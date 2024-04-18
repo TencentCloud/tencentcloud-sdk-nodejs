@@ -3445,7 +3445,7 @@ export interface AiAnalysisTaskCoverResult {
  */
 export interface DescribeEventConfigRequest {
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
 }
@@ -11321,19 +11321,19 @@ export interface DescribeEventConfigResponse {
   /**
    * 接收事件通知的方式。"PUSH" 为 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829#http.E5.9B.9E.E8.B0.83)，"PULL" 为 [基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/7829#.E5.9F.BA.E4.BA.8E.E6.B6.88.E6.81.AF.E9.98.9F.E5.88.97.E7.9A.84.E5.8F.AF.E9.9D.A0.E9.80.9A.E7.9F.A5)。
    */
-  Mode: string
+  Mode?: string
   /**
    * 采用 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/7829#http.E5.9B.9E.E8.B0.83) 接收方式时，用于接收 V3 版本事件通知的地址。
    */
-  NotificationUrl: string
+  NotificationUrl?: string
   /**
    * 是否接收 [视频上传完成](https://cloud.tencent.com/document/product/266/7830) 事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。
    */
-  UploadMediaCompleteEventSwitch: string
+  UploadMediaCompleteEventSwitch?: string
   /**
    * 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。
    */
-  DeleteMediaCompleteEventSwitch: string
+  DeleteMediaCompleteEventSwitch?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16710,7 +16710,7 @@ export interface DescribeCLSPushTargetsRequest {
    */
   Domains: Array<string>
   /**
-   * 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
 }
@@ -18479,13 +18479,13 @@ export interface RestoreMediaRequest {
    */
   FileIds: Array<string>
   /**
+   * 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。
+   */
+  RestoreDay: number
+  /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
-  /**
-   * 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。
-   */
-  RestoreDay?: number
   /**
    * 解冻模式。当媒体文件当前的存储类型为归档存储时，有以下取值：
 <li>极速模式：Expedited，解冻任务在5分钟后完成。</li>

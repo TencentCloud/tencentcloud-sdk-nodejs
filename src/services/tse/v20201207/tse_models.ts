@@ -7630,8 +7630,14 @@ polarismesh - STANDARD版本
   PrepaidRenewFlag?: number
   /**
    * 跨地域部署的引擎地域配置详情
+zk标准版没有跨地域部署，请不要填写
    */
   EngineRegionInfos?: Array<EngineRegionInfo>
+  /**
+   * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
+如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
+   */
+  StorageOption?: Array<StorageOption>
 }
 
 /**

@@ -36,27 +36,66 @@ export interface DescribeShareUnitResourcesResponse {
 }
 
 /**
- * UpdateOrganizationIdentity请求参数结构体
+ * EnablePolicyType返回参数结构体
  */
-export interface UpdateOrganizationIdentityRequest {
+export interface EnablePolicyTypeResponse {
   /**
-   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdentityId: number
+  RequestId?: string
+}
+
+/**
+ * ListTargetsForPolicy返回参数结构体
+ */
+export interface ListTargetsForPolicyResponse {
   /**
-   * 身份描述。
+   * 总数。
    */
-  Description: string
+  TotalNum?: number
   /**
-   * 身份策略。
+   * 指定SCP策略关联目标列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityPolicy: Array<IdentityPolicy>
+  List?: Array<ListTargetsForPolicyNode>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
  * DeleteOrganization请求参数结构体
  */
 export type DeleteOrganizationRequest = null
+
+/**
+ * DescribePolicyConfig返回参数结构体
+ */
+export interface DescribePolicyConfigResponse {
+  /**
+   * 开启状态。0-未开启、1-开启
+   */
+  Status?: number
+  /**
+   * 策略类型。SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QuitOrganization返回参数结构体
+ */
+export interface QuitOrganizationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * ListOrganizationIdentity请求参数结构体
@@ -188,6 +227,28 @@ export interface MoveOrganizationNodeMembersResponse {
 }
 
 /**
+ * AttachPolicy请求参数结构体
+ */
+export interface AttachPolicyRequest {
+  /**
+   * 绑定策略目标ID。成员Uin或部门ID
+   */
+  TargetId: number
+  /**
+   * 目标类型。取值范围：NODE-部门、MEMBER-成员
+   */
+  TargetType: string
+  /**
+   * 策略ID。
+   */
+  PolicyId: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type?: string
+}
+
+/**
  * DeleteShareUnit返回参数结构体
  */
 export interface DeleteShareUnitResponse {
@@ -201,6 +262,49 @@ export interface DeleteShareUnitResponse {
  * DeleteShareUnitMembers返回参数结构体
  */
 export interface DeleteShareUnitMembersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePolicy返回参数结构体
+ */
+export interface DescribePolicyResponse {
+  /**
+   * 策略Id。
+   */
+  PolicyId?: number
+  /**
+   * 策略名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyName?: string
+  /**
+   * 策略类型。1-自定义 2-预设策略
+   */
+  Type?: number
+  /**
+   * 策略描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 策略文档。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDocument?: string
+  /**
+   * 策略更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 策略创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -223,6 +327,16 @@ export interface CreateOrganizationIdentityRequest {
    * 身份描述
    */
   Description?: string
+}
+
+/**
+ * DeletePolicy返回参数结构体
+ */
+export interface DeletePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -316,6 +430,16 @@ export interface DescribeOrganizationResponse {
 }
 
 /**
+ * DisablePolicyType返回参数结构体
+ */
+export interface DisablePolicyTypeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationMemberPolicies请求参数结构体
  */
 export interface DescribeOrganizationMemberPoliciesRequest {
@@ -345,6 +469,24 @@ export interface DeleteOrganizationMembersPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateOrganizationIdentity请求参数结构体
+ */
+export interface UpdateOrganizationIdentityRequest {
+  /**
+   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
+   */
+  IdentityId: number
+  /**
+   * 身份描述。
+   */
+  Description: string
+  /**
+   * 身份策略。
+   */
+  IdentityPolicy: Array<IdentityPolicy>
 }
 
 /**
@@ -526,6 +668,16 @@ export interface MemberIdentity {
 }
 
 /**
+ * UpdateShareUnit返回参数结构体
+ */
+export interface UpdateShareUnitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateOrganizationNode请求参数结构体
  */
 export interface UpdateOrganizationNodeRequest {
@@ -572,6 +724,25 @@ export interface DescribeOrganizationAuthNodeResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<AuthNode>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListPolicies返回参数结构体
+ */
+export interface ListPoliciesResponse {
+  /**
+   * 策略总数
+   */
+  TotalNum?: number
+  /**
+   * 策略列表数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<ListPolicyNode>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -878,9 +1049,27 @@ export interface DeleteOrganizationNodesRequest {
 }
 
 /**
- * QuitOrganization返回参数结构体
+ * EnablePolicyType请求参数结构体
  */
-export interface QuitOrganizationResponse {
+export interface EnablePolicyTypeRequest {
+  /**
+   * 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取
+   */
+  OrganizationId: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType: string
+}
+
+/**
+ * CreatePolicy返回参数结构体
+ */
+export interface CreatePolicyResponse {
+  /**
+   * 策略ID
+   */
+  PolicyId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -954,21 +1143,34 @@ export interface ListOrganizationIdentityResponse {
 }
 
 /**
- * DescribeOrganizationMembers返回参数结构体
+ * DeletePolicy请求参数结构体
  */
-export interface DescribeOrganizationMembersResponse {
+export interface DeletePolicyRequest {
   /**
-   * 成员列表。
+   * 需要删除的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取
+
    */
-  Items?: Array<OrgMember>
+  PolicyId: number
   /**
-   * 总数目。
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
    */
-  Total?: number
+  Type?: string
+}
+
+/**
+ * 共享资源
+ */
+export interface ShareResource {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 共享资源ID。
+   * @deprecated
    */
-  RequestId?: string
+  ResourceId?: string
+  /**
+   * 产品资源ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductResourceId?: string
 }
 
 /**
@@ -1096,7 +1298,7 @@ export interface DescribeOrganizationMemberAuthAccountsRequest {
    */
   MemberUin: number
   /**
-   * 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)
+   * 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
    */
   PolicyId: number
 }
@@ -1218,13 +1420,47 @@ export interface DescribeOrganizationMembersRequest {
 }
 
 /**
- * UpdateShareUnit返回参数结构体
+ * DescribeOrganizationMembers返回参数结构体
  */
-export interface UpdateShareUnitResponse {
+export interface DescribeOrganizationMembersResponse {
+  /**
+   * 成员列表。
+   */
+  Items?: Array<OrgMember>
+  /**
+   * 总数目。
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListPoliciesForTarget请求参数结构体
+ */
+export interface ListPoliciesForTargetRequest {
+  /**
+   * 账号uin或者节点id。
+   */
+  TargetId: number
+  /**
+   * 每页数量。默认值是 20，必须大于 0 且小于或等于 200
+   */
+  Rp?: number
+  /**
+   * 页码。默认值是 1，从 1开始，不能大于 200
+   */
+  Page?: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType?: string
+  /**
+   * 搜索关键字。按照策略名称搜索
+   */
+  Keyword?: string
 }
 
 /**
@@ -1282,25 +1518,40 @@ export interface UpdateShareUnitRequest {
 }
 
 /**
- * DescribeShareUnits请求参数结构体
+ * DeleteOrganizationMemberAuthIdentity请求参数结构体
  */
-export interface DescribeShareUnitsRequest {
+export interface DeleteOrganizationMemberAuthIdentityRequest {
   /**
-   * 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。
+   * 成员Uin。
    */
-  Area: string
+  MemberUin: number
   /**
-   * 偏移量。取值是limit的整数倍。默认值 : 0。
+   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
-  Offset: number
+  IdentityId: number
+}
+
+/**
+ * 查询某个指定SCP策略关联的目标列表
+ */
+export interface ListTargetsForPolicyNode {
   /**
-   * 限制数目。取值范围：1~50。
+   * scp账号uin或节点Id
    */
-  Limit: number
+  Uin: number
   /**
-   * 搜索关键字。支持UnitId和Name搜索。
+   * 关联类型 1-节点关联 2-用户关联
    */
-  SearchKey?: string
+  RelatedType: number
+  /**
+   * 账号或者节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 绑定时间
+   */
+  AddTime: string
 }
 
 /**
@@ -1315,6 +1566,42 @@ export interface OrgPermission {
    * 权限名
    */
   Name: string
+}
+
+/**
+ * DetachPolicy请求参数结构体
+ */
+export interface DetachPolicyRequest {
+  /**
+   * 解绑策略目标ID。成员Uin或部门ID
+   */
+  TargetId: number
+  /**
+   * 目标类型。取值范围：NODE-部门、MEMBER-成员
+   */
+  TargetType: string
+  /**
+   * 策略ID。
+   */
+  PolicyId: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type?: string
+}
+
+/**
+ * DisablePolicyType请求参数结构体
+ */
+export interface DisablePolicyTypeRequest {
+  /**
+   * 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取
+   */
+  OrganizationId: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType: string
 }
 
 /**
@@ -1370,19 +1657,13 @@ export interface CreateOrganizationMemberPolicyRequest {
 export type CreateOrganizationRequest = null
 
 /**
- * 共享资源
+ * AttachPolicy返回参数结构体
  */
-export interface ShareResource {
+export interface AttachPolicyResponse {
   /**
-   * 共享资源ID。
-   * @deprecated
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceId?: string
-  /**
-   * 产品资源ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductResourceId?: string
+  RequestId?: string
 }
 
 /**
@@ -1444,6 +1725,16 @@ export interface OrgProductFinancial {
 }
 
 /**
+ * DetachPolicy返回参数结构体
+ */
+export interface DetachPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddShareUnit返回参数结构体
  */
 export interface AddShareUnitResponse {
@@ -1480,6 +1771,44 @@ export interface DescribeOrganizationFinancialByProductResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 企业组织策略列表
+ */
+export interface ListPolicyNode {
+  /**
+   * 策略创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddTime: string
+  /**
+   * 策略绑定次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttachedTimes: number
+  /**
+   * 策略描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 策略名称
+   */
+  PolicyName: string
+  /**
+   * 策略Id
+   */
+  PolicyId: number
+  /**
+   * 策略更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 策略类型 1-自定义 2-预设
+   */
+  Type: number
 }
 
 /**
@@ -1594,7 +1923,7 @@ export interface DescribeShareUnitMembersRequest {
    */
   Limit: number
   /**
-   * 搜索关键字。支持成员uin搜索。
+   * 搜索关键字。支持成员Uin搜索。
    */
   SearchKey?: string
 }
@@ -1677,6 +2006,25 @@ export interface ShareMember {
 }
 
 /**
+ * ListPoliciesForTarget返回参数结构体
+ */
+export interface ListPoliciesForTargetResponse {
+  /**
+   * 总数。
+   */
+  TotalNum?: number
+  /**
+   * 目标关联的策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<ListPoliciesForTarget>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteShareUnitMembers请求参数结构体
  */
 export interface DeleteShareUnitMembersRequest {
@@ -1708,6 +2056,16 @@ export interface DescribeOrganizationMemberAuthIdentitiesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdatePolicy返回参数结构体
+ */
+export interface UpdatePolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1770,6 +2128,32 @@ export interface DescribeOrganizationMemberEmailBindRequest {
    * 成员Uin。
    */
   MemberUin: number
+}
+
+/**
+ * ListPolicies请求参数结构体
+ */
+export interface ListPoliciesRequest {
+  /**
+   * 每页数量。默认值是 20，必须大于 0 且小于或等于 200
+   */
+  Rp?: number
+  /**
+   * 页码。默认值是 1，从 1开始，不能大于 200
+   */
+  Page?: number
+  /**
+   * 查询范围。取值范围： All-获取所有策略、QCS-只获取预设策略、Local-只获取自定义策略，默认值：All
+   */
+  Scope?: string
+  /**
+   * 搜索关键字。按照策略名搜索
+   */
+  Keyword?: string
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType?: string
 }
 
 /**
@@ -1910,6 +2294,29 @@ export interface CreateOrganizationMemberRequest {
 }
 
 /**
+ * CreatePolicy请求参数结构体
+ */
+export interface CreatePolicyRequest {
+  /**
+   * 策略名。
+长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_）
+   */
+  Name: string
+  /**
+   * 策略内容。参考CAM策略语法
+   */
+  Content: string
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type: string
+  /**
+   * 策略描述。
+   */
+  Description?: string
+}
+
+/**
  * 组织成员可授权的身份
  */
 export interface OrgMemberAuthIdentity {
@@ -1963,6 +2370,16 @@ export interface OrgMemberAuthIdentity {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemberName?: string
+}
+
+/**
+ * DeleteShareUnit请求参数结构体
+ */
+export interface DeleteShareUnitRequest {
+  /**
+   * 共享单元ID。
+   */
+  UnitId: string
 }
 
 /**
@@ -2078,6 +2495,53 @@ export interface DeleteAccountRequest {
    * 成员Uin。
    */
   MemberUin: number
+}
+
+/**
+ * 查询目标关联的SCP策略列表
+ */
+export interface ListPoliciesForTarget {
+  /**
+   * 策略Id
+   */
+  StrategyId: number
+  /**
+   * 策略名称
+   */
+  StrategyName: string
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+  /**
+   * 关联的账号或节点
+   */
+  Uin: number
+  /**
+   * 关联类型 1-节点 2-用户
+   */
+  Type: number
+  /**
+   * 策略创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddTime: string
+  /**
+   * 策略更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 部门名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 策略绑定时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttachTime: string
 }
 
 /**
@@ -2227,6 +2691,50 @@ export interface DeleteOrganizationMembersPolicyRequest {
 }
 
 /**
+ * DescribePolicy请求参数结构体
+ */
+export interface DescribePolicyRequest {
+  /**
+   * 策略Id。
+   */
+  PolicyId: number
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType?: string
+}
+
+/**
+ * ListTargetsForPolicy请求参数结构体
+ */
+export interface ListTargetsForPolicyRequest {
+  /**
+   * 策略Id。
+   */
+  PolicyId: number
+  /**
+   * 每页数量。默认值是 20，必须大于 0 且小于或等于 200
+   */
+  Rp?: number
+  /**
+   * 页码。默认值是 1，从 1开始，不能大于 200
+   */
+  Page?: number
+  /**
+   * 策略类型。取值范围：All-全部、User-用户、Node-节点
+   */
+  TargetType?: string
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  PolicyType?: string
+  /**
+   * 按照多个策略id搜索，空格隔开。
+   */
+  Keyword?: string
+}
+
+/**
  * DeleteOrganizationIdentity请求参数结构体
  */
 export interface DeleteOrganizationIdentityRequest {
@@ -2297,13 +2805,17 @@ export interface ProductResource {
 }
 
 /**
- * DeleteShareUnit请求参数结构体
+ * DescribePolicyConfig请求参数结构体
  */
-export interface DeleteShareUnitRequest {
+export interface DescribePolicyConfigRequest {
   /**
-   * 共享单元ID。
+   * 企业组织Id。可以调用[DescribeOrganization](https://cloud.tencent.com/document/product/850/67059)获取
    */
-  UnitId: string
+  OrganizationId: number
+  /**
+   * 策略类型。默认值0，取值范围：0-服务控制策略、1-标签策略
+   */
+  Type?: number
 }
 
 /**
@@ -2327,17 +2839,25 @@ export interface DescribeOrganizationMemberPoliciesResponse {
 }
 
 /**
- * DeleteOrganizationMemberAuthIdentity请求参数结构体
+ * DescribeShareUnits请求参数结构体
  */
-export interface DeleteOrganizationMemberAuthIdentityRequest {
+export interface DescribeShareUnitsRequest {
   /**
-   * 成员Uin。
+   * 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。
    */
-  MemberUin: number
+  Area: string
   /**
-   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
-  IdentityId: number
+  Offset: number
+  /**
+   * 限制数目。取值范围：1~50。
+   */
+  Limit: number
+  /**
+   * 搜索关键字。支持UnitId和Name搜索。
+   */
+  SearchKey?: string
 }
 
 /**
@@ -2366,4 +2886,30 @@ export interface DeleteAccountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdatePolicy请求参数结构体
+ */
+export interface UpdatePolicyRequest {
+  /**
+   * 需要编辑的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取
+   */
+  PolicyId: number
+  /**
+   * 策略描述。
+   */
+  Description?: string
+  /**
+   * 策略内容。参考CAM策略语法
+   */
+  Content?: string
+  /**
+   * 策略名。长度为1~128个字符，可以包含汉字、英文字母、数字和下划线（_）
+   */
+  Name?: string
+  /**
+   * 策略类型。默认值SERVICE_CONTROL_POLICY，取值范围：SERVICE_CONTROL_POLICY-服务控制策略、TAG_POLICY-标签策略
+   */
+  Type?: string
 }

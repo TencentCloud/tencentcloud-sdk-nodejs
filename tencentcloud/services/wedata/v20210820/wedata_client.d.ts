@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRuleTemplateResponse, DescribeEventConsumeTasksResponse, SubmitBaselineRequest, DescribeIntegrationStatisticsResponse, SubmitTaskTestRunResponse, DescribeStreamTaskLogListRequest, ModifyBaselineAlarmStatusRequest, DescribeIntegrationNodeResponse, MakeUpTasksNewResponse, ModifyIntegrationTaskRequest, DescribeScheduleInstanceResponse, DescribeRuleDimStatResponse, DescribeInstanceLogsRequest, DescribeTaskAlarmRegulationsResponse, DescribeTableLineageInfoRequest, CheckIntegrationTaskNameExistsResponse, DescribeWorkflowInfoByIdRequest, CreateDataSourceRequest, DescribeTrendStatResponse, DescribeRealTimeTaskSpeedRequest, DescribeRuleDimStatRequest, FreezeTasksRequest, DescribeDataObjectsResponse, DescribeRuleTemplatesResponse, DescribeRuleExecStatRequest, MakeUpWorkflowNewResponse, DescribeInstancesInfoWithTaskInfoResponse, ModifyBaselineTaskAlarmStatusResponse, DescribeRuleGroupSubscriptionRequest, CreateIntegrationNodeResponse, BatchDeleteTasksDsRequest, CreateDsFolderResponse, FreezeOpsTasksRequest, DeleteBaselineRequest, DescribeRulesResponse, CreateWorkflowRequest, DescribeTableMetasRequest, DescribeRuleGroupExecResultsByPageRequest, DescribeTableLineageRequest, KillOpsMakePlanInstancesRequest, UpdateWorkflowOwnerRequest, DescribeEventCasesRequest, ModifyDimensionWeightResponse, DescribeInstanceByCycleReportResponse, DescribeFieldBasicInfoResponse, DescribeRuleExecResultsByPageResponse, MakeUpTasksByWorkflowResponse, CheckTaskNameExistRequest, DescribeFunctionKindsRequest, DescribeFunctionKindsResponse, SaveCustomFunctionResponse, DescribeTemplateDimCountRequest, ModifyIntegrationTaskResponse, DescribeDataSourceListRequest, DescribeInstanceByCycleResponse, DescribeIntegrationStatisticsRecordsTrendRequest, DescribeOperateTasksRequest, DescribeDataCheckStatRequest, RegisterEventListenerResponse, GetOfflineInstanceListRequest, DescribeRuleExecResultsRequest, DescribeDrSonInstanceResponse, RunTaskResponse, SubmitWorkflowResponse, DeleteBaselineResponse, TriggerEventRequest, DescribeDependOpsTasksRequest, DescribeInstanceLogRequest, DescribeRuleGroupSubscriptionResponse, DescribeIntegrationStatisticsTaskStatusTrendResponse, DeleteResourceFileRequest, SaveCustomFunctionRequest, DescribeSchedulerTaskTypeCntRequest, ModifyWorkflowScheduleRequest, CreateDsFolderRequest, RegisterEventRequest, DescribeDiagnosticInfoByBaselineIdRequest, DescribeRuleGroupsByPageRequest, DescribeDataBasesRequest, BatchDeleteIntegrationTasksResponse, DescribeThirdTaskRunLogRequest, BatchRerunIntegrationTaskInstancesRequest, DescribeDrSonInstanceRequest, DescribeWorkflowTaskCountResponse, SubmitCustomFunctionResponse, DescribeDataObjectsRequest, DescribeTableLineageResponse, ModifyRuleGroupSubscriptionRequest, DescribeDataSourceListResponse, DescribeInstanceLogDetailRequest, BatchSuspendIntegrationTasksRequest, DeleteDsFolderResponse, DescribeDrInstancePageResponse, DescribeSchedulerTaskTypeCntResponse, DeleteCustomFunctionResponse, EditBaselineRequest, DescribeTaskScriptResponse, UploadContentResponse, ForceSucScheduleInstancesResponse, DescribeIntegrationTasksRequest, DescribeTaskInstanceResponse, DescribeSchedulerInstanceStatusResponse, CountOpsInstanceStateRequest, CreateTaskVersionDsResponse, DescribeProdTasksRequest, CheckDuplicateTemplateNameRequest, DescribeEventTypesResponse, BatchUpdateIntegrationTasksRequest, CreateResourcePathRequest, BatchModifyOpsOwnersRequest, ModifyTaskNameResponse, BatchDeleteOpsTasksRequest, ResumeIntegrationTaskResponse, FreezeTasksResponse, DescribeTaskReportDetailListResponse, DescribeBaselineInstanceDagRequest, DescribeIntegrationStatisticsInstanceTrendResponse, DescribeInstanceLogListRequest, RerunOpsMakePlanInstancesResponse, DescribeTableMetaRequest, DescribeAllTaskTypeResponse, DescribeRuleGroupResponse, DeleteDataSourcesResponse, ModifyTaskLinksRequest, DescribeBaselineInstancesResponse, DescribeOpsMakePlansResponse, DeleteFileRequest, DeleteDataSourcesRequest, ModifyTaskAlarmRegularRequest, DescribeColumnsMetaRequest, DescribeOrganizationalFunctionsRequest, DescribeRuleTemplateResponse, DescribeDependTaskListsRequest, DescribeEventsRequest, DescribeAllByFolderNewRequest, DescribeTaskRunHistoryResponse, BatchStopWorkflowsByIdsRequest, DescribeBatchOperateTaskResponse, CommitIntegrationTaskRequest, DescribeTableInfoListRequest, DescribeQualityScoreRequest, RunForceSucScheduleInstancesResponse, DescribeBaselineAllTaskDagResponse, CommitIntegrationTaskResponse, CreateBaselineRequest, DeleteResourceFilesRequest, DeleteResourceFileResponse, SubmitTaskResponse, ModifyFolderRequest, ModifyApproveStatusResponse, DescribeInstanceLogListResponse, DescribeTableQualityDetailsRequest, DescribeScheduleInstancesResponse, DeleteProjectParamDsResponse, RunTaskRequest, DescribeOpsWorkflowsRequest, DescribeDependTasksNewRequest, CreateOfflineTaskResponse, DescribeColumnLineageRequest, CreateTaskAlarmRegularRequest, ModifyRuleRequest, DescribeTableMetasResponse, FindAllFolderResponse, MakeUpOpsTasksResponse, StopBaselineRequest, DescribeRuleExecLogResponse, DescribeDependOpsTaskListRequest, DescribeInstanceLogsResponse, DescribeDsFolderTreeRequest, BatchDeleteIntegrationTasksRequest, KillOpsMakePlanInstancesResponse, DescribeScheduleInstanceRequest, TaskLogRequest, DescribeBaselineAllTaskDagRequest, DescribeIntegrationStatisticsTaskStatusRequest, GetFileInfoResponse, BatchDeleteTasksNewResponse, DescribeBelongToResponse, FreezeOpsTasksResponse, ModifyRuleGroupSubscriptionResponse, SuspendIntegrationTaskRequest, CreateHiveTableByDDLResponse, DescribeOperateOpsTaskDatasourceTypeRequest, DescribeTaskByCycleResponse, DescribeExecStrategyResponse, DescribeSuccessorOpsTaskInfosResponse, DeleteResourceResponse, ModifyRuleResponse, DescribeInstanceLogFileResponse, DescribeTaskInstanceReportDetailRequest, SubmitBaselineResponse, DeleteTaskDsResponse, DescribeAllByFolderNewResponse, DescribeDsParentFolderTreeRequest, KillScheduleInstancesResponse, RerunScheduleInstancesRequest, DescribeTaskInstancesResponse, CheckIntegrationNodeNameExistsResponse, DescribeWorkflowTaskCountRequest, DescribeInstanceListRequest, ModifyWorkflowScheduleResponse, DeleteCustomFunctionRequest, DescribeAllTaskTypeRequest, GetFileInfoRequest, DescribeSonInstancesRequest, DescribeBaselinesResponse, DryRunDIOfflineTaskRequest, CreateOfflineTaskRequest, SubmitSqlTaskResponse, DescribeIntegrationStatisticsRecordsTrendResponse, BatchCreateTaskVersionDsResponse, DescribeWorkflowOpsCanvasInfoRequest, SubmitCustomFunctionRequest, RerunOpsMakePlanInstancesRequest, BatchForceSuccessIntegrationTaskInstancesResponse, DescribeTableBasicInfoResponse, DescribeDiagnosticInfoByBaselineIdResponse, ModifyRuleTemplateRequest, DescribeRuleExecStatResponse, DescribeInstanceLogFileRequest, DagInstancesResponse, DescribeAllUsedVersionSonResponse, DescribeTemplateHistoryRequest, BatchRunOpsTaskResponse, FreezeTasksByMultiWorkflowRequest, DescribeEventResponse, DescribeOpsMakePlanInstancesRequest, ForceSucInstancesRequest, DescribeRuleExecExportResultRequest, GenHiveTableDDLSqlRequest, BatchCreateIntegrationTaskAlarmsRequest, LockIntegrationTaskResponse, KillScheduleInstancesRequest, DescribeEventsResponse, BatchStopOpsTasksRequest, DescribeFunctionTypesResponse, DeleteWorkflowNewRequest, BatchUpdateIntegrationTasksResponse, TaskLogResponse, CheckDuplicateRuleNameRequest, ModifyRuleTemplateResponse, DescribeInstanceLastLogRequest, DescribeEventRequest, BatchModifyOpsOwnersResponse, CreateTaskAlarmRegularResponse, DeleteRuleTemplateRequest, DescribeOpsMakePlanTasksRequest, CreateBaselineResponse, DescribeProjectRequest, CreateIntegrationTaskResponse, DescribeIntegrationTasksResponse, DeleteProjectUsersResponse, DescribeAlarmReceiverRequest, DescribeSchedulerTaskCntByStatusResponse, ModifyWorkflowInfoRequest, StartIntegrationTaskResponse, BatchResumeIntegrationTasksRequest, DescribeFolderListRequest, DeleteTaskAlarmRegularResponse, DeleteWorkflowByIdRequest, DescribeFathersResponse, DeleteRuleResponse, CreateTaskResponse, BatchStopIntegrationTasksResponse, ForceSucScheduleInstancesRequest, BatchResumeIntegrationTasksResponse, DeleteIntegrationNodeResponse, CommitRuleGroupExecResultRequest, DescribeDataSourceInfoListRequest, DescribeTaskInstancesRequest, DescribeRuleGroupExecResultsByPageWithoutAuthResponse, DescribeIntegrationNodeRequest, DescribeOperateOpsTaskDatasourceResponse, DescribeEventIsAlarmTypesResponse, DescribeSchedulerRunTimeInstanceCntByStatusResponse, DescribeDataTypesRequest, RunForceSucScheduleInstancesRequest, DescribeQualityScoreResponse, DescribeRulesByPageResponse, DescribeDsParentFolderTreeResponse, DescribeRuleTablesByPageRequest, DescribeEventConsumeTasksRequest, DescribeDataSourceInfoListResponse, DescribeRelatedInstancesResponse, CreateOrUpdateResourceRequest, CheckIntegrationNodeNameExistsRequest, MakeUpTasksNewRequest, GetOfflineInstanceListResponse, DescribeOpsMakePlansRequest, CreateOpsMakePlanRequest, BatchDeleteTasksDsResponse, DescribeDimensionScoreResponse, DescribeOrganizationalFunctionsResponse, DescribeInstancesInfoWithTaskInfoRequest, DescribeEventDetailRequest, FreezeTasksByWorkflowIdsRequest, DescribeDataTypesResponse, DescribeTaskByCycleReportResponse, BatchDeleteOpsTasksResponse, CheckDuplicateRuleNameResponse, DeleteRuleRequest, BatchCreateTaskVersionDsRequest, DeleteResourceFilesResponse, RerunInstancesRequest, DescribeFieldBasicInfoRequest, DescribeEventIsAlarmTypesRequest, CreateOpsMakePlanResponse, DescribeStreamTaskLogListResponse, DeleteWorkflowNewResponse, DescribeRuleGroupExecResultsByPageResponse, DescribeRuleGroupExecResultsByPageWithoutAuthRequest, GetIntegrationNodeColumnSchemaRequest, DeleteWorkflowByIdResponse, DescribeInstancesResponse, DeleteIntegrationNodeRequest, DescribeAlarmEventsResponse, ModifyIntegrationNodeResponse, DescribeIntegrationStatisticsTaskStatusTrendRequest, DescribeRuleHistoryByPageResponse, DescribeWorkflowInfoByIdResponse, DescribeBaselineByIdRequest, DescribeDatabaseMetasResponse, ModifyTaskAlarmRegularResponse, CreateRuleResponse, ModifyTaskLinksResponse, DescribeTaskRunHistoryRequest, BatchMakeUpIntegrationTasksRequest, CreateTaskVersionDsRequest, DeleteOfflineTaskRequest, SubmitTaskRequest, DescribeDatabaseInfoListResponse, ModifyDsFolderResponse, DescribeTableScoreTrendResponse, ModifyIntegrationNodeRequest, ModifyMonitorStatusResponse, DescribeRuleTemplatesByPageResponse, DescribeTemplateDimCountResponse, DescribeFunctionTypesRequest, BatchDeleteTasksNewRequest, DescribeInstanceLogResponse, DiagnosePlusRequest, DescribeOpsMakePlanTasksResponse, ModifyMonitorStatusRequest, DescribeColumnLineageResponse, DeleteFolderRequest, DescribeIntegrationTaskRequest, DescribeWorkflowListByProjectIdResponse, DeleteFilePathRequest, DescribeRulesByPageRequest, DescribeTopTableStatResponse, DescribeEventDetailResponse, DeleteDsFolderRequest, FreezeTasksByMultiWorkflowResponse, ModifyDsFolderRequest, TriggerDsEventResponse, CreateTaskRequest, DescribeDatabaseMetasRequest, CreateFolderResponse, DescribeRealTimeTaskInstanceNodeInfoRequest, DescribeDependTaskListsResponse, DescribeTaskInstanceReportDetailResponse, CreateHiveTableResponse, ModifyDataSourceResponse, DescribeTaskByStatusReportResponse, DescribeMonitorsByPageRequest, ModifyDimensionWeightRequest, DescribeRuleGroupsByPageResponse, SubmitSqlTaskRequest, DescribeTaskLockStatusResponse, KillInstancesRequest, RemoveWorkflowDsRequest, BatchKillIntegrationTaskInstancesRequest, DeleteTaskDsRequest, BatchStopOpsTasksResponse, DeleteFilePathResponse, RunRerunScheduleInstancesResponse, BatchModifyOwnersNewResponse, RobAndLockIntegrationTaskRequest, CommitExportTaskResponse, ModifyTaskInfoResponse, CreateRuleRequest, DescribeColumnsMetaResponse, DescribeRuleExecResultsResponse, DescribeTaskByStatusReportRequest, DeleteFileResponse, ModifyDataSourceRequest, DescribeDrInstanceScriptContentResponse, StopBaselineResponse, TriggerEventResponse, DescribeSchedulerTaskCntByStatusRequest, DescribeInstancesRequest, DescribeRuleDataSourcesRequest, CreateCustomFunctionRequest, DescribeResourceManagePathTreesRequest, DescribeTasksByPageResponse, DescribeInstanceByCycleReportRequest, DescribeTableQualityDetailsResponse, DescribeDataSourceWithoutInfoResponse, BatchStopWorkflowsByIdsResponse, DescribeDependOpsTaskListResponse, DescribeRuleTemplatesRequest, DiagnosePlusResponse, DescribeWorkflowListByProjectIdRequest, DescribeStatisticInstanceStatusTrendOpsResponse, CountOpsInstanceStateResponse, DescribeQualityScoreTrendRequest, SubmitTaskTestRunRequest, DescribeAlarmEventsRequest, CheckAlarmRegularNameExistResponse, DeleteProjectParamDsRequest, DescribeRuleTablesByPageResponse, DescribeSonInstancesResponse, DescribeThirdTaskRunLogResponse, DescribeTaskAlarmRegulationsRequest, DescribeRuleExecHistoryRequest, EditBaselineResponse, CreateCustomFunctionResponse, ModifyTaskInfoRequest, DescribeOperateOpsTasksRequest, DescribeTableMetaResponse, DescribeTaskDetailRequest, DescribeOfflineTaskTokenRequest, CreateWorkflowResponse, DescribeRuleExecDetailRequest, DeleteResourceRequest, RegisterEventListenerRequest, RobAndLockIntegrationTaskResponse, DescribeFathersRequest, DeleteTaskAlarmRegularRequest, DescribeApproveTypeListRequest, UnlockIntegrationTaskRequest, DeleteOfflineTaskResponse, DescribeDrInstancePageRequest, DescribeBelongToRequest, ForceSucInstancesResponse, GenHiveTableDDLSqlResponse, DescribeTaskReportResponse, DescribeRuleGroupTableRequest, CheckAlarmRegularNameExistRequest, GetOfflineDIInstanceListResponse, DescribeOperateOpsTaskDatasourceRequest, DescribeWorkflowExecuteByIdResponse, CreateIntegrationTaskRequest, BatchRunOpsTaskRequest, DescribeRealTimeTaskMetricOverviewRequest, CreateResourcePathResponse, DeleteFolderResponse, FreezeTasksByWorkflowIdsResponse, SubmitWorkflowRequest, DescribeResourceManagePathTreesResponse, RunRerunScheduleInstancesRequest, StartIntegrationTaskRequest, DescribeTaskDetailResponse, RerunInstancesResponse, DeleteIntegrationTaskRequest, CreateOrUpdateResourceResponse, ModifyTaskScriptRequest, CreateIntegrationNodeRequest, DescribeTableSchemaInfoRequest, DescribeTableScoreTrendRequest, ModifyExecStrategyRequest, DescribeBaselineInstancesRequest, MakeUpOpsTasksRequest, BatchForceSuccessIntegrationTaskInstancesRequest, DescribeRealTimeTaskInstanceNodeInfoResponse, DescribeTaskByCycleReportRequest, DescribeInstanceLogDetailResponse, SetTaskAlarmNewResponse, DescribeProdTasksResponse, DescribeApproveListRequest, DescribeBatchOperateTaskRequest, MakeUpWorkflowNewRequest, DescribeTaskReportRequest, CommitRuleGroupTaskResponse, DescribeRealTimeTaskMetricOverviewResponse, DescribeOfflineTaskTokenResponse, DescribeTableInfoListResponse, RemoveWorkflowDsResponse, GetOfflineDIInstanceListRequest, ModifyExecStrategyResponse, BatchStartIntegrationTasksRequest, DescribeDatasourceResponse, DescribeTableBasicInfoRequest, DescribeDatasourceRequest, KillInstancesResponse, DescribeStatisticInstanceStatusTrendOpsRequest, DescribeEventCasesResponse, DescribeTableSchemaInfoResponse, DescribeDataBasesResponse, SuspendIntegrationTaskResponse, UpdateWorkflowOwnerResponse, SetTaskAlarmNewRequest, RerunScheduleInstancesResponse, DescribeInstanceListResponse, DescribeOpsInstanceLogListRequest, UploadContentRequest, DescribeTaskReportDetailListRequest, DescribeProjectResponse, StopIntegrationTaskRequest, DescribeRuleGroupRequest, CreateDataSourceResponse, DescribeFolderWorkflowListResponse, CreateFolderRequest, DescribeIntegrationVersionNodesInfoResponse, DescribeRulesRequest, DescribeDrInstanceScriptContentRequest, DescribeRuleResponse, DescribeTaskScriptRequest, DescribeRuleHistoryByPageRequest, CheckIntegrationTaskNameExistsRequest, DescribeRuleRequest, DescribeRuleDataSourcesResponse, DescribeAlarmReceiverResponse, DescribeTableLineageInfoResponse, DescribeWorkflowCanvasInfoResponse, ModifyBaselineTaskAlarmStatusRequest, ModifyTaskScriptResponse, DescribeDimensionScoreRequest, FindAllFolderRequest, BatchStartIntegrationTasksResponse, DescribeIntegrationVersionNodesInfoRequest, DescribeSuccessorOpsTaskInfosRequest, DescribeSchedulerInstanceStatusRequest, DescribeScheduleInstancesRequest, DescribeRealTimeTaskSpeedResponse, ModifyWorkflowInfoResponse, DescribeFolderWorkflowListRequest, DescribeBaselineInstanceDagResponse, CheckTaskNameExistResponse, DescribeSchedulerRunTimeInstanceCntByStatusRequest, LockIntegrationTaskRequest, BatchStopIntegrationTasksRequest, DescribeRuleTemplatesByPageRequest, DescribeMonitorsByPageResponse, DescribeRuleExecResultsByPageRequest, RunTasksByMultiWorkflowResponse, DescribeInstanceLastLogResponse, DescribeExecStrategyRequest, CreateHiveTableRequest, BatchKillIntegrationTaskInstancesResponse, RunTasksByMultiWorkflowRequest, DescribeOperateOpsTaskDatasourceTypeResponse, CommitRuleGroupTaskRequest, DescribeRuleGroupTableResponse, DescribeDataSourceWithoutInfoRequest, DescribeTemplateHistoryResponse, DescribeWorkflowOpsCanvasInfoResponse, DescribeDependOpsTasksResponse, DeleteRuleTemplateResponse, DescribeRuleTemplateRequest, DescribeTaskByCycleRequest, TriggerDsEventRequest, CreateRuleTemplateRequest, BatchStopTasksNewResponse, MakeUpTasksByWorkflowRequest, UnlockIntegrationTaskResponse, DescribeRuleExecDetailResponse, DeleteIntegrationTaskResponse, ResumeIntegrationTaskRequest, DescribeInstanceByCycleRequest, DescribeFolderListResponse, DescribeIntegrationStatisticsTaskStatusResponse, DescribeAllUsedVersionSonRequest, DescribeOpsMakePlanInstancesResponse, DescribeDatabaseInfoListRequest, DescribeRuleExecHistoryResponse, DescribeIntegrationTaskResponse, ModifyBaselineAlarmStatusResponse, DescribeQualityScoreTrendResponse, ModifyFolderResponse, CreateHiveTableByDDLRequest, GetIntegrationNodeColumnSchemaResponse, StopIntegrationTaskResponse, DescribeOpsWorkflowsResponse, DescribeDependTasksNewResponse, CheckDuplicateTemplateNameResponse, DescribeRelatedInstancesRequest, DescribeDataCheckStatResponse, DescribeIntegrationStatisticsInstanceTrendRequest, BatchModifyOwnersNewRequest, DescribeDsFolderTreeResponse, DescribeWorkflowCanvasInfoRequest, DagInstancesRequest, DryRunDIOfflineTaskResponse, DescribeTaskLockStatusRequest, DescribeBaselinesRequest, ModifyApproveStatusRequest, DescribeRuleExecExportResultResponse, DescribeOperateTasksResponse, DescribeTopTableStatRequest, BatchCreateIntegrationTaskAlarmsResponse, BatchStopTasksNewRequest, ModifyTaskNameRequest, DescribeTrendStatRequest, DescribeEventTypesRequest, DescribeOpsInstanceLogListResponse, DescribeOperateOpsTasksResponse, DescribeApproveTypeListResponse, DescribeBaselineInstanceGanttRequest, BatchSuspendIntegrationTasksResponse, DeleteProjectUsersRequest, DescribeWorkflowExecuteByIdRequest, RegisterEventResponse, DescribeRuleExecLogRequest, BatchRerunIntegrationTaskInstancesResponse, DescribeBaselineByIdResponse, DescribeBaselineInstanceGanttResponse, CommitRuleGroupExecResultResponse, DescribeApproveListResponse, DescribeIntegrationStatisticsRequest, DescribeTasksByPageRequest, BatchMakeUpIntegrationTasksResponse, CommitExportTaskRequest, DescribeTaskInstanceRequest } from "./wedata_models";
+import { DescribeEventConsumeTasksResponse, CreateRuleTemplateResponse, DescribeIntegrationStatisticsResponse, UnlockIntegrationTaskResponse, SubmitTaskTestRunResponse, DescribeStreamTaskLogListRequest, DescribeIntegrationNodeResponse, ModifyIntegrationTaskRequest, DescribeRuleDimStatResponse, RegisterEventListenerResponse, DescribeTaskAlarmRegulationsResponse, DescribeTableLineageInfoRequest, DescribeWorkflowInfoByIdRequest, CreateDataSourceRequest, DescribeTrendStatResponse, DescribeRealTimeTaskSpeedRequest, DescribeRuleDimStatRequest, DescribeRuleTemplatesResponse, CreateIntegrationNodeResponse, CreateDsFolderResponse, FreezeOpsTasksRequest, DescribeRulesResponse, SubmitTaskRequest, DescribeTableMetasRequest, DescribeRuleGroupExecResultsByPageRequest, KillOpsMakePlanInstancesRequest, DescribeEventCasesRequest, BatchResumeIntegrationTasksResponse, DescribeFieldBasicInfoResponse, CheckTaskNameExistRequest, DescribeFunctionKindsRequest, DescribeFunctionKindsResponse, DescribeTemplateDimCountRequest, ModifyIntegrationTaskResponse, DescribeDataSourceListRequest, DescribeInstanceByCycleResponse, DescribeIntegrationStatisticsRecordsTrendRequest, DescribeDataCheckStatRequest, GetOfflineInstanceListRequest, DescribeRuleExecResultsRequest, SubmitWorkflowResponse, TriggerEventRequest, DescribeDependOpsTasksRequest, DescribeInstanceLogRequest, DescribeRuleGroupSubscriptionResponse, DescribeIntegrationStatisticsTaskStatusTrendResponse, DeleteResourceFileRequest, SaveCustomFunctionRequest, DescribeSchedulerTaskTypeCntRequest, ModifyWorkflowScheduleRequest, RegisterEventRequest, CheckAlarmRegularNameExistResponse, UploadContentResponse, DescribeRuleGroupsByPageRequest, BatchDeleteIntegrationTasksResponse, DescribeThirdTaskRunLogRequest, BatchRerunIntegrationTaskInstancesRequest, DescribeWorkflowTaskCountResponse, SubmitCustomFunctionResponse, DescribeTopTableStatRequest, DescribeTableLineageResponse, ModifyRuleGroupSubscriptionRequest, DescribeDataSourceListResponse, DescribeInstanceLogDetailRequest, BatchSuspendIntegrationTasksRequest, DeleteDsFolderResponse, DescribeDrInstancePageResponse, UpdateWorkflowOwnerRequest, DescribeSchedulerTaskTypeCntResponse, DeleteCustomFunctionResponse, DescribeTaskScriptResponse, DescribeSchedulerInstanceStatusResponse, CountOpsInstanceStateRequest, CreateTaskVersionDsResponse, BatchUpdateIntegrationTasksRequest, BatchModifyOpsOwnersRequest, ModifyTaskNameResponse, BatchDeleteOpsTasksRequest, ResumeIntegrationTaskResponse, DescribeIntegrationStatisticsInstanceTrendResponse, DescribeInstanceLogListRequest, DescribeRuleGroupResponse, DeleteDataSourcesResponse, ModifyTaskLinksRequest, DescribeOpsMakePlansResponse, DeleteFileRequest, DeleteDataSourcesRequest, ModifyTaskAlarmRegularRequest, SubmitSqlTaskResponse, DescribeColumnsMetaRequest, DescribeOrganizationalFunctionsRequest, DescribeRuleTemplateResponse, DescribeDependTaskListsRequest, DescribeAllByFolderNewRequest, DescribeTaskRunHistoryResponse, BatchStopWorkflowsByIdsRequest, DescribeBatchOperateTaskResponse, CommitIntegrationTaskRequest, DescribeTableInfoListRequest, DescribeQualityScoreRequest, RunForceSucScheduleInstancesResponse, CommitIntegrationTaskResponse, DeleteResourceFilesRequest, DeleteResourceFileResponse, SubmitTaskResponse, ModifyApproveStatusResponse, DescribeAlarmEventsResponse, DescribeInstanceLogListResponse, FreezeTasksByWorkflowIdsRequest, DescribeScheduleInstancesResponse, DeleteProjectParamDsResponse, DescribeOpsWorkflowsRequest, CreateOfflineTaskResponse, DescribeColumnLineageRequest, CreateTaskAlarmRegularRequest, ModifyRuleRequest, FindAllFolderResponse, DescribeRuleExecLogResponse, DescribeDsFolderTreeRequest, BatchDeleteIntegrationTasksRequest, KillOpsMakePlanInstancesResponse, TaskLogRequest, DescribeIntegrationStatisticsTaskStatusRequest, GetFileInfoResponse, FreezeOpsTasksResponse, ModifyRuleGroupSubscriptionResponse, CreateWorkflowDsResponse, CreateHiveTableByDDLResponse, DescribeTaskByCycleResponse, DescribeExecStrategyResponse, DescribeSuccessorOpsTaskInfosResponse, DeleteResourceResponse, ModifyRuleResponse, DescribeInstanceLogFileResponse, DeleteTaskDsResponse, DescribeAllByFolderNewResponse, DescribeDsParentFolderTreeRequest, KillScheduleInstancesResponse, UnlockIntegrationTaskRequest, DescribeWorkflowTaskCountRequest, DescribeInstanceListRequest, BatchStopIntegrationTasksRequest, DeleteCustomFunctionRequest, GetFileInfoRequest, DryRunDIOfflineTaskRequest, CreateOfflineTaskRequest, DescribeIntegrationStatisticsRecordsTrendResponse, BatchForceSuccessIntegrationTaskInstancesResponse, DescribeTableBasicInfoResponse, ModifyRuleTemplateRequest, DescribeRuleExecStatResponse, DagInstancesResponse, DescribeTableQualityDetailsRequest, DescribeEventResponse, DescribeOpsMakePlanInstancesRequest, GenHiveTableDDLSqlRequest, BatchCreateIntegrationTaskAlarmsRequest, LockIntegrationTaskResponse, KillScheduleInstancesRequest, BatchStopOpsTasksRequest, DescribeFunctionTypesResponse, ModifyRuleTemplateResponse, BatchUpdateIntegrationTasksResponse, TaskLogResponse, DescribeInstanceLastLogRequest, DescribeEventRequest, BatchModifyOpsOwnersResponse, CreateTaskAlarmRegularResponse, DeleteRuleTemplateRequest, DescribeOpsMakePlanTasksRequest, DescribeProjectRequest, CreateIntegrationTaskResponse, DescribeIntegrationTasksResponse, DeleteProjectUsersResponse, DescribeAlarmReceiverRequest, DescribeSchedulerTaskCntByStatusResponse, ModifyWorkflowInfoRequest, BatchResumeIntegrationTasksRequest, DeleteTaskAlarmRegularResponse, DeleteWorkflowByIdRequest, DescribeTableLineageRequest, CreateWorkflowDsRequest, CreateTaskResponse, BatchStopIntegrationTasksResponse, DescribeApproveTypeListRequest, DeleteIntegrationNodeResponse, DescribeDataSourceInfoListRequest, DescribeIntegrationNodeRequest, SetTaskAlarmNewResponse, GetOfflineDIInstanceListResponse, DescribeDatasourceResponse, DescribeStatisticInstanceStatusTrendOpsRequest, SuspendIntegrationTaskResponse, DescribeSchedulerRunTimeInstanceCntByStatusResponse, RunForceSucScheduleInstancesRequest, DescribeQualityScoreResponse, DescribeRulesByPageResponse, DescribeDsParentFolderTreeResponse, DeleteRuleResponse, DescribeEventConsumeTasksRequest, DescribeDataSourceInfoListResponse, CommitRuleGroupTaskRequest, CheckIntegrationNodeNameExistsRequest, GetOfflineInstanceListResponse, DescribeOpsMakePlansRequest, CreateOpsMakePlanRequest, DescribeDimensionScoreResponse, DescribeOrganizationalFunctionsResponse, DescribeTaskByCycleReportResponse, BatchDeleteOpsTasksResponse, CheckIntegrationTaskNameExistsResponse, DeleteRuleRequest, DeleteResourceFilesResponse, DescribeFieldBasicInfoRequest, DiagnoseProRequest, CreateOpsMakePlanResponse, DescribeStreamTaskLogListResponse, DescribeRuleGroupExecResultsByPageResponse, DescribeInstanceByCycleRequest, GetIntegrationNodeColumnSchemaRequest, DeleteWorkflowByIdResponse, DeleteIntegrationNodeRequest, ModifyIntegrationNodeResponse, DescribeIntegrationStatisticsTaskStatusTrendRequest, DescribeTableMetaRequest, DescribeWorkflowInfoByIdResponse, ModifyDimensionWeightResponse, ModifyTaskAlarmRegularResponse, CreateRuleResponse, ModifyTaskLinksResponse, DescribeTaskRunHistoryRequest, BatchMakeUpIntegrationTasksRequest, CreateTaskVersionDsRequest, DeleteOfflineTaskRequest, DescribeDatabaseInfoListResponse, ModifyDsFolderResponse, DescribeTableScoreTrendResponse, ModifyIntegrationNodeRequest, ModifyMonitorStatusResponse, DescribeRuleTemplatesByPageResponse, DescribeTemplateDimCountResponse, DescribeFunctionTypesRequest, DescribeInstanceLogResponse, DescribeOpsMakePlanTasksResponse, ModifyMonitorStatusRequest, DescribeColumnLineageResponse, DescribeIntegrationTaskRequest, DescribeWorkflowListByProjectIdResponse, DeleteFilePathRequest, DescribeRulesByPageRequest, DescribeTopTableStatResponse, DeleteDsFolderRequest, SaveCustomFunctionResponse, ModifyDsFolderRequest, TriggerDsEventResponse, CreateTaskRequest, DescribeDatabaseMetasRequest, DescribeSchedulerTaskCntByStatusRequest, DescribeRealTimeTaskInstanceNodeInfoRequest, DescribeDependTaskListsResponse, CreateHiveTableResponse, ModifyDataSourceResponse, DescribeTaskByStatusReportResponse, ModifyDimensionWeightRequest, SubmitSqlTaskRequest, DescribeTaskLockStatusResponse, RemoveWorkflowDsRequest, BatchKillIntegrationTaskInstancesRequest, DeleteTaskDsRequest, BatchStopOpsTasksResponse, DeleteFilePathResponse, RunRerunScheduleInstancesResponse, RobAndLockIntegrationTaskRequest, ModifyTaskInfoResponse, CreateRuleRequest, DescribeColumnsMetaResponse, DescribeRuleExecResultsResponse, DeleteFileResponse, ResumeIntegrationTaskRequest, ModifyDataSourceRequest, TriggerEventResponse, ModifyApproveStatusRequest, DescribeOperateOpsTasksResponse, DescribeResourceManagePathTreesRequest, DescribeTableQualityDetailsResponse, BatchStopWorkflowsByIdsResponse, DescribeWorkflowListByProjectIdRequest, DescribeStatisticInstanceStatusTrendOpsResponse, CountOpsInstanceStateResponse, TriggerDsEventRequest, DescribeQualityScoreTrendRequest, SubmitTaskTestRunRequest, DescribeAlarmEventsRequest, DescribeTableMetasResponse, DeleteProjectParamDsRequest, DescribeThirdTaskRunLogResponse, DescribeTaskAlarmRegulationsRequest, CreateCustomFunctionResponse, ModifyTaskInfoRequest, DescribeOperateOpsTasksRequest, DescribeTableMetaResponse, DescribeOfflineTaskTokenRequest, DescribeRuleExecDetailRequest, DeleteResourceRequest, RegisterEventListenerRequest, BatchRunOpsTaskResponse, CheckIntegrationNodeNameExistsResponse, RobAndLockIntegrationTaskResponse, DeleteTaskAlarmRegularRequest, DescribeInstanceLogFileRequest, DeleteOfflineTaskResponse, DescribeDrInstancePageRequest, ModifyWorkflowScheduleResponse, GenHiveTableDDLSqlResponse, DescribeRuleGroupTableRequest, CheckAlarmRegularNameExistRequest, DescribeWorkflowExecuteByIdResponse, CreateIntegrationTaskRequest, BatchRunOpsTaskRequest, DescribeRealTimeTaskMetricOverviewRequest, DescribeDatabaseMetasResponse, FreezeTasksByWorkflowIdsResponse, SubmitWorkflowRequest, DescribeResourceManagePathTreesResponse, RunRerunScheduleInstancesRequest, DeleteIntegrationTaskRequest, ModifyTaskScriptRequest, CreateIntegrationNodeRequest, DescribeTableSchemaInfoRequest, DescribeTableScoreTrendRequest, DescribeTaskByStatusReportRequest, ModifyExecStrategyRequest, BatchForceSuccessIntegrationTaskInstancesRequest, DescribeRealTimeTaskInstanceNodeInfoResponse, DescribeTaskByCycleReportRequest, DescribeInstanceLogDetailResponse, DescribeApproveListRequest, DescribeBatchOperateTaskRequest, StartIntegrationTaskResponse, CommitRuleGroupTaskResponse, DescribeRealTimeTaskMetricOverviewResponse, DescribeOfflineTaskTokenResponse, DescribeTableInfoListResponse, RemoveWorkflowDsResponse, GetOfflineDIInstanceListRequest, ModifyExecStrategyResponse, BatchStartIntegrationTasksRequest, CreateCustomFunctionRequest, DescribeTableBasicInfoRequest, DescribeDatasourceRequest, DescribeEventCasesResponse, DescribeTableSchemaInfoResponse, DiagnoseProResponse, UpdateWorkflowOwnerResponse, SetTaskAlarmNewRequest, DescribeInstanceListResponse, DescribeOpsInstanceLogListRequest, UploadContentRequest, StartIntegrationTaskRequest, DescribeProjectResponse, StopIntegrationTaskRequest, CreateDataSourceResponse, DescribeFolderWorkflowListResponse, DescribeIntegrationVersionNodesInfoResponse, DescribeRulesRequest, DescribeRuleResponse, DescribeTaskScriptRequest, DescribeRuleRequest, DescribeAlarmReceiverResponse, DescribeTableLineageInfoResponse, DescribeWorkflowCanvasInfoResponse, ModifyTaskScriptResponse, DescribeDimensionScoreRequest, FindAllFolderRequest, BatchStartIntegrationTasksResponse, DescribeIntegrationVersionNodesInfoRequest, DescribeSuccessorOpsTaskInfosRequest, DescribeSchedulerInstanceStatusRequest, DescribeScheduleInstancesRequest, DescribeRealTimeTaskSpeedResponse, ModifyWorkflowInfoResponse, DescribeFolderWorkflowListRequest, CheckTaskNameExistResponse, DescribeSchedulerRunTimeInstanceCntByStatusRequest, LockIntegrationTaskRequest, CreateDsFolderRequest, DescribeRuleTemplatesByPageRequest, RunTasksByMultiWorkflowResponse, DescribeInstanceLastLogResponse, DescribeExecStrategyRequest, CreateHiveTableRequest, BatchKillIntegrationTaskInstancesResponse, RunTasksByMultiWorkflowRequest, CheckIntegrationTaskNameExistsRequest, DescribeRuleGroupTableResponse, SuspendIntegrationTaskRequest, DescribeDependOpsTasksResponse, DeleteRuleTemplateResponse, DescribeRuleTemplateRequest, DescribeTaskByCycleRequest, CreateRuleTemplateRequest, DescribeRuleExecDetailResponse, DeleteIntegrationTaskResponse, DescribeRuleGroupsByPageResponse, DescribeIntegrationStatisticsTaskStatusResponse, DescribeOpsMakePlanInstancesResponse, DescribeDatabaseInfoListRequest, DescribeIntegrationTaskResponse, DescribeQualityScoreTrendResponse, CreateHiveTableByDDLRequest, GetIntegrationNodeColumnSchemaResponse, StopIntegrationTaskResponse, DescribeOpsWorkflowsResponse, DescribeRuleTemplatesRequest, DescribeDataCheckStatResponse, DescribeIntegrationStatisticsInstanceTrendRequest, DescribeDsFolderTreeResponse, DescribeWorkflowCanvasInfoRequest, DagInstancesRequest, DryRunDIOfflineTaskResponse, DescribeTaskLockStatusRequest, DescribeRuleExecStatRequest, BatchCreateIntegrationTaskAlarmsResponse, DescribeIntegrationStatisticsRequest, DescribeRuleGroupRequest, ModifyTaskNameRequest, DescribeTrendStatRequest, DescribeOpsInstanceLogListResponse, DescribeApproveTypeListResponse, DescribeRuleGroupSubscriptionRequest, BatchSuspendIntegrationTasksResponse, DeleteProjectUsersRequest, DescribeWorkflowExecuteByIdRequest, RegisterEventResponse, DescribeRuleExecLogRequest, BatchRerunIntegrationTaskInstancesResponse, DescribeApproveListResponse, DescribeIntegrationTasksRequest, BatchMakeUpIntegrationTasksResponse, SubmitCustomFunctionRequest } from "./wedata_models";
 /**
  * wedata client
  * @class
@@ -8,14 +8,9 @@ import { CreateRuleTemplateResponse, DescribeEventConsumeTasksResponse, SubmitBa
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-创建任务
+     * 创建任务
      */
     CreateTask(req: CreateTaskRequest, cb?: (error: string, rep: CreateTaskResponse) => void): Promise<CreateTaskResponse>;
-    /**
-     * 查询基线DAG
-     */
-    DescribeBaselineAllTaskDag(req: DescribeBaselineAllTaskDagRequest, cb?: (error: string, rep: DescribeBaselineAllTaskDagResponse) => void): Promise<DescribeBaselineAllTaskDagResponse>;
     /**
      * 创建任务告警规则
      */
@@ -29,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteIntegrationTask(req: DeleteIntegrationTaskRequest, cb?: (error: string, rep: DeleteIntegrationTaskResponse) => void): Promise<DeleteIntegrationTaskResponse>;
     /**
-     * 批量kill实例
+     * 批量终止实例
      */
     KillScheduleInstances(req: KillScheduleInstancesRequest, cb?: (error: string, rep: KillScheduleInstancesResponse) => void): Promise<KillScheduleInstancesResponse>;
     /**
@@ -37,22 +32,17 @@ export declare class Client extends AbstractClient {
      */
     GetFileInfo(req: GetFileInfoRequest, cb?: (error: string, rep: GetFileInfoResponse) => void): Promise<GetFileInfoResponse>;
     /**
-     * 获取表元数据list
-     */
-    DescribeTableMetas(req: DescribeTableMetasRequest, cb?: (error: string, rep: DescribeTableMetasResponse) => void): Promise<DescribeTableMetasResponse>;
-    /**
-     * 检查规则名称是否重复
-     */
-    CheckDuplicateRuleName(req: CheckDuplicateRuleNameRequest, cb?: (error: string, rep: CheckDuplicateRuleNameResponse) => void): Promise<CheckDuplicateRuleNameResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务脚本
+     * 查询任务脚本
      */
     DescribeTaskScript(req: DescribeTaskScriptRequest, cb?: (error: string, rep: DescribeTaskScriptResponse) => void): Promise<DescribeTaskScriptResponse>;
     /**
      * 创建规则模板
      */
     CreateRuleTemplate(req: CreateRuleTemplateRequest, cb?: (error: string, rep: CreateRuleTemplateResponse) => void): Promise<CreateRuleTemplateResponse>;
+    /**
+     * 实例诊断
+     */
+    DiagnosePro(req: DiagnoseProRequest, cb?: (error: string, rep: DiagnoseProResponse) => void): Promise<DiagnoseProResponse>;
     /**
      * 实时任务运行指标概览
      */
@@ -74,14 +64,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataCheckStat(req: DescribeDataCheckStatRequest, cb?: (error: string, rep: DescribeDataCheckStatResponse) => void): Promise<DescribeDataCheckStatResponse>;
     /**
-     * 分页查询规则执行结果列表
-     */
-    DescribeRuleExecResultsByPage(req: DescribeRuleExecResultsByPageRequest, cb?: (error: string, rep: DescribeRuleExecResultsByPageResponse) => void): Promise<DescribeRuleExecResultsByPageResponse>;
-    /**
-     * 查询运维画布信息，只需要获取边和节点
-     */
-    DescribeWorkflowOpsCanvasInfo(req: DescribeWorkflowOpsCanvasInfoRequest, cb?: (error: string, rep: DescribeWorkflowOpsCanvasInfoResponse) => void): Promise<DescribeWorkflowOpsCanvasInfoResponse>;
-    /**
      * 批量终止集成任务实例
      */
     BatchKillIntegrationTaskInstances(req: BatchKillIntegrationTaskInstancesRequest, cb?: (error: string, rep: BatchKillIntegrationTaskInstancesResponse) => void): Promise<BatchKillIntegrationTaskInstancesResponse>;
@@ -90,7 +72,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyExecStrategy(req: ModifyExecStrategyRequest, cb?: (error: string, rep: ModifyExecStrategyResponse) => void): Promise<ModifyExecStrategyResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
 注册事件监听器
      */
     RegisterEventListener(req: RegisterEventListenerRequest, cb?: (error: string, rep: RegisterEventListenerResponse) => void): Promise<RegisterEventListenerResponse>;
@@ -111,29 +93,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeIntegrationNode(req: DescribeIntegrationNodeRequest, cb?: (error: string, rep: DescribeIntegrationNodeResponse) => void): Promise<DescribeIntegrationNodeResponse>;
     /**
-     * 在基线系统内查询单个调度任务实例
-     */
-    DescribeScheduleInstance(req: DescribeScheduleInstanceRequest, cb?: (error: string, rep: DescribeScheduleInstanceResponse) => void): Promise<DescribeScheduleInstanceResponse>;
-    /**
      * 根据周期类型 查询所有任务
      */
     DescribeTaskByCycle(req: DescribeTaskByCycleRequest, cb?: (error: string, rep: DescribeTaskByCycleResponse) => void): Promise<DescribeTaskByCycleResponse>;
     /**
-     * 智能运维-批量删除任务
+     * 批量暂停集成任务
      */
-    BatchDeleteOpsTasks(req: BatchDeleteOpsTasksRequest, cb?: (error: string, rep: BatchDeleteOpsTasksResponse) => void): Promise<BatchDeleteOpsTasksResponse>;
-    /**
-     * 更新质量规则接口
-     */
-    ModifyRule(req: ModifyRuleRequest, cb?: (error: string, rep: ModifyRuleResponse) => void): Promise<ModifyRuleResponse>;
+    BatchSuspendIntegrationTasks(req: BatchSuspendIntegrationTasksRequest, cb?: (error: string, rep: BatchSuspendIntegrationTasksResponse) => void): Promise<BatchSuspendIntegrationTasksResponse>;
     /**
      * 元数据模型-字段基础信息查询接口
      */
     DescribeFieldBasicInfo(req: DescribeFieldBasicInfoRequest, cb?: (error: string, rep: DescribeFieldBasicInfoResponse) => void): Promise<DescribeFieldBasicInfoResponse>;
-    /**
-     * 规则组执行结果分页查询接口不带鉴权
-     */
-    DescribeRuleGroupExecResultsByPageWithoutAuth(req: DescribeRuleGroupExecResultsByPageWithoutAuthRequest, cb?: (error: string, rep: DescribeRuleGroupExecResultsByPageWithoutAuthResponse) => void): Promise<DescribeRuleGroupExecResultsByPageWithoutAuthResponse>;
     /**
      * 删除编排空间工作流
      */
@@ -143,30 +113,23 @@ export declare class Client extends AbstractClient {
      */
     DescribeThirdTaskRunLog(req: DescribeThirdTaskRunLogRequest, cb?: (error: string, rep: DescribeThirdTaskRunLogResponse) => void): Promise<DescribeThirdTaskRunLogResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-批量删除任务，仅对任务状态为”已停止“有效；
-
+     * 查询父目录树，用于工作流、任务定位
      */
-    BatchDeleteTasksNew(req: BatchDeleteTasksNewRequest, cb?: (error: string, rep: BatchDeleteTasksNewResponse) => void): Promise<BatchDeleteTasksNewResponse>;
+    DescribeDsParentFolderTree(req: DescribeDsParentFolderTreeRequest, cb?: (error: string, rep: DescribeDsParentFolderTreeResponse) => void): Promise<DescribeDsParentFolderTreeResponse>;
     /**
      * 继续集成任务
      */
     ResumeIntegrationTask(req: ResumeIntegrationTaskRequest, cb?: (error: string, rep: ResumeIntegrationTaskResponse) => void): Promise<ResumeIntegrationTaskResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-删除工作流
+     * 重命名任务（任务编辑）
      */
-    DeleteWorkflowNew(req: DeleteWorkflowNewRequest, cb?: (error: string, rep: DeleteWorkflowNewResponse) => void): Promise<DeleteWorkflowNewResponse>;
+    ModifyTaskName(req: ModifyTaskNameRequest, cb?: (error: string, rep: ModifyTaskNameResponse) => void): Promise<ModifyTaskNameResponse>;
     /**
-     * 提交基线
+     * 离线任务实例运行日志列表
      */
-    StopBaseline(req: StopBaselineRequest, cb?: (error: string, rep: StopBaselineResponse) => void): Promise<StopBaselineResponse>;
+    DescribeInstanceLogList(req: DescribeInstanceLogListRequest, cb?: (error: string, rep: DescribeInstanceLogListResponse) => void): Promise<DescribeInstanceLogListResponse>;
     /**
-     * 日志获取详情页面
-     */
-    DescribeInstanceLastLog(req: DescribeInstanceLastLogRequest, cb?: (error: string, rep: DescribeInstanceLastLogResponse) => void): Promise<DescribeInstanceLastLogResponse>;
-    /**
-     * 创建任务版本
+     * 提交任务版本
      */
     CreateTaskVersionDs(req: CreateTaskVersionDsRequest, cb?: (error: string, rep: CreateTaskVersionDsResponse) => void): Promise<CreateTaskVersionDsResponse>;
     /**
@@ -178,19 +141,13 @@ export declare class Client extends AbstractClient {
      */
     CreateCustomFunction(req: CreateCustomFunctionRequest, cb?: (error: string, rep: CreateCustomFunctionResponse) => void): Promise<CreateCustomFunctionResponse>;
     /**
-     * 编辑基线
+     * 解锁集成任务
      */
-    EditBaseline(req: EditBaselineRequest, cb?: (error: string, rep: EditBaselineResponse) => void): Promise<EditBaselineResponse>;
+    UnlockIntegrationTask(req: UnlockIntegrationTaskRequest, cb?: (error: string, rep: UnlockIntegrationTaskResponse) => void): Promise<UnlockIntegrationTaskResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-仅对任务状态为”调度中“和”已暂停“有效，对所选任务的任务实例进行终止，并停止调度
+     * 批量停止集成任务
      */
-    BatchStopTasksNew(req: BatchStopTasksNewRequest, cb?: (error: string, rep: BatchStopTasksNewResponse) => void): Promise<BatchStopTasksNewResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-删除文件夹
-     */
-    DeleteFolder(req: DeleteFolderRequest, cb?: (error: string, rep: DeleteFolderResponse) => void): Promise<DeleteFolderResponse>;
+    BatchStopIntegrationTasks(req: BatchStopIntegrationTasksRequest, cb?: (error: string, rep: BatchStopIntegrationTasksResponse) => void): Promise<BatchStopIntegrationTasksResponse>;
     /**
      * 运维大屏-任务状态分布
      */
@@ -204,8 +161,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeWorkflowListByProjectId(req: DescribeWorkflowListByProjectIdRequest, cb?: (error: string, rep: DescribeWorkflowListByProjectIdResponse) => void): Promise<DescribeWorkflowListByProjectIdResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-创建数据源
+     * 创建数据源
      */
     CreateDataSource(req: CreateDataSourceRequest, cb?: (error: string, rep: CreateDataSourceResponse) => void): Promise<CreateDataSourceResponse>;
     /**
@@ -216,10 +172,6 @@ export declare class Client extends AbstractClient {
      * 查看事件实例的消费任务
      */
     DescribeEventConsumeTasks(req: DescribeEventConsumeTasksRequest, cb?: (error: string, rep: DescribeEventConsumeTasksResponse) => void): Promise<DescribeEventConsumeTasksResponse>;
-    /**
-     * 查询基线诊断信息
-     */
-    DescribeDiagnosticInfoByBaselineId(req: DescribeDiagnosticInfoByBaselineIdRequest, cb?: (error: string, rep: DescribeDiagnosticInfoByBaselineIdResponse) => void): Promise<DescribeDiagnosticInfoByBaselineIdResponse>;
     /**
      * 获取离线任务长连接Token
      */
@@ -233,10 +185,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeApproveList(req: DescribeApproveListRequest, cb?: (error: string, rep: DescribeApproveListResponse) => void): Promise<DescribeApproveListResponse>;
     /**
-     * 更新集成节点
-     */
-    ModifyIntegrationNode(req: ModifyIntegrationNodeRequest, cb?: (error: string, rep: ModifyIntegrationNodeResponse) => void): Promise<ModifyIntegrationNodeResponse>;
-    /**
      * 抢占锁定集成任务
      */
     RobAndLockIntegrationTask(req: RobAndLockIntegrationTaskRequest, cb?: (error: string, rep: RobAndLockIntegrationTaskResponse) => void): Promise<RobAndLockIntegrationTaskResponse>;
@@ -249,17 +197,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmEvents(req: DescribeAlarmEventsRequest, cb?: (error: string, rep: DescribeAlarmEventsResponse) => void): Promise<DescribeAlarmEventsResponse>;
     /**
-     * 获取表列表
+     * 批量启动工作流
      */
-    DescribeRuleTablesByPage(req: DescribeRuleTablesByPageRequest, cb?: (error: string, rep: DescribeRuleTablesByPageResponse) => void): Promise<DescribeRuleTablesByPageResponse>;
+    RunTasksByMultiWorkflow(req: RunTasksByMultiWorkflowRequest, cb?: (error: string, rep: RunTasksByMultiWorkflowResponse) => void): Promise<RunTasksByMultiWorkflowResponse>;
     /**
      * 质量报告-质量评分
      */
     DescribeQualityScore(req: DescribeQualityScoreRequest, cb?: (error: string, rep: DescribeQualityScoreResponse) => void): Promise<DescribeQualityScoreResponse>;
-    /**
-     * 文件路径的根目录为 /datastudio/resource，如果要在根目录下创建 aaa 文件夹，FilePath的值应该为 /datastudio/resource，如果根目录下已经创建了 aaa 文件夹，要在 aaa 下创建  bbb 文件夹，FilePath的值应该为 /datastudio/resource/aaa
-     */
-    CreateResourcePath(req: CreateResourcePathRequest, cb?: (error: string, rep: CreateResourcePathResponse) => void): Promise<CreateResourcePathResponse>;
     /**
      * 数据质量概览页面触发维度分布统计接口
      */
@@ -277,19 +221,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeOpsMakePlanTasks(req: DescribeOpsMakePlanTasksRequest, cb?: (error: string, rep: DescribeOpsMakePlanTasksResponse) => void): Promise<DescribeOpsMakePlanTasksResponse>;
     /**
-     * 根据任务Id查找生产态子任务
+     * 数据质量概览页面表排行接口
      */
-    DescribeAllUsedVersionSon(req: DescribeAllUsedVersionSonRequest, cb?: (error: string, rep: DescribeAllUsedVersionSonResponse) => void): Promise<DescribeAllUsedVersionSonResponse>;
+    DescribeTopTableStat(req: DescribeTopTableStatRequest, cb?: (error: string, rep: DescribeTopTableStatResponse) => void): Promise<DescribeTopTableStatResponse>;
     /**
      * 查询全量函数
      */
     DescribeOrganizationalFunctions(req: DescribeOrganizationalFunctionsRequest, cb?: (error: string, rep: DescribeOrganizationalFunctionsResponse) => void): Promise<DescribeOrganizationalFunctionsResponse>;
     /**
-     * 解锁集成任务
-     */
-    UnlockIntegrationTask(req: UnlockIntegrationTaskRequest, cb?: (error: string, rep: UnlockIntegrationTaskResponse) => void): Promise<UnlockIntegrationTaskResponse>;
-    /**
-     * 实例强制成功
+     * 实例批量置成功
      */
     RunForceSucScheduleInstances(req: RunForceSucScheduleInstancesRequest, cb?: (error: string, rep: RunForceSucScheduleInstancesResponse) => void): Promise<RunForceSucScheduleInstancesResponse>;
     /**
@@ -297,30 +237,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeDsFolderTree(req: DescribeDsFolderTreeRequest, cb?: (error: string, rep: DescribeDsFolderTreeResponse) => void): Promise<DescribeDsFolderTreeResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量终止操作
+     * 无
      */
-    KillInstances(req: KillInstancesRequest, cb?: (error: string, rep: KillInstancesResponse) => void): Promise<KillInstancesResponse>;
-    /**
-     * 编辑基线实例中任务告警状态
-     */
-    ModifyBaselineTaskAlarmStatus(req: ModifyBaselineTaskAlarmStatusRequest, cb?: (error: string, rep: ModifyBaselineTaskAlarmStatusResponse) => void): Promise<ModifyBaselineTaskAlarmStatusResponse>;
+    SubmitTaskTestRun(req: SubmitTaskTestRunRequest, cb?: (error: string, rep: SubmitTaskTestRunResponse) => void): Promise<SubmitTaskTestRunResponse>;
     /**
      * 获取审批分类列表
      */
     DescribeApproveTypeList(req: DescribeApproveTypeListRequest, cb?: (error: string, rep: DescribeApproveTypeListResponse) => void): Promise<DescribeApproveTypeListResponse>;
     /**
-     * Runner 规则检测结果上报
+     * 规则执行日志查询
      */
-    CommitRuleGroupExecResult(req: CommitRuleGroupExecResultRequest, cb?: (error: string, rep: CommitRuleGroupExecResultResponse) => void): Promise<CommitRuleGroupExecResultResponse>;
+    DescribeRuleExecLog(req: DescribeRuleExecLogRequest, cb?: (error: string, rep: DescribeRuleExecLogResponse) => void): Promise<DescribeRuleExecLogResponse>;
     /**
      * 开发空间-批量删除目录和文件
      */
     DeleteFilePath(req: DeleteFilePathRequest, cb?: (error: string, rep: DeleteFilePathResponse) => void): Promise<DeleteFilePathResponse>;
-    /**
-     * 任务批量补录，调度状态任务才可以补录；
-     */
-    MakeUpOpsTasks(req: MakeUpOpsTasksRequest, cb?: (error: string, rep: MakeUpOpsTasksResponse) => void): Promise<MakeUpOpsTasksResponse>;
     /**
      * 编排空间-创建文件夹
      */
@@ -330,17 +261,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSuccessorOpsTaskInfos(req: DescribeSuccessorOpsTaskInfosRequest, cb?: (error: string, rep: DescribeSuccessorOpsTaskInfosResponse) => void): Promise<DescribeSuccessorOpsTaskInfosResponse>;
     /**
-     * 获取关联子实例
-     */
-    DescribeSonInstances(req: DescribeSonInstancesRequest, cb?: (error: string, rep: DescribeSonInstancesResponse) => void): Promise<DescribeSonInstancesResponse>;
-    /**
      * 调试运行集成任务
      */
     DryRunDIOfflineTask(req: DryRunDIOfflineTaskRequest, cb?: (error: string, rep: DryRunDIOfflineTaskResponse) => void): Promise<DryRunDIOfflineTaskResponse>;
-    /**
-     * 根据条件查找事件实例
-     */
-    DescribeEventCases(req: DescribeEventCasesRequest, cb?: (error: string, rep: DescribeEventCasesResponse) => void): Promise<DescribeEventCasesResponse>;
     /**
      * 质量报告-查询质量评分
      */
@@ -350,52 +273,34 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleGroupTable(req: DescribeRuleGroupTableRequest, cb?: (error: string, rep: DescribeRuleGroupTableResponse) => void): Promise<DescribeRuleGroupTableResponse>;
     /**
-     * DeleteBaseline
-     */
-    DeleteBaseline(req: DeleteBaselineRequest, cb?: (error: string, rep: DeleteBaselineResponse) => void): Promise<DeleteBaselineResponse>;
-    /**
      * 创建集成任务
      */
     CreateIntegrationTask(req: CreateIntegrationTaskRequest, cb?: (error: string, rep: CreateIntegrationTaskResponse) => void): Promise<CreateIntegrationTaskResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
+     * 查询规则详情
      */
-    ModifyTaskScript(req: ModifyTaskScriptRequest, cb?: (error: string, rep: ModifyTaskScriptResponse) => void): Promise<ModifyTaskScriptResponse>;
-    /**
-     * 提交数据导出任务
-     */
-    CommitExportTask(req: CommitExportTaskRequest, cb?: (error: string, rep: CommitExportTaskResponse) => void): Promise<CommitExportTaskResponse>;
-    /**
-     * 过滤条件【必要字段】{ruleId}
-     */
-    DescribeRuleHistoryByPage(req: DescribeRuleHistoryByPageRequest, cb?: (error: string, rep: DescribeRuleHistoryByPageResponse) => void): Promise<DescribeRuleHistoryByPageResponse>;
+    DescribeRule(req: DescribeRuleRequest, cb?: (error: string, rep: DescribeRuleResponse) => void): Promise<DescribeRuleResponse>;
     /**
      * 按补录计划批量终止实例。
      */
     KillOpsMakePlanInstances(req: KillOpsMakePlanInstancesRequest, cb?: (error: string, rep: KillOpsMakePlanInstancesResponse) => void): Promise<KillOpsMakePlanInstancesResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
+     * 数据源详情
      */
     DescribeDataSourceList(req: DescribeDataSourceListRequest, cb?: (error: string, rep: DescribeDataSourceListResponse) => void): Promise<DescribeDataSourceListResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
 更新任务
      */
     ModifyTaskInfo(req: ModifyTaskInfoRequest, cb?: (error: string, rep: ModifyTaskInfoResponse) => void): Promise<ModifyTaskInfoResponse>;
-    /**
-     * 查询集成任务版本节点信息
-     */
-    DescribeIntegrationVersionNodesInfo(req: DescribeIntegrationVersionNodesInfoRequest, cb?: (error: string, rep: DescribeIntegrationVersionNodesInfoResponse) => void): Promise<DescribeIntegrationVersionNodesInfoResponse>;
     /**
      * 事件管理-触发事件
      */
     TriggerDsEvent(req: TriggerDsEventRequest, cb?: (error: string, rep: TriggerDsEventResponse) => void): Promise<TriggerDsEventResponse>;
     /**
-     * 查询事件类型列表
+     * 运维大屏-实例运行时长排行
      */
-    DescribeEventTypes(req?: DescribeEventTypesRequest, cb?: (error: string, rep: DescribeEventTypesResponse) => void): Promise<DescribeEventTypesResponse>;
+    DescribeSchedulerRunTimeInstanceCntByStatus(req: DescribeSchedulerRunTimeInstanceCntByStatusRequest, cb?: (error: string, rep: DescribeSchedulerRunTimeInstanceCntByStatusResponse) => void): Promise<DescribeSchedulerRunTimeInstanceCntByStatusResponse>;
     /**
      * 任务状态统计
      */
@@ -417,10 +322,6 @@ export declare class Client extends AbstractClient {
      */
     BatchStartIntegrationTasks(req: BatchStartIntegrationTasksRequest, cb?: (error: string, rep: BatchStartIntegrationTasksResponse) => void): Promise<BatchStartIntegrationTasksResponse>;
     /**
-     * 分页查询质量监控组
-     */
-    DescribeMonitorsByPage(req: DescribeMonitorsByPageRequest, cb?: (error: string, rep: DescribeMonitorsByPageResponse) => void): Promise<DescribeMonitorsByPageResponse>;
-    /**
      * 质量报告-修改维度权限
      */
     ModifyDimensionWeight(req: ModifyDimensionWeightRequest, cb?: (error: string, rep: ModifyDimensionWeightResponse) => void): Promise<ModifyDimensionWeightResponse>;
@@ -437,18 +338,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeOpsMakePlanInstances(req: DescribeOpsMakePlanInstancesRequest, cb?: (error: string, rep: DescribeOpsMakePlanInstancesResponse) => void): Promise<DescribeOpsMakePlanInstancesResponse>;
     /**
-     * 查询任务实例的关联实例列表
-     */
-    DescribeRelatedInstances(req: DescribeRelatedInstancesRequest, cb?: (error: string, rep: DescribeRelatedInstancesResponse) => void): Promise<DescribeRelatedInstancesResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源详情
+     * 数据源详情
      */
     DescribeDatasource(req: DescribeDatasourceRequest, cb?: (error: string, rep: DescribeDatasourceResponse) => void): Promise<DescribeDatasourceResponse>;
     /**
-     * 任务运维搜索 查询生产态任务数据源列表
+     * 数据开发模块-文件夹更新
      */
-    DescribeOperateOpsTaskDatasource(req: DescribeOperateOpsTaskDatasourceRequest, cb?: (error: string, rep: DescribeOperateOpsTaskDatasourceResponse) => void): Promise<DescribeOperateOpsTaskDatasourceResponse>;
+    ModifyDsFolder(req: ModifyDsFolderRequest, cb?: (error: string, rep: ModifyDsFolderResponse) => void): Promise<ModifyDsFolderResponse>;
     /**
      * 通过工作流id，查询工作流详情
      */
@@ -458,11 +354,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskByStatusReport(req: DescribeTaskByStatusReportRequest, cb?: (error: string, rep: DescribeTaskByStatusReportResponse) => void): Promise<DescribeTaskByStatusReportResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-运行任务
-     */
-    RunTask(req: RunTaskRequest, cb?: (error: string, rep: RunTaskResponse) => void): Promise<RunTaskResponse>;
-    /**
      * 获取离线任务实例
      */
     GetOfflineInstanceList(req: GetOfflineInstanceListRequest, cb?: (error: string, rep: GetOfflineInstanceListResponse) => void): Promise<GetOfflineInstanceListResponse>;
@@ -471,49 +362,25 @@ export declare class Client extends AbstractClient {
      */
     CreateOfflineTask(req: CreateOfflineTaskRequest, cb?: (error: string, rep: CreateOfflineTaskResponse) => void): Promise<CreateOfflineTaskResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-更新工作流调度
+     * 更新工作流调度
      */
     ModifyWorkflowSchedule(req: ModifyWorkflowScheduleRequest, cb?: (error: string, rep: ModifyWorkflowScheduleResponse) => void): Promise<ModifyWorkflowScheduleResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-根据工作流分页查询任务
-     */
-    DescribeTasksByPage(req: DescribeTasksByPageRequest, cb?: (error: string, rep: DescribeTasksByPageResponse) => void): Promise<DescribeTasksByPageResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-创建文件夹
-     */
-    CreateFolder(req: CreateFolderRequest, cb?: (error: string, rep: CreateFolderResponse) => void): Promise<CreateFolderResponse>;
     /**
      * 获取表schema信息
      */
     DescribeTableSchemaInfo(req: DescribeTableSchemaInfoRequest, cb?: (error: string, rep: DescribeTableSchemaInfoResponse) => void): Promise<DescribeTableSchemaInfoResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量置成功
+     * 更新质量规则接口
      */
-    ForceSucInstances(req: ForceSucInstancesRequest, cb?: (error: string, rep: ForceSucInstancesResponse) => void): Promise<ForceSucInstancesResponse>;
+    ModifyRule(req: ModifyRuleRequest, cb?: (error: string, rep: ModifyRuleResponse) => void): Promise<ModifyRuleResponse>;
     /**
      * 查询函数类型
      */
     DescribeFunctionTypes(req?: DescribeFunctionTypesRequest, cb?: (error: string, rep: DescribeFunctionTypesResponse) => void): Promise<DescribeFunctionTypesResponse>;
     /**
-     * 查询父目录树，用于工作流、任务定位
+     * 删除数据源
      */
-    DescribeDsParentFolderTree(req: DescribeDsParentFolderTreeRequest, cb?: (error: string, rep: DescribeDsParentFolderTreeResponse) => void): Promise<DescribeDsParentFolderTreeResponse>;
-    /**
-     * 离线任务周期统计明细
-     */
-    DescribeTaskReportDetailList(req: DescribeTaskReportDetailListRequest, cb?: (error: string, rep: DescribeTaskReportDetailListResponse) => void): Promise<DescribeTaskReportDetailListResponse>;
-    /**
-     * 创建基线
-     */
-    CreateBaseline(req: CreateBaselineRequest, cb?: (error: string, rep: CreateBaselineResponse) => void): Promise<CreateBaselineResponse>;
-    /**
-     * 查询表的所有列元数据
-     */
-    DescribeColumnsMeta(req: DescribeColumnsMetaRequest, cb?: (error: string, rep: DescribeColumnsMetaResponse) => void): Promise<DescribeColumnsMetaResponse>;
+    DeleteDataSources(req: DeleteDataSourcesRequest, cb?: (error: string, rep: DeleteDataSourcesResponse) => void): Promise<DeleteDataSourcesResponse>;
     /**
      * 删除集成节点
      */
@@ -523,9 +390,9 @@ export declare class Client extends AbstractClient {
      */
     StopIntegrationTask(req: StopIntegrationTaskRequest, cb?: (error: string, rep: StopIntegrationTaskResponse) => void): Promise<StopIntegrationTaskResponse>;
     /**
-     * 拉取实例列表，join task表一些信息
+     * 获取表元数据list
      */
-    DescribeInstancesInfoWithTaskInfo(req: DescribeInstancesInfoWithTaskInfoRequest, cb?: (error: string, rep: DescribeInstancesInfoWithTaskInfoResponse) => void): Promise<DescribeInstancesInfoWithTaskInfoResponse>;
+    DescribeTableMetas(req: DescribeTableMetasRequest, cb?: (error: string, rep: DescribeTableMetasResponse) => void): Promise<DescribeTableMetasResponse>;
     /**
      * 实时任务同步速度趋势
      */
@@ -563,21 +430,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteResourceFiles(req: DeleteResourceFilesRequest, cb?: (error: string, rep: DeleteResourceFilesResponse) => void): Promise<DeleteResourceFilesResponse>;
     /**
-     * 补录任务
+     * 批量补数据（创建补录任务）
      */
     CreateOpsMakePlan(req: CreateOpsMakePlanRequest, cb?: (error: string, rep: CreateOpsMakePlanResponse) => void): Promise<CreateOpsMakePlanResponse>;
-    /**
-     * 提交基线
-     */
-    SubmitBaseline(req: SubmitBaselineRequest, cb?: (error: string, rep: SubmitBaselineResponse) => void): Promise<SubmitBaselineResponse>;
-    /**
-     * 任务运维列表组合条件查询
-     */
-    DescribeOperateTasks(req: DescribeOperateTasksRequest, cb?: (error: string, rep: DescribeOperateTasksResponse) => void): Promise<DescribeOperateTasksResponse>;
-    /**
-     * 实例诊断信息
-     */
-    DiagnosePlus(req: DiagnosePlusRequest, cb?: (error: string, rep: DiagnosePlusResponse) => void): Promise<DiagnosePlusResponse>;
     /**
      * 任务运维-批量冻结任务
      */
@@ -587,42 +442,26 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleGroup(req: DescribeRuleGroupRequest, cb?: (error: string, rep: DescribeRuleGroupResponse) => void): Promise<DescribeRuleGroupResponse>;
     /**
-     * 规则执行日志查询
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
      */
-    DescribeRuleExecLog(req: DescribeRuleExecLogRequest, cb?: (error: string, rep: DescribeRuleExecLogResponse) => void): Promise<DescribeRuleExecLogResponse>;
-    /**
-     * 数据质量概览页面表排行接口
-     */
-    DescribeTopTableStat(req: DescribeTopTableStatRequest, cb?: (error: string, rep: DescribeTopTableStatResponse) => void): Promise<DescribeTopTableStatResponse>;
+    ModifyTaskScript(req: ModifyTaskScriptRequest, cb?: (error: string, rep: ModifyTaskScriptResponse) => void): Promise<ModifyTaskScriptResponse>;
     /**
      * 获取具体实例相关日志信息
      */
     DescribeInstanceLogDetail(req: DescribeInstanceLogDetailRequest, cb?: (error: string, rep: DescribeInstanceLogDetailResponse) => void): Promise<DescribeInstanceLogDetailResponse>;
     /**
-     * 任务运维-查询生产态任务数据源类型列表
+     * 编排空间批量操作页面查找全部的文件夹
      */
-    DescribeOperateOpsTaskDatasourceType(req: DescribeOperateOpsTaskDatasourceTypeRequest, cb?: (error: string, rep: DescribeOperateOpsTaskDatasourceTypeResponse) => void): Promise<DescribeOperateOpsTaskDatasourceTypeResponse>;
+    FindAllFolder(req: FindAllFolderRequest, cb?: (error: string, rep: FindAllFolderResponse) => void): Promise<FindAllFolderResponse>;
     /**
      * 获取数据库信息
      */
     DescribeDatabaseInfoList(req: DescribeDatabaseInfoListRequest, cb?: (error: string, rep: DescribeDatabaseInfoListResponse) => void): Promise<DescribeDatabaseInfoListResponse>;
     /**
-     * 查询规则模板操作记录
-     */
-    DescribeTemplateHistory(req: DescribeTemplateHistoryRequest, cb?: (error: string, rep: DescribeTemplateHistoryResponse) => void): Promise<DescribeTemplateHistoryResponse>;
-    /**
      * 根据层级查找上/下游任务节点
      */
     DescribeDependOpsTasks(req: DescribeDependOpsTasksRequest, cb?: (error: string, rep: DescribeDependOpsTasksResponse) => void): Promise<DescribeDependOpsTasksResponse>;
-    /**
-     * 重命名任务（任务编辑）
-     */
-    ModifyTaskName(req: ModifyTaskNameRequest, cb?: (error: string, rep: ModifyTaskNameResponse) => void): Promise<ModifyTaskNameResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交任务
-     */
-    SubmitTask(req: SubmitTaskRequest, cb?: (error: string, rep: SubmitTaskResponse) => void): Promise<SubmitTaskResponse>;
     /**
      * 提交集成任务
      */
@@ -632,10 +471,6 @@ export declare class Client extends AbstractClient {
      */
     DeleteOfflineTask(req: DeleteOfflineTaskRequest, cb?: (error: string, rep: DeleteOfflineTaskResponse) => void): Promise<DeleteOfflineTaskResponse>;
     /**
-     * 查询质量规则数据源
-     */
-    DescribeRuleDataSources(req: DescribeRuleDataSourcesRequest, cb?: (error: string, rep: DescribeRuleDataSourcesResponse) => void): Promise<DescribeRuleDataSourcesResponse>;
-    /**
      * 创建hive表，返回表名称
      */
     CreateHiveTableByDDL(req: CreateHiveTableByDDLRequest, cb?: (error: string, rep: CreateHiveTableByDDLResponse) => void): Promise<CreateHiveTableByDDLResponse>;
@@ -643,18 +478,6 @@ export declare class Client extends AbstractClient {
      * 编排空间-删除文件夹
      */
     DeleteDsFolder(req: DeleteDsFolderRequest, cb?: (error: string, rep: DeleteDsFolderResponse) => void): Promise<DeleteDsFolderResponse>;
-    /**
-     * 实例强制成功
-     */
-    ForceSucScheduleInstances(req: ForceSucScheduleInstancesRequest, cb?: (error: string, rep: ForceSucScheduleInstancesResponse) => void): Promise<ForceSucScheduleInstancesResponse>;
-    /**
-     * 查询基线实例关键任务实例甘特图
-     */
-    DescribeBaselineInstanceGantt(req: DescribeBaselineInstanceGanttRequest, cb?: (error: string, rep: DescribeBaselineInstanceGanttResponse) => void): Promise<DescribeBaselineInstanceGanttResponse>;
-    /**
-     * 智能运维事件查询列表
-     */
-    DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
     /**
      * 获取资源管理目录树
      */
@@ -664,11 +487,6 @@ export declare class Client extends AbstractClient {
      */
     BatchForceSuccessIntegrationTaskInstances(req: BatchForceSuccessIntegrationTaskInstancesRequest, cb?: (error: string, rep: BatchForceSuccessIntegrationTaskInstancesResponse) => void): Promise<BatchForceSuccessIntegrationTaskInstancesResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-批量冻结任务
-     */
-    FreezeTasks(req: FreezeTasksRequest, cb?: (error: string, rep: FreezeTasksResponse) => void): Promise<FreezeTasksResponse>;
-    /**
      * 查询实时任务日志列表
      */
     DescribeStreamTaskLogList(req: DescribeStreamTaskLogListRequest, cb?: (error: string, rep: DescribeStreamTaskLogListResponse) => void): Promise<DescribeStreamTaskLogListResponse>;
@@ -676,10 +494,6 @@ export declare class Client extends AbstractClient {
      * 创建质量规则接口
      */
     CreateRule(req: CreateRuleRequest, cb?: (error: string, rep: CreateRuleResponse) => void): Promise<CreateRuleResponse>;
-    /**
-     * 下载日志文件，返回日志URL
-     */
-    DescribeInstanceLogFile(req: DescribeInstanceLogFileRequest, cb?: (error: string, rep: DescribeInstanceLogFileResponse) => void): Promise<DescribeInstanceLogFileResponse>;
     /**
      * 编辑规则模板
      */
@@ -693,10 +507,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeAllByFolderNew(req: DescribeAllByFolderNewRequest, cb?: (error: string, rep: DescribeAllByFolderNewResponse) => void): Promise<DescribeAllByFolderNewResponse>;
     /**
-     * 智能运维-事件列表-所属任务/基线过滤列表
-     */
-    DescribeBelongTo(req: DescribeBelongToRequest, cb?: (error: string, rep: DescribeBelongToResponse) => void): Promise<DescribeBelongToResponse>;
-    /**
      * 质量报告-查询表质量详情
      */
     DescribeTableQualityDetails(req: DescribeTableQualityDetailsRequest, cb?: (error: string, rep: DescribeTableQualityDetailsResponse) => void): Promise<DescribeTableQualityDetailsResponse>;
@@ -708,35 +518,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleGroupsByPage(req: DescribeRuleGroupsByPageRequest, cb?: (error: string, rep: DescribeRuleGroupsByPageResponse) => void): Promise<DescribeRuleGroupsByPageResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-删除数据源
+     * 查询表的所有列元数据
      */
-    DeleteDataSources(req: DeleteDataSourcesRequest, cb?: (error: string, rep: DeleteDataSourcesResponse) => void): Promise<DeleteDataSourcesResponse>;
+    DescribeColumnsMeta(req: DescribeColumnsMetaRequest, cb?: (error: string, rep: DescribeColumnsMetaResponse) => void): Promise<DescribeColumnsMetaResponse>;
     /**
-     * 智能运维事件详情1
-     */
-    DescribeEventDetail(req: DescribeEventDetailRequest, cb?: (error: string, rep: DescribeEventDetailResponse) => void): Promise<DescribeEventDetailResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-文件夹更新
-     */
-    ModifyFolder(req: ModifyFolderRequest, cb?: (error: string, rep: ModifyFolderResponse) => void): Promise<ModifyFolderResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务具体详情
-     */
-    DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量重跑
-     */
-    RerunInstances(req: RerunInstancesRequest, cb?: (error: string, rep: RerunInstancesResponse) => void): Promise<RerunInstancesResponse>;
-    /**
-     * 无
-     */
-    SubmitTaskTestRun(req: SubmitTaskTestRunRequest, cb?: (error: string, rep: SubmitTaskTestRunResponse) => void): Promise<SubmitTaskTestRunResponse>;
-    /**
-     * 批量操作任务列表
+     * 批量操作页面获取任务列表
      */
     DescribeBatchOperateTask(req: DescribeBatchOperateTaskRequest, cb?: (error: string, rep: DescribeBatchOperateTaskResponse) => void): Promise<DescribeBatchOperateTaskResponse>;
     /**
@@ -752,34 +538,13 @@ export declare class Client extends AbstractClient {
      */
     CheckIntegrationTaskNameExists(req: CheckIntegrationTaskNameExistsRequest, cb?: (error: string, rep: CheckIntegrationTaskNameExistsResponse) => void): Promise<CheckIntegrationTaskNameExistsResponse>;
     /**
-     * 获取字段类型列表
-     */
-    DescribeDataTypes(req: DescribeDataTypesRequest, cb?: (error: string, rep: DescribeDataTypesResponse) => void): Promise<DescribeDataTypesResponse>;
-    /**
      * 分页查询质量规则
      */
     DescribeRulesByPage(req: DescribeRulesByPageRequest, cb?: (error: string, rep: DescribeRulesByPageResponse) => void): Promise<DescribeRulesByPageResponse>;
     /**
-     * 启动集成任务
-     */
-    StartIntegrationTask(req: StartIntegrationTaskRequest, cb?: (error: string, rep: StartIntegrationTaskResponse) => void): Promise<StartIntegrationTaskResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-基于多个工作流进行批量冻结任务操作
-     */
-    FreezeTasksByMultiWorkflow(req: FreezeTasksByMultiWorkflowRequest, cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void): Promise<FreezeTasksByMultiWorkflowResponse>;
-    /**
      * 删除项目用户
      */
-    DeleteProjectUsers(req?: DeleteProjectUsersRequest, cb?: (error: string, rep: DeleteProjectUsersResponse) => void): Promise<DeleteProjectUsersResponse>;
-    /**
-     * 查询基线实例列表
-     */
-    DescribeBaselineInstances(req: DescribeBaselineInstancesRequest, cb?: (error: string, rep: DescribeBaselineInstancesResponse) => void): Promise<DescribeBaselineInstancesResponse>;
-    /**
-     * 获取所有任务类型
-     */
-    DescribeAllTaskType(req: DescribeAllTaskTypeRequest, cb?: (error: string, rep: DescribeAllTaskTypeResponse) => void): Promise<DescribeAllTaskTypeResponse>;
+    DeleteProjectUsers(req: DeleteProjectUsersRequest, cb?: (error: string, rep: DeleteProjectUsersResponse) => void): Promise<DeleteProjectUsersResponse>;
     /**
      * 删除文件
      */
@@ -793,24 +558,11 @@ export declare class Client extends AbstractClient {
      */
     UploadContent(req: UploadContentRequest, cb?: (error: string, rep: UploadContentResponse) => void): Promise<UploadContentResponse>;
     /**
-     * 获取关联父实例
+     * 查询模板详情
      */
-    DescribeFathers(req: DescribeFathersRequest, cb?: (error: string, rep: DescribeFathersResponse) => void): Promise<DescribeFathersResponse>;
+    DescribeRuleTemplate(req: DescribeRuleTemplateRequest, cb?: (error: string, rep: DescribeRuleTemplateResponse) => void): Promise<DescribeRuleTemplateResponse>;
     /**
-     * 基线列表
-     */
-    DescribeBaselines(req: DescribeBaselinesRequest, cb?: (error: string, rep: DescribeBaselinesResponse) => void): Promise<DescribeBaselinesResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-拉取文件夹下的工作流
-     */
-    DescribeFolderWorkflowList(req: DescribeFolderWorkflowListRequest, cb?: (error: string, rep: DescribeFolderWorkflowListResponse) => void): Promise<DescribeFolderWorkflowListResponse>;
-    /**
-     * 查询数据来源列表
-     */
-    DescribeDataBases(req: DescribeDataBasesRequest, cb?: (error: string, rep: DescribeDataBasesResponse) => void): Promise<DescribeDataBasesResponse>;
-    /**
-     * 任务运维-任务列表 批量运行
+     * 任务运维-任务列表 批量启动
      */
     BatchRunOpsTask(req: BatchRunOpsTaskRequest, cb?: (error: string, rep: BatchRunOpsTaskResponse) => void): Promise<BatchRunOpsTaskResponse>;
     /**
@@ -818,8 +570,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleTemplatesByPage(req: DescribeRuleTemplatesByPageRequest, cb?: (error: string, rep: DescribeRuleTemplatesByPageResponse) => void): Promise<DescribeRuleTemplatesByPageResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-更新工作流
+     * 更新工作流信息
      */
     ModifyWorkflowInfo(req: ModifyWorkflowInfoRequest, cb?: (error: string, rep: ModifyWorkflowInfoResponse) => void): Promise<ModifyWorkflowInfoResponse>;
     /**
@@ -827,10 +578,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleExecStat(req: DescribeRuleExecStatRequest, cb?: (error: string, rep: DescribeRuleExecStatResponse) => void): Promise<DescribeRuleExecStatResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-添加父任务依赖
+     * 实例批量重跑
      */
-    ModifyTaskLinks(req: ModifyTaskLinksRequest, cb?: (error: string, rep: ModifyTaskLinksResponse) => void): Promise<ModifyTaskLinksResponse>;
+    RunRerunScheduleInstances(req: RunRerunScheduleInstancesRequest, cb?: (error: string, rep: RunRerunScheduleInstancesResponse) => void): Promise<RunRerunScheduleInstancesResponse>;
     /**
      * 规则组执行结果分页查询接口
      */
@@ -848,28 +598,13 @@ export declare class Client extends AbstractClient {
      */
     DagInstances(req: DagInstancesRequest, cb?: (error: string, rep: DagInstancesResponse) => void): Promise<DagInstancesResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-拉取文件夹目录
-     */
-    DescribeFolderList(req: DescribeFolderListRequest, cb?: (error: string, rep: DescribeFolderListResponse) => void): Promise<DescribeFolderListResponse>;
-    /**
      * 修改审批单状态
      */
     ModifyApproveStatus(req: ModifyApproveStatusRequest, cb?: (error: string, rep: ModifyApproveStatusResponse) => void): Promise<ModifyApproveStatusResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-数据源列表
+     * 下载日志文件，返回日志下载URL
      */
-    DescribeDataSourceWithoutInfo(req: DescribeDataSourceWithoutInfoRequest, cb?: (error: string, rep: DescribeDataSourceWithoutInfoResponse) => void): Promise<DescribeDataSourceWithoutInfoResponse>;
-    /**
-     * 暂停集成任务
-     */
-    SuspendIntegrationTask(req: SuspendIntegrationTaskRequest, cb?: (error: string, rep: SuspendIntegrationTaskResponse) => void): Promise<SuspendIntegrationTaskResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-工作流下所有任务的补录
-     */
-    MakeUpWorkflowNew(req: MakeUpWorkflowNewRequest, cb?: (error: string, rep: MakeUpWorkflowNewResponse) => void): Promise<MakeUpWorkflowNewResponse>;
+    DescribeInstanceLogFile(req: DescribeInstanceLogFileRequest, cb?: (error: string, rep: DescribeInstanceLogFileResponse) => void): Promise<DescribeInstanceLogFileResponse>;
     /**
      * 数据集成大屏任务状态统计趋势
      */
@@ -883,46 +618,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeExecStrategy(req: DescribeExecStrategyRequest, cb?: (error: string, rep: DescribeExecStrategyResponse) => void): Promise<DescribeExecStrategyResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-创建工作流
-     */
-    CreateWorkflow(req: CreateWorkflowRequest, cb?: (error: string, rep: CreateWorkflowResponse) => void): Promise<CreateWorkflowResponse>;
-    /**
-     * 实例状态周期增长趋势
-     */
-    DescribeInstanceByCycleReport(req: DescribeInstanceByCycleReportRequest, cb?: (error: string, rep: DescribeInstanceByCycleReportResponse) => void): Promise<DescribeInstanceByCycleReportResponse>;
-    /**
-     * 查询规则详情
-     */
-    DescribeRule(req: DescribeRuleRequest, cb?: (error: string, rep: DescribeRuleResponse) => void): Promise<DescribeRuleResponse>;
-    /**
-     * 批量启动工作流
-     */
-    RunTasksByMultiWorkflow(req: RunTasksByMultiWorkflowRequest, cb?: (error: string, rep: RunTasksByMultiWorkflowResponse) => void): Promise<RunTasksByMultiWorkflowResponse>;
-    /**
-     * 修改工作流责任人
-     */
-    UpdateWorkflowOwner(req: UpdateWorkflowOwnerRequest, cb?: (error: string, rep: UpdateWorkflowOwnerResponse) => void): Promise<UpdateWorkflowOwnerResponse>;
-    /**
-     * 按起止日期统计离线任务的所有实例的运行指标总和
-     */
-    DescribeTaskReport(req: DescribeTaskReportRequest, cb?: (error: string, rep: DescribeTaskReportResponse) => void): Promise<DescribeTaskReportResponse>;
-    /**
-     * 查询试运行实例子实例列表
-     */
-    DescribeDrSonInstance(req: DescribeDrSonInstanceRequest, cb?: (error: string, rep: DescribeDrSonInstanceResponse) => void): Promise<DescribeDrSonInstanceResponse>;
-    /**
      * 列出表血缘信息
      */
     DescribeTableLineage(req: DescribeTableLineageRequest, cb?: (error: string, rep: DescribeTableLineageResponse) => void): Promise<DescribeTableLineageResponse>;
     /**
-     * 批量创建任务版本Ds
+     * 暂停集成任务
      */
-    BatchCreateTaskVersionDs(req: BatchCreateTaskVersionDsRequest, cb?: (error: string, rep: BatchCreateTaskVersionDsResponse) => void): Promise<BatchCreateTaskVersionDsResponse>;
+    SuspendIntegrationTask(req: SuspendIntegrationTaskRequest, cb?: (error: string, rep: SuspendIntegrationTaskResponse) => void): Promise<SuspendIntegrationTaskResponse>;
     /**
-     * 查询规则执行导出结果
+     * 创建工作流
      */
-    DescribeRuleExecExportResult(req: DescribeRuleExecExportResultRequest, cb?: (error: string, rep: DescribeRuleExecExportResultResponse) => void): Promise<DescribeRuleExecExportResultResponse>;
+    CreateWorkflowDs(req: CreateWorkflowDsRequest, cb?: (error: string, rep: CreateWorkflowDsResponse) => void): Promise<CreateWorkflowDsResponse>;
+    /**
+     * 根据条件查找事件实例
+     */
+    DescribeEventCases(req: DescribeEventCasesRequest, cb?: (error: string, rep: DescribeEventCasesResponse) => void): Promise<DescribeEventCasesResponse>;
+    /**
+     * 获取离线任务实例列表(新)
+     */
+    GetOfflineDIInstanceList(req: GetOfflineDIInstanceListRequest, cb?: (error: string, rep: GetOfflineDIInstanceListResponse) => void): Promise<GetOfflineDIInstanceListResponse>;
     /**
      * 通过工作流Id删除工作流
      */
@@ -932,17 +646,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
     /**
-     * 事件是否告警过滤条件
+     * 启动集成任务
      */
-    DescribeEventIsAlarmTypes(req?: DescribeEventIsAlarmTypesRequest, cb?: (error: string, rep: DescribeEventIsAlarmTypesResponse) => void): Promise<DescribeEventIsAlarmTypesResponse>;
+    StartIntegrationTask(req: StartIntegrationTaskRequest, cb?: (error: string, rep: StartIntegrationTaskResponse) => void): Promise<StartIntegrationTaskResponse>;
     /**
      * 锁定集成任务
      */
     LockIntegrationTask(req: LockIntegrationTaskRequest, cb?: (error: string, rep: LockIntegrationTaskResponse) => void): Promise<LockIntegrationTaskResponse>;
     /**
-     * 质量报告-质量分周期趋势
+     * 提交工作流
      */
-    DescribeQualityScoreTrend(req: DescribeQualityScoreTrendRequest, cb?: (error: string, rep: DescribeQualityScoreTrendResponse) => void): Promise<DescribeQualityScoreTrendResponse>;
+    SubmitWorkflow(req: SubmitWorkflowRequest, cb?: (error: string, rep: SubmitWorkflowResponse) => void): Promise<SubmitWorkflowResponse>;
     /**
      * 批量删除集成任务
      */
@@ -972,17 +686,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleGroupSubscription(req: DescribeRuleGroupSubscriptionRequest, cb?: (error: string, rep: DescribeRuleGroupSubscriptionResponse) => void): Promise<DescribeRuleGroupSubscriptionResponse>;
     /**
-     * 删除任务Ds
+     * 删除编排空间任务
      */
     DeleteTaskDs(req: DeleteTaskDsRequest, cb?: (error: string, rep: DeleteTaskDsResponse) => void): Promise<DeleteTaskDsResponse>;
     /**
      * 更新规则组订阅信息
      */
     ModifyRuleGroupSubscription(req: ModifyRuleGroupSubscriptionRequest, cb?: (error: string, rep: ModifyRuleGroupSubscriptionResponse) => void): Promise<ModifyRuleGroupSubscriptionResponse>;
-    /**
-     * 查询任务实例列表
-     */
-    DescribeTaskInstances(req: DescribeTaskInstancesRequest, cb?: (error: string, rep: DescribeTaskInstancesResponse) => void): Promise<DescribeTaskInstancesResponse>;
     /**
      * 删除任务告警规则
      */
@@ -992,7 +702,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleExecResults(req: DescribeRuleExecResultsRequest, cb?: (error: string, rep: DescribeRuleExecResultsResponse) => void): Promise<DescribeRuleExecResultsResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
 触发事件
      */
     TriggerEvent(req: TriggerEventRequest, cb?: (error: string, rep: TriggerEventResponse) => void): Promise<TriggerEventResponse>;
@@ -1001,17 +711,13 @@ export declare class Client extends AbstractClient {
      */
     FreezeTasksByWorkflowIds(req: FreezeTasksByWorkflowIdsRequest, cb?: (error: string, rep: FreezeTasksByWorkflowIdsResponse) => void): Promise<FreezeTasksByWorkflowIdsResponse>;
     /**
-     * 基线列表
-     */
-    DescribeBaselineById(req: DescribeBaselineByIdRequest, cb?: (error: string, rep: DescribeBaselineByIdResponse) => void): Promise<DescribeBaselineByIdResponse>;
-    /**
      * 资源管理删除资源
      */
     DeleteResource(req: DeleteResourceRequest, cb?: (error: string, rep: DeleteResourceResponse) => void): Promise<DeleteResourceResponse>;
     /**
-     * Ds批量删除任务，仅对任务状态为”已停止“有效；
+     * 质量报告-质量分周期趋势
      */
-    BatchDeleteTasksDs(req: BatchDeleteTasksDsRequest, cb?: (error: string, rep: BatchDeleteTasksDsResponse) => void): Promise<BatchDeleteTasksDsResponse>;
+    DescribeQualityScoreTrend(req: DescribeQualityScoreTrendRequest, cb?: (error: string, rep: DescribeQualityScoreTrendResponse) => void): Promise<DescribeQualityScoreTrendResponse>;
     /**
      * 通过taskIds查询task详情列表
      */
@@ -1021,8 +727,7 @@ export declare class Client extends AbstractClient {
      */
     SaveCustomFunction(req: SaveCustomFunctionRequest, cb?: (error: string, rep: SaveCustomFunctionResponse) => void): Promise<SaveCustomFunctionResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
+     * 修改数据源
      */
     ModifyDataSource(req: ModifyDataSourceRequest, cb?: (error: string, rep: ModifyDataSourceResponse) => void): Promise<ModifyDataSourceResponse>;
     /**
@@ -1030,19 +735,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskAlarmRegulations(req: DescribeTaskAlarmRegulationsRequest, cb?: (error: string, rep: DescribeTaskAlarmRegulationsResponse) => void): Promise<DescribeTaskAlarmRegulationsResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-根据层级查找上/下游任务节点
+     * 查询集成任务版本节点信息
      */
-    DescribeDependTasksNew(req: DescribeDependTasksNewRequest, cb?: (error: string, rep: DescribeDependTasksNewResponse) => void): Promise<DescribeDependTasksNewResponse>;
+    DescribeIntegrationVersionNodesInfo(req: DescribeIntegrationVersionNodesInfoRequest, cb?: (error: string, rep: DescribeIntegrationVersionNodesInfoResponse) => void): Promise<DescribeIntegrationVersionNodesInfoResponse>;
     /**
-     * 数据开发模块-文件夹更新
+     * 修改任务告警规则
      */
-    ModifyDsFolder(req: ModifyDsFolderRequest, cb?: (error: string, rep: ModifyDsFolderResponse) => void): Promise<ModifyDsFolderResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交工作流
-     */
-    SubmitWorkflow(req: SubmitWorkflowRequest, cb?: (error: string, rep: SubmitWorkflowResponse) => void): Promise<SubmitWorkflowResponse>;
+    ModifyTaskAlarmRegular(req: ModifyTaskAlarmRegularRequest, cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void): Promise<ModifyTaskAlarmRegularResponse>;
     /**
      * 删除用户自定义函数
      */
@@ -1052,9 +751,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTemplateDimCount(req: DescribeTemplateDimCountRequest, cb?: (error: string, rep: DescribeTemplateDimCountResponse) => void): Promise<DescribeTemplateDimCountResponse>;
     /**
-     * 查询基线实例DAG
+     * 根据项目id 获取项目下所有工作流列表
      */
-    DescribeBaselineInstanceDag(req: DescribeBaselineInstanceDagRequest, cb?: (error: string, rep: DescribeBaselineInstanceDagResponse) => void): Promise<DescribeBaselineInstanceDagResponse>;
+    DescribeFolderWorkflowList(req: DescribeFolderWorkflowListRequest, cb?: (error: string, rep: DescribeFolderWorkflowListResponse) => void): Promise<DescribeFolderWorkflowListResponse>;
     /**
      * 查询集成任务
      */
@@ -1072,10 +771,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeIntegrationStatisticsInstanceTrend(req: DescribeIntegrationStatisticsInstanceTrendRequest, cb?: (error: string, rep: DescribeIntegrationStatisticsInstanceTrendResponse) => void): Promise<DescribeIntegrationStatisticsInstanceTrendResponse>;
     /**
-     * 查询试运行实例执行内容
-     */
-    DescribeDrInstanceScriptContent(req: DescribeDrInstanceScriptContentRequest, cb?: (error: string, rep: DescribeDrInstanceScriptContentResponse) => void): Promise<DescribeDrInstanceScriptContentResponse>;
-    /**
      * 查询工作流画布运行起止时间
      */
     DescribeWorkflowExecuteById(req: DescribeWorkflowExecuteByIdRequest, cb?: (error: string, rep: DescribeWorkflowExecuteByIdResponse) => void): Promise<DescribeWorkflowExecuteByIdResponse>;
@@ -1084,24 +779,24 @@ export declare class Client extends AbstractClient {
      */
     CreateIntegrationNode(req: CreateIntegrationNodeRequest, cb?: (error: string, rep: CreateIntegrationNodeResponse) => void): Promise<CreateIntegrationNodeResponse>;
     /**
-     * 批量暂停集成任务
+     * 任务运维-批量删除任务
      */
-    BatchSuspendIntegrationTasks(req: BatchSuspendIntegrationTasksRequest, cb?: (error: string, rep: BatchSuspendIntegrationTasksResponse) => void): Promise<BatchSuspendIntegrationTasksResponse>;
+    BatchDeleteOpsTasks(req: BatchDeleteOpsTasksRequest, cb?: (error: string, rep: BatchDeleteOpsTasksResponse) => void): Promise<BatchDeleteOpsTasksResponse>;
     /**
      * 提交规则组运行任务接口
      */
     CommitRuleGroupTask(req: CommitRuleGroupTaskRequest, cb?: (error: string, rep: CommitRuleGroupTaskResponse) => void): Promise<CommitRuleGroupTaskResponse>;
     /**
-     * 根据任务id获取下游依赖任务列表
+     * 日志获取详情页面
      */
-    DescribeDependOpsTaskList(req: DescribeDependOpsTaskListRequest, cb?: (error: string, rep: DescribeDependOpsTaskListResponse) => void): Promise<DescribeDependOpsTaskListResponse>;
+    DescribeInstanceLastLog(req: DescribeInstanceLastLogRequest, cb?: (error: string, rep: DescribeInstanceLastLogResponse) => void): Promise<DescribeInstanceLastLogResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-获取实例日志列表
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+添加父任务依赖
      */
-    DescribeInstanceLogs(req: DescribeInstanceLogsRequest, cb?: (error: string, rep: DescribeInstanceLogsResponse) => void): Promise<DescribeInstanceLogsResponse>;
+    ModifyTaskLinks(req: ModifyTaskLinksRequest, cb?: (error: string, rep: ModifyTaskLinksResponse) => void): Promise<ModifyTaskLinksResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
 注册事件
      */
     RegisterEvent(req: RegisterEventRequest, cb?: (error: string, rep: RegisterEventResponse) => void): Promise<RegisterEventResponse>;
@@ -1109,18 +804,6 @@ export declare class Client extends AbstractClient {
      * 根据条件分页查询补录计划
      */
     DescribeOpsMakePlans(req: DescribeOpsMakePlansRequest, cb?: (error: string, rep: DescribeOpsMakePlansResponse) => void): Promise<DescribeOpsMakePlansResponse>;
-    /**
-     * 提交自定义函数
-     */
-    SubmitCustomFunction(req: SubmitCustomFunctionRequest, cb?: (error: string, rep: SubmitCustomFunctionResponse) => void): Promise<SubmitCustomFunctionResponse>;
-    /**
-     * 离线任务实例运行日志列表
-     */
-    DescribeInstanceLogList(req: DescribeInstanceLogListRequest, cb?: (error: string, rep: DescribeInstanceLogListResponse) => void): Promise<DescribeInstanceLogListResponse>;
-    /**
-     * 按补录计划批量重跑/选择补录计划→补录任务→补录实例，点击重跑
-     */
-    RerunOpsMakePlanInstances(req: RerunOpsMakePlanInstancesRequest, cb?: (error: string, rep: RerunOpsMakePlanInstancesResponse) => void): Promise<RerunOpsMakePlanInstancesResponse>;
     /**
      * 查询工作流画布
      */
@@ -1130,50 +813,23 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabaseMetas(req: DescribeDatabaseMetasRequest, cb?: (error: string, rep: DescribeDatabaseMetasResponse) => void): Promise<DescribeDatabaseMetasResponse>;
     /**
-     * 查找全部的文件夹
-     */
-    FindAllFolder(req: FindAllFolderRequest, cb?: (error: string, rep: FindAllFolderResponse) => void): Promise<FindAllFolderResponse>;
-    /**
-     * 修改任务告警规则
-     */
-    ModifyTaskAlarmRegular(req: ModifyTaskAlarmRegularRequest, cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void): Promise<ModifyTaskAlarmRegularResponse>;
-    /**
-     * 检查规则模板名称是否重复
-     */
-    CheckDuplicateTemplateName(req: CheckDuplicateTemplateNameRequest, cb?: (error: string, rep: CheckDuplicateTemplateNameResponse) => void): Promise<CheckDuplicateTemplateNameResponse>;
-    /**
-     * 实例批量重跑
-     */
-    RunRerunScheduleInstances(req: RunRerunScheduleInstancesRequest, cb?: (error: string, rep: RunRerunScheduleInstancesResponse) => void): Promise<RunRerunScheduleInstancesResponse>;
-    /**
      * 批量继续执行集成实时任务
      */
     BatchResumeIntegrationTasks(req: BatchResumeIntegrationTasksRequest, cb?: (error: string, rep: BatchResumeIntegrationTasksResponse) => void): Promise<BatchResumeIntegrationTasksResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
 设置任务告警，新建/更新告警信息（最新）
      */
     SetTaskAlarmNew(req: SetTaskAlarmNewRequest, cb?: (error: string, rep: SetTaskAlarmNewResponse) => void): Promise<SetTaskAlarmNewResponse>;
     /**
-     * 查询模板详情
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+提交任务
      */
-    DescribeRuleTemplate(req: DescribeRuleTemplateRequest, cb?: (error: string, rep: DescribeRuleTemplateResponse) => void): Promise<DescribeRuleTemplateResponse>;
-    /**
-     * 实例批量重跑
-     */
-    RerunScheduleInstances(req: RerunScheduleInstancesRequest, cb?: (error: string, rep: RerunScheduleInstancesResponse) => void): Promise<RerunScheduleInstancesResponse>;
+    SubmitTask(req: SubmitTaskRequest, cb?: (error: string, rep: SubmitTaskResponse) => void): Promise<SubmitTaskResponse>;
     /**
      * 即席分析提交SQL任务
      */
     SubmitSqlTask(req: SubmitSqlTaskRequest, cb?: (error: string, rep: SubmitSqlTaskResponse) => void): Promise<SubmitSqlTaskResponse>;
-    /**
-     * 数据质量获取生产调度任务列表
-     */
-    DescribeProdTasks(req: DescribeProdTasksRequest, cb?: (error: string, rep: DescribeProdTasksResponse) => void): Promise<DescribeProdTasksResponse>;
-    /**
-     * 数据质量，查询调度任务的实例列表
-     */
-    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
      * 获取数据源信息-数据源分页列表
      */
@@ -1183,10 +839,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeFunctionKinds(req?: DescribeFunctionKindsRequest, cb?: (error: string, rep: DescribeFunctionKindsResponse) => void): Promise<DescribeFunctionKindsResponse>;
     /**
-     * 查询规则执行历史， 最近30条
-     */
-    DescribeRuleExecHistory(req: DescribeRuleExecHistoryRequest, cb?: (error: string, rep: DescribeRuleExecHistoryResponse) => void): Promise<DescribeRuleExecHistoryResponse>;
-    /**
      * 查询Inlong manager日志
      */
     TaskLog(req: TaskLogRequest, cb?: (error: string, rep: TaskLogResponse) => void): Promise<TaskLogResponse>;
@@ -1195,21 +847,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleTemplates(req: DescribeRuleTemplatesRequest, cb?: (error: string, rep: DescribeRuleTemplatesResponse) => void): Promise<DescribeRuleTemplatesResponse>;
     /**
-     * 离线任务实例统计明细
+     * 修改工作流责任人
      */
-    DescribeTaskInstanceReportDetail(req: DescribeTaskInstanceReportDetailRequest, cb?: (error: string, rep: DescribeTaskInstanceReportDetailResponse) => void): Promise<DescribeTaskInstanceReportDetailResponse>;
+    UpdateWorkflowOwner(req: UpdateWorkflowOwnerRequest, cb?: (error: string, rep: UpdateWorkflowOwnerResponse) => void): Promise<UpdateWorkflowOwnerResponse>;
     /**
-     * 查询规则组数据对象列表
+     * 更新集成节点
      */
-    DescribeDataObjects(req: DescribeDataObjectsRequest, cb?: (error: string, rep: DescribeDataObjectsResponse) => void): Promise<DescribeDataObjectsResponse>;
-    /**
-     * 获取离线任务实例列表(新)
-     */
-    GetOfflineDIInstanceList(req: GetOfflineDIInstanceListRequest, cb?: (error: string, rep: GetOfflineDIInstanceListResponse) => void): Promise<GetOfflineDIInstanceListResponse>;
-    /**
-     * 编辑基线告警状态
-     */
-    ModifyBaselineAlarmStatus(req: ModifyBaselineAlarmStatusRequest, cb?: (error: string, rep: ModifyBaselineAlarmStatusResponse) => void): Promise<ModifyBaselineAlarmStatusResponse>;
+    ModifyIntegrationNode(req: ModifyIntegrationNodeRequest, cb?: (error: string, rep: ModifyIntegrationNodeResponse) => void): Promise<ModifyIntegrationNodeResponse>;
     /**
      * 获取项目信息
      */
@@ -1227,10 +871,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeOpsWorkflows(req: DescribeOpsWorkflowsRequest, cb?: (error: string, rep: DescribeOpsWorkflowsResponse) => void): Promise<DescribeOpsWorkflowsResponse>;
     /**
-     * 资源管理需要先将资源上传到cos中，然后调用该接口，将cos资源绑定到wedata
-     */
-    CreateOrUpdateResource(req: CreateOrUpdateResourceRequest, cb?: (error: string, rep: CreateOrUpdateResourceResponse) => void): Promise<CreateOrUpdateResourceResponse>;
-    /**
      * 批量重跑集成任务实例
      */
     BatchRerunIntegrationTaskInstances(req: BatchRerunIntegrationTaskInstancesRequest, cb?: (error: string, rep: BatchRerunIntegrationTaskInstancesResponse) => void): Promise<BatchRerunIntegrationTaskInstancesResponse>;
@@ -1239,9 +879,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTableLineageInfo(req: DescribeTableLineageInfoRequest, cb?: (error: string, rep: DescribeTableLineageInfoResponse) => void): Promise<DescribeTableLineageInfoResponse>;
     /**
-     * 离线任务实例详情
+     * 提交自定义函数
      */
-    DescribeTaskInstance(req: DescribeTaskInstanceRequest, cb?: (error: string, rep: DescribeTaskInstanceResponse) => void): Promise<DescribeTaskInstanceResponse>;
+    SubmitCustomFunction(req: SubmitCustomFunctionRequest, cb?: (error: string, rep: SubmitCustomFunctionResponse) => void): Promise<SubmitCustomFunctionResponse>;
     /**
      * 查询实时任务实例节点信息
      */
@@ -1251,18 +891,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeIntegrationStatistics(req: DescribeIntegrationStatisticsRequest, cb?: (error: string, rep: DescribeIntegrationStatisticsResponse) => void): Promise<DescribeIntegrationStatisticsResponse>;
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-任务批量补录，调度状态任务才可以补录；
-
-
-
-     */
-    MakeUpTasksNew(req: MakeUpTasksNewRequest, cb?: (error: string, rep: MakeUpTasksNewResponse) => void): Promise<MakeUpTasksNewResponse>;
-    /**
-     * 工作流补数据
-     */
-    MakeUpTasksByWorkflow(req: MakeUpTasksByWorkflowRequest, cb?: (error: string, rep: MakeUpTasksByWorkflowResponse) => void): Promise<MakeUpTasksByWorkflowResponse>;
-    /**
      * 批量停止工作流
      */
     BatchStopWorkflowsByIds(req: BatchStopWorkflowsByIdsRequest, cb?: (error: string, rep: BatchStopWorkflowsByIdsResponse) => void): Promise<BatchStopWorkflowsByIdsResponse>;
@@ -1270,17 +898,4 @@ export declare class Client extends AbstractClient {
      * 分页查询试运行实例列表
      */
     DescribeDrInstancePage(req: DescribeDrInstancePageRequest, cb?: (error: string, rep: DescribeDrInstancePageResponse) => void): Promise<DescribeDrInstancePageResponse>;
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-批量修改任务责任人
-     */
-    BatchModifyOwnersNew(req: BatchModifyOwnersNewRequest, cb?: (error: string, rep: BatchModifyOwnersNewResponse) => void): Promise<BatchModifyOwnersNewResponse>;
-    /**
-     * 运维大屏-实例运行时长排行
-     */
-    DescribeSchedulerRunTimeInstanceCntByStatus(req: DescribeSchedulerRunTimeInstanceCntByStatusRequest, cb?: (error: string, rep: DescribeSchedulerRunTimeInstanceCntByStatusResponse) => void): Promise<DescribeSchedulerRunTimeInstanceCntByStatusResponse>;
-    /**
-     * 批量停止集成任务
-     */
-    BatchStopIntegrationTasks(req: BatchStopIntegrationTasksRequest, cb?: (error: string, rep: BatchStopIntegrationTasksResponse) => void): Promise<BatchStopIntegrationTasksResponse>;
 }

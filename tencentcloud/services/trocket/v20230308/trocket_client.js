@@ -95,12 +95,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportSourceClusterTopics", req, cb);
     }
     /**
-     * 运营端查询topicStata
-     */
-    async DescribeTopicStatsOp(req, cb) {
-        return this.request("DescribeTopicStatsOp", req, cb);
-    }
-    /**
      * 查询用户列表，Filter参数使用说明如下：
 
 1. Username，用户名称模糊搜索

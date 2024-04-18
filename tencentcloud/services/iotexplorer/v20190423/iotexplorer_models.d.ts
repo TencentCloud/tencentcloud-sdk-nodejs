@@ -87,6 +87,27 @@ export interface DeleteProjectRequest {
     ProjectId: string;
 }
 /**
+ * DescribeCloudStorageAIService返回参数结构体
+ */
+export interface DescribeCloudStorageAIServiceResponse {
+    /**
+     * 启用状态
+     */
+    Enabled?: boolean;
+    /**
+     * 视频分析区域
+     */
+    ROI?: string;
+    /**
+     * 云存 AI 服务的配置参数
+     */
+    Config?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ListEventHistory返回参数结构体
  */
 export interface ListEventHistoryResponse {
@@ -499,9 +520,13 @@ export interface DeleteLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
- * DescribeCloudStoragePackageConsumeDetails返回参数结构体
+ * DescribeCloudStorageMultiThumbnail返回参数结构体
  */
-export interface DescribeCloudStoragePackageConsumeDetailsResponse {
+export interface DescribeCloudStorageMultiThumbnailResponse {
+    /**
+     * 缩略图访问地址
+     */
+    ThumbnailURLInfoList?: Array<ThumbnailURLInfoList>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -988,53 +1013,13 @@ export interface FenceAlarmPoint {
     Latitude: number;
 }
 /**
- * 子设备详情
+ * DescribeCloudStoragePackageConsumeDetails返回参数结构体
  */
-export interface FamilySubDevice {
+export interface DescribeCloudStoragePackageConsumeDetailsResponse {
     /**
-     * 产品Id
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProductId: string;
-    /**
-     * 设备名称
-     */
-    DeviceName: string;
-    /**
-     * 设备ID
-     */
-    DeviceId: string;
-    /**
-     * 设备别名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AliasName: string;
-    /**
-     * 设备绑定的家庭ID
-     */
-    FamilyId: string;
-    /**
-     * 设备所在的房间ID，默认"0"
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RoomId: string;
-    /**
-     * 图标
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IconUrl: string;
-    /**
-     * grid图标
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IconUrlGrid: string;
-    /**
-     * 设备绑定时间戳
-     */
-    CreateTime: number;
-    /**
-     * 设备更新时间戳
-     */
-    UpdateTime: number;
+    RequestId?: string;
 }
 /**
  * DescribeCloudStoragePackageConsumeStats返回参数结构体
@@ -1101,6 +1086,15 @@ export interface PackageInfo {
     CSUserId?: string;
 }
 /**
+ * ModifyCloudStorageAIServiceCallback返回参数结构体
+ */
+export interface ModifyCloudStorageAIServiceCallbackResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCloudStorageUsers返回参数结构体
  */
 export interface DescribeCloudStorageUsersResponse {
@@ -1157,45 +1151,30 @@ export interface FenceBindProductItem {
     ProductId: string;
 }
 /**
- * GetDeviceSumStatistics返回参数结构体
+ * ModifyProductCloudStorageAIService返回参数结构体
  */
-export interface GetDeviceSumStatisticsResponse {
-    /**
-     * 激活设备总数
-     */
-    ActivationCount?: number;
-    /**
-     * 在线设备总数
-     */
-    OnlineCount?: number;
-    /**
-     * 前一天激活设备数
-     */
-    ActivationBeforeDay?: number;
-    /**
-     * 前一天活跃设备数
-     */
-    ActiveBeforeDay?: number;
-    /**
-     * 前一周激活设备数
-     */
-    ActivationWeekDayCount?: number;
-    /**
-     * 前一周活跃设备数
-     */
-    ActiveWeekDayCount?: number;
-    /**
-     * 上一周激活设备数
-     */
-    ActivationBeforeWeekDayCount?: number;
-    /**
-     * 上一周活跃设备数
-     */
-    ActiveBeforeWeekDayCount?: number;
+export interface ModifyProductCloudStorageAIServiceResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeCloudStorageStreamData请求参数结构体
+ */
+export interface DescribeCloudStorageStreamDataRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 图片流事件开始时间
+     */
+    StartTime: number;
 }
 /**
  * 设备位置详情
@@ -1294,6 +1273,47 @@ export interface GenSingleDeviceSignatureOfPublicResponse {
      * 设备签名
      */
     DeviceSignature: DeviceSignatureInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetDeviceSumStatistics返回参数结构体
+ */
+export interface GetDeviceSumStatisticsResponse {
+    /**
+     * 激活设备总数
+     */
+    ActivationCount?: number;
+    /**
+     * 在线设备总数
+     */
+    OnlineCount?: number;
+    /**
+     * 前一天激活设备数
+     */
+    ActivationBeforeDay?: number;
+    /**
+     * 前一天活跃设备数
+     */
+    ActiveBeforeDay?: number;
+    /**
+     * 前一周激活设备数
+     */
+    ActivationWeekDayCount?: number;
+    /**
+     * 前一周活跃设备数
+     */
+    ActiveWeekDayCount?: number;
+    /**
+     * 上一周激活设备数
+     */
+    ActivationBeforeWeekDayCount?: number;
+    /**
+     * 上一周活跃设备数
+     */
+    ActiveBeforeWeekDayCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1407,17 +1427,13 @@ export interface DeviceData {
     DevicePsk: string;
 }
 /**
- * wifi定位信息
+ * ModifyCloudStorageAIService返回参数结构体
  */
-export interface WifiInfo {
+export interface ModifyCloudStorageAIServiceResponse {
     /**
-     * mac地址
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    MAC: string;
-    /**
-     * 信号强度
-     */
-    RSSI: number;
+    RequestId?: string;
 }
 /**
  * GetTopicRuleList请求参数结构体
@@ -1503,6 +1519,58 @@ export interface DescribeCloudStorageOrderRequest {
     OrderId: string;
 }
 /**
+ * 云存 AI 服务任务信息
+ */
+export interface CloudStorageAIServiceTask {
+    /**
+     * 云存 AI 服务任务 ID
+     */
+    TaskId?: string;
+    /**
+     * 产品 ID
+     */
+    ProductId?: string;
+    /**
+     * 设备名称
+     */
+    DeviceName?: string;
+    /**
+     * 通道 ID
+     */
+    ChannelId?: number;
+    /**
+     * 对应云存视频的起始时间
+     */
+    StartTime?: number;
+    /**
+     * 对应云存视频的结束时间
+     */
+    EndTime?: number;
+    /**
+     * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空）
+     */
+    Status?: number;
+    /**
+     * 任务结果
+     */
+    Result?: string;
+    /**
+     * 云存 AI 服务类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceType?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 最后更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: number;
+}
+/**
  * ModifyProject请求参数结构体
  */
 export interface ModifyProjectRequest {
@@ -1570,13 +1638,21 @@ export interface PublishRRPCMessageRequest {
     Payload: string;
 }
 /**
- * ListTopicPolicy请求参数结构体
+ * DescribeProductCloudStorageAIService返回参数结构体
  */
-export interface ListTopicPolicyRequest {
+export interface DescribeProductCloudStorageAIServiceResponse {
     /**
-     * 产品ID
+     * 开通状态
      */
-    ProductId: string;
+    Enabled?: boolean;
+    /**
+     * 当前账号是否可开通
+     */
+    Available?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 获取返回列表的详情。
@@ -1687,6 +1763,55 @@ export interface ListFirmwaresResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 子设备详情
+ */
+export interface FamilySubDevice {
+    /**
+     * 产品Id
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 设备ID
+     */
+    DeviceId: string;
+    /**
+     * 设备别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasName: string;
+    /**
+     * 设备绑定的家庭ID
+     */
+    FamilyId: string;
+    /**
+     * 设备所在的房间ID，默认"0"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoomId: string;
+    /**
+     * 图标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IconUrl: string;
+    /**
+     * grid图标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IconUrlGrid: string;
+    /**
+     * 设备绑定时间戳
+     */
+    CreateTime: number;
+    /**
+     * 设备更新时间戳
+     */
+    UpdateTime: number;
 }
 /**
  * ReleaseStudioProduct返回参数结构体
@@ -2019,6 +2144,27 @@ export interface DescribeFenceEventListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCloudStorageAIServiceCallback请求参数结构体
+ */
+export interface ModifyCloudStorageAIServiceCallbackRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 推送类型。http：HTTP 回调
+     */
+    Type: string;
+    /**
+     * HTTP 回调 URL
+     */
+    CallbackUrl?: string;
+    /**
+     * HTTP 回调鉴权 Token
+     */
+    CallbackToken?: string;
+}
+/**
  * DescribeDeviceFirmWare请求参数结构体
  */
 export interface DescribeDeviceFirmWareRequest {
@@ -2226,6 +2372,31 @@ export interface CreateTopicPolicyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyCloudStorageAIService请求参数结构体
+ */
+export interface ModifyCloudStorageAIServiceRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存 AI 服务类型。可选值：PackageDetect
+     */
+    ServiceType: string;
+    /**
+     * 启用状态
+     */
+    Enabled?: boolean;
+    /**
+     * 视频分析区域
+     */
+    ROI?: string;
 }
 /**
  * CreateDevice返回参数结构体
@@ -2522,6 +2693,35 @@ export interface DescribeDeviceLocationSolveResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCloudStorageAIServiceTasks请求参数结构体
+ */
+export interface DescribeCloudStorageAIServiceTasksRequest {
+    /**
+     * 产品 ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存 AI 服务类型。可选值：PackageDetect
+     */
+    ServiceType: string;
+    /**
+     * 分页拉取数量
+     */
+    Limit: number;
+    /**
+     * 分页拉取偏移
+     */
+    Offset?: number;
+    /**
+     * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；不传则查询全部状态的任务）
+     */
+    Status?: number;
+}
+/**
  * DescribeStudioProduct返回参数结构体
  */
 export interface DescribeStudioProductResponse {
@@ -2691,17 +2891,13 @@ export interface PublishMessageRequest {
     PayloadEncoding?: string;
 }
 /**
- * DescribeCloudStorageMultiThumbnail返回参数结构体
+ * DescribeProductCloudStorageAIService请求参数结构体
  */
-export interface DescribeCloudStorageMultiThumbnailResponse {
+export interface DescribeProductCloudStorageAIServiceRequest {
     /**
-     * 缩略图访问地址
+     * 产品ID
      */
-    ThumbnailURLInfoList?: Array<ThumbnailURLInfoList>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ProductId: string;
 }
 /**
  * ModifyTopicRule请求参数结构体
@@ -3292,25 +3488,13 @@ export interface DescribeFenceBindListRequest {
     Limit?: number;
 }
 /**
- * TransferCloudStorage请求参数结构体
+ * EnableTopicRule请求参数结构体
  */
-export interface TransferCloudStorageRequest {
+export interface EnableTopicRuleRequest {
     /**
-     * 产品ID
+     * 规则名称
      */
-    ProductId: string;
-    /**
-     * 已开通云存的设备名称
-     */
-    DeviceName: string;
-    /**
-     * 未开通云存的设备名称
-     */
-    ToDeviceName: string;
-    /**
-     * 未开通云存的设备产品ID
-     */
-    ToProductId?: string;
+    RuleName: string;
 }
 /**
  * DescribeBindedProducts返回参数结构体
@@ -4381,6 +4565,23 @@ export interface GetProjectListRequest {
     ProjectName?: string;
 }
 /**
+ * DescribeCloudStorageAIServiceTasks返回参数结构体
+ */
+export interface DescribeCloudStorageAIServiceTasksResponse {
+    /**
+     * 任务列表
+     */
+    Tasks?: Array<CloudStorageAIServiceTask>;
+    /**
+     * 任务数量
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeletePositionSpace返回参数结构体
  */
 export interface DeletePositionSpaceResponse {
@@ -4423,6 +4624,27 @@ export interface EnableTopicRuleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * TransferCloudStorage请求参数结构体
+ */
+export interface TransferCloudStorageRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 已开通云存的设备名称
+     */
+    DeviceName: string;
+    /**
+     * 未开通云存的设备名称
+     */
+    ToDeviceName: string;
+    /**
+     * 未开通云存的设备产品ID
+     */
+    ToProductId?: string;
 }
 /**
  * GetGatewaySubDeviceList请求参数结构体
@@ -4473,6 +4695,15 @@ export interface SearchStudioProductRequest {
      * 产品ID
      */
     ProductId?: string;
+}
+/**
+ * ListTopicPolicy请求参数结构体
+ */
+export interface ListTopicPolicyRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
 }
 /**
  * GenSingleDeviceSignatureOfPublic请求参数结构体
@@ -4627,6 +4858,19 @@ export interface DescribeLoRaFrequencyRequest {
     FreqId?: string;
 }
 /**
+ * ModifyProductCloudStorageAIService请求参数结构体
+ */
+export interface ModifyProductCloudStorageAIServiceRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 开通状态
+     */
+    Enabled?: boolean;
+}
+/**
  * DescribeCloudStorage返回参数结构体
  */
 export interface DescribeCloudStorageResponse {
@@ -4703,21 +4947,27 @@ export interface DescribeGatewayBindDevicesRequest {
     Limit: number;
 }
 /**
- * DescribeCloudStorageStreamData请求参数结构体
+ * DescribeCloudStorageAIServiceCallback返回参数结构体
  */
-export interface DescribeCloudStorageStreamDataRequest {
+export interface DescribeCloudStorageAIServiceCallbackResponse {
     /**
-     * 产品ID
+     * 推送类型。http：HTTP 回调
      */
-    ProductId: string;
+    Type?: string;
     /**
-     * 设备名称
+     * HTTP 回调 URL
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeviceName: string;
+    CallbackUrl?: string;
     /**
-     * 图片流事件开始时间
+     * HTTP 回调鉴权 Token
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: number;
+    CallbackToken?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeGatewaySubProducts请求参数结构体
@@ -4796,6 +5046,15 @@ export interface PublishMessageResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeCloudStorageAIServiceCallback请求参数结构体
+ */
+export interface DescribeCloudStorageAIServiceCallbackRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
 }
 /**
  * ModifyTopicPolicy请求参数结构体
@@ -4922,13 +5181,21 @@ export interface DescribeModelDefinitionRequest {
     ProductId: string;
 }
 /**
- * EnableTopicRule请求参数结构体
+ * DescribeCloudStorageAIService请求参数结构体
  */
-export interface EnableTopicRuleRequest {
+export interface DescribeCloudStorageAIServiceRequest {
     /**
-     * 规则名称
+     * 产品ID
      */
-    RuleName: string;
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存 AI 服务类型。可选值：PackageDetect
+     */
+    ServiceType: string;
 }
 /**
  * DescribeCloudStorageUsers请求参数结构体
@@ -4950,6 +5217,19 @@ export interface DescribeCloudStorageUsersRequest {
      * 分页拉取偏移
      */
     Offset: number;
+}
+/**
+ * wifi定位信息
+ */
+export interface WifiInfo {
+    /**
+     * mac地址
+     */
+    MAC: string;
+    /**
+     * 信号强度
+     */
+    RSSI: number;
 }
 /**
  * CreateTopicRule返回参数结构体

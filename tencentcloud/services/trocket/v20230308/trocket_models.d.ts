@@ -367,13 +367,25 @@ export interface DescribeMQTTProductSKUListResponse {
     RequestId?: string;
 }
 /**
- * DescribeTopicStatsOp返回参数结构体
+ * DescribeRoleList请求参数结构体
  */
-export interface DescribeTopicStatsOpResponse {
+export interface DescribeRoleListRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit: number;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeMQTTClient返回参数结构体
@@ -2450,15 +2462,6 @@ export interface ModifyMQTTTopicRequest {
     Remark?: string;
 }
 /**
- * DescribeTopicStatsOp请求参数结构体
- */
-export interface DescribeTopicStatsOpRequest {
-    /**
-     * 主题
-     */
-    Topic: string;
-}
-/**
  * 角色信息
  */
 export interface RoleItem {
@@ -2683,25 +2686,4 @@ export interface IpRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark: string;
-}
-/**
- * DescribeRoleList请求参数结构体
- */
-export interface DescribeRoleListRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 查询起始位置
-     */
-    Offset: number;
-    /**
-     * 查询结果限制数量
-     */
-    Limit: number;
-    /**
-     * 查询条件列表
-     */
-    Filters?: Array<Filter>;
 }

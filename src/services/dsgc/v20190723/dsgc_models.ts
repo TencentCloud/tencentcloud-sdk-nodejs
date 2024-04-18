@@ -467,6 +467,20 @@ export interface DescribeDSPADiscoveryServiceStatusResponse {
 }
 
 /**
+ * 云数据库资源项
+ */
+export interface CloudResourceItem {
+  /**
+   * 资源所处地域。
+   */
+  Region: string
+  /**
+   * 	云上资源列表。
+   */
+  Items: Array<DspaCloudResourceMeta>
+}
+
+/**
  * DescribeRuleDetail返回参数结构体
  */
 export interface DescribeRuleDetailResponse {
@@ -4222,20 +4236,28 @@ export interface CreateDSPADbMetaResourcesRequest {
   MetaType: string
   /**
    * 资源所处地域。
+   * @deprecated
    */
-  ResourceRegion: string
+  ResourceRegion?: string
   /**
    * 用来标记本次更新是否已经是最后一次，可选值：continue（后续还需要更新）、finished（本次是最后一次更新）。
+   * @deprecated
    */
-  UpdateStatus: string
+  UpdateStatus?: string
   /**
    * 本次更新的ID号，用来标记一次完整的更新过程。
+   * @deprecated
    */
-  UpdateId: string
+  UpdateId?: string
   /**
    * 云上资源列表。
+   * @deprecated
    */
-  Items: Array<DspaCloudResourceMeta>
+  Items?: Array<DspaCloudResourceMeta>
+  /**
+   * 必填，云数据库资源列表。
+   */
+  CloudResourceItems?: Array<CloudResourceItem>
 }
 
 /**
@@ -4335,6 +4357,7 @@ export interface DescribeDSPAComplianceGroupDetailRequest {
 export interface CreateDSPADbMetaResourcesResponse {
   /**
    * 本次更新的ID号，用来标记一次完整的更新过程。
+   * @deprecated
    */
   UpdateId?: string
   /**
@@ -4347,6 +4370,7 @@ export interface CreateDSPADbMetaResourcesResponse {
   DspaId?: string
   /**
    * 资源所处地域。
+   * @deprecated
    */
   ResourceRegion?: string
   /**
@@ -5809,17 +5833,23 @@ export interface ModifyDSPAESTaskResultResponse {
  */
 export interface CreateDSPACosMetaResourcesRequest {
   /**
-   * 资源所处地域。
-   */
-  ResourceRegion: string
-  /**
    * DSPA实例ID。
    */
   DspaId: string
   /**
-   * COS桶列表
+   * 资源所处地域。
+   * @deprecated
    */
-  Buckets: Array<string>
+  ResourceRegion?: string
+  /**
+   * COS桶列表
+   * @deprecated
+   */
+  Buckets?: Array<string>
+  /**
+   * 必填，COS资源列表
+   */
+  CosBucketItems?: Array<CosBucketItem>
 }
 
 /**
@@ -8427,6 +8457,20 @@ export interface ListDSPACosMetaResourcesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * cos桶资源项
+ */
+export interface CosBucketItem {
+  /**
+   * 资源所处地域。
+   */
+  Region: string
+  /**
+   * COS桶列表。
+   */
+  Buckets: Array<string>
 }
 
 /**

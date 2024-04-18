@@ -879,11 +879,11 @@ export interface DescribeRulesResponse {
   /**
    * 按照域名分类的规则信息列表
    */
-  DomainRuleSet: Array<DomainRuleSet>
+  DomainRuleSet?: Array<DomainRuleSet>
   /**
    * 该监听器下的域名总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1442,71 +1442,71 @@ export interface RuleInfo {
   /**
    * 规则信息
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 监听器信息
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 规则域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 规则路径
    */
-  Path: string
+  Path?: string
   /**
    * 源站类型
    */
-  RealServerType: string
+  RealServerType?: string
   /**
    * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
-  Scheduler: string
+  Scheduler?: string
   /**
    * 是否开启健康检查标志，1表示开启，0表示关闭
    */
-  HealthCheck: number
+  HealthCheck?: number
   /**
    * 规则状态，0表示运行中，1表示创建中，2表示销毁中，3表示绑定解绑源站中，4表示配置更新中
    */
-  RuleStatus: number
+  RuleStatus?: number
   /**
    * 健康检查相关参数
    */
-  CheckParams: RuleCheckParams
+  CheckParams?: RuleCheckParams
   /**
    * 已绑定的源站相关信息
    */
-  RealServerSet: Array<BindRealServer>
+  RealServerSet?: Array<BindRealServer>
   /**
    * 源站的服务状态，0表示异常，1表示正常。
 未开启健康检查时，该状态始终未正常。
 只要有一个源站健康状态为异常时，该状态为异常，具体源站的状态请查看RealServerSet。
    */
-  BindStatus: number
+  BindStatus?: number
   /**
    * 通道转发到源站的请求所携带的host，其中default表示直接转发接收到的host。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForwardHost: string
+  ForwardHost?: string
   /**
    * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerNameIndicationSwitch: string
+  ServerNameIndicationSwitch?: string
   /**
    * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerNameIndication: string
+  ServerNameIndication?: string
   /**
    * 强转HTTPS指示，当传递值为https:时表示强转为https
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForcedRedirect: string
+  ForcedRedirect?: string
 }
 
 /**
@@ -2590,6 +2590,10 @@ export interface ModifyDomainRequest {
 其他情况，使用该ClientCertificateId或PolyClientCertificateIds指定的证书。
    */
   PolyClientCertificateIds?: Array<string>
+  /**
+   * 是否作为默认域名，默认为“否”
+   */
+  IsDefaultServer?: boolean
 }
 
 /**
@@ -3117,6 +3121,10 @@ export interface CreateDomainRequest {
 默认不开启Http3。可以通过SetDomainHttp3开启。
    */
   Http3Supported?: number
+  /**
+   * 是否作为默认域名，默认为“否”
+   */
+  IsDefaultServer?: boolean
 }
 
 /**
@@ -4629,7 +4637,7 @@ export interface DescribeProxyDetailResponse {
   /**
    * 通道详情信息。
    */
-  ProxyDetail: ProxyInfo
+  ProxyDetail?: ProxyInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4742,97 +4750,97 @@ export interface DomainRuleSet {
   /**
    * 转发规则域名。
    */
-  Domain: string
+  Domain?: string
   /**
    * 该域名对应的转发规则列表。
    */
-  RuleSet: Array<RuleInfo>
+  RuleSet?: Array<RuleInfo>
   /**
    * 该域名对应的服务器证书ID，值为default时，表示使用默认证书（监听器配置的证书）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertificateId: string
+  CertificateId?: string
   /**
    * 该域名对应服务器证书名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertificateAlias: string
+  CertificateAlias?: string
   /**
    * 该域名对应的客户端证书ID，值为default时，表示使用默认证书（监听器配置的证书）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientCertificateId: string
+  ClientCertificateId?: string
   /**
    * 该域名对应客户端证书名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientCertificateAlias: string
+  ClientCertificateAlias?: string
   /**
    * 该域名对应基础认证配置ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BasicAuthConfId: string
+  BasicAuthConfId?: string
   /**
    * 基础认证开关，其中：
 0，表示未开启；
 1，表示已开启。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BasicAuth: number
+  BasicAuth?: number
   /**
    * 该域名对应基础认证配置名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BasicAuthConfAlias: string
+  BasicAuthConfAlias?: string
   /**
    * 该域名对应源站认证证书ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerCertificateId: string
+  RealServerCertificateId?: string
   /**
    * 源站认证开关，其中：
 0，表示未开启；
 1，表示已开启。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerAuth: number
+  RealServerAuth?: number
   /**
    * 该域名对应源站认证证书名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerCertificateAlias: string
+  RealServerCertificateAlias?: string
   /**
    * 该域名对应通道认证证书ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GaapCertificateId: string
+  GaapCertificateId?: string
   /**
    * 通道认证开关，其中：
 0，表示未开启；
 1，表示已开启。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GaapAuth: number
+  GaapAuth?: number
   /**
    * 该域名对应通道认证证书名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GaapCertificateAlias: string
+  GaapCertificateAlias?: string
   /**
    * 源站认证域名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerCertificateDomain: string
+  RealServerCertificateDomain?: string
   /**
    * 多客户端证书时，返回多个证书的id和别名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolyClientCertificateAliasInfo: Array<CertificateAliasInfo>
+  PolyClientCertificateAliasInfo?: Array<CertificateAliasInfo>
   /**
    * 多源站证书时，返回多个证书的id和别名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolyRealServerCertificateAliasInfo: Array<CertificateAliasInfo>
+  PolyRealServerCertificateAliasInfo?: Array<CertificateAliasInfo>
   /**
    * 域名的状态。
 0表示运行中，
@@ -4840,19 +4848,24 @@ export interface DomainRuleSet {
 2表示删除中。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainStatus: number
+  DomainStatus?: number
   /**
    * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BanStatus: string
+  BanStatus?: string
   /**
    * Http3特性标识，其中：
 0表示关闭；
 1表示启用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Http3Supported: number
+  Http3Supported?: number
+  /**
+   * 是否为默认域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefaultServer?: boolean
 }
 
 /**
@@ -5420,7 +5433,7 @@ export interface DescribeProxyGroupDetailsResponse {
   /**
    * 通道组详细信息。
    */
-  ProxyGroupDetail: ProxyGroupDetail
+  ProxyGroupDetail?: ProxyGroupDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -3098,7 +3098,7 @@ export interface DescribeYarnApplicationsRequest {
      */
     EndTime: number;
     /**
-     * 分页起始偏移，从0开始
+     * 分页偏移量，Offset=0表示第一页；如果limit=100，Offset=1，则表示第二页，数据第101条开始查询，返回100条数据；如果limit=100，Offset=2，则表示第三页，数据第201条开始查询，返回100条数据。依次类推
      */
     Offset: number;
     /**

@@ -128,16 +128,6 @@ it("trocket.v20230308.ImportSourceClusterTopics", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeTopicStatsOp", async function () {
-    try {
-       const data = await client.DescribeTopicStatsOp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trocket.v20230308.DescribeMQTTUserList", async function () {
     try {
        const data = await client.DescribeMQTTUserList({})

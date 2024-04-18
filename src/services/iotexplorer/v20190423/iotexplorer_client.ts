@@ -23,6 +23,7 @@ import {
   CloudStorageTimeData,
   DescribeDeviceLocationSolveRequest,
   DeleteProjectRequest,
+  DescribeCloudStorageAIServiceResponse,
   ListEventHistoryResponse,
   ModifyLoRaGatewayRequest,
   ThumbnailURLInfoList,
@@ -43,7 +44,7 @@ import {
   GenerateSignedVideoURLRequest,
   TopicRulePayload,
   DeleteLoRaFrequencyResponse,
-  DescribeCloudStoragePackageConsumeDetailsResponse,
+  DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
   ModifyPositionFenceRequest,
   PositionFenceItem,
@@ -68,20 +69,23 @@ import {
   DeletePositionFenceResponse,
   ModifyLoRaFrequencyRequest,
   FenceAlarmPoint,
-  FamilySubDevice,
+  DescribeCloudStoragePackageConsumeDetailsResponse,
   DescribeCloudStoragePackageConsumeStatsResponse,
   PackageInfo,
+  ModifyCloudStorageAIServiceCallbackResponse,
   DescribeCloudStorageUsersResponse,
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
-  GetDeviceSumStatisticsResponse,
+  ModifyProductCloudStorageAIServiceResponse,
+  DescribeCloudStorageStreamDataRequest,
   DevicePositionItem,
   ListTopicPolicyResponse,
   SearchPositionSpaceResponse,
   DescribePositionFenceListResponse,
   DescribeCloudStorageMultiThumbnailRequest,
   GenSingleDeviceSignatureOfPublicResponse,
+  GetDeviceSumStatisticsResponse,
   DeletePositionSpaceRequest,
   DescribePackageConsumeTasksRequest,
   CreateProjectRequest,
@@ -89,23 +93,25 @@ import {
   UnbindProductsRequest,
   SearchStudioProductResponse,
   DeviceData,
-  WifiInfo,
+  ModifyCloudStorageAIServiceResponse,
   GetTopicRuleListRequest,
   FenceBindDeviceItem,
   DeviceDataHistoryItem,
   GetFamilyDeviceUserListResponse,
   BindDeviceInfo,
   DescribeCloudStorageOrderRequest,
+  CloudStorageAIServiceTask,
   ModifyProjectRequest,
   DescribeBatchProductionResponse,
   PublishRRPCMessageRequest,
-  ListTopicPolicyRequest,
+  DescribeProductCloudStorageAIServiceResponse,
   BatchProductionInfo,
   DeleteDeviceRequest,
   DeleteLoRaFrequencyRequest,
   ModifyStudioProductResponse,
   ControlDeviceDataRequest,
   ListFirmwaresResponse,
+  FamilySubDevice,
   ReleaseStudioProductResponse,
   DescribeSpaceFenceEventListResponse,
   DescribePackageConsumeTasksResponse,
@@ -121,6 +127,7 @@ import {
   DescribeDeviceFirmWareResponse,
   SearchTopicRuleResponse,
   DescribeFenceEventListResponse,
+  ModifyCloudStorageAIServiceCallbackRequest,
   DescribeDeviceFirmWareRequest,
   UpdateDevicesEnableStateRequest,
   BindCloudStorageUserRequest,
@@ -133,6 +140,7 @@ import {
   DescribeDeviceDataHistoryResponse,
   DeleteProjectResponse,
   CreateTopicPolicyResponse,
+  ModifyCloudStorageAIServiceRequest,
   CreateDeviceResponse,
   CreateDeviceRequest,
   DescribeDevicePositionListResponse,
@@ -145,6 +153,7 @@ import {
   TopicRuleInfo,
   PositionFenceInfo,
   DescribeDeviceLocationSolveResponse,
+  DescribeCloudStorageAIServiceTasksRequest,
   DescribeStudioProductResponse,
   CreateFenceBindRequest,
   CreateIotVideoCloudStorageResponse,
@@ -154,7 +163,7 @@ import {
   ListFirmwaresRequest,
   GetStudioProductListResponse,
   PublishMessageRequest,
-  DescribeCloudStorageMultiThumbnailResponse,
+  DescribeProductCloudStorageAIServiceRequest,
   ModifyTopicRuleRequest,
   UploadFirmwareRequest,
   GetDeviceListRequest,
@@ -186,7 +195,7 @@ import {
   DescribeCloudStorageThumbnailRequest,
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
-  TransferCloudStorageRequest,
+  EnableTopicRuleRequest,
   DescribeBindedProductsResponse,
   DeviceSignatureInfo,
   PositionSpaceInfo,
@@ -242,12 +251,15 @@ import {
   ResetCloudStorageResponse,
   ResetCloudStorageEventResponse,
   GetProjectListRequest,
+  DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
   DescribeDeviceBindGatewayRequest,
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
+  TransferCloudStorageRequest,
   GetGatewaySubDeviceListRequest,
   SearchStudioProductRequest,
+  ListTopicPolicyRequest,
   GenSingleDeviceSignatureOfPublicRequest,
   DeleteDevicesRequest,
   AppDeviceInfo,
@@ -256,16 +268,18 @@ import {
   DeleteCloudStorageEventRequest,
   GetCOSURLRequest,
   DescribeLoRaFrequencyRequest,
+  ModifyProductCloudStorageAIServiceRequest,
   DescribeCloudStorageResponse,
   ResetCloudStorageRequest,
   DescribeGatewayBindDevicesRequest,
-  DescribeCloudStorageStreamDataRequest,
+  DescribeCloudStorageAIServiceCallbackResponse,
   DescribeGatewaySubProductsRequest,
   DeleteStudioProductRequest,
   BindProductsRequest,
   GetDeviceSumStatisticsRequest,
   ModifySpacePropertyResponse,
   PublishMessageResponse,
+  DescribeCloudStorageAIServiceCallbackRequest,
   ModifyTopicPolicyRequest,
   DescribeCloudStorageRequest,
   BindDevicesResponse,
@@ -274,8 +288,9 @@ import {
   SearchKeyword,
   CreatePositionFenceRequest,
   DescribeModelDefinitionRequest,
-  EnableTopicRuleRequest,
+  DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageUsersRequest,
+  WifiInfo,
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   DescribeCloudStorageOrderResponse,
@@ -354,6 +369,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicPolicyResponse) => void
   ): Promise<DescribeTopicPolicyResponse> {
     return this.request("DescribeTopicPolicy", req, cb)
+  }
+
+  /**
+   * 修改指定产品的云存 AI 服务开通状态
+   */
+  async ModifyProductCloudStorageAIService(
+    req: ModifyProductCloudStorageAIServiceRequest,
+    cb?: (error: string, rep: ModifyProductCloudStorageAIServiceResponse) => void
+  ): Promise<ModifyProductCloudStorageAIServiceResponse> {
+    return this.request("ModifyProductCloudStorageAIService", req, cb)
   }
 
   /**
@@ -487,6 +512,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定产品的云存 AI 服务开通状态
+   */
+  async DescribeProductCloudStorageAIService(
+    req: DescribeProductCloudStorageAIServiceRequest,
+    cb?: (error: string, rep: DescribeProductCloudStorageAIServiceResponse) => void
+  ): Promise<DescribeProductCloudStorageAIServiceResponse> {
+    return this.request("DescribeProductCloudStorageAIService", req, cb)
+  }
+
+  /**
    * 查询套餐消耗记录列表
    */
   async DescribePackageConsumeTasks(
@@ -577,13 +612,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发RRPC消息
+   * 查询指定设备的云存 AI 服务开通状态与参数配置
    */
-  async PublishRRPCMessage(
-    req: PublishRRPCMessageRequest,
-    cb?: (error: string, rep: PublishRRPCMessageResponse) => void
-  ): Promise<PublishRRPCMessageResponse> {
-    return this.request("PublishRRPCMessage", req, cb)
+  async DescribeCloudStorageAIService(
+    req: DescribeCloudStorageAIServiceRequest,
+    cb?: (error: string, rep: DescribeCloudStorageAIServiceResponse) => void
+  ): Promise<DescribeCloudStorageAIServiceResponse> {
+    return this.request("DescribeCloudStorageAIService", req, cb)
   }
 
   /**
@@ -977,6 +1012,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 下发RRPC消息
+   */
+  async PublishRRPCMessage(
+    req: PublishRRPCMessageRequest,
+    cb?: (error: string, rep: PublishRRPCMessageResponse) => void
+  ): Promise<PublishRRPCMessageResponse> {
+    return this.request("PublishRRPCMessage", req, cb)
+  }
+
+  /**
    * 获取设备云存服务详情
    */
   async DescribeCloudStorage(
@@ -1124,6 +1169,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindDevicesResponse) => void
   ): Promise<UnbindDevicesResponse> {
     return this.request("UnbindDevices", req, cb)
+  }
+
+  /**
+   * 修改指定设备的云存 AI 服务开通状态与参数配置
+   */
+  async ModifyCloudStorageAIService(
+    req: ModifyCloudStorageAIServiceRequest,
+    cb?: (error: string, rep: ModifyCloudStorageAIServiceResponse) => void
+  ): Promise<ModifyCloudStorageAIServiceResponse> {
+    return this.request("ModifyCloudStorageAIService", req, cb)
   }
 
   /**
@@ -1287,6 +1342,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云存AI分析回调配置
+   */
+  async DescribeCloudStorageAIServiceCallback(
+    req: DescribeCloudStorageAIServiceCallbackRequest,
+    cb?: (error: string, rep: DescribeCloudStorageAIServiceCallbackResponse) => void
+  ): Promise<DescribeCloudStorageAIServiceCallbackResponse> {
+    return this.request("DescribeCloudStorageAIServiceCallback", req, cb)
+  }
+
+  /**
    * 更新位置空间产品属性
    */
   async ModifySpaceProperty(
@@ -1364,6 +1429,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePositionFenceResponse) => void
   ): Promise<DeletePositionFenceResponse> {
     return this.request("DeletePositionFence", req, cb)
+  }
+
+  /**
+   * 修改云存AI分析回调配置
+   */
+  async ModifyCloudStorageAIServiceCallback(
+    req: ModifyCloudStorageAIServiceCallbackRequest,
+    cb?: (error: string, rep: ModifyCloudStorageAIServiceCallbackResponse) => void
+  ): Promise<ModifyCloudStorageAIServiceCallbackResponse> {
+    return this.request("ModifyCloudStorageAIServiceCallback", req, cb)
+  }
+
+  /**
+   * 查询指定设备的云存 AI 分析任务列表
+   */
+  async DescribeCloudStorageAIServiceTasks(
+    req: DescribeCloudStorageAIServiceTasksRequest,
+    cb?: (error: string, rep: DescribeCloudStorageAIServiceTasksResponse) => void
+  ): Promise<DescribeCloudStorageAIServiceTasksResponse> {
+    return this.request("DescribeCloudStorageAIServiceTasks", req, cb)
   }
 
   /**

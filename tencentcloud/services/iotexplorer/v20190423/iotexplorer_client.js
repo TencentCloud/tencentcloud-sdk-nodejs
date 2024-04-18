@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicPolicy", req, cb);
     }
     /**
+     * 修改指定产品的云存 AI 服务开通状态
+     */
+    async ModifyProductCloudStorageAIService(req, cb) {
+        return this.request("ModifyProductCloudStorageAIService", req, cb);
+    }
+    /**
      * 提供查询用户所创建的项目列表查询功能。
      */
     async GetProjectList(req, cb) {
@@ -136,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyFenceBind", req, cb);
     }
     /**
+     * 查询指定产品的云存 AI 服务开通状态
+     */
+    async DescribeProductCloudStorageAIService(req, cb) {
+        return this.request("DescribeProductCloudStorageAIService", req, cb);
+    }
+    /**
      * 查询套餐消耗记录列表
      */
     async DescribePackageConsumeTasks(req, cb) {
@@ -190,10 +202,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTopicRule", req, cb);
     }
     /**
-     * 下发RRPC消息
+     * 查询指定设备的云存 AI 服务开通状态与参数配置
      */
-    async PublishRRPCMessage(req, cb) {
-        return this.request("PublishRRPCMessage", req, cb);
+    async DescribeCloudStorageAIService(req, cb) {
+        return this.request("DescribeCloudStorageAIService", req, cb);
     }
     /**
      * 获取围栏绑定信息列表
@@ -430,6 +442,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicPolicy", req, cb);
     }
     /**
+     * 下发RRPC消息
+     */
+    async PublishRRPCMessage(req, cb) {
+        return this.request("PublishRRPCMessage", req, cb);
+    }
+    /**
      * 获取设备云存服务详情
      */
     async DescribeCloudStorage(req, cb) {
@@ -518,6 +536,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnbindDevices(req, cb) {
         return this.request("UnbindDevices", req, cb);
+    }
+    /**
+     * 修改指定设备的云存 AI 服务开通状态与参数配置
+     */
+    async ModifyCloudStorageAIService(req, cb) {
+        return this.request("ModifyCloudStorageAIService", req, cb);
     }
     /**
      * 提供查询某个项目下所有产品信息的能力。
@@ -616,6 +640,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetCloudStorageEvent", req, cb);
     }
     /**
+     * 查询云存AI分析回调配置
+     */
+    async DescribeCloudStorageAIServiceCallback(req, cb) {
+        return this.request("DescribeCloudStorageAIServiceCallback", req, cb);
+    }
+    /**
      * 更新位置空间产品属性
      */
     async ModifySpaceProperty(req, cb) {
@@ -662,6 +692,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeletePositionFence(req, cb) {
         return this.request("DeletePositionFence", req, cb);
+    }
+    /**
+     * 修改云存AI分析回调配置
+     */
+    async ModifyCloudStorageAIServiceCallback(req, cb) {
+        return this.request("ModifyCloudStorageAIServiceCallback", req, cb);
+    }
+    /**
+     * 查询指定设备的云存 AI 分析任务列表
+     */
+    async DescribeCloudStorageAIServiceTasks(req, cb) {
+        return this.request("DescribeCloudStorageAIServiceTasks", req, cb);
     }
     /**
      * 搜索规则

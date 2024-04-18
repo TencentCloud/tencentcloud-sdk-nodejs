@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuitOrganization", req, cb);
     }
     /**
-     * 获取组织成员访问身份列表
+     * 禁用策略类型
      */
-    async ListOrganizationIdentity(req, cb) {
-        return this.request("ListOrganizationIdentity", req, cb);
+    async DisablePolicyType(req, cb) {
+        return this.request("DisablePolicyType", req, cb);
     }
     /**
      * 更新共享单元。
@@ -76,6 +76,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOrganizationMembersPolicy", req, cb);
     }
     /**
+     * 获取组织成员访问身份列表
+     */
+    async ListOrganizationIdentity(req, cb) {
+        return this.request("ListOrganizationIdentity", req, cb);
+    }
+    /**
+     * 本接口（ListPoliciesForTarget）查询目标关联的策略列表
+     */
+    async ListPoliciesForTarget(req, cb) {
+        return this.request("ListPoliciesForTarget", req, cb);
+    }
+    /**
      * 添加企业组织节点
      */
     async AddOrganizationNode(req, cb) {
@@ -100,16 +112,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);
     }
     /**
+     * 本接口（DescribePolicy）可用于查询查看策略详情。
+     */
+    async DescribePolicy(req, cb) {
+        return this.request("DescribePolicy", req, cb);
+    }
+    /**
      * 更新企业组织节点
      */
     async UpdateOrganizationNode(req, cb) {
         return this.request("UpdateOrganizationNode", req, cb);
     }
     /**
-     * 删除共享单元。
+     * 添加组织成员访问授权
      */
-    async DeleteShareUnit(req, cb) {
-        return this.request("DeleteShareUnit", req, cb);
+    async CreateOrganizationMemberAuthIdentity(req, cb) {
+        return this.request("CreateOrganizationMemberAuthIdentity", req, cb);
     }
     /**
      * 批量删除企业组织成员
@@ -148,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteShareUnitResources", req, cb);
     }
     /**
+     * 获取共享单元列表。
+     */
+    async DescribeShareUnits(req, cb) {
+        return this.request("DescribeShareUnits", req, cb);
+    }
+    /**
      * 获取组织成员的授权策略列表
      */
     async DescribeOrganizationMemberPolicies(req, cb) {
@@ -172,16 +196,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationFinancialByMember", req, cb);
     }
     /**
-     * 添加组织成员访问授权
-     */
-    async CreateOrganizationMemberAuthIdentity(req, cb) {
-        return this.request("CreateOrganizationMemberAuthIdentity", req, cb);
-    }
-    /**
      * 添加共享单元资源
      */
     async AddShareUnitResources(req, cb) {
         return this.request("AddShareUnitResources", req, cb);
+    }
+    /**
+     * 绑定策略
+     */
+    async AttachPolicy(req, cb) {
+        return this.request("AttachPolicy", req, cb);
     }
     /**
      * 创建组织成员访问策略
@@ -214,6 +238,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOrganization", req, cb);
     }
     /**
+     * 解绑策略
+     */
+    async DetachPolicy(req, cb) {
+        return this.request("DetachPolicy", req, cb);
+    }
+    /**
      * 添加组织身份
      */
     async CreateOrganizationIdentity(req, cb) {
@@ -244,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberEmailBind", req, cb);
     }
     /**
+     * 启用策略类型
+     */
+    async EnablePolicyType(req, cb) {
+        return this.request("EnablePolicyType", req, cb);
+    }
+    /**
      * 创建组织成员
      */
     async CreateOrganizationMember(req, cb) {
@@ -260,6 +296,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddShareUnit(req, cb) {
         return this.request("AddShareUnit", req, cb);
+    }
+    /**
+     * 删除共享单元。
+     */
+    async DeleteShareUnit(req, cb) {
+        return this.request("DeleteShareUnit", req, cb);
+    }
+    /**
+     * 本接口（ListPolicies）可用于查询查看策略列表数据
+     */
+    async ListPolicies(req, cb) {
+        return this.request("ListPolicies", req, cb);
     }
     /**
      * 以产品维度获取组织财务信息
@@ -280,16 +328,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddShareUnitMembers", req, cb);
     }
     /**
+     * 本接口（DescribePolicyConfig）可用于查询企业组织策略配置
+     */
+    async DescribePolicyConfig(req, cb) {
+        return this.request("DescribePolicyConfig", req, cb);
+    }
+    /**
      * 获取组织节点列表
      */
     async DescribeOrganizationNodes(req, cb) {
         return this.request("DescribeOrganizationNodes", req, cb);
     }
     /**
-     * 获取共享单元列表。
+     * 删除策略
      */
-    async DescribeShareUnits(req, cb) {
-        return this.request("DescribeShareUnits", req, cb);
+    async DeletePolicy(req, cb) {
+        return this.request("DeletePolicy", req, cb);
     }
     /**
      * 成员账号删除检查
@@ -298,16 +352,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAccountDelete", req, cb);
     }
     /**
+     * 创建一个特殊类型的策略，你可以关联到企业组织Root节点、企业单元或者企业的成员账号。
+     */
+    async CreatePolicy(req, cb) {
+        return this.request("CreatePolicy", req, cb);
+    }
+    /**
      * 创建组织成员访问授权策略
      */
     async CreateOrganizationMemberPolicy(req, cb) {
         return this.request("CreateOrganizationMemberPolicy", req, cb);
     }
     /**
+     * 本接口（ListTargetsForPolicy）查询某个指定策略关联的目标列表
+     */
+    async ListTargetsForPolicy(req, cb) {
+        return this.request("ListTargetsForPolicy", req, cb);
+    }
+    /**
      * 删除组织成员访问授权
      */
     async DeleteOrganizationMemberAuthIdentity(req, cb) {
         return this.request("DeleteOrganizationMemberAuthIdentity", req, cb);
+    }
+    /**
+     * 编辑策略
+     */
+    async UpdatePolicy(req, cb) {
+        return this.request("UpdatePolicy", req, cb);
     }
 }
 exports.Client = Client;

@@ -19,8 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeShareUnitResourcesResponse,
-  UpdateOrganizationIdentityRequest,
+  EnablePolicyTypeResponse,
+  ListTargetsForPolicyResponse,
   DeleteOrganizationRequest,
+  DescribePolicyConfigResponse,
+  QuitOrganizationResponse,
   ListOrganizationIdentityRequest,
   DeleteOrganizationMembersRequest,
   CreateOrganizationResponse,
@@ -29,12 +32,17 @@ import {
   DescribeOrganizationFinancialByMonthResponse,
   OrgFinancialByMonth,
   MoveOrganizationNodeMembersResponse,
+  AttachPolicyRequest,
   DeleteShareUnitResponse,
   DeleteShareUnitMembersResponse,
+  DescribePolicyResponse,
   CreateOrganizationIdentityRequest,
+  DeletePolicyResponse,
   DescribeOrganizationResponse,
+  DisablePolicyTypeResponse,
   DescribeOrganizationMemberPoliciesRequest,
   DeleteOrganizationMembersPolicyResponse,
+  UpdateOrganizationIdentityRequest,
   ShareUnitMember,
   CancelOrganizationMemberAuthAccountRequest,
   DeleteOrganizationResponse,
@@ -43,9 +51,11 @@ import {
   DescribeShareUnitResourcesRequest,
   DeleteShareUnitResourcesRequest,
   MemberIdentity,
+  UpdateShareUnitResponse,
   UpdateOrganizationNodeRequest,
   DescribeShareAreasResponse,
   DescribeOrganizationAuthNodeResponse,
+  ListPoliciesResponse,
   BindOrganizationMemberAuthAccountRequest,
   DescribeShareUnitsResponse,
   UpdateOrganizationMemberEmailBindResponse,
@@ -62,11 +72,13 @@ import {
   AuthNode,
   DescribeOrganizationMemberEmailBindResponse,
   DeleteOrganizationNodesRequest,
-  QuitOrganizationResponse,
+  EnablePolicyTypeRequest,
+  CreatePolicyResponse,
   IdentityPolicy,
   AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
-  DescribeOrganizationMembersResponse,
+  DeletePolicyRequest,
+  ShareResource,
   QuitOrganizationRequest,
   AddOrganizationNodeRequest,
   AddShareUnitMembersRequest,
@@ -79,22 +91,28 @@ import {
   DescribeOrganizationMemberAuthAccountsResponse,
   OrgIdentity,
   DescribeOrganizationMembersRequest,
-  UpdateShareUnitResponse,
+  DescribeOrganizationMembersResponse,
+  ListPoliciesForTargetRequest,
   DeleteOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationMemberEmailBindRequest,
   UpdateShareUnitRequest,
-  DescribeShareUnitsRequest,
+  DeleteOrganizationMemberAuthIdentityRequest,
+  ListTargetsForPolicyNode,
   OrgPermission,
+  DetachPolicyRequest,
+  DisablePolicyTypeRequest,
   AddOrganizationMemberEmailResponse,
   AddShareUnitMembersResponse,
   CreateOrganizationMemberPolicyRequest,
   CreateOrganizationRequest,
-  ShareResource,
+  AttachPolicyResponse,
   CreateOrganizationMembersPolicyRequest,
   CheckAccountDeleteRequest,
   OrgProductFinancial,
+  DetachPolicyResponse,
   AddShareUnitResponse,
   DescribeOrganizationFinancialByProductResponse,
+  ListPolicyNode,
   DescribeOrganizationFinancialByProductRequest,
   OrgMemberPolicy,
   CreateOrganizationMemberPolicyResponse,
@@ -103,18 +121,24 @@ import {
   UpdateOrganizationMemberRequest,
   AddShareUnitResourcesRequest,
   ShareMember,
+  ListPoliciesForTargetResponse,
   DeleteShareUnitMembersRequest,
   DescribeOrganizationMemberAuthIdentitiesResponse,
+  UpdatePolicyResponse,
   ShareUnitResource,
   DeleteOrganizationIdentityResponse,
   DescribeOrganizationMemberEmailBindRequest,
+  ListPoliciesRequest,
   OrgMember,
   CreateOrganizationMemberRequest,
+  CreatePolicyRequest,
   OrgMemberAuthIdentity,
+  DeleteShareUnitRequest,
   NotAllowReason,
   OrgNode,
   CheckAccountDeleteResponse,
   DeleteAccountRequest,
+  ListPoliciesForTarget,
   CreateOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationFinancialByMemberRequest,
   DescribeOrganizationFinancialByMonthRequest,
@@ -124,16 +148,19 @@ import {
   UpdateOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DeleteOrganizationMembersPolicyRequest,
+  DescribePolicyRequest,
+  ListTargetsForPolicyRequest,
   DeleteOrganizationIdentityRequest,
   UpdateOrganizationNodeResponse,
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
   ProductResource,
-  DeleteShareUnitRequest,
+  DescribePolicyConfigRequest,
   DescribeOrganizationMemberPoliciesResponse,
-  DeleteOrganizationMemberAuthIdentityRequest,
+  DescribeShareUnitsRequest,
   ShareArea,
   DeleteAccountResponse,
+  UpdatePolicyRequest,
 } from "./organization_models"
 
 /**
@@ -166,13 +193,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员访问身份列表
+   * 禁用策略类型
    */
-  async ListOrganizationIdentity(
-    req: ListOrganizationIdentityRequest,
-    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
-  ): Promise<ListOrganizationIdentityResponse> {
-    return this.request("ListOrganizationIdentity", req, cb)
+  async DisablePolicyType(
+    req: DisablePolicyTypeRequest,
+    cb?: (error: string, rep: DisablePolicyTypeResponse) => void
+  ): Promise<DisablePolicyTypeResponse> {
+    return this.request("DisablePolicyType", req, cb)
   }
 
   /**
@@ -226,6 +253,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取组织成员访问身份列表
+   */
+  async ListOrganizationIdentity(
+    req: ListOrganizationIdentityRequest,
+    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
+  ): Promise<ListOrganizationIdentityResponse> {
+    return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 本接口（ListPoliciesForTarget）查询目标关联的策略列表
+   */
+  async ListPoliciesForTarget(
+    req: ListPoliciesForTargetRequest,
+    cb?: (error: string, rep: ListPoliciesForTargetResponse) => void
+  ): Promise<ListPoliciesForTargetResponse> {
+    return this.request("ListPoliciesForTarget", req, cb)
+  }
+
+  /**
    * 添加企业组织节点
    */
   async AddOrganizationNode(
@@ -266,6 +313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribePolicy）可用于查询查看策略详情。
+   */
+  async DescribePolicy(
+    req: DescribePolicyRequest,
+    cb?: (error: string, rep: DescribePolicyResponse) => void
+  ): Promise<DescribePolicyResponse> {
+    return this.request("DescribePolicy", req, cb)
+  }
+
+  /**
    * 更新企业组织节点
    */
   async UpdateOrganizationNode(
@@ -276,13 +333,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除共享单元。
+   * 添加组织成员访问授权
    */
-  async DeleteShareUnit(
-    req: DeleteShareUnitRequest,
-    cb?: (error: string, rep: DeleteShareUnitResponse) => void
-  ): Promise<DeleteShareUnitResponse> {
-    return this.request("DeleteShareUnit", req, cb)
+  async CreateOrganizationMemberAuthIdentity(
+    req: CreateOrganizationMemberAuthIdentityRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberAuthIdentityResponse) => void
+  ): Promise<CreateOrganizationMemberAuthIdentityResponse> {
+    return this.request("CreateOrganizationMemberAuthIdentity", req, cb)
   }
 
   /**
@@ -346,6 +403,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取共享单元列表。
+   */
+  async DescribeShareUnits(
+    req: DescribeShareUnitsRequest,
+    cb?: (error: string, rep: DescribeShareUnitsResponse) => void
+  ): Promise<DescribeShareUnitsResponse> {
+    return this.request("DescribeShareUnits", req, cb)
+  }
+
+  /**
    * 获取组织成员的授权策略列表
    */
   async DescribeOrganizationMemberPolicies(
@@ -386,16 +453,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加组织成员访问授权
-   */
-  async CreateOrganizationMemberAuthIdentity(
-    req: CreateOrganizationMemberAuthIdentityRequest,
-    cb?: (error: string, rep: CreateOrganizationMemberAuthIdentityResponse) => void
-  ): Promise<CreateOrganizationMemberAuthIdentityResponse> {
-    return this.request("CreateOrganizationMemberAuthIdentity", req, cb)
-  }
-
-  /**
    * 添加共享单元资源
    */
   async AddShareUnitResources(
@@ -403,6 +460,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddShareUnitResourcesResponse) => void
   ): Promise<AddShareUnitResourcesResponse> {
     return this.request("AddShareUnitResources", req, cb)
+  }
+
+  /**
+   * 绑定策略
+   */
+  async AttachPolicy(
+    req: AttachPolicyRequest,
+    cb?: (error: string, rep: AttachPolicyResponse) => void
+  ): Promise<AttachPolicyResponse> {
+    return this.request("AttachPolicy", req, cb)
   }
 
   /**
@@ -456,6 +523,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解绑策略
+   */
+  async DetachPolicy(
+    req: DetachPolicyRequest,
+    cb?: (error: string, rep: DetachPolicyResponse) => void
+  ): Promise<DetachPolicyResponse> {
+    return this.request("DetachPolicy", req, cb)
+  }
+
+  /**
    * 添加组织身份
    */
   async CreateOrganizationIdentity(
@@ -506,6 +583,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启用策略类型
+   */
+  async EnablePolicyType(
+    req: EnablePolicyTypeRequest,
+    cb?: (error: string, rep: EnablePolicyTypeResponse) => void
+  ): Promise<EnablePolicyTypeResponse> {
+    return this.request("EnablePolicyType", req, cb)
+  }
+
+  /**
    * 创建组织成员
    */
   async CreateOrganizationMember(
@@ -533,6 +620,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddShareUnitResponse) => void
   ): Promise<AddShareUnitResponse> {
     return this.request("AddShareUnit", req, cb)
+  }
+
+  /**
+   * 删除共享单元。
+   */
+  async DeleteShareUnit(
+    req: DeleteShareUnitRequest,
+    cb?: (error: string, rep: DeleteShareUnitResponse) => void
+  ): Promise<DeleteShareUnitResponse> {
+    return this.request("DeleteShareUnit", req, cb)
+  }
+
+  /**
+   * 本接口（ListPolicies）可用于查询查看策略列表数据
+   */
+  async ListPolicies(
+    req: ListPoliciesRequest,
+    cb?: (error: string, rep: ListPoliciesResponse) => void
+  ): Promise<ListPoliciesResponse> {
+    return this.request("ListPolicies", req, cb)
   }
 
   /**
@@ -566,6 +673,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribePolicyConfig）可用于查询企业组织策略配置
+   */
+  async DescribePolicyConfig(
+    req: DescribePolicyConfigRequest,
+    cb?: (error: string, rep: DescribePolicyConfigResponse) => void
+  ): Promise<DescribePolicyConfigResponse> {
+    return this.request("DescribePolicyConfig", req, cb)
+  }
+
+  /**
    * 获取组织节点列表
    */
   async DescribeOrganizationNodes(
@@ -576,13 +693,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取共享单元列表。
+   * 删除策略
    */
-  async DescribeShareUnits(
-    req: DescribeShareUnitsRequest,
-    cb?: (error: string, rep: DescribeShareUnitsResponse) => void
-  ): Promise<DescribeShareUnitsResponse> {
-    return this.request("DescribeShareUnits", req, cb)
+  async DeletePolicy(
+    req: DeletePolicyRequest,
+    cb?: (error: string, rep: DeletePolicyResponse) => void
+  ): Promise<DeletePolicyResponse> {
+    return this.request("DeletePolicy", req, cb)
   }
 
   /**
@@ -596,6 +713,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建一个特殊类型的策略，你可以关联到企业组织Root节点、企业单元或者企业的成员账号。
+   */
+  async CreatePolicy(
+    req: CreatePolicyRequest,
+    cb?: (error: string, rep: CreatePolicyResponse) => void
+  ): Promise<CreatePolicyResponse> {
+    return this.request("CreatePolicy", req, cb)
+  }
+
+  /**
    * 创建组织成员访问授权策略
    */
   async CreateOrganizationMemberPolicy(
@@ -606,6 +733,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ListTargetsForPolicy）查询某个指定策略关联的目标列表
+   */
+  async ListTargetsForPolicy(
+    req: ListTargetsForPolicyRequest,
+    cb?: (error: string, rep: ListTargetsForPolicyResponse) => void
+  ): Promise<ListTargetsForPolicyResponse> {
+    return this.request("ListTargetsForPolicy", req, cb)
+  }
+
+  /**
    * 删除组织成员访问授权
    */
   async DeleteOrganizationMemberAuthIdentity(
@@ -613,5 +750,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void
   ): Promise<DeleteOrganizationMemberAuthIdentityResponse> {
     return this.request("DeleteOrganizationMemberAuthIdentity", req, cb)
+  }
+
+  /**
+   * 编辑策略
+   */
+  async UpdatePolicy(
+    req: UpdatePolicyRequest,
+    cb?: (error: string, rep: UpdatePolicyResponse) => void
+  ): Promise<UpdatePolicyResponse> {
+    return this.request("UpdatePolicy", req, cb)
   }
 }

@@ -68,6 +68,16 @@ it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ModifyProductCloudStorageAIService", async function () {
+    try {
+       const data = await client.ModifyProductCloudStorageAIService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetProjectList", async function () {
     try {
        const data = await client.GetProjectList({})
@@ -198,6 +208,16 @@ it("iotexplorer.v20190423.ModifyFenceBind", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeProductCloudStorageAIService", async function () {
+    try {
+       const data = await client.DescribeProductCloudStorageAIService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribePackageConsumeTasks", async function () {
     try {
        const data = await client.DescribePackageConsumeTasks({})
@@ -288,9 +308,9 @@ it("iotexplorer.v20190423.DeleteTopicRule", async function () {
     }
 })
 
-it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageAIService", async function () {
     try {
-       const data = await client.PublishRRPCMessage({})
+       const data = await client.DescribeCloudStorageAIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +708,16 @@ it("iotexplorer.v20190423.CreateTopicPolicy", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
+    try {
+       const data = await client.PublishRRPCMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeCloudStorage", async function () {
     try {
        const data = await client.DescribeCloudStorage({})
@@ -831,6 +861,16 @@ it("iotexplorer.v20190423.DisableTopicRule", async function () {
 it("iotexplorer.v20190423.UnbindDevices", async function () {
     try {
        const data = await client.UnbindDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyCloudStorageAIService", async function () {
+    try {
+       const data = await client.ModifyCloudStorageAIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,6 +1038,16 @@ it("iotexplorer.v20190423.ResetCloudStorageEvent", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorageAIServiceCallback", async function () {
+    try {
+       const data = await client.DescribeCloudStorageAIServiceCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifySpaceProperty", async function () {
     try {
        const data = await client.ModifySpaceProperty({})
@@ -1071,6 +1121,26 @@ it("iotexplorer.v20190423.DescribeCloudStorageStreamData", async function () {
 it("iotexplorer.v20190423.DeletePositionFence", async function () {
     try {
        const data = await client.DeletePositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyCloudStorageAIServiceCallback", async function () {
+    try {
+       const data = await client.ModifyCloudStorageAIServiceCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStorageAIServiceTasks", async function () {
+    try {
+       const data = await client.DescribeCloudStorageAIServiceTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

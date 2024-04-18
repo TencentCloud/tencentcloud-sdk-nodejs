@@ -1227,6 +1227,48 @@ export interface SlowQueriesItem {
      * sql语句md5
      */
     SqlMd5?: string;
+    /**
+     * 远程读取次数
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncReadCountRemote?: number;
+    /**
+     * 远程读取的字节数
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncReadBytesRemote?: number;
+    /**
+     * 远程读取所花费的时间（微秒）
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncReadTimeRemote?: number;
+    /**
+     * 远程写入次数
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncWriteCountRemote?: number;
+    /**
+     * 远程写入的字节数。
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncWriteBytesRemote?: number;
+    /**
+     * 远程写入所花费的时间（微秒）。
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncWriteTimeRemote?: number;
+    /**
+     * 事务提交延迟（微秒）
+  数据库内核版本大于3.1.12
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TrxCommitDelay?: number;
 }
 /**
  * 数据库代理组详细信息

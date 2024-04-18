@@ -3937,6 +3937,11 @@ export interface NodePool {
    */
   DesiredNodesNum?: number
   /**
+   * 运行时描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuntimeConfig?: RuntimeConfig
+  /**
    * 节点池osName
 注意：此字段可能返回 null，表示取不到有效值。
    */

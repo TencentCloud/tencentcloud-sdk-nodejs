@@ -38,6 +38,7 @@ import {
   GetEventBusRequest,
   UpdateConnectionRequest,
   OutputStructParam,
+  Tag,
   GetRuleRequest,
   LogFilter,
   APIGWParams,

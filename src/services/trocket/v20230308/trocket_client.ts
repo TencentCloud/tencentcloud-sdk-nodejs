@@ -34,7 +34,7 @@ import {
   PublicAccessRule,
   VpcInfo,
   DescribeMQTTProductSKUListResponse,
-  DescribeTopicStatsOpResponse,
+  DescribeRoleListRequest,
   DescribeMQTTClientResponse,
   DescribeMQTTMessageListResponse,
   DescribeMQTTProductSKUListRequest,
@@ -121,7 +121,6 @@ import {
   DeleteConsumerGroupResponse,
   Endpoint,
   ModifyMQTTTopicRequest,
-  DescribeTopicStatsOpRequest,
   RoleItem,
   MQTTTopicItem,
   DescribeConsumerGroupListResponse,
@@ -133,7 +132,6 @@ import {
   DescribeMQTTTopicResponse,
   DescribeInstanceRequest,
   IpRule,
-  DescribeRoleListRequest,
 } from "./trocket_models"
 
 /**
@@ -254,16 +252,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
   ): Promise<ImportSourceClusterTopicsResponse> {
     return this.request("ImportSourceClusterTopics", req, cb)
-  }
-
-  /**
-   * 运营端查询topicStata
-   */
-  async DescribeTopicStatsOp(
-    req: DescribeTopicStatsOpRequest,
-    cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void
-  ): Promise<DescribeTopicStatsOpResponse> {
-    return this.request("DescribeTopicStatsOp", req, cb)
   }
 
   /**

@@ -717,6 +717,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("DescribeExtendedServiceAuthDetail", req, cb);
     }
     /**
+     * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
+     */
+    async DescribeBillUsage(req, cb) {
+        return this.request("DescribeBillUsage", req, cb);
+    }
+    /**
      * 此接口（ModifyIntegrationDepartment）用于更新企业的部门信息，支持更新部门名称、客户系统部门ID和部门序号等信息。
      */
     async ModifyIntegrationDepartment(req, cb) {

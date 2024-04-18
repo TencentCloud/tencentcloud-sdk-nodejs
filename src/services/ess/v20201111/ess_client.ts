@@ -46,6 +46,7 @@ import {
   DescribeThirdPartyAuthCodeResponse,
   HasAuthUser,
   DisableUserAutoSignResponse,
+  OrgBillSummary,
   ModifyExtendedServiceRequest,
   CancelUserAutoSignEnableUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
@@ -174,6 +175,8 @@ import {
   Recipient,
   DescribeFlowEvidenceReportRequest,
   FailedCreateRoleData,
+  DescribeBillUsageRequest,
+  DescribeBillUsageResponse,
   ApproverInfo,
   CreateFlowSignReviewResponse,
   ModifyIntegrationDepartmentRequest,
@@ -186,6 +189,7 @@ import {
   CreateBatchOrganizationRegistrationTasksRequest,
   FailedCreateStaffData,
   CreateExtendedServiceAuthInfosResponse,
+  SubOrgBillUsage,
   ApproverRestriction,
   CreateWebThemeConfigRequest,
   ApproverItem,
@@ -194,6 +198,7 @@ import {
   CreatePrepareFlowResponse,
   ModifyIntegrationDepartmentResponse,
   GetTaskResultApiResponse,
+  SubOrgBillSummary,
   CancelMultiFlowSignQRCodeRequest,
   DeleteIntegrationDepartmentRequest,
   UserFlowType,
@@ -1135,6 +1140,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeExtendedServiceAuthDetailResponse) => void
   ): Promise<DescribeExtendedServiceAuthDetailResponse> {
     return this.request("DescribeExtendedServiceAuthDetail", req, cb)
+  }
+
+  /**
+   * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
+   */
+  async DescribeBillUsage(
+    req: DescribeBillUsageRequest,
+    cb?: (error: string, rep: DescribeBillUsageResponse) => void
+  ): Promise<DescribeBillUsageResponse> {
+    return this.request("DescribeBillUsage", req, cb)
   }
 
   /**

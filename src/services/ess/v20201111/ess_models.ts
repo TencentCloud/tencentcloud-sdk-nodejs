@@ -798,6 +798,45 @@ export interface DisableUserAutoSignResponse {
 }
 
 /**
+ * 企业套餐余额情况
+ */
+export interface OrgBillSummary {
+  /**
+   * 套餐总数
+   */
+  Total?: number
+  /**
+   * 套餐使用数
+   */
+  Used?: number
+  /**
+   * 套餐剩余数
+   */
+  Available?: number
+  /**
+   * 套餐类型
+对应关系如下:
+<ul>
+<li>**CloudEnterprise**: 企业版合同</li>
+<li>**SingleSignature**: 单方签章</li>
+<li>**CloudProve**: 签署报告</li>
+<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
+<li>**ChannelWeCard**: 微工卡</li>
+<li>**SignFlow**: 合同套餐</li>
+<li>**SignFace**: 签署意愿（人脸识别）</li>
+<li>**SignPassword**: 签署意愿（密码）</li>
+<li>**SignSMS**: 签署意愿（短信）</li>
+<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
+<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
+<li>**OrgEssAuth**: 签署企业实名</li>
+<li>**FlowNotify**: 短信通知</li>
+<li>**AuthService**: 企业工商信息查询</li>
+</ul>
+   */
+  QuotaType?: string
+}
+
+/**
  * ModifyExtendedService请求参数结构体
  */
 export interface ModifyExtendedServiceRequest {
@@ -5819,6 +5858,47 @@ export interface FailedCreateRoleData {
 }
 
 /**
+ * DescribeBillUsage请求参数结构体
+ */
+export interface DescribeBillUsageRequest {
+  /**
+   * 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于90天
+   */
+  StartTime: string
+  /**
+   * 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于90天
+   */
+  EndTime: string
+  /**
+   * 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:<ul><li>**CloudEnterprise**: 企业版合同</li><li>**SingleSignature**: 单方签章</li><li>**CloudProve**: 签署报告</li><li>**CloudOnlineSign**: 腾讯会议在线签约</li><li>**ChannelWeCard**: 微工卡</li><li>**SignFlow**: 合同套餐</li><li>**SignFace**: 签署意愿（人脸识别）</li><li>**SignPassword**: 签署意愿（密码）</li><li>**SignSMS**: 签署意愿（短信）</li><li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li><li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li><li>**OrgEssAuth**: 签署企业实名</li><li>**FlowNotify**: 短信通知</li><li>**AuthService**: 企业工商信息查询</li></ul>
+   */
+  QuotaType?: string
+  /**
+   * 是否展示集团子企业的明细，默认否
+   */
+  DisplaySubEnterprise?: boolean
+}
+
+/**
+ * DescribeBillUsage返回参数结构体
+ */
+export interface DescribeBillUsageResponse {
+  /**
+   * 企业套餐余额及使用情况
+   */
+  Summary?: Array<OrgBillSummary>
+  /**
+   * 集团子企业套餐使用情况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubOrgSummary?: Array<SubOrgBillSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 合同参与者信息。
  */
 export interface ApproverInfo {
@@ -6257,6 +6337,37 @@ export interface CreateExtendedServiceAuthInfosResponse {
 }
 
 /**
+ * 集团子企业使用集团主企业的套餐使用情况
+ */
+export interface SubOrgBillUsage {
+  /**
+   * 套餐使用数
+   */
+  Used?: number
+  /**
+   * 套餐类型
+对应关系如下:
+<ul>
+<li>**CloudEnterprise**: 企业版合同</li>
+<li>**SingleSignature**: 单方签章</li>
+<li>**CloudProve**: 签署报告</li>
+<li>**CloudOnlineSign**: 腾讯会议在线签约</li>
+<li>**ChannelWeCard**: 微工卡</li>
+<li>**SignFlow**: 合同套餐</li>
+<li>**SignFace**: 签署意愿（人脸识别）</li>
+<li>**SignPassword**: 签署意愿（密码）</li>
+<li>**SignSMS**: 签署意愿（短信）</li>
+<li>**PersonalEssAuth**: 签署人实名（腾讯电子签认证）</li>
+<li>**PersonalThirdAuth**: 签署人实名（信任第三方认证）</li>
+<li>**OrgEssAuth**: 签署企业实名</li>
+<li>**FlowNotify**: 短信通知</li>
+<li>**AuthService**: 企业工商信息查询</li>
+</ul>
+   */
+  QuotaType?: string
+}
+
+/**
  * 指定签署人限制项
  */
 export interface ApproverRestriction {
@@ -6472,6 +6583,20 @@ export interface GetTaskResultApiResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 子企业套餐使用情况
+ */
+export interface SubOrgBillSummary {
+  /**
+   * 子企业名称
+   */
+  OrganizationName?: string
+  /**
+   *
+   */
+  Usage?: Array<SubOrgBillUsage>
 }
 
 /**

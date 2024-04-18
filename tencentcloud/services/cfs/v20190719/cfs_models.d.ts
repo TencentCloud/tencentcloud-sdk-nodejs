@@ -383,7 +383,7 @@ export interface FileSystemInfo {
      */
     SizeByte?: number;
     /**
-     * 文件系统最大空间限制。单位:GiB
+     * 文件系统空间限制。单位:GiB
      */
     SizeLimit?: number;
     /**
@@ -435,7 +435,7 @@ export interface FileSystemInfo {
      */
     BandwidthLimit?: number;
     /**
-     * 文件系统总容量
+     * 文件系统容量规格上限
   单位:GiB
      */
     Capacity?: number;
