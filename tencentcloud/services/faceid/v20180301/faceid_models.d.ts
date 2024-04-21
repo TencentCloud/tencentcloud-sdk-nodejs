@@ -1450,16 +1450,32 @@ export interface PhoneVerificationResponse {
   -9: 没有记录
   -11: 验证中心服务繁忙
      */
-    Result: string;
+    Result?: string;
     /**
      * 业务结果描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * 运营商名称。
   取值范围为["","移动","电信","联通"]
      */
-    Isp: string;
+    Isp?: string;
+    /**
+     * 业务结果详细信息。（当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回）
+  
+  枚举值：
+  
+  手机号码与姓名一致，与身份证号不一致；
+  
+  手机号码身份证号一致，与姓名不一致；
+  
+  手机号码与姓名和身份证号均不一致；
+  
+  姓名和身份证号不一致；
+  
+  其他不一致。
+     */
+    ResultDetail?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2387,6 +2403,12 @@ export interface PhoneVerificationRequest {
      * 手机号
      */
     Phone: string;
+    /**
+     * 验证模式（详版/简版）。简版与详版价格不一致，详见[价格说明](https://cloud.tencent.com/document/product/1007/84321)。
+  
+  枚举值：0（简版），1（详版）。默认值为0。
+     */
+    VerifyMode?: string;
     /**
      * 有加密需求的用户，传入kms的CiphertextBlob，关于数据加密可查阅 <a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
      */

@@ -2164,6 +2164,20 @@ export interface TSEInstanceDetail {
     CertificateList?: Array<GatewayCertificate>;
 }
 /**
+ * DescribeDeleteCertificatesTaskResult返回参数结构体
+ */
+export interface DescribeDeleteCertificatesTaskResultResponse {
+    /**
+     * 批量删除证书异步任务结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeleteTaskResult?: Array<DeleteTaskResult>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 云资源地域列表
  */
 export interface ResourceTypeRegions {
@@ -3112,17 +3126,36 @@ export interface CommitCertificateInformationRequest {
     VerifyType?: string;
 }
 /**
- * SubmitAuditManager返回参数结构体
+ * 批量删除证书异步任务结果
  */
-export interface SubmitAuditManagerResponse {
+export interface DeleteTaskResult {
     /**
-     * 管理人ID
+     * 任务ID
      */
-    ManagerId: number;
+    TaskId?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 证书ID
      */
-    RequestId?: string;
+    CertId?: string;
+    /**
+     * 异步查询结果： 0表示任务进行中、 1表示任务成功、 2表示任务失败、3表示未授权服务角色导致任务失败、4表示有未解绑的云资源导致任务失败、5表示查询关联云资源超时导致任务失败
+     */
+    Status?: number;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
+    /**
+     * 当前结果缓存时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CacheTime?: string;
+    /**
+     * 包含的域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domains?: Array<string>;
 }
 /**
  * DescribeHostDeployRecordDetail请求参数结构体
@@ -3583,6 +3616,15 @@ export interface DescribeHostUpdateRecordDetailResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDeleteCertificatesTaskResult请求参数结构体
+ */
+export interface DescribeDeleteCertificatesTaskResultRequest {
+    /**
+     * DeleteCertificates接口返回的任务ID， 最大支持100个
+     */
+    TaskIds: Array<string>;
 }
 /**
  * DescribeHostUpdateRecord请求参数结构体
@@ -4196,6 +4238,19 @@ export interface ModifyCertificateResubmitResponse {
      * 证书ID。
      */
     CertificateId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * SubmitAuditManager返回参数结构体
+ */
+export interface SubmitAuditManagerResponse {
+    /**
+     * 管理人ID
+     */
+    ManagerId: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

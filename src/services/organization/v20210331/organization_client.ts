@@ -21,13 +21,16 @@ import {
   DescribeShareUnitResourcesResponse,
   EnablePolicyTypeResponse,
   ListTargetsForPolicyResponse,
+  ListNonCompliantResourceResponse,
   DeleteOrganizationRequest,
+  TagComplianceDetails,
   DescribePolicyConfigResponse,
   QuitOrganizationResponse,
   ListOrganizationIdentityRequest,
   DeleteOrganizationMembersRequest,
   CreateOrganizationResponse,
   AddShareUnitResourcesResponse,
+  IdentityPolicy,
   AddOrganizationNodeResponse,
   DescribeOrganizationFinancialByMonthResponse,
   OrgFinancialByMonth,
@@ -39,8 +42,10 @@ import {
   CreateOrganizationIdentityRequest,
   DeletePolicyResponse,
   DescribeOrganizationResponse,
+  ListNonCompliantResourceRequest,
   DisablePolicyTypeResponse,
   DescribeOrganizationMemberPoliciesRequest,
+  DescribeEffectivePolicyRequest,
   DeleteOrganizationMembersPolicyResponse,
   UpdateOrganizationIdentityRequest,
   ShareUnitMember,
@@ -48,10 +53,9 @@ import {
   DeleteOrganizationResponse,
   OrgMemberAuthAccount,
   MemberMainInfo,
-  DescribeShareUnitResourcesRequest,
-  DeleteShareUnitResourcesRequest,
+  DeleteOrganizationMembersResponse,
+  DescribeOrganizationMembersResponse,
   MemberIdentity,
-  UpdateShareUnitResponse,
   UpdateOrganizationNodeRequest,
   DescribeShareAreasResponse,
   DescribeOrganizationAuthNodeResponse,
@@ -59,7 +63,7 @@ import {
   BindOrganizationMemberAuthAccountRequest,
   DescribeShareUnitsResponse,
   UpdateOrganizationMemberEmailBindResponse,
-  DeleteOrganizationMembersResponse,
+  DeleteShareUnitResourcesRequest,
   ManagerShareUnit,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberAuthIdentityResponse,
@@ -74,7 +78,7 @@ import {
   DeleteOrganizationNodesRequest,
   EnablePolicyTypeRequest,
   CreatePolicyResponse,
-  IdentityPolicy,
+  EffectivePolicy,
   AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
   DeletePolicyRequest,
@@ -89,9 +93,10 @@ import {
   DescribeShareUnitMembersResponse,
   DescribeShareAreasRequest,
   DescribeOrganizationMemberAuthAccountsResponse,
+  Tags,
   OrgIdentity,
   DescribeOrganizationMembersRequest,
-  DescribeOrganizationMembersResponse,
+  UpdateShareUnitResponse,
   ListPoliciesForTargetRequest,
   DeleteOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationMemberEmailBindRequest,
@@ -101,6 +106,7 @@ import {
   OrgPermission,
   DetachPolicyRequest,
   DisablePolicyTypeRequest,
+  DescribeEffectivePolicyResponse,
   AddOrganizationMemberEmailResponse,
   AddShareUnitMembersResponse,
   CreateOrganizationMemberPolicyRequest,
@@ -111,10 +117,12 @@ import {
   OrgProductFinancial,
   DetachPolicyResponse,
   AddShareUnitResponse,
+  DescribeShareUnitResourcesRequest,
   DescribeOrganizationFinancialByProductResponse,
   ListPolicyNode,
   DescribeOrganizationFinancialByProductRequest,
   OrgMemberPolicy,
+  ResourceTagMapping,
   CreateOrganizationMemberPolicyResponse,
   DescribeShareUnitMembersRequest,
   CancelOrganizationMemberAuthAccountResponse,
@@ -393,6 +401,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询目标关联的有效策略
+   */
+  async DescribeEffectivePolicy(
+    req: DescribeEffectivePolicyRequest,
+    cb?: (error: string, rep: DescribeEffectivePolicyResponse) => void
+  ): Promise<DescribeEffectivePolicyResponse> {
+    return this.request("DescribeEffectivePolicy", req, cb)
+  }
+
+  /**
    * 删除共享单元资源
    */
   async DeleteShareUnitResources(
@@ -460,6 +478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddShareUnitResourcesResponse) => void
   ): Promise<AddShareUnitResourcesResponse> {
     return this.request("AddShareUnitResources", req, cb)
+  }
+
+  /**
+   * 获取成员标签检测不合规资源列表
+   */
+  async ListNonCompliantResource(
+    req: ListNonCompliantResourceRequest,
+    cb?: (error: string, rep: ListNonCompliantResourceResponse) => void
+  ): Promise<ListNonCompliantResourceResponse> {
+    return this.request("ListNonCompliantResource", req, cb)
   }
 
   /**

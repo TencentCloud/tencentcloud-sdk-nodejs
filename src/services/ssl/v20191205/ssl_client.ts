@@ -82,6 +82,7 @@ import {
   DescribeCertificateResponse,
   PackageTransferOutInfo,
   TSEInstanceDetail,
+  DescribeDeleteCertificatesTaskResultResponse,
   ResourceTypeRegions,
   DeleteManagerRequest,
   DescribeHostUpdateRecordResponse,
@@ -117,7 +118,7 @@ import {
   Certificate,
   CreateCertificateByPackageRequest,
   CommitCertificateInformationRequest,
-  SubmitAuditManagerResponse,
+  DeleteTaskResult,
   DescribeHostDeployRecordDetailRequest,
   UpdateCertificateInstanceRequest,
   ReplaceCertificateRequest,
@@ -139,6 +140,7 @@ import {
   Filter,
   RevokeDomainValidateAuths,
   DescribeHostUpdateRecordDetailResponse,
+  DescribeDeleteCertificatesTaskResultRequest,
   DescribeHostUpdateRecordRequest,
   DescribeHostClbInstanceListRequest,
   VerifyManagerRequest,
@@ -165,6 +167,7 @@ import {
   UploadRevokeLetterResponse,
   CancelAuditCertificateRequest,
   ModifyCertificateResubmitResponse,
+  SubmitAuditManagerResponse,
   UpdateCertificateInstanceResponse,
   UploadCertificateRequest,
   OperationLog,
@@ -580,6 +583,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（RevokeCertificate）用于吊销证书。
+   */
+  async RevokeCertificate(
+    req: RevokeCertificateRequest,
+    cb?: (error: string, rep: RevokeCertificateResponse) => void
+  ): Promise<RevokeCertificateResponse> {
+    return this.request("RevokeCertificate", req, cb)
+  }
+
+  /**
    * 批量修改证书所属项目。
    */
   async ModifyCertificateProject(
@@ -730,13 +743,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RevokeCertificate）用于吊销证书。
+   * 查询批量删除任务结果
    */
-  async RevokeCertificate(
-    req: RevokeCertificateRequest,
-    cb?: (error: string, rep: RevokeCertificateResponse) => void
-  ): Promise<RevokeCertificateResponse> {
-    return this.request("RevokeCertificate", req, cb)
+  async DescribeDeleteCertificatesTaskResult(
+    req: DescribeDeleteCertificatesTaskResultRequest,
+    cb?: (error: string, rep: DescribeDeleteCertificatesTaskResultResponse) => void
+  ): Promise<DescribeDeleteCertificatesTaskResultResponse> {
+    return this.request("DescribeDeleteCertificatesTaskResult", req, cb)
   }
 
   /**

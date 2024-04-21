@@ -3213,6 +3213,10 @@ export interface CreateConsoleLoginUrlRequest {
 注意：`目前仅支持 H5 和 PC`。
    */
   AutoJumpUrl?: string
+  /**
+   * 是否展示头顶导航栏  <ul><li> **ENABLE** : (默认)进入web控制台展示头顶导航栏</li> <li> **DISABLE** : 进入web控制台不展示头顶导航栏</li></ul> 注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。
+   */
+  TopNavigationStatus?: string
 }
 
 /**

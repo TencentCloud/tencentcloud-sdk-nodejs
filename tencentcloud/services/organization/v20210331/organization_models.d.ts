@@ -45,9 +45,48 @@ export interface ListTargetsForPolicyResponse {
     RequestId?: string;
 }
 /**
+ * ListNonCompliantResource返回参数结构体
+ */
+export interface ListNonCompliantResourceResponse {
+    /**
+     * 资源及标签合规信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<ResourceTagMapping>;
+    /**
+     * 获取的下一页的Token值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PaginationToken?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteOrganization请求参数结构体
  */
 export declare type DeleteOrganizationRequest = null;
+/**
+ * 标签合规信息
+ */
+export interface TagComplianceDetails {
+    /**
+     * 合规状态。true-合规，false-不合规
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComplianceStatus: boolean;
+    /**
+     * 值不合规的标签键列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeysWithNonCompliantValues: Array<string>;
+    /**
+     * 键不合规的标签键列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NonCompliantKeys: Array<string>;
+}
 /**
  * DescribePolicyConfig返回参数结构体
  */
@@ -133,6 +172,29 @@ export interface AddShareUnitResourcesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 组织身份策略
+ */
+export interface IdentityPolicy {
+    /**
+     * CAM预设策略ID。PolicyType 为预设策略时有效且必选
+     */
+    PolicyId?: number;
+    /**
+     * CAM预设策略名称。PolicyType 为预设策略时有效且必选
+     */
+    PolicyName?: string;
+    /**
+     * 策略类型。取值 1-自定义策略  2-预设策略；默认值2
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyType?: number;
+    /**
+     * 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyDocument?: string;
 }
 /**
  * AddOrganizationNode返回参数结构体
@@ -392,6 +454,28 @@ export interface DescribeOrganizationResponse {
     RequestId?: string;
 }
 /**
+ * ListNonCompliantResource请求参数结构体
+ */
+export interface ListNonCompliantResourceRequest {
+    /**
+     * 限制数目。取值范围：1~50。
+     */
+    MaxResults: number;
+    /**
+     * 成员Uin。
+     */
+    MemberUin: number;
+    /**
+     * 从上一页的响应中获取的下一页的Token值。
+  如果是第一次请求，设置为空。
+     */
+    PaginationToken?: string;
+    /**
+     * 标签键。
+     */
+    TagKey?: string;
+}
+/**
  * DisablePolicyType返回参数结构体
  */
 export interface DisablePolicyTypeResponse {
@@ -420,6 +504,15 @@ export interface DescribeOrganizationMemberPoliciesRequest {
      * 搜索关键字。可用于策略名或描述搜索
      */
     SearchKey?: string;
+}
+/**
+ * DescribeEffectivePolicy请求参数结构体
+ */
+export interface DescribeEffectivePolicyRequest {
+    /**
+     * 账号uin或者节点id。
+     */
+    TargetId: number;
 }
 /**
  * DeleteOrganizationMembersPolicy返回参数结构体
@@ -553,54 +646,30 @@ export interface MemberMainInfo {
     MemberName: string;
 }
 /**
- * DescribeShareUnitResources请求参数结构体
+ * DeleteOrganizationMembers返回参数结构体
  */
-export interface DescribeShareUnitResourcesRequest {
+export interface DeleteOrganizationMembersResponse {
     /**
-     * 共享单元ID。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    UnitId: string;
-    /**
-     * 共享单元地域。
-     */
-    Area: string;
-    /**
-     * 偏移量。取值是limit的整数倍，默认值 : 0
-     */
-    Offset: number;
-    /**
-     * 限制数目。取值范围：1~50。
-     */
-    Limit: number;
-    /**
-     * 搜索关键字。支持产品资源ID搜索。
-     */
-    SearchKey?: string;
-    /**
-     * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
-     */
-    Type?: string;
+    RequestId?: string;
 }
 /**
- * DeleteShareUnitResources请求参数结构体
+ * DescribeOrganizationMembers返回参数结构体
  */
-export interface DeleteShareUnitResourcesRequest {
+export interface DescribeOrganizationMembersResponse {
     /**
-     * 共享单元ID。
+     * 成员列表。
      */
-    UnitId: string;
+    Items?: Array<OrgMember>;
     /**
-     * 共享单元地域。
+     * 总数目。
      */
-    Area: string;
+    Total?: number;
     /**
-     * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Type: string;
-    /**
-     * 共享资源列表。最大10个。
-     */
-    Resources: Array<ShareResource>;
+    RequestId?: string;
 }
 /**
  * 成员管理身份
@@ -616,15 +685,6 @@ export interface MemberIdentity {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityAliasName: string;
-}
-/**
- * UpdateShareUnit返回参数结构体
- */
-export interface UpdateShareUnitResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * UpdateOrganizationNode请求参数结构体
@@ -740,13 +800,25 @@ export interface UpdateOrganizationMemberEmailBindResponse {
     RequestId?: string;
 }
 /**
- * DeleteOrganizationMembers返回参数结构体
+ * DeleteShareUnitResources请求参数结构体
  */
-export interface DeleteOrganizationMembersResponse {
+export interface DeleteShareUnitResourcesRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 共享单元ID。
      */
-    RequestId?: string;
+    UnitId: string;
+    /**
+     * 共享单元地域。
+     */
+    Area: string;
+    /**
+     * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
+     */
+    Type: string;
+    /**
+     * 共享资源列表。最大10个。
+     */
+    Resources: Array<ShareResource>;
 }
 /**
  * 我的共享单元列表详情
@@ -1004,27 +1076,21 @@ export interface CreatePolicyResponse {
     RequestId?: string;
 }
 /**
- * 组织身份策略
+ * 有效策略。
  */
-export interface IdentityPolicy {
+export interface EffectivePolicy {
     /**
-     * CAM预设策略ID。PolicyType 为预设策略时有效且必选
+     * 目标ID。
      */
-    PolicyId?: number;
+    TargetId: number;
     /**
-     * CAM预设策略名称。PolicyType 为预设策略时有效且必选
+     * 有效策略内容。
      */
-    PolicyName?: string;
+    PolicyContent: string;
     /**
-     * 策略类型。取值 1-自定义策略  2-预设策略；默认值2
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 有效策略更新时间。
      */
-    PolicyType?: number;
-    /**
-     * 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PolicyDocument?: string;
+    LastUpdatedTimestamp: number;
 }
 /**
  * AddOrganizationMemberEmail请求参数结构体
@@ -1266,6 +1332,21 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
     RequestId?: string;
 }
 /**
+ * 标签键值对
+ */
+export interface Tags {
+    /**
+     * 标签键。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey: string;
+    /**
+     * 标签值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue: string;
+}
+/**
  * 组织身份
  */
 export interface OrgIdentity {
@@ -1330,17 +1411,9 @@ export interface DescribeOrganizationMembersRequest {
     Product?: string;
 }
 /**
- * DescribeOrganizationMembers返回参数结构体
+ * UpdateShareUnit返回参数结构体
  */
-export interface DescribeOrganizationMembersResponse {
-    /**
-     * 成员列表。
-     */
-    Items?: Array<OrgMember>;
-    /**
-     * 总数目。
-     */
-    Total?: number;
+export interface UpdateShareUnitResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1505,6 +1578,20 @@ export interface DisablePolicyTypeRequest {
     PolicyType: string;
 }
 /**
+ * DescribeEffectivePolicy返回参数结构体
+ */
+export interface DescribeEffectivePolicyResponse {
+    /**
+     * 有效策略。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EffectivePolicy?: EffectivePolicy;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * AddOrganizationMemberEmail返回参数结构体
  */
 export interface AddOrganizationMemberEmailResponse {
@@ -1637,6 +1724,35 @@ export interface AddShareUnitResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeShareUnitResources请求参数结构体
+ */
+export interface DescribeShareUnitResourcesRequest {
+    /**
+     * 共享单元ID。
+     */
+    UnitId: string;
+    /**
+     * 共享单元地域。
+     */
+    Area: string;
+    /**
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
+    Offset: number;
+    /**
+     * 限制数目。取值范围：1~50。
+     */
+    Limit: number;
+    /**
+     * 搜索关键字。支持产品资源ID搜索。
+     */
+    SearchKey?: string;
+    /**
+     * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
+     */
+    Type?: string;
 }
 /**
  * DescribeOrganizationFinancialByProduct返回参数结构体
@@ -1772,6 +1888,27 @@ export interface OrgMemberPolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime: string;
+}
+/**
+ * 资源及关联的标签
+ */
+export interface ResourceTagMapping {
+    /**
+     * 资源六段式。腾讯云使用资源六段式描述一个资源。
+  例如：qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resource: string;
+    /**
+     * 合规详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComplianceDetails: TagComplianceDetails;
+    /**
+     * 资源标签。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tags>;
 }
 /**
  * CreateOrganizationMemberPolicy返回参数结构体

@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     CreateConsumerGroup(req: CreateConsumerGroupRequest, cb?: (error: string, rep: CreateConsumerGroupResponse) => void): Promise<CreateConsumerGroupResponse>;
     /**
-     * 非对外接口，获取产品售卖规格
+     * 获取产品售卖规格
      */
     DescribeMQTTProductSKUList(req?: DescribeMQTTProductSKUListRequest, cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void): Promise<DescribeMQTTProductSKUListResponse>;
     /**
@@ -89,7 +89,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteRole(req: DeleteRoleRequest, cb?: (error: string, rep: DeleteRoleResponse) => void): Promise<DeleteRoleResponse>;
     /**
-     * 删除实例
+     * 删除MQTT实例
      */
     DeleteMQTTInstance(req: DeleteMQTTInstanceRequest, cb?: (error: string, rep: DeleteMQTTInstanceResponse) => void): Promise<DeleteMQTTInstanceResponse>;
     /**
@@ -101,7 +101,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMQTTTopic(req: DescribeMQTTTopicRequest, cb?: (error: string, rep: DescribeMQTTTopicResponse) => void): Promise<DescribeMQTTTopicResponse>;
     /**
-     * 为MQTT实例创建公网接入点
+     * 更新MQTT实例公网接入点
      */
     ModifyMQTTInsPublicEndpoint(req: ModifyMQTTInsPublicEndpointRequest, cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void): Promise<ModifyMQTTInsPublicEndpointResponse>;
     /**
@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
     /**
-     * 删除主题
+     * 删除MQTT主题
      */
     DeleteMQTTTopic(req: DeleteMQTTTopicRequest, cb?: (error: string, rep: DeleteMQTTTopicResponse) => void): Promise<DeleteMQTTTopicResponse>;
     /**

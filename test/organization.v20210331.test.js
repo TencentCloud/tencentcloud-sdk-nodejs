@@ -238,6 +238,16 @@ it("organization.v20210331.DeleteOrganizationNodes", async function () {
     }
 })
 
+it("organization.v20210331.DescribeEffectivePolicy", async function () {
+    try {
+       const data = await client.DescribeEffectivePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DeleteShareUnitResources", async function () {
     try {
        const data = await client.DeleteShareUnitResources({})
@@ -301,6 +311,16 @@ it("organization.v20210331.DescribeOrganizationFinancialByMember", async functio
 it("organization.v20210331.AddShareUnitResources", async function () {
     try {
        const data = await client.AddShareUnitResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.ListNonCompliantResource", async function () {
+    try {
+       const data = await client.ListNonCompliantResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -388,6 +388,16 @@ it("ssl.v20191205.UpdateCertificateRecordRetry", async function () {
     }
 })
 
+it("ssl.v20191205.RevokeCertificate", async function () {
+    try {
+       const data = await client.RevokeCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.ModifyCertificateProject", async function () {
     try {
        const data = await client.ModifyCertificateProject({})
@@ -538,9 +548,9 @@ it("ssl.v20191205.ApplyCertificate", async function () {
     }
 })
 
-it("ssl.v20191205.RevokeCertificate", async function () {
+it("ssl.v20191205.DescribeDeleteCertificatesTaskResult", async function () {
     try {
-       const data = await client.RevokeCertificate({})
+       const data = await client.DescribeDeleteCertificatesTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

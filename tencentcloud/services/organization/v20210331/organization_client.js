@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOrganizationNodes", req, cb);
     }
     /**
+     * 查询目标关联的有效策略
+     */
+    async DescribeEffectivePolicy(req, cb) {
+        return this.request("DescribeEffectivePolicy", req, cb);
+    }
+    /**
      * 删除共享单元资源
      */
     async DeleteShareUnitResources(req, cb) {
@@ -200,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddShareUnitResources(req, cb) {
         return this.request("AddShareUnitResources", req, cb);
+    }
+    /**
+     * 获取成员标签检测不合规资源列表
+     */
+    async ListNonCompliantResource(req, cb) {
+        return this.request("ListNonCompliantResource", req, cb);
     }
     /**
      * 绑定策略

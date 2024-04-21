@@ -83,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConsumerGroup", req, cb);
     }
     /**
-     * 非对外接口，获取产品售卖规格
+     * 获取产品售卖规格
      */
     async DescribeMQTTProductSKUList(req, cb) {
         return this.request("DescribeMQTTProductSKUList", req, cb);
@@ -147,7 +147,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRole", req, cb);
     }
     /**
-     * 删除实例
+     * 删除MQTT实例
      */
     async DeleteMQTTInstance(req, cb) {
         return this.request("DeleteMQTTInstance", req, cb);
@@ -165,7 +165,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMQTTTopic", req, cb);
     }
     /**
-     * 为MQTT实例创建公网接入点
+     * 更新MQTT实例公网接入点
      */
     async ModifyMQTTInsPublicEndpoint(req, cb) {
         return this.request("ModifyMQTTInsPublicEndpoint", req, cb);
@@ -210,7 +210,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstance", req, cb);
     }
     /**
-     * 删除主题
+     * 删除MQTT主题
      */
     async DeleteMQTTTopic(req, cb) {
         return this.request("DeleteMQTTTopic", req, cb);

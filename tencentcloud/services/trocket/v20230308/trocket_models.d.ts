@@ -428,6 +428,18 @@ export interface DescribeMQTTClientResponse {
      */
     MQTTClientSubscriptions?: Array<MQTTClientSubscription>;
     /**
+     * 服务端到客户端的流量统计
+     */
+    Inbound?: StatisticsReport;
+    /**
+     * 客户端到服务端的流量统计
+     */
+    OutBound?: StatisticsReport;
+    /**
+     * cleansession标志
+     */
+    CleanSession?: boolean;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -777,6 +789,15 @@ export interface DescribeMQTTInsPublicEndpointsResponse {
      * 公网访问规则
      */
     Rules?: Array<PublicAccessRule>;
+    /**
+     * 公网状态：
+      NORMAL-正常
+      CLOSING-关闭中
+      MODIFYING-修改中
+      CREATING-开启中
+      CLOSE-关闭
+     */
+    Status?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1523,6 +1544,11 @@ export interface MQTTEndpointItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: number;
+    /**
+     * 接入点ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ip?: string;
 }
 /**
  * DeleteMQTTUser返回参数结构体
@@ -2077,6 +2103,26 @@ export interface DescribeInstanceResponse {
     RequestId?: string;
 }
 /**
+ * MQTT客户端监控
+ */
+export interface PacketStatistics {
+    /**
+     * 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageType?: string;
+    /**
+     * 服务质量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Qos?: number;
+    /**
+     * 指标值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
+}
+/**
  * DeleteMQTTTopic返回参数结构体
  */
 export interface DeleteMQTTTopicResponse {
@@ -2460,6 +2506,21 @@ export interface ModifyMQTTTopicRequest {
      * 备注信息
      */
     Remark?: string;
+}
+/**
+ * MQTT客户端数据流量统计
+ */
+export interface StatisticsReport {
+    /**
+     * 字节数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bytes?: number;
+    /**
+     * 监控指标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<PacketStatistics>;
 }
 /**
  * 角色信息

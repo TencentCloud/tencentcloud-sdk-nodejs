@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCertificateRecordRetry", req, cb);
     }
     /**
+     * 本接口（RevokeCertificate）用于吊销证书。
+     */
+    async RevokeCertificate(req, cb) {
+        return this.request("RevokeCertificate", req, cb);
+    }
+    /**
      * 批量修改证书所属项目。
      */
     async ModifyCertificateProject(req, cb) {
@@ -340,10 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyCertificate", req, cb);
     }
     /**
-     * 本接口（RevokeCertificate）用于吊销证书。
+     * 查询批量删除任务结果
      */
-    async RevokeCertificate(req, cb) {
-        return this.request("RevokeCertificate", req, cb);
+    async DescribeDeleteCertificatesTaskResult(req, cb) {
+        return this.request("DescribeDeleteCertificatesTaskResult", req, cb);
     }
     /**
      * 查询管理人列表

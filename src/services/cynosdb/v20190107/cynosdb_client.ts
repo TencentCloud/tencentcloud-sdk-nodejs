@@ -165,6 +165,7 @@ import {
   ResumeServerlessResponse,
   SaleZone,
   SwitchProxyVpcResponse,
+  SlaveZoneAttrItem,
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,

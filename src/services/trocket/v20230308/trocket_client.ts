@@ -103,6 +103,7 @@ import {
   MQTTClientSubscription,
   ModifyTopicRequest,
   DescribeInstanceResponse,
+  PacketStatistics,
   DeleteMQTTTopicResponse,
   ModifyConsumerGroupResponse,
   DescribeMQTTInstanceCertRequest,
@@ -121,6 +122,7 @@ import {
   DeleteConsumerGroupResponse,
   Endpoint,
   ModifyMQTTTopicRequest,
+  StatisticsReport,
   RoleItem,
   MQTTTopicItem,
   DescribeConsumerGroupListResponse,
@@ -235,7 +237,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 非对外接口，获取产品售卖规格
+   * 获取产品售卖规格
    */
   async DescribeMQTTProductSKUList(
     req?: DescribeMQTTProductSKUListRequest,
@@ -339,7 +341,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除实例
+   * 删除MQTT实例
    */
   async DeleteMQTTInstance(
     req: DeleteMQTTInstanceRequest,
@@ -369,7 +371,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为MQTT实例创建公网接入点
+   * 更新MQTT实例公网接入点
    */
   async ModifyMQTTInsPublicEndpoint(
     req: ModifyMQTTInsPublicEndpointRequest,
@@ -442,7 +444,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除主题
+   * 删除MQTT主题
    */
   async DeleteMQTTTopic(
     req: DeleteMQTTTopicRequest,

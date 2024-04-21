@@ -2576,7 +2576,7 @@ export interface DescribeMachineGroupConfigsResponse {
  */
 export interface CheckRechargeKafkaServerRequest {
   /**
-   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   * 导入Kafka类型，0: 腾讯云CKafka；1: 用户自建Kafka。
    */
   KafkaType: number
   /**
@@ -2590,11 +2590,11 @@ KafkaType为1时，ServerAddr必填
    */
   ServerAddr?: string
   /**
-   * ServerAddr是否为加密连接
+   * ServerAddr是否为加密连接，默认值false。当KafkaType为1用户自建kafka时生效。
    */
   IsEncryptionAddr?: boolean
   /**
-   * 加密访问协议。IsEncryptionAddr参数为true时必填
+   * 加密访问协议。KafkaType参数为1并且IsEncryptionAddr参数为true时必填。
    */
   Protocol?: KafkaProtocolInfo
 }
@@ -3903,11 +3903,13 @@ export interface CreateShipperRequest {
    */
   TopicId: string
   /**
-   * 创建的投递规则投递的bucket
+   * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。
    */
   Bucket: string
   /**
-   * 创建的投递规则投递目录的前缀
+   * 投递规则投递的新的目录前缀。
+- 仅支持0-9A-Za-z-_/
+- 最大支持256个字符
    */
   Prefix: string
   /**
@@ -3943,15 +3945,25 @@ export interface CreateShipperRequest {
    */
   FilenameMode?: number
   /**
-   * 投递数据范围的开始时间点，不能超出日志主题的生命周期起点。如果用户不填写，默认为用户新建投递任务的时间。
+   * 投递数据范围的开始时间点（秒级时间戳），不能超出日志主题的生命周期起点。
+如果用户不填写，默认为用户新建投递任务的时间。
    */
   StartTime?: number
   /**
-   * 投递数据范围的结束时间点，不能填写未来时间。如果用户不填写，默认为持续投递，即无限。
+   * 投递数据范围的结束时间点（秒级时间戳），不能填写未来时间。
+如果用户不填写，默认为持续投递，即无限。
    */
   EndTime?: number
   /**
-   * cos桶存储类型
+   * cos桶存储类型。支持：STANDARD_IA、ARCHIVE、DEEP_ARCHIVE、STANDARD、MAZ_STANDARD、MAZ_STANDARD_IA、INTELLIGENT_TIERING。
+
+1. STANDARD_IA：低频存储；
+2. ARCHIVE：归档存储；
+3. DEEP_ARCHIVE：深度归档存储；
+4. STANDARD：标准存储；
+5. MAZ_STANDARD：标准存储（多 AZ）；
+6. MAZ_STANDARD_IA：低频存储（多 AZ）；
+7. INTELLIGENT_TIERING：智能分层存储。
    */
   StorageType?: string
 }
@@ -4648,29 +4660,29 @@ export interface DeleteExportRequest {
  */
 export interface PreviewKafkaRechargeRequest {
   /**
-   * 预览类型，1:源数据预览，2:导出结果预览
+   * 预览类型，1：源数据预览；2：导出结果预览。
    */
   PreviewType: number
   /**
-   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   * 导入Kafka类型，0：腾讯云CKafka；1：用户自建Kafka。
    */
   KafkaType: number
   /**
-   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。最多支持100个。
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。
+最多支持100个。
    */
   UserKafkaTopics: string
   /**
-   * 导入数据位置，-2:最早（默认），-1：最晚
+   * 导入数据位置，-2：最早；-1：最晚。
    */
   Offset: number
   /**
-   * 腾讯云CKafka实例ID。
-KafkaType为0时KafkaInstance必填
+   * 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。
    */
   KafkaInstance?: string
   /**
    * 服务地址。
-KafkaType为1时ServerAddr必填
+KafkaType为1时ServerAddr必填。
    */
   ServerAddr?: string
   /**
@@ -4680,7 +4692,7 @@ KafkaType为1时有效。
   IsEncryptionAddr?: boolean
   /**
    * 加密访问协议。
-KafkaType为1并且IsEncryptionAddr为true时Protocol必填
+KafkaType为1并且IsEncryptionAddr为true时Protocol必填。
    */
   Protocol?: KafkaProtocolInfo
   /**
@@ -4780,15 +4792,17 @@ export interface ModifyShipperRequest {
    */
   ShipperId: string
   /**
-   * 投递规则投递的新的bucket
+   * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。
    */
   Bucket?: string
   /**
-   * 投递规则投递的新的目录前缀
+   * 投递规则投递的新的目录前缀。
+- 仅支持0-9A-Za-z-_/
+- 最大支持256个字符
    */
   Prefix?: string
   /**
-   * 投递规则的开关状态
+   * 投递规则的开关状态。true：开启投递任务；false：关闭投递任务。
    */
   Status?: boolean
   /**
@@ -4820,11 +4834,19 @@ export interface ModifyShipperRequest {
    */
   Content?: ContentInfo
   /**
-   * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
+   * 投递文件命名配置，0：随机数命名，1：投递时间命名。
    */
   FilenameMode?: number
   /**
-   * cos桶类型
+   * cos桶存储类型。支持：STANDARD_IA、ARCHIVE、DEEP_ARCHIVE、STANDARD、MAZ_STANDARD、MAZ_STANDARD_IA、INTELLIGENT_TIERING。
+
+1. STANDARD_IA：低频存储；
+2. ARCHIVE：归档存储；
+3. DEEP_ARCHIVE：深度归档存储；
+4. STANDARD：标准存储；
+5. MAZ_STANDARD：标准存储（多 AZ）；
+6. MAZ_STANDARD_IA：低频存储（多 AZ）；
+7. INTELLIGENT_TIERING：智能分层存储。
    */
   StorageType?: string
 }
@@ -4858,20 +4880,20 @@ export interface CreateKafkaRechargeRequest {
    */
   LogRechargeRule: LogRechargeRuleInfo
   /**
-   * 腾讯云CKafka实例ID，KafkaType为0时必填
+   * 腾讯云CKafka实例ID，KafkaType为0时必填。
    */
   KafkaInstance?: string
   /**
-   * 服务地址，KafkaType为1时必填
+   * 服务地址，KafkaType为1时必填。
    */
   ServerAddr?: string
   /**
-   * ServerAddr是否为加密连接，KafkaType为1时必填
+   * ServerAddr是否为加密连接，KafkaType为1时必填。
    */
   IsEncryptionAddr?: boolean
   /**
    * 加密访问协议。
-KafkaType为1并且IsEncryptionAddr为true时Protocol必填
+KafkaType为1并且IsEncryptionAddr为true时Protocol必填。
    */
   Protocol?: KafkaProtocolInfo
   /**
@@ -6599,23 +6621,23 @@ export interface ModifyKafkaRechargeRequest {
    */
   Name?: string
   /**
-   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   * 导入Kafka类型，0：腾讯云CKafka：1：用户自建Kafka。
    */
   KafkaType?: number
   /**
-   * 腾讯云CKafka实例ID，KafkaType为0时必填
+   * 腾讯云CKafka实例ID，KafkaType为0时必填。
    */
   KafkaInstance?: string
   /**
-   * 服务地址
+   * 服务地址，KafkaType为1时必填。
    */
   ServerAddr?: string
   /**
-   * ServerAddr是否为加密连接
+   * ServerAddr是否为加密连接，KafkaType为1时必填。
    */
   IsEncryptionAddr?: boolean
   /**
-   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   * 加密访问协议，KafkaType参数为1并且IsEncryptionAddr参数为true时必填。
    */
   Protocol?: KafkaProtocolInfo
   /**
@@ -6631,7 +6653,7 @@ export interface ModifyKafkaRechargeRequest {
    */
   LogRechargeRule?: LogRechargeRuleInfo
   /**
-   * 导入控制，1：暂停，2：继续
+   * 导入控制，1：暂停；2：继续。
    */
   StatusControl?: number
 }

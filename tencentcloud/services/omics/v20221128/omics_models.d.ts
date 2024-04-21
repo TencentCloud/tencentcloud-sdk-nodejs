@@ -172,7 +172,7 @@ export interface RunApplicationRequest {
      */
     NFOption?: NFOption;
     /**
-     * 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow)
+     * 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。
      */
     WorkDir?: string;
     /**
@@ -181,6 +181,10 @@ export interface RunApplicationRequest {
   - PUBLIC：公共应用
      */
     AccessMode?: string;
+    /**
+     * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
+     */
+    VolumeIds?: Array<string>;
 }
 /**
  * GetRunMetadataFile返回参数结构体
@@ -363,9 +367,13 @@ export interface RunWorkflowRequest {
      */
     CacheClearDelay?: number;
     /**
-     * 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow)
+     * 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。
      */
     WorkDir?: string;
+    /**
+     * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
+     */
+    VolumeIds?: Array<string>;
 }
 /**
  * DescribeRuns请求参数结构体

@@ -22,7 +22,7 @@ export declare class Client extends AbstractClient {
      */
     SubmitTextToImageProJob(req: SubmitTextToImageProJobRequest, cb?: (error: string, rep: SubmitTextToImageProJobResponse) => void): Promise<SubmitTextToImageProJobResponse>;
     /**
-     * 智能文生图接口提供基础版文生图能力，将根据输入的文本描述，智能生成与之相关的结果图。
+     * 智能文生图接口基于文生图（标准版）模型，将根据输入的文本描述，智能生成与之相关的结果图。
 
 智能文生图默认提供3个并发任务数，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */

@@ -3743,6 +3743,21 @@ export interface SwitchProxyVpcResponse {
     RequestId?: string;
 }
 /**
+ * 可用区属性项
+ */
+export interface SlaveZoneAttrItem {
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * binlog同步方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BinlogSyncWay?: string;
+}
+/**
  * SwitchProxyVpc请求参数结构体
  */
 export interface SwitchProxyVpcRequest {
@@ -6723,6 +6738,10 @@ export interface ModifyClusterSlaveZoneRequest {
      * 新从可用区
      */
     NewSlaveZone: string;
+    /**
+     * binlog同步方式。默认值：async。可选值：sync、semisync、async
+     */
+    BinlogSyncWay?: string;
 }
 /**
  * DescribeInstanceErrorLogs返回参数结构体
@@ -7000,6 +7019,11 @@ export interface CynosdbClusterDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkType?: string;
+    /**
+     * 备可用区属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlaveZoneAttr?: Array<SlaveZoneAttrItem>;
 }
 /**
  * RestartInstance请求参数结构体
@@ -7400,6 +7424,16 @@ export interface ClusterSlaveData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NewSlaveZone?: Array<string>;
+    /**
+     * 新从可用区属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewSlaveZoneAttr?: Array<SlaveZoneAttrItem>;
+    /**
+     * 旧可用区属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldSlaveZoneAttr?: Array<SlaveZoneAttrItem>;
 }
 /**
  * 数据库地址
@@ -7567,6 +7601,10 @@ export interface AddClusterSlaveZoneRequest {
      * 从可用区
      */
     SlaveZone: string;
+    /**
+     * binlog同步方式。默认值：async。可选值：sync、semisync、async
+     */
+    BinlogSyncWay?: string;
 }
 /**
  * 回滚数据库信息
