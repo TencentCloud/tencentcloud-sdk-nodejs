@@ -89,6 +89,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 多轮改写
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     async QueryRewrite(req, cb) {
         return this.request("QueryRewrite", req, cb);
@@ -119,6 +120,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取特征向量
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     async GetEmbedding(req, cb) {
         return this.request("GetEmbedding", req, cb);

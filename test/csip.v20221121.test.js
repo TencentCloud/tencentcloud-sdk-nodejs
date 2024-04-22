@@ -288,6 +288,16 @@ it("csip.v20221121.CreateDomainAndIp", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAlertList", async function () {
+    try {
+       const data = await client.DescribeAlertList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeScanTaskList", async function () {
     try {
        const data = await client.DescribeScanTaskList({})

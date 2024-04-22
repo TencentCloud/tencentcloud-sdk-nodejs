@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExtensions", req, cb);
     }
     /**
-     * 批量查询自动任务外呼
+     * 批量查询自动外呼任务
      */
     async DescribeAutoCalloutTasks(req, cb) {
         return this.request("DescribeAutoCalloutTasks", req, cb);
@@ -244,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnbindStaffSkillGroupList(req, cb) {
         return this.request("UnbindStaffSkillGroupList", req, cb);
+    }
+    /**
+     * 修改座席的密码
+     */
+    async ModifyStaffPassword(req, cb) {
+        return this.request("ModifyStaffPassword", req, cb);
     }
     /**
      * 查询预测式外呼任务

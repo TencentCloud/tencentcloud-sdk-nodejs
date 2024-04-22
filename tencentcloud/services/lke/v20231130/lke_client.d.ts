@@ -49,6 +49,7 @@ export declare class Client extends AbstractClient {
     ListSelectDoc(req: ListSelectDocRequest, cb?: (error: string, rep: ListSelectDocResponse) => void): Promise<ListSelectDocResponse>;
     /**
      * 多轮改写
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     QueryRewrite(req: QueryRewriteRequest, cb?: (error: string, rep: QueryRewriteResponse) => void): Promise<QueryRewriteResponse>;
     /**
@@ -69,6 +70,7 @@ export declare class Client extends AbstractClient {
     CreateRelease(req: CreateReleaseRequest, cb?: (error: string, rep: CreateReleaseResponse) => void): Promise<CreateReleaseResponse>;
     /**
      * 获取特征向量
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     GetEmbedding(req: GetEmbeddingRequest, cb?: (error: string, rep: GetEmbeddingResponse) => void): Promise<GetEmbeddingResponse>;
     /**

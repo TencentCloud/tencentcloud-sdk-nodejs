@@ -399,6 +399,16 @@ export interface DisableCCCPhoneNumberRequest {
 }
 
 /**
+ * ModifyStaffPassword返回参数结构体
+ */
+export interface ModifyStaffPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreatePredictiveDialingCampaign请求参数结构体
  */
 export interface CreatePredictiveDialingCampaignRequest {
@@ -1813,6 +1823,24 @@ export interface UpdateCCCSkillGroupRequest {
    * true同振，false顺振
    */
   RingAll?: boolean
+}
+
+/**
+ * ModifyStaffPassword请求参数结构体
+ */
+export interface ModifyStaffPasswordRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 座席邮箱
+   */
+  Email: string
+  /**
+   * 设置的密码
+   */
+  Password: string
 }
 
 /**

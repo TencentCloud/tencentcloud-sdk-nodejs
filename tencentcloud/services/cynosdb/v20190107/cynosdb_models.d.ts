@@ -437,6 +437,15 @@ export interface ModifyInstanceParamRequest {
     IsInMaintainPeriod?: string;
 }
 /**
+ * ModifyInstanceUpgradeLimitDays返回参数结构体
+ */
+export interface ModifyInstanceUpgradeLimitDaysResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 数据库表信息
  */
 export interface DatabaseTables {
@@ -7667,6 +7676,23 @@ export interface ModifyClusterStorageResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyInstanceUpgradeLimitDays请求参数结构体
+ */
+export interface ModifyInstanceUpgradeLimitDaysRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 升级限制时间
+     */
+    UpgradeLimitDays: number;
 }
 /**
  * CloseClusterPasswordComplexity请求参数结构体

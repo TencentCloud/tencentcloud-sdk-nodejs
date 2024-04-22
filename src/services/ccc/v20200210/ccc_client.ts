@@ -36,6 +36,7 @@ import {
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
+  ModifyStaffPasswordResponse,
   CreatePredictiveDialingCampaignRequest,
   DescribeChatMessagesResponse,
   ServeParticipant,
@@ -86,6 +87,7 @@ import {
   SkillGroupInfoItem,
   ResetExtensionPasswordResponse,
   UpdateCCCSkillGroupRequest,
+  ModifyStaffPasswordRequest,
   ModifyStaffResponse,
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
@@ -201,7 +203,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询自动任务外呼
+   * 批量查询自动外呼任务
    */
   async DescribeAutoCalloutTasks(
     req: DescribeAutoCalloutTasksRequest,
@@ -540,6 +542,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnbindStaffSkillGroupListResponse) => void
   ): Promise<UnbindStaffSkillGroupListResponse> {
     return this.request("UnbindStaffSkillGroupList", req, cb)
+  }
+
+  /**
+   * 修改座席的密码
+   */
+  async ModifyStaffPassword(
+    req: ModifyStaffPasswordRequest,
+    cb?: (error: string, rep: ModifyStaffPasswordResponse) => void
+  ): Promise<ModifyStaffPasswordResponse> {
+    return this.request("ModifyStaffPassword", req, cb)
   }
 
   /**

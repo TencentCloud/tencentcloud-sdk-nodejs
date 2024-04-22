@@ -4812,8 +4812,8 @@ export interface NatGateway {
     CreatedTime?: string;
     /**
      * NAT网关的状态。
-   'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，
-  ‘FAILED’：失败。
+   'PENDING'：生产中，'DELETING'：删除中/子实例关闭中，'AVAILABLE'：运行中，'UPDATING'：升级中，
+  ‘PENDFAILURE’：创建失败，‘DELETEFAILURE：删除失败，‘DENIED’：子实例关闭中
      */
     State?: string;
     /**
@@ -5240,6 +5240,10 @@ export interface DescribeGatewayFlowMonitorDetailRequest {
      * 排序方法。顺序：`ASC`，倒序：`DESC`。默认值`DESC`。
      */
     OrderDirection?: string;
+    /**
+     * VPC内部IPv4地址，精确匹配
+     */
+    PrivateIpAddress?: string;
 }
 /**
  * InquiryPriceCreateVpnGateway返回参数结构体
@@ -7972,7 +7976,7 @@ export interface DownloadCustomerGatewayConfigurationRequest {
      */
     VpnConnectionId: string;
     /**
-     * 对端网关厂商信息对象，可通过[DescribeCustomerGatewayVendors](https://cloud.tencent.com/document/api/215/17513)获取。
+     * 对端网关厂商信息对象，可通过[DescribeCustomerGatewayVendors](https://cloud.tencent.com/document/api/215/17517)获取。
      */
     CustomerGatewayVendor: CustomerGatewayVendor;
     /**

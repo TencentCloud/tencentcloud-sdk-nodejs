@@ -378,6 +378,16 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     }
 })
 
+it("ccc.v20200210.ModifyStaffPassword", async function () {
+    try {
+       const data = await client.ModifyStaffPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribePredictiveDialingCampaign", async function () {
     try {
        const data = await client.DescribePredictiveDialingCampaign({})

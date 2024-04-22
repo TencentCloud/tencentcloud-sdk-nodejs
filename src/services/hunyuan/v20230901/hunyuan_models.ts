@@ -247,15 +247,15 @@ export interface EmbeddingData {
 }
 
 /**
- * token 使用计数。
+ * Token 使用计数。
  */
 export interface EmbeddingUsage {
   /**
-   * 输入Token数。
+   * 输入 Token 数。
    */
   PromptTokens?: number
   /**
-   * 总Token数。
+   * 总 Token 数。
    */
   TotalTokens?: number
 }
@@ -275,19 +275,19 @@ export interface Delta {
 }
 
 /**
- * token 数量
+ * Token 数量
  */
 export interface Usage {
   /**
-   * 输入 token 数量。
+   * 输入 Token 数量。
    */
   PromptTokens?: number
   /**
-   * 输出 token 数量。
+   * 输出 Token 数量。
    */
   CompletionTokens?: number
   /**
-   * 总 token 数量。
+   * 总 Token 数量。
    */
   TotalTokens?: number
 }

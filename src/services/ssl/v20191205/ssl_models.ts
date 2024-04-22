@@ -4085,11 +4085,7 @@ export interface DescribeHostCosInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型 cos
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -4098,6 +4094,26 @@ export interface DescribeHostCosInstanceListRequest {
    * 过滤参数列表
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型 cos
+   */
+  ResourceType?: string
+  /**
+   * 原证书ID
+   */
+  OldCertificateId?: string
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+  /**
+   * 是否异步
+   */
+  AsyncCache?: number
 }
 
 /**

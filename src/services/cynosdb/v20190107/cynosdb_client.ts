@@ -36,6 +36,7 @@ import {
   CreateClustersResponse,
   CynosdbInstanceGrp,
   ModifyInstanceParamRequest,
+  ModifyInstanceUpgradeLimitDaysResponse,
   DatabaseTables,
   UserHostPrivilege,
   DescribeProxyNodesResponse,
@@ -315,6 +316,7 @@ import {
   RollbackDatabase,
   DescribeTasksRequest,
   ModifyClusterStorageResponse,
+  ModifyInstanceUpgradeLimitDaysRequest,
   CloseClusterPasswordComplexityRequest,
   ModifyAccountParamsRequest,
   AuditLogFile,
@@ -1023,6 +1025,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddInstancesResponse) => void
   ): Promise<AddInstancesResponse> {
     return this.request("AddInstances", req, cb)
+  }
+
+  /**
+   * 修改实例小版本升级限制时间
+   */
+  async ModifyInstanceUpgradeLimitDays(
+    req: ModifyInstanceUpgradeLimitDaysRequest,
+    cb?: (error: string, rep: ModifyInstanceUpgradeLimitDaysResponse) => void
+  ): Promise<ModifyInstanceUpgradeLimitDaysResponse> {
+    return this.request("ModifyInstanceUpgradeLimitDays", req, cb)
   }
 
   /**

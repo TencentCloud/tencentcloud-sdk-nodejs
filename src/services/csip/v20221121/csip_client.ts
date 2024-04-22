@@ -31,7 +31,8 @@ import {
   AssetViewCFGRisk,
   AssetViewVULRisk,
   DescribeScanReportListRequest,
-  DescribeVpcAssetsResponse,
+  AlertInfo,
+  KeyValue,
   Vpc,
   PortRiskAdvanceCFGParamItem,
   StopRiskCenterTaskRequest,
@@ -49,6 +50,7 @@ import {
   DescribeNICAssetsRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
+  RoleInfo,
   TagCount,
   GateWayAsset,
   DescribeRiskCenterWebsiteRiskListResponse,
@@ -99,6 +101,7 @@ import {
   DescribePublicIpAssetsResponse,
   DescribeTaskLogURLResponse,
   ModifyOrganizationAccountStatusResponse,
+  AlertExtraInfo,
   DescribeDbAssetInfoRequest,
   DescribeAssetViewVulRiskListRequest,
   Filter,
@@ -110,18 +113,22 @@ import {
   DescribeGatewayAssetsResponse,
   AssetViewPortRisk,
   DescribeRiskCenterPortViewPortRiskListRequest,
+  DescribeVpcAssetsResponse,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DeleteDomainAndIpResponse,
   ServerRisk,
   ReportTaskIdList,
   AddNewBindRoleUserResponse,
+  RelatedEvent,
   WhereFilter,
+  DescribeAlertListResponse,
   ScanTaskInfoList,
   DescribeDbAssetsRequest,
   TaskLogInfo,
   ModifyRiskCenterRiskStatusResponse,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   TaskCenterCFGRiskInputParam,
+  DescribeAlertListRequest,
   CreateDomainAndIpRequest,
   DomainAssetVO,
   DescribeSearchBugInfoResponse,
@@ -425,6 +432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDomainAndIpResponse) => void
   ): Promise<CreateDomainAndIpResponse> {
     return this.request("CreateDomainAndIp", req, cb)
+  }
+
+  /**
+   * 告警中心全量告警列表接口
+   */
+  async DescribeAlertList(
+    req: DescribeAlertListRequest,
+    cb?: (error: string, rep: DescribeAlertListResponse) => void
+  ): Promise<DescribeAlertListResponse> {
+    return this.request("DescribeAlertList", req, cb)
   }
 
   /**

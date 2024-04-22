@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainAndIp", req, cb);
     }
     /**
+     * 告警中心全量告警列表接口
+     */
+    async DescribeAlertList(req, cb) {
+        return this.request("DescribeAlertList", req, cb);
+    }
+    /**
      * 获取扫描任务列表
      */
     async DescribeScanTaskList(req, cb) {

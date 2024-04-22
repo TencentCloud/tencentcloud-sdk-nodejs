@@ -745,33 +745,169 @@ export interface DescribeScanReportListRequest {
     Filter?: Filter;
 }
 /**
- * DescribeVpcAssets返回参数结构体
+ * 告警中心全量告警列表数据
  */
-export interface DescribeVpcAssetsResponse {
+export interface AlertInfo {
     /**
-     * 列表
+     * 告警ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: Array<Vpc>;
+    ID?: string;
     /**
-     * 总数
+     * 告警名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount?: number;
+    Name?: string;
     /**
-     * vpc列表
+     * 告警来源
+  CFW:云防火墙
+  WAF:Web应用防火墙
+  CWP:主机安全
+  CSIP:云安全中心
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcList?: Array<FilterDataObject>;
+    Source?: string;
     /**
-     * 地域列表
+     * 告警等级
+  1:提示
+  2:低危
+  3:中危
+  4:高危
+  5:严重
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionList?: Array<FilterDataObject>;
+    Level?: number;
     /**
-     * appid列表
+     * 攻击者
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppIdList?: Array<FilterDataObject>;
+    Attacker?: RoleInfo;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 受害者
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Victim?: RoleInfo;
+    /**
+     * 证据数据(比如攻击内容等)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EvidenceData?: string;
+    /**
+     * 证据位置(比如协议端口)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EvidenceLocation?: string;
+    /**
+     * 证据路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EvidencePath?: string;
+    /**
+     * 首次告警时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 最近告警时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 告警次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
+    /**
+     * 紧急缓解建议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UrgentSuggestion?: string;
+    /**
+     * 根治建议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemediationSuggestion?: string;
+    /**
+     * 处理状态
+  0：未处置，1：已忽略，2：已处置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 告警处理类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessType?: string;
+    /**
+     * 告警大类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 告警小类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubType?: string;
+    /**
+     * 下拉字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraInfo?: AlertExtraInfo;
+    /**
+     * 聚合字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 告警日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Date?: string;
+    /**
+     * appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppID?: string;
+    /**
+     * 账户名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NickName?: string;
+    /**
+     * 账户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 行为
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Action?: number;
+    /**
+     * 风险排查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskInvestigation?: string;
+    /**
+     * 风险处置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskTreatment?: string;
+}
+/**
+ * KeyValue对
+ */
+export interface KeyValue {
+    /**
+     * 字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * vpc列表数据
@@ -1381,6 +1517,116 @@ export interface TaskIdListKey {
      * 任务ID
      */
     TaskId: string;
+}
+/**
+ * 告警数据攻击者或受害者信息
+ */
+export interface RoleInfo {
+    /**
+     * IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IP?: string;
+    /**
+     * HostIP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostIP?: string;
+    /**
+     * 原始IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginIP?: string;
+    /**
+     * 端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 资产ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceID?: string;
+    /**
+     * 城市
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    City?: string;
+    /**
+     * 省份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Province?: string;
+    /**
+     * 国家
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Country?: string;
+    /**
+     * 地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Address?: string;
+    /**
+     * 纬度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Latitude?: string;
+    /**
+     * 经度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Longitude?: string;
+    /**
+     * 信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Info?: string;
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 企业名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Account?: string;
+    /**
+     * 家族团伙
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Family?: string;
+    /**
+     * 病毒名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VirusName?: string;
+    /**
+     * MD5值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MD5?: string;
+    /**
+     * 恶意进程文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 1:主机资产 2:域名资产 3:网络资产
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: number;
+    /**
+     * 来源日志分析的信息字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FromLogAnalysisData?: Array<KeyValue>;
 }
 /**
  * 产品日志条数
@@ -3510,6 +3756,358 @@ export interface ModifyOrganizationAccountStatusResponse {
     RequestId?: string;
 }
 /**
+ * 告警下拉字段
+ */
+export interface AlertExtraInfo {
+    /**
+     * 相关攻击事件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelateEvent?: RelatedEvent;
+    /**
+     * 泄漏内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LeakContent?: string;
+    /**
+     * 泄漏API
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LeakAPI?: string;
+    /**
+     * secretID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecretID?: string;
+    /**
+     * 命中规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rule?: string;
+    /**
+     * 规则描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleDesc?: string;
+    /**
+     * 协议端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtocolPort?: string;
+    /**
+     * 攻击内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackContent?: string;
+    /**
+     * 攻击IP画像
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackIPProfile?: string;
+    /**
+     * 攻击IP标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackIPTags?: string;
+    /**
+     * 请求方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestMethod?: string;
+    /**
+     * HTTP日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpLog?: string;
+    /**
+     * 被攻击域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackDomain?: string;
+    /**
+     * 文件路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FilePath?: string;
+    /**
+     * user_agent
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserAgent?: string;
+    /**
+     * 请求头
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestHeaders?: string;
+    /**
+     * 登录用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LoginUserName?: string;
+    /**
+     * 漏洞名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulnerabilityName?: string;
+    /**
+     * 公共漏洞和暴露
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVE?: string;
+    /**
+     * 服务进程
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceProcess?: string;
+    /**
+     * 文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileSize?: string;
+    /**
+     * 文件MD5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileMD5?: string;
+    /**
+     * 文件最近访问时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileLastAccessTime?: string;
+    /**
+     * 文件修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileModifyTime?: string;
+    /**
+     * 最近访问时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecentAccessTime?: string;
+    /**
+     * 最近修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecentModifyTime?: string;
+    /**
+     * 病毒名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VirusName?: string;
+    /**
+     * 病毒文件标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VirusFileTags?: string;
+    /**
+     * 行为特征
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BehavioralCharacteristics?: string;
+    /**
+     * 进程名（PID）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessNamePID?: string;
+    /**
+     * 进程路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessPath?: string;
+    /**
+     * 进程命令行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessCommandLine?: string;
+    /**
+     * 进程权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessPermissions?: string;
+    /**
+     * 执行命令
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutedCommand?: string;
+    /**
+     * 受影响文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AffectedFileName?: string;
+    /**
+     * 诱饵路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DecoyPath?: string;
+    /**
+     * 恶意进程文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousProcessFileSize?: string;
+    /**
+     * 恶意进程文件MD5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousProcessFileMD5?: string;
+    /**
+     * 恶意进程名（PID）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousProcessNamePID?: string;
+    /**
+     * 恶意进程路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousProcessPath?: string;
+    /**
+     * 恶意进程启动时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousProcessStartTime?: string;
+    /**
+     * 命令内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CommandContent?: string;
+    /**
+     * 启动用户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartupUser?: string;
+    /**
+     * 用户所属组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserGroup?: string;
+    /**
+     * 新增权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewPermissions?: string;
+    /**
+     * 父进程
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentProcess?: string;
+    /**
+     * 类名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClassName?: string;
+    /**
+     * 所属类加载器
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClassLoader?: string;
+    /**
+     * 类文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClassFileSize?: string;
+    /**
+     * 类文件MD5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClassFileMD5?: string;
+    /**
+     * 父类名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentClassName?: string;
+    /**
+     * 继承接口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InheritedInterface?: string;
+    /**
+     * 注释
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Comment?: string;
+    /**
+     * 载荷内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayloadContent?: string;
+    /**
+     * 回连地址画像
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallbackAddressPortrait?: string;
+    /**
+     * 回连地址标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallbackAddressTag?: string;
+    /**
+     * 进程MD5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessMD5?: string;
+    /**
+     * 文件权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FilePermission?: string;
+    /**
+     * 来源于日志分析的信息字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FromLogAnalysisData?: Array<KeyValue>;
+    /**
+     * 命中探针
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HitProbe?: string;
+    /**
+     * 命中蜜罐
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HitHoneyPot?: string;
+    /**
+     * 命令列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CommandList?: string;
+    /**
+     * 攻击事件描述
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackEventDesc?: string;
+    /**
+     * 进程信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessInfo?: string;
+    /**
+     * 使用用户名&密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserNameAndPwd?: string;
+    /**
+     * 主机防护策略ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyID?: string;
+    /**
+     * 主机防护策略名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyName?: string;
+    /**
+     * 主机防护命中策略，是策略ID和策略名称的组合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HitStrategy?: string;
+}
+/**
  * DescribeDbAssetInfo请求参数结构体
  */
 export interface DescribeDbAssetInfoRequest {
@@ -3918,6 +4516,35 @@ export interface DescribeRiskCenterPortViewPortRiskListRequest {
     Tags?: Array<AssetTag>;
 }
 /**
+ * DescribeVpcAssets返回参数结构体
+ */
+export interface DescribeVpcAssetsResponse {
+    /**
+     * 列表
+     */
+    Data?: Array<Vpc>;
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * vpc列表
+     */
+    VpcList?: Array<FilterDataObject>;
+    /**
+     * 地域列表
+     */
+    RegionList?: Array<FilterDataObject>;
+    /**
+     * appid列表
+     */
+    AppIdList?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRiskCenterPortViewPortRiskList返回参数结构体
  */
 export interface DescribeRiskCenterPortViewPortRiskListResponse {
@@ -4101,6 +4728,26 @@ export interface AddNewBindRoleUserResponse {
     RequestId?: string;
 }
 /**
+ * 相关攻击事件结构
+ */
+export interface RelatedEvent {
+    /**
+     * 事件ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventID?: string;
+    /**
+     * 事件描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 与事件关联的告警数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelatedCount?: number;
+}
+/**
  * 过滤条件
  */
 export interface WhereFilter {
@@ -4122,6 +4769,27 @@ export interface WhereFilter {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorType?: number;
+}
+/**
+ * DescribeAlertList返回参数结构体
+ */
+export interface DescribeAlertListResponse {
+    /**
+     * 全量告警列表
+     */
+    AlertList?: Array<AlertInfo>;
+    /**
+     * 告警大类数量
+     */
+    AlertTypeCount?: Array<TagCount>;
+    /**
+     * 告警总数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 扫描任务列表展示信息
@@ -4453,6 +5121,27 @@ export interface TaskCenterCFGRiskInputParam {
      * 资源类型
      */
     ResourceType: string;
+}
+/**
+ * DescribeAlertList请求参数结构体
+ */
+export interface DescribeAlertListRequest {
+    /**
+     * 标签搜索筛选
+     */
+    Filter: Filter;
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
+     * 被调用的集团账号的成员id
+     */
+    OperatedMemberId?: Array<string>;
+    /**
+     * 0:默认全部 1:资产ID 2:域名
+     */
+    AssetType?: number;
 }
 /**
  * CreateDomainAndIp请求参数结构体

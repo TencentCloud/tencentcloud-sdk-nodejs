@@ -406,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddInstances", req, cb);
     }
     /**
+     * 修改实例小版本升级限制时间
+     */
+    async ModifyInstanceUpgradeLimitDays(req, cb) {
+        return this.request("ModifyInstanceUpgradeLimitDays", req, cb);
+    }
+    /**
      * 删除用户账号
      */
     async DeleteAccounts(req, cb) {

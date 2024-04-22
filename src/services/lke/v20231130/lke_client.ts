@@ -85,6 +85,7 @@ import {
   VerifyQARequest,
   AttributeLabel,
   Option,
+  Usage,
   ResetSessionRequest,
   GetAppSecretRequest,
   DeleteQACateResponse,
@@ -323,8 +324,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 多轮改写
-   */
+     * 多轮改写
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
+     */
   async QueryRewrite(
     req: QueryRewriteRequest,
     cb?: (error: string, rep: QueryRewriteResponse) => void
@@ -373,8 +375,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取特征向量
-   */
+     * 获取特征向量
+本接口有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
+     */
   async GetEmbedding(
     req: GetEmbeddingRequest,
     cb?: (error: string, rep: GetEmbeddingResponse) => void

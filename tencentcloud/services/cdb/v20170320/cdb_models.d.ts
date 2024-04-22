@@ -245,6 +245,10 @@ export interface CreateCdbProxyRequest {
      * 连接池阈值
      */
     ConnectionPoolLimit?: number;
+    /**
+     * 指定要购买的 proxy 内核版本。不填则默认发货最新版本的 proxy。
+     */
+    ProxyVersion?: string;
 }
 /**
  * CreateCdbProxy返回参数结构体
