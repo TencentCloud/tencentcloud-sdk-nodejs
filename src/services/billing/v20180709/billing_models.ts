@@ -3300,6 +3300,21 @@ export interface BillDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
+  /**
+   * 国内国际编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionType?: string
+  /**
+   * 国内国际：资源所属区域类型（国内、国际）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionTypeName?: string
+  /**
+   * 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveDetail?: string
 }
 
 /**

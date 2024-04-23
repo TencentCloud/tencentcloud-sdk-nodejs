@@ -753,6 +753,20 @@ export interface ModifyAccountDescriptionResponse {
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey?: string
+  /**
+   * 标签值
+   */
+  TagValue?: string
+}
+
+/**
  * 参数约束
  */
 export interface ParamConstraint {
@@ -1286,6 +1300,10 @@ export interface DescribeDBInstancesRequest {
    */
   TagKeys?: Array<string>
   /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
    * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
    */
   FilterInstanceType?: string
@@ -1715,6 +1733,10 @@ export interface DescribeDBInstanceDetailResponse {
    * 是否支持DCN切换
    */
   IsDcnSwitchSupported?: number
+  /**
+   * proxy版本号
+   */
+  ProxyVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3750,11 +3772,11 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合条件的实例数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息列表
    */
-  Instances: Array<DBInstance>
+  Instances?: Array<DBInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

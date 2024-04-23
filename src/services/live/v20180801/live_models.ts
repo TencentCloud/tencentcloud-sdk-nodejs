@@ -1872,11 +1872,11 @@ export interface CreateRecordTaskRequest {
    */
   AppName: string
   /**
-   * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且EndTime - StartTime不能超过24小时。
+   * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且小于当前时间+7天。
    */
   EndTime: number
   /**
-   * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。StartTime不能超过当前时间+6天。
+   * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。EndTime - StartTime不能超过24小时。
    */
   StartTime?: number
   /**
@@ -2506,7 +2506,7 @@ export interface CreateScreenshotTaskResponse {
   /**
    * 任务ID，全局唯一标识截图任务。返回TaskId字段说明截图任务创建成功。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4367,7 +4367,7 @@ export interface CreateRecordTaskResponse {
   /**
    * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5151,7 +5151,7 @@ export interface CreateScreenshotTaskRequest {
    */
   AppName: string
   /**
-   * 截图任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且EndTime - StartTime不能超过24小时。
+   * 截图任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且小于当前时间+7天。
    */
   EndTime: number
   /**
@@ -5159,7 +5159,7 @@ export interface CreateScreenshotTaskRequest {
    */
   TemplateId: number
   /**
-   * 截图任务开始时间，Unix时间戳。如果不填表示立即启动截图。StartTime不能超过当前时间+6天。
+   * 截图任务开始时间，Unix时间戳。如果不填表示立即启动截图。EndTime - StartTime不能超过24小时。
    */
   StartTime?: number
   /**

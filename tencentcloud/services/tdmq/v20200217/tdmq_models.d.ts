@@ -4601,6 +4601,10 @@ export interface CreateRabbitMQVirtualHostRequest {
      * 消息轨迹开关,true打开,false关闭,默认关闭
      */
     TraceFlag?: boolean;
+    /**
+     * 是否创建镜像队列策略，默认值 true
+     */
+    MirrorQueuePolicyFlag?: boolean;
 }
 /**
  * VerifyRocketMQConsume请求参数结构体
@@ -5042,7 +5046,7 @@ export interface CreateRabbitMQVirtualHostResponse {
     /**
      * vhost名
      */
-    VirtualHost: string;
+    VirtualHost?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5661,122 +5665,137 @@ export interface DescribeRabbitMQQueueDetailResponse {
      * 队列名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * Vhost参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirtualHost: string;
+    VirtualHost?: string;
     /**
      * 队列名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QueueName: string;
+    QueueName?: string;
     /**
      * 队列类型,取值classic或quorum
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QueueType: string;
+    QueueType?: string;
     /**
      * 在线消费者数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Consumers: number;
+    Consumers?: number;
     /**
      * 持久标记
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Durable: boolean;
+    Durable?: boolean;
     /**
      * 自动清除
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoDelete: boolean;
+    AutoDelete?: boolean;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * MessageTTL参数,classic类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessageTTL: number;
+    MessageTTL?: number;
     /**
      * AutoExpire参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoExpire: number;
+    AutoExpire?: number;
     /**
      * MaxLength参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxLength: number;
+    MaxLength?: number;
     /**
      * MaxLengthBytes参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxLengthBytes: number;
+    MaxLengthBytes?: number;
     /**
      * DeliveryLimit参数,quorum类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeliveryLimit: number;
+    DeliveryLimit?: number;
     /**
      * OverflowBehaviour参数,取值为drop-head, reject-publish或reject-publish-dlx
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OverflowBehaviour: string;
+    OverflowBehaviour?: string;
     /**
      * DeadLetterExchange参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeadLetterExchange: string;
+    DeadLetterExchange?: string;
     /**
      * DeadLetterRoutingKey参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeadLetterRoutingKey: string;
+    DeadLetterRoutingKey?: string;
     /**
      * SingleActiveConsumer参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SingleActiveConsumer: boolean;
+    SingleActiveConsumer?: boolean;
     /**
      * MaximumPriority参数,classic类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaximumPriority: number;
+    MaximumPriority?: number;
     /**
      * LazyMode参数,classic类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LazyMode: boolean;
+    LazyMode?: boolean;
     /**
      * MasterLocator参数,classic类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MasterLocator: string;
+    MasterLocator?: string;
     /**
      * MaxInMemoryLength参数,quorum类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxInMemoryLength: number;
+    MaxInMemoryLength?: number;
     /**
      * MaxInMemoryBytes参数,quorum类型专用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxInMemoryBytes: number;
+    MaxInMemoryBytes?: number;
     /**
      * 创建时间戳,单位秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Node: string;
+    Node?: string;
+    /**
+     * 仲裁队列死信一致性策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeadLetterStrategy?: string;
+    /**
+     * 仲裁队列的领导者选举策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueueLeaderLocator?: string;
+    /**
+     * 仲裁队列的初始副本组大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuorumInitialGroupSize?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

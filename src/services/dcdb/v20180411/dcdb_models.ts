@@ -643,6 +643,20 @@ export interface DescribeDBParametersResponse {
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey?: string
+  /**
+   * 标签值
+   */
+  TagValue?: string
+}
+
+/**
  * DescribeBackupFiles请求参数结构体
  */
 export interface DescribeBackupFilesRequest {
@@ -1616,7 +1630,7 @@ export interface SwitchDBInstanceHAResponse {
   /**
    * 异步流程Id
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2058,6 +2072,10 @@ export interface SwitchDBInstanceHARequest {
    * 切换的目标区域，会自动选择该可用区中延迟最低的节点。
    */
   Zone: string
+  /**
+   * 指定分片实例id进行切换
+   */
+  ShardInstanceIds?: Array<string>
 }
 
 /**
@@ -3685,11 +3703,11 @@ export interface DescribeDCDBInstancesResponse {
   /**
    * 符合条件的实例数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息列表
    */
-  Instances: Array<DCDBInstanceInfo>
+  Instances?: Array<DCDBInstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4587,6 +4605,10 @@ export interface DescribeDCDBInstancesRequest {
    * 按标签key查询
    */
   TagKeys?: Array<string>
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
   /**
    * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
    */

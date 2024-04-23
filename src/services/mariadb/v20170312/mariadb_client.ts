@@ -57,6 +57,7 @@ import {
   ZoneChooseInfo,
   IsolateDedicatedDBInstanceRequest,
   ModifyAccountDescriptionResponse,
+  Tag,
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
   DBBackupTimeConfig,

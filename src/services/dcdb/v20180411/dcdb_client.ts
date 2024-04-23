@@ -50,6 +50,7 @@ import {
   CreateAccountRequest,
   UpgradeDedicatedDCDBInstanceResponse,
   DescribeDBParametersResponse,
+  Tag,
   DescribeBackupFilesRequest,
   IsolateHourDCDBInstanceRequest,
   ModifyDBInstanceNameResponse,

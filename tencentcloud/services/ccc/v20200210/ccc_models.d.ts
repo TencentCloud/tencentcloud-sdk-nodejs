@@ -3340,6 +3340,7 @@ export interface DescribeChatMessagesRequest {
     SdkAppId?: number;
     /**
      * 服务记录ID（废弃）
+     * @deprecated
      */
     CdrId?: string;
     /**
@@ -3355,7 +3356,7 @@ export interface DescribeChatMessagesRequest {
      */
     Order?: number;
     /**
-     * 服务记录 SessionID（必填）
+     * 服务记录 SessionID
      */
     SessionId?: string;
 }
