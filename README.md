@@ -85,6 +85,13 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 
 实例化`Client` 的入参支持 `clientConfig` 数据结构和说明 详见 [ClientConfig](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts)
 
+## Common Client
+从 4.0.714 版本开始腾讯云 NODEJS SDK 支持使用泛用性的 API 调用方式(Common Client)进行请求。您只需要安装 tencentcloud-sdk-nodejs-common 包，即可向任何产品发起调用。
+
+**注意，您必须明确知道您调用的接口所需参数，否则可能会调用失败。**
+
+详细使用请参阅示例：[使用 Common Client 进行调用](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/tree/master/examples/common)
+
 ## 更多示例
 
 更丰富的使用 demo 请在 examples 目录中寻找。
