@@ -306,12 +306,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQA", req, cb);
     }
     /**
-     * 查询文件解析结果
-     */
-    async QueryParseDocResult(req, cb) {
-        return this.request("QueryParseDocResult", req, cb);
-    }
-    /**
      * 查询属性标签列表
      */
     async ListAttributeLabel(req, cb) {
@@ -376,12 +370,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDoc(req, cb) {
         return this.request("ModifyDoc", req, cb);
-    }
-    /**
-     * 解析拆分文件
-     */
-    async ParseDoc(req, cb) {
-        return this.request("ParseDoc", req, cb);
     }
     /**
      * 获取ws token

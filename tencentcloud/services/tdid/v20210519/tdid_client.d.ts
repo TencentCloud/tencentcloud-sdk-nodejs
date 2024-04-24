@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     VerifyCredentials(req: VerifyCredentialsRequest, cb?: (error: string, rep: VerifyCredentialsResponse) => void): Promise<VerifyCredentialsResponse>;
     /**
-     * 查询凭证模版内容
+     * 查询凭证模板内容
      */
     QueryCPT(req: QueryCPTRequest, cb?: (error: string, rep: QueryCPTResponse) => void): Promise<QueryCPTResponse>;
     /**

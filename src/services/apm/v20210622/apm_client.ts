@@ -22,36 +22,44 @@ import {
   ModifyApmInstanceRequest,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
+  ModifyGeneralApmApplicationConfigRequest,
   DescribeServiceOverviewResponse,
   QueryMetricItem,
   TerminateApmInstanceRequest,
   DescribeApmInstancesResponse,
+  Instrument,
+  DescribeTagValuesResponse,
   Span,
   ApmAgentInfo,
   DescribeGeneralSpanListResponse,
   ApmMetricRecord,
   DescribeServiceOverviewRequest,
   DescribeApmAgentResponse,
+  DescribeTagValuesRequest,
   ApmField,
   Line,
-  DescribeGeneralSpanListRequest,
+  ApmApplicationConfigView,
+  ApmTag,
   APMKVItem,
   OrderBy,
   DescribeMetricRecordsResponse,
-  ApmTag,
+  DescribeGeneralSpanListRequest,
   Filter,
   APMKV,
   DescribeApmAgentRequest,
   DescribeMetricRecordsRequest,
+  DescribeGeneralApmApplicationConfigResponse,
   DescribeGeneralMetricDataRequest,
   CreateApmInstanceResponse,
   SpanReference,
   SpanProcess,
+  DescribeGeneralApmApplicationConfigRequest,
   ModifyApmInstanceResponse,
   GeneralFilter,
   DescribeApmInstancesRequest,
   SpanTag,
   DescribeGeneralMetricDataResponse,
+  ModifyGeneralApmApplicationConfigResponse,
   TerminateApmInstanceResponse,
 } from "./apm_models"
 
@@ -65,13 +73,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改APM实例接口
+   * 查询应用配置信息
    */
-  async ModifyApmInstance(
-    req: ModifyApmInstanceRequest,
-    cb?: (error: string, rep: ModifyApmInstanceResponse) => void
-  ): Promise<ModifyApmInstanceResponse> {
-    return this.request("ModifyApmInstance", req, cb)
+  async DescribeGeneralApmApplicationConfig(
+    req: DescribeGeneralApmApplicationConfigRequest,
+    cb?: (error: string, rep: DescribeGeneralApmApplicationConfigResponse) => void
+  ): Promise<DescribeGeneralApmApplicationConfigResponse> {
+    return this.request("DescribeGeneralApmApplicationConfig", req, cb)
+  }
+
+  /**
+   * 根据维度名和过滤条件，查询维度数据.
+   */
+  async DescribeTagValues(
+    req: DescribeTagValuesRequest,
+    cb?: (error: string, rep: DescribeTagValuesResponse) => void
+  ): Promise<DescribeTagValuesResponse> {
+    return this.request("DescribeTagValues", req, cb)
   }
 
   /**
@@ -102,6 +120,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApmAgentResponse) => void
   ): Promise<DescribeApmAgentResponse> {
     return this.request("DescribeApmAgent", req, cb)
+  }
+
+  /**
+   * 修改APM实例接口
+   */
+  async ModifyApmInstance(
+    req: ModifyApmInstanceRequest,
+    cb?: (error: string, rep: ModifyApmInstanceResponse) => void
+  ): Promise<ModifyApmInstanceResponse> {
+    return this.request("ModifyApmInstance", req, cb)
+  }
+
+  /**
+   * 对外开放的openApi，客户可以灵活的指定需要修改的字段，再加入需要修改的服务列表.
+   */
+  async ModifyGeneralApmApplicationConfig(
+    req: ModifyGeneralApmApplicationConfigRequest,
+    cb?: (error: string, rep: ModifyGeneralApmApplicationConfigResponse) => void
+  ): Promise<ModifyGeneralApmApplicationConfigResponse> {
+    return this.request("ModifyGeneralApmApplicationConfig", req, cb)
   }
 
   /**

@@ -236,6 +236,7 @@ import {
   NotebookDetail,
   DescribeTrainingTasksResponse,
   CronInfo,
+  LocalDisk,
   FrameworkInfo,
   DescribeLogsResponse,
   EncodedStartCmdInfo,

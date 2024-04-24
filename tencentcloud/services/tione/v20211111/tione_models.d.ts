@@ -6769,6 +6769,16 @@ export interface CronInfo {
     EndTime?: string;
 }
 /**
+ * 本地磁盘信息
+ */
+export interface LocalDisk {
+    /**
+     * 节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId: string;
+}
+/**
  * 框架信息列表
  */
 export interface FrameworkInfo {
@@ -7183,6 +7193,11 @@ export interface DataConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CFSTurboSource?: CFSTurbo;
+    /**
+     * 来自本地磁盘的信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalDiskSource?: LocalDisk;
 }
 /**
  * DescribeTrainingModelVersion请求参数结构体

@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SyncProxyOrganizationResponse,
+  FlowBatchUrlInfo,
   ChannelCreateConvertTaskApiResponse,
   ChannelCreateFlowRemindsResponse,
   Component,
@@ -105,6 +106,7 @@ import {
   Permission,
   DescribeExtendedServiceAuthDetailRequest,
   OrganizationAuthUrl,
+  FlowBatchApproverInfo,
   Staff,
   ComponentLimit,
   ChannelVerifyPdfResponse,

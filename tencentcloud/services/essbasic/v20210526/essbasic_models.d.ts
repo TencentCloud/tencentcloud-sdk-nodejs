@@ -8,6 +8,15 @@ export interface SyncProxyOrganizationResponse {
     RequestId?: string;
 }
 /**
+ * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowBatchUrlInfo {
+    /**
+     * 批量签署合同和签署方的信息，用于补充动态签署人。
+     */
+    FlowBatchApproverInfos?: Array<FlowBatchApproverInfo>;
+}
+/**
  * ChannelCreateConvertTaskApi返回参数结构体
  */
 export interface ChannelCreateConvertTaskApiResponse {
@@ -2882,6 +2891,19 @@ export interface OrganizationAuthUrl {
      * 企业批量注册的错误信息，例如：企业三要素不通过
      */
     ErrorMessage?: string;
+}
+/**
+ * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowBatchApproverInfo {
+    /**
+     * 合同流程ID。
+     */
+    FlowId?: string;
+    /**
+     * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
+     */
+    RecipientId?: string;
 }
 /**
  * 企业员工信息
@@ -6240,14 +6262,14 @@ export interface ChannelCreateBatchSignUrlRequest {
   
   注：`请确保和合同中填入的一致`
      */
-    Name: string;
+    Name?: string;
     /**
      * 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
   请确认手机号所有方为此业务通知方。
   
   注：`请确保和合同中填入的一致,  若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`
      */
-    Mobile: string;
+    Mobile?: string;
     /**
      * 执行本接口操作的员工信息。
   注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
@@ -6304,6 +6326,10 @@ export interface ChannelCreateBatchSignUrlRequest {
   </ul>
      */
     JumpToDetail?: boolean;
+    /**
+     * 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。
+     */
+    FlowBatchUrlInfo?: FlowBatchUrlInfo;
 }
 /**
  * ChannelCreateOrganizationModifyQrCode返回参数结构体

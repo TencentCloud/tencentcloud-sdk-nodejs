@@ -971,32 +971,6 @@ export interface DeleteQARequest {
     QaBizIds: Array<string>;
 }
 /**
- * ParseDoc请求参数结构体
- */
-export interface ParseDocRequest {
-    /**
-     * 文件名称(需要包括文件后缀, 最大长度1024字节)
-     */
-    Name: string;
-    /**
-     * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf)
-     */
-    Url: string;
-    /**
-     * 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节)
-     */
-    TaskId: string;
-    /**
-     * 切分策略
-     */
-    Policy?: string;
-    /**
-     * 默认值: parse
-     * @deprecated
-     */
-    Operate?: string;
-}
-/**
  * ListRelease请求参数结构体
  */
 export interface ListReleaseRequest {
@@ -1767,35 +1741,6 @@ export interface GetAppSecretRequest {
  * DeleteQACate返回参数结构体
  */
 export interface DeleteQACateResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * QueryParseDocResult返回参数结构体
- */
-export interface QueryParseDocResultResponse {
-    /**
-     * 等待 / 执行中 / 成功 / 失败
-     */
-    Status?: string;
-    /**
-     * 解析后的文件内容
-     */
-    Name?: string;
-    /**
-     * 文件下载地址
-     */
-    Url?: string;
-    /**
-     * 解析失败原因
-     */
-    Reason?: string;
-    /**
-     * 消耗量，输出页数
-     */
-    Usage?: Usage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3030,15 +2975,6 @@ export interface AppInfo {
     ModelAliasName?: string;
 }
 /**
- * QueryParseDocResult请求参数结构体
- */
-export interface QueryParseDocResultRequest {
-    /**
-     * 任务ID
-     */
-    TaskId: string;
-}
-/**
  * 知识问答配置
  */
 export interface KnowledgeQaConfig {
@@ -3694,19 +3630,6 @@ export interface CreateQAResponse {
  * StopDocParse返回参数结构体
  */
 export interface StopDocParseResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ParseDoc返回参数结构体
- */
-export interface ParseDocResponse {
-    /**
-     * 任务ID
-     */
-    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

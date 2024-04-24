@@ -46,7 +46,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyCredentials", req, cb);
     }
     /**
-     * 查询凭证模版内容
+     * 查询凭证模板内容
      */
     async QueryCPT(req, cb) {
         return this.request("QueryCPT", req, cb);

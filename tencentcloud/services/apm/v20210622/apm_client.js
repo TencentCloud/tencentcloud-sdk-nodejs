@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("apm.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
-     * 修改APM实例接口
+     * 查询应用配置信息
      */
-    async ModifyApmInstance(req, cb) {
-        return this.request("ModifyApmInstance", req, cb);
+    async DescribeGeneralApmApplicationConfig(req, cb) {
+        return this.request("DescribeGeneralApmApplicationConfig", req, cb);
+    }
+    /**
+     * 根据维度名和过滤条件，查询维度数据.
+     */
+    async DescribeTagValues(req, cb) {
+        return this.request("DescribeTagValues", req, cb);
     }
     /**
      * 通用查询调用链列表
@@ -50,6 +56,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeApmAgent(req, cb) {
         return this.request("DescribeApmAgent", req, cb);
+    }
+    /**
+     * 修改APM实例接口
+     */
+    async ModifyApmInstance(req, cb) {
+        return this.request("ModifyApmInstance", req, cb);
+    }
+    /**
+     * 对外开放的openApi，客户可以灵活的指定需要修改的字段，再加入需要修改的服务列表.
+     */
+    async ModifyGeneralApmApplicationConfig(req, cb) {
+        return this.request("ModifyGeneralApmApplicationConfig", req, cb);
     }
     /**
      * 获取指标数据通用接口。用户根据需要上送请求参数，返回对应的指标数据。

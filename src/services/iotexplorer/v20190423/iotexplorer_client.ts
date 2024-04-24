@@ -27,6 +27,7 @@ import {
   ListEventHistoryResponse,
   ModifyLoRaGatewayRequest,
   ThumbnailURLInfoList,
+  DescribeDeviceFirmwaresRequest,
   DevicesItem,
   DeleteFenceBindRequest,
   DescribeModelDefinitionResponse,
@@ -51,6 +52,7 @@ import {
   DeleteTopicRuleResponse,
   PositionItem,
   InheritCloudStorageUserRequest,
+  DeviceFirmwareInfo,
   TransferCloudStorageResponse,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
@@ -308,6 +310,7 @@ import {
   DescribeCloudStorageTimeRequest,
   GetBatchProductionsListResponse,
   DescribeGatewayBindDevicesResponse,
+  DescribeDeviceFirmwaresResponse,
   DescribeFirmwareTaskRequest,
   CreatePositionSpaceRequest,
 } from "./iotexplorer_models"
@@ -1129,6 +1132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicePositionListResponse) => void
   ): Promise<DescribeDevicePositionListResponse> {
     return this.request("DescribeDevicePositionList", req, cb)
+  }
+
+  /**
+   * 获取设备当前固件信息
+   */
+  async DescribeDeviceFirmwares(
+    req: DescribeDeviceFirmwaresRequest,
+    cb?: (error: string, rep: DescribeDeviceFirmwaresResponse) => void
+  ): Promise<DescribeDeviceFirmwaresResponse> {
+    return this.request("DescribeDeviceFirmwares", req, cb)
   }
 
   /**

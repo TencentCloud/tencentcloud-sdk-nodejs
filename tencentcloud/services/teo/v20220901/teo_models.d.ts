@@ -148,7 +148,7 @@ export interface OriginDetail {
   <li>COS：腾讯云 COS 对象存储源站；</li>
   <li>AWS_S3：AWS S3 对象存储源站；</li>
   <li>ORIGIN_GROUP：源站组类型源站；</li>
-   <li>VODEO：云点播（混合云版）；</li>
+  <li>VODEO：云点播（混合云版）；</li>
   <li>SPACE：源站卸载，当前仅白名单开放；</li>
   <li>LB：负载均衡，当前仅白名单开放。</li>
      */
@@ -160,7 +160,6 @@ export interface OriginDetail {
   <li>当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；</li>
   <li>当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；</li>
   <li>当 OriginType = VODEO 时，如果 VodeoDistributionRange = ALL，则该参数为 "all-buckets-in-vodeo-application"；如果 VodeoDistributionRange = Bucket，则该参数为对应存储桶域名。</li>
-  
      */
     Origin?: string;
     /**
@@ -176,10 +175,10 @@ export interface OriginDetail {
      */
     BackOriginGroupName?: string;
     /**
-     * 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWS_S3 时会生效，取值有：
+     * 指定是否允许访问私有对象存储源站，该参数仅当源站类型OriginType = COS 或 AWS_S3 时会生效，取值有：
   <li>on：使用私有鉴权；</li>
   <li>off：不使用私有鉴权。</li>
-  不填写，默认值为off。
+  不填写，默认值为 off。
      */
     PrivateAccess?: string;
     /**
@@ -7800,6 +7799,11 @@ export interface AccelerationDomain {
      */
     OriginProtocol?: string;
     /**
+     * 域名证书信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Certificate?: AccelerationDomainCertificate;
+    /**
      * HTTP回源端口。
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -7839,11 +7843,6 @@ export interface AccelerationDomain {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OwnershipVerification?: OwnershipVerification;
-    /**
-     * 域名证书信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Certificate?: AccelerationDomainCertificate;
 }
 /**
  * 慢速攻击的基础配置。

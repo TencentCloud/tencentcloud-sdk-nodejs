@@ -30,6 +30,16 @@ export interface DescribePersonCertificateResponse {
 }
 
 /**
+ * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowBatchUrlInfo {
+  /**
+   * 批量签署合同和签署方的信息，用于补充动态签署人。
+   */
+  FlowBatchApproverInfos?: Array<FlowBatchApproverInfo>
+}
+
+/**
  * 用户计费使用情况详情
  */
 export interface BillUsageDetail {
@@ -1177,6 +1187,20 @@ export interface DescribeIntegrationRolesRequest {
 
    */
   Offset?: number
+}
+
+/**
+ * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowBatchApproverInfo {
+  /**
+   * 合同流程ID。
+   */
+  FlowId?: string
+  /**
+   * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
+   */
+  RecipientId?: string
 }
 
 /**
@@ -7504,14 +7528,14 @@ export interface CreateBatchSignUrlRequest {
 
 注：`请确保和合同中填入的一致`
    */
-  Name: string
+  Name?: string
   /**
    * 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
 请确认手机号所有方为此业务通知方。
 
 注：`请确保和合同中填入的一致,  若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -7567,6 +7591,10 @@ export interface CreateBatchSignUrlRequest {
 </ul>
    */
   JumpToDetail?: boolean
+  /**
+   * 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。
+   */
+  FlowBatchUrlInfo?: FlowBatchUrlInfo
 }
 
 /**

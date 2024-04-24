@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePersonCertificateResponse,
+  FlowBatchUrlInfo,
   BillUsageDetail,
   DescribeCancelFlowsTaskResponse,
   IntentionActionResult,
@@ -54,6 +55,7 @@ import {
   CreateFlowOption,
   ReleasedApprover,
   DescribeIntegrationRolesRequest,
+  FlowBatchApproverInfo,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
   SealInfo,

@@ -102,7 +102,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询凭证模版内容
+   * 查询凭证模板内容
    */
   async QueryCPT(
     req: QueryCPTRequest,

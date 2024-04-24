@@ -32,7 +32,7 @@ export interface ImageModerationRequest {
    */
   FileContent?: string
   /**
-   * 该字段表示待检测图片文件的访问链接，图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，**大小不超过5MB**，建议**分辨率不低于256x256**；图片下载时间限制为3秒，超过则会返回下载超时；由于网络安全策略，**送审带重定向的链接，可能引起下载失败**，请尽量避免，比如Http返回302状态码的链接，可能导致接口返回ResourceUnavailable.ImageDownloadError。<br>备注：**该字段与FileContent必须选择输入其中一个**。
+   * 该字段表示待检测图片文件的访问链接。图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式，且**大小不得超过5MB**，建议**分辨率不低于256x256**。**图片下载时间限制为3秒，超时将进行一次重试，若再次失败，则会返回下载超时**。由于网络安全策略，**送审带重定向的链接**可能引起下载失败，请尽量避免使用返回302或其他非200状态码的HTTP链接，会导致接口返回 ResourceUnavailable.ImageDownloadError 错误。<br>备注：该字段与FileContent必须选择输入其中一个。
    */
   FileUrl?: string
   /**
@@ -76,34 +76,34 @@ export interface ObjectResult {
   /**
    * 该字段用于返回实体识别出的实体场景结果，如二维码、logo、图片OCR等场景。
    */
-  Scene: string
+  Scene?: string
   /**
    * 该字段用于返回针对当前恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
   /**
-   * 该字段用于返回检测结果所对应的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果所对应的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回当前恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior* 等子标签。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 该字段用于返回命中当前恶意标签下子标签的分值，取值为**0-100**，如：*Porn-SexBehavior 99* 则代表相应识别内容命中色情-性行为标签的分值为99。
    */
-  Score: number
+  Score?: number
   /**
    * 该标签用于返回所识别出的实体名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Names: Array<string>
+  Names?: Array<string>
   /**
    * 该标签用于返回所识别出实体的详细信息，如：序号、命中标签名称、位置坐标等信息，详细返回内容敬请参考相应数据结构（[ObjectDetail
 ](https://cloud.tencent.com/document/api/1125/53274#ObjectDetail)）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<ObjectDetail>
+  Details?: Array<ObjectDetail>
 }
 
 /**
@@ -113,39 +113,39 @@ export interface OcrTextDetail {
   /**
    * 该字段用于返回OCR识别出的文本内容。<br>备注：OCR文本识别上限在**5000字节内**。
    */
-  Text: string
+  Text?: string
   /**
-   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
-   * 该字段**仅当Label为Custom自定义关键词时有效**，用于返回自定义库的ID，以方便自定义库管理和配置。
+   * 该字段用于返回自定义库的ID，以方便自定义库管理和配置。
    */
-  LibId: string
+  LibId?: string
   /**
-   * 该字段**仅当Label为Custom自定义关键词时有效**，用于返回自定义库的名称，以方便自定义库管理和配置。
+   * 该字段用于返回自定义库的名称，以方便自定义库管理和配置。
    */
-  LibName: string
+  LibName?: string
   /**
    * 该参数用于返回在当前label下命中的关键词。
    */
-  Keywords: Array<string>
+  Keywords?: Array<string>
   /**
    * 该参数用于返回在当前恶意标签下模型命中的分值，取值为**0-100**；分数越高，代表当前场景越符合该恶意标签所对应的场景。
    */
-  Score: number
+  Score?: number
   /**
    * 该参数用于返回OCR检测框在图片中的位置（左上角xy坐标、长宽、旋转角度），以方便快速定位识别文字的相关信息。
    */
-  Location: Location
+  Location?: Location
   /**
    * 该参数用于返回OCR文本识别结果的置信度，取值在**0**（**置信度最低**）-**100**（**置信度最高**），越高代表对应图像越有可能是识别出的文字；如：*你好 99*，则表明OCR识别框内的文字大概率是”你好“。
    */
-  Rate: number
+  Rate?: number
   /**
    * 该字段用于返回检测结果所对应的恶意二级标签。
    */
-  SubLabel: string
+  SubLabel?: string
 }
 
 /**
@@ -264,32 +264,32 @@ export interface OcrResult {
   /**
    * 该字段表示识别场景，取值默认为OCR（图片OCR识别）。
    */
-  Scene: string
+  Scene?: string
   /**
    * 该字段用于返回优先级最高的恶意标签对应的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
   /**
-   * 该字段用于返回OCR检测结果所对应的优先级最高的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回OCR检测结果所对应的优先级最高的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回当前标签（Label）下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回OCR识别出的结果的详细内容，如：文本内容、对应标签、识别框位置等信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<OcrTextDetail>
+  Details?: Array<OcrTextDetail>
   /**
    * 该字段用于返回OCR识别出的文字信息。
    */
-  Text: string
+  Text?: string
 }
 
 /**
@@ -299,33 +299,33 @@ export interface LibDetail {
   /**
    * 该字段用于返回识别对象的ID以方便识别和区分。
    */
-  Id: number
+  Id?: number
   /**
-   * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。
+   * 该字段用于返回自定义库的ID，以方便自定义库管理和配置。
    */
-  LibId: string
+  LibId?: string
   /**
-   * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。
+   * 该字段用于返回自定义库的名称,以方便自定义库管理和配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LibName: string
+  LibName?: string
   /**
    * 该字段用于返回识别图像对象的ID以方便文件管理。
    */
-  ImageId: string
+  ImageId?: string
   /**
-   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回其他自定义标签以满足您的定制化场景需求，若无需求则可略过。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag: string
+  Tag?: string
   /**
    * 该字段用于返回对应模型命中的分值，取值为**0-100**，如：*Porn 99* 则代表相应识别内容命中色情标签的分值为99。
    */
-  Score: number
+  Score?: number
 }
 
 /**
@@ -361,28 +361,28 @@ export interface LabelResult {
   /**
    * 该字段用于返回模型识别出的场景结果，如广告、色情、有害内容等场景。
    */
-  Scene: string
+  Scene?: string
   /**
    * 该字段用于返回针对当前恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
   /**
-   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回对应恶意标签下的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表图片越有可能属于当前返回的标签；如：*色情 99*，则表明该图片非常有可能属于色情内容；*色情 0*，则表明该图片不属于色情内容。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回分类模型命中子标签的详细信息，如：序号、命中标签名称、分数等信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<LabelDetailItem>
+  Details?: Array<LabelDetailItem>
 }
 
 /**
@@ -455,29 +455,29 @@ export interface LibResult {
   /**
    * 该字段表示模型的场景识别结果，默认取值为Similar。
    */
-  Scene: string
+  Scene?: string
   /**
    * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
   /**
-   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 该字段用于返回图片检索模型识别的分值，取值为**0-100**，表示该审核图片**与库中样本的相似分值**，得分越高，代表当前内容越有可能命中相似图库内的样本。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回黑白库比对结果的详细信息，如：序号、库名称、恶意标签等信息；详细返回信息敬请参考对应数据结构（[LibDetail](https://cloud.tencent.com/document/product/1125/53274#LibDetail)）的描述文档
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<LibDetail>
+  Details?: Array<LibDetail>
 }
 
 /**
@@ -489,7 +489,7 @@ export interface ImageModerationResponse {
    */
   Suggestion?: string
   /**
-   * 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
+   * 该字段用于返回检测结果（LabelResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。
    */
   Label?: string
   /**

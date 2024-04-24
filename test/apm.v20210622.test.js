@@ -18,9 +18,19 @@ const client = new tencentcloud.apm.v20210622.Client({
 })
 describe("apm.v20210622.test.js", function () {
 
-it("apm.v20210622.ModifyApmInstance", async function () {
+it("apm.v20210622.DescribeGeneralApmApplicationConfig", async function () {
     try {
-       const data = await client.ModifyApmInstance({})
+       const data = await client.DescribeGeneralApmApplicationConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.DescribeTagValues", async function () {
+    try {
+       const data = await client.DescribeTagValues({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +61,26 @@ it("apm.v20210622.DescribeApmInstances", async function () {
 it("apm.v20210622.DescribeApmAgent", async function () {
     try {
        const data = await client.DescribeApmAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.ModifyApmInstance", async function () {
+    try {
+       const data = await client.ModifyApmInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.ModifyGeneralApmApplicationConfig", async function () {
+    try {
+       const data = await client.ModifyGeneralApmApplicationConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

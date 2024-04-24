@@ -272,6 +272,23 @@ export interface CreateApmInstanceRequest {
     PayMode?: number;
 }
 /**
+ * ModifyGeneralApmApplicationConfig请求参数结构体
+ */
+export interface ModifyGeneralApmApplicationConfigRequest {
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+    /**
+     * 需要修改的字段key value分别指定字段名、字段值
+     */
+    Tags: Array<ApmTag>;
+    /**
+     * 需要修改配置的服务列表名称
+     */
+    ServiceNames?: Array<string>;
+}
+/**
  * DescribeServiceOverview返回参数结构体
  */
 export interface DescribeServiceOverviewResponse {
@@ -320,6 +337,34 @@ export interface DescribeApmInstancesResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Instances?: Array<ApmInstanceDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 组件
+ */
+export interface Instrument {
+    /**
+     * 组件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 组件开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: boolean;
+}
+/**
+ * DescribeTagValues返回参数结构体
+ */
+export interface DescribeTagValuesResponse {
+    /**
+     * 维度值列表
+     */
+    Values?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -511,6 +556,39 @@ export interface DescribeApmAgentResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTagValues请求参数结构体
+ */
+export interface DescribeTagValuesRequest {
+    /**
+     * 维度名
+     */
+    TagKey: string;
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: number;
+    /**
+     * 过滤条件
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 开始时间
+     */
+    StartTime?: number;
+    /**
+     * Or过滤条件
+     */
+    OrFilters?: Array<Filter>;
+    /**
+     * 使用类型
+     */
+    Type?: string;
+}
+/**
  * 指标维度信息
  */
 export interface ApmField {
@@ -572,41 +650,101 @@ export interface Line {
     Tags: Array<ApmTag>;
 }
 /**
- * DescribeGeneralSpanList请求参数结构体
+ * 应用相关的配置列表项
  */
-export interface DescribeGeneralSpanListRequest {
+export interface ApmApplicationConfigView {
     /**
-     * 分页
+     * 实例ID
      */
-    Offset: number;
+    InstanceKey?: string;
     /**
-     * 列表项个数
+     * 服务名
      */
-    Limit: number;
+    ServiceName?: string;
     /**
-     * 排序
+     * 接口过滤
      */
-    OrderBy?: OrderBy;
+    OperationNameFilter?: string;
     /**
-     * span查询开始时间戳（单位:秒）
+     * 异常过滤
      */
-    StartTime?: number;
+    ExceptionFilter?: string;
     /**
-     * 实例名
+     * 错误码过滤
      */
-    InstanceId?: string;
+    ErrorCodeFilter?: string;
     /**
-     * 通用过滤参数
+     * 应用诊断开关
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Filters?: Array<Filter>;
+    EventEnable?: boolean;
     /**
-     * 业务自身服务名
+     * URL收敛开关 0 关 1 开
      */
-    BusinessName?: string;
+    UrlConvergenceSwitch?: number;
     /**
-     * span查询结束时间戳（单位:秒）
+     * URL收敛阈值
      */
-    EndTime?: number;
+    UrlConvergenceThreshold?: number;
+    /**
+     * URL收敛规则正则
+     */
+    UrlConvergence?: string;
+    /**
+     * URL排除规则正则
+     */
+    UrlExclude?: string;
+    /**
+     * 是否开启日志 0 关 1 开
+     */
+    IsRelatedLog?: number;
+    /**
+     * 日志来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogSource?: string;
+    /**
+     * CLS日志集
+     */
+    LogSet?: string;
+    /**
+     * 日志主题ID
+     */
+    LogTopicID?: string;
+    /**
+     * 线程剖析开关
+     */
+    SnapshotEnable?: boolean;
+    /**
+     * 线程剖析超时阈值
+     */
+    SnapshotTimeout?: number;
+    /**
+     * 探针开启开关
+     */
+    AgentEnable?: boolean;
+    /**
+     * 组件列表开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstrumentList?: Array<Instrument>;
+    /**
+     * 链路压缩开关
+     */
+    TraceSquash?: boolean;
+}
+/**
+ * 维度（标签）对象
+ */
+export interface ApmTag {
+    /**
+     * 维度Key(列名，标签Key)
+     */
+    Key: string;
+    /**
+     * 维度值（标签值）
+     */
+    Value: string;
 }
 /**
  * Apm通用KV结构
@@ -656,17 +794,41 @@ export interface DescribeMetricRecordsResponse {
     RequestId?: string;
 }
 /**
- * 维度（标签）对象
+ * DescribeGeneralSpanList请求参数结构体
  */
-export interface ApmTag {
+export interface DescribeGeneralSpanListRequest {
     /**
-     * 维度Key(列名，标签Key)
+     * 分页
      */
-    Key: string;
+    Offset: number;
     /**
-     * 维度值（标签值）
+     * 列表项个数
      */
-    Value: string;
+    Limit: number;
+    /**
+     * 排序
+     */
+    OrderBy?: OrderBy;
+    /**
+     * span查询开始时间戳（单位:秒）
+     */
+    StartTime?: number;
+    /**
+     * 实例名
+     */
+    InstanceId?: string;
+    /**
+     * 通用过滤参数
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 业务自身服务名
+     */
+    BusinessName?: string;
+    /**
+     * span查询结束时间戳（单位:秒）
+     */
+    EndTime?: number;
 }
 /**
  * 查询过滤参数
@@ -783,6 +945,19 @@ export interface DescribeMetricRecordsRequest {
     OrFilters?: Array<Filter>;
 }
 /**
+ * DescribeGeneralApmApplicationConfig返回参数结构体
+ */
+export interface DescribeGeneralApmApplicationConfigResponse {
+    /**
+     * 应用配置项
+     */
+    ApmApplicationConfigView?: ApmApplicationConfigView;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeGeneralMetricData请求参数结构体
  */
 export interface DescribeGeneralMetricDataRequest {
@@ -890,6 +1065,19 @@ export interface SpanProcess {
     Tags: Array<SpanTag>;
 }
 /**
+ * DescribeGeneralApmApplicationConfig请求参数结构体
+ */
+export interface DescribeGeneralApmApplicationConfigRequest {
+    /**
+     * 应用名
+     */
+    ServiceName: string;
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+}
+/**
  * ModifyApmInstance返回参数结构体
  */
 export interface ModifyApmInstanceResponse {
@@ -964,6 +1152,19 @@ export interface DescribeGeneralMetricDataResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Records: Array<Line>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyGeneralApmApplicationConfig返回参数结构体
+ */
+export interface ModifyGeneralApmApplicationConfigResponse {
+    /**
+     * 返回值描述
+     */
+    Message?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

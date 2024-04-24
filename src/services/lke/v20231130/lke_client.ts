@@ -55,7 +55,6 @@ import {
   ReferDetail,
   ListUnsatisfiedReplyRequest,
   DeleteQARequest,
-  ParseDocRequest,
   ListReleaseRequest,
   ListModelRequest,
   SummaryOutput,
@@ -89,7 +88,6 @@ import {
   ResetSessionRequest,
   GetAppSecretRequest,
   DeleteQACateResponse,
-  QueryParseDocResultResponse,
   ListReleaseDocPreviewResponse,
   SummaryConfig,
   GenerateQAResponse,
@@ -145,7 +143,6 @@ import {
   CreateAttributeLabelRequest,
   ListAppResponse,
   AppInfo,
-  QueryParseDocResultRequest,
   KnowledgeQaConfig,
   RejectedQuestion,
   MsgRecordReference,
@@ -177,7 +174,6 @@ import {
   CreateAttributeLabelResponse,
   CreateQAResponse,
   StopDocParseResponse,
-  ParseDocResponse,
   ListQACateRequest,
   ListReleaseQAPreviewRequest,
   DescribeReleaseInfoResponse,
@@ -686,16 +682,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文件解析结果
-   */
-  async QueryParseDocResult(
-    req: QueryParseDocResultRequest,
-    cb?: (error: string, rep: QueryParseDocResultResponse) => void
-  ): Promise<QueryParseDocResultResponse> {
-    return this.request("QueryParseDocResult", req, cb)
-  }
-
-  /**
    * 查询属性标签列表
    */
   async ListAttributeLabel(
@@ -803,16 +789,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDocResponse) => void
   ): Promise<ModifyDocResponse> {
     return this.request("ModifyDoc", req, cb)
-  }
-
-  /**
-   * 解析拆分文件
-   */
-  async ParseDoc(
-    req: ParseDocRequest,
-    cb?: (error: string, rep: ParseDocResponse) => void
-  ): Promise<ParseDocResponse> {
-    return this.request("ParseDoc", req, cb)
   }
 
   /**

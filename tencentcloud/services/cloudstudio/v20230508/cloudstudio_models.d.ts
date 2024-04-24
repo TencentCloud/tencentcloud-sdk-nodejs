@@ -81,7 +81,7 @@ export interface CreateWorkspaceTokenRequest {
      */
     TokenExpiredLimitSec?: number;
     /**
-     * token 授权策略，可选值为 workspace-run-only, all。默认为 all
+     * token 授权策略，可选值为 workspace-run-only, all。默认为 workspace-run-only
      */
     Policies?: Array<string>;
 }
