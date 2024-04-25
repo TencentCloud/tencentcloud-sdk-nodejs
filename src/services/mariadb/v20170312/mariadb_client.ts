@@ -860,7 +860,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消DCN同步
+   * 本接口（CancelDcnJob）用于取消DCN同步
    */
   async CancelDcnJob(
     req: CancelDcnJobRequest,

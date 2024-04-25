@@ -276,7 +276,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabaseTable(req: DescribeDatabaseTableRequest, cb?: (error: string, rep: DescribeDatabaseTableResponse) => void): Promise<DescribeDatabaseTableResponse>;
     /**
-     * 取消DCN同步
+     * 本接口（CancelDcnJob）用于取消DCN同步
      */
     CancelDcnJob(req: CancelDcnJobRequest, cb?: (error: string, rep: CancelDcnJobResponse) => void): Promise<CancelDcnJobResponse>;
     /**

@@ -7487,7 +7487,7 @@ export interface CreateSealPolicyRequest {
      */
     SealId: string;
     /**
-     * 授权有效期。时间戳秒级
+     * 授权有效期，时间戳秒级。可以传0，代表有效期到2099年12月12日23点59分59秒。
      */
     Expired: number;
     /**

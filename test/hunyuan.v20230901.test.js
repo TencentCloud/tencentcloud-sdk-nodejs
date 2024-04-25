@@ -18,6 +18,16 @@ const client = new tencentcloud.hunyuan.v20230901.Client({
 })
 describe("hunyuan.v20230901.test.js", function () {
 
+it("hunyuan.v20230901.ChatCompletions", async function () {
+    try {
+       const data = await client.ChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.ChatPro", async function () {
     try {
        const data = await client.ChatPro({})

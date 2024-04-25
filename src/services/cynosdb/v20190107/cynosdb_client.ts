@@ -39,7 +39,6 @@ import {
   ModifyInstanceUpgradeLimitDaysResponse,
   DatabaseTables,
   UserHostPrivilege,
-  DescribeProxyNodesResponse,
   DescribeClustersRequest,
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
@@ -68,13 +67,15 @@ import {
   AuditRuleTemplateInfo,
   DescribeParamTemplateDetailRequest,
   ModifyAccountPrivilegesRequest,
+  ParamItemInfo,
   UpgradeProxyResponse,
   DescribeInstanceSpecsRequest,
-  GrantAccountPrivilegesRequest,
+  DescribeProxyNodesResponse,
   ProxyNodeInfo,
   DescribeZonesResponse,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
+  DescribeChangedParamsAfterUpgradeResponse,
   ProxyGroupRwInfo,
   DescribeProxyNodesRequest,
   InquirePriceCreateResponse,
@@ -98,6 +99,7 @@ import {
   ManualBackupData,
   DescribeBinlogsRequest,
   InstanceAuditLogFilter,
+  SlaveZoneStockInfo,
   ModifyProxyRwSplitRequest,
   DescribeResourcePackageListResponse,
   RuleFilters,
@@ -167,6 +169,7 @@ import {
   SaleZone,
   SwitchProxyVpcResponse,
   SlaveZoneAttrItem,
+  DescribeChangedParamsAfterUpgradeRequest,
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
@@ -334,7 +337,7 @@ import {
   SwitchClusterLogBin,
   ExportInstanceErrorLogsResponse,
   ParamItemDetail,
-  SlaveZoneStockInfo,
+  GrantAccountPrivilegesRequest,
   IsolateClusterResponse,
   RollbackTableInfo,
   ModifyVipVportResponse,
@@ -655,6 +658,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void
   ): Promise<ExportInstanceSlowQueriesResponse> {
     return this.request("ExportInstanceSlowQueries", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比
+   */
+  async DescribeChangedParamsAfterUpgrade(
+    req: DescribeChangedParamsAfterUpgradeRequest,
+    cb?: (error: string, rep: DescribeChangedParamsAfterUpgradeResponse) => void
+  ): Promise<DescribeChangedParamsAfterUpgradeResponse> {
+    return this.request("DescribeChangedParamsAfterUpgrade", req, cb)
   }
 
   /**

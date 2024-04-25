@@ -514,7 +514,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmPolicies(req: DescribeAlarmPoliciesRequest, cb?: (error: string, rep: DescribeAlarmPoliciesResponse) => void): Promise<DescribeAlarmPoliciesResponse>;
     /**
-     * 获取targets信息
+     * 获取targets信息，在过滤条件中指定job名称时返回targets详情，否则仅返回数量
      */
     DescribePrometheusTargetsTMP(req: DescribePrometheusTargetsTMPRequest, cb?: (error: string, rep: DescribePrometheusTargetsTMPResponse) => void): Promise<DescribePrometheusTargetsTMPResponse>;
     /**

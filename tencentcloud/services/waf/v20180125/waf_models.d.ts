@@ -6914,7 +6914,7 @@ export interface ModifyModuleStatusRequest {
      */
     Domain: string;
     /**
-     * WEB 安全模块开关，0或1
+     * Web 安全模块开关，0或1
      */
     WebSecurity: number;
     /**

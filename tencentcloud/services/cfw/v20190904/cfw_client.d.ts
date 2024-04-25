@@ -287,7 +287,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     DescribeRuleOverview(req: DescribeRuleOverviewRequest, cb?: (error: string, rep: DescribeRuleOverviewResponse) => void): Promise<DescribeRuleOverviewResponse>;
     /**
-     * ip防护状态查询
+     * IP防护状态查询
      */
     DescribeIPStatusList(req: DescribeIPStatusListRequest, cb?: (error: string, rep: DescribeIPStatusListResponse) => void): Promise<DescribeIPStatusListResponse>;
     /**

@@ -278,6 +278,16 @@ it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeChangedParamsAfterUpgrade", async function () {
+    try {
+       const data = await client.DescribeChangedParamsAfterUpgrade({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeAccountPrivileges", async function () {
     try {
        const data = await client.DescribeAccountPrivileges({})

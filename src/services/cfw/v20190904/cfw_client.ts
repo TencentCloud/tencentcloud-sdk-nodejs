@@ -1005,7 +1005,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * ip防护状态查询
+   * IP防护状态查询
    */
   async DescribeIPStatusList(
     req: DescribeIPStatusListRequest,

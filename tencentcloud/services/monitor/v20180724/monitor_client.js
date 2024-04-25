@@ -778,7 +778,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmPolicies", req, cb);
     }
     /**
-     * 获取targets信息
+     * 获取targets信息，在过滤条件中指定job名称时返回targets详情，否则仅返回数量
      */
     async DescribePrometheusTargetsTMP(req, cb) {
         return this.request("DescribePrometheusTargetsTMP", req, cb);

@@ -422,7 +422,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseTable", req, cb);
     }
     /**
-     * 取消DCN同步
+     * 本接口（CancelDcnJob）用于取消DCN同步
      */
     async CancelDcnJob(req, cb) {
         return this.request("CancelDcnJob", req, cb);

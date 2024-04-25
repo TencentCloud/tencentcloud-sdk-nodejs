@@ -2281,7 +2281,7 @@ export interface DescribeDataEventUrlResponse {
   /**
    * 返回值
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2712,7 +2712,7 @@ export interface DescribeDataEventUrlRequest {
    */
   Device?: string
   /**
-   * 是否海外
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
    */
   IsAbroad?: string
   /**

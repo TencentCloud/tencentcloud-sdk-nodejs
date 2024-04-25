@@ -1567,6 +1567,56 @@ export interface ModifyScheduleRequest {
 }
 
 /**
+ * 点播媒体文件元信息
+ */
+export interface MediaMetaData {
+  /**
+   * 上传的媒体文件大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
+   */
+  Size?: number
+  /**
+   * 容器类型，例如 m4a，mp4 等。
+   */
+  Container?: string
+  /**
+   * 视频流码率平均值与音频流码率平均值之和，单位：bps。
+   */
+  Bitrate?: number
+  /**
+   * 视频流高度的最大值，单位：px。
+   */
+  Height?: number
+  /**
+   * 视频流宽度的最大值，单位：px。
+   */
+  Width?: number
+  /**
+   * 视频时长，单位：秒。
+   */
+  Duration?: number
+  /**
+   * 视频拍摄时的选择角度，单位：度。
+   */
+  Rotate?: number
+  /**
+   * 视频流信息。
+   */
+  VideoStreamSet?: Array<MediaVideoStreamItem>
+  /**
+   * 音频流信息。
+   */
+  AudioStreamSet?: Array<MediaAudioStreamItem>
+  /**
+   * 视频时长，单位：秒。
+   */
+  VideoDuration?: number
+  /**
+   * 音频时长，单位：秒。
+   */
+  AudioDuration?: number
+}
+
+/**
  * 创建媒体传输流的输出的RTP的目标地址。
  */
 export interface CreateOutputRTPSettingsDestinations {
@@ -1914,6 +1964,7 @@ export interface ParseLiveStreamProcessNotificationResponse {
    * 直播流处理结果类型，包含：
 <li>AiReviewResult：内容审核结果；</li>
 <li>AiRecognitionResult：内容识别结果；</li>
+<li>LiveRecordResult：直播录制结果；</li>
 <li>ProcessEof：直播流处理结束。</li>
    */
   NotificationType?: string
@@ -1946,6 +1997,11 @@ export interface ParseLiveStreamProcessNotificationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiQualityControlResultInfo?: LiveStreamAiQualityControlResultInfo
+  /**
+   * 直播录制结果，当 NotificationType 为 LiveRecordResult 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveRecordResultInfo?: LiveStreamRecordResultInfo
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
    */
@@ -10498,53 +10554,21 @@ export interface ModifyTranscodeTemplateResponse {
 }
 
 /**
- * 点播媒体文件元信息
+ * 直播流录制结果
  */
-export interface MediaMetaData {
+export interface LiveStreamRecordResultInfo {
   /**
-   * 上传的媒体文件大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
+   * 录制是否结束。
+0：录制未结束，返回单个文件结果
+1：录制结束，返回所有录制文件结果
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Size?: number
+  RecordOver?: number
   /**
-   * 容器类型，例如 m4a，mp4 等。
+   * 文件列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Container?: string
-  /**
-   * 视频流码率平均值与音频流码率平均值之和，单位：bps。
-   */
-  Bitrate?: number
-  /**
-   * 视频流高度的最大值，单位：px。
-   */
-  Height?: number
-  /**
-   * 视频流宽度的最大值，单位：px。
-   */
-  Width?: number
-  /**
-   * 视频时长，单位：秒。
-   */
-  Duration?: number
-  /**
-   * 视频拍摄时的选择角度，单位：度。
-   */
-  Rotate?: number
-  /**
-   * 视频流信息。
-   */
-  VideoStreamSet?: Array<MediaVideoStreamItem>
-  /**
-   * 音频流信息。
-   */
-  AudioStreamSet?: Array<MediaAudioStreamItem>
-  /**
-   * 视频时长，单位：秒。
-   */
-  VideoDuration?: number
-  /**
-   * 音频时长，单位：秒。
-   */
-  AudioDuration?: number
+  FileResults?: Array<LiveRecordFile>
 }
 
 /**

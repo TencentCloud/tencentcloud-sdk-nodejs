@@ -518,24 +518,6 @@ export interface UserHostPrivilege {
 }
 
 /**
- * DescribeProxyNodes返回参数结构体
- */
-export interface DescribeProxyNodesResponse {
-  /**
-   * 数据库代理节点总数
-   */
-  TotalCount?: number
-  /**
-   * 数据库代理节点列表
-   */
-  ProxyNodeInfos?: Array<ProxyNodeInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeClusters请求参数结构体
  */
 export interface DescribeClustersRequest {
@@ -1560,6 +1542,35 @@ export interface ModifyAccountPrivilegesRequest {
 }
 
 /**
+ * 参数变化信息
+ */
+export interface ParamItemInfo {
+  /**
+   * 参数名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamName?: string
+  /**
+   * 参数新值
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewValue?: string
+  /**
+   * 参数旧值
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldValue?: string
+  /**
+   * 参数公式
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueFunction?: string
+}
+
+/**
  * UpgradeProxy返回参数结构体
  */
 export interface UpgradeProxyResponse {
@@ -1593,25 +1604,21 @@ export interface DescribeInstanceSpecsRequest {
 }
 
 /**
- * GrantAccountPrivileges请求参数结构体
+ * DescribeProxyNodes返回参数结构体
  */
-export interface GrantAccountPrivilegesRequest {
+export interface DescribeProxyNodesResponse {
   /**
-   * 集群id
+   * 数据库代理节点总数
    */
-  ClusterId: string
+  TotalCount?: number
   /**
-   * 账号信息
+   * 数据库代理节点列表
    */
-  Account: InputAccount
+  ProxyNodeInfos?: Array<ProxyNodeInfo>
   /**
-   * 数据库表权限码数组
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DbTablePrivileges: Array<string>
-  /**
-   * 数据库表信息
-   */
-  DbTables: Array<DbTable>
+  RequestId?: string
 }
 
 /**
@@ -1704,6 +1711,25 @@ export interface ModifyParamTemplateRequest {
  * OpenAuditService返回参数结构体
  */
 export interface OpenAuditServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeChangedParamsAfterUpgrade返回参数结构体
+ */
+export interface DescribeChangedParamsAfterUpgradeResponse {
+  /**
+   * 参数个数
+   */
+  TotalCount?: number
+  /**
+   * 实例参数列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ParamItemInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2167,6 +2193,27 @@ RA - 范围。
    * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系。
    */
   Value: Array<string>
+}
+
+/**
+ * 备可用区库存信息
+ */
+export interface SlaveZoneStockInfo {
+  /**
+   * 备可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZone?: string
+  /**
+   * 备可用区的库存数量	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StockCount?: number
+  /**
+   * 备可用区是否有库存	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasStock?: boolean
 }
 
 /**
@@ -3930,6 +3977,24 @@ export interface SlaveZoneAttrItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BinlogSyncWay?: string
+}
+
+/**
+ * DescribeChangedParamsAfterUpgrade请求参数结构体
+ */
+export interface DescribeChangedParamsAfterUpgradeRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 变配后的CPU
+   */
+  DstCpu: number
+  /**
+   * 变配后的MEM，单位G
+   */
+  DstMem: number
 }
 
 /**
@@ -6257,7 +6322,7 @@ export interface CreateProxyRequest {
    */
   UniqueSubnetId?: string
   /**
-   * 数据库代理组节点个数
+   * 数据库代理组节点个数（该参数不再建议使用，建议使用ProxyZones)
    */
   ProxyCount?: number
   /**
@@ -6281,7 +6346,7 @@ export interface CreateProxyRequest {
    */
   Description?: string
   /**
-   * 数据库节点信息
+   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
    */
   ProxyZones?: Array<ProxyZone>
 }
@@ -8451,24 +8516,25 @@ export interface ParamItemDetail {
 }
 
 /**
- * 备可用区库存信息
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface SlaveZoneStockInfo {
+export interface GrantAccountPrivilegesRequest {
   /**
-   * 备可用区
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群id
    */
-  SlaveZone?: string
+  ClusterId: string
   /**
-   * 备可用区的库存数量	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 账号信息
    */
-  StockCount?: number
+  Account: InputAccount
   /**
-   * 备可用区是否有库存	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据库表权限码数组
    */
-  HasStock?: boolean
+  DbTablePrivileges: Array<string>
+  /**
+   * 数据库表信息
+   */
+  DbTables: Array<DbTable>
 }
 
 /**

@@ -36,6 +36,7 @@ import {
   DescribeRealtimeLogDeliveryTasksRequest,
   DescribeOriginProtectionResponse,
   DescribeBillingDataRequest,
+  LogFormat,
   DescribeEnvironmentsRequest,
   DescribeAliasDomainsRequest,
   RateLimitConfig,

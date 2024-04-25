@@ -698,7 +698,7 @@ export interface AutoSnapshotPolicyInfo {
    */
   Status?: string
   /**
-   * 帐号ID
+   * 账号ID
    */
   AppId?: number
   /**
@@ -826,7 +826,12 @@ export interface UpdateCfsRuleRequest {
    */
   RWPermission?: string
   /**
-   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。
+   * 用户权限，值为all_squash、no_all_squash、root_squash、no_root_squash。
+all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
    */
   UserPermission?: string
   /**
@@ -967,27 +972,27 @@ export interface UpdateCfsRuleResponse {
   /**
    * 权限组 ID
    */
-  PGroupId: string
+  PGroupId?: string
   /**
    * 规则 ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 允许访问的客户端 IP 或者 IP 段
    */
-  AuthClientIp: string
+  AuthClientIp?: string
   /**
    * 读写权限
    */
-  RWPermission: string
+  RWPermission?: string
   /**
    * 用户权限
    */
-  UserPermission: string
+  UserPermission?: string
   /**
    * 优先级
    */
-  Priority: number
+  Priority?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1312,7 +1317,12 @@ export interface CreateCfsRuleRequest {
    */
   RWPermission?: string
   /**
-   * 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。不填默认为root_squash。
+   * 用户权限，值为 all_squash、no_all_squash、root_squash、no_root_squash。
+all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
    */
   UserPermission?: string
 }
@@ -1741,23 +1751,27 @@ export interface PGroupRuleInfo {
   /**
    * 规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 允许访问的客户端IP
    */
-  AuthClientIp: string
+  AuthClientIp?: string
   /**
    * 读写权限, ro为只读，rw为读写
    */
-  RWPermission: string
+  RWPermission?: string
   /**
-   * 用户权限。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。
+   * all_squash：所有访问用户（含 root 用户）都会被映射为匿名用户或用户组。
+no_all_squash：所有访问用户（含 root 用户）均保持原有的 UID/GID 信息。
+root_squash：将来访的 root 用户映射为匿名用户或用户组，非 root 用户保持原有的 UID/GID 信息。
+no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 用户）均保持原有的 UID/GID 信息
+
    */
-  UserPermission: string
+  UserPermission?: string
   /**
    * 规则优先级，1-100。 其中 1 为最高，100为最低
    */
-  Priority: number
+  Priority?: number
 }
 
 /**
@@ -1971,7 +1985,7 @@ export interface SnapshotInfo {
    */
   Percent?: number
   /**
-   * 帐号ID
+   * 账号ID
    */
   AppId?: number
   /**
@@ -2271,27 +2285,27 @@ export interface CreateCfsRuleResponse {
   /**
    * 规则 ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 权限组 ID
    */
-  PGroupId: string
+  PGroupId?: string
   /**
    * 客户端 IP
    */
-  AuthClientIp: string
+  AuthClientIp?: string
   /**
    * 读写权限
    */
-  RWPermission: string
+  RWPermission?: string
   /**
    * 用户权限
    */
-  UserPermission: string
+  UserPermission?: string
   /**
    * 优先级
    */
-  Priority: number
+  Priority?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

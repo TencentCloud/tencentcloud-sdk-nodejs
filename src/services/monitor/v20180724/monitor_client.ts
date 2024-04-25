@@ -1714,7 +1714,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取targets信息
+   * 获取targets信息，在过滤条件中指定job名称时返回targets详情，否则仅返回数量
    */
   async DescribePrometheusTargetsTMP(
     req: DescribePrometheusTargetsTMPRequest,

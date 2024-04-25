@@ -3489,7 +3489,7 @@ export interface DescribeChatMessagesRequest {
    */
   InstanceId?: number
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 应用 ID，可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId?: number
   /**

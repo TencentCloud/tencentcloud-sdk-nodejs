@@ -398,6 +398,47 @@ export interface DescribeBillingDataRequest {
     Filters?: Array<BillingDataFilter>;
 }
 /**
+ * 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。
+ */
+export interface LogFormat {
+    /**
+     * 日志投递的预设输出格式类型，取值有：
+  <li>json：使用预设日志输出格式 JSON Lines，单条日志中的字段以键值对方式呈现；</li>
+  <li>csv：使用预设日志输出格式 csv，单条日志中仅呈现字段值，不呈现字段名称。</li>
+     */
+    FormatType: string;
+    /**
+     * 在每个日志投递批次之前添加的字符串。每个日志投递批次可能包含多条日志记录。
+     */
+    BatchPrefix?: string;
+    /**
+     * 在每个日志投递批次后附加的字符串。
+     */
+    BatchSuffix?: string;
+    /**
+     * 在每条日志记录之前添加的字符串。
+     */
+    RecordPrefix?: string;
+    /**
+     * 在每条日志记录后附加的字符串。
+     */
+    RecordSuffix?: string;
+    /**
+     * 插入日志记录之间作为分隔符的字符串，取值有：
+  <li>\n：换行符；</li>
+  <li>\t：制表符；</li>
+  <li>，：半角逗号。</li>
+     */
+    RecordDelimiter?: string;
+    /**
+     * 单条日志记录内，插入字段之间作为分隔符的字符串，取值有：
+  <li>\t：制表符；</li>
+  <li>，：半角逗号；</li>
+  <li>;：半角分号。</li>
+     */
+    FieldDelimiter?: string;
+}
+/**
  * DescribeEnvironments请求参数结构体
  */
 export interface DescribeEnvironmentsRequest {
@@ -516,6 +557,12 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
      * 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。
      */
     Sample?: number;
+    /**
+     * 日志投递的输出格式。不填表示为默认格式，默认格式逻辑如下：
+  <li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
+  <li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines；</li>特别地，当 TaskType 取值为 cls 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。
+     */
+    LogFormat?: LogFormat;
     /**
      * CLS 的配置信息。当 TaskType 取值为 cls 时，该参数必填。
      */
@@ -2704,27 +2751,31 @@ export interface Task {
     /**
      * 任务 ID。
      */
-    JobId: string;
-    /**
-     * 状态。
-     */
-    Status: string;
+    JobId?: string;
     /**
      * 资源。
      */
-    Target: string;
+    Target?: string;
     /**
      * 任务类型。
      */
-    Type: string;
+    Type?: string;
+    /**
+     * 状态。取值有：
+  <li>processing：处理中；</li>
+  <li>success：成功；</li>
+  <li> failed：失败；</li>
+  <li>timeout：超时。</li>
+     */
+    Status?: string;
     /**
      * 任务创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务完成时间。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeL4ProxyRules返回参数结构体
@@ -3467,6 +3518,10 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
      * 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填保持原有配置。
      */
     Sample?: number;
+    /**
+     * 日志投递的输出格式。不填保持原有配置。
+     */
+    LogFormat?: LogFormat;
     /**
      * 自定义 HTTP 服务的配置信息，不填保持原有配置。
      */
@@ -4771,6 +4826,13 @@ export interface RealtimeLogDeliveryTask {
      */
     Sample?: number;
     /**
+     * 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：
+  <li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
+  <li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogFormat?: LogFormat;
+    /**
      * CLS 的配置信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -5557,8 +5619,8 @@ export interface DDosProtectionConfig {
     /**
      * 中国大陆地区独立 DDoS 防护的规格。详情请参考 [独立 DDoS 防护相关费用](https://cloud.tencent.com/document/product/1552/94162)
   <li>PLATFORM：平台默认防护，即不开启独立 DDoS 防护；</li>
-  <li>BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽，可配置最高 300 Gpbs 弹性防护带宽；</li>
-  <li>BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽，可配置最高 600 Gpbs 弹性防护带宽。</li>不填写参数时，取默认值 PLATFORM。
+  <li>BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽以及 300 Gbps 弹性防护带宽；</li>
+  <li>BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽以及 600 Gbps 弹性防护带宽。</li>不填写参数时，取默认值 PLATFORM。
      */
     LevelMainland?: string;
     /**
@@ -5572,7 +5634,7 @@ export interface DDosProtectionConfig {
     /**
      * 全球（除中国大陆以外）地区独立 DDoS 防护的规格。
   <li>PLATFORM：平台默认防护，即不开启独立 DDoS 防护；</li>
-  <li>ANYCAST300：开启独立 DDoS 防护，提供合计最大 300 Gbps 防护带宽；</li>
+  <li>ANYCAST300：开启独立 DDoS 防护，提供 300 Gbps 防护带宽；</li>
   <li>ANYCAST_ALLIN：开启独立 DDoS 防护，使用全部可用防护资源进行防护。</li>不填写参数时，取默认值 PLATFORM。
      */
     LevelOverseas?: string;

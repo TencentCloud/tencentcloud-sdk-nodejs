@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportInstanceSlowQueries", req, cb);
     }
     /**
+     * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比
+     */
+    async DescribeChangedParamsAfterUpgrade(req, cb) {
+        return this.request("DescribeChangedParamsAfterUpgrade", req, cb);
+    }
+    /**
      * 查询账号已有权限
      */
     async DescribeAccountPrivileges(req, cb) {

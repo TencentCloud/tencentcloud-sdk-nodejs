@@ -124,19 +124,23 @@ export interface CreateWorkspaceRequest {
     /**
      * 应用名称
      */
-    AppId?: number;
+    TenantAppId?: number;
     /**
      * 用户UIN
      */
-    Uin?: string;
+    TenantUin?: string;
     /**
      * VPCID
      */
-    UniqVpcId?: string;
+    TenantUniqVpcId?: string;
     /**
      * 子网ID
      */
-    SubnetId?: string;
+    TenantSubnetId?: string;
+    /**
+     * 地域
+     */
+    Region?: string;
 }
 /**
  * RunWorkspace返回参数结构体
