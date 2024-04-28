@@ -288,6 +288,16 @@ it("domain.v20180808.BatchModifyDomainInfo", async function () {
     }
 })
 
+it("domain.v20180808.ModifyTemplate", async function () {
+    try {
+       const data = await client.ModifyTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.TransferProhibitionBatch", async function () {
     try {
        const data = await client.TransferProhibitionBatch({})

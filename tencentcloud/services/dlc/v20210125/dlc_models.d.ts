@@ -1335,7 +1335,7 @@ export interface UpdateUserDataEngineConfigRequest {
      */
     DataEngineConfigPairs?: Array<DataEngineConfigPair>;
     /**
-     * 作业引擎资源配置模版
+     * 作业引擎资源配置模板
      */
     SessionResourceTemplate?: SessionResourceTemplate;
 }
@@ -5728,7 +5728,7 @@ export interface CreateSparkAppRequest {
      */
     AppFile: string;
     /**
-     * 数据访问策略，CAM Role arn
+     * 数据访问策略，CAM Role arn，控制台通过数据作业—>作业配置获取，SDK通过DescribeUserRoles接口获取对应的值；
      */
     RoleArn: number;
     /**
@@ -7221,7 +7221,7 @@ export interface SparkJobInfo {
      */
     CurrentTaskId?: string;
     /**
-     * spark作业最近运行状态
+     * spark作业最近运行状态，初始化：0，运行中：1，成功：2，数据写入中： 3， 排队中： 4， 失败： -1， 已删除： -3，已过期： -5
      */
     JobStatus?: number;
     /**
@@ -7309,6 +7309,11 @@ export interface SparkJobInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSessionStarted?: boolean;
+    /**
+     * 引擎详细类型：SparkSQL、PrestoSQL、SparkBatch、StandardSpark、StandardPresto
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineTypeDetail?: string;
 }
 /**
  * DescribeScripts请求参数结构体

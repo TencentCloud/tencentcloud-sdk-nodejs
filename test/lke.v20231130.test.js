@@ -478,6 +478,16 @@ it("lke.v20231130.CreateQA", async function () {
     }
 })
 
+it("lke.v20231130.QueryParseDocResult", async function () {
+    try {
+       const data = await client.QueryParseDocResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ListAttributeLabel", async function () {
     try {
        const data = await client.ListAttributeLabel({})
@@ -581,6 +591,16 @@ it("lke.v20231130.GetMsgRecord", async function () {
 it("lke.v20231130.ModifyDoc", async function () {
     try {
        const data = await client.ModifyDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.ParseDoc", async function () {
+    try {
+       const data = await client.ParseDoc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

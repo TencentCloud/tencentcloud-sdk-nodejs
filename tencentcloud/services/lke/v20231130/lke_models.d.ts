@@ -308,6 +308,14 @@ export interface DescribeAppResponse {
      */
     AppKey?: string;
     /**
+     * 应用状态，1：未上线，2：运行中，3：停用
+     */
+    AppStatus?: number;
+    /**
+     * 状态说明
+     */
+    AppStatusDesc?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -393,6 +401,15 @@ export interface MsgRecord {
      * 是否大模型
      */
     IsLlmGenerated?: boolean;
+    /**
+     * 图片链接，可公有读
+     */
+    ImageUrls?: Array<string>;
+    /**
+     * 当次 token 统计信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TokenStat?: TokenStat;
 }
 /**
  * ListUnsatisfiedReply返回参数结构体
@@ -534,6 +551,11 @@ export interface GetMsgRecordResponse {
      */
     Records?: Array<MsgRecord>;
     /**
+     * session 清除关联上下文时间, 单位 ms
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SessionDisassociatedTimestamp?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -575,6 +597,31 @@ export interface DescribeUnsatisfiedReplyContextRequest {
      * 登录用户子账号(集成商模式必填)
      */
     LoginSubAccountUin?: string;
+}
+/**
+ * 执行过程信息记录
+ */
+export interface Procedure {
+    /**
+     * 执行过程英语名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 中文名, 用于展示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * 状态常量: 使用中: processing, 成功: success, 失败: failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 消耗 token 数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
 }
 /**
  * QA查询参数
@@ -969,6 +1016,32 @@ export interface DeleteQARequest {
      * 问答ID
      */
     QaBizIds: Array<string>;
+}
+/**
+ * ParseDoc请求参数结构体
+ */
+export interface ParseDocRequest {
+    /**
+     * 文件名称(需要包括文件后缀, 最大长度1024字节)
+     */
+    Name: string;
+    /**
+     * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf)
+     */
+    Url: string;
+    /**
+     * 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节)
+     */
+    TaskId: string;
+    /**
+     * 切分策略
+     */
+    Policy?: string;
+    /**
+     * 默认值: parse
+     * @deprecated
+     */
+    Operate?: string;
 }
 /**
  * ListRelease请求参数结构体
@@ -1551,6 +1624,21 @@ export interface KnowledgeQaOutput {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BareAnswer?: string;
+    /**
+     * 是否展示问题澄清开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShowQuestionClarify?: boolean;
+    /**
+     * 是否打开问题澄清
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UseQuestionClarify?: boolean;
+    /**
+     * 问题澄清关键词列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuestionClarifyKeywords?: Array<string>;
 }
 /**
  * CheckAttributeLabelRefer请求参数结构体
@@ -1727,6 +1815,10 @@ export interface ResetSessionRequest {
      * 会话ID
      */
     SessionId: string;
+    /**
+     * 是否仅清空会话关联
+     */
+    IsOnlyEmptyTheDialog?: boolean;
 }
 /**
  * GetAppSecret请求参数结构体
@@ -1741,6 +1833,35 @@ export interface GetAppSecretRequest {
  * DeleteQACate返回参数结构体
  */
 export interface DeleteQACateResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * QueryParseDocResult返回参数结构体
+ */
+export interface QueryParseDocResultResponse {
+    /**
+     * 等待 / 执行中 / 成功 / 失败
+     */
+    Status?: string;
+    /**
+     * 解析后的文件内容
+     */
+    Name?: string;
+    /**
+     * 文件下载地址
+     */
+    Url?: string;
+    /**
+     * 解析失败原因
+     */
+    Reason?: string;
+    /**
+     * 消耗量，输出页数
+     */
+    Usage?: Usage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1777,6 +1898,11 @@ export interface SummaryConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Output?: SummaryOutput;
+    /**
+     * 欢迎语，200字符以内
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Greeting?: string;
 }
 /**
  * GenerateQA返回参数结构体
@@ -2975,6 +3101,15 @@ export interface AppInfo {
     ModelAliasName?: string;
 }
 /**
+ * QueryParseDocResult请求参数结构体
+ */
+export interface QueryParseDocResultRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+}
+/**
  * 知识问答配置
  */
 export interface KnowledgeQaConfig {
@@ -3531,6 +3666,11 @@ export interface ClassifyConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Labels?: Array<ClassifyLabel>;
+    /**
+     * 欢迎语，200字符以内
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Greeting?: string;
 }
 /**
  * UploadAttributeLabel请求参数结构体
@@ -3630,6 +3770,19 @@ export interface CreateQAResponse {
  * StopDocParse返回参数结构体
  */
 export interface StopDocParseResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ParseDoc返回参数结构体
+ */
+export interface ParseDocResponse {
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3760,13 +3913,64 @@ export interface DeleteAppRequest {
     AppType: string;
 }
 /**
- * VerifyQA返回参数结构体
+ * 当前执行的 token 统计信息
  */
-export interface VerifyQAResponse {
+export interface TokenStat {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 会话 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SessionId?: string;
+    /**
+     * 请求 ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     RequestId?: string;
+    /**
+     * 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecordId?: string;
+    /**
+     * token 已使用数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedCount?: number;
+    /**
+     * 免费 token 数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FreeCount?: number;
+    /**
+     * 订单总 token 数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrderCount?: number;
+    /**
+     * 当前执行状态汇总, 常量: 使用中: processing, 成功: success, 失败: failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusSummary?: string;
+    /**
+     * 当前执行状态汇总后中文展示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusSummaryTitle?: string;
+    /**
+     * 当前请求执行时间, 单位 ms
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Elapsed?: number;
+    /**
+     * 当前请求消耗 token 数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TokenCount?: number;
+    /**
+     * 执行过程信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Procedures?: Array<Procedure>;
 }
 /**
  * 应用类型详情
@@ -3796,6 +4000,14 @@ export interface DescribeStorageCredentialRequest {
      * 机器人ID
      */
     BotBizId: string;
+    /**
+     * 文件类型
+     */
+    FileType?: string;
+    /**
+     * 权限场景，是否公有权限
+     */
+    IsPublic?: boolean;
 }
 /**
  * 问答列表
@@ -3976,6 +4188,10 @@ export interface GetMsgRecordRequest {
      * 机器人AppKey
      */
     BotAppKey?: string;
+    /**
+     * 场景, 体验: 1; 正式: 2
+     */
+    Scene?: number;
 }
 /**
  * DescribeStorageCredential返回参数结构体
@@ -4017,6 +4233,10 @@ export interface DescribeStorageCredentialResponse {
      * 图片存储目录
      */
     ImagePath?: string;
+    /**
+     * 上传存储目录
+     */
+    UploadPath?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4193,6 +4413,15 @@ export interface ListRejectedQuestionRequest {
   
      */
     Query?: string;
+}
+/**
+ * VerifyQA返回参数结构体
+ */
+export interface VerifyQAResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 发布配置项

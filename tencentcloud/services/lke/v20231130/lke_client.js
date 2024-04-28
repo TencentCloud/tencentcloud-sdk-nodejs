@@ -306,6 +306,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQA", req, cb);
     }
     /**
+     * 查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
+     */
+    async QueryParseDocResult(req, cb) {
+        return this.request("QueryParseDocResult", req, cb);
+    }
+    /**
      * 查询属性标签列表
      */
     async ListAttributeLabel(req, cb) {
@@ -370,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDoc(req, cb) {
         return this.request("ModifyDoc", req, cb);
+    }
+    /**
+     * 解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
+     */
+    async ParseDoc(req, cb) {
+        return this.request("ParseDoc", req, cb);
     }
     /**
      * 获取ws token

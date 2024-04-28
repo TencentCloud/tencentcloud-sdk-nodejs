@@ -1592,6 +1592,14 @@ export interface CreateCosRechargeRequest {
    * 提取规则，如果设置了ExtractRule，则必须设置LogType
    */
   ExtractRuleInfo?: ExtractRuleInfo
+  /**
+   * COS导入任务类型。1：一次性导入任务；2：持续性导入任务。默认为1：一次性导入任务
+   */
+  TaskType?: number
+  /**
+   * 元数据。
+   */
+  Metadata?: Array<string>
 }
 
 /**
@@ -5685,7 +5693,7 @@ export interface ShipperInfo {
  */
 export interface CreateCosRechargeResponse {
   /**
-   * cos_recharge记录id
+   * COS导入任务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
@@ -6753,7 +6761,7 @@ export interface CheckRechargeKafkaServerResponse {
  */
 export interface ModifyCosRechargeRequest {
   /**
-   * COS导入配置ID
+   * COS导入配置Id
    */
   Id: string
   /**
@@ -6765,9 +6773,41 @@ export interface ModifyCosRechargeRequest {
    */
   Name?: string
   /**
-   * 是否启用:   0： 未启用  ， 1：启用
+   * 任务状态   0： 停用 ， 1：启用
    */
   Enable?: number
+  /**
+   * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。
+   */
+  Bucket?: string
+  /**
+   * COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。
+   */
+  BucketRegion?: string
+  /**
+   * COS文件所在文件夹的前缀
+   */
+  Prefix?: string
+  /**
+   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文； 默认为minimalist_log
+   */
+  LogType?: string
+  /**
+   * 解析格式。supported: "", "gzip", "lzop", "snappy"; 默认空
+   */
+  Compress?: string
+  /**
+   * 提取规则，如果设置了ExtractRule，则必须设置LogType
+   */
+  ExtractRuleInfo?: ExtractRuleInfo
+  /**
+   * COS导入任务类型。1：一次性导入任务；2：持续性导入任务。
+   */
+  TaskType?: number
+  /**
+   * 元数据。支持 bucket，object。
+   */
+  Metadata?: Array<string>
 }
 
 /**

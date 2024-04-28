@@ -36,6 +36,7 @@ import {
   RecognizePhilippinesDrivingLicenseOCRRequest,
   WordItem,
   MLIDPassportOCRRequest,
+  RecognizeGeneralTextImageWarnResponse,
   ItemInfo,
   SmartStructuralOCRV2Request,
   TextDetectResponse,
@@ -58,12 +59,12 @@ import {
   HmtResidentPermitOCRResponse,
   VatInvoiceItem,
   VehicleRegCertInfo,
-  IDCardOCRResponse,
+  ElectronicAirTransport,
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
   SealInfo,
-  RecognizePhilippinesVoteIDOCRRequest,
+  RecognizeIndonesiaIDCardOCRRequest,
   InvoiceGeneralInfo,
   TextVatInvoice,
   InstitutionOCRResponse,
@@ -120,7 +121,7 @@ import {
   VehicleLicenseOCRResponse,
   RecognizePhilippinesSssIDOCRRequest,
   Key,
-  ElectronicAirTransport,
+  GeneralWarnInfo,
   ClassifyDetectOCRRequest,
   DutyPaidProofOCRResponse,
   TollInvoiceOCRRequest,
@@ -178,7 +179,7 @@ import {
   SmartStructuralOCRResponse,
   DetectedWords,
   OtherInvoiceList,
-  RecognizeIndonesiaIDCardOCRRequest,
+  IDCardOCRResponse,
   ShipInvoiceInfo,
   Polygon,
   GeneralAccurateOCRRequest,
@@ -196,7 +197,7 @@ import {
   FinanBillSliceInfo,
   RideHailingDriverLicenseOCRRequest,
   Encryption,
-  ArithmeticOCRRequest,
+  GetTaskStateResponse,
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
   FinanBillSliceOCRRequest,
@@ -216,9 +217,10 @@ import {
   QuestionObj,
   TableInfo,
   VinOCRResponse,
-  GetTaskStateResponse,
+  ArithmeticOCRRequest,
   FormulaOCRRequest,
   TextGeneralHandwriting,
+  RecognizePhilippinesVoteIDOCRRequest,
   PassportOCRRequest,
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
@@ -298,9 +300,10 @@ import {
   RecognizePhilippinesDrivingLicenseOCRResponse,
   FinanBillOCRRequest,
   QuotaInvoiceOCRResponse,
-  UsedCarPurchaseInvoice,
+  RecognizeGeneralTextImageWarnRequest,
   RecognizeForeignPermanentResidentIdCardRequest,
   GeneralFastOCRResponse,
+  UsedCarPurchaseInvoice,
   QrcodePositionObj,
 } from "./ocr_models"
 
@@ -1119,6 +1122,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: HmtResidentPermitOCRResponse) => void
   ): Promise<HmtResidentPermitOCRResponse> {
     return this.request("HmtResidentPermitOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持多种类型证件有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能。可以应用于各种证件信息有效性校验场景，例如银行开户、用户注册等场景。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async RecognizeGeneralTextImageWarn(
+    req: RecognizeGeneralTextImageWarnRequest,
+    cb?: (error: string, rep: RecognizeGeneralTextImageWarnResponse) => void
+  ): Promise<RecognizeGeneralTextImageWarnResponse> {
+    return this.request("RecognizeGeneralTextImageWarn", req, cb)
   }
 
   /**

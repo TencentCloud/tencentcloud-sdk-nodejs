@@ -55,6 +55,24 @@ export interface DescribeCustomDnsHostSetResponse {
 }
 
 /**
+ * ModifyTemplate请求参数结构体
+ */
+export interface ModifyTemplateRequest {
+  /**
+   * 证件信息
+   */
+  CertificateInfo: CertificateInfo
+  /**
+   * 联系人信息
+   */
+  ContactInfo: ContactInfo
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+}
+
+/**
  * CheckDomain返回参数结构体
  */
 export interface CheckDomainResponse {
@@ -1411,13 +1429,13 @@ export interface TransferProhibitionBatchResponse {
 }
 
 /**
- * ModifyIntlCustomDnsHost返回参数结构体
+ * ModifyTemplate返回参数结构体
  */
-export interface ModifyIntlCustomDnsHostResponse {
+export interface ModifyTemplateResponse {
   /**
-   * 任务ID
+   * 模板信息
    */
-  LogId?: number
+  Template: TemplateInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1542,6 +1560,20 @@ GZJGZY: 公证机构执业证。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegistrantImgUrl?: string
+}
+
+/**
+ * ModifyIntlCustomDnsHost返回参数结构体
+ */
+export interface ModifyIntlCustomDnsHostResponse {
+  /**
+   * 任务ID
+   */
+  LogId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

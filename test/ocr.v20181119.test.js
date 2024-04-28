@@ -518,6 +518,16 @@ it("ocr.v20181119.HmtResidentPermitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeGeneralTextImageWarn", async function () {
+    try {
+       const data = await client.RecognizeGeneralTextImageWarn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.SmartStructuralOCR", async function () {
     try {
        const data = await client.SmartStructuralOCR({})

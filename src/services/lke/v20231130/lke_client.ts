@@ -42,6 +42,7 @@ import {
   GetMsgRecordResponse,
   AttrLabelRefer,
   DescribeUnsatisfiedReplyContextRequest,
+  Procedure,
   QAQuery,
   ListAppRequest,
   AttrLabel,
@@ -55,6 +56,7 @@ import {
   ReferDetail,
   ListUnsatisfiedReplyRequest,
   DeleteQARequest,
+  ParseDocRequest,
   ListReleaseRequest,
   ListModelRequest,
   SummaryOutput,
@@ -88,6 +90,7 @@ import {
   ResetSessionRequest,
   GetAppSecretRequest,
   DeleteQACateResponse,
+  QueryParseDocResultResponse,
   ListReleaseDocPreviewResponse,
   SummaryConfig,
   GenerateQAResponse,
@@ -143,6 +146,7 @@ import {
   CreateAttributeLabelRequest,
   ListAppResponse,
   AppInfo,
+  QueryParseDocResultRequest,
   KnowledgeQaConfig,
   RejectedQuestion,
   MsgRecordReference,
@@ -174,13 +178,14 @@ import {
   CreateAttributeLabelResponse,
   CreateQAResponse,
   StopDocParseResponse,
+  ParseDocResponse,
   ListQACateRequest,
   ListReleaseQAPreviewRequest,
   DescribeReleaseInfoResponse,
   IsTransferIntentRequest,
   DescribeReferRequest,
   DeleteAppRequest,
-  VerifyQAResponse,
+  TokenStat,
   ListAppCategoryRspOption,
   DescribeStorageCredentialRequest,
   QAList,
@@ -202,6 +207,7 @@ import {
   DescribeRobotBizIDByAppKeyRequest,
   CreateRejectedQuestionRequest,
   ListRejectedQuestionRequest,
+  VerifyQAResponse,
   ReleaseConfigs,
   Filters,
   ModifyRejectedQuestionRequest,
@@ -682,6 +688,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档解析结果。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或[联系客服](https://cloud.tencent.com/act/event/Online_service) 。
+   */
+  async QueryParseDocResult(
+    req: QueryParseDocResultRequest,
+    cb?: (error: string, rep: QueryParseDocResultResponse) => void
+  ): Promise<QueryParseDocResultResponse> {
+    return this.request("QueryParseDocResult", req, cb)
+  }
+
+  /**
    * 查询属性标签列表
    */
   async ListAttributeLabel(
@@ -789,6 +805,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDocResponse) => void
   ): Promise<ModifyDocResponse> {
     return this.request("ModifyDoc", req, cb)
+  }
+
+  /**
+   * 解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
+   */
+  async ParseDoc(
+    req: ParseDocRequest,
+    cb?: (error: string, rep: ParseDocResponse) => void
+  ): Promise<ParseDocResponse> {
+    return this.request("ParseDoc", req, cb)
   }
 
   /**

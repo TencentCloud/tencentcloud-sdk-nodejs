@@ -128,6 +128,16 @@ it("ess.v20201111.CreateFlowGroupSignReview", async function () {
     }
 })
 
+it("ess.v20201111.UnbindEmployeeUserIdWithClientOpenId", async function () {
+    try {
+       const data = await client.UnbindEmployeeUserIdWithClientOpenId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.RenewAutoSignLicense", async function () {
     try {
        const data = await client.RenewAutoSignLicense({})
@@ -168,9 +178,9 @@ it("ess.v20201111.ModifyExtendedService", async function () {
     }
 })
 
-it("ess.v20201111.UnbindEmployeeUserIdWithClientOpenId", async function () {
+it("ess.v20201111.DescribeBatchOrganizationRegistrationUrls", async function () {
     try {
-       const data = await client.UnbindEmployeeUserIdWithClientOpenId({})
+       const data = await client.DescribeBatchOrganizationRegistrationUrls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

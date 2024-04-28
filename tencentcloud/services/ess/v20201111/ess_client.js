@@ -164,6 +164,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowGroupSignReview", req, cb);
     }
     /**
+     * 此接口（UnbindEmployeeUserIdWithClientOpenId）用于解除电子签系统员工UserId与客户系统员工OpenId之间的绑定关系。
+
+注：`在调用此接口时，需确保OpenId已通过调用`<a href="https://qian.tencent.com/developers/companyApis/staffs/BindEmployeeUserIdWithClientOpenId" target="_blank">BindEmployeeUserIdWithClientOpenId</a>`接口与电子签系统的UserId绑定过。若OpenId未经过绑定，则无法使用此接口进行解绑操作。`
+     */
+    async UnbindEmployeeUserIdWithClientOpenId(req, cb) {
+        return this.request("UnbindEmployeeUserIdWithClientOpenId", req, cb);
+    }
+    /**
      * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
 
 注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -216,12 +224,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyExtendedService", req, cb);
     }
     /**
-     * 此接口（UnbindEmployeeUserIdWithClientOpenId）用于解除电子签系统员工UserId与客户系统员工OpenId之间的绑定关系。
+     * 此接口用于获取企业批量认证异步任务的状态及结果。
 
-注：`在调用此接口时，需确保OpenId已通过调用`<a href="https://qian.tencent.com/developers/companyApis/staffs/BindEmployeeUserIdWithClientOpenId" target="_blank">BindEmployeeUserIdWithClientOpenId</a>`接口与电子签系统的UserId绑定过。若OpenId未经过绑定，则无法使用此接口进行解绑操作。`
+前提条件：已调用 CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任务接口，并得到了任务Id。
+
+异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间
      */
-    async UnbindEmployeeUserIdWithClientOpenId(req, cb) {
-        return this.request("UnbindEmployeeUserIdWithClientOpenId", req, cb);
+    async DescribeBatchOrganizationRegistrationUrls(req, cb) {
+        return this.request("DescribeBatchOrganizationRegistrationUrls", req, cb);
     }
     /**
      * 指定需要批量撤回的签署流程Id，以获取批量撤销链接。

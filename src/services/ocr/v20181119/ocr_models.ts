@@ -560,6 +560,36 @@ export interface MLIDPassportOCRRequest {
 }
 
 /**
+ * RecognizeGeneralTextImageWarn返回参数结构体
+ */
+export interface RecognizeGeneralTextImageWarnResponse {
+  /**
+   * 复印告警信息
+   */
+  Copy?: GeneralWarnInfo
+  /**
+   * 翻拍告警信息
+   */
+  Reprint?: GeneralWarnInfo
+  /**
+   * 模糊告警信息
+   */
+  Blur?: GeneralWarnInfo
+  /**
+   * 反光告警信息
+   */
+  Reflection?: GeneralWarnInfo
+  /**
+   * 边框不完整告警信息
+   */
+  BorderIncomplete?: GeneralWarnInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能结构化元素组
  */
 export interface ItemInfo {
@@ -1394,68 +1424,91 @@ export interface VehicleRegCertInfo {
 }
 
 /**
- * IDCardOCR返回参数结构体
+ * 全电发票（航空运输电子客票行程单）
  */
-export interface IDCardOCRResponse {
+export interface ElectronicAirTransport {
   /**
-   * 姓名（人像面）
+   * 发票代码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Code?: string
   /**
-   * 性别（人像面）
+   * 发票号码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sex?: string
+  Number?: string
   /**
-   * 民族（人像面）
+   * 开票日期
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nation?: string
+  Date?: string
   /**
-   * 出生日期（人像面）
+   * 金额
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Birth?: string
+  Amount?: string
   /**
-   * 地址（人像面）
+   * 校验码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address?: string
+  CheckCode?: string
   /**
-   * 身份证号（人像面）
+   * 价税合计
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdNum?: string
+  Total?: string
   /**
-   * 发证机关（国徽面）
+   * 抵扣标志
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Authority?: string
+  DeductionMark?: string
   /**
-   * 证件有效期（国徽面）
+   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidDate?: string
+  StateCode?: string
   /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+   * 购方识别号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerTaxCode?: string
+  /**
+   * 购方名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerName?: string
+  /**
+   * 合计税额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tax?: string
+  /**
+   * 国内国际标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomesticInternationalMark?: string
+  /**
+   * 旅客姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerName?: string
+  /**
+   * 有效身份证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerNo?: string
+  /**
+   * 电子客票号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicNumber?: string
+  /**
+   * 全电发票（航空运输电子客票行程单）详细信息
 
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
 
-WarnInfos，告警信息，Code 告警码列表和释义：
--9100	身份证有效日期不合法告警，
--9101	身份证边框不完整告警，
--9102	身份证复印件告警，
--9103	身份证翻拍告警，
--9105	身份证框内遮挡告警，
--9104	临时身份证告警，
--9106	身份证疑似存在PS痕迹告警，
--9107       身份证反光告警。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvancedInfo?: string
-  /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
-   */
-  ReflectDetailInfos?: Array<ReflectDetailInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ElectronicAirTransportDetails?: Array<ElectronicAirTransportDetail>
 }
 
 /**
@@ -1569,13 +1622,9 @@ export interface SealInfo {
 }
 
 /**
- * RecognizePhilippinesVoteIDOCR请求参数结构体
+ * RecognizeIndonesiaIDCardOCR请求参数结构体
  */
-export interface RecognizePhilippinesVoteIDOCRRequest {
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage: boolean
+export interface RecognizeIndonesiaIDCardOCRRequest {
   /**
    * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
@@ -1591,6 +1640,17 @@ export interface RecognizePhilippinesVoteIDOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
+  /**
+   * 场景参数，默认值为V1
+可选值：
+V1
+V2
+   */
+  Scene?: string
 }
 
 /**
@@ -3474,91 +3534,23 @@ export interface Key {
 }
 
 /**
- * 全电发票（航空运输电子客票行程单）
+ * 通用告警详情
  */
-export interface ElectronicAirTransport {
+export interface GeneralWarnInfo {
   /**
-   * 发票代码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否存在该告警
    */
-  Code?: string
+  IsWarn?: boolean
   /**
-   * 发票号码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 告警位置四点坐标
    */
-  Number?: string
+  Polygon?: Array<Polygon>
   /**
-   * 开票日期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Date?: string
-  /**
-   * 金额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Amount?: string
-  /**
-   * 校验码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckCode?: string
-  /**
-   * 价税合计
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: string
-  /**
-   * 抵扣标志
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeductionMark?: string
-  /**
-   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StateCode?: string
-  /**
-   * 购方识别号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BuyerTaxCode?: string
-  /**
-   * 购方名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BuyerName?: string
-  /**
-   * 合计税额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tax?: string
-  /**
-   * 国内国际标识
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DomesticInternationalMark?: string
-  /**
-   * 旅客姓名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PassengerName?: string
-  /**
-   * 有效身份证件号码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PassengerNo?: string
-  /**
-   * 电子客票号码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElectronicNumber?: string
-  /**
-   * 全电发票（航空运输电子客票行程单）详细信息
+   * 特殊判定，支持包括
 
-
-注意：此字段可能返回 null，表示取不到有效值。
+Finger：由手指导致的不完整，仅在不完整告警中返回
    */
-  ElectronicAirTransportDetails?: Array<ElectronicAirTransportDetail>
+  SpecificMatter?: string
 }
 
 /**
@@ -6195,35 +6187,68 @@ export interface OtherInvoiceList {
 }
 
 /**
- * RecognizeIndonesiaIDCardOCR请求参数结构体
+ * IDCardOCR返回参数结构体
  */
-export interface RecognizeIndonesiaIDCardOCRRequest {
+export interface IDCardOCRResponse {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 姓名（人像面）
    */
-  ImageBase64?: string
+  Name?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 性别（人像面）
    */
-  ImageUrl?: string
+  Sex?: string
   /**
-   * 是否返回人像照片。
+   * 民族（人像面）
    */
-  ReturnHeadImage?: boolean
+  Nation?: string
   /**
-   * 场景参数，默认值为V1
-可选值：
-V1
-V2
+   * 出生日期（人像面）
    */
-  Scene?: string
+  Birth?: string
+  /**
+   * 地址（人像面）
+   */
+  Address?: string
+  /**
+   * 身份证号（人像面）
+   */
+  IdNum?: string
+  /**
+   * 发证机关（国徽面）
+   */
+  Authority?: string
+  /**
+   * 证件有效期（国徽面）
+   */
+  ValidDate?: string
+  /**
+   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
+IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
+Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+
+Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
+
+WarnInfos，告警信息，Code 告警码列表和释义：
+-9100	身份证有效日期不合法告警，
+-9101	身份证边框不完整告警，
+-9102	身份证复印件告警，
+-9103	身份证翻拍告警，
+-9105	身份证框内遮挡告警，
+-9104	临时身份证告警，
+-9106	身份证疑似存在PS痕迹告警，
+-9107       身份证反光告警。
+   */
+  AdvancedInfo?: string
+  /**
+   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   */
+  ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6698,48 +6723,22 @@ export interface Encryption {
 }
 
 /**
- * ArithmeticOCR请求参数结构体
+ * GetTaskState返回参数结构体
  */
-export interface ArithmeticOCRRequest {
+export interface GetTaskStateResponse {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 1:任务识别完成，还未提交
+2:任务已手动关闭
+3:任务已提交
+4:任务识别中
+5:超时：任务超过了可操作的24H时限
+6:任务识别失败
    */
-  ImageBase64?: string
+  TaskState?: number
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageUrl?: string
-  /**
-   * 用于选择是否支持横屏拍摄。打开则支持横屏拍摄图片角度判断，角度信息在返回参数的angle中，默认值为true
-   */
-  SupportHorizontalImage?: boolean
-  /**
-   * 是否拒绝非速算图，打开则拒绝非速算图(注：非速算图是指风景人物等明显不是速算图片的图片)，默认值为false
-   */
-  RejectNonArithmeticPic?: boolean
-  /**
-   * 是否展开耦合算式中的竖式计算，默认值为false
-   */
-  EnableDispRelatedVertical?: boolean
-  /**
-   * 是否展示竖式算式的中间结果和格式控制字符，默认值为false
-   */
-  EnableDispMidResult?: boolean
-  /**
-   * 是否开启pdf识别，默认值为true
-   */
-  EnablePdfRecognize?: boolean
-  /**
-   * pdf页码，从0开始，默认为0
-   */
-  PdfPageIndex?: number
+  RequestId?: string
 }
 
 /**
@@ -7434,22 +7433,48 @@ export interface VinOCRResponse {
 }
 
 /**
- * GetTaskState返回参数结构体
+ * ArithmeticOCR请求参数结构体
  */
-export interface GetTaskStateResponse {
+export interface ArithmeticOCRRequest {
   /**
-   * 1:任务识别完成，还未提交
-2:任务已手动关闭
-3:任务已提交
-4:任务识别中
-5:超时：任务超过了可操作的24H时限
-6:任务识别失败
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  TaskState?: number
+  ImageBase64?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  RequestId?: string
+  ImageUrl?: string
+  /**
+   * 用于选择是否支持横屏拍摄。打开则支持横屏拍摄图片角度判断，角度信息在返回参数的angle中，默认值为true
+   */
+  SupportHorizontalImage?: boolean
+  /**
+   * 是否拒绝非速算图，打开则拒绝非速算图(注：非速算图是指风景人物等明显不是速算图片的图片)，默认值为false
+   */
+  RejectNonArithmeticPic?: boolean
+  /**
+   * 是否展开耦合算式中的竖式计算，默认值为false
+   */
+  EnableDispRelatedVertical?: boolean
+  /**
+   * 是否展示竖式算式的中间结果和格式控制字符，默认值为false
+   */
+  EnableDispMidResult?: boolean
+  /**
+   * 是否开启pdf识别，默认值为true
+   */
+  EnablePdfRecognize?: boolean
+  /**
+   * pdf页码，从0开始，默认为0
+   */
+  PdfPageIndex?: number
 }
 
 /**
@@ -7500,6 +7525,31 @@ export interface TextGeneralHandwriting {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WordPolygon: Array<Polygon>
+}
+
+/**
+ * RecognizePhilippinesVoteIDOCR请求参数结构体
+ */
+export interface RecognizePhilippinesVoteIDOCRRequest {
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage: boolean
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
 }
 
 /**
@@ -10212,6 +10262,103 @@ export interface QuotaInvoiceOCRResponse {
 }
 
 /**
+ * RecognizeGeneralTextImageWarn请求参数结构体
+ */
+export interface RecognizeGeneralTextImageWarnRequest {
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 示例值：false
+   */
+  EnablePdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。 示例值：1
+   */
+  PdfPageNumber?: number
+  /**
+   * 支持的模板类型
+- General 通用告警
+- LicensePlate 车牌告警
+   */
+  Type?: string
+}
+
+/**
+ * RecognizeForeignPermanentResidentIdCard请求参数结构体
+ */
+export interface RecognizeForeignPermanentResidentIdCardRequest {
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/docume
+   */
+  ImageUrl?: string
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   */
+  EnablePdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
+示例值：1
+   */
+  PdfPageNumber?: number
+}
+
+/**
+ * GeneralFastOCR返回参数结构体
+ */
+export interface GeneralFastOCRResponse {
+  /**
+   * 检测到的文本信息，具体内容请点击左侧链接。
+   */
+  TextDetections: Array<TextDetection>
+  /**
+   * 检测到的语言，目前支持的语种范围为：简体中文、繁体中文、英文、日文、韩文。未来将陆续新增对更多语种的支持。
+返回结果含义为：zh - 中英混合，jap - 日文，kor - 韩文。
+   */
+  Language: string
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
+   */
+  Angel: number
+  /**
+   * 图片为PDF时，返回PDF的总页数，默认为0
+   */
+  PdfPageSize: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 二手车销售统一发票
  */
 export interface UsedCarPurchaseInvoice {
@@ -10387,66 +10534,6 @@ export interface UsedCarPurchaseInvoice {
    * 机打发票号码
    */
   MachineNumber?: string
-}
-
-/**
- * RecognizeForeignPermanentResidentIdCard请求参数结构体
- */
-export interface RecognizeForeignPermanentResidentIdCardRequest {
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-支持的图片像素：需介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/docume
-   */
-  ImageUrl?: string
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-支持的图片像素：需介于20-10000px之间。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-   */
-  EnablePdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
-示例值：1
-   */
-  PdfPageNumber?: number
-}
-
-/**
- * GeneralFastOCR返回参数结构体
- */
-export interface GeneralFastOCRResponse {
-  /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
-   */
-  TextDetections: Array<TextDetection>
-  /**
-   * 检测到的语言，目前支持的语种范围为：简体中文、繁体中文、英文、日文、韩文。未来将陆续新增对更多语种的支持。
-返回结果含义为：zh - 中英混合，jap - 日文，kor - 韩文。
-   */
-  Language: string
-  /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
-   */
-  Angel: number
-  /**
-   * 图片为PDF时，返回PDF的总页数，默认为0
-   */
-  PdfPageSize: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

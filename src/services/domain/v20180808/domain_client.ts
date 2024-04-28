@@ -21,6 +21,7 @@ import {
   DeleteReservedPreDomainInfoResponse,
   DeleteTemplateResponse,
   DescribeCustomDnsHostSetResponse,
+  ModifyTemplateRequest,
   CheckDomainResponse,
   DeleteCustomDnsHostResponse,
   RenewDomainBatchRequest,
@@ -85,9 +86,10 @@ import {
   ReservedPreDomainInfo,
   CheckDomainRequest,
   TransferProhibitionBatchResponse,
-  ModifyIntlCustomDnsHostResponse,
+  ModifyTemplateResponse,
   DescribeTemplateListRequest,
   CertificateInfo,
+  ModifyIntlCustomDnsHostResponse,
   BidPreDomainsRequest,
   CreateTemplateRequest,
   UpdateProhibitionBatchResponse,
@@ -393,6 +395,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void
   ): Promise<BatchModifyDomainInfoResponse> {
     return this.request("BatchModifyDomainInfo", req, cb)
+  }
+
+  /**
+   * 修改模板信息
+   */
+  async ModifyTemplate(
+    req: ModifyTemplateRequest,
+    cb?: (error: string, rep: ModifyTemplateResponse) => void
+  ): Promise<ModifyTemplateResponse> {
+    return this.request("ModifyTemplate", req, cb)
   }
 
   /**

@@ -27,7 +27,7 @@ export interface CreateTawInstanceRequest {
      */
     InstanceDesc?: string;
     /**
-     * 每天数据上报量
+     * 每天数据上报量，（不作量级限制）
      */
     CountNum?: string;
     /**
@@ -124,7 +124,7 @@ export interface DescribeDataFetchProjectRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -274,7 +274,7 @@ export interface DescribeDataPvUrlInfoResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -296,7 +296,7 @@ export interface DescribeDataFetchUrlResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -577,7 +577,7 @@ export interface DescribeDataCustomUrlRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -634,7 +634,7 @@ export interface DescribeRumGroupLogResponse {
     /**
      * 返回字符串
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -713,7 +713,7 @@ export interface DescribeDataStaticUrlRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -945,7 +945,7 @@ export interface DescribeDataPerformancePageRequest {
      */
     ExtThird?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -1072,7 +1072,7 @@ export interface DescribeDataFetchUrlRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -1144,7 +1144,7 @@ export interface DescribeDataLogUrlStatisticsResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1284,7 +1284,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
      */
     Device?: string;
     /**
-     * 显示是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -1436,7 +1436,7 @@ export interface DescribeDataStaticProjectRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -1563,7 +1563,7 @@ export interface DescribeRumStatsLogListResponse {
     /**
      * 返回字符串
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1578,7 +1578,7 @@ export interface CreateWhitelistRequest {
      */
     InstanceID: string;
     /**
-     * 备注
+     * 备注（暂未作字节数限制）
      */
     Remark: string;
     /**
@@ -1627,7 +1627,7 @@ export interface DescribeDataCustomUrlResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1739,7 +1739,7 @@ export interface DescribeDataSetUrlStatisticsRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -1779,7 +1779,7 @@ export interface DescribeDataStaticProjectResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1995,7 +1995,7 @@ export interface DescribeDataLogUrlStatisticsRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -2143,7 +2143,7 @@ export interface DescribeDataPerformancePageResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2165,7 +2165,7 @@ export interface DescribeDataStaticResourceResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2257,7 +2257,7 @@ export interface DescribeDataWebVitalsPageRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -2350,7 +2350,7 @@ export interface DescribeDataFetchUrlInfoRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -2381,7 +2381,7 @@ export interface DescribeDataFetchUrlInfoResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2407,7 +2407,7 @@ export interface DescribeDataStaticUrlResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2420,11 +2420,11 @@ export interface CreateWhitelistResponse {
     /**
      * 消息
      */
-    Msg: string;
+    Msg?: string;
     /**
      * 白名单ID
      */
-    ID: number;
+    ID?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2499,7 +2499,7 @@ export interface DescribeDataWebVitalsPageResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2777,7 +2777,7 @@ export interface DescribeRumLogExportResponse {
     /**
      * 返回字符串
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2947,7 +2947,7 @@ export interface DescribeDataStaticResourceRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -3082,7 +3082,7 @@ export interface DescribeDataPvUrlInfoRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
      */
     IsAbroad?: string;
     /**
@@ -3118,7 +3118,7 @@ export interface DescribeDataFetchProjectResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3247,7 +3247,7 @@ export interface DescribeDataSetUrlStatisticsResponse {
     /**
      * 返回值
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

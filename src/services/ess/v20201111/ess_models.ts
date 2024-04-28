@@ -1986,6 +1986,25 @@ export interface CancelFailureFlow {
 }
 
 /**
+ * DescribeBatchOrganizationRegistrationUrls请求参数结构体
+ */
+export interface DescribeBatchOrganizationRegistrationUrlsRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 通过接口CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任得到的任务Id
+   */
+  TaskId: string
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
+}
+
+/**
  * 此结构体 (TemplateInfo) 用于描述模板的信息。
 
 > **模板组成** 
@@ -2744,6 +2763,28 @@ export interface DescribeExtendedServiceAuthDetailRequest {
    * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。`
    */
   Offset?: number
+}
+
+/**
+ * 企业批量注册链接信息
+ */
+export interface OrganizationAuthUrl {
+  /**
+   * 企业批量注册链接，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天
+跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
+<table> <thead> <tr> <th>Endpoint</th> <th>示例</th> <th>链接有效期限</th> </tr> </thead>  <tbody>
+ <tr> <td>PC</td> <td>https://qian.tencent.com/console/batch-register?token=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr> 
+<tr> <td>PC_SHORT_URL</td> <td>https://test.essurl.cn/8gDKUBAWK8</td> <td>7天</td> </tr> 
+<tr> <td>APP</td> <td>/pages/guide/index?to=REGISTER_ENTERPRISE_FOR_BATCH&urlAuthToken=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr> </tbody> </table>
+注： 
+`1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
+
+   */
+  AuthUrl?: string
+  /**
+   * 企业批量注册的错误信息，例如：企业三要素不通过
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -7840,6 +7881,20 @@ export interface SignUrl {
 }
 
 /**
+ * ModifyIntegrationRole返回参数结构体
+ */
+export interface ModifyIntegrationRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * VerifyPdf返回参数结构体
  */
 export interface VerifyPdfResponse {
@@ -8031,13 +8086,13 @@ export interface DescribeFlowTemplatesResponse {
 }
 
 /**
- * ModifyIntegrationRole返回参数结构体
+ * DescribeBatchOrganizationRegistrationUrls返回参数结构体
  */
-export interface ModifyIntegrationRoleResponse {
+export interface DescribeBatchOrganizationRegistrationUrlsResponse {
   /**
-   * 角色id
+   * 企业批量注册链接信息
    */
-  RoleId?: string
+  OrganizationAuthUrls?: Array<OrganizationAuthUrl>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

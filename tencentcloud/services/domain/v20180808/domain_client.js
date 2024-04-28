@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyDomainInfo", req, cb);
     }
     /**
+     * 修改模板信息
+     */
+    async ModifyTemplate(req, cb) {
+        return this.request("ModifyTemplate", req, cb);
+    }
+    /**
      * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
      */
     async TransferProhibitionBatch(req, cb) {

@@ -4521,7 +4521,7 @@ export interface RegistrationOrganizationInfo {
      */
     AdminName?: string;
     /**
-     * 组织机构超管姓名。
+     * 组织机构超管手机号。
   在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。
      */
     AdminMobile?: string;

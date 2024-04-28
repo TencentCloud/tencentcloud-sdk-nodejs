@@ -774,6 +774,20 @@ export interface QpsThreshold {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConfig返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConfigResponse {
+  /**
+   * 获取云原生API网关响应结果。
+   */
+  Result?: DescribeCloudNativeAPIGatewayConfigResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayRouteRateLimit请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
@@ -2909,17 +2923,17 @@ export interface KongPassiveHealthCheck {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayConfig返回参数结构体
+ * CreateGovernanceServices请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayConfigResponse {
+export interface CreateGovernanceServicesRequest {
   /**
-   * 获取云原生API网关响应结果。
+   * tse 实例 id。
    */
-  Result?: DescribeCloudNativeAPIGatewayConfigResult
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 服务信息。
    */
-  RequestId?: string
+  GovernanceServices: Array<GovernanceServiceInput>
 }
 
 /**
@@ -4288,17 +4302,17 @@ export interface DescribeGovernanceServicesResponse {
 }
 
 /**
- * CreateGovernanceServices请求参数结构体
+ * 云原生网关限流插件参数限流的精确Qps阈值
  */
-export interface CreateGovernanceServicesRequest {
+export interface AccurateQpsThreshold {
   /**
-   * tse 实例 id。
+   * qps阈值控制维度,包含:second、minute、hour、day、month、year
    */
-  InstanceId: string
+  Unit: string
   /**
-   * 服务信息。
+   * 全局配置ID
    */
-  GovernanceServices: Array<GovernanceServiceInput>
+  GlobalConfigId: string
 }
 
 /**
@@ -6101,6 +6115,11 @@ export interface LimitRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QpsThresholds?: Array<QpsThreshold>
+  /**
+   * 精确限流阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccurateQpsThresholds?: Array<AccurateQpsThreshold>
 }
 
 /**
@@ -7638,6 +7657,10 @@ zk标准版没有跨地域部署，请不要填写
 如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
    */
   StorageOption?: Array<StorageOption>
+  /**
+   * ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束
+   */
+  AffinityConstraint?: string
 }
 
 /**
@@ -8018,7 +8041,8 @@ export interface EngineRegionInfo {
    */
   VpcInfos: Array<VpcInfo>
   /**
-   * 是否为主地域
+   * Polaris: 是否为主地域
+Zookeeper: 是否为Leader固定地域
    */
   MainRegion?: boolean
   /**
