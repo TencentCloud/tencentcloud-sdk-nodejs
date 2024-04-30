@@ -58,6 +58,16 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.QueryMetric", async function () {
+    try {
+       const data = await client.QueryMetric({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyShipper", async function () {
     try {
        const data = await client.ModifyShipper({})
@@ -178,9 +188,9 @@ it("cls.v20201016.CreateConfig", async function () {
     }
 })
 
-it("cls.v20201016.QueryMetric", async function () {
+it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
     try {
-       const data = await client.QueryMetric({})
+       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +268,9 @@ it("cls.v20201016.ModifyIndex", async function () {
     }
 })
 
-it("cls.v20201016.DescribeIndex", async function () {
+it("cls.v20201016.ModifyKafkaRecharge", async function () {
     try {
-       const data = await client.DescribeIndex({})
+       const data = await client.ModifyKafkaRecharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +418,16 @@ it("cls.v20201016.DescribeShipperTasks", async function () {
     }
 })
 
+it("cls.v20201016.ModifyDashboardSubscribe", async function () {
+    try {
+       const data = await client.ModifyDashboardSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteIndex", async function () {
     try {
        const data = await client.DeleteIndex({})
@@ -451,6 +471,16 @@ it("cls.v20201016.ModifyConfigExtra", async function () {
 it("cls.v20201016.ModifyAlarmShield", async function () {
     try {
        const data = await client.ModifyAlarmShield({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.SearchDashboardSubscribe", async function () {
+    try {
+       const data = await client.SearchDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +558,16 @@ it("cls.v20201016.DescribeLogsets", async function () {
     }
 })
 
+it("cls.v20201016.CreateDashboardSubscribe", async function () {
+    try {
+       const data = await client.CreateDashboardSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.SearchCosRechargeInfo", async function () {
     try {
        const data = await client.SearchCosRechargeInfo({})
@@ -538,9 +578,9 @@ it("cls.v20201016.SearchCosRechargeInfo", async function () {
     }
 })
 
-it("cls.v20201016.ModifyKafkaRecharge", async function () {
+it("cls.v20201016.DescribeIndex", async function () {
     try {
-       const data = await client.ModifyKafkaRecharge({})
+       const data = await client.DescribeIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +591,16 @@ it("cls.v20201016.ModifyKafkaRecharge", async function () {
 it("cls.v20201016.CreateAlarmNotice", async function () {
     try {
        const data = await client.CreateAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteDashboardSubscribe", async function () {
+    try {
+       const data = await client.DeleteDashboardSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,6 +768,16 @@ it("cls.v20201016.ModifyTopic", async function () {
     }
 })
 
+it("cls.v20201016.DescribeDashboardSubscribes", async function () {
+    try {
+       const data = await client.DescribeDashboardSubscribes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyMachineGroup", async function () {
     try {
        const data = await client.ModifyMachineGroup({})
@@ -841,16 +901,6 @@ it("cls.v20201016.CreateScheduledSql", async function () {
 it("cls.v20201016.ModifyLogset", async function () {
     try {
        const data = await client.ModifyLogset({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
-    try {
-       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

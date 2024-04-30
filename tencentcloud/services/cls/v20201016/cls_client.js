@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 查询指定时刻指标的最新值
+     */
+    async QueryMetric(req, cb) {
+        return this.request("QueryMetric", req, cb);
+    }
+    /**
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
      */
     async ModifyShipper(req, cb) {
@@ -124,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConfig", req, cb);
     }
     /**
-     * 查询指定时刻指标的最新值
+     * 获取机器组绑定的采集规则配置
      */
-    async QueryMetric(req, cb) {
-        return this.request("QueryMetric", req, cb);
+    async DescribeMachineGroupConfigs(req, cb) {
+        return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
      * 本接口用于获取日志主题列表，支持分页
@@ -172,10 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIndex", req, cb);
     }
     /**
-     * 本接口用于获取索引配置信息
+     * 本接口用于修改Kafka数据订阅任务
      */
-    async DescribeIndex(req, cb) {
-        return this.request("DescribeIndex", req, cb);
+    async ModifyKafkaRecharge(req, cb) {
+        return this.request("ModifyKafkaRecharge", req, cb);
     }
     /**
      * 该接口用于创建告警屏蔽规则。
@@ -262,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShipperTasks", req, cb);
     }
     /**
+     * 此接口用于修改仪表盘订阅
+     */
+    async ModifyDashboardSubscribe(req, cb) {
+        return this.request("ModifyDashboardSubscribe", req, cb);
+    }
+    /**
      * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
      */
     async DeleteIndex(req, cb) {
@@ -290,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAlarmShield(req, cb) {
         return this.request("ModifyAlarmShield", req, cb);
+    }
+    /**
+     * 此接口用于预览仪表盘订阅
+     */
+    async SearchDashboardSubscribe(req, cb) {
+        return this.request("SearchDashboardSubscribe", req, cb);
     }
     /**
      * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
@@ -334,22 +352,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogsets", req, cb);
     }
     /**
+     * 此接口用于创建仪表盘订阅
+     */
+    async CreateDashboardSubscribe(req, cb) {
+        return this.request("CreateDashboardSubscribe", req, cb);
+    }
+    /**
      * 本接口用于预览cos导入信息
      */
     async SearchCosRechargeInfo(req, cb) {
         return this.request("SearchCosRechargeInfo", req, cb);
     }
     /**
-     * 本接口用于修改Kafka数据订阅任务
+     * 本接口用于获取索引配置信息
      */
-    async ModifyKafkaRecharge(req, cb) {
-        return this.request("ModifyKafkaRecharge", req, cb);
+    async DescribeIndex(req, cb) {
+        return this.request("DescribeIndex", req, cb);
     }
     /**
      * 该接口用于创建通知渠道组。
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);
+    }
+    /**
+     * 此接口用于删除仪表盘订阅
+     */
+    async DeleteDashboardSubscribe(req, cb) {
+        return this.request("DeleteDashboardSubscribe", req, cb);
     }
     /**
      * 本接口用于创建数据加工任务。
@@ -449,6 +479,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTopic(req, cb) {
         return this.request("ModifyTopic", req, cb);
+    }
+    /**
+     *  本接口用于获取仪表盘订阅列表，支持分页
+     */
+    async DescribeDashboardSubscribes(req, cb) {
+        return this.request("DescribeDashboardSubscribes", req, cb);
     }
     /**
      * 修改机器组
@@ -681,12 +717,6 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async ModifyLogset(req, cb) {
         return this.request("ModifyLogset", req, cb);
-    }
-    /**
-     * 获取机器组绑定的采集规则配置
-     */
-    async DescribeMachineGroupConfigs(req, cb) {
-        return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
      * 本接口用于修改数据加工任务

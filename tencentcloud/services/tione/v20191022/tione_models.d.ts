@@ -355,7 +355,7 @@ export interface DescribeNotebookLifecycleScriptsRequest {
  */
 export interface GitSecret {
     /**
-     * 无秘钥，默认选项
+     * 无密钥，默认选项
      */
     NoSecret?: boolean;
     /**

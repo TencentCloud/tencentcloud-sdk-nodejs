@@ -387,7 +387,7 @@ Ascending 按更新时间升序
  */
 export interface GitSecret {
   /**
-   * 无秘钥，默认选项
+   * 无密钥，默认选项
    */
   NoSecret?: boolean
   /**

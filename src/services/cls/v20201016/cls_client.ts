@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  UploadLogResponse,
+  DescribeAlarmNoticesRequest,
   CreateAlarmResponse,
   AlarmInfo,
   LogInfo,
@@ -30,6 +30,7 @@ import {
   DeleteScheduledSqlRequest,
   DynamicIndex,
   DeleteLogsetResponse,
+  UploadLogResponse,
   ParquetKeyInfo,
   DescribeCosRechargesResponse,
   DescribeShipperTasksResponse,
@@ -52,6 +53,7 @@ import {
   DescribePartitionsRequest,
   ContainerStdoutInfo,
   ConfigInfo,
+  QueryRangeMetricRequest,
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
   CollectInfo,
@@ -92,14 +94,17 @@ import {
   ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
+  ModifyDashboardSubscribeRequest,
   CreateConsumerResponse,
   CreateConfigResponse,
   ModifyMachineGroupResponse,
   DataTransformResouceInfo,
+  CreateDashboardSubscribeRequest,
   DeleteMachineGroupRequest,
   FullTextInfo,
   QueryMetricResponse,
   DescribeAlarmShieldsRequest,
+  SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
   DescribeConfigMachineGroupsResponse,
   ModifyAlarmRequest,
@@ -109,6 +114,7 @@ import {
   EventLog,
   CreateAlarmRequest,
   DeleteExportResponse,
+  DescribeDashboardSubscribesRequest,
   SearchLogInfos,
   PartitionInfo,
   DeleteScheduledSqlResponse,
@@ -121,7 +127,7 @@ import {
   DescribeMachineGroupConfigsResponse,
   CheckRechargeKafkaServerRequest,
   CreateAlarmShieldRequest,
-  MachineGroupInfo,
+  DeleteDashboardSubscribeResponse,
   DescribeLogHistogramResponse,
   CloseKafkaConsumerResponse,
   DeleteAlarmShieldResponse,
@@ -130,8 +136,9 @@ import {
   DescribeLogsetsResponse,
   CreateTopicRequest,
   DescribeTopicsRequest,
-  GetAlarmLogResponse,
   DeleteConsumerResponse,
+  GetAlarmLogResponse,
+  CreateDashboardSubscribeResponse,
   DescribeExportsRequest,
   DescribeMachineGroupsRequest,
   DescribeCosRechargesRequest,
@@ -158,7 +165,7 @@ import {
   CloseKafkaConsumerRequest,
   RuleTagInfo,
   CreateExportRequest,
-  QueryRangeMetricRequest,
+  ModifyDashboardSubscribeResponse,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
   DescribeMachineGroupsResponse,
@@ -229,12 +236,14 @@ import {
   SearchCosRechargeInfoResponse,
   DescribeAlarmsRequest,
   ShipperInfo,
+  DescribeDashboardSubscribesResponse,
   CreateCosRechargeResponse,
   DescribeAlertRecordHistoryResponse,
   KeyValueInfo,
+  SearchDashboardSubscribeResponse,
   AddMachineGroupInfoResponse,
   ModifyMachineGroupRequest,
-  DescribeAlarmNoticesRequest,
+  DeleteDashboardSubscribeRequest,
   NoticeReceiver,
   MetricLabel,
   ModifyTopicRequest,
@@ -274,6 +283,7 @@ import {
   CosRechargeInfo,
   RuleKeyValueInfo,
   DescribeKafkaConsumerRequest,
+  MachineGroupInfo,
   ModifyDataTransformResponse,
   DescribeDataTransformInfoResponse,
   ConsumerContent,
@@ -334,6 +344,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIndexResponse) => void
   ): Promise<CreateIndexResponse> {
     return this.request("CreateIndex", req, cb)
+  }
+
+  /**
+   * 查询指定时刻指标的最新值
+   */
+  async QueryMetric(
+    req: QueryMetricRequest,
+    cb?: (error: string, rep: QueryMetricResponse) => void
+  ): Promise<QueryMetricResponse> {
+    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -457,13 +477,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定时刻指标的最新值
+   * 获取机器组绑定的采集规则配置
    */
-  async QueryMetric(
-    req: QueryMetricRequest,
-    cb?: (error: string, rep: QueryMetricResponse) => void
-  ): Promise<QueryMetricResponse> {
-    return this.request("QueryMetric", req, cb)
+  async DescribeMachineGroupConfigs(
+    req: DescribeMachineGroupConfigsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
+  ): Promise<DescribeMachineGroupConfigsResponse> {
+    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**
@@ -537,13 +557,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取索引配置信息
+   * 本接口用于修改Kafka数据订阅任务
    */
-  async DescribeIndex(
-    req: DescribeIndexRequest,
-    cb?: (error: string, rep: DescribeIndexResponse) => void
-  ): Promise<DescribeIndexResponse> {
-    return this.request("DescribeIndex", req, cb)
+  async ModifyKafkaRecharge(
+    req: ModifyKafkaRechargeRequest,
+    cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
+  ): Promise<ModifyKafkaRechargeResponse> {
+    return this.request("ModifyKafkaRecharge", req, cb)
   }
 
   /**
@@ -687,6 +707,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于修改仪表盘订阅
+   */
+  async ModifyDashboardSubscribe(
+    req?: ModifyDashboardSubscribeRequest,
+    cb?: (error: string, rep: ModifyDashboardSubscribeResponse) => void
+  ): Promise<ModifyDashboardSubscribeResponse> {
+    return this.request("ModifyDashboardSubscribe", req, cb)
+  }
+
+  /**
    * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
    */
   async DeleteIndex(
@@ -734,6 +764,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAlarmShieldResponse) => void
   ): Promise<ModifyAlarmShieldResponse> {
     return this.request("ModifyAlarmShield", req, cb)
+  }
+
+  /**
+   * 此接口用于预览仪表盘订阅
+   */
+  async SearchDashboardSubscribe(
+    req?: SearchDashboardSubscribeRequest,
+    cb?: (error: string, rep: SearchDashboardSubscribeResponse) => void
+  ): Promise<SearchDashboardSubscribeResponse> {
+    return this.request("SearchDashboardSubscribe", req, cb)
   }
 
   /**
@@ -807,6 +847,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于创建仪表盘订阅
+   */
+  async CreateDashboardSubscribe(
+    req?: CreateDashboardSubscribeRequest,
+    cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
+  ): Promise<CreateDashboardSubscribeResponse> {
+    return this.request("CreateDashboardSubscribe", req, cb)
+  }
+
+  /**
    * 本接口用于预览cos导入信息
    */
   async SearchCosRechargeInfo(
@@ -817,13 +867,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改Kafka数据订阅任务
+   * 本接口用于获取索引配置信息
    */
-  async ModifyKafkaRecharge(
-    req: ModifyKafkaRechargeRequest,
-    cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
-  ): Promise<ModifyKafkaRechargeResponse> {
-    return this.request("ModifyKafkaRecharge", req, cb)
+  async DescribeIndex(
+    req: DescribeIndexRequest,
+    cb?: (error: string, rep: DescribeIndexResponse) => void
+  ): Promise<DescribeIndexResponse> {
+    return this.request("DescribeIndex", req, cb)
   }
 
   /**
@@ -834,6 +884,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
   ): Promise<CreateAlarmNoticeResponse> {
     return this.request("CreateAlarmNotice", req, cb)
+  }
+
+  /**
+   * 此接口用于删除仪表盘订阅
+   */
+  async DeleteDashboardSubscribe(
+    req?: DeleteDashboardSubscribeRequest,
+    cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void
+  ): Promise<DeleteDashboardSubscribeResponse> {
+    return this.request("DeleteDashboardSubscribe", req, cb)
   }
 
   /**
@@ -997,6 +1057,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTopicResponse) => void
   ): Promise<ModifyTopicResponse> {
     return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
+   *  本接口用于获取仪表盘订阅列表，支持分页
+   */
+  async DescribeDashboardSubscribes(
+    req?: DescribeDashboardSubscribesRequest,
+    cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void
+  ): Promise<DescribeDashboardSubscribesResponse> {
+    return this.request("DescribeDashboardSubscribes", req, cb)
   }
 
   /**
@@ -1281,16 +1351,6 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyLogsetResponse) => void
   ): Promise<ModifyLogsetResponse> {
     return this.request("ModifyLogset", req, cb)
-  }
-
-  /**
-   * 获取机器组绑定的采集规则配置
-   */
-  async DescribeMachineGroupConfigs(
-    req: DescribeMachineGroupConfigsRequest,
-    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
-  ): Promise<DescribeMachineGroupConfigsResponse> {
-    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**

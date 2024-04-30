@@ -16,13 +16,44 @@
  */
 
 /**
- * UploadLog返回参数结构体
+ * DescribeAlarmNotices请求参数结构体
  */
-export interface UploadLogResponse {
+export interface DescribeAlarmNoticesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <li> name
+按照【通知渠道组名称】进行过滤。
+类型：String
+必选：否</li>
+<li> alarmNoticeId
+按照【通知渠道组ID】进行过滤。
+类型：String
+必选：否</li>
+<li> uid
+按照【接收用户ID】进行过滤。
+类型：String
+必选：否</li>
+<li> groupId
+按照【接收用户组ID】进行过滤。
+类型：String
+必选：否</li>
+
+<li> deliverFlag
+按照【投递状态】进行过滤。
+类型：String
+必选：否
+可选值： "1":未启用,  "2": 已启用, "3":投递异常</li>
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100。
+   */
+  Limit?: number
 }
 
 /**
@@ -317,6 +348,16 @@ export interface DeleteLogsetResponse {
 }
 
 /**
+ * UploadLog返回参数结构体
+ */
+export interface UploadLogResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Parquet内容描述
  */
 export interface ParquetKeyInfo {
@@ -358,7 +399,7 @@ export interface DescribeShipperTasksResponse {
    * 投递任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks: Array<ShipperTaskInfo>
+  Tasks?: Array<ShipperTaskInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -894,6 +935,32 @@ export interface ConfigInfo {
 }
 
 /**
+ * QueryRangeMetric请求参数结构体
+ */
+export interface QueryRangeMetricRequest {
+  /**
+   * 指标主题ID
+   */
+  TopicId: string
+  /**
+   * 查询语句，使用PromQL语法
+   */
+  Query: string
+  /**
+   * 查询起始时间，秒级Unix时间戳
+   */
+  Start: number
+  /**
+   * 查询结束时间，秒级Unix时间戳
+   */
+  End: number
+  /**
+   * 查询时间间隔，单位秒
+   */
+  Step: number
+}
+
+/**
  * ModifyAlarm返回参数结构体
  */
 export interface ModifyAlarmResponse {
@@ -912,11 +979,13 @@ export interface DescribeShipperTasksRequest {
    */
   ShipperId: string
   /**
-   * 查询的开始时间戳，支持最近3天的查询， 毫秒
+   * 查询的开始时间戳，支持最近3天的查询， 毫秒。
+StartTime必须小于EndTime
    */
   StartTime: number
   /**
-   * 查询的结束时间戳， 毫秒
+   * 查询的结束时间戳， 毫秒。
+StartTime必须小于EndTime
    */
   EndTime: number
 }
@@ -1824,6 +1893,11 @@ export interface DeleteConfigFromMachineGroupResponse {
 }
 
 /**
+ * ModifyDashboardSubscribe请求参数结构体
+ */
+export type ModifyDashboardSubscribeRequest = null
+
+/**
  * CreateConsumer返回参数结构体
  */
 export interface CreateConsumerResponse {
@@ -1870,6 +1944,11 @@ export interface DataTransformResouceInfo {
    */
   Alias: string
 }
+
+/**
+ * CreateDashboardSubscribe请求参数结构体
+ */
+export type CreateDashboardSubscribeRequest = null
 
 /**
  * DeleteMachineGroup请求参数结构体
@@ -1943,6 +2022,11 @@ export interface DescribeAlarmShieldsRequest {
    */
   Limit?: number
 }
+
+/**
+ * SearchDashboardSubscribe请求参数结构体
+ */
+export type SearchDashboardSubscribeRequest = null
 
 /**
  * DescribePartitions返回参数结构体
@@ -2277,6 +2361,11 @@ export interface DeleteExportResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeDashboardSubscribes请求参数结构体
+ */
+export type DescribeDashboardSubscribesRequest = null
 
 /**
  * 多日志主题检索topic信息
@@ -2662,63 +2751,13 @@ export interface CreateAlarmShieldRequest {
 }
 
 /**
- * 机器组信息
+ * DeleteDashboardSubscribe返回参数结构体
  */
-export interface MachineGroupInfo {
+export interface DeleteDashboardSubscribeResponse {
   /**
-   * 机器组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupId?: string
-  /**
-   * 机器组名称
-   */
-  GroupName?: string
-  /**
-   * 机器组类型
-   */
-  MachineGroupType?: MachineGroupTypeInfo
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 机器组绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 是否开启机器组自动更新
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AutoUpdate?: string
-  /**
-   * 升级开始时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateStartTime?: string
-  /**
-   * 升级结束时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateEndTime?: string
-  /**
-   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceLogging?: boolean
-  /**
-   * 机器组中机器离线定期清理时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DelayCleanupTime?: number
-  /**
-   * 机器组元数据信息列表
-   */
-  MetaTags?: Array<MetaTagInfo>
-  /**
-   * 操作系统类型，0: Linux，1: windows
-   */
-  OSType?: number
+  RequestId?: string
 }
 
 /**
@@ -2910,6 +2949,16 @@ export interface DescribeTopicsRequest {
 }
 
 /**
+ * DeleteConsumer返回参数结构体
+ */
+export interface DeleteConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetAlarmLog返回参数结构体
  */
 export interface GetAlarmLogResponse {
@@ -2961,9 +3010,9 @@ export interface GetAlarmLogResponse {
 }
 
 /**
- * DeleteConsumer返回参数结构体
+ * CreateDashboardSubscribe返回参数结构体
  */
-export interface DeleteConsumerResponse {
+export interface CreateDashboardSubscribeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3703,29 +3752,13 @@ export interface CreateExportRequest {
 }
 
 /**
- * QueryRangeMetric请求参数结构体
+ * ModifyDashboardSubscribe返回参数结构体
  */
-export interface QueryRangeMetricRequest {
+export interface ModifyDashboardSubscribeResponse {
   /**
-   * 指标主题ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId: string
-  /**
-   * 查询语句，使用PromQL语法
-   */
-  Query: string
-  /**
-   * 查询起始时间，秒级Unix时间戳
-   */
-  Start: number
-  /**
-   * 查询结束时间，秒级Unix时间戳
-   */
-  End: number
-  /**
-   * 查询时间间隔，单位秒
-   */
-  Step: number
+  RequestId?: string
 }
 
 /**
@@ -5492,11 +5525,13 @@ export interface ModifyKafkaConsumerResponse {
  */
 export interface MachineGroupTypeInfo {
   /**
-   * 机器组类型，ip表示该机器组Values中存的是采集机器的IP地址，label表示该机器组Values中存储的是机器的标签
+   * 机器组类型。支持 ip 和 label。
+- ip：表示该机器组Values中存的是采集机器的ip地址
+- label：表示该机器组Values中存储的是机器的标签
    */
   Type: string
   /**
-   * 机器描述列表
+   * 机器描述列表。
    */
   Values?: Array<string>
 }
@@ -5689,6 +5724,16 @@ export interface ShipperInfo {
 }
 
 /**
+ * DescribeDashboardSubscribes返回参数结构体
+ */
+export interface DescribeDashboardSubscribesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCosRecharge返回参数结构体
  */
 export interface CreateCosRechargeResponse {
@@ -5742,6 +5787,16 @@ export interface KeyValueInfo {
 }
 
 /**
+ * SearchDashboardSubscribe返回参数结构体
+ */
+export interface SearchDashboardSubscribeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddMachineGroupInfo返回参数结构体
  */
 export interface AddMachineGroupInfoResponse {
@@ -5764,7 +5819,7 @@ export interface ModifyMachineGroupRequest {
    */
   GroupName?: string
   /**
-   * 机器组类型
+   * 机器组类型。Type：ip，Values中为ip字符串列表机器组；Type：label，Values中为标签字符串列表机器组。
    */
   MachineGroupType?: MachineGroupTypeInfo
   /**
@@ -5788,7 +5843,7 @@ export interface ModifyMachineGroupRequest {
    */
   ServiceLogging?: boolean
   /**
-   * 机器组中机器定期离线清理时间
+   * 机器组中机器定期离线清理时间。单位：天
    */
   DelayCleanupTime?: number
   /**
@@ -5798,45 +5853,9 @@ export interface ModifyMachineGroupRequest {
 }
 
 /**
- * DescribeAlarmNotices请求参数结构体
+ * DeleteDashboardSubscribe请求参数结构体
  */
-export interface DescribeAlarmNoticesRequest {
-  /**
-   * <li> name
-按照【通知渠道组名称】进行过滤。
-类型：String
-必选：否</li>
-<li> alarmNoticeId
-按照【通知渠道组ID】进行过滤。
-类型：String
-必选：否</li>
-<li> uid
-按照【接收用户ID】进行过滤。
-类型：String
-必选：否</li>
-<li> groupId
-按照【接收用户组ID】进行过滤。
-类型：String
-必选：否</li>
-
-<li> deliverFlag
-按照【投递状态】进行过滤。
-类型：String
-必选：否
-可选值： "1":未启用,  "2": 已启用, "3":投递异常</li>
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 分页单页限制数目，默认值为20，最大值100。
-   */
-  Limit?: number
-}
+export type DeleteDashboardSubscribeRequest = null
 
 /**
  * 告警通知接收者信息
@@ -6222,7 +6241,7 @@ export interface CreateMachineGroupRequest {
    */
   GroupName: string
   /**
-   * 创建机器组类型，Type为ip，Values中为Ip字符串列表创建机器组，Type为label， Values中为标签字符串列表创建机器组
+   * 创建机器组类型。Type：ip，Values中为ip字符串列表创建机器组；Type：label，Values中为标签字符串列表创建机器组。
    */
   MachineGroupType: MachineGroupTypeInfo
   /**
@@ -6230,7 +6249,7 @@ export interface CreateMachineGroupRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 是否开启机器组自动更新
+   * 是否开启机器组自动更新。默认false
    */
   AutoUpdate?: boolean
   /**
@@ -6242,11 +6261,11 @@ export interface CreateMachineGroupRequest {
    */
   UpdateEndTime?: string
   /**
-   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
+   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费。默认false
    */
   ServiceLogging?: boolean
   /**
-   * 机器组中机器离线清理时间
+   * 机器组中机器离线清理时间。单位：天
    */
   DelayCleanupTime?: number
   /**
@@ -6709,7 +6728,7 @@ export interface CreateDataTransformRequest {
    */
   Name: string
   /**
-   * 加工语句
+   * 加工语句。[创建加工任务](https://cloud.tencent.com/document/product/614/63940)  [函数总览](https://cloud.tencent.com/document/product/614/70395)
    */
   EtlContent: string
   /**
@@ -6982,6 +7001,66 @@ export interface DescribeKafkaConsumerRequest {
    * 日志主题ID
    */
   FromTopicId: string
+}
+
+/**
+ * 机器组信息
+ */
+export interface MachineGroupInfo {
+  /**
+   * 机器组ID
+   */
+  GroupId?: string
+  /**
+   * 机器组名称
+   */
+  GroupName?: string
+  /**
+   * 机器组类型
+   */
+  MachineGroupType?: MachineGroupTypeInfo
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 机器组绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 是否开启机器组自动更新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoUpdate?: string
+  /**
+   * 升级开始时间，建议业务低峰期升级LogListener
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateStartTime?: string
+  /**
+   * 升级结束时间，建议业务低峰期升级LogListener
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateEndTime?: string
+  /**
+   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceLogging?: boolean
+  /**
+   * 机器组中机器离线定期清理时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DelayCleanupTime?: number
+  /**
+   * 机器组元数据信息列表
+   */
+  MetaTags?: Array<MetaTagInfo>
+  /**
+   * 操作系统类型，0: Linux，1: windows
+   */
+  OSType?: number
 }
 
 /**

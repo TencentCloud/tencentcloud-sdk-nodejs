@@ -18,6 +18,16 @@ const client = new tencentcloud.teo.v20220901.Client({
 })
 describe("teo.v20220901.test.js", function () {
 
+it("teo.v20220901.DestroyPlan", async function () {
+    try {
+       const data = await client.DestroyPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreatePurgeTask", async function () {
     try {
        const data = await client.CreatePurgeTask({})
@@ -161,6 +171,16 @@ it("teo.v20220901.DownloadL7Logs", async function () {
 it("teo.v20220901.DescribeEnvironments", async function () {
     try {
        const data = await client.DescribeEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.IncreasePlanQuota", async function () {
+    try {
+       const data = await client.IncreasePlanQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +358,9 @@ it("teo.v20220901.ModifyL4Proxy", async function () {
     }
 })
 
-it("teo.v20220901.CreateAliasDomain", async function () {
+it("teo.v20220901.ModifyL4ProxyRules", async function () {
     try {
-       const data = await client.CreateAliasDomain({})
+       const data = await client.ModifyL4ProxyRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +398,9 @@ it("teo.v20220901.ModifyZoneSetting", async function () {
     }
 })
 
-it("teo.v20220901.ModifyL4ProxyRules", async function () {
+it("teo.v20220901.CreateAliasDomain", async function () {
     try {
-       const data = await client.ModifyL4ProxyRules({})
+       const data = await client.CreateAliasDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +478,16 @@ it("teo.v20220901.ModifySecurityPolicy", async function () {
     }
 })
 
+it("teo.v20220901.ModifyPlan", async function () {
+    try {
+       const data = await client.ModifyPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.BindZoneToPlan", async function () {
     try {
        const data = await client.BindZoneToPlan({})
@@ -511,6 +541,16 @@ it("teo.v20220901.CreateL4Proxy", async function () {
 it("teo.v20220901.ModifyApplicationProxyStatus", async function () {
     try {
        const data = await client.ModifyApplicationProxyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreatePlan", async function () {
+    try {
+       const data = await client.CreatePlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,6 +738,16 @@ it("teo.v20220901.DescribeL4Proxy", async function () {
     }
 })
 
+it("teo.v20220901.UpgradePlan", async function () {
+    try {
+       const data = await client.UpgradePlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeRules", async function () {
     try {
        const data = await client.DescribeRules({})
@@ -861,6 +911,16 @@ it("teo.v20220901.DescribeOriginProtection", async function () {
 it("teo.v20220901.ModifyL4ProxyRulesStatus", async function () {
     try {
        const data = await client.ModifyL4ProxyRulesStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.RenewPlan", async function () {
+    try {
+       const data = await client.RenewPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

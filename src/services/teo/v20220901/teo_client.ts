@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeployConfigGroupVersionRequest,
+  RenewFlag,
   Compression,
   DeleteL4ProxyRulesRequest,
   DescribeOriginGroupResponse,
@@ -26,6 +27,7 @@ import {
   SlowPostConfig,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
+  PrepaidPlanParam,
   ModifyAccelerationDomainResponse,
   TopEntryValue,
   DescribeHostsSettingResponse,
@@ -91,6 +93,7 @@ import {
   BotManagedRule,
   SecurityConfig,
   L4OfflineLog,
+  ModifyPlanRequest,
   ExceptUserRuleScope,
   SecEntryValue,
   ModifyL4ProxyRulesRequest,
@@ -121,6 +124,7 @@ import {
   DiffIPWhitelist,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
+  RenewPlanRequest,
   DescribePrefetchTasksResponse,
   DescribeZoneSettingRequest,
   ModifyL4ProxyStatusResponse,
@@ -147,6 +151,7 @@ import {
   ModifyL4ProxyRulesResponse,
   DDoSAttackEvent,
   DescribeConfigGroupVersionDetailRequest,
+  ModifyPlanResponse,
   DropPageDetail,
   CnameStatus,
   ServerCertInfo,
@@ -157,6 +162,8 @@ import {
   DeleteSharedCNAMERequest,
   ModifyRealtimeLogDeliveryTaskRequest,
   VanityNameServers,
+  DestroyPlanRequest,
+  CreatePlanRequest,
   IPGroup,
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
@@ -184,13 +191,15 @@ import {
   DeleteOriginGroupResponse,
   DescribeL4ProxyRequest,
   DescribeIdentificationsRequest,
-  TemplateScope,
+  ModifyHostsCertificateResponse,
   CreateAccelerationDomainRequest,
   NormalAction,
+  TopDetailData,
   DescribeZoneSettingResponse,
   DescribePurgeTasksRequest,
   IdentifyZoneRequest,
   CacheConfig,
+  UpgradePlanResponse,
   OfflineCache,
   CreateConfigGroupVersionRequest,
   AclUserRule,
@@ -211,6 +220,7 @@ import {
   DescribeL4ProxyResponse,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
+  RenewPlanResponse,
   RealtimeLogDeliveryTask,
   DescribeDeployHistoryRequest,
   BillingData,
@@ -250,10 +260,11 @@ import {
   DDosProtectionConfig,
   DescribeDDoSAttackDataRequest,
   CreateL4ProxyRequest,
+  CreatePlanResponse,
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
   Hsts,
-  ModifyHostsCertificateResponse,
+  CreateOriginGroupResponse,
   CreateRuleRequest,
   ModifyL4ProxyStatusRequest,
   RateLimitTemplateDetail,
@@ -278,6 +289,7 @@ import {
   DeliveryCondition,
   FollowOrigin,
   IPRegionInfo,
+  DestroyPlanResponse,
   QueryCondition,
   RuleRewriteActionParams,
   ModifyAliasDomainResponse,
@@ -309,15 +321,15 @@ import {
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
   CreateApplicationProxyRuleRequest,
+  IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
   DescribeAvailablePlansRequest,
-  CreateOriginGroupResponse,
   ModifyZoneResponse,
   AlgDetectSession,
   OriginProtectionInfo,
   AliasDomain,
-  RewriteAction,
   IpTableRule,
+  IncreasePlanQuotaRequest,
   DescribeDDoSAttackTopDataRequest,
   Quic,
   CreateCLSIndexRequest,
@@ -327,7 +339,8 @@ import {
   DownloadL7LogsResponse,
   AccelerationDomain,
   SlowRateConfig,
-  TopDetailData,
+  RewriteAction,
+  TemplateScope,
   DescribeOverviewL7DataRequest,
   DeleteSharedCNAMEResponse,
   DDoSBlockData,
@@ -360,6 +373,7 @@ import {
   Quota,
   CheckCnameStatusRequest,
   ModifyZoneStatusResponse,
+  UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DescribePurgeTasksResponse,
   DeployConfigGroupVersionResponse,
@@ -378,6 +392,23 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("teo.tencentcloudapi.com", "2022-09-01", clientConfig)
+  }
+
+  /**
+     * 当您需要停止 Edgeone 套餐的计费，可以通过该接口销毁计费套餐。
+> 销毁计费套餐需要满足以下条件：
+    1.套餐已过期（企业版套餐除外）；
+    2.套餐下所有站点均已关闭或删除。
+
+> 站点状态可以通过 [查询站点列表](https://cloud.tencent.com/document/product/1552/80713) 接口进行查询
+停用站点可以通过 [切换站点状态](https://cloud.tencent.com/document/product/1552/80707) 接口将站点切换至关闭状态
+删除站点可以通过 [删除站点](https://cloud.tencent.com/document/product/1552/80717) 接口将站点删除
+     */
+  async DestroyPlan(
+    req: DestroyPlanRequest,
+    cb?: (error: string, rep: DestroyPlanResponse) => void
+  ): Promise<DestroyPlanResponse> {
+    return this.request("DestroyPlan", req, cb)
   }
 
   /**
@@ -533,6 +564,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
   ): Promise<DescribeEnvironmentsResponse> {
     return this.request("DescribeEnvironments", req, cb)
+  }
+
+  /**
+     * 当您的套餐绑定的站点数，或配置的 Web 防护 - 自定义规则 - 精准匹配策略的规则数，或 Web 防护 - 速率限制 - 精准速率限制模块的规则数达到套餐允许的配额上限，可以通过该接口增购对应配额。
+> 该接口该仅支持企业版套餐。
+     */
+  async IncreasePlanQuota(
+    req: IncreasePlanQuotaRequest,
+    cb?: (error: string, rep: IncreasePlanQuotaResponse) => void
+  ): Promise<IncreasePlanQuotaResponse> {
+    return this.request("IncreasePlanQuota", req, cb)
   }
 
   /**
@@ -710,13 +752,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 创建别称域名。
+   * 用于修改四层代理转发规则，支持单条或者批量修改。
    */
-  async CreateAliasDomain(
-    req: CreateAliasDomainRequest,
-    cb?: (error: string, rep: CreateAliasDomainResponse) => void
-  ): Promise<CreateAliasDomainResponse> {
-    return this.request("CreateAliasDomain", req, cb)
+  async ModifyL4ProxyRules(
+    req: ModifyL4ProxyRulesRequest,
+    cb?: (error: string, rep: ModifyL4ProxyRulesResponse) => void
+  ): Promise<ModifyL4ProxyRulesResponse> {
+    return this.request("ModifyL4ProxyRules", req, cb)
   }
 
   /**
@@ -750,13 +792,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于修改四层代理转发规则，支持单条或者批量修改。
+   * 创建别称域名。
    */
-  async ModifyL4ProxyRules(
-    req: ModifyL4ProxyRulesRequest,
-    cb?: (error: string, rep: ModifyL4ProxyRulesResponse) => void
-  ): Promise<ModifyL4ProxyRulesResponse> {
-    return this.request("ModifyL4ProxyRules", req, cb)
+  async CreateAliasDomain(
+    req: CreateAliasDomainRequest,
+    cb?: (error: string, rep: CreateAliasDomainResponse) => void
+  ): Promise<CreateAliasDomainResponse> {
+    return this.request("CreateAliasDomain", req, cb)
   }
 
   /**
@@ -830,6 +872,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改套餐配置。目前仅支持修改预付费套餐的自动续费开关。
+   */
+  async ModifyPlan(
+    req: ModifyPlanRequest,
+    cb?: (error: string, rep: ModifyPlanResponse) => void
+  ): Promise<ModifyPlanResponse> {
+    return this.request("ModifyPlan", req, cb)
+  }
+
+  /**
    * 将未绑定套餐的站点绑定到已有套餐
    */
   async BindZoneToPlan(
@@ -887,6 +939,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyApplicationProxyStatusResponse) => void
   ): Promise<ModifyApplicationProxyStatusResponse> {
     return this.request("ModifyApplicationProxyStatus", req, cb)
+  }
+
+  /**
+     * 若您需要使用 Edgeone 产品，您需要通过此接口创建计费套餐。
+> 创建套餐后，您需要通过 [CreateZone](https://cloud.tencent.com/document/product/1552/80719) 完成创建站点，绑定套餐的流程，Edgeone 才能正常提供服务。
+     */
+  async CreatePlan(
+    req: CreatePlanRequest,
+    cb?: (error: string, rep: CreatePlanResponse) => void
+  ): Promise<CreatePlanResponse> {
+    return this.request("CreatePlan", req, cb)
   }
 
   /**
@@ -1073,6 +1136,19 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
+> 不同类型 Edgeone 计费套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
+计费套餐升级规则以及资费详情参考 [Edgeone计费套餐升配说明](https://cloud.tencent.com/document/product/1552/95291)
+如果需要将套餐升级至企业版，请 [联系我们](https://cloud.tencent.com/online-service)
+     */
+  async UpgradePlan(
+    req: UpgradePlanRequest,
+    cb?: (error: string, rep: UpgradePlanResponse) => void
+  ): Promise<UpgradePlanResponse> {
+    return this.request("UpgradePlan", req, cb)
+  }
+
+  /**
    * 查询规则引擎规则。
    */
   async DescribeRules(
@@ -1243,6 +1319,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyL4ProxyRulesStatusResponse) => void
   ): Promise<ModifyL4ProxyRulesStatusResponse> {
     return this.request("ModifyL4ProxyRulesStatus", req, cb)
+  }
+
+  /**
+     * 当您的套餐需要延长有效期，可以通过该接口进行续费。套餐续费仅支持个人版，基础版，标准版套餐。
+> 费用详情可参考 [套餐费用](https://cloud.tencent.com/document/product/1552/94158)
+     */
+  async RenewPlan(
+    req: RenewPlanRequest,
+    cb?: (error: string, rep: RenewPlanResponse) => void
+  ): Promise<RenewPlanResponse> {
+    return this.request("RenewPlan", req, cb)
   }
 
   /**

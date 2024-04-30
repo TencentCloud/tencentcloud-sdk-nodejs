@@ -20,6 +20,17 @@ export interface DeployConfigGroupVersionRequest {
     Description: string;
 }
 /**
+ * 预付费套餐自动续费配置项。
+ */
+export interface RenewFlag {
+    /**
+     * 预付费套餐的自动续费标志，取值有：
+  <li> on：开启自动续费；</li>
+  <li> off：不开启自动续费。</li>
+     */
+    Switch: string;
+}
+/**
  * 智能压缩配置。
  */
 export interface Compression {
@@ -198,6 +209,24 @@ export interface OriginDetail {
      * MO 存储桶 ID，分发范围(DistributionRange)为存储桶(Bucket)时必填
      */
     VodeoBucketId?: string;
+}
+/**
+ * 预付费套餐计费参数
+ */
+export interface PrepaidPlanParam {
+    /**
+     * 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
+  
+  不填写使用默认值 1。
+     */
+    Period?: number;
+    /**
+     * 预付费套餐的自动续费标志，取值有：
+  <li> on：开启自动续费；</li>
+  <li> off：不开启自动续费。</li>
+  不填写使用默认值 off，自动续费时，默认续费1个月。
+     */
+    RenewFlag?: string;
 }
 /**
  * ModifyAccelerationDomain返回参数结构体
@@ -1953,6 +1982,19 @@ export interface L4OfflineLog {
     Size?: number;
 }
 /**
+ * ModifyPlan请求参数结构体
+ */
+export interface ModifyPlanRequest {
+    /**
+     * 套餐 ID，形如 edgeone-2unuvzjmmn2q。
+     */
+    PlanId: string;
+    /**
+     * 预付费套餐自动续费配置。若开启了自动续费，则会在套餐到期前一天自动续费，仅支持个人版，基础版，标准版套餐。不填写表示保持原有配置。
+     */
+    RenewFlag?: RenewFlag;
+}
+/**
  * 例外规则的生效范围。
  */
 export interface ExceptUserRuleScope {
@@ -2565,6 +2607,23 @@ export interface ModifyRuleRequest {
      * 规则标签。
      */
     Tags?: Array<string>;
+}
+/**
+ * RenewPlan请求参数结构体
+ */
+export interface RenewPlanRequest {
+    /**
+     * 套餐 ID，形如 edgeone-2unuvzjmmn2q。
+     */
+    PlanId: string;
+    /**
+     * 续费套餐的时长，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
+     */
+    Period: number;
+    /**
+     * 是否自动使用代金券，取值有：<li> true：是；</li><li> false：否。</li>不填写使用默认值 false。
+     */
+    AutoUseVoucher?: string;
 }
 /**
  * DescribePrefetchTasks返回参数结构体
@@ -3276,6 +3335,15 @@ export interface DescribeConfigGroupVersionDetailRequest {
     VersionId: string;
 }
 /**
+ * ModifyPlan返回参数结构体
+ */
+export interface ModifyPlanResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 拦截页面的配置信息
  */
 export interface DropPageDetail {
@@ -3545,6 +3613,36 @@ export interface VanityNameServers {
      * 自定义 ns 列表。
      */
     Servers?: Array<string>;
+}
+/**
+ * DestroyPlan请求参数结构体
+ */
+export interface DestroyPlanRequest {
+    /**
+     * 套餐 ID，形如 edgeone-2wdo315m2y4c。
+     */
+    PlanId: string;
+}
+/**
+ * CreatePlan请求参数结构体
+ */
+export interface CreatePlanRequest {
+    /**
+     * 订阅的套餐类型，取值有：<li> personal：个人版套餐，预付费套餐；</li><li> basic：基础版套餐，预付费套餐；</li><li> standard：标准版套餐，预付费套餐；</li><li> enterprise：企业版套餐，后付费套餐。</li>订阅预付费套餐时，请确保账号内有足够余额，余额不足会产生一个待支付的订单。
+  计费概述参考 [Edgeone计费概述](https://cloud.tencent.com/document/product/1552/94156)
+  不同套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
+     */
+    PlanType: string;
+    /**
+     * 是否自动使用代金券，取值有：<li> true：是；</li><li> false：否。</li>该参数仅在 PlanType 为 personal, basic, standard 时有效。
+  不填写使用默认值 false。
+     */
+    AutoUseVoucher?: string;
+    /**
+     * 订阅预付费套餐参数，PlanType 为 personal, basic, standard 时，可以选填该参数，用于传入套餐的订阅时长和是否开启自动续费。
+  不填该参数时，默认开通套餐时长为 1 个月，不开启自动续费。
+     */
+    PrepaidPlanParam?: PrepaidPlanParam;
 }
 /**
  * IP 网段组
@@ -4226,19 +4324,13 @@ export interface DescribeIdentificationsRequest {
     Limit?: number;
 }
 /**
- * 安全模板绑定域名状态
+ * ModifyHostsCertificate返回参数结构体
  */
-export interface TemplateScope {
+export interface ModifyHostsCertificateResponse {
     /**
-     * 站点ID。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ZoneId?: string;
-    /**
-     * 实例状态列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EntityStatus?: Array<EntityStatus>;
+    RequestId?: string;
 }
 /**
  * CreateAccelerationDomain请求参数结构体
@@ -4293,6 +4385,19 @@ export interface NormalAction {
      * 参数。
      */
     Parameters: Array<RuleNormalActionParams>;
+}
+/**
+ * Top数据的详细信息
+ */
+export interface TopDetailData {
+    /**
+     * 字段名。
+     */
+    Key: string;
+    /**
+     * 字段值。
+     */
+    Value: number;
 }
 /**
  * DescribeZoneSetting返回参数结构体
@@ -4371,6 +4476,19 @@ export interface CacheConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FollowOrigin?: FollowOrigin;
+}
+/**
+ * UpgradePlan返回参数结构体
+ */
+export interface UpgradePlanResponse {
+    /**
+     * 订单号。
+     */
+    DealName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 离线缓存是否开启
@@ -4776,6 +4894,19 @@ export interface DeleteAccelerationDomainsRequest {
   <li> false：当该加速域名存在关联资源时，不允许删除。</li>不填写，默认值为：false。
      */
     Force?: boolean;
+}
+/**
+ * RenewPlan返回参数结构体
+ */
+export interface RenewPlanResponse {
+    /**
+     * 订单号。
+     */
+    DealName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 实时日志投递任务。
@@ -5731,6 +5862,23 @@ export interface CreateL4ProxyRequest {
     DDosProtectionConfig?: DDosProtectionConfig;
 }
 /**
+ * CreatePlan返回参数结构体
+ */
+export interface CreatePlanResponse {
+    /**
+     * 套餐 ID，形如 edgeone-2unuvzjmmn2q。
+     */
+    PlanId?: string;
+    /**
+     * 订单号。
+     */
+    DealName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeApplicationProxies请求参数结构体
  */
 export interface DescribeApplicationProxiesRequest {
@@ -5791,9 +5939,13 @@ export interface Hsts {
     Preload?: string;
 }
 /**
- * ModifyHostsCertificate返回参数结构体
+ * CreateOriginGroup返回参数结构体
  */
-export interface ModifyHostsCertificateResponse {
+export interface CreateOriginGroupResponse {
+    /**
+     * 源站组ID。
+     */
+    OriginGroupId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6471,6 +6623,7 @@ export interface DeliveryCondition {
   <li>EdgeResponseStatusCode：按照 EdgeOne 节点响应返回给客户端的状态码进行过滤。<br>   支持运算符：equal、great、less、great_equal、less_equal<br>   取值范围：任意大于等于 0 的整数</li>
   <li>OriginResponseStatusCode：按照源站响应状态码进行过滤。<br>   支持运算符：equal、great、less、great_equal、less_equal<br>   取值范围：任意大于等于 -1 的整数</li>
   <li>SecurityAction：按照请求命中安全规则后的最终处置动作进行过滤。<br>   支持运算符：equal<br>   可选项如下：<br>   -：未知/未命中<br>   Monitor：观察<br>   JSChallenge：JavaScript 挑战<br>   Deny：拦截<br>   Allow：放行<br>   BlockIP：IP 封禁<br>   Redirect：重定向<br>   ReturnCustomPage：返回自定义页面<br>   ManagedChallenge：托管挑战<br>   Silence：静默<br>   LongDelay：长时间等待后响应<br>   ShortDelay：短时间等待后响应</li>
+  <li>SecurityModule：按照最终处置请求的安全模块名称进行过滤。<br>   支持运算符：equal<br>   可选项如下：<br>   -：未知/未命中<br>   CustomRule：Web防护 - 自定义规则<br>   RateLimitingCustomRule：Web防护 - 速率限制规则<br>   ManagedRule：Web防护 - 托管规则<br>   L7DDoS：Web防护 - CC攻击防护<br>   BotManagement：Bot管理 - Bot基础管理<br>   BotClientReputation：Bot管理 - 客户端画像分析<br>   BotBehaviorAnalysis：Bot管理 - Bot智能分析<br>   BotCustomRule：Bot管理 - 自定义Bot规则<br>   BotActiveDetection：Bot管理 - 主动特征识别</li>
      */
     Conditions?: Array<QueryCondition>;
 }
@@ -6514,6 +6667,15 @@ export interface IPRegionInfo {
   <li>no：该 IP 不属于 EdgeOne 节点。</li>
      */
     IsEdgeOneIP?: string;
+}
+/**
+ * DestroyPlan返回参数结构体
+ */
+export interface DestroyPlanResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 查询条件
@@ -7456,6 +7618,19 @@ export interface CreateApplicationProxyRuleRequest {
     RuleTag?: string;
 }
 /**
+ * IncreasePlanQuota返回参数结构体
+ */
+export interface IncreasePlanQuotaResponse {
+    /**
+     * 订单号。
+     */
+    DealName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeIPRegion返回参数结构体
  */
 export interface DescribeIPRegionResponse {
@@ -7472,19 +7647,6 @@ export interface DescribeIPRegionResponse {
  * DescribeAvailablePlans请求参数结构体
  */
 export declare type DescribeAvailablePlansRequest = null;
-/**
- * CreateOriginGroup返回参数结构体
- */
-export interface CreateOriginGroupResponse {
-    /**
-     * 源站组ID。
-     */
-    OriginGroupId?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
 /**
  * ModifyZone返回参数结构体
  */
@@ -7618,19 +7780,6 @@ export interface AliasDomain {
     ModifiedOn: string;
 }
 /**
- * 规则引擎HTTP请求头/响应头类型的动作
- */
-export interface RewriteAction {
-    /**
-     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
-     */
-    Action: string;
-    /**
-     * 参数。
-     */
-    Parameters: Array<RuleRewriteActionParams>;
-}
-/**
  * IP黑白名单详细规则
  */
 export interface IpTableRule {
@@ -7683,6 +7832,23 @@ export interface IpTableRule {
      * 匹配内容。当 Operator为is_emty 或not_exists时，此值允许为空。
      */
     MatchContent?: string;
+}
+/**
+ * IncreasePlanQuota请求参数结构体
+ */
+export interface IncreasePlanQuotaRequest {
+    /**
+     * 套餐 ID, 形如 edgeone-2unuvzjmmn2q。
+     */
+    PlanId: string;
+    /**
+     * 新增的套餐配额类型，取值有：<li> site：站点数；</li><li> precise_access_control_rule：Web 防护 - 自定义规则 - 精准匹配策略的规则配额；</li><li> rate_limiting_rule：Web 防护 - 速率限制 - 精准速率限制模块的规则配额。</li>
+     */
+    QuotaType: string;
+    /**
+     * 新增的配额个数。单次新增的配额个数上限为 100。
+     */
+    QuotaNumber: number;
 }
 /**
  * DescribeDDoSAttackTopData请求参数结构体
@@ -7928,17 +8094,32 @@ export interface SlowRateConfig {
     Threshold?: number;
 }
 /**
- * Top数据的详细信息
+ * 规则引擎HTTP请求头/响应头类型的动作
  */
-export interface TopDetailData {
+export interface RewriteAction {
     /**
-     * 字段名。
+     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
-    Key: string;
+    Action: string;
     /**
-     * 字段值。
+     * 参数。
      */
-    Value: number;
+    Parameters: Array<RuleRewriteActionParams>;
+}
+/**
+ * 安全模板绑定域名状态
+ */
+export interface TemplateScope {
+    /**
+     * 站点ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId?: string;
+    /**
+     * 实例状态列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EntityStatus?: Array<EntityStatus>;
 }
 /**
  * DescribeOverviewL7Data请求参数结构体
@@ -8536,6 +8717,23 @@ export interface ModifyZoneStatusResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpgradePlan请求参数结构体
+ */
+export interface UpgradePlanRequest {
+    /**
+     * 套餐 ID，形如 edgeone-2unuvzjmmn2q。
+     */
+    PlanId: string;
+    /**
+     * 需要升级到的目标套餐版本，取值有：<li> basic：基础版套餐；</li><li> standard：标准版套餐。</li>
+     */
+    PlanType: string;
+    /**
+     * 是否自动使用代金券，取值有：<li> true：是；</li><li> false：否。</li>不填写使用默认值 false。
+     */
+    AutoUseVoucher?: string;
 }
 /**
  * CreatePurgeTask请求参数结构体

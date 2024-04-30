@@ -610,7 +610,7 @@ export interface DescribeDataCustomUrlRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。
    */
   NetType?: string
   /**
