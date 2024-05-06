@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterRouteTable(req: CreateClusterRouteTableRequest, cb?: (error: string, rep: CreateClusterRouteTableResponse) => void): Promise<CreateClusterRouteTableResponse>;
     /**
-     * 获得节点升级当前的进度
+     * 获得节点升级当前的进度，若集群未处于节点升级状态，则接口会报错：任务未找到。
      */
     GetUpgradeInstanceProgress(req: GetUpgradeInstanceProgressRequest, cb?: (error: string, rep: GetUpgradeInstanceProgressResponse) => void): Promise<GetUpgradeInstanceProgressResponse>;
     /**
@@ -456,7 +456,7 @@ export declare class Client extends AbstractClient {
      */
     ListClusterInspectionResultsItems(req: ListClusterInspectionResultsItemsRequest, cb?: (error: string, rep: ListClusterInspectionResultsItemsResponse) => void): Promise<ListClusterInspectionResultsItemsResponse>;
     /**
-     * 开启加密数据保护
+     * 开启加密数据保护，需要先开启KMS能力，完成KMS授权
      */
     EnableEncryptionProtection(req: EnableEncryptionProtectionRequest, cb?: (error: string, rep: EnableEncryptionProtectionResponse) => void): Promise<EnableEncryptionProtectionResponse>;
     /**
@@ -528,7 +528,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePrometheusGlobalNotification(req: DescribePrometheusGlobalNotificationRequest, cb?: (error: string, rep: DescribePrometheusGlobalNotificationResponse) => void): Promise<DescribePrometheusGlobalNotificationResponse>;
     /**
-     * 缩容独立集群master节点
+     * 缩容独立集群master节点，本功能为内测能力，使用之前请先提单联系我们。
      */
     ScaleInClusterMaster(req: ScaleInClusterMasterRequest, cb?: (error: string, rep: ScaleInClusterMasterResponse) => void): Promise<ScaleInClusterMasterResponse>;
     /**

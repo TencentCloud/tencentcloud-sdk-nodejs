@@ -1397,13 +1397,36 @@ export interface NoticeRule {
     Rule?: string;
 }
 /**
- * DeleteMachineGroup返回参数结构体
+ * 仪表盘订阅通知方式
  */
-export interface DeleteMachineGroupResponse {
+export interface DashboardNoticeMode {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 仪表盘通知方式。<br>
+  <li/>Uin：腾讯云用户<br>
+  <li/>Group：腾讯云用户组<br>
+  <li/>Email：自定义Email<br>
+  <li/>WeCom: 企业微信回调
      */
-    RequestId?: string;
+    ReceiverType: string;
+    /**
+     * 知方式对应的值。
+  <br> <li/> 当ReceiverType不是 Wecom 时，Values必填。
+     */
+    Values?: Array<string>;
+    /**
+     * 仪表盘通知渠道。
+  <br><li/> 支持：["Email","Sms","WeChat","Phone"]。
+  <br><li/> 当ReceiverType是 Email 或 Wecom 时，ReceiverChannels不能赋值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReceiverChannels?: Array<string>;
+    /**
+     * 回调Url。
+  <br><li/> 当ReceiverType是 Wecom 时，Url必填。
+  <br><li/> 当ReceiverType不是 Wecom 时，Url不能填写。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
 }
 /**
  * Kafka访问协议
@@ -1923,7 +1946,24 @@ export interface DescribeAlarmShieldsRequest {
 /**
  * SearchDashboardSubscribe请求参数结构体
  */
-export declare type SearchDashboardSubscribeRequest = null;
+export interface SearchDashboardSubscribeRequest {
+    /**
+     * 仪表盘id。
+     */
+    DashboardId: string;
+    /**
+     * 仪表盘订阅数据。
+     */
+    SubscribeData: DashboardSubscribeData;
+    /**
+     * 仪表盘订阅Id。
+     */
+    Id?: number;
+    /**
+     * 仪表盘订阅名称。
+     */
+    Name?: string;
+}
 /**
  * DescribePartitions返回参数结构体
  */
@@ -2270,6 +2310,15 @@ export interface SearchLogInfos {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Context?: string;
+}
+/**
+ * DeleteMachineGroup返回参数结构体
+ */
+export interface DeleteMachineGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 日志主题分区信息
@@ -3062,13 +3111,43 @@ export interface ModifyScheduledSqlRequest {
     SyntaxRule?: number;
 }
 /**
- * DeleteConfig返回参数结构体
+ * 仪表盘订阅相关数据
  */
-export interface DeleteConfigResponse {
+export interface DashboardSubscribeData {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 仪表盘订阅通知方式。
      */
-    RequestId?: string;
+    NoticeModes: Array<DashboardNoticeMode>;
+    /**
+     * 仪表盘订阅时间，为空标识取仪表盘默认的时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardTime?: Array<string>;
+    /**
+     * 仪表盘订阅模板变量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateVariables?: Array<DashboardTemplateVariable>;
+    /**
+     * 时区。参考：https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timezone?: string;
+    /**
+     * 语言。 zh 中文、en`英文。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubscribeLanguage?: string;
+    /**
+     * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JumpDomain?: string;
+    /**
+     * 自定义跳转链接。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JumpUrl?: string;
 }
 /**
  * CreateDeliverCloudFunction请求参数结构体
@@ -3588,13 +3667,17 @@ export interface CreateExportRequest {
     SyntaxRule?: number;
 }
 /**
- * ModifyDashboardSubscribe返回参数结构体
+ * 仪表盘订阅模板变量
  */
-export interface ModifyDashboardSubscribeResponse {
+export interface DashboardTemplateVariable {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * key的值
      */
-    RequestId?: string;
+    Key: string;
+    /**
+     * key对应的values取值values
+     */
+    Values: Array<string>;
 }
 /**
  * DescribeAlarmNotices返回参数结构体
@@ -4024,6 +4107,15 @@ export interface CreateShipperResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDashboardSubscribe返回参数结构体
+ */
+export interface ModifyDashboardSubscribeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeKafkaRecharges返回参数结构体
  */
 export interface DescribeKafkaRechargesResponse {
@@ -4264,6 +4356,15 @@ export interface DescribeDataTransformInfoRequest {
      * Type为1， 此参数必填
      */
     TaskId?: string;
+}
+/**
+ * DeleteConfig返回参数结构体
+ */
+export interface DeleteConfigResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteShipper返回参数结构体

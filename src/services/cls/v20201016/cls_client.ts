@@ -80,7 +80,7 @@ import {
   DeleteMachineGroupInfoRequest,
   CreateLogsetResponse,
   NoticeRule,
-  DeleteMachineGroupResponse,
+  DashboardNoticeMode,
   KafkaProtocolInfo,
   ScheduledSqlTaskInfo,
   DescribeConfigMachineGroupsRequest,
@@ -116,6 +116,7 @@ import {
   DeleteExportResponse,
   DescribeDashboardSubscribesRequest,
   SearchLogInfos,
+  DeleteMachineGroupResponse,
   PartitionInfo,
   DeleteScheduledSqlResponse,
   AlertHistoryRecord,
@@ -145,7 +146,7 @@ import {
   AlarmTarget,
   CreateKafkaRechargeResponse,
   ModifyScheduledSqlRequest,
-  DeleteConfigResponse,
+  DashboardSubscribeData,
   CreateDeliverCloudFunctionRequest,
   DeleteConsumerRequest,
   QueryRangeMetricResponse,
@@ -165,7 +166,7 @@ import {
   CloseKafkaConsumerRequest,
   RuleTagInfo,
   CreateExportRequest,
-  ModifyDashboardSubscribeResponse,
+  DashboardTemplateVariable,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
   DescribeMachineGroupsResponse,
@@ -185,6 +186,7 @@ import {
   ModifyTopicResponse,
   CreateConfigRequest,
   CreateShipperResponse,
+  ModifyDashboardSubscribeResponse,
   DescribeKafkaRechargesResponse,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
@@ -195,6 +197,7 @@ import {
   ContentInfo,
   ValueInfo,
   DescribeDataTransformInfoRequest,
+  DeleteConfigResponse,
   DeleteShipperResponse,
   ModifyKafkaConsumerRequest,
   ExportInfo,
@@ -770,7 +773,7 @@ export class Client extends AbstractClient {
    * 此接口用于预览仪表盘订阅
    */
   async SearchDashboardSubscribe(
-    req?: SearchDashboardSubscribeRequest,
+    req: SearchDashboardSubscribeRequest,
     cb?: (error: string, rep: SearchDashboardSubscribeResponse) => void
   ): Promise<SearchDashboardSubscribeResponse> {
     return this.request("SearchDashboardSubscribe", req, cb)

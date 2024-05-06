@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRouteTable", req, cb);
     }
     /**
-     * 获得节点升级当前的进度
+     * 获得节点升级当前的进度，若集群未处于节点升级状态，则接口会报错：任务未找到。
      */
     async GetUpgradeInstanceProgress(req, cb) {
         return this.request("GetUpgradeInstanceProgress", req, cb);
@@ -700,7 +700,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListClusterInspectionResultsItems", req, cb);
     }
     /**
-     * 开启加密数据保护
+     * 开启加密数据保护，需要先开启KMS能力，完成KMS授权
      */
     async EnableEncryptionProtection(req, cb) {
         return this.request("EnableEncryptionProtection", req, cb);
@@ -808,7 +808,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusGlobalNotification", req, cb);
     }
     /**
-     * 缩容独立集群master节点
+     * 缩容独立集群master节点，本功能为内测能力，使用之前请先提单联系我们。
      */
     async ScaleInClusterMaster(req, cb) {
         return this.request("ScaleInClusterMaster", req, cb);

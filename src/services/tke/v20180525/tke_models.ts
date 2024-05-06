@@ -1068,45 +1068,7 @@ export interface DescribeClustersRequest {
    */
   Limit?: number
   /**
-   * ·  ClusterName
-    按照【集群名】进行过滤。
-    类型：String
-    必选：否
-
-·  ClusterType
-    按照【集群类型】进行过滤。
-    类型：String
-    必选：否
-
-·  ClusterStatus
-    按照【集群状态】进行过滤。
-    类型：String
-    必选：否
-
-·  Tags
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-
-·  vpc-id
-    按照【VPC】进行过滤。
-    类型：String
-    必选：否
-
-·  tag-key
-    按照【标签键】进行过滤。
-    类型：String
-    必选：否
-
-·  tag-value
-    按照【标签值】进行过滤。
-    类型：String
-    必选：否
-
-·  tag:tag-key
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
+   * · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-123qajzs"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["abc:1"] 按照【标签键值对】进行过滤。 类型：String 必选：否
    */
   Filters?: Array<Filter>
   /**
@@ -1534,7 +1496,7 @@ export interface CheckInstancesUpgradeAbleRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 升级类型
+   * 升级类型，枚举值：reset(重装升级，支持大版本和小版本)，hot(原地滚动小版本升级)，major(原地滚动大版本升级)
    */
   UpgradeType?: string
   /**
@@ -2850,22 +2812,17 @@ export interface DescribeClusterNodePoolsRequest {
    */
   ClusterId: string
   /**
-   * ·  NodePoolsName
+   * · "Name":"NodePoolsName","Values": ["test"]
     按照【节点池名】进行过滤。
     类型：String
     必选：否
 
-·  NodePoolsId
+·  "Name":"NodePoolsId","Values": ["np-d2mb2zb"]
     按照【节点池id】进行过滤。
     类型：String
     必选：否
 
-·  tags
-    按照【标签键值对】进行过滤。
-    类型：String
-    必选：否
-
-·  tag:tag-key
+·  "Name":"Tags","Values": ["abc:1"]
     按照【标签键值对】进行过滤。
     类型：String
     必选：否
@@ -3101,7 +3058,7 @@ export interface ExistedInstancesPara {
    */
   InstanceIds: Array<string>
   /**
-   * 实例额外需要设置参数信息
+   * 实例额外需要设置参数信息（目前后端暂不支持此字段，我们将在未来的版本中实现）
    */
   InstanceAdvancedSettings?: InstanceAdvancedSettings
   /**
@@ -4819,7 +4776,7 @@ export interface ModifyNodePoolInstanceTypesRequest {
    */
   NodePoolId: string
   /**
-   * 机型列表
+   * 机型列表，主实例机型不支持修改
    */
   InstanceTypes: Array<string>
 }
@@ -4996,11 +4953,11 @@ export interface DescribeClustersResponse {
   /**
    * 集群总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 集群信息列表
    */
-  Clusters: Array<Cluster>
+  Clusters?: Array<Cluster>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5315,11 +5272,11 @@ export interface ReservedInstanceScope {
  */
 export interface DescribeAvailableClusterVersionRequest {
   /**
-   * 集群 Id
+   * 集群 Id。若只查询某个集群可升级的版本，需填写此项。
    */
   ClusterId?: string
   /**
-   * 集群 Id 列表
+   * 集群 Id 列表。若查询多个集群可升级的版本，需填写此项。
    */
   ClusterIds?: Array<string>
 }
@@ -6812,7 +6769,7 @@ export interface InstanceUpgradeProgressItem {
   /**
    * 节点instanceID
    */
-  InstanceID: string
+  InstanceID?: string
   /**
    * 任务生命周期
 process 运行中
@@ -6823,25 +6780,25 @@ timeout 已超时
 aborted 已取消
 pending 还未开始
    */
-  LifeState: string
+  LifeState?: string
   /**
    * 升级开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartAt: string
+  StartAt?: string
   /**
    * 升级结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndAt: string
+  EndAt?: string
   /**
    * 升级前检查结果
    */
-  CheckResult: InstanceUpgradePreCheckResult
+  CheckResult?: InstanceUpgradePreCheckResult
   /**
    * 升级步骤详情
    */
-  Detail: Array<TaskStepInfo>
+  Detail?: Array<TaskStepInfo>
 }
 
 /**
@@ -13252,7 +13209,7 @@ export interface ScaleInMaster {
    */
   NodeRole: string
   /**
-   * 实例的保留模式
+   * 实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
    */
   InstanceDeleteMode: string
 }

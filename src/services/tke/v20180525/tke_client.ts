@@ -881,7 +881,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获得节点升级当前的进度
+   * 获得节点升级当前的进度，若集群未处于节点升级状态，则接口会报错：任务未找到。
    */
   async GetUpgradeInstanceProgress(
     req: GetUpgradeInstanceProgressRequest,
@@ -1761,7 +1761,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启加密数据保护
+   * 开启加密数据保护，需要先开启KMS能力，完成KMS授权
    */
   async EnableEncryptionProtection(
     req: EnableEncryptionProtectionRequest,
@@ -1941,7 +1941,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 缩容独立集群master节点
+   * 缩容独立集群master节点，本功能为内测能力，使用之前请先提单联系我们。
    */
   async ScaleInClusterMaster(
     req: ScaleInClusterMasterRequest,
