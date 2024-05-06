@@ -583,7 +583,7 @@ export interface ModifyIp6RuleResponse {
  */
 export interface SetVpnGatewaysRenewFlagRequest {
   /**
-   * VPNGW字符型ID列表。可通过[DescribeVpnGateways](https://cloud.tencent.com/document/api/215/17514)接口返回值VpnGatewaySet中的VpnGatewayId获取。
+   * VPNGW字符型ID列表。可通过[DescribeVpnGateways](https://cloud.tencent.com/document/api/215/17514)接口返回值VpnGatewaySet中的VpnGatewayId获取，只能选择包年包月的VPN实例。
    */
   VpnGatewayIds: Array<string>
   /**
@@ -1474,11 +1474,11 @@ export interface CreateVpnGatewaySslServerRequest {
    */
   EncryptAlgorithm?: string
   /**
-   * 是否支持压缩。当前仅支持不支持压缩，默认False。
+   * 是否支持压缩。当前不支持压缩，默认False。
    */
   Compress?: boolean
   /**
-   * 是否开启SSO认证。默认为False
+   * 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。
    */
   SsoEnabled?: boolean
   /**
@@ -3710,7 +3710,7 @@ export interface DescribeVpnGatewaySslServersRequest {
    */
   Limit?: number
   /**
-   * SSL-VPN-SERVER实例ID。形如：vpngwSslServer-12345678。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。
+   * SSL-VPN-SERVER实例ID。形如：vpns-0p4rj60。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。
    */
   SslVpnServerIds?: Array<string>
   /**
@@ -5537,7 +5537,7 @@ export interface InquiryPriceCreateVpnGatewayResponse {
   /**
    * 商品价格。
    */
-  Price: Price
+  Price?: Price
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8598,11 +8598,11 @@ export interface ModifyVpnGatewaySslServerRequest {
    */
   IntegrityAlgorithm?: string
   /**
-   * 是否支持压缩。当前仅支持不支持压缩。默认False
+   * 是否支持压缩。当前不支持压缩。默认False。
    */
   Compress?: boolean
   /**
-   * 是否开启SSO认证，默认False
+   * 是否开启SSO认证。默认为False。该功能当前需要申请开白使用。
    */
   SsoEnabled?: boolean
   /**
@@ -8834,6 +8834,11 @@ export interface SslVpnSever {
    * 策略信息
    */
   AccessPolicy?: Array<AccessPolicy>
+  /**
+   * CAM服务提供商Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpName?: string
 }
 
 /**
@@ -12623,7 +12628,7 @@ export interface DeleteNetworkInterfaceRequest {
  */
 export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
   /**
-   * 商品价格。
+   * 商品价格。仅支持未过期的预付费网关。
    */
   Price?: Price
   /**
@@ -13120,7 +13125,7 @@ export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest {
    */
   VpnGatewayId: string
   /**
-   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。
+   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：Mbps。
    */
   InternetMaxBandwidthOut: number
 }
@@ -13438,7 +13443,7 @@ export interface ModifyVpnGatewayCcnRoutesRequest {
    */
   VpnGatewayId: string
   /**
-   * 云联网路由（IDC网段）列表。
+   * 云联网路由（IDC网段）列表。其中RouteId可通过[DescribeVpnGatewayCcnRoutes](https://cloud.tencent.com/document/product/215/43514)接口获取。
    */
   Routes: Array<VpngwCcnRoutes>
 }
@@ -14573,7 +14578,7 @@ export interface DescribeCcnRegionBandwidthLimitsRequest {
  */
 export interface InquiryPriceCreateVpnGatewayRequest {
   /**
-   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。
+   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。
    */
   InternetMaxBandwidthOut: number
   /**
@@ -14585,11 +14590,11 @@ export interface InquiryPriceCreateVpnGatewayRequest {
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100；单位：个。
+   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。
    */
   MaxConnection?: number
   /**
-   * 查询的VPN类型，支持IPSEC和SSL两种类型，为SSL类型时，MaxConnection参数必传。
+   * 查询的VPN类型，支持IPSEC、SSL两种类型，为SSL类型时，MaxConnection参数必传。
    */
   Type?: string
 }

@@ -1469,7 +1469,12 @@ export interface NoticeRule {
    */
   WebCallbacks?: Array<WebCallback>
   /**
-   * 匹配规则。
+   * 匹配规则 JSON串。
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1,2]\",\"Type\":\"Value\"}]}]}
+`
+以上示例表示：
+规则：
+通知类型属于告警通知,恢复通知
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: string
@@ -1751,7 +1756,7 @@ export interface ExtractRuleInfo {
    */
   UnMatchUpLoadSwitch?: boolean
   /**
-   * 失败日志的key
+   * 失败日志的key，当UnMatchUpLoadSwitch为true时必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnMatchLogKey?: string
@@ -1764,18 +1769,21 @@ export interface ExtractRuleInfo {
   Backtracking?: number
   /**
    * 是否为Gbk编码。 0：否；1：是。
-注意：
+注意
+- 目前取0值时，表示UTF-8编码
 - COS导入不支持此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsGBK?: number
   /**
    * 是否为标准json。  0：否； 1：是。
+注
+- 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonStandard?: number
   /**
-   * syslog传输协议，取值为tcp或者udp。
+   * syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置。
 - COS导入不支持此字段。
@@ -1783,7 +1791,7 @@ export interface ExtractRuleInfo {
    */
   Protocol?: string
   /**
-   * syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]。举例：127.0.0.1:9000
+   * syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置。
 - COS导入不支持此字段。
@@ -1794,6 +1802,7 @@ export interface ExtractRuleInfo {
    * rfc3164：指定系统日志采集使用RFC3164协议解析日志。
 rfc5424：指定系统日志采集使用RFC5424协议解析日志。
 auto：自动匹配rfc3164或者rfc5424其中一种协议。
+只有在LogType为service_syslog时生效，其余类型无需填写。
 注意：
 - 该字段适用于：创建采集规则配置、修改采集规则配置
 - COS导入不支持此字段。
@@ -1822,9 +1831,7 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议。
    */
   MetaTags?: Array<MetaTagInfo>
   /**
-   * Windows事件日志采集。
-注意：
-- COS导入不支持此字段。
+   * Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。
    */
   EventLogRules?: Array<EventLog>
 }
@@ -3898,7 +3905,7 @@ export interface DescribeMachineGroupsResponse {
  */
 export interface DeleteConfigExtraRequest {
   /**
-   * 采集规则扩展配置ID
+   * 特殊采集规则扩展配置ID
    */
   ConfigExtraId: string
 }
@@ -4146,19 +4153,21 @@ export interface DeleteAlarmResponse {
  */
 export interface WebCallback {
   /**
-   * 回调地址。
+   * 回调地址。最大支持1024个字节数。
    */
   Url: string
   /**
    * 回调的类型。可选值：
-<li> WeCom
-<li> Http
+- WeCom
+- Http
+- DingTalk
+- Lark
    */
   CallbackType: string
   /**
    * 回调方法。可选值：
-<li> POST
-<li> PUT
+- POST
+- PUT
 默认值为POST。CallbackType为Http时为必选。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4176,7 +4185,9 @@ export interface WebCallback {
    */
   Body?: string
   /**
-   * 序号
+   * 序号。
+- 入参无效。
+- 出参有效。
    */
   Index?: number
 }
@@ -4236,7 +4247,7 @@ export interface CreateConfigRequest {
    */
   Output: string
   /**
-   * 日志采集路径,包含文件名
+   * 日志采集路径，包含文件名，支持多个路径，多个路径之间英文逗号分隔，文件采集情况下必填
    */
   Path?: string
   /**
@@ -5967,21 +5978,23 @@ export type DeleteDashboardSubscribeRequest = null
 export interface NoticeReceiver {
   /**
    * 接受者类型。可选值：
-<br><li> Uin - 用户ID
-<br><li> Group - 用户组ID
+-  Uin - 用户ID
+- Group - 用户组ID
 暂不支持其余接收者类型。
    */
   ReceiverType: string
   /**
    * 接收者。
+当ReceiverType为Uin时，ReceiverIds的值为用户id。[子用户信息查询](https://cloud.tencent.com/document/product/598/36258)
+当ReceiverType为Group时，ReceiverIds的值为用户组id。[CAM用户组](https://cloud.tencent.com/document/product/598/14985)
    */
   ReceiverIds: Array<number | bigint>
   /**
    * 通知接收渠道。
-<br><li> Email - 邮件
-<br><li> Sms - 短信
-<br><li> WeChat - 微信
-<br><li> Phone - 电话
+- Email - 邮件
+- Sms - 短信
+- WeChat - 微信
+- Phone - 电话
    */
   ReceiverChannels: Array<string>
   /**
@@ -5993,7 +6006,10 @@ export interface NoticeReceiver {
    */
   EndTime?: string
   /**
-   * 位序
+   * 位序。
+
+- 入参无效。
+- 出参时有效。
    */
   Index?: number
 }
@@ -6565,7 +6581,27 @@ export interface CsvInfo {
  */
 export interface DescribeConfigExtrasRequest {
   /**
-   * 支持的key： topicId,name, configExtraId, machineGroupId
+   * name
+- 按照【特殊采集配置名称】进行模糊匹配过滤。
+- 类型：String
+- 必选：否
+
+configExtraId
+- 按照【特殊采集配置ID】进行过滤。
+- 类型：String
+- 必选：否
+
+topicId
+- 按照【日志主题】进行过滤。
+- 类型：String
+- 必选：否
+
+machineGroupId
+- 按照【机器组ID】进行过滤。
+- 类型：String
+- 必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
    */
   Filters?: Array<Filter>
   /**
@@ -6588,25 +6624,35 @@ export interface CreateAlarmNoticeRequest {
   Name: string
   /**
    * 通知类型。可选值：
-<li> Trigger - 告警触发 </li>
-<li> Recovery - 告警恢复</li>
-<li> All - 告警触发和告警恢复</li>
+- Trigger - 告警触发
+- Recovery - 告警恢复
+- All - 告警触发和告警恢复
+
+
+ 注意:  
+- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
+- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
    */
   Type?: string
   /**
    * 通知接收对象。
+ 注意:  
+- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
+- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
    * 接口回调信息（包括企业微信）。
+ 注意:  
+- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
+- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
    */
   WebCallbacks?: Array<WebCallback>
   /**
    * 通知规则。
-
  注意:  
-
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。
+- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
+- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
 
 
    */

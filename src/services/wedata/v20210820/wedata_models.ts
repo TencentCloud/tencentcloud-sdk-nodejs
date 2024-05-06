@@ -379,40 +379,6 @@ export interface DescribeTaskAlarmRegulationsResponse {
 }
 
 /**
- * DescribeTableLineageInfo请求参数结构体
- */
-export interface DescribeTableLineageInfoRequest {
-  /**
-   * 查询方向，INPUT,OUTPUT,BOTH枚举值
-   */
-  Direction: string
-  /**
-   * 表信息
-   */
-  Data: TableLineageInfo
-  /**
-   * 单次查询入度,默认 1
-   */
-  InputDepth?: number
-  /**
-   * 单次查询出度,默认 1
-   */
-  OutputDepth?: number
-  /**
-   * 额外参数（传递调用方信息）
-   */
-  ExtParams?: Array<LineageParamRecord>
-  /**
-   * 是否过滤临时表,默认true
-   */
-  IgnoreTemp?: boolean
-  /**
-   * 是否递归查询二级节点数目，默认为true
-   */
-  RecursiveSecond?: boolean
-}
-
-/**
  * 表的元数据信息
  */
 export interface ColumnBasicInfo {
@@ -2646,6 +2612,97 @@ export interface DescribeRuleGroupSubscriptionResponse {
 }
 
 /**
+ * 集群基础信息
+ */
+export interface BaseClusterInfo {
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 集群类型，EMR/CDW等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType?: string
+  /**
+   * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
+  /**
+   * 地域中文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionCn?: string
+  /**
+   * 地域英文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionEn?: string
+  /**
+   * 地区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionArea?: string
+  /**
+   * 集群是否使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Used?: boolean
+  /**
+   * 集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 集群状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusInfo?: string
+  /**
+   * 集群存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: string
+  /**
+   * 集群计算类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComputeType?: string
+  /**
+   * 集群资源量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterResource?: string
+  /**
+   * 集群付费方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeType?: string
+  /**
+   * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 额外配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraConf?: string
+  /**
+   * ranger账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RangerUserName?: string
+  /**
+   * cdw账号（用于展示）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdwUserName?: string
+}
+
+/**
  * DescribeIntegrationStatisticsTaskStatusTrend返回参数结构体
  */
 export interface DescribeIntegrationStatisticsTaskStatusTrendResponse {
@@ -2931,6 +2988,24 @@ export interface ModifyWorkflowScheduleRequest {
 }
 
 /**
+ * CreateDsFolder请求参数结构体
+ */
+export interface CreateDsFolderRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 文件夹名称
+   */
+  FolderName: string
+  /**
+   * 父文件夹ID
+   */
+  ParentsFolderId?: string
+}
+
+/**
  * RegisterEvent请求参数结构体
  */
 export interface RegisterEventRequest {
@@ -3027,13 +3102,19 @@ export interface MakePlanOpsDtoCollection {
 }
 
 /**
- * CheckAlarmRegularNameExist返回参数结构体
+ * DescribeTableMetas返回参数结构体
  */
-export interface CheckAlarmRegularNameExistResponse {
+export interface DescribeTableMetasResponse {
   /**
-   * 是否重名
+   * 表元数据
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: boolean
+  TableMetas: Array<TableMeta>
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5794,17 +5875,41 @@ export interface RuleGroup {
 }
 
 /**
- * FreezeTasksByWorkflowIds请求参数结构体
+ * DescribeTableQualityDetails请求参数结构体
  */
-export interface FreezeTasksByWorkflowIdsRequest {
+export interface DescribeTableQualityDetailsRequest {
   /**
-   * 工作流id列表
+   * 统计日期
    */
-  WorkflowIds: Array<string>
+  StatisticsDate: number
   /**
    * 项目id
    */
   ProjectId: string
+  /**
+   * 分页序号
+   */
+  PageNumber: number
+  /**
+   * 分页大小
+   */
+  PageSize: number
+  /**
+   * 过滤参数TableName、DatabaseId 、DatabaseName、OwnerUserName
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序参数 排序方式 DESC 或者 ASC，表得分排序 TableScore
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 数据来源id
+   */
+  DatasourceId?: string
+  /**
+   * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
+   */
+  ScoreType?: string
 }
 
 /**
@@ -6397,6 +6502,37 @@ export interface GetFileInfoResponse {
 }
 
 /**
+ * 基础用户信息
+ */
+export interface BaseUser {
+  /**
+   * 有云的UIN，全局唯一
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 用户全局唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 用户显示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 电话号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneNum?: string
+  /**
+   * 邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Email?: string
+}
+
+/**
  * 实例检索条件
  */
 export interface InstanceCondition {
@@ -6790,21 +6926,17 @@ sparksql任务类型：36 jdbcsql任务类型：21 dlc任务类型：32），可
 }
 
 /**
- * BatchStopIntegrationTasks请求参数结构体
+ * ModifyWorkflowSchedule返回参数结构体
  */
-export interface BatchStopIntegrationTasksRequest {
+export interface ModifyWorkflowScheduleResponse {
   /**
-   * 任务id
+   * 执行结果
    */
-  TaskIds: Array<string>
+  Data?: BatchResult
   /**
-   * 任务类型，201为实时任务，202为离线任务
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskType: number
-  /**
-   * 项目id
-   */
-  ProjectId: string
+  RequestId?: string
 }
 
 /**
@@ -7859,41 +7991,37 @@ export interface SubscribeWebHook {
 }
 
 /**
- * DescribeTableQualityDetails请求参数结构体
+ * DescribeTableLineageInfo请求参数结构体
  */
-export interface DescribeTableQualityDetailsRequest {
+export interface DescribeTableLineageInfoRequest {
   /**
-   * 统计日期
+   * 查询方向，INPUT,OUTPUT,BOTH枚举值
    */
-  StatisticsDate: number
+  Direction: string
   /**
-   * 项目id
+   * 表信息
    */
-  ProjectId: string
+  Data: TableLineageInfo
   /**
-   * 分页序号
+   * 单次查询入度,默认 1
    */
-  PageNumber: number
+  InputDepth?: number
   /**
-   * 分页大小
+   * 单次查询出度,默认 1
    */
-  PageSize: number
+  OutputDepth?: number
   /**
-   * 过滤参数TableName、DatabaseId 、DatabaseName、OwnerUserName
+   * 额外参数（传递调用方信息）
    */
-  Filters?: Array<Filter>
+  ExtParams?: Array<LineageParamRecord>
   /**
-   * 排序参数 排序方式 DESC 或者 ASC，表得分排序 TableScore
+   * 是否过滤临时表,默认true
    */
-  OrderFields?: Array<OrderField>
+  IgnoreTemp?: boolean
   /**
-   * 数据来源id
+   * 是否递归查询二级节点数目，默认为true
    */
-  DatasourceId?: string
-  /**
-   * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
-   */
-  ScoreType?: string
+  RecursiveSecond?: boolean
 }
 
 /**
@@ -10136,6 +10264,20 @@ export interface CollectionFolderOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<FolderOpsDto>
+}
+
+/**
+ * FreezeTasksByWorkflowIds请求参数结构体
+ */
+export interface FreezeTasksByWorkflowIdsRequest {
+  /**
+   * 工作流id列表
+   */
+  WorkflowIds: Array<string>
+  /**
+   * 项目id
+   */
+  ProjectId: string
 }
 
 /**
@@ -13830,19 +13972,13 @@ export interface CompareResult {
 }
 
 /**
- * DescribeTableMetas返回参数结构体
+ * CheckAlarmRegularNameExist返回参数结构体
  */
-export interface DescribeTableMetasResponse {
+export interface CheckAlarmRegularNameExistResponse {
   /**
-   * 表元数据
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否重名
    */
-  TableMetas: Array<TableMeta>
-  /**
-   * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount: number
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15435,20 +15571,6 @@ export interface ColumnMeta {
 }
 
 /**
- * ModifyWorkflowSchedule返回参数结构体
- */
-export interface ModifyWorkflowScheduleResponse {
-  /**
-   * 执行结果
-   */
-  Data?: BatchResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GenHiveTableDDLSql返回参数结构体
  */
 export interface GenHiveTableDDLSqlResponse {
@@ -16499,6 +16621,81 @@ export interface CommitRuleGroupTaskResponse {
 }
 
 /**
+ * 项目信息
+ */
+export interface Project {
+  /**
+   * 项目的所在租户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TenantId?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目标识，英文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 项目显示名称，可以为中文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: BaseUser
+  /**
+   * 租户信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenant?: BaseTenant
+  /**
+   * 项目的管理员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminUsers?: Array<BaseUser>
+  /**
+   * 项目关联的集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Clusters?: Array<BaseClusterInfo>
+  /**
+   * 项目的额外配置参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: string
+  /**
+   * 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中
+   */
+  Status?: number
+  /**
+   * 项目类型，SIMPLE：简单模式 STANDARD：标准模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model?: string
+}
+
+/**
  * DescribeRealTimeTaskMetricOverview返回参数结构体
  */
 export interface DescribeRealTimeTaskMetricOverviewResponse {
@@ -16971,6 +17168,10 @@ export interface StartIntegrationTaskRequest {
  * DescribeProject返回参数结构体
  */
 export interface DescribeProjectResponse {
+  /**
+   * 项目信息
+   */
+  Data?: Project
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17935,21 +18136,21 @@ export interface LockIntegrationTaskRequest {
 }
 
 /**
- * CreateDsFolder请求参数结构体
+ * BatchStopIntegrationTasks请求参数结构体
  */
-export interface CreateDsFolderRequest {
+export interface BatchStopIntegrationTasksRequest {
   /**
-   * 项目Id
+   * 任务id
+   */
+  TaskIds: Array<string>
+  /**
+   * 任务类型，201为实时任务，202为离线任务
+   */
+  TaskType: number
+  /**
+   * 项目id
    */
   ProjectId: string
-  /**
-   * 文件夹名称
-   */
-  FolderName: string
-  /**
-   * 父文件夹ID
-   */
-  ParentsFolderId?: string
 }
 
 /**
@@ -20086,6 +20287,42 @@ export interface DeleteProjectUsersRequest {
    * 用户ID列表
    */
   UserIds: Array<string>
+}
+
+/**
+ * 租户基础信息
+ */
+export interface BaseTenant {
+  /**
+   * 租户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TenantId: string
+  /**
+   * 租户标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TenantName: string
+  /**
+   * 租户显示名称，一般是中文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 租户主账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserId: string
+  /**
+   * 租户的额外配置参数, json格式字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params: string
 }
 
 /**

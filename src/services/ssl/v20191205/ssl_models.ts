@@ -4566,7 +4566,7 @@ export interface ApplyCertificateRequest {
    */
   ProjectId?: number
   /**
-   * 证书类型，目前仅支持类型2。2 = TrustAsia TLS RSA CA。
+   * 证书类型，目前仅支持类型83。83 = TrustAsia C1 DV Free。
    */
   PackageType?: string
   /**
@@ -4578,7 +4578,7 @@ export interface ApplyCertificateRequest {
    */
   ContactPhone?: string
   /**
-   * 有效期，默认12个月，目前仅支持12个月。
+   * 有效期，默认3个月，目前仅支持3个月。
    */
   ValidityPeriod?: string
   /**

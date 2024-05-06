@@ -1086,6 +1086,20 @@ export interface CreateRoInstanceIpResponse {
 }
 
 /**
+ * CloseSSL请求参数结构体
+ */
+export interface CloseSSLRequest {
+  /**
+   * 实例 ID 。只读组 ID为空时必填。
+   */
+  InstanceId?: string
+  /**
+   * 只读组 ID。实例 ID为空时必填。
+   */
+  RoGroupId?: string
+}
+
+/**
  * CreateAuditPolicy返回参数结构体
  */
 export interface CreateAuditPolicyResponse {
@@ -1905,6 +1919,20 @@ export interface ModifyAutoRenewFlagRequest {
 }
 
 /**
+ * OpenSSL请求参数结构体
+ */
+export interface OpenSSLRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId?: string
+  /**
+   * 只读组 ID。
+   */
+  RoGroupId?: string
+}
+
+/**
  * DeleteDeployGroups请求参数结构体
  */
 export interface DeleteDeployGroupsRequest {
@@ -1953,45 +1981,13 @@ export interface ModifyBackupConfigResponse {
 }
 
 /**
- * DescribeTimeWindow返回参数结构体
+ * OpenWanService请求参数结构体
  */
-export interface DescribeTimeWindowResponse {
+export interface OpenWanServiceRequest {
   /**
-   * 星期一的可维护时间列表。
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
-  Monday: Array<string>
-  /**
-   * 星期二的可维护时间列表。
-   */
-  Tuesday: Array<string>
-  /**
-   * 星期三的可维护时间列表。
-   */
-  Wednesday: Array<string>
-  /**
-   * 星期四的可维护时间列表。
-   */
-  Thursday: Array<string>
-  /**
-   * 星期五的可维护时间列表。
-   */
-  Friday: Array<string>
-  /**
-   * 星期六的可维护时间列表。
-   */
-  Saturday: Array<string>
-  /**
-   * 星期日的可维护时间列表。
-   */
-  Sunday: Array<string>
-  /**
-   * 最大数据延迟阈值
-   */
-  MaxDelayTime: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -3466,13 +3462,45 @@ export interface CreateRoInstanceIpRequest {
 }
 
 /**
- * OpenWanService请求参数结构体
+ * DescribeTimeWindow返回参数结构体
  */
-export interface OpenWanServiceRequest {
+export interface DescribeTimeWindowResponse {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 星期一的可维护时间列表。
    */
-  InstanceId: string
+  Monday: Array<string>
+  /**
+   * 星期二的可维护时间列表。
+   */
+  Tuesday: Array<string>
+  /**
+   * 星期三的可维护时间列表。
+   */
+  Wednesday: Array<string>
+  /**
+   * 星期四的可维护时间列表。
+   */
+  Thursday: Array<string>
+  /**
+   * 星期五的可维护时间列表。
+   */
+  Friday: Array<string>
+  /**
+   * 星期六的可维护时间列表。
+   */
+  Saturday: Array<string>
+  /**
+   * 星期日的可维护时间列表。
+   */
+  Sunday: Array<string>
+  /**
+   * 最大数据延迟阈值
+   */
+  MaxDelayTime: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7217,6 +7245,24 @@ export interface ModifyDBInstanceVipVportRequest {
 }
 
 /**
+ * DescribeSSLStatus返回参数结构体
+ */
+export interface DescribeSSLStatusResponse {
+  /**
+   * 是否开通 SSL 。ON 代表开通 ，OFF 代表未开通。
+   */
+  Status: string
+  /**
+   * 证书下载链接。
+   */
+  Url: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBImportRecords请求参数结构体
  */
 export interface DescribeDBImportRecordsRequest {
@@ -7599,6 +7645,20 @@ export interface DescribeLocalBinlogConfigResponse {
    * 该地域默认binlog保留策略。
    */
   LocalBinlogConfigDefault: LocalBinlogConfigDefault
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenSSL返回参数结构体
+ */
+export interface OpenSSLResponse {
+  /**
+   * 异步请求 ID。
+   */
+  AsyncRequestId: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9468,6 +9528,20 @@ export interface AddTimeWindowResponse {
 }
 
 /**
+ * CloseSSL返回参数结构体
+ */
+export interface CloseSSLResponse {
+  /**
+   * 异步请求 ID。
+   */
+  AsyncRequestId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAuditInstanceList请求参数结构体
  */
 export interface DescribeAuditInstanceListRequest {
@@ -9659,6 +9733,20 @@ export interface LocalBinlogConfigDefault {
    * 本地binlog空间使用率，可取值范围：[30,50]。
    */
   MaxUsage: number
+}
+
+/**
+ * DescribeSSLStatus请求参数结构体
+ */
+export interface DescribeSSLStatusRequest {
+  /**
+   * 实例 ID 。只读组 ID为空时必填。
+   */
+  InstanceId?: string
+  /**
+   * 只读组 ID。实例 ID为空时必填。
+   */
+  RoGroupId?: string
 }
 
 /**

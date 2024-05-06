@@ -297,182 +297,187 @@ export interface ClusterV2 {
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 集群描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterDesc: string
+  ClusterDesc?: string
   /**
    * 集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterType: string
+  ClusterType?: string
   /**
    * 集群所属私有网络ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 集群状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterStatus: string
+  ClusterStatus?: string
   /**
    * 集群CIDR
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterCIDR: string
+  ClusterCIDR?: string
   /**
    * 集群总CPU，单位: 核
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterTotalCpu: number
+  ClusterTotalCpu?: number
   /**
    * 集群总内存，单位: G
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterTotalMem: number
+  ClusterTotalMem?: number
   /**
    * 集群已使用CPU，单位: 核
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterUsedCpu: number
+  ClusterUsedCpu?: number
   /**
    * 集群已使用内存，单位: G
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterUsedMem: number
+  ClusterUsedMem?: number
   /**
    * 集群机器实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceCount: number
+  InstanceCount?: number
   /**
    * 集群运行中的机器实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunInstanceCount: number
+  RunInstanceCount?: number
   /**
    * 集群正常状态的机器实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NormalInstanceCount: number
+  NormalInstanceCount?: number
   /**
    * 删除标记：true：可以删除；false：不可删除
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeleteFlag: boolean
+  DeleteFlag?: boolean
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 集群所属TSF地域ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TsfRegionId: string
+  TsfRegionId?: string
   /**
    * 集群所属TSF地域名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TsfRegionName: string
+  TsfRegionName?: string
   /**
    * 集群所属TSF可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TsfZoneId: string
+  TsfZoneId?: string
   /**
    * 集群所属TSF可用区名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TsfZoneName: string
+  TsfZoneName?: string
   /**
    * 集群不可删除的原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeleteFlagReason: string
+  DeleteFlagReason?: string
   /**
    * 集群所属私有网络子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 集群剩余 cpu limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterLimitCpu: string
+  ClusterLimitCpu?: string
   /**
    * 集群剩余 memory limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterLimitMem: string
+  ClusterLimitMem?: string
   /**
    * 运行服务实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunServiceInstanceCount: number
+  RunServiceInstanceCount?: number
   /**
    * 给前端的按钮控制信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperationInfo: OperationInfo
+  OperationInfo?: OperationInfo
   /**
    * 容器集群版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterVersion: string
+  ClusterVersion?: string
   /**
    * 部署组总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupCount: number
+  GroupCount?: number
   /**
    * 运行中部署组数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunGroupCount: number
+  RunGroupCount?: number
   /**
    * 停止中部署组数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StopGroupCount: number
+  StopGroupCount?: number
   /**
    * 异常部署组数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AbnormalGroupCount: number
+  AbnormalGroupCount?: number
   /**
    * 集群备注名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterRemarkName: string
+  ClusterRemarkName?: string
   /**
    * api地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KuberneteApiServer: string
+  KuberneteApiServer?: string
   /**
    * K : kubeconfig, S : service account
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KuberneteNativeType: string
+  KuberneteNativeType?: string
   /**
    * native secret
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KuberneteNativeSecret: string
+  KuberneteNativeSecret?: string
+  /**
+   * 是否开启cls日志功能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableLogCollection?: boolean
 }
 
 /**
@@ -2218,7 +2223,7 @@ export interface CreateClusterResponse {
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5036,6 +5041,14 @@ export interface ModifyClusterRequest {
    * 备注名
    */
   ClusterRemarkName?: string
+  /**
+   * 是否开启cls日志功能
+   */
+  EnableLogCollection?: boolean
+  /**
+   * 是否修复cls日志功能
+   */
+  RepairLog?: boolean
 }
 
 /**
@@ -13629,6 +13642,10 @@ export interface CreateClusterRequest {
    * 无
    */
   ProgramIdList?: Array<string>
+  /**
+   * 是否开启cls日志功能
+   */
+  EnableLogCollection?: boolean
 }
 
 /**

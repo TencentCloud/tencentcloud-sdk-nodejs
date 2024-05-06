@@ -38,6 +38,10 @@ export interface DeleteRiskScanTaskRequest {
    * 任务id 列表
    */
   TaskIdList: Array<TaskIdListKey>
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -769,6 +773,10 @@ export interface AssetViewVULRisk {
  */
 export interface DescribeScanReportListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 列表过滤条件
    */
   Filter?: Filter
@@ -1041,6 +1049,10 @@ export interface StopRiskCenterTaskRequest {
    * 任务id 列表
    */
   TaskIdList: Array<TaskIdListKey>
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -1462,6 +1474,10 @@ export interface ModifyRiskCenterScanTaskResponse {
  */
 export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -1547,6 +1563,10 @@ export interface DescribeNICAssetsRequest {
  * DescribeScanTaskList请求参数结构体
  */
 export interface DescribeScanTaskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤内容
    */
@@ -2566,6 +2586,10 @@ export interface DescribeSubnetAssetsResponse {
  */
 export interface DescribeRiskCenterAssetViewPortRiskListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -2711,6 +2735,10 @@ export interface ModifyRiskCenterRiskStatusRequest {
    * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
    */
   Type: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -2739,6 +2767,10 @@ export interface RiskCenterStatusKey {
  * DescribeRiskCenterAssetViewWeakPasswordRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤内容
    */
@@ -3291,6 +3323,10 @@ export interface CreateRiskCenterScanTaskRequest {
    */
   ScanPlanType: number
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 扫描资产信息列表
    */
   Assets?: Array<TaskAssetObject>
@@ -3396,6 +3432,10 @@ export interface DescribeRiskCenterVULViewVULRiskListResponse {
  * DescribeRiskCenterVULViewVULRiskList请求参数结构体
  */
 export interface DescribeRiskCenterVULViewVULRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤内容
    */
@@ -4275,6 +4315,10 @@ export interface Filter {
  */
 export interface DescribeRiskCenterWebsiteRiskListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -4617,6 +4661,10 @@ export interface AssetViewPortRisk {
  * DescribeRiskCenterPortViewPortRiskList请求参数结构体
  */
 export interface DescribeRiskCenterPortViewPortRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤内容
    */
@@ -5222,6 +5270,10 @@ export interface ModifyRiskCenterRiskStatusResponse {
  */
 export interface DescribeRiskCenterAssetViewVULRiskListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -5826,6 +5878,10 @@ export interface DescribeCVMAssetsRequest {
  */
 export interface DescribeRiskCenterServerRiskListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -5859,6 +5915,10 @@ export interface ModifyRiskCenterScanTaskRequest {
    * 要修改的任务id
    */
   TaskId: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 扫描资产信息列表
    */
@@ -6047,6 +6107,10 @@ export interface CreateDomainAndIpResponse {
  */
 export interface DescribeTaskLogListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤内容
    */
   Filter?: Filter
@@ -6098,6 +6162,10 @@ export interface DescribeTaskLogURLRequest {
    * 0: 预览， 1: 下载
    */
   Type: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 任务报告Id 列表
    */

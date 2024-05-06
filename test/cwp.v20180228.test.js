@@ -3838,16 +3838,6 @@ it("cwp.v20180228.ModifyBaselineRule", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeAttackLogInfo", async function () {
-    try {
-       const data = await client.DescribeAttackLogInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ModifyWebPageProtectSwitch", async function () {
     try {
        const data = await client.ModifyWebPageProtectSwitch({})

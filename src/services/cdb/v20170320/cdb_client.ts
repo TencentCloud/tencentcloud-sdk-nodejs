@@ -54,6 +54,7 @@ import {
   CloseWanServiceRequest,
   DescribeAuditConfigRequest,
   CreateRoInstanceIpResponse,
+  CloseSSLRequest,
   CreateAuditPolicyResponse,
   LogRuleTemplateInfo,
   DescribeInstanceParamRecordsRequest,
@@ -88,10 +89,11 @@ import {
   SwitchDBInstanceMasterSlaveRequest,
   ModifyCdbProxyAddressVipAndVPortRequest,
   ModifyAutoRenewFlagRequest,
+  OpenSSLRequest,
   DeleteDeployGroupsRequest,
   DescribeAuditConfigResponse,
   ModifyBackupConfigResponse,
-  DescribeTimeWindowResponse,
+  OpenWanServiceRequest,
   DeleteAuditPolicyResponse,
   InitDBInstancesResponse,
   DescribeParamTemplateInfoResponse,
@@ -163,7 +165,7 @@ import {
   DescribeBackupsResponse,
   CreateAuditPolicyRequest,
   CreateRoInstanceIpRequest,
-  OpenWanServiceRequest,
+  DescribeTimeWindowResponse,
   StopCpuExpandResponse,
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
@@ -314,6 +316,7 @@ import {
   DescribeTimeWindowRequest,
   AdjustCdbProxyAddressResponse,
   ModifyDBInstanceVipVportRequest,
+  DescribeSSLStatusResponse,
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
@@ -333,6 +336,7 @@ import {
   DescribeSupportedPrivilegesResponse,
   SlowLogItem,
   DescribeLocalBinlogConfigResponse,
+  OpenSSLResponse,
   ModifyAuditServiceResponse,
   ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
@@ -417,6 +421,7 @@ import {
   RenewDBInstanceResponse,
   TablePrivilege,
   AddTimeWindowResponse,
+  CloseSSLResponse,
   DescribeAuditInstanceListRequest,
   DescribeBackupEncryptionStatusRequest,
   ModifyDBInstanceLogToCLSResponse,
@@ -425,6 +430,7 @@ import {
   RollbackTables,
   AuditRuleTemplateInfo,
   LocalBinlogConfigDefault,
+  DescribeSSLStatusRequest,
   DescribeSlowLogDataRequest,
   ReleaseIsolatedDBInstancesResponse,
   DeleteAuditLogFileRequest,
@@ -481,6 +487,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuditPolicyResponse) => void
   ): Promise<CreateAuditPolicyResponse> {
     return this.request("CreateAuditPolicy", req, cb)
+  }
+
+  /**
+   * 开启SSL连接功能。
+   */
+  async OpenSSL(
+    req: OpenSSLRequest,
+    cb?: (error: string, rep: OpenSSLResponse) => void
+  ): Promise<OpenSSLResponse> {
+    return this.request("OpenSSL", req, cb)
   }
 
   /**
@@ -1625,6 +1641,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询 SSL 开通情况。如果已经开通 SSL ，会同步返回证书下载链接。
+   */
+  async DescribeSSLStatus(
+    req: DescribeSSLStatusRequest,
+    cb?: (error: string, rep: DescribeSSLStatusResponse) => void
+  ): Promise<DescribeSSLStatusResponse> {
+    return this.request("DescribeSSLStatus", req, cb)
+  }
+
+  /**
    * 本接口(DescribeDBSwitchRecords)用于查询云数据库实例切换记录。
    */
   async DescribeDBSwitchRecords(
@@ -2079,6 +2105,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
   ): Promise<UpgradeDBInstanceResponse> {
     return this.request("UpgradeDBInstance", req, cb)
+  }
+
+  /**
+   * 关闭SSL连接功能。
+   */
+  async CloseSSL(
+    req: CloseSSLRequest,
+    cb?: (error: string, rep: CloseSSLResponse) => void
+  ): Promise<CloseSSLResponse> {
+    return this.request("CloseSSL", req, cb)
   }
 
   /**

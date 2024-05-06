@@ -349,7 +349,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteVpnGatewaySslClient(req: DeleteVpnGatewaySslClientRequest, cb?: (error: string, rep: DeleteVpnGatewaySslClientResponse) => void): Promise<DeleteVpnGatewaySslClientResponse>;
     /**
-     * 本接口（InquiryPriceResetVpnGatewayInternetMaxBandwidth）调整VPN网关带宽上限询价。
+     * 本接口（InquiryPriceResetVpnGatewayInternetMaxBandwidth）用于调整VPN网关带宽上限询价。
      */
     InquiryPriceResetVpnGatewayInternetMaxBandwidth(req: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest, cb?: (error: string, rep: InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse) => void): Promise<InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse>;
     /**
@@ -889,7 +889,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteVpcEndPoint(req: DeleteVpcEndPointRequest, cb?: (error: string, rep: DeleteVpcEndPointResponse) => void): Promise<DeleteVpcEndPointResponse>;
     /**
-     * 本接口（DeleteVpnGateway）用于删除VPN网关。目前只支持删除运行中的按量计费的IPSEC网关实例。
+     * 本接口（DeleteVpnGateway）用于删除VPN网关。
      */
     DeleteVpnGateway(req: DeleteVpnGatewayRequest, cb?: (error: string, rep: DeleteVpnGatewayResponse) => void): Promise<DeleteVpnGatewayResponse>;
     /**

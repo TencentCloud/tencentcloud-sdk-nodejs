@@ -2325,14 +2325,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBaselineRule", req, cb);
     }
     /**
-     * DescribeAttackEventInfo 接口替代
-
-网络攻击日志详情
-     */
-    async DescribeAttackLogInfo(req, cb) {
-        return this.request("DescribeAttackLogInfo", req, cb);
-    }
-    /**
      * 网站防篡改防护设置开关
      */
     async ModifyWebPageProtectSwitch(req, cb) {

@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditPolicy", req, cb);
     }
     /**
+     * 开启SSL连接功能。
+     */
+    async OpenSSL(req, cb) {
+        return this.request("OpenSSL", req, cb);
+    }
+    /**
      * 本接口(DescribeDBFeatures)用于查询云数据库版本属性，包括是否支持数据库加密、数据库审计等功能。
      */
     async DescribeDBFeatures(req, cb) {
@@ -747,6 +753,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBImportRecords", req, cb);
     }
     /**
+     * 查询 SSL 开通情况。如果已经开通 SSL ，会同步返回证书下载链接。
+     */
+    async DescribeSSLStatus(req, cb) {
+        return this.request("DescribeSSLStatus", req, cb);
+    }
+    /**
      * 本接口(DescribeDBSwitchRecords)用于查询云数据库实例切换记录。
      */
     async DescribeDBSwitchRecords(req, cb) {
@@ -1022,6 +1034,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpgradeDBInstance(req, cb) {
         return this.request("UpgradeDBInstance", req, cb);
+    }
+    /**
+     * 关闭SSL连接功能。
+     */
+    async CloseSSL(req, cb) {
+        return this.request("CloseSSL", req, cb);
     }
     /**
      * 本接口(CreateDeployGroup)用于创建放置实例的置放群组

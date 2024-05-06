@@ -6403,7 +6403,7 @@ export interface DescribeAuditInstanceListRequest {
    */
   AuditMode?: number
   /**
-   * 单次请求返回的数量。默认值为30，最大值为 20000。
+   * 单次请求返回的数量。默认值为30，最大值为 100。
    */
   Limit?: number
   /**

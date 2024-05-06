@@ -1125,10 +1125,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持多种类型证件有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能。可以应用于各种证件信息有效性校验场景，例如银行开户、用户注册等场景。
-
-默认接口请求频率限制：10次/秒。
-     */
+   * 本接口支持多种类型证件有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能。可以应用于各种证件信息有效性校验场景，例如银行开户、用户注册等场景。
+   */
   async RecognizeGeneralTextImageWarn(
     req: RecognizeGeneralTextImageWarnRequest,
     cb?: (error: string, rep: RecognizeGeneralTextImageWarnResponse) => void

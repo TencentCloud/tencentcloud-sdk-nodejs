@@ -117,7 +117,7 @@ import {
   PrivilegeEventInfo,
   RuleInfo,
   RansomDefenseRollbackResponse,
-  DescribeAttackLogInfoResponse,
+  ExportAssetSystemPackageListRequest,
   DescribePrivilegeEventsResponse,
   DescribeNetAttackWhiteListRequest,
   DescribeOverviewStatisticsResponse,
@@ -821,7 +821,6 @@ import {
   DescribeVulEffectHostListResponse,
   RegionListDetail,
   DescribeSearchLogsRequest,
-  DescribeAttackLogInfoRequest,
   ScanVulSettingResponse,
   DescribeAssetJarInfoResponse,
   DescribeVulInfoCvssRequest,
@@ -838,7 +837,6 @@ import {
   DescribeScanMalwareScheduleResponse,
   ExportRansomDefenseEventsListRequest,
   DescribeScreenProtectionCntRequest,
-  ExportAssetSystemPackageListRequest,
   AssetWebLocationBaseInfo,
   DescribeBaselineItemListRequest,
   DescribeScreenHostInvasionRequest,
@@ -5147,18 +5145,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBaselineRuleResponse) => void
   ): Promise<ModifyBaselineRuleResponse> {
     return this.request("ModifyBaselineRule", req, cb)
-  }
-
-  /**
-     * DescribeAttackEventInfo 接口替代
-
-网络攻击日志详情
-     */
-  async DescribeAttackLogInfo(
-    req: DescribeAttackLogInfoRequest,
-    cb?: (error: string, rep: DescribeAttackLogInfoResponse) => void
-  ): Promise<DescribeAttackLogInfoResponse> {
-    return this.request("DescribeAttackLogInfo", req, cb)
   }
 
   /**

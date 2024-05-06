@@ -2670,77 +2670,37 @@ export interface RansomDefenseRollbackResponse {
 }
 
 /**
- * DescribeAttackLogInfo返回参数结构体
+ * ExportAssetSystemPackageList请求参数结构体
  */
-export interface DescribeAttackLogInfoResponse {
+export interface ExportAssetSystemPackageListRequest {
   /**
-   * 日志ID
+   * 主机Uuid
    */
-  Id: number
+  Uuid?: string
   /**
-   * 主机ID
+   * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
   /**
-   * 攻击来源端口
+   * 过滤条件。
+<li>Name - String - 是否必填：否 - 包 名</li>
+<li>StartTime - String - 是否必填：否 - 安装开始时间</li>
+<li>EndTime - String - 是否必填：否 - 安装开始时间</li>
+<li>Type - int - 是否必填：否 - 安装包类型：
+1:rpm
+2:dpkg
+3:java
+4:system</li>
    */
-  SrcPort: number
+  Filters?: Array<Filter>
   /**
-   * 攻击来源IP
+   * 排序方式，asc升序 或 desc降序
    */
-  SrcIp: string
+  Order?: string
   /**
-   * 攻击目标端口
+   * 排序方式可选：[FistTime|InstallTime:安装时间]
    */
-  DstPort: number
-  /**
-   * 攻击目标IP
-   */
-  DstIp: string
-  /**
-   * 攻击方法
-   */
-  HttpMethod: string
-  /**
-   * 攻击目标主机
-   */
-  HttpHost: string
-  /**
-   * 攻击头信息
-   */
-  HttpHead: string
-  /**
-   * 攻击者浏览器标识
-   */
-  HttpUserAgent: string
-  /**
-   * 请求源
-   */
-  HttpReferer: string
-  /**
-   * 威胁类型
-   */
-  VulType: string
-  /**
-   * 攻击路径
-   */
-  HttpCgi: string
-  /**
-   * 攻击参数
-   */
-  HttpParam: string
-  /**
-   * 攻击时间
-   */
-  CreatedAt: string
-  /**
-   * 攻击内容
-   */
-  HttpContent: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  By?: string
 }
 
 /**
@@ -18762,16 +18722,6 @@ Other  其他服务器(非腾讯云)
 export type DescribeSearchLogsRequest = null
 
 /**
- * DescribeAttackLogInfo请求参数结构体
- */
-export interface DescribeAttackLogInfoRequest {
-  /**
-   * 日志ID
-   */
-  Id: number
-}
-
-/**
  * ScanVulSetting返回参数结构体
  */
 export interface ScanVulSettingResponse {
@@ -19044,40 +18994,6 @@ export interface ExportRansomDefenseEventsListRequest {
  * DescribeScreenProtectionCnt请求参数结构体
  */
 export type DescribeScreenProtectionCntRequest = null
-
-/**
- * ExportAssetSystemPackageList请求参数结构体
- */
-export interface ExportAssetSystemPackageListRequest {
-  /**
-   * 主机Uuid
-   */
-  Uuid?: string
-  /**
-   * 主机Quuid
-   */
-  Quuid?: string
-  /**
-   * 过滤条件。
-<li>Name - String - 是否必填：否 - 包 名</li>
-<li>StartTime - String - 是否必填：否 - 安装开始时间</li>
-<li>EndTime - String - 是否必填：否 - 安装开始时间</li>
-<li>Type - int - 是否必填：否 - 安装包类型：
-1:rpm
-2:dpkg
-3:java
-4:system</li>
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序方式，asc升序 或 desc降序
-   */
-  Order?: string
-  /**
-   * 排序方式可选：[FistTime|InstallTime:安装时间]
-   */
-  By?: string
-}
 
 /**
  * 资产管理Web站点列表信息

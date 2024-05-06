@@ -48,6 +48,16 @@ it("cdb.v20170320.CreateAuditPolicy", async function () {
     }
 })
 
+it("cdb.v20170320.OpenSSL", async function () {
+    try {
+       const data = await client.OpenSSL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDBFeatures", async function () {
     try {
        const data = await client.DescribeDBFeatures({})
@@ -1148,6 +1158,16 @@ it("cdb.v20170320.DescribeDBImportRecords", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeSSLStatus", async function () {
+    try {
+       const data = await client.DescribeSSLStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDBSwitchRecords", async function () {
     try {
        const data = await client.DescribeDBSwitchRecords({})
@@ -1591,6 +1611,16 @@ it("cdb.v20170320.DescribeInstanceAlarmEvents", async function () {
 it("cdb.v20170320.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.CloseSSL", async function () {
+    try {
+       const data = await client.CloseSSL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

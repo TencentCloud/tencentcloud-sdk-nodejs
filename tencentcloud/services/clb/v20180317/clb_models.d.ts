@@ -2128,6 +2128,10 @@ export interface ModifyListenerRequest {
      * 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。默认值：900，取值范围：共享型实例和独占型实例支持：300～900，性能容量型实例支持：300~2000。如需设置超过2000s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。
      */
     IdleConnectTimeout?: number;
+    /**
+     * 是否开启SNAT。
+     */
+    SnatEnable?: boolean;
 }
 /**
  * DeregisterTargetGroupInstances返回参数结构体
@@ -3561,6 +3565,10 @@ export interface CreateListenerRequest {
      * 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。默认值：900，取值范围：共享型实例和独占型实例支持：300～900，性能容量型实例支持：300~2000。如需设置超过2000s，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category),最大可设置到3600s。
      */
     IdleConnectTimeout?: number;
+    /**
+     * 是否开启SNAT。
+     */
+    SnatEnable?: boolean;
 }
 /**
  * CreateClsLogSet请求参数结构体
