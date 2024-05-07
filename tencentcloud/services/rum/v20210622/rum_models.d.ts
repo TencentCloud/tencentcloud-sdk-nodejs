@@ -348,15 +348,15 @@ export interface DescribeErrorResponse {
     /**
      * 内容
      */
-    Content: string;
+    Content?: string;
     /**
      * 项目ID
      */
-    ID: number;
+    ID?: number;
     /**
      * 时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -901,7 +901,7 @@ export interface DescribeDataPerformancePageRequest {
      */
     EndTime: number;
     /**
-     * pagepv：性能视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
+     * pagepv：pv视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
      */
     Type: string;
     /**
@@ -1008,7 +1008,7 @@ export interface DescribeDataFetchUrlRequest {
      */
     StartTime: number;
     /**
-     * allcount：性能视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+     * allcount：性能视图，pagepv：pv视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
      */
     Type: string;
     /**
@@ -1524,7 +1524,7 @@ export interface ProjectLimit {
  */
 export interface CreateProjectRequest {
     /**
-     * 创建的项目名(不为空且最长为 200)
+     * 应用名称(不为空且最长为 200)
      */
     Name: string;
     /**
@@ -1552,7 +1552,7 @@ export interface CreateProjectRequest {
      */
     URL?: string;
     /**
-     * 创建的项目描述(可选，最长为 1000)
+     * 应用描述(可选，最长为 1000)
      */
     Desc?: string;
 }
@@ -1848,7 +1848,7 @@ export interface DescribeReleaseFileSignRequest {
      */
     Timeout?: number;
     /**
-     * bucket类型，不填默认web，2:app
+     * bucket类型，不填默认1:web，2:app
      */
     FileType?: number;
 }
@@ -1916,7 +1916,7 @@ export interface DescribeScoresResponse {
     /**
      * 数组
      */
-    ScoreSet: Array<ScoreInfo>;
+    ScoreSet?: Array<ScoreInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2809,7 +2809,7 @@ export interface ModifyProjectRequest {
      */
     ID: number;
     /**
-     * 项目名(可选，不为空且最长为 200)
+     * 应用名称(可选，不为空且最长为 200字符)
      */
     Name?: string;
     /**
@@ -2837,7 +2837,7 @@ export interface ModifyProjectRequest {
      */
     Type?: string;
     /**
-     * 项目描述(可选，最长为 1000)
+     * 应用描述(可选，最长为 1000字符)
      */
     Desc?: string;
 }

@@ -1143,6 +1143,10 @@ export interface ReleasedApprover {
 
    */
   ApproverSignRole?: string
+  /**
+   * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
+   */
+  ApproverSignSealId?: string
 }
 
 /**

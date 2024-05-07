@@ -1200,7 +1200,12 @@ export interface ModifyDataTransformRequest {
    */
   Name?: string
   /**
-   * 加工语句
+   * 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733#b3c58797-4825-4807-bef4-68106e25024f) 
+
+其他参考文档：
+
+- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) 
+-  [函数总览](https://cloud.tencent.com/document/product/614/70395)
    */
   EtlContent?: string
   /**
@@ -1470,11 +1475,110 @@ export interface NoticeRule {
   WebCallbacks?: Array<WebCallback>
   /**
    * 匹配规则 JSON串。
-`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1,2]\",\"Type\":\"Value\"}]}]}
+**rule格式为如下嵌套结构体JSON字符串**
+```
+{
+    "Value": "AND",
+    "Type": "Operation",
+    "Children": [
+        {
+            "Value": "OR",
+            "Type": "Operation",
+            "Children": [
+                {
+                    "Type": "Condition",
+                    "Value": "Level",
+                    "Children": [
+                        {
+                            "Value": "In",
+                            "Type": "Compare"
+                        },
+                        {
+                            "Value": "[1,0]",
+                            "Type": "Value"
+                        }
+                    ]
+                },
+                {
+                    "Type": "Condition",
+                    "Value": "Level",
+                    "Children": [
+                        {
+                            "Value": "NotIn",
+                            "Type": "Compare"
+                        },
+                        {
+                            "Value": "[2]",
+                            "Type": "Value"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+**rule规则树限制规则如下**：
+- 顶层rule中Type可取值：`Condition`，`Operation`
+- Type为`Operation`的子节点支持的Type可取值：`Condition`，`Operation`
+- Type为`Condition`的子节点支持的Type可取值：`String`，`Compare`，`Array`，`TimeRange`，`Value`，`Key`
+- 其他Type无子节点
+- 当rule Type为`Operation`时，value可取值：`AND`，`OR`
+- 当rule Type为`Condition`时，value不可为空，子节点个数不能小于2
+    - 当子节点Type为  `Compare` 时，value可取值：`>`，`<`，`>=`，`<=`，`=`，`!=`，`Between`，`NotBetween`，`=~`，`!=~`，`In`，`NotIn`
+    - value为`Between`，`NotBetween`时，下一个子节点value必须是长度为2的数组
+    - value为`=~`，`!=~`时，下一个子节点value必须是一个正则表达式
+    - value为`In`，`NotIn`时， 下一个子节点value必须是一个数组
+
+**业务参数含义**：
+- Type：Condition 表示是规则条件，Value：Level 表示告警等级
+    - 子节点Type支持`Compare`，Value支持`In`，`NotIn`
+    - 下一个子节点value支持的值：0（警告），1（提醒），2 （紧急）
+以下示例表示：告警等级属于提醒
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Level\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]}]}
 `
-以上示例表示：
-规则：
-通知类型属于告警通知,恢复通知
+
+- Type：Condition 表示是规则条件，Value：NotifyType 表示通知类型
+    - 子节点Type支持`Compare`，Value支持`In`，`NotIn`
+    - 下一个子节点value支持的值：1（告警通知），2 （恢复通知）
+以下示例表示：通知类型属于告警通知或通知类型不属于恢复通知
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[2]\",\"Type\":\"Value\"}]}]}]}
+`
+
+- Type：Condition 表示是规则条件，Value：AlarmID 表示告警策略
+    - 子节点Type支持`Compare`，Value支持`In`，`NotIn`
+    - 下一个子节点value支持的值：告警策略id数组
+以下示例表示：告警策略属于alarm-53af048c-254b-4c73-bb48-xxx,alarm-6dfa8bc5-08da-4d64-b6cb-xxx或告警策略不属于alarm-1036314c-1e49-4cee-a8fb-xxx
+`"{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-53af048c-254b-4c73-bb48-xxx\\\",\\\"alarm-6dfa8bc5-08da-4d64-b6cb-xxx\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-1036314c-1e49-4cee-a8fb-xxx\\\"]\",\"Type\":\"Value\"}]}]}]}"
+`
+
+- Type：Condition 表示是规则条件，Value：AlarmName 表示告警策略名称
+    - 子节点Type支持`Compare`，Value支持`=~`，`!=~`
+    - 下一个子节点value支持的值：必须是正则表达式
+以下示例表示：告警策略名称正则匹配^test$或告警策略名称正则不匹配^hahaha$
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}
+`
+
+- Type：Condition 表示是规则条件，Value：Label 表示告警分类字段
+    - 子节点Type支持`Compare`，Value支持`In`，`NotIn`，`=~`，`!=~`
+    - 下一个子节点value支持的值：`In`，`NotIn` 时value是数组，`=~`，`!=~`时value是正则表达式
+以下示例表示：告警分类字段key1属于v1或告警分类字段key2不属于v2或告警分类字段key3正则匹配^test$或告警分类字段key4正则不匹配^hahaha$
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key1\",\"Type\":\"Key\"},{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v1\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key2\",\"Type\":\"Key\"},{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v2\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key3\",\"Type\":\"Key\"},{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key4\",\"Type\":\"Key\"},{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}
+`
+
+- Type：Condition 表示是规则条件，Value：NotifyTime 表示通知时间
+    - 子节点Type支持`Compare`，Value支持`Between `，`NotBetween `
+    - 下一个子节点value支持的值：长度为2，格式为`14:20:36`的字符串数组
+以下示例表示：通知时间在指定范围内14:18:36至14:33:36或通知时间不在指定范围内14:20:36至14:30:36
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"Between\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:18:36\\\",\\\"14:33:36\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"NotBetween\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:20:36\\\",\\\"14:30:36\\\"]\",\"Type\":\"Value\"}]}]}]}
+`
+
+- Type：Condition 表示是规则条件，Value：Duration 表示告警持续时间
+    - 子节点Type支持`Compare`，Value支持`>`，`<`，`>=`，`<=`
+    - 下一个子节点value支持的值：整型值单位分钟
+以下示例表示：告警持续时间大于1分钟或告警持续时间大于等于2分钟或告警持续时间小于3分钟或告警持续时间小于等于4分钟
+`{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">\",\"Type\":\"Compare\"},{\"Value\":1,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">=\",\"Type\":\"Compare\"},{\"Value\":2,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<\",\"Type\":\"Compare\"},{\"Value\":3,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<=\",\"Type\":\"Compare\"},{\"Value\":4,\"Type\":\"Value\"}]}]}]}
+`
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: string
@@ -1622,6 +1726,11 @@ export interface ScheduledSqlTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SyntaxRule?: number
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasServicesLog?: number
 }
 
 /**
@@ -1777,7 +1886,6 @@ export interface ExtractRuleInfo {
   IsGBK?: number
   /**
    * 是否为标准json。  0：否； 1：是。
-注
 - 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4166,9 +4274,11 @@ export interface WebCallback {
   CallbackType: string
   /**
    * 回调方法。可选值：
-- POST
+- POST（默认值）
 - PUT
-默认值为POST。CallbackType为Http时为必选。
+
+注意：
+- 参数CallbackType为Http时为必选。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
@@ -4378,7 +4488,7 @@ export interface PreviewLogStatistic {
    */
   LogContent: string
   /**
-   * 行号
+   * 行号。从0开始
    */
   LineNum: number
   /**
@@ -4386,16 +4496,20 @@ export interface PreviewLogStatistic {
    */
   DstTopicId?: string
   /**
-   * 失败错误码， 空字符串""表示正常
+   * 失败错误信息， 空字符串""表示正常
    */
   FailReason?: string
   /**
-   * 日志时间戳
+   * 日志时间，格式：`2024-05-07 17:13:17.105`
+
+- 入参时无效
+- 出参时有效，为日志中的时间格式
    */
   Time?: string
   /**
    * 目标topic-name
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   DstTopicName?: string
 }
@@ -5136,15 +5250,24 @@ export interface CreateConfigExtraRequest {
    */
   TopicId: string
   /**
-   * 类型：container_stdout、container_file、host_file
+   * 日志源类型。支持 container_stdout：容器标准输出；container_file：容器文件路径；host_file：节点文件路径。
    */
   Type: string
   /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+   * 采集的日志类型，默认为minimalist_log。支持以下类型：
+- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。
    */
   LogType: string
   /**
-   * 采集配置标
+   * 采集配置标记。
+- 目前只支持label_k8s，用于标记自建k8s集群使用的采集配置
+
    */
   ConfigFlag: string
   /**
@@ -5160,19 +5283,21 @@ export interface CreateConfigExtraRequest {
    */
   TopicName: string
   /**
-   * 节点文件配置信息
+   * 节点文件路径类型配置。
    */
   HostFile?: HostFileInfo
   /**
-   * 容器文件路径信息
+   * 容器文件路径类型配置。
    */
   ContainerFile?: ContainerFileInfo
   /**
-   * 容器标准输出信息
+   * 容器标准输出类型配置。
    */
   ContainerStdout?: ContainerStdoutInfo
   /**
-   * 日志格式化方式
+   * 日志格式化方式，用于容器采集场景。
+- stdout-docker-json：用于docker容器采集场景
+- stdout-containerd：用于containerd容器采集场景
    */
   LogFormat?: string
   /**
@@ -5184,7 +5309,9 @@ export interface CreateConfigExtraRequest {
    */
   ExcludePaths?: Array<ExcludePathInfo>
   /**
-   * 用户自定义采集规则，Json格式序列化的字符串
+   * 组合解析采集规则，用于复杂场景下的日志采集。
+- 取值参考：[使用组合解析提取模式采集日志
+](https://cloud.tencent.com/document/product/614/61310)
    */
   UserDefineRule?: string
   /**
@@ -5204,7 +5331,8 @@ export interface CreateConfigExtraRequest {
 - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
 - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
 - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+- ClsAgentDefault(自定义默认值，无特殊含义，用于清空其他选项)，建议取值0
+
    */
   AdvancedConfig?: string
 }
@@ -5998,17 +6126,17 @@ export interface NoticeReceiver {
    */
   ReceiverChannels: Array<string>
   /**
-   * 允许接收信息的开始时间。
+   * 允许接收信息的开始时间。格式：`15:04:05`，必填。
    */
   StartTime?: string
   /**
-   * 允许接收信息的结束时间。
+   * 允许接收信息的结束时间。格式：`15:04:05`，必填。
    */
   EndTime?: string
   /**
    * 位序。
 
-- 入参无效。
+- 入参时无效。
 - 出参时有效。
    */
   Index?: number
@@ -6361,7 +6489,9 @@ export interface CreateMachineGroupRequest {
    */
   GroupName: string
   /**
-   * 创建机器组类型。Type：ip，Values中为ip字符串列表创建机器组；Type：label，Values中为标签字符串列表创建机器组。
+   * 创建机器组类型。取值如下：
+- Type：ip，Values中为ip字符串列表创建机器组
+- Type：label，Values中为标签字符串列表创建机器组
    */
   MachineGroupType: MachineGroupTypeInfo
   /**
@@ -6393,7 +6523,9 @@ export interface CreateMachineGroupRequest {
    */
   MetaTags?: Array<MetaTagInfo>
   /**
-   * 系统类型，默认0，0：Linux，1: Windows
+   * 系统类型，取值如下：
+- 0：Linux （默认值）
+- 1：Windows
    */
   OSType?: number
 }
@@ -6581,25 +6713,22 @@ export interface CsvInfo {
  */
 export interface DescribeConfigExtrasRequest {
   /**
-   * name
+   * 过滤器，支持如下选项：
+name
 - 按照【特殊采集配置名称】进行模糊匹配过滤。
 - 类型：String
-- 必选：否
 
 configExtraId
 - 按照【特殊采集配置ID】进行过滤。
 - 类型：String
-- 必选：否
 
 topicId
 - 按照【日志主题】进行过滤。
 - 类型：String
-- 必选：否
 
 machineGroupId
 - 按照【机器组ID】进行过滤。
 - 类型：String
-- 必选：否
 
 每次请求的Filters的上限为10，Filter.Values的上限为5。
    */
@@ -6630,29 +6759,33 @@ export interface CreateAlarmNoticeRequest {
 
 
  注意:  
-- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
+- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
+- 2组rule配置互斥
+- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
    */
   Type?: string
   /**
    * 通知接收对象。
  注意:  
-- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
+- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
+- 2组rule配置互斥
+- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
    * 接口回调信息（包括企业微信）。
  注意:  
-- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
+- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
+- 2组rule配置互斥
+- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
    */
   WebCallbacks?: Array<WebCallback>
   /**
    * 通知规则。
  注意:  
-- Type、NoticeReceivers和WebCallbacks是一组配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空，NoticeRules是另一组配置，其中rule不许为空，2组配置互斥。
-- Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，必须填写一组配置。
+- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
+- 2组rule配置互斥
+- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
 
 
    */
@@ -6746,7 +6879,8 @@ export interface ModifyConfigExtraRequest {
    */
   HostFile?: HostFileInfo
   /**
-   * 容器文件路径信息
+   * 采集配置标记。
+- 目前只支持label_k8s，用于标记自建k8s集群使用的采集配置
    */
   ContainerFile?: ContainerFileInfo
   /**
@@ -6754,11 +6888,20 @@ export interface ModifyConfigExtraRequest {
    */
   ContainerStdout?: ContainerStdoutInfo
   /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+   * 采集的日志类型，默认为minimalist_log。支持以下类型：
+- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。
    */
   LogType?: string
   /**
-   * 日志格式化方式
+   * 日志格式化方式，用于容器采集场景。
+- stdout-docker-json：用于docker容器采集场景
+- stdout-containerd：用于containerd容器采集场景
    */
   LogFormat?: string
   /**
@@ -6770,7 +6913,9 @@ export interface ModifyConfigExtraRequest {
    */
   ExcludePaths?: Array<ExcludePathInfo>
   /**
-   * 用户自定义采集规则，Json格式序列化的字符串
+   * 组合解析采集规则，用于复杂场景下的日志采集。
+- 取值参考：[使用组合解析提取模式采集日志
+](https://cloud.tencent.com/document/product/614/61310)
    */
   UserDefineRule?: string
   /**
@@ -6802,7 +6947,8 @@ export interface ModifyConfigExtraRequest {
 - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
 - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
 - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+- ClsAgentDefault(自定义默认值，无特殊含义，用于清空其他选项)，建议取值0
+
    */
   AdvancedConfig?: string
 }
@@ -6878,7 +7024,12 @@ export interface CreateDataTransformRequest {
    */
   Name: string
   /**
-   * 加工语句。[创建加工任务](https://cloud.tencent.com/document/product/614/63940)  [函数总览](https://cloud.tencent.com/document/product/614/70395)
+   * 加工语句。 当FuncType为2时，EtlContent必须使用[log_auto_output](https://cloud.tencent.com/document/product/614/70733#b3c58797-4825-4807-bef4-68106e25024f) 
+
+其他参考文档：
+
+- [创建加工任务](https://cloud.tencent.com/document/product/614/63940) 
+-  [函数总览](https://cloud.tencent.com/document/product/614/70395)
    */
   EtlContent: string
   /**

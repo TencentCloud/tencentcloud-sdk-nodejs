@@ -705,7 +705,7 @@ export interface RabbitMQClusterInfo {
    */
   ExchangeNumber?: number
   /**
-   * 集群异常。
+   * 集群异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionInformation?: string
@@ -723,6 +723,16 @@ export interface RabbitMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MirrorQueuePolicyFlag?: number
+  /**
+   * 每秒消费消息数 单位：条/秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageConsumeRate?: number
+  /**
+   * 集群版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterVersion?: string
 }
 
 /**
@@ -3550,6 +3560,46 @@ export interface RabbitMQQueueListInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
+  /**
+   * 队列是否持久化，true 为持久化，false 为非持久化
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Durable?: boolean
+  /**
+   * 队列是否为自动删除队列，true 为自动删除，false 为非自动删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoDelete?: boolean
+  /**
+   * 队列所属实例 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 队列所属虚拟主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualHost?: string
+  /**
+   * 队列所在主节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Node?: string
+  /**
+   * 生效的策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Policy?: string
+  /**
+   * 扩展参数 key-value 对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Arguments?: string
+  /**
+   * 是否独占队列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Exclusive?: boolean
 }
 
 /**
@@ -7617,6 +7667,11 @@ export interface RabbitMQVirtualHostInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageRateOut?: number
+  /**
+   * 是否存在镜像队列策略，true 为存在，false 为不存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MirrorQueuePolicyFlag?: boolean
 }
 
 /**

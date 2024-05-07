@@ -8605,6 +8605,22 @@ export interface IPWhitelist {
 }
 
 /**
+ * DescribeSecurityIPGroup请求参数结构体
+ */
+export interface DescribeSecurityIPGroupRequest {
+  /**
+   * 站点 ID ，用于指定查询的站点范围。
+   */
+  ZoneId: string
+  /**
+   * 指定安全 IP 组 ID。
+<li>提供该参数时，仅查询指定 ID 的安全 IP 组配置；</li>
+<li>不传递参数时，返回站点下所有安全 IP 组信息。</li>
+   */
+  GroupIds?: Array<number | bigint>
+}
+
+/**
  * ModifyApplicationProxyStatus返回参数结构体
  */
 export interface ModifyApplicationProxyStatusResponse {
@@ -9084,6 +9100,20 @@ export interface CheckCnameStatusRequest {
  * ModifyZoneStatus返回参数结构体
  */
 export interface ModifyZoneStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityIPGroup返回参数结构体
+ */
+export interface DescribeSecurityIPGroupResponse {
+  /**
+   * 安全 IP 组的详细配置信息。包含每个安全 IP 组的 ID 、名称和 IP / 网段列表信息。
+   */
+  IPGroups?: Array<IPGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

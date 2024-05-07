@@ -1597,7 +1597,7 @@ export interface StartMCUMixTranscodeRequest {
 }
 
 /**
- * 页面录制视频参数
+ * 页面录制控制参数
  */
 export interface WebRecordVideoParams {
   /**
@@ -1613,6 +1613,12 @@ export interface WebRecordVideoParams {
 
    */
   Format?: string
+  /**
+   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
+Hls 格式录制此参数不生效。
+示例值：1440
+   */
+  MaxMediaFileDuration?: number
 }
 
 /**
@@ -2371,11 +2377,11 @@ export interface CreateCloudRecordingRequest {
    */
   RoomIdType?: number
   /**
-   * 混流的转码参数，录制模式为混流的时候可以设置。
+   * 合流的转码参数，录制模式为合流的时候可以设置。
    */
   MixTranscodeParams?: MixTranscodeParams
   /**
-   * 混流的布局参数，录制模式为混流的时候可以设置。
+   * 合流的布局参数，录制模式为合流的时候可以设置。
    */
   MixLayoutParams?: MixLayoutParams
   /**
@@ -3276,7 +3282,7 @@ export interface RecordParams {
   /**
    * 录制模式：
 1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；
-2：混流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
+2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
    */
   RecordMode: number
   /**
@@ -3301,7 +3307,7 @@ export interface RecordParams {
    */
   OutputFormat?: number
   /**
-   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。混流录制此参数无需设置，默认音视频合并。
+   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。合流录制此参数无需设置，默认音视频合并。
    */
   AvMerge?: number
   /**
@@ -3313,6 +3319,10 @@ Hls 格式录制此参数不生效。
    * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
    */
   MediaId?: number
+  /**
+   * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
+   */
+  FillType?: number
 }
 
 /**

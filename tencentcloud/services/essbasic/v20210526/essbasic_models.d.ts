@@ -1136,7 +1136,7 @@ export interface BaseFlowInfo {
  - 当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只传参数ApproverSignRole。
 
 如果需要指定B端(企业身份类型)签署人，其中ReleasedApprover需要传递的参数如下：
-`ApproverNumber`, `OrganizationName`, `ApproverType`必传。</br>
+(`ApproverNumber`, `ReleasedApproverRecipientId`这两个二选一), `OrganizationName`, `ApproverType`必传。</br>
 对于其他身份标识：
 - **子客企业指定经办人**：OpenId必传，OrganizationOpenId必传；
 - **非子客企业经办人**：Name、Mobile必传。
@@ -1153,6 +1153,11 @@ export interface ReleasedApprover {
   <li> **ENTERPRISESERVER**：企业静默签</li></ul>
      */
     ApproverType: string;
+    /**
+     * 签署人在原合同中的RecipientId，可以通过<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo" target="_blank">DescribeFlowDetailInfo</a>接口查看原流程中的签署人信息，可参考返回结构体<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#flowapproverdetail" target="_blank">FlowApproverDetail</a>中的RecipientId。
+  **注意**：当指定了此参数后，ApproverNumber即失效，会以本参数作为原合同参与人的选取。与ApproverNumber二选一。
+     */
+    ReleasedApproverRecipientId?: string;
     /**
      * 签署人姓名，最大长度50个字。
      */
@@ -1204,6 +1209,10 @@ export interface ReleasedApprover {
   如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
      */
     ApproverSignRole?: string;
+    /**
+     * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
+     */
+    ApproverSignSealId?: string;
 }
 /**
  * CreateConsoleLoginUrl返回参数结构体

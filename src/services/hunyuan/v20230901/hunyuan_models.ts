@@ -361,7 +361,7 @@ export interface Usage {
 }
 
 /**
- * 单条消息
+ * 会话内容
  */
 export interface Message {
   /**
@@ -371,7 +371,7 @@ export interface Message {
   /**
    * 文本内容
    */
-  Content: string
+  Content?: string
 }
 
 /**

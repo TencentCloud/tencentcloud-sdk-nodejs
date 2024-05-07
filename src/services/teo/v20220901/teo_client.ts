@@ -348,6 +348,7 @@ import {
   BindZoneToPlanRequest,
   SecurityType,
   IPWhitelist,
+  DescribeSecurityIPGroupRequest,
   ModifyApplicationProxyStatusResponse,
   Identification,
   TopEntry,
@@ -373,6 +374,7 @@ import {
   Quota,
   CheckCnameStatusRequest,
   ModifyZoneStatusResponse,
+  DescribeSecurityIPGroupResponse,
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DescribePurgeTasksResponse,
@@ -1384,13 +1386,26 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询 IP 组的配置信息，包括 IP 组名称、 IP 组内容、 IP 组归属站点。
-   */
+     * 接口已废弃，将于 2024 年 6 月 30 日停止服务。请使用 [查询安全 IP 组
+](https://cloud.tencent.com/document/product/1552/105866) 接口。
+
+查询 IP 组的配置信息，包括 IP 组名称、 IP 组内容、 IP 组归属站点。
+     */
   async DescribeSecurityIPGroupInfo(
     req: DescribeSecurityIPGroupInfoRequest,
     cb?: (error: string, rep: DescribeSecurityIPGroupInfoResponse) => void
   ): Promise<DescribeSecurityIPGroupInfoResponse> {
     return this.request("DescribeSecurityIPGroupInfo", req, cb)
+  }
+
+  /**
+   * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
+   */
+  async DescribeSecurityIPGroup(
+    req: DescribeSecurityIPGroupRequest,
+    cb?: (error: string, rep: DescribeSecurityIPGroupResponse) => void
+  ): Promise<DescribeSecurityIPGroupResponse> {
+    return this.request("DescribeSecurityIPGroup", req, cb)
   }
 
   /**

@@ -5328,11 +5328,11 @@ export interface PrometheusInstancesItem {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例计费模式。取值范围：
   <ul>
@@ -5340,28 +5340,28 @@ export interface PrometheusInstancesItem {
   <li>3：按量</li>
   </ul>
      */
-    InstanceChargeType: number;
+    InstanceChargeType?: number;
     /**
      * 地域 ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * VPC ID
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网 ID
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 存储周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataRetentionTime: number;
+    DataRetentionTime?: number;
     /**
      * 实例业务状态。取值范围：
   <ul>
@@ -5375,37 +5375,37 @@ export interface PrometheusInstancesItem {
   <li>9：欠费已停服</li>
   </ul>
      */
-    InstanceStatus: number;
+    InstanceStatus?: number;
     /**
      * Grafana 面板 URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GrafanaURL: string;
+    GrafanaURL?: string;
     /**
      * 创建时间
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 是否开启 Grafana
   <li>0：不开启</li>
   <li>1：开启</li>
      */
-    EnableGrafana: number;
+    EnableGrafana?: number;
     /**
      * 实例IPV4地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPv4Address: string;
+    IPv4Address?: string;
     /**
      * 实例关联的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSpecification: Array<PrometheusTag>;
+    TagSpecification?: Array<PrometheusTag>;
     /**
      * 购买的实例过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 计费状态
   <ul>
@@ -5417,23 +5417,23 @@ export interface PrometheusInstancesItem {
   </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeStatus: number;
+    ChargeStatus?: number;
     /**
      * 规格名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpecName: string;
+    SpecName?: string;
     /**
      * 自动续费标记
   <ul>
   <li>0：不自动续费</li>
   <li>1：开启自动续费</li>
   <li>2：禁止自动续费</li>
-  <li>-1：无效</ii>
+  <li>-1：无效</li>
   </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /**
      * 是否快过期
   <ul>
@@ -5442,27 +5442,27 @@ export interface PrometheusInstancesItem {
   </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsNearExpire: number;
+    IsNearExpire?: number;
     /**
      * 数据写入需要的 Token
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthToken: string;
+    AuthToken?: string;
     /**
      * Prometheus Remote Write 的地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemoteWrite: string;
+    RemoteWrite?: string;
     /**
      * Prometheus HTTP Api 根地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiRootPath: string;
+    ApiRootPath?: string;
     /**
      * Proxy 的地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyAddress: string;
+    ProxyAddress?: string;
     /**
      * Grafana 运行状态
   <ul>
@@ -5476,37 +5476,37 @@ export interface PrometheusInstancesItem {
   </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GrafanaStatus: number;
+    GrafanaStatus?: number;
     /**
      * Grafana IP 白名单列表，使用英文分号分隔
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GrafanaIpWhiteList: string;
+    GrafanaIpWhiteList?: string;
     /**
      * 实例的授权信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Grant: PrometheusInstanceGrantInfo;
+    Grant?: PrometheusInstanceGrantInfo;
     /**
      * 绑定的 Grafana 实例 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GrafanaInstanceId: string;
+    GrafanaInstanceId?: string;
     /**
      * 告警规则限制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlertRuleLimit: number;
+    AlertRuleLimit?: number;
     /**
      * 预聚合规则限制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordingRuleLimit: number;
+    RecordingRuleLimit?: number;
     /**
      * 迁移状态，0-不在迁移中，1-迁移中、原实例，2-迁移中、目标实例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MigrationType: number;
+    MigrationType?: number;
 }
 /**
  * DescribeConditionsTemplateList请求参数结构体
@@ -7589,7 +7589,7 @@ export interface PrometheusClusterAgentBasic {
      */
     Region: string;
     /**
-     * 集群类型
+     * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
      */
     ClusterType: string;
     /**
@@ -8190,13 +8190,13 @@ export interface PrometheusRegionItem {
  */
 export interface ModifyPrometheusInstanceAttributesRequest {
     /**
-     * 实例名称
-     */
-    InstanceName: string;
-    /**
      * 实例 ID
      */
     InstanceId: string;
+    /**
+     * 实例名称
+     */
+    InstanceName?: string;
     /**
      * 存储时长（取值为 15、30、45。此参数不适用于包年包月实例）
      */
