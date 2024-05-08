@@ -68,6 +68,16 @@ it("waf.v20180125.GetAttackTotalCount", async function () {
     }
 })
 
+it("waf.v20180125.ImportIpAccessControl", async function () {
+    try {
+       const data = await client.ImportIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.AddCustomWhiteRule", async function () {
     try {
        const data = await client.AddCustomWhiteRule({})
@@ -508,6 +518,16 @@ it("waf.v20180125.DescribeCertificateVerifyResult", async function () {
     }
 })
 
+it("waf.v20180125.DeleteIpAccessControlV2", async function () {
+    try {
+       const data = await client.DeleteIpAccessControlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.SwitchElasticMode", async function () {
     try {
        const data = await client.SwitchElasticMode({})
@@ -718,6 +738,16 @@ it("waf.v20180125.ModifyAreaBanStatus", async function () {
     }
 })
 
+it("waf.v20180125.ModifyIpAccessControl", async function () {
+    try {
+       const data = await client.ModifyIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAntiFakeRules", async function () {
     try {
        const data = await client.DescribeAntiFakeRules({})
@@ -771,6 +801,16 @@ it("waf.v20180125.DescribeTlsVersion", async function () {
 it("waf.v20180125.ModifyAntiInfoLeakRules", async function () {
     try {
        const data = await client.ModifyAntiInfoLeakRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateIpAccessControl", async function () {
+    try {
+       const data = await client.CreateIpAccessControl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageThumbnailList", req, cb);
     }
     /**
+     * 创建TRTC通话参数
+     */
+    async CreateTRTCSignaturesWithRoomId(req, cb) {
+        return this.request("CreateTRTCSignaturesWithRoomId", req, cb);
+    }
+    /**
      * 更新围栏绑定信息
      */
     async ModifyFenceBind(req, cb) {
@@ -304,10 +310,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
-     * 获取位置空间列表
+     * 查询指定的云存 AI 分析任务
      */
-    async GetPositionSpaceList(req, cb) {
-        return this.request("GetPositionSpaceList", req, cb);
+    async DescribeCloudStorageAIServiceTask(req, cb) {
+        return this.request("DescribeCloudStorageAIServiceTask", req, cb);
     }
     /**
      * 重置云存服务
@@ -394,6 +400,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindProducts", req, cb);
     }
     /**
+     * 获取位置空间列表
+     */
+    async GetPositionSpaceList(req, cb) {
+        return this.request("GetPositionSpaceList", req, cb);
+    }
+    /**
      * 提供删除某个项目下产品的能力
      */
     async DeleteStudioProduct(req, cb) {
@@ -410,6 +422,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGatewayBindDevices(req, cb) {
         return this.request("DescribeGatewayBindDevices", req, cb);
+    }
+    /**
+     * 解散TRTC房间
+     */
+    async DismissRoomByStrRoomIdFromTRTC(req, cb) {
+        return this.request("DismissRoomByStrRoomIdFromTRTC", req, cb);
     }
     /**
      * 创建围栏
@@ -478,16 +496,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindProducts", req, cb);
     }
     /**
+     * TRTC操作，将用户从房间移出
+     */
+    async RemoveUserByRoomIdFromTRTC(req, cb) {
+        return this.request("RemoveUserByRoomIdFromTRTC", req, cb);
+    }
+    /**
      * 搜索位置空间
      */
     async SearchPositionSpace(req, cb) {
         return this.request("SearchPositionSpace", req, cb);
     }
     /**
-     * 为用户提供新建项目的能力，用于集中管理产品和应用。
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
-    async CreateProject(req, cb) {
-        return this.request("CreateProject", req, cb);
+    async ModifyTopicPolicy(req, cb) {
+        return this.request("ModifyTopicPolicy", req, cb);
     }
     /**
      * 获取位置空间中围栏告警事件列表
@@ -562,6 +586,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindCloudStorageUser", req, cb);
     }
     /**
+     * 获取指定网关设备的子设备列表
+     */
+    async GetGatewaySubDeviceList(req, cb) {
+        return this.request("GetGatewaySubDeviceList", req, cb);
+    }
+    /**
      * 获取量产详情信息。
      */
     async DescribeBatchProduction(req, cb) {
@@ -580,16 +610,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDevices", req, cb);
     }
     /**
-     * 获取指定网关设备的子设备列表
+     * 为用户提供新建项目的能力，用于集中管理产品和应用。
      */
-    async GetGatewaySubDeviceList(req, cb) {
-        return this.request("GetGatewaySubDeviceList", req, cb);
+    async CreateProject(req, cb) {
+        return this.request("CreateProject", req, cb);
     }
     /**
-     * 本接口（UpdateTopicPolicy）用于更新Topic信息
+     * 获取云存 AI 分析任务输出文件的下载地址
      */
-    async ModifyTopicPolicy(req, cb) {
-        return this.request("ModifyTopicPolicy", req, cb);
+    async GenerateCloudStorageAIServiceTaskFileURL(req, cb) {
+        return this.request("GenerateCloudStorageAIServiceTaskFileURL", req, cb);
     }
     /**
      * 查询云存服务详情

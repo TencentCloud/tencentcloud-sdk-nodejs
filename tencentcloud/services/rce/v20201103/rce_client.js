@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("rce.tencentcloudapi.com", "2020-11-03", clientConfig);
     }
     /**
-     * 以图表形式展示三种请求状态的趋势变化
-     */
-    async DescribeRiskTrends(req, cb) {
-        return this.request("DescribeRiskTrends", req, cb);
-    }
-    /**
      * 此接口用于查询风险评估结果
      */
     async DescribeRiskAssessment(req, cb) {

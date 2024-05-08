@@ -28,6 +28,16 @@ it("mrs.v20200910.ImageToClass", async function () {
     }
 })
 
+it("mrs.v20200910.DrugInstructionObject", async function () {
+    try {
+       const data = await client.DrugInstructionObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mrs.v20200910.TurnPDFToObjectAsyncGetResult", async function () {
     try {
        const data = await client.TurnPDFToObjectAsyncGetResult({})

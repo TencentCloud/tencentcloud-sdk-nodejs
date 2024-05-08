@@ -122,6 +122,49 @@ export interface AddAntiFakeUrlRequest {
 }
 
 /**
+ * ModifyIpAccessControl请求参数结构体
+ */
+export interface ModifyIpAccessControlRequest {
+  /**
+   * 具体域名如：test.qcloudwaf.com
+全局域名为：global
+   */
+  Domain: string
+  /**
+   * ip参数列表
+   */
+  IpList: Array<string>
+  /**
+   * 42为黑名单，40为白名单
+   */
+  ActionType: number
+  /**
+   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   */
+  ValidTS: number
+  /**
+   * 规则ID
+   */
+  RuleId: number
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
+  /**
+   * 备注
+   */
+  Note?: string
+}
+
+/**
  * DescribePeakValue返回参数结构体
  */
 export interface DescribePeakValueResponse {
@@ -693,26 +736,17 @@ export interface PiechartItem {
 }
 
 /**
- * SwitchDomainRules请求参数结构体
+ * DeleteHost返回参数结构体
  */
-export interface SwitchDomainRulesRequest {
+export interface DeleteHostResponse {
   /**
-   * 域名
+   * 域名删除结果。Code表示状态码，Message表示详细信息。
    */
-  Domain?: string
+  Success?: ResponseCode
   /**
-   * 规则列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Ids?: Array<number | bigint>
-  /**
-   * 开关状态，0表示关闭，1表示开启，2表示只观察
-   */
-  Status?: number
-  /**
-   * 设置为观察模式原因，
-1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他
-   */
-  Reason?: number
+  RequestId?: string
 }
 
 /**
@@ -1351,6 +1385,20 @@ export interface DescribeCustomRuleListRequest {
    * exp_ts或者mod_ts
    */
   By?: string
+}
+
+/**
+ * DeleteIpAccessControlV2返回参数结构体
+ */
+export interface DeleteIpAccessControlV2Response {
+  /**
+   * 在批量删除的时候表示删除失败的条数
+   */
+  FailedCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2179,6 +2227,29 @@ export interface DescribeVipInfoRequest {
 }
 
 /**
+ * ImportIpAccessControl请求参数结构体
+ */
+export interface ImportIpAccessControlRequest {
+  /**
+   * 导入的IP黑白名单列表
+   */
+  Data: Array<IpAccessControlParam>
+  /**
+   * 具体域名如：test.qcloudwaf.com
+全局域名为：global
+   */
+  Domain: string
+  /**
+   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   */
+  SourceType: string
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+}
+
+/**
  * DescribeFindDomainList返回参数结构体
  */
 export interface DescribeFindDomainListResponse {
@@ -2995,24 +3066,33 @@ export interface ModifyAntiFakeUrlStatusRequest {
 }
 
 /**
- * TLS 加密套件
+ * DescribeCCRuleList请求参数结构体
  */
-export interface TLSCiphers {
+export interface DescribeCCRuleListRequest {
   /**
-   * TLS版本ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要查询的API所属的域名
    */
-  VersionId: number
+  Domain: string
   /**
-   * 加密套件ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 偏移
    */
-  CipherId: number
+  Offset: number
   /**
-   * 加密套件
-注意：此字段可能返回 null，表示取不到有效值。
+   * 容量
    */
-  CipherName: string
+  Limit: number
+  /**
+   * 目前支持根据ts_version排序
+   */
+  By: string
+  /**
+   * 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status
+   */
+  Filters?: Array<FiltersItemNew>
+  /**
+   * asc或者desc
+   */
+  Order?: string
 }
 
 /**
@@ -4751,6 +4831,45 @@ export interface DeleteAttackDownloadRecordResponse {
 }
 
 /**
+ * CreateIpAccessControl请求参数结构体
+ */
+export interface CreateIpAccessControlRequest {
+  /**
+   * 具体域名如：test.qcloudwaf.com
+全局域名为：global
+   */
+  Domain: string
+  /**
+   * ip参数列表
+   */
+  IpList: Array<string>
+  /**
+   * 42为黑名单，40为白名单
+   */
+  ActionType: number
+  /**
+   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   */
+  ValidTS: number
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
+  /**
+   * 备注
+   */
+  Note?: string
+}
+
+/**
  * DescribeFlowTrend请求参数结构体
  */
 export interface DescribeFlowTrendRequest {
@@ -5046,17 +5165,26 @@ export interface AccessLogItem {
 }
 
 /**
- * DeleteHost返回参数结构体
+ * SwitchDomainRules请求参数结构体
  */
-export interface DeleteHostResponse {
+export interface SwitchDomainRulesRequest {
   /**
-   * 域名删除结果。Code表示状态码，Message表示详细信息。
+   * 域名
    */
-  Success?: ResponseCode
+  Domain?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则列表
    */
-  RequestId?: string
+  Ids?: Array<number | bigint>
+  /**
+   * 开关状态，0表示关闭，1表示开启，2表示只观察
+   */
+  Status?: number
+  /**
+   * 设置为观察模式原因，
+1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他
+   */
+  Reason?: number
 }
 
 /**
@@ -5142,6 +5270,21 @@ export interface DescribeFlowTrendResponse {
    * 流量趋势数据
    */
   Data: Array<BotStatPointItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateIpAccessControl返回参数结构体
+ */
+export interface CreateIpAccessControlResponse {
+  /**
+   * 新增的规则对应的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5329,6 +5472,28 @@ export interface DescribeUserLevelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IP黑白名单参数结构体，主要用于IP黑白名单的导入。
+ */
+export interface IpAccessControlParam {
+  /**
+   * IP列表
+   */
+  IpList: Array<string>
+  /**
+   * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   */
+  ValidTs: number
+  /**
+   * 42为黑名单，40为白名单
+   */
+  ActionType: number
+  /**
+   * 备注
+   */
+  Note?: string
 }
 
 /**
@@ -6295,6 +6460,32 @@ export interface ModifyAreaBanStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteIpAccessControlV2请求参数结构体
+ */
+export interface DeleteIpAccessControlV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 规则ID列表，支持批量删除
+   */
+  RuleIds: Array<number | bigint>
+  /**
+   * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单
+   */
+  DeleteAll?: boolean
+  /**
+   * batch表示为批量防护的IP黑白名单
+   */
+  SourceType?: string
+  /**
+   * IP黑白名单类型，40为IP白名单，42为IP黑名单
+   */
+  ActionType?: number
 }
 
 /**
@@ -7726,17 +7917,13 @@ export interface AddAttackWhiteRuleResponse {
 }
 
 /**
- * ModifyDomainsCLSStatus请求参数结构体
+ * ImportIpAccessControl返回参数结构体
  */
-export interface ModifyDomainsCLSStatusRequest {
+export interface ImportIpAccessControlResponse {
   /**
-   * 需要修改的域名列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domains: Array<DomainURI>
-  /**
-   * 修改域名的访问日志开关为Status
-   */
-  Status: number
+  RequestId?: string
 }
 
 /**
@@ -8666,33 +8853,24 @@ export interface CreateDealsResponse {
 }
 
 /**
- * DescribeCCRuleList请求参数结构体
+ * TLS 加密套件
  */
-export interface DescribeCCRuleListRequest {
+export interface TLSCiphers {
   /**
-   * 需要查询的API所属的域名
+   * TLS版本ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  VersionId: number
   /**
-   * 偏移
+   * 加密套件ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  CipherId: number
   /**
-   * 容量
+   * 加密套件
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
-  /**
-   * 目前支持根据ts_version排序
-   */
-  By: string
-  /**
-   * 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status
-   */
-  Filters?: Array<FiltersItemNew>
-  /**
-   * asc或者desc
-   */
-  Order?: string
+  CipherName: string
 }
 
 /**
@@ -9037,6 +9215,16 @@ export interface DescribeVipInfoResponse {
 }
 
 /**
+ * ModifyIpAccessControl返回参数结构体
+ */
+export interface ModifyIpAccessControlResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRuleLimit请求参数结构体
  */
 export interface DescribeRuleLimitRequest {
@@ -9058,6 +9246,20 @@ export interface ModifyDomainPostActionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDomainsCLSStatus请求参数结构体
+ */
+export interface ModifyDomainsCLSStatusRequest {
+  /**
+   * 需要修改的域名列表
+   */
+  Domains: Array<DomainURI>
+  /**
+   * 修改域名的访问日志开关为Status
+   */
+  Status: number
 }
 
 /**

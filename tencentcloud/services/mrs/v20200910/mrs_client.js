@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageToClass", req, cb);
     }
     /**
+     * 药品说明书PDF文件结构化
+     */
+    async DrugInstructionObject(req, cb) {
+        return this.request("DrugInstructionObject", req, cb);
+    }
+    /**
      * 体检报告PDF文件结构化异步获取结果接口
      */
     async TurnPDFToObjectAsyncGetResult(req, cb) {

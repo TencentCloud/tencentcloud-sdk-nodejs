@@ -438,6 +438,15 @@ export interface GetDeviceListResponse {
     RequestId?: string;
 }
 /**
+ * DismissRoomByStrRoomIdFromTRTC返回参数结构体
+ */
+export interface DismissRoomByStrRoomIdFromTRTCResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * GenerateSignedVideoURL请求参数结构体
  */
 export interface GenerateSignedVideoURLRequest {
@@ -527,6 +536,25 @@ export interface TopicRulePayload {
  * DeleteLoRaFrequency返回参数结构体
  */
 export interface DeleteLoRaFrequencyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeGatewaySubDeviceList返回参数结构体
+ */
+export interface DescribeGatewaySubDeviceListResponse {
+    /**
+     * 设备的总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total: number;
+    /**
+     * 设备列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceList: Array<FamilySubDevice>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -740,21 +768,27 @@ export interface CallDeviceActionSyncRequest {
     InputParams?: string;
 }
 /**
- * 产品设备位置信息
+ * 设备的用户
  */
-export interface ProductDevicesPositionItem {
+export interface DeviceUser {
     /**
-     * 设备位置列表
+     * 用户ID
      */
-    Items: Array<DevicePositionItem>;
+    UserId: string;
     /**
-     * 产品标识
+     * 用户角色 1所有者，0：其他分享者
      */
-    ProductId: string;
+    Role: number;
     /**
-     * 设备位置数量
+     * 家庭ID，所有者带该参数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total: number;
+    FamilyId?: string;
+    /**
+     * 家庭名称，所有者带该参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FamilyName?: string;
 }
 /**
  * GetProjectList返回参数结构体
@@ -770,6 +804,15 @@ export interface GetProjectListResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyFenceBind返回参数结构体
+ */
+export interface ModifyFenceBindResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -985,45 +1028,13 @@ export interface DeletePositionFenceResponse {
     RequestId?: string;
 }
 /**
- * ModifyLoRaFrequency请求参数结构体
+ * DescribeCloudStorageAIServiceTask请求参数结构体
  */
-export interface ModifyLoRaFrequencyRequest {
+export interface DescribeCloudStorageAIServiceTaskRequest {
     /**
-     * 频点唯一ID
+     * 任务 ID
      */
-    FreqId?: string;
-    /**
-     * 频点名称
-     */
-    FreqName?: string;
-    /**
-     * 频点描述
-     */
-    Description?: string;
-    /**
-     * 数据上行信道
-     */
-    ChannelsDataUp?: Array<number | bigint>;
-    /**
-     * 数据下行信道RX1
-     */
-    ChannelsDataRX1?: Array<number | bigint>;
-    /**
-     * 数据下行信道RX2
-     */
-    ChannelsDataRX2?: Array<number | bigint>;
-    /**
-     * 入网上行信道
-     */
-    ChannelsJoinUp?: Array<number | bigint>;
-    /**
-     * 入网下行信道RX1
-     */
-    ChannelsJoinRX1?: Array<number | bigint>;
-    /**
-     * 入网下行信道RX2
-     */
-    ChannelsJoinRX2?: Array<number | bigint>;
+    TaskId: string;
 }
 /**
  * 围栏告警位置点
@@ -1114,6 +1125,15 @@ export interface PackageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CSUserId?: string;
+}
+/**
+ * UnbindDevices返回参数结构体
+ */
+export interface UnbindDevicesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyCloudStorageAIServiceCallback返回参数结构体
@@ -1500,6 +1520,23 @@ export interface FenceBindDeviceItem {
     Method: string;
 }
 /**
+ * GenerateCloudStorageAIServiceTaskFileURL返回参数结构体
+ */
+export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
+    /**
+     * 文件下载 URL
+     */
+    FileURL?: string;
+    /**
+     * 过期时间 UNIX 时间戳
+     */
+    ExpireTime?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 设备历史数据结构
  */
 export interface DeviceDataHistoryItem {
@@ -1569,6 +1606,13 @@ export interface CloudStorageAIServiceTask {
      */
     ChannelId?: number;
     /**
+     * 云存 AI 服务类型。可能取值：
+  
+  - `PackageDetect`：包裹检测
+  - `Highlight`：视频浓缩
+     */
+    ServiceType?: string;
+    /**
      * 对应云存视频的起始时间
      */
     StartTime?: number;
@@ -1577,7 +1621,7 @@ export interface CloudStorageAIServiceTask {
      */
     EndTime?: number;
     /**
-     * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空）
+     * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；4：执行中）
      */
     Status?: number;
     /**
@@ -1585,18 +1629,15 @@ export interface CloudStorageAIServiceTask {
      */
     Result?: string;
     /**
-     * 云存 AI 服务类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 任务输出文件列表
      */
-    ServiceType?: string;
+    Files?: Array<string>;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: number;
 }
@@ -2182,7 +2223,8 @@ export interface ModifyCloudStorageAIServiceCallbackRequest {
      */
     ProductId: string;
     /**
-     * 推送类型。http：HTTP 回调
+     * 推送类型。可选值：
+  - `http`：HTTP 回调
      */
     Type: string;
     /**
@@ -2331,6 +2373,31 @@ export interface CreateLoRaGatewayRequest {
     FrequencyId?: string;
 }
 /**
+ * TRTC 的参数 可以用来加入房间
+ */
+export interface TRTCParams {
+    /**
+     * TRTC入参: TRTC的实例ID
+     */
+    SdkAppId: number;
+    /**
+     * TRTC入参: 用户加入房间的ID
+     */
+    UserId: string;
+    /**
+     * TRTC入参: 用户的签名用来鉴权
+     */
+    UserSig: string;
+    /**
+     * TRTC入参: 加入的TRTC房间名称
+     */
+    StrRoomId: string;
+    /**
+     * TRTC入参: 校验TRTC的KEY
+     */
+    PrivateKey: string;
+}
+/**
  * ReleaseStudioProduct请求参数结构体
  */
 export interface ReleaseStudioProductRequest {
@@ -2416,7 +2483,9 @@ export interface ModifyCloudStorageAIServiceRequest {
      */
     DeviceName: string;
     /**
-     * 云存 AI 服务类型。可选值：PackageDetect
+     * 云存 AI 服务类型。可选值：
+  - `PackageDetect`：包裹检测
+  - `Highlight`：视频浓缩
      */
     ServiceType: string;
     /**
@@ -2427,6 +2496,10 @@ export interface ModifyCloudStorageAIServiceRequest {
      * 视频分析区域
      */
     ROI?: string;
+    /**
+     * 云存 AI 服务的配置参数
+     */
+    Config?: string;
 }
 /**
  * CreateDevice返回参数结构体
@@ -2735,7 +2808,9 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
      */
     DeviceName: string;
     /**
-     * 云存 AI 服务类型。可选值：PackageDetect
+     * 云存 AI 服务类型。可选值：
+  - `PackageDetect`：包裹检测
+  - `Highlight`：视频浓缩
      */
     ServiceType: string;
     /**
@@ -2747,9 +2822,22 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
      */
     Offset?: number;
     /**
-     * 任务状态（1：失败；2：成功但结果为空；3：成功且结果非空；不传则查询全部状态的任务）
+     * 任务状态。可选值：
+  - （不传）：查询全部状态的任务
+  - `1`：失败
+  - `2`：成功但结果为空
+  - `3`：成功且结果非空
+  - `4`：执行中
      */
     Status?: number;
+    /**
+     * 用户ID
+     */
+    UserId?: string;
+    /**
+     * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+     */
+    ChannelId?: number;
 }
 /**
  * DescribeStudioProduct返回参数结构体
@@ -3527,6 +3615,19 @@ export interface EnableTopicRuleRequest {
     RuleName: string;
 }
 /**
+ * RemoveUserByRoomIdFromTRTC请求参数结构体
+ */
+export interface RemoveUserByRoomIdFromTRTCRequest {
+    /**
+     * 房间id
+     */
+    RoomId: string;
+    /**
+     * 用户名称数组，数组元素不可重复，最长不超过 10 个。
+     */
+    TRTCUserIds: Array<string>;
+}
+/**
  * DescribeBindedProducts返回参数结构体
  */
 export interface DescribeBindedProductsResponse {
@@ -3739,6 +3840,19 @@ export interface DirectBindDeviceInFamilyRequest {
     RoomId?: string;
 }
 /**
+ * DescribeCloudStorageAIServiceTask返回参数结构体
+ */
+export interface DescribeCloudStorageAIServiceTaskResponse {
+    /**
+     * 任务信息
+     */
+    TaskInfo?: CloudStorageAIServiceTask;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCloudStorageEvents返回参数结构体
  */
 export interface DescribeCloudStorageEventsResponse {
@@ -3850,23 +3964,17 @@ export interface DescribeInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeGatewaySubDeviceList返回参数结构体
+ * CreateTRTCSignaturesWithRoomId请求参数结构体
  */
-export interface DescribeGatewaySubDeviceListResponse {
+export interface CreateTRTCSignaturesWithRoomIdRequest {
     /**
-     * 设备的总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * TRTC进房间的用户名称数组，数组元素不可重复，最长不超过 10 个。
      */
-    Total: number;
+    TRTCUserIds: Array<string>;
     /**
-     * 设备列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 房间id
      */
-    DeviceList: Array<FamilySubDevice>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    RoomId: string;
 }
 /**
  * Topic信息, 包括Topic名字和权限
@@ -3971,9 +4079,9 @@ export interface DescribeProjectRequest {
     ProjectId: string;
 }
 /**
- * UnbindDevices返回参数结构体
+ * ModifyModelDefinition返回参数结构体
  */
-export interface UnbindDevicesResponse {
+export interface ModifyModelDefinitionResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4037,13 +4145,13 @@ export interface CreateIotVideoCloudStorageRequest {
     StorageRegion?: string;
 }
 /**
- * ModifyModelDefinition返回参数结构体
+ * DismissRoomByStrRoomIdFromTRTC请求参数结构体
  */
-export interface ModifyModelDefinitionResponse {
+export interface DismissRoomByStrRoomIdFromTRTCRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 房间id
      */
-    RequestId?: string;
+    RoomId: string;
 }
 /**
  * DescribeCloudStoragePackageConsumeDetails请求参数结构体
@@ -4595,6 +4703,47 @@ export interface GetProjectListRequest {
     ProjectName?: string;
 }
 /**
+ * ModifyLoRaFrequency请求参数结构体
+ */
+export interface ModifyLoRaFrequencyRequest {
+    /**
+     * 频点唯一ID
+     */
+    FreqId?: string;
+    /**
+     * 频点名称
+     */
+    FreqName?: string;
+    /**
+     * 频点描述
+     */
+    Description?: string;
+    /**
+     * 数据上行信道
+     */
+    ChannelsDataUp?: Array<number | bigint>;
+    /**
+     * 数据下行信道RX1
+     */
+    ChannelsDataRX1?: Array<number | bigint>;
+    /**
+     * 数据下行信道RX2
+     */
+    ChannelsDataRX2?: Array<number | bigint>;
+    /**
+     * 入网上行信道
+     */
+    ChannelsJoinUp?: Array<number | bigint>;
+    /**
+     * 入网下行信道RX1
+     */
+    ChannelsJoinRX1?: Array<number | bigint>;
+    /**
+     * 入网下行信道RX2
+     */
+    ChannelsJoinRX2?: Array<number | bigint>;
+}
+/**
  * DescribeCloudStorageAIServiceTasks返回参数结构体
  */
 export interface DescribeCloudStorageAIServiceTasksResponse {
@@ -4698,33 +4847,21 @@ export interface GetGatewaySubDeviceListRequest {
     Limit: number;
 }
 /**
- * SearchStudioProduct请求参数结构体
+ * 产品设备位置信息
  */
-export interface SearchStudioProductRequest {
+export interface ProductDevicesPositionItem {
     /**
-     * 项目ID
+     * 设备位置列表
      */
-    ProjectId?: string;
+    Items: Array<DevicePositionItem>;
     /**
-     * 产品名称
+     * 产品标识
      */
-    ProductName?: string;
+    ProductId: string;
     /**
-     * 列表Limit
+     * 设备位置数量
      */
-    Limit?: number;
-    /**
-     * 列表Offset
-     */
-    Offset?: number;
-    /**
-     * 产品Status
-     */
-    DevStatus?: string;
-    /**
-     * 产品ID
-     */
-    ProductId?: string;
+    Total: number;
 }
 /**
  * ListTopicPolicy请求参数结构体
@@ -5223,7 +5360,10 @@ export interface DescribeCloudStorageAIServiceRequest {
      */
     DeviceName: string;
     /**
-     * 云存 AI 服务类型。可选值：PackageDetect
+     * 云存 AI 服务类型。可选值：
+  
+  - `PackageDetect`：包裹检测
+  - `Highlight`：视频浓缩
      */
     ServiceType: string;
 }
@@ -5351,27 +5491,18 @@ export interface PublishRRPCMessageResponse {
     RequestId?: string;
 }
 /**
- * 设备的用户
+ * CreateTRTCSignaturesWithRoomId返回参数结构体
  */
-export interface DeviceUser {
+export interface CreateTRTCSignaturesWithRoomIdResponse {
     /**
-     * 用户ID
-     */
-    UserId: string;
-    /**
-     * 用户角色 1所有者，0：其他分享者
-     */
-    Role: number;
-    /**
-     * 家庭ID，所有者带该参数
+     * 返回参数数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FamilyId?: string;
+    TRTCParamList?: Array<TRTCParams>;
     /**
-     * 家庭名称，所有者带该参数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    FamilyName?: string;
+    RequestId?: string;
 }
 /**
  * DescribeDevicePackages返回参数结构体
@@ -5536,13 +5667,21 @@ export interface DeviceInfo {
     IsLora: boolean;
 }
 /**
- * ModifyFenceBind返回参数结构体
+ * GenerateCloudStorageAIServiceTaskFileURL请求参数结构体
  */
-export interface ModifyFenceBindResponse {
+export interface GenerateCloudStorageAIServiceTaskFileURLRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 产品 ID
      */
-    RequestId?: string;
+    TaskId: string;
+    /**
+     * 文件名
+     */
+    FileName: string;
+    /**
+     * 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后）
+     */
+    ExpireTime?: number;
 }
 /**
  * DescribeInstance请求参数结构体
@@ -5674,6 +5813,44 @@ export interface InstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxDeviceOnlineCount?: number;
+}
+/**
+ * SearchStudioProduct请求参数结构体
+ */
+export interface SearchStudioProductRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId?: string;
+    /**
+     * 产品名称
+     */
+    ProductName?: string;
+    /**
+     * 列表Limit
+     */
+    Limit?: number;
+    /**
+     * 列表Offset
+     */
+    Offset?: number;
+    /**
+     * 产品Status
+     */
+    DevStatus?: string;
+    /**
+     * 产品ID
+     */
+    ProductId?: string;
+}
+/**
+ * RemoveUserByRoomIdFromTRTC返回参数结构体
+ */
+export interface RemoveUserByRoomIdFromTRTCResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeLoRaFrequency返回参数结构体

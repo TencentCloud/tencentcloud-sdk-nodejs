@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAttackTotalCount", req, cb);
     }
     /**
+     * 导入IP黑白名单
+     */
+    async ImportIpAccessControl(req, cb) {
+        return this.request("ImportIpAccessControl", req, cb);
+    }
+    /**
      * 增加精准白名单规则
      */
     async AddCustomWhiteRule(req, cb) {
@@ -325,6 +331,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificateVerifyResult", req, cb);
     }
     /**
+     * Waf IP黑白名单最新版本删除接口
+     */
+    async DeleteIpAccessControlV2(req, cb) {
+        return this.request("DeleteIpAccessControlV2", req, cb);
+    }
+    /**
      * 切换弹性的开关
      */
     async SwitchElasticMode(req, cb) {
@@ -451,6 +463,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAreaBanStatus", req, cb);
     }
     /**
+     * Waf IP黑白名单编辑接口
+     */
+    async ModifyIpAccessControl(req, cb) {
+        return this.request("ModifyIpAccessControl", req, cb);
+    }
+    /**
      * 获取防篡改url
      */
     async DescribeAntiFakeRules(req, cb) {
@@ -487,6 +505,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAntiInfoLeakRules(req, cb) {
         return this.request("ModifyAntiInfoLeakRules", req, cb);
+    }
+    /**
+     * Waf IP黑白名单新增接口
+     */
+    async CreateIpAccessControl(req, cb) {
+        return this.request("CreateIpAccessControl", req, cb);
     }
     /**
      * 添加防篡改url

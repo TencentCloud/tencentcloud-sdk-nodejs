@@ -2226,6 +2226,14 @@ export interface TelCdrInfo {
 电话呼入	            100	      blackList 呼入黑名单 
 
 电话呼出               2	              unconnected	未接通
+
+电话呼出             108	        restrictedCallee	被叫因高风险受限
+
+电话呼出             109	        tooManyRequest	    超频
+
+电话呼出             110	        restrictedArea	    外呼盲区
+
+电话呼出             111	        restrictedTime	外呼时间限制
                          
 电话呼出             201            unknown	未知状态
 
@@ -2239,7 +2247,7 @@ export interface TelCdrInfo {
 
 电话呼出	         206	           busy	通话中
 
-电话呼出   	 207	           outOfCredit	欠费
+电话呼出   	        207	           outOfCredit	欠费
 
 电话呼出	         208	           operatorError	运营商线路异常
 
@@ -2323,6 +2331,14 @@ export interface TelCdrInfo {
 电话呼入	            100	      blackList 呼入黑名单 
 
 电话呼出               2	              unconnected	未接通
+
+电话呼出             108	        restrictedCallee	被叫因高风险受限
+
+电话呼出             109	        tooManyRequest	    超频
+
+电话呼出             110	        restrictedArea	    外呼盲区
+
+电话呼出             111	        restrictedTime	外呼时间限制
                          
 电话呼出             201            unknown	未知状态
 
@@ -2336,7 +2352,7 @@ export interface TelCdrInfo {
 
 电话呼出	         206	           busy	通话中
 
-电话呼出   	 207	           outOfCredit	欠费
+电话呼出   	        207	           outOfCredit	欠费
 
 电话呼出	         208	           operatorError	运营商线路异常
 
@@ -3391,6 +3407,7 @@ export interface IMCdrInfo {
 101 座席手动转接
 102 IVR阶段放弃
 108 用户超时自动结束
+109 用户主动结束
    */
   EndStatus?: number
   /**

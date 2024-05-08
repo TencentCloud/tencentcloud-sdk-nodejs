@@ -199,11 +199,11 @@ export interface AttachCcnRequest {
  */
 export interface CreateInstancesRequest {
     /**
-     * 套餐ID。可以通过调用 [查询套餐](https://cloud.tencent.com/document/api/1207/47575) 接口获取。
+     * 套餐ID。可以通过调用 [DescribeBundles](https://cloud.tencent.com/document/api/1207/47575) 接口获取。
      */
     BundleId: string;
     /**
-     * 镜像ID。可以通过调用 [查询镜像信息](https://cloud.tencent.com/document/api/1207/47689) 接口获取。
+     * 镜像ID。可以通过调用 [DescribeBlueprints](https://cloud.tencent.com/document/api/1207/47689) 接口获取。
      */
     BlueprintId: string;
     /**
@@ -1091,7 +1091,7 @@ export interface DescribeInstancesTrafficPackagesResponse {
  */
 export interface DescribeDiskBackupsDeniedActionsRequest {
     /**
-     * 云硬盘备份点 ID 列表, 可通过 DescribeDiskBackups 接口查询。
+     * 云硬盘备份点 ID 列表, 可通过<a href="https://cloud.tencent.com/document/product/1207/84379" target="_blank">DescribeDiskBackups</a>接口查询。
      */
     DiskBackupIds: Array<string>;
 }
@@ -1634,7 +1634,7 @@ export interface DescribeInstancesDeniedActionsResponse {
     /**
      * 实例操作限制列表详细信息。
      */
-    InstanceDeniedActionSet: Array<InstanceDeniedActions>;
+    InstanceDeniedActionSet?: Array<InstanceDeniedActions>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1771,7 +1771,7 @@ export interface DescribeSnapshotsDeniedActionsResponse {
     /**
      * 快照操作限制列表详细信息。
      */
-    SnapshotDeniedActionSet: Array<SnapshotDeniedActions>;
+    SnapshotDeniedActionSet?: Array<SnapshotDeniedActions>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1825,7 +1825,7 @@ export interface DeleteDiskBackupsResponse {
  */
 export interface DeleteSnapshotsRequest {
     /**
-     * 要删除的快照 ID 列表，可通过 DescribeSnapshots 查询。
+     * 要删除的快照 ID 列表，可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a>查询。
      */
     SnapshotIds: Array<string>;
 }
@@ -1843,7 +1843,7 @@ export interface ModifyDisksRenewFlagResponse {
  */
 export interface ModifySnapshotAttributeRequest {
     /**
-     * 快照 ID, 可通过 DescribeSnapshots 查询。
+     * 快照 ID, 可通过 <a href="https://cloud.tencent.com/document/product/1207/54388">DescribeSnapshots</a> 查询。
      */
     SnapshotId: string;
     /**
@@ -3032,7 +3032,7 @@ export interface CreateDiskBackupResponse {
  */
 export interface DescribeSnapshotsDeniedActionsRequest {
     /**
-     * 快照 ID 列表, 可通过 DescribeSnapshots 查询。
+     * 快照 ID 列表, 可通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a> 查询。
      */
     SnapshotIds: Array<string>;
 }
@@ -3175,9 +3175,7 @@ export interface ResetInstancesPasswordRequest {
      */
     InstanceIds: Array<string>;
     /**
-     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
-  `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li>
-  `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：</br> `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字：0-9</br></li> <li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li></br> `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符</br> <li>小写字母：[a-z]</br></li> <li>大写字母：[A-Z]</br></li> <li>数字： 0-9</br></li> <li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</br></li> <li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。</li>
      */
     Password: string;
     /**
@@ -3474,7 +3472,7 @@ export interface ModifyFirewallRuleDescriptionResponse {
  */
 export interface DescribeDiskDiscountRequest {
     /**
-     * 云硬盘类型, 取值: "CLOUD_PREMIUM"。
+     * 云硬盘类型, 取值范围: CLOUD_PREMIUM: 高性能云硬盘，CLOUD_SSD: SSD云硬盘
      */
     DiskType: string;
     /**
@@ -4289,7 +4287,7 @@ export interface DescribeDiskBackupsDeniedActionsResponse {
     /**
      * 云硬盘备份点操作限制列表详细信息。
      */
-    DiskBackupDeniedActionSet: Array<DiskBackupDeniedActions>;
+    DiskBackupDeniedActionSet?: Array<DiskBackupDeniedActions>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

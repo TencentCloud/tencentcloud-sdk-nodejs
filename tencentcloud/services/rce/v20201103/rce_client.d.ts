@@ -1,16 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ManageMarketingRiskRequest, DescribeRiskTrendsRequest, DescribeRiskAssessmentRequest, DescribeRiskTrendsResponse, ManageMarketingRiskResponse, DescribeRiskAssessmentResponse } from "./rce_models";
+import { ManageMarketingRiskRequest, DescribeRiskAssessmentRequest, ManageMarketingRiskResponse, DescribeRiskAssessmentResponse } from "./rce_models";
 /**
  * rce client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 以图表形式展示三种请求状态的趋势变化
-     */
-    DescribeRiskTrends(req: DescribeRiskTrendsRequest, cb?: (error: string, rep: DescribeRiskTrendsResponse) => void): Promise<DescribeRiskTrendsResponse>;
     /**
      * 此接口用于查询风险评估结果
      */

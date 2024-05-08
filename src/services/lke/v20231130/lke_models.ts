@@ -1081,7 +1081,7 @@ export interface ParseDocRequest {
    */
   Name: string
   /**
-   * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf)
+   * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf), 该地址需要外网可以直接无状态访问
    */
   Url: string
   /**

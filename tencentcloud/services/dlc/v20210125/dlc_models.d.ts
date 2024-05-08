@@ -1658,6 +1658,10 @@ export interface CreateTasksRequest {
      * 计算引擎名称，不填任务提交到默认集群
      */
     DataEngineName?: string;
+    /**
+     * spark集群资源组名称
+     */
+    ResourceGroupName?: string;
 }
 /**
  * SuspendResumeDataEngine请求参数结构体
@@ -3770,6 +3774,16 @@ export interface DataEngineInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineNetworkId?: string;
+    /**
+     * 标准引擎关联的资源组个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineResourceGroupCount?: number;
+    /**
+     * 引擎当前使用量（Cu）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineResourceUsedCU?: number;
 }
 /**
  * LockMetaData返回参数结构体
@@ -4694,6 +4708,10 @@ export interface CreateTaskRequest {
      * 数据引擎名称，不填提交到默认集群
      */
     DataEngineName?: string;
+    /**
+     * 标准spark执行任务resourceGroupName
+     */
+    ResourceGroupName?: string;
 }
 /**
  * CreateTable请求参数结构体
@@ -4966,7 +4984,7 @@ export interface DatasourceConnectionInfo {
  */
 export interface DescribeDataEngineImageVersionsRequest {
     /**
-     * 引擎类型：SQL、SparkBatch
+     * 引擎类型：SQL、SparkBatch、StandardSpark、StandardPresto
      */
     EngineType: string;
 }
@@ -6759,6 +6777,10 @@ export interface DescribeTasksRequest {
      * 数据引擎名称，用于筛选
      */
     DataEngineName?: string;
+    /**
+     * spark引擎资源组名称
+     */
+    ResourceGroupName?: string;
 }
 /**
  * CreateSparkAppTask请求参数结构体
@@ -7625,6 +7647,16 @@ export interface TaskResponseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultFormat?: string;
+    /**
+     * 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineTypeDetail?: string;
+    /**
+     * spark引擎资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceGroupName?: string;
 }
 /**
  * DescribeStoreLocation返回参数结构体

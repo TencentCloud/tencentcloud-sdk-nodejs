@@ -22,6 +22,7 @@ import {
   WafRuleLimit,
   DescribeUserClbWafRegionsResponse,
   AddAntiFakeUrlRequest,
+  ModifyIpAccessControlRequest,
   DescribePeakValueResponse,
   ProductInfo,
   DescribeAntiLeakageItem,
@@ -49,7 +50,7 @@ import {
   FiltersItemNew,
   DeleteSpartaProtectionResponse,
   PiechartItem,
-  SwitchDomainRulesRequest,
+  DeleteHostResponse,
   ModifyApiAnalyzeStatusResponse,
   ModifyAttackWhiteRuleRequest,
   HostRecord,
@@ -68,6 +69,7 @@ import {
   PageInfo,
   DescribeCiphersDetailResponse,
   DescribeCustomRuleListRequest,
+  DeleteIpAccessControlV2Response,
   PostAttackDownloadTaskResponse,
   DescribeAttackWhiteRuleRequest,
   StrategyForAntiInfoLeak,
@@ -97,6 +99,7 @@ import {
   DeleteAttackDownloadRecordRequest,
   DescribeAntiFakeRulesRequest,
   DescribeVipInfoRequest,
+  ImportIpAccessControlRequest,
   DescribeFindDomainListResponse,
   DeleteSessionResponse,
   DescribeAccessIndexResponse,
@@ -127,7 +130,7 @@ import {
   CCRuleLists,
   PostAttackDownloadTaskRequest,
   ModifyAntiFakeUrlStatusRequest,
-  TLSCiphers,
+  DescribeCCRuleListRequest,
   ResponseCode,
   ModifyAccessPeriodResponse,
   ModifyAttackWhiteRuleResponse,
@@ -193,6 +196,7 @@ import {
   DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
   DeleteAttackDownloadRecordResponse,
+  CreateIpAccessControlRequest,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
   MiniPkg,
@@ -207,11 +211,12 @@ import {
   ModifyGenerateDealsResponse,
   UpsertSessionResponse,
   AccessLogItem,
-  DeleteHostResponse,
+  SwitchDomainRulesRequest,
   DeleteSessionRequest,
   SearchAttackLogRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
+  CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
   SessionItem,
   ModifyObjectRequest,
@@ -219,6 +224,7 @@ import {
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
   DescribeUserLevelResponse,
+  IpAccessControlParam,
   DescribeCustomRuleListResponse,
   GetInstanceQpsLimitRequest,
   SessionData,
@@ -258,6 +264,7 @@ import {
   ModifyApiAnalyzeStatusRequest,
   ModifyAntiInfoLeakRuleStatusResponse,
   ModifyAreaBanStatusResponse,
+  DeleteIpAccessControlV2Request,
   ModifyWafAutoDenyRulesRequest,
   DescribeAccessFastAnalysisResponse,
   ModifyDomainIpv6StatusResponse,
@@ -315,7 +322,7 @@ import {
   DeleteCustomWhiteRuleRequest,
   ModifyInstanceRenewFlagResponse,
   AddAttackWhiteRuleResponse,
-  ModifyDomainsCLSStatusRequest,
+  ImportIpAccessControlResponse,
   DescribeWafThreatenIntelligenceResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
@@ -343,7 +350,7 @@ import {
   GetAttackTotalCountResponse,
   DescribeDomainRulesResponse,
   CreateDealsResponse,
-  DescribeCCRuleListRequest,
+  TLSCiphers,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
@@ -361,8 +368,10 @@ import {
   FindAllDomainDetail,
   DeleteAntiInfoLeakRuleRequest,
   DescribeVipInfoResponse,
+  ModifyIpAccessControlResponse,
   DescribeRuleLimitRequest,
   ModifyDomainPostActionResponse,
+  ModifyDomainsCLSStatusRequest,
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
   DescribeDomainWhiteRulesResponse,
@@ -436,6 +445,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAttackTotalCountResponse) => void
   ): Promise<GetAttackTotalCountResponse> {
     return this.request("GetAttackTotalCount", req, cb)
+  }
+
+  /**
+   * 导入IP黑白名单
+   */
+  async ImportIpAccessControl(
+    req: ImportIpAccessControlRequest,
+    cb?: (error: string, rep: ImportIpAccessControlResponse) => void
+  ): Promise<ImportIpAccessControlResponse> {
+    return this.request("ImportIpAccessControl", req, cb)
   }
 
   /**
@@ -882,6 +901,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Waf IP黑白名单最新版本删除接口
+   */
+  async DeleteIpAccessControlV2(
+    req: DeleteIpAccessControlV2Request,
+    cb?: (error: string, rep: DeleteIpAccessControlV2Response) => void
+  ): Promise<DeleteIpAccessControlV2Response> {
+    return this.request("DeleteIpAccessControlV2", req, cb)
+  }
+
+  /**
    * 切换弹性的开关
    */
   async SwitchElasticMode(
@@ -1092,6 +1121,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Waf IP黑白名单编辑接口
+   */
+  async ModifyIpAccessControl(
+    req: ModifyIpAccessControlRequest,
+    cb?: (error: string, rep: ModifyIpAccessControlResponse) => void
+  ): Promise<ModifyIpAccessControlResponse> {
+    return this.request("ModifyIpAccessControl", req, cb)
+  }
+
+  /**
    * 获取防篡改url
    */
   async DescribeAntiFakeRules(
@@ -1151,6 +1190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAntiInfoLeakRulesResponse) => void
   ): Promise<ModifyAntiInfoLeakRulesResponse> {
     return this.request("ModifyAntiInfoLeakRules", req, cb)
+  }
+
+  /**
+   * Waf IP黑白名单新增接口
+   */
+  async CreateIpAccessControl(
+    req: CreateIpAccessControlRequest,
+    cb?: (error: string, rep: CreateIpAccessControlResponse) => void
+  ): Promise<CreateIpAccessControlResponse> {
+    return this.request("CreateIpAccessControl", req, cb)
   }
 
   /**

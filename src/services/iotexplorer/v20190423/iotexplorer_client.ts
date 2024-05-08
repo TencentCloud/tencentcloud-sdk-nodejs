@@ -42,9 +42,11 @@ import {
   BindDevicesRequest,
   DescribeDevicePackagesRequest,
   GetDeviceListResponse,
+  DismissRoomByStrRoomIdFromTRTCResponse,
   GenerateSignedVideoURLRequest,
   TopicRulePayload,
   DeleteLoRaFrequencyResponse,
+  DescribeGatewaySubDeviceListResponse,
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
   ModifyPositionFenceRequest,
@@ -56,8 +58,9 @@ import {
   TransferCloudStorageResponse,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
-  ProductDevicesPositionItem,
+  DeviceUser,
   GetProjectListResponse,
+  ModifyFenceBindResponse,
   DescribeDevicePositionListRequest,
   GetDeviceLocationHistoryResponse,
   UpdateFirmwareResponse,
@@ -69,11 +72,12 @@ import {
   DisableTopicRuleRequest,
   CreateBatchProductionRequest,
   DeletePositionFenceResponse,
-  ModifyLoRaFrequencyRequest,
+  DescribeCloudStorageAIServiceTaskRequest,
   FenceAlarmPoint,
   DescribeCloudStoragePackageConsumeDetailsResponse,
   DescribeCloudStoragePackageConsumeStatsResponse,
   PackageInfo,
+  UnbindDevicesResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
   DescribeCloudStorageUsersResponse,
   SearchTopicRuleRequest,
@@ -98,6 +102,7 @@ import {
   ModifyCloudStorageAIServiceResponse,
   GetTopicRuleListRequest,
   FenceBindDeviceItem,
+  GenerateCloudStorageAIServiceTaskFileURLResponse,
   DeviceDataHistoryItem,
   GetFamilyDeviceUserListResponse,
   BindDeviceInfo,
@@ -137,6 +142,7 @@ import {
   GetDeviceLocationHistoryRequest,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
+  TRTCParams,
   ReleaseStudioProductRequest,
   CreateProjectResponse,
   DescribeDeviceDataHistoryResponse,
@@ -198,6 +204,7 @@ import {
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   EnableTopicRuleRequest,
+  RemoveUserByRoomIdFromTRTCRequest,
   DescribeBindedProductsResponse,
   DeviceSignatureInfo,
   PositionSpaceInfo,
@@ -209,22 +216,23 @@ import {
   DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
+  DescribeCloudStorageAIServiceTaskResponse,
   DescribeCloudStorageEventsResponse,
   GetFamilyDeviceUserListRequest,
   DescribeBindedProductsRequest,
   CloudStorageEvent,
   DescribeCloudStorageDateResponse,
   DescribeInstanceResponse,
-  DescribeGatewaySubDeviceListResponse,
+  CreateTRTCSignaturesWithRoomIdRequest,
   TopicItem,
   DescribeSpaceFenceEventListRequest,
   GetLoRaGatewayListRequest,
   CloudStorageTimeInfo,
   FenceEventItem,
   DescribeProjectRequest,
-  UnbindDevicesResponse,
-  CreateIotVideoCloudStorageRequest,
   ModifyModelDefinitionResponse,
+  CreateIotVideoCloudStorageRequest,
+  DismissRoomByStrRoomIdFromTRTCRequest,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   UploadFirmwareResponse,
   DescribePackageConsumeTaskRequest,
@@ -253,6 +261,7 @@ import {
   ResetCloudStorageResponse,
   ResetCloudStorageEventResponse,
   GetProjectListRequest,
+  ModifyLoRaFrequencyRequest,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
   DescribeDeviceBindGatewayRequest,
@@ -260,7 +269,7 @@ import {
   EnableTopicRuleResponse,
   TransferCloudStorageRequest,
   GetGatewaySubDeviceListRequest,
-  SearchStudioProductRequest,
+  ProductDevicesPositionItem,
   ListTopicPolicyRequest,
   GenSingleDeviceSignatureOfPublicRequest,
   DeleteDevicesRequest,
@@ -298,14 +307,16 @@ import {
   DescribeCloudStorageOrderResponse,
   CreateTopicRuleRequest,
   PublishRRPCMessageResponse,
-  DeviceUser,
+  CreateTRTCSignaturesWithRoomIdResponse,
   DescribeDevicePackagesResponse,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   DeviceInfo,
-  ModifyFenceBindResponse,
+  GenerateCloudStorageAIServiceTaskFileURLRequest,
   DescribeInstanceRequest,
   InstanceDetail,
+  SearchStudioProductRequest,
+  RemoveUserByRoomIdFromTRTCResponse,
   DescribeLoRaFrequencyResponse,
   DescribeCloudStorageTimeRequest,
   GetBatchProductionsListResponse,
@@ -502,6 +513,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageThumbnailListResponse) => void
   ): Promise<DescribeCloudStorageThumbnailListResponse> {
     return this.request("DescribeCloudStorageThumbnailList", req, cb)
+  }
+
+  /**
+   * 创建TRTC通话参数
+   */
+  async CreateTRTCSignaturesWithRoomId(
+    req: CreateTRTCSignaturesWithRoomIdRequest,
+    cb?: (error: string, rep: CreateTRTCSignaturesWithRoomIdResponse) => void
+  ): Promise<CreateTRTCSignaturesWithRoomIdResponse> {
+    return this.request("CreateTRTCSignaturesWithRoomId", req, cb)
   }
 
   /**
@@ -785,13 +806,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取位置空间列表
+   * 查询指定的云存 AI 分析任务
    */
-  async GetPositionSpaceList(
-    req: GetPositionSpaceListRequest,
-    cb?: (error: string, rep: GetPositionSpaceListResponse) => void
-  ): Promise<GetPositionSpaceListResponse> {
-    return this.request("GetPositionSpaceList", req, cb)
+  async DescribeCloudStorageAIServiceTask(
+    req: DescribeCloudStorageAIServiceTaskRequest,
+    cb?: (error: string, rep: DescribeCloudStorageAIServiceTaskResponse) => void
+  ): Promise<DescribeCloudStorageAIServiceTaskResponse> {
+    return this.request("DescribeCloudStorageAIServiceTask", req, cb)
   }
 
   /**
@@ -935,6 +956,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取位置空间列表
+   */
+  async GetPositionSpaceList(
+    req: GetPositionSpaceListRequest,
+    cb?: (error: string, rep: GetPositionSpaceListResponse) => void
+  ): Promise<GetPositionSpaceListResponse> {
+    return this.request("GetPositionSpaceList", req, cb)
+  }
+
+  /**
    * 提供删除某个项目下产品的能力
    */
   async DeleteStudioProduct(
@@ -962,6 +993,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewayBindDevicesResponse) => void
   ): Promise<DescribeGatewayBindDevicesResponse> {
     return this.request("DescribeGatewayBindDevices", req, cb)
+  }
+
+  /**
+   * 解散TRTC房间
+   */
+  async DismissRoomByStrRoomIdFromTRTC(
+    req: DismissRoomByStrRoomIdFromTRTCRequest,
+    cb?: (error: string, rep: DismissRoomByStrRoomIdFromTRTCResponse) => void
+  ): Promise<DismissRoomByStrRoomIdFromTRTCResponse> {
+    return this.request("DismissRoomByStrRoomIdFromTRTC", req, cb)
   }
 
   /**
@@ -1075,6 +1116,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * TRTC操作，将用户从房间移出
+   */
+  async RemoveUserByRoomIdFromTRTC(
+    req: RemoveUserByRoomIdFromTRTCRequest,
+    cb?: (error: string, rep: RemoveUserByRoomIdFromTRTCResponse) => void
+  ): Promise<RemoveUserByRoomIdFromTRTCResponse> {
+    return this.request("RemoveUserByRoomIdFromTRTC", req, cb)
+  }
+
+  /**
    * 搜索位置空间
    */
   async SearchPositionSpace(
@@ -1085,13 +1136,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为用户提供新建项目的能力，用于集中管理产品和应用。
+   * 本接口（UpdateTopicPolicy）用于更新Topic信息
    */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
+  async ModifyTopicPolicy(
+    req: ModifyTopicPolicyRequest,
+    cb?: (error: string, rep: ModifyTopicPolicyResponse) => void
+  ): Promise<ModifyTopicPolicyResponse> {
+    return this.request("ModifyTopicPolicy", req, cb)
   }
 
   /**
@@ -1215,6 +1266,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取指定网关设备的子设备列表
+   */
+  async GetGatewaySubDeviceList(
+    req: GetGatewaySubDeviceListRequest,
+    cb?: (error: string, rep: GetGatewaySubDeviceListResponse) => void
+  ): Promise<GetGatewaySubDeviceListResponse> {
+    return this.request("GetGatewaySubDeviceList", req, cb)
+  }
+
+  /**
    * 获取量产详情信息。
    */
   async DescribeBatchProduction(
@@ -1245,23 +1306,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定网关设备的子设备列表
+   * 为用户提供新建项目的能力，用于集中管理产品和应用。
    */
-  async GetGatewaySubDeviceList(
-    req: GetGatewaySubDeviceListRequest,
-    cb?: (error: string, rep: GetGatewaySubDeviceListResponse) => void
-  ): Promise<GetGatewaySubDeviceListResponse> {
-    return this.request("GetGatewaySubDeviceList", req, cb)
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
   }
 
   /**
-   * 本接口（UpdateTopicPolicy）用于更新Topic信息
+   * 获取云存 AI 分析任务输出文件的下载地址
    */
-  async ModifyTopicPolicy(
-    req: ModifyTopicPolicyRequest,
-    cb?: (error: string, rep: ModifyTopicPolicyResponse) => void
-  ): Promise<ModifyTopicPolicyResponse> {
-    return this.request("ModifyTopicPolicy", req, cb)
+  async GenerateCloudStorageAIServiceTaskFileURL(
+    req: GenerateCloudStorageAIServiceTaskFileURLRequest,
+    cb?: (error: string, rep: GenerateCloudStorageAIServiceTaskFileURLResponse) => void
+  ): Promise<GenerateCloudStorageAIServiceTaskFileURLResponse> {
+    return this.request("GenerateCloudStorageAIServiceTaskFileURL", req, cb)
   }
 
   /**

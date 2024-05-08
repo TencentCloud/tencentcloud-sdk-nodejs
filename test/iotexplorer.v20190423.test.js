@@ -198,6 +198,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageThumbnailList", async function () 
     }
 })
 
+it("iotexplorer.v20190423.CreateTRTCSignaturesWithRoomId", async function () {
+    try {
+       const data = await client.CreateTRTCSignaturesWithRoomId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyFenceBind", async function () {
     try {
        const data = await client.ModifyFenceBind({})
@@ -478,9 +488,9 @@ it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageAIServiceTask", async function () {
     try {
-       const data = await client.GetPositionSpaceList({})
+       const data = await client.DescribeCloudStorageAIServiceTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +638,16 @@ it("iotexplorer.v20190423.UnbindProducts", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
+    try {
+       const data = await client.GetPositionSpaceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeleteStudioProduct", async function () {
     try {
        const data = await client.DeleteStudioProduct({})
@@ -651,6 +671,16 @@ it("iotexplorer.v20190423.DescribeDeviceData", async function () {
 it("iotexplorer.v20190423.DescribeGatewayBindDevices", async function () {
     try {
        const data = await client.DescribeGatewayBindDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DismissRoomByStrRoomIdFromTRTC", async function () {
+    try {
+       const data = await client.DismissRoomByStrRoomIdFromTRTC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +798,16 @@ it("iotexplorer.v20190423.BindProducts", async function () {
     }
 })
 
+it("iotexplorer.v20190423.RemoveUserByRoomIdFromTRTC", async function () {
+    try {
+       const data = await client.RemoveUserByRoomIdFromTRTC({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     try {
        const data = await client.SearchPositionSpace({})
@@ -778,9 +818,9 @@ it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     }
 })
 
-it("iotexplorer.v20190423.CreateProject", async function () {
+it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
     try {
-       const data = await client.CreateProject({})
+       const data = await client.ModifyTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,6 +948,16 @@ it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
+    try {
+       const data = await client.GetGatewaySubDeviceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     try {
        const data = await client.DescribeBatchProduction({})
@@ -938,9 +988,9 @@ it("iotexplorer.v20190423.DeleteDevices", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
+it("iotexplorer.v20190423.CreateProject", async function () {
     try {
-       const data = await client.GetGatewaySubDeviceList({})
+       const data = await client.CreateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,9 +998,9 @@ it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
+it("iotexplorer.v20190423.GenerateCloudStorageAIServiceTaskFileURL", async function () {
     try {
-       const data = await client.ModifyTopicPolicy({})
+       const data = await client.GenerateCloudStorageAIServiceTaskFileURL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

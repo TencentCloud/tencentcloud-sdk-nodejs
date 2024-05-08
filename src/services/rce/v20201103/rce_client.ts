@@ -18,27 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  OutputManageMarketingRisk,
-  WeChatAccountInfo,
   QQAccountInfo,
   ManageMarketingRiskRequest,
-  DescribeRiskTrendsRequest,
-  SponsorInfo,
   DescribeRiskAssessmentRequest,
   OnlineScamInfo,
   InputManageMarketingRisk,
-  InputFrontRisk,
-  OutputFrontRisk,
+  WeChatAccountInfo,
   OtherAccountInfo,
-  DescribeRiskTrendsResponse,
   AccountInfo,
   ManageMarketingRiskResponse,
   InputCryptoManageMarketingRisk,
   DescribeRiskAssessmentResponse,
-  OutputFrontRiskValue,
+  SponsorInfo,
   InputDetails,
   OutputManageMarketingRiskValue,
-  OutputFrontRiskData,
+  OutputManageMarketingRisk,
 } from "./rce_models"
 
 /**
@@ -48,16 +42,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("rce.tencentcloudapi.com", "2020-11-03", clientConfig)
-  }
-
-  /**
-   * 以图表形式展示三种请求状态的趋势变化
-   */
-  async DescribeRiskTrends(
-    req: DescribeRiskTrendsRequest,
-    cb?: (error: string, rep: DescribeRiskTrendsResponse) => void
-  ): Promise<DescribeRiskTrendsResponse> {
-    return this.request("DescribeRiskTrends", req, cb)
   }
 
   /**

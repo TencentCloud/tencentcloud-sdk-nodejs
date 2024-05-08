@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ImageMaskResponse, ImageToObjectRequest, ImageMaskAsyncGetResultResponse, ImageMaskAsyncRequest, TurnPDFToObjectAsyncRequest, TurnPDFToObjectAsyncResponse, TextToObjectResponse, TurnPDFToObjectResponse, TurnPDFToObjectAsyncGetResultResponse, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageMaskAsyncGetResultRequest, ImageMaskRequest, ImageToClassRequest, TurnPDFToObjectAsyncGetResultRequest, TextToClassRequest, TurnPDFToObjectRequest, ImageMaskAsyncResponse, ImageToObjectResponse } from "./mrs_models";
+import { ImageMaskResponse, ImageToObjectRequest, ImageMaskAsyncGetResultResponse, ImageMaskAsyncRequest, TurnPDFToObjectAsyncRequest, TurnPDFToObjectAsyncResponse, TextToObjectResponse, TurnPDFToObjectResponse, TurnPDFToObjectAsyncGetResultResponse, TextToObjectRequest, ImageToClassResponse, DrugInstructionObjectResponse, TextToClassResponse, ImageMaskAsyncGetResultRequest, ImageMaskRequest, DrugInstructionObjectRequest, ImageToClassRequest, TextToClassRequest, TurnPDFToObjectRequest, TurnPDFToObjectAsyncGetResultRequest, ImageMaskAsyncResponse, ImageToObjectResponse } from "./mrs_models";
 /**
  * mrs client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 图片分类
      */
     ImageToClass(req: ImageToClassRequest, cb?: (error: string, rep: ImageToClassResponse) => void): Promise<ImageToClassResponse>;
+    /**
+     * 药品说明书PDF文件结构化
+     */
+    DrugInstructionObject(req: DrugInstructionObjectRequest, cb?: (error: string, rep: DrugInstructionObjectResponse) => void): Promise<DrugInstructionObjectResponse>;
     /**
      * 体检报告PDF文件结构化异步获取结果接口
      */
