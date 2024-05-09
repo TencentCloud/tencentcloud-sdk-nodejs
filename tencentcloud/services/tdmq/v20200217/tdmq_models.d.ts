@@ -8191,41 +8191,41 @@ export interface Environment {
     /**
      * 命名空间名称
      */
-    EnvironmentId: string;
+    EnvironmentId?: string;
     /**
      * 说明
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 未消费消息过期时间，单位：秒，最大1296000（15天）
      */
-    MsgTTL: number;
+    MsgTTL?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近修改时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 命名空间ID
      */
-    NamespaceId: string;
+    NamespaceId?: string;
     /**
      * 命名空间名称
      */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
      * Topic数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicNum: number;
+    TopicNum?: number;
     /**
      * 消息保留策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetentionPolicy: RetentionPolicy;
+    RetentionPolicy?: RetentionPolicy;
     /**
      * 是否自动创建订阅
   注意：此字段可能返回 null，表示取不到有效值。

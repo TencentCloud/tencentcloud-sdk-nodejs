@@ -366,6 +366,7 @@ import {
   ModifySecurityPolicyResponse,
   ModifyOriginGroupRequest,
   SecurityTemplateBinding,
+  CacheTag,
   DescribeDefaultCertificatesResponse,
   OwnershipVerification,
   DescribeConfigGroupVersionsRequest,

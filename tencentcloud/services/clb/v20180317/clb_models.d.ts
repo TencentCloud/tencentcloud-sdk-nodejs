@@ -2253,7 +2253,7 @@ export interface HealthCheck {
      */
     HttpVersion?: string;
     /**
-     * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP），默认值：0
+     * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceIpType?: number;

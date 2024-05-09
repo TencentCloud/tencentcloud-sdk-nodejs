@@ -1125,7 +1125,7 @@ export interface DescribeGeneralApmApplicationConfigRequest {
    */
   ServiceName: string
   /**
-   * 实例Id
+   * 业务系统ID
    */
   InstanceId: string
 }

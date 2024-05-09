@@ -8601,6 +8601,11 @@ export interface ResourcePackage {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageType?: string;
+    /**
+     * 当前资源包绑定在当前实例下的抵扣优先级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeductionPriority?: number;
 }
 /**
  * DescribeBinlogSaveDays返回参数结构体

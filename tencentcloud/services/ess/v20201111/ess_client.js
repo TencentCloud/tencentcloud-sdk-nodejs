@@ -172,12 +172,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindEmployeeUserIdWithClientOpenId", req, cb);
     }
     /**
-     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
-
-注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     * 客户可以主动调用生成实名链接去做C端用户实名，会对实名的用户进行打标记为调用链接客户的用户
+使用场景：
+用户集成场景
+使用限制：
+此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估
      */
-    async RenewAutoSignLicense(req, cb) {
-        return this.request("RenewAutoSignLicense", req, cb);
+    async CreateUserVerifyUrl(req, cb) {
+        return this.request("CreateUserVerifyUrl", req, cb);
     }
     /**
      * 本接口（CreateEmbedWebUrl）用于创建嵌入Web的链接，支持以下类型的Web链接创建：
@@ -938,6 +940,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async DescribeThirdPartyAuthCode(req, cb) {
         return this.request("DescribeThirdPartyAuthCode", req, cb);
+    }
+    /**
+     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
+
+注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    async RenewAutoSignLicense(req, cb) {
+        return this.request("RenewAutoSignLicense", req, cb);
     }
     /**
      * 用来设置本企业嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），设置后获取的web签署界面都会使用此配置进行展示。

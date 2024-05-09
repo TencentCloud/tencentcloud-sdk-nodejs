@@ -161,6 +161,10 @@ export interface DescribeAssetViewVulRiskListResponse {
  */
 export interface DescribeOrganizationUserInfoRequest {
     /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
      * 过滤内容
      */
     Filter?: Filter;
@@ -796,12 +800,12 @@ export interface AlertInfo {
      */
     Victim?: RoleInfo;
     /**
-     * 证据数据(比如攻击内容等)
+     * 证据数据(例如攻击内容等)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EvidenceData?: string;
     /**
-     * 证据位置(比如协议端口)
+     * 证据位置(例如协议端口)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EvidenceLocation?: string;
@@ -1180,6 +1184,16 @@ export interface OrganizationUserInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TcMemberType?: number;
+    /**
+     * 子账号数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubUserCount?: number;
+    /**
+     * 加入方式详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinTypeInfo?: string;
 }
 /**
  * 安全中心资产标签
@@ -2072,6 +2086,16 @@ export interface DescribeOrganizationUserInfoResponse {
      */
     Data?: Array<OrganizationUserInfo>;
     /**
+     * 加入方式枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinTypeLst?: Array<FilterDataObject>;
+    /**
+     * 云厂商枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudTypeLst?: Array<FilterDataObject>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2790,6 +2814,11 @@ export interface DescribeCVMAssetsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetMapInstanceTypeList?: Array<AssetInstanceTypeMap>;
+    /**
+     * 公网内网枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicPrivateAttr?: Array<FilterDataObject>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5049,6 +5078,10 @@ export interface ScanTaskInfoList {
  */
 export interface DescribeDbAssetsRequest {
     /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
      * -
      */
     Filter?: Filter;
@@ -5646,6 +5679,11 @@ export interface DescribeDbAssetsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AppIdList?: Array<FilterDataObject>;
+    /**
+     * 公网内网枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicPrivateAttr?: Array<FilterDataObject>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

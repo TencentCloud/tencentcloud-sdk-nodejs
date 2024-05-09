@@ -15523,7 +15523,7 @@ export interface ExportBaselineItemListRequest {
 <li>ItemName - String - 是否必填：否 - 项名称</li>
 <li>DetectStatus - int - 是否必填：否 - 检测状态[0:未通过|3:通过|5:检测中]</li>
 <li>Level - int - 是否必填：否 - 风险等级</li>
-<li>StartTime - string - 是否必填：否 - 开时时间</li>
+<li>StartTime - string - 是否必填：否 - 开始时间</li>
 <li>EndTime - string - 是否必填：否 - 结束时间</li>
    */
   Filters?: Array<Filter>
@@ -19760,7 +19760,7 @@ export interface ExportFileTamperRulesRequest {
   /**
    * 过滤条件。
 <li>RuleCategory- string- 规则类别  0=系统规则，1=用户规则</li>
-<li>Name- String - 规则名称/li>
+<li>Name- String - 规则名称</li>
    */
   Filters?: Array<Filters>
 }
@@ -22360,6 +22360,11 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomItemValues?: Array<number | bigint>
+  /**
+   * 检测项所属分类
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryId?: number
 }
 
 /**
@@ -27881,7 +27886,7 @@ export interface DescribeBaselineListRequest {
  */
 export interface DescribePublicProxyInstallCommandRequest {
   /**
-   * nginx主机ip列表，逗号分隔
+   * nginx主机IP列表，逗号分隔
    */
   Ip?: string
 }
@@ -30089,12 +30094,12 @@ export interface DescribePublicProxyInstallCommandResponse {
   /**
    * Nginx安装命令
    */
-  NginxCommand: string
+  NginxCommand?: string
   /**
    * Keepalived安装命令
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeepAliveCommand: string
+  KeepAliveCommand?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

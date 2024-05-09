@@ -3476,7 +3476,7 @@ export interface DescribeDiskDiscountRequest {
      */
     DiskType: string;
     /**
-     * 云硬盘大小。
+     * 云硬盘大小, 单位: GB。
      */
     DiskSize: number;
     /**

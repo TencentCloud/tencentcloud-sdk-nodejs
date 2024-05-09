@@ -82,6 +82,7 @@ import {
   DeleteSealPoliciesRequest,
   CreateFlowGroupByTemplatesResponse,
   CancelFailureFlow,
+  CreateUserVerifyUrlResponse,
   DescribeBatchOrganizationRegistrationUrlsRequest,
   TemplateInfo,
   CreateDocumentResponse,
@@ -191,6 +192,7 @@ import {
   CreateOrganizationBatchSignUrlResponse,
   FileInfo,
   CreateBatchOrganizationRegistrationTasksRequest,
+  CreateUserVerifyUrlRequest,
   FailedCreateStaffData,
   CreateExtendedServiceAuthInfosResponse,
   SubOrgBillUsage,
@@ -471,15 +473,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
-
-注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     * 客户可以主动调用生成实名链接去做C端用户实名，会对实名的用户进行打标记为调用链接客户的用户
+使用场景：
+用户集成场景
+使用限制：
+此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估
      */
-  async RenewAutoSignLicense(
-    req: RenewAutoSignLicenseRequest,
-    cb?: (error: string, rep: RenewAutoSignLicenseResponse) => void
-  ): Promise<RenewAutoSignLicenseResponse> {
-    return this.request("RenewAutoSignLicense", req, cb)
+  async CreateUserVerifyUrl(
+    req: CreateUserVerifyUrlRequest,
+    cb?: (error: string, rep: CreateUserVerifyUrlResponse) => void
+  ): Promise<CreateUserVerifyUrlResponse> {
+    return this.request("CreateUserVerifyUrl", req, cb)
   }
 
   /**
@@ -1452,6 +1456,18 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
   ): Promise<DescribeThirdPartyAuthCodeResponse> {
     return this.request("DescribeThirdPartyAuthCode", req, cb)
+  }
+
+  /**
+     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
+
+注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+  async RenewAutoSignLicense(
+    req: RenewAutoSignLicenseRequest,
+    cb?: (error: string, rep: RenewAutoSignLicenseResponse) => void
+  ): Promise<RenewAutoSignLicenseResponse> {
+    return this.request("RenewAutoSignLicense", req, cb)
   }
 
   /**

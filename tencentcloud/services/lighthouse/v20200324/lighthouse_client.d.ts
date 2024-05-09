@@ -527,7 +527,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     InquirePriceRenewInstances(req: InquirePriceRenewInstancesRequest, cb?: (error: string, rep: InquirePriceRenewInstancesResponse) => void): Promise<InquirePriceRenewInstancesResponse>;
     /**
      * 本接口（DeleteSnapshots）用于删除快照。
-快照必须处于 NORMAL 状态，快照状态可以通过 DescribeSnapshots 接口查询，见输出参数中 SnapshotState 字段解释。
+快照必须处于 NORMAL 状态，快照状态可以通过 <a href="https://cloud.tencent.com/document/product/1207/54388" target="_blank">DescribeSnapshots</a> 接口查询，见输出参数中 SnapshotState 字段解释。
      */
     DeleteSnapshots(req: DeleteSnapshotsRequest, cb?: (error: string, rep: DeleteSnapshotsResponse) => void): Promise<DeleteSnapshotsResponse>;
     /**
