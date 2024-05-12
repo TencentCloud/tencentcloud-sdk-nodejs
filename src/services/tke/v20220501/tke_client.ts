@@ -20,30 +20,49 @@ import { ClientConfig } from "../../../common/interface"
 import {
   RuntimeConfig,
   Label,
+  CreateNodePoolResponse,
+  CreateNativeNodePoolParam,
   DescribeNodePoolsResponse,
-  Instance,
+  ExternalNodeInfo,
   DescribeClusterInstancesResponse,
+  AutoUpgradeOptions,
   AutoscalingAdded,
   SuperNodePoolInfo,
-  InternetAccessible,
+  NodeCountSummary,
   RegularNodePoolInfo,
   InstanceExtraArgs,
-  SuperNodeInfo,
+  MachineUpgradeSettings,
+  UpdateNativeNodePoolParam,
+  InstanceChargePrepaid,
+  DeleteNodePoolResponse,
+  Tag,
+  MachineSetScaling,
+  ModifyNodePoolRequest,
   Annotation,
   DescribeClusterInstancesRequest,
+  TagSpecification,
+  LifecycleConfig,
+  ModifyNodePoolResponse,
   Taint,
   Filter,
-  RegularNodeInfo,
+  ManagementConfig,
+  CreateNodePoolRequest,
   NativeNodePoolInfo,
   DescribeNodePoolsRequest,
   NodePool,
+  DeleteNodePoolRequest,
   InstanceAdvancedSettings,
-  ExternalNodeInfo,
-  NativeNodeInfo,
-  NodeCountSummary,
-  ManuallyAdded,
-  SortBy,
+  IntOrString,
   ExternalNodePoolInfo,
+  Instance,
+  NativeNodeInfo,
+  InternetAccessible,
+  SuperNodeInfo,
+  ManuallyAdded,
+  RegularNodeInfo,
+  SortBy,
+  Disk,
+  DataDisk,
 } from "./tke_models"
 
 /**
@@ -56,16 +75,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群下节点实例信息
-   */
-  async DescribeClusterInstances(
-    req: DescribeClusterInstancesRequest,
-    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
-  ): Promise<DescribeClusterInstancesResponse> {
-    return this.request("DescribeClusterInstances", req, cb)
-  }
-
-  /**
    * 查询 TKE 节点池列表
    */
   async DescribeNodePools(
@@ -73,5 +82,45 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNodePoolsResponse) => void
   ): Promise<DescribeNodePoolsResponse> {
     return this.request("DescribeNodePools", req, cb)
+  }
+
+  /**
+   * 创建 TKE 节点池
+   */
+  async CreateNodePool(
+    req: CreateNodePoolRequest,
+    cb?: (error: string, rep: CreateNodePoolResponse) => void
+  ): Promise<CreateNodePoolResponse> {
+    return this.request("CreateNodePool", req, cb)
+  }
+
+  /**
+   * 删除 TKE 节点池
+   */
+  async DeleteNodePool(
+    req: DeleteNodePoolRequest,
+    cb?: (error: string, rep: DeleteNodePoolResponse) => void
+  ): Promise<DeleteNodePoolResponse> {
+    return this.request("DeleteNodePool", req, cb)
+  }
+
+  /**
+   * 更新 TKE 节点池
+   */
+  async ModifyNodePool(
+    req: ModifyNodePoolRequest,
+    cb?: (error: string, rep: ModifyNodePoolResponse) => void
+  ): Promise<ModifyNodePoolResponse> {
+    return this.request("ModifyNodePool", req, cb)
+  }
+
+  /**
+   * 查询集群下节点实例信息
+   */
+  async DescribeClusterInstances(
+    req: DescribeClusterInstancesRequest,
+    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
+  ): Promise<DescribeClusterInstancesResponse> {
+    return this.request("DescribeClusterInstances", req, cb)
   }
 }

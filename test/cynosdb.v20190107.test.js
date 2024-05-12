@@ -278,6 +278,16 @@ it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
     }
 })
 
+it("cynosdb.v20190107.DeleteCLSDelivery", async function () {
+    try {
+       const data = await client.DeleteCLSDelivery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeChangedParamsAfterUpgrade", async function () {
     try {
        const data = await client.DescribeChangedParamsAfterUpgrade({})
@@ -341,6 +351,16 @@ it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
 it("cynosdb.v20190107.OfflineCluster", async function () {
     try {
        const data = await client.OfflineCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeInstanceErrorLogs", async function () {
+    try {
+       const data = await client.DescribeInstanceErrorLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,6 +828,16 @@ it("cynosdb.v20190107.ModifyInstanceParam", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeInstanceCLSLogDelivery", async function () {
+    try {
+       const data = await client.DescribeInstanceCLSLogDelivery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.BindClusterResourcePackages", async function () {
     try {
        const data = await client.BindClusterResourcePackages({})
@@ -968,6 +998,16 @@ it("cynosdb.v20190107.InquirePriceRenew", async function () {
     }
 })
 
+it("cynosdb.v20190107.StartCLSDelivery", async function () {
+    try {
+       const data = await client.StartCLSDelivery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
     try {
        const data = await client.ReloadBalanceProxyNode({})
@@ -991,6 +1031,16 @@ it("cynosdb.v20190107.SearchClusterDatabases", async function () {
 it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.StopCLSDelivery", async function () {
+    try {
+       const data = await client.StopCLSDelivery({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,9 +1268,9 @@ it("cynosdb.v20190107.ModifyDBInstanceSecurityGroups", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeInstanceErrorLogs", async function () {
+it("cynosdb.v20190107.CreateCLSDelivery", async function () {
     try {
-       const data = await client.DescribeInstanceErrorLogs({})
+       const data = await client.CreateCLSDelivery({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

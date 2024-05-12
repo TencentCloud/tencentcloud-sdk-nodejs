@@ -2553,7 +2553,7 @@ export interface StartPublishCdnStreamRequest {
    */
   RoomId: string
   /**
-   * 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整形房间号，1为字符串房间号。
+   * 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。
    */
   RoomIdType: number
   /**
@@ -2973,7 +2973,7 @@ export interface MixUserInfo {
    */
   RoomId?: string
   /**
-   * 房间号类型，0为整形房间号，1为字符串房间号。
+   * 房间号类型，0为整型房间号，1为字符串房间号。
    */
   RoomIdType?: number
 }

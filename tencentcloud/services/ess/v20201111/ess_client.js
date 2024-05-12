@@ -508,6 +508,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBatchOrganizationRegistrationTasks", req, cb);
     }
     /**
+     * 用于客户企业在调用生成[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)接口之前判断C端用户是否实名，如果已经实名，就不需要再次调用生成C端链接接口去实名
+注意：此接口仅会返回当前员工是否通过[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)所实名的员工是否实名，并不会返回个人用户自己在电子签进行实名的状况
+     */
+    async DescribeUserVerifyStatus(req, cb) {
+        return this.request("DescribeUserVerifyStatus", req, cb);
+    }
+    /**
      * 发起解除协议的主要应用场景为：基于一份已经签署的合同（签署流程），进行解除操作。
 解除协议的模板是官方提供 ，经过提供法务审核，暂不支持自定义。
 
@@ -517,7 +524,7 @@ class Client extends abstract_client_1.AbstractClient {
 <li>原合同个人类型参与人必须是解除协议的参与人，<code>不能更换其他第三方个人</code>参与解除协议。</li>
 <li>如果原合同企业参与人无法参与解除协议，可以指定同企业具有同等权限的<code>企业员工代为处理</code>。</li>
 <li>发起解除协议同发起其他企业合同一样，也会参与合同<code>扣费</code>，扣费标准同其他类型合同。</li>
-<li>在解除协议发起之后，原合同的状态将转变为解除中。一旦解除协议签署完毕，原合同及解除协议均变为已解除状态。</li>
+<li>在解除协议签署完毕后，原合同及解除协议均变为已解除状态。</li>
 <li>非原合同企业参与人发起解除协议时，需要有<code>解除合同的权限</code>。</li>
 </ul>
      */
@@ -1096,7 +1103,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
 <tr>
 <td>普通saas员工</td>
 <td>将Employees中的DisplayName设置员工的名字，Mobile设置成员工的手机号</td>
-<td>发送短信通知员工（短信中带有认证加入企业的链接）   ![image]() </td>
+<td>发送短信通知员工（短信中带有认证加入企业的链接）  </td>
 </tr>
 <tr>
 <td>企微员工</td>

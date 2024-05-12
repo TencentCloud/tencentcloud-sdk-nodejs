@@ -380,6 +380,11 @@ export interface MsgRecord {
    */
   Content?: string
   /**
+   * 当前记录所对应的 Session ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
    * 记录ID
    */
   RecordId?: string
@@ -416,6 +421,11 @@ export interface MsgRecord {
    */
   CanRating?: boolean
   /**
+   * 是否展示反馈按钮
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanFeedback?: boolean
+  /**
    * 记录类型
    */
   Type?: number
@@ -440,6 +450,21 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TokenStat?: TokenStat
+  /**
+   * 回复方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplyMethod?: number
+  /**
+   * 选项卡, 用于多轮对话
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionCards?: Array<string>
+  /**
+   * 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlow?: TaskFlowInfo
 }
 
 /**
@@ -1241,6 +1266,41 @@ export interface ModifyQARequest {
    * 有效结束时间，unix时间戳，0代表永久有效
    */
   ExpireEnd?: string
+}
+
+/**
+ * 任务流程信息
+ */
+export interface TaskFlowInfo {
+  /**
+   * 任务流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlowId?: string
+  /**
+   * 任务流程名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlowName?: string
+  /**
+   * Query 重写结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryRewrite?: string
+  /**
+   * 命中意图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HitIntent?: string
+  /**
+   * 任务流程回复类型
+0: 任务流回复
+1: 任务流静默
+2: 任务流拉回话术
+3: 任务流自定义回复
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
 }
 
 /**

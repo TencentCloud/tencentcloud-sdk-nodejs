@@ -1372,6 +1372,27 @@ export interface DeleteLiveTranscodeTemplateRequest {
     TemplateId: number;
 }
 /**
+ * StopLivePadProcessor请求参数结构体
+ */
+export interface StopLivePadProcessorRequest {
+    /**
+     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+     */
+    AppName: string;
+    /**
+     * 您的推流域名。
+     */
+    PushDomainName: string;
+    /**
+     * 流名称。
+     */
+    StreamName: string;
+    /**
+     * 操作人备注信息。
+     */
+    Operator?: string;
+}
+/**
  * StopRecordTask返回参数结构体
  */
 export interface StopRecordTaskResponse {
@@ -1427,9 +1448,14 @@ export interface DescribeLivePullStreamTaskStatusResponse {
     RequestId?: string;
 }
 /**
- * ModifyLiveStreamMonitor返回参数结构体
+ * DescribeLivePadProcessorList返回参数结构体
  */
-export interface ModifyLiveStreamMonitorResponse {
+export interface DescribeLivePadProcessorListResponse {
+    /**
+     * 当前正在拉取垫片的流名称列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamNameList?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6415,6 +6441,19 @@ export interface CertInfo {
  */
 export declare type DescribeLiveCallbackRulesRequest = null;
 /**
+ * DescribeLivePadProcessorList请求参数结构体
+ */
+export interface DescribeLivePadProcessorListRequest {
+    /**
+     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+     */
+    AppName: string;
+    /**
+     * 您的推流域名。
+     */
+    PushDomainName: string;
+}
+/**
  * DescribeConcurrentRecordStreamNum请求参数结构体
  */
 export interface DescribeConcurrentRecordStreamNumRequest {
@@ -6497,6 +6536,20 @@ export interface CreateLiveRecordTemplateResponse {
      * 模板Id。
      */
     TemplateId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * StopLivePadProcessor返回参数结构体
+ */
+export interface StopLivePadProcessorResponse {
+    /**
+     * 处理结果信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultMessage?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8560,6 +8613,15 @@ export interface LiveStreamMonitorNotifyPolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CallbackUrl?: string;
+}
+/**
+ * ModifyLiveStreamMonitor返回参数结构体
+ */
+export interface ModifyLiveStreamMonitorResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 直播监播任务信息。

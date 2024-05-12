@@ -8596,7 +8596,7 @@ export interface AutoStrategy {
      */
     ExpandThreshold: number;
     /**
-     * 自动扩容观测周期，单位s，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。
+     * 自动扩容观测周期，单位是分钟，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。
      */
     ExpandPeriod: number;
     /**
@@ -8604,7 +8604,7 @@ export interface AutoStrategy {
      */
     ShrinkThreshold: number;
     /**
-     * 自动缩容观测周期，单位s，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。
+     * 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。
      */
     ShrinkPeriod: number;
 }

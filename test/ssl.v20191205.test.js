@@ -88,9 +88,9 @@ it("ssl.v20191205.DeleteManager", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeHostVodInstanceList", async function () {
+it("ssl.v20191205.DescribeDownloadCertificateUrl", async function () {
     try {
-       const data = await client.DescribeHostVodInstanceList({})
+       const data = await client.DescribeDownloadCertificateUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +281,16 @@ it("ssl.v20191205.DescribeCompanies", async function () {
 it("ssl.v20191205.DescribeCertificateDetail", async function () {
     try {
        const data = await client.DescribeCertificateDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeHostVodInstanceList", async function () {
+    try {
+       const data = await client.DescribeHostVodInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -210,10 +210,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScreenshotTask", req, cb);
     }
     /**
-     * 该接口用来查询直播流监播任务配置的列表信息。
+     * 获取录制模板列表。
      */
-    async DescribeLiveStreamMonitorList(req, cb) {
-        return this.request("DescribeLiveStreamMonitorList", req, cb);
+    async DescribeLiveRecordTemplates(req, cb) {
+        return this.request("DescribeLiveRecordTemplates", req, cb);
     }
     /**
      * 验证用户是否拥有特定直播域名。
@@ -742,6 +742,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeScreenshotTask", req, cb);
     }
     /**
+     * 使用该接口查询垫片流。垫片流状态更新存在一定延迟，可间隔30秒以上查询，避免频繁查询该接口。
+     */
+    async DescribeLivePadProcessorList(req, cb) {
+        return this.request("DescribeLivePadProcessorList", req, cb);
+    }
+    /**
      * 直播推流带宽和流量数据查询。
 推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
      */
@@ -900,10 +906,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DeleteLiveRecord", req, cb);
     }
     /**
-     * 获取录制模板列表。
+     * 该接口用来查询直播流监播任务配置的列表信息。
      */
-    async DescribeLiveRecordTemplates(req, cb) {
-        return this.request("DescribeLiveRecordTemplates", req, cb);
+    async DescribeLiveStreamMonitorList(req, cb) {
+        return this.request("DescribeLiveStreamMonitorList", req, cb);
     }
     /**
      * 创建截图规则，需要先调用[CreateLiveSnapshotTemplate](/document/product/267/32624)接口创建截图模板，然后将返回的模板 ID 绑定到流进行使用。
@@ -1046,6 +1052,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async CancelCommonMixStream(req, cb) {
         return this.request("CancelCommonMixStream", req, cb);
+    }
+    /**
+     * 使用该接口停止垫片流。
+     */
+    async StopLivePadProcessor(req, cb) {
+        return this.request("StopLivePadProcessor", req, cb);
     }
     /**
      * 查询用户套餐包总量、使用量、剩余量、包状态、购买时间和过期时间等。

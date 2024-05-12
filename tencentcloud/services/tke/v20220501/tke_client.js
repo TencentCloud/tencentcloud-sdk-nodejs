@@ -28,16 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2022-05-01", clientConfig);
     }
     /**
-     * 查询集群下节点实例信息
-     */
-    async DescribeClusterInstances(req, cb) {
-        return this.request("DescribeClusterInstances", req, cb);
-    }
-    /**
      * 查询 TKE 节点池列表
      */
     async DescribeNodePools(req, cb) {
         return this.request("DescribeNodePools", req, cb);
+    }
+    /**
+     * 创建 TKE 节点池
+     */
+    async CreateNodePool(req, cb) {
+        return this.request("CreateNodePool", req, cb);
+    }
+    /**
+     * 删除 TKE 节点池
+     */
+    async DeleteNodePool(req, cb) {
+        return this.request("DeleteNodePool", req, cb);
+    }
+    /**
+     * 更新 TKE 节点池
+     */
+    async ModifyNodePool(req, cb) {
+        return this.request("ModifyNodePool", req, cb);
+    }
+    /**
+     * 查询集群下节点实例信息
+     */
+    async DescribeClusterInstances(req, cb) {
+        return this.request("DescribeClusterInstances", req, cb);
     }
 }
 exports.Client = Client;

@@ -18,9 +18,9 @@ const client = new tencentcloud.tke.v20220501.Client({
 })
 describe("tke.v20220501.test.js", function () {
 
-it("tke.v20220501.DescribeClusterInstances", async function () {
+it("tke.v20220501.DescribeNodePools", async function () {
     try {
-       const data = await client.DescribeClusterInstances({})
+       const data = await client.DescribeNodePools({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,39 @@ it("tke.v20220501.DescribeClusterInstances", async function () {
     }
 })
 
-it("tke.v20220501.DescribeNodePools", async function () {
+it("tke.v20220501.CreateNodePool", async function () {
     try {
-       const data = await client.DescribeNodePools({})
+       const data = await client.CreateNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.DeleteNodePool", async function () {
+    try {
+       const data = await client.DeleteNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.ModifyNodePool", async function () {
+    try {
+       const data = await client.ModifyNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.DescribeClusterInstances", async function () {
+    try {
+       const data = await client.DescribeClusterInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

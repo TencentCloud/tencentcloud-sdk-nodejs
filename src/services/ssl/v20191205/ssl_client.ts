@@ -101,6 +101,7 @@ import {
   DescribeCertificatesResponse,
   CommitCertificateInformationResponse,
   DeleteManagerResponse,
+  SubmitAuditManagerRequest,
   UploadCertificateResponse,
   DeployCertificateInstanceResponse,
   LiveInstanceDetail,
@@ -126,7 +127,7 @@ import {
   TkeSecretDetail,
   DescribeHostDeployRecordResponse,
   Tags,
-  SubmitAuditManagerRequest,
+  DescribeDownloadCertificateUrlResponse,
   DescribeHostTkeInstanceListRequest,
   DeployCertificateRecordRollbackRequest,
   DeleteCertificateResponse,
@@ -149,6 +150,7 @@ import {
   DescribeHostApiGatewayInstanceListRequest,
   TCBAccessService,
   DdosInstanceList,
+  DescribeDownloadCertificateUrlRequest,
   SubmittedData,
   DeployCertificateRecordRollbackResponse,
   TCBInstanceList,
@@ -283,13 +285,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询证书Vod云资源部署实例列表
+   * 获取下载证书链接
    */
-  async DescribeHostVodInstanceList(
-    req: DescribeHostVodInstanceListRequest,
-    cb?: (error: string, rep: DescribeHostVodInstanceListResponse) => void
-  ): Promise<DescribeHostVodInstanceListResponse> {
-    return this.request("DescribeHostVodInstanceList", req, cb)
+  async DescribeDownloadCertificateUrl(
+    req: DescribeDownloadCertificateUrlRequest,
+    cb?: (error: string, rep: DescribeDownloadCertificateUrlResponse) => void
+  ): Promise<DescribeDownloadCertificateUrlResponse> {
+    return this.request("DescribeDownloadCertificateUrl", req, cb)
   }
 
   /**
@@ -480,6 +482,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificateDetailResponse) => void
   ): Promise<DescribeCertificateDetailResponse> {
     return this.request("DescribeCertificateDetail", req, cb)
+  }
+
+  /**
+   * 查询证书Vod云资源部署实例列表
+   */
+  async DescribeHostVodInstanceList(
+    req: DescribeHostVodInstanceListRequest,
+    cb?: (error: string, rep: DescribeHostVodInstanceListResponse) => void
+  ): Promise<DescribeHostVodInstanceListResponse> {
+    return this.request("DescribeHostVodInstanceList", req, cb)
   }
 
   /**

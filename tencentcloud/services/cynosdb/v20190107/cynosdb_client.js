@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportInstanceSlowQueries", req, cb);
     }
     /**
+     * 删除日志投递
+     */
+    async DeleteCLSDelivery(req, cb) {
+        return this.request("DeleteCLSDelivery", req, cb);
+    }
+    /**
      * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比
      */
     async DescribeChangedParamsAfterUpgrade(req, cb) {
@@ -224,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OfflineCluster(req, cb) {
         return this.request("OfflineCluster", req, cb);
+    }
+    /**
+     * 查询实例错误日志列表
+     */
+    async DescribeInstanceErrorLogs(req, cb) {
+        return this.request("DescribeInstanceErrorLogs", req, cb);
     }
     /**
      * 修改集群名称
@@ -502,6 +514,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceParam", req, cb);
     }
     /**
+     * 查询实例日志投递信息
+     */
+    async DescribeInstanceCLSLogDelivery(req, cb) {
+        return this.request("DescribeInstanceCLSLogDelivery", req, cb);
+    }
+    /**
      * 为集群绑定资源包
      */
     async BindClusterResourcePackages(req, cb) {
@@ -598,6 +616,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenew", req, cb);
     }
     /**
+     * 开启日志投递
+     */
+    async StartCLSDelivery(req, cb) {
+        return this.request("StartCLSDelivery", req, cb);
+    }
+    /**
      * 负载均衡数据库代理
      */
     async ReloadBalanceProxyNode(req, cb) {
@@ -614,6 +638,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAuditRuleTemplates(req, cb) {
         return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
+     * 停止日志投递
+     */
+    async StopCLSDelivery(req, cb) {
+        return this.request("StopCLSDelivery", req, cb);
     }
     /**
      * 查询备份文件列表
@@ -748,10 +778,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 查询实例错误日志列表
+     * 创建日志投递
      */
-    async DescribeInstanceErrorLogs(req, cb) {
-        return this.request("DescribeInstanceErrorLogs", req, cb);
+    async CreateCLSDelivery(req, cb) {
+        return this.request("CreateCLSDelivery", req, cb);
     }
     /**
      * 此接口（ModifyBinlogSaveDays）用于修改集群Binlog保留天数。

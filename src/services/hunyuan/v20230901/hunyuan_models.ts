@@ -20,7 +20,7 @@
  */
 export interface ChatCompletionsRequest {
   /**
-   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-pro。
+   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro。
 各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。
 
 注意：
@@ -116,6 +116,16 @@ export interface GetEmbeddingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryHunyuanImageJob请求参数结构体
+ */
+export interface QueryHunyuanImageJobRequest {
+  /**
+   * 任务 ID。
+   */
+  JobId: string
 }
 
 /**
@@ -220,6 +230,20 @@ export interface ChatProResponse {
 }
 
 /**
+ * SubmitHunyuanImageJob返回参数结构体
+ */
+export interface SubmitHunyuanImageJobResponse {
+  /**
+   * 任务 ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 返回的回复, 支持多个
  */
 export interface Choice {
@@ -312,6 +336,50 @@ export interface EmbeddingData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Object?: string
+}
+
+/**
+ * QueryHunyuanImageJob返回参数结构体
+ */
+export interface QueryHunyuanImageJobResponse {
+  /**
+   * 当前任务状态码：
+1：等待中、2：运行中、4：处理失败、5：处理完成。
+   */
+  JobStatusCode?: string
+  /**
+   * 当前任务状态：排队中、处理中、处理失败或者处理完成。
+
+   */
+  JobStatusMsg?: string
+  /**
+   * 任务处理失败错误码。
+
+   */
+  JobErrorCode?: string
+  /**
+   * 任务处理失败错误信息。
+
+   */
+  JobErrorMsg?: string
+  /**
+   * 生成图 URL 列表，有效期1小时，请及时保存。
+
+   */
+  ResultImage?: Array<string>
+  /**
+   * 结果 detail 数组，Success 代表成功。
+
+   */
+  ResultDetails?: Array<string>
+  /**
+   * 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。
+   */
+  RevisedPrompt?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -472,4 +540,40 @@ export interface ChatStdRequest {
 当选择流式输出审核时，可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。
    */
   StreamModeration?: boolean
+}
+
+/**
+ * SubmitHunyuanImageJob请求参数结构体
+ */
+export interface SubmitHunyuanImageJobRequest {
+  /**
+   * 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。
+   */
+  Prompt: string
+  /**
+   * 绘画风格。
+请在 [混元生图风格列表](https://cloud.tencent.com/document/product/1729/105846) 中选择期望的风格，传入风格编号。
+不传默认不指定风格。
+   */
+  Style?: string
+  /**
+   * 生成图分辨率。
+支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。
+   */
+  Resolution?: string
+  /**
+   * 为生成结果图添加显式水印标识的开关，默认为1。  
+1：添加。  
+0：不添加。  
+其他数值：默认按1处理。  
+建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
+   */
+  LogoAdd?: number
+  /**
+   * prompt 扩写开关。1为开启，0为关闭，不传默认开启。
+开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。
+如果关闭扩写，将直接使用原始输入的 prompt 生成图片。
+建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。
+   */
+  Revise?: number
 }

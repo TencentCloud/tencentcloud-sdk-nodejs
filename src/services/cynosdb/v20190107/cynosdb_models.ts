@@ -34,6 +34,16 @@ export interface UpgradeProxyVersionResponse {
 }
 
 /**
+ * DescribeInstanceCLSLogDelivery返回参数结构体
+ */
+export interface DescribeInstanceCLSLogDeliveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMaintainPeriodConfig请求参数结构体
  */
 export interface ModifyMaintainPeriodConfigRequest {
@@ -516,6 +526,11 @@ export interface UserHostPrivilege {
    */
   DbPrivilege: string
 }
+
+/**
+ * StopCLSDelivery请求参数结构体
+ */
+export type StopCLSDeliveryRequest = null
 
 /**
  * DescribeClusters请求参数结构体
@@ -1542,6 +1557,16 @@ export interface ModifyAccountPrivilegesRequest {
 }
 
 /**
+ * StartCLSDelivery返回参数结构体
+ */
+export interface StartCLSDeliveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 参数变化信息
  */
 export interface ParamItemInfo {
@@ -1679,6 +1704,21 @@ export interface DescribeZonesResponse {
    * 地域信息
    */
   RegionSet?: Array<SaleRegion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchClusterTables返回参数结构体
+ */
+export interface SearchClusterTablesResponse {
+  /**
+   * 数据表列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<DatabaseTables>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2116,6 +2156,21 @@ export interface DescribeAccountAllGrantPrivilegesRequest {
    * 账号信息
    */
   Account: InputAccount
+}
+
+/**
+ * DeleteCLSDelivery请求参数结构体
+ */
+export type DeleteCLSDeliveryRequest = null
+
+/**
+ * CreateCLSDelivery返回参数结构体
+ */
+export interface CreateCLSDeliveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3047,6 +3102,16 @@ export interface RuleTemplateInfo {
 }
 
 /**
+ * StopCLSDelivery返回参数结构体
+ */
+export interface StopCLSDeliveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAuditLogFile返回参数结构体
  */
 export interface CreateAuditLogFileResponse {
@@ -3962,6 +4027,11 @@ export interface SwitchProxyVpcResponse {
    */
   RequestId?: string
 }
+
+/**
+ * StartCLSDelivery请求参数结构体
+ */
+export type StartCLSDeliveryRequest = null
 
 /**
  * 可用区属性项
@@ -6918,19 +6988,9 @@ export interface CreateBackupRequest {
 }
 
 /**
- * SearchClusterTables返回参数结构体
+ * CreateCLSDelivery请求参数结构体
  */
-export interface SearchClusterTablesResponse {
-  /**
-   * 数据表列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tables?: Array<DatabaseTables>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type CreateCLSDeliveryRequest = null
 
 /**
  * DescribeMaintainPeriod返回参数结构体
@@ -9035,6 +9095,11 @@ export interface ModifyAccountDescriptionRequest {
 }
 
 /**
+ * DescribeInstanceCLSLogDelivery请求参数结构体
+ */
+export type DescribeInstanceCLSLogDeliveryRequest = null
+
+/**
  * UpgradeInstance返回参数结构体
  */
 export interface UpgradeInstanceResponse {
@@ -9721,6 +9786,16 @@ export interface ZoneStockInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZoneStockInfos?: Array<SlaveZoneStockInfo>
+}
+
+/**
+ * DeleteCLSDelivery返回参数结构体
+ */
+export interface DeleteCLSDeliveryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

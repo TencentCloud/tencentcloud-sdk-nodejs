@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteManager", req, cb);
     }
     /**
-     * 查询证书Vod云资源部署实例列表
+     * 获取下载证书链接
      */
-    async DescribeHostVodInstanceList(req, cb) {
-        return this.request("DescribeHostVodInstanceList", req, cb);
+    async DescribeDownloadCertificateUrl(req, cb) {
+        return this.request("DescribeDownloadCertificateUrl", req, cb);
     }
     /**
      * 证书部署到云资源实例列表
@@ -188,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCertificateDetail(req, cb) {
         return this.request("DescribeCertificateDetail", req, cb);
+    }
+    /**
+     * 查询证书Vod云资源部署实例列表
+     */
+    async DescribeHostVodInstanceList(req, cb) {
+        return this.request("DescribeHostVodInstanceList", req, cb);
     }
     /**
      * 查询证书live云资源部署实例列表

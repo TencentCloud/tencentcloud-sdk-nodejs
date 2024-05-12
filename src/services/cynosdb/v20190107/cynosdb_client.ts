@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpgradeProxyVersionResponse,
+  DescribeInstanceCLSLogDeliveryResponse,
   ModifyMaintainPeriodConfigRequest,
   BizTaskModifyInstanceParam,
   ModifyClusterStorageRequest,
@@ -39,6 +40,7 @@ import {
   ModifyInstanceUpgradeLimitDaysResponse,
   DatabaseTables,
   UserHostPrivilege,
+  StopCLSDeliveryRequest,
   DescribeClustersRequest,
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
@@ -67,12 +69,14 @@ import {
   AuditRuleTemplateInfo,
   DescribeParamTemplateDetailRequest,
   ModifyAccountPrivilegesRequest,
+  StartCLSDeliveryResponse,
   ParamItemInfo,
   UpgradeProxyResponse,
   DescribeInstanceSpecsRequest,
   DescribeProxyNodesResponse,
   ProxyNodeInfo,
   DescribeZonesResponse,
+  SearchClusterTablesResponse,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
   DescribeChangedParamsAfterUpgradeResponse,
@@ -96,6 +100,8 @@ import {
   DescribeClusterParamsRequest,
   ModifyAccountHostResponse,
   DescribeAccountAllGrantPrivilegesRequest,
+  DeleteCLSDeliveryRequest,
+  CreateCLSDeliveryResponse,
   ManualBackupData,
   DescribeBinlogsRequest,
   InstanceAuditLogFilter,
@@ -138,6 +144,7 @@ import {
   DescribeZonesRequest,
   Tag,
   RuleTemplateInfo,
+  StopCLSDeliveryResponse,
   CreateAuditLogFileResponse,
   PauseServerlessResponse,
   DescribeInstanceDetailResponse,
@@ -168,6 +175,7 @@ import {
   ResumeServerlessResponse,
   SaleZone,
   SwitchProxyVpcResponse,
+  StartCLSDeliveryRequest,
   SlaveZoneAttrItem,
   DescribeChangedParamsAfterUpgradeRequest,
   SwitchProxyVpcRequest,
@@ -276,7 +284,7 @@ import {
   DescribeFlowRequest,
   OpenReadOnlyInstanceExclusiveAccessRequest,
   CreateBackupRequest,
-  SearchClusterTablesResponse,
+  CreateCLSDeliveryRequest,
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
   DescribeResourcePackageDetailRequest,
@@ -360,6 +368,7 @@ import {
   BillingResourceInfo,
   ModifyProxyRwSplitResponse,
   ModifyAccountDescriptionRequest,
+  DescribeInstanceCLSLogDeliveryRequest,
   UpgradeInstanceResponse,
   CreateAuditRuleTemplateResponse,
   DescribeResourcePackageListRequest,
@@ -387,6 +396,7 @@ import {
   DeleteAuditRuleTemplatesResponse,
   PolicyRule,
   ZoneStockInfo,
+  DeleteCLSDeliveryResponse,
   InquirePriceRenewResponse,
   ModifyAuditRuleTemplatesResponse,
 } from "./cynosdb_models"
@@ -661,6 +671,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除日志投递
+   */
+  async DeleteCLSDelivery(
+    req?: DeleteCLSDeliveryRequest,
+    cb?: (error: string, rep: DeleteCLSDeliveryResponse) => void
+  ): Promise<DeleteCLSDeliveryResponse> {
+    return this.request("DeleteCLSDelivery", req, cb)
+  }
+
+  /**
    * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比
    */
   async DescribeChangedParamsAfterUpgrade(
@@ -728,6 +748,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OfflineClusterResponse) => void
   ): Promise<OfflineClusterResponse> {
     return this.request("OfflineCluster", req, cb)
+  }
+
+  /**
+   * 查询实例错误日志列表
+   */
+  async DescribeInstanceErrorLogs(
+    req: DescribeInstanceErrorLogsRequest,
+    cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void
+  ): Promise<DescribeInstanceErrorLogsResponse> {
+    return this.request("DescribeInstanceErrorLogs", req, cb)
   }
 
   /**
@@ -1191,6 +1221,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例日志投递信息
+   */
+  async DescribeInstanceCLSLogDelivery(
+    req?: DescribeInstanceCLSLogDeliveryRequest,
+    cb?: (error: string, rep: DescribeInstanceCLSLogDeliveryResponse) => void
+  ): Promise<DescribeInstanceCLSLogDeliveryResponse> {
+    return this.request("DescribeInstanceCLSLogDelivery", req, cb)
+  }
+
+  /**
    * 为集群绑定资源包
    */
   async BindClusterResourcePackages(
@@ -1351,6 +1391,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启日志投递
+   */
+  async StartCLSDelivery(
+    req?: StartCLSDeliveryRequest,
+    cb?: (error: string, rep: StartCLSDeliveryResponse) => void
+  ): Promise<StartCLSDeliveryResponse> {
+    return this.request("StartCLSDelivery", req, cb)
+  }
+
+  /**
    * 负载均衡数据库代理
    */
   async ReloadBalanceProxyNode(
@@ -1378,6 +1428,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
   ): Promise<ModifyAuditRuleTemplatesResponse> {
     return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
+   * 停止日志投递
+   */
+  async StopCLSDelivery(
+    req?: StopCLSDeliveryRequest,
+    cb?: (error: string, rep: StopCLSDeliveryResponse) => void
+  ): Promise<StopCLSDeliveryResponse> {
+    return this.request("StopCLSDelivery", req, cb)
   }
 
   /**
@@ -1601,13 +1661,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例错误日志列表
+   * 创建日志投递
    */
-  async DescribeInstanceErrorLogs(
-    req: DescribeInstanceErrorLogsRequest,
-    cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void
-  ): Promise<DescribeInstanceErrorLogsResponse> {
-    return this.request("DescribeInstanceErrorLogs", req, cb)
+  async CreateCLSDelivery(
+    req?: CreateCLSDeliveryRequest,
+    cb?: (error: string, rep: CreateCLSDeliveryResponse) => void
+  ): Promise<CreateCLSDeliveryResponse> {
+    return this.request("CreateCLSDelivery", req, cb)
   }
 
   /**

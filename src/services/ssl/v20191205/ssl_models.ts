@@ -2636,6 +2636,16 @@ export interface DeleteManagerResponse {
 }
 
 /**
+ * SubmitAuditManager请求参数结构体
+ */
+export interface SubmitAuditManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+}
+
+/**
  * UploadCertificate返回参数结构体
  */
 export interface UploadCertificateResponse {
@@ -3489,13 +3499,21 @@ export interface Tags {
 }
 
 /**
- * SubmitAuditManager请求参数结构体
+ * DescribeDownloadCertificateUrl返回参数结构体
  */
-export interface SubmitAuditManagerRequest {
+export interface DescribeDownloadCertificateUrlResponse {
   /**
-   * 管理人ID
+   * 下载链接
    */
-  ManagerId: number
+  DownloadCertificateUrl: string
+  /**
+   * 下载文件的名称
+   */
+  DownloadFilename: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3916,6 +3934,20 @@ export interface DdosInstanceList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<DdosInstanceDetail>
+}
+
+/**
+ * DescribeDownloadCertificateUrl请求参数结构体
+ */
+export interface DescribeDownloadCertificateUrlRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+  /**
+   * 下载的服务类型: nginx tomcat apache iis jks other root
+   */
+  ServiceType?: string
 }
 
 /**
