@@ -45,7 +45,6 @@ import {
   StopTrainingJobRequest,
   UpdateNotebookInstanceResponse,
   ClsConfig,
-  UpdateNotebookLifecycleScriptRequest,
   UpdateNotebookInstanceRequest,
   CreatePresignedNotebookInstanceUrlRequest,
   CreateNotebookLifecycleScriptRequest,
@@ -77,7 +76,6 @@ import {
   VpcConfig,
   CreateNotebookLifecycleScriptResponse,
   CreatePresignedNotebookInstanceUrlResponse,
-  UpdateNotebookLifecycleScriptResponse,
   DescribeTrainingJobsRequest,
   StartNotebookInstanceRequest,
   CreateCodeRepositoryResponse,
@@ -164,16 +162,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCodeRepositoryResponse) => void
   ): Promise<CreateCodeRepositoryResponse> {
     return this.request("CreateCodeRepository", req, cb)
-  }
-
-  /**
-   * 更新notebook生命周期脚本
-   */
-  async UpdateNotebookLifecycleScript(
-    req: UpdateNotebookLifecycleScriptRequest,
-    cb?: (error: string, rep: UpdateNotebookLifecycleScriptResponse) => void
-  ): Promise<UpdateNotebookLifecycleScriptResponse> {
-    return this.request("UpdateNotebookLifecycleScript", req, cb)
   }
 
   /**

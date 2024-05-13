@@ -262,13 +262,14 @@ export interface TextArithmetic {
  */
 export interface HKIDCardOCRRequest {
   /**
-   * 是否鉴伪。
-   */
-  DetectFake: boolean
-  /**
    * 是否返回人像照片。
    */
   ReturnHeadImage: boolean
+  /**
+   * 是否鉴伪。
+   * @deprecated
+   */
+  DetectFake?: boolean
   /**
    * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
@@ -3317,6 +3318,16 @@ export interface RecognizeThaiIDCardOCRResponse {
    */
   PortraitImage?: string
   /**
+   * 告警码
+-9101 证件边框不完整告警
+-9102 证件复印件告警
+-9103 证件翻拍告警
+-9107 证件反光告警
+-9108 证件模糊告警
+-9109 告警能力未开通
+   */
+  WarnCardInfos?: Array<number | bigint>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3727,6 +3738,7 @@ export interface HKIDCardOCRResponse {
 1：假；
 2：真。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   FakeDetectResult?: number
   /**
@@ -3738,8 +3750,19 @@ export interface HKIDCardOCRResponse {
    * 多重告警码，当身份证是翻拍、复印件时返回对应告警码。
 -9102：证照复印件告警
 -9103：证照翻拍告警
+   * @deprecated
    */
   WarningCode?: Array<number | bigint>
+  /**
+   * 告警码
+-9101 证件边框不完整告警
+-9102 证件复印件告警
+-9103 证件翻拍告警
+-9107 证件反光告警
+-9108 证件模糊告警
+-9109 告警能力未开通
+   */
+  WarnCardInfos?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5728,6 +5751,16 @@ export interface RecognizeIndonesiaIDCardOCRResponse {
    */
   Kota?: string
   /**
+   * 告警码
+-9101 证件边框不完整告警
+-9102 证件复印件告警
+-9103 证件翻拍告警
+-9107 证件反光告警
+-9108 证件模糊告警
+-9109 告警能力未开通
+   */
+  WarnCardInfos?: Array<number | bigint>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6697,7 +6730,7 @@ export interface RideHailingDriverLicenseOCRRequest {
  */
 export interface Encryption {
   /**
-   * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。
+   * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CiphertextBlob: string
@@ -9765,31 +9798,32 @@ export interface MLIDCardOCRResponse {
   /**
    * 身份证号
    */
-  ID: string
+  ID?: string
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
   /**
    * 地址
    */
-  Address: string
+  Address?: string
   /**
    * 性别
    */
-  Sex: string
+  Sex?: string
   /**
    * 告警码
 -9103	证照翻拍告警
 -9102	证照复印件告警
 -9106       证件遮挡告警
 -9107       模糊图片告警
+   * @deprecated
    */
-  Warn: Array<number | bigint>
+  Warn?: Array<number | bigint>
   /**
    * 证件图片
    */
-  Image: string
+  Image?: string
   /**
    * 此字段为扩展字段。
 返回字段识别结果的置信度，格式如下
@@ -9799,7 +9833,7 @@ export interface MLIDCardOCRResponse {
   }
 }
    */
-  AdvancedInfo: string
+  AdvancedInfo?: string
   /**
    * 证件类型
 MyKad  身份证
@@ -9810,11 +9844,21 @@ POLIS  警察证
 IKAD   劳工证
 MyKid 儿童卡
    */
-  Type: string
+  Type?: string
   /**
    * 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证）
    */
-  Birthday: string
+  Birthday?: string
+  /**
+   * 告警码
+-9101 证件边框不完整告警
+-9102 证件复印件告警
+-9103 证件翻拍告警
+-9107 证件反光告警
+-9108 证件模糊告警
+-9109 告警能力未开通
+   */
+  WarnCardInfos?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

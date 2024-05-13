@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { StopTrainingJobResponse, CreateNotebookInstanceRequest, DescribeNotebookSummaryRequest, DescribeNotebookInstanceRequest, DeleteNotebookInstanceResponse, DeleteNotebookLifecycleScriptResponse, DescribeNotebookLifecycleScriptsRequest, DeleteCodeRepositoryRequest, DescribeCodeRepositoryResponse, StartNotebookInstanceResponse, UpdateCodeRepositoryResponse, CreateNotebookInstanceResponse, StopTrainingJobRequest, UpdateNotebookInstanceResponse, UpdateNotebookLifecycleScriptRequest, UpdateNotebookInstanceRequest, CreatePresignedNotebookInstanceUrlRequest, CreateNotebookLifecycleScriptRequest, CreateCodeRepositoryRequest, DescribeNotebookInstancesRequest, DescribeTrainingJobsResponse, DescribeCodeRepositoriesResponse, DescribeNotebookInstancesResponse, DescribeCodeRepositoryRequest, CreateTrainingJobResponse, DescribeNotebookInstanceResponse, DescribeTrainingJobRequest, DescribeNotebookLifecycleScriptsResponse, DescribeNotebookSummaryResponse, StopNotebookInstanceRequest, DeleteNotebookLifecycleScriptRequest, DescribeNotebookLifecycleScriptResponse, DescribeTrainingJobResponse, StopNotebookInstanceResponse, UpdateCodeRepositoryRequest, CreateTrainingJobRequest, DeleteNotebookInstanceRequest, DescribeNotebookLifecycleScriptRequest, CreateNotebookLifecycleScriptResponse, CreatePresignedNotebookInstanceUrlResponse, UpdateNotebookLifecycleScriptResponse, DescribeTrainingJobsRequest, StartNotebookInstanceRequest, CreateCodeRepositoryResponse, DescribeCodeRepositoriesRequest, DeleteCodeRepositoryResponse } from "./tione_models";
+import { StopTrainingJobResponse, CreateNotebookInstanceRequest, DescribeNotebookSummaryRequest, DescribeNotebookInstanceRequest, DeleteNotebookInstanceResponse, DeleteNotebookLifecycleScriptResponse, DescribeNotebookLifecycleScriptsRequest, DeleteCodeRepositoryRequest, DescribeCodeRepositoryResponse, StartNotebookInstanceResponse, UpdateCodeRepositoryResponse, CreateNotebookInstanceResponse, StopTrainingJobRequest, UpdateNotebookInstanceResponse, UpdateNotebookInstanceRequest, CreatePresignedNotebookInstanceUrlRequest, CreateNotebookLifecycleScriptRequest, CreateCodeRepositoryRequest, DescribeNotebookInstancesRequest, DescribeTrainingJobsResponse, DescribeCodeRepositoriesResponse, DescribeNotebookInstancesResponse, DescribeCodeRepositoryRequest, CreateTrainingJobResponse, DescribeNotebookInstanceResponse, DescribeTrainingJobRequest, DescribeNotebookLifecycleScriptsResponse, DescribeNotebookSummaryResponse, StopNotebookInstanceRequest, DeleteNotebookLifecycleScriptRequest, DescribeNotebookLifecycleScriptResponse, DescribeTrainingJobResponse, StopNotebookInstanceResponse, UpdateCodeRepositoryRequest, CreateTrainingJobRequest, DeleteNotebookInstanceRequest, DescribeNotebookLifecycleScriptRequest, CreateNotebookLifecycleScriptResponse, CreatePresignedNotebookInstanceUrlResponse, DescribeTrainingJobsRequest, StartNotebookInstanceRequest, CreateCodeRepositoryResponse, DescribeCodeRepositoriesRequest, DeleteCodeRepositoryResponse } from "./tione_models";
 /**
  * tione client
  * @class
@@ -35,10 +35,6 @@ export declare class Client extends AbstractClient {
      * 创建存储库
      */
     CreateCodeRepository(req: CreateCodeRepositoryRequest, cb?: (error: string, rep: CreateCodeRepositoryResponse) => void): Promise<CreateCodeRepositoryResponse>;
-    /**
-     * 更新notebook生命周期脚本
-     */
-    UpdateNotebookLifecycleScript(req: UpdateNotebookLifecycleScriptRequest, cb?: (error: string, rep: UpdateNotebookLifecycleScriptResponse) => void): Promise<UpdateNotebookLifecycleScriptResponse>;
     /**
      * 查询训练任务
      */

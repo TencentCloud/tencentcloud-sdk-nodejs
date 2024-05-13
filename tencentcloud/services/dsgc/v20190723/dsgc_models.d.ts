@@ -454,23 +454,23 @@ export interface DSPACosMetaDataInfo {
     /**
      * COS桶名
      */
-    Bucket: string;
+    Bucket?: string;
     /**
      * COS桶创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 1 -- 有效，0 -- 无效，资源可能已被删除。
      */
-    Valid: number;
+    Valid?: number;
     /**
      * DSPA为COS资源生成的资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * COS资源所处的地域
      */
-    ResourceRegion: string;
+    ResourceRegion?: string;
     /**
      * COS桶绑定状态
      */
@@ -832,46 +832,46 @@ export interface DspaCOSDiscoveryTask {
     /**
      * 任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 任务描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 执行周期，0单次 1每天 2每周 3每月
      */
-    Period: number;
+    Period?: number;
     /**
      * 执行计划，0立即 1定时
      */
-    Plan: number;
+    Plan?: number;
     /**
      * 任务开关；1 打开，0 关闭
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 数据源对象信息
      */
-    DataSourceInfo: DspaCOSDiscoveryTaskDataSourceInfo;
+    DataSourceInfo?: DspaCOSDiscoveryTaskDataSourceInfo;
     /**
      * 通用规则集开关，0 关闭，1 启用
      */
-    GeneralRuleSetEnable: number;
+    GeneralRuleSetEnable?: number;
     /**
      * 任务最新的一次执行结果信息，该字段用于查询任务列表接口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: ScanTaskResult;
+    Result?: ScanTaskResult;
     /**
      * 定时开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimingStartTime: string;
+    TimingStartTime?: string;
     /**
      * 关联分类模板是否更新
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceUpdate: boolean;
+    ComplianceUpdate?: boolean;
 }
 /**
  * COS敏感数据识别规则
@@ -1573,49 +1573,49 @@ export interface DspaDiscoveryTaskDetail {
     /**
      * 任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 任务描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 执行周期，0单次 1每天 2每周 3每月
      */
-    Period: number;
+    Period?: number;
     /**
      * 执行计划，0立即 1定时
      */
-    Plan: number;
+    Plan?: number;
     /**
      * 任务开关；1 打开，0 关闭
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 元数据对象信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSourceInfo: DspaDiscoveryTaskDataSource;
+    DataSourceInfo?: DspaDiscoveryTaskDataSource;
     /**
      * 通用规则集开关，0 关闭，1 启用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GeneralRuleSetEnable: number;
+    GeneralRuleSetEnable?: number;
     /**
      * 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefaultComplianceInfo: Array<ScanTaskComplianceInfo>;
+    DefaultComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 该任务中用户选择的合规组信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomComplianceInfo: Array<ScanTaskComplianceInfo>;
+    CustomComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 定时开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimingStartTime: string;
+    TimingStartTime?: string;
 }
 /**
  * DeleteDSPAMetaResource返回参数结构体
@@ -1641,11 +1641,11 @@ export interface DescribeAssetDetailDataExportResultResponse {
     /**
      * 导出结果
      */
-    ExportResult: string;
+    ExportResult?: string;
     /**
      * 导出文件地址
      */
-    ExportFileUrl: string;
+    ExportFileUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1688,7 +1688,7 @@ export interface DspaDiscoveryTaskDataSource {
      */
     ResourceRegion?: string;
     /**
-     * 无
+     * 数据源类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
@@ -1922,57 +1922,57 @@ export interface DspaDiscoveryTaskResultDetail {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 扫描结果详情ID
      */
-    FieldResultId: number;
+    FieldResultId?: number;
     /**
      * 所属数据表名
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 字段名
      */
-    FieldName: string;
+    FieldName?: string;
     /**
      * 敏感数据分类ID
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 敏感数据分类名称
      */
-    CategoryName: string;
+    CategoryName?: string;
     /**
      * 敏感数据分级ID
      */
-    LevelId: number;
+    LevelId?: number;
     /**
      * 敏感数据分级名称
      */
-    LevelName: string;
+    LevelName?: string;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 规则ID
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 敏感数据分级分数
      */
-    LevelRiskScore: number;
+    LevelRiskScore?: number;
     /**
      * 保护措施
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SafeGuard: DspaSafeGuard;
+    SafeGuard?: DspaSafeGuard;
     /**
      * 分类路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryFullPath: string;
+    CategoryFullPath?: string;
 }
 /**
  * DescribeLeafClassification请求参数结构体
@@ -2490,12 +2490,12 @@ export interface AuthorizeDSPAMetaResourcesResponse {
     /**
      * DSPA实例ID。
      */
-    DspaId: string;
+    DspaId?: string;
     /**
      * 授权结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results: Array<DspaTaskResult>;
+    Results?: Array<DspaTaskResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3913,7 +3913,7 @@ export interface DescribeDSPACategoryTreeResponse {
      * 分类树json
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultJson: string;
+    ResultJson?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4347,12 +4347,12 @@ export interface AccountRisk {
      * id（可不参考）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 风险账户
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskAccount: string;
+    RiskAccount?: string;
 }
 /**
  * DescribeDSPACategoryTreeWithRules返回参数结构体
@@ -4814,12 +4814,12 @@ export interface DSPAMetaType {
      * 元数据类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetaType: string;
+    MetaType?: string;
     /**
      * 支持的此元数据类型的地域列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Regions: Array<string>;
+    Regions?: Array<string>;
     /**
      * 此元数据类型支持的授权类型：
   account    -- 账户名密码授权，账户的最高只读权限需要由用户自行赋予；
@@ -4827,7 +4827,7 @@ export interface DSPAMetaType {
   如果此列表为空，表明此类资源不支持以上的授权机制，无法通过后台进行授权。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportedAuthTypes: Array<string>;
+    SupportedAuthTypes?: Array<string>;
 }
 /**
  * ModifyStandardInfo请求参数结构体
@@ -4927,19 +4927,19 @@ export interface DspaTaskResult {
     /**
      * 任务结果。
      */
-    Result: string;
+    Result?: string;
     /**
      * 结果描述。
      */
-    ResultDescription: string;
+    ResultDescription?: string;
     /**
      * 资源ID。
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源类型。
      */
-    MetaType: string;
+    MetaType?: string;
 }
 /**
  * DescribeRuleList请求参数结构体
@@ -5396,46 +5396,46 @@ export interface DspaCOSDiscoveryTaskDetail {
     /**
      * 任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 任务描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 执行周期，0单次 1每天 2每周 3每月
      */
-    Period: number;
+    Period?: number;
     /**
      * 执行计划，0立即 1定时
      */
-    Plan: number;
+    Plan?: number;
     /**
      * 任务开关；1 打开，0 关闭
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 数据源对象信息
      */
-    DataSourceInfo: DspaCOSDiscoveryTaskDataSourceInfo;
+    DataSourceInfo?: DspaCOSDiscoveryTaskDataSourceInfo;
     /**
      * 通用规则集开关，0 关闭，1 启用
      */
-    GeneralRuleSetEnable: number;
+    GeneralRuleSetEnable?: number;
     /**
      * 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefaultComplianceInfo: Array<ScanTaskComplianceInfo>;
+    DefaultComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 该任务中用户选择的合规组信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomComplianceInfo: Array<ScanTaskComplianceInfo>;
+    CustomComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 定时开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimingStartTime: string;
+    TimingStartTime?: string;
 }
 /**
  * DescribeSensitiveCOSDataDistribution返回参数结构体
@@ -8388,12 +8388,12 @@ export interface DescribeDSPACOSDiscoveryTaskResultResponse {
      * 扫描任务结果项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaCOSDiscoveryTaskResult>;
+    Items?: Array<DspaCOSDiscoveryTaskResult>;
     /**
      * 符合条件的数据结果数目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8767,12 +8767,12 @@ export interface DisableDSPAMetaResourceAuthResponse {
     /**
      * DSPA实例ID。
      */
-    DspaId: string;
+    DspaId?: string;
     /**
      * 授权结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results: Array<DspaTaskResult>;
+    Results?: Array<DspaTaskResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

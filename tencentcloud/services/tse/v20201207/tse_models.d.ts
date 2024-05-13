@@ -4460,6 +4460,11 @@ export interface NativeGatewayServerGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetIds?: string;
+    /**
+     * 分组默认权重
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultWeight?: number;
 }
 /**
  * DeleteCloudNativeAPIGatewayServiceRateLimit返回参数结构体
@@ -4604,11 +4609,11 @@ export interface CloudNativeAPIGatewayNode {
     /**
      * 云原生网关节点 id
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * 节点 ip
      */
-    NodeIp: string;
+    NodeIp?: string;
     /**
      * Zone id
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4634,6 +4639,16 @@ export interface CloudNativeAPIGatewayNode {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
+    /**
+     * 节点权重
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Weight?: number;
+    /**
+     * 是否默认权重
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsDefaultWeight?: boolean;
 }
 /**
  * UpdateCloudNativeAPIGatewaySpec返回参数结构体

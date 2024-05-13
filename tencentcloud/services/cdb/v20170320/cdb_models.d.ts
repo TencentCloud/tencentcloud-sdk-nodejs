@@ -231,6 +231,13 @@ export interface CreateCdbProxyRequest {
     UniqSubnetId: string;
     /**
      * 节点规格配置
+  备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。
+  示例中参数说明：
+  NodeCount：节点个数。
+  Region：节点地域。
+  Zone：节点可用区。
+  Cpu：单个代理节点核数（单位：核）。
+  Mem：单个代理节点内存数（单位：MB）。
      */
     ProxyNodeCustom: Array<ProxyNodeCustom>;
     /**
@@ -243,6 +250,7 @@ export interface CreateCdbProxyRequest {
     Desc?: string;
     /**
      * 连接池阈值
+  注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。
      */
     ConnectionPoolLimit?: number;
     /**
@@ -1637,6 +1645,7 @@ export interface UpgradeDBInstanceRequest {
     WaitSwitch?: number;
     /**
      * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+  备注：如您要将三节点降级至双节点，将该参数设置为空值即可实现。
      */
     BackupZone?: string;
     /**
@@ -4634,7 +4643,8 @@ export interface CreateDBInstanceRequest {
      */
     DeviceType?: string;
     /**
-     * 参数模板id。
+     * 参数模板 id。
+  备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。
      */
     ParamTemplateId?: number;
     /**
@@ -4659,6 +4669,7 @@ export interface CreateDBInstanceRequest {
     CageId?: string;
     /**
      * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
+  备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。
      */
     ParamTemplateType?: string;
     /**
@@ -5227,6 +5238,7 @@ export interface ModifyCdbProxyParamRequest {
     ProxyGroupId: string;
     /**
      * 连接池阈值
+  注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。
      */
     ConnectionPoolLimit: number;
 }
@@ -6018,7 +6030,7 @@ export interface AdjustCdbProxyResponse {
      * 异步任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7794,6 +7806,13 @@ export interface AdjustCdbProxyRequest {
     ProxyGroupId: string;
     /**
      * 节点规格配置
+  备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。
+  示例中参数说明：
+  NodeCount：节点个数
+  Region：节点地域
+  Zone：节点可用区
+  Cpu：单个代理节点核数（单位：核）
+  Mem：单个代理节点内存数（单位：MB）
      */
     ProxyNodeCustom: Array<ProxyNodeCustom>;
     /**
@@ -8184,7 +8203,8 @@ export interface CreateDBInstanceHourRequest {
      */
     DeviceType?: string;
     /**
-     * 参数模板id。
+     * 参数模板 id。
+  备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。
      */
     ParamTemplateId?: number;
     /**
@@ -8209,6 +8229,7 @@ export interface CreateDBInstanceHourRequest {
     CageId?: string;
     /**
      * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。
+  备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。
      */
     ParamTemplateType?: string;
     /**

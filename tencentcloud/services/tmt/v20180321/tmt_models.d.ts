@@ -69,26 +69,26 @@ export interface GetFileTranslateData {
     /**
      * 任务ID
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 文件数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileData: string;
+    FileData?: string;
     /**
      * 错误提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 翻译进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Progress: number;
+    Progress?: number;
 }
 /**
  * SpeechTranslate返回参数结构体

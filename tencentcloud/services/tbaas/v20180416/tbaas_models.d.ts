@@ -803,42 +803,42 @@ export interface ChainMakerTransactionResult {
     /**
      * 交易结果码
      */
-    Code: number;
+    Code?: number;
     /**
      * 交易结果码含义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CodeMessage: string;
+    CodeMessage?: string;
     /**
      * 交易ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TxId: string;
+    TxId?: string;
     /**
      * Gas使用量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GasUsed: number;
+    GasUsed?: number;
     /**
      * 区块高度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BlockHeight: number;
+    BlockHeight?: number;
     /**
      * 合约执行结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContractEvent: string;
+    ContractEvent?: string;
     /**
      * 合约返回信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 交易时间，单位是秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timestamp: number;
+    Timestamp?: number;
 }
 /**
  * GetLatestTransactionList请求参数结构体
@@ -1015,32 +1015,32 @@ export interface ChainMakerContractResult {
     /**
      * 交易结果码
      */
-    Code: number;
+    Code?: number;
     /**
      * 交易结果码含义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CodeMessage: string;
+    CodeMessage?: string;
     /**
      * 交易ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TxId: string;
+    TxId?: string;
     /**
      * Gas使用量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GasUsed: number;
+    GasUsed?: number;
     /**
      * 合约返回消息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 合约函数返回，base64编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
 }
 /**
  * GetClusterSummary请求参数结构体

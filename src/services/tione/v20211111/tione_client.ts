@@ -92,6 +92,7 @@ import {
   DataPoint,
   TagFilter,
   TJCallInfo,
+  CBSConfig,
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,

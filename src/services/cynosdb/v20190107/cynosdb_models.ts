@@ -38,6 +38,16 @@ export interface UpgradeProxyVersionResponse {
  */
 export interface DescribeInstanceCLSLogDeliveryResponse {
   /**
+   * 总数量
+
+   */
+  TotalCount?: number
+  /**
+   * 实例投递信息
+
+   */
+  InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -530,7 +540,16 @@ export interface UserHostPrivilege {
 /**
  * StopCLSDelivery请求参数结构体
  */
-export type StopCLSDeliveryRequest = null
+export interface StopCLSDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 日志主题id
+   */
+  CLSTopicIds: Array<string>
+}
 
 /**
  * DescribeClusters请求参数结构体
@@ -1561,6 +1580,10 @@ export interface ModifyAccountPrivilegesRequest {
  */
 export interface StartCLSDeliveryResponse {
   /**
+   * 异步任务id
+   */
+  TaskId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1872,13 +1895,195 @@ export interface InquirePriceCreateResponse {
 }
 
 /**
- * CreateClusterDatabase返回参数结构体
+ * CreateClusters请求参数结构体
  */
-export interface CreateClusterDatabaseResponse {
+export interface CreateClustersRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 可用区
    */
-  RequestId?: string
+  Zone: string
+  /**
+   * 所属VPC网络ID
+   */
+  VpcId: string
+  /**
+   * 所属子网ID
+   */
+  SubnetId: string
+  /**
+   * 数据库类型，取值范围: 
+<li> MYSQL </li>
+   */
+  DbType: string
+  /**
+   * 数据库版本，取值范围: 
+<li> MYSQL可选值：5.7，8.0 </li>
+   */
+  DbVersion: string
+  /**
+   * 所属项目ID
+   */
+  ProjectId?: number
+  /**
+   * 当DbMode为NORMAL或不填时必选
+普通实例Cpu核数
+   */
+  Cpu?: number
+  /**
+   * 当DbMode为NORMAL或不填时必选
+普通实例内存,单位GB
+   */
+  Memory?: number
+  /**
+   * 该参数无实际意义，已废弃。
+存储大小，单位GB。
+   */
+  Storage?: number
+  /**
+   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+   */
+  ClusterName?: string
+  /**
+   * 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种)
+   */
+  AdminPassword?: string
+  /**
+   * 端口，默认3306，取值范围[0, 65535)
+   */
+  Port?: number
+  /**
+   * 计费模式，按量计费：0，包年包月：1。默认按量计费。
+   */
+  PayMode?: number
+  /**
+   * 购买集群数，可选值范围[1,50]，默认为1
+   */
+  Count?: number
+  /**
+   * 回档类型：
+noneRollback：不回档；
+snapRollback，快照回档；
+timeRollback，时间点回档
+   */
+  RollbackStrategy?: string
+  /**
+   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+   */
+  RollbackId?: number
+  /**
+   * 回档时，传入源集群ID，用于查找源poolId
+   */
+  OriginalClusterId?: string
+  /**
+   * 时间点回档，指定时间；快照回档，快照时间
+   */
+  ExpectTime?: string
+  /**
+   * 该参数无实际意义，已废弃。
+时间点回档，指定时间允许范围
+   */
+  ExpectTimeThresh?: number
+  /**
+   * 普通实例存储上限，单位GB
+当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
+   */
+  StorageLimit?: number
+  /**
+   * 实例数量，数量范围为(0,16]
+   */
+  InstanceCount?: number
+  /**
+   * 包年包月购买时长
+   */
+  TimeSpan?: number
+  /**
+   * 包年包月购买时长单位，['s','d','m','y']
+   */
+  TimeUnit?: string
+  /**
+   * 包年包月购买是否自动续费，默认为0。
+0标识默认续费方式，1表示自动续费，2表示手不自动续费。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 是否自动选择代金券 1是 0否 默认为0
+   */
+  AutoVoucher?: number
+  /**
+   * 实例数量（该参数已不再使用，只做存量兼容处理）
+   */
+  HaCount?: number
+  /**
+   * 订单来源
+   */
+  OrderSource?: string
+  /**
+   * 集群创建需要绑定的tag数组信息
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * Db类型
+当DbType为MYSQL时可选(默认NORMAL)：
+<li>NORMAL</li>
+<li>SERVERLESS</li>
+   */
+  DbMode?: string
+  /**
+   * 当DbMode为SERVERLESS时必填
+cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MinCpu?: number
+  /**
+   * 当DbMode为SERVERLESS时必填：
+cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MaxCpu?: number
+  /**
+   * 当DbMode为SERVERLESS时，指定集群是否自动暂停，可选范围
+<li>yes</li>
+<li>no</li>
+默认值:yes
+   */
+  AutoPause?: string
+  /**
+   * 当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
+默认值:600
+   */
+  AutoPauseDelay?: number
+  /**
+   * 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费
+当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费
+回档与克隆均不支持包年包月存储
+   */
+  StoragePayMode?: number
+  /**
+   * 安全组id数组
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 告警策略Id数组
+   */
+  AlarmPolicyIds?: Array<string>
+  /**
+   * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
+   */
+  ClusterParams?: Array<ParamItem>
+  /**
+   * 交易模式，0-下单且支付，1-下单
+   */
+  DealMode?: number
+  /**
+   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+   */
+  ParamTemplateId?: number
+  /**
+   * 多可用区地址
+   */
+  SlaveZone?: string
+  /**
+   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+   */
+  InstanceInitInfos?: Array<InstanceInitInfo>
 }
 
 /**
@@ -2060,6 +2265,58 @@ export interface ModifyClusterDatabaseRequest {
 }
 
 /**
+ * 实例日志投递信息
+ */
+export interface InstanceCLSDeliveryInfo {
+  /**
+   * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例name
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 日志主题id
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 日志主题name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+  /**
+   * 日志集id
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * 日志集name
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 日志投递地域
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 投递状态creating,running,offlining,offlined
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+}
+
+/**
  * ModifyMaintainPeriodConfig返回参数结构体
  */
 export interface ModifyMaintainPeriodConfigResponse {
@@ -2161,12 +2418,25 @@ export interface DescribeAccountAllGrantPrivilegesRequest {
 /**
  * DeleteCLSDelivery请求参数结构体
  */
-export type DeleteCLSDeliveryRequest = null
+export interface DeleteCLSDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 日志主题id
+   */
+  CLSTopicIds: Array<string>
+}
 
 /**
  * CreateCLSDelivery返回参数结构体
  */
 export interface CreateCLSDeliveryResponse {
+  /**
+   * 异步任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3106,6 +3376,11 @@ export interface RuleTemplateInfo {
  */
 export interface StopCLSDeliveryResponse {
   /**
+   * 异步任务id
+
+   */
+  TaskId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3196,195 +3471,13 @@ export interface SetRenewFlagResponse {
 }
 
 /**
- * CreateClusters请求参数结构体
+ * CreateClusterDatabase返回参数结构体
  */
-export interface CreateClustersRequest {
+export interface CreateClusterDatabaseResponse {
   /**
-   * 可用区
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Zone: string
-  /**
-   * 所属VPC网络ID
-   */
-  VpcId: string
-  /**
-   * 所属子网ID
-   */
-  SubnetId: string
-  /**
-   * 数据库类型，取值范围: 
-<li> MYSQL </li>
-   */
-  DbType: string
-  /**
-   * 数据库版本，取值范围: 
-<li> MYSQL可选值：5.7，8.0 </li>
-   */
-  DbVersion: string
-  /**
-   * 所属项目ID
-   */
-  ProjectId?: number
-  /**
-   * 当DbMode为NORMAL或不填时必选
-普通实例Cpu核数
-   */
-  Cpu?: number
-  /**
-   * 当DbMode为NORMAL或不填时必选
-普通实例内存,单位GB
-   */
-  Memory?: number
-  /**
-   * 该参数无实际意义，已废弃。
-存储大小，单位GB。
-   */
-  Storage?: number
-  /**
-   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
-   */
-  ClusterName?: string
-  /**
-   * 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种)
-   */
-  AdminPassword?: string
-  /**
-   * 端口，默认3306，取值范围[0, 65535)
-   */
-  Port?: number
-  /**
-   * 计费模式，按量计费：0，包年包月：1。默认按量计费。
-   */
-  PayMode?: number
-  /**
-   * 购买集群数，可选值范围[1,50]，默认为1
-   */
-  Count?: number
-  /**
-   * 回档类型：
-noneRollback：不回档；
-snapRollback，快照回档；
-timeRollback，时间点回档
-   */
-  RollbackStrategy?: string
-  /**
-   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
-   */
-  RollbackId?: number
-  /**
-   * 回档时，传入源集群ID，用于查找源poolId
-   */
-  OriginalClusterId?: string
-  /**
-   * 时间点回档，指定时间；快照回档，快照时间
-   */
-  ExpectTime?: string
-  /**
-   * 该参数无实际意义，已废弃。
-时间点回档，指定时间允许范围
-   */
-  ExpectTimeThresh?: number
-  /**
-   * 普通实例存储上限，单位GB
-当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
-   */
-  StorageLimit?: number
-  /**
-   * 实例数量，数量范围为(0,16]
-   */
-  InstanceCount?: number
-  /**
-   * 包年包月购买时长
-   */
-  TimeSpan?: number
-  /**
-   * 包年包月购买时长单位，['s','d','m','y']
-   */
-  TimeUnit?: string
-  /**
-   * 包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示手不自动续费。
-   */
-  AutoRenewFlag?: number
-  /**
-   * 是否自动选择代金券 1是 0否 默认为0
-   */
-  AutoVoucher?: number
-  /**
-   * 实例数量（该参数已不再使用，只做存量兼容处理）
-   */
-  HaCount?: number
-  /**
-   * 订单来源
-   */
-  OrderSource?: string
-  /**
-   * 集群创建需要绑定的tag数组信息
-   */
-  ResourceTags?: Array<Tag>
-  /**
-   * Db类型
-当DbType为MYSQL时可选(默认NORMAL)：
-<li>NORMAL</li>
-<li>SERVERLESS</li>
-   */
-  DbMode?: string
-  /**
-   * 当DbMode为SERVERLESS时必填
-cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
-   */
-  MinCpu?: number
-  /**
-   * 当DbMode为SERVERLESS时必填：
-cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
-   */
-  MaxCpu?: number
-  /**
-   * 当DbMode为SERVERLESS时，指定集群是否自动暂停，可选范围
-<li>yes</li>
-<li>no</li>
-默认值:yes
-   */
-  AutoPause?: string
-  /**
-   * 当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
-默认值:600
-   */
-  AutoPauseDelay?: number
-  /**
-   * 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费
-当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费
-回档与克隆均不支持包年包月存储
-   */
-  StoragePayMode?: number
-  /**
-   * 安全组id数组
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 告警策略Id数组
-   */
-  AlarmPolicyIds?: Array<string>
-  /**
-   * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
-   */
-  ClusterParams?: Array<ParamItem>
-  /**
-   * 交易模式，0-下单且支付，1-下单
-   */
-  DealMode?: number
-  /**
-   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
-   */
-  ParamTemplateId?: number
-  /**
-   * 多可用区地址
-   */
-  SlaveZone?: string
-  /**
-   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
-   */
-  InstanceInitInfos?: Array<InstanceInitInfo>
+  RequestId?: string
 }
 
 /**
@@ -4031,7 +4124,16 @@ export interface SwitchProxyVpcResponse {
 /**
  * StartCLSDelivery请求参数结构体
  */
-export type StartCLSDeliveryRequest = null
+export interface StartCLSDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 开通的日志主题id
+   */
+  CLSTopicIds: Array<string>
+}
 
 /**
  * 可用区属性项
@@ -4065,6 +4167,46 @@ export interface DescribeChangedParamsAfterUpgradeRequest {
    * 变配后的MEM，单位G
    */
   DstMem: number
+}
+
+/**
+ * CLS日志投递配置
+ */
+export interface CLSInfo {
+  /**
+   * 日志主题操作：可选create,reuse。
+create:新增日志主题，使用TopicName创建日志主题。
+reuse:使用已有日志主题，使用TopicId指定日志主题。
+不允许使用已有日志主题且新建日志集的组合。
+   */
+  TopicOperation: string
+  /**
+   * 日志集操作：可选create,reuse。
+create:新增日志集，使用GroupName创建日志集。
+reuse:使用已有日志集，使用GroupId指定日志集。
+不允许使用已有日志主题且新建日志集的组合。
+   */
+  GroupOperation: string
+  /**
+   * 日志投递地域
+   */
+  Region: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
+  /**
+   * 日志主题name
+   */
+  TopicName?: string
+  /**
+   * 日志集id
+   */
+  GroupId?: string
+  /**
+   * 日志集name
+   */
+  GroupName?: string
 }
 
 /**
@@ -6990,7 +7132,16 @@ export interface CreateBackupRequest {
 /**
  * CreateCLSDelivery请求参数结构体
  */
-export type CreateCLSDeliveryRequest = null
+export interface CreateCLSDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 日志投递配置
+   */
+  CLSInfoList: Array<CLSInfo>
+}
 
 /**
  * DescribeMaintainPeriod返回参数结构体
@@ -9097,7 +9248,12 @@ export interface ModifyAccountDescriptionRequest {
 /**
  * DescribeInstanceCLSLogDelivery请求参数结构体
  */
-export type DescribeInstanceCLSLogDeliveryRequest = null
+export interface DescribeInstanceCLSLogDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
 
 /**
  * UpgradeInstance返回参数结构体
@@ -9792,6 +9948,11 @@ export interface ZoneStockInfo {
  * DeleteCLSDelivery返回参数结构体
  */
 export interface DeleteCLSDeliveryResponse {
+  /**
+   * 异步任务id
+
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

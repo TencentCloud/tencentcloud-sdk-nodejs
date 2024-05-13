@@ -276,6 +276,21 @@ export interface ImpalaQuery {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PerNodePeakMemoryBytesSum?: number;
+    /**
+     * 后端个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackendsCount?: number;
+    /**
+     * fragment数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FragmentInstancesCount?: number;
+    /**
+     * 剩余未完成Fragment数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemainingFragmentCount?: number;
 }
 /**
  * Pod的存储设备描述信息。

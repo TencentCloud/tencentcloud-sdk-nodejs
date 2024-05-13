@@ -5291,6 +5291,10 @@ export interface TargetGroupAssociation {
      * 转发规则ID
      */
     LocationId?: string;
+    /**
+     * 目标组权重，范围[0, 100]。仅绑定v2目标组时生效，如果不存在，则默认为10。
+     */
+    Weight?: number;
 }
 /**
  * 监听器的健康检查信息

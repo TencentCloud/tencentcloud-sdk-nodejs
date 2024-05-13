@@ -99,7 +99,6 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-
      */
     MLIDCardOCR(req: MLIDCardOCRRequest, cb?: (error: string, rep: MLIDCardOCRResponse) => void): Promise<MLIDCardOCRResponse>;
     /**

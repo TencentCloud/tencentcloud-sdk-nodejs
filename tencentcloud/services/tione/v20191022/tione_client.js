@@ -70,12 +70,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCodeRepository", req, cb);
     }
     /**
-     * 更新notebook生命周期脚本
-     */
-    async UpdateNotebookLifecycleScript(req, cb) {
-        return this.request("UpdateNotebookLifecycleScript", req, cb);
-    }
-    /**
      * 查询训练任务
      */
     async DescribeTrainingJob(req, cb) {

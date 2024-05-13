@@ -2499,6 +2499,16 @@ export interface TJCallInfo {
     CallExample?: string;
 }
 /**
+ * CBS存储配置
+ */
+export interface CBSConfig {
+    /**
+     * 存储大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeSizeInGB: number;
+}
+/**
  * CreateTrainingModel请求参数结构体
  */
 export interface CreateTrainingModelRequest {
@@ -7198,6 +7208,11 @@ export interface DataConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalDiskSource?: LocalDisk;
+    /**
+     * CBS配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CBSSource?: CBSConfig;
 }
 /**
  * DescribeTrainingModelVersion请求参数结构体

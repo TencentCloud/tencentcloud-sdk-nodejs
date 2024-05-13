@@ -3081,6 +3081,10 @@ export interface McuWaterMarkText {
      * 水印在输出时的层级，不填默认为0。
      */
     ZOrder?: number;
+    /**
+     * 水印字体，不填默认为Tencent。支持设置以下值： Tencent （默认） SourceHanSans
+     */
+    Font?: string;
 }
 /**
  * SeriesInfos类型

@@ -88,16 +88,6 @@ it("tione.v20191022.CreateCodeRepository", async function () {
     }
 })
 
-it("tione.v20191022.UpdateNotebookLifecycleScript", async function () {
-    try {
-       const data = await client.UpdateNotebookLifecycleScript({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tione.v20191022.DescribeTrainingJob", async function () {
     try {
        const data = await client.DescribeTrainingJob({})

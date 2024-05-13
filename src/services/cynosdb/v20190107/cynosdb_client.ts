@@ -83,7 +83,7 @@ import {
   ProxyGroupRwInfo,
   DescribeProxyNodesRequest,
   InquirePriceCreateResponse,
-  CreateClusterDatabaseResponse,
+  CreateClustersRequest,
   DescribeClusterParamLogsRequest,
   CloseProxyResponse,
   DescribeResourcePackageSaleSpecRequest,
@@ -93,6 +93,7 @@ import {
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
+  InstanceCLSDeliveryInfo,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
@@ -151,7 +152,7 @@ import {
   DeleteAccountsResponse,
   CreateResourcePackageResponse,
   SetRenewFlagResponse,
-  CreateClustersRequest,
+  CreateClusterDatabaseResponse,
   DescribeClustersResponse,
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
@@ -178,6 +179,7 @@ import {
   StartCLSDeliveryRequest,
   SlaveZoneAttrItem,
   DescribeChangedParamsAfterUpgradeRequest,
+  CLSInfo,
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
@@ -674,7 +676,7 @@ export class Client extends AbstractClient {
    * 删除日志投递
    */
   async DeleteCLSDelivery(
-    req?: DeleteCLSDeliveryRequest,
+    req: DeleteCLSDeliveryRequest,
     cb?: (error: string, rep: DeleteCLSDeliveryResponse) => void
   ): Promise<DeleteCLSDeliveryResponse> {
     return this.request("DeleteCLSDelivery", req, cb)
@@ -1224,7 +1226,7 @@ export class Client extends AbstractClient {
    * 查询实例日志投递信息
    */
   async DescribeInstanceCLSLogDelivery(
-    req?: DescribeInstanceCLSLogDeliveryRequest,
+    req: DescribeInstanceCLSLogDeliveryRequest,
     cb?: (error: string, rep: DescribeInstanceCLSLogDeliveryResponse) => void
   ): Promise<DescribeInstanceCLSLogDeliveryResponse> {
     return this.request("DescribeInstanceCLSLogDelivery", req, cb)
@@ -1394,7 +1396,7 @@ export class Client extends AbstractClient {
    * 开启日志投递
    */
   async StartCLSDelivery(
-    req?: StartCLSDeliveryRequest,
+    req: StartCLSDeliveryRequest,
     cb?: (error: string, rep: StartCLSDeliveryResponse) => void
   ): Promise<StartCLSDeliveryResponse> {
     return this.request("StartCLSDelivery", req, cb)
@@ -1434,7 +1436,7 @@ export class Client extends AbstractClient {
    * 停止日志投递
    */
   async StopCLSDelivery(
-    req?: StopCLSDeliveryRequest,
+    req: StopCLSDeliveryRequest,
     cb?: (error: string, rep: StopCLSDeliveryResponse) => void
   ): Promise<StopCLSDeliveryResponse> {
     return this.request("StopCLSDelivery", req, cb)
@@ -1664,7 +1666,7 @@ export class Client extends AbstractClient {
    * 创建日志投递
    */
   async CreateCLSDelivery(
-    req?: CreateCLSDeliveryRequest,
+    req: CreateCLSDeliveryRequest,
     cb?: (error: string, rep: CreateCLSDeliveryResponse) => void
   ): Promise<CreateCLSDeliveryResponse> {
     return this.request("CreateCLSDelivery", req, cb)
