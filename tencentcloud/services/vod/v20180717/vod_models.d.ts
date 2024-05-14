@@ -14950,7 +14950,8 @@ export interface DescribeTaskDetailResponse {
      * 任务状态，取值：
   <li>WAITING：等待中；</li>
   <li>PROCESSING：处理中；</li>
-  <li>FINISH：已完成。</li>
+  <li>FINISH：已完成；</li>
+  <li>ABORTED：已终止。</li>
      */
     Status?: string;
     /**
@@ -15815,7 +15816,7 @@ export interface TaskSimpleInfo {
      */
     TaskId?: string;
     /**
-     * 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
+     * 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）、ABORTED（已终止）。
      */
     Status?: string;
     /**

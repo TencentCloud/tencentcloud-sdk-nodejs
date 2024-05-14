@@ -7672,6 +7672,15 @@ zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下
    */
   EngineRegionInfos?: Array<EngineRegionInfo>
   /**
+   * zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUM
+zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
+   */
+  StorageType?: string
+  /**
+   * zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50
+   */
+  StorageCapacity?: number
+  /**
    * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
 如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
    */

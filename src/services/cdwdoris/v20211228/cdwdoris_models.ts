@@ -71,6 +71,22 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
    * 排序参数
    */
   DurationMs?: string
+  /**
+   * 查询sql
+   */
+  Sql?: string
+  /**
+   * 排序参数
+   */
+  ReadRows?: string
+  /**
+   * 排序参数
+   */
+  ResultBytes?: string
+  /**
+   * 排序参数
+   */
+  MemoryUsage?: string
 }
 
 /**
@@ -894,6 +910,22 @@ export interface DescribeSlowQueryRecordsRequest {
    * catalog名称
    */
   CatalogName?: Array<string>
+  /**
+   * sql名
+   */
+  Sql?: string
+  /**
+   * ReadRows排序字段
+   */
+  ReadRows?: string
+  /**
+   * ResultBytes排序字段
+   */
+  ResultBytes?: string
+  /**
+   * MemoryUsage排序字段
+   */
+  MemoryUsage?: string
 }
 
 /**
