@@ -605,102 +605,107 @@ export interface DescribeConnectResourceResp {
    * 连接源的Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 连接源名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 连接源描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 连接源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 连接源的状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 连接源的创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 连接源的异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 连接源的当前所处步骤
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentStep: string
+  CurrentStep?: string
   /**
    * 步骤列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepList: Array<string>
+  StepList?: Array<string>
   /**
    * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MySQLConnectParam: MySQLConnectParam
+  MySQLConnectParam?: MySQLConnectParam
   /**
    * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostgreSQLConnectParam: PostgreSQLConnectParam
+  PostgreSQLConnectParam?: PostgreSQLConnectParam
   /**
    * Dts配置，Type为DTS时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DtsConnectParam: DtsConnectParam
+  DtsConnectParam?: DtsConnectParam
   /**
    * MongoDB配置，Type为MONGODB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MongoDBConnectParam: MongoDBConnectParam
+  MongoDBConnectParam?: MongoDBConnectParam
   /**
    * Es配置，Type为ES时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EsConnectParam: EsConnectParam
+  EsConnectParam?: EsConnectParam
   /**
    * ClickHouse配置，Type为CLICKHOUSE时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClickHouseConnectParam: ClickHouseConnectParam
+  ClickHouseConnectParam?: ClickHouseConnectParam
   /**
    * MariaDB配置，Type为MARIADB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MariaDBConnectParam: MariaDBConnectParam
+  MariaDBConnectParam?: MariaDBConnectParam
   /**
    * SQLServer配置，Type为SQLSERVER时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SQLServerConnectParam: SQLServerConnectParam
+  SQLServerConnectParam?: SQLServerConnectParam
   /**
    * Ctsdb配置，Type为CTSDB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CtsdbConnectParam: CtsdbConnectParam
+  CtsdbConnectParam?: CtsdbConnectParam
   /**
    * Doris 配置，Type 为 DORIS 时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DorisConnectParam: DorisConnectParam
+  DorisConnectParam?: DorisConnectParam
   /**
    * Kafka配置，Type 为 KAFKA 时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaConnectParam?: KafkaConnectParam
+  /**
+   * MQTT配置，Type 为 MQTT 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MqttConnectParam?: MqttConnectParam
 }
 
 /**
@@ -759,82 +764,102 @@ export interface FetchLatestDatahubMessageListResponse {
 export interface EsParam {
   /**
    * 实例资源
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * Es的连接port
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * Es用户名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * Es密码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfBuilt?: boolean
   /**
    * 实例vip
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceVip?: string
   /**
    * 实例的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqVpcId?: string
   /**
    * Es是否抛弃解析失败的消息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DropInvalidMessage?: boolean
   /**
    * Es自定义index名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Index?: string
   /**
    * Es自定义日期后缀
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DateFormat?: string
   /**
    * 非json格式数据的自定义key
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentKey?: string
   /**
    * Es是否抛弃非json格式的消息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DropInvalidJsonMessage?: boolean
   /**
    * 转储到Es中的文档ID取值字段名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DocumentIdField?: string
   /**
    * Es自定义index名称的类型，STRING，JSONPATH，默认为STRING
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexType?: string
   /**
    * 当设置成员参数DropInvalidMessageToCls设置为true时,DropInvalidMessage参数失效
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DropCls?: DropCls
   /**
    * 转储到ES的消息为Database的binlog时，如果需要同步数据库操作，即增删改的操作到ES时填写数据库表主键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabasePrimaryKey?: string
   /**
    * 死信队列
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DropDlq?: FailureParam
   /**
    * 使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordMappingList?: Array<EsRecordMapping>
   /**
    * 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DateField?: string
   /**
    * 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordMappingMode?: string
 }
@@ -859,34 +884,42 @@ export interface DescribeAclRuleResponse {
 export interface DtsParam {
   /**
    * Dts实例Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * Dts的连接ip
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * Dts的连接port
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * Dts订阅的topic
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Topic?: string
   /**
    * Dts消费分组的Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * Dts消费分组的账号
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupUser?: string
   /**
    * Dts消费分组的密码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupPassword?: string
   /**
    * false同步原始数据，true同步解析后的json格式数据,默认true
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TranSql?: boolean
 }
@@ -1198,6 +1231,11 @@ export interface DatahubResource {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfParam?: ScfParam
+  /**
+   * MQTT配置，Type为 MQTT 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MqttParam?: MqttParam
 }
 
 /**
@@ -1366,10 +1404,12 @@ export interface CreateInstancePreResp {
 export interface EsRecordMapping {
   /**
    * es 索引成员名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnName?: string
   /**
    * 消息字段名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonKey?: string
 }
@@ -2076,6 +2116,72 @@ export interface DorisConnectParam {
 }
 
 /**
+ * 创建MQTT 为Source的Data Hub Task参数
+ */
+export interface MqttParam {
+  /**
+   * 需要同步的MQTT Topic列表, CSV格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topics: string
+  /**
+   * MQTT clean-session
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CleanSession: boolean
+  /**
+   * MQTT instance-id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource?: string
+  /**
+   * MQTT实例VIP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * MQTT VIP 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * MQTT实例用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * MQTT实例内账户密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * QoS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qos?: number
+  /**
+   * tasks.max 订阅Topic的并发Task个数, 默认为1; 当设置大于1时, 使用Shared Subscription
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxTasks?: number
+  /**
+   * MQTT 实例的Service VIP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceVip?: string
+  /**
+   * MQTT实例的VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId?: string
+  /**
+   * 是否为自建集群, MQTT只支持非自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelfBuilt?: boolean
+}
+
+/**
  * SendMessage请求参数结构体
  */
 export interface SendMessageRequest {
@@ -2562,22 +2668,27 @@ export interface MongoDBModifyConnectParam {
 export interface TdwParam {
   /**
    * Tdw的bid
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Bid: string
   /**
    * Tdw的tid
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tid: string
   /**
    * 默认true
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDomestic?: boolean
   /**
    * TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TdwHost?: string
   /**
    * TDW端口，默认8099
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TdwPort?: number
 }
@@ -3450,42 +3561,52 @@ export interface CreateConnectResourceRequest {
 export interface MariaDBParam {
   /**
    * MariaDB的数据库名称，"*"为全数据库
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * MariaDB的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 该MariaDB在连接管理内的Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotMode?: string
   /**
    * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyColumns?: string
   /**
    * 当Table输入的是前缀时，该项值为true，否则为false
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IsTablePrefix?: boolean
   /**
    * 输出格式，DEFAULT、CANAL_1、CANAL_2
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputFormat?: string
   /**
    * 如果该值为all，则DDL数据以及DML数据也会写入到选中的topic；若该值为dml，则只有DML数据写入到选中的topic
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeContentChanges?: string
   /**
    * 如果该值为true，且MySQL中"binlog_rows_query_log_events"配置项的值为"ON"，则流入到topic的数据包含原SQL语句；若该值为false，流入到topic的数据不包含原SQL语句
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeQuery?: boolean
   /**
    * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordWithSchema?: boolean
 }
@@ -4091,6 +4212,47 @@ export interface TopicInSyncReplicaInfo {
 }
 
 /**
+ * MQTT连接源参数
+ */
+export interface MqttConnectParam {
+  /**
+   * MQTT连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * MQTT连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password: string
+  /**
+   * MQTT连接源的实例资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource: string
+  /**
+   * MQTT Instance vpc-id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId: string
+  /**
+   * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelfBuilt?: boolean
+  /**
+   * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsUpdate?: boolean
+  /**
+   * MQTT连接源的实例资源地域, 跨地域时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+}
+
+/**
  * DeleteConnectResource返回参数结构体
  */
 export interface DeleteConnectResourceResponse {
@@ -4667,34 +4829,42 @@ export interface DescribeAppInfoResponse {
 export interface CosParam {
   /**
    * cos 存储桶名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketName: string
   /**
    * 地域代码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
    * 对象名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectKey?: string
   /**
    * 汇聚消息量的大小（单位：MB)
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AggregateBatchSize?: number
   /**
    * 汇聚的时间间隔（单位：小时）
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AggregateInterval?: number
   /**
    * 消息汇聚后的文件格式（支持csv, json）
+注意：此字段可能返回 null，表示取不到有效值。
    */
   FormatOutputType?: string
   /**
    * 转储的对象目录前缀
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectKeyPrefix?: string
   /**
    * 根据strptime 时间格式化的分区格式
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DirectoryTimeFormat?: string
 }
@@ -4950,18 +5120,22 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
 export interface ClickHouseSchema {
   /**
    * 表的列名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ColumnName: string
   /**
    * 该列对应的jsonKey名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonKey: string
   /**
    * 表列项的类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
    * 列项是否允许为空
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowNull: boolean
 }
@@ -5179,7 +5353,7 @@ export interface VipEntity {
  */
 export interface KafkaConnectParam {
   /**
-   * Kafka连接源的实例资源, 非自建时必填
+   * Kafka连接源的实例资源, 非自建时必填，NetworkType=VPC时传clb实例id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: string
@@ -5194,7 +5368,7 @@ export interface KafkaConnectParam {
    */
   IsUpdate?: boolean
   /**
-   * Kafka连接的broker地址, 自建时必填
+   * Kafka连接的broker地址, NetworkType=PUBLIC公网时必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BrokerAddress?: string
@@ -7134,54 +7308,67 @@ export interface CreateRouteResponse {
 export interface PostgreSQLParam {
   /**
    * PostgreSQL的数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 该PostgreSQL在连接管理内的Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PluginName: string
   /**
    * 复制存量信息(never增量, initial全量)，默认为initial
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotMode?: string
   /**
    * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DataFormat?: string
   /**
    * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DataTargetInsertMode?: string
   /**
    * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DataTargetPrimaryKeyField?: string
   /**
    * 表与消息间的映射关系
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DataTargetRecordMapping?: Array<RecordMapping>
   /**
    * 是否抛弃解析失败的消息，默认为true
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DropInvalidMessage?: boolean
   /**
    * 输入的table是否为正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IsTableRegular?: boolean
   /**
    * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyColumns?: string
   /**
    * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordWithSchema?: boolean
 }
@@ -7275,23 +7462,28 @@ export interface DescribeGroup {
 export interface ClsParam {
   /**
    * 生产的信息是否为json格式
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DecodeJson: boolean
   /**
    * cls日志主题id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * cls日志集id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSet?: string
   /**
    * 当DecodeJson为false时必填
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentKey?: string
   /**
    * 指定消息中的某字段内容作为cls日志的时间。
 字段内容格式需要是秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeField?: string
 }
@@ -7706,10 +7898,12 @@ export interface DescribeGroupOffsetsResponse {
 export interface CtsdbParam {
   /**
    * 连接管理实例资源
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: string
   /**
    * Ctsdb的metric
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CtsdbMetric?: string
 }
@@ -8030,50 +8224,62 @@ export interface DescribeAclRuleRequest {
 export interface MongoDBParam {
   /**
    * MongoDB的数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * MongoDB的集群
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Collection: string
   /**
    * 是否复制存量数据，默认传参true
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CopyExisting: boolean
   /**
    * 实例资源
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * MongoDB的连接ip
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * MongoDB的连接port
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * MongoDB数据库用户名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
    * MongoDB数据库密码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
    * 监听事件类型，为空时表示全选。取值包括insert,update,replace,delete,invalidate,drop,dropdatabase,rename，多个类型间使用,逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ListeningEvent?: string
   /**
    * 主从优先级，默认主节点
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadPreference?: string
   /**
    * 聚合管道
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Pipeline?: string
   /**
    * 是否为自建集群
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfBuilt?: boolean
 }
@@ -8438,22 +8644,27 @@ export interface MySQLConnectParam {
 export interface ScfParam {
   /**
    * SCF云函数函数名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   FunctionName: string
   /**
    * SCF云函数命名空间, 默认为default
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * SCF云函数版本及别名, 默认为$DEFAULT
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Qualifier?: string
   /**
    * 每批最大发送消息数, 默认为1000
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchSize?: number
   /**
    * SCF调用失败后重试次数, 默认为5
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetries?: number
 }
@@ -8617,47 +8828,47 @@ export interface DescribeConnectResource {
    * 连接源的Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 连接源名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 连接源描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 连接源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 连接源的状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 连接源的创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 连接源的异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 该连接源关联的Datahub任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatahubTaskCount: number
+  DatahubTaskCount?: number
   /**
    * 连接源的当前所处步骤
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentStep: string
+  CurrentStep?: string
   /**
    * 创建进度百分比
 注意：此字段可能返回 null，表示取不到有效值。
@@ -8672,57 +8883,62 @@ export interface DescribeConnectResource {
    * Dts配置，Type为DTS时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DtsConnectParam: DtsConnectParam
+  DtsConnectParam?: DtsConnectParam
   /**
    * MongoDB配置，Type为MONGODB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MongoDBConnectParam: MongoDBConnectParam
+  MongoDBConnectParam?: MongoDBConnectParam
   /**
    * Es配置，Type为ES时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EsConnectParam: EsConnectParam
+  EsConnectParam?: EsConnectParam
   /**
    * ClickHouse配置，Type为CLICKHOUSE时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClickHouseConnectParam: ClickHouseConnectParam
+  ClickHouseConnectParam?: ClickHouseConnectParam
   /**
    * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MySQLConnectParam: MySQLConnectParam
+  MySQLConnectParam?: MySQLConnectParam
   /**
    * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostgreSQLConnectParam: PostgreSQLConnectParam
+  PostgreSQLConnectParam?: PostgreSQLConnectParam
   /**
    * MariaDB配置，Type为MARIADB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MariaDBConnectParam: MariaDBConnectParam
+  MariaDBConnectParam?: MariaDBConnectParam
   /**
    * SQLServer配置，Type为SQLSERVER时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SQLServerConnectParam: SQLServerConnectParam
+  SQLServerConnectParam?: SQLServerConnectParam
   /**
    * Ctsdb配置，Type为CTSDB时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CtsdbConnectParam: CtsdbConnectParam
+  CtsdbConnectParam?: CtsdbConnectParam
   /**
    * Doris 配置，Type 为 DORIS 时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DorisConnectParam: DorisConnectParam
+  DorisConnectParam?: DorisConnectParam
   /**
    * Kafka配置，Type 为 KAFKA 时返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaConnectParam?: KafkaConnectParam
+  /**
+   * MQTT配置，Type 为 MQTT 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MqttConnectParam?: MqttConnectParam
 }
 
 /**
@@ -8859,18 +9075,22 @@ export interface AclRuleResp {
 export interface SQLServerParam {
   /**
    * SQLServer的数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * SQLServer的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"数据库名.数据表名"的格式进行填写
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 该SQLServer在连接管理内的Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
   /**
    * 复制存量信息(schema_only增量, initial全量)，默认为initial
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotMode?: string
 }

@@ -1813,6 +1813,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAbnormalProcessRules", req, cb);
     }
     /**
+     * 查询检查报告
+     */
+    async DescribeInspectionReport(req, cb) {
+        return this.request("DescribeInspectionReport", req, cb);
+    }
+    /**
      * 用指定的检测项重新检测选定的资产，返回创建的合规检查任务的ID。
      */
     async ScanComplianceAssetsByPolicyItem(req, cb) {
@@ -1891,10 +1897,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecLogDeliveryKafkaSetting", req, cb);
     }
     /**
-     * 查询检查报告
+     * DescribeRiskContainerImageList查询风险容器镜像列表
      */
-    async DescribeInspectionReport(req, cb) {
-        return this.request("DescribeInspectionReport", req, cb);
+    async DescribeEventEscapeImageList(req, cb) {
+        return this.request("DescribeEventEscapeImageList", req, cb);
     }
     /**
      * 容器网络创建网络策略删除任务

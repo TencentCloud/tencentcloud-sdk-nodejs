@@ -1211,6 +1211,43 @@ export interface AssetTag {
     TagValue?: string;
 }
 /**
+ * 该结构体用来传入告警的key，以更新告警的status
+ */
+export interface NewAlertKey {
+    /**
+     * 需要更改的用户appid
+     */
+    AppId: string;
+    /**
+     * 告警类别
+     */
+    Type: string;
+    /**
+     * 告警子类别
+     */
+    SubType: string;
+    /**
+     * 告警来源
+     */
+    Source: string;
+    /**
+     * 告警名称
+     */
+    Name: string;
+    /**
+     * 告警key
+     */
+    Key: string;
+    /**
+     * 时间
+     */
+    Date: string;
+    /**
+     * 状态
+     */
+    Status?: number;
+}
+/**
  * ip列表
  */
 export interface IpAssetListVO {
@@ -1487,6 +1524,24 @@ export interface Tag {
      * 标签内容
      */
     Value: string;
+}
+/**
+ * UpdateAlertStatusList返回参数结构体
+ */
+export interface UpdateAlertStatusListResponse {
+    /**
+     * 结果信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Msg?: string;
+    /**
+     * 结果代码
+     */
+    Code?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteDomainAndIp请求参数结构体
@@ -3387,6 +3442,28 @@ export interface DescribeRiskCenterVULViewVULRiskListRequest {
      * 资产标签
      */
     Tags?: Array<AssetTag>;
+}
+/**
+ * UpdateAlertStatusList请求参数结构体
+ */
+export interface UpdateAlertStatusListRequest {
+    /**
+     * 告警ID列表
+     */
+    ID: Array<NewAlertKey>;
+    /**
+     * 操作类型
+  1:撤销处置
+  2:标记为已处置
+  3:标记忽略
+  4:取消标记处置
+  5:取消标记忽略
+     */
+    OperateType: number;
+    /**
+     * 被调用的集团账号的成员id
+     */
+    OperatedMemberId?: Array<string>;
 }
 /**
  * 漏洞风险高级配置

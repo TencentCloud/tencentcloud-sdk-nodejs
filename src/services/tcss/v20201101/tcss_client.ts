@@ -26,6 +26,7 @@ import {
   DescribeScanIgnoreVulListResponse,
   ModifyVulDefenceEventStatusRequest,
   ModifyVirusAutoIsolateExampleSwitchResponse,
+  DescribeEventEscapeImageListResponse,
   CKafkaTopicInfo,
   CreateVulExportJobResponse,
   DescribeUnfinishRefreshTaskResponse,
@@ -34,6 +35,7 @@ import {
   CreateNetworkFirewallUndoPublishRequest,
   CreateRefreshTaskResponse,
   CreateVulDefenceHostExportJobResponse,
+  DescribeEventEscapeImageListRequest,
   ImageVul,
   CreateVulImageExportJobResponse,
   AbnormalProcessEventDescription,
@@ -691,6 +693,7 @@ import {
   DescribeImageAutoAuthorizedTaskListRequest,
   DescribeVirusSampleDownloadUrlRequest,
   AddAndPublishNetworkFirewallPolicyYamlDetailResponse,
+  EventEscapeImageInfo,
   DescribeRiskDnsEventDetailResponse,
   AddAndPublishNetworkFirewallPolicyDetailRequest,
   DescribeEscapeEventInfoRequest,
@@ -3839,6 +3842,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询检查报告
+   */
+  async DescribeInspectionReport(
+    req?: DescribeInspectionReportRequest,
+    cb?: (error: string, rep: DescribeInspectionReportResponse) => void
+  ): Promise<DescribeInspectionReportResponse> {
+    return this.request("DescribeInspectionReport", req, cb)
+  }
+
+  /**
    * 用指定的检测项重新检测选定的资产，返回创建的合规检查任务的ID。
    */
   async ScanComplianceAssetsByPolicyItem(
@@ -3969,13 +3982,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询检查报告
+   * DescribeRiskContainerImageList查询风险容器镜像列表
    */
-  async DescribeInspectionReport(
-    req?: DescribeInspectionReportRequest,
-    cb?: (error: string, rep: DescribeInspectionReportResponse) => void
-  ): Promise<DescribeInspectionReportResponse> {
-    return this.request("DescribeInspectionReport", req, cb)
+  async DescribeEventEscapeImageList(
+    req: DescribeEventEscapeImageListRequest,
+    cb?: (error: string, rep: DescribeEventEscapeImageListResponse) => void
+  ): Promise<DescribeEventEscapeImageListResponse> {
+    return this.request("DescribeEventEscapeImageList", req, cb)
   }
 
   /**

@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlertList", req, cb);
     }
     /**
+     * 批量告警状态处理接口
+     */
+    async UpdateAlertStatusList(req, cb) {
+        return this.request("UpdateAlertStatusList", req, cb);
+    }
+    /**
      * 获取扫描任务列表
      */
     async DescribeScanTaskList(req, cb) {

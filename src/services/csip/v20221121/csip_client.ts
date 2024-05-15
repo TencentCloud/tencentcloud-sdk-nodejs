@@ -39,6 +39,7 @@ import {
   DataSearchBug,
   OrganizationUserInfo,
   AssetTag,
+  NewAlertKey,
   IpAssetListVO,
   DescribeTopAttackInfoResponse,
   DescribeVULRiskAdvanceCFGListRequest,
@@ -46,6 +47,7 @@ import {
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeDomainAssetsRequest,
   Tag,
+  UpdateAlertStatusListResponse,
   DeleteDomainAndIpRequest,
   DescribeNICAssetsRequest,
   DescribeScanTaskListRequest,
@@ -88,6 +90,7 @@ import {
   DescribeRiskCenterAssetViewCFGRiskListResponse,
   DescribeRiskCenterVULViewVULRiskListResponse,
   DescribeRiskCenterVULViewVULRiskListRequest,
+  UpdateAlertStatusListRequest,
   TaskCenterVulRiskInputParam,
   TaskAdvanceCFG,
   DescribeScanTaskListResponse,
@@ -442,6 +445,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlertListResponse) => void
   ): Promise<DescribeAlertListResponse> {
     return this.request("DescribeAlertList", req, cb)
+  }
+
+  /**
+   * 批量告警状态处理接口
+   */
+  async UpdateAlertStatusList(
+    req: UpdateAlertStatusListRequest,
+    cb?: (error: string, rep: UpdateAlertStatusListResponse) => void
+  ): Promise<UpdateAlertStatusListResponse> {
+    return this.request("UpdateAlertStatusList", req, cb)
   }
 
   /**

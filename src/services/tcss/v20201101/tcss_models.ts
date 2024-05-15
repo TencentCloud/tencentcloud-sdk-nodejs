@@ -152,6 +152,24 @@ export interface ModifyVirusAutoIsolateExampleSwitchResponse {
 }
 
 /**
+ * DescribeEventEscapeImageList返回参数结构体
+ */
+export interface DescribeEventEscapeImageListResponse {
+  /**
+   * 风险容器镜像列表
+   */
+  List?: Array<EventEscapeImageInfo>
+  /**
+   * 事件总数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Ckafka topic信息
  */
 export interface CKafkaTopicInfo {
@@ -299,6 +317,36 @@ export interface CreateVulDefenceHostExportJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeEventEscapeImageList请求参数结构体
+ */
+export interface DescribeEventEscapeImageListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤参数:
+EventType: 事件类型(MOUNT_SENSITIVE_PTAH:敏感路径挂载 PRIVILEGE_CONTAINER_START:特权容器)
+Status: 事件状态(EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略)
+ImageID: 镜像id
+ImageName:镜像名称
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 升序降序,asc desc
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -17745,6 +17793,67 @@ export interface AddAndPublishNetworkFirewallPolicyYamlDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 风险容器信息
+ */
+export interface EventEscapeImageInfo {
+  /**
+   * 镜像id，用于跳转
+   */
+  ImageId?: string
+  /**
+   * 唯一值
+   */
+  UniqueKey?: string
+  /**
+   * 事件类型
+   ESCAPE_CGROUPS：利用cgroup机制逃逸
+   ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+   ESCAPE_DOCKER_API：访问Docker API接口逃逸
+   ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+   MOUNT_SENSITIVE_PTAH：敏感路径挂载
+   PRIVILEGE_CONTAINER_START：特权容器
+   PRIVILEGE：程序提权逃逸
+   */
+  EventType?: string
+  /**
+   * 原始事件类型
+   */
+  OriginEventType?: string
+  /**
+   * 镜像名
+   */
+  ImageName?: string
+  /**
+   * 容器数量
+   */
+  ContainerCount?: number
+  /**
+   * 生成时间
+   */
+  FoundTime?: string
+  /**
+   * 最近生成时间
+   */
+  LatestFoundTime?: string
+  /**
+   * 事件数量
+   */
+  EventCount?: number
+  /**
+   * 状态，EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
+   */
+  Status?: string
+  /**
+   * 风险描述
+   */
+  Description?: string
+  /**
+   * 解决方案
+   */
+  Solution?: string
 }
 
 /**

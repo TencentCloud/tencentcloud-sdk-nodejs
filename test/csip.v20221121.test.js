@@ -298,6 +298,16 @@ it("csip.v20221121.DescribeAlertList", async function () {
     }
 })
 
+it("csip.v20221121.UpdateAlertStatusList", async function () {
+    try {
+       const data = await client.UpdateAlertStatusList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeScanTaskList", async function () {
     try {
        const data = await client.DescribeScanTaskList({})

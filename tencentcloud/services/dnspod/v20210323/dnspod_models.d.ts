@@ -35,7 +35,7 @@ export interface CreateRecordRequest {
      */
     MX?: number;
     /**
-     * TTL，范围1-604800，不同等级域名最小值不同。
+     * TTL，范围1-604800，不同套餐域名最小值不同。
      */
     TTL?: number;
     /**

@@ -2988,6 +2988,16 @@ it("tcss.v20201101.DescribeAbnormalProcessRules", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeInspectionReport", async function () {
+    try {
+       const data = await client.DescribeInspectionReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.ScanComplianceAssetsByPolicyItem", async function () {
     try {
        const data = await client.ScanComplianceAssetsByPolicyItem({})
@@ -3118,9 +3128,9 @@ it("tcss.v20201101.DescribeSecLogDeliveryKafkaSetting", async function () {
     }
 })
 
-it("tcss.v20201101.DescribeInspectionReport", async function () {
+it("tcss.v20201101.DescribeEventEscapeImageList", async function () {
     try {
-       const data = await client.DescribeInspectionReport({})
+       const data = await client.DescribeEventEscapeImageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
