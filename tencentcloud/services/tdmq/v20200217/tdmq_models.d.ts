@@ -5070,7 +5070,7 @@ export interface SendCmqMsgRequest {
      */
     MsgContent: string;
     /**
-     * 延迟时间
+     * 延迟时间。单位为秒，默认值为0秒，最大不能超过队列配置的消息最长未确认时间。
      */
     DelaySeconds: number;
 }
@@ -6282,7 +6282,7 @@ export interface ModifyCmqSubscriptionAttributeRequest {
      */
     TopicName: string;
     /**
-     * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+     * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
      */
     SubscriptionName: string;
     /**
@@ -6816,11 +6816,11 @@ export interface SendCmqMsgResponse {
     /**
      * true表示发送成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 消息id
      */
-    MsgId: string;
+    MsgId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8723,7 +8723,7 @@ export interface CreateCmqQueueRequest {
      */
     VisibilityTimeout?: number;
     /**
-     * 消息最大长度。取值范围 1024-65536 Byte（即1-64K），默认值 65536。
+     * 消息最大长度。取值范围 1024-1048576 Byte（即1-1024K），默认值 1048576。
      */
     MaxMsgSize?: number;
     /**

@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUserManagerPwd", req, cb);
     }
     /**
+     * 获取Hbase表级监控数据概览接口
+     */
+    async DescribeHBaseTableOverview(req, cb) {
+        return this.request("DescribeHBaseTableOverview", req, cb);
+    }
+    /**
      * 查询集群实例信息
      */
     async DescribeInstances(req, cb) {
@@ -180,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPodState", req, cb);
     }
     /**
+     * 用于启停服务 重启服务等功能
+     */
+    async StartStopServiceOrMonitor(req, cb) {
+        return this.request("StartStopServiceOrMonitor", req, cb);
+    }
+    /**
      * 创建EMR集群实例
      */
     async CreateInstance(req, cb) {
@@ -192,10 +204,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
-     * 查询YARN资源调度数据信息
+     * 添加扩缩容规则，按负载和时间
      */
-    async DescribeResourceSchedule(req, cb) {
-        return this.request("DescribeResourceSchedule", req, cb);
+    async AddMetricScaleStrategy(req, cb) {
+        return this.request("AddMetricScaleStrategy", req, cb);
     }
     /**
      * 查询流程任务
@@ -210,10 +222,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHiveQueries", req, cb);
     }
     /**
-     * 用于启停服务 重启服务等功能
+     * 查询监控概览页指标数据
      */
-    async StartStopServiceOrMonitor(req, cb) {
-        return this.request("StartStopServiceOrMonitor", req, cb);
+    async DescribeEmrOverviewMetrics(req, cb) {
+        return this.request("DescribeEmrOverviewMetrics", req, cb);
     }
     /**
      * 缩容Task节点
@@ -234,10 +246,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoScaleStrategies", req, cb);
     }
     /**
-     * 添加扩缩容规则，按负载和时间
+     * 查询YARN资源调度数据信息
      */
-    async AddMetricScaleStrategy(req, cb) {
-        return this.request("AddMetricScaleStrategy", req, cb);
+    async DescribeResourceSchedule(req, cb) {
+        return this.request("DescribeResourceSchedule", req, cb);
     }
     /**
      * 获取自动扩缩容全局配置

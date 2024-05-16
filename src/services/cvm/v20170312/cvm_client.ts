@@ -78,6 +78,7 @@ import {
   InternetChargeTypeConfig,
   DescribeImagesResponse,
   ModifyInstancesVpcAttributeResponse,
+  CpuTopology,
   DescribeLaunchTemplatesResponse,
   DeleteHpcClustersResponse,
   DescribeInstancesActionTimerResponse,

@@ -1779,15 +1779,15 @@ export interface GetUserRequest {
  */
 export interface LoginActionMfaFlag {
   /**
-   * 是否设置手机号为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
+   * 是否设置手机号为登录和敏感操作安全校验方式， 1: 设置，0: 不设置
    */
   Phone?: number
   /**
-   * 是否设置软token为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
+   * 是否设置软token为登录和敏感操作安全校验方式， 1: 设置，0: 不设置
    */
   Stoken?: number
   /**
-   * 是否设置微信为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
+   * 是否设置微信为登录和敏感操作安全校验方式， 1: 设置，0: 不设置
    */
   Wechat?: number
 }
@@ -2034,57 +2034,57 @@ export interface AttachPolicyInfo {
   /**
    * 策略id
    */
-  PolicyId: number
+  PolicyId?: number
   /**
    * 策略名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyName: string
+  PolicyName?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateMode: number
+  CreateMode?: number
   /**
    * 取值为user和QCS
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyType: string
+  PolicyType?: string
   /**
    * 策略备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
-   * 策略关联操作者主帐号
+   * 策略关联操作者主账号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperateOwnerUin: string
+  OperateOwnerUin?: string
   /**
-   * 策略关联操作者ID，如果UinType为0表示子帐号Uin，如果UinType为1表示角色ID
+   * 策略关联操作者ID，如果UinType为0表示子账号Uin，如果UinType为1表示角色ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperateUin: string
+  OperateUin?: string
   /**
-   * UinType为0表示OperateUin字段是子帐号Uin，如果UinType为1表示OperateUin字段是角色ID
+   * UinType为0表示OperateUin字段是子账号Uin，如果UinType为1表示OperateUin字段是角色ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperateUinType: number
+  OperateUinType?: number
   /**
    * 是否已下线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deactived: number
+  Deactived?: number
   /**
    * 已下线的产品列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeactivedDetail: Array<string>
+  DeactivedDetail?: Array<string>
 }
 
 /**
@@ -2237,7 +2237,7 @@ export interface GetPolicyVersionResponse {
  */
 export interface GetCustomMFATokenInfoResponse {
   /**
-   * 自定义多因子验证Token对应的帐号Id
+   * 自定义多因子验证Token对应的账号Id
    */
   Uin?: number
   /**
@@ -2265,10 +2265,6 @@ export interface CreateOIDCConfigRequest {
    */
   IdentityUrl: string
   /**
-   * 签名公钥，需要base64
-   */
-  IdentityKey: string
-  /**
    * 客户端ID
    */
   ClientId: Array<string>
@@ -2276,6 +2272,10 @@ export interface CreateOIDCConfigRequest {
    * 名称
    */
   Name: string
+  /**
+   * 签名公钥，需要base64
+   */
+  IdentityKey: string
   /**
    * 描述
    */
@@ -2468,10 +2468,6 @@ export interface CreateUserOIDCConfigRequest {
    */
   IdentityUrl: string
   /**
-   * 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的帐号安全，建议您定期轮换签名公钥。
-   */
-  IdentityKey: string
-  /**
    * 客户端ID，在OpenID Connect身份提供商注册的客户端ID。
    */
   ClientId: string
@@ -2491,6 +2487,10 @@ export interface CreateUserOIDCConfigRequest {
    * 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段
    */
   MappingFiled: string
+  /**
+   * 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。
+   */
+  IdentityKey: string
   /**
    * 授权请求Scope。openid; email;profile。授权请求信息范围。默认必选openid。
    */
@@ -2798,10 +2798,6 @@ export interface UpdateOIDCConfigRequest {
    */
   IdentityUrl: string
   /**
-   * 签名公钥，需要base64
-   */
-  IdentityKey: string
-  /**
    * 客户端ID
    */
   ClientId: Array<string>
@@ -2809,6 +2805,10 @@ export interface UpdateOIDCConfigRequest {
    * 名称
    */
   Name: string
+  /**
+   * 签名公钥，需要base64
+   */
+  IdentityKey: string
   /**
    * 描述
    */
@@ -2954,10 +2954,6 @@ export interface UpdateUserOIDCConfigRequest {
    */
   IdentityUrl: string
   /**
-   * RSA签名公钥，JWKS格式，需要进行base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。
-   */
-  IdentityKey: string
-  /**
    * 客户端ID，在OpenID Connect身份提供商注册的客户端ID，允许英文字母、数字、特殊字符.-_:/，不能以特殊字符.-_:/开头，单个客户端ID最大64个字符。
    */
   ClientId: string
@@ -2974,9 +2970,13 @@ export interface UpdateUserOIDCConfigRequest {
    */
   ResponseMode: string
   /**
-   * 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段,仅支持英文字母、数宇、汉字、符号@、＆_[]-的组合，1-255个中文或英文字符
+   * 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段,仅支持英文字母、数字、汉字、符号@、＆_[]-的组合，1-255个中文或英文字符
    */
   MappingFiled: string
+  /**
+   * RSA签名公钥，JWKS格式，需要进行base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的账号安全，建议您定期轮换签名公钥。
+   */
+  IdentityKey: string
   /**
    * 授权请求Scope。有openid; email;profile三种。代表授权请求信息范围openid表示请求访问用户的身份信息，email表示请求访问用户的电子邮件地址，profile表示请求访问用户的基本信息。默认必选openid。
    */

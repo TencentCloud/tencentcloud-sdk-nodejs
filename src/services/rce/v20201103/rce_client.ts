@@ -20,19 +20,17 @@ import { ClientConfig } from "../../../common/interface"
 import {
   QQAccountInfo,
   ManageMarketingRiskRequest,
-  DescribeRiskAssessmentRequest,
+  OutputManageMarketingRisk,
   OnlineScamInfo,
   InputManageMarketingRisk,
-  WeChatAccountInfo,
   OtherAccountInfo,
   AccountInfo,
   ManageMarketingRiskResponse,
   InputCryptoManageMarketingRisk,
-  DescribeRiskAssessmentResponse,
   SponsorInfo,
   InputDetails,
   OutputManageMarketingRiskValue,
-  OutputManageMarketingRisk,
+  WeChatAccountInfo,
 } from "./rce_models"
 
 /**
@@ -42,16 +40,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("rce.tencentcloudapi.com", "2020-11-03", clientConfig)
-  }
-
-  /**
-   * 此接口用于查询风险评估结果
-   */
-  async DescribeRiskAssessment(
-    req?: DescribeRiskAssessmentRequest,
-    cb?: (error: string, rep: DescribeRiskAssessmentResponse) => void
-  ): Promise<DescribeRiskAssessmentResponse> {
-    return this.request("DescribeRiskAssessment", req, cb)
   }
 
   /**

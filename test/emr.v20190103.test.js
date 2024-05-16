@@ -148,6 +148,16 @@ it("emr.v20190103.ModifyUserManagerPwd", async function () {
     }
 })
 
+it("emr.v20190103.DescribeHBaseTableOverview", async function () {
+    try {
+       const data = await client.DescribeHBaseTableOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -268,6 +278,16 @@ it("emr.v20190103.SyncPodState", async function () {
     }
 })
 
+it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+    try {
+       const data = await client.StartStopServiceOrMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
@@ -288,9 +308,9 @@ it("emr.v20190103.InquiryPriceCreateInstance", async function () {
     }
 })
 
-it("emr.v20190103.DescribeResourceSchedule", async function () {
+it("emr.v20190103.AddMetricScaleStrategy", async function () {
     try {
-       const data = await client.DescribeResourceSchedule({})
+       const data = await client.AddMetricScaleStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +338,9 @@ it("emr.v20190103.DescribeHiveQueries", async function () {
     }
 })
 
-it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     try {
-       const data = await client.StartStopServiceOrMonitor({})
+       const data = await client.DescribeEmrOverviewMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +378,9 @@ it("emr.v20190103.DescribeAutoScaleStrategies", async function () {
     }
 })
 
-it("emr.v20190103.AddMetricScaleStrategy", async function () {
+it("emr.v20190103.DescribeResourceSchedule", async function () {
     try {
-       const data = await client.AddMetricScaleStrategy({})
+       const data = await client.DescribeResourceSchedule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

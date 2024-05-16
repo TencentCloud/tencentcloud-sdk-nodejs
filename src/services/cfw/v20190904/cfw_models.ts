@@ -5391,7 +5391,7 @@ export interface DescribeFwEdgeIpsResponse {
  */
 export interface DescribeIPStatusListResponse {
   /**
-   * ip状态信息
+   * IP状态信息
    */
   StatusList?: Array<IPDefendStatus>
   /**

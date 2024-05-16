@@ -281,7 +281,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
-     * 枚举cmq死信队列源队列
+     * 接口很久之前已删除，需下线
+
+枚举cmq死信队列源队列
      */
     async DescribeCmqDeadLetterSourceQueues(req, cb) {
         return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);

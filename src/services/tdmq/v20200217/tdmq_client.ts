@@ -796,8 +796,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举cmq死信队列源队列
-   */
+     * 接口很久之前已删除，需下线
+
+枚举cmq死信队列源队列
+     */
   async DescribeCmqDeadLetterSourceQueues(
     req: DescribeCmqDeadLetterSourceQueuesRequest,
     cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void

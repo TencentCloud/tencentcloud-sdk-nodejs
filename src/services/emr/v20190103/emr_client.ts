@@ -22,6 +22,7 @@ import {
   ClusterSetting,
   PodSpecInfo,
   PodSaleSpec,
+  DescribeHBaseTableOverviewRequest,
   ScaleOutInstanceResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
@@ -42,6 +43,7 @@ import {
   WeekRepeatStrategy,
   UserManagerFilter,
   DynamicPodSpec,
+  OverviewRow,
   DiskSpec,
   ModifyUserManagerPwdRequest,
   COSSettings,
@@ -49,6 +51,7 @@ import {
   SubnetInfo,
   ScaleOutInstanceRequest,
   ZoneDetailPriceResult,
+  DescribeHBaseTableOverviewResponse,
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyAutoScaleStrategyRequest,
   NodeResourceSpec,
@@ -76,7 +79,7 @@ import {
   DescribeJobFlowRequest,
   InquiryPriceCreateInstanceResponse,
   StartStopServiceOrMonitorRequest,
-  TerminateInstanceRequest,
+  OverviewMetricData,
   AutoScaleRecord,
   JobFlowResourceSpec,
   Configuration,
@@ -107,6 +110,8 @@ import {
   PriceDetail,
   DescribeResourceScheduleResponse,
   MultiDisk,
+  TerminateInstanceRequest,
+  MetricTags,
   TerminateClusterNodesResponse,
   ModifyResourceSchedulerRequest,
   LoginSettings,
@@ -116,6 +121,7 @@ import {
   TimeAutoScaleStrategy,
   DescribeInsightListResponse,
   DescribeHiveQueriesRequest,
+  DeleteAutoScaleStrategyResponse,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
   DescribeCvmQuotaResponse,
@@ -132,6 +138,7 @@ import {
   MetaDbInfo,
   Execution,
   UpdateInstanceSettings,
+  DescribeEmrOverviewMetricsResponse,
   ScriptBootstrapActionConfig,
   DescribeInstancesRequest,
   NotRepeatStrategy,
@@ -164,7 +171,7 @@ import {
   MultiZoneSetting,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
-  DeleteAutoScaleStrategyResponse,
+  DescribeEmrOverviewMetricsRequest,
   PodState,
   ScaleOutClusterResponse,
   PartDetailPriceItem,
@@ -183,6 +190,7 @@ import {
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
+  TableSchemaItem,
   InquiryPriceScaleOutInstanceResponse,
   AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
@@ -341,6 +349,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取Hbase表级监控数据概览接口
+   */
+  async DescribeHBaseTableOverview(
+    req: DescribeHBaseTableOverviewRequest,
+    cb?: (error: string, rep: DescribeHBaseTableOverviewResponse) => void
+  ): Promise<DescribeHBaseTableOverviewResponse> {
+    return this.request("DescribeHBaseTableOverview", req, cb)
+  }
+
+  /**
    * 查询集群实例信息
    */
   async DescribeInstances(
@@ -463,6 +481,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于启停服务 重启服务等功能
+   */
+  async StartStopServiceOrMonitor(
+    req: StartStopServiceOrMonitorRequest,
+    cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void
+  ): Promise<StartStopServiceOrMonitorResponse> {
+    return this.request("StartStopServiceOrMonitor", req, cb)
+  }
+
+  /**
    * 创建EMR集群实例
    */
   async CreateInstance(
@@ -483,13 +511,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询YARN资源调度数据信息
+   * 添加扩缩容规则，按负载和时间
    */
-  async DescribeResourceSchedule(
-    req: DescribeResourceScheduleRequest,
-    cb?: (error: string, rep: DescribeResourceScheduleResponse) => void
-  ): Promise<DescribeResourceScheduleResponse> {
-    return this.request("DescribeResourceSchedule", req, cb)
+  async AddMetricScaleStrategy(
+    req: AddMetricScaleStrategyRequest,
+    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
+  ): Promise<AddMetricScaleStrategyResponse> {
+    return this.request("AddMetricScaleStrategy", req, cb)
   }
 
   /**
@@ -513,13 +541,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于启停服务 重启服务等功能
+   * 查询监控概览页指标数据
    */
-  async StartStopServiceOrMonitor(
-    req: StartStopServiceOrMonitorRequest,
-    cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void
-  ): Promise<StartStopServiceOrMonitorResponse> {
-    return this.request("StartStopServiceOrMonitor", req, cb)
+  async DescribeEmrOverviewMetrics(
+    req: DescribeEmrOverviewMetricsRequest,
+    cb?: (error: string, rep: DescribeEmrOverviewMetricsResponse) => void
+  ): Promise<DescribeEmrOverviewMetricsResponse> {
+    return this.request("DescribeEmrOverviewMetrics", req, cb)
   }
 
   /**
@@ -553,13 +581,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加扩缩容规则，按负载和时间
+   * 查询YARN资源调度数据信息
    */
-  async AddMetricScaleStrategy(
-    req: AddMetricScaleStrategyRequest,
-    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
-  ): Promise<AddMetricScaleStrategyResponse> {
-    return this.request("AddMetricScaleStrategy", req, cb)
+  async DescribeResourceSchedule(
+    req: DescribeResourceScheduleRequest,
+    cb?: (error: string, rep: DescribeResourceScheduleResponse) => void
+  ): Promise<DescribeResourceScheduleResponse> {
+    return this.request("DescribeResourceSchedule", req, cb)
   }
 
   /**

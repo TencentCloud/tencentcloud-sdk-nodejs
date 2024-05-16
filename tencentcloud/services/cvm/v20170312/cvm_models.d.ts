@@ -1310,6 +1310,20 @@ export interface ModifyInstancesVpcAttributeResponse {
     RequestId?: string;
 }
 /**
+ * 描述了实例CPU拓扑结构的相关信息。
+ */
+export interface CpuTopology {
+    /**
+     * 决定启用的CPU物理核心数。
+     */
+    CoreCount?: number;
+    /**
+     * 每核心线程数。该参数决定是否开启或关闭超线程。<br><li>1 表示关闭超线程 </li><br><li>2 表示开启超线程</li>
+   不设置时，实例使用默认的超线程策略。开关超线程请参考文档：[开启与关闭超线程](https://cloud.tencent.com/document/product/213/103798)。
+     */
+    ThreadPerCore?: number;
+}
+/**
  * DescribeLaunchTemplates返回参数结构体
  */
 export interface DescribeLaunchTemplatesResponse {
@@ -4036,6 +4050,10 @@ export interface RunInstancesRequest {
   false（默认）：发送正常请求，通过检查后直接创建实例
      */
     DryRun?: boolean;
+    /**
+     * 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。
+     */
+    CpuTopology?: CpuTopology;
     /**
      * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
      */

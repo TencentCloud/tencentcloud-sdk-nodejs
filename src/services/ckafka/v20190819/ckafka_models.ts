@@ -2462,6 +2462,10 @@ export interface ModifyConnectResourceRequest {
    * Kafka配置，Type为 KAFKA 时必填
    */
   KafkaConnectParam?: KafkaConnectParam
+  /**
+   * MQTT配置，Type为 MQTT 时必填
+   */
+  MqttConnectParam?: MqttConnectParam
 }
 
 /**
@@ -3553,6 +3557,10 @@ export interface CreateConnectResourceRequest {
    * Kafka配置，Type为 KAFKA 时必填
    */
   KafkaConnectParam?: KafkaConnectParam
+  /**
+   * MQTT配置，Type为 MQTT 时必填
+   */
+  MqttConnectParam?: MqttConnectParam
 }
 
 /**

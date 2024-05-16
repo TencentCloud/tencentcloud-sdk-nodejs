@@ -132,6 +132,36 @@ export interface PodSaleSpec {
 }
 
 /**
+ * DescribeHBaseTableOverview请求参数结构体
+ */
+export interface DescribeHBaseTableOverviewRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 分页查询编号偏移量，从0开始
+   */
+  Offset: number
+  /**
+   * 分页查询时的分页大小，最小1，最大100
+   */
+  Limit: number
+  /**
+   * 表名称，模糊匹配
+   */
+  Table?: string
+  /**
+   * 排序的字段，有默认值
+   */
+  OrderField?: string
+  /**
+   * 默认为降序，asc代表升序，desc代表降序
+   */
+  OrderType?: string
+}
+
+/**
  * ScaleOutInstance返回参数结构体
  */
 export interface ScaleOutInstanceResponse {
@@ -854,6 +884,36 @@ export interface DynamicPodSpec {
 }
 
 /**
+ * Hbase的TableMetric Overview返回
+ */
+export interface OverviewRow {
+  /**
+   * 表名字
+   */
+  Table?: string
+  /**
+   * 读请求次数
+   */
+  ReadRequestCount?: number
+  /**
+   * 写请求次数
+   */
+  WriteRequestCount?: number
+  /**
+   * 当前memstore的size
+   */
+  MemstoreSize?: number
+  /**
+   * 当前region中StroreFile的size
+   */
+  StoreFileSize?: number
+  /**
+   * regions，点击可跳转
+   */
+  Operation?: string
+}
+
+/**
  * 磁盘描述。
  */
 export interface DiskSpec {
@@ -1299,6 +1359,14 @@ export interface ScaleOutInstanceRequest {
    * 0表示关闭自动续费，1表示开启自动续费
    */
   AutoRenew?: number
+  /**
+   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   */
+  ResourceBaseType?: string
+  /**
+   * 计算资源id
+   */
+  ComputeResourceId?: string
 }
 
 /**
@@ -1314,6 +1382,28 @@ export interface ZoneDetailPriceResult {
    * 不同节点的价格详情
    */
   NodeDetailPrice: Array<NodeDetailPriceResult>
+}
+
+/**
+ * DescribeHBaseTableOverview返回参数结构体
+ */
+export interface DescribeHBaseTableOverviewResponse {
+  /**
+   * 概览数据数组
+   */
+  TableMonitorList?: Array<OverviewRow>
+  /**
+   * 概览数据数组长度
+   */
+  TotalCount?: number
+  /**
+   * 表schema信息
+   */
+  SchemaList?: Array<TableSchemaItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2412,17 +2502,39 @@ export interface StartStopServiceOrMonitorRequest {
 }
 
 /**
- * TerminateInstance请求参数结构体
+ * 概览数据
  */
-export interface TerminateInstanceRequest {
+export interface OverviewMetricData {
   /**
-   * 实例ID。
+   * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  Metric?: string
   /**
-   * 销毁节点ID。该参数为预留参数，用户无需配置。
+   * 第一个数据时间戳
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceIds?: Array<string>
+  First?: number
+  /**
+   * 最后一个数据时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Last?: number
+  /**
+   * 采样点时间间隔
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: number
+  /**
+   * 采样点数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataPoints?: Array<string>
+  /**
+   * 指标tags
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: MetricTags
 }
 
 /**
@@ -3425,6 +3537,44 @@ export interface MultiDisk {
 }
 
 /**
+ * TerminateInstance请求参数结构体
+ */
+export interface TerminateInstanceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 销毁节点ID。该参数为预留参数，用户无需配置。
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   */
+  ResourceBaseType?: string
+  /**
+   * 计算资源ID
+   */
+  ComputeResourceId?: string
+}
+
+/**
+ * 指标tag
+ */
+export interface MetricTags {
+  /**
+   * 指标单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit?: string
+  /**
+   * 指标Type
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * TerminateClusterNodes返回参数结构体
  */
 export interface TerminateClusterNodesResponse {
@@ -3800,6 +3950,16 @@ export interface DescribeHiveQueriesRequest {
    * 结束时间小于时间点
    */
   EndTimeLte?: number
+}
+
+/**
+ * DeleteAutoScaleStrategy返回参数结构体
+ */
+export interface DeleteAutoScaleStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4377,6 +4537,20 @@ export interface UpdateInstanceSettings {
    * 变配机器规格
    */
   InstanceType?: string
+}
+
+/**
+ * DescribeEmrOverviewMetrics返回参数结构体
+ */
+export interface DescribeEmrOverviewMetricsResponse {
+  /**
+   * 指标数据明细
+   */
+  Result?: Array<OverviewMetricData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5272,13 +5446,37 @@ export interface UserInfoForUserManager {
 }
 
 /**
- * DeleteAutoScaleStrategy返回参数结构体
+ * DescribeEmrOverviewMetrics请求参数结构体
  */
-export interface DeleteAutoScaleStrategyResponse {
+export interface DescribeEmrOverviewMetricsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间
    */
-  RequestId?: string
+  End: number
+  /**
+   * 指标名
+   */
+  Metric: string
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 粒度 30s-max 1m-max 1h-max等
+   */
+  Downsample: string
+  /**
+   * 起始时间，画饼状图时不传
+   */
+  Start?: number
+  /**
+   * 聚合方法，扩展用，这里目前不用传
+   */
+  Aggregator?: string
+  /**
+   * 指标要查询的具体type 如："{"type":"CapacityTotal|CapacityRemaining"}"
+   */
+  Tags?: string
 }
 
 /**
@@ -5552,6 +5750,14 @@ export interface InquiryPriceScaleOutInstanceRequest {
    * 扩容的Master节点数量。
    */
   MasterCount?: number
+  /**
+   * 类型为ComputeResource和EMR以及默认，默认为EMR
+   */
+  ResourceBaseType?: string
+  /**
+   * 计算资源id
+   */
+  ComputeResourceId?: string
 }
 
 /**
@@ -5880,6 +6086,39 @@ export interface UserManagerUserBriefInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DownLoadKeyTabUrl: string
+}
+
+/**
+ * 表格schema信息
+ */
+export interface TableSchemaItem {
+  /**
+   * 列标识
+   */
+  Name: string
+  /**
+   * 是否可按该列排序
+   */
+  Sortable: boolean
+  /**
+   * 是否可筛选
+   */
+  WithFilter: boolean
+  /**
+   * 筛选的候选集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Candidates: Array<string>
+  /**
+   * 是否可点击
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Clickable: boolean
+  /**
+   * 展示的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title: string
 }
 
 /**

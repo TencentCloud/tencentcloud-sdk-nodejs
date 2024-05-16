@@ -491,9 +491,9 @@ export interface SearchCosRechargeInfoRequest {
    */
   BucketRegion: string
   /**
-   * cos文件所在文件夹的前缀
+   * COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。
    */
-  Prefix: string
+  Prefix?: string
   /**
    * 压缩模式:   "", "gzip", "lzop", "snappy";   默认""
    */
@@ -1735,14 +1735,14 @@ export interface CreateCosRechargeRequest {
    */
   BucketRegion: string
   /**
-   * COS文件所在文件夹的前缀
-   */
-  Prefix: string
-  /**
    * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；
 默认为minimalist_log
    */
   LogType: string
+  /**
+   * COS文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。
+   */
+  Prefix?: string
   /**
    * supported: "", "gzip", "lzop", "snappy"; 默认空
    */
@@ -7058,7 +7058,7 @@ export interface ModifyCosRechargeRequest {
    */
   BucketRegion?: string
   /**
-   * COS文件所在文件夹的前缀
+   * COS文件所在文件夹的前缀。为空串时投递存储桶下所有的文件。
    */
   Prefix?: string
   /**

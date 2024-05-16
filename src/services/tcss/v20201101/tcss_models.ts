@@ -698,12 +698,12 @@ export interface DescribeAssetImageRegistryVulListResponse {
    * 镜像漏洞列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ImageVul>
+  List?: Array<ImageVul>
   /**
    * 总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3674,7 +3674,7 @@ export interface DescribeAssetImageRegistryVulListExportRequest {
    */
   ImageInfo?: ImageInfo
   /**
-   * 镜像标识Id
+   * 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
    */
   Id?: number
 }
@@ -10871,7 +10871,7 @@ export interface DescribeAssetImageRegistryVulListExportResponse {
    * excel文件下载地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13868,7 +13868,7 @@ export interface DescribeAssetImageRegistryVulListRequest {
    */
   ImageInfo?: ImageInfo
   /**
-   * 镜像标识Id
+   * 必填参数，镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
    */
   Id?: number
 }

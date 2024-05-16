@@ -400,6 +400,11 @@ export interface EmbedTokenInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TicketNum?: number
+  /**
+   * 全局参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GlobalParam?: string
 }
 
 /**
@@ -789,6 +794,49 @@ export interface CreateEmbedTokenRequest {
    * 访问次数限制，限制范围1-99999，为空则不设置访问次数限制
    */
   TicketNum?: number
+  /**
+   * 全局筛选参数 报表过滤条件的全局参数。 格式为JSON格式的字符串
+**目前仅支持字符类型页面参数绑定到全局参数
+**
+[
+    {
+        "ParamKey": "name",  //页面参数名称
+        "JoinType": "AND",     // 连接方式,目前仅支持AND
+        "WhereList": [
+            {
+                "Operator": "-neq",   // 操作符，参考以下说明
+                "Value": [                   //操作值，单值数组只传一个值
+                    "zZWJMD",
+                    "ZzVGHX",
+                    "湖南省",
+                    "河北省"
+                ]
+            }
+        ]
+    },
+    {
+        "ParamKey": "genderParam",
+        "JoinType": "AND",
+        "WhereList": [
+            {
+                "Operator": "-neq",
+                "Value": [
+                    "男"
+                ]
+            }
+        ]
+    }
+]
+
+
+
+Operator 目前支持
+-neq  不等于!=操作符
+-eq  等于=操作符
+-is     in操作符
+
+   */
+  GlobalParam?: string
 }
 
 /**

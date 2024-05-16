@@ -59,9 +59,35 @@ export interface ManageMarketingRiskRequest {
 }
 
 /**
- * DescribeRiskAssessment请求参数结构体
+ * 全栈式风控引擎出参
  */
-export type DescribeRiskAssessmentRequest = null
+export interface OutputManageMarketingRisk {
+  /**
+   * 错误码，0 表示成功，非0表示失败错误码。
+0：成功
+1：错误
+1002：参数错误
+4300：未开通服务
+4301：后端未创建对应产品
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: number
+  /**
+   * UTF-8编码，出错消息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 业务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: OutputManageMarketingRiskValue
+  /**
+   * 控制台显示的req_id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UUid?: string
+}
 
 /**
  * 诈骗信息。
@@ -206,45 +232,6 @@ export interface InputManageMarketingRisk {
 }
 
 /**
- * 微信账号信息。
- */
-export interface WeChatAccountInfo {
-  /**
-   * 微信的OpenId/UnionId。
-   */
-  WeChatOpenId: string
-  /**
-   * 微信开放账号类型：
-1：微信公众号/微信第三方登录。
-2：微信小程序。
-   */
-  WeChatSubType?: number
-  /**
-   * 随机串。如果WeChatSubType是2，该字段必填。Token签名随机数，建议16个字符。
-   */
-  RandStr?: string
-  /**
-   * 如果WeChatSubType 是1，填入授权的 access_token（注意：不是普通 access_token，详情请参阅官方说明文档。获取网页版本的 access_token 时，scope 字段必需填写snsapi_userinfo
-如果WeChatSubType是2，填入以session_key 为密钥签名随机数RandStr（hmac_sha256签名算法）得到的字符串。
-   */
-  WeChatAccessToken?: string
-  /**
-   * 用于标识微信用户登录后所关联业务自身的账号ID。
-   */
-  AssociateAccount?: string
-  /**
-   * 账号绑定的MD5手机号，
-注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。
-   */
-  MobilePhone?: string
-  /**
-   * 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5
-注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。
-   */
-  DeviceId?: string
-}
-
-/**
  * 其它账号信息。
  */
 export interface OtherAccountInfo {
@@ -329,16 +316,6 @@ export interface InputCryptoManageMarketingRisk {
    * 加密内容，非空时接口采用加密模式。
    */
   CryptoContent?: string
-}
-
-/**
- * DescribeRiskAssessment返回参数结构体
- */
-export interface DescribeRiskAssessmentResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -457,32 +434,40 @@ reject：高风险，建议拦截
 }
 
 /**
- * 全栈式风控引擎出参
+ * 微信账号信息。
  */
-export interface OutputManageMarketingRisk {
+export interface WeChatAccountInfo {
   /**
-   * 错误码，0 表示成功，非0表示失败错误码。
-0：成功
-1：错误
-1002：参数错误
-4300：未开通服务
-4301：后端未创建对应产品
-注意：此字段可能返回 null，表示取不到有效值。
+   * 微信的OpenId/UnionId。
    */
-  Code?: number
+  WeChatOpenId: string
   /**
-   * UTF-8编码，出错消息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 微信开放账号类型：
+1：微信公众号/微信第三方登录。
+2：微信小程序。
    */
-  Message?: string
+  WeChatSubType?: number
   /**
-   * 业务详情。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 随机串。如果WeChatSubType是2，该字段必填。Token签名随机数，建议16个字符。
    */
-  Value?: OutputManageMarketingRiskValue
+  RandStr?: string
   /**
-   * 控制台显示的req_id。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 如果WeChatSubType 是1，填入授权的 access_token（注意：不是普通 access_token，详情请参阅官方说明文档。获取网页版本的 access_token 时，scope 字段必需填写snsapi_userinfo
+如果WeChatSubType是2，填入以session_key 为密钥签名随机数RandStr（hmac_sha256签名算法）得到的字符串。
    */
-  UUid?: string
+  WeChatAccessToken?: string
+  /**
+   * 用于标识微信用户登录后所关联业务自身的账号ID。
+   */
+  AssociateAccount?: string
+  /**
+   * 账号绑定的MD5手机号，
+注释：只支持标准中国大陆11位手机号MD5加密后位的32位小写字符串。
+   */
+  MobilePhone?: string
+  /**
+   * 用户设备号，支持IMEI、IMEIMD5、IDFA、IDFAMD5
+注释：IMEIMD5、IDFAMD5加密方式，对IMEI、IDFA明文进行MD5加密，加密后取32位小写值。
+   */
+  DeviceId?: string
 }

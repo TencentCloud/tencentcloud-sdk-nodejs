@@ -8543,6 +8543,10 @@ export interface SimpleHlsClipRequest {
      * 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。
      */
     SessionContext?: string;
+    /**
+     * 保留字段，特殊用途时使用。 示例值：""
+     */
+    ExtInfo?: string;
 }
 /**
  * 指定删除点播视频时的删除内容

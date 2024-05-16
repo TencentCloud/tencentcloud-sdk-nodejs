@@ -177,7 +177,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqSubscriptionDetail(req: DescribeCmqSubscriptionDetailRequest, cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void): Promise<DescribeCmqSubscriptionDetailResponse>;
     /**
-     * 枚举cmq死信队列源队列
+     * 接口很久之前已删除，需下线
+
+枚举cmq死信队列源队列
      */
     DescribeCmqDeadLetterSourceQueues(req: DescribeCmqDeadLetterSourceQueuesRequest, cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void): Promise<DescribeCmqDeadLetterSourceQueuesResponse>;
     /**
