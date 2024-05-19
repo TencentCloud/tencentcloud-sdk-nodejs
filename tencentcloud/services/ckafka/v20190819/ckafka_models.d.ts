@@ -5219,59 +5219,59 @@ export interface DatahubTaskInfo {
     /**
      * 任务ID
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 任务名称
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * 任务类型，SOURCE数据接入，SINK数据流出
      */
-    TaskType: string;
+    TaskType?: string;
     /**
      * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 数据源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceResource: DatahubResource;
+    SourceResource?: DatahubResource;
     /**
      * 数据目标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetResource: DatahubResource;
+    TargetResource?: DatahubResource;
     /**
      * 任务创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 异常信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMessage: string;
+    ErrorMessage?: string;
     /**
      * 创建进度百分比
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskProgress: number;
+    TaskProgress?: number;
     /**
      * 任务当前处于的步骤
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskCurrentStep: string;
+    TaskCurrentStep?: string;
     /**
      * Datahub转储Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatahubId: string;
+    DatahubId?: string;
     /**
      * 步骤列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepList: Array<string>;
+    StepList?: Array<string>;
 }
 /**
  * CreateAclRule返回参数结构体
