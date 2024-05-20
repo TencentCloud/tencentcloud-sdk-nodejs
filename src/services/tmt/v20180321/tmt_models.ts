@@ -117,35 +117,35 @@ export interface SpeechTranslateResponse {
   /**
    * 请求的SessionUuid直接返回
    */
-  SessionUuid: string
+  SessionUuid?: string
   /**
    * 语音识别状态 1-进行中 0-完成
    */
-  RecognizeStatus: number
+  RecognizeStatus?: number
   /**
    * 识别出的原文
    */
-  SourceText: string
+  SourceText?: string
   /**
    * 翻译出的译文
    */
-  TargetText: string
+  TargetText?: string
   /**
    * 第几个语音分片
    */
-  Seq: number
+  Seq?: number
   /**
    * 原语言
    */
-  Source: string
+  Source?: string
   /**
    * 目标语言
    */
-  Target: string
+  Target?: string
   /**
    * 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值
    */
-  VadSeq: number
+  VadSeq?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -361,10 +361,12 @@ export interface SpeechTranslateRequest {
   ProjectId?: number
   /**
    * 识别模式，该参数已废弃
+   * @deprecated
    */
   Mode?: string
   /**
    * 该参数已废弃
+   * @deprecated
    */
   TransType?: number
 }

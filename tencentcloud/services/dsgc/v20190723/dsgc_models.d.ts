@@ -481,7 +481,7 @@ export interface DSPACosMetaDataInfo {
     Storage?: number;
 }
 /**
- * DSPA评估模版
+ * DSPA评估模板
  */
 export interface AssessmentTemplate {
     /**
@@ -1999,12 +1999,7 @@ export interface DescribeDSPAAssessmentTemplatesRequest {
      */
     Limit?: number;
     /**
-     * 过滤项。
-  支持模糊搜索：（TemplateId，TemplateName）
-  支持过滤：
-  Source：模版来源，system / user
-  UseType：模版类型，auto，semi-auto，law等
-  Status：模版启用状态，draft / launched
+     * 过滤项。支持模糊搜索：（TemplateId，TemplateName）支持过滤：Source：模板来源，system / userUseType：模板类型，auto，semi-auto，law等Status：模板启用状态，draft / launched
      */
     Filters?: Array<DspaAssessmentFilter>;
 }
@@ -5492,7 +5487,7 @@ export interface CreateDSPAAssessmentRiskTemplateRequest {
      */
     DspaId: string;
     /**
-     * 模版名称
+     * 模板名称
      */
     TemplateName: string;
     /**
@@ -5504,7 +5499,7 @@ export interface CreateDSPAAssessmentRiskTemplateRequest {
      */
     RiskIdList: Array<number | bigint>;
     /**
-     * 模版描述
+     * 模板描述
      */
     TemplateDescription?: string;
 }

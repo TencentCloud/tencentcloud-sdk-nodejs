@@ -5,31 +5,31 @@ export interface ApplicationList {
     /**
      * 服务开关状态
      */
-    ServiceConf: ServiceStatus;
+    ServiceConf?: ServiceStatus;
     /**
      * 应用ID(AppID)
      */
-    BizId: number;
+    BizId?: number;
     /**
      * 应用名称
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 项目ID，默认为0
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 应用状态，返回0表示正常，1表示关闭，2表示欠费停服，3表示欠费回收
      */
-    AppStatus: number;
+    AppStatus?: number;
     /**
      * 创建时间，Unix时间戳格式
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 应用类型，无需关注此数值
      */
-    AppType: number;
+    AppType?: number;
 }
 /**
  * ModifyAppStatus请求参数结构体

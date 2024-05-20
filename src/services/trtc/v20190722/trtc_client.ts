@@ -80,6 +80,7 @@ import {
   DescribeRoomInfoResponse,
   DismissRoomRequest,
   DescribeTRTCRealTimeQualityMetricDataRequest,
+  DescribeAITranscriptionRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   McuLayout,
   DescribeUserInfoResponse,
@@ -121,6 +122,7 @@ import {
   OutputParams,
   DeleteCloudRecordingResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
+  RecognizeConfig,
   QualityData,
   StopPublishCdnStreamRequest,
   DeletePictureResponse,
@@ -146,20 +148,25 @@ import {
   ModifyCloudRecordingResponse,
   StartMCUMixTranscodeByStrRoomIdRequest,
   DescribeCloudRecordingResponse,
+  StartAITranscriptionRequest,
   DismissRoomResponse,
   StopStreamIngestResponse,
   MixUserInfo,
   EventMessage,
   DescribeTRTCMarketQualityDataRequest,
+  SummarizeTranscriptionRequest,
   UpdatePublishCdnStreamRequest,
   StartWebRecordRequest,
   MaxVideoUser,
   AgentParams,
   StopWebRecordResponse,
+  SummarizeTranscriptionResponse,
   DeletePictureRequest,
   McuSeiParams,
+  StopAITranscriptionRequest,
   UpdatePublishCdnStreamResponse,
   McuWaterMarkText,
+  TranscriptionParams,
   SeriesInfos,
   RemoveUserByStrRoomIdRequest,
   RecordParams,
@@ -169,14 +176,17 @@ import {
   PresetLayoutConfig,
   McuPublishCdnParam,
   AudioParams,
+  StopAITranscriptionResponse,
   SeriesInfo,
   WaterMarkTimestamp,
   SingleSubscribeParams,
   PublishCdnParams,
+  DescribeAITranscriptionResponse,
   McuWaterMarkParams,
   AbnormalExperience,
   RoomState,
   CreatePictureResponse,
+  StartAITranscriptionResponse,
   RemoveUserResponse,
 } from "./trtc_models"
 
@@ -579,6 +589,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+   * 这个接口调用后，后台会启动机器人，实时进行语音识别并下发字幕和会议记录。
+   */
+  async StartAITranscription(
+    req: StartAITranscriptionRequest,
+    cb?: (error: string, rep: StartAITranscriptionResponse) => void
+  ): Promise<StartAITranscriptionResponse> {
+    return this.request("StartAITranscription", req, cb)
+  }
+
+  /**
      * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
 userCount：通话人数，
 roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
@@ -603,6 +623,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: StopWebRecordResponse) => void
   ): Promise<StopWebRecordResponse> {
     return this.request("StopWebRecord", req, cb)
+  }
+
+  /**
+   * 停止转推任务。
+   */
+  async StopPublishCdnStream(
+    req: StopPublishCdnStreamRequest,
+    cb?: (error: string, rep: StopPublishCdnStreamResponse) => void
+  ): Promise<StopPublishCdnStreamResponse> {
+    return this.request("StopPublishCdnStream", req, cb)
   }
 
   /**
@@ -684,6 +714,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void
   ): Promise<StopMCUMixTranscodeByStrRoomIdResponse> {
     return this.request("StopMCUMixTranscodeByStrRoomId", req, cb)
+  }
+
+  /**
+   * 对转录的文本进行总结
+   */
+  async SummarizeTranscription(
+    req?: SummarizeTranscriptionRequest,
+    cb?: (error: string, rep: SummarizeTranscriptionResponse) => void
+  ): Promise<SummarizeTranscriptionResponse> {
+    return this.request("SummarizeTranscription", req, cb)
   }
 
   /**
@@ -801,6 +841,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+   * 查询AI转录状态
+   */
+  async DescribeAITranscription(
+    req: DescribeAITranscriptionRequest,
+    cb?: (error: string, rep: DescribeAITranscriptionResponse) => void
+  ): Promise<DescribeAITranscriptionResponse> {
+    return this.request("DescribeAITranscription", req, cb)
+  }
+
+  /**
      * 更新转推任务。
 注：请参见启动转推任务的接口说明和使用说明。
      */
@@ -865,13 +915,13 @@ networkDelay ：网络延迟率。
   }
 
   /**
-   * 停止转推任务。
+   * 停止AI转录
    */
-  async StopPublishCdnStream(
-    req: StopPublishCdnStreamRequest,
-    cb?: (error: string, rep: StopPublishCdnStreamResponse) => void
-  ): Promise<StopPublishCdnStreamResponse> {
-    return this.request("StopPublishCdnStream", req, cb)
+  async StopAITranscription(
+    req: StopAITranscriptionRequest,
+    cb?: (error: string, rep: StopAITranscriptionResponse) => void
+  ): Promise<StopAITranscriptionResponse> {
+    return this.request("StopAITranscription", req, cb)
   }
 
   /**

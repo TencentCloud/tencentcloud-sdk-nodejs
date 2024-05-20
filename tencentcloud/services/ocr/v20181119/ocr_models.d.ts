@@ -3196,9 +3196,29 @@ export interface RecognizeThaiIDCardOCRResponse {
      */
     ExpirationDate?: string;
     /**
+     * 英文签发日期
+     */
+    EnIssueDate?: string;
+    /**
+     * 英文到期日期
+     */
+    EnExpirationDate?: string;
+    /**
      * 泰文出生日期
      */
     Birthday?: string;
+    /**
+     * 英文出生日期
+     */
+    EnBirthday?: string;
+    /**
+     * 宗教信仰
+     */
+    Religion?: string;
+    /**
+     * 序列号
+     */
+    SerialNumber?: string;
     /**
      * 地址
      */

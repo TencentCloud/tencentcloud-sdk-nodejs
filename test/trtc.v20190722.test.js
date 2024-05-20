@@ -228,6 +228,16 @@ it("trtc.v20190722.StartMCUMixTranscode", async function () {
     }
 })
 
+it("trtc.v20190722.StartAITranscription", async function () {
+    try {
+       const data = await client.StartAITranscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeTRTCMarketScaleData", async function () {
     try {
        const data = await client.DescribeTRTCMarketScaleData({})
@@ -241,6 +251,16 @@ it("trtc.v20190722.DescribeTRTCMarketScaleData", async function () {
 it("trtc.v20190722.StopWebRecord", async function () {
     try {
        const data = await client.StopWebRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopPublishCdnStream", async function () {
+    try {
+       const data = await client.StopPublishCdnStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +321,16 @@ it("trtc.v20190722.DismissRoomByStrRoomId", async function () {
 it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     try {
        const data = await client.StopMCUMixTranscodeByStrRoomId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.SummarizeTranscription", async function () {
+    try {
+       const data = await client.SummarizeTranscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +428,16 @@ it("trtc.v20190722.ModifyPicture", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeAITranscription", async function () {
+    try {
+       const data = await client.DescribeAITranscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.UpdatePublishCdnStream", async function () {
     try {
        const data = await client.UpdatePublishCdnStream({})
@@ -448,9 +488,9 @@ it("trtc.v20190722.DescribeTRTCMarketQualityData", async function () {
     }
 })
 
-it("trtc.v20190722.StopPublishCdnStream", async function () {
+it("trtc.v20190722.StopAITranscription", async function () {
     try {
-       const data = await client.StopPublishCdnStream({})
+       const data = await client.StopAITranscription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

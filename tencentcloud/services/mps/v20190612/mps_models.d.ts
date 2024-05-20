@@ -5463,13 +5463,13 @@ export interface AiAnalysisTaskTagResult {
     Output?: AiAnalysisTaskTagOutput;
 }
 /**
- * 智能去水印任务输入类型
+ * 智能擦除任务输入类型
  */
 export interface AiAnalysisTaskDelLogoInput {
     /**
-     * 视频智能去水印模板 ID。
+     * 视频智能擦除模板 ID。
      */
-    Definition: number;
+    Definition?: number;
 }
 /**
  * BatchStopStreamLinkFlow请求参数结构体
@@ -7445,7 +7445,7 @@ export interface AiAnalysisResult {
   <li>Tag：智能标签</li>
   <li>FrameTag：智能按帧标签</li>
   <li>Highlight：智能精彩集锦</li>
-  <li>DeLogo：智能去水印</li>
+  <li>DeLogo：智能擦除</li>
   <li>Description：大模型摘要</li>
      */
     Type?: string;
@@ -7475,7 +7475,7 @@ export interface AiAnalysisResult {
      */
     HighlightTask?: AiAnalysisTaskHighlightResult;
     /**
-     * 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。
+     * 视频内容分析智能擦除任务的查询结果，当任务类型为 DeLogo 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeLogoTask?: AiAnalysisTaskDelLogoResult;
@@ -8724,17 +8724,17 @@ export interface DescribeStreamLinkFlowRealtimeStatusRequest {
     OutputIds?: Array<string>;
 }
 /**
- * 智能去水印结果信息
+ * 智能擦除结果信息
  */
 export interface AiAnalysisTaskDelLogoOutput {
     /**
-     * 去水印后文件的路径。
+     * 擦除后文件的路径。
      */
-    Path: string;
+    Path?: string;
     /**
-     * 去水印后文件的存储位置。
+     * 擦除后文件的存储位置。
      */
-    OutputStorage: TaskOutputStorage;
+    OutputStorage?: TaskOutputStorage;
 }
 /**
  * Asr 文字涉违禁信息
@@ -13460,7 +13460,7 @@ export interface LiveActivityResItem {
     LiveRecordTask?: LiveScheduleLiveRecordTaskResult;
 }
 /**
- * 智能去水印结果类型
+ * 智能擦除结果类型
  */
 export interface AiAnalysisTaskDelLogoResult {
     /**
@@ -13476,11 +13476,11 @@ export interface AiAnalysisTaskDelLogoResult {
      */
     Message?: string;
     /**
-     * 智能去水印任务输入。
+     * 智能擦除任务输入。
      */
     Input?: AiAnalysisTaskDelLogoInput;
     /**
-     * 智能去水印任务输出。
+     * 智能擦除任务输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Output?: AiAnalysisTaskDelLogoOutput;

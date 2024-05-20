@@ -1423,6 +1423,16 @@ export interface DescribeTRTCRealTimeQualityMetricDataRequest {
 }
 
 /**
+ * DescribeAITranscription请求参数结构体
+ */
+export interface DescribeAITranscriptionRequest {
+  /**
+   * 唯一标识AI转录任务。
+   */
+  TaskId: string
+}
+
+/**
  * 查询旁路转码计费时长。
 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
@@ -2448,6 +2458,34 @@ export interface StopMCUMixTranscodeByStrRoomIdRequest {
 }
 
 /**
+ * 语音识别使用的配置
+ */
+export interface RecognizeConfig {
+  /**
+   * 支持的语言，目前支持语言如下：
+    Chinese = "zh"
+    Chinese_TW = "zh-TW"
+    English = "en"
+    Vietnamese = "vi"
+    Japanese = "ja"
+    Korean = "ko"
+    Indonesia = "id"
+    Thai = "th"
+    Portuguese = "pt"
+    Turkish = "tr"
+    Arabic = "ar"
+    Spanish = "es"
+    Hindi = "hi"
+    French = "fr"
+   */
+  Language?: string
+  /**
+   * 选填，如果填写，则会启用翻译，不填则忽略。支持语言同Language字段。
+   */
+  TranslationLanguage?: string
+}
+
+/**
  * Es返回的质量数据
  */
 export interface QualityData {
@@ -2943,6 +2981,32 @@ Exited：表示当前录制任务正在退出的过程中。
 }
 
 /**
+ * StartAITranscription请求参数结构体
+ */
+export interface StartAITranscriptionRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，使用该sdkappid开启任务。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，使用该roomid开启任务。
+   */
+  RoomId: string
+  /**
+   * 启动转录机器人和鉴权的参数。
+   */
+  TranscriptionParams: TranscriptionParams
+  /**
+   * TRTC房间号的类型，0代表数字房间号，1代表字符串房间号。不填默认是数字房间号。
+   */
+  RoomIdType?: number
+  /**
+   * 语音识别配置
+   */
+  RecognizeConfig?: RecognizeConfig
+}
+
+/**
  * DismissRoom返回参数结构体
  */
 export interface DismissRoomResponse {
@@ -3033,6 +3097,11 @@ h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数�
    */
   Period: string
 }
+
+/**
+ * SummarizeTranscription请求参数结构体
+ */
+export type SummarizeTranscriptionRequest = null
 
 /**
  * UpdatePublishCdnStream请求参数结构体
@@ -3156,6 +3225,16 @@ export interface StopWebRecordResponse {
 }
 
 /**
+ * SummarizeTranscription返回参数结构体
+ */
+export interface SummarizeTranscriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeletePicture请求参数结构体
  */
 export interface DeletePictureRequest {
@@ -3181,6 +3260,16 @@ export interface McuSeiParams {
    * 透传SEI
    */
   PassThrough?: McuPassThrough
+}
+
+/**
+ * StopAITranscription请求参数结构体
+ */
+export interface StopAITranscriptionRequest {
+  /**
+   * 唯一标识转录任务。
+   */
+  TaskId: string
 }
 
 /**
@@ -3245,6 +3334,41 @@ export interface McuWaterMarkText {
    * 水印字体，不填默认为Tencent。支持设置以下值： Tencent （默认） SourceHanSans
    */
   Font?: string
+}
+
+/**
+ * AI转录参数
+ */
+export interface TranscriptionParams {
+  /**
+   * 转录机器人的UserId，用于进房发起转录任务。【注意】这个UserId不能与当前房间内的主播观众[UserId](https://cloud.tencent.com/document/product/647/46351#userid)重复。如果一个房间发起多个转录任务时，机器人的userid也不能相互重复，否则会中断前一个任务。需要保证转录机器人UserId在房间内唯一。
+   */
+  UserId: string
+  /**
+   * 转录机器人UserId对应的校验签名，即UserId和UserSig相当于转录机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   */
+  UserSig: string
+  /**
+   * IM[管理员账户](
+https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98)，如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。
+   */
+  IMAdminUserId?: string
+  /**
+   * IM管理员账户生成的签名，用于向特定群组发送消息。如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。必须和IM管理员的UserId一起填写。
+   */
+  IMAdminUserSig?: string
+  /**
+   * 房间内推流用户全部退出后超过MaxIdleTime秒，后台自动关闭转录任务，默认值是60s。
+   */
+  MaxIdleTime?: number
+  /**
+   * 1表示机器人只订阅单个人的流，0表示机器人订阅整个房间的流，如果不填默认订阅整个房间的流。
+   */
+  TranscriptionMode?: number
+  /**
+   * TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。
+   */
+  TargetUserId?: string
 }
 
 /**
@@ -3465,6 +3589,16 @@ export interface AudioParams {
 }
 
 /**
+ * StopAITranscription返回参数结构体
+ */
+export interface StopAITranscriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SeriesInfo类型
  */
 export interface SeriesInfo {
@@ -3522,6 +3656,24 @@ export interface PublishCdnParams {
    * 第三方CDN转推的目的地址，同时只支持转推一个第三方CDN地址。
    */
   PublishCdnUrls: Array<string>
+}
+
+/**
+ * DescribeAITranscription返回参数结构体
+ */
+export interface DescribeAITranscriptionResponse {
+  /**
+   * 起始时间。
+   */
+  StartTime?: string
+  /**
+   * 转录任务状态。
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3606,6 +3758,20 @@ export interface CreatePictureResponse {
    * 图片id
    */
   PictureId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartAITranscription返回参数结构体
+ */
+export interface StartAITranscriptionResponse {
+  /**
+   * 用于唯一标识转录任务。
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

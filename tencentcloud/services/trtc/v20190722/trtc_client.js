@@ -333,6 +333,12 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StartMCUMixTranscode", req, cb);
     }
     /**
+     * 这个接口调用后，后台会启动机器人，实时进行语音识别并下发字幕和会议记录。
+     */
+    async StartAITranscription(req, cb) {
+        return this.request("StartAITranscription", req, cb);
+    }
+    /**
      * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
 userCount：通话人数，
 roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
@@ -350,6 +356,12 @@ peakCurrentUsers：峰值同时在线人数。
      */
     async StopWebRecord(req, cb) {
         return this.request("StopWebRecord", req, cb);
+    }
+    /**
+     * 停止转推任务。
+     */
+    async StopPublishCdnStream(req, cb) {
+        return this.request("StopPublishCdnStream", req, cb);
     }
     /**
      * 接口说明：
@@ -407,6 +419,12 @@ peakCurrentUsers：峰值同时在线人数。
      */
     async StopMCUMixTranscodeByStrRoomId(req, cb) {
         return this.request("StopMCUMixTranscodeByStrRoomId", req, cb);
+    }
+    /**
+     * 对转录的文本进行总结
+     */
+    async SummarizeTranscription(req, cb) {
+        return this.request("SummarizeTranscription", req, cb);
     }
     /**
      * 获取TRTC录制的用量明细。
@@ -487,6 +505,12 @@ peakCurrentUsers：峰值同时在线人数。
         return this.request("ModifyPicture", req, cb);
     }
     /**
+     * 查询AI转录状态
+     */
+    async DescribeAITranscription(req, cb) {
+        return this.request("DescribeAITranscription", req, cb);
+    }
+    /**
      * 更新转推任务。
 注：请参见启动转推任务的接口说明和使用说明。
      */
@@ -531,10 +555,10 @@ networkDelay ：网络延迟率。
         return this.request("DescribeTRTCMarketQualityData", req, cb);
     }
     /**
-     * 停止转推任务。
+     * 停止AI转录
      */
-    async StopPublishCdnStream(req, cb) {
-        return this.request("StopPublishCdnStream", req, cb);
+    async StopAITranscription(req, cb) {
+        return this.request("StopAITranscription", req, cb);
     }
     /**
      * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）

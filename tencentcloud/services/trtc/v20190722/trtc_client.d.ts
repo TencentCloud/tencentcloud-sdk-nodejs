@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreatePictureRequest, DescribeTRTCMarketQualityMetricDataResponse, DescribeTRTCRealTimeScaleDataRequest, DescribeTRTCMarketScaleDataRequest, DescribeUserEventRequest, DescribeTrtcRoomUsageResponse, StopPublishCdnStreamResponse, DescribeTRTCRealTimeScaleMetricDataRequest, StopWebRecordRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeTRTCMarketScaleDataResponse, ModifyPictureRequest, DescribeWebRecordResponse, DescribeUserInfoRequest, DescribeTRTCMarketQualityDataResponse, DescribeRelayUsageRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeTRTCMarketQualityMetricDataRequest, DescribeWebRecordRequest, DescribeTRTCRealTimeScaleDataResponse, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeTRTCRealTimeQualityDataResponse, DescribeMixTranscodingUsageRequest, DescribeStreamIngestResponse, StopStreamIngestRequest, DescribeTRTCRealTimeQualityDataRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, DismissRoomRequest, DescribeTRTCRealTimeQualityMetricDataRequest, DescribeUserInfoResponse, RemoveUserByStrRoomIdResponse, DescribeTRTCRealTimeScaleMetricDataResponse, StartMCUMixTranscodeRequest, StartPublishCdnStreamResponse, DescribeTRTCMarketScaleMetricDataRequest, DescribeRelayUsageResponse, StartStreamIngestRequest, DescribeRecordingUsageResponse, StopMCUMixTranscodeRequest, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, DescribeTRTCRealTimeQualityMetricDataResponse, StartWebRecordResponse, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopPublishCdnStreamRequest, DeletePictureResponse, ModifyCloudRecordingRequest, StartPublishCdnStreamRequest, CreateCloudRecordingResponse, StartStreamIngestResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribePictureResponse, DescribeTrtcRoomUsageRequest, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, StartMCUMixTranscodeByStrRoomIdRequest, DescribeCloudRecordingResponse, DismissRoomResponse, StopStreamIngestResponse, DescribeTRTCMarketQualityDataRequest, UpdatePublishCdnStreamRequest, StartWebRecordRequest, StopWebRecordResponse, DeletePictureRequest, UpdatePublishCdnStreamResponse, RemoveUserByStrRoomIdRequest, DescribeStreamIngestRequest, DescribeTRTCMarketScaleMetricDataResponse, CreatePictureResponse, RemoveUserResponse } from "./trtc_models";
+import { CreatePictureRequest, DescribeTRTCMarketQualityMetricDataResponse, DescribeTRTCRealTimeScaleDataRequest, DescribeTRTCMarketScaleDataRequest, DescribeUserEventRequest, DescribeTrtcRoomUsageResponse, StopPublishCdnStreamResponse, DescribeTRTCRealTimeScaleMetricDataRequest, StopWebRecordRequest, DescribeUserEventResponse, StopMCUMixTranscodeByStrRoomIdResponse, DescribeCallDetailInfoRequest, DescribeTRTCMarketScaleDataResponse, ModifyPictureRequest, DescribeWebRecordResponse, DescribeUserInfoRequest, DescribeTRTCMarketQualityDataResponse, DescribeRelayUsageRequest, DescribeRecordStatisticResponse, StartMCUMixTranscodeByStrRoomIdResponse, DescribeTrtcUsageResponse, DismissRoomByStrRoomIdRequest, DescribeTRTCMarketQualityMetricDataRequest, DescribeWebRecordRequest, DescribeTRTCRealTimeScaleDataResponse, DescribeRecordStatisticRequest, DescribeRoomInfoRequest, DescribeCallDetailInfoResponse, DescribeTRTCRealTimeQualityDataResponse, DescribeMixTranscodingUsageRequest, DescribeStreamIngestResponse, StopStreamIngestRequest, DescribeTRTCRealTimeQualityDataRequest, DescribeTrtcUsageRequest, DescribeRoomInfoResponse, DismissRoomRequest, DescribeTRTCRealTimeQualityMetricDataRequest, DescribeAITranscriptionRequest, DescribeUserInfoResponse, RemoveUserByStrRoomIdResponse, DescribeTRTCRealTimeScaleMetricDataResponse, StartMCUMixTranscodeRequest, StartPublishCdnStreamResponse, DescribeTRTCMarketScaleMetricDataRequest, DescribeRelayUsageResponse, StartStreamIngestRequest, DescribeRecordingUsageResponse, StopMCUMixTranscodeRequest, ModifyPictureResponse, DescribeRecordingUsageRequest, DescribeScaleInfoResponse, StopMCUMixTranscodeResponse, DescribeMixTranscodingUsageResponse, RemoveUserRequest, DescribeUnusualEventRequest, DescribeCloudRecordingRequest, DescribeTRTCRealTimeQualityMetricDataResponse, StartWebRecordResponse, CreateCloudRecordingRequest, DeleteCloudRecordingResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopPublishCdnStreamRequest, DeletePictureResponse, ModifyCloudRecordingRequest, StartPublishCdnStreamRequest, CreateCloudRecordingResponse, StartStreamIngestResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DeleteCloudRecordingRequest, DescribePictureRequest, DescribePictureResponse, DescribeTrtcRoomUsageRequest, DescribeTrtcMcuTranscodeTimeRequest, DescribeScaleInfoRequest, DismissRoomByStrRoomIdResponse, DescribeUnusualEventResponse, ModifyCloudRecordingResponse, StartMCUMixTranscodeByStrRoomIdRequest, DescribeCloudRecordingResponse, StartAITranscriptionRequest, DismissRoomResponse, StopStreamIngestResponse, DescribeTRTCMarketQualityDataRequest, SummarizeTranscriptionRequest, UpdatePublishCdnStreamRequest, StartWebRecordRequest, StopWebRecordResponse, SummarizeTranscriptionResponse, DeletePictureRequest, StopAITranscriptionRequest, UpdatePublishCdnStreamResponse, RemoveUserByStrRoomIdRequest, DescribeStreamIngestRequest, DescribeTRTCMarketScaleMetricDataResponse, StopAITranscriptionResponse, DescribeAITranscriptionResponse, CreatePictureResponse, StartAITranscriptionResponse, RemoveUserResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -271,6 +271,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     StartMCUMixTranscode(req: StartMCUMixTranscodeRequest, cb?: (error: string, rep: StartMCUMixTranscodeResponse) => void): Promise<StartMCUMixTranscodeResponse>;
     /**
+     * 这个接口调用后，后台会启动机器人，实时进行语音识别并下发字幕和会议记录。
+     */
+    StartAITranscription(req: StartAITranscriptionRequest, cb?: (error: string, rep: StartAITranscriptionResponse) => void): Promise<StartAITranscriptionResponse>;
+    /**
      * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
 userCount：通话人数，
 roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
@@ -285,6 +289,10 @@ peakCurrentUsers：峰值同时在线人数。
      * 停止页面录制任务
      */
     StopWebRecord(req: StopWebRecordRequest, cb?: (error: string, rep: StopWebRecordResponse) => void): Promise<StopWebRecordResponse>;
+    /**
+     * 停止转推任务。
+     */
+    StopPublishCdnStream(req: StopPublishCdnStreamRequest, cb?: (error: string, rep: StopPublishCdnStreamResponse) => void): Promise<StopPublishCdnStreamResponse>;
     /**
      * 接口说明：
 启动云端录制功能，完成房间内的音视频录制，并上传到指定的云存储。您可以通过此 API 接口把TRTC 房间中的每一路音视频流做单独的录制又或者多路视频画面合流混成一路。
@@ -330,6 +338,10 @@ peakCurrentUsers：峰值同时在线人数。
      * 接口说明：结束云端混流
      */
     StopMCUMixTranscodeByStrRoomId(req: StopMCUMixTranscodeByStrRoomIdRequest, cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void): Promise<StopMCUMixTranscodeByStrRoomIdResponse>;
+    /**
+     * 对转录的文本进行总结
+     */
+    SummarizeTranscription(req?: SummarizeTranscriptionRequest, cb?: (error: string, rep: SummarizeTranscriptionResponse) => void): Promise<SummarizeTranscriptionResponse>;
     /**
      * 获取TRTC录制的用量明细。
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
@@ -391,6 +403,10 @@ peakCurrentUsers：峰值同时在线人数。
      */
     ModifyPicture(req: ModifyPictureRequest, cb?: (error: string, rep: ModifyPictureResponse) => void): Promise<ModifyPictureResponse>;
     /**
+     * 查询AI转录状态
+     */
+    DescribeAITranscription(req: DescribeAITranscriptionRequest, cb?: (error: string, rep: DescribeAITranscriptionResponse) => void): Promise<DescribeAITranscriptionResponse>;
+    /**
      * 更新转推任务。
 注：请参见启动转推任务的接口说明和使用说明。
      */
@@ -425,9 +441,9 @@ networkDelay ：网络延迟率。
      */
     DescribeTRTCMarketQualityData(req: DescribeTRTCMarketQualityDataRequest, cb?: (error: string, rep: DescribeTRTCMarketQualityDataResponse) => void): Promise<DescribeTRTCMarketQualityDataResponse>;
     /**
-     * 停止转推任务。
+     * 停止AI转录
      */
-    StopPublishCdnStream(req: StopPublishCdnStreamRequest, cb?: (error: string, rep: StopPublishCdnStreamResponse) => void): Promise<StopPublishCdnStreamResponse>;
+    StopAITranscription(req: StopAITranscriptionRequest, cb?: (error: string, rep: StopAITranscriptionResponse) => void): Promise<StopAITranscriptionResponse>;
     /**
      * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
 异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
