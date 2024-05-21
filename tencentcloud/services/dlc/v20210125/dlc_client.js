@@ -484,6 +484,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelSparkSessionBatchSQL", req, cb);
     }
     /**
+     * 修改用户信息
+     */
+    async ModifyUser(req, cb) {
+        return this.request("ModifyUser", req, cb);
+    }
+    /**
      * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
     async DescribeSparkSessionBatchSqlLog(req, cb) {
@@ -712,10 +718,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserDataEngineConfig", req, cb);
     }
     /**
-     * 修改用户信息
+     * 本接口（DescribeTaskLog）用于获取spark 作业任务日志详情
      */
-    async ModifyUser(req, cb) {
-        return this.request("ModifyUser", req, cb);
+    async DescribeTaskLog(req, cb) {
+        return this.request("DescribeTaskLog", req, cb);
     }
     /**
      * 修改引擎描述信息

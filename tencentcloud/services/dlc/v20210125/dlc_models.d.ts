@@ -1630,6 +1630,43 @@ export interface Policy {
     Id?: number;
 }
 /**
+ * DescribeTaskLog请求参数结构体
+ */
+export interface DescribeTaskLogRequest {
+    /**
+     * 列表返回的Id
+     */
+    TaskId: string;
+    /**
+     * 开始运行时间，unix时间戳（毫秒）
+     */
+    StartTime: number;
+    /**
+     * 结束运行时间，unix时间戳（毫秒）
+     */
+    EndTime: number;
+    /**
+     * 分页大小，最大1000，配合Context一起使用
+     */
+    Limit: number;
+    /**
+     * 下一次分页参数，第一次传空。透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
+     */
+    Context: string;
+    /**
+     * 是否升序排列，true:升序排序，false:倒序，默认false，倒序排列
+     */
+    Asc?: boolean;
+    /**
+     * 预览日志的通用过滤条件
+     */
+    Filters?: Array<Filter>;
+    /**
+     * SparkSQL任务唯一ID
+     */
+    BatchId?: string;
+}
+/**
  * UpdateUserDataEngineConfig返回参数结构体
  */
 export interface UpdateUserDataEngineConfigResponse {
@@ -6415,6 +6452,35 @@ export interface TaskResultInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QueryResultTime?: number;
+}
+/**
+ * DescribeTaskLog返回参数结构体
+ */
+export interface DescribeTaskLogResponse {
+    /**
+     * 下一次分页参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Context?: string;
+    /**
+     * 是否获取完结
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ListOver?: boolean;
+    /**
+     * 日志详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Results?: Array<JobLogResult>;
+    /**
+     * 日志url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTasks返回参数结构体

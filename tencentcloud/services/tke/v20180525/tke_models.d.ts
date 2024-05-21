@@ -425,7 +425,7 @@ export interface UpgradeClusterReleaseRequest {
      */
     ChartFrom?: string;
     /**
-     * 制品版本( 从第三安装时，不传这个参数）
+     * 制品版本( 从第三方安装时，不传这个参数）
      */
     ChartVersion?: string;
     /**
@@ -445,7 +445,7 @@ export interface UpgradeClusterReleaseRequest {
      */
     ChartNamespace?: string;
     /**
-     * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+     * 集群类型，支持传 tke, eks, tkeedge, external(注册集群）
      */
     ClusterType?: string;
 }
@@ -2571,9 +2571,7 @@ export interface AddExistedInstancesRequest {
      */
     SkipValidateOptions?: Array<string>;
     /**
-     * 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。
-  
-  参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。
+     * 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instance将使用默认配置。
      */
     InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>;
     /**
@@ -8244,7 +8242,7 @@ export interface CreateClusterReleaseRequest {
      */
     ChartNamespace?: string;
     /**
-     * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
+     * 集群类型，支持传 tke, eks, tkeedge, external(注册集群）
      */
     ClusterType?: string;
 }

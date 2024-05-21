@@ -61,6 +61,7 @@ import {
   DeleteConfigTemplateResponse,
   DescribeGroupBindedGatewaysResponse,
   DescribeJvmMonitorRequest,
+  EnableLaneRuleRequest,
   TaskRule,
   UnbindApiGroupRequest,
   TaskRecord,
@@ -68,8 +69,10 @@ import {
   RedoTaskBatchRequest,
   DescribeGroupsResponse,
   ModifyUploadInfoResponse,
+  EnableLaneRuleResponse,
   TsfPageConfig,
   CreateApiRateLimitRuleRequest,
+  DisableLaneRuleResponse,
   TaskRecordPage,
   AssociateBusinessLogConfigRequest,
   DescribeJvmMonitorResponse,
@@ -548,6 +551,7 @@ import {
   WarmupSetting,
   EnableUnitRouteRequest,
   TsfPageApplication,
+  DisableLaneRuleRequest,
   InstanceEnrichedInfo,
   DescribeResourceTaskStatusRequest,
   DescribeInvocationMetricDataCurveResponse,
@@ -1016,6 +1020,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGroupsWithPluginResponse) => void
   ): Promise<DescribeGroupsWithPluginResponse> {
     return this.request("DescribeGroupsWithPlugin", req, cb)
+  }
+
+  /**
+   * 启用泳道规则
+   */
+  async EnableLaneRule(
+    req: EnableLaneRuleRequest,
+    cb?: (error: string, rep: EnableLaneRuleResponse) => void
+  ): Promise<EnableLaneRuleResponse> {
+    return this.request("EnableLaneRule", req, cb)
   }
 
   /**
@@ -2559,6 +2573,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DraftApiGroupResponse) => void
   ): Promise<DraftApiGroupResponse> {
     return this.request("DraftApiGroup", req, cb)
+  }
+
+  /**
+   * 禁用泳道规则
+   */
+  async DisableLaneRule(
+    req: DisableLaneRuleRequest,
+    cb?: (error: string, rep: DisableLaneRuleResponse) => void
+  ): Promise<DisableLaneRuleResponse> {
+    return this.request("DisableLaneRule", req, cb)
   }
 
   /**

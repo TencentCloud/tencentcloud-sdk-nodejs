@@ -795,7 +795,7 @@ export interface CreateStudioProductResponse {
   /**
    * 产品描述
    */
-  Product: ProductEntry
+  Product?: ProductEntry
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1010,6 +1010,14 @@ export interface CreateStudioProductRequest {
    * 产品的项目ID
    */
   ProjectId: string
+  /**
+   * 平均传输速率
+   */
+  Rate?: string
+  /**
+   * 期限
+   */
+  Period?: string
 }
 
 /**
@@ -2295,6 +2303,16 @@ wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、els
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceCount?: number
+  /**
+   * 平均传输速率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rate?: string
+  /**
+   * 有效期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Period?: string
 }
 
 /**

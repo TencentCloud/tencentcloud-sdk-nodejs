@@ -114,6 +114,7 @@ import {
   GooseFS,
   TextLabelDistributionInfo,
   Option,
+  ImageSecret,
   DescribeNotebookImageRecordsRequest,
   StopCreatingImageRequest,
   DefaultInnerCallInfo,

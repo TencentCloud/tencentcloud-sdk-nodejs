@@ -167,9 +167,13 @@ HYBRID_PAID:
    */
   ServiceEIP?: ServiceEIP
   /**
-   * 服务的启动命令，以base64格式进行输入
+   * 服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效
    */
   CommandBase64?: string
+  /**
+   * 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092
+   */
+  ServicePort?: number
 }
 
 /**
@@ -2447,9 +2451,13 @@ HYBRID_PAID:
    */
   ServiceEIP?: ServiceEIP
   /**
-   * 服务的启动命令，以base64格式进行输入
+   * 服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效
    */
   CommandBase64?: string
+  /**
+   * 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092
+   */
+  ServicePort?: number
 }
 
 /**
@@ -3383,6 +3391,27 @@ export interface Option {
 }
 
 /**
+ * 自定义镜像仓库凭据
+ */
+export interface ImageSecret {
+  /**
+   * 用于加密密码的KMS公钥ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyId?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * 密码,base64编码； 当keyId不为空时，密码是加密后的
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+}
+
+/**
  * DescribeNotebookImageRecords请求参数结构体
  */
 export interface DescribeNotebookImageRecordsRequest {
@@ -4276,7 +4305,7 @@ INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED
  */
 export interface ImageInfo {
   /**
-   * 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像
+   * 镜像类型：TCR为腾讯云TCR镜像; CCR为腾讯云TCR个人版镜像，PreSet为平台预置镜像，CUSTOM为第三方自定义镜像
    */
   ImageType: string
   /**
@@ -4308,6 +4337,11 @@ export interface ImageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportDataPipeline?: boolean
+  /**
+   * 镜像仓库用户名密码信息(仅当ImageType为CUSTOM第三方镜像的时候需要)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageSecret?: ImageSecret
 }
 
 /**
@@ -4474,6 +4508,11 @@ HYBRID_PAID:
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceEIP?: ServiceEIP
+  /**
+   * 服务端口，默认为8501
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServicePort?: number
 }
 
 /**

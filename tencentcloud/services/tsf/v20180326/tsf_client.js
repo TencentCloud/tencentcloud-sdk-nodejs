@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupsWithPlugin", req, cb);
     }
     /**
+     * 启用泳道规则
+     */
+    async EnableLaneRule(req, cb) {
+        return this.request("EnableLaneRule", req, cb);
+    }
+    /**
      * 禁用单元化路由
      */
     async DisableUnitRoute(req, cb) {
@@ -1175,6 +1181,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DraftApiGroup(req, cb) {
         return this.request("DraftApiGroup", req, cb);
+    }
+    /**
+     * 禁用泳道规则
+     */
+    async DisableLaneRule(req, cb) {
+        return this.request("DisableLaneRule", req, cb);
     }
     /**
      * 查询API分组下的Api列表信息

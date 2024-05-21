@@ -78,6 +78,7 @@ import {
   GetOptimizerPolicyResponse,
   DescribeTableRequest,
   Policy,
+  DescribeTaskLogRequest,
   UpdateUserDataEngineConfigResponse,
   CreateTasksRequest,
   SuspendResumeDataEngineRequest,
@@ -286,6 +287,7 @@ import {
   TagInfo,
   DeleteSparkAppRequest,
   TaskResultInfo,
+  DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
   CommonMetrics,
@@ -1134,6 +1136,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户信息
+   */
+  async ModifyUser(
+    req: ModifyUserRequest,
+    cb?: (error: string, rep: ModifyUserResponse) => void
+  ): Promise<ModifyUserResponse> {
+    return this.request("ModifyUser", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
    */
   async DescribeSparkSessionBatchSqlLog(
@@ -1514,13 +1526,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户信息
+   * 本接口（DescribeTaskLog）用于获取spark 作业任务日志详情
    */
-  async ModifyUser(
-    req: ModifyUserRequest,
-    cb?: (error: string, rep: ModifyUserResponse) => void
-  ): Promise<ModifyUserResponse> {
-    return this.request("ModifyUser", req, cb)
+  async DescribeTaskLog(
+    req: DescribeTaskLogRequest,
+    cb?: (error: string, rep: DescribeTaskLogResponse) => void
+  ): Promise<DescribeTaskLogResponse> {
+    return this.request("DescribeTaskLog", req, cb)
   }
 
   /**

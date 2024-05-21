@@ -972,6 +972,15 @@ export interface DescribeJvmMonitorRequest {
     Tag?: string;
 }
 /**
+ * EnableLaneRule请求参数结构体
+ */
+export interface EnableLaneRuleRequest {
+    /**
+     * 泳道规则ID
+     */
+    RuleId: string;
+}
+/**
  * 任务规则
  */
 export interface TaskRule {
@@ -1146,6 +1155,20 @@ export interface ModifyUploadInfoResponse {
     RequestId?: string;
 }
 /**
+ * EnableLaneRule返回参数结构体
+ */
+export interface EnableLaneRuleResponse {
+    /**
+     * 操作状态。成功：true，失败：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TsfPage<Config>
  */
 export interface TsfPageConfig {
@@ -1174,6 +1197,20 @@ export interface CreateApiRateLimitRuleRequest {
      * 开启/禁用，enabled/disabled, 不传默认开启
      */
     UsableStatus?: string;
+}
+/**
+ * DisableLaneRule返回参数结构体
+ */
+export interface DisableLaneRuleResponse {
+    /**
+     * 操作状态。成功：true，失败：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 翻页查询的任务记录返回
@@ -11368,7 +11405,7 @@ export interface RevocationPublicConfigRequest {
  */
 export interface ModifyLaneRuleResponse {
     /**
-     * 操作状态
+     * 操作状态。成功：true，失败：false
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: boolean;
@@ -12662,6 +12699,15 @@ export interface TsfPageApplication {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Content: Array<ApplicationForPage>;
+}
+/**
+ * DisableLaneRule请求参数结构体
+ */
+export interface DisableLaneRuleRequest {
+    /**
+     * 泳道规则ID
+     */
+    RuleId: string;
 }
 /**
  * 包含虚拟机所在TSF中的位置信息

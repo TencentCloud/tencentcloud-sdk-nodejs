@@ -388,6 +388,16 @@ it("tsf.v20180326.DescribeGroupsWithPlugin", async function () {
     }
 })
 
+it("tsf.v20180326.EnableLaneRule", async function () {
+    try {
+       const data = await client.EnableLaneRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DisableUnitRoute", async function () {
     try {
        const data = await client.DisableUnitRoute({})
@@ -1921,6 +1931,16 @@ it("tsf.v20180326.DescribeInstances", async function () {
 it("tsf.v20180326.DraftApiGroup", async function () {
     try {
        const data = await client.DraftApiGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DisableLaneRule", async function () {
+    try {
+       const data = await client.DisableLaneRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

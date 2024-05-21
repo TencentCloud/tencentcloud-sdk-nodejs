@@ -778,6 +778,16 @@ it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     }
 })
 
+it("dlc.v20210125.ModifyUser", async function () {
+    try {
+       const data = await client.ModifyUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
     try {
        const data = await client.DescribeSparkSessionBatchSqlLog({})
@@ -1158,9 +1168,9 @@ it("dlc.v20210125.DescribeUserDataEngineConfig", async function () {
     }
 })
 
-it("dlc.v20210125.ModifyUser", async function () {
+it("dlc.v20210125.DescribeTaskLog", async function () {
     try {
-       const data = await client.ModifyUser({})
+       const data = await client.DescribeTaskLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
