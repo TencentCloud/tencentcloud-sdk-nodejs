@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateModelServiceRequest, CreateNotebookImageResponse, DescribeLogsRequest, DescribeModelAccelerateVersionsRequest, StopModelAccelerateTaskRequest, DeleteTrainingModelVersionResponse, DeleteNotebookImageRecordRequest, ModifyNotebookTagsRequest, DescribeDatasetDetailStructuredResponse, ModifyServiceGroupWeightsResponse, RestartModelAccelerateTaskRequest, DescribeBillingResourceGroupsRequest, DeleteNotebookRequest, DescribeTrainingFrameworksResponse, DescribeModelServiceGroupRequest, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, ModifyServiceGroupWeightsRequest, DescribeTrainingTasksRequest, DescribeBatchTaskRequest, DescribeNotebookImageKernelsRequest, DescribeDatasetDetailUnstructuredRequest, SendChatMessageResponse, ModifyNotebookTagsResponse, DescribeBillingResourceGroupResponse, DescribeNotebookImageRecordsResponse, DescribeBillingResourceGroupsResponse, StartNotebookResponse, CreateNotebookResponse, CreateBatchTaskRequest, DescribeLatestTrainingMetricsResponse, DescribeTrainingMetricsRequest, CreateNotebookImageRequest, StartNotebookRequest, DescribeModelAccelerateVersionsResponse, DescribeBuildInImagesRequest, StartTrainingTaskRequest, StopBatchTaskRequest, ModifyModelServiceRequest, ChatCompletionRequest, ModifyModelServicePartialConfigResponse, DescribeModelAccEngineVersionsResponse, DescribeModelServiceCallInfoRequest, CreateTrainingModelRequest, DescribeAPIConfigsRequest, DescribeModelServiceGroupsResponse, DescribeBillingResourceInstanceRunningJobsResponse, DescribeTrainingModelsResponse, DescribeBatchTaskInstancesResponse, CreateNotebookRequest, CreatePresignedNotebookUrlResponse, ModifyNotebookRequest, DescribeModelServicesRequest, RestartModelAccelerateTaskResponse, DescribeNotebookImageRecordsRequest, StopCreatingImageRequest, DescribeBatchTaskInstancesRequest, DescribeModelServiceHistoryRequest, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeBillingSpecsRequest, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, StopCreatingImageResponse, DescribeTrainingFrameworksRequest, DescribeBatchTasksResponse, DescribeNotebooksResponse, DescribeModelServiceHotUpdatedResponse, DescribeModelAccelerateTaskResponse, DescribeModelServiceGroupsRequest, StopNotebookResponse, DescribeModelServiceRequest, CreateTrainingTaskResponse, DeleteModelServiceRequest, DeleteModelAccelerateTaskRequest, CreateTrainingTaskRequest, CreatePresignedNotebookUrlRequest, ModifyNotebookResponse, DescribeModelServiceResponse, DescribeBuildInImagesResponse, DescribeDatasetsResponse, CreateBatchModelAccTasksRequest, DescribeBillingSpecsPriceRequest, DescribeBillingSpecsResponse, DeleteTrainingTaskResponse, CreateBatchTaskResponse, DescribeEventsResponse, DeleteModelServiceResponse, DescribeTrainingModelsRequest, DescribeLatestTrainingMetricsRequest, DescribeDatasetDetailUnstructuredResponse, DeleteBatchTaskRequest, DescribeModelServiceCallInfoResponse, DescribeNotebooksRequest, DeleteNotebookResponse, DeleteTrainingTaskRequest, DescribeModelServiceHistoryResponse, DescribeNotebookImageKernelsResponse, DescribeBillingResourceInstanceRunningJobsRequest, ModifyModelServiceResponse, DeleteBatchTaskResponse, DescribeBatchTasksRequest, CreateDatasetRequest, DeleteNotebookImageRecordResponse, CreateModelServiceResponse, DescribeModelServiceGroupResponse, DeleteModelAccelerateTaskResponse, DescribeNotebookResponse, CreateTrainingModelResponse, StopModelAccelerateTaskResponse, DescribeAPIConfigsResponse, DescribeDatasetDetailStructuredRequest, SendChatMessageRequest, DescribeModelAccelerateTaskRequest, ModifyModelServicePartialConfigRequest, DescribeModelAccelerateTasksResponse, DeleteDatasetResponse, DescribeNotebookRequest, DescribeTrainingTasksResponse, DescribeLogsResponse, CreateOptimizedModelRequest, StopNotebookRequest, DeleteModelServiceGroupRequest, StopBatchTaskResponse, DescribeBillingResourceGroupRequest, PushTrainingMetricsRequest, DescribeTrainingTaskRequest, ChatCompletionResponse, DescribeTrainingTaskPodsRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, DescribeTrainingModelVersionRequest, DescribeModelAccelerateTasksRequest, PushTrainingMetricsResponse, StopTrainingTaskResponse, CreateOptimizedModelResponse, DescribeTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DescribeEventsRequest, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DescribeBatchTaskResponse, CreateBatchModelAccTasksResponse, DeleteTrainingModelVersionRequest, DescribeModelAccEngineVersionsRequest, DescribeBillingSpecsPriceResponse, DescribeTrainingModelVersionResponse, DescribeModelServicesResponse, StopTrainingTaskRequest, StartTrainingTaskResponse } from "./tione_models";
+import { CreateModelServiceRequest, DescribeModelAccelerateVersionsRequest, StopModelAccelerateTaskRequest, DeleteTrainingModelVersionResponse, DescribeBillingResourceGroupsRequest, DeleteNotebookRequest, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, DescribeTrainingTasksRequest, SendChatMessageResponse, DescribeBillingResourceGroupResponse, DescribeBillingResourceGroupsResponse, StartNotebookResponse, DescribeTrainingModelVersionRequest, StartNotebookRequest, PushTrainingMetricsRequest, DescribeModelAccelerateVersionsResponse, DescribeBuildInImagesRequest, ModifyModelServiceRequest, ChatCompletionRequest, DescribeModelServiceCallInfoRequest, CreateTrainingModelRequest, DescribeBillingResourceInstanceRunningJobsResponse, CreateNotebookRequest, CreatePresignedNotebookUrlResponse, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeModelServiceGroupsResponse, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, DescribeModelServiceResponse, DescribeModelAccelerateTaskResponse, DescribeModelServiceGroupsRequest, DescribeModelServiceRequest, DeleteModelServiceRequest, DescribeModelServiceGroupRequest, CreatePresignedNotebookUrlRequest, StopNotebookResponse, DescribeModelServiceHotUpdatedResponse, DescribeBuildInImagesResponse, DescribeDatasetsResponse, CreateNotebookResponse, DescribeNotebooksResponse, DescribeModelServiceCallInfoResponse, DescribeNotebooksRequest, DeleteNotebookResponse, ModifyModelServiceResponse, CreateDatasetRequest, CreateModelServiceResponse, DescribeModelServiceGroupResponse, DescribeNotebookResponse, CreateTrainingModelResponse, StopModelAccelerateTaskResponse, SendChatMessageRequest, DescribeModelAccelerateTaskRequest, DeleteDatasetResponse, DescribeTrainingTasksResponse, DescribeNotebookRequest, DescribeBillingResourceInstanceRunningJobsRequest, StopNotebookRequest, DeleteModelServiceGroupRequest, DescribeBillingResourceGroupRequest, DescribeTrainingTaskRequest, ChatCompletionResponse, DescribeTrainingTaskPodsRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, PushTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DeleteModelServiceResponse, DeleteTrainingModelVersionRequest, DescribeTrainingModelVersionResponse } from "./tione_models";
 /**
  * tione client
  * @class
@@ -12,41 +12,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeTrainingModelVersion(req: DescribeTrainingModelVersionRequest, cb?: (error: string, rep: DescribeTrainingModelVersionResponse) => void): Promise<DescribeTrainingModelVersionResponse>;
     /**
-     * 删除批量预测任务
+     * 查询单个服务
      */
-    DeleteBatchTask(req: DeleteBatchTaskRequest, cb?: (error: string, rep: DeleteBatchTaskResponse) => void): Promise<DeleteBatchTaskResponse>;
-    /**
-     * 本接口(DescribeBillingSpecs)用于查询计费项列表
-     */
-    DescribeBillingSpecs(req: DescribeBillingSpecsRequest, cb?: (error: string, rep: DescribeBillingSpecsResponse) => void): Promise<DescribeBillingSpecsResponse>;
+    DescribeModelService(req: DescribeModelServiceRequest, cb?: (error: string, rep: DescribeModelServiceResponse) => void): Promise<DescribeModelServiceResponse>;
     /**
      * 导入模型
      */
     CreateTrainingModel(req: CreateTrainingModelRequest, cb?: (error: string, rep: CreateTrainingModelResponse) => void): Promise<CreateTrainingModelResponse>;
     /**
-     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
-     */
-    DescribeBillingSpecsPrice(req: DescribeBillingSpecsPriceRequest, cb?: (error: string, rep: DescribeBillingSpecsPriceResponse) => void): Promise<DescribeBillingSpecsPriceResponse>;
-    /**
      * 展示服务的调用信息
      */
     DescribeModelServiceCallInfo(req: DescribeModelServiceCallInfoRequest, cb?: (error: string, rep: DescribeModelServiceCallInfoResponse) => void): Promise<DescribeModelServiceCallInfoResponse>;
     /**
-     * 增量更新在线推理服务的部分配置，不更新的配置项不需要传入
+     * 训练任务列表
      */
-    ModifyModelServicePartialConfig(req: ModifyModelServicePartialConfigRequest, cb?: (error: string, rep: ModifyModelServicePartialConfigResponse) => void): Promise<ModifyModelServicePartialConfigResponse>;
-    /**
-     * 保存优化模型
-     */
-    CreateOptimizedModel(req: CreateOptimizedModelRequest, cb?: (error: string, rep: CreateOptimizedModelResponse) => void): Promise<CreateOptimizedModelResponse>;
-    /**
-     * 训练任务详情
-     */
-    DescribeTrainingTask(req: DescribeTrainingTaskRequest, cb?: (error: string, rep: DescribeTrainingTaskResponse) => void): Promise<DescribeTrainingTaskResponse>;
-    /**
-     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
-     */
-    DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
+    DescribeTrainingTasks(req: DescribeTrainingTasksRequest, cb?: (error: string, rep: DescribeTrainingTasksResponse) => void): Promise<DescribeTrainingTasksResponse>;
     /**
      * 获取内置镜像列表
      */
@@ -56,37 +36,17 @@ export declare class Client extends AbstractClient {
      */
     StartNotebook(req: StartNotebookRequest, cb?: (error: string, rep: StartNotebookResponse) => void): Promise<StartNotebookResponse>;
     /**
-     * 查询单个服务
-     */
-    DescribeModelService(req: DescribeModelServiceRequest, cb?: (error: string, rep: DescribeModelServiceResponse) => void): Promise<DescribeModelServiceResponse>;
-    /**
-     * 训练框架列表
-     */
-    DescribeTrainingFrameworks(req?: DescribeTrainingFrameworksRequest, cb?: (error: string, rep: DescribeTrainingFrameworksResponse) => void): Promise<DescribeTrainingFrameworksResponse>;
-    /**
      * 删除数据集
      */
     DeleteDataset(req: DeleteDatasetRequest, cb?: (error: string, rep: DeleteDatasetResponse) => void): Promise<DeleteDatasetResponse>;
-    /**
-     * 创建模型训练任务
-     */
-    CreateTrainingTask(req: CreateTrainingTaskRequest, cb?: (error: string, rep: CreateTrainingTaskResponse) => void): Promise<CreateTrainingTaskResponse>;
-    /**
-     * 停止批量预测任务
-     */
-    StopBatchTask(req: StopBatchTaskRequest, cb?: (error: string, rep: StopBatchTaskResponse) => void): Promise<StopBatchTaskResponse>;
-    /**
-     * 查询非结构化数据集详情
-     */
-    DescribeDatasetDetailUnstructured(req: DescribeDatasetDetailUnstructuredRequest, cb?: (error: string, rep: DescribeDatasetDetailUnstructuredResponse) => void): Promise<DescribeDatasetDetailUnstructuredResponse>;
     /**
      * 删除Notebook
      */
     DeleteNotebook(req: DeleteNotebookRequest, cb?: (error: string, rep: DeleteNotebookResponse) => void): Promise<DeleteNotebookResponse>;
     /**
-     * 模型列表
+     * 训练任务详情
      */
-    DescribeTrainingModels(req: DescribeTrainingModelsRequest, cb?: (error: string, rep: DescribeTrainingModelsResponse) => void): Promise<DescribeTrainingModelsResponse>;
+    DescribeTrainingTask(req: DescribeTrainingTaskRequest, cb?: (error: string, rep: DescribeTrainingTaskResponse) => void): Promise<DescribeTrainingTaskResponse>;
     /**
      * 训练任务pod列表
      */
@@ -104,53 +64,21 @@ export declare class Client extends AbstractClient {
      */
     ChatCompletion(req: ChatCompletionRequest, cb?: (error: string, rep: ChatCompletionResponse) => void): Promise<ChatCompletionResponse>;
     /**
-     * 查询训练自定义指标
+     * 模型加速之后的模型版本列表
      */
-    DescribeTrainingMetrics(req: DescribeTrainingMetricsRequest, cb?: (error: string, rep: DescribeTrainingMetricsResponse) => void): Promise<DescribeTrainingMetricsResponse>;
-    /**
-     * 修改Notebook标签
-     */
-    ModifyNotebookTags(req: ModifyNotebookTagsRequest, cb?: (error: string, rep: ModifyNotebookTagsResponse) => void): Promise<ModifyNotebookTagsResponse>;
-    /**
-     * 删除模型
-     */
-    DeleteTrainingModel(req: DeleteTrainingModelRequest, cb?: (error: string, rep: DeleteTrainingModelResponse) => void): Promise<DeleteTrainingModelResponse>;
-    /**
-     * 更新推理服务组流量分配
-     */
-    ModifyServiceGroupWeights(req: ModifyServiceGroupWeightsRequest, cb?: (error: string, rep: ModifyServiceGroupWeightsResponse) => void): Promise<ModifyServiceGroupWeightsResponse>;
+    DescribeModelAccelerateVersions(req: DescribeModelAccelerateVersionsRequest, cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void): Promise<DescribeModelAccelerateVersionsResponse>;
     /**
      * 创建数据集
      */
     CreateDataset(req: CreateDatasetRequest, cb?: (error: string, rep: CreateDatasetResponse) => void): Promise<CreateDatasetResponse>;
     /**
-     * 查询批量预测任务实例列表
-     */
-    DescribeBatchTaskInstances(req: DescribeBatchTaskInstancesRequest, cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void): Promise<DescribeBatchTaskInstancesResponse>;
-    /**
      * 创建Notebook
      */
     CreateNotebook(req: CreateNotebookRequest, cb?: (error: string, rep: CreateNotebookResponse) => void): Promise<CreateNotebookResponse>;
     /**
-     * 查询模型加速引擎版本列表
+     * 查询单个服务组
      */
-    DescribeModelAccEngineVersions(req?: DescribeModelAccEngineVersionsRequest, cb?: (error: string, rep: DescribeModelAccEngineVersionsResponse) => void): Promise<DescribeModelAccEngineVersionsResponse>;
-    /**
-     * 停止模型训练任务
-     */
-    StopTrainingTask(req: StopTrainingTaskRequest, cb?: (error: string, rep: StopTrainingTaskResponse) => void): Promise<StopTrainingTaskResponse>;
-    /**
-     * 启动模型训练任务
-     */
-    StartTrainingTask(req: StartTrainingTaskRequest, cb?: (error: string, rep: StartTrainingTaskResponse) => void): Promise<StartTrainingTaskResponse>;
-    /**
-     * 删除模型加速任务
-     */
-    DeleteModelAccelerateTask(req: DeleteModelAccelerateTaskRequest, cb?: (error: string, rep: DeleteModelAccelerateTaskResponse) => void): Promise<DeleteModelAccelerateTaskResponse>;
-    /**
-     * 列举API
-     */
-    DescribeAPIConfigs(req: DescribeAPIConfigsRequest, cb?: (error: string, rep: DescribeAPIConfigsResponse) => void): Promise<DescribeAPIConfigsResponse>;
+    DescribeModelServiceGroup(req: DescribeModelServiceGroupRequest, cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void): Promise<DescribeModelServiceGroupResponse>;
     /**
      * 根据服务组id删除服务组下所有模型服务
      */
@@ -160,53 +88,25 @@ export declare class Client extends AbstractClient {
      */
     PushTrainingMetrics(req: PushTrainingMetricsRequest, cb?: (error: string, rep: PushTrainingMetricsResponse) => void): Promise<PushTrainingMetricsResponse>;
     /**
-     * 查询批量预测任务列表信息
-     */
-    DescribeBatchTasks(req: DescribeBatchTasksRequest, cb?: (error: string, rep: DescribeBatchTasksResponse) => void): Promise<DescribeBatchTasksResponse>;
-    /**
      * 模型版本列表
      */
     DescribeTrainingModelVersions(req: DescribeTrainingModelVersionsRequest, cb?: (error: string, rep: DescribeTrainingModelVersionsResponse) => void): Promise<DescribeTrainingModelVersionsResponse>;
-    /**
-     * 查看notebook镜像保存记录
-     */
-    DescribeNotebookImageRecords(req: DescribeNotebookImageRecordsRequest, cb?: (error: string, rep: DescribeNotebookImageRecordsResponse) => void): Promise<DescribeNotebookImageRecordsResponse>;
-    /**
-     * 保存镜像
-     */
-    CreateNotebookImage(req: CreateNotebookImageRequest, cb?: (error: string, rep: CreateNotebookImageResponse) => void): Promise<CreateNotebookImageResponse>;
-    /**
-     * 查询模型加速任务列表
-     */
-    DescribeModelAccelerateTasks(req: DescribeModelAccelerateTasksRequest, cb?: (error: string, rep: DescribeModelAccelerateTasksResponse) => void): Promise<DescribeModelAccelerateTasksResponse>;
     /**
      * 用于创建、发布一个新的模型服务
      */
     CreateModelService(req: CreateModelServiceRequest, cb?: (error: string, rep: CreateModelServiceResponse) => void): Promise<CreateModelServiceResponse>;
     /**
-     * 查询数据集列表
-     */
-    DescribeDatasets(req: DescribeDatasetsRequest, cb?: (error: string, rep: DescribeDatasetsResponse) => void): Promise<DescribeDatasetsResponse>;
-    /**
      * 生成Notebook访问链接
      */
     CreatePresignedNotebookUrl(req: CreatePresignedNotebookUrlRequest, cb?: (error: string, rep: CreatePresignedNotebookUrlResponse) => void): Promise<CreatePresignedNotebookUrlResponse>;
-    /**
-     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
-     */
-    DescribeLogs(req: DescribeLogsRequest, cb?: (error: string, rep: DescribeLogsResponse) => void): Promise<DescribeLogsResponse>;
     /**
      * 根据服务id删除模型服务
      */
     DeleteModelService(req: DeleteModelServiceRequest, cb?: (error: string, rep: DeleteModelServiceResponse) => void): Promise<DeleteModelServiceResponse>;
     /**
-     * 查询结构化数据集详情
+     * 查询数据集列表
      */
-    DescribeDatasetDetailStructured(req: DescribeDatasetDetailStructuredRequest, cb?: (error: string, rep: DescribeDatasetDetailStructuredResponse) => void): Promise<DescribeDatasetDetailStructuredResponse>;
-    /**
-     * 重启模型加速任务
-     */
-    RestartModelAccelerateTask(req: RestartModelAccelerateTaskRequest, cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void): Promise<RestartModelAccelerateTaskResponse>;
+    DescribeDatasets(req: DescribeDatasetsRequest, cb?: (error: string, rep: DescribeDatasetsResponse) => void): Promise<DescribeDatasetsResponse>;
     /**
      * 查询资源组节点运行中的任务
      */
@@ -216,18 +116,6 @@ export declare class Client extends AbstractClient {
      */
     SendChatMessage(req: SendChatMessageRequest, cb?: (error: string, rep: SendChatMessageResponse) => void): Promise<SendChatMessageResponse>;
     /**
-     * 查询多个服务
-     */
-    DescribeModelServices(req: DescribeModelServicesRequest, cb?: (error: string, rep: DescribeModelServicesResponse) => void): Promise<DescribeModelServicesResponse>;
-    /**
-     * 训练任务列表
-     */
-    DescribeTrainingTasks(req: DescribeTrainingTasksRequest, cb?: (error: string, rep: DescribeTrainingTasksResponse) => void): Promise<DescribeTrainingTasksResponse>;
-    /**
-     * 删除notebook镜像保存记录
-     */
-    DeleteNotebookImageRecord(req: DeleteNotebookImageRecordRequest, cb?: (error: string, rep: DeleteNotebookImageRecordResponse) => void): Promise<DeleteNotebookImageRecordResponse>;
-    /**
      * 用于更新模型服务
      */
     ModifyModelService(req: ModifyModelServiceRequest, cb?: (error: string, rep: ModifyModelServiceResponse) => void): Promise<ModifyModelServiceResponse>;
@@ -236,53 +124,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeNotebooks(req: DescribeNotebooksRequest, cb?: (error: string, rep: DescribeNotebooksResponse) => void): Promise<DescribeNotebooksResponse>;
     /**
-     * 创建批量预测任务
+     * 删除模型
      */
-    CreateBatchTask(req: CreateBatchTaskRequest, cb?: (error: string, rep: CreateBatchTaskResponse) => void): Promise<CreateBatchTaskResponse>;
+    DeleteTrainingModel(req: DeleteTrainingModelRequest, cb?: (error: string, rep: DeleteTrainingModelResponse) => void): Promise<DeleteTrainingModelResponse>;
     /**
-     * 停止保存镜像
+     * 停止模型加速任务
      */
-    StopCreatingImage(req: StopCreatingImageRequest, cb?: (error: string, rep: StopCreatingImageResponse) => void): Promise<StopCreatingImageResponse>;
-    /**
-     * 删除训练任务
-     */
-    DeleteTrainingTask(req: DeleteTrainingTaskRequest, cb?: (error: string, rep: DeleteTrainingTaskResponse) => void): Promise<DeleteTrainingTaskResponse>;
-    /**
-     * 模型加速之后的模型版本列表
-     */
-    DescribeModelAccelerateVersions(req: DescribeModelAccelerateVersionsRequest, cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void): Promise<DescribeModelAccelerateVersionsResponse>;
-    /**
-     * 批量创建模型加速任务
-     */
-    CreateBatchModelAccTasks(req: CreateBatchModelAccTasksRequest, cb?: (error: string, rep: CreateBatchModelAccTasksResponse) => void): Promise<CreateBatchModelAccTasksResponse>;
-    /**
-     * 查询批量预测任务
-     */
-    DescribeBatchTask(req: DescribeBatchTaskRequest, cb?: (error: string, rep: DescribeBatchTaskResponse) => void): Promise<DescribeBatchTaskResponse>;
-    /**
-     * 查询单个服务组
-     */
-    DescribeModelServiceGroup(req: DescribeModelServiceGroupRequest, cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void): Promise<DescribeModelServiceGroupResponse>;
+    StopModelAccelerateTask(req: StopModelAccelerateTaskRequest, cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void): Promise<StopModelAccelerateTaskResponse>;
     /**
      * 查询资源组节点列表
      */
     DescribeBillingResourceGroup(req: DescribeBillingResourceGroupRequest, cb?: (error: string, rep: DescribeBillingResourceGroupResponse) => void): Promise<DescribeBillingResourceGroupResponse>;
     /**
-     * 查询最近上报的训练自定义指标
-     */
-    DescribeLatestTrainingMetrics(req: DescribeLatestTrainingMetricsRequest, cb?: (error: string, rep: DescribeLatestTrainingMetricsResponse) => void): Promise<DescribeLatestTrainingMetricsResponse>;
-    /**
-     * 查询镜像kernel
-     */
-    DescribeNotebookImageKernels(req: DescribeNotebookImageKernelsRequest, cb?: (error: string, rep: DescribeNotebookImageKernelsResponse) => void): Promise<DescribeNotebookImageKernelsResponse>;
-    /**
      * Notebook详情
      */
     DescribeNotebook(req: DescribeNotebookRequest, cb?: (error: string, rep: DescribeNotebookResponse) => void): Promise<DescribeNotebookResponse>;
-    /**
-     * 展示服务的历史版本
-     */
-    DescribeModelServiceHistory(req: DescribeModelServiceHistoryRequest, cb?: (error: string, rep: DescribeModelServiceHistoryResponse) => void): Promise<DescribeModelServiceHistoryResponse>;
     /**
      * 删除模型版本
      */
@@ -299,14 +155,6 @@ export declare class Client extends AbstractClient {
      * 列举在线推理服务组
      */
     DescribeModelServiceGroups(req: DescribeModelServiceGroupsRequest, cb?: (error: string, rep: DescribeModelServiceGroupsResponse) => void): Promise<DescribeModelServiceGroupsResponse>;
-    /**
-     * 修改Notebook
-     */
-    ModifyNotebook(req: ModifyNotebookRequest, cb?: (error: string, rep: ModifyNotebookResponse) => void): Promise<ModifyNotebookResponse>;
-    /**
-     * 停止模型加速任务
-     */
-    StopModelAccelerateTask(req: StopModelAccelerateTaskRequest, cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void): Promise<StopModelAccelerateTaskResponse>;
     /**
      * 停止Notebook
      */

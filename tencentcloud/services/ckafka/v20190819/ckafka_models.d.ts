@@ -6247,15 +6247,20 @@ export interface PrometheusDTO {
     /**
      * export类型（jmx_export\node_export）
      */
-    Type: string;
+    Type?: string;
     /**
      * vip
      */
-    SourceIp: string;
+    SourceIp?: string;
     /**
      * vport
      */
-    SourcePort: number;
+    SourcePort?: number;
+    /**
+     * broker地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BrokerIp?: string;
 }
 /**
  * topic 生产消息数据，消费者数据

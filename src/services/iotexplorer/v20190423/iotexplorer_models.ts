@@ -2532,6 +2532,28 @@ export interface CreateLoRaGatewayRequest {
 }
 
 /**
+ * UpdateDeviceTWeCallAuthorizeStatus请求参数结构体
+ */
+export interface UpdateDeviceTWeCallAuthorizeStatusRequest {
+  /**
+   * TweCall授权状态：0未授权，1已授权
+   */
+  Status?: number
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名
+   */
+  DeviceName?: string
+  /**
+   * 微信用户的openId
+   */
+  WechatOpenId?: string
+}
+
+/**
  * TRTC 的参数 可以用来加入房间
  */
 export interface TRTCParams {
@@ -5704,6 +5726,16 @@ export interface DescribeCloudStorageUsersRequest {
    * 分页拉取偏移
    */
   Offset: number
+}
+
+/**
+ * UpdateDeviceTWeCallAuthorizeStatus返回参数结构体
+ */
+export interface UpdateDeviceTWeCallAuthorizeStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

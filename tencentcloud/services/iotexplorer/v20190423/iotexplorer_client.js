@@ -598,6 +598,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchProduction", req, cb);
     }
     /**
+     * 更新用户对设备的TweCall授权状态
+     */
+    async UpdateDeviceTWeCallAuthorizeStatus(req, cb) {
+        return this.request("UpdateDeviceTWeCallAuthorizeStatus", req, cb);
+    }
+    /**
      * 删除云存事件
      */
     async DeleteCloudStorageEvent(req, cb) {

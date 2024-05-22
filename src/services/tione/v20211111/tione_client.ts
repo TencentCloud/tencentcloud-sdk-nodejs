@@ -19,272 +19,157 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
-  CreateNotebookImageResponse,
-  ModelInfo,
-  DescribeLogsRequest,
+  Service,
   DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
-  TrainingDataPoint,
-  BatchTaskDetail,
-  DeleteNotebookImageRecordRequest,
+  ServiceEIP,
   NotebookSetItem,
-  ModifyNotebookTagsRequest,
-  DescribeDatasetDetailStructuredResponse,
-  ModifyServiceGroupWeightsResponse,
-  RestartModelAccelerateTaskRequest,
+  SSHConfig,
   Usage,
   DescribeBillingResourceGroupsRequest,
   DeleteNotebookRequest,
-  DescribeTrainingFrameworksResponse,
-  DescribeModelServiceGroupRequest,
-  Filter,
-  TrainingMetric,
+  RDMAConfig,
   DescribeTrainingModelVersionsRequest,
-  SpecUnit,
   CreateDatasetResponse,
-  Service,
   CrossTenantENIInfo,
   HyperParameter,
-  ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,
-  DescribeBatchTaskRequest,
-  DescribeNotebookImageKernelsRequest,
-  DescribeDatasetDetailUnstructuredRequest,
-  TrainingTaskDetail,
+  VolumeMount,
   SendChatMessageResponse,
-  ModifyNotebookTagsResponse,
   DescribeBillingResourceGroupResponse,
-  DescribeNotebookImageRecordsResponse,
+  ServiceCallInfo,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
-  SpecPrice,
   StartNotebookResponse,
-  CreateNotebookResponse,
   CFSTurbo,
-  RowValue,
-  CreateBatchTaskRequest,
+  DescribeTrainingModelVersionRequest,
   ResourceInstanceRunningJobInfo,
   ImageFIlter,
-  DescribeLatestTrainingMetricsResponse,
   DefaultNginxGatewayCallInfo,
-  FilterLabelInfo,
-  WorkloadStatus,
   CFSConfig,
-  DescribeTrainingMetricsRequest,
-  CreateNotebookImageRequest,
   StartNotebookRequest,
-  APIConfigDetail,
+  PushTrainingMetricsRequest,
   InferTemplate,
   DescribeModelAccelerateVersionsResponse,
   DescribeBuildInImagesRequest,
-  SSHConfig,
-  StartTrainingTaskRequest,
-  StopBatchTaskRequest,
   ContainerStatus,
-  TextLabelDistributionDetailInfoThirdClass,
   ModifyModelServiceRequest,
-  FrameworkVersion,
   ChatCompletionRequest,
-  ModifyModelServicePartialConfigResponse,
-  DescribeModelAccEngineVersionsResponse,
+  TrainingTaskSetItem,
   DescribeModelServiceCallInfoRequest,
   DataPoint,
-  TagFilter,
   TJCallInfo,
   CBSConfig,
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,
-  Event,
-  DescribeAPIConfigsRequest,
-  DescribeModelServiceGroupsResponse,
   DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
-  DescribeTrainingModelsResponse,
-  DescribeBatchTaskInstancesResponse,
   CreateNotebookRequest,
   CreatePresignedNotebookUrlResponse,
-  ModifyNotebookRequest,
-  DescribeModelServicesRequest,
-  RestartModelAccelerateTaskResponse,
-  ModelAccEngineVersion,
+  HorizontalPodAutoscaler,
   ResourceConfigInfo,
-  Spec,
   GooseFS,
-  TextLabelDistributionInfo,
   Option,
   ImageSecret,
-  DescribeNotebookImageRecordsRequest,
-  StopCreatingImageRequest,
   DefaultInnerCallInfo,
   Choice,
   ResourceGroup,
-  DescribeBatchTaskInstancesRequest,
-  DescribeModelServiceHistoryRequest,
   Tag,
   DescribeDatasetsRequest,
   ModelAccelerateVersion,
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
-  DescribeBillingSpecsRequest,
-  RDMAConfig,
+  DescribeModelServiceGroupsResponse,
   InferCodeInfo,
   DescribeInferTemplatesRequest,
   PrivateLinkInfo,
   DeleteModelServiceGroupResponse,
   GpuDetail,
-  StopCreatingImageResponse,
-  DescribeTrainingFrameworksRequest,
-  DescribeBatchTasksResponse,
   CronScaleJob,
-  DescribeNotebooksResponse,
   InferTemplateGroup,
-  DescribeModelServiceHotUpdatedResponse,
+  DescribeModelServiceResponse,
   DatasetInfo,
   DescribeModelAccelerateTaskResponse,
-  DetectionLabelInfo,
+  TagFilter,
   DescribeModelServiceGroupsRequest,
-  ServiceEIPInfo,
-  TextLabelDistributionDetailInfoSecondClass,
-  PreTrainModel,
-  BatchTaskSetItem,
   ImageInfo,
   ServiceInfo,
-  TrainingTaskSetItem,
-  StopNotebookResponse,
   DescribeModelServiceRequest,
-  CreateTrainingTaskResponse,
-  NotebookImageRecord,
   DeleteModelServiceRequest,
-  DeleteModelAccelerateTaskRequest,
-  CreateTrainingTaskRequest,
+  DescribeModelServiceGroupRequest,
   Message,
   CreatePresignedNotebookUrlRequest,
-  ModifyNotebookResponse,
-  DescribeModelServiceResponse,
+  StopNotebookResponse,
+  DescribeModelServiceHotUpdatedResponse,
   DescribeBuildInImagesResponse,
   DescribeDatasetsResponse,
   ModelSource,
-  CreateBatchModelAccTasksRequest,
+  CreateNotebookResponse,
   IntranetCallInfo,
-  DescribeBillingSpecsPriceRequest,
-  WeightEntry,
   Instance,
-  DescribeBillingSpecsResponse,
-  DeleteTrainingTaskResponse,
-  TextLabelDistributionDetailInfoFifthClass,
-  BatchTaskInstance,
-  CreateBatchTaskResponse,
-  DescribeEventsResponse,
-  DeleteModelServiceResponse,
+  ServiceEIPInfo,
+  DescribeNotebooksResponse,
   DatasetGroup,
-  DescribeTrainingModelsRequest,
   StatefulSetCondition,
-  TextLabelDistributionDetailInfoFourthClass,
-  Pod,
-  DescribeLatestTrainingMetricsRequest,
-  DescribeDatasetDetailUnstructuredResponse,
-  OcrLabelInfo,
-  DeleteBatchTaskRequest,
-  GroupResource,
   ResourceInfo,
+  GroupResource,
   DescribeModelServiceCallInfoResponse,
   DataSetConfig,
   ScheduledAction,
   DescribeNotebooksRequest,
   DeleteNotebookResponse,
-  DeleteTrainingTaskRequest,
-  DescribeModelServiceHistoryResponse,
-  BatchModelAccTask,
-  DescribeNotebookImageKernelsResponse,
-  DescribeBillingResourceInstanceRunningJobsRequest,
+  NotebookDetail,
+  Filter,
   ModifyModelServiceResponse,
   PodInfo,
-  DeleteBatchTaskResponse,
-  EngineVersion,
-  DescribeBatchTasksRequest,
+  ModelInfo,
   CreateDatasetRequest,
-  VolumeMount,
-  DeleteNotebookImageRecordResponse,
   CreateModelServiceResponse,
-  ServiceEIP,
-  DescribeModelServiceGroupResponse,
   ServiceGroup,
-  TrainingModelDTO,
   ServiceLimit,
-  ServiceHistory,
-  DeleteModelAccelerateTaskResponse,
+  DescribeModelServiceGroupResponse,
   DescribeNotebookResponse,
-  CustomTrainingData,
-  RowItem,
   CreateTrainingModelResponse,
-  LogIdentity,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
-  DescribeAPIConfigsResponse,
-  DescribeDatasetDetailStructuredRequest,
   SendChatMessageRequest,
   DescribeModelAccelerateTaskRequest,
   Container,
-  SegmentationInfo,
-  ModifyModelServicePartialConfigRequest,
-  DescribeModelAccelerateTasksResponse,
   DeleteDatasetResponse,
-  HorizontalPodAutoscaler,
-  ServiceCallInfo,
-  CustomTrainingPoint,
-  DescribeNotebookRequest,
-  NotebookDetail,
+  TrainingTaskDetail,
   DescribeTrainingTasksResponse,
-  CronInfo,
+  DescribeNotebookRequest,
   LocalDisk,
-  FrameworkInfo,
-  DescribeLogsResponse,
-  EncodedStartCmdInfo,
-  CreateOptimizedModelRequest,
+  DescribeBillingResourceInstanceRunningJobsRequest,
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
-  StopBatchTaskResponse,
   DescribeBillingResourceGroupRequest,
-  PushTrainingMetricsRequest,
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,
   DeleteDatasetRequest,
-  CustomTrainingMetric,
   DataConfig,
-  DescribeTrainingModelVersionRequest,
   ResourceConf,
-  DescribeModelAccelerateTasksRequest,
   PushTrainingMetricsResponse,
-  StopTrainingTaskResponse,
-  CreateOptimizedModelResponse,
   HDFSConfig,
-  DescribeTrainingMetricsResponse,
   DescribeTrainingTaskPodsResponse,
   ModelAccelerateTask,
-  EnvVar,
-  DescribeEventsRequest,
+  Pod,
   DeleteTrainingModelRequest,
-  PointInfo,
   DescribeModelServiceHotUpdatedRequest,
   DescribeTrainingTaskResponse,
-  DescribeBatchTaskResponse,
-  CreateBatchModelAccTasksResponse,
+  DeleteModelServiceResponse,
   MetricData,
   DeleteTrainingModelVersionRequest,
-  DescribeModelAccEngineVersionsRequest,
-  DescribeBillingSpecsPriceResponse,
   DescribeTrainingModelVersionResponse,
-  TextLabelDistributionDetailInfoFirstClass,
-  DescribeModelServicesResponse,
-  StopTrainingTaskRequest,
+  EnvVar,
   LogConfig,
-  StartTrainingTaskResponse,
+  WorkloadStatus,
 } from "./tione_models"
 
 /**
@@ -307,23 +192,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除批量预测任务
+   * 查询单个服务
    */
-  async DeleteBatchTask(
-    req: DeleteBatchTaskRequest,
-    cb?: (error: string, rep: DeleteBatchTaskResponse) => void
-  ): Promise<DeleteBatchTaskResponse> {
-    return this.request("DeleteBatchTask", req, cb)
-  }
-
-  /**
-   * 本接口(DescribeBillingSpecs)用于查询计费项列表
-   */
-  async DescribeBillingSpecs(
-    req: DescribeBillingSpecsRequest,
-    cb?: (error: string, rep: DescribeBillingSpecsResponse) => void
-  ): Promise<DescribeBillingSpecsResponse> {
-    return this.request("DescribeBillingSpecs", req, cb)
+  async DescribeModelService(
+    req: DescribeModelServiceRequest,
+    cb?: (error: string, rep: DescribeModelServiceResponse) => void
+  ): Promise<DescribeModelServiceResponse> {
+    return this.request("DescribeModelService", req, cb)
   }
 
   /**
@@ -337,16 +212,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
-   */
-  async DescribeBillingSpecsPrice(
-    req: DescribeBillingSpecsPriceRequest,
-    cb?: (error: string, rep: DescribeBillingSpecsPriceResponse) => void
-  ): Promise<DescribeBillingSpecsPriceResponse> {
-    return this.request("DescribeBillingSpecsPrice", req, cb)
-  }
-
-  /**
    * 展示服务的调用信息
    */
   async DescribeModelServiceCallInfo(
@@ -357,43 +222,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增量更新在线推理服务的部分配置，不更新的配置项不需要传入
+   * 训练任务列表
    */
-  async ModifyModelServicePartialConfig(
-    req: ModifyModelServicePartialConfigRequest,
-    cb?: (error: string, rep: ModifyModelServicePartialConfigResponse) => void
-  ): Promise<ModifyModelServicePartialConfigResponse> {
-    return this.request("ModifyModelServicePartialConfig", req, cb)
-  }
-
-  /**
-   * 保存优化模型
-   */
-  async CreateOptimizedModel(
-    req: CreateOptimizedModelRequest,
-    cb?: (error: string, rep: CreateOptimizedModelResponse) => void
-  ): Promise<CreateOptimizedModelResponse> {
-    return this.request("CreateOptimizedModel", req, cb)
-  }
-
-  /**
-   * 训练任务详情
-   */
-  async DescribeTrainingTask(
-    req: DescribeTrainingTaskRequest,
-    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
-  ): Promise<DescribeTrainingTaskResponse> {
-    return this.request("DescribeTrainingTask", req, cb)
-  }
-
-  /**
-   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
-   */
-  async DescribeEvents(
-    req: DescribeEventsRequest,
-    cb?: (error: string, rep: DescribeEventsResponse) => void
-  ): Promise<DescribeEventsResponse> {
-    return this.request("DescribeEvents", req, cb)
+  async DescribeTrainingTasks(
+    req: DescribeTrainingTasksRequest,
+    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
+  ): Promise<DescribeTrainingTasksResponse> {
+    return this.request("DescribeTrainingTasks", req, cb)
   }
 
   /**
@@ -417,26 +252,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个服务
-   */
-  async DescribeModelService(
-    req: DescribeModelServiceRequest,
-    cb?: (error: string, rep: DescribeModelServiceResponse) => void
-  ): Promise<DescribeModelServiceResponse> {
-    return this.request("DescribeModelService", req, cb)
-  }
-
-  /**
-   * 训练框架列表
-   */
-  async DescribeTrainingFrameworks(
-    req?: DescribeTrainingFrameworksRequest,
-    cb?: (error: string, rep: DescribeTrainingFrameworksResponse) => void
-  ): Promise<DescribeTrainingFrameworksResponse> {
-    return this.request("DescribeTrainingFrameworks", req, cb)
-  }
-
-  /**
    * 删除数据集
    */
   async DeleteDataset(
@@ -444,36 +259,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDatasetResponse) => void
   ): Promise<DeleteDatasetResponse> {
     return this.request("DeleteDataset", req, cb)
-  }
-
-  /**
-   * 创建模型训练任务
-   */
-  async CreateTrainingTask(
-    req: CreateTrainingTaskRequest,
-    cb?: (error: string, rep: CreateTrainingTaskResponse) => void
-  ): Promise<CreateTrainingTaskResponse> {
-    return this.request("CreateTrainingTask", req, cb)
-  }
-
-  /**
-   * 停止批量预测任务
-   */
-  async StopBatchTask(
-    req: StopBatchTaskRequest,
-    cb?: (error: string, rep: StopBatchTaskResponse) => void
-  ): Promise<StopBatchTaskResponse> {
-    return this.request("StopBatchTask", req, cb)
-  }
-
-  /**
-   * 查询非结构化数据集详情
-   */
-  async DescribeDatasetDetailUnstructured(
-    req: DescribeDatasetDetailUnstructuredRequest,
-    cb?: (error: string, rep: DescribeDatasetDetailUnstructuredResponse) => void
-  ): Promise<DescribeDatasetDetailUnstructuredResponse> {
-    return this.request("DescribeDatasetDetailUnstructured", req, cb)
   }
 
   /**
@@ -487,13 +272,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 模型列表
+   * 训练任务详情
    */
-  async DescribeTrainingModels(
-    req: DescribeTrainingModelsRequest,
-    cb?: (error: string, rep: DescribeTrainingModelsResponse) => void
-  ): Promise<DescribeTrainingModelsResponse> {
-    return this.request("DescribeTrainingModels", req, cb)
+  async DescribeTrainingTask(
+    req: DescribeTrainingTaskRequest,
+    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
+  ): Promise<DescribeTrainingTaskResponse> {
+    return this.request("DescribeTrainingTask", req, cb)
   }
 
   /**
@@ -537,43 +322,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询训练自定义指标
+   * 模型加速之后的模型版本列表
    */
-  async DescribeTrainingMetrics(
-    req: DescribeTrainingMetricsRequest,
-    cb?: (error: string, rep: DescribeTrainingMetricsResponse) => void
-  ): Promise<DescribeTrainingMetricsResponse> {
-    return this.request("DescribeTrainingMetrics", req, cb)
-  }
-
-  /**
-   * 修改Notebook标签
-   */
-  async ModifyNotebookTags(
-    req: ModifyNotebookTagsRequest,
-    cb?: (error: string, rep: ModifyNotebookTagsResponse) => void
-  ): Promise<ModifyNotebookTagsResponse> {
-    return this.request("ModifyNotebookTags", req, cb)
-  }
-
-  /**
-   * 删除模型
-   */
-  async DeleteTrainingModel(
-    req: DeleteTrainingModelRequest,
-    cb?: (error: string, rep: DeleteTrainingModelResponse) => void
-  ): Promise<DeleteTrainingModelResponse> {
-    return this.request("DeleteTrainingModel", req, cb)
-  }
-
-  /**
-   * 更新推理服务组流量分配
-   */
-  async ModifyServiceGroupWeights(
-    req: ModifyServiceGroupWeightsRequest,
-    cb?: (error: string, rep: ModifyServiceGroupWeightsResponse) => void
-  ): Promise<ModifyServiceGroupWeightsResponse> {
-    return this.request("ModifyServiceGroupWeights", req, cb)
+  async DescribeModelAccelerateVersions(
+    req: DescribeModelAccelerateVersionsRequest,
+    cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void
+  ): Promise<DescribeModelAccelerateVersionsResponse> {
+    return this.request("DescribeModelAccelerateVersions", req, cb)
   }
 
   /**
@@ -587,16 +342,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询批量预测任务实例列表
-   */
-  async DescribeBatchTaskInstances(
-    req: DescribeBatchTaskInstancesRequest,
-    cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void
-  ): Promise<DescribeBatchTaskInstancesResponse> {
-    return this.request("DescribeBatchTaskInstances", req, cb)
-  }
-
-  /**
    * 创建Notebook
    */
   async CreateNotebook(
@@ -607,53 +352,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询模型加速引擎版本列表
+   * 查询单个服务组
    */
-  async DescribeModelAccEngineVersions(
-    req?: DescribeModelAccEngineVersionsRequest,
-    cb?: (error: string, rep: DescribeModelAccEngineVersionsResponse) => void
-  ): Promise<DescribeModelAccEngineVersionsResponse> {
-    return this.request("DescribeModelAccEngineVersions", req, cb)
-  }
-
-  /**
-   * 停止模型训练任务
-   */
-  async StopTrainingTask(
-    req: StopTrainingTaskRequest,
-    cb?: (error: string, rep: StopTrainingTaskResponse) => void
-  ): Promise<StopTrainingTaskResponse> {
-    return this.request("StopTrainingTask", req, cb)
-  }
-
-  /**
-   * 启动模型训练任务
-   */
-  async StartTrainingTask(
-    req: StartTrainingTaskRequest,
-    cb?: (error: string, rep: StartTrainingTaskResponse) => void
-  ): Promise<StartTrainingTaskResponse> {
-    return this.request("StartTrainingTask", req, cb)
-  }
-
-  /**
-   * 删除模型加速任务
-   */
-  async DeleteModelAccelerateTask(
-    req: DeleteModelAccelerateTaskRequest,
-    cb?: (error: string, rep: DeleteModelAccelerateTaskResponse) => void
-  ): Promise<DeleteModelAccelerateTaskResponse> {
-    return this.request("DeleteModelAccelerateTask", req, cb)
-  }
-
-  /**
-   * 列举API
-   */
-  async DescribeAPIConfigs(
-    req: DescribeAPIConfigsRequest,
-    cb?: (error: string, rep: DescribeAPIConfigsResponse) => void
-  ): Promise<DescribeAPIConfigsResponse> {
-    return this.request("DescribeAPIConfigs", req, cb)
+  async DescribeModelServiceGroup(
+    req: DescribeModelServiceGroupRequest,
+    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
+  ): Promise<DescribeModelServiceGroupResponse> {
+    return this.request("DescribeModelServiceGroup", req, cb)
   }
 
   /**
@@ -677,16 +382,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询批量预测任务列表信息
-   */
-  async DescribeBatchTasks(
-    req: DescribeBatchTasksRequest,
-    cb?: (error: string, rep: DescribeBatchTasksResponse) => void
-  ): Promise<DescribeBatchTasksResponse> {
-    return this.request("DescribeBatchTasks", req, cb)
-  }
-
-  /**
    * 模型版本列表
    */
   async DescribeTrainingModelVersions(
@@ -694,36 +389,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingModelVersionsResponse) => void
   ): Promise<DescribeTrainingModelVersionsResponse> {
     return this.request("DescribeTrainingModelVersions", req, cb)
-  }
-
-  /**
-   * 查看notebook镜像保存记录
-   */
-  async DescribeNotebookImageRecords(
-    req: DescribeNotebookImageRecordsRequest,
-    cb?: (error: string, rep: DescribeNotebookImageRecordsResponse) => void
-  ): Promise<DescribeNotebookImageRecordsResponse> {
-    return this.request("DescribeNotebookImageRecords", req, cb)
-  }
-
-  /**
-   * 保存镜像
-   */
-  async CreateNotebookImage(
-    req: CreateNotebookImageRequest,
-    cb?: (error: string, rep: CreateNotebookImageResponse) => void
-  ): Promise<CreateNotebookImageResponse> {
-    return this.request("CreateNotebookImage", req, cb)
-  }
-
-  /**
-   * 查询模型加速任务列表
-   */
-  async DescribeModelAccelerateTasks(
-    req: DescribeModelAccelerateTasksRequest,
-    cb?: (error: string, rep: DescribeModelAccelerateTasksResponse) => void
-  ): Promise<DescribeModelAccelerateTasksResponse> {
-    return this.request("DescribeModelAccelerateTasks", req, cb)
   }
 
   /**
@@ -737,16 +402,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据集列表
-   */
-  async DescribeDatasets(
-    req: DescribeDatasetsRequest,
-    cb?: (error: string, rep: DescribeDatasetsResponse) => void
-  ): Promise<DescribeDatasetsResponse> {
-    return this.request("DescribeDatasets", req, cb)
-  }
-
-  /**
    * 生成Notebook访问链接
    */
   async CreatePresignedNotebookUrl(
@@ -754,16 +409,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePresignedNotebookUrlResponse) => void
   ): Promise<CreatePresignedNotebookUrlResponse> {
     return this.request("CreatePresignedNotebookUrl", req, cb)
-  }
-
-  /**
-   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
-   */
-  async DescribeLogs(
-    req: DescribeLogsRequest,
-    cb?: (error: string, rep: DescribeLogsResponse) => void
-  ): Promise<DescribeLogsResponse> {
-    return this.request("DescribeLogs", req, cb)
   }
 
   /**
@@ -777,23 +422,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询结构化数据集详情
+   * 查询数据集列表
    */
-  async DescribeDatasetDetailStructured(
-    req: DescribeDatasetDetailStructuredRequest,
-    cb?: (error: string, rep: DescribeDatasetDetailStructuredResponse) => void
-  ): Promise<DescribeDatasetDetailStructuredResponse> {
-    return this.request("DescribeDatasetDetailStructured", req, cb)
-  }
-
-  /**
-   * 重启模型加速任务
-   */
-  async RestartModelAccelerateTask(
-    req: RestartModelAccelerateTaskRequest,
-    cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void
-  ): Promise<RestartModelAccelerateTaskResponse> {
-    return this.request("RestartModelAccelerateTask", req, cb)
+  async DescribeDatasets(
+    req: DescribeDatasetsRequest,
+    cb?: (error: string, rep: DescribeDatasetsResponse) => void
+  ): Promise<DescribeDatasetsResponse> {
+    return this.request("DescribeDatasets", req, cb)
   }
 
   /**
@@ -817,36 +452,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询多个服务
-   */
-  async DescribeModelServices(
-    req: DescribeModelServicesRequest,
-    cb?: (error: string, rep: DescribeModelServicesResponse) => void
-  ): Promise<DescribeModelServicesResponse> {
-    return this.request("DescribeModelServices", req, cb)
-  }
-
-  /**
-   * 训练任务列表
-   */
-  async DescribeTrainingTasks(
-    req: DescribeTrainingTasksRequest,
-    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
-  ): Promise<DescribeTrainingTasksResponse> {
-    return this.request("DescribeTrainingTasks", req, cb)
-  }
-
-  /**
-   * 删除notebook镜像保存记录
-   */
-  async DeleteNotebookImageRecord(
-    req: DeleteNotebookImageRecordRequest,
-    cb?: (error: string, rep: DeleteNotebookImageRecordResponse) => void
-  ): Promise<DeleteNotebookImageRecordResponse> {
-    return this.request("DeleteNotebookImageRecord", req, cb)
-  }
-
-  /**
    * 用于更新模型服务
    */
   async ModifyModelService(
@@ -867,73 +472,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建批量预测任务
+   * 删除模型
    */
-  async CreateBatchTask(
-    req: CreateBatchTaskRequest,
-    cb?: (error: string, rep: CreateBatchTaskResponse) => void
-  ): Promise<CreateBatchTaskResponse> {
-    return this.request("CreateBatchTask", req, cb)
+  async DeleteTrainingModel(
+    req: DeleteTrainingModelRequest,
+    cb?: (error: string, rep: DeleteTrainingModelResponse) => void
+  ): Promise<DeleteTrainingModelResponse> {
+    return this.request("DeleteTrainingModel", req, cb)
   }
 
   /**
-   * 停止保存镜像
+   * 停止模型加速任务
    */
-  async StopCreatingImage(
-    req: StopCreatingImageRequest,
-    cb?: (error: string, rep: StopCreatingImageResponse) => void
-  ): Promise<StopCreatingImageResponse> {
-    return this.request("StopCreatingImage", req, cb)
-  }
-
-  /**
-   * 删除训练任务
-   */
-  async DeleteTrainingTask(
-    req: DeleteTrainingTaskRequest,
-    cb?: (error: string, rep: DeleteTrainingTaskResponse) => void
-  ): Promise<DeleteTrainingTaskResponse> {
-    return this.request("DeleteTrainingTask", req, cb)
-  }
-
-  /**
-   * 模型加速之后的模型版本列表
-   */
-  async DescribeModelAccelerateVersions(
-    req: DescribeModelAccelerateVersionsRequest,
-    cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void
-  ): Promise<DescribeModelAccelerateVersionsResponse> {
-    return this.request("DescribeModelAccelerateVersions", req, cb)
-  }
-
-  /**
-   * 批量创建模型加速任务
-   */
-  async CreateBatchModelAccTasks(
-    req: CreateBatchModelAccTasksRequest,
-    cb?: (error: string, rep: CreateBatchModelAccTasksResponse) => void
-  ): Promise<CreateBatchModelAccTasksResponse> {
-    return this.request("CreateBatchModelAccTasks", req, cb)
-  }
-
-  /**
-   * 查询批量预测任务
-   */
-  async DescribeBatchTask(
-    req: DescribeBatchTaskRequest,
-    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
-  ): Promise<DescribeBatchTaskResponse> {
-    return this.request("DescribeBatchTask", req, cb)
-  }
-
-  /**
-   * 查询单个服务组
-   */
-  async DescribeModelServiceGroup(
-    req: DescribeModelServiceGroupRequest,
-    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
-  ): Promise<DescribeModelServiceGroupResponse> {
-    return this.request("DescribeModelServiceGroup", req, cb)
+  async StopModelAccelerateTask(
+    req: StopModelAccelerateTaskRequest,
+    cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void
+  ): Promise<StopModelAccelerateTaskResponse> {
+    return this.request("StopModelAccelerateTask", req, cb)
   }
 
   /**
@@ -947,26 +502,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询最近上报的训练自定义指标
-   */
-  async DescribeLatestTrainingMetrics(
-    req: DescribeLatestTrainingMetricsRequest,
-    cb?: (error: string, rep: DescribeLatestTrainingMetricsResponse) => void
-  ): Promise<DescribeLatestTrainingMetricsResponse> {
-    return this.request("DescribeLatestTrainingMetrics", req, cb)
-  }
-
-  /**
-   * 查询镜像kernel
-   */
-  async DescribeNotebookImageKernels(
-    req: DescribeNotebookImageKernelsRequest,
-    cb?: (error: string, rep: DescribeNotebookImageKernelsResponse) => void
-  ): Promise<DescribeNotebookImageKernelsResponse> {
-    return this.request("DescribeNotebookImageKernels", req, cb)
-  }
-
-  /**
    * Notebook详情
    */
   async DescribeNotebook(
@@ -974,16 +509,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNotebookResponse) => void
   ): Promise<DescribeNotebookResponse> {
     return this.request("DescribeNotebook", req, cb)
-  }
-
-  /**
-   * 展示服务的历史版本
-   */
-  async DescribeModelServiceHistory(
-    req: DescribeModelServiceHistoryRequest,
-    cb?: (error: string, rep: DescribeModelServiceHistoryResponse) => void
-  ): Promise<DescribeModelServiceHistoryResponse> {
-    return this.request("DescribeModelServiceHistory", req, cb)
   }
 
   /**
@@ -1024,26 +549,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelServiceGroupsResponse) => void
   ): Promise<DescribeModelServiceGroupsResponse> {
     return this.request("DescribeModelServiceGroups", req, cb)
-  }
-
-  /**
-   * 修改Notebook
-   */
-  async ModifyNotebook(
-    req: ModifyNotebookRequest,
-    cb?: (error: string, rep: ModifyNotebookResponse) => void
-  ): Promise<ModifyNotebookResponse> {
-    return this.request("ModifyNotebook", req, cb)
-  }
-
-  /**
-   * 停止模型加速任务
-   */
-  async StopModelAccelerateTask(
-    req: StopModelAccelerateTaskRequest,
-    cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void
-  ): Promise<StopModelAccelerateTaskResponse> {
-    return this.request("StopModelAccelerateTask", req, cb)
   }
 
   /**

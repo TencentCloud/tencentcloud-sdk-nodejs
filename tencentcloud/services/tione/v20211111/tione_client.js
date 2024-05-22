@@ -34,16 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingModelVersion", req, cb);
     }
     /**
-     * 删除批量预测任务
+     * 查询单个服务
      */
-    async DeleteBatchTask(req, cb) {
-        return this.request("DeleteBatchTask", req, cb);
-    }
-    /**
-     * 本接口(DescribeBillingSpecs)用于查询计费项列表
-     */
-    async DescribeBillingSpecs(req, cb) {
-        return this.request("DescribeBillingSpecs", req, cb);
+    async DescribeModelService(req, cb) {
+        return this.request("DescribeModelService", req, cb);
     }
     /**
      * 导入模型
@@ -52,40 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTrainingModel", req, cb);
     }
     /**
-     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
-     */
-    async DescribeBillingSpecsPrice(req, cb) {
-        return this.request("DescribeBillingSpecsPrice", req, cb);
-    }
-    /**
      * 展示服务的调用信息
      */
     async DescribeModelServiceCallInfo(req, cb) {
         return this.request("DescribeModelServiceCallInfo", req, cb);
     }
     /**
-     * 增量更新在线推理服务的部分配置，不更新的配置项不需要传入
+     * 训练任务列表
      */
-    async ModifyModelServicePartialConfig(req, cb) {
-        return this.request("ModifyModelServicePartialConfig", req, cb);
-    }
-    /**
-     * 保存优化模型
-     */
-    async CreateOptimizedModel(req, cb) {
-        return this.request("CreateOptimizedModel", req, cb);
-    }
-    /**
-     * 训练任务详情
-     */
-    async DescribeTrainingTask(req, cb) {
-        return this.request("DescribeTrainingTask", req, cb);
-    }
-    /**
-     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
-     */
-    async DescribeEvents(req, cb) {
-        return this.request("DescribeEvents", req, cb);
+    async DescribeTrainingTasks(req, cb) {
+        return this.request("DescribeTrainingTasks", req, cb);
     }
     /**
      * 获取内置镜像列表
@@ -100,40 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartNotebook", req, cb);
     }
     /**
-     * 查询单个服务
-     */
-    async DescribeModelService(req, cb) {
-        return this.request("DescribeModelService", req, cb);
-    }
-    /**
-     * 训练框架列表
-     */
-    async DescribeTrainingFrameworks(req, cb) {
-        return this.request("DescribeTrainingFrameworks", req, cb);
-    }
-    /**
      * 删除数据集
      */
     async DeleteDataset(req, cb) {
         return this.request("DeleteDataset", req, cb);
-    }
-    /**
-     * 创建模型训练任务
-     */
-    async CreateTrainingTask(req, cb) {
-        return this.request("CreateTrainingTask", req, cb);
-    }
-    /**
-     * 停止批量预测任务
-     */
-    async StopBatchTask(req, cb) {
-        return this.request("StopBatchTask", req, cb);
-    }
-    /**
-     * 查询非结构化数据集详情
-     */
-    async DescribeDatasetDetailUnstructured(req, cb) {
-        return this.request("DescribeDatasetDetailUnstructured", req, cb);
     }
     /**
      * 删除Notebook
@@ -142,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNotebook", req, cb);
     }
     /**
-     * 模型列表
+     * 训练任务详情
      */
-    async DescribeTrainingModels(req, cb) {
-        return this.request("DescribeTrainingModels", req, cb);
+    async DescribeTrainingTask(req, cb) {
+        return this.request("DescribeTrainingTask", req, cb);
     }
     /**
      * 训练任务pod列表
@@ -172,28 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChatCompletion", req, cb);
     }
     /**
-     * 查询训练自定义指标
+     * 模型加速之后的模型版本列表
      */
-    async DescribeTrainingMetrics(req, cb) {
-        return this.request("DescribeTrainingMetrics", req, cb);
-    }
-    /**
-     * 修改Notebook标签
-     */
-    async ModifyNotebookTags(req, cb) {
-        return this.request("ModifyNotebookTags", req, cb);
-    }
-    /**
-     * 删除模型
-     */
-    async DeleteTrainingModel(req, cb) {
-        return this.request("DeleteTrainingModel", req, cb);
-    }
-    /**
-     * 更新推理服务组流量分配
-     */
-    async ModifyServiceGroupWeights(req, cb) {
-        return this.request("ModifyServiceGroupWeights", req, cb);
+    async DescribeModelAccelerateVersions(req, cb) {
+        return this.request("DescribeModelAccelerateVersions", req, cb);
     }
     /**
      * 创建数据集
@@ -202,46 +124,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDataset", req, cb);
     }
     /**
-     * 查询批量预测任务实例列表
-     */
-    async DescribeBatchTaskInstances(req, cb) {
-        return this.request("DescribeBatchTaskInstances", req, cb);
-    }
-    /**
      * 创建Notebook
      */
     async CreateNotebook(req, cb) {
         return this.request("CreateNotebook", req, cb);
     }
     /**
-     * 查询模型加速引擎版本列表
+     * 查询单个服务组
      */
-    async DescribeModelAccEngineVersions(req, cb) {
-        return this.request("DescribeModelAccEngineVersions", req, cb);
-    }
-    /**
-     * 停止模型训练任务
-     */
-    async StopTrainingTask(req, cb) {
-        return this.request("StopTrainingTask", req, cb);
-    }
-    /**
-     * 启动模型训练任务
-     */
-    async StartTrainingTask(req, cb) {
-        return this.request("StartTrainingTask", req, cb);
-    }
-    /**
-     * 删除模型加速任务
-     */
-    async DeleteModelAccelerateTask(req, cb) {
-        return this.request("DeleteModelAccelerateTask", req, cb);
-    }
-    /**
-     * 列举API
-     */
-    async DescribeAPIConfigs(req, cb) {
-        return this.request("DescribeAPIConfigs", req, cb);
+    async DescribeModelServiceGroup(req, cb) {
+        return this.request("DescribeModelServiceGroup", req, cb);
     }
     /**
      * 根据服务组id删除服务组下所有模型服务
@@ -256,34 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PushTrainingMetrics", req, cb);
     }
     /**
-     * 查询批量预测任务列表信息
-     */
-    async DescribeBatchTasks(req, cb) {
-        return this.request("DescribeBatchTasks", req, cb);
-    }
-    /**
      * 模型版本列表
      */
     async DescribeTrainingModelVersions(req, cb) {
         return this.request("DescribeTrainingModelVersions", req, cb);
-    }
-    /**
-     * 查看notebook镜像保存记录
-     */
-    async DescribeNotebookImageRecords(req, cb) {
-        return this.request("DescribeNotebookImageRecords", req, cb);
-    }
-    /**
-     * 保存镜像
-     */
-    async CreateNotebookImage(req, cb) {
-        return this.request("CreateNotebookImage", req, cb);
-    }
-    /**
-     * 查询模型加速任务列表
-     */
-    async DescribeModelAccelerateTasks(req, cb) {
-        return this.request("DescribeModelAccelerateTasks", req, cb);
     }
     /**
      * 用于创建、发布一个新的模型服务
@@ -292,22 +160,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateModelService", req, cb);
     }
     /**
-     * 查询数据集列表
-     */
-    async DescribeDatasets(req, cb) {
-        return this.request("DescribeDatasets", req, cb);
-    }
-    /**
      * 生成Notebook访问链接
      */
     async CreatePresignedNotebookUrl(req, cb) {
         return this.request("CreatePresignedNotebookUrl", req, cb);
-    }
-    /**
-     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
-     */
-    async DescribeLogs(req, cb) {
-        return this.request("DescribeLogs", req, cb);
     }
     /**
      * 根据服务id删除模型服务
@@ -316,16 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteModelService", req, cb);
     }
     /**
-     * 查询结构化数据集详情
+     * 查询数据集列表
      */
-    async DescribeDatasetDetailStructured(req, cb) {
-        return this.request("DescribeDatasetDetailStructured", req, cb);
-    }
-    /**
-     * 重启模型加速任务
-     */
-    async RestartModelAccelerateTask(req, cb) {
-        return this.request("RestartModelAccelerateTask", req, cb);
+    async DescribeDatasets(req, cb) {
+        return this.request("DescribeDatasets", req, cb);
     }
     /**
      * 查询资源组节点运行中的任务
@@ -340,24 +190,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendChatMessage", req, cb);
     }
     /**
-     * 查询多个服务
-     */
-    async DescribeModelServices(req, cb) {
-        return this.request("DescribeModelServices", req, cb);
-    }
-    /**
-     * 训练任务列表
-     */
-    async DescribeTrainingTasks(req, cb) {
-        return this.request("DescribeTrainingTasks", req, cb);
-    }
-    /**
-     * 删除notebook镜像保存记录
-     */
-    async DeleteNotebookImageRecord(req, cb) {
-        return this.request("DeleteNotebookImageRecord", req, cb);
-    }
-    /**
      * 用于更新模型服务
      */
     async ModifyModelService(req, cb) {
@@ -370,46 +202,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebooks", req, cb);
     }
     /**
-     * 创建批量预测任务
+     * 删除模型
      */
-    async CreateBatchTask(req, cb) {
-        return this.request("CreateBatchTask", req, cb);
+    async DeleteTrainingModel(req, cb) {
+        return this.request("DeleteTrainingModel", req, cb);
     }
     /**
-     * 停止保存镜像
+     * 停止模型加速任务
      */
-    async StopCreatingImage(req, cb) {
-        return this.request("StopCreatingImage", req, cb);
-    }
-    /**
-     * 删除训练任务
-     */
-    async DeleteTrainingTask(req, cb) {
-        return this.request("DeleteTrainingTask", req, cb);
-    }
-    /**
-     * 模型加速之后的模型版本列表
-     */
-    async DescribeModelAccelerateVersions(req, cb) {
-        return this.request("DescribeModelAccelerateVersions", req, cb);
-    }
-    /**
-     * 批量创建模型加速任务
-     */
-    async CreateBatchModelAccTasks(req, cb) {
-        return this.request("CreateBatchModelAccTasks", req, cb);
-    }
-    /**
-     * 查询批量预测任务
-     */
-    async DescribeBatchTask(req, cb) {
-        return this.request("DescribeBatchTask", req, cb);
-    }
-    /**
-     * 查询单个服务组
-     */
-    async DescribeModelServiceGroup(req, cb) {
-        return this.request("DescribeModelServiceGroup", req, cb);
+    async StopModelAccelerateTask(req, cb) {
+        return this.request("StopModelAccelerateTask", req, cb);
     }
     /**
      * 查询资源组节点列表
@@ -418,28 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillingResourceGroup", req, cb);
     }
     /**
-     * 查询最近上报的训练自定义指标
-     */
-    async DescribeLatestTrainingMetrics(req, cb) {
-        return this.request("DescribeLatestTrainingMetrics", req, cb);
-    }
-    /**
-     * 查询镜像kernel
-     */
-    async DescribeNotebookImageKernels(req, cb) {
-        return this.request("DescribeNotebookImageKernels", req, cb);
-    }
-    /**
      * Notebook详情
      */
     async DescribeNotebook(req, cb) {
         return this.request("DescribeNotebook", req, cb);
-    }
-    /**
-     * 展示服务的历史版本
-     */
-    async DescribeModelServiceHistory(req, cb) {
-        return this.request("DescribeModelServiceHistory", req, cb);
     }
     /**
      * 删除模型版本
@@ -464,18 +248,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeModelServiceGroups(req, cb) {
         return this.request("DescribeModelServiceGroups", req, cb);
-    }
-    /**
-     * 修改Notebook
-     */
-    async ModifyNotebook(req, cb) {
-        return this.request("ModifyNotebook", req, cb);
-    }
-    /**
-     * 停止模型加速任务
-     */
-    async StopModelAccelerateTask(req, cb) {
-        return this.request("StopModelAccelerateTask", req, cb);
     }
     /**
      * 停止Notebook

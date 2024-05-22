@@ -5071,11 +5071,13 @@ export interface RegistrationOrganizationInfo {
      * 组织机构超管姓名。
   在注册流程中，必须是超管本人进行操作。
   如果法人做为超管管理组织机构,超管姓名就是法人姓名
+  如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数。
      */
     AdminName?: string;
     /**
-     * 组织机构超管姓名。
+     * 组织机构超管手机号。
   在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。
+  如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数
      */
     AdminMobile?: string;
     /**
@@ -5092,7 +5094,8 @@ export interface RegistrationOrganizationInfo {
      */
     AuthorizationTypes?: Array<number | bigint>;
     /**
-     * 认证人身份证号
+     * 认证人身份证号，如果入参中传递超管授权书PowerOfAttorneys，则此参数为必填参数
+  
      */
     AdminIdCardNumber?: string;
     /**
@@ -5108,6 +5111,15 @@ export interface RegistrationOrganizationInfo {
      * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
      */
     BusinessLicense?: string;
+    /**
+     * 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。
+  p.s. 如果上传授权书 ，需遵循以下条件
+  1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。
+  2. 超管的个人身份必须在电子签已经实名。
+  2. 认证方式AuthorizationTypes必须只能是上传授权书方式
+  
+     */
+    PowerOfAttorneys?: Array<string>;
 }
 /**
  * CreateEmbedWebUrl请求参数结构体

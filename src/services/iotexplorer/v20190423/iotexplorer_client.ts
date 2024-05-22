@@ -142,6 +142,7 @@ import {
   GetDeviceLocationHistoryRequest,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
+  UpdateDeviceTWeCallAuthorizeStatusRequest,
   TRTCParams,
   ReleaseStudioProductRequest,
   CreateProjectResponse,
@@ -301,6 +302,7 @@ import {
   DescribeModelDefinitionRequest,
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageUsersRequest,
+  UpdateDeviceTWeCallAuthorizeStatusResponse,
   WifiInfo,
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
@@ -1283,6 +1285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchProductionResponse) => void
   ): Promise<DescribeBatchProductionResponse> {
     return this.request("DescribeBatchProduction", req, cb)
+  }
+
+  /**
+   * 更新用户对设备的TweCall授权状态
+   */
+  async UpdateDeviceTWeCallAuthorizeStatus(
+    req: UpdateDeviceTWeCallAuthorizeStatusRequest,
+    cb?: (error: string, rep: UpdateDeviceTWeCallAuthorizeStatusResponse) => void
+  ): Promise<UpdateDeviceTWeCallAuthorizeStatusResponse> {
+    return this.request("UpdateDeviceTWeCallAuthorizeStatus", req, cb)
   }
 
   /**
