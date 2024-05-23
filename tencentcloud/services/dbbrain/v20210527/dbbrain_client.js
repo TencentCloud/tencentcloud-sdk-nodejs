@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateMonitorSwitch", req, cb);
     }
     /**
-     * 修改实例巡检开关。
+     * 修改实例的配置信息。
      */
     async ModifyDiagDBInstanceConf(req, cb) {
         return this.request("ModifyDiagDBInstanceConf", req, cb);
@@ -220,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySqlFilters", req, cb);
     }
     /**
-     * 修改审计配置相关信息，如高频存储时长等
+     * 查询redis大key分析任务列表。
      */
-    async ModifyAuditService(req, cb) {
-        return this.request("ModifyAuditService", req, cb);
+    async DescribeRedisBigKeyAnalysisTasks(req, cb) {
+        return this.request("DescribeRedisBigKeyAnalysisTasks", req, cb);
     }
     /**
      * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
@@ -320,6 +320,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIndexRecommendInfo(req, cb) {
         return this.request("DescribeIndexRecommendInfo", req, cb);
+    }
+    /**
+     * 修改审计配置相关信息，如高频存储时长等
+     */
+    async ModifyAuditService(req, cb) {
+        return this.request("ModifyAuditService", req, cb);
     }
     /**
      * 查询某张表的慢查模板概览

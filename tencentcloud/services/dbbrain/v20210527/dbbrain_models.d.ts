@@ -522,6 +522,24 @@ export interface DescribeSlowLogTopSqlsRequest {
     Product?: string;
 }
 /**
+ * DescribeRedisBigKeyAnalysisTasks返回参数结构体
+ */
+export interface DescribeRedisBigKeyAnalysisTasksResponse {
+    /**
+     * 任务总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 任务列表。
+     */
+    Tasks?: Array<RedisBigKeyTask>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDBDiagReportTasks返回参数结构体
  */
 export interface DescribeDBDiagReportTasksResponse {
@@ -584,6 +602,39 @@ export interface AuditInstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceTags?: Array<string>;
+}
+/**
+ * Redis大Key分析任务详情。
+ */
+export interface RedisBigKeyTask {
+    /**
+     * 异步任务请求 ID。
+     */
+    AsyncRequestId?: number;
+    /**
+     * 任务创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * 任务开始时间。
+     */
+    StartTime?: string;
+    /**
+     * 任务结束时间。
+     */
+    EndTime?: string;
+    /**
+     * 任务状态。
+     */
+    TaskStatus?: string;
+    /**
+     * 任务执行进度。
+     */
+    Progress?: number;
+    /**
+     * 任务包含的分片节点序号列表。
+     */
+    ShardIds?: Array<number | bigint>;
 }
 /**
  * CancelKillTask返回参数结构体
@@ -1236,7 +1287,7 @@ export interface ModifyDiagDBInstanceConfRequest {
      */
     Regions: string;
     /**
-     * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+     * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"redis" - 云数据库 Redis。
      */
     Product: string;
     /**
@@ -2079,6 +2130,11 @@ export interface InstanceConfs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ShardNum?: string;
+    /**
+     * 是否开启大key周期性分析，仅redis产品有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnalysisTopKey?: string;
 }
 /**
  * 接收组信息
@@ -2811,17 +2867,25 @@ export interface DescribeAuditInstanceListRequest {
     Filters?: Array<AuditInstanceFilter>;
 }
 /**
- * VerifyUserAccount返回参数结构体
+ * DescribeRedisBigKeyAnalysisTasks请求参数结构体
  */
-export interface VerifyUserAccountResponse {
+export interface DescribeRedisBigKeyAnalysisTasksRequest {
     /**
-     * 会话token，有效期为5分钟。
+     * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
      */
-    SessionToken: string;
+    Product: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 实例ID。
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 查询数目，默认为20，最大值为100。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
 }
 /**
  * DescribeSqlFilters请求参数结构体
@@ -3411,6 +3475,19 @@ export interface DescribeAlarmTemplateRequest {
   cynosdb -  tdsql-c
      */
     Product?: string;
+}
+/**
+ * VerifyUserAccount返回参数结构体
+ */
+export interface VerifyUserAccountResponse {
+    /**
+     * 会话token，有效期为5分钟。
+     */
+    SessionToken: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSlowLogTimeSeriesStats返回参数结构体
@@ -4135,7 +4212,7 @@ export interface DescribeDiagDBInstancesRequest {
      */
     IsSupported: boolean;
     /**
-     * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+     * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
      */
     Product: string;
     /**

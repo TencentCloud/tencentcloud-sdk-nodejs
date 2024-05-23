@@ -338,9 +338,9 @@ it("dbbrain.v20210527.ModifySqlFilters", async function () {
     }
 })
 
-it("dbbrain.v20210527.ModifyAuditService", async function () {
+it("dbbrain.v20210527.DescribeRedisBigKeyAnalysisTasks", async function () {
     try {
-       const data = await client.ModifyAuditService({})
+       const data = await client.DescribeRedisBigKeyAnalysisTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +501,16 @@ it("dbbrain.v20210527.AddUserContact", async function () {
 it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
     try {
        const data = await client.DescribeIndexRecommendInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.ModifyAuditService", async function () {
+    try {
+       const data = await client.ModifyAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

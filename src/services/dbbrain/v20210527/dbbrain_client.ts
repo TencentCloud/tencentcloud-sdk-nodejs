@@ -36,9 +36,11 @@ import {
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBDiagEventResponse,
   DescribeSlowLogTopSqlsRequest,
+  DescribeRedisBigKeyAnalysisTasksResponse,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
   AuditInstanceInfo,
+  RedisBigKeyTask,
   CancelKillTaskResponse,
   DescribeRedisTopBigKeysResponse,
   DescribeSqlTemplateRequest,
@@ -134,7 +136,7 @@ import {
   InstanceInfo,
   TemplateInfo,
   DescribeAuditInstanceListRequest,
-  VerifyUserAccountResponse,
+  DescribeRedisBigKeyAnalysisTasksRequest,
   DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
   DeleteSecurityAuditLogExportTasksRequest,
@@ -162,6 +164,7 @@ import {
   CreateProxySessionKillTaskResponse,
   AuditLogFile,
   DescribeAlarmTemplateRequest,
+  VerifyUserAccountResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeProxyProcessStatisticsRequest,
   MonitorFloatMetric,
@@ -317,7 +320,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例巡检开关。
+   * 修改实例的配置信息。
    */
   async ModifyDiagDBInstanceConf(
     req: ModifyDiagDBInstanceConfRequest,
@@ -527,13 +530,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改审计配置相关信息，如高频存储时长等
+   * 查询redis大key分析任务列表。
    */
-  async ModifyAuditService(
-    req: ModifyAuditServiceRequest,
-    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
-  ): Promise<ModifyAuditServiceResponse> {
-    return this.request("ModifyAuditService", req, cb)
+  async DescribeRedisBigKeyAnalysisTasks(
+    req: DescribeRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: DescribeRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<DescribeRedisBigKeyAnalysisTasksResponse> {
+    return this.request("DescribeRedisBigKeyAnalysisTasks", req, cb)
   }
 
   /**
@@ -694,6 +697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexRecommendInfoResponse) => void
   ): Promise<DescribeIndexRecommendInfoResponse> {
     return this.request("DescribeIndexRecommendInfo", req, cb)
+  }
+
+  /**
+   * 修改审计配置相关信息，如高频存储时长等
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
   }
 
   /**

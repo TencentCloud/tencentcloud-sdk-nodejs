@@ -18,9 +18,39 @@ const client = new tencentcloud.svp.v20240125.Client({
 })
 describe("svp.v20240125.test.js", function () {
 
+it("svp.v20240125.DescribeSavingPlanUsage", async function () {
+    try {
+       const data = await client.DescribeSavingPlanUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("svp.v20240125.DescribeSavingPlanOverview", async function () {
+    try {
+       const data = await client.DescribeSavingPlanOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("svp.v20240125.CreateSavingPlanOrder", async function () {
     try {
        const data = await client.CreateSavingPlanOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("svp.v20240125.DescribeSavingPlanDeduct", async function () {
+    try {
+       const data = await client.DescribeSavingPlanDeduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

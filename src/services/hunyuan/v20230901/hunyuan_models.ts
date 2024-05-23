@@ -442,7 +442,7 @@ export interface Usage {
  */
 export interface Message {
   /**
-   * 角色
+   * 角色，可选值包括 system、user、assistant。
    */
   Role: string
   /**

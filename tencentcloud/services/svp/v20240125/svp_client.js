@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("svp.tencentcloudapi.com", "2024-01-25", clientConfig);
     }
     /**
+     * 查用当前用户明细节省计划查询时段内的使用情况
+     */
+    async DescribeSavingPlanUsage(req, cb) {
+        return this.request("DescribeSavingPlanUsage", req, cb);
+    }
+    /**
+     * 查用当前用户明细节省计划总览查询时段内的使用情况
+     */
+    async DescribeSavingPlanOverview(req, cb) {
+        return this.request("DescribeSavingPlanOverview", req, cb);
+    }
+    /**
      * 创建节省计划订单
      */
     async CreateSavingPlanOrder(req, cb) {
         return this.request("CreateSavingPlanOrder", req, cb);
+    }
+    /**
+     * 查询节省计划抵扣明细
+     */
+    async DescribeSavingPlanDeduct(req, cb) {
+        return this.request("DescribeSavingPlanDeduct", req, cb);
     }
 }
 exports.Client = Client;

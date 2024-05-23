@@ -96,7 +96,7 @@ import {
   CreateResultDownloadRequest,
   DescribeNotebookSessionStatementSqlResultResponse,
   ModifyUserRequest,
-  LakeFileSystemToken,
+  DescribeTasksCostInfoResponse,
   AddDMSPartitionsResponse,
   CancelNotebookSessionStatementRequest,
   SparkMonitorMetrics,
@@ -167,7 +167,7 @@ import {
   CreateSparkAppResponse,
   CreateTaskResponse,
   AlterDMSPartitionResponse,
-  Users,
+  DescribeTableResponse,
   DetachUserPolicyResponse,
   SparkSessionBatchLogOperate,
   UnbindWorkGroupsFromUserResponse,
@@ -185,6 +185,7 @@ import {
   DatasourceConnectionConfig,
   UpdateRowFilterRequest,
   TColumn,
+  LakeFileSystemToken,
   AlterDMSTableResponse,
   DescribeUpdatableDataEnginesResponse,
   DeleteUserRequest,
@@ -261,7 +262,7 @@ import {
   CreateSparkAppRequest,
   CreateSparkSessionBatchSQLRequest,
   ListTaskJobLogDetailResponse,
-  DescribeTableResponse,
+  Users,
   HouseEventsInfo,
   SQLTask,
   AttachUserPolicyResponse,
@@ -269,6 +270,7 @@ import {
   DetachWorkGroupPolicyRequest,
   CancelNotebookSessionStatementBatchRequest,
   DescribeLakeFsTaskResultResponse,
+  DescribeTasksCostInfoRequest,
   UserDetailInfo,
   DescribeTaskResultResponse,
   DescribeDatasourceConnectionResponse,
@@ -298,6 +300,7 @@ import {
   DMSSds,
   ViewBaseInfo,
   CheckLockMetaDataRequest,
+  AddOptimizerEnginesResponse,
   DescribeTasksRequest,
   CreateSparkAppTaskRequest,
   DeleteWorkGroupRequest,
@@ -311,6 +314,7 @@ import {
   DescribeNotebookSessionsResponse,
   DescribeEngineUsageInfoRequest,
   RollbackDataEngineImageResponse,
+  AddOptimizerEnginesRequest,
   Partition,
   ModifySparkAppBatchRequest,
   ModifySparkAppResponse,
@@ -516,6 +520,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
+   */
+  async DescribeSparkSessionBatchSqlLog(
+    req: DescribeSparkSessionBatchSqlLogRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void
+  ): Promise<DescribeSparkSessionBatchSqlLogResponse> {
+    return this.request("DescribeSparkSessionBatchSqlLog", req, cb)
+  }
+
+  /**
    * 切换主备集群
    */
   async SwitchDataEngine(
@@ -693,6 +707,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLakeFsTaskResultResponse) => void
   ): Promise<DescribeLakeFsTaskResultResponse> {
     return this.request("DescribeLakeFsTaskResult", req, cb)
+  }
+
+  /**
+   * 添加数据优化资源
+   */
+  async AddOptimizerEngines(
+    req?: AddOptimizerEnginesRequest,
+    cb?: (error: string, rep: AddOptimizerEnginesResponse) => void
+  ): Promise<AddOptimizerEnginesResponse> {
+    return this.request("AddOptimizerEngines", req, cb)
   }
 
   /**
@@ -1056,6 +1080,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（DescribeTasksCostInfo）用于查询任务消耗
+   */
+  async DescribeTasksCostInfo(
+    req: DescribeTasksCostInfoRequest,
+    cb?: (error: string, rep: DescribeTasksCostInfoResponse) => void
+  ): Promise<DescribeTasksCostInfoResponse> {
+    return this.request("DescribeTasksCostInfo", req, cb)
+  }
+
+  /**
    * 查询结果下载任务
    */
   async DescribeResultDownload(
@@ -1146,13 +1180,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
+   * 本接口（CancelTask），用于取消任务
    */
-  async DescribeSparkSessionBatchSqlLog(
-    req: DescribeSparkSessionBatchSqlLogRequest,
-    cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void
-  ): Promise<DescribeSparkSessionBatchSqlLogResponse> {
-    return this.request("DescribeSparkSessionBatchSqlLog", req, cb)
+  async CancelTask(
+    req: CancelTaskRequest,
+    cb?: (error: string, rep: CancelTaskResponse) => void
+  ): Promise<CancelTaskResponse> {
+    return this.request("CancelTask", req, cb)
   }
 
   /**
@@ -1383,16 +1417,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateExportTaskResponse) => void
   ): Promise<CreateExportTaskResponse> {
     return this.request("CreateExportTask", req, cb)
-  }
-
-  /**
-   * 本接口（CancelTask），用于取消任务
-   */
-  async CancelTask(
-    req: CancelTaskRequest,
-    cb?: (error: string, rep: CancelTaskResponse) => void
-  ): Promise<CancelTaskResponse> {
-    return this.request("CancelTask", req, cb)
   }
 
   /**

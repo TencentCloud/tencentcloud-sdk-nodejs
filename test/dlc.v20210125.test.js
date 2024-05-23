@@ -158,6 +158,16 @@ it("dlc.v20210125.CreateNotebookSessionStatementSupportBatchSQL", async function
     }
 })
 
+it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
+    try {
+       const data = await client.DescribeSparkSessionBatchSqlLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.SwitchDataEngine", async function () {
     try {
        const data = await client.SwitchDataEngine({})
@@ -331,6 +341,16 @@ it("dlc.v20210125.AlterDMSPartition", async function () {
 it("dlc.v20210125.DescribeLakeFsTaskResult", async function () {
     try {
        const data = await client.DescribeLakeFsTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AddOptimizerEngines", async function () {
+    try {
+       const data = await client.AddOptimizerEngines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,6 +718,16 @@ it("dlc.v20210125.DescribeNotebookSessionLog", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTasksCostInfo", async function () {
+    try {
+       const data = await client.DescribeTasksCostInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeResultDownload", async function () {
     try {
        const data = await client.DescribeResultDownload({})
@@ -788,9 +818,9 @@ it("dlc.v20210125.ModifyUser", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
+it("dlc.v20210125.CancelTask", async function () {
     try {
-       const data = await client.DescribeSparkSessionBatchSqlLog({})
+       const data = await client.CancelTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,16 +1051,6 @@ it("dlc.v20210125.CreateTable", async function () {
 it("dlc.v20210125.CreateExportTask", async function () {
     try {
        const data = await client.CreateExportTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dlc.v20210125.CancelTask", async function () {
-    try {
-       const data = await client.CancelTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

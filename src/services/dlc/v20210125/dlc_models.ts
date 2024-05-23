@@ -2112,29 +2112,23 @@ export interface ModifyUserRequest {
 }
 
 /**
- * LakeFileSystem使用的临时token
+ * DescribeTasksCostInfo返回参数结构体
  */
-export interface LakeFileSystemToken {
+export interface DescribeTasksCostInfoResponse {
   /**
-   * Token使用的临时密钥的ID
+   * 下一页的标识
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretId?: string
+  SearchAfter?: string
   /**
-   * Token使用的临时密钥
+   * 返回的数据，字符串类型的二维数组，首行为列中文名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretKey?: string
+  Data?: string
   /**
-   * Token信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Token?: string
-  /**
-   * 过期时间
-   */
-  ExpiredTime?: number
-  /**
-   * 颁布时间
-   */
-  IssueTime?: number
+  RequestId?: string
 }
 
 /**
@@ -3671,19 +3665,17 @@ export interface AlterDMSPartitionResponse {
 }
 
 /**
- * 用户信息集合
+ * DescribeTable返回参数结构体
  */
-export interface Users {
+export interface DescribeTableResponse {
   /**
-   * 用户信息集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据表对象
    */
-  UserSet: Array<UserMessage>
+  Table?: TableResponseInfo
   /**
-   * 用户总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount: number
+  RequestId?: string
 }
 
 /**
@@ -4251,6 +4243,32 @@ export interface TColumn {
 Scale小于Precision
    */
   Scale?: number
+}
+
+/**
+ * LakeFileSystem使用的临时token
+ */
+export interface LakeFileSystemToken {
+  /**
+   * Token使用的临时密钥的ID
+   */
+  SecretId?: string
+  /**
+   * Token使用的临时密钥
+   */
+  SecretKey?: string
+  /**
+   * Token信息
+   */
+  Token?: string
+  /**
+   * 过期时间
+   */
+  ExpiredTime?: number
+  /**
+   * 颁布时间
+   */
+  IssueTime?: number
 }
 
 /**
@@ -6228,17 +6246,19 @@ export interface ListTaskJobLogDetailResponse {
 }
 
 /**
- * DescribeTable返回参数结构体
+ * 用户信息集合
  */
-export interface DescribeTableResponse {
+export interface Users {
   /**
-   * 数据表对象
+   * 用户信息集合
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Table?: TableResponseInfo
+  UserSet: Array<UserMessage>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 用户总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  TotalCount: number
 }
 
 /**
@@ -6348,6 +6368,40 @@ export interface DescribeLakeFsTaskResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTasksCostInfo请求参数结构体
+ */
+export interface DescribeTasksCostInfoRequest {
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。
+task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。
+task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
+task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
+task-operator- string （子uin过滤）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻
+   */
+  StartTime?: string
+  /**
+   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
+   */
+  EndTime?: string
+  /**
+   * 数据引擎名称，用于筛选
+   */
+  DataEngineName?: string
+  /**
+   * 下一页的标识
+   */
+  SearchAfter?: string
+  /**
+   * 每页的大小
+   */
+  PageSize?: number
 }
 
 /**
@@ -7100,6 +7154,16 @@ export interface CheckLockMetaDataRequest {
 }
 
 /**
+ * AddOptimizerEngines返回参数结构体
+ */
+export interface AddOptimizerEnginesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -7417,6 +7481,11 @@ export interface RollbackDataEngineImageResponse {
    */
   RequestId?: string
 }
+
+/**
+ * AddOptimizerEngines请求参数结构体
+ */
+export type AddOptimizerEnginesRequest = null
 
 /**
  * 数据表分块信息。

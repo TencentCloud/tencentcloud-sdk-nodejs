@@ -1650,11 +1650,7 @@ export interface CreateRocketMQVipInstanceRequest {
      */
     Name: string;
     /**
-     * 实例规格：
-  基础型，rocket-vip-basic-1
-  标准型，rocket-vip-basic-2
-  高阶Ⅰ型，rocket-vip-basic-3
-  高阶Ⅱ型，rocket-vip-basic-4
+     * 集群规格，支持规格有 1.通用型:rocket-vip-basic-0; 2.基础型:rocket-vip-basic-1; 3.标准型:rocket-vip-basic-2; 4.高阶Ⅰ型:rocket-vip-basic-3; 5.高阶Ⅱ型:rocket-vip-basic-4
      */
     Spec: string;
     /**

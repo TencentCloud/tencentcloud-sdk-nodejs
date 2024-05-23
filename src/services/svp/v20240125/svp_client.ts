@@ -17,7 +17,19 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { CreateSavingPlanOrderRequest, CreateSavingPlanOrderResponse } from "./svp_models"
+import {
+  CreateSavingPlanOrderRequest,
+  CreateSavingPlanOrderResponse,
+  DescribeSavingPlanDeductRequest,
+  SavingPlanOverviewDetail,
+  DescribeSavingPlanUsageRequest,
+  SavingPlanDeductDetail,
+  DescribeSavingPlanOverviewResponse,
+  DescribeSavingPlanUsageResponse,
+  DescribeSavingPlanDeductResponse,
+  DescribeSavingPlanOverviewRequest,
+  SavingPlanUsageDetail,
+} from "./svp_models"
 
 /**
  * svp client
@@ -29,6 +41,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查用当前用户明细节省计划查询时段内的使用情况
+   */
+  async DescribeSavingPlanUsage(
+    req: DescribeSavingPlanUsageRequest,
+    cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void
+  ): Promise<DescribeSavingPlanUsageResponse> {
+    return this.request("DescribeSavingPlanUsage", req, cb)
+  }
+
+  /**
+   * 查用当前用户明细节省计划总览查询时段内的使用情况
+   */
+  async DescribeSavingPlanOverview(
+    req: DescribeSavingPlanOverviewRequest,
+    cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void
+  ): Promise<DescribeSavingPlanOverviewResponse> {
+    return this.request("DescribeSavingPlanOverview", req, cb)
+  }
+
+  /**
    * 创建节省计划订单
    */
   async CreateSavingPlanOrder(
@@ -36,5 +68,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSavingPlanOrderResponse) => void
   ): Promise<CreateSavingPlanOrderResponse> {
     return this.request("CreateSavingPlanOrder", req, cb)
+  }
+
+  /**
+   * 查询节省计划抵扣明细
+   */
+  async DescribeSavingPlanDeduct(
+    req: DescribeSavingPlanDeductRequest,
+    cb?: (error: string, rep: DescribeSavingPlanDeductResponse) => void
+  ): Promise<DescribeSavingPlanDeductResponse> {
+    return this.request("DescribeSavingPlanDeduct", req, cb)
   }
 }

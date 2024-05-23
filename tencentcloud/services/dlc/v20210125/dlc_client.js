@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
     }
     /**
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
+     */
+    async DescribeSparkSessionBatchSqlLog(req, cb) {
+        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
+    }
+    /**
      * 切换主备集群
      */
     async SwitchDataEngine(req, cb) {
@@ -218,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLakeFsTaskResult(req, cb) {
         return this.request("DescribeLakeFsTaskResult", req, cb);
+    }
+    /**
+     * 添加数据优化资源
+     */
+    async AddOptimizerEngines(req, cb) {
+        return this.request("AddOptimizerEngines", req, cb);
     }
     /**
      * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
@@ -436,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebookSessionLog", req, cb);
     }
     /**
+     * 该接口（DescribeTasksCostInfo）用于查询任务消耗
+     */
+    async DescribeTasksCostInfo(req, cb) {
+        return this.request("DescribeTasksCostInfo", req, cb);
+    }
+    /**
      * 查询结果下载任务
      */
     async DescribeResultDownload(req, cb) {
@@ -490,10 +508,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUser", req, cb);
     }
     /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
+     * 本接口（CancelTask），用于取消任务
      */
-    async DescribeSparkSessionBatchSqlLog(req, cb) {
-        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
+    async CancelTask(req, cb) {
+        return this.request("CancelTask", req, cb);
     }
     /**
      * 本接口（DescribeTable），用于查询单个表的详细信息。
@@ -632,12 +650,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateExportTask(req, cb) {
         return this.request("CreateExportTask", req, cb);
-    }
-    /**
-     * 本接口（CancelTask），用于取消任务
-     */
-    async CancelTask(req, cb) {
-        return this.request("CancelTask", req, cb);
     }
     /**
      * 从工作组中删除用户

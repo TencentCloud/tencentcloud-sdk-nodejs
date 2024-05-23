@@ -1085,6 +1085,60 @@ export interface DescribeStreamLinkEventRequest {
 }
 
 /**
+ * 转码信息
+ */
+export interface MediaTranscodeItem {
+  /**
+   * 转码后文件的目标存储。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 转码后的视频文件路径。
+   */
+  Path?: string
+  /**
+   * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。
+   */
+  Definition?: number
+  /**
+   * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
+   */
+  Bitrate?: number
+  /**
+   * 视频流高度的最大值，单位：px。
+   */
+  Height?: number
+  /**
+   * 视频流宽度的最大值，单位：px。
+   */
+  Width?: number
+  /**
+   * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
+   */
+  Size?: number
+  /**
+   * 视频时长，单位：秒。
+   */
+  Duration?: number
+  /**
+   * 容器类型，例如 m4a，mp4 等。
+   */
+  Container?: string
+  /**
+   * 视频的 md5 值。
+   */
+  Md5?: string
+  /**
+   * 音频流信息。
+   */
+  AudioStreamSet?: Array<MediaAudioStreamItem>
+  /**
+   * 视频流信息。
+   */
+  VideoStreamSet?: Array<MediaVideoStreamItem>
+}
+
+/**
  * 诊断结果项。
  */
 export interface DiagnoseResult {
@@ -11133,6 +11187,7 @@ export interface LiveStreamAiRecognitionResultItem {
 <li>AsrFullTextRecognition：语音全文识别，</li>
 <li>OcrFullTextRecognition：文本全文识别。</li>
 <li>TransTextRecognition：语音翻译。</li>
+<li>ObjectRecognition：目标检测。</li>
 <li>TagRecognition：精彩打点。</li>
    */
   Type?: string
@@ -11165,6 +11220,10 @@ OcrFullTextRecognition 时有效。
    * 翻译结果，当Type 为 TransTextRecognition 时有效。
    */
   TransTextRecognitionResultSet?: Array<LiveStreamTransTextRecognitionResult>
+  /**
+   * 目标检测结果，当Type为 ObjectRecognition 时有效。
+   */
+  ObjectRecognitionResultSet?: Array<LiveStreamObjectRecognitionResult>
   /**
    * 打点结果，当Type 为 TagRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -13092,57 +13151,29 @@ export interface DeleteTranscodeTemplateResponse {
 }
 
 /**
- * 转码信息
+ * 直播 AI 物体识别结果
  */
-export interface MediaTranscodeItem {
+export interface LiveStreamObjectRecognitionResult {
   /**
-   * 转码后文件的目标存储。
+   * 识别的物体名称。
    */
-  OutputStorage?: TaskOutputStorage
+  Name: string
   /**
-   * 转码后的视频文件路径。
+   * 识别片段起始的 PTS 时间，单位：秒。
    */
-  Path?: string
+  StartPtsOffset: number
   /**
-   * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。
+   * 识别片段终止的 PTS 时间，单位：秒。
    */
-  Definition?: number
+  EndPtsOffset: number
   /**
-   * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
+   * 识别片段置信度。取值：0~100。
    */
-  Bitrate?: number
+  Confidence: number
   /**
-   * 视频流高度的最大值，单位：px。
+   * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
-  Height?: number
-  /**
-   * 视频流宽度的最大值，单位：px。
-   */
-  Width?: number
-  /**
-   * 媒体文件总大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
-   */
-  Size?: number
-  /**
-   * 视频时长，单位：秒。
-   */
-  Duration?: number
-  /**
-   * 容器类型，例如 m4a，mp4 等。
-   */
-  Container?: string
-  /**
-   * 视频的 md5 值。
-   */
-  Md5?: string
-  /**
-   * 音频流信息。
-   */
-  AudioStreamSet?: Array<MediaAudioStreamItem>
-  /**
-   * 视频流信息。
-   */
-  VideoStreamSet?: Array<MediaVideoStreamItem>
+  AreaCoordSet: Array<number | bigint>
 }
 
 /**

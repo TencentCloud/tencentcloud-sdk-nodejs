@@ -12,6 +12,19 @@ export interface DescribePersonCertificateResponse {
     RequestId?: string;
 }
 /**
+ * CreateOrganizationGroupInvitationLink请求参数结构体
+ */
+export interface CreateOrganizationGroupInvitationLinkRequest {
+    /**
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 到期时间（以秒为单位的时间戳），其上限为30天的有效期限。
+     */
+    ExpireTime: number;
+}
+/**
  * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
  */
 export interface FlowBatchUrlInfo {
@@ -3002,6 +3015,19 @@ export interface DescribeFlowTemplatesRequest {
     WithPreviewUrl?: boolean;
 }
 /**
+ * CreateIntegrationSubOrganizationActiveRecord返回参数结构体
+ */
+export interface CreateIntegrationSubOrganizationActiveRecordResponse {
+    /**
+     * 激活失败的成员企业ID集合
+     */
+    FailedSubOrganizationIds?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteSealPolicies返回参数结构体
  */
 export interface DeleteSealPoliciesResponse {
@@ -4681,25 +4707,40 @@ export interface FlowCreateApprover {
     Intention?: Intention;
 }
 /**
- * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
+ * CreateOrganizationGroupInvitationLink返回参数结构体
  */
-export interface ApproverComponentLimitType {
+export interface CreateOrganizationGroupInvitationLinkResponse {
     /**
-     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+     * 加入集团二维码链接，子企业的管理员可以直接扫码进入。
+  注意:1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
      */
-    RecipientId: string;
+    Link?: string;
     /**
-     * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选
+     * 到期时间（以秒为单位的时间戳）
+     */
+    ExpireTime?: number;
+    /**
+     * 加入集团短链接。
+  注意:
+  1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。
+  2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。
+  3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
+     */
+    JumpUrl?: string;
+    /**
+     * 腾讯电子签小程序加入集团链接。
   
-  签名方式：
-  <ul>
-  <li>HANDWRITE-手写签名</li>
-  <li>ESIGN-个人印章类型</li>
-  <li>OCR_ESIGN-AI智能识别手写签名</li>
-  <li>SYSTEM_ESIGN-系统签名</li>
-  </ul>
+  <li>小程序和APP集成使用</li>
+  <li>得到的链接类似于`pages/guide?shortKey=yDw***k1xFc5`, 用法可以参考：<a href="https://qian.tencent.com/developers/company/openwxminiprogram" target="_blank">跳转电子签小程序</a></li>
+  
+  
+  注： <font color="red">生成的链路后面不能再增加参数</font>
      */
-    Values: Array<string>;
+    MiniAppPath?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
@@ -5352,17 +5393,49 @@ export interface CreateFlowGroupByFilesResponse {
     RequestId?: string;
 }
 /**
- * CreateIntegrationEmployees返回参数结构体
+ * CreateReleaseFlow请求参数结构体
  */
-export interface CreateIntegrationEmployeesResponse {
+export interface CreateReleaseFlowRequest {
     /**
-     * 创建员工的结果。包含创建成功的数据与创建失败数据。
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    CreateEmployeeResult?: CreateStaffResult;
+    Operator: UserInfo;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 待解除的签署流程编号（即原签署流程的编号）。
      */
-    RequestId?: string;
+    NeedRelievedFlowId: string;
+    /**
+     * 解除协议内容, 包括解除理由等信息。
+     */
+    ReliveInfo: RelieveInfo;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 替换解除协议的签署人， 如不指定替换签署人,  则使用原流程的签署人。 <br/>
+  如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+  
+  注意：
+  `只能更换自己企业的签署人,  不支持更换个人类型或者其他企业的签署人。`
+  `可以不指定替换签署人, 使用原流程的签署人 `
+     */
+    ReleasedApprovers?: Array<ReleasedApprover>;
+    /**
+     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。
+  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
+     */
+    Deadline?: number;
+    /**
+     * 调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。
+  
+  在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。
+  
+  回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
+     */
+    UserData?: string;
 }
 /**
  * 批量补充签署人时，补充失败的报错说明
@@ -5448,49 +5521,17 @@ export interface CreateFlowSignUrlRequest {
     UrlType?: number;
 }
 /**
- * CreateReleaseFlow请求参数结构体
+ * CreateIntegrationEmployees返回参数结构体
  */
-export interface CreateReleaseFlowRequest {
+export interface CreateIntegrationEmployeesResponse {
     /**
-     * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     * 创建员工的结果。包含创建成功的数据与创建失败数据。
      */
-    Operator: UserInfo;
+    CreateEmployeeResult?: CreateStaffResult;
     /**
-     * 待解除的签署流程编号（即原签署流程的编号）。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    NeedRelievedFlowId: string;
-    /**
-     * 解除协议内容, 包括解除理由等信息。
-     */
-    ReliveInfo: RelieveInfo;
-    /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-     */
-    Agent?: Agent;
-    /**
-     * 替换解除协议的签署人， 如不指定替换签署人,  则使用原流程的签署人。 <br/>
-  如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
-  
-  注意：
-  `只能更换自己企业的签署人,  不支持更换个人类型或者其他企业的签署人。`
-  `可以不指定替换签署人, 使用原流程的签署人 `
-     */
-    ReleasedApprovers?: Array<ReleasedApprover>;
-    /**
-     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。
-  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
-     */
-    Deadline?: number;
-    /**
-     * 调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。
-  
-  在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。
-  
-  回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
-     */
-    UserData?: string;
+    RequestId?: string;
 }
 /**
  * CreateIntegrationUserRoles请求参数结构体
@@ -6683,6 +6724,30 @@ export interface ModifyApplicationCallbackInfoRequest {
      * 企业应用回调信息
      */
     CallbackInfo: CallbackInfo;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+}
+/**
+ * DescribeUserAutoSignStatus请求参数结构体
+ */
+export interface DescribeUserAutoSignStatusRequest {
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 自动签使用的场景值, 可以选择的场景值如下:
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+     */
+    SceneKey: string;
+    /**
+     * 要查询状态的用户信息, 包括名字,身份证等
+     */
+    UserInfo: UserThreeFactor;
     /**
      * 代理企业和员工的信息。
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -8310,6 +8375,19 @@ export interface DeleteExtendedServiceAuthInfosRequest {
     Agent?: Agent;
 }
 /**
+ * DescribeExtendedServiceAuthInfos返回参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfosResponse {
+    /**
+     * 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。
+     */
+    AuthInfoList?: Array<ExtendAuthInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeIntegrationDepartments请求参数结构体
  */
 export interface DescribeIntegrationDepartmentsRequest {
@@ -8406,28 +8484,17 @@ export interface CreateFlowResponse {
     RequestId?: string;
 }
 /**
- * DescribeUserAutoSignStatus请求参数结构体
+ * CreateIntegrationSubOrganizationActiveRecord请求参数结构体
  */
-export interface DescribeUserAutoSignStatusRequest {
+export interface CreateIntegrationSubOrganizationActiveRecordRequest {
     /**
-     * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+     * 待激活成员企业ID集合
      */
-    SceneKey: string;
-    /**
-     * 要查询状态的用户信息, 包括名字,身份证等
-     */
-    UserInfo: UserThreeFactor;
-    /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-     */
-    Agent?: Agent;
+    SubOrganizationIds: Array<string>;
 }
 /**
  * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
@@ -8608,17 +8675,25 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
     RequestId?: string;
 }
 /**
- * DescribeExtendedServiceAuthInfos返回参数结构体
+ * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
  */
-export interface DescribeExtendedServiceAuthInfosResponse {
+export interface ApproverComponentLimitType {
     /**
-     * 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
      */
-    AuthInfoList?: Array<ExtendAuthInfo>;
+    RecipientId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选
+  
+  签名方式：
+  <ul>
+  <li>HANDWRITE-手写签名</li>
+  <li>ESIGN-个人印章类型</li>
+  <li>OCR_ESIGN-AI智能识别手写签名</li>
+  <li>SYSTEM_ESIGN-系统签名</li>
+  </ul>
      */
-    RequestId?: string;
+    Values: Array<string>;
 }
 /**
  * 抄送信息
