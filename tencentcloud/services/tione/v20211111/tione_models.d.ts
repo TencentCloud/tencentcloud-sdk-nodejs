@@ -1856,6 +1856,11 @@ export interface GooseFS {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
+    /**
+     * GooseFS命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameSpace?: string;
 }
 /**
  * 键值对

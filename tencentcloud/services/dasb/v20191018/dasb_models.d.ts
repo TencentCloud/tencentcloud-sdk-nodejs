@@ -124,27 +124,126 @@ export interface DeleteDevicesResponse {
     RequestId?: string;
 }
 /**
- * 部门信息
+ * 修改密码任务信息
  */
-export interface Department {
+export interface ChangePwdTaskInfo {
     /**
-     * 部门ID
-     */
-    Id?: string;
-    /**
-     * 部门名称，1 - 256个字符
-     */
-    Name?: string;
-    /**
-     * 部门管理员账号ID
+     * id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Managers?: Array<string>;
+    Id?: number;
     /**
-     * 管理员用户
+     * 任务id
+     */
+    OperationId?: string;
+    /**
+     * 任务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ManagerUsers?: Array<DepartmentManagerUser>;
+    TaskName?: string;
+    /**
+     * 所属部门信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Department?: Department;
+    /**
+     * 改密方式。1：使用执行账号。2：修改自身密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChangeMethod?: number;
+    /**
+     * 执行账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunAccount?: string;
+    /**
+     * 密码生成策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthGenerationStrategy?: number;
+    /**
+     * 密码长度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PasswordLength?: number;
+    /**
+     * 包含小写字母
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SmallLetter?: number;
+    /**
+     * 包含大写字母
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BigLetter?: number;
+    /**
+     * 包含数字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Digit?: number;
+    /**
+     * 包含的特殊字符，base64
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Symbol?: string;
+    /**
+     * 改密完成通知。0-通知，1-不通知
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompleteNotify?: number;
+    /**
+     * 通知人邮箱
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NotifyEmails?: Array<string>;
+    /**
+     * 加密附件密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FilePassword?: string;
+    /**
+     * 需要改密的账户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccountSet?: Array<string>;
+    /**
+     * 需要改密的主机
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceSet?: Array<Device>;
+    /**
+     * 任务类型：4手动，5自动
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: number;
+    /**
+     * 周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Period?: number;
+    /**
+     * 首次执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstTime?: string;
+    /**
+     * 下次执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NextTime?: string;
+}
+/**
+ * CreateChangePwdTask返回参数结构体
+ */
+export interface CreateChangePwdTaskResponse {
+    /**
+     * 任务id
+     */
+    OperationId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 主机账号
@@ -179,6 +278,31 @@ export interface BindDeviceAccountPasswordResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeChangePwdTaskDetail请求参数结构体
+ */
+export interface DescribeChangePwdTaskDetailRequest {
+    /**
+     * 改密任务Id
+     */
+    OperationId: string;
+    /**
+     * 所属部门ID，如：“1.2.3”
+     */
+    DepartmentId?: string;
+    /**
+     * 过滤数组，支持：InstanceId 资产ID，DeviceName 资产名称，Ip 内外IP，Account 资产账号，LastChangeStatus 上次改密状态。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页偏移位置，默认0
+     */
+    Offset?: number;
+    /**
+     * 每页条目。默认20
+     */
+    Limit?: number;
 }
 /**
  * ResetDeviceAccountPassword请求参数结构体
@@ -338,6 +462,41 @@ export interface DeleteUserGroupMembersRequest {
      * 需删除的成员用户ID集合
      */
     MemberIdSet: Array<number | bigint>;
+}
+/**
+ * RunChangePwdTask请求参数结构体
+ */
+export interface RunChangePwdTaskRequest {
+    /**
+     * 任务Id
+     */
+    OperationId: string;
+    /**
+     * 部门id
+     */
+    DepartmentId?: string;
+    /**
+     * 改密任务详情
+     */
+    Details?: Array<RunChangePwdTaskDetail>;
+}
+/**
+ * DescribeChangePwdTaskDetail返回参数结构体
+ */
+export interface DescribeChangePwdTaskDetailResponse {
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Details?: Array<ChangePwdTaskDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteUserGroups返回参数结构体
@@ -878,6 +1037,29 @@ export interface OperationEvent {
     Result: number;
 }
 /**
+ * 部门信息
+ */
+export interface Department {
+    /**
+     * 部门ID
+     */
+    Id?: string;
+    /**
+     * 部门名称，1 - 256个字符
+     */
+    Name?: string;
+    /**
+     * 部门管理员账号ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Managers?: Array<string>;
+    /**
+     * 管理员用户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManagerUsers?: Array<DepartmentManagerUser>;
+}
+/**
  * ModifyCmdTemplate请求参数结构体
  */
 export interface ModifyCmdTemplateRequest {
@@ -933,6 +1115,40 @@ export interface DescribeAssetSyncStatusResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyChangePwdTask返回参数结构体
+ */
+export interface ModifyChangePwdTaskResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeUserGroups请求参数结构体
+ */
+export interface DescribeUserGroupsRequest {
+    /**
+     * 用户组ID集合
+     */
+    IdSet?: Array<number | bigint>;
+    /**
+     * 用户组名，模糊查询,长度：0-64字符
+     */
+    Name?: string;
+    /**
+     * 分页偏移位置，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 每页条目数量，缺省20，最大500
+     */
+    Limit?: number;
+    /**
+     * 部门ID，用于过滤属于某个部门的用户组
+     */
+    DepartmentId?: string;
 }
 /**
  * CreateAcl请求参数结构体
@@ -1067,6 +1283,19 @@ export interface DescribeLoginEventResponse {
     RequestId?: string;
 }
 /**
+ * 立即执行改密任务的入参
+ */
+export interface RunChangePwdTaskDetail {
+    /**
+     * 资产id
+     */
+    DeviceId: number;
+    /**
+     * 资产账号
+     */
+    Account: string;
+}
+/**
  * DeleteDeviceGroupMembers请求参数结构体
  */
 export interface DeleteDeviceGroupMembersRequest {
@@ -1091,6 +1320,25 @@ export interface SearchCommandResponse {
      * 命令列表
      */
     Commands?: Array<SearchCommandResult>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeChangePwdTask返回参数结构体
+ */
+export interface DescribeChangePwdTaskResponse {
+    /**
+     * 任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks?: Array<ChangePwdTaskInfo>;
+    /**
+     * 任务总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1681,29 +1929,19 @@ export interface ResetDeviceAccountPrivateKeyRequest {
     IdSet: Array<number | bigint>;
 }
 /**
- * DescribeDeviceGroups请求参数结构体
+ * 部门管理员信息
  */
-export interface DescribeDeviceGroupsRequest {
+export interface DepartmentManagerUser {
     /**
-     * 资产组ID集合
+     * 管理员Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdSet?: Array<number | bigint>;
+    ManagerId?: string;
     /**
-     * 资产组名，最长64个字符，模糊查询
+     * 管理员姓名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
-    /**
-     * 分页偏移位置，默认值为0
-     */
-    Offset?: number;
-    /**
-     * 每页条目数量，缺省20，最大500
-     */
-    Limit?: number;
-    /**
-     * 部门ID，用于过滤属于某个部门的资产组
-     */
-    DepartmentId?: string;
+    ManagerName?: string;
 }
 /**
  * CreateAssetSyncJob返回参数结构体
@@ -1730,6 +1968,95 @@ export interface BindDeviceAccountPrivateKeyRequest {
      * 主机账号私钥口令，最大长度256字节
      */
     PrivateKeyPassword?: string;
+}
+/**
+ * ModifyChangePwdTask请求参数结构体
+ */
+export interface ModifyChangePwdTaskRequest {
+    /**
+     * 改密任务id
+     */
+    OperationId: string;
+    /**
+     * 改密资产id列表
+     */
+    DeviceIdSet: Array<number | bigint>;
+    /**
+     * 改密资产的账号列表
+     */
+    AccountSet: Array<string>;
+    /**
+     * 修改类型：1：修改任务信息  2：关联任务资产账号
+     */
+    ModifyType: number;
+    /**
+     * 改密方式。1：使用执行账号修改密码；2：修改自身密码
+     */
+    ChangeMethod: number;
+    /**
+     * 密码生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码
+     */
+    AuthGenerationStrategy: number;
+    /**
+     * 任务名称
+     */
+    TaskName?: string;
+    /**
+     * 所属部门ID，"1,2,3"
+     */
+    DepartmentId?: string;
+    /**
+     * 任务的执行账号
+     */
+    RunAccount?: string;
+    /**
+     * 密码，手动指定密码时必传。
+     */
+    Password?: string;
+    /**
+     * 密码限制长度，自动生成密码必传。
+     */
+    PasswordLength?: number;
+    /**
+     * 密码包含小写字母，0：否，1：是。
+     */
+    SmallLetter?: number;
+    /**
+     * 密码包含大写字母，0：否，1：是。
+     */
+    BigLetter?: number;
+    /**
+     * 密码包含数字，0：否，1：是。
+     */
+    Digit?: number;
+    /**
+     * 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$
+     */
+    Symbol?: string;
+    /**
+     * 改密完成通知。0：不通知 1：通知
+     */
+    CompleteNotify?: number;
+    /**
+     * 通知邮箱
+     */
+    NotifyEmails?: Array<string>;
+    /**
+     * 加密压缩文件密码
+     */
+    FilePassword?: string;
+    /**
+     * 任务类型， 4：手工执行  5：周期自动执行
+     */
+    Type?: number;
+    /**
+     * 周期任务周期，单位天（大于等于 1，小于等于 365）
+     */
+    Period?: number;
+    /**
+     * 周期任务首次执行时间
+     */
+    FirstTime?: string;
 }
 /**
  * CreateAssetSyncJob请求参数结构体
@@ -2201,6 +2528,27 @@ export interface CreateUserRequest {
     DepartmentId?: string;
 }
 /**
+ * DescribeChangePwdTask请求参数结构体
+ */
+export interface DescribeChangePwdTaskRequest {
+    /**
+     * 过滤数组。过滤数组。Name支持以下值: OperationId 任务ID TaskName 任务名
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 所属部门ID
+     */
+    DepartmentId?: string;
+    /**
+     * 分页偏移量，默认0
+     */
+    Offset?: number;
+    /**
+     * 每页条目数量，默认20
+     */
+    Limit?: number;
+}
+/**
  * SearchFileBySid返回参数结构体
  */
 export interface SearchFileBySidResponse {
@@ -2276,6 +2624,26 @@ export interface ModifyUserResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 查询改密计划详情
+ */
+export interface ChangePwdTaskDetail {
+    /**
+     * 资产信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Device?: Device;
+    /**
+     * 资产账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Account?: string;
+    /**
+     * 上次改密结果。0-未改密  1-改密成功 2-改密失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastChangeStatus?: number;
 }
 /**
  * DescribeCmdTemplates返回参数结构体
@@ -2403,25 +2771,13 @@ export interface DescribeDasbImageIdsResponse {
     RequestId?: string;
 }
 /**
- * DescribeCmdTemplates请求参数结构体
+ * DeleteChangePwdTask请求参数结构体
  */
-export interface DescribeCmdTemplatesRequest {
+export interface DeleteChangePwdTaskRequest {
     /**
-     * 命令模板ID集合，非必需
+     * 改密任务id列表
      */
-    IdSet?: Array<number | bigint>;
-    /**
-     * 命令模板名，模糊查询，最大长度64字符
-     */
-    Name?: string;
-    /**
-     * 分页偏移位置，默认值为0
-     */
-    Offset?: number;
-    /**
-     * 每页条目数量，默认20
-     */
-    Limit?: number;
+    IdSet: Array<number | bigint>;
 }
 /**
  * ModifyUserGroup请求参数结构体
@@ -2441,9 +2797,120 @@ export interface ModifyUserGroupRequest {
     DepartmentId?: string;
 }
 /**
- * DeleteAcls返回参数结构体
+ * CreateChangePwdTask请求参数结构体
  */
-export interface DeleteAclsResponse {
+export interface CreateChangePwdTaskRequest {
+    /**
+     * 任务名
+     */
+    TaskName: string;
+    /**
+     * 资产id数组
+     */
+    DeviceIdSet: Array<number | bigint>;
+    /**
+     * 修改的账户数组
+     */
+    AccountSet: Array<string>;
+    /**
+     * 改密方式。1：使用执行账号修改密码；2：修改自身密码
+     */
+    ChangeMethod: number;
+    /**
+     * 认证生成方式。 1:自动生成相同密码 2:自动生成不同密码 3:手动指定相同密码
+     */
+    AuthGenerationStrategy: number;
+    /**
+     * 执行账号
+     */
+    RunAccount?: string;
+    /**
+     * 手动指定密码时必传
+     */
+    Password?: string;
+    /**
+     * 密码限制长度，长度大于 12 位
+     */
+    PasswordLength?: number;
+    /**
+     * 密码包含小写字母。0：否，1：是
+     */
+    SmallLetter?: number;
+    /**
+     * 密码包含大写字母。0：否，1：是
+     */
+    BigLetter?: number;
+    /**
+     * 密码包含数字。0：否，1：是
+     */
+    Digit?: number;
+    /**
+     * 密码包含的特殊字符（base64编码），包含：^[-_#();%~!+=]*$
+     */
+    Symbol?: string;
+    /**
+     * 改密完成通知。0：不通知
+    1：通知
+     */
+    CompleteNotify?: number;
+    /**
+     * 通知邮箱
+     */
+    NotifyEmails?: Array<string>;
+    /**
+     * 加密压缩文件密码
+     */
+    FilePassword?: string;
+    /**
+     * 所属部门id。“1.2.3”
+     */
+    DepartmentId?: string;
+    /**
+     * 任务类型  4-手工执行  5-周期自动执行
+     */
+    Type?: number;
+    /**
+     * 执行周期，单位天（大于等于 1，小于等于 365）
+     */
+    Period?: number;
+    /**
+     * 周期任务首次执行时间
+     */
+    FirstTime?: string;
+}
+/**
+ * 登录日志
+ */
+export interface LoginEvent {
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 姓名
+     */
+    RealName: string;
+    /**
+     * 操作时间
+     */
+    Time: string;
+    /**
+     * 来源IP
+     */
+    SourceIp: string;
+    /**
+     * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+     */
+    Entry: number;
+    /**
+     * 操作结果，1-成功，2-失败
+     */
+    Result: number;
+}
+/**
+ * DeleteChangePwdTask返回参数结构体
+ */
+export interface DeleteChangePwdTaskResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2534,6 +3001,27 @@ export interface ModifyUserRequest {
      * 用户所属部门的ID，如1.2.3
      */
     DepartmentId?: string;
+}
+/**
+ * DescribeCmdTemplates请求参数结构体
+ */
+export interface DescribeCmdTemplatesRequest {
+    /**
+     * 命令模板ID集合，非必需
+     */
+    IdSet?: Array<number | bigint>;
+    /**
+     * 命令模板名，模糊查询，最大长度64字符
+     */
+    Name?: string;
+    /**
+     * 分页偏移位置，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 每页条目数量，默认20
+     */
+    Limit?: number;
 }
 /**
  * ModifyAcl返回参数结构体
@@ -2804,6 +3292,15 @@ export interface Resource {
     LogDeliveryArgs?: string;
 }
 /**
+ * RunChangePwdTask返回参数结构体
+ */
+export interface RunChangePwdTaskResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BindDeviceResource请求参数结构体
  */
 export interface BindDeviceResourceRequest {
@@ -3010,19 +3507,29 @@ export interface DescribeDevicesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 部门管理员信息
+ * DescribeDeviceGroups请求参数结构体
  */
-export interface DepartmentManagerUser {
+export interface DescribeDeviceGroupsRequest {
     /**
-     * 管理员Id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 资产组ID集合
      */
-    ManagerId?: string;
+    IdSet?: Array<number | bigint>;
     /**
-     * 管理员姓名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 资产组名，最长64个字符，模糊查询
      */
-    ManagerName?: string;
+    Name?: string;
+    /**
+     * 分页偏移位置，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 每页条目数量，缺省20，最大500
+     */
+    Limit?: number;
+    /**
+     * 部门ID，用于过滤属于某个部门的资产组
+     */
+    DepartmentId?: string;
 }
 /**
  * 权限控制模板对象
@@ -3203,58 +3710,13 @@ export interface SearchFileResult {
     FileNew: string;
 }
 /**
- * 登录日志
+ * DeleteAcls返回参数结构体
  */
-export interface LoginEvent {
+export interface DeleteAclsResponse {
     /**
-     * 用户名
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    UserName: string;
-    /**
-     * 姓名
-     */
-    RealName: string;
-    /**
-     * 操作时间
-     */
-    Time: string;
-    /**
-     * 来源IP
-     */
-    SourceIp: string;
-    /**
-     * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
-     */
-    Entry: number;
-    /**
-     * 操作结果，1-成功，2-失败
-     */
-    Result: number;
-}
-/**
- * DescribeUserGroups请求参数结构体
- */
-export interface DescribeUserGroupsRequest {
-    /**
-     * 用户组ID集合
-     */
-    IdSet?: Array<number | bigint>;
-    /**
-     * 用户组名，模糊查询,长度：0-64字符
-     */
-    Name?: string;
-    /**
-     * 分页偏移位置，默认值为0
-     */
-    Offset?: number;
-    /**
-     * 每页条目数量，缺省20，最大500
-     */
-    Limit?: number;
-    /**
-     * 部门ID，用于过滤属于某个部门的用户组
-     */
-    DepartmentId?: string;
+    RequestId?: string;
 }
 /**
  * DescribeDeviceGroupMembers请求参数结构体

@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditInstanceList", req, cb);
     }
     /**
+     * 删除Redis实例的大key分析任务。
+     */
+    async DeleteRedisBigKeyAnalysisTasks(req, cb) {
+        return this.request("DeleteRedisBigKeyAnalysisTasks", req, cb);
+    }
+    /**
      * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
      */
     async DescribeTopSpaceSchemaTimeSeries(req, cb) {

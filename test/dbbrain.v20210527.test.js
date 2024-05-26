@@ -188,6 +188,16 @@ it("dbbrain.v20210527.DescribeAuditInstanceList", async function () {
     }
 })
 
+it("dbbrain.v20210527.DeleteRedisBigKeyAnalysisTasks", async function () {
+    try {
+       const data = await client.DeleteRedisBigKeyAnalysisTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceSchemaTimeSeries({})

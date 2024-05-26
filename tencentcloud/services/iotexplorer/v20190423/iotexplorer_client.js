@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevicePackages", req, cb);
     }
     /**
-     * 列出量产数据列表信息。
+     * 用于查看某个设备的详细信息
      */
-    async GetBatchProductionsList(req, cb) {
-        return this.request("GetBatchProductionsList", req, cb);
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
     }
     /**
      * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
@@ -112,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEventHistory", req, cb);
     }
     /**
-     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * 删除设备
      */
-    async DescribeStudioProduct(req, cb) {
-        return this.request("DescribeStudioProduct", req, cb);
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
     }
     /**
      * 获取 LoRa 网关列表接口
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReleaseStudioProduct(req, cb) {
         return this.request("ReleaseStudioProduct", req, cb);
+    }
+    /**
+     * 列出量产数据列表信息。
+     */
+    async GetBatchProductionsList(req, cb) {
+        return this.request("GetBatchProductionsList", req, cb);
     }
     /**
      * 批量拉取云存事件缩略图
@@ -184,12 +190,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLoRaGateway", req, cb);
     }
     /**
-     * 用于查看某个设备的详细信息
-     */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
-    }
-    /**
      * 获取围栏告警事件列表
      */
     async DescribeFenceEventList(req, cb) {
@@ -224,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoRaGateway(req, cb) {
         return this.request("DeleteLoRaGateway", req, cb);
+    }
+    /**
+     * 取消分配
+     */
+    async CancelAssignTWeCallLicense(req, cb) {
+        return this.request("CancelAssignTWeCallLicense", req, cb);
     }
     /**
      * 为用户提供新建产品的能力，用于管理用户的设备
@@ -478,6 +484,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFirmware", req, cb);
     }
     /**
+     * 查询TWeCall包列表
+     */
+    async GetTWeCallPkgList(req, cb) {
+        return this.request("GetTWeCallPkgList", req, cb);
+    }
+    /**
      * 批量禁用启用设备
      */
     async UpdateDevicesEnableState(req, cb) {
@@ -508,6 +520,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchPositionSpace", req, cb);
     }
     /**
+     * 分配License
+     */
+    async AssignTWeCallLicense(req, cb) {
+        return this.request("AssignTWeCallLicense", req, cb);
+    }
+    /**
      * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
     async ModifyTopicPolicy(req, cb) {
@@ -524,6 +542,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateFirmware(req, cb) {
         return this.request("UpdateFirmware", req, cb);
+    }
+    /**
+     * 查询激活状态
+     */
+    async GetTWeCallActiveStatus(req, cb) {
+        return this.request("GetTWeCallActiveStatus", req, cb);
     }
     /**
      * 用于获取网关可绑定或解绑的子产品
@@ -598,6 +622,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchProduction", req, cb);
     }
     /**
+     * 激活
+     */
+    async ActivateTWeCallLicense(req, cb) {
+        return this.request("ActivateTWeCallLicense", req, cb);
+    }
+    /**
      * 更新用户对设备的TweCall授权状态
      */
     async UpdateDeviceTWeCallAuthorizeStatus(req, cb) {
@@ -652,10 +682,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPositionFence", req, cb);
     }
     /**
-     * 删除设备
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
+    async DescribeStudioProduct(req, cb) {
+        return this.request("DescribeStudioProduct", req, cb);
     }
     /**
      * 获取围栏列表
@@ -728,6 +758,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudStorageStreamData(req, cb) {
         return this.request("DescribeCloudStorageStreamData", req, cb);
+    }
+    /**
+     * 查询小程序列表
+     */
+    async GetAuthMiniProgramAppList(req, cb) {
+        return this.request("GetAuthMiniProgramAppList", req, cb);
     }
     /**
      * 删除围栏

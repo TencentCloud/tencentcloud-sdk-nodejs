@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWorkGroupInfo", req, cb);
     }
     /**
+     * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
+     */
+    async ListTaskJobLogName(req, cb) {
+        return this.request("ListTaskJobLogName", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     async DescribeNotebookSession(req, cb) {

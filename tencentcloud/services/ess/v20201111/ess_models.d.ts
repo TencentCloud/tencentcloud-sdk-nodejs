@@ -4935,9 +4935,19 @@ export interface DescribeUserVerifyStatusRequest {
      */
     Name: string;
     /**
-     * 证件号，身份证如果有x的话，统一按照大写X传递
+     * 证件号码，应符合以下规则
+  <ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+  <li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给香港居民，“M”字头签发给澳门居民；第2位至第11位为数字。</li>
+  <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
      */
     IdCardNumber: string;
+    /**
+     * 证件类型，支持以下类型
+  <ul><li>ID_CARD : 居民身份证 (默认值)</li>
+  <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+  <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+     */
+    IdCardType: string;
 }
 /**
  * 授权用户

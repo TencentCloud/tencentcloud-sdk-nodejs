@@ -68,6 +68,10 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
      * 排序参数
      */
     MemoryUsage?: string;
+    /**
+     * IsQuery条件
+     */
+    IsQuery?: number;
 }
 /**
  * ResizeDisk请求参数结构体

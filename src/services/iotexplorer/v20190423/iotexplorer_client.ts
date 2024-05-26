@@ -18,12 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  UpdateDevicesEnableStateResponse,
+  GetTWeCallPkgListRequest,
   DescribeCloudStorageDateRequest,
   CloudStorageTimeData,
   DescribeDeviceLocationSolveRequest,
   DeleteProjectRequest,
   DescribeCloudStorageAIServiceResponse,
+  AssignTWeCallLicenseRequest,
   ListEventHistoryResponse,
   ModifyLoRaGatewayRequest,
   ThumbnailURLInfoList,
@@ -43,6 +44,7 @@ import {
   DescribeDevicePackagesRequest,
   GetDeviceListResponse,
   DismissRoomByStrRoomIdFromTRTCResponse,
+  UpdateDevicesEnableStateResponse,
   GenerateSignedVideoURLRequest,
   TopicRulePayload,
   DeleteLoRaFrequencyResponse,
@@ -55,28 +57,34 @@ import {
   PositionItem,
   InheritCloudStorageUserRequest,
   DeviceFirmwareInfo,
+  GetDeviceLocationHistoryRequest,
   TransferCloudStorageResponse,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
   DeviceUser,
   GetProjectListResponse,
+  TWeCallActiveInfo,
   ModifyFenceBindResponse,
   DescribeDevicePositionListRequest,
+  DescribeCloudStorageAIServiceTaskRequest,
   GetDeviceLocationHistoryResponse,
   UpdateFirmwareResponse,
   ModifyPositionFenceResponse,
+  WifiInfo,
   ModifyStudioProductRequest,
-  ModifyPositionSpaceResponse,
+  ModifyFenceBindRequest,
   CreateStudioProductRequest,
-  ProductModelDefinition,
+  LoRaFrequencyEntry,
   DisableTopicRuleRequest,
   CreateBatchProductionRequest,
   DeletePositionFenceResponse,
-  DescribeCloudStorageAIServiceTaskRequest,
+  CancelAssignTWeCallLicenseRequest,
   FenceAlarmPoint,
   DescribeCloudStoragePackageConsumeDetailsResponse,
   DescribeCloudStoragePackageConsumeStatsResponse,
   PackageInfo,
+  GetTWeCallActiveStatusResponse,
+  GetAuthMiniProgramAppListResponse,
   UnbindDevicesResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
   DescribeCloudStorageUsersResponse,
@@ -99,6 +107,7 @@ import {
   UnbindProductsRequest,
   SearchStudioProductResponse,
   DeviceData,
+  PublishMessageRequest,
   ModifyCloudStorageAIServiceResponse,
   GetTopicRuleListRequest,
   FenceBindDeviceItem,
@@ -119,6 +128,7 @@ import {
   ControlDeviceDataRequest,
   ListFirmwaresResponse,
   FamilySubDevice,
+  DescribeCloudStorageAIServiceTaskResponse,
   ReleaseStudioProductResponse,
   DescribeSpaceFenceEventListResponse,
   DescribePackageConsumeTasksResponse,
@@ -126,7 +136,7 @@ import {
   UnbindProductsResponse,
   DescribeTopicPolicyResponse,
   SearchPositionSpaceRequest,
-  LoRaFrequencyEntry,
+  EventHistoryItem,
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
   GetPositionSpaceListRequest,
@@ -139,7 +149,7 @@ import {
   UpdateDevicesEnableStateRequest,
   BindCloudStorageUserRequest,
   DescribeTopicRuleRequest,
-  GetDeviceLocationHistoryRequest,
+  AssignTWeCallLicenseResponse,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
@@ -171,16 +181,17 @@ import {
   DescribeCloudStorageEventsRequest,
   ListFirmwaresRequest,
   GetStudioProductListResponse,
-  PublishMessageRequest,
+  AuthMiniProgramAppInfo,
   DescribeProductCloudStorageAIServiceRequest,
   ModifyTopicRuleRequest,
   UploadFirmwareRequest,
   GetDeviceListRequest,
   ModifySpacePropertyRequest,
   GetPositionSpaceListResponse,
+  GetTWeCallActiveStatusRequest,
   CloudStorageUserInfo,
   GetCOSURLResponse,
-  ModifyFenceBindRequest,
+  GetAuthMiniProgramAppListRequest,
   GetTopicRuleListResponse,
   ResetCloudStorageEventRequest,
   DescribeFenceEventListRequest,
@@ -189,7 +200,7 @@ import {
   DescribeGatewaySubProductsResponse,
   ProjectEntry,
   ModifyLoRaGatewayResponse,
-  EventHistoryItem,
+  DescribeStudioProductRequest,
   DirectBindDeviceInFamilyResponse,
   TopicRule,
   CallDeviceActionAsyncRequest,
@@ -209,6 +220,7 @@ import {
   DescribeBindedProductsResponse,
   DeviceSignatureInfo,
   PositionSpaceInfo,
+  TWeCallInfo,
   LoRaGatewayLocation,
   DescribeDeviceRequest,
   ModifyModelDefinitionRequest,
@@ -217,7 +229,7 @@ import {
   DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
-  DescribeCloudStorageAIServiceTaskResponse,
+  CancelAssignTWeCallLicenseResponse,
   DescribeCloudStorageEventsResponse,
   GetFamilyDeviceUserListRequest,
   DescribeBindedProductsRequest,
@@ -231,6 +243,7 @@ import {
   CloudStorageTimeInfo,
   FenceEventItem,
   DescribeProjectRequest,
+  ModifyPositionSpaceResponse,
   ModifyModelDefinitionResponse,
   CreateIotVideoCloudStorageRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
@@ -249,7 +262,7 @@ import {
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
   UpdateFirmwareRequest,
-  DescribeStudioProductRequest,
+  ActivateTWeCallLicenseResponse,
   PackageConsumeTask,
   PackageConsumeStat,
   CreatePositionSpaceResponse,
@@ -303,13 +316,14 @@ import {
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageUsersRequest,
   UpdateDeviceTWeCallAuthorizeStatusResponse,
-  WifiInfo,
+  ActivateTWeCallLicenseRequest,
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   DescribeCloudStorageOrderResponse,
   CreateTopicRuleRequest,
   PublishRRPCMessageResponse,
   CreateTRTCSignaturesWithRoomIdResponse,
+  ProductModelDefinition,
   DescribeDevicePackagesResponse,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
@@ -320,9 +334,11 @@ import {
   SearchStudioProductRequest,
   RemoveUserByRoomIdFromTRTCResponse,
   DescribeLoRaFrequencyResponse,
+  TWeCallPkgInfo,
   DescribeCloudStorageTimeRequest,
   GetBatchProductionsListResponse,
   DescribeGatewayBindDevicesResponse,
+  GetTWeCallPkgListResponse,
   DescribeDeviceFirmwaresResponse,
   DescribeFirmwareTaskRequest,
   CreatePositionSpaceRequest,
@@ -368,13 +384,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出量产数据列表信息。
+   * 用于查看某个设备的详细信息
    */
-  async GetBatchProductionsList(
-    req: GetBatchProductionsListRequest,
-    cb?: (error: string, rep: GetBatchProductionsListResponse) => void
-  ): Promise<GetBatchProductionsListResponse> {
-    return this.request("GetBatchProductionsList", req, cb)
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
   }
 
   /**
@@ -478,13 +494,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+   * 删除设备
    */
-  async DescribeStudioProduct(
-    req: DescribeStudioProductRequest,
-    cb?: (error: string, rep: DescribeStudioProductResponse) => void
-  ): Promise<DescribeStudioProductResponse> {
-    return this.request("DescribeStudioProduct", req, cb)
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
   }
 
   /**
@@ -505,6 +521,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseStudioProductResponse) => void
   ): Promise<ReleaseStudioProductResponse> {
     return this.request("ReleaseStudioProduct", req, cb)
+  }
+
+  /**
+   * 列出量产数据列表信息。
+   */
+  async GetBatchProductionsList(
+    req: GetBatchProductionsListRequest,
+    cb?: (error: string, rep: GetBatchProductionsListResponse) => void
+  ): Promise<GetBatchProductionsListResponse> {
+    return this.request("GetBatchProductionsList", req, cb)
   }
 
   /**
@@ -598,16 +624,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
-   */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
-  }
-
-  /**
    * 获取围栏告警事件列表
    */
   async DescribeFenceEventList(
@@ -665,6 +681,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoRaGatewayResponse) => void
   ): Promise<DeleteLoRaGatewayResponse> {
     return this.request("DeleteLoRaGateway", req, cb)
+  }
+
+  /**
+   * 取消分配
+   */
+  async CancelAssignTWeCallLicense(
+    req: CancelAssignTWeCallLicenseRequest,
+    cb?: (error: string, rep: CancelAssignTWeCallLicenseResponse) => void
+  ): Promise<CancelAssignTWeCallLicenseResponse> {
+    return this.request("CancelAssignTWeCallLicense", req, cb)
   }
 
   /**
@@ -1088,6 +1114,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询TWeCall包列表
+   */
+  async GetTWeCallPkgList(
+    req: GetTWeCallPkgListRequest,
+    cb?: (error: string, rep: GetTWeCallPkgListResponse) => void
+  ): Promise<GetTWeCallPkgListResponse> {
+    return this.request("GetTWeCallPkgList", req, cb)
+  }
+
+  /**
    * 批量禁用启用设备
    */
   async UpdateDevicesEnableState(
@@ -1138,6 +1174,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分配License
+   */
+  async AssignTWeCallLicense(
+    req: AssignTWeCallLicenseRequest,
+    cb?: (error: string, rep: AssignTWeCallLicenseResponse) => void
+  ): Promise<AssignTWeCallLicenseResponse> {
+    return this.request("AssignTWeCallLicense", req, cb)
+  }
+
+  /**
    * 本接口（UpdateTopicPolicy）用于更新Topic信息
    */
   async ModifyTopicPolicy(
@@ -1165,6 +1211,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateFirmwareResponse) => void
   ): Promise<UpdateFirmwareResponse> {
     return this.request("UpdateFirmware", req, cb)
+  }
+
+  /**
+   * 查询激活状态
+   */
+  async GetTWeCallActiveStatus(
+    req: GetTWeCallActiveStatusRequest,
+    cb?: (error: string, rep: GetTWeCallActiveStatusResponse) => void
+  ): Promise<GetTWeCallActiveStatusResponse> {
+    return this.request("GetTWeCallActiveStatus", req, cb)
   }
 
   /**
@@ -1288,6 +1344,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 激活
+   */
+  async ActivateTWeCallLicense(
+    req: ActivateTWeCallLicenseRequest,
+    cb?: (error: string, rep: ActivateTWeCallLicenseResponse) => void
+  ): Promise<ActivateTWeCallLicenseResponse> {
+    return this.request("ActivateTWeCallLicense", req, cb)
+  }
+
+  /**
    * 更新用户对设备的TweCall授权状态
    */
   async UpdateDeviceTWeCallAuthorizeStatus(
@@ -1378,13 +1444,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除设备
+   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
+  async DescribeStudioProduct(
+    req: DescribeStudioProductRequest,
+    cb?: (error: string, rep: DescribeStudioProductResponse) => void
+  ): Promise<DescribeStudioProductResponse> {
+    return this.request("DescribeStudioProduct", req, cb)
   }
 
   /**
@@ -1505,6 +1571,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageStreamDataResponse) => void
   ): Promise<DescribeCloudStorageStreamDataResponse> {
     return this.request("DescribeCloudStorageStreamData", req, cb)
+  }
+
+  /**
+   * 查询小程序列表
+   */
+  async GetAuthMiniProgramAppList(
+    req: GetAuthMiniProgramAppListRequest,
+    cb?: (error: string, rep: GetAuthMiniProgramAppListResponse) => void
+  ): Promise<GetAuthMiniProgramAppListResponse> {
+    return this.request("GetAuthMiniProgramAppList", req, cb)
   }
 
   /**

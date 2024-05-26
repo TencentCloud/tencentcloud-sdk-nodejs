@@ -110,6 +110,7 @@ import {
   MongoDBIndex,
   CreateDBDiagReportUrlRequest,
   CloseAuditServiceResponse,
+  DeleteRedisBigKeyAnalysisTasksResponse,
   CloseAuditServiceRequest,
   InstanceConfs,
   ReceiveInfo,
@@ -152,6 +153,7 @@ import {
   Process,
   ModifyAuditServiceResponse,
   DescribeHealthScoreRequest,
+  DeleteRedisBigKeyAnalysisTasksRequest,
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
   DescribeAllUserGroupRequest,
@@ -377,6 +379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
   ): Promise<DescribeAuditInstanceListResponse> {
     return this.request("DescribeAuditInstanceList", req, cb)
+  }
+
+  /**
+   * 删除Redis实例的大key分析任务。
+   */
+  async DeleteRedisBigKeyAnalysisTasks(
+    req: DeleteRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: DeleteRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<DeleteRedisBigKeyAnalysisTasksResponse> {
+    return this.request("DeleteRedisBigKeyAnalysisTasks", req, cb)
   }
 
   /**

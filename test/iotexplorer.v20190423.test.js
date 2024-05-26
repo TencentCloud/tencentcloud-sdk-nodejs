@@ -48,9 +48,9 @@ it("iotexplorer.v20190423.DescribeDevicePackages", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetBatchProductionsList", async function () {
+it("iotexplorer.v20190423.DescribeDevice", async function () {
     try {
-       const data = await client.GetBatchProductionsList({})
+       const data = await client.DescribeDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +158,9 @@ it("iotexplorer.v20190423.ListEventHistory", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
+it("iotexplorer.v20190423.DeleteDevice", async function () {
     try {
-       const data = await client.DescribeStudioProduct({})
+       const data = await client.DeleteDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("iotexplorer.v20190423.GetLoRaGatewayList", async function () {
 it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     try {
        const data = await client.ReleaseStudioProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetBatchProductionsList", async function () {
+    try {
+       const data = await client.GetBatchProductionsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,16 +288,6 @@ it("iotexplorer.v20190423.ModifyLoRaGateway", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDevice", async function () {
-    try {
-       const data = await client.DescribeDevice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
     try {
        const data = await client.DescribeFenceEventList({})
@@ -341,6 +341,16 @@ it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
 it("iotexplorer.v20190423.DeleteLoRaGateway", async function () {
     try {
        const data = await client.DeleteLoRaGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CancelAssignTWeCallLicense", async function () {
+    try {
+       const data = await client.CancelAssignTWeCallLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +778,16 @@ it("iotexplorer.v20190423.UploadFirmware", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTWeCallPkgList", async function () {
+    try {
+       const data = await client.GetTWeCallPkgList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UpdateDevicesEnableState", async function () {
     try {
        const data = await client.UpdateDevicesEnableState({})
@@ -818,6 +838,16 @@ it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     }
 })
 
+it("iotexplorer.v20190423.AssignTWeCallLicense", async function () {
+    try {
+       const data = await client.AssignTWeCallLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
     try {
        const data = await client.ModifyTopicPolicy({})
@@ -841,6 +871,16 @@ it("iotexplorer.v20190423.DescribeSpaceFenceEventList", async function () {
 it("iotexplorer.v20190423.UpdateFirmware", async function () {
     try {
        const data = await client.UpdateFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetTWeCallActiveStatus", async function () {
+    try {
+       const data = await client.GetTWeCallActiveStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1008,16 @@ it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ActivateTWeCallLicense", async function () {
+    try {
+       const data = await client.ActivateTWeCallLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UpdateDeviceTWeCallAuthorizeStatus", async function () {
     try {
        const data = await client.UpdateDeviceTWeCallAuthorizeStatus({})
@@ -1058,9 +1108,9 @@ it("iotexplorer.v20190423.ModifyPositionFence", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DeleteDevice", async function () {
+it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
     try {
-       const data = await client.DeleteDevice({})
+       const data = await client.DescribeStudioProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1181,6 +1231,16 @@ it("iotexplorer.v20190423.DescribeInstance", async function () {
 it("iotexplorer.v20190423.DescribeCloudStorageStreamData", async function () {
     try {
        const data = await client.DescribeCloudStorageStreamData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetAuthMiniProgramAppList", async function () {
+    try {
+       const data = await client.GetAuthMiniProgramAppList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

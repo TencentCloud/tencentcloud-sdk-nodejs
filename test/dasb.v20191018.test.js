@@ -108,9 +108,9 @@ it("dasb.v20191018.DeleteDevices", async function () {
     }
 })
 
-it("dasb.v20191018.AddUserGroupMembers", async function () {
+it("dasb.v20191018.CreateChangePwdTask", async function () {
     try {
-       const data = await client.AddUserGroupMembers({})
+       const data = await client.CreateChangePwdTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +218,16 @@ it("dasb.v20191018.DeleteUserGroupMembers", async function () {
     }
 })
 
+it("dasb.v20191018.ModifyChangePwdTask", async function () {
+    try {
+       const data = await client.ModifyChangePwdTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.CreateAssetSyncJob", async function () {
     try {
        const data = await client.CreateAssetSyncJob({})
@@ -231,6 +241,16 @@ it("dasb.v20191018.CreateAssetSyncJob", async function () {
 it("dasb.v20191018.DescribeAcls", async function () {
     try {
        const data = await client.DescribeAcls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.RunChangePwdTask", async function () {
+    try {
+       const data = await client.RunChangePwdTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +348,16 @@ it("dasb.v20191018.ResetDeviceAccountPrivateKey", async function () {
     }
 })
 
+it("dasb.v20191018.DescribeAssetSyncStatus", async function () {
+    try {
+       const data = await client.DescribeAssetSyncStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.CreateDeviceAccount", async function () {
     try {
        const data = await client.CreateDeviceAccount({})
@@ -338,9 +368,9 @@ it("dasb.v20191018.CreateDeviceAccount", async function () {
     }
 })
 
-it("dasb.v20191018.SearchAuditLog", async function () {
+it("dasb.v20191018.DescribeChangePwdTaskDetail", async function () {
     try {
-       const data = await client.SearchAuditLog({})
+       const data = await client.DescribeChangePwdTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +381,16 @@ it("dasb.v20191018.SearchAuditLog", async function () {
 it("dasb.v20191018.DeleteDeviceGroupMembers", async function () {
     try {
        const data = await client.DeleteDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteChangePwdTask", async function () {
+    try {
+       const data = await client.DeleteChangePwdTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +448,16 @@ it("dasb.v20191018.ModifyResource", async function () {
     }
 })
 
+it("dasb.v20191018.SearchAuditLog", async function () {
+    try {
+       const data = await client.SearchAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.ModifyUser", async function () {
     try {
        const data = await client.ModifyUser({})
@@ -438,9 +488,9 @@ it("dasb.v20191018.DeleteCmdTemplates", async function () {
     }
 })
 
-it("dasb.v20191018.DescribeAssetSyncStatus", async function () {
+it("dasb.v20191018.AddUserGroupMembers", async function () {
     try {
-       const data = await client.DescribeAssetSyncStatus({})
+       const data = await client.AddUserGroupMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +551,16 @@ it("dasb.v20191018.SearchFileBySid", async function () {
 it("dasb.v20191018.ImportExternalDevice", async function () {
     try {
        const data = await client.ImportExternalDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DescribeChangePwdTask", async function () {
+    try {
+       const data = await client.DescribeChangePwdTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

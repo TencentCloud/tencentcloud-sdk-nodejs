@@ -27,9 +27,11 @@ import {
   DescribeDeviceGroupsResponse,
   DeleteCmdTemplatesResponse,
   DeleteDevicesResponse,
-  Department,
+  ChangePwdTaskInfo,
+  CreateChangePwdTaskResponse,
   DeviceAccount,
   BindDeviceAccountPasswordResponse,
+  DescribeChangePwdTaskDetailRequest,
   ResetDeviceAccountPasswordRequest,
   AddUserGroupMembersRequest,
   CreateResourceRequest,
@@ -37,6 +39,8 @@ import {
   ResetUserResponse,
   SessionCommand,
   DeleteUserGroupMembersRequest,
+  RunChangePwdTaskRequest,
+  DescribeChangePwdTaskDetailResponse,
   DeleteUserGroupsResponse,
   ModifyDeviceRequest,
   SearchFileRequest,
@@ -56,14 +60,19 @@ import {
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
   OperationEvent,
+  Department,
   ModifyCmdTemplateRequest,
   ModifyUserGroupResponse,
   CreateUserResponse,
   DescribeAssetSyncStatusResponse,
+  ModifyChangePwdTaskResponse,
+  DescribeUserGroupsRequest,
   CreateAclRequest,
   DescribeLoginEventResponse,
+  RunChangePwdTaskDetail,
   DeleteDeviceGroupMembersRequest,
   SearchCommandResponse,
+  DescribeChangePwdTaskResponse,
   CreateDeviceGroupRequest,
   CreateAclResponse,
   DescribeAclsResponse,
@@ -83,9 +92,10 @@ import {
   CreateCmdTemplateRequest,
   AuditLogResult,
   ResetDeviceAccountPrivateKeyRequest,
-  DescribeDeviceGroupsRequest,
+  DepartmentManagerUser,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
+  ModifyChangePwdTaskRequest,
   CreateAssetSyncJobRequest,
   Group,
   DescribeAssetSyncStatusRequest,
@@ -110,10 +120,12 @@ import {
   DescribeUsersResponse,
   DeployResourceResponse,
   CreateUserRequest,
+  DescribeChangePwdTaskRequest,
   SearchFileBySidResponse,
   DescribeOperationEventRequest,
   ModifyDeviceResponse,
   ModifyUserResponse,
+  ChangePwdTaskDetail,
   DescribeCmdTemplatesResponse,
   CreateDeviceAccountRequest,
   ModifyCmdTemplateResponse,
@@ -123,13 +135,16 @@ import {
   AddUserGroupMembersResponse,
   DescribeDeviceAccountsRequest,
   DescribeDasbImageIdsResponse,
-  DescribeCmdTemplatesRequest,
+  DeleteChangePwdTaskRequest,
   ModifyUserGroupRequest,
-  DeleteAclsResponse,
+  CreateChangePwdTaskRequest,
+  LoginEvent,
+  DeleteChangePwdTaskResponse,
   CreateUserGroupResponse,
   DeleteDevicesRequest,
   DescribeDeviceAccountsResponse,
   ModifyUserRequest,
+  DescribeCmdTemplatesRequest,
   ModifyAclResponse,
   DescribeResourcesRequest,
   DeleteDeviceGroupsRequest,
@@ -137,18 +152,18 @@ import {
   SearchAuditLogResponse,
   SessionResult,
   Resource,
+  RunChangePwdTaskResponse,
   BindDeviceResourceRequest,
   Acl,
   DescribeDevicesRequest,
-  DepartmentManagerUser,
+  DescribeDeviceGroupsRequest,
   ACTemplate,
   SearchSessionCommandRequest,
   SearchFileBySidRequest,
   DescribeOperationEventResponse,
   ExternalDevice,
   SearchFileResult,
-  LoginEvent,
-  DescribeUserGroupsRequest,
+  DeleteAclsResponse,
   DescribeDeviceGroupMembersRequest,
   DescribeAclsRequest,
   AddDeviceGroupMembersRequest,
@@ -256,13 +271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加用户组成员
+   * 创建修改密码任务
    */
-  async AddUserGroupMembers(
-    req: AddUserGroupMembersRequest,
-    cb?: (error: string, rep: AddUserGroupMembersResponse) => void
-  ): Promise<AddUserGroupMembersResponse> {
-    return this.request("AddUserGroupMembers", req, cb)
+  async CreateChangePwdTask(
+    req: CreateChangePwdTaskRequest,
+    cb?: (error: string, rep: CreateChangePwdTaskResponse) => void
+  ): Promise<CreateChangePwdTaskResponse> {
+    return this.request("CreateChangePwdTask", req, cb)
   }
 
   /**
@@ -366,6 +381,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新修改密码任务
+   */
+  async ModifyChangePwdTask(
+    req: ModifyChangePwdTaskRequest,
+    cb?: (error: string, rep: ModifyChangePwdTaskResponse) => void
+  ): Promise<ModifyChangePwdTaskResponse> {
+    return this.request("ModifyChangePwdTask", req, cb)
+  }
+
+  /**
    * 创建手工资产同步任务
    */
   async CreateAssetSyncJob(
@@ -383,6 +408,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAclsResponse) => void
   ): Promise<DescribeAclsResponse> {
     return this.request("DescribeAcls", req, cb)
+  }
+
+  /**
+   * 执行改密任务
+   */
+  async RunChangePwdTask(
+    req: RunChangePwdTaskRequest,
+    cb?: (error: string, rep: RunChangePwdTaskResponse) => void
+  ): Promise<RunChangePwdTaskResponse> {
+    return this.request("RunChangePwdTask", req, cb)
   }
 
   /**
@@ -476,6 +511,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询资产同步状态
+   */
+  async DescribeAssetSyncStatus(
+    req: DescribeAssetSyncStatusRequest,
+    cb?: (error: string, rep: DescribeAssetSyncStatusResponse) => void
+  ): Promise<DescribeAssetSyncStatusResponse> {
+    return this.request("DescribeAssetSyncStatus", req, cb)
+  }
+
+  /**
    * 新建主机账号
    */
   async CreateDeviceAccount(
@@ -486,13 +531,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索审计日志
+   * 查询改密任务详情
    */
-  async SearchAuditLog(
-    req: SearchAuditLogRequest,
-    cb?: (error: string, rep: SearchAuditLogResponse) => void
-  ): Promise<SearchAuditLogResponse> {
-    return this.request("SearchAuditLog", req, cb)
+  async DescribeChangePwdTaskDetail(
+    req: DescribeChangePwdTaskDetailRequest,
+    cb?: (error: string, rep: DescribeChangePwdTaskDetailResponse) => void
+  ): Promise<DescribeChangePwdTaskDetailResponse> {
+    return this.request("DescribeChangePwdTaskDetail", req, cb)
   }
 
   /**
@@ -503,6 +548,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDeviceGroupMembersResponse) => void
   ): Promise<DeleteDeviceGroupMembersResponse> {
     return this.request("DeleteDeviceGroupMembers", req, cb)
+  }
+
+  /**
+   * 删除改密任务
+   */
+  async DeleteChangePwdTask(
+    req: DeleteChangePwdTaskRequest,
+    cb?: (error: string, rep: DeleteChangePwdTaskResponse) => void
+  ): Promise<DeleteChangePwdTaskResponse> {
+    return this.request("DeleteChangePwdTask", req, cb)
   }
 
   /**
@@ -556,6 +611,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 搜索审计日志
+   */
+  async SearchAuditLog(
+    req: SearchAuditLogRequest,
+    cb?: (error: string, rep: SearchAuditLogResponse) => void
+  ): Promise<SearchAuditLogResponse> {
+    return this.request("SearchAuditLog", req, cb)
+  }
+
+  /**
    * 修改用户信息
    */
   async ModifyUser(
@@ -586,13 +651,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资产同步状态
+   * 添加用户组成员
    */
-  async DescribeAssetSyncStatus(
-    req: DescribeAssetSyncStatusRequest,
-    cb?: (error: string, rep: DescribeAssetSyncStatusResponse) => void
-  ): Promise<DescribeAssetSyncStatusResponse> {
-    return this.request("DescribeAssetSyncStatus", req, cb)
+  async AddUserGroupMembers(
+    req: AddUserGroupMembersRequest,
+    cb?: (error: string, rep: AddUserGroupMembersResponse) => void
+  ): Promise<AddUserGroupMembersResponse> {
+    return this.request("AddUserGroupMembers", req, cb)
   }
 
   /**
@@ -653,6 +718,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportExternalDeviceResponse) => void
   ): Promise<ImportExternalDeviceResponse> {
     return this.request("ImportExternalDevice", req, cb)
+  }
+
+  /**
+   * 查询改密任务列表
+   */
+  async DescribeChangePwdTask(
+    req: DescribeChangePwdTaskRequest,
+    cb?: (error: string, rep: DescribeChangePwdTaskResponse) => void
+  ): Promise<DescribeChangePwdTaskResponse> {
+    return this.request("DescribeChangePwdTask", req, cb)
   }
 
   /**

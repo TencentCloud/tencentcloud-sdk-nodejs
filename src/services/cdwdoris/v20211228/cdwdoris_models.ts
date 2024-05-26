@@ -87,6 +87,10 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
    * 排序参数
    */
   MemoryUsage?: string
+  /**
+   * IsQuery条件
+   */
+  IsQuery?: number
 }
 
 /**

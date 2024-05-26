@@ -1072,6 +1072,11 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceAbility?: InstanceAbility
+  /**
+   * 实例机器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
 }
 
 /**
@@ -1178,6 +1183,16 @@ export interface ModifyInstanceData {
    * 变配前存储上限
    */
   OldStorageLimit?: number
+  /**
+   * 变配前实例机器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldDeviceType?: string
+  /**
+   * 变配后实例机器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
   /**
    * 升级方式。升级完成后切换或维护时间内切换
    */
@@ -1649,6 +1664,10 @@ export interface DescribeInstanceSpecsRequest {
    * 是否需要返回可用区信息
    */
   IncludeZoneStocks?: boolean
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -1883,11 +1902,11 @@ export interface InquirePriceCreateResponse {
   /**
    * 实例价格
    */
-  InstancePrice: TradePrice
+  InstancePrice?: TradePrice
   /**
    * 存储价格
    */
-  StoragePrice: TradePrice
+  StoragePrice?: TradePrice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3254,6 +3273,10 @@ export interface UpgradeInstanceRequest {
    */
   UpgradeType: string
   /**
+   * 实例机器类型
+   */
+  DeviceType?: string
+  /**
    * 该参数已废弃
    */
   StorageLimit?: number
@@ -3925,6 +3948,10 @@ export interface InquirePriceCreateRequest {
    */
   StoragePayMode: string
   /**
+   * 实例设备类型
+   */
+  DeviceType?: string
+  /**
    * CPU核数，PREPAID与POSTPAID实例类型必传
    */
   Cpu?: number
@@ -4315,6 +4342,10 @@ export interface AddInstancesRequest {
    * 新增只读实例数，取值范围为(0,15]
    */
   ReadOnlyCount: number
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
   /**
    * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。
    * @deprecated
@@ -4940,6 +4971,10 @@ export interface InstanceInitInfo {
    * Serverless实例最大规格
    */
   MaxRoCpu?: number
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -6295,10 +6330,6 @@ export interface RollbackToNewClusterRequest {
    */
   OriginalClusterId: string
   /**
-   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
-   */
-  ClusterName?: string
-  /**
    * 所属VPC网络ID
    */
   UniqVpcId?: string
@@ -6307,9 +6338,25 @@ export interface RollbackToNewClusterRequest {
    */
   UniqSubnetId?: string
   /**
+   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+   */
+  ClusterName?: string
+  /**
+   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+   */
+  RollbackId?: number
+  /**
+   * 时间点回档，指定时间；快照回档，快照时间
+   */
+  ExpectTime?: string
+  /**
    * 是否自动选择代金券 1是 0否 默认为0
    */
   AutoVoucher?: number
+  /**
+   * 集群创建需要绑定的tag数组信息
+   */
+  ResourceTags?: Array<Tag>
   /**
    * Db类型
 当DbType为MYSQL时可选(默认NORMAL)：
@@ -6352,29 +6399,21 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    */
   ClusterParams?: Array<ParamItem>
   /**
-   * 0-下单并支付 1-下单
-   */
-  DealMode?: number
-  /**
    * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
    */
   ParamTemplateId?: number
-  /**
-   * 集群创建需要绑定的tag数组信息
-   */
-  ResourceTags?: Array<Tag>
   /**
    * 实例初始化配置信息，主要用于购买集群时选不同规格实例
    */
   InstanceInitInfos?: Array<InstanceInitInfo>
   /**
-   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+   * 0-下单并支付 1-下单
    */
-  RollbackId?: number
+  DealMode?: number
   /**
-   * 时间点回档，指定时间；快照回档，快照时间
+   * 计算节点付费模式：0-按量计费，1-预付费
    */
-  ExpectTime?: string
+  PayMode?: number
 }
 
 /**
@@ -7986,6 +8025,16 @@ export interface ClusterInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerlessStatus?: string
+  /**
+   * 实例任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceTasks?: Array<ObjectTask>
+  /**
+   * 实例机器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceDeviceType?: string
 }
 
 /**

@@ -64,6 +64,7 @@ import {
   HiveInfo,
   DescribeNotebookSessionStatementSqlResultRequest,
   CreateTableResponse,
+  ListTaskJobLogNameRequest,
   DescribeTaskResultRequest,
   UpdateUserDataEngineConfigRequest,
   RollbackDataEngineImageRequest,
@@ -145,6 +146,7 @@ import {
   TextFile,
   WorkGroups,
   CreateNotebookSessionStatementResponse,
+  ListTaskJobLogNameResponse,
   DescribeLakeFsTaskResultRequest,
   AlterDMSTableRequest,
   DescribeDMSPartitionsResponse,
@@ -447,6 +449,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWorkGroupInfoResponse) => void
   ): Promise<DescribeWorkGroupInfoResponse> {
     return this.request("DescribeWorkGroupInfo", req, cb)
+  }
+
+  /**
+   * 本接口（ListTaskJobLogName）用于获取spark-jar日志名称列表
+   */
+  async ListTaskJobLogName(
+    req: ListTaskJobLogNameRequest,
+    cb?: (error: string, rep: ListTaskJobLogNameResponse) => void
+  ): Promise<ListTaskJobLogNameResponse> {
+    return this.request("ListTaskJobLogName", req, cb)
   }
 
   /**

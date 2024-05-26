@@ -1,21 +1,27 @@
 /**
- * UpdateDevicesEnableState返回参数结构体
+ * GetTWeCallPkgList请求参数结构体
  */
-export interface UpdateDevicesEnableStateResponse {
+export interface GetTWeCallPkgListRequest {
     /**
-     * 删除的结果代码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * appId
      */
-    ResultCode: string;
+    MiniProgramAppId: string;
     /**
-     * 删除的结果信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 类型
      */
-    ResultMessage: string;
+    PkgType?: Array<number | bigint>;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 状态
      */
-    RequestId?: string;
+    Status?: Array<number | bigint>;
+    /**
+     * 偏移量
+     */
+    Offset?: number;
+    /**
+     * 每页数据大小
+     */
+    Limit?: number;
 }
 /**
  * DescribeCloudStorageDate请求参数结构体
@@ -106,6 +112,23 @@ export interface DescribeCloudStorageAIServiceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * AssignTWeCallLicense请求参数结构体
+ */
+export interface AssignTWeCallLicenseRequest {
+    /**
+     * voip类型
+     */
+    PkgType: number;
+    /**
+     * appId
+     */
+    MiniProgramAppId: string;
+    /**
+     * License数
+     */
+    DeductNum: number;
 }
 /**
  * ListEventHistory返回参数结构体
@@ -447,6 +470,25 @@ export interface DismissRoomByStrRoomIdFromTRTCResponse {
     RequestId?: string;
 }
 /**
+ * UpdateDevicesEnableState返回参数结构体
+ */
+export interface UpdateDevicesEnableStateResponse {
+    /**
+     * 删除的结果代码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultCode: string;
+    /**
+     * 删除的结果信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultMessage: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * GenerateSignedVideoURL请求参数结构体
  */
 export interface GenerateSignedVideoURLRequest {
@@ -725,6 +767,31 @@ export interface DeviceFirmwareInfo {
     UpdateTime: number;
 }
 /**
+ * GetDeviceLocationHistory请求参数结构体
+ */
+export interface GetDeviceLocationHistoryRequest {
+    /**
+     * 产品Id
+     */
+    ProductId: string;
+    /**
+     * 设备名
+     */
+    DeviceName: string;
+    /**
+     * 查询起始时间，Unix时间，单位为毫秒
+     */
+    StartTime: number;
+    /**
+     * 查询结束时间，Unix时间，单位为毫秒
+     */
+    EndTime: number;
+    /**
+     * 坐标类型
+     */
+    CoordinateType?: number;
+}
+/**
  * TransferCloudStorage返回参数结构体
  */
 export interface TransferCloudStorageResponse {
@@ -810,6 +877,26 @@ export interface GetProjectListResponse {
     RequestId?: string;
 }
 /**
+ * TWeCall设备激活信息
+ */
+export interface TWeCallActiveInfo {
+    /**
+     * 小程序ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelId?: string;
+    /**
+     * Sn信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sn?: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: number;
+}
+/**
  * ModifyFenceBind返回参数结构体
  */
 export interface ModifyFenceBindResponse {
@@ -838,6 +925,15 @@ export interface DescribeDevicePositionListRequest {
      * 分页的大小
      */
     Limit?: number;
+}
+/**
+ * DescribeCloudStorageAIServiceTask请求参数结构体
+ */
+export interface DescribeCloudStorageAIServiceTaskRequest {
+    /**
+     * 任务 ID
+     */
+    TaskId: string;
 }
 /**
  * GetDeviceLocationHistory返回参数结构体
@@ -871,6 +967,19 @@ export interface ModifyPositionFenceResponse {
     RequestId?: string;
 }
 /**
+ * wifi定位信息
+ */
+export interface WifiInfo {
+    /**
+     * mac地址
+     */
+    MAC: string;
+    /**
+     * 信号强度
+     */
+    RSSI: number;
+}
+/**
  * ModifyStudioProduct请求参数结构体
  */
 export interface ModifyStudioProductRequest {
@@ -900,13 +1009,17 @@ export interface ModifyStudioProductRequest {
     BindStrategy?: number;
 }
 /**
- * ModifyPositionSpace返回参数结构体
+ * ModifyFenceBind请求参数结构体
  */
-export interface ModifyPositionSpaceResponse {
+export interface ModifyFenceBindRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 围栏Id
      */
-    RequestId?: string;
+    FenceId: number;
+    /**
+     * 围栏绑定的产品列表
+     */
+    Items: Array<FenceBindProductItem>;
 }
 /**
  * CreateStudioProduct请求参数结构体
@@ -954,35 +1067,49 @@ export interface CreateStudioProductRequest {
     Period?: string;
 }
 /**
- * 产品模型定义
+ * LoRa自定义频点信息
  */
-export interface ProductModelDefinition {
+export interface LoRaFrequencyEntry {
     /**
-     * 产品ID
+     * 频点唯一ID
      */
-    ProductId: string;
+    FreqId: string;
     /**
-     * 模型定义
+     * 频点名称
      */
-    ModelDefine: string;
+    FreqName: string;
     /**
-     * 更新时间，秒级时间戳
+     * 频点描述
      */
-    UpdateTime: number;
+    Description: string;
     /**
-     * 创建时间，秒级时间戳
+     * 数据上行信道
+     */
+    ChannelsDataUp: Array<number | bigint>;
+    /**
+     * 数据下行信道RX1
+     */
+    ChannelsDataRX1: Array<number | bigint>;
+    /**
+     * 数据下行信道RX2
+     */
+    ChannelsDataRX2: Array<number | bigint>;
+    /**
+     * 入网上行信道
+     */
+    ChannelsJoinUp: Array<number | bigint>;
+    /**
+     * 入网下行RX1信道
+     */
+    ChannelsJoinRX1: Array<number | bigint>;
+    /**
+     * 入网下行RX2信道
+     */
+    ChannelsJoinRX2: Array<number | bigint>;
+    /**
+     * 创建时间
      */
     CreateTime: number;
-    /**
-     * 产品所属分类的模型快照（产品创建时刻的）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CategoryModel: string;
-    /**
-     * 产品的连接类型的模型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NetTypeModel: string;
 }
 /**
  * DisableTopicRule请求参数结构体
@@ -1036,13 +1163,13 @@ export interface DeletePositionFenceResponse {
     RequestId?: string;
 }
 /**
- * DescribeCloudStorageAIServiceTask请求参数结构体
+ * CancelAssignTWeCallLicense请求参数结构体
  */
-export interface DescribeCloudStorageAIServiceTaskRequest {
+export interface CancelAssignTWeCallLicenseRequest {
     /**
-     * 任务 ID
+     * 订单号
      */
-    TaskId: string;
+    PkgId: string;
 }
 /**
  * 围栏告警位置点
@@ -1133,6 +1260,36 @@ export interface PackageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CSUserId?: string;
+}
+/**
+ * GetTWeCallActiveStatus返回参数结构体
+ */
+export interface GetTWeCallActiveStatusResponse {
+    /**
+     * 激活状态
+     */
+    TWeCallActiveInfos?: Array<TWeCallActiveInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetAuthMiniProgramAppList返回参数结构体
+ */
+export interface GetAuthMiniProgramAppListResponse {
+    /**
+     * 小程序列表
+     */
+    MiniProgramList?: Array<AuthMiniProgramAppInfo>;
+    /**
+     * 总数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UnbindDevices返回参数结构体
@@ -1483,6 +1640,35 @@ export interface DeviceData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DevicePsk: string;
+}
+/**
+ * PublishMessage请求参数结构体
+ */
+export interface PublishMessageRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 消息发往的主题
+     */
+    Topic: string;
+    /**
+     * 云端下发到设备的控制报文
+     */
+    Payload: string;
+    /**
+     * 消息服务质量等级，取值为0或1
+     */
+    Qos?: number;
+    /**
+     * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
+     */
+    PayloadEncoding?: string;
 }
 /**
  * ModifyCloudStorageAIService返回参数结构体
@@ -1893,6 +2079,19 @@ export interface FamilySubDevice {
     UpdateTime: number;
 }
 /**
+ * DescribeCloudStorageAIServiceTask返回参数结构体
+ */
+export interface DescribeCloudStorageAIServiceTaskResponse {
+    /**
+     * 任务信息
+     */
+    TaskInfo?: CloudStorageAIServiceTask;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ReleaseStudioProduct返回参数结构体
  */
 export interface ReleaseStudioProductResponse {
@@ -2001,49 +2200,39 @@ export interface SearchPositionSpaceRequest {
     Limit: number;
 }
 /**
- * LoRa自定义频点信息
+ * 设备事件的搜索结果项
  */
-export interface LoRaFrequencyEntry {
+export interface EventHistoryItem {
     /**
-     * 频点唯一ID
+     * 事件的时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreqId: string;
+    TimeStamp: number;
     /**
-     * 频点名称
+     * 事件的产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreqName: string;
+    ProductId: string;
     /**
-     * 频点描述
+     * 事件的设备名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    DeviceName: string;
     /**
-     * 数据上行信道
+     * 事件的标识符ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChannelsDataUp: Array<number | bigint>;
+    EventId: string;
     /**
-     * 数据下行信道RX1
+     * 事件的类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChannelsDataRX1: Array<number | bigint>;
+    Type: string;
     /**
-     * 数据下行信道RX2
+     * 事件的数据
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChannelsDataRX2: Array<number | bigint>;
-    /**
-     * 入网上行信道
-     */
-    ChannelsJoinUp: Array<number | bigint>;
-    /**
-     * 入网下行RX1信道
-     */
-    ChannelsJoinRX1: Array<number | bigint>;
-    /**
-     * 入网下行RX2信道
-     */
-    ChannelsJoinRX2: Array<number | bigint>;
-    /**
-     * 创建时间
-     */
-    CreateTime: number;
+    Data: string;
 }
 /**
  * ModifyTopicPolicy返回参数结构体
@@ -2307,29 +2496,13 @@ export interface DescribeTopicRuleRequest {
     RuleName: string;
 }
 /**
- * GetDeviceLocationHistory请求参数结构体
+ * AssignTWeCallLicense返回参数结构体
  */
-export interface GetDeviceLocationHistoryRequest {
+export interface AssignTWeCallLicenseResponse {
     /**
-     * 产品Id
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProductId: string;
-    /**
-     * 设备名
-     */
-    DeviceName: string;
-    /**
-     * 查询起始时间，Unix时间，单位为毫秒
-     */
-    StartTime: number;
-    /**
-     * 查询结束时间，Unix时间，单位为毫秒
-     */
-    EndTime: number;
-    /**
-     * 坐标类型
-     */
-    CoordinateType?: number;
+    RequestId?: string;
 }
 /**
  * CallDeviceActionSync返回参数结构体
@@ -3019,33 +3192,39 @@ export interface GetStudioProductListResponse {
     RequestId?: string;
 }
 /**
- * PublishMessage请求参数结构体
+ * 授权小程序信息
  */
-export interface PublishMessageRequest {
+export interface AuthMiniProgramAppInfo {
     /**
-     * 产品ID
+     * 小程序APPID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductId: string;
+    MiniProgramAppId?: string;
     /**
-     * 设备名称
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeviceName: string;
+    CreateTime?: number;
     /**
-     * 消息发往的主题
+     * 小程序名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Topic: string;
+    MiniProgramName?: string;
     /**
-     * 云端下发到设备的控制报文
+     * 激活码数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Payload: string;
+    LicenseNum?: number;
     /**
-     * 消息服务质量等级，取值为0或1
+     * 应用ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Qos?: number;
+    IotAppId?: string;
     /**
-     * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayloadEncoding?: string;
+    IotAppName?: string;
 }
 /**
  * DescribeProductCloudStorageAIService请求参数结构体
@@ -3172,6 +3351,19 @@ export interface GetPositionSpaceListResponse {
     RequestId?: string;
 }
 /**
+ * GetTWeCallActiveStatus请求参数结构体
+ */
+export interface GetTWeCallActiveStatusRequest {
+    /**
+     * appId
+     */
+    MiniProgramAppId: string;
+    /**
+     * 设备列表
+     */
+    DeviceList?: Array<TWeCallInfo>;
+}
+/**
  * 云存用户信息
  */
 export interface CloudStorageUserInfo {
@@ -3194,17 +3386,21 @@ export interface GetCOSURLResponse {
     RequestId?: string;
 }
 /**
- * ModifyFenceBind请求参数结构体
+ * GetAuthMiniProgramAppList请求参数结构体
  */
-export interface ModifyFenceBindRequest {
+export interface GetAuthMiniProgramAppListRequest {
     /**
-     * 围栏Id
+     * appId
      */
-    FenceId: number;
+    MiniProgramAppId?: string;
     /**
-     * 围栏绑定的产品列表
+     * 页码
      */
-    Items: Array<FenceBindProductItem>;
+    Offset?: number;
+    /**
+     * 每页大小
+     */
+    Limit?: number;
 }
 /**
  * GetTopicRuleList返回参数结构体
@@ -3380,39 +3576,13 @@ export interface ModifyLoRaGatewayResponse {
     RequestId?: string;
 }
 /**
- * 设备事件的搜索结果项
+ * DescribeStudioProduct请求参数结构体
  */
-export interface EventHistoryItem {
+export interface DescribeStudioProductRequest {
     /**
-     * 事件的时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeStamp: number;
-    /**
-     * 事件的产品ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 产品ID
      */
     ProductId: string;
-    /**
-     * 事件的设备名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeviceName: string;
-    /**
-     * 事件的标识符ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EventId: string;
-    /**
-     * 事件的类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Type: string;
-    /**
-     * 事件的数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data: string;
 }
 /**
  * DirectBindDeviceInFamily返回参数结构体
@@ -3743,6 +3913,26 @@ export interface PositionSpaceInfo {
     Zoom: number;
 }
 /**
+ * TWeCall信息
+ */
+export interface TWeCallInfo {
+    /**
+     * 小程序ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelId: string;
+    /**
+     * Sn信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sn: string;
+    /**
+     * 激活数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActiveNum?: number;
+}
+/**
  * 网关坐标
  */
 export interface LoRaGatewayLocation {
@@ -3879,13 +4069,9 @@ export interface DirectBindDeviceInFamilyRequest {
     RoomId?: string;
 }
 /**
- * DescribeCloudStorageAIServiceTask返回参数结构体
+ * CancelAssignTWeCallLicense返回参数结构体
  */
-export interface DescribeCloudStorageAIServiceTaskResponse {
-    /**
-     * 任务信息
-     */
-    TaskInfo?: CloudStorageAIServiceTask;
+export interface CancelAssignTWeCallLicenseResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4116,6 +4302,15 @@ export interface DescribeProjectRequest {
      * 项目ID
      */
     ProjectId: string;
+}
+/**
+ * ModifyPositionSpace返回参数结构体
+ */
+export interface ModifyPositionSpaceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyModelDefinition返回参数结构体
@@ -4492,13 +4687,13 @@ export interface UpdateFirmwareRequest {
     UpgradeMethod?: number;
 }
 /**
- * DescribeStudioProduct请求参数结构体
+ * ActivateTWeCallLicense返回参数结构体
  */
-export interface DescribeStudioProductRequest {
+export interface ActivateTWeCallLicenseResponse {
     /**
-     * 产品ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProductId: string;
+    RequestId?: string;
 }
 /**
  * 套餐包消耗任务列表
@@ -5437,17 +5632,21 @@ export interface UpdateDeviceTWeCallAuthorizeStatusResponse {
     RequestId?: string;
 }
 /**
- * wifi定位信息
+ * ActivateTWeCallLicense请求参数结构体
  */
-export interface WifiInfo {
+export interface ActivateTWeCallLicenseRequest {
     /**
-     * mac地址
+     * voip类型
      */
-    MAC: string;
+    PkgType: number;
     /**
-     * 信号强度
+     * appId
      */
-    RSSI: number;
+    MiniProgramAppId: string;
+    /**
+     * 设备列表
+     */
+    DeviceList?: Array<TWeCallInfo>;
 }
 /**
  * CreateTopicRule返回参数结构体
@@ -5551,6 +5750,37 @@ export interface CreateTRTCSignaturesWithRoomIdResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 产品模型定义
+ */
+export interface ProductModelDefinition {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 模型定义
+     */
+    ModelDefine: string;
+    /**
+     * 更新时间，秒级时间戳
+     */
+    UpdateTime: number;
+    /**
+     * 创建时间，秒级时间戳
+     */
+    CreateTime: number;
+    /**
+     * 产品所属分类的模型快照（产品创建时刻的）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryModel: string;
+    /**
+     * 产品的连接类型的模型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetTypeModel: string;
 }
 /**
  * DescribeDevicePackages返回参数结构体
@@ -5915,6 +6145,46 @@ export interface DescribeLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
+ * TWeCall设备信息
+ */
+export interface TWeCallPkgInfo {
+    /**
+     * 包ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PkgId?: string;
+    /**
+     * 包类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PkgType?: number;
+    /**
+     * 生效时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: number;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 已使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseUsedNum?: number;
+    /**
+     * 总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseTotalNum?: number;
+}
+/**
  * DescribeCloudStorageTime请求参数结构体
  */
 export interface DescribeCloudStorageTimeRequest {
@@ -5981,6 +6251,23 @@ export interface DescribeGatewayBindDevicesResponse {
      * 子设备所属的产品名。
      */
     ProductName: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetTWeCallPkgList返回参数结构体
+ */
+export interface GetTWeCallPkgListResponse {
+    /**
+     * 激活状态
+     */
+    TWeCallPkgList?: Array<TWeCallPkgInfo>;
+    /**
+     * 总数
+     */
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

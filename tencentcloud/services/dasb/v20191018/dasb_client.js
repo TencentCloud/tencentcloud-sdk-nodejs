@@ -82,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDevices", req, cb);
     }
     /**
-     * 添加用户组成员
+     * 创建修改密码任务
      */
-    async AddUserGroupMembers(req, cb) {
-        return this.request("AddUserGroupMembers", req, cb);
+    async CreateChangePwdTask(req, cb) {
+        return this.request("CreateChangePwdTask", req, cb);
     }
     /**
      * 查询用户组列表
@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserGroupMembers", req, cb);
     }
     /**
+     * 更新修改密码任务
+     */
+    async ModifyChangePwdTask(req, cb) {
+        return this.request("ModifyChangePwdTask", req, cb);
+    }
+    /**
      * 创建手工资产同步任务
      */
     async CreateAssetSyncJob(req, cb) {
@@ -158,6 +164,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAcls(req, cb) {
         return this.request("DescribeAcls", req, cb);
+    }
+    /**
+     * 执行改密任务
+     */
+    async RunChangePwdTask(req, cb) {
+        return this.request("RunChangePwdTask", req, cb);
     }
     /**
      * 清除设备账号绑定密码
@@ -214,22 +226,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetDeviceAccountPrivateKey", req, cb);
     }
     /**
+     * 查询资产同步状态
+     */
+    async DescribeAssetSyncStatus(req, cb) {
+        return this.request("DescribeAssetSyncStatus", req, cb);
+    }
+    /**
      * 新建主机账号
      */
     async CreateDeviceAccount(req, cb) {
         return this.request("CreateDeviceAccount", req, cb);
     }
     /**
-     * 搜索审计日志
+     * 查询改密任务详情
      */
-    async SearchAuditLog(req, cb) {
-        return this.request("SearchAuditLog", req, cb);
+    async DescribeChangePwdTaskDetail(req, cb) {
+        return this.request("DescribeChangePwdTaskDetail", req, cb);
     }
     /**
      * 删除资产组成员
      */
     async DeleteDeviceGroupMembers(req, cb) {
         return this.request("DeleteDeviceGroupMembers", req, cb);
+    }
+    /**
+     * 删除改密任务
+     */
+    async DeleteChangePwdTask(req, cb) {
+        return this.request("DeleteChangePwdTask", req, cb);
     }
     /**
      * 查询操作日志
@@ -262,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResource", req, cb);
     }
     /**
+     * 搜索审计日志
+     */
+    async SearchAuditLog(req, cb) {
+        return this.request("SearchAuditLog", req, cb);
+    }
+    /**
      * 修改用户信息
      */
     async ModifyUser(req, cb) {
@@ -280,10 +310,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmdTemplates", req, cb);
     }
     /**
-     * 查询资产同步状态
+     * 添加用户组成员
      */
-    async DescribeAssetSyncStatus(req, cb) {
-        return this.request("DescribeAssetSyncStatus", req, cb);
+    async AddUserGroupMembers(req, cb) {
+        return this.request("AddUserGroupMembers", req, cb);
     }
     /**
      * 查询资产组列表
@@ -320,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ImportExternalDevice(req, cb) {
         return this.request("ImportExternalDevice", req, cb);
+    }
+    /**
+     * 查询改密任务列表
+     */
+    async DescribeChangePwdTask(req, cb) {
+        return this.request("DescribeChangePwdTask", req, cb);
     }
     /**
      * 添加资产组成员
