@@ -85,41 +85,28 @@ export interface Capacity {
 }
 
 /**
- * GetFlowStatistic请求参数结构体
+ * GetFlowAlarmInfo返回参数结构体
  */
-export interface GetFlowStatisticRequest {
+export interface GetFlowAlarmInfoResponse {
   /**
-   * 设备ID
+   * 流量包的告警阈值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceId: string
+  AlarmValue?: number
   /**
-   * 开始查找时间
+   * 告警通知回调url
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BeginTime: number
+  NotifyUrl?: string
   /**
-   * 截止时间
+   * 告警通知回调key
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
+  CallbackKey?: string
   /**
-   * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: number
-  /**
-   * 时间粒度（1：按小时统计，2：按天统计）
-   */
-  TimeGranularity: number
-  /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
-   */
-  AccessRegion?: string
-  /**
-   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
-   */
-  GatewayType?: number
-  /**
-   * 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
-   */
-  DeviceList?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -210,6 +197,54 @@ export interface GetNetMonitorRequest {
    * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
    */
   GatewayType?: number
+}
+
+/**
+ * OrderFlowPackage请求参数结构体
+ */
+export interface OrderFlowPackageRequest {
+  /**
+   * 流量包规格类型。可取值如下：
+DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、
+DEVICE_3_FLOW_100G、
+DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
+档位也影响流量包可绑定的设备数量上限：
+20G：最多绑定1个设备
+50G：最多绑定2个设备
+100G：最多绑定3个设备
+500G：最多绑定5个设备
+   */
+  PackageType: string
+  /**
+   * 流量包绑定的设备ID列表。捆绑设备个数上限取决于包的规格档位：
+20G：最多绑定1个设备
+50G：最多绑定2个设备
+100G：最多绑定3个设备
+500G：最多绑定5个设备
+   */
+  DeviceList: Array<string>
+  /**
+   * 是否自动续费，该选项和流量截断冲突，只能开启一个
+   */
+  AutoRenewFlag: boolean
+  /**
+   * 区域标识，0：国内，1：国外
+   */
+  PackageRegion: number
+  /**
+   * 是否开启流量截断功能，该选项和自动续费冲突
+   */
+  FlowTruncFlag?: boolean
+  /**
+   * 是否自动选择代金券，默认false。
+有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。
+   */
+  AutoVoucher?: boolean
+  /**
+   * 指定代金券ID。自动选择代金券时此参数无效。目前只允许传入一张代金券。
+注：若指定的代金券不符合订单抵扣条件，则正常支付，不扣券
+   */
+  VoucherIds?: Array<string>
 }
 
 /**
@@ -428,18 +463,9 @@ export interface SrcAddressInfo {
 }
 
 /**
- * 网络详细信息
+ * GetFlowAlarmInfo请求参数结构体
  */
-export interface NetDetails {
-  /**
-   * 流量值（byte）
-   */
-  Current?: number
-  /**
-   * 时间点，单位：s
-   */
-  Time?: string
-}
+export type GetFlowAlarmInfoRequest = null
 
 /**
  * CreateQos返回参数结构体
@@ -889,6 +915,44 @@ export interface GetPublicKeyResponse {
 }
 
 /**
+ * GetFlowStatistic请求参数结构体
+ */
+export interface GetFlowStatisticRequest {
+  /**
+   * 设备ID
+   */
+  DeviceId: string
+  /**
+   * 开始查找时间
+   */
+  BeginTime: number
+  /**
+   * 截止时间
+   */
+  EndTime: number
+  /**
+   * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
+   */
+  Type: number
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+  /**
+   * 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
+   */
+  DeviceList?: Array<string>
+}
+
+/**
  * ActivateHardware请求参数结构体
  */
 export interface ActivateHardwareRequest {
@@ -1123,51 +1187,17 @@ export interface ActivateHardwareResponse {
 }
 
 /**
- * OrderFlowPackage请求参数结构体
+ * 网络详细信息
  */
-export interface OrderFlowPackageRequest {
+export interface NetDetails {
   /**
-   * 流量包规格类型。可取值如下：
-DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、
-DEVICE_3_FLOW_100G、
-DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
-档位也影响流量包可绑定的设备数量上限：
-20G：最多绑定1个设备
-50G：最多绑定2个设备
-100G：最多绑定3个设备
-500G：最多绑定5个设备
+   * 流量值（byte）
    */
-  PackageType: string
+  Current?: number
   /**
-   * 流量包绑定的设备ID列表。捆绑设备个数上限取决于包的规格档位：
-20G：最多绑定1个设备
-50G：最多绑定2个设备
-100G：最多绑定3个设备
-500G：最多绑定5个设备
+   * 时间点，单位：s
    */
-  DeviceList: Array<string>
-  /**
-   * 是否自动续费，该选项和流量截断冲突，只能开启一个
-   */
-  AutoRenewFlag: boolean
-  /**
-   * 区域标识，0：国内，1：国外
-   */
-  PackageRegion: number
-  /**
-   * 是否开启流量截断功能，该选项和自动续费冲突
-   */
-  FlowTruncFlag?: boolean
-  /**
-   * 是否自动选择代金券，默认false。
-有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。
-   */
-  AutoVoucher?: boolean
-  /**
-   * 指定代金券ID。自动选择代金券时此参数无效。目前只允许传入一张代金券。
-注：若指定的代金券不符合订单抵扣条件，则正常支付，不扣券
-   */
-  VoucherIds?: Array<string>
+  Time?: string
 }
 
 /**
@@ -1178,6 +1208,40 @@ export interface UpdateHardwareResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetFlowStatisticByGroup请求参数结构体
+ */
+export interface GetFlowStatisticByGroupRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+  /**
+   * 开始查找时间
+   */
+  BeginTime: number
+  /**
+   * 截止时间
+   */
+  EndTime: number
+  /**
+   * 流量种类（1：上行流量，2：下行流量， 3: 上下行总和）
+   */
+  Type: number
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
 }
 
 /**
@@ -1405,6 +1469,32 @@ export interface AddHardwareRequest {
    * 硬件列表
    */
   Hardware: Array<Hardware>
+}
+
+/**
+ * GetFlowStatisticByGroup返回参数结构体
+ */
+export interface GetFlowStatisticByGroupResponse {
+  /**
+   * 流量详细信息
+   */
+  NetDetails?: Array<NetDetails>
+  /**
+   * 查找时间段流量使用最大值（单位：byte）
+   */
+  MaxValue?: number
+  /**
+   * 查找时间段流量使用平均值（单位：byte）
+   */
+  AvgValue?: number
+  /**
+   * 查找时间段流量使用总量（单位：byte）
+   */
+  TotalValue?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

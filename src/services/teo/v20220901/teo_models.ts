@@ -3754,6 +3754,7 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
   Sample?: number
   /**
    * 日志投递的输出格式。不填保持原有配置。
+特别地，当 TaskType 取值为 cls 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。
    */
   LogFormat?: LogFormat
   /**

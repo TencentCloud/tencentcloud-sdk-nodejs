@@ -22,18 +22,19 @@ import {
   GetDeviceResponse,
   GetDevicePayModeRequest,
   Capacity,
-  GetFlowStatisticRequest,
+  GetFlowAlarmInfoResponse,
   DestAddressInfo,
   GetNetMonitorResponse,
   SlotNetInfo,
   DeleteQosRequest,
   GetNetMonitorRequest,
+  OrderFlowPackageRequest,
   GetMultiFlowStatisticResponse,
   VendorHardware,
   DeviceNetInfo,
   GetFlowStatisticResponse,
   SrcAddressInfo,
-  NetDetails,
+  GetFlowAlarmInfoRequest,
   CreateQosResponse,
   DescribeQosResponse,
   GetVendorHardwareRequest,
@@ -53,6 +54,7 @@ import {
   GetVendorHardwareResponse,
   UpdateDeviceRequest,
   GetPublicKeyResponse,
+  GetFlowStatisticRequest,
   ActivateHardwareRequest,
   AddHardwareResponse,
   ModifyPackageRenewFlagResponse,
@@ -65,8 +67,9 @@ import {
   GetDevicePayModeResponse,
   GetDeviceRequest,
   ActivateHardwareResponse,
-  OrderFlowPackageRequest,
+  NetDetails,
   UpdateHardwareResponse,
+  GetFlowStatisticByGroupRequest,
   HardwareInfo,
   GetDevicesResponse,
   DescribeQosRequest,
@@ -76,6 +79,7 @@ import {
   GetStatisticDataResponse,
   DeviceInfo,
   AddHardwareRequest,
+  GetFlowStatisticByGroupResponse,
   Hardware,
   GetDevicesRequest,
   FlowPackageInfo,
@@ -124,6 +128,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFlowStatisticResponse) => void
   ): Promise<GetFlowStatisticResponse> {
     return this.request("GetFlowStatistic", req, cb)
+  }
+
+  /**
+   * 获取指定分组，指定时间数据流量使用情况
+   */
+  async GetFlowStatisticByGroup(
+    req: GetFlowStatisticByGroupRequest,
+    cb?: (error: string, rep: GetFlowStatisticByGroupResponse) => void
+  ): Promise<GetFlowStatisticByGroupResponse> {
+    return this.request("GetFlowStatisticByGroup", req, cb)
   }
 
   /**
@@ -184,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddHardwareResponse) => void
   ): Promise<AddHardwareResponse> {
     return this.request("AddHardware", req, cb)
+  }
+
+  /**
+   * 通过指定设备的ID查找设备详细信息
+   */
+  async GetDevice(
+    req: GetDeviceRequest,
+    cb?: (error: string, rep: GetDeviceResponse) => void
+  ): Promise<GetDeviceResponse> {
+    return this.request("GetDevice", req, cb)
   }
 
   /**
@@ -267,13 +291,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过指定设备的ID查找设备详细信息
+   * 根据AppId查询用户设置的流量告警信息，包括阈值，回调url和key
    */
-  async GetDevice(
-    req: GetDeviceRequest,
-    cb?: (error: string, rep: GetDeviceResponse) => void
-  ): Promise<GetDeviceResponse> {
-    return this.request("GetDevice", req, cb)
+  async GetFlowAlarmInfo(
+    req?: GetFlowAlarmInfoRequest,
+    cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void
+  ): Promise<GetFlowAlarmInfoResponse> {
+    return this.request("GetFlowAlarmInfo", req, cb)
   }
 
   /**

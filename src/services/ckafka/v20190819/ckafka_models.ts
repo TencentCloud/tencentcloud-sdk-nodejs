@@ -6524,6 +6524,16 @@ export interface PrometheusDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BrokerIp?: string
+  /**
+   * VPC ID信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网ID信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
 }
 
 /**

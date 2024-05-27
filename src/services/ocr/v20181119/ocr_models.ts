@@ -10032,6 +10032,30 @@ WARN_RESHOOT_CARD翻拍件告警
    */
   Angle?: number
   /**
+   * 是否有国徽。0为没有，1为有。
+   */
+  NationalEmblem?: boolean
+  /**
+   * 是否有二维码。0为没有，1为有。
+   */
+  QRCode?: boolean
+  /**
+   * 是否有印章。0为没有，1为有。
+   */
+  Seal?: boolean
+  /**
+   * 标题
+   */
+  Title?: string
+  /**
+   * 编号
+   */
+  SerialNumber?: string
+  /**
+   * 登记机关
+   */
+  RegistrationAuthority?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

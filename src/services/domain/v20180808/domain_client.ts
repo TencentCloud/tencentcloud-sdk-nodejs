@@ -18,38 +18,51 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  AuctionInfo,
   DeleteReservedPreDomainInfoResponse,
+  DescribeBiddingAppointDetailResponse,
   DeleteTemplateResponse,
+  PriceInfo,
   DescribeCustomDnsHostSetResponse,
   ModifyTemplateRequest,
   CheckDomainResponse,
   DeleteCustomDnsHostResponse,
+  DescribeBiddingSuccessfulDetailRequest,
   RenewDomainBatchRequest,
   DescribeTemplateListResponse,
-  TransferProhibitionBatchRequest,
+  SetDomainAutoRenewResponse,
+  DescribeBiddingAppointDetailRequest,
   DescribeCustomDnsHostSetRequest,
   CreateCustomDnsHostResponse,
-  ModifyCustomDnsHostRequest,
+  DescribeBiddingAppointListRequest,
   DescribeDomainPriceListResponse,
+  DescribeBiddingListResponse,
   CheckBatchStatusRequest,
   ReserveBidInfo,
   CreateDomainBatchRequest,
+  ModifyTemplateResponse,
   DescribeBatchOperationLogsRequest,
   UploadImageRequest,
   ModifyCustomDnsHostResponse,
   BidPreDomainsResponse,
-  ModifyDomainDNSBatchRequest,
+  DescribeAuctionListRequest,
   DescribeBatchOperationLogDetailsResponse,
+  ModifyDomainDNSBatchRequest,
   DescribeReservedBidInfoRequest,
   DeletePhoneEmailResponse,
   ReservedPreDomainsResponse,
+  DescribeUnPreDomainDetailResponse,
   DomainBatchDetailSet,
   UploadImageResponse,
+  SendPhoneEmailCodeResponse,
+  BidDetailPageRequest,
+  BiddingPreReleaseResponse,
   DomainSimpleInfo,
   CreateDomainRedemptionResponse,
   DeletePhoneEmailRequest,
-  DescribeReservedPreDomainInfoResponse,
+  DescribeTldListRequest,
   BatchStatus,
+  DescribePreAuctionListResponse,
   RenewDomainBatchResponse,
   ReservedDomainInfo,
   TransferInDomainBatchResponse,
@@ -58,55 +71,73 @@ import {
   PhoneEmailData,
   CreateTemplateResponse,
   UpdateProhibitionBatchRequest,
+  PreReleaseInfo,
+  BiddingPreReleaseRequest,
   DescribePreDomainListResponse,
-  SendPhoneEmailCodeRequest,
+  ModifyIntlCustomDnsHostResponse,
   DescribeDomainBaseInfoRequest,
+  DescribePayWaitDetailResponse,
   DescribeDomainNameListRequest,
   DescribeBatchOperationLogsResponse,
-  ModifyDomainOwnerBatchRequest,
+  DescribePreAuctionListRequest,
+  SendPhoneEmailCodeRequest,
+  DeleteBiddingRequest,
   DescribePhoneEmailListResponse,
   DescribePreDomainListRequest,
+  PreAuctionInfo,
   CreatePhoneEmailResponse,
   FailReservedDomainInfo,
   ReservedPreDomainsRequest,
   BatchModifyDomainInfoRequest,
+  DescribeBiddingDetailResponse,
   CreateDomainBatchResponse,
   DeleteReservedPreDomainInfoRequest,
-  SendPhoneEmailCodeResponse,
+  ReservedPreDomainInfo,
+  DeleteBiddingResponse,
   DescribeTemplateResponse,
+  DescribePayWaitDetailRequest,
   DescribeDomainSimpleInfoRequest,
+  TransferProhibitionBatchRequest,
   DescribeDomainSimpleInfoResponse,
+  DescribeBiddingSuccessfulListResponse,
   TemplateInfo,
-  ModifyDomainOwnerBatchResponse,
+  CertificateInfo,
   TransferInDomainBatchRequest,
-  ModifyDomainDNSBatchResponse,
+  CreateTemplateRequest,
   DescribeReservedPreDomainInfoRequest,
   DescribeDomainPriceListRequest,
   ModifyIntlCustomDnsHostRequest,
-  ReservedPreDomainInfo,
+  DescribePreReleaseListResponse,
   CheckDomainRequest,
   TransferProhibitionBatchResponse,
-  ModifyTemplateResponse,
+  DescribeBiddingListRequest,
+  ModifyCustomDnsHostRequest,
+  DescribeBiddingSuccessfulListRequest,
   DescribeTemplateListRequest,
-  CertificateInfo,
-  ModifyIntlCustomDnsHostResponse,
+  ModifyDomainOwnerBatchResponse,
+  ModifyDomainOwnerBatchRequest,
   BidPreDomainsRequest,
-  CreateTemplateRequest,
+  DescribeAuctionListResponse,
+  ModifyDomainDNSBatchResponse,
   UpdateProhibitionBatchResponse,
   CreatePhoneEmailRequest,
-  PriceInfo,
+  DescribeBiddingDetailRequest,
   DescribeTemplateRequest,
+  DescribeUnPreDomainDetailRequest,
   DescribeReservedBidInfoResponse,
-  DescribeTldListRequest,
+  DescribeBiddingSuccessfulDetailResponse,
+  DescribeReservedPreDomainInfoResponse,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   SyncCustomDnsHostRequest,
   ContactInfo,
   DeleteTemplateRequest,
-  SetDomainAutoRenewResponse,
+  BidDetailPageResponse,
   CustomDnsHost,
   DomainList,
+  PriceScopeConf,
   DescribePhoneEmailListRequest,
+  DescribeBiddingAppointListResponse,
   DomainBaseInfo,
   DescribeTldListResponse,
   CreateCustomDnsHostRequest,
@@ -115,6 +146,7 @@ import {
   CreateDomainRedemptionRequest,
   SetDomainAutoRenewRequest,
   SyncCustomDnsHostResponse,
+  DescribePreReleaseListRequest,
   DomainBatchLogSet,
 } from "./domain_models"
 
@@ -125,6 +157,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("domain.tencentcloudapi.com", "2018-08-08", clientConfig)
+  }
+
+  /**
+   * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+   */
+  async TransferProhibitionBatch(
+    req: TransferProhibitionBatchRequest,
+    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
+  ): Promise<TransferProhibitionBatchResponse> {
+    return this.request("TransferProhibitionBatch", req, cb)
+  }
+
+  /**
+   * 我预定的域名。
+   */
+  async DescribeBiddingAppointList(
+    req: DescribeBiddingAppointListRequest,
+    cb?: (error: string, rep: DescribeBiddingAppointListResponse) => void
+  ): Promise<DescribeBiddingAppointListResponse> {
+    return this.request("DescribeBiddingAppointList", req, cb)
+  }
+
+  /**
+   * 用于出价界面出价请求
+   */
+  async BiddingPreRelease(
+    req: BiddingPreReleaseRequest,
+    cb?: (error: string, rep: BiddingPreReleaseResponse) => void
+  ): Promise<BiddingPreReleaseResponse> {
+    return this.request("BiddingPreRelease", req, cb)
   }
 
   /**
@@ -238,6 +300,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取域名实名信息详情
+   */
+  async DescribeDomainSimpleInfo(
+    req: DescribeDomainSimpleInfoRequest,
+    cb?: (error: string, rep: DescribeDomainSimpleInfoResponse) => void
+  ): Promise<DescribeDomainSimpleInfoResponse> {
+    return this.request("DescribeDomainSimpleInfo", req, cb)
+  }
+
+  /**
    * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
    */
   async CreateDomainBatch(
@@ -288,6 +360,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 我得标的域名。
+   */
+  async DescribeBiddingSuccessfulList(
+    req: DescribeBiddingSuccessfulListRequest,
+    cb?: (error: string, rep: DescribeBiddingSuccessfulListResponse) => void
+  ): Promise<DescribeBiddingSuccessfulListResponse> {
+    return this.request("DescribeBiddingSuccessfulList", req, cb)
+  }
+
+  /**
    * 检查域名是否可以注册。
    */
   async CheckDomain(
@@ -315,6 +397,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncCustomDnsHostResponse) => void
   ): Promise<SyncCustomDnsHostResponse> {
     return this.request("SyncCustomDnsHost", req, cb)
+  }
+
+  /**
+   * 用于预释放竞价列表数据查询
+   */
+  async DescribePreAuctionList(
+    req: DescribePreAuctionListRequest,
+    cb?: (error: string, rep: DescribePreAuctionListResponse) => void
+  ): Promise<DescribePreAuctionListResponse> {
+    return this.request("DescribePreAuctionList", req, cb)
   }
 
   /**
@@ -368,6 +460,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 接口用于预释放页面查询
+   */
+  async DescribePreReleaseList(
+    req: DescribePreReleaseListRequest,
+    cb?: (error: string, rep: DescribePreReleaseListResponse) => void
+  ): Promise<DescribePreReleaseListResponse> {
+    return this.request("DescribePreReleaseList", req, cb)
+  }
+
+  /**
+   * 用户控制台获取竞价列表
+   */
+  async DescribeAuctionList(
+    req: DescribeAuctionListRequest,
+    cb?: (error: string, rep: DescribeAuctionListResponse) => void
+  ): Promise<DescribeAuctionListResponse> {
+    return this.request("DescribeAuctionList", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
    */
   async DescribeTemplateList(
@@ -388,13 +500,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+   * 删除记录。
    */
-  async BatchModifyDomainInfo(
-    req: BatchModifyDomainInfoRequest,
-    cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void
-  ): Promise<BatchModifyDomainInfoResponse> {
-    return this.request("BatchModifyDomainInfo", req, cb)
+  async DeleteBidding(
+    req?: DeleteBiddingRequest,
+    cb?: (error: string, rep: DeleteBiddingResponse) => void
+  ): Promise<DeleteBiddingResponse> {
+    return this.request("DeleteBidding", req, cb)
   }
 
   /**
@@ -408,13 +520,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+   * 该接口用于用户详情页出价请求
    */
-  async TransferProhibitionBatch(
-    req: TransferProhibitionBatchRequest,
-    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
-  ): Promise<TransferProhibitionBatchResponse> {
-    return this.request("TransferProhibitionBatch", req, cb)
+  async BidDetailPage(
+    req: BidDetailPageRequest,
+    cb?: (error: string, rep: BidDetailPageResponse) => void
+  ): Promise<BidDetailPageResponse> {
+    return this.request("BidDetailPage", req, cb)
+  }
+
+  /**
+   * 查询预释放未预约域名详情接口
+   */
+  async DescribeUnPreDomainDetail(
+    req: DescribeUnPreDomainDetailRequest,
+    cb?: (error: string, rep: DescribeUnPreDomainDetailResponse) => void
+  ): Promise<DescribeUnPreDomainDetailResponse> {
+    return this.request("DescribeUnPreDomainDetail", req, cb)
   }
 
   /**
@@ -438,6 +560,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 等待支付详情接口
+   */
+  async DescribePayWaitDetail(
+    req: DescribePayWaitDetailRequest,
+    cb?: (error: string, rep: DescribePayWaitDetailResponse) => void
+  ): Promise<DescribePayWaitDetailResponse> {
+    return this.request("DescribePayWaitDetail", req, cb)
+  }
+
+  /**
+   * 我竞价的域名。
+   */
+  async DescribeBiddingList(
+    req: DescribeBiddingListRequest,
+    cb?: (error: string, rep: DescribeBiddingListResponse) => void
+  ): Promise<DescribeBiddingListResponse> {
+    return this.request("DescribeBiddingList", req, cb)
+  }
+
+  /**
    * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
    */
   async CreateTemplate(
@@ -445,6 +587,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTemplateResponse) => void
   ): Promise<CreateTemplateResponse> {
     return this.request("CreateTemplate", req, cb)
+  }
+
+  /**
+   * 我竞价的域名-竞价详情。
+   */
+  async DescribeBiddingDetail(
+    req?: DescribeBiddingDetailRequest,
+    cb?: (error: string, rep: DescribeBiddingDetailResponse) => void
+  ): Promise<DescribeBiddingDetailResponse> {
+    return this.request("DescribeBiddingDetail", req, cb)
   }
 
   /**
@@ -458,13 +610,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除自定义DNS Host
+   * 我预约的域名-预约详情。
    */
-  async DeleteCustomDnsHost(
-    req: DeleteCustomDnsHostRequest,
-    cb?: (error: string, rep: DeleteCustomDnsHostResponse) => void
-  ): Promise<DeleteCustomDnsHostResponse> {
-    return this.request("DeleteCustomDnsHost", req, cb)
+  async DescribeBiddingAppointDetail(
+    req?: DescribeBiddingAppointDetailRequest,
+    cb?: (error: string, rep: DescribeBiddingAppointDetailResponse) => void
+  ): Promise<DescribeBiddingAppointDetailResponse> {
+    return this.request("DescribeBiddingAppointDetail", req, cb)
   }
 
   /**
@@ -475,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePhoneEmailListResponse) => void
   ): Promise<DescribePhoneEmailListResponse> {
     return this.request("DescribePhoneEmailList", req, cb)
+  }
+
+  /**
+   * 此接口用于发送手机邮箱验证码。
+   */
+  async SendPhoneEmailCode(
+    req: SendPhoneEmailCodeRequest,
+    cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
+  ): Promise<SendPhoneEmailCodeResponse> {
+    return this.request("SendPhoneEmailCode", req, cb)
   }
 
   /**
@@ -499,23 +661,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名实名信息详情
+   * 删除自定义DNS Host
    */
-  async DescribeDomainSimpleInfo(
-    req: DescribeDomainSimpleInfoRequest,
-    cb?: (error: string, rep: DescribeDomainSimpleInfoResponse) => void
-  ): Promise<DescribeDomainSimpleInfoResponse> {
-    return this.request("DescribeDomainSimpleInfo", req, cb)
+  async DeleteCustomDnsHost(
+    req: DeleteCustomDnsHostRequest,
+    cb?: (error: string, rep: DeleteCustomDnsHostResponse) => void
+  ): Promise<DeleteCustomDnsHostResponse> {
+    return this.request("DeleteCustomDnsHost", req, cb)
   }
 
   /**
-   * 此接口用于发送手机邮箱验证码。
+   * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
    */
-  async SendPhoneEmailCode(
-    req: SendPhoneEmailCodeRequest,
-    cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
-  ): Promise<SendPhoneEmailCodeResponse> {
-    return this.request("SendPhoneEmailCode", req, cb)
+  async BatchModifyDomainInfo(
+    req: BatchModifyDomainInfoRequest,
+    cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void
+  ): Promise<BatchModifyDomainInfoResponse> {
+    return this.request("BatchModifyDomainInfo", req, cb)
   }
 
   /**
@@ -536,5 +698,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchOperationLogsResponse) => void
   ): Promise<DescribeBatchOperationLogsResponse> {
     return this.request("DescribeBatchOperationLogs", req, cb)
+  }
+
+  /**
+   * 我得标的域名-得标详情。
+   */
+  async DescribeBiddingSuccessfulDetail(
+    req?: DescribeBiddingSuccessfulDetailRequest,
+    cb?: (error: string, rep: DescribeBiddingSuccessfulDetailResponse) => void
+  ): Promise<DescribeBiddingSuccessfulDetailResponse> {
+    return this.request("DescribeBiddingSuccessfulDetail", req, cb)
   }
 }

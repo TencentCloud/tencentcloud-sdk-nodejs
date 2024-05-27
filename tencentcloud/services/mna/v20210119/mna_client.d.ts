@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetDevicePayModeRequest, GetFlowStatisticRequest, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, GetMultiFlowStatisticResponse, GetFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, GetFlowPackagesRequest, GetHardwareListRequest, CreateEncryptedKeyResponse, OrderFlowPackageResponse, UpdateDeviceResponse, ModifyPackageRenewFlagRequest, CreateQosRequest, GetStatisticDataRequest, GetFlowPackagesResponse, GetVendorHardwareResponse, UpdateDeviceRequest, GetPublicKeyResponse, ActivateHardwareRequest, AddHardwareResponse, ModifyPackageRenewFlagResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDevicePayModeResponse, GetDeviceRequest, ActivateHardwareResponse, OrderFlowPackageRequest, UpdateHardwareResponse, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, AddHardwareRequest, GetDevicesRequest, GetHardwareListResponse, UpdateHardwareRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
+import { GetDeviceResponse, GetDevicePayModeRequest, GetFlowAlarmInfoResponse, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, OrderFlowPackageRequest, GetMultiFlowStatisticResponse, GetFlowStatisticResponse, GetFlowAlarmInfoRequest, CreateQosResponse, DescribeQosResponse, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, GetFlowPackagesRequest, GetHardwareListRequest, CreateEncryptedKeyResponse, OrderFlowPackageResponse, UpdateDeviceResponse, ModifyPackageRenewFlagRequest, CreateQosRequest, GetStatisticDataRequest, GetFlowPackagesResponse, GetVendorHardwareResponse, UpdateDeviceRequest, GetPublicKeyResponse, GetFlowStatisticRequest, ActivateHardwareRequest, AddHardwareResponse, ModifyPackageRenewFlagResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDevicePayModeResponse, GetDeviceRequest, ActivateHardwareResponse, UpdateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, AddHardwareRequest, GetFlowStatisticByGroupResponse, GetDevicesRequest, GetHardwareListResponse, UpdateHardwareRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
 /**
  * mna client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 获取指定设备Id，指定时间点数据流量使用情况
      */
     GetFlowStatistic(req: GetFlowStatisticRequest, cb?: (error: string, rep: GetFlowStatisticResponse) => void): Promise<GetFlowStatisticResponse>;
+    /**
+     * 获取指定分组，指定时间数据流量使用情况
+     */
+    GetFlowStatisticByGroup(req: GetFlowStatisticByGroupRequest, cb?: (error: string, rep: GetFlowStatisticByGroupResponse) => void): Promise<GetFlowStatisticByGroupResponse>;
     /**
      * 批量获取设备流量统计曲线
      */
@@ -43,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
      */
     AddHardware(req: AddHardwareRequest, cb?: (error: string, rep: AddHardwareResponse) => void): Promise<AddHardwareResponse>;
+    /**
+     * 通过指定设备的ID查找设备详细信息
+     */
+    GetDevice(req: GetDeviceRequest, cb?: (error: string, rep: GetDeviceResponse) => void): Promise<GetDeviceResponse>;
     /**
      * 移动网络发起Qos加速过程
      */
@@ -76,9 +84,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteQos(req: DeleteQosRequest, cb?: (error: string, rep: DeleteQosResponse) => void): Promise<DeleteQosResponse>;
     /**
-     * 通过指定设备的ID查找设备详细信息
+     * 根据AppId查询用户设置的流量告警信息，包括阈值，回调url和key
      */
-    GetDevice(req: GetDeviceRequest, cb?: (error: string, rep: GetDeviceResponse) => void): Promise<GetDeviceResponse>;
+    GetFlowAlarmInfo(req?: GetFlowAlarmInfoRequest, cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void): Promise<GetFlowAlarmInfoResponse>;
     /**
      * 购买预付费流量包
      */

@@ -1,7 +1,50 @@
 /**
+ * 用于域名预释放详情页面
+ */
+export interface AuctionInfo {
+    /**
+     * 竞拍人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bidder?: string;
+    /**
+     * 竞拍时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuctionTime?: string;
+    /**
+     * 竞拍价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuctionPrice?: number;
+    /**
+     * 状态 up: 领先 down: 落后
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+}
+/**
  * DeleteReservedPreDomainInfo返回参数结构体
  */
 export interface DeleteReservedPreDomainInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBiddingAppointDetail返回参数结构体
+ */
+export interface DescribeBiddingAppointDetailResponse {
+    /**
+     *  1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回
+     */
+    Status?: number;
+    /**
+     * 预约保证金是否已经退回
+  yes：退回 no: 未退回
+     */
+    BiddingBondRefund?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15,6 +58,31 @@ export interface DeleteTemplateResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 域名价格信息
+ */
+export interface PriceInfo {
+    /**
+     * 域名后缀，例如.com
+     */
+    Tld: string;
+    /**
+     * 购买年限，范围[1-10]
+     */
+    Year: number;
+    /**
+     * 域名原价
+     */
+    Price: number;
+    /**
+     * 域名现价
+     */
+    RealPrice: number;
+    /**
+     * 商品的购买类型，新购，续费，赎回，转入，续费并转入
+     */
+    Operation: string;
 }
 /**
  * DescribeCustomDnsHostSet返回参数结构体
@@ -130,6 +198,10 @@ export interface DeleteCustomDnsHostResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBiddingSuccessfulDetail请求参数结构体
+ */
+export declare type DescribeBiddingSuccessfulDetailRequest = null;
+/**
  * RenewDomainBatch请求参数结构体
  */
 export interface RenewDomainBatchRequest {
@@ -187,20 +259,18 @@ export interface DescribeTemplateListResponse {
     RequestId?: string;
 }
 /**
- * TransferProhibitionBatch请求参数结构体
+ * SetDomainAutoRenew返回参数结构体
  */
-export interface TransferProhibitionBatchRequest {
+export interface SetDomainAutoRenewResponse {
     /**
-     * 批量操作的域名。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Domains: Array<string>;
-    /**
-     * 是否开启禁止域名转移。
-  True: 开启禁止域名转移状态。
-  False：关闭禁止域名转移状态。
-     */
-    Status: boolean;
+    RequestId?: string;
 }
+/**
+ * DescribeBiddingAppointDetail请求参数结构体
+ */
+export declare type DescribeBiddingAppointDetailRequest = null;
 /**
  * DescribeCustomDnsHostSet请求参数结构体
  */
@@ -232,21 +302,25 @@ export interface CreateCustomDnsHostResponse {
     RequestId?: string;
 }
 /**
- * ModifyCustomDnsHost请求参数结构体
+ * DescribeBiddingAppointList请求参数结构体
  */
-export interface ModifyCustomDnsHostRequest {
+export interface DescribeBiddingAppointListRequest {
     /**
-     * 域名实例ID
+     * 每页数量
      */
-    DomainId: string;
+    PageSize: number;
     /**
-     * DNS名称
+     * 状态： 1 已预约 9 预约持有者索回
      */
-    DnsName: string;
+    Status?: Array<number | bigint>;
     /**
-     * IP地址列表
+     * 排序字段：AppointEndTime 预约结束时间
      */
-    IpSet: Array<string>;
+    SortField?: string;
+    /**
+     * 排序规则：asc升序，desc降序
+     */
+    SortOrder?: string;
 }
 /**
  * DescribeDomainPriceList返回参数结构体
@@ -256,6 +330,15 @@ export interface DescribeDomainPriceListResponse {
      * 域名价格列表
      */
     PriceList?: Array<PriceInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBiddingList返回参数结构体
+ */
+export interface DescribeBiddingListResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -347,6 +430,19 @@ export interface CreateDomainBatchRequest {
     ActivityId?: string;
 }
 /**
+ * ModifyTemplate返回参数结构体
+ */
+export interface ModifyTemplateResponse {
+    /**
+     * 模板信息
+     */
+    Template: TemplateInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBatchOperationLogs请求参数结构体
  */
 export interface DescribeBatchOperationLogsRequest {
@@ -391,17 +487,21 @@ export interface BidPreDomainsResponse {
     RequestId?: string;
 }
 /**
- * ModifyDomainDNSBatch请求参数结构体
+ * DescribeAuctionList请求参数结构体
  */
-export interface ModifyDomainDNSBatchRequest {
+export interface DescribeAuctionListRequest {
     /**
-     * 批量操作的域名。
+     * 业务ID
      */
-    Domains: Array<string>;
+    BusinessId: string;
     /**
-     * 域名DNS 数组。
+     * 条数，默认10条
      */
-    Dns: Array<string>;
+    Limit?: number;
+    /**
+     * 偏移量
+     */
+    OffSet?: number;
 }
 /**
  * DescribeBatchOperationLogDetails返回参数结构体
@@ -420,6 +520,19 @@ export interface DescribeBatchOperationLogDetailsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyDomainDNSBatch请求参数结构体
+ */
+export interface ModifyDomainDNSBatchRequest {
+    /**
+     * 批量操作的域名。
+     */
+    Domains: Array<string>;
+    /**
+     * 域名DNS 数组。
+     */
+    Dns: Array<string>;
 }
 /**
  * DescribeReservedBidInfo请求参数结构体
@@ -451,6 +564,59 @@ export interface ReservedPreDomainsResponse {
      * 预定失败域名列表
      */
     FailDomainList?: Array<FailReservedDomainInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeUnPreDomainDetail返回参数结构体
+ */
+export interface DescribeUnPreDomainDetailResponse {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 预约人数
+     */
+    PreCount?: number;
+    /**
+     * 域名注册时间
+     */
+    RegTime?: string;
+    /**
+     * 域名删除时间
+     */
+    DeleteTime?: string;
+    /**
+     * 到期时间
+     */
+    ExpireTime?: string;
+    /**
+     * 域名状态
+     */
+    Status?: string;
+    /**
+     * 域名价格
+     */
+    CurrentPrice?: number;
+    /**
+     * 域名保证金
+     */
+    AppointBondPrice?: number;
+    /**
+     * 是否已经预约
+     */
+    IsAppoint?: boolean;
+    /**
+     * 业务ID
+     */
+    BusinessId?: string;
+    /**
+     * 是否为原持有者域名
+     */
+    IsDomainUser?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -506,6 +672,41 @@ export interface UploadImageResponse {
      * 资质照片地址。
      */
     AccessUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * SendPhoneEmailCode返回参数结构体
+ */
+export interface SendPhoneEmailCodeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * BidDetailPage请求参数结构体
+ */
+export interface BidDetailPageRequest {
+    /**
+     * 业务ID
+     */
+    BusinessId: string;
+}
+/**
+ * BiddingPreRelease返回参数结构体
+ */
+export interface BiddingPreReleaseResponse {
+    /**
+     * 是否需要额外支付
+     */
+    IsNeedPay?: boolean;
+    /**
+     * 计费请求参数，以Json字符串的形式进行返回。
+     */
+    BillingParam?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -659,22 +860,9 @@ export interface DeletePhoneEmailRequest {
     Type: number;
 }
 /**
- * DescribeReservedPreDomainInfo返回参数结构体
+ * DescribeTldList请求参数结构体
  */
-export interface DescribeReservedPreDomainInfoResponse {
-    /**
-     * 预释放预约列表
-     */
-    ReservedPreDomainInfoList?: Array<ReservedPreDomainInfo>;
-    /**
-     * 总数
-     */
-    Total?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeTldListRequest = null;
 /**
  * 批量任务状态
  */
@@ -691,6 +879,25 @@ export interface BatchStatus {
      * 批量任务类型
      */
     BatchAction: string;
+}
+/**
+ * DescribePreAuctionList返回参数结构体
+ */
+export interface DescribePreAuctionListResponse {
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 预释放竞价列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PreAuctionList?: Array<PreAuctionInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * RenewDomainBatch返回参数结构体
@@ -828,6 +1035,74 @@ export interface UpdateProhibitionBatchRequest {
     Status: boolean;
 }
 /**
+ * 预释放列表信息
+ */
+export interface PreReleaseInfo {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 预订倒计时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReservationTime?: string;
+    /**
+     * 域名注册时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegTime?: string;
+    /**
+     * 域名删除时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DelTime?: string;
+    /**
+     * 当前人数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentPeople?: number;
+    /**
+     * 当前价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 是否收藏
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsFollow?: boolean;
+    /**
+     * 是否已经预约
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAppoint?: boolean;
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessId?: string;
+    /**
+     * 是否为原持有者
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsDomainUser?: boolean;
+}
+/**
+ * BiddingPreRelease请求参数结构体
+ */
+export interface BiddingPreReleaseRequest {
+    /**
+     * 业务ID
+     */
+    BusinessId: string;
+    /**
+     * 价格
+     */
+    Price: number;
+}
+/**
  * DescribePreDomainList返回参数结构体
  */
 export interface DescribePreDomainListResponse {
@@ -845,17 +1120,17 @@ export interface DescribePreDomainListResponse {
     RequestId?: string;
 }
 /**
- * SendPhoneEmailCode请求参数结构体
+ * ModifyIntlCustomDnsHost返回参数结构体
  */
-export interface SendPhoneEmailCodeRequest {
+export interface ModifyIntlCustomDnsHostResponse {
     /**
-     * 手机或者邮箱号。
+     * 任务ID
      */
-    Code: string;
+    LogId?: number;
     /**
-     * 1：手机  2：邮箱。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Type: number;
+    RequestId?: string;
 }
 /**
  * DescribeDomainBaseInfo请求参数结构体
@@ -865,6 +1140,39 @@ export interface DescribeDomainBaseInfoRequest {
      * 域名
      */
     Domain: string;
+}
+/**
+ * DescribePayWaitDetail返回参数结构体
+ */
+export interface DescribePayWaitDetailResponse {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 域名类型
+     */
+    Status?: string;
+    /**
+     * 支付结束时间
+     */
+    EndTime?: string;
+    /**
+     * 域名注册时间
+     */
+    RegTime?: string;
+    /**
+     * 域名成交价格
+     */
+    Price?: number;
+    /**
+     * 待退还保证金
+     */
+    RetDeposit?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDomainNameList请求参数结构体
@@ -898,26 +1206,35 @@ export interface DescribeBatchOperationLogsResponse {
     RequestId?: string;
 }
 /**
- * ModifyDomainOwnerBatch请求参数结构体
+ * DescribePreAuctionList请求参数结构体
  */
-export interface ModifyDomainOwnerBatchRequest {
+export interface DescribePreAuctionListRequest {
     /**
-     * 要过户的域名。
+     * 页码
      */
-    Domains: Array<string>;
+    PageNumber?: number;
     /**
-     * 转入账户的uin。
+     * 条数
      */
-    NewOwnerUin: string;
-    /**
-     * 是否同时转移对应的 DNS 解析域名，默认false
-     */
-    TransferDns?: boolean;
-    /**
-     * 转入账户的appid。
-     */
-    NewOwnerAppId?: string;
+    PageSize?: number;
 }
+/**
+ * SendPhoneEmailCode请求参数结构体
+ */
+export interface SendPhoneEmailCodeRequest {
+    /**
+     * 手机或者邮箱号。
+     */
+    Code: string;
+    /**
+     * 1：手机  2：邮箱。
+     */
+    Type: number;
+}
+/**
+ * DeleteBidding请求参数结构体
+ */
+export declare type DeleteBiddingRequest = null;
 /**
  * DescribePhoneEmailList返回参数结构体
  */
@@ -955,6 +1272,41 @@ export interface DescribePreDomainListRequest {
      * 用户指定上架时间筛选
      */
     UpTime?: string;
+}
+/**
+ * 预释放竞价列表
+ */
+export interface PreAuctionInfo {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 竞价倒计时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BiddingTime?: string;
+    /**
+     * 出价次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BidCount?: number;
+    /**
+     * 当前价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 用户操作 bid：出价 "noAction"：无法操作
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Op?: string;
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessId?: string;
 }
 /**
  * CreatePhoneEmail返回参数结构体
@@ -1013,6 +1365,15 @@ export interface BatchModifyDomainInfoRequest {
     LockTransfer?: boolean;
 }
 /**
+ * DescribeBiddingDetail返回参数结构体
+ */
+export interface DescribeBiddingDetailResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateDomainBatch返回参数结构体
  */
 export interface CreateDomainBatchResponse {
@@ -1036,9 +1397,52 @@ export interface DeleteReservedPreDomainInfoRequest {
     ResourceIdList: Array<string>;
 }
 /**
- * SendPhoneEmailCode返回参数结构体
+ * 预约预释放域名详情信息
  */
-export interface SendPhoneEmailCodeResponse {
+export interface ReservedPreDomainInfo {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成
+     */
+    ReservedStatus?: number;
+    /**
+     * 域名预定失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailReason?: string;
+    /**
+     * 预计变更所有权时间（仅用于参考，实际时间会存在误差）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChangeOwnerTime?: string;
+    /**
+     * 注册时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegTime?: string;
+    /**
+     * 到期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 资源ID，用于删除资源信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId?: string;
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessId?: string;
+}
+/**
+ * DeleteBidding返回参数结构体
+ */
+export interface DeleteBiddingResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1058,6 +1462,15 @@ export interface DescribeTemplateResponse {
     RequestId?: string;
 }
 /**
+ * DescribePayWaitDetail请求参数结构体
+ */
+export interface DescribePayWaitDetailRequest {
+    /**
+     * 业务ID
+     */
+    BusinessId: string;
+}
+/**
  * DescribeDomainSimpleInfo请求参数结构体
  */
 export interface DescribeDomainSimpleInfoRequest {
@@ -1065,6 +1478,21 @@ export interface DescribeDomainSimpleInfoRequest {
      * 域名
      */
     DomainName: string;
+}
+/**
+ * TransferProhibitionBatch请求参数结构体
+ */
+export interface TransferProhibitionBatchRequest {
+    /**
+     * 批量操作的域名。
+     */
+    Domains: Array<string>;
+    /**
+     * 是否开启禁止域名转移。
+  True: 开启禁止域名转移状态。
+  False：关闭禁止域名转移状态。
+     */
+    Status: boolean;
 }
 /**
  * DescribeDomainSimpleInfo返回参数结构体
@@ -1078,6 +1506,15 @@ export interface DescribeDomainSimpleInfoResponse {
      * 账号ID
      */
     Uin?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBiddingSuccessfulList返回参数结构体
+ */
+export interface DescribeBiddingSuccessfulListResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1135,251 +1572,6 @@ export interface TemplateInfo {
      * 是包含黑名单手机或邮箱
      */
     IsBlack?: boolean;
-}
-/**
- * ModifyDomainOwnerBatch返回参数结构体
- */
-export interface ModifyDomainOwnerBatchResponse {
-    /**
-     * 日志id
-     */
-    LogId: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * TransferInDomainBatch请求参数结构体
- */
-export interface TransferInDomainBatchRequest {
-    /**
-     * 转入的域名名称数组。
-     */
-    Domains: Array<string>;
-    /**
-     * 域名转移码数组。
-     */
-    PassWords: Array<string>;
-    /**
-     * 模板ID。
-     */
-    TemplateId: string;
-    /**
-     * 付费模式 0手动在线付费，1使用余额付费。
-     */
-    PayMode: number;
-    /**
-     * 自动续费开关。有两个可选值：
-  0 表示关闭，不自动续费（默认值）
-  1 表示开启，将自动续费
-     */
-    AutoRenewFlag?: number;
-    /**
-     * true： 开启60天内禁止转移注册商锁定
-  false：关闭60天内禁止转移注册商锁定
-  默认 true
-     */
-    LockTransfer?: boolean;
-    /**
-     * 是否开启更新锁：0=默认不开启，1=开启
-     */
-    UpdateProhibition?: number;
-    /**
-     * 是否开启转移锁：0=默认不开启，1=开启
-     */
-    TransferProhibition?: number;
-    /**
-     * 渠道来源，pc/miniprogram/h5等
-     */
-    ChannelFrom?: string;
-    /**
-     * 订单来源，common正常/dianshi_active点石活动等
-     */
-    OrderFrom?: string;
-    /**
-     * 活动id
-     */
-    ActivityId?: string;
-}
-/**
- * ModifyDomainDNSBatch返回参数结构体
- */
-export interface ModifyDomainDNSBatchResponse {
-    /**
-     * 日志ID。
-     */
-    LogId: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeReservedPreDomainInfo请求参数结构体
- */
-export interface DescribeReservedPreDomainInfoRequest {
-    /**
-     * 域名,每次最多支持500条域名查询
-     */
-    DomainList?: Array<string>;
-    /**
-     * 状态，用于筛选，可不填写(1. 成功 2. 失败（失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 5. 预约 6. 竞价)
-     */
-    ReservedStatus?: number;
-    /**
-     * 根据预约时间排序，仅支持："desc","asc"。
-     */
-    ReservedTimeSort?: string;
-    /**
-     * 条数
-     */
-    Limit?: number;
-    /**
-     * 偏移量
-     */
-    Offset?: number;
-}
-/**
- * DescribeDomainPriceList请求参数结构体
- */
-export interface DescribeDomainPriceListRequest {
-    /**
-     * 查询价格的后缀列表。默认则为全部后缀
-     */
-    TldList?: Array<string>;
-    /**
-     * 查询购买的年份，默认会列出所有年份的价格
-     */
-    Year?: Array<number | bigint>;
-    /**
-     * 域名的购买类型：new  新购，renew 续费，redem 赎回，tran 转入
-     */
-    Operation?: Array<string>;
-}
-/**
- * ModifyIntlCustomDnsHost请求参数结构体
- */
-export interface ModifyIntlCustomDnsHostRequest {
-    /**
-     * 域名ID
-     */
-    DomainId: string;
-    /**
-     * DNS Host
-     */
-    DnsName: string;
-    /**
-     * IP地址
-     */
-    IpSet: Array<string>;
-}
-/**
- * 预约预释放域名详情信息
- */
-export interface ReservedPreDomainInfo {
-    /**
-     * 域名
-     */
-    Domain?: string;
-    /**
-     * 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成
-     */
-    ReservedStatus?: number;
-    /**
-     * 域名预定失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailReason?: string;
-    /**
-     * 预计变更所有权时间（仅用于参考，实际时间会存在误差）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ChangeOwnerTime?: string;
-    /**
-     * 注册时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RegTime?: string;
-    /**
-     * 到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpireTime?: string;
-    /**
-     * 资源ID，用于删除资源信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResourceId?: string;
-    /**
-     * 业务ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BusinessId?: string;
-}
-/**
- * CheckDomain请求参数结构体
- */
-export interface CheckDomainRequest {
-    /**
-     * 所查询域名名称
-     */
-    DomainName: string;
-    /**
-     * 年限。该参数为空时无法查询溢价词域名
-     */
-    Period?: string;
-}
-/**
- * TransferProhibitionBatch返回参数结构体
- */
-export interface TransferProhibitionBatchResponse {
-    /**
-     * 日志ID
-     */
-    LogId: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifyTemplate返回参数结构体
- */
-export interface ModifyTemplateResponse {
-    /**
-     * 模板信息
-     */
-    Template: TemplateInfo;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeTemplateList请求参数结构体
- */
-export interface DescribeTemplateListRequest {
-    /**
-     * 偏移量，默认为0。
-     */
-    Offset?: number;
-    /**
-     * 返回数量，默认为20，最大值为100。
-     */
-    Limit?: number;
-    /**
-     * 用户注册类型，默认:all , 个人：I ,企业: E
-     */
-    Type?: string;
-    /**
-     * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
-     */
-    Status?: string;
-    /**
-     * 关键字，用于域名所有者筛选
-     */
-    Keyword?: string;
 }
 /**
  * 认证资料信息
@@ -1475,17 +1667,293 @@ export interface CertificateInfo {
     RegistrantImgUrl?: string;
 }
 /**
- * ModifyIntlCustomDnsHost返回参数结构体
+ * TransferInDomainBatch请求参数结构体
  */
-export interface ModifyIntlCustomDnsHostResponse {
+export interface TransferInDomainBatchRequest {
     /**
-     * 任务ID
+     * 转入的域名名称数组。
      */
-    LogId?: number;
+    Domains: Array<string>;
+    /**
+     * 域名转移码数组。
+     */
+    PassWords: Array<string>;
+    /**
+     * 模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 付费模式 0手动在线付费，1使用余额付费。
+     */
+    PayMode: number;
+    /**
+     * 自动续费开关。有两个可选值：
+  0 表示关闭，不自动续费（默认值）
+  1 表示开启，将自动续费
+     */
+    AutoRenewFlag?: number;
+    /**
+     * true： 开启60天内禁止转移注册商锁定
+  false：关闭60天内禁止转移注册商锁定
+  默认 true
+     */
+    LockTransfer?: boolean;
+    /**
+     * 是否开启更新锁：0=默认不开启，1=开启
+     */
+    UpdateProhibition?: number;
+    /**
+     * 是否开启转移锁：0=默认不开启，1=开启
+     */
+    TransferProhibition?: number;
+    /**
+     * 渠道来源，pc/miniprogram/h5等
+     */
+    ChannelFrom?: string;
+    /**
+     * 订单来源，common正常/dianshi_active点石活动等
+     */
+    OrderFrom?: string;
+    /**
+     * 活动id
+     */
+    ActivityId?: string;
+}
+/**
+ * CreateTemplate请求参数结构体
+ */
+export interface CreateTemplateRequest {
+    /**
+     * 联系人信息
+     */
+    ContactInfo: ContactInfo;
+    /**
+     * 证件信息
+     */
+    CertificateInfo?: CertificateInfo;
+}
+/**
+ * DescribeReservedPreDomainInfo请求参数结构体
+ */
+export interface DescribeReservedPreDomainInfoRequest {
+    /**
+     * 域名,每次最多支持500条域名查询
+     */
+    DomainList?: Array<string>;
+    /**
+     * 状态，用于筛选，可不填写(1. 成功 2. 失败（失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 5. 预约 6. 竞价)
+     */
+    ReservedStatus?: number;
+    /**
+     * 根据预约时间排序，仅支持："desc","asc"。
+     */
+    ReservedTimeSort?: string;
+    /**
+     * 条数
+     */
+    Limit?: number;
+    /**
+     * 偏移量
+     */
+    Offset?: number;
+}
+/**
+ * DescribeDomainPriceList请求参数结构体
+ */
+export interface DescribeDomainPriceListRequest {
+    /**
+     * 查询价格的后缀列表。默认则为全部后缀
+     */
+    TldList?: Array<string>;
+    /**
+     * 查询购买的年份，默认会列出所有年份的价格
+     */
+    Year?: Array<number | bigint>;
+    /**
+     * 域名的购买类型：new  新购，renew 续费，redem 赎回，tran 转入
+     */
+    Operation?: Array<string>;
+}
+/**
+ * ModifyIntlCustomDnsHost请求参数结构体
+ */
+export interface ModifyIntlCustomDnsHostRequest {
+    /**
+     * 域名ID
+     */
+    DomainId: string;
+    /**
+     * DNS Host
+     */
+    DnsName: string;
+    /**
+     * IP地址
+     */
+    IpSet: Array<string>;
+}
+/**
+ * DescribePreReleaseList返回参数结构体
+ */
+export interface DescribePreReleaseListResponse {
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 预释放列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PreReleaseList?: Array<PreReleaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CheckDomain请求参数结构体
+ */
+export interface CheckDomainRequest {
+    /**
+     * 所查询域名名称
+     */
+    DomainName: string;
+    /**
+     * 年限。该参数为空时无法查询溢价词域名
+     */
+    Period?: string;
+}
+/**
+ * TransferProhibitionBatch返回参数结构体
+ */
+export interface TransferProhibitionBatchResponse {
+    /**
+     * 日志ID
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBiddingList请求参数结构体
+ */
+export interface DescribeBiddingListRequest {
+    /**
+     * 每页数量
+     */
+    PageSize: number;
+    /**
+     * 2 竞价中  3 等待出价  4 交易失败  10 竞价阶段持有者赎回
+     */
+    Status?: Array<number | bigint>;
+    /**
+     * 排序字段：BiddingEndTime 竞价结束时间
+  BiddingPrice 我的价格
+     */
+    SortField?: string;
+    /**
+     * 排序规则：asc升序，desc降序
+     */
+    SortOrder?: string;
+}
+/**
+ * ModifyCustomDnsHost请求参数结构体
+ */
+export interface ModifyCustomDnsHostRequest {
+    /**
+     * 域名实例ID
+     */
+    DomainId: string;
+    /**
+     * DNS名称
+     */
+    DnsName: string;
+    /**
+     * IP地址列表
+     */
+    IpSet: Array<string>;
+}
+/**
+ * DescribeBiddingSuccessfulList请求参数结构体
+ */
+export interface DescribeBiddingSuccessfulListRequest {
+    /**
+     * 每页数量
+     */
+    PageSize: number;
+    /**
+     * 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约
+     */
+    Status?: Array<number | bigint>;
+    /**
+     * 排序字段：SuccessfulTime 预约结束时间
+     */
+    SortField?: string;
+    /**
+     * 排序规则：asc升序，desc降序
+     */
+    SortOrder?: string;
+}
+/**
+ * DescribeTemplateList请求参数结构体
+ */
+export interface DescribeTemplateListRequest {
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为20，最大值为100。
+     */
+    Limit?: number;
+    /**
+     * 用户注册类型，默认:all , 个人：I ,企业: E
+     */
+    Type?: string;
+    /**
+     * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
+     */
+    Status?: string;
+    /**
+     * 关键字，用于域名所有者筛选
+     */
+    Keyword?: string;
+}
+/**
+ * ModifyDomainOwnerBatch返回参数结构体
+ */
+export interface ModifyDomainOwnerBatchResponse {
+    /**
+     * 日志id
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDomainOwnerBatch请求参数结构体
+ */
+export interface ModifyDomainOwnerBatchRequest {
+    /**
+     * 要过户的域名。
+     */
+    Domains: Array<string>;
+    /**
+     * 转入账户的uin。
+     */
+    NewOwnerUin: string;
+    /**
+     * 是否同时转移对应的 DNS 解析域名，默认false
+     */
+    TransferDns?: boolean;
+    /**
+     * 转入账户的appid。
+     */
+    NewOwnerAppId?: string;
 }
 /**
  * BidPreDomains请求参数结构体
@@ -1501,17 +1969,36 @@ export interface BidPreDomainsRequest {
     Price?: number;
 }
 /**
- * CreateTemplate请求参数结构体
+ * DescribeAuctionList返回参数结构体
  */
-export interface CreateTemplateRequest {
+export interface DescribeAuctionListResponse {
     /**
-     * 联系人信息
+     * 竞拍详情列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContactInfo: ContactInfo;
+    AuctionList?: Array<AuctionInfo>;
     /**
-     * 证件信息
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertificateInfo?: CertificateInfo;
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDomainDNSBatch返回参数结构体
+ */
+export interface ModifyDomainDNSBatchResponse {
+    /**
+     * 日志ID。
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateProhibitionBatch返回参数结构体
@@ -1544,30 +2031,9 @@ export interface CreatePhoneEmailRequest {
     VerifyCode: string;
 }
 /**
- * 域名价格信息
+ * DescribeBiddingDetail请求参数结构体
  */
-export interface PriceInfo {
-    /**
-     * 域名后缀，例如.com
-     */
-    Tld: string;
-    /**
-     * 购买年限，范围[1-10]
-     */
-    Year: number;
-    /**
-     * 域名原价
-     */
-    Price: number;
-    /**
-     * 域名现价
-     */
-    RealPrice: number;
-    /**
-     * 商品的购买类型，新购，续费，赎回，转入，续费并转入
-     */
-    Operation: string;
-}
+export declare type DescribeBiddingDetailRequest = null;
 /**
  * DescribeTemplate请求参数结构体
  */
@@ -1576,6 +2042,15 @@ export interface DescribeTemplateRequest {
      * 模板ID
      */
     TemplateId: string;
+}
+/**
+ * DescribeUnPreDomainDetail请求参数结构体
+ */
+export interface DescribeUnPreDomainDetailRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
 }
 /**
  * DescribeReservedBidInfo返回参数结构体
@@ -1620,9 +2095,39 @@ export interface DescribeReservedBidInfoResponse {
     RequestId?: string;
 }
 /**
- * DescribeTldList请求参数结构体
+ * DescribeBiddingSuccessfulDetail返回参数结构体
  */
-export declare type DescribeTldListRequest = null;
+export interface DescribeBiddingSuccessfulDetailResponse {
+    /**
+     * 保证金，是否退款，yes表示退款，no表示不退款
+     */
+    BiddingBondRefund?: string;
+    /**
+     * 状态：1 竞价中，2 待出价，3 竞价失败， 4 等待支付 5 等待转移， 6 转移中，7 交易成功，8 持有者索回，9 已违约
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeReservedPreDomainInfo返回参数结构体
+ */
+export interface DescribeReservedPreDomainInfoResponse {
+    /**
+     * 预释放预约列表
+     */
+    ReservedPreDomainInfoList?: Array<ReservedPreDomainInfo>;
+    /**
+     * 总数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * DescribeBatchOperationLogDetails请求参数结构体
  */
@@ -1746,9 +2251,39 @@ export interface DeleteTemplateRequest {
     TemplateId: string;
 }
 /**
- * SetDomainAutoRenew返回参数结构体
+ * BidDetailPage返回参数结构体
  */
-export interface SetDomainAutoRenewResponse {
+export interface BidDetailPageResponse {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 当前域名价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentPrice?: number;
+    /**
+     * 用户上次出价
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BidPrice?: number;
+    /**
+     * 当前加价幅度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentPriceScope?: number;
+    /**
+     * 加价幅度区间配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PriceScope?: Array<PriceScopeConf>;
+    /**
+     * 用户当前已经支付了的保证金
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DepositPrice?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1826,6 +2361,31 @@ export interface DomainList {
     BuyStatus: string;
 }
 /**
+ * 预释放价格区间配置
+ */
+export interface PriceScopeConf {
+    /**
+     * 最高价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxPrice?: number;
+    /**
+     * 最低价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinPrice?: number;
+    /**
+     * 价格幅度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 保证金
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DepositPrice?: number;
+}
+/**
  * DescribePhoneEmailList请求参数结构体
  */
 export interface DescribePhoneEmailListRequest {
@@ -1845,6 +2405,15 @@ export interface DescribePhoneEmailListRequest {
      * 手机或者邮箱，用于精确搜索
      */
     Code?: string;
+}
+/**
+ * DescribeBiddingAppointList返回参数结构体
+ */
+export interface DescribeBiddingAppointListResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 获取域名基础信息
@@ -2044,6 +2613,99 @@ export interface SyncCustomDnsHostResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribePreReleaseList请求参数结构体
+ */
+export interface DescribePreReleaseListRequest {
+    /**
+     * 关键词
+     */
+    Keywords?: string;
+    /**
+     * 搜索关键字，开头
+     */
+    DomainStart?: boolean;
+    /**
+     * 搜索关键字结尾
+     */
+    DomainEnd?: boolean;
+    /**
+     * 排序
+     */
+    Sort?: number;
+    /**
+     * 起始价格
+     */
+    PriceStart?: number;
+    /**
+     * 结束价格
+     */
+    PriceEnd?: number;
+    /**
+     * 起始域名长度
+     */
+    LengthStart?: number;
+    /**
+     * 结束域名长度
+     */
+    LengthEnd?: number;
+    /**
+     * 页码
+     */
+    PageNumber?: number;
+    /**
+     * 没页显示数
+     */
+    PageSize?: number;
+    /**
+     * 后缀
+     */
+    Suffix?: Array<number | bigint>;
+    /**
+     * 一级分类
+     */
+    ClassOne?: number;
+    /**
+     * 二级分类
+     */
+    ClassTwo?: Array<number | bigint>;
+    /**
+     * 三级分类
+     */
+    ClassThree?: Array<number | bigint>;
+    /**
+     * 四级分类
+     */
+    ClassFour?: Array<number | bigint>;
+    /**
+     * 排除关键字，开头
+     */
+    FilterStart?: boolean;
+    /**
+     * 排除关键字，结尾
+     */
+    FilterEnd?: boolean;
+    /**
+     * 排除关键字
+     */
+    FilterWords?: string;
+    /**
+     * 交易类型
+     */
+    TransType?: number;
+    /**
+     * 搜索白金域名
+     */
+    IsTop?: boolean;
+    /**
+     * 结束时间排序啊 desc:倒序 asc:正序
+     */
+    EndTimeSort?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
 }
 /**
  * 批量操作记录

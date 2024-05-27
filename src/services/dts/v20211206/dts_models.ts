@@ -5114,7 +5114,7 @@ export interface CreateSyncJobRequest {
    */
   PayMode: string
   /**
-   * 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
+   * 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,tdstore等
    */
   SrcDatabaseType: string
   /**
@@ -5122,7 +5122,7 @@ export interface CreateSyncJobRequest {
    */
   SrcRegion: string
   /**
-   * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka等
+   * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka,tdstore等
    */
   DstDatabaseType: string
   /**

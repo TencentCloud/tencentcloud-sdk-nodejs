@@ -95,7 +95,7 @@ export interface DescribeInstancesTrafficPackagesRequest {
  */
 export interface DescribeDisksDeniedActionsRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
 }
@@ -870,11 +870,11 @@ export interface DescribeDiskBackupsResponse {
  */
 export interface AttachDisksRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceId: string
   /**
@@ -926,7 +926,7 @@ export interface RebootInstancesRequest {
  */
 export interface ResetAttachCcnRequest {
   /**
-   * 云联网实例ID。
+   * 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。
    */
   CcnId: string
 }
@@ -1246,7 +1246,7 @@ export interface ModifyBlueprintAttributeRequest {
  */
 export interface InquirePriceRenewDisksRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 1。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
   /**
@@ -1434,7 +1434,7 @@ export interface ApplyInstanceSnapshotResponse {
  */
 export interface DetachDisksRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
 }
@@ -1811,7 +1811,7 @@ export interface RenewDisksRequest {
  */
 export interface ModifyDisksAttributeRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
   /**
@@ -2061,11 +2061,17 @@ export interface DescribeAllScenesRequest {
  */
 export interface ModifyDisksRenewFlagRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds: Array<string>
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 自动续费标识。取值范围：
+
+- NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+- NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+
+若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
   RenewFlag: string
 }
@@ -3082,7 +3088,7 @@ export interface InquirePriceRenewDisksResponse {
   /**
    * 云硬盘价格。
    */
-  DiskPrice: DiskPrice
+  DiskPrice?: DiskPrice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3477,7 +3483,7 @@ export interface DescribeFirewallTemplateRuleQuotaResponse {
  */
 export interface DetachCcnRequest {
   /**
-   * 云联网实例ID。
+   * 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。
    */
   CcnId: string
 }
@@ -3984,7 +3990,7 @@ export interface CreateFirewallRulesResponse {
  */
 export interface DescribeDisksRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 100。
    */
   DiskIds?: Array<string>
   /**
@@ -4646,11 +4652,11 @@ export interface DescribeDisksReturnableResponse {
   /**
    * 可退还云硬盘详细信息列表。
    */
-  DiskReturnableSet: Array<DiskReturnable>
+  DiskReturnableSet?: Array<DiskReturnable>
   /**
    * 符合条件的云硬盘数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4754,7 +4760,7 @@ export interface DescribeResetInstanceBlueprintsResponse {
  */
 export interface DescribeDisksReturnableRequest {
   /**
-   * 云硬盘ID列表。
+   * 云硬盘ID列表。每次批量请求云硬盘的上限为 10。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
    */
   DiskIds?: Array<string>
   /**
@@ -4989,7 +4995,7 @@ export interface DescribeDisksDeniedActionsResponse {
   /**
    * 云硬盘操作限制列表详细信息。
    */
-  DiskDeniedActionSet: Array<DiskDeniedActions>
+  DiskDeniedActionSet?: Array<DiskDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

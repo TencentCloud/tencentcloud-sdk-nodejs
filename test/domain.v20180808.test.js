@@ -18,6 +18,36 @@ const client = new tencentcloud.domain.v20180808.Client({
 })
 describe("domain.v20180808.test.js", function () {
 
+it("domain.v20180808.TransferProhibitionBatch", async function () {
+    try {
+       const data = await client.TransferProhibitionBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeBiddingAppointList", async function () {
+    try {
+       const data = await client.DescribeBiddingAppointList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.BiddingPreRelease", async function () {
+    try {
+       const data = await client.BiddingPreRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.SetDomainAutoRenew", async function () {
     try {
        const data = await client.SetDomainAutoRenew({})
@@ -128,6 +158,16 @@ it("domain.v20180808.ModifyIntlCustomDnsHost", async function () {
     }
 })
 
+it("domain.v20180808.DescribeDomainSimpleInfo", async function () {
+    try {
+       const data = await client.DescribeDomainSimpleInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CreateDomainBatch", async function () {
     try {
        const data = await client.CreateDomainBatch({})
@@ -178,6 +218,16 @@ it("domain.v20180808.DescribeTldList", async function () {
     }
 })
 
+it("domain.v20180808.DescribeBiddingSuccessfulList", async function () {
+    try {
+       const data = await client.DescribeBiddingSuccessfulList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CheckDomain", async function () {
     try {
        const data = await client.CheckDomain({})
@@ -201,6 +251,16 @@ it("domain.v20180808.ReservedPreDomains", async function () {
 it("domain.v20180808.SyncCustomDnsHost", async function () {
     try {
        const data = await client.SyncCustomDnsHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribePreAuctionList", async function () {
+    try {
+       const data = await client.DescribePreAuctionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +318,26 @@ it("domain.v20180808.CreateDomainRedemption", async function () {
     }
 })
 
+it("domain.v20180808.DescribePreReleaseList", async function () {
+    try {
+       const data = await client.DescribePreReleaseList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeAuctionList", async function () {
+    try {
+       const data = await client.DescribeAuctionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.DescribeTemplateList", async function () {
     try {
        const data = await client.DescribeTemplateList({})
@@ -278,9 +358,9 @@ it("domain.v20180808.DeleteReservedPreDomainInfo", async function () {
     }
 })
 
-it("domain.v20180808.BatchModifyDomainInfo", async function () {
+it("domain.v20180808.DeleteBidding", async function () {
     try {
-       const data = await client.BatchModifyDomainInfo({})
+       const data = await client.DeleteBidding({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +378,19 @@ it("domain.v20180808.ModifyTemplate", async function () {
     }
 })
 
-it("domain.v20180808.TransferProhibitionBatch", async function () {
+it("domain.v20180808.BidDetailPage", async function () {
     try {
-       const data = await client.TransferProhibitionBatch({})
+       const data = await client.BidDetailPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeUnPreDomainDetail", async function () {
+    try {
+       const data = await client.DescribeUnPreDomainDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +418,39 @@ it("domain.v20180808.UpdateProhibitionBatch", async function () {
     }
 })
 
+it("domain.v20180808.DescribePayWaitDetail", async function () {
+    try {
+       const data = await client.DescribePayWaitDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeBiddingList", async function () {
+    try {
+       const data = await client.DescribeBiddingList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CreateTemplate", async function () {
     try {
        const data = await client.CreateTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeBiddingDetail", async function () {
+    try {
+       const data = await client.DescribeBiddingDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +468,9 @@ it("domain.v20180808.DescribeReservedPreDomainInfo", async function () {
     }
 })
 
-it("domain.v20180808.DeleteCustomDnsHost", async function () {
+it("domain.v20180808.DescribeBiddingAppointDetail", async function () {
     try {
-       const data = await client.DeleteCustomDnsHost({})
+       const data = await client.DescribeBiddingAppointDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +481,16 @@ it("domain.v20180808.DeleteCustomDnsHost", async function () {
 it("domain.v20180808.DescribePhoneEmailList", async function () {
     try {
        const data = await client.DescribePhoneEmailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.SendPhoneEmailCode", async function () {
+    try {
+       const data = await client.SendPhoneEmailCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +518,9 @@ it("domain.v20180808.RenewDomainBatch", async function () {
     }
 })
 
-it("domain.v20180808.DescribeDomainSimpleInfo", async function () {
+it("domain.v20180808.DeleteCustomDnsHost", async function () {
     try {
-       const data = await client.DescribeDomainSimpleInfo({})
+       const data = await client.DeleteCustomDnsHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +528,9 @@ it("domain.v20180808.DescribeDomainSimpleInfo", async function () {
     }
 })
 
-it("domain.v20180808.SendPhoneEmailCode", async function () {
+it("domain.v20180808.BatchModifyDomainInfo", async function () {
     try {
-       const data = await client.SendPhoneEmailCode({})
+       const data = await client.BatchModifyDomainInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +551,16 @@ it("domain.v20180808.DescribeDomainPriceList", async function () {
 it("domain.v20180808.DescribeBatchOperationLogs", async function () {
     try {
        const data = await client.DescribeBatchOperationLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeBiddingSuccessfulDetail", async function () {
+    try {
+       const data = await client.DescribeBiddingSuccessfulDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

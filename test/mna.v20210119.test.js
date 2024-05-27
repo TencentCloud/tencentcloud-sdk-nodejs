@@ -48,6 +48,16 @@ it("mna.v20210119.GetFlowStatistic", async function () {
     }
 })
 
+it("mna.v20210119.GetFlowStatisticByGroup", async function () {
+    try {
+       const data = await client.GetFlowStatisticByGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetMultiFlowStatistic", async function () {
     try {
        const data = await client.GetMultiFlowStatistic({})
@@ -101,6 +111,16 @@ it("mna.v20210119.GetFlowPackages", async function () {
 it("mna.v20210119.AddHardware", async function () {
     try {
        const data = await client.AddHardware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetDevice", async function () {
+    try {
+       const data = await client.GetDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +208,9 @@ it("mna.v20210119.DeleteQos", async function () {
     }
 })
 
-it("mna.v20210119.GetDevice", async function () {
+it("mna.v20210119.GetFlowAlarmInfo", async function () {
     try {
-       const data = await client.GetDevice({})
+       const data = await client.GetFlowAlarmInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

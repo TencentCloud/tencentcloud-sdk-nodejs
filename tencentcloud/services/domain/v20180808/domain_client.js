@@ -28,6 +28,24 @@ class Client extends abstract_client_1.AbstractClient {
         super("domain.tencentcloudapi.com", "2018-08-08", clientConfig);
     }
     /**
+     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+     */
+    async TransferProhibitionBatch(req, cb) {
+        return this.request("TransferProhibitionBatch", req, cb);
+    }
+    /**
+     * 我预定的域名。
+     */
+    async DescribeBiddingAppointList(req, cb) {
+        return this.request("DescribeBiddingAppointList", req, cb);
+    }
+    /**
+     * 用于出价界面出价请求
+     */
+    async BiddingPreRelease(req, cb) {
+        return this.request("BiddingPreRelease", req, cb);
+    }
+    /**
      * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
      */
     async SetDomainAutoRenew(req, cb) {
@@ -94,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIntlCustomDnsHost", req, cb);
     }
     /**
+     * 获取域名实名信息详情
+     */
+    async DescribeDomainSimpleInfo(req, cb) {
+        return this.request("DescribeDomainSimpleInfo", req, cb);
+    }
+    /**
      * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
      */
     async CreateDomainBatch(req, cb) {
@@ -124,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTldList", req, cb);
     }
     /**
+     * 我得标的域名。
+     */
+    async DescribeBiddingSuccessfulList(req, cb) {
+        return this.request("DescribeBiddingSuccessfulList", req, cb);
+    }
+    /**
      * 检查域名是否可以注册。
      */
     async CheckDomain(req, cb) {
@@ -140,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SyncCustomDnsHost(req, cb) {
         return this.request("SyncCustomDnsHost", req, cb);
+    }
+    /**
+     * 用于预释放竞价列表数据查询
+     */
+    async DescribePreAuctionList(req, cb) {
+        return this.request("DescribePreAuctionList", req, cb);
     }
     /**
      * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
@@ -172,6 +208,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainRedemption", req, cb);
     }
     /**
+     * 接口用于预释放页面查询
+     */
+    async DescribePreReleaseList(req, cb) {
+        return this.request("DescribePreReleaseList", req, cb);
+    }
+    /**
+     * 用户控制台获取竞价列表
+     */
+    async DescribeAuctionList(req, cb) {
+        return this.request("DescribeAuctionList", req, cb);
+    }
+    /**
      * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
      */
     async DescribeTemplateList(req, cb) {
@@ -184,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteReservedPreDomainInfo", req, cb);
     }
     /**
-     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+     * 删除记录。
      */
-    async BatchModifyDomainInfo(req, cb) {
-        return this.request("BatchModifyDomainInfo", req, cb);
+    async DeleteBidding(req, cb) {
+        return this.request("DeleteBidding", req, cb);
     }
     /**
      * 修改模板信息
@@ -196,10 +244,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTemplate", req, cb);
     }
     /**
-     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+     * 该接口用于用户详情页出价请求
      */
-    async TransferProhibitionBatch(req, cb) {
-        return this.request("TransferProhibitionBatch", req, cb);
+    async BidDetailPage(req, cb) {
+        return this.request("BidDetailPage", req, cb);
+    }
+    /**
+     * 查询预释放未预约域名详情接口
+     */
+    async DescribeUnPreDomainDetail(req, cb) {
+        return this.request("DescribeUnPreDomainDetail", req, cb);
     }
     /**
      * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
@@ -214,10 +268,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateProhibitionBatch", req, cb);
     }
     /**
+     * 等待支付详情接口
+     */
+    async DescribePayWaitDetail(req, cb) {
+        return this.request("DescribePayWaitDetail", req, cb);
+    }
+    /**
+     * 我竞价的域名。
+     */
+    async DescribeBiddingList(req, cb) {
+        return this.request("DescribeBiddingList", req, cb);
+    }
+    /**
      * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
      */
     async CreateTemplate(req, cb) {
         return this.request("CreateTemplate", req, cb);
+    }
+    /**
+     * 我竞价的域名-竞价详情。
+     */
+    async DescribeBiddingDetail(req, cb) {
+        return this.request("DescribeBiddingDetail", req, cb);
     }
     /**
      * 合作商用于查询预约预释放状态信息内容
@@ -226,16 +298,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReservedPreDomainInfo", req, cb);
     }
     /**
-     * 删除自定义DNS Host
+     * 我预约的域名-预约详情。
      */
-    async DeleteCustomDnsHost(req, cb) {
-        return this.request("DeleteCustomDnsHost", req, cb);
+    async DescribeBiddingAppointDetail(req, cb) {
+        return this.request("DescribeBiddingAppointDetail", req, cb);
     }
     /**
      * 本接口用于获取已验证的手机邮箱列表
      */
     async DescribePhoneEmailList(req, cb) {
         return this.request("DescribePhoneEmailList", req, cb);
+    }
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    async SendPhoneEmailCode(req, cb) {
+        return this.request("SendPhoneEmailCode", req, cb);
     }
     /**
      * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
@@ -251,16 +329,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDomainBatch", req, cb);
     }
     /**
-     * 获取域名实名信息详情
+     * 删除自定义DNS Host
      */
-    async DescribeDomainSimpleInfo(req, cb) {
-        return this.request("DescribeDomainSimpleInfo", req, cb);
+    async DeleteCustomDnsHost(req, cb) {
+        return this.request("DeleteCustomDnsHost", req, cb);
     }
     /**
-     * 此接口用于发送手机邮箱验证码。
+     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
      */
-    async SendPhoneEmailCode(req, cb) {
-        return this.request("SendPhoneEmailCode", req, cb);
+    async BatchModifyDomainInfo(req, cb) {
+        return this.request("BatchModifyDomainInfo", req, cb);
     }
     /**
      * 按照域名后缀获取对应的价格列表
@@ -273,6 +351,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBatchOperationLogs(req, cb) {
         return this.request("DescribeBatchOperationLogs", req, cb);
+    }
+    /**
+     * 我得标的域名-得标详情。
+     */
+    async DescribeBiddingSuccessfulDetail(req, cb) {
+        return this.request("DescribeBiddingSuccessfulDetail", req, cb);
     }
 }
 exports.Client = Client;

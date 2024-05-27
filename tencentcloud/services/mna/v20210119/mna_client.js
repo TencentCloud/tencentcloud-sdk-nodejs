@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetFlowStatistic", req, cb);
     }
     /**
+     * 获取指定分组，指定时间数据流量使用情况
+     */
+    async GetFlowStatisticByGroup(req, cb) {
+        return this.request("GetFlowStatisticByGroup", req, cb);
+    }
+    /**
      * 批量获取设备流量统计曲线
      */
     async GetMultiFlowStatistic(req, cb) {
@@ -80,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddHardware(req, cb) {
         return this.request("AddHardware", req, cb);
+    }
+    /**
+     * 通过指定设备的ID查找设备详细信息
+     */
+    async GetDevice(req, cb) {
+        return this.request("GetDevice", req, cb);
     }
     /**
      * 移动网络发起Qos加速过程
@@ -130,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteQos", req, cb);
     }
     /**
-     * 通过指定设备的ID查找设备详细信息
+     * 根据AppId查询用户设置的流量告警信息，包括阈值，回调url和key
      */
-    async GetDevice(req, cb) {
-        return this.request("GetDevice", req, cb);
+    async GetFlowAlarmInfo(req, cb) {
+        return this.request("GetFlowAlarmInfo", req, cb);
     }
     /**
      * 购买预付费流量包

@@ -409,7 +409,7 @@ export interface DescribePvListResponse {
      * pv列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectPvSet: Array<RumPvInfo>;
+    ProjectPvSet?: Array<RumPvInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -796,11 +796,11 @@ export interface DescribeTawAreasResponse {
     /**
      * 片区总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 片区列表
      */
-    AreaSet: Array<RumAreaInfo>;
+    AreaSet?: Array<RumAreaInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2094,7 +2094,7 @@ export interface DescribeTawAreasRequest {
      */
     AreaKeys?: Array<string>;
     /**
-     * 分页Limit
+     * 分页Limit，默认根据AreaKeys和AreaStatuses参数查询所有。
      */
     Limit?: number;
     /**
@@ -2102,7 +2102,7 @@ export interface DescribeTawAreasRequest {
      */
     AreaStatuses?: Array<number | bigint>;
     /**
-     * 分页Offset
+     * 分页Offset，默认根据AreaKeys和AreaStatuses参数查询所有。
      */
     Offset?: number;
 }
@@ -3005,7 +3005,7 @@ export interface DescribePvListRequest {
      */
     StartTime: string;
     /**
-     * 获取day：d，   获取min则不填
+     * 对PV指标的查询维度。获取day：d，   获取min则不填。
      */
     Dimension?: string;
 }

@@ -400,7 +400,7 @@ export interface UpdateProbeTaskAttributesRequest {
      */
     TaskId: string;
     /**
-     * 任务名
+     * 任务名，该参数为空时不作任何修改。
      */
     Name?: string;
 }
