@@ -434,7 +434,7 @@ export declare class Client extends AbstractClient {
      */
     CreateOpsMakePlan(req: CreateOpsMakePlanRequest, cb?: (error: string, rep: CreateOpsMakePlanResponse) => void): Promise<CreateOpsMakePlanResponse>;
     /**
-     * 任务运维-批量冻结任务
+     * 任务运维-批量暂停任务
      */
     FreezeOpsTasks(req: FreezeOpsTasksRequest, cb?: (error: string, rep: FreezeOpsTasksResponse) => void): Promise<FreezeOpsTasksResponse>;
     /**

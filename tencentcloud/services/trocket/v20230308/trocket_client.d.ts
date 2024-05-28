@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     CreateMQTTTopic(req: CreateMQTTTopicRequest, cb?: (error: string, rep: CreateMQTTTopicResponse) => void): Promise<CreateMQTTTopicResponse>;
     /**
-     * 购买新实例
+     * 创建 RocketMQ 5.x 集群
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
     /**

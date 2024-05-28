@@ -204,7 +204,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMQTTTopic", req, cb);
     }
     /**
-     * 购买新实例
+     * 创建 RocketMQ 5.x 集群
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);

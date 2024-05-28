@@ -1770,11 +1770,11 @@ export interface StartStreamIngestRequest {
    */
   PrivateMapKey?: string
   /**
-   * 视频编码参数。可选，如果不填，保持原始流的参数。
+   * 【本字段已废弃】视频编码参数。可选，如果不填，保持原始流的参数。
    */
   VideoEncodeParams?: VideoEncodeParams
   /**
-   * 音频编码参数。可选，如果不填，保持原始流的参数。
+   * 【本字段已废弃】音频编码参数。可选，如果不填，保持原始流的参数。
    */
   AudioEncodeParams?: AudioEncodeParams
   /**

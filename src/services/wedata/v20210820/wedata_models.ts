@@ -876,6 +876,10 @@ export interface FreezeOpsTasksRequest {
    * 任务操作是否消息通知下游任务责任人
    */
   OperateIsInform: boolean
+  /**
+   * 是否终止已生成的实例
+   */
+  KillInstance?: boolean
 }
 
 /**
@@ -2406,6 +2410,16 @@ export interface InstanceOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryAttempts?: number
+  /**
+   * 紧急去除的依赖父实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeletedFatherList?: Array<string>
+  /**
+   * 循环依赖关联的实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CirculateInstanceList?: Array<InstanceOpsDto>
 }
 
 /**
@@ -5200,6 +5214,10 @@ export interface BatchStopWorkflowsByIdsRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 是否终止已生成的实例
+   */
+  KillInstance?: boolean
 }
 
 /**
@@ -6449,19 +6467,24 @@ export interface OpsTaskLinkInfoDto {
   /**
    * 下游任务id
    */
-  TaskTo: string
+  TaskTo?: string
   /**
    * 上游任务id
    */
-  TaskFrom: string
+  TaskFrom?: string
   /**
    * 依赖边类型 1、“real_real”表示任务->任务；2、"virtual_real" 跨工作流任务->任务
    */
-  LinkType: string
+  LinkType?: string
   /**
    * 依赖边id
    */
-  LinkId: string
+  LinkId?: string
+  /**
+   * 为了区分新增的循环依赖新增的类型。默认是normal，循环依赖则是circulate
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LinkStyle?: string
 }
 
 /**
@@ -8384,6 +8407,10 @@ export interface BatchStopOpsTasksRequest {
    * 项目Id
    */
   ProjectId: string
+  /**
+   * 是否终止已生成的实例
+   */
+  KillInstance?: boolean
 }
 
 /**
@@ -10278,6 +10305,10 @@ export interface FreezeTasksByWorkflowIdsRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 是否终止已生成的实例
+   */
+  KillInstance?: boolean
 }
 
 /**
@@ -10751,11 +10782,16 @@ export interface OpsTaskCanvasInfoList {
   /**
    * 画布任务信息
    */
-  TasksList: Array<OpsTaskCanvasDto>
+  TasksList?: Array<OpsTaskCanvasDto>
   /**
    * 画布任务链接信息
    */
-  LinksList: Array<OpsTaskLinkInfoDto>
+  LinksList?: Array<OpsTaskLinkInfoDto>
+  /**
+   * 画布循环依赖任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CirculateTaskList?: OpsTaskCanvasDto
 }
 
 /**
@@ -13340,6 +13376,11 @@ export interface DatasourceBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamsString?: string
+  /**
+   * 区分数据源类型自定义源还是系统源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category?: string
 }
 
 /**
@@ -14456,6 +14497,14 @@ export interface DescribeOperateOpsTasksRequest {
    * 查询关键字
    */
   KeyWord?: string
+  /**
+   * 实例生成方式
+   */
+  InitStrategy?: string
+  /**
+   * 额外请求的资源类型
+   */
+  RequestResourceTypes?: Array<string>
 }
 
 /**
@@ -19148,6 +19197,10 @@ export interface CreateHiveTableByDDLRequest {
    * 责任人
    */
   Incharge?: string
+  /**
+   * schema名称
+   */
+  SchemaName?: string
 }
 
 /**

@@ -99,6 +99,7 @@ import {
   CreateAssetSyncJobRequest,
   Group,
   DescribeAssetSyncStatusRequest,
+  Clb,
   ResetDeviceAccountPrivateKeyResponse,
   DeleteUsersRequest,
   DeleteDeviceAccountsRequest,

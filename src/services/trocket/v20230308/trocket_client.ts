@@ -434,7 +434,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买新实例
+   * 创建 RocketMQ 5.x 集群
    */
   async CreateInstance(
     req: CreateInstanceRequest,

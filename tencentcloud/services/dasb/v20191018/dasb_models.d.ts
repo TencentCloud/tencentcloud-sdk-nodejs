@@ -1732,7 +1732,12 @@ export interface DescribeResourcesResponse {
     /**
      * 堡垒机资源列表
      */
-    ResourceSet: Array<Resource>;
+    ResourceSet?: Array<Resource>;
+    /**
+     * 堡垒机资源数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2098,6 +2103,16 @@ export interface DescribeAssetSyncStatusRequest {
      * 查询的资产同步类型。1 -主机资产， 2 - 数据库资产
      */
     Category: number;
+}
+/**
+ * 负载均衡
+ */
+export interface Clb {
+    /**
+     * 负载均衡IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClbIp?: string;
 }
 /**
  * ResetDeviceAccountPrivateKey返回参数结构体
@@ -3048,6 +3063,14 @@ export interface DescribeResourcesRequest {
      * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
      */
     ResourceIds?: Array<string>;
+    /**
+     * 每页条目数量
+     */
+    Limit?: number;
+    /**
+     * 分页偏移位置
+     */
+    Offset?: number;
 }
 /**
  * DeleteDeviceGroups请求参数结构体
@@ -3290,6 +3313,11 @@ export interface Resource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LogDeliveryArgs?: string;
+    /**
+     * 堡垒机资源LB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClbSet?: Array<Clb>;
 }
 /**
  * RunChangePwdTask返回参数结构体

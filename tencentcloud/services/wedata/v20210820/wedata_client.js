@@ -666,7 +666,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOpsMakePlan", req, cb);
     }
     /**
-     * 任务运维-批量冻结任务
+     * 任务运维-批量暂停任务
      */
     async FreezeOpsTasks(req, cb) {
         return this.request("FreezeOpsTasks", req, cb);

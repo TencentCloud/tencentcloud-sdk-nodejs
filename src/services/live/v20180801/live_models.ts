@@ -5133,6 +5133,10 @@ PullVodPushLive -点播。
    * 新的目标地址，用于任务同时推两路场景。
    */
   BackupToUrl?: string
+  /**
+   * 直播转码模板，使用云直播的转码功能进行转码后再转推出去。转码模板需在云直播控制台创建。
+   */
+  TranscodeTemplateName?: string
 }
 
 /**
@@ -7438,6 +7442,11 @@ PullVodPushLive -点播。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupToUrl?: string
+  /**
+   * 直播转码模板。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranscodeTemplateName?: string
 }
 
 /**

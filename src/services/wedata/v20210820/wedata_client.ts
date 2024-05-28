@@ -1759,7 +1759,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 任务运维-批量冻结任务
+   * 任务运维-批量暂停任务
    */
   async FreezeOpsTasks(
     req: FreezeOpsTasksRequest,

@@ -218,7 +218,7 @@ export interface DescribeFirewallTemplateRulesRequest {
  */
 export interface AttachCcnRequest {
   /**
-   * 云联网实例ID。
+   * 云联网实例ID。可通过[DescribeCcnAttachedInstances](https://cloud.tencent.com/document/product/1207/58797)接口返回值中的CcnId获取。
    */
   CcnId: string
 }
@@ -604,7 +604,7 @@ export interface RestartDockerContainersRequest {
  */
 export interface DeleteKeyPairsRequest {
   /**
-   * 密钥对 ID 列表，每次请求批量密钥对的上限为 10。
+   * 密钥对 ID 列表，每次请求批量密钥对的上限为 10。可通过[DescribeKeyPairs](https://cloud.tencent.com/document/api/1207/55540)接口返回值中的KeyId获取。
    */
   KeyIds: Array<string>
 }
@@ -978,7 +978,7 @@ export interface CreateDisksRequest {
  */
 export interface AssociateInstancesKeyPairsRequest {
   /**
-   * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
+   * 密钥对 ID 列表，每次请求批量密钥对的上限为 100。可通过[DescribeKeyPairs](https://cloud.tencent.com/document/api/1207/55540)接口返回值中的KeyId获取。
    */
   KeyIds: Array<string>
   /**
@@ -1841,11 +1841,11 @@ export interface DescribeKeyPairsResponse {
   /**
    * 符合条件的密钥对数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 密钥对详细信息列表。
    */
-  KeyPairSet: Array<KeyPair>
+  KeyPairSet?: Array<KeyPair>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2095,7 +2095,7 @@ export interface StartDockerContainersResponse {
  */
 export interface DisassociateInstancesKeyPairsRequest {
   /**
-   * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
+   * 密钥对 ID 列表，每次请求批量密钥对的上限为 100。可通过[DescribeKeyPairs](https://cloud.tencent.com/document/api/1207/55540)接口返回值中的KeyId获取。
    */
   KeyIds: Array<string>
   /**
@@ -2520,7 +2520,7 @@ export interface DescribeBlueprintsResponse {
  */
 export interface DescribeKeyPairsRequest {
   /**
-   * 密钥对 ID 列表。
+   * 密钥对 ID 列表，每次请求批量密钥对的上限为 100。
    */
   KeyIds?: Array<string>
   /**
@@ -3418,7 +3418,7 @@ export interface DiskPrice {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceIds?: Array<string>
   /**
@@ -4475,11 +4475,11 @@ export interface InternetAccessible {
  */
 export interface ReplaceFirewallTemplateRuleRequest {
   /**
-   * 防火墙模板ID。
+   * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 的返回值 TemplateSet 获取。
    */
   TemplateId: string
   /**
-   * 防火墙模板规则ID。
+   * 防火墙模板规则ID。可通过 [DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875) 的返回值 TemplateRuleSet 获取。
    */
   TemplateRuleId: string
   /**
