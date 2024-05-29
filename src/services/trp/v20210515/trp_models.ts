@@ -253,67 +253,67 @@ export interface ScanLog {
   /**
    * 行ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 微信openid
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Openid: string
+  Openid?: string
   /**
    * 微信昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nickname: string
+  Nickname?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Code: string
+  Code?: string
   /**
    * 企业ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 商户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 商品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * ip地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip: string
+  Ip?: string
   /**
    * 国家
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Country: string
+  Country?: string
   /**
    * 省份
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Province: string
+  Province?: string
   /**
    * 城市
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  City: string
+  City?: string
   /**
    * 县/区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  District: string
+  District?: string
   /**
    * 微信 unionid
 注意：此字段可能返回 null，表示取不到有效值。
@@ -343,6 +343,21 @@ export interface ScanLog {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
+  /**
+   * 产品Logo
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductLogo?: string
+  /**
+   * 风险状态
+0: 未知, 1:通过, 2:失败/风险, 3:存疑
+   */
+  Status?: number
+  /**
+   * 是否开启验证
+0:否, 1:是
+   */
+  Verify?: number
 }
 
 /**
@@ -619,6 +634,31 @@ export interface CodePack {
 0:否, 1:是
    */
   RelateType?: number
+  /**
+   * 场景码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SceneCode?: number
+  /**
+   * 码规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeRule?: string
+  /**
+   * 已使用码数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedAmount?: number
+  /**
+   * 开始流水号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialStart?: number
+  /**
+   * 结束流水号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialEnd?: number
 }
 
 /**
@@ -1358,11 +1398,16 @@ export interface Job {
   /**
    * 调度ID
    */
-  JobId: number
+  JobId?: number
   /**
    * 执行状态 init:初始化, pending: 执行中, done: 执行成功, error: 执行失败
    */
-  Status: string
+  Status?: string
+  /**
+   * 任务错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -1478,6 +1523,16 @@ export interface PackSpec {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeParts?: Array<CodePart>
+  /**
+   * 包装单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit?: string
+  /**
+   * 场景值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SceneCode?: number
 }
 
 /**
@@ -1642,6 +1697,10 @@ export interface CreateCodePackRequest {
    * 层级码时是否提前生成关联关系，默认为 1
    */
   RelateType?: number
+  /**
+   * 场景值
+   */
+  SceneCode?: number
 }
 
 /**
@@ -1796,6 +1855,10 @@ export interface CreateCustomPackRequest {
 默认为1，仅对层级码有效
    */
   RelateType?: number
+  /**
+   * 场景值
+   */
+  SceneCode?: number
 }
 
 /**
@@ -2655,12 +2718,12 @@ export interface DescribeTraceCodesResponse {
    * 标识列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TraceCodes: Array<TraceCode>
+  TraceCodes?: Array<TraceCode>
   /**
    * 条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3030,47 +3093,47 @@ export interface TraceCode {
   /**
    * 二维码
    */
-  Code: string
+  Code?: string
   /**
    * 企业ID
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 码包ID
    */
-  PackId: string
+  PackId?: string
   /**
    * 批次ID
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 所属商户ID
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 产品ID
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 码状态 0: 冻结 1: 激活
    */
-  Status: number
+  Status?: number
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 商户名称
    */
-  MerchantName: string
+  MerchantName?: string
   /**
    * 产品名称
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 渠道商ID
    */
@@ -3079,6 +3142,21 @@ export interface TraceCode {
    * 码层级 0: 最小级, 1: 一级, 2: 二级
    */
   Level?: number
+  /**
+   * 码层级详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackSpec?: Array<PackSpec>
+  /**
+   * 场景码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SceneCode?: number
+  /**
+   * 流水码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialCode?: number
 }
 
 /**
@@ -3330,6 +3408,14 @@ export interface DescribeCodePacksRequest {
    * 资源ID ResType是 batch 时对应是批次ID, 是 order_in, order_out时，则是订单ID
    */
   ResId?: string
+  /**
+   * 应用场景
+   */
+  SceneCode?: number
+  /**
+   * 码包状态
+   */
+  Status?: string
 }
 
 /**

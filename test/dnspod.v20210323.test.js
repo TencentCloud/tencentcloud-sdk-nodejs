@@ -18,6 +18,16 @@ const client = new tencentcloud.dnspod.v20210323.Client({
 })
 describe("dnspod.v20210323.test.js", function () {
 
+it("dnspod.v20210323.ModifyDomainToGroup", async function () {
+    try {
+       const data = await client.ModifyDomainToGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeRecordList", async function () {
     try {
        const data = await client.DescribeRecordList({})

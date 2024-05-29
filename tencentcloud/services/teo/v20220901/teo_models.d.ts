@@ -1584,16 +1584,16 @@ export interface Sv {
  */
 export interface Rule {
     /**
-     * 执行的功能。
-     */
-    Actions: Array<Action>;
-    /**
      * 执行功能判断条件。
   注意：满足该数组内任意一项条件，功能即可执行。
      */
     Conditions: Array<RuleAndConditions>;
     /**
-     * 嵌套规则。
+     * 执行的功能。注意：Actions 和 SubRules 不可都为空
+     */
+    Actions?: Array<Action>;
+    /**
+     * 嵌套规则。注意：SubRules 和 Actions 不可都为空
      */
     SubRules?: Array<SubRuleItem>;
 }

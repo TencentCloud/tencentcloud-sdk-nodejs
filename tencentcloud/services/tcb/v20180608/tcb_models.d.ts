@@ -3632,6 +3632,10 @@ export interface DescribeWxGatewaysRequest {
      */
     EnvId: string;
     /**
+     * 网关ID
+     */
+    GatewayId?: string;
+    /**
      * 服务名称，精确匹配
      */
     GatewayName?: string;
@@ -4353,12 +4357,12 @@ export interface DescribeWxGatewaysResponse {
      * 返回的服务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Gateways: Array<GatewayItem>;
+    Gateways?: Array<GatewayItem>;
     /**
      * 网关总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5890,102 +5894,132 @@ export interface GatewayItem {
     /**
      * 用户uin
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 用户appid
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
+    /**
+     * WxAppId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WxAppId?: string;
     /**
      * 环境id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * Gateway唯一id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayId: string;
+    GatewayId?: string;
     /**
      * Gateway名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayName: string;
+    GatewayName?: string;
     /**
      * Gateway类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayType: string;
+    GatewayType?: string;
     /**
      * Gateway描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayDesc: string;
+    GatewayDesc?: string;
     /**
      * 套餐版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageVersion: string;
+    PackageVersion?: string;
     /**
      * 套餐唯一id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageId: number;
+    PackageId?: number;
     /**
      * vpc唯一id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetIds: Array<string>;
+    SubnetIds?: Array<string>;
     /**
      * 网关状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * l5地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    L5Addr: string;
+    L5Addr?: string;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
+    /**
+     * 是否可以续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CanRenew?: boolean;
+    /**
+     * 自动续费标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRenewFlag?: number;
     /**
      * 隔离时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateTime: string;
+    IsolateTime?: string;
     /**
      * 到期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 变更时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
+    /**
+     * 是否可以降配
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CanDowngrade?: boolean;
     /**
      * 允许未登录访问
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AllowUncertified: number;
+    AllowUncertified?: number;
     /**
      * 网关版本限额
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionNumLimit?: number;
+    /**
+     * Donut接入ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LongAccessId?: string;
+    /**
+     * Donut接入域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessDomain?: string;
 }
 /**
  * 扩展文件信息

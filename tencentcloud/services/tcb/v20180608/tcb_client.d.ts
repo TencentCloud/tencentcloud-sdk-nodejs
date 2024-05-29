@@ -193,7 +193,6 @@ export declare class Client extends AbstractClient {
     ModifyDatabaseACL(req: ModifyDatabaseACLRequest, cb?: (error: string, rep: ModifyDatabaseACLResponse) => void): Promise<ModifyDatabaseACLResponse>;
     /**
      * 查看安全网关
-
      */
     DescribeWxGateways(req: DescribeWxGatewaysRequest, cb?: (error: string, rep: DescribeWxGatewaysResponse) => void): Promise<DescribeWxGatewaysResponse>;
     /**

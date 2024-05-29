@@ -731,9 +731,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查看安全网关
-
-     */
+   * 查看安全网关
+   */
   async DescribeWxGateways(
     req: DescribeWxGatewaysRequest,
     cb?: (error: string, rep: DescribeWxGatewaysResponse) => void

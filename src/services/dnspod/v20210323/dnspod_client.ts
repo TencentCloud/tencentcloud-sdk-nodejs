@@ -22,7 +22,7 @@ import {
   DescribeRecordFilterListResponse,
   DownloadSnapshotRequest,
   DescribeBatchTaskDetail,
-  ModifyVasAutoRenewStatusResponse,
+  ModifyDomainToGroupRequest,
   RollbackSnapshotRequest,
   DeleteDomainAliasResponse,
   DescribeVASStatisticRequest,
@@ -82,6 +82,7 @@ import {
   DescribeRecordLineListRequest,
   DescribeRecordListResponse,
   CreateRecordBatchRequest,
+  ModifyDomainToGroupResponse,
   DeleteDomainAliasRequest,
   DomainAliasInfo,
   CreateDealRequest,
@@ -153,6 +154,7 @@ import {
   PayOrderWithBalanceRequest,
   DescribePackageDetailRequest,
   DescribeRecordFilterListRequest,
+  ModifyVasAutoRenewStatusResponse,
   ModifyRecordFieldsRequest,
   DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
@@ -220,6 +222,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dnspod.tencentcloudapi.com", "2021-03-23", clientConfig)
+  }
+
+  /**
+   * 修改域名所属分组
+   */
+  async ModifyDomainToGroup(
+    req: ModifyDomainToGroupRequest,
+    cb?: (error: string, rep: ModifyDomainToGroupResponse) => void
+  ): Promise<ModifyDomainToGroupResponse> {
+    return this.request("ModifyDomainToGroup", req, cb)
   }
 
   /**

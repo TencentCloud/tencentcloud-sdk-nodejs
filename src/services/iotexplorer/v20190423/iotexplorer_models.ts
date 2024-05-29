@@ -1832,7 +1832,7 @@ export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
    */
   FileURL?: string
   /**
-   * 过期时间 UNIX 时间戳
+   * 过期时间 UNIX 时间戳（最大不超过文件所属任务的过期时间）
    */
   ExpireTime?: number
   /**
@@ -6284,7 +6284,7 @@ export interface GenerateCloudStorageAIServiceTaskFileURLRequest {
    */
   FileName: string
   /**
-   * 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后）
+   * 过期时间 UNIX 时间戳（默认值为当前时间 1 小时后，最大不超过文件所属任务的过期时间）
    */
   ExpireTime?: number
 }

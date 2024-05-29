@@ -973,7 +973,8 @@ export interface CancelShareBlueprintAcrossAccountsResponse {
  */
 export interface DescribeSnapshotsRequest {
     /**
-     * 要查询快照的 ID 列表。
+     * 要查询快照的 ID 列表。每次请求批量快照的上限为 100。
+  可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId		获取。
   参数不支持同时指定 SnapshotIds 和 Filters。
      */
     SnapshotIds?: Array<string>;
@@ -982,15 +983,22 @@ export interface DescribeSnapshotsRequest {
   <li>snapshot-id</li>按照【快照 ID】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/54388">DescribeSnapshots</a> 接口返回值中的 SnapshotId 获取。
+  
   <li>disk-id</li>按照【磁盘 ID】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/66093">DescribeDisks</a> 接口返回值中的 DiskId 获取。
+  
   <li>snapshot-name</li>按照【快照名称】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/54388">DescribeSnapshots</a> 接口返回值中的 SnapshotName 获取。
   <li>instance-id</li>按照【实例 ID 】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
+  
   每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。
      */
     Filters?: Array<Filter>;
@@ -1510,7 +1518,8 @@ export interface FirewallTemplateApplyRecordDetail {
  */
 export interface DescribeInstancesDiskNumRequest {
     /**
-     * 实例ID列表。
+     * 实例ID列表。每次请求批量实例的上限为 100。
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
      */
     InstanceIds: Array<string>;
 }
@@ -2204,7 +2213,7 @@ export interface StopDockerContainersRequest {
  */
 export interface DescribeModifyInstanceBundlesRequest {
     /**
-     * 实例 ID。
+     * 实例 ID。可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
@@ -2212,6 +2221,7 @@ export interface DescribeModifyInstanceBundlesRequest {
   <li>bundle-id</li>按照【套餐 ID】进行过滤。
   类型：String
   必选：否
+  可通过<a href="https://cloud.tencent.com/document/product/1207/47575"> DescribeBundles </a>接口返回值中的 BundleId 获取。
   <li>support-platform-type</li>按照【系统类型】进行过滤。
   取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
   类型：String
@@ -2260,11 +2270,11 @@ export interface DescribeInstancesDiskNumResponse {
     /**
      * 挂载信息列表
      */
-    AttachDetailSet: Array<AttachDetail>;
+    AttachDetailSet?: Array<AttachDetail>;
     /**
      * 挂载信息数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2288,11 +2298,11 @@ export interface InquirePriceCreateBlueprintResponse {
  */
 export interface ResetFirewallTemplateRulesRequest {
     /**
-     * 模板ID。
+     * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId	获取。
      */
     TemplateId: string;
     /**
-     * 重置后的防火墙模板规则列表。
+     * 重置后的防火墙模板规则列表。每次请求批量防火墙规则的上限为 100。
      */
     TemplateRules: Array<FirewallRule>;
 }
@@ -3182,7 +3192,7 @@ export interface StopInstancesResponse {
  */
 export interface ResetInstancesPasswordRequest {
     /**
-     * 实例 ID 列表。每次请求批量实例的上限为 100。
+     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
      */
     InstanceIds: Array<string>;
     /**
@@ -3385,11 +3395,11 @@ export interface DescribeSnapshotsResponse {
     /**
      * 快照的数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 快照的详情列表。
      */
-    SnapshotSet: Array<Snapshot>;
+    SnapshotSet?: Array<Snapshot>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4051,11 +4061,11 @@ export interface ModifyInstancesRenewFlagResponse {
  */
 export interface ApplyInstanceSnapshotRequest {
     /**
-     * 实例 ID。
+     * 实例 ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/product/1207/47573) 接口返回值中的 InstanceId	获取。
      */
     InstanceId: string;
     /**
-     * 快照 ID。
+     * 快照 ID。可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/1207/54388) 接口返回值中的 SnapshotId		获取。
      */
     SnapshotId: string;
 }
@@ -4229,11 +4239,11 @@ export interface InternetAccessible {
  */
 export interface ReplaceFirewallTemplateRuleRequest {
     /**
-     * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 的返回值 TemplateSet 获取。
+     * 防火墙模板ID。可通过 [DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874) 接口返回值中的 TemplateId 获取。
      */
     TemplateId: string;
     /**
-     * 防火墙模板规则ID。可通过 [DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875) 的返回值 TemplateRuleSet 获取。
+     * 防火墙模板规则ID。可通过 [DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875) 接口返回值中的 TemplateRuleId 获取。
      */
     TemplateRuleId: string;
     /**
@@ -4865,11 +4875,11 @@ export interface DescribeModifyInstanceBundlesResponse {
     /**
      * 符合条件的套餐数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 变更套餐详细信息。
      */
-    ModifyBundleSet: Array<ModifyBundle>;
+    ModifyBundleSet?: Array<ModifyBundle>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4906,7 +4916,7 @@ export interface ModifyDisksAttributeResponse {
  */
 export interface CreateInstanceSnapshotRequest {
     /**
-     * 需要创建快照的实例 ID。
+     * 需要创建快照的实例 ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/product/1207/47573) 接口返回值中的 InstanceId	获取。
      */
     InstanceId: string;
     /**

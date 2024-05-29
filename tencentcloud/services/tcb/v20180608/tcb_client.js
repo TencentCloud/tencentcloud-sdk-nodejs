@@ -303,7 +303,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查看安全网关
-
      */
     async DescribeWxGateways(req, cb) {
         return this.request("DescribeWxGateways", req, cb);

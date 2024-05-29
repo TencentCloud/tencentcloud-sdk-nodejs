@@ -1227,6 +1227,11 @@ re=正则匹配
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HierarchicalValue?: AlarmHierarchicalValue
+  /**
+   * 是否延迟指标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatenessMetric?: number
 }
 
 /**
@@ -4092,51 +4097,51 @@ export interface Metric {
   /**
    * 告警策略类型
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 指标名
    */
-  MetricName: string
+  MetricName?: string
   /**
    * 指标展示名
    */
-  Description: string
+  Description?: string
   /**
    * 最小值
    */
-  Min: number
+  Min?: number
   /**
    * 最大值
    */
-  Max: number
+  Max?: number
   /**
    * 维度列表
    */
-  Dimensions: Array<string>
+  Dimensions?: Array<string>
   /**
    * 单位
    */
-  Unit: string
+  Unit?: string
   /**
    * 指标配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricConfig: MetricConfig
+  MetricConfig?: MetricConfig
   /**
    * 是否为高级指标。1是 0否
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAdvanced: number
+  IsAdvanced?: number
   /**
    * 高级指标是否开通。1是 0否
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsOpen: number
+  IsOpen?: number
   /**
    * 集成中心产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: number
+  ProductId?: number
   /**
    * 匹配运算符
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4147,6 +4152,11 @@ export interface Metric {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Periods?: Array<number | bigint>
+  /**
+   * 是否延迟指标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatenessMetric?: number
 }
 
 /**

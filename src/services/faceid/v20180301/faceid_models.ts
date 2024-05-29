@@ -745,8 +745,9 @@ export interface EncryptedPhoneVerificationRequest {
    * 敏感信息的加密方式，目前支持明文、MD5和SHA256加密传输，参数取值：
 
 0：明文，不加密
-1:   使用MD5加密
-2:   使用SHA256
+1：使用MD5加密
+2：使用SHA256
+3：使用SM3加密
    */
   EncryptionMode: string
 }
@@ -767,16 +768,16 @@ export interface EncryptedPhoneVerificationResponse {
 -9: 没有记录
 -11: 验证中心服务繁忙
    */
-  Result: string
+  Result?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 运营商名称。
 取值范围为["移动","联通","电信",""]
    */
-  ISP: string
+  ISP?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

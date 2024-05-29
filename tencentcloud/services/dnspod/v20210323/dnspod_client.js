@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("dnspod.tencentcloudapi.com", "2021-03-23", clientConfig);
     }
     /**
+     * 修改域名所属分组
+     */
+    async ModifyDomainToGroup(req, cb) {
+        return this.request("ModifyDomainToGroup", req, cb);
+    }
+    /**
      * 获取某个域名下的解析记录列表
 备注：
 1. 新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试

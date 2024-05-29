@@ -155,13 +155,21 @@ export interface DescribeBatchTaskDetail {
 }
 
 /**
- * ModifyVasAutoRenewStatus返回参数结构体
+ * ModifyDomainToGroup请求参数结构体
  */
-export interface ModifyVasAutoRenewStatusResponse {
+export interface ModifyDomainToGroupRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain: string
+  /**
+   * 域名分组ID
+   */
+  GroupId: number
+  /**
+   * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+   */
+  DomainId?: number
 }
 
 /**
@@ -1526,6 +1534,16 @@ export interface CreateRecordBatchRequest {
    * 记录数组
    */
   RecordList: Array<AddRecordBatch>
+}
+
+/**
+ * ModifyDomainToGroup返回参数结构体
+ */
+export interface ModifyDomainToGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3308,6 +3326,16 @@ DISABLE：暂停
    * 项目ID
    */
   ProjectId?: number
+}
+
+/**
+ * ModifyVasAutoRenewStatus返回参数结构体
+ */
+export interface ModifyVasAutoRenewStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
