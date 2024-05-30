@@ -4941,31 +4941,31 @@ export interface DescribeDefenseSwitchResponse {
   /**
    * 基础防御开关
    */
-  BasicRuleSwitch: number
+  BasicRuleSwitch?: number
   /**
    * 安全基线开关
    */
-  BaselineAllSwitch: number
+  BaselineAllSwitch?: number
   /**
    * 威胁情报开关
    */
-  TiSwitch: number
+  TiSwitch?: number
   /**
    * 虚拟补丁开关
    */
-  VirtualPatchSwitch: number
+  VirtualPatchSwitch?: number
   /**
    * 是否历史开启
    */
-  HistoryOpen: number
+  HistoryOpen?: number
   /**
    * 状态值，0：查询成功，非0：查询失败
    */
-  ReturnCode: number
+  ReturnCode?: number
   /**
    * 状态信息，success：查询成功，fail：查询失败
    */
-  ReturnMsg: string
+  ReturnMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

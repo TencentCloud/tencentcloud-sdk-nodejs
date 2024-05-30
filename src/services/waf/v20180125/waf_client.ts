@@ -75,6 +75,7 @@ import {
   StrategyForAntiInfoLeak,
   AddSpartaProtectionResponse,
   DescribeUserDomainInfoRequest,
+  HybridPkg,
   IpAccessControlData,
   DescribeHostResponse,
   ModifyWafAutoDenyRulesResponse,
@@ -86,6 +87,7 @@ import {
   DescribeHostRequest,
   AccessFullTextInfo,
   DeleteCustomRuleRequest,
+  JobDateTime,
   DescribeHostsRequest,
   ModifyCustomWhiteRuleStatusRequest,
   ClbWafRegionItem,
@@ -93,7 +95,7 @@ import {
   ModifyInstanceElasticModeResponse,
   TargetEntity,
   CCRuleItem,
-  HybridPkg,
+  DescribeDomainCountInfoRequest,
   DescribeCustomWhiteRuleResponse,
   ModifySpartaProtectionRequest,
   DeleteAttackDownloadRecordRequest,
@@ -123,6 +125,7 @@ import {
   DomainInfo,
   DescribeDomainsResponse,
   AddAntiFakeUrlResponse,
+  SearchAttackLogResponse,
   ModifySpartaProtectionResponse,
   DescribeUserCdcClbWafRegionsResponse,
   SwitchElasticModeResponse,
@@ -150,7 +153,6 @@ import {
   DescribeTlsVersionRequest,
   DealData,
   DescribeDomainDetailsSaasRequest,
-  DescribeDomainCountInfoRequest,
   CreateDealsGoodsDetail,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
@@ -241,10 +243,12 @@ import {
   CacheUrlItem,
   DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
+  TimedJob,
   DomainPackageNew,
   ModifyDomainsCLSStatusResponse,
   ModifyBotStatusResponse,
   ModifyCustomRuleStatusResponse,
+  DomainRuleId,
   PortItem,
   ModifyHostStatusResponse,
   ModifyCustomRuleStatusRequest,
@@ -296,7 +300,7 @@ import {
   ModifyDomainPostActionRequest,
   BotPkg,
   UpsertCCAutoStatusRequest,
-  SearchAttackLogResponse,
+  DescribeWafAutoDenyRulesResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
   WebshellStatus,
@@ -324,6 +328,7 @@ import {
   AddAttackWhiteRuleResponse,
   ImportIpAccessControlResponse,
   DescribeWafThreatenIntelligenceResponse,
+  CronJob,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AddSpartaProtectionRequest,
@@ -353,7 +358,6 @@ import {
   TLSCiphers,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
-  DescribeWafAutoDenyRulesResponse,
   DeleteCCRuleRequest,
   DescribeAttackTypeResponse,
   DescribeCCRuleResponse,
@@ -381,6 +385,7 @@ import {
   ClbDomainsInfo,
   DescribeObjectsResponse,
   SearchAccessLogRequest,
+  MiniExtendPkg,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
   AccessRuleKeyValueInfo,
@@ -468,7 +473,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf IP黑白名单Delete接口
+   * Waf IP黑白名单Delete接口（建议使用DeleteIpAccessControlV2来替换当前接口）
    */
   async DeleteIpAccessControl(
     req: DeleteIpAccessControlRequest,
@@ -791,7 +796,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf IP黑白名单Upsert接口
+   * Waf IP黑白名单Upsert接口（建议使用CreateIpAccessControl、ModifyIpAccessControl来替换当前接口）
    */
   async UpsertIpAccessControl(
     req: UpsertIpAccessControlRequest,

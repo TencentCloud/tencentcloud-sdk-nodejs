@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddCustomWhiteRule", req, cb);
     }
     /**
-     * Waf IP黑白名单Delete接口
+     * Waf IP黑白名单Delete接口（建议使用DeleteIpAccessControlV2来替换当前接口）
      */
     async DeleteIpAccessControl(req, cb) {
         return this.request("DeleteIpAccessControl", req, cb);
@@ -265,7 +265,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModuleStatus", req, cb);
     }
     /**
-     * Waf IP黑白名单Upsert接口
+     * Waf IP黑白名单Upsert接口（建议使用CreateIpAccessControl、ModifyIpAccessControl来替换当前接口）
      */
     async UpsertIpAccessControl(req, cb) {
         return this.request("UpsertIpAccessControl", req, cb);

@@ -4166,6 +4166,10 @@ export interface CreateAssetImageScanSettingRequest {
 02:00 时分
    */
   ScanEndTime?: string
+  /**
+   * 排除扫描的镜像
+   */
+  ExcludeImages?: Array<string>
 }
 
 /**
@@ -6531,6 +6535,11 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
    * 命名空间
    */
   Namespace?: Array<string>
+  /**
+   * 排除的镜像资产id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcludeImageAssetIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10735,6 +10744,10 @@ export interface UpdateImageRegistryTimingScanTaskRequest {
    * 命名空间
    */
   Namespace?: Array<string>
+  /**
+   * 排除的镜像资产id
+   */
+  ExcludeImageAssetIds?: Array<number | bigint>
 }
 
 /**
@@ -18619,6 +18632,11 @@ export interface DescribeAssetImageScanSettingResponse {
    * 扫描结束时间 02:00 时分
    */
   ScanEndTime?: string
+  /**
+   * 排除的扫描镜像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcludeImages?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -222,7 +222,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeApp(req: DescribeAppRequest, cb?: (error: string, rep: DescribeAppResponse) => void): Promise<DescribeAppResponse>;
     /**
-     * 创建只是引擎应用，包括：知识管理应用、知识摘要应用、标签提取应用。
+     * 创建知识引擎应用。
      */
     CreateApp(req: CreateAppRequest, cb?: (error: string, rep: CreateAppResponse) => void): Promise<CreateAppResponse>;
     /**

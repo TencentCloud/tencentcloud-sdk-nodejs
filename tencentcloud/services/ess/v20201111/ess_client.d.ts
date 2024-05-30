@@ -520,6 +520,9 @@ export declare class Client extends AbstractClient {
 HttpProfile httpProfile = new HttpProfile();
 httpProfile.setEndpoint("file.test.ess.tencent.cn");
 ```
+
+<font color="red">相关视频指引</font> <br>
+1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/ess_uploadfiles.mp4" target="_blank">上传用于合同发起的PDF文件代码编写示例</a><br>
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
     /**

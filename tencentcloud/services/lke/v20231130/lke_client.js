@@ -348,7 +348,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApp", req, cb);
     }
     /**
-     * 创建只是引擎应用，包括：知识管理应用、知识摘要应用、标签提取应用。
+     * 创建知识引擎应用。
      */
     async CreateApp(req, cb) {
         return this.request("CreateApp", req, cb);

@@ -2132,7 +2132,7 @@ export interface RetryDocAuditRequest {
  */
 export interface SaveDocRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2144,7 +2144,7 @@ export interface SaveDocRequest {
    */
   FileType: string
   /**
-   * cos路径
+   * 平台cos路径，与DescribeStorageCredential接口查询UploadPath参数保持一致
    */
   CosUrl: string
   /**
@@ -3873,11 +3873,11 @@ export interface BaseConfig {
    */
   Name: string
   /**
-   * 机器人头像
+   * 应用头像
    */
   Avatar: string
   /**
-   * 机器人描述
+   * 应用描述
    */
   Desc?: string
 }

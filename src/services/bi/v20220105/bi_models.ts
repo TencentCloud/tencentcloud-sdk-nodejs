@@ -1468,6 +1468,11 @@ export interface UserRoleListDataUserRoleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InValidateAppRange?: boolean
+  /**
+   * 用户openid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppOpenUserId?: string
 }
 
 /**
@@ -2285,6 +2290,16 @@ export interface UserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AreaCode?: string
+  /**
+   * 企微账号id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppUserId?: string
+  /**
+   * 企微账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppUserName?: string
 }
 
 /**

@@ -87,6 +87,7 @@ import {
   ResourceRef,
   DescribeSystemResourcesResponse,
   ClazzLevel,
+  SubEks,
   WorkSpaceClusterItem,
   CheckSavepointRequest,
   DeleteJobConfigsRequest,

@@ -217,33 +217,38 @@ export interface DescribeAntiLeakageItem {
   /**
    * 规则ID
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 状态值
    */
-  Status: number
+  Status?: number
   /**
    * 动作
    */
-  Action: string
+  Action?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 匹配条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Strategies: Array<DescribeAntiInfoLeakRulesStrategyItem>
+  Strategies?: Array<DescribeAntiInfoLeakRulesStrategyItem>
   /**
    * 匹配的URL
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uri: string
+  Uri?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -930,6 +935,10 @@ hybrid:混合云
  */
 export interface ModifyCustomRuleResponse {
   /**
+   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   */
+  Success?: ResponseCode
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1385,6 +1394,10 @@ export interface DescribeCustomRuleListRequest {
    * exp_ts或者mod_ts
    */
   By?: string
+  /**
+   * 查询的域名列表,访问控制页面不用传
+   */
+  DomainList?: Array<string>
 }
 
 /**
@@ -1483,6 +1496,52 @@ export interface AddSpartaProtectionResponse {
  * DescribeUserDomainInfo请求参数结构体
  */
 export type DescribeUserDomainInfoRequest = null
+
+/**
+ * 混合云节点资源信息
+ */
+export interface HybridPkg {
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: number
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
+}
 
 /**
  * 数据封装
@@ -1747,6 +1806,31 @@ export interface DeleteCustomRuleRequest {
    * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
    */
   Edition?: string
+  /**
+   * 批量删除的规则列表
+   */
+  DomainRuleIdList?: Array<DomainRuleId>
+}
+
+/**
+ * 规则执行的时间结构体
+ */
+export interface JobDateTime {
+  /**
+   * 定时执行的时间参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timed?: Array<TimedJob>
+  /**
+   * 周期执行的时间参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cron?: Array<CronJob>
+  /**
+   * 时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeTZone?: string
 }
 
 /**
@@ -1929,50 +2013,9 @@ export interface CCRuleItem {
 }
 
 /**
- * 混合云节点资源信息
+ * DescribeDomainCountInfo请求参数结构体
  */
-export interface HybridPkg {
-  /**
-   * 资源id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceIds?: string
-  /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: number
-  /**
-   * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BeginTime?: string
-  /**
-   * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * 申请数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InquireNum?: number
-  /**
-   * 使用数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsedNum?: number
-  /**
-   * 续费标志
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewFlag?: number
-}
+export type DescribeDomainCountInfoRequest = null
 
 /**
  * DescribeCustomWhiteRule返回参数结构体
@@ -2174,6 +2217,10 @@ https：使用https协议回源
    * 是否开启缓存 0-关闭 1-开启
    */
   ProxyBuffer?: number
+  /**
+   * 0: 禁用拨测, 1: 启用拨测。默认启用拨测
+   */
+  ProbeStatus?: number
 }
 
 /**
@@ -2508,6 +2555,36 @@ export interface DescribeCustomRulesRspRuleListItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
+  /**
+   * 定时任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: string
+  /**
+   * 定时任务配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 周期任务粒度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronType?: string
+  /**
+   * 自定义标签，风控规则用，用来表示是内置规则还是用户自定义的
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Label?: string
+  /**
+   * 拦截页面id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageId?: string
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
 }
 
 /**
@@ -2558,12 +2635,12 @@ export interface AddCustomWhiteRuleResponse {
   /**
    * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
    */
-  Success: ResponseCode
+  Success?: ResponseCode
   /**
    * 添加成功的规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2933,6 +3010,36 @@ export interface AddAntiFakeUrlResponse {
    * 规则ID
    */
   Id?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchAttackLog返回参数结构体
+ */
+export interface SearchAttackLogResponse {
+  /**
+   * 当前返回的攻击日志条数
+   */
+  Count?: number
+  /**
+   * 接口升级，此字段无效，默认返回空字符串
+   */
+  Context?: string
+  /**
+   * 攻击日志数组条目内容
+   */
+  Data?: Array<AttackLogInfo>
+  /**
+   * CLS接口返回内容
+   */
+  ListOver?: boolean
+  /**
+   * CLS接口返回内容，标志是否启动新版本索引
+   */
+  SqlFlag?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3464,11 +3571,6 @@ export interface DescribeDomainDetailsSaasRequest {
 }
 
 /**
- * DescribeDomainCountInfo请求参数结构体
- */
-export type DescribeDomainCountInfoRequest = null
-
-/**
  * 产品明细
  */
 export interface CreateDealsGoodsDetail {
@@ -3927,6 +4029,11 @@ export interface BatchIpAccessControlItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpList?: Array<string>
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -4860,7 +4967,7 @@ export interface CreateIpAccessControlRequest {
    */
   Edition?: string
   /**
-   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   * 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值）
    */
   SourceType?: string
   /**
@@ -5087,6 +5194,11 @@ export interface IpAccessControlItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpList?: Array<string>
+  /**
+   * 规则创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -5301,7 +5413,7 @@ export interface UpsertIpAccessControlRequest {
    */
   Domain: string
   /**
-   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   * IP 参数列表，json数组由IP，source，note，action，valid_ts组成。IP对应配置的IP地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
    */
   Items: Array<string>
   /**
@@ -5313,7 +5425,7 @@ export interface UpsertIpAccessControlRequest {
    */
   Edition?: string
   /**
-   * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
+   * 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值）
    */
   SourceType?: string
 }
@@ -5503,11 +5615,11 @@ export interface DescribeCustomRuleListResponse {
   /**
    * 规则详情
    */
-  RuleList: Array<DescribeCustomRulesRspRuleListItem>
+  RuleList?: Array<DescribeCustomRulesRspRuleListItem>
   /**
    * 规则条数
    */
-  TotalCount: string
+  TotalCount?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5656,6 +5768,21 @@ export interface UserDomainInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudType?: string
+  /**
+   * 标记clbwaf类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlbType?: string
+  /**
+   * BOT开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BotStatus?: number
+  /**
+   * API开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiStatus?: number
 }
 
 /**
@@ -5828,6 +5955,22 @@ export interface DescribeDomainDetailsClbRequest {
 }
 
 /**
+ * 规则定时任务数据结构
+ */
+export interface TimedJob {
+  /**
+   * 开始时间戳，单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartDateTime?: number
+  /**
+   * 结束时间戳，单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndDateTime?: number
+}
+
+/**
  * clb-waf 域名扩展套餐
  */
 export interface DomainPackageNew {
@@ -5912,6 +6055,22 @@ export interface ModifyCustomRuleStatusResponse {
 }
 
 /**
+ * 域名-规则id结构体
+ */
+export interface DomainRuleId {
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: string
+}
+
+/**
  * 防护域名端口配置信息
  */
 export interface PortItem {
@@ -5971,6 +6130,10 @@ export interface ModifyCustomRuleStatusRequest {
    * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
    */
   Edition?: string
+  /**
+   * 规则id
+   */
+  DomainRuleIdList?: Array<DomainRuleId>
 }
 
 /**
@@ -6240,6 +6403,16 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastQpsExceedTime?: string
+  /**
+   * 小程序安全接入ID数量扩张包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MiniExtendPkg?: MiniExtendPkg
+  /**
+   * 计费项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingItem?: string
 }
 
 /**
@@ -6592,27 +6765,37 @@ export interface CacheUrlItems {
   /**
    * 标识
    */
-  Id: number
+  Id?: number
   /**
    * 名字
    */
-  Name: string
+  Name?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 网址
    */
-  Uri: string
+  Uri?: string
   /**
    * 协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 状态
    */
-  Status: number
+  Status?: number
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -6802,6 +6985,14 @@ export interface AddCustomWhiteRuleRequest {
    * 放行的详情
    */
   Bypass: string
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -6921,6 +7112,10 @@ export interface DescribeAccessExportsResponse {
  * DeleteCustomRule返回参数结构体
  */
 export interface DeleteCustomRuleResponse {
+  /**
+   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   */
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7056,6 +7251,10 @@ export interface UpsertCCRuleRequest {
    * 规则ID，新增时填0
    */
   RuleId?: number
+  /**
+   * 规则创建时间
+   */
+  CreateTime?: number
 }
 
 /**
@@ -7207,29 +7406,35 @@ export interface UpsertCCAutoStatusRequest {
 }
 
 /**
- * SearchAttackLog返回参数结构体
+ * DescribeWafAutoDenyRules返回参数结构体
  */
-export interface SearchAttackLogResponse {
+export interface DescribeWafAutoDenyRulesResponse {
   /**
-   * 当前返回的攻击日志条数
+   * 攻击次数阈值
    */
-  Count?: number
+  AttackThreshold?: number
   /**
-   * 接口升级，此字段无效，默认返回空字符串
+   * 攻击时间阈值
    */
-  Context?: string
+  TimeThreshold?: number
   /**
-   * 攻击日志数组条目内容
+   * 自动封禁时间
    */
-  Data?: Array<AttackLogInfo>
+  DenyTimeThreshold?: number
   /**
-   * CLS接口返回内容
+   * 自动封禁状态
    */
-  ListOver?: boolean
+  DefenseStatus?: number
   /**
-   * CLS接口返回内容，标志是否启动新版本索引
+   * 数据来源Source字段 custom-自定义(默认)、batch-domain-批量域名
+
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SqlFlag?: boolean
+  Source?: string
+  /**
+   * 重保护网域名状态
+   */
+  HWState?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7521,6 +7726,26 @@ export interface ModifyCustomRuleRequest {
 默认是0
    */
   ExpireTime?: number
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 规则来源，判断是不是小程序的
+   */
+  Source?: string
+  /**
+   * 开关状态，小程序风控规则的时候传该值
+   */
+  Status?: number
+  /**
+   * 拦截页面id
+   */
+  PageId?: string
 }
 
 /**
@@ -7720,6 +7945,11 @@ export interface CCRuleItems {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionApplied?: Array<number | bigint>
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -7791,27 +8021,32 @@ export interface RuleList {
   /**
    * 规则Id
    */
-  Id: number
+  Id?: number
   /**
    * 规则列表的id
    */
-  Rules: Array<number | bigint>
+  Rules?: Array<number | bigint>
   /**
    * 请求url
    */
-  Url: string
+  Url?: string
   /**
    * 请求的方法
    */
-  Function: string
+  Function?: string
   /**
    * 时间戳
    */
-  Time: string
+  Time?: string
   /**
    * 开关状态
    */
-  Status: number
+  Status?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -7876,6 +8111,14 @@ export interface ModifyCustomWhiteRuleRequest {
    * 匹配条件数组
    */
   Strategies: Array<Strategy>
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -7938,6 +8181,32 @@ export interface DescribeWafThreatenIntelligenceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则周期执行的数据结构
+ */
+export interface CronJob {
+  /**
+   * 每个月的几号执行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Days?: Array<number | bigint>
+  /**
+   * 每个星期的星期几执行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WDays?: Array<number | bigint>
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**
@@ -8422,6 +8691,10 @@ cdn-waf：CDN上的Web防护能力
    * 是否开启缓存 0-关闭 1-开启
    */
   ProxyBuffer?: number
+  /**
+   * 0: 禁用拨测, 1: 启用拨测。默认启用拨测
+   */
+  ProbeStatus?: number
 }
 
 /**
@@ -8904,10 +9177,6 @@ export interface AddCustomRuleRequest {
    */
   SortId: string
   /**
-   * 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期
-   */
-  ExpireTime: string
-  /**
    * 策略详情
    */
   Strategies: Array<Strategy>
@@ -8924,6 +9193,10 @@ export interface AddCustomRuleRequest {
    */
   Redirect?: string
   /**
+   * 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期
+   */
+  ExpireTime?: string
+  /**
    * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
    */
   Edition?: string
@@ -8935,42 +9208,30 @@ export interface AddCustomRuleRequest {
    * 添加规则的来源，默认为空
    */
   EventId?: string
-}
-
-/**
- * DescribeWafAutoDenyRules返回参数结构体
- */
-export interface DescribeWafAutoDenyRulesResponse {
   /**
-   * 攻击次数阈值
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
    */
-  AttackThreshold?: number
+  JobType?: string
   /**
-   * 攻击时间阈值
+   * 规则执行的时间
    */
-  TimeThreshold?: number
+  JobDateTime?: JobDateTime
   /**
-   * 自动封禁时间
-   */
-  DenyTimeThreshold?: number
-  /**
-   * 自动封禁状态
-   */
-  DefenseStatus?: number
-  /**
-   * 数据来源Source字段 custom-自定义(默认)、batch-domain-批量域名
-
-注意：此字段可能返回 null，表示取不到有效值。
+   * 规则来源，判断是不是小程序的
    */
   Source?: string
   /**
-   * 重保护网域名状态
+   * 规则标签，小程序规则用，标识是内置规则还是自定义规则
    */
-  HWState?: number
+  Label?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开关状态，小程序风控规则的时候传该值
    */
-  RequestId?: string
+  Status?: number
+  /**
+   * 拦截页面id
+   */
+  PageId?: string
 }
 
 /**
@@ -9505,6 +9766,52 @@ export interface SearchAccessLogRequest {
    * 第几页，从0开始。新版本接口字段
    */
   Page?: number
+}
+
+/**
+ * 小程序安全接入ID扩展资源信息
+ */
+export interface MiniExtendPkg {
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: number
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 购买数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * 续费标志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingItem?: string
 }
 
 /**

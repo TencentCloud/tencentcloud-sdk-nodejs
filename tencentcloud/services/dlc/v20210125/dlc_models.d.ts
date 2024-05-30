@@ -1523,6 +1523,11 @@ export interface CreateStoreLocationRequest {
  */
 export interface DescribeLakeFsInfoResponse {
     /**
+     * 托管存储信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LakeFsInfos?: Array<LakeFsInfo>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4745,6 +4750,27 @@ export interface UpdateDataEngineResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 描述DLC托管存储基本信息
+ */
+export interface LakeFsInfo {
+    /**
+     * 托管存储名称
+     */
+    Name?: string;
+    /**
+     * 托管存储类型
+     */
+    Type?: string;
+    /**
+     * 容量
+     */
+    SpaceUsedSize?: number;
+    /**
+     * 创建时候的时间戳
+     */
+    CreateTimeStamp?: number;
 }
 /**
  * QueryResult请求参数结构体

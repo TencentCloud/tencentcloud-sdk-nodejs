@@ -1757,6 +1757,37 @@ export interface ClazzLevel {
 }
 
 /**
+ * 混合计费
+ */
+export interface SubEks {
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * cu数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CuNum?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusDesc?: string
+  /**
+   * 运行cu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningCu?: number
+}
+
+/**
  * 空间和集群绑定关系
  */
 export interface WorkSpaceClusterItem {
@@ -2408,71 +2439,71 @@ export interface ClusterGroupSetItem {
   /**
    * clusterGroup 的 SerialId
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
    */
-  Name: string
+  Name?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 区
    */
-  Zone: string
+  Zone?: string
   /**
    * 账号 APPID
    */
-  AppId: number
+  AppId?: number
   /**
    * 主账号 UIN
    */
-  OwnerUin: string
+  OwnerUin?: string
   /**
    * 创建账号 UIN
    */
-  CreatorUin: string
+  CreatorUin?: string
   /**
    * CU 数量
    */
-  CuNum: number
+  CuNum?: number
   /**
    * CU 内存规格
    */
-  CuMem: number
+  CuMem?: number
   /**
    * 集群状态, 1 未初始化,，3 初始化中，2 运行中
    */
-  Status: number
+  Status?: number
   /**
    * 状态描述
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 集群创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后一次操作集群的时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 描述
    */
-  Remark: string
+  Remark?: string
   /**
    * 网络
    */
-  NetEnvironmentType: number
+  NetEnvironmentType?: number
   /**
    * 空闲 CU
    */
-  FreeCuNum: number
+  FreeCuNum?: number
   /**
    * 细粒度资源下的空闲CU
    */
-  FreeCu: number
+  FreeCu?: number
   /**
    * 运行中CU
    */
@@ -2481,6 +2512,11 @@ export interface ClusterGroupSetItem {
    * 付费模式
    */
   PayMode?: number
+  /**
+   * 弹性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubEks?: SubEks
 }
 
 /**
@@ -2787,6 +2823,21 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebUIType?: number
+  /**
+   * 2 独享集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 子eks集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubEks?: SubEks
+  /**
+   * 上级集群
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentSerialId?: string
 }
 
 /**

@@ -213,6 +213,7 @@ import {
   CreateUserResponse,
   DescribeNotebookSessionStatementsRequest,
   UpdateDataEngineResponse,
+  LakeFsInfo,
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
   CreateTaskRequest,

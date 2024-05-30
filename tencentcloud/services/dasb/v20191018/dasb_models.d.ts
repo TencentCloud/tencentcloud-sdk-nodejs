@@ -527,6 +527,10 @@ export interface ModifyDeviceRequest {
      * 资产所属部门ID
      */
     DepartmentId?: string;
+    /**
+     * 网络域Id
+     */
+    DomainId?: string;
 }
 /**
  * SearchFile请求参数结构体
@@ -2382,6 +2386,16 @@ export interface Device {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IpPortSet?: Array<string>;
+    /**
+     * 网络域Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomainId?: string;
+    /**
+     * 网络域名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomainName?: string;
 }
 /**
  * DescribeDasbImageIds请求参数结构体
@@ -3318,6 +3332,16 @@ export interface Resource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClbSet?: Array<Clb>;
+    /**
+     * 网络域个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomainCount?: number;
+    /**
+     * 已使用网络域个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedDomainCount?: number;
 }
 /**
  * RunChangePwdTask返回参数结构体
@@ -3340,6 +3364,10 @@ export interface BindDeviceResourceRequest {
      * 堡垒机服务ID
      */
     ResourceId: string;
+    /**
+     * 网络域ID
+     */
+    DomainId?: string;
 }
 /**
  * 访问权限
