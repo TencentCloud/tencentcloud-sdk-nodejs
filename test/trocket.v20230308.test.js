@@ -338,6 +338,16 @@ it("trocket.v20230308.DescribeTopicList", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeMQTTInsPublicEndpoints", async function () {
+    try {
+       const data = await client.DescribeMQTTInsPublicEndpoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeMQTTInstanceCert", async function () {
     try {
        const data = await client.DescribeMQTTInstanceCert({})
@@ -398,9 +408,9 @@ it("trocket.v20230308.DescribeInstanceList", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTInsPublicEndpoints", async function () {
+it("trocket.v20230308.DescribeFusionInstanceList", async function () {
     try {
-       const data = await client.DescribeMQTTInsPublicEndpoints({})
+       const data = await client.DescribeFusionInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

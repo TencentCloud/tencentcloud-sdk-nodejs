@@ -185,86 +185,169 @@ export interface ModifyInstanceRequest {
     MaxTopicNum?: number;
 }
 /**
- * 主题与消费组的订阅关系数据
+ * 实例列表页中的实例信息
  */
-export interface SubscriptionData {
+export interface FusionInstanceItem {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
-     * 主题名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例名称
      */
-    Topic?: string;
+    InstanceName?: string;
     /**
-     * 主题类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例版本
      */
-    TopicType?: string;
+    Version?: string;
     /**
-     * 单个节点上主题队列数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例类型，
+  EXPERIMENT，体验版
+  BASIC，基础版
+  PRO，专业版
+  PLATINUM，铂金版
      */
-    TopicQueueNum?: number;
+    InstanceType?: string;
     /**
-     * 消费组名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例状态，
+  RUNNING, 运行中
+  MAINTAINING，维护中
+  ABNORMAL，异常
+  OVERDUE，欠费
+  DESTROYED，已删除
+  CREATING，创建中
+  MODIFYING，变配中
+  CREATE_FAILURE，创建失败
+  MODIFY_FAILURE，变配失败
+  DELETING，删除中
      */
-    ConsumerGroup?: string;
+    InstanceStatus?: string;
     /**
-     * 是否在线
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例主题数上限
      */
-    IsOnline?: boolean;
+    TopicNumLimit?: number;
     /**
-     * 消费类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例消费组数量上限
      */
-    ConsumeType?: string;
+    GroupNumLimit?: number;
     /**
-     * 订阅规则
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 计费模式，
+  POSTPAID，按量计费
+  PREPAID，包年包月
      */
-    SubString?: string;
+    PayMode?: string;
     /**
-     * 过滤类型
+     * 到期时间，秒为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpressionType?: string;
+    ExpiryTime?: number;
     /**
-     * 订阅一致性
+     * 备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Consistency?: number;
+    Remark?: string;
     /**
-     * 消费堆积
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主题数量
      */
-    ConsumerLag?: number;
+    TopicNum?: number;
     /**
-     * 最后消费进度更新时间，秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 消费组数量
      */
-    LastUpdateTime?: number;
+    GroupNum?: number;
     /**
-     * 最大重试次数
+     * 标签列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxRetryTimes?: number;
+    TagList?: Array<Tag>;
     /**
-     * 是否顺序消费
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 商品规格
      */
-    ConsumeMessageOrderly?: boolean;
+    SkuCode?: string;
     /**
-     * 消费模式:
-  BROADCASTING 广播模式;
-  CLUSTERING 集群模式;
+     * TPS限流值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessageModel?: string;
+    TpsLimit?: number;
+    /**
+     * 弹性TPS限流值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScaledTpsLimit?: number;
+    /**
+     * 消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageRetention?: number;
+    /**
+     * 延迟消息最大时长，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxMessageDelay?: number;
+    /**
+     * 是否自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: number;
+    /**
+     * 4.x独有数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceItemExtraInfo?: InstanceItemExtraInfo;
+    /**
+     * 预销毁时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DestroyTime?: number;
+}
+/**
+ * 4.x集群和5.0集群列表统一显示 4.x特殊数据承载接口
+ */
+export interface InstanceItemExtraInfo {
+    /**
+     * 是否vip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsVip?: boolean;
+    /**
+     * 4.x专享集群状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VipInstanceStatus?: number;
+    /**
+     * 专享集群峰值带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxBandWidth?: number;
+    /**
+     * 专享集群规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecName?: string;
+    /**
+     * 专享集群节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeCount?: number;
+    /**
+     * 专享集群最大存储
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxStorage?: number;
+    /**
+     * 专享集群最大保留时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRetention?: number;
+    /**
+     * 专项集群最大保留时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinRetention?: number;
+    /**
+     * 4.0共享集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStatus?: number;
 }
 /**
  * CreateMQTTInsPublicEndpoint返回参数结构体
@@ -1014,6 +1097,24 @@ export interface DescribeMQTTInsVPCEndpointsRequest {
     InstanceId: string;
 }
 /**
+ * DescribeFusionInstanceList返回参数结构体
+ */
+export interface DescribeFusionInstanceListResponse {
+    /**
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 实例列表
+     */
+    Data?: Array<FusionInstanceItem>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateTopic请求参数结构体
  */
 export interface CreateTopicRequest {
@@ -1709,6 +1810,88 @@ export interface TopicItem {
     MsgTTL?: number;
 }
 /**
+ * 主题与消费组的订阅关系数据
+ */
+export interface SubscriptionData {
+    /**
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 主题名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Topic?: string;
+    /**
+     * 主题类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicType?: string;
+    /**
+     * 单个节点上主题队列数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicQueueNum?: number;
+    /**
+     * 消费组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerGroup?: string;
+    /**
+     * 是否在线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsOnline?: boolean;
+    /**
+     * 消费类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumeType?: string;
+    /**
+     * 订阅规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubString?: string;
+    /**
+     * 过滤类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpressionType?: string;
+    /**
+     * 订阅一致性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Consistency?: number;
+    /**
+     * 消费堆积
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerLag?: number;
+    /**
+     * 最后消费进度更新时间，秒为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastUpdateTime?: number;
+    /**
+     * 最大重试次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRetryTimes?: number;
+    /**
+     * 是否顺序消费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumeMessageOrderly?: boolean;
+    /**
+     * 消费模式:
+  BROADCASTING 广播模式;
+  CLUSTERING 集群模式;
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageModel?: string;
+}
+/**
  * CreateInstance请求参数结构体
  */
 export interface CreateInstanceRequest {
@@ -2164,6 +2347,27 @@ export interface CreateMQTTUserRequest {
      * 密码，该字段为空时候则后端会默认生成
      */
     Password?: string;
+}
+/**
+ * DescribeFusionInstanceList请求参数结构体
+ */
+export interface DescribeFusionInstanceListRequest {
+    /**
+     * 查询起始位置
+     */
+    Offset: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit: number;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 标签过滤器
+     */
+    TagFilters?: Array<TagFilter>;
 }
 /**
  * DescribeMQTTMessage请求参数结构体

@@ -4838,62 +4838,62 @@ export interface InstanceClusterNode {
     /**
      * 节点名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 实例运行时节点 ID。
      */
-    RunId: string;
+    RunId?: string;
     /**
      * 集群角色。
   - 0：master。
   - 1：slave。
      */
-    Role: number;
+    Role?: number;
     /**
      * 节点状态。
   - 0：readwrite,。
   - 1：read。
   - 2：backup。
      */
-    Status: number;
+    Status?: number;
     /**
      * 服务状态。
   0-down。
   1-on
      */
-    Connected: number;
+    Connected?: number;
     /**
      * 节点创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 节点下线时间。
      */
-    DownTime: string;
+    DownTime?: string;
     /**
      * 节点 Slot 分布区间。
      */
-    Slots: string;
+    Slots?: string;
     /**
      * 节点 Key分布。
      */
-    Keys: number;
+    Keys?: number;
     /**
      * 节点 QPS。分片节点每秒执行次数。单位：次/秒。
      */
-    Qps: number;
+    Qps?: number;
     /**
      * 节点 QPS 倾斜度。
      */
-    QpsSlope: number;
+    QpsSlope?: number;
     /**
      * 节点存储。
      */
-    Storage: number;
+    Storage?: number;
     /**
      * 节点存储倾斜度。
      */
-    StorageSlope: number;
+    StorageSlope?: number;
 }
 /**
  * DescribeSSLStatus返回参数结构体

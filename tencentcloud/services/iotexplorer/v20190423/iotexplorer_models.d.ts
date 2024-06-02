@@ -3922,7 +3922,7 @@ export interface TWeCallInfo {
      */
     ModelId: string;
     /**
-     * Sn信息
+     * Sn信息，SN格式：产品ID_设备名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Sn: string;
@@ -5636,7 +5636,7 @@ export interface UpdateDeviceTWeCallAuthorizeStatusResponse {
  */
 export interface ActivateTWeCallLicenseRequest {
     /**
-     * voip类型
+     * TWecall类型： 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
      */
     PkgType: number;
     /**

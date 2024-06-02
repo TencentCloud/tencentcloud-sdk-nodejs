@@ -26,7 +26,8 @@ import {
   ModifyRoleResponse,
   DeleteMQTTInsPublicEndpointRequest,
   ModifyInstanceRequest,
-  SubscriptionData,
+  FusionInstanceItem,
+  InstanceItemExtraInfo,
   CreateMQTTInsPublicEndpointResponse,
   ImportSourceClusterConsumerGroupsResponse,
   DeleteTopicRequest,
@@ -64,6 +65,7 @@ import {
   DeleteInstanceRequest,
   ModifyRoleRequest,
   DescribeMQTTInsVPCEndpointsRequest,
+  DescribeFusionInstanceListResponse,
   CreateTopicRequest,
   DeleteRoleRequest,
   MQTTProductSkuItem,
@@ -92,6 +94,7 @@ import {
   DescribeConsumerGroupRequest,
   DescribeConsumerGroupListRequest,
   TopicItem,
+  SubscriptionData,
   CreateInstanceRequest,
   DescribeConsumerGroupResponse,
   ModifyTopicResponse,
@@ -109,6 +112,7 @@ import {
   DescribeMQTTInstanceCertRequest,
   ModifyMQTTInsPublicEndpointResponse,
   CreateMQTTUserRequest,
+  DescribeFusionInstanceListRequest,
   DescribeMQTTMessageRequest,
   CreateRoleResponse,
   DescribeMQTTTopicListResponse,
@@ -477,6 +481,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询MQTT实例公网接入点
+   */
+  async DescribeMQTTInsPublicEndpoints(
+    req: DescribeMQTTInsPublicEndpointsRequest,
+    cb?: (error: string, rep: DescribeMQTTInsPublicEndpointsResponse) => void
+  ): Promise<DescribeMQTTInsPublicEndpointsResponse> {
+    return this.request("DescribeMQTTInsPublicEndpoints", req, cb)
+  }
+
+  /**
    * 查询MQTT集群证书列表
    */
   async DescribeMQTTInstanceCert(
@@ -552,13 +566,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询MQTT实例公网接入点
-   */
-  async DescribeMQTTInsPublicEndpoints(
-    req: DescribeMQTTInsPublicEndpointsRequest,
-    cb?: (error: string, rep: DescribeMQTTInsPublicEndpointsResponse) => void
-  ): Promise<DescribeMQTTInsPublicEndpointsResponse> {
-    return this.request("DescribeMQTTInsPublicEndpoints", req, cb)
+     * 获取实例列表，Filters参数使用说明如下：
+1. InstanceName, 名称模糊查询
+2. InstanceId，实例ID查询
+3. InstanceType, 实例类型查询，支持多选
+4. Version，实例版本查询
+当使用TagFilters查询时，Filters参数失效。
+     */
+  async DescribeFusionInstanceList(
+    req: DescribeFusionInstanceListRequest,
+    cb?: (error: string, rep: DescribeFusionInstanceListResponse) => void
+  ): Promise<DescribeFusionInstanceListResponse> {
+    return this.request("DescribeFusionInstanceList", req, cb)
   }
 
   /**
