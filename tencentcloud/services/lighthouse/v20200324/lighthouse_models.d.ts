@@ -115,7 +115,7 @@ export interface InquirePriceCreateBlueprintRequest {
  */
 export interface DescribeDiskBackupsRequest {
     /**
-     * 要查询云硬盘备份点的ID列表。参数不支持同时指定 DiskBackupIds 和 Filters。
+     * 查询的云硬盘备份点ID列表。最大支持 100 个。参数不支持同时指定 DiskBackupIds 和 Filters。
      */
     DiskBackupIds?: Array<string>;
     /**
@@ -129,7 +129,8 @@ export interface DescribeDiskBackupsRequest {
   <li>disk-backup-state</li>按照【云硬盘备份点状态】进行过滤。
   类型：String
   必选：否
-  取值：参考数据结构[DiskBackup](https://cloud.tencent.com/document/product/1207/47576#DiskBackup)下的DiskBackupState取值。
+  取值：参考数据结构
+  <a href="https://cloud.tencent.com/document/product/1207/47576#DiskBackup">DescribeSnapshots</a> 下的DiskBackupState取值。
   <li>disk-usage</li>按照【云硬盘类型】进行过滤。
   类型：String
   必选：否
@@ -138,11 +139,11 @@ export interface DescribeDiskBackupsRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 偏移量，默认为 0。
+     * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
      */
     Offset?: number;
     /**
-     * 返回数量，默认为 20，最大值为 100。
+     * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
      */
     Limit?: number;
 }
@@ -444,11 +445,11 @@ export interface DescribeScenesResponse {
     /**
      * 使用场景列表。
      */
-    SceneSet: Array<Scene>;
+    SceneSet?: Array<Scene>;
     /**
      * 使用场景总数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -544,11 +545,11 @@ export interface DescribeGeneralResourceQuotasRequest {
  */
 export interface RestartDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID列表。
+     * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerIds: Array<string>;
 }
@@ -622,7 +623,7 @@ export interface DeleteFirewallTemplateRulesResponse {
  */
 export interface DescribeFirewallTemplatesRequest {
     /**
-     * 防火墙模板ID列表。
+     * 防火墙模板ID列表。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。列表长度最大值为100。
      */
     TemplateIds?: Array<string>;
     /**
@@ -778,11 +779,11 @@ export interface DescribeRegionsResponse {
  */
 export interface DescribeFirewallTemplateApplyRecordsRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
     /**
-     * 应用任务ID列表。
+     * 应用防火墙模版任务ID列表。可通过[ApplyFirewallTemplate](https://cloud.tencent.com/document/product/1207/96883)接口返回值TaskId字段获取。
      */
     TaskIds?: Array<string>;
 }
@@ -829,11 +830,11 @@ export interface AttachDisksRequest {
  */
 export interface ModifyDiskBackupsAttributeRequest {
     /**
-     * 云硬盘备份点ID列表。
+     * 云硬盘备份点ID，可通过 [DescribeDiskBackups](https://cloud.tencent.com/document/api/1207/84379) 接口返回值中的 DiskBackupId 获取。
      */
     DiskBackupIds: Array<string>;
     /**
-     * 云硬盘备份点名称，最大长度90。
+     * 云硬盘备份点名称，最大长度 90 。
      */
     DiskBackupName?: string;
 }
@@ -1363,11 +1364,11 @@ export interface DetachDisksRequest {
  */
 export interface ModifyFirewallRulesRequest {
     /**
-     * 实例 ID。
+     * 实例 ID。实例的ID可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 防火墙规则列表。
+     * 防火墙规则列表。列表长度最大值是100。
      */
     FirewallRules: Array<FirewallRule>;
     /**
@@ -1406,7 +1407,7 @@ export interface CreateBlueprintRequest {
  */
 export interface DeleteFirewallRulesRequest {
     /**
-     * 实例 ID。
+     * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
@@ -1449,7 +1450,7 @@ export interface DescribeInstanceVncUrlRequest {
  */
 export interface ModifyFirewallRuleDescriptionRequest {
     /**
-     * 实例 ID。
+     * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
@@ -1557,7 +1558,7 @@ export interface StopDockerContainersResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1656,7 +1657,7 @@ export interface RestartDockerContainersResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1680,11 +1681,11 @@ export interface CreateFirewallTemplateRequest {
  */
 export interface RemoveDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID列表。
+     * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerIds: Array<string>;
 }
@@ -1791,7 +1792,7 @@ export interface DescribeSnapshotsDeniedActionsResponse {
  */
 export interface DescribeScenesRequest {
     /**
-     * 使用场景ID列表。
+     * 使用场景ID列表。可通过[DescribeScenes](https://cloud.tencent.com/document/product/1207/83512)接口返回值中的SceneId获取。
      */
     SceneIds?: Array<string>;
     /**
@@ -1926,7 +1927,7 @@ export interface DescribeBundleDiscountResponse {
  */
 export interface DescribeAllScenesRequest {
     /**
-     * 使用场景ID列表。
+     * 使用场景ID列表。可通过[DescribeAllScenes](https://cloud.tencent.com/document/product/1207/83513)接口返回值中的SceneId获取。
      */
     SceneIds?: Array<string>;
     /**
@@ -1964,7 +1965,7 @@ export interface StartDockerContainersResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2187,11 +2188,11 @@ export interface ModifyBlueprintAttributeResponse {
  */
 export interface ModifyFirewallTemplateRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
     /**
-     * 模板名称。
+     * 防火墙模板名称。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateName?: string;
 }
@@ -2200,11 +2201,11 @@ export interface ModifyFirewallTemplateRequest {
  */
 export interface StopDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID列表。
+     * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerIds: Array<string>;
 }
@@ -2674,7 +2675,7 @@ export interface DescribeDockerActivitiesResponse {
  */
 export interface DescribeFirewallTemplateRuleQuotaRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
 }
@@ -2893,11 +2894,11 @@ export interface DescribeAllScenesResponse {
     /**
      * 使用场景详细信息列表。
      */
-    SceneInfoSet: Array<SceneInfo>;
+    SceneInfoSet?: Array<SceneInfo>;
     /**
      * 使用场景详细信息总数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3308,7 +3309,7 @@ export interface RenameDockerContainerResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3471,11 +3472,11 @@ export interface Snapshot {
  */
 export interface ApplyFirewallTemplateRequest {
     /**
-     * 模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
     /**
-     * 应用防火墙模板的实例列表。
+     * 应用防火墙模板的实例列表。列表长度最大值是100。
      */
     ApplyInstances: Array<InstanceIdentifier>;
 }
@@ -3547,11 +3548,11 @@ export interface DiskBackupDeniedActions {
  */
 export interface CreateDiskBackupRequest {
     /**
-     * 云硬盘 ID。当前只支持数据盘创建备份点。
+     * 云硬盘ID，可通过 [DescribeDisks](https://cloud.tencent.com/document/api/1207/66093) 接口返回值中的 DiskId 获取。
      */
     DiskId: string;
     /**
-     * 云硬盘备份点名称，最大长度90。
+     * 云硬盘备份点名称，最大长度为 90 。
      */
     DiskBackupName?: string;
 }
@@ -3560,7 +3561,7 @@ export interface CreateDiskBackupRequest {
  */
 export interface CreateFirewallRulesRequest {
     /**
-     * 实例 ID。
+     * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
@@ -3604,15 +3605,15 @@ export interface DescribeFirewallRulesResponse {
     /**
      * 符合条件的防火墙规则数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 防火墙规则详细信息列表。
      */
-    FirewallRuleSet: Array<FirewallRuleInfo>;
+    FirewallRuleSet?: Array<FirewallRuleInfo>;
     /**
      * 防火墙版本号。
      */
-    FirewallVersion: number;
+    FirewallVersion?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3999,7 +4000,7 @@ export interface RemoveDockerContainersResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4146,7 +4147,7 @@ export interface ApplyFirewallTemplateResponse {
  */
 export interface TerminateDisksRequest {
     /**
-     * 云硬盘ID列表。
+     * 云硬盘ID列表。可通过[DescribeDisks](https://cloud.tencent.com/document/product/1207/66093)接口返回值中的DiskId获取。
      */
     DiskIds: Array<string>;
 }
@@ -4207,7 +4208,7 @@ export interface DescribeDiskConfigsResponse {
  */
 export interface CreateFirewallTemplateRulesRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
     /**
@@ -4430,7 +4431,7 @@ export interface ModifyDiskBackupsAttributeResponse {
  */
 export interface DeleteFirewallTemplateRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
 }
@@ -4642,11 +4643,11 @@ export interface ModifyInstancesRenewFlagRequest {
  */
 export interface StartDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID列表。
+     * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerIds: Array<string>;
 }
@@ -4708,11 +4709,11 @@ export interface RenewInstancesResponse {
  */
 export interface RenameDockerContainerRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID。
+     * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerId: string;
     /**
@@ -4756,15 +4757,15 @@ export interface IsolateDisksResponse {
  */
 export interface DescribeFirewallRulesRequest {
     /**
-     * 实例 ID。
+     * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/1207/47573) 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
-     * 偏移量，默认为 0。
+     * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
      */
     Offset?: number;
     /**
-     * 返回数量，默认为 20，最大值为 100。
+     * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
      */
     Limit?: number;
 }
@@ -4799,7 +4800,7 @@ export interface DiskDeniedActions {
  */
 export interface InquirePriceCreateInstancesRequest {
     /**
-     * 实例的套餐 ID。
+     * 实例的套餐 ID。可以通过调用[DescribeBundles](https://cloud.tencent.com/document/api/1207/47575)接口获取。
      */
     BundleId: string;
     /**
@@ -5016,11 +5017,12 @@ export interface DescribeInstanceLoginKeyPairAttributeResponse {
  */
 export interface DeleteFirewallTemplateRulesRequest {
     /**
-     * 防火墙模板ID。
+     * 防火墙模板ID。可通过[DescribeFirewallTemplates](https://cloud.tencent.com/document/product/1207/96874)接口返回值字段TemplateSet获取。
      */
     TemplateId: string;
     /**
-     * 防火墙模板规则ID列表。
+     * 防火墙模板规则ID列表。可通过[DescribeFirewallTemplateRules](https://cloud.tencent.com/document/product/1207/96875)接口返回值字段TemplateRuleSet获取。
+  
      */
     TemplateRuleIds: Array<string>;
 }

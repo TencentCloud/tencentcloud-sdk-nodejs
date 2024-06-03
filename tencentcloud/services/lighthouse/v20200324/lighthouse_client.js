@@ -89,7 +89,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDisksRenewFlag", req, cb);
     }
     /**
-     * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重命名情况。
+     * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重命名情况。
      */
     async RenameDockerContainer(req, cb) {
         return this.request("RenameDockerContainer", req, cb);
@@ -129,7 +129,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBlueprintAttribute", req, cb);
     }
     /**
-     * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重启情况。
+     * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重启情况。
      */
     async RestartDockerContainers(req, cb) {
         return this.request("RestartDockerContainers", req, cb);
@@ -401,7 +401,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachDisks", req, cb);
     }
     /**
-     * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询启动情况。
+     * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询启动情况。
      */
     async StartDockerContainers(req, cb) {
         return this.request("StartDockerContainers", req, cb);
@@ -608,7 +608,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("StopInstances", req, cb);
     }
     /**
-     * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询停止情况。
+     * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询停止情况。
      */
     async StopDockerContainers(req, cb) {
         return this.request("StopDockerContainers", req, cb);
@@ -667,7 +667,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询删除情况。
+     * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询删除情况。
      */
     async RemoveDockerContainers(req, cb) {
         return this.request("RemoveDockerContainers", req, cb);

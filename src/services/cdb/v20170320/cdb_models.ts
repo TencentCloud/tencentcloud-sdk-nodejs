@@ -1234,6 +1234,7 @@ export interface CreateCdbProxyAddressRequest {
   UniqSubnetId: string
   /**
    * 是否开启连接池
+注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。
    */
   ConnectionPool?: boolean
   /**
@@ -1256,6 +1257,14 @@ export interface CreateCdbProxyAddressRequest {
    * 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool为true时生效。
    */
   ConnectionPoolType?: string
+  /**
+   * 是否自适应负载均衡
+   */
+  AutoLoadBalance?: boolean
+  /**
+   * 接入模式
+   */
+  AccessMode?: string
 }
 
 /**
@@ -6123,6 +6132,16 @@ export interface ProxyInst {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
+  /**
+   * 实例节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstNodeId?: string
+  /**
+   * 节点角色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstNodeRole?: string
 }
 
 /**
@@ -6230,42 +6249,52 @@ export interface DescribeProxySupportParamResponse {
    * 支持最大代理版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyVersion: string
+  ProxyVersion?: string
   /**
    * 是否支持连接池
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportPool: boolean
+  SupportPool?: boolean
   /**
    * 连接池最小值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PoolMin: number
+  PoolMin?: number
   /**
    * 连接池最大值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PoolMax: number
+  PoolMax?: number
   /**
    * 是否支持事务拆分
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportTransSplit: boolean
+  SupportTransSplit?: boolean
   /**
    * 支持连接池的最小代理版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportPoolMinVersion: string
+  SupportPoolMinVersion?: string
   /**
    * 支持事务拆分的最小代理版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportTransSplitMinVersion: string
+  SupportTransSplitMinVersion?: string
   /**
    * 是否支持设置只读
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportReadOnly: boolean
+  SupportReadOnly?: boolean
+  /**
+   * 是否自动均衡负载
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportAutoLoadBalance?: boolean
+  /**
+   * 是否支持接入模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportAccessMode?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6859,12 +6888,21 @@ export interface AdjustCdbProxyAddressRequest {
   TransSplit?: boolean
   /**
    * 是否开启连接池
+注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。
    */
   ConnectionPool?: boolean
   /**
    * 读写权重分配。如果 WeightMode 传的是 system ，则传入的权重不生效，由系统分配默认权重。
    */
   ProxyAllocation?: Array<ProxyAllocation>
+  /**
+   * 是否开启自适应负载均衡
+   */
+  AutoLoadBalance?: boolean
+  /**
+   * 访问模式：就近访问，均衡分配
+   */
+  AccessMode?: string
 }
 
 /**
@@ -8211,79 +8249,89 @@ export interface ProxyAddress {
   /**
    * 代理组地址ID
    */
-  ProxyAddressId: string
+  ProxyAddressId?: string
   /**
    * 私有网络ID
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * 私有子网ID
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * IP地址
    */
-  Vip: string
+  Vip?: string
   /**
    * 端口
    */
-  VPort: number
+  VPort?: number
   /**
    * 权重分配模式；
 系统自动分配："system"， 自定义："custom"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WeightMode: string
+  WeightMode?: string
   /**
    * 是否开启延迟剔除，取值："true" | "false"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsKickOut: boolean
+  IsKickOut?: boolean
   /**
    * 最小保留数量，最小取值：0
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MinCount: number
+  MinCount?: number
   /**
    * 延迟剔除阈值，最小取值：0
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxDelay: number
+  MaxDelay?: number
   /**
    * 是否自动添加RO，取值："true" | "false"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoAddRo: boolean
+  AutoAddRo?: boolean
   /**
    * 是否是只读，取值："true" | "false"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadOnly: boolean
+  ReadOnly?: boolean
   /**
    * 是否开启事务分离
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransSplit: boolean
+  TransSplit?: boolean
   /**
    * 是否开启故障转移
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailOver: boolean
+  FailOver?: boolean
   /**
    * 是否开启连接池
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConnectionPool: boolean
+  ConnectionPool?: boolean
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Desc: string
+  Desc?: string
   /**
    * 实例读权重分配
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyAllocation: Array<ProxyAllocation>
+  ProxyAllocation?: Array<ProxyAllocation>
+  /**
+   * 接入模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessMode?: string
+  /**
+   * 是否开启自动负载均衡
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoLoadBalance?: boolean
 }
 
 /**

@@ -464,6 +464,8 @@ var ump_1 = require("./ump");
 Object.defineProperty(exports, "ump", { enumerable: true, get: function () { return ump_1.ump; } });
 var vcg_1 = require("./vcg");
 Object.defineProperty(exports, "vcg", { enumerable: true, get: function () { return vcg_1.vcg; } });
+var vdb_1 = require("./vdb");
+Object.defineProperty(exports, "vdb", { enumerable: true, get: function () { return vdb_1.vdb; } });
 var vm_1 = require("./vm");
 Object.defineProperty(exports, "vm", { enumerable: true, get: function () { return vm_1.vm; } });
 var vms_1 = require("./vms");

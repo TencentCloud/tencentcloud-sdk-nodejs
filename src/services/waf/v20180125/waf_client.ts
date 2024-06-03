@@ -87,6 +87,7 @@ import {
   DescribeHostRequest,
   AccessFullTextInfo,
   DeleteCustomRuleRequest,
+  ModifyApiSecEventChangeRequest,
   JobDateTime,
   DescribeHostsRequest,
   ModifyCustomWhiteRuleStatusRequest,
@@ -163,6 +164,7 @@ import {
   GoodsDetail,
   DeleteIpAccessControlResponse,
   BatchIpAccessControlItem,
+  ApiSecKey,
   UserWhiteRule,
   PortInfo,
   AddAttackWhiteRuleRequest,
@@ -341,6 +343,7 @@ import {
   DescribeDomainVerifyResultRequest,
   CreateDealsGoods,
   ModifySpartaProtectionModeResponse,
+  ModifyApiSecEventChangeResponse,
   ModifyCustomWhiteRuleStatusResponse,
   DescribeTopAttackDomainRequest,
   BatchIpAccessControlData,
@@ -1747,6 +1750,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainRulesResponse) => void
   ): Promise<DescribeDomainRulesResponse> {
     return this.request("DescribeDomainRules", req, cb)
+  }
+
+  /**
+   * api安全状态变更接口
+   */
+  async ModifyApiSecEventChange(
+    req: ModifyApiSecEventChangeRequest,
+    cb?: (error: string, rep: ModifyApiSecEventChangeResponse) => void
+  ): Promise<ModifyApiSecEventChangeResponse> {
+    return this.request("ModifyApiSecEventChange", req, cb)
   }
 
   /**

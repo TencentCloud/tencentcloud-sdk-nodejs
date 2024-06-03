@@ -7248,6 +7248,16 @@ export interface KongUpstreamInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfCamAuthEnable?: boolean
+  /**
+   * 云函数是否开启Base64编码，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScfIsBase64Encoded?: boolean
+  /**
+   * 云函数是否开启响应集成，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScfIsIntegratedResponse?: boolean
 }
 
 /**

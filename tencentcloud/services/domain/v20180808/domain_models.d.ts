@@ -1344,6 +1344,14 @@ export interface ReservedPreDomainsRequest {
      * 模板ID
      */
     TemplateId: string;
+    /**
+     * 结束后是否自动支付尾款，默认开启 传入1关闭
+     */
+    IsAutoPay?: number;
+    /**
+     * 结束后是否自动进行梯度保证金扣除，默认开启 传入1关闭
+     */
+    IsBidAutoPay?: number;
 }
 /**
  * BatchModifyDomainInfo请求参数结构体

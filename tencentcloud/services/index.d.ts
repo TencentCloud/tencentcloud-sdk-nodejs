@@ -230,6 +230,7 @@ export { tsw } from "./tsw";
 export { tts } from "./tts";
 export { ump } from "./ump";
 export { vcg } from "./vcg";
+export { vdb } from "./vdb";
 export { vm } from "./vm";
 export { vms } from "./vms";
 export { vod } from "./vod";

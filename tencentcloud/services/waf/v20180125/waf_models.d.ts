@@ -1727,6 +1727,39 @@ export interface DeleteCustomRuleRequest {
     DomainRuleIdList?: Array<DomainRuleId>;
 }
 /**
+ * ModifyApiSecEventChange请求参数结构体
+ */
+export interface ModifyApiSecEventChangeRequest {
+    /**
+     * 变更状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略
+     */
+    Mode?: string;
+    /**
+     * 处理人
+     */
+    UserName?: string;
+    /**
+     * 备注，有长度显示1k
+     */
+    Remark?: string;
+    /**
+     * 批量操作的事件列表
+     */
+    EventIdList?: Array<string>;
+    /**
+     * 批量操作的api列表
+     */
+    ApiNameList?: Array<ApiSecKey>;
+    /**
+     * 判断是否删除，包括删除事件和删除资产
+     */
+    IsDelete?: boolean;
+    /**
+     * 判断是否是更新api的备注，更新api备注的时候，为true
+     */
+    UpdateApiRemark?: boolean;
+}
+/**
  * 规则执行的时间结构体
  */
 export interface JobDateTime {
@@ -3873,6 +3906,23 @@ export interface BatchIpAccessControlItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
+}
+/**
+ * api列表
+ */
+export interface ApiSecKey {
+    /**
+     * api名称
+     */
+    ApiName: string;
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 请求方法
+     */
+    Method: string;
 }
 /**
  * 用户规则白名单
@@ -8506,6 +8556,15 @@ export interface CreateDealsGoods {
  * ModifySpartaProtectionMode返回参数结构体
  */
 export interface ModifySpartaProtectionModeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyApiSecEventChange返回参数结构体
+ */
+export interface ModifyApiSecEventChangeResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

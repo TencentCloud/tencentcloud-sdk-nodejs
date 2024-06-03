@@ -75,6 +75,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartFlow", req, cb);
     }
     /**
+     * 该接口会生成一个手机号变更的链接，用户可以通过该链接进入电子签系统进行手机号的变更。
+该接口支持员工和个人端手机号的变更。
+     */
+    async CreateUserMobileChangeUrl(req, cb) {
+        return this.request("CreateUserMobileChangeUrl", req, cb);
+    }
+    /**
      * 用于撤销合同流程<br/>
 适用场景：如果某个合同流程当前至少还有一方没有签署，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。<br/>
 - **可撤回合同状态**：未全部签署完成

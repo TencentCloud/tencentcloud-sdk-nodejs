@@ -1369,7 +1369,7 @@ export interface DescribeMicroservicesResponse {
    * 微服务分页列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageMicroservice
+  Result?: TsfPageMicroservice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3314,6 +3314,16 @@ export interface TsfConfigCenter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceId?: string
+  /**
+   * 当前版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentVersion?: string
+  /**
+   * 需要升级的版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetVersion?: string
 }
 
 /**
@@ -3463,7 +3473,7 @@ export interface DescribeStatisticsResponse {
    * 查询服务统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ServiceStatisticsResults
+  Result?: ServiceStatisticsResults
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10078,6 +10088,10 @@ export interface DeleteApplicationRequest {
    * 应用ID
    */
   ApplicationId: string
+  /**
+   * 是否删除镜像仓库
+   */
+  SyncDeleteImageRepository?: boolean
 }
 
 /**
@@ -11001,6 +11015,10 @@ export interface DescribeMicroservicesRequest {
    * 搜索的服务名列表
    */
   MicroserviceNameList?: Array<string>
+  /**
+   * 注册中心实例id
+   */
+  ConfigCenterInstanceId?: string
 }
 
 /**
@@ -13798,6 +13816,13 @@ export interface ConfigRelease {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigCenters?: Array<TsfConfigCenter>
+  /**
+   * DUAL_STATUS_WRITE_REGISTRATION_ON 双写&&双注册开启
+
+DUAL_STATUS_WRITE_REGISTRATION_OFF 双写&&双注册关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DaulStatus?: string
 }
 
 /**
@@ -15026,7 +15051,7 @@ export interface DescribeStatisticsRequest {
    */
   Limit: number
   /**
-   * 命名空间Id
+   * 命名空间Id,此字段，和 NamespaceIdList 或者 MetricDimensionValues 字段包含 namespaceId 维度信息。三者选其一。
    */
   NamespaceId?: string
   /**
@@ -15038,11 +15063,11 @@ export interface DescribeStatisticsRequest {
    */
   OrderType?: number
   /**
-   * 开始时间：年月日 时分秒2020-05-12 14:43:12
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
    */
   EndTime?: string
   /**
-   * 开始时间：年月日 时分秒2020-05-12 14:43:12
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12， 不能为空
    */
   StartTime?: string
   /**
@@ -15069,6 +15094,10 @@ export interface DescribeStatisticsRequest {
    * 命名空间id数组
    */
   NamespaceIdList?: Array<string>
+  /**
+   * 独占配置中心的ID
+   */
+  ConfigCenterInstanceId?: string
 }
 
 /**

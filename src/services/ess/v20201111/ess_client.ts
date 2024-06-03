@@ -160,6 +160,7 @@ import {
   RemindFlowRecords,
   CreatePreparedPersonalEsignResponse,
   DescribeOrganizationSealsResponse,
+  CreateUserMobileChangeUrlRequest,
   RegistrationOrganizationInfo,
   CreateEmbedWebUrlRequest,
   DeleteIntegrationEmployeesRequest,
@@ -238,6 +239,7 @@ import {
   DescribeFlowBriefsRequest,
   CreateSealPolicyRequest,
   DescribeBillUsageDetailResponse,
+  CreateUserMobileChangeUrlResponse,
   CreateUserAutoSignEnableUrlResponse,
   DescribeSignFaceVideoResponse,
   SignUrl,
@@ -347,6 +349,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartFlowResponse) => void
   ): Promise<StartFlowResponse> {
     return this.request("StartFlow", req, cb)
+  }
+
+  /**
+     * 该接口会生成一个手机号变更的链接，用户可以通过该链接进入电子签系统进行手机号的变更。
+该接口支持员工和个人端手机号的变更。
+     */
+  async CreateUserMobileChangeUrl(
+    req: CreateUserMobileChangeUrlRequest,
+    cb?: (error: string, rep: CreateUserMobileChangeUrlResponse) => void
+  ): Promise<CreateUserMobileChangeUrlResponse> {
+    return this.request("CreateUserMobileChangeUrl", req, cb)
   }
 
   /**

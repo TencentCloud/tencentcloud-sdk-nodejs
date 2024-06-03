@@ -405,7 +405,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重命名情况。
+   * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重命名情况。
    */
   async RenameDockerContainer(
     req: RenameDockerContainerRequest,
@@ -469,7 +469,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重启情况。
+   * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重启情况。
    */
   async RestartDockerContainers(
     req: RestartDockerContainersRequest,
@@ -901,7 +901,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询启动情况。
+   * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询启动情况。
    */
   async StartDockerContainers(
     req: StartDockerContainersRequest,
@@ -1212,7 +1212,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询停止情况。
+   * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询停止情况。
    */
   async StopDockerContainers(
     req: StopDockerContainersRequest,
@@ -1303,7 +1303,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询删除情况。
+   * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询删除情况。
    */
   async RemoveDockerContainers(
     req: RemoveDockerContainersRequest,

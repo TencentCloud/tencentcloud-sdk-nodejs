@@ -16628,6 +16628,10 @@ export interface UploadContentRequest {
      * 请求来源，WEB 前端；CLIENT 客户端
      */
     RequestFromSource?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
 }
 /**
  * StartIntegrationTask请求参数结构体

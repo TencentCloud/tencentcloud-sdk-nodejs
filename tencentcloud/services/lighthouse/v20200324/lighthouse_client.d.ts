@@ -53,7 +53,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDisksRenewFlag(req: ModifyDisksRenewFlagRequest, cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void): Promise<ModifyDisksRenewFlagResponse>;
     /**
-     * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重命名情况。
+     * 重命名实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重命名情况。
      */
     RenameDockerContainer(req: RenameDockerContainerRequest, cb?: (error: string, rep: RenameDockerContainerResponse) => void): Promise<RenameDockerContainerResponse>;
     /**
@@ -81,7 +81,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBlueprintAttribute(req: ModifyBlueprintAttributeRequest, cb?: (error: string, rep: ModifyBlueprintAttributeResponse) => void): Promise<ModifyBlueprintAttributeResponse>;
     /**
-     * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重启情况。
+     * 重启实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重启情况。
      */
     RestartDockerContainers(req: RestartDockerContainersRequest, cb?: (error: string, rep: RestartDockerContainersResponse) => void): Promise<RestartDockerContainersResponse>;
     /**
@@ -273,7 +273,7 @@ export declare class Client extends AbstractClient {
      */
     DetachDisks(req: DetachDisksRequest, cb?: (error: string, rep: DetachDisksResponse) => void): Promise<DetachDisksResponse>;
     /**
-     * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询启动情况。
+     * 启动实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询启动情况。
      */
     StartDockerContainers(req: StartDockerContainersRequest, cb?: (error: string, rep: StartDockerContainersResponse) => void): Promise<StartDockerContainersResponse>;
     /**
@@ -428,7 +428,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     StopInstances(req: StopInstancesRequest, cb?: (error: string, rep: StopInstancesResponse) => void): Promise<StopInstancesResponse>;
     /**
-     * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询停止情况。
+     * 停止实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询停止情况。
      */
     StopDockerContainers(req: StopDockerContainersRequest, cb?: (error: string, rep: StopDockerContainersResponse) => void): Promise<StopDockerContainersResponse>;
     /**
@@ -471,7 +471,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询删除情况。
+     * 删除实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询删除情况。
      */
     RemoveDockerContainers(req: RemoveDockerContainersRequest, cb?: (error: string, rep: RemoveDockerContainersResponse) => void): Promise<RemoveDockerContainersResponse>;
     /**

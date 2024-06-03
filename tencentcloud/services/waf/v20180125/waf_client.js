@@ -839,6 +839,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainRules", req, cb);
     }
     /**
+     * api安全状态变更接口
+     */
+    async ModifyApiSecEventChange(req, cb) {
+        return this.request("ModifyApiSecEventChange", req, cb);
+    }
+    /**
      * 增加域名规则白名单
      */
     async AddDomainWhiteRule(req, cb) {

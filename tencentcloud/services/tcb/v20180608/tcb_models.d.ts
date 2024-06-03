@@ -2609,22 +2609,22 @@ export interface SpecialCostItem {
      * 上报日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReportDate: string;
+    ReportDate?: string;
     /**
      * 腾讯云uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 资源id:环境id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 上报任务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * EstablishCloudBaseRunServer返回参数结构体

@@ -617,6 +617,10 @@ export interface DescribeListBGPInstancesRequest {
      * 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 3: 包含全部
      */
     FilterTransRegionFlag?: number;
+    /**
+     * zoenid列表
+     */
+    FilterZoneIdList?: Array<number | bigint>;
 }
 /**
  * 字段值，K-V形式
@@ -5230,6 +5234,11 @@ export interface BGPInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SuperPackFlag?: number;
+    /**
+     * 所属ZoneId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId?: number;
 }
 /**
  * DescribeBizMonitorTrend返回参数结构体
