@@ -1103,39 +1103,44 @@ export interface DescribeFirmwareResponse {
     /**
      * 固件版本号
      */
-    Version: string;
+    Version?: string;
     /**
      * 产品ID
      */
-    ProductId: string;
+    ProductId?: string;
     /**
      * 固件名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 固件描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 固件Md5值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Md5sum: string;
+    Md5sum?: string;
     /**
      * 固件上传的秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Createtime: number;
+    Createtime?: number;
     /**
      * 产品名称
      */
-    ProductName: string;
+    ProductName?: string;
     /**
      * 固件类型。选项：mcu、module
      */
-    FwType: string;
+    FwType?: string;
+    /**
+     * 固件用户自定义配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDefined?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1543,45 +1548,50 @@ export interface FirmwareInfo {
     /**
      * 固件版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 固件MD5值
      */
-    Md5sum: string;
+    Md5sum?: string;
     /**
      * 固件创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 产品名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductName: string;
+    ProductName?: string;
     /**
      * 固件名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 固件描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 产品ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductId: string;
+    ProductId?: string;
     /**
      * 固件类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FwType: string;
+    FwType?: string;
     /**
      * 创建者 Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateUserId: number;
+    CreateUserId?: number;
+    /**
+     * 固件用户自定义配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDefined?: string;
 }
 /**
  * CreateProduct请求参数结构体

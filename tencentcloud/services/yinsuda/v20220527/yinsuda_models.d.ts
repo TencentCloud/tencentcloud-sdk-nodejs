@@ -5,7 +5,7 @@ export interface ApplyChorusResponse {
     /**
      * 合唱 Token。
      */
-    ChorusToken: string;
+    ChorusToken?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22,11 +22,11 @@ export interface KTVBPMInfo {
   <li>Fast：快；</li>
   <li>Unknown：未知。</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * BPM 值。
      */
-    Value: number;
+    Value?: number;
 }
 /**
  * DescribeKTVSuggestions返回参数结构体
@@ -82,11 +82,11 @@ export interface MusicAlbumCoverInfo {
   <li>Small：240 x 240 尺寸；</li>
   <li>Medium：480 x 480 尺寸。</li>
      */
-    Dimension: string;
+    Dimension?: string;
     /**
      * 下载链接。
      */
-    Url: string;
+    Url?: string;
 }
 /**
  * CreateKTVRobot请求参数结构体
@@ -121,7 +121,7 @@ export interface KTVSuggestionInfo {
     /**
      * 联想词。
      */
-    Suggestion: string;
+    Suggestion?: string;
 }
 /**
  * SyncKTVRobotCommand请求参数结构体
@@ -151,11 +151,11 @@ export interface KTVTagInfo {
     /**
      * 标签 Id。
      */
-    TagId: string;
+    TagId?: string;
     /**
      * 标签名称。
      */
-    Name: string;
+    Name?: string;
 }
 /**
  * DescribeKTVPlaylistDetail请求参数结构体
@@ -215,36 +215,36 @@ export interface KTVMusicDetailInfo {
     /**
      * 歌曲基础信息。
      */
-    KTVMusicBaseInfo: KTVMusicBaseInfo;
+    KTVMusicBaseInfo?: KTVMusicBaseInfo;
     /**
      * 播放凭证。
      */
-    PlayToken: string;
+    PlayToken?: string;
     /**
      * 歌词下载链接。
      */
-    LyricsUrl: string;
+    LyricsUrl?: string;
     /**
      * 音高数据下载链接。
      */
-    MidiUrl: string;
+    MidiUrl?: string;
     /**
      * 副歌片段信息。
      */
-    ChorusClipSet: Array<ChorusClip>;
+    ChorusClipSet?: Array<ChorusClip>;
     /**
      * 前奏间隔。
      */
-    PreludeInterval: number;
+    PreludeInterval?: number;
     /**
      * 歌曲流派列表。
      */
-    GenreSet: Array<string>;
+    GenreSet?: Array<string>;
     /**
      * 节拍信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BPMInfo: KTVBPMInfo;
+    BPMInfo?: KTVBPMInfo;
 }
 /**
  * CreateKTVRobot返回参数结构体
@@ -356,11 +356,11 @@ export interface DescribeKTVPlaylistsResponse {
     /**
      * 歌单基础信息。
      */
-    PlaylistBaseInfoSet: Array<KTVPlaylistBaseInfo>;
+    PlaylistBaseInfoSet?: Array<KTVPlaylistBaseInfo>;
     /**
      * 歌单总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -483,6 +483,7 @@ export interface SetAudioParamCommandInput {
      * 音频类型，取值有：
   <li>Original：原唱</li>
   <li>Accompaniment：伴奏</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
 }
@@ -493,16 +494,16 @@ export interface KTVMatchMusic {
     /**
      * 匹配到的歌曲基础信息。
      */
-    KTVMusicBaseInfo: KTVMusicBaseInfo;
+    KTVMusicBaseInfo?: KTVMusicBaseInfo;
     /**
      * 命中规则。
      */
-    MatchRule: KTVMatchRule;
+    MatchRule?: KTVMatchRule;
     /**
      * AME 歌曲基础信息，仅在使用音速达歌曲 Id 匹配 AME 曲库时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AMEMusicBaseInfo: AMEMusicBaseInfo;
+    AMEMusicBaseInfo?: AMEMusicBaseInfo;
 }
 /**
  * TRTC推流进房信息
@@ -577,11 +578,11 @@ export interface DescribeKTVRobotsResponse {
     /**
      * 机器人总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 机器人信息集合。
      */
-    KTVRobotInfoSet: Array<KTVRobotInfo>;
+    KTVRobotInfoSet?: Array<KTVRobotInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -620,15 +621,15 @@ export interface KTVTagGroupInfo {
     /**
      * 分组 Id。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 分组名。
      */
-    Name: string;
+    Name?: string;
     /**
      * 标签列表。
      */
-    TagInfoSet: Array<KTVTagInfo>;
+    TagInfoSet?: Array<KTVTagInfo>;
 }
 /**
  * DescribeVipUserInfo请求参数结构体
@@ -680,15 +681,15 @@ export interface AMEMusicBaseInfo {
     /**
      * 歌曲 Id。
      */
-    MusicId: string;
+    MusicId?: string;
     /**
      * 歌曲名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 歌手列表。
      */
-    SingerSet: Array<string>;
+    SingerSet?: Array<string>;
 }
 /**
  * DescribeKTVMusicsByTag返回参数结构体
@@ -731,11 +732,11 @@ export interface MusicAlbumInfo {
     /**
      * 专辑名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 封面列表。
      */
-    CoverInfoSet: Array<MusicAlbumCoverInfo>;
+    CoverInfoSet?: Array<MusicAlbumCoverInfo>;
 }
 /**
  * 设置播放模式
@@ -747,6 +748,7 @@ export interface SetPlayModeCommandInput {
   <li>Order：顺序播放</li>
   <li>RepeatSingle：单曲循环</li>
   <li>Shuffle：随机播放</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     PlayMode: string;
 }
@@ -833,39 +835,39 @@ export interface KTVRobotInfo {
     /**
      * 机器人Id。
      */
-    RobotId: string;
+    RobotId?: string;
     /**
      * 状态，取值有：
   <li>Play：播放</li>
   <li>Pause：暂停</li>
   <li>Destroy：销毁</li>
      */
-    Status: string;
+    Status?: string;
     /**
      * 播放列表。
      */
-    Playlists: Array<string>;
+    Playlists?: Array<string>;
     /**
      * 当前歌单索引位置。
      */
-    CurIndex: number;
+    CurIndex?: number;
     /**
      * 播放进度，单位：毫秒。
      */
-    Position: number;
+    Position?: number;
     /**
      * 音频参数。
      */
-    SetAudioParamInput: SetAudioParamCommandInput;
+    SetAudioParamInput?: SetAudioParamCommandInput;
     /**
      * 进房信息。
      */
-    JoinRoomInput: JoinRoomInput;
+    JoinRoomInput?: JoinRoomInput;
     /**
      * RTC厂商类型，取值有：
   <li>TRTC</li>
      */
-    RTCSystem: string;
+    RTCSystem?: string;
     /**
      * 播放模式，PlayMode取值有：
   <li>RepeatPlaylist：列表循环</li>
@@ -873,7 +875,7 @@ export interface KTVRobotInfo {
   <li>RepeatSingle：单曲循环</li>
   <li>Shuffle：随机播放</li>
      */
-    SetPlayModeInput: SetPlayModeCommandInput;
+    SetPlayModeInput?: SetPlayModeCommandInput;
 }
 /**
  * DescribeKTVMatchMusics返回参数结构体
@@ -882,11 +884,11 @@ export interface DescribeKTVMatchMusicsResponse {
     /**
      * 匹配到的歌曲列表。
      */
-    MatchMusicSet: Array<KTVMatchMusic>;
+    MatchMusicSet?: Array<KTVMatchMusic>;
     /**
      * 未匹配的规则列表。
      */
-    NotMatchRuleSet: Array<KTVMatchRule>;
+    NotMatchRuleSet?: Array<KTVMatchRule>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -899,7 +901,7 @@ export interface DescribeKTVTagsResponse {
     /**
      * 标签分组列表。
      */
-    TagGroupInfoSet: Array<KTVTagGroupInfo>;
+    TagGroupInfoSet?: Array<KTVTagGroupInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -968,11 +970,11 @@ export interface ChorusClip {
     /**
      * 开始时间，单位：毫秒。
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 结束时间，单位：毫秒。
      */
-    EndTime: number;
+    EndTime?: number;
 }
 /**
  * RechargeVip请求参数结构体
@@ -1098,40 +1100,40 @@ export interface KTVMusicBaseInfo {
     /**
      * 歌曲Id。
      */
-    MusicId: string;
+    MusicId?: string;
     /**
      * 歌曲名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 歌手名称。
      */
-    SingerSet: Array<string>;
+    SingerSet?: Array<string>;
     /**
      * 播放时长。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 歌手图片链接。
      */
-    SingerImageUrl: string;
+    SingerImageUrl?: string;
     /**
      * 专辑信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlbumInfo: MusicAlbumInfo;
+    AlbumInfo?: MusicAlbumInfo;
     /**
      * 权益列表，取值有：
   <li>Play：可播；</li>
   <li>Sing：可唱。</li>
      */
-    RightSet: Array<string>;
+    RightSet?: Array<string>;
     /**
      * 推荐类型，取值有：
   <li>Featured：精选；</li>
   <li>Other：其他。</li>
      */
-    RecommendType: string;
+    RecommendType?: string;
 }
 /**
  * DescribeKTVMusicsByTag请求参数结构体
@@ -1286,11 +1288,11 @@ export interface KTVPlaylistBaseInfo {
     /**
      * 歌单Id。
      */
-    PlaylistId: string;
+    PlaylistId?: string;
     /**
      * 歌单标题。
      */
-    Title: string;
+    Title?: string;
 }
 /**
  * DescribeUserInfo请求参数结构体
@@ -1334,6 +1336,10 @@ export interface DescribeKTVMusicAccompanySegmentUrlVipRequest {
      * 歌曲 Id
      */
     MusicId: string;
+    /**
+     * 房间Id
+     */
+    RoomId?: string;
 }
 /**
  * DestroyKTVRobot请求参数结构体

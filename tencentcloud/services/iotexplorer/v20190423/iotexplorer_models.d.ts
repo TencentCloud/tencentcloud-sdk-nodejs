@@ -2876,50 +2876,55 @@ export interface FirmwareInfo {
     /**
      * 固件版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 固件MD5值
      */
-    Md5sum: string;
+    Md5sum?: string;
     /**
      * 固件创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 产品名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductName: string;
+    ProductName?: string;
     /**
      * 固件名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 固件描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 产品ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductId: string;
+    ProductId?: string;
     /**
      * 固件升级模块
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FwType: string;
+    FwType?: string;
     /**
      * 创建者子 uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateUserId: number;
+    CreateUserId?: number;
     /**
      * 创建者昵称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatorNickName: string;
+    CreatorNickName?: string;
+    /**
+     * 固件用户自定义配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDefined?: string;
 }
 /**
  * DescribeTopicPolicy请求参数结构体

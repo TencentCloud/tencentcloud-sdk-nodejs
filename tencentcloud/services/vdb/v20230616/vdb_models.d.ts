@@ -219,7 +219,7 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
- * 网路信息
+ * 网络信息
  */
 export interface Network {
     /**

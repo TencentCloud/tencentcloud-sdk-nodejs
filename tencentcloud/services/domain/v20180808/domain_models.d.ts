@@ -2663,7 +2663,7 @@ export interface DescribePreReleaseListRequest {
      */
     PageNumber?: number;
     /**
-     * 没页显示数
+     * 每页显示数
      */
     PageSize?: number;
     /**

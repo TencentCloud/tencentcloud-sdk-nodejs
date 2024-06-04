@@ -16,11 +16,11 @@ export interface RunDockerContainersRequest {
  */
 export interface DescribeDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID列表。
+     * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerIds?: Array<string>;
     /**
@@ -509,11 +509,11 @@ export interface ModifyInstancesAttributeRequest {
  */
 export interface DescribeDockerContainerDetailRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID。
+     * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerId: string;
 }
@@ -2075,11 +2075,11 @@ export interface ImportKeyPairRequest {
  */
 export interface DescribeDockerActivitiesRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * Docker活动ID列表。
+     * Docker活动ID列表。可通过[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口返回值中的ActivityId获取。
      */
     ActivityIds?: Array<string>;
     /**
