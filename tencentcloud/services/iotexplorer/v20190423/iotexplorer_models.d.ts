@@ -1211,55 +1211,25 @@ export interface DescribeCloudStoragePackageConsumeStatsResponse {
     RequestId?: string;
 }
 /**
- * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
+ * GetWechatDeviceTicket请求参数结构体
  */
-export interface PackageInfo {
+export interface GetWechatDeviceTicketRequest {
     /**
-     * 云存开启状态，0为未开启，2为正在生效，1为已过期
-  注：这里只返回状态为0的数据
+     * 产品ID
      */
-    Status?: number;
+    ProductId: string;
     /**
-     * 云存类型，1为全时云存，2为事件云存
+     * 产品名称
      */
-    CSType?: number;
+    DeviceName: string;
     /**
-     * 云存回看时长
+     * 是否第三方小程序
      */
-    CSShiftDuration?: number;
+    IsThirdApp?: number;
     /**
-     * 云存套餐过期时间
+     * 模板ID
      */
-    CSExpiredTime?: number;
-    /**
-     * 云存套餐创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatedAt?: number;
-    /**
-     * 云存套餐更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdatedAt?: number;
-    /**
-     * 套餐id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PackageId?: string;
-    /**
-     * 订单id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OrderId?: string;
-    /**
-     * 通道id
-     */
-    ChannelId?: number;
-    /**
-     * 用户id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CSUserId?: string;
+    ModelId?: string;
 }
 /**
  * GetTWeCallActiveStatus返回参数结构体
@@ -1325,6 +1295,26 @@ export interface DescribeCloudStorageUsersResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 微信物联网硬件信息
+ */
+export interface WXIoTDeviceInfo {
+    /**
+     * sn信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SN?: string;
+    /**
+     * 票据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SNTicket?: string;
+    /**
+     * 模版ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelId?: string;
 }
 /**
  * SearchTopicRule请求参数结构体
@@ -2564,25 +2554,18 @@ export interface CreateLoRaGatewayRequest {
     FrequencyId?: string;
 }
 /**
- * UpdateDeviceTWeCallAuthorizeStatus请求参数结构体
+ * GetWechatDeviceTicket返回参数结构体
  */
-export interface UpdateDeviceTWeCallAuthorizeStatusRequest {
+export interface GetWechatDeviceTicketResponse {
     /**
-     * TweCall授权状态：0未授权，1已授权
+     * 微信设备信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status?: number;
+    WXDeviceInfo?: WXDeviceInfo;
     /**
-     * 产品ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProductId?: string;
-    /**
-     * 设备名
-     */
-    DeviceName?: string;
-    /**
-     * 微信用户的openId
-     */
-    WechatOpenId?: string;
+    RequestId?: string;
 }
 /**
  * TRTC 的参数 可以用来加入房间
@@ -2725,6 +2708,27 @@ export interface CreateDeviceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpdateDeviceTWeCallAuthorizeStatus请求参数结构体
+ */
+export interface UpdateDeviceTWeCallAuthorizeStatusRequest {
+    /**
+     * TweCall授权状态：0未授权，1已授权
+     */
+    Status?: number;
+    /**
+     * 产品ID
+     */
+    ProductId?: string;
+    /**
+     * 设备名
+     */
+    DeviceName?: string;
+    /**
+     * 微信用户的openId
+     */
+    WechatOpenId?: string;
 }
 /**
  * CreateDevice请求参数结构体
@@ -4743,6 +4747,57 @@ export interface PackageConsumeStat {
     Source?: number;
 }
 /**
+ * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
+ */
+export interface PackageInfo {
+    /**
+     * 云存开启状态，0为未开启，2为正在生效，1为已过期
+  注：这里只返回状态为0的数据
+     */
+    Status?: number;
+    /**
+     * 云存类型，1为全时云存，2为事件云存
+     */
+    CSType?: number;
+    /**
+     * 云存回看时长
+     */
+    CSShiftDuration?: number;
+    /**
+     * 云存套餐过期时间
+     */
+    CSExpiredTime?: number;
+    /**
+     * 云存套餐创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: number;
+    /**
+     * 云存套餐更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedAt?: number;
+    /**
+     * 套餐id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PackageId?: string;
+    /**
+     * 订单id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrderId?: string;
+    /**
+     * 通道id
+     */
+    ChannelId?: number;
+    /**
+     * 用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CSUserId?: string;
+}
+/**
  * CreatePositionSpace返回参数结构体
  */
 export interface CreatePositionSpaceResponse {
@@ -4833,6 +4888,21 @@ export interface CreateBatchProductionResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 微信硬件设备信息
+ */
+export interface WXDeviceInfo {
+    /**
+     * 设备ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * 设备信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WXIoTDeviceInfo?: WXIoTDeviceInfo;
 }
 /**
  * ModifyLoRaFrequency返回参数结构体

@@ -25,6 +25,35 @@ export interface StopAutoCalloutTaskRequest {
     TaskId: number;
 }
 /**
+ * CreateIVRSession请求参数结构体
+ */
+export interface CreateIVRSessionRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 被叫
+     */
+    Callee: string;
+    /**
+     * 指定的 IVR Id，目前支持呼入和自动外呼两种类型
+     */
+    IVRId: number;
+    /**
+     * 主叫号码列表
+     */
+    Callers?: Array<string>;
+    /**
+     * 自定义变量
+     */
+    Variables?: Array<Variable>;
+    /**
+     * 用户数据
+     */
+    UUI?: string;
+}
+/**
  * 企业资质申请信息
  */
 export interface CompanyApplyInfo {
@@ -3062,21 +3091,13 @@ export interface DescribeCompanyListRequest {
     ApplyID?: Array<number | bigint>;
 }
 /**
- * DescribeActiveCarrierPrivilegeNumber返回参数结构体
+ * CreateIVRSession返回参数结构体
  */
-export interface DescribeActiveCarrierPrivilegeNumberResponse {
+export interface CreateIVRSessionResponse {
     /**
-     * 总数量
+     * 新创建的会话 ID
      */
-    TotalCount?: number;
-    /**
-     * 生效列表
-     */
-    ActiveCarrierPrivilegeNumbers?: Array<ActiveCarrierPrivilegeNumber>;
-    /**
-     * 待审核单号
-     */
-    PendingApplicantIds?: Array<number | bigint>;
+    SessionId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3096,6 +3117,27 @@ export interface IMSatisfaction {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Label: string;
+}
+/**
+ * DescribeActiveCarrierPrivilegeNumber返回参数结构体
+ */
+export interface DescribeActiveCarrierPrivilegeNumberResponse {
+    /**
+     * 总数量
+     */
+    TotalCount?: number;
+    /**
+     * 生效列表
+     */
+    ActiveCarrierPrivilegeNumbers?: Array<ActiveCarrierPrivilegeNumber>;
+    /**
+     * 待审核单号
+     */
+    PendingApplicantIds?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * HangUpCall请求参数结构体

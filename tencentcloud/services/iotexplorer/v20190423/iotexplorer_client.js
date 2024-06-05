@@ -358,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageThumbnail", req, cb);
     }
     /**
+     * 查询微信设备授权票据
+     */
+    async GetWechatDeviceTicket(req, cb) {
+        return this.request("GetWechatDeviceTicket", req, cb);
+    }
+    /**
      * 拉取多个云存事件缩略图
      */
     async DescribeCloudStorageMultiThumbnail(req, cb) {

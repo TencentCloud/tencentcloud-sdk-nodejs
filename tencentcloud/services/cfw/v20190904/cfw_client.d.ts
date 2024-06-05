@@ -75,7 +75,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifyNatSequenceRules(req: ModifyNatSequenceRulesRequest, cb?: (error: string, rep: ModifyNatSequenceRulesResponse) => void): Promise<ModifyNatSequenceRulesResponse>;
     /**
-     * 删除防火墙实例
+     * 接口废弃
+
+删除防火墙实例
      */
     DeleteVpcInstance(req?: DeleteVpcInstanceRequest, cb?: (error: string, rep: DeleteVpcInstanceResponse) => void): Promise<DeleteVpcInstanceResponse>;
     /**
@@ -188,7 +190,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     CreateBlockIgnoreRuleNew(req: CreateBlockIgnoreRuleNewRequest, cb?: (error: string, rep: CreateBlockIgnoreRuleNewResponse) => void): Promise<CreateBlockIgnoreRuleNewResponse>;
     /**
-     * DescribeSourceAsset-查询资产组全部资产信息
+     * DescribeSourceAsset-查询全部资产信息
      */
     DescribeSourceAsset(req: DescribeSourceAssetRequest, cb?: (error: string, rep: DescribeSourceAssetResponse) => void): Promise<DescribeSourceAssetResponse>;
     /**

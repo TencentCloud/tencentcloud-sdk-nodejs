@@ -900,7 +900,7 @@ export interface ModifyProjectLimitRequest {
    */
   ProjectID: number
   /**
-   * 项目接口
+   * 取值为[log speed performance webvitals pv event custom miniProgramData]其中之一
    */
   ProjectInterface?: string
   /**

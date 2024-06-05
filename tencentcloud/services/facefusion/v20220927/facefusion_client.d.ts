@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMaterialListResponse, FuseFaceResponse, FuseFaceRequest, DescribeMaterialListRequest } from "./facefusion_models";
+import { DescribeMaterialListResponse, FuseFaceUltraRequest, FuseFaceUltraResponse, FuseFaceResponse, FuseFaceRequest, DescribeMaterialListRequest } from "./facefusion_models";
 /**
  * facefusion client
  * @class
@@ -19,4 +19,9 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     FuseFace(req: FuseFaceRequest, cb?: (error: string, rep: FuseFaceResponse) => void): Promise<FuseFaceResponse>;
+    /**
+     * 图片人脸融合（专业版）为同步接口，支持自定义美颜、人脸增强、牙齿增强、拉脸等参数，最高支持8K分辨率，有多个模型类型供选择。查看 <a href="https://cloud.tencent.com/document/product/670/38247" target="_blank">融合接入指引</a>。
+请求频率限制为2次/秒。
+     */
+    FuseFaceUltra(req: FuseFaceUltraRequest, cb?: (error: string, rep: FuseFaceUltraResponse) => void): Promise<FuseFaceUltraResponse>;
 }

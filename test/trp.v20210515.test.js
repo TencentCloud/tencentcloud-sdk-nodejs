@@ -148,6 +148,16 @@ it("trp.v20210515.DescribeCodesByPack", async function () {
     }
 })
 
+it("trp.v20210515.CreateChainBatch", async function () {
+    try {
+       const data = await client.CreateChainBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeMerchantById", async function () {
     try {
        const data = await client.DescribeMerchantById({})

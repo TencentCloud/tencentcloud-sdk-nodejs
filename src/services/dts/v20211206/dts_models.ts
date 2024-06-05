@@ -5493,6 +5493,10 @@ export interface DescribeSubscribeJobsRequest {
    */
   InstanceId?: string
   /**
+   * 订阅的topicName
+   */
+  Topic?: string
+  /**
    * 计费模式筛选，可能的值：0-包年包月，1-按量计费
    */
   PayType?: number

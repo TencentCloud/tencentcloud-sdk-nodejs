@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CodeBatch,
+  DescribeScanStatsRequest,
   DescribeScanLogsResponse,
   Quota,
   PlanQRCode,
@@ -33,7 +34,7 @@ import {
   DeleteCodeBatchRequest,
   DescribeMerchantsRequest,
   ModifyTraceCodeRequest,
-  DescribeCustomRulesResponse,
+  DescribePlanQRCodesResponse,
   CreateMerchantRequest,
   DescribeCodeBatchByIdRequest,
   DescribeTraceCodeByIdResponse,
@@ -74,6 +75,7 @@ import {
   AuthorizedTransferRequest,
   ReportBatchCallbackStatusRequest,
   DescribeCodeBatchesResponse,
+  Chain,
   CreateProductRequest,
   CreateCustomPackRequest,
   Ext,
@@ -93,6 +95,7 @@ import {
   DescribeTmpTokenResponse,
   DescribeCodePackUrlRequest,
   DeleteProductResponse,
+  CreateChainBatchRequest,
   OutputAuthorizedTransfer,
   DeleteTraceDataResponse,
   ModifyCustomRuleStatusRequest,
@@ -114,6 +117,7 @@ import {
   DescribePlanQRCodeScanRecordsRequest,
   RawScanLog,
   DescribePlanQRCodesRequest,
+  CreateChainBatchResponse,
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
   DescribeTraceCodesResponse,
@@ -134,7 +138,7 @@ import {
   DescribeMerchantsResponse,
   DescribeRawScanLogsResponse,
   DescribeTraceDataListRequest,
-  DescribeScanStatsRequest,
+  ChainValue,
   DeleteMerchantResponse,
   DeleteCodeBatchResponse,
   CreateTraceChainRequest,
@@ -143,7 +147,7 @@ import {
   DescribeProductByIdResponse,
   DescribeCodePacksRequest,
   DescribeJobFileUrlResponse,
-  DescribePlanQRCodesResponse,
+  DescribeCustomRulesResponse,
   DescribeTraceCodeByIdRequest,
   ModifyCodeBatchResponse,
   PlanQRCodeRecord,
@@ -290,6 +294,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCodesByPackResponse) => void
   ): Promise<DescribeCodesByPackResponse> {
     return this.request("DescribeCodesByPack", req, cb)
+  }
+
+  /**
+   * 批量上链接口
+   */
+  async CreateChainBatch(
+    req: CreateChainBatchRequest,
+    cb?: (error: string, rep: CreateChainBatchResponse) => void
+  ): Promise<CreateChainBatchResponse> {
+    return this.request("CreateChainBatch", req, cb)
   }
 
   /**

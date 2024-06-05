@@ -82,12 +82,13 @@ import {
   FenceAlarmPoint,
   DescribeCloudStoragePackageConsumeDetailsResponse,
   DescribeCloudStoragePackageConsumeStatsResponse,
-  PackageInfo,
+  GetWechatDeviceTicketRequest,
   GetTWeCallActiveStatusResponse,
   GetAuthMiniProgramAppListResponse,
   UnbindDevicesResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
   DescribeCloudStorageUsersResponse,
+  WXIoTDeviceInfo,
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
@@ -152,7 +153,7 @@ import {
   AssignTWeCallLicenseResponse,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
-  UpdateDeviceTWeCallAuthorizeStatusRequest,
+  GetWechatDeviceTicketResponse,
   TRTCParams,
   ReleaseStudioProductRequest,
   CreateProjectResponse,
@@ -161,6 +162,7 @@ import {
   CreateTopicPolicyResponse,
   ModifyCloudStorageAIServiceRequest,
   CreateDeviceResponse,
+  UpdateDeviceTWeCallAuthorizeStatusRequest,
   CreateDeviceRequest,
   DescribeDevicePositionListResponse,
   InheritCloudStorageUserResponse,
@@ -265,9 +267,11 @@ import {
   ActivateTWeCallLicenseResponse,
   PackageConsumeTask,
   PackageConsumeStat,
+  PackageInfo,
   CreatePositionSpaceResponse,
   ProjectEntryEx,
   CreateBatchProductionResponse,
+  WXDeviceInfo,
   ModifyLoRaFrequencyResponse,
   DescribeFenceBindListResponse,
   DescribeCloudStorageThumbnailListResponse,
@@ -901,6 +905,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
   ): Promise<DescribeCloudStorageThumbnailResponse> {
     return this.request("DescribeCloudStorageThumbnail", req, cb)
+  }
+
+  /**
+   * 查询微信设备授权票据
+   */
+  async GetWechatDeviceTicket(
+    req: GetWechatDeviceTicketRequest,
+    cb?: (error: string, rep: GetWechatDeviceTicketResponse) => void
+  ): Promise<GetWechatDeviceTicketResponse> {
+    return this.request("GetWechatDeviceTicket", req, cb)
   }
 
   /**

@@ -303,17 +303,17 @@ export interface ChatProRequest {
  */
 export interface EmbeddingData {
     /**
-     * embedding 信息。
+     * Embedding 信息，目前为 1024 维浮点数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Embedding?: Array<number>;
     /**
-     * 下标。
+     * 下标，目前不支持批量，因此固定为 0。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Index?: number;
     /**
-     * embedding
+     * 目前固定为 "embedding"。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Object?: string;

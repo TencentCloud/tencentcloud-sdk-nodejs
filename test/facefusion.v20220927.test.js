@@ -38,4 +38,14 @@ it("facefusion.v20220927.FuseFace", async function () {
     }
 })
 
+it("facefusion.v20220927.FuseFaceUltra", async function () {
+    try {
+       const data = await client.FuseFaceUltra({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

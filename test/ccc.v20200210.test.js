@@ -418,6 +418,16 @@ it("ccc.v20200210.CreateStaff", async function () {
     }
 })
 
+it("ccc.v20200210.CreateIVRSession", async function () {
+    try {
+       const data = await client.CreateIVRSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateAutoCalloutTask", async function () {
     try {
        const data = await client.CreateAutoCalloutTask({})

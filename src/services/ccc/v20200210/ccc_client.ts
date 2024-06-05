@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExtensionRequest,
   StopAutoCalloutTaskRequest,
+  CreateIVRSessionRequest,
   CompanyApplyInfo,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
@@ -140,8 +141,9 @@ import {
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
   DescribeCompanyListRequest,
-  DescribeActiveCarrierPrivilegeNumberResponse,
+  CreateIVRSessionResponse,
   IMSatisfaction,
+  DescribeActiveCarrierPrivilegeNumberResponse,
   HangUpCallRequest,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
@@ -582,6 +584,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStaffResponse) => void
   ): Promise<CreateStaffResponse> {
     return this.request("CreateStaff", req, cb)
+  }
+
+  /**
+   * 创建关联 IVR 的会话，仅高级版支持，目前支持呼入和自动外呼两种 IVR 类型。收到请求后 TCCC 会先尝试呼通被叫，然后进入 IVR 流程。
+   */
+  async CreateIVRSession(
+    req: CreateIVRSessionRequest,
+    cb?: (error: string, rep: CreateIVRSessionResponse) => void
+  ): Promise<CreateIVRSessionResponse> {
+    return this.request("CreateIVRSession", req, cb)
   }
 
   /**

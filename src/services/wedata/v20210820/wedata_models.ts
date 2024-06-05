@@ -3264,6 +3264,11 @@ export interface RuleTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceTypes?: Array<number | bigint>
+  /**
+   * 创建人IdStr
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIdStr?: string
 }
 
 /**
@@ -3948,35 +3953,40 @@ export interface DimensionScoreInfo {
    * 维度名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 权重
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
   /**
    * 设置人id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: number
+  UserId?: number
   /**
    * 设置人名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName: string
+  UserName?: string
   /**
    * 更新时间 时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 参与评估表数量
    */
-  JoinTableNumber: number
+  JoinTableNumber?: number
   /**
    * 评分
    */
-  Score: number
+  Score?: number
+  /**
+   * 设置人idStr
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIdStr?: string
 }
 
 /**
@@ -13838,6 +13848,11 @@ export interface SubscribeReceiver {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverName?: string
+  /**
+   * 接收人Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiverUserIdStr?: string
 }
 
 /**

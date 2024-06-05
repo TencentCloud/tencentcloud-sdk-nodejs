@@ -3631,28 +3631,28 @@ export interface MediaProcessTaskAnimatedGraphicResult {
     /**
      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
      */
-    Status: string;
+    Status?: string;
     /**
      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
      */
-    ErrCodeExt: string;
+    ErrCodeExt?: string;
     /**
      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
      */
-    ErrCode: number;
+    ErrCode?: number;
     /**
      * 错误信息。
      */
-    Message: string;
+    Message?: string;
     /**
      * 转动图任务的输入。
      */
-    Input: AnimatedGraphicTaskInput;
+    Input?: AnimatedGraphicTaskInput;
     /**
      * 转动图任务的输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Output: MediaAnimatedGraphicsItem;
+    Output?: MediaAnimatedGraphicsItem;
     /**
      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4326,28 +4326,28 @@ export interface MediaProcessTaskImageSpriteResult {
     /**
      * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
      */
-    Status: string;
+    Status?: string;
     /**
      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
      */
-    ErrCodeExt: string;
+    ErrCodeExt?: string;
     /**
      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
      */
-    ErrCode: number;
+    ErrCode?: number;
     /**
      * 错误信息。
      */
-    Message: string;
+    Message?: string;
     /**
      * 对视频截雪碧图任务的输入。
      */
-    Input: ImageSpriteTaskInput;
+    Input?: ImageSpriteTaskInput;
     /**
      * 对视频截雪碧图任务的输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Output: MediaImageSpriteItem;
+    Output?: MediaImageSpriteItem;
     /**
      * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -10623,11 +10623,7 @@ export interface AiAnalysisTaskDescriptionInput {
  */
 export interface DescribeTaskDetailResponse {
     /**
-     * 任务类型，目前取值有：
-  <li>WorkflowTask：视频工作流处理任务。</li>
-  <li>EditMediaTask：视频编辑任务。</li>
-  <li>LiveStreamProcessTask：直播流处理任务。</li>
-  <li>ScheduleTask：编排处理任务。</li>
+     * 任务类型，目前取值有：<li>WorkflowTask：视频工作流处理任务。</li><li>EditMediaTask：视频编辑任务。</li><li>LiveStreamProcessTask：直播流处理任务。</li><li>ScheduleTask：编排处理任务。</li><li>EvaluationTask：评测任务。</li>
      */
     TaskType?: string;
     /**
@@ -12030,22 +12026,22 @@ export interface QualityControlData {
      * 为true时表示视频无音频轨。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoAudio: boolean;
+    NoAudio?: boolean;
     /**
      * 为true时表示视频无视频轨。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoVideo: boolean;
+    NoVideo?: boolean;
     /**
      * 视频无参考质量打分，百分制。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QualityEvaluationScore: number;
+    QualityEvaluationScore?: number;
     /**
      * 质检检出异常项。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QualityControlResultSet: Array<QualityControlResult>;
+    QualityControlResultSet?: Array<QualityControlResult>;
 }
 /**
  * Drm 加密信息。

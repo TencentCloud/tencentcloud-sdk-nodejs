@@ -127,7 +127,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyNatSequenceRules", req, cb);
     }
     /**
-     * 删除防火墙实例
+     * 接口废弃
+
+删除防火墙实例
      */
     async DeleteVpcInstance(req, cb) {
         return this.request("DeleteVpcInstance", req, cb);
@@ -296,7 +298,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("CreateBlockIgnoreRuleNew", req, cb);
     }
     /**
-     * DescribeSourceAsset-查询资产组全部资产信息
+     * DescribeSourceAsset-查询全部资产信息
      */
     async DescribeSourceAsset(req, cb) {
         return this.request("DescribeSourceAsset", req, cb);

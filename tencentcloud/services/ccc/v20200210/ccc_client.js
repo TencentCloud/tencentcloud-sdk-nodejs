@@ -270,6 +270,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStaff", req, cb);
     }
     /**
+     * 创建关联 IVR 的会话，仅高级版支持，目前支持呼入和自动外呼两种 IVR 类型。收到请求后 TCCC 会先尝试呼通被叫，然后进入 IVR 流程。
+     */
+    async CreateIVRSession(req, cb) {
+        return this.request("CreateIVRSession", req, cb);
+    }
+    /**
      * 创建自动外呼任务
      */
     async CreateAutoCalloutTask(req, cb) {

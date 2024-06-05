@@ -107,6 +107,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCodesByPack", req, cb);
     }
     /**
+     * 批量上链接口
+     */
+    async CreateChainBatch(req, cb) {
+        return this.request("CreateChainBatch", req, cb);
+    }
+    /**
      * 查询商户信息
      */
     async DescribeMerchantById(req, cb) {

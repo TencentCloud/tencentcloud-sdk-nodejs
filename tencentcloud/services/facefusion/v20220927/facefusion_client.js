@@ -43,5 +43,12 @@ class Client extends abstract_client_1.AbstractClient {
     async FuseFace(req, cb) {
         return this.request("FuseFace", req, cb);
     }
+    /**
+     * 图片人脸融合（专业版）为同步接口，支持自定义美颜、人脸增强、牙齿增强、拉脸等参数，最高支持8K分辨率，有多个模型类型供选择。查看 <a href="https://cloud.tencent.com/document/product/670/38247" target="_blank">融合接入指引</a>。
+请求频率限制为2次/秒。
+     */
+    async FuseFaceUltra(req, cb) {
+        return this.request("FuseFaceUltra", req, cb);
+    }
 }
 exports.Client = Client;

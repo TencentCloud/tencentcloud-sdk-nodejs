@@ -568,6 +568,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageThumbnail", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
+    try {
+       const data = await client.GetWechatDeviceTicket({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeCloudStorageMultiThumbnail", async function () {
     try {
        const data = await client.DescribeCloudStorageMultiThumbnail({})

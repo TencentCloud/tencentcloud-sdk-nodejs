@@ -104,6 +104,39 @@ export interface CodeBatch {
     Attrs?: Array<AttrItem>;
 }
 /**
+ * DescribeScanStats请求参数结构体
+ */
+export interface DescribeScanStatsRequest {
+    /**
+     * 企业ID
+     */
+    CorpId?: number;
+    /**
+     * 分页数量
+     */
+    PageSize?: number;
+    /**
+     * 当前分页
+     */
+    PageNumber?: number;
+    /**
+     * 商户ID
+     */
+    MerchantId?: string;
+    /**
+     * 产品ID
+     */
+    ProductId?: string;
+    /**
+     * 批次ID
+     */
+    BatchId?: string;
+    /**
+     * 安心码
+     */
+    Code?: string;
+}
+/**
  * DescribeScanLogs返回参数结构体
  */
 export interface DescribeScanLogsResponse {
@@ -688,19 +721,21 @@ export interface ModifyTraceCodeRequest {
     Status?: number;
 }
 /**
- * DescribeCustomRules返回参数结构体
+ * DescribePlanQRCodes返回参数结构体
  */
-export interface DescribeCustomRulesResponse {
+export interface DescribePlanQRCodesResponse {
     /**
-     * 码规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回码
      */
-    CustomRules: Array<CustomRule>;
+    Ret?: number;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    Total?: number;
+    /**
+     * 数据
+     */
+    Data?: Array<PlanQRCode>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1691,6 +1726,21 @@ export interface DescribeCodeBatchesResponse {
     RequestId?: string;
 }
 /**
+ * 上链数据
+ */
+export interface Chain {
+    /**
+     * 码url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Code: string;
+    /**
+     * 上链数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: Array<ChainValue>;
+}
+/**
  * CreateProduct请求参数结构体
  */
 export interface CreateProductRequest {
@@ -2170,6 +2220,19 @@ export interface DeleteProductResponse {
     RequestId?: string;
 }
 /**
+ * CreateChainBatch请求参数结构体
+ */
+export interface CreateChainBatchRequest {
+    /**
+     * 企业ID
+     */
+    CorpId: number;
+    /**
+     * 溯源ID
+     */
+    ChainList: Array<Chain>;
+}
+/**
  * 业务出参
  */
 export interface OutputAuthorizedTransfer {
@@ -2536,6 +2599,15 @@ export interface DescribePlanQRCodesRequest {
      * 页大小
      */
     PageSize: number;
+}
+/**
+ * CreateChainBatch返回参数结构体
+ */
+export interface CreateChainBatchResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyCodeBatch请求参数结构体
@@ -3124,37 +3196,24 @@ export interface DescribeTraceDataListRequest {
     PageSize?: number;
 }
 /**
- * DescribeScanStats请求参数结构体
+ * 上链数据 key-value
  */
-export interface DescribeScanStatsRequest {
+export interface ChainValue {
     /**
-     * 企业ID
+     * 标题名字
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CorpId?: number;
+    Label: string;
     /**
-     * 分页数量
+     * 类型，文字："text"，图片："image"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageSize?: number;
+    Type: string;
     /**
-     * 当前分页
+     * 值，文字类型："abc"，图片类型：""/images/img.png"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageNumber?: number;
-    /**
-     * 商户ID
-     */
-    MerchantId?: string;
-    /**
-     * 产品ID
-     */
-    ProductId?: string;
-    /**
-     * 批次ID
-     */
-    BatchId?: string;
-    /**
-     * 安心码
-     */
-    Code?: string;
+    Value: string;
 }
 /**
  * DeleteMerchant返回参数结构体
@@ -3292,21 +3351,19 @@ export interface DescribeJobFileUrlResponse {
     RequestId?: string;
 }
 /**
- * DescribePlanQRCodes返回参数结构体
+ * DescribeCustomRules返回参数结构体
  */
-export interface DescribePlanQRCodesResponse {
+export interface DescribeCustomRulesResponse {
     /**
-     * 返回码
+     * 码规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ret?: number;
+    CustomRules: Array<CustomRule>;
     /**
      * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total?: number;
-    /**
-     * 数据
-     */
-    Data?: Array<PlanQRCode>;
+    TotalCount: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

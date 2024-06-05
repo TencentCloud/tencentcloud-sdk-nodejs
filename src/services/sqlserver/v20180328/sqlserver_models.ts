@@ -5509,57 +5509,61 @@ export interface RecycleReadOnlyGroupRequest {
 }
 
 /**
- * 账户信息详情
+ * 账号信息详情
  */
 export interface AccountDetail {
   /**
    * 账户名
    */
-  Name: string
+  Name?: string
   /**
    * 账户备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 账户创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
    */
-  Status: number
+  Status?: number
   /**
    * 账户更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 密码更新时间
    */
-  PassTime: string
+  PassTime?: string
   /**
    * 账户内部状态，正常为enable
    */
-  InternalStatus: string
+  InternalStatus?: string
   /**
    * 该账户对相关db的读写权限信息
    */
-  Dbs: Array<DBPrivilege>
+  Dbs?: Array<DBPrivilege>
   /**
    * 是否为管理员账户
    */
-  IsAdmin: boolean
+  IsAdmin?: boolean
+  /**
+   * 是否为cam托管账户
+   */
+  IsCam?: boolean
   /**
    * win-windows鉴权,sql-sqlserver鉴权
    */
-  Authentication: string
+  Authentication?: string
   /**
    * win-windows鉴权账户需要host
    */
-  Host: string
+  Host?: string
   /**
    * 账号类型。L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限
    */
-  AccountType: string
+  AccountType?: string
 }
 
 /**
@@ -5684,7 +5688,7 @@ export interface AccountCreateInfo {
   /**
    * 实例密码
    */
-  Password: string
+  Password?: string
   /**
    * DB权限列表
    */
@@ -5694,7 +5698,7 @@ export interface AccountCreateInfo {
    */
   Remark?: string
   /**
-   * 是否为管理员账户，当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false，等价于AccountType=L3
+   * 是否为管理员账户，当值为true 等价于单节点AccountType=L0，双节点AccountType=L1，当值为false，等价于AccountType=L3
    */
   IsAdmin?: boolean
   /**
@@ -5705,6 +5709,10 @@ export interface AccountCreateInfo {
    * 账号类型，IsAdmin的扩展字段。 L0-超级权限(基础版独有),L1-高级权限,L2-特殊权限,L3-普通权限，默认L3
    */
   AccountType?: string
+  /**
+   * 是否开启CAM验证
+   */
+  IsCam?: boolean
 }
 
 /**
