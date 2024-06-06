@@ -570,7 +570,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  查询Prometheus按量实例用量
+   * 查询Prometheus按量实例用量
    */
   async DescribePrometheusInstanceUsage(
     req: DescribePrometheusInstanceUsageRequest,

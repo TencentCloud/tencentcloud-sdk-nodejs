@@ -538,9 +538,9 @@ it("postgres.v20170312.ResetAccountPassword", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
+it("postgres.v20170312.RestoreDBInstanceObjects", async function () {
     try {
-       const data = await client.DescribeDBInstanceAttribute({})
+       const data = await client.RestoreDBInstanceObjects({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +891,16 @@ it("postgres.v20170312.DeleteBaseBackup", async function () {
 it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
     try {
        const data = await client.DescribeReadOnlyGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
+    try {
+       const data = await client.DescribeDBInstanceAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

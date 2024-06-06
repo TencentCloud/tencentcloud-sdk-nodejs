@@ -118,22 +118,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
     }
     /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
-     */
-    async DescribeSparkSessionBatchSqlLog(req, cb) {
-        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
-    }
-    /**
      * 切换主备集群
      */
     async SwitchDataEngine(req, cb) {
         return this.request("SwitchDataEngine", req, cb);
     }
     /**
-     * DMS元数据更新库
+     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
      */
-    async AlterDMSDatabase(req, cb) {
-        return this.request("AlterDMSDatabase", req, cb);
+    async DescribeDataEngines(req, cb) {
+        return this.request("DescribeDataEngines", req, cb);
     }
     /**
      * DMS元数据获取分区
@@ -142,10 +136,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDMSPartitions", req, cb);
     }
     /**
-     * 查询任务结果
+     * 本接口（CancelTask），用于取消任务
      */
-    async DescribeTaskResult(req, cb) {
-        return this.request("DescribeTaskResult", req, cb);
+    async CancelTask(req, cb) {
+        return this.request("CancelTask", req, cb);
+    }
+    /**
+     * 查询DLC Catalog授权列表
+     */
+    async DescribeDLCCatalogAccess(req, cb) {
+        return this.request("DescribeDLCCatalogAccess", req, cb);
     }
     /**
      * DMS元数据获取表列表
@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSparkAppTask", req, cb);
     }
     /**
+     * 此接口（DescribeOtherCHDFSBindingList）用于查询其他产品元数据加速桶绑定列表
+     */
+    async DescribeOtherCHDFSBindingList(req, cb) {
+        return this.request("DescribeOtherCHDFSBindingList", req, cb);
+    }
+    /**
      * 查询托管存储指定目录的Summary
      */
     async DescribeLakeFsDirSummary(req, cb) {
@@ -200,6 +206,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNotebookSessions(req, cb) {
         return this.request("DescribeNotebookSessions", req, cb);
+    }
+    /**
+     * 本接口（RegisterThirdPartyAccessUser）查询开通第三方平台访问的用户信息
+     */
+    async DescribeThirdPartyAccessUser(req, cb) {
+        return this.request("DescribeThirdPartyAccessUser", req, cb);
+    }
+    /**
+     * 撤销DLC Catalog访问权限
+     */
+    async RevokeDLCCatalogAccess(req, cb) {
+        return this.request("RevokeDLCCatalogAccess", req, cb);
     }
     /**
      * 创建用户
@@ -292,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTablesName", req, cb);
     }
     /**
+     * 此接口（DeleteCHDFSBindingProduct）用于删除元数据加速桶和产品绑定关系
+     */
+    async DeleteCHDFSBindingProduct(req, cb) {
+        return this.request("DeleteCHDFSBindingProduct", req, cb);
+    }
+    /**
      * 上报元数据心跳
      */
     async ReportHeartbeatMetaData(req, cb) {
@@ -340,6 +364,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollbackDataEngineImage", req, cb);
     }
     /**
+     * 本接口（DescribeSubUserAccessPolicy）用于开通了第三方平台访问的用户，查询其子用户的访问策略
+     */
+    async DescribeSubUserAccessPolicy(req, cb) {
+        return this.request("DescribeSubUserAccessPolicy", req, cb);
+    }
+    /**
      * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
     async CreateSparkSessionBatchSQL(req, cb) {
@@ -350,6 +380,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNotebookSessionStatements(req, cb) {
         return this.request("DescribeNotebookSessionStatements", req, cb);
+    }
+    /**
+     * 授权访问DLC Catalog
+     */
+    async GrantDLCCatalogAccess(req, cb) {
+        return this.request("GrantDLCCatalogAccess", req, cb);
     }
     /**
      * 本接口用于控制挂起或启动数据引擎
@@ -400,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatement", req, cb);
     }
     /**
-     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
+     * DMS元数据更新库
      */
-    async DescribeDataEngines(req, cb) {
-        return this.request("DescribeDataEngines", req, cb);
+    async AlterDMSDatabase(req, cb) {
+        return this.request("AlterDMSDatabase", req, cb);
     }
     /**
      * 本接口（DescribeSparkSessionBatchSQL）用于查询Spark SQL批任务运行状态
@@ -490,6 +526,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkGroup", req, cb);
     }
     /**
+     * 此接口（CreateCHDFSBindingProduct）用于创建元数据加速桶和产品绑定关系
+     */
+    async CreateCHDFSBindingProduct(req, cb) {
+        return this.request("CreateCHDFSBindingProduct", req, cb);
+    }
+    /**
      * 本接口（DescribeDatasourceConnection）用于查询数据源信息
      */
     async DescribeDatasourceConnection(req, cb) {
@@ -514,10 +556,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUser", req, cb);
     }
     /**
-     * 本接口（CancelTask），用于取消任务
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
-    async CancelTask(req, cb) {
-        return this.request("CancelTask", req, cb);
+    async DescribeSparkSessionBatchSqlLog(req, cb) {
+        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
     }
     /**
      * 本接口（DescribeTable），用于查询单个表的详细信息。
@@ -652,10 +694,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTable", req, cb);
     }
     /**
+     * 查询任务结果
+     */
+    async DescribeTaskResult(req, cb) {
+        return this.request("DescribeTaskResult", req, cb);
+    }
+    /**
      * 该接口（CreateExportTask）用于创建导出任务
      */
     async CreateExportTask(req, cb) {
         return this.request("CreateExportTask", req, cb);
+    }
+    /**
+     * 本接口（RegisterThirdPartyAccessUser）用于开通第三方平台访问
+     */
+    async RegisterThirdPartyAccessUser(req, cb) {
+        return this.request("RegisterThirdPartyAccessUser", req, cb);
     }
     /**
      * 从工作组中删除用户
@@ -716,6 +770,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeViews(req, cb) {
         return this.request("DescribeViews", req, cb);
+    }
+    /**
+     * 本接口（RegisterThirdPartyAccessUser）用于移除第三方平台访问
+     */
+    async DeleteThirdPartyAccessUser(req, cb) {
+        return this.request("DeleteThirdPartyAccessUser", req, cb);
     }
     /**
      * DMS元数据获取库

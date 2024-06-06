@@ -146,6 +146,7 @@ import {
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
+  ServiceCallInfoV2,
   DescribeBillingResourceGroupRequest,
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,

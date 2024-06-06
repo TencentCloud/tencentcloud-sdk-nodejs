@@ -86,7 +86,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusAlertGroups", req, cb);
     }
     /**
-     *  查询Prometheus按量实例用量
+     * 查询Prometheus按量实例用量
      */
     async DescribePrometheusInstanceUsage(req, cb) {
         return this.request("DescribePrometheusInstanceUsage", req, cb);

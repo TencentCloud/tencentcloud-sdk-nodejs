@@ -50,18 +50,21 @@ import {
   DeleteNotebookSessionRequest,
   CreateDMSTableResponse,
   DescribeSparkSessionBatchSQLRequest,
+  DescribeUsersResponse,
   SmartOptimizerPolicy,
   SparkSessionBatchLog,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
   ElasticsearchInfo,
-  UpdateDataEngineConfigResponse,
+  DeleteUsersFromWorkGroupResponse,
+  DescribeDLCCatalogAccessResponse,
   DescribeUserRolesResponse,
   CreateExportTaskRequest,
   CreateDMSTableRequest,
   DMSTable,
   ModifyWorkGroupResponse,
-  HiveInfo,
+  DMSSds,
+  OpendThirdAccessUserInfo,
   DescribeNotebookSessionStatementSqlResultRequest,
   CreateTableResponse,
   ListTaskJobLogNameRequest,
@@ -69,6 +72,7 @@ import {
   UpdateUserDataEngineConfigRequest,
   RollbackDataEngineImageRequest,
   QueryResultResponse,
+  RevokeDLCCatalogAccessRequest,
   DataGovernPolicy,
   CreateWorkGroupResponse,
   DescribeEngineUsageInfoResponse,
@@ -91,7 +95,7 @@ import {
   TasksOverview,
   CreateDatabaseResponse,
   DropDMSPartitionsResponse,
-  DropDMSTableResponse,
+  CreateWorkGroupRequest,
   DescribeDatasourceConnectionRequest,
   CheckDataEngineImageCanBeUpgradeRequest,
   CreateResultDownloadRequest,
@@ -106,19 +110,23 @@ import {
   DescribeTablesNameRequest,
   WorkGroupInfo,
   SwitchDataEngineRequest,
+  DLCCatalogAccess,
   ModifyUserResponse,
   DeleteScriptResponse,
   Task,
   DataEngineConfigInstanceInfo,
   CrontabResumeSuspendStrategy,
+  VpcInfo,
   NotebookSessions,
   CreateNotebookSessionStatementSupportBatchSQLRequest,
   DetachWorkGroupPolicyResponse,
   DescribeSparkSessionBatchSqlLogResponse,
   SwitchDataEngineResponse,
   DescribeLakeFsInfoRequest,
+  CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
   DescribeUserTypeResponse,
+  DeleteThirdPartyAccessUserRequest,
   DeleteUserResponse,
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
@@ -137,8 +145,8 @@ import {
   DescribeNotebookSessionLogRequest,
   UserInfo,
   GetOptimizerPolicyRequest,
+  Users,
   DataEngineConfigPair,
-  CreateWorkGroupRequest,
   SuspendResumeDataEngineResponse,
   DatasourceConnectionLocation,
   AttachUserPolicyRequest,
@@ -148,6 +156,7 @@ import {
   CreateNotebookSessionStatementResponse,
   ListTaskJobLogNameResponse,
   DescribeLakeFsTaskResultRequest,
+  OtherCHDFSBinding,
   AlterDMSTableRequest,
   DescribeDMSPartitionsResponse,
   CreateScriptRequest,
@@ -155,6 +164,7 @@ import {
   DescribeNotebookSessionLogResponse,
   DescribeForbiddenTableProResponse,
   DescribeWorkGroupInfoRequest,
+  DescribeOtherCHDFSBindingListRequest,
   CancelTaskResponse,
   TableInfo,
   DescribeSparkSessionBatchSQLResponse,
@@ -168,6 +178,7 @@ import {
   Other,
   CreateSparkAppResponse,
   CreateTaskResponse,
+  MountPointAssociates,
   AlterDMSPartitionResponse,
   DescribeTableResponse,
   DetachUserPolicyResponse,
@@ -179,6 +190,7 @@ import {
   LockMetaDataResponse,
   CheckLockMetaDataResponse,
   AlterDMSDatabaseRequest,
+  DescribeOtherCHDFSBindingListResponse,
   UpdateRowFilterResponse,
   DescribeDataEngineEventsRequest,
   DescribeDataEnginePythonSparkImagesResponse,
@@ -197,6 +209,7 @@ import {
   RestartDataEngineResponse,
   SwitchDataEngineImageResponse,
   DescribeSparkAppTasksResponse,
+  CreateCHDFSBindingProductRequest,
   NotebookSessionInfo,
   DataEngineBasicInfo,
   ModifySparkAppRequest,
@@ -213,6 +226,7 @@ import {
   CreateUserResponse,
   DescribeNotebookSessionStatementsRequest,
   UpdateDataEngineResponse,
+  TPartition,
   LakeFsInfo,
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
@@ -223,6 +237,7 @@ import {
   DescribeUpdatableDataEnginesRequest,
   DescribeStoreLocationRequest,
   DescribeViewsRequest,
+  GrantDLCCatalogAccessRequest,
   ReportHeartbeatMetaDataRequest,
   AttachWorkGroupPolicyResponse,
   DescribeDMSTablesRequest,
@@ -249,28 +264,32 @@ import {
   DMSTableInfo,
   DMSPartition,
   WorkGroupDetailInfo,
+  DescribeThirdPartyAccessUserRequest,
   AssignMangedTablePropertiesResponse,
-  DeleteUsersFromWorkGroupResponse,
+  UpdateDataEngineConfigResponse,
   DataEngineImageVersion,
   MysqlInfo,
   GenerateCreateMangedTableSqlRequest,
   StatementInformation,
   OtherDatasourceConnection,
-  DetachUserPolicyRequest,
+  TaskResultInfo,
+  DeleteThirdPartyAccessUserResponse,
   AddUsersToWorkGroupResponse,
   DescribeDataEngineImageVersionsResponse,
   DeleteSparkAppResponse,
   DescribeUserDataEngineConfigRequest,
   CreateTasksResponse,
+  GrantDLCCatalogAccessResponse,
   CreateSparkAppRequest,
   CreateSparkSessionBatchSQLRequest,
   ListTaskJobLogDetailResponse,
-  Users,
+  DescribeSubUserAccessPolicyRequest,
   HouseEventsInfo,
   SQLTask,
   AttachUserPolicyResponse,
   CreateDMSDatabaseRequest,
   DetachWorkGroupPolicyRequest,
+  DeleteCHDFSBindingProductResponse,
   CancelNotebookSessionStatementBatchRequest,
   DescribeLakeFsTaskResultResponse,
   DescribeTasksCostInfoRequest,
@@ -280,18 +299,21 @@ import {
   PrestoMonitorMetrics,
   DescribeNotebookSessionStatementRequest,
   ModifyDataEngineDescriptionRequest,
+  DropDMSTableResponse,
   WorkGroupMessage,
   DescribeUserDataEngineConfigResponse,
   DescribeSparkAppJobRequest,
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
   DescribeNotebookSessionResponse,
+  DescribeSubUserAccessPolicyResponse,
   CreateScriptResponse,
   ModifyAdvancedStoreLocationResponse,
   CreateTasksInOrderResponse,
   TagInfo,
   DeleteSparkAppRequest,
-  TaskResultInfo,
+  DescribeDLCCatalogAccessRequest,
+  DetachUserPolicyRequest,
   DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
@@ -300,7 +322,8 @@ import {
   DescribeUserTypeRequest,
   CheckDataEngineConfigPairsValidityRequest,
   CSVSerde,
-  DMSSds,
+  HiveInfo,
+  CHDFSProductVpcInfo,
   ViewBaseInfo,
   CheckLockMetaDataRequest,
   AddOptimizerEnginesResponse,
@@ -312,6 +335,8 @@ import {
   UnlockMetaDataRequest,
   CreateSparkAppTaskResponse,
   ListTaskJobLogDetailRequest,
+  RevokeDLCCatalogAccessResponse,
+  DeleteCHDFSBindingProductRequest,
   RenewDataEngineResponse,
   DataSourceInfo,
   DescribeNotebookSessionsResponse,
@@ -320,6 +345,7 @@ import {
   AddOptimizerEnginesRequest,
   Partition,
   ModifySparkAppBatchRequest,
+  RegisterThirdPartyAccessUserResponse,
   ModifySparkAppResponse,
   Property,
   DescribeWorkGroupsResponse,
@@ -343,13 +369,14 @@ import {
   ModifySparkAppBatchResponse,
   CheckDataEngineImageCanBeRollbackResponse,
   DeleteNotebookSessionResponse,
-  TPartition,
+  DescribeThirdPartyAccessUserResponse,
   DescribeNotebookSessionStatementsResponse,
   CancelSparkSessionBatchSQLResponse,
   DatabaseInfo,
-  DescribeDMSTableRequest,
+  DescribeDataEnginesRequest,
   JobLogResult,
   DropDMSDatabaseResponse,
+  VpcCidrBlock,
   DeleteUsersFromWorkGroupRequest,
   DMSColumnOrder,
   DescribeViewsResponse,
@@ -364,9 +391,9 @@ import {
   CreateInternalTableResponse,
   DescribeSparkAppTasksRequest,
   UserMessage,
-  DescribeUsersResponse,
+  RegisterThirdPartyAccessUserRequest,
   SwitchDataEngineImageRequest,
-  DescribeDataEnginesRequest,
+  DescribeDMSTableRequest,
   ModifyGovernEventRuleRequest,
   DatabaseResponseInfo,
   DMSColumn,
@@ -533,16 +560,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
-   */
-  async DescribeSparkSessionBatchSqlLog(
-    req: DescribeSparkSessionBatchSqlLogRequest,
-    cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void
-  ): Promise<DescribeSparkSessionBatchSqlLogResponse> {
-    return this.request("DescribeSparkSessionBatchSqlLog", req, cb)
-  }
-
-  /**
    * 切换主备集群
    */
   async SwitchDataEngine(
@@ -553,13 +570,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DMS元数据更新库
+   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
    */
-  async AlterDMSDatabase(
-    req: AlterDMSDatabaseRequest,
-    cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
-  ): Promise<AlterDMSDatabaseResponse> {
-    return this.request("AlterDMSDatabase", req, cb)
+  async DescribeDataEngines(
+    req: DescribeDataEnginesRequest,
+    cb?: (error: string, rep: DescribeDataEnginesResponse) => void
+  ): Promise<DescribeDataEnginesResponse> {
+    return this.request("DescribeDataEngines", req, cb)
   }
 
   /**
@@ -573,13 +590,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务结果
+   * 本接口（CancelTask），用于取消任务
    */
-  async DescribeTaskResult(
-    req: DescribeTaskResultRequest,
-    cb?: (error: string, rep: DescribeTaskResultResponse) => void
-  ): Promise<DescribeTaskResultResponse> {
-    return this.request("DescribeTaskResult", req, cb)
+  async CancelTask(
+    req: CancelTaskRequest,
+    cb?: (error: string, rep: CancelTaskResponse) => void
+  ): Promise<CancelTaskResponse> {
+    return this.request("CancelTask", req, cb)
+  }
+
+  /**
+   * 查询DLC Catalog授权列表
+   */
+  async DescribeDLCCatalogAccess(
+    req: DescribeDLCCatalogAccessRequest,
+    cb?: (error: string, rep: DescribeDLCCatalogAccessResponse) => void
+  ): Promise<DescribeDLCCatalogAccessResponse> {
+    return this.request("DescribeDLCCatalogAccess", req, cb)
   }
 
   /**
@@ -643,6 +670,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（DescribeOtherCHDFSBindingList）用于查询其他产品元数据加速桶绑定列表
+   */
+  async DescribeOtherCHDFSBindingList(
+    req: DescribeOtherCHDFSBindingListRequest,
+    cb?: (error: string, rep: DescribeOtherCHDFSBindingListResponse) => void
+  ): Promise<DescribeOtherCHDFSBindingListResponse> {
+    return this.request("DescribeOtherCHDFSBindingList", req, cb)
+  }
+
+  /**
    * 查询托管存储指定目录的Summary
    */
   async DescribeLakeFsDirSummary(
@@ -670,6 +707,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void
   ): Promise<DescribeNotebookSessionsResponse> {
     return this.request("DescribeNotebookSessions", req, cb)
+  }
+
+  /**
+   * 本接口（RegisterThirdPartyAccessUser）查询开通第三方平台访问的用户信息
+   */
+  async DescribeThirdPartyAccessUser(
+    req?: DescribeThirdPartyAccessUserRequest,
+    cb?: (error: string, rep: DescribeThirdPartyAccessUserResponse) => void
+  ): Promise<DescribeThirdPartyAccessUserResponse> {
+    return this.request("DescribeThirdPartyAccessUser", req, cb)
+  }
+
+  /**
+   * 撤销DLC Catalog访问权限
+   */
+  async RevokeDLCCatalogAccess(
+    req: RevokeDLCCatalogAccessRequest,
+    cb?: (error: string, rep: RevokeDLCCatalogAccessResponse) => void
+  ): Promise<RevokeDLCCatalogAccessResponse> {
+    return this.request("RevokeDLCCatalogAccess", req, cb)
   }
 
   /**
@@ -823,6 +880,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（DeleteCHDFSBindingProduct）用于删除元数据加速桶和产品绑定关系
+   */
+  async DeleteCHDFSBindingProduct(
+    req: DeleteCHDFSBindingProductRequest,
+    cb?: (error: string, rep: DeleteCHDFSBindingProductResponse) => void
+  ): Promise<DeleteCHDFSBindingProductResponse> {
+    return this.request("DeleteCHDFSBindingProduct", req, cb)
+  }
+
+  /**
    * 上报元数据心跳
    */
   async ReportHeartbeatMetaData(
@@ -903,6 +970,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeSubUserAccessPolicy）用于开通了第三方平台访问的用户，查询其子用户的访问策略
+   */
+  async DescribeSubUserAccessPolicy(
+    req?: DescribeSubUserAccessPolicyRequest,
+    cb?: (error: string, rep: DescribeSubUserAccessPolicyResponse) => void
+  ): Promise<DescribeSubUserAccessPolicyResponse> {
+    return this.request("DescribeSubUserAccessPolicy", req, cb)
+  }
+
+  /**
    * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
    */
   async CreateSparkSessionBatchSQL(
@@ -920,6 +997,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNotebookSessionStatementsResponse) => void
   ): Promise<DescribeNotebookSessionStatementsResponse> {
     return this.request("DescribeNotebookSessionStatements", req, cb)
+  }
+
+  /**
+   * 授权访问DLC Catalog
+   */
+  async GrantDLCCatalogAccess(
+    req: GrantDLCCatalogAccessRequest,
+    cb?: (error: string, rep: GrantDLCCatalogAccessResponse) => void
+  ): Promise<GrantDLCCatalogAccessResponse> {
+    return this.request("GrantDLCCatalogAccess", req, cb)
   }
 
   /**
@@ -1003,13 +1090,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
+   * DMS元数据更新库
    */
-  async DescribeDataEngines(
-    req: DescribeDataEnginesRequest,
-    cb?: (error: string, rep: DescribeDataEnginesResponse) => void
-  ): Promise<DescribeDataEnginesResponse> {
-    return this.request("DescribeDataEngines", req, cb)
+  async AlterDMSDatabase(
+    req: AlterDMSDatabaseRequest,
+    cb?: (error: string, rep: AlterDMSDatabaseResponse) => void
+  ): Promise<AlterDMSDatabaseResponse> {
+    return this.request("AlterDMSDatabase", req, cb)
   }
 
   /**
@@ -1153,6 +1240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（CreateCHDFSBindingProduct）用于创建元数据加速桶和产品绑定关系
+   */
+  async CreateCHDFSBindingProduct(
+    req: CreateCHDFSBindingProductRequest,
+    cb?: (error: string, rep: CreateCHDFSBindingProductResponse) => void
+  ): Promise<CreateCHDFSBindingProductResponse> {
+    return this.request("CreateCHDFSBindingProduct", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDatasourceConnection）用于查询数据源信息
    */
   async DescribeDatasourceConnection(
@@ -1193,13 +1290,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CancelTask），用于取消任务
+   * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
    */
-  async CancelTask(
-    req: CancelTaskRequest,
-    cb?: (error: string, rep: CancelTaskResponse) => void
-  ): Promise<CancelTaskResponse> {
-    return this.request("CancelTask", req, cb)
+  async DescribeSparkSessionBatchSqlLog(
+    req: DescribeSparkSessionBatchSqlLogRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void
+  ): Promise<DescribeSparkSessionBatchSqlLogResponse> {
+    return this.request("DescribeSparkSessionBatchSqlLog", req, cb)
   }
 
   /**
@@ -1423,6 +1520,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询任务结果
+   */
+  async DescribeTaskResult(
+    req: DescribeTaskResultRequest,
+    cb?: (error: string, rep: DescribeTaskResultResponse) => void
+  ): Promise<DescribeTaskResultResponse> {
+    return this.request("DescribeTaskResult", req, cb)
+  }
+
+  /**
    * 该接口（CreateExportTask）用于创建导出任务
    */
   async CreateExportTask(
@@ -1430,6 +1537,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateExportTaskResponse) => void
   ): Promise<CreateExportTaskResponse> {
     return this.request("CreateExportTask", req, cb)
+  }
+
+  /**
+   * 本接口（RegisterThirdPartyAccessUser）用于开通第三方平台访问
+   */
+  async RegisterThirdPartyAccessUser(
+    req?: RegisterThirdPartyAccessUserRequest,
+    cb?: (error: string, rep: RegisterThirdPartyAccessUserResponse) => void
+  ): Promise<RegisterThirdPartyAccessUserResponse> {
+    return this.request("RegisterThirdPartyAccessUser", req, cb)
   }
 
   /**
@@ -1530,6 +1647,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeViewsResponse) => void
   ): Promise<DescribeViewsResponse> {
     return this.request("DescribeViews", req, cb)
+  }
+
+  /**
+   * 本接口（RegisterThirdPartyAccessUser）用于移除第三方平台访问
+   */
+  async DeleteThirdPartyAccessUser(
+    req?: DeleteThirdPartyAccessUserRequest,
+    cb?: (error: string, rep: DeleteThirdPartyAccessUserResponse) => void
+  ): Promise<DeleteThirdPartyAccessUserResponse> {
+    return this.request("DeleteThirdPartyAccessUser", req, cb)
   }
 
   /**

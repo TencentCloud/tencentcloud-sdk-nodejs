@@ -644,11 +644,11 @@ export interface ListTargetsResponse {
   /**
    * 目标总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 目标信息
    */
-  Targets: Array<Target>
+  Targets?: Array<Target>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -702,38 +702,38 @@ export interface Target {
   /**
    * 目标类型
    */
-  Type: string
+  Type?: string
   /**
    * 事件集ID
    */
-  EventBusId: string
+  EventBusId?: string
   /**
    * 目标ID
    */
-  TargetId: string
+  TargetId?: string
   /**
    * 目标描述
    */
-  TargetDescription: TargetDescription
+  TargetDescription?: TargetDescription
   /**
    * 事件规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 开启批量投递使能
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableBatchDelivery: boolean
+  EnableBatchDelivery?: boolean
   /**
    * 批量投递最长等待时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchTimeout: number
+  BatchTimeout?: number
   /**
    * 批量投递最大事件条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchEventCount: number
+  BatchEventCount?: number
 }
 
 /**
@@ -914,11 +914,11 @@ export interface ListConnectionsResponse {
   /**
    * 连接器信息
    */
-  Connections: Array<Connection>
+  Connections?: Array<Connection>
   /**
    * 连接器总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1033,7 +1033,7 @@ export interface ListRulesRequest {
    */
   EventBusId: string
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）,name（规则名称）
    */
   OrderBy?: string
   /**
@@ -1137,45 +1137,45 @@ export interface Rule {
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 修改时间
    */
-  ModTime: string
+  ModTime?: string
   /**
    * 使能开关
    */
-  Enable: boolean
+  Enable?: boolean
   /**
    * 描述
    */
-  Description: string
+  Description?: string
   /**
    * 规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 创建时间
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 事件集ID
    */
-  EventBusId: string
+  EventBusId?: string
   /**
    * 规则名称
    */
-  RuleName: string
+  RuleName?: string
   /**
    * Target 简要信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Targets: Array<TargetBrief>
+  Targets?: Array<TargetBrief>
   /**
    * rule设置的dlq规则. 可能为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadLetterConfig: DeadLetterConfig
+  DeadLetterConfig?: DeadLetterConfig
 }
 
 /**
@@ -1501,11 +1501,11 @@ export interface ListRulesResponse {
   /**
    * 事件规则信息
    */
-  Rules: Array<Rule>
+  Rules?: Array<Rule>
   /**
    * 事件规则总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1518,26 +1518,32 @@ export interface ListRulesResponse {
 export interface ESTargetParams {
   /**
    * 网络连接类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   NetMode: string
   /**
    * 索引前缀
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexPrefix: string
   /**
    * es日志轮换粒度
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RotationInterval: string
   /**
    * DTS事件配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputMode: string
   /**
    * DTS索引配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexSuffixMode: string
   /**
    * es模版类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexTemplateType?: string
 }
@@ -1638,14 +1644,17 @@ export interface GetPlatformEventTemplateResponse {
 export interface SCFParams {
   /**
    * 批量投递最长等待时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchTimeout?: number
   /**
    * 批量投递最大事件条数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchEventCount?: number
   /**
    * 开启批量投递使能
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableBatchDelivery?: boolean
 }

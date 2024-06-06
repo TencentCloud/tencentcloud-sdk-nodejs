@@ -733,11 +733,11 @@ export interface DescribeSubscribesResponse {
     /**
      * 符合查询条件的实例总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 数据订阅实例的信息列表
      */
-    Items: Array<SubscribeInfo>;
+    Items?: Array<SubscribeInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -889,6 +889,11 @@ export interface SubscribeInfo {
      */
     ConsumeStartTime?: string;
     /**
+     * 自动续费标识。0-不自动续费，1-自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRenewFlag?: number;
+    /**
      * 数据订阅实例所属地域
      */
     Region?: string;
@@ -925,11 +930,6 @@ export interface SubscribeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<TagItem>;
-    /**
-     * 自动续费标识。0-不自动续费，1-自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoRenewFlag?: number;
     /**
      * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1315,7 +1315,7 @@ export interface SubsErr {
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * 迁移任务错误信息及提示

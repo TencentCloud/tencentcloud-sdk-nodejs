@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePrometheusAlertGroups(req: DescribePrometheusAlertGroupsRequest, cb?: (error: string, rep: DescribePrometheusAlertGroupsResponse) => void): Promise<DescribePrometheusAlertGroupsResponse>;
     /**
-     *  查询Prometheus按量实例用量
+     * 查询Prometheus按量实例用量
      */
     DescribePrometheusInstanceUsage(req: DescribePrometheusInstanceUsageRequest, cb?: (error: string, rep: DescribePrometheusInstanceUsageResponse) => void): Promise<DescribePrometheusInstanceUsageResponse>;
     /**

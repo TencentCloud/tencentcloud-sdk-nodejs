@@ -838,6 +838,23 @@ export interface DescribeSparkSessionBatchSQLRequest {
     CustomKey?: string;
 }
 /**
+ * DescribeUsers返回参数结构体
+ */
+export interface DescribeUsersResponse {
+    /**
+     * 查询到的用户总数
+     */
+    TotalCount: number;
+    /**
+     * 查询到的授权用户信息集合
+     */
+    UserSet: Array<UserInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SmartOptimizerPolicy
  */
 export interface SmartOptimizerPolicy {
@@ -994,9 +1011,26 @@ export interface ElasticsearchInfo {
     ServiceInfo?: Array<IpPortPair>;
 }
 /**
- * UpdateDataEngineConfig返回参数结构体
+ * DeleteUsersFromWorkGroup返回参数结构体
  */
-export interface UpdateDataEngineConfigResponse {
+export interface DeleteUsersFromWorkGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeDLCCatalogAccess返回参数结构体
+ */
+export interface DescribeDLCCatalogAccessResponse {
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * DLCCatalog授权列表
+     */
+    Rows?: Array<DLCCatalogAccess>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1209,67 +1243,104 @@ export interface ModifyWorkGroupResponse {
     RequestId?: string;
 }
 /**
- * hive类型数据源的信息
+ * 元数据存储描述属性
  */
-export interface HiveInfo {
+export interface DMSSds {
     /**
-     * hive metastore的地址
-     */
-    MetaStoreUrl: string;
-    /**
-     * hive数据源类型，代表数据储存的位置，COS或者HDFS
-     */
-    Type: string;
-    /**
-     * 数据源所在的私有网络信息
-     */
-    Location: DatasourceConnectionLocation;
-    /**
-     * 如果类型为HDFS，需要传一个用户名
-     */
-    User?: string;
-    /**
-     * 如果类型为HDFS，需要选择是否高可用
-     */
-    HighAvailability?: boolean;
-    /**
-     * 如果类型为COS，需要填写COS桶连接
-     */
-    BucketUrl?: string;
-    /**
-     * json字符串。如果类型为HDFS，需要填写该字段
-     */
-    HdfsProperties?: string;
-    /**
-     * Hive的元数据库信息
+     * 存储地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mysql?: MysqlInfo;
+    Location?: string;
     /**
-     * emr集群Id
+     * 输入格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId?: string;
+    InputFormat?: string;
     /**
-     * emr集群名称
+     * 输出格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName?: string;
+    OutputFormat?: string;
     /**
-     * EMR集群中hive组件的版本号
+     * bucket数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HiveVersion?: string;
+    NumBuckets?: number;
     /**
-     * Kerberos详细信息
+     * 是是否压缩
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KerberosInfo?: KerberosInfo;
+    Compressed?: boolean;
     /**
-     * 是否开启Kerberos
+     * 是否有子目录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KerberosEnable?: boolean;
+    StoredAsSubDirectories?: boolean;
+    /**
+     * 序列化lib
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SerdeLib?: string;
+    /**
+     * 序列化名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SerdeName?: string;
+    /**
+     * 桶名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BucketCols?: Array<string>;
+    /**
+     * 序列化参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SerdeParams?: Array<KVPair>;
+    /**
+     * 附加参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: Array<KVPair>;
+    /**
+     * 列排序(Expired)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SortCols?: DMSColumnOrder;
+    /**
+     * 列
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Cols?: Array<DMSColumn>;
+    /**
+     * 列排序字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SortColumns?: Array<DMSColumnOrder>;
+}
+/**
+ * 开通了第三方访问的用户信息
+ */
+export interface OpendThirdAccessUserInfo {
+    /**
+     * id信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
+    /**
+     * 用户主UIN
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 用户AppId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: string;
+    /**
+     * 开通时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
 }
 /**
  * DescribeNotebookSessionStatementSqlResult请求参数结构体
@@ -1394,6 +1465,15 @@ export interface QueryResultResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * RevokeDLCCatalogAccess请求参数结构体
+ */
+export interface RevokeDLCCatalogAccessRequest {
+    /**
+     * VpcID
+     */
+    VpcId: string;
 }
 /**
  * 数据治理规则
@@ -1891,13 +1971,25 @@ export interface DropDMSPartitionsResponse {
     RequestId?: string;
 }
 /**
- * DropDMSTable返回参数结构体
+ * CreateWorkGroup请求参数结构体
  */
-export interface DropDMSTableResponse {
+export interface CreateWorkGroupRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 工作组名称
      */
-    RequestId?: string;
+    WorkGroupName: string;
+    /**
+     * 工作组描述
+     */
+    WorkGroupDescription?: string;
+    /**
+     * 工作组绑定的鉴权策略集合
+     */
+    PolicySet?: Array<Policy>;
+    /**
+     * 需要绑定到工作组的用户Id集合
+     */
+    UserIds?: Array<string>;
 }
 /**
  * DescribeDatasourceConnection请求参数结构体
@@ -2221,6 +2313,31 @@ export interface SwitchDataEngineRequest {
     StartStandbyCluster: boolean;
 }
 /**
+ * DLC 数据目录访问权限
+ */
+export interface DLCCatalogAccess {
+    /**
+     * VPCID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId: string;
+    /**
+     * 产品类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Product: string;
+    /**
+     * 描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+}
+/**
  * ModifyUser返回参数结构体
  */
 export interface ModifyUserResponse {
@@ -2292,6 +2409,31 @@ export interface CrontabResumeSuspendStrategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SuspendStrategy?: number;
+}
+/**
+ * vpc信息
+ */
+export interface VpcInfo {
+    /**
+     * vpc Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * vpc子网
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcCidrBlock?: string;
+    /**
+     * 规则Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleId?: number;
+    /**
+     * 权限组Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessGroupId?: string;
 }
 /**
  * notebook session列表信息。
@@ -2408,6 +2550,20 @@ export interface SwitchDataEngineResponse {
  */
 export declare type DescribeLakeFsInfoRequest = null;
 /**
+ * CreateCHDFSBindingProduct返回参数结构体
+ */
+export interface CreateCHDFSBindingProductResponse {
+    /**
+     * 绑定信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MountPointAssociates?: Array<MountPointAssociates>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUserInfo请求参数结构体
  */
 export interface DescribeUserInfoRequest {
@@ -2478,6 +2634,10 @@ export interface DescribeUserTypeResponse {
      */
     RequestId?: string;
 }
+/**
+ * DeleteThirdPartyAccessUser请求参数结构体
+ */
+export declare type DeleteThirdPartyAccessUserRequest = null;
 /**
  * DeleteUser返回参数结构体
  */
@@ -2934,6 +3094,21 @@ export interface GetOptimizerPolicyRequest {
     SmartPolicy: SmartPolicy;
 }
 /**
+ * 用户信息集合
+ */
+export interface Users {
+    /**
+     * 用户信息集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserSet: Array<UserMessage>;
+    /**
+     * 用户总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+}
+/**
  * 引擎配置
  */
 export interface DataEngineConfigPair {
@@ -2947,27 +3122,6 @@ export interface DataEngineConfigPair {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigValue: string;
-}
-/**
- * CreateWorkGroup请求参数结构体
- */
-export interface CreateWorkGroupRequest {
-    /**
-     * 工作组名称
-     */
-    WorkGroupName: string;
-    /**
-     * 工作组描述
-     */
-    WorkGroupDescription?: string;
-    /**
-     * 工作组绑定的鉴权策略集合
-     */
-    PolicySet?: Array<Policy>;
-    /**
-     * 需要绑定到工作组的用户Id集合
-     */
-    UserIds?: Array<string>;
 }
 /**
  * SuspendResumeDataEngine返回参数结构体
@@ -3088,6 +3242,31 @@ export interface DescribeLakeFsTaskResultRequest {
      * 需要访问的任务结果路径
      */
     FsPath: string;
+}
+/**
+ * 非DLC产品CHDFS绑定
+ */
+export interface OtherCHDFSBinding {
+    /**
+     * 产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductName?: string;
+    /**
+     * 用户名称（该字段已废弃）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SuperUser?: Array<string>;
+    /**
+     * vpc配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcInfo?: Array<CHDFSProductVpcInfo>;
+    /**
+     * 是否与该桶绑定（该字段已废弃）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsBind?: boolean;
 }
 /**
  * AlterDMSTable请求参数结构体
@@ -3327,6 +3506,15 @@ export interface DescribeWorkGroupInfoRequest {
     Offset?: number;
 }
 /**
+ * DescribeOtherCHDFSBindingList请求参数结构体
+ */
+export interface DescribeOtherCHDFSBindingListRequest {
+    /**
+     * 桶名
+     */
+    BucketId: string;
+}
+/**
  * CancelTask返回参数结构体
  */
 export interface CancelTaskResponse {
@@ -3519,6 +3707,36 @@ export interface CreateTaskResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 绑定融合桶信息
+ */
+export interface MountPointAssociates {
+    /**
+     * 桶Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BucketId?: string;
+    /**
+     * vpcId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 子网地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcCidrBlock?: string;
+    /**
+     * 权限组Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessGroupId?: string;
+    /**
+     * 权限规则Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessRuleId?: number;
 }
 /**
  * AlterDMSPartition返回参数结构体
@@ -3901,6 +4119,23 @@ export interface AlterDMSDatabaseRequest {
     Asset?: Asset;
 }
 /**
+ * DescribeOtherCHDFSBindingList返回参数结构体
+ */
+export interface DescribeOtherCHDFSBindingListResponse {
+    /**
+     * 非DLC 产品绑定列表
+     */
+    OtherCHDFSBindingList?: Array<OtherCHDFSBinding>;
+    /**
+     * 总记录数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateRowFilter返回参数结构体
  */
 export interface UpdateRowFilterResponse {
@@ -4231,6 +4466,31 @@ export interface DescribeSparkAppTasksResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateCHDFSBindingProduct请求参数结构体
+ */
+export interface CreateCHDFSBindingProductRequest {
+    /**
+     * 需要绑定的元数据加速桶名
+     */
+    MountPoint: string;
+    /**
+     * 桶的类型，分为cos和lakefs
+     */
+    BucketType: string;
+    /**
+     * 产品名称
+     */
+    ProductName: string;
+    /**
+     * 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传
+     */
+    EngineName?: string;
+    /**
+     * vpc信息，产品名称为other时必传此参数
+     */
+    VpcInfo?: Array<VpcInfo>;
 }
 /**
  * Notebook Session详细信息。
@@ -4752,6 +5012,43 @@ export interface UpdateDataEngineResponse {
     RequestId?: string;
 }
 /**
+ * 表分区字段信息
+ */
+export interface TPartition {
+    /**
+     * 字段名称
+     */
+    Name: string;
+    /**
+     * 字段类型
+     */
+    Type?: string;
+    /**
+     * 字段描述
+     */
+    Comment?: string;
+    /**
+     * 分区类型
+     */
+    PartitionType?: string;
+    /**
+     * 分区格式
+     */
+    PartitionFormat?: string;
+    /**
+     * 分区分隔数
+     */
+    PartitionDot?: number;
+    /**
+     * 分区转换策略
+     */
+    Transform?: string;
+    /**
+     * 策略参数
+     */
+    TransformArgs?: Array<string>;
+}
+/**
  * 描述DLC托管存储基本信息
  */
 export interface LakeFsInfo {
@@ -4909,6 +5206,31 @@ export interface DescribeViewsRequest {
      * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
      */
     EndTime?: string;
+}
+/**
+ * GrantDLCCatalogAccess请求参数结构体
+ */
+export interface GrantDLCCatalogAccessRequest {
+    /**
+     * 授权VpcId
+     */
+    VpcId: string;
+    /**
+     * 产品(EMR|DLC|Doris|Inlong|Wedata)
+     */
+    Product: string;
+    /**
+     * 描述
+     */
+    Description?: string;
+    /**
+     * VPC所属账号UIN
+     */
+    VpcUin?: string;
+    /**
+     * VPC所属账号AppId
+     */
+    VpcAppId?: number;
 }
 /**
  * ReportHeartbeatMetaData请求参数结构体
@@ -5596,6 +5918,10 @@ export interface WorkGroupDetailInfo {
     RowFilterInfo: Policys;
 }
 /**
+ * DescribeThirdPartyAccessUser请求参数结构体
+ */
+export declare type DescribeThirdPartyAccessUserRequest = null;
+/**
  * AssignMangedTableProperties返回参数结构体
  */
 export interface AssignMangedTablePropertiesResponse {
@@ -5605,9 +5931,9 @@ export interface AssignMangedTablePropertiesResponse {
     RequestId?: string;
 }
 /**
- * DeleteUsersFromWorkGroup返回参数结构体
+ * UpdateDataEngineConfig返回参数结构体
  */
-export interface DeleteUsersFromWorkGroupResponse {
+export interface UpdateDataEngineConfigResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5740,17 +6066,103 @@ export interface OtherDatasourceConnection {
     Location: DatasourceConnectionLocation;
 }
 /**
- * DetachUserPolicy请求参数结构体
+ * 任务结果信息。
  */
-export interface DetachUserPolicyRequest {
+export interface TaskResultInfo {
     /**
-     * 用户Id，和CAM侧Uin匹配
+     * 任务唯一ID
      */
-    UserId: string;
+    TaskId?: string;
     /**
-     * 解绑的权限集合
+     * 数据源名称，当前任务执行时候选中的默认数据源
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicySet?: Array<Policy>;
+    DatasourceConnectionName?: string;
+    /**
+     * 数据库名称，当前任务执行时候选中的默认数据库
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName?: string;
+    /**
+     * 当前执行的SQL，一个任务包含一个SQL
+     */
+    SQL?: string;
+    /**
+     * 执行任务的类型，现在分为DDL、DML、DQL
+     */
+    SQLType?: string;
+    /**
+     * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功  3：数据写入中 4：排队中 -1：任务执行失败 -3：用户手动终止 。只有任务执行成功的情况下，才会返回任务执行的结果
+     */
+    State?: number;
+    /**
+     * 扫描的数据量，单位byte
+     */
+    DataAmount?: number;
+    /**
+     * 计算耗时，单位： ms
+     */
+    UsedTime?: number;
+    /**
+     * 任务结果输出的COS桶地址
+     */
+    OutputPath?: string;
+    /**
+     * 任务创建时间，时间戳
+     */
+    CreateTime?: string;
+    /**
+     * 任务执行信息，成功时返回success，失败时返回失败原因
+     */
+    OutputMessage?: string;
+    /**
+     * 被影响的行数
+     */
+    RowAffectInfo?: string;
+    /**
+     * 结果的schema信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultSchema?: Array<Column>;
+    /**
+     * 结果信息，反转义后，外层数组的每个元素为一行数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultSet?: string;
+    /**
+     * 分页信息，如果没有更多结果数据，nextToken为空
+     */
+    NextToken?: string;
+    /**
+     * 任务执行进度num/100(%)
+     */
+    Percentage?: number;
+    /**
+     * 任务进度明细
+     */
+    ProgressDetail?: string;
+    /**
+     * 控制台展示格式。table：表格展示 text：文本展示
+     */
+    DisplayFormat?: string;
+    /**
+     * 任务耗时，单位： ms
+     */
+    TotalTime?: number;
+    /**
+     * 获取结果消耗的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueryResultTime?: number;
+}
+/**
+ * DeleteThirdPartyAccessUser返回参数结构体
+ */
+export interface DeleteThirdPartyAccessUserResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddUsersToWorkGroup返回参数结构体
@@ -5826,6 +6238,15 @@ export interface CreateTasksResponse {
      * 任务Id集合，按照执行顺序排列
      */
     TaskIdSet?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GrantDLCCatalogAccess返回参数结构体
+ */
+export interface GrantDLCCatalogAccessResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6037,20 +6458,9 @@ export interface ListTaskJobLogDetailResponse {
     RequestId?: string;
 }
 /**
- * 用户信息集合
+ * DescribeSubUserAccessPolicy请求参数结构体
  */
-export interface Users {
-    /**
-     * 用户信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserSet: Array<UserMessage>;
-    /**
-     * 用户总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount: number;
-}
+export declare type DescribeSubUserAccessPolicyRequest = null;
 /**
  * 集群事件日志
  */
@@ -6126,6 +6536,15 @@ export interface DetachWorkGroupPolicyRequest {
      * 解绑的权限集合
      */
     PolicySet?: Array<Policy>;
+}
+/**
+ * DeleteCHDFSBindingProduct返回参数结构体
+ */
+export interface DeleteCHDFSBindingProductResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CancelNotebookSessionStatementBatch请求参数结构体
@@ -6313,6 +6732,15 @@ export interface ModifyDataEngineDescriptionRequest {
     Message: string;
 }
 /**
+ * DropDMSTable返回参数结构体
+ */
+export interface DropDMSTableResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 工作组部分信息
  */
 export interface WorkGroupMessage {
@@ -6409,6 +6837,19 @@ export interface DescribeNotebookSessionResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSubUserAccessPolicy返回参数结构体
+ */
+export interface DescribeSubUserAccessPolicyResponse {
+    /**
+     * 子用户访问策略
+     */
+    PolicyDocument?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateScript返回参数结构体
  */
 export interface CreateScriptResponse {
@@ -6468,94 +6909,34 @@ export interface DeleteSparkAppRequest {
     AppName: string;
 }
 /**
- * 任务结果信息。
+ * DescribeDLCCatalogAccess请求参数结构体
  */
-export interface TaskResultInfo {
+export interface DescribeDLCCatalogAccessRequest {
     /**
-     * 任务唯一ID
+     * 显示条数
      */
-    TaskId?: string;
+    Limit?: number;
     /**
-     * 数据源名称，当前任务执行时候选中的默认数据源
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 记录数量
      */
-    DatasourceConnectionName?: string;
+    Offset?: number;
     /**
-     * 数据库名称，当前任务执行时候选中的默认数据库
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 过滤条件
      */
-    DatabaseName?: string;
+    Filter?: Filter;
+}
+/**
+ * DetachUserPolicy请求参数结构体
+ */
+export interface DetachUserPolicyRequest {
     /**
-     * 当前执行的SQL，一个任务包含一个SQL
+     * 用户Id，和CAM侧Uin匹配
      */
-    SQL?: string;
+    UserId: string;
     /**
-     * 执行任务的类型，现在分为DDL、DML、DQL
+     * 解绑的权限集合
      */
-    SQLType?: string;
-    /**
-     * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功  3：数据写入中 4：排队中 -1：任务执行失败 -3：用户手动终止 。只有任务执行成功的情况下，才会返回任务执行的结果
-     */
-    State?: number;
-    /**
-     * 扫描的数据量，单位byte
-     */
-    DataAmount?: number;
-    /**
-     * 计算耗时，单位： ms
-     */
-    UsedTime?: number;
-    /**
-     * 任务结果输出的COS桶地址
-     */
-    OutputPath?: string;
-    /**
-     * 任务创建时间，时间戳
-     */
-    CreateTime?: string;
-    /**
-     * 任务执行信息，成功时返回success，失败时返回失败原因
-     */
-    OutputMessage?: string;
-    /**
-     * 被影响的行数
-     */
-    RowAffectInfo?: string;
-    /**
-     * 结果的schema信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResultSchema?: Array<Column>;
-    /**
-     * 结果信息，反转义后，外层数组的每个元素为一行数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResultSet?: string;
-    /**
-     * 分页信息，如果没有更多结果数据，nextToken为空
-     */
-    NextToken?: string;
-    /**
-     * 任务执行进度num/100(%)
-     */
-    Percentage?: number;
-    /**
-     * 任务进度明细
-     */
-    ProgressDetail?: string;
-    /**
-     * 控制台展示格式。table：表格展示 text：文本展示
-     */
-    DisplayFormat?: string;
-    /**
-     * 任务耗时，单位： ms
-     */
-    TotalTime?: number;
-    /**
-     * 获取结果消耗的时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    QueryResultTime?: number;
+    PolicySet?: Array<Policy>;
 }
 /**
  * DescribeTaskLog返回参数结构体
@@ -6790,79 +7171,98 @@ export interface CSVSerde {
     Separator?: string;
 }
 /**
- * 元数据存储描述属性
+ * hive类型数据源的信息
  */
-export interface DMSSds {
+export interface HiveInfo {
     /**
-     * 存储地址
+     * hive metastore的地址
+     */
+    MetaStoreUrl: string;
+    /**
+     * hive数据源类型，代表数据储存的位置，COS或者HDFS
+     */
+    Type: string;
+    /**
+     * 数据源所在的私有网络信息
+     */
+    Location: DatasourceConnectionLocation;
+    /**
+     * 如果类型为HDFS，需要传一个用户名
+     */
+    User?: string;
+    /**
+     * 如果类型为HDFS，需要选择是否高可用
+     */
+    HighAvailability?: boolean;
+    /**
+     * 如果类型为COS，需要填写COS桶连接
+     */
+    BucketUrl?: string;
+    /**
+     * json字符串。如果类型为HDFS，需要填写该字段
+     */
+    HdfsProperties?: string;
+    /**
+     * Hive的元数据库信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Location?: string;
+    Mysql?: MysqlInfo;
     /**
-     * 输入格式
+     * emr集群Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InputFormat?: string;
+    InstanceId?: string;
     /**
-     * 输出格式
+     * emr集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OutputFormat?: string;
+    InstanceName?: string;
     /**
-     * bucket数量
+     * EMR集群中hive组件的版本号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NumBuckets?: number;
+    HiveVersion?: string;
     /**
-     * 是是否压缩
+     * Kerberos详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Compressed?: boolean;
+    KerberosInfo?: KerberosInfo;
     /**
-     * 是否有子目录
+     * 是否开启Kerberos
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StoredAsSubDirectories?: boolean;
+    KerberosEnable?: boolean;
+}
+/**
+ * chdfs产品vpc信息
+ */
+export interface CHDFSProductVpcInfo {
     /**
-     * 序列化lib
+     * vpc id
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SerdeLib?: string;
+    VpcId?: string;
     /**
-     * 序列化名称
+     * vpc名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SerdeName?: string;
+    VpcName?: string;
     /**
-     * 桶名称
+     * vpc子网信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BucketCols?: Array<string>;
+    VpcCidrBlock?: Array<VpcCidrBlock>;
     /**
-     * 序列化参数
+     * 规则Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SerdeParams?: Array<KVPair>;
+    RuleId?: number;
     /**
-     * 附加参数
+     * 权限组Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Params?: Array<KVPair>;
-    /**
-     * 列排序(Expired)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SortCols?: DMSColumnOrder;
-    /**
-     * 列
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Cols?: Array<DMSColumn>;
-    /**
-     * 列排序字段
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SortColumns?: Array<DMSColumnOrder>;
+    AccessGroupId?: string;
 }
 /**
  * 视图基本配置信息
@@ -7126,6 +7526,40 @@ export interface ListTaskJobLogDetailRequest {
     BatchId?: string;
 }
 /**
+ * RevokeDLCCatalogAccess返回参数结构体
+ */
+export interface RevokeDLCCatalogAccessResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteCHDFSBindingProduct请求参数结构体
+ */
+export interface DeleteCHDFSBindingProductRequest {
+    /**
+     * 需要解绑的元数据加速桶名
+     */
+    MountPoint: string;
+    /**
+     * 桶的类型，分为cos和lakefs
+     */
+    BucketType: string;
+    /**
+     * 产品名称
+     */
+    ProductName: string;
+    /**
+     * 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传
+     */
+    EngineName?: string;
+    /**
+     * vpc信息，ProductName选择other时，必传此参数
+     */
+    VpcInfo?: Array<VpcInfo>;
+}
+/**
  * RenewDataEngine返回参数结构体
  */
 export interface RenewDataEngineResponse {
@@ -7289,6 +7723,15 @@ export interface ModifySparkAppBatchRequest {
      * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
      */
     IsInherit?: number;
+}
+/**
+ * RegisterThirdPartyAccessUser返回参数结构体
+ */
+export interface RegisterThirdPartyAccessUserResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifySparkApp返回参数结构体
@@ -8039,41 +8482,17 @@ export interface DeleteNotebookSessionResponse {
     RequestId?: string;
 }
 /**
- * 表分区字段信息
+ * DescribeThirdPartyAccessUser返回参数结构体
  */
-export interface TPartition {
+export interface DescribeThirdPartyAccessUserResponse {
     /**
-     * 字段名称
+     * 用户信息
      */
-    Name: string;
+    UserInfo?: OpendThirdAccessUserInfo;
     /**
-     * 字段类型
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Type?: string;
-    /**
-     * 字段描述
-     */
-    Comment?: string;
-    /**
-     * 分区类型
-     */
-    PartitionType?: string;
-    /**
-     * 分区格式
-     */
-    PartitionFormat?: string;
-    /**
-     * 分区分隔数
-     */
-    PartitionDot?: number;
-    /**
-     * 分区转换策略
-     */
-    Transform?: string;
-    /**
-     * 策略参数
-     */
-    TransformArgs?: Array<string>;
+    RequestId?: string;
 }
 /**
  * DescribeNotebookSessionStatements返回参数结构体
@@ -8122,37 +8541,61 @@ export interface DatabaseInfo {
     Location?: string;
 }
 /**
- * DescribeDMSTable请求参数结构体
+ * DescribeDataEngines请求参数结构体
  */
-export interface DescribeDMSTableRequest {
+export interface DescribeDataEnginesRequest {
     /**
-     * 数据库名称
+     * 偏移量，默认为0。
      */
-    DbName?: string;
+    Offset?: number;
     /**
-     * 数据库schema名称
+     * 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu/kyuubi_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH），engine-network-id - String（引擎网络Id）
      */
-    SchemaName?: string;
+    Filters?: Array<Filter>;
     /**
-     * 表名称
+     * 排序字段，支持如下字段类型，create-time
      */
-    Name?: string;
+    SortBy?: string;
     /**
-     * 数据目录
+     * 排序方式，desc表示正序，asc表示反序， 默认为asc。
      */
-    Catalog?: string;
+    Sorting?: string;
     /**
-     * 查询关键词
+     * 返回数量，默认为10，最大值为100。
      */
-    Keyword?: string;
+    Limit?: number;
     /**
-     * 查询模式
+     * 已废弃，请使用DatasourceConnectionNameSet
      */
-    Pattern?: string;
+    DatasourceConnectionName?: string;
     /**
-     * 表类型
+     * 是否不返回共享引擎，true不返回共享引擎，false可以返回共享引擎
      */
-    Type?: string;
+    ExcludePublicEngine?: boolean;
+    /**
+     * 参数应该为引擎权限类型，有效类型："USE", "MODIFY", "OPERATE", "MONITOR", "DELETE"
+     */
+    AccessTypes?: Array<string>;
+    /**
+     * 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL
+     */
+    EngineExecType?: string;
+    /**
+     * 引擎类型，有效值：spark/presto/kyuubi，为空时默认获取非kyuubi引擎（网关引擎）
+     */
+    EngineType?: string;
+    /**
+     * 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎
+     */
+    DatasourceConnectionNameSet?: Array<string>;
+    /**
+     * 引擎版本，有效值：Native/SuperSQL，为空时默认获取SuperSQL引擎
+     */
+    EngineGeneration?: string;
+    /**
+     * 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi
+     */
+    EngineTypeDetail?: string;
 }
 /**
  * 日志详情
@@ -8192,6 +8635,21 @@ export interface DropDMSDatabaseResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VPC子网信息
+ */
+export interface VpcCidrBlock {
+    /**
+     * 子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CidrId?: string;
+    /**
+     * 子网网段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CidrAddr?: string;
 }
 /**
  * DeleteUsersFromWorkGroup请求参数结构体
@@ -8472,22 +8930,9 @@ export interface UserMessage {
     UserAlias: string;
 }
 /**
- * DescribeUsers返回参数结构体
+ * RegisterThirdPartyAccessUser请求参数结构体
  */
-export interface DescribeUsersResponse {
-    /**
-     * 查询到的用户总数
-     */
-    TotalCount: number;
-    /**
-     * 查询到的授权用户信息集合
-     */
-    UserSet: Array<UserInfo>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type RegisterThirdPartyAccessUserRequest = null;
 /**
  * SwitchDataEngineImage请求参数结构体
  */
@@ -8502,61 +8947,37 @@ export interface SwitchDataEngineImageRequest {
     NewImageVersionId: string;
 }
 /**
- * DescribeDataEngines请求参数结构体
+ * DescribeDMSTable请求参数结构体
  */
-export interface DescribeDataEnginesRequest {
+export interface DescribeDMSTableRequest {
     /**
-     * 偏移量，默认为0。
+     * 数据库名称
      */
-    Offset?: number;
+    DbName?: string;
     /**
-     * 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu/kyuubi_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH），engine-network-id - String（引擎网络Id）
+     * 数据库schema名称
      */
-    Filters?: Array<Filter>;
+    SchemaName?: string;
     /**
-     * 排序字段，支持如下字段类型，create-time
+     * 表名称
      */
-    SortBy?: string;
+    Name?: string;
     /**
-     * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+     * 数据目录
      */
-    Sorting?: string;
+    Catalog?: string;
     /**
-     * 返回数量，默认为10，最大值为100。
+     * 查询关键词
      */
-    Limit?: number;
+    Keyword?: string;
     /**
-     * 已废弃，请使用DatasourceConnectionNameSet
+     * 查询模式
      */
-    DatasourceConnectionName?: string;
+    Pattern?: string;
     /**
-     * 是否不返回共享引擎，true不返回共享引擎，false可以返回共享引擎
+     * 表类型
      */
-    ExcludePublicEngine?: boolean;
-    /**
-     * 参数应该为引擎权限类型，有效类型："USE", "MODIFY", "OPERATE", "MONITOR", "DELETE"
-     */
-    AccessTypes?: Array<string>;
-    /**
-     * 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL
-     */
-    EngineExecType?: string;
-    /**
-     * 引擎类型，有效值：spark/presto/kyuubi，为空时默认获取非kyuubi引擎（网关引擎）
-     */
-    EngineType?: string;
-    /**
-     * 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎
-     */
-    DatasourceConnectionNameSet?: Array<string>;
-    /**
-     * 引擎版本，有效值：Native/SuperSQL，为空时默认获取SuperSQL引擎
-     */
-    EngineGeneration?: string;
-    /**
-     * 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi
-     */
-    EngineTypeDetail?: string;
+    Type?: string;
 }
 /**
  * ModifyGovernEventRule请求参数结构体

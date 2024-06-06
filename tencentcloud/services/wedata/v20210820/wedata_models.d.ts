@@ -19642,6 +19642,16 @@ export interface OrganizationalFunction {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: string;
+    /**
+     * 操作人 ID 列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorUserIdsStr?: Array<string>;
+    /**
+     * 公有云 Owner ID 列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerUserIdsStr?: Array<string>;
 }
 /**
  * 通用排序字段

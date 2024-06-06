@@ -342,10 +342,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
-     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
+     * 根据备份集或恢复目标时间，在原实例上恢复数据库相关对象，例如数据库、表。
      */
-    async DescribeDBInstanceAttribute(req, cb) {
-        return this.request("DescribeDBInstanceAttribute", req, cb);
+    async RestoreDBInstanceObjects(req, cb) {
+        return this.request("RestoreDBInstanceObjects", req, cb);
     }
     /**
      * 可对实例进行网络的删除操作。
@@ -563,6 +563,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReadOnlyGroups", req, cb);
     }
     /**
+     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
+     */
+    async DescribeDBInstanceAttribute(req, cb) {
+        return this.request("DescribeDBInstanceAttribute", req, cb);
+    }
+    /**
      * 本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。
      */
     async UpgradeDBInstance(req, cb) {
@@ -570,8 +576,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (CreateInstances) 用于创建一个或者多个PostgreSQL实例，通过此接口创建的实例无需进行初始化，可直接使用。
-<li>实例创建成功后将自动开机启动，实例状态变为“运行中”。
-<li>预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
+<li>实例创建成功后将自动开机启动，实例状态变为“运行中”。</li>
+<li>预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。</li>
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);

@@ -3011,15 +3011,20 @@ export interface IntranetCallInfo {
    */
   ServiceEIPInfo?: Array<ServiceEIPInfo>
   /**
+   * 默认内网调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultInnerCallInfos?: Array<DefaultInnerCallInfo>
+  /**
    * 私有连接信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrivateLinkInfos?: Array<PrivateLinkInfo>
   /**
-   * 默认内网调用信息
+   * 基于新网关的私有连接信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultInnerCallInfos?: Array<DefaultInnerCallInfo>
+  PrivateLinkInfosV2?: Array<PrivateLinkInfo>
 }
 
 /**
@@ -3413,6 +3418,11 @@ export interface DescribeModelServiceCallInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntranetCallInfo?: IntranetCallInfo
+  /**
+   * 基于新网关的服务调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceCallInfoV2?: ServiceCallInfoV2
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4608,6 +4618,32 @@ STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsQAT?: boolean
+}
+
+/**
+ * V2版本的服务调用信息
+ */
+export interface ServiceCallInfoV2 {
+  /**
+   * 服务组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceGroupId?: string
+  /**
+   * 服务的公网调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternetEndpoint?: string
+  /**
+   * 鉴权是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationEnable?: boolean
+  /**
+   * 鉴权token，仅当AuthorizationEnable为true时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthToken?: string
 }
 
 /**
