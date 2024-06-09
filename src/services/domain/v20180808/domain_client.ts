@@ -20,8 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AuctionInfo,
   DeleteReservedPreDomainInfoResponse,
-  DescribeBiddingAppointDetailResponse,
+  DescribeUnPreDomainDetailRequest,
   DeleteTemplateResponse,
+  BiddingResult,
   PriceInfo,
   DescribeCustomDnsHostSetResponse,
   ModifyTemplateRequest,
@@ -41,6 +42,7 @@ import {
   ReserveBidInfo,
   CreateDomainBatchRequest,
   ModifyTemplateResponse,
+  BiddingSuccessfulResult,
   DescribeBatchOperationLogsRequest,
   UploadImageRequest,
   ModifyCustomDnsHostResponse,
@@ -60,7 +62,7 @@ import {
   DomainSimpleInfo,
   CreateDomainRedemptionResponse,
   DeletePhoneEmailRequest,
-  DescribeTldListRequest,
+  DescribeReservedPreDomainInfoResponse,
   BatchStatus,
   DescribePreAuctionListResponse,
   RenewDomainBatchResponse,
@@ -123,10 +125,10 @@ import {
   CreatePhoneEmailRequest,
   DescribeBiddingDetailRequest,
   DescribeTemplateRequest,
-  DescribeUnPreDomainDetailRequest,
+  DescribeBiddingAppointDetailResponse,
   DescribeReservedBidInfoResponse,
   DescribeBiddingSuccessfulDetailResponse,
-  DescribeReservedPreDomainInfoResponse,
+  DescribeTldListRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   SyncCustomDnsHostRequest,
@@ -140,6 +142,7 @@ import {
   DescribeBiddingAppointListResponse,
   DomainBaseInfo,
   DescribeTldListResponse,
+  DomainBatchLogSet,
   CreateCustomDnsHostRequest,
   DeleteCustomDnsHostRequest,
   CheckBatchStatusResponse,
@@ -147,7 +150,7 @@ import {
   SetDomainAutoRenewRequest,
   SyncCustomDnsHostResponse,
   DescribePreReleaseListRequest,
-  DomainBatchLogSet,
+  BiddingAppointResult,
 } from "./domain_models"
 
 /**
@@ -503,7 +506,7 @@ export class Client extends AbstractClient {
    * 删除记录。
    */
   async DeleteBidding(
-    req?: DeleteBiddingRequest,
+    req: DeleteBiddingRequest,
     cb?: (error: string, rep: DeleteBiddingResponse) => void
   ): Promise<DeleteBiddingResponse> {
     return this.request("DeleteBidding", req, cb)
@@ -593,7 +596,7 @@ export class Client extends AbstractClient {
    * 我竞价的域名-竞价详情。
    */
   async DescribeBiddingDetail(
-    req?: DescribeBiddingDetailRequest,
+    req: DescribeBiddingDetailRequest,
     cb?: (error: string, rep: DescribeBiddingDetailResponse) => void
   ): Promise<DescribeBiddingDetailResponse> {
     return this.request("DescribeBiddingDetail", req, cb)
@@ -613,7 +616,7 @@ export class Client extends AbstractClient {
    * 我预约的域名-预约详情。
    */
   async DescribeBiddingAppointDetail(
-    req?: DescribeBiddingAppointDetailRequest,
+    req: DescribeBiddingAppointDetailRequest,
     cb?: (error: string, rep: DescribeBiddingAppointDetailResponse) => void
   ): Promise<DescribeBiddingAppointDetailResponse> {
     return this.request("DescribeBiddingAppointDetail", req, cb)
@@ -704,7 +707,7 @@ export class Client extends AbstractClient {
    * 我得标的域名-得标详情。
    */
   async DescribeBiddingSuccessfulDetail(
-    req?: DescribeBiddingSuccessfulDetailRequest,
+    req: DescribeBiddingSuccessfulDetailRequest,
     cb?: (error: string, rep: DescribeBiddingSuccessfulDetailResponse) => void
   ): Promise<DescribeBiddingSuccessfulDetailResponse> {
     return this.request("DescribeBiddingSuccessfulDetail", req, cb)

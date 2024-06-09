@@ -1478,6 +1478,15 @@ export interface AccelerateType {
     Switch: string;
 }
 /**
+ * ModifyCustomErrorPage返回参数结构体
+ */
+export interface ModifyCustomErrorPageResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 嵌套规则信息。
  */
 export interface SubRule {
@@ -1750,6 +1759,15 @@ export interface BillingDataFilter {
     Value: string;
 }
 /**
+ * DeleteCustomErrorPage返回参数结构体
+ */
+export interface DeleteCustomErrorPageResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTimingL7CacheData返回参数结构体
  */
 export interface DescribeTimingL7CacheDataResponse {
@@ -1798,6 +1816,19 @@ export interface Header {
     Value: string;
 }
 /**
+ * DeleteCustomErrorPage请求参数结构体
+ */
+export interface DeleteCustomErrorPageRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 自定义页面 ID。
+     */
+    PageId: string;
+}
+/**
  * 实时日志投递任务中的自定义日志字段。
  */
 export interface CustomField {
@@ -1819,24 +1850,6 @@ export interface CustomField {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
-}
-/**
- * CreateL4ProxyRules请求参数结构体
- */
-export interface CreateL4ProxyRulesRequest {
-    /**
-     * 站点 ID。
-     */
-    ZoneId: string;
-    /**
-     * 四层代理实例 ID。
-     */
-    ProxyId: string;
-    /**
-     * 转发规则列表。单次最多支持 200 条转发规则。
-  注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
-     */
-    L4ProxyRules: Array<L4ProxyRule>;
 }
 /**
  * DeleteZone请求参数结构体
@@ -1997,35 +2010,37 @@ export interface ModifyPlanRequest {
     RenewFlag?: RenewFlag;
 }
 /**
- * 例外规则的生效范围。
+ * 自定义错误码页面结构体。
  */
-export interface ExceptUserRuleScope {
+export interface CustomErrorPage {
     /**
-     * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-  <li>complete：完全跳过模式；</li>
-  <li>partial：部分跳过模式。</li>
+     * 自定义错误页面 ID。
      */
-    Type?: string;
+    PageId?: string;
     /**
-     * 生效的模块，该字段取值有：
-  <li>waf：托管规则；</li>
-  <li>rate：速率限制；</li>
-  <li>acl：自定义规则；</li>
-  <li>cc：cc攻击防护；</li>
-  <li>bot：Bot防护。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 站点 ID。
      */
-    Modules?: Array<string>;
+    ZoneId?: string;
     /**
-     * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义错误页面名称。
      */
-    PartialModules?: Array<PartialModule>;
+    Name?: string;
     /**
-     * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义错误页面类型。
      */
-    SkipConditions?: Array<SkipCondition>;
+    ContentType?: string;
+    /**
+     * 自定义错误页面描述。
+     */
+    Description?: string;
+    /**
+     * 自定义错误页面内容。
+     */
+    Content?: string;
+    /**
+     * 自定义错误页面引用。
+     */
+    References?: Array<ErrorPageReference>;
 }
 /**
  * 安全数据维度值信息
@@ -2393,23 +2408,15 @@ export interface DefaultServerCertInfo {
     SignAlgo?: string;
 }
 /**
- * 支持标准debug结构体
+ * 离线缓存是否开启
  */
-export interface StandardDebug {
+export interface OfflineCache {
     /**
-     * Debug 功能开关，取值有：
+     * 离线缓存是否开启，取值有：
   <li>on：开启；</li>
   <li>off：关闭。</li>
      */
     Switch: string;
-    /**
-     * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。
-     */
-    AllowClientIPList: Array<string>;
-    /**
-     * Debug 功能到期时间。超出设置的时间，则功能失效。
-     */
-    ExpireTime: string;
 }
 /**
  * DescribeDDoSAttackTopData返回参数结构体
@@ -2505,6 +2512,23 @@ export interface MaxAge {
   注意：时间为0，即不缓存。
      */
     MaxAgeTime?: number;
+}
+/**
+ * DescribeCustomErrorPages返回参数结构体
+ */
+export interface DescribeCustomErrorPagesResponse {
+    /**
+     * 自定义错误页面总数。
+     */
+    TotalCount?: number;
+    /**
+     * 自定义错误页面数据列表。
+     */
+    ErrorPages?: Array<CustomErrorPage>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteApplicationProxy返回参数结构体
@@ -3805,6 +3829,27 @@ export interface RuleItem {
     Tags: Array<string>;
 }
 /**
+ * 慢速攻击的基础配置。
+ */
+export interface SlowRateConfig {
+    /**
+     * 开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+    /**
+     * 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Interval?: number;
+    /**
+     * 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Threshold?: number;
+}
+/**
  * 缓存时间设置
  */
 export interface Cache {
@@ -4205,6 +4250,35 @@ export interface CreateL4ProxyRulesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCustomErrorPage请求参数结构体
+ */
+export interface ModifyCustomErrorPageRequest {
+    /**
+     * 自定义错误页面 ID。
+     */
+    PageId: string;
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 自定义错误页名称，名称为2 - 60个字符。
+     */
+    Name?: string;
+    /**
+     * 自定义错误页描述，描述内容不超过60个字符。
+     */
+    Description?: string;
+    /**
+     * 自定义错误页面类型，取值有：<li>text/html。 </li><li>application/json。</li><li>plain/text。</li><li>text/xml。</li>
+     */
+    ContentType?: string;
+    /**
+     * 自定义错误页面内容。内容不超过 2KB。
+     */
+    Content?: string;
+}
+/**
  * 缓存键配置。
  */
 export interface CacheKey {
@@ -4501,15 +4575,22 @@ export interface UpgradePlanResponse {
     RequestId?: string;
 }
 /**
- * 离线缓存是否开启
+ * CreateL4ProxyRules请求参数结构体
  */
-export interface OfflineCache {
+export interface CreateL4ProxyRulesRequest {
     /**
-     * 离线缓存是否开启，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 站点 ID。
      */
-    Switch: string;
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则列表。单次最多支持 200 条转发规则。
+  注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
+     */
+    L4ProxyRules: Array<L4ProxyRule>;
 }
 /**
  * CreateConfigGroupVersion请求参数结构体
@@ -6195,6 +6276,31 @@ export interface ModifyL4ProxyRulesStatusRequest {
     Status: string;
 }
 /**
+ * DescribeCustomErrorPages请求参数结构体
+ */
+export interface DescribeCustomErrorPagesRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 过滤条件，Filters.Values 的上限为20，详细的过滤条件Name值如下：
+  <li>page-id： 按照页面 ID 进行过滤；</li>
+  <li>name： 按照页面名称进行过滤；</li>
+  <li>description：按照页面描述过滤；</li>
+  <li>content-type：按照页面类型过滤。</li>
+     */
+    Filters?: Array<AdvancedFilter>;
+    /**
+     * 分页查询偏移量。默认值：0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目。默认值：20，最大值：1000。
+     */
+    Limit?: number;
+}
+/**
  * DescribeTimingL4Data返回参数结构体
  */
 export interface DescribeTimingL4DataResponse {
@@ -6572,6 +6678,37 @@ export interface DescribeSecurityIPGroupInfoRequest {
      * 分页查询的起始条目偏移量。默认值为 0 。
      */
     Offset?: number;
+}
+/**
+ * 例外规则的生效范围。
+ */
+export interface ExceptUserRuleScope {
+    /**
+     * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+  <li>complete：完全跳过模式；</li>
+  <li>partial：部分跳过模式。</li>
+     */
+    Type?: string;
+    /**
+     * 生效的模块，该字段取值有：
+  <li>waf：托管规则；</li>
+  <li>rate：速率限制；</li>
+  <li>acl：自定义规则；</li>
+  <li>cc：cc攻击防护；</li>
+  <li>bot：Bot防护。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Modules?: Array<string>;
+    /**
+     * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartialModules?: Array<PartialModule>;
+    /**
+     * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SkipConditions?: Array<SkipCondition>;
 }
 /**
  * 例外规则的详细模块配置。
@@ -7522,6 +7659,15 @@ export interface TemplateConfig {
     TemplateName: string;
 }
 /**
+ * 自定义错误页面被引用的来源
+ */
+export interface ErrorPageReference {
+    /**
+     * 引用的业务 ID，如自定义拦截规则 ID。
+     */
+    BusinessId?: string;
+}
+/**
  * Bot扩展处置方式，多处置动作组合。
  */
 export interface BotExtendAction {
@@ -8083,25 +8229,17 @@ export interface AccelerationDomain {
     OwnershipVerification?: OwnershipVerification;
 }
 /**
- * 慢速攻击的基础配置。
+ * CreateCustomizeErrorPage返回参数结构体
  */
-export interface SlowRateConfig {
+export interface CreateCustomizeErrorPageResponse {
     /**
-     * 开关，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 页面 ID。
      */
-    Switch: string;
+    PageId?: string;
     /**
-     * 统计的间隔，单位是秒，即在首段包传输结束后，将数据传输轴按照本参数切分，每个分片独立计算慢速攻击。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Interval?: number;
-    /**
-     * 统计时应用的速率阈值，单位是bps，即如果本分片中的传输速率没达到本参数的值，则判定为慢速攻击，应用慢速攻击的处置方式。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Threshold?: number;
+    RequestId?: string;
 }
 /**
  * 规则引擎HTTP请求头/响应头类型的动作
@@ -8268,6 +8406,31 @@ export interface IPWhitelist {
     IPv6: Array<string>;
 }
 /**
+ * CreateCustomizeErrorPage请求参数结构体
+ */
+export interface CreateCustomizeErrorPageRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 自定义错误页名称，名称为 2-30 个字符。
+     */
+    Name: string;
+    /**
+     * 自定义错误页面类型，取值有：<li>text/html； </li><li>application/json；</li><li>text/plain；</li><li>text/xml。</li>
+     */
+    ContentType: string;
+    /**
+     * 自定义错误页面描述，描述不超过 60 个字符。
+     */
+    Description?: string;
+    /**
+     * 自定义错误页面内容，内容不超过 2KB。
+     */
+    Content?: string;
+}
+/**
  * DescribeSecurityIPGroup请求参数结构体
  */
 export interface DescribeSecurityIPGroupRequest {
@@ -8356,6 +8519,25 @@ export interface AccelerateMainland {
   <li>off：关闭。</li>
      */
     Switch: string;
+}
+/**
+ * 支持标准debug结构体
+ */
+export interface StandardDebug {
+    /**
+     * Debug 功能开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+    /**
+     * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。
+     */
+    AllowClientIPList: Array<string>;
+    /**
+     * Debug 功能到期时间。超出设置的时间，则功能失效。
+     */
+    ExpireTime: string;
 }
 /**
  * BindSecurityTemplateToEntity请求参数结构体

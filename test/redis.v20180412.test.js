@@ -168,6 +168,16 @@ it("redis.v20180412.DescribeInstanceSecurityGroup", async function () {
     }
 })
 
+it("redis.v20180412.DescribeBackupDetail", async function () {
+    try {
+       const data = await client.DescribeBackupDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.UpgradeVersionToMultiAvailabilityZones", async function () {
     try {
        const data = await client.UpgradeVersionToMultiAvailabilityZones({})

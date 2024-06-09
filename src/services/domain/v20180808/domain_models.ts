@@ -52,22 +52,13 @@ export interface DeleteReservedPreDomainInfoResponse {
 }
 
 /**
- * DescribeBiddingAppointDetail返回参数结构体
+ * DescribeUnPreDomainDetail请求参数结构体
  */
-export interface DescribeBiddingAppointDetailResponse {
+export interface DescribeUnPreDomainDetailRequest {
   /**
-   *  1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回
+   * 域名
    */
-  Status?: number
-  /**
-   * 预约保证金是否已经退回
-yes：退回 no: 未退回
-   */
-  BiddingBondRefund?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Domain: string
 }
 
 /**
@@ -78,6 +69,62 @@ export interface DeleteTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 我竞价的域名结构体。
+ */
+export interface BiddingResult {
+  /**
+   * business_id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessID?: string
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 当前价格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentPrice?: number
+  /**
+   * 当前用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentNickname?: string
+  /**
+   * 我的出价
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiddingPrice?: number
+  /**
+   * 竞价保证金
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiddingBondPrice?: number
+  /**
+   * 竞价结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiddingEndTime?: string
+  /**
+   * 竞价标识，1 领先，2 落后
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiddingFlag?: number
+  /**
+   * 出价次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiddingNum?: number
+  /**
+   * 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
 }
 
 /**
@@ -226,7 +273,12 @@ export interface DeleteCustomDnsHostResponse {
 /**
  * DescribeBiddingSuccessfulDetail请求参数结构体
  */
-export type DescribeBiddingSuccessfulDetailRequest = null
+export interface DescribeBiddingSuccessfulDetailRequest {
+  /**
+   * business_id
+   */
+  BusinessID?: string
+}
 
 /**
  * RenewDomainBatch请求参数结构体
@@ -300,7 +352,12 @@ export interface SetDomainAutoRenewResponse {
 /**
  * DescribeBiddingAppointDetail请求参数结构体
  */
-export type DescribeBiddingAppointDetailRequest = null
+export interface DescribeBiddingAppointDetailRequest {
+  /**
+   * business_id
+   */
+  BusinessID?: string
+}
 
 /**
  * DescribeCustomDnsHostSet请求参数结构体
@@ -339,9 +396,17 @@ export interface CreateCustomDnsHostResponse {
  */
 export interface DescribeBiddingAppointListRequest {
   /**
+   * 页码
+   */
+  PageNumber: number
+  /**
    * 每页数量
    */
   PageSize: number
+  /**
+   * 域名
+   */
+  Domain?: string
   /**
    * 状态： 1 已预约 9 预约持有者索回
    */
@@ -374,6 +439,14 @@ export interface DescribeDomainPriceListResponse {
  * DescribeBiddingList返回参数结构体
  */
 export interface DescribeBiddingListResponse {
+  /**
+   * 搜索结果条数
+   */
+  Total?: number
+  /**
+   * 竞价列表
+   */
+  BiddingList?: Array<BiddingResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -480,6 +553,17 @@ export interface ModifyTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 我得标的域名结构体。
+ */
+export interface BiddingSuccessfulResult {
+  /**
+   * 支付结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayEndTime?: string
 }
 
 /**
@@ -919,9 +1003,22 @@ export interface DeletePhoneEmailRequest {
 }
 
 /**
- * DescribeTldList请求参数结构体
+ * DescribeReservedPreDomainInfo返回参数结构体
  */
-export type DescribeTldListRequest = null
+export interface DescribeReservedPreDomainInfoResponse {
+  /**
+   * 预释放预约列表
+   */
+  ReservedPreDomainInfoList?: Array<ReservedPreDomainInfo>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 批量任务状态
@@ -1314,7 +1411,12 @@ export interface SendPhoneEmailCodeRequest {
 /**
  * DeleteBidding请求参数结构体
  */
-export type DeleteBiddingRequest = null
+export interface DeleteBiddingRequest {
+  /**
+   * business_id
+   */
+  BusinessID?: string
+}
 
 /**
  * DescribePhoneEmailList返回参数结构体
@@ -1464,6 +1566,62 @@ false：关闭60天内禁止转移注册商锁定
  * DescribeBiddingDetail返回参数结构体
  */
 export interface DescribeBiddingDetailResponse {
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 出价次数
+   */
+  BiddingNum?: number
+  /**
+   * 竞价开始时间
+   */
+  BiddingStartTime?: string
+  /**
+   * 竞价结束时间
+   */
+  BiddingEndTime?: string
+  /**
+   *  注册时间
+   */
+  RegTime?: string
+  /**
+   * 过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 删除时间
+   */
+  DeleteTime?: string
+  /**
+   * 当前价格
+   */
+  CurrentPrice?: number
+  /**
+   * 当前用户昵称
+   */
+  CurrentNickname?: string
+  /**
+   * 竞价保证金
+   */
+  BiddingBondPrice?: number
+  /**
+   * 1 已预约，2 竞价中，3 支付尾款 4 交割 5 交易失败 6 交易成功，7 已过期
+   */
+  Status?: number
+  /**
+   * 竞价标识，1 领先，2 落后
+   */
+  BiddingFlag?: number
+  /**
+   * 是否退款，yes表示退款，no表示不退款
+   */
+  BiddingBondRefund?: string
+  /**
+   * 我的出价
+   */
+  BiddingPrice?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1621,6 +1779,14 @@ export interface DescribeDomainSimpleInfoResponse {
  * DescribeBiddingSuccessfulList返回参数结构体
  */
 export interface DescribeBiddingSuccessfulListResponse {
+  /**
+   * 搜索结果条数
+   */
+  Total?: number
+  /**
+   * 得标列表
+   */
+  SuccessfulList?: Array<BiddingSuccessfulResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1958,9 +2124,17 @@ export interface TransferProhibitionBatchResponse {
  */
 export interface DescribeBiddingListRequest {
   /**
+   * 页码
+   */
+  PageNumber: number
+  /**
    * 每页数量
    */
   PageSize: number
+  /**
+   * 域名
+   */
+  Domain?: string
   /**
    * 2 竞价中  3 等待出价  4 交易失败  10 竞价阶段持有者赎回
    */
@@ -1999,9 +2173,17 @@ export interface ModifyCustomDnsHostRequest {
  */
 export interface DescribeBiddingSuccessfulListRequest {
   /**
+   * 页码
+   */
+  PageNumber: number
+  /**
    * 每页数量
    */
   PageSize: number
+  /**
+   * 域名
+   */
+  Domain?: string
   /**
    * 状态：5 等待支付 6 等待转移， 7 转移中，8 交易成功，11 尾款阶段持有者索回，12 已违约
    */
@@ -2161,7 +2343,12 @@ export interface CreatePhoneEmailRequest {
 /**
  * DescribeBiddingDetail请求参数结构体
  */
-export type DescribeBiddingDetailRequest = null
+export interface DescribeBiddingDetailRequest {
+  /**
+   * business_id
+   */
+  BusinessID?: string
+}
 
 /**
  * DescribeTemplate请求参数结构体
@@ -2174,13 +2361,58 @@ export interface DescribeTemplateRequest {
 }
 
 /**
- * DescribeUnPreDomainDetail请求参数结构体
+ * DescribeBiddingAppointDetail返回参数结构体
  */
-export interface DescribeUnPreDomainDetailRequest {
+export interface DescribeBiddingAppointDetailResponse {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
+  /**
+   * 预约人数
+   */
+  AppointNum?: number
+  /**
+   * 预约开始时间
+   */
+  AppointStartTime?: string
+  /**
+   * 预约结束时间
+   */
+  AppointEndTime?: string
+  /**
+   *  注册时间
+   */
+  RegTime?: string
+  /**
+   * 过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 删除时间
+   */
+  DeleteTime?: string
+  /**
+   * 当前价格
+   */
+  AppointPrice?: number
+  /**
+   * 预约保证金
+   */
+  AppointBondPrice?: number
+  /**
+   *  1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回
+   */
+  Status?: number
+  /**
+   * 预约保证金是否已经退回
+yes：退回 no: 未退回
+   */
+  BiddingBondRefund?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2231,9 +2463,41 @@ export interface DescribeReservedBidInfoResponse {
  */
 export interface DescribeBiddingSuccessfulDetailResponse {
   /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 得标时间
+   */
+  SuccessfulTime?: string
+  /**
+   * 得标价格
+   */
+  SuccessfulPrice?: number
+  /**
+   *  注册时间
+   */
+  RegTime?: string
+  /**
+   * 过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 删除时间
+   */
+  DeleteTime?: string
+  /**
+   * 付款结束时间
+   */
+  PayEndTime?: string
+  /**
    * 保证金，是否退款，yes表示退款，no表示不退款
    */
   BiddingBondRefund?: string
+  /**
+   * 保证金
+   */
+  BiddingBondPrice?: number
   /**
    * 状态：1 竞价中，2 待出价，3 竞价失败， 4 等待支付 5 等待转移， 6 转移中，7 交易成功，8 持有者索回，9 已违约
    */
@@ -2245,22 +2509,9 @@ export interface DescribeBiddingSuccessfulDetailResponse {
 }
 
 /**
- * DescribeReservedPreDomainInfo返回参数结构体
+ * DescribeTldList请求参数结构体
  */
-export interface DescribeReservedPreDomainInfoResponse {
-  /**
-   * 预释放预约列表
-   */
-  ReservedPreDomainInfoList?: Array<ReservedPreDomainInfo>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeTldListRequest = null
 
 /**
  * DescribeBatchOperationLogDetails请求参数结构体
@@ -2555,6 +2806,14 @@ export interface DescribePhoneEmailListRequest {
  */
 export interface DescribeBiddingAppointListResponse {
   /**
+   * 搜索结果条数
+   */
+  Total?: number
+  /**
+   * 预约列表
+   */
+  AppointList?: Array<BiddingAppointResult>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2678,6 +2937,42 @@ export interface DescribeTldListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量操作记录
+ */
+export interface DomainBatchLogSet {
+  /**
+   * 日志ID
+   */
+  LogId: number
+  /**
+   * 数量
+   */
+  Number: number
+  /**
+   * 执行状态：
+doing 执行中。
+done 执行完成。
+   */
+  Status: string
+  /**
+   * 提交时间
+   */
+  CreatedOn: string
+  /**
+   * 批量操作成功个数
+   */
+  Success?: number
+  /**
+   * 批量操作处理中个数
+   */
+  Doing?: number
+  /**
+   * 批量操作失败个数
+   */
+  Failed?: number
 }
 
 /**
@@ -2862,37 +3157,42 @@ export interface DescribePreReleaseListRequest {
 }
 
 /**
- * 批量操作记录
+ * 我预定的域名结构体。
  */
-export interface DomainBatchLogSet {
+export interface BiddingAppointResult {
   /**
-   * 日志ID
+   * business_id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogId: number
+  BusinessID?: string
   /**
-   * 数量
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Number: number
+  Domain?: string
   /**
-   * 执行状态：
-doing 执行中。
-done 执行完成。
+   * 预定价格
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  AppointPrice?: number
   /**
-   * 提交时间
+   * 预约保证金
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedOn: string
+  AppointBondPrice?: number
   /**
-   * 批量操作成功个数
+   * 预约结束时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Success?: number
+  AppointEndTime?: string
   /**
-   * 批量操作处理中个数
+   * 预约人数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Doing?: number
+  AppointNum?: number
   /**
-   * 批量操作失败个数
+   *  1 已预约，2 竞价中，3 等待出价 4 等待支付 5 失败 6 转移中，7 转移成功 8 持有者索回
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Failed?: number
+  Status?: number
 }

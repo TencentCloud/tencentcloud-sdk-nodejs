@@ -938,6 +938,16 @@ it("tse.v20201207.DeleteWafDomains", async function () {
     }
 })
 
+it("tse.v20201207.DescribePublicAddressConfig", async function () {
+    try {
+       const data = await client.DescribePublicAddressConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayService", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayService({})

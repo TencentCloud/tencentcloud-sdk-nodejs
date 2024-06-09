@@ -1743,6 +1743,19 @@ export interface RateLimitResponse {
     HttpStatus?: number;
 }
 /**
+ * DescribePublicAddressConfig请求参数结构体
+ */
+export interface DescribePublicAddressConfigRequest {
+    /**
+     * 网关实例id
+     */
+    GatewayId: string;
+    /**
+     * 查询该分组的公网信息，不传则查询实例所有的公网负载均衡信息
+     */
+    GroupId?: string;
+}
+/**
  * DescribeCloudNativeAPIGatewayServices请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServicesRequest {
@@ -7397,6 +7410,15 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
      * 灰度规则配置
      */
     CanaryRule: CloudNativeAPIGatewayCanaryRule;
+}
+/**
+ * DescribePublicAddressConfig返回参数结构体
+ */
+export interface DescribePublicAddressConfigResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 获取云原生API网关实例协议端口列表响应结果

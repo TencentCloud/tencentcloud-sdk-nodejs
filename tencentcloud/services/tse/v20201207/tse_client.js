@@ -580,6 +580,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWafDomains", req, cb);
     }
     /**
+     * 查询公网地址信息
+     */
+    async DescribePublicAddressConfig(req, cb) {
+        return this.request("DescribePublicAddressConfig", req, cb);
+    }
+    /**
      * 删除云原生网关服务
      */
     async DeleteCloudNativeAPIGatewayService(req, cb) {

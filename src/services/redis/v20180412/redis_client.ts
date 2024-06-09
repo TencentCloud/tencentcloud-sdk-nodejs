@@ -114,6 +114,7 @@ import {
   ModifyInstanceAccountResponse,
   DelayDistribution,
   DescribeProjectSecurityGroupsResponse,
+  DescribeBackupDetailRequest,
   DescribeInstanceMonitorTookDistResponse,
   DescribeBandwidthRangeRequest,
   InstanceIntegerParam,
@@ -133,6 +134,7 @@ import {
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
   ModifyInstanceEventRequest,
+  DescribeBackupDetailResponse,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
@@ -421,6 +423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSecurityGroupResponse) => void
   ): Promise<DescribeInstanceSecurityGroupResponse> {
     return this.request("DescribeInstanceSecurityGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeBackupDetail）用于查询实例的备份信息详情。
+   */
+  async DescribeBackupDetail(
+    req: DescribeBackupDetailRequest,
+    cb?: (error: string, rep: DescribeBackupDetailResponse) => void
+  ): Promise<DescribeBackupDetailResponse> {
+    return this.request("DescribeBackupDetail", req, cb)
   }
 
   /**

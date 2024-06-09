@@ -76,6 +76,7 @@ import {
   OriginGroupReference,
   ExceptUserRule,
   AccelerateType,
+  ModifyCustomErrorPageResponse,
   SubRule,
   ConfigGroupVersionInfo,
   VerifyOwnershipResponse,
@@ -84,17 +85,18 @@ import {
   DownloadL4LogsRequest,
   ModifyZoneSettingRequest,
   BillingDataFilter,
+  DeleteCustomErrorPageResponse,
   DescribeTimingL7CacheDataResponse,
   DescribeZonesResponse,
   Header,
+  DeleteCustomErrorPageRequest,
   CustomField,
-  CreateL4ProxyRulesRequest,
   DeleteZoneRequest,
   BotManagedRule,
   SecurityConfig,
   L4OfflineLog,
   ModifyPlanRequest,
-  ExceptUserRuleScope,
+  CustomErrorPage,
   SecEntryValue,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
@@ -114,11 +116,12 @@ import {
   DescribeSecurityTemplateBindingsRequest,
   AlgDetectResult,
   DefaultServerCertInfo,
-  StandardDebug,
+  OfflineCache,
   DescribeDDoSAttackTopDataResponse,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
   MaxAge,
+  DescribeCustomErrorPagesResponse,
   DeleteApplicationProxyResponse,
   AlgDetectRule,
   DiffIPWhitelist,
@@ -172,6 +175,7 @@ import {
   CreateConfigGroupVersionResponse,
   DownloadL7LogsRequest,
   RuleItem,
+  SlowRateConfig,
   Cache,
   DetailHost,
   DescribeRealtimeLogDeliveryTasksResponse,
@@ -184,6 +188,7 @@ import {
   RateLimitUserRule,
   CreatePlanForZoneRequest,
   CreateL4ProxyRulesResponse,
+  ModifyCustomErrorPageRequest,
   CacheKey,
   DownloadL4LogsResponse,
   BindSharedCNAMERequest,
@@ -200,7 +205,7 @@ import {
   IdentifyZoneRequest,
   CacheConfig,
   UpgradePlanResponse,
-  OfflineCache,
+  CreateL4ProxyRulesRequest,
   CreateConfigGroupVersionRequest,
   AclUserRule,
   DescribeDDoSAttackEventRequest,
@@ -273,6 +278,7 @@ import {
   CreateApplicationProxyRequest,
   CC,
   ModifyL4ProxyRulesStatusRequest,
+  DescribeCustomErrorPagesRequest,
   DescribeTimingL4DataResponse,
   Action,
   ApplicationProxy,
@@ -283,6 +289,7 @@ import {
   RuleAndConditions,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
+  ExceptUserRuleScope,
   PartialModule,
   ModifyApplicationProxyRuleStatusRequest,
   SecEntry,
@@ -317,6 +324,7 @@ import {
   AdvancedFilter,
   DescribeDDoSAttackDataResponse,
   TemplateConfig,
+  ErrorPageReference,
   BotExtendAction,
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
@@ -338,7 +346,7 @@ import {
   ModifyZoneSettingResponse,
   DownloadL7LogsResponse,
   AccelerationDomain,
-  SlowRateConfig,
+  CreateCustomizeErrorPageResponse,
   RewriteAction,
   TemplateScope,
   DescribeOverviewL7DataRequest,
@@ -348,12 +356,14 @@ import {
   BindZoneToPlanRequest,
   SecurityType,
   IPWhitelist,
+  CreateCustomizeErrorPageRequest,
   DescribeSecurityIPGroupRequest,
   ModifyApplicationProxyStatusResponse,
   Identification,
   TopEntry,
   NsVerification,
   AccelerateMainland,
+  StandardDebug,
   BindSecurityTemplateToEntityRequest,
   IntelligenceRuleItem,
   IntelligenceRule,
@@ -915,6 +925,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 创建自定义错误页面。
+   */
+  async CreateCustomizeErrorPage(
+    req: CreateCustomizeErrorPageRequest,
+    cb?: (error: string, rep: CreateCustomizeErrorPageResponse) => void
+  ): Promise<CreateCustomizeErrorPageResponse> {
+    return this.request("CreateCustomizeErrorPage", req, cb)
+  }
+
+  /**
    * 修改加速域名信息
    */
   async ModifyAccelerationDomain(
@@ -1039,6 +1059,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询自定义错误页列表。
+   */
+  async DescribeCustomErrorPages(
+    req: DescribeCustomErrorPagesRequest,
+    cb?: (error: string, rep: DescribeCustomErrorPagesResponse) => void
+  ): Promise<DescribeCustomErrorPagesResponse> {
+    return this.request("DescribeCustomErrorPages", req, cb)
+  }
+
+  /**
    * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
    */
   async DescribeRulesSetting(
@@ -1129,13 +1159,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于查询四层代理实例列表。
+   * 删除自定义错误页面。
    */
-  async DescribeL4Proxy(
-    req: DescribeL4ProxyRequest,
-    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
-  ): Promise<DescribeL4ProxyResponse> {
-    return this.request("DescribeL4Proxy", req, cb)
+  async DeleteCustomErrorPage(
+    req: DeleteCustomErrorPageRequest,
+    cb?: (error: string, rep: DeleteCustomErrorPageResponse) => void
+  ): Promise<DeleteCustomErrorPageResponse> {
+    return this.request("DeleteCustomErrorPage", req, cb)
   }
 
   /**
@@ -1410,6 +1440,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改自定义错误页面。
+   */
+  async ModifyCustomErrorPage(
+    req: ModifyCustomErrorPageRequest,
+    cb?: (error: string, rep: ModifyCustomErrorPageResponse) => void
+  ): Promise<ModifyCustomErrorPageResponse> {
+    return this.request("ModifyCustomErrorPage", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDDoSAttackData）用于查询DDoS攻击时序数据。
    */
   async DescribeDDoSAttackData(
@@ -1437,6 +1477,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeAliasDomainsResponse) => void
   ): Promise<DescribeAliasDomainsResponse> {
     return this.request("DescribeAliasDomains", req, cb)
+  }
+
+  /**
+   * 用于查询四层代理实例列表。
+   */
+  async DescribeL4Proxy(
+    req: DescribeL4ProxyRequest,
+    cb?: (error: string, rep: DescribeL4ProxyResponse) => void
+  ): Promise<DescribeL4ProxyResponse> {
+    return this.request("DescribeL4Proxy", req, cb)
   }
 
   /**

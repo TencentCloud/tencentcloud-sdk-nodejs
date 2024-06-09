@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSecurityGroup", req, cb);
     }
     /**
+     * 本接口（DescribeBackupDetail）用于查询实例的备份信息详情。
+     */
+    async DescribeBackupDetail(req, cb) {
+        return this.request("DescribeBackupDetail", req, cb);
+    }
+    /**
      * 升级实例支持多AZ
      */
     async UpgradeVersionToMultiAvailabilityZones(req, cb) {

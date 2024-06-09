@@ -345,6 +345,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DeleteL4ProxyRules", req, cb);
     }
     /**
+     * 创建自定义错误页面。
+     */
+    async CreateCustomizeErrorPage(req, cb) {
+        return this.request("CreateCustomizeErrorPage", req, cb);
+    }
+    /**
      * 修改加速域名信息
      */
     async ModifyAccelerationDomain(req, cb) {
@@ -421,6 +427,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeAvailablePlans", req, cb);
     }
     /**
+     * 查询自定义错误页列表。
+     */
+    async DescribeCustomErrorPages(req, cb) {
+        return this.request("DescribeCustomErrorPages", req, cb);
+    }
+    /**
      * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
      */
     async DescribeRulesSetting(req, cb) {
@@ -475,10 +487,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeL4ProxyRules", req, cb);
     }
     /**
-     * 用于查询四层代理实例列表。
+     * 删除自定义错误页面。
      */
-    async DescribeL4Proxy(req, cb) {
-        return this.request("DescribeL4Proxy", req, cb);
+    async DeleteCustomErrorPage(req, cb) {
+        return this.request("DeleteCustomErrorPage", req, cb);
     }
     /**
      * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
@@ -648,6 +660,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeSecurityIPGroup", req, cb);
     }
     /**
+     * 修改自定义错误页面。
+     */
+    async ModifyCustomErrorPage(req, cb) {
+        return this.request("ModifyCustomErrorPage", req, cb);
+    }
+    /**
      * 本接口（DescribeDDoSAttackData）用于查询DDoS攻击时序数据。
      */
     async DescribeDDoSAttackData(req, cb) {
@@ -664,6 +682,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeAliasDomains(req, cb) {
         return this.request("DescribeAliasDomains", req, cb);
+    }
+    /**
+     * 用于查询四层代理实例列表。
+     */
+    async DescribeL4Proxy(req, cb) {
+        return this.request("DescribeL4Proxy", req, cb);
     }
     /**
      * 通过本接口查询计费数据。

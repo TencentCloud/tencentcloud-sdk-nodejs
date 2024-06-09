@@ -518,6 +518,16 @@ it("teo.v20220901.DeleteL4ProxyRules", async function () {
     }
 })
 
+it("teo.v20220901.CreateCustomizeErrorPage", async function () {
+    try {
+       const data = await client.CreateCustomizeErrorPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyAccelerationDomain", async function () {
     try {
        const data = await client.ModifyAccelerationDomain({})
@@ -638,6 +648,16 @@ it("teo.v20220901.DescribeAvailablePlans", async function () {
     }
 })
 
+it("teo.v20220901.DescribeCustomErrorPages", async function () {
+    try {
+       const data = await client.DescribeCustomErrorPages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeRulesSetting", async function () {
     try {
        const data = await client.DescribeRulesSetting({})
@@ -728,9 +748,9 @@ it("teo.v20220901.DescribeL4ProxyRules", async function () {
     }
 })
 
-it("teo.v20220901.DescribeL4Proxy", async function () {
+it("teo.v20220901.DeleteCustomErrorPage", async function () {
     try {
-       const data = await client.DescribeL4Proxy({})
+       const data = await client.DeleteCustomErrorPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,6 +1018,16 @@ it("teo.v20220901.DescribeSecurityIPGroup", async function () {
     }
 })
 
+it("teo.v20220901.ModifyCustomErrorPage", async function () {
+    try {
+       const data = await client.ModifyCustomErrorPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeDDoSAttackData", async function () {
     try {
        const data = await client.DescribeDDoSAttackData({})
@@ -1021,6 +1051,16 @@ it("teo.v20220901.DeleteSharedCNAME", async function () {
 it("teo.v20220901.DescribeAliasDomains", async function () {
     try {
        const data = await client.DescribeAliasDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeL4Proxy", async function () {
+    try {
+       const data = await client.DescribeL4Proxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

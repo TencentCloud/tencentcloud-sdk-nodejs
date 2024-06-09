@@ -94,6 +94,7 @@ import {
   SREInstance,
   CreateWafDomainsResponse,
   RateLimitResponse,
+  DescribePublicAddressConfigRequest,
   DescribeCloudNativeAPIGatewayServicesRequest,
   CreateConfigFileResponse,
   DescribeCloudNativeAPIGatewayUpstreamResponse,
@@ -326,6 +327,7 @@ import {
   ModifyGovernanceInstancesRequest,
   CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
+  DescribePublicAddressConfigResponse,
   DescribeGatewayInstancePortResult,
   PublishConfigFilesRequest,
   CreateAutoScalerResourceStrategyResponse,
@@ -1280,6 +1282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWafDomainsResponse) => void
   ): Promise<DeleteWafDomainsResponse> {
     return this.request("DeleteWafDomains", req, cb)
+  }
+
+  /**
+   * 查询公网地址信息
+   */
+  async DescribePublicAddressConfig(
+    req: DescribePublicAddressConfigRequest,
+    cb?: (error: string, rep: DescribePublicAddressConfigResponse) => void
+  ): Promise<DescribePublicAddressConfigResponse> {
+    return this.request("DescribePublicAddressConfig", req, cb)
   }
 
   /**
