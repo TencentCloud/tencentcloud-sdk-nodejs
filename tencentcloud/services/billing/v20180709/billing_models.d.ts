@@ -1626,7 +1626,7 @@ export interface DescribeAllocationOverviewRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**
@@ -2503,7 +2503,7 @@ export interface DescribeAllocationSummaryByBusinessRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**

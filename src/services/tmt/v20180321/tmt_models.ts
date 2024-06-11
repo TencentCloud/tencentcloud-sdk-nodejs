@@ -168,19 +168,19 @@ export interface ImageTranslateResponse {
   /**
    * 请求的SessionUuid返回
    */
-  SessionUuid: string
+  SessionUuid?: string
   /**
    * 源语言
    */
-  Source: string
+  Source?: string
   /**
    * 目标语言
    */
-  Target: string
+  Target?: string
   /**
    * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
    */
-  ImageRecord: ImageRecord
+  ImageRecord?: ImageRecord
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

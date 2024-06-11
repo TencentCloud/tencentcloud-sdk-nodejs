@@ -755,6 +755,23 @@ export interface CreateAccessKeyRequest {
     TargetUin?: number;
 }
 /**
+ * BuildDataFlowAuthToken请求参数结构体
+ */
+export interface BuildDataFlowAuthTokenRequest {
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 资源地域
+     */
+    ResourceRegion: string;
+    /**
+     * 资源用户名
+     */
+    ResourceAccount: string;
+}
+/**
  * GetRolePermissionBoundary返回参数结构体
  */
 export interface GetRolePermissionBoundaryResponse {
@@ -1313,6 +1330,23 @@ export interface CreatePolicyResponse {
     RequestId?: string;
 }
 /**
+ * ListGroups返回参数结构体
+ */
+export interface ListGroupsResponse {
+    /**
+     * 用户组总数。
+     */
+    TotalNum?: number;
+    /**
+     * 用户组数组信息。
+     */
+    GroupInfo?: Array<GroupInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DetachRolePolicy请求参数结构体
  */
 export interface DetachRolePolicyRequest {
@@ -1600,6 +1634,20 @@ export interface UpdateRoleConsoleLoginRequest {
     RoleName?: string;
 }
 /**
+ * BuildDataFlowAuthToken返回参数结构体
+ */
+export interface BuildDataFlowAuthTokenResponse {
+    /**
+     * 认证凭据AuthToken信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Credentials?: AuthToken;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateUser返回参数结构体
  */
 export interface UpdateUserResponse {
@@ -1758,27 +1806,6 @@ export interface SAMLProviderInfo {
      * SAML身份提供商上次修改时间
      */
     ModifyTime: string;
-}
-/**
- * 用于ListPoliciesGrantingServiceAccess接口的Policy节点
- */
-export interface ListGrantServiceAccessPolicy {
-    /**
-     * 策略ID
-     */
-    PolicyId: string;
-    /**
-     * 策略名
-     */
-    PolicyName: string;
-    /**
-     * 策略类型: Custom自定义策略，Presetting预设策略
-     */
-    PolicyType: string;
-    /**
-     * 策略描述
-     */
-    PolicyDescription: string;
 }
 /**
  * DisableUserSSO请求参数结构体
@@ -2057,21 +2084,40 @@ export interface ListAttachedUserPoliciesResponse {
     RequestId?: string;
 }
 /**
- * ListGroups返回参数结构体
+ * 认证凭据Token
  */
-export interface ListGroupsResponse {
+export interface AuthToken {
     /**
-     * 用户组总数。
+     * 认证Token
      */
-    TotalNum?: number;
+    Token?: string;
     /**
-     * 用户组数组信息。
+     * 服务器时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupInfo?: Array<GroupInfo>;
+    CurrentTime?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 毫秒时间戳，根据轮转周期准确计算得到
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    NextRotationTime?: number;
+    /**
+     * 毫秒，如果轮转失败则为 -1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastRotationTimeCost?: number;
+    /**
+     * 成功：success
+  失败：failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RotationStatus?: string;
+    /**
+     * 成功：success
+  失败：失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RotationMessage?: string;
 }
 /**
  * PutUserPermissionsBoundary返回参数结构体
@@ -2352,9 +2398,33 @@ export interface CreateUserOIDCConfigRequest {
     Description?: string;
 }
 /**
- * AttachGroupPolicy返回参数结构体
+ * AddUser返回参数结构体
  */
-export interface AttachGroupPolicyResponse {
+export interface AddUserResponse {
+    /**
+     * 子用户 UIN
+     */
+    Uin?: number;
+    /**
+     * 子用户用户名
+     */
+    Name?: string;
+    /**
+     * 如果输入参数组合为自动生成随机密码，则返回生成的密码
+     */
+    Password?: string;
+    /**
+     * 子用户密钥 ID
+     */
+    SecretId?: string;
+    /**
+     * 子用户密钥 Key
+     */
+    SecretKey?: string;
+    /**
+     * 子用户 UID
+     */
+    Uid?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3219,37 +3289,25 @@ export interface PolicyVersionDetail {
     Document: string;
 }
 /**
- * AddUser返回参数结构体
+ * 用于ListPoliciesGrantingServiceAccess接口的Policy节点
  */
-export interface AddUserResponse {
+export interface ListGrantServiceAccessPolicy {
     /**
-     * 子用户 UIN
+     * 策略ID
      */
-    Uin?: number;
+    PolicyId: string;
     /**
-     * 子用户用户名
+     * 策略名
      */
-    Name?: string;
+    PolicyName: string;
     /**
-     * 如果输入参数组合为自动生成随机密码，则返回生成的密码
+     * 策略类型: Custom自定义策略，Presetting预设策略
      */
-    Password?: string;
+    PolicyType: string;
     /**
-     * 子用户密钥 ID
+     * 策略描述
      */
-    SecretId?: string;
-    /**
-     * 子用户密钥 Key
-     */
-    SecretKey?: string;
-    /**
-     * 子用户 UID
-     */
-    Uid?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    PolicyDescription: string;
 }
 /**
  * 用于ListPoliciesGrantingServiceAccess接口的Service节点
@@ -3453,6 +3511,15 @@ export interface ListAttachedUserPoliciesRequest {
      * 每页大小，默认值是 20
      */
     Rp?: number;
+}
+/**
+ * AttachGroupPolicy返回参数结构体
+ */
+export interface AttachGroupPolicyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdatePolicy请求参数结构体

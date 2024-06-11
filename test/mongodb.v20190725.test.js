@@ -128,9 +128,29 @@ it("mongodb.v20190725.IsolateDBInstance", async function () {
     }
 })
 
+it("mongodb.v20190725.SetBackupRules", async function () {
+    try {
+       const data = await client.SetBackupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.InquirePriceModifyDBInstanceSpec", async function () {
     try {
        const data = await client.InquirePriceModifyDBInstanceSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeBackupRules", async function () {
+    try {
+       const data = await client.DescribeBackupRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +338,16 @@ it("mongodb.v20190725.AssignProject", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeTransparentDataEncryptionStatus", async function () {
+    try {
+       const data = await client.DescribeTransparentDataEncryptionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAccountUsers", async function () {
     try {
        const data = await client.DescribeAccountUsers({})
@@ -351,6 +381,16 @@ it("mongodb.v20190725.RenameInstance", async function () {
 it("mongodb.v20190725.KillOps", async function () {
     try {
        const data = await client.KillOps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.EnableTransparentDataEncryption", async function () {
+    try {
+       const data = await client.EnableTransparentDataEncryption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

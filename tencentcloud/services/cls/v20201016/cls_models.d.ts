@@ -3753,6 +3753,10 @@ export interface CreateExportRequest {
   0：Lucene语法，1：CQL语法。
      */
     SyntaxRule?: number;
+    /**
+     * 导出字段
+     */
+    DerivedFields?: Array<string>;
 }
 /**
  * 仪表盘订阅模板变量
@@ -4551,6 +4555,11 @@ export interface ExportInfo {
   0：Lucene语法，1：CQL语法。
      */
     SyntaxRule?: number;
+    /**
+     * 导出字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DerivedFields?: Array<string>;
 }
 /**
  * ModifyIndex返回参数结构体

@@ -8,7 +8,9 @@ import { ModifyDbauditInstancesRenewFlagResponse, DescribeDbauditInstanceTypeRes
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取镜像列表
+     * 这些接口是传统版堡垒机接口.数审未用到，堡垒机的已全部迁移到dasb下，cds这边预下线
+
+获取镜像列表
      */
     DescribeDasbImageIds(req?: DescribeDasbImageIdsRequest, cb?: (error: string, rep: DescribeDasbImageIdsResponse) => void): Promise<DescribeDasbImageIdsResponse>;
     /**

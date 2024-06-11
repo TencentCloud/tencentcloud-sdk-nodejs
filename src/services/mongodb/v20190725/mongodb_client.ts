@@ -30,12 +30,15 @@ import {
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   InstanceMultiParam,
+  DescribeBackupRulesResponse,
   SlowLogPattern,
   AssignProjectResponse,
   DescribeDBInstanceDealResponse,
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
   DescribeSecurityGroupRequest,
+  RenameInstanceRequest,
+  DescribeBackupRulesRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
   DBInstancePrice,
@@ -44,7 +47,7 @@ import {
   FlashbackDatabase,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
-  DescribeDBInstanceNodePropertyRequest,
+  EnableTransparentDataEncryptionRequest,
   DeleteAccountUserRequest,
   SpecItem,
   ModifyDBInstanceNetworkAddressResponse,
@@ -59,6 +62,7 @@ import {
   ModifyDBInstanceSpecRequest,
   Auth,
   FlashBackDBInstanceRequest,
+  TerminateDBInstancesResponse,
   ResetDBInstancePasswordRequest,
   InstanceIntegerParam,
   ModifyNetworkAddress,
@@ -96,18 +100,21 @@ import {
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
   ShardInfo,
-  TerminateDBInstancesResponse,
-  RenameInstanceRequest,
+  SetBackupRulesResponse,
+  DescribeDBInstanceNodePropertyRequest,
   RenewDBInstancesResponse,
   InstanceEnumParam,
   FlashBackDBInstanceResponse,
   RenameInstanceResponse,
+  DescribeTransparentDataEncryptionStatusResponse,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
   NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
   CreateDBInstanceHourRequest,
+  EnableTransparentDataEncryptionResponse,
+  SetBackupRulesRequest,
   AssignProjectRequest,
   CreateBackupDownloadTaskResponse,
   SpecificationInfo,
@@ -119,8 +126,10 @@ import {
   DeleteAccountUserResponse,
   DescribeDBInstancesResponse,
   OfflineIsolatedDBInstanceRequest,
+  KMSInfoDetail,
   InquirePriceCreateDBInstancesRequest,
   DescribeInstanceParamsResponse,
+  DescribeTransparentDataEncryptionStatusRequest,
   RemoveNodeList,
   SetInstanceMaintenanceRequest,
   InstanceDetail,
@@ -249,6 +258,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(SetBackupRules)用于设置 MongoDB 云数据库的自动备份规则。
+   */
+  async SetBackupRules(
+    req: SetBackupRulesRequest,
+    cb?: (error: string, rep: SetBackupRulesResponse) => void
+  ): Promise<SetBackupRulesResponse> {
+    return this.request("SetBackupRules", req, cb)
+  }
+
+  /**
    * 本接口 (InquirePriceModifyDBInstanceSpec) 用于查询实例配置变更后的价格。
    */
   async InquirePriceModifyDBInstanceSpec(
@@ -256,6 +275,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceModifyDBInstanceSpecResponse) => void
   ): Promise<InquirePriceModifyDBInstanceSpecResponse> {
     return this.request("InquirePriceModifyDBInstanceSpec", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeBackupRules）用于获取实例自动备份配置信息。
+   */
+  async DescribeBackupRules(
+    req: DescribeBackupRulesRequest,
+    cb?: (error: string, rep: DescribeBackupRulesResponse) => void
+  ): Promise<DescribeBackupRulesResponse> {
+    return this.request("DescribeBackupRules", req, cb)
   }
 
   /**
@@ -441,6 +470,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取实例透明加密的开启状态
+   */
+  async DescribeTransparentDataEncryptionStatus(
+    req: DescribeTransparentDataEncryptionStatusRequest,
+    cb?: (error: string, rep: DescribeTransparentDataEncryptionStatusResponse) => void
+  ): Promise<DescribeTransparentDataEncryptionStatusResponse> {
+    return this.request("DescribeTransparentDataEncryptionStatus", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
    */
   async DescribeAccountUsers(
@@ -478,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KillOpsResponse) => void
   ): Promise<KillOpsResponse> {
     return this.request("KillOps", req, cb)
+  }
+
+  /**
+   * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+   */
+  async EnableTransparentDataEncryption(
+    req: EnableTransparentDataEncryptionRequest,
+    cb?: (error: string, rep: EnableTransparentDataEncryptionResponse) => void
+  ): Promise<EnableTransparentDataEncryptionResponse> {
+    return this.request("EnableTransparentDataEncryption", req, cb)
   }
 
   /**

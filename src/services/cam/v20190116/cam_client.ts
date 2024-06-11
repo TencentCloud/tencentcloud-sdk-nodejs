@@ -68,6 +68,7 @@ import {
   CreateAccessKeyResponse,
   DeletePolicyVersionResponse,
   CreateAccessKeyRequest,
+  BuildDataFlowAuthTokenRequest,
   GetRolePermissionBoundaryResponse,
   AttachedUserPolicyGroupInfo,
   ListGroupsForUserResponse,
@@ -94,6 +95,7 @@ import {
   GetUserResponse,
   GetUserPermissionBoundaryResponse,
   CreatePolicyResponse,
+  ListGroupsResponse,
   DetachRolePolicyRequest,
   UntagRoleResponse,
   ListPoliciesGrantingServiceAccessResponse,
@@ -108,6 +110,7 @@ import {
   DeleteRoleRequest,
   ListWeChatWorkSubAccountsRequest,
   UpdateRoleConsoleLoginRequest,
+  BuildDataFlowAuthTokenResponse,
   UpdateUserResponse,
   UpdateAssumeRolePolicyResponse,
   GetPolicyVersionRequest,
@@ -118,7 +121,6 @@ import {
   SubAccountInfo,
   CreateGroupRequest,
   SAMLProviderInfo,
-  ListGrantServiceAccessPolicy,
   DisableUserSSORequest,
   ListPoliciesGrantingServiceAccessRequest,
   UpdateSAMLProviderResponse,
@@ -134,7 +136,7 @@ import {
   AttachUserPolicyRequest,
   ListAttachedGroupPoliciesResponse,
   ListAttachedUserPoliciesResponse,
-  ListGroupsResponse,
+  AuthToken,
   PutUserPermissionsBoundaryResponse,
   GetPolicyVersionResponse,
   GetCustomMFATokenInfoResponse,
@@ -151,7 +153,7 @@ import {
   ListUsersRequest,
   ListCollaboratorsRequest,
   CreateUserOIDCConfigRequest,
-  AttachGroupPolicyResponse,
+  AddUserResponse,
   UpdateGroupResponse,
   ListEntitiesForPolicyRequest,
   TagRoleRequest,
@@ -200,7 +202,7 @@ import {
   AttachEntityOfPolicy,
   DeleteOIDCConfigResponse,
   PolicyVersionDetail,
-  AddUserResponse,
+  ListGrantServiceAccessPolicy,
   ListGrantServiceAccessService,
   CreateUserSAMLConfigResponse,
   DescribeSubAccountsResponse,
@@ -216,6 +218,7 @@ import {
   ListAccessKeysResponse,
   GetSecurityLastUsedResponse,
   ListAttachedUserPoliciesRequest,
+  AttachGroupPolicyResponse,
   UpdatePolicyRequest,
   DeleteOIDCConfigRequest,
   CreateMessageReceiverResponse,
@@ -332,13 +335,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户权限边界
+   * 修改用户OIDC配置
    */
-  async DeleteUserPermissionsBoundary(
-    req: DeleteUserPermissionsBoundaryRequest,
-    cb?: (error: string, rep: DeleteUserPermissionsBoundaryResponse) => void
-  ): Promise<DeleteUserPermissionsBoundaryResponse> {
-    return this.request("DeleteUserPermissionsBoundary", req, cb)
+  async UpdateUserOIDCConfig(
+    req: UpdateUserOIDCConfigRequest,
+    cb?: (error: string, rep: UpdateUserOIDCConfigResponse) => void
+  ): Promise<UpdateUserOIDCConfigResponse> {
+    return this.request("UpdateUserOIDCConfig", req, cb)
   }
 
   /**
@@ -399,6 +402,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateRoleDescriptionResponse) => void
   ): Promise<UpdateRoleDescriptionResponse> {
     return this.request("UpdateRoleDescription", req, cb)
+  }
+
+  /**
+   * 获取数据流认证Token
+   */
+  async BuildDataFlowAuthToken(
+    req: BuildDataFlowAuthTokenRequest,
+    cb?: (error: string, rep: BuildDataFlowAuthTokenResponse) => void
+  ): Promise<BuildDataFlowAuthTokenResponse> {
+    return this.request("BuildDataFlowAuthToken", req, cb)
   }
 
   /**
@@ -734,6 +747,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户组
+   */
+  async CreateGroup(
+    req: CreateGroupRequest,
+    cb?: (error: string, rep: CreateGroupResponse) => void
+  ): Promise<CreateGroupResponse> {
+    return this.request("CreateGroup", req, cb)
+  }
+
+  /**
    * 本接口（DeletePolicy）可用于删除策略。
    */
   async DeletePolicy(
@@ -744,13 +767,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户组
+   * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
    */
-  async CreateGroup(
-    req: CreateGroupRequest,
-    cb?: (error: string, rep: CreateGroupResponse) => void
-  ): Promise<CreateGroupResponse> {
-    return this.request("CreateGroup", req, cb)
+  async DeletePolicyVersion(
+    req: DeletePolicyVersionRequest,
+    cb?: (error: string, rep: DeletePolicyVersionResponse) => void
+  ): Promise<DeletePolicyVersionResponse> {
+    return this.request("DeletePolicyVersion", req, cb)
   }
 
   /**
@@ -984,13 +1007,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户OIDC配置
+   * 删除用户权限边界
    */
-  async UpdateUserOIDCConfig(
-    req: UpdateUserOIDCConfigRequest,
-    cb?: (error: string, rep: UpdateUserOIDCConfigResponse) => void
-  ): Promise<UpdateUserOIDCConfigResponse> {
-    return this.request("UpdateUserOIDCConfig", req, cb)
+  async DeleteUserPermissionsBoundary(
+    req: DeleteUserPermissionsBoundaryRequest,
+    cb?: (error: string, rep: DeleteUserPermissionsBoundaryResponse) => void
+  ): Promise<DeleteUserPermissionsBoundaryResponse> {
+    return this.request("DeleteUserPermissionsBoundary", req, cb)
   }
 
   /**
@@ -1071,16 +1094,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRoleResponse) => void
   ): Promise<GetRoleResponse> {
     return this.request("GetRole", req, cb)
-  }
-
-  /**
-   * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
-   */
-  async DeletePolicyVersion(
-    req: DeletePolicyVersionRequest,
-    cb?: (error: string, rep: DeletePolicyVersionResponse) => void
-  ): Promise<DeletePolicyVersionResponse> {
-    return this.request("DeletePolicyVersion", req, cb)
   }
 
   /**

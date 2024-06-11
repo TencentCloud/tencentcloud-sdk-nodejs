@@ -320,6 +320,29 @@ export interface InstanceMultiParam {
     ValueType: string;
 }
 /**
+ * DescribeBackupRules返回参数结构体
+ */
+export interface DescribeBackupRulesResponse {
+    /**
+     * 备份数据保留期限。单位为：天。
+     */
+    BackupSaveTime?: number;
+    /**
+     * 自动备份开始时间。
+     */
+    BackupTime?: number;
+    /**
+     * 备份方式。
+  - 0：逻辑备份。
+  - 1：物理备份。
+     */
+    BackupMethod?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 用于描述MongoDB数据库慢日志统计信息
  */
 export interface SlowLogPattern {
@@ -414,6 +437,28 @@ export interface IsolateDBInstanceResponse {
 export interface DescribeSecurityGroupRequest {
     /**
      * 实例 ID。例如：cmgo-p8vn****。
+     */
+    InstanceId: string;
+}
+/**
+ * RenameInstance请求参数结构体
+ */
+export interface RenameInstanceRequest {
+    /**
+     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     */
+    InstanceId: string;
+    /**
+     * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
+     */
+    NewName: string;
+}
+/**
+ * DescribeBackupRules请求参数结构体
+ */
+export interface DescribeBackupRulesRequest {
+    /**
+     * 指定实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
      */
     InstanceId: string;
 }
@@ -556,39 +601,21 @@ export interface CreateDBInstanceHourResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBInstanceNodeProperty请求参数结构体
+ * EnableTransparentDataEncryption请求参数结构体
  */
-export interface DescribeDBInstanceNodePropertyRequest {
+export interface EnableTransparentDataEncryptionRequest {
     /**
-     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+     * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。目前支持通用版本包含：4.4、5.0，云盘版暂不支持。
      */
     InstanceId: string;
     /**
-     * 节点ID。
+     *  [密钥管理系统（Key Management Service，KMS）](https://cloud.tencent.com/document/product/573/18809)服务所在地域，例如 ap-shanghai。
      */
-    NodeIds?: Array<string>;
+    KmsRegion: string;
     /**
-     * 节点角色。可选值包括：
-  <ul><li>PRIMARY：主节点。</li><li>SECONDARY：从节点。</li><li>READONLY：只读节点。</li><li>ARBITER：仲裁节点。</li></ul>
+     * 密钥 ID。若不设置该参数，不指定具体的密钥 ID，由腾讯云自动生成密钥。
      */
-    Roles?: Array<string>;
-    /**
-     * 该参数指定节点是否为Hidden节点，默认为false。
-     */
-    OnlyHidden?: boolean;
-    /**
-     * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
-     */
-    Priority?: number;
-    /**
-     * 该参数指定节点投票权。
-  <ul><li>1：具有投票权。</li><li>0：无投票权。</li></ul>
-     */
-    Votes?: number;
-    /**
-     * 节点标签。
-     */
-    Tags?: Array<NodeTag>;
+    KeyId?: string;
 }
 /**
  * DeleteAccountUser请求参数结构体
@@ -1040,6 +1067,15 @@ export interface FlashBackDBInstanceRequest {
      * 数据最终写入的实例 ID。
      */
     TargetInstanceId?: string;
+}
+/**
+ * TerminateDBInstances返回参数结构体
+ */
+export interface TerminateDBInstancesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ResetDBInstancePassword请求参数结构体
@@ -1798,26 +1834,48 @@ export interface ShardInfo {
     RealReplicaSetId: string;
 }
 /**
- * TerminateDBInstances返回参数结构体
+ * SetBackupRules返回参数结构体
  */
-export interface TerminateDBInstancesResponse {
+export interface SetBackupRulesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * RenameInstance请求参数结构体
+ * DescribeDBInstanceNodeProperty请求参数结构体
  */
-export interface RenameInstanceRequest {
+export interface DescribeDBInstanceNodePropertyRequest {
     /**
-     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
      */
     InstanceId: string;
     /**
-     * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
+     * 节点ID。
      */
-    NewName: string;
+    NodeIds?: Array<string>;
+    /**
+     * 节点角色。可选值包括：
+  <ul><li>PRIMARY：主节点。</li><li>SECONDARY：从节点。</li><li>READONLY：只读节点。</li><li>ARBITER：仲裁节点。</li></ul>
+     */
+    Roles?: Array<string>;
+    /**
+     * 该参数指定节点是否为Hidden节点，默认为false。
+     */
+    OnlyHidden?: boolean;
+    /**
+     * 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。
+     */
+    Priority?: number;
+    /**
+     * 该参数指定节点投票权。
+  <ul><li>1：具有投票权。</li><li>0：无投票权。</li></ul>
+     */
+    Votes?: number;
+    /**
+     * 节点标签。
+     */
+    Tags?: Array<NodeTag>;
 }
 /**
  * RenewDBInstances返回参数结构体
@@ -1887,6 +1945,26 @@ export interface FlashBackDBInstanceResponse {
  * RenameInstance返回参数结构体
  */
 export interface RenameInstanceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeTransparentDataEncryptionStatus返回参数结构体
+ */
+export interface DescribeTransparentDataEncryptionStatusResponse {
+    /**
+     * 表示是否开启了透明加密。
+  - close：未开启。
+  - open：已开启。
+     */
+    TransparentDataEncryptionStatus?: string;
+    /**
+     * 已绑定的密钥列表，如未绑定，返回null。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyInfoList?: Array<KMSInfoDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2142,6 +2220,46 @@ export interface CreateDBInstanceHourRequest {
     HiddenZone?: string;
 }
 /**
+ * EnableTransparentDataEncryption返回参数结构体
+ */
+export interface EnableTransparentDataEncryptionResponse {
+    /**
+     * 开启透明加密的异步流程id，用于查询流程状态。
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * SetBackupRules请求参数结构体
+ */
+export interface SetBackupRulesRequest {
+    /**
+     * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 设置自动备份方式。- 0：逻辑备份。- 1：物理备份。-3：快照备份(仅云盘版支持)。
+     */
+    BackupMethod: number;
+    /**
+     * 设置自动备份开始时间。取值范围为：[0,23]，例如：该参数设置为2，表示02:00开始备份。
+     */
+    BackupTime: number;
+    /**
+     * 设置自动备份发生错误时，是否发送失败告警。
+  - true：发送。
+  - false：不发送。
+     */
+    Notify?: boolean;
+    /**
+     * 指定备份数据保存天数。默认为 7 天，支持设置为7、30、90、180、365。
+     */
+    BackupRetentionPeriod?: number;
+}
+/**
  * AssignProject请求参数结构体
  */
 export interface AssignProjectRequest {
@@ -2321,6 +2439,41 @@ export interface OfflineIsolatedDBInstanceRequest {
     InstanceId: string;
 }
 /**
+ * KMS密钥信息
+ */
+export interface KMSInfoDetail {
+    /**
+     * 主密钥 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyId?: string;
+    /**
+     * 主密钥名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyName?: string;
+    /**
+     * 实例与密钥绑定时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 密钥状态。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 密钥用途。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyUsage?: string;
+    /**
+     * 密钥来源。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyOrigin?: string;
+}
+/**
  * InquirePriceCreateDBInstances请求参数结构体
  */
 export interface InquirePriceCreateDBInstancesRequest {
@@ -2444,6 +2597,15 @@ export interface DescribeInstanceParamsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeTransparentDataEncryptionStatus请求参数结构体
+ */
+export interface DescribeTransparentDataEncryptionStatusRequest {
+    /**
+     * 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+     */
+    InstanceId: string;
 }
 /**
  * 修改实例节点详情

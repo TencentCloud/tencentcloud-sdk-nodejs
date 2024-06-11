@@ -88,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetUser", req, cb);
     }
     /**
-     * 删除用户权限边界
+     * 修改用户OIDC配置
      */
-    async DeleteUserPermissionsBoundary(req, cb) {
-        return this.request("DeleteUserPermissionsBoundary", req, cb);
+    async UpdateUserOIDCConfig(req, cb) {
+        return this.request("UpdateUserOIDCConfig", req, cb);
     }
     /**
      * 根据删除TaskId获取服务相关角色删除状态
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateRoleDescription(req, cb) {
         return this.request("UpdateRoleDescription", req, cb);
+    }
+    /**
+     * 获取数据流认证Token
+     */
+    async BuildDataFlowAuthToken(req, cb) {
+        return this.request("BuildDataFlowAuthToken", req, cb);
     }
     /**
      * 更新SAML身份提供商信息
@@ -330,16 +336,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetSecurityLastUsed", req, cb);
     }
     /**
+     * 创建用户组
+     */
+    async CreateGroup(req, cb) {
+        return this.request("CreateGroup", req, cb);
+    }
+    /**
      * 本接口（DeletePolicy）可用于删除策略。
      */
     async DeletePolicy(req, cb) {
         return this.request("DeletePolicy", req, cb);
     }
     /**
-     * 创建用户组
+     * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
      */
-    async CreateGroup(req, cb) {
-        return this.request("CreateGroup", req, cb);
+    async DeletePolicyVersion(req, cb) {
+        return this.request("DeletePolicyVersion", req, cb);
     }
     /**
      * 列出指定CAM用户的访问密钥
@@ -480,10 +492,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRolePermissionBoundary", req, cb);
     }
     /**
-     * 修改用户OIDC配置
+     * 删除用户权限边界
      */
-    async UpdateUserOIDCConfig(req, cb) {
-        return this.request("UpdateUserOIDCConfig", req, cb);
+    async DeleteUserPermissionsBoundary(req, cb) {
+        return this.request("DeleteUserPermissionsBoundary", req, cb);
     }
     /**
      * 查询角色OIDC配置
@@ -532,12 +544,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetRole(req, cb) {
         return this.request("GetRole", req, cb);
-    }
-    /**
-     * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
-     */
-    async DeletePolicyVersion(req, cb) {
-        return this.request("DeletePolicyVersion", req, cb);
     }
     /**
      * 本接口（ListPolicies）可用于查询策略列表。

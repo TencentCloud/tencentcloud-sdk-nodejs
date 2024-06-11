@@ -94,10 +94,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateDBInstance", req, cb);
     }
     /**
+     * 本接口(SetBackupRules)用于设置 MongoDB 云数据库的自动备份规则。
+     */
+    async SetBackupRules(req, cb) {
+        return this.request("SetBackupRules", req, cb);
+    }
+    /**
      * 本接口 (InquirePriceModifyDBInstanceSpec) 用于查询实例配置变更后的价格。
      */
     async InquirePriceModifyDBInstanceSpec(req, cb) {
         return this.request("InquirePriceModifyDBInstanceSpec", req, cb);
+    }
+    /**
+     * 本接口（DescribeBackupRules）用于获取实例自动备份配置信息。
+     */
+    async DescribeBackupRules(req, cb) {
+        return this.request("DescribeBackupRules", req, cb);
     }
     /**
      * 查询异步任务状态接口
@@ -210,6 +222,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignProject", req, cb);
     }
     /**
+     * 获取实例透明加密的开启状态
+     */
+    async DescribeTransparentDataEncryptionStatus(req, cb) {
+        return this.request("DescribeTransparentDataEncryptionStatus", req, cb);
+    }
+    /**
      * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
      */
     async DescribeAccountUsers(req, cb) {
@@ -232,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async KillOps(req, cb) {
         return this.request("KillOps", req, cb);
+    }
+    /**
+     * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+     */
+    async EnableTransparentDataEncryption(req, cb) {
+        return this.request("EnableTransparentDataEncryption", req, cb);
     }
     /**
      * 本接口（CreateBackupDBInstance）用于备份实例。

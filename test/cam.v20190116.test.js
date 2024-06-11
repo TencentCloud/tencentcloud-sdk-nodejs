@@ -118,9 +118,9 @@ it("cam.v20190116.GetUser", async function () {
     }
 })
 
-it("cam.v20190116.DeleteUserPermissionsBoundary", async function () {
+it("cam.v20190116.UpdateUserOIDCConfig", async function () {
     try {
-       const data = await client.DeleteUserPermissionsBoundary({})
+       const data = await client.UpdateUserOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("cam.v20190116.DeleteUser", async function () {
 it("cam.v20190116.UpdateRoleDescription", async function () {
     try {
        const data = await client.UpdateRoleDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.BuildDataFlowAuthToken", async function () {
+    try {
+       const data = await client.BuildDataFlowAuthToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,6 +528,16 @@ it("cam.v20190116.GetSecurityLastUsed", async function () {
     }
 })
 
+it("cam.v20190116.CreateGroup", async function () {
+    try {
+       const data = await client.CreateGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.DeletePolicy", async function () {
     try {
        const data = await client.DeletePolicy({})
@@ -528,9 +548,9 @@ it("cam.v20190116.DeletePolicy", async function () {
     }
 })
 
-it("cam.v20190116.CreateGroup", async function () {
+it("cam.v20190116.DeletePolicyVersion", async function () {
     try {
-       const data = await client.CreateGroup({})
+       const data = await client.DeletePolicyVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +788,9 @@ it("cam.v20190116.GetRolePermissionBoundary", async function () {
     }
 })
 
-it("cam.v20190116.UpdateUserOIDCConfig", async function () {
+it("cam.v20190116.DeleteUserPermissionsBoundary", async function () {
     try {
-       const data = await client.UpdateUserOIDCConfig({})
+       const data = await client.DeleteUserPermissionsBoundary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -851,16 +871,6 @@ it("cam.v20190116.DescribeSafeAuthFlagColl", async function () {
 it("cam.v20190116.GetRole", async function () {
     try {
        const data = await client.GetRole({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cam.v20190116.DeletePolicyVersion", async function () {
-    try {
-       const data = await client.DeletePolicyVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

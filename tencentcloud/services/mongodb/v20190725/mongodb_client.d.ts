@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResponse, DescribeAccountUsersRequest, SetInstanceMaintenanceResponse, CreateBackupDBInstanceResponse, FlushInstanceRouterConfigRequest, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeSecurityGroupRequest, DescribeBackupDownloadTaskResponse, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, DescribeDBInstanceNodePropertyRequest, DeleteAccountUserRequest, ModifyDBInstanceNetworkAddressResponse, CreateAccountUserResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, FlashBackDBInstanceRequest, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, CreateAccountUserRequest, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, TerminateDBInstancesResponse, RenameInstanceRequest, RenewDBInstancesResponse, FlashBackDBInstanceResponse, RenameInstanceResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, AssignProjectRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DeleteAccountUserResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, SetInstanceMaintenanceRequest, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
+import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResponse, DescribeAccountUsersRequest, SetInstanceMaintenanceResponse, CreateBackupDBInstanceResponse, FlushInstanceRouterConfigRequest, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, DescribeBackupRulesResponse, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeSecurityGroupRequest, RenameInstanceRequest, DescribeBackupRulesRequest, DescribeBackupDownloadTaskResponse, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, EnableTransparentDataEncryptionRequest, DeleteAccountUserRequest, ModifyDBInstanceNetworkAddressResponse, CreateAccountUserResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, FlashBackDBInstanceRequest, TerminateDBInstancesResponse, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, CreateAccountUserRequest, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, SetBackupRulesResponse, DescribeDBInstanceNodePropertyRequest, RenewDBInstancesResponse, FlashBackDBInstanceResponse, RenameInstanceResponse, DescribeTransparentDataEncryptionStatusResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, EnableTransparentDataEncryptionResponse, SetBackupRulesRequest, AssignProjectRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DeleteAccountUserResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, DescribeTransparentDataEncryptionStatusRequest, SetInstanceMaintenanceRequest, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
 /**
  * mongodb client
  * @class
@@ -52,9 +52,17 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstance(req: IsolateDBInstanceRequest, cb?: (error: string, rep: IsolateDBInstanceResponse) => void): Promise<IsolateDBInstanceResponse>;
     /**
+     * 本接口(SetBackupRules)用于设置 MongoDB 云数据库的自动备份规则。
+     */
+    SetBackupRules(req: SetBackupRulesRequest, cb?: (error: string, rep: SetBackupRulesResponse) => void): Promise<SetBackupRulesResponse>;
+    /**
      * 本接口 (InquirePriceModifyDBInstanceSpec) 用于查询实例配置变更后的价格。
      */
     InquirePriceModifyDBInstanceSpec(req: InquirePriceModifyDBInstanceSpecRequest, cb?: (error: string, rep: InquirePriceModifyDBInstanceSpecResponse) => void): Promise<InquirePriceModifyDBInstanceSpecResponse>;
+    /**
+     * 本接口（DescribeBackupRules）用于获取实例自动备份配置信息。
+     */
+    DescribeBackupRules(req: DescribeBackupRulesRequest, cb?: (error: string, rep: DescribeBackupRulesResponse) => void): Promise<DescribeBackupRulesResponse>;
     /**
      * 查询异步任务状态接口
      */
@@ -130,6 +138,10 @@ export declare class Client extends AbstractClient {
      */
     AssignProject(req: AssignProjectRequest, cb?: (error: string, rep: AssignProjectResponse) => void): Promise<AssignProjectResponse>;
     /**
+     * 获取实例透明加密的开启状态
+     */
+    DescribeTransparentDataEncryptionStatus(req: DescribeTransparentDataEncryptionStatusRequest, cb?: (error: string, rep: DescribeTransparentDataEncryptionStatusResponse) => void): Promise<DescribeTransparentDataEncryptionStatusResponse>;
+    /**
      * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
      */
     DescribeAccountUsers(req: DescribeAccountUsersRequest, cb?: (error: string, rep: DescribeAccountUsersResponse) => void): Promise<DescribeAccountUsersResponse>;
@@ -145,6 +157,10 @@ export declare class Client extends AbstractClient {
      * 本接口(KillOps)用于终止MongoDB云数据库实例上执行的特定操作。
      */
     KillOps(req: KillOpsRequest, cb?: (error: string, rep: KillOpsResponse) => void): Promise<KillOpsResponse>;
+    /**
+     * 本接口(EnableTransparentDataEncryption)用于开启云数据库 MongoDB 的透明加密能力。
+     */
+    EnableTransparentDataEncryption(req: EnableTransparentDataEncryptionRequest, cb?: (error: string, rep: EnableTransparentDataEncryptionResponse) => void): Promise<EnableTransparentDataEncryptionResponse>;
     /**
      * 本接口（CreateBackupDBInstance）用于备份实例。
      */
