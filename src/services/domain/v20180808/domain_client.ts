@@ -653,9 +653,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
-
-     */
+   * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+   */
   async RenewDomainBatch(
     req: RenewDomainBatchRequest,
     cb?: (error: string, rep: RenewDomainBatchResponse) => void

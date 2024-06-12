@@ -5939,6 +5939,10 @@ export interface ModifyTopicRequest {
   开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
      */
     IsWebTracking?: boolean;
+    /**
+     * 日志主题分区数量
+     */
+    PartitionCount?: number;
 }
 /**
  * CKafka的描述-需要投递到的kafka信息

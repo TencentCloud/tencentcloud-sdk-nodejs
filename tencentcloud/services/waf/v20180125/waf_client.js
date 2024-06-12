@@ -228,10 +228,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAntiInfoLeakRule", req, cb);
     }
     /**
+     * 修改地域封禁中的地域信息
+     */
+    async ModifyAreaBanAreas(req, cb) {
+        return this.request("ModifyAreaBanAreas", req, cb);
+    }
+    /**
      * 计费资源购买、续费下单接口
      */
     async CreateDeals(req, cb) {
         return this.request("CreateDeals", req, cb);
+    }
+    /**
+     * 获取WAF地域封禁支持的地域列表
+     */
+    async DescribeAreaBanSupportAreas(req, cb) {
+        return this.request("DescribeAreaBanSupportAreas", req, cb);
     }
     /**
      * 编辑SAAS型接入的紧急CC防护状态

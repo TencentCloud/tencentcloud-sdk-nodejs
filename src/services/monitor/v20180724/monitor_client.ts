@@ -1604,7 +1604,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Prometheus 服务可用区
+   * 列出 Prometheus 服务可用区。
    */
   async DescribePrometheusZones(
     req: DescribePrometheusZonesRequest,
@@ -1885,8 +1885,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取Prometheus聚合规则yaml列表
-   */
+     * DescribePrometheusRecordRules 接口可完全代替该接口。近30天仅有3次调用，且都是报错请求
+
+拉取Prometheus聚合规则yaml列表
+     */
   async DescribePrometheusRecordRuleYaml(
     req: DescribePrometheusRecordRuleYamlRequest,
     cb?: (error: string, rep: DescribePrometheusRecordRuleYamlResponse) => void
@@ -2027,7 +2029,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出可安装的所有 Grafana 插件
+   * 列出可安装的所有 Grafana 插件。
    */
   async DescribePluginOverviews(
     req?: DescribePluginOverviewsRequest,

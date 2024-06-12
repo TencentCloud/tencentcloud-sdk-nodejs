@@ -205,7 +205,6 @@ export declare class Client extends AbstractClient {
     ModifyDomainOwnerBatch(req: ModifyDomainOwnerBatchRequest, cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void): Promise<ModifyDomainOwnerBatchResponse>;
     /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
-
      */
     RenewDomainBatch(req: RenewDomainBatchRequest, cb?: (error: string, rep: RenewDomainBatchResponse) => void): Promise<RenewDomainBatchResponse>;
     /**

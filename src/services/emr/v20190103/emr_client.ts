@@ -24,6 +24,7 @@ import {
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
   ScaleOutInstanceResponse,
+  DescribeClusterFlowStatusDetailResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
   PodVolume,
@@ -54,6 +55,7 @@ import {
   DescribeHBaseTableOverviewResponse,
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyAutoScaleStrategyRequest,
+  Configuration,
   NodeResourceSpec,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
@@ -67,10 +69,11 @@ import {
   AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
   VPCSettings,
-  CustomServiceDefine,
+  DescribeHiveQueriesRequest,
   DescribeInstanceRenewNodesRequest,
   YarnApplication,
   JobResult,
+  FlowParam,
   DescribeAutoScaleStrategiesResponse,
   StopParams,
   DependService,
@@ -82,12 +85,13 @@ import {
   OverviewMetricData,
   AutoScaleRecord,
   JobFlowResourceSpec,
-  Configuration,
+  FlowParamsDesc,
   DescribeResourceScheduleRequest,
+  AllNodeResourceSpec,
   Placement,
   QuotaEntity,
   PodParameter,
-  AllNodeResourceSpec,
+  DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
   DescribeInsightListRequest,
@@ -120,7 +124,7 @@ import {
   PriceResource,
   TimeAutoScaleStrategy,
   DescribeInsightListResponse,
-  DescribeHiveQueriesRequest,
+  CustomServiceDefine,
   DeleteAutoScaleStrategyResponse,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
@@ -157,6 +161,7 @@ import {
   DescribeInstancesResponse,
   DescribeYarnApplicationsResponse,
   DescribeUsersForUserManagerResponse,
+  FlowExtraDetail,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
   ModifyResourcesTagsRequest,
@@ -191,6 +196,7 @@ import {
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
   TableSchemaItem,
+  StageInfoDetail,
   InquiryPriceScaleOutInstanceResponse,
   AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
@@ -296,6 +302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
   ): Promise<InquirePriceRenewEmrResponse> {
     return this.request("InquirePriceRenewEmr", req, cb)
+  }
+
+  /**
+   * 查询EMR任务运行详情状态
+   */
+  async DescribeClusterFlowStatusDetail(
+    req: DescribeClusterFlowStatusDetailRequest,
+    cb?: (error: string, rep: DescribeClusterFlowStatusDetailResponse) => void
+  ): Promise<DescribeClusterFlowStatusDetailResponse> {
+    return this.request("DescribeClusterFlowStatusDetail", req, cb)
   }
 
   /**

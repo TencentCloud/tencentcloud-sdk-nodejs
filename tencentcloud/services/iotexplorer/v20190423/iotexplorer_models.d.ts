@@ -1230,6 +1230,10 @@ export interface GetWechatDeviceTicketRequest {
      * 模板ID
      */
     ModelId?: string;
+    /**
+     * 小程序APPID
+     */
+    MiniProgramAppId?: string;
 }
 /**
  * GetTWeCallActiveStatus返回参数结构体

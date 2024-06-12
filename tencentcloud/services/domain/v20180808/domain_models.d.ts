@@ -332,7 +332,7 @@ export interface DescribeBiddingAppointDetailRequest {
  */
 export interface DescribeCustomDnsHostSetRequest {
     /**
-     * 域名实例ID
+     * 域名实例ID(域名基本信息或我的域名列表接口可获取)
      */
     DomainId: string;
     /**
@@ -1001,7 +1001,7 @@ export interface RenewDomainBatchResponse {
     /**
      * 操作日志ID。
      */
-    LogId: number;
+    LogId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1056,7 +1056,7 @@ export interface BatchModifyDomainInfoResponse {
     /**
      * 日志ID
      */
-    LogId: number;
+    LogId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1357,11 +1357,11 @@ export interface DescribePhoneEmailListResponse {
  */
 export interface DescribePreDomainListRequest {
     /**
-     * 页码
+     * 页码，默认为1
      */
     Page?: number;
     /**
-     * 条数
+     * 条数，默认为20
      */
     Size?: number;
     /**
@@ -1462,7 +1462,7 @@ export interface BatchModifyDomainInfoRequest {
      */
     Domains: Array<string>;
     /**
-     * 模板ID。
+     * 模板ID(可从模板列表接口获取)
      */
     TemplateId: string;
     /**
@@ -2214,7 +2214,7 @@ export interface CreatePhoneEmailRequest {
      */
     Type: number;
     /**
-     * 验证码
+     * 验证码(通过SendPhoneEmailCode发送到手机或邮箱的验证码)
      */
     VerifyCode: string;
 }
@@ -2503,7 +2503,7 @@ export interface ContactInfo {
  */
 export interface DeleteTemplateRequest {
     /**
-     * 模板ID
+     * 模板ID(可通过模板信息列表获取)
      */
     TemplateId: string;
 }

@@ -712,7 +712,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTempSync", req, cb);
     }
     /**
-     * 列出 Prometheus 服务可用区
+     * 列出 Prometheus 服务可用区。
      */
     async DescribePrometheusZones(req, cb) {
         return this.request("DescribePrometheusZones", req, cb);
@@ -885,7 +885,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyGroupInfo", req, cb);
     }
     /**
-     * 拉取Prometheus聚合规则yaml列表
+     * DescribePrometheusRecordRules 接口可完全代替该接口。近30天仅有3次调用，且都是报错请求
+
+拉取Prometheus聚合规则yaml列表
      */
     async DescribePrometheusRecordRuleYaml(req, cb) {
         return this.request("DescribePrometheusRecordRuleYaml", req, cb);
@@ -971,7 +973,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusConfig", req, cb);
     }
     /**
-     * 列出可安装的所有 Grafana 插件
+     * 列出可安装的所有 Grafana 插件。
      */
     async DescribePluginOverviews(req, cb) {
         return this.request("DescribePluginOverviews", req, cb);

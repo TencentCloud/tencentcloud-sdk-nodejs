@@ -35,7 +35,9 @@ export declare class Client extends AbstractClient {
      */
     StopMigrateJob(req: StopMigrateJobRequest, cb?: (error: string, rep: StopMigrateJobResponse) => void): Promise<StopMigrateJobResponse>;
     /**
-     * 本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
+     * 接口不再使用
+
+本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
      */
     DescribeRegionConf(req?: DescribeRegionConfRequest, cb?: (error: string, rep: DescribeRegionConfResponse) => void): Promise<DescribeRegionConfResponse>;
     /**

@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenewEmr", req, cb);
     }
     /**
+     * 查询EMR任务运行详情状态
+     */
+    async DescribeClusterFlowStatusDetail(req, cb) {
+        return this.request("DescribeClusterFlowStatusDetail", req, cb);
+    }
+    /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      */
     async InquiryPriceScaleOutInstance(req, cb) {

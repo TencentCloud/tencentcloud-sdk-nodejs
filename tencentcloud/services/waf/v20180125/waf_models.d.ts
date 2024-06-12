@@ -3057,6 +3057,15 @@ export interface PostAttackDownloadTaskRequest {
     Count?: number;
 }
 /**
+ * ModifyAreaBanAreas返回参数结构体
+ */
+export interface ModifyAreaBanAreasResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyAntiFakeUrlStatus请求参数结构体
  */
 export interface ModifyAntiFakeUrlStatusRequest {
@@ -3390,6 +3399,19 @@ export interface ApiPkg {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAPISecurityTrial?: number;
+}
+/**
+ * DescribeAreaBanSupportAreas返回参数结构体
+ */
+export interface DescribeAreaBanSupportAreasResponse {
+    /**
+     * 地域封禁的地域列表，要解析成json后使用
+     */
+    Data?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribePorts请求参数结构体
@@ -3755,6 +3777,10 @@ export interface GoodsDetailNew {
      */
     ResourceId?: string;
 }
+/**
+ * DescribeAreaBanSupportAreas请求参数结构体
+ */
+export declare type DescribeAreaBanSupportAreasRequest = null;
 /**
  * 产品明细
  */
@@ -8419,6 +8445,27 @@ export interface AddSpartaProtectionRequest {
      * 0: 禁用拨测, 1: 启用拨测。默认启用拨测
      */
     ProbeStatus?: number;
+}
+/**
+ * ModifyAreaBanAreas请求参数结构体
+ */
+export interface ModifyAreaBanAreasRequest {
+    /**
+     * 需要修改的域名
+     */
+    Domain: string;
+    /**
+     * 需要调整的地域信息，一个字符串数组
+     */
+    Areas: Array<string>;
+    /**
+     * 定时任务类型
+     */
+    JobType?: string;
+    /**
+     * 定时任务配置
+     */
+    JobDateTime?: JobDateTime;
 }
 /**
  * ModifyModuleStatus返回参数结构体

@@ -470,7 +470,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePrometheusTempSync(req: DescribePrometheusTempSyncRequest, cb?: (error: string, rep: DescribePrometheusTempSyncResponse) => void): Promise<DescribePrometheusTempSyncResponse>;
     /**
-     * 列出 Prometheus 服务可用区
+     * 列出 Prometheus 服务可用区。
      */
     DescribePrometheusZones(req: DescribePrometheusZonesRequest, cb?: (error: string, rep: DescribePrometheusZonesResponse) => void): Promise<DescribePrometheusZonesResponse>;
     /**
@@ -589,7 +589,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePolicyGroupInfo(req: DescribePolicyGroupInfoRequest, cb?: (error: string, rep: DescribePolicyGroupInfoResponse) => void): Promise<DescribePolicyGroupInfoResponse>;
     /**
-     * 拉取Prometheus聚合规则yaml列表
+     * DescribePrometheusRecordRules 接口可完全代替该接口。近30天仅有3次调用，且都是报错请求
+
+拉取Prometheus聚合规则yaml列表
      */
     DescribePrometheusRecordRuleYaml(req: DescribePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: DescribePrometheusRecordRuleYamlResponse) => void): Promise<DescribePrometheusRecordRuleYamlResponse>;
     /**
@@ -647,7 +649,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePrometheusConfig(req: CreatePrometheusConfigRequest, cb?: (error: string, rep: CreatePrometheusConfigResponse) => void): Promise<CreatePrometheusConfigResponse>;
     /**
-     * 列出可安装的所有 Grafana 插件
+     * 列出可安装的所有 Grafana 插件。
      */
     DescribePluginOverviews(req?: DescribePluginOverviewsRequest, cb?: (error: string, rep: DescribePluginOverviewsResponse) => void): Promise<DescribePluginOverviewsResponse>;
     /**

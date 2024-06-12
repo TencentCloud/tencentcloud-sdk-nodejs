@@ -153,8 +153,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
-   */
+     * 接口不再使用
+
+本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
+     */
   async DescribeRegionConf(
     req?: DescribeRegionConfRequest,
     cb?: (error: string, rep: DescribeRegionConfResponse) => void

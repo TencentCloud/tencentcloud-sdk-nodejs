@@ -1163,7 +1163,7 @@ export interface CreateAutoCalloutTaskRequest {
    */
   NotAfter?: number
   /**
-   * 最大尝试次数
+   * 最大尝试次数，1-3 次
    */
   Tries?: number
   /**

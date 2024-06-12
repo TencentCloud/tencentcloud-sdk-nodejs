@@ -133,6 +133,7 @@ import {
   AccessRuleInfo,
   CCRuleLists,
   PostAttackDownloadTaskRequest,
+  ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
@@ -149,6 +150,7 @@ import {
   ModifyCustomWhiteRuleResponse,
   SearchItem,
   ApiPkg,
+  DescribeAreaBanSupportAreasResponse,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
   DescribeTlsVersionRequest,
@@ -161,6 +163,7 @@ import {
   ModifyInstanceRenewFlagRequest,
   UserWhiteRuleItem,
   GoodsDetailNew,
+  DescribeAreaBanSupportAreasRequest,
   GoodsDetail,
   DeleteIpAccessControlResponse,
   BatchIpAccessControlItem,
@@ -334,6 +337,7 @@ import {
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AddSpartaProtectionRequest,
+  ModifyAreaBanAreasRequest,
   ModifyModuleStatusResponse,
   AttackLogInfo,
   DescribeCCAutoStatusResponse,
@@ -738,6 +742,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改地域封禁中的地域信息
+   */
+  async ModifyAreaBanAreas(
+    req: ModifyAreaBanAreasRequest,
+    cb?: (error: string, rep: ModifyAreaBanAreasResponse) => void
+  ): Promise<ModifyAreaBanAreasResponse> {
+    return this.request("ModifyAreaBanAreas", req, cb)
+  }
+
+  /**
    * 计费资源购买、续费下单接口
    */
   async CreateDeals(
@@ -745,6 +759,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDealsResponse) => void
   ): Promise<CreateDealsResponse> {
     return this.request("CreateDeals", req, cb)
+  }
+
+  /**
+   * 获取WAF地域封禁支持的地域列表
+   */
+  async DescribeAreaBanSupportAreas(
+    req?: DescribeAreaBanSupportAreasRequest,
+    cb?: (error: string, rep: DescribeAreaBanSupportAreasResponse) => void
+  ): Promise<DescribeAreaBanSupportAreasResponse> {
+    return this.request("DescribeAreaBanSupportAreas", req, cb)
   }
 
   /**

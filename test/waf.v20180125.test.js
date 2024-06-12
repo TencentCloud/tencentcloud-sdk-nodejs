@@ -348,9 +348,29 @@ it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyAreaBanAreas", async function () {
+    try {
+       const data = await client.ModifyAreaBanAreas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.CreateDeals", async function () {
     try {
        const data = await client.CreateDeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeAreaBanSupportAreas", async function () {
+    try {
+       const data = await client.DescribeAreaBanSupportAreas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

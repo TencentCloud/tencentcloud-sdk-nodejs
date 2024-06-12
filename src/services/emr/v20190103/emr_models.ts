@@ -201,6 +201,54 @@ export interface ScaleOutInstanceResponse {
 }
 
 /**
+ * DescribeClusterFlowStatusDetail返回参数结构体
+ */
+export interface DescribeClusterFlowStatusDetailResponse {
+  /**
+   * 任务步骤详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StageDetails?: Array<StageInfoDetail>
+  /**
+   * 任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowDesc?: Array<FlowParamsDesc>
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowName?: string
+  /**
+   * 总任务流程进度：
+例如：0.8
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowTotalProgress?: number
+  /**
+   * 定义流程总状态：
+0:初始化，
+1:运行中，
+2:完成，
+3:完成（存在跳过步骤），
+-1:失败，
+-3:阻塞，
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowTotalStatus?: number
+  /**
+   * 流程额外信息
+NeedExtraDetail为true时返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowExtraDetail?: Array<FlowExtraDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUserManagerPwd返回参数结构体
  */
 export interface ModifyUserManagerPwdResponse {
@@ -1444,6 +1492,20 @@ export interface ModifyAutoScaleStrategyRequest {
 }
 
 /**
+ * 自定义配置参数
+ */
+export interface Configuration {
+  /**
+   * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+   */
+  Classification: string
+  /**
+   * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+   */
+  Properties: string
+}
+
+/**
  * 资源详情
  */
 export interface NodeResourceSpec {
@@ -1984,17 +2046,41 @@ export interface VPCSettings {
 }
 
 /**
- * 共用自建组件参数
+ * DescribeHiveQueries请求参数结构体
  */
-export interface CustomServiceDefine {
+export interface DescribeHiveQueriesRequest {
   /**
-   * 自定义参数key
+   * 集群ID
    */
-  Name?: string
+  InstanceId: string
   /**
-   * 自定义参数value
+   * 起始时间秒
    */
-  Value?: string
+  StartTime: number
+  /**
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
+  /**
+   * 执行状态,ERROR等
+   */
+  State?: Array<string>
+  /**
+   * 结束时间大于的时间点
+   */
+  EndTimeGte?: number
+  /**
+   * 结束时间小于时间点
+   */
+  EndTimeLte?: number
 }
 
 /**
@@ -2289,6 +2375,22 @@ export interface JobResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
+}
+
+/**
+ * FlowParam流程参数
+ */
+export interface FlowParam {
+  /**
+   * 流程参数key
+TraceId：通过TraceId查询
+FlowId： 通过FlowId查询
+   */
+  FKey: string
+  /**
+   * 参数value
+   */
+  FValue: string
 }
 
 /**
@@ -2643,17 +2745,18 @@ export interface JobFlowResourceSpec {
 }
 
 /**
- * 自定义配置参数
+ * 任务参数描述
  */
-export interface Configuration {
+export interface FlowParamsDesc {
   /**
-   * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+   * 参数key
    */
-  Classification: string
+  PKey: string
   /**
-   * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+   * 参数value
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Properties: string
+  PValue: string
 }
 
 /**
@@ -2664,6 +2767,52 @@ export interface DescribeResourceScheduleRequest {
    * emr集群的英文id
    */
   InstanceId: string
+}
+
+/**
+ * 资源描述
+ */
+export interface AllNodeResourceSpec {
+  /**
+   * 描述Master节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterResourceSpec?: NodeResourceSpec
+  /**
+   * 描述Core节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoreResourceSpec?: NodeResourceSpec
+  /**
+   * 描述Taskr节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskResourceSpec?: NodeResourceSpec
+  /**
+   * 描述Common节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommonResourceSpec?: NodeResourceSpec
+  /**
+   * Master节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterCount?: number
+  /**
+   * Corer节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoreCount?: number
+  /**
+   * Task节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCount?: number
+  /**
+   * Common节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommonCount?: number
 }
 
 /**
@@ -2833,49 +2982,22 @@ export interface PodParameter {
 }
 
 /**
- * 资源描述
+ * DescribeClusterFlowStatusDetail请求参数结构体
  */
-export interface AllNodeResourceSpec {
+export interface DescribeClusterFlowStatusDetailRequest {
   /**
-   * 描述Master节点资源
-注意：此字段可能返回 null，表示取不到有效值。
+   * EMR实例ID
    */
-  MasterResourceSpec?: NodeResourceSpec
+  InstanceId: string
   /**
-   * 描述Core节点资源
-注意：此字段可能返回 null，表示取不到有效值。
+   * 流程相关参数
    */
-  CoreResourceSpec?: NodeResourceSpec
+  FlowParam: FlowParam
   /**
-   * 描述Taskr节点资源
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否返回任务额外信息
+默认: false
    */
-  TaskResourceSpec?: NodeResourceSpec
-  /**
-   * 描述Common节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CommonResourceSpec?: NodeResourceSpec
-  /**
-   * Master节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MasterCount?: number
-  /**
-   * Corer节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CoreCount?: number
-  /**
-   * Task节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskCount?: number
-  /**
-   * Common节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CommonCount?: number
+  NeedExtraDetail?: boolean
 }
 
 /**
@@ -3920,41 +4042,17 @@ export interface DescribeInsightListResponse {
 }
 
 /**
- * DescribeHiveQueries请求参数结构体
+ * 共用自建组件参数
  */
-export interface DescribeHiveQueriesRequest {
+export interface CustomServiceDefine {
   /**
-   * 集群ID
+   * 自定义参数key
    */
-  InstanceId: string
+  Name?: string
   /**
-   * 起始时间秒
+   * 自定义参数value
    */
-  StartTime: number
-  /**
-   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
-   */
-  EndTime: number
-  /**
-   * 分页起始偏移，从0开始
-   */
-  Offset: number
-  /**
-   * 分页大小，合法范围[1,100]
-   */
-  Limit: number
-  /**
-   * 执行状态,ERROR等
-   */
-  State?: Array<string>
-  /**
-   * 结束时间大于的时间点
-   */
-  EndTimeGte?: number
-  /**
-   * 结束时间小于时间点
-   */
-  EndTimeLte?: number
+  Value?: string
 }
 
 /**
@@ -4995,6 +5093,22 @@ export interface DescribeUsersForUserManagerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 流程额外信息
+ */
+export interface FlowExtraDetail {
+  /**
+   * 额外信息Title
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail?: Array<FlowParamsDesc>
 }
 
 /**
@@ -6132,6 +6246,83 @@ export interface TableSchemaItem {
 }
 
 /**
+ * 任务步骤详情
+ */
+export interface StageInfoDetail {
+  /**
+   * 步骤id
+   */
+  Stage?: string
+  /**
+   * 步骤名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 是否展示
+   */
+  IsShow?: boolean
+  /**
+   * 是否子流程
+   */
+  IsSubFlow?: boolean
+  /**
+   * 子流程标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubFlowFlag?: string
+  /**
+   * 步骤运行状态：0:未开始 1:进行中 2:已完成 3:部分完成  -1:失败
+   */
+  Status?: number
+  /**
+   * 步骤运行状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Desc?: string
+  /**
+   * 运行进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Starttime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endtime?: string
+  /**
+   * 是否有详情信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HadWoodDetail?: boolean
+  /**
+   * Wood子流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WoodJobId?: number
+  /**
+   * 多语言版本Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LanguageKey?: string
+  /**
+   * 如果stage失败，失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedReason?: string
+  /**
+   * 步骤耗时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeConsuming?: string
+}
+
+/**
  * InquiryPriceScaleOutInstance返回参数结构体
  */
 export interface InquiryPriceScaleOutInstanceResponse {
@@ -6588,6 +6779,11 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServicesStatus?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
 }
 
 /**

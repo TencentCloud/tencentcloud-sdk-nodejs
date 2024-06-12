@@ -6731,6 +6731,10 @@ DataSourceType 数据源类型，不填默认过滤非自建的所有关系型�
 注意：每个name默认支持最多5个values。
    */
   Filters?: Array<Filter>
+  /**
+   * casbId
+   */
+  CasbId?: string
 }
 
 /**
@@ -8087,7 +8091,7 @@ export interface ExportAssetDetailDataResponse {
   /**
    * 导出任务id
    */
-  ExportTaskId: number
+  ExportTaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

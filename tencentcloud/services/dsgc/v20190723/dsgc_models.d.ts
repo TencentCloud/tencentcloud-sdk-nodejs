@@ -6432,6 +6432,10 @@ export interface ExportAssetDetailDataRequest {
   注意：每个name默认支持最多5个values。
      */
     Filters?: Array<Filter>;
+    /**
+     * casbId
+     */
+    CasbId?: string;
 }
 /**
  * 合规组中规则信息：包括规则ID，数据分类ID, 数据分级标识ID
@@ -7725,7 +7729,7 @@ export interface ExportAssetDetailDataResponse {
     /**
      * 导出任务id
      */
-    ExportTaskId: number;
+    ExportTaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

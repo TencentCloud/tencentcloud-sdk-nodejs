@@ -323,7 +323,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
-
      */
     async RenewDomainBatch(req, cb) {
         return this.request("RenewDomainBatch", req, cb);
