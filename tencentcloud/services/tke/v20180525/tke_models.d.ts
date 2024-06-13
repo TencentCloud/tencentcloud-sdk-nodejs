@@ -167,11 +167,11 @@ export interface SubnetInfos {
      */
     SecurityGroups?: Array<string>;
     /**
-     * 系统
+     * 系统，默认linux
      */
     Os?: string;
     /**
-     * 硬件架构
+     * 硬件架构，默认amd64
      */
     Arch?: string;
 }
@@ -1372,27 +1372,27 @@ export interface DescribeEKSClusterCredentialResponse {
     /**
      * 集群的接入地址信息
      */
-    Addresses: Array<IPAddress>;
+    Addresses?: Array<IPAddress>;
     /**
      * 集群的认证信息（token只有请求是主账号才返回，子账户请使用返回的kubeconfig）
      */
-    Credential: ClusterCredential;
+    Credential?: ClusterCredential;
     /**
      * 集群的公网访问信息
      */
-    PublicLB: ClusterPublicLB;
+    PublicLB?: ClusterPublicLB;
     /**
      * 集群的内网访问信息
      */
-    InternalLB: ClusterInternalLB;
+    InternalLB?: ClusterInternalLB;
     /**
      * 标记是否新的内外网功能
      */
-    ProxyLB: boolean;
+    ProxyLB?: boolean;
     /**
      * 连接用户集群k8s 的Config
      */
-    Kubeconfig: string;
+    Kubeconfig?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6988,22 +6988,27 @@ export interface DescribePrometheusGlobalNotificationRequest {
 export interface ClusterPublicLB {
     /**
      * 是否开启公网访问LB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled: boolean;
     /**
      * 允许访问的来源CIDR列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowFromCidrs?: Array<string>;
     /**
      * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityPolicies?: Array<string>;
     /**
      * 外网访问相关的扩展参数，格式为json
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraParam?: string;
     /**
      * 新内外网功能，需要传递安全组
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroup?: string;
 }
@@ -9618,7 +9623,7 @@ export interface CreateEKSClusterResponse {
     /**
      * 弹性集群Id
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10659,10 +10664,12 @@ export interface CreateClusterEndpointVipRequest {
 export interface ClusterInternalLB {
     /**
      * 是否开启内网访问LB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled: boolean;
     /**
      * 内网访问LB关联的子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
 }

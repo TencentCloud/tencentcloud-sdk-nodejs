@@ -464,11 +464,11 @@ export interface ModifyNetworkConfigResponse {
  */
 export interface CommandTake {
     /**
-     * 命令
+     * 命令名。
      */
     Cmd: string;
     /**
-     * 耗时
+     * 耗时时长。
      */
     Took: number;
 }
@@ -2298,7 +2298,7 @@ export interface DescribeBackupDetailRequest {
  */
 export interface DescribeInstanceMonitorTookDistResponse {
     /**
-     * 时延分布信息
+     * 时延分布信息。
      */
     Data?: Array<DelayDistribution>;
     /**
@@ -2397,15 +2397,19 @@ export interface AllocateWanAddressResponse {
  */
 export interface DescribeInstanceMonitorTookDistRequest {
     /**
-     * 实例Id
+     * 实例 ID。
      */
     InstanceId: string;
     /**
-     * 时间；例如："20190219"
+     * 查询时间日期。
      */
     Date: string;
     /**
-     * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
+     * 时间范围。
+  - 1：实时。
+  - 2：近30分钟。
+  - 3：近6小时。
+  - 4：近24小时。
      */
     SpanType: number;
 }
@@ -2510,7 +2514,7 @@ export interface DescribeInstanceMonitorTopNCmdTookResponse {
     /**
      * 耗时详细信息
      */
-    Data: Array<CommandTake>;
+    Data?: Array<CommandTake>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3280,7 +3284,7 @@ export interface DescribeProjectSecurityGroupsRequest {
     /**
      * 项目 ID。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 偏移量，取值为Limit的整数倍。
      */
@@ -4052,11 +4056,11 @@ export interface DescribeInstancesRequest {
  */
 export interface SourceCommand {
     /**
-     * 命令
+     * 命令名称。
      */
     Cmd: string;
     /**
-     * 执行次数
+     * 执行次数。
      */
     Count: number;
 }
@@ -4207,11 +4211,15 @@ export interface DeleteInstanceAccountRequest {
  */
 export interface DescribeInstanceMonitorHotKeyRequest {
     /**
-     * 实例Id
+     * 指定实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
      */
     InstanceId: string;
     /**
-     * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
+     * 查询时间范围。
+  - 1：实时。
+  - 2：近30分钟。
+  - 3：近6小时。
+  - 4：近24小时。
      */
     SpanType: number;
 }
@@ -4694,11 +4702,15 @@ export interface DescribeInstanceMonitorBigKeyTypeDistRequest {
  */
 export interface DescribeInstanceMonitorTopNCmdTookRequest {
     /**
-     * 实例ID
+     * 实例 ID。
      */
     InstanceId: string;
     /**
-     * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
+     * 查询时间范围。
+  - 1：实时。
+  - 2：近30分钟。
+  - 3：近6小时。
+  - 4：近24小时。
      */
     SpanType: number;
 }
@@ -5817,7 +5829,7 @@ export interface Instances {
  */
 export interface DescribeInstanceMonitorHotKeyResponse {
     /**
-     * 热Key详细信息
+     * 热 Key 详细信息。
      */
     Data?: Array<HotKeyInfo>;
     /**

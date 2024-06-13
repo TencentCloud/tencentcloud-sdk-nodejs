@@ -260,7 +260,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProjectSecurityGroup(req: DescribeProjectSecurityGroupRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupResponse) => void): Promise<DescribeProjectSecurityGroupResponse>;
     /**
-     * 查询实例热Key
+     * 本接口（DescribeInstanceMonitorHotKey）用于查询实例热Key。
      */
     DescribeInstanceMonitorHotKey(req: DescribeInstanceMonitorHotKeyRequest, cb?: (error: string, rep: DescribeInstanceMonitorHotKeyResponse) => void): Promise<DescribeInstanceMonitorHotKeyResponse>;
     /**

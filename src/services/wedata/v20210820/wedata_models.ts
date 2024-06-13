@@ -6393,6 +6393,22 @@ false 否
 }
 
 /**
+ * 表附加信息
+ */
+export interface TableMetaProperty {
+  /**
+   * 属性的key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 属性的值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * BatchDeleteIntegrationTasks请求参数结构体
  */
 export interface BatchDeleteIntegrationTasksRequest {
@@ -10422,6 +10438,32 @@ export interface ApproveType {
 }
 
 /**
+ * 按表名查询的查询条件
+ */
+export interface TableNameFilter {
+  /**
+   * 数据源类型
+   */
+  MsType?: string
+  /**
+   * 数据源id
+   */
+  DatasourceId?: number
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+  /**
+   * schema
+   */
+  SchemaName?: string
+  /**
+   * 表名
+   */
+  Name?: string
+}
+
+/**
  * 实时任务实例当前的节点信息
  */
 export interface RealTimeTaskInstanceNodeInfo {
@@ -10768,6 +10810,14 @@ export interface DescribeTableMetaRequest {
    * 表唯一id
    */
   TableId: string
+  /**
+   * 按名称查询的条件
+   */
+  TableNameFilter?: TableNameFilter
+  /**
+   * 查询条件类型0按id，1按名称，默认为0
+   */
+  TableFilterType?: number
 }
 
 /**
@@ -13818,6 +13868,11 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PartitionExpireDays?: number
+  /**
+   * 表附属信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableProperties?: Array<TableMetaProperty>
 }
 
 /**
@@ -14706,7 +14761,7 @@ export interface DescribeTableMetaResponse {
    * 表的元数据信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableMeta: TableMeta
+  TableMeta?: TableMeta
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

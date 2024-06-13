@@ -406,7 +406,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroup", req, cb);
     }
     /**
-     * 查询实例热Key
+     * 本接口（DescribeInstanceMonitorHotKey）用于查询实例热Key。
      */
     async DescribeInstanceMonitorHotKey(req, cb) {
         return this.request("DescribeInstanceMonitorHotKey", req, cb);

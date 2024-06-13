@@ -492,6 +492,9 @@ class Client extends abstract_client_1.AbstractClient {
 HttpProfile httpProfile = new HttpProfile();
 httpProfile.setEndpoint("file.test.ess.tencent.cn");
 ```
+
+<font color="red">相关视频指引</font> <br>
+1. <a href="https://dyn.ess.tencent.cn/guide/apivideo/essbasic-UploadFiles.mp4" target="_blank">【上传文件代码】编写示例</a><br>
      */
     async UploadFiles(req, cb) {
         return this.request("UploadFiles", req, cb);

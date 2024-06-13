@@ -239,7 +239,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询专用通道列表。
+   * 查询专用通道列表。
    */
   async DescribeDirectConnectTunnels(
     req: DescribeDirectConnectTunnelsRequest,

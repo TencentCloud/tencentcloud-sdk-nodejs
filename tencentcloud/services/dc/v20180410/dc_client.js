@@ -120,7 +120,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInternetAddress", req, cb);
     }
     /**
-     * 用于查询专用通道列表。
+     * 查询专用通道列表。
      */
     async DescribeDirectConnectTunnels(req, cb) {
         return this.request("DescribeDirectConnectTunnels", req, cb);

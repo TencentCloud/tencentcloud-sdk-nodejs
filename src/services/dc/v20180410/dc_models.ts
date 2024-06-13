@@ -26,10 +26,12 @@ export type DescribeInternetAddressQuotaRequest = null
 export interface BgpPeer {
   /**
    * 用户侧BGP ASN
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Asn?: number
   /**
    * 用户侧BGP密钥
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthKey?: string
 }
@@ -446,6 +448,7 @@ export interface ModifyDirectConnectTunnelAttributeResponse {
 export interface RouteFilterPrefix {
   /**
    * 用户侧网段地址
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Cidr?: string
 }
@@ -486,11 +489,11 @@ export interface DirectConnectTunnelExtra {
   /**
    * 专用通道ID
    */
-  DirectConnectTunnelId: string
+  DirectConnectTunnelId?: string
   /**
    * 物理专线ID
    */
-  DirectConnectId: string
+  DirectConnectId?: string
   /**
    * 专用通道状态
 AVAILABLE:就绪或者已连接
@@ -503,163 +506,163 @@ DELETED:删除完成
 COMFIRMING:待接受
 REJECTED:拒绝
    */
-  State: string
+  State?: string
   /**
    * 物理专线的拥有者，开发商账号 ID
    */
-  DirectConnectOwnerAccount: string
+  DirectConnectOwnerAccount?: string
   /**
    * 专用通道的拥有者，开发商账号 ID
    */
-  OwnerAccount: string
+  OwnerAccount?: string
   /**
    * 网络类型，分别为VPC、BMVPC、CCN
  VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网
    */
-  NetworkType: string
+  NetworkType?: string
   /**
    * VPC地域对应的网络名，如ap-guangzhou
    */
-  NetworkRegion: string
+  NetworkRegion?: string
   /**
    * 私有网络统一 ID 或者黑石网络统一 ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 专线网关 ID
    */
-  DirectConnectGatewayId: string
+  DirectConnectGatewayId?: string
   /**
    * BGP ：BGP路由 STATIC：静态 默认为 BGP 路由
    */
-  RouteType: string
+  RouteType?: string
   /**
    * 用户侧BGP，Asn，AuthKey
    */
-  BgpPeer: BgpPeer
+  BgpPeer?: BgpPeer
   /**
    * 用户侧网段地址
    */
-  RouteFilterPrefixes: Array<RouteFilterPrefix>
+  RouteFilterPrefixes?: Array<RouteFilterPrefix>
   /**
    * 互联网通道公网网段地址
    */
-  PublicAddresses: Array<RouteFilterPrefix>
+  PublicAddresses?: Array<RouteFilterPrefix>
   /**
    * 专用通道的Vlan
    */
-  Vlan: number
+  Vlan?: number
   /**
    * 腾讯侧互联 IP
    */
-  TencentAddress: string
+  TencentAddress?: string
   /**
    * 腾讯侧备用互联IP
    */
-  TencentBackupAddress: string
+  TencentBackupAddress?: string
   /**
    * 用户侧互联 IP
    */
-  CustomerAddress: string
+  CustomerAddress?: string
   /**
    * 专用通道名称
    */
-  DirectConnectTunnelName: string
+  DirectConnectTunnelName?: string
   /**
    * 专用通道创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 专用通道带宽值
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * 关联的网络自定义探测ID
    */
-  NetDetectId: string
+  NetDetectId?: string
   /**
    * BGP community开关
    */
-  EnableBGPCommunity: boolean
+  EnableBGPCommunity?: boolean
   /**
    * 是否为Nat通道
    */
-  NatType: number
+  NatType?: number
   /**
    * VPC地域简码，如gz、cd
    */
-  VpcRegion: string
+  VpcRegion?: string
   /**
    * 是否开启BFD
    */
-  BfdEnable: number
+  BfdEnable?: number
   /**
    * 是否开启NQA
    */
-  NqaEnable: number
+  NqaEnable?: number
   /**
    * 专用通道接入点类型
    */
-  AccessPointType: string
+  AccessPointType?: string
   /**
    * 专线网关名称
    */
-  DirectConnectGatewayName: string
+  DirectConnectGatewayName?: string
   /**
    * VPC名称
    */
-  VpcName: string
+  VpcName?: string
   /**
    * 专用通道关联的物理专线是否签署了用户协议
    */
-  SignLaw: boolean
+  SignLaw?: boolean
   /**
    * BFD配置信息
    */
-  BfdInfo: BFDInfo
+  BfdInfo?: BFDInfo
   /**
    * NQA配置信息
    */
-  NqaInfo: NQAInfo
+  NqaInfo?: NQAInfo
   /**
    * BGP状态
    */
-  BgpStatus: BGPStatus
+  BgpStatus?: BGPStatus
   /**
    * 是否开启IPv6
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IPv6Enable: number
+  IPv6Enable?: number
   /**
    * 腾讯侧互联IPv6地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TencentIPv6Address: string
+  TencentIPv6Address?: string
   /**
    * 腾讯侧备用互联IPv6地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TencentBackupIPv6Address: string
+  TencentBackupIPv6Address?: string
   /**
    * BGPv6状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BgpIPv6Status: BGPStatus
+  BgpIPv6Status?: BGPStatus
   /**
    * 用户侧互联IPv6地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomerIPv6Address: string
+  CustomerIPv6Address?: string
   /**
    * 专用通道是否支持巨帧。1 支持，0 不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JumboEnable: number
+  JumboEnable?: number
   /**
    * 专用通道是否支持高精度BFD。1支持，0不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HighPrecisionBFDEnable: number
+  HighPrecisionBFDEnable?: number
 }
 
 /**
@@ -878,21 +881,21 @@ export interface DescribeDirectConnectTunnelsRequest {
   /**
    * 过滤条件:
 参数不支持同时指定DirectConnectTunnelIds和Filters。
-<li> direct-connect-tunnel-name, 专用通道名称。</li>
-<li> direct-connect-tunnel-id, 专用通道实例ID，如dcx-abcdefgh。</li>
-<li>direct-connect-id, 物理专线实例ID，如，dc-abcdefgh。</li>
+direct-connect-tunnel-name, 专用通道名称。
+direct-connect-tunnel-id, 专用通道实例ID，如：dcx-abcdefgh。
+direct-connect-id, 物理专线实例ID，如：dc-abcdefgh。
    */
   Filters?: Array<Filter>
   /**
-   * 专用通道 ID数组
+   * 专用通道ID数组。
    */
   DirectConnectTunnelIds?: Array<string>
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -1330,11 +1333,11 @@ export interface DeleteDirectConnectRequest {
  */
 export interface DescribeDirectConnectTunnelsResponse {
   /**
-   * 专用通道列表
+   * 专用通道列表。
    */
   DirectConnectTunnelSet?: Array<DirectConnectTunnel>
   /**
-   * 符合专用通道数量。
+   * 专用通道总数量。
    */
   TotalCount?: number
   /**
@@ -1528,11 +1531,11 @@ export interface DirectConnectTunnel {
   /**
    * 专用通道ID
    */
-  DirectConnectTunnelId: string
+  DirectConnectTunnelId?: string
   /**
    * 物理专线ID
    */
-  DirectConnectId: string
+  DirectConnectId?: string
   /**
    * 专用通道状态
 AVAILABLE:就绪或者已连接
@@ -1545,127 +1548,132 @@ DELETED:删除完成
 COMFIRMING:待接受
 REJECTED:拒绝
    */
-  State: string
+  State?: string
   /**
    * 物理专线的拥有者，开发商账号 ID
    */
-  DirectConnectOwnerAccount: string
+  DirectConnectOwnerAccount?: string
   /**
    * 专用通道的拥有者，开发商账号 ID
    */
-  OwnerAccount: string
+  OwnerAccount?: string
   /**
    * 网络类型，分别为VPC、BMVPC、CCN
  VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网
    */
-  NetworkType: string
+  NetworkType?: string
   /**
    * VPC地域对应的网络名，如ap-guangzhou
    */
-  NetworkRegion: string
+  NetworkRegion?: string
   /**
    * 私有网络统一 ID 或者黑石网络统一 ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 专线网关 ID
    */
-  DirectConnectGatewayId: string
+  DirectConnectGatewayId?: string
   /**
    * BGP ：BGP路由 STATIC：静态 默认为 BGP 路由
    */
-  RouteType: string
+  RouteType?: string
   /**
    * 用户侧BGP，Asn，AuthKey
    */
-  BgpPeer: BgpPeer
+  BgpPeer?: BgpPeer
   /**
    * 用户侧网段地址
    */
-  RouteFilterPrefixes: Array<RouteFilterPrefix>
+  RouteFilterPrefixes?: Array<RouteFilterPrefix>
   /**
    * 专用通道的Vlan
    */
-  Vlan: number
+  Vlan?: number
   /**
    * TencentAddress，腾讯侧互联 IP
    */
-  TencentAddress: string
+  TencentAddress?: string
   /**
    * CustomerAddress，用户侧互联 IP
    */
-  CustomerAddress: string
+  CustomerAddress?: string
   /**
    * 专用通道名称
    */
-  DirectConnectTunnelName: string
+  DirectConnectTunnelName?: string
   /**
    * 专用通道创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 专用通道带宽值
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * 专用通道标签值
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * 关联的网络自定义探测ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetDetectId: string
+  NetDetectId?: string
   /**
    * BGP community开关
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableBGPCommunity: boolean
+  EnableBGPCommunity?: boolean
   /**
    * 是否为Nat通道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NatType: number
+  NatType?: number
   /**
    * VPC地域简码，如gz、cd
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcRegion: string
+  VpcRegion?: string
   /**
    * 是否开启BFD
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BfdEnable: number
+  BfdEnable?: number
   /**
    * 专用通道接入点类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessPointType: string
+  AccessPointType?: string
   /**
    * 专线网关名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DirectConnectGatewayName: string
+  DirectConnectGatewayName?: string
   /**
    * VPC名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcName: string
+  VpcName?: string
   /**
    * TencentBackupAddress，腾讯侧备用互联 IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TencentBackupAddress: string
+  TencentBackupAddress?: string
   /**
    * 专用通道关联的物理专线是否签署了用户协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SignLaw: boolean
+  SignLaw?: boolean
   /**
    * 高速上云服务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CloudAttachId: string
+  CloudAttachId?: string
+  /**
+   * 是否共享通道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShareOrNot?: number
 }
 
 /**

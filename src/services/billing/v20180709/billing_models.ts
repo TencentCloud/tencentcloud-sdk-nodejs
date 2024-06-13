@@ -1133,11 +1133,11 @@ export interface DescribeAllocationOverviewResponse {
  */
 export interface DescribeDosageCosDetailByDateRequest {
   /**
-   * 查询用量开始时间，例如：2020-09-01
+   * 查询用量开始时间，格式为yyyy-mm-dd，例如：2020-09-01
    */
   StartDate: string
   /**
-   * 查询用量结束时间，例如：2020-09-30（与开始时间同月，不支持跨月查询）
+   * 查询用量结束时间，格式为yyyy-mm-dd，例如：2020-09-30（与开始时间同月，不支持跨月查询）
    */
   EndDate: string
   /**

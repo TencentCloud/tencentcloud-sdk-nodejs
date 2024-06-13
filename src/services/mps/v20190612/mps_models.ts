@@ -2414,30 +2414,13 @@ export interface ModifyStreamLinkFlowRequest {
 }
 
 /**
- * 智能精彩片段结果类型
+ * 编辑视频任务的输入。
  */
-export interface AiAnalysisTaskHighlightResult {
+export interface EditMediaTaskInput {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 输入的视频文件信息。
    */
-  Status?: string
-  /**
-   * 错误码，0：成功，其他值：失败。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 智能精彩片段任务输入。
-   */
-  Input?: AiAnalysisTaskHighlightInput
-  /**
-   * 智能精彩片段任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: AiAnalysisTaskHighlightOutput
+  FileInfoSet?: Array<EditMediaFileInfo>
 }
 
 /**
@@ -3098,13 +3081,30 @@ export interface AiRecognitionTaskOcrFullTextResultOutput {
 }
 
 /**
- * 编辑视频任务的输入。
+ * 智能精彩片段结果类型
  */
-export interface EditMediaTaskInput {
+export interface AiAnalysisTaskHighlightResult {
   /**
-   * 输入的视频文件信息。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  FileInfoSet?: Array<EditMediaFileInfo>
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能精彩片段任务输入。
+   */
+  Input?: AiAnalysisTaskHighlightInput
+  /**
+   * 智能精彩片段任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskHighlightOutput
 }
 
 /**
@@ -3570,6 +3570,16 @@ export interface AudioDenoiseConfig {
 默认值：ON。
    */
   Switch?: string
+}
+
+/**
+ * DeleteTranscodeTemplate请求参数结构体
+ */
+export interface DeleteTranscodeTemplateRequest {
+  /**
+   * 转码模板唯一标识。
+   */
+  Definition: number
 }
 
 /**
@@ -4373,6 +4383,16 @@ export interface PornConfigureInfoForUpdate {
    * 文本鉴黄控制参数。
    */
   OcrReviewInfo?: PornOcrReviewTemplateInfoForUpdate
+}
+
+/**
+ * 拆条任务输入类型
+ */
+export interface AiAnalysisTaskSegmentInput {
+  /**
+   * 拆条任务模板 ID。
+   */
+  Definition: number
 }
 
 /**
@@ -5679,41 +5699,6 @@ export interface ModifyWordSampleRequest {
 }
 
 /**
- * 编辑视频任务信息
- */
-export interface EditMediaTask {
-  /**
-   * 任务 ID。
-   */
-  TaskId: string
-  /**
-   * 任务状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
-   */
-  Status: string
-  /**
-   * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-   */
-  ErrCode: number
-  /**
-   * 错误信息。
-   */
-  Message: string
-  /**
-   * 视频编辑任务的输入。
-   */
-  Input: EditMediaTaskInput
-  /**
-   * 视频编辑任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output: EditMediaTaskOutput
-}
-
-/**
  * 人脸识别结果片段
  */
 export interface AiRecognitionTaskFaceSegmentItem {
@@ -5991,6 +5976,16 @@ export interface AiRecognitionTaskOcrFullTextResult {
 }
 
 /**
+ * 智能拆条结果信息
+ */
+export interface AiAnalysisTaskSegmentOutput {
+  /**
+   * 智能拆条子片段列表。
+   */
+  SegmentSet: Array<SegmentRecognitionItem>
+}
+
+/**
  * 视频编辑/合成任务 视频元素信息。
  */
 export interface ComposeVideoItem {
@@ -6179,6 +6174,33 @@ export interface ManageTaskRequest {
    * 视频处理的任务 ID。
    */
   TaskId: string
+}
+
+/**
+ * 拆条结果类型
+ */
+export interface AiAnalysisTaskSegmentResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 拆条任务输入。
+   */
+  Input?: AiAnalysisTaskSegmentInput
+  /**
+   * 拆条任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskSegmentOutput
 }
 
 /**
@@ -7721,13 +7743,38 @@ export interface DescribeInput {
 }
 
 /**
- * DeleteTranscodeTemplate请求参数结构体
+ * 编辑视频任务信息
  */
-export interface DeleteTranscodeTemplateRequest {
+export interface EditMediaTask {
   /**
-   * 转码模板唯一标识。
+   * 任务 ID。
    */
-  Definition: number
+  TaskId: string
+  /**
+   * 任务状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status: string
+  /**
+   * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+   */
+  ErrCode: number
+  /**
+   * 错误信息。
+   */
+  Message: string
+  /**
+   * 视频编辑任务的输入。
+   */
+  Input: EditMediaTaskInput
+  /**
+   * 视频编辑任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output: EditMediaTaskOutput
 }
 
 /**
@@ -7870,6 +7917,11 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeLogoTask?: AiAnalysisTaskDelLogoResult
+  /**
+   * 视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentTask?: AiAnalysisTaskSegmentResult
   /**
    * 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -8747,20 +8799,30 @@ export interface SegmentRecognitionItem {
   /**
    * 置信度。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 片段起始时间偏移。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 片段结束时间偏移。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 拆条片段URL。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentUrl?: string
+  /**
+   * 分段标题。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 分段概要。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: string
 }
 
 /**

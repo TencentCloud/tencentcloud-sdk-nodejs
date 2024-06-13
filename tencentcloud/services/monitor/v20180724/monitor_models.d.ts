@@ -5973,67 +5973,67 @@ export interface AlarmNotice {
      * 告警通知模板 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 告警通知模板名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 上次修改时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
      * 上次修改人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedBy: string;
+    UpdatedBy?: string;
     /**
      * 告警通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=全部通知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoticeType: string;
+    NoticeType?: string;
     /**
      * 用户通知列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserNotices: Array<UserNotice>;
+    UserNotices?: Array<UserNotice>;
     /**
      * 回调通知列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    URLNotices: Array<URLNotice>;
+    URLNotices?: Array<URLNotice>;
     /**
      * 是否是系统预设通知模板 0=否 1=是
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsPreset: number;
+    IsPreset?: number;
     /**
      * 通知语言 zh-CN=中文 en-US=英文
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoticeLanguage: string;
+    NoticeLanguage?: string;
     /**
      * 告警通知模板绑定的告警策略ID列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyIds: Array<string>;
+    PolicyIds?: Array<string>;
     /**
      * 后台 amp consumer id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AMPConsumerId: string;
+    AMPConsumerId?: string;
     /**
      * 推送cls渠道
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CLSNotices: Array<CLSNotice>;
+    CLSNotices?: Array<CLSNotice>;
     /**
      * 通知模板绑定的标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeProductEventList返回的Events的Dimensions

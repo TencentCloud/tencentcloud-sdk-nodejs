@@ -906,7 +906,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例热Key
+   * 本接口（DescribeInstanceMonitorHotKey）用于查询实例热Key。
    */
   async DescribeInstanceMonitorHotKey(
     req: DescribeInstanceMonitorHotKeyRequest,

@@ -927,6 +927,11 @@ export interface ManagerShareUnit {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareMemberNum?: number
+  /**
+   * 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShareScope?: number
 }
 
 /**
@@ -1305,6 +1310,10 @@ export interface AddShareUnitRequest {
    * 共享单元描述。最大128个字符。
    */
   Description?: string
+  /**
+   * 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号，默认值：1
+   */
+  ShareScope?: number
 }
 
 /**
@@ -1593,6 +1602,10 @@ export interface UpdateShareUnitRequest {
    * 共享单元描述。最大128个字符。
    */
   Description?: string
+  /**
+   * 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号，默认值：1
+   */
+  ShareScope?: number
 }
 
 /**

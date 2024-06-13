@@ -29,6 +29,11 @@ export interface Indicator {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockTitle?: Array<BlockTitle>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -821,6 +826,11 @@ export interface Hospitalization {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdmissionDiagnosis?: string
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -1760,6 +1770,11 @@ export interface CovidItemsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -1917,6 +1932,11 @@ export interface EyeItemsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -2065,6 +2085,11 @@ export interface FirstPage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fp2NdItems?: Array<Fp2NdItem>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -2574,17 +2599,22 @@ export interface Endoscopy {
    * 活检部位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BiopsyPart: BiopsyPart
+  BiopsyPart?: BiopsyPart
   /**
    * 可见描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Desc: EndoscopyDesc
+  Desc?: EndoscopyDesc
   /**
    * 结论
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Summary: Summary
+  Summary?: Summary
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -2760,6 +2790,11 @@ export interface PathologyV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Molecular?: Array<Molecular>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -3028,12 +3063,17 @@ export interface DiagCert {
    * 建议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Advice: Advice
+  Advice?: Advice
   /**
    * 诊断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Diagnosis: Array<DiagCertItem>
+  Diagnosis?: Array<DiagCertItem>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -3781,6 +3821,11 @@ export interface Surgery {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OtherInfo?: OtherInfo
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -4297,6 +4342,11 @@ export interface Check {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockTitle?: Array<BlockTitle>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -5517,7 +5567,12 @@ export interface VaccineCertificate {
    * 免疫接种列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VaccineList: Array<Vaccination>
+  VaccineList?: Array<Vaccination>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -5861,7 +5916,12 @@ export interface Prescription {
    * 药品列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MedicineList: Array<Medicine>
+  MedicineList?: Array<Medicine>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -6492,6 +6552,11 @@ export interface BloodPressureItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: PhysicalBaseItem
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -6558,6 +6623,11 @@ export interface TextTypeListBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TextTypeList?: Array<TextType>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -6814,6 +6884,11 @@ export interface TimelineInformation {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeline?: Array<TimelineEvent>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7050,6 +7125,11 @@ export interface BirthCert {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IssueInfo?: IssueInfo
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7071,6 +7151,11 @@ export interface KeyValueItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: PhysicalBaseItem
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7304,6 +7389,11 @@ export interface DischargeInfoBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParagraphBlock?: ParagraphBlock
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7325,6 +7415,11 @@ export interface Maternity {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrText?: string
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7408,6 +7503,11 @@ export interface ResultInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<BaseInfo>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -7449,6 +7549,11 @@ export interface MedDoc {
    * 诊疗记录
    */
   TreatmentRecord?: TreatmentRecord
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -8135,6 +8240,11 @@ export interface IndicatorV3 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableIndicators?: Array<TableIndicators>
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -8432,6 +8542,11 @@ export interface ValueUnitItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Unit?: PhysicalBaseItem
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -8551,42 +8666,47 @@ export interface MedicalRecordInfo {
    * 就诊日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnosisTime: string
+  DiagnosisTime?: string
   /**
    * 就诊科室
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnosisDepartmentName: string
+  DiagnosisDepartmentName?: string
   /**
    * 就诊医生
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnosisDoctorName: string
+  DiagnosisDoctorName?: string
   /**
    * 临床诊断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClinicalDiagnosis: string
+  ClinicalDiagnosis?: string
   /**
    * 主述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MainNarration: string
+  MainNarration?: string
   /**
    * 体格检查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhysicalExamination: string
+  PhysicalExamination?: string
   /**
    * 检查结论
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InspectionFindings: string
+  InspectionFindings?: string
   /**
    * 治疗意见
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TreatmentOpinion: string
+  TreatmentOpinion?: string
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**
@@ -8597,12 +8717,17 @@ export interface Electrocardiogram {
    * 心电图详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EcgDescription: EcgDescription
+  EcgDescription?: EcgDescription
   /**
    * 心电图诊断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EcgDiagnosis: EcgDiagnosis
+  EcgDiagnosis?: EcgDiagnosis
+  /**
+   * 数据在原PDF文件中的第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
 }
 
 /**

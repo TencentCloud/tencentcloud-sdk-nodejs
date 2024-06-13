@@ -1000,6 +1000,11 @@ export interface ServerlessSpace {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KibanaLanguage?: string;
+    /**
+     * 0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterType?: number;
 }
 /**
  * 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项）

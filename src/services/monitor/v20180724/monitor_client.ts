@@ -670,8 +670,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
-   */
+     * 接口功能是检查是否为prometheus新用户，已有其他功能更加全面的接口替代
+
+判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+     */
   async CheckIsPrometheusNewUser(
     req?: CheckIsPrometheusNewUserRequest,
     cb?: (error: string, rep: CheckIsPrometheusNewUserResponse) => void

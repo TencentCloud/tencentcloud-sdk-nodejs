@@ -70,7 +70,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInternetAddress(req: DescribeInternetAddressRequest, cb?: (error: string, rep: DescribeInternetAddressResponse) => void): Promise<DescribeInternetAddressResponse>;
     /**
-     * 用于查询专用通道列表。
+     * 查询专用通道列表。
      */
     DescribeDirectConnectTunnels(req: DescribeDirectConnectTunnelsRequest, cb?: (error: string, rep: DescribeDirectConnectTunnelsResponse) => void): Promise<DescribeDirectConnectTunnelsResponse>;
     /**
