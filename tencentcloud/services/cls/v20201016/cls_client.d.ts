@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCosRecharge(req: CreateCosRechargeRequest, cb?: (error: string, rep: CreateCosRechargeResponse) => void): Promise<CreateCosRechargeResponse>;
     /**
-     * 本接口用于合并一个读写态的主题分区，合并时指定一个主题分区 ID，日志服务会自动合并范围右相邻的分区。
+     * 该接口已废弃，如需修改分区数量，请使用ModifyTopic接口。
      */
     MergePartition(req: MergePartitionRequest, cb?: (error: string, rep: MergePartitionResponse) => void): Promise<MergePartitionResponse>;
     /**
@@ -260,7 +260,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmNotices(req: DescribeAlarmNoticesRequest, cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void): Promise<DescribeAlarmNoticesResponse>;
     /**
-     * 本接口用于获取主题分区列表。
+     * 该接口已废弃，如需获取分区数量，请使用DescribeTopics接口。
      */
     DescribePartitions(req: DescribePartitionsRequest, cb?: (error: string, rep: DescribePartitionsResponse) => void): Promise<DescribePartitionsResponse>;
     /**
@@ -295,7 +295,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteExport(req: DeleteExportRequest, cb?: (error: string, rep: DeleteExportResponse) => void): Promise<DeleteExportResponse>;
     /**
-     * 本接口用于分裂主题分区
+     * 该接口已废弃，如需修改分区数量，请使用ModifyTopic接口。
      */
     SplitPartition(req: SplitPartitionRequest, cb?: (error: string, rep: SplitPartitionResponse) => void): Promise<SplitPartitionResponse>;
     /**

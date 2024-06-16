@@ -2059,7 +2059,7 @@ export interface DescribePartitionsResponse {
     /**
      * 分区列表
      */
-    Partitions: Array<PartitionInfo>;
+    Partitions?: Array<PartitionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4781,7 +4781,7 @@ export interface SplitPartitionResponse {
     /**
      * 分裂结果集
      */
-    Partitions: Array<PartitionInfo>;
+    Partitions?: Array<PartitionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

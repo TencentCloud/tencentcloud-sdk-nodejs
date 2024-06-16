@@ -308,7 +308,7 @@ export interface DeleteUsersRequest {
 
 /**
  * 导入用户信息
-1、UserName，PhoneNumber ，Email ，WechatOpenId ，WechatUnionId ，AlipayUserId ，QqOpenId ，QqUnionId 八个属性中，导入时必须包含其中一个属性并遵守初始化自定义属性的正则表达式规则。UserName，PhoneNumber，Email的正则表达式在控制台的自定义属性中可以查询到。
+1、UserName，PhoneNumber ，Email ，WechatOpenId ，WechatUnionId ，AlipayUserId ，QqOpenId ，QqUnionId ，WeComUserId 九个属性中，导入时必须包含其中一个属性并遵守初始化自定义属性的正则表达式规则。UserName，PhoneNumber，Email的正则表达式在控制台的自定义属性中可以查询到。
 2、对于密码的导入，导入的密码支持明文导入，MD5密文导入，SHA1密文导入，BCRYPT密文导入 ，这个需要在PasswordEncryptTypeEnum 字段中指定。
 3、IdentityVerified，IdentityVerificationMethod 支持导入，
 IdentityVerified 为true，IdentityVerificationMethod必传；
@@ -364,6 +364,10 @@ export interface ImportUser {
    * 支付宝alipayUserId
    */
   AlipayUserId?: string
+  /**
+   * 企业微信weComUserId
+   */
+  WeComUserId?: string
   /**
    * 描述
    */
@@ -789,204 +793,209 @@ export interface User {
   /**
    * 用户ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName: string
+  UserName?: string
   /**
    * 手机号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhoneNumber: string
+  PhoneNumber?: string
   /**
    * 邮箱
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Email: string
+  Email?: string
   /**
    * 上次登录时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastSignOn: number
+  LastSignOn?: number
   /**
    * 创建时间
    */
-  CreatedDate: number
+  CreatedDate?: number
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 用户来源
    */
-  UserDataSourceEnum: string
+  UserDataSourceEnum?: string
   /**
    * 昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nickname: string
+  Nickname?: string
   /**
    * 地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
    * 生日
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Birthdate: number
+  Birthdate?: number
   /**
    * 用户组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserGroups: Array<string>
+  UserGroups?: Array<string>
   /**
    * 上次修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifiedDate: number
+  LastModifiedDate?: number
   /**
    * 自定义属性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomAttributes: Array<MemberMap>
+  CustomAttributes?: Array<MemberMap>
   /**
    * 身份证号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResidentIdentityCard: string
+  ResidentIdentityCard?: string
   /**
    * QQ的OpenId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QqOpenId: string
+  QqOpenId?: string
   /**
    * QQ的UnionId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QqUnionId: string
+  QqUnionId?: string
   /**
    * 微信的WechatOpenId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WechatOpenId: string
+  WechatOpenId?: string
   /**
    * 微信的WechatUnionId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WechatUnionId: string
+  WechatUnionId?: string
   /**
    * 支付宝的AlipayUserId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlipayUserId: string
+  AlipayUserId?: string
+  /**
+   * 企业微信的WeComUserId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WeComUserId?: string
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 姓名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 坐标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Locale: string
+  Locale?: string
   /**
    * 性别
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Gender: string
+  Gender?: string
   /**
    * 实名核验方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityVerificationMethod: string
+  IdentityVerificationMethod?: string
   /**
    * 是否已经实名核验
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityVerified: boolean
+  IdentityVerified?: boolean
   /**
    * 工作
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Job: string
+  Job?: string
   /**
    * 国家
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nationality: string
+  Nationality?: string
   /**
    * 是否主账号（进行过账号融合后，主账号为true，从账号为false）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Primary: boolean
+  Primary?: boolean
   /**
    * 时区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 是否已经首次登录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlreadyFirstLogin: boolean
+  AlreadyFirstLogin?: boolean
   /**
    * 租户id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 用户目录id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreId: string
+  UserStoreId?: string
   /**
    * 版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: number
+  Version?: number
   /**
    * 锁定类型（分为管理员锁定，和登录策略锁定）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LockType: string
+  LockType?: string
   /**
    * 锁定时间点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LockTime: number
+  LockTime?: number
   /**
    * 索引字段1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexedAttribute1: string
+  IndexedAttribute1?: string
   /**
    * 索引字段2
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexedAttribute2: string
+  IndexedAttribute2?: string
   /**
    * 索引字段3
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexedAttribute3: string
+  IndexedAttribute3?: string
   /**
    * 索引字段4
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexedAttribute4: string
+  IndexedAttribute4?: string
   /**
    * 索引字段5
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexedAttribute5: string
+  IndexedAttribute5?: string
 }
 
 /**

@@ -675,11 +675,11 @@ export interface DescribeEKSContainerInstanceEventResponse {
     /**
      * 事件集合
      */
-    Events: Array<Event>;
+    Events?: Array<Event>;
     /**
      * 容器实例id
      */
-    EksCiId: string;
+    EksCiId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4302,12 +4302,12 @@ export interface SetNodePoolNodeProtectionResponse {
      * 成功设置的节点id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SucceedInstanceIds: Array<string>;
+    SucceedInstanceIds?: Array<string>;
     /**
      * 没有成功设置的节点id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedInstanceIds: Array<string>;
+    FailedInstanceIds?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6056,7 +6056,7 @@ export interface DeleteClusterNodePoolResponse {
  */
 export interface DeleteImageCachesRequest {
     /**
-     * 镜像缓存Id数组
+     * 镜像缓存ID数组
      */
     ImageCacheIds: Array<string>;
 }
@@ -7895,11 +7895,11 @@ export interface DescribeExistedInstancesResponse {
      * 已经存在的实例信息数组。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExistedInstanceSet: Array<ExistedInstance>;
+    ExistedInstanceSet?: Array<ExistedInstance>;
     /**
      * 符合条件的实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8026,12 +8026,12 @@ export interface DescribeRouteTableConflictsResponse {
     /**
      * 路由表是否冲突。
      */
-    HasConflict: boolean;
+    HasConflict?: boolean;
     /**
      * 路由表冲突列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableConflictSet: Array<RouteTableConflict>;
+    RouteTableConflictSet?: Array<RouteTableConflict>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8371,11 +8371,11 @@ export interface DescribeClusterLevelAttributeResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群规模
      */
-    Items: Array<ClusterLevelAttribute>;
+    Items?: Array<ClusterLevelAttribute>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11188,11 +11188,11 @@ export interface DescribeClusterStatusResponse {
     /**
      * 集群状态列表
      */
-    ClusterStatusSet: Array<ClusterStatus>;
+    ClusterStatusSet?: Array<ClusterStatus>;
     /**
      * 集群个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12333,7 +12333,7 @@ export interface DescribeClusterCommonNamesResponse {
     /**
      * 子账户Uin与其客户端证书的CN字段映射
      */
-    CommonNames: Array<CommonName>;
+    CommonNames?: Array<CommonName>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

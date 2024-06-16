@@ -108,6 +108,16 @@ it("waf.v20180125.DescribeAntiInfoLeakRules", async function () {
     }
 })
 
+it("waf.v20180125.DescribeAreaBanAreas", async function () {
+    try {
+       const data = await client.DescribeAreaBanAreas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyCustomRule", async function () {
     try {
        const data = await client.ModifyCustomRule({})
@@ -328,9 +338,9 @@ it("waf.v20180125.DescribeWebshellStatus", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainWhiteRules", async function () {
+it("waf.v20180125.GenerateDealsAndPayNew", async function () {
     try {
-       const data = await client.DescribeDomainWhiteRules({})
+       const data = await client.GenerateDealsAndPayNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +998,9 @@ it("waf.v20180125.DeleteSession", async function () {
     }
 })
 
-it("waf.v20180125.GenerateDealsAndPayNew", async function () {
+it("waf.v20180125.DescribeDomainWhiteRules", async function () {
     try {
-       const data = await client.GenerateDealsAndPayNew({})
+       const data = await client.DescribeDomainWhiteRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

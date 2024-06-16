@@ -21,26 +21,32 @@ export interface HorizontalPodAutoscalerSpec {
 export interface CustomPromConfig {
     /**
      * Prometheus 访问地址
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url: string;
     /**
      * 认证方式
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthType: string;
     /**
      * 是否公网地址，缺省为 false
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublicAddr?: boolean;
     /**
      * 虚拟网络id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * Prometheus 用户名（用于 basic 认证方式）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Username?: string;
     /**
      * Prometheus 密码（用于 basic 认证方式）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Password?: string;
 }
@@ -122,7 +128,7 @@ export interface LoadBalancerStatus {
      * 负载均衡实例 Hostname
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadBalancerHostname?: string;
+    LoadBalancerHostname: string;
 }
 /**
  * ModifyTracingConfig返回参数结构体
@@ -1224,11 +1230,11 @@ export interface DescribeMeshListResponse {
      * 查询到的网格信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MeshList: Array<Mesh>;
+    MeshList?: Array<Mesh>;
     /**
      * 总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1261,6 +1267,11 @@ export interface APM {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
+    /**
+     * 是否要删除APM实例
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NeedDelete?: boolean;
 }
 /**
  * ResourceRequirements 描述了计算资源需求。
@@ -1405,4 +1416,14 @@ export interface LoadBalancer {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossRegionConfig?: CrossRegionConfig;
+    /**
+     * 设置跨可用区容灾时的主可用区ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MasterZoneID?: string;
+    /**
+     * 设置跨可用区容灾时的备可用区ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlaveZoneID?: string;
 }

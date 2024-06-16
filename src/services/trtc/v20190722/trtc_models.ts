@@ -3241,7 +3241,7 @@ export interface StartWebRecordRequest {
    */
   MaxDurationLimit?: number
   /**
-   * 云存储相关的参数，目前支持腾讯云对象存储以及腾讯云云点播VOD，不支持第三方云存储
+   * 【必填】云存储相关的参数，目前支持腾讯云对象存储以及腾讯云云点播VOD，不支持第三方云存储
    */
   StorageParams?: StorageParams
   /**
@@ -3249,7 +3249,7 @@ export interface StartWebRecordRequest {
    */
   WebRecordVideoParams?: WebRecordVideoParams
   /**
-   * TRTC的SdkAppId
+   * 【必填】TRTC的SdkAppId
    */
   SdkAppId?: number
   /**

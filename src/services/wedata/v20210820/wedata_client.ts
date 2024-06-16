@@ -260,6 +260,7 @@ import {
   DimensionScore,
   SubscribeWebHook,
   DescribeTableLineageInfoRequest,
+  CreateTaskFolderRequest,
   IntegrationNodeDetail,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
@@ -320,7 +321,7 @@ import {
   RuleExecConfig,
   SuspendIntegrationTaskResponse,
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
-  RecordField,
+  CreateTaskFolderResponse,
   RunForceSucScheduleInstancesRequest,
   DescribeQualityScoreResponse,
   DescribeRulesByPageResponse,
@@ -569,6 +570,7 @@ import {
   CreateDataSourceResponse,
   TaskByStatus,
   DescribeFolderWorkflowListResponse,
+  RecordField,
   DescribeIntegrationVersionNodesInfoResponse,
   DescribeRulesRequest,
   DescribeRuleResponse,
@@ -2695,6 +2697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseMetasResponse) => void
   ): Promise<DescribeDatabaseMetasResponse> {
     return this.request("DescribeDatabaseMetas", req, cb)
+  }
+
+  /**
+   * 编排空间-工作流-创建任务文件夹
+   */
+  async CreateTaskFolder(
+    req: CreateTaskFolderRequest,
+    cb?: (error: string, rep: CreateTaskFolderResponse) => void
+  ): Promise<CreateTaskFolderResponse> {
+    return this.request("CreateTaskFolder", req, cb)
   }
 
   /**

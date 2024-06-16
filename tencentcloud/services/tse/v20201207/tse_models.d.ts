@@ -1712,6 +1712,16 @@ export interface SREInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageOption?: Array<StorageOption>;
+    /**
+     * Zookeeper的额外环境数据信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZookeeperRegionInfo?: ZookeeperRegionInfo;
+    /**
+     * 部署架构
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeployMode?: string;
 }
 /**
  * CreateWafDomains返回参数结构体
@@ -2836,6 +2846,11 @@ export interface VpcInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IntranetAddress?: string;
+    /**
+     * 负载均衡均衡接入点子网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LbSubnetId?: string;
 }
 /**
  * 云原生API网关vpc配置。
@@ -3959,6 +3974,30 @@ export interface StorageOption {
     Capacity?: number;
 }
 /**
+ * Zookeeper的地域额外信息记录
+ */
+export interface ZookeeperRegionInfo {
+    /**
+     * 部署架构信息
+  
+  - SingleRegion: 普通单地域
+  - MultiRegion: 普通多地域场景
+  - MasterSlave: 两地域，主备地域场景
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeployMode?: string;
+    /**
+     * 主地域的额外信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MainRegion?: ZookeeperRegionMyIdInfo;
+    /**
+     * 其他地域的额外信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OtherRegions?: Array<ZookeeperRegionMyIdInfo>;
+}
+/**
  * DescribeConfigFile返回参数结构体
  */
 export interface DescribeConfigFileResponse {
@@ -4291,6 +4330,26 @@ export interface ModifyNetworkBasicInfoRequest {
      * 负载均衡描述
      */
     Description?: string;
+}
+/**
+ * Zookeeper的地域信息的 myid 信息记录
+ */
+export interface ZookeeperRegionMyIdInfo {
+    /**
+     * 地域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * myid 的起始号段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MyIdStart?: number;
+    /**
+     * myid 的结束号段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MyIdEnd?: number;
 }
 /**
  * DescribeUpstreamHealthCheckConfig请求参数结构体

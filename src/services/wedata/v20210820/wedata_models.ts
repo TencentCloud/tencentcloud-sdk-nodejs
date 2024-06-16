@@ -8074,6 +8074,28 @@ export interface DescribeTableLineageInfoRequest {
 }
 
 /**
+ * CreateTaskFolder请求参数结构体
+ */
+export interface CreateTaskFolderRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 文件夹名称
+   */
+  FolderName: string
+  /**
+   * 工作量ID
+   */
+  WorkflowId: string
+  /**
+   * 父文件夹ID
+   */
+  ParentFolderId?: string
+}
+
+/**
  * 集成节点详情
  */
 export interface IntegrationNodeDetail {
@@ -9744,17 +9766,18 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
 }
 
 /**
- * 通用记录字段，与服务端约定传入合法的键值对
+ * CreateTaskFolder返回参数结构体
  */
-export interface RecordField {
+export interface CreateTaskFolderResponse {
   /**
-   * 字段名称，拓展字段名称
+   * 任务文件夹Id，null则创建失败
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Data?: string
   /**
-   * 字段值，拓展字段值
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value?: string
+  RequestId?: string
 }
 
 /**
@@ -17421,6 +17444,20 @@ export interface DescribeFolderWorkflowListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 通用记录字段，与服务端约定传入合法的键值对
+ */
+export interface RecordField {
+  /**
+   * 字段名称，拓展字段名称
+   */
+  Name?: string
+  /**
+   * 字段值，拓展字段值
+   */
+  Value?: string
 }
 
 /**

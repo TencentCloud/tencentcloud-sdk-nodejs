@@ -16,6 +16,28 @@
  */
 
 /**
+ * UpgradeProxyVersion请求参数结构体
+ */
+export interface UpgradeProxyVersionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 当前proxy版本
+   */
+  CurrentProxyVersion: string
+  /**
+   * 可升级的redis版本
+   */
+  UpgradeProxyVersion: string
+  /**
+   * 1-立即升级   0-维护时间窗口升级
+   */
+  InstanceTypeUpgradeNow: number
+}
+
+/**
  * UpgradeSmallVersion请求参数结构体
  */
 export interface UpgradeSmallVersionRequest {
@@ -251,6 +273,16 @@ export interface ApplyParamsTemplateRequest {
 }
 
 /**
+ * DescribeReplicationGroupInstance请求参数结构体
+ */
+export interface DescribeReplicationGroupInstanceRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * UpgradeInstanceVersion返回参数结构体
  */
 export interface UpgradeInstanceVersionResponse {
@@ -426,13 +458,9 @@ export interface CreateReplicationGroupRequest {
 }
 
 /**
- * ModifyInstanceReadOnly返回参数结构体
+ * DescribeInstanceSpecBandwidth返回参数结构体
  */
-export interface ModifyInstanceReadOnlyResponse {
-  /**
-   * 任务ID
-   */
-  TaskId: number
+export interface DescribeInstanceSpecBandwidthResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1299,21 +1327,13 @@ export interface SecurityGroup {
 }
 
 /**
- * DescribeInstanceBackups返回参数结构体
+ * DescribeBandwidthRange请求参数结构体
  */
-export interface DescribeInstanceBackupsResponse {
+export interface DescribeBandwidthRangeRequest {
   /**
-   * 备份总数。
+   * 实例 ID。
    */
-  TotalCount?: number
-  /**
-   * 实例的备份数组。
-   */
-  BackupSet?: Array<RedisBackupSet>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -1819,18 +1839,9 @@ export interface DescribeInstanceEventsRequest {
 }
 
 /**
- * ChangeMasterInstance返回参数结构体
+ * DescribeGlobalReplicationArea请求参数结构体
  */
-export interface ChangeMasterInstanceResponse {
-  /**
-   * 异步流程ID。
-   */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeGlobalReplicationAreaRequest = null
 
 /**
  * AddReplicationInstance返回参数结构体
@@ -2247,6 +2258,11 @@ export interface DescribeDBSecurityGroupsRequest {
 }
 
 /**
+ * DescribeProductInfo请求参数结构体
+ */
+export type DescribeProductInfoRequest = null
+
+/**
  * InquiryPriceCreateInstance返回参数结构体
  */
 export interface InquiryPriceCreateInstanceResponse {
@@ -2299,6 +2315,38 @@ export interface DescribeInstanceParamsResponse {
    * 实例多选项型参数。
    */
   InstanceMultiParam?: Array<InstanceMultiParam>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeReplicationGroupInstance返回参数结构体
+ */
+export interface DescribeReplicationGroupInstanceResponse {
+  /**
+   * AppID。
+   */
+  AppId?: number
+  /**
+   * 地域数字编号。
+   */
+  RegionId?: number
+  /**
+   * 复制组字符串ID。
+   */
+  GroupId?: string
+  /**
+   * 复制组名称。
+   */
+  GroupName?: string
+  /**
+   * 实例复制组角色。
+- r:  备实例
+- rw: 主实例
+   */
+  InstanceRole?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2394,6 +2442,20 @@ export interface DescribeProjectSecurityGroupsResponse {
 }
 
 /**
+ * ModifyInstanceReadOnly返回参数结构体
+ */
+export interface ModifyInstanceReadOnlyResponse {
+  /**
+   * 任务ID
+   */
+  TaskId: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBackupDetail请求参数结构体
  */
 export interface DescribeBackupDetailRequest {
@@ -2422,13 +2484,21 @@ export interface DescribeInstanceMonitorTookDistResponse {
 }
 
 /**
- * DescribeBandwidthRange请求参数结构体
+ * DescribeInstanceBackups返回参数结构体
  */
-export interface DescribeBandwidthRangeRequest {
+export interface DescribeInstanceBackupsResponse {
   /**
-   * 实例 ID。
+   * 备份总数。
    */
-  InstanceId: string
+  TotalCount?: number
+  /**
+   * 实例的备份数组。
+   */
+  BackupSet?: Array<RedisBackupSet>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2491,6 +2561,20 @@ export interface UpgradeVersionToMultiAvailabilityZonesRequest {
 <ul><li>true：支持就近访问功能。升级过程，需同时升级 Proxy 版本和 Redis 内核小版本，涉及数据搬迁，可能会长达数小时。</li><li>false：无需支持就近访问功能。升级多可用区仅涉及管理元数据迁移，对服务没有影响，升级过程通常在3分钟内完成。</li></ul>
    */
   UpgradeProxyAndRedisServer?: boolean
+}
+
+/**
+ * ModfiyInstancePassword返回参数结构体
+ */
+export interface ModfiyInstancePasswordResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2860,6 +2944,20 @@ export interface DescribeTaskListRequest {
    * 操作者账号 ID，UIN。
    */
   OperateUin?: Array<string>
+}
+
+/**
+ * ChangeMasterInstance返回参数结构体
+ */
+export interface ChangeMasterInstanceResponse {
+  /**
+   * 异步流程ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4018,6 +4116,24 @@ export interface DescribeInstanceDealDetailResponse {
 }
 
 /**
+ * ModifyReplicationGroup请求参数结构体
+ */
+export interface ModifyReplicationGroupRequest {
+  /**
+   * 复制组字符串ID
+   */
+  GroupId: string
+  /**
+   * 复制组名称
+   */
+  GroupName?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
  * 复制组信息
  */
 export interface Groups {
@@ -4306,6 +4422,16 @@ export interface DescribeSlowLogRequest {
 }
 
 /**
+ * ModifyReplicationGroup返回参数结构体
+ */
+export interface ModifyReplicationGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteParamTemplate请求参数结构体
  */
 export interface DeleteParamTemplateRequest {
@@ -4540,17 +4666,19 @@ export interface ModifyParamTemplateRequest {
 }
 
 /**
- * ModfiyInstancePassword返回参数结构体
+ * 可使用的地域信息
  */
-export interface ModfiyInstancePasswordResponse {
+export interface AvailableRegion {
   /**
-   * 任务 ID。
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: number
+  Region?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  AvailableZones?: Array<string>
 }
 
 /**
@@ -5467,9 +5595,9 @@ export interface SwitchProxyRequest {
 }
 
 /**
- * DescribeProductInfo请求参数结构体
+ * DescribeInstanceSpecBandwidth请求参数结构体
  */
-export type DescribeProductInfoRequest = null
+export type DescribeInstanceSpecBandwidthRequest = null
 
 /**
  * SwitchInstanceVip返回参数结构体
@@ -5833,25 +5961,17 @@ export interface ChangeInstanceRoleResponse {
 }
 
 /**
- * UpgradeProxyVersion请求参数结构体
+ * DescribeGlobalReplicationArea返回参数结构体
  */
-export interface UpgradeProxyVersionRequest {
+export interface DescribeGlobalReplicationAreaResponse {
   /**
-   * 实例ID
+   * 可用地域信息
    */
-  InstanceId: string
+  AvailableRegions?: Array<AvailableRegion>
   /**
-   * 当前proxy版本
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CurrentProxyVersion: string
-  /**
-   * 可升级的redis版本
-   */
-  UpgradeProxyVersion: string
-  /**
-   * 1-立即升级   0-维护时间窗口升级
-   */
-  InstanceTypeUpgradeNow: number
+  RequestId?: string
 }
 
 /**

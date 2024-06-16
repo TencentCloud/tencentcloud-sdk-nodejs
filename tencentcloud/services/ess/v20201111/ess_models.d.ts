@@ -259,8 +259,11 @@ export interface CreateSealRequest {
     SealSize?: string;
     /**
      * 企业税号
-  注: `1.印章类型SealType是INVOICE类型时，此参数才会生效`
-  `2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号`
+  注:
+  <ul>
+  <li>1.印章类型SealType是INVOICE类型时，此参数才会生效</li>
+  <li>2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（<font color="red">如果是通过授权书授权方式认证的企业，此参数必传不能为空</font>）</li>
+  </ul>
      */
     TaxIdentifyCode?: string;
 }
@@ -1544,7 +1547,7 @@ export interface CreateConvertTaskApiRequest {
     ResourceId: string;
     /**
      * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator?: UserInfo;
     /**
@@ -2491,10 +2494,10 @@ export interface CreateSchemeUrlRequest {
     /**
      * 要跳转到的页面类型
   
-  <ul><li> **0** : 腾讯电子签小程序个人首页 (默认)</li>
-  <li> **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面)</li>
-  <li> **2** : 腾讯电子签小程序合同列表页</li><li> **3** : 腾讯电子签小程序合同封面页
-  注：`生成动态签署人补充链接时，必须指定为封面页`</li></ul>
+  <ul><li> **0** : 腾讯电子签小程序个人首页 (默认) <a href="https://qcloudimg.tencent-cloud.cn/raw/a2667ea84ec993cc060321afe3191d65.jpg" target="_blank" >点击查看示例页面</a></li>
+  <li> **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面)<a href="https://qcloudimg.tencent-cloud.cn/raw/446a679f09b1b7f40eb84e67face8acc.jpg" target="_blank" >点击查看示例页面</a></li>
+  <li> **2** : 腾讯电子签小程序合同列表页 <a href="https://qcloudimg.tencent-cloud.cn/raw/c7b80e44c1d68ae3270a6fc4939c7214.jpg" target="_blank" >点击查看示例页面</a> </li>
+  <li> **3** : 腾讯电子签小程序合同封面页  （注：`生成动态签署人补充链接时，必须指定为封面页`）<a href="https://qcloudimg.tencent-cloud.cn/raw/0d22cc587be4bf084877c151350c3bf7.jpg" target="_blank" >点击查看示例页面</a></li></ul>
      */
     PathType?: number;
     /**
@@ -5376,7 +5379,7 @@ export interface GetTaskResultApiRequest {
     TaskId: string;
     /**
      * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator?: UserInfo;
     /**

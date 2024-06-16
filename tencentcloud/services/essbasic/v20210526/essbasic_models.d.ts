@@ -5664,6 +5664,15 @@ export interface CreatePartnerAutoSignAuthUrlRequest {
   
      */
     PlatformAppAuthorization?: boolean;
+    /**
+     * 指定印章类型，指定后只能选择该类型的印章进行授权
+  支持以下印章类型：
+  - OFFICIAL : 企业公章
+  - CONTRACT : 合同专用章
+  - FINANCE : 财务专用章
+  - PERSONNEL : 人事专用章
+     */
+    SealTypes?: Array<string>;
 }
 /**
  * ChannelCreateBatchCancelFlowUrl请求参数结构体
@@ -7718,8 +7727,12 @@ export interface CreateSealByImageRequest {
     SealSize?: string;
     /**
      * 企业税号
-  注: `1.印章类型SealType是INVOICE类型时，此参数才会生效`
-  `2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号`
+  
+  注:
+  <ul>
+  <li>1.印章类型SealType是INVOICE类型时，此参数才会生效</li>
+  <li>2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（<font color="red">如果是通过授权书授权方式认证的企业，此参数必传不能为空</font>）</li>
+  </ul>
      */
     TaxIdentifyCode?: string;
 }

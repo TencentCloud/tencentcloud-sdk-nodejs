@@ -699,6 +699,11 @@ export interface RabbitMQClusterInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterVersion?: string;
+    /**
+     * 计费模式，0-后付费，1-预付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: number;
 }
 /**
  * vhost概览统计信息
@@ -7819,11 +7824,11 @@ export interface DescribeRabbitMQUserResponse {
     /**
      * 返回的User数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 当前已创建的RabbitMQ用户列表
      */
-    RabbitMQUserList: Array<RabbitMQUser>;
+    RabbitMQUserList?: Array<RabbitMQUser>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

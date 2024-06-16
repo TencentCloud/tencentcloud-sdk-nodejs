@@ -1108,82 +1108,6 @@ export interface PeakPointsItem {
 }
 
 /**
- * Clb类型防护对象
- */
-export interface ClbObject {
-  /**
-   * 对象ID
-   */
-  ObjectId?: string
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 精准域名列表
-   */
-  PreciseDomains?: Array<string>
-  /**
-   * WAF功能开关状态，0关闭1开启
-   */
-  Status?: number
-  /**
-   * WAF日志开关状态，0关闭1开启
-   */
-  ClsStatus?: number
-  /**
-   * CLB对象对应的虚拟域名
-   */
-  VirtualDomain?: string
-  /**
-   * 对象名称
-   */
-  ObjectName?: string
-  /**
-   * 公网地址
-   */
-  PublicIp?: Array<string>
-  /**
-   * 内网地址
-   */
-  PrivateIp?: Array<string>
-  /**
-   * VPC名称
-   */
-  VpcName?: string
-  /**
-   * VPC ID
-   */
-  Vpc?: string
-  /**
-   * waf实例等级，如果未绑定实例为0
-   */
-  InstanceLevel?: number
-  /**
-   * clb投递开关
-   */
-  PostCLSStatus?: number
-  /**
-   * kafka投递开关
-   */
-  PostCKafkaStatus?: number
-  /**
-   * 对象类型：CLB:负载均衡器，TSE:云原生网关
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 对象地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-}
-
-/**
  * DescribeSession请求参数结构体
  */
 export interface DescribeSessionRequest {
@@ -3011,6 +2935,21 @@ public：公有云域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessStatus?: number
+}
+
+/**
+ * DescribeAreaBanAreas返回参数结构体
+ */
+export interface DescribeAreaBanAreasResponse {
+  /**
+   * 回包内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeAreaBanAreasRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4863,13 +4802,79 @@ export interface DescribeHistogramResponse {
 }
 
 /**
- * RefreshAccessCheckResult返回参数结构体
+ * Clb类型防护对象
  */
-export interface RefreshAccessCheckResultResponse {
+export interface ClbObject {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 对象ID
    */
-  RequestId?: string
+  ObjectId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 精准域名列表
+   */
+  PreciseDomains?: Array<string>
+  /**
+   * WAF功能开关状态，0关闭1开启
+   */
+  Status?: number
+  /**
+   * WAF日志开关状态，0关闭1开启
+   */
+  ClsStatus?: number
+  /**
+   * CLB对象对应的虚拟域名
+   */
+  VirtualDomain?: string
+  /**
+   * 对象名称
+   */
+  ObjectName?: string
+  /**
+   * 公网地址
+   */
+  PublicIp?: Array<string>
+  /**
+   * 内网地址
+   */
+  PrivateIp?: Array<string>
+  /**
+   * VPC名称
+   */
+  VpcName?: string
+  /**
+   * VPC ID
+   */
+  Vpc?: string
+  /**
+   * waf实例等级，如果未绑定实例为0
+   */
+  InstanceLevel?: number
+  /**
+   * clb投递开关
+   */
+  PostCLSStatus?: number
+  /**
+   * kafka投递开关
+   */
+  PostCKafkaStatus?: number
+  /**
+   * 对象类型：CLB:负载均衡器，TSE:云原生网关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 对象地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
 }
 
 /**
@@ -5124,6 +5129,16 @@ export interface MiniPkg {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItem?: string
+}
+
+/**
+ * DescribeAreaBanAreas请求参数结构体
+ */
+export interface DescribeAreaBanAreasRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
 }
 
 /**
@@ -7262,6 +7277,40 @@ export interface DeleteCCRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAreaBanAreas接口的回包
+ */
+export interface DescribeAreaBanAreasRsp {
+  /**
+   * 状态 "0"：未开启地域封禁 "1"：开启地域封禁
+   */
+  Status?: string
+  /**
+   * 数据来源 custom-自定义(默认)、batch-批量防护
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * 字符串数据，配置的地域列表
+   */
+  Areas?: Array<string>
+  /**
+   * 定时任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: string
+  /**
+   * 定时任务详细配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 周期任务配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronType?: string
 }
 
 /**
@@ -10009,4 +10058,14 @@ export interface ModifyHostStatusRequest {
    * 域名状态列表
    */
   HostsStatus: Array<HostStatus>
+}
+
+/**
+ * RefreshAccessCheckResult返回参数结构体
+ */
+export interface RefreshAccessCheckResultResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

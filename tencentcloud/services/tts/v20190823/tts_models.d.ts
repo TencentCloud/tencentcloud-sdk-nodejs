@@ -249,7 +249,7 @@ export interface TextToVoiceRequest {
      */
     EmotionIntensity?: number;
     /**
-     * 一句话复刻音色id，使用一句话复刻音色时需填写。若使用一句话复刻，VoiceType请填入固定值“200000000”
+     * 预留参数，暂未使用
      */
     FastVoiceType?: string;
 }

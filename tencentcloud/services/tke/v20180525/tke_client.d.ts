@@ -496,7 +496,9 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterRoute(req: CreateClusterRouteRequest, cb?: (error: string, rep: CreateClusterRouteResponse) => void): Promise<CreateClusterRouteResponse>;
     /**
-     * 获取导入第三方集群YAML定义
+     * tdcc接口已迁移至tdcc产品下，tke下的接口下线
+
+获取导入第三方集群YAML定义
      */
     DescribeExternalClusterSpec(req: DescribeExternalClusterSpecRequest, cb?: (error: string, rep: DescribeExternalClusterSpecResponse) => void): Promise<DescribeExternalClusterSpecResponse>;
     /**

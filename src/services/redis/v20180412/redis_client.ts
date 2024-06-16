@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpgradeProxyVersionRequest,
   UpgradeSmallVersionRequest,
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
@@ -28,10 +29,11 @@ import {
   RestoreInstanceRequest,
   AllocateWanAddressRequest,
   ApplyParamsTemplateRequest,
+  DescribeReplicationGroupInstanceRequest,
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
   CreateReplicationGroupRequest,
-  ModifyInstanceReadOnlyResponse,
+  DescribeInstanceSpecBandwidthResponse,
   DescribeInstanceZoneInfoRequest,
   ModifyConnectionConfigResponse,
   ModifyNetworkConfigResponse,
@@ -67,7 +69,7 @@ import {
   RedisInstanceEvent,
   UpgradeVersionToMultiAvailabilityZonesResponse,
   SecurityGroup,
-  DescribeInstanceBackupsResponse,
+  DescribeBandwidthRangeRequest,
   DescribeInstanceParamRecordsResponse,
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
@@ -85,7 +87,7 @@ import {
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
   DescribeInstanceEventsRequest,
-  ChangeMasterInstanceResponse,
+  DescribeGlobalReplicationAreaRequest,
   AddReplicationInstanceResponse,
   DestroyPostpaidInstanceResponse,
   SwitchInstanceVipRequest,
@@ -106,19 +108,23 @@ import {
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
   DescribeDBSecurityGroupsRequest,
+  DescribeProductInfoRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
   DescribeInstanceParamsResponse,
+  DescribeReplicationGroupInstanceResponse,
   UpgradeProxyVersionResponse,
   ResetPasswordRequest,
   ModifyInstanceAccountResponse,
   DelayDistribution,
   DescribeProjectSecurityGroupsResponse,
+  ModifyInstanceReadOnlyResponse,
   DescribeBackupDetailRequest,
   DescribeInstanceMonitorTookDistResponse,
-  DescribeBandwidthRangeRequest,
+  DescribeInstanceBackupsResponse,
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
+  ModfiyInstancePasswordResponse,
   AllocateWanAddressResponse,
   DescribeInstanceMonitorTookDistRequest,
   DeleteReplicationInstanceRequest,
@@ -133,6 +139,7 @@ import {
   InstanceTextParam,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
+  ChangeMasterInstanceResponse,
   ModifyInstanceEventRequest,
   DescribeBackupDetailResponse,
   ChangeReplicaToMasterResponse,
@@ -181,11 +188,13 @@ import {
   DeleteReplicationInstanceResponse,
   CleanUpInstanceRequest,
   DescribeInstanceDealDetailResponse,
+  ModifyReplicationGroupRequest,
   Groups,
   DescribeInstancesRequest,
   SourceCommand,
   ModfiyInstancePasswordRequest,
   DescribeSlowLogRequest,
+  ModifyReplicationGroupResponse,
   DeleteParamTemplateRequest,
   DescribeAutoBackupConfigRequest,
   DescribeInstanceMonitorSIPResponse,
@@ -200,7 +209,7 @@ import {
   ManualBackupInstanceRequest,
   DescribeReplicationGroupResponse,
   ModifyParamTemplateRequest,
-  ModfiyInstancePasswordResponse,
+  AvailableRegion,
   InstanceSet,
   ReleaseWanAddressRequest,
   InquiryPriceRenewInstanceRequest,
@@ -234,7 +243,7 @@ import {
   DescribeBackupDownloadRestrictionRequest,
   DescribeParamTemplateInfoResponse,
   SwitchProxyRequest,
-  DescribeProductInfoRequest,
+  DescribeInstanceSpecBandwidthRequest,
   SwitchInstanceVipResponse,
   BackupLimitVpcItem,
   DisassociateSecurityGroupsRequest,
@@ -252,7 +261,7 @@ import {
   OpenSSLResponse,
   TendisSlowLogDetail,
   ChangeInstanceRoleResponse,
-  UpgradeProxyVersionRequest,
+  DescribeGlobalReplicationAreaResponse,
   ZoneCapacityConf,
   ModifyInstanceEventResponse,
   UpgradeInstanceRequest,
@@ -443,6 +452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeVersionToMultiAvailabilityZonesResponse) => void
   ): Promise<UpgradeVersionToMultiAvailabilityZonesResponse> {
     return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb)
+  }
+
+  /**
+   * 查询全球复制支持地域信息
+   */
+  async DescribeGlobalReplicationArea(
+    req?: DescribeGlobalReplicationAreaRequest,
+    cb?: (error: string, rep: DescribeGlobalReplicationAreaResponse) => void
+  ): Promise<DescribeGlobalReplicationAreaResponse> {
+    return this.request("DescribeGlobalReplicationArea", req, cb)
   }
 
   /**
@@ -706,6 +725,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改复制组信息
+   */
+  async ModifyReplicationGroup(
+    req: ModifyReplicationGroupRequest,
+    cb?: (error: string, rep: ModifyReplicationGroupResponse) => void
+  ): Promise<ModifyReplicationGroupResponse> {
+    return this.request("ModifyReplicationGroup", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstanceSupportFeature）用于查询实例支持的功能特性。
    */
   async DescribeInstanceSupportFeature(
@@ -766,6 +795,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeInstanceSpecBandwidth）用于查询或计算带宽规格。
+   */
+  async DescribeInstanceSpecBandwidth(
+    req?: DescribeInstanceSpecBandwidthRequest,
+    cb?: (error: string, rep: DescribeInstanceSpecBandwidthResponse) => void
+  ): Promise<DescribeInstanceSpecBandwidthResponse> {
+    return this.request("DescribeInstanceSpecBandwidth", req, cb)
+  }
+
+  /**
    * Proxy模拟故障接口
    */
   async SwitchProxy(
@@ -813,6 +852,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyPostpaidInstanceResponse) => void
   ): Promise<DestroyPostpaidInstanceResponse> {
     return this.request("DestroyPostpaidInstance", req, cb)
+  }
+
+  /**
+   * 实例解隔离
+   */
+  async StartupInstance(
+    req: StartupInstanceRequest,
+    cb?: (error: string, rep: StartupInstanceResponse) => void
+  ): Promise<StartupInstanceResponse> {
+    return this.request("StartupInstance", req, cb)
   }
 
   /**
@@ -1136,13 +1185,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例解隔离
+   * 查询复制组信息
    */
-  async StartupInstance(
-    req: StartupInstanceRequest,
-    cb?: (error: string, rep: StartupInstanceResponse) => void
-  ): Promise<StartupInstanceResponse> {
-    return this.request("StartupInstance", req, cb)
+  async DescribeReplicationGroupInstance(
+    req: DescribeReplicationGroupInstanceRequest,
+    cb?: (error: string, rep: DescribeReplicationGroupInstanceResponse) => void
+  ): Promise<DescribeReplicationGroupInstanceResponse> {
+    return this.request("DescribeReplicationGroupInstance", req, cb)
   }
 
   /**

@@ -188,6 +188,16 @@ it("redis.v20180412.UpgradeVersionToMultiAvailabilityZones", async function () {
     }
 })
 
+it("redis.v20180412.DescribeGlobalReplicationArea", async function () {
+    try {
+       const data = await client.DescribeGlobalReplicationArea({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyInstanceParams", async function () {
     try {
        const data = await client.ModifyInstanceParams({})
@@ -448,6 +458,16 @@ it("redis.v20180412.InquiryPriceCreateInstance", async function () {
     }
 })
 
+it("redis.v20180412.ModifyReplicationGroup", async function () {
+    try {
+       const data = await client.ModifyReplicationGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstanceSupportFeature", async function () {
     try {
        const data = await client.DescribeInstanceSupportFeature({})
@@ -508,6 +528,16 @@ it("redis.v20180412.ManualBackupInstance", async function () {
     }
 })
 
+it("redis.v20180412.DescribeInstanceSpecBandwidth", async function () {
+    try {
+       const data = await client.DescribeInstanceSpecBandwidth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.SwitchProxy", async function () {
     try {
        const data = await client.SwitchProxy({})
@@ -551,6 +581,16 @@ it("redis.v20180412.DescribeParamTemplateInfo", async function () {
 it("redis.v20180412.DestroyPostpaidInstance", async function () {
     try {
        const data = await client.DestroyPostpaidInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.StartupInstance", async function () {
+    try {
+       const data = await client.StartupInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,9 +918,9 @@ it("redis.v20180412.DescribeBandwidthRange", async function () {
     }
 })
 
-it("redis.v20180412.StartupInstance", async function () {
+it("redis.v20180412.DescribeReplicationGroupInstance", async function () {
     try {
-       const data = await client.StartupInstance({})
+       const data = await client.DescribeReplicationGroupInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

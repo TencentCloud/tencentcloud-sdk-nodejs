@@ -59,7 +59,6 @@ import {
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
   PeakPointsItem,
-  ClbObject,
   DescribeSessionRequest,
   DescribePolicyStatusRequest,
   DescribeAccessFastAnalysisRequest,
@@ -124,6 +123,7 @@ import {
   DescribeHostsResponse,
   DescribeAccessIndexRequest,
   DomainInfo,
+  DescribeAreaBanAreasResponse,
   DescribeDomainsResponse,
   AddAntiFakeUrlResponse,
   SearchAttackLogResponse,
@@ -193,7 +193,7 @@ import {
   CreateAccessExportResponse,
   ModifyHostRequest,
   DescribeHistogramResponse,
-  RefreshAccessCheckResultResponse,
+  ClbObject,
   ModifyUserLevelResponse,
   CreateAccessExportRequest,
   DescribeAutoDenyIPResponse,
@@ -207,6 +207,7 @@ import {
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
   MiniPkg,
+  DescribeAreaBanAreasRequest,
   AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
   ModifyProtectionStatusRequest,
@@ -298,6 +299,7 @@ import {
   DeleteCustomRuleResponse,
   DescribeHistogramRequest,
   DeleteCCRuleResponse,
+  DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
   ModifyAntiInfoLeakRuleStatusRequest,
   ModifyProtectionStatusResponse,
@@ -398,6 +400,7 @@ import {
   AccessRuleKeyValueInfo,
   DescribeObjectsRequest,
   ModifyHostStatusRequest,
+  RefreshAccessCheckResultResponse,
 } from "./waf_models"
 
 /**
@@ -499,6 +502,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAntiInfoLeakRulesResponse) => void
   ): Promise<DescribeAntiInfoLeakRulesResponse> {
     return this.request("DescribeAntiInfoLeakRules", req, cb)
+  }
+
+  /**
+   * 获取地域封禁配置包括地域封禁开关，设置封禁的地区信息
+   */
+  async DescribeAreaBanAreas(
+    req: DescribeAreaBanAreasRequest,
+    cb?: (error: string, rep: DescribeAreaBanAreasResponse) => void
+  ): Promise<DescribeAreaBanAreasResponse> {
+    return this.request("DescribeAreaBanAreas", req, cb)
   }
 
   /**
@@ -722,13 +735,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名的规则白名单
+   * 计费资源购买、续费下单接口
    */
-  async DescribeDomainWhiteRules(
-    req: DescribeDomainWhiteRulesRequest,
-    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
-  ): Promise<DescribeDomainWhiteRulesResponse> {
-    return this.request("DescribeDomainWhiteRules", req, cb)
+  async GenerateDealsAndPayNew(
+    req: GenerateDealsAndPayNewRequest,
+    cb?: (error: string, rep: GenerateDealsAndPayNewResponse) => void
+  ): Promise<GenerateDealsAndPayNewResponse> {
+    return this.request("GenerateDealsAndPayNew", req, cb)
   }
 
   /**
@@ -1387,13 +1400,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 计费资源购买、续费下单接口
+   * 获取域名的规则白名单
    */
-  async GenerateDealsAndPayNew(
-    req: GenerateDealsAndPayNewRequest,
-    cb?: (error: string, rep: GenerateDealsAndPayNewResponse) => void
-  ): Promise<GenerateDealsAndPayNewResponse> {
-    return this.request("GenerateDealsAndPayNew", req, cb)
+  async DescribeDomainWhiteRules(
+    req: DescribeDomainWhiteRulesRequest,
+    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
+  ): Promise<DescribeDomainWhiteRulesResponse> {
+    return this.request("DescribeDomainWhiteRules", req, cb)
   }
 
   /**

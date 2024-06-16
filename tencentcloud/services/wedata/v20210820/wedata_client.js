@@ -1231,6 +1231,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseMetas", req, cb);
     }
     /**
+     * 编排空间-工作流-创建任务文件夹
+     */
+    async CreateTaskFolder(req, cb) {
+        return this.request("CreateTaskFolder", req, cb);
+    }
+    /**
      * 批量继续执行集成实时任务
      */
     async BatchResumeIntegrationTasks(req, cb) {

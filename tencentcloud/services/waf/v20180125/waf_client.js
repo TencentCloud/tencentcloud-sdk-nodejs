@@ -84,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAntiInfoLeakRules", req, cb);
     }
     /**
+     * 获取地域封禁配置包括地域封禁开关，设置封禁的地区信息
+     */
+    async DescribeAreaBanAreas(req, cb) {
+        return this.request("DescribeAreaBanAreas", req, cb);
+    }
+    /**
      * 编辑自定义规则
      */
     async ModifyCustomRule(req, cb) {
@@ -216,10 +222,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWebshellStatus", req, cb);
     }
     /**
-     * 获取域名的规则白名单
+     * 计费资源购买、续费下单接口
      */
-    async DescribeDomainWhiteRules(req, cb) {
-        return this.request("DescribeDomainWhiteRules", req, cb);
+    async GenerateDealsAndPayNew(req, cb) {
+        return this.request("GenerateDealsAndPayNew", req, cb);
     }
     /**
      * 信息防泄漏删除规则
@@ -617,10 +623,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
-     * 计费资源购买、续费下单接口
+     * 获取域名的规则白名单
      */
-    async GenerateDealsAndPayNew(req, cb) {
-        return this.request("GenerateDealsAndPayNew", req, cb);
+    async DescribeDomainWhiteRules(req, cb) {
+        return this.request("DescribeDomainWhiteRules", req, cb);
     }
     /**
      * 设置域名的webshell状态。

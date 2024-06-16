@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb);
     }
     /**
+     * 查询全球复制支持地域信息
+     */
+    async DescribeGlobalReplicationArea(req, cb) {
+        return this.request("DescribeGlobalReplicationArea", req, cb);
+    }
+    /**
      * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
      */
     async ModifyInstanceParams(req, cb) {
@@ -286,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
+     * 修改复制组信息
+     */
+    async ModifyReplicationGroup(req, cb) {
+        return this.request("ModifyReplicationGroup", req, cb);
+    }
+    /**
      * 本接口（DescribeInstanceSupportFeature）用于查询实例支持的功能特性。
      */
     async DescribeInstanceSupportFeature(req, cb) {
@@ -322,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManualBackupInstance", req, cb);
     }
     /**
+     * 本接口（DescribeInstanceSpecBandwidth）用于查询或计算带宽规格。
+     */
+    async DescribeInstanceSpecBandwidth(req, cb) {
+        return this.request("DescribeInstanceSpecBandwidth", req, cb);
+    }
+    /**
      * Proxy模拟故障接口
      */
     async SwitchProxy(req, cb) {
@@ -350,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DestroyPostpaidInstance(req, cb) {
         return this.request("DestroyPostpaidInstance", req, cb);
+    }
+    /**
+     * 实例解隔离
+     */
+    async StartupInstance(req, cb) {
+        return this.request("StartupInstance", req, cb);
     }
     /**
      * 查询实例访问的耗时分布
@@ -544,10 +568,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBandwidthRange", req, cb);
     }
     /**
-     * 实例解隔离
+     * 查询复制组信息
      */
-    async StartupInstance(req, cb) {
-        return this.request("StartupInstance", req, cb);
+    async DescribeReplicationGroupInstance(req, cb) {
+        return this.request("DescribeReplicationGroupInstance", req, cb);
     }
     /**
      * 本接口（DescribeProxySlowLog）用于查询代理慢查询。

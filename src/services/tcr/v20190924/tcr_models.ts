@@ -1130,35 +1130,35 @@ export interface DownloadHelmChartResponse {
   /**
    * 临时token
    */
-  TmpToken: string
+  TmpToken?: string
   /**
    * 临时的secretId
    */
-  TmpSecretId: string
+  TmpSecretId?: string
   /**
    * 临时的secretKey
    */
-  TmpSecretKey: string
+  TmpSecretKey?: string
   /**
    * 存储桶信息
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 实例ID
    */
-  Region: string
+  Region?: string
   /**
    * chart信息
    */
-  Path: string
+  Path?: string
   /**
    * 开始时间时间戳
    */
-  StartTime: number
+  StartTime?: number
   /**
    * token过期时间时间戳
    */
-  ExpiredTime: number
+  ExpiredTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
