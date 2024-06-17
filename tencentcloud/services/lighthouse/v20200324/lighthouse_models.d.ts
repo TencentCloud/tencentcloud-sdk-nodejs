@@ -2933,53 +2933,53 @@ export interface Bundle {
     /**
      * 套餐 ID。
      */
-    BundleId: string;
+    BundleId?: string;
     /**
      * 内存大小，单位 GB。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 系统盘类型。
   取值范围：
   <li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
      */
-    SystemDiskType: string;
+    SystemDiskType?: string;
     /**
      * 系统盘大小。单位GB。
      */
-    SystemDiskSize: number;
+    SystemDiskSize?: number;
     /**
      * 每月网络流量，单位 GB。
      */
-    MonthlyTraffic: number;
+    MonthlyTraffic?: number;
     /**
      * 是否支持 Linux/Unix 平台。
      */
-    SupportLinuxUnixPlatform: boolean;
+    SupportLinuxUnixPlatform?: boolean;
     /**
      * 是否支持 Windows 平台。
      */
-    SupportWindowsPlatform: boolean;
+    SupportWindowsPlatform?: boolean;
     /**
      * 套餐当前单位价格信息。
      */
-    Price: Price;
+    Price?: Price;
     /**
      * CPU 核数。
      */
-    CPU: number;
+    CPU?: number;
     /**
      * 峰值带宽，单位 Mbps。
      */
-    InternetMaxBandwidthOut: number;
+    InternetMaxBandwidthOut?: number;
     /**
      * 网络计费类型。
      */
-    InternetChargeType: string;
+    InternetChargeType?: string;
     /**
      * 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄)
      */
-    BundleSalesState: string;
+    BundleSalesState?: string;
     /**
      * 套餐类型。
   取值范围：
@@ -2992,7 +2992,7 @@ export interface Bundle {
   <li>CAREFREE_BUNDLE：无忧型</li>
   <li>BEFAST_BUNDLE：蜂驰型 </li>
      */
-    BundleType: string;
+    BundleType?: string;
     /**
      * 套餐类型描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3005,7 +3005,7 @@ export interface Bundle {
   "NORMAL": 普通套餐
   "CAREFREE": 无忧套餐
      */
-    BundleDisplayLabel: string;
+    BundleDisplayLabel?: string;
 }
 /**
  * 云硬盘配置

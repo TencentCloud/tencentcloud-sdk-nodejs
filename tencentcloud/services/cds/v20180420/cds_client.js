@@ -28,12 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("cds.tencentcloudapi.com", "2018-04-20", clientConfig);
     }
     /**
-     * 这些接口是传统版堡垒机接口.数审未用到，堡垒机的已全部迁移到dasb下，cds这边预下线
-
-获取镜像列表
+     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
      */
-    async DescribeDasbImageIds(req, cb) {
-        return this.request("DescribeDasbImageIds", req, cb);
+    async DescribeDbauditInstanceType(req, cb) {
+        return this.request("DescribeDbauditInstanceType", req, cb);
     }
     /**
      * 本接口 (ModifyDbauditInstancesRenewFlag) 用于修改数据安全审计产品实例续费标识
@@ -58,12 +56,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDbauditUsedRegions(req, cb) {
         return this.request("DescribeDbauditUsedRegions", req, cb);
-    }
-    /**
-     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
-     */
-    async DescribeDbauditInstanceType(req, cb) {
-        return this.request("DescribeDbauditInstanceType", req, cb);
     }
 }
 exports.Client = Client;

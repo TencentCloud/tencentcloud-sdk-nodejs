@@ -23,34 +23,42 @@ export interface ImportSnapshotsResponse {
 export interface CompareTablesInfo {
     /**
      * 源表格的集群id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcTableClusterId: string;
     /**
      * 源表格的表格组id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcTableGroupId: string;
     /**
      * 源表格的表名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcTableName: string;
     /**
      * 目标表格的集群id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstTableClusterId: string;
     /**
      * 目标表格的表格组id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstTableGroupId: string;
     /**
      * 目标表格的表名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstTableName: string;
     /**
      * 源表格的实例id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcTableInstanceId: string;
     /**
      * 目标表格的实例id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstTableInstanceId: string;
 }
@@ -1045,6 +1053,11 @@ export interface SnapshotResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SnapshotStatus: number;
+    /**
+     * 申请单ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationId?: string;
 }
 /**
  * ModifyCensorship请求参数结构体
@@ -1671,11 +1684,11 @@ export interface DescribeClustersResponse {
     /**
      * 集群实例数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群实例列表
      */
-    Clusters: Array<ClusterInfo>;
+    Clusters?: Array<ClusterInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2179,6 +2192,21 @@ export interface TaskInfoNew {
      * 任务详情
      */
     Content: string;
+    /**
+     * 表格组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableGroupId?: string;
+    /**
+     * 表格组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableGroupName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
 }
 /**
  * TcaplusDB的缓写表信息
@@ -2527,26 +2555,32 @@ export interface DescribeTablesRequest {
 export interface KafkaInfo {
     /**
      * Kafka address
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Address: string;
     /**
      * Kafka topic
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Topic: string;
     /**
      * kafka username
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     User: string;
     /**
      * kafka password
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Password: string;
     /**
      * ckafka实例
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Instance: string;
     /**
      * 是否走VPC
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsVpc: number;
 }

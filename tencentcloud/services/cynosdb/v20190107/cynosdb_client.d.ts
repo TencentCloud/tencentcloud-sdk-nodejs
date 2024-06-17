@@ -544,7 +544,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterInstanceGroups(req: DescribeClusterInstanceGroupsRequest, cb?: (error: string, rep: DescribeClusterInstanceGroupsResponse) => void): Promise<DescribeClusterInstanceGroupsResponse>;
     /**
-     * 指定时间和集群查询是否可回滚
+     * 历史废弃接口，从云API下线
+
+指定时间和集群查询是否可回滚
      */
     DescribeRollbackTimeValidity(req: DescribeRollbackTimeValidityRequest, cb?: (error: string, rep: DescribeRollbackTimeValidityResponse) => void): Promise<DescribeRollbackTimeValidityResponse>;
     /**

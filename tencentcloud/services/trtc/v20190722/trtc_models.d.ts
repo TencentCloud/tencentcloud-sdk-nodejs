@@ -3263,10 +3263,12 @@ export interface TranscriptionParams {
     /**
      * IM[管理员账户](
   https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98)，如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。
+     * @deprecated
      */
     IMAdminUserId?: string;
     /**
      * IM管理员账户生成的签名，用于向特定群组发送消息。如果填写，后台下发消息会使用IM通道，而不是TRTC自定义消息。必须和IM管理员的UserId一起填写。
+     * @deprecated
      */
     IMAdminUserSig?: string;
     /**

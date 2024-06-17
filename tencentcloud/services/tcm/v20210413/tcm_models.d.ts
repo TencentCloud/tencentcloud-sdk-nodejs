@@ -538,45 +538,45 @@ export interface DescribeAccessLogConfigResponse {
     /**
      * 访问日志输出路径。默认 /dev/stdout
      */
-    File: string;
+    File?: string;
     /**
      * 访问日志的格式。
      */
-    Format: string;
+    Format?: string;
     /**
      * 访问日志输出编码，可取值为 "TEXT" 或 "JSON"，默认 TEXT"
      */
-    Encoding: string;
+    Encoding?: string;
     /**
      * 选中的范围
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SelectedRange: SelectedRange;
+    SelectedRange?: SelectedRange;
     /**
      * 采用的模板，可取值为"istio" 或 "trace"，默认为"istio"
      */
-    Template: string;
+    Template?: string;
     /**
      * 腾讯云日志服务相关参数
      */
-    CLS: CLS;
+    CLS?: CLS;
     /**
      * GRPC第三方服务器地址
      */
-    Address: string;
+    Address?: string;
     /**
      * 是否启用GRPC第三方服务器
      */
-    EnableServer: boolean;
+    EnableServer?: boolean;
     /**
      * 是否启用标准输出
      */
-    EnableStdout: boolean;
+    EnableStdout?: boolean;
     /**
      * 是否启用访问日志采集
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Enable: boolean;
+    Enable?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

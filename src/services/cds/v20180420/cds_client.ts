@@ -31,8 +31,6 @@ import {
   DbauditTypesInfo,
   DescribeDbauditUsedRegionsRequest,
   InquiryPriceDbauditInstanceRequest,
-  DescribeDasbImageIdsResponse,
-  DescribeDasbImageIdsRequest,
 } from "./cds_models"
 
 /**
@@ -45,15 +43,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 这些接口是传统版堡垒机接口.数审未用到，堡垒机的已全部迁移到dasb下，cds这边预下线
-
-获取镜像列表
-     */
-  async DescribeDasbImageIds(
-    req?: DescribeDasbImageIdsRequest,
-    cb?: (error: string, rep: DescribeDasbImageIdsResponse) => void
-  ): Promise<DescribeDasbImageIdsResponse> {
-    return this.request("DescribeDasbImageIds", req, cb)
+   * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
+   */
+  async DescribeDbauditInstanceType(
+    req?: DescribeDbauditInstanceTypeRequest,
+    cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void
+  ): Promise<DescribeDbauditInstanceTypeResponse> {
+    return this.request("DescribeDbauditInstanceType", req, cb)
   }
 
   /**
@@ -94,15 +90,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDbauditUsedRegionsResponse) => void
   ): Promise<DescribeDbauditUsedRegionsResponse> {
     return this.request("DescribeDbauditUsedRegions", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
-   */
-  async DescribeDbauditInstanceType(
-    req?: DescribeDbauditInstanceTypeRequest,
-    cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void
-  ): Promise<DescribeDbauditInstanceTypeResponse> {
-    return this.request("DescribeDbauditInstanceType", req, cb)
   }
 }

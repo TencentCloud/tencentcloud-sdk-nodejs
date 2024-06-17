@@ -950,6 +950,21 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HasEsIndex?: boolean
+  /**
+   * true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSecondaryZone?: boolean
+  /**
+   * desc
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondaryZoneInfo?: string
+  /**
+   * 是否clickhouse-keeper
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClickHouseKeeper?: boolean
 }
 
 /**

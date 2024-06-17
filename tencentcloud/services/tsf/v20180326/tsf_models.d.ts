@@ -1877,197 +1877,197 @@ export interface Instance {
      * 机器实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 机器名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 机器内网地址IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LanIp: string;
+    LanIp?: string;
     /**
      * 机器外网地址IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WanIp: string;
+    WanIp?: string;
     /**
      * 机器描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceDesc: string;
+    InstanceDesc?: string;
     /**
      * 集群ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * VM的状态 虚机：虚机的状态 容器：Pod所在虚机的状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /**
      * VM的可使用状态 虚机：虚机是否能够作为资源使用 容器：虚机是否能够作为资源部署POD
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceAvailableStatus: string;
+    InstanceAvailableStatus?: string;
     /**
      * 服务下的服务实例的状态 虚机：应用是否可用 + Agent状态 容器：Pod状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceInstanceStatus: string;
+    ServiceInstanceStatus?: string;
     /**
      * 标识此instance是否已添加在tsf中
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CountInTsf: number;
+    CountInTsf?: number;
     /**
      * 机器所属部署组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 机器所属应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 机器所属应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * 机器实例在CVM的创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceCreatedTime: string;
+    InstanceCreatedTime?: string;
     /**
      * 机器实例在CVM的过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceExpiredTime: string;
+    InstanceExpiredTime?: string;
     /**
      * 机器实例在CVM的计费模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceChargeType: string;
+    InstanceChargeType?: string;
     /**
      * 机器实例总CPU信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTotalCpu: number;
+    InstanceTotalCpu?: number;
     /**
      * 机器实例总内存信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTotalMem: number;
+    InstanceTotalMem?: number;
     /**
      * 机器实例使用的CPU信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceUsedCpu: number;
+    InstanceUsedCpu?: number;
     /**
      * 机器实例使用的内存信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceUsedMem: number;
+    InstanceUsedMem?: number;
     /**
      * 机器实例Limit CPU信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceLimitCpu: number;
+    InstanceLimitCpu?: number;
     /**
      * 机器实例Limit 内存信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceLimitMem: number;
+    InstanceLimitMem?: number;
     /**
      * 包版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstancePkgVersion: string;
+    InstancePkgVersion?: string;
     /**
      * 集群类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 机器实例业务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RestrictState: string;
+    RestrictState?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 实例执行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OperationState: number;
+    OperationState?: number;
     /**
      * NamespaceId Ns ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceId: string;
+    NamespaceId?: string;
     /**
      * InstanceZoneId 可用区ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceZoneId: string;
+    InstanceZoneId?: string;
     /**
      * InstanceImportMode 导入模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceImportMode: string;
+    InstanceImportMode?: string;
     /**
      * ApplicationType应用类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationType: string;
+    ApplicationType?: string;
     /**
      * ApplicationResourceType 资源类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationResourceType: string;
+    ApplicationResourceType?: string;
     /**
      * sidecar状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceSidecarStatus: string;
+    ServiceSidecarStatus?: string;
     /**
      * 部署组名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * NS名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
      * 健康检查原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reason: string;
+    Reason?: string;
     /**
      * agent版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AgentVersion: string;
+    AgentVersion?: string;
     /**
      * 容器母机实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeInstanceId: string;
+    NodeInstanceId?: string;
 }
 /**
  * UpdateHealthCheckSettings请求参数结构体
@@ -4192,6 +4192,11 @@ export interface FileConfigRelease {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
+    /**
+     * 配置中心发布详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigCenters?: Array<TsfConfigCenter>;
 }
 /**
  * DescribeInvocationMetricDataPoint请求参数结构体
@@ -7719,7 +7724,7 @@ export interface DescribeGroupReleaseResponse {
      * 部署组发布的相关信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: GroupRelease;
+    Result?: GroupRelease;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

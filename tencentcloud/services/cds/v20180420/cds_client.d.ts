@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyDbauditInstancesRenewFlagResponse, DescribeDbauditInstanceTypeResponse, InquiryPriceDbauditInstanceResponse, ModifyDbauditInstancesRenewFlagRequest, DescribeDbauditUsedRegionsResponse, DescribeDbauditInstancesRequest, DescribeDbauditInstanceTypeRequest, DescribeDbauditInstancesResponse, DescribeDbauditUsedRegionsRequest, InquiryPriceDbauditInstanceRequest, DescribeDasbImageIdsResponse, DescribeDasbImageIdsRequest } from "./cds_models";
+import { ModifyDbauditInstancesRenewFlagResponse, DescribeDbauditInstanceTypeResponse, InquiryPriceDbauditInstanceResponse, ModifyDbauditInstancesRenewFlagRequest, DescribeDbauditUsedRegionsResponse, DescribeDbauditInstancesRequest, DescribeDbauditInstanceTypeRequest, DescribeDbauditInstancesResponse, DescribeDbauditUsedRegionsRequest, InquiryPriceDbauditInstanceRequest } from "./cds_models";
 /**
  * cds client
  * @class
@@ -8,11 +8,9 @@ import { ModifyDbauditInstancesRenewFlagResponse, DescribeDbauditInstanceTypeRes
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 这些接口是传统版堡垒机接口.数审未用到，堡垒机的已全部迁移到dasb下，cds这边预下线
-
-获取镜像列表
+     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
      */
-    DescribeDasbImageIds(req?: DescribeDasbImageIdsRequest, cb?: (error: string, rep: DescribeDasbImageIdsResponse) => void): Promise<DescribeDasbImageIdsResponse>;
+    DescribeDbauditInstanceType(req?: DescribeDbauditInstanceTypeRequest, cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void): Promise<DescribeDbauditInstanceTypeResponse>;
     /**
      * 本接口 (ModifyDbauditInstancesRenewFlag) 用于修改数据安全审计产品实例续费标识
      */
@@ -29,8 +27,4 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeDbauditUsedRegions) 用于查询可售卖地域列表。
      */
     DescribeDbauditUsedRegions(req?: DescribeDbauditUsedRegionsRequest, cb?: (error: string, rep: DescribeDbauditUsedRegionsResponse) => void): Promise<DescribeDbauditUsedRegionsResponse>;
-    /**
-     * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
-     */
-    DescribeDbauditInstanceType(req?: DescribeDbauditInstanceTypeRequest, cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void): Promise<DescribeDbauditInstanceTypeResponse>;
 }

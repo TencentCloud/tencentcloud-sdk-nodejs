@@ -54,7 +54,7 @@ export interface DescribeAuditLogResponse {
   /**
    * 操作日志列表
    */
-  Data: Array<AuditLog>
+  Data?: Array<AuditLog>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -68,11 +68,11 @@ export interface DescribePrivateDNSAccountListResponse {
   /**
    * 私有域解析账号数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 私有域解析账号列表
    */
-  AccountSet: Array<PrivateDNSAccount>
+  AccountSet?: Array<PrivateDNSAccount>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -495,11 +495,11 @@ export interface DescribeRequestDataResponse {
   /**
    * 请求量统计表
    */
-  Data: Array<MetricData>
+  Data?: Array<MetricData>
   /**
    * 请求量单位时间: Day：天，Hour：小时
    */
-  Interval: string
+  Interval?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

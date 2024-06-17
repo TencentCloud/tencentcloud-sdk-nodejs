@@ -6414,6 +6414,26 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    * 计算节点付费模式：0-按量计费，1-预付费
    */
   PayMode?: number
+  /**
+   * 时间
+   */
+  TimeSpan?: number
+  /**
+   * 单位
+   */
+  TimeUnit?: string
+  /**
+   * 回档库信息
+   */
+  RollbackDatabases?: Array<RollbackDatabase>
+  /**
+   * 回档表信息
+   */
+  RollbackTables?: Array<RollbackTable>
+  /**
+   * 原ro实例信息
+   */
+  OriginalROInstanceList?: Array<string>
 }
 
 /**

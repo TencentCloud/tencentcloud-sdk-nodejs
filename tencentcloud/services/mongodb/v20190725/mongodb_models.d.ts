@@ -830,43 +830,56 @@ export interface BackupInfo {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 备份方式，0-自动备份，1-手动备份
      */
-    BackupType: number;
+    BackupType?: number;
     /**
      * 备份名称
      */
-    BackupName: string;
+    BackupName?: string;
     /**
      * 备份备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupDesc: string;
+    BackupDesc?: string;
     /**
      * 备份文件大小，单位KB
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupSize: number;
+    BackupSize?: number;
     /**
      * 备份开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 备份状态，1-备份中，2-备份成功
      */
-    Status: number;
+    Status?: number;
     /**
      * 备份方法，0-逻辑备份，1-物理备份
      */
-    BackupMethod: number;
+    BackupMethod?: number;
+    /**
+     * 备份记录id
+     */
+    BackId?: number;
+    /**
+     * 备份删除时间
+     */
+    DeleteTime?: string;
+    /**
+     * 异地备份地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupRegion?: string;
 }
 /**
  * DescribeDBInstances请求参数结构体
@@ -1371,11 +1384,11 @@ export interface DescribeDBBackupsResponse {
     /**
      * 备份列表
      */
-    BackupList: Array<BackupInfo>;
+    BackupList?: Array<BackupInfo>;
     /**
      * 备份总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

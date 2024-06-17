@@ -1009,24 +1009,24 @@ export interface DescribeUpstreamHealthCheckConfigResponse {
     RequestId?: string;
 }
 /**
- * 服务契约版本信息
+ * 获取云原生api网关公网地址信息响应结果
  */
-export interface GovernanceServiceContractVersion {
+export interface DescribePublicAddressConfigResult {
     /**
-     * 契约版本
+     * 网关实例id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version?: string;
+    GatewayId?: string;
     /**
-     * 契约名称
+     * 公网地址信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
+    ConfigList?: Array<PublicAddressConfig>;
     /**
-     * 唯一名称
+     * 总个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key?: string;
+    TotalCount?: number;
 }
 /**
  * 配置文件
@@ -1457,6 +1457,36 @@ export interface ExternalRedis {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RedisTimeout: number;
+}
+/**
+ * 公网地址信息
+ */
+export interface PublicAddressConfig {
+    /**
+     * 公网 ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vip?: string;
+    /**
+     * 公网最大带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 公网所属分组 id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: string;
+    /**
+     * 公网所属分组名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
+    /**
+     * 公网负载均衡 id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetworkId?: string;
 }
 /**
  * DeleteGovernanceNamespaces返回参数结构体
@@ -6532,18 +6562,24 @@ export interface CloudNativeAPIGatewayCanaryRuleCondition {
     GlobalConfigName?: string;
 }
 /**
- * UpdateUpstreamHealthCheckConfig返回参数结构体
+ * 服务契约版本信息
  */
-export interface UpdateUpstreamHealthCheckConfigResponse {
+export interface GovernanceServiceContractVersion {
     /**
-     * 是否成功
+     * 契约版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result?: boolean;
+    Version?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 契约名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Name?: string;
+    /**
+     * 唯一名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
 }
 /**
  * DescribeNativeGatewayServerGroups请求参数结构体
@@ -7475,6 +7511,10 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
  */
 export interface DescribePublicAddressConfigResponse {
     /**
+     * 公网地址信息
+     */
+    Result?: DescribePublicAddressConfigResult;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7690,6 +7730,20 @@ export interface DescribeConfigFileReleaseHistoriesResponse {
      * 配置文件发布历史列表
      */
     ConfigFileReleaseHistories?: Array<ConfigFileReleaseHistory>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateUpstreamHealthCheckConfig返回参数结构体
+ */
+export interface UpdateUpstreamHealthCheckConfigResponse {
+    /**
+     * 是否成功
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
