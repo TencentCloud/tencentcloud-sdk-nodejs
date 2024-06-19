@@ -3762,6 +3762,45 @@ export interface DescribeDrInstancePageResponse {
     RequestId?: string;
 }
 /**
+ * MoveTasksToFolder请求参数结构体
+ */
+export interface MoveTasksToFolderRequest {
+    /**
+     * 项目Id
+     */
+    ProjectId: string;
+    /**
+     * 工作流ID
+     */
+    WorkflowId: string;
+    /**
+     * 任务文件夹ID
+     */
+    TaskFolderId: string;
+    /**
+     * 任务ID
+     */
+    TaskIds: Array<string>;
+    /**
+     * 虚拟任务ID
+     */
+    VirtualTaskIds: Array<string>;
+}
+/**
+ * MoveTasksToFolder返回参数结构体
+ */
+export interface MoveTasksToFolderResponse {
+    /**
+     * true代表成功
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateWorkflowOwner请求参数结构体
  */
 export interface UpdateWorkflowOwnerRequest {
@@ -10510,7 +10549,7 @@ export interface OpsTaskCanvasInfoList {
      * 画布循环依赖任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CirculateTaskList?: OpsTaskCanvasDto;
+    CirculateTaskList?: Array<OpsTaskCanvasDto>;
 }
 /**
  * ModifyDimensionWeight返回参数结构体

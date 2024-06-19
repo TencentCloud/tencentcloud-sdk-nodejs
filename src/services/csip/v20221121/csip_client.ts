@@ -27,6 +27,7 @@ import {
   DescribeOrganizationUserInfoRequest,
   FilterDataObject,
   ReportItemKey,
+  TaskAdvanceCFG,
   CVMAssetVO,
   AssetViewCFGRisk,
   AssetViewVULRisk,
@@ -35,13 +36,14 @@ import {
   KeyValue,
   Vpc,
   PortRiskAdvanceCFGParamItem,
-  StopRiskCenterTaskRequest,
+  DescribeVULRiskDetailRequest,
   DataSearchBug,
   OrganizationUserInfo,
   AssetTag,
   NewAlertKey,
   IpAssetListVO,
   DescribeTopAttackInfoResponse,
+  DescribeVULRiskDetailResponse,
   DescribeVULRiskAdvanceCFGListRequest,
   ModifyRiskCenterScanTaskResponse,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
@@ -79,7 +81,9 @@ import {
   PublicIpDomainListKey,
   DescribeTopAttackInfoRequest,
   DescribeCVMAssetsResponse,
+  VulImpactComponentInfo,
   VULRiskAdvanceCFGList,
+  WhereFilter,
   DescribePublicIpAssetsRequest,
   AssetClusterPod,
   DescribeCVMAssetInfoRequest,
@@ -92,17 +96,20 @@ import {
   DescribeRiskCenterVULViewVULRiskListRequest,
   UpdateAlertStatusListRequest,
   TaskCenterVulRiskInputParam,
-  TaskAdvanceCFG,
+  StopRiskCenterTaskRequest,
   DescribeScanTaskListResponse,
   ScanTaskInfo,
   AssetInstanceTypeMap,
   Tags,
   VULViewVULRisk,
   PortViewPortRisk,
+  VULRiskInfo,
   DescribeClusterPodAssetsRequest,
   DescribeCVMAssetInfoResponse,
   DescribePublicIpAssetsResponse,
+  DescribeVulViewVulRiskListRequest,
   DescribeTaskLogURLResponse,
+  VulTrend,
   ModifyOrganizationAccountStatusResponse,
   AlertExtraInfo,
   DescribeDbAssetInfoRequest,
@@ -123,7 +130,7 @@ import {
   ReportTaskIdList,
   AddNewBindRoleUserResponse,
   RelatedEvent,
-  WhereFilter,
+  VULViewVULRiskData,
   DescribeAlertListResponse,
   ScanTaskInfoList,
   DescribeDbAssetsRequest,
@@ -151,6 +158,7 @@ import {
   DescribeListenerListRequest,
   DeleteRiskScanTaskResponse,
   DescribeGatewayAssetsRequest,
+  DescribeVulViewVulRiskListResponse,
   CreateDomainAndIpResponse,
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
@@ -348,6 +356,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取漏洞展开详情
+   */
+  async DescribeVULRiskDetail(
+    req: DescribeVULRiskDetailRequest,
+    cb?: (error: string, rep: DescribeVULRiskDetailResponse) => void
+  ): Promise<DescribeVULRiskDetailResponse> {
+    return this.request("DescribeVULRiskDetail", req, cb)
+  }
+
+  /**
    * 获取内容风险列表
    */
   async DescribeRiskCenterWebsiteRiskList(
@@ -415,6 +433,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskLogListResponse) => void
   ): Promise<DescribeTaskLogListResponse> {
     return this.request("DescribeTaskLogList", req, cb)
+  }
+
+  /**
+   * 获取漏洞视角的漏洞风险列表
+   */
+  async DescribeVulViewVulRiskList(
+    req: DescribeVulViewVulRiskListRequest,
+    cb?: (error: string, rep: DescribeVulViewVulRiskListResponse) => void
+  ): Promise<DescribeVulViewVulRiskListResponse> {
+    return this.request("DescribeVulViewVulRiskList", req, cb)
   }
 
   /**

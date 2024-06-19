@@ -128,6 +128,8 @@ import {
   BatchSuspendIntegrationTasksRequest,
   DeleteDsFolderResponse,
   DescribeDrInstancePageResponse,
+  MoveTasksToFolderRequest,
+  MoveTasksToFolderResponse,
   UpdateWorkflowOwnerRequest,
   DescribeSchedulerTaskTypeCntResponse,
   DeleteCustomFunctionResponse,
@@ -1069,6 +1071,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteProjectParamDsResponse) => void
   ): Promise<DeleteProjectParamDsResponse> {
     return this.request("DeleteProjectParamDs", req, cb)
+  }
+
+  /**
+   * 编排空间-工作流-移动任务到工作流文件夹
+   */
+  async MoveTasksToFolder(
+    req: MoveTasksToFolderRequest,
+    cb?: (error: string, rep: MoveTasksToFolderResponse) => void
+  ): Promise<MoveTasksToFolderResponse> {
+    return this.request("MoveTasksToFolder", req, cb)
   }
 
   /**

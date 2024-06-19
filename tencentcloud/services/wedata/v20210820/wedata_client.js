@@ -251,6 +251,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProjectParamDs", req, cb);
     }
     /**
+     * 编排空间-工作流-移动任务到工作流文件夹
+     */
+    async MoveTasksToFolder(req, cb) {
+        return this.request("MoveTasksToFolder", req, cb);
+    }
+    /**
      * 根据项目id 获取项目下所有工作流列表
      */
     async DescribeWorkflowListByProjectId(req, cb) {

@@ -332,7 +332,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeReplicationGroup(req: DescribeReplicationGroupRequest, cb?: (error: string, rep: DescribeReplicationGroupResponse) => void): Promise<DescribeReplicationGroupResponse>;
     /**
-     * 查询实例续费价格（包年包月）
+     * 本接口（InquiryPriceRenewInstance）用于查询包年包月计费实例的续费价格。
      */
     InquiryPriceRenewInstance(req: InquiryPriceRenewInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void): Promise<InquiryPriceRenewInstanceResponse>;
     /**
@@ -400,7 +400,7 @@ export declare class Client extends AbstractClient {
      */
     ApplyParamsTemplate(req: ApplyParamsTemplateRequest, cb?: (error: string, rep: ApplyParamsTemplateResponse) => void): Promise<ApplyParamsTemplateResponse>;
     /**
-     * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
+     * 本接口（DescribeMaintenanceWindow）用于查询实例维护时间窗。在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
      */
     DescribeMaintenanceWindow(req: DescribeMaintenanceWindowRequest, cb?: (error: string, rep: DescribeMaintenanceWindowResponse) => void): Promise<DescribeMaintenanceWindowResponse>;
     /**

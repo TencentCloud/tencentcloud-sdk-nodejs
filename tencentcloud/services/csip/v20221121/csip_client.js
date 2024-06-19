@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetViewVulRiskList", req, cb);
     }
     /**
+     * 获取漏洞展开详情
+     */
+    async DescribeVULRiskDetail(req, cb) {
+        return this.request("DescribeVULRiskDetail", req, cb);
+    }
+    /**
      * 获取内容风险列表
      */
     async DescribeRiskCenterWebsiteRiskList(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskLogList(req, cb) {
         return this.request("DescribeTaskLogList", req, cb);
+    }
+    /**
+     * 获取漏洞视角的漏洞风险列表
+     */
+    async DescribeVulViewVulRiskList(req, cb) {
+        return this.request("DescribeVulViewVulRiskList", req, cb);
     }
     /**
      * 获取扫描报告列表

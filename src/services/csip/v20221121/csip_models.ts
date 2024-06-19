@@ -222,6 +222,28 @@ export interface ReportItemKey {
 }
 
 /**
+ * 任务高级配置
+ */
+export interface TaskAdvanceCFG {
+  /**
+   * 端口风险高级配置
+   */
+  PortRisk?: Array<PortRiskAdvanceCFGParamItem>
+  /**
+   * 漏洞风险高级配置
+   */
+  VulRisk?: Array<TaskCenterVulRiskInputParam>
+  /**
+   * 弱口令风险高级配置
+   */
+  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
+  /**
+   * 配置风险高级配置
+   */
+  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+}
+
+/**
  * 主机资产信息
  */
 export interface CVMAssetVO {
@@ -1046,17 +1068,21 @@ export interface PortRiskAdvanceCFGParamItem {
 }
 
 /**
- * StopRiskCenterTask请求参数结构体
+ * DescribeVULRiskDetail请求参数结构体
  */
-export interface StopRiskCenterTaskRequest {
-  /**
-   * 任务id 列表
-   */
-  TaskIdList: Array<TaskIdListKey>
+export interface DescribeVULRiskDetailRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+  /**
+   * 风险id
+   */
+  RiskId?: string
+  /**
+   * pcMgrId
+   */
+  PCMGRId?: string
 }
 
 /**
@@ -1475,6 +1501,36 @@ export interface DescribeTopAttackInfoResponse {
    * Top攻击类型/攻击者次数
    */
   TopAttackInfo?: Array<TagCount>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVULRiskDetail返回参数结构体
+ */
+export interface DescribeVULRiskDetailResponse {
+  /**
+   * 安全产品支持情况
+   */
+  ServiceSupport?: Array<ServiceSupport>
+  /**
+   * 漏洞趋势
+   */
+  VulTrend?: Array<VulTrend>
+  /**
+   * 漏洞补充信息
+   */
+  VulData?: VULRiskInfo
+  /**
+   * 小助手问答id
+   */
+  QuestionId?: string
+  /**
+   * 会话id
+   */
+  SessionId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2958,6 +3014,22 @@ export interface DescribeCVMAssetsResponse {
 }
 
 /**
+ * 漏洞影响组件信息
+ */
+export interface VulImpactComponentInfo {
+  /**
+   * 组件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Component?: string
+  /**
+   * 版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+}
+
+/**
  * 漏洞风险高级配置列表
  */
 export interface VULRiskAdvanceCFGList {
@@ -3054,6 +3126,30 @@ export interface VULRiskAdvanceCFGList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecentScanTime?: string
+}
+
+/**
+ * 过滤条件
+ */
+export interface WhereFilter {
+  /**
+   * 过滤的项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 过滤的值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values: Array<string>
+  /**
+   * 中台定义：
+1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
+精确匹配填 7 模糊匹配填9 
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorType?: number
 }
 
 /**
@@ -3570,25 +3666,17 @@ export interface TaskCenterVulRiskInputParam {
 }
 
 /**
- * 任务高级配置
+ * StopRiskCenterTask请求参数结构体
  */
-export interface TaskAdvanceCFG {
+export interface StopRiskCenterTaskRequest {
   /**
-   * 端口风险高级配置
+   * 任务id 列表
    */
-  PortRisk?: Array<PortRiskAdvanceCFGParamItem>
+  TaskIdList: Array<TaskIdListKey>
   /**
-   * 漏洞风险高级配置
+   * 集团账号的成员id
    */
-  VulRisk?: Array<TaskCenterVulRiskInputParam>
-  /**
-   * 弱口令风险高级配置
-   */
-  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
-  /**
-   * 配置风险高级配置
-   */
-  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+  MemberId?: Array<string>
 }
 
 /**
@@ -3903,6 +3991,32 @@ export interface PortViewPortRisk {
 }
 
 /**
+ * 漏洞风险信息
+ */
+export interface VULRiskInfo {
+  /**
+   * 修复建议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fix?: string
+  /**
+   * 技术参考/参考链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  References?: string
+  /**
+   * 漏洞描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Describe?: string
+  /**
+   * 受影响组件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImpactComponent?: Array<VulImpactComponentInfo>
+}
+
+/**
  * DescribeClusterPodAssets请求参数结构体
  */
 export interface DescribeClusterPodAssetsRequest {
@@ -3977,6 +4091,24 @@ export interface DescribePublicIpAssetsResponse {
 }
 
 /**
+ * DescribeVulViewVulRiskList请求参数结构体
+ */
+export interface DescribeVulViewVulRiskListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
+}
+
+/**
  * DescribeTaskLogURL返回参数结构体
  */
 export interface DescribeTaskLogURLResponse {
@@ -3988,6 +4120,32 @@ export interface DescribeTaskLogURLResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 漏洞趋势-攻击趋势、影响用户、影响资产
+ */
+export interface VulTrend {
+  /**
+   * 影响的资产数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectAssetCount?: number
+  /**
+   * 影响的用户数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectUserCount?: number
+  /**
+   * 攻击数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttackCount?: number
+  /**
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Date?: string
 }
 
 /**
@@ -5024,27 +5182,141 @@ export interface RelatedEvent {
 }
 
 /**
- * 过滤条件
+ * 漏洞视角的漏洞风险对象
  */
-export interface WhereFilter {
+export interface VULViewVULRiskData {
   /**
-   * 过滤的项
+   * 端口
+   */
+  Port?: string
+  /**
+   * 影响资产
+   */
+  NoHandleCount?: number
+  /**
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+   */
+  Level?: string
+  /**
+   * 组件
+   */
+  Component?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 影响资产数量
+   */
+  AffectAssetCount?: number
+  /**
+   * 风险ID
+   */
+  RiskId?: string
+  /**
+   * 扫描来源，具体看接口返回枚举类型
+   */
+  From?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 漏洞类型
+   */
+  VULType?: string
+  /**
+   * 漏洞名
+   */
+  VULName?: string
+  /**
+   * cve
+   */
+  CVE?: string
+  /**
+   * 漏洞payload
+   */
+  Payload?: string
+  /**
+   * 漏洞影响组件
+   */
+  AppName?: string
+  /**
+   * 漏洞影响版本
+   */
+  AppVersion?: string
+  /**
+   * 风险点
+   */
+  VULURL?: string
+  /**
+   * 用户昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Nick?: string
   /**
-   * 过滤的值
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<string>
+  Uin?: string
   /**
-   * 中台定义：
-1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
-精确匹配填 7 模糊匹配填9 
-
+   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperatorType?: number
+  EMGCVulType?: number
+  /**
+   * CVSS评分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CVSS?: number
+  /**
+   * PCMGRId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PCMGRId?: string
+  /**
+   * 漏洞标签。搜索时应急 必修传参VulTag=SuggestRepair/EMGCVul
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulTag?: Array<string>
+  /**
+   * 漏洞披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisclosureTime?: string
+  /**
+   * 攻击热度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttackHeat?: number
+  /**
+   * 是否必修漏洞1是，0不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSuggest?: number
+  /**
+   * 处置任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HandleTaskId?: string
+  /**
+   * 引擎来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineSource?: string
+  /**
+   * 新的漏洞风险id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulRiskId?: string
 }
 
 /**
@@ -6204,6 +6476,42 @@ export interface DescribeGatewayAssetsRequest {
    * 过滤参数
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeVulViewVulRiskList返回参数结构体
+ */
+export interface DescribeVulViewVulRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 漏洞产视角的漏洞风险列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<VULViewVULRiskData>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 来源列表
+   */
+  FromLists?: Array<FilterDataObject>
+  /**
+   * 漏洞类型列表
+   */
+  VULTypeLists?: Array<FilterDataObject>
+  /**
+   * tag枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

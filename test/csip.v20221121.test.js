@@ -198,6 +198,16 @@ it("csip.v20221121.DescribeAssetViewVulRiskList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeVULRiskDetail", async function () {
+    try {
+       const data = await client.DescribeVULRiskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterWebsiteRiskList({})
@@ -261,6 +271,16 @@ it("csip.v20221121.DescribeSearchBugInfo", async function () {
 it("csip.v20221121.DescribeTaskLogList", async function () {
     try {
        const data = await client.DescribeTaskLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeVulViewVulRiskList", async function () {
+    try {
+       const data = await client.DescribeVulViewVulRiskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -388,6 +388,16 @@ it("wedata.v20210820.DeleteProjectParamDs", async function () {
     }
 })
 
+it("wedata.v20210820.MoveTasksToFolder", async function () {
+    try {
+       const data = await client.MoveTasksToFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeWorkflowListByProjectId", async function () {
     try {
        const data = await client.DescribeWorkflowListByProjectId({})
