@@ -988,6 +988,16 @@ it("dlc.v20210125.DescribeEngineUsageInfo", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTasksOverview", async function () {
+    try {
+       const data = await client.DescribeTasksOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UpdateDataEngineConfig", async function () {
     try {
        const data = await client.UpdateDataEngineConfig({})

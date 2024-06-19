@@ -305,6 +305,36 @@ export interface DescribeClusterDetailDatabasesRequest {
     DbName?: string;
 }
 /**
+ * 回档RO组信息
+ */
+export interface RollbackRoGroupInfo {
+    /**
+     * 实例组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceGroupId?: string;
+    /**
+     * vpc信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpcId?: string;
+    /**
+     * 子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqSubnetId?: string;
+    /**
+     * vip信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vip?: string;
+    /**
+     * vport信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vport?: number;
+}
+/**
  * CreateClusters返回参数结构体
  */
 export interface CreateClustersResponse {
@@ -2547,21 +2577,34 @@ export interface DescribeResourcePackageListResponse {
     RequestId?: string;
 }
 /**
- * 审计规则的规则过滤条件
+ * 任务信息
  */
-export interface RuleFilters {
+export interface ObjectTask {
     /**
-     * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句；affectRows -影响行数；sentRows-返回行数；checkRows-扫描行数；execTime-执行时间。
+     * 任务自增ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    TaskId?: number;
     /**
-     * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于；REG-正则；GT-大于；LT-小于。
+     * 任务类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Compare: string;
+    TaskType?: string;
     /**
-     * 审计规则过滤条件的匹配值。
+     * 任务状态
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value: Array<string>;
+    TaskStatus?: string;
+    /**
+     * 任务ID（集群ID|实例组ID|实例ID）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectId?: string;
+    /**
+     * 任务类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectType?: string;
 }
 /**
  * ModifyAuditRuleTemplates请求参数结构体
@@ -3113,6 +3156,11 @@ export interface RollbackData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupFileName?: string;
+    /**
+     * 回档进程
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollbackProcess?: RollbackProcessInfo;
 }
 /**
  * UpgradeInstance请求参数结构体
@@ -4998,6 +5046,21 @@ export interface DescribeBackupConfigRequest {
     ClusterId: string;
 }
 /**
+ * 交换实例信息
+ */
+export interface ExchangeInstanceInfo {
+    /**
+     * 源实例信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcInstanceInfo?: RollbackInstanceInfo;
+    /**
+     * 目标实例信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstInstanceInfo?: RollbackInstanceInfo;
+}
+/**
  * DescribeAccounts请求参数结构体
  */
 export interface DescribeAccountsRequest {
@@ -5372,34 +5435,21 @@ export interface ModifyResourcePackageClustersRequest {
     UnbindClusterIds?: Array<string>;
 }
 /**
- * 任务信息
+ * 审计规则的规则过滤条件
  */
-export interface ObjectTask {
+export interface RuleFilters {
     /**
-     * 任务自增ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句；affectRows -影响行数；sentRows-返回行数；checkRows-扫描行数；execTime-执行时间。
      */
-    TaskId?: number;
+    Type: string;
     /**
-     * 任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于；REG-正则；GT-大于；LT-小于。
      */
-    TaskType?: string;
+    Compare: string;
     /**
-     * 任务状态
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 审计规则过滤条件的匹配值。
      */
-    TaskStatus?: string;
-    /**
-     * 任务ID（集群ID|实例组ID|实例ID）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ObjectId?: string;
-    /**
-     * 任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ObjectType?: string;
+    Value: Array<string>;
 }
 /**
  * DescribeFlow返回参数结构体
@@ -5744,6 +5794,11 @@ export interface BizTaskInfo {
      */
     ClusterId?: string;
     /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
      * 任务创建时间
      */
     CreateTime?: string;
@@ -5880,6 +5935,12 @@ export interface BizTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskMaintainInfo?: TaskMaintainInfo;
+    /**
+     * 实例日志投递信息
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>;
 }
 /**
  * RemoveClusterSlaveZone返回参数结构体
@@ -7601,6 +7662,21 @@ export interface InstanceAuditRule {
     RuleTemplates?: Array<RuleTemplateInfo>;
 }
 /**
+ * 交换RO组信息
+ */
+export interface ExchangeRoGroupInfo {
+    /**
+     * 源RO组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcRoGroupInfo?: RollbackRoGroupInfo;
+    /**
+     * 目标RO组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstRoGroupInfo?: RollbackRoGroupInfo;
+}
+/**
  * RefundResourcePackage请求参数结构体
  */
 export interface RefundResourcePackageRequest {
@@ -7634,6 +7710,71 @@ export interface ModifyInstanceNameRequest {
      * 实例名称
      */
     InstanceName: string;
+}
+/**
+ * 回档实例信息
+ */
+export interface RollbackInstanceInfo {
+    /**
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName?: string;
+    /**
+     * vpc信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpcId?: string;
+    /**
+     * 子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqSubnetId?: string;
+    /**
+     * vip信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vip?: string;
+    /**
+     * vport信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vport?: number;
+    /**
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * cpu大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Cpu?: number;
+    /**
+     * 内存大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Mem?: number;
+    /**
+     * 存储大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageLimit?: number;
 }
 /**
  * UpgradeClusterVersion返回参数结构体
@@ -8513,6 +8654,46 @@ export interface RollbackTableInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NewTable: string;
+}
+/**
+ * 回档进度详情
+ */
+export interface RollbackProcessInfo {
+    /**
+     * 是否可以交换vip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsVipSwitchable?: boolean;
+    /**
+     * vip可交换时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VipSwitchableTime?: string;
+    /**
+     * 交换实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExchangeInstanceInfoList?: Array<ExchangeInstanceInfo>;
+    /**
+     * 交换RO组列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExchangeRoGroupInfoList?: Array<ExchangeRoGroupInfo>;
+    /**
+     * 当前步骤
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentStep?: string;
+    /**
+     * 当前步骤进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentStepProgress?: number;
+    /**
+     * 当前步骤剩余时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentStepRemainingTime?: string;
 }
 /**
  * ModifyVipVport返回参数结构体

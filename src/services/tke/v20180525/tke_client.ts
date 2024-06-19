@@ -293,6 +293,7 @@ import {
   DescribeClusterRoutesRequest,
   DeleteECMInstancesRequest,
   ClusterLevelAttribute,
+  PodChargeInfo,
   RemoveNodeFromNodePoolResponse,
   SetNodePoolNodeProtectionRequest,
   EnableClusterAuditRequest,
@@ -347,6 +348,7 @@ import {
   ModifyPrometheusTempResponse,
   VirtualNode,
   PodNodeInfo,
+  DescribePodChargeInfoRequest,
   ForwardTKEEdgeApplicationRequestV3Response,
   CreateClusterVirtualNodePoolRequest,
   ModifyPrometheusConfigRequest,
@@ -607,6 +609,7 @@ import {
   KubeJarvisStateInspectionOverview,
   DescribePrometheusOverviewsResponse,
   DescribeClusterInspectionResultsOverviewResponse,
+  DescribePodChargeInfoResponse,
   DeletePrometheusRecordRuleYamlRequest,
   InstallAddonRequest,
   InstanceUpgradePreCheckResult,
@@ -968,6 +971,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UninstallLogAgentResponse) => void
   ): Promise<UninstallLogAgentResponse> {
     return this.request("UninstallLogAgent", req, cb)
+  }
+
+  /**
+   * 查询正在运行中Pod的计费信息。可以通过 Namespace 和 Name 来查询某个 Pod 的信息，也可以通过 Pod 的 Uid 批量查询。
+   */
+  async DescribePodChargeInfo(
+    req: DescribePodChargeInfoRequest,
+    cb?: (error: string, rep: DescribePodChargeInfoResponse) => void
+  ): Promise<DescribePodChargeInfoResponse> {
+    return this.request("DescribePodChargeInfo", req, cb)
   }
 
   /**

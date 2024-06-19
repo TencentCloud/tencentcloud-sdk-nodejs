@@ -377,7 +377,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取主题属性
-
      */
     async DescribeTopicAttributes(req, cb) {
         return this.request("DescribeTopicAttributes", req, cb);

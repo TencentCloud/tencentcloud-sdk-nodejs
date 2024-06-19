@@ -1080,10 +1080,6 @@ export interface DescribePolicyStatusRequest {
  */
 export interface DescribeAccessFastAnalysisRequest {
     /**
-     * 客户要查询的日志主题ID，每个客户都有对应的一个主题
-     */
-    TopicId: string;
-    /**
      * 要查询的日志的起始时间，Unix时间戳，单位ms
      */
     From: number;
@@ -1099,6 +1095,11 @@ export interface DescribeAccessFastAnalysisRequest {
      * 需要分析统计的字段名
      */
     FieldName: string;
+    /**
+     * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+     * @deprecated
+     */
+    TopicId?: string;
     /**
      * 排序字段,升序asc,降序desc，默认降序desc
      */
@@ -3353,6 +3354,23 @@ export interface DescribeAreaBanSupportAreasResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAccessFastAnalysis接口的出参
+ */
+export interface AccessFieldValueRatioInfo {
+    /**
+     * 日志条数
+     */
+    Count?: number;
+    /**
+     * 对应的Value值的百分比
+     */
+    Ratio?: number;
+    /**
+     * 字段对应的值
+     */
+    Value?: string;
+}
+/**
  * DescribePorts请求参数结构体
  */
 export interface DescribePortsRequest {
@@ -4362,39 +4380,17 @@ export interface AddAntiInfoLeakRulesResponse {
     RequestId?: string;
 }
 /**
- * clb-waf QPS套餐 New
+ * DescribeWafThreatenIntelligence返回参数结构体
  */
-export interface QPSPackageNew {
+export interface DescribeWafThreatenIntelligenceResponse {
     /**
-     * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * WAF 威胁情报封禁信息
      */
-    ResourceIds: string;
+    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
     /**
-     * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ValidTime: string;
-    /**
-     * 是否自动续费，1：自动续费，0：不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RenewFlag: number;
-    /**
-     * 套餐购买个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count: number;
-    /**
-     * 套餐购买地域，clb-waf暂时没有用到
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region: string;
-    /**
-     * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillingItem?: string;
+    RequestId?: string;
 }
 /**
  * AddDomainWhiteRule请求参数结构体
@@ -5942,13 +5938,13 @@ export interface PortItem {
     NginxServerId: string;
 }
 /**
- * ModifyHostStatus返回参数结构体
+ * DescribeCCAutoStatus返回参数结构体
  */
-export interface ModifyHostStatusResponse {
+export interface DescribeCCAutoStatusResponse {
     /**
-     * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
+     * 配置状态，0表示关闭，1表示开启
      */
-    Success?: ResponseCode;
+    AutoCCSwitch?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6517,6 +6513,15 @@ export interface ModifyWafAutoDenyRulesRequest {
  */
 export interface DescribeAccessFastAnalysisResponse {
     /**
+     * 注意：此字段可能返回 null，表示取不到有效值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FieldValueRatioInfos?: Array<AccessFieldValueRatioInfo>;
+    /**
+     * 日志条数
+     */
+    TotalCount?: number;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -6767,43 +6772,6 @@ export interface DescribeTopAttackDomainResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * AddCustomWhiteRule请求参数结构体
- */
-export interface AddCustomWhiteRuleRequest {
-    /**
-     * 规则名称
-     */
-    Name: string;
-    /**
-     * 优先级
-     */
-    SortId: string;
-    /**
-     * 过期时间
-     */
-    ExpireTime: string;
-    /**
-     * 策略详情
-     */
-    Strategies: Array<Strategy>;
-    /**
-     * 需要添加策略的域名
-     */
-    Domain: string;
-    /**
-     * 放行的详情
-     */
-    Bypass: string;
-    /**
-     * 定时任务类型
-     */
-    JobType?: string;
-    /**
-     * 定时任务配置
-     */
-    JobDateTime?: JobDateTime;
 }
 /**
  * 计费下单接口出入参Goods
@@ -7971,17 +7939,41 @@ export interface ImportIpAccessControlResponse {
     RequestId?: string;
 }
 /**
- * DescribeWafThreatenIntelligence返回参数结构体
+ * AddCustomWhiteRule请求参数结构体
  */
-export interface DescribeWafThreatenIntelligenceResponse {
+export interface AddCustomWhiteRuleRequest {
     /**
-     * WAF 威胁情报封禁信息
+     * 规则名称
      */
-    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+    Name: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 优先级
      */
-    RequestId?: string;
+    SortId: string;
+    /**
+     * 过期时间
+     */
+    ExpireTime: string;
+    /**
+     * 策略详情
+     */
+    Strategies: Array<Strategy>;
+    /**
+     * 需要添加策略的域名
+     */
+    Domain: string;
+    /**
+     * 放行的详情
+     */
+    Bypass: string;
+    /**
+     * 定时任务类型
+     */
+    JobType?: string;
+    /**
+     * 定时任务配置
+     */
+    JobDateTime?: JobDateTime;
 }
 /**
  * 规则周期执行的数据结构
@@ -8545,13 +8537,13 @@ export interface AttackLogInfo {
     TimeStamp: string;
 }
 /**
- * DescribeCCAutoStatus返回参数结构体
+ * ModifyHostStatus返回参数结构体
  */
-export interface DescribeCCAutoStatusResponse {
+export interface ModifyHostStatusResponse {
     /**
-     * 配置状态，0表示关闭，1表示开启
+     * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
      */
-    AutoCCSwitch?: number;
+    Success?: ResponseCode;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8573,6 +8565,41 @@ export interface DescribeAntiInfoLeakRulesRequest {
      * 翻页
      */
     PageInfo?: PageInfo;
+}
+/**
+ * clb-waf QPS套餐 New
+ */
+export interface QPSPackageNew {
+    /**
+     * 资源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidTime: string;
+    /**
+     * 是否自动续费，1：自动续费，0：不自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag: number;
+    /**
+     * 套餐购买个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count: number;
+    /**
+     * 套餐购买地域，clb-waf暂时没有用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * 计费项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingItem?: string;
 }
 /**
  * 攻击日志统计详情

@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRuleTemplate", req, cb);
     }
     /**
-     * 实例诊断
+     * 实例诊断，用于诊断 INITIAL、DEPENDENCE、ALLOCATED、LAUNCHED、EVENT_LISTENING、BEFORE_ASPECT、EXPIRED、FAILED状态的实例
      */
     async DiagnosePro(req, cb) {
         return this.request("DiagnosePro", req, cb);

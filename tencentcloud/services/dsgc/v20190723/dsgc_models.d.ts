@@ -4357,7 +4357,7 @@ export interface DescribeDSPACategoryTreeWithRulesResponse {
      * 分类树json
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultJson: string;
+    ResultJson?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6323,13 +6323,13 @@ export interface DescribeDSPALevelGroupsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaDiscoveryLevelDetail>;
+    Items?: Array<DspaDiscoveryLevelDetail>;
     /**
      * 符合条件的敏感数据分级标识记录数
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9005,12 +9005,12 @@ export interface DescribeDSPALevelDetailResponse {
      * 符合条件的敏感数据分级标识记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<LevelItem>;
+    Items?: Array<LevelItem>;
     /**
      * 符合条件的敏感数据分级标识记录数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

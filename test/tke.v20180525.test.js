@@ -348,6 +348,16 @@ it("tke.v20180525.UninstallLogAgent", async function () {
     }
 })
 
+it("tke.v20180525.DescribePodChargeInfo", async function () {
+    try {
+       const data = await client.DescribePodChargeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeVersions", async function () {
     try {
        const data = await client.DescribeVersions({})

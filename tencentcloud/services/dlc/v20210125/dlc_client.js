@@ -610,6 +610,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEngineUsageInfo", req, cb);
     }
     /**
+     * 查看任务概览页
+     */
+    async DescribeTasksOverview(req, cb) {
+        return this.request("DescribeTasksOverview", req, cb);
+    }
+    /**
      * 用户某种操作，触发引擎配置修改
      */
     async UpdateDataEngineConfig(req, cb) {

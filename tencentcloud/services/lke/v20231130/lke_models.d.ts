@@ -260,6 +260,30 @@ export interface DeleteDocRequest {
     BotBizId: string;
 }
 /**
+ * ReconstructDocument返回参数结构体
+ */
+export interface ReconstructDocumentResponse {
+    /**
+     * 识别生成的Markdown文件base64编码的字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkdownBase64?: string;
+    /**
+     * 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InsetImagePackage?: string;
+    /**
+     * 输入文件中嵌入的图片中文字内容的识别结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocumentRecognizeInfo?: Array<DocumentRecognizeInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeApp返回参数结构体
  */
 export interface DescribeAppResponse {
@@ -568,22 +592,19 @@ export interface ModifyDocAttrRangeResponse {
     RequestId?: string;
 }
 /**
- * GetMsgRecord返回参数结构体
+ * DescribeQA请求参数结构体
  */
-export interface GetMsgRecordResponse {
+export interface DescribeQARequest {
     /**
-     * 会话记录
+     * QA业务ID
+  
      */
-    Records?: Array<MsgRecord>;
+    QaBizId: string;
     /**
-     * session 清除关联上下文时间, 单位 ms
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 机器人ID
+  
      */
-    SessionDisassociatedTimestamp?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    BotBizId: string;
 }
 /**
  * 属性标签引用信息
@@ -601,6 +622,18 @@ export interface AttrLabelRefer {
      * 标签ID
      */
     LabelBizIds?: Array<string>;
+}
+/**
+ * 创建智能文档解析任务的配置信息
+ */
+export interface CreateReconstructDocumentFlowConfig {
+    /**
+     * Markdown文件中表格返回的形式
+  0，表格以MD形式返回
+  1，表格以HTML形式返回
+  默认为1
+     */
+    TableResultType?: string;
 }
 /**
  * DescribeUnsatisfiedReplyContext请求参数结构体
@@ -2101,6 +2134,16 @@ export interface SaveDocRequest {
     Opt?: number;
 }
 /**
+ * 文档解析失败记录
+ */
+export interface ReconstructDocumentFailedPage {
+    /**
+     * 失败页码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageNumber?: number;
+}
+/**
  * ModifyQACate返回参数结构体
  */
 export interface ModifyQACateResponse {
@@ -2636,6 +2679,27 @@ export interface GroupQARequest {
     CateBizId: string;
 }
 /**
+ * RateMsgRecord请求参数结构体
+ */
+export interface RateMsgRecordRequest {
+    /**
+     * 机器人appKey
+     */
+    BotAppKey: string;
+    /**
+     * 消息ID
+     */
+    RecordId: string;
+    /**
+     * 1点赞2点踩
+     */
+    Score: number;
+    /**
+     * 原因
+     */
+    Reasons?: Array<string>;
+}
+/**
  * IsTransferIntent返回参数结构体
  */
 export interface IsTransferIntentResponse {
@@ -2649,19 +2713,22 @@ export interface IsTransferIntentResponse {
     RequestId?: string;
 }
 /**
- * DescribeQA请求参数结构体
+ * GetMsgRecord返回参数结构体
  */
-export interface DescribeQARequest {
+export interface GetMsgRecordResponse {
     /**
-     * QA业务ID
-  
+     * 会话记录
      */
-    QaBizId: string;
+    Records?: Array<MsgRecord>;
     /**
-     * 机器人ID
-  
+     * session 清除关联上下文时间, 单位 ms
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BotBizId: string;
+    SessionDisassociatedTimestamp?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeApp请求参数结构体
@@ -2679,6 +2746,15 @@ export interface DescribeAppRequest {
      * 是否发布后的配置
      */
     IsRelease?: boolean;
+}
+/**
+ * GetReconstructDocumentResult请求参数结构体
+ */
+export interface GetReconstructDocumentResultRequest {
+    /**
+     * 任务唯一id
+     */
+    TaskId: string;
 }
 /**
  * ListQA返回参数结构体
@@ -2911,25 +2987,26 @@ export interface ListDocItem {
     ExpireEnd?: string;
 }
 /**
- * RateMsgRecord请求参数结构体
+ * 文本的坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值
  */
-export interface RateMsgRecordRequest {
+export interface Polygon {
     /**
-     * 机器人appKey
+     * 左上顶点坐标
      */
-    BotAppKey: string;
+    LeftTop?: Coord;
     /**
-     * 消息ID
+     * 右上顶点坐标
      */
-    RecordId: string;
+    RightTop?: Coord;
     /**
-     * 1点赞2点踩
+     * 右下顶点坐标
      */
-    Score: number;
+    RightBottom?: Coord;
     /**
-     * 原因
+     * 左下顶点坐标
      */
-    Reasons?: Array<string>;
+    LeftBottom?: Coord;
 }
 /**
  * 应用模型配置
@@ -2977,6 +3054,32 @@ export interface ClassifyLabel {
     Values?: Array<string>;
 }
 /**
+ * ReconstructDocument请求参数结构体
+ */
+export interface ReconstructDocumentRequest {
+    /**
+     * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    FileBase64?: string;
+    /**
+     * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    FileUrl?: string;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+     */
+    FileStartPageNumber?: number;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+  单次调用，最多支持10页pdf的智能识别。
+     */
+    FileEndPageNumber?: number;
+    /**
+     * 配置选项，支持配置是否在生成的Markdown中是否嵌入图片
+     */
+    Config?: ReconstructDocumentConfig;
+}
+/**
  * RetryDocAudit返回参数结构体
  */
 export interface RetryDocAuditResponse {
@@ -2986,13 +3089,71 @@ export interface RetryDocAuditResponse {
     RequestId?: string;
 }
 /**
- * RetryRelease返回参数结构体
+ * GetReconstructDocumentResult返回参数结构体
  */
-export interface RetryReleaseResponse {
+export interface GetReconstructDocumentResultResponse {
+    /**
+     * 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行；
+     */
+    Status?: string;
+    /**
+     * 输入文件中嵌入的图片中文字内容的识别结果，存储在腾讯云cos的下载地址
+     */
+    DocumentRecognizeResultUrl?: string;
+    /**
+     * 还原失败的页
+     */
+    FailedPages?: Array<ReconstructDocumentFailedPage>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 发布拒答
+ */
+export interface RejectedQuestion {
+    /**
+     * 拒答问题ID
+  
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RejectedBizId?: string;
+    /**
+     * 被拒答的问题
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Question?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 状态描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusDesc?: string;
+    /**
+     * 更新时间
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 是否允许编辑
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAllowEdit?: boolean;
+    /**
+     * 是否允许删除
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAllowDelete?: boolean;
 }
 /**
  * SaveDoc返回参数结构体
@@ -3160,6 +3321,31 @@ export interface AppInfo {
     ModelAliasName?: string;
 }
 /**
+ * CreateReconstructDocumentFlow请求参数结构体
+ */
+export interface CreateReconstructDocumentFlowRequest {
+    /**
+     * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    FileBase64?: string;
+    /**
+     * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    FileUrl?: string;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+     */
+    FileStartPageNumber?: number;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+     */
+    FileEndPageNumber?: number;
+    /**
+     * 创建智能文档识别任务配置信息
+     */
+    Config?: CreateReconstructDocumentFlowConfig;
+}
+/**
  * QueryParseDocResult请求参数结构体
  */
 export interface QueryParseDocResultRequest {
@@ -3199,50 +3385,17 @@ export interface KnowledgeQaConfig {
     Output?: KnowledgeQaOutput;
 }
 /**
- * 发布拒答
+ * 坐标
  */
-export interface RejectedQuestion {
+export interface Coord {
     /**
-     * 拒答问题ID
-  
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 横坐标
      */
-    RejectedBizId?: string;
+    X?: number;
     /**
-     * 被拒答的问题
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 纵坐标
      */
-    Question?: string;
-    /**
-     * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * 状态描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StatusDesc?: string;
-    /**
-     * 更新时间
-  
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 是否允许编辑
-  
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsAllowEdit?: boolean;
-    /**
-     * 是否允许删除
-  
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsAllowDelete?: boolean;
+    Y?: number;
 }
 /**
  * 聊天详情Refer
@@ -3695,6 +3848,49 @@ export interface DeleteDocResponse {
     RequestId?: string;
 }
 /**
+ * 文档元素字段
+ */
+export interface DocumentElement {
+    /**
+     * 文档元素索引
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: number;
+    /**
+     * 元素类型，包括paragraph、table、formula、figure、title、header、footer、figure_text
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 元素内容，当type为figure或formula(公式识别关闭)时该字段内容为图片的位置
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Text?: string;
+    /**
+     * 元素坐标，左上角(x1, y1)，右上角(x2, y2)，右下角(x3, y3)，左下角(x4, y4)
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Polygon?: Polygon;
+    /**
+     * 元素层级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level?: number;
+    /**
+     * 入参开启EnableInsetImage后返回，表示在InsetImagePackage中的内嵌图片名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InsetImageName?: string;
+    /**
+     * 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Elements?: Array<DocumentElement>;
+}
+/**
  * 应用基础配置
  */
 export interface BaseConfig {
@@ -3798,6 +3994,15 @@ export interface GetAppKnowledgeCountResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RetryRelease返回参数结构体
+ */
+export interface RetryReleaseResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3970,6 +4175,33 @@ export interface DeleteAppRequest {
      * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
      */
     AppType: string;
+}
+/**
+ * CreateRejectedQuestion请求参数结构体
+ */
+export interface CreateRejectedQuestionRequest {
+    /**
+     * 机器人ID
+     */
+    BotBizId: string;
+    /**
+     * 拒答问题
+  
+  
+     */
+    Question: string;
+    /**
+     * 拒答问题来源的数据源唯一id，取值1，2
+  
+  
+     */
+    BusinessSource: number;
+    /**
+     * 拒答问题来源的数据源唯一id
+  
+  
+     */
+    BusinessId?: string;
 }
 /**
  * 当前执行的 token 统计信息
@@ -4423,31 +4655,64 @@ export interface DescribeRobotBizIDByAppKeyRequest {
     AppKey: string;
 }
 /**
- * CreateRejectedQuestion请求参数结构体
+ * 单页文档识别的内容
  */
-export interface CreateRejectedQuestionRequest {
+export interface DocumentRecognizeInfo {
     /**
-     * 机器人ID
+     * 输入PDF文件的页码，从1开始。输入图片的话值始终为1
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BotBizId: string;
+    PageNumber?: number;
     /**
-     * 拒答问题
+     * 旋转角度
   
-  
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Question: string;
+    Angle?: number;
     /**
-     * 拒答问题来源的数据源唯一id，取值1，2
-  
-  
+     * AI算法识别处理后的图片高度
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BusinessSource: number;
+    Height?: number;
     /**
-     * 拒答问题来源的数据源唯一id
-  
-  
+     * AI算法识别处理后的图片宽度
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BusinessId?: string;
+    Width?: number;
+    /**
+     * 图片的原始高度，输入PDF文件则表示单页PDF转图片之后的图片高度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginHeight?: number;
+    /**
+     * 图片的原始宽度，输入PDF文件则表示单页PDF转图片之后的图片宽度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginWidth?: number;
+    /**
+     * 文档元素信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Elements?: Array<DocumentElement>;
+    /**
+     * 旋转角度
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RotatedAngle?: number;
+}
+/**
+ * CreateReconstructDocumentFlow返回参数结构体
+ */
+export interface CreateReconstructDocumentFlowResponse {
+    /**
+     * 任务唯一id
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ListRejectedQuestion请求参数结构体
@@ -4579,6 +4844,15 @@ export interface StopDocParseRequest {
      * 文档ID
      */
     DocBizId: string;
+}
+/**
+ * ReconstructDocument配置选项
+ */
+export interface ReconstructDocumentConfig {
+    /**
+     * 生成的Markdown中是否嵌入图片
+     */
+    EnableInsetImage?: boolean;
 }
 /**
  * ListSelectDoc请求参数结构体

@@ -241,7 +241,6 @@ export declare class Client extends AbstractClient {
     InstanceScalingDown(req: InstanceScalingDownRequest, cb?: (error: string, rep: InstanceScalingDownResponse) => void): Promise<InstanceScalingDownResponse>;
     /**
      * 获取主题属性
-
      */
     DescribeTopicAttributes(req: DescribeTopicAttributesRequest, cb?: (error: string, rep: DescribeTopicAttributesResponse) => void): Promise<DescribeTopicAttributesResponse>;
     /**

@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     CreateRuleTemplate(req: CreateRuleTemplateRequest, cb?: (error: string, rep: CreateRuleTemplateResponse) => void): Promise<CreateRuleTemplateResponse>;
     /**
-     * 实例诊断
+     * 实例诊断，用于诊断 INITIAL、DEPENDENCE、ALLOCATED、LAUNCHED、EVENT_LISTENING、BEFORE_ASPECT、EXPIRED、FAILED状态的实例
      */
     DiagnosePro(req: DiagnoseProRequest, cb?: (error: string, rep: DiagnoseProResponse) => void): Promise<DiagnoseProResponse>;
     /**

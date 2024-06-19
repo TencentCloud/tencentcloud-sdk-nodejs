@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UninstallLogAgent", req, cb);
     }
     /**
+     * 查询正在运行中Pod的计费信息。可以通过 Namespace 和 Name 来查询某个 Pod 的信息，也可以通过 Pod 的 Uid 批量查询。
+     */
+    async DescribePodChargeInfo(req, cb) {
+        return this.request("DescribePodChargeInfo", req, cb);
+    }
+    /**
      * 获取集群版本信息
      */
     async DescribeVersions(req, cb) {

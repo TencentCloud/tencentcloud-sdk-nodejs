@@ -52,7 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMicroservices", req, cb);
     }
     /**
-     * 查询应用关联日志配置项信息
+     * 接口未使用，废弃录用
+
+查询应用关联日志配置项信息
      */
     async DescribeApplicationBusinessLogConfig(req, cb) {
         return this.request("DescribeApplicationBusinessLogConfig", req, cb);

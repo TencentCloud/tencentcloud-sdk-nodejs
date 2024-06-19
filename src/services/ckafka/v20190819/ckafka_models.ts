@@ -871,7 +871,7 @@ export interface DescribeAclRuleResponse {
   /**
    * 返回的AclRule结果集对象
    */
-  Result: AclRuleResp
+  Result?: AclRuleResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -931,7 +931,7 @@ export interface DescribeTopicSubscribeGroupResponse {
   /**
    * 返回结果
    */
-  Result: TopicSubscribeGroup
+  Result?: TopicSubscribeGroup
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1809,67 +1809,67 @@ export interface AclRule {
    * Acl规则名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PatternType: string
+  PatternType?: string
   /**
    * 表示前缀匹配的前缀的值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pattern: string
+  Pattern?: string
   /**
    * Acl资源类型,目前只支持Topic,枚举值列表：Topic
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 该规则所包含的ACL信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AclList: string
+  AclList?: string
   /**
    * 规则所创建的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTimeStamp: string
+  CreateTimeStamp?: string
   /**
    * 预设ACL规则是否应用到新增的topic中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsApplied: number
+  IsApplied?: number
   /**
    * 规则更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTimeStamp: string
+  UpdateTimeStamp?: string
   /**
    * 规则的备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comment: string
+  Comment?: string
   /**
    * 其中一个显示的对应的TopicName
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 应用该ACL规则的Topic数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicCount: number
+  TopicCount?: number
   /**
    * patternType的中文显示
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PatternTypeTitle: string
+  PatternTypeTitle?: string
 }
 
 /**
@@ -2489,7 +2489,7 @@ export interface DescribeACLResponse {
   /**
    * 返回的ACL结果集对象
    */
-  Result: AclResponse
+  Result?: AclResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2594,7 +2594,7 @@ export interface DescribeTopicResponse {
    * 返回的结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TopicResult
+  Result?: TopicResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2787,7 +2787,7 @@ export interface CreateConsumerResponse {
   /**
    * 创建group描述
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3682,7 +3682,7 @@ export interface DeleteRouteResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3933,7 +3933,7 @@ export interface DeleteAclResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4379,7 +4379,7 @@ export interface ModifyTopicAttributesResponse {
   /**
    * 返回结果集
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4917,58 +4917,83 @@ export interface ZoneResponse {
   /**
    * zone列表
    */
-  ZoneList: Array<ZoneInfo>
+  ZoneList?: Array<ZoneInfo>
   /**
    * 最大购买实例个数
    */
-  MaxBuyInstanceNum: number
+  MaxBuyInstanceNum?: number
   /**
    * 最大购买带宽 单位Mb/s
    */
-  MaxBandwidth: number
+  MaxBandwidth?: number
   /**
    * 后付费单位价格
    */
-  UnitPrice: Price
+  UnitPrice?: Price
   /**
    * 后付费消息单价
    */
-  MessagePrice: Price
+  MessagePrice?: Price
   /**
    * 用户独占集群信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterInfo: Array<ClusterInfo>
+  ClusterInfo?: Array<ClusterInfo>
   /**
    * 购买标准版配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Standard: string
+  Standard?: string
   /**
    * 购买标准版S2配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StandardS2: string
+  StandardS2?: string
   /**
    * 购买专业版配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Profession: string
+  Profession?: string
   /**
    * 购买物理独占版配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Physical: string
+  Physical?: string
   /**
    * 公网带宽
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicNetwork: string
+  PublicNetwork?: string
   /**
    * 公网带宽配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicNetworkLimit: string
+  PublicNetworkLimit?: string
+  /**
+   * 请求ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestId?: string
+  /**
+   * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 分页offset
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 分页limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 是否必须录入tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForceCheckTag?: boolean
 }
 
 /**
@@ -5307,7 +5332,7 @@ export interface DescribeRegionResponse {
    * 返回地域枚举结果列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: Array<Region>
+  Result?: Array<Region>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5321,7 +5346,7 @@ export interface CreateTopicResponse {
   /**
    * 返回创建结果
    */
-  Result: CreateTopicResp
+  Result?: CreateTopicResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5394,7 +5419,7 @@ export interface DescribeTopicProduceConnectionResponse {
   /**
    * 链接信息返回结果集
    */
-  Result: Array<DescribeConnectInfoResultDTO>
+  Result?: Array<DescribeConnectInfoResultDTO>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5520,7 +5545,7 @@ export interface DescribeTopicAttributesResponse {
   /**
    * 返回的结果对象
    */
-  Result: TopicAttributesResponse
+  Result?: TopicAttributesResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5989,7 +6014,7 @@ export interface DescribeDatahubTopicsResponse {
    * 主题列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: DescribeDatahubTopicsResp
+  Result?: DescribeDatahubTopicsResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6576,7 +6601,7 @@ export interface FetchMessageByOffsetResponse {
   /**
    * 返回结果
    */
-  Result: ConsumerRecord
+  Result?: ConsumerRecord
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7102,7 +7127,7 @@ export interface DescribeCkafkaZoneResponse {
   /**
    * 查询结果复杂对象实体
    */
-  Result: ZoneResponse
+  Result?: ZoneResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8075,7 +8100,7 @@ export interface DeleteGroupResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8402,13 +8427,13 @@ export interface ModifyTopicAttributesRequest {
    */
   RetentionMs?: number
   /**
-   * Segment 分片滚动的时长，单位：ms，当前最小为86400000ms。
-   */
-  SegmentMs?: number
-  /**
    * 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。
    */
   MaxMessageBytes?: number
+  /**
+   * Segment 分片滚动的时长，单位：ms，当前最小为300000ms。
+   */
+  SegmentMs?: number
   /**
    * 消息删除策略，可以选择delete 或者compact
    */
@@ -9019,7 +9044,7 @@ export interface DescribeTopicDetailResponse {
   /**
    * 返回的主题详情实体
    */
-  Result: TopicDetailResponse
+  Result?: TopicDetailResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

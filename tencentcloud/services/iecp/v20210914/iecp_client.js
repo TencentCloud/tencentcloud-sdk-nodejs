@@ -34,7 +34,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespace", req, cb);
     }
     /**
-     * 获取单元可视化配置信息
+     * 产品停售，预下线
+
+获取单元可视化配置信息
      */
     async DescribeEdgeUnitApplicationVisualization(req, cb) {
         return this.request("DescribeEdgeUnitApplicationVisualization", req, cb);
@@ -82,7 +84,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeUnitDeployGridItemYaml", req, cb);
     }
     /**
-     * yaml方式创建应用
+     * 产品停售，预下线
+
+yaml方式创建应用
      */
     async CreateEdgeUnitApplicationYaml(req, cb) {
         return this.request("CreateEdgeUnitApplicationYaml", req, cb);
@@ -94,7 +98,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConfigMap", req, cb);
     }
     /**
-     * 获取应用事件列表
+     * 产品停售，预下线
+
+获取应用事件列表
      */
     async DescribeEdgeUnitApplicationEvents(req, cb) {
         return this.request("DescribeEdgeUnitApplicationEvents", req, cb);
@@ -160,7 +166,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeNodes", req, cb);
     }
     /**
-     * 获取应用模板列表
+     * 产品停售，预下线
+
+获取应用模板列表
      */
     async DescribeApplications(req, cb) {
         return this.request("DescribeApplications", req, cb);
@@ -250,7 +258,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEdgeUnitDeployGridItem", req, cb);
     }
     /**
-     * 获取应用的Yaml配置
+     * 产品停售，预下线
+
+获取应用的Yaml配置
      */
     async DescribeEdgeUnitApplicationYaml(req, cb) {
         return this.request("DescribeEdgeUnitApplicationYaml", req, cb);
@@ -262,13 +272,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEdgeUnitApplicationVisualization", req, cb);
     }
     /**
-     * 删除应用模板
+     * 产品停售，预下线
+
+删除应用模板
      */
     async DeleteApplications(req, cb) {
         return this.request("DeleteApplications", req, cb);
     }
     /**
-     * 修改应用模板配置
+     * 产品停售，预下线
+
+修改应用模板配置
      */
     async ModifyApplicationVisualization(req, cb) {
         return this.request("ModifyApplicationVisualization", req, cb);
@@ -298,7 +312,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNodeUnit", req, cb);
     }
     /**
-     * 检查单元应用的Yaml配置
+     * 产品停售，预下线
+
+检查单元应用的Yaml配置
      */
     async DescribeEdgeUnitApplicationYamlError(req, cb) {
         return this.request("DescribeEdgeUnitApplicationYamlError", req, cb);
@@ -346,7 +362,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNodeUnit", req, cb);
     }
     /**
-     * 获取应用日志
+     * 产品停售，预下线
+
+获取应用日志
      */
     async DescribeEdgeUnitApplicationLogs(req, cb) {
         return this.request("DescribeEdgeUnitApplicationLogs", req, cb);
@@ -364,7 +382,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIotDevice", req, cb);
     }
     /**
-     * 检查应用模板的Yaml配置
+     * 产品停售，预下线
+
+检查应用模板的Yaml配置
      */
     async DescribeApplicationYamlError(req, cb) {
         return this.request("DescribeApplicationYamlError", req, cb);
@@ -394,7 +414,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecret", req, cb);
     }
     /**
-     * 可视化创建应用
+     * 产品停售，预下线
+
+可视化创建应用
      */
     async CreateEdgeUnitApplicationVisualization(req, cb) {
         return this.request("CreateEdgeUnitApplicationVisualization", req, cb);
@@ -418,13 +440,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMessageRoute", req, cb);
     }
     /**
-     * 从组件市场选中组件并添加到应用模板列表
+     * 产品停售，预下线
+
+从组件市场选中组件并添加到应用模板列表
      */
     async ApplyMarketComponent(req, cb) {
         return this.request("ApplyMarketComponent", req, cb);
     }
     /**
-     * 获取应用模板可视化配置信息
+     * 产品停售，预下线
+
+获取应用模板可视化配置信息
      */
     async DescribeApplicationVisualization(req, cb) {
         return this.request("DescribeApplicationVisualization", req, cb);
@@ -466,13 +492,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgePod", req, cb);
     }
     /**
-     * 获取应用下Pod状态
+     * 产品停售，预下线
+
+获取应用下Pod状态
      */
     async DescribeEdgeUnitApplicationPods(req, cb) {
         return this.request("DescribeEdgeUnitApplicationPods", req, cb);
     }
     /**
-     * 删除应用列表
+     * 产品停售，预下线
+
+删除应用列表
      */
     async DeleteEdgeUnitApplications(req, cb) {
         return this.request("DeleteEdgeUnitApplications", req, cb);
@@ -508,7 +538,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConfigMap", req, cb);
     }
     /**
-     * 查询边缘集群详情
+     * 产品停售，预下线
+
+查询边缘集群详情
      */
     async DescribeEdgeUnitCloud(req, cb) {
         return this.request("DescribeEdgeUnitCloud", req, cb);
@@ -556,7 +588,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEdgeUnitCloudApi", req, cb);
     }
     /**
-     * 修改应用模板基本信息
+     * 产品停售，预下线
+
+修改应用模板基本信息
      */
     async ModifyApplicationBasicInfo(req, cb) {
         return this.request("ModifyApplicationBasicInfo", req, cb);
@@ -568,7 +602,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeUnitDeployGridItem", req, cb);
     }
     /**
-     * 查询应用模板Yaml
+     * 产品停售，预下线
+
+查询应用模板Yaml
      */
     async DescribeApplicationYaml(req, cb) {
         return this.request("DescribeApplicationYaml", req, cb);
@@ -580,7 +616,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEdgeUnitApplicationBasicInfo", req, cb);
     }
     /**
-     * 创建可视化创建应用模板
+     * 产品停售，预下线
+
+创建可视化创建应用模板
      */
     async CreateApplicationVisualization(req, cb) {
         return this.request("CreateApplicationVisualization", req, cb);
@@ -598,7 +636,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeNodePodContainers", req, cb);
     }
     /**
-     * 获取应用容器状态
+     * 产品停售，预下线
+
+获取应用容器状态
      */
     async DescribeEdgeUnitApplicationPodContainers(req, cb) {
         return this.request("DescribeEdgeUnitApplicationPodContainers", req, cb);

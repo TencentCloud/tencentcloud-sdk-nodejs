@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRejectedQuestion", req, cb);
     }
     /**
+     * 更新问答
+     */
+    async ModifyQA(req, cb) {
+        return this.request("ModifyQA", req, cb);
+    }
+    /**
      * 检查属性下的标签名是否存在
      */
     async CheckAttributeLabelExist(req, cb) {
@@ -82,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRejectedQuestion", req, cb);
     }
     /**
+     * 获取文档解析任务执行结果
+     */
+    async GetReconstructDocumentResult(req, cb) {
+        return this.request("GetReconstructDocumentResult", req, cb);
+    }
+    /**
      * 获取账户信息
      */
     async ListSelectDoc(req, cb) {
@@ -95,10 +107,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryRewrite", req, cb);
     }
     /**
-     * 更新问答
+     * 获取不满意回复上下文
      */
-    async ModifyQA(req, cb) {
-        return this.request("ModifyQA", req, cb);
+    async DescribeUnsatisfiedReplyContext(req, cb) {
+        return this.request("DescribeUnsatisfiedReplyContext", req, cb);
     }
     /**
      * 批量修改文档适用范围
@@ -234,10 +246,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAttributeLabel", req, cb);
     }
     /**
-     * 获取不满意回复上下文
+     * 文档解析，异步接口。
      */
-    async DescribeUnsatisfiedReplyContext(req, cb) {
-        return this.request("DescribeUnsatisfiedReplyContext", req, cb);
+    async CreateReconstructDocumentFlow(req, cb) {
+        return this.request("CreateReconstructDocumentFlow", req, cb);
     }
     /**
      * 上传导入属性标签
@@ -448,6 +460,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportUnsatisfiedReply(req, cb) {
         return this.request("ExportUnsatisfiedReply", req, cb);
+    }
+    /**
+     * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+     */
+    async ReconstructDocument(req, cb) {
+        return this.request("ReconstructDocument", req, cb);
     }
     /**
      * 重置会话

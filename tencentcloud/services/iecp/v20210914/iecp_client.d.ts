@@ -12,7 +12,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNamespace(req: DescribeNamespaceRequest, cb?: (error: string, rep: DescribeNamespaceResponse) => void): Promise<DescribeNamespaceResponse>;
     /**
-     * 获取单元可视化配置信息
+     * 产品停售，预下线
+
+获取单元可视化配置信息
      */
     DescribeEdgeUnitApplicationVisualization(req: DescribeEdgeUnitApplicationVisualizationRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationVisualizationResponse) => void): Promise<DescribeEdgeUnitApplicationVisualizationResponse>;
     /**
@@ -44,7 +46,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEdgeUnitDeployGridItemYaml(req: DescribeEdgeUnitDeployGridItemYamlRequest, cb?: (error: string, rep: DescribeEdgeUnitDeployGridItemYamlResponse) => void): Promise<DescribeEdgeUnitDeployGridItemYamlResponse>;
     /**
-     * yaml方式创建应用
+     * 产品停售，预下线
+
+yaml方式创建应用
      */
     CreateEdgeUnitApplicationYaml(req: CreateEdgeUnitApplicationYamlRequest, cb?: (error: string, rep: CreateEdgeUnitApplicationYamlResponse) => void): Promise<CreateEdgeUnitApplicationYamlResponse>;
     /**
@@ -52,7 +56,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyConfigMap(req: ModifyConfigMapRequest, cb?: (error: string, rep: ModifyConfigMapResponse) => void): Promise<ModifyConfigMapResponse>;
     /**
-     * 获取应用事件列表
+     * 产品停售，预下线
+
+获取应用事件列表
      */
     DescribeEdgeUnitApplicationEvents(req: DescribeEdgeUnitApplicationEventsRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationEventsResponse) => void): Promise<DescribeEdgeUnitApplicationEventsResponse>;
     /**
@@ -96,7 +102,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEdgeNodes(req: DescribeEdgeNodesRequest, cb?: (error: string, rep: DescribeEdgeNodesResponse) => void): Promise<DescribeEdgeNodesResponse>;
     /**
-     * 获取应用模板列表
+     * 产品停售，预下线
+
+获取应用模板列表
      */
     DescribeApplications(req: DescribeApplicationsRequest, cb?: (error: string, rep: DescribeApplicationsResponse) => void): Promise<DescribeApplicationsResponse>;
     /**
@@ -156,7 +164,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteEdgeUnitDeployGridItem(req: DeleteEdgeUnitDeployGridItemRequest, cb?: (error: string, rep: DeleteEdgeUnitDeployGridItemResponse) => void): Promise<DeleteEdgeUnitDeployGridItemResponse>;
     /**
-     * 获取应用的Yaml配置
+     * 产品停售，预下线
+
+获取应用的Yaml配置
      */
     DescribeEdgeUnitApplicationYaml(req: DescribeEdgeUnitApplicationYamlRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationYamlResponse) => void): Promise<DescribeEdgeUnitApplicationYamlResponse>;
     /**
@@ -164,11 +174,15 @@ export declare class Client extends AbstractClient {
      */
     ModifyEdgeUnitApplicationVisualization(req: ModifyEdgeUnitApplicationVisualizationRequest, cb?: (error: string, rep: ModifyEdgeUnitApplicationVisualizationResponse) => void): Promise<ModifyEdgeUnitApplicationVisualizationResponse>;
     /**
-     * 删除应用模板
+     * 产品停售，预下线
+
+删除应用模板
      */
     DeleteApplications(req: DeleteApplicationsRequest, cb?: (error: string, rep: DeleteApplicationsResponse) => void): Promise<DeleteApplicationsResponse>;
     /**
-     * 修改应用模板配置
+     * 产品停售，预下线
+
+修改应用模板配置
      */
     ModifyApplicationVisualization(req: ModifyApplicationVisualizationRequest, cb?: (error: string, rep: ModifyApplicationVisualizationResponse) => void): Promise<ModifyApplicationVisualizationResponse>;
     /**
@@ -188,7 +202,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNodeUnit(req: DescribeNodeUnitRequest, cb?: (error: string, rep: DescribeNodeUnitResponse) => void): Promise<DescribeNodeUnitResponse>;
     /**
-     * 检查单元应用的Yaml配置
+     * 产品停售，预下线
+
+检查单元应用的Yaml配置
      */
     DescribeEdgeUnitApplicationYamlError(req: DescribeEdgeUnitApplicationYamlErrorRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationYamlErrorResponse) => void): Promise<DescribeEdgeUnitApplicationYamlErrorResponse>;
     /**
@@ -220,7 +236,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteNodeUnit(req: DeleteNodeUnitRequest, cb?: (error: string, rep: DeleteNodeUnitResponse) => void): Promise<DeleteNodeUnitResponse>;
     /**
-     * 获取应用日志
+     * 产品停售，预下线
+
+获取应用日志
      */
     DescribeEdgeUnitApplicationLogs(req: DescribeEdgeUnitApplicationLogsRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationLogsResponse) => void): Promise<DescribeEdgeUnitApplicationLogsResponse>;
     /**
@@ -232,7 +250,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteIotDevice(req: DeleteIotDeviceRequest, cb?: (error: string, rep: DeleteIotDeviceResponse) => void): Promise<DeleteIotDeviceResponse>;
     /**
-     * 检查应用模板的Yaml配置
+     * 产品停售，预下线
+
+检查应用模板的Yaml配置
      */
     DescribeApplicationYamlError(req: DescribeApplicationYamlErrorRequest, cb?: (error: string, rep: DescribeApplicationYamlErrorResponse) => void): Promise<DescribeApplicationYamlErrorResponse>;
     /**
@@ -252,7 +272,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteSecret(req: DeleteSecretRequest, cb?: (error: string, rep: DeleteSecretResponse) => void): Promise<DeleteSecretResponse>;
     /**
-     * 可视化创建应用
+     * 产品停售，预下线
+
+可视化创建应用
      */
     CreateEdgeUnitApplicationVisualization(req: CreateEdgeUnitApplicationVisualizationRequest, cb?: (error: string, rep: CreateEdgeUnitApplicationVisualizationResponse) => void): Promise<CreateEdgeUnitApplicationVisualizationResponse>;
     /**
@@ -268,11 +290,15 @@ export declare class Client extends AbstractClient {
      */
     DeleteMessageRoute(req: DeleteMessageRouteRequest, cb?: (error: string, rep: DeleteMessageRouteResponse) => void): Promise<DeleteMessageRouteResponse>;
     /**
-     * 从组件市场选中组件并添加到应用模板列表
+     * 产品停售，预下线
+
+从组件市场选中组件并添加到应用模板列表
      */
     ApplyMarketComponent(req: ApplyMarketComponentRequest, cb?: (error: string, rep: ApplyMarketComponentResponse) => void): Promise<ApplyMarketComponentResponse>;
     /**
-     * 获取应用模板可视化配置信息
+     * 产品停售，预下线
+
+获取应用模板可视化配置信息
      */
     DescribeApplicationVisualization(req: DescribeApplicationVisualizationRequest, cb?: (error: string, rep: DescribeApplicationVisualizationResponse) => void): Promise<DescribeApplicationVisualizationResponse>;
     /**
@@ -300,11 +326,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeEdgePod(req: DescribeEdgePodRequest, cb?: (error: string, rep: DescribeEdgePodResponse) => void): Promise<DescribeEdgePodResponse>;
     /**
-     * 获取应用下Pod状态
+     * 产品停售，预下线
+
+获取应用下Pod状态
      */
     DescribeEdgeUnitApplicationPods(req: DescribeEdgeUnitApplicationPodsRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationPodsResponse) => void): Promise<DescribeEdgeUnitApplicationPodsResponse>;
     /**
-     * 删除应用列表
+     * 产品停售，预下线
+
+删除应用列表
      */
     DeleteEdgeUnitApplications(req: DeleteEdgeUnitApplicationsRequest, cb?: (error: string, rep: DeleteEdgeUnitApplicationsResponse) => void): Promise<DeleteEdgeUnitApplicationsResponse>;
     /**
@@ -328,7 +358,9 @@ export declare class Client extends AbstractClient {
      */
     CreateConfigMap(req: CreateConfigMapRequest, cb?: (error: string, rep: CreateConfigMapResponse) => void): Promise<CreateConfigMapResponse>;
     /**
-     * 查询边缘集群详情
+     * 产品停售，预下线
+
+查询边缘集群详情
      */
     DescribeEdgeUnitCloud(req: DescribeEdgeUnitCloudRequest, cb?: (error: string, rep: DescribeEdgeUnitCloudResponse) => void): Promise<DescribeEdgeUnitCloudResponse>;
     /**
@@ -360,7 +392,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyEdgeUnitCloudApi(req: ModifyEdgeUnitCloudApiRequest, cb?: (error: string, rep: ModifyEdgeUnitCloudApiResponse) => void): Promise<ModifyEdgeUnitCloudApiResponse>;
     /**
-     * 修改应用模板基本信息
+     * 产品停售，预下线
+
+修改应用模板基本信息
      */
     ModifyApplicationBasicInfo(req: ModifyApplicationBasicInfoRequest, cb?: (error: string, rep: ModifyApplicationBasicInfoResponse) => void): Promise<ModifyApplicationBasicInfoResponse>;
     /**
@@ -368,7 +402,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEdgeUnitDeployGridItem(req: DescribeEdgeUnitDeployGridItemRequest, cb?: (error: string, rep: DescribeEdgeUnitDeployGridItemResponse) => void): Promise<DescribeEdgeUnitDeployGridItemResponse>;
     /**
-     * 查询应用模板Yaml
+     * 产品停售，预下线
+
+查询应用模板Yaml
      */
     DescribeApplicationYaml(req: DescribeApplicationYamlRequest, cb?: (error: string, rep: DescribeApplicationYamlResponse) => void): Promise<DescribeApplicationYamlResponse>;
     /**
@@ -376,7 +412,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyEdgeUnitApplicationBasicInfo(req: ModifyEdgeUnitApplicationBasicInfoRequest, cb?: (error: string, rep: ModifyEdgeUnitApplicationBasicInfoResponse) => void): Promise<ModifyEdgeUnitApplicationBasicInfoResponse>;
     /**
-     * 创建可视化创建应用模板
+     * 产品停售，预下线
+
+创建可视化创建应用模板
      */
     CreateApplicationVisualization(req: CreateApplicationVisualizationRequest, cb?: (error: string, rep: CreateApplicationVisualizationResponse) => void): Promise<CreateApplicationVisualizationResponse>;
     /**
@@ -388,7 +426,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEdgeNodePodContainers(req: DescribeEdgeNodePodContainersRequest, cb?: (error: string, rep: DescribeEdgeNodePodContainersResponse) => void): Promise<DescribeEdgeNodePodContainersResponse>;
     /**
-     * 获取应用容器状态
+     * 产品停售，预下线
+
+获取应用容器状态
      */
     DescribeEdgeUnitApplicationPodContainers(req: DescribeEdgeUnitApplicationPodContainersRequest, cb?: (error: string, rep: DescribeEdgeUnitApplicationPodContainersResponse) => void): Promise<DescribeEdgeUnitApplicationPodContainersResponse>;
     /**

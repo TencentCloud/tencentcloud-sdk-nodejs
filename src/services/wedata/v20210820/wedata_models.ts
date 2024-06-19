@@ -10589,6 +10589,14 @@ export interface DescribeFieldBasicInfoRequest {
  */
 export interface DiagnoseProRequest {
   /**
+   * 查询条件（当前接口TaskId和CurRunDate需要填充在该字段方可诊断）
+   */
+  SearchCondition: InstanceApiOpsRequest
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
    * 实例列表
    */
   Instances?: Array<InstanceOpsDto>
@@ -10613,10 +10621,6 @@ export interface DiagnoseProRequest {
    */
   SonInstanceType?: string
   /**
-   * 查询条件（当前接口TaskId和CurRunDate需要填充在该字段方可诊断）
-   */
-  SearchCondition?: InstanceApiOpsRequest
-  /**
    * 访问类型
    */
   OptType?: string
@@ -10628,10 +10632,6 @@ export interface DiagnoseProRequest {
    * 操作者id
    */
   OperatorId?: string
-  /**
-   * 项目id
-   */
-  ProjectId?: string
   /**
    * 项目标志
    */
@@ -13253,6 +13253,11 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LarkWebHooks?: string
+  /**
+   * 钉钉群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DingDingWebHooks?: string
 }
 
 /**

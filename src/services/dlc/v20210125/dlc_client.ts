@@ -168,6 +168,7 @@ import {
   CancelTaskResponse,
   TableInfo,
   DescribeSparkSessionBatchSQLResponse,
+  DescribeTasksOverviewResponse,
   KafkaInfo,
   FavorInfo,
   DeleteDataEngineRequest,
@@ -226,6 +227,7 @@ import {
   CreateUserResponse,
   DescribeNotebookSessionStatementsRequest,
   UpdateDataEngineResponse,
+  DescribeTasksOverviewRequest,
   TPartition,
   LakeFsInfo,
   QueryResultRequest,
@@ -1377,6 +1379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEngineUsageInfoResponse) => void
   ): Promise<DescribeEngineUsageInfoResponse> {
     return this.request("DescribeEngineUsageInfo", req, cb)
+  }
+
+  /**
+   * 查看任务概览页
+   */
+  async DescribeTasksOverview(
+    req?: DescribeTasksOverviewRequest,
+    cb?: (error: string, rep: DescribeTasksOverviewResponse) => void
+  ): Promise<DescribeTasksOverviewResponse> {
+    return this.request("DescribeTasksOverview", req, cb)
   }
 
   /**

@@ -135,36 +135,36 @@ export interface ContainerState {
    * 容器运行开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 容器状态：created, running, exited, unknown
    */
-  State: string
+  State?: string
   /**
    * 容器运行结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FinishTime: string
+  FinishTime?: string
   /**
    * 容器运行退出码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExitCode: number
+  ExitCode?: number
   /**
    * 容器状态 Reason
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 容器状态信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
   /**
    * 容器重启次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RestartCount: number
+  RestartCount?: number
 }
 
 /**
@@ -918,7 +918,7 @@ export interface EnvironmentVariable {
  */
 export interface UpdateImageCacheRequest {
   /**
-   * 镜像缓存Id
+   * 镜像缓存ID
    */
   ImageCacheId: string
   /**
@@ -2222,39 +2222,39 @@ export interface ImageCache {
   /**
    * 镜像缓存Id
    */
-  ImageCacheId: string
+  ImageCacheId?: string
   /**
    * 镜像缓存名称
    */
-  ImageCacheName: string
+  ImageCacheName?: string
   /**
    * 镜像缓存大小。单位：GiB
    */
-  ImageCacheSize: number
+  ImageCacheSize?: number
   /**
    * 镜像缓存包含的镜像列表
    */
-  Images: Array<string>
+  Images?: Array<string>
   /**
    * 创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 到期时间
    */
-  ExpireDateTime: string
+  ExpireDateTime?: string
   /**
    * 镜像缓存事件信息
    */
-  Events: Array<ImageCacheEvent>
+  Events?: Array<ImageCacheEvent>
   /**
    * 最新一次匹配到镜像缓存的时间
    */
-  LastMatchedTime: string
+  LastMatchedTime?: string
   /**
    * 镜像缓存对应的快照Id
    */
-  SnapshotId: string
+  SnapshotId?: string
   /**
    * 镜像缓存状态，可能取值：
 Pending：创建中
@@ -2264,7 +2264,7 @@ Updating：更新中
 UpdateFailed：更新失败
 只有状态为Ready时，才能正常使用镜像缓存
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -3191,11 +3191,11 @@ export interface CreateImageCacheRequest {
    */
   Images: Array<string>
   /**
-   * 实例所属子网Id
+   * 实例所属子网 ID
    */
   SubnetId: string
   /**
-   * 实例所属VPC Id
+   * 实例所属 VPC ID
    */
   VpcId: string
   /**
@@ -3203,7 +3203,7 @@ export interface CreateImageCacheRequest {
    */
   ImageCacheName?: string
   /**
-   * 安全组Id
+   * 安全组 ID
    */
   SecurityGroupIds?: Array<string>
   /**
@@ -6106,6 +6106,54 @@ export interface ClusterLevelAttribute {
 }
 
 /**
+ * Pod计费信息
+ */
+export interface PodChargeInfo {
+  /**
+   * Pod计费开始时间
+   */
+  StartTime?: string
+  /**
+   * Pod的Uid
+   */
+  Uid?: string
+  /**
+   * Pod的CPU
+   */
+  Cpu?: number
+  /**
+   * Pod的内存
+   */
+  Memory?: number
+  /**
+   * Pod类型：intel、amd、v100、t4、a10\*gnv4、a10\*gnv4v等。
+   */
+  Type?: string
+  /**
+   * Pod是GPU时，表示GPU卡数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gpu?: string
+  /**
+   * 计费类型
+PREPAID：Pod调度到包月超级节点
+POSTPAID_BY_HOUR：按量计费
+RESERVED_INSTANCE：上个周期被预留券抵扣
+SPOT：竞价实例
+TPOD：特惠实例
+   */
+  ChargeType?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * Pod名称
+   */
+  Name?: string
+}
+
+/**
  * RemoveNodeFromNodePool返回参数结构体
  */
 export interface RemoveNodeFromNodePoolResponse {
@@ -7222,6 +7270,28 @@ export interface PodNodeInfo {
 }
 
 /**
+ * DescribePodChargeInfo请求参数结构体
+ */
+export interface DescribePodChargeInfoRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * Pod名称
+   */
+  Name?: string
+  /**
+   * Pod的Uid
+   */
+  Uids?: Array<string>
+}
+
+/**
  * ForwardTKEEdgeApplicationRequestV3返回参数结构体
  */
 export interface ForwardTKEEdgeApplicationRequestV3Response {
@@ -7773,6 +7843,11 @@ export interface DescribeIPAMDResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClaimExpiredDuration?: string
+  /**
+   * 是否开启了中继网卡模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableTrunkingENI?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8901,11 +8976,11 @@ export interface DescribeImageCachesResponse {
   /**
    * 镜像缓存总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 镜像缓存信息列表
    */
-  ImageCaches: Array<ImageCache>
+  ImageCaches?: Array<ImageCache>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9320,12 +9395,12 @@ export interface GetMostSuitableImageCacheResponse {
   /**
    * 是否有匹配的镜像缓存
    */
-  Found: boolean
+  Found?: boolean
   /**
    * 匹配的镜像缓存
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageCache: ImageCache
+  ImageCache?: ImageCache
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10109,7 +10184,7 @@ export interface CreateImageCacheResponse {
   /**
    * 镜像缓存Id
    */
-  ImageCacheId: string
+  ImageCacheId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12073,12 +12148,12 @@ export interface DescribeEnableVpcCniProgressResponse {
   /**
    * 任务进度的描述：Running/Succeed/Failed
    */
-  Status: string
+  Status?: string
   /**
    * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12825,6 +12900,20 @@ export interface DescribeClusterInspectionResultsOverviewResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InspectionOverview?: Array<KubeJarvisStateInspectionOverview>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePodChargeInfo返回参数结构体
+ */
+export interface DescribePodChargeInfoResponse {
+  /**
+   * Pod计费信息
+   */
+  ChargeInfoSet?: Array<PodChargeInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

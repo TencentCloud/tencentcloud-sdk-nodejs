@@ -91,6 +91,14 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
    * IsQuery条件
    */
   IsQuery?: number
+  /**
+   * 数据库名称
+   */
+  DbName?: Array<string>
+  /**
+   * catalog名称
+   */
+  CatalogName?: Array<string>
 }
 
 /**

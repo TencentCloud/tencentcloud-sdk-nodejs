@@ -68,6 +68,16 @@ it("lke.v20231130.CreateRejectedQuestion", async function () {
     }
 })
 
+it("lke.v20231130.ModifyQA", async function () {
+    try {
+       const data = await client.ModifyQA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.CheckAttributeLabelExist", async function () {
     try {
        const data = await client.CheckAttributeLabelExist({})
@@ -108,6 +118,16 @@ it("lke.v20231130.DeleteRejectedQuestion", async function () {
     }
 })
 
+it("lke.v20231130.GetReconstructDocumentResult", async function () {
+    try {
+       const data = await client.GetReconstructDocumentResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ListSelectDoc", async function () {
     try {
        const data = await client.ListSelectDoc({})
@@ -128,9 +148,9 @@ it("lke.v20231130.QueryRewrite", async function () {
     }
 })
 
-it("lke.v20231130.ModifyQA", async function () {
+it("lke.v20231130.DescribeUnsatisfiedReplyContext", async function () {
     try {
-       const data = await client.ModifyQA({})
+       const data = await client.DescribeUnsatisfiedReplyContext({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +378,9 @@ it("lke.v20231130.CreateAttributeLabel", async function () {
     }
 })
 
-it("lke.v20231130.DescribeUnsatisfiedReplyContext", async function () {
+it("lke.v20231130.CreateReconstructDocumentFlow", async function () {
     try {
-       const data = await client.DescribeUnsatisfiedReplyContext({})
+       const data = await client.CreateReconstructDocumentFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +731,16 @@ it("lke.v20231130.CreateQACate", async function () {
 it("lke.v20231130.ExportUnsatisfiedReply", async function () {
     try {
        const data = await client.ExportUnsatisfiedReply({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.ReconstructDocument", async function () {
+    try {
+       const data = await client.ReconstructDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

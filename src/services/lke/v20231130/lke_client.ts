@@ -29,6 +29,7 @@ import {
   ListSelectDocResponse,
   DescribeReleaseInfoRequest,
   DeleteDocRequest,
+  ReconstructDocumentResponse,
   DescribeAppResponse,
   UploadAttributeLabelResponse,
   MsgRecord,
@@ -39,8 +40,9 @@ import {
   UnsatisfiedReply,
   CreateQACateResponse,
   ModifyDocAttrRangeResponse,
-  GetMsgRecordResponse,
+  DescribeQARequest,
   AttrLabelRefer,
+  CreateReconstructDocumentFlowConfig,
   DescribeUnsatisfiedReplyContextRequest,
   Procedure,
   QAQuery,
@@ -99,6 +101,7 @@ import {
   DescribeDocRequest,
   RetryDocAuditRequest,
   SaveDocRequest,
+  ReconstructDocumentFailedPage,
   ModifyQACateResponse,
   DescribeAttributeLabelResponse,
   ModifyAttributeLabelResponse,
@@ -128,28 +131,33 @@ import {
   ListDocRequest,
   GetEmbeddingRequest,
   GroupQARequest,
+  RateMsgRecordRequest,
   IsTransferIntentResponse,
-  DescribeQARequest,
+  GetMsgRecordResponse,
   DescribeAppRequest,
+  GetReconstructDocumentResultRequest,
   ListQAResponse,
   IgnoreUnsatisfiedReplyRequest,
   DescribeReleaseResponse,
   TaskParams,
   ListDocItem,
-  RateMsgRecordRequest,
+  Polygon,
   AppModel,
   ClassifyLabel,
+  ReconstructDocumentRequest,
   RetryDocAuditResponse,
-  RetryReleaseResponse,
+  GetReconstructDocumentResultResponse,
+  RejectedQuestion,
   SaveDocResponse,
   DeleteRejectedQuestionResponse,
   Credentials,
   CreateAttributeLabelRequest,
   ListAppResponse,
   AppInfo,
+  CreateReconstructDocumentFlowRequest,
   QueryParseDocResultRequest,
   KnowledgeQaConfig,
-  RejectedQuestion,
+  Coord,
   MsgRecordReference,
   ListRejectedQuestionPreviewRequest,
   ListReleaseConfigPreviewResponse,
@@ -171,11 +179,13 @@ import {
   DeleteAppResponse,
   ListAttributeLabelRequest,
   DeleteDocResponse,
+  DocumentElement,
   BaseConfig,
   ClassifyConfig,
   UploadAttributeLabelRequest,
   ExportAttributeLabelRequest,
   GetAppKnowledgeCountResponse,
+  RetryReleaseResponse,
   CreateAttributeLabelResponse,
   CreateQAResponse,
   StopDocParseResponse,
@@ -186,6 +196,7 @@ import {
   IsTransferIntentRequest,
   DescribeReferRequest,
   DeleteAppRequest,
+  CreateRejectedQuestionRequest,
   TokenStat,
   ListAppCategoryRspOption,
   DescribeStorageCredentialRequest,
@@ -206,7 +217,8 @@ import {
   ReleaseRejectedQuestion,
   CreateQACateRequest,
   DescribeRobotBizIDByAppKeyRequest,
-  CreateRejectedQuestionRequest,
+  DocumentRecognizeInfo,
+  CreateReconstructDocumentFlowResponse,
   ListRejectedQuestionRequest,
   VerifyQAResponse,
   ReleaseConfigs,
@@ -214,6 +226,7 @@ import {
   ModifyRejectedQuestionRequest,
   IgnoreUnsatisfiedReplyResponse,
   StopDocParseRequest,
+  ReconstructDocumentConfig,
   ListSelectDocRequest,
 } from "./lke_models"
 
@@ -277,6 +290,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新问答
+   */
+  async ModifyQA(
+    req: ModifyQARequest,
+    cb?: (error: string, rep: ModifyQAResponse) => void
+  ): Promise<ModifyQAResponse> {
+    return this.request("ModifyQA", req, cb)
+  }
+
+  /**
    * 检查属性下的标签名是否存在
    */
   async CheckAttributeLabelExist(
@@ -317,6 +340,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取文档解析任务执行结果
+   */
+  async GetReconstructDocumentResult(
+    req: GetReconstructDocumentResultRequest,
+    cb?: (error: string, rep: GetReconstructDocumentResultResponse) => void
+  ): Promise<GetReconstructDocumentResultResponse> {
+    return this.request("GetReconstructDocumentResult", req, cb)
+  }
+
+  /**
    * 获取账户信息
    */
   async ListSelectDoc(
@@ -338,13 +371,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新问答
+   * 获取不满意回复上下文
    */
-  async ModifyQA(
-    req: ModifyQARequest,
-    cb?: (error: string, rep: ModifyQAResponse) => void
-  ): Promise<ModifyQAResponse> {
-    return this.request("ModifyQA", req, cb)
+  async DescribeUnsatisfiedReplyContext(
+    req: DescribeUnsatisfiedReplyContextRequest,
+    cb?: (error: string, rep: DescribeUnsatisfiedReplyContextResponse) => void
+  ): Promise<DescribeUnsatisfiedReplyContextResponse> {
+    return this.request("DescribeUnsatisfiedReplyContext", req, cb)
   }
 
   /**
@@ -569,13 +602,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取不满意回复上下文
+   * 文档解析，异步接口。
    */
-  async DescribeUnsatisfiedReplyContext(
-    req: DescribeUnsatisfiedReplyContextRequest,
-    cb?: (error: string, rep: DescribeUnsatisfiedReplyContextResponse) => void
-  ): Promise<DescribeUnsatisfiedReplyContextResponse> {
-    return this.request("DescribeUnsatisfiedReplyContext", req, cb)
+  async CreateReconstructDocumentFlow(
+    req: CreateReconstructDocumentFlowRequest,
+    cb?: (error: string, rep: CreateReconstructDocumentFlowResponse) => void
+  ): Promise<CreateReconstructDocumentFlowResponse> {
+    return this.request("CreateReconstructDocumentFlow", req, cb)
   }
 
   /**
@@ -926,6 +959,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportUnsatisfiedReplyResponse) => void
   ): Promise<ExportUnsatisfiedReplyResponse> {
     return this.request("ExportUnsatisfiedReply", req, cb)
+  }
+
+  /**
+   * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+   */
+  async ReconstructDocument(
+    req: ReconstructDocumentRequest,
+    cb?: (error: string, rep: ReconstructDocumentResponse) => void
+  ): Promise<ReconstructDocumentResponse> {
+    return this.request("ReconstructDocument", req, cb)
   }
 
   /**

@@ -310,8 +310,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取单元可视化配置信息
-   */
+     * 产品停售，预下线
+
+获取单元可视化配置信息
+     */
   async DescribeEdgeUnitApplicationVisualization(
     req: DescribeEdgeUnitApplicationVisualizationRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationVisualizationResponse) => void
@@ -390,8 +392,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * yaml方式创建应用
-   */
+     * 产品停售，预下线
+
+yaml方式创建应用
+     */
   async CreateEdgeUnitApplicationYaml(
     req: CreateEdgeUnitApplicationYamlRequest,
     cb?: (error: string, rep: CreateEdgeUnitApplicationYamlResponse) => void
@@ -410,8 +414,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用事件列表
-   */
+     * 产品停售，预下线
+
+获取应用事件列表
+     */
   async DescribeEdgeUnitApplicationEvents(
     req: DescribeEdgeUnitApplicationEventsRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationEventsResponse) => void
@@ -520,8 +526,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用模板列表
-   */
+     * 产品停售，预下线
+
+获取应用模板列表
+     */
   async DescribeApplications(
     req: DescribeApplicationsRequest,
     cb?: (error: string, rep: DescribeApplicationsResponse) => void
@@ -670,8 +678,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用的Yaml配置
-   */
+     * 产品停售，预下线
+
+获取应用的Yaml配置
+     */
   async DescribeEdgeUnitApplicationYaml(
     req: DescribeEdgeUnitApplicationYamlRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationYamlResponse) => void
@@ -690,8 +700,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除应用模板
-   */
+     * 产品停售，预下线
+
+删除应用模板
+     */
   async DeleteApplications(
     req: DeleteApplicationsRequest,
     cb?: (error: string, rep: DeleteApplicationsResponse) => void
@@ -700,8 +712,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改应用模板配置
-   */
+     * 产品停售，预下线
+
+修改应用模板配置
+     */
   async ModifyApplicationVisualization(
     req: ModifyApplicationVisualizationRequest,
     cb?: (error: string, rep: ModifyApplicationVisualizationResponse) => void
@@ -750,8 +764,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查单元应用的Yaml配置
-   */
+     * 产品停售，预下线
+
+检查单元应用的Yaml配置
+     */
   async DescribeEdgeUnitApplicationYamlError(
     req: DescribeEdgeUnitApplicationYamlErrorRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationYamlErrorResponse) => void
@@ -830,8 +846,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用日志
-   */
+     * 产品停售，预下线
+
+获取应用日志
+     */
   async DescribeEdgeUnitApplicationLogs(
     req: DescribeEdgeUnitApplicationLogsRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationLogsResponse) => void
@@ -860,8 +878,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查应用模板的Yaml配置
-   */
+     * 产品停售，预下线
+
+检查应用模板的Yaml配置
+     */
   async DescribeApplicationYamlError(
     req: DescribeApplicationYamlErrorRequest,
     cb?: (error: string, rep: DescribeApplicationYamlErrorResponse) => void
@@ -910,8 +930,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可视化创建应用
-   */
+     * 产品停售，预下线
+
+可视化创建应用
+     */
   async CreateEdgeUnitApplicationVisualization(
     req: CreateEdgeUnitApplicationVisualizationRequest,
     cb?: (error: string, rep: CreateEdgeUnitApplicationVisualizationResponse) => void
@@ -950,8 +972,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从组件市场选中组件并添加到应用模板列表
-   */
+     * 产品停售，预下线
+
+从组件市场选中组件并添加到应用模板列表
+     */
   async ApplyMarketComponent(
     req: ApplyMarketComponentRequest,
     cb?: (error: string, rep: ApplyMarketComponentResponse) => void
@@ -960,8 +984,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用模板可视化配置信息
-   */
+     * 产品停售，预下线
+
+获取应用模板可视化配置信息
+     */
   async DescribeApplicationVisualization(
     req: DescribeApplicationVisualizationRequest,
     cb?: (error: string, rep: DescribeApplicationVisualizationResponse) => void
@@ -1030,8 +1056,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用下Pod状态
-   */
+     * 产品停售，预下线
+
+获取应用下Pod状态
+     */
   async DescribeEdgeUnitApplicationPods(
     req: DescribeEdgeUnitApplicationPodsRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationPodsResponse) => void
@@ -1040,8 +1068,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除应用列表
-   */
+     * 产品停售，预下线
+
+删除应用列表
+     */
   async DeleteEdgeUnitApplications(
     req: DeleteEdgeUnitApplicationsRequest,
     cb?: (error: string, rep: DeleteEdgeUnitApplicationsResponse) => void
@@ -1100,8 +1130,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询边缘集群详情
-   */
+     * 产品停售，预下线
+
+查询边缘集群详情
+     */
   async DescribeEdgeUnitCloud(
     req: DescribeEdgeUnitCloudRequest,
     cb?: (error: string, rep: DescribeEdgeUnitCloudResponse) => void
@@ -1180,8 +1212,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改应用模板基本信息
-   */
+     * 产品停售，预下线
+
+修改应用模板基本信息
+     */
   async ModifyApplicationBasicInfo(
     req: ModifyApplicationBasicInfoRequest,
     cb?: (error: string, rep: ModifyApplicationBasicInfoResponse) => void
@@ -1200,8 +1234,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询应用模板Yaml
-   */
+     * 产品停售，预下线
+
+查询应用模板Yaml
+     */
   async DescribeApplicationYaml(
     req: DescribeApplicationYamlRequest,
     cb?: (error: string, rep: DescribeApplicationYamlResponse) => void
@@ -1220,8 +1256,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建可视化创建应用模板
-   */
+     * 产品停售，预下线
+
+创建可视化创建应用模板
+     */
   async CreateApplicationVisualization(
     req: CreateApplicationVisualizationRequest,
     cb?: (error: string, rep: CreateApplicationVisualizationResponse) => void
@@ -1250,8 +1288,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用容器状态
-   */
+     * 产品停售，预下线
+
+获取应用容器状态
+     */
   async DescribeEdgeUnitApplicationPodContainers(
     req: DescribeEdgeUnitApplicationPodContainersRequest,
     cb?: (error: string, rep: DescribeEdgeUnitApplicationPodContainersResponse) => void

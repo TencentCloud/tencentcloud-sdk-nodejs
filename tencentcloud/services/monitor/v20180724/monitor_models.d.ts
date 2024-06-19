@@ -8541,6 +8541,10 @@ export interface DeleteAlarmPolicyRequest {
      * 告警策略 ID 列表
      */
     PolicyIds: Array<string>;
+    /**
+     * prom的实例id
+     */
+    PromInsIds?: Array<string>;
 }
 /**
  * 事件告警条件

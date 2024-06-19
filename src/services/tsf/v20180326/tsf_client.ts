@@ -693,8 +693,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询应用关联日志配置项信息
-   */
+     * 接口未使用，废弃录用
+
+查询应用关联日志配置项信息
+     */
   async DescribeApplicationBusinessLogConfig(
     req: DescribeApplicationBusinessLogConfigRequest,
     cb?: (error: string, rep: DescribeApplicationBusinessLogConfigResponse) => void

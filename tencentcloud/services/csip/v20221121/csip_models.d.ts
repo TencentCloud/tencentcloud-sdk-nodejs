@@ -535,6 +535,16 @@ export interface CVMAssetVO {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AgentCpuPer?: number;
+    /**
+     * cvm真正所属的appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealAppid?: number;
+    /**
+     * 云资产类型：0：腾讯云，1：aws，2：azure
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudType?: number;
 }
 /**
  * 资产视角配置风险
@@ -1602,6 +1612,10 @@ export interface UpdateAlertStatusListResponse {
  */
 export interface DeleteDomainAndIpRequest {
     /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
      * -
      */
     Content?: Array<PublicIpDomainListKey>;
@@ -2179,6 +2193,16 @@ export interface AssetViewVULRiskData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VulRiskId?: string;
+    /**
+     * 新版漏洞id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TvdID?: string;
+    /**
+     * 是否可以一键体检，1-可以，0-不可以
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsOneClick?: number;
 }
 /**
  * DescribeOrganizationUserInfo返回参数结构体
@@ -3447,6 +3471,10 @@ export interface CreateRiskCenterScanTaskRequest {
      * 资产标签
      */
     Tags?: AssetTag;
+    /**
+     * 任务完成回调webhook地址
+     */
+    FinishWebHook?: string;
 }
 /**
  * DescribeRiskCenterAssetViewCFGRiskList返回参数结构体
@@ -5169,7 +5197,7 @@ export interface VULViewVULRiskData {
      */
     AttackHeat?: number;
     /**
-     * 是否必修漏洞1是，0不是
+     * 是否必修漏洞，1-是，0-不是
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSuggest?: number;
@@ -5188,6 +5216,16 @@ export interface VULViewVULRiskData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VulRiskId?: string;
+    /**
+     * 新版漏洞id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TvdID?: string;
+    /**
+     * 是否可以一键体检，1-可以，0-不可以
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsOneClick?: number;
 }
 /**
  * DescribeAlertList返回参数结构体
@@ -5578,6 +5616,10 @@ export interface CreateDomainAndIpRequest {
      * 公网IP/域名
      */
     Content: Array<string>;
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
     /**
      * 资产标签
      */
@@ -6179,6 +6221,10 @@ export interface ModifyRiskCenterScanTaskRequest {
      * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
      */
     TaskMode?: number;
+    /**
+     * 任务完成回调webhook地址
+     */
+    FinishWebHook?: string;
 }
 /**
  * clb实例和监听器信息

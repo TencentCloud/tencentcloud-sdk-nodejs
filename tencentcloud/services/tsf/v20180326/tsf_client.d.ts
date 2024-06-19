@@ -24,7 +24,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeMicroservices(req: DescribeMicroservicesRequest, cb?: (error: string, rep: DescribeMicroservicesResponse) => void): Promise<DescribeMicroservicesResponse>;
     /**
-     * 查询应用关联日志配置项信息
+     * 接口未使用，废弃录用
+
+查询应用关联日志配置项信息
      */
     DescribeApplicationBusinessLogConfig(req: DescribeApplicationBusinessLogConfigRequest, cb?: (error: string, rep: DescribeApplicationBusinessLogConfigResponse) => void): Promise<DescribeApplicationBusinessLogConfigResponse>;
     /**

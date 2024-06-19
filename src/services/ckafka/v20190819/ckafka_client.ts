@@ -948,9 +948,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取主题属性
-
-     */
+   * 获取主题属性
+   */
   async DescribeTopicAttributes(
     req: DescribeTopicAttributesRequest,
     cb?: (error: string, rep: DescribeTopicAttributesResponse) => void
