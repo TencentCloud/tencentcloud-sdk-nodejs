@@ -78,16 +78,6 @@ it("dts.v20180330.StopMigrateJob", async function () {
     }
 })
 
-it("dts.v20180330.DescribeRegionConf", async function () {
-    try {
-       const data = await client.DescribeRegionConf({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dts.v20180330.DescribeMigrateJobs", async function () {
     try {
        const data = await client.DescribeMigrateJobs({})

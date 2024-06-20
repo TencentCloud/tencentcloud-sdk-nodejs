@@ -1624,127 +1624,132 @@ export interface MsInstance {
      * 机器实例ID信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 机器实例名称信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 服务运行的端口号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port: string;
+    Port?: string;
     /**
      * 机器实例内网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LanIp: string;
+    LanIp?: string;
     /**
      * 机器实例外网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WanIp: string;
+    WanIp?: string;
     /**
      * 机器可用状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceAvailableStatus: string;
+    InstanceAvailableStatus?: string;
     /**
      * 服务运行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceInstanceStatus: string;
+    ServiceInstanceStatus?: string;
     /**
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * 集群ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 命名空间ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceId: string;
+    NamespaceId?: string;
     /**
      * 命名空间名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
      * 部署组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 部署组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 机器TSF可用状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /**
      * 健康检查URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheckUrl: string;
+    HealthCheckUrl?: string;
     /**
      * 集群类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 应用程序包版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationPackageVersion: string;
+    ApplicationPackageVersion?: string;
     /**
      * 应用类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationType: string;
+    ApplicationType?: string;
     /**
      * 服务状态，passing 在线，critical 离线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceStatus: string;
+    ServiceStatus?: string;
     /**
      * 注册时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegistrationTime: number;
+    RegistrationTime?: number;
     /**
      * 上次心跳时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastHeartbeatTime: number;
+    LastHeartbeatTime?: number;
     /**
      * 实例注册id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegistrationId: string;
+    RegistrationId?: string;
     /**
      * 屏蔽状态，hidden 为屏蔽，unhidden 为未屏蔽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HiddenStatus: string;
+    HiddenStatus?: string;
+    /**
+     * json格式的 meta 信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetaJson?: string;
 }
 /**
  * 微服务网关插件绑定对象
@@ -12372,7 +12377,7 @@ export interface DescribeUnitApiUseDetailResponse {
     /**
      * 单元化使用统计对象
      */
-    Result: GroupUnitApiUseStatistics;
+    Result?: GroupUnitApiUseStatistics;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14514,7 +14519,7 @@ export interface DescribeMicroserviceResponse {
      * 微服务详情实例列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: TsfPageMsInstance;
+    Result?: TsfPageMsInstance;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

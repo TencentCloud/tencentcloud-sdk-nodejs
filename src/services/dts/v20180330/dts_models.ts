@@ -205,37 +205,6 @@ export interface CreateMigrateJobRequest {
 }
 
 /**
- * 数据订阅地域售卖信息
- */
-export interface SubscribeRegionConf {
-  /**
-   * 地域名称，如广州
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionName: string
-  /**
-   * 地区标识，如ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region: string
-  /**
-   * 地域名称，如华南地区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Area: string
-  /**
-   * 是否为默认地域，0 - 不是，1 - 是的
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsDefaultRegion: number
-  /**
-   * 当前地域的售卖情况，1 - 正常， 2-灰度，3 - 停售
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-}
-
-/**
  * ModifySubscribeName请求参数结构体
  */
 export interface ModifySubscribeNameRequest {
@@ -703,61 +672,13 @@ export interface OfflineIsolatedSubscribeRequest {
 }
 
 /**
- * DescribeSubscribes请求参数结构体
+ * OfflineIsolatedSubscribe返回参数结构体
  */
-export interface DescribeSubscribesRequest {
+export interface OfflineIsolatedSubscribeResponse {
   /**
-   * 数据订阅的实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SubscribeId?: string
-  /**
-   * 数据订阅的实例名称
-   */
-  SubscribeName?: string
-  /**
-   * 绑定数据库实例的ID
-   */
-  InstanceId?: string
-  /**
-   * 数据订阅实例的通道ID
-   */
-  ChannelId?: string
-  /**
-   * 计费模式筛选，可能的值：0-包年包月，1-按量计费
-   */
-  PayType?: string
-  /**
-   * 订阅的数据库产品，如mysql
-   */
-  Product?: string
-  /**
-   * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中
-   */
-  Status?: Array<string>
-  /**
-   * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
-   */
-  SubsStatus?: Array<string>
-  /**
-   * 返回记录的起始偏移量，默认为0。请输入非负整数
-   */
-  Offset?: number
-  /**
-   * 单次返回的记录数量，默认20。请输入1到100的整数
-   */
-  Limit?: number
-  /**
-   * 排序方向，可选的值为"DESC"和"ASC"，默认为"DESC"，按创建时间逆序排序
-   */
-  OrderDirection?: string
-  /**
-   * 标签过滤条件
-   */
-  TagFilters?: Array<TagFilter>
-  /**
-   * 订阅实例版本;txdts-旧版数据订阅，kafka-kafka版本数据订阅
-   */
-  SubscribeVersion?: string
+  RequestId?: string
 }
 
 /**
@@ -803,16 +724,6 @@ export interface ModifySubscribeConsumeTimeRequest {
 }
 
 /**
- * StopMigrateJob请求参数结构体
- */
-export interface StopMigrateJobRequest {
-  /**
-   * 数据迁移任务ID
-   */
-  JobId: string
-}
-
-/**
  * 描述详细迁移过程
  */
 export interface MigrateDetailInfo {
@@ -847,21 +758,13 @@ export interface MigrateDetailInfo {
 }
 
 /**
- * DescribeRegionConf返回参数结构体
+ * StopMigrateJob请求参数结构体
  */
-export interface DescribeRegionConfResponse {
+export interface StopMigrateJobRequest {
   /**
-   * 可售卖地域的数量
+   * 数据迁移任务ID
    */
-  TotalCount?: number
-  /**
-   * 可售卖地域详情
-   */
-  Items?: Array<SubscribeRegionConf>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  JobId: string
 }
 
 /**
@@ -1091,16 +994,6 @@ export interface StopMigrateJobResponse {
 }
 
 /**
- * OfflineIsolatedSubscribe返回参数结构体
- */
-export interface OfflineIsolatedSubscribeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * IsolateSubscribe请求参数结构体
  */
 export interface IsolateSubscribeRequest {
@@ -1219,9 +1112,62 @@ export interface MigrateJobInfo {
 }
 
 /**
- * DescribeRegionConf请求参数结构体
+ * DescribeSubscribes请求参数结构体
  */
-export type DescribeRegionConfRequest = null
+export interface DescribeSubscribesRequest {
+  /**
+   * 数据订阅的实例ID
+   */
+  SubscribeId?: string
+  /**
+   * 数据订阅的实例名称
+   */
+  SubscribeName?: string
+  /**
+   * 绑定数据库实例的ID
+   */
+  InstanceId?: string
+  /**
+   * 数据订阅实例的通道ID
+   */
+  ChannelId?: string
+  /**
+   * 计费模式筛选，可能的值：0-包年包月，1-按量计费
+   */
+  PayType?: string
+  /**
+   * 订阅的数据库产品，如mysql
+   */
+  Product?: string
+  /**
+   * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中
+   */
+  Status?: Array<string>
+  /**
+   * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
+   */
+  SubsStatus?: Array<string>
+  /**
+   * 返回记录的起始偏移量，默认为0。请输入非负整数
+   */
+  Offset?: number
+  /**
+   * 单次返回的记录数量，默认20。请输入1到100的整数
+   */
+  Limit?: number
+  /**
+   * 排序方向，可选的值为"DESC"和"ASC"，默认为"DESC"，按创建时间逆序排序
+   */
+  OrderDirection?: string
+  /**
+   * 标签过滤条件
+   */
+  TagFilters?: Array<TagFilter>
+  /**
+   * 订阅实例版本;txdts-旧版数据订阅，kafka-kafka版本数据订阅
+   */
+  SubscribeVersion?: string
+}
 
 /**
  * CompleteMigrateJob返回参数结构体

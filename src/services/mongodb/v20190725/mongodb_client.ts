@@ -30,10 +30,12 @@ import {
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   InstanceMultiParam,
+  ModifyInstanceParamsResponse,
   DescribeBackupRulesResponse,
   SlowLogPattern,
   AssignProjectResponse,
   DescribeDBInstanceDealResponse,
+  ModifyMongoDBParamType,
   OfflineIsolatedDBInstanceResponse,
   IsolateDBInstanceResponse,
   DescribeSecurityGroupRequest,
@@ -116,6 +118,7 @@ import {
   EnableTransparentDataEncryptionResponse,
   SetBackupRulesRequest,
   AssignProjectRequest,
+  ModifyInstanceParamsRequest,
   CreateBackupDownloadTaskResponse,
   SpecificationInfo,
   DescribeSlowLogPatternsRequest,
@@ -285,6 +288,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupRulesResponse) => void
   ): Promise<DescribeBackupRulesResponse> {
     return this.request("DescribeBackupRules", req, cb)
+  }
+
+  /**
+   * 本接口(RenameInstance)用于修改云数据库实例的名称。
+   */
+  async RenameInstance(
+    req: RenameInstanceRequest,
+    cb?: (error: string, rep: RenameInstanceResponse) => void
+  ): Promise<RenameInstanceResponse> {
+    return this.request("RenameInstance", req, cb)
   }
 
   /**
@@ -500,13 +513,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(RenameInstance)用于修改云数据库实例的名称。
+   * 本接口（ModifyInstanceParams）用于修改mongoDB实例的参数配置。
    */
-  async RenameInstance(
-    req: RenameInstanceRequest,
-    cb?: (error: string, rep: RenameInstanceResponse) => void
-  ): Promise<RenameInstanceResponse> {
-    return this.request("RenameInstance", req, cb)
+  async ModifyInstanceParams(
+    req: ModifyInstanceParamsRequest,
+    cb?: (error: string, rep: ModifyInstanceParamsResponse) => void
+  ): Promise<ModifyInstanceParamsResponse> {
+    return this.request("ModifyInstanceParams", req, cb)
   }
 
   /**

@@ -1724,7 +1724,7 @@ export interface EmrListInstance {
    */
   ClusterId?: string
   /**
-   * 状态描述
+   * 常见状态描述：集群生产中,集群运行中,集群创建中,集群已关闭,集群已删除
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
@@ -1795,7 +1795,7 @@ export interface EmrListInstance {
    */
   Zone?: string
   /**
-   * 状态码
+   * 状态码, 取值为-2(集群已删除), -1(集群已关闭), 0(集群生产中), 2(集群运行中), 3(集群创建中)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number

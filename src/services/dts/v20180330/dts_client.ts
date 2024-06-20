@@ -28,7 +28,6 @@ import {
   IsolateSubscribeResponse,
   ModifySubscribeObjectsResponse,
   CreateMigrateJobRequest,
-  SubscribeRegionConf,
   ModifySubscribeNameRequest,
   ModifySubscribeConsumeTimeResponse,
   DstInfo,
@@ -43,13 +42,12 @@ import {
   DescribeMigrateCheckJobResponse,
   ActivateSubscribeRequest,
   OfflineIsolatedSubscribeRequest,
-  DescribeSubscribesRequest,
+  OfflineIsolatedSubscribeResponse,
   ResetSubscribeResponse,
   DescribeSubscribesResponse,
   ModifySubscribeConsumeTimeRequest,
-  StopMigrateJobRequest,
   MigrateDetailInfo,
-  DescribeRegionConfResponse,
+  StopMigrateJobRequest,
   DescribeAsyncRequestInfoResponse,
   SubscribeInfo,
   ResetSubscribeRequest,
@@ -59,12 +57,11 @@ import {
   DescribeMigrateJobsRequest,
   ModifySubscribeAutoRenewFlagResponse,
   StopMigrateJobResponse,
-  OfflineIsolatedSubscribeResponse,
   IsolateSubscribeRequest,
   ModifySubscribeAutoRenewFlagRequest,
   CompleteMigrateJobRequest,
   MigrateJobInfo,
-  DescribeRegionConfRequest,
+  DescribeSubscribesRequest,
   CompleteMigrateJobResponse,
   SubscribeObject,
   CreateMigrateJobResponse,
@@ -150,18 +147,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopMigrateJobResponse) => void
   ): Promise<StopMigrateJobResponse> {
     return this.request("StopMigrateJob", req, cb)
-  }
-
-  /**
-     * 接口不再使用
-
-本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
-     */
-  async DescribeRegionConf(
-    req?: DescribeRegionConfRequest,
-    cb?: (error: string, rep: DescribeRegionConfResponse) => void
-  ): Promise<DescribeRegionConfResponse> {
-    return this.request("DescribeRegionConf", req, cb)
   }
 
   /**

@@ -152,6 +152,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCreateFlowByFiles", req, cb);
     }
     /**
+     * 获取区块链存证报告查看链接/二维码接口
+
+适用场景：企业员工可以通过此接口生成合同区块链存证报告的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。
+
+[点击查看区块链存证报告样式](https://qcloudimg.tencent-cloud.cn/raw/47d5e9c2ffa90ad4e27b3cd14095aa08.jpg)
+
+注：
+<ul><li>1. 二维码下载链接过期时间为5分钟，请尽快下载保存。二维码/短链的过期时间为<font color="red">7天</font>，超过有效期则不可用。</li>
+<li>2. 合同状态需为<font color="red">签署完成</font> 、<font color="red">已解除</font>才能生成报告查看二维码/短链。</li>
+<li>3. 调用接口时，需确保接口调用身份拥有此合同的访问数据权限或为合同参与方。</li>
+<li>4. 通过扫码或者点击链接，用户无需登录或者鉴权即可查看对应合同的区块链存证报告，请妥善保管好二维码或链接。</li></ul>
+     */
+    async CreateFlowBlockchainEvidenceUrl(req, cb) {
+        return this.request("CreateFlowBlockchainEvidenceUrl", req, cb);
+    }
+    /**
      * 此接口用于获取企业批量认证异步任务的状态及结果。
 
 前提条件：已调用 CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任务接口，并得到了任务Id。
@@ -744,6 +760,12 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     async ChannelDescribeUserAutoSignStatus(req, cb) {
         return this.request("ChannelDescribeUserAutoSignStatus", req, cb);
+    }
+    /**
+     * 此接口用于获取创建法人章二维码图片base64
+     */
+    async CreateLegalSealQrCode(req, cb) {
+        return this.request("CreateLegalSealQrCode", req, cb);
     }
     /**
      * 对合同流程文件进行数字签名验证，判断数字签名是否有效，合同文件内容是否被篡改。

@@ -88,6 +88,16 @@ it("essbasic.v20210526.ChannelCreateFlowByFiles", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateFlowBlockchainEvidenceUrl", async function () {
+    try {
+       const data = await client.CreateFlowBlockchainEvidenceUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.DescribeBatchOrganizationRegistrationUrls", async function () {
     try {
        const data = await client.DescribeBatchOrganizationRegistrationUrls({})
@@ -431,6 +441,16 @@ it("essbasic.v20210526.ChannelCreateUserAutoSignSealUrl", async function () {
 it("essbasic.v20210526.ChannelDescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.ChannelDescribeUserAutoSignStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateLegalSealQrCode", async function () {
+    try {
+       const data = await client.CreateLegalSealQrCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

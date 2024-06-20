@@ -78,9 +78,9 @@ it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async functi
     }
 })
 
-it("organization.v20210331.DescribeShareUnitResources", async function () {
+it("organization.v20210331.AcceptJoinShareUnitInvitation", async function () {
     try {
-       const data = await client.DescribeShareUnitResources({})
+       const data = await client.AcceptJoinShareUnitInvitation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("organization.v20210331.DescribeOrganizationFinancialByMonth", async function
 it("organization.v20210331.DeleteAccount", async function () {
     try {
        const data = await client.DeleteAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.RejectJoinShareUnitInvitation", async function () {
+    try {
+       const data = await client.RejectJoinShareUnitInvitation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +461,16 @@ it("organization.v20210331.DescribeOrganizationMemberEmailBind", async function 
 it("organization.v20210331.EnablePolicyType", async function () {
     try {
        const data = await client.EnablePolicyType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeShareUnitResources", async function () {
+    try {
+       const data = await client.DescribeShareUnitResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

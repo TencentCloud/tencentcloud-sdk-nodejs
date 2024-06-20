@@ -107,6 +107,7 @@ import {
   SparkMonitorMetrics,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
+  BatchSQLCostInfo,
   DescribeTablesNameRequest,
   WorkGroupInfo,
   SwitchDataEngineRequest,
@@ -168,6 +169,7 @@ import {
   CancelTaskResponse,
   TableInfo,
   DescribeSparkSessionBatchSQLResponse,
+  DescribeSparkSessionBatchSQLCostResponse,
   DescribeTasksOverviewResponse,
   KafkaInfo,
   FavorInfo,
@@ -384,6 +386,7 @@ import {
   DescribeViewsResponse,
   DescribeWorkGroupsRequest,
   LockMetaDataRequest,
+  DescribeSparkSessionBatchSQLCostRequest,
   CreateNotebookSessionResponse,
   DescribeDataEngineResponse,
   QueryTaskCostDetailRequest,
@@ -902,6 +905,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分配原生表表属性
+   */
+  async AssignMangedTableProperties(
+    req: AssignMangedTablePropertiesRequest,
+    cb?: (error: string, rep: AssignMangedTablePropertiesResponse) => void
+  ): Promise<AssignMangedTablePropertiesResponse> {
+    return this.request("AssignMangedTableProperties", req, cb)
+  }
+
+  /**
    * 查询可更新配置的引擎列表
    */
   async DescribeUpdatableDataEngines(
@@ -1385,7 +1398,7 @@ export class Client extends AbstractClient {
    * 查看任务概览页
    */
   async DescribeTasksOverview(
-    req?: DescribeTasksOverviewRequest,
+    req: DescribeTasksOverviewRequest,
     cb?: (error: string, rep: DescribeTasksOverviewResponse) => void
   ): Promise<DescribeTasksOverviewResponse> {
     return this.request("DescribeTasksOverview", req, cb)
@@ -1432,13 +1445,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分配原生表表属性
+   * 本接口（DescribeSparkSessionBatchSQLCost）用于查询Spark SQL批任务消耗
    */
-  async AssignMangedTableProperties(
-    req: AssignMangedTablePropertiesRequest,
-    cb?: (error: string, rep: AssignMangedTablePropertiesResponse) => void
-  ): Promise<AssignMangedTablePropertiesResponse> {
-    return this.request("AssignMangedTableProperties", req, cb)
+  async DescribeSparkSessionBatchSQLCost(
+    req: DescribeSparkSessionBatchSQLCostRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSQLCostResponse) => void
+  ): Promise<DescribeSparkSessionBatchSQLCostResponse> {
+    return this.request("DescribeSparkSessionBatchSQLCost", req, cb)
   }
 
   /**

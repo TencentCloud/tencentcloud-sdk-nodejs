@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditLogFile", req, cb);
     }
     /**
-     * 更换集群vpc
+     * 续费集群
      */
-    async SwitchClusterVpc(req, cb) {
-        return this.request("SwitchClusterVpc", req, cb);
+    async RenewClusters(req, cb) {
+        return this.request("RenewClusters", req, cb);
     }
     /**
      * 关闭数据库代理
@@ -656,6 +656,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAccountDescription(req, cb) {
         return this.request("ModifyAccountDescription", req, cb);
+    }
+    /**
+     * 更换集群vpc
+     */
+    async SwitchClusterVpc(req, cb) {
+        return this.request("SwitchClusterVpc", req, cb);
     }
     /**
      * 创建数据库

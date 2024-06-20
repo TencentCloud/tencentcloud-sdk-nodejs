@@ -24,6 +24,7 @@ import {
   ListNonCompliantResourceResponse,
   DeleteOrganizationRequest,
   TagComplianceDetails,
+  RejectJoinShareUnitInvitationRequest,
   DescribePolicyConfigResponse,
   QuitOrganizationResponse,
   ListOrganizationIdentityRequest,
@@ -56,6 +57,7 @@ import {
   DeleteOrganizationMembersResponse,
   DescribeOrganizationMembersResponse,
   MemberIdentity,
+  RejectJoinShareUnitInvitationResponse,
   UpdateOrganizationNodeRequest,
   DescribeShareAreasResponse,
   DescribeOrganizationAuthNodeResponse,
@@ -90,7 +92,7 @@ import {
   OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
-  DescribeShareUnitMembersResponse,
+  AcceptJoinShareUnitInvitationResponse,
   DescribeShareAreasRequest,
   DescribeOrganizationMemberAuthAccountsResponse,
   Tags,
@@ -124,7 +126,7 @@ import {
   OrgMemberPolicy,
   ResourceTagMapping,
   CreateOrganizationMemberPolicyResponse,
-  DescribeShareUnitMembersRequest,
+  AcceptJoinShareUnitInvitationRequest,
   CancelOrganizationMemberAuthAccountResponse,
   UpdateOrganizationMemberRequest,
   AddShareUnitResourcesRequest,
@@ -146,6 +148,7 @@ import {
   OrgNode,
   CheckAccountDeleteResponse,
   DeleteAccountRequest,
+  DescribeShareUnitMembersRequest,
   ListPoliciesForTarget,
   CreateOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationFinancialByMemberRequest,
@@ -153,6 +156,7 @@ import {
   CreateOrganizationMembersPolicyResponse,
   DeleteShareUnitResourcesResponse,
   CreateOrganizationIdentityResponse,
+  DescribeShareUnitMembersResponse,
   UpdateOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DeleteOrganizationMembersPolicyRequest,
@@ -241,13 +245,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取共享单元资源列表。
+   * 接受加入共享单元邀请。
    */
-  async DescribeShareUnitResources(
-    req: DescribeShareUnitResourcesRequest,
-    cb?: (error: string, rep: DescribeShareUnitResourcesResponse) => void
-  ): Promise<DescribeShareUnitResourcesResponse> {
-    return this.request("DescribeShareUnitResources", req, cb)
+  async AcceptJoinShareUnitInvitation(
+    req: AcceptJoinShareUnitInvitationRequest,
+    cb?: (error: string, rep: AcceptJoinShareUnitInvitationResponse) => void
+  ): Promise<AcceptJoinShareUnitInvitationResponse> {
+    return this.request("AcceptJoinShareUnitInvitation", req, cb)
   }
 
   /**
@@ -388,6 +392,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccountResponse) => void
   ): Promise<DeleteAccountResponse> {
     return this.request("DeleteAccount", req, cb)
+  }
+
+  /**
+   * 拒绝加入共享单元邀请。
+   */
+  async RejectJoinShareUnitInvitation(
+    req: RejectJoinShareUnitInvitationRequest,
+    cb?: (error: string, rep: RejectJoinShareUnitInvitationResponse) => void
+  ): Promise<RejectJoinShareUnitInvitationResponse> {
+    return this.request("RejectJoinShareUnitInvitation", req, cb)
   }
 
   /**
@@ -618,6 +632,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnablePolicyTypeResponse) => void
   ): Promise<EnablePolicyTypeResponse> {
     return this.request("EnablePolicyType", req, cb)
+  }
+
+  /**
+   * 获取共享单元资源列表。
+   */
+  async DescribeShareUnitResources(
+    req: DescribeShareUnitResourcesRequest,
+    cb?: (error: string, rep: DescribeShareUnitResourcesResponse) => void
+  ): Promise<DescribeShareUnitResourcesResponse> {
+    return this.request("DescribeShareUnitResources", req, cb)
   }
 
   /**

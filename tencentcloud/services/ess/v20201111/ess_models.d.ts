@@ -420,19 +420,17 @@ export interface CreatePreparedPersonalEsignRequest {
     SceneKey?: string;
 }
 /**
- * 删除员工结果
+ * CreateLegalSealQrCode返回参数结构体
  */
-export interface DeleteStaffsResult {
+export interface CreateLegalSealQrCodeResponse {
     /**
-     * 删除员工的成功数据
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 二维码图片base64值
      */
-    SuccessEmployeeData: Array<SuccessDeleteStaffData>;
+    QrcodeBase64?: string;
     /**
-     * 删除员工的失败数据
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    FailedEmployeeData: Array<FailedDeleteStaffData>;
+    RequestId?: string;
 }
 /**
  * DescribeIntegrationDepartments返回参数结构体
@@ -1083,48 +1081,39 @@ export interface CreateFlowOption {
     ResultPageConfig?: Array<CreateResultPageConfig>;
 }
 /**
- * 解除协议的签署人，如不指定，默认使用原流程中的签署人。<br/>
-`注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。`<br/>
-`注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。`<br/>
-`注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。`<br/>
+ * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
  */
-export interface ReleasedApprover {
+export interface FilledComponent {
     /**
-     * 签署人姓名，最大长度50个字。
-  
+     * 控件Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    ComponentId?: string;
     /**
-     * 签署人手机号。
+     * 控件名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mobile: string;
+    ComponentName?: string;
     /**
-     * 要更换的原合同参与人RecipientId编号。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+     * 控件填写状态；0-未填写；1-已填写
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelievedApproverReceiptId: string;
+    ComponentFillStatus?: string;
     /**
-     * 指定签署人类型，目前仅支持
-  <ul><li> **ORGANIZATION**：企业（默认值）</li>
-  <li> **ENTERPRISESERVER**：企业静默签</li></ul>
+     * 控件填写内容
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproverType?: string;
+    ComponentValue?: string;
     /**
-     * 签署控件类型，支持自定义企业签署方的签署控件类型
-  <ul><li> **SIGN_SEAL**：默认为印章控件类型（默认值）</li>
-  <li> **SIGN_SIGNATURE**：手写签名控件类型</li></ul>
+     * 控件所属参与方Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproverSignComponentType?: string;
+    ComponentRecipientId?: string;
     /**
-     * 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`,  第三个叫`丙方`，以此类推。
-  
-  如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
-  
+     * 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproverSignRole?: string;
-    /**
-     * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
-     */
-    ApproverSignSealId?: string;
+    ImageUrl?: string;
 }
 /**
  * DescribeIntegrationRoles请求参数结构体
@@ -1335,6 +1324,36 @@ export interface GroupOrganization {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowEngineEnable?: boolean;
+}
+/**
+ * 机构信息
+ */
+export interface OrganizationInfo {
+    /**
+     * 机构在平台的编号，内部字段，暂未开放
+     * @deprecated
+     */
+    OrganizationId?: string;
+    /**
+     * 用户渠道，内部字段，暂未开放
+     * @deprecated
+     */
+    Channel?: string;
+    /**
+     * 用户在渠道的机构编号，内部字段，暂未开放
+     * @deprecated
+     */
+    OrganizationOpenId?: string;
+    /**
+     * 用户真实的IP，内部字段，暂未开放
+     * @deprecated
+     */
+    ClientIp?: string;
+    /**
+     * 机构的代理IP，内部字段，暂未开放
+     * @deprecated
+     */
+    ProxyIp?: string;
 }
 /**
  * CreateOrganizationAuthUrl请求参数结构体
@@ -3048,34 +3067,23 @@ export interface DeleteSealPoliciesResponse {
     RequestId?: string;
 }
 /**
- * 机构信息
+ * CreateLegalSealQrCode请求参数结构体
  */
-export interface OrganizationInfo {
+export interface CreateLegalSealQrCodeRequest {
     /**
-     * 机构在平台的编号，内部字段，暂未开放
-     * @deprecated
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    OrganizationId?: string;
+    Operator?: UserInfo;
     /**
-     * 用户渠道，内部字段，暂未开放
-     * @deprecated
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
-    Channel?: string;
+    Agent?: Agent;
     /**
-     * 用户在渠道的机构编号，内部字段，暂未开放
-     * @deprecated
+     * 机构信息，暂未开放
      */
-    OrganizationOpenId?: string;
-    /**
-     * 用户真实的IP，内部字段，暂未开放
-     * @deprecated
-     */
-    ClientIp?: string;
-    /**
-     * 机构的代理IP，内部字段，暂未开放
-     * @deprecated
-     */
-    ProxyIp?: string;
+    Organization?: OrganizationInfo;
 }
 /**
  * DescribeUserAutoSignStatus返回参数结构体
@@ -5004,6 +5012,27 @@ export interface Intention {
     IntentionActions?: Array<IntentionAction>;
 }
 /**
+ * CreateFlowBlockchainEvidenceUrl返回参数结构体
+ */
+export interface CreateFlowBlockchainEvidenceUrlResponse {
+    /**
+     * 二维码图片下载链接，下载链接有效时间5分钟，请尽快下载保存。
+     */
+    QrCode?: string;
+    /**
+     * 查看短链，可直接点击短链查看报告。
+     */
+    Url?: string;
+    /**
+     * 二维码和短链的过期时间戳，过期时间默认为生成链接后7天。
+     */
+    ExpiredOn?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateDocument请求参数结构体
  */
 export interface CreateDocumentRequest {
@@ -6743,6 +6772,21 @@ export interface SubOrgBillSummary {
     Usage?: Array<SubOrgBillUsage>;
 }
 /**
+ * 删除员工结果
+ */
+export interface DeleteStaffsResult {
+    /**
+     * 删除员工的成功数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SuccessEmployeeData: Array<SuccessDeleteStaffData>;
+    /**
+     * 删除员工的失败数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailedEmployeeData: Array<FailedDeleteStaffData>;
+}
+/**
  * CancelMultiFlowSignQRCode请求参数结构体
  */
 export interface CancelMultiFlowSignQRCodeRequest {
@@ -8046,6 +8090,50 @@ export interface VerifyPdfResponse {
     RequestId?: string;
 }
 /**
+ * 解除协议的签署人，如不指定，默认使用原流程中的签署人。<br/>
+`注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。`<br/>
+`注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。`<br/>
+`注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。`<br/>
+ */
+export interface ReleasedApprover {
+    /**
+     * 签署人姓名，最大长度50个字。
+  
+     */
+    Name: string;
+    /**
+     * 签署人手机号。
+     */
+    Mobile: string;
+    /**
+     * 要更换的原合同参与人RecipientId编号。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+     */
+    RelievedApproverReceiptId: string;
+    /**
+     * 指定签署人类型，目前仅支持
+  <ul><li> **ORGANIZATION**：企业（默认值）</li>
+  <li> **ENTERPRISESERVER**：企业静默签</li></ul>
+     */
+    ApproverType?: string;
+    /**
+     * 签署控件类型，支持自定义企业签署方的签署控件类型
+  <ul><li> **SIGN_SEAL**：默认为印章控件类型（默认值）</li>
+  <li> **SIGN_SIGNATURE**：手写签名控件类型</li></ul>
+     */
+    ApproverSignComponentType?: string;
+    /**
+     * 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`,  第三个叫`丙方`，以此类推。
+  
+  如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
+  
+     */
+    ApproverSignRole?: string;
+    /**
+     * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
+     */
+    ApproverSignSealId?: string;
+}
+/**
  * CreateFlowGroupSignReview请求参数结构体
  */
 export interface CreateFlowGroupSignReviewRequest {
@@ -8641,39 +8729,25 @@ export interface CreateIntegrationSubOrganizationActiveRecordRequest {
     SubOrganizationIds: Array<string>;
 }
 /**
- * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
+ * CreateFlowBlockchainEvidenceUrl请求参数结构体
  */
-export interface FilledComponent {
+export interface CreateFlowBlockchainEvidenceUrlRequest {
     /**
-     * 控件Id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    ComponentId?: string;
+    Operator: UserInfo;
     /**
-     * 控件名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 合同流程ID，为32位字符串。
+  建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
      */
-    ComponentName?: string;
+    FlowId: string;
     /**
-     * 控件填写状态；0-未填写；1-已填写
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
-    ComponentFillStatus?: string;
-    /**
-     * 控件填写内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ComponentValue?: string;
-    /**
-     * 控件所属参与方Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ComponentRecipientId?: string;
-    /**
-     * 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImageUrl?: string;
+    Agent?: Agent;
 }
 /**
  * CreateBatchQuickSignUrl请求参数结构体

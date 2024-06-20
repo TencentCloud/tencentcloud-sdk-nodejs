@@ -148,9 +148,9 @@ it("cynosdb.v20190107.CreateAuditLogFile", async function () {
     }
 })
 
-it("cynosdb.v20190107.SwitchClusterVpc", async function () {
+it("cynosdb.v20190107.RenewClusters", async function () {
     try {
-       const data = await client.SwitchClusterVpc({})
+       const data = await client.RenewClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1061,6 +1061,16 @@ it("cynosdb.v20190107.DescribeBackupList", async function () {
 it("cynosdb.v20190107.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SwitchClusterVpc", async function () {
+    try {
+       const data = await client.SwitchClusterVpc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

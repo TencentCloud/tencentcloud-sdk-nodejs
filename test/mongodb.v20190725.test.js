@@ -158,6 +158,16 @@ it("mongodb.v20190725.DescribeBackupRules", async function () {
     }
 })
 
+it("mongodb.v20190725.RenameInstance", async function () {
+    try {
+       const data = await client.RenameInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAsyncRequestInfo", async function () {
     try {
        const data = await client.DescribeAsyncRequestInfo({})
@@ -368,9 +378,9 @@ it("mongodb.v20190725.SetInstanceMaintenance", async function () {
     }
 })
 
-it("mongodb.v20190725.RenameInstance", async function () {
+it("mongodb.v20190725.ModifyInstanceParams", async function () {
     try {
-       const data = await client.RenameInstance({})
+       const data = await client.ModifyInstanceParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

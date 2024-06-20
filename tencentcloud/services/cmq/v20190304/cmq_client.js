@@ -83,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicDetail", req, cb);
     }
     /**
-     * 枚举队列
+     * 枚举队列列表
      */
     async DescribeQueueDetail(req, cb) {
         return this.request("DescribeQueueDetail", req, cb);

@@ -2315,6 +2315,42 @@ export interface CreateStoreLocationResponse {
 }
 
 /**
+ * spark session batch SQL的消耗信息
+ */
+export interface BatchSQLCostInfo {
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BatchId?: string
+  /**
+   * 引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineName?: string
+  /**
+   * 引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineId?: string
+  /**
+   * 本次消耗，单位cu
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cost?: number
+  /**
+   * 时间开销，秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeCost?: number
+  /**
+   * 操作者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+}
+
+/**
  * DescribeTablesName请求参数结构体
  */
 export interface DescribeTablesNameRequest {
@@ -3738,13 +3774,28 @@ export interface DescribeSparkSessionBatchSQLResponse {
 }
 
 /**
+ * DescribeSparkSessionBatchSQLCost返回参数结构体
+ */
+export interface DescribeSparkSessionBatchSQLCostResponse {
+  /**
+   * 任务消耗
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostInfo?: Array<BatchSQLCostInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasksOverview返回参数结构体
  */
 export interface DescribeTasksOverviewResponse {
   /**
    * 各类任务个数大于0
    */
-  TasksOverview: TasksOverview
+  TasksOverview?: TasksOverview
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5253,7 +5304,24 @@ export interface UpdateDataEngineResponse {
 /**
  * DescribeTasksOverview请求参数结构体
  */
-export type DescribeTasksOverviewRequest = null
+export interface DescribeTasksOverviewRequest {
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 筛选条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 引擎名
+   */
+  DataEngineName?: string
+}
 
 /**
  * 表分区字段信息
@@ -9144,6 +9212,16 @@ export interface LockMetaDataRequest {
    * 主机名
    */
   Hostname?: string
+}
+
+/**
+ * DescribeSparkSessionBatchSQLCost请求参数结构体
+ */
+export interface DescribeSparkSessionBatchSQLCostRequest {
+  /**
+   * SparkSQL唯一标识
+   */
+  BatchIds?: Array<string>
 }
 
 /**

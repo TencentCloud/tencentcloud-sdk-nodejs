@@ -31,7 +31,7 @@ export interface VoicePrintDeleteRequest {
     /**
      * 说话人id，说话人唯一标识
      */
-    VoicePrintId: string;
+    VoicePrintId?: string;
 }
 /**
  * DescribeAsyncRecognitionTasks请求参数结构体

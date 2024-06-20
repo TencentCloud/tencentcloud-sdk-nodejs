@@ -251,6 +251,7 @@ import {
   RollBackClusterRequest,
   BizTaskInfo,
   RemoveClusterSlaveZoneResponse,
+  RenewClustersRequest,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
   QueryParamFilter,
   NewAccount,
@@ -353,6 +354,7 @@ import {
   ParamItemDetail,
   GrantAccountPrivilegesRequest,
   IsolateClusterResponse,
+  RenewClustersResponse,
   RollbackTableInfo,
   RollbackProcessInfo,
   ModifyVipVportResponse,
@@ -548,13 +550,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更换集群vpc
+   * 续费集群
    */
-  async SwitchClusterVpc(
-    req: SwitchClusterVpcRequest,
-    cb?: (error: string, rep: SwitchClusterVpcResponse) => void
-  ): Promise<SwitchClusterVpcResponse> {
-    return this.request("SwitchClusterVpc", req, cb)
+  async RenewClusters(
+    req: RenewClustersRequest,
+    cb?: (error: string, rep: RenewClustersResponse) => void
+  ): Promise<RenewClustersResponse> {
+    return this.request("RenewClusters", req, cb)
   }
 
   /**
@@ -1465,6 +1467,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
   ): Promise<ModifyAccountDescriptionResponse> {
     return this.request("ModifyAccountDescription", req, cb)
+  }
+
+  /**
+   * 更换集群vpc
+   */
+  async SwitchClusterVpc(
+    req: SwitchClusterVpcRequest,
+    cb?: (error: string, rep: SwitchClusterVpcResponse) => void
+  ): Promise<SwitchClusterVpcResponse> {
+    return this.request("SwitchClusterVpc", req, cb)
   }
 
   /**

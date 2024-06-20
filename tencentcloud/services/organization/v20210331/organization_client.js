@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
     }
     /**
-     * 获取共享单元资源列表。
+     * 接受加入共享单元邀请。
      */
-    async DescribeShareUnitResources(req, cb) {
-        return this.request("DescribeShareUnitResources", req, cb);
+    async AcceptJoinShareUnitInvitation(req, cb) {
+        return this.request("AcceptJoinShareUnitInvitation", req, cb);
     }
     /**
      * 删除组织成员访问策略
@@ -152,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAccount(req, cb) {
         return this.request("DeleteAccount", req, cb);
+    }
+    /**
+     * 拒绝加入共享单元邀请。
+     */
+    async RejectJoinShareUnitInvitation(req, cb) {
+        return this.request("RejectJoinShareUnitInvitation", req, cb);
     }
     /**
      * 批量删除企业组织节点
@@ -290,6 +296,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async EnablePolicyType(req, cb) {
         return this.request("EnablePolicyType", req, cb);
+    }
+    /**
+     * 获取共享单元资源列表。
+     */
+    async DescribeShareUnitResources(req, cb) {
+        return this.request("DescribeShareUnitResources", req, cb);
     }
     /**
      * 创建组织成员

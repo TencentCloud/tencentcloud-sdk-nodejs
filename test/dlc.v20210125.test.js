@@ -508,6 +508,16 @@ it("dlc.v20210125.ReportHeartbeatMetaData", async function () {
     }
 })
 
+it("dlc.v20210125.AssignMangedTableProperties", async function () {
+    try {
+       const data = await client.AssignMangedTableProperties({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUpdatableDataEngines", async function () {
     try {
        const data = await client.DescribeUpdatableDataEngines({})
@@ -1038,9 +1048,9 @@ it("dlc.v20210125.CreateDMSTable", async function () {
     }
 })
 
-it("dlc.v20210125.AssignMangedTableProperties", async function () {
+it("dlc.v20210125.DescribeSparkSessionBatchSQLCost", async function () {
     try {
-       const data = await client.AssignMangedTableProperties({})
+       const data = await client.DescribeSparkSessionBatchSQLCost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

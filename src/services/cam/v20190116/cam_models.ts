@@ -794,7 +794,7 @@ export interface CreateAccessKeyResponse {
    * 访问密钥
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessKey: AccessKeyDetail
+  AccessKey?: AccessKeyDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -819,6 +819,10 @@ export interface CreateAccessKeyRequest {
    * 指定用户Uin，不填默认为当前用户创建访问密钥
    */
   TargetUin?: number
+  /**
+   * 密钥描述，长度在1到1024之间，可包含大小写字符，数字以及特殊字符：=,.@:/-。 正则为：[\w+=,.@:/-]*。
+   */
+  Description?: string
 }
 
 /**
@@ -1002,19 +1006,24 @@ export interface AccessKeyDetail {
   /**
    * 访问密钥标识
    */
-  AccessKeyId: string
+  AccessKeyId?: string
   /**
    * 访问密钥（密钥仅创建时可见，请妥善保存）
    */
-  SecretAccessKey: string
+  SecretAccessKey?: string
   /**
    * 密钥状态，激活（Active）或未激活（Inactive）
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -2337,15 +2346,20 @@ export interface AccessKey {
   /**
    * 访问密钥标识
    */
-  AccessKeyId: string
+  AccessKeyId?: string
   /**
    * 密钥状态，激活（Active）或未激活（Inactive）
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
+  /**
+   * 密钥描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**

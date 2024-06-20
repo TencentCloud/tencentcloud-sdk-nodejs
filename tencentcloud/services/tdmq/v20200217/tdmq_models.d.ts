@@ -361,6 +361,38 @@ export interface ConsumerStats {
     LastTimestamp?: number;
 }
 /**
+ * DescribeRocketMQEnvironmentRoles请求参数结构体
+ */
+export interface DescribeRocketMQEnvironmentRolesRequest {
+    /**
+     * 必填字段，RocketMQ集群的ID
+     */
+    ClusterId: string;
+    /**
+     * 环境（命名空间）名称。
+     */
+    EnvironmentId?: string;
+    /**
+     * 起始下标，不填默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，不填则默认为10，最大值为20。
+     */
+    Limit?: number;
+    /**
+     * 角色名称
+     */
+    RoleName?: string;
+    /**
+     * * RoleName
+  按照角色名进行过滤，精确查询。
+  类型：String
+  必选：否
+     */
+    Filters?: Array<Filter>;
+}
+/**
  * DeleteRocketMQGroup请求参数结构体
  */
 export interface DeleteRocketMQGroupRequest {
@@ -750,19 +782,32 @@ export interface DescribeRabbitMQQueuesResponse {
     RequestId?: string;
 }
 /**
- * 标签的key/value的类型
+ * DescribeEnvironments请求参数结构体
  */
-export interface Tag {
+export interface DescribeEnvironmentsRequest {
     /**
-     * 标签的key的值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * Pulsar 集群的ID
      */
-    TagKey: string;
+    ClusterId: string;
     /**
-     * 标签的Value的值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 命名空间名称，模糊搜索。
      */
-    TagValue: string;
+    EnvironmentId?: string;
+    /**
+     * 起始下标，不填默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，不填则默认为10，最大值为20。
+     */
+    Limit?: number;
+    /**
+     * * EnvironmentId
+  按照名称空间进行过滤，精确查询。
+  类型：String
+  必选：否
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeRocketMQNamespaces请求参数结构体
@@ -1019,13 +1064,13 @@ export interface ModifyCmqSubscriptionAttributeResponse {
     RequestId?: string;
 }
 /**
- * DescribeNamespaceBundlesOpt返回参数结构体
+ * DeleteRocketMQRoles返回参数结构体
  */
-export interface DescribeNamespaceBundlesOptResponse {
+export interface DeleteRocketMQRolesResponse {
     /**
-     * 记录条数
+     * 成功删除的角色名称数组。
      */
-    TotalCount?: number;
+    RoleNames?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1328,6 +1373,27 @@ export interface UnbindCmqDeadLetterResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyRocketMQEnvironmentRole请求参数结构体
+ */
+export interface ModifyRocketMQEnvironmentRoleRequest {
+    /**
+     * 环境（命名空间）名称。
+     */
+    EnvironmentId: string;
+    /**
+     * 角色名称。
+     */
+    RoleName: string;
+    /**
+     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     */
+    Permissions: Array<string>;
+    /**
+     * 必填字段，集群的ID
+     */
+    ClusterId: string;
 }
 /**
  * ModifyRocketMQNamespace返回参数结构体
@@ -1811,6 +1877,15 @@ export interface DescribeNamespaceBundlesOptRequest {
     OwnerBroker?: string;
 }
 /**
+ * DeleteRocketMQEnvironmentRoles返回参数结构体
+ */
+export interface DeleteRocketMQEnvironmentRolesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteCmqSubscribe请求参数结构体
  */
 export interface DeleteCmqSubscribeRequest {
@@ -2205,6 +2280,23 @@ export interface ModifyEnvironmentRoleRequest {
     ClusterId: string;
 }
 /**
+ * DescribeRocketMQRoles返回参数结构体
+ */
+export interface DescribeRocketMQRolesResponse {
+    /**
+     * 记录数。
+     */
+    TotalCount?: number;
+    /**
+     * 角色数组。
+     */
+    RoleSets?: Array<Role>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 订阅关系
  */
 export interface SubscriptionTopic {
@@ -2222,45 +2314,21 @@ export interface SubscriptionTopic {
     SubscriptionName: string;
 }
 /**
- * AMQP集群配置
+ * ModifyRocketMQRole请求参数结构体
  */
-export interface AMQPClusterConfig {
+export interface ModifyRocketMQRoleRequest {
     /**
-     * 单Vhost TPS上限
+     * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
      */
-    MaxTpsPerVHost: number;
+    RoleName: string;
     /**
-     * 单Vhost客户端连接数上限
+     * 必填字段，集群Id
      */
-    MaxConnNumPerVHost: number;
+    ClusterId: string;
     /**
-     * 最大Vhost数量
+     * 备注说明，长度必须大等于0且小等于128。
      */
-    MaxVHostNum: number;
-    /**
-     * 最大exchange数量
-     */
-    MaxExchangeNum: number;
-    /**
-     * 最大Queue数量
-     */
-    MaxQueueNum: number;
-    /**
-     * 消息最大保留时间，以毫秒为单位
-     */
-    MaxRetentionTime: number;
-    /**
-     * 已使用Vhost数量
-     */
-    UsedVHostNum: number;
-    /**
-     * 已使用exchange数量
-     */
-    UsedExchangeNum: number;
-    /**
-     * 已使用queue数量
-     */
-    UsedQueueNum: number;
+    Remark?: string;
 }
 /**
  * DescribeMqMsgTrace请求参数结构体
@@ -3290,6 +3358,47 @@ export interface DescribeRocketMQClusterResponse {
     RequestId?: string;
 }
 /**
+ * AMQP集群配置
+ */
+export interface AMQPClusterConfig {
+    /**
+     * 单Vhost TPS上限
+     */
+    MaxTpsPerVHost: number;
+    /**
+     * 单Vhost客户端连接数上限
+     */
+    MaxConnNumPerVHost: number;
+    /**
+     * 最大Vhost数量
+     */
+    MaxVHostNum: number;
+    /**
+     * 最大exchange数量
+     */
+    MaxExchangeNum: number;
+    /**
+     * 最大Queue数量
+     */
+    MaxQueueNum: number;
+    /**
+     * 消息最大保留时间，以毫秒为单位
+     */
+    MaxRetentionTime: number;
+    /**
+     * 已使用Vhost数量
+     */
+    UsedVHostNum: number;
+    /**
+     * 已使用exchange数量
+     */
+    UsedExchangeNum: number;
+    /**
+     * 已使用queue数量
+     */
+    UsedQueueNum: number;
+}
+/**
  * 服务方信息
  */
 export interface ServerLog {
@@ -3525,32 +3634,19 @@ export interface CreateProClusterResponse {
     RequestId?: string;
 }
 /**
- * DescribeEnvironments请求参数结构体
+ * 标签的key/value的类型
  */
-export interface DescribeEnvironmentsRequest {
+export interface Tag {
     /**
-     * Pulsar 集群的ID
+     * 标签的key的值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    TagKey: string;
     /**
-     * 命名空间名称，模糊搜索。
+     * 标签的Value的值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvironmentId?: string;
-    /**
-     * 起始下标，不填默认为0。
-     */
-    Offset?: number;
-    /**
-     * 返回数量，不填则默认为10，最大值为20。
-     */
-    Limit?: number;
-    /**
-     * * EnvironmentId
-  按照名称空间进行过滤，精确查询。
-  类型：String
-  必选：否
-     */
-    Filters?: Array<Filter>;
+    TagValue: string;
 }
 /**
  * CreateProCluster请求参数结构体
@@ -3637,6 +3733,27 @@ export interface ClearCmqQueueRequest {
      * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
      */
     QueueName: string;
+}
+/**
+ * CreateRocketMQEnvironmentRole请求参数结构体
+ */
+export interface CreateRocketMQEnvironmentRoleRequest {
+    /**
+     * 环境（命名空间）名称。
+     */
+    EnvironmentId: string;
+    /**
+     * 角色名称。
+     */
+    RoleName: string;
+    /**
+     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     */
+    Permissions: Array<string>;
+    /**
+     * 必填字段，集群的ID
+     */
+    ClusterId: string;
 }
 /**
  * SetRocketMQPublicAccessPoint请求参数结构体
@@ -3786,6 +3903,28 @@ export interface ModifyRocketMQNamespaceRequest {
  * ModifyRocketMQTopic返回参数结构体
  */
 export interface ModifyRocketMQTopicResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateRocketMQRole返回参数结构体
+ */
+export interface CreateRocketMQRoleResponse {
+    /**
+     * 角色名称
+     */
+    RoleName?: string;
+    /**
+     * 角色token
+     */
+    Token?: string;
+    /**
+     * 备注说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4813,9 +4952,46 @@ export interface DescribeEnvironmentAttributesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRocketMQRoles请求参数结构体
+ */
+export interface DescribeRocketMQRolesRequest {
+    /**
+     * 起始下标，不填默认为0。
+     */
+    Offset: number;
+    /**
+     * 返回数量，不填则默认为10，最大值为20。
+     */
+    Limit: number;
+    /**
+     * 必填字段，集群Id
+     */
+    ClusterId: string;
+    /**
+     * 角色名称，模糊查询
+     */
+    RoleName?: string;
+    /**
+     * * RoleName
+  按照角色名进行过滤，精确查询。
+  类型：String
+  必选：否
+     */
+    Filters?: Array<Filter>;
+}
+/**
  * CreateRocketMQNamespace返回参数结构体
  */
 export interface CreateRocketMQNamespaceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyRocketMQEnvironmentRole返回参数结构体
+ */
+export interface ModifyRocketMQEnvironmentRoleResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5103,6 +5279,19 @@ export interface CreateRabbitMQVirtualHostResponse {
      * vhost名
      */
     VirtualHost?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeNamespaceBundlesOpt返回参数结构体
+ */
+export interface DescribeNamespaceBundlesOptResponse {
+    /**
+     * 记录条数
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5439,6 +5628,36 @@ export interface SendRocketMQMessageResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * Pulsar专业版集群规格信息
+ */
+export interface PulsarProClusterSpecInfo {
+    /**
+     * 集群规格名称
+     */
+    SpecName: string;
+    /**
+     * 峰值tps
+     */
+    MaxTps: number;
+    /**
+     * 峰值带宽。单位：mbps
+     */
+    MaxBandWidth: number;
+    /**
+     * 最大命名空间个数
+     */
+    MaxNamespaces: number;
+    /**
+     * 最大主题分区数
+     */
+    MaxTopics: number;
+    /**
+     * 规格外弹性TPS
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScalableTps: number;
 }
 /**
  * 订阅者
@@ -6224,6 +6443,23 @@ export interface DescribeCmqDeadLetterSourceQueuesRequest {
     SourceQueueName?: string;
 }
 /**
+ * CreateRocketMQRole请求参数结构体
+ */
+export interface CreateRocketMQRoleRequest {
+    /**
+     * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+     */
+    RoleName: string;
+    /**
+     * 必填字段，集群Id
+     */
+    ClusterId: string;
+    /**
+     * 备注说明，长度必须大等于0且小等于128。
+     */
+    Remark?: string;
+}
+/**
  * DescribeNodeHealthOpt返回参数结构体
  */
 export interface DescribeNodeHealthOptResponse {
@@ -6609,6 +6845,23 @@ export interface SendMsgRequest {
     ClusterId?: string;
 }
 /**
+ * DescribeRocketMQEnvironmentRoles返回参数结构体
+ */
+export interface DescribeRocketMQEnvironmentRolesResponse {
+    /**
+     * 记录数。
+     */
+    TotalCount?: number;
+    /**
+     * 命名空间角色集合。
+     */
+    EnvironmentRoleSets?: Array<EnvironmentRole>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRocketMQMigratingTopicList请求参数结构体
  */
 export interface DescribeRocketMQMigratingTopicListRequest {
@@ -6953,6 +7206,23 @@ export interface DeleteCmqSubscribeResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRocketMQEnvironmentRoles请求参数结构体
+ */
+export interface DeleteRocketMQEnvironmentRolesRequest {
+    /**
+     * 环境（命名空间）名称。
+     */
+    EnvironmentId: string;
+    /**
+     * 角色名称数组。
+     */
+    RoleNames: Array<string>;
+    /**
+     * 必填字段，集群的ID
+     */
+    ClusterId: string;
+}
+/**
  * VPC配置信息
  */
 export interface VpcConfig {
@@ -7031,6 +7301,19 @@ export interface DescribeRabbitMQVirtualHostRequest {
      * 排序顺序，ascend 或 descend
      */
     SortOrder?: string;
+}
+/**
+ * DeleteRocketMQRoles请求参数结构体
+ */
+export interface DeleteRocketMQRolesRequest {
+    /**
+     * 角色名称数组。
+     */
+    RoleNames: Array<string>;
+    /**
+     * 必填字段，集群Id
+     */
+    ClusterId: string;
 }
 /**
  * cmq DeadLetterPolicy
@@ -7115,34 +7398,21 @@ export interface CreateRabbitMQUserResponse {
     RequestId?: string;
 }
 /**
- * Pulsar专业版集群规格信息
+ * ModifyRocketMQRole返回参数结构体
  */
-export interface PulsarProClusterSpecInfo {
+export interface ModifyRocketMQRoleResponse {
     /**
-     * 集群规格名称
+     * 角色名称
      */
-    SpecName: string;
+    RoleName?: string;
     /**
-     * 峰值tps
+     * 备注说明
      */
-    MaxTps: number;
+    Remark?: string;
     /**
-     * 峰值带宽。单位：mbps
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    MaxBandWidth: number;
-    /**
-     * 最大命名空间个数
-     */
-    MaxNamespaces: number;
-    /**
-     * 最大主题分区数
-     */
-    MaxTopics: number;
-    /**
-     * 规格外弹性TPS
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ScalableTps: number;
+    RequestId?: string;
 }
 /**
  * DescribePulsarProInstanceDetail请求参数结构体
@@ -8681,6 +8951,15 @@ export interface DescribeCmqQueueDetailRequest {
      * 精确匹配QueueName
      */
     QueueName: string;
+}
+/**
+ * CreateRocketMQEnvironmentRole返回参数结构体
+ */
+export interface CreateRocketMQEnvironmentRoleResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteEnvironmentRoles请求参数结构体

@@ -467,6 +467,20 @@ export interface Department {
 }
 
 /**
+ * CreateLegalSealQrCode返回参数结构体
+ */
+export interface CreateLegalSealQrCodeResponse {
+  /**
+   * 二维码图片base64值
+   */
+  QrcodeBase64?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 签署人配置信息
  */
 export interface CommonApproverOption {
@@ -1516,26 +1530,31 @@ export interface ChannelCreateSealPolicyResponse {
 }
 
 /**
- * PrepareFlows请求参数结构体
+ * 机构信息
  */
-export interface PrepareFlowsRequest {
+export interface OrganizationInfo {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   * 用户在渠道的机构编号
    */
-  Agent: Agent
+  OrganizationOpenId: string
   /**
-   * 多个合同（签署流程）信息，最大支持20个签署流程。
+   * 机构在平台的编号
    */
-  FlowInfos: Array<FlowInfo>
+  OrganizationId?: string
   /**
-   * 操作完成后的跳转地址，最大长度200
+   * 用户渠道
    */
-  JumpUrl: string
+  Channel?: string
   /**
-   * 暂未开放
+   * 用户真实的IP
    * @deprecated
    */
-  Operator?: UserInfo
+  ClientIp?: string
+  /**
+   * 机构的代理IP
+   * @deprecated
+   */
+  ProxyIp?: string
 }
 
 /**
@@ -3279,31 +3298,30 @@ export interface CreateConsoleLoginUrlRequest {
 }
 
 /**
- * 机构信息
+ * CreateLegalSealQrCode请求参数结构体
  */
-export interface OrganizationInfo {
+export interface CreateLegalSealQrCodeRequest {
   /**
-   * 用户在渠道的机构编号
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
+</ul>注:
+`1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 `
+`2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 `
+`3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 `
    */
-  OrganizationOpenId: string
+  Agent?: Agent
   /**
-   * 机构在平台的编号
+   * 操作人信息
    */
-  OrganizationId?: string
+  Operator?: UserInfo
   /**
-   * 用户渠道
+   * 企业信息
    */
-  Channel?: string
-  /**
-   * 用户真实的IP
-   * @deprecated
-   */
-  ClientIp?: string
-  /**
-   * 机构的代理IP
-   * @deprecated
-   */
-  ProxyIp?: string
+  Organization?: OrganizationInfo
 }
 
 /**
@@ -4444,6 +4462,28 @@ export interface Intention {
 注：`选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。`
    */
   IntentionActions?: Array<IntentionAction>
+}
+
+/**
+ * CreateFlowBlockchainEvidenceUrl返回参数结构体
+ */
+export interface CreateFlowBlockchainEvidenceUrlResponse {
+  /**
+   * 二维码图片下载链接，下载链接有效时间5分钟，请尽快下载保存。
+   */
+  QrCode?: string
+  /**
+   * 查看短链，可直接点击短链查看报告。
+   */
+  Url?: string
+  /**
+   * 二维码和短链的过期时间戳，过期时间默认为生成链接后7天。
+   */
+  ExpiredOn?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7551,6 +7591,93 @@ export interface UploadFilesRequest {
 }
 
 /**
+ * CreateSealByImage请求参数结构体
+ */
+export interface CreateSealByImageRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
+   */
+  Agent: Agent
+  /**
+   * 电子印章名字，1-50个中文字符
+注:`同一企业下电子印章名字不能相同`
+   */
+  SealName: string
+  /**
+   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式
+
+注: `通过图片创建的电子印章，需电子签平台人工审核`
+
+
+   */
+  SealImage?: string
+  /**
+   * 操作者的信息
+   * @deprecated
+   */
+  Operator?: UserInfo
+  /**
+   * 电子印章生成方式
+<ul>
+<li><strong>空值</strong>:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片</li>
+<li><strong>SealGenerateSourceSystem</strong>: 系统生成印章, 无需上传SealImage图片</li>
+</ul>
+   */
+  GenerateSource?: string
+  /**
+   * 电子印章类型 , 可选类型如下: 
+<ul><li>**OFFICIAL**: (默认)公章</li>
+<li>**CONTRACT**: 合同专用章;</li>
+<li>**FINANCE**: 财务专用章;</li>
+<li>**PERSONNEL**: 人事专用章</li>
+<li>**INVOICE**: 发票专用章</li>
+</ul>
+注: `同企业下只能有一个公章, 重复创建会报错`
+   */
+  SealType?: string
+  /**
+   * 企业印章横向文字，最多可填15个汉字  (若超过印章最大宽度，优先压缩字间距，其次缩小字号)
+横向文字的位置如下图中的"印章横向文字在这里"
+
+![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png)
+
+   */
+  SealHorizontalText?: string
+  /**
+   * 印章样式, 可以选择的样式如下: 
+<ul><li>**circle**:(默认)圆形印章</li>
+<li>**ellipse**:椭圆印章</li></ul>
+   */
+  SealStyle?: string
+  /**
+   * 印章尺寸取值描述, 可以选择的尺寸如下: 
+<ul><li> **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效</li>
+<li> **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效</li>
+<li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li>
+<li> **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
+   */
+  SealSize?: string
+  /**
+   * 企业税号
+
+注:
+<ul>
+<li>1.印章类型SealType是INVOICE类型时，此参数才会生效</li>
+<li>2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（<font color="red">如果是通过授权书授权方式认证的企业，此参数必传不能为空</font>）</li>
+</ul>
+   */
+  TaxIdentifyCode?: string
+}
+
+/**
  * DescribeChannelOrganizations返回参数结构体
  */
 export interface DescribeChannelOrganizationsResponse {
@@ -7599,17 +7726,17 @@ export interface ChannelCreateOrganizationBatchSignUrlResponse {
  */
 export interface EmbedUrlOption {
   /**
-   * 合同详情页面是否展示合同控件信息
-<br/>true:允许在合同详情页展示控件
-<br/>false:不允许在合同详情页展示控件
-<br/>默认false,在合同详情页不展示控件
+   * 合同详情预览，允许展示控件信息
+<ul>
+<li><b>true</b>：允许在合同详情页展示控件</li>
+<li><b>false</b>：（默认）不允许在合同详情页展示控件</li>
+</ul>
    */
   ShowFlowDetailComponent?: boolean
   /**
-   * 模版预览页面是否展示空间信息
-<br/>true:允许在模版预览页展示控件
-<br/>false:不允许在模版预览页展示控件
-<br/>默认false,在模版预览页不展示控件
+   * 模板预览，允许展示模板控件信息
+<ul><li> <b>true</b> :允许在模板预览页展示控件</li>
+<li> <b>false</b> :（默认）不允许在模板预览页展示控件</li></ul>
    */
   ShowTemplateComponent?: boolean
 }
@@ -7887,90 +8014,17 @@ export interface IntentionQuestion {
 }
 
 /**
- * CreateSealByImage请求参数结构体
+ * CreateFlowBlockchainEvidenceUrl请求参数结构体
  */
-export interface CreateSealByImageRequest {
+export interface CreateFlowBlockchainEvidenceUrlRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。  此接口下面信息必填。 <ul> <li>渠道应用标识:  Agent.AppId</li> <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li> <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li> </ul>
    */
   Agent: Agent
   /**
-   * 电子印章名字，1-50个中文字符
-注:`同一企业下电子印章名字不能相同`
+   * 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
-  SealName: string
-  /**
-   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式
-
-注: `通过图片创建的电子印章，需电子签平台人工审核`
-
-
-   */
-  SealImage?: string
-  /**
-   * 操作者的信息
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
-   * 电子印章生成方式
-<ul>
-<li><strong>空值</strong>:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片</li>
-<li><strong>SealGenerateSourceSystem</strong>: 系统生成印章, 无需上传SealImage图片</li>
-</ul>
-   */
-  GenerateSource?: string
-  /**
-   * 电子印章类型 , 可选类型如下: 
-<ul><li>**OFFICIAL**: (默认)公章</li>
-<li>**CONTRACT**: 合同专用章;</li>
-<li>**FINANCE**: 财务专用章;</li>
-<li>**PERSONNEL**: 人事专用章</li>
-<li>**INVOICE**: 发票专用章</li>
-</ul>
-注: `同企业下只能有一个公章, 重复创建会报错`
-   */
-  SealType?: string
-  /**
-   * 企业印章横向文字，最多可填15个汉字  (若超过印章最大宽度，优先压缩字间距，其次缩小字号)
-横向文字的位置如下图中的"印章横向文字在这里"
-
-![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png)
-
-   */
-  SealHorizontalText?: string
-  /**
-   * 印章样式, 可以选择的样式如下: 
-<ul><li>**circle**:(默认)圆形印章</li>
-<li>**ellipse**:椭圆印章</li></ul>
-   */
-  SealStyle?: string
-  /**
-   * 印章尺寸取值描述, 可以选择的尺寸如下: 
-<ul><li> **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效</li>
-<li> **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效</li>
-<li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li>
-<li> **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
-   */
-  SealSize?: string
-  /**
-   * 企业税号
-
-注:
-<ul>
-<li>1.印章类型SealType是INVOICE类型时，此参数才会生效</li>
-<li>2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（<font color="red">如果是通过授权书授权方式认证的企业，此参数必传不能为空</font>）</li>
-</ul>
-   */
-  TaxIdentifyCode?: string
+  FlowId: string
 }
 
 /**
@@ -8214,4 +8268,27 @@ export interface ChannelDescribeFlowComponentsRequest {
    * 需要获取填写控件填写内容的合同流程ID
    */
   FlowId: string
+}
+
+/**
+ * PrepareFlows请求参数结构体
+ */
+export interface PrepareFlowsRequest {
+  /**
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   */
+  Agent: Agent
+  /**
+   * 多个合同（签署流程）信息，最大支持20个签署流程。
+   */
+  FlowInfos: Array<FlowInfo>
+  /**
+   * 操作完成后的跳转地址，最大长度200
+   */
+  JumpUrl: string
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  Operator?: UserInfo
 }

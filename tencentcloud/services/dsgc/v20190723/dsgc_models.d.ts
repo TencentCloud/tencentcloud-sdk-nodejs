@@ -1624,11 +1624,11 @@ export interface DeleteDSPAMetaResourceResponse {
     /**
      * DSPA实例ID。
      */
-    DspaId: string;
+    DspaId?: string;
     /**
      * 删除结果。
      */
-    Results: Array<DspaTaskResult>;
+    Results?: Array<DspaTaskResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2927,11 +2927,11 @@ export interface DeleteCosMetaResourceResponse {
      * 结果集合。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results: Array<DspaTaskResult>;
+    Results?: Array<DspaTaskResult>;
     /**
      * DSPA实例ID。
      */
-    DspaId: string;
+    DspaId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8218,12 +8218,12 @@ export interface GetResourceConnectionStatusResponse {
     /**
      * 连接状态，success -- 连接成功，failed -- 连接失败
      */
-    ConnectionStatus: string;
+    ConnectionStatus?: string;
     /**
      * 连接状态的描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectionDesc: string;
+    ConnectionDesc?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

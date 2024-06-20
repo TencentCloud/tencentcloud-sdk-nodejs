@@ -30,6 +30,7 @@ import {
   DescribeRabbitMQNodeListRequest,
   PublishCmqMsgRequest,
   ConsumerStats,
+  DescribeRocketMQEnvironmentRolesRequest,
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
   ModifyRabbitMQUserRequest,
@@ -38,7 +39,7 @@ import {
   RabbitMQClusterInfo,
   RabbitMQVirtualHostStatistics,
   DescribeRabbitMQQueuesResponse,
-  Tag,
+  DescribeEnvironmentsRequest,
   DescribeRocketMQNamespacesRequest,
   ModifyRocketMQClusterResponse,
   CreateEnvironmentRequest,
@@ -53,7 +54,7 @@ import {
   DescribeRabbitMQVirtualHostResponse,
   CreateRocketMQClusterRequest,
   ModifyCmqSubscriptionAttributeResponse,
-  DescribeNamespaceBundlesOptResponse,
+  DeleteRocketMQRolesResponse,
   DeleteRocketMQTopicResponse,
   Publisher,
   ModifyRoleRequest,
@@ -65,6 +66,7 @@ import {
   ModifyRocketMQGroupRequest,
   DescribeCmqTopicDetailRequest,
   UnbindCmqDeadLetterResponse,
+  ModifyRocketMQEnvironmentRoleRequest,
   ModifyRocketMQNamespaceResponse,
   InternalTenant,
   DeleteEnvironmentsRequest,
@@ -81,6 +83,7 @@ import {
   DescribeRabbitMQVipInstanceRequest,
   DeleteTopicsRequest,
   DescribeNamespaceBundlesOptRequest,
+  DeleteRocketMQEnvironmentRolesResponse,
   DeleteCmqSubscribeRequest,
   RocketMQClusterConfig,
   DescribeCmqDeadLetterSourceQueuesResponse,
@@ -100,8 +103,9 @@ import {
   SetRocketMQPublicAccessPointResponse,
   RocketMQTopicConfigOutput,
   ModifyEnvironmentRoleRequest,
+  DescribeRocketMQRolesResponse,
   SubscriptionTopic,
-  AMQPClusterConfig,
+  ModifyRocketMQRoleRequest,
   DescribeMqMsgTraceRequest,
   SendBatchMessagesRequest,
   DescribeRabbitMQNodeListResponse,
@@ -137,6 +141,7 @@ import {
   DescribeRocketMQConsumerConnectionsResponse,
   DescribeCmqSubscriptionDetailRequest,
   DescribeRocketMQClusterResponse,
+  AMQPClusterConfig,
   ServerLog,
   DescribeMsgTraceResponse,
   ModifyClusterRequest,
@@ -145,11 +150,12 @@ import {
   RabbitMQQueueListInfo,
   DescribeMsgResponse,
   CreateProClusterResponse,
-  DescribeEnvironmentsRequest,
+  Tag,
   CreateProClusterRequest,
   DescribeRabbitMQVipInstancesResponse,
   DeleteRolesRequest,
   ClearCmqQueueRequest,
+  CreateRocketMQEnvironmentRoleRequest,
   SetRocketMQPublicAccessPointRequest,
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
@@ -159,6 +165,7 @@ import {
   CreateRocketMQGroupResponse,
   ModifyRocketMQNamespaceRequest,
   ModifyRocketMQTopicResponse,
+  CreateRocketMQRoleResponse,
   DeleteRocketMQGroupResponse,
   PulsarProInstance,
   RocketMQMigrationTopicDistribution,
@@ -192,7 +199,9 @@ import {
   DescribeRocketMQConsumerConnectionsRequest,
   CreateRoleRequest,
   DescribeEnvironmentAttributesResponse,
+  DescribeRocketMQRolesRequest,
   CreateRocketMQNamespaceResponse,
+  ModifyRocketMQEnvironmentRoleResponse,
   CreateCmqQueueResponse,
   DeleteRabbitMQVipInstanceRequest,
   ModifyEnvironmentAttributesResponse,
@@ -208,6 +217,7 @@ import {
   SendCmqMsgRequest,
   RabbitMQPrivateVirtualHost,
   CreateRabbitMQVirtualHostResponse,
+  DescribeNamespaceBundlesOptResponse,
   RewindCmqQueueResponse,
   PublicAccessRule,
   RabbitMQClusterWhiteListInfo,
@@ -223,6 +233,7 @@ import {
   DescribePublishersRequest,
   ModifyRoleResponse,
   SendRocketMQMessageResponse,
+  PulsarProClusterSpecInfo,
   Subscription,
   RocketMQMessageTrack,
   DescribeRocketMQNamespacesResponse,
@@ -241,6 +252,7 @@ import {
   ResetMsgSubOffsetByTimestampResponse,
   SendMessagesRequest,
   DescribeCmqDeadLetterSourceQueuesRequest,
+  CreateRocketMQRoleRequest,
   DescribeNodeHealthOptResponse,
   DescribeRabbitMQVipInstanceResponse,
   ModifyCmqSubscriptionAttributeRequest,
@@ -260,6 +272,7 @@ import {
   TraceResult,
   DescribeRabbitMQQueuesRequest,
   SendMsgRequest,
+  DescribeRocketMQEnvironmentRolesResponse,
   DescribeRocketMQMigratingTopicListRequest,
   CreateRoleResponse,
   ModifyRabbitMQUserResponse,
@@ -275,15 +288,17 @@ import {
   ModifyCmqQueueAttributeRequest,
   RabbitMQClusterSpecInfo,
   DeleteCmqSubscribeResponse,
+  DeleteRocketMQEnvironmentRolesRequest,
   VpcConfig,
   DescribeRabbitMQVipInstancesRequest,
   DescribeClusterDetailResponse,
   DescribeRabbitMQVirtualHostRequest,
+  DeleteRocketMQRolesRequest,
   CmqDeadLetterPolicy,
   QueueQuota,
   ExportRocketMQMessageDetailRequest,
   CreateRabbitMQUserResponse,
-  PulsarProClusterSpecInfo,
+  ModifyRocketMQRoleResponse,
   DescribePulsarProInstanceDetailRequest,
   BindCluster,
   ModifyClusterResponse,
@@ -345,6 +360,7 @@ import {
   RetentionPolicy,
   DescribePublishersResponse,
   DescribeCmqQueueDetailRequest,
+  CreateRocketMQEnvironmentRoleResponse,
   DeleteEnvironmentRolesRequest,
   CreateRocketMQTopicResponse,
   CreateCmqQueueRequest,
@@ -435,6 +451,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建角色
+   */
+  async CreateRocketMQRole(
+    req: CreateRocketMQRoleRequest,
+    cb?: (error: string, rep: CreateRocketMQRoleResponse) => void
+  ): Promise<CreateRocketMQRoleResponse> {
+    return this.request("CreateRocketMQRole", req, cb)
+  }
+
+  /**
    * 创建cmq主题
    */
   async CreateCmqTopic(
@@ -505,13 +531,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询RocketMQ平滑迁移任务列表
+   * 删除角色，支持批量。
    */
-  async DescribeRocketMQSmoothMigrationTaskList(
-    req: DescribeRocketMQSmoothMigrationTaskListRequest,
-    cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
-  ): Promise<DescribeRocketMQSmoothMigrationTaskListResponse> {
-    return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb)
+  async DeleteRocketMQRoles(
+    req: DeleteRocketMQRolesRequest,
+    cb?: (error: string, rep: DeleteRocketMQRolesResponse) => void
+  ): Promise<DeleteRocketMQRolesResponse> {
+    return this.request("DeleteRocketMQRoles", req, cb)
   }
 
   /**
@@ -635,14 +661,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 发送单条消息
-不支持持久topic
-     */
-  async SendMessages(
-    req: SendMessagesRequest,
-    cb?: (error: string, rep: SendMessagesResponse) => void
-  ): Promise<SendMessagesResponse> {
-    return this.request("SendMessages", req, cb)
+   * 修改环境角色授权。
+   */
+  async ModifyRocketMQEnvironmentRole(
+    req: ModifyRocketMQEnvironmentRoleRequest,
+    cb?: (error: string, rep: ModifyRocketMQEnvironmentRoleResponse) => void
+  ): Promise<ModifyRocketMQEnvironmentRoleResponse> {
+    return this.request("ModifyRocketMQEnvironmentRole", req, cb)
   }
 
   /**
@@ -838,6 +863,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建环境角色授权
+   */
+  async CreateRocketMQEnvironmentRole(
+    req: CreateRocketMQEnvironmentRoleRequest,
+    cb?: (error: string, rep: CreateRocketMQEnvironmentRoleResponse) => void
+  ): Promise<CreateRocketMQEnvironmentRoleResponse> {
+    return this.request("CreateRocketMQEnvironmentRole", req, cb)
+  }
+
+  /**
    * 获取在线消费端详情
    */
   async DescribeRocketMQConsumerConnectionDetail(
@@ -915,6 +950,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQVipInstanceDetailResponse) => void
   ): Promise<DescribeRocketMQVipInstanceDetailResponse> {
     return this.request("DescribeRocketMQVipInstanceDetail", req, cb)
+  }
+
+  /**
+   * 获取角色列表
+   */
+  async DescribeRocketMQRoles(
+    req: DescribeRocketMQRolesRequest,
+    cb?: (error: string, rep: DescribeRocketMQRolesResponse) => void
+  ): Promise<DescribeRocketMQRolesResponse> {
+    return this.request("DescribeRocketMQRoles", req, cb)
   }
 
   /**
@@ -1038,6 +1083,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 角色修改
+   */
+  async ModifyRocketMQRole(
+    req: ModifyRocketMQRoleRequest,
+    cb?: (error: string, rep: ModifyRocketMQRoleResponse) => void
+  ): Promise<ModifyRocketMQRoleResponse> {
+    return this.request("ModifyRocketMQRole", req, cb)
+  }
+
+  /**
    * RabbitMQ专享版查询节点列表
    */
   async DescribeRabbitMQNodeList(
@@ -1065,6 +1120,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void
   ): Promise<DeleteRocketMQTopicResponse> {
     return this.request("DeleteRocketMQTopic", req, cb)
+  }
+
+  /**
+   * 用于查询RocketMQ平滑迁移任务列表
+   */
+  async DescribeRocketMQSmoothMigrationTaskList(
+    req: DescribeRocketMQSmoothMigrationTaskListRequest,
+    cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
+  ): Promise<DescribeRocketMQSmoothMigrationTaskListResponse> {
+    return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb)
   }
 
   /**
@@ -1185,6 +1250,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRocketMQTopicResponse) => void
   ): Promise<CreateRocketMQTopicResponse> {
     return this.request("CreateRocketMQTopic", req, cb)
+  }
+
+  /**
+   * 获取命名空间角色列表
+   */
+  async DescribeRocketMQEnvironmentRoles(
+    req: DescribeRocketMQEnvironmentRolesRequest,
+    cb?: (error: string, rep: DescribeRocketMQEnvironmentRolesResponse) => void
+  ): Promise<DescribeRocketMQEnvironmentRolesResponse> {
+    return this.request("DescribeRocketMQEnvironmentRoles", req, cb)
   }
 
   /**
@@ -1417,6 +1492,17 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribeRocketMQClustersResponse) => void
   ): Promise<DescribeRocketMQClustersResponse> {
     return this.request("DescribeRocketMQClusters", req, cb)
+  }
+
+  /**
+     * 发送单条消息
+不支持持久topic
+     */
+  async SendMessages(
+    req: SendMessagesRequest,
+    cb?: (error: string, rep: SendMessagesResponse) => void
+  ): Promise<SendMessagesResponse> {
+    return this.request("SendMessages", req, cb)
   }
 
   /**
@@ -1667,6 +1753,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: CreateRocketMQVipInstanceResponse) => void
   ): Promise<CreateRocketMQVipInstanceResponse> {
     return this.request("CreateRocketMQVipInstance", req, cb)
+  }
+
+  /**
+   * 删除环境角色授权。
+   */
+  async DeleteRocketMQEnvironmentRoles(
+    req: DeleteRocketMQEnvironmentRolesRequest,
+    cb?: (error: string, rep: DeleteRocketMQEnvironmentRolesResponse) => void
+  ): Promise<DeleteRocketMQEnvironmentRolesResponse> {
+    return this.request("DeleteRocketMQEnvironmentRoles", req, cb)
   }
 
   /**

@@ -88,6 +88,15 @@ export interface TagComplianceDetails {
     NonCompliantKeys: Array<string>;
 }
 /**
+ * RejectJoinShareUnitInvitation请求参数结构体
+ */
+export interface RejectJoinShareUnitInvitationRequest {
+    /**
+     * 共享单元ID。
+     */
+    UnitId: string;
+}
+/**
  * DescribePolicyConfig返回参数结构体
  */
 export interface DescribePolicyConfigResponse {
@@ -685,6 +694,15 @@ export interface MemberIdentity {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityAliasName: string;
+}
+/**
+ * RejectJoinShareUnitInvitation返回参数结构体
+ */
+export interface RejectJoinShareUnitInvitationResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateOrganizationNode请求参数结构体
@@ -1294,19 +1312,9 @@ export interface DescribeOrganizationMemberAuthAccountsRequest {
     PolicyId: number;
 }
 /**
- * DescribeShareUnitMembers返回参数结构体
+ * AcceptJoinShareUnitInvitation返回参数结构体
  */
-export interface DescribeShareUnitMembersResponse {
-    /**
-     * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Total?: number;
-    /**
-     * 共享单元成员列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items?: Array<ShareUnitMember>;
+export interface AcceptJoinShareUnitInvitationResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1938,29 +1946,13 @@ export interface CreateOrganizationMemberPolicyResponse {
     RequestId?: string;
 }
 /**
- * DescribeShareUnitMembers请求参数结构体
+ * AcceptJoinShareUnitInvitation请求参数结构体
  */
-export interface DescribeShareUnitMembersRequest {
+export interface AcceptJoinShareUnitInvitationRequest {
     /**
      * 共享单元ID。
      */
     UnitId: string;
-    /**
-     * 共享单元地域。
-     */
-    Area: string;
-    /**
-     * 偏移量。取值是limit的整数倍，默认值 : 0
-     */
-    Offset: number;
-    /**
-     * 限制数目。取值范围：1~50。
-     */
-    Limit: number;
-    /**
-     * 搜索关键字。支持成员Uin搜索。
-     */
-    SearchKey?: string;
 }
 /**
  * CancelOrganizationMemberAuthAccount返回参数结构体
@@ -2511,6 +2503,31 @@ export interface DeleteAccountRequest {
     MemberUin: number;
 }
 /**
+ * DescribeShareUnitMembers请求参数结构体
+ */
+export interface DescribeShareUnitMembersRequest {
+    /**
+     * 共享单元ID。
+     */
+    UnitId: string;
+    /**
+     * 共享单元地域。
+     */
+    Area: string;
+    /**
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
+    Offset: number;
+    /**
+     * 限制数目。取值范围：1~50。
+     */
+    Limit: number;
+    /**
+     * 搜索关键字。支持成员Uin搜索。
+     */
+    SearchKey?: string;
+}
+/**
  * 查询目标关联的SCP策略列表
  */
 export interface ListPoliciesForTarget {
@@ -2651,6 +2668,25 @@ export interface CreateOrganizationIdentityResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeShareUnitMembers返回参数结构体
+ */
+export interface DescribeShareUnitMembersResponse {
+    /**
+     * 总数目。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 共享单元成员列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<ShareUnitMember>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

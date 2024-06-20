@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, DescribeSubscribesRequest, ResetSubscribeResponse, DescribeSubscribesResponse, ModifySubscribeConsumeTimeRequest, StopMigrateJobRequest, DescribeRegionConfResponse, DescribeAsyncRequestInfoResponse, ResetSubscribeRequest, ModifyMigrateJobResponse, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, OfflineIsolatedSubscribeResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, CompleteMigrateJobRequest, DescribeRegionConfRequest, CompleteMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, StartMigrateJobResponse, StartMigrateJobRequest } from "./dts_models";
+import { DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, OfflineIsolatedSubscribeResponse, ResetSubscribeResponse, DescribeSubscribesResponse, ModifySubscribeConsumeTimeRequest, StopMigrateJobRequest, DescribeAsyncRequestInfoResponse, ResetSubscribeRequest, ModifyMigrateJobResponse, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, CompleteMigrateJobRequest, DescribeSubscribesRequest, CompleteMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, StartMigrateJobResponse, StartMigrateJobRequest } from "./dts_models";
 /**
  * dts client
  * @class
@@ -34,12 +34,6 @@ export declare class Client extends AbstractClient {
 在迁移过程中允许调用该接口撤销迁移, 撤销迁移的任务会失败。通过DescribeMigrateJobs接口查询到任务状态为运行中（status=7）或准备完成（status=8）时，才能撤销数据迁移任务。
      */
     StopMigrateJob(req: StopMigrateJobRequest, cb?: (error: string, rep: StopMigrateJobResponse) => void): Promise<StopMigrateJobResponse>;
-    /**
-     * 接口不再使用
-
-本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
-     */
-    DescribeRegionConf(req?: DescribeRegionConfRequest, cb?: (error: string, rep: DescribeRegionConfResponse) => void): Promise<DescribeRegionConfResponse>;
     /**
      * 查询数据迁移任务.
 如果是金融区链路, 请使用域名: https://dts.ap-shenzhen-fsi.tencentcloudapi.com

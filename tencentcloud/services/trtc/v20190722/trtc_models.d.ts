@@ -1542,7 +1542,7 @@ export interface WebRecordVideoParams {
      */
     Height?: number;
     /**
-     * 指定输出格式，可选hls,mp4
+     * 指定输出格式，可选hls,mp4。存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
   
      */
     Format?: string;

@@ -320,6 +320,26 @@ export interface InstanceMultiParam {
     ValueType: string;
 }
 /**
+ * ModifyInstanceParams返回参数结构体
+ */
+export interface ModifyInstanceParamsResponse {
+    /**
+     * 修改参数配置是否生效。
+  - true：参数修改后的值已生效。
+  - false：执行失败。
+  
+     */
+    Changed?: boolean;
+    /**
+     * 该参数暂时无意义(兼容前端保留)。
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBackupRules返回参数结构体
  */
 export interface DescribeBackupRulesResponse {
@@ -404,6 +424,19 @@ export interface DescribeDBInstanceDealResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 修改mongoDB实例，请求参数
+ */
+export interface ModifyMongoDBParamType {
+    /**
+     * 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。
+     */
+    Key: string;
+    /**
+     * 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。
+     */
+    Value: string;
 }
 /**
  * OfflineIsolatedDBInstance返回参数结构体
@@ -2284,6 +2317,26 @@ export interface AssignProjectRequest {
      * 项目ID，用户已创建项目的唯一ID,非自定义
      */
     ProjectId: number;
+}
+/**
+ * ModifyInstanceParams请求参数结构体
+ */
+export interface ModifyInstanceParamsRequest {
+    /**
+     * 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+  
+     */
+    InstanceId: string;
+    /**
+     * 指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 [DescribeInstanceParams ](https://cloud.tencent.com/document/product/240/65903)获取。
+     */
+    InstanceParams: Array<ModifyMongoDBParamType>;
+    /**
+     * 操作类型，包括：
+  - IMMEDIATELY：立即调整。
+  - DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。
+     */
+    ModifyType?: string;
 }
 /**
  * CreateBackupDownloadTask返回参数结构体

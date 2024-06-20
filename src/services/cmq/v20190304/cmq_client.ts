@@ -163,7 +163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举队列
+   * 枚举队列列表
    */
   async DescribeQueueDetail(
     req: DescribeQueueDetailRequest,

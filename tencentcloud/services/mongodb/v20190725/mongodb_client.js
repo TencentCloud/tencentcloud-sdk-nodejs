@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupRules", req, cb);
     }
     /**
+     * 本接口(RenameInstance)用于修改云数据库实例的名称。
+     */
+    async RenameInstance(req, cb) {
+        return this.request("RenameInstance", req, cb);
+    }
+    /**
      * 查询异步任务状态接口
      */
     async DescribeAsyncRequestInfo(req, cb) {
@@ -240,10 +246,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetInstanceMaintenance", req, cb);
     }
     /**
-     * 本接口(RenameInstance)用于修改云数据库实例的名称。
+     * 本接口（ModifyInstanceParams）用于修改mongoDB实例的参数配置。
      */
-    async RenameInstance(req, cb) {
-        return this.request("RenameInstance", req, cb);
+    async ModifyInstanceParams(req, cb) {
+        return this.request("ModifyInstanceParams", req, cb);
     }
     /**
      * 本接口(KillOps)用于终止MongoDB云数据库实例上执行的特定操作。

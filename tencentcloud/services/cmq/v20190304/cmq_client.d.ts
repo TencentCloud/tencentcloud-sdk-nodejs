@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopicDetail(req: DescribeTopicDetailRequest, cb?: (error: string, rep: DescribeTopicDetailResponse) => void): Promise<DescribeTopicDetailResponse>;
     /**
-     * 枚举队列
+     * 枚举队列列表
      */
     DescribeQueueDetail(req: DescribeQueueDetailRequest, cb?: (error: string, rep: DescribeQueueDetailResponse) => void): Promise<DescribeQueueDetailResponse>;
     /**

@@ -67,14 +67,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopMigrateJob", req, cb);
     }
     /**
-     * 接口不再使用
-
-本接口（DescribeRegionConf）用于查询可售卖订阅实例的地域
-     */
-    async DescribeRegionConf(req, cb) {
-        return this.request("DescribeRegionConf", req, cb);
-    }
-    /**
      * 查询数据迁移任务.
 如果是金融区链路, 请使用域名: https://dts.ap-shenzhen-fsi.tencentcloudapi.com
      */

@@ -322,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReportHeartbeatMetaData", req, cb);
     }
     /**
+     * 分配原生表表属性
+     */
+    async AssignMangedTableProperties(req, cb) {
+        return this.request("AssignMangedTableProperties", req, cb);
+    }
+    /**
      * 查询可更新配置的引擎列表
      */
     async DescribeUpdatableDataEngines(req, cb) {
@@ -640,10 +646,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDMSTable", req, cb);
     }
     /**
-     * 分配原生表表属性
+     * 本接口（DescribeSparkSessionBatchSQLCost）用于查询Spark SQL批任务消耗
      */
-    async AssignMangedTableProperties(req, cb) {
-        return this.request("AssignMangedTableProperties", req, cb);
+    async DescribeSparkSessionBatchSQLCost(req, cb) {
+        return this.request("DescribeSparkSessionBatchSQLCost", req, cb);
     }
     /**
      * 升级引擎镜像

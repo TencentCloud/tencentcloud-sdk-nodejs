@@ -5956,6 +5956,27 @@ export interface RemoveClusterSlaveZoneResponse {
     RequestId?: string;
 }
 /**
+ * RenewClusters请求参数结构体
+ */
+export interface RenewClustersRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 续费时长
+     */
+    TimeSpan: number;
+    /**
+     * 时间单位 y,m,d,h,i,s
+     */
+    TimeUnit: string;
+    /**
+     * 交易模式 0-下单并支付 1-下单
+     */
+    DealMode?: number;
+}
+/**
  * OpenClusterReadOnlyInstanceGroupAccess返回参数结构体
  */
 export interface OpenClusterReadOnlyInstanceGroupAccessResponse {
@@ -8635,6 +8656,40 @@ export interface IsolateClusterResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DealNames?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RenewClusters返回参数结构体
+ */
+export interface RenewClustersResponse {
+    /**
+     * 预付费总订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BigDealIds: Array<string>;
+    /**
+     * 退款订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealNames: Array<string>;
+    /**
+     * 冻结流水，一次开通一个冻结流水
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TranId: string;
+    /**
+     * 每个订单号对应的发货资源id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds: Array<string>;
+    /**
+     * 集群id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterIds: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

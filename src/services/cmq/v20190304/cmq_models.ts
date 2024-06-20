@@ -387,25 +387,25 @@ export interface TransactionPolicy {
  */
 export interface DescribeTopicDetailRequest {
   /**
-   * 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
+   * 标签匹配。
    */
-  Offset?: number
+  TagKey?: string
   /**
    * 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。
    */
   Limit?: number
   /**
+   * 精确匹配TopicName。
+   */
+  TopicName?: string
+  /**
    * 目前只支持过滤TopicName ， 且只能填一个过滤值。
    */
   Filters?: Array<Filter>
   /**
-   * 标签匹配。
+   * 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
    */
-  TagKey?: string
-  /**
-   * 精确匹配TopicName。
-   */
-  TopicName?: string
+  Offset?: number
 }
 
 /**
@@ -569,25 +569,25 @@ export interface ModifyTopicAttributeRequest {
  */
 export interface DescribeQueueDetailRequest {
   /**
-   * 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0
+   * 标签搜索
    */
-  Offset?: number
+  TagKey?: string
   /**
    * 分页时本页获取队列的个数，如果不传递该参数，则该参数默认为20，最大值为50。
    */
   Limit?: number
   /**
+   * 精确匹配QueueName
+   */
+  QueueName?: string
+  /**
    * 筛选参数，目前支持QueueName筛选，且仅支持一个关键字
    */
   Filters?: Array<Filter>
   /**
-   * 标签搜索
+   * 分页时本页获取队列列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0
    */
-  TagKey?: string
-  /**
-   * 精确匹配QueueName
-   */
-  QueueName?: string
+  Offset?: number
 }
 
 /**

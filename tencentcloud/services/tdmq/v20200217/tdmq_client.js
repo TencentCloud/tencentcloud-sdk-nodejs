@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQMsgTrace", req, cb);
     }
     /**
+     * 创建角色
+     */
+    async CreateRocketMQRole(req, cb) {
+        return this.request("CreateRocketMQRole", req, cb);
+    }
+    /**
      * 创建cmq主题
      */
     async CreateCmqTopic(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProCluster", req, cb);
     }
     /**
-     * 用于查询RocketMQ平滑迁移任务列表
+     * 删除角色，支持批量。
      */
-    async DescribeRocketMQSmoothMigrationTaskList(req, cb) {
-        return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb);
+    async DeleteRocketMQRoles(req, cb) {
+        return this.request("DeleteRocketMQRoles", req, cb);
     }
     /**
      * 获取指定消费组下当前客户端的连接情况
@@ -184,11 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopics", req, cb);
     }
     /**
-     * 发送单条消息
-不支持持久topic
+     * 修改环境角色授权。
      */
-    async SendMessages(req, cb) {
-        return this.request("SendMessages", req, cb);
+    async ModifyRocketMQEnvironmentRole(req, cb) {
+        return this.request("ModifyRocketMQEnvironmentRole", req, cb);
     }
     /**
      * 更新RocketMQ主题信息
@@ -307,6 +312,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQSourceClusterTopicList", req, cb);
     }
     /**
+     * 创建环境角色授权
+     */
+    async CreateRocketMQEnvironmentRole(req, cb) {
+        return this.request("CreateRocketMQEnvironmentRole", req, cb);
+    }
+    /**
      * 获取在线消费端详情
      */
     async DescribeRocketMQConsumerConnectionDetail(req, cb) {
@@ -353,6 +364,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRocketMQVipInstanceDetail(req, cb) {
         return this.request("DescribeRocketMQVipInstanceDetail", req, cb);
+    }
+    /**
+     * 获取角色列表
+     */
+    async DescribeRocketMQRoles(req, cb) {
+        return this.request("DescribeRocketMQRoles", req, cb);
     }
     /**
      * 查询RabbitMQ用户列表
@@ -427,6 +444,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMsgTrace", req, cb);
     }
     /**
+     * 角色修改
+     */
+    async ModifyRocketMQRole(req, cb) {
+        return this.request("ModifyRocketMQRole", req, cb);
+    }
+    /**
      * RabbitMQ专享版查询节点列表
      */
     async DescribeRabbitMQNodeList(req, cb) {
@@ -443,6 +466,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRocketMQTopic(req, cb) {
         return this.request("DeleteRocketMQTopic", req, cb);
+    }
+    /**
+     * 用于查询RocketMQ平滑迁移任务列表
+     */
+    async DescribeRocketMQSmoothMigrationTaskList(req, cb) {
+        return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb);
     }
     /**
      * 导出RocketMQ消息详情
@@ -515,6 +544,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateRocketMQTopic(req, cb) {
         return this.request("CreateRocketMQTopic", req, cb);
+    }
+    /**
+     * 获取命名空间角色列表
+     */
+    async DescribeRocketMQEnvironmentRoles(req, cb) {
+        return this.request("DescribeRocketMQEnvironmentRoles", req, cb);
     }
     /**
      * 删除RocketMQ集群
@@ -665,6 +700,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DescribeRocketMQClusters", req, cb);
     }
     /**
+     * 发送单条消息
+不支持持久topic
+     */
+    async SendMessages(req, cb) {
+        return this.request("SendMessages", req, cb);
+    }
+    /**
      * 修改主题备注和分区数
      */
     async ModifyTopic(req, cb) {
@@ -813,6 +855,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async CreateRocketMQVipInstance(req, cb) {
         return this.request("CreateRocketMQVipInstance", req, cb);
+    }
+    /**
+     * 删除环境角色授权。
+     */
+    async DeleteRocketMQEnvironmentRoles(req, cb) {
+        return this.request("DeleteRocketMQEnvironmentRoles", req, cb);
     }
     /**
      * 获取某个租户的虚拟集群列表
