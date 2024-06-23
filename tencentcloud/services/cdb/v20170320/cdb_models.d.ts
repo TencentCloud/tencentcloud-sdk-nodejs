@@ -901,6 +901,19 @@ export interface DescribeDBInstancesRequest {
     EngineTypes?: Array<string>;
 }
 /**
+ * CreateDeployGroup返回参数结构体
+ */
+export interface CreateDeployGroupResponse {
+    /**
+     * 置放群组ID。
+     */
+    DeployGroupId: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyCdbProxyAddressDesc请求参数结构体
  */
 export interface ModifyCdbProxyAddressDescRequest {
@@ -943,6 +956,19 @@ export interface CdbRegionSellConf {
     RegionConfig: Array<CdbZoneSellConf>;
 }
 /**
+ * 集群版 RW 节点的配置。
+ */
+export interface ReadWriteNode {
+    /**
+     * RW 节点所在可用区。
+     */
+    Zone: string;
+    /**
+     * 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。
+     */
+    NodeId?: string;
+}
+/**
  * DescribeRoGroups请求参数结构体
  */
 export interface DescribeRoGroupsRequest {
@@ -952,21 +978,21 @@ export interface DescribeRoGroupsRequest {
     InstanceId: string;
 }
 /**
- * DescribeBackupDecryptionKey请求参数结构体
+ * DescribeInstanceUpgradeType返回参数结构体
  */
-export interface DescribeBackupDecryptionKeyRequest {
+export interface DescribeInstanceUpgradeTypeResponse {
     /**
-     * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
+     * 实例id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * 实例的备份ID，可通过DescribeBackups接口查询备份的ID。
+     * 实例升级类型
      */
-    BackupId: number;
+    UpgradeType?: string;
     /**
-     * 备份类型 data: 数据备份 binlog:日志备份，默认为data
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    BackupType?: string;
+    RequestId?: string;
 }
 /**
  * CreateCdbProxyAddress返回参数结构体
@@ -1591,6 +1617,19 @@ export interface DescribeCdbZoneConfigResponse {
     RequestId?: string;
 }
 /**
+ * 集群版的 RO 节点配置。
+ */
+export interface ReadonlyNode {
+    /**
+     * 是否分布在随机可用区。传入YES表示随机可用区。否则使用Zone指定的可用区。
+     */
+    IsRandomZone?: string;
+    /**
+     * 指定该节点分布在哪个可用区。
+     */
+    Zone?: string;
+}
+/**
  * DescribeTables请求参数结构体
  */
 export interface DescribeTablesRequest {
@@ -2023,21 +2062,21 @@ export interface UploadInfo {
     CompleteNum: number;
 }
 /**
- * DisassociateSecurityGroups请求参数结构体
+ * 独享集群CDB实例的节点分布情况
  */
-export interface DisassociateSecurityGroupsRequest {
+export interface NodeDistribution {
     /**
-     * 安全组 ID。
+     * 主实例Master节点所在主机ID或者只读实例所在主机ID
      */
-    SecurityGroupId: string;
+    Node: string;
     /**
-     * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
+     * 主实例第一Slave节点所在主机ID
      */
-    InstanceIds: Array<string>;
+    SlaveNodeOne: string;
     /**
-     * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+     * 主实例第二Slave节点所在主机ID
      */
-    ForReadonlyInstance?: boolean;
+    SlaveNodeTwo: string;
 }
 /**
  * 审计规则的过滤条件
@@ -2342,6 +2381,15 @@ export interface CreateAuditRuleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StopDBImportJob请求参数结构体
+ */
+export interface StopDBImportJobRequest {
+    /**
+     * 异步任务的请求 ID。
+     */
+    AsyncRequestId: string;
 }
 /**
  * ModifyRemoteBackupConfig返回参数结构体
@@ -3664,13 +3712,61 @@ export interface DescribeDeviceMonitorInfoRequest {
     Count?: number;
 }
 /**
- * StopDBImportJob请求参数结构体
+ * DescribeInstanceUpgradeType请求参数结构体
  */
-export interface StopDBImportJobRequest {
+export interface DescribeInstanceUpgradeTypeRequest {
     /**
-     * 异步任务的请求 ID。
+     * 实例id
      */
-    AsyncRequestId: string;
+    InstanceId: string;
+    /**
+     * 目标实例cpu
+     */
+    DstCpu: number;
+    /**
+     * 目标实例内存
+     */
+    DstMemory: number;
+    /**
+     * 目标实例磁盘
+     */
+    DstDisk: number;
+    /**
+     * 目标实例版本
+     */
+    DstVersion?: string;
+    /**
+     * 目标实例部署模型
+     */
+    DstDeployMode?: number;
+    /**
+     * 目标实例复制类型
+     */
+    DstProtectMode?: number;
+    /**
+     * 目标实例备机1可用区
+     */
+    DstSlaveZone?: number;
+    /**
+     * 目标实例备机2可用区
+     */
+    DstBackupZone?: number;
+    /**
+     * 目标实例类型
+     */
+    DstCdbType?: string;
+    /**
+     * 目标实例主可用区
+     */
+    DstZoneId?: number;
+    /**
+     * 独享集群CDB实例的节点分布情况
+     */
+    NodeDistribution?: NodeDistribution;
+    /**
+     * 集群版的节点拓扑配置
+     */
+    ClusterTopology?: ClusterTopology;
 }
 /**
  * DescribeDBPrice请求参数结构体
@@ -4127,6 +4223,19 @@ export interface DescribeRemoteBackupConfigRequest {
      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
      */
     InstanceId: string;
+}
+/**
+ * 集群版的节点拓扑配置。
+ */
+export interface ClusterTopology {
+    /**
+     * RW 节点拓扑。
+     */
+    ReadWriteNode?: ReadWriteNode;
+    /**
+     * RO 节点拓扑。
+     */
+    ReadOnlyNodes?: Array<ReadonlyNode>;
 }
 /**
  * 标签信息
@@ -4947,17 +5056,21 @@ export interface CreateAccountsResponse {
     RequestId?: string;
 }
 /**
- * CreateDeployGroup返回参数结构体
+ * 售卖实例类型
  */
-export interface CreateDeployGroupResponse {
+export interface CdbSellType {
     /**
-     * 置放群组ID。
+     * 售卖实例名称。Z3是高可用类型对应规格中的DeviceType包含UNIVERSAL,EXCLUSIVE；CVM是基础版类型对应规格中的DeviceType是BASIC；TKE是基础型v2类型对应规格中的DeviceType是BASIC_V2。
      */
-    DeployGroupId: string;
+    TypeName: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 引擎版本号
      */
-    RequestId?: string;
+    EngineVersion: Array<string>;
+    /**
+     * 售卖规格Id
+     */
+    ConfigIds: Array<number | bigint>;
 }
 /**
  * 主实例信息
@@ -5044,6 +5157,23 @@ export interface ResetRootAccountResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DisassociateSecurityGroups请求参数结构体
+ */
+export interface DisassociateSecurityGroupsRequest {
+    /**
+     * 安全组 ID。
+     */
+    SecurityGroupId: string;
+    /**
+     * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+     */
+    ForReadonlyInstance?: boolean;
 }
 /**
  * 数据库账号信息
@@ -5434,6 +5564,23 @@ export interface DescribeBackupDownloadRestrictionResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeBackupDecryptionKey请求参数结构体
+ */
+export interface DescribeBackupDecryptionKeyRequest {
+    /**
+     * 实例ID，格式如：cdb-XXXX。与云数据库控制台页面中显示的实例 ID 相同。
+     */
+    InstanceId: string;
+    /**
+     * 实例的备份ID，可通过DescribeBackups接口查询备份的ID。
+     */
+    BackupId: number;
+    /**
+     * 备份类型 data: 数据备份 binlog:日志备份，默认为data
+     */
+    BackupType?: string;
 }
 /**
  * 克隆任务记录。
@@ -8037,23 +8184,6 @@ export interface DeleteDeployGroupsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 售卖实例类型
- */
-export interface CdbSellType {
-    /**
-     * 售卖实例名称。Z3是高可用类型对应规格中的DeviceType包含UNIVERSAL,EXCLUSIVE；CVM是基础版类型对应规格中的DeviceType是BASIC；TKE是基础型v2类型对应规格中的DeviceType是BASIC_V2。
-     */
-    TypeName: string;
-    /**
-     * 引擎版本号
-     */
-    EngineVersion: Array<string>;
-    /**
-     * 售卖规格Id
-     */
-    ConfigIds: Array<number | bigint>;
 }
 /**
  * DescribeTasks请求参数结构体

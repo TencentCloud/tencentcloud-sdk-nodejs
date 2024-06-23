@@ -21,7 +21,6 @@ export declare class Client extends AbstractClient {
     CreateReceiverDetailWithData(req: CreateReceiverDetailWithDataRequest, cb?: (error: string, rep: CreateReceiverDetailWithDataResponse) => void): Promise<CreateReceiverDetailWithDataResponse>;
     /**
      * 获取邮件发送状态。仅支持查询30天之内的数据
-默认接口请求频率限制：1次/秒
      */
     GetSendEmailStatus(req: GetSendEmailStatusRequest, cb?: (error: string, rep: GetSendEmailStatusResponse) => void): Promise<GetSendEmailStatusResponse>;
     /**

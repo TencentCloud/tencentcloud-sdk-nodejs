@@ -34,6 +34,15 @@ export interface GetWsTokenResponse {
    */
   Token?: string
   /**
+   * 余额; 余额大于 0 时表示有效.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Balance?: number
+  /**
+   * 对话窗输入字符限制
+   */
+  InputLenLimit?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -44,7 +53,7 @@ export interface GetWsTokenResponse {
  */
 export interface CheckAttributeLabelExistRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -282,7 +291,7 @@ export interface DeleteDocRequest {
    */
   DocBizIds: Array<string>
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
 }
@@ -477,6 +486,20 @@ export interface MsgRecord {
   TokenStat?: TokenStat
   /**
    * 回复方式
+1:大模型直接回复;
+2:保守回复, 未知问题回复;
+3:拒答问题回复;
+4:敏感回复;
+5:问答对直接回复, 已采纳问答对优先回复;
+6:欢迎语回复;
+7:并发超限回复;
+8:全局干预知识;
+9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
+10:任务流程答案回复;
+11:搜索引擎回复;
+12:知识润色后回复;
+13:图片理解回复;
+14:实时文档回复;
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplyMethod?: number
@@ -490,6 +513,11 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskFlow?: TaskFlowInfo
+  /**
+   * 用户传入的文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileInfos?: Array<FileInfo>
 }
 
 /**
@@ -581,7 +609,7 @@ export interface UnsatisfiedReply {
    */
   Question?: string
   /**
-   * 机器人回复
+   * 应用回复
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Answer?: string
@@ -640,8 +668,7 @@ export interface DescribeQARequest {
    */
   QaBizId: string
   /**
-   * 机器人ID
-
+   * 应用ID
    */
   BotBizId: string
 }
@@ -682,7 +709,7 @@ export interface CreateReconstructDocumentFlowConfig {
  */
 export interface DescribeUnsatisfiedReplyContextRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -741,7 +768,7 @@ export interface QAQuery {
    */
   PageSize: number
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -848,7 +875,7 @@ export interface AttrLabel {
  */
 export interface ModifyQAAttrRangeRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -966,6 +993,11 @@ export interface KnowledgeQaSearch {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DocTopN?: number
+  /**
+   * 检索置信度，针对文档和问答有效，最小0.01，最大0.99
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Confidence?: number
 }
 
 /**
@@ -1089,7 +1121,7 @@ export interface ReferDetail {
  */
 export interface ListUnsatisfiedReplyRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1123,7 +1155,7 @@ export interface ListUnsatisfiedReplyRequest {
  */
 export interface DeleteQARequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1258,7 +1290,7 @@ export interface ListDocResponse {
  */
 export interface ModifyQARequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1347,9 +1379,13 @@ export interface GetDocPreviewRequest {
    */
   DocBizId: string
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
+  /**
+   * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
+   */
+  TypeKey?: string
 }
 
 /**
@@ -1410,7 +1446,7 @@ export interface CreateAppResponse {
  */
 export interface DescribeAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1444,7 +1480,7 @@ export interface DescribeAttributeLabelRequest {
  */
 export interface CreateQARequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1512,7 +1548,7 @@ export interface CreateCorpRequest {
  */
 export interface RetryDocParseRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1614,7 +1650,7 @@ export interface ListQaItem {
  */
 export interface DeleteAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1636,7 +1672,7 @@ export interface DeleteAttributeLabelRequest {
  */
 export interface DescribeRobotBizIDByAppKeyResponse {
   /**
-   * 机器人业务ID
+   * 应用业务ID
    */
   BotBizId?: string
   /**
@@ -1819,7 +1855,7 @@ export interface KnowledgeQaOutput {
  */
 export interface CheckAttributeLabelReferRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1845,7 +1881,7 @@ export interface CheckAttributeLabelReferRequest {
  */
 export interface ModifyQACateRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1864,7 +1900,7 @@ export interface ModifyQACateRequest {
  */
 export interface ModifyAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -1906,7 +1942,7 @@ export interface VerifyQARequest {
    */
   List: Array<QAList>
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2139,7 +2175,7 @@ export interface GetTaskStatusResponse {
  */
 export interface DescribeDocRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2153,7 +2189,7 @@ export interface DescribeDocRequest {
  */
 export interface RetryDocAuditRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2355,7 +2391,7 @@ export interface GetEmbeddingResponse {
  */
 export interface ExportUnsatisfiedReplyRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2583,7 +2619,7 @@ export interface ModifyRejectedQuestionResponse {
  */
 export interface ListReleaseDocPreviewRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2744,6 +2780,11 @@ export interface Context {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
+  /**
+   * 文档信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileInfos?: Array<MsgFileInfo>
 }
 
 /**
@@ -2795,7 +2836,7 @@ export interface GetEmbeddingRequest {
  */
 export interface GroupQARequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -2813,7 +2854,7 @@ export interface GroupQARequest {
  */
 export interface RateMsgRecordRequest {
   /**
-   * 机器人appKey
+   * 应用appKey
    */
   BotAppKey: string
   /**
@@ -2930,7 +2971,7 @@ export interface ListQAResponse {
  */
 export interface IgnoreUnsatisfiedReplyRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3173,6 +3214,11 @@ export interface AppModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AliasName?: string
+  /**
+   * token余量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenBalance?: number
 }
 
 /**
@@ -3201,20 +3247,19 @@ export interface ClassifyLabel {
  */
 export interface ReconstructDocumentRequest {
   /**
-   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
    */
   FileBase64?: string
   /**
-   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   FileUrl?: string
   /**
-   * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。
    */
   FileStartPageNumber?: number
   /**
-   * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
-单次调用，最多支持10页pdf的智能识别。
+   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的文档解析。
    */
   FileEndPageNumber?: number
   /**
@@ -3246,7 +3291,7 @@ export interface GetReconstructDocumentResultResponse {
    */
   DocumentRecognizeResultUrl?: string
   /**
-   * 还原失败的页
+   * 文档解析失败的页码
    */
   FailedPages?: Array<ReconstructDocumentFailedPage>
   /**
@@ -3360,11 +3405,42 @@ export interface Credentials {
 }
 
 /**
+ * 文档信息
+ */
+export interface MsgFileInfo {
+  /**
+   * 文档名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 文档大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: string
+  /**
+   * 文档URL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileUrl?: string
+  /**
+   * 文档类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+  /**
+   * 文档ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocId?: string
+}
+
+/**
  * CreateAttributeLabel请求参数结构体
  */
 export interface CreateAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3478,23 +3554,23 @@ export interface AppInfo {
  */
 export interface CreateReconstructDocumentFlowRequest {
   /**
-   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
    */
   FileBase64?: string
   /**
-   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 100M。文件下载时间不超过 15 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   FileUrl?: string
   /**
-   * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。
    */
   FileStartPageNumber?: number
   /**
-   * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。
    */
   FileEndPageNumber?: number
   /**
-   * 创建智能文档识别任务配置信息
+   * 创建文档解析任务配置信息
    */
   Config?: CreateReconstructDocumentFlowConfig
 }
@@ -3585,7 +3661,7 @@ export interface MsgRecordReference {
  */
 export interface ListRejectedQuestionPreviewRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3662,7 +3738,7 @@ export interface ModelInfo {
  */
 export interface DeleteRejectedQuestionRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3679,7 +3755,7 @@ export interface DeleteRejectedQuestionRequest {
  */
 export interface Highlight {
   /**
-   * 高亮启始位置
+   * 高亮起始位置
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3699,11 +3775,42 @@ export interface Highlight {
 }
 
 /**
+ * 实时上传的文件信息
+ */
+export interface FileInfo {
+  /**
+   * 文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: string
+  /**
+   * 文件的URL地址，COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileUrl?: string
+  /**
+   * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileType?: string
+  /**
+   * 解析后返回的DocID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocId?: string
+}
+
+/**
  * ExportQAList请求参数结构体
  */
 export interface ExportQAListRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3823,7 +3930,7 @@ export interface DeleteAttributeLabelResponse {
  */
 export interface DeleteQACateRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3837,7 +3944,7 @@ export interface DeleteQACateRequest {
  */
 export interface GenerateQARequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3855,7 +3962,7 @@ export interface GetWsTokenRequest {
    */
   Type: number
   /**
-   * 机器人AppKey
+   * 应用AppKey
    */
   BotAppKey?: string
   /**
@@ -3929,7 +4036,7 @@ export interface EmbeddingObject {
  */
 export interface ModifyDocRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -3990,7 +4097,7 @@ export interface DeleteAppResponse {
  */
 export interface ListAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4113,7 +4220,7 @@ export interface ClassifyConfig {
  */
 export interface UploadAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4147,7 +4254,7 @@ export interface UploadAttributeLabelRequest {
  */
 export interface ExportAttributeLabelRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4246,7 +4353,7 @@ export interface ParseDocResponse {
  */
 export interface ListQACateRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
 }
@@ -4256,7 +4363,7 @@ export interface ListQACateRequest {
  */
 export interface ListReleaseQAPreviewRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4330,7 +4437,7 @@ export interface IsTransferIntentRequest {
    */
   Content: string
   /**
-   * 机器人appKey
+   * 应用appKey
    */
   BotAppKey: string
 }
@@ -4340,7 +4447,7 @@ export interface IsTransferIntentRequest {
  */
 export interface DescribeReferRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4376,7 +4483,7 @@ export interface DeleteAppRequest {
  */
 export interface CreateRejectedQuestionRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4486,17 +4593,21 @@ export interface ListAppCategoryRspOption {
  */
 export interface DescribeStorageCredentialRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
-  BotBizId: string
+  BotBizId?: string
   /**
-   * 文件类型
+   * 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等
    */
   FileType?: string
   /**
-   * 权限场景，是否公有权限
+   * IsPublic为空用于上传文件时选择场景，当上传为图片文件是IsPublic为true，上传文档文件时场景IsPublic为false
    */
   IsPublic?: boolean
+  /**
+   * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
+   */
+  TypeKey?: string
 }
 
 /**
@@ -4683,7 +4794,7 @@ export interface GetMsgRecordRequest {
    */
   LastRecordId?: string
   /**
-   * 机器人AppKey
+   * 应用AppKey
    */
   BotAppKey?: string
   /**
@@ -4733,7 +4844,7 @@ export interface DescribeStorageCredentialResponse {
    */
   ImagePath?: string
   /**
-   * 上传存储目录
+   * 上传存储路径，到具体文件
    */
   UploadPath?: string
   /**
@@ -4769,7 +4880,7 @@ export interface GetTaskStatusRequest {
    */
   TaskType: string
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
 }
@@ -4793,7 +4904,7 @@ export interface CheckAttributeLabelReferResponse {
  */
 export interface ModifyDocAttrRangeRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4846,7 +4957,7 @@ export interface ReleaseRejectedQuestion {
  */
 export interface CreateQACateRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -4865,7 +4976,7 @@ export interface CreateQACateRequest {
  */
 export interface DescribeRobotBizIDByAppKeyRequest {
   /**
-   * 机器人appkey
+   * 应用appkey
    */
   AppKey: string
 }
@@ -4937,7 +5048,7 @@ export interface CreateReconstructDocumentFlowResponse {
  */
 export interface ListRejectedQuestionRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -5028,7 +5139,7 @@ export interface Filters {
  */
 export interface ModifyRejectedQuestionRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -5061,7 +5172,7 @@ export interface IgnoreUnsatisfiedReplyResponse {
  */
 export interface StopDocParseRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**
@@ -5085,7 +5196,7 @@ export interface ReconstructDocumentConfig {
  */
 export interface ListSelectDocRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
   /**

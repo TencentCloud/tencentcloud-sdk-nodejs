@@ -45,10 +45,12 @@ import {
   DescribeParamTemplateInfoRequest,
   ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
+  CreateDeployGroupResponse,
   ModifyCdbProxyAddressDescRequest,
   CdbRegionSellConf,
+  ReadWriteNode,
   DescribeRoGroupsRequest,
-  DescribeBackupDecryptionKeyRequest,
+  DescribeInstanceUpgradeTypeResponse,
   CreateCdbProxyAddressResponse,
   RollbackTableName,
   CloseWanServiceRequest,
@@ -80,6 +82,7 @@ import {
   AuditPolicy,
   ProxyNode,
   DescribeCdbZoneConfigResponse,
+  ReadonlyNode,
   DescribeTablesRequest,
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
@@ -100,7 +103,7 @@ import {
   DescribeInstanceParamsResponse,
   DeleteDatabaseRequest,
   UploadInfo,
-  DisassociateSecurityGroupsRequest,
+  NodeDistribution,
   AuditRuleFilters,
   ModifyLocalBinlogConfigRequest,
   StartBatchRollbackResponse,
@@ -117,6 +120,7 @@ import {
   RuleFilters,
   ModifyAuditRuleTemplatesRequest,
   CreateAuditRuleResponse,
+  StopDBImportJobRequest,
   ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
@@ -183,7 +187,7 @@ import {
   DescribeLocalBinlogConfigRequest,
   TagsInfoOfInstance,
   DescribeDeviceMonitorInfoRequest,
-  StopDBImportJobRequest,
+  DescribeInstanceUpgradeTypeRequest,
   DescribeDBPriceRequest,
   SlaveConfig,
   ModifyAccountPrivilegesResponse,
@@ -210,6 +214,7 @@ import {
   AuditLogAggregationResult,
   DatabasesWithCharacterLists,
   DescribeRemoteBackupConfigRequest,
+  ClusterTopology,
   TagInfo,
   DescribeDBInstancesResponse,
   DescribeBackupDownloadRestrictionRequest,
@@ -238,9 +243,10 @@ import {
   DescribeDBInstanceRebootTimeRequest,
   Inbound,
   CreateAccountsResponse,
-  CreateDeployGroupResponse,
+  CdbSellType,
   MasterInfo,
   ResetRootAccountResponse,
+  DisassociateSecurityGroupsRequest,
   Account,
   ModifyNameOrDescByDpIdResponse,
   DescribeClusterInfoRequest,
@@ -256,6 +262,7 @@ import {
   SwitchForUpgradeRequest,
   CreateDBInstanceHourResponse,
   DescribeBackupDownloadRestrictionResponse,
+  DescribeBackupDecryptionKeyRequest,
   CloneItem,
   ModifyDBInstanceSecurityGroupsResponse,
   CreateAccountsRequest,
@@ -372,7 +379,6 @@ import {
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
   DeleteDeployGroupsResponse,
-  CdbSellType,
   DescribeTasksRequest,
   ModifyBackupEncryptionStatusRequest,
   DescribeRollbackTaskDetailResponse,
@@ -651,6 +657,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopRollbackResponse) => void
   ): Promise<StopRollbackResponse> {
     return this.request("StopRollback", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeInstanceUpgradeType)用于查询数据库实例升级类型。
+   */
+  async DescribeInstanceUpgradeType(
+    req: DescribeInstanceUpgradeTypeRequest,
+    cb?: (error: string, rep: DescribeInstanceUpgradeTypeResponse) => void
+  ): Promise<DescribeInstanceUpgradeTypeResponse> {
+    return this.request("DescribeInstanceUpgradeType", req, cb)
   }
 
   /**

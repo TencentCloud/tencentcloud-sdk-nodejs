@@ -323,6 +323,14 @@ export interface SendEmailRequest {
      * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
      */
     TriggerType?: number;
+    /**
+     * smtp头中的Message-Id字段
+     */
+    SmtpMessageId?: string;
+    /**
+     * smtp头中可以设置的其它字段
+     */
+    SmtpHeaders?: string;
 }
 /**
  * DeleteBlackList请求参数结构体

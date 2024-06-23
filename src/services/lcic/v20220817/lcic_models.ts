@@ -131,7 +131,7 @@ video 纯视频
    */
   EndDelayTime?: number
   /**
-   * 直播类型：0 常规（默认）1 伪直播
+   * 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播
    */
   LiveType?: number
   /**
@@ -139,7 +139,7 @@ video 纯视频
    */
   RecordLiveUrl?: string
   /**
-   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1或2的时候有效
    */
   EnableAutoStart?: number
   /**
@@ -2816,7 +2816,7 @@ export interface RoomInfo {
    */
   EndDelayTime?: number
   /**
-   * 直播类型：0 常规（默认）1 伪直播
+   * 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播
    */
   LiveType?: number
   /**
@@ -2824,7 +2824,7 @@ export interface RoomInfo {
    */
   RecordLiveUrl?: string
   /**
-   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1或2的时候有效
    */
   EnableAutoStart?: number
   /**

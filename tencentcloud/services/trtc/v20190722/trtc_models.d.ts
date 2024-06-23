@@ -1690,14 +1690,17 @@ export interface StartStreamIngestRequest {
     PrivateMapKey?: string;
     /**
      * 【本字段已废弃】视频编码参数。可选，如果不填，保持原始流的参数。
+     * @deprecated
      */
     VideoEncodeParams?: VideoEncodeParams;
     /**
      * 【本字段已废弃】音频编码参数。可选，如果不填，保持原始流的参数。
+     * @deprecated
      */
     AudioEncodeParams?: AudioEncodeParams;
     /**
      * 【本字段已废弃，请使用 StreamUrl 字段】源流URL，支持一个地址。
+     * @deprecated
      */
     SourceUrl?: Array<string>;
     /**

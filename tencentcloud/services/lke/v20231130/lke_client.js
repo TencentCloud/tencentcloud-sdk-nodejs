@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRejectedQuestion", req, cb);
     }
     /**
-     * 获取文档解析任务执行结果
+     * 本接口为异步接口的查询结果接口，用于获取文档解析处理结果。
      */
     async GetReconstructDocumentResult(req, cb) {
         return this.request("GetReconstructDocumentResult", req, cb);
@@ -180,7 +180,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteQA", req, cb);
     }
     /**
-     * 通过appKey获取机器人业务ID
+     * 通过appKey获取应用业务ID
      */
     async DescribeRobotBizIDByAppKey(req, cb) {
         return this.request("DescribeRobotBizIDByAppKey", req, cb);
@@ -246,7 +246,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAttributeLabel", req, cb);
     }
     /**
-     * 文档解析，异步接口。
+     * 本接口为异步接口的发起请求接口，用于发起文档解析任务。
+文档解析支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+
+体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
      */
     async CreateReconstructDocumentFlow(req, cb) {
         return this.request("CreateReconstructDocumentFlow", req, cb);
@@ -390,7 +393,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDoc", req, cb);
     }
     /**
-     * 解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
+     * 接口即将下线，请切换使用新接口：[文档解析](https://cloud.tencent.com/document/product/1759/107504)
+解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
      */
     async ParseDoc(req, cb) {
         return this.request("ParseDoc", req, cb);
@@ -402,7 +406,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetWsToken", req, cb);
     }
     /**
-     * 创建企业
+     * 删除文档
      */
     async DeleteDoc(req, cb) {
         return this.request("DeleteDoc", req, cb);
@@ -463,6 +467,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+
+体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
      */
     async ReconstructDocument(req, cb) {
         return this.request("ReconstructDocument", req, cb);

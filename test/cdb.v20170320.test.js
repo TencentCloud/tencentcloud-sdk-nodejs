@@ -208,6 +208,16 @@ it("cdb.v20170320.StopRollback", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeInstanceUpgradeType", async function () {
+    try {
+       const data = await client.DescribeInstanceUpgradeType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.OfflineIsolatedInstances", async function () {
     try {
        const data = await client.OfflineIsolatedInstances({})

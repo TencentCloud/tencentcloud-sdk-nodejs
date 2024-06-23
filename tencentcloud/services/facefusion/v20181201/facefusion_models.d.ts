@@ -214,27 +214,27 @@ export interface FuseFaceReviewResult {
     /**
      * 保留字段
      */
-    Category: string;
+    Category?: string;
     /**
      * 状态码， 0为处理成功，其他值为处理失败
      */
-    Code: string;
+    Code?: string;
     /**
      * 对应状态码信息描述
      */
-    CodeDescription: string;
+    CodeDescription?: string;
     /**
      * 保留字段
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 保留字段
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 审核详细内容
      */
-    DetailSet: Array<FuseFaceReviewDetail>;
+    DetailSet?: Array<FuseFaceReviewDetail>;
 }
 /**
  * FuseFace返回参数结构体

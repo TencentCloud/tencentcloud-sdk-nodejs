@@ -843,7 +843,7 @@ export interface DescribeFirewallTemplateApplyRecordsRequest {
    */
   TemplateId: string
   /**
-   * 应用防火墙模版任务ID列表。可通过[ApplyFirewallTemplate](https://cloud.tencent.com/document/product/1207/96883)接口返回值TaskId字段获取。
+   * 应用防火墙模板任务ID列表。可通过[ApplyFirewallTemplate](https://cloud.tencent.com/document/product/1207/96883)接口返回值TaskId字段获取。
    */
   TaskIds?: Array<string>
 }

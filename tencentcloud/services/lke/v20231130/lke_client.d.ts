@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteRejectedQuestion(req: DeleteRejectedQuestionRequest, cb?: (error: string, rep: DeleteRejectedQuestionResponse) => void): Promise<DeleteRejectedQuestionResponse>;
     /**
-     * 获取文档解析任务执行结果
+     * 本接口为异步接口的查询结果接口，用于获取文档解析处理结果。
      */
     GetReconstructDocumentResult(req: GetReconstructDocumentResultRequest, cb?: (error: string, rep: GetReconstructDocumentResultResponse) => void): Promise<GetReconstructDocumentResultResponse>;
     /**
@@ -110,7 +110,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteQA(req: DeleteQARequest, cb?: (error: string, rep: DeleteQAResponse) => void): Promise<DeleteQAResponse>;
     /**
-     * 通过appKey获取机器人业务ID
+     * 通过appKey获取应用业务ID
      */
     DescribeRobotBizIDByAppKey(req: DescribeRobotBizIDByAppKeyRequest, cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void): Promise<DescribeRobotBizIDByAppKeyResponse>;
     /**
@@ -154,7 +154,10 @@ export declare class Client extends AbstractClient {
      */
     CreateAttributeLabel(req: CreateAttributeLabelRequest, cb?: (error: string, rep: CreateAttributeLabelResponse) => void): Promise<CreateAttributeLabelResponse>;
     /**
-     * 文档解析，异步接口。
+     * 本接口为异步接口的发起请求接口，用于发起文档解析任务。
+文档解析支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+
+体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
      */
     CreateReconstructDocumentFlow(req: CreateReconstructDocumentFlowRequest, cb?: (error: string, rep: CreateReconstructDocumentFlowResponse) => void): Promise<CreateReconstructDocumentFlowResponse>;
     /**
@@ -250,7 +253,8 @@ export declare class Client extends AbstractClient {
      */
     ModifyDoc(req: ModifyDocRequest, cb?: (error: string, rep: ModifyDocResponse) => void): Promise<ModifyDocResponse>;
     /**
-     * 解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
+     * 接口即将下线，请切换使用新接口：[文档解析](https://cloud.tencent.com/document/product/1759/107504)
+解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
      */
     ParseDoc(req: ParseDocRequest, cb?: (error: string, rep: ParseDocResponse) => void): Promise<ParseDocResponse>;
     /**
@@ -258,7 +262,7 @@ export declare class Client extends AbstractClient {
      */
     GetWsToken(req: GetWsTokenRequest, cb?: (error: string, rep: GetWsTokenResponse) => void): Promise<GetWsTokenResponse>;
     /**
-     * 创建企业
+     * 删除文档
      */
     DeleteDoc(req: DeleteDocRequest, cb?: (error: string, rep: DeleteDocResponse) => void): Promise<DeleteDocResponse>;
     /**
@@ -299,6 +303,8 @@ export declare class Client extends AbstractClient {
     ExportUnsatisfiedReply(req: ExportUnsatisfiedReplyRequest, cb?: (error: string, rep: ExportUnsatisfiedReplyResponse) => void): Promise<ExportUnsatisfiedReplyResponse>;
     /**
      * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+
+体验期间单账号限制qps仅为1，若有正式接入需要请与产研团队沟通开放。
      */
     ReconstructDocument(req: ReconstructDocumentRequest, cb?: (error: string, rep: ReconstructDocumentResponse) => void): Promise<ReconstructDocumentResponse>;
     /**

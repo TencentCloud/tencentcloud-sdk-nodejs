@@ -146,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopRollback", req, cb);
     }
     /**
+     * 本接口(DescribeInstanceUpgradeType)用于查询数据库实例升级类型。
+     */
+    async DescribeInstanceUpgradeType(req, cb) {
+        return this.request("DescribeInstanceUpgradeType", req, cb);
+    }
+    /**
      * 本接口(OfflineIsolatedInstances)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态，即通过 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询到 Status 值为 5 的实例。
 
 该接口为异步操作，部分资源的回收可能存在延迟。您可以通过使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口，指定实例 InstanceId 和状态 Status 为 [5,6,7] 进行查询，若返回实例为空，则实例资源已全部释放。
