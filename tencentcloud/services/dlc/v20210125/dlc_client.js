@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachWorkGroupPolicy", req, cb);
     }
     /**
+     * 查询引擎规格详情
+     */
+    async DescribeDataEnginesScaleDetail(req, cb) {
+        return this.request("DescribeDataEnginesScaleDetail", req, cb);
+    }
+    /**
      * 创建spark作业
      */
     async CreateSparkApp(req, cb) {

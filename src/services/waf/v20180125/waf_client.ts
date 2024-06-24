@@ -247,6 +247,7 @@ import {
   GetAttackTotalCountRequest,
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
+  AddAreaBanAreasRequest,
   CacheUrlItem,
   DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
@@ -326,6 +327,7 @@ import {
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
+  AddAreaBanAreasResponse,
   GetAttackHistogramRequest,
   RuleList,
   DescribeAttackTypeRequest,
@@ -1338,6 +1340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddAttackWhiteRuleResponse) => void
   ): Promise<AddAttackWhiteRuleResponse> {
     return this.request("AddAttackWhiteRule", req, cb)
+  }
+
+  /**
+   * 添加地域封禁中的地域信息
+   */
+  async AddAreaBanAreas(
+    req: AddAreaBanAreasRequest,
+    cb?: (error: string, rep: AddAreaBanAreasResponse) => void
+  ): Promise<AddAreaBanAreasResponse> {
+    return this.request("AddAreaBanAreas", req, cb)
   }
 
   /**

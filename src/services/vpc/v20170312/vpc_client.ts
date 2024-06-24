@@ -1423,7 +1423,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询终端节点服务列表。
+   * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
    */
   async DescribeVpcEndPointService(
     req: DescribeVpcEndPointServiceRequest,
@@ -1730,7 +1730,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+   * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。
    */
   async DeleteTemplateMember(
     req: DeleteTemplateMemberRequest,
@@ -1762,7 +1762,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+   * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。
    */
   async ModifyTemplateMember(
     req: ModifyTemplateMemberRequest,
@@ -3356,7 +3356,7 @@ LimitTypes取值范围：
   }
 
   /**
-   * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+   * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。
    */
   async AddTemplateMember(
     req: AddTemplateMemberRequest,

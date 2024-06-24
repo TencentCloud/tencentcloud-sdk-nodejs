@@ -297,28 +297,33 @@ export interface DeleteDocRequest {
 }
 
 /**
- * ReconstructDocument返回参数结构体
+ * GetAnswerTypeDataCount请求参数结构体
  */
-export interface ReconstructDocumentResponse {
+export interface GetAnswerTypeDataCountRequest {
   /**
-   * 识别生成的Markdown文件base64编码的字符串
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开始日期
    */
-  MarkdownBase64?: string
+  StartTime: number
   /**
-   * 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束日期
    */
-  InsetImagePackage?: string
+  EndTime: number
   /**
-   * 输入文件中嵌入的图片中文字内容的识别结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用id
    */
-  DocumentRecognizeInfo?: Array<DocumentRecognizeInfo>
+  AppBizId?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 消息来源(1、分享用户端  2、对话API  3、对话测试  4、应用评测)
    */
-  RequestId?: string
+  Type?: number
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -652,6 +657,56 @@ export interface CreateQACateResponse {
  * ModifyDocAttrRange返回参数结构体
  */
 export interface ModifyDocAttrRangeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAnswerTypeDataCount返回参数结构体
+ */
+export interface GetAnswerTypeDataCountResponse {
+  /**
+   * 总消息数
+   */
+  Total?: number
+  /**
+   * 大模型直接回复总数
+   */
+  ModelReplyCount?: number
+  /**
+   * 知识型回复总数
+   */
+  KnowledgeCount?: number
+  /**
+   * 任务流回复总数
+   */
+  TaskFlowCount?: number
+  /**
+   * 搜索引擎回复总数
+   */
+  SearchEngineCount?: number
+  /**
+   * 图片理解回复总数
+   */
+  ImageUnderstandingCount?: number
+  /**
+   * 拒答回复总数
+   */
+  RejectCount?: number
+  /**
+   * 敏感回复总数
+   */
+  SensitiveCount?: number
+  /**
+   * 并发超限回复总数
+   */
+  ConcurrentLimitCount?: number
+  /**
+   * 未知问题回复总数
+   */
+  UnknownIssuesCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1165,30 +1220,41 @@ export interface DeleteQARequest {
 }
 
 /**
- * ParseDoc请求参数结构体
+ * GetLikeDataCount返回参数结构体
  */
-export interface ParseDocRequest {
+export interface GetLikeDataCountResponse {
   /**
-   * 文件名称(需要包括文件后缀, 最大长度1024字节)
+   * 可评价消息数
    */
-  Name: string
+  Total?: number
   /**
-   * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf), 该地址需要外网可以直接无状态访问
+   * 评价数
    */
-  Url: string
+  AppraisalTotal?: number
   /**
-   * 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节)
+   * 参评率
    */
-  TaskId: string
+  ParticipationRate?: number
   /**
-   * 切分策略
+   * 点赞数
    */
-  Policy?: string
+  LikeTotal?: number
   /**
-   * 默认值: parse
-   * @deprecated
+   * 点赞率
    */
-  Operate?: string
+  LikeRate?: number
+  /**
+   * 点踩数
+   */
+  DislikeTotal?: number
+  /**
+   * 点踩率
+   */
+  DislikeRate?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1682,6 +1748,31 @@ export interface DescribeRobotBizIDByAppKeyResponse {
 }
 
 /**
+ * ReconstructDocument返回参数结构体
+ */
+export interface ReconstructDocumentResponse {
+  /**
+   * 识别生成的Markdown文件base64编码的字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MarkdownBase64?: string
+  /**
+   * 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InsetImagePackage?: string
+  /**
+   * 输入文件中嵌入的图片中文字内容的识别结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocumentRecognizeInfo?: Array<DocumentRecognizeInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDoc返回参数结构体
  */
 export interface DescribeDocResponse {
@@ -1934,25 +2025,14 @@ export interface ModifyAttributeLabelRequest {
 }
 
 /**
- * VerifyQA请求参数结构体
+ * 任务参数
  */
-export interface VerifyQARequest {
+export interface TaskParams {
   /**
-   * 问答列表
+   * 下载地址,需要通过cos桶临时密钥去下载
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<QAList>
-  /**
-   * 应用ID
-   */
-  BotBizId: string
-  /**
-   * 登录用户主账号(集成商模式必填)
-   */
-  LoginUin?: string
-  /**
-   * 登录用户子账号(集成商模式必填)
-   */
-  LoginSubAccountUin?: string
+  CosPath?: string
 }
 
 /**
@@ -2107,6 +2187,22 @@ export interface ListReleaseDocPreviewResponse {
 }
 
 /**
+ * 解析为 word 文档的结果
+ */
+export interface WordRecognizeInfo {
+  /**
+   * 输入文件的页码数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * word的base64
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordBase64?: string
+}
+
+/**
  * 知识摘要应用配置
  */
 export interface SummaryConfig {
@@ -2182,6 +2278,21 @@ export interface DescribeDocRequest {
    * 文档ID
    */
   DocBizId: string
+}
+
+/**
+ * ConvertDocument返回参数结构体
+ */
+export interface ConvertDocumentResponse {
+  /**
+   * 识别生成的word文件base64编码的字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordRecognizeInfo?: Array<WordRecognizeInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3015,14 +3126,26 @@ export interface DescribeReleaseResponse {
 }
 
 /**
- * 任务参数
+ * ConvertDocument请求参数结构体
  */
-export interface TaskParams {
+export interface ConvertDocumentRequest {
   /**
-   * 下载地址,需要通过cos桶临时密钥去下载
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  CosPath?: string
+  FileUrl?: string
+  /**
+   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  FileBase64?: string
+  /**
+   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   */
+  FileStartPageNumber?: number
+  /**
+   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+建议一次请求的页面不超过3页。
+   */
+  FileEndPageNumber?: number
 }
 
 /**
@@ -3168,6 +3291,33 @@ export interface ListDocItem {
 }
 
 /**
+ * ParseDoc请求参数结构体
+ */
+export interface ParseDocRequest {
+  /**
+   * 文件名称(需要包括文件后缀, 最大长度1024字节)
+   */
+  Name: string
+  /**
+   * 文件下载链接 (支持的文件类型: docx, txt, markdown, pdf), 该地址需要外网可以直接无状态访问
+   */
+  Url: string
+  /**
+   * 任务ID, 用于幂等去重, 业务自行定义(最大长度64字节)
+   */
+  TaskId: string
+  /**
+   * 切分策略
+   */
+  Policy?: string
+  /**
+   * 默认值: parse
+   * @deprecated
+   */
+  Operate?: string
+}
+
+/**
  * 文本的坐标，以四个顶点坐标表示
 注意：此字段可能返回 null，表示取不到有效值
  */
@@ -3255,11 +3405,11 @@ export interface ReconstructDocumentRequest {
    */
   FileUrl?: string
   /**
-   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。
    */
   FileStartPageNumber?: number
   /**
-   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。单次调用，最多支持10页pdf的文档解析。
+   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为10，表示识别到pdf文件的第10页。单次调用最多支持识别10页内容，即FileEndPageNumber-FileStartPageNumber需要不大于10。
    */
   FileEndPageNumber?: number
   /**
@@ -3348,29 +3498,33 @@ export interface RejectedQuestion {
 }
 
 /**
- * SaveDoc返回参数结构体
+ * GetLikeDataCount请求参数结构体
  */
-export interface SaveDocResponse {
+export interface GetLikeDataCountRequest {
   /**
-   * 文档ID
+   * 开始日期
    */
-  DocBizId?: string
+  StartTime: number
   /**
-   * 导入错误信息
+   * 结束日期
    */
-  ErrorMsg?: string
+  EndTime: number
   /**
-   * 错误链接
+   * 应用id
    */
-  ErrorLink?: string
+  AppBizId?: Array<string>
   /**
-   * 错误链接文本
+   * 消息来源(1、分享用户端  2、对话API)
    */
-  ErrorLinkText?: string
+  Type?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 登录用户主账号(集成商模式必填)
    */
-  RequestId?: string
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -3562,11 +3716,11 @@ export interface CreateReconstructDocumentFlowRequest {
    */
   FileUrl?: string
   /**
-   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。
    */
   FileStartPageNumber?: number
   /**
-   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+   * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为100，表示识别到pdf文件的第100页。单次调用最多支持识别100页内容，即FileEndPageNumber-FileStartPageNumber需要不大于100。
    */
   FileEndPageNumber?: number
   /**
@@ -3923,6 +4077,28 @@ export interface DeleteAttributeLabelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VerifyQA请求参数结构体
+ */
+export interface VerifyQARequest {
+  /**
+   * 问答列表
+   */
+  List: Array<QAList>
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -4655,6 +4831,32 @@ export interface DescribeCorpResponse {
 
    */
   FullName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SaveDoc返回参数结构体
+ */
+export interface SaveDocResponse {
+  /**
+   * 文档ID
+   */
+  DocBizId?: string
+  /**
+   * 导入错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 错误链接
+   */
+  ErrorLink?: string
+  /**
+   * 错误链接文本
+   */
+  ErrorLinkText?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

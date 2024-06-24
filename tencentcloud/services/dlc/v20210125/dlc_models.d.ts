@@ -1343,6 +1343,20 @@ export interface OpendThirdAccessUserInfo {
     CreateTime?: string;
 }
 /**
+ * DescribeDataEnginesScaleDetail返回参数结构体
+ */
+export interface DescribeDataEnginesScaleDetailResponse {
+    /**
+     * 引擎规格统计详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scales?: Array<DataEngineScaleInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeNotebookSessionStatementSqlResult请求参数结构体
  */
 export interface DescribeNotebookSessionStatementSqlResultRequest {
@@ -1765,13 +1779,21 @@ export interface DescribeTaskLogRequest {
     BatchId?: string;
 }
 /**
- * UpdateUserDataEngineConfig返回参数结构体
+ * DescribeDataEnginesScaleDetail请求参数结构体
  */
-export interface UpdateUserDataEngineConfigResponse {
+export interface DescribeDataEnginesScaleDetailRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 引擎名称列表
      */
-    RequestId?: string;
+    DataEngineNames?: Array<string>;
+    /**
+     * 开始时间，时间格式：yyyy-MM-dd HH:mm:ss，最长查询一个月内的记录
+     */
+    StartTime?: string;
+    /**
+     * 结束时间，时间格式：yyyy-MM-dd HH:mm:ss，最长查询一个月内的记录
+     */
+    EndTime?: string;
 }
 /**
  * CreateTasks请求参数结构体
@@ -1891,6 +1913,15 @@ export interface TableResponseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HeatValue?: number;
+}
+/**
+ * UpdateUserDataEngineConfig返回参数结构体
+ */
+export interface UpdateUserDataEngineConfigResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyUserType返回参数结构体
@@ -4448,6 +4479,26 @@ export interface DeleteUserRequest {
      * 需要删除的用户的Id
      */
     UserIds: Array<string>;
+}
+/**
+ * 引擎规格详情
+ */
+export interface DataEngineScaleInfoDetail {
+    /**
+     * 统计开始时间，格式为：yyyy-MM-dd HH:mm:ss
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 统计结束时间，格式为：yyyy-MM-dd HH:mm:ss
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 当前统计时间段，引擎规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CU?: number;
 }
 /**
  * DeleteDataEngine返回参数结构体
@@ -8872,6 +8923,26 @@ export interface DescribeDataEngineResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 引擎规格详情
+ */
+export interface DataEngineScaleInfo {
+    /**
+     * 引擎ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataEngineId?: string;
+    /**
+     * 引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataEngineName?: string;
+    /**
+     * 引擎规格详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScaleDetail?: Array<DataEngineScaleInfoDetail>;
 }
 /**
  * QueryTaskCostDetail请求参数结构体

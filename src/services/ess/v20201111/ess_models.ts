@@ -3193,6 +3193,7 @@ export interface CreateLegalSealQrCodeRequest {
   Agent?: Agent
   /**
    * 机构信息，暂未开放
+   * @deprecated
    */
   Organization?: OrganizationInfo
 }

@@ -118,6 +118,16 @@ it("asr.v20190614.CreateCustomization", async function () {
     }
 })
 
+it("asr.v20190614.VoicePrintGroupVerify", async function () {
+    try {
+       const data = await client.VoicePrintGroupVerify({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.DeleteAsrVocab", async function () {
     try {
        const data = await client.DeleteAsrVocab({})

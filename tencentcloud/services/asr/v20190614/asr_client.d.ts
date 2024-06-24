@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, VoicePrintEnrollRequest, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintVerifyRequest, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintVerifyResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintCountRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, VoicePrintCompareRequest, VoicePrintCompareResponse, DeleteCustomizationRequest, VoicePrintCountResponse, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
+import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, VoicePrintVerifyRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, VoicePrintEnrollRequest, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, VoicePrintGroupVerifyRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintGroupVerifyResponse, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintCountResponse, VoicePrintVerifyResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintCountRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, VoicePrintCompareRequest, VoicePrintCompareResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
 /**
  * asr client
  * @class
@@ -31,7 +31,7 @@ export declare class Client extends AbstractClient {
     /**
      * 统计并返回注册的说话人id总数
      */
-    VoicePrintCount(req?: VoicePrintCountRequest, cb?: (error: string, rep: VoicePrintCountResponse) => void): Promise<VoicePrintCountResponse>;
+    VoicePrintCount(req: VoicePrintCountRequest, cb?: (error: string, rep: VoicePrintCountResponse) => void): Promise<VoicePrintCountResponse>;
     /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      */
@@ -54,6 +54,10 @@ export declare class Client extends AbstractClient {
 注意：调用该接口后，模型会自动训练。新建模型成功后，调用ModifyCustomizationState接口修改为上线状态，即可在识别请求中使用对应模型ID。
      */
     CreateCustomization(req: CreateCustomizationRequest, cb?: (error: string, rep: CreateCustomizationResponse) => void): Promise<CreateCustomizationResponse>;
+    /**
+     * 说话人验证1:N接口，可以通过传入一段说话人音频，并且指定已存在的groupId, 和返回topN,  接口返回groupId内所有声纹和传入音频声纹比对打分TopN的结果。
+     */
+    VoicePrintGroupVerify(req: VoicePrintGroupVerifyRequest, cb?: (error: string, rep: VoicePrintGroupVerifyResponse) => void): Promise<VoicePrintGroupVerifyResponse>;
     /**
      * 用户通过本接口进行热词表的删除。
      */

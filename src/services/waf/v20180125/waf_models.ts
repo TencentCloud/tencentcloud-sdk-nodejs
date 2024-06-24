@@ -5994,6 +5994,32 @@ export interface DescribeAttackOverviewResponse {
 }
 
 /**
+ * AddAreaBanAreas请求参数结构体
+ */
+export interface AddAreaBanAreasRequest {
+  /**
+   * 需要修改的域名
+   */
+  Domain: string
+  /**
+   * 需要新增的封禁地域
+   */
+  Areas: Array<string>
+  /**
+   * waf版本信息，spart-waf或者clb-waf，其他无效，请一定填写
+   */
+  Edition?: string
+  /**
+   * 定时任务类型
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+}
+
+/**
  * 防篡改url元素
  */
 export interface CacheUrlItem {
@@ -8088,6 +8114,16 @@ export interface DescribeAntiInfoLeakageRulesResponse {
    * 规则列表
    */
   RuleList?: Array<DescribeAntiLeakageItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddAreaBanAreas返回参数结构体
+ */
+export interface AddAreaBanAreasResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

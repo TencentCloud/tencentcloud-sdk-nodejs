@@ -5517,7 +5517,7 @@ export interface DescribeGatewayFlowMonitorDetailRequest {
    */
   Limit?: number
   /**
-   * 排序字段。支持 `InPkg` `OutPkg` `InTraffic` `OutTraffic`。默认值`OutTraffic`。
+   * 排序字段。支持 `InPkg` `OutPkg` `InTraffic` `OutTraffic`，标准型nat额外支持 并发连接数`ConcurrentConnectionCount` 、新建连接速率`NewConnectionRate`。默认值`OutTraffic`。
    */
   OrderField?: string
   /**
@@ -6604,7 +6604,7 @@ export interface DescribeVpcEndPointServiceRequest {
    */
   EndPointServiceIds?: Array<string>
   /**
-   * <li>不支持同时传入参数 Filters 。</li> <li>列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。</li>
+   * <li>不支持同时传入参数 Filters 。</li> <li>列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，哪些终端节点服务授权了该账户。</li>
    */
   IsListAuthorizedEndPointService?: boolean
 }
@@ -9196,23 +9196,31 @@ export interface GatewayFlowMonitorDetail {
   /**
    * 来源`IP`。
    */
-  PrivateIpAddress: string
+  PrivateIpAddress?: string
   /**
    * 入包量。
    */
-  InPkg: number
+  InPkg?: number
   /**
    * 出包量。
    */
-  OutPkg: number
+  OutPkg?: number
   /**
    * 入流量，单位：`Byte`。
    */
-  InTraffic: number
+  InTraffic?: number
   /**
    * 出流量，单位：`Byte`。
    */
-  OutTraffic: number
+  OutTraffic?: number
+  /**
+   * 并发连接数。仅标准型nat支持此参数。
+   */
+  ConcurrentConnectionCount?: number
+  /**
+   * 新建连接速率。仅标准型nat支持此参数。
+   */
+  NewConnectionRate?: number
 }
 
 /**

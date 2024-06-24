@@ -18,6 +18,8 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeProductSKUsRequest,
+  ProductSKU,
   DescribeRoleListResponse,
   DeleteMQTTTopicRequest,
   CreateInstanceResponse,
@@ -75,6 +77,7 @@ import {
   CreateConsumerGroupResponse,
   DescribeMQTTUserListResponse,
   ModifyMQTTUserResponse,
+  PriceTag,
   MQTTUserItem,
   ModifyMQTTInsPublicEndpointRequest,
   ModifyMQTTInstanceCertBindingResponse,
@@ -137,6 +140,7 @@ import {
   DescribeMQTTMessageListRequest,
   DescribeMQTTTopicResponse,
   DescribeInstanceRequest,
+  DescribeProductSKUsResponse,
   IpRule,
 } from "./trocket_models"
 
@@ -312,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConsumerGroupResponse) => void
   ): Promise<DeleteConsumerGroupResponse> {
     return this.request("DeleteConsumerGroup", req, cb)
+  }
+
+  /**
+   * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
+   */
+  async DescribeProductSKUs(
+    req?: DescribeProductSKUsRequest,
+    cb?: (error: string, rep: DescribeProductSKUsResponse) => void
+  ): Promise<DescribeProductSKUsResponse> {
+    return this.request("DescribeProductSKUs", req, cb)
   }
 
   /**

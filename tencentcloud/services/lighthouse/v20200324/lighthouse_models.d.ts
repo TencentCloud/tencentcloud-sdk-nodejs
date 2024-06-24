@@ -3,7 +3,7 @@
  */
 export interface RunDockerContainersRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
@@ -569,7 +569,7 @@ export interface RerunDockerContainerResponse {
     /**
      * Docker活动ID。
      */
-    DockerActivityId: string;
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1424,7 +1424,7 @@ export interface DeleteFirewallRulesRequest {
  */
 export interface RerunDockerContainerRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
@@ -1432,7 +1432,7 @@ export interface RerunDockerContainerRequest {
      */
     ContainerConfiguration: DockerContainerConfiguration;
     /**
-     * 容器ID。
+     * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerId: string;
 }
@@ -2711,7 +2711,7 @@ export interface DescribeCcnAttachedInstancesResponse {
  */
 export interface DescribeBundlesRequest {
     /**
-     * 套餐 ID 列表。
+     * 套餐 ID 列表。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。
      */
     BundleIds?: Array<string>;
     /**
@@ -3093,11 +3093,11 @@ export interface CreateFirewallTemplateRulesResponse {
  */
 export interface ModifyDockerContainerRequest {
     /**
-     * 实例ID。
+     * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
      */
     InstanceId: string;
     /**
-     * 容器ID。
+     * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
      */
     ContainerId: string;
     /**
@@ -3958,7 +3958,7 @@ export interface LoginConfiguration {
  */
 export interface DescribeResetInstanceBlueprintsRequest {
     /**
-     * 实例ID
+     * 实例ID。可通过 <a href="https://cloud.tencent.com/document/product/1207/47573">DescribeInstances</a> 接口返回值中的 InstanceId 获取。
      */
     InstanceId: string;
     /**
@@ -3974,6 +3974,7 @@ export interface DescribeResetInstanceBlueprintsRequest {
   <li>blueprint-id</li>按照【镜像 ID】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/47689">DescribeBlueprints</a> 接口返回值中的 BlueprintId 获取。
   <li>blueprint-type</li>按照【镜像类型】进行过滤。
   取值： APP_OS（应用镜像 ）；PURE_OS（ 系统镜像）；PRIVATE（自定义镜像）。
   类型：String
@@ -3985,9 +3986,11 @@ export interface DescribeResetInstanceBlueprintsRequest {
   <li>blueprint-name</li>按照【镜像名称】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/47689">DescribeBlueprints</a> 接口返回值中的 BlueprintName 获取。
   <li>blueprint-state</li>按照【镜像状态】进行过滤。
   类型：String
   必选：否
+  可通过 <a href="https://cloud.tencent.com/document/product/1207/47689">DescribeBlueprints</a> 接口返回值中的 BlueprintState 获取。
   
   每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
      */
@@ -4379,7 +4382,7 @@ export interface DescribeDockerContainerDetailResponse {
  */
 export interface DescribeBundleDiscountRequest {
     /**
-     * 套餐 ID。
+     * 套餐 ID。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。
      */
     BundleId: string;
 }
@@ -4492,11 +4495,11 @@ export interface DescribeResetInstanceBlueprintsResponse {
     /**
      * 符合条件的镜像数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像重置信息列表
      */
-    ResetInstanceBlueprintSet: Array<ResetInstanceBlueprint>;
+    ResetInstanceBlueprintSet?: Array<ResetInstanceBlueprint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

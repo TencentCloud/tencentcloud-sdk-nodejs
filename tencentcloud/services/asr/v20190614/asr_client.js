@@ -95,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomization", req, cb);
     }
     /**
+     * 说话人验证1:N接口，可以通过传入一段说话人音频，并且指定已存在的groupId, 和返回topN,  接口返回groupId内所有声纹和传入音频声纹比对打分TopN的结果。
+     */
+    async VoicePrintGroupVerify(req, cb) {
+        return this.request("VoicePrintGroupVerify", req, cb);
+    }
+    /**
      * 用户通过本接口进行热词表的删除。
      */
     async DeleteAsrVocab(req, cb) {

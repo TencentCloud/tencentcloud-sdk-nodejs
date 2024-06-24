@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDoc", req, cb);
     }
     /**
+     * 获取文档预览信息
+     */
+    async GetDocPreview(req, cb) {
+        return this.request("GetDocPreview", req, cb);
+    }
+    /**
      * 删除拒答问题
      */
     async DeleteRejectedQuestion(req, cb) {
@@ -168,10 +174,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RateMsgRecord", req, cb);
     }
     /**
-     * 问答列表
+     * 回答类型数据统计
      */
-    async ListQA(req, cb) {
-        return this.request("ListQA", req, cb);
+    async GetAnswerTypeDataCount(req, cb) {
+        return this.request("GetAnswerTypeDataCount", req, cb);
+    }
+    /**
+     * 点赞点踩数据统计
+     */
+    async GetLikeDataCount(req, cb) {
+        return this.request("GetLikeDataCount", req, cb);
     }
     /**
      * 删除问答
@@ -267,16 +279,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListApp", req, cb);
     }
     /**
-     * 获取文档预览信息
+     * 文档生成问答
      */
-    async GetDocPreview(req, cb) {
-        return this.request("GetDocPreview", req, cb);
+    async GenerateQA(req, cb) {
+        return this.request("GenerateQA", req, cb);
     }
     /**
      * 发布文档预览
      */
     async ListReleaseDocPreview(req, cb) {
         return this.request("ListReleaseDocPreview", req, cb);
+    }
+    /**
+     * 问答列表
+     */
+    async ListQA(req, cb) {
+        return this.request("ListQA", req, cb);
     }
     /**
      * 创建企业
@@ -345,10 +363,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAppKnowledgeCount", req, cb);
     }
     /**
-     * 文档生成问答
+     * 接口支持图片和PDF转可编辑word格式文件，将文件中的图片、文本、表格等元素识别，并根据位置进行还原。
      */
-    async GenerateQA(req, cb) {
-        return this.request("GenerateQA", req, cb);
+    async ConvertDocument(req, cb) {
+        return this.request("ConvertDocument", req, cb);
     }
     /**
      * 应用类型列表

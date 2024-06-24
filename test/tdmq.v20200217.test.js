@@ -48,9 +48,19 @@ it("tdmq.v20200217.DescribeRocketMQConsumeStats", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeRocketMQNamespaces", async function () {
+it("tdmq.v20200217.DeleteRoles", async function () {
     try {
-       const data = await client.DescribeRocketMQNamespaces({})
+       const data = await client.DeleteRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRabbitMQExchanges", async function () {
+    try {
+       const data = await client.DescribeRabbitMQExchanges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +221,16 @@ it("tdmq.v20200217.RewindCmqQueue", async function () {
 it("tdmq.v20200217.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRocketMQNamespaces", async function () {
+    try {
+       const data = await client.DescribeRocketMQNamespaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,16 +611,6 @@ it("tdmq.v20200217.DescribeRocketMQRoles", async function () {
 it("tdmq.v20200217.DescribeRabbitMQUser", async function () {
     try {
        const data = await client.DescribeRabbitMQUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.DeleteRoles", async function () {
-    try {
-       const data = await client.DeleteRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

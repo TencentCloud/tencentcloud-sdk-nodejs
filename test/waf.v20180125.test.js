@@ -938,6 +938,16 @@ it("waf.v20180125.AddAttackWhiteRule", async function () {
     }
 })
 
+it("waf.v20180125.AddAreaBanAreas", async function () {
+    try {
+       const data = await client.AddAreaBanAreas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomainCountInfo", async function () {
     try {
        const data = await client.DescribeDomainCountInfo({})

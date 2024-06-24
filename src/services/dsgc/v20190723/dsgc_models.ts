@@ -4129,92 +4129,92 @@ export interface DspaDiscoveryCOSTaskResultDetail {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 扫描File结果详情ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileResultId: number
+  FileResultId?: number
   /**
    * 所属桶名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BucketName: string
+  BucketName?: string
   /**
    * 所属文件名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileName: string
+  FileName?: string
   /**
    * 敏感数据分类ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryId: number
+  CategoryId?: number
   /**
    * 敏感数据分类名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryName: string
+  CategoryName?: string
   /**
    * 敏感数据分级ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LevelId: number
+  LevelId?: number
   /**
    * 敏感数据分级名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LevelName: string
+  LevelName?: string
   /**
    * KMS加密，true or false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KMSEncrypted: boolean
+  KMSEncrypted?: boolean
   /**
    * 规则名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 敏感数据分级分数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LevelRiskScore: number
+  LevelRiskScore?: number
   /**
    * 文件大小，单位为KB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSize: number
+  FileSize?: number
   /**
    * 文件类型，如csv，txt
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileType: string
+  FileType?: string
   /**
    * 敏感数据出现次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SensitiveDataCount: number
+  SensitiveDataCount?: number
   /**
    * 分类树路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryFullPath: Array<string>
+  CategoryFullPath?: Array<string>
   /**
    * 合规组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComplianceId: number
+  ComplianceId?: number
   /**
    * 结果id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultId: number
+  ResultId?: number
 }
 
 /**

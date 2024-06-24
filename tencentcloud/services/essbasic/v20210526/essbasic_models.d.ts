@@ -3205,10 +3205,12 @@ export interface CreateLegalSealQrCodeRequest {
     Agent?: Agent;
     /**
      * 操作人信息
+     * @deprecated
      */
     Operator?: UserInfo;
     /**
      * 企业信息
+     * @deprecated
      */
     Organization?: OrganizationInfo;
 }

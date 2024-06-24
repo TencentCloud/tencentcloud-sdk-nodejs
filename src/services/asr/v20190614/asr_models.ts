@@ -51,6 +51,39 @@ export interface VoicePrintDeleteRequest {
    * 说话人id，说话人唯一标识
    */
   VoicePrintId?: string
+  /**
+   * 说话人分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
+   */
+  GroupId?: string
+  /**
+   * 删除模式: 
+0.默认值，删除该条声纹
+1.从分组中删除该条声纹，声纹本身不删除
+2.从声纹库中删除分组，仅删除分组信息，不会真正删除分组中的声纹
+   */
+  DelMod?: number
+}
+
+/**
+ * VoicePrintVerify请求参数结构体
+ */
+export interface VoicePrintVerifyRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率，目前支持16000，单位：Hz，必填
+   */
+  SampleRate: number
+  /**
+   * 说话人id, 说话人唯一标识
+   */
+  VoicePrintId: string
+  /**
+   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   */
+  Data: string
 }
 
 /**
@@ -512,6 +545,45 @@ export interface DownloadAsrVocabResponse {
 }
 
 /**
+ * [词表内容](https://cloud.tencent.com/document/product/1093/41484#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ */
+export interface Vocab {
+  /**
+   * 热词表名称
+   */
+  Name?: string
+  /**
+   * 热词表描述
+   */
+  Description?: string
+  /**
+   * 热词表ID
+   */
+  VocabId?: string
+  /**
+   * 词权重列表
+   */
+  WordWeights?: Array<HotWord>
+  /**
+   * 词表创建时间
+   */
+  CreateTime?: string
+  /**
+   * 词表更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态
+   */
+  State?: number
+  /**
+   * 标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagInfos?: Array<string>
+}
+
+/**
  * CreateRecTask返回参数结构体
  */
 export interface CreateRecTaskResponse {
@@ -595,6 +667,10 @@ export interface VoicePrintEnrollRequest {
    * 说话人昵称  不超过32字节
    */
   SpeakerNick?: string
+  /**
+   * 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符
+   */
+  GroupId?: string
 }
 
 /**
@@ -832,6 +908,32 @@ export interface CreateRecTaskRequest {
 }
 
 /**
+ * VoicePrintGroupVerify请求参数结构体
+ */
+export interface VoicePrintGroupVerifyRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率，目前支持16000，单位：Hz，必填
+   */
+  SampleRate: number
+  /**
+   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   */
+  Data: string
+  /**
+   * 分组id, 支持数字，字母，下划线，长度不超过128
+   */
+  GroupId: string
+  /**
+   * 返回打分结果降序排列topN, TopN大于0， 小于可创建声纹最大数量
+   */
+  TopN: number
+}
+
+/**
  * GetAsrVocabList请求参数结构体
  */
 export interface GetAsrVocabListRequest {
@@ -870,25 +972,17 @@ export interface GetCustomizationListResponse {
 }
 
 /**
- * VoicePrintVerify请求参数结构体
+ * VoicePrintGroupVerify返回参数结构体
  */
-export interface VoicePrintVerifyRequest {
+export interface VoicePrintGroupVerifyResponse {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * TopN 返回结果;系统建议打分70分以上为同一个人音色，评分也取决于音频质量、长度等其他原因影响，您可以按照业务需求适当提高或降低分数要求
    */
-  VoiceFormat: number
+  Data?: VerifyTopResult
   /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SampleRate: number
-  /**
-   * 说话人id, 说话人唯一标识
-   */
-  VoicePrintId: string
-  /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
-   */
-  Data: string
+  RequestId?: string
 }
 
 /**
@@ -916,42 +1010,14 @@ export interface SetVocabStateRequest {
 }
 
 /**
- * [词表内容](https://cloud.tencent.com/document/product/1093/41484#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ * 说话人验证1:N返回结果
  */
-export interface Vocab {
+export interface VerifyTopResult {
   /**
-   * 热词表名称
-   */
-  Name?: string
-  /**
-   * 热词表描述
-   */
-  Description?: string
-  /**
-   * 热词表ID
-   */
-  VocabId?: string
-  /**
-   * 词权重列表
-   */
-  WordWeights?: Array<HotWord>
-  /**
-   * 词表创建时间
-   */
-  CreateTime?: string
-  /**
-   * 词表更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态
-   */
-  State?: number
-  /**
-   * 标签数组
+   * 对比打分结果，按照打分降序排列返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagInfos?: Array<string>
+  VerifyTops?: Array<VerifyTop>
 }
 
 /**
@@ -1091,6 +1157,20 @@ export interface UpdateAsrVocabResponse {
    * 热词表ID
    */
   VocabId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VoicePrintCount返回参数结构体
+ */
+export interface VoicePrintCountResponse {
+  /**
+   * 统计数据
+   */
+  Data?: VoicePrintCountData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1256,7 +1336,18 @@ export interface UpdateAsrVocabRequest {
 /**
  * VoicePrintCount请求参数结构体
  */
-export type VoicePrintCountRequest = null
+export interface VoicePrintCountRequest {
+  /**
+   * 分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
+   */
+  GroupId?: string
+  /**
+   * 统计模式
+0: 统计所有声纹数量
+1: 统计指定分组下的声纹数量
+   */
+  CountMod?: number
+}
 
 /**
  * DescribeTaskStatus请求参数结构体
@@ -1374,17 +1465,24 @@ export interface DeleteCustomizationRequest {
 }
 
 /**
- * VoicePrintCount返回参数结构体
+ * 声纹组对比结果top数据
  */
-export interface VoicePrintCountResponse {
+export interface VerifyTop {
   /**
-   * 统计数据
+   * 相似度打分
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: VoicePrintCountData
+  Score?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 说话人id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  VoicePrintId?: string
+  /**
+   * 说话人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeakerId?: string
 }
 
 /**
@@ -1496,6 +1594,11 @@ export interface VoicePrintCountData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
+  /**
+   * 说话人id列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoicePrintList?: Array<VoicePrintBaseData>
 }
 
 /**

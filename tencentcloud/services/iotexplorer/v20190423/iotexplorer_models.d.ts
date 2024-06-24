@@ -801,6 +801,51 @@ export interface TransferCloudStorageResponse {
     RequestId?: string;
 }
 /**
+ * LoRa自定义频点信息
+ */
+export interface LoRaFrequencyEntry {
+    /**
+     * 频点唯一ID
+     */
+    FreqId: string;
+    /**
+     * 频点名称
+     */
+    FreqName: string;
+    /**
+     * 频点描述
+     */
+    Description: string;
+    /**
+     * 数据上行信道
+     */
+    ChannelsDataUp: Array<number | bigint>;
+    /**
+     * 数据下行信道RX1
+     */
+    ChannelsDataRX1: Array<number | bigint>;
+    /**
+     * 数据下行信道RX2
+     */
+    ChannelsDataRX2: Array<number | bigint>;
+    /**
+     * 入网上行信道
+     */
+    ChannelsJoinUp: Array<number | bigint>;
+    /**
+     * 入网下行RX1信道
+     */
+    ChannelsJoinRX1: Array<number | bigint>;
+    /**
+     * 入网下行RX2信道
+     */
+    ChannelsJoinRX2: Array<number | bigint>;
+    /**
+     * 创建时间
+     */
+    CreateTime: number;
+}
+/**
  * CreateStudioProduct返回参数结构体
  */
 export interface CreateStudioProductResponse {
@@ -1067,49 +1112,17 @@ export interface CreateStudioProductRequest {
     Period?: string;
 }
 /**
- * LoRa自定义频点信息
+ * GetTWeCallActiveStatus返回参数结构体
  */
-export interface LoRaFrequencyEntry {
+export interface GetTWeCallActiveStatusResponse {
     /**
-     * 频点唯一ID
+     * 激活状态
      */
-    FreqId: string;
+    TWeCallActiveInfos?: Array<TWeCallActiveInfo>;
     /**
-     * 频点名称
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    FreqName: string;
-    /**
-     * 频点描述
-     */
-    Description: string;
-    /**
-     * 数据上行信道
-     */
-    ChannelsDataUp: Array<number | bigint>;
-    /**
-     * 数据下行信道RX1
-     */
-    ChannelsDataRX1: Array<number | bigint>;
-    /**
-     * 数据下行信道RX2
-     */
-    ChannelsDataRX2: Array<number | bigint>;
-    /**
-     * 入网上行信道
-     */
-    ChannelsJoinUp: Array<number | bigint>;
-    /**
-     * 入网下行RX1信道
-     */
-    ChannelsJoinRX1: Array<number | bigint>;
-    /**
-     * 入网下行RX2信道
-     */
-    ChannelsJoinRX2: Array<number | bigint>;
-    /**
-     * 创建时间
-     */
-    CreateTime: number;
+    RequestId?: string;
 }
 /**
  * DisableTopicRule请求参数结构体
@@ -1236,17 +1249,17 @@ export interface GetWechatDeviceTicketRequest {
     MiniProgramAppId?: string;
 }
 /**
- * GetTWeCallActiveStatus返回参数结构体
+ * DescribeFirmware请求参数结构体
  */
-export interface GetTWeCallActiveStatusResponse {
+export interface DescribeFirmwareRequest {
     /**
-     * 激活状态
+     * 产品ID
      */
-    TWeCallActiveInfos?: Array<TWeCallActiveInfo>;
+    ProductID: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 固件版本号
      */
-    RequestId?: string;
+    FirmwareVersion: string;
 }
 /**
  * GetAuthMiniProgramAppList返回参数结构体
@@ -2107,6 +2120,57 @@ export interface DescribeSpaceFenceEventListResponse {
      * 围栏告警事件总数
      */
     Total: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeFirmware返回参数结构体
+ */
+export interface DescribeFirmwareResponse {
+    /**
+     * 固件版本号
+     */
+    Version?: string;
+    /**
+     * 产品ID
+     */
+    ProductId?: string;
+    /**
+     * 固件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 固件描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 固件Md5值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Md5sum?: string;
+    /**
+     * 固件上传的秒级时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Createtime?: number;
+    /**
+     * 产品名称
+     */
+    ProductName?: string;
+    /**
+     * 固件升级模块
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwType?: string;
+    /**
+     * 固件用户自定义配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDefined?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

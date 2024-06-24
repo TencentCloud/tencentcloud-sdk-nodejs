@@ -108,6 +108,16 @@ it("lke.v20231130.DescribeDoc", async function () {
     }
 })
 
+it("lke.v20231130.GetDocPreview", async function () {
+    try {
+       const data = await client.GetDocPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.DeleteRejectedQuestion", async function () {
     try {
        const data = await client.DeleteRejectedQuestion({})
@@ -248,9 +258,19 @@ it("lke.v20231130.RateMsgRecord", async function () {
     }
 })
 
-it("lke.v20231130.ListQA", async function () {
+it("lke.v20231130.GetAnswerTypeDataCount", async function () {
     try {
-       const data = await client.ListQA({})
+       const data = await client.GetAnswerTypeDataCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.GetLikeDataCount", async function () {
+    try {
+       const data = await client.GetLikeDataCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +428,9 @@ it("lke.v20231130.ListApp", async function () {
     }
 })
 
-it("lke.v20231130.GetDocPreview", async function () {
+it("lke.v20231130.GenerateQA", async function () {
     try {
-       const data = await client.GetDocPreview({})
+       const data = await client.GenerateQA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +441,16 @@ it("lke.v20231130.GetDocPreview", async function () {
 it("lke.v20231130.ListReleaseDocPreview", async function () {
     try {
        const data = await client.ListReleaseDocPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lke.v20231130.ListQA", async function () {
+    try {
+       const data = await client.ListQA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +568,9 @@ it("lke.v20231130.GetAppKnowledgeCount", async function () {
     }
 })
 
-it("lke.v20231130.GenerateQA", async function () {
+it("lke.v20231130.ConvertDocument", async function () {
     try {
-       const data = await client.GenerateQA({})
+       const data = await client.ConvertDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

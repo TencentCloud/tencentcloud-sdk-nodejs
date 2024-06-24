@@ -46,10 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQConsumeStats", req, cb);
     }
     /**
-     * 获取RocketMQ命名空间列表
+     * 删除角色，支持批量。
      */
-    async DescribeRocketMQNamespaces(req, cb) {
-        return this.request("DescribeRocketMQNamespaces", req, cb);
+    async DeleteRoles(req, cb) {
+        return this.request("DeleteRoles", req, cb);
+    }
+    /**
+     * 查询RabbitMQ exchange 列表
+     */
+    async DescribeRabbitMQExchanges(req, cb) {
+        return this.request("DescribeRabbitMQExchanges", req, cb);
     }
     /**
      * 更新Amqp集群信息
@@ -146,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTopic(req, cb) {
         return this.request("CreateTopic", req, cb);
+    }
+    /**
+     * 获取RocketMQ命名空间列表
+     */
+    async DescribeRocketMQNamespaces(req, cb) {
+        return this.request("DescribeRocketMQNamespaces", req, cb);
     }
     /**
      * 查询cmq全量队列
@@ -376,12 +388,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRabbitMQUser(req, cb) {
         return this.request("DescribeRabbitMQUser", req, cb);
-    }
-    /**
-     * 删除角色，支持批量。
-     */
-    async DeleteRoles(req, cb) {
-        return this.request("DeleteRoles", req, cb);
     }
     /**
      * 更新RocketMQ集群信息

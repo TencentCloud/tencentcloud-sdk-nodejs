@@ -226,6 +226,7 @@ export { trro } from "./trro";
 export { trtc } from "./trtc";
 export { tse } from "./tse";
 export { tsf } from "./tsf";
+export { tsi } from "./tsi";
 export { tsw } from "./tsw";
 export { tts } from "./tts";
 export { ump } from "./ump";

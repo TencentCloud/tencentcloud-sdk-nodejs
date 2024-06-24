@@ -1819,6 +1819,54 @@ export interface DescribeRabbitMQVipInstanceRequest {
     ClusterId: string;
 }
 /**
+ * DescribeRabbitMQExchanges请求参数结构体
+ */
+export interface DescribeRabbitMQExchangesRequest {
+    /**
+     * 实例 id
+     */
+    InstanceId: string;
+    /**
+     * vhost 参数
+     */
+    VirtualHost: string;
+    /**
+     * 分页 offset
+     */
+    Offset?: number;
+    /**
+     * 分页 limit
+     */
+    Limit?: number;
+    /**
+     * 搜索关键词, 支持模糊匹配
+     */
+    SearchWord?: string;
+    /**
+     * 筛选 exchange 类型, 数组中每个元素为选中的过滤类型
+     */
+    ExchangeTypeFilters?: Array<string>;
+    /**
+     * 筛选 exchange 创建来源,  "system":"系统创建", "user":"用户创建"
+     */
+    ExchangeCreatorFilters?: Array<string>;
+    /**
+     * exchange 名称，用于精确匹配
+     */
+    ExchangeName?: string;
+    /**
+     * 排序依据的字段：
+  MessageRateInOut - 生产消费速率之和；
+  MessageRateIn - 生产速率；
+  MessageRateOut - 消费速率；
+     */
+    SortElement?: string;
+    /**
+     * 排序顺序，ascend 或 descend
+     */
+    SortOrder?: string;
+}
+/**
  * DeleteTopics请求参数结构体
  */
 export interface DeleteTopicsRequest {
@@ -5933,6 +5981,25 @@ export interface DescribeRocketMQPublicAccessPointResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRabbitMQExchanges返回参数结构体
+ */
+export interface DescribeRabbitMQExchangesResponse {
+    /**
+     * 策略列表信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExchangeInfoList?: Array<RabbitMQExchangeListInfo>;
+    /**
+     * 策略结果总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRabbitMQQueueDetail返回参数结构体
  */
 export interface DescribeRabbitMQQueueDetailResponse {
@@ -8361,6 +8428,89 @@ export interface CmqTopic {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubscriptionCount?: number;
+}
+/**
+ * RabbitMQ exchange列表成员信息
+ */
+export interface RabbitMQExchangeListInfo {
+    /**
+     * exchange 名
+     */
+    ExchangeName?: string;
+    /**
+     * 备注说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * exchange 类型, 支持 "fanout","direct","topic","headers"
+     */
+    ExchangeType?: string;
+    /**
+     * VHost参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VirtualHost?: string;
+    /**
+     * exchange 创建者, "system":"系统创建", "user":"用户创建"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExchangeCreator?: string;
+    /**
+     * exchange 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTimeStamp?: string;
+    /**
+     * exchange 修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModTimeStamp?: string;
+    /**
+     * 输入消息速率
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageRateIn?: number;
+    /**
+     * 输出消息速率
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageRateOut?: number;
+    /**
+     * 是否为持久化交换机，true 为持久化，false 为非持久化
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Durable?: boolean;
+    /**
+     * 是否为自动删除交换机，true 为自动删除，false 为非自动删除
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoDelete?: boolean;
+    /**
+     * 是否为内部交换机，true 为内部交换机
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Internal?: boolean;
+    /**
+     * 交换机所属实例 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 生效的策略名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Policy?: string;
+    /**
+     * 扩展参数 key-value 对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Arguments?: string;
+    /**
+     * 未调度的延时消息数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessagesDelayed?: number;
 }
 /**
  * DescribeBindVpcs请求参数结构体

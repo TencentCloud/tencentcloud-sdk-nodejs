@@ -29,7 +29,7 @@ import {
   ListSelectDocResponse,
   DescribeReleaseInfoRequest,
   DeleteDocRequest,
-  ReconstructDocumentResponse,
+  GetAnswerTypeDataCountRequest,
   DescribeAppResponse,
   UploadAttributeLabelResponse,
   MsgRecord,
@@ -40,6 +40,7 @@ import {
   UnsatisfiedReply,
   CreateQACateResponse,
   ModifyDocAttrRangeResponse,
+  GetAnswerTypeDataCountResponse,
   DescribeQARequest,
   AttrLabelRefer,
   CreateReconstructDocumentFlowConfig,
@@ -58,7 +59,7 @@ import {
   ReferDetail,
   ListUnsatisfiedReplyRequest,
   DeleteQARequest,
-  ParseDocRequest,
+  GetLikeDataCountResponse,
   ListReleaseRequest,
   ListModelRequest,
   SummaryOutput,
@@ -79,6 +80,7 @@ import {
   ListQaItem,
   DeleteAttributeLabelRequest,
   DescribeRobotBizIDByAppKeyResponse,
+  ReconstructDocumentResponse,
   DescribeDocResponse,
   CreateReleaseRequest,
   Label,
@@ -86,7 +88,7 @@ import {
   CheckAttributeLabelReferRequest,
   ModifyQACateRequest,
   ModifyAttributeLabelRequest,
-  VerifyQARequest,
+  TaskParams,
   AttributeLabel,
   Option,
   Usage,
@@ -95,10 +97,12 @@ import {
   DeleteQACateResponse,
   QueryParseDocResultResponse,
   ListReleaseDocPreviewResponse,
+  WordRecognizeInfo,
   SummaryConfig,
   GenerateQAResponse,
   GetTaskStatusResponse,
   DescribeDocRequest,
+  ConvertDocumentResponse,
   RetryDocAuditRequest,
   SaveDocRequest,
   ReconstructDocumentFailedPage,
@@ -139,8 +143,9 @@ import {
   ListQAResponse,
   IgnoreUnsatisfiedReplyRequest,
   DescribeReleaseResponse,
-  TaskParams,
+  ConvertDocumentRequest,
   ListDocItem,
+  ParseDocRequest,
   Polygon,
   AppModel,
   ClassifyLabel,
@@ -148,7 +153,7 @@ import {
   RetryDocAuditResponse,
   GetReconstructDocumentResultResponse,
   RejectedQuestion,
-  SaveDocResponse,
+  GetLikeDataCountRequest,
   DeleteRejectedQuestionResponse,
   Credentials,
   MsgFileInfo,
@@ -172,6 +177,7 @@ import {
   QueryRewriteRequest,
   ModifyAppRequest,
   DeleteAttributeLabelResponse,
+  VerifyQARequest,
   DeleteQACateRequest,
   GenerateQARequest,
   GetWsTokenRequest,
@@ -204,6 +210,7 @@ import {
   DescribeStorageCredentialRequest,
   QAList,
   DescribeCorpResponse,
+  SaveDocResponse,
   ListReleaseResponse,
   ListModelResponse,
   ListAttributeLabelResponse,
@@ -329,6 +336,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDocResponse) => void
   ): Promise<DescribeDocResponse> {
     return this.request("DescribeDoc", req, cb)
+  }
+
+  /**
+   * 获取文档预览信息
+   */
+  async GetDocPreview(
+    req: GetDocPreviewRequest,
+    cb?: (error: string, rep: GetDocPreviewResponse) => void
+  ): Promise<GetDocPreviewResponse> {
+    return this.request("GetDocPreview", req, cb)
   }
 
   /**
@@ -474,13 +491,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 问答列表
+   * 回答类型数据统计
    */
-  async ListQA(
-    req: ListQARequest,
-    cb?: (error: string, rep: ListQAResponse) => void
-  ): Promise<ListQAResponse> {
-    return this.request("ListQA", req, cb)
+  async GetAnswerTypeDataCount(
+    req: GetAnswerTypeDataCountRequest,
+    cb?: (error: string, rep: GetAnswerTypeDataCountResponse) => void
+  ): Promise<GetAnswerTypeDataCountResponse> {
+    return this.request("GetAnswerTypeDataCount", req, cb)
+  }
+
+  /**
+   * 点赞点踩数据统计
+   */
+  async GetLikeDataCount(
+    req: GetLikeDataCountRequest,
+    cb?: (error: string, rep: GetLikeDataCountResponse) => void
+  ): Promise<GetLikeDataCountResponse> {
+    return this.request("GetLikeDataCount", req, cb)
   }
 
   /**
@@ -637,13 +664,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取文档预览信息
+   * 文档生成问答
    */
-  async GetDocPreview(
-    req: GetDocPreviewRequest,
-    cb?: (error: string, rep: GetDocPreviewResponse) => void
-  ): Promise<GetDocPreviewResponse> {
-    return this.request("GetDocPreview", req, cb)
+  async GenerateQA(
+    req: GenerateQARequest,
+    cb?: (error: string, rep: GenerateQAResponse) => void
+  ): Promise<GenerateQAResponse> {
+    return this.request("GenerateQA", req, cb)
   }
 
   /**
@@ -654,6 +681,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListReleaseDocPreviewResponse) => void
   ): Promise<ListReleaseDocPreviewResponse> {
     return this.request("ListReleaseDocPreview", req, cb)
+  }
+
+  /**
+   * 问答列表
+   */
+  async ListQA(
+    req: ListQARequest,
+    cb?: (error: string, rep: ListQAResponse) => void
+  ): Promise<ListQAResponse> {
+    return this.request("ListQA", req, cb)
   }
 
   /**
@@ -767,13 +804,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档生成问答
+   * 接口支持图片和PDF转可编辑word格式文件，将文件中的图片、文本、表格等元素识别，并根据位置进行还原。
    */
-  async GenerateQA(
-    req: GenerateQARequest,
-    cb?: (error: string, rep: GenerateQAResponse) => void
-  ): Promise<GenerateQAResponse> {
-    return this.request("GenerateQA", req, cb)
+  async ConvertDocument(
+    req: ConvertDocumentRequest,
+    cb?: (error: string, rep: ConvertDocumentResponse) => void
+  ): Promise<ConvertDocumentResponse> {
+    return this.request("ConvertDocument", req, cb)
   }
 
   /**

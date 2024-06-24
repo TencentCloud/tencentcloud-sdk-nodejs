@@ -81,6 +81,7 @@ import {
   CreateRocketMQVipInstanceRequest,
   PulsarNetworkAccessPointInfo,
   DescribeRabbitMQVipInstanceRequest,
+  DescribeRabbitMQExchangesRequest,
   DeleteTopicsRequest,
   DescribeNamespaceBundlesOptRequest,
   DeleteRocketMQEnvironmentRolesResponse,
@@ -241,6 +242,7 @@ import {
   DescribeRocketMQMigratingTopicListResponse,
   DescribeEnvironmentRolesResponse,
   DescribeRocketMQPublicAccessPointResponse,
+  DescribeRabbitMQExchangesResponse,
   DescribeRabbitMQQueueDetailResponse,
   DescribeRocketMQTopicMsgsResponse,
   VerifyRocketMQConsumeResponse,
@@ -331,6 +333,7 @@ import {
   DeleteRocketMQVipInstanceRequest,
   MsgLog,
   CmqTopic,
+  RabbitMQExchangeListInfo,
   DescribeBindVpcsRequest,
   TopicRecord,
   DescribeEnvironmentRolesRequest,
@@ -421,13 +424,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取RocketMQ命名空间列表
+   * 删除角色，支持批量。
    */
-  async DescribeRocketMQNamespaces(
-    req: DescribeRocketMQNamespacesRequest,
-    cb?: (error: string, rep: DescribeRocketMQNamespacesResponse) => void
-  ): Promise<DescribeRocketMQNamespacesResponse> {
-    return this.request("DescribeRocketMQNamespaces", req, cb)
+  async DeleteRoles(
+    req: DeleteRolesRequest,
+    cb?: (error: string, rep: DeleteRolesResponse) => void
+  ): Promise<DeleteRolesResponse> {
+    return this.request("DeleteRoles", req, cb)
+  }
+
+  /**
+   * 查询RabbitMQ exchange 列表
+   */
+  async DescribeRabbitMQExchanges(
+    req: DescribeRabbitMQExchangesRequest,
+    cb?: (error: string, rep: DescribeRabbitMQExchangesResponse) => void
+  ): Promise<DescribeRabbitMQExchangesResponse> {
+    return this.request("DescribeRabbitMQExchanges", req, cb)
   }
 
   /**
@@ -588,6 +601,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicResponse) => void
   ): Promise<CreateTopicResponse> {
     return this.request("CreateTopic", req, cb)
+  }
+
+  /**
+   * 获取RocketMQ命名空间列表
+   */
+  async DescribeRocketMQNamespaces(
+    req: DescribeRocketMQNamespacesRequest,
+    cb?: (error: string, rep: DescribeRocketMQNamespacesResponse) => void
+  ): Promise<DescribeRocketMQNamespacesResponse> {
+    return this.request("DescribeRocketMQNamespaces", req, cb)
   }
 
   /**
@@ -970,16 +993,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRabbitMQUserResponse) => void
   ): Promise<DescribeRabbitMQUserResponse> {
     return this.request("DescribeRabbitMQUser", req, cb)
-  }
-
-  /**
-   * 删除角色，支持批量。
-   */
-  async DeleteRoles(
-    req: DeleteRolesRequest,
-    cb?: (error: string, rep: DeleteRolesResponse) => void
-  ): Promise<DeleteRolesResponse> {
-    return this.request("DeleteRoles", req, cb)
   }
 
   /**

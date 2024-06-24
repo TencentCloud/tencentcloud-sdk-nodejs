@@ -456,6 +456,8 @@ var tse_1 = require("./tse");
 Object.defineProperty(exports, "tse", { enumerable: true, get: function () { return tse_1.tse; } });
 var tsf_1 = require("./tsf");
 Object.defineProperty(exports, "tsf", { enumerable: true, get: function () { return tsf_1.tsf; } });
+var tsi_1 = require("./tsi");
+Object.defineProperty(exports, "tsi", { enumerable: true, get: function () { return tsi_1.tsi; } });
 var tsw_1 = require("./tsw");
 Object.defineProperty(exports, "tsw", { enumerable: true, get: function () { return tsw_1.tsw; } });
 var tts_1 = require("./tts");

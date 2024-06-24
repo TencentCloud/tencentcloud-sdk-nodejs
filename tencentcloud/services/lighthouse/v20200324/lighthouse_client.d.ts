@@ -111,7 +111,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstancesLoginKeyPairAttribute(req: ModifyInstancesLoginKeyPairAttributeRequest, cb?: (error: string, rep: ModifyInstancesLoginKeyPairAttributeResponse) => void): Promise<ModifyInstancesLoginKeyPairAttributeResponse>;
     /**
-     * 重新创建并运行实例内的Docker容器，之后可以通过返回的ActivityId调用DescribeDockerActivities接口查询重建情况。
+     * 重新创建并运行实例内的Docker容器，之后可以通过返回的ActivityId调用[DescribeDockerActivities](https://cloud.tencent.com/document/product/1207/95476)接口查询重建情况。
      */
     RerunDockerContainer(req: RerunDockerContainerRequest, cb?: (error: string, rep: RerunDockerContainerResponse) => void): Promise<RerunDockerContainerResponse>;
     /**

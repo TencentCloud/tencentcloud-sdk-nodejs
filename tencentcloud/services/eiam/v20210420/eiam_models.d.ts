@@ -1029,7 +1029,7 @@ export interface DeleteUsersResponse {
      * 未被成功删除的用户信息。当业务参数为DeleteIdList时，本字段将返回未成功删除的用户ID列表。当业务参数为DeleteNameList时，本字段将返回未成功删除的用户名称列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedItems: Array<string>;
+    FailedItems?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2006,16 +2006,16 @@ export interface DescribeUserThirdPartyAccountInfoResponse {
     /**
      * 用户 id。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 用户名。
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 三方账号的绑定情况。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ThirdPartyAccounts: Array<ThirdPartyAccountInfo>;
+    ThirdPartyAccounts?: Array<ThirdPartyAccountInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

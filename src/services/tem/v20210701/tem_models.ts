@@ -3758,17 +3758,17 @@ export interface UseDefaultRepoParameters {
    * 企业版实例名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnterpriseInstanceName: string
+  EnterpriseInstanceName?: string
   /**
    * 企业版收费类型  0 按量收费   1 包年包月
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnterpriseInstanceChargeType: number
+  EnterpriseInstanceChargeType?: number
   /**
    * 企业版规格：basic-基础班 ，standard-标准版，premium-高级版
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnterpriseInstanceType: string
+  EnterpriseInstanceType?: string
 }
 
 /**
@@ -4060,7 +4060,7 @@ export interface CreateApplicationResponse {
   /**
    * 服务code
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

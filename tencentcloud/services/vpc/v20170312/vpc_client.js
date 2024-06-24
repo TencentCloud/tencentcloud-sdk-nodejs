@@ -415,7 +415,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignPrivateIpAddresses", req, cb);
     }
     /**
-     * 查询终端节点服务列表。
+     * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
      */
     async DescribeVpcEndPointService(req, cb) {
         return this.request("DescribeVpcEndPointService", req, cb);
@@ -610,7 +610,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AcceptAttachCcnInstances", req, cb);
     }
     /**
-     * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     async DeleteTemplateMember(req, cb) {
         return this.request("DeleteTemplateMember", req, cb);
@@ -630,7 +630,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGatewayFlowQos", req, cb);
     }
     /**
-     * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     async ModifyTemplateMember(req, cb) {
         return this.request("ModifyTemplateMember", req, cb);
@@ -1652,7 +1652,7 @@ LimitTypes取值范围：
         return this.request("CreateNatGatewaySourceIpTranslationNatRule", req, cb);
     }
     /**
-     * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     async AddTemplateMember(req, cb) {
         return this.request("AddTemplateMember", req, cb);

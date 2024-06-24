@@ -16,6 +16,82 @@
  */
 
 /**
+ * DescribeProductSKUs请求参数结构体
+ */
+export type DescribeProductSKUsRequest = null
+
+/**
+ * 商品售卖信息
+ */
+export interface ProductSKU {
+  /**
+   * 产品类型，
+EXPERIMENT，体验版
+BASIC，基础版
+PRO，专业版
+PLATINUM，铂金版
+   */
+  InstanceType?: string
+  /**
+   * 规格代码
+   */
+  SkuCode?: string
+  /**
+   * TPS上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 弹性TPS上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaledTpsLimit?: number
+  /**
+   * 主题数量上限默认值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNumLimit?: number
+  /**
+   * 消费组数量上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupNumLimit?: number
+  /**
+   * 默认消息保留时间，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultRetention?: number
+  /**
+   * 可调整消息保留时间上限，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetentionUpperLimit?: number
+  /**
+   * 可调整消息保留时间下限，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetentionLowerLimit?: number
+  /**
+   * 延时消息最大时长，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxMessageDelay?: number
+  /**
+   * 是否可购买
+   */
+  OnSale?: boolean
+  /**
+   * 计费项信息
+   */
+  PriceTags?: Array<PriceTag>
+  /**
+   * 主题数量上限默认最大值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNumUpperLimit?: number
+}
+
+/**
  * DescribeRoleList返回参数结构体
  */
 export interface DescribeRoleListResponse {
@@ -1373,6 +1449,21 @@ export interface ModifyMQTTUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 价格标签信息
+ */
+export interface PriceTag {
+  /**
+   * 计价名称
+   */
+  Name?: string
+  /**
+   * 步长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Step?: number
 }
 
 /**
@@ -3046,6 +3137,21 @@ export interface DescribeInstanceRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeProductSKUs返回参数结构体
+ */
+export interface DescribeProductSKUsResponse {
+  /**
+   * 商品配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ProductSKU>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

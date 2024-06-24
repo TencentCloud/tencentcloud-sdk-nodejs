@@ -21,6 +21,7 @@ import {
   SetVocabStateResponse,
   CreateCustomizationResponse,
   VoicePrintDeleteRequest,
+  VoicePrintVerifyRequest,
   DescribeAsyncRecognitionTasksRequest,
   ModifyCustomizationStateRequest,
   GetAsrVocabResponse,
@@ -36,6 +37,7 @@ import {
   SentenceDetail,
   CreateCustomizationRequest,
   DownloadAsrVocabResponse,
+  Vocab,
   CreateRecTaskResponse,
   ModifyCustomizationResponse,
   GetModelInfoRequest,
@@ -45,12 +47,13 @@ import {
   DeleteAsrVocabResponse,
   DownloadCustomizationResponse,
   CreateRecTaskRequest,
+  VoicePrintGroupVerifyRequest,
   GetAsrVocabListRequest,
   GetCustomizationListResponse,
-  VoicePrintVerifyRequest,
+  VoicePrintGroupVerifyResponse,
   DownloadAsrVocabRequest,
   SetVocabStateRequest,
-  Vocab,
+  VerifyTopResult,
   CloseAsyncRecognitionTaskRequest,
   Task,
   AsyncRecognitionTasks,
@@ -60,6 +63,7 @@ import {
   DeleteAsrVocabRequest,
   GetCustomizationListRequest,
   UpdateAsrVocabResponse,
+  VoicePrintCountResponse,
   VoicePrintCompareData,
   VoicePrintVerifyResponse,
   CreateAsrVocabResponse,
@@ -75,7 +79,7 @@ import {
   VoicePrintCompareRequest,
   VoicePrintCompareResponse,
   DeleteCustomizationRequest,
-  VoicePrintCountResponse,
+  VerifyTop,
   AsyncRecognitionTaskInfo,
   ModifyCustomizationStateResponse,
   DescribeAsyncRecognitionTasksResponse,
@@ -144,7 +148,7 @@ export class Client extends AbstractClient {
    * 统计并返回注册的说话人id总数
    */
   async VoicePrintCount(
-    req?: VoicePrintCountRequest,
+    req: VoicePrintCountRequest,
     cb?: (error: string, rep: VoicePrintCountResponse) => void
   ): Promise<VoicePrintCountResponse> {
     return this.request("VoicePrintCount", req, cb)
@@ -200,6 +204,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCustomizationResponse) => void
   ): Promise<CreateCustomizationResponse> {
     return this.request("CreateCustomization", req, cb)
+  }
+
+  /**
+   * 说话人验证1:N接口，可以通过传入一段说话人音频，并且指定已存在的groupId, 和返回topN,  接口返回groupId内所有声纹和传入音频声纹比对打分TopN的结果。
+   */
+  async VoicePrintGroupVerify(
+    req: VoicePrintGroupVerifyRequest,
+    cb?: (error: string, rep: VoicePrintGroupVerifyResponse) => void
+  ): Promise<VoicePrintGroupVerifyResponse> {
+    return this.request("VoicePrintGroupVerify", req, cb)
   }
 
   /**

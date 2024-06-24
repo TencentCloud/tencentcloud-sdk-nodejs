@@ -275,7 +275,7 @@ export declare class Client extends AbstractClient {
      */
     AssignPrivateIpAddresses(req: AssignPrivateIpAddressesRequest, cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void): Promise<AssignPrivateIpAddressesResponse>;
     /**
-     * 查询终端节点服务列表。
+     * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
      */
     DescribeVpcEndPointService(req: DescribeVpcEndPointServiceRequest, cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void): Promise<DescribeVpcEndPointServiceResponse>;
     /**
@@ -414,7 +414,7 @@ export declare class Client extends AbstractClient {
      */
     AcceptAttachCcnInstances(req: AcceptAttachCcnInstancesRequest, cb?: (error: string, rep: AcceptAttachCcnInstancesResponse) => void): Promise<AcceptAttachCcnInstancesResponse>;
     /**
-     * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     DeleteTemplateMember(req: DeleteTemplateMemberRequest, cb?: (error: string, rep: DeleteTemplateMemberResponse) => void): Promise<DeleteTemplateMemberResponse>;
     /**
@@ -428,7 +428,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGatewayFlowQos(req: DescribeGatewayFlowQosRequest, cb?: (error: string, rep: DescribeGatewayFlowQosResponse) => void): Promise<DescribeGatewayFlowQosResponse>;
     /**
-     * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     ModifyTemplateMember(req: ModifyTemplateMemberRequest, cb?: (error: string, rep: ModifyTemplateMemberResponse) => void): Promise<ModifyTemplateMemberResponse>;
     /**
@@ -1164,7 +1164,7 @@ LimitTypes取值范围：
      */
     CreateNatGatewaySourceIpTranslationNatRule(req: CreateNatGatewaySourceIpTranslationNatRuleRequest, cb?: (error: string, rep: CreateNatGatewaySourceIpTranslationNatRuleResponse) => void): Promise<CreateNatGatewaySourceIpTranslationNatRuleResponse>;
     /**
-     * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。
      */
     AddTemplateMember(req: AddTemplateMemberRequest, cb?: (error: string, rep: AddTemplateMemberResponse) => void): Promise<AddTemplateMemberResponse>;
     /**

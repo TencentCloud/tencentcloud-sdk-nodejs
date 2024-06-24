@@ -59,6 +59,7 @@ import {
   DeviceFirmwareInfo,
   GetDeviceLocationHistoryRequest,
   TransferCloudStorageResponse,
+  LoRaFrequencyEntry,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
   DeviceUser,
@@ -74,7 +75,7 @@ import {
   ModifyStudioProductRequest,
   ModifyFenceBindRequest,
   CreateStudioProductRequest,
-  LoRaFrequencyEntry,
+  GetTWeCallActiveStatusResponse,
   DisableTopicRuleRequest,
   CreateBatchProductionRequest,
   DeletePositionFenceResponse,
@@ -83,7 +84,7 @@ import {
   DescribeCloudStoragePackageConsumeDetailsResponse,
   DescribeCloudStoragePackageConsumeStatsResponse,
   GetWechatDeviceTicketRequest,
-  GetTWeCallActiveStatusResponse,
+  DescribeFirmwareRequest,
   GetAuthMiniProgramAppListResponse,
   UnbindDevicesResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
@@ -132,6 +133,7 @@ import {
   DescribeCloudStorageAIServiceTaskResponse,
   ReleaseStudioProductResponse,
   DescribeSpaceFenceEventListResponse,
+  DescribeFirmwareResponse,
   DescribePackageConsumeTasksResponse,
   DeleteLoRaGatewayRequest,
   UnbindProductsResponse,
@@ -1255,6 +1257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicePositionListResponse) => void
   ): Promise<DescribeDevicePositionListResponse> {
     return this.request("DescribeDevicePositionList", req, cb)
+  }
+
+  /**
+   * 查询固件信息
+   */
+  async DescribeFirmware(
+    req: DescribeFirmwareRequest,
+    cb?: (error: string, rep: DescribeFirmwareResponse) => void
+  ): Promise<DescribeFirmwareResponse> {
+    return this.request("DescribeFirmware", req, cb)
   }
 
   /**

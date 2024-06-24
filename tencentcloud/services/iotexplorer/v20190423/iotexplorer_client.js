@@ -568,6 +568,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevicePositionList", req, cb);
     }
     /**
+     * 查询固件信息
+     */
+    async DescribeFirmware(req, cb) {
+        return this.request("DescribeFirmware", req, cb);
+    }
+    /**
      * 获取设备当前固件信息
      */
     async DescribeDeviceFirmwares(req, cb) {

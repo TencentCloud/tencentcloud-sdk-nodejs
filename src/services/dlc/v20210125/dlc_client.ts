@@ -65,6 +65,7 @@ import {
   ModifyWorkGroupResponse,
   DMSSds,
   OpendThirdAccessUserInfo,
+  DescribeDataEnginesScaleDetailResponse,
   DescribeNotebookSessionStatementSqlResultRequest,
   CreateTableResponse,
   ListTaskJobLogNameRequest,
@@ -84,11 +85,12 @@ import {
   DescribeTableRequest,
   Policy,
   DescribeTaskLogRequest,
-  UpdateUserDataEngineConfigResponse,
+  DescribeDataEnginesScaleDetailRequest,
   CreateTasksRequest,
   SuspendResumeDataEngineRequest,
   DescribeSparkAppJobsResponse,
   TableResponseInfo,
+  UpdateUserDataEngineConfigResponse,
   ModifyUserTypeResponse,
   DescribeDataEnginePythonSparkImagesRequest,
   CancelSparkSessionBatchSQLRequest,
@@ -206,6 +208,7 @@ import {
   AlterDMSTableResponse,
   DescribeUpdatableDataEnginesResponse,
   DeleteUserRequest,
+  DataEngineScaleInfoDetail,
   DeleteDataEngineResponse,
   CosPermission,
   IpPortPair,
@@ -389,6 +392,7 @@ import {
   DescribeSparkSessionBatchSQLCostRequest,
   CreateNotebookSessionResponse,
   DescribeDataEngineResponse,
+  DataEngineScaleInfo,
   QueryTaskCostDetailRequest,
   ModifyDataEngineDescriptionResponse,
   UpdateDataEngineConfigRequest,
@@ -952,6 +956,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void
   ): Promise<AttachWorkGroupPolicyResponse> {
     return this.request("AttachWorkGroupPolicy", req, cb)
+  }
+
+  /**
+   * 查询引擎规格详情
+   */
+  async DescribeDataEnginesScaleDetail(
+    req: DescribeDataEnginesScaleDetailRequest,
+    cb?: (error: string, rep: DescribeDataEnginesScaleDetailResponse) => void
+  ): Promise<DescribeDataEnginesScaleDetailResponse> {
+    return this.request("DescribeDataEnginesScaleDetail", req, cb)
   }
 
   /**

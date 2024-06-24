@@ -129,6 +129,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConsumerGroup", req, cb);
     }
     /**
+     * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
+     */
+    async DescribeProductSKUs(req, cb) {
+        return this.request("DescribeProductSKUs", req, cb);
+    }
+    /**
      * 修改消费组属性
      */
     async ModifyConsumerGroup(req, cb) {

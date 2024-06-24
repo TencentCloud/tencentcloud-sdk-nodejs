@@ -587,6 +587,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddAttackWhiteRule", req, cb);
     }
     /**
+     * 添加地域封禁中的地域信息
+     */
+    async AddAreaBanAreas(req, cb) {
+        return this.request("AddAreaBanAreas", req, cb);
+    }
+    /**
      * 获取域名概况
      */
     async DescribeDomainCountInfo(req, cb) {
