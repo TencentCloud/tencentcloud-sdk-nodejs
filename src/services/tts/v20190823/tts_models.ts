@@ -155,7 +155,7 @@ export interface CreateTtsTaskRequest {
    */
   Text: string
   /**
-   * 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。
+   * 音量大小，范围：[-10，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。
    */
   Volume?: number
   /**
@@ -222,7 +222,7 @@ export interface TextToVoiceRequest {
    */
   SessionId: string
   /**
-   * 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。
+   * 音量大小，范围[-10，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。
    */
   Volume?: number
   /**

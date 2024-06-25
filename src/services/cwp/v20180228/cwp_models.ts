@@ -11083,13 +11083,28 @@ export interface DescribeOpenPortStatisticsResponse {
 }
 
 /**
- * DeleteAttackLogs返回参数结构体
+ * ExportRiskDnsEventList请求参数结构体
  */
-export interface DeleteAttackLogsResponse {
+export interface ExportRiskDnsEventListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <li>IpOrName - String - 是否必填：否 - 主机Ip或别名筛选</li>
+<li>HostId - String - 是否必填：否 - 主机Id</li>
+<li>AgentId - String - 是否必填：否 - 客户端Id</li>
+<li>PolicyType - String - 是否必填：否 - 策略类型,0:系统策略1:用户自定义策略</li>
+<li>Domain - String - 是否必填：否 - 域名(先对域名做urlencode,再base64)</li>
+<li>HandleStatus - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
+<li>BeginTime - String - 是否必填：否 - 最近访问开始时间</li>
+<li>EndTime - String - 是否必填：否 - 最近访问结束时间</li>
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 排序方式：[ASC:升序|DESC:降序]
+   */
+  Order?: string
+  /**
+   * 排序字段：[AccessCount:请求次数|LastTime:最近请求时间]
+   */
+  By?: string
 }
 
 /**
@@ -12452,17 +12467,18 @@ export interface EditPrivilegeRulesResponse {
 }
 
 /**
- * DeleteAttackLogs请求参数结构体
+ * DescribeVulHostTop返回参数结构体
  */
-export interface DeleteAttackLogsRequest {
+export interface DescribeVulHostTopResponse {
   /**
-   * 日志ID数组，最大100条。
+   * 服务器风险top列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ids?: Array<number | bigint>
+  VulHostTopList: Array<VulHostTopInfo>
   /**
-   * 是否全部删除
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsAll?: boolean
+  RequestId?: string
 }
 
 /**
@@ -15544,13 +15560,37 @@ export interface UpdateBaselineStrategyResponse {
 }
 
 /**
- * DeleteReverseShellRules请求参数结构体
+ * DescribeAgentInstallCommand请求参数结构体
  */
-export interface DeleteReverseShellRulesRequest {
+export interface DescribeAgentInstallCommandRequest {
   /**
-   * ID数组. (最大100条)
+   * 是否腾讯云
    */
-  Ids: Array<number | bigint>
+  IsCloud: boolean
+  /**
+   * 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线
+   */
+  NetType: string
+  /**
+   * 地域标示, NetType=direct时必填
+   */
+  RegionCode?: string
+  /**
+   * VpcId, NetType=direct时必填
+   */
+  VpcId?: string
+  /**
+   * 标签ID列表，IsCloud=false时才会生效
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * 命令有效期，非腾讯云时必填
+   */
+  ExpireDate?: string
+  /**
+   * 代理方式接入的vip
+   */
+  Vip?: string
 }
 
 /**
@@ -17613,37 +17653,13 @@ export interface EditTagsRequest {
 }
 
 /**
- * DescribeAgentInstallCommand请求参数结构体
+ * DeleteReverseShellRules请求参数结构体
  */
-export interface DescribeAgentInstallCommandRequest {
+export interface DeleteReverseShellRulesRequest {
   /**
-   * 是否腾讯云
+   * ID数组. (最大100条)
    */
-  IsCloud: boolean
-  /**
-   * 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线
-   */
-  NetType: string
-  /**
-   * 地域标示, NetType=direct时必填
-   */
-  RegionCode?: string
-  /**
-   * VpcId, NetType=direct时必填
-   */
-  VpcId?: string
-  /**
-   * 标签ID列表，IsCloud=false时才会生效
-   */
-  TagIds?: Array<number | bigint>
-  /**
-   * 命令有效期，非腾讯云时必填
-   */
-  ExpireDate?: string
-  /**
-   * 代理方式接入的vip
-   */
-  Vip?: string
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -20827,31 +20843,6 @@ export interface DescribeVulEffectModulesResponse {
 }
 
 /**
- * ExportRiskDnsEventList请求参数结构体
- */
-export interface ExportRiskDnsEventListRequest {
-  /**
-   * <li>IpOrName - String - 是否必填：否 - 主机Ip或别名筛选</li>
-<li>HostId - String - 是否必填：否 - 主机Id</li>
-<li>AgentId - String - 是否必填：否 - 客户端Id</li>
-<li>PolicyType - String - 是否必填：否 - 策略类型,0:系统策略1:用户自定义策略</li>
-<li>Domain - String - 是否必填：否 - 域名(先对域名做urlencode,再base64)</li>
-<li>HandleStatus - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
-<li>BeginTime - String - 是否必填：否 - 最近访问开始时间</li>
-<li>EndTime - String - 是否必填：否 - 最近访问结束时间</li>
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序方式：[ASC:升序|DESC:降序]
-   */
-  Order?: string
-  /**
-   * 排序字段：[AccessCount:请求次数|LastTime:最近请求时间]
-   */
-  By?: string
-}
-
-/**
  * DeleteWebPageEventLog返回参数结构体
  */
 export interface DeleteWebPageEventLogResponse {
@@ -22116,21 +22107,6 @@ export interface SecurityTrend {
    * 事件数量。
    */
   EventNum: number
-}
-
-/**
- * DescribeVulHostTop返回参数结构体
- */
-export interface DescribeVulHostTopResponse {
-  /**
-   * 服务器风险top列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulHostTopList: Array<VulHostTopInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

@@ -1498,6 +1498,11 @@ export interface CommonMixControlParams {
 填1时，透传原始流的sei
    */
   PassInputSei?: number
+  /**
+   * 取值范围[0,1]
+填1时，图片输入中的透明通道生效。
+   */
+  UsePictureTransparent?: number
 }
 
 /**

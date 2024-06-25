@@ -547,6 +547,131 @@ export interface CreateDataSourceRequest {
     DevelopmentParams?: string;
 }
 /**
+ * 用户文件信息
+ */
+export interface UserFileDTONew {
+    /**
+     * 资源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId?: string;
+    /**
+     * 文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 文件类型，如 jar zip 等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileExtensionType?: string;
+    /**
+     * 文件上传类型，资源管理为 resource
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 文件MD5值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Md5Value?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 文件大小，单位为字节
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: number;
+    /**
+     * 本地路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalPath?: string;
+    /**
+     * 本地临时路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalTempPath?: string;
+    /**
+     * 远程路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemotePath?: string;
+    /**
+     * 文件拥有者名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerName?: string;
+    /**
+     * 文件拥有者uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Owner?: string;
+    /**
+     * 文件深度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PathDepth?: string;
+    /**
+     * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 附加信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraInfo?: string;
+    /**
+     * 本地临时压缩文件绝对路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZipPath?: string;
+    /**
+     * 文件所属存储桶
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bucket?: string;
+    /**
+     * 文件所属存储桶的地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 删除用户名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeleteName?: string;
+    /**
+     * 删除用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeleteOwner?: string;
+    /**
+     * 操作者id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Operator?: string;
+    /**
+     * 操作者名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorName?: string;
+    /**
+     * 全路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FullPath?: string;
+}
+/**
  * 集成节点schema映射
  */
 export interface IntegrationNodeSchemaMapping {
@@ -3044,6 +3169,19 @@ export interface UploadContentResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UploadResource请求参数结构体
+ */
+export interface UploadResourceRequest {
+    /**
+     * 资源上传请求信息
+     */
+    UploadResourceRequestInfo?: UploadResourceRequestInfo;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
 }
 /**
  * 规则执行日志
@@ -13692,6 +13830,43 @@ export interface CheckAlarmRegularNameExistResponse {
     RequestId?: string;
 }
 /**
+ * 资管管理-上传资源请求
+ */
+export interface UploadResourceRequestInfo {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 资源路径
+     */
+    FilePath: string;
+    /**
+     * 桶名称
+     */
+    BucketName: string;
+    /**
+     * 所属地区
+     */
+    Region: string;
+    /**
+     * 是否为新资源
+     */
+    NewFile: boolean;
+    /**
+     * 资源列表
+     */
+    FileList?: Array<string>;
+    /**
+     * 资源大小列表
+     */
+    FileSizeList?: Array<string>;
+    /**
+     * File Md5（适配私有化，公有云可以不传）
+     */
+    FileMd5?: string;
+}
+/**
  * DeleteProjectParamDs请求参数结构体
  */
 export interface DeleteProjectParamDsRequest {
@@ -18596,6 +18771,19 @@ export interface DescribeIntegrationStatisticsTaskStatusResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusData?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UploadResource返回参数结构体
+ */
+export interface UploadResourceResponse {
+    /**
+     * 资源文件信息列表
+     */
+    Data?: Array<UserFileDTONew>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -48,6 +48,16 @@ it("iotexplorer.v20190423.DescribeDevicePackages", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeFirmwareUpdateStatus", async function () {
+    try {
+       const data = await client.DescribeFirmwareUpdateStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeDevice", async function () {
     try {
        const data = await client.DescribeDevice({})
@@ -458,6 +468,16 @@ it("iotexplorer.v20190423.ListFirmwares", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishFirmwareUpdateMessage", async function () {
+    try {
+       const data = await client.PublishFirmwareUpdateMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateDevice", async function () {
     try {
        const data = await client.CreateDevice({})
@@ -498,9 +518,9 @@ it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeCloudStorageAIServiceTask", async function () {
+it("iotexplorer.v20190423.GenSingleDeviceSignatureOfPublic", async function () {
     try {
-       const data = await client.DescribeCloudStorageAIServiceTask({})
+       const data = await client.GenSingleDeviceSignatureOfPublic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1088,16 @@ it("iotexplorer.v20190423.DeleteDevices", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CheckFirmwareUpdate", async function () {
+    try {
+       const data = await client.CheckFirmwareUpdate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateProject", async function () {
     try {
        const data = await client.CreateProject({})
@@ -1228,9 +1258,9 @@ it("iotexplorer.v20190423.ListTopicPolicy", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GenSingleDeviceSignatureOfPublic", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageAIServiceTask", async function () {
     try {
-       const data = await client.GenSingleDeviceSignatureOfPublic({})
+       const data = await client.DescribeCloudStorageAIServiceTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

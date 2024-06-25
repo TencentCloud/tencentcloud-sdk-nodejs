@@ -4078,16 +4078,6 @@ it("cwp.v20180228.DescribeAssetTypes", async function () {
     }
 })
 
-it("cwp.v20180228.CreateNetAttackWhiteList", async function () {
-    try {
-       const data = await client.CreateNetAttackWhiteList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeVulLabels", async function () {
     try {
        const data = await client.DescribeVulLabels({})
@@ -4968,9 +4958,9 @@ it("cwp.v20180228.ExportReverseShellEvents", async function () {
     }
 })
 
-it("cwp.v20180228.DeleteAttackLogs", async function () {
+it("cwp.v20180228.CreateNetAttackWhiteList", async function () {
     try {
-       const data = await client.DeleteAttackLogs({})
+       const data = await client.CreateNetAttackWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

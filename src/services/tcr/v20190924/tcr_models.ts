@@ -3364,7 +3364,7 @@ export interface ValidateRepositoryExistPersonalResponse {
   /**
    * 验证个人版仓库是否存在返回信息
    */
-  Data: RepoIsExistResp
+  Data?: RepoIsExistResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3388,11 +3388,11 @@ export interface CheckInstanceResponse {
   /**
    * 检查结果，true为合法，false为非法
    */
-  IsValidated: boolean
+  IsValidated?: boolean
   /**
    * 实例所在的RegionId
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4174,6 +4174,11 @@ export interface CheckInstanceNameResponse {
    */
   IsValidated?: boolean
   /**
+   * 1: Illegal（名子非法）, 2:Reserved（名字保留）, 3:Existed（名字已存在）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetailCode?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4483,7 +4488,7 @@ export interface ValidateNamespaceExistPersonalResponse {
   /**
    * 验证命名空间是否存在返回信息
    */
-  Data: NamespaceIsExistsResp
+  Data?: NamespaceIsExistsResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

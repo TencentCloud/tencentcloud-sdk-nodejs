@@ -44,7 +44,7 @@ import {
   DescribeDevicePackagesRequest,
   GetDeviceListResponse,
   DismissRoomByStrRoomIdFromTRTCResponse,
-  UpdateDevicesEnableStateResponse,
+  DescribeFirmwareUpdateStatusResponse,
   GenerateSignedVideoURLRequest,
   TopicRulePayload,
   DeleteLoRaFrequencyResponse,
@@ -55,7 +55,7 @@ import {
   PositionFenceItem,
   DeleteTopicRuleResponse,
   PositionItem,
-  InheritCloudStorageUserRequest,
+  GetAuthMiniProgramAppListResponse,
   DeviceFirmwareInfo,
   GetDeviceLocationHistoryRequest,
   TransferCloudStorageResponse,
@@ -85,7 +85,7 @@ import {
   DescribeCloudStoragePackageConsumeStatsResponse,
   GetWechatDeviceTicketRequest,
   DescribeFirmwareRequest,
-  GetAuthMiniProgramAppListResponse,
+  CheckFirmwareUpdateResponse,
   UnbindDevicesResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
   DescribeCloudStorageUsersResponse,
@@ -100,7 +100,7 @@ import {
   SearchPositionSpaceResponse,
   DescribePositionFenceListResponse,
   DescribeCloudStorageMultiThumbnailRequest,
-  GenSingleDeviceSignatureOfPublicResponse,
+  DescribeFirmwareUpdateStatusRequest,
   GetDeviceSumStatisticsResponse,
   DeletePositionSpaceRequest,
   DescribePackageConsumeTasksRequest,
@@ -128,6 +128,7 @@ import {
   DeleteLoRaFrequencyRequest,
   ModifyStudioProductResponse,
   ControlDeviceDataRequest,
+  TransferCloudStorageRequest,
   ListFirmwaresResponse,
   FamilySubDevice,
   DescribeCloudStorageAIServiceTaskResponse,
@@ -186,6 +187,7 @@ import {
   ListFirmwaresRequest,
   GetStudioProductListResponse,
   AuthMiniProgramAppInfo,
+  CheckFirmwareUpdateRequest,
   DescribeProductCloudStorageAIServiceRequest,
   ModifyTopicRuleRequest,
   UploadFirmwareRequest,
@@ -221,6 +223,7 @@ import {
   DescribeFenceBindListRequest,
   EnableTopicRuleRequest,
   RemoveUserByRoomIdFromTRTCRequest,
+  PublishFirmwareUpdateMessageRequest,
   DescribeBindedProductsResponse,
   DeviceSignatureInfo,
   PositionSpaceInfo,
@@ -256,6 +259,7 @@ import {
   DescribePackageConsumeTaskRequest,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
+  PublishFirmwareUpdateMessageResponse,
   BindCloudStorageUserResponse,
   DeleteTopicPolicyResponse,
   DeleteLoRaGatewayResponse,
@@ -285,9 +289,10 @@ import {
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
   DescribeDeviceBindGatewayRequest,
+  UpdateDevicesEnableStateResponse,
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
-  TransferCloudStorageRequest,
+  GenSingleDeviceSignatureOfPublicResponse,
   GetGatewaySubDeviceListRequest,
   ProductDevicesPositionItem,
   ListTopicPolicyRequest,
@@ -305,6 +310,7 @@ import {
   DescribeGatewayBindDevicesRequest,
   DescribeCloudStorageAIServiceCallbackResponse,
   DescribeGatewaySubProductsRequest,
+  InheritCloudStorageUserRequest,
   DeleteStudioProductRequest,
   BindProductsRequest,
   GetDeviceSumStatisticsRequest,
@@ -387,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicePackagesResponse) => void
   ): Promise<DescribeDevicePackagesResponse> {
     return this.request("DescribeDevicePackages", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeFirmwareUpdateStatus）用于查询设备固件升级状态及进度。
+   */
+  async DescribeFirmwareUpdateStatus(
+    req: DescribeFirmwareUpdateStatusRequest,
+    cb?: (error: string, rep: DescribeFirmwareUpdateStatusResponse) => void
+  ): Promise<DescribeFirmwareUpdateStatusResponse> {
+    return this.request("DescribeFirmwareUpdateStatus", req, cb)
   }
 
   /**
@@ -800,6 +816,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（PublishFirmwareUpdateMessage）用于用户确认升级后，云端向设备发起固件升级请求。
+   */
+  async PublishFirmwareUpdateMessage(
+    req: PublishFirmwareUpdateMessageRequest,
+    cb?: (error: string, rep: PublishFirmwareUpdateMessageResponse) => void
+  ): Promise<PublishFirmwareUpdateMessageResponse> {
+    return this.request("PublishFirmwareUpdateMessage", req, cb)
+  }
+
+  /**
    * 创建设备
    */
   async CreateDevice(
@@ -840,13 +866,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定的云存 AI 分析任务
+   * 无
    */
-  async DescribeCloudStorageAIServiceTask(
-    req: DescribeCloudStorageAIServiceTaskRequest,
-    cb?: (error: string, rep: DescribeCloudStorageAIServiceTaskResponse) => void
-  ): Promise<DescribeCloudStorageAIServiceTaskResponse> {
-    return this.request("DescribeCloudStorageAIServiceTask", req, cb)
+  async GenSingleDeviceSignatureOfPublic(
+    req: GenSingleDeviceSignatureOfPublicRequest,
+    cb?: (error: string, rep: GenSingleDeviceSignatureOfPublicResponse) => void
+  ): Promise<GenSingleDeviceSignatureOfPublicResponse> {
+    return this.request("GenSingleDeviceSignatureOfPublic", req, cb)
   }
 
   /**
@@ -1410,6 +1436,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CheckFirmwareUpdate）用于查询设备可升级固件版本
+   */
+  async CheckFirmwareUpdate(
+    req: CheckFirmwareUpdateRequest,
+    cb?: (error: string, rep: CheckFirmwareUpdateResponse) => void
+  ): Promise<CheckFirmwareUpdateResponse> {
+    return this.request("CheckFirmwareUpdate", req, cb)
+  }
+
+  /**
    * 为用户提供新建项目的能力，用于集中管理产品和应用。
    */
   async CreateProject(
@@ -1570,13 +1606,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 无
+   * 查询指定的云存 AI 分析任务
    */
-  async GenSingleDeviceSignatureOfPublic(
-    req: GenSingleDeviceSignatureOfPublicRequest,
-    cb?: (error: string, rep: GenSingleDeviceSignatureOfPublicResponse) => void
-  ): Promise<GenSingleDeviceSignatureOfPublicResponse> {
-    return this.request("GenSingleDeviceSignatureOfPublic", req, cb)
+  async DescribeCloudStorageAIServiceTask(
+    req: DescribeCloudStorageAIServiceTaskRequest,
+    cb?: (error: string, rep: DescribeCloudStorageAIServiceTaskResponse) => void
+  ): Promise<DescribeCloudStorageAIServiceTaskResponse> {
+    return this.request("DescribeCloudStorageAIServiceTask", req, cb)
   }
 
   /**

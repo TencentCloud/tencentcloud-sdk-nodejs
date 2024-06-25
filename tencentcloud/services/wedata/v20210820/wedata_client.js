@@ -155,6 +155,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIntegrationNode", req, cb);
     }
     /**
+     * 资源管理-上传资源
+     */
+    async UploadResource(req, cb) {
+        return this.request("UploadResource", req, cb);
+    }
+    /**
      * 根据周期类型 查询所有任务
      */
     async DescribeTaskByCycle(req, cb) {

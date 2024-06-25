@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevicePackages", req, cb);
     }
     /**
+     * 本接口（DescribeFirmwareUpdateStatus）用于查询设备固件升级状态及进度。
+     */
+    async DescribeFirmwareUpdateStatus(req, cb) {
+        return this.request("DescribeFirmwareUpdateStatus", req, cb);
+    }
+    /**
      * 用于查看某个设备的详细信息
      */
     async DescribeDevice(req, cb) {
@@ -292,6 +298,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListFirmwares", req, cb);
     }
     /**
+     * 本接口（PublishFirmwareUpdateMessage）用于用户确认升级后，云端向设备发起固件升级请求。
+     */
+    async PublishFirmwareUpdateMessage(req, cb) {
+        return this.request("PublishFirmwareUpdateMessage", req, cb);
+    }
+    /**
      * 创建设备
      */
     async CreateDevice(req, cb) {
@@ -316,10 +328,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
-     * 查询指定的云存 AI 分析任务
+     * 无
      */
-    async DescribeCloudStorageAIServiceTask(req, cb) {
-        return this.request("DescribeCloudStorageAIServiceTask", req, cb);
+    async GenSingleDeviceSignatureOfPublic(req, cb) {
+        return this.request("GenSingleDeviceSignatureOfPublic", req, cb);
     }
     /**
      * 重置云存服务
@@ -658,6 +670,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDevices", req, cb);
     }
     /**
+     * 本接口（CheckFirmwareUpdate）用于查询设备可升级固件版本
+     */
+    async CheckFirmwareUpdate(req, cb) {
+        return this.request("CheckFirmwareUpdate", req, cb);
+    }
+    /**
      * 为用户提供新建项目的能力，用于集中管理产品和应用。
      */
     async CreateProject(req, cb) {
@@ -754,10 +772,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTopicPolicy", req, cb);
     }
     /**
-     * 无
+     * 查询指定的云存 AI 分析任务
      */
-    async GenSingleDeviceSignatureOfPublic(req, cb) {
-        return this.request("GenSingleDeviceSignatureOfPublic", req, cb);
+    async DescribeCloudStorageAIServiceTask(req, cb) {
+        return this.request("DescribeCloudStorageAIServiceTask", req, cb);
     }
     /**
      * 公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效

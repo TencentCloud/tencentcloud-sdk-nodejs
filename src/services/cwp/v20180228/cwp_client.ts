@@ -497,7 +497,7 @@ import {
   ModifyBaselineRuleIgnoreResponse,
   CreateVulFixResponse,
   DescribeOpenPortStatisticsResponse,
-  DeleteAttackLogsResponse,
+  ExportRiskDnsEventListRequest,
   SecurityDynamic,
   DescribeMachineGeneralRequest,
   ExportRiskProcessEventsResponse,
@@ -552,7 +552,7 @@ import {
   CreateBuyBindTaskRequest,
   HostInfo,
   EditPrivilegeRulesResponse,
-  DeleteAttackLogsRequest,
+  DescribeVulHostTopResponse,
   ProtectEventLists,
   TrustMalwaresResponse,
   DescribeHistoryServiceRequest,
@@ -684,7 +684,7 @@ import {
   DescribeAssetUserInfoRequest,
   ExportBaselineItemListRequest,
   UpdateBaselineStrategyResponse,
-  DeleteReverseShellRulesRequest,
+  DescribeAgentInstallCommandRequest,
   DescribeMachineRegionListResponse,
   ExportPrivilegeEventsRequest,
   ModifyWebPageProtectSwitchRequest,
@@ -767,7 +767,7 @@ import {
   DescribeScanStateResponse,
   BaselineHostDetect,
   EditTagsRequest,
-  DescribeAgentInstallCommandRequest,
+  DeleteReverseShellRulesRequest,
   ScreenVulInfo,
   UntrustMalwaresRequest,
   DescribeScreenEventsCntRequest,
@@ -900,7 +900,6 @@ import {
   ModifyLogKafkaAccessRequest,
   EventStat,
   DescribeVulEffectModulesResponse,
-  ExportRiskDnsEventListRequest,
   DeleteWebPageEventLogResponse,
   DescribeLicenseBindScheduleRequest,
   DeleteRiskDnsPolicyRequest,
@@ -952,7 +951,6 @@ import {
   Machine,
   FileTamperRule,
   SecurityTrend,
-  DescribeVulHostTopResponse,
   ScanTaskAgainResponse,
   DescribeAssetWebServiceProcessListRequest,
   DescribeScreenMachinesResponse,
@@ -5388,16 +5386,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建网络攻击白名单
-   */
-  async CreateNetAttackWhiteList(
-    req: CreateNetAttackWhiteListRequest,
-    cb?: (error: string, rep: CreateNetAttackWhiteListResponse) => void
-  ): Promise<CreateNetAttackWhiteListResponse> {
-    return this.request("CreateNetAttackWhiteList", req, cb)
-  }
-
-  /**
    * 获取用户漏洞所有标签列表
    */
   async DescribeVulLabels(
@@ -6282,15 +6270,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ModifyEventAttackStatus 接口替代
-
-删除网络攻击日志
-     */
-  async DeleteAttackLogs(
-    req: DeleteAttackLogsRequest,
-    cb?: (error: string, rep: DeleteAttackLogsResponse) => void
-  ): Promise<DeleteAttackLogsResponse> {
-    return this.request("DeleteAttackLogs", req, cb)
+   * 创建网络攻击白名单
+   */
+  async CreateNetAttackWhiteList(
+    req: CreateNetAttackWhiteListRequest,
+    cb?: (error: string, rep: CreateNetAttackWhiteListResponse) => void
+  ): Promise<CreateNetAttackWhiteListResponse> {
+    return this.request("CreateNetAttackWhiteList", req, cb)
   }
 
   /**

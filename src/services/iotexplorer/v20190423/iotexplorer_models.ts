@@ -513,19 +513,40 @@ export interface DismissRoomByStrRoomIdFromTRTCResponse {
 }
 
 /**
- * UpdateDevicesEnableState返回参数结构体
+ * DescribeFirmwareUpdateStatus返回参数结构体
  */
-export interface UpdateDevicesEnableStateResponse {
+export interface DescribeFirmwareUpdateStatusResponse {
   /**
-   * 删除的结果代码
+   * 升级任务源版本。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: string
+  OriVersion?: string
   /**
-   * 删除的结果信息
+   * 升级任务目标版本。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMessage: string
+  DstVersion?: string
+  /**
+   * 升级状态：
+
+- 0：设备离线。
+- 1：待处理。
+- 2：消息下发成功。
+- 3：下载中。
+- 4：烧录中。
+- 5：失败。
+- 6：升级完成。
+- 7：正在处理中。
+- 8：等待用户确认。
+- 20：下载完成。
+
+   */
+  Status?: number
+  /**
+   * 进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -783,25 +804,21 @@ export interface PositionItem {
 }
 
 /**
- * InheritCloudStorageUser请求参数结构体
+ * GetAuthMiniProgramAppList返回参数结构体
  */
-export interface InheritCloudStorageUserRequest {
+export interface GetAuthMiniProgramAppListResponse {
   /**
-   * 产品ID
+   * 小程序列表
    */
-  ProductId: string
+  MiniProgramList?: Array<AuthMiniProgramAppInfo>
   /**
-   * 设备名称
+   * 总数
    */
-  DeviceName: string
+  Total?: number
   /**
-   * 原始用户ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId: string
-  /**
-   * 目标用户ID
-   */
-  ToUserId: string
+  RequestId?: string
 }
 
 /**
@@ -1346,17 +1363,19 @@ export interface DescribeFirmwareRequest {
 }
 
 /**
- * GetAuthMiniProgramAppList返回参数结构体
+ * CheckFirmwareUpdate返回参数结构体
  */
-export interface GetAuthMiniProgramAppListResponse {
+export interface CheckFirmwareUpdateResponse {
   /**
-   * 小程序列表
+   * 设备当前固件版本。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniProgramList?: Array<AuthMiniProgramAppInfo>
+  CurrentVersion?: string
   /**
-   * 总数
+   * 固件可升级版本。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
+  DstVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1587,17 +1606,17 @@ export interface DescribeCloudStorageMultiThumbnailRequest {
 }
 
 /**
- * GenSingleDeviceSignatureOfPublic返回参数结构体
+ * DescribeFirmwareUpdateStatus请求参数结构体
  */
-export interface GenSingleDeviceSignatureOfPublicResponse {
+export interface DescribeFirmwareUpdateStatusRequest {
   /**
-   * 设备签名
+   * 产品 ID。
    */
-  DeviceSignature: DeviceSignatureInfo
+  ProductId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 设备名。
    */
-  RequestId?: string
+  DeviceName: string
 }
 
 /**
@@ -2144,6 +2163,28 @@ export interface ControlDeviceDataRequest {
    * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
    */
   DataTimestamp?: number
+}
+
+/**
+ * TransferCloudStorage请求参数结构体
+ */
+export interface TransferCloudStorageRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 已开通云存的设备名称
+   */
+  DeviceName: string
+  /**
+   * 未开通云存的设备名称
+   */
+  ToDeviceName: string
+  /**
+   * 未开通云存的设备产品ID
+   */
+  ToProductId?: string
 }
 
 /**
@@ -3489,6 +3530,20 @@ export interface AuthMiniProgramAppInfo {
 }
 
 /**
+ * CheckFirmwareUpdate请求参数结构体
+ */
+export interface CheckFirmwareUpdateRequest {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+  /**
+   * 设备名称。
+   */
+  DeviceName: string
+}
+
+/**
  * DescribeProductCloudStorageAIService请求参数结构体
  */
 export interface DescribeProductCloudStorageAIServiceRequest {
@@ -4134,6 +4189,20 @@ export interface RemoveUserByRoomIdFromTRTCRequest {
 }
 
 /**
+ * PublishFirmwareUpdateMessage请求参数结构体
+ */
+export interface PublishFirmwareUpdateMessageRequest {
+  /**
+   * 产品 ID。
+   */
+  ProductID: string
+  /**
+   * 设备名称。
+   */
+  DeviceName?: string
+}
+
+/**
  * DescribeBindedProducts返回参数结构体
  */
 export interface DescribeBindedProductsResponse {
@@ -4766,6 +4835,21 @@ export interface CreateLoRaGatewayResponse {
    * LoRa 网关信息
    */
   Gateway: LoRaGatewayItem
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * PublishFirmwareUpdateMessage返回参数结构体
+ */
+export interface PublishFirmwareUpdateMessageResponse {
+  /**
+   * 请求状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5444,6 +5528,26 @@ export interface DescribeDeviceBindGatewayRequest {
 }
 
 /**
+ * UpdateDevicesEnableState返回参数结构体
+ */
+export interface UpdateDevicesEnableStateResponse {
+  /**
+   * 删除的结果代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultCode: string
+  /**
+   * 删除的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultMessage: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLoRaFrequency返回参数结构体
  */
 export interface CreateLoRaFrequencyResponse {
@@ -5468,25 +5572,17 @@ export interface EnableTopicRuleResponse {
 }
 
 /**
- * TransferCloudStorage请求参数结构体
+ * GenSingleDeviceSignatureOfPublic返回参数结构体
  */
-export interface TransferCloudStorageRequest {
+export interface GenSingleDeviceSignatureOfPublicResponse {
   /**
-   * 产品ID
+   * 设备签名
    */
-  ProductId: string
+  DeviceSignature: DeviceSignatureInfo
   /**
-   * 已开通云存的设备名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DeviceName: string
-  /**
-   * 未开通云存的设备名称
-   */
-  ToDeviceName: string
-  /**
-   * 未开通云存的设备产品ID
-   */
-  ToProductId?: string
+  RequestId?: string
 }
 
 /**
@@ -5840,6 +5936,28 @@ export interface DescribeGatewaySubProductsRequest {
    * 是否跨账号产品
    */
   ProductSource?: number
+}
+
+/**
+ * InheritCloudStorageUser请求参数结构体
+ */
+export interface InheritCloudStorageUserRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 原始用户ID
+   */
+  UserId: string
+  /**
+   * 目标用户ID
+   */
+  ToUserId: string
 }
 
 /**

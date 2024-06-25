@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("ioa.tencentcloudapi.com", "2022-06-01", clientConfig);
     }
     /**
+     * 查询账户根分组详情，私有化调用path为：capi/Assets/DescribeRootAccountGroup
+     */
+    async DescribeRootAccountGroup(req, cb) {
+        return this.request("DescribeRootAccountGroup", req, cb);
+    }
+    /**
      * 查询满足条件的终端数据详情，私有化调用path为：/capi/Assets/Device/DescribeDevices
      */
     async DescribeDevices(req, cb) {
         return this.request("DescribeDevices", req, cb);
+    }
+    /**
+     * 以分页的方式查询账户目录列表,私有化调用path为：/capi/Assets/DescribeAccountGroups
+     */
+    async DescribeAccountGroups(req, cb) {
+        return this.request("DescribeAccountGroups", req, cb);
+    }
+    /**
+     * 获取账号列表，支持分页，模糊搜索，私有化调用path为：/capi/Assets/Account/DescribeLocalAccounts
+     */
+    async DescribeLocalAccounts(req, cb) {
+        return this.request("DescribeLocalAccounts", req, cb);
     }
 }
 exports.Client = Client;

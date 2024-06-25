@@ -18,9 +18,39 @@ const client = new tencentcloud.ioa.v20220601.Client({
 })
 describe("ioa.v20220601.test.js", function () {
 
+it("ioa.v20220601.DescribeRootAccountGroup", async function () {
+    try {
+       const data = await client.DescribeRootAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeAccountGroups", async function () {
+    try {
+       const data = await client.DescribeAccountGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeLocalAccounts", async function () {
+    try {
+       const data = await client.DescribeLocalAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

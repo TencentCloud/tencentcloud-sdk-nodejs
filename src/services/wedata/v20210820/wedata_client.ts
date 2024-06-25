@@ -35,6 +35,7 @@ import {
   ColumnBasicInfo,
   DescribeWorkflowInfoByIdRequest,
   CreateDataSourceRequest,
+  UserFileDTONew,
   IntegrationNodeSchemaMapping,
   DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
@@ -106,6 +107,7 @@ import {
   MakePlanOpsDtoCollection,
   DescribeTableMetasResponse,
   UploadContentResponse,
+  UploadResourceRequest,
   RuleExecLog,
   RuleTemplate,
   DescribeRuleGroupsByPageRequest,
@@ -475,6 +477,7 @@ import {
   DescribeAlarmEventsRequest,
   CompareResult,
   CheckAlarmRegularNameExistResponse,
+  UploadResourceRequestInfo,
   DeleteProjectParamDsRequest,
   Content,
   SpeedValue,
@@ -639,6 +642,7 @@ import {
   DescribeRuleGroupsByPageResponse,
   TableBasicInfo,
   DescribeIntegrationStatisticsTaskStatusResponse,
+  UploadResourceResponse,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
   DescribeIntegrationTaskResponse,
@@ -911,6 +915,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationNodeResponse) => void
   ): Promise<DescribeIntegrationNodeResponse> {
     return this.request("DescribeIntegrationNode", req, cb)
+  }
+
+  /**
+   * 资源管理-上传资源
+   */
+  async UploadResource(
+    req: UploadResourceRequest,
+    cb?: (error: string, rep: UploadResourceResponse) => void
+  ): Promise<UploadResourceResponse> {
+    return this.request("UploadResource", req, cb)
   }
 
   /**

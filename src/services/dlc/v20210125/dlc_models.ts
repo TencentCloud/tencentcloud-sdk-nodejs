@@ -299,22 +299,22 @@ export interface DescribeDMSDatabaseResponse {
    * 数据库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * schema名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchemaName: string
+  SchemaName?: string
   /**
    * 存储地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Location: string
+  Location?: string
   /**
    * 数据对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Asset: Asset
+  Asset?: Asset
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -522,92 +522,92 @@ export interface DescribeDMSTableResponse {
    * 基础对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Asset: Asset
+  Asset?: Asset
   /**
    * 视图文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ViewOriginalText: string
+  ViewOriginalText?: string
   /**
    * 视图文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ViewExpandedText: string
+  ViewExpandedText?: string
   /**
    * hive维护版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Retention: number
+  Retention?: number
   /**
    * 存储对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sds: DMSSds
+  Sds?: DMSSds
   /**
    * 分区列
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PartitionKeys: Array<DMSColumn>
+  PartitionKeys?: Array<DMSColumn>
   /**
    * 分区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions: Array<DMSPartition>
+  Partitions?: Array<DMSPartition>
   /**
    * 表类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 数据库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbName: string
+  DbName?: string
   /**
    * Schame名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchemaName: string
+  SchemaName?: string
   /**
    * 存储大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageSize: number
+  StorageSize?: number
   /**
    * 记录数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordCount: number
+  RecordCount?: number
   /**
    * 生命周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LifeTime: number
+  LifeTime?: number
   /**
    * 最后访问时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastAccessTime: string
+  LastAccessTime?: string
   /**
    * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataUpdateTime: string
+  DataUpdateTime?: string
   /**
    * 结构更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StructUpdateTime: string
+  StructUpdateTime?: string
   /**
    * 列
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Columns: Array<DMSColumn>
+  Columns?: Array<DMSColumn>
   /**
    * 表名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1142,7 +1142,7 @@ export interface CreateDMSTableRequest {
    */
   Asset?: Asset
   /**
-   * 表类型
+   * 表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW
    */
   Type?: string
   /**

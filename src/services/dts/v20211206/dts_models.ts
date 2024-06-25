@@ -4622,7 +4622,7 @@ export interface Endpoint {
    */
   Role?: string
   /**
-   * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
+   * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql。注意TDSQL-C MySQL、TDSQL PostgreSQL无需填写此项值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DbKernel?: string
@@ -5114,7 +5114,7 @@ export interface CreateSyncJobRequest {
    */
   PayMode: string
   /**
-   * 源端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,tdstore等
+   * 源端数据库类型,如mysql,mariadb,percona,postgresql,cynosdbmysql(表示TDSQL-C MySQL),tdpg(TDSQL PostgreSQL版),tdsqlmysql,tdstore(表示TDSQL TDStore版)等。
    */
   SrcDatabaseType: string
   /**
@@ -5122,7 +5122,7 @@ export interface CreateSyncJobRequest {
    */
   SrcRegion: string
   /**
-   * 目标端数据库类型,如mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql,kafka,tdstore等
+   * 目标端数据库类型,如mysql,mariadb,percona,cynosdbmysql(表示TDSQL-C MySQL),tdpg(TDSQL PostgreSQL版),tdsqlmysql,kafka,tdstore(表示TDSQL TDStore版)等。
    */
   DstDatabaseType: string
   /**

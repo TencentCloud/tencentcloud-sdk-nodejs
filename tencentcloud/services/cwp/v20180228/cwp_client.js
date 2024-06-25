@@ -2469,12 +2469,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetTypes", req, cb);
     }
     /**
-     * 创建网络攻击白名单
-     */
-    async CreateNetAttackWhiteList(req, cb) {
-        return this.request("CreateNetAttackWhiteList", req, cb);
-    }
-    /**
      * 获取用户漏洞所有标签列表
      */
     async DescribeVulLabels(req, cb) {
@@ -3007,12 +3001,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportReverseShellEvents", req, cb);
     }
     /**
-     * ModifyEventAttackStatus 接口替代
-
-删除网络攻击日志
+     * 创建网络攻击白名单
      */
-    async DeleteAttackLogs(req, cb) {
-        return this.request("DeleteAttackLogs", req, cb);
+    async CreateNetAttackWhiteList(req, cb) {
+        return this.request("CreateNetAttackWhiteList", req, cb);
     }
     /**
      * 更改恶意请求策略

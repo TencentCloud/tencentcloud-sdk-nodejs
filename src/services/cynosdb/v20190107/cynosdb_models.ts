@@ -4940,6 +4940,11 @@ export interface AuditLog {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateInfo?: Array<LogRuleTemplateInfo>
+  /**
+   * 事务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxId?: number
 }
 
 /**

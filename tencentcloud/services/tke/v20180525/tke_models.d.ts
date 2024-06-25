@@ -4749,6 +4749,10 @@ export interface PrometheusAgentInfo {
      * 备注
      */
     Describe?: string;
+    /**
+     * 集群所在地域
+     */
+    Region?: string;
 }
 /**
  * CreateEdgeCVMInstances返回参数结构体

@@ -18,15 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  Sort,
+  DescribeAccountGroupsResponse,
+  DescribeRootAccountGroupResponse,
   DescribeDevicesPageRsp,
+  DeviceDetail,
+  DescribeLocalAccountsData,
+  DescribeLocalAccountsRequest,
   FilterGroup,
   DescribeDevicesResponse,
-  Filter,
+  DescribeLocalAccountAccountGroupsData,
+  DescribeLocalAccountsPage,
   DescribeDevicesRequest,
   Paging,
-  DeviceDetail,
+  Sort,
   Condition,
+  Filter,
+  DescribeLocalAccountsResponse,
+  DescribeAccountGroupsData,
+  DescribeRootAccountGroupRequest,
+  GetAccountGroupData,
+  DescribeAccountGroupsPageResp,
+  DescribeAccountGroupsRequest,
 } from "./ioa_models"
 
 /**
@@ -39,6 +51,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询账户根分组详情，私有化调用path为：capi/Assets/DescribeRootAccountGroup
+   */
+  async DescribeRootAccountGroup(
+    req?: DescribeRootAccountGroupRequest,
+    cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
+  ): Promise<DescribeRootAccountGroupResponse> {
+    return this.request("DescribeRootAccountGroup", req, cb)
+  }
+
+  /**
    * 查询满足条件的终端数据详情，私有化调用path为：/capi/Assets/Device/DescribeDevices
    */
   async DescribeDevices(
@@ -46,5 +68,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicesResponse) => void
   ): Promise<DescribeDevicesResponse> {
     return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 以分页的方式查询账户目录列表,私有化调用path为：/capi/Assets/DescribeAccountGroups
+   */
+  async DescribeAccountGroups(
+    req: DescribeAccountGroupsRequest,
+    cb?: (error: string, rep: DescribeAccountGroupsResponse) => void
+  ): Promise<DescribeAccountGroupsResponse> {
+    return this.request("DescribeAccountGroups", req, cb)
+  }
+
+  /**
+   * 获取账号列表，支持分页，模糊搜索，私有化调用path为：/capi/Assets/Account/DescribeLocalAccounts
+   */
+  async DescribeLocalAccounts(
+    req: DescribeLocalAccountsRequest,
+    cb?: (error: string, rep: DescribeLocalAccountsResponse) => void
+  ): Promise<DescribeLocalAccountsResponse> {
+    return this.request("DescribeLocalAccounts", req, cb)
   }
 }

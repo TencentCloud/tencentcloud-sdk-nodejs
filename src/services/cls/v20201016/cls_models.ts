@@ -1432,22 +1432,21 @@ export interface ModifyScheduledSqlResponse {
 }
 
 /**
- * DescribeConfigs返回参数结构体
+ * 免鉴权条件信息
  */
-export interface DescribeConfigsResponse {
+export interface ConditionInfo {
   /**
-   * 采集配置列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 条件属性，目前只支持VpcID
    */
-  Configs?: Array<ConfigInfo>
+  Attributes?: string
   /**
-   * 过滤到的总数目
+   * 条件规则，1:等于，2:不等于
    */
-  TotalCount?: number
+  Rule?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 对应条件属性的值
    */
-  RequestId?: string
+  ConditionValue?: string
 }
 
 /**
@@ -1782,9 +1781,18 @@ export interface CreateCosRechargeRequest {
 }
 
 /**
- * ModifyAlarmShield返回参数结构体
+ * DescribeConfigs返回参数结构体
  */
-export interface ModifyAlarmShieldResponse {
+export interface DescribeConfigsResponse {
+  /**
+   * 采集配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configs?: Array<ConfigInfo>
+  /**
+   * 过滤到的总数目
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2351,6 +2359,17 @@ export interface ModifyAlarmNoticeRequest {
 - 传其中一组数据，则另一组数据置空。
    */
   NoticeRules?: Array<NoticeRule>
+}
+
+/**
+ * 日志主题扩展信息
+ */
+export interface TopicExtendInfo {
+  /**
+   * 日志主题免鉴权配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnonymousAccess?: AnonymousInfo
 }
 
 /**
@@ -3051,6 +3070,10 @@ export interface CreateTopicRequest {
 开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
    */
   IsWebTracking?: boolean
+  /**
+   * 日志主题扩展信息
+   */
+  Extends?: TopicExtendInfo
 }
 
 /**
@@ -3390,6 +3413,16 @@ export interface DashboardSubscribeData {
 }
 
 /**
+ * ModifyAlarmShield返回参数结构体
+ */
+export interface ModifyAlarmShieldResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDeliverCloudFunction请求参数结构体
  */
 export interface CreateDeliverCloudFunctionRequest {
@@ -3458,35 +3491,17 @@ export interface DeleteIndexRequest {
 }
 
 /**
- * DescribeConsumer返回参数结构体
+ * 免鉴权信息
  */
-export interface DescribeConsumerResponse {
+export interface AnonymousInfo {
   /**
-   * 投递任务是否生效
+   * 操作列表，支持trackLog(JS/HTTP上传日志  )和realtimeProducer(kafka协议上传日志)
    */
-  Effective: boolean
+  Operations?: Array<string>
   /**
-   * 是否投递日志的元数据信息
+   * 条件列表
    */
-  NeedContent: boolean
-  /**
-   * 如果需要投递元数据信息，元数据信息的描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Content: ConsumerContent
-  /**
-   * CKafka的描述
-   */
-  Ckafka: Ckafka
-  /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Compression: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Conditions?: Array<ConditionInfo>
 }
 
 /**
@@ -5134,6 +5149,48 @@ export interface ModifyShipperRequest {
 }
 
 /**
+ * 告警通知接收者信息
+ */
+export interface NoticeReceiver {
+  /**
+   * 接受者类型。可选值：
+-  Uin - 用户ID
+- Group - 用户组ID
+暂不支持其余接收者类型。
+   */
+  ReceiverType: string
+  /**
+   * 接收者。
+当ReceiverType为Uin时，ReceiverIds的值为用户uid。[子用户信息查询](https://cloud.tencent.com/document/api/598/53486)
+当ReceiverType为Group时，ReceiverIds的值为用户组id。[CAM用户组](https://cloud.tencent.com/document/product/598/14985)
+   */
+  ReceiverIds: Array<number | bigint>
+  /**
+   * 通知接收渠道。
+- Email - 邮件
+- Sms - 短信
+- WeChat - 微信
+- Phone - 电话
+   */
+  ReceiverChannels: Array<string>
+  /**
+   * 允许接收信息的开始时间。格式：`15:04:05`，必填。
+   */
+  StartTime?: string
+  /**
+   * 允许接收信息的结束时间。格式：`15:04:05`，必填。
+   */
+  EndTime?: string
+  /**
+   * 位序。
+
+- 入参时无效。
+- 出参时有效。
+   */
+  Index?: number
+}
+
+/**
  * CreateKafkaRecharge请求参数结构体
  */
 export interface CreateKafkaRechargeRequest {
@@ -6089,45 +6146,35 @@ export interface ModifyMachineGroupRequest {
 export type DeleteDashboardSubscribeRequest = null
 
 /**
- * 告警通知接收者信息
+ * DescribeConsumer返回参数结构体
  */
-export interface NoticeReceiver {
+export interface DescribeConsumerResponse {
   /**
-   * 接受者类型。可选值：
--  Uin - 用户ID
-- Group - 用户组ID
-暂不支持其余接收者类型。
+   * 投递任务是否生效
    */
-  ReceiverType: string
+  Effective: boolean
   /**
-   * 接收者。
-当ReceiverType为Uin时，ReceiverIds的值为用户uid。[子用户信息查询](https://cloud.tencent.com/document/api/598/53486)
-当ReceiverType为Group时，ReceiverIds的值为用户组id。[CAM用户组](https://cloud.tencent.com/document/product/598/14985)
+   * 是否投递日志的元数据信息
    */
-  ReceiverIds: Array<number | bigint>
+  NeedContent: boolean
   /**
-   * 通知接收渠道。
-- Email - 邮件
-- Sms - 短信
-- WeChat - 微信
-- Phone - 电话
+   * 如果需要投递元数据信息，元数据信息的描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceiverChannels: Array<string>
+  Content: ConsumerContent
   /**
-   * 允许接收信息的开始时间。格式：`15:04:05`，必填。
+   * CKafka的描述
    */
-  StartTime?: string
+  Ckafka: Ckafka
   /**
-   * 允许接收信息的结束时间。格式：`15:04:05`，必填。
+   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  Compression: number
   /**
-   * 位序。
-
-- 入参时无效。
-- 出参时有效。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Index?: number
+  RequestId?: string
 }
 
 /**
