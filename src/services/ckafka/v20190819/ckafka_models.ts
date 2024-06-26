@@ -310,7 +310,7 @@ export interface DescribeDatahubTaskResponse {
   /**
    * 返回结果
    */
-  Result: DescribeDatahubTaskRes
+  Result?: DescribeDatahubTaskRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -551,7 +551,7 @@ export interface DescribeDatahubGroupOffsetsResponse {
   /**
    * 返回的结果对象
    */
-  Result: GroupOffsetResponse
+  Result?: GroupOffsetResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -716,7 +716,7 @@ export interface AuthorizeTokenResponse {
    * 0 成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: number
+  Result?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -751,7 +751,7 @@ export interface FetchLatestDatahubMessageListResponse {
   /**
    * 返回结果。
    */
-  Result: Array<ConsumerRecord>
+  Result?: Array<ConsumerRecord>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1010,7 +1010,7 @@ export interface CreateRouteRequest {
    */
   InstanceId: string
   /**
-   * 路由网络类型(3:vpc路由;4:标准版支撑路由;7:专业版支撑路由)
+   * 路由网络类型(3:vpc路由;7:内部支撑路由)
    */
   VipType: number
   /**
@@ -1422,7 +1422,7 @@ export interface ModifyDatahubTaskResponse {
    * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: DatahubTaskIdRes
+  Result?: DatahubTaskIdRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1969,7 +1969,7 @@ export interface CreateTokenResponse {
    * token串
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2565,7 +2565,7 @@ export interface GroupOffsetResponse {
  */
 export interface CreateDatahubTopicRequest {
   /**
-   * 名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   Name: string
   /**
@@ -2749,7 +2749,7 @@ export interface DescribeDatahubTopicResponse {
   /**
    * 返回的结果对象
    */
-  Result: DescribeDatahubTopicResp
+  Result?: DescribeDatahubTopicResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3725,7 +3725,7 @@ export interface CreatePrometheusResponse {
   /**
    * 打通普罗米修斯
    */
-  Result: PrometheusResult
+  Result?: PrometheusResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4267,7 +4267,7 @@ export interface DeleteConnectResourceResponse {
   /**
    * 连接源的Id
    */
-  Result: ConnectResourceResourceIdResp
+  Result?: ConnectResourceResourceIdResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4321,7 +4321,7 @@ export interface DeleteAclRuleResponse {
   /**
    * 返回被删除的规则的ID
    */
-  Result: number
+  Result?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5531,7 +5531,7 @@ export interface CreateAclRuleResponse {
   /**
    * 规则的唯一表示Key
    */
-  Result: number
+  Result?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5721,7 +5721,7 @@ export interface DeleteDatahubTaskResponse {
    * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: DatahubTaskIdRes
+  Result?: DatahubTaskIdRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6029,7 +6029,7 @@ export interface DescribeConnectResourceResponse {
    * 连接源的Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: DescribeConnectResourceResp
+  Result?: DescribeConnectResourceResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6651,7 +6651,7 @@ export interface CreateDatahubTopicResponse {
   /**
    * 返回创建结果
    */
-  Result: DatahubTopicResp
+  Result?: DatahubTopicResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7705,7 +7705,7 @@ export interface ModifyDatahubTopicResponse {
   /**
    * 返回结果集
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

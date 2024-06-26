@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     SendMessage(req: SendMessageRequest, cb?: (error: string, rep: SendMessageResponse) => void): Promise<SendMessageResponse>;
     /**
-     * 修改Datahub主题属性
+     * 修改DIP主题属性
      */
     ModifyDatahubTopic(req: ModifyDatahubTopicRequest, cb?: (error: string, rep: ModifyDatahubTopicResponse) => void): Promise<ModifyDatahubTopicResponse>;
     /**
@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     CreateRoute(req: CreateRouteRequest, cb?: (error: string, rep: CreateRouteResponse) => void): Promise<CreateRouteResponse>;
     /**
-     * 删除Datahub任务
+     * 删除Dip任务
      */
     DeleteDatahubTask(req: DeleteDatahubTaskRequest, cb?: (error: string, rep: DeleteDatahubTaskResponse) => void): Promise<DeleteDatahubTaskResponse>;
     /**
@@ -120,7 +120,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePrometheus(req: DescribePrometheusRequest, cb?: (error: string, rep: DescribePrometheusResponse) => void): Promise<DescribePrometheusResponse>;
     /**
-     * 创建Datahub主题
+     * 创建DIP主题
      */
     CreateDatahubTopic(req: CreateDatahubTopicRequest, cb?: (error: string, rep: CreateDatahubTopicResponse) => void): Promise<CreateDatahubTopicResponse>;
     /**
@@ -305,7 +305,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAclRule(req: CreateAclRuleRequest, cb?: (error: string, rep: CreateAclRuleResponse) => void): Promise<CreateAclRuleResponse>;
     /**
-     * 获取Datahub主题属性
+     * 获取DIP主题属性
      */
     DescribeDatahubTopic(req: DescribeDatahubTopicRequest, cb?: (error: string, rep: DescribeDatahubTopicResponse) => void): Promise<DescribeDatahubTopicResponse>;
     /**

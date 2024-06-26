@@ -41,6 +41,7 @@ import {
   CheckBatchStatusRequest,
   ReserveBidInfo,
   CreateDomainBatchRequest,
+  SucDomainInfo,
   ModifyTemplateResponse,
   BiddingSuccessfulResult,
   DescribeBatchOperationLogsRequest,

@@ -2127,7 +2127,7 @@ export interface ModifyAlarmRequest {
      */
     MultiConditions?: Array<MultiCondition>;
     /**
-     * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
+     * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为2000。
      */
     TriggerCount?: number;
     /**
@@ -2300,7 +2300,7 @@ export interface CreateAlarmRequest {
      */
     MonitorTime: MonitorTime;
     /**
-     * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
+     * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为2000。
      */
     TriggerCount: number;
     /**
@@ -4683,6 +4683,11 @@ export interface TopicInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsWebTracking?: boolean;
+    /**
+     * 日志主题扩展信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extends?: TopicExtendInfo;
 }
 /**
  * 分组触发条件
@@ -5990,6 +5995,10 @@ export interface ModifyTopicRequest {
      */
     IsWebTracking?: boolean;
     /**
+     * 日志主题扩展信息
+     */
+    Extends?: TopicExtendInfo;
+    /**
      * 日志主题分区数量
      */
     PartitionCount?: number;
@@ -6157,7 +6166,7 @@ export interface ModifyLogsetResponse {
  */
 export interface MonitorTime {
     /**
-     * 执行周期， 可选值：Period；Fixed。
+     * 执行周期， 可选值：`Period`、`Fixed`。
   
   - Period：固定频率
   - Fixed：固定时间
@@ -6165,8 +6174,9 @@ export interface MonitorTime {
     Type: string;
     /**
      * 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。
+  当type为`Period`,`Fixed`时，time字段生效。
      */
-    Time: number;
+    Time?: number;
 }
 /**
  * 多主题检索返回信息

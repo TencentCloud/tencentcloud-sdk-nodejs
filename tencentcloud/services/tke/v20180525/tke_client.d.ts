@@ -208,7 +208,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterPendingReleases(req: DescribeClusterPendingReleasesRequest, cb?: (error: string, rep: DescribeClusterPendingReleasesResponse) => void): Promise<DescribeClusterPendingReleasesResponse>;
     /**
-     * 以Yaml的方式创建聚合规则
+     * 创建聚合规则yaml方式
      */
     CreatePrometheusRecordRuleYaml(req: CreatePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void): Promise<CreatePrometheusRecordRuleYamlResponse>;
     /**
@@ -416,7 +416,7 @@ export declare class Client extends AbstractClient {
      */
     RestartEKSContainerInstances(req: RestartEKSContainerInstancesRequest, cb?: (error: string, rep: RestartEKSContainerInstancesResponse) => void): Promise<RestartEKSContainerInstancesResponse>;
     /**
-     * 删除Prometheus配置，如果目标不存在，将返回成功
+     * 删除集群采集配置
      */
     DeletePrometheusConfig(req: DeletePrometheusConfigRequest, cb?: (error: string, rep: DeletePrometheusConfigResponse) => void): Promise<DeletePrometheusConfigResponse>;
     /**
@@ -570,7 +570,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePrometheusAlertRule(req: CreatePrometheusAlertRuleRequest, cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void): Promise<CreatePrometheusAlertRuleResponse>;
     /**
-     * 删除聚合实例
+     * 删除聚合规则
      */
     DeletePrometheusRecordRuleYaml(req: DeletePrometheusRecordRuleYamlRequest, cb?: (error: string, rep: DeletePrometheusRecordRuleYamlResponse) => void): Promise<DeletePrometheusRecordRuleYamlResponse>;
     /**
@@ -582,7 +582,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyPrometheusTemp(req: ModifyPrometheusTempRequest, cb?: (error: string, rep: ModifyPrometheusTempResponse) => void): Promise<ModifyPrometheusTempResponse>;
     /**
-     * 通过yaml的方式修改Prometheus聚合实例
+     * 修改聚合规则yaml方式
      */
     ModifyPrometheusRecordRuleYaml(req: ModifyPrometheusRecordRuleYamlRequest, cb?: (error: string, rep: ModifyPrometheusRecordRuleYamlResponse) => void): Promise<ModifyPrometheusRecordRuleYamlResponse>;
     /**
@@ -674,7 +674,7 @@ export declare class Client extends AbstractClient {
      */
     SyncPrometheusTemp(req: SyncPrometheusTempRequest, cb?: (error: string, rep: SyncPrometheusTempResponse) => void): Promise<SyncPrometheusTempResponse>;
     /**
-     * 修改prometheus配置，如果配置项不存在，则会新增
+     * 修改集群采集配置
      */
     ModifyPrometheusConfig(req: ModifyPrometheusConfigRequest, cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void): Promise<ModifyPrometheusConfigResponse>;
     /**
@@ -754,7 +754,7 @@ export declare class Client extends AbstractClient {
      */
     RollbackClusterRelease(req: RollbackClusterReleaseRequest, cb?: (error: string, rep: RollbackClusterReleaseResponse) => void): Promise<RollbackClusterReleaseResponse>;
     /**
-     * 拉取Prometheus配置
+     * 获取集群采集配置
      */
     DescribePrometheusConfig(req: DescribePrometheusConfigRequest, cb?: (error: string, rep: DescribePrometheusConfigResponse) => void): Promise<DescribePrometheusConfigResponse>;
     /**
@@ -854,7 +854,7 @@ export declare class Client extends AbstractClient {
      */
     DeletePrometheusTempSync(req: DeletePrometheusTempSyncRequest, cb?: (error: string, rep: DeletePrometheusTempSyncResponse) => void): Promise<DeletePrometheusTempSyncResponse>;
     /**
-     * 创建prometheus配置
+     * 创建集群采集配置
      */
     CreatePrometheusConfig(req: CreatePrometheusConfigRequest, cb?: (error: string, rep: CreatePrometheusConfigResponse) => void): Promise<CreatePrometheusConfigResponse>;
     /**

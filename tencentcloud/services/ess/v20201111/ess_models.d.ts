@@ -5021,7 +5021,7 @@ export interface CreateFlowBlockchainEvidenceUrlResponse {
      */
     QrCode?: string;
     /**
-     * 查看短链，可直接点击短链查看报告。
+     * 查看短链，可直接点击短链查看证书。
      */
     Url?: string;
     /**

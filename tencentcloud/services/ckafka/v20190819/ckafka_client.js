@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendMessage", req, cb);
     }
     /**
-     * 修改Datahub主题属性
+     * 修改DIP主题属性
      */
     async ModifyDatahubTopic(req, cb) {
         return this.request("ModifyDatahubTopic", req, cb);
@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRoute", req, cb);
     }
     /**
-     * 删除Datahub任务
+     * 删除Dip任务
      */
     async DeleteDatahubTask(req, cb) {
         return this.request("DeleteDatahubTask", req, cb);
@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheus", req, cb);
     }
     /**
-     * 创建Datahub主题
+     * 创建DIP主题
      */
     async CreateDatahubTopic(req, cb) {
         return this.request("CreateDatahubTopic", req, cb);
@@ -473,7 +473,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAclRule", req, cb);
     }
     /**
-     * 获取Datahub主题属性
+     * 获取DIP主题属性
      */
     async DescribeDatahubTopic(req, cb) {
         return this.request("DescribeDatahubTopic", req, cb);

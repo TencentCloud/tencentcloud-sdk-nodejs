@@ -1144,7 +1144,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 以Yaml的方式创建聚合规则
+   * 创建聚合规则yaml方式
    */
   async CreatePrometheusRecordRuleYaml(
     req: CreatePrometheusRecordRuleYamlRequest,
@@ -1664,7 +1664,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Prometheus配置，如果目标不存在，将返回成功
+   * 删除集群采集配置
    */
   async DeletePrometheusConfig(
     req: DeletePrometheusConfigRequest,
@@ -2046,7 +2046,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除聚合实例
+   * 删除聚合规则
    */
   async DeletePrometheusRecordRuleYaml(
     req: DeletePrometheusRecordRuleYamlRequest,
@@ -2076,7 +2076,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过yaml的方式修改Prometheus聚合实例
+   * 修改聚合规则yaml方式
    */
   async ModifyPrometheusRecordRuleYaml(
     req: ModifyPrometheusRecordRuleYamlRequest,
@@ -2306,7 +2306,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改prometheus配置，如果配置项不存在，则会新增
+   * 修改集群采集配置
    */
   async ModifyPrometheusConfig(
     req: ModifyPrometheusConfigRequest,
@@ -2506,7 +2506,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取Prometheus配置
+   * 获取集群采集配置
    */
   async DescribePrometheusConfig(
     req: DescribePrometheusConfigRequest,
@@ -2756,7 +2756,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建prometheus配置
+   * 创建集群采集配置
    */
   async CreatePrometheusConfig(
     req: CreatePrometheusConfigRequest,

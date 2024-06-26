@@ -700,6 +700,11 @@ export interface TeoInstanceList {
      * edgeone实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * 根证书
@@ -807,6 +812,11 @@ export interface TkeInstanceList {
      * 该地域下tke实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DescribeDeployedResources请求参数结构体
@@ -894,6 +904,31 @@ export interface ClbListener {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NoMatchDomains?: Array<string>;
+}
+/**
+ * cos实例详情 - 异步关联云资源数据结构
+ */
+export interface COSInstanceList {
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<CosInstanceDetail>;
+    /**
+     * 地域下总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DescribeCompanies返回参数结构体
@@ -1039,20 +1074,20 @@ export interface ClbListenerRule {
     /**
      * 规则ID
      */
-    LocationId: string;
+    LocationId?: string;
     /**
      * 规则绑定的域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 规则是否匹配待绑定证书的域名
      */
-    IsMatch: boolean;
+    IsMatch?: boolean;
     /**
      * 规则已绑定的证书数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Certificate: Certificate;
+    Certificate?: Certificate;
     /**
      * 不匹配域名列表
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2324,6 +2359,11 @@ export interface DescribeCertificateBindResourceTaskDetailResponse {
      */
     TSE?: Array<TSEInstanceList>;
     /**
+     * 关联的COS资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    COS?: Array<COSInstanceList>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2385,6 +2425,11 @@ export interface CdnInstanceList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<CdnInstanceDetail>;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * UpdateCertificateRecordRetry请求参数结构体
@@ -2848,6 +2893,11 @@ export interface ApiGatewayInstanceList {
      * 该地域下apigateway实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * teo实例详情
@@ -3548,6 +3598,11 @@ export interface WafInstanceList {
      * 该地域下waf实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
@@ -3786,6 +3841,11 @@ export interface DdosInstanceList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<DdosInstanceDetail>;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DescribeDownloadCertificateUrl请求参数结构体
@@ -3956,6 +4016,11 @@ export interface TCBInstanceList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Environments?: Array<TCBEnvironments>;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DescribeHostCosInstanceList请求参数结构体
@@ -4113,6 +4178,11 @@ export interface LiveInstanceList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<LiveInstanceDetail>;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DeleteCertificate请求参数结构体
@@ -4762,6 +4832,11 @@ export interface ClbInstanceList {
      * 该地域下Clb实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * UpdateCertificateRecordRetry返回参数结构体
@@ -4974,6 +5049,11 @@ export interface TSEInstanceList {
      * 地域
      */
     Region?: string;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * DescribeHostLighthouseInstanceList返回参数结构体
@@ -5020,4 +5100,9 @@ export interface VODInstanceList {
      * 该地域下vod实例总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }

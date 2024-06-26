@@ -328,7 +328,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterPendingReleases", req, cb);
     }
     /**
-     * 以Yaml的方式创建聚合规则
+     * 创建聚合规则yaml方式
      */
     async CreatePrometheusRecordRuleYaml(req, cb) {
         return this.request("CreatePrometheusRecordRuleYaml", req, cb);
@@ -640,7 +640,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartEKSContainerInstances", req, cb);
     }
     /**
-     * 删除Prometheus配置，如果目标不存在，将返回成功
+     * 删除集群采集配置
      */
     async DeletePrometheusConfig(req, cb) {
         return this.request("DeletePrometheusConfig", req, cb);
@@ -870,7 +870,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusAlertRule", req, cb);
     }
     /**
-     * 删除聚合实例
+     * 删除聚合规则
      */
     async DeletePrometheusRecordRuleYaml(req, cb) {
         return this.request("DeletePrometheusRecordRuleYaml", req, cb);
@@ -888,7 +888,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusTemp", req, cb);
     }
     /**
-     * 通过yaml的方式修改Prometheus聚合实例
+     * 修改聚合规则yaml方式
      */
     async ModifyPrometheusRecordRuleYaml(req, cb) {
         return this.request("ModifyPrometheusRecordRuleYaml", req, cb);
@@ -1026,7 +1026,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 修改prometheus配置，如果配置项不存在，则会新增
+     * 修改集群采集配置
      */
     async ModifyPrometheusConfig(req, cb) {
         return this.request("ModifyPrometheusConfig", req, cb);
@@ -1146,7 +1146,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollbackClusterRelease", req, cb);
     }
     /**
-     * 拉取Prometheus配置
+     * 获取集群采集配置
      */
     async DescribePrometheusConfig(req, cb) {
         return this.request("DescribePrometheusConfig", req, cb);
@@ -1296,7 +1296,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusTempSync", req, cb);
     }
     /**
-     * 创建prometheus配置
+     * 创建集群采集配置
      */
     async CreatePrometheusConfig(req, cb) {
         return this.request("CreatePrometheusConfig", req, cb);

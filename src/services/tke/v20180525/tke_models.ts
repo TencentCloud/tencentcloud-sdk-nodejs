@@ -657,6 +657,10 @@ export interface DeletePrometheusClusterAgentRequest {
    * 实例id
    */
   InstanceId: string
+  /**
+   * 在7天可回收期间，强制解除绑定
+   */
+  Force?: boolean
 }
 
 /**
@@ -1811,17 +1815,17 @@ initializing 初始化中
 running 初始化完成，运行中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 初始化任务步骤
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Steps: Array<TaskStepInfo>
+  Steps?: Array<TaskStepInfo>
   /**
    * 实例eks集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EksClusterId: string
+  EksClusterId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2924,22 +2928,22 @@ export interface DescribePrometheusGlobalConfigResponse {
   /**
    * 配置内容
    */
-  Config: string
+  Config?: string
   /**
    * ServiceMonitors列表以及对应targets信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceMonitors: Array<PrometheusConfigItem>
+  ServiceMonitors?: Array<PrometheusConfigItem>
   /**
    * PodMonitors列表以及对应targets信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PodMonitors: Array<PrometheusConfigItem>
+  PodMonitors?: Array<PrometheusConfigItem>
   /**
    * RawJobs列表以及对应targets信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RawJobs: Array<PrometheusConfigItem>
+  RawJobs?: Array<PrometheusConfigItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3443,6 +3447,10 @@ export interface DeletePrometheusConfigRequest {
    * 要删除的RawJobs名字列表
    */
   RawJobs?: Array<string>
+  /**
+   * 要删除的Probe名字列表
+   */
+  Probes?: Array<string>
 }
 
 /**
@@ -4256,11 +4264,11 @@ export interface DescribePrometheusAlertPolicyResponse {
    * 告警详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlertRules: Array<PrometheusAlertPolicyItem>
+  AlertRules?: Array<PrometheusAlertPolicyItem>
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4381,7 +4389,7 @@ export interface DescribePrometheusGlobalNotificationResponse {
    * 全局告警通知渠道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Notification: PrometheusNotificationItem
+  Notification?: PrometheusNotificationItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5548,7 +5556,7 @@ export interface DescribePrometheusTempSyncResponse {
    * 同步目标详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Targets: Array<PrometheusTemplateSyncTarget>
+  Targets?: Array<PrometheusTemplateSyncTarget>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6719,6 +6727,10 @@ export interface DescribePrometheusConfigResponse {
    */
   RawJobs?: Array<PrometheusConfigItem>
   /**
+   * Probe配置
+   */
+  Probes?: Array<PrometheusConfigItem>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6868,11 +6880,11 @@ export interface DescribePrometheusRecordRulesResponse {
   /**
    * 聚合规则
    */
-  Records: Array<PrometheusRecordRuleYamlItem>
+  Records?: Array<PrometheusRecordRuleYamlItem>
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7044,7 +7056,7 @@ export interface CreatePrometheusAlertPolicyResponse {
   /**
    * 告警id
    */
-  Id: string
+  Id?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7381,6 +7393,10 @@ export interface ModifyPrometheusConfigRequest {
    * prometheus原生Job配置
    */
   RawJobs?: Array<PrometheusConfigItem>
+  /**
+   * Probes 配置
+   */
+  Probes?: Array<PrometheusConfigItem>
 }
 
 /**
@@ -7886,6 +7902,10 @@ export interface CreatePrometheusConfigRequest {
    * prometheus原生Job配置
    */
   RawJobs?: Array<PrometheusConfigItem>
+  /**
+   * Probe 配置
+   */
+  Probes?: Array<PrometheusConfigItem>
 }
 
 /**
@@ -7985,12 +8005,12 @@ export interface DescribePrometheusInstancesOverviewResponse {
   /**
    * 实例列表
    */
-  Instances: Array<PrometheusInstancesOverview>
+  Instances?: Array<PrometheusInstancesOverview>
   /**
    * 实例总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8635,7 +8655,7 @@ export interface CreatePrometheusGlobalNotificationResponse {
    * 全局告警通知渠道ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9309,7 +9329,7 @@ export interface CreatePrometheusTempResponse {
   /**
    * 模板Id
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10628,12 +10648,12 @@ export interface DescribeVpcCniPodLimitsResponse {
    * 机型数据数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 机型信息及其可支持的最大VPC-CNI模式Pod数量信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PodLimitsInstanceSet: Array<PodLimitsInstance>
+  PodLimitsInstanceSet?: Array<PodLimitsInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10648,12 +10668,12 @@ export interface DescribeVersionsResponse {
    * 版本数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 版本列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionInstanceSet: Array<VersionInstance>
+  VersionInstanceSet?: Array<VersionInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11860,11 +11880,11 @@ export interface DescribePrometheusClusterAgentsResponse {
   /**
    * 被关联集群信息
    */
-  Agents: Array<PrometheusAgentOverview>
+  Agents?: Array<PrometheusAgentOverview>
   /**
    * 被关联集群总量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12073,11 +12093,11 @@ export interface DescribePrometheusTempResponse {
   /**
    * 模板列表
    */
-  Templates: Array<PrometheusTemp>
+  Templates?: Array<PrometheusTemp>
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -542,6 +542,22 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
+ * 预释放域名预约参数补充成功信息
+ */
+export interface SucDomainInfo {
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 业务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessId?: string
+}
+
+/**
  * ModifyTemplate返回参数结构体
  */
 export interface ModifyTemplateResponse {
@@ -697,6 +713,10 @@ export interface ReservedPreDomainsResponse {
    * 预定失败域名列表
    */
   FailDomainList?: Array<FailReservedDomainInfo>
+  /**
+   * 域名预定成功详情
+   */
+  SucDomains?: Array<SucDomainInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

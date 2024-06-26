@@ -508,7 +508,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Datahub主题属性
+   * 修改DIP主题属性
    */
   async ModifyDatahubTopic(
     req: ModifyDatahubTopicRequest,
@@ -608,7 +608,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Datahub任务
+   * 删除Dip任务
    */
   async DeleteDatahubTask(
     req: DeleteDatahubTaskRequest,
@@ -648,7 +648,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Datahub主题
+   * 创建DIP主题
    */
   async CreateDatahubTopic(
     req: CreateDatahubTopicRequest,
@@ -1109,7 +1109,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Datahub主题属性
+   * 获取DIP主题属性
    */
   async DescribeDatahubTopic(
     req: DescribeDatahubTopicRequest,

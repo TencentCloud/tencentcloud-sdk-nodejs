@@ -43,6 +43,7 @@ import {
   TCBHostInstance,
   UploadRevokeLetterRequest,
   ClbListener,
+  COSInstanceList,
   DescribeCompaniesResponse,
   CheckCertificateChainResponse,
   DescribeHostCosInstanceListResponse,
