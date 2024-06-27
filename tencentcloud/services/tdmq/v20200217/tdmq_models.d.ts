@@ -631,6 +631,11 @@ export interface RabbitMQVipInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Vpcs?: Array<VpcEndpointInfo>;
+    /**
+     * 创建时间，毫秒为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
 }
 /**
  * RabbiteMQ集群基本信息
@@ -1014,11 +1019,11 @@ export interface DescribeRocketMQVipInstanceDetailResponse {
     /**
      * 集群信息
      */
-    ClusterInfo: RocketMQClusterInfo;
+    ClusterInfo?: RocketMQClusterInfo;
     /**
      * 集群配置
      */
-    InstanceConfig: RocketMQInstanceConfig;
+    InstanceConfig?: RocketMQInstanceConfig;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2865,13 +2870,33 @@ export interface CreateRabbitMQVipInstanceRequest {
      */
     EnableCreateDefaultHaMirrorQueue?: boolean;
     /**
-     * 自动续费,不传默认为true
+     * 预付费使用。自动续费,不传默认为true
      */
     AutoRenewFlag?: boolean;
     /**
      * 购买时长,不传默认为1(月)
      */
     TimeSpan?: number;
+    /**
+     * 付费方式，0 为后付费，即按量计费；1 为预付费，即包年包月。默认包年包月
+     */
+    PayMode?: number;
+    /**
+     * 集群版本，不传默认为 3.8.30，可选值为 3.8.30 和 3.11.8
+     */
+    ClusterVersion?: string;
+    /**
+     * 是否国际站请求，默认 false
+     */
+    IsIntl?: boolean;
+    /**
+     * 资源标签列表
+     */
+    ResourceTags?: Array<Tag>;
+    /**
+     * 公网带宽大小，单位 M
+     */
+    Bandwidth?: number;
 }
 /**
  * DescribeRocketMQSmoothMigrationTask请求参数结构体
@@ -4672,6 +4697,31 @@ export interface RocketMQInstanceConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxQueuesPerTopic?: number;
+    /**
+     * 最大可设置消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRetention?: number;
+    /**
+     * 最小可设置消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinRetention?: number;
+    /**
+     * 实例消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Retention?: number;
+    /**
+     * Topic个数最小配额，即免费额度，默认为集群规格单节点最小配额*节点个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicNumLowerLimit?: number;
+    /**
+     * Topic个数最大配额，默认为集群规格单节点最大配额*节点个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicNumUpperLimit?: number;
 }
 /**
  * 迁移topic列表数据
@@ -5066,6 +5116,10 @@ export interface DeleteRabbitMQVipInstanceRequest {
      * 实例Id
      */
     InstanceId: string;
+    /**
+     * 是否国际站请求，默认 false
+     */
+    IsIntl?: boolean;
 }
 /**
  * ModifyEnvironmentAttributes返回参数结构体
@@ -5666,12 +5720,12 @@ export interface SendRocketMQMessageResponse {
     /**
      * 发送结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 消息ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgId: string;
+    MsgId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8865,6 +8919,16 @@ export interface RabbitMQUser {
      * 用户类型，System：系统创建，User：用户创建
      */
     Type?: string;
+    /**
+     * 单个用户最大可用连接数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxConnections?: number;
+    /**
+     * 单个用户最大可用通道数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxChannels?: number;
 }
 /**
  * DescribeRocketMQVipInstances请求参数结构体

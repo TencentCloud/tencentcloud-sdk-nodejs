@@ -1664,9 +1664,7 @@ export interface AudioTemplateInfoForUpdate {
   <li>flac。</li>
   当外层参数 Container 为 m4a 时，可选值为：
   <li>aac；</li>
-  <li>mp3；</li>
   <li>ac3。</li>
-  <li>eac3。</li>
   当外层参数 Container 为 mp4 或 flv 时，可选值为：
   <li>aac：更适合 mp4；</li>
   <li>mp3：更适合 flv；</li>
@@ -2016,9 +2014,7 @@ export interface AudioTemplateInfo {
   <li>flac。</li>
   当外层参数 Container 为 m4a 时，可选值为：
   <li>aac；</li>
-  <li>mp3；</li>
   <li>ac3。</li>
-  <li>eac3。</li>
   当外层参数 Container 为 mp4 或 flv 时，可选值为：
   <li>aac：更适合 mp4；</li>
   <li>mp3：更适合 flv；</li>
@@ -2256,7 +2252,6 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
   <li>militant：武装分子；</li>
   <li>explosion：爆炸火灾；</li>
   <li>terrorists：涉敏人物；</li>
-  <li>scenario：涉敏画面。</li>
      */
     LabelSet?: Array<string>;
     /**
@@ -2751,40 +2746,40 @@ export interface DescribeInputSRTSettings {
      * SRT模式。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mode: string;
+    Mode?: string;
     /**
      * 流Id。
      */
-    StreamId: string;
+    StreamId?: string;
     /**
      * 延迟。
      */
-    Latency: number;
+    Latency?: number;
     /**
      * 接收延迟。
      */
-    RecvLatency: number;
+    RecvLatency?: number;
     /**
      * 对端延迟。
      */
-    PeerLatency: number;
+    PeerLatency?: number;
     /**
      * 对端空闲超时时间。
      */
-    PeerIdleTimeout: number;
+    PeerIdleTimeout?: number;
     /**
      * 解密密钥。
      */
-    Passphrase: string;
+    Passphrase?: string;
     /**
      * 密钥长度。
      */
-    PbKeyLen: number;
+    PbKeyLen?: number;
     /**
      * SRT对端地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceAddresses: Array<SRTSourceAddressResp>;
+    SourceAddresses?: Array<SRTSourceAddressResp>;
 }
 /**
  * 智能封面结果类型
@@ -2887,11 +2882,11 @@ export interface SRTAddressDestination {
     /**
      * 目标地址的IP。
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 目标地址的端口。
      */
-    Port: number;
+    Port?: number;
 }
 /**
  * Event管理的Flow列表
@@ -3339,11 +3334,11 @@ export interface DescribeAIRecognitionTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 视频内容识别模板详情列表。
      */
-    AIRecognitionTemplateSet: Array<AIRecognitionTemplateItem>;
+    AIRecognitionTemplateSet?: Array<AIRecognitionTemplateItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4180,7 +4175,7 @@ export interface EditMediaOutputConfig {
  */
 export interface AiQualityControlTaskInput {
     /**
-     * 视频质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。
+     * 媒体质检模板 ID 。暂时可以直接使用 预设模板ID 10，后面控制台支持用户配置自定义模板。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Definition?: number;
@@ -4843,15 +4838,14 @@ export interface VideoTemplateInfo {
   <li>dnxhd：DNxHD 编码</li>
   注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
   
-  注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。
+  注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
   注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
   注意：VP8、VP9编码容器目前只支持webm，mkv。
   注意：MPEG2、dnxhd 编码容器目前只支持mxf。
      */
     Codec: string;
     /**
-     * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
-  注意：自适应码率时取值范围是 [0, 60]
+     * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60]
      */
     Fps: number;
     /**
@@ -4908,11 +4902,11 @@ export interface VideoTemplateInfo {
     Vcrf?: number;
     /**
      * hls 分片类型，可选值 ：
-  <li>6：HLS+TS 切片</li>
+  <li>0：HLS+TS 切片</li>
   <li>2：HLS+TS byte range</li>
   <li>7：HLS+MP4 切片</li>
   <li>5：HLS+MP4 byte range</li>
-  默认值：6
+  默认值：0
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SegmentType?: number;
@@ -5128,6 +5122,10 @@ export interface CreateOutputInfo {
      * 绑定的输入安全组 ID。
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 可用区，output最多只支持输入一个可用区。
+     */
+    Zones?: Array<string>;
 }
 /**
  * 媒体处理输出对象信息。
@@ -5679,7 +5677,7 @@ export interface ProcessMediaRequest {
      */
     AiRecognitionTask?: AiRecognitionTaskInput;
     /**
-     * 视频质检类型任务参数。
+     * 媒体质检类型任务参数。
      */
     AiQualityControlTask?: AiQualityControlTaskInput;
     /**
@@ -5691,7 +5689,7 @@ export interface ProcessMediaRequest {
      */
     TasksPriority?: number;
     /**
-     * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
      */
     SessionId?: string;
     /**
@@ -6420,11 +6418,11 @@ export interface DescribeWorkflowsResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 工作流信息数组。
      */
-    WorkflowInfoSet: Array<WorkflowInfo>;
+    WorkflowInfoSet?: Array<WorkflowInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6462,11 +6460,11 @@ export interface DescribeContentReviewTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 内容审核模板详情列表。
      */
-    ContentReviewTemplateSet: Array<ContentReviewTemplateItem>;
+    ContentReviewTemplateSet?: Array<ContentReviewTemplateItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6868,7 +6866,7 @@ export interface CreateStreamLinkInputRequest {
     InputGroup?: Array<CreateInput>;
 }
 /**
- * 质检任务结果类型
+ * 媒体质检任务结果类型
  */
 export interface ScheduleQualityControlTaskResult {
     /**
@@ -6888,11 +6886,11 @@ export interface ScheduleQualityControlTaskResult {
      */
     Message?: string;
     /**
-     * 质检任务的输入。
+     * 媒体质检任务的输入。
      */
     Input?: AiQualityControlTaskInput;
     /**
-     * 质检任务的输出。
+     * 媒体质检任务的输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Output?: QualityControlData;
@@ -7449,6 +7447,10 @@ export interface DescribeInput {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 可用区配置，开启容灾情况下最多有两个，顺序和pipeline 0、1对应，否则最多只有一个可用区。
+     */
+    Zones?: Array<string>;
 }
 /**
  * 编辑视频任务信息
@@ -7928,6 +7930,10 @@ export interface DescribeOutput {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 可用区，output目前最多只支持一个。
+     */
+    Zones?: Array<string>;
 }
 /**
  * 直播 AI 内容审核声音鉴黄结果
@@ -8079,7 +8085,7 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
     /**
      * 时间点截图模板唯一标识。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9327,12 +9333,13 @@ export interface ActivityResult {
   <li>AiContentReview：内容审核。</li>
   <li>AIRecognition：智能识别。</li>
   <li>AIAnalysis：智能分析。</li>
+  <li>AiQualityControl：媒体质检。</li>
      */
-    ActivityType: string;
+    ActivityType?: string;
     /**
      * 原子任务输出。
      */
-    ActivityResItem: ActivityResItem;
+    ActivityResItem?: ActivityResItem;
 }
 /**
  * 查询输入的HLS配置信息。
@@ -10067,6 +10074,7 @@ export interface Activity {
   <li>action-image-sprite：雪碧图</li>
   <li>action-snapshotByTimeOffset: 时间点截图</li>
   <li>action-adaptive-substream：自适应码流</li>
+  <li>action-AIQualityControl：媒体质检</li>
   
   
   
@@ -10320,7 +10328,7 @@ export interface VideoTemplateInfoForUpdate {
   <li>dnxhd：DNxHD 编码</li>
   注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
   
-  注意：av1 编码容器目前只支持 mp4 ，webm，mkv，mov。
+  注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
   注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
   注意：VP8、VP9编码容器目前只支持webm，mkv。
   注意：MPEG2、dnxhd 编码容器目前只支持mxf。
@@ -10328,7 +10336,7 @@ export interface VideoTemplateInfoForUpdate {
      */
     Codec?: string;
     /**
-     * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
+     * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Fps?: number;
@@ -10390,11 +10398,11 @@ export interface VideoTemplateInfoForUpdate {
     ContentAdaptStream?: number;
     /**
      * hls 分片类型，可选值：
-  <li>6：HLS+TS 切片</li>
+  <li>0：HLS+TS 切片</li>
   <li>2：HLS+TS byte range</li>
   <li>7：HLS+MP4 切片</li>
   <li>5：HLS+MP4 byte range</li>
-  默认值：6
+  默认值：0
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SegmentType?: number;
@@ -10519,11 +10527,11 @@ export interface DescribeImageSpriteTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 雪碧图模板详情列表。
      */
-    ImageSpriteTemplateSet: Array<ImageSpriteTemplate>;
+    ImageSpriteTemplateSet?: Array<ImageSpriteTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11121,52 +11129,52 @@ export interface DescribeOutputSRTSettings {
      * 转推的目标的地址信息列表，SRT模式为CALLER时使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Destinations: Array<SRTAddressDestination>;
+    Destinations?: Array<SRTAddressDestination>;
     /**
      * 流Id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StreamId: string;
+    StreamId?: string;
     /**
      * 延迟。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Latency: number;
+    Latency?: number;
     /**
      * 接收延迟。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecvLatency: number;
+    RecvLatency?: number;
     /**
      * 对端延迟。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PeerLatency: number;
+    PeerLatency?: number;
     /**
      * 对端空闲超时时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PeerIdleTimeout: number;
+    PeerIdleTimeout?: number;
     /**
      * 加密密钥。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Passphrase: string;
+    Passphrase?: string;
     /**
      * 加密密钥长度。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PbKeyLen: number;
+    PbKeyLen?: number;
     /**
      * SRT模式。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mode: string;
+    Mode?: string;
     /**
      * 服务器监听地址，SRT模式为LISTENER时使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceAddresses: Array<OutputSRTSourceAddressResp>;
+    SourceAddresses?: Array<OutputSRTSourceAddressResp>;
 }
 /**
  * 人脸识别输入。
@@ -11421,11 +11429,11 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 指定时间点截图模板详情列表。
      */
-    SnapshotByTimeOffsetTemplateSet: Array<SnapshotByTimeOffsetTemplate>;
+    SnapshotByTimeOffsetTemplateSet?: Array<SnapshotByTimeOffsetTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11732,6 +11740,10 @@ export interface CreateInput {
      * 绑定的输入安全组 ID。
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。
+     */
+    Zones?: Array<string>;
 }
 /**
  * 内容审核涉敏任务输入参数类型
@@ -11907,7 +11919,7 @@ export interface ProcessLiveStreamRequest {
      */
     AiAnalysisTask?: AiAnalysisTaskInput;
     /**
-     * 视频内容质检类型任务参数。
+     * 媒体质检类型任务参数。
      */
     AiQualityControlTask?: AiQualityControlTaskInput;
     /**
@@ -12139,7 +12151,7 @@ export interface LiveStreamProcessTask {
     Url: string;
 }
 /**
- * 质检结果输出。
+ * 媒体质检结果输出。
  */
 export interface QualityControlData {
     /**
@@ -12158,7 +12170,7 @@ export interface QualityControlData {
      */
     QualityEvaluationScore?: number;
     /**
-     * 质检检出异常项。
+     * 内容质检检出异常项。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QualityControlResultSet?: Array<QualityControlResult>;
@@ -12186,11 +12198,11 @@ export interface DescribeSampleSnapshotTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 采样截图模板详情列表。
      */
-    SampleSnapshotTemplateSet: Array<SampleSnapshotTemplate>;
+    SampleSnapshotTemplateSet?: Array<SampleSnapshotTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12308,6 +12320,7 @@ export interface LiveActivityResult {
     /**
      * 原子任务类型。
   <li>LiveRecord：直播录制。</li>
+  <li>AiQualityControl：媒体质检。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ActivityType?: string;
@@ -12337,7 +12350,6 @@ export interface TerrorismImgReviewTemplateInfo {
   <li>militant：武装分子；</li>
   <li>explosion：爆炸火灾；</li>
   <li>terrorists：涉敏人物；</li>
-  <li>scenario：涉敏画面。</li>
      */
     LabelSet?: Array<string>;
     /**
@@ -12554,11 +12566,11 @@ export interface DescribeWatermarkTemplatesResponse {
     /**
      * 符合过滤条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 水印模板详情列表。
      */
-    WatermarkTemplateSet: Array<WatermarkTemplate>;
+    WatermarkTemplateSet?: Array<WatermarkTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12899,6 +12911,10 @@ export interface ModifyInput {
      * 绑定的输入安全组 ID。 仅支持关联一组安全组。
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 可用区，非必填，最多支持输入两个可用区，对于需改接口，只要第二个可用区会参与到资源分配。如果input开启容灾或者涉及RTSP_PULL协议切换时有效(会重新分配地址)。
+     */
+    Zones?: Array<string>;
 }
 /**
  * 视频降噪配置
@@ -13200,7 +13216,7 @@ export interface WorkflowTask {
      */
     AiRecognitionResultSet?: Array<AiRecognitionResult>;
     /**
-     * 视频质检任务的执行状态与结果。
+     * 媒体质检任务的执行状态与结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AiQualityControlTaskResult?: ScheduleQualityControlTaskResult;
@@ -13411,11 +13427,11 @@ export interface CreateWatermarkTemplateResponse {
     /**
      * 水印模板唯一标识。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 水印图片地址，仅当 Type 为 image，该字段有效。
      */
-    ImageUrl: string;
+    ImageUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13607,6 +13623,11 @@ export interface LiveActivityResItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LiveRecordTask?: LiveScheduleLiveRecordTaskResult;
+    /**
+     * 媒体质检任务输出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LiveQualityControlTask?: ScheduleQualityControlTaskResult;
 }
 /**
  * 智能擦除结果类型
@@ -13680,7 +13701,7 @@ export interface TerrorismConfigureInfo {
     /**
      * 文本涉敏任务控制参数。
      */
-    OcrReviewInfo: TerrorismOcrReviewTemplateInfo;
+    OcrReviewInfo?: TerrorismOcrReviewTemplateInfo;
 }
 /**
  * 语音涉敏任务控制参数

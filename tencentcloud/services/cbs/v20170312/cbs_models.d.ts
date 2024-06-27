@@ -1914,11 +1914,11 @@ export interface AutoMountConfiguration {
     /**
      * 子机内的挂载点。
      */
-    MountPoint: Array<string>;
+    MountPoint?: Array<string>;
     /**
      * 文件系统类型，支持的有 ext4、xfs。
      */
-    FileSystemType: string;
+    FileSystemType?: string;
 }
 /**
  * CopySnapshotCrossRegions请求参数结构体

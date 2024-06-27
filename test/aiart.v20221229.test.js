@@ -48,6 +48,16 @@ it("aiart.v20221229.QueryTextToImageProJob", async function () {
     }
 })
 
+it("aiart.v20221229.GenerateAvatar", async function () {
+    try {
+       const data = await client.GenerateAvatar({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
     try {
        const data = await client.QueryTrainPortraitModelJob({})

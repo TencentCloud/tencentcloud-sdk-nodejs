@@ -66,12 +66,12 @@ export interface DescribeDevicesPageRsp {
  */
 export interface DeviceDetail {
   /**
-   * 设备ID(只支持32位)
+   * 设备ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
-   * 设备唯一标识符
+   * 设备唯一标识码，在ioa中每个设备有唯一标识码
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mid?: string
@@ -81,12 +81,12 @@ export interface DeviceDetail {
    */
   Name?: string
   /**
-   * 设备所在分组ID(只支持32位)
+   * 设备所在分组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: number
   /**
-   * OS平台(只支持32位)
+   * OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OsType?: number
@@ -96,7 +96,7 @@ export interface DeviceDetail {
    */
   Ip?: string
   /**
-   * 在线状态 2 在线 0，1 离线(只支持32位)
+   * 在线状态，2：在线、0或者1:离线
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OnlineStatus?: number
@@ -121,7 +121,7 @@ export interface DeviceDetail {
    */
   ConnActiveTime?: string
   /**
-   * 设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
+   * 设备是否加锁 ，1：锁定 0或者2：未锁定。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Locked?: number
@@ -151,7 +151,7 @@ export interface DeviceDetail {
    */
   CriticalVulListCount?: number
   /**
-   * 设备名 和Name相同，保留参数
+   * 设备名，和Name相同
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComputerName?: string
@@ -166,12 +166,12 @@ export interface DeviceDetail {
    */
   MacAddr?: string
   /**
-   * 漏洞数(只支持32位)
+   * 漏洞数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VulCount?: number
   /**
-   * 病毒风险数(只支持32位)
+   * 病毒风险数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskCount?: number
@@ -206,7 +206,7 @@ export interface DeviceDetail {
    */
   UserName?: string
   /**
-   * 防火墙状态(只支持32位)
+   * 防火墙状态，不等于0表示开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirewallStatus?: number
@@ -226,7 +226,7 @@ export interface DeviceDetail {
    */
   NGNStrategyVer?: string
   /**
-   * 最近登录账号
+   * 最近登录账户的账号
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IOAUserName?: string
@@ -271,7 +271,7 @@ export interface DeviceDetail {
    */
   AccountGroupName?: string
   /**
-   * 登录账号姓名
+   * 最近登录账户的姓名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountName?: string
@@ -638,39 +638,49 @@ export interface DescribeLocalAccountsResponse {
 }
 
 /**
- * 账户分响应对象集合
+ * 分组名称
  */
 export interface DescribeAccountGroupsData {
   /**
-   * 创建时间
+   * 名称path
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Itime?: string
+  NamePath?: string
   /**
-   * 账户组名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * id patch数组
+   * id patch数组(只支持32位)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdPathArr?: Array<number | bigint>
-  /**
-   * 该分组下用户总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserTotal?: number
   /**
    * 扩展信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: string
   /**
-   * 导入类型
+   * 最后更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImportType?: string
+  Utime?: string
+  /**
+   * 父id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 组织id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgId?: string
+  /**
+   * 账户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
@@ -682,55 +692,55 @@ export interface DescribeAccountGroupsData {
    */
   Source?: number
   /**
-   * miniIAM id
+   * id path
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MiniIamId?: string
+  IdPath?: string
   /**
-   * 组织id
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgId?: string
-  /**
-   * 是否该账户的直接权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReadOnly?: boolean
-  /**
-   * 父id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentId?: number
-  /**
-   * 名称path
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamePath?: string
+  Itime?: string
   /**
    * 父组织id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentOrgId?: string
   /**
-   * id path
+   * 导入类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdPath?: string
+  ImportType?: string
   /**
-   * 自增id
+   * miniIAM id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: number
+  MiniIamId?: string
+  /**
+   * 该分组下用户总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserTotal?: number
   /**
    * 是否叶子节点
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLeaf?: boolean
   /**
-   * 最后更新时间
+   * 是否该账户的直接权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Utime?: string
+  ReadOnly?: boolean
+  /**
+   * 最新一次同步任务的结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestSyncResult?: string
+  /**
+   * 最新一次同步任务的结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestSyncTime?: string
 }
 
 /**

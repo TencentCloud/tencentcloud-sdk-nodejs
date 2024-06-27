@@ -1729,14 +1729,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrialReport", req, cb);
     }
     /**
-     * ExportAttackEvents接口替代
-
-导出网络攻击日志
-     */
-    async ExportAttackLogs(req, cb) {
-        return this.request("ExportAttackLogs", req, cb);
-    }
-    /**
      * 此接口（DescribeUsualLoginPlaces）用于查询常用登录地。
      */
     async DescribeUsualLoginPlaces(req, cb) {

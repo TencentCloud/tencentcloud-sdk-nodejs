@@ -1328,218 +1328,17 @@ export interface UpdateRecordDetails {
 }
 
 /**
- * DescribeCertificateDetail返回参数结构体
+ * DeployCertificateRecordRetry请求参数结构体
  */
-export interface DescribeCertificateDetailResponse {
+export interface DeployCertificateRecordRetryRequest {
   /**
-   * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 待重试部署记录ID
    */
-  OwnerUin?: string
+  DeployRecordId?: number
   /**
-   * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 待重试部署记录详情ID
    */
-  ProjectId?: string
-  /**
-   * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  From?: string
-  /**
-   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateType?: string
-  /**
-   * 证书套餐类型：null = 用户上传证书（没有套餐类型），1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = DNSPod 国密域名型证书，34 = DNSPod 国密域名型多域名证书，35 = DNSPod 国密域名型通配符证书，37 = DNSPod 国密企业型证书，38 = DNSPod 国密企业型多域名证书，39 = DNSPod 国密企业型通配符证书，40 = DNSPod 国密增强型证书，41 = DNSPod 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 颁发者。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductZhName?: string
-  /**
-   * 域名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 备注名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alias?: string
-  /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 状态信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusMsg?: string
-  /**
-   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyType?: string
-  /**
-   * 漏洞扫描状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityStatus?: string
-  /**
-   * 证书生效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertBeginTime?: string
-  /**
-   * 证书失效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertEndTime?: string
-  /**
-   * 证书有效期：单位（月）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValidityPeriod?: string
-  /**
-   * 申请时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InsertTime?: string
-  /**
-   * 订单 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrderId?: string
-  /**
-   * 证书扩展信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateExtra?: CertificateExtra
-  /**
-   * 证书私钥
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificatePrivateKey?: string
-  /**
-   * 证书公钥（即证书内容）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificatePublicKey?: string
-  /**
-   * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvAuthDetail?: DvAuthDetail
-  /**
-   * 漏洞扫描评估报告。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityReport?: string
-  /**
-   * 证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateId?: string
-  /**
-   * 证书类型名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TypeName?: string
-  /**
-   * 状态描述。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusName?: string
-  /**
-   * 证书包含的多个域名（不包含主域名，主域名使用Domain字段）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubjectAltName?: Array<string>
-  /**
-   * 是否为付费证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVip?: boolean
-  /**
-   * 是否为泛域名证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsWildcard?: boolean
-  /**
-   * 是否为 DV 版证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsDv?: boolean
-  /**
-   * 是否启用了漏洞扫描功能。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVulnerability?: boolean
-  /**
-   * 提交的资料信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubmittedData?: SubmittedData
-  /**
-   * 是否可续费。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewAble?: boolean
-  /**
-   * 是否可部署。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deployable?: boolean
-  /**
-   * 关联标签列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tags>
-  /**
-   * 根证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RootCert?: RootCertificates
-  /**
-   * 国密加密证书
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EncryptCert?: string
-  /**
-   * 国密加密私钥
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EncryptPrivateKey?: string
-  /**
-   * 签名证书 SHA1指纹
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertFingerprint?: string
-  /**
-   * 加密证书 SHA1指纹 （国密证书特有）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EncryptCertFingerprint?: string
-  /**
-   * 证书算法
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EncryptAlgorithm?: string
-  /**
-   * DV证书吊销验证值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvRevokeAuthDetail?: Array<DvAuths>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeployRecordDetailId?: number
 }
 
 /**
@@ -1584,6 +1383,196 @@ export interface SupportDownloadType {
    * 是否可以下载根证书
    */
   ROOT?: boolean
+}
+
+/**
+ * DescribeCertificate返回参数结构体
+ */
+export interface DescribeCertificateResponse {
+  /**
+   * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUin?: string
+  /**
+   * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  From?: string
+  /**
+   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateType?: string
+  /**
+   * 证书套餐类型： 2 = TrustAsia TLS RSA CA，3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = Wotrus 国密域名型证书，34 = Wotrus 国密域名型多域名证书，35 = Wotrus 国密域名型通配符证书，37 = Wotrus 国密企业型证书，38 = Wotrus 国密企业型多域名证书，39 = Wotrus 国密企业型通配符证书，40 = Wotrus 国密增强型证书，41 = Wotrus 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书，43 = DNSPod-企业型(OV)SSL证书，44 = DNSPod-企业型(OV)通配符SSL证书，45 = DNSPod-企业型(OV)多域名SSL证书， 46 = DNSPod-增强型(EV)SSL证书，47 = DNSPod-增强型(EV)多域名SSL证书，48 = DNSPod-域名型(DV)SSL证书，49 = DNSPod-域名型(DV)通配符SSL证书，50 = DNSPod-域名型(DV)多域名SSL证书，51 = DNSPod（国密）-企业型(OV)SSL证书，52 = DNSPod（国密）-企业型(OV)通配符SSL证书，53 = DNSPod（国密）-企业型(OV)多域名SSL证书，54 = DNSPod（国密）-域名型(DV)SSL证书，55 = DNSPod（国密）-域名型(DV)通配符SSL证书， 56 = DNSPod（国密）-域名型(DV)多域名SSL证书，57 = SecureSite 企业型专业版多域名(OV Pro)，58 = SecureSite 企业型多域名(OV)，59 = SecureSite 增强型专业版多域名(EV Pro)，60 = SecureSite 增强型多域名(EV)，61 = Geotrust 增强型多域名(EV)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 证书颁发者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductZhName?: string
+  /**
+   * 域名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 备注名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alias?: string
+  /**
+   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 状态信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusMsg?: string
+  /**
+   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyType?: string
+  /**
+   * 漏洞扫描状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityStatus?: string
+  /**
+   * 证书生效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertBeginTime?: string
+  /**
+   * 证书失效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertEndTime?: string
+  /**
+   * 证书有效期：单位(月)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidityPeriod?: string
+  /**
+   * 申请时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InsertTime?: string
+  /**
+   * 订单 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderId?: string
+  /**
+   * 证书扩展信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateExtra?: CertificateExtra
+  /**
+   * DV 认证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvAuthDetail?: DvAuthDetail
+  /**
+   * 漏洞扫描评估报告。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityReport?: string
+  /**
+   * 证书 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateId?: string
+  /**
+   * 证书类型名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageTypeName?: string
+  /**
+   * 状态描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusName?: string
+  /**
+   * 证书包含的多个域名（包含主域名）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubjectAltName?: Array<string>
+  /**
+   * 是否为 VIP 客户。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVip?: boolean
+  /**
+   * 是否为泛域名证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWildcard?: boolean
+  /**
+   * 是否为 DV 版证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDv?: boolean
+  /**
+   * 是否启用了漏洞扫描功能。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVulnerability?: boolean
+  /**
+   * 是否可重颁发证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewAble?: boolean
+  /**
+   * 提交的资料信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubmittedData?: SubmittedData
+  /**
+   * 是否可部署。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deployable?: boolean
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tags>
+  /**
+   * CA证书的所有加密方式	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CAEncryptAlgorithms?: Array<string>
+  /**
+   * CA证书的所有通用名称	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CACommonNames?: Array<string>
+  /**
+   * CA证书所有的到期时间	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CAEndTimes?: Array<string>
+  /**
+   * DV证书吊销验证值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvRevokeAuthDetail?: Array<DvAuths>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2021,193 +2010,47 @@ export interface VodInstanceDetail {
 }
 
 /**
- * DescribeCertificate返回参数结构体
+ * 公司信息
  */
-export interface DescribeCertificateResponse {
+export interface CompanyInfo {
   /**
-   * 用户 UIN。
+   * 公司名称
+   */
+  CompanyName: string
+  /**
+   * 公司ID
+   */
+  CompanyId: number
+  /**
+   * 公司所在国家
+   */
+  CompanyCountry: string
+  /**
+   * 公司所在省份
+   */
+  CompanyProvince: string
+  /**
+   * 公司所在城市
+   */
+  CompanyCity: string
+  /**
+   * 公司所在详细地址
+   */
+  CompanyAddress: string
+  /**
+   * 公司电话
+   */
+  CompanyPhone: string
+  /**
+   * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerUin?: string
+  IdType?: string
   /**
-   * 项目 ID。
+   * ID号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId?: string
-  /**
-   * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  From?: string
-  /**
-   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateType?: string
-  /**
-   * 证书套餐类型： 2 = TrustAsia TLS RSA CA，3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = Wotrus 国密域名型证书，34 = Wotrus 国密域名型多域名证书，35 = Wotrus 国密域名型通配符证书，37 = Wotrus 国密企业型证书，38 = Wotrus 国密企业型多域名证书，39 = Wotrus 国密企业型通配符证书，40 = Wotrus 国密增强型证书，41 = Wotrus 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书，43 = DNSPod-企业型(OV)SSL证书，44 = DNSPod-企业型(OV)通配符SSL证书，45 = DNSPod-企业型(OV)多域名SSL证书， 46 = DNSPod-增强型(EV)SSL证书，47 = DNSPod-增强型(EV)多域名SSL证书，48 = DNSPod-域名型(DV)SSL证书，49 = DNSPod-域名型(DV)通配符SSL证书，50 = DNSPod-域名型(DV)多域名SSL证书，51 = DNSPod（国密）-企业型(OV)SSL证书，52 = DNSPod（国密）-企业型(OV)通配符SSL证书，53 = DNSPod（国密）-企业型(OV)多域名SSL证书，54 = DNSPod（国密）-域名型(DV)SSL证书，55 = DNSPod（国密）-域名型(DV)通配符SSL证书， 56 = DNSPod（国密）-域名型(DV)多域名SSL证书，57 = SecureSite 企业型专业版多域名(OV Pro)，58 = SecureSite 企业型多域名(OV)，59 = SecureSite 增强型专业版多域名(EV Pro)，60 = SecureSite 增强型多域名(EV)，61 = Geotrust 增强型多域名(EV)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageType?: string
-  /**
-   * 证书颁发者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductZhName?: string
-  /**
-   * 域名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 备注名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alias?: string
-  /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 状态信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusMsg?: string
-  /**
-   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyType?: string
-  /**
-   * 漏洞扫描状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityStatus?: string
-  /**
-   * 证书生效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertBeginTime?: string
-  /**
-   * 证书失效时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertEndTime?: string
-  /**
-   * 证书有效期：单位(月)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValidityPeriod?: string
-  /**
-   * 申请时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InsertTime?: string
-  /**
-   * 订单 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrderId?: string
-  /**
-   * 证书扩展信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateExtra?: CertificateExtra
-  /**
-   * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvAuthDetail?: DvAuthDetail
-  /**
-   * 漏洞扫描评估报告。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityReport?: string
-  /**
-   * 证书 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertificateId?: string
-  /**
-   * 证书类型名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PackageTypeName?: string
-  /**
-   * 状态描述。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusName?: string
-  /**
-   * 证书包含的多个域名（包含主域名）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubjectAltName?: Array<string>
-  /**
-   * 是否为 VIP 客户。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVip?: boolean
-  /**
-   * 是否为泛域名证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsWildcard?: boolean
-  /**
-   * 是否为 DV 版证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsDv?: boolean
-  /**
-   * 是否启用了漏洞扫描功能。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsVulnerability?: boolean
-  /**
-   * 是否可重颁发证书。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewAble?: boolean
-  /**
-   * 提交的资料信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubmittedData?: SubmittedData
-  /**
-   * 是否可部署。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deployable?: boolean
-  /**
-   * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tags>
-  /**
-   * CA证书的所有加密方式	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CAEncryptAlgorithms?: Array<string>
-  /**
-   * CA证书的所有通用名称	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CACommonNames?: Array<string>
-  /**
-   * CA证书所有的到期时间	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CAEndTimes?: Array<string>
-  /**
-   * DV证书吊销验证值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DvRevokeAuthDetail?: Array<DvAuths>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  IdNumber?: string
 }
 
 /**
@@ -2260,24 +2103,25 @@ export interface PackageTransferOutInfo {
 }
 
 /**
- * tse实例详情
+ * DeleteCertificates返回参数结构体
  */
-export interface TSEInstanceDetail {
+export interface DeleteCertificatesResponse {
   /**
-   * 网关ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 成功的ID
    */
-  GatewayId?: string
+  Success?: Array<string>
   /**
-   * 网关名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 失败的ID和原因
    */
-  GatewayName?: string
+  Fail?: Array<BatchDeleteFail>
   /**
-   * 网关证书列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 证书ID和异步任务的ID
    */
-  CertificateList?: Array<GatewayCertificate>
+  CertTaskIds?: Array<CertTaskId>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3192,6 +3036,44 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
+ * UploadCertificate请求参数结构体
+ */
+export interface UploadCertificateRequest {
+  /**
+   * 证书内容。
+   */
+  CertificatePublicKey: string
+  /**
+   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+   */
+  CertificatePrivateKey?: string
+  /**
+   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
+   */
+  CertificateType?: string
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+  /**
+   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+   */
+  CertificateUse?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tags>
+  /**
+   * 相同的证书是否允许重复上传
+   */
+  Repeatable?: boolean
+}
+
+/**
  * CLB证书详情
  */
 export interface Certificate {
@@ -3449,47 +3331,19 @@ export interface ReplaceCertificateRequest {
 }
 
 /**
- * 公司信息
+ * 批量删除失败的项
  */
-export interface CompanyInfo {
+export interface BatchDeleteFail {
   /**
-   * 公司名称
-   */
-  CompanyName: string
-  /**
-   * 公司ID
-   */
-  CompanyId: number
-  /**
-   * 公司所在国家
-   */
-  CompanyCountry: string
-  /**
-   * 公司所在省份
-   */
-  CompanyProvince: string
-  /**
-   * 公司所在城市
-   */
-  CompanyCity: string
-  /**
-   * 公司所在详细地址
-   */
-  CompanyAddress: string
-  /**
-   * 公司电话
-   */
-  CompanyPhone: string
-  /**
-   * 类型
+   * 失败的证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdType?: string
+  CertId?: string
   /**
-   * ID号
+   * 失败的原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdNumber?: string
+  Msg?: string
 }
 
 /**
@@ -3688,14 +3542,9 @@ export interface ModifyCertificateProjectRequest {
 }
 
 /**
- * DescribeCertificate请求参数结构体
+ * DeleteCertificates请求参数结构体
  */
-export interface DescribeCertificateRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-}
+export type DeleteCertificatesRequest = null
 
 /**
  * DescribeHostVodInstanceList返回参数结构体
@@ -3995,6 +3844,27 @@ export interface DdosInstanceList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Error?: string
+}
+
+/**
+ * tse实例详情
+ */
+export interface TSEInstanceDetail {
+  /**
+   * 网关ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayName?: string
+  /**
+   * 网关证书列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateList?: Array<GatewayCertificate>
 }
 
 /**
@@ -4567,41 +4437,13 @@ export interface UpdateCertificateInstanceResponse {
 }
 
 /**
- * UploadCertificate请求参数结构体
+ * DescribeCertificate请求参数结构体
  */
-export interface UploadCertificateRequest {
+export interface DescribeCertificateRequest {
   /**
-   * 证书内容。
+   * 证书 ID。
    */
-  CertificatePublicKey: string
-  /**
-   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
-   */
-  CertificatePrivateKey?: string
-  /**
-   * 证书类型，默认 SVR。CA = CA证书，SVR = 服务器证书。
-   */
-  CertificateType?: string
-  /**
-   * 备注名称。
-   */
-  Alias?: string
-  /**
-   * 项目 ID。
-   */
-  ProjectId?: number
-  /**
-   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
-   */
-  CertificateUse?: string
-  /**
-   * 标签列表
-   */
-  Tags?: Array<Tags>
-  /**
-   * 相同的证书是否允许重复上传
-   */
-  Repeatable?: boolean
+  CertificateId: string
 }
 
 /**
@@ -4811,17 +4653,218 @@ export interface DescribeHostApiGatewayInstanceListResponse {
 }
 
 /**
- * DeployCertificateRecordRetry请求参数结构体
+ * DescribeCertificateDetail返回参数结构体
  */
-export interface DeployCertificateRecordRetryRequest {
+export interface DescribeCertificateDetailResponse {
   /**
-   * 待重试部署记录ID
+   * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployRecordId?: number
+  OwnerUin?: string
   /**
-   * 待重试部署记录详情ID
+   * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployRecordDetailId?: number
+  ProjectId?: string
+  /**
+   * 证书来源：trustasia = 亚洲诚信，upload = 用户上传。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  From?: string
+  /**
+   * 证书类型：CA = 客户端证书，SVR = 服务器证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateType?: string
+  /**
+   * 证书套餐类型：null = 用户上传证书（没有套餐类型），1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书，25 = Wotrus 域名型证书，26 = Wotrus 域名型多域名证书，27 = Wotrus 域名型通配符证书，28 = Wotrus 企业型证书，29 = Wotrus 企业型多域名证书，30 = Wotrus 企业型通配符证书，31 = Wotrus 增强型证书，32 = Wotrus 增强型多域名证书，33 = DNSPod 国密域名型证书，34 = DNSPod 国密域名型多域名证书，35 = DNSPod 国密域名型通配符证书，37 = DNSPod 国密企业型证书，38 = DNSPod 国密企业型多域名证书，39 = DNSPod 国密企业型通配符证书，40 = DNSPod 国密增强型证书，41 = DNSPod 国密增强型多域名证书，42 = TrustAsia 域名型通配符多域名证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 颁发者。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductZhName?: string
+  /**
+   * 域名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 备注名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alias?: string
+  /**
+   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 状态信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusMsg?: string
+  /**
+   * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyType?: string
+  /**
+   * 漏洞扫描状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityStatus?: string
+  /**
+   * 证书生效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertBeginTime?: string
+  /**
+   * 证书失效时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertEndTime?: string
+  /**
+   * 证书有效期：单位（月）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidityPeriod?: string
+  /**
+   * 申请时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InsertTime?: string
+  /**
+   * 订单 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderId?: string
+  /**
+   * 证书扩展信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateExtra?: CertificateExtra
+  /**
+   * 证书私钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificatePrivateKey?: string
+  /**
+   * 证书公钥（即证书内容）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificatePublicKey?: string
+  /**
+   * DV 认证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvAuthDetail?: DvAuthDetail
+  /**
+   * 漏洞扫描评估报告。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityReport?: string
+  /**
+   * 证书 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateId?: string
+  /**
+   * 证书类型名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeName?: string
+  /**
+   * 状态描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusName?: string
+  /**
+   * 证书包含的多个域名（不包含主域名，主域名使用Domain字段）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubjectAltName?: Array<string>
+  /**
+   * 是否为付费证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVip?: boolean
+  /**
+   * 是否为泛域名证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWildcard?: boolean
+  /**
+   * 是否为 DV 版证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDv?: boolean
+  /**
+   * 是否启用了漏洞扫描功能。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsVulnerability?: boolean
+  /**
+   * 提交的资料信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubmittedData?: SubmittedData
+  /**
+   * 是否可续费。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewAble?: boolean
+  /**
+   * 是否可部署。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deployable?: boolean
+  /**
+   * 关联标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tags>
+  /**
+   * 根证书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootCert?: RootCertificates
+  /**
+   * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptCert?: string
+  /**
+   * 国密加密私钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptPrivateKey?: string
+  /**
+   * 签名证书 SHA1指纹
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertFingerprint?: string
+  /**
+   * 加密证书 SHA1指纹 （国密证书特有）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptCertFingerprint?: string
+  /**
+   * 证书算法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptAlgorithm?: string
+  /**
+   * DV证书吊销验证值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DvRevokeAuthDetail?: Array<DvAuths>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

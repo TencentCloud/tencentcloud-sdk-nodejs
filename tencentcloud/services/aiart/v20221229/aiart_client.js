@@ -59,6 +59,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryTextToImageProJob", req, cb);
     }
     /**
+     * 百变头像接口将根据输入的人像照片，生成风格百变的头像。
+百变头像默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    async GenerateAvatar(req, cb) {
+        return this.request("GenerateAvatar", req, cb);
+    }
+    /**
      * AI 写真提供 AI 写真形象照的训练与生成能力，分为上传训练图片、训练模型、生成图片3个环节，需要依次调用对应接口。
 每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
 训练模型分为提交任务和查询任务2个接口。

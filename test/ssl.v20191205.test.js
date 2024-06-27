@@ -148,6 +148,16 @@ it("ssl.v20191205.UpdateCertificateRecordRollback", async function () {
     }
 })
 
+it("ssl.v20191205.UpdateCertificateRecordRetry", async function () {
+    try {
+       const data = await client.UpdateCertificateRecordRetry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeHostDdosInstanceList", async function () {
     try {
        const data = await client.DescribeHostDdosInstanceList({})
@@ -388,9 +398,9 @@ it("ssl.v20191205.DescribeHostDeployRecord", async function () {
     }
 })
 
-it("ssl.v20191205.UpdateCertificateRecordRetry", async function () {
+it("ssl.v20191205.DeleteCertificates", async function () {
     try {
-       const data = await client.UpdateCertificateRecordRetry({})
+       const data = await client.DeleteCertificates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

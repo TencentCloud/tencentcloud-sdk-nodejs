@@ -31,6 +31,7 @@ import {
   SubmitTextToImageProJobResponse,
   SubmitTrainPortraitModelJobRequest,
   TextToImageRequest,
+  GenerateAvatarRequest,
   LogoRect,
   Filter,
   SubmitTrainPortraitModelJobResponse,
@@ -38,6 +39,7 @@ import {
   ImageToImageResponse,
   UploadTrainPortraitImagesResponse,
   QueryTextToImageProJobRequest,
+  GenerateAvatarResponse,
   TextToImageResponse,
   SubmitDrawPortraitJobRequest,
 } from "./aiart_models"
@@ -92,6 +94,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryTextToImageProJobResponse) => void
   ): Promise<QueryTextToImageProJobResponse> {
     return this.request("QueryTextToImageProJob", req, cb)
+  }
+
+  /**
+     * 百变头像接口将根据输入的人像照片，生成风格百变的头像。
+百变头像默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async GenerateAvatar(
+    req: GenerateAvatarRequest,
+    cb?: (error: string, rep: GenerateAvatarResponse) => void
+  ): Promise<GenerateAvatarResponse> {
+    return this.request("GenerateAvatar", req, cb)
   }
 
   /**

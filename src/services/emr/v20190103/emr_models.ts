@@ -987,6 +987,117 @@ CLOUD_HSSD 增强型云SSD。
 }
 
 /**
+ * 自动扩缩容基于负载指标的规则
+ */
+export interface LoadAutoScaleStrategy {
+  /**
+   * 规则ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyId?: number
+  /**
+   * 规则名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName?: string
+  /**
+   * 规则生效冷却时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalmDownTime?: number
+  /**
+   * 扩缩容动作，1表示扩容，2表示缩容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleAction?: number
+  /**
+   * 每次规则生效时的扩缩容数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleNum?: number
+  /**
+   * 扩缩容负载指标。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadMetrics?: string
+  /**
+   * 规则元数据记录ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricId?: number
+  /**
+   * 规则统计周期，提供300s,600s,900s
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatisticPeriod?: number
+  /**
+   * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessMethod?: number
+  /**
+   * 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。
+   */
+  TriggerThreshold?: number
+  /**
+   * 条件触发数组。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerConditions?: TriggerConditions
+  /**
+   * 规则优先级，添加时无效，默认为自增。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * 规则状态，1表示启动，3表示禁用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyStatus?: number
+  /**
+   * 规则扩容指定 yarn node label
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  YarnNodeLabel?: string
+  /**
+   * 规则生效的有效时间
+   */
+  PeriodValid?: string
+  /**
+   * 优雅缩容开关
+   */
+  GraceDownFlag?: boolean
+  /**
+   * 优雅缩容等待时间
+   */
+  GraceDownTime?: number
+  /**
+   * 绑定标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 预设配置组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigGroupAssigned?: string
+  /**
+   * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
+"DEFAULT"表示默认方式，与"INSTANCE"意义相同。
+"INSTANCE"表示按照节点计算，默认方式。
+"CPU"表示按照机器的核数计算。
+"MEMORYGB"表示按照机器内存数计算。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MeasureMethod?: string
+  /**
+   * 多指标触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadMetricsConditions?: LoadMetricsConditions
+}
+
+/**
  * ModifyUserManagerPwd请求参数结构体
  */
 export interface ModifyUserManagerPwdRequest {
@@ -1482,6 +1593,10 @@ export interface ModifyAutoScaleStrategyRequest {
    */
   StrategyType: number
   /**
+   * 按负载扩缩容的指标。
+   */
+  LoadAutoScaleStrategies?: Array<LoadAutoScaleStrategy>
+  /**
    * 按时间扩缩容的规则。
    */
   TimeAutoScaleStrategies?: Array<TimeAutoScaleStrategy>
@@ -1921,9 +2036,13 @@ export interface AddMetricScaleStrategyRequest {
    */
   InstanceId: string
   /**
-   * 1表示按负载规则扩容，2表示按时间规则扩容。
+   * 1表示按负载规则扩容，2表示按时间规则扩容。必须填写，并且和下面的规则策略匹配
    */
   StrategyType: number
+  /**
+   * 按负载扩容的规则。
+   */
+  LoadAutoScaleStrategy?: LoadAutoScaleStrategy
   /**
    * 按时间扩缩容的规则。
    */
@@ -2378,6 +2497,82 @@ export interface JobResult {
 }
 
 /**
+ * 资源详情
+ */
+export interface Resource {
+  /**
+   * 节点规格描述，如CVM.SA2。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec: string
+  /**
+   * 存储类型
+取值范围：
+<li>4：表示云SSD。</li>
+<li>5：表示高效云盘。</li>
+<li>6：表示增强型SSD云硬盘。</li>
+<li>11：表示吞吐型云硬盘。</li>
+<li>12：表示极速型SSD云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType: number
+  /**
+   * 磁盘类型
+取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType: string
+  /**
+   * 内存容量,单位为M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize: number
+  /**
+   * CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * 数据盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize: number
+  /**
+   * 系统盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootSize?: number
+  /**
+   * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiDisks?: Array<MultiDisk>
+  /**
+   * 需要绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 规格类型，如S2.MEDIUM8
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 本地盘数量，该字段已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalDiskNum?: number
+  /**
+   * 本地盘数量，如2
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskNum?: number
+}
+
+/**
  * FlowParam流程参数
  */
 export interface FlowParam {
@@ -2397,6 +2592,11 @@ FlowId： 通过FlowId查询
  * DescribeAutoScaleStrategies返回参数结构体
  */
 export interface DescribeAutoScaleStrategiesResponse {
+  /**
+   * 按负载伸缩规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadAutoScaleStrategies?: Array<LoadAutoScaleStrategy>
   /**
    * 按时间伸缩规则
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2704,6 +2904,16 @@ export interface AutoScaleRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryInfo?: string
+  /**
+   * 重试英文描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryEnReason?: string
+  /**
+   * 重试描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryReason?: string
 }
 
 /**
@@ -3686,6 +3896,21 @@ export interface TerminateInstanceRequest {
 }
 
 /**
+ * 规则触发条件
+ */
+export interface TriggerCondition {
+  /**
+   * 条件比较方法，1表示大于，2表示小于，3表示大于等于，4表示小于等于。
+   */
+  CompareMethod: number
+  /**
+   * 条件阈值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Threshold?: number
+}
+
+/**
  * 指标tag
  */
 export interface MetricTags {
@@ -3937,7 +4162,7 @@ export interface TimeAutoScaleStrategy {
    */
   ScaleNum: number
   /**
-   * 规则状态，1表示有效，2表示无效，3表示暂停。
+   * 规则状态，1表示有效，2表示无效，3表示暂停。必须填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyStatus: number
@@ -4001,7 +4226,7 @@ export interface TimeAutoScaleStrategy {
    */
   MaxUse?: number
   /**
-   * 节点部署服务列表。
+   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SoftDeployInfo?: Array<number | bigint>
@@ -4863,7 +5088,7 @@ export interface DescribeInstancesListRequest {
  */
 export interface RepeatStrategy {
   /**
-   * 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。
+   * 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。必须填写
    */
   RepeatType: string
   /**
@@ -4887,7 +5112,7 @@ export interface RepeatStrategy {
    */
   NotRepeat?: NotRepeatStrategy
   /**
-   * 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。
+   * 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。必须填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Expire?: string
@@ -5565,6 +5790,17 @@ export interface UserInfoForUserManager {
 }
 
 /**
+ * 规则触发条件数组
+ */
+export interface TriggerConditions {
+  /**
+   * 规则触发条件数组。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Conditions?: Array<TriggerCondition>
+}
+
+/**
  * DescribeEmrOverviewMetrics请求参数结构体
  */
 export interface DescribeEmrOverviewMetricsRequest {
@@ -5885,79 +6121,14 @@ export interface InquiryPriceScaleOutInstanceRequest {
 }
 
 /**
- * 资源详情
+ * 负载指标
  */
-export interface Resource {
+export interface LoadMetricsConditions {
   /**
-   * 节点规格描述，如CVM.SA2。
+   * 触发规则条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Spec: string
-  /**
-   * 存储类型
-取值范围：
-<li>4：表示云SSD。</li>
-<li>5：表示高效云盘。</li>
-<li>6：表示增强型SSD云硬盘。</li>
-<li>11：表示吞吐型云硬盘。</li>
-<li>12：表示极速型SSD云硬盘。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageType: number
-  /**
-   * 磁盘类型
-取值范围：
-<li>CLOUD_SSD：表示云SSD。</li>
-<li>CLOUD_PREMIUM：表示高效云盘。</li>
-<li>CLOUD_BASIC：表示云硬盘。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskType: string
-  /**
-   * 内存容量,单位为M
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemSize: number
-  /**
-   * CPU核数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cpu: number
-  /**
-   * 数据盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskSize: number
-  /**
-   * 系统盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RootSize?: number
-  /**
-   * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MultiDisks?: Array<MultiDisk>
-  /**
-   * 需要绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 规格类型，如S2.MEDIUM8
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 本地盘数量，该字段已废弃
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LocalDiskNum?: number
-  /**
-   * 本地盘数量，如2
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskNum?: number
+  LoadMetrics?: Array<LoadMetricsCondition>
 }
 
 /**
@@ -6083,54 +6254,34 @@ export interface ModifyResourceTags {
 }
 
 /**
- * 资源详情
+ * 负载指标条件
  */
-export interface ResourceDetail {
+export interface LoadMetricsCondition {
   /**
-   * 规格
+   * 规则统计周期，提供1min,3min,5min。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Spec: string
+  StatisticPeriod?: number
   /**
-   * 规格名
+   * 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecName: string
+  TriggerThreshold?: number
   /**
-   * 硬盘类型
+   * 扩缩容负载指标。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageType: number
+  LoadMetrics?: string
   /**
-   * 硬盘类型
+   * 规则元数据记录ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskType: string
+  MetricId?: number
   /**
-   * 系统盘大小
+   * 触发条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RootSize: number
-  /**
-   * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemSize: number
-  /**
-   * CPU个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cpu: number
-  /**
-   * 硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskSize: number
-  /**
-   * 规格
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType: string
+  Conditions?: Array<TriggerCondition>
 }
 
 /**
@@ -6394,6 +6545,51 @@ export interface AutoScaleResourceConf {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GraceDownFlag?: boolean
+  /**
+   * "CVM"表示规格全部使用CVM相关类型，"POD"表示规格使用容器相关类型,默认为"CVM"。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HardwareType?: string
+  /**
+   * "POSTPAY"表示只使用按量计费，"SPOT_FIRST"表示竞价实例优先，只有HardwareType为"HOST"时支持竞价实例优先，"POD"只支持纯按量计费。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: string
+  /**
+   * 竞价实例优先的场景下，按量计费资源数量的最低百分比，整数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostPayPercentMin?: number
+  /**
+   * 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；默认不勾选（0），勾选（1)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChangeToPod?: number
+  /**
+   * 伸缩组名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  YarnNodeLabel?: string
+  /**
+   * 伸缩组状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupStatus?: number
+  /**
+   * 并行伸缩 0关闭；1开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Parallel?: number
+  /**
+   * 是否支持MNode
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableMNode?: number
 }
 
 /**
@@ -6450,6 +6646,57 @@ export interface StrategyConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Args?: Array<Arg>
+}
+
+/**
+ * 资源详情
+ */
+export interface ResourceDetail {
+  /**
+   * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec: string
+  /**
+   * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecName: string
+  /**
+   * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType: number
+  /**
+   * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType: string
+  /**
+   * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootSize: number
+  /**
+   * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize: number
+  /**
+   * CPU个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize: number
+  /**
+   * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType: string
 }
 
 /**
@@ -6820,6 +7067,10 @@ export interface DescribeAutoScaleRecordsRequest {
    * 分页参数。最大支持100
    */
   Limit?: number
+  /**
+   * 表示是自动(0)还是托管伸缩(1)
+   */
+  RecordSource?: number
 }
 
 /**

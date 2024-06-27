@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCertificateRecordRollback", req, cb);
     }
     /**
+     * 云资源更新重试部署记录
+     */
+    async UpdateCertificateRecordRetry(req, cb) {
+        return this.request("UpdateCertificateRecordRetry", req, cb);
+    }
+    /**
      * 查询证书ddos云资源部署实例列表
      */
     async DescribeHostDdosInstanceList(req, cb) {
@@ -250,10 +256,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostDeployRecord", req, cb);
     }
     /**
-     * 云资源更新重试部署记录
+     * 批量删除证书，删除证书前支持查询证书是否关联了腾讯云云资源 （需自定义配置参数，参数名称：IsSync）
      */
-    async UpdateCertificateRecordRetry(req, cb) {
-        return this.request("UpdateCertificateRecordRetry", req, cb);
+    async DeleteCertificates(req, cb) {
+        return this.request("DeleteCertificates", req, cb);
     }
     /**
      * 本接口（RevokeCertificate）用于吊销证书。

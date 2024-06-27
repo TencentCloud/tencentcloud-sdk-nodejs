@@ -2643,6 +2643,10 @@ export interface BizLicenseOCRRequest {
      * 是否返回告警码，默认为false
      */
     EnableCopyWarn?: boolean;
+    /**
+     * 是否返回自动拼接的有效期，默认为true
+     */
+    EnablePeriodComplete?: boolean;
 }
 /**
  * MixedInvoiceDetect返回参数结构体
@@ -4530,6 +4534,10 @@ export interface TrainTicket {
      * 是否有退票费标识（0：没有，1：有）
      */
     RefundMark?: number;
+    /**
+     * 是否有改签费标识（0：没有，1：有）
+     */
+    TicketChangeMark?: number;
 }
 /**
  * TextDetect请求参数结构体

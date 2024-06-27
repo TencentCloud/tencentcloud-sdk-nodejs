@@ -59,9 +59,10 @@ import {
   DescribeHostLiveInstanceListRequest,
   DescribeHostDdosInstanceListResponse,
   UpdateRecordDetails,
-  DescribeCertificateDetailResponse,
+  DeployCertificateRecordRetryRequest,
   ModifyCertificateResubmitRequest,
   SupportDownloadType,
+  DescribeCertificateResponse,
   DownloadCertificateRequest,
   DescribeHostTkeInstanceListResponse,
   DescribeCertificateBindResourceTaskResultRequest,
@@ -80,9 +81,9 @@ import {
   UpdateSyncProgress,
   DescribeManagersResponse,
   VodInstanceDetail,
-  DescribeCertificateResponse,
+  CompanyInfo,
   PackageTransferOutInfo,
-  TSEInstanceDetail,
+  DeleteCertificatesResponse,
   DescribeDeleteCertificatesTaskResultResponse,
   ResourceTypeRegions,
   DeleteManagerRequest,
@@ -117,6 +118,7 @@ import {
   RevokeCertificateRequest,
   PreAuditInfo,
   DescribeManagerDetailResponse,
+  UploadCertificateRequest,
   Certificate,
   CreateCertificateByPackageRequest,
   CommitCertificateInformationRequest,
@@ -124,7 +126,7 @@ import {
   DescribeHostDeployRecordDetailRequest,
   UpdateCertificateInstanceRequest,
   ReplaceCertificateRequest,
-  CompanyInfo,
+  BatchDeleteFail,
   TkeSecretDetail,
   DescribeHostDeployRecordResponse,
   Tags,
@@ -135,7 +137,7 @@ import {
   RevokeCertificateResponse,
   DeployedResources,
   ModifyCertificateProjectRequest,
-  DescribeCertificateRequest,
+  DeleteCertificatesRequest,
   DescribeHostVodInstanceListResponse,
   WafInstanceList,
   ModifyCertificatesExpiringNotificationSwitchRequest,
@@ -151,6 +153,7 @@ import {
   DescribeHostApiGatewayInstanceListRequest,
   TCBAccessService,
   DdosInstanceList,
+  TSEInstanceDetail,
   DescribeDownloadCertificateUrlRequest,
   SubmittedData,
   DeployCertificateRecordRollbackResponse,
@@ -172,7 +175,7 @@ import {
   ModifyCertificateResubmitResponse,
   SubmitAuditManagerResponse,
   UpdateCertificateInstanceResponse,
-  UploadCertificateRequest,
+  DescribeCertificateRequest,
   OperationLog,
   ModifyCertificateAliasResponse,
   ApplyCertificateRequest,
@@ -180,7 +183,7 @@ import {
   Error,
   UpdateRecordInfo,
   DescribeHostApiGatewayInstanceListResponse,
-  DeployCertificateRecordRetryRequest,
+  DescribeCertificateDetailResponse,
   DescribeCertificateBindResourceTaskResultResponse,
   ProjectInfo,
   DescribeHostTeoInstanceListRequest,
@@ -343,6 +346,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateCertificateRecordRollbackResponse) => void
   ): Promise<UpdateCertificateRecordRollbackResponse> {
     return this.request("UpdateCertificateRecordRollback", req, cb)
+  }
+
+  /**
+   * 云资源更新重试部署记录
+   */
+  async UpdateCertificateRecordRetry(
+    req: UpdateCertificateRecordRetryRequest,
+    cb?: (error: string, rep: UpdateCertificateRecordRetryResponse) => void
+  ): Promise<UpdateCertificateRecordRetryResponse> {
+    return this.request("UpdateCertificateRecordRetry", req, cb)
   }
 
   /**
@@ -586,13 +599,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云资源更新重试部署记录
+   * 批量删除证书，删除证书前支持查询证书是否关联了腾讯云云资源 （需自定义配置参数，参数名称：IsSync）
    */
-  async UpdateCertificateRecordRetry(
-    req: UpdateCertificateRecordRetryRequest,
-    cb?: (error: string, rep: UpdateCertificateRecordRetryResponse) => void
-  ): Promise<UpdateCertificateRecordRetryResponse> {
-    return this.request("UpdateCertificateRecordRetry", req, cb)
+  async DeleteCertificates(
+    req?: DeleteCertificatesRequest,
+    cb?: (error: string, rep: DeleteCertificatesResponse) => void
+  ): Promise<DeleteCertificatesResponse> {
+    return this.request("DeleteCertificates", req, cb)
   }
 
   /**

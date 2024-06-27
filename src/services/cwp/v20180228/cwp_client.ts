@@ -88,7 +88,7 @@ import {
   DescribeRansomDefenseStrategyListRequest,
   DescribeMachineClearHistoryRequest,
   DescribeServersAndRiskAndFirstInfoResponse,
-  ExportAttackLogsResponse,
+  ModifyMalwareWhiteListRequest,
   DescribeSecurityProtectionStatResponse,
   DescribeAssetJarListRequest,
   DescribeJavaMemShellPluginInfoRequest,
@@ -369,7 +369,6 @@ import {
   DescribeVulListRequest,
   DescribeLicenseBindListResponse,
   BaselineInfo,
-  ModifyMalwareWhiteListRequest,
   DescribeWebHookReceiverUsageResponse,
   AssetAppBaseInfo,
   DescribeJavaMemShellInfoRequest,
@@ -451,7 +450,6 @@ import {
   DeleteMachineClearHistoryRequest,
   DescribeLogHistogramResponse,
   DescribeUsersConfigRequest,
-  ExportAttackLogsRequest,
   DeleteMachineRequest,
   DescribeAssetWebLocationListResponse,
   DescribeAssetDiskListResponse,
@@ -4151,18 +4149,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrialReportResponse) => void
   ): Promise<DescribeTrialReportResponse> {
     return this.request("DescribeTrialReport", req, cb)
-  }
-
-  /**
-     * ExportAttackEvents接口替代
-
-导出网络攻击日志
-     */
-  async ExportAttackLogs(
-    req: ExportAttackLogsRequest,
-    cb?: (error: string, rep: ExportAttackLogsResponse) => void
-  ): Promise<ExportAttackLogsResponse> {
-    return this.request("ExportAttackLogs", req, cb)
   }
 
   /**

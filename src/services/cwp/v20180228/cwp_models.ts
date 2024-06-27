@@ -1829,21 +1829,45 @@ export interface DescribeServersAndRiskAndFirstInfoResponse {
 }
 
 /**
- * ExportAttackLogs返回参数结构体
+ * ModifyMalwareWhiteList请求参数结构体
  */
-export interface ExportAttackLogsResponse {
+export interface ModifyMalwareWhiteListRequest {
   /**
-   * 已废弃
+   * 白名单模式； 0MD5白名单，1自定义
    */
-  DownloadUrl?: string
+  Mode: number
   /**
-   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
+   * 规则唯一ID
    */
-  TaskId?: string
+  Id: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * quuid 列表
    */
-  RequestId?: string
+  QuuidList?: Array<string>
+  /**
+   * 是否全部主机； 0否，1是。
+   */
+  IsGlobal?: number
+  /**
+   * 匹配模式 ；0 精确匹配，1模糊匹配(废弃)
+   */
+  MatchType?: number
+  /**
+   * 文件名称(正则)；长度不超过200个
+   */
+  FileName?: Array<string>
+  /**
+   * 文件目录(正则)；长度不超过200个，内容base64转义
+   */
+  FileDirectory?: Array<string>
+  /**
+   * 文件后缀；长度不超过200个，内容base64转义（废弃）
+   */
+  FileExtension?: Array<string>
+  /**
+   * MD5列表
+   */
+  Md5List?: Array<string>
 }
 
 /**
@@ -8353,48 +8377,6 @@ export interface BaselineInfo {
 }
 
 /**
- * ModifyMalwareWhiteList请求参数结构体
- */
-export interface ModifyMalwareWhiteListRequest {
-  /**
-   * 白名单模式； 0MD5白名单，1自定义
-   */
-  Mode: number
-  /**
-   * 规则唯一ID
-   */
-  Id: number
-  /**
-   * quuid 列表
-   */
-  QuuidList?: Array<string>
-  /**
-   * 是否全部主机； 0否，1是。
-   */
-  IsGlobal?: number
-  /**
-   * 匹配模式 ；0 精确匹配，1模糊匹配(废弃)
-   */
-  MatchType?: number
-  /**
-   * 文件名称(正则)；长度不超过200个
-   */
-  FileName?: Array<string>
-  /**
-   * 文件目录(正则)；长度不超过200个，内容base64转义
-   */
-  FileDirectory?: Array<string>
-  /**
-   * 文件后缀；长度不超过200个，内容base64转义（废弃）
-   */
-  FileExtension?: Array<string>
-  /**
-   * MD5列表
-   */
-  Md5List?: Array<string>
-}
-
-/**
  * DescribeWebHookReceiverUsage返回参数结构体
  */
 export interface DescribeWebHookReceiverUsageResponse {
@@ -10121,31 +10103,6 @@ export interface DescribeUsersConfigRequest {
 <li>license_monitor 授权监控配置 0 关闭, 1开启</li>
    */
   ConfigName: string
-}
-
-/**
- * ExportAttackLogs请求参数结构体
- */
-export interface ExportAttackLogsRequest {
-  /**
-   * 过滤条件。
-<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
-<li>VulType - String 威胁类型 - 是否必填: 否</li>
-<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
-<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
-<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
-<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
-   */
-  Filters?: Array<Filters>
-  /**
-   * 主机安全客户端ID
-   */
-  Uuid?: string
-  /**
-   * 云主机机器ID
-   */
-  Quuid?: string
 }
 
 /**
