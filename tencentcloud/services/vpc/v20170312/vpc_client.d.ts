@@ -911,7 +911,6 @@ export declare class Client extends AbstractClient {
     DeleteRoutes(req: DeleteRoutesRequest, cb?: (error: string, rep: DeleteRoutesResponse) => void): Promise<DeleteRoutesResponse>;
     /**
      * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
-
      */
     ModifyDirectConnectGatewayAttribute(req: ModifyDirectConnectGatewayAttributeRequest, cb?: (error: string, rep: ModifyDirectConnectGatewayAttributeResponse) => void): Promise<ModifyDirectConnectGatewayAttributeResponse>;
     /**

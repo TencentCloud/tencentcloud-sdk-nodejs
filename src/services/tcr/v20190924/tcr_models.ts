@@ -2993,6 +2993,10 @@ export interface DescribeNamespacesRequest {
   All?: boolean
   /**
    * 过滤条件
+- 按照【标签】过滤
+   Name: Tags
+   Value:   tagKey:tagVal
+
    */
   Filters?: Array<Filter>
   /**

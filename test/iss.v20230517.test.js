@@ -298,6 +298,16 @@ it("iss.v20230517.DescribeUserDevice", async function () {
     }
 })
 
+it("iss.v20230517.QueryForbidPlayChannelList", async function () {
+    try {
+       const data = await client.QueryForbidPlayChannelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.DescribeAITaskResult", async function () {
     try {
        const data = await client.DescribeAITaskResult({})
@@ -551,6 +561,16 @@ it("iss.v20230517.AddRecordTemplate", async function () {
 it("iss.v20230517.AddRecordPlan", async function () {
     try {
        const data = await client.AddRecordPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.SetForbidPlayChannels", async function () {
+    try {
+       const data = await client.SetForbidPlayChannels({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -148,7 +148,7 @@ export declare class Client extends AbstractClient {
      */
     DeployCertificateRecordRetry(req: DeployCertificateRecordRetryRequest, cb?: (error: string, rep: DeployCertificateRecordRetryResponse) => void): Promise<DeployCertificateRecordRetryResponse>;
     /**
-     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
+     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos
      */
     DescribeCertificateBindResourceTaskResult(req: DescribeCertificateBindResourceTaskResultRequest, cb?: (error: string, rep: DescribeCertificateBindResourceTaskResultResponse) => void): Promise<DescribeCertificateBindResourceTaskResultResponse>;
     /**
@@ -212,7 +212,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCertificateByPackage(req: CreateCertificateByPackageRequest, cb?: (error: string, rep: CreateCertificateByPackageResponse) => void): Promise<CreateCertificateByPackageResponse>;
     /**
-     * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口
+     * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口
      */
     CreateCertificateBindResourceSyncTask(req: CreateCertificateBindResourceSyncTaskRequest, cb?: (error: string, rep: CreateCertificateBindResourceSyncTaskResponse) => void): Promise<CreateCertificateBindResourceSyncTaskResponse>;
     /**

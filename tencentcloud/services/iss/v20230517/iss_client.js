@@ -197,6 +197,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserDevice", req, cb);
     }
     /**
+     * 查询禁播通道列表
+     */
+    async QueryForbidPlayChannelList(req, cb) {
+        return this.request("QueryForbidPlayChannelList", req, cb);
+    }
+    /**
      * 获取AI任务识别结果
      */
     async DescribeAITaskResult(req, cb) {
@@ -351,6 +357,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddRecordPlan(req, cb) {
         return this.request("AddRecordPlan", req, cb);
+    }
+    /**
+     * 禁止主、子账号对视频通道的实况预览
+     */
+    async SetForbidPlayChannels(req, cb) {
+        return this.request("SetForbidPlayChannels", req, cb);
     }
     /**
      * 用于查询组织目录下的未添加到实时上云计划中的通道数量

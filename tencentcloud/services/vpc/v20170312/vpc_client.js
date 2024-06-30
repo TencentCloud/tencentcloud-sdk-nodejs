@@ -1309,7 +1309,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
-
      */
     async ModifyDirectConnectGatewayAttribute(req, cb) {
         return this.request("ModifyDirectConnectGatewayAttribute", req, cb);

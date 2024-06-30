@@ -49,8 +49,6 @@ export interface ChannelCreateFlowRemindsResponse {
 1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）
 2. 表单域(FIELD)定位方式
 3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找
-可以参考官网说明
-https://cloud.tencent.com/document/product/1323/78346#component-.E4.B8.89.E7.A7.8D.E5.AE.9A.E4.BD.8D.E6.96.B9.E5.BC.8F.E8.AF.B4.E6.98.8E
  */
 export interface Component {
     /**
@@ -442,7 +440,10 @@ export interface Department {
  */
 export interface CreateLegalSealQrCodeResponse {
     /**
-     * 二维码图片base64值
+     * 二维码图片base64值，二维码有效期7天（604800秒）
+  
+  二维码图片的样式如下图：
+  ![image](https://qcloudimg.tencent-cloud.cn/raw/7ec2478761158a35a9c623882839a5df.png)
      */
     QrcodeBase64?: string;
     /**
@@ -3729,7 +3730,7 @@ export interface ChannelDescribeOrganizationSealsRequest {
      */
     Agent: Agent;
     /**
-     * 返回最大数量，最大为100
+     * 指定分页每页返回的数据条数，单页最大支持 100。
      */
     Limit: number;
     /**
@@ -3737,22 +3738,20 @@ export interface ChannelDescribeOrganizationSealsRequest {
      */
     Offset?: number;
     /**
-     * 查询信息类型
-  支持的值如下：
-  <ul><li>0-默认，不返回授权用户信息</li>
-  <li>1-返回授权用户信息</li>
-  </ul>
+     * 查询授权用户信息类型，取值如下：
+  
+  <ul> <li><b>0</b>：（默认）不返回授权用户信息</li> <li><b>1</b>：返回授权用户的信息</li> </ul>
      */
     InfoType?: number;
     /**
-     * 印章id（没有输入返回所有）
+     * 印章id，是否查询特定的印章（没有输入返回所有）
   
   注:  `没有输入返回所有记录，最大返回100条。`
      */
     SealId?: string;
     /**
      * 电子印章类型 , 可选类型如下:
-  <ul><li>**OFFICIAL**: (默认)公章</li>
+  <ul><li>**OFFICIAL**: 公章</li>
   <li>**CONTRACT**: 合同专用章;</li>
   <li>**FINANCE**: 财务专用章;</li>
   <li>**PERSONNEL**: 人事专用章</li>
@@ -3763,7 +3762,10 @@ export interface ChannelDescribeOrganizationSealsRequest {
      */
     SealTypes?: Array<string>;
     /**
-     * 查询的印章状态列表。 <ul> <li>空，只查询启用状态的印章；</li> <li>ALL，查询所有状态的印章；</li> <li>CHECKING，查询待审核的印章；</li> <li>SUCCESS，查询启用状态的印章；</li> <li>FAIL，查询印章审核拒绝的印章；</li> <li>DISABLE，查询已停用的印章；</li> <li>STOPPED，查询已终止的印章；</li> <li>VOID，查询已作废的印章；</li> <li>INVALID，查询已失效的印章；</li> </ul>
+     *
+  需查询的印章状态列表。
+  
+  <ul> <li>空，()仅查询启用状态的印章；</li> <li><strong>ALL</strong>，查询所有状态的印章；</li> <li><strong>CHECKING</strong>，查询待审核的印章；</li> <li><strong>SUCCESS</strong>，查询启用状态的印章；</li> <li><strong>FAIL</strong>，查询印章审核拒绝的印章；</li> <li><strong>DISABLE</strong>，查询已停用的印章；</li> <li><strong>STOPPED</strong>，查询已终止的印章；</li> <li><strong>VOID</strong>，查询已作废的印章；</li> <li><strong>INVALID</strong>，查询已失效的印章。</li> </ul>
      */
     SealStatuses?: Array<string>;
 }
@@ -5834,7 +5836,7 @@ export interface ChannelDisableUserAutoSignRequest {
  */
 export interface ChannelDescribeOrganizationSealsResponse {
     /**
-     * 在设置了SealId时返回0或1，没有设置时返回公司的总印章数量，可能比返回的印章数组数量多
+     * 在设定了SealId时，返回值为0或1；若未设定SealId，则返回公司的总印章数量
      */
     TotalCount?: number;
     /**

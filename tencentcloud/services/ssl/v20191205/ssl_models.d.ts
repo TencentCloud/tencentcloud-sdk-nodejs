@@ -3122,7 +3122,7 @@ export interface UpdateCertificateInstanceRequest {
      */
     OldCertificateId: string;
     /**
-     * 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse
+     * 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse、cos
      */
     ResourceTypes: Array<string>;
     /**
@@ -4783,6 +4783,11 @@ export interface BindResourceRegionResult {
      * 关联资源总数
      */
     TotalCount?: number;
+    /**
+     * 是否查询异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
 }
 /**
  * tke实例详情

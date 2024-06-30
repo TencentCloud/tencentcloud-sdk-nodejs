@@ -22,9 +22,10 @@ import {
   GetEmailTemplateRequest,
   ListSendTasksResponse,
   CreateReceiverResponse,
-  CreateEmailTemplateRequest,
+  CreateCustomBlacklistRequest,
   ListEmailAddressResponse,
   ListEmailAddressRequest,
+  UpdateCustomBlackListResponse,
   UpdateEmailSmtpPassWordResponse,
   ListReceiversRequest,
   GetEmailIdentityResponse,
@@ -33,52 +34,60 @@ import {
   Template,
   ListSendTasksRequest,
   GetSendEmailStatusResponse,
-  SendEmailRequest,
+  TemplatesMetadata,
+  ReceiverDetail,
   DeleteBlackListRequest,
   EmailSender,
   BatchSendEmailResponse,
   DeleteEmailIdentityRequest,
+  Volume,
   UpdateEmailIdentityRequest,
   GetEmailIdentityRequest,
   DeleteEmailIdentityResponse,
   GetStatisticsReportRequest,
+  CreateCustomBlacklistResponse,
   CreateReceiverRequest,
   SendTaskData,
-  TemplatesMetadata,
+  ListReceiverDetailsResponse,
   DeleteEmailTemplateResponse,
-  Volume,
+  UpdateCustomBlackListRequest,
   CreateEmailIdentityRequest,
+  ListCustomBlacklistRequest,
   UpdateEmailSmtpPassWordRequest,
   ReceiverData,
   UpdateEmailIdentityResponse,
-  DeleteEmailTemplateRequest,
+  CreateEmailTemplateRequest,
   DeleteBlackListResponse,
-  ListReceiverDetailsResponse,
+  DeleteCustomBlackListRequest,
   UpdateEmailTemplateRequest,
+  ListCustomBlacklistResponse,
   SendEmailStatus,
   ListEmailTemplatesRequest,
   CreateReceiverDetailWithDataResponse,
   ReceiverInputData,
   CreateReceiverDetailResponse,
-  ReceiverDetail,
+  DeleteReceiverResponse,
   ListEmailTemplatesResponse,
   SendEmailResponse,
+  SendEmailRequest,
   ListBlackEmailAddressResponse,
   GetSendEmailStatusRequest,
   Simple,
   DeleteReceiverRequest,
   ListEmailIdentitiesResponse,
-  DeleteReceiverResponse,
+  DeleteEmailTemplateRequest,
   TemplateContent,
   GetStatisticsReportResponse,
   DeleteEmailAddressRequest,
+  BlackAddressDetail,
   EmailIdentity,
   BlackEmailAddress,
-  CycleEmailParam,
   DeleteEmailAddressResponse,
+  CycleEmailParam,
   CreateEmailIdentityResponse,
   ListReceiverDetailsRequest,
   CreateEmailAddressRequest,
+  DeleteCustomBlackListResponse,
   CreateReceiverDetailRequest,
   CreateEmailTemplateResponse,
   ListReceiversResponse,
@@ -181,13 +190,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+   * 更新自定义黑名单
    */
-  async GetStatisticsReport(
-    req: GetStatisticsReportRequest,
-    cb?: (error: string, rep: GetStatisticsReportResponse) => void
-  ): Promise<GetStatisticsReportResponse> {
-    return this.request("GetStatisticsReport", req, cb)
+  async UpdateCustomBlackList(
+    req: UpdateCustomBlackListRequest,
+    cb?: (error: string, rep: UpdateCustomBlackListResponse) => void
+  ): Promise<UpdateCustomBlackListResponse> {
+    return this.request("UpdateCustomBlackList", req, cb)
+  }
+
+  /**
+   * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+   */
+  async ListBlackEmailAddress(
+    req: ListBlackEmailAddressRequest,
+    cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
+  ): Promise<ListBlackEmailAddressResponse> {
+    return this.request("ListBlackEmailAddress", req, cb)
   }
 
   /**
@@ -272,6 +291,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加自定义黑名单
+   */
+  async CreateCustomBlacklist(
+    req: CreateCustomBlacklistRequest,
+    cb?: (error: string, rep: CreateCustomBlacklistResponse) => void
+  ): Promise<CreateCustomBlacklistResponse> {
+    return this.request("CreateCustomBlacklist", req, cb)
+  }
+
+  /**
    * 删除发信模板
    */
   async DeleteEmailTemplate(
@@ -312,6 +341,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除自定义黑名单邮箱地址
+   */
+  async DeleteCustomBlackList(
+    req: DeleteCustomBlackListRequest,
+    cb?: (error: string, rep: DeleteCustomBlackListResponse) => void
+  ): Promise<DeleteCustomBlackListResponse> {
+    return this.request("DeleteCustomBlackList", req, cb)
+  }
+
+  /**
    * 邮箱被拉黑之后，用户如果确认收件邮箱有效或者已经处于激活状态，可以从腾讯云地址库中删除该黑名单之后继续投递。
    */
   async DeleteBlackList(
@@ -332,13 +371,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+   * 获取自定义黑名单列表
    */
-  async ListBlackEmailAddress(
-    req: ListBlackEmailAddressRequest,
-    cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
-  ): Promise<ListBlackEmailAddressResponse> {
-    return this.request("ListBlackEmailAddress", req, cb)
+  async ListCustomBlacklist(
+    req: ListCustomBlacklistRequest,
+    cb?: (error: string, rep: ListCustomBlacklistResponse) => void
+  ): Promise<ListCustomBlacklistResponse> {
+    return this.request("ListCustomBlacklist", req, cb)
+  }
+
+  /**
+   * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+   */
+  async GetStatisticsReport(
+    req: GetStatisticsReportRequest,
+    cb?: (error: string, rep: GetStatisticsReportResponse) => void
+  ): Promise<GetStatisticsReportResponse> {
+    return this.request("GetStatisticsReport", req, cb)
   }
 
   /**

@@ -27,13 +27,14 @@ import {
   DescribeDevicePresetData,
   ListSubTasksRequest,
   DescribeGatewayMonitor,
-  DescribeAITaskResultRequest,
+  AddRecordBackupPlanResponse,
   DescribeCNAMERequest,
   DescribeVideoDownloadUrlData,
   ControlRecordTimelineRequest,
   DeleteOrganizationRequest,
   OperTimeSlot,
   CheckDomainResponse,
+  SetForbidPlayChannelsRequest,
   SubTaskData,
   DescribeCNAMEResponse,
   UpdateOrganizationResponse,
@@ -92,7 +93,7 @@ import {
   DescribeStreamAuthData,
   AddRecordTemplateResponse,
   ListRecordPlansRequest,
-  AddRecordBackupPlanResponse,
+  DescribeAITaskResultRequest,
   SnapshotConfig,
   ListSubTasksResponse,
   ListAITasksRequest,
@@ -160,6 +161,7 @@ import {
   UpdateUserDeviceResponse,
   GatewaysData,
   ListGatewayDevicesData,
+  ListForbidplayChannelsData,
   DescribeDevicePresetRequest,
   ListGatewaysResponse,
   AddRecordBackupPlanData,
@@ -172,6 +174,7 @@ import {
   DescribeGatewayProtocolRequest,
   AddAITaskRequest,
   DescribeGatewayProtocolData,
+  QueryForbidPlayChannelListResponse,
   DescribeVideoDownloadUrlRequest,
   DescribeGatewayVersionResponse,
   ListGatewaysRequest,
@@ -189,6 +192,7 @@ import {
   BitRateInfo,
   PlayRecordRequest,
   UpdateRecordBackupTemplateModify,
+  QueryForbidPlayChannelListRequest,
   CheckDomainRequest,
   PlateContent,
   UpgradeGatewayRequest,
@@ -212,6 +216,7 @@ import {
   DeleteRecordRetrieveTaskRequest,
   DescribeRecordBackupPlanData,
   DescribeRecordSliceResponse,
+  ChannelAttrInfo,
   UpdateRecordPlanResponse,
   DescribeTaskResponse,
   DescribeGatewayVersion,
@@ -222,6 +227,7 @@ import {
   AddAITaskResponse,
   DescribeDeviceRegion,
   RecordPlanChannelInfo,
+  SetForbidPlayChannelsResponse,
   UpdateRecordTemplateRequest,
   DeleteRecordBackupTemplateRequest,
   ListGatewayDevicesRequest,
@@ -270,6 +276,7 @@ import {
   UpdateRecordBackupTemplateData,
   UpdateRecordBackupPlanData,
   AddDeviceData,
+  SetForbidplayChannelParam,
 } from "./iss_models"
 
 /**
@@ -563,6 +570,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询禁播通道列表
+   */
+  async QueryForbidPlayChannelList(
+    req: QueryForbidPlayChannelListRequest,
+    cb?: (error: string, rep: QueryForbidPlayChannelListResponse) => void
+  ): Promise<QueryForbidPlayChannelListResponse> {
+    return this.request("QueryForbidPlayChannelList", req, cb)
+  }
+
+  /**
    * 获取AI任务识别结果
    */
   async DescribeAITaskResult(
@@ -820,6 +837,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddRecordPlanResponse) => void
   ): Promise<AddRecordPlanResponse> {
     return this.request("AddRecordPlan", req, cb)
+  }
+
+  /**
+   * 禁止主、子账号对视频通道的实况预览
+   */
+  async SetForbidPlayChannels(
+    req: SetForbidPlayChannelsRequest,
+    cb?: (error: string, rep: SetForbidPlayChannelsResponse) => void
+  ): Promise<SetForbidPlayChannelsResponse> {
+    return this.request("SetForbidPlayChannels", req, cb)
   }
 
   /**

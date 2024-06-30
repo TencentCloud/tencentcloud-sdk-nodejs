@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateEmailTemplateRequest, ListEmailAddressResponse, ListEmailAddressRequest, UpdateEmailSmtpPassWordResponse, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, SendEmailRequest, DeleteBlackListRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, CreateReceiverRequest, DeleteEmailTemplateResponse, CreateEmailIdentityRequest, UpdateEmailSmtpPassWordRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, ListReceiverDetailsResponse, UpdateEmailTemplateRequest, ListEmailTemplatesRequest, CreateReceiverDetailWithDataResponse, CreateReceiverDetailResponse, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, DeleteReceiverRequest, ListEmailIdentitiesResponse, DeleteReceiverResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, ListReceiverDetailsRequest, CreateEmailAddressRequest, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, CreateReceiverDetailWithDataRequest, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
+import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateCustomBlacklistRequest, ListEmailAddressResponse, ListEmailAddressRequest, UpdateCustomBlackListResponse, UpdateEmailSmtpPassWordResponse, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, DeleteBlackListRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, CreateCustomBlacklistResponse, CreateReceiverRequest, ListReceiverDetailsResponse, DeleteEmailTemplateResponse, UpdateCustomBlackListRequest, CreateEmailIdentityRequest, ListCustomBlacklistRequest, UpdateEmailSmtpPassWordRequest, UpdateEmailIdentityResponse, CreateEmailTemplateRequest, DeleteBlackListResponse, DeleteCustomBlackListRequest, UpdateEmailTemplateRequest, ListCustomBlacklistResponse, ListEmailTemplatesRequest, CreateReceiverDetailWithDataResponse, CreateReceiverDetailResponse, DeleteReceiverResponse, ListEmailTemplatesResponse, SendEmailResponse, SendEmailRequest, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, DeleteReceiverRequest, ListEmailIdentitiesResponse, DeleteEmailTemplateRequest, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, ListReceiverDetailsRequest, CreateEmailAddressRequest, DeleteCustomBlackListResponse, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, CreateReceiverDetailWithDataRequest, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
 /**
  * ses client
  * @class
@@ -40,9 +40,13 @@ export declare class Client extends AbstractClient {
      */
     GetEmailTemplate(req: GetEmailTemplateRequest, cb?: (error: string, rep: GetEmailTemplateResponse) => void): Promise<GetEmailTemplateResponse>;
     /**
-     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+     * 更新自定义黑名单
      */
-    GetStatisticsReport(req: GetStatisticsReportRequest, cb?: (error: string, rep: GetStatisticsReportResponse) => void): Promise<GetStatisticsReportResponse>;
+    UpdateCustomBlackList(req: UpdateCustomBlackListRequest, cb?: (error: string, rep: UpdateCustomBlackListResponse) => void): Promise<UpdateCustomBlackListResponse>;
+    /**
+     * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+     */
+    ListBlackEmailAddress(req: ListBlackEmailAddressRequest, cb?: (error: string, rep: ListBlackEmailAddressResponse) => void): Promise<ListBlackEmailAddressResponse>;
     /**
      * 更新邮件模板，更新后需再次审核
      */
@@ -77,6 +81,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateEmailSmtpPassWord(req: UpdateEmailSmtpPassWordRequest, cb?: (error: string, rep: UpdateEmailSmtpPassWordResponse) => void): Promise<UpdateEmailSmtpPassWordResponse>;
     /**
+     * 添加自定义黑名单
+     */
+    CreateCustomBlacklist(req: CreateCustomBlacklistRequest, cb?: (error: string, rep: CreateCustomBlacklistResponse) => void): Promise<CreateCustomBlacklistResponse>;
+    /**
      * 删除发信模板
      */
     DeleteEmailTemplate(req: DeleteEmailTemplateRequest, cb?: (error: string, rep: DeleteEmailTemplateResponse) => void): Promise<DeleteEmailTemplateResponse>;
@@ -93,6 +101,10 @@ export declare class Client extends AbstractClient {
      */
     CreateEmailIdentity(req: CreateEmailIdentityRequest, cb?: (error: string, rep: CreateEmailIdentityResponse) => void): Promise<CreateEmailIdentityResponse>;
     /**
+     * 删除自定义黑名单邮箱地址
+     */
+    DeleteCustomBlackList(req: DeleteCustomBlackListRequest, cb?: (error: string, rep: DeleteCustomBlackListResponse) => void): Promise<DeleteCustomBlackListResponse>;
+    /**
      * 邮箱被拉黑之后，用户如果确认收件邮箱有效或者已经处于激活状态，可以从腾讯云地址库中删除该黑名单之后继续投递。
      */
     DeleteBlackList(req: DeleteBlackListRequest, cb?: (error: string, rep: DeleteBlackListResponse) => void): Promise<DeleteBlackListResponse>;
@@ -101,9 +113,13 @@ export declare class Client extends AbstractClient {
      */
     SendEmail(req: SendEmailRequest, cb?: (error: string, rep: SendEmailResponse) => void): Promise<SendEmailResponse>;
     /**
-     * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+     * 获取自定义黑名单列表
      */
-    ListBlackEmailAddress(req: ListBlackEmailAddressRequest, cb?: (error: string, rep: ListBlackEmailAddressResponse) => void): Promise<ListBlackEmailAddressResponse>;
+    ListCustomBlacklist(req: ListCustomBlacklistRequest, cb?: (error: string, rep: ListCustomBlacklistResponse) => void): Promise<ListCustomBlacklistResponse>;
+    /**
+     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+     */
+    GetStatisticsReport(req: GetStatisticsReportRequest, cb?: (error: string, rep: GetStatisticsReportResponse) => void): Promise<GetStatisticsReportResponse>;
     /**
      * 在创建完收件人列表后，向这个收件人列表中批量增加收件人邮箱地址，一次最大支持2万，异步完成处理。数据量比较大的时候，上传可能需要一点时间，可以通过查询收件人列表了解上传状态和上传数量。本接口与接口CreateReceiverDetailWithData的功能特性基本一致，只是不支持上传发信时的模板参数。用户首先调用创建收件人列表接口-CreateReceiver后，然后调用本接口传入收件人地址，最后使用批量发送邮件接口-BatchSendEmail，即可完成批量发信。本接口也支持追加收件人地址，也不支持去重，需要用户自己保证收件人地址不重复。本接口一次请求的收件人地址数量限制为2W条，但收件人列表中收件人地址的总量不能超过一定的数量，目前是限制5万条。
      */

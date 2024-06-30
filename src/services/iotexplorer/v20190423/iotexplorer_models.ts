@@ -6331,6 +6331,27 @@ export interface PublishRRPCMessageResponse {
 }
 
 /**
+ * TWeCall分类统计数据
+ */
+export interface TWeCallCategoryPkgInfo {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PkgType?: number
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  All?: number
+  /**
+   * 已使用数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Used?: number
+}
+
+/**
  * CreateTRTCSignaturesWithRoomId返回参数结构体
  */
 export interface CreateTRTCSignaturesWithRoomIdResponse {
@@ -6877,6 +6898,11 @@ export interface GetTWeCallPkgListResponse {
    * 总数
    */
   Total?: number
+  /**
+   * 分类统计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TWeCallCategoryPkgList?: Array<TWeCallCategoryPkgInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -96,17 +96,17 @@ export interface CreateReceiverResponse {
     RequestId?: string;
 }
 /**
- * CreateEmailTemplate请求参数结构体
+ * CreateCustomBlacklist请求参数结构体
  */
-export interface CreateEmailTemplateRequest {
+export interface CreateCustomBlacklistRequest {
     /**
-     * 模板名称
+     * 添加到黑名单的邮件地址
      */
-    TemplateName: string;
+    Emails: Array<string>;
     /**
-     * 模板内容
+     * 过期日期
      */
-    TemplateContent: TemplateContent;
+    ExpireDate?: string;
 }
 /**
  * ListEmailAddress返回参数结构体
@@ -126,6 +126,15 @@ export interface ListEmailAddressResponse {
  * ListEmailAddress请求参数结构体
  */
 export declare type ListEmailAddressRequest = null;
+/**
+ * UpdateCustomBlackList返回参数结构体
+ */
+export interface UpdateCustomBlackListResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * UpdateEmailSmtpPassWord返回参数结构体
  */
@@ -273,64 +282,46 @@ export interface GetSendEmailStatusResponse {
     RequestId?: string;
 }
 /**
- * SendEmail请求参数结构体
+ * 模板列表结构
  */
-export interface SendEmailRequest {
+export interface TemplatesMetadata {
     /**
-     * 发件人邮箱地址。不使用别名时请直接填写发件人邮箱地址，例如：noreply@mail.qcloud.com
-  如需填写发件人别名时，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：别名+一个空格+<邮箱地址>
+     * 创建时间
      */
-    FromEmailAddress: string;
+    CreatedTimestamp: number;
     /**
-     * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
+     * 模板名称
      */
-    Destination: Array<string>;
+    TemplateName: string;
     /**
-     * 邮件主题
+     * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
      */
-    Subject: string;
+    TemplateStatus: number;
     /**
-     * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
+     * 模板ID
      */
-    ReplyToAddresses?: string;
+    TemplateID: number;
     /**
-     * 抄送人邮箱地址，最多支持抄送20人。
+     * 审核原因
      */
-    Cc?: Array<string>;
+    ReviewReason: string;
+}
+/**
+ * 收件人列表详情
+ */
+export interface ReceiverDetail {
     /**
-     * 密送人邮箱地址，最多支持抄送20人。
+     * 收件人地址
      */
-    Bcc?: Array<string>;
+    Email: string;
     /**
-     * 使用模板发送时，填写模板相关参数。
-  <dx-alert infotype="notice" title="注意"> 如您未申请过特殊配置，则该字段为必填 </dx-alert>
+     * 创建时间
      */
-    Template?: Template;
+    CreateTime: string;
     /**
-     * 已废弃
-  <dx-alert infotype="notice" title="说明"> 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。</dx-alert>
+     * 模板参数
      */
-    Simple?: Simple;
-    /**
-     * 需要发送附件时，填写附件相关参数。腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍，应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 时接口会返回错误
-     */
-    Attachments?: Array<Attachment>;
-    /**
-     * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
-     */
-    Unsubscribe?: string;
-    /**
-     * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
-     */
-    TriggerType?: number;
-    /**
-     * smtp头中的Message-Id字段
-     */
-    SmtpMessageId?: string;
-    /**
-     * smtp头中可以设置的其它字段
-     */
-    SmtpHeaders?: string;
+    TemplateData: string;
 }
 /**
  * DeleteBlackList请求参数结构体
@@ -383,6 +374,45 @@ export interface DeleteEmailIdentityRequest {
     EmailIdentity: string;
 }
 /**
+ * 统计数据的结构体
+ */
+export interface Volume {
+    /**
+     * 日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SendDate: string;
+    /**
+     * 邮件请求数量
+     */
+    RequestCount: number;
+    /**
+     * 腾讯云通过数量
+     */
+    AcceptedCount: number;
+    /**
+     * 送达数量
+     */
+    DeliveredCount: number;
+    /**
+     * 打开邮件的用户数量，根据收件人去重
+     */
+    OpenedCount: number;
+    /**
+     * 点击了邮件中的链接数量用户数量
+     */
+    ClickedCount: number;
+    /**
+     * 退信数量
+     */
+    BounceCount: number;
+    /**
+     * 取消订阅的用户数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UnsubscribeCount: number;
+}
+/**
  * UpdateEmailIdentity请求参数结构体
  */
 export interface UpdateEmailIdentityRequest {
@@ -429,6 +459,15 @@ export interface GetStatisticsReportRequest {
      * 收件方邮箱类型，例如gmail.com
      */
     ReceivingMailboxType?: string;
+}
+/**
+ * CreateCustomBlacklist返回参数结构体
+ */
+export interface CreateCustomBlacklistResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateReceiver请求参数结构体
@@ -517,29 +556,21 @@ export interface SendTaskData {
     ReceiversName: string;
 }
 /**
- * 模板列表结构
+ * ListReceiverDetails返回参数结构体
  */
-export interface TemplatesMetadata {
+export interface ListReceiverDetailsResponse {
     /**
-     * 创建时间
+     * 总数
      */
-    CreatedTimestamp: number;
+    TotalCount: number;
     /**
-     * 模板名称
+     * 数据记录
      */
-    TemplateName: string;
+    Data: Array<ReceiverDetail>;
     /**
-     * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateStatus: number;
-    /**
-     * 模板ID
-     */
-    TemplateID: number;
-    /**
-     * 审核原因
-     */
-    ReviewReason: string;
+    RequestId?: string;
 }
 /**
  * DeleteEmailTemplate返回参数结构体
@@ -551,43 +582,21 @@ export interface DeleteEmailTemplateResponse {
     RequestId?: string;
 }
 /**
- * 统计数据的结构体
+ * UpdateCustomBlackList请求参数结构体
  */
-export interface Volume {
+export interface UpdateCustomBlackListRequest {
     /**
-     * 日期
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 需要更改的黑名单id
      */
-    SendDate: string;
+    Id: number;
     /**
-     * 邮件请求数量
+     * 修改后的邮件地址
      */
-    RequestCount: number;
+    Email: string;
     /**
-     * 腾讯云通过数量
+     * 过期时间，为空则表示永久有效
      */
-    AcceptedCount: number;
-    /**
-     * 送达数量
-     */
-    DeliveredCount: number;
-    /**
-     * 打开邮件的用户数量，根据收件人去重
-     */
-    OpenedCount: number;
-    /**
-     * 点击了邮件中的链接数量用户数量
-     */
-    ClickedCount: number;
-    /**
-     * 退信数量
-     */
-    BounceCount: number;
-    /**
-     * 取消订阅的用户数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UnsubscribeCount: number;
+    ExpireDate?: string;
 }
 /**
  * CreateEmailIdentity请求参数结构体
@@ -597,6 +606,27 @@ export interface CreateEmailIdentityRequest {
      * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
      */
     EmailIdentity: string;
+}
+/**
+ * ListCustomBlacklist请求参数结构体
+ */
+export interface ListCustomBlacklistRequest {
+    /**
+     * 偏移量，整型，从0开始
+     */
+    Offset: number;
+    /**
+     * 限制数目，整型,不超过100
+     */
+    Limit: number;
+    /**
+     * 筛选黑名单的状态，0:已过期，1:生效中, 2:全部
+     */
+    Status: number;
+    /**
+     * 黑名单中的邮箱地址
+     */
+    Email?: string;
 }
 /**
  * UpdateEmailSmtpPassWord请求参数结构体
@@ -664,13 +694,17 @@ export interface UpdateEmailIdentityResponse {
     RequestId?: string;
 }
 /**
- * DeleteEmailTemplate请求参数结构体
+ * CreateEmailTemplate请求参数结构体
  */
-export interface DeleteEmailTemplateRequest {
+export interface CreateEmailTemplateRequest {
     /**
-     * 模板ID
+     * 模板名称
      */
-    TemplateID: number;
+    TemplateName: string;
+    /**
+     * 模板内容
+     */
+    TemplateContent: TemplateContent;
 }
 /**
  * DeleteBlackList返回参数结构体
@@ -682,21 +716,13 @@ export interface DeleteBlackListResponse {
     RequestId?: string;
 }
 /**
- * ListReceiverDetails返回参数结构体
+ * DeleteCustomBlackList请求参数结构体
  */
-export interface ListReceiverDetailsResponse {
+export interface DeleteCustomBlackListRequest {
     /**
-     * 总数
+     * 需要删除的邮箱地址
      */
-    TotalCount: number;
-    /**
-     * 数据记录
-     */
-    Data: Array<ReceiverDetail>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Emails: Array<string>;
 }
 /**
  * UpdateEmailTemplate请求参数结构体
@@ -714,6 +740,23 @@ export interface UpdateEmailTemplateRequest {
      * 模板名字
      */
     TemplateName: string;
+}
+/**
+ * ListCustomBlacklist返回参数结构体
+ */
+export interface ListCustomBlacklistResponse {
+    /**
+     * 列表总数
+     */
+    TotalCount?: number;
+    /**
+     * 黑名单列表详情
+     */
+    Data?: Array<BlackAddressDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 描述邮件发送状态
@@ -843,21 +886,13 @@ export interface CreateReceiverDetailResponse {
     RequestId?: string;
 }
 /**
- * 收件人列表详情
+ * DeleteReceiver返回参数结构体
  */
-export interface ReceiverDetail {
+export interface DeleteReceiverResponse {
     /**
-     * 收件人地址
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Email: string;
-    /**
-     * 创建时间
-     */
-    CreateTime: string;
-    /**
-     * 模板参数
-     */
-    TemplateData: string;
+    RequestId?: string;
 }
 /**
  * ListEmailTemplates返回参数结构体
@@ -888,6 +923,66 @@ export interface SendEmailResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SendEmail请求参数结构体
+ */
+export interface SendEmailRequest {
+    /**
+     * 发件人邮箱地址。不使用别名时请直接填写发件人邮箱地址，例如：noreply@mail.qcloud.com
+  如需填写发件人别名时，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：别名+一个空格+<邮箱地址>
+     */
+    FromEmailAddress: string;
+    /**
+     * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
+     */
+    Destination: Array<string>;
+    /**
+     * 邮件主题
+     */
+    Subject: string;
+    /**
+     * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
+     */
+    ReplyToAddresses?: string;
+    /**
+     * 抄送人邮箱地址，最多支持抄送20人。
+     */
+    Cc?: Array<string>;
+    /**
+     * 密送人邮箱地址，最多支持抄送20人。
+     */
+    Bcc?: Array<string>;
+    /**
+     * 使用模板发送时，填写模板相关参数。
+  <dx-alert infotype="notice" title="注意"> 如您未申请过特殊配置，则该字段为必填 </dx-alert>
+     */
+    Template?: Template;
+    /**
+     * 已废弃
+  <dx-alert infotype="notice" title="说明"> 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。</dx-alert>
+     */
+    Simple?: Simple;
+    /**
+     * 需要发送附件时，填写附件相关参数。腾讯云接口请求最大支持 8M 的请求包，附件内容经过 Base64 预期扩大1.5倍，应该控制所有附件的总大小最大在 4M 以内，整体请求超出 8M 时接口会返回错误
+     */
+    Attachments?: Array<Attachment>;
+    /**
+     * 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语
+     */
+    Unsubscribe?: string;
+    /**
+     * 邮件触发类型 0:非触发类，默认类型，营销类邮件、非即时类邮件等选择此类型  1:触发类，验证码等即时发送类邮件，若邮件超过一定大小，系统会自动选择非触发类型通道
+     */
+    TriggerType?: number;
+    /**
+     * smtp头中的Message-Id字段
+     */
+    SmtpMessageId?: string;
+    /**
+     * smtp头中可以设置的其它字段
+     */
+    SmtpHeaders?: string;
 }
 /**
  * ListBlackEmailAddress返回参数结构体
@@ -975,13 +1070,13 @@ export interface ListEmailIdentitiesResponse {
     RequestId?: string;
 }
 /**
- * DeleteReceiver返回参数结构体
+ * DeleteEmailTemplate请求参数结构体
  */
-export interface DeleteReceiverResponse {
+export interface DeleteEmailTemplateRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 模板ID
      */
-    RequestId?: string;
+    TemplateID: number;
 }
 /**
  * 模板内容，TEXT和HTML必须至少存在一项，建议使用TEXT和HTML的组合
@@ -1021,6 +1116,36 @@ export interface DeleteEmailAddressRequest {
      * 发信地址
      */
     EmailAddress: string;
+}
+/**
+ * 黑名单详情
+ */
+export interface BlackAddressDetail {
+    /**
+     * 黑名单地址id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
+    /**
+     * 邮箱地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Email?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireDate?: string;
+    /**
+     * 黑名单状态，0:已过期，1:生效中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * 发信域名验证列表结构体
@@ -1066,6 +1191,15 @@ export interface BlackEmailAddress {
     IspDesc?: string;
 }
 /**
+ * DeleteEmailAddress返回参数结构体
+ */
+export interface DeleteEmailAddressResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 创建重复周期发送邮件任务的参数
  */
 export interface CycleEmailParam {
@@ -1081,15 +1215,6 @@ export interface CycleEmailParam {
      * 是否终止周期，用于任务更新 0否1是
      */
     TermCycle?: number;
-}
-/**
- * DeleteEmailAddress返回参数结构体
- */
-export interface DeleteEmailAddressResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * CreateEmailIdentity返回参数结构体
@@ -1145,6 +1270,15 @@ export interface CreateEmailAddressRequest {
      * 发件人别名
      */
     EmailSenderName?: string;
+}
+/**
+ * DeleteCustomBlackList返回参数结构体
+ */
+export interface DeleteCustomBlackListResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateReceiverDetail请求参数结构体

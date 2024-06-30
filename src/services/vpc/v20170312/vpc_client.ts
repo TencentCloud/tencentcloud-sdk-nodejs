@@ -2832,9 +2832,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
-
-     */
+   * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
+   */
   async ModifyDirectConnectGatewayAttribute(
     req: ModifyDirectConnectGatewayAttributeRequest,
     cb?: (error: string, rep: ModifyDirectConnectGatewayAttributeResponse) => void

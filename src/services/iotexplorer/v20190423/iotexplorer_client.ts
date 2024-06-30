@@ -334,6 +334,7 @@ import {
   DescribeCloudStorageOrderResponse,
   CreateTopicRuleRequest,
   PublishRRPCMessageResponse,
+  TWeCallCategoryPkgInfo,
   CreateTRTCSignaturesWithRoomIdResponse,
   ProductModelDefinition,
   DescribeDevicePackagesResponse,

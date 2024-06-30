@@ -281,41 +281,17 @@ export interface DescribeGatewayMonitor {
 }
 
 /**
- * DescribeAITaskResult请求参数结构体
+ * AddRecordBackupPlan返回参数结构体
  */
-export interface DescribeAITaskResultRequest {
+export interface AddRecordBackupPlanResponse {
   /**
-   * AI 任务 ID
+   * 返回数据
    */
-  TaskId: string
+  Data?: AddRecordBackupPlanData
   /**
-   * 通道ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChannelId: string
-  /**
-   * 桶内文件的路径。
-   */
-  Object?: string
-  /**
-   * AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别)
-   */
-  DetectType?: string
-  /**
-   * 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-   */
-  BeginTime?: string
-  /**
-   * 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-   */
-  EndTime?: string
-  /**
-   * 页码。默认为1
-   */
-  PageNumber?: number
-  /**
-   * 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果）
-   */
-  PageSize?: number
+  RequestId?: string
 }
 
 /**
@@ -406,6 +382,20 @@ export interface CheckDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SetForbidPlayChannels请求参数结构体
+ */
+export interface SetForbidPlayChannelsRequest {
+  /**
+   * 要禁播的通道参数，一次最多可以设置200个通道
+   */
+  Channels: Array<SetForbidplayChannelParam>
+  /**
+   * 用户uin，可以是子用户的也可以是主用户的uin
+   */
+  UserId: string
 }
 
 /**
@@ -1627,17 +1617,41 @@ export interface AddRecordTemplateResponse {
 export type ListRecordPlansRequest = null
 
 /**
- * AddRecordBackupPlan返回参数结构体
+ * DescribeAITaskResult请求参数结构体
  */
-export interface AddRecordBackupPlanResponse {
+export interface DescribeAITaskResultRequest {
   /**
-   * 返回数据
+   * AI 任务 ID
    */
-  Data?: AddRecordBackupPlanData
+  TaskId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 通道ID
    */
-  RequestId?: string
+  ChannelId: string
+  /**
+   * 桶内文件的路径。
+   */
+  Object?: string
+  /**
+   * AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别)
+   */
+  DetectType?: string
+  /**
+   * 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
+   */
+  BeginTime?: string
+  /**
+   * 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
+   */
+  EndTime?: string
+  /**
+   * 页码。默认为1
+   */
+  PageNumber?: number
+  /**
+   * 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果）
+   */
+  PageSize?: number
 }
 
 /**
@@ -3170,6 +3184,29 @@ export interface ListGatewayDevicesData {
 }
 
 /**
+ * 用户禁止播流的通道列表返回数据
+ */
+export interface ListForbidplayChannelsData {
+  /**
+   * 第几页
+   */
+  PageNumber?: number
+  /**
+   * 当前页的设备数量
+   */
+  PageSize?: number
+  /**
+   * 本次查询的设备通道总数
+   */
+  TotalCount?: number
+  /**
+   * 设备通道信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<ChannelAttrInfo>
+}
+
+/**
  * DescribeDevicePreset请求参数结构体
  */
 export interface DescribeDevicePresetRequest {
@@ -3363,6 +3400,21 @@ export interface DescribeGatewayProtocolData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Label?: string
+}
+
+/**
+ * QueryForbidPlayChannelList返回参数结构体
+ */
+export interface QueryForbidPlayChannelListResponse {
+  /**
+   * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ListForbidplayChannelsData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3691,6 +3743,24 @@ export interface UpdateRecordBackupTemplateModify {
    * 上云倍速（支持1，2，4倍速）
    */
   Scale?: number
+}
+
+/**
+ * QueryForbidPlayChannelList请求参数结构体
+ */
+export interface QueryForbidPlayChannelListRequest {
+  /**
+   * 子用户uin，也可以是主用户的uin
+   */
+  UserId: string
+  /**
+   * 每页最大数量，最大为200，超过按照200返回
+   */
+  PageSize: number
+  /**
+   * 第几页
+   */
+  PageNumber: number
 }
 
 /**
@@ -4174,6 +4244,30 @@ export interface DescribeRecordSliceResponse {
 }
 
 /**
+ * 通道属性信息
+ */
+export interface ChannelAttrInfo {
+  /**
+   * 设备通道所属的设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备通道所属的设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceName?: string
+  /**
+   * 设备通道ID
+   */
+  ChannelId?: string
+  /**
+   * 设备通道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelName?: string
+}
+
+/**
  * UpdateRecordPlan返回参数结构体
  */
 export interface UpdateRecordPlanResponse {
@@ -4413,6 +4507,16 @@ export interface RecordPlanChannelInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrganizationName?: string
+}
+
+/**
+ * SetForbidPlayChannels返回参数结构体
+ */
+export interface SetForbidPlayChannelsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5342,4 +5446,18 @@ export interface AddDeviceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
+}
+
+/**
+ * 设置通道禁止播流，有通道Id和使能enable字段
+ */
+export interface SetForbidplayChannelParam {
+  /**
+   * 通道Id
+   */
+  ChannelId: string
+  /**
+   * 是否禁止通道播流
+   */
+  Enable: boolean
 }
