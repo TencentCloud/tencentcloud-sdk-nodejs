@@ -268,6 +268,16 @@ it("wedata.v20210820.DescribeFieldBasicInfo", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTableScoreTrend", async function () {
+    try {
+       const data = await client.DescribeTableScoreTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.RemoveWorkflowDs", async function () {
     try {
        const data = await client.RemoveWorkflowDs({})
@@ -788,9 +798,9 @@ it("wedata.v20210820.ModifyIntegrationTask", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTableScoreTrend", async function () {
+it("wedata.v20210820.DescribeDutyScheduleDetails", async function () {
     try {
-       const data = await client.DescribeTableScoreTrend({})
+       const data = await client.DescribeDutyScheduleDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,6 +1218,16 @@ it("wedata.v20210820.DeleteDsFolder", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeBatchOperateTask", async function () {
+    try {
+       const data = await client.DescribeBatchOperateTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeResourceManagePathTrees", async function () {
     try {
        const data = await client.DescribeResourceManagePathTrees({})
@@ -1308,9 +1328,9 @@ it("wedata.v20210820.DescribeColumnsMeta", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeBatchOperateTask", async function () {
+it("wedata.v20210820.DescribeDutyScheduleList", async function () {
     try {
-       const data = await client.DescribeBatchOperateTask({})
+       const data = await client.DescribeDutyScheduleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

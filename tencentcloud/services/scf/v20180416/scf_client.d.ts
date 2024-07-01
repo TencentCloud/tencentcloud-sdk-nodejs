@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateNamespace(req: UpdateNamespaceRequest, cb?: (error: string, rep: UpdateNamespaceResponse) => void): Promise<UpdateNamespaceResponse>;
     /**
-     *  SCF同步调用函数接口
+     * SCF同步调用函数接口。
      */
     InvokeFunction(req: InvokeFunctionRequest, cb?: (error: string, rep: InvokeFunctionResponse) => void): Promise<InvokeFunctionResponse>;
     /**

@@ -992,6 +992,20 @@ export interface DescribeVpcLimitsResponse {
 }
 
 /**
+ * CreatePrivateNatGatewayDestinationIpPortTranslationNatRule请求参数结构体
+ */
+export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 目的端口转换规则列表。
+   */
+  LocalDestinationIpPortTranslationNatRules: Array<LocalDestinationIpPortTranslationNatRule>
+}
+
+/**
  * IP在线查询的字段信息
  */
 export interface IpField {
@@ -1718,6 +1732,24 @@ export interface AssociateNetworkAclSubnetsResponse {
 }
 
 /**
+ * DeletePrivateNatGatewayTranslationNatRule请求参数结构体
+ */
+export interface DeletePrivateNatGatewayTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则对象数组。
+   */
+  TranslationNatRules: Array<TranslationNatRule>
+  /**
+   * 跨域参数，当VPC为跨域时填写为True。
+   */
+  CrossDomain?: boolean
+}
+
+/**
  * DeleteNatGatewayDestinationIpPortTranslationNatRule请求参数结构体
  */
 export interface DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest {
@@ -2141,6 +2173,34 @@ export interface DescribeBandwidthPackagesResponse {
 }
 
 /**
+ * ResetRoutes返回参数结构体
+ */
+export interface ResetRoutesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrivateNatGatewayRegions返回参数结构体
+ */
+export interface DescribePrivateNatGatewayRegionsResponse {
+  /**
+   * 地域对象
+   */
+  RegionSet: Array<NatRegionInfoWithArea>
+  /**
+   * 返回可支持地域总数
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReplaceSecurityGroupPolicies返回参数结构体
  */
 export interface ReplaceSecurityGroupPoliciesResponse {
@@ -2428,6 +2488,32 @@ export interface IpGeolocationInfo {
 }
 
 /**
+ * 私网网关Snat转发规则入参
+ */
+export interface TranslationNatRuleInput {
+  /**
+   * 转换规则目标，可选值"LOCAL","PEER"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   */
+  TranslationIp: string
+  /**
+   * 转换规则描述。
+   */
+  Description: string
+  /**
+   * 源`IP`,当转换规则类型为三层时有效。
+   */
+  OriginalIp?: string
+}
+
+/**
  * DeleteFlowLog请求参数结构体
  */
 export interface DeleteFlowLogRequest {
@@ -2493,6 +2579,40 @@ export interface HaVipDisassociateAddressIpResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 私网网关Snat转发规则修改
+ */
+export interface TranslationNatRuleDiff {
+  /**
+   * 转发规则目标，可选值"LOCAL","PEER"。
+   */
+  TranslationDirection: string
+  /**
+   * 转发规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转发规则映射`IP`,当转发规则类型为四层时为`IP`池
+   */
+  TranslationIp: string
+  /**
+   * 转发规则描述。
+   */
+  Description: string
+  /**
+   * 旧转发规则映射`IP`,当转发规则类型为四层时为`IP`池
+   */
+  OldTranslationIp: string
+  /**
+   * 新转发规则源`IP`,当转发规则类型为三层时有效
+   */
+  OriginalIp?: string
+  /**
+   * 旧转发规则源`IP`,当转发规则类型为三层时有效
+   */
+  OldOriginalIp?: string
 }
 
 /**
@@ -3023,6 +3143,34 @@ export interface DescribeAccountAttributesResponse {
 }
 
 /**
+ * ReturnNormalAddresses请求参数结构体
+ */
+export interface ReturnNormalAddressesRequest {
+  /**
+   * 普通公网IP 的 IP 地址,示例：101.35.139.183
+   */
+  AddressIps?: Array<string>
+}
+
+/**
+ * ModifyPrivateNatGatewayTranslationNatRule请求参数结构体
+ */
+export interface ModifyPrivateNatGatewayTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则对象数组。仅支持修改单个转换规则
+   */
+  TranslationNatRules: Array<TranslationNatRuleDiff>
+  /**
+   * 跨域参数，当VPC为跨域时填写为True。
+   */
+  CrossDomain?: boolean
+}
+
+/**
  * AssignPrivateIpAddresses返回参数结构体
  */
 export interface AssignPrivateIpAddressesResponse {
@@ -3120,13 +3268,51 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
 }
 
 /**
- * ReturnNormalAddresses请求参数结构体
+ * 网络ACL规则。
  */
-export interface ReturnNormalAddressesRequest {
+export interface NetworkAclEntry {
   /**
-   * 普通公网IP 的 IP 地址,示例：101.35.139.183
+   * 协议, 取值: TCP,UDP, ICMP, ALL。
    */
-  AddressIps?: Array<string>
+  Protocol?: string
+  /**
+   * 端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
+   */
+  Port?: string
+  /**
+   * 网段或IP(互斥)。增量创建ACL规则时，CidrBlock和Ipv6CidrBlock至少提供一个。
+   */
+  CidrBlock?: string
+  /**
+   * 网段或IPv6(互斥)。
+   */
+  Ipv6CidrBlock?: string
+  /**
+   * ACCEPT 或 DROP。
+   */
+  Action?: string
+  /**
+   * 规则描述，最大长度100。
+   */
+  Description?: string
+  /**
+   * 修改时间。
+   */
+  ModifyTime?: string
+  /**
+   * 优先级，从1开始。
+   */
+  Priority?: number
+  /**
+   * IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAclIpv4EntryId?: string
+  /**
+   * IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAclIpv6EntryId?: string
 }
 
 /**
@@ -3773,6 +3959,16 @@ NONEXTHOP：无下一跳；
 }
 
 /**
+ * SetVpnGatewaysRenewFlag返回参数结构体
+ */
+export interface SetVpnGatewaysRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSgSnapshotFileContent返回参数结构体
  */
 export interface DescribeSgSnapshotFileContentResponse {
@@ -4122,6 +4318,24 @@ CCN VPN 形的通道 可以不传VPCID
 }
 
 /**
+ * 可创建的私网网关配额数量
+ */
+export interface PrivateNatGatewayLimit {
+  /**
+   * 私有网络唯一`ID`。
+   */
+  UniqVpcId: string
+  /**
+   * Vpc下总计可创建私网网关数量。
+   */
+  TotalLimit: number
+  /**
+   * 可创建私网网关数量。
+   */
+  Available: number
+}
+
+/**
  * CCN路由策略对象
  */
 export interface CcnRoute {
@@ -4215,21 +4429,17 @@ export interface DescribeTrafficPackagesRequest {
 }
 
 /**
- * DescribeLocalGateway返回参数结构体
+ * DeleteSecurityGroupPolicies请求参数结构体
  */
-export interface DescribeLocalGatewayResponse {
+export interface DeleteSecurityGroupPoliciesRequest {
   /**
-   * 本地网关信息集合。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
-  LocalGatewaySet?: Array<LocalGateway>
+  SecurityGroupId: string
   /**
-   * 本地网关总数。
+   * 安全组规则集合。一个请求中只能删除单个方向的一条或多条规则。支持指定索引（PolicyIndex） 匹配删除和安全组规则匹配删除两种方式，一个请求中只能使用一种匹配方式。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SecurityGroupPolicySet: SecurityGroupPolicySet
 }
 
 /**
@@ -4780,6 +4990,36 @@ export interface ReplaceRouteTableAssociationRequest {
 }
 
 /**
+ * 本端目的IP端口转换复杂结构
+ */
+export interface LocalDestinationIpPortTranslationNatRule {
+  /**
+   * 协议
+   */
+  Protocol: string
+  /**
+   * 源端口
+   */
+  OriginalPort: number
+  /**
+   * 源IP
+   */
+  OriginalIp: string
+  /**
+   * 目的端口
+   */
+  TranslationPort: number
+  /**
+   * 目的IP
+   */
+  TranslationIp: string
+  /**
+   * 描述
+   */
+  Description?: string
+}
+
+/**
  * AssociateNetworkAclSubnets请求参数结构体
  */
 export interface AssociateNetworkAclSubnetsRequest {
@@ -4885,6 +5125,11 @@ export interface SecurityGroupPolicy {
    */
   ModifyTime?: string
 }
+
+/**
+ * DescribePrivateNatGatewayRegions请求参数结构体
+ */
+export type DescribePrivateNatGatewayRegionsRequest = null
 
 /**
  * DescribeSnapshotPolicies请求参数结构体
@@ -5056,6 +5301,16 @@ export interface ModifySecurityGroupPoliciesRequest {
    * 排序安全组标识，默认值为False。当SortPolicys为False时，不改变安全组规则排序；当SortPolicys为True时，系统将严格按照SecurityGroupPolicySet参数传入的安全组规则及顺序进行重置，考虑到人为输入参数可能存在遗漏风险，建议通过控制台对安全组规则进行排序。
    */
   SortPolicys?: boolean
+}
+
+/**
+ * ModifyPrivateNatGatewayAttribute返回参数结构体
+ */
+export interface ModifyPrivateNatGatewayAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5635,13 +5890,41 @@ export interface CreateVpnGatewaySslServerResponse {
 }
 
 /**
- * ResetRoutes返回参数结构体
+ * 本端目的IP端口转换复杂结构
  */
-export interface ResetRoutesResponse {
+export interface PrivateNatDestinationIpPortTranslationNatRule {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 协议
    */
-  RequestId?: string
+  Protocol: string
+  /**
+   * 原端口
+   */
+  OriginalPort: number
+  /**
+   * 原IP
+   */
+  OriginalIp: string
+  /**
+   * 映射端口
+   */
+  TranslationPort: number
+  /**
+   * 映射IP
+   */
+  TranslationIp: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -5989,6 +6272,20 @@ export interface MemberInfo {
 }
 
 /**
+ * ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule请求参数结构体
+ */
+export interface ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 目的端口转换规则列表。
+   */
+  LocalDestinationIpPortTranslationNatRules: Array<DestinationIpPortTranslationNatRuleDiff>
+}
+
+/**
  * ResumeSnapshotInstance请求参数结构体
  */
 export interface ResumeSnapshotInstanceRequest {
@@ -6028,6 +6325,16 @@ export interface ReplaceSecurityGroupPolicyRequest {
  * ModifyVpcEndPointServiceAttribute返回参数结构体
  */
 export interface ModifyVpcEndPointServiceAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePrivateNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
+ */
+export interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6393,56 +6700,40 @@ export interface DescribeNetworkInterfaceLimitRequest {
 }
 
 /**
- * CreateBandwidthPackage请求参数结构体
+ * ModifyVpnGatewayRoutes返回参数结构体
  */
-export interface CreateBandwidthPackageRequest {
+export interface ModifyVpnGatewayRoutesResponse {
   /**
-   * 带宽包类型, 默认值: BGP, 可选值:
-<li>BGP: 普通BGP共享带宽包</li>
-<li>HIGH_QUALITY_BGP: 精品BGP共享带宽包</li>
-<li>SINGLEISP_CMCC: 中国移动共享带宽包</li>
-<li>SINGLEISP_CTCC: 中国电信共享带宽包</li>
-<li>SINGLEISP_CUCC: 中国联通共享带宽包</li>
+   * VPN路由信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetworkType?: string
+  Routes?: Array<VpnGatewayRoute>
   /**
-   * 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:
-<li>TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费</li>
-<li>PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费</li>
-<li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
-<li>ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费</li>
-<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
-   */
-  ChargeType?: string
+/**
+ * 地址信息
+ */
+export interface AddressTemplateItem {
   /**
-   * 带宽包名称。
+   * ipm-xxxxxxxx
    */
-  BandwidthPackageName?: string
+  AddressTemplateId?: string
   /**
-   * 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。
+   * IP模板名称
    */
-  BandwidthPackageCount?: number
+  AddressTemplateName?: string
   /**
-   * 带宽包限速大小。单位：Mbps，-1表示不限速。不同计费类型的带宽包对应不同的带宽上下限。
+   * 废弃字段
    */
-  InternetMaxBandwidth?: number
+  From?: string
   /**
-   * 需要关联的标签列表。
+   * 废弃字段
    */
-  Tags?: Array<Tag>
-  /**
-   * 带宽包协议类型。当前支持'ipv4'和'ipv6'协议带宽包，默认值是'ipv4'。
-   */
-  Protocol?: string
-  /**
-   * 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。
-   */
-  TimeSpan?: number
-  /**
-   * 网络出口，默认值：center_egress1
-   */
-  Egress?: string
+  To?: string
 }
 
 /**
@@ -6642,6 +6933,20 @@ export interface ModifyServiceTemplateAttributeRequest {
 }
 
 /**
+ * ModifyPrivateNatGatewayAttribute请求参数结构体
+ */
+export interface ModifyPrivateNatGatewayAttributeRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 私网网关名称，可任意命名，但不得超过60个字符。
+   */
+  NatGatewayName: string
+}
+
+/**
  * AssociateAddress返回参数结构体
  */
 export interface AssociateAddressResponse {
@@ -6830,6 +7135,24 @@ export interface DescribeVpcsResponse {
 }
 
 /**
+ * DescribePrivateNatGatewayLimits返回参数结构体
+ */
+export interface DescribePrivateNatGatewayLimitsResponse {
+  /**
+   * 查询返回结果个数。
+   */
+  TotalCount: number
+  /**
+   * 私网网关配额。
+   */
+  PrivateNatGatewayLimitSet: Array<PrivateNatGatewayLimit>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNetworkInterfaceLimit返回参数结构体
  */
 export interface DescribeNetworkInterfaceLimitResponse {
@@ -6950,6 +7273,24 @@ export interface RemoveIp6RulesRequest {
 }
 
 /**
+ * CreatePrivateNatGatewayTranslationNatRule请求参数结构体
+ */
+export interface CreatePrivateNatGatewayTranslationNatRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则对象数组。
+   */
+  TranslationNatRules: Array<TranslationNatRuleInput>
+  /**
+   * 跨域参数，当VPC为跨域时填写为True。
+   */
+  CrossDomain?: boolean
+}
+
+/**
  * DescribeIpGeolocationDatabaseUrl请求参数结构体
  */
 export interface DescribeIpGeolocationDatabaseUrlRequest {
@@ -7058,6 +7399,16 @@ export interface HaVipAssociateAddressIpResponse {
 }
 
 /**
+ * DeletePrivateNatGatewayTranslationAclRule返回参数结构体
+ */
+export interface DeletePrivateNatGatewayTranslationAclRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSpecificTrafficPackageUsedDetails请求参数结构体
  */
 export interface DescribeSpecificTrafficPackageUsedDetailsRequest {
@@ -7110,51 +7461,25 @@ export interface DeleteVpnConnectionRequest {
 }
 
 /**
- * 网络ACL规则。
+ * DescribePrivateNatGatewayDestinationIpPortTranslationNatRules请求参数结构体
  */
-export interface NetworkAclEntry {
+export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRequest {
   /**
-   * 协议, 取值: TCP,UDP, ICMP, ALL。
+   * 私网网关唯一`ID`，形如"intranat-xxxxxxxx)
    */
-  Protocol?: string
+  NatGatewayId: string
   /**
-   * 端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
+   * 过滤条件，Name可选值"OriginalIp",  "TranslationIp", "OriginalPort","TranslationPort",  "Protocol", "Description"
    */
-  Port?: string
+  Filters?: Array<Filter>
   /**
-   * 网段或IP(互斥)。增量创建ACL规则时，CidrBlock和Ipv6CidrBlock至少提供一个。
+   * 偏移量，默认值为0。
    */
-  CidrBlock?: string
+  Offset?: number
   /**
-   * 网段或IPv6(互斥)。
+   * 返回数目，默认值为20。
    */
-  Ipv6CidrBlock?: string
-  /**
-   * ACCEPT 或 DROP。
-   */
-  Action?: string
-  /**
-   * 规则描述，最大长度100。
-   */
-  Description?: string
-  /**
-   * 修改时间。
-   */
-  ModifyTime?: string
-  /**
-   * 优先级，从1开始。
-   */
-  Priority?: number
-  /**
-   * IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkAclIpv4EntryId?: string
-  /**
-   * IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkAclIpv6EntryId?: string
+  Limit?: number
 }
 
 /**
@@ -8035,6 +8360,40 @@ export interface CreateVpcEndPointServiceRequest {
 }
 
 /**
+ * DescribePrivateNatGateways请求参数结构体
+ */
+export interface DescribePrivateNatGatewaysRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-0g3blj80`。
+   */
+  NatGatewayIds?: Array<string>
+  /**
+   * 过滤条件。
+<li>NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。</li>
+<li>NatGatewayName - String - 专线网关名称，默认模糊查询。</li>
+<li>VpcId - String - 私网网关所在`VpcId`。</li>
+<li>TagKey - Tag数组 - 私网网关标签键值对数组</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20。
+   */
+  Limit?: number
+  /**
+   * 排序字段。可选值："NatGatewayId"、"NatGatewayName"、"CreatedTime"
+   */
+  OrderField?: string
+  /**
+   * 排序方式。可选值："ASC"、"DESC"。
+   */
+  OrderDirection?: string
+}
+
+/**
  * `IPv6`地址信息。
  */
 export interface Ipv6Address {
@@ -8066,6 +8425,24 @@ export interface Ipv6Address {
 <li>`AVAILABLE`：可用的</li>
    */
   State?: string
+}
+
+/**
+ * DescribePrivateNatGatewayTranslationAclRules返回参数结构体
+ */
+export interface DescribePrivateNatGatewayTranslationAclRulesResponse {
+  /**
+   * 返回个数。
+   */
+  TotalCount?: number
+  /**
+   * 访问控制规则列表。
+   */
+  TranslationAclRuleSet?: Array<TranslationAclRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8129,9 +8506,47 @@ export interface BandwidthPackageBillBandwidth {
 }
 
 /**
- * DeleteHaVip返回参数结构体
+ * DescribePrivateNatGatewayTranslationAclRules请求参数结构体
  */
-export interface DeleteHaVipResponse {
+export interface DescribePrivateNatGatewayTranslationAclRulesRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则目标，可选值"LOCAL"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   */
+  TranslationIp: string
+  /**
+   * 源`IP`,当转换规则类型为三层时有效。
+   */
+  OriginalIp?: string
+  /**
+   * 偏移量。默认值为0。
+   */
+  Offset?: number
+  /**
+   * 返回数目，默认值为20。
+   */
+  Limit?: number
+}
+
+/**
+ * DeletePrivateNatGatewayTranslationNatRule返回参数结构体
+ */
+export interface DeletePrivateNatGatewayTranslationNatRuleResponse {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9144,25 +9559,31 @@ export interface AssociateDirectConnectGatewayNatGatewayRequest {
 }
 
 /**
- * 地址信息
+ * DeletePrivateNatGatewayDestinationIpPortTranslationNatRule请求参数结构体
  */
-export interface AddressTemplateItem {
+export interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest {
   /**
-   * ipm-xxxxxxxx
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
    */
-  AddressTemplateId?: string
+  NatGatewayId: string
   /**
-   * IP模板名称
+   * 目的端口转换规则数组。
    */
-  AddressTemplateName?: string
+  LocalDestinationIpPortTranslationNatRules: Array<LocalDestinationIpPortTranslationNatRule>
+}
+
+/**
+ * CreatePrivateNatGatewayTranslationNatRule返回参数结构体
+ */
+export interface CreatePrivateNatGatewayTranslationNatRuleResponse {
   /**
-   * 废弃字段
+   * 私网网关唯一`ID`。
    */
-  From?: string
+  NatGatewayId?: string
   /**
-   * 废弃字段
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  To?: string
+  RequestId?: string
 }
 
 /**
@@ -9444,17 +9865,21 @@ export interface CcnInstance {
 }
 
 /**
- * DeleteSecurityGroupPolicies请求参数结构体
+ * DescribeLocalGateway返回参数结构体
  */
-export interface DeleteSecurityGroupPoliciesRequest {
+export interface DescribeLocalGatewayResponse {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   * 本地网关信息集合。
    */
-  SecurityGroupId: string
+  LocalGatewaySet?: Array<LocalGateway>
   /**
-   * 安全组规则集合。一个请求中只能删除单个方向的一条或多条规则。支持指定索引（PolicyIndex） 匹配删除和安全组规则匹配删除两种方式，一个请求中只能使用一种匹配方式。
+   * 本地网关总数。
    */
-  SecurityGroupPolicySet: SecurityGroupPolicySet
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9493,6 +9918,16 @@ export interface DeleteNatGatewayRequest {
  * ModifyCustomerGatewayAttribute返回参数结构体
  */
 export interface ModifyCustomerGatewayAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePrivateNatGatewayTranslationAclRule返回参数结构体
+ */
+export interface CreatePrivateNatGatewayTranslationAclRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9666,6 +10101,32 @@ export interface GatewayQos {
 }
 
 /**
+ * DescribePrivateNatGatewayTranslationNatRules请求参数结构体
+ */
+export interface DescribePrivateNatGatewayTranslationNatRulesRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId?: string
+  /**
+   * 过滤条件。
+<li>OriginalIp - String - 转换规则源`IP`。</li>
+<li>TranslationIp - String - 转换`IP`。</li>
+<li>VpcId - String - 私网网关所在`VpcId`。</li>
+<li>Description - String - 转换规则描述</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量。默认值为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量。默认值为20。
+   */
+  Limit?: number
+}
+
+/**
  * GetCcnRegionBandwidthLimits请求参数结构体
  */
 export interface GetCcnRegionBandwidthLimitsRequest {
@@ -9835,6 +10296,92 @@ export interface DescribeCrossBorderFlowMonitorRequest {
 }
 
 /**
+ * 本端目的IP端口转换复杂结构
+ */
+export interface DestinationIpPortTranslationNatRuleDiff {
+  /**
+   * 协议
+   */
+  Protocol: string
+  /**
+   * 源端口
+   */
+  OriginalPort: number
+  /**
+   * 源IP
+   */
+  OriginalIp: string
+  /**
+   * 目的端口
+   */
+  TranslationPort: number
+  /**
+   * 目的IP
+   */
+  TranslationIp: string
+  /**
+   * 旧协议。
+   */
+  OldProtocol: string
+  /**
+   * 旧源端口
+   */
+  OldOriginalPort: number
+  /**
+   * 旧源IP
+   */
+  OldOriginalIp: string
+  /**
+   * 旧目的端口
+   */
+  OldTranslationPort: number
+  /**
+   * 旧目的IP
+   */
+  OldTranslationIp: string
+  /**
+   * 描述
+   */
+  Description?: string
+}
+
+/**
+ * 私网网关对象
+ */
+export interface PrivateNatGateway {
+  /**
+   * 私网网关`ID`。
+   */
+  NatGatewayId?: string
+  /**
+   * 私网网关名称。
+   */
+  NatGatewayName?: string
+  /**
+   * 私网网关关联`VPC`实例`ID`。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 私网网关当前状态。
+   */
+  Status?: string
+  /**
+   * 私网网关跨域标志。
+   */
+  CrossDomain?: boolean
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 标签键值对。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
+}
+
+/**
  * DescribeVpnGatewayRoutes返回参数结构体
  */
 export interface DescribeVpnGatewayRoutesResponse {
@@ -9896,6 +10443,36 @@ export interface CreateVpnConnRoute {
 }
 
 /**
+ * CreatePrivateNatGateway请求参数结构体
+ */
+export interface CreatePrivateNatGatewayRequest {
+  /**
+   * 私网网关名称
+   */
+  NatGatewayName: string
+  /**
+   * 私有网络实例ID。当创建VPC类型私网NAT网关或者专线网关类型私网NAT网关时，此参数必填。
+   */
+  VpcId?: string
+  /**
+   * 跨域参数。仅当取值为True时，才会支持跨域绑定VPC。
+   */
+  CrossDomain?: boolean
+  /**
+   * 实例标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * VPC类型私网NAT网关。仅当取值为True时，才会创建VPC类型私网NAT网关。
+   */
+  VpcType?: boolean
+  /**
+   * 云联网类型私网NAT网关需要绑定的云联网实例ID。
+   */
+  CcnId?: string
+}
+
+/**
  * AttachCcnInstances返回参数结构体
  */
 export interface AttachCcnInstancesResponse {
@@ -9933,6 +10510,24 @@ export interface ModifyVpcAttributeResponse {
  * ModifyVpnConnectionAttribute返回参数结构体
  */
 export interface ModifyVpnConnectionAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrivateNatGatewayTranslationNatRules返回参数结构体
+ */
+export interface DescribePrivateNatGatewayTranslationNatRulesResponse {
+  /**
+   * 对象数目。
+   */
+  TotalCount: number
+  /**
+   * 转换规则详情数组。
+   */
+  TranslationNatRuleSet: Array<TranslationNatRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10488,13 +11083,13 @@ export interface DescribeAddressTemplateGroupsResponse {
 }
 
 /**
- * ReleaseAddresses请求参数结构体
+ * ModifyPrivateNatGatewayTranslationAclRule返回参数结构体
  */
-export interface ReleaseAddressesRequest {
+export interface ModifyPrivateNatGatewayTranslationAclRuleResponse {
   /**
-   * 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AddressIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -10608,17 +11203,29 @@ export interface DescribeCustomerGatewaysRequest {
 }
 
 /**
- * RenewAddresses请求参数结构体
+ * InquiryPriceCreateVpnGateway请求参数结构体
  */
-export interface RenewAddressesRequest {
+export interface InquiryPriceCreateVpnGatewayRequest {
   /**
-   * EIP唯一标识ID列表，形如'eip-xxxx'
+   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。
    */
-  AddressIds: Array<string>
+  InternetMaxBandwidthOut: number
   /**
-   * 续费参数
+   * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
    */
-  AddressChargePrepaid: AddressChargePrepaid
+  InstanceChargeType?: string
+  /**
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。
+   */
+  MaxConnection?: number
+  /**
+   * 查询的VPN类型，支持IPSEC、SSL两种类型，为SSL类型时，MaxConnection参数必传。
+   */
+  Type?: string
 }
 
 /**
@@ -11021,6 +11628,36 @@ export interface UnassignIpv6AddressesRequest {
 }
 
 /**
+ * ModifyPrivateNatGatewayTranslationAclRule请求参数结构体
+ */
+export interface ModifyPrivateNatGatewayTranslationAclRuleRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
+   */
+  NatGatewayId: string
+  /**
+   * 转换规则目标，可选值"LOCAL"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池
+   */
+  TranslationIp: string
+  /**
+   * 访问控制列表，需要附带AclRuleId参数。
+   */
+  TranslationAclRules: Array<TranslationAclRule>
+  /**
+   * 源`IP`,当转换规则类型为三层时有效
+   */
+  OriginalIp?: string
+}
+
+/**
  * CreateTrafficPackages请求参数结构体
  */
 export interface CreateTrafficPackagesRequest {
@@ -11086,6 +11723,42 @@ export interface ModifyCcnAttributeRequest {
    * 是否开启路由重叠功能。`False` 不开启，`True` 开启。
    */
   RouteOverlapFlag?: boolean
+}
+
+/**
+ * 私网网关Snat转发规则
+ */
+export interface TranslationNatRule {
+  /**
+   * 转换规则目标，可选值"LOCAL","PEER"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   */
+  TranslationIp: string
+  /**
+   * 转换规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 源`IP`,当转换规则类型为三层时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalIp?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -11159,13 +11832,33 @@ export interface ModifyNetworkAclAttributeRequest {
 }
 
 /**
- * SetVpnGatewaysRenewFlag返回参数结构体
+ * CreatePrivateNatGatewayTranslationAclRule请求参数结构体
  */
-export interface SetVpnGatewaysRenewFlagResponse {
+export interface CreatePrivateNatGatewayTranslationAclRuleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
    */
-  RequestId?: string
+  NatGatewayId: string
+  /**
+   * 转换规则目标，可选值"LOCAL"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池。
+   */
+  TranslationIp: string
+  /**
+   * 访问控制列表。
+   */
+  TranslationAclRules: Array<TranslationAclRule>
+  /**
+   * 源`IP`,当转换规则类型为三层时有效。
+   */
+  OriginalIp?: string
 }
 
 /**
@@ -11541,6 +12234,16 @@ export interface EnableGatewayFlowMonitorResponse {
 }
 
 /**
+ * ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
+ */
+export interface ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述带宽包资源信息的结构
  */
 export interface Resource {
@@ -11556,6 +12259,24 @@ export interface Resource {
    * 带宽包资源Ip
    */
   AddressIp: string
+}
+
+/**
+ * DescribePrivateNatGatewayDestinationIpPortTranslationNatRules返回参数结构体
+ */
+export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse {
+  /**
+   * 总规则数目。
+   */
+  TotalCount: number
+  /**
+   * 目的端口转换规则数组。
+   */
+  LocalDestinationIpPortTranslationNatRuleSet: Array<PrivateNatDestinationIpPortTranslationNatRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11726,18 +12447,56 @@ export interface DeleteVpcPeeringConnectionRequest {
 }
 
 /**
- * ModifyVpnGatewayRoutes返回参数结构体
+ * CreateBandwidthPackage请求参数结构体
  */
-export interface ModifyVpnGatewayRoutesResponse {
+export interface CreateBandwidthPackageRequest {
   /**
-   * VPN路由信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 带宽包类型, 默认值: BGP, 可选值:
+<li>BGP: 普通BGP共享带宽包</li>
+<li>HIGH_QUALITY_BGP: 精品BGP共享带宽包</li>
+<li>SINGLEISP_CMCC: 中国移动共享带宽包</li>
+<li>SINGLEISP_CTCC: 中国电信共享带宽包</li>
+<li>SINGLEISP_CUCC: 中国联通共享带宽包</li>
    */
-  Routes?: Array<VpnGatewayRoute>
+  NetworkType?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:
+<li>TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费</li>
+<li>PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费</li>
+<li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
+<li>ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费</li>
+<li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费</li>
+
    */
-  RequestId?: string
+  ChargeType?: string
+  /**
+   * 带宽包名称。
+   */
+  BandwidthPackageName?: string
+  /**
+   * 带宽包数量(传统账户类型只能填1), 标准账户类型取值范围为1~20。
+   */
+  BandwidthPackageCount?: number
+  /**
+   * 带宽包限速大小。单位：Mbps，-1表示不限速。不同计费类型的带宽包对应不同的带宽上下限。
+   */
+  InternetMaxBandwidth?: number
+  /**
+   * 需要关联的标签列表。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 带宽包协议类型。当前支持'ipv4'和'ipv6'协议带宽包，默认值是'ipv4'。
+   */
+  Protocol?: string
+  /**
+   * 预付费包月带宽包的购买时长，单位: 月，取值范围: 1~60。
+   */
+  TimeSpan?: number
+  /**
+   * 网络出口，默认值：center_egress1
+   */
+  Egress?: string
 }
 
 /**
@@ -11890,6 +12649,16 @@ export interface ReplaceSecurityGroupPoliciesRequest {
    * 旧的安全组规则集合对象，可选，日志记录用。
    */
   OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet
+}
+
+/**
+ * DeletePrivateNatGateway请求参数结构体
+ */
+export interface DeletePrivateNatGatewayRequest {
+  /**
+   * 私网网关唯一`ID`，形如"intranat-xxxxxxxx"。
+   */
+  NatGatewayId: string
 }
 
 /**
@@ -12293,6 +13062,16 @@ export interface CreateDefaultVpcRequest {
 }
 
 /**
+ * DeletePrivateNatGateway返回参数结构体
+ */
+export interface DeletePrivateNatGatewayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSubnets返回参数结构体
  */
 export interface DescribeSubnetsResponse {
@@ -12383,6 +13162,24 @@ export interface InquiryPriceRenewVpnGatewayRequest {
  * EnableCcnRoutes返回参数结构体
  */
 export interface EnableCcnRoutesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrivateNatGateways返回参数结构体
+ */
+export interface DescribePrivateNatGatewaysResponse {
+  /**
+   * 符合条件的对象数。
+   */
+  TotalCount?: number
+  /**
+   * 私网网关对象数组。
+   */
+  PrivateNatGatewaySet?: Array<PrivateNatGateway>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13545,6 +14342,16 @@ export interface DescribeServiceTemplatesRequest {
 }
 
 /**
+ * ModifyPrivateNatGatewayTranslationNatRule返回参数结构体
+ */
+export interface ModifyPrivateNatGatewayTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 协议端口模板
  */
 export interface ServiceTemplateSpecification {
@@ -13725,6 +14532,24 @@ export interface NetworkAclQuintupleEntries {
    * 网络ACL五元组出站规则
    */
   Egress?: Array<NetworkAclQuintupleEntry>
+}
+
+/**
+ * CreatePrivateNatGateway返回参数结构体
+ */
+export interface CreatePrivateNatGatewayResponse {
+  /**
+   * 私网网关对象。
+   */
+  PrivateNatGatewaySet?: Array<PrivateNatGateway>
+  /**
+   * 创建实例个数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14157,6 +14982,11 @@ export interface VpcLimit {
 }
 
 /**
+ * NAT地域地区对象
+ */
+export type NatRegionInfoWithArea = null
+
+/**
  * DetachClassicLinkVpc返回参数结构体
  */
 export interface DetachClassicLinkVpcResponse {
@@ -14269,13 +15099,33 @@ export interface EnableFlowLogsResponse {
 }
 
 /**
- * LockCcnBandwidths返回参数结构体
+ * DeletePrivateNatGatewayTranslationAclRule请求参数结构体
  */
-export interface LockCcnBandwidthsResponse {
+export interface DeletePrivateNatGatewayTranslationAclRuleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 私网网关唯一`ID`，形如：`intranat-xxxxxxxx`。
    */
-  RequestId?: string
+  NatGatewayId: string
+  /**
+   * 转换规则目标，可选值"LOCAL"。
+   */
+  TranslationDirection: string
+  /**
+   * 转换规则类型，可选值"NETWORK_LAYER","TRANSPORT_LAYER"。
+   */
+  TranslationType: string
+  /**
+   * 转换`IP`,当转换规则类型为四层时为`IP`池
+   */
+  TranslationIp: string
+  /**
+   * 访问控制规则对应`ID`
+   */
+  AclRuleIds: Array<number | bigint>
+  /**
+   * 源`IP`,当转换规则类型为三层时有效
+   */
+  OriginalIp?: string
 }
 
 /**
@@ -14340,6 +15190,40 @@ export interface DescribeDhcpIpsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 私网网关转发规则匹配ACL
+ */
+export interface TranslationAclRule {
+  /**
+   * ACL协议类型，可选值:"ALL","TCP","UDP"
+   */
+  Protocol: string
+  /**
+   * 源端口。
+   */
+  SourcePort: string
+  /**
+   * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
+   */
+  SourceCidr: string
+  /**
+   * 目的端口。
+   */
+  DestinationPort: string
+  /**
+   * 目的地址。
+   */
+  DestinationCidr: string
+  /**
+   * ACL规则`ID`。
+   */
+  AclRuleId?: number
+  /**
+   * 是否匹配。
+   */
+  Action?: number
 }
 
 /**
@@ -14582,29 +15466,13 @@ export interface DescribeCcnRegionBandwidthLimitsRequest {
 }
 
 /**
- * InquiryPriceCreateVpnGateway请求参数结构体
+ * DeleteHaVip返回参数结构体
  */
-export interface InquiryPriceCreateVpnGatewayRequest {
+export interface DeleteHaVipResponse {
   /**
-   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InternetMaxBandwidthOut: number
-  /**
-   * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
-   */
-  InstanceChargeType?: string
-  /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-   */
-  InstanceChargePrepaid?: InstanceChargePrepaid
-  /**
-   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。
-   */
-  MaxConnection?: number
-  /**
-   * 查询的VPN类型，支持IPSEC、SSL两种类型，为SSL类型时，MaxConnection参数必传。
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -14726,6 +15594,16 @@ export interface DeleteCustomerGatewayRequest {
 }
 
 /**
+ * LockCcnBandwidths返回参数结构体
+ */
+export interface LockCcnBandwidthsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAddressTemplates返回参数结构体
  */
 export interface DescribeAddressTemplatesResponse {
@@ -14779,6 +15657,35 @@ export interface AcceptVpcPeeringConnectionRequest {
    * 对等连接唯一ID。
    */
   PeeringConnectionId: string
+}
+
+/**
+ * DescribePrivateNatGatewayLimits请求参数结构体
+ */
+export interface DescribePrivateNatGatewayLimitsRequest {
+  /**
+   * 查询VPC下可创建的私网网关配额数量，可选值：
+<li>VpcId - String - 所在VpcId</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 返回数目，默认值为20。
+   */
+  Limit?: number
+}
+
+/**
+ * CreatePrivateNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
+ */
+export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14863,6 +15770,16 @@ export interface CreateSecurityGroupWithPoliciesRequest {
    * 安全组规则集合。
    */
   SecurityGroupPolicySet?: SecurityGroupPolicySet
+}
+
+/**
+ * ReleaseAddresses请求参数结构体
+ */
+export interface ReleaseAddressesRequest {
+  /**
+   * 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。
+   */
+  AddressIds: Array<string>
 }
 
 /**
@@ -15042,6 +15959,20 @@ export interface ModifySubnetAttributeRequest {
    * 子网是否开启广播。
    */
   EnableBroadcast?: string
+}
+
+/**
+ * RenewAddresses请求参数结构体
+ */
+export interface RenewAddressesRequest {
+  /**
+   * EIP唯一标识ID列表，形如'eip-xxxx'
+   */
+  AddressIds: Array<string>
+  /**
+   * 续费参数
+   */
+  AddressChargePrepaid: AddressChargePrepaid
 }
 
 /**

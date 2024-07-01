@@ -295,12 +295,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAttackHistogram", req, cb);
     }
     /**
-     * 本接口用于修改访问日志保存期限等字段信息
-     */
-    async ModifyAccessPeriod(req, cb) {
-        return this.request("ModifyAccessPeriod", req, cb);
-    }
-    /**
      * 修改域名列表的访问日志开关
      */
     async ModifyDomainsCLSStatus(req, cb) {

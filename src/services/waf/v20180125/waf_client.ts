@@ -137,7 +137,6 @@ import {
   ModifyAntiFakeUrlStatusRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
-  ModifyAccessPeriodResponse,
   ModifyAttackWhiteRuleResponse,
   SearchAccessLogResponse,
   DescribeAntiInfoLeakageRulesRequest,
@@ -358,7 +357,6 @@ import {
   BatchIpAccessControlData,
   DescribeAntiInfoLeakRulesRuleItem,
   DeleteDownloadRecordResponse,
-  ModifyAccessPeriodRequest,
   DescribePeakValueRequest,
   BotQPS,
   DescribeDomainDetailsClbResponse,
@@ -856,16 +854,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAttackHistogramResponse) => void
   ): Promise<GetAttackHistogramResponse> {
     return this.request("GetAttackHistogram", req, cb)
-  }
-
-  /**
-   * 本接口用于修改访问日志保存期限等字段信息
-   */
-  async ModifyAccessPeriod(
-    req: ModifyAccessPeriodRequest,
-    cb?: (error: string, rep: ModifyAccessPeriodResponse) => void
-  ): Promise<ModifyAccessPeriodResponse> {
-    return this.request("ModifyAccessPeriod", req, cb)
   }
 
   /**

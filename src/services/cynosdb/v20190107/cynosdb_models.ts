@@ -1118,32 +1118,32 @@ export interface DescribeClusterPasswordComplexityResponse {
    * 数据字典参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordDictionary: ParamInfo
+  ValidatePasswordDictionary?: ParamInfo
   /**
    * 密码长度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordLength: ParamInfo
+  ValidatePasswordLength?: ParamInfo
   /**
    * 大小写敏感字符个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordMixedCaseCount: ParamInfo
+  ValidatePasswordMixedCaseCount?: ParamInfo
   /**
    * 数字个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordNumberCount: ParamInfo
+  ValidatePasswordNumberCount?: ParamInfo
   /**
    * 密码等级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordPolicy: ParamInfo
+  ValidatePasswordPolicy?: ParamInfo
   /**
    * 特殊字符个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidatePasswordSpecialCharCount: ParamInfo
+  ValidatePasswordSpecialCharCount?: ParamInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3004,11 +3004,11 @@ export interface DescribeClusterDetailDatabasesResponse {
    * 数据库信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbInfos: Array<DbInfo>
+  DbInfos?: Array<DbInfo>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3493,7 +3493,7 @@ export interface DescribeInstanceDetailResponse {
   /**
    * 实例详情
    */
-  Detail: CynosdbInstanceDetail
+  Detail?: CynosdbInstanceDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3868,52 +3868,52 @@ export interface NetAddr {
    * 内网ip
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip: string
+  Vip?: string
   /**
    * 内网端口号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vport: number
+  Vport?: number
   /**
    * 外网域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WanDomain: string
+  WanDomain?: string
   /**
    * 外网端口号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WanPort: number
+  WanPort?: number
   /**
    * 网络类型（ro-只读,rw/ha-读写）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetType: string
+  NetType?: string
   /**
    * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * 私有网络ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * 描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 外网IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WanIP: string
+  WanIP?: string
   /**
    * 外网状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WanStatus: string
+  WanStatus?: string
   /**
    * 实例组ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4500,6 +4500,12 @@ export interface CynosdbInstanceDetail {
    */
   StatusDesc?: string
   /**
+   * serverless实例状态, 可能值：
+resume
+pause
+   */
+  ServerlessStatus?: string
+  /**
    * 数据库类型
    */
   DbType?: string
@@ -4587,12 +4593,6 @@ export interface CynosdbInstanceDetail {
    * serverless实例cpu上限
    */
   MaxCpu?: number
-  /**
-   * serverless实例状态, 可能值：
-resume
-pause
-   */
-  ServerlessStatus?: string
 }
 
 /**
@@ -5988,6 +5988,16 @@ export interface Ability {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportManualSnapshot: string
+  /**
+   * 是否支持透明数据加密
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportTransparentDataEncryption?: string
+  /**
+   * 不支持透明数据加密原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoSupportTransparentDataEncryptionReason?: string
 }
 
 /**
@@ -7299,15 +7309,15 @@ export interface DescribeMaintainPeriodResponse {
   /**
    * 维护week days
    */
-  MaintainWeekDays: Array<string>
+  MaintainWeekDays?: Array<string>
   /**
    * 维护开始时间，单位秒
    */
-  MaintainStartTime: number
+  MaintainStartTime?: number
   /**
    * 维护时长，单位秒
    */
-  MaintainDuration: number
+  MaintainDuration?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9272,6 +9282,11 @@ export interface ParamInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Func?: string
+  /**
+   * 支持公式的参数的默认公式样式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FuncPattern?: string
 }
 
 /**

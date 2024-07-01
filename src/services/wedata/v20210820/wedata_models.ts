@@ -1456,6 +1456,40 @@ export interface EventCaseAuditLogOptDto {
 }
 
 /**
+ * DescribeTableLineage请求参数结构体
+ */
+export interface DescribeTableLineageRequest {
+  /**
+   * 查询方向，INPUT,OUTPUT,BOTH枚举值
+   */
+  Direction: string
+  /**
+   * 表信息
+   */
+  Data: TableLineageInfo
+  /**
+   * 单次查询入度,默认 1
+   */
+  InputDepth?: number
+  /**
+   * 单次查询出度,默认 1
+   */
+  OutputDepth?: number
+  /**
+   * 额外参数（传递调用方信息）
+   */
+  ExtParams?: Array<LineageParamRecord>
+  /**
+   * 是否过滤临时表,默认true
+   */
+  IgnoreTemp?: boolean
+  /**
+   * 是否递归查询二级节点数目，默认为true
+   */
+  RecursiveSecond?: boolean
+}
+
+/**
  * KillOpsMakePlanInstances请求参数结构体
  */
 export interface KillOpsMakePlanInstancesRequest {
@@ -2546,6 +2580,24 @@ export interface InstanceOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CirculateInstanceList?: Array<InstanceOpsDto>
+}
+
+/**
+ * DescribeDutyScheduleDetails请求参数结构体
+ */
+export interface DescribeDutyScheduleDetailsRequest {
+  /**
+   * 值班表id
+   */
+  Id: number
+  /**
+   * 查询时间
+   */
+  QueryDate: string
+  /**
+   * 扩展字段
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5412,14 +5464,13 @@ export interface BatchStopWorkflowsByIdsRequest {
 }
 
 /**
- * DescribeBatchOperateTask返回参数结构体
+ * DescribeDutyScheduleList返回参数结构体
  */
-export interface DescribeBatchOperateTaskResponse {
+export interface DescribeDutyScheduleListResponse {
   /**
    * 无
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: DescribeBatchOperateTaskPage
+  Data: DutySchedule
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6370,23 +6421,179 @@ export interface ModifyRuleRequest {
 }
 
 /**
- * 操作结果
+ * 数据源对象
  */
-export interface BatchReturn {
+export interface DataSourceInfo {
   /**
-   * 执行结果
-   */
-  Result: boolean
-  /**
-   * 执行情况备注
+   * 若数据源列表为绑定数据库，则为db名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorDesc: string
+  DatabaseName?: string
   /**
-   * 执行情况id
+   * 数据源描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorId: string
+  Description?: string
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: number
+  /**
+   * 数据源引擎的实例ID，如CDB实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Instance?: string
+  /**
+   * 数据源名称，在相同SpaceName下，数据源名称不能为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 数据源引擎所属区域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 数据源类型:枚举值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 数据源所属的集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 应用ID AppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * 业务侧数据源的配置信息扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizParams?: string
+  /**
+   * 数据源类别：绑定引擎、绑定数据库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category?: string
+  /**
+   * 数据源展示名，为了可视化查看
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Display?: string
+  /**
+   * 数据源责任人账号ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerAccount?: string
+  /**
+   * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: string
+  /**
+   * 数据源数据源的可见性，1为可见、0为不可见。默认为1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 数据源责任人账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerAccountName?: string
+  /**
+   * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
+  /**
+   * 归属项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerProjectId?: string
+  /**
+   * 归属项目Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerProjectName?: string
+  /**
+   * 归属项目标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerProjectIdent?: string
+  /**
+   * 授权项目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorityProjectName?: string
+  /**
+   * 授权用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorityUserName?: string
+  /**
+   * 是否有编辑权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Edit?: boolean
+  /**
+   * 是否有授权权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Author?: boolean
+  /**
+   * 是否有转交权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deliver?: boolean
+  /**
+   * 数据源状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceStatus?: string
+  /**
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * Params json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamsString?: string
+  /**
+   * BizParams json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizParamsString?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTime?: number
+  /**
+   * 数据源页面展示类型，与Type对应
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShowType?: string
+  /**
+   * 当前数据源生产源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductId?: number
+  /**
+   * 当前数据源开发源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DevelopmentId?: number
+  /**
+   * 同params 内容为开发数据源的数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DevelopmentParams?: string
 }
 
 /**
@@ -9314,6 +9521,21 @@ export interface MakePlanOpsDto {
 }
 
 /**
+ * DescribeBatchOperateTask返回参数结构体
+ */
+export interface DescribeBatchOperateTaskResponse {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeBatchOperateTaskPage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 提交工作流实体
  */
 export interface SubmitWorkflow {
@@ -9442,37 +9664,18 @@ export interface ProjectBaseInfoOpsRequest {
 }
 
 /**
- * DescribeTableLineage请求参数结构体
+ * DeleteRule返回参数结构体
  */
-export interface DescribeTableLineageRequest {
+export interface DeleteRuleResponse {
   /**
-   * 查询方向，INPUT,OUTPUT,BOTH枚举值
+   * 是否删除成功
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Direction: string
+  Data?: boolean
   /**
-   * 表信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Data: TableLineageInfo
-  /**
-   * 单次查询入度,默认 1
-   */
-  InputDepth?: number
-  /**
-   * 单次查询出度,默认 1
-   */
-  OutputDepth?: number
-  /**
-   * 额外参数（传递调用方信息）
-   */
-  ExtParams?: Array<LineageParamRecord>
-  /**
-   * 是否过滤临时表,默认true
-   */
-  IgnoreTemp?: boolean
-  /**
-   * 是否递归查询二级节点数目，默认为true
-   */
-  RecursiveSecond?: boolean
+  RequestId?: string
 }
 
 /**
@@ -9962,6 +10165,21 @@ export interface CreateTaskFolderResponse {
 }
 
 /**
+ * ModifyTaskScript返回参数结构体
+ */
+export interface ModifyTaskScriptResponse {
+  /**
+   * 详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CommonContent
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunForceSucScheduleInstances请求参数结构体
  */
 export interface RunForceSucScheduleInstancesRequest {
@@ -10100,21 +10318,6 @@ export interface TopTableStatItem {
    * 数
    */
   Cnt: number
-}
-
-/**
- * DeleteRule返回参数结构体
- */
-export interface DeleteRuleResponse {
-  /**
-   * 是否删除成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -10963,6 +11166,157 @@ export interface DeleteIntegrationNodeRequest {
    * 项目id
    */
   ProjectId: string
+}
+
+/**
+ * 表的元数据信息
+ */
+export interface TableBasicInfo {
+  /**
+   * 表的全局唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
+  /**
+   * 数据源全局唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: string
+  /**
+   * 数据源名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceName?: string
+  /**
+   * 数据库ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: string
+  /**
+   * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 引擎/存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineType?: string
+  /**
+   * 表类型，视图，外部表等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableType?: string
+  /**
+   * 项目Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 所属项目英文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 所属项目英中文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectDisplayName?: string
+  /**
+   * 责任人ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableOwnerId?: string
+  /**
+   * 责任人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableOwnerName?: string
+  /**
+   * 存储位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageLocation?: number
+  /**
+   * 表描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 是否分区表，0-全量表 1-分区表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPartitionTable?: number
+  /**
+   * 分区字段list
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartitionColumns?: Array<string>
+  /**
+   * 存储格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageFormat?: string
+  /**
+   * 存储量，字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSize?: number
+  /**
+   * 存储量，单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSizeWithUnit?: string
+  /**
+   * 累计存储【MB】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSizeMb?: number
+  /**
+   * 副本数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplicaCount?: number
+  /**
+   * 文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileCount?: number
+  /**
+   * 分区总数（包含hive，iceberg）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartitionCount?: number
+  /**
+   * 分区字段数量（包含hive，iceberg）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartitionFieldCount?: number
+  /**
+   * 生命周期-分区保留天数【分区保留策略时有效】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartitionExpireDays?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 存储位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: string
 }
 
 /**
@@ -12366,6 +12720,24 @@ export interface ModifyDataSourceResponse {
 }
 
 /**
+ * 值班表列表
+ */
+export interface DutyScheduleData {
+  /**
+   * 值班表Id
+   */
+  Id: number
+  /**
+   * 值班表名称
+   */
+  Name: string
+  /**
+   * 创建人
+   */
+  Creator: string
+}
+
+/**
  * DescribeTaskByStatusReport返回参数结构体
  */
 export interface DescribeTaskByStatusReportResponse {
@@ -13462,33 +13834,17 @@ resource 资源
 }
 
 /**
- * 函数资源信息
+ * DescribeDutyScheduleDetails返回参数结构体
  */
-export interface FunctionResource {
+export interface DescribeDutyScheduleDetailsResponse {
   /**
-   * 资源路径
-注意：此字段可能返回 null，表示取不到有效值。
+   * 值班日历信息
    */
-  Path: string
+  Data?: Array<DutyScheduleDetailsInfo>
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * 资源唯一标识
-   */
-  Id?: string
-  /**
-   * 资源 MD5 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Md5?: string
-  /**
-   * 默认是 hdfs
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -14825,179 +15181,104 @@ export interface DescribeOperateOpsTasksRequest {
 }
 
 /**
- * 数据源对象
+ * DescribeBatchOperateTask请求参数结构体
  */
-export interface DataSourceInfo {
+export interface DescribeBatchOperateTaskRequest {
   /**
-   * 若数据源列表为绑定数据库，则为db名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目Id
    */
-  DatabaseName?: string
+  ProjectId: string
   /**
-   * 数据源描述信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页码
    */
-  Description?: string
+  Page: string
   /**
-   * 数据源ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页号
    */
-  ID?: number
+  Size: string
   /**
-   * 数据源引擎的实例ID，如CDB实例ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 状态列表
+草稿：'NS'，'N','P','R'
+运行：''Y'
+停止：'F'
+冻结：'O'
+停止中：'T'
    */
-  Instance?: string
+  StatusList?: Array<string>
   /**
-   * 数据源名称，在相同SpaceName下，数据源名称不能为空
-注意：此字段可能返回 null，表示取不到有效值。
+   * 责任人名列表
    */
-  Name?: string
+  OwnerNameList?: Array<string>
   /**
-   * 数据源引擎所属区域
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作流列表
    */
-  Region?: string
+  WorkflowIdList?: Array<string>
   /**
-   * 数据源类型:枚举值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务名称搜索
    */
-  Type?: string
+  TaskNameFilter?: string
   /**
-   * 数据源所属的集群id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务类型列表
    */
-  ClusterId?: string
+  TaskTypeList?: Array<string>
   /**
-   * 应用ID AppId
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文件夹列表
    */
-  AppId?: number
+  FordIdList?: Array<string>
   /**
-   * 业务侧数据源的配置信息扩展
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务Id搜索
    */
-  BizParams?: string
+  TaskIdFilter?: string
   /**
-   * 数据源类别：绑定引擎、绑定数据库
-注意：此字段可能返回 null，表示取不到有效值。
+   * 责任人搜索
    */
-  Category?: string
+  OwnerNameFilter?: string
   /**
-   * 数据源展示名，为了可视化查看
-注意：此字段可能返回 null，表示取不到有效值。
+   * 排序字段：
+UpdateTime
+CreateTime
    */
-  Display?: string
+  SortItem?: string
   /**
-   * 数据源责任人账号ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * asc:升序
+desc:降序
    */
-  OwnerAccount?: string
+  SortType?: string
   /**
-   * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎类型列表：三种
+SparkJob
+SparkSql
+presto
    */
-  Params?: string
+  DataEngineList?: Array<string>
   /**
-   * 数据源数据源的可见性，1为可见、0为不可见。默认为1
-注意：此字段可能返回 null，表示取不到有效值。
+   * 操作人名
    */
-  Status?: number
+  UserId?: string
   /**
-   * 数据源责任人账号名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 1
    */
-  OwnerAccountName?: string
+  OwnerId?: string
   /**
-   * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 1
    */
-  ClusterName?: string
+  TenantId?: string
   /**
-   * 归属项目ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据源ID列表
    */
-  OwnerProjectId?: string
+  DatasourceIdList?: Array<string>
   /**
-   * 归属项目Name
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据源类型列表
    */
-  OwnerProjectName?: string
+  DatasourceTypeList?: Array<string>
   /**
-   * 归属项目标识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 调度单位类型列表
    */
-  OwnerProjectIdent?: string
+  CycleUnitList?: Array<string>
   /**
-   * 授权项目
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否筛选出可提交的任务
    */
-  AuthorityProjectName?: string
-  /**
-   * 授权用户
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuthorityUserName?: string
-  /**
-   * 是否有编辑权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Edit?: boolean
-  /**
-   * 是否有授权权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Author?: boolean
-  /**
-   * 是否有转交权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deliver?: boolean
-  /**
-   * 数据源状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataSourceStatus?: string
-  /**
-   * 时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: number
-  /**
-   * Params json字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParamsString?: string
-  /**
-   * BizParams json字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BizParamsString?: string
-  /**
-   * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifiedTime?: number
-  /**
-   * 数据源页面展示类型，与Type对应
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShowType?: string
-  /**
-   * 当前数据源生产源Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductId?: number
-  /**
-   * 当前数据源开发源Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DevelopmentId?: number
-  /**
-   * 同params 内容为开发数据源的数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DevelopmentParams?: string
+  CanSubmit?: boolean
 }
 
 /**
@@ -15710,6 +15991,42 @@ export interface DescribeInstanceLogFileRequest {
 }
 
 /**
+ * 值班人员
+ */
+export interface DutyPerson {
+  /**
+   * 值班人子账号id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId: string
+  /**
+   * 值班人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * 值班人员主账号用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUserId?: string
+  /**
+   * 值班人tenantId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TenantId?: number
+  /**
+   * 2023-11-02 08:00:00
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddTime?: string
+  /**
+   * 扩展字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: string
+}
+
+/**
  * DeleteOfflineTask返回参数结构体
  */
 export interface DeleteOfflineTaskResponse {
@@ -16192,6 +16509,40 @@ export interface DescribeWorkflowExecuteByIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 状态趋势统计
+ */
+export interface TaskByStatus {
+  /**
+   * 统计值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CountGroup?: string
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShowTimeGroup?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 周期单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleUnit?: string
+  /**
+   * 1
+   */
+  ReportTime?: string
+  /**
+   * 1
+   */
+  Count?: number
 }
 
 /**
@@ -16857,104 +17208,21 @@ export interface DescribeApproveListRequest {
 }
 
 /**
- * DescribeBatchOperateTask请求参数结构体
+ * DescribeDutyScheduleList请求参数结构体
  */
-export interface DescribeBatchOperateTaskRequest {
+export interface DescribeDutyScheduleListRequest {
   /**
-   * 项目Id
+   * 页码，默认1
    */
-  ProjectId: string
+  PageNumber: number
   /**
-   * 页码
+   * 页大小，默认10
    */
-  Page: string
+  PageSize: number
   /**
-   * 页号
+   * 值班表名称
    */
-  Size: string
-  /**
-   * 状态列表
-草稿：'NS'，'N','P','R'
-运行：''Y'
-停止：'F'
-冻结：'O'
-停止中：'T'
-   */
-  StatusList?: Array<string>
-  /**
-   * 责任人名列表
-   */
-  OwnerNameList?: Array<string>
-  /**
-   * 工作流列表
-   */
-  WorkflowIdList?: Array<string>
-  /**
-   * 任务名称搜索
-   */
-  TaskNameFilter?: string
-  /**
-   * 任务类型列表
-   */
-  TaskTypeList?: Array<string>
-  /**
-   * 文件夹列表
-   */
-  FordIdList?: Array<string>
-  /**
-   * 任务Id搜索
-   */
-  TaskIdFilter?: string
-  /**
-   * 责任人搜索
-   */
-  OwnerNameFilter?: string
-  /**
-   * 排序字段：
-UpdateTime
-CreateTime
-   */
-  SortItem?: string
-  /**
-   * asc:升序
-desc:降序
-   */
-  SortType?: string
-  /**
-   * 引擎类型列表：三种
-SparkJob
-SparkSql
-presto
-   */
-  DataEngineList?: Array<string>
-  /**
-   * 操作人名
-   */
-  UserId?: string
-  /**
-   * 1
-   */
-  OwnerId?: string
-  /**
-   * 1
-   */
-  TenantId?: string
-  /**
-   * 数据源ID列表
-   */
-  DatasourceIdList?: Array<string>
-  /**
-   * 数据源类型列表
-   */
-  DatasourceTypeList?: Array<string>
-  /**
-   * 调度单位类型列表
-   */
-  CycleUnitList?: Array<string>
-  /**
-   * 是否筛选出可提交的任务
-   */
-  CanSubmit?: boolean
+  Name?: string
 }
 
 /**
@@ -17622,37 +17890,23 @@ export interface CreateDataSourceResponse {
 }
 
 /**
- * 状态趋势统计
+ * 操作结果
  */
-export interface TaskByStatus {
+export interface BatchReturn {
   /**
-   * 统计值
+   * 执行结果
+   */
+  Result: boolean
+  /**
+   * 执行情况备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountGroup?: string
+  ErrorDesc: string
   /**
-   * 日期
+   * 执行情况id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShowTimeGroup?: string
-  /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 周期单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleUnit?: string
-  /**
-   * 1
-   */
-  ReportTime?: string
-  /**
-   * 1
-   */
-  Count?: number
+  ErrorId: string
 }
 
 /**
@@ -17957,18 +18211,30 @@ export interface BatchOperateResult {
 }
 
 /**
- * ModifyTaskScript返回参数结构体
+ * 值班表列表
  */
-export interface ModifyTaskScriptResponse {
+export interface DutySchedule {
   /**
-   * 详情
+   * 值班表列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: CommonContent
+  Rows: Array<DutyScheduleData>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 总条数
    */
-  RequestId?: string
+  TotalCount: number
+  /**
+   * 页号
+   */
+  PageNumber: number
+  /**
+   * 页大小
+   */
+  PageSize: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber: number
 }
 
 /**
@@ -18576,6 +18842,21 @@ export interface RunTasksByMultiWorkflowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 值班信息表
+ */
+export interface DutyScheduleDetailsInfo {
+  /**
+   * 值班日期
+   */
+  Day: string
+  /**
+   * 值班信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duty: Array<Duty>
 }
 
 /**
@@ -19252,154 +19533,29 @@ export interface DescribeRuleGroupsByPageResponse {
 }
 
 /**
- * 表的元数据信息
+ * 值班信息
  */
-export interface TableBasicInfo {
+export interface Duty {
   /**
-   * 表的全局唯一ID
+   * 值班Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableId?: string
+  DutyScheduleId: number
   /**
-   * 数据源全局唯一ID
+   * 值班开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceId?: string
+  StartTime: string
   /**
-   * 数据源名
+   * 值班结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceName?: string
+  EndTime: string
   /**
-   * 数据库ID
+   * 值班人员
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseId?: string
-  /**
-   * 数据库名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatabaseName?: string
-  /**
-   * 表名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableName?: string
-  /**
-   * 引擎/存储类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EngineType?: string
-  /**
-   * 表类型，视图，外部表等
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableType?: string
-  /**
-   * 项目Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectId?: string
-  /**
-   * 所属项目英文名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectName?: string
-  /**
-   * 所属项目英中文名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectDisplayName?: string
-  /**
-   * 责任人ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableOwnerId?: string
-  /**
-   * 责任人名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableOwnerName?: string
-  /**
-   * 存储位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageLocation?: number
-  /**
-   * 表描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 是否分区表，0-全量表 1-分区表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsPartitionTable?: number
-  /**
-   * 分区字段list
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionColumns?: Array<string>
-  /**
-   * 存储格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageFormat?: string
-  /**
-   * 存储量，字节数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageSize?: number
-  /**
-   * 存储量，单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageSizeWithUnit?: string
-  /**
-   * 累计存储【MB】
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalSizeMb?: number
-  /**
-   * 副本数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReplicaCount?: number
-  /**
-   * 文件数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileCount?: number
-  /**
-   * 分区总数（包含hive，iceberg）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionCount?: number
-  /**
-   * 分区字段数量（包含hive，iceberg）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionFieldCount?: number
-  /**
-   * 生命周期-分区保留天数【分区保留策略时有效】
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionExpireDays?: number
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 存储位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: string
+  DutyPersons: Array<DutyPerson>
 }
 
 /**
@@ -20923,6 +21079,36 @@ export interface BatchMakeUpIntegrationTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 函数资源信息
+ */
+export interface FunctionResource {
+  /**
+   * 资源路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path: string
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 资源唯一标识
+   */
+  Id?: string
+  /**
+   * 资源 MD5 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Md5?: string
+  /**
+   * 默认是 hdfs
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
 }
 
 /**

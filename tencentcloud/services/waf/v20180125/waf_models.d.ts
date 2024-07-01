@@ -3065,15 +3065,6 @@ export interface ResponseCode {
     Message: string;
 }
 /**
- * ModifyAccessPeriod返回参数结构体
- */
-export interface ModifyAccessPeriodResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ModifyAttackWhiteRule返回参数结构体
  */
 export interface ModifyAttackWhiteRuleResponse {
@@ -8817,20 +8808,6 @@ export interface DeleteDownloadRecordResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * ModifyAccessPeriod请求参数结构体
- */
-export interface ModifyAccessPeriodRequest {
-    /**
-     * 访问日志保存期限，范围为[1, 180]
-     */
-    Period: number;
-    /**
-     * 日志主题，新版本不需要再传
-     * @deprecated
-     */
-    TopicId?: string;
 }
 /**
  * DescribePeakValue请求参数结构体

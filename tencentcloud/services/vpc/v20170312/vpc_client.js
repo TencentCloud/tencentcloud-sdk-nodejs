@@ -46,11 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomerGateways", req, cb);
     }
     /**
-     * 本接口（ReplaceSecurityGroupPolicy）用于替换单条安全组规则（SecurityGroupPolicy）。
-单个请求中只能替换单个方向的一条规则, 必须要指定索引（PolicyIndex）。
+     * 本接口（DisassociateDhcpIpWithAddressIp）用于将DhcpIp已绑定的弹性公网IP（EIP）解除绑定。<br />
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
-    async ReplaceSecurityGroupPolicy(req, cb) {
-        return this.request("ReplaceSecurityGroupPolicy", req, cb);
+    async DisassociateDhcpIpWithAddressIp(req, cb) {
+        return this.request("DisassociateDhcpIpWithAddressIp", req, cb);
     }
     /**
      * 本接口 (AdjustPublicAddress) 用于更换IP地址，支持更换CVM实例的普通公网IP和包月带宽的EIP。
@@ -174,17 +175,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCcnAttachedInstances", req, cb);
     }
     /**
-     * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br />
-注意: 调用本接口是先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
+     * 本接口（DescribePrivateNatGatewayRegions）用于查询查询私网NAT网关可支持地域
      */
-    async ResetRoutes(req, cb) {
-        return this.request("ResetRoutes", req, cb);
+    async DescribePrivateNatGatewayRegions(req, cb) {
+        return this.request("DescribePrivateNatGatewayRegions", req, cb);
     }
     /**
-     * 删除SSL-VPN-SERVER 实例
+     * 本接口（CreatePrivateNatGateway）用于创建私网NAT网关。
      */
-    async DeleteVpnGatewaySslServer(req, cb) {
-        return this.request("DeleteVpnGatewaySslServer", req, cb);
+    async CreatePrivateNatGateway(req, cb) {
+        return this.request("CreatePrivateNatGateway", req, cb);
     }
     /**
      * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID或弹性网卡ID查询弹性网卡配额，返回该CVM实例或弹性网卡能绑定的弹性网卡配额，以及弹性网卡可以分配的IP配额。
@@ -297,6 +297,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpnGatewaySslServer", req, cb);
     }
     /**
+     * 本接口（ReplaceSecurityGroupPolicy）用于替换单条安全组规则（SecurityGroupPolicy）。
+单个请求中只能替换单个方向的一条规则, 必须要指定索引（PolicyIndex）。
+     */
+    async ReplaceSecurityGroupPolicy(req, cb) {
+        return this.request("ReplaceSecurityGroupPolicy", req, cb);
+    }
+    /**
      * 本接口（EnableVpnGatewaySslClientCert）用于启用SSL-VPN-CLIENT 证书。
      */
     async EnableVpnGatewaySslClientCert(req, cb) {
@@ -321,6 +328,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyNetworkAclEntries(req, cb) {
         return this.request("ModifyNetworkAclEntries", req, cb);
+    }
+    /**
+     * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br />
+注意: 调用本接口是先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
+     */
+    async ResetRoutes(req, cb) {
+        return this.request("ResetRoutes", req, cb);
     }
     /**
      * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
@@ -349,6 +363,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateNatGatewayAddress", req, cb);
     }
     /**
+     * 本接口（CreatePrivateNatGatewayTranslationNatRule）用于创建私网NAT网关源端转换规则。
+     */
+    async CreatePrivateNatGatewayTranslationNatRule(req, cb) {
+        return this.request("CreatePrivateNatGatewayTranslationNatRule", req, cb);
+    }
+    /**
+     * 本接口（ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule）用于修改私网NAT网关目的端口转换规则
+     */
+    async ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        return this.request("ModifyPrivateNatGatewayDestinationIpPortTranslationNatRule", req, cb);
+    }
+    /**
+     * 本接口（ModifyPrivateNatGatewayTranslationNatRule）用于修改私网NAT网关源端转换规则
+     */
+    async ModifyPrivateNatGatewayTranslationNatRule(req, cb) {
+        return this.request("ModifyPrivateNatGatewayTranslationNatRule", req, cb);
+    }
+    /**
      * 本接口（ModifyPrivateIpAddressesAttribute）用于修改弹性网卡内网IP属性。
      */
     async ModifyPrivateIpAddressesAttribute(req, cb) {
@@ -361,10 +393,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpcEndPointAttribute", req, cb);
     }
     /**
-     * 本接口（DescribeVpnGatewayRoutes）用于查询VPN网关路由。
+     * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
      */
-    async DescribeVpnGatewayRoutes(req, cb) {
-        return this.request("DescribeVpnGatewayRoutes", req, cb);
+    async DescribeSnapshotPolicies(req, cb) {
+        return this.request("DescribeSnapshotPolicies", req, cb);
     }
     /**
      * 本接口（ModifyVpnGatewayRoutes）用于修改VPN路由是否启用。
@@ -596,6 +628,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LockCcnBandwidths", req, cb);
     }
     /**
+     * 本接口（DescribePrivateNatGatewayDestinationIpPortTranslationNatRules）用于查询私网NAT网关目的端口转换规则
+     */
+    async DescribePrivateNatGatewayDestinationIpPortTranslationNatRules(req, cb) {
+        return this.request("DescribePrivateNatGatewayDestinationIpPortTranslationNatRules", req, cb);
+    }
+    /**
      * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板。
 >?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
 >
@@ -765,6 +803,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableSnapshotPolicies", req, cb);
     }
     /**
+     * 本接口（DeletePrivateNatGatewayTranslationNatRule）用于删除私网NAT网关源端转换规则
+     */
+    async DeletePrivateNatGatewayTranslationNatRule(req, cb) {
+        return this.request("DeletePrivateNatGatewayTranslationNatRule", req, cb);
+    }
+    /**
      * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
      */
     async DescribeDhcpIps(req, cb) {
@@ -804,6 +848,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSubnet", req, cb);
     }
     /**
+     * 删除SSL-VPN-SERVER 实例
+     */
+    async DeleteVpnGatewaySslServer(req, cb) {
+        return this.request("DeleteVpnGatewaySslServer", req, cb);
+    }
+    /**
      * 本接口(AttachClassicLinkVpc)用于创建私有网络和基础网络设备互通。
 * 私有网络和基础网络设备必须在同一个地域。
 * 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/30720">私有网络与基础网络</a>。
@@ -812,6 +862,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AttachClassicLinkVpc(req, cb) {
         return this.request("AttachClassicLinkVpc", req, cb);
+    }
+    /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     */
+    async UnassignIpv6SubnetCidrBlock(req, cb) {
+        return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
     }
     /**
      * 本接口（DisassociateNatGatewayAddress）用于NAT网关解绑弹性IP。
@@ -927,6 +984,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateVpcEndPointService", req, cb);
     }
     /**
+     * 本接口（DescribeVpcEndPoint）用于查询终端节点列表。
+     */
+    async DescribeVpcEndPoint(req, cb) {
+        return this.request("DescribeVpcEndPoint", req, cb);
+    }
+    /**
      * 本接口（HaVipDisassociateAddressIp）用于将高可用虚拟IP（HAVIP）已绑定的弹性公网IP（EIP）解除绑定。<br />
 本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
@@ -947,11 +1010,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachNetworkInterface", req, cb);
     }
     /**
-     * 本接口（RejectAttachCcnInstances）用于跨账号关联实例时，云联网所有者拒绝关联操作。
-
+     * 本接口（DeletePrivateNatGatewayDestinationIpPortTranslationNatRule）用于删除私网NAT网关目的端口转换规则
      */
-    async RejectAttachCcnInstances(req, cb) {
-        return this.request("RejectAttachCcnInstances", req, cb);
+    async DeletePrivateNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        return this.request("DeletePrivateNatGatewayDestinationIpPortTranslationNatRule", req, cb);
     }
     /**
      * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
@@ -978,6 +1040,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteVpnGatewayRoutes(req, cb) {
         return this.request("DeleteVpnGatewayRoutes", req, cb);
+    }
+    /**
+     * 本接口（ModifyCcnAttribute）用于修改云联网（CCN）的相关属性。
+     */
+    async ModifyCcnAttribute(req, cb) {
+        return this.request("ModifyCcnAttribute", req, cb);
     }
     /**
      * 本接口（ModifyDhcpIpAttribute）用于修改DhcpIp属性
@@ -1265,6 +1333,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteVpcEndPointService", req, cb);
     }
     /**
+     * 本接口（DeletePrivateNatGatewayTranslationAclRule）用于删除私网NAT网关源端转换访问控制规则
+     */
+    async DeletePrivateNatGatewayTranslationAclRule(req, cb) {
+        return this.request("DeletePrivateNatGatewayTranslationAclRule", req, cb);
+    }
+    /**
      * 本接口（CreateNetworkAclQuintupleEntries）用于增量网络ACL五元组的入站规则和出站规则。
      */
     async CreateNetworkAclQuintupleEntries(req, cb) {
@@ -1289,11 +1363,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceTemplate", req, cb);
     }
     /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     * 本接口（RejectAttachCcnInstances）用于跨账号关联实例时，云联网所有者拒绝关联操作。
+
      */
-    async ReturnNormalAddresses(req, cb) {
-        return this.request("ReturnNormalAddresses", req, cb);
+    async RejectAttachCcnInstances(req, cb) {
+        return this.request("RejectAttachCcnInstances", req, cb);
     }
     /**
      * 本接口（WithdrawNotifyRoutes）用于撤销已发布到云联网的路由。路由表列表页操作增加“从云联网撤销”。
@@ -1356,6 +1430,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcEndPointServiceWhiteList", req, cb);
     }
     /**
+     * 本接口（UnlockCcnBandwidths）用户解锁云联网限速实例。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（SecurityUnlockCcns）。
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     */
+    async UnlockCcnBandwidths(req, cb) {
+        return this.request("UnlockCcnBandwidths", req, cb);
+    }
+    /**
      * 本接口（RejectVpcPeeringConnection）用于驳回对等连接请求。
      */
     async RejectVpcPeeringConnection(req, cb) {
@@ -1374,6 +1456,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomerGateway", req, cb);
     }
     /**
+     * 本接口（DescribePrivateNatGatewayLimits）用于查询可创建的私网NAT网关配额数量
+     */
+    async DescribePrivateNatGatewayLimits(req, cb) {
+        return this.request("DescribePrivateNatGatewayLimits", req, cb);
+    }
+    /**
      * 本接口（DescribeCrossBorderCompliance）用于查询用户创建的合规化资质审批单。
 服务商可以查询服务名下的任意 `APPID` 创建的审批单；非服务商，只能查询自己审批单。
      */
@@ -1387,12 +1475,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAddressTemplateGroup", req, cb);
     }
     /**
-     * 本接口（UnlockCcnBandwidths）用户解锁云联网限速实例。
-该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（SecurityUnlockCcns）。
-如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     * 本接口（ModifyPrivateNatGatewayAttribute）用于修改私网NAT网关属性
      */
-    async UnlockCcnBandwidths(req, cb) {
-        return this.request("UnlockCcnBandwidths", req, cb);
+    async ModifyPrivateNatGatewayAttribute(req, cb) {
+        return this.request("ModifyPrivateNatGatewayAttribute", req, cb);
     }
     /**
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
@@ -1676,11 +1762,10 @@ LimitTypes取值范围：
         return this.request("DescribeHaVips", req, cb);
     }
     /**
-     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。<br />
-子网段如果还有IP占用且未回收，则子网段无法释放。
+     * 本接口（DescribePrivateNatGateways）用于查询私网NAT网关
      */
-    async UnassignIpv6SubnetCidrBlock(req, cb) {
-        return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
+    async DescribePrivateNatGateways(req, cb) {
+        return this.request("DescribePrivateNatGateways", req, cb);
     }
     /**
      * 本接口（CreateLocalGateway）用于创建用于CDC的本地网关。
@@ -1764,6 +1849,12 @@ LimitTypes取值范围：
         return this.request("DescribeSubnets", req, cb);
     }
     /**
+     * 本接口（DescribeVpnGatewayRoutes）用于查询VPN网关路由。
+     */
+    async DescribeVpnGatewayRoutes(req, cb) {
+        return this.request("DescribeVpnGatewayRoutes", req, cb);
+    }
+    /**
      * 本接口 (DescribeAddressQuota) 用于查询您账户的[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）在当前地域的配额信息。配额详情可参见 [EIP 产品简介](https://cloud.tencent.com/document/product/213/5733)。
      */
     async DescribeAddressQuota(req, cb) {
@@ -1784,6 +1875,13 @@ LimitTypes取值范围：
         return this.request("ModifyCustomerGatewayAttribute", req, cb);
     }
     /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     */
+    async ReturnNormalAddresses(req, cb) {
+        return this.request("ReturnNormalAddresses", req, cb);
+    }
+    /**
      * 本接口（DescribeNetworkAcls）用于查询网络ACL列表。
      */
     async DescribeNetworkAcls(req, cb) {
@@ -1800,6 +1898,12 @@ LimitTypes取值范围：
      */
     async DescribeSecurityGroups(req, cb) {
         return this.request("DescribeSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口（DescribePrivateNatGatewayTranslationNatRules）用于查询私网NAT网关源端转换规则
+     */
+    async DescribePrivateNatGatewayTranslationNatRules(req, cb) {
+        return this.request("DescribePrivateNatGatewayTranslationNatRules", req, cb);
     }
     /**
      * 本接口（CreateVpnGateway）用于创建VPN网关。
@@ -1859,12 +1963,10 @@ LimitTypes取值范围：
         return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb);
     }
     /**
-     * 本接口（DisassociateDhcpIpWithAddressIp）用于将DhcpIp已绑定的弹性公网IP（EIP）解除绑定。<br />
->?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
->
+     * 本接口（CreatePrivateNatGatewayDestinationIpPortTranslationNatRule）用于创建私网NAT网关目的端口转换规则
      */
-    async DisassociateDhcpIpWithAddressIp(req, cb) {
-        return this.request("DisassociateDhcpIpWithAddressIp", req, cb);
+    async CreatePrivateNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        return this.request("CreatePrivateNatGatewayDestinationIpPortTranslationNatRule", req, cb);
     }
     /**
      * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）。
@@ -2034,10 +2136,16 @@ LimitTypes取值范围：
         return this.request("ModifyNatGatewaySourceIpTranslationNatRule", req, cb);
     }
     /**
-     * 本接口（ModifyCcnAttribute）用于修改云联网（CCN）的相关属性。
+     * 本接口（ CreatePrivateNatGatewayTranslationAclRule）用于创建私网NAT网关源端转换访问控制规则
      */
-    async ModifyCcnAttribute(req, cb) {
-        return this.request("ModifyCcnAttribute", req, cb);
+    async CreatePrivateNatGatewayTranslationAclRule(req, cb) {
+        return this.request("CreatePrivateNatGatewayTranslationAclRule", req, cb);
+    }
+    /**
+     * 本接口（ModifyPrivateNatGatewayTranslationAclRule）用于修改私网NAT网关源端转换访问控制规则
+     */
+    async ModifyPrivateNatGatewayTranslationAclRule(req, cb) {
+        return this.request("ModifyPrivateNatGatewayTranslationAclRule", req, cb);
     }
     /**
      * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
@@ -2058,10 +2166,10 @@ LimitTypes取值范围：
         return this.request("DescribeSecurityGroupAssociationStatistics", req, cb);
     }
     /**
-     * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
+     * 本接口（DescribePrivateNatGatewayTranslationAclRules）用于查询私网NAT网关源端转换访问控制规则
      */
-    async DescribeSnapshotPolicies(req, cb) {
-        return this.request("DescribeSnapshotPolicies", req, cb);
+    async DescribePrivateNatGatewayTranslationAclRules(req, cb) {
+        return this.request("DescribePrivateNatGatewayTranslationAclRules", req, cb);
     }
     /**
      * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
@@ -2173,10 +2281,10 @@ LimitTypes取值范围：
         return this.request("ModifyVpcAttribute", req, cb);
     }
     /**
-     * 本接口（DescribeVpcEndPoint）用于查询终端节点列表。
+     * 本接口（DeletePrivateNatGateway）用于删除私网NAT网关。
      */
-    async DescribeVpcEndPoint(req, cb) {
-        return this.request("DescribeVpcEndPoint", req, cb);
+    async DeletePrivateNatGateway(req, cb) {
+        return this.request("DeletePrivateNatGateway", req, cb);
     }
     /**
      * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。

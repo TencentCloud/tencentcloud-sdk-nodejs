@@ -197,7 +197,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  SCF同步调用函数接口
+   * SCF同步调用函数接口。
    */
   async InvokeFunction(
     req: InvokeFunctionRequest,

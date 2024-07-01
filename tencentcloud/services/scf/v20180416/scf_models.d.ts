@@ -649,7 +649,7 @@ export interface InvokeFunctionResponse {
     /**
      * 函数执行结果
      */
-    Result: Result;
+    Result?: Result;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1432,35 +1432,35 @@ export interface Result {
     /**
      * 表示执行过程中的日志输出，异步调用返回为空
      */
-    Log: string;
+    Log?: string;
     /**
      * 表示执行函数的返回，异步调用返回为空
      */
-    RetMsg: string;
+    RetMsg?: string;
     /**
      * 表示执行函数的错误返回信息，异步调用返回为空
      */
-    ErrMsg: string;
+    ErrMsg?: string;
     /**
      * 执行函数时的内存大小，单位为Byte，异步调用返回为空
      */
-    MemUsage: number;
+    MemUsage?: number;
     /**
      * 表示执行函数的耗时，单位是毫秒，异步调用返回为空
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 表示函数的计费耗时，单位是毫秒，异步调用返回为空
      */
-    BillDuration: number;
+    BillDuration?: number;
     /**
      * 此次函数执行的Id
      */
-    FunctionRequestId: string;
+    FunctionRequestId?: string;
     /**
      * 请求 Invoke 接口，该参数已弃用。请求 InvokeFunction 接口，该参数值为请求执行[状态码](https://cloud.tencent.com/document/product/583/42611)。
      */
-    InvokeResult: number;
+    InvokeResult?: number;
 }
 /**
  * CreateAlias返回参数结构体

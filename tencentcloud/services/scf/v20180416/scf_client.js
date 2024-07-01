@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateNamespace", req, cb);
     }
     /**
-     *  SCF同步调用函数接口
+     * SCF同步调用函数接口。
      */
     async InvokeFunction(req, cb) {
         return this.request("InvokeFunction", req, cb);

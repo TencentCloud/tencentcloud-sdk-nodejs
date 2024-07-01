@@ -179,6 +179,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFieldBasicInfo", req, cb);
     }
     /**
+     * 查询表得分趋势
+     */
+    async DescribeTableScoreTrend(req, cb) {
+        return this.request("DescribeTableScoreTrend", req, cb);
+    }
+    /**
      * 删除编排空间工作流
      */
     async RemoveWorkflowDs(req, cb) {
@@ -492,10 +498,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIntegrationTask", req, cb);
     }
     /**
-     * 查询表得分趋势
+     * 获取值班日历
      */
-    async DescribeTableScoreTrend(req, cb) {
-        return this.request("DescribeTableScoreTrend", req, cb);
+    async DescribeDutyScheduleDetails(req, cb) {
+        return this.request("DescribeDutyScheduleDetails", req, cb);
     }
     /**
      * 数据集成大屏任务状态分布统计
@@ -745,6 +751,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDsFolder", req, cb);
     }
     /**
+     * 批量操作页面获取任务列表
+     */
+    async DescribeBatchOperateTask(req, cb) {
+        return this.request("DescribeBatchOperateTask", req, cb);
+    }
+    /**
      * 获取资源管理目录树
      */
     async DescribeResourceManagePathTrees(req, cb) {
@@ -808,10 +820,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeColumnsMeta", req, cb);
     }
     /**
-     * 批量操作页面获取任务列表
+     * 获取值班表列表
      */
-    async DescribeBatchOperateTask(req, cb) {
-        return this.request("DescribeBatchOperateTask", req, cb);
+    async DescribeDutyScheduleList(req, cb) {
+        return this.request("DescribeDutyScheduleList", req, cb);
     }
     /**
      * 删除质量规则接口

@@ -1060,10 +1060,12 @@ export interface DescribeManagerDetailRequest {
     ManagerId: number;
     /**
      * 分页每页数量
+     * @deprecated
      */
     Limit?: number;
     /**
      * 分页偏移量
+     * @deprecated
      */
     Offset?: number;
 }
@@ -2838,81 +2840,81 @@ export interface DescribeManagerDetailResponse {
     /**
      * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
      */
-    Status: string;
+    Status?: string;
     /**
      * 管理人姓名
      */
-    ManagerFirstName: string;
+    ManagerFirstName?: string;
     /**
      * 管理人邮箱
      */
-    ManagerMail: string;
+    ManagerMail?: string;
     /**
      * 联系人姓名
      */
-    ContactFirstName: string;
+    ContactFirstName?: string;
     /**
      * 管理人姓名
      */
-    ManagerLastName: string;
+    ManagerLastName?: string;
     /**
      * 联系人职位
      */
-    ContactPosition: string;
+    ContactPosition?: string;
     /**
      * 管理人职位
      */
-    ManagerPosition: string;
+    ManagerPosition?: string;
     /**
      * 核验通过时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VerifyTime: string;
+    VerifyTime?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 核验过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 联系人姓名
      */
-    ContactLastName: string;
+    ContactLastName?: string;
     /**
      * 管理人电话
      */
-    ManagerPhone: string;
+    ManagerPhone?: string;
     /**
      * 联系人电话
      */
-    ContactPhone: string;
+    ContactPhone?: string;
     /**
      * 联系人邮箱
      */
-    ContactMail: string;
+    ContactMail?: string;
     /**
      * 管理人所属部门
      */
-    ManagerDepartment: string;
+    ManagerDepartment?: string;
     /**
      * 管理人所属公司信息
      */
-    CompanyInfo: CompanyInfo;
+    CompanyInfo?: CompanyInfo;
     /**
      * 管理人公司ID
      */
-    CompanyId: number;
+    CompanyId?: number;
     /**
      * 管理人ID
      */
-    ManagerId: number;
+    ManagerId?: number;
     /**
      * 审核状态详细信息
      */
-    StatusInfo: Array<ManagerStatusInfo>;
+    StatusInfo?: Array<ManagerStatusInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4969,7 +4971,28 @@ export interface DescribeCompaniesRequest {
 /**
  * 管理人的四种审核状态
  */
-export declare type ManagerStatusInfo = null;
+export interface ManagerStatusInfo {
+    /**
+     * 审核类型，枚举值：ov,ev,cs,ev_cs
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 审核状态，枚举值：pending,completed,invalid,submitted,expiring,expired
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+}
 /**
  * CancelAuditCertificate返回参数结构体
  */
