@@ -785,6 +785,7 @@ import {
   DisableCcnRoutesResponse,
   DescribeCcnRegionBandwidthLimitsRequest,
   DeleteHaVipResponse,
+  HealthCheckConfig,
   CreateAssistantCidrResponse,
   CustomerGatewayVendor,
   DescribeAddressTemplatesRequest,

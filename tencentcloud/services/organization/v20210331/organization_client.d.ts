@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     CreateOrganizationMemberAuthIdentity(req: CreateOrganizationMemberAuthIdentityRequest, cb?: (error: string, rep: CreateOrganizationMemberAuthIdentityResponse) => void): Promise<CreateOrganizationMemberAuthIdentityResponse>;
     /**
-     * 批量删除企业组织成员
+     * 从组织中移除成员账号，不会删除账号。
      */
     DeleteOrganizationMembers(req: DeleteOrganizationMembersRequest, cb?: (error: string, rep: DeleteOrganizationMembersResponse) => void): Promise<DeleteOrganizationMembersResponse>;
     /**

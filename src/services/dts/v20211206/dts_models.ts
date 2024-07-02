@@ -4756,6 +4756,11 @@ export interface Endpoint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChildInstanceType?: string
+  /**
+   * tdsql的分片id。如节点类型为set必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetId?: string
 }
 
 /**

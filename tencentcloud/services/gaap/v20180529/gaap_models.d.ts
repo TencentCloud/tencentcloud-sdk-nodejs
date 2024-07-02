@@ -813,6 +813,15 @@ export interface DestroyProxiesRequest {
     ProxyIds?: Array<string>;
 }
 /**
+ * SetTlsVersion返回参数结构体
+ */
+export interface SetTlsVersionResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRules返回参数结构体
  */
 export interface DescribeRulesResponse {
@@ -1176,6 +1185,23 @@ export interface IPDetail {
      * 带宽
      */
     Bandwidth: number;
+}
+/**
+ * SetTlsVersion请求参数结构体
+ */
+export interface SetTlsVersionRequest {
+    /**
+     * 监听器ID
+     */
+    ListenerId: string;
+    /**
+     * TLS版本
+     */
+    TLSSupportVersion: Array<string>;
+    /**
+     * 密码套件包
+     */
+    TLSCiphers: string;
 }
 /**
  * 通道状态信息

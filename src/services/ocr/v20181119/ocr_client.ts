@@ -183,7 +183,7 @@ import {
   OtherInvoiceList,
   IDCardOCRResponse,
   ShipInvoiceInfo,
-  Polygon,
+  MedicalInvoiceItem,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
@@ -239,9 +239,10 @@ import {
   CarInvoiceOCRResponse,
   VehicleRegCertOCRResponse,
   GeneralFastOCRRequest,
-  MedicalInvoiceItem,
+  ImageSize,
   DocumentElement,
   RecognizeGeneralInvoiceResponse,
+  Polygon,
   GetTaskStateResponse,
   InsuranceBillInfo,
   GetTaskStateRequest,
@@ -1325,6 +1326,8 @@ export class Client extends AbstractClient {
      * 本接口支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。
 
 产品优势：针对广告商品图片普遍存在较多繁体字、艺术字的特点，进行了识别能力的增强。支持中英文、横排、竖排以及倾斜场景文字识别。文字识别的召回率和准确率能达到96%以上。
+
+默认接口请求频率限制：20次/秒。
      */
   async AdvertiseOCR(
     req: AdvertiseOCRRequest,

@@ -178,6 +178,16 @@ it("gaap.v20180529.CreateProxyGroupDomain", async function () {
     }
 })
 
+it("gaap.v20180529.SetTlsVersion", async function () {
+    try {
+       const data = await client.SetTlsVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.CreateUDPListeners", async function () {
     try {
        const data = await client.CreateUDPListeners({})

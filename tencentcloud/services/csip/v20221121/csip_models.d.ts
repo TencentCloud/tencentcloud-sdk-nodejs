@@ -599,7 +599,7 @@ export interface AssetViewCFGRisk {
      */
     Status?: number;
     /**
-     * -
+     * 相关规范
      */
     CFGSTD?: string;
     /**
@@ -1616,7 +1616,7 @@ export interface DeleteDomainAndIpRequest {
      */
     MemberId?: Array<string>;
     /**
-     * -
+     * 资产
      */
     Content?: Array<PublicIpDomainListKey>;
     /**
@@ -3256,7 +3256,7 @@ export interface AssetViewWeakPassRisk {
      */
     Status?: number;
     /**
-     * 资产唯一id
+     * ID，处理风险使用
      */
     Id?: string;
     /**
@@ -3306,7 +3306,7 @@ export interface AssetViewWeakPassRisk {
      */
     Fix?: string;
     /**
-     * 负载
+     * 证明
      */
     Payload?: string;
 }
@@ -3335,7 +3335,7 @@ export interface WebsiteRisk {
      */
     Status?: number;
     /**
-     * 资产唯一id
+     * ID,处理风险使用
      */
     Id?: string;
     /**
@@ -3850,7 +3850,7 @@ export interface VULViewVULRisk {
  */
 export interface PortViewPortRisk {
     /**
-     * 影响资产
+     * 未处理数量
      */
     NoHandleCount?: number;
     /**
@@ -3882,15 +3882,15 @@ export interface PortViewPortRisk {
      */
     Suggestion?: number;
     /**
-     * 状态，0未处理、1已处置、2已忽略
+     * 影响资产数量
      */
     AffectAssetCount?: string;
     /**
-     * 资产唯一id
+     * ID
      */
     Id?: string;
     /**
-     * 资产子类型
+     * 识别来源
      */
     From?: string;
     /**

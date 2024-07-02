@@ -125,6 +125,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProxyGroupDomain", req, cb);
     }
     /**
+     * 设置监听器TLS配置
+     */
+    async SetTlsVersion(req, cb) {
+        return this.request("SetTlsVersion", req, cb);
+    }
+    /**
      * 该接口（CreateUDPListeners）用于批量创建单通道或者通道组的UDP协议类型的监听器。
      */
     async CreateUDPListeners(req, cb) {

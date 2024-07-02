@@ -2412,10 +2412,14 @@ export interface AccelerationDomainCertificate {
    */
   Mode?: string
   /**
-   * 证书列表。
+   * 服务端证书列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<CertificateInfo>
+  /**
+   * 边缘双向认证配置。
+   */
+  ClientCertInfo?: MutualTLS
 }
 
 /**
@@ -5518,6 +5522,23 @@ export interface RulesSettingAction {
 }
 
 /**
+ * HTTPS 双向认证。
+ */
+export interface MutualTLS {
+  /**
+   * 双向认证配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 双向认证证书列表。
+注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。
+   */
+  CertInfos?: Array<CertificateInfo>
+}
+
+/**
  * Ipv6访问配置
  */
 export interface Ipv6 {
@@ -6415,13 +6436,13 @@ export interface CreateApplicationProxyRuleResponse {
 }
 
 /**
- * https 服务端证书配置
+ * https 证书配置。
  */
 export interface CertificateInfo {
   /**
-   * 服务器证书 ID。
+   * 证书 ID。
    */
-  CertId?: string
+  CertId: string
   /**
    * 证书备注名。
    */
@@ -7190,14 +7211,15 @@ export interface ModifyHostsCertificateRequest {
    */
   Hosts: Array<string>
   /**
-   * 配置证书的模式，取值有：
-<li>disable：不配置证书；</li>
-<li>eofreecert：配置 EdgeOne 免费证书；</li>
-<li>sslcert：配置 SSL 证书。</li>不填时默认取值为 disable。
+   * 配置服务端证书的模式，取值有：
+<li>disable：不配置服务端证书；</li>
+<li>eofreecert：配置 EdgeOne 免费服务端证书；</li>
+<li>sslcert：配置 SSL 托管服务端证书；</li>
+不填写表示服务端证书保持原有配置。
    */
   Mode?: string
   /**
-   * SSL 证书配置，本参数仅在 mode = sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。
+   * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。
    */
   ServerCertInfo?: Array<ServerCertInfo>
   /**
@@ -7208,6 +7230,11 @@ export interface ModifyHostsCertificateRequest {
    * @deprecated
    */
   ApplyType?: string
+  /**
+   * 边缘双向认证配置。
+不填写表示边缘双向认证保持原有配置。
+   */
+  ClientCertInfo?: MutualTLS
 }
 
 /**

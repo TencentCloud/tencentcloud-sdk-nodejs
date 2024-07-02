@@ -423,7 +423,7 @@ export interface CreateImageModerationAsyncTaskRequest {
    */
   DataId?: string
   /**
-   * 该字段表示待检测图片文件内容的Base64编码，图片**大小不超过5MB**，建议**分辨率不低于256x256**，否则可能会影响识别效果。<br>备注： **该字段与FileUrl必须选择输入其中一个**。
+   * 该字段表示待检测图片文件内容的Base64编码，图片**大小不超过30MB**，建议**分辨率不低于256x256**，否则可能会影响识别效果。<br>备注： **该字段与FileUrl必须选择输入其中一个**。
    */
   FileContent?: string
   /**

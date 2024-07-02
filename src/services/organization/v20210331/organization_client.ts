@@ -355,7 +355,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除企业组织成员
+   * 从组织中移除成员账号，不会删除账号。
    */
   async DeleteOrganizationMembers(
     req: DeleteOrganizationMembersRequest,

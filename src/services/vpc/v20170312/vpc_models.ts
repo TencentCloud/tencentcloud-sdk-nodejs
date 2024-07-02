@@ -4315,6 +4315,10 @@ CCN VPN 形的通道 可以不传VPCID
    * BGP配置。
    */
   BgpConfig?: BgpConfig
+  /**
+   * 健康检查NQA配置。
+   */
+  HealthCheckConfig?: HealthCheckConfig
 }
 
 /**
@@ -4551,6 +4555,11 @@ export interface VpnConnection {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BgpConfig?: BgpConfigAndAsn
+  /**
+   * Nqa配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckConfig?: HealthCheckConfig
 }
 
 /**
@@ -13416,6 +13425,10 @@ export interface ModifyVpnConnectionAttributeRequest {
    * 对端网关ID，4.0及以上网关下的通道支持更新。
    */
   CustomerGatewayId?: string
+  /**
+   * 健康检查配置
+   */
+  HealthCheckConfig?: HealthCheckConfig
 }
 
 /**
@@ -15473,6 +15486,32 @@ export interface DeleteHaVipResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VPN通道健康检查配置
+ */
+export interface HealthCheckConfig {
+  /**
+   * 探测模式，默认值NQA，不可修改。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProbeType?: string
+  /**
+   * 探测间隔，腾讯云两次健康检查间隔时间，范围【1000-5000】，单位ms。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProbeInterval?: number
+  /**
+   * 探测次数，连续N次健康检查失败后执行路由切换，范围【3-8】，单位次。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProbeThreshold?: number
+  /**
+   * 探测超时时间，范围【10-5000】，单位ms。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProbeTimeout?: number
 }
 
 /**

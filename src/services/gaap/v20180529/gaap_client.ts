@@ -61,6 +61,7 @@ import {
   CheckProxyCreateResponse,
   ModifyCertificateRequest,
   DestroyProxiesRequest,
+  SetTlsVersionResponse,
   DescribeRulesResponse,
   DescribeProxiesResponse,
   CreateRuleResponse,
@@ -82,6 +83,7 @@ import {
   DescribeListenerRealServersResponse,
   DescribeProxyDetailRequest,
   IPDetail,
+  SetTlsVersionRequest,
   ProxyStatus,
   DeleteDomainRequest,
   CreateFirstLinkSessionRequest,
@@ -444,6 +446,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProxyGroupDomainResponse) => void
   ): Promise<CreateProxyGroupDomainResponse> {
     return this.request("CreateProxyGroupDomain", req, cb)
+  }
+
+  /**
+   * 设置监听器TLS配置
+   */
+  async SetTlsVersion(
+    req: SetTlsVersionRequest,
+    cb?: (error: string, rep: SetTlsVersionResponse) => void
+  ): Promise<SetTlsVersionResponse> {
+    return this.request("SetTlsVersion", req, cb)
   }
 
   /**

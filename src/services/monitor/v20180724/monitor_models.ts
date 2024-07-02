@@ -6940,6 +6940,10 @@ export interface DescribeAlarmHistoriesRequest {
    * 告警等级,取值范围：Remind、Serious、Warn
    */
   AlarmLevels?: Array<string>
+  /**
+   * 收敛历史的唯一id
+   */
+  ConvergenceHistoryIDs?: Array<string>
 }
 
 /**

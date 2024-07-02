@@ -3151,48 +3151,52 @@ export interface InstanceBackupFileItem {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例状态
      */
-    InstanceStatus: number;
+    InstanceStatus?: number;
     /**
      * 分片ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShardId: string;
+    ShardId?: string;
     /**
      * 文件路径
      */
-    FilePath: string;
+    FilePath?: string;
     /**
      * 文件名
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件大小
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
      */
-    BackupType: string;
+    BackupType?: string;
     /**
      * 手动备份，0:否，1:是
      */
-    ManualBackup: number;
+    ManualBackup?: number;
     /**
      * 备份开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份结束时间
      */
-    EndTime: string;
+    EndTime?: string;
+    /**
+     * 对象的存储类型，枚举值：STANDARD（标准存储）、ARCHIVE（归档存储）。
+     */
+    StorageClass?: string;
 }
 /**
  * DescribeOrders请求参数结构体

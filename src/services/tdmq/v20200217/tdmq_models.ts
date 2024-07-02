@@ -3019,6 +3019,10 @@ export interface CreateRabbitMQVipInstanceRequest {
    * 公网带宽大小，单位 M
    */
   Bandwidth?: number
+  /**
+   * 是否打开公网接入，不传默认为false
+   */
+  EnablePublicAccess?: boolean
 }
 
 /**
@@ -5199,11 +5203,11 @@ export interface CreateRoleRequest {
   /**
    * 备注说明，长度必须大等于0且小等于128。
    */
-  Remark?: string
+  Remark: string
   /**
    * 必填字段，集群Id
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -8086,6 +8090,11 @@ export interface RabbitMQVirtualHostInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualHostStatistics?: RabbitMQVirtualHostStatistics
+  /**
+   * 消息轨迹开关,true打开,false关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceFlag?: boolean
   /**
    * vhost状态，与原生控制台对应，有running、partial、stopped、unknown
 注意：此字段可能返回 null，表示取不到有效值。

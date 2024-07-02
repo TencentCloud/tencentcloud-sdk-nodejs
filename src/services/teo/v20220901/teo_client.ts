@@ -238,6 +238,7 @@ import {
   BindSharedCNAMEMap,
   DeleteRealtimeLogDeliveryTaskRequest,
   RulesSettingAction,
+  MutualTLS,
   Ipv6,
   ModifyApplicationProxyRuleRequest,
   AclConfig,
