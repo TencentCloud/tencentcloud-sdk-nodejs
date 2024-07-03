@@ -281,6 +281,14 @@ hi：印地语
    * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于6000字符。
    */
   SourceTextList: Array<string>
+  /**
+   * 需要使用的术语库列表
+   */
+  TermRepoIDList?: Array<string>
+  /**
+   * 需要使用的例句库列表
+   */
+  SentRepoIDList?: Array<string>
 }
 
 /**
@@ -516,6 +524,14 @@ hi：印地语
    * 用来标记不希望被翻译的文本内容，如句子中的特殊符号、人名、地名等；每次请求只支持配置一个不被翻译的单词；仅支持配置人名、地名等名词，不要配置动词或短语，否则会影响翻译结果。
    */
   UntranslatedText?: string
+  /**
+   * 需要使用的术语库列表
+   */
+  TermRepoIDList?: Array<string>
+  /**
+   * 需要使用的例句库列表
+   */
+  SentRepoIDList?: Array<string>
 }
 
 /**

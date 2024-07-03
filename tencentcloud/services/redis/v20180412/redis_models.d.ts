@@ -492,11 +492,11 @@ export interface CommandTake {
     /**
      * 命令名。
      */
-    Cmd: string;
+    Cmd?: string;
     /**
-     * 耗时时长。
+     * 耗时时长。单位：ms。
      */
-    Took: number;
+    Took?: number;
 }
 /**
  * DescribeInstanceMonitorBigKey返回参数结构体
@@ -3111,11 +3111,15 @@ export interface RedisNodes {
  */
 export interface DescribeInstanceMonitorTopNCmdRequest {
     /**
-     * 实例Id
+     * 实例 ID。
      */
     InstanceId: string;
     /**
-     * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
+     * 时间范围。
+  - 1：实时。
+  - 2：近30分钟。
+  - 3：近6小时。
+  - 4：近24小时。
      */
     SpanType: number;
 }
@@ -4175,11 +4179,11 @@ export interface SourceCommand {
     /**
      * 命令名称。
      */
-    Cmd: string;
+    Cmd?: string;
     /**
      * 执行次数。
      */
-    Count: number;
+    Count?: number;
 }
 /**
  * ModfiyInstancePassword请求参数结构体
@@ -5087,7 +5091,7 @@ export interface AddReplicationInstanceRequest {
  */
 export interface InstanceClusterNode {
     /**
-     * 节点名称。
+     * 节点组名称。
      */
     Name?: string;
     /**
@@ -5683,7 +5687,7 @@ export interface OpenSSLResponse {
     /**
      * 任务ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5749,19 +5753,21 @@ export interface ZoneCapacityConf {
      */
     ZoneId?: string;
     /**
-     * 可用区名称
+     * 可用区名称。
      */
     ZoneName?: string;
     /**
-     * 可用区是否售罄
+     * 可用区是否售罄。
      */
     IsSaleout?: boolean;
     /**
-     * 是否为默认可用区
+     * 是否为默认可用区。
      */
     IsDefault?: boolean;
     /**
-     * 网络类型：basenet -- 基础网络；vpcnet -- VPC网络
+     * 网络类型。
+  - basenet：基础网络。
+  - vpcnet -- VPC网络。
      */
     NetWorkType?: Array<string>;
     /**

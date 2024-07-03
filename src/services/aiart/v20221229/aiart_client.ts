@@ -37,6 +37,8 @@ import {
   SubmitTrainPortraitModelJobResponse,
   QueryDrawPortraitJobRequest,
   ImageToImageResponse,
+  ReplaceBackgroundRequest,
+  ReplaceBackgroundResponse,
   UploadTrainPortraitImagesResponse,
   QueryTextToImageProJobRequest,
   GenerateAvatarResponse,
@@ -65,6 +67,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitTextToImageProJobResponse) => void
   ): Promise<SubmitTextToImageProJobResponse> {
     return this.request("SubmitTextToImageProJob", req, cb)
+  }
+
+  /**
+     * 商品背景生成接口根据指定的背景描述 Prompt，将商品图中的原背景替换为自定义的新背景并保留商品主体形象，实现商品背景的自由生成与更换。
+
+商品背景生成默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async ReplaceBackground(
+    req: ReplaceBackgroundRequest,
+    cb?: (error: string, rep: ReplaceBackgroundResponse) => void
+  ): Promise<ReplaceBackgroundResponse> {
+    return this.request("ReplaceBackground", req, cb)
   }
 
   /**

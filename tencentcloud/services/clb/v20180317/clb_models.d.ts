@@ -2827,75 +2827,75 @@ export interface ClassicalListener {
     /**
      * 负载均衡监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 负载均衡监听器端口
      */
-    ListenerPort: number;
+    ListenerPort?: number;
     /**
      * 监听器后端转发端口
      */
-    InstancePort: number;
+    InstancePort?: number;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器协议类型
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 会话保持时间
      */
-    SessionExpire: number;
+    SessionExpire?: number;
     /**
      * 是否开启了健康检查：1（开启）、0（关闭）
      */
-    HealthSwitch: number;
+    HealthSwitch?: number;
     /**
      * 响应超时时间
      */
-    TimeOut: number;
+    TimeOut?: number;
     /**
      * 检查间隔
      */
-    IntervalTime: number;
+    IntervalTime?: number;
     /**
      * 健康阈值
      */
-    HealthNum: number;
+    HealthNum?: number;
     /**
      * 不健康阈值
      */
-    UnhealthNum: number;
+    UnhealthNum?: number;
     /**
-     * 传统型公网负载均衡的 HTTP、HTTPS 监听器的请求均衡方法。wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发
+     * 传统型公网负载均衡 监听器的请求均衡方法。空字符串或wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发，least_conn表示按最小连接数。
      */
-    HttpHash: string;
+    HttpHash?: string;
     /**
      * 传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查返回码。具体可参考创建监听器中对该字段的解释
      */
-    HttpCode: number;
+    HttpCode?: number;
     /**
      * 传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查路径
      */
-    HttpCheckPath: string;
+    HttpCheckPath?: string;
     /**
      * 传统型公网负载均衡的 HTTPS 监听器的认证方式
      */
-    SSLMode: string;
+    SSLMode?: string;
     /**
      * 传统型公网负载均衡的 HTTPS 监听器的服务端证书 ID
      */
-    CertId: string;
+    CertId?: string;
     /**
      * 传统型公网负载均衡的 HTTPS 监听器的客户端证书 ID
      */
-    CertCaId: string;
+    CertCaId?: string;
     /**
      * 监听器的状态，0 表示创建中，1 表示运行中
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * DeleteLoadBalancer请求参数结构体

@@ -458,7 +458,7 @@ export interface ModifyHostModeResponse {
    * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Success: ResponseCode
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -658,7 +658,7 @@ export interface DeleteAttackWhiteRuleResponse {
    * 删除失败的规则序号组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailIds: Array<number | bigint>
+  FailIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1490,7 +1490,7 @@ export interface DescribeHostResponse {
   /**
    * 域名详情
    */
-  Host: HostRecord
+  Host?: HostRecord
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2687,12 +2687,12 @@ export interface DescribeHostsResponse {
   /**
    * 防护域名列表的长度
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 防护域名的列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostList: Array<HostRecord>
+  HostList?: Array<HostRecord>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4862,6 +4862,31 @@ export interface ClbObject {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
+  /**
+   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Proxy?: number
+  /**
+   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpHeaders?: Array<string>
+  /**
+   * bot防护开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BotStatus?: number
+  /**
+   * api防护开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiStatus?: number
+  /**
+   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectFlowMode?: number
 }
 
 /**
@@ -5307,16 +5332,16 @@ export interface ModifyGenerateDealsResponse {
    * 计费下单响应结构体
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: DealData
+  Data?: DealData
   /**
    * 1:成功，0:失败
    */
-  Status: number
+  Status?: number
   /**
    * 返回message
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnMessage: string
+  ReturnMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5662,7 +5687,7 @@ export interface DescribeUserLevelResponse {
   /**
    * 300:正常 400:严格
    */
-  Level: number
+  Level?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8888,19 +8913,19 @@ export interface AttackLogInfo {
   /**
    * 攻击日志的详情内容
    */
-  Content: string
+  Content?: string
   /**
    * CLS返回内容
    */
-  FileName: string
+  FileName?: string
   /**
    * CLS返回内容
    */
-  Source: string
+  Source?: string
   /**
    * CLS返回内容
    */
-  TimeStamp: string
+  TimeStamp?: string
 }
 
 /**

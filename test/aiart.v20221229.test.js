@@ -28,6 +28,16 @@ it("aiart.v20221229.SubmitTextToImageProJob", async function () {
     }
 })
 
+it("aiart.v20221229.ReplaceBackground", async function () {
+    try {
+       const data = await client.ReplaceBackground({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.SubmitTrainPortraitModelJob", async function () {
     try {
        const data = await client.SubmitTrainPortraitModelJob({})

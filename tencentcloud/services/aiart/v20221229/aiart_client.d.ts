@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, ReplaceBackgroundRequest, ReplaceBackgroundResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
@@ -15,6 +15,12 @@ export declare class Client extends AbstractClient {
 并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
     SubmitTextToImageProJob(req: SubmitTextToImageProJobRequest, cb?: (error: string, rep: SubmitTextToImageProJobResponse) => void): Promise<SubmitTextToImageProJobResponse>;
+    /**
+     * 商品背景生成接口根据指定的背景描述 Prompt，将商品图中的原背景替换为自定义的新背景并保留商品主体形象，实现商品背景的自由生成与更换。
+
+商品背景生成默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    ReplaceBackground(req: ReplaceBackgroundRequest, cb?: (error: string, rep: ReplaceBackgroundResponse) => void): Promise<ReplaceBackgroundResponse>;
     /**
      * AI 写真提供 AI 写真形象照的训练与生成能力，分为上传训练图片、训练模型、生成图片3个环节，需要依次调用对应接口。
 每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。

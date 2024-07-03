@@ -5414,7 +5414,7 @@ export interface UploadFile {
      */
     FileBody: string;
     /**
-     * 文件名
+     * 文件名，最大长度不超过200字符
      */
     FileName?: string;
 }
