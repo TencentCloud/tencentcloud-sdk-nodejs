@@ -10305,8 +10305,8 @@ export interface RecognizeGeneralTextImageWarnRequest {
     PdfPageNumber?: number;
     /**
      * 支持的模板类型
-  - General 通用告警
-  - LicensePlate 车牌告警
+  - General 通用告警（支持所有类型告警）
+  - LicensePlate 车牌告警（支持翻拍告警）
      */
     Type?: string;
 }

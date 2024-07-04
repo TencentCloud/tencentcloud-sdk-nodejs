@@ -218,6 +218,26 @@ export interface ApproveUser {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Scf?: Scf
+  /**
+   * 审批状态 （取值范围 0:待审批  1:审批通过  2:拒绝  6:其他人已审批）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveStatus?: number
+  /**
+   * 审批意见
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveMsg?: string
+  /**
+   * 审批时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveTime?: string
+  /**
+   * 审批组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApproveGroup?: string
 }
 
 /**

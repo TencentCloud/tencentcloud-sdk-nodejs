@@ -7175,19 +7175,19 @@ export interface DescribeVulEffectHostListRequest {
  */
 export interface DeliverTypeDetails {
     /**
-     * 安全模块类型 1: 入侵检测 2: 漏洞管理 3: 基线管理 4: 高级防御 5:客户端相关 6: 资产指纹
+     * 安全模块类型 1: 入侵检测 2: 漏洞管理 3: 基线管理 4: 高级防御 5:客户端相关 6: 资产指纹 7 主机列表 8 客户端上报
      */
     SecurityType: number;
     /**
-     * 安全模块下的日志类型，http://tapd.woa.com/Teneyes/markdown_wikis/show/#1210131751002328905
+     * 安全模块下的日志类型
      */
     LogType: Array<number | bigint>;
     /**
-     * kafka topic id
+     * 主题ID
      */
     TopicId: string;
     /**
-     * kafka topic name
+     * 主题名
      */
     TopicName: string;
     /**
@@ -7203,9 +7203,21 @@ export interface DeliverTypeDetails {
      */
     ErrInfo?: string;
     /**
-     * 最近一次状态上报时间戳，s
+     * 最近一次状态上报时间戳
      */
     StatusTime?: number;
+    /**
+     * 日志集名
+     */
+    LogName?: string;
+    /**
+     * 日志集ID
+     */
+    LogSetId?: string;
+    /**
+     * 日志集所在地域
+     */
+    Region?: string;
 }
 /**
  * ModifyNetAttackSetting返回参数结构体
@@ -9232,15 +9244,17 @@ export interface LoginWhiteCombinedInfo {
  */
 export interface ExportBaselineRuleDetectListRequest {
     /**
-     * <li>RuleName - string - 是否必填：否 - 规则名称</i>
-  <li>IsPassed - int - 是否必填：否 - 是否通过</li>
-  <li>RiskTier - int - 是否必填：否 - 风险等级</li>
+     * <li>RuleName - string - 是否必填：否 - 规则名称</li><li>IsPassed - int - 是否必填：否 - 是否通过</li><li>RiskTier - int - 是否必填：否 - 风险等级</li>
      */
     Filters?: Array<Filter>;
     /**
      * 0:过滤的结果导出；1:全部导出
      */
     ExportAll?: number;
+    /**
+     * 0:导出界面展示；1:导出全部结果事件
+     */
+    IsExportDetail?: number;
 }
 /**
  * SetLocalStorageExpire返回参数结构体
@@ -16984,17 +16998,17 @@ export interface DescribeDefenceEventDetailResponse {
  */
 export interface ExportBaselineHostDetectListRequest {
     /**
-     * <li>HostTag - string - 是否必填：否 - 主机标签</i>
-  <li>ItemId - int64 - 是否必填：否 - 项Id</i>
-  <li>RuleId - int64 - 是否必填：否 - 规则Id</li>
-  <li>IsPassed - int - 是否必填：否 - 是否通过</li>
-  <li>RiskTier - int - 是否必填：否 - 风险等级</li>
+     * <li>HostTag - string - 是否必填：否 - 主机标签</li><li>ItemId - int64 - 是否必填：否 - 项Id</li><li>RuleId - int64 - 是否必填：否 - 规则Id</li><li>IsPassed - int - 是否必填：否 - 是否通过</li><li>RiskTier - int - 是否必填：否 - 风险等级</li>
      */
     Filters?: Array<Filter>;
     /**
      * 0:过滤的结果导出；1:全部导出
      */
     ExportAll?: number;
+    /**
+     * 0:导出界面展示；1:导出全部结果事件
+     */
+    IsExportDetail?: number;
 }
 /**
  * DescribeAssetDatabaseInfo请求参数结构体
@@ -19421,16 +19435,17 @@ export interface DescribeScreenProtectionStatResponse {
  */
 export interface ExportBaselineItemDetectListRequest {
     /**
-     * <li>HostId - string - 是否必填：否 - 主机Id</i>
-  <li>RuleId - int64 - 是否必填：否 - 规则Id</i>
-  <li>IsPassed - int - 是否必填：否 - 是否通过</li>
-  <li>RiskTier - int - 是否必填：否 - 风险等级</li>
+     * <li>HostId - string - 是否必填：否 - 主机Id</li><li>RuleId - int64 - 是否必填：否 - 规则Id</li><li>IsPassed - int - 是否必填：否 - 是否通过</li><li>RiskTier - int - 是否必填：否 - 风险等级</li>
      */
     Filters?: Array<Filter>;
     /**
      * 0:过滤的结果导出；1:全部导出
      */
     ExportAll?: number;
+    /**
+     * 0:导出界面展示；1:导出全部结果事件
+     */
+    IsExportDetail?: number;
 }
 /**
  * DescribeAttackSource请求参数结构体

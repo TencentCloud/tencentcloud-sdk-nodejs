@@ -510,21 +510,24 @@ export interface DescribeFirmwareUpdateStatusResponse {
     RequestId?: string;
 }
 /**
- * GenerateSignedVideoURL请求参数结构体
+ * 设备激活结果数据
  */
-export interface GenerateSignedVideoURLRequest {
+export interface DeviceActiveResult {
     /**
-     * 视频播放原始URL地址
+     * 模版ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VideoURL: string;
+    ModelId?: string;
     /**
-     * 播放链接过期时间
+     * SN信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: number;
+    Sn?: string;
     /**
-     * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+     * 设备激活状态，0：激活成功；9800020：设备数超出限制；9800040：资源包类型和设备类型不匹配；9800039：资源包余额不足；9800037：激活码序号已使用；9800038：设备有效期超出限制；
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChannelId?: number;
+    ErrCode?: number;
 }
 /**
  * TopicRulePayload结构
@@ -4056,6 +4059,23 @@ export interface PositionSpaceInfo {
     Zoom: number;
 }
 /**
+ * GenerateSignedVideoURL请求参数结构体
+ */
+export interface GenerateSignedVideoURLRequest {
+    /**
+     * 视频播放原始URL地址
+     */
+    VideoURL: string;
+    /**
+     * 播放链接过期时间
+     */
+    ExpireTime: number;
+    /**
+     * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+     */
+    ChannelId?: number;
+}
+/**
  * TWeCall信息
  */
 export interface TWeCallInfo {
@@ -4852,6 +4872,11 @@ export interface UpdateFirmwareRequest {
  * ActivateTWeCallLicense返回参数结构体
  */
 export interface ActivateTWeCallLicenseResponse {
+    /**
+     * 设备激活返回数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceList?: Array<DeviceActiveResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5896,7 +5921,7 @@ export interface UpdateDeviceTWeCallAuthorizeStatusResponse {
  */
 export interface ActivateTWeCallLicenseRequest {
     /**
-     * TWecall类型： 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+     * TWecall类型： 0-测试激活码； 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
      */
     PkgType: number;
     /**

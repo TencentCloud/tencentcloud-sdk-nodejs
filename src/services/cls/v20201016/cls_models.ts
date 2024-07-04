@@ -5682,6 +5682,11 @@ export interface DescribeMachinesResponse {
    */
   ServiceLogging?: boolean
   /**
+   * 总数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6306,6 +6311,45 @@ export interface DescribeMachinesRequest {
    * 查询的机器组ID
    */
   GroupId: string
+  /**
+   * ip
+- 按照【ip】进行过滤。
+- 类型：String
+- 必选：否
+
+instance
+- 按照【instance】进行过滤。
+- 类型：String
+- 必选：否
+
+version
+- 按照【LogListener版本】进行过滤。
+- 类型：String
+- 必选：否
+
+status
+- 按照【状态】进行过滤。
+- 类型：String
+- 必选：否
+- 可选值：0：离线，1：正常
+
+offlineTime
+- 按照【机器离线时间】进行过滤。
+- 类型：String
+- 必选：否
+- - 可选值：0：无离线时间，12：12小时内，24：一天内，48：两天内，99：两天前
+
+每次请求的Filters的上限为10，Filter.Values的上限为100。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目。最大支持100
+   */
+  Limit?: number
 }
 
 /**

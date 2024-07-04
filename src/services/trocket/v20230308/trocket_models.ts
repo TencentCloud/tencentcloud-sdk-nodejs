@@ -1018,14 +1018,6 @@ export interface DescribeMQTTInsPublicEndpointsResponse {
  */
 export interface DescribeInstanceListRequest {
   /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
    * 查询条件列表
    */
   Filters?: Array<Filter>
@@ -1033,6 +1025,14 @@ export interface DescribeInstanceListRequest {
    * 标签过滤器
    */
   TagFilters?: Array<TagFilter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
 }
 
 /**
@@ -1627,6 +1627,11 @@ PREPAID，包年包月
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMessageDelay?: number
+  /**
+   * 是否自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
 }
 
 /**

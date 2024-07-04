@@ -49,13 +49,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StyleImagePro", req, cb);
     }
     /**
-     * 撤销视频美颜任务请求
+     * 产品不再维护，准备下线。
+
+撤销视频美颜任务请求
      */
     async CancelBeautifyVideoJob(req, cb) {
         return this.request("CancelBeautifyVideoJob", req, cb);
     }
     /**
-     * 查询视频美颜处理进度
+     * 产品不再维护，准备下线。
+
+查询视频美颜处理进度
      */
     async QueryBeautifyVideoJob(req, cb) {
         return this.request("QueryBeautifyVideoJob", req, cb);
@@ -92,7 +96,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetModelList", req, cb);
     }
     /**
-     * 视频美颜(此接口目前已下线)
+     * 产品不再维护，准备下线。
+
+视频美颜(此接口目前已下线)
      */
     async BeautifyVideo(req, cb) {
         return this.request("BeautifyVideo", req, cb);

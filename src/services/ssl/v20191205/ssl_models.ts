@@ -372,6 +372,11 @@ export interface DeployRecordDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
+  /**
+   * 部署CLB监听器的Url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: Array<string>
 }
 
 /**
@@ -1144,6 +1149,11 @@ export interface ClbListenerRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoMatchDomains?: Array<string>
+  /**
+   * 规则绑定的路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
 }
 
 /**
@@ -1739,6 +1749,11 @@ export interface UpdateRecordDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TCBType?: string
+  /**
+   * 监听器Url(clb专属)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
 }
 
 /**

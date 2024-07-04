@@ -89,8 +89,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 撤销视频美颜任务请求
-   */
+     * 产品不再维护，准备下线。
+
+撤销视频美颜任务请求
+     */
   async CancelBeautifyVideoJob(
     req: CancelBeautifyVideoJobRequest,
     cb?: (error: string, rep: CancelBeautifyVideoJobResponse) => void
@@ -99,8 +101,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询视频美颜处理进度
-   */
+     * 产品不再维护，准备下线。
+
+查询视频美颜处理进度
+     */
   async QueryBeautifyVideoJob(
     req: QueryBeautifyVideoJobRequest,
     cb?: (error: string, rep: QueryBeautifyVideoJobResponse) => void
@@ -156,8 +160,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 视频美颜(此接口目前已下线)
-   */
+     * 产品不再维护，准备下线。
+
+视频美颜(此接口目前已下线)
+     */
   async BeautifyVideo(
     req: BeautifyVideoRequest,
     cb?: (error: string, rep: BeautifyVideoResponse) => void

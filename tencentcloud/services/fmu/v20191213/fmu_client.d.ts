@@ -23,11 +23,15 @@ export declare class Client extends AbstractClient {
      */
     StyleImagePro(req: StyleImageProRequest, cb?: (error: string, rep: StyleImageProResponse) => void): Promise<StyleImageProResponse>;
     /**
-     * 撤销视频美颜任务请求
+     * 产品不再维护，准备下线。
+
+撤销视频美颜任务请求
      */
     CancelBeautifyVideoJob(req: CancelBeautifyVideoJobRequest, cb?: (error: string, rep: CancelBeautifyVideoJobResponse) => void): Promise<CancelBeautifyVideoJobResponse>;
     /**
-     * 查询视频美颜处理进度
+     * 产品不再维护，准备下线。
+
+查询视频美颜处理进度
      */
     QueryBeautifyVideoJob(req: QueryBeautifyVideoJobRequest, cb?: (error: string, rep: QueryBeautifyVideoJobResponse) => void): Promise<QueryBeautifyVideoJobResponse>;
     /**
@@ -54,7 +58,9 @@ export declare class Client extends AbstractClient {
      */
     GetModelList(req: GetModelListRequest, cb?: (error: string, rep: GetModelListResponse) => void): Promise<GetModelListResponse>;
     /**
-     * 视频美颜(此接口目前已下线)
+     * 产品不再维护，准备下线。
+
+视频美颜(此接口目前已下线)
      */
     BeautifyVideo(req: BeautifyVideoRequest, cb?: (error: string, rep: BeautifyVideoResponse) => void): Promise<BeautifyVideoResponse>;
 }

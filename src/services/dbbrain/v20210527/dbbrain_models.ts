@@ -600,7 +600,7 @@ export interface AddUserContactResponse {
   /**
    * 添加成功的联系人id。
    */
-  Id: number
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2521,7 +2521,7 @@ export interface AddUserContactRequest {
    */
   Name: string
   /**
-   * 邮箱地址，支持大小写字母、数字、下划线及@字符， 不能以下划线开头，邮箱地址不可重复。
+   * 邮箱地址，支持大小写字母、数字、下划线、连字符及@字符， 只能以数字或字母开头，邮箱地址不可重复。
    */
   ContactInfo: string
   /**
