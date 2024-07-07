@@ -330,11 +330,11 @@ export interface DescribeLogstashInstanceLogsResponse {
     /**
      * 返回的日志条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 日志详细信息列表
      */
-    InstanceLogList: Array<InstanceLog>;
+    InstanceLogList?: Array<InstanceLog>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1306,6 +1306,23 @@ export interface StartLogstashPipelinesRequest {
      * 管道ID列表
      */
     PipelineIds: Array<string>;
+}
+/**
+ * DescribeServerlessMetrics请求参数结构体
+ */
+export interface DescribeServerlessMetricsRequest {
+    /**
+     * space空间id
+     */
+    SpaceId?: string;
+    /**
+     * index索引id
+     */
+    IndexId?: string;
+    /**
+     * 指标类型，暂时只支持Storage
+     */
+    MetricType?: Array<string>;
 }
 /**
  * GetDiagnoseSettings返回参数结构体
@@ -2742,6 +2759,10 @@ export interface CreateInstanceRequest {
      * cdcId，使用cdc子网时传递
      */
     CdcId?: string;
+    /**
+     * 置放群组亲和度，范围[0,10]，0表示不开启
+     */
+    DisasterRecoverGroupAffinity?: number;
 }
 /**
  * CreateLogstashInstance请求参数结构体
@@ -3246,6 +3267,11 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NetConnectScheme?: string;
+    /**
+     * 置放群组相关参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DisasterRecoverGroupAffinity?: number;
 }
 /**
  * 数据接入cvm实例信息
@@ -4590,6 +4616,19 @@ export interface ServerlessDi {
      * tke数据源
      */
     DiSourceTke?: DiSourceTke;
+}
+/**
+ * DescribeServerlessMetrics返回参数结构体
+ */
+export interface DescribeServerlessMetricsResponse {
+    /**
+     * storage指标值，单位byte
+     */
+    Storage?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * StopLogstashPipelines返回参数结构体

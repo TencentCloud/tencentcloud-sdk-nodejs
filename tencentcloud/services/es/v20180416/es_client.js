@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 用于启动Logstash管道
+     */
+    async StartLogstashPipelines(req, cb) {
+        return this.request("StartLogstashPipelines", req, cb);
+    }
+    /**
      * 更新接收客户端请求的节点类型
      */
     async UpdateRequestTargetNodeTypes(req, cb) {
@@ -208,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogstashInstanceOperations", req, cb);
     }
     /**
-     * 用于启动Logstash管道
+     * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
      */
-    async StartLogstashPipelines(req, cb) {
-        return this.request("StartLogstashPipelines", req, cb);
+    async DescribeServerlessMetrics(req, cb) {
+        return this.request("DescribeServerlessMetrics", req, cb);
     }
     /**
      * 查询实例指定条件下的操作记录

@@ -380,7 +380,9 @@ peakCurrentUsers：峰值同时在线人数。
      */
     StopMCUMixTranscodeByStrRoomId(req: StopMCUMixTranscodeByStrRoomIdRequest, cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void): Promise<StopMCUMixTranscodeByStrRoomIdResponse>;
     /**
-     * 对转录的文本进行总结。
+     * 接口不再支持
+
+对转录的文本进行总结。
      */
     SummarizeTranscription(req?: SummarizeTranscriptionRequest, cb?: (error: string, rep: SummarizeTranscriptionResponse) => void): Promise<SummarizeTranscriptionResponse>;
     /**

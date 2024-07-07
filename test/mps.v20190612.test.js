@@ -388,9 +388,29 @@ it("mps.v20190612.ResetWorkflow", async function () {
     }
 })
 
+it("mps.v20190612.DeleteQualityControlTemplate", async function () {
+    try {
+       const data = await client.DeleteQualityControlTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteWorkflow", async function () {
     try {
        const data = await client.DeleteWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateQualityControlTemplate", async function () {
+    try {
+       const data = await client.CreateQualityControlTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +511,16 @@ it("mps.v20190612.DeleteContentReviewTemplate", async function () {
 it("mps.v20190612.CreateAIAnalysisTemplate", async function () {
     try {
        const data = await client.CreateAIAnalysisTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyQualityControlTemplate", async function () {
+    try {
+       const data = await client.ModifyQualityControlTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -921,6 +951,16 @@ it("mps.v20190612.CreateStreamLinkEvent", async function () {
 it("mps.v20190612.CreatePersonSample", async function () {
     try {
        const data = await client.CreatePersonSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeQualityControlTemplates", async function () {
+    try {
+       const data = await client.DescribeQualityControlTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -4328,6 +4328,11 @@ export interface CloudStorageEvent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadStatus?: string;
+    /**
+     * 事件自定义数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: string;
 }
 /**
  * DescribeCloudStorageDate返回参数结构体

@@ -36,6 +36,97 @@ export interface ModifySampleSnapshotTemplateResponse {
 }
 
 /**
+ * 容器格式诊断结果
+ */
+export interface ContainerDiagnoseResultItem {
+  /**
+   * 诊断出的异常类别，取值范围：
+DecodeParamException：解码参数异常
+TimeStampException：时间戳异常
+FrameException： 帧率异常
+StreamStatusException：流状态异常
+StreamInfo：流信息异常
+StreamAbnormalCharacteristics：流特征异常
+DecodeException：解码异常
+HLSRequirements：HLS 格式异常
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category?: string
+  /**
+   * 诊断出的具体异常类型，取值如下：
+
+VideoResolutionChanged：视频分辨率变化
+AudioSampleRateChanged：音频采样率变化
+AudioChannelsChanged：音频通道数变化
+ParameterSetsChanged：流参数集信息发生变化
+DarOrSarInvalid：视频的宽高比异常
+TimestampFallback：DTS时间戳回退
+DtsJitter：DTS抖动过大
+PtsJitter：PTS抖动过大
+AACDurationDeviation：AAC帧时间戳间隔不合理
+AudioDroppingFrames：音频丢帧
+VideoDroppingFrames：视频丢帧
+AVTimestampInterleave：音视频交织不合理
+PtsLessThanDts：媒体流的 pts 小于 dts
+ReceiveFpsJitter：网络接收帧率抖动过大
+ReceiveFpsTooSmall：网络接收视频帧率过小
+FpsJitter：通过PTS计算得到的流帧率抖动过大
+StreamOpenFailed：流打开失败
+StreamEnd：流结束
+StreamParseFailed：流解析失败
+VideoFirstFrameNotIdr：首帧不是IDR帧
+StreamNALUError：NALU起始码错误
+TsStreamNoAud：mpegts的H26x流缺失 AUD NALU
+AudioStreamLack：无音频流
+VideoStreamLack：无视频流
+LackAudioRecover：缺失音频流恢复
+LackVideoRecover：缺失视频流恢复
+VideoBitrateOutofRange：视频流码率(kbps)超出范围
+AudioBitrateOutofRange：音频流码率(kbps)超出范围
+VideoDecodeFailed：视频解码错误
+AudioDecodeFailed：音频解码错误
+AudioOutOfPhase：双通道音频相位相反
+VideoDuplicatedFrame：视频流中存在重复帧
+AudioDuplicatedFrame：音频流中存在重复帧
+VideoRotation：视频画面旋转
+TsMultiPrograms：MPEG2-TS流有多个program
+Mp4InvalidCodecFourcc：MP4中codec fourcc不符合Apple HLS要求
+HLSBadM3u8Format：无效的m3u8文件
+HLSInvalidMasterM3u8：无效的main m3u8文件
+HLSInvalidMediaM3u8：无效的media m3u8文件
+HLSMasterM3u8Recommended：main m3u8缺少标准推荐的参数
+HLSMediaM3u8Recommended：media m3u8缺少标准推荐的参数
+HLSMediaM3u8DiscontinuityExist：media m3u8存在EXT-X-DISCONTINUITY
+HLSMediaSegmentsStreamNumChange：切片的流数目发生变化
+HLSMediaSegmentsPTSJitterDeviation：切片间PTS跳变且没有EXT-X-DISCONTINUITY
+HLSMediaSegmentsDTSJitterDeviation：切片间DTS跳变且没有EXT-X-DISCONTINUITY
+TimecodeTrackExist：MP4存在tmcd轨道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 诊断出的异常级别，取值范围：
+Fatal：影响后续播放和解析，
+Error： 可能会影响播放，
+Warning： 可能会有潜在风险，但不一定会影响播放，
+Notice：比较重要的流信息，
+Info：一般性的流信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeverityLevel?: string
+  /**
+   * 警告出现的时间点，形式如 “2022-12-25T13:14:16Z”
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DateTimeSet?: Array<string>
+  /**
+   * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimestampSet?: Array<number>
+}
+
+/**
  * ModifyWatermarkTemplate请求参数结构体
  */
 export interface ModifyWatermarkTemplateRequest {
@@ -2533,9 +2624,13 @@ export interface AiRecognitionTaskOcrWordsResultInput {
 }
 
 /**
- * DeleteWorkflow返回参数结构体
+ * CreateQualityControlTemplate返回参数结构体
  */
-export interface DeleteWorkflowResponse {
+export interface CreateQualityControlTemplateResponse {
+  /**
+   * 媒体质检模板唯一标识。
+   */
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3586,16 +3681,6 @@ export interface AudioDenoiseConfig {
 默认值：ON。
    */
   Switch?: string
-}
-
-/**
- * DeleteTranscodeTemplate请求参数结构体
- */
-export interface DeleteTranscodeTemplateRequest {
-  /**
-   * 转码模板唯一标识。
-   */
-  Definition: number
 }
 
 /**
@@ -5486,6 +5571,16 @@ export interface UserDefineConfigureInfo {
 }
 
 /**
+ * DeleteQualityControlTemplate请求参数结构体
+ */
+export interface DeleteQualityControlTemplateRequest {
+  /**
+   * 媒体质检模板唯一标识。
+   */
+  Definition: number
+}
+
+/**
  * 色彩增强配置
  */
 export interface ColorEnhanceConfig {
@@ -5714,6 +5809,30 @@ export interface MediaAnimatedGraphicsItem {
 }
 
 /**
+ * DescribeQualityControlTemplates请求参数结构体
+ */
+export interface DescribeQualityControlTemplatesRequest {
+  /**
+   * 媒体质检模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
+  /**
+   * "Preset"：预设，Custom":客户魔板
+   */
+  Type?: string
+}
+
+/**
  * ModifyWordSample请求参数结构体
  */
 export interface ModifyWordSampleRequest {
@@ -5737,6 +5856,41 @@ export interface ModifyWordSampleRequest {
    * 标签操作信息。
    */
   TagOperationInfo?: AiSampleTagOperation
+}
+
+/**
+ * 编辑视频任务信息
+ */
+export interface EditMediaTask {
+  /**
+   * 任务 ID。
+   */
+  TaskId: string
+  /**
+   * 任务状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status: string
+  /**
+   * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+   */
+  ErrCode: number
+  /**
+   * 错误信息。
+   */
+  Message: string
+  /**
+   * 视频编辑任务的输入。
+   */
+  Input: EditMediaTaskInput
+  /**
+   * 视频编辑任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output: EditMediaTaskOutput
 }
 
 /**
@@ -5853,6 +6007,47 @@ export interface AiAnalysisTaskHighlightOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputStorage?: TaskOutputStorage
+}
+
+/**
+ * 质检项配置
+ */
+export interface QualityControlItemConfig {
+  /**
+   * 质检项名称。
+   */
+  Type: string
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 采样方式，取值范围：
+- Time：根据时间间隔采样。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sampling?: string
+  /**
+   * 采样间隔时间，取值范围：[0, 60000]，单位：ms。
+默认值 0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntervalTime?: number
+  /**
+   * 异常持续时间，取值范围：[0, 60000]，单位：ms。
+默认值 0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 检测分值的阈值，使用数学区间格式，当检测值超出区间范围会触发回调。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Threshold?: string
 }
 
 /**
@@ -6487,6 +6682,16 @@ export interface ImageWatermarkTemplate {
 }
 
 /**
+ * ModifyQualityControlTemplate返回参数结构体
+ */
+export interface ModifyQualityControlTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音关键词识别控制参数。
  */
 export interface AsrWordsConfigureInfo {
@@ -6851,13 +7056,61 @@ export interface AnimatedGraphicsTemplate {
 }
 
 /**
- * DescribeStreamLinkFlow请求参数结构体
+ * 创建输入的配置信息。
  */
-export interface DescribeStreamLinkFlowRequest {
+export interface CreateInput {
   /**
-   * 流Id。
+   * 输入名称，可填大小写、数字和下划线，长度为[1, 32]。
    */
-  FlowId: string
+  InputName: string
+  /**
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
+   */
+  Protocol: string
+  /**
+   * 输入描述，长度为[0, 255]。
+   */
+  Description?: string
+  /**
+   * 输入的IP白名单，格式为CIDR。
+   */
+  AllowIpList?: Array<string>
+  /**
+   * 输入的SRT配置信息。
+   */
+  SRTSettings?: CreateInputSRTSettings
+  /**
+   * 输入的RTP配置信息。
+   */
+  RTPSettings?: CreateInputRTPSettings
+  /**
+   * 输入的主备开关，可选[OPEN|CLOSE]，默认为CLOSE。
+   */
+  FailOver?: string
+  /**
+   * 输入的RTMP_PULL配置信息。
+   */
+  RTMPPullSettings?: CreateInputRTMPPullSettings
+  /**
+   * 输入的RTSP_PULL配置信息。
+   */
+  RTSPPullSettings?: CreateInputRTSPPullSettings
+  /**
+   * 输入的HLS_PULL配置信息。
+   */
+  HLSPullSettings?: CreateInputHLSPullSettings
+  /**
+   * 延播平滑吐流配置信息。
+   */
+  ResilientStream?: ResilientStreamConf
+  /**
+   * 绑定的输入安全组 ID。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。
+   */
+  Zones?: Array<string>
 }
 
 /**
@@ -6969,6 +7222,11 @@ export interface ActivityPara {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiRecognitionTask?: AiRecognitionTaskInput
+  /**
+   * 媒体质检任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityControlTask?: AiQualityControlTaskInput
 }
 
 /**
@@ -7661,6 +7919,24 @@ export interface DescribeImageSpriteTemplatesRequest {
 }
 
 /**
+ * CreateQualityControlTemplate请求参数结构体
+ */
+export interface CreateQualityControlTemplateRequest {
+  /**
+   * 媒体质检模板名称，长度限制：64 个字符。
+   */
+  Name: string
+  /**
+   * 媒体质检控制参数。
+   */
+  QualityControlItemSet: Array<QualityControlItemConfig>
+  /**
+   * 媒体质检模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+}
+
+/**
  * AI 样本管理，标签操作。
  */
 export interface AiSampleTagOperation {
@@ -7788,38 +8064,13 @@ export interface DescribeInput {
 }
 
 /**
- * 编辑视频任务信息
+ * DeleteTranscodeTemplate请求参数结构体
  */
-export interface EditMediaTask {
+export interface DeleteTranscodeTemplateRequest {
   /**
-   * 任务 ID。
+   * 转码模板唯一标识。
    */
-  TaskId: string
-  /**
-   * 任务状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
-   */
-  Status: string
-  /**
-   * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-   */
-  ErrCode: number
-  /**
-   * 错误信息。
-   */
-  Message: string
-  /**
-   * 视频编辑任务的输入。
-   */
-  Input: EditMediaTaskInput
-  /**
-   * 视频编辑任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output: EditMediaTaskOutput
+  Definition: number
 }
 
 /**
@@ -9429,6 +9680,25 @@ export interface AiAnalysisTaskClassificationResult {
 }
 
 /**
+ * DescribeQualityControlTemplates返回参数结构体
+ */
+export interface DescribeQualityControlTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 媒体质检模板详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityControlTemplateSet?: Array<QualityControlTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 画面涉敏任务控制参数。
  */
 export interface PoliticalImgReviewTemplateInfoForUpdate {
@@ -10797,7 +11067,7 @@ export interface VideoTemplateInfoForUpdate {
    */
   Codec?: string
   /**
-   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
+   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fps?: number
@@ -10983,6 +11253,28 @@ PureAudio：纯音频类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefinitionType?: string
+}
+
+/**
+ * ModifyQualityControlTemplate请求参数结构体
+ */
+export interface ModifyQualityControlTemplateRequest {
+  /**
+   * 媒体质检模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 媒体质检模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 媒体质检配置参数。
+   */
+  QualityControlItemSet?: Array<QualityControlItemConfig>
 }
 
 /**
@@ -12200,64 +12492,6 @@ export interface CreateAIAnalysisTemplateRequest {
 }
 
 /**
- * 创建输入的配置信息。
- */
-export interface CreateInput {
-  /**
-   * 输入名称，可填大小写、数字和下划线，长度为[1, 32]。
-   */
-  InputName: string
-  /**
-   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
-   */
-  Protocol: string
-  /**
-   * 输入描述，长度为[0, 255]。
-   */
-  Description?: string
-  /**
-   * 输入的IP白名单，格式为CIDR。
-   */
-  AllowIpList?: Array<string>
-  /**
-   * 输入的SRT配置信息。
-   */
-  SRTSettings?: CreateInputSRTSettings
-  /**
-   * 输入的RTP配置信息。
-   */
-  RTPSettings?: CreateInputRTPSettings
-  /**
-   * 输入的主备开关，可选[OPEN|CLOSE]，默认为CLOSE。
-   */
-  FailOver?: string
-  /**
-   * 输入的RTMP_PULL配置信息。
-   */
-  RTMPPullSettings?: CreateInputRTMPPullSettings
-  /**
-   * 输入的RTSP_PULL配置信息。
-   */
-  RTSPPullSettings?: CreateInputRTSPPullSettings
-  /**
-   * 输入的HLS_PULL配置信息。
-   */
-  HLSPullSettings?: CreateInputHLSPullSettings
-  /**
-   * 延播平滑吐流配置信息。
-   */
-  ResilientStream?: ResilientStreamConf
-  /**
-   * 绑定的输入安全组 ID。
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。
-   */
-  Zones?: Array<string>
-}
-
-/**
  * 内容审核涉敏任务输入参数类型
  */
 export interface AiReviewTerrorismTaskInput {
@@ -12700,6 +12934,11 @@ export interface QualityControlData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlResultSet?: Array<QualityControlResult>
+  /**
+   * 格式诊断检出异常项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerDiagnoseResultSet?: Array<ContainerDiagnoseResultItem>
 }
 
 /**
@@ -13160,6 +13399,16 @@ UTC时间，如'2020-01-01T12:00:00Z'。
 }
 
 /**
+ * DeleteQualityControlTemplate返回参数结构体
+ */
+export interface DeleteQualityControlTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询输出的RTMP配置信息。
  */
 export interface DescribeOutputRTMPSettings {
@@ -13190,6 +13439,16 @@ export interface FrameTagConfigureInfo {
 <li>OFF：关闭智能按帧标签任务。</li>
    */
   Switch: string
+}
+
+/**
+ * DeleteWorkflow返回参数结构体
+ */
+export interface DeleteWorkflowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13843,28 +14102,13 @@ export interface AiReviewTaskPornAsrResult {
 }
 
 /**
- * 编辑点播视频文件信息
+ * DescribeStreamLinkFlow请求参数结构体
  */
-export interface EditMediaFileInfo {
+export interface DescribeStreamLinkFlowRequest {
   /**
-   * 视频的输入信息。
+   * 流Id。
    */
-  InputInfo: MediaInputInfo
-  /**
-   * 【剪辑】任务生效，视频剪辑的起始时间偏移，单位：秒。
-   */
-  StartTimeOffset?: number
-  /**
-   * 【剪辑】任务生效，视频剪辑的结束时间偏移，单位：秒。
-   */
-  EndTimeOffset?: number
-  /**
-   * 【合成】任务必选，用于轨道元素中媒体关联源素材 ID。
-
-注意：允许字母、数字、-、_ ，最长 32 字符
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: string
+  FlowId: string
 }
 
 /**
@@ -14199,6 +14443,11 @@ export interface ActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisTask?: ScheduleAnalysisTaskResult
+  /**
+   * 媒体质检任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityControlTask?: ScheduleQualityControlTaskResult
 }
 
 /**
@@ -14215,6 +14464,31 @@ export interface LiveActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveQualityControlTask?: ScheduleQualityControlTaskResult
+}
+
+/**
+ * 编辑点播视频文件信息
+ */
+export interface EditMediaFileInfo {
+  /**
+   * 视频的输入信息。
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * 【剪辑】任务生效，视频剪辑的起始时间偏移，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 【剪辑】任务生效，视频剪辑的结束时间偏移，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 【合成】任务必选，用于轨道元素中媒体关联源素材 ID。
+
+注意：允许字母、数字、-、_ ，最长 32 字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
 }
 
 /**
@@ -14278,6 +14552,48 @@ export interface SampleSnapshotTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectNumberFormat?: NumberFormat
+}
+
+/**
+ * 媒体质检模板详情
+ */
+export interface QualityControlTemplate {
+  /**
+   * 媒体质检模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 媒体质检模板名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 模板描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 模板类型，取值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 媒体质检配置参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityControlItemSet?: Array<QualityControlItemConfig>
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**

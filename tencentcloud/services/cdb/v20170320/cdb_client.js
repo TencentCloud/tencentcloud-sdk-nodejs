@@ -409,10 +409,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProxySupportParam", req, cb);
     }
     /**
-     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+     * 该接口用于查询实例本地binlog保留策略。
      */
-    async DescribeDeviceMonitorInfo(req, cb) {
-        return this.request("DescribeDeviceMonitorInfo", req, cb);
+    async DescribeLocalBinlogConfig(req, cb) {
+        return this.request("DescribeLocalBinlogConfig", req, cb);
     }
     /**
      * 本接口(CreateBackup)用于创建数据库备份。
@@ -664,6 +664,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditConfig", req, cb);
     }
     /**
+     * 手动刷新轮转密码
+     */
+    async ResetPassword(req, cb) {
+        return this.request("ResetPassword", req, cb);
+    }
+    /**
      * 本接口(ModifyInstanceParam)用于修改云数据库实例的参数。
      */
     async ModifyInstanceParam(req, cb) {
@@ -771,6 +777,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSwitchRecords", req, cb);
     }
     /**
+     * 开启密码轮转
+     */
+    async CreateRotationPassword(req, cb) {
+        return this.request("CreateRotationPassword", req, cb);
+    }
+    /**
      * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
 
 注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
@@ -819,6 +831,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAuditRuleTemplates(req, cb) {
         return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
+     * 关闭实例账户密码轮转
+     */
+    async DeleteRotationPassword(req, cb) {
+        return this.request("DeleteRotationPassword", req, cb);
     }
     /**
      * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
@@ -950,10 +968,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceProject", req, cb);
     }
     /**
-     * 该接口用于查询实例本地binlog保留策略。
+     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
      */
-    async DescribeLocalBinlogConfig(req, cb) {
-        return this.request("DescribeLocalBinlogConfig", req, cb);
+    async DescribeDeviceMonitorInfo(req, cb) {
+        return this.request("DescribeDeviceMonitorInfo", req, cb);
     }
     /**
      * 本接口(OpenWanService)用于开通实例外网访问。

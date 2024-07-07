@@ -20,10 +20,11 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CheckDataEngineConfigPairsValidityResponse,
   DescribeResultDownloadResponse,
-  PythonSparkImage,
+  AccessInfo,
   DescribeDatabasesRequest,
   Asset,
   CreateUserRequest,
+  PythonSparkImage,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
   SmartOptimizerLifecyclePolicy,

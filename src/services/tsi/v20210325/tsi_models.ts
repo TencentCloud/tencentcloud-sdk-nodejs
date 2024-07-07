@@ -124,7 +124,7 @@ export interface TongChuanRecognizeRequest {
    */
   IsEnd: number
   /**
-   * 翻译时机，0 -不翻译 1 - 句子结束时翻译，2 - 句子实时翻译
+   * 翻译时机，0-不翻译 2-句子实时翻译
    */
   TranslateTime: number
   /**
@@ -180,7 +180,7 @@ export interface TongChuanSyncRequest {
    */
   IsEnd: number
   /**
-   * 翻译时机，0 -不翻译 1 - 句子结束时翻译，2 - 句子实时翻译
+   * 翻译时机，0-不翻译 2-句子实时翻译
    */
   TranslateTime: number
   /**

@@ -50,8 +50,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 号码营销监控
-   */
+     * 不在使用的API
+
+号码营销监控
+     */
   async DescribeSmpnMhm(
     req: DescribeSmpnMhmRequest,
     cb?: (error: string, rep: DescribeSmpnMhmResponse) => void
@@ -60,8 +62,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 虚假号码识别
-   */
+     * 不在使用的API
+
+虚假号码识别
+     */
   async DescribeSmpnFnr(
     req: DescribeSmpnFnrRequest,
     cb?: (error: string, rep: DescribeSmpnFnrResponse) => void
@@ -70,8 +74,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 企业号码认证
-   */
+     * 不在使用的API
+
+企业号码认证
+     */
   async CreateSmpnEpa(
     req: CreateSmpnEpaRequest,
     cb?: (error: string, rep: CreateSmpnEpaResponse) => void
@@ -80,8 +86,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询号码的标记和标记次数
-   */
+     * 不在使用的API
+
+查询号码的标记和标记次数
+     */
   async DescribeSmpnChp(
     req: DescribeSmpnChpRequest,
     cb?: (error: string, rep: DescribeSmpnChpResponse) => void
@@ -90,8 +98,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询号码恶意标记等级
-   */
+     * 不在使用的API
+
+查询号码恶意标记等级
+     */
   async DescribeSmpnMrl(
     req: DescribeSmpnMrlRequest,
     cb?: (error: string, rep: DescribeSmpnMrlResponse) => void

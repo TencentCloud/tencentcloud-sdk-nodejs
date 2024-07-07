@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifySnapshotByTimeOffsetTemplateResponse,
   ModifySampleSnapshotTemplateResponse,
+  ContainerDiagnoseResultItem,
   ModifyWatermarkTemplateRequest,
   DescribeInputRTPSettings,
   AiRecognitionTaskAsrFullTextSegmentItem,
@@ -111,7 +112,7 @@ import {
   TextWatermarkTemplateInputForUpdate,
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
-  DeleteWorkflowResponse,
+  CreateQualityControlTemplateResponse,
   QualityControlResult,
   AiReviewPornTaskInput,
   HdrConfig,
@@ -161,7 +162,6 @@ import {
   PoliticalOcrReviewTemplateInfoForUpdate,
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
-  DeleteTranscodeTemplateRequest,
   PornAsrReviewTemplateInfoForUpdate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ScheduleRecognitionTaskResult,
@@ -242,6 +242,7 @@ import {
   MediaProcessTaskResult,
   ModifyAIAnalysisTemplateRequest,
   UserDefineConfigureInfo,
+  DeleteQualityControlTemplateRequest,
   ColorEnhanceConfig,
   DescribeOutputRTPSettings,
   ComposeAudioItem,
@@ -250,7 +251,9 @@ import {
   AiAnalysisTaskFrameTagOutput,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   MediaAnimatedGraphicsItem,
+  DescribeQualityControlTemplatesRequest,
   ModifyWordSampleRequest,
+  EditMediaTask,
   AiRecognitionTaskFaceSegmentItem,
   AiAnalysisTaskTagResult,
   AiAnalysisTaskDelLogoInput,
@@ -258,6 +261,7 @@ import {
   RTMPAddressDestination,
   AiAnalysisTaskTagOutput,
   AiAnalysisTaskHighlightOutput,
+  QualityControlItemConfig,
   CreateStreamLinkEventResponse,
   AdaptiveDynamicStreamingInfoItem,
   ProcessMediaRequest,
@@ -285,6 +289,7 @@ import {
   ImageSpriteTaskInput,
   DeleteContentReviewTemplateResponse,
   ImageWatermarkTemplate,
+  ModifyQualityControlTemplateResponse,
   AsrWordsConfigureInfo,
   ModifyStreamLinkOutputInfoRequest,
   LiveStreamAsrWordsRecognitionResult,
@@ -300,7 +305,7 @@ import {
   DescribeContentReviewTemplatesResponse,
   DescribeStreamLinkActivateStateResponse,
   AnimatedGraphicsTemplate,
-  DescribeStreamLinkFlowRequest,
+  CreateInput,
   CreateOutputRTMPSettings,
   WorkflowTrigger,
   HLSPullSourceAddress,
@@ -332,11 +337,12 @@ import {
   LiveStreamAiReviewImagePoliticalResult,
   RawImageWatermarkInput,
   DescribeImageSpriteTemplatesRequest,
+  CreateQualityControlTemplateRequest,
   AiSampleTagOperation,
   SRTSourceAddressResp,
   CreateAIRecognitionTemplateResponse,
   DescribeInput,
-  EditMediaTask,
+  DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
   BatchStartStreamLinkFlowResponse,
   ProhibitedConfigureInfo,
@@ -405,6 +411,7 @@ import {
   CoverConfigureInfoForUpdate,
   DisableWorkflowResponse,
   AiAnalysisTaskClassificationResult,
+  DescribeQualityControlTemplatesResponse,
   PoliticalImgReviewTemplateInfoForUpdate,
   FlowRealtimeStatusRTMP,
   UserDefineOcrTextReviewTemplateInfo,
@@ -466,6 +473,7 @@ import {
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
   AdaptiveDynamicStreamingTaskInput,
+  ModifyQualityControlTemplateRequest,
   DescribeImageSpriteTemplatesResponse,
   SimpleAesDrm,
   TaskNotifyConfig,
@@ -512,7 +520,6 @@ import {
   CreateTranscodeTemplateResponse,
   AiRecognitionTaskAsrWordsResultInput,
   CreateAIAnalysisTemplateRequest,
-  CreateInput,
   AiReviewTerrorismTaskInput,
   DescribeWorkflowsRequest,
   DescribeSchedulesRequest,
@@ -545,8 +552,10 @@ import {
   PoliticalConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
   DescribeStreamLinkFlowLogsRequest,
+  DeleteQualityControlTemplateResponse,
   DescribeOutputRTMPSettings,
   FrameTagConfigureInfo,
+  DeleteWorkflowResponse,
   ExecuteFunctionRequest,
   DescribeStreamLinkFlowLogsResponse,
   AiAnalysisTaskHeadTailOutput,
@@ -571,7 +580,7 @@ import {
   WorkflowTask,
   FlowMediaVideo,
   AiReviewTaskPornAsrResult,
-  EditMediaFileInfo,
+  DescribeStreamLinkFlowRequest,
   UrlInputInfo,
   ComposeAudioStream,
   FaceConfigureInfo,
@@ -589,8 +598,10 @@ import {
   FlowAudio,
   ActivityResItem,
   LiveActivityResItem,
+  EditMediaFileInfo,
   AiAnalysisTaskDelLogoResult,
   SampleSnapshotTaskInput,
+  QualityControlTemplate,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
   CreateAnimatedGraphicsTemplateResponse,
@@ -1034,6 +1045,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除媒体质检模板
+   */
+  async DeleteQualityControlTemplate(
+    req: DeleteQualityControlTemplateRequest,
+    cb?: (error: string, rep: DeleteQualityControlTemplateResponse) => void
+  ): Promise<DeleteQualityControlTemplateResponse> {
+    return this.request("DeleteQualityControlTemplate", req, cb)
+  }
+
+  /**
    * 删除工作流。对于已启用的工作流，需要禁用后才能删除。
    */
   async DeleteWorkflow(
@@ -1041,6 +1062,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkflowResponse) => void
   ): Promise<DeleteWorkflowResponse> {
     return this.request("DeleteWorkflow", req, cb)
+  }
+
+  /**
+   * 创建媒体质检模板，数量上限：50。
+   */
+  async CreateQualityControlTemplate(
+    req: CreateQualityControlTemplateRequest,
+    cb?: (error: string, rep: CreateQualityControlTemplateResponse) => void
+  ): Promise<CreateQualityControlTemplateResponse> {
+    return this.request("CreateQualityControlTemplate", req, cb)
   }
 
   /**
@@ -1141,6 +1172,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
   ): Promise<CreateAIAnalysisTemplateResponse> {
     return this.request("CreateAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 修改媒体质检模板。
+   */
+  async ModifyQualityControlTemplate(
+    req: ModifyQualityControlTemplateRequest,
+    cb?: (error: string, rep: ModifyQualityControlTemplateResponse) => void
+  ): Promise<ModifyQualityControlTemplateResponse> {
+    return this.request("ModifyQualityControlTemplate", req, cb)
   }
 
   /**
@@ -1603,6 +1644,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePersonSampleResponse) => void
   ): Promise<CreatePersonSampleResponse> {
     return this.request("CreatePersonSample", req, cb)
+  }
+
+  /**
+   * 查询用户自定义媒体质检模板，支持根据条件，分页查询。
+   */
+  async DescribeQualityControlTemplates(
+    req: DescribeQualityControlTemplatesRequest,
+    cb?: (error: string, rep: DescribeQualityControlTemplatesResponse) => void
+  ): Promise<DescribeQualityControlTemplatesResponse> {
+    return this.request("DescribeQualityControlTemplates", req, cb)
   }
 
   /**

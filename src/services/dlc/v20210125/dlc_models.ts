@@ -74,34 +74,19 @@ export interface DescribeResultDownloadResponse {
 }
 
 /**
- * python-spark镜像信息。
+ * 引擎的访问信息
  */
-export interface PythonSparkImage {
+export interface AccessInfo {
   /**
-   * spark镜像唯一id
-   */
-  SparkImageId: string
-  /**
-   * 集群小版本镜像id
-   */
-  ChildImageVersionId: string
-  /**
-   * spark镜像名称
-   */
-  SparkImageVersion: string
-  /**
-   * spark镜像描述信息
+   * 访问引擎的方法
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  AccessType?: string
   /**
-   * 创建时间
+   * 访问引擎的url，内部的部分参数需要根据实际情况替换
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
-  /**
-   * 更新时间
-   */
-  UpdateTime: string
+  AccessConnectionInfos?: Array<string>
 }
 
 /**
@@ -228,6 +213,37 @@ export interface CreateUserRequest {
    * 用户别名，字符长度小50
    */
   UserAlias?: string
+}
+
+/**
+ * python-spark镜像信息。
+ */
+export interface PythonSparkImage {
+  /**
+   * spark镜像唯一id
+   */
+  SparkImageId: string
+  /**
+   * 集群小版本镜像id
+   */
+  ChildImageVersionId: string
+  /**
+   * spark镜像名称
+   */
+  SparkImageVersion: string
+  /**
+   * spark镜像描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
 }
 
 /**
@@ -4345,6 +4361,16 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineResourceUsedCU?: number
+  /**
+   * 引擎的访问信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessInfos?: Array<AccessInfo>
+  /**
+   * 引擎所在网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineNetworkName?: string
 }
 
 /**

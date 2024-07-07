@@ -138,6 +138,16 @@ it("es.v20180416.CreateIndex", async function () {
     }
 })
 
+it("es.v20180416.StartLogstashPipelines", async function () {
+    try {
+       const data = await client.StartLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
     try {
        const data = await client.UpdateRequestTargetNodeTypes({})
@@ -298,9 +308,9 @@ it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
     }
 })
 
-it("es.v20180416.StartLogstashPipelines", async function () {
+it("es.v20180416.DescribeServerlessMetrics", async function () {
     try {
-       const data = await client.StartLogstashPipelines({})
+       const data = await client.DescribeServerlessMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

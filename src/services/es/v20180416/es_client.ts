@@ -70,6 +70,7 @@ import {
   DescribeIndexMetaResponse,
   DiagnoseJobMeta,
   StartLogstashPipelinesRequest,
+  DescribeServerlessMetricsRequest,
   GetDiagnoseSettingsResponse,
   CreateServerlessInstanceRequest,
   DescribeServerlessSpacesRequest,
@@ -180,6 +181,7 @@ import {
   RestartInstanceRequest,
   ZoneDetail,
   ServerlessDi,
+  DescribeServerlessMetricsResponse,
   StopLogstashPipelinesResponse,
   DescribeServerlessInstancesRequest,
   KibanaNodeInfo,
@@ -324,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIndexResponse) => void
   ): Promise<CreateIndexResponse> {
     return this.request("CreateIndex", req, cb)
+  }
+
+  /**
+   * 用于启动Logstash管道
+   */
+  async StartLogstashPipelines(
+    req: StartLogstashPipelinesRequest,
+    cb?: (error: string, rep: StartLogstashPipelinesResponse) => void
+  ): Promise<StartLogstashPipelinesResponse> {
+    return this.request("StartLogstashPipelines", req, cb)
   }
 
   /**
@@ -499,13 +511,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于启动Logstash管道
+   * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
    */
-  async StartLogstashPipelines(
-    req: StartLogstashPipelinesRequest,
-    cb?: (error: string, rep: StartLogstashPipelinesResponse) => void
-  ): Promise<StartLogstashPipelinesResponse> {
-    return this.request("StartLogstashPipelines", req, cb)
+  async DescribeServerlessMetrics(
+    req: DescribeServerlessMetricsRequest,
+    cb?: (error: string, rep: DescribeServerlessMetricsResponse) => void
+  ): Promise<DescribeServerlessMetricsResponse> {
+    return this.request("DescribeServerlessMetrics", req, cb)
   }
 
   /**

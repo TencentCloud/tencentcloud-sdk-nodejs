@@ -280,10 +280,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetWorkflow", req, cb);
     }
     /**
+     * 删除媒体质检模板
+     */
+    async DeleteQualityControlTemplate(req, cb) {
+        return this.request("DeleteQualityControlTemplate", req, cb);
+    }
+    /**
      * 删除工作流。对于已启用的工作流，需要禁用后才能删除。
      */
     async DeleteWorkflow(req, cb) {
         return this.request("DeleteWorkflow", req, cb);
+    }
+    /**
+     * 创建媒体质检模板，数量上限：50。
+     */
+    async CreateQualityControlTemplate(req, cb) {
+        return this.request("CreateQualityControlTemplate", req, cb);
     }
     /**
      * 修改用户自定义雪碧图模板。
@@ -344,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAIAnalysisTemplate(req, cb) {
         return this.request("CreateAIAnalysisTemplate", req, cb);
+    }
+    /**
+     * 修改媒体质检模板。
+     */
+    async ModifyQualityControlTemplate(req, cb) {
+        return this.request("ModifyQualityControlTemplate", req, cb);
     }
     /**
      * 停止媒体传输流。
@@ -634,6 +652,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePersonSample(req, cb) {
         return this.request("CreatePersonSample", req, cb);
+    }
+    /**
+     * 查询用户自定义媒体质检模板，支持根据条件，分页查询。
+     */
+    async DescribeQualityControlTemplates(req, cb) {
+        return this.request("DescribeQualityControlTemplates", req, cb);
     }
     /**
      * 禁用自动化触发编排任务。

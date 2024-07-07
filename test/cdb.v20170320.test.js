@@ -608,9 +608,9 @@ it("cdb.v20170320.DescribeProxySupportParam", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
+it("cdb.v20170320.DescribeLocalBinlogConfig", async function () {
     try {
-       const data = await client.DescribeDeviceMonitorInfo({})
+       const data = await client.DescribeLocalBinlogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1018,6 +1018,16 @@ it("cdb.v20170320.DescribeAuditConfig", async function () {
     }
 })
 
+it("cdb.v20170320.ResetPassword", async function () {
+    try {
+       const data = await client.ResetPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyInstanceParam", async function () {
     try {
        const data = await client.ModifyInstanceParam({})
@@ -1188,6 +1198,16 @@ it("cdb.v20170320.DescribeDBSwitchRecords", async function () {
     }
 })
 
+it("cdb.v20170320.CreateRotationPassword", async function () {
+    try {
+       const data = await client.CreateRotationPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.CreateDBImportJob", async function () {
     try {
        const data = await client.CreateDBImportJob({})
@@ -1261,6 +1281,16 @@ it("cdb.v20170320.ResetRootAccount", async function () {
 it("cdb.v20170320.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DeleteRotationPassword", async function () {
+    try {
+       const data = await client.DeleteRotationPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1478,9 +1508,9 @@ it("cdb.v20170320.ModifyDBInstanceProject", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeLocalBinlogConfig", async function () {
+it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
     try {
-       const data = await client.DescribeLocalBinlogConfig({})
+       const data = await client.DescribeDeviceMonitorInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

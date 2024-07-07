@@ -46,6 +46,7 @@ import {
   ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
   CreateDeployGroupResponse,
+  CreateRotationPasswordResponse,
   ModifyCdbProxyAddressDescRequest,
   CdbRegionSellConf,
   ReadWriteNode,
@@ -54,7 +55,7 @@ import {
   CreateCdbProxyAddressResponse,
   RollbackTableName,
   CloseWanServiceRequest,
-  DescribeAuditConfigRequest,
+  OpenAuditServiceResponse,
   CreateRoInstanceIpResponse,
   CloseSSLRequest,
   CreateAuditPolicyResponse,
@@ -86,7 +87,7 @@ import {
   DescribeTablesRequest,
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
-  OpenAuditServiceResponse,
+  DescribeAuditConfigRequest,
   DescribeBinlogBackupOverviewResponse,
   DescribeDBInstanceLogToCLSResponse,
   SwitchDBInstanceMasterSlaveRequest,
@@ -180,6 +181,7 @@ import {
   StartCpuExpandResponse,
   CreateCloneInstanceResponse,
   DescribeCdbZoneConfigRequest,
+  ResetPasswordRequest,
   OpenDBInstanceGTIDRequest,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
@@ -220,7 +222,7 @@ import {
   DescribeBackupDownloadRestrictionRequest,
   CreateDeployGroupRequest,
   DeleteAccountsRequest,
-  ReloadBalanceProxyNodeRequest,
+  DeleteRotationPasswordResponse,
   DescribeAccountsResponse,
   RollbackTimeRange,
   AuditLog,
@@ -260,6 +262,7 @@ import {
   RoGroup,
   ParameterDetail,
   SwitchForUpgradeRequest,
+  CreateRotationPasswordRequest,
   CreateDBInstanceHourResponse,
   DescribeBackupDownloadRestrictionResponse,
   DescribeBackupDecryptionKeyRequest,
@@ -357,6 +360,7 @@ import {
   DescribeRoMinScaleResponse,
   RoWeightValue,
   DescribeSlowLogDataResponse,
+  DeleteRotationPasswordRequest,
   RestartDBInstancesResponse,
   DescribeSlowLogsRequest,
   TagInfoItem,
@@ -368,6 +372,7 @@ import {
   DeleteAuditRuleRequest,
   DeleteParamTemplateResponse,
   DBSwitchInfo,
+  ResetPasswordResponse,
   DescribeAuditRuleTemplateModifyHistoryRequest,
   DescribeTasksResponse,
   DescribeAuditLogsResponse,
@@ -397,6 +402,7 @@ import {
   DescribeDBFeaturesRequest,
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
+  ReloadBalanceProxyNodeRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   CloseAuditServiceRequest,
   AutoStrategy,
@@ -1083,13 +1089,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+   * 该接口用于查询实例本地binlog保留策略。
    */
-  async DescribeDeviceMonitorInfo(
-    req: DescribeDeviceMonitorInfoRequest,
-    cb?: (error: string, rep: DescribeDeviceMonitorInfoResponse) => void
-  ): Promise<DescribeDeviceMonitorInfoResponse> {
-    return this.request("DescribeDeviceMonitorInfo", req, cb)
+  async DescribeLocalBinlogConfig(
+    req: DescribeLocalBinlogConfigRequest,
+    cb?: (error: string, rep: DescribeLocalBinlogConfigResponse) => void
+  ): Promise<DescribeLocalBinlogConfigResponse> {
+    return this.request("DescribeLocalBinlogConfig", req, cb)
   }
 
   /**
@@ -1502,6 +1508,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 手动刷新轮转密码
+   */
+  async ResetPassword(
+    req: ResetPasswordRequest,
+    cb?: (error: string, rep: ResetPasswordResponse) => void
+  ): Promise<ResetPasswordResponse> {
+    return this.request("ResetPassword", req, cb)
+  }
+
+  /**
    * 本接口(ModifyInstanceParam)用于修改云数据库实例的参数。
    */
   async ModifyInstanceParam(
@@ -1677,6 +1693,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启密码轮转
+   */
+  async CreateRotationPassword(
+    req: CreateRotationPasswordRequest,
+    cb?: (error: string, rep: CreateRotationPasswordResponse) => void
+  ): Promise<CreateRotationPasswordResponse> {
+    return this.request("CreateRotationPassword", req, cb)
+  }
+
+  /**
      * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
 
 注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
@@ -1756,6 +1782,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
   ): Promise<ModifyAuditRuleTemplatesResponse> {
     return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
+   * 关闭实例账户密码轮转
+   */
+  async DeleteRotationPassword(
+    req: DeleteRotationPasswordRequest,
+    cb?: (error: string, rep: DeleteRotationPasswordResponse) => void
+  ): Promise<DeleteRotationPasswordResponse> {
+    return this.request("DeleteRotationPassword", req, cb)
   }
 
   /**
@@ -1972,13 +2008,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于查询实例本地binlog保留策略。
+   * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
    */
-  async DescribeLocalBinlogConfig(
-    req: DescribeLocalBinlogConfigRequest,
-    cb?: (error: string, rep: DescribeLocalBinlogConfigResponse) => void
-  ): Promise<DescribeLocalBinlogConfigResponse> {
-    return this.request("DescribeLocalBinlogConfig", req, cb)
+  async DescribeDeviceMonitorInfo(
+    req: DescribeDeviceMonitorInfoRequest,
+    cb?: (error: string, rep: DescribeDeviceMonitorInfoResponse) => void
+  ): Promise<DescribeDeviceMonitorInfoResponse> {
+    return this.request("DescribeDeviceMonitorInfo", req, cb)
   }
 
   /**

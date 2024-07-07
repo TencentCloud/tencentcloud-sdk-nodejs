@@ -959,6 +959,16 @@ export interface CreateDeployGroupResponse {
 }
 
 /**
+ * CreateRotationPassword返回参数结构体
+ */
+export interface CreateRotationPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCdbProxyAddressDesc请求参数结构体
  */
 export interface ModifyCdbProxyAddressDescRequest {
@@ -1086,13 +1096,13 @@ export interface CloseWanServiceRequest {
 }
 
 /**
- * DescribeAuditConfig请求参数结构体
+ * OpenAuditService返回参数结构体
  */
-export interface DescribeAuditConfigRequest {
+export interface OpenAuditServiceResponse {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -1837,13 +1847,13 @@ export interface ModifyParamTemplateRequest {
 }
 
 /**
- * OpenAuditService返回参数结构体
+ * DescribeAuditConfig请求参数结构体
  */
-export interface OpenAuditServiceResponse {
+export interface DescribeAuditConfigRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -3789,6 +3799,24 @@ export interface CreateCloneInstanceResponse {
 export type DescribeCdbZoneConfigRequest = null
 
 /**
+ * ResetPassword请求参数结构体
+ */
+export interface ResetPasswordRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 手动刷新轮转密码的实例账户名，例如root
+   */
+  User: string
+  /**
+   * 手动刷新轮转密码的实例账户域名，例如%
+   */
+  Host: string
+}
+
+/**
  * OpenDBInstanceGTID请求参数结构体
  */
 export interface OpenDBInstanceGTIDRequest {
@@ -4529,17 +4557,13 @@ export interface DeleteAccountsRequest {
 }
 
 /**
- * ReloadBalanceProxyNode请求参数结构体
+ * DeleteRotationPassword返回参数结构体
  */
-export interface ReloadBalanceProxyNodeRequest {
+export interface DeleteRotationPasswordResponse {
   /**
-   * 代理组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProxyGroupId: string
-  /**
-   * 代理组地址ID
-   */
-  ProxyAddressId?: string
+  RequestId?: string
 }
 
 /**
@@ -5776,6 +5800,20 @@ export interface SwitchForUpgradeRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+}
+
+/**
+ * CreateRotationPassword请求参数结构体
+ */
+export interface CreateRotationPasswordRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 当前需开启密码轮转的账号信息，包含账户名与主机名
+   */
+  Accounts: Array<Account>
 }
 
 /**
@@ -8081,6 +8119,28 @@ export interface DescribeSlowLogDataResponse {
 }
 
 /**
+ * DeleteRotationPassword请求参数结构体
+ */
+export interface DeleteRotationPasswordRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同
+   */
+  InstanceId: string
+  /**
+   * 关闭密码轮转的实例账户名,例如root
+   */
+  User: string
+  /**
+   * 关闭密码轮转的实例账户域名，例如%
+   */
+  Host: string
+  /**
+   * 关闭密码轮转后实例账户的最新密码
+   */
+  Password: string
+}
+
+/**
  * RestartDBInstances返回参数结构体
  */
 export interface RestartDBInstancesResponse {
@@ -8247,6 +8307,16 @@ export interface DBSwitchInfo {
    * 切换类型，可能的返回值为：TRANSFER - 数据迁移；MASTER2SLAVE - 主备切换；RECOVERY - 主从恢复
    */
   SwitchType: string
+}
+
+/**
+ * ResetPassword返回参数结构体
+ */
+export interface ResetPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9156,6 +9226,20 @@ export interface DescribeBinlogBackupOverviewRequest {
    * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
    */
   Product: string
+}
+
+/**
+ * ReloadBalanceProxyNode请求参数结构体
+ */
+export interface ReloadBalanceProxyNodeRequest {
+  /**
+   * 代理组ID
+   */
+  ProxyGroupId: string
+  /**
+   * 代理组地址ID
+   */
+  ProxyAddressId?: string
 }
 
 /**
