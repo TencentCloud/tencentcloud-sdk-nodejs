@@ -3145,6 +3145,11 @@ export interface ListDocItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireEnd?: string;
+    /**
+     * 是否允许重试，0：否，1：是
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAllowRetry?: boolean;
 }
 /**
  * ParseDoc请求参数结构体

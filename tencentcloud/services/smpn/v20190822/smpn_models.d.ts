@@ -12,50 +12,6 @@ export interface DescribeSmpnChpRequest {
     RequestData: CHPRequest;
 }
 /**
- * 企业号码认证请求
- */
-export interface EPARequest {
-    /**
-     * 电话号码
-     */
-    PhoneNumber: string;
-    /**
-     * 黄页名称
-     */
-    Name: string;
-}
-/**
- * 号码营销监控请求
- */
-export interface MHMRequest {
-    /**
-     * 电话号码
-     */
-    PhoneNumber: string;
-}
-/**
- * 号码恶意标记等级请求
- */
-export interface MRLRequest {
-    /**
-     * 电话号码
-     */
-    PhoneNumber: string;
-}
-/**
- * CreateSmpnEpa返回参数结构体
- */
-export interface CreateSmpnEpaResponse {
-    /**
-     * 业号码认证回应内容
-     */
-    ResponseData?: EPAResponse;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeSmpnFnr返回参数结构体
  */
 export interface DescribeSmpnFnrResponse {
@@ -63,19 +19,6 @@ export interface DescribeSmpnFnrResponse {
      * 虚假号码识别回应内容
      */
     ResponseData?: FNRResponse;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeSmpnMhm返回参数结构体
- */
-export interface DescribeSmpnMhmResponse {
-    /**
-     * 号码营销监控回应内容
-     */
-    ResponseData?: MHMResponse;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -95,19 +38,6 @@ export interface DescribeSmpnFnrRequest {
     ResourceId: string;
 }
 /**
- * DescribeSmpnMrl请求参数结构体
- */
-export interface DescribeSmpnMrlRequest {
-    /**
-     * 恶意标记等级请求内容
-     */
-    RequestData: MRLRequest;
-    /**
-     * 用于计费的资源ID
-     */
-    ResourceId: string;
-}
-/**
  * 终端骚扰保护请求内容
  */
 export interface CHPRequest {
@@ -115,100 +45,6 @@ export interface CHPRequest {
      * 电话号码
      */
     PhoneNumber: string;
-}
-/**
- * 号码恶意标记等级
- */
-export interface MRLResponse {
-    /**
-     * 骚扰电话恶意标记等级
-     */
-    DisturbLevel: number;
-    /**
-     * 房产中介恶意标记等级
-     */
-    HouseAgentLevel: number;
-    /**
-     * 保险理财恶意标记等级
-     */
-    InsuranceLevel: number;
-    /**
-     * 广告推销恶意标记等级
-     */
-    SalesLevel: number;
-    /**
-     * 诈骗电话恶意标记等级
-     */
-    CheatLevel: number;
-}
-/**
- * DescribeSmpnMrl返回参数结构体
- */
-export interface DescribeSmpnMrlResponse {
-    /**
-     * 恶意标记等级回应内容
-     */
-    ResponseData?: MRLResponse;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeSmpnMhm请求参数结构体
- */
-export interface DescribeSmpnMhmRequest {
-    /**
-     * 号码营销监控请求内容
-     */
-    RequestData: MHMRequest;
-    /**
-     * 用于计费的资源ID
-     */
-    ResourceId: string;
-}
-/**
- * 号码营销监控回应
- */
-export interface MHMResponse {
-    /**
-     * 标记类型
-   0: 无标记
-   50:骚扰电话
-   51:房产中介
-   52:保险理财
-   53:广告推销
-   54:诈骗电话
-   55:快递电话
-   56:出租车专车
-     */
-    TagType: number;
-    /**
-     * 标记次数
-     */
-    TagCount: number;
-}
-/**
- * CreateSmpnEpa请求参数结构体
- */
-export interface CreateSmpnEpaRequest {
-    /**
-     * 企业号码认证请求内容
-     */
-    RequestData: EPARequest;
-    /**
-     * 用于计费的资源ID
-     */
-    ResourceId: string;
-}
-/**
- * 企业号码认证回应
- */
-export interface EPAResponse {
-    /**
-     * 0成功 其他失败
-     */
-    RetCode: number;
 }
 /**
  * 虚假号码识别回应

@@ -884,9 +884,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口即将下线，请切换使用新接口：[文档解析](https://cloud.tencent.com/document/product/1759/107504)
-解析拆分文档。该接口需开通文档解析原子能力后调用。文档解析原子能力内测中，如有需要请联系架构师或 [联系客服](https://cloud.tencent.com/act/event/Online_service)  。
-     */
+   * 接口即将下线，请切换使用新接口：[文档解析](https://cloud.tencent.com/document/product/1759/107504)
+   */
   async ParseDoc(
     req: ParseDocRequest,
     cb?: (error: string, rep: ParseDocResponse) => void

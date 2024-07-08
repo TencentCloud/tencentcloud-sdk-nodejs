@@ -30,14 +30,6 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 不在使用的API
 
-号码营销监控
-     */
-    async DescribeSmpnMhm(req, cb) {
-        return this.request("DescribeSmpnMhm", req, cb);
-    }
-    /**
-     * 不在使用的API
-
 虚假号码识别
      */
     async DescribeSmpnFnr(req, cb) {
@@ -46,26 +38,10 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 不在使用的API
 
-企业号码认证
-     */
-    async CreateSmpnEpa(req, cb) {
-        return this.request("CreateSmpnEpa", req, cb);
-    }
-    /**
-     * 不在使用的API
-
 查询号码的标记和标记次数
      */
     async DescribeSmpnChp(req, cb) {
         return this.request("DescribeSmpnChp", req, cb);
-    }
-    /**
-     * 不在使用的API
-
-查询号码恶意标记等级
-     */
-    async DescribeSmpnMrl(req, cb) {
-        return this.request("DescribeSmpnMrl", req, cb);
     }
 }
 exports.Client = Client;

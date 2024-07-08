@@ -18,16 +18,6 @@ const client = new tencentcloud.smpn.v20190822.Client({
 })
 describe("smpn.v20190822.test.js", function () {
 
-it("smpn.v20190822.DescribeSmpnMhm", async function () {
-    try {
-       const data = await client.DescribeSmpnMhm({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("smpn.v20190822.DescribeSmpnFnr", async function () {
     try {
        const data = await client.DescribeSmpnFnr({})
@@ -38,29 +28,9 @@ it("smpn.v20190822.DescribeSmpnFnr", async function () {
     }
 })
 
-it("smpn.v20190822.CreateSmpnEpa", async function () {
-    try {
-       const data = await client.CreateSmpnEpa({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("smpn.v20190822.DescribeSmpnChp", async function () {
     try {
        const data = await client.DescribeSmpnChp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("smpn.v20190822.DescribeSmpnMrl", async function () {
-    try {
-       const data = await client.DescribeSmpnMrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

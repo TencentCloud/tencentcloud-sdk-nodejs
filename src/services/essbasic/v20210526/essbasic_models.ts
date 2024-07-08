@@ -3066,51 +3066,53 @@ export interface Staff {
   /**
    * 员工在电子签平台的用户ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 显示的员工名
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 员工手机号
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 员工邮箱
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Email: string
+  Email?: string
   /**
    * 员工在第三方应用平台的用户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OpenId: string
+  OpenId?: string
   /**
    * 员工角色
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Roles: Array<StaffRole>
+  Roles?: Array<StaffRole>
   /**
    * 员工部门
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Department: Department
+  Department?: Department
   /**
    * 员工是否实名
    */
-  Verified: boolean
+  Verified?: boolean
   /**
    * 员工创建时间戳，单位秒
    */
-  CreatedOn: number
+  CreatedOn?: number
   /**
    * 员工实名时间戳，单位秒
    */
-  VerifiedOn: number
+  VerifiedOn?: number
   /**
    * 员工是否离职：0-未离职，1-离职
    */
-  QuiteJob: number
+  QuiteJob?: number
 }
 
 /**
@@ -7310,7 +7312,7 @@ export interface DescribeTemplatesRequest {
    */
   ContentType?: number
   /**
-   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
 
 注意: 
 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
@@ -7325,7 +7327,7 @@ export interface DescribeTemplatesRequest {
   /**
    * 指定每页返回的数据条数，和Offset参数配合使用。
 
-注：`1.默认值为20，单页做大值为200。`
+注：`1.默认值为20，单页做大值为100。`
    */
   Limit?: number
   /**
@@ -8032,6 +8034,11 @@ export interface CreateFlowBlockchainEvidenceUrlRequest {
    * 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
   FlowId: string
+  /**
+   * 链接/二维码的有效截止时间，格式为unix时间戳。最长不超过 2099年12月31日（4102415999）。
+默认值为有效期为当前时间后7天。
+   */
+  ExpiredOn?: number
 }
 
 /**

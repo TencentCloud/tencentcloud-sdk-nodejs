@@ -6915,6 +6915,10 @@ export interface VerifyOfdVatInvoiceOCRRequest {
   OfdFileUrl 和 OfdFileBase64 必传其一，若两者都传，只解析OfdFileBase64。
      */
     OfdFileBase64?: string;
+    /**
+     * 需要识别的OFD发票页面的对应页码，默认值为1。 示例值：1
+     */
+    OfdPageNumber?: number;
 }
 /**
  * FinanBillSliceOCR请求参数结构体

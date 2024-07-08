@@ -9544,6 +9544,16 @@ export interface AiAnalysisTaskDelLogoOutput {
    * 擦除后文件的存储位置。
    */
   OutputStorage?: TaskOutputStorage
+  /**
+   * 基于画面提取的字幕文件路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginSubtitlePath?: string
+  /**
+   * 基于画面提取的字幕翻译文件路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateSubtitlePath?: string
 }
 
 /**
