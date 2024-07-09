@@ -124,53 +124,58 @@ export interface FSAttribute {
   /**
    * 文件系统类型, 可填goosefs和goosefsx
    */
-  Type: string
+  Type?: string
   /**
    * 文件系统ID
    */
-  FileSystemId: string
+  FileSystemId?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * GooseFSx文件系统属性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GooseFSxAttribute: GooseFSxAttribute
+  GooseFSxAttribute?: GooseFSxAttribute
   /**
    * 文件系统状态 ACTIVE(运行中), CREATING(创建中), DESTROYING(销毁中), FAIL(创建失败),EXPANDING(扩容中),PROBING(容灾中)
    */
-  Status: string
+  Status?: string
   /**
    * 文件系统名
    */
-  Name: string
+  Name?: string
   /**
    * 文件系统备注描述
    */
-  Description: string
+  Description?: string
   /**
    * vpc ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 子网所在的可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * Tag数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag: Array<Tag>
+  Tag?: Array<Tag>
   /**
    * 更新属性时间
    */
-  ModifyTime: string
+  ModifyTime?: string
+  /**
+   * 文件系统付费信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeAttribute?: ChargeAttribute
 }
 
 /**
@@ -205,6 +210,32 @@ export interface QueryCrossVpcSubnetSupportForClientNodeRequest {
    * 文件系统ID
    */
   FileSystemId: string
+}
+
+/**
+ * 付费信息详情
+ */
+export interface ChargeAttribute {
+  /**
+   * 到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurDeadline?: string
+  /**
+   * 付费方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: string
+  /**
+   * 自动付费标识：0:默认未设置 1:自动续费 2 不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag?: number
+  /**
+   * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
 }
 
 /**
@@ -379,6 +410,10 @@ export interface ExpandCapacityRequest {
    * 新增扩容的系统容量
    */
   ExpandedCapacity: number
+  /**
+   * 容量修改类型：add/sub
+   */
+  ModifyType?: string
 }
 
 /**
@@ -886,4 +921,9 @@ export interface MappedBucket {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketRegion?: string
+  /**
+   * 自定义Endpoint
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint?: string
 }

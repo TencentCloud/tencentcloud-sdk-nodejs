@@ -88,6 +88,16 @@ it("ivld.v20210903.UpdateCustomPerson", async function () {
     }
 })
 
+it("ivld.v20210903.DescribeVideoSummaryDetail", async function () {
+    try {
+       const data = await client.DescribeVideoSummaryDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ivld.v20210903.DeleteCustomCategory", async function () {
     try {
        const data = await client.DeleteCustomCategory({})
@@ -138,6 +148,16 @@ it("ivld.v20210903.DescribeTask", async function () {
     }
 })
 
+it("ivld.v20210903.CreateVideoSummaryTask", async function () {
+    try {
+       const data = await client.CreateVideoSummaryTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ivld.v20210903.DescribeCustomPersonDetail", async function () {
     try {
        const data = await client.DescribeCustomPersonDetail({})
@@ -181,6 +201,16 @@ it("ivld.v20210903.DeleteCustomPerson", async function () {
 it("ivld.v20210903.DescribeMedia", async function () {
     try {
        const data = await client.DescribeMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ivld.v20210903.DescribeUsageAmount", async function () {
+    try {
+       const data = await client.DescribeUsageAmount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

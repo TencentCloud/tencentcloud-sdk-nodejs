@@ -73,6 +73,7 @@ import {
   DeleteVpnGatewaySslClientResponse,
   CreateVpcResponse,
   AssistantCidr,
+  ModifyVpnGatewaySslClientCertRequest,
   ModifyNetworkAclEntriesRequest,
   DescribeVpcPrivateIpAddressesRequest,
   AddressTemplate,
@@ -273,6 +274,7 @@ import {
   ModifyServiceTemplateAttributeResponse,
   DescribeCcnsResponse,
   TemplateLimit,
+  PolicyStatistics,
   CreateSubnetResponse,
   DescribeSecurityGroupPoliciesResponse,
   DescribeGatewayFlowQosResponse,
@@ -494,6 +496,7 @@ import {
   DescribeCcnRegionBandwidthLimitsResponse,
   ModifyTemplateMemberRequest,
   EnableSnapshotPoliciesRequest,
+  ModifyVpnGatewaySslClientCertResponse,
   DescribeAddressesResponse,
   GatewayQos,
   DescribePrivateNatGatewayTranslationNatRulesRequest,
@@ -1366,13 +1369,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新专线直连nat路由，更新nat到专线的路由表
+   * 更新SslVpnClient证书
    */
-  async RefreshDirectConnectGatewayRouteToNatGateway(
-    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
-    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
-  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
-    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
+  async ModifyVpnGatewaySslClientCert(
+    req: ModifyVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: ModifyVpnGatewaySslClientCertResponse) => void
+  ): Promise<ModifyVpnGatewaySslClientCertResponse> {
+    return this.request("ModifyVpnGatewaySslClientCert", req, cb)
   }
 
   /**
@@ -2497,6 +2500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVpcPeeringConnectionResponse) => void
   ): Promise<ModifyVpcPeeringConnectionResponse> {
     return this.request("ModifyVpcPeeringConnection", req, cb)
+  }
+
+  /**
+   * 刷新专线直连nat路由，更新nat到专线的路由表
+   */
+  async RefreshDirectConnectGatewayRouteToNatGateway(
+    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
+    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
+  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
+    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
   }
 
   /**

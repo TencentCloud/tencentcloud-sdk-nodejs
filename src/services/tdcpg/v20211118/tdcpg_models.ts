@@ -179,11 +179,11 @@ export interface DescribeClusterInstancesResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例列表信息
    */
-  InstanceSet: Array<Instance>
+  InstanceSet?: Array<Instance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1114,11 +1114,11 @@ export interface DescribeClustersResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 集群列表信息
    */
-  ClusterSet: Array<Cluster>
+  ClusterSet?: Array<Cluster>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

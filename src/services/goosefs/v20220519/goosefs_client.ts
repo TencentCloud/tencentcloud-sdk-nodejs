@@ -29,6 +29,7 @@ import {
   DescribeClusterRoleTokenResponse,
   BatchDeleteClientNodesResponse,
   QueryCrossVpcSubnetSupportForClientNodeRequest,
+  ChargeAttribute,
   DeleteCrossVpcSubnetSupportForClientNodeRequest,
   AttachFileSystemBucketRequest,
   DeleteFileSystemRequest,

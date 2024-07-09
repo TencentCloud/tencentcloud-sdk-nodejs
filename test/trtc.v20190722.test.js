@@ -38,6 +38,26 @@ it("trtc.v20190722.DescribeTrtcUsage", async function () {
     }
 })
 
+it("trtc.v20190722.SummarizeTranscription", async function () {
+    try {
+       const data = await client.SummarizeTranscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopAIConversation", async function () {
+    try {
+       const data = await client.StopAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeTRTCMarketQualityMetricData", async function () {
     try {
        const data = await client.DescribeTRTCMarketQualityMetricData({})
@@ -98,9 +118,19 @@ it("trtc.v20190722.DescribeTRTCMarketScaleMetricData", async function () {
     }
 })
 
-it("trtc.v20190722.StopStreamIngest", async function () {
+it("trtc.v20190722.StartAIConversation", async function () {
     try {
-       const data = await client.StopStreamIngest({})
+       const data = await client.StartAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeAIConversation", async function () {
+    try {
+       const data = await client.DescribeAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +358,9 @@ it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     }
 })
 
-it("trtc.v20190722.SummarizeTranscription", async function () {
+it("trtc.v20190722.StopStreamIngest", async function () {
     try {
-       const data = await client.SummarizeTranscription({})
+       const data = await client.StopStreamIngest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

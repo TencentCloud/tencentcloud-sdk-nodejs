@@ -4590,7 +4590,7 @@ export interface DescribeHistogramResponse {
     /**
      * 统计数据
      */
-    Histogram: Array<string>;
+    Histogram?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6948,7 +6948,7 @@ export interface DescribeHistogramRequest {
      */
     ToTime: string;
     /**
-     * 聚类字段，ip为ip聚合，art为响应耗时聚合，url为url聚合，local为ip转化的城市聚合
+     * 聚类字段，ip为ip聚合，art为响应耗时聚合，url为url聚合，local为ip转化的城市聚合,qps为每秒请求数峰值的聚合，up为上行带宽峰值聚合，down为下行带峰值聚合
      */
     QueryField: string;
     /**

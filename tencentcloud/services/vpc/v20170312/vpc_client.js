@@ -351,10 +351,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachCcnInstances", req, cb);
     }
     /**
-     * 刷新专线直连nat路由，更新nat到专线的路由表
+     * 更新SslVpnClient证书
      */
-    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
-        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
+    async ModifyVpnGatewaySslClientCert(req, cb) {
+        return this.request("ModifyVpnGatewaySslClientCert", req, cb);
     }
     /**
      * 本接口(AssociateNatGatewayAddress)用于NAT网关绑定弹性IP（EIP）。
@@ -1058,6 +1058,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyVpcPeeringConnection(req, cb) {
         return this.request("ModifyVpcPeeringConnection", req, cb);
+    }
+    /**
+     * 刷新专线直连nat路由，更新nat到专线的路由表
+     */
+    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
     }
     /**
      * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。

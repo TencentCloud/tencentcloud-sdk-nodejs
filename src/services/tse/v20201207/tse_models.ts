@@ -250,6 +250,10 @@ export interface CreateCloudNativeAPIGatewayRequest {
    * 公网相关配置
    */
   InternetConfig?: InternetConfig
+  /**
+   * 关联的prometheus ID
+   */
+  PromId?: string
 }
 
 /**
@@ -1579,6 +1583,11 @@ export interface PublicAddressConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkId?: string
+  /**
+   * 公网负载均衡描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**

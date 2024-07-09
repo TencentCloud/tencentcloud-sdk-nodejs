@@ -18,12 +18,15 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  AgentConfig,
   CreatePictureRequest,
   AudioEncodeParams,
   DescribeTRTCMarketQualityMetricDataResponse,
   MixLayout,
-  McuVideoParams,
+  DescribeRecordingUsageResponse,
   DescribeTRTCRealTimeScaleDataRequest,
+  StartAIConversationResponse,
+  STTConfig,
   DescribeTRTCMarketScaleDataRequest,
   McuLayoutVolume,
   DescribeUserEventRequest,
@@ -35,6 +38,7 @@ import {
   ScaleInfomation,
   DescribeTRTCRealTimeScaleMetricDataRequest,
   StopWebRecordRequest,
+  StopAITranscriptionRequest,
   VideoEncodeParams,
   DescribeUserEventResponse,
   VideoEncode,
@@ -58,6 +62,7 @@ import {
   DescribeWebRecordRequest,
   DescribeTRTCRealTimeScaleDataResponse,
   DescribeRecordStatisticRequest,
+  McuVideoParams,
   DescribeRoomInfoRequest,
   StorageParams,
   CloudVod,
@@ -82,7 +87,7 @@ import {
   DescribeTRTCRealTimeQualityMetricDataRequest,
   DescribeAITranscriptionRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
-  McuLayout,
+  DescribeAIConversationResponse,
   DescribeUserInfoResponse,
   RemoveUserByStrRoomIdResponse,
   DescribeTRTCRealTimeScaleMetricDataResponse,
@@ -94,7 +99,7 @@ import {
   DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
-  DescribeRecordingUsageResponse,
+  McuLayout,
   StopMCUMixTranscodeRequest,
   ModifyPictureResponse,
   DescribeRecordingUsageRequest,
@@ -125,10 +130,12 @@ import {
   RecognizeConfig,
   QualityData,
   StopPublishCdnStreamRequest,
+  StartAIConversationRequest,
   DeletePictureResponse,
   ModifyCloudRecordingRequest,
-  VideoParams,
+  StopAIConversationResponse,
   StartPublishCdnStreamRequest,
+  DescribeAIConversationRequest,
   RowValues,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   CreateCloudRecordingResponse,
@@ -162,8 +169,9 @@ import {
   StopWebRecordResponse,
   SummarizeTranscriptionResponse,
   DeletePictureRequest,
+  VideoParams,
   McuSeiParams,
-  StopAITranscriptionRequest,
+  StopAIConversationRequest,
   UpdatePublishCdnStreamResponse,
   McuWaterMarkText,
   TranscriptionParams,
@@ -227,6 +235,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrtcUsageResponse) => void
   ): Promise<DescribeTrtcUsageResponse> {
     return this.request("DescribeTrtcUsage", req, cb)
+  }
+
+  /**
+     * 接口不再支持
+
+对转录的文本进行总结。
+     */
+  async SummarizeTranscription(
+    req?: SummarizeTranscriptionRequest,
+    cb?: (error: string, rep: SummarizeTranscriptionResponse) => void
+  ): Promise<SummarizeTranscriptionResponse> {
+    return this.request("SummarizeTranscription", req, cb)
+  }
+
+  /**
+   * 停止AI对话任务
+   */
+  async StopAIConversation(
+    req: StopAIConversationRequest,
+    cb?: (error: string, rep: StopAIConversationResponse) => void
+  ): Promise<StopAIConversationResponse> {
+    return this.request("StopAIConversation", req, cb)
   }
 
   /**
@@ -405,13 +435,23 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 停止一个输入在线媒体流任务。
+   * 启动一个任务，机器人将进入TRTC房间，与指定成员进行AI对话
    */
-  async StopStreamIngest(
-    req: StopStreamIngestRequest,
-    cb?: (error: string, rep: StopStreamIngestResponse) => void
-  ): Promise<StopStreamIngestResponse> {
-    return this.request("StopStreamIngest", req, cb)
+  async StartAIConversation(
+    req: StartAIConversationRequest,
+    cb?: (error: string, rep: StartAIConversationResponse) => void
+  ): Promise<StartAIConversationResponse> {
+    return this.request("StartAIConversation", req, cb)
+  }
+
+  /**
+   * 查询AI对话任务状态。
+   */
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**
@@ -758,15 +798,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 接口不再支持
-
-对转录的文本进行总结。
-     */
-  async SummarizeTranscription(
-    req?: SummarizeTranscriptionRequest,
-    cb?: (error: string, rep: SummarizeTranscriptionResponse) => void
-  ): Promise<SummarizeTranscriptionResponse> {
-    return this.request("SummarizeTranscription", req, cb)
+   * 停止一个输入在线媒体流任务。
+   */
+  async StopStreamIngest(
+    req: StopStreamIngestRequest,
+    cb?: (error: string, rep: StopStreamIngestResponse) => void
+  ): Promise<StopStreamIngestResponse> {
+    return this.request("StopStreamIngest", req, cb)
   }
 
   /**

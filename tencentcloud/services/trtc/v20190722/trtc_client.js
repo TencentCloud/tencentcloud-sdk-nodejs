@@ -50,6 +50,20 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrtcUsage", req, cb);
     }
     /**
+     * 接口不再支持
+
+对转录的文本进行总结。
+     */
+    async SummarizeTranscription(req, cb) {
+        return this.request("SummarizeTranscription", req, cb);
+    }
+    /**
+     * 停止AI对话任务
+     */
+    async StopAIConversation(req, cb) {
+        return this.request("StopAIConversation", req, cb);
+    }
+    /**
      * 查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
 joinSuccessRate：加入频道成功率。
 joinSuccessIn5sRate：5s内加入频道成功率。
@@ -201,10 +215,16 @@ peakCurrentUsers：峰值同时在线人数。
         return this.request("DescribeTRTCMarketScaleMetricData", req, cb);
     }
     /**
-     * 停止一个输入在线媒体流任务。
+     * 启动一个任务，机器人将进入TRTC房间，与指定成员进行AI对话
      */
-    async StopStreamIngest(req, cb) {
-        return this.request("StopStreamIngest", req, cb);
+    async StartAIConversation(req, cb) {
+        return this.request("StartAIConversation", req, cb);
+    }
+    /**
+     * 查询AI对话任务状态。
+     */
+    async DescribeAIConversation(req, cb) {
+        return this.request("DescribeAIConversation", req, cb);
     }
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
@@ -462,12 +482,10 @@ peakCurrentUsers：峰值同时在线人数。
         return this.request("StopMCUMixTranscodeByStrRoomId", req, cb);
     }
     /**
-     * 接口不再支持
-
-对转录的文本进行总结。
+     * 停止一个输入在线媒体流任务。
      */
-    async SummarizeTranscription(req, cb) {
-        return this.request("SummarizeTranscription", req, cb);
+    async StopStreamIngest(req, cb) {
+        return this.request("StopStreamIngest", req, cb);
     }
     /**
      * 获取TRTC录制的用量明细。

@@ -1067,6 +1067,15 @@ export interface AssistantCidr {
     SubnetSet: Array<Subnet>;
 }
 /**
+ * ModifyVpnGatewaySslClientCert请求参数结构体
+ */
+export interface ModifyVpnGatewaySslClientCertRequest {
+    /**
+     * SSL-VPN-CLIENT 实例ID列表。
+     */
+    SslVpnClientIds: Array<string>;
+}
+/**
  * ModifyNetworkAclEntries请求参数结构体
  */
 export interface ModifyNetworkAclEntriesRequest {
@@ -1528,6 +1537,11 @@ export interface SecurityGroupPolicySet {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Ingress?: Array<SecurityGroupPolicy>;
+    /**
+     * 安全组策略条目统计。只用于出参。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyStatistics?: PolicyStatistics;
 }
 /**
  * ModifyFlowLogAttribute请求参数结构体
@@ -4827,47 +4841,58 @@ export interface RenewVpnGatewayRequest {
 export interface SecurityGroupPolicy {
     /**
      * 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyIndex?: number;
     /**
      * 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 端口(all, 离散port,  range)。
   说明：如果Protocol设置为ALL，则Port也需要设置为all。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: string;
     /**
      * 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceTemplate?: ServiceTemplateSpecification;
     /**
      * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     CidrBlock?: string;
     /**
      * 网段或IPv6(互斥)。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ipv6CidrBlock?: string;
     /**
      * 安全组实例ID，例如：sg-ohuuioma。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupId?: string;
     /**
      * IP地址ID或者IP地址组ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AddressTemplate?: AddressTemplateSpecification;
     /**
      * ACCEPT 或 DROP。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Action?: string;
     /**
      * 安全组规则描述。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDescription?: string;
     /**
      * 安全组最近修改时间。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
 }
@@ -4977,6 +5002,31 @@ export interface TemplateLimit {
     ServiceTemplateGroupMemberLimit: number;
 }
 /**
+ * 安全组策略统计
+ */
+export interface PolicyStatistics {
+    /**
+     * 入站IPv4总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IngressIPv4TotalCount: number;
+    /**
+     * 入站IPv6总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IngressIPv6TotalCount: number;
+    /**
+     * 出站IPv4总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EgressIPv4TotalCount: number;
+    /**
+     * 出站IPv6总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EgressIPv6TotalCount: number;
+}
+/**
  * CreateSubnet返回参数结构体
  */
 export interface CreateSubnetResponse {
@@ -4996,7 +5046,7 @@ export interface DescribeSecurityGroupPoliciesResponse {
     /**
      * 安全组规则集合。
      */
-    SecurityGroupPolicySet: SecurityGroupPolicySet;
+    SecurityGroupPolicySet?: SecurityGroupPolicySet;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6719,7 +6769,7 @@ export interface DescribeAddressesRequest {
  */
 export interface DescribeSecurityGroupPoliciesRequest {
     /**
-     * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+     * 安全组实例ID，例如：sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
      */
     SecurityGroupId: string;
     /**
@@ -9575,6 +9625,19 @@ export interface EnableSnapshotPoliciesRequest {
      * 快照策略Id。
      */
     SnapshotPolicyIds: Array<string>;
+}
+/**
+ * ModifyVpnGatewaySslClientCert返回参数结构体
+ */
+export interface ModifyVpnGatewaySslClientCertResponse {
+    /**
+     * 异步任务ID。
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAddresses返回参数结构体

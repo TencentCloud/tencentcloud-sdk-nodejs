@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { AddCustomPersonImageRequest, DescribeTaskDetailResponse, DeleteCustomCategoryRequest, DescribeCustomCategoriesRequest, DescribeTasksResponse, CreateCustomPersonResponse, ImportMediaResponse, QueryCallbackRequest, DescribeMediaRequest, DescribeTasksRequest, DescribeCustomPersonsResponse, CreateCustomGroupRequest, AddCustomPersonImageResponse, CreateDefaultCategoriesRequest, UpdateCustomPersonResponse, UpdateCustomCategoryRequest, CreateTaskRequest, DescribeCustomCategoriesResponse, DescribeCustomGroupResponse, DeleteCustomPersonImageRequest, DeleteMediaResponse, ModifyCallbackRequest, DeleteCustomPersonResponse, DeleteTaskRequest, ImportMediaRequest, DescribeMediasRequest, CreateDefaultCategoriesResponse, DescribeCustomPersonsRequest, DescribeMediaResponse, DeleteCustomPersonImageResponse, CreateCustomCategoryResponse, QueryCallbackResponse, CreateCustomGroupResponse, UpdateCustomCategoryResponse, DescribeMediasResponse, DeleteCustomPersonRequest, DescribeCustomPersonDetailResponse, DeleteMediaRequest, CreateCustomCategoryRequest, DescribeTaskResponse, CreateTaskResponse, DescribeCustomPersonDetailRequest, DescribeTaskDetailRequest, DeleteTaskResponse, DescribeTaskRequest, UpdateCustomPersonRequest, ModifyCallbackResponse, CreateCustomPersonRequest, DeleteCustomCategoryResponse, DescribeCustomGroupRequest } from "./ivld_models";
+import { AddCustomPersonImageRequest, DescribeVideoSummaryDetailRequest, DescribeTaskDetailResponse, DeleteCustomCategoryRequest, DescribeCustomCategoriesRequest, DescribeTasksResponse, DescribeVideoSummaryDetailResponse, CreateCustomPersonResponse, DescribeUsageAmountRequest, ImportMediaResponse, QueryCallbackRequest, DescribeMediaRequest, DescribeTasksRequest, DescribeCustomPersonsResponse, CreateCustomGroupRequest, AddCustomPersonImageResponse, CreateDefaultCategoriesRequest, UpdateCustomPersonResponse, UpdateCustomCategoryRequest, CreateTaskRequest, DescribeCustomCategoriesResponse, DescribeCustomGroupResponse, DeleteCustomPersonImageRequest, DeleteMediaResponse, ModifyCallbackRequest, DeleteCustomPersonResponse, DeleteTaskRequest, ImportMediaRequest, DescribeMediasRequest, CreateDefaultCategoriesResponse, DescribeCustomPersonsRequest, DescribeMediaResponse, DescribeUsageAmountResponse, DeleteCustomPersonImageResponse, CreateCustomCategoryResponse, CreateVideoSummaryTaskRequest, QueryCallbackResponse, CreateCustomGroupResponse, UpdateCustomCategoryResponse, DescribeMediasResponse, DeleteCustomPersonRequest, DescribeCustomPersonDetailResponse, DeleteMediaRequest, CreateCustomCategoryRequest, DescribeTaskResponse, CreateTaskResponse, DescribeCustomPersonDetailRequest, DescribeTaskDetailRequest, DeleteTaskResponse, DescribeTaskRequest, UpdateCustomPersonRequest, ModifyCallbackResponse, CreateVideoSummaryTaskResponse, CreateCustomPersonRequest, DeleteCustomCategoryResponse, DescribeCustomGroupRequest } from "./ivld_models";
 /**
  * ivld client
  * @class
@@ -56,6 +56,10 @@ URL字段推荐您使用COS地址，其形式为`https://${Bucket}-${AppId}.cos.
      */
     UpdateCustomPerson(req: UpdateCustomPersonRequest, cb?: (error: string, rep: UpdateCustomPersonResponse) => void): Promise<UpdateCustomPersonResponse>;
     /**
+     * 描述任务信息，如果任务成功完成，还将返回任务结果
+     */
+    DescribeVideoSummaryDetail(req: DescribeVideoSummaryDetailRequest, cb?: (error: string, rep: DescribeVideoSummaryDetailResponse) => void): Promise<DescribeVideoSummaryDetailResponse>;
+    /**
      * 删除自定义分类信息
      */
     DeleteCustomCategory(req: DeleteCustomCategoryRequest, cb?: (error: string, rep: DeleteCustomCategoryResponse) => void): Promise<DeleteCustomCategoryResponse>;
@@ -81,6 +85,34 @@ URL字段推荐您使用COS地址，其形式为`https://${Bucket}-${AppId}.cos.
 
      */
     DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
+    /**
+     * 创建一个视频缩编任务。
+
+### 回调事件消息通知协议
+
+#### 网络协议
+- 回调接口协议目前仅支持http/https协议；
+- 请求：HTTP POST 请求，包体内容为 JSON，每一种消息的具体包体内容参见后文。
+- 应答：HTTP STATUS CODE = 200，服务端忽略应答包具体内容，为了协议友好，建议客户应答内容携带 JSON： `{"code":0}`
+
+#### 通知可靠性
+
+事件通知服务具备重试能力，事件通知失败后会总计重试3次；
+为了避免重试对您的服务器以及网络带宽造成冲击，请保持正常回包。触发重试条件如下：
+- 长时间（5 秒）未回包应答。
+- 应答 HTTP STATUS 不为200。
+
+
+#### 回调接口协议
+
+##### 分析任务完成消息回调
+| 参数名称 | 必选 | 类型 | 描述 |
+|---------|---------|---------|---------|
+| TaskId | 是 | String | 任务ID |
+| TaskStatus | 是 | Integer | 任务执行状态 |
+| FailedReason | 是 | String | 若任务失败，该字段为失败原因 |
+     */
+    CreateVideoSummaryTask(req: CreateVideoSummaryTaskRequest, cb?: (error: string, rep: CreateVideoSummaryTaskResponse) => void): Promise<CreateVideoSummaryTaskResponse>;
     /**
      * 描述自定义人物详细信息，包括人物信息与人物信息
      */
@@ -108,6 +140,10 @@ URL字段推荐您使用COS地址，其形式为`https://${Bucket}-${AppId}.cos.
 如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
      */
     DescribeMedia(req: DescribeMediaRequest, cb?: (error: string, rep: DescribeMediaResponse) => void): Promise<DescribeMediaResponse>;
+    /**
+     * 获取用户资源使用量
+     */
+    DescribeUsageAmount(req?: DescribeUsageAmountRequest, cb?: (error: string, rep: DescribeUsageAmountResponse) => void): Promise<DescribeUsageAmountResponse>;
     /**
      * 将MediaId对应的媒资文件从系统中删除。
 

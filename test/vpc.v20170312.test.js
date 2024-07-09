@@ -518,9 +518,9 @@ it("vpc.v20170312.DetachCcnInstances", async function () {
     }
 })
 
-it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+it("vpc.v20170312.ModifyVpnGatewaySslClientCert", async function () {
     try {
-       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
+       const data = await client.ModifyVpnGatewaySslClientCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1551,6 +1551,16 @@ it("vpc.v20170312.ModifyDhcpIpAttribute", async function () {
 it("vpc.v20170312.ModifyVpcPeeringConnection", async function () {
     try {
        const data = await client.ModifyVpcPeeringConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+    try {
+       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

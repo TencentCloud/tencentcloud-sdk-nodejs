@@ -2702,7 +2702,7 @@ export interface DescribeDBInstanceGTIDResponse {
     /**
      * GTID 是否开通的标记，可能的取值为：0 - 未开通，1 - 已开通。
      */
-    IsGTIDOpen: number;
+    IsGTIDOpen?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5203,10 +5203,12 @@ export interface DisassociateSecurityGroupsRequest {
 export interface Account {
     /**
      * 新账户的名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     User: string;
     /**
      * 新账户的域名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Host: string;
 }
@@ -6855,12 +6857,12 @@ export interface DescribeAuditRulesResponse {
     /**
      * 符合条件的审计规则个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 审计规则详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<AuditRule>;
+    Items?: Array<AuditRule>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8018,12 +8020,12 @@ export interface DescribeAuditPoliciesResponse {
     /**
      * 符合条件的审计策略个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 审计策略详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<AuditPolicy>;
+    Items?: Array<AuditPolicy>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
