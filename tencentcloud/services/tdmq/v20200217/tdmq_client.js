@@ -602,7 +602,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
 
 1. 多条消息的内容之间使用特殊字符 '###' 来进行分割，业务侧接收到消息之后，可以利用不同语言提供的 Split 工具分割不同的消息。
 2. 多条消息的 MessageID 之间使用特殊字符 '###' 来进行分割，业务侧接收到消息之后，可以利用不同语言提供的 Split 工具分割不同的消息。（用于在调用 AcknowledgeMessage 接口中填入所需要的 MessageID 字段信息）
-
      */
     async ReceiveMessage(req, cb) {
         return this.request("ReceiveMessage", req, cb);

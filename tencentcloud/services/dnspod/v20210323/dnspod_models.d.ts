@@ -54,6 +54,10 @@ export interface CreateRecordRequest {
      * 开启DNSSEC时，强制添加CNAME/URL记录
      */
     DnssecConflictMode?: string;
+    /**
+     * 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
+     */
+    GroupId?: number;
 }
 /**
  * DescribeRecordFilterList返回参数结构体

@@ -321,11 +321,11 @@ export interface DescribeBlueprintInstancesResponse {
     /**
      * 符合条件的镜像实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像实例列表信息。
      */
-    BlueprintInstanceSet: Array<BlueprintInstance>;
+    BlueprintInstanceSet?: Array<BlueprintInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1212,39 +1212,39 @@ export interface Disk {
     /**
      * 磁盘ID
      */
-    DiskId: string;
+    DiskId?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 磁盘名称
      */
-    DiskName: string;
+    DiskName?: string;
     /**
      * 磁盘类型
      */
-    DiskUsage: string;
+    DiskUsage?: string;
     /**
      * 磁盘介质类型
      */
-    DiskType: string;
+    DiskType?: string;
     /**
      * 磁盘付费类型
      */
-    DiskChargeType: string;
+    DiskChargeType?: string;
     /**
      * 磁盘大小
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 续费标识
      */
-    RenewFlag: string;
+    RenewFlag?: string;
     /**
      * 磁盘状态，取值范围：
   <li>PENDING：创建中。 </li>
@@ -1258,53 +1258,53 @@ export interface Disk {
   <li> DELETING：删除中。</li>
   <li> FREEZING：冻结中。</li>
      */
-    DiskState: string;
+    DiskState?: string;
     /**
      * 磁盘挂载状态
      */
-    Attached: boolean;
+    Attached?: boolean;
     /**
      * 是否随实例释放
      */
-    DeleteWithInstance: boolean;
+    DeleteWithInstance?: boolean;
     /**
      * 上一次操作
      */
-    LatestOperation: string;
+    LatestOperation?: string;
     /**
      * 上一次操作状态
      */
-    LatestOperationState: string;
+    LatestOperationState?: string;
     /**
      * 上一次请求ID
      */
-    LatestOperationRequestId: string;
+    LatestOperationRequestId?: string;
     /**
      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredTime: string;
+    ExpiredTime?: string;
     /**
      * 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolatedTime: string;
+    IsolatedTime?: string;
     /**
      * 云硬盘的已有备份点数量。
      */
-    DiskBackupCount: number;
+    DiskBackupCount?: number;
     /**
      * 云硬盘的备份点配额数量。
      */
-    DiskBackupQuota: number;
+    DiskBackupQuota?: number;
 }
 /**
  * ModifyFirewallRules返回参数结构体
@@ -1337,7 +1337,7 @@ export interface ZoneInfo {
  */
 export interface DescribeBlueprintInstancesRequest {
     /**
-     * 实例 ID 列表，当前最多支持 1 个。
+     * 实例 ID 列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 当前最多支持1个。
      */
     InstanceIds: Array<string>;
 }
@@ -3626,11 +3626,11 @@ export interface DescribeInstancesReturnableResponse {
     /**
      * 符合条件的实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 可退还实例详细信息列表。
      */
-    InstanceReturnableSet: Array<InstanceReturnable>;
+    InstanceReturnableSet?: Array<InstanceReturnable>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("mna.tencentcloudapi.com", "2021-01-19", clientConfig);
     }
     /**
+     * 设置用户流量告警信息接口，通过该接口设置流量包告警阈值以及告警时回调的url和key
+     */
+    async SetNotifyUrl(req, cb) {
+        return this.request("SetNotifyUrl", req, cb);
+    }
+    /**
      * 更新硬件信息
      */
     async UpdateHardware(req, cb) {
@@ -70,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPublicKey", req, cb);
     }
     /**
+     * 向已存在分组中添加设备
+     */
+    async GroupAddDevice(req, cb) {
+        return this.request("GroupAddDevice", req, cb);
+    }
+    /**
      * 激活硬件设备
      */
     async ActivateHardware(req, cb) {
@@ -100,6 +112,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQos", req, cb);
     }
     /**
+     * 删除分组
+     */
+    async DeleteGroup(req, cb) {
+        return this.request("DeleteGroup", req, cb);
+    }
+    /**
+     * 获取Qos加速状态
+     */
+    async DescribeQos(req, cb) {
+        return this.request("DescribeQos", req, cb);
+    }
+    /**
      * 删除设备信息
      */
     async DeleteDevice(req, cb) {
@@ -122,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetDevicePayMode(req, cb) {
         return this.request("GetDevicePayMode", req, cb);
+    }
+    /**
+     * 查看分组详细信息
+     */
+    async GetGroupDetail(req, cb) {
+        return this.request("GetGroupDetail", req, cb);
     }
     /**
      * 获取厂商硬件设备列表
@@ -148,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetFlowAlarmInfo", req, cb);
     }
     /**
+     * 删除分组中的设备
+     */
+    async GroupDeleteDevice(req, cb) {
+        return this.request("GroupDeleteDevice", req, cb);
+    }
+    /**
      * 购买预付费流量包
      */
     async OrderFlowPackage(req, cb) {
@@ -172,10 +208,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDevice", req, cb);
     }
     /**
-     * 获取Qos加速状态
+     * 获取指定区域，指定时间点数据流量使用情况
      */
-    async DescribeQos(req, cb) {
-        return this.request("DescribeQos", req, cb);
+    async GetFlowStatisticByRegion(req, cb) {
+        return this.request("GetFlowStatisticByRegion", req, cb);
+    }
+    /**
+     * 获取分组列表
+     */
+    async GetGroupList(req, cb) {
+        return this.request("GetGroupList", req, cb);
+    }
+    /**
+     * 更新分组备注
+     */
+    async UpdateGroup(req, cb) {
+        return this.request("UpdateGroup", req, cb);
+    }
+    /**
+     * 新建分组
+     */
+    async AddGroup(req, cb) {
+        return this.request("AddGroup", req, cb);
     }
 }
 exports.Client = Client;

@@ -2272,7 +2272,7 @@ export interface SaveDocRequest {
      */
     IsRefer?: boolean;
     /**
-     * 文档操作类型：1：批量导入；2:文档导入
+     * 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档）
      */
     Opt?: number;
 }
@@ -2638,6 +2638,61 @@ export interface ListReleaseDocPreviewRequest {
      * 状态(1新增2修改3删除)
      */
     Actions?: Array<number | bigint>;
+}
+/**
+ * 文档片段
+ */
+export interface DocSegment {
+    /**
+     * 片段ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessId?: string;
+    /**
+     * 文件类型(markdown,word,txt)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileType?: string;
+    /**
+     * 文档切片类型(segment-文档切片 table-表格)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SegmentType?: string;
+    /**
+     * 标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * 段落内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageContent?: string;
+    /**
+     * 段落原文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgData?: string;
+    /**
+     * 文章ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocId?: string;
+    /**
+     * 文档业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocBizId?: string;
+    /**
+     * 文档链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocUrl?: string;
 }
 /**
  * DescribeUnsatisfiedReplyContext返回参数结构体
@@ -4188,6 +4243,20 @@ export interface BaseConfig {
     Desc?: string;
 }
 /**
+ * DescribeSegments返回参数结构体
+ */
+export interface DescribeSegmentsResponse {
+    /**
+     * 片段列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<DocSegment>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 标签提取配置
  */
 export interface ClassifyConfig {
@@ -5095,6 +5164,19 @@ export interface ReleaseConfigs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
+}
+/**
+ * DescribeSegments请求参数结构体
+ */
+export interface DescribeSegmentsRequest {
+    /**
+     * 应用ID
+     */
+    BotBizId: string;
+    /**
+     * 文档ID
+     */
+    SegBizId?: Array<string>;
 }
 /**
  * 不满意回复检索过滤

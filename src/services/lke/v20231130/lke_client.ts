@@ -125,6 +125,7 @@ import {
   ListReleaseQAPreviewResponse,
   ModifyRejectedQuestionResponse,
   ListReleaseDocPreviewRequest,
+  DocSegment,
   DescribeUnsatisfiedReplyContextResponse,
   Message,
   ExportUnsatisfiedReplyResponse,
@@ -189,6 +190,7 @@ import {
   DeleteDocResponse,
   DocumentElement,
   BaseConfig,
+  DescribeSegmentsResponse,
   ClassifyConfig,
   UploadAttributeLabelRequest,
   ExportAttributeLabelRequest,
@@ -231,6 +233,7 @@ import {
   ListRejectedQuestionRequest,
   VerifyQAResponse,
   ReleaseConfigs,
+  DescribeSegmentsRequest,
   Filters,
   ModifyRejectedQuestionRequest,
   IgnoreUnsatisfiedReplyResponse,
@@ -941,6 +944,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GroupQAResponse) => void
   ): Promise<GroupQAResponse> {
     return this.request("GroupQA", req, cb)
+  }
+
+  /**
+   * 获取片段详情
+   */
+  async DescribeSegments(
+    req: DescribeSegmentsRequest,
+    cb?: (error: string, rep: DescribeSegmentsResponse) => void
+  ): Promise<DescribeSegmentsResponse> {
+    return this.request("DescribeSegments", req, cb)
   }
 
   /**

@@ -1683,35 +1683,35 @@ export interface ReceiveMessageResponse {
     /**
      * 用作标识消息的唯一主键
      */
-    MessageID: string;
+    MessageID?: string;
     /**
      * 接收消息的内容
      */
-    MessagePayload: string;
+    MessagePayload?: string;
     /**
      * 提供给 Ack 接口，用来Ack哪一个topic中的消息
      */
-    AckTopic: string;
+    AckTopic?: string;
     /**
      * 返回的错误信息，如果为空，说明没有错误
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 返回订阅者的名字，用来创建 ack consumer时使用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubName: string;
+    SubName?: string;
     /**
      * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessageIDList: string;
+    MessageIDList?: string;
     /**
      * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessagesPayload: string;
+    MessagesPayload?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

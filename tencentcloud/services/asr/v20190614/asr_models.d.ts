@@ -57,13 +57,13 @@ export interface VoicePrintVerifyRequest {
      */
     SampleRate: number;
     /**
-     * 说话人id, 说话人唯一标识
-     */
-    VoicePrintId: string;
-    /**
      * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
      */
     Data: string;
+    /**
+     * 说话人id, 说话人唯一标识
+     */
+    VoicePrintId: string;
 }
 /**
  * DescribeAsyncRecognitionTasks请求参数结构体

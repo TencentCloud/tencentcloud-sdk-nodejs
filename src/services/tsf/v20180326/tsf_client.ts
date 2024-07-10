@@ -47,7 +47,7 @@ import {
   DeleteRepositoryResponse,
   DeleteApplicationResponse,
   QuantileEntity,
-  UpdateRepositoryRequest,
+  ModifyProgramRequest,
   DescribePathRewriteResponse,
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
@@ -71,6 +71,7 @@ import {
   ModifyUploadInfoResponse,
   EnableLaneRuleResponse,
   TsfPageConfig,
+  CreateProgramRequest,
   CreateApiRateLimitRuleRequest,
   DisableLaneRuleResponse,
   TaskRecordPage,
@@ -216,6 +217,7 @@ import {
   DescribeContainerGroupDetailResponse,
   CreatePathRewritesWithDetailRespResponse,
   Ports,
+  UpdateRepositoryRequest,
   DescribeGroupGatewaysResponse,
   SimpleKafkaDeliveryConfig,
   RevocationConfigResponse,
@@ -307,6 +309,7 @@ import {
   CreateUnitRuleWithDetailRespResponse,
   GatewayDeployGroup,
   PkgList,
+  CreateProgramResponse,
   Cluster,
   DescribeGroupUseDetailRequest,
   Microservice,
@@ -586,6 +589,7 @@ import {
   ModifyApplicationRequest,
   DescribePathRewritesResponse,
   DeleteGatewayApiRequest,
+  ModifyProgramResponse,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
@@ -2448,6 +2452,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 更新数据集
+   */
+  async ModifyProgram(
+    req: ModifyProgramRequest,
+    cb?: (error: string, rep: ModifyProgramResponse) => void
+  ): Promise<ModifyProgramResponse> {
+    return this.request("ModifyProgram", req, cb)
+  }
+
+  /**
    * 标准输出日志搜索
    */
   async SearchStdoutLog(
@@ -2655,6 +2669,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeEnabledUnitRuleResponse) => void
   ): Promise<DescribeEnabledUnitRuleResponse> {
     return this.request("DescribeEnabledUnitRule", req, cb)
+  }
+
+  /**
+   * 创建数据集
+   */
+  async CreateProgram(
+    req: CreateProgramRequest,
+    cb?: (error: string, rep: CreateProgramResponse) => void
+  ): Promise<CreateProgramResponse> {
+    return this.request("CreateProgram", req, cb)
   }
 
   /**

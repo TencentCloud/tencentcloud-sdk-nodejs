@@ -1808,6 +1808,16 @@ it("tsf.v20180326.DeployContainerGroup", async function () {
     }
 })
 
+it("tsf.v20180326.ModifyProgram", async function () {
+    try {
+       const data = await client.ModifyProgram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.SearchStdoutLog", async function () {
     try {
        const data = await client.SearchStdoutLog({})
@@ -2011,6 +2021,16 @@ it("tsf.v20180326.CreateContainGroup", async function () {
 it("tsf.v20180326.DescribeEnabledUnitRule", async function () {
     try {
        const data = await client.DescribeEnabledUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.CreateProgram", async function () {
+    try {
+       const data = await client.CreateProgram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

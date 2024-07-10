@@ -8961,7 +8961,7 @@ export interface AllocateAddressesRequest {
      */
     AddressName?: string;
     /**
-     * 静态单线IP网络出口，默认值：center_egress1
+     * 网络出口，当前仅支持精品BGP、静态单线，这2种IP 地址类型的指定出口传入，默认值：center_egress1，其它可选值：center_egress2、center_egress3
      */
     Egress?: string;
     /**

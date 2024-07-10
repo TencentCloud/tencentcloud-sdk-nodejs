@@ -447,6 +447,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GroupQA", req, cb);
     }
     /**
+     * 获取片段详情
+     */
+    async DescribeSegments(req, cb) {
+        return this.request("DescribeSegments", req, cb);
+    }
+    /**
      * 获取拒答问题
      */
     async ListRejectedQuestion(req, cb) {

@@ -18,6 +18,16 @@ const client = new tencentcloud.mna.v20210119.Client({
 })
 describe("mna.v20210119.test.js", function () {
 
+it("mna.v20210119.SetNotifyUrl", async function () {
+    try {
+       const data = await client.SetNotifyUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.UpdateHardware", async function () {
     try {
        const data = await client.UpdateHardware({})
@@ -88,6 +98,16 @@ it("mna.v20210119.GetPublicKey", async function () {
     }
 })
 
+it("mna.v20210119.GroupAddDevice", async function () {
+    try {
+       const data = await client.GroupAddDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.ActivateHardware", async function () {
     try {
        const data = await client.ActivateHardware({})
@@ -138,6 +158,26 @@ it("mna.v20210119.CreateQos", async function () {
     }
 })
 
+it("mna.v20210119.DeleteGroup", async function () {
+    try {
+       const data = await client.DeleteGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DescribeQos", async function () {
+    try {
+       const data = await client.DescribeQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})
@@ -171,6 +211,16 @@ it("mna.v20210119.GetNetMonitor", async function () {
 it("mna.v20210119.GetDevicePayMode", async function () {
     try {
        const data = await client.GetDevicePayMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetGroupDetail", async function () {
+    try {
+       const data = await client.GetGroupDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +268,16 @@ it("mna.v20210119.GetFlowAlarmInfo", async function () {
     }
 })
 
+it("mna.v20210119.GroupDeleteDevice", async function () {
+    try {
+       const data = await client.GroupDeleteDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.OrderFlowPackage", async function () {
     try {
        const data = await client.OrderFlowPackage({})
@@ -258,9 +318,39 @@ it("mna.v20210119.AddDevice", async function () {
     }
 })
 
-it("mna.v20210119.DescribeQos", async function () {
+it("mna.v20210119.GetFlowStatisticByRegion", async function () {
     try {
-       const data = await client.DescribeQos({})
+       const data = await client.GetFlowStatisticByRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetGroupList", async function () {
+    try {
+       const data = await client.GetGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.UpdateGroup", async function () {
+    try {
+       const data = await client.UpdateGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.AddGroup", async function () {
+    try {
+       const data = await client.AddGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetDevicePayModeRequest, GetFlowAlarmInfoResponse, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, OrderFlowPackageRequest, GetMultiFlowStatisticResponse, GetFlowStatisticResponse, GetFlowAlarmInfoRequest, CreateQosResponse, DescribeQosResponse, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, GetFlowPackagesRequest, GetHardwareListRequest, CreateEncryptedKeyResponse, OrderFlowPackageResponse, UpdateDeviceResponse, ModifyPackageRenewFlagRequest, CreateQosRequest, GetStatisticDataRequest, GetFlowPackagesResponse, GetVendorHardwareResponse, UpdateDeviceRequest, GetPublicKeyResponse, GetFlowStatisticRequest, ActivateHardwareRequest, AddHardwareResponse, ModifyPackageRenewFlagResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDevicePayModeResponse, GetDeviceRequest, ActivateHardwareResponse, UpdateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, AddHardwareRequest, GetFlowStatisticByGroupResponse, GetDevicesRequest, GetHardwareListResponse, UpdateHardwareRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
+import { GetDeviceResponse, GetMultiFlowStatisticResponse, UpdateHardwareResponse, DescribeQosResponse, GetFlowPackagesRequest, SetNotifyUrlResponse, ModifyPackageRenewFlagRequest, GetFlowPackagesResponse, GetVendorHardwareResponse, AddGroupRequest, GetGroupListRequest, GetGroupDetailRequest, GroupDeleteDeviceResponse, GroupAddDeviceRequest, GetStatisticDataResponse, GetPublicKeyRequest, GetFlowStatisticByGroupResponse, GetNetMonitorResponse, DeleteQosRequest, GetFlowStatisticByRegionRequest, GetFlowAlarmInfoRequest, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, DeleteGroupRequest, CreateEncryptedKeyResponse, CreateQosRequest, ModifyPackageRenewFlagResponse, DeleteQosResponse, GetDeviceRequest, ActivateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, GetDevicesRequest, SetNotifyUrlRequest, GetDevicePayModeRequest, CreateQosResponse, GetHardwareListRequest, GroupDeleteDeviceRequest, GetFlowStatisticByRegionResponse, ActivateHardwareRequest, GetMultiFlowStatisticRequest, GetFlowAlarmInfoResponse, OrderFlowPackageRequest, GetGroupDetailResponse, UpdateGroupResponse, GetHardwareListResponse, AddDeviceRequest, UpdateGroupRequest, GetFlowStatisticResponse, UpdateHardwareRequest, GetNetMonitorRequest, GetGroupListResponse, OrderFlowPackageResponse, UpdateDeviceResponse, GroupAddDeviceResponse, GetStatisticDataRequest, UpdateDeviceRequest, DeleteGroupResponse, GetPublicKeyResponse, AddHardwareResponse, GetFlowStatisticRequest, AddDeviceResponse, GetDevicePayModeResponse, DeleteDeviceResponse, AddHardwareRequest, AddGroupResponse } from "./mna_models";
 /**
  * mna client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 设置用户流量告警信息接口，通过该接口设置流量包告警阈值以及告警时回调的url和key
+     */
+    SetNotifyUrl(req: SetNotifyUrlRequest, cb?: (error: string, rep: SetNotifyUrlResponse) => void): Promise<SetNotifyUrlResponse>;
     /**
      * 更新硬件信息
      */
@@ -36,6 +40,10 @@ export declare class Client extends AbstractClient {
      */
     GetPublicKey(req?: GetPublicKeyRequest, cb?: (error: string, rep: GetPublicKeyResponse) => void): Promise<GetPublicKeyResponse>;
     /**
+     * 向已存在分组中添加设备
+     */
+    GroupAddDevice(req: GroupAddDeviceRequest, cb?: (error: string, rep: GroupAddDeviceResponse) => void): Promise<GroupAddDeviceResponse>;
+    /**
      * 激活硬件设备
      */
     ActivateHardware(req: ActivateHardwareRequest, cb?: (error: string, rep: ActivateHardwareResponse) => void): Promise<ActivateHardwareResponse>;
@@ -56,6 +64,14 @@ export declare class Client extends AbstractClient {
      */
     CreateQos(req: CreateQosRequest, cb?: (error: string, rep: CreateQosResponse) => void): Promise<CreateQosResponse>;
     /**
+     * 删除分组
+     */
+    DeleteGroup(req: DeleteGroupRequest, cb?: (error: string, rep: DeleteGroupResponse) => void): Promise<DeleteGroupResponse>;
+    /**
+     * 获取Qos加速状态
+     */
+    DescribeQos(req: DescribeQosRequest, cb?: (error: string, rep: DescribeQosResponse) => void): Promise<DescribeQosResponse>;
+    /**
      * 删除设备信息
      */
     DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
@@ -71,6 +87,10 @@ export declare class Client extends AbstractClient {
      * 获取设备付费模式
      */
     GetDevicePayMode(req: GetDevicePayModeRequest, cb?: (error: string, rep: GetDevicePayModeResponse) => void): Promise<GetDevicePayModeResponse>;
+    /**
+     * 查看分组详细信息
+     */
+    GetGroupDetail(req: GetGroupDetailRequest, cb?: (error: string, rep: GetGroupDetailResponse) => void): Promise<GetGroupDetailResponse>;
     /**
      * 获取厂商硬件设备列表
      */
@@ -88,6 +108,10 @@ export declare class Client extends AbstractClient {
      */
     GetFlowAlarmInfo(req?: GetFlowAlarmInfoRequest, cb?: (error: string, rep: GetFlowAlarmInfoResponse) => void): Promise<GetFlowAlarmInfoResponse>;
     /**
+     * 删除分组中的设备
+     */
+    GroupDeleteDevice(req: GroupDeleteDeviceRequest, cb?: (error: string, rep: GroupDeleteDeviceResponse) => void): Promise<GroupDeleteDeviceResponse>;
+    /**
      * 购买预付费流量包
      */
     OrderFlowPackage(req: OrderFlowPackageRequest, cb?: (error: string, rep: OrderFlowPackageResponse) => void): Promise<OrderFlowPackageResponse>;
@@ -104,7 +128,19 @@ export declare class Client extends AbstractClient {
      */
     AddDevice(req: AddDeviceRequest, cb?: (error: string, rep: AddDeviceResponse) => void): Promise<AddDeviceResponse>;
     /**
-     * 获取Qos加速状态
+     * 获取指定区域，指定时间点数据流量使用情况
      */
-    DescribeQos(req: DescribeQosRequest, cb?: (error: string, rep: DescribeQosResponse) => void): Promise<DescribeQosResponse>;
+    GetFlowStatisticByRegion(req: GetFlowStatisticByRegionRequest, cb?: (error: string, rep: GetFlowStatisticByRegionResponse) => void): Promise<GetFlowStatisticByRegionResponse>;
+    /**
+     * 获取分组列表
+     */
+    GetGroupList(req: GetGroupListRequest, cb?: (error: string, rep: GetGroupListResponse) => void): Promise<GetGroupListResponse>;
+    /**
+     * 更新分组备注
+     */
+    UpdateGroup(req: UpdateGroupRequest, cb?: (error: string, rep: UpdateGroupResponse) => void): Promise<UpdateGroupResponse>;
+    /**
+     * 新建分组
+     */
+    AddGroup(req: AddGroupRequest, cb?: (error: string, rep: AddGroupResponse) => void): Promise<AddGroupResponse>;
 }

@@ -1107,6 +1107,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeployContainerGroup", req, cb);
     }
     /**
+     * 更新数据集
+     */
+    async ModifyProgram(req, cb) {
+        return this.request("ModifyProgram", req, cb);
+    }
+    /**
      * 标准输出日志搜索
      */
     async SearchStdoutLog(req, cb) {
@@ -1231,6 +1237,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeEnabledUnitRule(req, cb) {
         return this.request("DescribeEnabledUnitRule", req, cb);
+    }
+    /**
+     * 创建数据集
+     */
+    async CreateProgram(req, cb) {
+        return this.request("CreateProgram", req, cb);
     }
     /**
      * 修改容器部署组实例数

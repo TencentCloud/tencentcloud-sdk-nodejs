@@ -78,9 +78,9 @@ it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
     }
 })
 
-it("aiart.v20221229.UploadTrainPortraitImages", async function () {
+it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
     try {
-       const data = await client.UploadTrainPortraitImages({})
+       const data = await client.SubmitDrawPortraitJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +98,16 @@ it("aiart.v20221229.QueryDrawPortraitJob", async function () {
     }
 })
 
+it("aiart.v20221229.UploadTrainPortraitImages", async function () {
+    try {
+       const data = await client.UploadTrainPortraitImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.TextToImage", async function () {
     try {
        const data = await client.TextToImage({})
@@ -108,9 +118,9 @@ it("aiart.v20221229.TextToImage", async function () {
     }
 })
 
-it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
+it("aiart.v20221229.ChangeClothes", async function () {
     try {
-       const data = await client.SubmitDrawPortraitJob({})
+       const data = await client.ChangeClothes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

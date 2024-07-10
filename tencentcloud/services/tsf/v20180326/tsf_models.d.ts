@@ -739,17 +739,29 @@ export interface QuantileEntity {
     NinthPositionValue: string;
 }
 /**
- * UpdateRepository请求参数结构体
+ * ModifyProgram请求参数结构体
  */
-export interface UpdateRepositoryRequest {
+export interface ModifyProgramRequest {
     /**
-     * 仓库ID
+     * 数据集ID
      */
-    RepositoryId: string;
+    ProgramId: string;
     /**
-     * 仓库描述
+     * 数据集名称，不传入时不更新
      */
-    RepositoryDesc?: string;
+    ProgramName?: string;
+    /**
+     * 数据集描述，不传入时不更新
+     */
+    ProgramDesc?: string;
+    /**
+     * 数据项列表，传入null不更新，传入空数组全量删除
+     */
+    ProgramItemList?: Array<ProgramItem>;
+    /**
+     * ProgramItemList是否是空数组
+     */
+    EmptyProgramItemList?: boolean;
 }
 /**
  * DescribePathRewrite返回参数结构体
@@ -1180,6 +1192,23 @@ export interface TsfPageConfig {
      * 配置项列表
      */
     Content: Array<Config>;
+}
+/**
+ * CreateProgram请求参数结构体
+ */
+export interface CreateProgramRequest {
+    /**
+     * 数据集名称
+     */
+    ProgramName: string;
+    /**
+     * 数据集描述
+     */
+    ProgramDesc?: string;
+    /**
+     * 数据项列表，传入null或空数组时不新增
+     */
+    ProgramItemList?: Array<ProgramItem>;
 }
 /**
  * CreateApiRateLimitRule请求参数结构体
@@ -4538,6 +4567,19 @@ export interface Ports {
     Protocol: string;
 }
 /**
+ * UpdateRepository请求参数结构体
+ */
+export interface UpdateRepositoryRequest {
+    /**
+     * 仓库ID
+     */
+    RepositoryId: string;
+    /**
+     * 仓库描述
+     */
+    RepositoryDesc?: string;
+}
+/**
  * DescribeGroupGateways返回参数结构体
  */
 export interface DescribeGroupGatewaysResponse {
@@ -6870,6 +6912,19 @@ export interface PkgList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RepositoryName: string;
+}
+/**
+ * CreateProgram返回参数结构体
+ */
+export interface CreateProgramResponse {
+    /**
+     * true: 创建成功；false: 创建失败
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 集群
@@ -13592,6 +13647,19 @@ export interface DeleteGatewayApiRequest {
      * Api ID 数组
      */
     ApiList: Array<string>;
+}
+/**
+ * ModifyProgram返回参数结构体
+ */
+export interface ModifyProgramResponse {
+    /**
+     * true: 更新成功；false: 更新失败
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 添加实例到集群的结果

@@ -202,6 +202,52 @@ export interface QueryTrainPortraitModelJobRequest {
     ModelId: string;
 }
 /**
+ * ReplaceBackground请求参数结构体
+ */
+export interface ReplaceBackgroundRequest {
+    /**
+     * 商品原图 Url。
+  图片限制：单边分辨率小于4000，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     */
+    ProductUrl: string;
+    /**
+     * 商品 Mask 图 Url，要求背景透明，保留商品主体。
+  如果不传，将自动使用内置的商品分割算法得到 Mask。
+  支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。
+  图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。
+     */
+    MaskUrl?: string;
+    /**
+     * 对新背景的文本描述。
+  最多支持256个 utf-8 字符，支持中、英文。
+     */
+    Prompt?: string;
+    /**
+     * 替换背景后生成的商品图分辨率。
+  支持生成单边分辨率大于500且小于4000、长宽比在2:5 ~ 5:2之间的图片，不传默认生成1280:1280。
+  建议图片比例为1:1、9:16、16:9，生成效果更佳，使用其他比例的生成效果可能不如建议比例。
+     */
+    Resolution?: string;
+    /**
+     * 为生成结果图添加标识的开关，默认为1。
+  1：添加标识。
+  0：不添加标识。
+  其他数值：默认按1处理。
+  建议您使用显著标识来提示结果图是 AI 生成的图片。
+     */
+    LogoAdd?: number;
+    /**
+     * 标识内容设置。
+  默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+     */
+    LogoParam?: LogoParam;
+    /**
+     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+  生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。
+     */
+    RspImgType?: string;
+}
+/**
  * SubmitTextToImageProJob请求参数结构体
  */
 export interface SubmitTextToImageProJobRequest {
@@ -301,6 +347,21 @@ export interface QueryTrainPortraitModelJobResponse {
      * 任务错误信息。
      */
     JobErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ChangeClothes返回参数结构体
+ */
+export interface ChangeClothesResponse {
+    /**
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+     */
+    ResultImage?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -512,45 +573,42 @@ export interface ImageToImageResponse {
     RequestId?: string;
 }
 /**
- * ReplaceBackground请求参数结构体
+ * ChangeClothes请求参数结构体
  */
-export interface ReplaceBackgroundRequest {
+export interface ChangeClothesRequest {
     /**
-     * 商品原图 Url。
-  图片限制：单边分辨率小于4000，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     * 模特图片 Url。
+  图片限制：单边分辨率小于3000，且大于512，转成 Base64 字符串后小于 8MB。
+  输入要求：
+  1、建议上传正面模特图片，至少完整露出应穿着输入指定服装的身体部位（全身、上半身或下半身），无大角度身体偏转或异常姿势。
+  2、建议上传3:4比例的图片，生成效果更佳。
+  3、建议模特图片中的原始服装和更换后的服装类别一致，或原始服装在身体上的覆盖范围小于等于更换后的服装（例如需要给模特换上短裤，则原始模特图片中也建议穿短裤，不建议穿长裤），否则会影响人像生成效果。
+  
      */
-    ProductUrl: string;
+    ModelUrl: string;
     /**
-     * 商品 Mask 图 Url，要求背景透明，保留商品主体。
-  如果不传，将自动使用内置的商品分割算法得到 Mask。
-  支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。
-  图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。
+     * 服装图片 Url。
+  图片限制：单边分辨率小于3000，大于512，转成 Base64 字符串后小于 8MB。
+  输入要求：
+  建议上传服装完整的正面平铺图片，仅包含1个服装主体，服装类型支持上衣、下装、连衣裙，三选一。算法将根据输入的图片，结合服装图片给模特换装。
      */
-    MaskUrl?: string;
+    ClothesUrl: string;
     /**
-     * 对新背景的文本描述。
-  最多支持256个 utf-8 字符，支持中、英文。
+     * 服装类型，需要和服装图片保持一致。
+  取值：
+  Upper-body：上衣
+  Lower-body：下装
+  Dress：连衣裙
      */
-    Prompt?: string;
-    /**
-     * 替换背景后生成的商品图分辨率。
-  支持生成单边分辨率大于500且小于4000、长宽比在2:5 ~ 5:2之间的图片，不传默认生成1280:1280。
-  建议图片比例为1:1、9:16、16:9，生成效果更佳，使用其他比例的生成效果可能不如建议比例。
-     */
-    Resolution?: string;
+    ClothesType: string;
     /**
      * 为生成结果图添加标识的开关，默认为1。
   1：添加标识。
   0：不添加标识。
   其他数值：默认按1处理。
-  建议您使用显著标识来提示结果图是 AI 生成的图片。
+  建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
      */
     LogoAdd?: number;
-    /**
-     * 标识内容设置。
-  默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
-     */
-    LogoParam?: LogoParam;
     /**
      * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
   生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。

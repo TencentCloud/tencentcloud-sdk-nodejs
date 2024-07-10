@@ -708,6 +708,16 @@ it("lke.v20231130.GroupQA", async function () {
     }
 })
 
+it("lke.v20231130.DescribeSegments", async function () {
+    try {
+       const data = await client.DescribeSegments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.ListRejectedQuestion", async function () {
     try {
        const data = await client.ListRejectedQuestion({})

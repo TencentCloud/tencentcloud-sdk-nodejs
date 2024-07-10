@@ -4906,6 +4906,11 @@ export interface LiveStreamTaskNotifyConfig {
      * HTTP回调地址，NotifyType为URL时必填。
      */
     NotifyUrl?: string;
+    /**
+     * 用于生成回调签名的 Key。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NotifyKey?: string;
 }
 /**
  * 视频流配置参数
@@ -12997,23 +13002,28 @@ export interface LiveStreamObjectRecognitionResult {
     /**
      * 识别的物体名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 识别片段起始的 PTS 时间，单位：秒。
      */
-    StartPtsOffset: number;
+    StartPtsOffset?: number;
     /**
      * 识别片段终止的 PTS 时间，单位：秒。
      */
-    EndPtsOffset: number;
+    EndPtsOffset?: number;
     /**
      * 识别片段置信度。取值：0~100。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number | bigint>;
+    AreaCoordSet?: Array<number | bigint>;
+    /**
+     * 截图链接。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
 }
 /**
  * 采样截图信息
