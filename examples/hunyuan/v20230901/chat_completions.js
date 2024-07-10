@@ -19,7 +19,7 @@ const client = new HunyuanClient({
 
 // 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
 // 流式调用
-client.ChatStd({
+client.ChatCompletions({
   Messages: [{
     Role: 'user',
     Content: '你好, 可以讲个笑话吗'
@@ -41,7 +41,7 @@ client.ChatStd({
 )
 
 // 非流式调用
-client.ChatStd({
+client.ChatCompletions({
   Messages: [{
     Role: 'user',
     Content: '你好, 可以讲个笑话吗'
