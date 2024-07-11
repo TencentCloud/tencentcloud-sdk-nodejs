@@ -318,9 +318,9 @@ it("essbasic.v20210526.UploadFiles", async function () {
     }
 })
 
-it("essbasic.v20210526.CreateSignUrls", async function () {
+it("essbasic.v20210526.CreateEmployeeQualificationSealQrCode", async function () {
     try {
-       const data = await client.CreateSignUrls({})
+       const data = await client.CreateEmployeeQualificationSealQrCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +521,16 @@ it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateSignUrls", async function () {
+    try {
+       const data = await client.CreateSignUrls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

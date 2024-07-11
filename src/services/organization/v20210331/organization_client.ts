@@ -665,7 +665,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建共享单元，只有企业组织管理员可创建。
+   * 创建共享单元。
    */
   async AddShareUnit(
     req: AddShareUnitRequest,

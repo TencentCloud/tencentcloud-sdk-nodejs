@@ -389,6 +389,16 @@ export interface FlushBinlogResponse {
 }
 
 /**
+ * UpgradeHourDBInstance返回参数结构体
+ */
+export interface UpgradeHourDBInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -2586,6 +2596,40 @@ export interface DeleteAccountRequest {
    * 用户允许的访问 host
    */
   Host: string
+}
+
+/**
+ * UpgradeHourDBInstance请求参数结构体
+ */
+export interface UpgradeHourDBInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 内存大小，单位：GB
+   */
+  Memory: number
+  /**
+   * 存储大小，单位：GB
+   */
+  Storage: number
+  /**
+   * 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换结束时间,  格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。
+   */
+  SwitchEndTime?: string
+  /**
+   * 是否自动重试。 0：不自动重试  1：自动重试
+   */
+  SwitchAutoRetry?: number
+  /**
+   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+   */
+  Zones?: Array<string>
 }
 
 /**

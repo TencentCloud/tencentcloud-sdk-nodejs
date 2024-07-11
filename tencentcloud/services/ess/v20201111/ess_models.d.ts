@@ -842,6 +842,7 @@ export interface ModifyExtendedServiceRequest {
     /**
      * 要管理的拓展服务类型。
   <ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
+  <li>AUTO_SIGN_CAN_FILL_IN：本企业自动签合同支持签前内容补充</li>
   <li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
   <li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
   <li>MOBILE_CHECK_APPROVER：个人签署方仅校验手机号</li>
@@ -849,7 +850,8 @@ export interface ModifyExtendedServiceRequest {
   <li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
   <li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
   <li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
-  <li>PAGING_SEAL：骑缝章</li>
+  <li>ORGANIZATION_FLOW_EMAIL_NOTIFY：邮件通知签署方</li>
+  <li>FLOW_APPROVAL：合同审批强制开启</li>
   <li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
      */
     ServiceType: string;
@@ -1968,35 +1970,17 @@ export interface DescribeSignFaceVideoRequest {
     Agent?: Agent;
 }
 /**
- * DeleteSealPolicies请求参数结构体
+ * CreateEmployeeQualificationSealQrCode返回参数结构体
  */
-export interface DeleteSealPoliciesRequest {
+export interface CreateEmployeeQualificationSealQrCodeResponse {
     /**
-     * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     * 二维码图片的Base64  注:  `此二维码的有效时间为7天，过期后需要重新生成新的二维码图片`
      */
-    Operator: UserInfo;
+    QrcodeBase64?: string;
     /**
-     * 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PolicyIds?: Array<string>;
-    /**
-     * 电子印章ID，为32位字符串。
-  建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
-  可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
-  注：印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填。
-     */
-    SealId?: string;
-    /**
-     * 待授权的员工ID，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-  可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
-     */
-    UserIds?: Array<string>;
-    /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-     */
-    Agent?: Agent;
+    RequestId?: string;
 }
 /**
  * CreateFlowGroupByTemplates返回参数结构体
@@ -3280,6 +3264,23 @@ export interface IntentionActionResultDetail {
     Video?: string;
 }
 /**
+ * CreateEmployeeQualificationSealQrCode请求参数结构体
+ */
+export interface CreateEmployeeQualificationSealQrCodeRequest {
+    /**
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的
+     */
+    HintText?: string;
+}
+/**
  * CreatePersonAuthCertificateImage返回参数结构体
  */
 export interface CreatePersonAuthCertificateImageResponse {
@@ -3558,6 +3559,37 @@ export interface SuccessDeleteStaffData {
     UserId: string;
 }
 /**
+ * DeleteSealPolicies请求参数结构体
+ */
+export interface DeleteSealPoliciesRequest {
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 印章授权编码数组。这个参数跟下面的SealId其中一个必填，另外一个可选填
+     */
+    PolicyIds?: Array<string>;
+    /**
+     * 电子印章ID，为32位字符串。
+  建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+  可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
+  注：印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填。
+     */
+    SealId?: string;
+    /**
+     * 待授权的员工ID，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+  可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
+     */
+    UserIds?: Array<string>;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+}
+/**
  * CreateConvertTaskApi返回参数结构体
  */
 export interface CreateConvertTaskApiResponse {
@@ -3704,7 +3736,7 @@ export interface CreateFlowByFilesRequest {
      */
     Operator: UserInfo;
     /**
-     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+     * 合同流程的名称（可自定义此名称），长度不能超过200个字符，只能由中文、字母、数字、中划线和下划线组成。
   
   该名称还将用于合同签署完成后的下载文件名。
      */
@@ -3738,6 +3770,7 @@ export interface CreateFlowByFilesRequest {
   <li> 勾选框控件        </li>
   <li> 数字控件          </li>
   <li> 图片控件          </li>
+  <li> 水印控件          </li>
   <li> 动态表格等填写控件</li></ul>
      */
     Components?: Array<Component>;
@@ -7254,11 +7287,7 @@ export interface DescribeOrganizationSealsRequest {
      */
     SealId?: string;
     /**
-     * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。
-  
-  目前支持以下几种：
-  
-  <ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>ORGANIZATION_SEAL</strong>：企业印章（通过图片上传创建）；</li> <li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> </ul>
+     * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种：<ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>ORGANIZATION_SEAL</strong>：企业印章（通过图片上传创建）；</li> <li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> <li><strong>EMPLOYEE_QUALIFICATION_SEAL</strong>：员工执业章。</li> </ul>
      */
     SealTypes?: Array<string>;
     /**
@@ -7666,6 +7695,7 @@ export interface DescribeExtendedServiceAuthInfosRequest {
   默认为空，即查询当前支持的所有扩展服务信息。
   若需查询单个扩展服务的开通情况，请传递相应的值，如下所示：
   <ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
+  <li>AUTO_SIGN_CAN_FILL_IN：本企业自动签合同支持签前内容补充</li>
   <li>BATCH_SIGN：批量签署</li>
   <li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
   <li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
@@ -7674,7 +7704,8 @@ export interface DescribeExtendedServiceAuthInfosRequest {
   <li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
   <li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
   <li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
-  <li>PAGING_SEAL：骑缝章</li>
+  <li>ORGANIZATION_FLOW_EMAIL_NOTIFY：邮件通知签署方</li>
+  <li>FLOW_APPROVAL：合同审批强制开启</li>
   <li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
      */
     ExtendServiceType?: string;

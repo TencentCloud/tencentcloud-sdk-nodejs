@@ -376,7 +376,7 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
    */
   SubnetId: string
   /**
-   * 数据存储时间（单位天），限制值为15，30，45之一
+   * 数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一
    */
   DataRetentionTime: number
   /**

@@ -36,6 +36,7 @@ import {
   DescribeUpgradePriceRequest,
   TerminateDedicatedDBInstanceResponse,
   FlushBinlogResponse,
+  UpgradeHourDBInstanceResponse,
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
   DescribeFileDownloadUrlRequest,
@@ -123,6 +124,7 @@ import {
   DescribeDatabaseObjectsResponse,
   ModifyDBInstanceNameRequest,
   DeleteAccountRequest,
+  UpgradeHourDBInstanceRequest,
   TableColumn,
   CreateTmpInstancesResponse,
   UpgradeDBInstanceRequest,
@@ -847,6 +849,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 升级MariaDB按量计费实例
+   */
+  async UpgradeHourDBInstance(
+    req: UpgradeHourDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeHourDBInstanceResponse) => void
+  ): Promise<UpgradeHourDBInstanceResponse> {
+    return this.request("UpgradeHourDBInstance", req, cb)
   }
 
   /**

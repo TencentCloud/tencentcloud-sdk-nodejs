@@ -814,6 +814,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBatchOrganizationRegistrationTasks", req, cb);
     }
     /**
+     * 该接口用于获取个人授权执业章给企业的二维码，需要个人用户通过微信扫码。扫描后将跳转到腾讯电子签小程序，进入到授权执业章的流程。个人用户授权成功后，企业印章管理员需对印章进行审核，审核通过后，即可使用个人授权的执业章进行盖章操作。
+
+**注意**
+1. 该二维码**有效期为7天**，过期后将失效，可重新创建。
+     */
+    async CreateEmployeeQualificationSealQrCode(req, cb) {
+        return this.request("CreateEmployeeQualificationSealQrCode", req, cb);
+    }
+    /**
      * 创建企业扩展服务授权，当前仅支持授权 “企业自动签” 和 “批量签署” 给企业员工。
 该接口作用和电子签控制台 企业设置-扩展服务-企业自动签署和批量签署授权 两个模块功能相同，可通过该接口授权给企业员工。
 

@@ -33,6 +33,7 @@ import {
   CreateLegalSealQrCodeResponse,
   CommonApproverOption,
   DescribeCancelFlowsTaskResponse,
+  CreateEmployeeQualificationSealQrCodeResponse,
   ChannelCreateFlowGroupByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
@@ -117,6 +118,7 @@ import {
   CommonFlowApprover,
   FillApproverInfo,
   IntentionActionResultDetail,
+  CreateEmployeeQualificationSealQrCodeRequest,
   ChannelCreateUserAutoSignSealUrlRequest,
   PdfVerifyResult,
   UserThreeFactor,
@@ -880,30 +882,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 创建跳转小程序查看或签署的链接
+     * 该接口用于获取个人授权执业章给企业的二维码，需要个人用户通过微信扫码。扫描后将跳转到腾讯电子签小程序，进入到授权执业章的流程。个人用户授权成功后，企业印章管理员需对印章进行审核，审核通过后，即可使用个人授权的执业章进行盖章操作。
 
-**腾讯电子签小程序的AppID 和 原始Id如下:**
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
-
-**主要使用场景EndPoint分类**
-
-|EndPoint| 场景| 说明和示例|
-|  ----  | ----  | --- |
-|  WEIXINAPP  | 短链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序（与腾讯电子签官方短信提醒用户签署形式一样）<br> 示例: https://essurl.cn/x9nvWU8fTg|
-|  LONGURL2WEIXINAPP  | 长链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序, 是WEIXINAPP生成短链代表的那个长链|
-|  CHANNEL  | 带有H5引导页的跳转腾讯电子签小程序签署场景 |  点击链接打开一个H5引导页面, 页面中有个"前往小程序"的按钮, 点击后会跳转到腾讯电子签小程序签署场景;  签署完成会回到H5引导页面, 然后跳转到指定创建链接指定的JumpUrl<br>示例: https://res.ess.tencent.cn/cdn/h5-activity-beta/jump-mp.html?use=channel-guide&type=warning&token=uIFKIU8fTd |
-|APP| <font color="red">贵方APP</font>跳转腾讯电子签小程序签署场景|  贵方App直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方App的场景<br>跳转到腾讯电子签小程序的实现可以参考微信的官方文档:<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html" target="_blank">开放能力/打开 App</a> <br> 示例: pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3 |
-|APP| <font color="red">贵方小程序</font>跳转腾讯电子签小程序签署场景|  贵方小程序直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方小程序的场景<br>跳转到腾讯电子签小程序的实现可以参考微信官方文档<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html" target="_blank">全屏方式</a>和<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html " target="_blank">半屏方式</a><br>此时返回的SignUrl就是官方文档中的path<br> 示例:pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3  |
+**注意**
+1. 该二维码**有效期为7天**，过期后将失效，可重新创建。
      */
-  async CreateSignUrls(
-    req: CreateSignUrlsRequest,
-    cb?: (error: string, rep: CreateSignUrlsResponse) => void
-  ): Promise<CreateSignUrlsResponse> {
-    return this.request("CreateSignUrls", req, cb)
+  async CreateEmployeeQualificationSealQrCode(
+    req: CreateEmployeeQualificationSealQrCodeRequest,
+    cb?: (error: string, rep: CreateEmployeeQualificationSealQrCodeResponse) => void
+  ): Promise<CreateEmployeeQualificationSealQrCodeResponse> {
+    return this.request("CreateEmployeeQualificationSealQrCode", req, cb)
   }
 
   /**
@@ -1287,6 +1275,33 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: PrepareFlowsResponse) => void
   ): Promise<PrepareFlowsResponse> {
     return this.request("PrepareFlows", req, cb)
+  }
+
+  /**
+     * 创建跳转小程序查看或签署的链接
+
+**腾讯电子签小程序的AppID 和 原始Id如下:**
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+
+**主要使用场景EndPoint分类**
+
+|EndPoint| 场景| 说明和示例|
+|  ----  | ----  | --- |
+|  WEIXINAPP  | 短链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序（与腾讯电子签官方短信提醒用户签署形式一样）<br> 示例: https://essurl.cn/x9nvWU8fTg|
+|  LONGURL2WEIXINAPP  | 长链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序, 是WEIXINAPP生成短链代表的那个长链|
+|  CHANNEL  | 带有H5引导页的跳转腾讯电子签小程序签署场景 |  点击链接打开一个H5引导页面, 页面中有个"前往小程序"的按钮, 点击后会跳转到腾讯电子签小程序签署场景;  签署完成会回到H5引导页面, 然后跳转到指定创建链接指定的JumpUrl<br>示例: https://res.ess.tencent.cn/cdn/h5-activity-beta/jump-mp.html?use=channel-guide&type=warning&token=uIFKIU8fTd |
+|APP| <font color="red">贵方APP</font>跳转腾讯电子签小程序签署场景|  贵方App直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方App的场景<br>跳转到腾讯电子签小程序的实现可以参考微信的官方文档:<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html" target="_blank">开放能力/打开 App</a> <br> 示例: pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3 |
+|APP| <font color="red">贵方小程序</font>跳转腾讯电子签小程序签署场景|  贵方小程序直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方小程序的场景<br>跳转到腾讯电子签小程序的实现可以参考微信官方文档<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html" target="_blank">全屏方式</a>和<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html " target="_blank">半屏方式</a><br>此时返回的SignUrl就是官方文档中的path<br> 示例:pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3  |
+     */
+  async CreateSignUrls(
+    req: CreateSignUrlsRequest,
+    cb?: (error: string, rep: CreateSignUrlsResponse) => void
+  ): Promise<CreateSignUrlsResponse> {
+    return this.request("CreateSignUrls", req, cb)
   }
 
   /**

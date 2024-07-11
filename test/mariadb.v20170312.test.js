@@ -638,6 +638,16 @@ it("mariadb.v20170312.DescribeDBSecurityGroups", async function () {
     }
 })
 
+it("mariadb.v20170312.UpgradeHourDBInstance", async function () {
+    try {
+       const data = await client.UpgradeHourDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeDatabaseTable", async function () {
     try {
        const data = await client.DescribeDatabaseTable({})

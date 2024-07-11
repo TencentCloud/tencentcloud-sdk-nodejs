@@ -94,6 +94,7 @@ import {
   CreateProxyGroupRequest,
   RuleInfo,
   RealServerStatus,
+  DescribeTaskStatusResponse,
   DescribeTCPListenersResponse,
   DescribeRulesRequest,
   DescribeCountryAreaMappingResponse,
@@ -197,6 +198,7 @@ import {
   NewRealServer,
   DescribeFirstLinkSessionResponse,
   DescribeHTTPListenersResponse,
+  DescribeTaskStatusRequest,
   HttpHeaderParam,
   DescribeRealServerStatisticsResponse,
   AccessRegionDomainConf,
@@ -998,6 +1000,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirstLinkSessionResponse) => void
   ): Promise<DescribeFirstLinkSessionResponse> {
     return this.request("DescribeFirstLinkSession", req, cb)
+  }
+
+  /**
+   * 查询异步任务执行状态
+   */
+  async DescribeTaskStatus(
+    req?: DescribeTaskStatusRequest,
+    cb?: (error: string, rep: DescribeTaskStatusResponse) => void
+  ): Promise<DescribeTaskStatusResponse> {
+    return this.request("DescribeTaskStatus", req, cb)
   }
 
   /**

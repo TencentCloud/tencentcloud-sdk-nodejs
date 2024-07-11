@@ -518,6 +518,20 @@ export interface DescribeCancelFlowsTaskResponse {
 }
 
 /**
+ * CreateEmployeeQualificationSealQrCode返回参数结构体
+ */
+export interface CreateEmployeeQualificationSealQrCodeResponse {
+  /**
+   * 二维码图片的Base64  注:  `此二维码的有效时间为7天，过期后需要重新生成新的二维码图片`
+   */
+  QrcodeBase64?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ChannelCreateFlowGroupByTemplates返回参数结构体
  */
 export interface ChannelCreateFlowGroupByTemplatesResponse {
@@ -3203,7 +3217,9 @@ export interface CreateConsoleLoginUrlRequest {
   Agent: Agent
   /**
    * 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。
-<font color="red">在测试环境联调的过程中，企业名称请使用以下名称 
+<font color="red">
+在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。
+企业名称请使用以下名称, 以下名称可以不用走收录。
 **子客测试专用企业1 - 子客测试专用企业9**</font>
 
 注:
@@ -3613,6 +3629,20 @@ export interface IntentionActionResultDetail {
 }
 
 /**
+ * CreateEmployeeQualificationSealQrCode请求参数结构体
+ */
+export interface CreateEmployeeQualificationSealQrCodeRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。<ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
+   */
+  Agent: Agent
+  /**
+   * 提示信息，扫码后此信息会展示给扫描用户，用来提示用户授权操作的目的
+   */
+  HintText?: string
+}
+
+/**
  * ChannelCreateUserAutoSignSealUrl请求参数结构体
  */
 export interface ChannelCreateUserAutoSignSealUrlRequest {
@@ -3874,15 +3904,7 @@ export interface ChannelDescribeOrganizationSealsRequest {
    */
   SealId?: string
   /**
-   * 电子印章类型 , 可选类型如下: 
-<ul><li>**OFFICIAL**: 公章</li>
-<li>**CONTRACT**: 合同专用章;</li>
-<li>**FINANCE**: 财务专用章;</li>
-<li>**PERSONNEL**: 人事专用章</li>
-<li>**INVOICE**: 发票专用章</li>
-</ul>
-
-注:  `为空时查询所有类型的印章。`
+   * 电子印章类型 , 可选类型如下: <ul><li>**OFFICIAL**: 公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li><<li>**EMPLOYEE_QUALIFICATION_SEAL**: 员工执业章</li></ul>注:  `为空时查询所有类型的印章。`
    */
   SealTypes?: Array<string>
   /**
@@ -5597,7 +5619,6 @@ export interface ExtentServiceAuthInfo {
 <li>AUTO_SIGN             企业自动签（自动签署）</li>
 <li>  OVERSEA_SIGN          企业与港澳台居民签署合同</li>
 <li>  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份</li>
-<li> PAGING_SEAL           骑缝章</li>
 <li> DOWNLOAD_FLOW         授权渠道下载合同 </li>
 <li>AGE_LIMIT_EXPANSION 拓宽签署方年龄限制</li>
 <li>HIDE_OPERATOR_DISPLAY 隐藏合同经办人姓名</li>

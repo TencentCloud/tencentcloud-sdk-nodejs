@@ -2860,6 +2860,11 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    */
   KillProcess?: number
   /**
+   * 1 清理, 0 不清理
+<li>本操作会修复被篡改的系统命令，计划任务等系统文件，操作中请确保yum/apt 可用</li>
+   */
+  DoClean?: number
+  /**
    * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
    */
   EngineType?: number
@@ -2871,6 +2876,14 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    * 是否开启恶意进程查杀[0:未开启,1:开启]
    */
   EnableMemShellScan?: number
+  /**
+   * 防护模式 0 标准 1重保
+   */
+  ProtectMode?: number
+  /**
+   * 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件
+   */
+  ProtectFileScope?: number
 }
 
 /**
@@ -21755,68 +21768,76 @@ export interface DescribeMalwareTimingScanSettingResponse {
   /**
    * 检测模式 0 全盘检测  1快速检测
    */
-  CheckPattern: number
+  CheckPattern?: number
   /**
    * 检测周期 开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 检测周期 超时结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 是否全部服务器 1 全部 2 自选
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 自选服务器时必须 主机quuid的string数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QuuidList: Array<string>
+  QuuidList?: Array<string>
   /**
    * 监控模式 0 标准 1深度
    */
-  MonitoringPattern: number
+  MonitoringPattern?: number
   /**
    * 周期 1每天
    */
-  Cycle: number
+  Cycle?: number
   /**
    * 定时检测开关 0 关闭1 开启
    */
-  EnableScan: number
+  EnableScan?: number
   /**
    * 唯一ID
    */
-  Id: number
+  Id?: number
   /**
    * 实时监控0 关闭 1开启
    */
-  RealTimeMonitoring: number
+  RealTimeMonitoring?: number
   /**
    * 是否自动隔离：1-是，0-否
    */
-  AutoIsolation: number
+  AutoIsolation?: number
   /**
    * 一键扫描超时时长，如：1800秒（s）
    */
-  ClickTimeout: number
+  ClickTimeout?: number
   /**
    * 是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效
    */
-  KillProcess: number
+  KillProcess?: number
   /**
    * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
    */
-  EngineType: number
+  EngineType?: number
   /**
    * 启发引擎 0 关闭 1开启
    */
-  EnableInspiredEngine: number
+  EnableInspiredEngine?: number
   /**
    * 是否开启恶意进程查杀[0:未开启,1:开启]
    */
-  EnableMemShellScan: number
+  EnableMemShellScan?: number
+  /**
+   * 防护模式 0 标准 1 重保
+   */
+  ProtectMode?: number
+  /**
+   * 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件
+   */
+  ProtectFileScope?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

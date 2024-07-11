@@ -457,6 +457,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirstLinkSession", req, cb);
     }
     /**
+     * 查询异步任务执行状态
+     */
+    async DescribeTaskStatus(req, cb) {
+        return this.request("DescribeTaskStatus", req, cb);
+    }
+    /**
      * 本接口（DeleteFirstLinkSession）用于删除接入段加速会话，删除加速会话后会停止加速。
      */
     async DeleteFirstLinkSession(req, cb) {

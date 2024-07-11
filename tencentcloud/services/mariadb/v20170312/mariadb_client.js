@@ -416,6 +416,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
+     * 升级MariaDB按量计费实例
+     */
+    async UpgradeHourDBInstance(req, cb) {
+        return this.request("UpgradeHourDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
      */
     async DescribeDatabaseTable(req, cb) {

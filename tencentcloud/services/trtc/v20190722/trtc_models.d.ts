@@ -871,7 +871,7 @@ export interface DescribeTrtcUsageResponse {
      */
     UsageKey?: Array<string>;
     /**
-     * 各个时间点用量明细。
+     * 各个时间点用量明细，单位:分钟
      */
     UsageList?: Array<TrtcUsage>;
     /**
@@ -1670,11 +1670,15 @@ export interface TrtcUsage {
     /**
      * 时间点，格式为YYYY-MM-DD HH:mm:ss。多天查询时，HH:mm:ss为00:00:00。
      */
-    TimeKey: string;
+    TimeKey?: string;
     /**
-     * 用量数组。每个数值含义与UsageKey对应。单位：分钟。
+     * 时间点时间戳
      */
-    UsageValue: Array<number>;
+    TimeStampKey?: number;
+    /**
+     * 用量数组。每个数值含义与UsageKey对应。单位:分钟。
+     */
+    UsageValue?: Array<number>;
 }
 /**
  * DescribeTRTCMarketScaleMetricData请求参数结构体

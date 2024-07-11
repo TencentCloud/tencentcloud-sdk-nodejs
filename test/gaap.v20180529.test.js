@@ -728,6 +728,16 @@ it("gaap.v20180529.DescribeFirstLinkSession", async function () {
     }
 })
 
+it("gaap.v20180529.DescribeTaskStatus", async function () {
+    try {
+       const data = await client.DescribeTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DeleteFirstLinkSession", async function () {
     try {
        const data = await client.DeleteFirstLinkSession({})

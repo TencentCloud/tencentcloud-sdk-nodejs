@@ -200,7 +200,7 @@ export declare class Client extends AbstractClient {
      */
     BindOrganizationMemberAuthAccount(req: BindOrganizationMemberAuthAccountRequest, cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void): Promise<BindOrganizationMemberAuthAccountResponse>;
     /**
-     * 创建共享单元，只有企业组织管理员可创建。
+     * 创建共享单元。
      */
     AddShareUnit(req: AddShareUnitRequest, cb?: (error: string, rep: AddShareUnitResponse) => void): Promise<AddShareUnitResponse>;
     /**

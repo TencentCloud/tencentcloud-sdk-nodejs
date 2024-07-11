@@ -3250,6 +3250,11 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceName?: string
+  /**
+   * flink 版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlinkVersion?: string
 }
 
 /**
@@ -3315,6 +3320,11 @@ export interface SlotSharingGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * SlotSharingGroup的配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configuration?: Array<Property>
 }
 
 /**
