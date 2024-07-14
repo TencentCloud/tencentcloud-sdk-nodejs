@@ -297,7 +297,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询异步任务执行状态
      */
-    DescribeTaskStatus(req?: DescribeTaskStatusRequest, cb?: (error: string, rep: DescribeTaskStatusResponse) => void): Promise<DescribeTaskStatusResponse>;
+    DescribeTaskStatus(req: DescribeTaskStatusRequest, cb?: (error: string, rep: DescribeTaskStatusResponse) => void): Promise<DescribeTaskStatusResponse>;
     /**
      * 本接口（DeleteFirstLinkSession）用于删除接入段加速会话，删除加速会话后会停止加速。
      */

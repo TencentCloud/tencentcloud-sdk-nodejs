@@ -1006,7 +1006,7 @@ export class Client extends AbstractClient {
    * 查询异步任务执行状态
    */
   async DescribeTaskStatus(
-    req?: DescribeTaskStatusRequest,
+    req: DescribeTaskStatusRequest,
     cb?: (error: string, rep: DescribeTaskStatusResponse) => void
   ): Promise<DescribeTaskStatusResponse> {
     return this.request("DescribeTaskStatus", req, cb)

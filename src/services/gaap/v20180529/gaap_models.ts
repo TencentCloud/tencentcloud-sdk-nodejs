@@ -4010,7 +4010,12 @@ export interface DescribeHTTPListenersResponse {
 /**
  * DescribeTaskStatus请求参数结构体
  */
-export type DescribeTaskStatusRequest = null
+export interface DescribeTaskStatusRequest {
+  /**
+   * 任务ID，值为异步接口返回的RequestId
+   */
+  TaskId?: string
+}
 
 /**
  * 描述HTTP的包头参数

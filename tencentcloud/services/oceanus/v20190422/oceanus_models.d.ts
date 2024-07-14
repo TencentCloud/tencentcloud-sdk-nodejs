@@ -328,6 +328,10 @@ export interface CreateJobConfigRequest {
      * es索引空间
      */
     EsServerlessSpace?: string;
+    /**
+     * flink版本
+     */
+    FlinkVersion?: string;
 }
 /**
  * 集群的版本相关信息

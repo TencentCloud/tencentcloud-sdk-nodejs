@@ -335,7 +335,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSnapshot", req, cb);
     }
     /**
-     * 获取快照概览信息
+     * 为进一步规范化API命名，该接口决定预下线，新接口命名为：DescribeSnapshotOverview
+
+获取快照概览信息
      */
     async GetSnapOverview(req, cb) {
         return this.request("GetSnapOverview", req, cb);

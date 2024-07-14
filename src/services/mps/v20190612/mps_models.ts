@@ -4103,23 +4103,23 @@ export interface DescribeStreamLinkEventsResponse {
   /**
    * 媒体传输事件的配置信息列表。
    */
-  Infos: Array<DescribeEvent>
+  Infos?: Array<DescribeEvent>
   /**
    * 当前页数。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页大小。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6984,7 +6984,7 @@ export interface DescribeStreamLinkActivateStateResponse {
   /**
    * 用户已激活为0，否则为非0。
    */
-  Status: number
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

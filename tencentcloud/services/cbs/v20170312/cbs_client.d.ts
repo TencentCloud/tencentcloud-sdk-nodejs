@@ -241,7 +241,9 @@ export declare class Client extends AbstractClient {
      */
     CreateSnapshot(req: CreateSnapshotRequest, cb?: (error: string, rep: CreateSnapshotResponse) => void): Promise<CreateSnapshotResponse>;
     /**
-     * 获取快照概览信息
+     * 为进一步规范化API命名，该接口决定预下线，新接口命名为：DescribeSnapshotOverview
+
+获取快照概览信息
      */
     GetSnapOverview(req?: GetSnapOverviewRequest, cb?: (error: string, rep: GetSnapOverviewResponse) => void): Promise<GetSnapOverviewResponse>;
     /**

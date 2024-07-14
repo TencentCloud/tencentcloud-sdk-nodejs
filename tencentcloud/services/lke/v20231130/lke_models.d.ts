@@ -3609,6 +3609,10 @@ export interface AppInfo {
  */
 export interface CreateReconstructDocumentFlowRequest {
     /**
+     * 文件类型。支持的文件类型：PDF、DOCX、DOC、XLS、XLSX、PPT、PPTX、PNG、JPG、JPEG、CSV
+     */
+    FileType?: string;
+    /**
      * 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
      */
     FileBase64?: string;
@@ -5084,7 +5088,7 @@ export interface DocumentRecognizeInfo {
  */
 export interface CreateReconstructDocumentFlowResponse {
     /**
-     * 任务唯一id
+     * 任务唯一id。30天内可以通过GetReconstructDocumentResult接口查询TaskId对应的处理结果。
      */
     TaskId?: string;
     /**

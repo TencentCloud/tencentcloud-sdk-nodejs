@@ -16,6 +16,26 @@
  */
 
 /**
+ * PublishRRPCMessage返回参数结构体
+ */
+export interface PublishRRPCMessageResponse {
+  /**
+   * RRPC消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageId: number
+  /**
+   * 设备回复的消息内容，采用base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayloadBase64: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetTWeCallPkgList请求参数结构体
  */
 export interface GetTWeCallPkgListRequest {
@@ -3624,6 +3644,10 @@ export interface GetDeviceListRequest {
    * 项目ID。产品 ID 为 -1 时，该参数必填
    */
   ProjectId?: string
+  /**
+   * 每次请求的Filters的上限为10，Filter.Values的上限为1。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -4088,7 +4112,12 @@ export interface DescribeTopicRuleResponse {
    * 规则描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rule: TopicRule
+  Rule?: TopicRule
+  /**
+   * 规则绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CamTag?: Array<CamTag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4366,21 +4395,19 @@ export interface ModifyModelDefinitionRequest {
 }
 
 /**
- * DescribePositionFenceList请求参数结构体
+ * 标签数据结构
  */
-export interface DescribePositionFenceListRequest {
+export interface CamTag {
   /**
-   * 位置空间Id
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpaceId: string
+  TagKey?: string
   /**
-   * 翻页偏移量，0起始
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
-  /**
-   * 最大返回结果数
-   */
-  Limit?: number
+  TagValue?: string
 }
 
 /**
@@ -4496,17 +4523,21 @@ export interface DescribeCloudStorageEventsResponse {
 }
 
 /**
- * GetFamilyDeviceUserList请求参数结构体
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+- 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+
+- 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
  */
-export interface GetFamilyDeviceUserListRequest {
+export interface Filter {
   /**
-   * 产品ID
+   * 需要过滤的字段
    */
-  ProductId: string
+  Name: string
   /**
-   * 设备名称
+   * 字段的过滤的一个或多个值
    */
-  DeviceName: string
+  Values?: Array<string>
 }
 
 /**
@@ -4722,6 +4753,24 @@ export interface ModifyPositionSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePositionFenceList请求参数结构体
+ */
+export interface DescribePositionFenceListRequest {
+  /**
+   * 位置空间Id
+   */
+  SpaceId: string
+  /**
+   * 翻页偏移量，0起始
+   */
+  Offset?: number
+  /**
+   * 最大返回结果数
+   */
+  Limit?: number
 }
 
 /**
@@ -6330,23 +6379,17 @@ export interface CreateTopicRuleRequest {
 }
 
 /**
- * PublishRRPCMessage返回参数结构体
+ * GetFamilyDeviceUserList请求参数结构体
  */
-export interface PublishRRPCMessageResponse {
+export interface GetFamilyDeviceUserListRequest {
   /**
-   * RRPC消息ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 产品ID
    */
-  MessageId: number
+  ProductId: string
   /**
-   * 设备回复的消息内容，采用base64编码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 设备名称
    */
-  PayloadBase64: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeviceName: string
 }
 
 /**
@@ -6762,6 +6805,10 @@ export interface SearchStudioProductRequest {
    * 产品ID
    */
   ProductId?: string
+  /**
+   * 每次请求的Filters的上限为10，Filter.Values的上限为1。
+   */
+  Filters?: Array<Filter>
 }
 
 /**

@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sdkVersion = void 0;
-exports.sdkVersion = "4.0.895";
+exports.sdkVersion = "4.0.896";
