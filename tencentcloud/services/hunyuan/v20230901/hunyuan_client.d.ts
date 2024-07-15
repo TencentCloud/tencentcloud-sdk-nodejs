@@ -1,12 +1,26 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChatCompletionsRequest, GetEmbeddingRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, SubmitHunyuanImageJobResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, ChatCompletionsResponse } from "./hunyuan_models";
+import { ChatCompletionsRequest, GetEmbeddingRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, TextToImageLiteResponse, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, ChatCompletionsResponse } from "./hunyuan_models";
 /**
  * hunyuan client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 混元生图接口基于混元大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
+提交任务：输入文本等，提交一个混元生图异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+并发任务数（并发）说明：并发任务数指能同时处理的任务数量。混元生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    SubmitHunyuanImageJob(req: SubmitHunyuanImageJobRequest, cb?: (error: string, rep: SubmitHunyuanImageJobResponse) => void): Promise<SubmitHunyuanImageJobResponse>;
+    /**
+     * 混元生图接口基于混元大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
+提交任务：输入文本等，提交一个混元生图异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+并发任务数（并发）说明：并发任务数指能同时处理的任务数量。混元生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    QueryHunyuanImageJob(req: QueryHunyuanImageJobRequest, cb?: (error: string, rep: QueryHunyuanImageJobResponse) => void): Promise<QueryHunyuanImageJobResponse>;
     /**
      * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
 
@@ -17,23 +31,14 @@ export declare class Client extends AbstractClient {
      */
     ChatCompletions(req: ChatCompletionsRequest, cb?: (error: string, rep: ChatCompletionsResponse) => void): Promise<ChatCompletionsResponse>;
     /**
-     * 混元生图接口基于混元大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
-提交任务：输入文本等，提交一个混元生图异步任务，获得任务 ID。
-查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
-并发任务数（并发）说明：并发任务数指能同时处理的任务数量。混元生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
-     */
-    QueryHunyuanImageJob(req: QueryHunyuanImageJobRequest, cb?: (error: string, rep: QueryHunyuanImageJobResponse) => void): Promise<QueryHunyuanImageJobResponse>;
-    /**
-     * 混元生图接口基于混元大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
-提交任务：输入文本等，提交一个混元生图异步任务，获得任务 ID。
-查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
-并发任务数（并发）说明：并发任务数指能同时处理的任务数量。混元生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
-     */
-    SubmitHunyuanImageJob(req: SubmitHunyuanImageJobRequest, cb?: (error: string, rep: SubmitHunyuanImageJobResponse) => void): Promise<SubmitHunyuanImageJobResponse>;
-    /**
      * 该接口用于计算文本对应Token数、字符数。
      */
     GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
+    /**
+     * 文生图轻量版接口根据输入的文本描述，智能生成与之相关的结果图。
+文生图轻量版默认提供3个并发任务数，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    TextToImageLite(req: TextToImageLiteRequest, cb?: (error: string, rep: TextToImageLiteResponse) => void): Promise<TextToImageLiteResponse>;
     /**
      * 腾讯混元 Embedding 接口，可以将文本转化为高质量的向量数据。
      */

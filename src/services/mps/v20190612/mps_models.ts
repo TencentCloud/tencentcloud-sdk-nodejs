@@ -2239,7 +2239,7 @@ export interface ExecuteFunctionResponse {
   /**
    * 处理结果打包后的字符串，具体与后台一同协调。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4975,7 +4975,7 @@ export interface CreateContentReviewTemplateResponse {
   /**
    * 内容审核模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5165,7 +5165,8 @@ export interface VideoTemplateInfo {
    */
   Codec: string
   /**
-   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。 注意：自适应码率时取值范围是 [0, 60]
+   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
+注意：自适应码率时取值范围是 [0, 60]
    */
   Fps: number
   /**
@@ -8389,7 +8390,8 @@ export interface ResetWorkflowRequest {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致，即`{inputDir}`。
+   * 视频处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与触发文件所在的目录一致，即`{inputDir}`。
    */
   OutputDir?: string
   /**
@@ -9046,7 +9048,7 @@ export interface CreateSampleSnapshotTemplateResponse {
   /**
    * 采样截图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9090,7 +9092,7 @@ export interface WithdrawsWatermarkResponse {
   /**
    * 任务 ID，可以通过该 ID 查询任务状态和结果。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14657,7 +14659,7 @@ export interface CreateAnimatedGraphicsTemplateResponse {
   /**
    * 转动图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15192,7 +15194,7 @@ export interface CreateImageSpriteTemplateResponse {
   /**
    * 雪碧图模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15256,7 +15258,7 @@ export interface ModifyWatermarkTemplateResponse {
   /**
    * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。
    */
-  ImageUrl: string
+  ImageUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -291,6 +291,10 @@ OPEN：公网属性， INTERNAL：内网属性。
    * 网络出口
    */
   Egress?: string
+  /**
+   * 负载均衡实例的预付费相关属性
+   */
+  LBChargePrepaid?: LBChargePrepaid
 }
 
 /**

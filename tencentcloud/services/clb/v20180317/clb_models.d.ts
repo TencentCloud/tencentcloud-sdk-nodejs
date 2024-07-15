@@ -264,6 +264,10 @@ export interface CreateLoadBalancerRequest {
      * 网络出口
      */
     Egress?: string;
+    /**
+     * 负载均衡实例的预付费相关属性
+     */
+    LBChargePrepaid?: LBChargePrepaid;
 }
 /**
  * DescribeLoadBalancerOverview返回参数结构体

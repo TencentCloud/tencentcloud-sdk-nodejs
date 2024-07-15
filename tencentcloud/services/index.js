@@ -94,6 +94,8 @@ var cdwdoris_1 = require("./cdwdoris");
 Object.defineProperty(exports, "cdwdoris", { enumerable: true, get: function () { return cdwdoris_1.cdwdoris; } });
 var cdwpg_1 = require("./cdwpg");
 Object.defineProperty(exports, "cdwpg", { enumerable: true, get: function () { return cdwpg_1.cdwpg; } });
+var cdz_1 = require("./cdz");
+Object.defineProperty(exports, "cdz", { enumerable: true, get: function () { return cdz_1.cdz; } });
 var cfg_1 = require("./cfg");
 Object.defineProperty(exports, "cfg", { enumerable: true, get: function () { return cfg_1.cfg; } });
 var cfs_1 = require("./cfs");

@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     BatchStartStreamLinkFlow(req: BatchStartStreamLinkFlowRequest, cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void): Promise<BatchStartStreamLinkFlowResponse>;
     /**
-     * 创建用户自定义转码模板，数量上限：1000。
+     * 创建用户自定义转码模板，数量上限：1000
      */
     CreateTranscodeTemplate(req: CreateTranscodeTemplateRequest, cb?: (error: string, rep: CreateTranscodeTemplateResponse) => void): Promise<CreateTranscodeTemplateResponse>;
     /**

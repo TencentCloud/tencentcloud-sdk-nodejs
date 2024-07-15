@@ -378,9 +378,19 @@ it("cbs.v20170312.ModifySnapshotsSharePermission", async function () {
     }
 })
 
-it("cbs.v20170312.CreateSnapshot", async function () {
+it("cbs.v20170312.DescribeSnapshotOverview", async function () {
     try {
-       const data = await client.CreateSnapshot({})
+       const data = await client.DescribeSnapshotOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DetachDisks", async function () {
+    try {
+       const data = await client.DetachDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +418,9 @@ it("cbs.v20170312.ResizeDisk", async function () {
     }
 })
 
-it("cbs.v20170312.DetachDisks", async function () {
+it("cbs.v20170312.CreateSnapshot", async function () {
     try {
-       const data = await client.DetachDisks({})
+       const data = await client.CreateSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

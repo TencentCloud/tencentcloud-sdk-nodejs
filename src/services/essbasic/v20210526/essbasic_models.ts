@@ -7663,14 +7663,7 @@ export interface CreateSealByImageRequest {
    */
   GenerateSource?: string
   /**
-   * 电子印章类型 , 可选类型如下: 
-<ul><li>**OFFICIAL**: (默认)公章</li>
-<li>**CONTRACT**: 合同专用章;</li>
-<li>**FINANCE**: 财务专用章;</li>
-<li>**PERSONNEL**: 人事专用章</li>
-<li>**INVOICE**: 发票专用章</li>
-</ul>
-注: `同企业下只能有一个公章, 重复创建会报错`
+   * 电子印章类型 , 可选类型如下: <ul><li>**OFFICIAL**: (默认)公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li></ul>注: `同企业下只能有<font color="red">一个</font>公章, 重复创建会报错`
    */
   SealType?: string
   /**

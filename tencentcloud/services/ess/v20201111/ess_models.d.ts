@@ -184,14 +184,7 @@ export interface CreateSealRequest {
      */
     GenerateSource?: string;
     /**
-     * 电子印章类型 , 可选类型如下:
-  <ul><li>**OFFICIAL**: (默认)公章</li>
-  <li>**CONTRACT**: 合同专用章;</li>
-  <li>**FINANCE**: 财务专用章;</li>
-  <li>**PERSONNEL**: 人事专用章</li>
-  <li>**INVOICE**: 发票专用章</li>
-  </ul>
-  注: `同企业下只能有一个公章, 重复创建会报错`
+     * 电子印章类型 , 可选类型如下: <ul><li>**OFFICIAL**: (默认)公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li></ul>注: `同企业下只能有<font color="red">一个</font>公章, 重复创建会报错`
      */
     SealType?: string;
     /**
@@ -2341,9 +2334,9 @@ export interface CreateFlowRequest {
      */
     Operator: UserInfo;
     /**
-     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+     * 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。
   
-  该名称还将用于合同签署完成后的下载文件名。
+  该名称还将用于合同签署完成后文件下载的默认文件名称。
      */
     FlowName: string;
     /**
@@ -3736,9 +3729,9 @@ export interface CreateFlowByFilesRequest {
      */
     Operator: UserInfo;
     /**
-     * 合同流程的名称（可自定义此名称），长度不能超过200个字符，只能由中文、字母、数字、中划线和下划线组成。
+     * 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。
   
-  该名称还将用于合同签署完成后的下载文件名。
+  该名称还将用于合同签署完成后文件下载的默认文件名称。
      */
     FlowName: string;
     /**
@@ -7022,8 +7015,9 @@ export interface CreatePrepareFlowRequest {
      */
     ResourceId: string;
     /**
-     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+     * 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&)、（+）组成。
   
+  该名称还将用于合同签署完成后文件下载的默认文件名称。
      */
     FlowName: string;
     /**

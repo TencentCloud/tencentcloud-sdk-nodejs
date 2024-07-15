@@ -218,17 +218,21 @@ export interface DetailPrice {
 }
 
 /**
- * CreateDiskBackup请求参数结构体
+ * ModifySnapshotsSharePermission请求参数结构体
  */
-export interface CreateDiskBackupRequest {
+export interface ModifySnapshotsSharePermissionRequest {
   /**
-   * 要创建备份点的云硬盘名称。
+   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
    */
-  DiskId: string
+  SnapshotIds: Array<string>
   /**
-   * 云硬盘备份点名称。长度不能超过100个字符。
+   * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。账号ID不同于QQ号，查询用户账号ID请查看[账号信息](https://console.cloud.tencent.com/developer)中的账号ID栏。
    */
-  DiskBackupName?: string
+  AccountIds: Array<string>
+  /**
+   * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
+   */
+  Permission: string
 }
 
 /**
@@ -943,6 +947,32 @@ export interface DetachDisksRequest {
 }
 
 /**
+ * DescribeSnapshotOverview返回参数结构体
+ */
+export interface DescribeSnapshotOverviewResponse {
+  /**
+   * 当前总有效快照数量
+   */
+  TotalNums?: number
+  /**
+   * 已使用快照总容量大小，容量单位为GiB
+   */
+  TotalSize?: number
+  /**
+   * 快照免费额度大小，额度单位为GiB
+   */
+  FreeQuota?: number
+  /**
+   * 快照真实产生计费的总容量大小，单位为GiB
+   */
+  RealTradeSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDisksChargeType返回参数结构体
  */
 export interface ModifyDisksChargeTypeResponse {
@@ -1518,6 +1548,11 @@ export interface DiskChargePrepaid {
 }
 
 /**
+ * DescribeSnapshotOverview请求参数结构体
+ */
+export type DescribeSnapshotOverviewRequest = null
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。
  */
 export interface Filter {
@@ -1699,21 +1734,17 @@ export interface AttachDisksResponse {
 }
 
 /**
- * ModifySnapshotsSharePermission请求参数结构体
+ * CreateDiskBackup请求参数结构体
  */
-export interface ModifySnapshotsSharePermissionRequest {
+export interface CreateDiskBackupRequest {
   /**
-   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
+   * 要创建备份点的云硬盘名称。
    */
-  SnapshotIds: Array<string>
+  DiskId: string
   /**
-   * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。账号ID不同于QQ号，查询用户账号ID请查看[账号信息](https://console.cloud.tencent.com/developer)中的账号ID栏。
+   * 云硬盘备份点名称。长度不能超过100个字符。
    */
-  AccountIds: Array<string>
-  /**
-   * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
-   */
-  Permission: string
+  DiskBackupName?: string
 }
 
 /**

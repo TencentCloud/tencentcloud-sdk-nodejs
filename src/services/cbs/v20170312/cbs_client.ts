@@ -23,7 +23,7 @@ import {
   DescribeDiskBackupsRequest,
   AutoSnapshotPolicy,
   DetailPrice,
-  CreateDiskBackupRequest,
+  ModifySnapshotsSharePermissionRequest,
   CopySnapshotCrossRegionsResponse,
   ModifyAutoSnapshotPolicyAttributeResponse,
   ModifyDiskBackupQuotaRequest,
@@ -54,6 +54,7 @@ import {
   TerminateDisksResponse,
   ApplySnapshotResponse,
   DetachDisksRequest,
+  DescribeSnapshotOverviewResponse,
   ModifyDisksChargeTypeResponse,
   CreateSnapshotRequest,
   DescribeInstancesDiskNumRequest,
@@ -89,13 +90,14 @@ import {
   InquirePriceModifyDiskBackupQuotaResponse,
   DeleteAutoSnapshotPoliciesRequest,
   DiskChargePrepaid,
+  DescribeSnapshotOverviewRequest,
   Filter,
   InquiryPriceCreateDisksRequest,
   DescribeSnapshotsResponse,
   Snapshot,
   CreateDisksResponse,
   AttachDisksResponse,
-  ModifySnapshotsSharePermissionRequest,
+  CreateDiskBackupRequest,
   BindAutoSnapshotPolicyResponse,
   DiskBackup,
   DescribeDisksRequest,
@@ -574,17 +576,26 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
+   * 该接口用于查询用户快照使用概览，包括快照总容量、计费容量等信息。
+   */
+  async DescribeSnapshotOverview(
+    req?: DescribeSnapshotOverviewRequest,
+    cb?: (error: string, rep: DescribeSnapshotOverviewResponse) => void
+  ): Promise<DescribeSnapshotOverviewResponse> {
+    return this.request("DescribeSnapshotOverview", req, cb)
+  }
 
-* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
-* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
-* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
+  /**
+     * 本接口（DetachDisks）用于卸载云硬盘。
+
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      */
-  async CreateSnapshot(
-    req: CreateSnapshotRequest,
-    cb?: (error: string, rep: CreateSnapshotResponse) => void
-  ): Promise<CreateSnapshotResponse> {
-    return this.request("CreateSnapshot", req, cb)
+  async DetachDisks(
+    req: DetachDisksRequest,
+    cb?: (error: string, rep: DetachDisksResponse) => void
+  ): Promise<DetachDisksResponse> {
+    return this.request("DetachDisks", req, cb)
   }
 
   /**
@@ -613,16 +624,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DetachDisks）用于卸载云硬盘。
+     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
 
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
+* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
      */
-  async DetachDisks(
-    req: DetachDisksRequest,
-    cb?: (error: string, rep: DetachDisksResponse) => void
-  ): Promise<DetachDisksResponse> {
-    return this.request("DetachDisks", req, cb)
+  async CreateSnapshot(
+    req: CreateSnapshotRequest,
+    cb?: (error: string, rep: CreateSnapshotResponse) => void
+  ): Promise<CreateSnapshotResponse> {
+    return this.request("CreateSnapshot", req, cb)
   }
 
   /**

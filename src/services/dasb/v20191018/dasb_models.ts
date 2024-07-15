@@ -2641,7 +2641,7 @@ export interface CreateUserRequest {
    */
   RealName: string
   /**
-   * 大陆手机号直接填写，如果是其他国家、地区号码， 按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+   * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
    */
   Phone?: string
   /**
@@ -3140,7 +3140,7 @@ export interface ModifyUserRequest {
    */
   RealName: string
   /**
-   * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+   * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
    */
   Phone?: string
   /**

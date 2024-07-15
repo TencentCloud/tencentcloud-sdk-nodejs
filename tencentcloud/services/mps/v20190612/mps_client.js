@@ -200,7 +200,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchStartStreamLinkFlow", req, cb);
     }
     /**
-     * 创建用户自定义转码模板，数量上限：1000。
+     * 创建用户自定义转码模板，数量上限：1000
      */
     async CreateTranscodeTemplate(req, cb) {
         return this.request("CreateTranscodeTemplate", req, cb);
