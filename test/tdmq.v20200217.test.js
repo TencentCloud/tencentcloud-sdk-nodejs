@@ -218,6 +218,16 @@ it("tdmq.v20200217.RewindCmqQueue", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQTopicStats", async function () {
+    try {
+       const data = await client.DescribeRocketMQTopicStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -418,6 +428,16 @@ it("tdmq.v20200217.ModifyPublicNetworkAccessPoint", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyRocketMQInstance", async function () {
+    try {
+       const data = await client.ModifyRocketMQInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateCmqQueue", async function () {
     try {
        const data = await client.CreateCmqQueue({})
@@ -531,6 +551,16 @@ it("tdmq.v20200217.DescribeRocketMQConsumerConnectionDetail", async function () 
 it("tdmq.v20200217.DescribeRabbitMQVipInstance", async function () {
     try {
        const data = await client.DescribeRabbitMQVipInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRocketMQTopicsByGroup", async function () {
+    try {
+       const data = await client.DescribeRocketMQTopicsByGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

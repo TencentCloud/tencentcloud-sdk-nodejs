@@ -777,92 +777,127 @@ export interface DedicatedClusterOrder {
     /**
      * 专用集群id
      */
-    DedicatedClusterId: string;
+    DedicatedClusterId?: string;
     /**
      * 专用集群类型id（移到下一层级，已经废弃，后续将删除）
      */
-    DedicatedClusterTypeId: string;
+    DedicatedClusterTypeId?: string;
     /**
      * 支持的存储类型列表（移到下一层级，已经废弃，后续将删除）
      */
-    SupportedStorageType: Array<string>;
+    SupportedStorageType?: Array<string>;
     /**
      * 支持的上连交换机的链路传输速率(GiB)（移到下一层级，已经废弃，后续将删除）
      */
-    SupportedUplinkSpeed: Array<number | bigint>;
+    SupportedUplinkSpeed?: Array<number | bigint>;
     /**
      * 支持的实例族列表（移到下一层级，已经废弃，后续将删除）
      */
-    SupportedInstanceFamily: Array<string>;
+    SupportedInstanceFamily?: Array<string>;
     /**
      * 地板承重要求(KG)
      */
-    Weight: number;
+    Weight?: number;
     /**
      * 功率要求(KW)
      */
-    PowerDraw: number;
+    PowerDraw?: number;
     /**
      * 订单状态
      */
-    OrderStatus: string;
+    OrderStatus?: string;
     /**
      * 订单创建的时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 大订单ID
      */
-    DedicatedClusterOrderId: string;
+    DedicatedClusterOrderId?: string;
     /**
      * 订单类型，创建CREATE或扩容EXTEND
      */
-    Action: string;
+    Action?: string;
     /**
      * 子订单详情列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DedicatedClusterOrderItems: Array<DedicatedClusterOrderItem>;
+    DedicatedClusterOrderItems?: Array<DedicatedClusterOrderItem>;
     /**
      * cpu值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * mem值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mem: number;
+    Mem?: number;
     /**
      * gpu值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Gpu: number;
+    Gpu?: number;
     /**
      * 0代表未支付，1代表已支付
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayStatus: number;
+    PayStatus?: number;
     /**
      * 支付方式，一次性、按月、按年
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayType: string;
+    PayType?: string;
     /**
      * 购买时长的单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeUnit: string;
+    TimeUnit?: string;
     /**
      * 购买时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeSpan: number;
+    TimeSpan?: number;
     /**
      * 订单类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrderType: string;
+    OrderType?: string;
+    /**
+     * 验收状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckStatus?: string;
+    /**
+     * 交付预期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeliverExpectTime?: string;
+    /**
+     * 交付实际完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeliverFinishTime?: string;
+    /**
+     * 验收预期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckExpectTime?: string;
+    /**
+     * 验收实际完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckFinishTime?: string;
+    /**
+     * 订单SLA
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrderSLA?: string;
+    /**
+     * 订单支付计划
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrderPayPlan?: string;
 }
 /**
  * ModifyDedicatedClusterInfo请求参数结构体
@@ -1071,6 +1106,10 @@ export interface DescribeDedicatedClusterOrdersRequest {
      * 订单类型为过滤条件：CREATE  EXTEND
      */
     ActionType?: string;
+    /**
+     * 订单类型列表
+     */
+    OrderTypes?: Array<string>;
 }
 /**
  * DescribeDedicatedClusters返回参数结构体

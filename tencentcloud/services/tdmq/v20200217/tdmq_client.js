@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RewindCmqQueue", req, cb);
     }
     /**
+     * 获取Topic生产详情列表
+     */
+    async DescribeRocketMQTopicStats(req, cb) {
+        return this.request("DescribeRocketMQTopicStats", req, cb);
+    }
+    /**
      * 新增指定分区、类型的消息主题
      */
     async CreateTopic(req, cb) {
@@ -268,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPublicNetworkAccessPoint", req, cb);
     }
     /**
+     * 修改RocketMQ专享实例
+     */
+    async ModifyRocketMQInstance(req, cb) {
+        return this.request("ModifyRocketMQInstance", req, cb);
+    }
+    /**
      * 创建cmq队列接口
      */
     async CreateCmqQueue(req, cb) {
@@ -340,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRabbitMQVipInstance(req, cb) {
         return this.request("DescribeRabbitMQVipInstance", req, cb);
+    }
+    /**
+     * 获取指定消费组下订阅的主题列表
+     */
+    async DescribeRocketMQTopicsByGroup(req, cb) {
+        return this.request("DescribeRocketMQTopicsByGroup", req, cb);
     }
     /**
      * 从腾讯云可观测平台拉取公网指标监控数据，目前仅支持客户端到 LB 的入带宽和出宽带指标。

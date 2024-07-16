@@ -138,6 +138,10 @@ export interface CreateRoomRequest {
      * @deprecated
      */
     RecordLang?: string;
+    /**
+     * 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0
+     */
+    RecordStream?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -2120,7 +2124,7 @@ export interface DescribeRoomResponse {
      */
     EndDelayTime?: number;
     /**
-     * 直播类型：0 常规（默认）1 伪直播
+     * 直播类型：0 常规（默认）1 伪直播 2 RTMP推流直播
      */
     LiveType?: number;
     /**
@@ -2709,6 +2713,10 @@ export interface RoomInfo {
      * @deprecated
      */
     RecordLang?: string;
+    /**
+     * 录制类型 0 仅录制混流（默认） ;1 录制混流+单流，该模式下除混流录制基础上，分别录制老师、台上学生的音视频流，每路录制都会产生相应的录制费用 。示例：0
+     */
+    RecordStream?: number;
 }
 /**
  * ModifyRoom请求参数结构体

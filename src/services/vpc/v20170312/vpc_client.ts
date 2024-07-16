@@ -235,6 +235,7 @@ import {
   DownloadCustomerGatewayConfigurationResponse,
   DescribeBandwidthPackagesRequest,
   DeleteDirectConnectGatewayCcnRoutesResponse,
+  HaVipAssociation,
   DescribeAssistantCidrResponse,
   DescribeHaVipsRequest,
   IpAddressStates,

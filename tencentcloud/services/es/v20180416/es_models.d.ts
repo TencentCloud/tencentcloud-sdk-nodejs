@@ -4446,6 +4446,14 @@ export interface UpdateInstanceRequest {
      * cvm延迟上架参数
      */
     CvmDelayOnlineTime?: number;
+    /**
+     * 分片迁移并发数
+     */
+    ShardAllocationConcurrents?: number;
+    /**
+     * 分片迁移并发速度
+     */
+    ShardAllocationBytes?: number;
 }
 /**
  * CreateServerlessInstance返回参数结构体
@@ -4766,7 +4774,7 @@ export interface DescribeInstancePluginListRequest {
      */
     Limit?: number;
     /**
-     * 排序字段<li>1：插件名 pluginName
+     * 排序字段<li>1：插件名 pluginName</li>
      */
     OrderBy?: string;
     /**

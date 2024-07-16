@@ -42,6 +42,7 @@ import {
   DescribeEnvironmentsRequest,
   DescribeRocketMQNamespacesRequest,
   ModifyRocketMQClusterResponse,
+  DescribeRocketMQTopicStatsResponse,
   CreateEnvironmentRequest,
   CreateCmqSubscribeResponse,
   DescribeClustersRequest,
@@ -151,6 +152,7 @@ import {
   RabbitMQQueueListInfo,
   DescribeMsgResponse,
   CreateProClusterResponse,
+  ModifyRocketMQInstanceRequest,
   Tag,
   CreateProClusterRequest,
   DescribeRabbitMQVipInstancesResponse,
@@ -161,6 +163,7 @@ import {
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
   FilterSubscription,
+  TopicStats,
   DescribeClustersResponse,
   ClearCmqSubscriptionFilterTagsRequest,
   CreateRocketMQGroupResponse,
@@ -233,6 +236,7 @@ import {
   RocketMQConsumerTopic,
   DescribePublishersRequest,
   ModifyRoleResponse,
+  DescribeRocketMQTopicStatsRequest,
   SendRocketMQMessageResponse,
   PulsarProClusterSpecInfo,
   Subscription,
@@ -250,6 +254,7 @@ import {
   DeleteRolesResponse,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
+  ModifyRocketMQInstanceResponse,
   PartitionsTopic,
   ResetMsgSubOffsetByTimestampResponse,
   SendMessagesRequest,
@@ -309,6 +314,7 @@ import {
   RabbitMQPrivateNode,
   ModifyPublicNetworkAccessPointRequest,
   DescribeRocketMQSourceClusterGroupListResponse,
+  DescribeRocketMQTopicsByGroupRequest,
   DescribeRocketMQConsumeStatsResponse,
   DescribeRocketMQPublicAccessMonitorDataResponse,
   RabbitMQVirtualHostInfo,
@@ -364,6 +370,7 @@ import {
   DescribePublishersResponse,
   DescribeCmqQueueDetailRequest,
   CreateRocketMQEnvironmentRoleResponse,
+  DescribeRocketMQTopicsByGroupResponse,
   DeleteEnvironmentRolesRequest,
   CreateRocketMQTopicResponse,
   CreateCmqQueueRequest,
@@ -594,6 +601,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取Topic生产详情列表
+   */
+  async DescribeRocketMQTopicStats(
+    req: DescribeRocketMQTopicStatsRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopicStatsResponse) => void
+  ): Promise<DescribeRocketMQTopicStatsResponse> {
+    return this.request("DescribeRocketMQTopicStats", req, cb)
+  }
+
+  /**
    * 新增指定分区、类型的消息主题
    */
   async CreateTopic(
@@ -794,6 +811,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改RocketMQ专享实例
+   */
+  async ModifyRocketMQInstance(
+    req: ModifyRocketMQInstanceRequest,
+    cb?: (error: string, rep: ModifyRocketMQInstanceResponse) => void
+  ): Promise<ModifyRocketMQInstanceResponse> {
+    return this.request("ModifyRocketMQInstance", req, cb)
+  }
+
+  /**
    * 创建cmq队列接口
    */
   async CreateCmqQueue(
@@ -913,6 +940,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRabbitMQVipInstanceResponse) => void
   ): Promise<DescribeRabbitMQVipInstanceResponse> {
     return this.request("DescribeRabbitMQVipInstance", req, cb)
+  }
+
+  /**
+   * 获取指定消费组下订阅的主题列表
+   */
+  async DescribeRocketMQTopicsByGroup(
+    req: DescribeRocketMQTopicsByGroupRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopicsByGroupResponse) => void
+  ): Promise<DescribeRocketMQTopicsByGroupResponse> {
+    return this.request("DescribeRocketMQTopicsByGroup", req, cb)
   }
 
   /**

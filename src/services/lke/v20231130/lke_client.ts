@@ -867,7 +867,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取推荐问题
+   * 获取聊天历史请求
    */
   async GetMsgRecord(
     req: GetMsgRecordRequest,

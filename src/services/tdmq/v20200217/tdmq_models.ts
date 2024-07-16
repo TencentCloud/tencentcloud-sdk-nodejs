@@ -886,6 +886,20 @@ export interface ModifyRocketMQClusterResponse {
 }
 
 /**
+ * DescribeRocketMQTopicStats返回参数结构体
+ */
+export interface DescribeRocketMQTopicStatsResponse {
+  /**
+   * 生产详情列表
+   */
+  TopicStatsList?: Array<TopicStats>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateEnvironment请求参数结构体
  */
 export interface CreateEnvironmentRequest {
@@ -3861,6 +3875,28 @@ export interface CreateProClusterResponse {
 }
 
 /**
+ * ModifyRocketMQInstance请求参数结构体
+ */
+export interface ModifyRocketMQInstanceRequest {
+  /**
+   * 专享实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  Name?: string
+  /**
+   * 实例备注信息
+   */
+  Remark?: string
+  /**
+   * 实例消息保留时间，小时为单位
+   */
+  MessageRetention?: number
+}
+
+/**
  * 标签的key/value的类型
  */
 export interface Tag {
@@ -4066,6 +4102,42 @@ export interface FilterSubscription {
    * 按照订阅名过滤，精确查询。
    */
   SubscriptionNames?: Array<string>
+}
+
+/**
+ * Topic状态
+ */
+export interface TopicStats {
+  /**
+   * 所属Broker节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerName?: string
+  /**
+   * 队列编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueId?: number
+  /**
+   * 最小位点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinOffset?: number
+  /**
+   * 最大位点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxOffset?: number
+  /**
+   * 消息条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageCount?: number
+  /**
+   * 消息最后写入时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTimestamp?: number
 }
 
 /**
@@ -5950,6 +6022,24 @@ export interface ModifyRoleResponse {
 }
 
 /**
+ * DescribeRocketMQTopicStats请求参数结构体
+ */
+export interface DescribeRocketMQTopicStatsRequest {
+  /**
+   * 实例ID
+   */
+  ClusterId: string
+  /**
+   * 命名空间
+   */
+  NamespaceId: string
+  /**
+   * 主题名
+   */
+  TopicName: string
+}
+
+/**
  * SendRocketMQMessage返回参数结构体
  */
 export interface SendRocketMQMessageResponse {
@@ -6689,6 +6779,16 @@ export interface RocketMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
+}
+
+/**
+ * ModifyRocketMQInstance返回参数结构体
+ */
+export interface ModifyRocketMQInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7997,6 +8097,32 @@ export interface DescribeRocketMQSourceClusterGroupListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRocketMQTopicsByGroup请求参数结构体
+ */
+export interface DescribeRocketMQTopicsByGroupRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 命名空间名称
+   */
+  NamespaceId: string
+  /**
+   * 消费组名称
+   */
+  GroupId: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 限制条数
+   */
+  Limit?: number
 }
 
 /**
@@ -9551,6 +9677,24 @@ export interface DescribeCmqQueueDetailRequest {
  * CreateRocketMQEnvironmentRole返回参数结构体
  */
 export interface CreateRocketMQEnvironmentRoleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRocketMQTopicsByGroup返回参数结构体
+ */
+export interface DescribeRocketMQTopicsByGroupResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+  /**
+   * 主题列表
+   */
+  Topics: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

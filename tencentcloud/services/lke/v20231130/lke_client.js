@@ -399,7 +399,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRejectedQuestionPreview", req, cb);
     }
     /**
-     * 获取推荐问题
+     * 获取聊天历史请求
      */
     async GetMsgRecord(req, cb) {
         return this.request("GetMsgRecord", req, cb);

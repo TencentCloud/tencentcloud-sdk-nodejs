@@ -257,7 +257,7 @@ export declare class Client extends AbstractClient {
      */
     ListRejectedQuestionPreview(req: ListRejectedQuestionPreviewRequest, cb?: (error: string, rep: ListRejectedQuestionPreviewResponse) => void): Promise<ListRejectedQuestionPreviewResponse>;
     /**
-     * 获取推荐问题
+     * 获取聊天历史请求
      */
     GetMsgRecord(req: GetMsgRecordRequest, cb?: (error: string, rep: GetMsgRecordResponse) => void): Promise<GetMsgRecordResponse>;
     /**
