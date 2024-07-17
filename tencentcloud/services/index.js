@@ -116,6 +116,8 @@ var ckafka_1 = require("./ckafka");
 Object.defineProperty(exports, "ckafka", { enumerable: true, get: function () { return ckafka_1.ckafka; } });
 var clb_1 = require("./clb");
 Object.defineProperty(exports, "clb", { enumerable: true, get: function () { return clb_1.clb; } });
+var cloudapp_1 = require("./cloudapp");
+Object.defineProperty(exports, "cloudapp", { enumerable: true, get: function () { return cloudapp_1.cloudapp; } });
 var cloudaudit_1 = require("./cloudaudit");
 Object.defineProperty(exports, "cloudaudit", { enumerable: true, get: function () { return cloudaudit_1.cloudaudit; } });
 var cloudhsm_1 = require("./cloudhsm");

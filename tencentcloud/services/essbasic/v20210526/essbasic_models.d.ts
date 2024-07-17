@@ -6335,14 +6335,14 @@ export interface ChannelCreateBatchSignUrlRequest {
      * 签署方经办人的姓名。
   经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
   
-  注：`请确保和合同中填入的一致`，`除动态签署人场景外，此参数必填`
+  注：`请确保和合同中填入的一致`，`除动态签署人或子客员工经办人场景外，此参数必填`
      */
     Name?: string;
     /**
      * 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
   请确认手机号所有方为此业务通知方。
   
-  注：`请确保和合同中填入的一致,  若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`，`除动态签署人场景外，此参数必填`
+  注：`请确保和合同中填入的一致,  若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`，`除动态签署人或子客员工经办人场景外，此参数必填`
      */
     Mobile?: string;
     /**
@@ -6382,14 +6382,14 @@ export interface ChannelCreateBatchSignUrlRequest {
      */
     FlowIds?: Array<string>;
     /**
-     * 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。
+     * SaaS平台企业员工签署方的企业名称。目标签署人如果为saas应用企业员工身份，此参数必填。
   
   注：
   <ul>
   <li>请确认该名称与企业营业执照中注册的名称一致。</li>
   <li>如果名称中包含英文括号()，请使用中文括号（）代替。</li>
   <li>请确保此企业已完成腾讯电子签企业认证。</li>
-  <li>暂时仅支持给`自建应用集成企业` 生成员工批签链接，不支持子客企业。</li>
+  <li>**若为子客企业员工，请使用OpenId，OrganizationOpenId参数，此参数留空即可**</li>
   </ul>
      */
     OrganizationName?: string;
@@ -6405,6 +6405,20 @@ export interface ChannelCreateBatchSignUrlRequest {
      * 批量签署合同相关信息，指定合同和签署方的信息，用于补充动态签署人。
      */
     FlowBatchUrlInfo?: FlowBatchUrlInfo;
+    /**
+     * 第三方平台子客企业员工的标识OpenId，批签合同经办人为子客员工的情况下为必填。
+  
+  注：
+  <ul>
+  <li>传入的OpenId对应员工在此子客企业下必须已经实名</li>
+  <li>传递了此参数可以无需传递Name，Mobile，IdCardNumber，IdCardType参数。系统会根据员工OpenId自动拉取实名信息。</li>
+  </ul>
+     */
+    OpenId?: string;
+    /**
+     * 第三方平台子客企业的企业的标识, 即OrganizationOpenId，批签合同经办人为子客企业员工是为必填。
+     */
+    OrganizationOpenId?: string;
 }
 /**
  * ChannelCreateOrganizationModifyQrCode返回参数结构体
@@ -7437,7 +7451,7 @@ export interface CreateSealByImageRequest {
      */
     GenerateSource?: string;
     /**
-     * 电子印章类型 , 可选类型如下: <ul><li>**OFFICIAL**: (默认)公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li></ul>注: `同企业下只能有<font color="red">一个</font>公章, 重复创建会报错`
+     * 电子印章类型 , 可选类型如下: <ul><li>**OFFICIAL**: (默认)公章</li><li>**CONTRACT**: 合同专用章;</li><li>**FINANCE**: 财务专用章;</li><li>**PERSONNEL**: 人事专用章</li><li>**INVOICE**: 发票专用章</li><li>**OTHER**: 其他</li></ul>注: 同企业下只能有<font color="red">一个</font>公章, 重复创建会报错
      */
     SealType?: string;
     /**

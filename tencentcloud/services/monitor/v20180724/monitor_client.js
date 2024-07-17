@@ -993,7 +993,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordingRules", req, cb);
     }
     /**
-     * 修改prometheus配置，如果配置项不存在，则会新增
+     * 修改prometheus采集配置
      */
     async ModifyPrometheusConfig(req, cb) {
         return this.request("ModifyPrometheusConfig", req, cb);

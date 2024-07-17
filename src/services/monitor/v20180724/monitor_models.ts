@@ -96,11 +96,11 @@ export interface DescribePolicyGroupListResponse {
  */
 export interface DescribePrometheusInstancesOverviewRequest {
   /**
-   * 用于分页
+   * 分页偏移量，默认为0
    */
   Offset?: number
   /**
-   * 用于分页
+   * 返回数量，默认为20，最大值为100
    */
   Limit?: number
   /**
@@ -564,38 +564,7 @@ export interface UpdateServiceDiscoveryRequest {
    */
   Type: number
   /**
-   * 服务发现配置信息，YAML 格式
-
-示例值：
-
-```
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: go-demo    # 填写一个唯一名称
-  namespace: cm-prometheus  # namespace固定，不要修改
-spec:
-  endpoints:
-  - interval: 30s
-    # 填写service yaml中Prometheus Exporter对应的Port的Name
-    port: 2112
-    # 填写Prometheus Exporter对应的Path的值，不填默认/metrics
-    path: /metrics
-    relabelings:
-    # ** 必须要有一个 label 为 application，这里假设 k8s 有一个 label 为 app，
-    # 我们通过 relabel 的 replace 动作把它替换成了 application
-    - action: replace
-      sourceLabels:  [__meta_kubernetes_pod_label_app]
-      targetLabel: application
-  # 选择要监控service所在的namespace
-  namespaceSelector:
-    matchNames:
-    - golang-demo
-    # 填写要监控service的Label值，以定位目标service
-  selector:
-    matchLabels:
-      app: golang-app-demo
-```
+   * 服务发现配置信息，YAML 格式，[具体YAML参数内容请参考](https://cloud.tencent.com/document/product/1416/55995#service-monitor)
    */
   Yaml: string
 }
@@ -4986,7 +4955,7 @@ export interface DescribePrometheusTargetsTMPRequest {
    */
   Filters?: Array<Filter>
   /**
-   * targets偏移量，默认为0
+   * targets分页偏移量，默认为0
    */
   Offset?: number
   /**
@@ -6101,38 +6070,7 @@ export interface CreateServiceDiscoveryRequest {
    */
   Type: number
   /**
-   * 服务发现配置信息，YAML 格式
-
-示例值：
-
-```
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: go-demo    # 填写一个唯一名称
-  namespace: cm-prometheus  # namespace固定，不要修改
-spec:
-  endpoints:
-  - interval: 30s
-    # 填写service yaml中Prometheus Exporter对应的Port的Name
-    port: 2112
-    # 填写Prometheus Exporter对应的Path的值，不填默认/metrics
-    path: /metrics
-    relabelings:
-    # ** 必须要有一个 label 为 application，这里假设 k8s 有一个 label 为 app，
-    # 我们通过 relabel 的 replace 动作把它替换成了 application
-    - action: replace
-      sourceLabels:  [__meta_kubernetes_pod_label_app]
-      targetLabel: application
-  # 选择要监控service所在的namespace
-  namespaceSelector:
-    matchNames:
-    - golang-demo
-    # 填写要监控service的Label值，以定位目标service
-  selector:
-    matchLabels:
-      app: golang-app-demo
-```
+   * 服务发现配置信息，YAML 格式，[具体YAML参数内容请参考](https://cloud.tencent.com/document/product/1416/55995#service-monitor)
    */
   Yaml: string
 }
@@ -7503,11 +7441,11 @@ export interface DescribePrometheusClusterAgentsRequest {
    */
   InstanceId: string
   /**
-   * 用于分页
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 用于分页
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
   /**
@@ -8544,38 +8482,7 @@ export interface DeleteServiceDiscoveryRequest {
    */
   Type: number
   /**
-   * 服务发现配置信息，YAML 格式
-
-示例值：
-
-```
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: go-demo    # 填写一个唯一名称
-  namespace: cm-prometheus  # namespace固定，不要修改
-spec:
-  endpoints:
-  - interval: 30s
-    # 填写service yaml中Prometheus Exporter对应的Port的Name
-    port: 2112
-    # 填写Prometheus Exporter对应的Path的值，不填默认/metrics
-    path: /metrics
-    relabelings:
-    # ** 必须要有一个 label 为 application，这里假设 k8s 有一个 label 为 app，
-    # 我们通过 relabel 的 replace 动作把它替换成了 application
-    - action: replace
-      sourceLabels:  [__meta_kubernetes_pod_label_app]
-      targetLabel: application
-  # 选择要监控service所在的namespace
-  namespaceSelector:
-    matchNames:
-    - golang-demo
-    # 填写要监控service的Label值，以定位目标service
-  selector:
-    matchLabels:
-      app: golang-app-demo
-```
+   * 服务发现配置信息，YAML 格式，[具体YAML参数内容请参考](https://cloud.tencent.com/document/product/1416/55995#service-monitor)
    */
   Yaml: string
 }
@@ -8829,13 +8736,11 @@ export interface UpdateGrafanaWhiteListRequest {
  */
 export interface UpdatePrometheusAgentStatusRequest {
   /**
-   * Prometheus 实例 ID，例如：prom-abcd1234
+   * Prometheus 实例 ID
    */
   InstanceId: string
   /**
    * Agent ID 列表，例如：agent-abcd1234，可在控制台 Agent 管理中获取
-
-示例值：["agent-abcd1234"]
    */
   AgentIds: Array<string>
   /**
@@ -9917,7 +9822,7 @@ ID 按templateId过滤
    */
   Filters?: Array<Filter>
   /**
-   * 分页偏移
+   * 分页偏移量，默认为0
    */
   Offset?: number
   /**

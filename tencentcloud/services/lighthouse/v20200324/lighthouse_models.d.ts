@@ -271,15 +271,15 @@ export interface CreateInstancesRequest {
 export interface DescribeZonesRequest {
     /**
      * 可用区列表排序的依据字段。取值范围：
-  <li>ZONE：依据可用区排序。
+  <li>ZONE：依据可用区排序。</li>
   <li>INSTANCE_DISPLAY_LABEL：依据可用区展示标签排序，可用区展示标签包括：HIDDEN（隐藏）、NORMAL（普通）、SELECTED（默认选中），默认采用的升序排列为：['HIDDEN', 'NORMAL', 'SELECTED']。
-  默认按可用区排序。
+  默认按可用区排序。</li>
      */
     OrderField?: string;
     /**
      * 输出可用区列表的排列顺序。取值范围：
-  <li>ASC：升序排列。
-  <li>DESC：降序排列。
+  <li>ASC：升序排列。 </li>
+  <li>DESC：降序排列。</li>
   默认按升序排列。
      */
     Order?: string;
@@ -3856,11 +3856,11 @@ export interface DescribeZonesResponse {
     /**
      * 可用区数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 可用区详细信息列表
      */
-    ZoneInfoSet: Array<ZoneInfo>;
+    ZoneInfoSet?: Array<ZoneInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

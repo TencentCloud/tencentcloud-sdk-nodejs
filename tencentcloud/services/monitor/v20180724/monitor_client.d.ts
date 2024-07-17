@@ -663,7 +663,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRecordingRules(req: DescribeRecordingRulesRequest, cb?: (error: string, rep: DescribeRecordingRulesResponse) => void): Promise<DescribeRecordingRulesResponse>;
     /**
-     * 修改prometheus配置，如果配置项不存在，则会新增
+     * 修改prometheus采集配置
      */
     ModifyPrometheusConfig(req: ModifyPrometheusConfigRequest, cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void): Promise<ModifyPrometheusConfigResponse>;
     /**

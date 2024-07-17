@@ -307,12 +307,12 @@ export interface CreateDSPADiscoveryTaskResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 扫描结果ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultId: number;
+    ResultId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2738,6 +2738,18 @@ export interface CreateDSPADiscoveryTaskRequest {
   当执行计划（Plan字段）为”立即“时，定时启动时间不会生效，此场景下给该字段传值不会被保存。
      */
     TimingStartTime?: string;
+    /**
+     * random-随机，asc生序，desc降序
+     */
+    Order?: string;
+    /**
+     * 抽样的条数，范围30-1000
+     */
+    Rows?: number;
+    /**
+     * 抽样的排序字段
+     */
+    GlobalOrderField?: string;
 }
 /**
  * 权限风险详情
@@ -4232,7 +4244,7 @@ export interface DescribeDSPATaskResultDataSampleResponse {
      * 数据样本列表，最多10条数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaFieldResultDataSample>;
+    Items?: Array<DspaFieldResultDataSample>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5342,6 +5354,14 @@ export interface DescribeDSPAESDataSampleRequest {
      * 字段扫描结果ID
      */
     FieldResultId: number;
+    /**
+     * 排序方式
+     */
+    Order?: string;
+    /**
+     * 排序字段
+     */
+    OrderField?: string;
 }
 /**
  * GetUserQuotaInfo返回参数结构体
@@ -7401,6 +7421,14 @@ export interface DescribeDSPATaskResultDataSampleRequest {
      * 字段扫描结果ID
      */
     FieldResultId: number;
+    /**
+     * 排序方式
+     */
+    Order?: string;
+    /**
+     * 排序字段
+     */
+    OrderField?: string;
 }
 /**
  * 生成的建议的风险等级矩阵
