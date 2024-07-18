@@ -457,7 +457,7 @@ export interface UpgradeClusterReleaseRequest {
    */
   Values?: ReleaseValues
   /**
-   * 制品来源，范围：tke-market 或 other默认值：tke-market。
+   * 制品来源，范围：tke-market 或 other 默认值：tke-market，示例值：tke-market
    */
   ChartFrom?: string
   /**
@@ -477,7 +477,7 @@ export interface UpgradeClusterReleaseRequest {
    */
   Password?: string
   /**
-   * 制品命名空间
+   * 制品命名空间，ChartFrom为tke-market时ChartNamespace不为空，值为DescribeProducts接口反馈的Namespace
    */
   ChartNamespace?: string
   /**
@@ -8730,7 +8730,7 @@ export interface CreateClusterReleaseRequest {
    */
   Values?: ReleaseValues
   /**
-   * 制品来源，范围：tke-market 或 other
+   * 制品来源，范围：tke-market 或 other默认值：tke-market。
    */
   ChartFrom?: string
   /**
@@ -8750,7 +8750,7 @@ export interface CreateClusterReleaseRequest {
    */
   Password?: string
   /**
-   * 制品命名空间
+   * 制品命名空间，ChartFrom为tke-market时ChartNamespace不为空，值为DescribeProducts接口反馈的Namespace
    */
   ChartNamespace?: string
   /**

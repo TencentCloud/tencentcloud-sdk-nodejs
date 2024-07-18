@@ -3336,7 +3336,7 @@ export interface DescribeStaffStatusMetricsRequest {
    */
   GroupIdList?: Array<number | bigint>
   /**
-   * 筛选坐席状态列表
+   * 筛选坐席状态列表 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
    */
   StatusList?: Array<string>
 }

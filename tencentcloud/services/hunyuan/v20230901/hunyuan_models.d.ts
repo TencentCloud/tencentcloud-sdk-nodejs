@@ -131,7 +131,9 @@ export interface Content {
  */
 export interface SubmitHunyuanImageJobRequest {
     /**
-     * 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。
+     * 文本描述。
+  算法将根据输入的文本智能生成与之相关的图像。
+  不能为空，推荐使用中文。最多可传1024个 utf-8 字符。
      */
     Prompt: string;
     /**

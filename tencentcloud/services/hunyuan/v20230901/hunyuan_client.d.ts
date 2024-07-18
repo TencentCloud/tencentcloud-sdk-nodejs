@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     TextToImageLite(req: TextToImageLiteRequest, cb?: (error: string, rep: TextToImageLiteResponse) => void): Promise<TextToImageLiteResponse>;
     /**
-     * 腾讯混元 Embedding 接口，可以将文本转化为高质量的向量数据。
+     * 腾讯混元 Embedding 接口，可以将文本转化为高质量的向量数据。向量维度为1024维。
      */
     GetEmbedding(req: GetEmbeddingRequest, cb?: (error: string, rep: GetEmbeddingResponse) => void): Promise<GetEmbeddingResponse>;
 }

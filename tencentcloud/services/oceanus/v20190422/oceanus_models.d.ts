@@ -2411,6 +2411,11 @@ export interface ClusterGroupSetItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubEks?: SubEks;
+    /**
+     * 默认 "" 包销模式 "exclusiveSale"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingResourceMode?: string;
 }
 /**
  * DescribeJobConfigs请求参数结构体
@@ -2731,6 +2736,11 @@ export interface Cluster {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceType?: number;
+    /**
+     * 集群类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingResourceMode?: string;
 }
 /**
  * DescribeJobSubmissionLog请求参数结构体
