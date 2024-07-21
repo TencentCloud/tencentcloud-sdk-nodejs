@@ -42,6 +42,7 @@ import {
   DatabaseTables,
   UserHostPrivilege,
   StopCLSDeliveryRequest,
+  ExportResourcePackageDeductDetailsResponse,
   DescribeClustersRequest,
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
@@ -70,6 +71,7 @@ import {
   AuditRuleTemplateInfo,
   DescribeParamTemplateDetailRequest,
   ModifyAccountPrivilegesRequest,
+  ExportResourcePackageDeductDetailsRequest,
   StartCLSDeliveryResponse,
   ParamItemInfo,
   UpgradeProxyResponse,
@@ -188,7 +190,7 @@ import {
   IsolateClusterRequest,
   AddInstancesRequest,
   CynosdbInstanceDetail,
-  InputAccount,
+  RollbackTable,
   DescribeInstanceErrorLogsRequest,
   DescribeInstanceDetailRequest,
   Package,
@@ -206,6 +208,7 @@ import {
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
+  BizTaskInfo,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
   DescribeAccountPrivilegesResponse,
@@ -227,6 +230,7 @@ import {
   DescribeInstancesResponse,
   SalePackageSpec,
   Account,
+  ModifyResourcePackagesDeductionPriorityResponse,
   CloseWanRequest,
   AuditLogFilter,
   UpgradeProxyVersionRequest,
@@ -249,7 +253,7 @@ import {
   SwitchClusterZoneRequest,
   Ability,
   RollBackClusterRequest,
-  BizTaskInfo,
+  ModifyResourcePackagesDeductionPriorityRequest,
   RemoveClusterSlaveZoneResponse,
   RenewClustersRequest,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
@@ -310,7 +314,7 @@ import {
   DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
-  RollbackTable,
+  InputAccount,
   ModifyClusterNameRequest,
   InstanceAuditRule,
   ExchangeRoGroupInfo,
@@ -327,6 +331,7 @@ import {
   DescribeTasksResponse,
   OpenClusterPasswordComplexityRequest,
   DescribeAuditLogsResponse,
+  PackagePriority,
   ModifyAccountDescriptionResponse,
   SetRenewFlagRequest,
   ProxyGroup,
@@ -570,13 +575,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理规格
+   * 资源包使用明细导出
    */
-  async DescribeProxySpecs(
-    req?: DescribeProxySpecsRequest,
-    cb?: (error: string, rep: DescribeProxySpecsResponse) => void
-  ): Promise<DescribeProxySpecsResponse> {
-    return this.request("DescribeProxySpecs", req, cb)
+  async ExportResourcePackageDeductDetails(
+    req: ExportResourcePackageDeductDetailsRequest,
+    cb?: (error: string, rep: ExportResourcePackageDeductDetailsResponse) => void
+  ): Promise<ExportResourcePackageDeductDetailsResponse> {
+    return this.request("ExportResourcePackageDeductDetails", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   */
+  async SwitchProxyVpc(
+    req: SwitchProxyVpcRequest,
+    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
+  ): Promise<SwitchProxyVpcResponse> {
+    return this.request("SwitchProxyVpc", req, cb)
   }
 
   /**
@@ -957,6 +972,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyParamTemplateResponse) => void
   ): Promise<ModifyParamTemplateResponse> {
     return this.request("ModifyParamTemplate", req, cb)
+  }
+
+  /**
+   * 修改已绑定资源包抵扣优先级
+   */
+  async ModifyResourcePackagesDeductionPriority(
+    req: ModifyResourcePackagesDeductionPriorityRequest,
+    cb?: (error: string, rep: ModifyResourcePackagesDeductionPriorityResponse) => void
+  ): Promise<ModifyResourcePackagesDeductionPriorityResponse> {
+    return this.request("ModifyResourcePackagesDeductionPriority", req, cb)
   }
 
   /**
@@ -1610,13 +1635,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   * 查询数据库代理规格
    */
-  async SwitchProxyVpc(
-    req: SwitchProxyVpcRequest,
-    cb?: (error: string, rep: SwitchProxyVpcResponse) => void
-  ): Promise<SwitchProxyVpcResponse> {
-    return this.request("SwitchProxyVpc", req, cb)
+  async DescribeProxySpecs(
+    req?: DescribeProxySpecsRequest,
+    cb?: (error: string, rep: DescribeProxySpecsResponse) => void
+  ): Promise<DescribeProxySpecsResponse> {
+    return this.request("DescribeProxySpecs", req, cb)
   }
 
   /**

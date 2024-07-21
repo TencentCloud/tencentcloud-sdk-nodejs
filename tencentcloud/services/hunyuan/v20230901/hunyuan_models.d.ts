@@ -84,6 +84,10 @@ export interface ChatCompletionsRequest {
      * 强制模型调用指定的工具，当参数ToolChoice为custom时，此参数为必填
      */
     CustomTool?: Tool;
+    /**
+     * 默认是false，在值为true且命中搜索时，接口会返回SearchInfo
+     */
+    SearchInfo?: boolean;
 }
 /**
  * GetEmbedding请求参数结构体
@@ -203,6 +207,26 @@ export interface Tool {
     Function: ToolFunction;
 }
 /**
+ * 搜索引文信息
+ */
+export interface SearchResult {
+    /**
+     * 搜索引文序号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: string;
+    /**
+     * 搜索引文标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * 搜索引文链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
+}
+/**
  * 返回的回复, 支持多个
  */
 export interface Choice {
@@ -285,13 +309,32 @@ export interface ToolFunction {
  */
 export interface TextToImageLiteResponse {
     /**
-     * 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
      */
     ResultImage?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 模型生成的工具调用
+ */
+export interface ToolCall {
+    /**
+     * 工具调用id
+     */
+    Id: string;
+    /**
+     * 工具调用类型，当前只支持function
+     */
+    Type: string;
+    /**
+     * 具体的function调用
+     */
+    Function: ToolCallFunction;
 }
 /**
  * 具体的function调用
@@ -305,46 +348,6 @@ export interface ToolCallFunction {
      * function参数，一般为json字符串
      */
     Arguments: string;
-}
-/**
- * TextToImageLite请求参数结构体
- */
-export interface TextToImageLiteRequest {
-    /**
-     * 文本描述。
-  算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。
-  不能为空，推荐使用中文。最多可传256个 utf-8 字符。
-     */
-    Prompt: string;
-    /**
-     * 反向文本描述。
-  用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。
-  推荐使用中文。最多可传256个 utf-8 字符。
-     */
-    NegativePrompt?: string;
-    /**
-     * 绘画风格。
-  请在 [智能文生图风格列表](https://cloud.tencent.com/document/product/1668/86249) 中选择期望的风格，传入风格编号。
-  推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。
-     */
-    Style?: string;
-    /**
-     * 生成图分辨率。
-  支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3）、1080:1920（9:16）、1920:1080（16:9），不传默认使用768:768。
-     */
-    Resolution?: string;
-    /**
-     * 为生成结果图添加标识的开关，默认为1。
-  1：添加标识。
-  0：不添加标识。
-  其他数值：默认按0处理。
-  建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
-     */
-    LogoAdd?: number;
-    /**
-     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
-     */
-    RspImgType?: string;
 }
 /**
  * 返回的内容（流式返回）
@@ -368,21 +371,43 @@ export interface Delta {
     ToolCalls?: Array<ToolCall>;
 }
 /**
- * 模型生成的工具调用
+ * TextToImageLite请求参数结构体
  */
-export interface ToolCall {
+export interface TextToImageLiteRequest {
     /**
-     * 工具调用id
+     * 文本描述。
+  算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。
+  不能为空，推荐使用中文。最多可传256个 utf-8 字符。
      */
-    Id: string;
+    Prompt: string;
     /**
-     * 工具调用类型，当前只支持function
+     * 反向文本描述。
+  用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。
+  推荐使用中文。最多可传256个 utf-8 字符。
      */
-    Type: string;
+    NegativePrompt?: string;
     /**
-     * 具体的function调用
+     * 绘画风格。
+  请在 [文生图轻量版风格列表](https://cloud.tencent.com/document/product/1729/108992) 中选择期望的风格，传入风格编号。不传默认使用201（日系动漫风格）。
      */
-    Function: ToolCallFunction;
+    Style?: string;
+    /**
+     * 生成图分辨率。
+  支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3）、1080:1920（9:16）、1920:1080（16:9），不传默认使用768:768。
+     */
+    Resolution?: string;
+    /**
+     * 为生成结果图添加标识的开关，默认为1。
+  1：添加标识。
+  0：不添加标识。
+  其他数值：默认按0处理。
+  建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
+     */
+    LogoAdd?: number;
+    /**
+     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+     */
+    RspImgType?: string;
 }
 /**
  * SubmitHunyuanImageJob返回参数结构体
@@ -474,6 +499,16 @@ export interface ErrorMsg {
     Code?: number;
 }
 /**
+ * 搜索结果信息
+ */
+export interface SearchInfo {
+    /**
+     * 搜索引文信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SearchResults?: Array<SearchResult>;
+}
+/**
  * GetTokenCount请求参数结构体
  */
 export interface GetTokenCountRequest {
@@ -545,6 +580,10 @@ export interface ChatCompletionsResponse {
      * 多轮会话风险审核，值为1时，表明存在信息安全风险，建议终止客户多轮会话。
      */
     ModerationLevel?: string;
+    /**
+     * 搜索结果信息
+     */
+    SearchInfo?: SearchInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
      */

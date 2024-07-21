@@ -542,6 +542,19 @@ export interface StopCLSDeliveryRequest {
     CLSTopicIds: Array<string>;
 }
 /**
+ * ExportResourcePackageDeductDetails返回参数结构体
+ */
+export interface ExportResourcePackageDeductDetailsResponse {
+    /**
+     * 文件详情
+     */
+    FileContent?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeClusters请求参数结构体
  */
 export interface DescribeClustersRequest {
@@ -1551,6 +1564,47 @@ export interface ModifyAccountPrivilegesRequest {
      * 表权限数组
      */
     TablePrivileges?: Array<TablePrivileges>;
+}
+/**
+ * ExportResourcePackageDeductDetails请求参数结构体
+ */
+export interface ExportResourcePackageDeductDetailsRequest {
+    /**
+     * 需要导出的资源包ID
+     */
+    PackageId: string;
+    /**
+     * 使用资源包容量的cynos集群ID
+     */
+    ClusterIds?: Array<string>;
+    /**
+     * 排序字段，目前支持：createTime（资源包被抵扣时间），successDeductSpec（资源包抵扣量）
+     */
+    OrderBy?: string;
+    /**
+     * 排序类型，支持ASC、DESC、asc、desc
+     */
+    OrderByType?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
+    /**
+     * 单次最大导出数据行数，目前最大支持2000行
+     */
+    Limit?: string;
+    /**
+     * 偏移量页数
+     */
+    Offset?: string;
+    /**
+     * 导出数据格式，目前仅支持csv格式，留作扩展
+     */
+    FileType?: string;
 }
 /**
  * StartCLSDelivery返回参数结构体
@@ -4409,17 +4463,17 @@ export interface CynosdbInstanceDetail {
     MaxCpu?: number;
 }
 /**
- * 账号，包含accountName和host
+ * 回档数据库及表
  */
-export interface InputAccount {
+export interface RollbackTable {
     /**
-     * 账号
+     * 数据库名称
      */
-    AccountName: string;
+    Database: string;
     /**
-     * 主机，默认‘%’
+     * 数据库表
      */
-    Host?: string;
+    Tables: Array<RollbackTableInfo>;
 }
 /**
  * DescribeInstanceErrorLogs请求参数结构体
@@ -4907,6 +4961,171 @@ export interface DescribeClusterDatabasesRequest {
     Limit?: number;
 }
 /**
+ * 任务信息
+ */
+export interface BizTaskInfo {
+    /**
+     * 任务id
+     */
+    ID?: number;
+    /**
+     * 用户appid
+     */
+    AppId?: number;
+    /**
+     * 集群id
+     */
+    ClusterId?: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 任务创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 延迟执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DelayTime?: string;
+    /**
+     * 任务失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrMsg?: string;
+    /**
+     * 异步任务流id
+     */
+    FlowId?: number;
+    /**
+     * 任务输入信息
+     */
+    Input?: string;
+    /**
+     * 实例组id
+     * @deprecated
+     */
+    InstanceGrpId?: string;
+    /**
+     * 实例组id
+     */
+    InstanceGroupId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 任务操作对象id
+     */
+    ObjectId?: string;
+    /**
+     * 任务操作对象类型
+     */
+    ObjectType?: string;
+    /**
+     * 操作者uin
+     */
+    Operator?: string;
+    /**
+     * 任务输出信息
+     */
+    Output?: string;
+    /**
+     * 任务状态
+     */
+    Status?: string;
+    /**
+     * 任务类型
+     */
+    TaskType?: string;
+    /**
+     * 触发本任务的父任务ID
+     */
+    TriggerTaskId?: number;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: string;
+    /**
+     * 任务开始时间
+     */
+    StartTime?: string;
+    /**
+     * 任务结束时间
+     */
+    EndTime?: string;
+    /**
+     * 集群名称
+     */
+    ClusterName?: string;
+    /**
+     * 实例名称
+     */
+    InstanceName?: string;
+    /**
+     * 任务进度
+     */
+    Process?: number;
+    /**
+     * 修改参数任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyParamsData?: Array<ModifyParamsData>;
+    /**
+     * 创建集群任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateClustersData?: CreateClustersData;
+    /**
+     * 集群回档任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollbackData?: RollbackData;
+    /**
+     * 实例变配任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceData?: ModifyInstanceData;
+    /**
+     * 手动备份任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManualBackupData?: ManualBackupData;
+    /**
+     * 修改内核版本任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyDbVersionData?: ModifyDbVersionData;
+    /**
+     * 集群可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterSlaveData?: ClusterSlaveData;
+    /**
+     * 转换集群日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SwitchClusterLogBin?: SwitchClusterLogBin;
+    /**
+     * 修改实例参数数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceParamsData?: BizTaskModifyParamsData;
+    /**
+     * 维护时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskMaintainInfo?: TaskMaintainInfo;
+    /**
+     * 实例日志投递信息
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>;
+}
+/**
  * DescribeRollbackTimeRange请求参数结构体
  */
 export interface DescribeRollbackTimeRangeRequest {
@@ -5321,6 +5540,15 @@ export interface Account {
      * 用户最大连接数
      */
     MaxUserConnections: number;
+}
+/**
+ * ModifyResourcePackagesDeductionPriority返回参数结构体
+ */
+export interface ModifyResourcePackagesDeductionPriorityResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CloseWan请求参数结构体
@@ -5793,169 +6021,21 @@ export interface RollBackClusterRequest {
     RollbackMode?: string;
 }
 /**
- * 任务信息
+ * ModifyResourcePackagesDeductionPriority请求参数结构体
  */
-export interface BizTaskInfo {
+export interface ModifyResourcePackagesDeductionPriorityRequest {
     /**
-     * 任务id
+     * 需要修改优先级的资源包类型，CCU：计算资源包，DISK：存储资源包
      */
-    ID?: number;
+    PackageType: string;
     /**
-     * 用户appid
+     * 修改后的抵扣优先级对于哪个cynos资源生效
      */
-    AppId?: number;
+    ClusterId: string;
     /**
-     * 集群id
+     * 资源包抵扣优先级
      */
-    ClusterId?: string;
-    /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
-    /**
-     * 任务创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 延迟执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DelayTime?: string;
-    /**
-     * 任务失败信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrMsg?: string;
-    /**
-     * 异步任务流id
-     */
-    FlowId?: number;
-    /**
-     * 任务输入信息
-     */
-    Input?: string;
-    /**
-     * 实例组id
-     * @deprecated
-     */
-    InstanceGrpId?: string;
-    /**
-     * 实例组id
-     */
-    InstanceGroupId?: string;
-    /**
-     * 实例id
-     */
-    InstanceId?: string;
-    /**
-     * 任务操作对象id
-     */
-    ObjectId?: string;
-    /**
-     * 任务操作对象类型
-     */
-    ObjectType?: string;
-    /**
-     * 操作者uin
-     */
-    Operator?: string;
-    /**
-     * 任务输出信息
-     */
-    Output?: string;
-    /**
-     * 任务状态
-     */
-    Status?: string;
-    /**
-     * 任务类型
-     */
-    TaskType?: string;
-    /**
-     * 触发本任务的父任务ID
-     */
-    TriggerTaskId?: number;
-    /**
-     * 更新时间
-     */
-    UpdateTime?: string;
-    /**
-     * 任务开始时间
-     */
-    StartTime?: string;
-    /**
-     * 任务结束时间
-     */
-    EndTime?: string;
-    /**
-     * 集群名称
-     */
-    ClusterName?: string;
-    /**
-     * 实例名称
-     */
-    InstanceName?: string;
-    /**
-     * 任务进度
-     */
-    Process?: number;
-    /**
-     * 修改参数任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifyParamsData?: Array<ModifyParamsData>;
-    /**
-     * 创建集群任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateClustersData?: CreateClustersData;
-    /**
-     * 集群回档任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RollbackData?: RollbackData;
-    /**
-     * 实例变配任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifyInstanceData?: ModifyInstanceData;
-    /**
-     * 手动备份任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ManualBackupData?: ManualBackupData;
-    /**
-     * 修改内核版本任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifyDbVersionData?: ModifyDbVersionData;
-    /**
-     * 集群可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterSlaveData?: ClusterSlaveData;
-    /**
-     * 转换集群日志
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SwitchClusterLogBin?: SwitchClusterLogBin;
-    /**
-     * 修改实例参数数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifyInstanceParamsData?: BizTaskModifyParamsData;
-    /**
-     * 维护时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskMaintainInfo?: TaskMaintainInfo;
-    /**
-     * 实例日志投递信息
-  
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>;
+    DeductionPriorities: Array<PackagePriority>;
 }
 /**
  * RemoveClusterSlaveZone返回参数结构体
@@ -7643,17 +7723,17 @@ export interface ModifyResourcePackageClustersResponse {
     RequestId?: string;
 }
 /**
- * 回档数据库及表
+ * 账号，包含accountName和host
  */
-export interface RollbackTable {
+export interface InputAccount {
     /**
-     * 数据库名称
+     * 账号
      */
-    Database: string;
+    AccountName: string;
     /**
-     * 数据库表
+     * 主机，默认‘%’
      */
-    Tables: Array<RollbackTableInfo>;
+    Host?: string;
 }
 /**
  * ModifyClusterName请求参数结构体
@@ -8040,6 +8120,19 @@ export interface DescribeAuditLogsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 资源包抵扣优先级
+ */
+export interface PackagePriority {
+    /**
+     * 需要自定义抵扣优先级的资源包
+     */
+    PackageId?: string;
+    /**
+     * 自定义的抵扣优先级
+     */
+    DeductionPriority?: number;
 }
 /**
  * ModifyAccountDescription返回参数结构体

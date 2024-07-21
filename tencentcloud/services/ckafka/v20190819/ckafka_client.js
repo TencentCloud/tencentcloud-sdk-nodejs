@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDatahubTopic", req, cb);
     }
     /**
+     * 设置自动化运维属性
+     */
+    async ModifyRoutineMaintenanceTask(req, cb) {
+        return this.request("ModifyRoutineMaintenanceTask", req, cb);
+    }
+    /**
      * 创建主题ip白名单
      */
     async CreateTopicIpWhiteList(req, cb) {

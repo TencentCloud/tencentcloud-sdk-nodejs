@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQos", req, cb);
     }
     /**
+     * 删除互通规则
+     */
+    async DeleteL3Conn(req, cb) {
+        return this.request("DeleteL3Conn", req, cb);
+    }
+    /**
      * 删除分组
      */
     async DeleteGroup(req, cb) {
@@ -154,10 +160,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetGroupDetail", req, cb);
     }
     /**
+     * 更新互通规则CIDR
+     */
+    async UpdateL3Cidr(req, cb) {
+        return this.request("UpdateL3Cidr", req, cb);
+    }
+    /**
      * 获取厂商硬件设备列表
      */
     async GetVendorHardware(req, cb) {
         return this.request("GetVendorHardware", req, cb);
+    }
+    /**
+     * 新建互通规则
+     */
+    async AddL3Conn(req, cb) {
+        return this.request("AddL3Conn", req, cb);
     }
     /**
      * 通过此接口设置和更新预置密钥
@@ -202,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetHardwareList", req, cb);
     }
     /**
+     * 更新互通规则开关
+     */
+    async UpdateL3Switch(req, cb) {
+        return this.request("UpdateL3Switch", req, cb);
+    }
+    /**
      * 新建设备记录
      */
     async AddDevice(req, cb) {
@@ -230,6 +254,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddGroup(req, cb) {
         return this.request("AddGroup", req, cb);
+    }
+    /**
+     * 获取互通规则列表
+     */
+    async GetL3ConnList(req, cb) {
+        return this.request("GetL3ConnList", req, cb);
+    }
+    /**
+     * 更新互通规则备注
+     */
+    async UpdateL3Conn(req, cb) {
+        return this.request("UpdateL3Conn", req, cb);
     }
 }
 exports.Client = Client;

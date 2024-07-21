@@ -1,32 +1,11 @@
 /**
- * 设备流量信息
+ * DeleteL3Conn返回参数结构体
  */
-export interface FlowDetails {
+export interface DeleteL3ConnResponse {
     /**
-     * 流量数据点
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    NetDetails?: Array<NetDetails>;
-    /**
-     * 设备ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeviceId?: string;
-    /**
-     * 流量最大值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxValue?: number;
-    /**
-     * 流量平均值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AvgValue?: number;
-    /**
-     * 流量总值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalValue?: number;
+    RequestId?: string;
 }
 /**
  * GetDevice返回参数结构体
@@ -62,6 +41,15 @@ export interface DestAddressInfo {
      * 加速业务目标 ip 地址数组
      */
     DestIp: Array<string>;
+}
+/**
+ * UpdateL3Conn返回参数结构体
+ */
+export interface UpdateL3ConnResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateHardware返回参数结构体
@@ -100,6 +88,19 @@ export interface UpdateNetInfo {
     NetInfoName?: string;
 }
 /**
+ * UpdateL3Switch请求参数结构体
+ */
+export interface UpdateL3SwitchRequest {
+    /**
+     * 互通规则ID
+     */
+    L3ConnId: string;
+    /**
+     * 互通规则开关
+     */
+    Enable?: boolean;
+}
+/**
  * DescribeQos返回参数结构体
  */
 export interface DescribeQosResponse {
@@ -132,6 +133,31 @@ export interface DescribeQosResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * AddL3Conn请求参数结构体
+ */
+export interface AddL3ConnRequest {
+    /**
+     * 设置互通网段CIDR1，支持： 10.0.0.0 - 10.255.255.255，172.16.0.0 - 172.31.255.255，192.168.0.0 - 192.168.255.255
+     */
+    Cidr1: string;
+    /**
+     * 设置互通网段CIDR2，支持： 10.0.0.0 - 10.255.255.255，172.16.0.0 - 172.31.255.255，192.168.0.0 - 192.168.255.255
+     */
+    Cidr2: string;
+    /**
+     * CIDR1对应的设备ID
+     */
+    DeviceId1: string;
+    /**
+     * CIDR2对应的设备ID
+     */
+    DeviceId2: string;
+    /**
+     * 规则描述
+     */
+    Description?: string;
 }
 /**
  * GetFlowPackages请求参数结构体
@@ -169,6 +195,15 @@ export interface SetNotifyUrlResponse {
     RequestId?: string;
 }
 /**
+ * UpdateL3Cidr返回参数结构体
+ */
+export interface UpdateL3CidrResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyPackageRenewFlag请求参数结构体
  */
 export interface ModifyPackageRenewFlagRequest {
@@ -197,6 +232,15 @@ export interface GetFlowPackagesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteL3Conn请求参数结构体
+ */
+export interface DeleteL3ConnRequest {
+    /**
+     * 互通规则ID列表
+     */
+    L3ConnIdList: Array<string>;
 }
 /**
  * GetVendorHardware返回参数结构体
@@ -617,6 +661,36 @@ export interface CreateEncryptedKeyResponse {
     RequestId?: string;
 }
 /**
+ * UpdateL3Switch返回参数结构体
+ */
+export interface UpdateL3SwitchResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetL3ConnList返回参数结构体
+ */
+export interface GetL3ConnListResponse {
+    /**
+     * 互通规则列表
+     */
+    L3ConnList?: Array<L3ConnInfo>;
+    /**
+     * 设备总记录条数
+     */
+    Length?: number;
+    /**
+     * 总页数
+     */
+    TotalPage?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateQos请求参数结构体
  */
 export interface CreateQosRequest {
@@ -880,6 +954,19 @@ export interface DescribeQosRequest {
      * 单次加速唯一 Id
      */
     SessionId: string;
+}
+/**
+ * AddL3Conn返回参数结构体
+ */
+export interface AddL3ConnResponse {
+    /**
+     * 互通规则ID
+     */
+    L3ConnId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * GetDevices请求参数结构体
@@ -1180,6 +1267,36 @@ export interface GetHardwareListRequest {
     Keyword?: string;
 }
 /**
+ * 设备流量信息
+ */
+export interface FlowDetails {
+    /**
+     * 流量数据点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetDetails?: Array<NetDetails>;
+    /**
+     * 设备ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * 流量最大值（单位：bytes）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxValue?: number;
+    /**
+     * 流量平均值（单位：bytes）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AvgValue?: number;
+    /**
+     * 流量总值（单位：bytes）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalValue?: number;
+}
+/**
  * GroupDeleteDevice请求参数结构体
  */
 export interface GroupDeleteDeviceRequest {
@@ -1409,6 +1526,23 @@ export interface UpdateGroupResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * GetL3ConnList请求参数结构体
+ */
+export interface GetL3ConnListRequest {
+    /**
+     * 每页显示记录数，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+     */
+    PageSize: number;
+    /**
+     * 当前查看页码，PageSize、PageNumber值均为-1 时，按照1页无限制条数匹配所有设备
+     */
+    PageNumber: number;
+    /**
+     * 搜索分组的DeviceId，为空时匹配所有分组
+     */
+    DeviceId?: string;
 }
 /**
  * 流量包信息
@@ -1690,6 +1824,40 @@ export interface UpdateDeviceResponse {
     RequestId?: string;
 }
 /**
+ * 三层互通规则信息
+ */
+export interface L3ConnInfo {
+    /**
+     * 互通规则ID
+     */
+    L3ConnId?: string;
+    /**
+     * 互通设备ID
+     */
+    DeviceId1?: string;
+    /**
+     * 互通规则CIDR
+     */
+    Cidr1?: string;
+    /**
+     * 互通设备ID
+     */
+    DeviceId2?: string;
+    /**
+     * 互通规则CIDR
+     */
+    Cidr2?: string;
+    /**
+     * 互通规则启用状态
+     */
+    Enable?: boolean;
+    /**
+     * 互通规则描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+}
+/**
  * GroupAddDevice返回参数结构体
  */
 export interface GroupAddDeviceResponse {
@@ -1874,6 +2042,19 @@ export interface GetDevicePayModeResponse {
     RequestId?: string;
 }
 /**
+ * UpdateL3Conn请求参数结构体
+ */
+export interface UpdateL3ConnRequest {
+    /**
+     * 互通规则ID
+     */
+    L3ConnId: string;
+    /**
+     * 互通规则备注
+     */
+    Description?: string;
+}
+/**
  * 设备付费模式信息
  */
 export interface DevicePayModeInfo {
@@ -2000,6 +2181,31 @@ export interface Hardware {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareId?: string;
+}
+/**
+ * UpdateL3Cidr请求参数结构体
+ */
+export interface UpdateL3CidrRequest {
+    /**
+     * 互通规则ID
+     */
+    L3ConnId: string;
+    /**
+     * 互通规则CIDR
+     */
+    Cidr1: string;
+    /**
+     * 互通设备ID
+     */
+    DeviceId1?: string;
+    /**
+     * 互通设备ID
+     */
+    DeviceId2?: string;
+    /**
+     * 互通规则CIDR
+     */
+    Cidr2?: string;
 }
 /**
  * AddGroup返回参数结构体

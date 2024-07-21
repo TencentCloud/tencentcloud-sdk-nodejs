@@ -18,17 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  FlowDetails,
+  DeleteL3ConnResponse,
   GetDeviceResponse,
   GetMultiFlowStatisticResponse,
   DestAddressInfo,
+  UpdateL3ConnResponse,
   UpdateHardwareResponse,
   UpdateNetInfo,
+  UpdateL3SwitchRequest,
   DescribeQosResponse,
+  AddL3ConnRequest,
   GetFlowPackagesRequest,
   SetNotifyUrlResponse,
+  UpdateL3CidrResponse,
   ModifyPackageRenewFlagRequest,
   GetFlowPackagesResponse,
+  DeleteL3ConnRequest,
   GetVendorHardwareResponse,
   DeviceBaseInfo,
   AddGroupRequest,
@@ -50,6 +55,8 @@ import {
   DeleteDeviceRequest,
   DeleteGroupRequest,
   CreateEncryptedKeyResponse,
+  UpdateL3SwitchResponse,
+  GetL3ConnListResponse,
   CreateQosRequest,
   GroupInfo,
   ModifyPackageRenewFlagResponse,
@@ -60,6 +67,7 @@ import {
   GetFlowStatisticByGroupRequest,
   GetDevicesResponse,
   DescribeQosRequest,
+  AddL3ConnResponse,
   GetDevicesRequest,
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
@@ -71,6 +79,7 @@ import {
   CreateQosResponse,
   ActivateHardware,
   GetHardwareListRequest,
+  FlowDetails,
   GroupDeleteDeviceRequest,
   DeviceDetails,
   GetFlowStatisticByRegionResponse,
@@ -81,6 +90,7 @@ import {
   OrderFlowPackageRequest,
   GetGroupDetailResponse,
   UpdateGroupResponse,
+  GetL3ConnListRequest,
   FlowPackageInfo,
   GetHardwareListResponse,
   AddDeviceRequest,
@@ -92,6 +102,7 @@ import {
   GetGroupListResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
+  L3ConnInfo,
   GroupAddDeviceResponse,
   GetStatisticDataRequest,
   UpdateDeviceRequest,
@@ -101,12 +112,14 @@ import {
   GetFlowStatisticRequest,
   AddDeviceResponse,
   GetDevicePayModeResponse,
+  UpdateL3ConnRequest,
   DevicePayModeInfo,
   MonitorData,
   DeleteDeviceResponse,
   DeviceInfo,
   AddHardwareRequest,
   Hardware,
+  UpdateL3CidrRequest,
   AddGroupResponse,
 } from "./mna_models"
 
@@ -260,6 +273,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除互通规则
+   */
+  async DeleteL3Conn(
+    req: DeleteL3ConnRequest,
+    cb?: (error: string, rep: DeleteL3ConnResponse) => void
+  ): Promise<DeleteL3ConnResponse> {
+    return this.request("DeleteL3Conn", req, cb)
+  }
+
+  /**
    * 删除分组
    */
   async DeleteGroup(
@@ -330,6 +353,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新互通规则CIDR
+   */
+  async UpdateL3Cidr(
+    req: UpdateL3CidrRequest,
+    cb?: (error: string, rep: UpdateL3CidrResponse) => void
+  ): Promise<UpdateL3CidrResponse> {
+    return this.request("UpdateL3Cidr", req, cb)
+  }
+
+  /**
    * 获取厂商硬件设备列表
    */
   async GetVendorHardware(
@@ -337,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetVendorHardwareResponse) => void
   ): Promise<GetVendorHardwareResponse> {
     return this.request("GetVendorHardware", req, cb)
+  }
+
+  /**
+   * 新建互通规则
+   */
+  async AddL3Conn(
+    req: AddL3ConnRequest,
+    cb?: (error: string, rep: AddL3ConnResponse) => void
+  ): Promise<AddL3ConnResponse> {
+    return this.request("AddL3Conn", req, cb)
   }
 
   /**
@@ -410,6 +453,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新互通规则开关
+   */
+  async UpdateL3Switch(
+    req: UpdateL3SwitchRequest,
+    cb?: (error: string, rep: UpdateL3SwitchResponse) => void
+  ): Promise<UpdateL3SwitchResponse> {
+    return this.request("UpdateL3Switch", req, cb)
+  }
+
+  /**
    * 新建设备记录
    */
   async AddDevice(
@@ -457,5 +510,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddGroupResponse) => void
   ): Promise<AddGroupResponse> {
     return this.request("AddGroup", req, cb)
+  }
+
+  /**
+   * 获取互通规则列表
+   */
+  async GetL3ConnList(
+    req: GetL3ConnListRequest,
+    cb?: (error: string, rep: GetL3ConnListResponse) => void
+  ): Promise<GetL3ConnListResponse> {
+    return this.request("GetL3ConnList", req, cb)
+  }
+
+  /**
+   * 更新互通规则备注
+   */
+  async UpdateL3Conn(
+    req: UpdateL3ConnRequest,
+    cb?: (error: string, rep: UpdateL3ConnResponse) => void
+  ): Promise<UpdateL3ConnResponse> {
+    return this.request("UpdateL3Conn", req, cb)
   }
 }

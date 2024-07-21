@@ -5002,6 +5002,14 @@ export interface RestartNodesRequest {
    * cvm延迟上架时间
    */
   CvmDelayOnlineTime?: number
+  /**
+   * 分片迁移并发数
+   */
+  ShardAllocationConcurrents?: number
+  /**
+   * 分片迁移并发速度
+   */
+  ShardAllocationBytes?: number
 }
 
 /**
@@ -5074,6 +5082,14 @@ export interface UpgradeInstanceRequest {
    * cvm延迟上架参数
    */
   CvmDelayOnlineTime?: number
+  /**
+   * 分片迁移并发数
+   */
+  ShardAllocationConcurrents?: number
+  /**
+   * 分片迁移并发速度
+   */
+  ShardAllocationBytes?: number
 }
 
 /**

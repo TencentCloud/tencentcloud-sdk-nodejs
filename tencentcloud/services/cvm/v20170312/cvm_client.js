@@ -224,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesModification", req, cb);
     }
     /**
+     * 退出救援模式
+     */
+    async ExitRescueMode(req, cb) {
+        return this.request("ExitRescueMode", req, cb);
+    }
+    /**
      * 本接口 (AssociateInstancesKeyPairs) 用于将密钥绑定到实例上。
 
 * 将密钥的公钥写入到实例的`SSH`配置当中，用户就可以通过该密钥的私钥来登录实例。
@@ -347,6 +353,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHosts(req, cb) {
         return this.request("DescribeHosts", req, cb);
+    }
+    /**
+     * 进入救援模式
+     */
+    async EnterRescueMode(req, cb) {
+        return this.request("EnterRescueMode", req, cb);
     }
     /**
      * 本接口 (DescribeInstancesStatus) 用于查询一个或多个实例的状态。

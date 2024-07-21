@@ -983,35 +983,35 @@ export interface InstanceBind {
     /**
      * 云联网ID。
      */
-    CcnId: string;
+    CcnId?: string;
     /**
      * 实例类型：VPC，DIRECTCONNECT，BMVPC，EDGE，EDGE_TUNNEL，EDGE_VPNGW，VPNGW。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例绑定路由表的时间。
      */
-    InstanceBindTime: string;
+    InstanceBindTime?: string;
     /**
      * 路由表ID。
      */
-    RouteTableId: string;
+    RouteTableId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例所在地域。
      */
-    InstanceRegion: Array<string>;
+    InstanceRegion?: string;
     /**
      * 实例所属的账户uin。
      */
-    InstanceUin: string;
+    InstanceUin?: string;
     /**
      * 关联实例状态：
   <li>`PENDING`：申请中</li>
@@ -1024,7 +1024,7 @@ export interface InstanceBind {
   <li>`DETACHING`：解关联中</li>
   <li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
      */
-    State: string;
+    State?: string;
 }
 /**
  * AddBandwidthPackageResources请求参数结构体

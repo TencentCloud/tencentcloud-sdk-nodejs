@@ -3356,6 +3356,21 @@ export interface DescribeTopicSyncReplicaResponse {
     RequestId?: string;
 }
 /**
+ * 统一返回的TopicResponse
+ */
+export interface TopicResult {
+    /**
+     * 返回的主题信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicList: Array<Topic>;
+    /**
+     * 符合条件的 topic 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+}
+/**
  * CreateConnectResource请求参数结构体
  */
 export interface CreateConnectResourceRequest {
@@ -4792,6 +4807,55 @@ export interface ZoneResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ForceCheckTag?: boolean;
+}
+/**
+ * ModifyRoutineMaintenanceTask请求参数结构体
+ */
+export interface ModifyRoutineMaintenanceTaskRequest {
+    /**
+     * 实例id
+     */
+    InstanceId: string;
+    /**
+     * 自动化运维类别
+     */
+    MaintenanceType: string;
+    /**
+     * 自动化运维子类别
+     */
+    MaintenanceSubtype: string;
+    /**
+     * 主题名称
+     */
+    TopicName?: string;
+    /**
+     * 任务触发阈值
+     */
+    ConfigureThreshold?: number;
+    /**
+     * 任务调整步长
+     */
+    ConfigureStepSize?: number;
+    /**
+     * 任务调整上限
+     */
+    ConfigureLimit?: number;
+    /**
+     * 任务预期触发时间，存储从当日 0AM 开始偏移的秒数
+     */
+    PlannedTime?: number;
+    /**
+     * 任务额外信息
+     */
+    ExtraConfig?: string;
+    /**
+     * 任务状态
+     */
+    Status?: number;
+    /**
+     * 执行week day
+     */
+    Week?: string;
 }
 /**
  * 实例对象
@@ -7576,19 +7640,17 @@ export interface InquiryPrice {
     DetailPrices: InquiryDetailPrice;
 }
 /**
- * 统一返回的TopicResponse
+ * ModifyRoutineMaintenanceTask返回参数结构体
  */
-export interface TopicResult {
+export interface ModifyRoutineMaintenanceTaskResponse {
     /**
-     * 返回的主题信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回结果
      */
-    TopicList: Array<Topic>;
+    Result?: JgwOperateResponse;
     /**
-     * 符合条件的 topic 数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TotalCount: number;
+    RequestId?: string;
 }
 /**
  * DescribeTopicDetail请求参数结构体

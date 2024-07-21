@@ -278,6 +278,16 @@ it("cvm.v20170312.DescribeInstancesModification", async function () {
     }
 })
 
+it("cvm.v20170312.ExitRescueMode", async function () {
+    try {
+       const data = await client.ExitRescueMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.AssociateInstancesKeyPairs", async function () {
     try {
        const data = await client.AssociateInstancesKeyPairs({})
@@ -431,6 +441,16 @@ it("cvm.v20170312.RepairTaskControl", async function () {
 it("cvm.v20170312.DescribeHosts", async function () {
     try {
        const data = await client.DescribeHosts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.EnterRescueMode", async function () {
+    try {
+       const data = await client.EnterRescueMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

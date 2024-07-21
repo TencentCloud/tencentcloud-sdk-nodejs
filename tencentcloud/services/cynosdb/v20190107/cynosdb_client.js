@@ -118,10 +118,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseProxy", req, cb);
     }
     /**
-     * 查询数据库代理规格
+     * 资源包使用明细导出
      */
-    async DescribeProxySpecs(req, cb) {
-        return this.request("DescribeProxySpecs", req, cb);
+    async ExportResourcePackageDeductDetails(req, cb) {
+        return this.request("ExportResourcePackageDeductDetails", req, cb);
+    }
+    /**
+     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     */
+    async SwitchProxyVpc(req, cb) {
+        return this.request("SwitchProxyVpc", req, cb);
     }
     /**
      * 该接口（DescribeClusterDetail）显示集群详情
@@ -350,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyParamTemplate(req, cb) {
         return this.request("ModifyParamTemplate", req, cb);
+    }
+    /**
+     * 修改已绑定资源包抵扣优先级
+     */
+    async ModifyResourcePackagesDeductionPriority(req, cb) {
+        return this.request("ModifyResourcePackagesDeductionPriority", req, cb);
     }
     /**
      * 该接口(DescribeInstanceParams)查询实例参数列表
@@ -742,10 +754,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMaintainPeriod", req, cb);
     }
     /**
-     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     * 查询数据库代理规格
      */
-    async SwitchProxyVpc(req, cb) {
-        return this.request("SwitchProxyVpc", req, cb);
+    async DescribeProxySpecs(req, cb) {
+        return this.request("DescribeProxySpecs", req, cb);
     }
     /**
      * 查询数据库列表

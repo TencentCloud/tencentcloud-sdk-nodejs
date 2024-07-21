@@ -168,9 +168,19 @@ it("cynosdb.v20190107.CloseProxy", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeProxySpecs", async function () {
+it("cynosdb.v20190107.ExportResourcePackageDeductDetails", async function () {
     try {
-       const data = await client.DescribeProxySpecs({})
+       const data = await client.ExportResourcePackageDeductDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+    try {
+       const data = await client.SwitchProxyVpc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +561,16 @@ it("cynosdb.v20190107.ModifyClusterDatabase", async function () {
 it("cynosdb.v20190107.ModifyParamTemplate", async function () {
     try {
        const data = await client.ModifyParamTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyResourcePackagesDeductionPriority", async function () {
+    try {
+       const data = await client.ModifyResourcePackagesDeductionPriority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,9 +1228,9 @@ it("cynosdb.v20190107.DescribeMaintainPeriod", async function () {
     }
 })
 
-it("cynosdb.v20190107.SwitchProxyVpc", async function () {
+it("cynosdb.v20190107.DescribeProxySpecs", async function () {
     try {
-       const data = await client.SwitchProxyVpc({})
+       const data = await client.DescribeProxySpecs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

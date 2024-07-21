@@ -760,17 +760,30 @@ export interface ResetInstanceRequest {
     UserData?: string;
 }
 /**
- * 实例启动模板，通过该参数可使用实例模板中的预设参数创建实例。
+ * ModifyHpcClusterAttribute请求参数结构体
  */
-export interface LaunchTemplate {
+export interface ModifyHpcClusterAttributeRequest {
     /**
-     * 实例启动模板ID，通过该参数可使用实例模板中的预设参数创建实例。
+     * 高性能计算集群ID。
      */
-    LaunchTemplateId?: string;
+    HpcClusterId: string;
     /**
-     * 实例启动模板版本号，若给定，新实例启动模板将基于给定的版本号创建
+     * 高性能计算集群新名称。
      */
-    LaunchTemplateVersion?: number;
+    Name?: string;
+    /**
+     * 高性能计算集群新备注。
+     */
+    Remark?: string;
+}
+/**
+ * ExitRescueMode返回参数结构体
+ */
+export interface ExitRescueModeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeChcHosts返回参数结构体
@@ -1403,6 +1416,27 @@ export interface ModifyImageAttributeRequest {
      * 设置新的镜像描述；必须满足下列限制： <li> 不得超过 256 个字符。</li>
      */
     ImageDescription?: string;
+}
+/**
+ * EnterRescueMode请求参数结构体
+ */
+export interface EnterRescueModeRequest {
+    /**
+     * 需要进入救援模式的实例id
+     */
+    InstanceId: string;
+    /**
+     * 救援模式下系统密码
+     */
+    Password: string;
+    /**
+     * 救援模式下系统用户名
+     */
+    Username?: string;
+    /**
+     * 是否强制关机
+     */
+    ForceStop?: boolean;
 }
 /**
  * DescribeInstanceVncUrl请求参数结构体
@@ -3415,6 +3449,15 @@ export interface ReservedInstanceFamilyItem {
  */
 export declare type DescribeInternetChargeTypeConfigsRequest = null;
 /**
+ * ExitRescueMode请求参数结构体
+ */
+export interface ExitRescueModeRequest {
+    /**
+     * 退出救援模式的实例id
+     */
+    InstanceId: string;
+}
+/**
  * DescribeDisasterRecoverGroups返回参数结构体
  */
 export interface DescribeDisasterRecoverGroupsResponse {
@@ -4159,21 +4202,13 @@ export interface ModifyHostsAttributeResponse {
     RequestId?: string;
 }
 /**
- * ModifyHpcClusterAttribute请求参数结构体
+ * EnterRescueMode返回参数结构体
  */
-export interface ModifyHpcClusterAttributeRequest {
+export interface EnterRescueModeResponse {
     /**
-     * 高性能计算集群ID。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    HpcClusterId: string;
-    /**
-     * 高性能计算集群新名称。
-     */
-    Name?: string;
-    /**
-     * 高性能计算集群新备注。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * DescribeTaskInfo返回参数结构体
@@ -5076,6 +5111,19 @@ export interface ModifyInstanceDiskTypeRequest {
      * 实例系统盘配置信息，只需要指定要转换的目标云硬盘的介质类型，指定DiskType的值。只支持CDHPAID类型实例指定CdcId参数。
      */
     SystemDisk?: SystemDisk;
+}
+/**
+ * 实例启动模板，通过该参数可使用实例模板中的预设参数创建实例。
+ */
+export interface LaunchTemplate {
+    /**
+     * 实例启动模板ID，通过该参数可使用实例模板中的预设参数创建实例。
+     */
+    LaunchTemplateId?: string;
+    /**
+     * 实例启动模板版本号，若给定，新实例启动模板将基于给定的版本号创建
+     */
+    LaunchTemplateVersion?: number;
 }
 /**
  * InquiryPriceResetInstancesType返回参数结构体

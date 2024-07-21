@@ -50,7 +50,8 @@ import {
   DeleteKeyPairsRequest,
   SystemDisk,
   ResetInstanceRequest,
-  LaunchTemplate,
+  ModifyHpcClusterAttributeRequest,
+  ExitRescueModeResponse,
   DescribeChcHostsResponse,
   InstanceTypeConfig,
   RepairTaskControlRequest,
@@ -85,6 +86,7 @@ import {
   DescribeInstancesOperationLimitRequest,
   ResetInstancesPasswordResponse,
   ModifyImageAttributeRequest,
+  EnterRescueModeRequest,
   DescribeInstanceVncUrlRequest,
   StopInstancesResponse,
   ModifyImageSharePermissionRequest,
@@ -161,6 +163,7 @@ import {
   DescribeReservedInstancesOfferingsRequest,
   ReservedInstanceFamilyItem,
   DescribeInternetChargeTypeConfigsRequest,
+  ExitRescueModeRequest,
   DescribeDisasterRecoverGroupsResponse,
   ExportImagesRequest,
   ActionTimer,
@@ -190,7 +193,7 @@ import {
   CreateHpcClusterRequest,
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
   ModifyHostsAttributeResponse,
-  ModifyHpcClusterAttributeRequest,
+  EnterRescueModeResponse,
   DescribeTaskInfoResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
   StartInstancesResponse,
@@ -231,6 +234,7 @@ import {
   RebootInstancesResponse,
   DescribeChcHostsRequest,
   ModifyInstanceDiskTypeRequest,
+  LaunchTemplate,
   InquiryPriceResetInstancesTypeResponse,
   DeleteHpcClustersRequest,
   ReservedInstancesOffering,
@@ -595,6 +599,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 退出救援模式
+   */
+  async ExitRescueMode(
+    req: ExitRescueModeRequest,
+    cb?: (error: string, rep: ExitRescueModeResponse) => void
+  ): Promise<ExitRescueModeResponse> {
+    return this.request("ExitRescueMode", req, cb)
+  }
+
+  /**
      * 本接口 (AssociateInstancesKeyPairs) 用于将密钥绑定到实例上。
 
 * 将密钥的公钥写入到实例的`SSH`配置当中，用户就可以通过该密钥的私钥来登录实例。
@@ -781,6 +795,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostsResponse) => void
   ): Promise<DescribeHostsResponse> {
     return this.request("DescribeHosts", req, cb)
+  }
+
+  /**
+   * 进入救援模式
+   */
+  async EnterRescueMode(
+    req: EnterRescueModeRequest,
+    cb?: (error: string, rep: EnterRescueModeResponse) => void
+  ): Promise<EnterRescueModeResponse> {
+    return this.request("EnterRescueMode", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetMultiFlowStatisticResponse, UpdateHardwareResponse, DescribeQosResponse, GetFlowPackagesRequest, SetNotifyUrlResponse, ModifyPackageRenewFlagRequest, GetFlowPackagesResponse, GetVendorHardwareResponse, AddGroupRequest, GetGroupListRequest, GetGroupDetailRequest, GroupDeleteDeviceResponse, GroupAddDeviceRequest, GetStatisticDataResponse, GetPublicKeyRequest, GetFlowStatisticByGroupResponse, GetNetMonitorResponse, DeleteQosRequest, GetFlowStatisticByRegionRequest, GetFlowAlarmInfoRequest, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, DeleteGroupRequest, CreateEncryptedKeyResponse, CreateQosRequest, ModifyPackageRenewFlagResponse, DeleteQosResponse, GetDeviceRequest, ActivateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, GetDevicesRequest, SetNotifyUrlRequest, GetDevicePayModeRequest, CreateQosResponse, GetHardwareListRequest, GroupDeleteDeviceRequest, GetFlowStatisticByRegionResponse, ActivateHardwareRequest, GetMultiFlowStatisticRequest, GetFlowAlarmInfoResponse, OrderFlowPackageRequest, GetGroupDetailResponse, UpdateGroupResponse, GetHardwareListResponse, AddDeviceRequest, UpdateGroupRequest, GetFlowStatisticResponse, UpdateHardwareRequest, GetNetMonitorRequest, GetGroupListResponse, OrderFlowPackageResponse, UpdateDeviceResponse, GroupAddDeviceResponse, GetStatisticDataRequest, UpdateDeviceRequest, DeleteGroupResponse, GetPublicKeyResponse, AddHardwareResponse, GetFlowStatisticRequest, AddDeviceResponse, GetDevicePayModeResponse, DeleteDeviceResponse, AddHardwareRequest, AddGroupResponse } from "./mna_models";
+import { DeleteL3ConnResponse, GetDeviceResponse, GetMultiFlowStatisticResponse, UpdateL3ConnResponse, UpdateHardwareResponse, UpdateL3SwitchRequest, DescribeQosResponse, AddL3ConnRequest, GetFlowPackagesRequest, SetNotifyUrlResponse, UpdateL3CidrResponse, ModifyPackageRenewFlagRequest, GetFlowPackagesResponse, DeleteL3ConnRequest, GetVendorHardwareResponse, AddGroupRequest, GetGroupListRequest, GetGroupDetailRequest, GroupDeleteDeviceResponse, GroupAddDeviceRequest, GetStatisticDataResponse, GetPublicKeyRequest, GetFlowStatisticByGroupResponse, GetNetMonitorResponse, DeleteQosRequest, GetFlowStatisticByRegionRequest, GetFlowAlarmInfoRequest, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, DeleteGroupRequest, CreateEncryptedKeyResponse, UpdateL3SwitchResponse, GetL3ConnListResponse, CreateQosRequest, ModifyPackageRenewFlagResponse, DeleteQosResponse, GetDeviceRequest, ActivateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, AddL3ConnResponse, GetDevicesRequest, SetNotifyUrlRequest, GetDevicePayModeRequest, CreateQosResponse, GetHardwareListRequest, GroupDeleteDeviceRequest, GetFlowStatisticByRegionResponse, ActivateHardwareRequest, GetMultiFlowStatisticRequest, GetFlowAlarmInfoResponse, OrderFlowPackageRequest, GetGroupDetailResponse, UpdateGroupResponse, GetL3ConnListRequest, GetHardwareListResponse, AddDeviceRequest, UpdateGroupRequest, GetFlowStatisticResponse, UpdateHardwareRequest, GetNetMonitorRequest, GetGroupListResponse, OrderFlowPackageResponse, UpdateDeviceResponse, GroupAddDeviceResponse, GetStatisticDataRequest, UpdateDeviceRequest, DeleteGroupResponse, GetPublicKeyResponse, AddHardwareResponse, GetFlowStatisticRequest, AddDeviceResponse, GetDevicePayModeResponse, UpdateL3ConnRequest, DeleteDeviceResponse, AddHardwareRequest, UpdateL3CidrRequest, AddGroupResponse } from "./mna_models";
 /**
  * mna client
  * @class
@@ -64,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     CreateQos(req: CreateQosRequest, cb?: (error: string, rep: CreateQosResponse) => void): Promise<CreateQosResponse>;
     /**
+     * 删除互通规则
+     */
+    DeleteL3Conn(req: DeleteL3ConnRequest, cb?: (error: string, rep: DeleteL3ConnResponse) => void): Promise<DeleteL3ConnResponse>;
+    /**
      * 删除分组
      */
     DeleteGroup(req: DeleteGroupRequest, cb?: (error: string, rep: DeleteGroupResponse) => void): Promise<DeleteGroupResponse>;
@@ -92,9 +96,17 @@ export declare class Client extends AbstractClient {
      */
     GetGroupDetail(req: GetGroupDetailRequest, cb?: (error: string, rep: GetGroupDetailResponse) => void): Promise<GetGroupDetailResponse>;
     /**
+     * 更新互通规则CIDR
+     */
+    UpdateL3Cidr(req: UpdateL3CidrRequest, cb?: (error: string, rep: UpdateL3CidrResponse) => void): Promise<UpdateL3CidrResponse>;
+    /**
      * 获取厂商硬件设备列表
      */
     GetVendorHardware(req: GetVendorHardwareRequest, cb?: (error: string, rep: GetVendorHardwareResponse) => void): Promise<GetVendorHardwareResponse>;
+    /**
+     * 新建互通规则
+     */
+    AddL3Conn(req: AddL3ConnRequest, cb?: (error: string, rep: AddL3ConnResponse) => void): Promise<AddL3ConnResponse>;
     /**
      * 通过此接口设置和更新预置密钥
      */
@@ -124,6 +136,10 @@ export declare class Client extends AbstractClient {
      */
     GetHardwareList(req: GetHardwareListRequest, cb?: (error: string, rep: GetHardwareListResponse) => void): Promise<GetHardwareListResponse>;
     /**
+     * 更新互通规则开关
+     */
+    UpdateL3Switch(req: UpdateL3SwitchRequest, cb?: (error: string, rep: UpdateL3SwitchResponse) => void): Promise<UpdateL3SwitchResponse>;
+    /**
      * 新建设备记录
      */
     AddDevice(req: AddDeviceRequest, cb?: (error: string, rep: AddDeviceResponse) => void): Promise<AddDeviceResponse>;
@@ -143,4 +159,12 @@ export declare class Client extends AbstractClient {
      * 新建分组
      */
     AddGroup(req: AddGroupRequest, cb?: (error: string, rep: AddGroupResponse) => void): Promise<AddGroupResponse>;
+    /**
+     * 获取互通规则列表
+     */
+    GetL3ConnList(req: GetL3ConnListRequest, cb?: (error: string, rep: GetL3ConnListResponse) => void): Promise<GetL3ConnListResponse>;
+    /**
+     * 更新互通规则备注
+     */
+    UpdateL3Conn(req: UpdateL3ConnRequest, cb?: (error: string, rep: UpdateL3ConnResponse) => void): Promise<UpdateL3ConnResponse>;
 }

@@ -147,6 +147,7 @@ import {
   DescribeTopicProduceConnectionRequest,
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
+  TopicResult,
   CreateConnectResourceRequest,
   MariaDBParam,
   Route,
@@ -204,6 +205,7 @@ import {
   AclResponse,
   PrometheusResult,
   ZoneResponse,
+  ModifyRoutineMaintenanceTaskRequest,
   Instance,
   DescribeInstanceAttributesResponse,
   MapParam,
@@ -310,7 +312,7 @@ import {
   DescribeDatahubTopicsRequest,
   CreateDatahubTaskRequest,
   InquiryPrice,
-  TopicResult,
+  ModifyRoutineMaintenanceTaskResponse,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
   CtsdbParam,
@@ -515,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDatahubTopicResponse) => void
   ): Promise<ModifyDatahubTopicResponse> {
     return this.request("ModifyDatahubTopic", req, cb)
+  }
+
+  /**
+   * 设置自动化运维属性
+   */
+  async ModifyRoutineMaintenanceTask(
+    req: ModifyRoutineMaintenanceTaskRequest,
+    cb?: (error: string, rep: ModifyRoutineMaintenanceTaskResponse) => void
+  ): Promise<ModifyRoutineMaintenanceTaskResponse> {
+    return this.request("ModifyRoutineMaintenanceTask", req, cb)
   }
 
   /**

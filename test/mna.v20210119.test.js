@@ -158,6 +158,16 @@ it("mna.v20210119.CreateQos", async function () {
     }
 })
 
+it("mna.v20210119.DeleteL3Conn", async function () {
+    try {
+       const data = await client.DeleteL3Conn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.DeleteGroup", async function () {
     try {
        const data = await client.DeleteGroup({})
@@ -228,9 +238,29 @@ it("mna.v20210119.GetGroupDetail", async function () {
     }
 })
 
+it("mna.v20210119.UpdateL3Cidr", async function () {
+    try {
+       const data = await client.UpdateL3Cidr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetVendorHardware", async function () {
     try {
        const data = await client.GetVendorHardware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.AddL3Conn", async function () {
+    try {
+       const data = await client.AddL3Conn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +338,16 @@ it("mna.v20210119.GetHardwareList", async function () {
     }
 })
 
+it("mna.v20210119.UpdateL3Switch", async function () {
+    try {
+       const data = await client.UpdateL3Switch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.AddDevice", async function () {
     try {
        const data = await client.AddDevice({})
@@ -351,6 +391,26 @@ it("mna.v20210119.UpdateGroup", async function () {
 it("mna.v20210119.AddGroup", async function () {
     try {
        const data = await client.AddGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetL3ConnList", async function () {
+    try {
+       const data = await client.GetL3ConnList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.UpdateL3Conn", async function () {
+    try {
+       const data = await client.UpdateL3Conn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
