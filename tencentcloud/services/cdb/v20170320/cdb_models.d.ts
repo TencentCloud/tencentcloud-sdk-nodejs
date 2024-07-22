@@ -7315,6 +7315,10 @@ export interface UpgradeDBInstanceEngineVersionRequest {
      * 延迟阈值。取值范围1~10
      */
     MaxDelayTime?: number;
+    /**
+     * 版本升级支持指定参数
+     */
+    ParamList?: Array<UpgradeEngineVersionParams>;
 }
 /**
  * DescribeDataBackupOverview请求参数结构体
@@ -7382,6 +7386,21 @@ export interface SwitchForUpgradeResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 5.7升级8.0指定参数的结构
+ */
+export interface UpgradeEngineVersionParams {
+    /**
+     * 参数名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 参数值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * DescribeAccountPrivileges请求参数结构体

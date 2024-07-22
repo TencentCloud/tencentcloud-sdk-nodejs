@@ -345,10 +345,12 @@ export interface DuplicateImagePersonalRequest {
 export interface RetentionRule {
     /**
      * 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
      * 规则设置下的对应值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: number;
 }
@@ -1280,11 +1282,11 @@ export interface DescribeTagRetentionExecutionTaskResponse {
     /**
      * 版本保留执行任务列表
      */
-    RetentionTaskList: Array<RetentionTask>;
+    RetentionTaskList?: Array<RetentionTask>;
     /**
      * 版本保留执行任务总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1688,27 +1690,27 @@ export interface RetentionPolicy {
     /**
      * 版本保留策略Id
      */
-    RetentionId: number;
+    RetentionId?: number;
     /**
      * 命名空间的名称
      */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
      * 规则列表
      */
-    RetentionRuleList: Array<RetentionRule>;
+    RetentionRuleList?: Array<RetentionRule>;
     /**
      * 定期执行方式
      */
-    CronSetting: string;
+    CronSetting?: string;
     /**
      * 是否启用规则
      */
-    Disabled: boolean;
+    Disabled?: boolean;
     /**
      * 基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用
      */
-    NextExecutionTime: string;
+    NextExecutionTime?: string;
 }
 /**
  * DescribeImageLifecycleGlobalPersonal返回参数结构体
@@ -2061,11 +2063,11 @@ export interface DescribeImagesResponse {
     /**
      * 容器镜像信息列表
      */
-    ImageInfoList: Array<TcrImageInfo>;
+    ImageInfoList?: Array<TcrImageInfo>;
     /**
      * 容器镜像总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2724,6 +2726,10 @@ export interface DeleteImageRequest {
      */
     RegistryId: string;
     /**
+     * 命名空间名称
+     */
+    NamespaceName: string;
+    /**
      * 镜像仓库名称
      */
     RepositoryName: string;
@@ -2731,10 +2737,6 @@ export interface DeleteImageRequest {
      * 镜像版本
      */
     ImageVersion: string;
-    /**
-     * 命名空间名称
-     */
-    NamespaceName: string;
 }
 /**
  * ModifyRepositoryAccessPersonal请求参数结构体
@@ -3595,6 +3597,16 @@ export interface DescribeImageManifestsResponse {
      */
     Config?: string;
     /**
+     * 镜像的Labels信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Labels?: Array<KeyValueString>;
+    /**
+     * 镜像大小，单位：byte
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: number;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4000,11 +4012,11 @@ export interface DescribeTagRetentionRulesResponse {
     /**
      * 版本保留策略列表
      */
-    RetentionPolicyList: Array<RetentionPolicy>;
+    RetentionPolicyList?: Array<RetentionPolicy>;
     /**
      * 版本保留策略总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4618,11 +4630,11 @@ export interface DescribeTagRetentionExecutionResponse {
     /**
      * 版本保留执行记录列表
      */
-    RetentionExecutionList: Array<RetentionExecution>;
+    RetentionExecutionList?: Array<RetentionExecution>;
     /**
      * 版本保留执行记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

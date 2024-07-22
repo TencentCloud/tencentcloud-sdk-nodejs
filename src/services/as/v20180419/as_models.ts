@@ -809,6 +809,13 @@ ORIGINAL，AS 直接将入参中所填的 InstanceName 传递给 CVM，CVM 可�
 UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会对其进行拓展，伸缩组中实例的 InstanceName 可以保证唯一。
    */
   InstanceNameStyle?: string
+  /**
+   * 云服务器实例名后缀。字符长度为[1,105]，且与 InstanceName 的长度和不能超过107。
+
+假设后缀名称为 suffix，原实例名为 test.0，最终实例名为 test.0.suffix。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceNameSuffix?: string
 }
 
 /**
@@ -2308,7 +2315,15 @@ export interface DescribeNotificationConfigurationsResponse {
  */
 export interface DataDisk {
   /**
-   * 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
+   * 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：
+<li>LOCAL_BASIC：本地硬盘</li>
+<li>LOCAL_SSD：本地SSD硬盘</li>
+<li>CLOUD_BASIC：普通云硬盘</li>
+<li>CLOUD_PREMIUM：高性能云硬盘</li>
+<li>CLOUD_SSD：SSD云硬盘</li>
+<li>CLOUD_HSSD：增强型SSD云硬盘</li>
+<li>CLOUD_TSSD：极速型SSD云硬盘</li>
+默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
@@ -2323,12 +2338,16 @@ export interface DataDisk {
    */
   SnapshotId?: string
   /**
-   * 数据盘是否随子机销毁。取值范围：<br><li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘<br><li>FALSE：子机销毁时，保留数据盘
+   * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
+<li>FALSE：子机销毁时，保留数据盘</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteWithInstance?: boolean
   /**
-   * 数据盘是否加密。取值范围：<br><li>TRUE：加密<br><li>FALSE：不加密
+   * 数据盘是否加密。取值范围：
+<li>TRUE：加密</li>
+<li>FALSE：不加密</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Encrypt?: boolean
@@ -2338,6 +2357,13 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ThroughputPerformance?: number
+  /**
+   * 突发性能。是否开启突发性能，默认取值为 false。
+
+注：内测中，需提单申请后使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BurstPerformance?: boolean
 }
 
 /**

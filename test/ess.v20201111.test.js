@@ -148,6 +148,16 @@ it("ess.v20201111.CreateFlowGroupByTemplates", async function () {
     }
 })
 
+it("ess.v20201111.CreatePartnerAutoSignAuthUrl", async function () {
+    try {
+       const data = await client.CreatePartnerAutoSignAuthUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowByFiles", async function () {
     try {
        const data = await client.CreateFlowByFiles({})

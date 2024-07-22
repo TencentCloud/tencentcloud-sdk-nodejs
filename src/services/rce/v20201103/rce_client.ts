@@ -27,6 +27,7 @@ import {
   AccountInfo,
   ManageMarketingRiskResponse,
   InputCryptoManageMarketingRisk,
+  DataAuthorizationInfo,
   SponsorInfo,
   InputDetails,
   OutputManageMarketingRiskValue,

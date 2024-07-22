@@ -141,6 +141,7 @@ import {
   RegisterInfo,
   DescribeFileUrlsRequest,
   FormField,
+  CreatePartnerAutoSignAuthUrlResponse,
   CreateUserAutoSignSealUrlRequest,
   ModifyFlowDeadlineRequest,
   UserInfo,
@@ -202,6 +203,7 @@ import {
   FileInfo,
   CreateBatchOrganizationRegistrationTasksRequest,
   CreateUserVerifyUrlRequest,
+  CreatePartnerAutoSignAuthUrlRequest,
   FailedCreateStaffData,
   CreateExtendedServiceAuthInfosResponse,
   SubOrgBillUsage,
@@ -570,6 +572,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowGroupByTemplatesResponse) => void
   ): Promise<CreateFlowGroupByTemplatesResponse> {
     return this.request("CreateFlowGroupByTemplates", req, cb)
+  }
+
+  /**
+     * 创建他方自动签授权链接，通过该链接可进入小程序进行合作方企业的自动签授权，若当前企业未开通企业自动签，通过该链接会先引导开通本企业自动签。
+该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权
+
+
+
+注: 
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Operator.UserId 需要传递超管或者法人的UserId)
+2. 已经在授权中或者授权成功的企业，无法重复授权
+     */
+  async CreatePartnerAutoSignAuthUrl(
+    req: CreatePartnerAutoSignAuthUrlRequest,
+    cb?: (error: string, rep: CreatePartnerAutoSignAuthUrlResponse) => void
+  ): Promise<CreatePartnerAutoSignAuthUrlResponse> {
+    return this.request("CreatePartnerAutoSignAuthUrl", req, cb)
   }
 
   /**

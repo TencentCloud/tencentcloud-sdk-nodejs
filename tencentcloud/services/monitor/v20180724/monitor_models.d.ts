@@ -1745,19 +1745,24 @@ export interface UnBindingPolicyObjectResponse {
  */
 export interface DescribePrometheusRecordRulesRequest {
     /**
-     * 实例id
+     * 实例ID
+  
+  示例值：prom-343kafd34
      */
     InstanceId: string;
     /**
-     * 分页
+     * 偏移量，默认为0。 示例值：1
      */
     Offset?: number;
     /**
-     * 分页
+     * 返回数量，默认为20，最大值为100。
+  示例值：1
      */
     Limit?: number;
     /**
-     * 过滤
+     * 仅支持按Name, Values字段过滤:
+  - Name = Name
+    按照给定的预聚合名称列表匹配
      */
     Filters?: Array<Filter>;
 }
@@ -3238,11 +3243,11 @@ export interface DescribeAlarmSmsQuotaQuota {
  */
 export interface ModifyPrometheusAlertPolicyRequest {
     /**
-     * 实例id
+     * Prometheus 实例 ID
      */
     InstanceId: string;
     /**
-     * 告警配置
+     * 告警配置，[具体参考](https://cloud.tencent.com/document/api/248/30354#PrometheusAlertPolicyItem)
      */
     AlertRule: PrometheusAlertPolicyItem;
 }
@@ -4237,20 +4242,23 @@ export interface CreatePrometheusAgentResponse {
  */
 export interface DescribePrometheusAlertPolicyRequest {
     /**
-     * 实例id
+     * 实例ID
      */
     InstanceId: string;
     /**
-     * 分页
+     * 分页偏移量，默认为0。 示例值：1
      */
     Offset?: number;
     /**
-     * 分页
+     * 分页返回数量，默认为20，最大值为100
      */
     Limit?: number;
     /**
-     * 过滤
-  支持ID，Name
+     * 仅支持按Name, Values字段过滤:
+  - Name = Name
+    按照给定的告警规则名称列表匹配
+  - Name = ID
+    按照给定的告警规则ID列表匹配
      */
     Filters?: Array<Filter>;
 }
@@ -8338,12 +8346,12 @@ export interface DescribeRecordingRulesResponse {
     /**
      * 规则组数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 规则组详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordingRuleSet: Array<RecordingRuleSet>;
+    RecordingRuleSet?: Array<RecordingRuleSet>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9393,11 +9401,15 @@ export interface BindingPolicyObjectDimension {
  */
 export interface DescribePrometheusTempRequest {
     /**
-     * 模糊过滤条件，支持
-  Level 按模板级别过滤
-  Name 按名称过滤
-  Describe 按描述过滤
-  ID 按templateId过滤
+     * 仅支持按Name, Values字段过滤:
+  * Name = Name
+    按照给定的模板名称列表匹配
+  * Name = ID
+    按照给定的模板ID列表匹配
+  * Name = Describe
+    按照给定的模板描述列表匹配
+  * Name = Level
+    按照给定的模板维度(instance, cluster)列表匹配
      */
     Filters?: Array<Filter>;
     /**
@@ -9405,7 +9417,7 @@ export interface DescribePrometheusTempRequest {
      */
     Offset?: number;
     /**
-     * 总数限制
+     * 分页返回数量，默认为20，最大值为100
      */
     Limit?: number;
 }

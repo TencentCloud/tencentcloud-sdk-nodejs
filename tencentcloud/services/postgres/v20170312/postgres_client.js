@@ -54,10 +54,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceHAConfig", req, cb);
     }
     /**
-     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
      */
-    async RebalanceReadOnlyGroup(req, cb) {
-        return this.request("RebalanceReadOnlyGroup", req, cb);
+    async DescribeBackupOverview(req, cb) {
+        return this.request("DescribeBackupOverview", req, cb);
+    }
+    /**
+     * 本接口用于查询数据库对象列表。例如查询test数据库下的模式列表。
+     */
+    async DescribeDatabaseObjects(req, cb) {
+        return this.request("DescribeDatabaseObjects", req, cb);
     }
     /**
      * 本接口（ModifyAccountRemark）用于修改账号备注。
@@ -114,10 +120,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
+     * 本接口（RenewInstance）用于续费实例。
      */
-    async CreateServerlessDBInstance(req, cb) {
-        return this.request("CreateServerlessDBInstance", req, cb);
+    async RenewInstance(req, cb) {
+        return this.request("RenewInstance", req, cb);
     }
     /**
      * 接口（DescribeDatabases）用来查询实例的数据库列表。
@@ -144,6 +150,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSlowlogs", req, cb);
     }
     /**
+     * 查询数据库账号对某数据库对象拥有的权限列表。
+     */
+    async DescribeAccountPrivileges(req, cb) {
+        return this.request("DescribeAccountPrivileges", req, cb);
+    }
+    /**
      * 可对RO组进行网络的删除操作。
      */
     async DeleteReadOnlyGroupNetworkAccess(req, cb) {
@@ -154,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBInstanceChargeType(req, cb) {
         return this.request("ModifyDBInstanceChargeType", req, cb);
+    }
+    /**
+     * 解除数据库账号的锁定，解锁后账号可以登陆数据库。
+     */
+    async UnlockAccount(req, cb) {
+        return this.request("UnlockAccount", req, cb);
     }
     /**
      * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，调用前请仔细确认要操作的实例。只能销毁隔离中的实例。
@@ -198,6 +216,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParameterTemplateAttributes", req, cb);
     }
     /**
+     * 根据备份集或恢复目标时间，在原实例上恢复数据库相关对象，例如数据库、表。
+     */
+    async RestoreDBInstanceObjects(req, cb) {
+        return this.request("RestoreDBInstanceObjects", req, cb);
+    }
+    /**
      * 本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
      */
     async CloseServerlessDBExtranetAccess(req, cb) {
@@ -210,10 +234,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceDeployment", req, cb);
     }
     /**
-     * 本接口（RenewInstance）用于续费实例。
+     * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
      */
-    async RenewInstance(req, cb) {
-        return this.request("RenewInstance", req, cb);
+    async CreateServerlessDBInstance(req, cb) {
+        return this.request("CreateServerlessDBInstance", req, cb);
+    }
+    /**
+     * 此接口用于创建数据账号，返回的Oid为账号唯一标识。与数据库系统表pg_roles中记录的oid一致。
+     */
+    async CreateAccount(req, cb) {
+        return this.request("CreateAccount", req, cb);
     }
     /**
      * 本接口 (ModifyDBInstanceParameters) 用于修改实例参数。
@@ -306,10 +336,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeDBInstanceMajorVersion", req, cb);
     }
     /**
-     * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
+     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
      */
-    async DescribeBackupOverview(req, cb) {
-        return this.request("DescribeBackupOverview", req, cb);
+    async RebalanceReadOnlyGroup(req, cb) {
+        return this.request("RebalanceReadOnlyGroup", req, cb);
     }
     /**
      * 本接口（CreateReadOnlyGroupNetworkAccess）用于创建RO组的网络。
@@ -342,10 +372,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
-     * 根据备份集或恢复目标时间，在原实例上恢复数据库相关对象，例如数据库、表。
+     * 本接口（RestartDBInstance）用于重启实例。
      */
-    async RestoreDBInstanceObjects(req, cb) {
-        return this.request("RestoreDBInstanceObjects", req, cb);
+    async RestartDBInstance(req, cb) {
+        return this.request("RestartDBInstance", req, cb);
     }
     /**
      * 可对实例进行网络的删除操作。
@@ -366,10 +396,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBXlogs", req, cb);
     }
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
      */
-    async RestartDBInstance(req, cb) {
-        return this.request("RestartDBInstance", req, cb);
+    async DescribeDBInstanceAttribute(req, cb) {
+        return this.request("DescribeDBInstanceAttribute", req, cb);
     }
     /**
      * 本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
@@ -404,10 +434,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBaseBackupExpireTime", req, cb);
     }
     /**
-     * 本接口（CreateReadOnlyGroup）用于创建只读组
+     * 修改某账号对某数据库对象的权限、修改账号类型。
      */
-    async CreateReadOnlyGroup(req, cb) {
-        return this.request("CreateReadOnlyGroup", req, cb);
+    async ModifyAccountPrivileges(req, cb) {
+        return this.request("ModifyAccountPrivileges", req, cb);
     }
     /**
      * 此接口（DescribeSlowQueryList）用于查询指定时间范围内的所有慢查询。
@@ -515,6 +545,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenDBExtranetAccess", req, cb);
     }
     /**
+     * 此接口用于删除数据库账号，需要同时输入Oid与UserName，避免误删。
+     */
+    async DeleteAccount(req, cb) {
+        return this.request("DeleteAccount", req, cb);
+    }
+    /**
      * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
      */
     async ModifyBackupPlan(req, cb) {
@@ -539,6 +575,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
+     * 本接口（CreateReadOnlyGroup）用于创建只读组
+     */
+    async CreateReadOnlyGroup(req, cb) {
+        return this.request("CreateReadOnlyGroup", req, cb);
+    }
+    /**
      * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
      */
     async InquiryPriceRenewDBInstance(req, cb) {
@@ -557,16 +599,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBaseBackup", req, cb);
     }
     /**
+     * 此接口用于锁定数据库账号，锁定后账号当前连接会断开，并且无法建立新连接。
+     */
+    async LockAccount(req, cb) {
+        return this.request("LockAccount", req, cb);
+    }
+    /**
      * 本接口（DescribeReadOnlyGroups）用于查询只读组列表
      */
     async DescribeReadOnlyGroups(req, cb) {
         return this.request("DescribeReadOnlyGroups", req, cb);
-    }
-    /**
-     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
-     */
-    async DescribeDBInstanceAttribute(req, cb) {
-        return this.request("DescribeDBInstanceAttribute", req, cb);
     }
     /**
      * 本接口（UpgradeDBInstance）用于升级实例配置。本接口已废弃，推荐使用接口[ModifyDBInstanceSpec](https://cloud.tencent.com/document/api/409/63689)替代。

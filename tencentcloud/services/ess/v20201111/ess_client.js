@@ -254,6 +254,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowGroupByTemplates", req, cb);
     }
     /**
+     * 创建他方自动签授权链接，通过该链接可进入小程序进行合作方企业的自动签授权，若当前企业未开通企业自动签，通过该链接会先引导开通本企业自动签。
+该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权
+
+
+
+注:
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Operator.UserId 需要传递超管或者法人的UserId)
+2. 已经在授权中或者授权成功的企业，无法重复授权
+     */
+    async CreatePartnerAutoSignAuthUrl(req, cb) {
+        return this.request("CreatePartnerAutoSignAuthUrl", req, cb);
+    }
+    /**
      * 此接口（CreateFlowByFiles）用来通过上传后的pdf资源编号来创建待签署的合同流程。<br/>
 适用场景：适用非制式的合同文件签署。一般开发者自己有完整的签署文件，可以通过该接口传入完整的PDF文件及流程信息生成待签署的合同流程。<br/>
 

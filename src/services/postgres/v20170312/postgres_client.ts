@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateDBInstancesRequest,
   SetAutoRenewFlagRequest,
+  DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   DescribeDBXlogsRequest,
   CreateReadOnlyGroupNetworkAccessRequest,
@@ -34,10 +35,11 @@ import {
   CreateBaseBackupRequest,
   ModifyDBInstanceReadOnlyGroupResponse,
   ClassInfo,
-  DescribeCloneDBInstanceSpecRequest,
+  DescribeDBInstanceParametersResponse,
   DescribeDBInstanceSecurityGroupsResponse,
   BackupPlan,
   RestoreDBInstanceObjectsResponse,
+  SlowlogDetail,
   SwitchDBInstancePrimaryRequest,
   OpenServerlessDBExtranetAccessRequest,
   RenewInstanceResponse,
@@ -48,6 +50,7 @@ import {
   AddDBInstanceToReadOnlyGroupRequest,
   DescribeProductConfigRequest,
   RemoveDBInstanceFromReadOnlyGroupRequest,
+  CreateAccountRequest,
   InitDBInstancesResponse,
   DescribeDefaultParametersRequest,
   RenewInstanceRequest,
@@ -69,6 +72,7 @@ import {
   DescribeDBInstanceAttributeRequest,
   CloseServerlessDBExtranetAccessRequest,
   CreateBaseBackupResponse,
+  LockAccountResponse,
   CloneDBInstanceResponse,
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
@@ -100,20 +104,24 @@ import {
   ParamVersionRelation,
   DescribeLogBackupsRequest,
   SetAutoRenewFlagResponse,
+  ModifyPrivilege,
   NetworkAccess,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
-  ModifyDBInstancesProjectResponse,
+  DescribeDatabaseObjectsRequest,
   DescribeParameterTemplatesResponse,
   ParamSpecRelation,
+  DatabaseObject,
+  UpgradeDBInstanceKernelVersionRequest,
   SwitchDBInstancePrimaryResponse,
+  UnlockAccountRequest,
   ModifyDBInstanceHAConfigRequest,
   PgDeal,
   DeleteReadOnlyGroupNetworkAccessResponse,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
   DBBackup,
-  ServerlessDBAccount,
+  ModifyDBInstancesProjectResponse,
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
   DescribeClassesRequest,
@@ -143,9 +151,11 @@ import {
   OpenDBExtranetAccessResponse,
   InquiryPriceUpgradeDBInstanceRequest,
   DescribeDBInstanceHAConfigResponse,
+  DescribeDatabaseObjectsResponse,
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   EncryptionKey,
+  DeleteAccountRequest,
   UpgradeDBInstanceKernelVersionResponse,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
@@ -159,14 +169,16 @@ import {
   ModifyDBInstanceDeploymentResponse,
   DBInstance,
   DeleteParameterTemplateResponse,
+  ModifyAccountPrivilegesResponse,
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
   Filter,
   DescribeReadOnlyGroupsRequest,
-  DescribeBackupDownloadURLRequest,
+  DescribeBaseBackupsResponse,
   ModifyDBInstanceParametersResponse,
   DescribeDBVersionsResponse,
-  SlowlogDetail,
+  DatabasePrivilege,
+  UnlockAccountResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DBNode,
   ModifyDBInstanceNameResponse,
@@ -191,6 +203,7 @@ import {
   InquiryPriceRenewDBInstanceRequest,
   CreateReadOnlyGroupResponse,
   DeleteDBInstanceNetworkAccessResponse,
+  ModifyAccountPrivilegesRequest,
   DeleteServerlessDBInstanceRequest,
   ModifyReadOnlyGroupConfigResponse,
   AccountInfo,
@@ -204,22 +217,26 @@ import {
   DisIsolateDBInstancesResponse,
   CreateParameterTemplateRequest,
   ModifySwitchTimePeriodRequest,
+  CreateAccountResponse,
   DescribeSlowQueryListRequest,
-  DescribeDBInstanceParametersResponse,
+  DescribeCloneDBInstanceSpecRequest,
   RegionInfo,
   DisIsolateDBInstancesRequest,
   RestartDBInstanceResponse,
-  ModifyBaseBackupExpireTimeRequest,
+  LockAccountRequest,
   DescribeDBInstancesResponse,
   DescribeDBInstanceSecurityGroupsRequest,
   DescribeBackupPlansRequest,
+  ModifyBaseBackupExpireTimeRequest,
   ModifyDBInstanceHAConfigResponse,
   RebalanceReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceParametersRequest,
   RawSlowQuery,
+  ServerlessDBAccount,
   DescribeDBSlowlogsResponse,
+  DescribeAccountPrivilegesRequest,
   RestoreDBInstanceObjectsRequest,
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
@@ -234,14 +251,14 @@ import {
   DeleteBaseBackupResponse,
   PolicyRule,
   ModifyDBInstanceSpecResponse,
-  DescribeBaseBackupsResponse,
+  DescribeBackupDownloadURLRequest,
   DescribeDBXlogsResponse,
-  UpgradeDBInstanceKernelVersionRequest,
+  ModifyDBInstanceChargeTypeResponse,
   DescribeBaseBackupsRequest,
   DescribeEncryptionKeysResponse,
   CreateReadOnlyGroupNetworkAccessResponse,
   CreateDBInstancesResponse,
-  ModifyDBInstanceChargeTypeResponse,
+  DeleteAccountResponse,
 } from "./postgres_models"
 
 /**
@@ -296,13 +313,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+   * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
    */
-  async RebalanceReadOnlyGroup(
-    req: RebalanceReadOnlyGroupRequest,
-    cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void
-  ): Promise<RebalanceReadOnlyGroupResponse> {
-    return this.request("RebalanceReadOnlyGroup", req, cb)
+  async DescribeBackupOverview(
+    req?: DescribeBackupOverviewRequest,
+    cb?: (error: string, rep: DescribeBackupOverviewResponse) => void
+  ): Promise<DescribeBackupOverviewResponse> {
+    return this.request("DescribeBackupOverview", req, cb)
+  }
+
+  /**
+   * 本接口用于查询数据库对象列表。例如查询test数据库下的模式列表。
+   */
+  async DescribeDatabaseObjects(
+    req: DescribeDatabaseObjectsRequest,
+    cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void
+  ): Promise<DescribeDatabaseObjectsResponse> {
+    return this.request("DescribeDatabaseObjects", req, cb)
   }
 
   /**
@@ -396,13 +423,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
+   * 本接口（RenewInstance）用于续费实例。
    */
-  async CreateServerlessDBInstance(
-    req: CreateServerlessDBInstanceRequest,
-    cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void
-  ): Promise<CreateServerlessDBInstanceResponse> {
-    return this.request("CreateServerlessDBInstance", req, cb)
+  async RenewInstance(
+    req: RenewInstanceRequest,
+    cb?: (error: string, rep: RenewInstanceResponse) => void
+  ): Promise<RenewInstanceResponse> {
+    return this.request("RenewInstance", req, cb)
   }
 
   /**
@@ -446,6 +473,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询数据库账号对某数据库对象拥有的权限列表。
+   */
+  async DescribeAccountPrivileges(
+    req: DescribeAccountPrivilegesRequest,
+    cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void
+  ): Promise<DescribeAccountPrivilegesResponse> {
+    return this.request("DescribeAccountPrivileges", req, cb)
+  }
+
+  /**
    * 可对RO组进行网络的删除操作。
    */
   async DeleteReadOnlyGroupNetworkAccess(
@@ -463,6 +500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceChargeTypeResponse) => void
   ): Promise<ModifyDBInstanceChargeTypeResponse> {
     return this.request("ModifyDBInstanceChargeType", req, cb)
+  }
+
+  /**
+   * 解除数据库账号的锁定，解锁后账号可以登陆数据库。
+   */
+  async UnlockAccount(
+    req: UnlockAccountRequest,
+    cb?: (error: string, rep: UnlockAccountResponse) => void
+  ): Promise<UnlockAccountResponse> {
+    return this.request("UnlockAccount", req, cb)
   }
 
   /**
@@ -536,6 +583,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据备份集或恢复目标时间，在原实例上恢复数据库相关对象，例如数据库、表。
+   */
+  async RestoreDBInstanceObjects(
+    req: RestoreDBInstanceObjectsRequest,
+    cb?: (error: string, rep: RestoreDBInstanceObjectsResponse) => void
+  ): Promise<RestoreDBInstanceObjectsResponse> {
+    return this.request("RestoreDBInstanceObjects", req, cb)
+  }
+
+  /**
    * 本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
    */
   async CloseServerlessDBExtranetAccess(
@@ -556,13 +613,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RenewInstance）用于续费实例。
+   * 本接口 (CreateServerlessDBInstance) 用于创建一个ServerlessDB实例，创建成功返回实例ID。
    */
-  async RenewInstance(
-    req: RenewInstanceRequest,
-    cb?: (error: string, rep: RenewInstanceResponse) => void
-  ): Promise<RenewInstanceResponse> {
-    return this.request("RenewInstance", req, cb)
+  async CreateServerlessDBInstance(
+    req: CreateServerlessDBInstanceRequest,
+    cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void
+  ): Promise<CreateServerlessDBInstanceResponse> {
+    return this.request("CreateServerlessDBInstance", req, cb)
+  }
+
+  /**
+   * 此接口用于创建数据账号，返回的Oid为账号唯一标识。与数据库系统表pg_roles中记录的oid一致。
+   */
+  async CreateAccount(
+    req: CreateAccountRequest,
+    cb?: (error: string, rep: CreateAccountResponse) => void
+  ): Promise<CreateAccountResponse> {
+    return this.request("CreateAccount", req, cb)
   }
 
   /**
@@ -716,13 +783,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
+   * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
    */
-  async DescribeBackupOverview(
-    req?: DescribeBackupOverviewRequest,
-    cb?: (error: string, rep: DescribeBackupOverviewResponse) => void
-  ): Promise<DescribeBackupOverviewResponse> {
-    return this.request("DescribeBackupOverview", req, cb)
+  async RebalanceReadOnlyGroup(
+    req: RebalanceReadOnlyGroupRequest,
+    cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void
+  ): Promise<RebalanceReadOnlyGroupResponse> {
+    return this.request("RebalanceReadOnlyGroup", req, cb)
   }
 
   /**
@@ -776,13 +843,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据备份集或恢复目标时间，在原实例上恢复数据库相关对象，例如数据库、表。
+   * 本接口（RestartDBInstance）用于重启实例。
    */
-  async RestoreDBInstanceObjects(
-    req: RestoreDBInstanceObjectsRequest,
-    cb?: (error: string, rep: RestoreDBInstanceObjectsResponse) => void
-  ): Promise<RestoreDBInstanceObjectsResponse> {
-    return this.request("RestoreDBInstanceObjects", req, cb)
+  async RestartDBInstance(
+    req: RestartDBInstanceRequest,
+    cb?: (error: string, rep: RestartDBInstanceResponse) => void
+  ): Promise<RestartDBInstanceResponse> {
+    return this.request("RestartDBInstance", req, cb)
   }
 
   /**
@@ -816,13 +883,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RestartDBInstance）用于重启实例。
+   * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
    */
-  async RestartDBInstance(
-    req: RestartDBInstanceRequest,
-    cb?: (error: string, rep: RestartDBInstanceResponse) => void
-  ): Promise<RestartDBInstanceResponse> {
-    return this.request("RestartDBInstance", req, cb)
+  async DescribeDBInstanceAttribute(
+    req: DescribeDBInstanceAttributeRequest,
+    cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void
+  ): Promise<DescribeDBInstanceAttributeResponse> {
+    return this.request("DescribeDBInstanceAttribute", req, cb)
   }
 
   /**
@@ -878,13 +945,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateReadOnlyGroup）用于创建只读组
+   * 修改某账号对某数据库对象的权限、修改账号类型。
    */
-  async CreateReadOnlyGroup(
-    req: CreateReadOnlyGroupRequest,
-    cb?: (error: string, rep: CreateReadOnlyGroupResponse) => void
-  ): Promise<CreateReadOnlyGroupResponse> {
-    return this.request("CreateReadOnlyGroup", req, cb)
+  async ModifyAccountPrivileges(
+    req: ModifyAccountPrivilegesRequest,
+    cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
+  ): Promise<ModifyAccountPrivilegesResponse> {
+    return this.request("ModifyAccountPrivileges", req, cb)
   }
 
   /**
@@ -1061,6 +1128,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于删除数据库账号，需要同时输入Oid与UserName，避免误删。
+   */
+  async DeleteAccount(
+    req: DeleteAccountRequest,
+    cb?: (error: string, rep: DeleteAccountResponse) => void
+  ): Promise<DeleteAccountResponse> {
+    return this.request("DeleteAccount", req, cb)
+  }
+
+  /**
    * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
    */
   async ModifyBackupPlan(
@@ -1101,6 +1178,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateReadOnlyGroup）用于创建只读组
+   */
+  async CreateReadOnlyGroup(
+    req: CreateReadOnlyGroupRequest,
+    cb?: (error: string, rep: CreateReadOnlyGroupResponse) => void
+  ): Promise<CreateReadOnlyGroupResponse> {
+    return this.request("CreateReadOnlyGroup", req, cb)
+  }
+
+  /**
    * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
    */
   async InquiryPriceRenewDBInstance(
@@ -1131,6 +1218,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于锁定数据库账号，锁定后账号当前连接会断开，并且无法建立新连接。
+   */
+  async LockAccount(
+    req: LockAccountRequest,
+    cb?: (error: string, rep: LockAccountResponse) => void
+  ): Promise<LockAccountResponse> {
+    return this.request("LockAccount", req, cb)
+  }
+
+  /**
    * 本接口（DescribeReadOnlyGroups）用于查询只读组列表
    */
   async DescribeReadOnlyGroups(
@@ -1138,16 +1235,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void
   ): Promise<DescribeReadOnlyGroupsResponse> {
     return this.request("DescribeReadOnlyGroups", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
-   */
-  async DescribeDBInstanceAttribute(
-    req: DescribeDBInstanceAttributeRequest,
-    cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void
-  ): Promise<DescribeDBInstanceAttributeResponse> {
-    return this.request("DescribeDBInstanceAttribute", req, cb)
   }
 
   /**

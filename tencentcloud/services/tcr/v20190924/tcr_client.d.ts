@@ -102,7 +102,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteServiceAccount(req: DeleteServiceAccountRequest, cb?: (error: string, rep: DeleteServiceAccountResponse) => void): Promise<DeleteServiceAccountResponse>;
     /**
-     * 查询版本保留规则
+     * 查询镜像版本保留规则
      */
     DescribeTagRetentionRules(req: DescribeTagRetentionRulesRequest, cb?: (error: string, rep: DescribeTagRetentionRulesResponse) => void): Promise<DescribeTagRetentionRulesResponse>;
     /**
@@ -178,7 +178,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeNamespacePersonal(req: DescribeNamespacePersonalRequest, cb?: (error: string, rep: DescribeNamespacePersonalResponse) => void): Promise<DescribeNamespacePersonalResponse>;
     /**
-     * 查询所有实例命名空间列表
+     * 查询所有有实例命名空间列表
      */
     DescribeInstanceAllNamespaces(req: DescribeInstanceAllNamespacesRequest, cb?: (error: string, rep: DescribeInstanceAllNamespacesResponse) => void): Promise<DescribeInstanceAllNamespacesResponse>;
     /**

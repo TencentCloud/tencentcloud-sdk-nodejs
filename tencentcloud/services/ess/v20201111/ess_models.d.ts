@@ -4347,6 +4347,27 @@ export interface FormField {
     ComponentName?: string;
 }
 /**
+ * CreatePartnerAutoSignAuthUrl返回参数结构体
+ */
+export interface CreatePartnerAutoSignAuthUrlResponse {
+    /**
+     * 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。
+     */
+    Url?: string;
+    /**
+     * 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径
+     */
+    MiniAppPath?: string;
+    /**
+     * 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。
+     */
+    ExpireTime?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateUserAutoSignSealUrl请求参数结构体
  */
 export interface CreateUserAutoSignSealUrlRequest {
@@ -6527,6 +6548,27 @@ export interface CreateUserVerifyUrlRequest {
      * 在用户完成实名认证后，其自定义数据将通过[企业引导个人实名认证后回调](https://qian.tencent.com/developers/company/callback_types_staffs/#%E5%8D%81%E4%BA%8C-%E4%BC%81%E4%B8%9A%E5%BC%95%E5%AF%BC%E4%B8%AA%E4%BA%BA%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E5%9B%9E%E8%B0%83)返回，以便用户确认其个人数据信息。请注意，自定义数据的字符长度上限为1000，且必须采用base64编码格式。
      */
     UserData?: string;
+}
+/**
+ * CreatePartnerAutoSignAuthUrl请求参数结构体
+ */
+export interface CreatePartnerAutoSignAuthUrlRequest {
+    /**
+     * 被授企业id
+     */
+    AuthorizedOrganizationId?: string;
+    /**
+     * 指定印章类型，指定后只能选择该类型的印章进行授权支持以下印章类型：- OFFICIAL : 企业公章- CONTRACT : 合同专用章- FINANCE : 财务专用章- PERSONNEL : 人事专用章
+     */
+    SealTypes?: Array<string>;
+    /**
+     * 代理企业和员工的信息。<br/>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 执行本接口操作的员工信息。<br/>注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator?: UserInfo;
 }
 /**
  * 创建员工的失败数据

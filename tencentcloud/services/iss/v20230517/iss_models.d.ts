@@ -3328,7 +3328,8 @@ export interface ListTasksRequest {
      * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，
   BatchUpgradeDevice，
   BatchResetDevice,
-  BatchRebootDevice
+  BatchRebootDevice,
+  BatchRefreshDeviceChannel
      */
     Operation?: string;
     /**

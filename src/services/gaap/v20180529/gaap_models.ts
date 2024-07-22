@@ -809,7 +809,7 @@ export interface CheckProxyCreateResponse {
   /**
    * 查询能否创建给定配置的通道，1可以创建，0不可创建。
    */
-  CheckFlag: number
+  CheckFlag?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1614,7 +1614,7 @@ export interface DescribeCountryAreaMappingResponse {
   /**
    * 国家地区编码映射表。
    */
-  CountryAreaMappingList: Array<CountryAreaMap>
+  CountryAreaMappingList?: Array<CountryAreaMap>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1757,11 +1757,11 @@ export interface DescribeAccessRegionsResponse {
   /**
    * 加速区域总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 加速区域详情列表
    */
-  AccessRegionSet: Array<RegionDetail>
+  AccessRegionSet?: Array<RegionDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3516,21 +3516,21 @@ export interface DescribeRegionAndPriceResponse {
   /**
    * 源站区域总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 源站区域详情列表
    */
-  DestRegionSet: Array<RegionDetail>
+  DestRegionSet?: Array<RegionDetail>
   /**
    * 通道带宽费用梯度价格
    */
-  BandwidthUnitPrice: Array<BandwidthPriceGradient>
+  BandwidthUnitPrice?: Array<BandwidthPriceGradient>
   /**
    * 带宽价格货币类型：
 CNY 人民币
 USD 美元
    */
-  Currency: string
+  Currency?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3617,7 +3617,7 @@ export interface DescribeBlackHeaderResponse {
    * 禁用的自定义header列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BlackHeaders: Array<string>
+  BlackHeaders?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3903,40 +3903,40 @@ export interface InquiryPriceCreateProxyResponse {
   /**
    * 通道基础费用价格，单位：元/天。
    */
-  ProxyDailyPrice: number
+  ProxyDailyPrice?: number
   /**
    * 通道带宽费用梯度价格。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BandwidthUnitPrice: Array<BandwidthPriceGradient>
+  BandwidthUnitPrice?: Array<BandwidthPriceGradient>
   /**
    * 通道基础费用折扣价格，单位：元/天。
    */
-  DiscountProxyDailyPrice: number
+  DiscountProxyDailyPrice?: number
   /**
    * 价格使用的货币，支持人民币，美元等。
    */
-  Currency: string
+  Currency?: string
   /**
    * 通道的流量费用价格，单位: 元/GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowUnitPrice: number
+  FlowUnitPrice?: number
   /**
    * 通道的流量费用折扣价格，单位:元/GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiscountFlowUnitPrice: number
+  DiscountFlowUnitPrice?: number
   /**
    * 精品BGP的带宽费用价格，单位: 元/Mbps/天
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cn2BandwidthPrice: number
+  Cn2BandwidthPrice?: number
   /**
    * 精品BGP的折后带宽费用价格，单位: 元/Mbps/天
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cn2BandwidthPriceWithDiscount: number
+  Cn2BandwidthPriceWithDiscount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

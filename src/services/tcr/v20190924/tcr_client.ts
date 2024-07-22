@@ -545,7 +545,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询版本保留规则
+   * 查询镜像版本保留规则
    */
   async DescribeTagRetentionRules(
     req: DescribeTagRetentionRulesRequest,
@@ -735,7 +735,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询所有实例命名空间列表
+   * 查询所有有实例命名空间列表
    */
   async DescribeInstanceAllNamespaces(
     req: DescribeInstanceAllNamespacesRequest,

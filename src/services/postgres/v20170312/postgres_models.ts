@@ -119,6 +119,20 @@ export interface SetAutoRenewFlagRequest {
 }
 
 /**
+ * DescribeAccountPrivileges返回参数结构体
+ */
+export interface DescribeAccountPrivilegesResponse {
+  /**
+   * 用户拥有数据库user_database的CREATE、CONNECT、TEMPORARY权限
+   */
+  PrivilegeSet?: Array<DatabasePrivilege>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -600,21 +614,21 @@ export interface ClassInfo {
 }
 
 /**
- * DescribeCloneDBInstanceSpec请求参数结构体
+ * DescribeDBInstanceParameters返回参数结构体
  */
-export interface DescribeCloneDBInstanceSpecRequest {
+export interface DescribeDBInstanceParametersResponse {
   /**
-   * 实例ID。
+   * 参数列表总数
    */
-  DBInstanceId: string
+  TotalCount?: number
   /**
-   * 基础备份集ID，此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
+   * 参数列表返回详情
    */
-  BackupSetId?: string
+  Detail?: Array<ParamInfo>
   /**
-   * 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RecoveryTargetTime?: string
+  RequestId?: string
 }
 
 /**
@@ -661,6 +675,24 @@ export interface RestoreDBInstanceObjectsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 慢查询详情
+ */
+export interface SlowlogDetail {
+  /**
+   * 花费总时间
+   */
+  TotalTime: number
+  /**
+   * 调用总次数
+   */
+  TotalCalls: number
+  /**
+   * 脱敏后的慢SQL列表
+   */
+  NormalQueries: Array<NormalQueryItem>
 }
 
 /**
@@ -865,6 +897,32 @@ export interface RemoveDBInstanceFromReadOnlyGroupRequest {
    * 只读组ID
    */
   ReadOnlyGroupId: string
+}
+
+/**
+ * CreateAccount请求参数结构体
+ */
+export interface CreateAccountRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 创建的账号名称。
+   */
+  UserName: string
+  /**
+   * 账号对应的密码。
+   */
+  Password: string
+  /**
+   * 账号类型。当前支持normal、tencentDBSuper两个输入。normal指代普通用户，tencentDBSuper为拥有pg_tencentdb_superuser角色的账号。
+   */
+  Type: string
+  /**
+   * 账号备注。
+   */
+  Remark?: string
 }
 
 /**
@@ -1301,6 +1359,16 @@ export interface CreateBaseBackupResponse {
    * 数据备份集ID
    */
   BaseBackupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * LockAccount返回参数结构体
+ */
+export interface LockAccountResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2099,6 +2167,27 @@ export interface SetAutoRenewFlagResponse {
 }
 
 /**
+ * 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。
+ */
+export interface ModifyPrivilege {
+  /**
+   * 要修改的数据库对象及权限列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabasePrivilege?: DatabasePrivilege
+  /**
+   * 修改的方式，当前仅支持grantObject、revokeObject、alterRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyType?: string
+  /**
+   * 当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCascade?: boolean
+}
+
+/**
  * 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo）
  */
 export interface NetworkAccess {
@@ -2169,17 +2258,37 @@ export interface RemoveDBInstanceFromReadOnlyGroupResponse {
 }
 
 /**
- * ModifyDBInstancesProject返回参数结构体
+ * DescribeDatabaseObjects请求参数结构体
  */
-export interface ModifyDBInstancesProjectResponse {
+export interface DescribeDatabaseObjectsRequest {
   /**
-   * 转移项目成功的实例个数
+   * 实例ID。
    */
-  Count?: number
+  DBInstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 查询的对象类型。支持查询的数据对象有：database,schema,sequence,procedure,type,function,table,view,matview,column。
    */
-  RequestId?: string
+  ObjectType: string
+  /**
+   * 单次显示数量，默认20。可选范围为[0,100]。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 查询对象所属的数据库。当查询对象类型不为database时，此参数必填。
+   */
+  DatabaseName?: string
+  /**
+   * 查询对象所属的模式。当查询对象类型不为database、schema时，此参数必填。
+   */
+  SchemaName?: string
+  /**
+   * 查询对象所属的表。当查询对象类型为column时，此参数必填。
+   */
+  TableName?: string
 }
 
 /**
@@ -2242,6 +2351,75 @@ export interface ParamSpecRelation {
 }
 
 /**
+ * 描述数据库中某个对象所属的类型、是在哪个数据库、模式、表中的对象。
+ */
+export interface DatabaseObject {
+  /**
+   * 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectType: string
+  /**
+   * 所描述的数据库对象名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectName: string
+  /**
+   * 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 所要描述的数据库对象，所属的模式名称。当描述对象不为database、schema时，此参数必选。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * 所要描述的数据库对象，所属的表名称。当描述的对象类型为column时，此参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+}
+
+/**
+ * UpgradeDBInstanceKernelVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 升级的目标内核版本号。可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)的返回字段AvailableUpgradeTarget获取。
+
+   */
+  TargetDBKernelVersion: string
+  /**
+   * 指定实例升级内核版本号完成后的切换时间。可选值:
+<li>0：立即切换
+<li>1：指定时间切换
+<li>2：维护时间窗口内切换
+默认值：0 
+   */
+  SwitchTag?: number
+  /**
+   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+   */
+  SwitchEndTime?: string
+  /**
+   * 是否对本次升级实例内核版本号操作执行预检查。
+<li>true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
+<li>false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+默认值：false
+   */
+  DryRun?: boolean
+}
+
+/**
  * SwitchDBInstancePrimary返回参数结构体
  */
 export interface SwitchDBInstancePrimaryResponse {
@@ -2249,6 +2427,20 @@ export interface SwitchDBInstancePrimaryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnlockAccount请求参数结构体
+ */
+export interface UnlockAccountRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 账号名称。
+   */
+  UserName: string
 }
 
 /**
@@ -2447,24 +2639,17 @@ export interface DBBackup {
 }
 
 /**
- * serverless账号描述
+ * ModifyDBInstancesProject返回参数结构体
  */
-export interface ServerlessDBAccount {
+export interface ModifyDBInstancesProjectResponse {
   /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 转移项目成功的实例个数
    */
-  DBUser: string
+  Count?: number
   /**
-   * 密码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBPassword: string
-  /**
-   * 连接数限制
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DBConnLimit: number
+  RequestId?: string
 }
 
 /**
@@ -3368,6 +3553,26 @@ export interface DescribeDBInstanceHAConfigResponse {
 }
 
 /**
+ * DescribeDatabaseObjects返回参数结构体
+ */
+export interface DescribeDatabaseObjectsResponse {
+  /**
+   * 查询对象列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectSet?: Array<string>
+  /**
+   * 查询对象总数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateDBInstances请求参数结构体
  */
 export interface IsolateDBInstancesRequest {
@@ -3426,6 +3631,20 @@ export interface EncryptionKey {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime: string
+}
+
+/**
+ * DeleteAccount请求参数结构体
+ */
+export interface DeleteAccountRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 删除的账号名称。
+   */
+  UserName: string
 }
 
 /**
@@ -3892,6 +4111,16 @@ export interface DeleteParameterTemplateResponse {
 }
 
 /**
+ * ModifyAccountPrivileges返回参数结构体
+ */
+export interface ModifyAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteReadOnlyGroup请求参数结构体
  */
 export interface DeleteReadOnlyGroupRequest {
@@ -3976,29 +4205,21 @@ read-only-group-id：按照只读组ID过滤，类型为string。
 }
 
 /**
- * DescribeBackupDownloadURL请求参数结构体
+ * DescribeBaseBackups返回参数结构体
  */
-export interface DescribeBackupDownloadURLRequest {
+export interface DescribeBaseBackupsResponse {
   /**
-   * 实例ID。
+   * 查询到的数据备份数量。
    */
-  DBInstanceId: string
+  TotalCount?: number
   /**
-   * 备份类型，目前支持：LogBackup，BaseBackup。
+   * 数据备份详细信息列表。
    */
-  BackupType: string
+  BaseBackupSet?: Array<BaseBackup>
   /**
-   * 备份的唯一ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BackupId: string
-  /**
-   * 链接的有效时间，默认为12小时。
-   */
-  URLExpireTime?: number
-  /**
-   * 备份下载限制
-   */
-  BackupDownloadRestriction?: BackupDownloadRestriction
+  RequestId?: string
 }
 
 /**
@@ -4026,21 +4247,29 @@ export interface DescribeDBVersionsResponse {
 }
 
 /**
- * 慢查询详情
+ * 指定账号对数据库对象拥有的权限列表
  */
-export interface SlowlogDetail {
+export interface DatabasePrivilege {
   /**
-   * 花费总时间
+   * 数据库对象，当ObjectType为database时，DataseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalTime: number
+  Object?: DatabaseObject
   /**
-   * 调用总次数
+   * 指定账号对数据库对象拥有的权限列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCalls: number
+  PrivilegeSet?: Array<string>
+}
+
+/**
+ * UnlockAccount返回参数结构体
+ */
+export interface UnlockAccountResponse {
   /**
-   * 脱敏后的慢SQL列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NormalQueries: Array<NormalQueryItem>
+  RequestId?: string
 }
 
 /**
@@ -4574,6 +4803,24 @@ export interface DeleteDBInstanceNetworkAccessResponse {
 }
 
 /**
+ * ModifyAccountPrivileges请求参数结构体
+ */
+export interface ModifyAccountPrivilegesRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 修改此账号对某数据库对象的权限。
+   */
+  UserName: string
+  /**
+   * 修改的权限信息，支持批量修改，一次最高修改50条。
+   */
+  ModifyPrivilegeSet: Array<ModifyPrivilege>
+}
+
+/**
  * DeleteServerlessDBInstance请求参数结构体
  */
 export interface DeleteServerlessDBInstanceRequest {
@@ -4804,6 +5051,16 @@ export interface ModifySwitchTimePeriodRequest {
 }
 
 /**
+ * CreateAccount返回参数结构体
+ */
+export interface CreateAccountResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSlowQueryList请求参数结构体
  */
 export interface DescribeSlowQueryListRequest {
@@ -4842,21 +5099,21 @@ export interface DescribeSlowQueryListRequest {
 }
 
 /**
- * DescribeDBInstanceParameters返回参数结构体
+ * DescribeCloneDBInstanceSpec请求参数结构体
  */
-export interface DescribeDBInstanceParametersResponse {
+export interface DescribeCloneDBInstanceSpecRequest {
   /**
-   * 参数列表总数
+   * 实例ID。
    */
-  TotalCount?: number
+  DBInstanceId: string
   /**
-   * 参数列表返回详情
+   * 基础备份集ID，此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
    */
-  Detail?: Array<ParamInfo>
+  BackupSetId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。
    */
-  RequestId?: string
+  RecoveryTargetTime?: string
 }
 
 /**
@@ -4928,21 +5185,17 @@ export interface RestartDBInstanceResponse {
 }
 
 /**
- * ModifyBaseBackupExpireTime请求参数结构体
+ * LockAccount请求参数结构体
  */
-export interface ModifyBaseBackupExpireTimeRequest {
+export interface LockAccountRequest {
   /**
    * 实例ID。
    */
   DBInstanceId: string
   /**
-   * 数据备份ID。
+   * 账号名称。
    */
-  BaseBackupId: string
-  /**
-   * 新过期时间。
-   */
-  NewExpireTime: string
+  UserName: string
 }
 
 /**
@@ -4985,6 +5238,24 @@ export interface DescribeBackupPlansRequest {
    * 实例ID
    */
   DBInstanceId: string
+}
+
+/**
+ * ModifyBaseBackupExpireTime请求参数结构体
+ */
+export interface ModifyBaseBackupExpireTimeRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 数据备份ID。
+   */
+  BaseBackupId: string
+  /**
+   * 新过期时间。
+   */
+  NewExpireTime: string
 }
 
 /**
@@ -5088,6 +5359,27 @@ export interface RawSlowQuery {
 }
 
 /**
+ * serverless账号描述
+ */
+export interface ServerlessDBAccount {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBUser: string
+  /**
+   * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBPassword: string
+  /**
+   * 连接数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBConnLimit: number
+}
+
+/**
  * DescribeDBSlowlogs返回参数结构体
  */
 export interface DescribeDBSlowlogsResponse {
@@ -5103,6 +5395,24 @@ export interface DescribeDBSlowlogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccountPrivileges请求参数结构体
+ */
+export interface DescribeAccountPrivilegesRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 查询此账号对某数据库对象所拥有的权限信息。
+   */
+  UserName: string
+  /**
+   * 要查询的数据库对象信息
+   */
+  DatabaseObjectSet: Array<DatabaseObject>
 }
 
 /**
@@ -5395,21 +5705,29 @@ export interface ModifyDBInstanceSpecResponse {
 }
 
 /**
- * DescribeBaseBackups返回参数结构体
+ * DescribeBackupDownloadURL请求参数结构体
  */
-export interface DescribeBaseBackupsResponse {
+export interface DescribeBackupDownloadURLRequest {
   /**
-   * 查询到的数据备份数量。
+   * 实例ID。
    */
-  TotalCount?: number
+  DBInstanceId: string
   /**
-   * 数据备份详细信息列表。
+   * 备份类型，目前支持：LogBackup，BaseBackup。
    */
-  BaseBackupSet?: Array<BaseBackup>
+  BackupType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 备份的唯一ID。
    */
-  RequestId?: string
+  BackupId: string
+  /**
+   * 链接的有效时间，默认为12小时。
+   */
+  URLExpireTime?: number
+  /**
+   * 备份下载限制
+   */
+  BackupDownloadRestriction?: BackupDownloadRestriction
 }
 
 /**
@@ -5431,41 +5749,17 @@ export interface DescribeDBXlogsResponse {
 }
 
 /**
- * UpgradeDBInstanceKernelVersion请求参数结构体
+ * ModifyDBInstanceChargeType返回参数结构体
  */
-export interface UpgradeDBInstanceKernelVersionRequest {
+export interface ModifyDBInstanceChargeTypeResponse {
   /**
-   * 实例ID。
+   * 订单名
    */
-  DBInstanceId: string
+  DealName?: string
   /**
-   * 升级的目标内核版本号。可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)的返回字段AvailableUpgradeTarget获取。
-
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TargetDBKernelVersion: string
-  /**
-   * 指定实例升级内核版本号完成后的切换时间。可选值:
-<li>0：立即切换
-<li>1：指定时间切换
-<li>2：维护时间窗口内切换
-默认值：0 
-   */
-  SwitchTag?: number
-  /**
-   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
-   */
-  SwitchStartTime?: string
-  /**
-   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
-   */
-  SwitchEndTime?: string
-  /**
-   * 是否对本次升级实例内核版本号操作执行预检查。
-<li>true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
-<li>false：发送正常请求（默认值），通过检查后直接升级内核版本号。
-默认值：false
-   */
-  DryRun?: boolean
+  RequestId?: string
 }
 
 /**
@@ -5559,13 +5853,9 @@ export interface CreateDBInstancesResponse {
 }
 
 /**
- * ModifyDBInstanceChargeType返回参数结构体
+ * DeleteAccount返回参数结构体
  */
-export interface ModifyDBInstanceChargeTypeResponse {
-  /**
-   * 订单名
-   */
-  DealName?: string
+export interface DeleteAccountResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

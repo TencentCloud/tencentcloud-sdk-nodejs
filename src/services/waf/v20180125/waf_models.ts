@@ -162,6 +162,14 @@ export interface ModifyIpAccessControlRequest {
    * 备注
    */
   Note?: string
+  /**
+   * 定时配置类型
+   */
+  JobType?: string
+  /**
+   * 定时配置详情
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -807,6 +815,18 @@ export interface ModifyAttackWhiteRuleRequest {
    * 编辑的加白的规则ID列表
    */
   SignatureIds?: Array<string>
+  /**
+   * 加白的大类规则ID
+   */
+  TypeIds?: Array<string>
+  /**
+   * 0表示按照特定规则ID加白, 1表示按照规则类型加白
+   */
+  Mode?: number
+  /**
+   * 规则名
+   */
+  Name?: string
 }
 
 /**
@@ -1370,7 +1390,7 @@ export interface DescribeAttackWhiteRuleRequest {
    */
   Limit: number
   /**
-   * 排序字段，支持user_id, signature_id, modify_time
+   * 排序的字段，支持user_id, signature_id, modify_time
    */
   By?: string
   /**
@@ -1518,12 +1538,12 @@ export interface DescribeUserSignatureRuleResponse {
   /**
    * 规则总数
    */
-  Total: number
+  Total?: number
   /**
    * 规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rules: Array<UserSignatureRule>
+  Rules?: Array<UserSignatureRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1923,52 +1943,77 @@ export interface CCRuleItem {
   /**
    * 动作
    */
-  ActionType: number
+  ActionType?: number
   /**
    * 高级模式
    */
-  Advance: number
+  Advance?: number
   /**
    * 时间周期
    */
-  Interval: number
+  Interval?: number
   /**
    * 限制次数
    */
-  Limit: number
+  Limit?: number
   /**
    * 匹配方法
    */
-  MatchFunc: number
+  MatchFunc?: number
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 优先级
    */
-  Priority: number
+  Priority?: number
   /**
    * 状态
    */
-  Status: number
+  Status?: number
   /**
    * 更新时间戳
    */
-  TsVersion: number
+  TsVersion?: number
   /**
    * 匹配url
    */
-  Url: string
+  Url?: string
   /**
    * 策略动作有效时间
    */
-  ValidTime: number
+  ValidTime?: number
   /**
    * 高级参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OptionsArr: string
+  OptionsArr?: string
+  /**
+   * url长度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Length?: number
+  /**
+   * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventId?: string
+  /**
+   * 关联的Session规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionApplied?: Array<number | bigint>
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -3777,6 +3822,11 @@ export interface UserWhiteRuleItem {
    * 匹配内容
    */
   MatchContent: string
+  /**
+   * 匹配参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchParams?: string
 }
 
 /**
@@ -4045,6 +4095,26 @@ export interface BatchIpAccessControlItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
+  /**
+   * 定时任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: string
+  /**
+   * 周期任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronType?: string
+  /**
+   * 定时任务配置详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 生效状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidStatus?: number
 }
 
 /**
@@ -4072,35 +4142,75 @@ export interface UserWhiteRule {
   /**
    * 白名单的id
    */
-  WhiteRuleId: number
+  WhiteRuleId?: number
   /**
    * 规则id
    */
-  SignatureId: string
+  SignatureId?: string
   /**
    * 状态
    */
-  Status: number
+  Status?: number
   /**
    * 匹配域
    */
-  MatchField: string
+  MatchField?: string
+  /**
+   * 匹配参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchParams?: string
   /**
    * 匹配方法
    */
-  MatchMethod: string
+  MatchMethod?: string
   /**
    * 匹配内容
    */
-  MatchContent: string
+  MatchContent?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
+  /**
+   * 规则ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignatureIds?: Array<string>
+  /**
+   * 大类规则ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeIds?: Array<string>
+  /**
+   * 大类规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeId?: string
+  /**
+   * 0:按照特定规则ID加白, 1:按照规则类型加白
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: number
+  /**
+   * 规则名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 匹配规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchInfo?: Array<UserWhiteRuleItem>
+  /**
+   * MatchInfo字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchInfoStr?: string
 }
 
 /**
@@ -4157,6 +4267,18 @@ export interface AddAttackWhiteRuleRequest {
    * 加白的规则ID列表
    */
   SignatureIds?: Array<string>
+  /**
+   * 加白的大类规则ID
+   */
+  TypeIds?: Array<string>
+  /**
+   * 0:按照特定规则ID加白, 1:按照规则类型加白
+   */
+  Mode?: number
+  /**
+   * 规则名
+   */
+  Name?: string
 }
 
 /**
@@ -4322,7 +4444,7 @@ export interface DescribeIpAccessControlRequest {
    */
   OffSet?: number
   /**
-   * 每页返回的数量
+   * 每页返回的数量，默认为20
    */
   Limit?: number
   /**
@@ -4353,6 +4475,10 @@ export interface DescribeIpAccessControlRequest {
    * 规则ID
    */
   RuleId?: number
+  /**
+   * 定时任务类型筛选0 1 2 3 4
+   */
+  TimerType?: number
 }
 
 /**
@@ -4414,7 +4540,7 @@ export interface DescribeIpHitItemsRequest {
    */
   Count: number
   /**
-   * 类别
+   * 类别，ip封禁传值auto_deny
    */
   Category: string
   /**
@@ -4639,47 +4765,52 @@ export interface UserSignatureRule {
   /**
    * 特征ID
    */
-  ID: string
+  ID?: string
   /**
    * 规则开关
    */
-  Status: number
+  Status?: number
   /**
    * 主类ID
    */
-  MainClassID: string
+  MainClassID?: string
   /**
    * 子类ID
    */
-  SubClassID: string
+  SubClassID?: string
   /**
    * CVE ID
    */
-  CveID: string
+  CveID?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 主类名字，根据Language字段输出中文/英文
    */
-  MainClassName: string
+  MainClassName?: string
   /**
    * 子类名字，根据Language字段输出中文/英文，若子类id为00000000，此字段为空
    */
-  SubClassName: string
+  SubClassName?: string
   /**
    * 规则描述
    */
-  Description: string
+  Description?: string
   /**
    * 0/1
    */
-  Reason: number
+  Reason?: number
+  /**
+   * 1: 高危 2:中危 3:低危
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskLevel?: number
 }
 
 /**
@@ -5065,13 +5196,21 @@ export interface CreateIpAccessControlRequest {
    */
   Edition?: string
   /**
-   * 可选值为：batch（批量添加）、bot、cc、custom（非批量添加时的默认值）
+   * 可选值为：batch（批量添加）、bot（BOT流量分析中的BOT详情列表中添加时）、cc（在攻击日志列表中对攻击类型为CC的IP添加时）、custom（非批量添加时的默认值）
    */
   SourceType?: string
   /**
    * 备注
    */
   Note?: string
+  /**
+   * 定时配置类型
+   */
+  JobType?: string
+  /**
+   * 定时配置详情
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -5307,6 +5446,21 @@ export interface IpAccessControlItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
+  /**
+   * 定时任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: string
+  /**
+   * 周期任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronType?: string
+  /**
+   * 定时任务配置详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobDateTime?: JobDateTime
 }
 
 /**
@@ -6551,6 +6705,11 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItem?: string
+  /**
+   * 实例延期释放标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FreeDelayFlag?: number
 }
 
 /**
@@ -6627,6 +6786,10 @@ export interface DescribeInstancesRequest {
    * 过滤数组
    */
   Filters?: Array<FiltersItemNew>
+  /**
+   * 释放延期标识
+   */
+  FreeDelayFlag?: number
 }
 
 /**
@@ -7398,6 +7561,10 @@ export interface UpsertCCRuleRequest {
    * 规则创建时间
    */
   CreateTime?: number
+  /**
+   * url长度
+   */
+  Length?: number
 }
 
 /**
@@ -10070,12 +10237,12 @@ export interface DescribeAttackWhiteRuleResponse {
   /**
    * 规则总数
    */
-  Total: number
+  Total?: number
   /**
    * 规则白名单列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<UserWhiteRule>
+  List?: Array<UserWhiteRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

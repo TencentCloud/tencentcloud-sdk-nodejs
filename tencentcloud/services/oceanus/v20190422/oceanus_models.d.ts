@@ -1572,6 +1572,10 @@ export interface RunJobDescription {
      * 自定义时间戳
      */
     CustomTimestamp?: number;
+    /**
+     * timestamp; latest-offset;  earliest-offset; 任选一种
+     */
+    KafkaScanMode?: string;
 }
 /**
  * DescribeResourceRelatedJobs返回参数结构体
