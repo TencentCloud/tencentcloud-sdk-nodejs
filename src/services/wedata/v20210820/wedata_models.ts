@@ -3115,6 +3115,11 @@ export interface RuleGroupExecStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerTypes?: Array<string>
+  /**
+   * DLC资源组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DlcGroupName?: string
 }
 
 /**
@@ -5216,6 +5221,14 @@ export interface DescribeOrganizationalFunctionsRequest {
 
    */
   EnvType?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Filter
+  /**
+   * 排序条件
+   */
+  OrderFields?: OrderField
 }
 
 /**
@@ -14772,33 +14785,33 @@ export interface FunctionVersion {
   /**
    * 版本号：V0 V1 V2
    */
-  Tag: string
+  Tag?: string
   /**
    * 提交人 ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 变更类型：ADD、MODIFY
    */
-  Type: string
+  Type?: string
   /**
    * 备注
    */
-  Comment: string
+  Comment?: string
   /**
    * 提交时间: UTC 秒数
    */
-  Timestamp: string
+  Timestamp?: string
   /**
    * 提交人名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName: string
+  UserName?: string
   /**
    * 版本内容：json string 格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: string
+  Content?: string
 }
 
 /**
@@ -16939,6 +16952,10 @@ export interface DescribeTableSchemaInfoRequest {
    * 元数据Database下的Schema名称
    */
   SchemaName?: string
+  /**
+   * 项目空间ID
+   */
+  ProjectId?: string
 }
 
 /**

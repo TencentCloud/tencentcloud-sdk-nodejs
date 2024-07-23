@@ -85,6 +85,7 @@ import {
   CreateBackUpScheduleRequest,
   DeleteBackUpDataRequest,
   DescribeInstanceRequest,
+  InstanceDetail,
   ActionAlterCkUserResponse,
   AttachCBSSpec,
   ScheduleStrategy,

@@ -53,6 +53,12 @@ export interface SubmitVideoStylizationJobRequest {
 - 视频FPS：15～60fps。
    */
   VideoUrl: string
+  /**
+   * 风格化强度 可选参数["low","medium","high"] 
+"low":风格化强度弱,"medium":"风格化强度中等","high":"风格化强度强" 
+默认为medium
+   */
+  StyleStrength?: string
 }
 
 /**

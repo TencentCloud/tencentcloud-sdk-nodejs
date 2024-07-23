@@ -38,6 +38,16 @@ it("mongodb.v20190725.DescribeDBInstanceNodeProperty", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.DescribeDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstanceDeal", async function () {
     try {
        const data = await client.DescribeDBInstanceDeal({})
@@ -188,9 +198,39 @@ it("mongodb.v20190725.CreateAccountUser", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.ModifyDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.CreateDBInstanceHour", async function () {
     try {
        const data = await client.CreateDBInstanceHour({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.CreateDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.CreateDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.DropDBInstanceParamTpl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +421,16 @@ it("mongodb.v20190725.SetInstanceMaintenance", async function () {
 it("mongodb.v20190725.ModifyInstanceParams", async function () {
     try {
        const data = await client.ModifyInstanceParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeDBInstanceParamTplDetail", async function () {
+    try {
+       const data = await client.DescribeDBInstanceParamTplDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

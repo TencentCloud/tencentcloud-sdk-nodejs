@@ -155,6 +155,19 @@ export interface SetAutoScalingConfigurationRequest {
     DryRun?: boolean;
 }
 /**
+ * DetachNodes请求参数结构体
+ */
+export interface DetachNodesRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+    /**
+     * 集群中的节点id
+     */
+    NodeIds: Array<string>;
+}
+/**
  * 节点概览信息。
  */
 export interface NodeOverview {
@@ -169,7 +182,7 @@ export interface NodeOverview {
      */
     Zone?: string;
     /**
-     * 节点状态。<br><li>SUBMITTED：已完成提交。<br><li>CREATING：创建中。<br><li>CREATED：完成创建。<br><li>INITING：初始化中。<br><li>INIT_FAILED：初始化失败。<br><li>RUNNING：运行中。<br><li>DELETING：销毁中。
+     * 节点状态。<li>SUBMITTED：已完成提交。</li><li>CREATING：创建中。</li><li>CREATED：完成创建。</li><li>INITING：初始化中。</li><li>INIT_FAILED：初始化失败。</li><li>RUNNING：运行中。</li><li>DELETING：销毁中。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeState?: string;
@@ -184,15 +197,20 @@ export interface NodeOverview {
      */
     QueueName?: string;
     /**
-     * 节点角色。<br><li>Manager：管控节点。<br><li>Compute：计算节点。<br><li>Login：登录节点。<br><li>ManagerBackup：备用管控节点。
+     * 节点角色。<li>Manager：管控节点。</li><li>Compute：计算节点。</li><li>Login：登录节点。</li><li>ManagerBackup：备用管控节点。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeRole?: string;
     /**
-     * 节点类型。<br><li>STATIC：静态节点。<br><li>DYNAMIC：弹性节点。
+     * 节点类型。<li>STATIC：静态节点。</li><li>DYNAMIC：弹性节点。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeType?: string;
+    /**
+     * thpc集群节点id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId?: string;
 }
 /**
  * DescribeNodes请求参数结构体
@@ -203,7 +221,24 @@ export interface DescribeNodesRequest {
      */
     ClusterId: string;
     /**
-     * <li><strong>queue-name</strong></li> <p style="padding-left: 30px;">按照【<strong>队列名称</strong>】进行过滤。队列名称形如：compute。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-role</strong></li> <p style="padding-left: 30px;">按照【<strong>节点角色</strong>】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;"><li><strong>node-type</strong></li> <p style="padding-left: 30px;">按照【<strong>节点类型</strong>】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+     * <ul>
+      <li><strong>queue-name</strong>
+          <p style="padding-left: 30px;">按照【<strong>队列名称</strong>】进行过滤。队列名称形如：compute。</p>
+          <p style="padding-left: 30px;">类型：String</p>
+          <p style="padding-left: 30px;">必选：否</p>
+      </li>
+      <li><strong>node-role</strong>
+          <p style="padding-left: 30px;">按照【<strong>节点角色</strong>】进行过滤。节点角色形如：Manager。（Manager：管控节点。Compute：计算节点。Login：登录节点。ManagerBackup：备用管控节点。）</p>
+          <p style="padding-left: 30px;">类型：String</p>
+          <p style="padding-left: 30px;">必选：否</p>
+      </li>
+      <li><strong>node-type</strong>
+          <p style="padding-left: 30px;">按照【<strong>节点类型</strong>】进行过滤。节点类型形如：STATIC。(STATIC：静态节点。DYNAMIC：弹性节点。)</p>
+          <p style="padding-left: 30px;">类型：String</p>
+          <p style="padding-left: 30px;">必选：否</p>
+      </li>
+  </ul>
+  <p style="padding-left: 30px;">每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。</p>
      */
     Filters?: Array<Filter>;
     /**
@@ -329,45 +364,33 @@ export interface AddQueueRequest {
     QueueName: string;
 }
 /**
- * 登录节点概览。
+ * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
  */
-export interface LoginNodeOverview {
+export interface InternetAccessible {
     /**
-     * 登录节点ID。
+     * 网络计费类型。取值范围：
+  BANDWIDTH_PREPAID：预付费按带宽结算
+  TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+  BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
+  BANDWIDTH_PACKAGE：带宽包用户
+  默认取值：非带宽包用户默认与子机付费类型保持一致。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeId: string;
+    InternetChargeType?: string;
+    /**
+     * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetMaxBandwidthOut?: number;
 }
 /**
- * 描述CFS文件系统版本和挂载信息
+ * AttachNodes返回参数结构体
  */
-export interface CFSOption {
+export interface AttachNodesResponse {
     /**
-     * 文件系统本地挂载路径。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    LocalPath: string;
-    /**
-     * 文件系统远程挂载ip及路径。
-     */
-    RemotePath: string;
-    /**
-     * 文件系统协议类型，默认值NFS 3.0。
-  <li>NFS 3.0。
-  <li>NFS 4.0。
-  <li>TURBO。
-     */
-    Protocol?: string;
-    /**
-     * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
-     */
-    StorageType?: string;
-    /**
-     * 文件系统挂载挂载命令参数选项。
-  
-  - NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
-  - NFS 4.0默认值：vers=4.0,noresvport
-  - TURBO默认值：user_xattr
-     */
-    MountOption?: string;
+    RequestId?: string;
 }
 /**
  * 符合条件的集群活动信息。
@@ -596,21 +619,36 @@ export interface DescribeClusterStorageOptionResponse {
     RequestId?: string;
 }
 /**
- * DescribeQueues返回参数结构体
+ * 描述CFS文件系统版本和挂载信息
  */
-export interface DescribeQueuesResponse {
+export interface CFSOption {
     /**
-     * 队列概览信息列表。
+     * 文件系统本地挂载路径。
      */
-    QueueSet?: Array<QueueOverview>;
+    LocalPath: string;
     /**
-     * 符合条件的队列数量。
+     * 文件系统远程挂载ip及路径。
      */
-    TotalCount?: number;
+    RemotePath: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 文件系统协议类型，默认值NFS 3.0。
+  <li>NFS 3.0。
+  <li>NFS 4.0。
+  <li>TURBO。
      */
-    RequestId?: string;
+    Protocol?: string;
+    /**
+     * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
+     */
+    StorageType?: string;
+    /**
+     * 文件系统挂载挂载命令参数选项。
+  
+  - NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
+  - NFS 4.0默认值：vers=4.0,noresvport
+  - TURBO默认值：user_xattr
+     */
+    MountOption?: string;
 }
 /**
  * GooseFS存储选项概览信息。
@@ -670,17 +708,13 @@ export interface InstanceChargePrepaid {
     RenewFlag?: string;
 }
 /**
- * 标签键值对。
+ * 登录节点概览。
  */
-export interface Tag {
+export interface LoginNodeOverview {
     /**
-     * 标签键
+     * 登录节点ID。
      */
-    Key: string;
-    /**
-     * 标签值
-     */
-    Value: string;
+    NodeId: string;
 }
 /**
  * 登录节点信息。
@@ -860,6 +894,19 @@ export interface SystemDisk {
     DiskSize?: number;
 }
 /**
+ * 标签键值对。
+ */
+export interface Tag {
+    /**
+     * 标签键
+     */
+    Key: string;
+    /**
+     * 标签值
+     */
+    Value: string;
+}
+/**
  * 描述了实例登录相关配置与信息。
  */
 export interface LoginSettings {
@@ -916,6 +963,82 @@ export interface DescribeClusterActivitiesRequest {
     Limit?: number;
 }
 /**
+ * 扩容队列配置。
+ */
+export interface QueueConfig {
+    /**
+     * 队列名称。
+     */
+    QueueName: string;
+    /**
+     * 队列中弹性节点数量最小值。默认值：0。取值范围：0～200。
+     */
+    MinSize?: number;
+    /**
+     * 队列中弹性节点数量最大值。默认值：10。取值范围：0～200。
+     */
+    MaxSize?: number;
+    /**
+     * 是否开启自动扩容。
+     */
+    EnableAutoExpansion?: boolean;
+    /**
+     * 是否开启自动缩容。
+     */
+    EnableAutoShrink?: boolean;
+    /**
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
+     */
+    ImageId?: string;
+    /**
+     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+     */
+    SystemDisk?: SystemDisk;
+    /**
+     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+     */
+    DataDisks?: Array<DataDisk>;
+    /**
+     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+     */
+    InternetAccessible?: InternetAccessible;
+    /**
+     * 扩容节点配置信息。
+     */
+    ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
+    /**
+     * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
+     */
+    DesiredIdleNodeCapacity?: number;
+    /**
+     * 扩容比例。默认值：100。取值范围：1～100。
+  如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
+     */
+    ScaleOutRatio?: number;
+    /**
+     * 比例扩容阈值。默认值：0。取值范围：0～200。
+  当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
+  此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
+     */
+    ScaleOutNodeThreshold?: number;
+    /**
+     * 每轮扩容最大节点个数。默认值：100。取值范围：1～100。
+     */
+    MaxNodesPerCycle?: number;
+    /**
+     * 扩容过程中，作业的内存在匹配实例机型时增大比例（不会影响作业提交的内存大小，只影响匹配计算过程）。<br/>
+  针对场景：由于实例机型的总内存会大于实例内部的可用内存，16GB内存规格的实例，实例操作系统内的可用内存只有约14.9GB内存。假设此时提交一个需要15GB内存的作业，
+  
+  - 当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。
+  - 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。
+     */
+    ScaleUpMemRatio?: number;
+    /**
+     * 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认开启腾讯云可观测平台、云安全服务、自动化助手服务。
+     */
+    EnhancedService?: EnhancedService;
+}
+/**
  * DeleteQueue请求参数结构体
  */
 export interface DeleteQueueRequest {
@@ -968,7 +1091,7 @@ export interface AddNodesRequest {
      */
     ImageId?: string;
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li>默认值：POSTPAID_BY_HOUR。
      */
     InstanceChargeType?: string;
     /**
@@ -976,7 +1099,7 @@ export interface AddNodesRequest {
      */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-     * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -1010,12 +1133,12 @@ export interface AddNodesRequest {
      */
     ClientToken?: string;
     /**
-     * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。<li>SGE默认队列为：all.q。
+     * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li><li>SGE默认队列为：all.q。</li>
   
      */
     QueueName?: string;
     /**
-     * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
+     * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。</li><li>Login：登录节点。</li>
      */
     NodeRole?: string;
     /**
@@ -1027,13 +1150,17 @@ export interface AddNodesRequest {
      */
     DryRun?: boolean;
     /**
-     * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
+     * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。</li><li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。</li>
      */
     NodeType?: string;
     /**
      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
      */
     ProjectId?: number;
+    /**
+     * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
+     */
+    ResourceType?: string;
 }
 /**
  * CFS存储选项概览信息。
@@ -1174,6 +1301,23 @@ export interface QueueConfigOverview {
     ScaleUpMemRatio?: number;
 }
 /**
+ * DescribeQueues返回参数结构体
+ */
+export interface DescribeQueuesResponse {
+    /**
+     * 队列概览信息列表。
+     */
+    QueueSet?: Array<QueueOverview>;
+    /**
+     * 符合条件的队列数量。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 描述了VPC相关信息
  */
 export interface VirtualPrivateCloud {
@@ -1267,80 +1411,13 @@ export interface GooseFSxOptionOverview {
     LocalPath?: string;
 }
 /**
- * 扩容队列配置。
+ * DetachNodes返回参数结构体
  */
-export interface QueueConfig {
+export interface DetachNodesResponse {
     /**
-     * 队列名称。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    QueueName: string;
-    /**
-     * 队列中弹性节点数量最小值。默认值：0。取值范围：0～200。
-     */
-    MinSize?: number;
-    /**
-     * 队列中弹性节点数量最大值。默认值：10。取值范围：0～200。
-     */
-    MaxSize?: number;
-    /**
-     * 是否开启自动扩容。
-     */
-    EnableAutoExpansion?: boolean;
-    /**
-     * 是否开启自动缩容。
-     */
-    EnableAutoShrink?: boolean;
-    /**
-     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜和特定自定义镜像。
-     */
-    ImageId?: string;
-    /**
-     * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-     */
-    SystemDisk?: SystemDisk;
-    /**
-     * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-     */
-    DataDisks?: Array<DataDisk>;
-    /**
-     * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-     */
-    InternetAccessible?: InternetAccessible;
-    /**
-     * 扩容节点配置信息。
-     */
-    ExpansionNodeConfigs?: Array<ExpansionNodeConfig>;
-    /**
-     * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
-     */
-    DesiredIdleNodeCapacity?: number;
-    /**
-     * 扩容比例。默认值：100。取值范围：1～100。
-  如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
-     */
-    ScaleOutRatio?: number;
-    /**
-     * 比例扩容阈值。默认值：0。取值范围：0～200。
-  当作业负载需要扩容节点数量大于此值，当前扩容轮次按照ScaleOutRatio配置的比例进行扩容。当作业负载需要扩容节点数量小于此值，当前扩容轮次扩容当前作业负载所需数量的节点。
-  此参数配合ScaleOutRatio参数进行使用，用于比例扩容场景下，在作业负载所需节点数量较小时，加快收敛速度。
-     */
-    ScaleOutNodeThreshold?: number;
-    /**
-     * 每轮扩容最大节点个数。默认值：100。取值范围：1～100。
-     */
-    MaxNodesPerCycle?: number;
-    /**
-     * 扩容过程中，作业的内存在匹配实例机型时增大比例（不会影响作业提交的内存大小，只影响匹配计算过程）。<br/>
-  针对场景：由于实例机型的总内存会大于实例内部的可用内存，16GB内存规格的实例，实例操作系统内的可用内存只有约14.9GB内存。假设此时提交一个需要15GB内存的作业，
-  
-  - 当ScaleUpMemRatio=0时，会匹配到16GB内存规格的实例,但是由于操作系统内的可用内存为14.9GB小于作业所需的15GB，扩容出来的实例作业无法运行起来。
-  - 当ScaleUpMemRatio=10时，匹配实例规格会按照15*(1+10%)=16.5GB来进行实例规格匹配，则不会匹配到16GB的实例，而是更大内存规格的实例来保证作业能够被运行起来。
-     */
-    ScaleUpMemRatio?: number;
-    /**
-     * 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认开启腾讯云可观测平台、云安全服务、自动化助手服务。
-     */
-    EnhancedService?: EnhancedService;
+    RequestId?: string;
 }
 /**
  * DescribeAutoScalingConfiguration请求参数结构体
@@ -1369,31 +1446,38 @@ export interface StorageOption {
     GooseFSxOptions?: Array<GooseFSxOption>;
 }
 /**
- * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ * AttachNodes请求参数结构体
  */
-export interface InternetAccessible {
+export interface AttachNodesRequest {
     /**
-     * 网络计费类型。取值范围：
-  BANDWIDTH_PREPAID：预付费按带宽结算
-  TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
-  BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
-  BANDWIDTH_PACKAGE：带宽包用户
-  默认取值：非带宽包用户默认与子机付费类型保持一致。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群id
      */
-    InternetChargeType?: string;
+    ClusterId: string;
     /**
-     * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
      */
-    InternetMaxBandwidthOut?: number;
+    ResourceSet: Array<string>;
+    /**
+     * 队列名称。不指定则为默认队列：
+  SLURM默认队列为：compute。
+  SGE默认队列为：all.q。
+     */
+    QueueName?: string;
+    /**
+     * 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。
+     */
+    ImageId?: string;
+    /**
+     * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
+     */
+    ResourceType?: string;
 }
 /**
  * 计算节点信息。
  */
 export interface ComputeNode {
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li>默认值：POSTPAID_BY_HOUR。
      */
     InstanceChargeType?: string;
     /**
@@ -1401,8 +1485,7 @@ export interface ComputeNode {
      */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-     * 节点机型。不同实例机型指定了不同的资源规格。
-  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     * 节点机型。不同实例机型指定了不同的资源规格。<li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -1418,15 +1501,18 @@ export interface ComputeNode {
      */
     InternetAccessible?: InternetAccessible;
     /**
-     * 节点显示名称。<br><li>
-  不指定节点显示名称则默认显示‘未命名’。
-  最多支持60个字符。
+     * 节点显示名称。<li>不指定节点显示名称则默认显示‘未命名’。
+  最多支持60个字符。</li>
      */
     InstanceName?: string;
     /**
      * 实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
      */
     ProjectId?: number;
+    /**
+     * 实例资源类型，默认是CVM资源
+     */
+    ResourceType?: string;
 }
 /**
  * DeleteNodes请求参数结构体

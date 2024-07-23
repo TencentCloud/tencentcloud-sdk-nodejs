@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DescribeInitNodeScriptsRequest, DeleteClusterResponse, AddQueueRequest, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, DescribeQueuesResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, ModifyInitNodeScriptsRequest, DescribeAutoScalingConfigurationRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DescribeInitNodeScriptsResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DetachNodesRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DescribeInitNodeScriptsRequest, DeleteClusterResponse, AddQueueRequest, AttachNodesResponse, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, DescribeQueuesResponse, ModifyInitNodeScriptsRequest, DetachNodesResponse, DescribeAutoScalingConfigurationRequest, AttachNodesRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DescribeInitNodeScriptsResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -48,12 +48,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInitNodeScripts(req: DescribeInitNodeScriptsRequest, cb?: (error: string, rep: DescribeInitNodeScriptsResponse) => void): Promise<DescribeInitNodeScriptsResponse>;
     /**
-     * 本接口(DeleteQueue)用于从指定集群删除队列。
-* 本接口为目前只支持SchedulerType为SLURM的集群。
-
-* 删除队列时，需要保证队列内不存在节点。
+     * 本接口 (AttachNodes) 用于绑定一个或者多个计算节点指定资源到指定集群中。
      */
-    DeleteQueue(req: DeleteQueueRequest, cb?: (error: string, rep: DeleteQueueResponse) => void): Promise<DeleteQueueResponse>;
+    AttachNodes(req: AttachNodesRequest, cb?: (error: string, rep: AttachNodesResponse) => void): Promise<AttachNodesResponse>;
     /**
      * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
      */
@@ -71,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
+     * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+     */
+    DetachNodes(req: DetachNodesRequest, cb?: (error: string, rep: DetachNodesResponse) => void): Promise<DetachNodesResponse>;
+    /**
      * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
     DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
@@ -82,4 +83,11 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
      */
     DescribeQueues(req: DescribeQueuesRequest, cb?: (error: string, rep: DescribeQueuesResponse) => void): Promise<DescribeQueuesResponse>;
+    /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+* 本接口为目前只支持SchedulerType为SLURM的集群。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+    DeleteQueue(req: DeleteQueueRequest, cb?: (error: string, rep: DeleteQueueResponse) => void): Promise<DeleteQueueResponse>;
 }

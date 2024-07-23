@@ -158,17 +158,13 @@ export interface CreateDBInstanceRequest {
     HiddenZone?: string;
 }
 /**
- * DescribeCurrentOp返回参数结构体
+ * CreateDBInstanceParamTpl返回参数结构体
  */
-export interface DescribeCurrentOpResponse {
+export interface CreateDBInstanceParamTplResponse {
     /**
-     * 符合查询条件的操作总数
+     * 模板ID
      */
-    TotalCount: number;
-    /**
-     * 当前操作列表
-     */
-    CurrentOps: Array<CurrentOp>;
+    TplId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -184,13 +180,25 @@ export interface DescribeAccountUsersRequest {
     InstanceId: string;
 }
 /**
- * SetInstanceMaintenance返回参数结构体
+ * DescribeDBInstanceParamTpl请求参数结构体
  */
-export interface SetInstanceMaintenanceResponse {
+export interface DescribeDBInstanceParamTplRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 参数模板 ID 查询条件。
      */
-    RequestId?: string;
+    TplIds?: Array<string>;
+    /**
+     * 模板名称，查询条件。
+     */
+    TplNames?: Array<string>;
+    /**
+     * 根据版本号插叙参数模板，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是：MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。
+     */
+    MongoVersion?: Array<string>;
+    /**
+     * 根据模板类型查询参数模板，支持DEFAULT（默认模板）和CUSTOMIZE（自定义模板）两种。
+     */
+    TplType?: string;
 }
 /**
  * CreateBackupDBInstance返回参数结构体
@@ -206,13 +214,22 @@ export interface CreateBackupDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * FlushInstanceRouterConfig请求参数结构体
+ * 数据库实例价格
  */
-export interface FlushInstanceRouterConfigRequest {
+export interface DBInstancePrice {
     /**
-     * 实例ID
+     * 单价
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    UnitPrice: number;
+    /**
+     * 原价
+     */
+    OriginalPrice: number;
+    /**
+     * 折扣价
+     */
+    DiscountPrice: number;
 }
 /**
  * KillOps请求参数结构体
@@ -283,6 +300,23 @@ export interface FlushInstanceRouterConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCurrentOp返回参数结构体
+ */
+export interface DescribeCurrentOpResponse {
+    /**
+     * 符合查询条件的操作总数
+     */
+    TotalCount: number;
+    /**
+     * 当前操作列表
+     */
+    CurrentOps: Array<CurrentOp>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 实例可修改参数Multi类型集合。
  */
 export interface InstanceMultiParam {
@@ -338,6 +372,15 @@ export interface ModifyInstanceParamsResponse {
      * 该参数暂时无意义(兼容前端保留)。
      */
     TaskId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * SetInstanceMaintenance返回参数结构体
+ */
+export interface SetInstanceMaintenanceResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -469,6 +512,36 @@ export interface IsolateDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * CreateDBInstanceParamTpl请求参数结构体
+ */
+export interface CreateDBInstanceParamTplRequest {
+    /**
+     * 参数模板名称。
+     */
+    TplName: string;
+    /**
+     * 版本号，该参数模板支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是：MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。当MirrorTplId为空时，该字段必填。
+     */
+    MongoVersion?: string;
+    /**
+     * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
+  当MirrorTplId为空时，该字段必填。
+     */
+    ClusterType?: string;
+    /**
+     * 模板描述信息。
+     */
+    TplDesc?: string;
+    /**
+     * 模板参数，若为空，则以系统默认模板作为新版本参数。
+     */
+    Params?: Array<ParamType>;
+    /**
+     * 镜像模板ID，若该字段不为空，则以该模板为镜像，克隆出一个新的模板。注意：MirrorTplId不为空时，MongoVersion及ClusterType将以MirrorTpl模板的版本及实例类型为准。
+     */
+    MirrorTplId?: string;
+}
+/**
  * DescribeSecurityGroup请求参数结构体
  */
 export interface DescribeSecurityGroupRequest {
@@ -535,22 +608,13 @@ export interface AddNodeList {
     Zone: string;
 }
 /**
- * 数据库实例价格
+ * FlushInstanceRouterConfig请求参数结构体
  */
-export interface DBInstancePrice {
+export interface FlushInstanceRouterConfigRequest {
     /**
-     * 单价
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例ID
      */
-    UnitPrice: number;
-    /**
-     * 原价
-     */
-    OriginalPrice: number;
-    /**
-     * 折扣价
-     */
-    DiscountPrice: number;
+    InstanceId: string;
 }
 /**
  * 实例信息
@@ -564,6 +628,19 @@ export interface DBInstanceInfo {
      * 地域信息
      */
     Region: string;
+}
+/**
+ * 数据库参数
+ */
+export interface ParamType {
+    /**
+     * 参数
+     */
+    Key: string;
+    /**
+     * 参数值
+     */
+    Value: string;
 }
 /**
  * SetAccountUserPrivilege返回参数结构体
@@ -632,6 +709,15 @@ export interface CreateDBInstanceHourResponse {
      * 创建的实例ID列表。
      */
     InstanceIds?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DropDBInstanceParamTpl返回参数结构体
+ */
+export interface DropDBInstanceParamTplResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -773,6 +859,15 @@ export interface ModifyDBInstanceNetworkAddressResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DropDBInstanceParamTpl请求参数结构体
+ */
+export interface DropDBInstanceParamTplRequest {
+    /**
+     * 参数模板 ID。
+     */
+    TplId: string;
 }
 /**
  * CreateAccountUser返回参数结构体
@@ -1409,6 +1504,15 @@ export interface DescribeClientConnectionsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstanceParamTpl返回参数结构体
+ */
+export interface ModifyDBInstanceParamTplResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TerminateDBInstances请求参数结构体
  */
 export interface TerminateDBInstancesRequest {
@@ -1651,6 +1755,35 @@ export interface CreateBackupDownloadTaskRequest {
     BackupSets: Array<ReplicaSetInfo>;
 }
 /**
+ * 数据库参数模板
+ */
+export interface ParamTpl {
+    /**
+     * 参数模板名称
+     */
+    TplName: string;
+    /**
+     * 参数模板ID
+     */
+    TplId: string;
+    /**
+     * 适用数据库版本
+     */
+    MongoVersion: string;
+    /**
+     * 适用数据库类型
+     */
+    ClusterType: string;
+    /**
+     * 参数模板描述
+     */
+    TplDesc: string;
+    /**
+     * 模板类型，包括DEFAULT（默认模板）及CUSTOMIZE（定制模板）两种类型
+     */
+    TplType: string;
+}
+/**
  * InquirePriceModifyDBInstanceSpec返回参数结构体
  */
 export interface InquirePriceModifyDBInstanceSpecResponse {
@@ -1717,6 +1850,76 @@ export interface DescribeDBInstanceNodePropertyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDBInstanceParamTplDetail返回参数结构体
+ */
+export interface DescribeDBInstanceParamTplDetailResponse {
+    /**
+     * 枚举类参数详情列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceEnumParams?: Array<InstanceEnumParam>;
+    /**
+     * 整形参数详情列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceIntegerParams?: Array<InstanceIntegerParam>;
+    /**
+     * 文本参数详情列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceTextParams?: Array<InstanceTextParam>;
+    /**
+     * 多值参数详情列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceMultiParams?: Array<InstanceMultiParam>;
+    /**
+     * 参数总个数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 模板适配实例版本。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MongoVersion?: string;
+    /**
+     * 模板适配集群类型，副本集或分片。。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterType?: string;
+    /**
+     * 参数模板名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TplName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDBInstanceParamTpl请求参数结构体
+ */
+export interface ModifyDBInstanceParamTplRequest {
+    /**
+     * 待修改的参数模板 ID，示例：tpl-jglr91vew。
+     */
+    TplId: string;
+    /**
+     * 待修改参数模板名称，为空时，保持原有名称。
+     */
+    TplName?: string;
+    /**
+     * 待修改参数模板描述，为空时，保持原有描述。
+     */
+    TplDesc?: string;
+    /**
+     * 待修改参数名及参数值，为空时，各参数保持原有值，支持单条或批量修改。
+     */
+    Params?: Array<ParamType>;
 }
 /**
  * DescribeCurrentOp请求参数结构体
@@ -2675,6 +2878,25 @@ export interface DescribeInstanceParamsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDBInstanceParamTpl返回参数结构体
+ */
+export interface DescribeDBInstanceParamTplResponse {
+    /**
+     * 参数模板列表信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParamTpls?: Array<ParamTpl>;
+    /**
+     * 参数模板总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTransparentDataEncryptionStatus请求参数结构体
  */
 export interface DescribeTransparentDataEncryptionStatusRequest {
@@ -2727,6 +2949,19 @@ export interface SetInstanceMaintenanceRequest {
   - 结束时间务必是基于开始时间向后的时间。
      */
     MaintenanceEnd: string;
+}
+/**
+ * DescribeDBInstanceParamTplDetail请求参数结构体
+ */
+export interface DescribeDBInstanceParamTplDetailRequest {
+    /**
+     * 参数模板 ID。
+     */
+    TplId: string;
+    /**
+     * 参数名称，传入该值，则只会获取该字段的参数详情。为空时，返回全部参数。
+     */
+    ParamName?: string;
 }
 /**
  * 实例详情

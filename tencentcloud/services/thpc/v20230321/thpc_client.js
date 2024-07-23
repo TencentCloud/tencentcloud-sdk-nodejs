@@ -86,13 +86,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInitNodeScripts", req, cb);
     }
     /**
-     * 本接口(DeleteQueue)用于从指定集群删除队列。
-* 本接口为目前只支持SchedulerType为SLURM的集群。
-
-* 删除队列时，需要保证队列内不存在节点。
+     * 本接口 (AttachNodes) 用于绑定一个或者多个计算节点指定资源到指定集群中。
      */
-    async DeleteQueue(req, cb) {
-        return this.request("DeleteQueue", req, cb);
+    async AttachNodes(req, cb) {
+        return this.request("AttachNodes", req, cb);
     }
     /**
      * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
@@ -119,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
+     * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+     */
+    async DetachNodes(req, cb) {
+        return this.request("DetachNodes", req, cb);
+    }
+    /**
      * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
     async DeleteCluster(req, cb) {
@@ -135,6 +138,15 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeQueues(req, cb) {
         return this.request("DescribeQueues", req, cb);
+    }
+    /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+* 本接口为目前只支持SchedulerType为SLURM的集群。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+    async DeleteQueue(req, cb) {
+        return this.request("DeleteQueue", req, cb);
     }
 }
 exports.Client = Client;

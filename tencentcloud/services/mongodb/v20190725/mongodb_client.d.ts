@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSpecInfoRequest, CreateDBInstanceRequest, DescribeCurrentOpResponse, DescribeAccountUsersRequest, SetInstanceMaintenanceResponse, CreateBackupDBInstanceResponse, FlushInstanceRouterConfigRequest, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, ModifyInstanceParamsResponse, DescribeBackupRulesResponse, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeSecurityGroupRequest, RenameInstanceRequest, DescribeBackupRulesRequest, DescribeBackupDownloadTaskResponse, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, EnableTransparentDataEncryptionRequest, DeleteAccountUserRequest, ModifyDBInstanceNetworkAddressResponse, CreateAccountUserResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, FlashBackDBInstanceRequest, TerminateDBInstancesResponse, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, CreateAccountUserRequest, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, SetBackupRulesResponse, DescribeDBInstanceNodePropertyRequest, RenewDBInstancesResponse, FlashBackDBInstanceResponse, RenameInstanceResponse, DescribeTransparentDataEncryptionStatusResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, EnableTransparentDataEncryptionResponse, SetBackupRulesRequest, AssignProjectRequest, ModifyInstanceParamsRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DeleteAccountUserResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, DescribeTransparentDataEncryptionStatusRequest, SetInstanceMaintenanceRequest, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
+import { DescribeSpecInfoRequest, CreateDBInstanceRequest, CreateDBInstanceParamTplResponse, DescribeAccountUsersRequest, DescribeDBInstanceParamTplRequest, CreateBackupDBInstanceResponse, KillOpsRequest, InquirePriceRenewDBInstancesRequest, DescribeSlowLogsRequest, FlushInstanceRouterConfigResponse, DescribeCurrentOpResponse, ModifyInstanceParamsResponse, SetInstanceMaintenanceResponse, DescribeBackupRulesResponse, AssignProjectResponse, DescribeDBInstanceDealResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, CreateDBInstanceParamTplRequest, DescribeSecurityGroupRequest, RenameInstanceRequest, DescribeBackupRulesRequest, DescribeBackupDownloadTaskResponse, FlushInstanceRouterConfigRequest, SetAccountUserPrivilegeResponse, ModifyDBInstanceNetworkAddressRequest, CreateDBInstanceHourResponse, DropDBInstanceParamTplResponse, EnableTransparentDataEncryptionRequest, DeleteAccountUserRequest, ModifyDBInstanceNetworkAddressResponse, DropDBInstanceParamTplRequest, CreateAccountUserResponse, DescribeSlowLogPatternsResponse, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, FlashBackDBInstanceRequest, TerminateDBInstancesResponse, ResetDBInstancePasswordRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, CreateAccountUserRequest, ModifyDBInstanceSecurityGroupRequest, DescribeAccountUsersResponse, DescribeBackupDownloadTaskRequest, DescribeClientConnectionsResponse, ModifyDBInstanceParamTplResponse, TerminateDBInstancesRequest, DescribeDBBackupsResponse, ModifyDBInstanceSecurityGroupResponse, DescribeInstanceParamsRequest, InquirePriceCreateDBInstancesResponse, DescribeSecurityGroupResponse, ResetDBInstancePasswordResponse, DescribeDBInstanceDealRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, InquirePriceModifyDBInstanceSpecResponse, DescribeDBInstanceNodePropertyResponse, DescribeDBInstanceParamTplDetailResponse, ModifyDBInstanceParamTplRequest, DescribeCurrentOpRequest, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, SetBackupRulesResponse, DescribeDBInstanceNodePropertyRequest, RenewDBInstancesResponse, FlashBackDBInstanceResponse, RenameInstanceResponse, DescribeTransparentDataEncryptionStatusResponse, CreateBackupDBInstanceRequest, SetAccountUserPrivilegeRequest, KillOpsResponse, IsolateDBInstanceRequest, CreateDBInstanceHourRequest, EnableTransparentDataEncryptionResponse, SetBackupRulesRequest, AssignProjectRequest, ModifyInstanceParamsRequest, CreateBackupDownloadTaskResponse, DescribeSlowLogPatternsRequest, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, DeleteAccountUserResponse, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, InquirePriceCreateDBInstancesRequest, DescribeInstanceParamsResponse, DescribeDBInstanceParamTplResponse, DescribeTransparentDataEncryptionStatusRequest, SetInstanceMaintenanceRequest, DescribeDBInstanceParamTplDetailRequest, ModifyDBInstanceSpecResponse, RenewDBInstancesRequest } from "./mongodb_models";
 /**
  * mongodb client
  * @class
@@ -15,6 +15,11 @@ export declare class Client extends AbstractClient {
      * 本接口用于查询节点的属性，包括节点所在可用区、节点名称、地址、角色、状态、主从延迟、优先级、投票权、标签等属性。
      */
     DescribeDBInstanceNodeProperty(req: DescribeDBInstanceNodePropertyRequest, cb?: (error: string, rep: DescribeDBInstanceNodePropertyResponse) => void): Promise<DescribeDBInstanceNodePropertyResponse>;
+    /**
+     * 本接口(DescribeDBInstanceParamTpl )用于查询当前账号下所有MongoDB数据库参数模板
+**说明：DescribeDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    DescribeDBInstanceParamTpl(req: DescribeDBInstanceParamTplRequest, cb?: (error: string, rep: DescribeDBInstanceParamTplResponse) => void): Promise<DescribeDBInstanceParamTplResponse>;
     /**
      * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
      */
@@ -76,9 +81,24 @@ export declare class Client extends AbstractClient {
      */
     CreateAccountUser(req: CreateAccountUserRequest, cb?: (error: string, rep: CreateAccountUserResponse) => void): Promise<CreateAccountUserResponse>;
     /**
+     * 本接口(ModifyDBInstanceParamTpl )用于修改MongoDB云数据库实例的参数模板。
+**说明：ModifyDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    ModifyDBInstanceParamTpl(req: ModifyDBInstanceParamTplRequest, cb?: (error: string, rep: ModifyDBInstanceParamTplResponse) => void): Promise<ModifyDBInstanceParamTplResponse>;
+    /**
      * 本接口（CreateDBInstanceHour）用于创建按量计费的MongoDB云数据库实例。
      */
     CreateDBInstanceHour(req: CreateDBInstanceHourRequest, cb?: (error: string, rep: CreateDBInstanceHourResponse) => void): Promise<CreateDBInstanceHourResponse>;
+    /**
+     * 本接口(CreateDBInstanceParamTpl)用于创建云数据库MongoDB实例的参数模板
+**说明：CreateDBInstanceParamTpl API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    CreateDBInstanceParamTpl(req: CreateDBInstanceParamTplRequest, cb?: (error: string, rep: CreateDBInstanceParamTplResponse) => void): Promise<CreateDBInstanceParamTplResponse>;
+    /**
+     * 本接口(DropDBInstanceParamTpl )用于删除云数据库MongoDB实例的参数模板
+**说明：DropDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    DropDBInstanceParamTpl(req: DropDBInstanceParamTplRequest, cb?: (error: string, rep: DropDBInstanceParamTplResponse) => void): Promise<DropDBInstanceParamTplResponse>;
     /**
      * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
      */
@@ -157,6 +177,11 @@ export declare class Client extends AbstractClient {
      * 本接口（ModifyInstanceParams）用于修改mongoDB实例的参数配置。
      */
     ModifyInstanceParams(req: ModifyInstanceParamsRequest, cb?: (error: string, rep: ModifyInstanceParamsResponse) => void): Promise<ModifyInstanceParamsResponse>;
+    /**
+     * 本接口(DescribeDBInstanceParamTplDetail )用于查询MongoDB云数据库实例的参数模板详情。
+**说明：DescribeDBInstanceParamTplDetail  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    DescribeDBInstanceParamTplDetail(req: DescribeDBInstanceParamTplDetailRequest, cb?: (error: string, rep: DescribeDBInstanceParamTplDetailResponse) => void): Promise<DescribeDBInstanceParamTplDetailResponse>;
     /**
      * 本接口(KillOps)用于终止MongoDB云数据库实例上执行的特定操作。
      */

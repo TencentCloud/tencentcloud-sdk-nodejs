@@ -354,6 +354,16 @@ export interface ChargeProperties {
     TimeUnit?: string;
 }
 /**
+ * Instance表detail字段
+ */
+export interface InstanceDetail {
+    /**
+     * 告警策略是否可用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableAlarmStrategy?: boolean;
+}
+/**
  * 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息
  */
 export interface ClusterConfigsInfoFromEMR {
@@ -805,6 +815,11 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CoolDownBucket?: string;
+    /**
+     * 实例扩展信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Details?: InstanceDetail;
 }
 /**
  * DescribeInstances返回参数结构体

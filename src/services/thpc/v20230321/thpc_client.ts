@@ -24,6 +24,7 @@ import {
   QueueOverview,
   DescribeClustersRequest,
   SetAutoScalingConfigurationRequest,
+  DetachNodesRequest,
   NodeOverview,
   DescribeNodesRequest,
   DeleteNodesResponse,
@@ -34,8 +35,8 @@ import {
   NodeActivity,
   Placement,
   AddQueueRequest,
-  LoginNodeOverview,
-  CFSOption,
+  InternetAccessible,
+  AttachNodesResponse,
   ClusterActivity,
   CreateClusterResponse,
   RunSecurityServiceEnabled,
@@ -44,11 +45,11 @@ import {
   CreateClusterRequest,
   AddQueueResponse,
   DescribeClusterStorageOptionResponse,
-  DescribeQueuesResponse,
+  CFSOption,
   GooseFSOptionOverview,
   EnhancedService,
   InstanceChargePrepaid,
-  Tag,
+  LoginNodeOverview,
   LoginNode,
   StorageOptionOverview,
   NodeScript,
@@ -58,10 +59,12 @@ import {
   DeleteClusterRequest,
   ComputeNodeOverview,
   SystemDisk,
+  Tag,
   LoginSettings,
   GooseFSOption,
   RunAutomationServiceEnabled,
   DescribeClusterActivitiesRequest,
+  QueueConfig,
   DeleteQueueRequest,
   Filter,
   AddNodesRequest,
@@ -71,14 +74,15 @@ import {
   GooseFSxOption,
   RunMonitorServiceEnabled,
   QueueConfigOverview,
+  DescribeQueuesResponse,
   VirtualPrivateCloud,
   ExpansionNodeConfigOverview,
   ModifyInitNodeScriptsRequest,
   GooseFSxOptionOverview,
-  QueueConfig,
+  DetachNodesResponse,
   DescribeAutoScalingConfigurationRequest,
   StorageOption,
-  InternetAccessible,
+  AttachNodesRequest,
   ComputeNode,
   DeleteNodesRequest,
   DescribeClustersResponse,
@@ -195,16 +199,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(DeleteQueue)用于从指定集群删除队列。
-* 本接口为目前只支持SchedulerType为SLURM的集群。
-
-* 删除队列时，需要保证队列内不存在节点。
-     */
-  async DeleteQueue(
-    req: DeleteQueueRequest,
-    cb?: (error: string, rep: DeleteQueueResponse) => void
-  ): Promise<DeleteQueueResponse> {
-    return this.request("DeleteQueue", req, cb)
+   * 本接口 (AttachNodes) 用于绑定一个或者多个计算节点指定资源到指定集群中。
+   */
+  async AttachNodes(
+    req: AttachNodesRequest,
+    cb?: (error: string, rep: AttachNodesResponse) => void
+  ): Promise<AttachNodesResponse> {
+    return this.request("AttachNodes", req, cb)
   }
 
   /**
@@ -248,6 +249,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+   */
+  async DetachNodes(
+    req: DetachNodesRequest,
+    cb?: (error: string, rep: DetachNodesResponse) => void
+  ): Promise<DetachNodesResponse> {
+    return this.request("DetachNodes", req, cb)
+  }
+
+  /**
    * 本接口（DeleteCluster）用于删除一个指定的集群。
    */
   async DeleteCluster(
@@ -275,5 +286,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQueuesResponse) => void
   ): Promise<DescribeQueuesResponse> {
     return this.request("DescribeQueues", req, cb)
+  }
+
+  /**
+     * 本接口(DeleteQueue)用于从指定集群删除队列。
+* 本接口为目前只支持SchedulerType为SLURM的集群。
+
+* 删除队列时，需要保证队列内不存在节点。
+     */
+  async DeleteQueue(
+    req: DeleteQueueRequest,
+    cb?: (error: string, rep: DeleteQueueResponse) => void
+  ): Promise<DeleteQueueResponse> {
+    return this.request("DeleteQueue", req, cb)
   }
 }

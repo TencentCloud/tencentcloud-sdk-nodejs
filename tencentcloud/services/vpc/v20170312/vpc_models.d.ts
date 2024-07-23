@@ -11377,6 +11377,10 @@ export interface ModifyVpnGatewayAttributeRequest {
      * BGP ASN。ASN取值范围为1- 4294967295，默认值64551，其中139341、45090和58835不可用。
      */
     BgpAsn?: number;
+    /**
+     * 服务端最大连接数个数。
+     */
+    MaxConnection?: number;
 }
 /**
  * CreateNatGateway请求参数结构体
@@ -12763,6 +12767,31 @@ export interface CCN {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteBroadcastPolicyFlag?: boolean;
+    /**
+     * 是否开启等价路由功能。`False` 未开启，`True` 开启。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RouteECMPFlag?: boolean;
+    /**
+     * 是否开启路由重叠功能。`False` 未开启，`True` 开启。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RouteOverlapFlag?: boolean;
+    /**
+     * 是否开启QOS。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TrafficMarkingPolicyFlag?: boolean;
+    /**
+     * 是否开启路由表选择策略。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RouteSelectPolicyFlag?: boolean;
+    /**
+     * 是否开启二层云联网通道。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DirectConnectAccelerateChannelFlag?: boolean;
 }
 /**
  * 网络ACL五元组Entry

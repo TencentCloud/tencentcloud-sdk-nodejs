@@ -845,6 +845,10 @@ export interface NativeNodePoolInfo {
    */
   Replicas?: number
   /**
+   * 就绪 Machine 个数
+   */
+  ReadyReplicas?: number
+  /**
    * 公网带宽设置
 注意：此字段可能返回 null，表示取不到有效值。
    */

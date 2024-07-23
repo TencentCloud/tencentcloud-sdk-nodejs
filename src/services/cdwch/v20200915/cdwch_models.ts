@@ -965,6 +965,11 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouseKeeper?: boolean
+  /**
+   * 实例扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Details?: InstanceDetail
 }
 
 /**
@@ -1763,6 +1768,17 @@ export interface DescribeInstanceRequest {
    * 是否是open api查询
    */
   IsOpenApi?: boolean
+}
+
+/**
+ * Instance表detail字段
+ */
+export interface InstanceDetail {
+  /**
+   * 告警策略是否可用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableAlarmStrategy?: boolean
 }
 
 /**

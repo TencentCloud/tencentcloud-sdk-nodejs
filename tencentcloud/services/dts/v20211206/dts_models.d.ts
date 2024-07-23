@@ -1658,6 +1658,10 @@ export interface StopCompareRequest {
      * 对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
      */
     CompareTaskId: string;
+    /**
+     * 是否强制停止。如果填true，同步任务增量阶段会跳过一致性校验产生的binlog，达到快速恢复任务的效果
+     */
+    ForceStop?: boolean;
 }
 /**
  * 数据同步配置多节点数据库的节点信息。多节点数据库，如tdsqlmysql使用该结构；单节点数据库，如mysql使用Endpoint。

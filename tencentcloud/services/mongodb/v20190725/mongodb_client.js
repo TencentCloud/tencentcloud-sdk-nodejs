@@ -40,6 +40,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceNodeProperty", req, cb);
     }
     /**
+     * 本接口(DescribeDBInstanceParamTpl )用于查询当前账号下所有MongoDB数据库参数模板
+**说明：DescribeDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    async DescribeDBInstanceParamTpl(req, cb) {
+        return this.request("DescribeDBInstanceParamTpl", req, cb);
+    }
+    /**
      * 本接口（DescribeDBInstanceDeal）用于获取MongoDB购买、续费及变配订单详细。
      */
     async DescribeDBInstanceDeal(req, cb) {
@@ -130,10 +137,31 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccountUser", req, cb);
     }
     /**
+     * 本接口(ModifyDBInstanceParamTpl )用于修改MongoDB云数据库实例的参数模板。
+**说明：ModifyDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    async ModifyDBInstanceParamTpl(req, cb) {
+        return this.request("ModifyDBInstanceParamTpl", req, cb);
+    }
+    /**
      * 本接口（CreateDBInstanceHour）用于创建按量计费的MongoDB云数据库实例。
      */
     async CreateDBInstanceHour(req, cb) {
         return this.request("CreateDBInstanceHour", req, cb);
+    }
+    /**
+     * 本接口(CreateDBInstanceParamTpl)用于创建云数据库MongoDB实例的参数模板
+**说明：CreateDBInstanceParamTpl API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    async CreateDBInstanceParamTpl(req, cb) {
+        return this.request("CreateDBInstanceParamTpl", req, cb);
+    }
+    /**
+     * 本接口(DropDBInstanceParamTpl )用于删除云数据库MongoDB实例的参数模板
+**说明：DropDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    async DropDBInstanceParamTpl(req, cb) {
+        return this.request("DropDBInstanceParamTpl", req, cb);
     }
     /**
      * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
@@ -250,6 +278,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstanceParams(req, cb) {
         return this.request("ModifyInstanceParams", req, cb);
+    }
+    /**
+     * 本接口(DescribeDBInstanceParamTplDetail )用于查询MongoDB云数据库实例的参数模板详情。
+**说明：DescribeDBInstanceParamTplDetail  API正在公测中，在此期间，该接口仅对公测用户开放**
+     */
+    async DescribeDBInstanceParamTplDetail(req, cb) {
+        return this.request("DescribeDBInstanceParamTplDetail", req, cb);
     }
     /**
      * 本接口(KillOps)用于终止MongoDB云数据库实例上执行的特定操作。

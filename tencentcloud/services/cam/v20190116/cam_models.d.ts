@@ -1133,6 +1133,11 @@ export interface RoleInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<RoleTags>;
+    /**
+     * 角色RoleArn信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoleArn?: string;
 }
 /**
  * DescribeSafeAuthFlag返回参数结构体

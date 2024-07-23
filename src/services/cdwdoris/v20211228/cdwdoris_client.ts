@@ -32,6 +32,7 @@ import {
   DescribeInstanceNodesRequest,
   ModifyInstanceRequest,
   ChargeProperties,
+  InstanceDetail,
   ClusterConfigsInfoFromEMR,
   InstanceNode,
   CreateInstanceNewResponse,
