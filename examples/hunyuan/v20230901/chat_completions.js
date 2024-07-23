@@ -1,6 +1,4 @@
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
-import { SSEResponseModel } from "../../../tencentcloud/common/sse_response_model"
-import { ChatStdResponse } from "../../../tencentcloud/services/hunyuan/v20230901/hunyuan_models"
+const tencentcloud = require("../../../tencentcloud")
 
 // 导入对应产品模块的client models
 const HunyuanClient = tencentcloud.hunyuan.v20230901.Client
@@ -21,7 +19,8 @@ const client = new HunyuanClient({
 
 // 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
 // 流式调用
-client.ChatStd({
+client.ChatCompletions({
+  Model: 'hunyuan-pro',
   Messages: [{
     Role: 'user',
     Content: '你好, 可以讲个笑话吗'
@@ -43,7 +42,8 @@ client.ChatStd({
 )
 
 // 非流式调用
-client.ChatStd({
+client.ChatCompletions({
+  Model: 'hunyuan-pro',
   Messages: [{
     Role: 'user',
     Content: '你好, 可以讲个笑话吗'
