@@ -113,6 +113,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceModifyDBInstanceSpec", req, cb);
     }
     /**
+     * 本接口用于重启数据库节点。
+     */
+    async RestartNodes(req, cb) {
+        return this.request("RestartNodes", req, cb);
+    }
+    /**
      * 本接口（DescribeBackupRules）用于获取实例自动备份配置信息。
      */
     async DescribeBackupRules(req, cb) {

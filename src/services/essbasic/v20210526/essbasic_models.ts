@@ -7591,7 +7591,7 @@ export interface CreateFlowsByTemplatesRequest {
  */
 export interface DescribeBatchOrganizationRegistrationUrlsResponse {
   /**
-   * 子企业注册认证的的链接列表
+   * 子企业注册认证的链接列表
    */
   OrganizationAuthUrls?: Array<OrganizationAuthUrl>
   /**

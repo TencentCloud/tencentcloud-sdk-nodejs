@@ -1960,10 +1960,7 @@ export interface ModifySpartaProtectionRequest {
      */
     InstanceID: string;
     /**
-     * 必填项。证书类型。
-  0：仅配置HTTP监听端口，没有证书
-  1：证书来源为自有证书
-  2：证书来源为托管证书
+     * 证书类型。0：仅配置HTTP监听端口，没有证书1：证书来源为自有证书2：证书来源为托管证书
      */
     CertType?: number;
     /**
@@ -1979,11 +1976,7 @@ export interface ModifySpartaProtectionRequest {
      */
     SSLId?: string;
     /**
-     * 必填项。waf前是否部署有七层代理服务。
-  0：没有部署代理服务
-  1：有部署代理服务，waf将使用XFF获取客户端IP
-  2：有部署代理服务，waf将使用remote_addr获取客户端IP
-  3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
+     * waf前是否部署有七层代理服务。0：没有部署代理服务1：有部署代理服务，waf将使用XFF获取客户端IP2：有部署代理服务，waf将使用remote_addr获取客户端IP3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
      */
     IsCdn?: number;
     /**
@@ -1997,15 +1990,11 @@ export interface ModifySpartaProtectionRequest {
      */
     HttpsUpstreamPort?: string;
     /**
-     * 必填项。是否开启HTTP强制跳转到HTTPS。
-  0：不强制跳转
-  1：开启强制跳转
+     * 是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转
      */
     HttpsRewrite?: number;
     /**
-     * 必填项。回源类型。
-  0：通过IP回源
-  1：通过域名回源
+     * 回源类型。0：通过IP回源1：通过域名回源
      */
     UpstreamType?: number;
     /**
@@ -2017,22 +2006,15 @@ export interface ModifySpartaProtectionRequest {
      */
     SrcList?: Array<string>;
     /**
-     * 必填项。是否开启HTTP2，需要开启HTTPS协议支持。
-  0：关闭
-  1：开启
+     * 是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启
      */
     IsHttp2?: number;
     /**
-     * 必填项。是否开启WebSocket支持。
-  0：关闭
-  1：开启
+     * 是否开启WebSocket支持。0：关闭1：开启
      */
     IsWebsocket?: number;
     /**
-     * 必填项。回源负载均衡策略。
-  0：轮询
-  1：IP hash
-  2：加权轮询
+     * 回源负载均衡策略。0：轮询1：IP hash2：加权轮询
      */
     LoadBalance?: number;
     /**
@@ -2044,17 +2026,15 @@ export interface ModifySpartaProtectionRequest {
      */
     Edition?: string;
     /**
-     * 必填项。端口信息，可通过DescribeDomains接口获取具体参数信息。
+     * 端口信息，可通过DescribeDomains接口获取具体参数信息。
      */
     Ports?: Array<SpartaProtectionPort>;
     /**
-     * 必填项。是否开启长连接。
-  0： 短连接
-  1： 长连接
+     * 是否开启长连接。0： 短连接1： 长连接
      */
     IsKeepAlive?: string;
     /**
-     * 必填项，待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+     * 待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
      */
     Anycast?: number;
     /**
@@ -2062,9 +2042,7 @@ export interface ModifySpartaProtectionRequest {
      */
     Weights?: Array<number | bigint>;
     /**
-     * 必填项，是否开启主动健康检测。
-  0：不开启
-  1：开启
+     * 是否开启主动健康检测。0：不开启1：开启
      */
     ActiveCheck?: number;
     /**
@@ -2076,11 +2054,7 @@ export interface ModifySpartaProtectionRequest {
      */
     Ciphers?: Array<number | bigint>;
     /**
-     * 必填项。加密套件模板。
-  0：不支持选择，使用默认模板
-  1：通用型模板
-  2：安全型模板
-  3：自定义模板
+     * 加密套件模板。0：不支持选择，使用默认模板  1：通用型模板 2：安全型模板3：自定义模板
      */
     CipherTemplate?: number;
     /**
@@ -2108,9 +2082,7 @@ export interface ModifySpartaProtectionRequest {
      */
     IpHeaders?: Array<string>;
     /**
-     * 必填项。是否开启XFF重置。
-  0：关闭
-  1：开启
+     * 是否开启XFF重置。0：关闭1：开启
      */
     XFFReset?: number;
     /**

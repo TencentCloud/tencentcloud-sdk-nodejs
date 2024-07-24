@@ -3215,7 +3215,7 @@ export interface NetworkAclEntry {
      */
     Protocol?: string;
     /**
-     * 端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。
+     * 端口(all, 单个port,  range)。当Protocol为ALL或ICMP时，不能指定Port。使用-指定端口范围，如：10-20。
      */
     Port?: string;
     /**

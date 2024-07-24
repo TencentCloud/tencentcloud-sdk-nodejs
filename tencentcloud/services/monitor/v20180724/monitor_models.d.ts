@@ -1745,24 +1745,19 @@ export interface UnBindingPolicyObjectResponse {
  */
 export interface DescribePrometheusRecordRulesRequest {
     /**
-     * 实例ID
-  
-  示例值：prom-343kafd34
+     * Prometheus 实例 ID
      */
     InstanceId: string;
     /**
-     * 偏移量，默认为0。 示例值：1
+     * 偏移量，默认为0。
      */
     Offset?: number;
     /**
      * 返回数量，默认为20，最大值为100。
-  示例值：1
      */
     Limit?: number;
     /**
-     * 仅支持按Name, Values字段过滤:
-  - Name = Name
-    按照给定的预聚合名称列表匹配
+     * 仅支持按Name, Values字段过滤。
      */
     Filters?: Array<Filter>;
 }

@@ -6124,6 +6124,11 @@ export interface DescribeLogsResponse {
      */
     ReturnMsg?: string;
     /**
+     * 七层协议，NTA日志有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppProtocolList?: Array<string>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7155,6 +7160,14 @@ export interface DescribeAddressTemplateListResponse {
      * 协议端口模板数量
      */
     PortTemplateCount?: number;
+    /**
+     * 已使用的地址模版数
+     */
+    UsedTemplateCount?: number;
+    /**
+     * 地址模版配额数量
+     */
+    TemplateQuotaCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

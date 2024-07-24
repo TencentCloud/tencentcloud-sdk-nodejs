@@ -1133,6 +1133,10 @@ export interface PermitOCRResponse {
      */
     Birthday?: string;
     /**
+     * 头像照片的base64
+     */
+    PortraitImage?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -3748,6 +3752,10 @@ export interface PermitOCRRequest {
   非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
+    /**
+     * 是否返回头像照片，默认为 false
+     */
+    CropPortrait?: boolean;
 }
 /**
  * 混贴票据中单张发票的内容

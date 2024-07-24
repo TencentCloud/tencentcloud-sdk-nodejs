@@ -820,11 +820,11 @@ export interface StaffStatusMetrics {
  */
 export interface DescribeTelCdrRequest {
     /**
-     * 起始时间戳，Unix 秒级时间戳
+     * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
      */
     StartTimeStamp: number;
     /**
-     * 结束时间戳，Unix 秒级时间戳
+     * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
      */
     EndTimeStamp: number;
     /**
@@ -2482,7 +2482,7 @@ export interface DeleteStaffRequest {
      */
     SdkAppId: number;
     /**
-     * 待删除客服邮箱列表
+     * 待删除客服邮箱列表，一次最大支持200个。
      */
     StaffList: Array<string>;
 }

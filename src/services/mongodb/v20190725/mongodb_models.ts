@@ -174,6 +174,10 @@ export interface CreateDBInstanceRequest {
    * Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。
    */
   HiddenZone?: string
+  /**
+   * 参数模板 ID。参数模板是一组 MongoDB 的参数并为预设置了参数值的集合，将一组有相同诉求的参数及值 存为模板，在创建实例时，可直接引用参数值到新实例。合理使用参数模板，可以提高MongoDB数据库的效率。模板列表从 DescribeDBInstanceParamTpl 接口获取，注意模板支持的版本及实例类型。
+   */
+  ParamTemplateId?: string
 }
 
 /**
@@ -2600,6 +2604,10 @@ export interface CreateDBInstanceHourRequest {
    * Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。
    */
   HiddenZone?: string
+  /**
+   * 参数模板 ID。参数模板是一组 MongoDB 的参数并为预设置了参数值的集合，将一组有相同诉求的参数及值 存为模板，在创建实例时，可直接引用参数值到新实例。合理使用参数模板，可以提高MongoDB数据库的效率。模板列表从 DescribeDBInstanceParamTpl 接口获取，注意模板支持的版本。
+   */
+  ParamTemplateId?: string
 }
 
 /**
@@ -3075,6 +3083,20 @@ export interface RemoveNodeList {
 }
 
 /**
+ * RestartNodes请求参数结构体
+ */
+export interface RestartNodesRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+  /**
+   * 节点Id。
+   */
+  NodeIds: Array<string>
+}
+
+/**
  * SetInstanceMaintenance请求参数结构体
  */
 export interface SetInstanceMaintenanceRequest {
@@ -3093,6 +3115,20 @@ export interface SetInstanceMaintenanceRequest {
 - 结束时间务必是基于开始时间向后的时间。
    */
   MaintenanceEnd: string
+}
+
+/**
+ * RestartNodes返回参数结构体
+ */
+export interface RestartNodesResponse {
+  /**
+   * 流程Id。
+   */
+  FlowId: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

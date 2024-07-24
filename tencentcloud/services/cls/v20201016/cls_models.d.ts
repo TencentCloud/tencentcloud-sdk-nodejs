@@ -587,7 +587,8 @@ export interface UploadLogRequest {
      */
     TopicId: string;
     /**
-     * 根据 hashkey 写入相应范围的主题分区
+     * 该参数已废弃，请勿使用
+     * @deprecated
      */
     HashKey?: string;
     /**

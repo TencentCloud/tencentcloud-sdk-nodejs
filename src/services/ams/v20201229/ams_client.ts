@@ -113,7 +113,6 @@ export class Client extends AbstractClient {
 - 接口仅限音频文件传入，视频文件传入请调用长音频异步接口；
 - 接口**默认QPS为20**，如需自定义配置并发或请求频率，请工单咨询；
 - 接口**默认超时为10s**，请求如超过该时长则接口会报错。
-
      */
   async CreateAudioModerationSyncTask(
     req: CreateAudioModerationSyncTaskRequest,

@@ -158,6 +158,16 @@ it("mongodb.v20190725.InquirePriceModifyDBInstanceSpec", async function () {
     }
 })
 
+it("mongodb.v20190725.RestartNodes", async function () {
+    try {
+       const data = await client.RestartNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeBackupRules", async function () {
     try {
        const data = await client.DescribeBackupRules({})

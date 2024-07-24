@@ -3192,19 +3192,19 @@ export interface DescribeCloudRecordingResponse {
   /**
    * 录制任务的唯一Id。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 云端录制任务的状态信息。
 Idle：表示当前录制任务空闲中
 InProgress：表示当前录制任务正在进行中。
 Exited：表示当前录制任务正在退出的过程中。
    */
-  Status: string
+  Status?: string
   /**
    * 录制文件信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageFileList: Array<StorageFile>
+  StorageFileList?: Array<StorageFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

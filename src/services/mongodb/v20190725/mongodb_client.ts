@@ -145,7 +145,9 @@ import {
   DescribeDBInstanceParamTplResponse,
   DescribeTransparentDataEncryptionStatusRequest,
   RemoveNodeList,
+  RestartNodesRequest,
   SetInstanceMaintenanceRequest,
+  RestartNodesResponse,
   DescribeDBInstanceParamTplDetailRequest,
   InstanceDetail,
   ModifyDBInstanceSpecResponse,
@@ -301,6 +303,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceModifyDBInstanceSpecResponse) => void
   ): Promise<InquirePriceModifyDBInstanceSpecResponse> {
     return this.request("InquirePriceModifyDBInstanceSpec", req, cb)
+  }
+
+  /**
+   * 本接口用于重启数据库节点。
+   */
+  async RestartNodes(
+    req: RestartNodesRequest,
+    cb?: (error: string, rep: RestartNodesResponse) => void
+  ): Promise<RestartNodesResponse> {
+    return this.request("RestartNodes", req, cb)
   }
 
   /**
