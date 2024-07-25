@@ -771,7 +771,7 @@ export interface CreateEmbedTokenRequest {
    */
   PageId?: number
   /**
-   * page表示嵌出页面，panel表嵌出整个看板
+   * page表示嵌出页面，panel表示嵌出整个看板
    */
   Scope?: string
   /**

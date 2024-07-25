@@ -828,9 +828,9 @@ it("tke.v20180525.DescribeRegions", async function () {
     }
 })
 
-it("tke.v20180525.SyncPrometheusTemplate", async function () {
+it("tke.v20180525.DescribeReservedInstanceUtilizationRate", async function () {
     try {
-       const data = await client.SyncPrometheusTemplate({})
+       const data = await client.DescribeReservedInstanceUtilizationRate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1811,6 +1811,16 @@ it("tke.v20180525.DeleteClusterEndpoint", async function () {
 it("tke.v20180525.CreateClusterRelease", async function () {
     try {
        const data = await client.CreateClusterRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.SyncPrometheusTemplate", async function () {
+    try {
+       const data = await client.SyncPrometheusTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

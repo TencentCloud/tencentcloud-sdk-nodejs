@@ -366,13 +366,25 @@ export interface StaticInfo {
 }
 
 /**
- * SyncFwOperate返回参数结构体
+ * ModifySequenceRules请求参数结构体
  */
-export interface SyncFwOperateResponse {
+export interface ModifySequenceRulesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 边Id值
    */
-  RequestId?: string
+  EdgeId?: string
+  /**
+   * 修改数据
+   */
+  Data?: Array<SequenceData>
+  /**
+   * NAT地域
+   */
+  Area?: string
+  /**
+   * 方向，0：出向，1：入向
+   */
+  Direction?: number
 }
 
 /**
@@ -1115,6 +1127,44 @@ export interface ModifyNatInstanceRequest {
 }
 
 /**
+ * DescribeNatFwDnatRule请求参数结构体
+ */
+export interface DescribeNatFwDnatRuleRequest {
+  /**
+   * 需要查询的索引，特定场景使用，可不填
+   */
+  Index?: string
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * 检索的起始时间，可不传
+   */
+  StartTime?: string
+  /**
+   * 检索的截止时间，可不传
+   */
+  EndTime?: string
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
+}
+
+/**
  * DescribeAssociatedInstanceList返回参数结构体
  */
 export interface DescribeAssociatedInstanceListResponse {
@@ -1611,25 +1661,13 @@ export interface DeleteIdsWhiteRuleRequest {
 }
 
 /**
- * ModifySequenceRules请求参数结构体
+ * ModifyNatFwSwitch返回参数结构体
  */
-export interface ModifySequenceRulesRequest {
+export interface ModifyNatFwSwitchResponse {
   /**
-   * 边Id值
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EdgeId?: string
-  /**
-   * 修改数据
-   */
-  Data?: Array<SequenceData>
-  /**
-   * NAT地域
-   */
-  Area?: string
-  /**
-   * 方向，0：出向，1：入向
-   */
-  Direction?: number
+  RequestId?: string
 }
 
 /**
@@ -1810,6 +1848,16 @@ export interface VpcFwGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrossUserMode?: string
+  /**
+   * 云联网模式下，当前实例是否需要开启重叠路由开关，1：需要开启，0：不需要开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedSwitchCcnOverlap?: number
+  /**
+   * 云联网模式下，实例关联的云联网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CcnId?: string
 }
 
 /**
@@ -2084,6 +2132,62 @@ export interface DescribeVpcAcRuleRequest {
    * 排序所用到的字段
    */
   By?: string
+}
+
+/**
+ * NAT防火墙Dnat规则列表
+ */
+export interface DescNatDnatRule {
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 网络协议，可选值：TCP、UDP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpProtocol?: string
+  /**
+   * 弹性IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIpAddress?: string
+  /**
+   * 公网端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicPort?: number
+  /**
+   * 内网地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateIpAddress?: string
+  /**
+   * 内网端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivatePort?: number
+  /**
+   * NAT防火墙转发规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 是否被关联引用，如被远程运维使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsReferenced?: number
+  /**
+   * 所属防火墙实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwInsId?: string
+  /**
+   * 关联的nat网关Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatGwId?: string
 }
 
 /**
@@ -3222,6 +3326,16 @@ export interface DescribeNatFwInfoCountResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenSwitchCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SyncFwOperate返回参数结构体
+ */
+export interface SyncFwOperateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4825,9 +4939,18 @@ export interface DescribeIPStatusListRequest {
 }
 
 /**
- * ModifyNatFwSwitch返回参数结构体
+ * DescribeNatFwDnatRule返回参数结构体
  */
-export interface ModifyNatFwSwitchResponse {
+export interface DescribeNatFwDnatRuleResponse {
+  /**
+   * Dnat规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<DescNatDnatRule>
+  /**
+   * 列表总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

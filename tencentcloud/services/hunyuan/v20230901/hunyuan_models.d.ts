@@ -90,6 +90,23 @@ export interface ChatCompletionsRequest {
     SearchInfo?: boolean;
 }
 /**
+ * logo参数
+ */
+export interface LogoParam {
+    /**
+     * 水印url
+     */
+    LogoUrl?: string;
+    /**
+     * 水印base64，url和base64二选一传入
+     */
+    LogoImage?: string;
+    /**
+     * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+     */
+    LogoRect?: LogoRect;
+}
+/**
  * GetEmbedding请求参数结构体
  */
 export interface GetEmbeddingRequest {
@@ -126,7 +143,7 @@ export interface Content {
     Text?: string;
     /**
      * 图片的url，当 Type 为 image_url 时使用，表示具体的图片内容
-  如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64" 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"
+  如"https://example.com/1.png" 或 图片的base64（注意 "data:image/jpeg;base64," 为必要部分）："data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA......"
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: ImageUrl;
@@ -153,6 +170,24 @@ export interface SubmitHunyuanImageJobRequest {
      */
     Resolution?: string;
     /**
+     * 图片生成数量。
+  支持1 ~ 4张，默认生成1张。
+     */
+    Num?: number;
+    /**
+     * 随机种子，默认随机。
+  不传：随机种子生成。
+  正数：固定种子生成。
+     */
+    Seed?: number;
+    /**
+     * prompt 扩写开关。1为开启，0为关闭，不传默认开启。
+  开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。
+  如果关闭扩写，将直接使用原始输入的 prompt 生成图片。
+  建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。
+     */
+    Revise?: number;
+    /**
      * 为生成结果图添加显式水印标识的开关，默认为1。
   1：添加。
   0：不添加。
@@ -161,12 +196,10 @@ export interface SubmitHunyuanImageJobRequest {
      */
     LogoAdd?: number;
     /**
-     * prompt 扩写开关。1为开启，0为关闭，不传默认开启。
-  开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。
-  如果关闭扩写，将直接使用原始输入的 prompt 生成图片。
-  建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。
+     * 标识内容设置。
+  默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
      */
-    Revise?: number;
+    LogoParam?: LogoParam;
 }
 /**
  * Token 数量
@@ -306,19 +339,25 @@ export interface ToolFunction {
     Description?: string;
 }
 /**
- * TextToImageLite返回参数结构体
+ * 返回的内容（流式返回）
  */
-export interface TextToImageLiteResponse {
+export interface Delta {
     /**
-     * 根据入参 RspImgType 填入不同，返回不同的内容。
-  如果传入 base64 则返回生成图 Base64 编码。
-  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+     * 角色名称。
      */
-    ResultImage?: string;
+    Role?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 内容详情。
      */
-    RequestId?: string;
+    Content?: string;
+    /**
+     * 模型生成的工具调用，仅 hunyuan-functioncall 模型支持
+  说明：
+  对于每一次的输出值应该以Id为标识对Type、Name、Arguments字段进行合并。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ToolCalls?: Array<ToolCall>;
 }
 /**
  * 模型生成的工具调用
@@ -351,25 +390,25 @@ export interface ToolCallFunction {
     Arguments: string;
 }
 /**
- * 返回的内容（流式返回）
+ * 输入框
  */
-export interface Delta {
+export interface LogoRect {
     /**
-     * 角色名称。
+     * 左上角X坐标
      */
-    Role?: string;
+    X?: number;
     /**
-     * 内容详情。
+     * 左上角Y坐标
      */
-    Content?: string;
+    Y?: number;
     /**
-     * 模型生成的工具调用，仅 hunyuan-functioncall 模型支持
-  说明：
-  对于每一次的输出值应该以Id为标识对Type、Name、Arguments字段进行合并。
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 方框宽度
      */
-    ToolCalls?: Array<ToolCall>;
+    Width?: number;
+    /**
+     * 方框高度
+     */
+    Height?: number;
 }
 /**
  * TextToImageLite请求参数结构体
@@ -405,6 +444,11 @@ export interface TextToImageLiteRequest {
   建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
      */
     LogoAdd?: number;
+    /**
+     * 标识内容设置。
+  默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+     */
+    LogoParam?: LogoParam;
     /**
      * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
      */
@@ -517,6 +561,21 @@ export interface GetTokenCountRequest {
      * 输入文本
      */
     Prompt: string;
+}
+/**
+ * TextToImageLite返回参数结构体
+ */
+export interface TextToImageLiteResponse {
+    /**
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+     */
+    ResultImage?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 会话内容

@@ -41,6 +41,9 @@ import {
   PodNewSpec,
   EmrProductConfigDetail,
   DayRepeatStrategy,
+  DescribeTrinoQueryInfoResponse,
+  PriceResult,
+  TrinoQueryInfo,
   WeekRepeatStrategy,
   UserManagerFilter,
   DynamicPodSpec,
@@ -179,7 +182,6 @@ import {
   MultiZoneSetting,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
-  TriggerConditions,
   DescribeEmrOverviewMetricsRequest,
   PodState,
   ScaleOutClusterResponse,
@@ -209,6 +211,7 @@ import {
   ResourceDetail,
   SceneSoftwareConfig,
   ShortNodeInfo,
+  DescribeTrinoQueryInfoRequest,
   EmrPrice,
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
@@ -629,6 +632,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterNodesResponse) => void
   ): Promise<DescribeClusterNodesResponse> {
     return this.request("DescribeClusterNodes", req, cb)
+  }
+
+  /**
+   * 获取trino查询结果
+   */
+  async DescribeTrinoQueryInfo(
+    req: DescribeTrinoQueryInfoRequest,
+    cb?: (error: string, rep: DescribeTrinoQueryInfoResponse) => void
+  ): Promise<DescribeTrinoQueryInfoResponse> {
+    return this.request("DescribeTrinoQueryInfo", req, cb)
   }
 
   /**

@@ -278,6 +278,16 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNatFwDnatRule", async function () {
+    try {
+       const data = await client.DescribeNatFwDnatRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeEnterpriseSGRuleProgress", async function () {
     try {
        const data = await client.DescribeEnterpriseSGRuleProgress({})

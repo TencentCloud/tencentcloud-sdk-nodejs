@@ -514,10 +514,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 同步模板到实例或者集群
+     * 查询各种规格类型的预留券使用率
      */
-    async SyncPrometheusTemplate(req, cb) {
-        return this.request("SyncPrometheusTemplate", req, cb);
+    async DescribeReservedInstanceUtilizationRate(req, cb) {
+        return this.request("DescribeReservedInstanceUtilizationRate", req, cb);
     }
     /**
      * 添加已经存在的实例到集群
@@ -1108,6 +1108,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterRelease(req, cb) {
         return this.request("CreateClusterRelease", req, cb);
+    }
+    /**
+     * 同步模板到实例或者集群
+     */
+    async SyncPrometheusTemplate(req, cb) {
+        return this.request("SyncPrometheusTemplate", req, cb);
     }
     /**
      * 查看超级节点池列表

@@ -190,6 +190,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeBlockByIpTimesList", req, cb);
     }
     /**
+     * 查询Nat防火墙Dnat规则
+     */
+    async DescribeNatFwDnatRule(req, cb) {
+        return this.request("DescribeNatFwDnatRule", req, cb);
+    }
+    /**
      * 查询新版安全组下发进度
      */
     async DescribeEnterpriseSGRuleProgress(req, cb) {

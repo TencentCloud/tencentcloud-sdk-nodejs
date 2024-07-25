@@ -848,6 +848,139 @@ export interface DayRepeatStrategy {
     Step: number;
 }
 /**
+ * DescribeTrinoQueryInfo返回参数结构体
+ */
+export interface DescribeTrinoQueryInfoResponse {
+    /**
+     * 总数，分页查询时使用
+     */
+    TotalCount?: number;
+    /**
+     * 查询结果数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueryInfoList?: Array<TrinoQueryInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 询价结果
+ */
+export interface PriceResult {
+    /**
+     * 原价
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginalCost?: number;
+    /**
+     * 折扣价
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountCost?: number;
+}
+/**
+ * trino 查询信息
+ */
+export interface TrinoQueryInfo {
+    /**
+     * catalog
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Catalog?: string;
+    /**
+     * 提交IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientIpAddr?: string;
+    /**
+     * 切片数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompletedSplits?: string;
+    /**
+     * CPU时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CpuTime?: number;
+    /**
+     * 累计内存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CumulativeMemory?: number;
+    /**
+     * 执行时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DurationMillis?: number;
+    /**
+     * 结束时间 (s)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: number;
+    /**
+     * 查询ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 内部传输量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternalNetworkBytes?: number;
+    /**
+     * 输出字节数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputBytes?: number;
+    /**
+     * 峰值内存量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeakUserMemoryBytes?: number;
+    /**
+     * 物理输入量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PhysicalInputBytes?: number;
+    /**
+     * 处理输入量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessedInputBytes?: number;
+    /**
+     * 编译时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SqlCompileTime?: number;
+    /**
+     * 开始时间 (s)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: number;
+    /**
+     * 执行状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State?: string;
+    /**
+     * 执行语句
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Statement?: string;
+    /**
+     * 提交用户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    User?: string;
+    /**
+     * 写入字节数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WrittenBytes?: number;
+}
+/**
  * 定时扩容每周重复任务策略
  */
 export interface WeekRepeatStrategy {
@@ -971,34 +1104,10 @@ export interface LoadAutoScaleStrategy {
      */
     ScaleNum?: number;
     /**
-     * 扩缩容负载指标。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LoadMetrics?: string;
-    /**
-     * 规则元数据记录ID。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MetricId?: number;
-    /**
-     * 规则统计周期，提供300s,600s,900s。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StatisticPeriod?: number;
-    /**
      * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProcessMethod?: number;
-    /**
-     * 触发次数，当连续触发超过TriggerThreshold次后才开始扩缩容。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。
-     */
-    TriggerThreshold?: number;
-    /**
-     * 条件触发数组。注:不推荐使用此属性，和LoadMetricsConditions属性配置互斥，配置了LoadMetricsConditions，这个属性不生效。请优先使用LoadMetricsConditions属性支持多指标。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TriggerConditions?: TriggerConditions;
     /**
      * 规则优先级，添加时无效，默认为自增。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3154,40 +3263,40 @@ export interface RenewInstancesInfo {
     /**
      * 节点资源ID
      */
-    EmrResourceId: string;
+    EmrResourceId?: string;
     /**
      * 节点类型。0:common节点；1:master节点
   ；2:core节点；3:task节点
      */
-    Flag: number;
+    Flag?: number;
     /**
      * 内网IP
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 节点内存描述
      */
-    MemDesc: string;
+    MemDesc?: string;
     /**
      * 节点核数
      */
-    CpuNum: number;
+    CpuNum?: number;
     /**
      * 硬盘大小
      */
-    DiskSize: string;
+    DiskSize?: string;
     /**
      * 过期时间
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 节点规格
      */
-    Spec: string;
+    Spec?: string;
     /**
      * 磁盘类型
      */
-    StorageType: number;
+    StorageType?: number;
 }
 /**
  * DescribeInsightList请求参数结构体
@@ -3573,29 +3682,34 @@ export interface InquiryPriceUpdateInstanceResponse {
      * 原价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCost: number;
+    OriginalCost?: number;
     /**
      * 折扣价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiscountCost: number;
+    DiscountCost?: number;
     /**
      * 变配的时间单位。取值范围：
   <li>s：表示秒。</li>
   <li>m：表示月份。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeUnit: string;
+    TimeUnit?: string;
     /**
      * 变配的时长。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeSpan: number;
+    TimeSpan?: number;
     /**
      * 价格详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PriceDetail: Array<PriceDetail>;
+    PriceDetail?: Array<PriceDetail>;
+    /**
+     * 新配置价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewConfigPrice?: PriceResult;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4838,19 +4952,19 @@ export interface InquiryPriceUpdateInstanceRequest {
      */
     TimeSpan: number;
     /**
-     * 节点变配的目标配置。
-     */
-    UpdateSpec: UpdateInstanceSettings;
-    /**
      * 实例计费模式。取值范围：
   <li>0：表示按量计费。</li>
   <li>1：表示包年包月。</li>
      */
     PayMode: number;
     /**
+     * 节点变配的目标配置。
+     */
+    UpdateSpec?: UpdateInstanceSettings;
+    /**
      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
      */
-    Placement: Placement;
+    Placement?: Placement;
     /**
      * 货币种类。取值范围：
   <li>CNY：表示人民币。</li>
@@ -5189,10 +5303,6 @@ export interface InquiryPriceRenewInstanceRequest {
      */
     ResourceIds: Array<string>;
     /**
-     * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
-     */
-    Placement: Placement;
-    /**
      * 实例计费模式。此处只支持取值为1，表示包年包月。
      */
     PayMode: number;
@@ -5206,6 +5316,10 @@ export interface InquiryPriceRenewInstanceRequest {
   <li>CNY：表示人民币。</li>
      */
     Currency?: string;
+    /**
+     * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+     */
+    Placement?: Placement;
     /**
      * 是否按量转包年包月。0：否，1：是。
      */
@@ -5606,16 +5720,6 @@ export interface UserInfoForUserManager {
      * 备注
      */
     ReMark?: string;
-}
-/**
- * 规则触发条件数组
- */
-export interface TriggerConditions {
-    /**
-     * 规则触发条件数组。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Conditions?: Array<TriggerCondition>;
 }
 /**
  * DescribeEmrOverviewMetrics请求参数结构体
@@ -6522,6 +6626,31 @@ export interface ShortNodeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeSize?: number;
+}
+/**
+ * DescribeTrinoQueryInfo请求参数结构体
+ */
+export interface DescribeTrinoQueryInfoRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 获取查询信息开始时间 (s)
+     */
+    StartTime: number;
+    /**
+     * 获取查询信息结束时间 (s)
+     */
+    EndTime: number;
+    /**
+     * 分页查询时的分页大小，最小1，最大100
+     */
+    PageSize: number;
+    /**
+     * 分页查询时的页号，从1开始
+     */
+    Page: number;
 }
 /**
  * Emr询价描述

@@ -230,6 +230,7 @@ import {
   UninstallClusterReleaseResponse,
   ClusterCIDRSettings,
   Taint,
+  ReservedInstanceUtilizationRate,
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
   OIDCConfigAuthenticationOptions,
@@ -320,7 +321,9 @@ import {
   DescribeClusterSecurityResponse,
   RouteInfo,
   ModifyNodePoolDesiredCapacityAboutAsgResponse,
+  DescribeReservedInstanceUtilizationRateRequest,
   CreateClusterRouteRequest,
+  DescribeReservedInstanceUtilizationRateResponse,
   ModifyClusterEndpointSPRequest,
   DescribePrometheusConfigResponse,
   DeleteClusterEndpointResponse,
@@ -1454,13 +1457,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步模板到实例或者集群
+   * 查询各种规格类型的预留券使用率
    */
-  async SyncPrometheusTemplate(
-    req: SyncPrometheusTemplateRequest,
-    cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
-  ): Promise<SyncPrometheusTemplateResponse> {
-    return this.request("SyncPrometheusTemplate", req, cb)
+  async DescribeReservedInstanceUtilizationRate(
+    req: DescribeReservedInstanceUtilizationRateRequest,
+    cb?: (error: string, rep: DescribeReservedInstanceUtilizationRateResponse) => void
+  ): Promise<DescribeReservedInstanceUtilizationRateResponse> {
+    return this.request("DescribeReservedInstanceUtilizationRate", req, cb)
   }
 
   /**
@@ -2443,6 +2446,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterReleaseResponse) => void
   ): Promise<CreateClusterReleaseResponse> {
     return this.request("CreateClusterRelease", req, cb)
+  }
+
+  /**
+   * 同步模板到实例或者集群
+   */
+  async SyncPrometheusTemplate(
+    req: SyncPrometheusTemplateRequest,
+    cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
+  ): Promise<SyncPrometheusTemplateResponse> {
+    return this.request("SyncPrometheusTemplate", req, cb)
   }
 
   /**

@@ -270,6 +270,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodes", req, cb);
     }
     /**
+     * 获取trino查询结果
+     */
+    async DescribeTrinoQueryInfo(req, cb) {
+        return this.request("DescribeTrinoQueryInfo", req, cb);
+    }
+    /**
      * 查询集群列表
      */
     async DescribeInstancesList(req, cb) {

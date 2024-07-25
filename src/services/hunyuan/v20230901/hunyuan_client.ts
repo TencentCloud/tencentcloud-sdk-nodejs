@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ChatCompletionsRequest,
+  LogoParam,
   GetEmbeddingRequest,
   ImageUrl,
   Content,
@@ -31,10 +32,10 @@ import {
   GetTokenCountResponse,
   EmbeddingData,
   ToolFunction,
-  TextToImageLiteResponse,
+  Delta,
   ToolCall,
   ToolCallFunction,
-  Delta,
+  LogoRect,
   TextToImageLiteRequest,
   SubmitHunyuanImageJobResponse,
   QueryHunyuanImageJobResponse,
@@ -42,6 +43,7 @@ import {
   ErrorMsg,
   SearchInfo,
   GetTokenCountRequest,
+  TextToImageLiteResponse,
   Message,
   ChatCompletionsResponse,
   EmbeddingUsage,

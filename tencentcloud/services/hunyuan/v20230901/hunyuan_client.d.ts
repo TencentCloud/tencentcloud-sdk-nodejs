@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChatCompletionsRequest, GetEmbeddingRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, TextToImageLiteResponse, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, ChatCompletionsResponse } from "./hunyuan_models";
+import { ChatCompletionsRequest, GetEmbeddingRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, TextToImageLiteResponse, ChatCompletionsResponse } from "./hunyuan_models";
 /**
  * hunyuan client
  * @class

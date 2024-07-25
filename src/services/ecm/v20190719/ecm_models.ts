@@ -5140,6 +5140,14 @@ export interface ModifyVpcAttributeRequest {
    * 私有网络描述
    */
   Description?: string
+  /**
+   * DNS地址，最多支持4个，第1个默认为主，其余为备。
+   */
+  DnsServers?: Array<string>
+  /**
+   * 域名。
+   */
+  DomainName?: string
 }
 
 /**

@@ -255,12 +255,12 @@ export interface DescribeTaskDetailResponse {
    */
   TryInSeconds?: number
   /**
-   * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
+   * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageSegments?: Array<ImageSegments>
   /**
-   * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
+   * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioSegments?: Array<AudioSegments>
@@ -546,8 +546,7 @@ export interface InputInfo {
  */
 export interface CreateVideoModerationTaskRequest {
   /**
-   * 该字段表示策略的具体编号，用于接口调度，在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。
-备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
+   * 该字段表示特定审核策略的编号，用于接口调度。需要提前在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中创建策略后获取该Biztype字段，传入该字段，会根据业务场景在审核时调用相应的审核策略。 备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
    */
   BizType: string
   /**
@@ -782,68 +781,68 @@ export interface AudioResult {
    * 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HitFlag: number
+  HitFlag?: number
   /**
    * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
 返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text: string
+  Text?: string
   /**
-   * 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+   * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 该字段用于返回音频文件的时长，单位为毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Duration: string
+  Duration?: string
   /**
    * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
   /**
    * 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TextResults: Array<AudioResultDetailTextResult>
+  TextResults?: Array<AudioResultDetailTextResult>
   /**
    * 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MoanResults: Array<AudioResultDetailMoanResult>
+  MoanResults?: Array<AudioResultDetailMoanResult>
   /**
    * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LanguageResults: Array<AudioResultDetailLanguageResult>
+  LanguageResults?: Array<AudioResultDetailLanguageResult>
   /**
    * 该字段用于返回当前标签（Lable）下的二级标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 识别类标签结果信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecognitionResults: Array<RecognitionResult>
+  RecognitionResults?: Array<RecognitionResult>
 }
 
 /**
@@ -1061,7 +1060,7 @@ export interface ImageResult {
 1 命中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HitFlag: number
+  HitFlag?: number
   /**
    * 命中的标签
 Porn 色情
@@ -1073,7 +1072,7 @@ Terror 暴恐
 Ad 广告
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 审核建议，可选值：
 Pass 通过，
@@ -1081,25 +1080,25 @@ Review 建议人审，
 Block 确认违规
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 得分
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 画面截帧图片结果集
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<ImageResultResult>
+  Results?: Array<ImageResultResult>
   /**
-   * 图片URL地址
+   * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 附加字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
 }

@@ -5,11 +5,21 @@ export interface ImageSegments {
     /**
      * 该字段用于返回视频片段的截帧时间，单位为秒。对于点播文件，该参数代表对应截取图片相对于视频的偏移时间，如0（代表不偏移），5（视频开始后5秒），10（视频开始后10秒）；对于直播文件，该参数则返回对应图片的Unix时间戳，如：1594650717。
      */
-    OffsetTime: string;
+    OffsetTime?: string;
     /**
      * 该字段用于返回视频片段的具体截帧审核结果，详细内容敬请参考ImageResult数据结构的描述。
      */
-    Result: ImageResult;
+    Result?: ImageResult;
+    /**
+     * 该字段用于返回视频片段的具体截帧审核时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: string;
+    /**
+     * 该字段用于返回视频片段的截帧时间，单位为豪秒。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OffsetusTime?: string;
 }
 /**
  * 图片输出结果的子结果
@@ -153,90 +163,110 @@ export interface DescribeTaskDetailResponse {
      * 该字段用于返回创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 该字段用于返回调用视频审核接口时传入的数据ID参数，方便数据的辨别和管理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataId: string;
+    DataId?: string;
     /**
      * 该字段用于返回调用视频审核接口时传入的BizType参数，方便数据的辨别和管理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BizType: string;
+    BizType?: string;
     /**
      * 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 该字段用于返回所查询内容的任务状态。
   <br>取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<TaskLabel>;
+    Labels?: Array<TaskLabel>;
     /**
      * 该字段用于返回输入媒体文件的详细信息，包括编解码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MediaInfo: MediaInfo;
+    MediaInfo?: MediaInfo;
     /**
      * 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InputInfo: InputInfo;
+    InputInfo?: InputInfo;
     /**
      * 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
-     * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
+     * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageSegments: Array<ImageSegments>;
+    ImageSegments?: Array<ImageSegments>;
     /**
-     * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
+     * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AudioSegments: Array<AudioSegments>;
+    AudioSegments?: Array<AudioSegments>;
     /**
      * 当任务状态为Error时，返回对应错误的类型，取值：**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）
   **URL_ERROR**：下载地址验证失败。
   **TIMEOUT_ERROR**：处理超时。任务状态非Error时默认返回为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorType: string;
+    ErrorType?: string;
     /**
      * 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorDescription: string;
+    ErrorDescription?: string;
     /**
      * 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
+    /**
+     * 该字段用于返回检测结果明细数据相关的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SegmentCosUrlList?: SegmentCosUrlList;
+    /**
+     * 该字段用于返回音频审核的ASR识别结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AudioText?: string;
+    /**
+     * 在秒后重试
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TryInSeconds?: number;
+    /**
+     * 该字段用于返回音频文件识别出的对应文本内容。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Asrs?: Array<RcbAsr>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -331,53 +361,58 @@ export interface ImageResultsResultDetail {
      * 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 该字段用于返回图片OCR文本识别的检测结果，识别**上限在5000字节内**。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Text: string;
+    Text?: string;
     /**
      * 该字段用于返回图像审核子结果的详细位置信息，如坐标、大小、旋转角度等。详细返回内容敬请参考ImageResultsResultDetailLocation数据结构的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Location: ImageResultsResultDetailLocation;
+    Location?: ImageResultsResultDetailLocation;
     /**
      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
     /**
      * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibId: string;
+    LibId?: string;
     /**
      * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibName: string;
+    LibName?: string;
     /**
      * 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keywords: Array<string>;
+    Keywords?: Array<string>;
     /**
      * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
   返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Score: number;
+    Score?: number;
     /**
      * 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubLabelCode: string;
+    SubLabelCode?: string;
+    /**
+     * 该字段用于返回恶意标签下对应的子标签的检测结果，如：*Porn-SexBehavior*等子标签。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubLabel?: string;
 }
 /**
  * 输入信息详情
@@ -436,17 +471,17 @@ export interface DescribeTasksResponse {
      * 该字段用于返回当前查询的任务总量，格式为int字符串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total: string;
+    Total?: string;
     /**
      * 该字段用于返回当前页的任务详细数据，具体输出内容请参见TaskData数据结构的详细描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<TaskData>;
+    Data?: Array<TaskData>;
     /**
      * 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageToken: string;
+    PageToken?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -574,6 +609,51 @@ export interface AudioResultDetailTextResult {
     SubLabel: string;
 }
 /**
+ * 明细数据相关的cos url
+ */
+export interface SegmentCosUrlList {
+    /**
+     * 全量图片片段的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageAllUrl?: string;
+    /**
+     * 全量音频片段的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AudioAllUrl?: string;
+    /**
+     * 违规图片片段的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageBlockUrl?: string;
+    /**
+     * 违规音频片段的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AudioBlockUrl?: string;
+    /**
+     * 全量音频识别文本的cos url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AsrUrl?: string;
+}
+/**
+ * 审核切片asr文本信息
+ */
+export interface RcbAsr {
+    /**
+     * 该字段用于返回音频文件识别出的对应文本内容，最大支持前1000个字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Text?: string;
+    /**
+     * 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: string;
+}
+/**
  * 音频审核输出参数
  */
 export interface AudioResult {
@@ -604,7 +684,7 @@ export interface AudioResult {
      */
     Text?: string;
     /**
-     * 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+     * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
@@ -831,41 +911,46 @@ export interface ImageResult {
      * 该参数用于标识审核内容是否命中恶意标签，取值：0（**未命中**）和1（**命中**）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HitFlag: number;
+    HitFlag?: number;
     /**
      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
     /**
      * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
   返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 -性行为 99*，则表明该文本非常有可能属于色情性行为内容。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Score: number;
+    Score?: number;
     /**
      * 该字段用于返回图像审核结果的子结果，详细内容敬请参考ImageResultResult数据结构的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results: Array<ImageResultResult>;
+    Results?: Array<ImageResultResult>;
     /**
-     * 该字段用于返回审核结果的访问链接（URL），图片支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。<br>备注：数据**默认有效期为12小时**。如您需要更长时间的保存，请在数据储存的COS桶中配置对应的储存时长。
+     * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Extra: string;
+    Extra?: string;
     /**
      * 该字段用于返回当前标签（Lable）下的二级标签。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubLabel: string;
+    SubLabel?: string;
+    /**
+     * 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecognitionResults?: Array<RecognitionResult>;
 }

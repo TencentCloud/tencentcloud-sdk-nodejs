@@ -4770,6 +4770,62 @@ export interface Taint {
 }
 
 /**
+ * 预留券的使用率信息
+ */
+export interface ReservedInstanceUtilizationRate {
+  /**
+   * 使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rate?: number
+  /**
+   * 预留券数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Num?: number
+  /**
+   * 核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CPU?: number
+  /**
+   * 内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   *  预留券类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * GPU 卡数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuNum?: string
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 集群 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeName?: string
+  /**
+   * Pod 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodNum?: number
+}
+
+/**
  * ModifyNodePoolInstanceTypes请求参数结构体
  */
 export interface ModifyNodePoolInstanceTypesRequest {
@@ -6671,6 +6727,24 @@ export interface ModifyNodePoolDesiredCapacityAboutAsgResponse {
 }
 
 /**
+ * DescribeReservedInstanceUtilizationRate请求参数结构体
+ */
+export interface DescribeReservedInstanceUtilizationRateRequest {
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 集群 ID
+   */
+  ClusterId?: string
+  /**
+   *  节点名称
+   */
+  NodeName?: string
+}
+
+/**
  * CreateClusterRoute请求参数结构体
  */
 export interface CreateClusterRouteRequest {
@@ -6686,6 +6760,28 @@ export interface CreateClusterRouteRequest {
    * 下一跳地址，即目的节点的内网 IP 地址
    */
   GatewayIp: string
+}
+
+/**
+ * DescribeReservedInstanceUtilizationRate返回参数结构体
+ */
+export interface DescribeReservedInstanceUtilizationRateResponse {
+  /**
+   * 预留券使用率
+   */
+  UtilizationRateSet?: Array<ReservedInstanceUtilizationRate>
+  /**
+   * 按量计费的 Pod 总数
+   */
+  PodNum?: number
+  /**
+   *  Pod 被预留券抵扣的抵扣率
+   */
+  PodRate?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

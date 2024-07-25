@@ -580,6 +580,14 @@ export interface StopCLSDeliveryRequest {
    * 日志主题id
    */
   CLSTopicIds: Array<string>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 是否维护时间运行
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -2420,6 +2428,11 @@ export interface InstanceCLSDeliveryInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 日志类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogType?: string
 }
 
 /**
@@ -2533,6 +2546,14 @@ export interface DeleteCLSDeliveryRequest {
    * 日志主题id
    */
   CLSTopicIds: Array<string>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 是否维护时间运行
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -4265,6 +4286,14 @@ export interface StartCLSDeliveryRequest {
    * 开通的日志主题id
    */
   CLSTopicIds: Array<string>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 是否维护时间运行
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -7384,6 +7413,14 @@ export interface CreateCLSDeliveryRequest {
    * 日志投递配置
    */
   CLSInfoList: Array<CLSInfo>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 是否维护时间运行
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -9693,6 +9730,10 @@ export interface DescribeInstanceCLSLogDeliveryRequest {
    * 实例id
    */
   InstanceId: string
+  /**
+   * 日志类型
+   */
+  LogType?: string
 }
 
 /**

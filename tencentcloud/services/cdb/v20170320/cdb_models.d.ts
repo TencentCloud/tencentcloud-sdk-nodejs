@@ -4780,7 +4780,7 @@ export interface CreateDBInstanceRequest {
      */
     ClientToken?: string;
     /**
-     * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。
+     * 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。
      */
     DeviceType?: string;
     /**
@@ -4830,6 +4830,10 @@ export interface CreateDBInstanceRequest {
      * 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。
      */
     Vips?: Array<string>;
+    /**
+     * 集群版节点拓扑配置。
+     */
+    ClusterTopology?: ClusterTopology;
 }
 /**
  * DescribeParamTemplates请求参数结构体
@@ -8466,7 +8470,7 @@ export interface CreateDBInstanceHourRequest {
      */
     ClientToken?: string;
     /**
-     * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - ONTKE单节点实例。 不指定则默认为通用型实例。
+     * 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型实例。
      */
     DeviceType?: string;
     /**
@@ -8515,6 +8519,10 @@ export interface CreateDBInstanceHourRequest {
      * 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。
      */
     Vips?: Array<string>;
+    /**
+     * 集群版节点拓扑配置。
+     */
+    ClusterTopology?: ClusterTopology;
 }
 /**
  * DescribeAuditRuleTemplates返回参数结构体
@@ -8627,7 +8635,7 @@ export interface CreateCloneInstanceRequest {
      */
     BackupZone?: string;
     /**
-     * 克隆实例类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例。 不指定则默认为通用型。
+     * 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 集群版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 集群版加强型。不指定则默认为通用型。
      */
     DeviceType?: string;
     /**
@@ -8658,6 +8666,10 @@ export interface CreateCloneInstanceRequest {
      * 实例时长，PayType为PRE_PAID时必传，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
      */
     Period?: number;
+    /**
+     * 集群版节点拓扑配置。
+     */
+    ClusterTopology?: ClusterTopology;
 }
 /**
  * CloseCDBProxy请求参数结构体

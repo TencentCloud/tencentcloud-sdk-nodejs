@@ -39,6 +39,8 @@ import {
   RecognitionResult,
   CancelTaskResponse,
   AudioResultDetailTextResult,
+  SegmentCosUrlList,
+  RcbAsr,
   AudioResult,
   AudioResultDetailMoanResult,
   TaskData,
@@ -59,10 +61,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 通过查看任务详情 DescribeTaskDetail 接口，可主动轮询获取检测结果详情。<br>
-
-默认接口请求频率限制：**200次/秒**。
-     */
+   * 通过查看任务详情 DescribeTaskDetail 接口，可主动轮询获取检测结果详情。
+   */
   async DescribeTaskDetail(
     req: DescribeTaskDetailRequest,
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void

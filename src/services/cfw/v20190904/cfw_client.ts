@@ -34,7 +34,7 @@ import {
   ModifyEnterpriseSecurityGroupRuleResponse,
   FwCidrInfo,
   StaticInfo,
-  SyncFwOperateResponse,
+  ModifySequenceRulesRequest,
   DescribeNatAcRuleResponse,
   ModifyBlockTopRequest,
   AddAclRuleRequest,
@@ -63,6 +63,7 @@ import {
   DescribeTLogInfoResponse,
   DescribeUnHandleEventTabListRequest,
   ModifyNatInstanceRequest,
+  DescribeNatFwDnatRuleRequest,
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
   CreateBlockIgnoreRuleListRequest,
@@ -82,7 +83,7 @@ import {
   ModifySecurityGroupSequenceRulesResponse,
   SecurityGroupRule,
   DeleteIdsWhiteRuleRequest,
-  ModifySequenceRulesRequest,
+  ModifyNatFwSwitchResponse,
   ModifyAclRuleResponse,
   SequenceData,
   CreateNatFwInstanceRequest,
@@ -98,6 +99,7 @@ import {
   ModifyNatFwReSelectResponse,
   CreateAlertCenterOmitRequest,
   DescribeVpcAcRuleRequest,
+  DescNatDnatRule,
   VpcFwInstanceInfo,
   DescribeSwitchListsRequest,
   ModifyEdgeIpSwitchResponse,
@@ -133,6 +135,7 @@ import {
   CreateNatFwInstanceResponse,
   NewModeItems,
   DescribeNatFwInfoCountResponse,
+  SyncFwOperateResponse,
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
@@ -197,7 +200,7 @@ import {
   IocListData,
   InstanceInfo,
   DescribeIPStatusListRequest,
-  ModifyNatFwSwitchResponse,
+  DescribeNatFwDnatRuleResponse,
   ModifyNatFwVpcDnsSwitchRequest,
   DescribeFwSyncStatusResponse,
   DeleteNatFwInstanceRequest,
@@ -581,6 +584,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void
   ): Promise<DescribeBlockByIpTimesListResponse> {
     return this.request("DescribeBlockByIpTimesList", req, cb)
+  }
+
+  /**
+   * 查询Nat防火墙Dnat规则
+   */
+  async DescribeNatFwDnatRule(
+    req: DescribeNatFwDnatRuleRequest,
+    cb?: (error: string, rep: DescribeNatFwDnatRuleResponse) => void
+  ): Promise<DescribeNatFwDnatRuleResponse> {
+    return this.request("DescribeNatFwDnatRule", req, cb)
   }
 
   /**

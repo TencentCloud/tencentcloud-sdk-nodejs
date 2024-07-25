@@ -6603,6 +6603,11 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OthersPrivateAccess?: OthersPrivateAccess
+  /**
+   * 参数黑名单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamFilter?: ParamFilter
 }
 
 /**
@@ -7569,6 +7574,27 @@ off：关闭，不使用Cookie作为Cache的一部分
 }
 
 /**
+ * 参数黑名单规则
+ */
+export interface ParamFilterRule {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 参数值数组, 小于10个
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values: Array<string>
+  /**
+   * http 返回码 ( 暂仅支持403)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReturnCode?: string
+}
+
+/**
  * 带宽封顶配置，默认为关闭状态
  */
 export interface BandwidthAlert {
@@ -8184,6 +8210,10 @@ global：全球加速
    * HTTPS服务（收费服务，详见计费说明和产品文档）
    */
   HttpsBilling?: HttpsBilling
+  /**
+   * 参数黑名单
+   */
+  ParamFilter?: ParamFilter
 }
 
 /**
@@ -8600,6 +8630,22 @@ export interface ScdnEventLogConditions {
    * 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.*
    */
   Value: string
+}
+
+/**
+ * 参数黑名单
+ */
+export interface ParamFilter {
+  /**
+   *  参数黑名单开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch: string
+  /**
+   * 参数黑名单规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterRules?: Array<ParamFilterRule>
 }
 
 /**

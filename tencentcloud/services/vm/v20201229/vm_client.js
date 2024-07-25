@@ -28,9 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("vm.tencentcloudapi.com", "2020-12-29", clientConfig);
     }
     /**
-     * 通过查看任务详情 DescribeTaskDetail 接口，可主动轮询获取检测结果详情。<br>
-
-默认接口请求频率限制：**200次/秒**。
+     * 通过查看任务详情 DescribeTaskDetail 接口，可主动轮询获取检测结果详情。
      */
     async DescribeTaskDetail(req, cb) {
         return this.request("DescribeTaskDetail", req, cb);
