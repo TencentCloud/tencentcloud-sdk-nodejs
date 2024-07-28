@@ -138,6 +138,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGroupMember", req, cb);
     }
     /**
+     * 解禁从房间里面踢出的用户
+     */
+    async UnblockKickedUser(req, cb) {
+        return this.request("UnblockKickedUser", req, cb);
+    }
+    /**
      * 创建房间内可以使用的文档。
      */
     async CreateDocument(req, cb) {

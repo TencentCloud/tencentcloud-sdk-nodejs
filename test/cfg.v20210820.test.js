@@ -18,6 +18,16 @@ const client = new tencentcloud.cfg.v20210820.Client({
 })
 describe("cfg.v20210820.test.js", function () {
 
+it("cfg.v20210820.DescribeObjectTypeList", async function () {
+    try {
+       const data = await client.DescribeObjectTypeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.CreateTaskFromTemplate", async function () {
     try {
        const data = await client.CreateTaskFromTemplate({})
@@ -68,6 +78,26 @@ it("cfg.v20210820.ModifyTaskRunStatus", async function () {
     }
 })
 
+it("cfg.v20210820.ExecuteTask", async function () {
+    try {
+       const data = await client.ExecuteTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfg.v20210820.CreateTaskFromAction", async function () {
+    try {
+       const data = await client.CreateTaskFromAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.TriggerPolicy", async function () {
     try {
        const data = await client.TriggerPolicy({})
@@ -88,9 +118,9 @@ it("cfg.v20210820.DescribeTaskList", async function () {
     }
 })
 
-it("cfg.v20210820.DescribeTaskExecuteLogs", async function () {
+it("cfg.v20210820.DescribeTaskPolicyTriggerLog", async function () {
     try {
-       const data = await client.DescribeTaskExecuteLogs({})
+       const data = await client.DescribeTaskPolicyTriggerLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +128,9 @@ it("cfg.v20210820.DescribeTaskExecuteLogs", async function () {
     }
 })
 
-it("cfg.v20210820.DescribeTask", async function () {
+it("cfg.v20210820.DescribeTaskExecuteLogs", async function () {
     try {
-       const data = await client.DescribeTask({})
+       const data = await client.DescribeTaskExecuteLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +148,9 @@ it("cfg.v20210820.DeleteTask", async function () {
     }
 })
 
-it("cfg.v20210820.ExecuteTask", async function () {
+it("cfg.v20210820.DescribeActionLibraryList", async function () {
     try {
-       const data = await client.ExecuteTask({})
+       const data = await client.DescribeActionLibraryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +158,19 @@ it("cfg.v20210820.ExecuteTask", async function () {
     }
 })
 
-it("cfg.v20210820.DescribeTaskPolicyTriggerLog", async function () {
+it("cfg.v20210820.DescribeActionFieldConfigList", async function () {
     try {
-       const data = await client.DescribeTaskPolicyTriggerLog({})
+       const data = await client.DescribeActionFieldConfigList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfg.v20210820.DescribeTask", async function () {
+    try {
+       const data = await client.DescribeTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

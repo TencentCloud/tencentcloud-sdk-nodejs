@@ -46,10 +46,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitVideoStylizationJob", req, cb);
     }
     /**
+     * 用于提交图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+    async SubmitPortraitSingJob(req, cb) {
+        return this.request("SubmitPortraitSingJob", req, cb);
+    }
+    /**
      * 确认视频转译结果
      */
     async ConfirmVideoTranslateJob(req, cb) {
         return this.request("ConfirmVideoTranslateJob", req, cb);
+    }
+    /**
+     * 用于查询图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+    async DescribePortraitSingJob(req, cb) {
+        return this.request("DescribePortraitSingJob", req, cb);
     }
     /**
      * 用于查询图片跳舞任务。图片跳舞能力支持舞蹈动作结合图片生成跳舞视频，满足社交娱乐、互动营销等场景的需求。

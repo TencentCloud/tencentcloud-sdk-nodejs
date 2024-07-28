@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTaskRequest, ModifyTaskRunStatusResponse, DeleteTaskRequest, ExecuteTaskResponse, DescribeTaskExecuteLogsRequest, DescribeTaskResponse, ModifyTaskRunStatusRequest, DescribeTemplateResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, DescribeTaskPolicyTriggerLogResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskPolicyTriggerLogRequest, CreateTaskFromTemplateRequest, TriggerPolicyRequest, TriggerPolicyResponse, DescribeTaskListRequest, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, DescribeTemplateListRequest } from "./cfg_models";
+import { DescribeTaskRequest, DescribeActionFieldConfigListRequest, CreateTaskFromActionRequest, DeleteTaskRequest, DescribeActionLibraryListRequest, ExecuteTaskResponse, DescribeActionFieldConfigListResponse, DescribeTaskExecuteLogsRequest, DescribeObjectTypeListResponse, ModifyTaskRunStatusRequest, DescribeTemplateResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, DescribeTemplateListRequest, DescribeObjectTypeListRequest, DescribeTaskPolicyTriggerLogResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskPolicyTriggerLogRequest, CreateTaskFromTemplateRequest, TriggerPolicyRequest, TriggerPolicyResponse, DescribeTaskListRequest, DescribeActionLibraryListResponse, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, ModifyTaskRunStatusResponse, DescribeTaskResponse, CreateTaskFromActionResponse } from "./cfg_models";
 /**
  * cfg client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 查询对象类型列表
+     */
+    DescribeObjectTypeList(req: DescribeObjectTypeListRequest, cb?: (error: string, rep: DescribeObjectTypeListResponse) => void): Promise<DescribeObjectTypeListResponse>;
     /**
      * 从经验库创建演练
      */
@@ -28,6 +32,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyTaskRunStatus(req: ModifyTaskRunStatusRequest, cb?: (error: string, rep: ModifyTaskRunStatusResponse) => void): Promise<ModifyTaskRunStatusResponse>;
     /**
+     * 执行任务
+     */
+    ExecuteTask(req: ExecuteTaskRequest, cb?: (error: string, rep: ExecuteTaskResponse) => void): Promise<ExecuteTaskResponse>;
+    /**
+     * 从动作创建演练
+     */
+    CreateTaskFromAction(req: CreateTaskFromActionRequest, cb?: (error: string, rep: CreateTaskFromActionResponse) => void): Promise<CreateTaskFromActionResponse>;
+    /**
      * 用于触发混沌演练护栏（类型为触发和恢复2种）
      */
     TriggerPolicy(req: TriggerPolicyRequest, cb?: (error: string, rep: TriggerPolicyResponse) => void): Promise<TriggerPolicyResponse>;
@@ -36,23 +48,27 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskList(req: DescribeTaskListRequest, cb?: (error: string, rep: DescribeTaskListResponse) => void): Promise<DescribeTaskListResponse>;
     /**
+     * 获取护栏触发日志
+     */
+    DescribeTaskPolicyTriggerLog(req: DescribeTaskPolicyTriggerLogRequest, cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void): Promise<DescribeTaskPolicyTriggerLogResponse>;
+    /**
      * 获取演练过程中的所有日志
      */
     DescribeTaskExecuteLogs(req: DescribeTaskExecuteLogsRequest, cb?: (error: string, rep: DescribeTaskExecuteLogsResponse) => void): Promise<DescribeTaskExecuteLogsResponse>;
-    /**
-     * 查询任务
-     */
-    DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
     /**
      * 删除任务
      */
     DeleteTask(req: DeleteTaskRequest, cb?: (error: string, rep: DeleteTaskResponse) => void): Promise<DeleteTaskResponse>;
     /**
-     * 执行任务
+     * 获取混沌演练平台的动作库列表
      */
-    ExecuteTask(req: ExecuteTaskRequest, cb?: (error: string, rep: ExecuteTaskResponse) => void): Promise<ExecuteTaskResponse>;
+    DescribeActionLibraryList(req: DescribeActionLibraryListRequest, cb?: (error: string, rep: DescribeActionLibraryListResponse) => void): Promise<DescribeActionLibraryListResponse>;
     /**
-     * 获取护栏触发日志
+     * 根据动作ID获取动作栏位动态配置参数信息，里面包含动作自有和通用两部分参数。
      */
-    DescribeTaskPolicyTriggerLog(req: DescribeTaskPolicyTriggerLogRequest, cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void): Promise<DescribeTaskPolicyTriggerLogResponse>;
+    DescribeActionFieldConfigList(req: DescribeActionFieldConfigListRequest, cb?: (error: string, rep: DescribeActionFieldConfigListResponse) => void): Promise<DescribeActionFieldConfigListResponse>;
+    /**
+     * 查询任务
+     */
+    DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
 }

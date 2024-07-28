@@ -29,6 +29,7 @@ import {
   DeleteUserResponse,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
+  UnblockKickedUserResponse,
   BatchRegisterRequest,
   DeleteRoomResponse,
   ModifyUserProfileRequest,
@@ -56,6 +57,7 @@ import {
   CreateDocumentResponse,
   DescribeGroupResponse,
   SetAppCustomContentResponse,
+  UnblockKickedUserRequest,
   BatchUserRequest,
   LoginUserResponse,
   ModifyGroupRequest,
@@ -360,6 +362,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteGroupMemberResponse) => void
   ): Promise<DeleteGroupMemberResponse> {
     return this.request("DeleteGroupMember", req, cb)
+  }
+
+  /**
+   * 解禁从房间里面踢出的用户
+   */
+  async UnblockKickedUser(
+    req: UnblockKickedUserRequest,
+    cb?: (error: string, rep: UnblockKickedUserResponse) => void
+  ): Promise<UnblockKickedUserResponse> {
+    return this.request("UnblockKickedUser", req, cb)
   }
 
   /**

@@ -372,6 +372,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 批量删除解析记录
+备注：因存储限制， 建议一次批量删除最多2000条
      */
     async DeleteRecordBatch(req, cb) {
         return this.request("DeleteRecordBatch", req, cb);

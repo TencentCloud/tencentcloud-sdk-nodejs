@@ -8,13 +8,17 @@ export interface DescribeTaskRequest {
     TaskId: number;
 }
 /**
- * ModifyTaskRunStatus返回参数结构体
+ * DescribeActionFieldConfigList请求参数结构体
  */
-export interface ModifyTaskRunStatusResponse {
+export interface DescribeActionFieldConfigListRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 动作ID列表
      */
-    RequestId?: string;
+    ActionIds: Array<number | bigint>;
+    /**
+     * 对象类型ID
+     */
+    ObjectTypeId: number;
 }
 /**
  * 任务分组动作
@@ -153,37 +157,37 @@ export interface TaskGroupInstancesExecuteRules {
     TaskGroupInstancesExecuteNum?: number;
 }
 /**
- * 从经验模板创建演练时需要配置的任务参数
+ * CreateTaskFromAction请求参数结构体
  */
-export interface TaskConfig {
+export interface CreateTaskFromActionRequest {
     /**
-     * 动作组配置，需要保证配置个数和经验中的动作组个数一致
+     * 动作ID，可从动作列表接口DescribeActionLibraryList获取
      */
-    TaskGroupsConfig: Array<TaskGroupConfig>;
+    TaskActionId: number;
     /**
-     * 更改后的演练名称，不填则默认取经验名称
+     * 参与演练的实例ID
+     */
+    TaskInstances: Array<string>;
+    /**
+     * 演练名称，不填则默认取动作名称
      */
     TaskTitle?: string;
     /**
-     * 更改后的演练描述，不填则默认取经验描述
+     * 演练描述，不填则默认取动作描述
      */
     TaskDescription?: string;
     /**
-     * 演练执行模式：1----手工执行/ 2 ---自动执行，不填则默认取经验执行模式
+     * 动作通用参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数
      */
-    TaskMode?: number;
+    TaskActionGeneralConfiguration?: string;
     /**
-     * 演练自动暂停时间，单位分钟, 不填则默认取经验自动暂停时间
+     * 动作自定义参数，需要json序列化传入，可以从动作详情接口DescribeActionFieldConfigList获取，不填默认使用动作默认参数，注意：必填参数，是没有默认值的 ，务必保证传入有效值
+     */
+    TaskActionCustomConfiguration?: string;
+    /**
+     * 演练自动暂停时间，单位分钟, 不填则默认为60
      */
     TaskPauseDuration?: number;
-    /**
-     * 演练标签信息，不填则默认取经验标签
-     */
-    Tags?: Array<TagWithCreate>;
-    /**
-     * 护栏处理方式，1--顺序回滚，2--演练暂停
-     */
-    PolicyDealType?: number;
 }
 /**
  * DeleteTask请求参数结构体
@@ -193,6 +197,35 @@ export interface DeleteTaskRequest {
      * 任务ID
      */
     TaskId: number;
+}
+/**
+ * DescribeActionLibraryList请求参数结构体
+ */
+export interface DescribeActionLibraryListRequest {
+    /**
+     * 0-100
+     */
+    Limit: number;
+    /**
+     * 默认值0
+     */
+    Offset: number;
+    /**
+     * 对象类型ID
+     */
+    ObjectType: number;
+    /**
+     * Keyword取值{"动作名称": "a_title", "描述": "a_desc", "动作类型": "a_type", "创建时间": "a_create_time", "二级分类": "a_resource_type"}
+     */
+    Filters?: Array<ActionFilter>;
+    /**
+     * 动作分类，1表示故障动作，2表示恢复动作
+     */
+    Attribute?: Array<number | bigint>;
+    /**
+     * 筛选项 -动作ID
+     */
+    ActionIds?: Array<number | bigint>;
 }
 /**
  * 任务分组
@@ -264,29 +297,173 @@ export interface ExecuteTaskResponse {
     RequestId?: string;
 }
 /**
- * 动作组的配置项
+ * DescribeActionFieldConfigList返回参数结构体
  */
-export interface TaskGroupConfig {
+export interface DescribeActionFieldConfigListResponse {
     /**
-     * 动作组所关联的实例对象
+     * 通用栏位配置列表
      */
-    TaskGroupInstances: Array<string>;
+    Common?: Array<ActionFieldConfigResult>;
     /**
-     * 动作组标题，不填默认取经验中的动作组名称
+     * 动作栏位配置列表
      */
-    TaskGroupTitle?: string;
+    Results?: Array<ActionFieldConfigResult>;
     /**
-     * 动作组描述，不填默认取经验中的动作组描述
+     * 资源下线信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskGroupDescription?: string;
+    ResourceOffline?: Array<ResourceOffline>;
     /**
-     * 动作执行模式。1 --- 顺序执行，2 --- 阶段执行, 不填默认取经验中的动作组执行模式
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TaskGroupMode?: number;
+    RequestId?: string;
+}
+/**
+ * 动作动态参数返回格式
+ */
+export interface ActionFieldConfigDetail {
     /**
-     * 动作组中的动作参数，不填默认使用经验中的动作参数，配置时可以只指定想要修改参数的动作
+     * 组件类型
+  可选项如下：
+  input  文本框
+  textarea  多行文本框
+  number  数值输入框
+  select   选择器
+  cascader  级联选择器
+  radio  单选
+  time   时间选择
      */
-    TaskGroupActionsConfig?: Array<TaskGroupActionConfig>;
+    Type: string;
+    /**
+     * 组件label
+     */
+    Lable: string;
+    /**
+     * 组件唯一标识， 传回后端时的key
+     */
+    Field: string;
+    /**
+     * 默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultValue: string;
+    /**
+     * 支持配置项如下,可根据需要选择配置项，不需要配置是设置空{}：
+  
+  {
+  
+    placeholder: string (占位符)
+  
+    tooltip: string (提示信息)
+  
+    reg: RegExp (对输入内容格式进行正则校验的规则)
+  
+    max: number (对于输入框，限制最大输入字符数，对于数值输入框，设置上限)
+  
+    min: number (对于数值输入框，设置下限)
+  
+    step: number (设置数值输入框的步长，默认为1)
+  
+    format: string (时间选择的格式，如YYYY-MM-DD表示年月日, YYYY-MM-DD HH:mm:ss 表示时分秒)
+  
+    separator:  string[] (多行输入框的分隔符，不传或者为空时表示不分隔，直接返回用户输入的文本字符串)
+  
+    multiple: boolean (是否多选,对选择器和级联选择器有效)
+  
+    options:  选择器的选项【支持以下两种形式】
+  
+  直接给定选项数组  { value: string; label: string }[]
+  通过调接口获取选项                                                                                                                                       { api: string(接口地址),                                                                                                                                       params: string[] (接口参数,对应于参数配置的field，前端根据field对应的所有组件的输入值作为参数查询数据， 为空时在组件加载时直接请求数据)                                                                                                    }
+  }
+     */
+    Config: string;
+    /**
+     * 是否必填 (0 -- 否   1-- 是)
+     */
+    Required: number;
+    /**
+     * compute配置依赖的其他field满足的条件时通过校验（如：三个表单项中必须至少有一个填写了）
+  
+  [fieldName,
+  
+  { config:  此项保留，等待后面具体场景细化  }
+  
+  ]
+     */
+    Validate: string;
+    /**
+     * 是否可见
+     */
+    Visible: string;
+}
+/**
+ * 任务分组动作
+ */
+export interface TemplateGroupAction {
+    /**
+     * 经验库分组动作ID
+     */
+    TemplateGroupActionId: number;
+    /**
+     * 动作ID
+     */
+    ActionId: number;
+    /**
+     * 分组动作顺序
+     */
+    Order: number;
+    /**
+     * 分组动作通用配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GeneralConfiguration: string;
+    /**
+     * 分组动作自定义配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomConfiguration: string;
+    /**
+     * 动作分组创建时间
+     */
+    CreateTime: string;
+    /**
+     * 动作分组更新时间
+     */
+    UpdateTime: string;
+    /**
+     * 动作名称
+     */
+    ActionTitle: string;
+    /**
+     * 自身随机id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RandomId: number;
+    /**
+     * 恢复动作id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecoverId: number;
+    /**
+     * 执行动作id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecuteId: number;
+    /**
+     * 调用api类型，0:tat, 1:云api
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionApiType?: number;
+    /**
+     * 1:故障，2:恢复
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionAttribute?: number;
+    /**
+     * 动作类型：平台和自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionType?: string;
 }
 /**
  * 经验库
@@ -394,18 +571,13 @@ export interface DescribeTaskExecuteLogsRequest {
     Offset: number;
 }
 /**
- * DescribeTask返回参数结构体
+ * DescribeObjectTypeList返回参数结构体
  */
-export interface DescribeTaskResponse {
+export interface DescribeObjectTypeListResponse {
     /**
-     * 任务信息
+     * 对象类型列表
      */
-    Task?: Task;
-    /**
-     * 任务对应的演练报告信息，null表示未导出报告
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReportInfo?: TaskReportInfo;
+    ObjectTypeList?: Array<ObjectType>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -479,6 +651,36 @@ export interface ActionFilter {
      * 搜索内容值
      */
     Values: Array<string>;
+}
+/**
+ * 护栏策略触发日志
+ */
+export interface PolicyTriggerLog {
+    /**
+     * 演练ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: number;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 类型，0--触发，1--恢复
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerType?: number;
+    /**
+     * 内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content?: string;
+    /**
+     * 触发时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatTime?: string;
 }
 /**
  * DescribeTemplate请求参数结构体
@@ -601,73 +803,24 @@ export interface DescribeTaskListResponse {
     RequestId?: string;
 }
 /**
- * 任务分组动作
+ * 资源下线
  */
-export interface TemplateGroupAction {
+export interface ResourceOffline {
     /**
-     * 经验库分组动作ID
-     */
-    TemplateGroupActionId: number;
-    /**
-     * 动作ID
-     */
-    ActionId: number;
-    /**
-     * 分组动作顺序
-     */
-    Order: number;
-    /**
-     * 分组动作通用配置
+     * 资源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GeneralConfiguration: string;
+    ResourceId?: number;
     /**
-     * 分组动作自定义配置
+     * 资源下线时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomConfiguration: string;
+    ResourceDeleteTime?: string;
     /**
-     * 动作分组创建时间
-     */
-    CreateTime: string;
-    /**
-     * 动作分组更新时间
-     */
-    UpdateTime: string;
-    /**
-     * 动作名称
-     */
-    ActionTitle: string;
-    /**
-     * 自身随机id
+     * 资源下线提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RandomId: number;
-    /**
-     * 恢复动作id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RecoverId: number;
-    /**
-     * 执行动作id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExecuteId: number;
-    /**
-     * 调用api类型，0:tat, 1:云api
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ActionApiType?: number;
-    /**
-     * 1:故障，2:恢复
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ActionAttribute?: number;
-    /**
-     * 动作类型：平台和自定义
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ActionType?: string;
+    ResourceDeleteMessage?: string;
 }
 /**
  * DescribeTemplateList返回参数结构体
@@ -723,6 +876,47 @@ export interface TaskMonitor {
     Unit: string;
 }
 /**
+ * DescribeTemplateList请求参数结构体
+ */
+export interface DescribeTemplateListRequest {
+    /**
+     * 分页Limit, 最大值100
+     */
+    Limit: number;
+    /**
+     * 分页Offset
+     */
+    Offset: number;
+    /**
+     * 演练名称
+     */
+    Title?: string;
+    /**
+     * 标签键
+     */
+    Tag?: Array<string>;
+    /**
+     * 状态，1---使用中， 2---停用
+     */
+    IsUsed?: number;
+    /**
+     * 标签对
+     */
+    Tags?: Array<TagWithDescribe>;
+    /**
+     * 经验来源 0-自建 1-专家推荐
+     */
+    TemplateSource?: number;
+    /**
+     * 经验ID
+     */
+    TemplateIdList?: Array<number | bigint>;
+    /**
+     * 过滤参数
+     */
+    Filters?: Array<ActionFilter>;
+}
+/**
  * 展示标签列表
  */
 export interface TagWithDescribe {
@@ -734,6 +928,18 @@ export interface TagWithDescribe {
      * 标签值
      */
     TagValue: string;
+}
+/**
+ * DescribeObjectTypeList请求参数结构体
+ */
+export interface DescribeObjectTypeListRequest {
+    /**
+     * 所支持的对象
+  0：全平台产品
+  1：平台接入的对象
+  2：应用所支持的部分对象
+     */
+    SupportType?: number;
 }
 /**
  * DescribeTaskPolicyTriggerLog返回参数结构体
@@ -770,6 +976,37 @@ export interface DeleteTaskResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 对象类型
+ */
+export interface ObjectType {
+    /**
+     * 对象类型ID
+     */
+    ObjectTypeId?: number;
+    /**
+     * 对象类型名称
+     */
+    ObjectTypeTitle?: string;
+    /**
+     * 对象类型第一级
+     */
+    ObjectTypeLevelOne?: string;
+    /**
+     * 对象类型参数
+     */
+    ObjectTypeParams?: ObjectTypeConfig;
+    /**
+     * tke接口json解析规则，null不需要解析
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectTypeJsonParse?: ObjectTypeJsonParse;
+    /**
+     * 是否包含新动作
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectHasNewAction?: boolean;
 }
 /**
  * DescribeTaskPolicyTriggerLog请求参数结构体
@@ -994,6 +1231,39 @@ export interface TriggerPolicyRequest {
     TriggerType: number;
 }
 /**
+ * 从经验模板创建演练时需要配置的任务参数
+ */
+export interface TaskConfig {
+    /**
+     * 动作组配置，需要保证配置个数和经验中的动作组个数一致
+     */
+    TaskGroupsConfig: Array<TaskGroupConfig>;
+    /**
+     * 更改后的演练名称，不填则默认取经验名称
+     */
+    TaskTitle?: string;
+    /**
+     * 更改后的演练描述，不填则默认取经验描述
+     */
+    TaskDescription?: string;
+    /**
+     * 演练执行模式：1----手工执行/ 2 ---自动执行，不填则默认取经验执行模式
+     */
+    TaskMode?: number;
+    /**
+     * 演练自动暂停时间，单位分钟, 不填则默认取经验自动暂停时间
+     */
+    TaskPauseDuration?: number;
+    /**
+     * 演练标签信息，不填则默认取经验标签
+     */
+    Tags?: Array<TagWithCreate>;
+    /**
+     * 护栏处理方式，1--顺序回滚，2--演练暂停
+     */
+    PolicyDealType?: number;
+}
+/**
  * TriggerPolicy返回参数结构体
  */
 export interface TriggerPolicyResponse {
@@ -1070,6 +1340,48 @@ export interface DescribeTaskListRequest {
      * 任务状态筛选--支持多选 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束)
      */
     TaskStatusList?: Array<number | bigint>;
+}
+/**
+ * DescribeActionLibraryList返回参数结构体
+ */
+export interface DescribeActionLibraryListResponse {
+    /**
+     * 查询结果列表
+     */
+    Results?: Array<ActionLibraryListResult>;
+    /**
+     * 符合记录条数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 标准pod对象类型下拉数据的解析
+ */
+export interface ObjectTypeJsonParse {
+    /**
+     * 命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameSpace?: string;
+    /**
+     * 工作负载名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkloadName?: string;
+    /**
+     * 节点IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LanIP?: string;
+    /**
+     * 节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
 }
 /**
  * 任务列表信息
@@ -1163,6 +1475,31 @@ export interface DescribeTaskExecuteLogsResponse {
     RequestId?: string;
 }
 /**
+ * 动作组的配置项
+ */
+export interface TaskGroupConfig {
+    /**
+     * 动作组所关联的实例对象
+     */
+    TaskGroupInstances: Array<string>;
+    /**
+     * 动作组标题，不填默认取经验中的动作组名称
+     */
+    TaskGroupTitle?: string;
+    /**
+     * 动作组描述，不填默认取经验中的动作组描述
+     */
+    TaskGroupDescription?: string;
+    /**
+     * 动作执行模式。1 --- 顺序执行，2 --- 阶段执行, 不填默认取经验中的动作组执行模式
+     */
+    TaskGroupMode?: number;
+    /**
+     * 动作组中的动作参数，不填默认使用经验中的动作参数，配置时可以只指定想要修改参数的动作
+     */
+    TaskGroupActionsConfig?: Array<TaskGroupActionConfig>;
+}
+/**
  * 监控指标
  */
 export interface TemplateMonitor {
@@ -1249,6 +1586,23 @@ export interface TemplatePolicy {
     TemplatePolicyDealType: number;
 }
 /**
+ * 动作栏位配置结果
+ */
+export interface ActionFieldConfigResult {
+    /**
+     * 动作ID
+     */
+    ActionId: number;
+    /**
+     * 动作名称
+     */
+    ActionName: string;
+    /**
+     * 动作对应的栏位配置详情
+     */
+    ConfigDetail: Array<ActionFieldConfigDetail>;
+}
+/**
  * 动作组中的动作参数
  */
 export interface TaskGroupActionConfig {
@@ -1266,75 +1620,136 @@ export interface TaskGroupActionConfig {
     TaskGroupActionCustomConfiguration?: string;
 }
 /**
- * 护栏策略触发日志
+ * 动作库数据列表
  */
-export interface PolicyTriggerLog {
+export interface ActionLibraryListResult {
     /**
-     * 演练ID
+     * 动作名称
+     */
+    ActionName?: string;
+    /**
+     * 动作描述
+     */
+    Desc?: string;
+    /**
+     * 动作类型。范围：["平台","自定义"]
+     */
+    ActionType?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 创建人
+     */
+    Creator?: string;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: string;
+    /**
+     * 动作风险描述
+     */
+    RiskDesc?: string;
+    /**
+     * 动作ID
+     */
+    ActionId?: number;
+    /**
+     * 动作属性（ 1：故障  2：恢复）
+     */
+    AttributeId?: number;
+    /**
+     * 关联的动作ID
+     */
+    RelationActionId?: number;
+    /**
+     * 操作命令
+     */
+    ActionCommand?: string;
+    /**
+     * 动作类型( 0 -- tat   1 -- 云API）
+     */
+    ActionCommandType?: number;
+    /**
+     * 自定义动作的参数，json string
+     */
+    ActionContent?: string;
+    /**
+     * 二级分类
   注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType?: string;
+    /**
+     * 动作描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionDetail?: string;
+    /**
+     * 是否允许当前账号使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAllowed?: boolean;
+    /**
+     * 最佳实践案例的链接地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionBestCase?: string;
+    /**
+     * 对象类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectType?: string;
+    /**
+     * 监控指标ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricIdList?: Array<number | bigint>;
+    /**
+     * 是否是新动作
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsNewAction?: boolean;
+}
+/**
+ * ModifyTaskRunStatus返回参数结构体
+ */
+export interface ModifyTaskRunStatusResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeTask返回参数结构体
+ */
+export interface DescribeTaskResponse {
+    /**
+     * 任务信息
+     */
+    Task?: Task;
+    /**
+     * 任务对应的演练报告信息，null表示未导出报告
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReportInfo?: TaskReportInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateTaskFromAction返回参数结构体
+ */
+export interface CreateTaskFromActionResponse {
+    /**
+     * 创建成功的演练ID
      */
     TaskId?: number;
     /**
-     * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Name?: string;
-    /**
-     * 类型，0--触发，1--恢复
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TriggerType?: number;
-    /**
-     * 内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Content?: string;
-    /**
-     * 触发时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatTime?: string;
-}
-/**
- * DescribeTemplateList请求参数结构体
- */
-export interface DescribeTemplateListRequest {
-    /**
-     * 分页Limit, 最大值100
-     */
-    Limit: number;
-    /**
-     * 分页Offset
-     */
-    Offset: number;
-    /**
-     * 演练名称
-     */
-    Title?: string;
-    /**
-     * 标签键
-     */
-    Tag?: Array<string>;
-    /**
-     * 状态，1---使用中， 2---停用
-     */
-    IsUsed?: number;
-    /**
-     * 标签对
-     */
-    Tags?: Array<TagWithDescribe>;
-    /**
-     * 经验来源 0-自建 1-专家推荐
-     */
-    TemplateSource?: number;
-    /**
-     * 经验ID
-     */
-    TemplateIdList?: Array<number | bigint>;
-    /**
-     * 过滤参数
-     */
-    Filters?: Array<ActionFilter>;
+    RequestId?: string;
 }
 /**
  * 经验库列表信息
@@ -1391,4 +1806,40 @@ export interface TagWithCreate {
      * 标签值
      */
     TagValue: string;
+}
+/**
+ * 对象类型字段类型
+ */
+export interface ObjectTypeConfigFields {
+    /**
+     * instanceId
+     */
+    Key: string;
+    /**
+     * 实例id
+     */
+    Header: string;
+    /**
+     * 字段值是否需要转译，当不需要转译时，此字段返回null
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Transfer?: string;
+    /**
+     * tke的pod字段信息解析
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JsonParse?: string;
+}
+/**
+ * 对象类型配置
+ */
+export interface ObjectTypeConfig {
+    /**
+     * 主键
+     */
+    Key: string;
+    /**
+     * 对象类型配置字段列表
+     */
+    Fields: Array<ObjectTypeConfigFields>;
 }

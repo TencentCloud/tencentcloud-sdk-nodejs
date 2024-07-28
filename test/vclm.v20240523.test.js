@@ -48,9 +48,29 @@ it("vclm.v20240523.SubmitVideoStylizationJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitPortraitSingJob", async function () {
+    try {
+       const data = await client.SubmitPortraitSingJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.ConfirmVideoTranslateJob", async function () {
     try {
        const data = await client.ConfirmVideoTranslateJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribePortraitSingJob", async function () {
+    try {
+       const data = await client.DescribePortraitSingJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

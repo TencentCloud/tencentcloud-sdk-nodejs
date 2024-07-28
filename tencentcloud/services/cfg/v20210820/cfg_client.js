@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cfg.tencentcloudapi.com", "2021-08-20", clientConfig);
     }
     /**
+     * 查询对象类型列表
+     */
+    async DescribeObjectTypeList(req, cb) {
+        return this.request("DescribeObjectTypeList", req, cb);
+    }
+    /**
      * 从经验库创建演练
      */
     async CreateTaskFromTemplate(req, cb) {
@@ -58,6 +64,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTaskRunStatus", req, cb);
     }
     /**
+     * 执行任务
+     */
+    async ExecuteTask(req, cb) {
+        return this.request("ExecuteTask", req, cb);
+    }
+    /**
+     * 从动作创建演练
+     */
+    async CreateTaskFromAction(req, cb) {
+        return this.request("CreateTaskFromAction", req, cb);
+    }
+    /**
      * 用于触发混沌演练护栏（类型为触发和恢复2种）
      */
     async TriggerPolicy(req, cb) {
@@ -70,16 +88,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskList", req, cb);
     }
     /**
+     * 获取护栏触发日志
+     */
+    async DescribeTaskPolicyTriggerLog(req, cb) {
+        return this.request("DescribeTaskPolicyTriggerLog", req, cb);
+    }
+    /**
      * 获取演练过程中的所有日志
      */
     async DescribeTaskExecuteLogs(req, cb) {
         return this.request("DescribeTaskExecuteLogs", req, cb);
-    }
-    /**
-     * 查询任务
-     */
-    async DescribeTask(req, cb) {
-        return this.request("DescribeTask", req, cb);
     }
     /**
      * 删除任务
@@ -88,16 +106,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTask", req, cb);
     }
     /**
-     * 执行任务
+     * 获取混沌演练平台的动作库列表
      */
-    async ExecuteTask(req, cb) {
-        return this.request("ExecuteTask", req, cb);
+    async DescribeActionLibraryList(req, cb) {
+        return this.request("DescribeActionLibraryList", req, cb);
     }
     /**
-     * 获取护栏触发日志
+     * 根据动作ID获取动作栏位动态配置参数信息，里面包含动作自有和通用两部分参数。
      */
-    async DescribeTaskPolicyTriggerLog(req, cb) {
-        return this.request("DescribeTaskPolicyTriggerLog", req, cb);
+    async DescribeActionFieldConfigList(req, cb) {
+        return this.request("DescribeActionFieldConfigList", req, cb);
+    }
+    /**
+     * 查询任务
+     */
+    async DescribeTask(req, cb) {
+        return this.request("DescribeTask", req, cb);
     }
 }
 exports.Client = Client;

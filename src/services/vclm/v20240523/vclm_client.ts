@@ -22,17 +22,21 @@ import {
   SubmitVideoStylizationJobRequest,
   ConfirmVideoTranslateJobRequest,
   DescribeVideoStylizationJobRequest,
+  DescribePortraitSingJobRequest,
   DescribeImageAnimateJobResponse,
+  SubmitPortraitSingJobRequest,
+  TranslateResult,
   SubmitImageAnimateJobResponse,
   ConfirmVideoTranslateJobResponse,
   SubmitVideoTranslateJobResponse,
   DescribeVideoTranslateJobRequest,
+  SubmitVideoStylizationJobResponse,
   DescribeVideoStylizationJobResponse,
   SubmitImageAnimateJobRequest,
   DescribeImageAnimateJobRequest,
-  SubmitVideoStylizationJobResponse,
+  DescribePortraitSingJobResponse,
   SubmitVideoTranslateJobRequest,
-  TranslateResult,
+  SubmitPortraitSingJobResponse,
   DescribeVideoTranslateJobResponse,
 } from "./vclm_models"
 
@@ -76,6 +80,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于提交图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+  async SubmitPortraitSingJob(
+    req: SubmitPortraitSingJobRequest,
+    cb?: (error: string, rep: SubmitPortraitSingJobResponse) => void
+  ): Promise<SubmitPortraitSingJobResponse> {
+    return this.request("SubmitPortraitSingJob", req, cb)
+  }
+
+  /**
    * 确认视频转译结果
    */
   async ConfirmVideoTranslateJob(
@@ -83,6 +98,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ConfirmVideoTranslateJobResponse) => void
   ): Promise<ConfirmVideoTranslateJobResponse> {
     return this.request("ConfirmVideoTranslateJob", req, cb)
+  }
+
+  /**
+     * 用于查询图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+  async DescribePortraitSingJob(
+    req: DescribePortraitSingJobRequest,
+    cb?: (error: string, rep: DescribePortraitSingJobResponse) => void
+  ): Promise<DescribePortraitSingJobResponse> {
+    return this.request("DescribePortraitSingJob", req, cb)
   }
 
   /**

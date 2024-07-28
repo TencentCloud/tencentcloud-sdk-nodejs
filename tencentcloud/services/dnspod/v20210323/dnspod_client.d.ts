@@ -240,6 +240,7 @@ export declare class Client extends AbstractClient {
     DeleteDomainAlias(req: DeleteDomainAliasRequest, cb?: (error: string, rep: DeleteDomainAliasResponse) => void): Promise<DeleteDomainAliasResponse>;
     /**
      * 批量删除解析记录
+备注：因存储限制， 建议一次批量删除最多2000条
      */
     DeleteRecordBatch(req: DeleteRecordBatchRequest, cb?: (error: string, rep: DeleteRecordBatchResponse) => void): Promise<DeleteRecordBatchResponse>;
     /**

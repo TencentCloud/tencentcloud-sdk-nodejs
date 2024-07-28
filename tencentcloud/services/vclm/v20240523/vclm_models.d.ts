@@ -65,6 +65,15 @@ export interface DescribeVideoStylizationJobRequest {
     JobId: string;
 }
 /**
+ * DescribePortraitSingJob请求参数结构体
+ */
+export interface DescribePortraitSingJobRequest {
+    /**
+     * 任务ID
+     */
+    JobId: string;
+}
+/**
  * DescribeImageAnimateJob返回参数结构体
  */
 export interface DescribeImageAnimateJobResponse {
@@ -88,6 +97,45 @@ export interface DescribeImageAnimateJobResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SubmitPortraitSingJob请求参数结构体
+ */
+export interface SubmitPortraitSingJobRequest {
+    /**
+     * 传入音频URL地址。音频要求：
+  —音频时长：不超过60秒
+  —音频格式：mp3、wav、m4a
+     */
+    AudioUrl: string;
+    /**
+     * 传入图片URL地址，图片要求：
+  —图片格式：jpg、jpeg、png
+  —图片分辨率：长边不超过2560
+  —图片大小：不超过6M
+  —图片宽高比：图片【宽：高】在1:2到2:1范围内
+     */
+    ImageUrl?: string;
+    /**
+     * 传入图片Base64编码。
+  —图片Base64编码与URL地址必传其一
+     */
+    ImageBase64?: string;
+}
+/**
+ * 音频翻译结果
+ */
+export interface TranslateResult {
+    /**
+     * 翻译源文字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceText?: string;
+    /**
+     * 翻译后文字。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetText?: string;
 }
 /**
  * SubmitImageAnimateJob返回参数结构体
@@ -154,6 +202,19 @@ export interface DescribeVideoTranslateJobRequest {
     JobId: string;
 }
 /**
+ * SubmitVideoStylizationJob返回参数结构体
+ */
+export interface SubmitVideoStylizationJobResponse {
+    /**
+     * 任务ID
+     */
+    JobId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeVideoStylizationJob返回参数结构体
  */
 export interface DescribeVideoStylizationJobResponse {
@@ -218,13 +279,30 @@ export interface DescribeImageAnimateJobRequest {
     JobId?: string;
 }
 /**
- * SubmitVideoStylizationJob返回参数结构体
+ * DescribePortraitSingJob返回参数结构体
  */
-export interface SubmitVideoStylizationJobResponse {
+export interface DescribePortraitSingJobResponse {
     /**
      * 任务ID
      */
     JobId?: string;
+    /**
+     * 任务状态码
+  —RUN：处理中
+  —FAIL：处理失败
+  —STOP：处理终止
+  —DONE：处理完成
+     */
+    StatusCode?: string;
+    /**
+     * 任务状态信息
+     */
+    StatusMsg?: string;
+    /**
+     * 生成视频的URL地址
+  有效期24小时
+     */
+    ResultVideoUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -260,19 +338,17 @@ export interface SubmitVideoTranslateJobRequest {
     LipSync?: number;
 }
 /**
- * 音频翻译结果
+ * SubmitPortraitSingJob返回参数结构体
  */
-export interface TranslateResult {
+export interface SubmitPortraitSingJobResponse {
     /**
-     * 翻译源文字
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 任务ID
      */
-    SourceText?: string;
+    JobId?: string;
     /**
-     * 翻译后文字。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TargetText?: string;
+    RequestId?: string;
 }
 /**
  * DescribeVideoTranslateJob返回参数结构体

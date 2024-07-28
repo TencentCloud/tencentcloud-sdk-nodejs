@@ -198,6 +198,16 @@ it("lcic.v20220817.DeleteGroupMember", async function () {
     }
 })
 
+it("lcic.v20220817.UnblockKickedUser", async function () {
+    try {
+       const data = await client.UnblockKickedUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateDocument", async function () {
     try {
        const data = await client.CreateDocument({})

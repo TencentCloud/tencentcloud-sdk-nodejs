@@ -1318,20 +1318,20 @@ export interface VideoEditProjectOutput {
   /**
    * 导出的多媒体创作引擎媒体 Id，仅当导出目标为多媒体创作引擎媒体时有效。
    */
-  MaterialId: string
+  MaterialId?: string
   /**
    * 云点播媒资 FileId。
    */
-  VodFileId: string
+  VodFileId?: string
   /**
    * 导出的媒资 URL。
    */
-  URL: string
+  URL?: string
   /**
    * 元信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaData: MediaMetaData
+  MetaData?: MediaMetaData
   /**
    * 导出视频的封面图片 URL。
    */

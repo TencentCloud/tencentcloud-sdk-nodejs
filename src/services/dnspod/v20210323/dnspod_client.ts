@@ -792,8 +792,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除解析记录
-   */
+     * 批量删除解析记录
+备注：因存储限制， 建议一次批量删除最多2000条
+     */
   async DeleteRecordBatch(
     req: DeleteRecordBatchRequest,
     cb?: (error: string, rep: DeleteRecordBatchResponse) => void

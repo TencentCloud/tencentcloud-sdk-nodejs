@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitVideoStylizationJobRequest, ConfirmVideoTranslateJobRequest, DescribeVideoStylizationJobRequest, DescribeImageAnimateJobResponse, SubmitImageAnimateJobResponse, ConfirmVideoTranslateJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, DescribeVideoStylizationJobResponse, SubmitImageAnimateJobRequest, DescribeImageAnimateJobRequest, SubmitVideoStylizationJobResponse, SubmitVideoTranslateJobRequest, DescribeVideoTranslateJobResponse } from "./vclm_models";
+import { SubmitVideoStylizationJobRequest, ConfirmVideoTranslateJobRequest, DescribeVideoStylizationJobRequest, DescribePortraitSingJobRequest, DescribeImageAnimateJobResponse, SubmitPortraitSingJobRequest, SubmitImageAnimateJobResponse, ConfirmVideoTranslateJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, SubmitVideoStylizationJobResponse, DescribeVideoStylizationJobResponse, SubmitImageAnimateJobRequest, DescribeImageAnimateJobRequest, DescribePortraitSingJobResponse, SubmitVideoTranslateJobRequest, SubmitPortraitSingJobResponse, DescribeVideoTranslateJobResponse } from "./vclm_models";
 /**
  * vclm client
  * @class
@@ -20,9 +20,19 @@ export declare class Client extends AbstractClient {
      */
     SubmitVideoStylizationJob(req: SubmitVideoStylizationJobRequest, cb?: (error: string, rep: SubmitVideoStylizationJobResponse) => void): Promise<SubmitVideoStylizationJobResponse>;
     /**
+     * 用于提交图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+    SubmitPortraitSingJob(req: SubmitPortraitSingJobRequest, cb?: (error: string, rep: SubmitPortraitSingJobResponse) => void): Promise<SubmitPortraitSingJobResponse>;
+    /**
      * 确认视频转译结果
      */
     ConfirmVideoTranslateJob(req: ConfirmVideoTranslateJobRequest, cb?: (error: string, rep: ConfirmVideoTranslateJobResponse) => void): Promise<ConfirmVideoTranslateJobResponse>;
+    /**
+     * 用于查询图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+    DescribePortraitSingJob(req: DescribePortraitSingJobRequest, cb?: (error: string, rep: DescribePortraitSingJobResponse) => void): Promise<DescribePortraitSingJobResponse>;
     /**
      * 用于查询图片跳舞任务。图片跳舞能力支持舞蹈动作结合图片生成跳舞视频，满足社交娱乐、互动营销等场景的需求。
      */

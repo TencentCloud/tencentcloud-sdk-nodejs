@@ -331,6 +331,16 @@ export interface ModifyAppResponse {
 }
 
 /**
+ * UnblockKickedUser返回参数结构体
+ */
+export interface UnblockKickedUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchRegister请求参数结构体
  */
 export interface BatchRegisterRequest {
@@ -996,6 +1006,24 @@ export interface SetAppCustomContentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnblockKickedUser请求参数结构体
+ */
+export interface UnblockKickedUserRequest {
+  /**
+   * 低代码平台的SdkAppId。
+   */
+  SdkAppId: number
+  /**
+   * 房间Id。
+   */
+  RoomId: number
+  /**
+   * 需要解禁踢出的成员Id。
+   */
+  UserId: string
 }
 
 /**

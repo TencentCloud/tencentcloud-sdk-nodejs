@@ -19,52 +19,68 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeTaskRequest,
-  ModifyTaskRunStatusResponse,
+  DescribeActionFieldConfigListRequest,
   TaskGroupAction,
   ApmServiceInfo,
   TaskGroupInstancesExecuteRules,
-  TaskConfig,
+  CreateTaskFromActionRequest,
   DeleteTaskRequest,
+  DescribeActionLibraryListRequest,
   TaskGroup,
   ExecuteTaskResponse,
-  TaskGroupConfig,
+  DescribeActionFieldConfigListResponse,
+  ActionFieldConfigDetail,
+  TemplateGroupAction,
   Template,
   DescribeTaskExecuteLogsRequest,
-  DescribeTaskResponse,
+  DescribeObjectTypeListResponse,
   ModifyTaskRunStatusRequest,
   DescribeTemplateResponse,
   DescribePolicy,
   ActionFilter,
+  PolicyTriggerLog,
   DescribeTemplateRequest,
   ExecuteTaskInstanceRequest,
   TaskGroupInstance,
   ExecuteTaskRequest,
   DescribeTaskListResponse,
-  TemplateGroupAction,
+  ResourceOffline,
   DescribeTemplateListResponse,
   TaskMonitor,
+  DescribeTemplateListRequest,
   TagWithDescribe,
+  DescribeObjectTypeListRequest,
   DescribeTaskPolicyTriggerLogResponse,
   CreateTaskFromTemplateResponse,
   DeleteTaskResponse,
+  ObjectType,
   DescribeTaskPolicyTriggerLogRequest,
   Task,
   TaskReportInfo,
   CreateTaskFromTemplateRequest,
   TriggerPolicyRequest,
+  TaskConfig,
   TriggerPolicyResponse,
   DescribeTaskListRequest,
+  DescribeActionLibraryListResponse,
+  ObjectTypeJsonParse,
   TaskListItem,
   ExecuteTaskInstanceResponse,
   DescribeTaskExecuteLogsResponse,
+  TaskGroupConfig,
   TemplateMonitor,
   TemplateGroup,
   TemplatePolicy,
+  ActionFieldConfigResult,
   TaskGroupActionConfig,
-  PolicyTriggerLog,
-  DescribeTemplateListRequest,
+  ActionLibraryListResult,
+  ModifyTaskRunStatusResponse,
+  DescribeTaskResponse,
+  CreateTaskFromActionResponse,
   TemplateListItem,
   TagWithCreate,
+  ObjectTypeConfigFields,
+  ObjectTypeConfig,
 } from "./cfg_models"
 
 /**
@@ -74,6 +90,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cfg.tencentcloudapi.com", "2021-08-20", clientConfig)
+  }
+
+  /**
+   * 查询对象类型列表
+   */
+  async DescribeObjectTypeList(
+    req: DescribeObjectTypeListRequest,
+    cb?: (error: string, rep: DescribeObjectTypeListResponse) => void
+  ): Promise<DescribeObjectTypeListResponse> {
+    return this.request("DescribeObjectTypeList", req, cb)
   }
 
   /**
@@ -127,6 +153,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 执行任务
+   */
+  async ExecuteTask(
+    req: ExecuteTaskRequest,
+    cb?: (error: string, rep: ExecuteTaskResponse) => void
+  ): Promise<ExecuteTaskResponse> {
+    return this.request("ExecuteTask", req, cb)
+  }
+
+  /**
+   * 从动作创建演练
+   */
+  async CreateTaskFromAction(
+    req: CreateTaskFromActionRequest,
+    cb?: (error: string, rep: CreateTaskFromActionResponse) => void
+  ): Promise<CreateTaskFromActionResponse> {
+    return this.request("CreateTaskFromAction", req, cb)
+  }
+
+  /**
    * 用于触发混沌演练护栏（类型为触发和恢复2种）
    */
   async TriggerPolicy(
@@ -147,6 +193,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取护栏触发日志
+   */
+  async DescribeTaskPolicyTriggerLog(
+    req: DescribeTaskPolicyTriggerLogRequest,
+    cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void
+  ): Promise<DescribeTaskPolicyTriggerLogResponse> {
+    return this.request("DescribeTaskPolicyTriggerLog", req, cb)
+  }
+
+  /**
    * 获取演练过程中的所有日志
    */
   async DescribeTaskExecuteLogs(
@@ -154,16 +210,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskExecuteLogsResponse) => void
   ): Promise<DescribeTaskExecuteLogsResponse> {
     return this.request("DescribeTaskExecuteLogs", req, cb)
-  }
-
-  /**
-   * 查询任务
-   */
-  async DescribeTask(
-    req: DescribeTaskRequest,
-    cb?: (error: string, rep: DescribeTaskResponse) => void
-  ): Promise<DescribeTaskResponse> {
-    return this.request("DescribeTask", req, cb)
   }
 
   /**
@@ -177,22 +223,32 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 执行任务
+   * 获取混沌演练平台的动作库列表
    */
-  async ExecuteTask(
-    req: ExecuteTaskRequest,
-    cb?: (error: string, rep: ExecuteTaskResponse) => void
-  ): Promise<ExecuteTaskResponse> {
-    return this.request("ExecuteTask", req, cb)
+  async DescribeActionLibraryList(
+    req: DescribeActionLibraryListRequest,
+    cb?: (error: string, rep: DescribeActionLibraryListResponse) => void
+  ): Promise<DescribeActionLibraryListResponse> {
+    return this.request("DescribeActionLibraryList", req, cb)
   }
 
   /**
-   * 获取护栏触发日志
+   * 根据动作ID获取动作栏位动态配置参数信息，里面包含动作自有和通用两部分参数。
    */
-  async DescribeTaskPolicyTriggerLog(
-    req: DescribeTaskPolicyTriggerLogRequest,
-    cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void
-  ): Promise<DescribeTaskPolicyTriggerLogResponse> {
-    return this.request("DescribeTaskPolicyTriggerLog", req, cb)
+  async DescribeActionFieldConfigList(
+    req: DescribeActionFieldConfigListRequest,
+    cb?: (error: string, rep: DescribeActionFieldConfigListResponse) => void
+  ): Promise<DescribeActionFieldConfigListResponse> {
+    return this.request("DescribeActionFieldConfigList", req, cb)
+  }
+
+  /**
+   * 查询任务
+   */
+  async DescribeTask(
+    req: DescribeTaskRequest,
+    cb?: (error: string, rep: DescribeTaskResponse) => void
+  ): Promise<DescribeTaskResponse> {
+    return this.request("DescribeTask", req, cb)
   }
 }
