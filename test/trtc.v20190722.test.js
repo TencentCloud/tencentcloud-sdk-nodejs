@@ -518,6 +518,16 @@ it("trtc.v20190722.DescribeTRTCMarketQualityData", async function () {
     }
 })
 
+it("trtc.v20190722.ControlAIConversation", async function () {
+    try {
+       const data = await client.ControlAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StopAITranscription", async function () {
     try {
        const data = await client.StopAITranscription({})

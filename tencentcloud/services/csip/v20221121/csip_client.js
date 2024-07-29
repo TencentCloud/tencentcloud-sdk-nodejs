@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskCenterWebsiteRiskList", req, cb);
     }
     /**
+     * 云防资产中心统计数据
+     */
+    async DescribeCFWAssetStatistics(req, cb) {
+        return this.request("DescribeCFWAssetStatistics", req, cb);
+    }
+    /**
      * 获取报告下载的临时链接
      */
     async DescribeTaskLogURL(req, cb) {

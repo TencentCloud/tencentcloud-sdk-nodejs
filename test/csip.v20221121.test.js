@@ -218,6 +218,16 @@ it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
+    try {
+       const data = await client.DescribeCFWAssetStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeTaskLogURL", async function () {
     try {
        const data = await client.DescribeTaskLogURL({})

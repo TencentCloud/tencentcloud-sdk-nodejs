@@ -6145,6 +6145,11 @@ export interface DescAcItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetName?: string;
+    /**
+     * 规则最近命中时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastHitTime?: string;
 }
 /**
  * CreateChooseVpcs请求参数结构体
@@ -7281,11 +7286,11 @@ export interface DescribeAddressTemplateListResponse {
      */
     PortTemplateCount?: number;
     /**
-     * 已使用的地址模版数
+     * 已使用的地址模板数
      */
     UsedTemplateCount?: number;
     /**
-     * 地址模版配额数量
+     * 地址模板配额数量
      */
     TemplateQuotaCount?: number;
     /**

@@ -616,7 +616,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindDevices", req, cb);
     }
     /**
-     * 修改指定设备的云存 AI 服务开通状态与参数配置
+     * 修改指定设备的云存 AI 服务参数配置
      */
     async ModifyCloudStorageAIService(req, cb) {
         return this.request("ModifyCloudStorageAIService", req, cb);

@@ -1043,6 +1043,156 @@ export interface PortRiskAdvanceCFGParamItem {
     Enable?: number;
 }
 /**
+ * 主机资产详情
+ */
+export interface AssetBaseInfoResponse {
+    /**
+     * vpc-id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * vpc-name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcName?: string;
+    /**
+     * 资产名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetName?: string;
+    /**
+     * 操作系统
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Os?: string;
+    /**
+     * 公网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIp?: string;
+    /**
+     * 内网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrivateIp?: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: string;
+    /**
+     * 资产id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetId?: string;
+    /**
+     * 账号数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccountNum?: number;
+    /**
+     * 端口数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PortNum?: number;
+    /**
+     * 进程数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessNum?: number;
+    /**
+     * 软件应用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SoftApplicationNum?: number;
+    /**
+     * 数据库数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseNum?: number;
+    /**
+     * Web应用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebApplicationNum?: number;
+    /**
+     * 服务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceNum?: number;
+    /**
+     * web框架数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebFrameworkNum?: number;
+    /**
+     * Web站点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebSiteNum?: number;
+    /**
+     * Jar包数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JarPackageNum?: number;
+    /**
+     * 启动服务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartServiceNum?: number;
+    /**
+     * 计划任务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduledTaskNum?: number;
+    /**
+     * 环境变量数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnvironmentVariableNum?: number;
+    /**
+     * 内核模块数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KernelModuleNum?: number;
+    /**
+     * 系统安装包数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SystemInstallationPackageNum?: number;
+    /**
+     * 剩余防护时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SurplusProtectDay?: number;
+    /**
+     * 客户端是否安装  1 已安装 0 未安装
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CWPStatus?: number;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: Array<Tag>;
+    /**
+     * 防护等级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtectLevel?: string;
+    /**
+     * 防护时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtectedDay?: number;
+}
+/**
  * DescribeVULRiskDetail请求参数结构体
  */
 export interface DescribeVULRiskDetailRequest {
@@ -1505,21 +1655,21 @@ export interface DescribeVULRiskDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeVULRiskAdvanceCFGList请求参数结构体
+ * DescribeDomainAssets请求参数结构体
  */
-export interface DescribeVULRiskAdvanceCFGListRequest {
+export interface DescribeDomainAssetsRequest {
     /**
      * 集团账号的成员id
      */
     MemberId?: Array<string>;
     /**
-     * 任务ID
-     */
-    TaskId?: string;
-    /**
-     * 过滤条件
+     * -
      */
     Filter?: Filter;
+    /**
+     * 安全中心自定义标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * ModifyRiskCenterScanTask返回参数结构体
@@ -1560,21 +1710,37 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
     Tags?: Array<AssetTag>;
 }
 /**
- * DescribeDomainAssets请求参数结构体
+ * DescribeRiskCenterWebsiteRiskList返回参数结构体
  */
-export interface DescribeDomainAssetsRequest {
+export interface DescribeRiskCenterWebsiteRiskListResponse {
     /**
-     * 集团账号的成员id
+     * 总条数
      */
-    MemberId?: Array<string>;
+    TotalCount?: number;
     /**
-     * -
+     * 内容风险列表
      */
-    Filter?: Filter;
+    Data?: Array<WebsiteRisk>;
     /**
-     * 安全中心自定义标签
+     * 状态列表
      */
-    Tags?: Array<AssetTag>;
+    StatusLists?: Array<FilterDataObject>;
+    /**
+     * 危险等级列表
+     */
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 资产类型列表
+     */
+    InstanceTypeLists?: Array<FilterDataObject>;
+    /**
+     * 风险类型列表
+     */
+    DetectEngineLists?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 标签
@@ -1588,6 +1754,15 @@ export interface Tag {
      * 标签内容
      */
     Value: string;
+}
+/**
+ * ModifyRiskCenterRiskStatus返回参数结构体
+ */
+export interface ModifyRiskCenterRiskStatusResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateAlertStatusList返回参数结构体
@@ -1927,39 +2102,6 @@ export interface GateWayAsset {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineRegion?: string;
-}
-/**
- * DescribeRiskCenterWebsiteRiskList返回参数结构体
- */
-export interface DescribeRiskCenterWebsiteRiskListResponse {
-    /**
-     * 总条数
-     */
-    TotalCount?: number;
-    /**
-     * 内容风险列表
-     */
-    Data?: Array<WebsiteRisk>;
-    /**
-     * 状态列表
-     */
-    StatusLists?: Array<FilterDataObject>;
-    /**
-     * 危险等级列表
-     */
-    LevelLists?: Array<FilterDataObject>;
-    /**
-     * 资产类型列表
-     */
-    InstanceTypeLists?: Array<FilterDataObject>;
-    /**
-     * 风险类型列表
-     */
-    DetectEngineLists?: Array<FilterDataObject>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeScanReportList返回参数结构体
@@ -4459,6 +4601,41 @@ export interface DescribeAssetViewVulRiskListRequest {
     Tags?: Array<AssetTag>;
 }
 /**
+ * DescribeVulViewVulRiskList返回参数结构体
+ */
+export interface DescribeVulViewVulRiskListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 漏洞产视角的漏洞风险列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<VULViewVULRiskData>;
+    /**
+     * 危险等级列表
+     */
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 来源列表
+     */
+    FromLists?: Array<FilterDataObject>;
+    /**
+     * 漏洞类型列表
+     */
+    VULTypeLists?: Array<FilterDataObject>;
+    /**
+     * tag枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
  */
 export interface Filter {
@@ -4566,154 +4743,57 @@ export interface DescribeClusterPodAssetsResponse {
     RequestId?: string;
 }
 /**
- * 主机资产详情
+ * DescribeCFWAssetStatistics返回参数结构体
  */
-export interface AssetBaseInfoResponse {
+export interface DescribeCFWAssetStatisticsResponse {
     /**
-     * vpc-id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 网络资产总数
      */
-    VpcId?: string;
+    NetworkTotal?: number;
     /**
-     * vpc-name
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 资产clb数量
      */
-    VpcName?: string;
+    ClbTotal?: number;
     /**
-     * 资产名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * nat数量
      */
-    AssetName?: string;
+    NatTotal?: number;
     /**
-     * 操作系统
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 公网ip数量
      */
-    Os?: string;
+    PublicAssetTotal?: number;
     /**
-     * 公网ip
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主机数量
      */
-    PublicIp?: string;
+    CVMAssetTotal?: number;
     /**
-     * 内网ip
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 配置风险
      */
-    PrivateIp?: string;
+    CFGTotal?: number;
     /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 端口风险
      */
-    Region?: string;
+    PortTotal?: number;
     /**
-     * 资产类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 内容风险
      */
-    AssetType?: string;
+    WebsiteTotal?: number;
     /**
-     * 资产id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 风险服务暴露
      */
-    AssetId?: string;
+    ServerTotal?: number;
     /**
-     * 账号数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 弱口令风险
      */
-    AccountNum?: number;
+    WeakPasswordTotal?: number;
     /**
-     * 端口数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 漏洞风险
      */
-    PortNum?: number;
+    VULTotal?: number;
     /**
-     * 进程数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProcessNum?: number;
-    /**
-     * 软件应用数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SoftApplicationNum?: number;
-    /**
-     * 数据库数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DatabaseNum?: number;
-    /**
-     * Web应用数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WebApplicationNum?: number;
-    /**
-     * 服务数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ServiceNum?: number;
-    /**
-     * web框架数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WebFrameworkNum?: number;
-    /**
-     * Web站点数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WebSiteNum?: number;
-    /**
-     * Jar包数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    JarPackageNum?: number;
-    /**
-     * 启动服务数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StartServiceNum?: number;
-    /**
-     * 计划任务数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ScheduledTaskNum?: number;
-    /**
-     * 环境变量数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EnvironmentVariableNum?: number;
-    /**
-     * 内核模块数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    KernelModuleNum?: number;
-    /**
-     * 系统安装包数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SystemInstallationPackageNum?: number;
-    /**
-     * 剩余防护时长
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SurplusProtectDay?: number;
-    /**
-     * 客户端是否安装  1 已安装 0 未安装
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CWPStatus?: number;
-    /**
-     * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tag?: Array<Tag>;
-    /**
-     * 防护等级
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProtectLevel?: string;
-    /**
-     * 防护时长
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProtectedDay?: number;
+    RequestId?: string;
 }
 /**
  * DescribeGatewayAssets返回参数结构体
@@ -5545,13 +5625,21 @@ export interface TaskLogInfo {
     TemplateId?: number;
 }
 /**
- * ModifyRiskCenterRiskStatus返回参数结构体
+ * DescribeVULRiskAdvanceCFGList请求参数结构体
  */
-export interface ModifyRiskCenterRiskStatusResponse {
+export interface DescribeVULRiskAdvanceCFGListRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 集团账号的成员id
      */
-    RequestId?: string;
+    MemberId?: Array<string>;
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 过滤条件
+     */
+    Filter?: Filter;
 }
 /**
  * DescribeRiskCenterAssetViewVULRiskList请求参数结构体
@@ -6368,40 +6456,9 @@ export interface DescribeGatewayAssetsRequest {
     Filter?: Filter;
 }
 /**
- * DescribeVulViewVulRiskList返回参数结构体
+ * DescribeCFWAssetStatistics请求参数结构体
  */
-export interface DescribeVulViewVulRiskListResponse {
-    /**
-     * 总条数
-     */
-    TotalCount?: number;
-    /**
-     * 漏洞产视角的漏洞风险列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: Array<VULViewVULRiskData>;
-    /**
-     * 危险等级列表
-     */
-    LevelLists?: Array<FilterDataObject>;
-    /**
-     * 来源列表
-     */
-    FromLists?: Array<FilterDataObject>;
-    /**
-     * 漏洞类型列表
-     */
-    VULTypeLists?: Array<FilterDataObject>;
-    /**
-     * tag枚举
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<FilterDataObject>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeCFWAssetStatisticsRequest = null;
 /**
  * CreateDomainAndIp返回参数结构体
  */

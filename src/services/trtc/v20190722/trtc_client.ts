@@ -21,9 +21,10 @@ import {
   AgentConfig,
   CreatePictureRequest,
   AudioEncodeParams,
+  ServerPushText,
   DescribeTRTCMarketQualityMetricDataResponse,
   MixLayout,
-  DescribeRecordingUsageResponse,
+  McuVideoParams,
   DescribeTRTCRealTimeScaleDataRequest,
   StartAIConversationResponse,
   STTConfig,
@@ -37,7 +38,7 @@ import {
   AbnormalEvent,
   ScaleInfomation,
   DescribeTRTCRealTimeScaleMetricDataRequest,
-  StopWebRecordRequest,
+  ControlAIConversationResponse,
   StopAITranscriptionRequest,
   VideoEncodeParams,
   DescribeUserEventResponse,
@@ -62,7 +63,6 @@ import {
   DescribeWebRecordRequest,
   DescribeTRTCRealTimeScaleDataResponse,
   DescribeRecordStatisticRequest,
-  McuVideoParams,
   DescribeRoomInfoRequest,
   StorageParams,
   CloudVod,
@@ -83,11 +83,12 @@ import {
   EventList,
   DescribeTrtcUsageRequest,
   DescribeRoomInfoResponse,
-  DismissRoomRequest,
+  McuLayoutParams,
   DescribeTRTCRealTimeQualityMetricDataRequest,
   DescribeAITranscriptionRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   DescribeAIConversationResponse,
+  McuLayout,
   DescribeUserInfoResponse,
   RemoveUserByStrRoomIdResponse,
   DescribeTRTCRealTimeScaleMetricDataResponse,
@@ -99,7 +100,7 @@ import {
   DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
   StartStreamIngestRequest,
-  McuLayout,
+  DescribeRecordingUsageResponse,
   StopMCUMixTranscodeRequest,
   ModifyPictureResponse,
   DescribeRecordingUsageRequest,
@@ -114,7 +115,7 @@ import {
   AudioEncode,
   RemoveUserRequest,
   TRTCDataResult,
-  McuLayoutParams,
+  DismissRoomRequest,
   DescribeUnusualEventRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
@@ -145,11 +146,13 @@ import {
   DeleteCloudRecordingRequest,
   DescribePictureRequest,
   TRTCDataResp,
+  VideoParams,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
   UserInformation,
   DescribeScaleInfoRequest,
+  ControlAIConversationRequest,
   DismissRoomByStrRoomIdResponse,
   DescribeUnusualEventResponse,
   ModifyCloudRecordingResponse,
@@ -169,7 +172,7 @@ import {
   StopWebRecordResponse,
   SummarizeTranscriptionResponse,
   DeletePictureRequest,
-  VideoParams,
+  StopWebRecordRequest,
   McuSeiParams,
   StopAIConversationRequest,
   UpdatePublishCdnStreamResponse,
@@ -992,6 +995,16 @@ networkDelay ：网络延迟率。
     cb?: (error: string, rep: DescribeTRTCMarketQualityDataResponse) => void
   ): Promise<DescribeTRTCMarketQualityDataResponse> {
     return this.request("DescribeTRTCMarketQualityData", req, cb)
+  }
+
+  /**
+   * 提供服务端控制机器人的功能
+   */
+  async ControlAIConversation(
+    req: ControlAIConversationRequest,
+    cb?: (error: string, rep: ControlAIConversationResponse) => void
+  ): Promise<ControlAIConversationResponse> {
+    return this.request("ControlAIConversation", req, cb)
   }
 
   /**

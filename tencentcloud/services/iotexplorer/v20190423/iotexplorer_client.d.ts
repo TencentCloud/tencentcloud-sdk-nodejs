@@ -400,7 +400,7 @@ export declare class Client extends AbstractClient {
      */
     UnbindDevices(req: UnbindDevicesRequest, cb?: (error: string, rep: UnbindDevicesResponse) => void): Promise<UnbindDevicesResponse>;
     /**
-     * 修改指定设备的云存 AI 服务开通状态与参数配置
+     * 修改指定设备的云存 AI 服务参数配置
      */
     ModifyCloudStorageAIService(req: ModifyCloudStorageAIServiceRequest, cb?: (error: string, rep: ModifyCloudStorageAIServiceResponse) => void): Promise<ModifyCloudStorageAIServiceResponse>;
     /**

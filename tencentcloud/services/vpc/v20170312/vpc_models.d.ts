@@ -12306,6 +12306,7 @@ export interface CreateBandwidthPackageRequest {
   <li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
   <li>ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费</li>
   <li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费</li>
+  <li>PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费按主流量计费</li>
   
      */
     ChargeType?: string;

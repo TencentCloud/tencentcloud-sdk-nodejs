@@ -139,17 +139,17 @@ export interface DeleteProjectRequest {
  */
 export interface DescribeCloudStorageAIServiceResponse {
   /**
-   * 启用状态
+   * 视频分析启用状态
    */
   Enabled?: boolean
   /**
-   * 视频分析区域
-   */
-  ROI?: string
-  /**
-   * 云存 AI 服务的配置参数
+   * 视频分析配置参数
    */
   Config?: string
+  /**
+   * 视频分析识别区域
+   */
+  ROI?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2682,7 +2682,7 @@ export interface DescribeFenceEventListResponse {
  */
 export interface ModifyCloudStorageAIServiceCallbackRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
   /**
@@ -2951,7 +2951,7 @@ export interface CreateTopicPolicyResponse {
  */
 export interface ModifyCloudStorageAIServiceRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
   /**
@@ -2960,20 +2960,20 @@ export interface ModifyCloudStorageAIServiceRequest {
   DeviceName: string
   /**
    * 云存 AI 服务类型。可选值：
-- `PackageDetect`：包裹检测
+- `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
    */
   ServiceType: string
   /**
-   * 启用状态
+   * 视频分析启用状态
    */
   Enabled?: boolean
   /**
-   * 视频分析区域
+   * 视频分析识别区域
    */
   ROI?: string
   /**
-   * 云存 AI 服务的配置参数
+   * 视频分析配置参数
    */
   Config?: string
 }
@@ -3325,7 +3325,7 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
   DeviceName: string
   /**
    * 云存 AI 服务类型。可选值：
-- `PackageDetect`：包裹检测
+- `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
    */
   ServiceType: string
@@ -3347,11 +3347,11 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
    */
   Status?: number
   /**
-   * 用户ID
+   * 用户 ID
    */
   UserId?: string
   /**
-   * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+   * 通道 ID
    */
   ChannelId?: number
 }
@@ -3559,7 +3559,7 @@ export interface CheckFirmwareUpdateRequest {
  */
 export interface DescribeProductCloudStorageAIServiceRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
 }
@@ -5873,7 +5873,7 @@ export interface DescribeLoRaFrequencyRequest {
  */
 export interface ModifyProductCloudStorageAIServiceRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
   /**
@@ -6096,7 +6096,7 @@ export interface PublishMessageResponse {
  */
 export interface DescribeCloudStorageAIServiceCallbackRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
 }
@@ -6238,7 +6238,7 @@ export interface DescribeModelDefinitionRequest {
  */
 export interface DescribeCloudStorageAIServiceRequest {
   /**
-   * 产品ID
+   * 产品 ID
    */
   ProductId: string
   /**
@@ -6247,8 +6247,7 @@ export interface DescribeCloudStorageAIServiceRequest {
   DeviceName: string
   /**
    * 云存 AI 服务类型。可选值：
-
-- `PackageDetect`：包裹检测
+- `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
    */
   ServiceType: string

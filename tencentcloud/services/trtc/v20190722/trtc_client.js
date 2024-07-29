@@ -615,6 +615,12 @@ networkDelay ：网络延迟率。
         return this.request("DescribeTRTCMarketQualityData", req, cb);
     }
     /**
+     * 提供服务端控制机器人的功能
+     */
+    async ControlAIConversation(req, cb) {
+        return this.request("ControlAIConversation", req, cb);
+    }
+    /**
      * 停止AI转录任务。
      */
     async StopAITranscription(req, cb) {

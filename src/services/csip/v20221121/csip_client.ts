@@ -36,6 +36,7 @@ import {
   KeyValue,
   Vpc,
   PortRiskAdvanceCFGParamItem,
+  AssetBaseInfoResponse,
   DescribeVULRiskDetailRequest,
   DataSearchBug,
   OrganizationUserInfo,
@@ -44,11 +45,12 @@ import {
   IpAssetListVO,
   DescribeTopAttackInfoResponse,
   DescribeVULRiskDetailResponse,
-  DescribeVULRiskAdvanceCFGListRequest,
+  DescribeDomainAssetsRequest,
   ModifyRiskCenterScanTaskResponse,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
-  DescribeDomainAssetsRequest,
+  DescribeRiskCenterWebsiteRiskListResponse,
   Tag,
+  ModifyRiskCenterRiskStatusResponse,
   UpdateAlertStatusListResponse,
   DeleteDomainAndIpRequest,
   DescribeNICAssetsRequest,
@@ -57,7 +59,6 @@ import {
   RoleInfo,
   TagCount,
   GateWayAsset,
-  DescribeRiskCenterWebsiteRiskListResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
   TaskLogURL,
@@ -114,12 +115,13 @@ import {
   AlertExtraInfo,
   DescribeDbAssetInfoRequest,
   DescribeAssetViewVulRiskListRequest,
+  DescribeVulViewVulRiskListResponse,
   Filter,
   DescribeRiskCenterWebsiteRiskListRequest,
   ServerRiskSuggestion,
   DescribeSubnetAssetsRequest,
   DescribeClusterPodAssetsResponse,
-  AssetBaseInfoResponse,
+  DescribeCFWAssetStatisticsResponse,
   DescribeGatewayAssetsResponse,
   AssetViewPortRisk,
   DescribeRiskCenterPortViewPortRiskListRequest,
@@ -135,7 +137,7 @@ import {
   ScanTaskInfoList,
   DescribeDbAssetsRequest,
   TaskLogInfo,
-  ModifyRiskCenterRiskStatusResponse,
+  DescribeVULRiskAdvanceCFGListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   TaskCenterCFGRiskInputParam,
   DescribeAlertListRequest,
@@ -158,7 +160,7 @@ import {
   DescribeListenerListRequest,
   DeleteRiskScanTaskResponse,
   DescribeGatewayAssetsRequest,
-  DescribeVulViewVulRiskListResponse,
+  DescribeCFWAssetStatisticsRequest,
   CreateDomainAndIpResponse,
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
@@ -373,6 +375,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void
   ): Promise<DescribeRiskCenterWebsiteRiskListResponse> {
     return this.request("DescribeRiskCenterWebsiteRiskList", req, cb)
+  }
+
+  /**
+   * 云防资产中心统计数据
+   */
+  async DescribeCFWAssetStatistics(
+    req?: DescribeCFWAssetStatisticsRequest,
+    cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void
+  ): Promise<DescribeCFWAssetStatisticsResponse> {
+    return this.request("DescribeCFWAssetStatistics", req, cb)
   }
 
   /**

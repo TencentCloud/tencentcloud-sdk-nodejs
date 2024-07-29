@@ -7364,7 +7364,7 @@ export interface ExportAssetRecentMachineInfoResponse {
     /**
      * 下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13846,85 +13846,90 @@ export interface BashEvent {
     /**
      * 数据ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 主机安全ID
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 主机ID
      */
-    Quuid: string;
+    Quuid?: string;
     /**
      * 主机内网IP
      */
-    Hostip: string;
+    Hostip?: string;
     /**
      * 执行用户名
      */
-    User: string;
+    User?: string;
     /**
      * 平台类型
      */
-    Platform: number;
+    Platform?: number;
     /**
      * 执行命令
      */
-    BashCmd: string;
+    BashCmd?: string;
     /**
      * 规则ID
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 规则等级：1-高 2-中 3-低
      */
-    RuleLevel: number;
+    RuleLevel?: number;
     /**
      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
      */
-    Status: number;
+    Status?: number;
     /**
      * 发生时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 主机名
      */
-    MachineName: string;
+    MachineName?: string;
     /**
      * 0: bash日志 1: 实时监控(雷霆版)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetectBy: number;
+    DetectBy?: number;
     /**
      * 进程id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Pid: string;
+    Pid?: string;
     /**
      * 进程名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Exe: string;
+    Exe?: string;
     /**
      * 处理时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 规则类别  0=系统规则，1=用户规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleCategory: number;
+    RuleCategory?: number;
     /**
      * 自动生成的正则表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegexBashCmd: string;
+    RegexBashCmd?: string;
+    /**
+     * 主机HostName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostName?: string;
 }
 /**
  * DeleteMalwares请求参数结构体
@@ -17253,7 +17258,7 @@ export interface ExportSecurityTrendsResponse {
     /**
      * 导出文件下载链接地址。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18505,116 +18510,121 @@ export interface BashEventsInfo {
     /**
      * 数据ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 云镜ID
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 主机ID
      */
-    Quuid: string;
+    Quuid?: string;
     /**
      * 主机内网IP
      */
-    HostIp: string;
+    HostIp?: string;
     /**
      * 平台类型
      */
-    Platform: number;
+    Platform?: number;
     /**
      * 执行命令
      */
-    BashCmd: string;
+    BashCmd?: string;
     /**
      * 规则ID,等于0表示已规则已被删除或生效范围已修改
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 规则等级：1-高 2-中 3-低
      */
-    RuleLevel: number;
+    RuleLevel?: number;
     /**
      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3= 已忽略
      */
-    Status: number;
+    Status?: number;
     /**
      * 发生时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 主机名
      */
-    MachineName: string;
+    MachineName?: string;
     /**
      * 进程名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Exe: string;
+    Exe?: string;
     /**
      * 处理时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 规则类别  0=系统规则，1=用户规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleCategory: number;
+    RuleCategory?: number;
     /**
      * 自动生成的正则表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegexBashCmd: string;
+    RegexBashCmd?: string;
     /**
      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PsTree: string;
+    PsTree?: string;
     /**
      * 建议方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuggestScheme: string;
+    SuggestScheme?: string;
     /**
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HarmDescribe: string;
+    HarmDescribe?: string;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 参考链接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    References: Array<string>;
+    References?: Array<string>;
     /**
      * 主机外网ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MachineWanIp: string;
+    MachineWanIp?: string;
     /**
      * 主机在线状态 OFFLINE  ONLINE
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MachineStatus: string;
+    MachineStatus?: string;
     /**
      * 登录用户
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    User: string;
+    User?: string;
     /**
      * 进程号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Pid: string;
+    Pid?: string;
+    /**
+     * 数据来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetectBy?: string;
 }
 /**
  * StopNoticeBanTips返回参数结构体

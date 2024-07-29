@@ -98,6 +98,20 @@ export interface AudioEncodeParams {
 }
 
 /**
+ * 服务端控制AI对话机器人播报指定文本
+ */
+export interface ServerPushText {
+  /**
+   * 服务端推送播报文本
+   */
+  Text?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
+}
+
+/**
  * DescribeTRTCMarketQualityMetricData返回参数结构体
  */
 export interface DescribeTRTCMarketQualityMetricDataResponse {
@@ -167,21 +181,41 @@ export interface MixLayout {
 }
 
 /**
- * DescribeRecordingUsage返回参数结构体
+ * 混流转推的视频相关参数。
  */
-export interface DescribeRecordingUsageResponse {
+export interface McuVideoParams {
   /**
-   * 用量类型，与UsageValue中各个位置的值对应。
+   * 输出流视频编码参数。
    */
-  UsageKey?: Array<string>
+  VideoEncode?: VideoEncode
   /**
-   * 各个时间点用量明细。
+   * 混流布局参数。
    */
-  UsageList?: Array<TrtcUsage>
+  LayoutParams?: McuLayoutParams
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 整个画布背景颜色，常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
    */
-  RequestId?: string
+  BackGroundColor?: string
+  /**
+   * 整个画布的背景图url，优先级高于BackGroundColor。支持png、jpg、jpeg格式。图片大小限制不超过5MB。
+注：您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，背景图将不会生效。
+   */
+  BackgroundImageUrl?: string
+  /**
+   * 混流布局的水印参数。
+   */
+  WaterMarkList?: Array<McuWaterMarkParams>
+  /**
+   * 背景图在输出时的显示模式：0为裁剪，1为缩放并显示黑底，2为变比例伸缩。后台默认为变比例伸缩。
+   */
+  BackgroundRenderMode?: number
 }
 
 /**
@@ -493,13 +527,13 @@ export interface DescribeTRTCRealTimeScaleMetricDataRequest {
 }
 
 /**
- * StopWebRecord请求参数结构体
+ * ControlAIConversation返回参数结构体
  */
-export interface StopWebRecordRequest {
+export interface ControlAIConversationResponse {
   /**
-   * 需要停止的任务Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -1040,44 +1074,6 @@ export interface DescribeRecordStatisticRequest {
 }
 
 /**
- * 混流转推的视频相关参数。
- */
-export interface McuVideoParams {
-  /**
-   * 输出流视频编码参数。
-   */
-  VideoEncode?: VideoEncode
-  /**
-   * 混流布局参数。
-   */
-  LayoutParams?: McuLayoutParams
-  /**
-   * 整个画布背景颜色，常用的颜色有：
-红色：0xcc0033。
-黄色：0xcc9900。
-绿色：0xcccc33。
-蓝色：0x99CCFF。
-黑色：0x000000。
-白色：0xFFFFFF。
-灰色：0x999999。
-   */
-  BackGroundColor?: string
-  /**
-   * 整个画布的背景图url，优先级高于BackGroundColor。支持png、jpg、jpeg格式。图片大小限制不超过5MB。
-注：您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，背景图将不会生效。
-   */
-  BackgroundImageUrl?: string
-  /**
-   * 混流布局的水印参数。
-   */
-  WaterMarkList?: Array<McuWaterMarkParams>
-  /**
-   * 背景图在输出时的显示模式：0为裁剪，1为缩放并显示黑底，2为变比例伸缩。后台默认为变比例伸缩。
-   */
-  BackgroundRenderMode?: number
-}
-
-/**
  * DescribeRoomInfo请求参数结构体
  */
 export interface DescribeRoomInfoRequest {
@@ -1496,17 +1492,29 @@ export interface DescribeRoomInfoResponse {
 }
 
 /**
- * DismissRoom请求参数结构体
+ * 混流布局参数。
  */
-export interface DismissRoomRequest {
+export interface McuLayoutParams {
   /**
-   * TRTC的SDKAppId。
+   * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
    */
-  SdkAppId: number
+  MixLayoutMode?: number
   /**
-   * 数字房间号。本接口仅支持解散数字类型房间号，如需解散字符串类型房间号，请使用DismissRoomByStrRoomId。
+   * 纯音频上行是否占布局位置，只在动态布局中有效。0表示纯音频不占布局位置，1表示纯音频占布局位置，不填默认为0。
    */
-  RoomId: number
+  PureAudioHoldPlaceMode?: number
+  /**
+   * 自定义模板中有效，指定用户视频在混合画面中的位置。
+   */
+  MixLayoutList?: Array<McuLayout>
+  /**
+   * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
+   */
+  MaxVideoUser?: MaxVideoUser
+  /**
+   * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
+   */
+  RenderMode?: number
 }
 
 /**
@@ -1607,6 +1615,85 @@ export interface DescribeAIConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 混流布局参数。
+ */
+export interface McuLayout {
+  /**
+   * 用户媒体流参数。不填时腾讯云后台按照上行主播的进房顺序自动填充。
+   */
+  UserMediaStream?: UserMediaStream
+  /**
+   * 子画面在输出时的宽度，单位为像素值，不填默认为0。
+   */
+  ImageWidth?: number
+  /**
+   * 子画面在输出时的高度，单位为像素值，不填默认为0。
+   */
+  ImageHeight?: number
+  /**
+   * 子画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
+   */
+  LocationX?: number
+  /**
+   * 子画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
+   */
+  LocationY?: number
+  /**
+   * 子画面在输出时的层级，不填默认为0。
+   */
+  ZOrder?: number
+  /**
+   * 子画面在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底。不填默认为0。
+   */
+  RenderMode?: number
+  /**
+   * 【此参数配置无效，暂不支持】子画面的背景颜色，常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+   */
+  BackGroundColor?: string
+  /**
+   * 子画面的背景图url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。支持png、jpg、jpeg、bmp、gif、webm格式。图片大小限制不超过5MB。
+注：您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，子画面的背景图将不会生效。
+   */
+  BackgroundImageUrl?: string
+  /**
+   * 客户自定义裁剪，针对原始输入流裁剪
+   */
+  CustomCrop?: McuCustomCrop
+  /**
+   * 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩，4为自定义渲染。不填默认为3。
+   */
+  BackgroundRenderMode?: number
+  /**
+   * 子画面的透明模版url，指向一张包含透明通道的模板图片。填写该参数，后台混流时会提取该模板图片的透明通道，将其缩放作为目标画面的透明通道，再和其他画面进行混合。您可以通过透明模版实现目标画面的半透明效果和任意形状裁剪（如圆角、星形、心形等）。 支持png格式。图片大小限制不超过5MB。
+注：1，模板图片宽高比应接近目标画面宽高比，以避免缩放适配目标画面时出现模板效果变形；2，透明模版只有RenderMode为0（裁剪）时才生效；3，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，透明模版将不会生效。
+   */
+  TransparentUrl?: string
+  /**
+   * 子背景图的自定义渲染参数，当BackgroundRenderMode为4时必须配置。
+   */
+  BackgroundCustomRender?: McuBackgroundCustomRender
+  /**
+   * 子背景色生效模式，默认值为0表示均不生效。
+bit0:占位图缩放是否生效。
+bit1:上行流缩放是否生效。
+您可以将相应bit位置1启动生效，例如：
+0(00)表示子背景色不生效。
+1(01)表示子背景色只在占位图缩放时生效。
+2(10)表示子背景色只在上行流缩放时生效。
+3(11)表示子背景色在占位图缩放和上行流缩放时均生效。
+
+   */
+  BackGroundColorMode?: number
 }
 
 /**
@@ -1874,82 +1961,21 @@ export interface StartStreamIngestRequest {
 }
 
 /**
- * 混流布局参数。
+ * DescribeRecordingUsage返回参数结构体
  */
-export interface McuLayout {
+export interface DescribeRecordingUsageResponse {
   /**
-   * 用户媒体流参数。不填时腾讯云后台按照上行主播的进房顺序自动填充。
+   * 用量类型，与UsageValue中各个位置的值对应。
    */
-  UserMediaStream?: UserMediaStream
+  UsageKey?: Array<string>
   /**
-   * 子画面在输出时的宽度，单位为像素值，不填默认为0。
+   * 各个时间点用量明细。
    */
-  ImageWidth?: number
+  UsageList?: Array<TrtcUsage>
   /**
-   * 子画面在输出时的高度，单位为像素值，不填默认为0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageHeight?: number
-  /**
-   * 子画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
-   */
-  LocationX?: number
-  /**
-   * 子画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
-   */
-  LocationY?: number
-  /**
-   * 子画面在输出时的层级，不填默认为0。
-   */
-  ZOrder?: number
-  /**
-   * 子画面在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底。不填默认为0。
-   */
-  RenderMode?: number
-  /**
-   * 【此参数配置无效，暂不支持】子画面的背景颜色，常用的颜色有：
-红色：0xcc0033。
-黄色：0xcc9900。
-绿色：0xcccc33。
-蓝色：0x99CCFF。
-黑色：0x000000。
-白色：0xFFFFFF。
-灰色：0x999999。
-   */
-  BackGroundColor?: string
-  /**
-   * 子画面的背景图url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。支持png、jpg、jpeg、bmp、gif、webm格式。图片大小限制不超过5MB。
-注：您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，子画面的背景图将不会生效。
-   */
-  BackgroundImageUrl?: string
-  /**
-   * 客户自定义裁剪，针对原始输入流裁剪
-   */
-  CustomCrop?: McuCustomCrop
-  /**
-   * 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩，4为自定义渲染。不填默认为3。
-   */
-  BackgroundRenderMode?: number
-  /**
-   * 子画面的透明模版url，指向一张包含透明通道的模板图片。填写该参数，后台混流时会提取该模板图片的透明通道，将其缩放作为目标画面的透明通道，再和其他画面进行混合。您可以通过透明模版实现目标画面的半透明效果和任意形状裁剪（如圆角、星形、心形等）。 支持png格式。图片大小限制不超过5MB。
-注：1，模板图片宽高比应接近目标画面宽高比，以避免缩放适配目标画面时出现模板效果变形；2，透明模版只有RenderMode为0（裁剪）时才生效；3，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，透明模版将不会生效。
-   */
-  TransparentUrl?: string
-  /**
-   * 子背景图的自定义渲染参数，当BackgroundRenderMode为4时必须配置。
-   */
-  BackgroundCustomRender?: McuBackgroundCustomRender
-  /**
-   * 子背景色生效模式，默认值为0表示均不生效。
-bit0:占位图缩放是否生效。
-bit1:上行流缩放是否生效。
-您可以将相应bit位置1启动生效，例如：
-0(00)表示子背景色不生效。
-1(01)表示子背景色只在占位图缩放时生效。
-2(10)表示子背景色只在上行流缩放时生效。
-3(11)表示子背景色在占位图缩放和上行流缩放时均生效。
-
-   */
-  BackGroundColorMode?: number
+  RequestId?: string
 }
 
 /**
@@ -2262,29 +2288,17 @@ export interface TRTCDataResult {
 }
 
 /**
- * 混流布局参数。
+ * DismissRoom请求参数结构体
  */
-export interface McuLayoutParams {
+export interface DismissRoomRequest {
   /**
-   * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
+   * TRTC的SDKAppId。
    */
-  MixLayoutMode?: number
+  SdkAppId: number
   /**
-   * 纯音频上行是否占布局位置，只在动态布局中有效。0表示纯音频不占布局位置，1表示纯音频占布局位置，不填默认为0。
+   * 数字房间号。本接口仅支持解散数字类型房间号，如需解散字符串类型房间号，请使用DismissRoomByStrRoomId。
    */
-  PureAudioHoldPlaceMode?: number
-  /**
-   * 自定义模板中有效，指定用户视频在混合画面中的位置。
-   */
-  MixLayoutList?: Array<McuLayout>
-  /**
-   * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
-   */
-  MaxVideoUser?: MaxVideoUser
-  /**
-   * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
-   */
-  RenderMode?: number
+  RoomId: number
 }
 
 /**
@@ -3000,6 +3014,32 @@ export interface TRTCDataResp {
 }
 
 /**
+ * 录制视频转码参数。
+ */
+export interface VideoParams {
+  /**
+   * 视频的宽度值，单位为像素，默认值360。不能超过1920，与height的乘积不能超过1920*1080。
+   */
+  Width: number
+  /**
+   * 视频的高度值，单位为像素，默认值640。不能超过1920，与width的乘积不能超过1920*1080。
+   */
+  Height: number
+  /**
+   * 视频的帧率，范围[1, 60]，默认15。
+   */
+  Fps: number
+  /**
+   * 视频的码率,单位是bps，范围[64000, 8192000]，默认550000bps。
+   */
+  BitRate: number
+  /**
+   * 视频关键帧时间间隔，单位秒，默认值10秒。
+   */
+  Gop: number
+}
+
+/**
  * DescribePicture返回参数结构体
  */
 export interface DescribePictureResponse {
@@ -3110,6 +3150,26 @@ export interface DescribeScaleInfoRequest {
 注意：按天统计，结束时间大于前一天，否则查询数据为空（如：需查询20号数据，结束时间需晚于20号0点）。
    */
   EndTime: number
+}
+
+/**
+ * ControlAIConversation请求参数结构体
+ */
+export interface ControlAIConversationRequest {
+  /**
+   * 任务唯一标识
+   */
+  TaskId: string
+  /**
+   * 控制命令，目前支持命令如下：
+
+- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本
+   */
+  Command: string
+  /**
+   * 服务端发送播报文本命令，当Command为ServerPushText时必填
+   */
+  ServerPushText?: ServerPushText
 }
 
 /**
@@ -3489,29 +3549,13 @@ export interface DeletePictureRequest {
 }
 
 /**
- * 录制视频转码参数。
+ * StopWebRecord请求参数结构体
  */
-export interface VideoParams {
+export interface StopWebRecordRequest {
   /**
-   * 视频的宽度值，单位为像素，默认值360。不能超过1920，与height的乘积不能超过1920*1080。
+   * 需要停止的任务Id
    */
-  Width: number
-  /**
-   * 视频的高度值，单位为像素，默认值640。不能超过1920，与width的乘积不能超过1920*1080。
-   */
-  Height: number
-  /**
-   * 视频的帧率，范围[1, 60]，默认15。
-   */
-  Fps: number
-  /**
-   * 视频的码率,单位是bps，范围[64000, 8192000]，默认550000bps。
-   */
-  BitRate: number
-  /**
-   * 视频关键帧时间间隔，单位秒，默认值10秒。
-   */
-  Gop: number
+  TaskId: string
 }
 
 /**
