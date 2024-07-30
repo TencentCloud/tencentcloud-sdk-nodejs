@@ -59,6 +59,7 @@ import {
   SessionDeviceDetail,
   GetDeviceLicenseResponse,
   CreateDeviceResponse,
+  MultiNet,
   DescribeSessionStatisticsByIntervalRequest,
   CreateDeviceRequest,
   DescribeSessionStatisticsResponse,

@@ -1579,7 +1579,7 @@ export interface Encryption {
      */
     EncryptList: Array<string>;
     /**
-     * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅<a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
+     * 加密后的对称密钥，关于密钥的生成和使用请查阅<a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CiphertextBlob: string;

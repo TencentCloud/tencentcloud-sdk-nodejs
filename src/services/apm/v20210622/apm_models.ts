@@ -989,6 +989,10 @@ export interface DescribeMetricRecordsRequest {
    * Or过滤条件
    */
   OrFilters?: Array<Filter>
+  /**
+   * 数据来源
+   */
+  Type?: string
 }
 
 /**

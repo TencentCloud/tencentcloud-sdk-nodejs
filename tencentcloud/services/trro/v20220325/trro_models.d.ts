@@ -5,7 +5,7 @@ export interface DescribeDeviceSessionDetailsResponse {
     /**
      * 按设备区分的会话详细数据
      */
-    Details: Array<SessionDeviceDetail>;
+    Details?: Array<SessionDeviceDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -703,15 +703,15 @@ export interface DescribeDeviceListResponse {
     /**
      * 设备信息列表
      */
-    Devices: Array<DeviceInfo>;
+    Devices?: Array<DeviceInfo>;
     /**
      * 设备总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 本次返回的设备数
      */
-    Num: number;
+    Num?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -767,6 +767,10 @@ export interface DescribeDeviceListRequest {
      * 当前页码，不填默认为1（首页）
      */
     PageNumber?: number;
+    /**
+     * 设备状态筛选，不填默认为不过滤。取值：["ready","connected","online"]，online代表ready或connected
+     */
+    DeviceStatus?: string;
 }
 /**
  * 会话数据详单（按设备区分）
@@ -844,8 +848,9 @@ export interface SessionDeviceDetail {
      */
     DecodeCost?: Array<number | bigint>;
     /**
-     * 渲染耗时，单位：ms
+     * 【已废弃，使用RenderCost】
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     RenderConst?: Array<number | bigint>;
     /**
@@ -888,6 +893,56 @@ export interface SessionDeviceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptureCost?: Array<number | bigint>;
+    /**
+     * 渲染耗时，单位：ms
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenderCost?: Array<number | bigint>;
+    /**
+     * 配置宽度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigWidth?: number;
+    /**
+     * 配置高度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigHeight?: number;
+    /**
+     * 平均帧间隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FrameDelta?: Array<number | bigint>;
+    /**
+     * 最大帧间隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxFrameDelta?: Array<number | bigint>;
+    /**
+     * 总码率评估,单位：kbps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalBitrateEstimate?: Array<number | bigint>;
+    /**
+     * 帧间隔大于100ms的卡顿时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lag100Duration?: Array<number | bigint>;
+    /**
+     * 帧间隔大于150ms的卡顿时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lag150Duration?: Array<number | bigint>;
+    /**
+     * 是否开启多网：0 单网，1 多网
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MultiMode?: number;
+    /**
+     * 多网卡信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MultiNet?: Array<MultiNet>;
 }
 /**
  * GetDeviceLicense返回参数结构体
@@ -910,6 +965,41 @@ export interface CreateDeviceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 多网的网卡状态信息
+ */
+export interface MultiNet {
+    /**
+     * 网卡序号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetId?: number;
+    /**
+     * 网卡IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetIp?: string;
+    /**
+     * 时延，单位ms
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rtt?: Array<number | bigint>;
+    /**
+     * 丢包率，单位%
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lost?: Array<number | bigint>;
+    /**
+     * 发送bps，单位kbps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SendBps?: Array<number | bigint>;
+    /**
+     * 接收bps，单位kbps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecvBps?: Array<number | bigint>;
 }
 /**
  * DescribeSessionStatisticsByInterval请求参数结构体

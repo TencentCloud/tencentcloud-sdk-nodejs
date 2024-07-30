@@ -943,6 +943,10 @@ export interface DescribeMetricRecordsRequest {
      * Or过滤条件
      */
     OrFilters?: Array<Filter>;
+    /**
+     * 数据来源
+     */
+    Type?: string;
 }
 /**
  * DescribeGeneralApmApplicationConfig返回参数结构体

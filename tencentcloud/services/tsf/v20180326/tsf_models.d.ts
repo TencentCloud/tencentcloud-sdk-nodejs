@@ -12474,13 +12474,13 @@ export interface DescribeUsableUnitNamespacesRequest {
  */
 export interface DescribeContainerGroupsRequest {
     /**
+     * 分组所属应用ID。
+     */
+    ApplicationId: string;
+    /**
      * 搜索字段，模糊搜索groupName字段
      */
     SearchWord?: string;
-    /**
-     * 分组所属应用ID。必填
-     */
-    ApplicationId?: string;
     /**
      * 排序字段，默认为 createTime字段，支持id， name， createTime
      */

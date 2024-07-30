@@ -464,7 +464,7 @@ export declare class Client extends AbstractClient {
      */
     CreateTable(req: CreateTableRequest, cb?: (error: string, rep: CreateTableResponse) => void): Promise<CreateTableResponse>;
     /**
-     * 查询任务结果
+     * 查询任务结果，仅支持30天以内的任务查询结果，且返回数据大小超过近50M会进行截断。
      */
     DescribeTaskResult(req: DescribeTaskResultRequest, cb?: (error: string, rep: DescribeTaskResultResponse) => void): Promise<DescribeTaskResultResponse>;
     /**

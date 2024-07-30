@@ -588,7 +588,7 @@ export interface BidPreDomainsResponse {
  */
 export interface DescribeAuctionListRequest {
     /**
-     * 业务ID
+     * 业务ID，通过接口DescribeBiddingList返回结果中获取
      */
     BusinessId: string;
     /**

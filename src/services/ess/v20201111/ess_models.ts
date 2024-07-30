@@ -4609,11 +4609,9 @@ export interface CreateFlowApproversRequest {
    */
   Operator: UserInfo
   /**
-   * 补充企业签署人信息。
+   * 补充签署环节签署候选人信息。
 
-- 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充；
-
-- 如果不指定，则使用姓名和手机号进行补充。
+注：` 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充； 如果不指定，则使用姓名和手机号进行补充。`
    */
   Approvers: Array<FillApproverInfo>
   /**
@@ -4625,9 +4623,9 @@ export interface CreateFlowApproversRequest {
   /**
    * 签署人信息补充方式
 
-<ul><li>**0**: 添加或签人候选人，或签支持一个节点传多个签署人，不传值默认或签。
+<ul><li>**0**: <font color="red">或签合同</font>添加签署候选人，或签支持一个节点传多个签署人，不传值默认或签。
 注: `或签只支持企业签署方`</li>
-<li>**1**: 表示往未指定签署人的节点，添加一个明确的签署人，支持企业或个人签署方。</li></ul>
+<li>**1**: <font color="red">动态签署人合同</font>的添加签署候选人，支持企业或个人签署方。</li></ul>
    */
   FillApproverType?: number
   /**
