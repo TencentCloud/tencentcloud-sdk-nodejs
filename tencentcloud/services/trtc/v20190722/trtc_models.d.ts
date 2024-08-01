@@ -1347,6 +1347,11 @@ export interface McuUserInfoParams {
      * 用户参数。
      */
     UserInfo: MixUserInfo;
+    /**
+     * 混音的音量调整：取值范围是0到100，100为原始上行音量，不填默认为100，值越小则音量越低。
+  注：该参数只在音量白名单下配置生效，其他场景配置无效。
+     */
+    SoundLevel?: number;
 }
 /**
  * 用户媒体流参数。

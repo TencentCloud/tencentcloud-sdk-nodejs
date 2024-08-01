@@ -4288,7 +4288,7 @@ export interface CreateClusterResponse {
      * 实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4453,6 +4453,10 @@ export interface CreateClusterRequest {
      * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
      */
     ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>;
+    /**
+     * cos桶路径，创建StarRocks存算分离集群时用到
+     */
+    CosBucket?: string;
 }
 /**
  * 容器集群用户组信息
@@ -4786,6 +4790,10 @@ export interface CreateInstanceRequest {
      * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
      */
     MultiZoneSettings?: Array<MultiZoneSetting>;
+    /**
+     * cos桶路径，创建StarRocks存算分离集群时用到
+     */
+    CosBucket?: string;
 }
 /**
  * 元数据库信息

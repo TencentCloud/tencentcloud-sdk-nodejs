@@ -41,6 +41,7 @@ import {
   DeleteShareUnitMembersResponse,
   DescribePolicyResponse,
   CreateOrganizationIdentityRequest,
+  ListOrganizationServiceResponse,
   DeletePolicyResponse,
   DescribeOrganizationResponse,
   ListNonCompliantResourceRequest,
@@ -51,6 +52,7 @@ import {
   UpdateOrganizationIdentityRequest,
   ShareUnitMember,
   CancelOrganizationMemberAuthAccountRequest,
+  OrganizationServiceAssign,
   DeleteOrganizationResponse,
   OrgMemberAuthAccount,
   MemberMainInfo,
@@ -153,6 +155,7 @@ import {
   CreateOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationFinancialByMemberRequest,
   DescribeOrganizationFinancialByMonthRequest,
+  ListOrganizationServiceRequest,
   CreateOrganizationMembersPolicyResponse,
   DeleteShareUnitResourcesResponse,
   CreateOrganizationIdentityResponse,
@@ -782,6 +785,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
   ): Promise<CreateOrganizationMemberPolicyResponse> {
     return this.request("CreateOrganizationMemberPolicy", req, cb)
+  }
+
+  /**
+   * 获取集团服务设置列表
+   */
+  async ListOrganizationService(
+    req: ListOrganizationServiceRequest,
+    cb?: (error: string, rep: ListOrganizationServiceResponse) => void
+  ): Promise<ListOrganizationServiceResponse> {
+    return this.request("ListOrganizationService", req, cb)
   }
 
   /**

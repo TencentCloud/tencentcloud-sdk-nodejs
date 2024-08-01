@@ -105,6 +105,14 @@ export interface ChatCompletionsRequest {
    * 默认是false，在值为true且命中搜索时，接口会返回SearchInfo
    */
   SearchInfo?: boolean
+  /**
+   * 搜索引文角标开关。
+说明：
+1. 配合EnableEnhancement和SearchInfo参数使用。打开后，回答中命中搜索的结果会在片段后增加角标标志，对应SearchInfo列表中的链接。
+2. false：开关关闭，true：开关打开。
+3. 未传值时默认开关关闭（false）。
+   */
+  Citation?: boolean
 }
 
 /**
@@ -667,7 +675,7 @@ export interface ChatCompletionsResponse {
    */
   Note?: string
   /**
-   * 本轮对话的 ID。
+   * 本次请求的 RequestId。
    */
   Id?: string
   /**

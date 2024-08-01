@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicPolicy", req, cb);
     }
     /**
-     * 修改指定产品的云存 AI 服务开通状态
+     * 开通设备云存AI分析服务
      */
-    async ModifyProductCloudStorageAIService(req, cb) {
-        return this.request("ModifyProductCloudStorageAIService", req, cb);
+    async CreateCloudStorageAIService(req, cb) {
+        return this.request("CreateCloudStorageAIService", req, cb);
     }
     /**
      * 提供查询用户所创建的项目列表查询功能。
@@ -370,6 +370,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageThumbnail", req, cb);
     }
     /**
+     * 重置指定设备的云存 AI 服务
+     */
+    async ResetCloudStorageAIService(req, cb) {
+        return this.request("ResetCloudStorageAIService", req, cb);
+    }
+    /**
      * 查询微信设备授权票据
      */
     async GetWechatDeviceTicket(req, cb) {
@@ -458,6 +464,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePositionFence(req, cb) {
         return this.request("CreatePositionFence", req, cb);
+    }
+    /**
+     * 修改指定产品的云存 AI 服务开通状态
+     */
+    async ModifyProductCloudStorageAIService(req, cb) {
+        return this.request("ModifyProductCloudStorageAIService", req, cb);
     }
     /**
      * 创建新 LoRa 网关设备接口

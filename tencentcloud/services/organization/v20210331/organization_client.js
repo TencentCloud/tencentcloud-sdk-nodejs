@@ -388,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOrganizationMemberPolicy", req, cb);
     }
     /**
+     * 获取集团服务设置列表
+     */
+    async ListOrganizationService(req, cb) {
+        return this.request("ListOrganizationService", req, cb);
+    }
+    /**
      * 本接口（ListTargetsForPolicy）查询某个指定策略关联的目标列表
      */
     async ListTargetsForPolicy(req, cb) {

@@ -1245,6 +1245,11 @@ export interface KongActiveHealthCheck {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpPath?: string
+  /**
+   * GET HTTP 请求的超时时间，单位：秒。默认 60。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeout?: number
 }
 
 /**

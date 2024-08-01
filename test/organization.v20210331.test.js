@@ -618,6 +618,16 @@ it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
     }
 })
 
+it("organization.v20210331.ListOrganizationService", async function () {
+    try {
+       const data = await client.ListOrganizationService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.ListTargetsForPolicy", async function () {
     try {
        const data = await client.ListTargetsForPolicy({})

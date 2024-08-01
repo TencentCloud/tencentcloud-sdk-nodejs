@@ -18,6 +18,46 @@ const client = new tencentcloud.cdwdoris.v20211228.Client({
 })
 describe("cdwdoris.v20211228.test.js", function () {
 
+it("cdwdoris.v20211228.CreateBackUpSchedule", async function () {
+    try {
+       const data = await client.CreateBackUpSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeFrontEnd", async function () {
+    try {
+       const data = await client.DescribeFrontEnd({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeBackUpSchedules", async function () {
+    try {
+       const data = await client.DescribeBackUpSchedules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeBackUpJob", async function () {
+    try {
+       const data = await client.DescribeBackUpJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.DestroyInstance", async function () {
     try {
        const data = await client.DestroyInstance({})
@@ -28,9 +68,19 @@ it("cdwdoris.v20211228.DestroyInstance", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeSqlApis", async function () {
+it("cdwdoris.v20211228.DescribeDorisMetricFiles", async function () {
     try {
-       const data = await client.DescribeSqlApis({})
+       const data = await client.DescribeDorisMetricFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeDatabaseAuditRecords", async function () {
+    try {
+       const data = await client.DescribeDatabaseAuditRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +148,9 @@ it("cdwdoris.v20211228.DescribeUserBindWorkloadGroup", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ScaleUpInstance", async function () {
+it("cdwdoris.v20211228.DescribeBackUpTables", async function () {
     try {
-       const data = await client.ScaleUpInstance({})
+       const data = await client.DescribeBackUpTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +168,19 @@ it("cdwdoris.v20211228.DescribeRegionZone", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ModifyWorkloadGroup", async function () {
+it("cdwdoris.v20211228.ModifyNodeStatus", async function () {
     try {
-       const data = await client.ModifyWorkloadGroup({})
+       const data = await client.ModifyNodeStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeClusterConfigsHistory", async function () {
+    try {
+       const data = await client.DescribeClusterConfigsHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +218,9 @@ it("cdwdoris.v20211228.ModifyUserBindWorkloadGroup", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ScaleOutInstance", async function () {
+it("cdwdoris.v20211228.DeleteBackUpData", async function () {
     try {
-       const data = await client.ScaleOutInstance({})
+       const data = await client.DeleteBackUpData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +231,16 @@ it("cdwdoris.v20211228.ScaleOutInstance", async function () {
 it("cdwdoris.v20211228.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ModifyWorkloadGroup", async function () {
+    try {
+       const data = await client.ModifyWorkloadGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +278,29 @@ it("cdwdoris.v20211228.DeleteWorkloadGroup", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
+it("cdwdoris.v20211228.OpenBackUp", async function () {
     try {
-       const data = await client.ModifySecurityGroups({})
+       const data = await client.OpenBackUp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeDmsSqlHistory", async function () {
+    try {
+       const data = await client.DescribeDmsSqlHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeReplicaVersion", async function () {
+    try {
+       const data = await client.DescribeReplicaVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +311,26 @@ it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
 it("cdwdoris.v20211228.DescribeFederationToken", async function () {
     try {
        const data = await client.DescribeFederationToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
+    try {
+       const data = await client.ModifySecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.RecoverBackUpJob", async function () {
+    try {
+       const data = await client.RecoverBackUpJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,6 +358,16 @@ it("cdwdoris.v20211228.ModifyUserPrivilegesV3", async function () {
     }
 })
 
+it("cdwdoris.v20211228.DescribeInstanceOperations", async function () {
+    try {
+       const data = await client.DescribeInstanceOperations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.FitClsLog", async function () {
     try {
        const data = await client.FitClsLog({})
@@ -258,9 +378,19 @@ it("cdwdoris.v20211228.FitClsLog", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeDatabaseAuditRecords", async function () {
+it("cdwdoris.v20211228.DescribeSqlApis", async function () {
     try {
-       const data = await client.DescribeDatabaseAuditRecords({})
+       const data = await client.DescribeSqlApis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeBackUpTaskDetail", async function () {
+    try {
+       const data = await client.DescribeBackUpTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,16 +418,6 @@ it("cdwdoris.v20211228.CreateInstanceNew", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeInstanceNodes", async function () {
-    try {
-       const data = await client.DescribeInstanceNodes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdwdoris.v20211228.DescribeGoodsDetail", async function () {
     try {
        const data = await client.DescribeGoodsDetail({})
@@ -308,9 +428,109 @@ it("cdwdoris.v20211228.DescribeGoodsDetail", async function () {
     }
 })
 
+it("cdwdoris.v20211228.DescribeDatabaseAuditResource", async function () {
+    try {
+       const data = await client.DescribeDatabaseAuditResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.CancelBackupJob", async function () {
+    try {
+       const data = await client.CancelBackupJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ScaleUpInstance", async function () {
+    try {
+       const data = await client.ScaleUpInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ScaleOutInstance", async function () {
+    try {
+       const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeBackUpJobDetail", async function () {
+    try {
+       const data = await client.DescribeBackUpJobDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeInstanceNodesRole", async function () {
+    try {
+       const data = await client.DescribeInstanceNodesRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.RestartClusterForConfigs", async function () {
+    try {
+       const data = await client.RestartClusterForConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeSpec", async function () {
+    try {
+       const data = await client.DescribeSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeAreaRegion", async function () {
+    try {
+       const data = await client.DescribeAreaRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.ResizeDisk", async function () {
     try {
        const data = await client.ResizeDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeInstancesHealthState", async function () {
+    try {
+       const data = await client.DescribeInstancesHealthState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +558,9 @@ it("cdwdoris.v20211228.DescribeSlowQueryRecordsDownload", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeReplicaVersion", async function () {
+it("cdwdoris.v20211228.DescribeInstanceNodes", async function () {
     try {
-       const data = await client.DescribeReplicaVersion({})
+       const data = await client.DescribeInstanceNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

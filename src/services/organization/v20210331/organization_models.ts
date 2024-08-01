@@ -405,6 +405,26 @@ export interface CreateOrganizationIdentityRequest {
 }
 
 /**
+ * ListOrganizationService返回参数结构体
+ */
+export interface ListOrganizationServiceResponse {
+  /**
+   * 总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 集团服务列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<OrganizationServiceAssign>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeletePolicy返回参数结构体
  */
 export interface DeletePolicyResponse {
@@ -628,6 +648,78 @@ export interface CancelOrganizationMemberAuthAccountRequest {
    * 组织子账号Uin。
    */
   OrgSubAccountUin: number
+}
+
+/**
+ * 集团服务设置
+ */
+export interface OrganizationServiceAssign {
+  /**
+   * 集团服务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: number
+  /**
+   * 集团服务产品名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductName?: string
+  /**
+   * 是否支持委派。取值: 1-是  2-否
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAssign?: number
+  /**
+   * 集团服务描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 当前委派管理员数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberNum?: string
+  /**
+   * 帮助文档。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Document?: string
+  /**
+   * 集团服务产品控制台路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsoleUrl?: string
+  /**
+   * 是否接入使用状态。取值: 1-是 
+ 2-否
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsUsageStatus?: number
+  /**
+   * 委派管理员数量限制。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanAssignCount?: number
+  /**
+   * 集团服务产品标识。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Product?: string
+  /**
+   * 是否支持集团服务授权。取值 1-是、2-否
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceGrant?: number
+  /**
+   * 集团服务授权启用状态。ServiceGrant值为1时该字段有效 ，取值：Enabled-开启  Disabled-关闭 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GrantStatus?: string
+  /**
+   * 是否支持设置委派管理范围。取值: 1-是  2-否
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSetManagementScope?: number
 }
 
 /**
@@ -2786,6 +2878,24 @@ export interface DescribeOrganizationFinancialByMonthRequest {
    * 查询产品列表。 最大100个
    */
   ProductCodes?: Array<string>
+}
+
+/**
+ * ListOrganizationService请求参数结构体
+ */
+export interface ListOrganizationServiceRequest {
+  /**
+   * 偏移量。取值是limit的整数倍，默认值 : 0
+   */
+  Offset: number
+  /**
+   * 限制数目。取值范围：1~50，默认值：10
+   */
+  Limit: number
+  /**
+   * 名称搜索关键字。
+   */
+  SearchKey?: string
 }
 
 /**

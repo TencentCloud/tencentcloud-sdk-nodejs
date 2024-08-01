@@ -50,7 +50,7 @@ export interface ImageTranslateRequest {
    */
   Scene: string
   /**
-   * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
+   * 图片数据的Base64字符串，经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片中包含文字需要少于6000字符。
    */
   Data: string
   /**

@@ -205,6 +205,20 @@ export interface DescribeInstanceMonitorTopNCmdResponse {
 }
 
 /**
+ * ModifyInstanceAvailabilityZones返回参数结构体
+ */
+export interface ModifyInstanceAvailabilityZonesResponse {
+  /**
+   * 任务ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAutoBackupConfig返回参数结构体
  */
 export interface ModifyAutoBackupConfigResponse {
@@ -1555,6 +1569,68 @@ export interface DisableReplicaReadonlyRequest {
 }
 
 /**
+ * redis独享集群详细信息
+ */
+export interface CDCResource {
+  /**
+   * 用户的Appid
+   */
+  AppId: number
+  /**
+   * 地域id
+   */
+  RegionId: number
+  /**
+   * 可用区id
+   */
+  ZoneId: number
+  /**
+   * redis独享集群id
+   */
+  RedisClusterId: string
+  /**
+   * 计费模式，1-包年包月，0-按量计费
+   */
+  PayMode: number
+  /**
+   * 项目id
+   */
+  ProjectId: number
+  /**
+   * 自动续费标识，0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+   */
+  AutoRenewFlag: number
+  /**
+   * 独享集群名称
+   */
+  ClusterName: string
+  /**
+   * 实例创建时间
+   */
+  StartTime: string
+  /**
+   * 实例到期时间
+   */
+  EndTime: string
+  /**
+   * 集群状态：1-流程中，2-运行中，3-已隔离
+   */
+  Status: number
+  /**
+   * 基础管控资源包
+   */
+  BaseBundles: Array<ResourceBundle>
+  /**
+   * 资源包列表
+   */
+  ResourceBundles: Array<ResourceBundle>
+  /**
+   * 所属本地专有集群id
+   */
+  DedicatedClusterId: string
+}
+
+/**
  * 任务信息详情
  */
 export interface TaskInfoDetail {
@@ -2636,6 +2712,17 @@ export interface DeleteReplicationInstanceRequest {
 }
 
 /**
+ * SwitchAccessNewInstance请求参数结构体
+ */
+export interface SwitchAccessNewInstanceRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+示例值：crs-asdasdas
+   */
+  InstanceId: string
+}
+
+/**
  * KillMasterGroup请求参数结构体
  */
 export interface KillMasterGroupRequest {
@@ -2812,6 +2899,24 @@ export interface InstanceTextParam {
 - 2：修改完成。
    */
   Status?: number
+}
+
+/**
+ * DescribeRedisClusterOverview返回参数结构体
+ */
+export interface DescribeRedisClusterOverviewResponse {
+  /**
+   * 资源包总数
+   */
+  TotalBundle: number
+  /**
+   * 资源包总内存大小，单位：GB
+   */
+  TotalMemory: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4606,14 +4711,21 @@ export interface UpgradeInstanceResponse {
 }
 
 /**
- * SwitchAccessNewInstance请求参数结构体
+ * redis独享集群资源包
  */
-export interface SwitchAccessNewInstanceRequest {
+export interface ResourceBundle {
   /**
-   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
-示例值：crs-asdasdas
+   * 资源包名称
    */
-  InstanceId: string
+  ResourceBundleName: string
+  /**
+   * 可售卖内存，单位：GB
+   */
+  AvailableMemory: number
+  /**
+   * 资源包个数
+   */
+  Count: number
 }
 
 /**
@@ -4938,6 +5050,21 @@ export interface InstanceSet {
    */
   PolarisServer?: string
   /**
+   * CDC Redis集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedisClusterId?: string
+  /**
+   * CDC 集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DedicatedClusterId?: string
+  /**
+   * 产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductVersion?: string
+  /**
    * 实例当前Proxy版本。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -5077,6 +5204,16 @@ export interface DestroyPrepaidInstanceResponse {
 }
 
 /**
+ * DescribeRedisClusterOverview请求参数结构体
+ */
+export interface DescribeRedisClusterOverviewRequest {
+  /**
+   * 本地专用集群id
+   */
+  DedicatedClusterId?: string
+}
+
+/**
  * DescribeCommonDBInstances返回参数结构体
  */
 export interface DescribeCommonDBInstancesResponse {
@@ -5161,6 +5298,48 @@ Redis2.8标准架构、CKV标准架构无需填写。
 - cdc：独享集群版。
    */
   ProductVersion?: string
+}
+
+/**
+ * DescribeRedisClusters请求参数结构体
+ */
+export interface DescribeRedisClustersRequest {
+  /**
+   * Redis独享集群id
+   */
+  RedisClusterIds?: Array<string>
+  /**
+   * 集群状态：1-流程中，2-运行中，3-已隔离
+   */
+  Status?: Array<number | bigint>
+  /**
+   * 项目ID数组
+   */
+  ProjectIds?: Array<number | bigint>
+  /**
+   * 续费模式：0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+   */
+  AutoRenewFlag?: Array<number | bigint>
+  /**
+   * Redis独享集群名称
+   */
+  ClusterName?: string
+  /**
+   * 搜索关键词：支持集群Id、集群名称
+   */
+  SearchKey?: string
+  /**
+   * 分页限制返回大小，不传则默认为20
+   */
+  Limit?: number
+  /**
+   * 偏移量，取Limit整数倍
+   */
+  Offset?: number
+  /**
+   * 本地专用集群id
+   */
+  DedicatedClusterId?: string
 }
 
 /**
@@ -5478,13 +5657,17 @@ export interface DescribeProxySlowLogRequest {
 }
 
 /**
- * ModifyInstanceAvailabilityZones返回参数结构体
+ * DescribeRedisClusters返回参数结构体
  */
-export interface ModifyInstanceAvailabilityZonesResponse {
+export interface DescribeRedisClustersResponse {
   /**
-   * 任务ID。
+   * 集群总数
    */
-  TaskId?: number
+  Total: number
+  /**
+   * CDC集群资源列表
+   */
+  Resources: Array<CDCResource>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

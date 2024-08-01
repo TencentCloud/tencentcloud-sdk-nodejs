@@ -13169,6 +13169,12 @@ export interface TranslateConfigureInfo {
    * 翻译目标语言。
    */
   DestinationLanguage?: string
+  /**
+   * 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：
+<li>vtt：生成 WebVTT 字幕文件。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubtitleFormat?: string
 }
 
 /**
@@ -14684,6 +14690,11 @@ export interface TranslateConfigureInfoForUpdate {
    * 翻译目标语言。
    */
   DestinationLanguage?: string
+  /**
+   * 生成的字幕文件格式，填空字符串表示不生成字幕文件，可选值：
+<li>vtt：生成 WebVTT 字幕文件。</li>
+   */
+  SubtitleFormat?: string
 }
 
 /**

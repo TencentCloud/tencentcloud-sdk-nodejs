@@ -18,103 +18,162 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeDatabaseAuditResourceRequest,
+  DescribeDorisMetricFilesResponse,
   DescribeInstanceUsedSubnetsResponse,
-  DescribeInstanceNodesResponse,
-  DescribeInstanceStateRequest,
+  DescribeFrontEndRequest,
+  CreateInstanceNewResponse,
+  DescribeClusterConfigsHistoryResponse,
+  DescribeInstanceOperationsRequest,
   DescribeClusterConfigsResponse,
   ScaleOutInstanceResponse,
   ModifyUserPrivilegesV3Response,
   DescribeFederationTokenRequest,
   ModifyWorkloadGroupStatusResponse,
-  InstanceConfigItem,
+  BindUser,
+  CancelBackupJobRequest,
   ModifyWorkloadGroupRequest,
   ResourceNodeSpec,
   UserWorkloadGroup,
-  ModifyInstanceRequest,
+  DescribeSlowQueryRecordsDownloadResponse,
   DeleteWorkloadGroupRequest,
   WorkloadGroupConfig,
+  FitClsLogRequest,
   ResourceNodeDiskSpec,
-  DescribeInstancesResponse,
+  DescribeDmsSqlHistoryRequest,
+  DescribeFederationTokenResponse,
+  CosSourceInfo,
   ReduceInstanceResponse,
+  DescribeBackUpTaskDetailRequest,
   VersionReplicaItem,
-  CreateInstanceNewRequest,
+  RecoverBackUpJobRequest,
+  DiskSpec,
+  DescribeInstanceOperationsResponse,
+  DescribeUserBindWorkloadGroupResponse,
   ScaleOutInstanceRequest,
   UpdateUserPrivileges,
+  DescribeMetricsFileReq,
+  DescribeInstanceStateRequest,
+  OpenBackUpResponse,
   NetworkInfo,
   ZoneInfo,
   DescribeRestoreTaskDetailResponse,
+  DeleteBackUpDataRequest,
   ConfigKeyValue,
   Tag,
   ResizeDiskResponse,
   ModifyInstanceResponse,
   DescribeSlowQueryRecordsDownloadRequest,
-  ModifyUserBindWorkloadGroupRequest,
-  DescribeRegionZoneRequest,
-  NodeInfo,
+  DescribeAreaRegionResponse,
+  DescribeDorisMetricFilesRequest,
+  ModifyNodeStatusRequest,
   RestartClusterForNodeResponse,
+  CancelBackupJobResponse,
+  DescribeAreaRegionRequest,
+  SlowQueryRecord,
   DescribeInstanceNodesRequest,
   ChargeProperties,
   DescribeWorkloadGroupRequest,
-  DestroyInstanceResponse,
+  OpenBackUpRequest,
+  InstanceOperation,
+  BackupTableContent,
+  DescribeInstanceNodesResponse,
   DescribeSqlApisRequest,
   ModifySecurityGroupsRequest,
-  ModifyUserPrivilegesV3Request,
+  CreateInstanceNewRequest,
+  DescribeDmsSqlHistoryResponse,
+  DorisSourceInfo,
   AttachCBSSpec,
   DataBaseAuditRecord,
   DescribeSlowQueryRecordsResponse,
-  BindUser,
+  ClusterConfigsHistory,
+  InstanceConfigItem,
   DescribeRegionZoneResponse,
+  CreateBackUpScheduleRequest,
+  BackupCosInfo,
+  DescribeClusterConfigsHistoryRequest,
   DescribeInstanceStateResponse,
   DescribeInstanceNodesInfoRequest,
-  DescribeDatabaseAuditDownloadRequest,
-  DescribeGoodsDetailRequest,
+  DescribeInstancesHealthStateResponse,
+  DescribeSlowQueryRecordsRequest,
+  DescribeInstanceNodesRoleResponse,
+  DestroyInstanceResponse,
+  DescribeBackUpJobRequest,
   ResizeDiskRequest,
   ModifyWorkloadGroupStatusRequest,
+  DescribeRegionZoneRequest,
+  DescribeDatabaseAuditResourceResponse,
+  ModifyUserBindWorkloadGroupRequest,
   DescribeSqlApisResponse,
-  SlowQueryRecord,
-  DescribeSlowQueryRecordsDownloadResponse,
+  ModifyInstanceRequest,
+  DescribeSpecResponse,
   ModifyInstanceKeyValConfigsResponse,
+  DescribeBackUpSchedulesResponse,
+  DescribeBackUpTablesResponse,
   DescribeDatabaseAuditRecordsResponse,
   InstanceNode,
+  DescribeInstancesHealthStateRequest,
+  NodeInfo,
+  FrontEndRule,
+  RestartClusterForConfigsResponse,
+  ModifySecurityGroupsResponse,
   InstanceInfo,
   DescribeUserBindWorkloadGroupRequest,
   DescribeInstancesRequest,
-  CreateWorkloadGroupResponse,
+  DescribeBackUpSchedulesRequest,
   DescribeClusterConfigsRequest,
-  CreateInstanceNewResponse,
   ModifyWorkloadGroupResponse,
   DescribeRestoreTaskDetailRequest,
+  ModifyUserPrivilegesV3Request,
+  CreateBackUpScheduleResponse,
+  ModifyNodeStatusResponse,
   DescribeInstanceResponse,
-  FitClsLogRequest,
+  DescribeBackUpJobResponse,
   FitClsLogResponse,
   RestartClusterForNodeRequest,
+  BackupStatus,
   SearchTags,
-  DescribeFederationTokenResponse,
+  DescribeInstancesResponse,
   DescribeInstanceUsedSubnetsRequest,
   SpecExtra,
   DescribeDatabaseAuditRecordsRequest,
+  ModifyMetricFileStructNew,
+  DescribeBackUpJobDetailResponse,
+  DescribeBackUpJobDetailRequest,
   DescribeWorkloadGroupResponse,
-  ModifySecurityGroupsResponse,
+  ModifyMetricFileStruct,
+  DescribeInstanceRequest,
+  DescribeBackUpTaskDetailResponse,
+  ReduceInstanceRequest,
   DeleteWorkloadGroupResponse,
+  ResourceSpec,
   ClusterConfigsInfoFromEMR,
+  RestartClusterForConfigsRequest,
   RegionAreaInfo,
   DestroyInstanceRequest,
   RegionInfo,
-  DescribeSlowQueryRecordsRequest,
+  CreateWorkloadGroupResponse,
   CreateWorkloadGroupRequest,
   DescribeGoodsDetailResponse,
   RestoreStatus,
+  DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
+  BackUpJobDisplay,
   ModifyUserBindWorkloadGroupResponse,
+  RecoverBackUpJobResponse,
   ScaleUpInstanceRequest,
   DescribeReplicaVersionRequest,
   NodesSummary,
-  DescribeUserBindWorkloadGroupResponse,
+  DescribeDatabaseAuditDownloadRequest,
   CreateInstanceSpec,
-  DescribeInstanceRequest,
-  ReduceInstanceRequest,
+  DescribeFrontEndResponse,
+  DescribeGoodsDetailRequest,
   InstanceDetail,
+  DescribeSpecRequest,
+  DescribeBackUpTablesRequest,
+  DescribeInstanceNodesRoleRequest,
   DescribeDatabaseAuditDownloadResponse,
+  NodeInfos,
   DescribeReplicaVersionResponse,
   DescribeInstanceNodesInfoResponse,
   ScaleUpInstanceResponse,
@@ -130,6 +189,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建或者修改备份策略
+   */
+  async CreateBackUpSchedule(
+    req: CreateBackUpScheduleRequest,
+    cb?: (error: string, rep: CreateBackUpScheduleResponse) => void
+  ): Promise<CreateBackUpScheduleResponse> {
+    return this.request("CreateBackUpSchedule", req, cb)
+  }
+
+  /**
+   * 查询前端内容
+   */
+  async DescribeFrontEnd(
+    req: DescribeFrontEndRequest,
+    cb?: (error: string, rep: DescribeFrontEndResponse) => void
+  ): Promise<DescribeFrontEndResponse> {
+    return this.request("DescribeFrontEnd", req, cb)
+  }
+
+  /**
+   * 获取备份、迁移的调度任务信息
+   */
+  async DescribeBackUpSchedules(
+    req?: DescribeBackUpSchedulesRequest,
+    cb?: (error: string, rep: DescribeBackUpSchedulesResponse) => void
+  ): Promise<DescribeBackUpSchedulesResponse> {
+    return this.request("DescribeBackUpSchedules", req, cb)
+  }
+
+  /**
+   * 查询备份实例列表
+   */
+  async DescribeBackUpJob(
+    req: DescribeBackUpJobRequest,
+    cb?: (error: string, rep: DescribeBackUpJobResponse) => void
+  ): Promise<DescribeBackUpJobResponse> {
+    return this.request("DescribeBackUpJob", req, cb)
+  }
+
+  /**
    * 销毁集群
    */
   async DestroyInstance(
@@ -140,13 +239,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 针对驱动sql命令查询ck集群接口
+   * 展示监控指标文件
    */
-  async DescribeSqlApis(
-    req: DescribeSqlApisRequest,
-    cb?: (error: string, rep: DescribeSqlApisResponse) => void
-  ): Promise<DescribeSqlApisResponse> {
-    return this.request("DescribeSqlApis", req, cb)
+  async DescribeDorisMetricFiles(
+    req: DescribeDorisMetricFilesRequest,
+    cb?: (error: string, rep: DescribeDorisMetricFilesResponse) => void
+  ): Promise<DescribeDorisMetricFilesResponse> {
+    return this.request("DescribeDorisMetricFiles", req, cb)
+  }
+
+  /**
+   * 获取数据库审计记录
+   */
+  async DescribeDatabaseAuditRecords(
+    req: DescribeDatabaseAuditRecordsRequest,
+    cb?: (error: string, rep: DescribeDatabaseAuditRecordsResponse) => void
+  ): Promise<DescribeDatabaseAuditRecordsResponse> {
+    return this.request("DescribeDatabaseAuditRecords", req, cb)
   }
 
   /**
@@ -210,13 +319,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 计算资源垂直变配
+   * 获取可备份表信息
    */
-  async ScaleUpInstance(
-    req: ScaleUpInstanceRequest,
-    cb?: (error: string, rep: ScaleUpInstanceResponse) => void
-  ): Promise<ScaleUpInstanceResponse> {
-    return this.request("ScaleUpInstance", req, cb)
+  async DescribeBackUpTables(
+    req: DescribeBackUpTablesRequest,
+    cb?: (error: string, rep: DescribeBackUpTablesResponse) => void
+  ): Promise<DescribeBackUpTablesResponse> {
+    return this.request("DescribeBackUpTables", req, cb)
   }
 
   /**
@@ -230,13 +339,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改资源组信息
+   * 修改节点状态
    */
-  async ModifyWorkloadGroup(
-    req: ModifyWorkloadGroupRequest,
-    cb?: (error: string, rep: ModifyWorkloadGroupResponse) => void
-  ): Promise<ModifyWorkloadGroupResponse> {
-    return this.request("ModifyWorkloadGroup", req, cb)
+  async ModifyNodeStatus(
+    req: ModifyNodeStatusRequest,
+    cb?: (error: string, rep: ModifyNodeStatusResponse) => void
+  ): Promise<ModifyNodeStatusResponse> {
+    return this.request("ModifyNodeStatus", req, cb)
+  }
+
+  /**
+   * 获取集群配置文件修改历史
+   */
+  async DescribeClusterConfigsHistory(
+    req: DescribeClusterConfigsHistoryRequest,
+    cb?: (error: string, rep: DescribeClusterConfigsHistoryResponse) => void
+  ): Promise<DescribeClusterConfigsHistoryResponse> {
+    return this.request("DescribeClusterConfigsHistory", req, cb)
   }
 
   /**
@@ -270,13 +389,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 水平扩容节点
+   * 删除备份数据
    */
-  async ScaleOutInstance(
-    req: ScaleOutInstanceRequest,
-    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
-  ): Promise<ScaleOutInstanceResponse> {
-    return this.request("ScaleOutInstance", req, cb)
+  async DeleteBackUpData(
+    req: DeleteBackUpDataRequest,
+    cb?: (error: string, rep: DeleteBackUpDataResponse) => void
+  ): Promise<DeleteBackUpDataResponse> {
+    return this.request("DeleteBackUpData", req, cb)
   }
 
   /**
@@ -287,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 修改资源组信息
+   */
+  async ModifyWorkloadGroup(
+    req: ModifyWorkloadGroupRequest,
+    cb?: (error: string, rep: ModifyWorkloadGroupResponse) => void
+  ): Promise<ModifyWorkloadGroupResponse> {
+    return this.request("ModifyWorkloadGroup", req, cb)
   }
 
   /**
@@ -320,13 +449,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改安全组
+   * 开启或者关闭策略
    */
-  async ModifySecurityGroups(
-    req: ModifySecurityGroupsRequest,
-    cb?: (error: string, rep: ModifySecurityGroupsResponse) => void
-  ): Promise<ModifySecurityGroupsResponse> {
-    return this.request("ModifySecurityGroups", req, cb)
+  async OpenBackUp(
+    req: OpenBackUpRequest,
+    cb?: (error: string, rep: OpenBackUpResponse) => void
+  ): Promise<OpenBackUpResponse> {
+    return this.request("OpenBackUp", req, cb)
+  }
+
+  /**
+   * 查询sql工作区历史运行记录
+   */
+  async DescribeDmsSqlHistory(
+    req: DescribeDmsSqlHistoryRequest,
+    cb?: (error: string, rep: DescribeDmsSqlHistoryResponse) => void
+  ): Promise<DescribeDmsSqlHistoryResponse> {
+    return this.request("DescribeDmsSqlHistory", req, cb)
+  }
+
+  /**
+   * 检查内核版本是否支持新的备份恢复语法
+   */
+  async DescribeReplicaVersion(
+    req: DescribeReplicaVersionRequest,
+    cb?: (error: string, rep: DescribeReplicaVersionResponse) => void
+  ): Promise<DescribeReplicaVersionResponse> {
+    return this.request("DescribeReplicaVersion", req, cb)
   }
 
   /**
@@ -337,6 +486,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFederationTokenResponse) => void
   ): Promise<DescribeFederationTokenResponse> {
     return this.request("DescribeFederationToken", req, cb)
+  }
+
+  /**
+   * 更改安全组
+   */
+  async ModifySecurityGroups(
+    req: ModifySecurityGroupsRequest,
+    cb?: (error: string, rep: ModifySecurityGroupsResponse) => void
+  ): Promise<ModifySecurityGroupsResponse> {
+    return this.request("ModifySecurityGroups", req, cb)
+  }
+
+  /**
+   * 备份恢复
+   */
+  async RecoverBackUpJob(
+    req: RecoverBackUpJobRequest,
+    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
+  ): Promise<RecoverBackUpJobResponse> {
+    return this.request("RecoverBackUpJob", req, cb)
   }
 
   /**
@@ -360,6 +529,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在集群详情页面，拉取该集群的操作
+   */
+  async DescribeInstanceOperations(
+    req: DescribeInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
+  ): Promise<DescribeInstanceOperationsResponse> {
+    return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
    * 给已存在集群，配置日志服务
    */
   async FitClsLog(
@@ -370,13 +549,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取数据库审计记录
+   * 针对驱动sql命令查询ck集群接口
    */
-  async DescribeDatabaseAuditRecords(
-    req: DescribeDatabaseAuditRecordsRequest,
-    cb?: (error: string, rep: DescribeDatabaseAuditRecordsResponse) => void
-  ): Promise<DescribeDatabaseAuditRecordsResponse> {
-    return this.request("DescribeDatabaseAuditRecords", req, cb)
+  async DescribeSqlApis(
+    req: DescribeSqlApisRequest,
+    cb?: (error: string, rep: DescribeSqlApisResponse) => void
+  ): Promise<DescribeSqlApisResponse> {
+    return this.request("DescribeSqlApis", req, cb)
+  }
+
+  /**
+   * 查询备份任务进度详情
+   */
+  async DescribeBackUpTaskDetail(
+    req: DescribeBackUpTaskDetailRequest,
+    cb?: (error: string, rep: DescribeBackUpTaskDetailResponse) => void
+  ): Promise<DescribeBackUpTaskDetailResponse> {
+    return this.request("DescribeBackUpTaskDetail", req, cb)
   }
 
   /**
@@ -400,16 +589,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群节点信息列表
-   */
-  async DescribeInstanceNodes(
-    req: DescribeInstanceNodesRequest,
-    cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
-  ): Promise<DescribeInstanceNodesResponse> {
-    return this.request("DescribeInstanceNodes", req, cb)
-  }
-
-  /**
    * 生成计费相关接口的GoodsDetail结构
    */
   async DescribeGoodsDetail(
@@ -420,6 +599,96 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 数据库审计数据库、用户等
+   */
+  async DescribeDatabaseAuditResource(
+    req: DescribeDatabaseAuditResourceRequest,
+    cb?: (error: string, rep: DescribeDatabaseAuditResourceResponse) => void
+  ): Promise<DescribeDatabaseAuditResourceResponse> {
+    return this.request("DescribeDatabaseAuditResource", req, cb)
+  }
+
+  /**
+   * 取消对应的备份实例任务
+   */
+  async CancelBackupJob(
+    req: CancelBackupJobRequest,
+    cb?: (error: string, rep: CancelBackupJobResponse) => void
+  ): Promise<CancelBackupJobResponse> {
+    return this.request("CancelBackupJob", req, cb)
+  }
+
+  /**
+   * 计算资源垂直变配
+   */
+  async ScaleUpInstance(
+    req: ScaleUpInstanceRequest,
+    cb?: (error: string, rep: ScaleUpInstanceResponse) => void
+  ): Promise<ScaleUpInstanceResponse> {
+    return this.request("ScaleUpInstance", req, cb)
+  }
+
+  /**
+   * 水平扩容节点
+   */
+  async ScaleOutInstance(
+    req: ScaleOutInstanceRequest,
+    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
+  ): Promise<ScaleOutInstanceResponse> {
+    return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 查询备份任务详情
+   */
+  async DescribeBackUpJobDetail(
+    req: DescribeBackUpJobDetailRequest,
+    cb?: (error: string, rep: DescribeBackUpJobDetailResponse) => void
+  ): Promise<DescribeBackUpJobDetailResponse> {
+    return this.request("DescribeBackUpJobDetail", req, cb)
+  }
+
+  /**
+   * 获取集群节点角色
+   */
+  async DescribeInstanceNodesRole(
+    req: DescribeInstanceNodesRoleRequest,
+    cb?: (error: string, rep: DescribeInstanceNodesRoleResponse) => void
+  ): Promise<DescribeInstanceNodesRoleResponse> {
+    return this.request("DescribeInstanceNodesRole", req, cb)
+  }
+
+  /**
+   * 重启集群让配置文件生效
+   */
+  async RestartClusterForConfigs(
+    req: RestartClusterForConfigsRequest,
+    cb?: (error: string, rep: RestartClusterForConfigsResponse) => void
+  ): Promise<RestartClusterForConfigsResponse> {
+    return this.request("RestartClusterForConfigs", req, cb)
+  }
+
+  /**
+   * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+   */
+  async DescribeSpec(
+    req: DescribeSpecRequest,
+    cb?: (error: string, rep: DescribeSpecResponse) => void
+  ): Promise<DescribeSpecResponse> {
+    return this.request("DescribeSpec", req, cb)
+  }
+
+  /**
+   * 集群列表页上显示地域信息及各个地域的集群总数
+   */
+  async DescribeAreaRegion(
+    req: DescribeAreaRegionRequest,
+    cb?: (error: string, rep: DescribeAreaRegionResponse) => void
+  ): Promise<DescribeAreaRegionResponse> {
+    return this.request("DescribeAreaRegion", req, cb)
+  }
+
+  /**
    * 扩容云盘
    */
   async ResizeDisk(
@@ -427,6 +696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResizeDiskResponse) => void
   ): Promise<ResizeDiskResponse> {
     return this.request("ResizeDisk", req, cb)
+  }
+
+  /**
+   * 集群健康检查
+   */
+  async DescribeInstancesHealthState(
+    req: DescribeInstancesHealthStateRequest,
+    cb?: (error: string, rep: DescribeInstancesHealthStateResponse) => void
+  ): Promise<DescribeInstancesHealthStateResponse> {
+    return this.request("DescribeInstancesHealthState", req, cb)
   }
 
   /**
@@ -450,13 +729,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查内核版本是否支持新的备份恢复语法
+   * 获取集群节点信息列表
    */
-  async DescribeReplicaVersion(
-    req: DescribeReplicaVersionRequest,
-    cb?: (error: string, rep: DescribeReplicaVersionResponse) => void
-  ): Promise<DescribeReplicaVersionResponse> {
-    return this.request("DescribeReplicaVersion", req, cb)
+  async DescribeInstanceNodes(
+    req: DescribeInstanceNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
+  ): Promise<DescribeInstanceNodesResponse> {
+    return this.request("DescribeInstanceNodes", req, cb)
   }
 
   /**

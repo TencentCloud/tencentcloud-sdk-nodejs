@@ -18,20 +18,63 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  QQAccountInfo,
+  DataContentInfo,
+  OutputDescribeNameListFrontFix,
+  DescribeNameListResponse,
+  OutputDescribeDataListFront,
+  InputCreateNameListFront,
   ManageMarketingRiskRequest,
-  OutputManageMarketingRisk,
-  OnlineScamInfo,
-  InputManageMarketingRisk,
-  OtherAccountInfo,
-  AccountInfo,
-  ManageMarketingRiskResponse,
-  InputCryptoManageMarketingRisk,
-  DataAuthorizationInfo,
-  SponsorInfo,
-  InputDetails,
-  OutputManageMarketingRiskValue,
+  InputDeleteNameListFront,
   WeChatAccountInfo,
+  InputDescribeNameListFront,
+  AccountInfo,
+  ModifyNameListDataRequest,
+  OuntputDescribeDataListInfo,
+  InputDescribeNameListDetail,
+  OutputManageMarketingRiskValue,
+  CreateNameListRequest,
+  DeleteNameListDataResponse,
+  ImportNameListDataResponse,
+  DeleteNameListRequest,
+  DescribeNameListDetailResponse,
+  OutputDescribeNameListInfo,
+  ManageMarketingRiskResponse,
+  OutputDescribeNameListFrontFixListData,
+  OutputDeleteNameListData,
+  OutputModifyNameFront,
+  InputDetails,
+  ModifyNameListRequest,
+  OutputModifyNameListFront,
+  DescribeNameListDetailRequest,
+  DescribeNameListDataListResponse,
+  DeleteNameListDataRequest,
+  InputModifyNameListDataFront,
+  OutputManageMarketingRisk,
+  InputDescribeDataListFront,
+  InputImportNameListDataFront,
+  DescribeNameListDataListRequest,
+  InputCryptoManageMarketingRisk,
+  DescribeNameListRequest,
+  OutputImportNameListDataFront,
+  InputModifyNameFront,
+  SponsorInfo,
+  CreateNameListResponse,
+  OtherAccountInfo,
+  OutputDescribeDataListFrontData,
+  OutputDescribeNameListDetailFront,
+  OutputDescribeNameListDetail,
+  OnlineScamInfo,
+  QQAccountInfo,
+  ModifyNameListDataResponse,
+  InputManageMarketingRisk,
+  OutputCreateNameListFront,
+  ModifyNameListResponse,
+  OutputDeleteNameListFront,
+  InputDeleteNameListData,
+  ImportNameListDataRequest,
+  DataAuthorizationInfo,
+  DeleteNameListResponse,
+  InputModifyNameListDataFrontListData,
 } from "./rce_models"
 
 /**
@@ -44,6 +87,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改黑白名单列表详情 详情内容 开始和结束时间 状态 备注等
+   */
+  async ModifyNameListData(
+    req: ModifyNameListDataRequest,
+    cb?: (error: string, rep: ModifyNameListDataResponse) => void
+  ): Promise<ModifyNameListDataResponse> {
+    return this.request("ModifyNameListData", req, cb)
+  }
+
+  /**
+   * 删除黑白名单数据
+   */
+  async DeleteNameListData(
+    req: DeleteNameListDataRequest,
+    cb?: (error: string, rep: DeleteNameListDataResponse) => void
+  ): Promise<DeleteNameListDataResponse> {
+    return this.request("DeleteNameListData", req, cb)
+  }
+
+  /**
+   * 黑白名单详情数据展示 名单id 客户appid uin 数据内容 开始时间和结束时间 状态 描述
+   */
+  async DescribeNameListDataList(
+    req: DescribeNameListDataListRequest,
+    cb?: (error: string, rep: DescribeNameListDataListResponse) => void
+  ): Promise<DescribeNameListDataListResponse> {
+    return this.request("DescribeNameListDataList", req, cb)
+  }
+
+  /**
+   * 查询黑白名单列表详情
+   */
+  async DescribeNameListDetail(
+    req: DescribeNameListDetailRequest,
+    cb?: (error: string, rep: DescribeNameListDetailResponse) => void
+  ): Promise<DescribeNameListDetailResponse> {
+    return this.request("DescribeNameListDetail", req, cb)
+  }
+
+  /**
    * 全栈式风控引擎（RiskControlEngine，RCE）是基于人工智能技术和腾讯20年风控实战沉淀，依托腾讯海量业务构建的风控引擎，以轻量级的 SaaS 服务方式接入，帮助您快速解决注册、登录、营销活动等关键场景遇到的欺诈问题，实时防御黑灰产作恶。
    */
   async ManageMarketingRisk(
@@ -51,5 +134,55 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageMarketingRiskResponse) => void
   ): Promise<ManageMarketingRiskResponse> {
     return this.request("ManageMarketingRisk", req, cb)
+  }
+
+  /**
+   * 修改列表数据 列表名称 列表类型 数据类型 状态 备注
+   */
+  async ModifyNameList(
+    req: ModifyNameListRequest,
+    cb?: (error: string, rep: ModifyNameListResponse) => void
+  ): Promise<ModifyNameListResponse> {
+    return this.request("ModifyNameList", req, cb)
+  }
+
+  /**
+   * 创建黑白名单列表的数据 包含列表名称 列表名单类型id 关联场景id 数据类型id 记录状态 备注 数据来源 手动输入数据或cos文件key
+   */
+  async CreateNameList(
+    req: CreateNameListRequest,
+    cb?: (error: string, rep: CreateNameListResponse) => void
+  ): Promise<CreateNameListResponse> {
+    return this.request("CreateNameList", req, cb)
+  }
+
+  /**
+   * 修改黑白名单状态 关闭 开启 删除
+   */
+  async DeleteNameList(
+    req: DeleteNameListRequest,
+    cb?: (error: string, rep: DeleteNameListResponse) => void
+  ): Promise<DeleteNameListResponse> {
+    return this.request("DeleteNameList", req, cb)
+  }
+
+  /**
+   * 新增黑白名单详情数据 手动导入或批量导入
+   */
+  async ImportNameListData(
+    req: ImportNameListDataRequest,
+    cb?: (error: string, rep: ImportNameListDataResponse) => void
+  ): Promise<ImportNameListDataResponse> {
+    return this.request("ImportNameListData", req, cb)
+  }
+
+  /**
+   * 列表展示黑白名单列表数据, 包含列表名称, 名单类型, 数据类型, 数据来源, 描述, 状态等
+   */
+  async DescribeNameList(
+    req: DescribeNameListRequest,
+    cb?: (error: string, rep: DescribeNameListResponse) => void
+  ): Promise<DescribeNameListResponse> {
+    return this.request("DescribeNameList", req, cb)
   }
 }

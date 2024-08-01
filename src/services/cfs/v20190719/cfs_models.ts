@@ -849,13 +849,17 @@ export interface DeleteUserQuotaRequest {
    */
   FileSystemId: string
   /**
-   * 指定配额类型，包括Uid、Gid
+   * 指定配额类型，包括Uid、Gid、Dir
    */
   UserType: string
   /**
    * UID/GID信息
    */
-  UserId: string
+  UserId?: string
+  /**
+   * 设置目录配额的目录的绝对路径
+   */
+  DirectoryPath?: string
 }
 
 /**
@@ -1157,21 +1161,25 @@ export interface SetUserQuotaRequest {
    */
   FileSystemId: string
   /**
-   * 指定配额类型，包括Uid、Gid
+   * 指定配额类型，包括Uid、Gid，Dir，分别代表用户配额，用户组配额，目录配额
    */
   UserType: string
   /**
    * UID/GID信息
    */
-  UserId: string
+  UserId?: string
   /**
-   * 容量硬限制，单位GiB
+   * 容量硬限制，单位GiB。设置范围10-10000000。
    */
   CapacityHardLimit?: number
   /**
-   * 文件硬限制，单位个
+   * 文件硬限制，单位个。设置范围1000-100000000
    */
   FileHardLimit?: number
+  /**
+   * 需设置目录配额的目录绝对路径，不同目录不可存在包含关系
+   */
+  DirectoryPath?: string
 }
 
 /**

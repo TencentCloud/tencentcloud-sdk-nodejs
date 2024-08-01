@@ -33,7 +33,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateFileSystemBandwidthLimit(req: UpdateFileSystemBandwidthLimitRequest, cb?: (error: string, rep: UpdateFileSystemBandwidthLimitResponse) => void): Promise<UpdateFileSystemBandwidthLimitResponse>;
     /**
-     * 设置文件系统配额，提供UID/GID的配额设置的接口
+     * 设置文件系统配额，提供UID/GID的配额设置的接口（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
      */
     SetUserQuota(req: SetUserQuotaRequest, cb?: (error: string, rep: SetUserQuotaResponse) => void): Promise<SetUserQuotaResponse>;
     /**
@@ -151,7 +151,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteMountTarget(req: DeleteMountTargetRequest, cb?: (error: string, rep: DeleteMountTargetResponse) => void): Promise<DeleteMountTargetResponse>;
     /**
-     * 指定条件删除文件系统配额
+     * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
      */
     DeleteUserQuota(req: DeleteUserQuotaRequest, cb?: (error: string, rep: DeleteUserQuotaResponse) => void): Promise<DeleteUserQuotaResponse>;
     /**

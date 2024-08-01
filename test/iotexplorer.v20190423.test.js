@@ -78,9 +78,9 @@ it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyProductCloudStorageAIService", async function () {
+it("iotexplorer.v20190423.CreateCloudStorageAIService", async function () {
     try {
-       const data = await client.ModifyProductCloudStorageAIService({})
+       const data = await client.CreateCloudStorageAIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +588,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageThumbnail", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ResetCloudStorageAIService", async function () {
+    try {
+       const data = await client.ResetCloudStorageAIService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetWechatDeviceTicket", async function () {
     try {
        const data = await client.GetWechatDeviceTicket({})
@@ -731,6 +741,16 @@ it("iotexplorer.v20190423.DismissRoomByStrRoomIdFromTRTC", async function () {
 it("iotexplorer.v20190423.CreatePositionFence", async function () {
     try {
        const data = await client.CreatePositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyProductCloudStorageAIService", async function () {
+    try {
+       const data = await client.ModifyProductCloudStorageAIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

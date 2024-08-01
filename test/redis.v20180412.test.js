@@ -748,6 +748,16 @@ it("redis.v20180412.DescribeInstanceMonitorBigKey", async function () {
     }
 })
 
+it("redis.v20180412.DescribeRedisClusters", async function () {
+    try {
+       const data = await client.DescribeRedisClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.KillMasterGroup", async function () {
     try {
        const data = await client.KillMasterGroup({})
@@ -811,6 +821,16 @@ it("redis.v20180412.DescribeInstanceEvents", async function () {
 it("redis.v20180412.SwitchInstanceVip", async function () {
     try {
        const data = await client.SwitchInstanceVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeDBSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeDBSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,9 +998,9 @@ it("redis.v20180412.UpgradeInstance", async function () {
     }
 })
 
-it("redis.v20180412.DescribeDBSecurityGroups", async function () {
+it("redis.v20180412.DescribeRedisClusterOverview", async function () {
     try {
-       const data = await client.DescribeDBSecurityGroups({})
+       const data = await client.DescribeRedisClusterOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

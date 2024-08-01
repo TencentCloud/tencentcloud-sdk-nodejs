@@ -466,6 +466,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKey", req, cb);
     }
     /**
+     * 查询Redis独享集群列表
+     */
+    async DescribeRedisClusters(req, cb) {
+        return this.request("DescribeRedisClusters", req, cb);
+    }
+    /**
      * 本接口（KillMasterGroup）模拟故障。
      */
     async KillMasterGroup(req, cb) {
@@ -506,6 +512,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SwitchInstanceVip(req, cb) {
         return this.request("SwitchInstanceVip", req, cb);
+    }
+    /**
+     * 本接口（DescribeDBSecurityGroups）用于查询实例的安全组详情。
+     */
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
      * 本接口（DescribeReplicationGroup）用于查询复制组。
@@ -604,10 +616,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeInstance", req, cb);
     }
     /**
-     * 本接口（DescribeDBSecurityGroups）用于查询实例的安全组详情。
+     * 查询Redis独享集群概览信息
      */
-    async DescribeDBSecurityGroups(req, cb) {
-        return this.request("DescribeDBSecurityGroups", req, cb);
+    async DescribeRedisClusterOverview(req, cb) {
+        return this.request("DescribeRedisClusterOverview", req, cb);
     }
     /**
      * 应用参数模板到实例
