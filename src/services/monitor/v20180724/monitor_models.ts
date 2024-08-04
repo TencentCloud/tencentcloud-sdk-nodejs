@@ -75,16 +75,16 @@ export interface DescribePolicyGroupListResponse {
    * 策略组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupList: Array<DescribePolicyGroupListGroup>
+  GroupList?: Array<DescribePolicyGroupListGroup>
   /**
    * 策略组总数
    */
-  Total: number
+  Total?: number
   /**
    * 备注信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Warning: string
+  Warning?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3223,7 +3223,7 @@ export interface CreateAlarmPolicyRequest {
    */
   Module: string
   /**
-   * 策略名称，不超过20字符
+   * 策略名称，不超过60字符
    */
   PolicyName: string
   /**
@@ -3873,17 +3873,17 @@ export interface DescribeBasicAlarmListResponse {
    * 告警列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Alarms: Array<DescribeBasicAlarmListAlarms>
+  Alarms?: Array<DescribeBasicAlarmListAlarms>
   /**
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 备注信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Warning: string
+  Warning?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6890,7 +6890,8 @@ export interface DescribeAlarmHistoriesRequest {
    */
   EndTime?: number
   /**
-   * 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测
+   * 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测，"MT_TRTC"=实时音视频，
+"MT_RUMAPP"=终端性能监控
    */
   MonitorTypes?: Array<string>
   /**

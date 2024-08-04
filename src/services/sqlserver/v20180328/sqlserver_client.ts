@@ -96,7 +96,6 @@ import {
   ModifyMigrationRequest,
   CrossBackupAddr,
   QueryMigrationCheckProcessRequest,
-  ModifyDBRemarkRequest,
   RestartDBInstanceResponse,
   DescribeRollbackTimeResponse,
   DescribeProductSpecResponse,
@@ -123,6 +122,7 @@ import {
   DescribeDBInstanceInterResponse,
   ModifyPublishSubscribeNameResponse,
   DeleteIncrementalMigrationRequest,
+  CutXEventsResponse,
   DescribeBackupsRequest,
   RestoreInstanceRequest,
   ModifyDatabaseShrinkMDFRequest,
@@ -161,7 +161,7 @@ import {
   DescribeBackupsResponse,
   StopMigrationRequest,
   TerminateDBInstanceResponse,
-  DescribeMigrationDetailRequest,
+  ModifyDBRemarkRequest,
   DescribeAccountPrivilegeByDBResponse,
   DBPrivilegeModifyInfo,
   CheckItem,
@@ -243,6 +243,7 @@ import {
   DescribeXEventsResponse,
   DeleteIncrementalMigrationResponse,
   DescribeFlowStatusResponse,
+  CutXEventsRequest,
   SwitchCloudInstanceHAResponse,
   DescribeUploadIncrementalInfoResponse,
   DeleteRestoreTaskResponse,
@@ -277,6 +278,7 @@ import {
   ModifyDBInstanceProjectRequest,
   MigrationStep,
   RenewPostpaidDBInstanceRequest,
+  DescribeMigrationDetailRequest,
   DescribeReadOnlyGroupDetailsRequest,
   CreateDBInstancesRequest,
   ModifyCrossBackupStrategyRequest,
@@ -644,6 +646,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabasesResponse) => void
   ): Promise<DescribeDatabasesResponse> {
     return this.request("DescribeDatabases", req, cb)
+  }
+
+  /**
+   * 本接口(CutXEvents)用于手动切割阻塞日志和死锁日志。
+   */
+  async CutXEvents(
+    req: CutXEventsRequest,
+    cb?: (error: string, rep: CutXEventsResponse) => void
+  ): Promise<CutXEventsResponse> {
+    return this.request("CutXEvents", req, cb)
   }
 
   /**

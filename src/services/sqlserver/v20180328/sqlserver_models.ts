@@ -1697,20 +1697,6 @@ export interface QueryMigrationCheckProcessRequest {
 }
 
 /**
- * ModifyDBRemark请求参数结构体
- */
-export interface ModifyDBRemarkRequest {
-  /**
-   * 实例ID，形如mssql-rljoi3bf
-   */
-  InstanceId: string
-  /**
-   * 数据库名称及备注数组，每个元素包含数据库名和对应的备注
-   */
-  DBRemarks: Array<DBRemark>
-}
-
-/**
  * RestartDBInstance返回参数结构体
  */
 export interface RestartDBInstanceResponse {
@@ -2237,6 +2223,16 @@ export interface DeleteIncrementalMigrationRequest {
    * 增量备份导入任务ID，由CreateIncrementalMigration接口返回
    */
   IncrementalMigrationId: string
+}
+
+/**
+ * CutXEvents返回参数结构体
+ */
+export interface CutXEventsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3006,13 +3002,17 @@ export interface TerminateDBInstanceResponse {
 }
 
 /**
- * DescribeMigrationDetail请求参数结构体
+ * ModifyDBRemark请求参数结构体
  */
-export interface DescribeMigrationDetailRequest {
+export interface ModifyDBRemarkRequest {
   /**
-   * 迁移任务ID
+   * 实例ID，形如mssql-rljoi3bf
    */
-  MigrateId: number
+  InstanceId: string
+  /**
+   * 数据库名称及备注数组，每个元素包含数据库名和对应的备注
+   */
+  DBRemarks: Array<DBRemark>
 }
 
 /**
@@ -5268,6 +5268,16 @@ export interface DescribeFlowStatusResponse {
 }
 
 /**
+ * CutXEvents请求参数结构体
+ */
+export interface CutXEventsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * SwitchCloudInstanceHA返回参数结构体
  */
 export interface SwitchCloudInstanceHAResponse {
@@ -5996,6 +6006,16 @@ export interface RenewPostpaidDBInstanceRequest {
    * 实例ID，格式如：mssql-3l3fgqn7 或 mssqlro-3l3fgqn7
    */
   InstanceId: string
+}
+
+/**
+ * DescribeMigrationDetail请求参数结构体
+ */
+export interface DescribeMigrationDetailRequest {
+  /**
+   * 迁移任务ID
+   */
+  MigrateId: number
 }
 
 /**

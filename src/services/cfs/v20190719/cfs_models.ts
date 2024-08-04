@@ -1259,7 +1259,7 @@ export interface CreateCfsSnapshotResponse {
  */
 export interface UserQuota {
   /**
-   * 指定配额类型，包括Uid、Gid
+   * 指定配额类型，包括Uid、Gid、Dir
    */
   UserType: string
   /**
@@ -1288,6 +1288,16 @@ export interface UserQuota {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileUsed?: number
+  /**
+   * 目录配额的目录绝对路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectoryPath?: string
+  /**
+   * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
