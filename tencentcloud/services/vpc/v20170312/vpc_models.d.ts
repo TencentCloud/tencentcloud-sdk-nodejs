@@ -9346,6 +9346,26 @@ export interface AllocateAddressesRequest {
     ClientToken?: string;
 }
 /**
+ * 私网NAT网关跨域信息
+ */
+export interface PrivateNatCrossDomainInfo {
+    /**
+     * 跨域私网NAT关联的云联网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
+    /**
+     * 跨域私网NAT本端Vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalVpcId?: string;
+    /**
+     * 跨域私网NAT对端Vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeerVpcId?: string;
+}
+/**
  * DescribeDhcpIps返回参数结构体
  */
 export interface DescribeDhcpIpsResponse {
@@ -10258,6 +10278,31 @@ export interface PrivateNatGateway {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
+    /**
+     * 专线网关唯一`ID`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DirectConnectGatewayIds?: Array<string>;
+    /**
+     * 私网网关类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NatType?: string;
+    /**
+     * 私网NAT跨域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CrossDomainInfo?: PrivateNatCrossDomainInfo;
+    /**
+     * 是否VPC型私网网关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcType?: boolean;
+    /**
+     * 跨域私网NAT关联的云联网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
 }
 /**
  * DescribeVpnGatewayRoutes返回参数结构体

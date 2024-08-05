@@ -1321,19 +1321,19 @@ export interface CreateDSPAMetaResourcesResponse {
     /**
      * 本次更新的ID号，用来标记一次完整的更新过程。
      */
-    UpdateId: string;
+    UpdateId?: string;
     /**
      * 资源类型，支持：cdb（云数据库 MySQL）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbpg（TDSQL-C PostgreSQL版）、cynosdbmysql（TDSQL-C MySQL版）
      */
-    MetaType: string;
+    MetaType?: string;
     /**
      * DSPA实例ID。
      */
-    DspaId: string;
+    DspaId?: string;
     /**
      * 资源所处地域。
      */
-    ResourceRegion: string;
+    ResourceRegion?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5699,12 +5699,12 @@ export interface DspaUserResourceMeta {
      */
     ResourceAuthAccount?: string;
     /**
-     * x
+     * 实例类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
-     * x
+     * 实例值
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceValue?: string;
@@ -7115,14 +7115,14 @@ export interface ModifyDSPAAssessmentRiskLatestRequest {
      */
     DspaId: string;
     /**
-     * 最新风险项Id
-     * @deprecated
-     */
-    RiskLatestTableId: number;
-    /**
      * 风险状态（waiting:待处理，processing:处理中，finished:已处理，ignored:已忽略）
      */
     Status: string;
+    /**
+     * 最新风险项Id
+     * @deprecated
+     */
+    RiskLatestTableId?: number;
     /**
      * 备注
      */

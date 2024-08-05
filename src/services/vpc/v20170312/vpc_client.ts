@@ -478,6 +478,7 @@ import {
   DownloadVpnGatewaySslClientCertResponse,
   DeleteNetDetectResponse,
   AllocateAddressesRequest,
+  PrivateNatCrossDomainInfo,
   DescribeDhcpIpsResponse,
   ModifyAssistantCidrRequest,
   CreateIp6TranslatorsRequest,
@@ -3035,8 +3036,10 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（DeleteVpnConnection）用于删除VPN通道。
-   */
+     * 本接口（DeleteVpnConnection）用于删除VPN通道。
+>?本接口为异步接口
+>
+     */
   async DeleteVpnConnection(
     req: DeleteVpnConnectionRequest,
     cb?: (error: string, rep: DeleteVpnConnectionResponse) => void

@@ -989,6 +989,8 @@ LimitTypes取值范围：
     EnableSnapshotPolicies(req: EnableSnapshotPoliciesRequest, cb?: (error: string, rep: EnableSnapshotPoliciesResponse) => void): Promise<EnableSnapshotPoliciesResponse>;
     /**
      * 本接口（DeleteVpnConnection）用于删除VPN通道。
+>?本接口为异步接口
+>
      */
     DeleteVpnConnection(req: DeleteVpnConnectionRequest, cb?: (error: string, rep: DeleteVpnConnectionResponse) => void): Promise<DeleteVpnConnectionResponse>;
     /**

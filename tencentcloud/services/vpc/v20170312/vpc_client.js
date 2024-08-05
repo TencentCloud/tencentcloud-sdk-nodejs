@@ -1397,6 +1397,8 @@ LimitTypes取值范围：
     }
     /**
      * 本接口（DeleteVpnConnection）用于删除VPN通道。
+>?本接口为异步接口
+>
      */
     async DeleteVpnConnection(req, cb) {
         return this.request("DeleteVpnConnection", req, cb);
