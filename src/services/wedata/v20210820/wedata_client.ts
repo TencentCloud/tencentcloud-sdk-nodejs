@@ -51,6 +51,7 @@ import {
   WorkFlowExecuteDto,
   RecordsSpeed,
   ColumnLineageInfo,
+  TaskLineageInfoPair,
   SubmitTaskRequest,
   DescribeTableMetasRequest,
   RuleExecResultDetail,
@@ -66,6 +67,7 @@ import {
   ColumnItem,
   RuleGroupExecResult,
   AlarmEventInfo,
+  DescribeTaskLineageRequest,
   BytesSpeed,
   CheckTaskNameExistRequest,
   ThresholdValue,
@@ -202,6 +204,7 @@ import {
   ModifyRuleRequest,
   DataSourceInfo,
   FindAllFolderResponse,
+  LifecycleInfo,
   ResourcePathTree,
   DescribeRuleExecLogResponse,
   ParamInfo,
@@ -304,6 +307,7 @@ import {
   ModifyWorkflowInfoRequest,
   MakePlanOpsDto,
   DescribeBatchOperateTaskResponse,
+  StartIntegrationTaskResponse,
   SubmitWorkflow,
   BatchResumeIntegrationTasksRequest,
   OperationOpsDto,
@@ -462,6 +466,7 @@ import {
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
   DescribeDutyScheduleDetailsResponse,
+  TaskLineageInfo,
   DescribeTableQualityDetailsResponse,
   CommonIdOpsDto,
   BatchStopWorkflowsByIdsResponse,
@@ -551,7 +556,7 @@ import {
   DescribeInstanceLogDetailResponse,
   DescribeApproveListRequest,
   DescribeDutyScheduleListRequest,
-  StartIntegrationTaskResponse,
+  DescribeTaskLineageResponse,
   CommitRuleGroupTaskResponse,
   Project,
   DescribeRealTimeTaskMetricOverviewResponse,
@@ -677,6 +682,7 @@ import {
   RuleConfig,
   LogContent,
   RealTimeTaskSpeed,
+  TagVoteSum,
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,
   DescribeRuleGroupRequest,
@@ -1926,6 +1932,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchOperateTaskResponse) => void
   ): Promise<DescribeBatchOperateTaskResponse> {
     return this.request("DescribeBatchOperateTask", req, cb)
+  }
+
+  /**
+   * 通过任务查询表的血缘关系
+   */
+  async DescribeTaskLineage(
+    req: DescribeTaskLineageRequest,
+    cb?: (error: string, rep: DescribeTaskLineageResponse) => void
+  ): Promise<DescribeTaskLineageResponse> {
+    return this.request("DescribeTaskLineage", req, cb)
   }
 
   /**

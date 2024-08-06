@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChatCompletionsRequest, GetEmbeddingRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, TextToImageLiteResponse, ChatCompletionsResponse } from "./hunyuan_models";
+import { ChatCompletionsRequest, GetEmbeddingRequest, ActivateServiceRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, SetPayModeResponse, SetPayModeRequest, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, ActivateServiceResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, TextToImageLiteResponse, ChatCompletionsResponse } from "./hunyuan_models";
 /**
  * hunyuan client
  * @class
@@ -22,6 +22,10 @@ export declare class Client extends AbstractClient {
      */
     QueryHunyuanImageJob(req: QueryHunyuanImageJobRequest, cb?: (error: string, rep: QueryHunyuanImageJobResponse) => void): Promise<QueryHunyuanImageJobResponse>;
     /**
+     * 该接口用于计算文本对应Token数、字符数。
+     */
+    GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
+    /**
      * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
 
  1. 本接口暂不支持返回图片内容。
@@ -31,9 +35,13 @@ export declare class Client extends AbstractClient {
      */
     ChatCompletions(req: ChatCompletionsRequest, cb?: (error: string, rep: ChatCompletionsResponse) => void): Promise<ChatCompletionsResponse>;
     /**
-     * 该接口用于计算文本对应Token数、字符数。
+     * 开通服务
      */
-    GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
+    ActivateService(req: ActivateServiceRequest, cb?: (error: string, rep: ActivateServiceResponse) => void): Promise<ActivateServiceResponse>;
+    /**
+     * 设置付费模式
+     */
+    SetPayMode(req: SetPayModeRequest, cb?: (error: string, rep: SetPayModeResponse) => void): Promise<SetPayModeResponse>;
     /**
      * 文生图轻量版接口根据输入的文本描述，智能生成与之相关的结果图。
 文生图轻量版默认提供3个并发任务数，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。

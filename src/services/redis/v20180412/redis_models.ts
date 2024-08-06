@@ -646,7 +646,7 @@ export interface ModifyInstanceRequest {
    */
   Operation: string
   /**
-   * 实例Id
+   * 实例Id，每次请求的实例的上限为10。
    */
   InstanceIds?: Array<string>
   /**
@@ -742,7 +742,7 @@ export interface DescribeCommonDBInstancesRequest {
    */
   PayMode?: number
   /**
-   * 实例ID过滤信息列表
+   * 实例ID过滤信息列表，数组最大长度限制为100
    */
   InstanceIds?: Array<string>
   /**
@@ -1183,14 +1183,16 @@ export interface DescribeParamTemplatesRequest {
 - 9：Redis 5.0 内存版（集群架构）。
 - 15：Redis 6.2 内存版（标准架构）。
 - 16：Redis 6.2 内存版（集群架构）。
+- 17：Redis 7.0 内存版（标准架构）。
+- 18：Redis 7.0 内存版（集群架构）。
    */
   ProductTypes?: Array<number | bigint>
   /**
-   * 模板名称数组。
+   * 模板名称数组。数组最大长度限制为50
    */
   TemplateNames?: Array<string>
   /**
-   * 模板ID数组。
+   * 模板ID数组。数组最大长度限制为50
    */
   TemplateIds?: Array<string>
 }
@@ -1438,7 +1440,7 @@ export interface InstanceMultiParam {
  */
 export interface DescribeInstanceDealDetailRequest {
   /**
-   * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。
+   * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。数组最大长度限制为10
    */
   DealIds: Array<string>
 }
@@ -4703,7 +4705,7 @@ export interface UpgradeInstanceResponse {
   /**
    * 订单ID。
    */
-  DealId: string
+  DealId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6258,7 +6260,7 @@ export interface UpgradeInstanceRequest {
    */
   RedisReplicasNum?: number
   /**
-   * 多AZ实例，增加副本时的附带信息，包括副本的可用区和副本的类型（NodeType为1）。非多AZ实例不需要配置该参数。
+   * 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。
    */
   NodeSet?: Array<RedisNodeInfo>
 }

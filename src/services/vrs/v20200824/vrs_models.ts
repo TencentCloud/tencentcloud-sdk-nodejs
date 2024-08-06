@@ -42,7 +42,27 @@ export interface DescribeVRSTaskStatusResponse {
 /**
  * GetTrainingText请求参数结构体
  */
-export type GetTrainingTextRequest = null
+export interface GetTrainingTextRequest {
+  /**
+   * 复刻类型。
+0 - 轻量版声音复刻（默认）;
+5 - 一句话声音复刻。
+   */
+  TaskType?: number
+  /**
+   * 音色场景。（仅支持一句话声音复刻，其余复刻类型不生效） 
+0 - 通用场景（默认）； 
+1 - 聊天场景； 
+2 - 阅读场景； 
+3 - 资讯播报场景。
+   */
+  Domain?: number
+  /**
+   * 文本语种。（仅支持一句话声音复刻，其余复刻类型不生效） 
+1 - 中文（默认）。
+   */
+  TextLanguage?: number
+}
 
 /**
  * DownloadVRSModel请求参数结构体
@@ -113,7 +133,14 @@ export interface CreateVRSTaskResponse {
 /**
  * GetVRSVoiceTypes请求参数结构体
  */
-export type GetVRSVoiceTypesRequest = null
+export interface GetVRSVoiceTypesRequest {
+  /**
+   * 复刻类型。
+0 - 除快速声音复刻外其他复刻类型（默认）；
+5 - 一句话声音复刻。
+   */
+  TaskType?: number
+}
 
 /**
  * 任务结果
@@ -135,7 +162,7 @@ export interface DescribeVRSTaskStatusRespData {
    */
   StatusStr?: string
   /**
-   * 音色id。
+   * 音色id。（若为一句话复刻时，该值为固定值“200000000”）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceType?: number
@@ -144,6 +171,16 @@ export interface DescribeVRSTaskStatusRespData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
+  /**
+   * 任务过期时间。（当复刻类型为一句话复刻时展示）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 快速复刻音色ID。（当复刻类型为一句话复刻时展示）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FastVoiceType?: string
 }
 
 /**
@@ -286,7 +323,7 @@ export interface CreateVRSTaskRequest {
    */
   VoiceLanguage: number
   /**
-   * 音频ID集合
+   * 音频ID集合。（一句话声音复刻仅需填写一个音质检测接口返回的AudioId）
    */
   AudioIdList: Array<string>
   /**
@@ -309,11 +346,13 @@ export interface CreateVRSTaskRequest {
    */
   ModelType?: number
   /**
-   * 复刻类型。 0 - 轻量版声音复刻（默认）。
+   * 复刻类型。
+0 - 轻量版声音复刻（默认）；
+5 - 一句话声音复刻。
    */
   TaskType?: number
   /**
-   * 校验音频ID。
+   * 校验音频ID。（仅基础版声音复刻使用）
    */
   VPRAudioId?: string
 }
@@ -384,7 +423,7 @@ export interface DetectionEnvAndSoundQualityRespData {
  */
 export interface VoiceTypeInfo {
   /**
-   * 音色id
+   * 音色id。（若为一句话复刻时，该值为固定值“200000000”）
    */
   VoiceType?: number
   /**
@@ -411,6 +450,17 @@ export interface VoiceTypeInfo {
    * 部署状态。若已部署，则可通过语音合成接口调用该音色
    */
   IsDeployed?: boolean
+  /**
+   * 任务过期时间。（当复刻类型为一句话复刻时展示）
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 快速复刻音色ID。（当复刻类型为一句话复刻时展示）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FastVoiceType?: string
 }
 
 /**
@@ -434,11 +484,18 @@ export interface DetectEnvAndSoundQualityRequest {
    */
   Codec?: string
   /**
-   * 音频采样率：
-
-16000：16k（默认）
+   * 音频采样率。
+16000：16k（默认）；
+24000：24k（仅一句话声音复刻支持）；
+48000：48k（仅一句话声音复刻支持）。
    */
   SampleRate?: number
+  /**
+   * 复刻类型。
+0 - 轻量版声音复刻（默认）;
+5 - 一句话声音复刻。
+   */
+  TaskType?: number
 }
 
 /**

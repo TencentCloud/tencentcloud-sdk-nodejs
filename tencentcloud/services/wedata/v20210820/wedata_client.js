@@ -757,6 +757,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchOperateTask", req, cb);
     }
     /**
+     * 通过任务查询表的血缘关系
+     */
+    async DescribeTaskLineage(req, cb) {
+        return this.request("DescribeTaskLineage", req, cb);
+    }
+    /**
      * 获取资源管理目录树
      */
     async DescribeResourceManagePathTrees(req, cb) {

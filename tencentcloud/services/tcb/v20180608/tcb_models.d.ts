@@ -5619,37 +5619,42 @@ export interface DescribeCloudBaseRunServerResponse {
      * 个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 版本列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionItems: Array<CloudBaseRunServerVersionItem>;
+    VersionItems?: Array<CloudBaseRunServerVersionItem>;
     /**
      * 服务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerName: string;
+    ServerName?: string;
     /**
      * 是否对于外网开放
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsPublic: boolean;
+    IsPublic?: boolean;
     /**
      * 镜像仓库
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageRepo: string;
+    ImageRepo?: string;
     /**
      * 流量配置的类型（FLOW,URL_PARAMS)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrafficType: string;
+    TrafficType?: string;
     /**
      * 服务创建类型，默认为空，一键部署为oneclick
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceType: string;
+    SourceType?: string;
+    /**
+     * 服务标签, function: 托管函数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

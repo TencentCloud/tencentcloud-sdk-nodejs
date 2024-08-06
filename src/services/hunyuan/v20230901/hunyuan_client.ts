@@ -22,6 +22,7 @@ import {
   LogoParam,
   GetEmbeddingRequest,
   ImageUrl,
+  ActivateServiceRequest,
   Content,
   SubmitHunyuanImageJobRequest,
   Usage,
@@ -33,11 +34,14 @@ import {
   EmbeddingData,
   ToolFunction,
   Delta,
+  SetPayModeResponse,
   ToolCall,
   ToolCallFunction,
+  SetPayModeRequest,
   LogoRect,
   TextToImageLiteRequest,
   SubmitHunyuanImageJobResponse,
+  ActivateServiceResponse,
   QueryHunyuanImageJobResponse,
   GetEmbeddingResponse,
   ErrorMsg,
@@ -85,6 +89,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于计算文本对应Token数、字符数。
+   */
+  async GetTokenCount(
+    req: GetTokenCountRequest,
+    cb?: (error: string, rep: GetTokenCountResponse) => void
+  ): Promise<GetTokenCountResponse> {
+    return this.request("GetTokenCount", req, cb)
+  }
+
+  /**
      * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
 
  1. 本接口暂不支持返回图片内容。
@@ -100,13 +114,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于计算文本对应Token数、字符数。
+   * 开通服务
    */
-  async GetTokenCount(
-    req: GetTokenCountRequest,
-    cb?: (error: string, rep: GetTokenCountResponse) => void
-  ): Promise<GetTokenCountResponse> {
-    return this.request("GetTokenCount", req, cb)
+  async ActivateService(
+    req: ActivateServiceRequest,
+    cb?: (error: string, rep: ActivateServiceResponse) => void
+  ): Promise<ActivateServiceResponse> {
+    return this.request("ActivateService", req, cb)
+  }
+
+  /**
+   * 设置付费模式
+   */
+  async SetPayMode(
+    req: SetPayModeRequest,
+    cb?: (error: string, rep: SetPayModeResponse) => void
+  ): Promise<SetPayModeResponse> {
+    return this.request("SetPayMode", req, cb)
   }
 
   /**

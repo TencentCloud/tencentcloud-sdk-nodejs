@@ -214,6 +214,7 @@ export interface TextToVoiceRequest {
     ModelType?: number;
     /**
      * 音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见[购买指南](https://cloud.tencent.com/document/product/1073/34112)。完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。
+  若使用一句话版声音复刻，请填入固定值“200000000”
      */
     VoiceType?: number;
     /**
@@ -249,7 +250,7 @@ export interface TextToVoiceRequest {
      */
     EmotionIntensity?: number;
     /**
-     * 预留参数，暂未使用
+     * 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。
      */
     FastVoiceType?: string;
 }

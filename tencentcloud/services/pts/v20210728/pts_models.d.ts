@@ -3434,7 +3434,7 @@ export interface StartJobResponse {
     /**
      * 任务ID
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3449,7 +3449,7 @@ export interface UpdateScenarioRequest {
      */
     ScenarioId: string;
     /**
-     * 场景名
+     * 场景名；调用该接口时，请将 Scenario 中不需要修改的字段保持原样也作为接口的入参，否则场景可能会不可用。
      */
     Name?: string;
     /**

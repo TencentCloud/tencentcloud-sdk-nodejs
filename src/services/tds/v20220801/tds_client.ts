@@ -23,6 +23,7 @@ import {
   DescribeFraudPremiumResponse,
   DescribeFraudBaseRequest,
   DescribeFraudBaseResponse,
+  DataAuthorizationInfo,
   DescribeTrustedIDRequest,
   DescribeFraudPremiumRequest,
   DescribeFraudUltimateResponse,

@@ -396,7 +396,7 @@ export declare class Client extends AbstractClient {
      */
     ChangeMasterInstance(req: ChangeMasterInstanceRequest, cb?: (error: string, rep: ChangeMasterInstanceResponse) => void): Promise<ChangeMasterInstanceResponse>;
     /**
-     * 变更实例配置
+     * 本接口（UpgradeInstance）用于变更实例的配置规格。
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**

@@ -6373,6 +6373,10 @@ export interface VatElectronicInfo {
    * 电子发票详细条目信息
    */
   VatElectronicItems?: Array<VatElectronicItemInfo>
+  /**
+   * 业务类型标志
+   */
+  ServiceTypeLabel?: string
 }
 
 /**

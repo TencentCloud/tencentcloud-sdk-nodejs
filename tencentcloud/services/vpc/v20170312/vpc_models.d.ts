@@ -6088,6 +6088,10 @@ export interface AssignIpv6AddressesRequest {
      * 自动分配`IPv6`地址个数，内网IP地址个数总和不能超过配额数。与入参`Ipv6Addresses`合并计算配额。与Ipv6Addresses必填一个。
      */
     Ipv6AddressCount?: number;
+    /**
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
+    ClientToken?: string;
 }
 /**
  * CreateServiceTemplateGroup返回参数结构体

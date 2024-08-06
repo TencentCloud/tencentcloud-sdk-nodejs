@@ -38,6 +38,16 @@ it("hunyuan.v20230901.QueryHunyuanImageJob", async function () {
     }
 })
 
+it("hunyuan.v20230901.GetTokenCount", async function () {
+    try {
+       const data = await client.GetTokenCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.ChatCompletions", async function () {
     try {
        const data = await client.ChatCompletions({})
@@ -48,9 +58,19 @@ it("hunyuan.v20230901.ChatCompletions", async function () {
     }
 })
 
-it("hunyuan.v20230901.GetTokenCount", async function () {
+it("hunyuan.v20230901.ActivateService", async function () {
     try {
-       const data = await client.GetTokenCount({})
+       const data = await client.ActivateService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.SetPayMode", async function () {
+    try {
+       const data = await client.SetPayMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

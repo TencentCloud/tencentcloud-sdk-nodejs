@@ -64,16 +64,14 @@ export interface ChatCompletionsRequest {
   StreamModeration?: boolean
   /**
    * 说明：
-1. 影响输出文本的多样性，取值越大，生成文本的多样性越强。
-2. 取值区间为 [0.0, 1.0]，未传值时使用各模型推荐值。
-3. 非必要不建议使用，不合理的取值会影响效果。
+1. 影响输出文本的多样性，取值区间为 [0.0, 1.0]。取值越大，生成文本的多样性越强。
+2. 模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。
    */
   TopP?: number
   /**
    * 说明：
-1. 较高的数值会使输出更加随机，而较低的数值会使其更加集中和确定。
-2. 取值区间为 [0.0, 2.0]，未传值时使用各模型推荐值。
-3. 非必要不建议使用，不合理的取值会影响效果。
+1. 影响模型输出多样性，取值区间为 [0.0, 2.0]。较高的数值会使输出更加多样化和不可预测，而较低的数值会使其更加集中和确定。
+2. 模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。
    */
   Temperature?: number
   /**
@@ -152,6 +150,16 @@ export interface ImageUrl {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url: string
+}
+
+/**
+ * ActivateService请求参数结构体
+ */
+export interface ActivateServiceRequest {
+  /**
+   * 开通之后，是否关闭后付费；默认为0，不关闭；1为关闭
+   */
+  PayMode?: number
 }
 
 /**
@@ -400,6 +408,16 @@ export interface Delta {
 }
 
 /**
+ * SetPayMode返回参数结构体
+ */
+export interface SetPayModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 模型生成的工具调用
  */
 export interface ToolCall {
@@ -429,6 +447,16 @@ export interface ToolCallFunction {
    * function参数，一般为json字符串
    */
   Arguments: string
+}
+
+/**
+ * SetPayMode请求参数结构体
+ */
+export interface SetPayModeRequest {
+  /**
+   * 设置后付费状态，0：后付费；1：预付费
+   */
+  PayMode: number
 }
 
 /**
@@ -506,6 +534,16 @@ export interface SubmitHunyuanImageJobResponse {
    * 任务 ID。
    */
   JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ActivateService返回参数结构体
+ */
+export interface ActivateServiceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

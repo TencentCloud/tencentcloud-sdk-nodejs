@@ -610,7 +610,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeMasterInstance", req, cb);
     }
     /**
-     * 变更实例配置
+     * 本接口（UpgradeInstance）用于变更实例的配置规格。
      */
     async UpgradeInstance(req, cb) {
         return this.request("UpgradeInstance", req, cb);

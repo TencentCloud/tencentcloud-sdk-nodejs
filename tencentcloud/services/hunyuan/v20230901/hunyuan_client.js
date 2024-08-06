@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryHunyuanImageJob", req, cb);
     }
     /**
+     * 该接口用于计算文本对应Token数、字符数。
+     */
+    async GetTokenCount(req, cb) {
+        return this.request("GetTokenCount", req, cb);
+    }
+    /**
      * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
 
  1. 本接口暂不支持返回图片内容。
@@ -57,10 +63,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChatCompletions", req, cb);
     }
     /**
-     * 该接口用于计算文本对应Token数、字符数。
+     * 开通服务
      */
-    async GetTokenCount(req, cb) {
-        return this.request("GetTokenCount", req, cb);
+    async ActivateService(req, cb) {
+        return this.request("ActivateService", req, cb);
+    }
+    /**
+     * 设置付费模式
+     */
+    async SetPayMode(req, cb) {
+        return this.request("SetPayMode", req, cb);
     }
     /**
      * 文生图轻量版接口根据输入的文本描述，智能生成与之相关的结果图。
