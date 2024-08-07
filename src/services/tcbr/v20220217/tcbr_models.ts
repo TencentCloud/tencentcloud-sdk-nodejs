@@ -508,10 +508,12 @@ export interface DescribeServerManageTaskRequest {
 export interface HpaPolicy {
   /**
    * 扩缩容类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyType: string
   /**
    * 扩缩容阈值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyThreshold: number
 }
@@ -621,6 +623,11 @@ export interface ServerBaseConfig {
    * 解析类型：json ｜ line
    */
   LogParseType?: string
+  /**
+   * 服务标签, function: 函数托管
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: string
 }
 
 /**

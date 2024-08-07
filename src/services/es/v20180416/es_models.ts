@@ -2889,6 +2889,10 @@ export interface CreateInstanceRequest {
    * 置放群组亲和度，范围[0,10]，0表示不开启
    */
   DisasterRecoverGroupAffinity?: number
+  /**
+   * 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段
+   */
+  SubProductCode?: string
 }
 
 /**
@@ -3402,6 +3406,11 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DisasterRecoverGroupAffinity?: number
+  /**
+   * 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductCode?: string
 }
 
 /**
@@ -3516,6 +3525,10 @@ export interface DescribeInstancesRequest {
    * Vpc列表 筛选项
    */
   VpcIds?: Array<string>
+  /**
+   * cdc集群id
+   */
+  CdcId?: string
 }
 
 /**
