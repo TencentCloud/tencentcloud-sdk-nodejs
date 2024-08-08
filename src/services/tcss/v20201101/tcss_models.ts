@@ -2504,6 +2504,10 @@ export interface DescribeComplianceAssetDetailInfoRequest {
    * 客户资产ID。
    */
   CustomerAssetId: number
+  /**
+   * 资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -2699,11 +2703,11 @@ export interface ComplianceAssetSummary {
   /**
    * 资产类别。
    */
-  AssetType: string
+  AssetType?: string
   /**
    * 是否为客户的首次检测。与CheckStatus配合使用。
    */
-  IsCustomerFirstCheck: boolean
+  IsCustomerFirstCheck?: boolean
   /**
    * 检测状态
 
@@ -2717,70 +2721,70 @@ CHECK_FINISHED, 检测完成
 
 CHECK_FAILED, 检测失败
    */
-  CheckStatus: string
+  CheckStatus?: string
   /**
    * 此类别的检测进度，为 0~100 的数。若未在检测中，无此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckProgress: number
+  CheckProgress?: number
   /**
    * 此类资产通过的检测项的数目。
    */
-  PassedPolicyItemCount: number
+  PassedPolicyItemCount?: number
   /**
    * 此类资产未通过的检测的数目。
    */
-  FailedPolicyItemCount: number
+  FailedPolicyItemCount?: number
   /**
    * 此类资产下未通过的严重级别的检测项的数目。
    */
-  FailedCriticalPolicyItemCount: number
+  FailedCriticalPolicyItemCount?: number
   /**
    * 此类资产下未通过的高危检测项的数目。
    */
-  FailedHighRiskPolicyItemCount: number
+  FailedHighRiskPolicyItemCount?: number
   /**
    * 此类资产下未通过的中危检测项的数目。
    */
-  FailedMediumRiskPolicyItemCount: number
+  FailedMediumRiskPolicyItemCount?: number
   /**
    * 此类资产下未通过的低危检测项的数目。
    */
-  FailedLowRiskPolicyItemCount: number
+  FailedLowRiskPolicyItemCount?: number
   /**
    * 此类资产下提示级别的检测项的数目。
    */
-  NoticePolicyItemCount: number
+  NoticePolicyItemCount?: number
   /**
    * 通过检测的资产的数目。
    */
-  PassedAssetCount: number
+  PassedAssetCount?: number
   /**
    * 未通过检测的资产的数目。
    */
-  FailedAssetCount: number
+  FailedAssetCount?: number
   /**
    * 此类资产的合规率，0~100的数。
    */
-  AssetPassedRate: number
+  AssetPassedRate?: number
   /**
    * 检测失败的资产的数目。
    */
-  ScanFailedAssetCount: number
+  ScanFailedAssetCount?: number
   /**
    * 上次检测的耗时，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckCostTime: number
+  CheckCostTime?: number
   /**
    * 上次检测的时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastCheckTime: string
+  LastCheckTime?: string
   /**
    * 定时检测规则。
    */
-  PeriodRule: CompliancePeriodTaskRule
+  PeriodRule?: CompliancePeriodTaskRule
   /**
    * 已开启的检查项总数
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2791,6 +2795,21 @@ CHECK_FAILED, 检测失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoredPolicyItemCount?: number
+  /**
+   * 总检测项数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPolicyItemCount?: number
+  /**
+   * 检测主机数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectHostCount?: number
+  /**
+   * 当前任务剩余时间，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftTime?: number
 }
 
 /**
@@ -3984,6 +4003,10 @@ export interface ScanComplianceAssetsByPolicyItemRequest {
    * 要重新扫描的客户资产项ID的列表。
    */
   CustomerAssetIdSet: Array<number | bigint>
+  /**
+   * 扫描资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -5078,7 +5101,7 @@ export interface ScanComplianceAssetsByPolicyItemResponse {
   /**
    * 返回重新检测任务的ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5195,15 +5218,15 @@ export interface DescribeComplianceTaskPolicyItemSummaryListResponse {
    * 返回最近一次合规检查任务的ID。这个任务为本次所展示数据的来源。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 返回检测项的总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 返回各检测项对应的汇总信息的列表。
    */
-  PolicyItemSummaryList: Array<CompliancePolicyItemSummary>
+  PolicyItemSummaryList?: Array<CompliancePolicyItemSummary>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8350,6 +8373,10 @@ export interface ScanComplianceScanFailedAssetsRequest {
    * 要重新扫描的客户资产项ID的列表。
    */
   CustomerAssetIdSet: Array<number | bigint>
+  /**
+   * 扫描资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -8488,7 +8515,7 @@ export interface ScanComplianceAssetsResponse {
   /**
    * 返回重新检测任务的ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11608,6 +11635,10 @@ export interface ScanComplianceAssetsRequest {
    * 要重新扫描的客户资产项ID的列表。
    */
   CustomerAssetIdSet: Array<number | bigint>
+  /**
+   * 扫描资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -15447,10 +15478,7 @@ ASSET_K8S, K8S资产
    */
   Limit?: number
   /**
-   * 过滤条件。
-Name - String
-Name 可取值：ItemType, StandardId,  RiskLevel。
-当为K8S资产时，还可取ClusterName。
+   * 过滤条件 <li>Name      string 检测项名字</li> <li>ItemType  string 检测项类型</li> <li>RiskLevel string 威胁等级</li> <li>IsOpen    int    是否开启</li>
    */
   Filters?: Array<ComplianceFilters>
 }
@@ -15462,36 +15490,36 @@ export interface CompliancePolicyItemSummary {
   /**
    * 为客户分配的唯一的检测项的ID。
    */
-  CustomerPolicyItemId: number
+  CustomerPolicyItemId?: number
   /**
    * 检测项的原始ID。
    */
-  BasePolicyItemId: number
+  BasePolicyItemId?: number
   /**
    * 检测项的名称。
    */
-  Name: string
+  Name?: string
   /**
    * 检测项所属的类型，枚举字符串。
    */
-  Category: string
+  Category?: string
   /**
    * 所属的合规标准
    */
-  BenchmarkStandardName: string
+  BenchmarkStandardName?: string
   /**
    * 威胁等级。RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
    */
-  RiskLevel: string
+  RiskLevel?: string
   /**
    * 检测项所属的资产类型
    */
-  AssetType: string
+  AssetType?: string
   /**
    * 最近检测的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastCheckTime: string
+  LastCheckTime?: string
   /**
    * 检测状态
 
@@ -15503,42 +15531,42 @@ CHECK_FINISHED, 检测完成
 
 CHECK_FAILED, 检测失败
    */
-  CheckStatus: string
+  CheckStatus?: string
   /**
    * 检测结果。RESULT_PASSED: 通过
 
 RESULT_FAILED: 未通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckResult: string
+  CheckResult?: string
   /**
    * 通过检测的资产的数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PassedAssetCount: number
+  PassedAssetCount?: number
   /**
    * 未通过检测的资产的数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedAssetCount: number
+  FailedAssetCount?: number
   /**
    * 检测项对应的白名单项的ID。如果存在且非0，表示检测项被用户忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WhitelistId: number
+  WhitelistId?: number
   /**
    * 处理建议。
    */
-  FixSuggestion: string
+  FixSuggestion?: string
   /**
    * 所属的合规标准的ID
    */
-  BenchmarkStandardId: number
+  BenchmarkStandardId?: number
   /**
    * 检测项适用的版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicableVersion: string
+  ApplicableVersion?: string
   /**
    * 检查项描述
 注意：此字段可能返回 null，表示取不到有效值。
@@ -15549,6 +15577,13 @@ RESULT_FAILED: 未通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditProcedure?: string
+  /**
+   * 是否开启
+<li>0 关闭</li>
+<li>1 开启</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEnable?: number
 }
 
 /**
@@ -15985,6 +16020,10 @@ export interface AddComplianceAssetPolicySetToWhitelistRequest {
    * 资产ID+检查项IDs. 列表
    */
   AssetPolicySetList: Array<ComplianceAssetPolicySetItem>
+  /**
+   * 扫描资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -16045,11 +16084,11 @@ export interface DescribeComplianceAssetPolicyItemListResponse {
   /**
    * 返回检测项的总数。如果用户未启用基线检查，此处返回0。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 返回某个资产下的检测项的列表。
    */
-  AssetPolicyItemList: Array<ComplianceAssetPolicyItem>
+  AssetPolicyItemList?: Array<ComplianceAssetPolicyItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18584,6 +18623,10 @@ export interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
    * 需要忽略指定资产内的检查项ID列表
    */
   CustomerPolicyItemIdSet?: Array<number | bigint>
+  /**
+   * 扫描资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**
@@ -21151,27 +21194,27 @@ export interface DescribeComplianceAssetDetailInfoResponse {
   /**
    * 某资产的详情。
    */
-  AssetDetailInfo: ComplianceAssetDetailInfo
+  AssetDetailInfo?: ComplianceAssetDetailInfo
   /**
    * 当资产为容器时，返回此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContainerDetailInfo: ComplianceContainerDetailInfo
+  ContainerDetailInfo?: ComplianceContainerDetailInfo
   /**
    * 当资产为镜像时，返回此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageDetailInfo: ComplianceImageDetailInfo
+  ImageDetailInfo?: ComplianceImageDetailInfo
   /**
    * 当资产为主机时，返回此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostDetailInfo: ComplianceHostDetailInfo
+  HostDetailInfo?: ComplianceHostDetailInfo
   /**
    * 当资产为K8S时，返回此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  K8SDetailInfo: ComplianceK8SDetailInfo
+  K8SDetailInfo?: ComplianceK8SDetailInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21205,7 +21248,7 @@ export interface ScanComplianceScanFailedAssetsResponse {
   /**
    * 返回重新检测任务的ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21362,9 +21405,13 @@ export interface DescribeComplianceAssetPolicyItemListRequest {
   Limit?: number
   /**
    * 过滤器列表。Name字段支持
-RiskLevel
+RiskLevel， AppId
    */
   Filters?: Array<ComplianceFilters>
+  /**
+   * 资产类型 <li>ASSET_CONTAINER Docker容器</li> <li>ASSET_IMAGE Docker镜像</li> <li>ASSET_HOST Docker主机</li> <li>ASSET_K8S Kubernetes</li> <li>ASSET_CONTAINERD Containerd主机</li> <li>ASSET_CONTAINERD_CONTAINER Containerd容器</li>
+   */
+  AssetType?: string
 }
 
 /**

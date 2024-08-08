@@ -40,13 +40,15 @@ import {
   ModifyConfigExtraResponse,
   SearchCosRechargeInfoRequest,
   KafkaRechargeInfo,
-  ModifyLogsetRequest,
+  ConsoleSharingConfig,
+  DeleteConsoleSharingRequest,
   UploadLogRequest,
+  ModifyConsoleSharingRequest,
   CreateLogsetRequest,
   DescribeShippersRequest,
   CreateScheduledSqlResponse,
   DescribeDashboardsRequest,
-  QueryMetricRequest,
+  CreateConsoleSharingRequest,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
@@ -77,6 +79,7 @@ import {
   DescribeIndexRequest,
   ModifyScheduledSqlResponse,
   ConditionInfo,
+  MachineGroupInfo,
   DeleteMachineGroupInfoRequest,
   CreateLogsetResponse,
   NoticeRule,
@@ -97,6 +100,7 @@ import {
   ModifyDashboardSubscribeRequest,
   CreateConsumerResponse,
   CreateConfigResponse,
+  DescribeConsoleSharingListResponse,
   ModifyMachineGroupResponse,
   DataTransformResouceInfo,
   CreateDashboardSubscribeRequest,
@@ -104,6 +108,7 @@ import {
   FullTextInfo,
   QueryMetricResponse,
   DescribeAlarmShieldsRequest,
+  ModifyLogsetRequest,
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
   DescribeConfigMachineGroupsResponse,
@@ -114,6 +119,7 @@ import {
   TopicExtendInfo,
   EventLog,
   CreateAlarmRequest,
+  DescribeConsoleSharingListRequest,
   DeleteExportResponse,
   DescribeDashboardSubscribesRequest,
   SearchLogInfos,
@@ -185,12 +191,13 @@ import {
   WebCallback,
   DescribeAlarmsResponse,
   CreateAlarmNoticeResponse,
-  ModifyTopicResponse,
+  DeleteConsoleSharingResponse,
   CreateConfigRequest,
   CreateShipperResponse,
   ModifyDashboardSubscribeResponse,
   DescribeKafkaRechargesResponse,
   DeleteIndexResponse,
+  ModifyTopicResponse,
   AlarmAnalysisConfig,
   PreviewLogStatistic,
   SearchLogErrors,
@@ -236,17 +243,20 @@ import {
   AlertHistoryNotice,
   DeleteAlarmRequest,
   AlarmShieldInfo,
+  CreateConsoleSharingResponse,
   ModifyKafkaConsumerResponse,
+  ModifyConsoleSharingResponse,
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
   SearchCosRechargeInfoResponse,
   DescribeAlarmsRequest,
-  ShipperInfo,
+  QueryMetricRequest,
   DescribeDashboardSubscribesResponse,
   CreateCosRechargeResponse,
   DescribeAlertRecordHistoryResponse,
   KeyValueInfo,
   SearchDashboardSubscribeResponse,
+  ShipperInfo,
   AddMachineGroupInfoResponse,
   ModifyMachineGroupRequest,
   DeleteDashboardSubscribeRequest,
@@ -289,7 +299,7 @@ import {
   CosRechargeInfo,
   RuleKeyValueInfo,
   DescribeKafkaConsumerRequest,
-  MachineGroupInfo,
+  ConsoleSharingParam,
   ModifyDataTransformResponse,
   DescribeDataTransformInfoResponse,
   ConsumerContent,
@@ -340,6 +350,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExportsResponse) => void
   ): Promise<DescribeExportsResponse> {
     return this.request("DescribeExports", req, cb)
+  }
+
+  /**
+   * 本接口用于获取告警策略执行详情
+   */
+  async GetAlarmLog(
+    req: GetAlarmLogRequest,
+    cb?: (error: string, rep: GetAlarmLogResponse) => void
+  ): Promise<GetAlarmLogResponse> {
+    return this.request("GetAlarmLog", req, cb)
   }
 
   /**
@@ -833,13 +853,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取告警策略执行详情
+   * 批量查询控制台分享列表
    */
-  async GetAlarmLog(
-    req: GetAlarmLogRequest,
-    cb?: (error: string, rep: GetAlarmLogResponse) => void
-  ): Promise<GetAlarmLogResponse> {
-    return this.request("GetAlarmLog", req, cb)
+  async DescribeConsoleSharingList(
+    req?: DescribeConsoleSharingListRequest,
+    cb?: (error: string, rep: DescribeConsoleSharingListResponse) => void
+  ): Promise<DescribeConsoleSharingListResponse> {
+    return this.request("DescribeConsoleSharingList", req, cb)
+  }
+
+  /**
+   * 创建控制台分享
+   */
+  async CreateConsoleSharing(
+    req: CreateConsoleSharingRequest,
+    cb?: (error: string, rep: CreateConsoleSharingResponse) => void
+  ): Promise<CreateConsoleSharingResponse> {
+    return this.request("CreateConsoleSharing", req, cb)
   }
 
   /**
@@ -1036,6 +1066,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除控制台分享
+   */
+  async DeleteConsoleSharing(
+    req: DeleteConsoleSharingRequest,
+    cb?: (error: string, rep: DeleteConsoleSharingResponse) => void
+  ): Promise<DeleteConsoleSharingResponse> {
+    return this.request("DeleteConsoleSharing", req, cb)
+  }
+
+  /**
    * 获取机器组信息列表
    */
   async DescribeMachineGroups(
@@ -1143,6 +1183,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeShippersResponse) => void
   ): Promise<DescribeShippersResponse> {
     return this.request("DescribeShippers", req, cb)
+  }
+
+  /**
+   * 修改控制台分享，目前仅允许修改有效期
+   */
+  async ModifyConsoleSharing(
+    req: ModifyConsoleSharingRequest,
+    cb?: (error: string, rep: ModifyConsoleSharingResponse) => void
+  ): Promise<ModifyConsoleSharingResponse> {
+    return this.request("ModifyConsoleSharing", req, cb)
   }
 
   /**

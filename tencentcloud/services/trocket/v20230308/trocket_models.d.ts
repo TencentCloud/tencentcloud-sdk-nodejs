@@ -642,6 +642,27 @@ export interface ImportSourceClusterConsumerGroupsRequest {
     GroupList: Array<SourceClusterGroupConfig>;
 }
 /**
+ * DescribeConsumerLag请求参数结构体
+ */
+export interface DescribeConsumerLagRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
+    /**
+     * 命名空间，4.x集群必填
+     */
+    Namespace?: string;
+    /**
+     * 订阅主题，不为空则查询订阅了该主题的消费组的堆积
+     */
+    SubscribeTopic?: string;
+}
+/**
  * 标签数据
  */
 export interface Tag {
@@ -840,15 +861,6 @@ export interface CreateConsumerGroupRequest {
      * 备注
      */
     Remark?: string;
-}
-/**
- * ModifyMQTTTopic返回参数结构体
- */
-export interface ModifyMQTTTopicResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * 消息记录
@@ -2105,6 +2117,19 @@ export interface ModifyTopicResponse {
     RequestId?: string;
 }
 /**
+ * DescribeConsumerLag返回参数结构体
+ */
+export interface DescribeConsumerLagResponse {
+    /**
+     * 堆积数
+     */
+    ConsumerLag?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeMQTTInsPublicEndpoints请求参数结构体
  */
 export interface DescribeMQTTInsPublicEndpointsRequest {
@@ -2136,24 +2161,9 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * DescribeMQTTInstanceCert返回参数结构体
+ * ModifyMQTTTopic返回参数结构体
  */
-export interface DescribeMQTTInstanceCertResponse {
-    /**
-     * 集群id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceId?: string;
-    /**
-     * 服务端证书id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SSLServerCertId?: string;
-    /**
-     * CA证书id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SSLCaCertId?: string;
+export interface ModifyMQTTTopicResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2798,6 +2808,24 @@ export interface StatisticsReport {
     Items?: Array<PacketStatistics>;
 }
 /**
+ * IP规则
+ */
+export interface IpRule {
+    /**
+     * IP地址
+     */
+    Ip: string;
+    /**
+     * 是否允许放行
+     */
+    Allow: boolean;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+}
+/**
  * 角色信息
  */
 export interface RoleItem {
@@ -2939,37 +2967,28 @@ export interface DeleteTopicResponse {
     RequestId?: string;
 }
 /**
- * DescribeMQTTMessageList请求参数结构体
+ * DescribeMQTTInstanceCert返回参数结构体
  */
-export interface DescribeMQTTMessageListRequest {
+export interface DescribeMQTTInstanceCertResponse {
     /**
-     * 实例ID
+     * 集群id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * 主题
+     * 服务端证书id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Topic: string;
+    SSLServerCertId?: string;
     /**
-     * 开始时间
+     * CA证书id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: number;
+    SSLCaCertId?: string;
     /**
-     * 结束时间
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    EndTime: number;
-    /**
-     * 请求任务id
-     */
-    TaskRequestId: string;
-    /**
-     * 查询起始位置
-     */
-    Offset?: number;
-    /**
-     * 查询结果限制数量
-     */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeMQTTTopic返回参数结构体
@@ -3020,20 +3039,35 @@ export interface DescribeProductSKUsResponse {
     RequestId?: string;
 }
 /**
- * IP规则
+ * DescribeMQTTMessageList请求参数结构体
  */
-export interface IpRule {
+export interface DescribeMQTTMessageListRequest {
     /**
-     * IP地址
+     * 实例ID
      */
-    Ip: string;
+    InstanceId: string;
     /**
-     * 是否允许放行
+     * 主题
      */
-    Allow: boolean;
+    Topic: string;
     /**
-     * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 开始时间
      */
-    Remark: string;
+    StartTime: number;
+    /**
+     * 结束时间
+     */
+    EndTime: number;
+    /**
+     * 请求任务id
+     */
+    TaskRequestId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit?: number;
 }

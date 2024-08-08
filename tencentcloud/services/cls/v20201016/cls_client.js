@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExports", req, cb);
     }
     /**
+     * 本接口用于获取告警策略执行详情
+     */
+    async GetAlarmLog(req, cb) {
+        return this.request("GetAlarmLog", req, cb);
+    }
+    /**
      * 本接口用于创建索引
      */
     async CreateIndex(req, cb) {
@@ -340,10 +346,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachineGroupInfo", req, cb);
     }
     /**
-     * 本接口用于获取告警策略执行详情
+     * 批量查询控制台分享列表
      */
-    async GetAlarmLog(req, cb) {
-        return this.request("GetAlarmLog", req, cb);
+    async DescribeConsoleSharingList(req, cb) {
+        return this.request("DescribeConsoleSharingList", req, cb);
+    }
+    /**
+     * 创建控制台分享
+     */
+    async CreateConsoleSharing(req, cb) {
+        return this.request("CreateConsoleSharing", req, cb);
     }
     /**
      * 本接口用于获取日志集信息列表。
@@ -463,6 +475,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SplitPartition", req, cb);
     }
     /**
+     * 删除控制台分享
+     */
+    async DeleteConsoleSharing(req, cb) {
+        return this.request("DeleteConsoleSharing", req, cb);
+    }
+    /**
      * 获取机器组信息列表
      */
     async DescribeMachineGroups(req, cb) {
@@ -527,6 +545,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeShippers(req, cb) {
         return this.request("DescribeShippers", req, cb);
+    }
+    /**
+     * 修改控制台分享，目前仅允许修改有效期
+     */
+    async ModifyConsoleSharing(req, cb) {
+        return this.request("ModifyConsoleSharing", req, cb);
     }
     /**
      * 本接口用于获取仪表盘

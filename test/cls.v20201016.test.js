@@ -48,6 +48,16 @@ it("cls.v20201016.DescribeExports", async function () {
     }
 })
 
+it("cls.v20201016.GetAlarmLog", async function () {
+    try {
+       const data = await client.GetAlarmLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateIndex", async function () {
     try {
        const data = await client.CreateIndex({})
@@ -538,9 +548,19 @@ it("cls.v20201016.DeleteMachineGroupInfo", async function () {
     }
 })
 
-it("cls.v20201016.GetAlarmLog", async function () {
+it("cls.v20201016.DescribeConsoleSharingList", async function () {
     try {
-       const data = await client.GetAlarmLog({})
+       const data = await client.DescribeConsoleSharingList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateConsoleSharing", async function () {
+    try {
+       const data = await client.CreateConsoleSharing({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +758,16 @@ it("cls.v20201016.SplitPartition", async function () {
     }
 })
 
+it("cls.v20201016.DeleteConsoleSharing", async function () {
+    try {
+       const data = await client.DeleteConsoleSharing({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeMachineGroups", async function () {
     try {
        const data = await client.DescribeMachineGroups({})
@@ -841,6 +871,16 @@ it("cls.v20201016.ModifyAlarm", async function () {
 it("cls.v20201016.DescribeShippers", async function () {
     try {
        const data = await client.DescribeShippers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyConsoleSharing", async function () {
+    try {
+       const data = await client.ModifyConsoleSharing({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

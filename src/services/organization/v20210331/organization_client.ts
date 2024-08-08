@@ -48,13 +48,14 @@ import {
   DisablePolicyTypeResponse,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeEffectivePolicyRequest,
+  CreateOrgServiceAssignRequest,
   DeleteOrganizationMembersPolicyResponse,
   UpdateOrganizationIdentityRequest,
   ShareUnitMember,
   CancelOrganizationMemberAuthAccountRequest,
   OrganizationServiceAssign,
   DeleteOrganizationResponse,
-  OrgMemberAuthAccount,
+  ListOrgServiceAssignMemberResponse,
   MemberMainInfo,
   DeleteOrganizationMembersResponse,
   DescribeOrganizationMembersResponse,
@@ -71,6 +72,7 @@ import {
   ManagerShareUnit,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberAuthIdentityResponse,
+  DeleteOrgServiceAssignRequest,
   DescribeOrganizationRequest,
   DescribeOrganizationNodesRequest,
   BindOrganizationMemberAuthAccountResponse,
@@ -87,6 +89,7 @@ import {
   ListOrganizationIdentityResponse,
   DeletePolicyRequest,
   ShareResource,
+  NodeMainInfo,
   QuitOrganizationRequest,
   AddOrganizationNodeRequest,
   AddShareUnitMembersRequest,
@@ -111,6 +114,7 @@ import {
   DetachPolicyRequest,
   DisablePolicyTypeRequest,
   DescribeEffectivePolicyResponse,
+  CreateOrgServiceAssignResponse,
   AddOrganizationMemberEmailResponse,
   AddShareUnitMembersResponse,
   CreateOrganizationMemberPolicyRequest,
@@ -120,6 +124,7 @@ import {
   CheckAccountDeleteRequest,
   OrgProductFinancial,
   DetachPolicyResponse,
+  OrganizationServiceAssignMember,
   AddShareUnitResponse,
   DescribeShareUnitResourcesRequest,
   DescribeOrganizationFinancialByProductResponse,
@@ -142,6 +147,7 @@ import {
   DescribeOrganizationMemberEmailBindRequest,
   ListPoliciesRequest,
   OrgMember,
+  OrgMemberAuthAccount,
   CreateOrganizationMemberRequest,
   CreatePolicyRequest,
   OrgMemberAuthIdentity,
@@ -160,6 +166,7 @@ import {
   DeleteShareUnitResourcesResponse,
   CreateOrganizationIdentityResponse,
   DescribeShareUnitMembersResponse,
+  ListOrgServiceAssignMemberRequest,
   UpdateOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DeleteOrganizationMembersPolicyRequest,
@@ -171,6 +178,7 @@ import {
   DescribeOrganizationFinancialByMemberResponse,
   ProductResource,
   DescribePolicyConfigRequest,
+  DeleteOrgServiceAssignResponse,
   DescribeOrganizationMemberPoliciesResponse,
   DescribeShareUnitsRequest,
   ShareArea,
@@ -398,6 +406,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取集团服务委派管理员列表
+   */
+  async ListOrgServiceAssignMember(
+    req: ListOrgServiceAssignMemberRequest,
+    cb?: (error: string, rep: ListOrgServiceAssignMemberResponse) => void
+  ): Promise<ListOrgServiceAssignMemberResponse> {
+    return this.request("ListOrgServiceAssignMember", req, cb)
+  }
+
+  /**
    * 拒绝加入共享单元邀请。
    */
   async RejectJoinShareUnitInvitation(
@@ -415,6 +433,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOrganizationNodesResponse) => void
   ): Promise<DeleteOrganizationNodesResponse> {
     return this.request("DeleteOrganizationNodes", req, cb)
+  }
+
+  /**
+   * 添加集团服务委派管理员
+   */
+  async CreateOrgServiceAssign(
+    req: CreateOrgServiceAssignRequest,
+    cb?: (error: string, rep: CreateOrgServiceAssignResponse) => void
+  ): Promise<CreateOrgServiceAssignResponse> {
+    return this.request("CreateOrgServiceAssign", req, cb)
   }
 
   /**
@@ -588,6 +616,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除集团服务委派管理员
+   */
+  async DeleteOrgServiceAssign(
+    req: DeleteOrgServiceAssignRequest,
+    cb?: (error: string, rep: DeleteOrgServiceAssignResponse) => void
+  ): Promise<DeleteOrgServiceAssignResponse> {
+    return this.request("DeleteOrgServiceAssign", req, cb)
+  }
+
+  /**
    * 删除组织身份
    */
   async DeleteOrganizationIdentity(
@@ -758,13 +796,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 成员账号删除检查
+   * 删除组织成员访问授权
    */
-  async CheckAccountDelete(
-    req: CheckAccountDeleteRequest,
-    cb?: (error: string, rep: CheckAccountDeleteResponse) => void
-  ): Promise<CheckAccountDeleteResponse> {
-    return this.request("CheckAccountDelete", req, cb)
+  async DeleteOrganizationMemberAuthIdentity(
+    req: DeleteOrganizationMemberAuthIdentityRequest,
+    cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void
+  ): Promise<DeleteOrganizationMemberAuthIdentityResponse> {
+    return this.request("DeleteOrganizationMemberAuthIdentity", req, cb)
   }
 
   /**
@@ -808,13 +846,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除组织成员访问授权
+   * 成员账号删除检查
    */
-  async DeleteOrganizationMemberAuthIdentity(
-    req: DeleteOrganizationMemberAuthIdentityRequest,
-    cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void
-  ): Promise<DeleteOrganizationMemberAuthIdentityResponse> {
-    return this.request("DeleteOrganizationMemberAuthIdentity", req, cb)
+  async CheckAccountDelete(
+    req: CheckAccountDeleteRequest,
+    cb?: (error: string, rep: CheckAccountDeleteResponse) => void
+  ): Promise<CheckAccountDeleteResponse> {
+    return this.request("CheckAccountDelete", req, cb)
   }
 
   /**

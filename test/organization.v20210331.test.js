@@ -228,6 +228,16 @@ it("organization.v20210331.DeleteAccount", async function () {
     }
 })
 
+it("organization.v20210331.ListOrgServiceAssignMember", async function () {
+    try {
+       const data = await client.ListOrgServiceAssignMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.RejectJoinShareUnitInvitation", async function () {
     try {
        const data = await client.RejectJoinShareUnitInvitation({})
@@ -241,6 +251,16 @@ it("organization.v20210331.RejectJoinShareUnitInvitation", async function () {
 it("organization.v20210331.DeleteOrganizationNodes", async function () {
     try {
        const data = await client.DeleteOrganizationNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrgServiceAssign", async function () {
+    try {
+       const data = await client.CreateOrgServiceAssign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +438,16 @@ it("organization.v20210331.CreateOrganizationIdentity", async function () {
     }
 })
 
+it("organization.v20210331.DeleteOrgServiceAssign", async function () {
+    try {
+       const data = await client.DeleteOrgServiceAssign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DeleteOrganizationIdentity", async function () {
     try {
        const data = await client.DeleteOrganizationIdentity({})
@@ -588,9 +618,9 @@ it("organization.v20210331.DeletePolicy", async function () {
     }
 })
 
-it("organization.v20210331.CheckAccountDelete", async function () {
+it("organization.v20210331.DeleteOrganizationMemberAuthIdentity", async function () {
     try {
-       const data = await client.CheckAccountDelete({})
+       const data = await client.DeleteOrganizationMemberAuthIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +668,9 @@ it("organization.v20210331.ListTargetsForPolicy", async function () {
     }
 })
 
-it("organization.v20210331.DeleteOrganizationMemberAuthIdentity", async function () {
+it("organization.v20210331.CheckAccountDelete", async function () {
     try {
-       const data = await client.DeleteOrganizationMemberAuthIdentity({})
+       const data = await client.CheckAccountDelete({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

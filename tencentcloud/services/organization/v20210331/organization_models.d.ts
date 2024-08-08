@@ -543,6 +543,31 @@ export interface DescribeEffectivePolicyRequest {
     TargetId: number;
 }
 /**
+ * CreateOrgServiceAssign请求参数结构体
+ */
+export interface CreateOrgServiceAssignRequest {
+    /**
+     * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+     */
+    ServiceId: number;
+    /**
+     * 委派管理员Uin列表。 最大长度20个
+     */
+    MemberUins: Array<number | bigint>;
+    /**
+     * 委派管理员管理范围。 取值：1-全部成员 2-部分成员，默认值1
+     */
+    ManagementScope?: number;
+    /**
+     * 管理的成员Uin列表。ManagementScope为2时该参数有效
+     */
+    ManagementScopeUins?: Array<number | bigint>;
+    /**
+     * 管理的部门ID列表。ManagementScope为2时该参数有效
+     */
+    ManagementScopeNodeIds?: Array<number | bigint>;
+}
+/**
  * DeleteOrganizationMembersPolicy返回参数结构体
  */
 export interface DeleteOrganizationMembersPolicyResponse {
@@ -680,54 +705,23 @@ export interface DeleteOrganizationResponse {
     RequestId?: string;
 }
 /**
- * 成员和子账号的授权关系
+ * ListOrgServiceAssignMember返回参数结构体
  */
-export interface OrgMemberAuthAccount {
+export interface ListOrgServiceAssignMemberResponse {
     /**
-     * 组织子账号Uin。
+     * 总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgSubAccountUin: number;
+    Total?: number;
     /**
-     * 策略ID。
+     * 委派管理员列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    Items?: Array<OrganizationServiceAssignMember>;
     /**
-     * 策略名。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PolicyName: string;
-    /**
-     * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityId: number;
-    /**
-     * 身份角色名。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityRoleName: string;
-    /**
-     * 身份角色别名。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityRoleAliasName: string;
-    /**
-     * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime: string;
-    /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
-    /**
-     * 子账号名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OrgSubAccountName: string;
+    RequestId?: string;
 }
 /**
  * 成员主要信息
@@ -1009,6 +1003,19 @@ export interface CreateOrganizationMemberAuthIdentityResponse {
     RequestId?: string;
 }
 /**
+ * DeleteOrgServiceAssign请求参数结构体
+ */
+export interface DeleteOrgServiceAssignRequest {
+    /**
+     * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+     */
+    ServiceId: number;
+    /**
+     * 委派管理员Uin。
+     */
+    MemberUin: number;
+}
+/**
  * DescribeOrganization请求参数结构体
  */
 export interface DescribeOrganizationRequest {
@@ -1273,6 +1280,21 @@ export interface ShareResource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductResourceId?: string;
+}
+/**
+ * 部门主要信息
+ */
+export interface NodeMainInfo {
+    /**
+     * 部门ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId: number;
+    /**
+     * 部门名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName: string;
 }
 /**
  * QuitOrganization请求参数结构体
@@ -1703,6 +1725,15 @@ export interface DescribeEffectivePolicyResponse {
     RequestId?: string;
 }
 /**
+ * CreateOrgServiceAssign返回参数结构体
+ */
+export interface CreateOrgServiceAssignResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * AddOrganizationMemberEmail返回参数结构体
  */
 export interface AddOrganizationMemberEmailResponse {
@@ -1822,6 +1853,56 @@ export interface DetachPolicyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 集团服务委派成员信息
+ */
+export interface OrganizationServiceAssignMember {
+    /**
+     * 集团服务ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceId?: number;
+    /**
+     * 集团服务产品名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductName?: string;
+    /**
+     * 委派管理员Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberUin?: number;
+    /**
+     * 委派管理员名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberName?: string;
+    /**
+     * 启用状态 。取值：0-服务无启用状态  1-已启用  2-未启用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsageStatus?: number;
+    /**
+     * 委派时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 委派管理员管理范围。取值: 1-全部成员  2-部分成员
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManagementScope?: number;
+    /**
+     * 管理的成员Uin列表。ManagementScope值为2时该参数有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManagementScopeMembers?: Array<MemberMainInfo>;
+    /**
+     * 管理的部门ID列表。ManagementScope值为2时该参数有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManagementScopeNodes?: Array<NodeMainInfo>;
 }
 /**
  * AddShareUnit返回参数结构体
@@ -2351,6 +2432,56 @@ export interface OrgMember {
     PermissionStatus: string;
 }
 /**
+ * 成员和子账号的授权关系
+ */
+export interface OrgMemberAuthAccount {
+    /**
+     * 组织子账号Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgSubAccountUin: number;
+    /**
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyId: number;
+    /**
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyName: string;
+    /**
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityId: number;
+    /**
+     * 身份角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleName: string;
+    /**
+     * 身份角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleAliasName: string;
+    /**
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 子账号名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgSubAccountName: string;
+}
+/**
  * CreateOrganizationMember请求参数结构体
  */
 export interface CreateOrganizationMemberRequest {
@@ -2800,6 +2931,23 @@ export interface DescribeShareUnitMembersResponse {
     RequestId?: string;
 }
 /**
+ * ListOrgServiceAssignMember请求参数结构体
+ */
+export interface ListOrgServiceAssignMemberRequest {
+    /**
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
+    Offset: number;
+    /**
+     * 限制数目。取值范围：1~50，默认值：10
+     */
+    Limit: number;
+    /**
+     * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+     */
+    ServiceId: number;
+}
+/**
  * UpdateOrganizationIdentity返回参数结构体
  */
 export interface UpdateOrganizationIdentityResponse {
@@ -2955,6 +3103,15 @@ export interface DescribePolicyConfigRequest {
      * 策略类型。默认值0，取值范围：0-服务控制策略、1-标签策略
      */
     Type?: number;
+}
+/**
+ * DeleteOrgServiceAssign返回参数结构体
+ */
+export interface DeleteOrgServiceAssignResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeOrganizationMemberPolicies返回参数结构体

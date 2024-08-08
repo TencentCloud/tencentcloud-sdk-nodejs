@@ -42,6 +42,7 @@ import {
   DescribeMQTTMessageListResponse,
   DescribeMQTTProductSKUListRequest,
   ImportSourceClusterConsumerGroupsRequest,
+  DescribeConsumerLagRequest,
   Tag,
   DescribeMQTTMessageResponse,
   DescribeMQTTInstanceListResponse,
@@ -49,7 +50,6 @@ import {
   DescribeInstanceListResponse,
   ModifyInstanceResponse,
   CreateConsumerGroupRequest,
-  ModifyMQTTTopicResponse,
   MQTTMessageItem,
   DescribeMQTTClientRequest,
   DescribeMQTTInsVPCEndpointsResponse,
@@ -101,10 +101,11 @@ import {
   CreateInstanceRequest,
   DescribeConsumerGroupResponse,
   ModifyTopicResponse,
+  DescribeConsumerLagResponse,
   DescribeMQTTInsPublicEndpointsRequest,
   DeleteRoleResponse,
   Filter,
-  DescribeMQTTInstanceCertResponse,
+  ModifyMQTTTopicResponse,
   DescribeMQTTTopicListRequest,
   MQTTClientSubscription,
   ModifyTopicRequest,
@@ -130,6 +131,7 @@ import {
   Endpoint,
   ModifyMQTTTopicRequest,
   StatisticsReport,
+  IpRule,
   RoleItem,
   MQTTTopicItem,
   DescribeConsumerGroupListResponse,
@@ -137,11 +139,11 @@ import {
   CreateMQTTInsPublicEndpointRequest,
   CreateMQTTTopicRequest,
   DeleteTopicResponse,
-  DescribeMQTTMessageListRequest,
+  DescribeMQTTInstanceCertResponse,
   DescribeMQTTTopicResponse,
   DescribeInstanceRequest,
   DescribeProductSKUsResponse,
-  IpRule,
+  DescribeMQTTMessageListRequest,
 } from "./trocket_models"
 
 /**
@@ -376,6 +378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMQTTMessageResponse) => void
   ): Promise<DescribeMQTTMessageResponse> {
     return this.request("DescribeMQTTMessage", req, cb)
+  }
+
+  /**
+   * 查询指定消费组堆积数。
+   */
+  async DescribeConsumerLag(
+    req: DescribeConsumerLagRequest,
+    cb?: (error: string, rep: DescribeConsumerLagResponse) => void
+  ): Promise<DescribeConsumerLagResponse> {
+    return this.request("DescribeConsumerLag", req, cb)
   }
 
   /**

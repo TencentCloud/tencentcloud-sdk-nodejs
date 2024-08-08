@@ -165,6 +165,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMQTTMessage", req, cb);
     }
     /**
+     * 查询指定消费组堆积数。
+     */
+    async DescribeConsumerLag(req, cb) {
+        return this.request("DescribeConsumerLag", req, cb);
+    }
+    /**
      * 查询mqtt主题详情
      */
     async DescribeMQTTTopic(req, cb) {

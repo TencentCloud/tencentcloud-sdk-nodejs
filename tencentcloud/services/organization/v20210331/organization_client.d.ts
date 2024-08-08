@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeShareUnitResourcesResponse, EnablePolicyTypeResponse, ListTargetsForPolicyResponse, ListNonCompliantResourceResponse, DeleteOrganizationRequest, RejectJoinShareUnitInvitationRequest, DescribePolicyConfigResponse, QuitOrganizationResponse, ListOrganizationIdentityRequest, DeleteOrganizationMembersRequest, CreateOrganizationResponse, AddShareUnitResourcesResponse, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, MoveOrganizationNodeMembersResponse, AttachPolicyRequest, DeleteShareUnitResponse, DeleteShareUnitMembersResponse, DescribePolicyResponse, CreateOrganizationIdentityRequest, ListOrganizationServiceResponse, DeletePolicyResponse, DescribeOrganizationResponse, ListNonCompliantResourceRequest, DisablePolicyTypeResponse, DescribeOrganizationMemberPoliciesRequest, DescribeEffectivePolicyRequest, DeleteOrganizationMembersPolicyResponse, UpdateOrganizationIdentityRequest, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationResponse, DeleteOrganizationMembersResponse, DescribeOrganizationMembersResponse, RejectJoinShareUnitInvitationResponse, UpdateOrganizationNodeRequest, DescribeShareAreasResponse, DescribeOrganizationAuthNodeResponse, ListPoliciesResponse, BindOrganizationMemberAuthAccountRequest, DescribeShareUnitsResponse, UpdateOrganizationMemberEmailBindResponse, DeleteShareUnitResourcesRequest, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberAuthIdentityResponse, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, UpdateOrganizationMemberResponse, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationNodesRequest, EnablePolicyTypeRequest, CreatePolicyResponse, AddOrganizationMemberEmailRequest, ListOrganizationIdentityResponse, DeletePolicyRequest, QuitOrganizationRequest, AddOrganizationNodeRequest, AddShareUnitMembersRequest, AddShareUnitRequest, DescribeOrganizationAuthNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, AcceptJoinShareUnitInvitationResponse, DescribeShareAreasRequest, DescribeOrganizationMemberAuthAccountsResponse, DescribeOrganizationMembersRequest, UpdateShareUnitResponse, ListPoliciesForTargetRequest, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest, UpdateShareUnitRequest, DeleteOrganizationMemberAuthIdentityRequest, DetachPolicyRequest, DisablePolicyTypeRequest, DescribeEffectivePolicyResponse, AddOrganizationMemberEmailResponse, AddShareUnitMembersResponse, CreateOrganizationMemberPolicyRequest, CreateOrganizationRequest, AttachPolicyResponse, CreateOrganizationMembersPolicyRequest, CheckAccountDeleteRequest, DetachPolicyResponse, AddShareUnitResponse, DescribeShareUnitResourcesRequest, DescribeOrganizationFinancialByProductResponse, DescribeOrganizationFinancialByProductRequest, CreateOrganizationMemberPolicyResponse, AcceptJoinShareUnitInvitationRequest, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, AddShareUnitResourcesRequest, ListPoliciesForTargetResponse, DeleteShareUnitMembersRequest, DescribeOrganizationMemberAuthIdentitiesResponse, UpdatePolicyResponse, DeleteOrganizationIdentityResponse, DescribeOrganizationMemberEmailBindRequest, ListPoliciesRequest, CreateOrganizationMemberRequest, CreatePolicyRequest, DeleteShareUnitRequest, CheckAccountDeleteResponse, DeleteAccountRequest, DescribeShareUnitMembersRequest, CreateOrganizationMemberAuthIdentityRequest, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, ListOrganizationServiceRequest, CreateOrganizationMembersPolicyResponse, DeleteShareUnitResourcesResponse, CreateOrganizationIdentityResponse, DescribeShareUnitMembersResponse, UpdateOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DescribePolicyRequest, ListTargetsForPolicyRequest, DeleteOrganizationIdentityRequest, UpdateOrganizationNodeResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DescribePolicyConfigRequest, DescribeOrganizationMemberPoliciesResponse, DescribeShareUnitsRequest, DeleteAccountResponse, UpdatePolicyRequest } from "./organization_models";
+import { DescribeShareUnitResourcesResponse, EnablePolicyTypeResponse, ListTargetsForPolicyResponse, ListNonCompliantResourceResponse, DeleteOrganizationRequest, RejectJoinShareUnitInvitationRequest, DescribePolicyConfigResponse, QuitOrganizationResponse, ListOrganizationIdentityRequest, DeleteOrganizationMembersRequest, CreateOrganizationResponse, AddShareUnitResourcesResponse, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, MoveOrganizationNodeMembersResponse, AttachPolicyRequest, DeleteShareUnitResponse, DeleteShareUnitMembersResponse, DescribePolicyResponse, CreateOrganizationIdentityRequest, ListOrganizationServiceResponse, DeletePolicyResponse, DescribeOrganizationResponse, ListNonCompliantResourceRequest, DisablePolicyTypeResponse, DescribeOrganizationMemberPoliciesRequest, DescribeEffectivePolicyRequest, CreateOrgServiceAssignRequest, DeleteOrganizationMembersPolicyResponse, UpdateOrganizationIdentityRequest, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationResponse, ListOrgServiceAssignMemberResponse, DeleteOrganizationMembersResponse, DescribeOrganizationMembersResponse, RejectJoinShareUnitInvitationResponse, UpdateOrganizationNodeRequest, DescribeShareAreasResponse, DescribeOrganizationAuthNodeResponse, ListPoliciesResponse, BindOrganizationMemberAuthAccountRequest, DescribeShareUnitsResponse, UpdateOrganizationMemberEmailBindResponse, DeleteShareUnitResourcesRequest, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberAuthIdentityResponse, DeleteOrgServiceAssignRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, UpdateOrganizationMemberResponse, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationNodesRequest, EnablePolicyTypeRequest, CreatePolicyResponse, AddOrganizationMemberEmailRequest, ListOrganizationIdentityResponse, DeletePolicyRequest, QuitOrganizationRequest, AddOrganizationNodeRequest, AddShareUnitMembersRequest, AddShareUnitRequest, DescribeOrganizationAuthNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, AcceptJoinShareUnitInvitationResponse, DescribeShareAreasRequest, DescribeOrganizationMemberAuthAccountsResponse, DescribeOrganizationMembersRequest, UpdateShareUnitResponse, ListPoliciesForTargetRequest, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest, UpdateShareUnitRequest, DeleteOrganizationMemberAuthIdentityRequest, DetachPolicyRequest, DisablePolicyTypeRequest, DescribeEffectivePolicyResponse, CreateOrgServiceAssignResponse, AddOrganizationMemberEmailResponse, AddShareUnitMembersResponse, CreateOrganizationMemberPolicyRequest, CreateOrganizationRequest, AttachPolicyResponse, CreateOrganizationMembersPolicyRequest, CheckAccountDeleteRequest, DetachPolicyResponse, AddShareUnitResponse, DescribeShareUnitResourcesRequest, DescribeOrganizationFinancialByProductResponse, DescribeOrganizationFinancialByProductRequest, CreateOrganizationMemberPolicyResponse, AcceptJoinShareUnitInvitationRequest, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, AddShareUnitResourcesRequest, ListPoliciesForTargetResponse, DeleteShareUnitMembersRequest, DescribeOrganizationMemberAuthIdentitiesResponse, UpdatePolicyResponse, DeleteOrganizationIdentityResponse, DescribeOrganizationMemberEmailBindRequest, ListPoliciesRequest, CreateOrganizationMemberRequest, CreatePolicyRequest, DeleteShareUnitRequest, CheckAccountDeleteResponse, DeleteAccountRequest, DescribeShareUnitMembersRequest, CreateOrganizationMemberAuthIdentityRequest, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, ListOrganizationServiceRequest, CreateOrganizationMembersPolicyResponse, DeleteShareUnitResourcesResponse, CreateOrganizationIdentityResponse, DescribeShareUnitMembersResponse, ListOrgServiceAssignMemberRequest, UpdateOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DescribePolicyRequest, ListTargetsForPolicyRequest, DeleteOrganizationIdentityRequest, UpdateOrganizationNodeResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DescribePolicyConfigRequest, DeleteOrgServiceAssignResponse, DescribeOrganizationMemberPoliciesResponse, DescribeShareUnitsRequest, DeleteAccountResponse, UpdatePolicyRequest } from "./organization_models";
 /**
  * organization client
  * @class
@@ -92,6 +92,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteAccount(req: DeleteAccountRequest, cb?: (error: string, rep: DeleteAccountResponse) => void): Promise<DeleteAccountResponse>;
     /**
+     * 获取集团服务委派管理员列表
+     */
+    ListOrgServiceAssignMember(req: ListOrgServiceAssignMemberRequest, cb?: (error: string, rep: ListOrgServiceAssignMemberResponse) => void): Promise<ListOrgServiceAssignMemberResponse>;
+    /**
      * 拒绝加入共享单元邀请。
      */
     RejectJoinShareUnitInvitation(req: RejectJoinShareUnitInvitationRequest, cb?: (error: string, rep: RejectJoinShareUnitInvitationResponse) => void): Promise<RejectJoinShareUnitInvitationResponse>;
@@ -99,6 +103,10 @@ export declare class Client extends AbstractClient {
      * 批量删除企业组织节点
      */
     DeleteOrganizationNodes(req: DeleteOrganizationNodesRequest, cb?: (error: string, rep: DeleteOrganizationNodesResponse) => void): Promise<DeleteOrganizationNodesResponse>;
+    /**
+     * 添加集团服务委派管理员
+     */
+    CreateOrgServiceAssign(req: CreateOrgServiceAssignRequest, cb?: (error: string, rep: CreateOrgServiceAssignResponse) => void): Promise<CreateOrgServiceAssignResponse>;
     /**
      * 查询目标关联的有效策略
      */
@@ -168,6 +176,10 @@ export declare class Client extends AbstractClient {
      */
     CreateOrganizationIdentity(req: CreateOrganizationIdentityRequest, cb?: (error: string, rep: CreateOrganizationIdentityResponse) => void): Promise<CreateOrganizationIdentityResponse>;
     /**
+     * 删除集团服务委派管理员
+     */
+    DeleteOrgServiceAssign(req: DeleteOrgServiceAssignRequest, cb?: (error: string, rep: DeleteOrgServiceAssignResponse) => void): Promise<DeleteOrgServiceAssignResponse>;
+    /**
      * 删除组织身份
      */
     DeleteOrganizationIdentity(req: DeleteOrganizationIdentityRequest, cb?: (error: string, rep: DeleteOrganizationIdentityResponse) => void): Promise<DeleteOrganizationIdentityResponse>;
@@ -236,9 +248,9 @@ export declare class Client extends AbstractClient {
      */
     DeletePolicy(req: DeletePolicyRequest, cb?: (error: string, rep: DeletePolicyResponse) => void): Promise<DeletePolicyResponse>;
     /**
-     * 成员账号删除检查
+     * 删除组织成员访问授权
      */
-    CheckAccountDelete(req: CheckAccountDeleteRequest, cb?: (error: string, rep: CheckAccountDeleteResponse) => void): Promise<CheckAccountDeleteResponse>;
+    DeleteOrganizationMemberAuthIdentity(req: DeleteOrganizationMemberAuthIdentityRequest, cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void): Promise<DeleteOrganizationMemberAuthIdentityResponse>;
     /**
      * 创建一个特殊类型的策略，您可以关联到企业组织Root节点、企业部门节点或者企业的成员账号。
      */
@@ -256,9 +268,9 @@ export declare class Client extends AbstractClient {
      */
     ListTargetsForPolicy(req: ListTargetsForPolicyRequest, cb?: (error: string, rep: ListTargetsForPolicyResponse) => void): Promise<ListTargetsForPolicyResponse>;
     /**
-     * 删除组织成员访问授权
+     * 成员账号删除检查
      */
-    DeleteOrganizationMemberAuthIdentity(req: DeleteOrganizationMemberAuthIdentityRequest, cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void): Promise<DeleteOrganizationMemberAuthIdentityResponse>;
+    CheckAccountDelete(req: CheckAccountDeleteRequest, cb?: (error: string, rep: CheckAccountDeleteResponse) => void): Promise<CheckAccountDeleteResponse>;
     /**
      * 编辑策略
      */

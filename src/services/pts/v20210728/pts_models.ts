@@ -403,7 +403,7 @@ export interface CreateCronJobResponse {
   /**
    * 定时任务ID
    */
-  CronJobId: string
+  CronJobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1481,12 +1481,12 @@ export interface DescribeFilesResponse {
    * 文件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSet: Array<File>
+  FileSet?: Array<File>
   /**
    * 文件总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2389,12 +2389,12 @@ export interface DescribeAlertChannelsResponse {
    * 告警通知接收组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlertChannelSet: Array<AlertChannelRecord>
+  AlertChannelSet?: Array<AlertChannelRecord>
   /**
    * 告警通知接收组数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2938,12 +2938,12 @@ export interface DescribeAlertRecordsResponse {
    * 告警历史
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlertRecordSet: Array<AlertRecord>
+  AlertRecordSet?: Array<AlertRecord>
   /**
    * 告警历史记录的总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3540,12 +3540,12 @@ export interface DescribeJobsResponse {
    * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobSet: Array<Job>
+  JobSet?: Array<Job>
   /**
    * 任务数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

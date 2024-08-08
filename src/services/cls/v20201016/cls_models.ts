@@ -601,21 +601,73 @@ export interface KafkaRechargeInfo {
 }
 
 /**
- * ModifyLogset请求参数结构体
+ * 控制台分享配置
  */
-export interface ModifyLogsetRequest {
+export interface ConsoleSharingConfig {
   /**
-   * 日志集ID
+   * 分享链接名称
    */
-  LogsetId: string
+  Name: string
   /**
-   * 日志集名称
+   * 仪表盘: 1; 检索页:2
    */
-  LogsetName?: string
+  Type: number
   /**
-   * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+   * 分享链接有效期，单位：毫秒，最长支持30天
    */
-  Tags?: Array<Tag>
+  DurationMilliseconds: number
+  /**
+   * 允许访问的资源列表
+   */
+  Resources: Array<string>
+  /**
+   * 分享链接域名，可选范围
+- 公网匿名分享：填写clsshare.com
+- datasight内网匿名分享(若开启)：datasight内网域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 验证码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyCode?: string
+  /**
+   * 开始时间，支持绝对时间(13位时间戳字符串)/相对时间字符串
+   */
+  StartTime?: string
+  /**
+   * 结束时间，支持绝对时间(13位时间戳字符串)/相对时间字符串
+   */
+  EndTime?: string
+  /**
+   * 当StartTime/EndTime为相对时间时，基于NowTime计算绝对时间，默认为创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NowTime?: number
+  /**
+   * params参数列表，当Type为2时支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: Array<ConsoleSharingParam>
+  /**
+   * 是否允许访问者自行修改检索分析时间范围，默认不锁定
+   */
+  IsLockTimeRange?: boolean
+  /**
+   * 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态
+   */
+  IsLockQuery?: boolean
+}
+
+/**
+ * DeleteConsoleSharing请求参数结构体
+ */
+export interface DeleteConsoleSharingRequest {
+  /**
+   * 免密分享Id
+   */
+  SharingId: string
 }
 
 /**
@@ -635,6 +687,20 @@ export interface UploadLogRequest {
    * 压缩方法
    */
   CompressType?: string
+}
+
+/**
+ * ModifyConsoleSharing请求参数结构体
+ */
+export interface ModifyConsoleSharingRequest {
+  /**
+   * 免密分享链接Id
+   */
+  SharingId: string
+  /**
+   * 指定分享链接有效期，单位：毫秒，最长可设定有效期为30天
+   */
+  DurationMilliseconds: number
 }
 
 /**
@@ -716,21 +782,13 @@ export interface DescribeDashboardsRequest {
 }
 
 /**
- * QueryMetric请求参数结构体
+ * CreateConsoleSharing请求参数结构体
  */
-export interface QueryMetricRequest {
+export interface CreateConsoleSharingRequest {
   /**
-   * 查询语句，使用PromQL语法
+   * 免密分享配置
    */
-  Query: string
-  /**
-   * 指标主题ID
-   */
-  TopicId: string
-  /**
-   * 查询时间，秒级Unix时间戳
-   */
-  Time?: number
+  SharingConfig: ConsoleSharingConfig
 }
 
 /**
@@ -1464,6 +1522,66 @@ export interface ConditionInfo {
 }
 
 /**
+ * 机器组信息
+ */
+export interface MachineGroupInfo {
+  /**
+   * 机器组ID
+   */
+  GroupId?: string
+  /**
+   * 机器组名称
+   */
+  GroupName?: string
+  /**
+   * 机器组类型
+   */
+  MachineGroupType?: MachineGroupTypeInfo
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 机器组绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 是否开启机器组自动更新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoUpdate?: string
+  /**
+   * 升级开始时间，建议业务低峰期升级LogListener
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateStartTime?: string
+  /**
+   * 升级结束时间，建议业务低峰期升级LogListener
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateEndTime?: string
+  /**
+   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceLogging?: boolean
+  /**
+   * 机器组中机器离线定期清理时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DelayCleanupTime?: number
+  /**
+   * 机器组元数据信息列表
+   */
+  MetaTags?: Array<MetaTagInfo>
+  /**
+   * 操作系统类型，0: Linux，1: windows
+   */
+  OSType?: number
+}
+
+/**
  * DeleteMachineGroupInfo请求参数结构体
  */
 export interface DeleteMachineGroupInfoRequest {
@@ -2055,6 +2173,20 @@ export interface CreateConfigResponse {
 }
 
 /**
+ * DescribeConsoleSharingList返回参数结构体
+ */
+export interface DescribeConsoleSharingListResponse {
+  /**
+   * 分页的总数目
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMachineGroup返回参数结构体
  */
 export interface ModifyMachineGroupResponse {
@@ -2154,6 +2286,24 @@ export interface DescribeAlarmShieldsRequest {
    * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
+}
+
+/**
+ * ModifyLogset请求参数结构体
+ */
+export interface ModifyLogsetRequest {
+  /**
+   * 日志集ID
+   */
+  LogsetId: string
+  /**
+   * 日志集名称
+   */
+  LogsetName?: string
+  /**
+   * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2512,6 +2662,11 @@ Classifications元素的Value长度不能超过200个字符。
    */
   Classifications?: Array<AlarmClassification>
 }
+
+/**
+ * DescribeConsoleSharingList请求参数结构体
+ */
+export type DescribeConsoleSharingListRequest = null
 
 /**
  * DeleteExport返回参数结构体
@@ -4347,9 +4502,9 @@ export interface CreateAlarmNoticeResponse {
 }
 
 /**
- * ModifyTopic返回参数结构体
+ * DeleteConsoleSharing返回参数结构体
  */
-export interface ModifyTopicResponse {
+export interface DeleteConsoleSharingResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4456,6 +4611,16 @@ export interface DescribeKafkaRechargesResponse {
  * DeleteIndex返回参数结构体
  */
 export interface DeleteIndexResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5834,9 +5999,37 @@ export interface AlarmShieldInfo {
 }
 
 /**
+ * CreateConsoleSharing返回参数结构体
+ */
+export interface CreateConsoleSharingResponse {
+  /**
+   * 免密分享链接
+   */
+  SharingUrl?: string
+  /**
+   * 免密分享链接ID
+   */
+  SharingId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyKafkaConsumer返回参数结构体
  */
 export interface ModifyKafkaConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyConsoleSharing返回参数结构体
+ */
+export interface ModifyConsoleSharingResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5946,6 +6139,97 @@ enable
 }
 
 /**
+ * QueryMetric请求参数结构体
+ */
+export interface QueryMetricRequest {
+  /**
+   * 查询语句，使用PromQL语法
+   */
+  Query: string
+  /**
+   * 指标主题ID
+   */
+  TopicId: string
+  /**
+   * 查询时间，秒级Unix时间戳
+   */
+  Time?: number
+}
+
+/**
+ * DescribeDashboardSubscribes返回参数结构体
+ */
+export interface DescribeDashboardSubscribesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCosRecharge返回参数结构体
+ */
+export interface CreateCosRechargeResponse {
+  /**
+   * COS导入任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAlertRecordHistory返回参数结构体
+ */
+export interface DescribeAlertRecordHistoryResponse {
+  /**
+   * 告警历史总数
+   */
+  TotalCount?: number
+  /**
+   * 告警历史详情
+   */
+  Records?: Array<AlertHistoryRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 键值或者元字段索引的字段信息
+ */
+export interface KeyValueInfo {
+  /**
+   * 需要配置键值或者元字段索引的字段名称，仅支持字母、数字、下划线和-./@，且不能以下划线开头
+
+注意：
+1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀
+2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过300
+3，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k
+4，不允许同时包含json父子级字段，例如a及a.b
+   */
+  Key: string
+  /**
+   * 字段的索引描述信息
+   */
+  Value: ValueInfo
+}
+
+/**
+ * SearchDashboardSubscribe返回参数结构体
+ */
+export interface SearchDashboardSubscribeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 投递规则
  */
 export interface ShipperInfo {
@@ -6044,79 +6328,6 @@ export interface ShipperInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
-}
-
-/**
- * DescribeDashboardSubscribes返回参数结构体
- */
-export interface DescribeDashboardSubscribesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateCosRecharge返回参数结构体
- */
-export interface CreateCosRechargeResponse {
-  /**
-   * COS导入任务id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAlertRecordHistory返回参数结构体
- */
-export interface DescribeAlertRecordHistoryResponse {
-  /**
-   * 告警历史总数
-   */
-  TotalCount?: number
-  /**
-   * 告警历史详情
-   */
-  Records?: Array<AlertHistoryRecord>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 键值或者元字段索引的字段信息
- */
-export interface KeyValueInfo {
-  /**
-   * 需要配置键值或者元字段索引的字段名称，仅支持字母、数字、下划线和-./@，且不能以下划线开头
-
-注意：
-1，元字段（tag）的Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀
-2，键值索引（KeyValue）及元字段索引（Tag）中的Key总数不能超过300
-3，Key的层级不能超过10层，例如a.b.c.d.e.f.g.h.j.k
-4，不允许同时包含json父子级字段，例如a及a.b
-   */
-  Key: string
-  /**
-   * 字段的索引描述信息
-   */
-  Value: ValueInfo
-}
-
-/**
- * SearchDashboardSubscribe返回参数结构体
- */
-export interface SearchDashboardSubscribeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7423,63 +7634,19 @@ export interface DescribeKafkaConsumerRequest {
 }
 
 /**
- * 机器组信息
+ * 控制台分享链接params参数
  */
-export interface MachineGroupInfo {
+export interface ConsoleSharingParam {
   /**
-   * 机器组ID
-   */
-  GroupId?: string
-  /**
-   * 机器组名称
-   */
-  GroupName?: string
-  /**
-   * 机器组类型
-   */
-  MachineGroupType?: MachineGroupTypeInfo
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 机器组绑定的标签列表
+   * 名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags?: Array<Tag>
+  Name?: string
   /**
-   * 是否开启机器组自动更新
+   * 值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoUpdate?: string
-  /**
-   * 升级开始时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateStartTime?: string
-  /**
-   * 升级结束时间，建议业务低峰期升级LogListener
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateEndTime?: string
-  /**
-   * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceLogging?: boolean
-  /**
-   * 机器组中机器离线定期清理时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DelayCleanupTime?: number
-  /**
-   * 机器组元数据信息列表
-   */
-  MetaTags?: Array<MetaTagInfo>
-  /**
-   * 操作系统类型，0: Linux，1: windows
-   */
-  OSType?: number
+  Value?: string
 }
 
 /**

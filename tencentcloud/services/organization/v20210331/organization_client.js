@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAccount", req, cb);
     }
     /**
+     * 获取集团服务委派管理员列表
+     */
+    async ListOrgServiceAssignMember(req, cb) {
+        return this.request("ListOrgServiceAssignMember", req, cb);
+    }
+    /**
      * 拒绝加入共享单元邀请。
      */
     async RejectJoinShareUnitInvitation(req, cb) {
@@ -164,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteOrganizationNodes(req, cb) {
         return this.request("DeleteOrganizationNodes", req, cb);
+    }
+    /**
+     * 添加集团服务委派管理员
+     */
+    async CreateOrgServiceAssign(req, cb) {
+        return this.request("CreateOrgServiceAssign", req, cb);
     }
     /**
      * 查询目标关联的有效策略
@@ -268,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOrganizationIdentity", req, cb);
     }
     /**
+     * 删除集团服务委派管理员
+     */
+    async DeleteOrgServiceAssign(req, cb) {
+        return this.request("DeleteOrgServiceAssign", req, cb);
+    }
+    /**
      * 删除组织身份
      */
     async DeleteOrganizationIdentity(req, cb) {
@@ -370,10 +388,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePolicy", req, cb);
     }
     /**
-     * 成员账号删除检查
+     * 删除组织成员访问授权
      */
-    async CheckAccountDelete(req, cb) {
-        return this.request("CheckAccountDelete", req, cb);
+    async DeleteOrganizationMemberAuthIdentity(req, cb) {
+        return this.request("DeleteOrganizationMemberAuthIdentity", req, cb);
     }
     /**
      * 创建一个特殊类型的策略，您可以关联到企业组织Root节点、企业部门节点或者企业的成员账号。
@@ -400,10 +418,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTargetsForPolicy", req, cb);
     }
     /**
-     * 删除组织成员访问授权
+     * 成员账号删除检查
      */
-    async DeleteOrganizationMemberAuthIdentity(req, cb) {
-        return this.request("DeleteOrganizationMemberAuthIdentity", req, cb);
+    async CheckAccountDelete(req, cb) {
+        return this.request("CheckAccountDelete", req, cb);
     }
     /**
      * 编辑策略
