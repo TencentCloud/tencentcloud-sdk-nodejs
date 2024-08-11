@@ -118,16 +118,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHBaseTableOverview", req, cb);
     }
     /**
+     * 查询服务进程信息
+     */
+    async DescribeServiceNodeInfos(req, cb) {
+        return this.request("DescribeServiceNodeInfos", req, cb);
+    }
+    /**
      * 查询集群实例信息
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 创建流程作业
+     * 部署生效
      */
-    async RunJobFlow(req, cb) {
-        return this.request("RunJobFlow", req, cb);
+    async ModifyYarnDeploy(req, cb) {
+        return this.request("ModifyYarnDeploy", req, cb);
     }
     /**
      * 销毁集群节点
@@ -216,6 +222,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddMetricScaleStrategy", req, cb);
     }
     /**
+     * 查看yarn资源调度的调度历史
+     */
+    async DescribeYarnScheduleHistory(req, cb) {
+        return this.request("DescribeYarnScheduleHistory", req, cb);
+    }
+    /**
      * 查询流程任务
      */
     async DescribeJobFlow(req, cb) {
@@ -298,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ScaleOutCluster(req, cb) {
         return this.request("ScaleOutCluster", req, cb);
+    }
+    /**
+     * 创建流程作业
+     */
+    async RunJobFlow(req, cb) {
+        return this.request("RunJobFlow", req, cb);
     }
 }
 exports.Client = Client;

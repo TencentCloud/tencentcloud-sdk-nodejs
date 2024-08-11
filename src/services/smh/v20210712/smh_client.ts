@@ -18,28 +18,39 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeUserLifecycleResponse,
   ModifyLibraryResponse,
   DescribeLibrariesResponse,
   SendSmsCodeResponse,
   Instance,
+  DeleteUserRequest,
   TrafficPackage,
   DeleteLibraryRequest,
   DescribeTrafficPackagesRequest,
   DescribeTrafficPackagesResponse,
+  CreateUserResponse,
   DescribeLibrarySecretRequest,
   DescribeLibrarySecretResponse,
   SendSmsCodeRequest,
-  DescribeOfficialInstancesRequest,
+  DeleteUserResponse,
   DescribeLibrariesRequest,
   LibraryExtension,
+  ModifyUserResponse,
   VerifySmsCodeResponse,
   ModifyLibraryRequest,
   DescribeOfficialOverviewRequest,
   DeleteLibraryResponse,
   DescribeOfficialInstancesResponse,
+  DescribeUserLifecycleRequest,
   VerifySmsCodeRequest,
+  DescribeOfficialInstancesRequest,
+  CreateUserRequest,
+  CreateUserLifecycleResponse,
   CreateLibraryResponse,
+  UserFilter,
   Library,
+  CreateUserLifecycleRequest,
+  ModifyUserRequest,
   CreateLibraryRequest,
   DescribeOfficialOverviewResponse,
 } from "./smh_models"
@@ -51,6 +62,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("smh.tencentcloudapi.com", "2021-07-12", clientConfig)
+  }
+
+  /**
+   * 更新用户信息。
+   */
+  async ModifyUser(
+    req: ModifyUserRequest,
+    cb?: (error: string, rep: ModifyUserResponse) => void
+  ): Promise<ModifyUserResponse> {
+    return this.request("ModifyUser", req, cb)
+  }
+
+  /**
+   * 一次删除多个用户。
+   */
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+   */
+  async VerifySmsCode(
+    req: VerifySmsCodeRequest,
+    cb?: (error: string, rep: VerifySmsCodeResponse) => void
+  ): Promise<VerifySmsCodeResponse> {
+    return this.request("VerifySmsCode", req, cb)
   }
 
   /**
@@ -84,13 +125,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+   * 新建用户。
    */
-  async VerifySmsCode(
-    req: VerifySmsCodeRequest,
-    cb?: (error: string, rep: VerifySmsCodeResponse) => void
-  ): Promise<VerifySmsCodeResponse> {
-    return this.request("VerifySmsCode", req, cb)
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 设置用户生命周期。如果指定的用户已经设置了生命周期，重复调用此接口将覆盖已有的设置。也可用于清除指定用户的生命周期。
+   */
+  async CreateUserLifecycle(
+    req: CreateUserLifecycleRequest,
+    cb?: (error: string, rep: CreateUserLifecycleResponse) => void
+  ): Promise<CreateUserLifecycleResponse> {
+    return this.request("CreateUserLifecycle", req, cb)
   }
 
   /**
@@ -141,6 +192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLibraryResponse) => void
   ): Promise<DeleteLibraryResponse> {
     return this.request("DeleteLibrary", req, cb)
+  }
+
+  /**
+   * 查询用户生命周期。
+   */
+  async DescribeUserLifecycle(
+    req: DescribeUserLifecycleRequest,
+    cb?: (error: string, rep: DescribeUserLifecycleResponse) => void
+  ): Promise<DescribeUserLifecycleResponse> {
+    return this.request("DescribeUserLifecycle", req, cb)
   }
 
   /**

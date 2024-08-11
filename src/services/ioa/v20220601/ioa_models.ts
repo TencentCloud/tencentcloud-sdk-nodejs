@@ -477,7 +477,8 @@ export interface DescribeDevicesRequest {
    */
   Condition?: Condition
   /**
-   * 私有化默认分组id-名称-操作系统
+   * 【和GroupIds必须有一个填写】设备分组id（需要和OsType匹配）
+id-名称-操作系统
 1	全网终端	Win
 2	未分组终端	Win
 30000000	服务器	Win
@@ -494,11 +495,11 @@ export interface DescribeDevicesRequest {
    */
   GroupId?: number
   /**
-   * 系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）
+   * 【必填】操作系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
    */
   OsType?: number
   /**
-   * 在线状态 2 在线 0，1 离线
+   * 在线状态 （2表示在线，0或者1表示离线）
    */
   OnlineStatus?: number
   /**
@@ -510,11 +511,11 @@ export interface DescribeDevicesRequest {
    */
   Sort?: Sort
   /**
-   * 获取第几页--兼容旧接口,参数同Condition(只支持32位)
+   * 获取第几页--兼容旧接口,参数同Condition
    */
   PageNum?: number
   /**
-   * 每页获取数--兼容旧接口,参数同Condition(只支持32位)
+   * 每页获取数--兼容旧接口,参数同Condition
    */
   PageSize?: number
   /**

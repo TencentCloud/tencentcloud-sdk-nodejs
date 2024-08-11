@@ -168,6 +168,16 @@ it("emr.v20190103.DescribeHBaseTableOverview", async function () {
     }
 })
 
+it("emr.v20190103.DescribeServiceNodeInfos", async function () {
+    try {
+       const data = await client.DescribeServiceNodeInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -178,9 +188,9 @@ it("emr.v20190103.DescribeInstances", async function () {
     }
 })
 
-it("emr.v20190103.RunJobFlow", async function () {
+it("emr.v20190103.ModifyYarnDeploy", async function () {
     try {
-       const data = await client.RunJobFlow({})
+       const data = await client.ModifyYarnDeploy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +338,16 @@ it("emr.v20190103.AddMetricScaleStrategy", async function () {
     }
 })
 
+it("emr.v20190103.DescribeYarnScheduleHistory", async function () {
+    try {
+       const data = await client.DescribeYarnScheduleHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeJobFlow", async function () {
     try {
        const data = await client.DescribeJobFlow({})
@@ -461,6 +481,16 @@ it("emr.v20190103.DescribeInsightList", async function () {
 it("emr.v20190103.ScaleOutCluster", async function () {
     try {
        const data = await client.ScaleOutCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.RunJobFlow", async function () {
+    try {
+       const data = await client.RunJobFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

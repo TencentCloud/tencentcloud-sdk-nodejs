@@ -13714,6 +13714,16 @@ export interface ModifyWebPageProtectDirRequest {
 }
 
 /**
+ * ModifyReverseShellRulesAggregation返回参数结构体
+ */
+export interface ModifyReverseShellRulesAggregationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源管理Web应用列表信息
  */
 export interface AssetWebFrameBaseInfo {
@@ -27103,6 +27113,53 @@ export interface DescribeBaselineRuleDetectListResponse {
 }
 
 /**
+ * UpdateBaselineStrategy请求参数结构体
+ */
+export interface UpdateBaselineStrategyRequest {
+  /**
+   * 策略id
+   */
+  StrategyId: number
+  /**
+   * 策略名称
+   */
+  StrategyName: string
+  /**
+   * 检测周期
+   */
+  ScanCycle: number
+  /**
+   * 定期检测时间，该时间下发扫描
+   */
+  ScanAt: string
+  /**
+   * 该策略下选择的基线id数组
+   */
+  CategoryIds: Array<string>
+  /**
+   * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+   */
+  IsGlobal: number
+  /**
+   * 云主机类型：
+cvm：腾讯云服务器
+bm：裸金属
+ecm：边缘计算主机
+lh:轻量应用服务器
+other:混合云机器
+   */
+  MachineType: string
+  /**
+   * 主机地域 ap-guangzhou
+   */
+  RegionCode: string
+  /**
+   * 主机id数组
+   */
+  Quuids: Array<string>
+}
+
+/**
  * 资产管理内核模块参数
  */
 export interface AssetCoreModuleParam {
@@ -30003,50 +30060,57 @@ export interface DescribeScanTaskDetailsResponse {
 }
 
 /**
- * UpdateBaselineStrategy请求参数结构体
+ * ModifyReverseShellRulesAggregation请求参数结构体
  */
-export interface UpdateBaselineStrategyRequest {
+export interface ModifyReverseShellRulesAggregationRequest {
   /**
-   * 策略id
+   * 规则ID(新增时请留空)
    */
-  StrategyId: number
+  Id?: number
   /**
-   * 策略名称
+   * 客户端ID数组
    */
-  StrategyName: string
+  Uuids?: Array<string>
   /**
-   * 检测周期
+   * 主机IP
    */
-  ScanCycle: number
+  HostIp?: string
   /**
-   * 定期检测时间，该时间下发扫描
+   * 目标IP
    */
-  ScanAt: string
+  DestIp?: string
   /**
-   * 该策略下选择的基线id数组
+   * 目标端口
    */
-  CategoryIds: Array<string>
+  DestPort?: string
   /**
-   * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+   * 进程名
    */
-  IsGlobal: number
+  ProcessName?: string
   /**
-   * 云主机类型：
-cvm：腾讯云服务器
-bm：裸金属
-ecm：边缘计算主机
-lh:轻量应用服务器
-other:混合云机器
+   * 是否全局规则(默认否)
    */
-  MachineType: string
+  IsGlobal?: number
   /**
-   * 主机地域 ap-guangzhou
+   * 事件列表和详情点击加白时关联的事件id (新增规则时请留空)
    */
-  RegionCode: string
+  EventId?: number
   /**
-   * 主机id数组
+   * 加白方式， 0:常规加白 1:正则加白
    */
-  Quuids: Array<string>
+  WhiteType?: number
+  /**
+   * 正则表达式
+   */
+  RuleRegexp?: string
+  /**
+   * 处理历史事件， 0:不处理 1:处理
+   */
+  HandleHistory?: number
+  /**
+   * 批次id
+   */
+  GroupID?: string
 }
 
 /**

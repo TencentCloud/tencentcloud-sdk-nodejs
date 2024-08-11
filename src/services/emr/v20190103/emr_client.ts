@@ -25,6 +25,7 @@ import {
   DescribeHBaseTableOverviewRequest,
   ScaleOutInstanceResponse,
   DescribeClusterFlowStatusDetailResponse,
+  SchedulerTaskInfo,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
   PodVolume,
@@ -33,12 +34,12 @@ import {
   PersistentVolumeContext,
   TerminateTasksRequest,
   HostVolumeContext,
-  ScaleOutClusterRequest,
+  DescribeServiceNodeInfosRequest,
   DiskSpecInfo,
   HiveQuery,
   Step,
   KeyValue,
-  PodNewSpec,
+  DescribeAutoScaleGroupGlobalConfRequest,
   EmrProductConfigDetail,
   DayRepeatStrategy,
   DescribeTrinoQueryInfoResponse,
@@ -57,19 +58,23 @@ import {
   ScaleOutInstanceRequest,
   ZoneDetailPriceResult,
   DescribeHBaseTableOverviewResponse,
-  DescribeAutoScaleGroupGlobalConfRequest,
+  DescribeServiceNodeInfosResponse,
   ModifyAutoScaleStrategyRequest,
-  Configuration,
-  NodeResourceSpec,
+  FlowParamsDesc,
+  ModifyYarnDeployResponse,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
   NodeDetailPriceResult,
   Tag,
+  HealthStatus,
   Arg,
   ClusterIDToFlowID,
   EmrListInstance,
+  ServiceNodeDetailInfo,
   AddUsersForUserManagerResponse,
   TopologyInfo,
+  SchedulerTaskDetail,
+  NodeResourceSpec,
   AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
   VPCSettings,
@@ -90,23 +95,26 @@ import {
   OverviewMetricData,
   AutoScaleRecord,
   JobFlowResourceSpec,
-  FlowParamsDesc,
+  Configuration,
   DescribeResourceScheduleRequest,
   AllNodeResourceSpec,
   Placement,
   QuotaEntity,
+  ModifyYarnDeployRequest,
   PodParameter,
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
   DescribeInsightListRequest,
-  RunJobFlowResponse,
+  DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
   DescribeHiveQueriesResponse,
+  RunJobFlowResponse,
   PodNewParameter,
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
   ScaleOutServiceConfGroupsInfo,
+  DescribeYarnScheduleHistoryResponse,
   DescribeAutoScaleGroupGlobalConfResponse,
   DescribeEmrApplicationStaticsRequest,
   DescribeClusterNodesResponse,
@@ -152,6 +160,7 @@ import {
   ScriptBootstrapActionConfig,
   DescribeInstancesRequest,
   NotRepeatStrategy,
+  PodNewSpec,
   InquiryPriceUpdateInstanceRequest,
   DescribeAutoScaleStrategiesRequest,
   TerminateClusterNodesRequest,
@@ -180,13 +189,16 @@ import {
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
   MultiZoneSetting,
+  ScaleOutClusterRequest,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
   DescribeEmrOverviewMetricsRequest,
   PodState,
   ScaleOutClusterResponse,
+  ServiceProcessFunctionInfo,
   PartDetailPriceItem,
   ExternalService,
+  RestartPolicy,
   PreExecuteFileSettings,
   ClusterExternalServiceInfo,
   SoftDependInfo,
@@ -383,6 +395,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询服务进程信息
+   */
+  async DescribeServiceNodeInfos(
+    req: DescribeServiceNodeInfosRequest,
+    cb?: (error: string, rep: DescribeServiceNodeInfosResponse) => void
+  ): Promise<DescribeServiceNodeInfosResponse> {
+    return this.request("DescribeServiceNodeInfos", req, cb)
+  }
+
+  /**
    * 查询集群实例信息
    */
   async DescribeInstances(
@@ -393,13 +415,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建流程作业
+   * 部署生效
    */
-  async RunJobFlow(
-    req: RunJobFlowRequest,
-    cb?: (error: string, rep: RunJobFlowResponse) => void
-  ): Promise<RunJobFlowResponse> {
-    return this.request("RunJobFlow", req, cb)
+  async ModifyYarnDeploy(
+    req: ModifyYarnDeployRequest,
+    cb?: (error: string, rep: ModifyYarnDeployResponse) => void
+  ): Promise<ModifyYarnDeployResponse> {
+    return this.request("ModifyYarnDeploy", req, cb)
   }
 
   /**
@@ -545,6 +567,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看yarn资源调度的调度历史
+   */
+  async DescribeYarnScheduleHistory(
+    req: DescribeYarnScheduleHistoryRequest,
+    cb?: (error: string, rep: DescribeYarnScheduleHistoryResponse) => void
+  ): Promise<DescribeYarnScheduleHistoryResponse> {
+    return this.request("DescribeYarnScheduleHistory", req, cb)
+  }
+
+  /**
    * 查询流程任务
    */
   async DescribeJobFlow(
@@ -682,5 +714,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleOutClusterResponse) => void
   ): Promise<ScaleOutClusterResponse> {
     return this.request("ScaleOutCluster", req, cb)
+  }
+
+  /**
+   * 创建流程作业
+   */
+  async RunJobFlow(
+    req: RunJobFlowRequest,
+    cb?: (error: string, rep: RunJobFlowResponse) => void
+  ): Promise<RunJobFlowResponse> {
+    return this.request("RunJobFlow", req, cb)
   }
 }

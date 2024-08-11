@@ -2558,7 +2558,6 @@ export interface RecognizeConfig {
   
   注意：
   如果缺少满足您需求的语言，请联系我们技术人员。
-  示例值：zh
      */
     Language?: string;
     /**
@@ -2567,37 +2566,13 @@ export interface RecognizeConfig {
      */
     AlternativeLanguage?: Array<string>;
     /**
-     * 使用的模型，目前支持tencent和google，默认是tencent。
+     * 目前已不支持
      * @deprecated
      */
     Model?: string;
     /**
-     * 翻译功能支持的语言，如果填写，则会启用翻译，不填则只会使用语音识别。
-  注：文本翻译功能需要购买「语音转文本时长包」解锁或领取包月套餐-体验版解。
-  目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循[ISO639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)：
-  Chinese = "zh"
-  Chinese_TW = "zh-TW"
-  English = "en"
-  Vietnamese = "vi"
-  Japanese = "ja"
-  Korean = "ko"
-  Indonesia = "id"
-  Thai = "th"
-  Portuguese = "pt"
-  Turkish = "tr"
-  Arabic = "ar"
-  Spanish = "es"
-  Hindi = "hi"
-  French = "fr"
-  Malay = "ms"
-  Filipino = "fil"
-  German = "de"
-  Italian = "it"
-  Russian = "ru"
-  
-  注意：
-  如果缺少满足您需求的语言，请联系我们技术人员。
-  示例值：en
+     * 目前已不支持
+     * @deprecated
      */
     TranslationLanguage?: string;
 }

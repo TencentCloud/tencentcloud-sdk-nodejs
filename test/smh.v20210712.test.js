@@ -18,6 +18,36 @@ const client = new tencentcloud.smh.v20210712.Client({
 })
 describe("smh.v20210712.test.js", function () {
 
+it("smh.v20210712.ModifyUser", async function () {
+    try {
+       const data = await client.ModifyUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("smh.v20210712.DeleteUser", async function () {
+    try {
+       const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("smh.v20210712.VerifySmsCode", async function () {
+    try {
+       const data = await client.VerifySmsCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("smh.v20210712.DescribeOfficialInstances", async function () {
     try {
        const data = await client.DescribeOfficialInstances({})
@@ -48,9 +78,19 @@ it("smh.v20210712.SendSmsCode", async function () {
     }
 })
 
-it("smh.v20210712.VerifySmsCode", async function () {
+it("smh.v20210712.CreateUser", async function () {
     try {
-       const data = await client.VerifySmsCode({})
+       const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("smh.v20210712.CreateUserLifecycle", async function () {
+    try {
+       const data = await client.CreateUserLifecycle({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +141,16 @@ it("smh.v20210712.DescribeTrafficPackages", async function () {
 it("smh.v20210712.DeleteLibrary", async function () {
     try {
        const data = await client.DeleteLibrary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("smh.v20210712.DescribeUserLifecycle", async function () {
+    try {
+       const data = await client.DescribeUserLifecycle({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

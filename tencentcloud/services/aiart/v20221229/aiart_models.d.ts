@@ -214,6 +214,11 @@ export interface ReplaceBackgroundRequest {
      */
     Prompt: string;
     /**
+     * 商品图中的商品主体名称。
+  建议说明商品主体，否则影响生成效果。
+     */
+    Product?: string;
+    /**
      * 商品 Mask 图 Url，要求背景透明，保留商品主体。
   如果不传，将自动使用内置的商品分割算法得到 Mask。
   支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。

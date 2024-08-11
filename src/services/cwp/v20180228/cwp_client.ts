@@ -609,6 +609,7 @@ import {
   CKafkaInstanceInfo,
   ExportProtectDirListResponse,
   ModifyWebPageProtectDirRequest,
+  ModifyReverseShellRulesAggregationResponse,
   AssetWebFrameBaseInfo,
   ModifyJavaMemShellsStatusRequest,
   DescribeFileTamperRuleInfoRequest,
@@ -1158,6 +1159,7 @@ import {
   AssetWebAppBaseInfo,
   DescribeRiskDnsInfoRequest,
   DescribeBaselineRuleDetectListResponse,
+  UpdateBaselineStrategyRequest,
   AssetCoreModuleParam,
   DescribeMachineLicenseDetailResponse,
   DescribeHostInfoRequest,
@@ -1269,7 +1271,7 @@ import {
   UpdateMachineTagsRequest,
   DescribeBaselineItemDetectListResponse,
   DescribeScanTaskDetailsResponse,
-  UpdateBaselineStrategyRequest,
+  ModifyReverseShellRulesAggregationRequest,
   DescribeHostLoginListResponse,
   DescribePublicProxyInstallCommandResponse,
   DescribeAttackTopRequest,
@@ -1996,6 +1998,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachineLicenseDetailResponse) => void
   ): Promise<DescribeMachineLicenseDetailResponse> {
     return this.request("DescribeMachineLicenseDetail", req, cb)
+  }
+
+  /**
+   * 编辑反弹Shell规则（支持多服务器选择）
+   */
+  async ModifyReverseShellRulesAggregation(
+    req: ModifyReverseShellRulesAggregationRequest,
+    cb?: (error: string, rep: ModifyReverseShellRulesAggregationResponse) => void
+  ): Promise<ModifyReverseShellRulesAggregationResponse> {
+    return this.request("ModifyReverseShellRulesAggregation", req, cb)
   }
 
   /**
@@ -5242,8 +5254,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云护航服务使用完成后，该接口可以确认收货
-   */
+     * 云护航计费产品已下线
+
+云护航服务使用完成后，该接口可以确认收货
+     */
   async CreateCloudProtectServiceOrderRecord(
     req: CreateCloudProtectServiceOrderRecordRequest,
     cb?: (error: string, rep: CreateCloudProtectServiceOrderRecordResponse) => void

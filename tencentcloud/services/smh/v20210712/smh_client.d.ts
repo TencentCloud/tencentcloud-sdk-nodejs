@@ -1,12 +1,24 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyLibraryResponse, DescribeLibrariesResponse, SendSmsCodeResponse, DeleteLibraryRequest, DescribeTrafficPackagesRequest, DescribeTrafficPackagesResponse, DescribeLibrarySecretRequest, DescribeLibrarySecretResponse, SendSmsCodeRequest, DescribeOfficialInstancesRequest, DescribeLibrariesRequest, VerifySmsCodeResponse, ModifyLibraryRequest, DescribeOfficialOverviewRequest, DeleteLibraryResponse, DescribeOfficialInstancesResponse, VerifySmsCodeRequest, CreateLibraryResponse, CreateLibraryRequest, DescribeOfficialOverviewResponse } from "./smh_models";
+import { DescribeUserLifecycleResponse, ModifyLibraryResponse, DescribeLibrariesResponse, SendSmsCodeResponse, DeleteUserRequest, DeleteLibraryRequest, DescribeTrafficPackagesRequest, DescribeTrafficPackagesResponse, CreateUserResponse, DescribeLibrarySecretRequest, DescribeLibrarySecretResponse, SendSmsCodeRequest, DeleteUserResponse, DescribeLibrariesRequest, ModifyUserResponse, VerifySmsCodeResponse, ModifyLibraryRequest, DescribeOfficialOverviewRequest, DeleteLibraryResponse, DescribeOfficialInstancesResponse, DescribeUserLifecycleRequest, VerifySmsCodeRequest, DescribeOfficialInstancesRequest, CreateUserRequest, CreateUserLifecycleResponse, CreateLibraryResponse, CreateUserLifecycleRequest, ModifyUserRequest, CreateLibraryRequest, DescribeOfficialOverviewResponse } from "./smh_models";
 /**
  * smh client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 更新用户信息。
+     */
+    ModifyUser(req: ModifyUserRequest, cb?: (error: string, rep: ModifyUserResponse) => void): Promise<ModifyUserResponse>;
+    /**
+     * 一次删除多个用户。
+     */
+    DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
+    /**
+     * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+     */
+    VerifySmsCode(req: VerifySmsCodeRequest, cb?: (error: string, rep: VerifySmsCodeResponse) => void): Promise<VerifySmsCodeResponse>;
     /**
      * 查询官方云盘实例
      */
@@ -20,9 +32,13 @@ export declare class Client extends AbstractClient {
      */
     SendSmsCode(req: SendSmsCodeRequest, cb?: (error: string, rep: SendSmsCodeResponse) => void): Promise<SendSmsCodeResponse>;
     /**
-     * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+     * 新建用户。
      */
-    VerifySmsCode(req: VerifySmsCodeRequest, cb?: (error: string, rep: VerifySmsCodeResponse) => void): Promise<VerifySmsCodeResponse>;
+    CreateUser(req: CreateUserRequest, cb?: (error: string, rep: CreateUserResponse) => void): Promise<CreateUserResponse>;
+    /**
+     * 设置用户生命周期。如果指定的用户已经设置了生命周期，重复调用此接口将覆盖已有的设置。也可用于清除指定用户的生命周期。
+     */
+    CreateUserLifecycle(req: CreateUserLifecycleRequest, cb?: (error: string, rep: CreateUserLifecycleResponse) => void): Promise<CreateUserLifecycleResponse>;
     /**
      * 查询 PaaS 服务媒体库列表
      */
@@ -43,6 +59,10 @@ export declare class Client extends AbstractClient {
      * 删除 PaaS 服务媒体库
      */
     DeleteLibrary(req: DeleteLibraryRequest, cb?: (error: string, rep: DeleteLibraryResponse) => void): Promise<DeleteLibraryResponse>;
+    /**
+     * 查询用户生命周期。
+     */
+    DescribeUserLifecycle(req: DescribeUserLifecycleRequest, cb?: (error: string, rep: DescribeUserLifecycleResponse) => void): Promise<DescribeUserLifecycleResponse>;
     /**
      * 查询 PaaS 服务媒体库密钥
      */

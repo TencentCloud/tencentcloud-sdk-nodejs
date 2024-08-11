@@ -28,6 +28,24 @@ class Client extends abstract_client_1.AbstractClient {
         super("smh.tencentcloudapi.com", "2021-07-12", clientConfig);
     }
     /**
+     * 更新用户信息。
+     */
+    async ModifyUser(req, cb) {
+        return this.request("ModifyUser", req, cb);
+    }
+    /**
+     * 一次删除多个用户。
+     */
+    async DeleteUser(req, cb) {
+        return this.request("DeleteUser", req, cb);
+    }
+    /**
+     * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+     */
+    async VerifySmsCode(req, cb) {
+        return this.request("VerifySmsCode", req, cb);
+    }
+    /**
      * 查询官方云盘实例
      */
     async DescribeOfficialInstances(req, cb) {
@@ -46,10 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendSmsCode", req, cb);
     }
     /**
-     * 验证短信验证码以换绑官方云盘实例的超级管理员账号
+     * 新建用户。
      */
-    async VerifySmsCode(req, cb) {
-        return this.request("VerifySmsCode", req, cb);
+    async CreateUser(req, cb) {
+        return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 设置用户生命周期。如果指定的用户已经设置了生命周期，重复调用此接口将覆盖已有的设置。也可用于清除指定用户的生命周期。
+     */
+    async CreateUserLifecycle(req, cb) {
+        return this.request("CreateUserLifecycle", req, cb);
     }
     /**
      * 查询 PaaS 服务媒体库列表
@@ -80,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLibrary(req, cb) {
         return this.request("DeleteLibrary", req, cb);
+    }
+    /**
+     * 查询用户生命周期。
+     */
+    async DescribeUserLifecycle(req, cb) {
+        return this.request("DescribeUserLifecycle", req, cb);
     }
     /**
      * 查询 PaaS 服务媒体库密钥

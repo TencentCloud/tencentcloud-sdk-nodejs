@@ -6500,19 +6500,31 @@ export interface SearchLogRequest {
      */
     Topics?: Array<MultiTopicSearchInformation>;
     /**
-     * 表示单次查询返回的原始日志条数，默认为100，最大值为1000，获取后续日志需使用Context参数
-  注意：
-  * 仅当检索分析语句(Query)不包含SQL时有效
-  * SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
-     */
-    Limit?: number;
-    /**
      * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
   注意：
   * 仅当检索分析语句(Query)不包含SQL时有效
   * SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a>
      */
     Sort?: string;
+    /**
+     * 表示单次查询返回的原始日志条数，默认为100，最大值为1000。
+  注意：
+  * 仅当检索分析语句(Query)不包含SQL时有效
+  * SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+  
+  可通过两种方式获取后续更多日志：
+  * Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志
+  * Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制
+     */
+    Limit?: number;
+    /**
+     * 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。
+  注意：
+  * 仅当检索分析语句(Query)不包含SQL时有效
+  * 不能与Context参数同时使用
+  * 仅适用于单日志主题检索
+     */
+    Offset?: number;
     /**
      * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
   注意：

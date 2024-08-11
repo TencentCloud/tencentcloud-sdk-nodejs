@@ -225,6 +225,39 @@ export interface DescribeClusterFlowStatusDetailResponse {
     RequestId?: string;
 }
 /**
+ * yarn资源调度历史
+ */
+export interface SchedulerTaskInfo {
+    /**
+     * 调度器类型
+     */
+    SchedulerName: string;
+    /**
+     * 操作类型
+     */
+    OperatorName: string;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State: number;
+    /**
+     * 详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Details: Array<SchedulerTaskDetail>;
+}
+/**
  * ModifyUserManagerPwd返回参数结构体
  */
 export interface ModifyUserManagerPwdResponse {
@@ -460,95 +493,78 @@ export interface HostVolumeContext {
     VolumePath: string;
 }
 /**
- * ScaleOutCluster请求参数结构体
+ * DescribeServiceNodeInfos请求参数结构体
  */
-export interface ScaleOutClusterRequest {
+export interface DescribeServiceNodeInfosRequest {
     /**
-     * 节点计费模式。取值范围：
-  <li>PREPAID：预付费，即包年包月。</li>
-  <li>POSTPAID_BY_HOUR：按小时后付费。</li>
-  <li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
-     */
-    InstanceChargeType: string;
-    /**
-     * 集群实例ID。
+     * 实例ID
      */
     InstanceId: string;
     /**
-     * 扩容节点类型以及数量
+     * 页码
      */
-    ScaleOutNodeConfig: ScaleOutNodeConfig;
+    Offset?: number;
     /**
-     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
+     * 页大小
      */
-    ClientToken?: string;
+    Limit?: number;
     /**
-     * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+     * 搜索字段
      */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
+    SearchText?: string;
     /**
-     * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+     * '配置状态，-2：配置失败，-1:配置过期，1：已同步', -99 '全部'
      */
-    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
+    ConfStatus?: number;
     /**
-     * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     * 过滤条件：维护状态
+  0代表所有状态
+  1代表正常模式
+  2代表维护模式
+  
      */
-    SoftDeployInfo?: Array<number | bigint>;
+    MaintainStateId?: number;
     /**
-     * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     * 过滤条件：操作状态
+  0代表所有状态
+  1代表已启动
+  2代表已停止
      */
-    ServiceNodeInfo?: Array<number | bigint>;
+    OperatorStateId?: number;
     /**
-     * 分散置放群组ID列表，当前只支持指定一个。
-  该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+     * 过滤条件：健康状态
+  "0"代表不可用
+  "1"代表良好
+  "-2"代表未知
+  "-99"代表所有
+  "-3"代表存在隐患
+  "-4"代表未探测
      */
-    DisasterRecoverGroupIds?: Array<string>;
+    HealthStateId?: string;
     /**
-     * 扩容节点绑定标签列表。
+     * 服务组件名称，都是大写比如YARN
      */
-    Tags?: Array<Tag>;
+    ServiceName?: string;
     /**
-     * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+     * 节点名称
+  master
+  core
+  task
+  common
+  router
+  
      */
-    HardwareSourceType?: string;
+    NodeTypeName?: string;
     /**
-     * Pod相关资源信息
+     * 过滤条件：dn是否处于维护状态
+  0代表所有状态
+  1代表处于维护状态
      */
-    PodSpecInfo?: PodSpecInfo;
+    DataNodeMaintenanceId?: number;
     /**
-     * 使用clickhouse集群扩容时，选择的机器分组名称
+     * 支持搜索的字段
      */
-    ClickHouseClusterName?: string;
-    /**
-     * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
-     */
-    ClickHouseClusterType?: string;
-    /**
-     * 扩容指定 Yarn Node Label
-     */
-    YarnNodeLabel?: string;
-    /**
-     * 扩容后是否启动服务，默认取值否
-  <li>true：是</li>
-  <li>false：否</li>
-     */
-    EnableStartServiceFlag?: boolean;
-    /**
-     * 规格设置
-     */
-    ResourceSpec?: NodeResourceSpec;
-    /**
-     * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
-     */
-    Zone?: string;
-    /**
-     * 子网，默认是集群创建时的子网
-     */
-    SubnetId?: string;
-    /**
-     * 扩容指定配置组
-     */
-    ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>;
+    SearchFields?: Array<SearchItem>;
 }
 /**
  * 节点磁盘信息
@@ -674,63 +690,13 @@ export interface KeyValue {
     Value: string;
 }
 /**
- * 扩容容器资源时的资源描述
+ * DescribeAutoScaleGroupGlobalConf请求参数结构体
  */
-export interface PodNewSpec {
+export interface DescribeAutoScaleGroupGlobalConfRequest {
     /**
-     * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+     * 实例ID。
      */
-    ResourceProviderIdentifier: string;
-    /**
-     * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
-     */
-    ResourceProviderType: string;
-    /**
-     * 资源的用途，即节点类型，当前仅支持"TASK"。
-     */
-    NodeFlag: string;
-    /**
-     * CPU核数。
-     */
-    Cpu: number;
-    /**
-     * 内存大小，单位为GB。
-     */
-    Memory: number;
-    /**
-     * Eks集群-CPU类型，当前支持"intel"和"amd"
-     */
-    CpuType?: string;
-    /**
-     * Pod节点数据目录挂载信息。
-     */
-    PodVolumes?: Array<PodVolume>;
-    /**
-     * 是否浮动规格，默认否
-  <li>true：代表是</li>
-  <li>false：代表否</li>
-     */
-    EnableDynamicSpecFlag?: boolean;
-    /**
-     * 浮动规格
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DynamicPodSpec?: DynamicPodSpec;
-    /**
-     * 代表vpc网络唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
-    /**
-     * 代表vpc子网唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
-    /**
-     * pod name
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PodName?: string;
+    InstanceId: string;
 }
 /**
  * EMR产品配置
@@ -1627,13 +1593,33 @@ export interface DescribeHBaseTableOverviewResponse {
     RequestId?: string;
 }
 /**
- * DescribeAutoScaleGroupGlobalConf请求参数结构体
+ * DescribeServiceNodeInfos返回参数结构体
  */
-export interface DescribeAutoScaleGroupGlobalConfRequest {
+export interface DescribeServiceNodeInfosResponse {
     /**
-     * 实例ID。
+     * 总数量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    TotalCnt?: number;
+    /**
+     * 进程信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceNodeList?: Array<ServiceNodeDetailInfo>;
+    /**
+     * 集群所有节点的别名序列化
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasInfo?: string;
+    /**
+     * 支持的FlagNode列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportNodeFlagFilterList?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyAutoScaleStrategy请求参数结构体
@@ -1661,47 +1647,37 @@ export interface ModifyAutoScaleStrategyRequest {
     GroupId?: number;
 }
 /**
- * 自定义配置参数
+ * 任务参数描述
  */
-export interface Configuration {
+export interface FlowParamsDesc {
     /**
-     * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+     * 参数key
      */
-    Classification: string;
+    PKey: string;
     /**
-     * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+     * 参数value
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Properties: string;
+    PValue: string;
 }
 /**
- * 资源详情
+ * ModifyYarnDeploy返回参数结构体
  */
-export interface NodeResourceSpec {
+export interface ModifyYarnDeployResponse {
     /**
-     * 规格类型，如S2.MEDIUM8
+     * 为false不点亮部署生效、重置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    IsDraft?: boolean;
     /**
-     * 系统盘，系统盘个数不超过1块
+     * 错误信息，预留
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SystemDisk: Array<DiskSpecInfo>;
+    ErrorMsg?: string;
     /**
-     * 需要绑定的标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Tags?: Array<Tag>;
-    /**
-     * 云数据盘，云数据盘总个数不超过15块
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DataDisk?: Array<DiskSpecInfo>;
-    /**
-     * 本地数据盘
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LocalDataDisk?: Array<DiskSpecInfo>;
+    RequestId?: string;
 }
 /**
  * ModifyResourceScheduleConfig返回参数结构体
@@ -1845,6 +1821,23 @@ export interface Tag {
      * 标签值
      */
     TagValue?: string;
+}
+/**
+ * 进程健康状态
+ */
+export interface HealthStatus {
+    /**
+     * 运行正常
+     */
+    Code: number;
+    /**
+     * 运行正常
+     */
+    Text: string;
+    /**
+     * 运行正常
+     */
+    Desc: string;
 }
 /**
  * 通用的参数
@@ -2027,6 +2020,104 @@ export interface EmrListInstance {
     IsDedicatedCluster?: boolean;
 }
 /**
+ * 服务进程信息
+ */
+export interface ServiceNodeDetailInfo {
+    /**
+     * 进程所在节点IP
+     */
+    Ip?: string;
+    /**
+     * 进程类型
+     */
+    NodeType?: number;
+    /**
+     * 进程名称
+     */
+    NodeName?: string;
+    /**
+     * 服务组件状态
+     */
+    ServiceStatus?: number;
+    /**
+     * 进程监控状态
+     */
+    MonitorStatus?: number;
+    /**
+     * 服务组件状态
+     */
+    Status?: number;
+    /**
+     * 进程端口信息
+     */
+    PortsInfo?: string;
+    /**
+     * 最近重启时间
+     */
+    LastRestartTime?: string;
+    /**
+     * 节点类型
+     */
+    Flag?: number;
+    /**
+     * 配置组ID
+     */
+    ConfGroupId?: number;
+    /**
+     * 配置组名称
+     */
+    ConfGroupName?: string;
+    /**
+     * 节点是否需要重启
+     */
+    ConfStatus?: number;
+    /**
+     * 进程探测信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceDetectionInfo?: Array<ServiceProcessFunctionInfo>;
+    /**
+     * 节点类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeFlagFilter?: string;
+    /**
+     * 进程健康状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthStatus?: HealthStatus;
+    /**
+     * 角色是否支持监控
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportRoleMonitor?: boolean;
+    /**
+     * 暂停策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StopPolicies?: Array<RestartPolicy>;
+    /**
+     * 测试环境api强校验，现网没有，emrcc接口返回有。不加会报错
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HAState?: string;
+    /**
+     * NameService名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameService?: string;
+    /**
+     * 是否支持联邦
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsFederation?: boolean;
+    /**
+     * datanode是否是维护状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataNodeMaintenanceState?: number;
+}
+/**
  * AddUsersForUserManager返回参数结构体
  */
 export interface AddUsersForUserManagerResponse {
@@ -2069,6 +2160,61 @@ export interface TopologyInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeInfoList?: Array<ShortNodeInfo>;
+}
+/**
+ * 调度任务详情
+ */
+export interface SchedulerTaskDetail {
+    /**
+     * 步骤
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Step: string;
+    /**
+     * 进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Progress: string;
+    /**
+     * 失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailReason: string;
+    /**
+     * 用来获取详情的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobId?: number;
+}
+/**
+ * 资源详情
+ */
+export interface NodeResourceSpec {
+    /**
+     * 规格类型，如S2.MEDIUM8
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType: string;
+    /**
+     * 系统盘，系统盘个数不超过1块
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SystemDisk: Array<DiskSpecInfo>;
+    /**
+     * 需要绑定的标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 云数据盘，云数据盘总个数不超过15块
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataDisk?: Array<DiskSpecInfo>;
+    /**
+     * 本地数据盘
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalDataDisk?: Array<DiskSpecInfo>;
 }
 /**
  * AddMetricScaleStrategy请求参数结构体
@@ -2982,18 +3128,17 @@ export interface JobFlowResourceSpec {
     CommonResourceSpec?: JobFlowResource;
 }
 /**
- * 任务参数描述
+ * 自定义配置参数
  */
-export interface FlowParamsDesc {
+export interface Configuration {
     /**
-     * 参数key
+     * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
      */
-    PKey: string;
+    Classification: string;
     /**
-     * 参数value
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
      */
-    PValue: string;
+    Properties: string;
 }
 /**
  * DescribeResourceSchedule请求参数结构体
@@ -3086,6 +3231,23 @@ export interface QuotaEntity {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone: string;
+}
+/**
+ * ModifyYarnDeploy请求参数结构体
+ */
+export interface ModifyYarnDeployRequest {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 切换后的调度器，可选值为fair、capacity
+     */
+    NewScheduler: string;
+    /**
+     * 现在使用的调度器，可选值为fair、capacity
+     */
+    OldScheduler?: string;
 }
 /**
  * POD自定义权限和自定义参数
@@ -3324,17 +3486,37 @@ export interface DescribeInsightListRequest {
     Page: number;
 }
 /**
- * RunJobFlow返回参数结构体
+ * DescribeYarnScheduleHistory请求参数结构体
  */
-export interface RunJobFlowResponse {
+export interface DescribeYarnScheduleHistoryRequest {
     /**
-     * 作业流程ID。
+     * 集群id
      */
-    JobFlowId: number;
+    InstanceId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 开始时间
      */
-    RequestId?: string;
+    StartTime?: number;
+    /**
+     * 结束时间
+     */
+    EndTime?: number;
+    /**
+     * 页码
+     */
+    Limit?: number;
+    /**
+     * 页大小
+     */
+    Offset?: number;
+    /**
+     * 调度器类型 可选值为“ALL”，"Capacity Scheduler", "Fair Scheduler"
+     */
+    SchedulerType?: string;
+    /**
+     * 任务类型0:等待执行，1:执行中，2：完成，-1:失败 ，-99:全部
+     */
+    TaskState?: number;
 }
 /**
  * StartStopServiceOrMonitor返回参数结构体
@@ -3357,6 +3539,19 @@ export interface DescribeHiveQueriesResponse {
      * 结果列表
      */
     Results?: Array<HiveQuery>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RunJobFlow返回参数结构体
+ */
+export interface RunJobFlowResponse {
+    /**
+     * 作业流程ID。
+     */
+    JobFlowId: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3552,6 +3747,35 @@ export interface ScaleOutServiceConfGroupsInfo {
                                                                ConfGroupName参数不传 默认 代表集群维度
      */
     ConfGroupName?: string;
+}
+/**
+ * DescribeYarnScheduleHistory返回参数结构体
+ */
+export interface DescribeYarnScheduleHistoryResponse {
+    /**
+     * 任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks?: Array<SchedulerTaskInfo>;
+    /**
+     * 任务详情总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 调度类型筛选列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SchedulerNameList?: Array<string>;
+    /**
+     * 状态筛选列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StateList?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAutoScaleGroupGlobalConf返回参数结构体
@@ -4944,6 +5168,65 @@ export interface NotRepeatStrategy {
     ExecuteAt: string;
 }
 /**
+ * 扩容容器资源时的资源描述
+ */
+export interface PodNewSpec {
+    /**
+     * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+     */
+    ResourceProviderIdentifier: string;
+    /**
+     * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+     */
+    ResourceProviderType: string;
+    /**
+     * 资源的用途，即节点类型，当前仅支持"TASK"。
+     */
+    NodeFlag: string;
+    /**
+     * CPU核数。
+     */
+    Cpu: number;
+    /**
+     * 内存大小，单位为GB。
+     */
+    Memory: number;
+    /**
+     * Eks集群-CPU类型，当前支持"intel"和"amd"
+     */
+    CpuType?: string;
+    /**
+     * Pod节点数据目录挂载信息。
+     */
+    PodVolumes?: Array<PodVolume>;
+    /**
+     * 是否浮动规格，默认否
+  <li>true：代表是</li>
+  <li>false：代表否</li>
+     */
+    EnableDynamicSpecFlag?: boolean;
+    /**
+     * 浮动规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DynamicPodSpec?: DynamicPodSpec;
+    /**
+     * 代表vpc网络唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 代表vpc子网唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * pod name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodName?: string;
+}
+/**
  * InquiryPriceUpdateInstance请求参数结构体
  */
 export interface InquiryPriceUpdateInstanceRequest {
@@ -5692,6 +5975,97 @@ export interface MultiZoneSetting {
     ResourceSpec?: NewResourceSpec;
 }
 /**
+ * ScaleOutCluster请求参数结构体
+ */
+export interface ScaleOutClusterRequest {
+    /**
+     * 节点计费模式。取值范围：
+  <li>PREPAID：预付费，即包年包月。</li>
+  <li>POSTPAID_BY_HOUR：按小时后付费。</li>
+  <li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
+     */
+    InstanceChargeType: string;
+    /**
+     * 集群实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 扩容节点类型以及数量
+     */
+    ScaleOutNodeConfig: ScaleOutNodeConfig;
+    /**
+     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
+     */
+    ClientToken?: string;
+    /**
+     * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+     */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+     * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+     */
+    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
+    /**
+     * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     */
+    SoftDeployInfo?: Array<number | bigint>;
+    /**
+     * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     */
+    ServiceNodeInfo?: Array<number | bigint>;
+    /**
+     * 分散置放群组ID列表，当前只支持指定一个。
+  该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+     */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+     * 扩容节点绑定标签列表。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+     */
+    HardwareSourceType?: string;
+    /**
+     * Pod相关资源信息
+     */
+    PodSpecInfo?: PodSpecInfo;
+    /**
+     * 使用clickhouse集群扩容时，选择的机器分组名称
+     */
+    ClickHouseClusterName?: string;
+    /**
+     * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+     */
+    ClickHouseClusterType?: string;
+    /**
+     * 扩容指定 Yarn Node Label
+     */
+    YarnNodeLabel?: string;
+    /**
+     * 扩容后是否启动服务，默认取值否
+  <li>true：是</li>
+  <li>false：否</li>
+     */
+    EnableStartServiceFlag?: boolean;
+    /**
+     * 规格设置
+     */
+    ResourceSpec?: NodeResourceSpec;
+    /**
+     * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+     */
+    Zone?: string;
+    /**
+     * 子网，默认是集群创建时的子网
+     */
+    SubnetId?: string;
+    /**
+     * 扩容指定配置组
+     */
+    ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>;
+}
+/**
  * ModifyResourceScheduleConfig请求参数结构体
  */
 export interface ModifyResourceScheduleConfigRequest {
@@ -5820,6 +6194,49 @@ export interface ScaleOutClusterResponse {
     RequestId?: string;
 }
 /**
+ * 进程检测信息
+ */
+export interface ServiceProcessFunctionInfo {
+    /**
+     * 探测告警级别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetectAlert?: string;
+    /**
+     * 探测功能描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    DetetcFunctionKey?: string;
+    /**
+     * 探测功能结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    DetetcFunctionValue?: string;
+    /**
+     * 探测结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    DetetcTime?: string;
+    /**
+     * 探测功能描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetectFunctionKey?: string;
+    /**
+     * 探测功能结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetectFunctionValue?: string;
+    /**
+     * 探测结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetectTime?: string;
+}
+/**
  * 用于创建集群价格清单-节点组成部分价格
  */
 export interface PartDetailPriceItem {
@@ -5874,6 +6291,31 @@ export interface ExternalService {
      * 共用组件集群
      */
     InstanceId: string;
+}
+/**
+ * 组件重启策略
+ */
+export interface RestartPolicy {
+    /**
+     * 重启策略名。
+     */
+    Name: string;
+    /**
+     * 策略展示名称。
+     */
+    DisplayName: string;
+    /**
+     * 策略描述。
+     */
+    Describe: string;
+    /**
+     * 批量重启节点数可选范围。
+     */
+    BatchSizeRange: Array<number | bigint>;
+    /**
+     * 是否是默认策略。
+     */
+    IsDefault: string;
 }
 /**
  * 预执行脚本配置
