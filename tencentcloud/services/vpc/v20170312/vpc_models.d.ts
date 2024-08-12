@@ -4302,51 +4302,61 @@ export interface CcnRoute {
     /**
      * 目的端
      */
-    DestinationCidrBlock: string;
+    DestinationCidrBlock?: string;
     /**
      * 下一跳类型（关联实例类型），所有类型：VPC、DIRECTCONNECT
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 下一跳（关联实例）
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 下一跳名称（关联实例名称）
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 下一跳所属地域（关联实例所属地域）
      */
-    InstanceRegion: string;
+    InstanceRegion?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 路由是否启用
      */
-    Enabled: boolean;
+    Enabled?: boolean;
     /**
      * 关联实例所属UIN（根账号）
      */
-    InstanceUin: string;
+    InstanceUin?: string;
     /**
      * 路由的扩展状态
      */
-    ExtraState: string;
+    ExtraState?: string;
     /**
      * 是否动态路由
      */
-    IsBgp: boolean;
+    IsBgp?: boolean;
     /**
      * 路由优先级
      */
-    RoutePriority: number;
+    RoutePriority?: number;
     /**
      * 下一跳扩展名称（关联实例的扩展名称）
      */
-    InstanceExtraName: string;
+    InstanceExtraName?: string;
+    /**
+     * 实例类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasType?: string;
+    /**
+     * 实例id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasInstanceId?: string;
 }
 /**
  * ModifyIpv6AddressesAttribute返回参数结构体
@@ -12842,6 +12852,11 @@ export interface CCN {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectConnectAccelerateChannelFlag?: boolean;
+    /**
+     * 是否支持ipv6路由表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ipv6Flag?: string;
 }
 /**
  * 网络ACL五元组Entry

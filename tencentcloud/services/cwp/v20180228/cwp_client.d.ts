@@ -1641,7 +1641,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeVulLabels(req?: DescribeVulLabelsRequest, cb?: (error: string, rep: DescribeVulLabelsResponse) => void): Promise<DescribeVulLabelsResponse>;
     /**
-     * 查询云护航服务订单列表
+     * 云护航计费产品已下线
+
+查询云护航服务订单列表
      */
     DescribeCloudProtectServiceOrderList(req: DescribeCloudProtectServiceOrderListRequest, cb?: (error: string, rep: DescribeCloudProtectServiceOrderListResponse) => void): Promise<DescribeCloudProtectServiceOrderListResponse>;
     /**

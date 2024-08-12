@@ -5396,8 +5396,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云护航服务订单列表
-   */
+     * 云护航计费产品已下线
+
+查询云护航服务订单列表
+     */
   async DescribeCloudProtectServiceOrderList(
     req: DescribeCloudProtectServiceOrderListRequest,
     cb?: (error: string, rep: DescribeCloudProtectServiceOrderListResponse) => void

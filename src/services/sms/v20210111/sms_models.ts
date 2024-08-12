@@ -569,7 +569,8 @@ export interface SendSmsRequest {
   TemplateId: string
   /**
    * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看。
-<dx-alert infotype="notice" title="注意">发送国内短信该参数必填，且需填写签名内容而非签名ID。</dx-alert>
+<dx-alert infotype="notice" title="注意"><ul><li>发送国内短信该参数必填，且需填写签名内容而非签名ID。
+</li><li>发送国际/港澳台短信该参数非必填。</li></ul></dx-alert>
    */
   SignName?: string
   /**
