@@ -275,6 +275,10 @@ export interface DescribeCNAMERequest {
      * 服务节点 ID（从查询域名可绑定服务节点接口DescribeDomainRegion中获取）
      */
     ClusterId: string;
+    /**
+     * 域名类型，0:拉流域名 1:推流域名
+     */
+    DomainType?: number;
 }
 /**
  * 获取云录像下载URL返回的数据
@@ -2388,6 +2392,11 @@ export interface DescribeDomainData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId?: string;
+    /**
+     * 域名类型 0:拉流域名 1:推流域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomainType?: number;
 }
 /**
  * ListRecordBackupTemplates返回参数结构体
@@ -2763,6 +2772,16 @@ export interface DescribeDeviceData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubscribeSwitch?: number;
+    /**
+     * RTMP推流地址自定义appName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppName?: string;
+    /**
+     * RTMP推流地址自定义streamName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamName?: string;
 }
 /**
  * AddUserDevice请求参数结构体
@@ -2824,6 +2843,14 @@ export interface AddUserDeviceRequest {
      * 设备 SN，仅IVCP 协议设备需要
      */
     SNCode?: string;
+    /**
+     * RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字组合限制32个字符内）
+     */
+    AppName?: string;
+    /**
+     * RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字组合限制32个字符内）
+     */
+    StreamName?: string;
 }
 /**
  * ListRecordBackupPlanDevices返回参数结构体

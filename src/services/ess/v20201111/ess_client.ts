@@ -42,7 +42,7 @@ import {
   AuthInfoDetail,
   ModifyApplicationCallbackInfoResponse,
   CreateMultiFlowSignQRCodeResponse,
-  FlowApproverUrlInfo,
+  DescribeIntegrationDepartmentsRequest,
   ReviewerInfo,
   FlowBrief,
   DescribeThirdPartyAuthCodeResponse,
@@ -127,6 +127,7 @@ import {
   UserThreeFactor,
   SignQrCode,
   CreateSealPolicyResponse,
+  FlowApproverUrlInfo,
   DisableUserAutoSignRequest,
   DescribeIntegrationEmployeesResponse,
   SuccessDeleteStaffData,
@@ -265,6 +266,7 @@ import {
   RelieveInfo,
   UserFlowType,
   EmbedUrlOption,
+  CreateBatchOrganizationAuthorizationUrlRequest,
   CreateBatchCancelFlowUrlRequest,
   WebThemeConfig,
   CreateMultiFlowSignQRCodeRequest,
@@ -272,7 +274,7 @@ import {
   DescribeFlowInfoRequest,
   DeleteExtendedServiceAuthInfosRequest,
   DescribeExtendedServiceAuthInfosResponse,
-  DescribeIntegrationDepartmentsRequest,
+  CreateBatchOrganizationAuthorizationUrlResponse,
   DescribeFlowInfoResponse,
   RenewAutoSignLicenseResponse,
   CancelMultiFlowSignQRCodeResponse,
@@ -1301,6 +1303,38 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（CreateBatchOrganizationRegistrationTasks）用于批量创建企业认证链接
+该接口为异步提交任务接口,需要跟查询企业批量认证链接(DescribeBatchOrganizationRegistrationUrls) 配合使用.
+
+批量创建链接有以下限制：
+
+1. 单次最多创建10个企业。
+2. 一天同一家企业最多创建8000家企业。
+3. 同一批创建的企业不能重复 其中包括 企业名称，企业统一信用代码
+4. 跳转到小程序的实现，参考微信官方文档（分为全屏、半屏两种方式），如何配置也可以请参考: 跳转电子签小程序配置
+
+注：
+
+1. **此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估**
+  
+2. 如果生成的链接是APP链接，跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
+  
+
+**腾讯电子签小程序的AppID 和 原始Id如下:**
+
+| 小程序 | AppID | 原始ID |
+| --- | --- | --- |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+  async CreateBatchOrganizationRegistrationTasks(
+    req: CreateBatchOrganizationRegistrationTasksRequest,
+    cb?: (error: string, rep: CreateBatchOrganizationRegistrationTasksResponse) => void
+  ): Promise<CreateBatchOrganizationRegistrationTasksResponse> {
+    return this.request("CreateBatchOrganizationRegistrationTasks", req, cb)
+  }
+
+  /**
      * 用于客户企业在调用生成[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)接口之前判断C端用户是否实名，如果已经实名，就不需要再次调用生成C端链接接口去实名
 注意：此接口仅会返回当前员工是否通过[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)所实名的员工是否实名，并不会返回个人用户自己在电子签进行实名的状况
      */
@@ -1332,35 +1366,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CreateBatchOrganizationRegistrationTasks）用于批量创建企业认证链接
-该接口为异步提交任务接口,需要跟查询企业批量认证链接(DescribeBatchOrganizationRegistrationUrls) 配合使用.
+     * 此接口用于获取企业批量认证链接-单链接包含多条认证流。
 
-批量创建链接有以下限制：
+前提条件：已调用 [CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任务接口](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks) 和[查询企业批量认证链接DescribeBatchOrganizationRegistrationUrls](https://qian.tencent.com/developers/companyApis/organizations/DescribeBatchOrganizationRegistrationUrls) 确保认证任务已经完成。
 
-1. 单次最多创建10个企业。
-2. 一天同一家企业最多创建8000家企业。
-3. 同一批创建的企业不能重复 其中包括 企业名称，企业统一信用代码
-4. 跳转到小程序的实现，参考微信官方文档（分为全屏、半屏两种方式），如何配置也可以请参考: 跳转电子签小程序配置
-
-注：
-
-1. **此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估**
-  
-2. 如果生成的链接是APP链接，跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
-  
-
-**腾讯电子签小程序的AppID 和 原始Id如下:**
-
-| 小程序 | AppID | 原始ID |
-| --- | --- | --- |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间。
+此链接包含多条认证流程，使用该链接可以批量的对企业进行认证。
      */
-  async CreateBatchOrganizationRegistrationTasks(
-    req: CreateBatchOrganizationRegistrationTasksRequest,
-    cb?: (error: string, rep: CreateBatchOrganizationRegistrationTasksResponse) => void
-  ): Promise<CreateBatchOrganizationRegistrationTasksResponse> {
-    return this.request("CreateBatchOrganizationRegistrationTasks", req, cb)
+  async CreateBatchOrganizationAuthorizationUrl(
+    req: CreateBatchOrganizationAuthorizationUrlRequest,
+    cb?: (error: string, rep: CreateBatchOrganizationAuthorizationUrlResponse) => void
+  ): Promise<CreateBatchOrganizationAuthorizationUrlResponse> {
+    return this.request("CreateBatchOrganizationAuthorizationUrl", req, cb)
   }
 
   /**

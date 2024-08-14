@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDevice", req, cb);
     }
     /**
+     * 购买一次性授权License
+     */
+    async OrderPerLicense(req, cb) {
+        return this.request("OrderPerLicense", req, cb);
+    }
+    /**
      * 获取单设备的实时流量统计指标
      */
     async GetNetMonitor(req, cb) {

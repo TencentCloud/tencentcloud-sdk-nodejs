@@ -187,6 +187,20 @@ export interface AddL3ConnRequest {
 }
 
 /**
+ * OrderPerLicense返回参数结构体
+ */
+export interface OrderPerLicenseResponse {
+  /**
+   * 一次性授权License的资源ID
+   */
+  ResourceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetFlowPackages请求参数结构体
  */
 export interface GetFlowPackagesRequest {
@@ -1774,6 +1788,34 @@ export interface AddDeviceRequest {
    * 设备无流量包处理方式，0: 按量付费，1: 截断加速
    */
   FlowTrunc?: number
+}
+
+/**
+ * OrderPerLicense请求参数结构体
+ */
+export interface OrderPerLicenseRequest {
+  /**
+   * 购买永久授权License的设备ID，如果是厂商未激活设备采用HardwareId
+   */
+  DeviceId: string
+  /**
+   * 设备类型，0: SDK，1: CPE，作为用户创建或激活设备时传0，作为厂商创建待激活设备时传1
+   */
+  Type: number
+  /**
+   * 购买失败后是否回滚（删除）设备，默认true，如果设备绑定了生效中的流量包则不能回滚。
+   */
+  RollBack?: boolean
+  /**
+   * 是否自动选择代金券，默认false。
+有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。
+   */
+  AutoVoucher?: boolean
+  /**
+   * 指定代金券ID。自动选择代金券时此参数无效。目前只允许传入一张代金券。
+注：若指定的代金券不符合订单抵扣条件，则正常支付，不扣券
+   */
+  VoucherIds?: Array<string>
 }
 
 /**

@@ -208,6 +208,16 @@ it("mna.v20210119.UpdateDevice", async function () {
     }
 })
 
+it("mna.v20210119.OrderPerLicense", async function () {
+    try {
+       const data = await client.OrderPerLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetNetMonitor", async function () {
     try {
        const data = await client.GetNetMonitor({})

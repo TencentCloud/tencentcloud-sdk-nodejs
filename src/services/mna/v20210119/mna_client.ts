@@ -28,6 +28,7 @@ import {
   UpdateL3SwitchRequest,
   DescribeQosResponse,
   AddL3ConnRequest,
+  OrderPerLicenseResponse,
   GetFlowPackagesRequest,
   SetNotifyUrlResponse,
   UpdateL3CidrResponse,
@@ -94,6 +95,7 @@ import {
   FlowPackageInfo,
   GetHardwareListResponse,
   AddDeviceRequest,
+  OrderPerLicenseRequest,
   UpdateGroupRequest,
   GetFlowStatisticResponse,
   UpdateHardwareRequest,
@@ -320,6 +322,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDeviceResponse) => void
   ): Promise<UpdateDeviceResponse> {
     return this.request("UpdateDevice", req, cb)
+  }
+
+  /**
+   * 购买一次性授权License
+   */
+  async OrderPerLicense(
+    req: OrderPerLicenseRequest,
+    cb?: (error: string, rep: OrderPerLicenseResponse) => void
+  ): Promise<OrderPerLicenseResponse> {
+    return this.request("OrderPerLicense", req, cb)
   }
 
   /**

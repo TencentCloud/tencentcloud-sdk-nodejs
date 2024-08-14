@@ -2671,6 +2671,13 @@ false-否
 <li> 6 :设备面容识别</li></ul>
    */
   ApproverSignTypes?: Array<number | bigint>
+  /**
+   * 签署方是否可以转他人处理
+
+<ul><li> **false** : ( 默认)可以转他人处理</li>
+<li> **true** :不可以转他人处理</li></ul>
+   */
+  NoTransfer?: boolean
 }
 
 /**

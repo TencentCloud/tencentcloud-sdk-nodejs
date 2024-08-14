@@ -283,6 +283,16 @@ export interface SmartOptimizerLifecyclePolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DropTable?: boolean;
+    /**
+     * 过期字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredField?: string;
+    /**
+     * 过期字段格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredFieldFormat?: string;
 }
 /**
  * DescribeDMSDatabase返回参数结构体
@@ -791,7 +801,13 @@ export interface UpdateDataEngineRequest {
 /**
  * SmartOptimizerWrittenPolicy
  */
-export declare type SmartOptimizerWrittenPolicy = null;
+export interface SmartOptimizerWrittenPolicy {
+    /**
+     * none/enable/disable/default
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WrittenEnable?: string;
+}
 /**
  * DescribeSparkAppJobs请求参数结构体
  */
@@ -4421,33 +4437,50 @@ export interface UpdateRowFilterRequest {
 export interface TColumn {
     /**
      * 字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 字段类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: string;
     /**
      * 字段描述
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Comment?: string;
     /**
      * 字段默认值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Default?: string;
     /**
      * 字段是否是非空
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotNull?: boolean;
     /**
      * 表示整个 numeric 的长度,取值1-38
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Precision?: number;
     /**
      * 表示小数部分的长度
   Scale小于Precision
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scale?: number;
+    /**
+     * 字段位置，小的在前
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Position?: number;
+    /**
+     * 是否为分区字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPartition?: boolean;
 }
 /**
  * LakeFileSystem使用的临时token
@@ -5231,6 +5264,26 @@ export interface LakeFsInfo {
      * 创建时候的时间戳
      */
     CreateTimeStamp?: number;
+    /**
+     * 是否是用户默认桶，0：默认桶，1：非默认桶
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultBucket?: number;
+    /**
+     * 托管存储short name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShortName?: string;
+    /**
+     * 桶描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 托管桶状态，当前取值为：creating、bind、readOnly、isolate
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
 }
 /**
  * QueryResult请求参数结构体

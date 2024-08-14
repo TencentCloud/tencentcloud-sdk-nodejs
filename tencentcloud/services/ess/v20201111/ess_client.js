@@ -810,29 +810,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowBlockchainEvidenceUrl", req, cb);
     }
     /**
-     * 用于客户企业在调用生成[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)接口之前判断C端用户是否实名，如果已经实名，就不需要再次调用生成C端链接接口去实名
-注意：此接口仅会返回当前员工是否通过[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)所实名的员工是否实名，并不会返回个人用户自己在电子签进行实名的状况
-     */
-    async DescribeUserVerifyStatus(req, cb) {
-        return this.request("DescribeUserVerifyStatus", req, cb);
-    }
-    /**
-     * 此接口（ModifyIntegrationRole）用来更新企业自定义的SaaS角色或集团角色。
-
-适用场景1：更新当前企业的自定义SaaS角色或集团角色，并且更新时不进行角色中权限的更新（PermissionGroups 参数不传）。
-
-适用场景2：更新当前企业的自定义SaaS角色或集团角色，并且更新时进行角色中权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
-
-适用场景3：更新集团角色管理的子企业列表，可通过设置 SubOrganizationIds 参数达到此效果。
-
-适用场景4：主企业代理子企业操作的场景，需要设置Agent参数，并且ProxyOrganizationId设置为子企业的id即可。
-
-注意事项：SaaS角色和集团角色对应的权限树是不一样的。
-     */
-    async ModifyIntegrationRole(req, cb) {
-        return this.request("ModifyIntegrationRole", req, cb);
-    }
-    /**
      * 本接口（CreateBatchOrganizationRegistrationTasks）用于批量创建企业认证链接
 该接口为异步提交任务接口,需要跟查询企业批量认证链接(DescribeBatchOrganizationRegistrationUrls) 配合使用.
 
@@ -859,6 +836,40 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBatchOrganizationRegistrationTasks(req, cb) {
         return this.request("CreateBatchOrganizationRegistrationTasks", req, cb);
+    }
+    /**
+     * 用于客户企业在调用生成[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)接口之前判断C端用户是否实名，如果已经实名，就不需要再次调用生成C端链接接口去实名
+注意：此接口仅会返回当前员工是否通过[C端用户实名链接（CreateUserVerifyUrl）](https://qian.tencent.com/developers/companyApis/users/CreateUserVerifyUrl)所实名的员工是否实名，并不会返回个人用户自己在电子签进行实名的状况
+     */
+    async DescribeUserVerifyStatus(req, cb) {
+        return this.request("DescribeUserVerifyStatus", req, cb);
+    }
+    /**
+     * 此接口（ModifyIntegrationRole）用来更新企业自定义的SaaS角色或集团角色。
+
+适用场景1：更新当前企业的自定义SaaS角色或集团角色，并且更新时不进行角色中权限的更新（PermissionGroups 参数不传）。
+
+适用场景2：更新当前企业的自定义SaaS角色或集团角色，并且更新时进行角色中权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
+
+适用场景3：更新集团角色管理的子企业列表，可通过设置 SubOrganizationIds 参数达到此效果。
+
+适用场景4：主企业代理子企业操作的场景，需要设置Agent参数，并且ProxyOrganizationId设置为子企业的id即可。
+
+注意事项：SaaS角色和集团角色对应的权限树是不一样的。
+     */
+    async ModifyIntegrationRole(req, cb) {
+        return this.request("ModifyIntegrationRole", req, cb);
+    }
+    /**
+     * 此接口用于获取企业批量认证链接-单链接包含多条认证流。
+
+前提条件：已调用 [CreateBatchOrganizationRegistrationTasks创建企业批量认证链接任务接口](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks) 和[查询企业批量认证链接DescribeBatchOrganizationRegistrationUrls](https://qian.tencent.com/developers/companyApis/organizations/DescribeBatchOrganizationRegistrationUrls) 确保认证任务已经完成。
+
+异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间。
+此链接包含多条认证流程，使用该链接可以批量的对企业进行认证。
+     */
+    async CreateBatchOrganizationAuthorizationUrl(req, cb) {
+        return this.request("CreateBatchOrganizationAuthorizationUrl", req, cb);
     }
     /**
      * 该接口用于获取个人授权执业章给企业的微信二维码，需要个人用户通过微信扫码。

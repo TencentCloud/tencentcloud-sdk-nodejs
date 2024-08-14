@@ -35,15 +35,32 @@ export interface ClientNodeAttribute {
     /**
      * 客户端节点IP
      */
-    ClientNodeIp: string;
+    ClientNodeIp?: string;
     /**
      * 客户端节点服务状态, Active(运行中), Adding(添加中), Destroying(销毁中), Down(已停止)
      */
-    Status: string;
+    Status?: string;
     /**
      * 客户端节点类型，extend(扩展节点)，manager(管理节点)
      */
-    ClientType: string;
+    ClientType?: string;
+    /**
+     * 节点所属vpcid
+     */
+    VpcId?: string;
+    /**
+     * 节点所属子网id
+     */
+    SubnetId?: string;
+    /**
+     * cvmId
+     */
+    InstanceId?: string;
+    /**
+     * 自定义挂载点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MountPoint?: string;
 }
 /**
  * ModifyDataRepositoryBandwidth返回参数结构体
@@ -481,6 +498,10 @@ export interface LinuxNodeAttribute {
      * linux客户端节点地址
      */
     LinuxClientNodeIp?: string;
+    /**
+     * 自定义挂载点
+     */
+    MountPoint?: string;
 }
 /**
  * BatchDeleteClientNodes请求参数结构体
