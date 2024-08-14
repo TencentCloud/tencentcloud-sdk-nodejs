@@ -720,6 +720,23 @@ export interface DefaultParameterConf {
     ParameterDescription?: string;
 }
 /**
+ * DescribeScenes返回参数结构体
+ */
+export interface DescribeScenesResponse {
+    /**
+     * 符合条件的场景总数。
+     */
+    TotalCount?: number;
+    /**
+     * 场景详情列表。
+     */
+    SceneSet?: Array<Scene>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRegisterInstances返回参数结构体
  */
 export interface DescribeRegisterInstancesResponse {
@@ -1026,6 +1043,7 @@ export interface DescribeCommandsRequest {
   <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li>
   <li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。</li>
   <li> command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。</li>
+  <li> scene-id - String - 是否必填：否 -（过滤条件）按照场景ID过滤。</li>
   <li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。</li>
   <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
   <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
@@ -1442,6 +1460,62 @@ export interface DeleteCommandsResponse {
     RequestId?: string;
 }
 /**
+ * 场景详情。
+ */
+export interface Scene {
+    /**
+     * 场景 ID 。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneId?: string;
+    /**
+     * 场景名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneName?: string;
+    /**
+     * 场景创建者。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedBy?: string;
+    /**
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedTime?: string;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedTime?: string;
+}
+/**
+ * DescribeScenes请求参数结构体
+ */
+export interface DescribeScenesRequest {
+    /**
+     * 场景 ID 数组
+     */
+    SceneIds?: Array<string>;
+    /**
+     * 过滤条件。
+  <li> scene-id - String - 是否必填：否 -（过滤条件）按照场景 ID 过滤。</li>
+  <li> scene-name - String - 是否必填：否 -（过滤条件）按照场景名称过滤。</li>
+  <li> created-by - String - 是否必填：否 -（过滤条件）按照场景创建者过滤，取值为 TAT 或 USER。TAT 代表公共命令，USER 代表由用户创建的命令。</li>
+  
+  每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `SceneIds` 和 `Filters` 。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
+    Offset?: number;
+}
+/**
  * DeleteRegisterCodes返回参数结构体
  */
 export interface DeleteRegisterCodesResponse {
@@ -1485,7 +1559,7 @@ export interface ModifyRegisterInstanceRequest {
      */
     InstanceId: string;
     /**
-     * 实例名。
+     * 实例名称。有效长度为 1～60 字符。
      */
     InstanceName: string;
 }

@@ -1558,6 +1558,7 @@ export interface BankCard4EVerificationResponse {
   '-5': '手机号码不合法'
   '-18': '验证中心服务繁忙'
   '-19': '验证次数超限，请次日重试'
+  '-20': '该证件号暂不支持核验，当前仅支持二代身份证'
      */
     Result?: string;
     /**
@@ -1872,6 +1873,7 @@ export interface BankCardVerificationResponse {
   '-4': '银行卡号码有误'
   '-17': '验证中心服务繁忙'
   '-18': '验证次数超限，请次日重试'
+  '-19': '该证件号暂不支持核验，当前仅支持二代身份证'
      */
     Result?: string;
     /**

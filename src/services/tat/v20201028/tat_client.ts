@@ -45,6 +45,7 @@ import {
   DescribeQuotasRequest,
   EnableInvokerRequest,
   DefaultParameterConf,
+  DescribeScenesResponse,
   DescribeRegisterInstancesResponse,
   ModifyCommandResponse,
   RegionInfo,
@@ -79,6 +80,8 @@ import {
   DescribeRegisterCodesRequest,
   DeleteCommandRequest,
   DeleteCommandsResponse,
+  Scene,
+  DescribeScenesRequest,
   DeleteRegisterCodesResponse,
   DescribeInvokerRecordsRequest,
   DeleteInvokerRequest,
@@ -351,6 +354,16 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
     cb?: (error: string, rep: DisableRegisterCodesResponse) => void
   ): Promise<DisableRegisterCodesResponse> {
     return this.request("DisableRegisterCodes", req, cb)
+  }
+
+  /**
+   * 此接口用于查询场景详情。
+   */
+  async DescribeScenes(
+    req: DescribeScenesRequest,
+    cb?: (error: string, rep: DescribeScenesResponse) => void
+  ): Promise<DescribeScenesResponse> {
+    return this.request("DescribeScenes", req, cb)
   }
 
   /**

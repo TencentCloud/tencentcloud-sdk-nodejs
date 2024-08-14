@@ -49,7 +49,7 @@ import {
   HasAuthUser,
   ChannelCreateBatchSignUrlResponse,
   ChannelCreatePrepareFlowResponse,
-  WebThemeConfig,
+  CreateBatchInitOrganizationUrlResponse,
   DetectInfoVideoData,
   OperateChannelTemplateResponse,
   FlowFileInfo,
@@ -161,11 +161,12 @@ import {
   FillError,
   ChannelRenewAutoSignLicenseRequest,
   ChannelDescribeBillUsageDetailResponse,
+  IntentionActionResult,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
   ChannelCreateRoleResponse,
-  IntentionActionResult,
+  FormField,
   FailedCreateRoleData,
   ChannelDescribeUserAutoSignStatusRequest,
   FlowResourceUrlInfo,
@@ -194,6 +195,7 @@ import {
   ChannelDescribeRolesResponse,
   ChannelCreateReleaseFlowRequest,
   ChannelDescribeFlowComponentsResponse,
+  WebThemeConfig,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
@@ -217,7 +219,7 @@ import {
   ModifyFlowDeadlineRequest,
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
-  FormField,
+  CreateBatchInitOrganizationUrlRequest,
   CreateFlowGroupSignReviewRequest,
   ChannelBillUsageDetail,
   DescribeTemplatesRequest,
@@ -1590,6 +1592,22 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: ChannelCreateFlowGroupByTemplatesResponse) => void
   ): Promise<ChannelCreateFlowGroupByTemplatesResponse> {
     return this.request("ChannelCreateFlowGroupByTemplates", req, cb)
+  }
+
+  /**
+     * 支持企业进行批量初始化操作：
+
+此接口存在以下限制：
+1. 批量操作的企业需要已经完成电子签的认证流程。
+2. 通过此接口生成的链接在小程序端进行操作时，操作人需要是<font  color="red">所有企业的超管或法人</font>。
+3. 批量操作的企业，需要是本方第三方应用下的企业。
+4. <font  color="red">操作链接过期时间默认为生成链接后7天。</font>
+     */
+  async CreateBatchInitOrganizationUrl(
+    req: CreateBatchInitOrganizationUrlRequest,
+    cb?: (error: string, rep: CreateBatchInitOrganizationUrlResponse) => void
+  ): Promise<CreateBatchInitOrganizationUrlResponse> {
+    return this.request("CreateBatchInitOrganizationUrl", req, cb)
   }
 
   /**

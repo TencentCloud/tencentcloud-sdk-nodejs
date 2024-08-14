@@ -258,6 +258,16 @@ it("tat.v20201028.DisableRegisterCodes", async function () {
     }
 })
 
+it("tat.v20201028.DescribeScenes", async function () {
+    try {
+       const data = await client.DescribeScenes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.DescribeInvokerRecords", async function () {
     try {
        const data = await client.DescribeInvokerRecords({})

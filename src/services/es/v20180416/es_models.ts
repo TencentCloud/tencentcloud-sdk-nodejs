@@ -299,6 +299,10 @@ export interface CreateServerlessSpaceV2Request {
    * 空间id
    */
   ZoneId?: number
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -1059,6 +1063,11 @@ export interface ServerlessSpace {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: number
+  /**
+   * key:value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -1389,9 +1398,13 @@ export interface DescribeServerlessMetricsRequest {
    */
   IndexId?: string
   /**
-   * 指标类型，暂时只支持Storage
+   * 指标类型，暂时只支持Storage(存储大小),AllMetric(所有存储指标：索引流量、存储大小、文档数量、读请求和写请求)
    */
   MetricType?: Array<string>
+  /**
+   * 时间长度类型DurationType(1: 3小时, 2: 昨天1天,3: 今日0点到现在)
+   */
+  DurationType?: number
 }
 
 /**
@@ -1510,6 +1523,10 @@ export interface DescribeServerlessSpacesRequest {
    * 分页条数
    */
   Limit?: number
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -3721,6 +3738,11 @@ export interface ServerlessIndexMetaField {
    * 标签信息
    */
   TagList?: Array<TagInfo>
+  /**
+   * 3782478.47
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexTraffic?: number
 }
 
 /**
@@ -4831,6 +4853,22 @@ export interface DescribeServerlessMetricsResponse {
    * storage指标值，单位byte
    */
   Storage?: number
+  /**
+   * IndexTraffic指标值，单位byte
+   */
+  IndexTraffic?: number
+  /**
+   * 读请求数，单位次数
+   */
+  ReadReqTimes?: number
+  /**
+   * 写请求数，单位次数
+   */
+  WriteReqTimes?: number
+  /**
+   * 文档数量，单位个数
+   */
+  DocCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -215,6 +215,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
+获取一段时间时间范围内的指标数据
      */
     async DescribeServerlessMetrics(req, cb) {
         return this.request("DescribeServerlessMetrics", req, cb);

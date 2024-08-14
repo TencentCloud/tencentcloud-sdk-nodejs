@@ -438,6 +438,16 @@ it("ess.v20201111.CreateFlowSignUrl", async function () {
     }
 })
 
+it("ess.v20201111.CreateBatchInitOrganizationUrl", async function () {
+    try {
+       const data = await client.CreateBatchInitOrganizationUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CancelUserAutoSignEnableUrl", async function () {
     try {
        const data = await client.CancelUserAutoSignEnableUrl({})

@@ -1926,16 +1926,35 @@ export interface UsageRecords {
   /**
    * 使用金额（微分）
    */
-  UsedAmount: number
+  UsedAmount?: number
   /**
    * 使用时间
    */
-  UsedTime: string
+  UsedTime?: string
   /**
    * 使用记录细节
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsageDetails: Array<UsageDetails>
+  UsageDetails?: Array<UsageDetails>
+  /**
+   * 付费模式
+   */
+  PayMode?: string
+  /**
+   * 查询的券id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoucherId?: string
+  /**
+   * 交易场景：（adjust：调账、common：正常交易场景）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayScene?: string
+  /**
+   * 唯一id,对应交易:预付费的dealName,调账/后付费的outTradeNo
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeqId?: string
 }
 
 /**
@@ -5767,12 +5786,52 @@ export interface UsageDetails {
    * 商品名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 商品细节
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubProductName: string
+  SubProductName?: string
+  /**
+   * 产品码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductCode?: string
+  /**
+   * 子产品码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductCode?: string
+  /**
+   * 计费项码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingItemCode?: string
+  /**
+   * 计费细项码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubBillingItemCode?: string
+  /**
+   * 产品英文名	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductEnName?: string
+  /**
+   * 子产品英文名	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductEnName?: string
+  /**
+   * 结算周期	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcUnit?: string
+  /**
+   * payMode为prepay 且 payScene为common的情况下存在
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action?: string
 }
 
 /**

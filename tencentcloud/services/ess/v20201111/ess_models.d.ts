@@ -871,9 +871,25 @@ export interface ModifyExtendedServiceRequest {
     Endpoint?: string;
 }
 /**
- * CancelUserAutoSignEnableUrl返回参数结构体
+ * CreateBatchInitOrganizationUrl返回参数结构体
  */
-export interface CancelUserAutoSignEnableUrlResponse {
+export interface CreateBatchInitOrganizationUrlResponse {
+    /**
+     * 小程序路径
+     */
+    MiniAppPath?: string;
+    /**
+     * 操作长链
+     */
+    OperateLongUrl?: string;
+    /**
+     * 操作短链
+     */
+    OperateShortUrl?: string;
+    /**
+     * 操作二维码
+     */
+    QRCodeUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2669,6 +2685,31 @@ export interface CreateReleaseFlowResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateBatchInitOrganizationUrl请求参数结构体
+ */
+export interface CreateBatchInitOrganizationUrlRequest {
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 初始化操作类型
+  <ul><li>CREATE_SEAL : 创建印章</li>
+  <li>AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业</li>
+  <li>OPEN_AUTO_SIGN :开通企业自动签署</li></ul>
+     */
+    OperateTypes: Array<string>;
+    /**
+     * 批量操作的企业Id列表，最大支持50个
+     */
+    OrganizationIds: Array<string>;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * CreateWebThemeConfig返回参数结构体
@@ -4795,40 +4836,25 @@ export interface FlowCreateApprover {
     Intention?: Intention;
 }
 /**
- * CreateOrganizationGroupInvitationLink返回参数结构体
+ * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
  */
-export interface CreateOrganizationGroupInvitationLinkResponse {
+export interface ApproverComponentLimitType {
     /**
-     * 加入集团二维码链接，子企业的管理员可以直接扫码进入。
-  注意:1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
      */
-    Link?: string;
+    RecipientId: string;
     /**
-     * 到期时间（以秒为单位的时间戳）
-     */
-    ExpireTime?: number;
-    /**
-     * 加入集团短链接。
-  注意:
-  1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。
-  2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。
-  3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
-     */
-    JumpUrl?: string;
-    /**
-     * 腾讯电子签小程序加入集团链接。
+     * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选
   
-  <li>小程序和APP集成使用</li>
-  <li>得到的链接类似于`pages/guide?shortKey=yDw***k1xFc5`, 用法可以参考：<a href="https://qian.tencent.com/developers/company/openwxminiprogram" target="_blank">跳转电子签小程序</a></li>
-  
-  
-  注： <font color="red">生成的链路后面不能再增加参数</font>
+  签名方式：
+  <ul>
+  <li>HANDWRITE-手写签名</li>
+  <li>ESIGN-个人印章类型</li>
+  <li>OCR_ESIGN-AI智能识别手写签名</li>
+  <li>SYSTEM_ESIGN-系统签名</li>
+  </ul>
      */
-    MiniAppPath?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Values: Array<string>;
 }
 /**
  * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
@@ -6937,24 +6963,13 @@ export interface DeleteIntegrationDepartmentRequest {
     ReceiveDeptId?: string;
 }
 /**
- * 用户自定义合同类型， 自定义合同类型的管理可以[点击查看在控制台位置的截图](https://qcloudimg.tencent-cloud.cn/raw/85a9b2ebce07b0cd6d75d5327d538235.png)
+ * CancelUserAutoSignEnableUrl返回参数结构体
  */
-export interface UserFlowType {
+export interface CancelUserAutoSignEnableUrlResponse {
     /**
-     * 合同类型ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    UserFlowTypeId?: string;
-    /**
-     * 合同类型名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name?: string;
-    /**
-     * 合同类型说明
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
+    RequestId?: string;
 }
 /**
  * ModifyApplicationCallbackInfo请求参数结构体
@@ -8516,6 +8531,26 @@ export interface RelieveInfo {
     OtherDeals?: string;
 }
 /**
+ * 用户自定义合同类型， 自定义合同类型的管理可以[点击查看在控制台位置的截图](https://qcloudimg.tencent-cloud.cn/raw/85a9b2ebce07b0cd6d75d5327d538235.png)
+ */
+export interface UserFlowType {
+    /**
+     * 合同类型ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserFlowTypeId?: string;
+    /**
+     * 合同类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 合同类型说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+}
+/**
  * 个性化参数
  */
 export interface EmbedUrlOption {
@@ -9005,25 +9040,40 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
     RequestId?: string;
 }
 /**
- * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
+ * CreateOrganizationGroupInvitationLink返回参数结构体
  */
-export interface ApproverComponentLimitType {
+export interface CreateOrganizationGroupInvitationLinkResponse {
     /**
-     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+     * 加入集团二维码链接，子企业的管理员可以直接扫码进入。
+  注意:1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
      */
-    RecipientId: string;
+    Link?: string;
     /**
-     * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选
+     * 到期时间（以秒为单位的时间戳）
+     */
+    ExpireTime?: number;
+    /**
+     * 加入集团短链接。
+  注意:
+  1. 该链接有效期时间为ExpireTime，同时需要注意保密，不要外泄给无关用户。
+  2. 该链接不支持小程序嵌入，仅支持<b>移动端浏览器</b>打开。
+  3. <font color="red">生成的链路后面不能再增加参数</font>（会出现覆盖链接中已有参数导致错误）
+     */
+    JumpUrl?: string;
+    /**
+     * 腾讯电子签小程序加入集团链接。
   
-  签名方式：
-  <ul>
-  <li>HANDWRITE-手写签名</li>
-  <li>ESIGN-个人印章类型</li>
-  <li>OCR_ESIGN-AI智能识别手写签名</li>
-  <li>SYSTEM_ESIGN-系统签名</li>
-  </ul>
+  <li>小程序和APP集成使用</li>
+  <li>得到的链接类似于`pages/guide?shortKey=yDw***k1xFc5`, 用法可以参考：<a href="https://qian.tencent.com/developers/company/openwxminiprogram" target="_blank">跳转电子签小程序</a></li>
+  
+  
+  注： <font color="red">生成的链路后面不能再增加参数</font>
      */
-    Values: Array<string>;
+    MiniAppPath?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 抄送信息

@@ -2009,7 +2009,7 @@ export interface CreateInstanceRequest {
      */
     InstanceType: string;
     /**
-     * 实例名称
+     * 集群名称
      */
     Name: string;
     /**
@@ -2025,15 +2025,19 @@ export interface CreateInstanceRequest {
      */
     TagList?: Array<Tag>;
     /**
-     * 实例绑定的VPC信息
+     * 集群绑定的VPC信息，必填
      */
     VpcList?: Array<VpcInfo>;
     /**
-     * 是否开启公网
+     * 是否开启公网，默认值为false表示不开启
      */
     EnablePublic?: boolean;
     /**
-     * 公网带宽（单位：兆）
+     * 公网是否按流量计费，默认值为false表示不按流量计费
+     */
+    BillingFlow?: boolean;
+    /**
+     * 公网带宽（单位：兆），默认值为0。如果开启公网，该字段必须为大于0的正整数
      */
     Bandwidth?: number;
     /**
@@ -2045,15 +2049,15 @@ export interface CreateInstanceRequest {
      */
     MessageRetention?: number;
     /**
-     * 付费模式（0: 后付费；1: 预付费）
+     * 付费模式（0: 后付费；1: 预付费），默认值为0
      */
     PayMode?: number;
     /**
-     * 是否自动续费（0: 不自动续费；1: 自动续费）
+     * 是否自动续费（0: 不自动续费；1: 自动续费），默认值为0
      */
     RenewFlag?: number;
     /**
-     * 购买时长（单位：月）
+     * 购买时长（单位：月），默认值为1
      */
     TimeSpan?: number;
     /**
@@ -2553,6 +2557,26 @@ export interface SourceClusterGroupConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImportStatus?: string;
+    /**
+     * 4.x的命名空间，出参使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NamespaceV4?: string;
+    /**
+     * 4.x的消费组名，出参使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupNameV4?: string;
+    /**
+     * 4.x的完整命名空间，出参使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FullNamespaceV4?: string;
+    /**
+     * 是否为顺序投递，5.0有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumeMessageOrderly?: boolean;
 }
 /**
  * DescribeMQTTUserList请求参数结构体

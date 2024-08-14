@@ -668,6 +668,16 @@ it("essbasic.v20210526.ChannelCreateFlowGroupByTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateBatchInitOrganizationUrl", async function () {
+    try {
+       const data = await client.CreateBatchInitOrganizationUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateChannelOrganizationInfoChangeUrl", async function () {
     try {
        const data = await client.CreateChannelOrganizationInfoChangeUrl({})

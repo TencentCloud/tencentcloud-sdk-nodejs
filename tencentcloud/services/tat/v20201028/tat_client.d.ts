@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRegisterCodeResponse, PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, DisableRegisterCodesRequest, DescribeRegisterInstancesRequest, DeleteRegisterCodesRequest, RunCommandRequest, InvokeCommandRequest, DescribeInvocationTasksRequest, DeleteRegisterInstanceResponse, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, DeleteCommandsRequest, EnableInvokerResponse, DescribeQuotasRequest, EnableInvokerRequest, DescribeRegisterInstancesResponse, ModifyCommandResponse, DescribeInvokersResponse, CancelInvocationResponse, DeleteRegisterInstanceRequest, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateRegisterCodeRequest, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, ModifyInvokerResponse, ModifyRegisterInstanceResponse, DescribeRegisterCodesResponse, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, CancelInvocationRequest, DescribeRegisterCodesRequest, DeleteCommandRequest, DeleteCommandsResponse, DeleteRegisterCodesResponse, DescribeInvokerRecordsRequest, DeleteInvokerRequest, ModifyRegisterInstanceRequest, RunCommandResponse, DisableRegisterCodesResponse, DescribeQuotasResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
+import { CreateRegisterCodeResponse, PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, DisableRegisterCodesRequest, DescribeRegisterInstancesRequest, DeleteRegisterCodesRequest, RunCommandRequest, InvokeCommandRequest, DescribeInvocationTasksRequest, DeleteRegisterInstanceResponse, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, DeleteCommandsRequest, EnableInvokerResponse, DescribeQuotasRequest, EnableInvokerRequest, DescribeScenesResponse, DescribeRegisterInstancesResponse, ModifyCommandResponse, DescribeInvokersResponse, CancelInvocationResponse, DeleteRegisterInstanceRequest, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateRegisterCodeRequest, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, ModifyInvokerResponse, ModifyRegisterInstanceResponse, DescribeRegisterCodesResponse, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, CancelInvocationRequest, DescribeRegisterCodesRequest, DeleteCommandRequest, DeleteCommandsResponse, DescribeScenesRequest, DeleteRegisterCodesResponse, DescribeInvokerRecordsRequest, DeleteInvokerRequest, ModifyRegisterInstanceRequest, RunCommandResponse, DisableRegisterCodesResponse, DescribeQuotasResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
 /**
  * tat client
  * @class
@@ -114,6 +114,10 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
      * 此接口用于批量禁用注册码。
      */
     DisableRegisterCodes(req: DisableRegisterCodesRequest, cb?: (error: string, rep: DisableRegisterCodesResponse) => void): Promise<DisableRegisterCodesResponse>;
+    /**
+     * 此接口用于查询场景详情。
+     */
+    DescribeScenes(req: DescribeScenesRequest, cb?: (error: string, rep: DescribeScenesResponse) => void): Promise<DescribeScenesResponse>;
     /**
      * 此接口用于查询执行器的执行记录。
      */
