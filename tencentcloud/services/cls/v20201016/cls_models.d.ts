@@ -594,31 +594,36 @@ export interface ConsoleSharingConfig {
      */
     VerifyCode?: string;
     /**
-     * 开始时间，支持绝对时间(13位时间戳字符串)/相对时间字符串
+     * 默认查询范围的开始时间点，支持绝对时间(13位Unix时间戳)或相对时间表达式
      */
     StartTime?: string;
     /**
-     * 结束时间，支持绝对时间(13位时间戳字符串)/相对时间字符串
+     * 默认查询范围的结束时间点，支持绝对时间(13位Unix时间戳)或相对时间表达式。注意，结束时间点要大于开始时间点
      */
     EndTime?: string;
     /**
-     * 当StartTime/EndTime为相对时间时，基于NowTime计算绝对时间，默认为创建时间
+     * 仅当StartTime/EndTime为相对时间时使用，基于NowTime计算绝对时间，默认为创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NowTime?: number;
     /**
-     * params参数列表，当Type为2时支持
+     * 默认的检索分析语句，仅当Type为2时使用
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Params?: Array<ConsoleSharingParam>;
     /**
-     * 是否允许访问者自行修改检索分析时间范围，默认不锁定
+     * 是否允许访问者自行修改检索分析时间范围。默认不锁定（false）
      */
     IsLockTimeRange?: boolean;
     /**
-     * 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态
+     * 是否允许访问者自行修改日志检索语句。在检索页分享中表示检索语句锁定状态；在仪表盘中表示过滤变量锁定状态。默认不锁定（false）
      */
     IsLockQuery?: boolean;
+    /**
+     * 检索页分享是否允许访问者下载日志，默认不允许（false）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportLogExport?: boolean;
 }
 /**
  * DeleteConsoleSharing请求参数结构体
@@ -2050,7 +2055,28 @@ export interface DeleteConfigFromMachineGroupResponse {
 /**
  * ModifyDashboardSubscribe请求参数结构体
  */
-export declare type ModifyDashboardSubscribeRequest = null;
+export interface ModifyDashboardSubscribeRequest {
+    /**
+     * 仪表盘订阅id。
+     */
+    Id: number;
+    /**
+     * 仪表盘id。
+     */
+    DashboardId?: string;
+    /**
+     * 仪表盘订阅名称。
+     */
+    Name?: string;
+    /**
+     * 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。
+     */
+    Cron?: string;
+    /**
+     * 仪表盘订阅数据。
+     */
+    SubscribeData?: DashboardSubscribeData;
+}
 /**
  * CreateConsumer返回参数结构体
  */
@@ -2111,7 +2137,24 @@ export interface DataTransformResouceInfo {
 /**
  * CreateDashboardSubscribe请求参数结构体
  */
-export declare type CreateDashboardSubscribeRequest = null;
+export interface CreateDashboardSubscribeRequest {
+    /**
+     * 仪表盘订阅名称。
+     */
+    Name: string;
+    /**
+     * 仪表盘id。
+     */
+    DashboardId: string;
+    /**
+     * 订阅时间cron表达式，格式为：{秒数} {分钟} {小时} {日期} {月份} {星期}；（有效数据为：{分钟} {小时} {日期} {月份} {星期}）。<br><li/>{秒数} 取值范围： 0 ~ 59 <br><li/>{分钟} 取值范围： 0 ~ 59  <br><li/>{小时} 取值范围： 0 ~ 23  <br><li/>{日期} 取值范围： 1 ~ 31 AND (dayOfMonth最后一天： L) <br><li/>{月份} 取值范围： 1 ~ 12 <br><li/>{星期} 取值范围： 0 ~ 6 【0:星期日， 6星期六】
+     */
+    Cron: string;
+    /**
+     * 仪表盘订阅数据。
+     */
+    SubscribeData: DashboardSubscribeData;
+}
 /**
  * DeleteMachineGroup请求参数结构体
  */
@@ -2561,7 +2604,20 @@ export interface DeleteExportResponse {
 /**
  * DescribeDashboardSubscribes请求参数结构体
  */
-export declare type DescribeDashboardSubscribesRequest = null;
+export interface DescribeDashboardSubscribesRequest {
+    /**
+     * <br><li/> dashboardId：按照【仪表盘id】进行过滤。类型：String必选：否<br><br><li/> 每次请求的Filters的上限为10，Filter.Values的上限为100。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为20，最大值100。
+     */
+    Limit?: number;
+}
 /**
  * 多日志主题检索topic信息
  */
@@ -6131,7 +6187,12 @@ export interface ModifyMachineGroupRequest {
 /**
  * DeleteDashboardSubscribe请求参数结构体
  */
-export declare type DeleteDashboardSubscribeRequest = null;
+export interface DeleteDashboardSubscribeRequest {
+    /**
+     * 仪表盘订阅记录id。
+     */
+    Id: number;
+}
 /**
  * DescribeConsumer返回参数结构体
  */

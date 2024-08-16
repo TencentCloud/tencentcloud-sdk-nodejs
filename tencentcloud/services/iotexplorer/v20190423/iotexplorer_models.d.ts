@@ -3072,7 +3072,6 @@ export interface DescribeCloudStorageAIServiceResponse {
   - `1`：全时套餐
   - `2`：事件套餐
   - `3`：低功耗套餐
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
@@ -3080,17 +3079,14 @@ export interface DescribeCloudStorageAIServiceResponse {
   
   - `0`：未开通或已过期
   - `1`：生效中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 云存 AI 套餐过期时间 UNIX 时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: number;
     /**
      * 用户 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
@@ -5604,7 +5600,7 @@ export interface CloudStorageAIServiceTask {
     /**
      * 云存 AI 服务类型。可能取值：
   
-  - `PackageDetect`：包裹检测
+  - `RealtimeObjectDetect`：目标检测
   - `Highlight`：视频浓缩
      */
     ServiceType?: string;
@@ -5636,6 +5632,10 @@ export interface CloudStorageAIServiceTask {
      * 最后更新时间
      */
     UpdateTime?: number;
+    /**
+     * 自定义任务 ID
+     */
+    CustomId?: string;
 }
 /**
  * ListTopicPolicy请求参数结构体

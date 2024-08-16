@@ -5165,12 +5165,14 @@ export interface VideoTemplateInfo {
    */
   Codec: string
   /**
-   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
-注意：自适应码率时取值范围是 [0, 60]
+   * 视频帧率，取值范围：
+当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；
+当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]
+当取值为 0，表示帧率和原始视频保持一致。
    */
   Fps: number
   /**
-   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
    */
   Bitrate: number
@@ -5231,6 +5233,12 @@ export interface VideoTemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentType?: number
+  /**
+   * 帧率分母部分
+注意：值必须大于0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FpsDenominator?: number
 }
 
 /**
@@ -11084,12 +11092,15 @@ export interface VideoTemplateInfoForUpdate {
    */
   Codec?: string
   /**
-   * 视频帧率，取值范围：[0, 120]，单位：Hz。 当取值为 0，表示帧率和原始视频保持一致。
+   * 视频帧率，取值范围：
+当FpsDenominator的值为空时，范围：[0, 120]，单位：Hz；
+当FpsDenominator的值不为空时，Fps/FpsDenominator的范围：[0,120]
+当取值为 0，表示帧率和原始视频保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fps?: number
   /**
-   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -11154,6 +11165,12 @@ export interface VideoTemplateInfoForUpdate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SegmentType?: number
+  /**
+   * 帧率分母部分
+注意：值必须大于0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FpsDenominator?: number
 }
 
 /**
@@ -12299,6 +12316,16 @@ export interface MediaVideoStreamItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Codecs?: string
+  /**
+   * 帧率分子部分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FpsNumerator?: number
+  /**
+   * 帧率分母部分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FpsDenominator?: number
 }
 
 /**

@@ -1168,6 +1168,16 @@ export interface CcnRouteTableInputPolicy {
    * 策略描述。
    */
   Description: string
+  /**
+   * as-path操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateAsPath?: string
+  /**
+   * as-path操作模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsPathOperateMode?: string
 }
 
 /**
@@ -13519,6 +13529,16 @@ export interface CCN {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Flag?: string
+  /**
+   * 是否支持路由表聚合策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MrtbAggregatePolicyFlag?: boolean
+  /**
+   * 是否支持策略值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MrtbPolicyValueFlag?: boolean
 }
 
 /**
@@ -13916,6 +13936,26 @@ export interface CcnRouteTableBroadcastPolicy {
    * 策略描述
    */
   Description: string
+  /**
+   * as-path操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateAsPath?: string
+  /**
+   * as-path操作模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsPathOperateMode?: string
+  /**
+   * community操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateCommunitySet?: Array<string>
+  /**
+   * community操作模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommunityOperateMode?: string
 }
 
 /**

@@ -736,7 +736,7 @@ export class Client extends AbstractClient {
    * 此接口用于修改仪表盘订阅
    */
   async ModifyDashboardSubscribe(
-    req?: ModifyDashboardSubscribeRequest,
+    req: ModifyDashboardSubscribeRequest,
     cb?: (error: string, rep: ModifyDashboardSubscribeResponse) => void
   ): Promise<ModifyDashboardSubscribeResponse> {
     return this.request("ModifyDashboardSubscribe", req, cb)
@@ -886,7 +886,7 @@ export class Client extends AbstractClient {
    * 此接口用于创建仪表盘订阅
    */
   async CreateDashboardSubscribe(
-    req?: CreateDashboardSubscribeRequest,
+    req: CreateDashboardSubscribeRequest,
     cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void
   ): Promise<CreateDashboardSubscribeResponse> {
     return this.request("CreateDashboardSubscribe", req, cb)
@@ -926,7 +926,7 @@ export class Client extends AbstractClient {
    * 此接口用于删除仪表盘订阅
    */
   async DeleteDashboardSubscribe(
-    req?: DeleteDashboardSubscribeRequest,
+    req: DeleteDashboardSubscribeRequest,
     cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void
   ): Promise<DeleteDashboardSubscribeResponse> {
     return this.request("DeleteDashboardSubscribe", req, cb)
@@ -1106,10 +1106,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  本接口用于获取仪表盘订阅列表，支持分页
+   * 本接口用于获取仪表盘订阅列表，支持分页
    */
   async DescribeDashboardSubscribes(
-    req?: DescribeDashboardSubscribesRequest,
+    req: DescribeDashboardSubscribesRequest,
     cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void
   ): Promise<DescribeDashboardSubscribesResponse> {
     return this.request("DescribeDashboardSubscribes", req, cb)

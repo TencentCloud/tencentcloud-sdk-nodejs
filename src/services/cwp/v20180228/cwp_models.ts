@@ -8974,22 +8974,27 @@ export interface CanFixVulInfo {
    * 漏洞id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulId: number
+  VulId?: number
   /**
    * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulName: string
+  VulName?: string
   /**
    * 该漏洞可修复的主机信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostList: Array<VulInfoHostInfo>
+  HostList?: Array<VulInfoHostInfo>
   /**
    * 修复提示tag
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FixTag: Array<string>
+  FixTag?: Array<string>
+  /**
+   * 漏洞分类1 web cms漏洞,2应用漏洞,4linux软件漏洞,5windows系统漏洞
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulCategory?: number
 }
 
 /**
@@ -11592,6 +11597,10 @@ export interface CreateVulFixTaskQuuids {
    * 需要修复漏洞的主机，所有主机必须有VulId的这个漏洞且是待修复状态。
    */
   Quuids: Array<string>
+  /**
+   * 修复方式 0组件更新或者安装补丁,1禁用服务
+   */
+  FixMethod?: number
 }
 
 /**
@@ -16900,31 +16909,36 @@ export interface VulFixStatusInfo {
    * 漏洞id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulId: number
+  VulId?: number
   /**
    * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulName: string
+  VulName?: string
   /**
    * 漏洞修复进度 1-100；
    */
-  Progress: number
+  Progress?: number
   /**
    * 漏洞对应主机修复状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostList: Array<VulFixStatusHostInfo>
+  HostList?: Array<VulFixStatusHostInfo>
   /**
    * 漏洞修复失败主机数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailCnt: number
+  FailCnt?: number
   /**
    * 修复成功的数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FixSuccessCnt: number
+  FixSuccessCnt?: number
+  /**
+   * 修复方式 0组件更新或者安装补丁,1禁用服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FixMethod?: number
 }
 
 /**

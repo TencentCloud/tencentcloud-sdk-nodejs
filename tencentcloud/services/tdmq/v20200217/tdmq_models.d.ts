@@ -3890,6 +3890,10 @@ export interface SetRocketMQPublicAccessPointRequest {
      * 公网访问安全规则列表，Enabled为true时必须传入
      */
     Rules?: Array<PublicAccessRule>;
+    /**
+     * 公网是否按流量计费
+     */
+    BillingFlow?: boolean;
 }
 /**
  * DeleteEnvironments返回参数结构体
@@ -6091,34 +6095,39 @@ export interface DescribeRocketMQPublicAccessPointResponse {
   3，关闭中
   4，修改中
      */
-    Status: number;
+    Status?: number;
     /**
      * 支付状态：
   0, 未知
   1，正常
   2，欠费
      */
-    PayStatus: number;
+    PayStatus?: number;
     /**
      * 接入点地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccessUrl: string;
+    AccessUrl?: string;
     /**
      * 安全访问规则列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rules: Array<PublicAccessRule>;
+    Rules?: Array<PublicAccessRule>;
     /**
      * 带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 付费模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMode: number;
+    PayMode?: number;
+    /**
+     * 公网是否按流量计费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingFlow?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

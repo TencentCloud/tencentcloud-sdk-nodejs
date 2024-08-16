@@ -1,4 +1,22 @@
 /**
+ * 门头照识别结果
+ */
+export interface StoreInfo {
+    /**
+     * 识别出的字段名称(关键字)，支持以下字段：
+  付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
+     */
+    Name?: string;
+    /**
+     * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+     */
+    Value?: string;
+    /**
+     * 文本行在旋转纠正之后的图像中的像素坐标
+     */
+    Rect?: Rect;
+}
+/**
  * 非税收入条目
  */
 export interface NonTaxItem {
@@ -1103,49 +1121,21 @@ export interface ElectronicFlightTicketFull {
     FlightItems?: Array<FlightItemInfo>;
 }
 /**
- * PermitOCR返回参数结构体
+ * ClassifyStoreName请求参数结构体
  */
-export interface PermitOCRResponse {
+export interface ClassifyStoreNameRequest {
     /**
-     * 姓名
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  支持的图片像素：需介于20-10000px之间。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Name?: string;
+    ImageBase64?: string;
     /**
-     * 英文姓名
+     * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    EnglishName?: string;
-    /**
-     * 证件号
-     */
-    Number?: string;
-    /**
-     * 性别
-     */
-    Sex?: string;
-    /**
-     * 有效期限
-     */
-    ValidDate?: string;
-    /**
-     * 签发机关
-     */
-    IssueAuthority?: string;
-    /**
-     * 签发地点
-     */
-    IssueAddress?: string;
-    /**
-     * 出生日期
-     */
-    Birthday?: string;
-    /**
-     * 头像照片的base64
-     */
-    PortraitImage?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ImageUrl?: string;
 }
 /**
  * InvoiceGeneralOCR请求参数结构体
@@ -1417,91 +1407,23 @@ export interface VehicleRegCertInfo {
     Value: string;
 }
 /**
- * 全电发票（航空运输电子客票行程单）
+ * 通用告警详情
  */
-export interface ElectronicAirTransport {
+export interface GeneralWarnInfo {
     /**
-     * 发票代码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 是否存在该告警
      */
-    Code?: string;
+    IsWarn?: boolean;
     /**
-     * 发票号码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 告警位置四点坐标
      */
-    Number?: string;
+    Polygon?: Array<Polygon>;
     /**
-     * 开票日期
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Date?: string;
-    /**
-     * 金额
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Amount?: string;
-    /**
-     * 校验码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CheckCode?: string;
-    /**
-     * 价税合计
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Total?: string;
-    /**
-     * 抵扣标志
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeductionMark?: string;
-    /**
-     * 发票状态代码，0正常 1 未更新  2作废 3已红冲
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StateCode?: string;
-    /**
-     * 购方识别号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BuyerTaxCode?: string;
-    /**
-     * 购方名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BuyerName?: string;
-    /**
-     * 合计税额
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tax?: string;
-    /**
-     * 国内国际标识
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DomesticInternationalMark?: string;
-    /**
-     * 旅客姓名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PassengerName?: string;
-    /**
-     * 有效身份证件号码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PassengerNo?: string;
-    /**
-     * 电子客票号码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ElectronicNumber?: string;
-    /**
-     * 全电发票（航空运输电子客票行程单）详细信息
+     * 特殊判定，支持包括
   
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+  Finger：由手指导致的不完整，仅在不完整告警中返回
      */
-    ElectronicAirTransportDetails?: Array<ElectronicAirTransportDetail>;
+    SpecificMatter?: string;
 }
 /**
  * 机票行程卡条目
@@ -2211,6 +2133,23 @@ export interface SmartStructuralOCRRequest {
      * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
      */
     ReturnFullText?: boolean;
+}
+/**
+ * RecognizeStoreName请求参数结构体
+ */
+export interface RecognizeStoreNameRequest {
+    /**
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  支持的图片像素：需介于20-10000px之间。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    ImageBase64?: string;
+    /**
+     * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    ImageUrl?: string;
 }
 /**
  * 智能结构化识别
@@ -3171,75 +3110,21 @@ export interface GeneralBasicOCRResponse {
     RequestId?: string;
 }
 /**
- * RecognizeThaiIDCardOCR返回参数结构体
+ * RecognizeStoreName返回参数结构体
  */
-export interface RecognizeThaiIDCardOCRResponse {
+export interface RecognizeStoreNameResponse {
     /**
-     * 身份证号码
+     * 门头照名称
      */
-    ID?: string;
+    StoreInfo?: Array<StoreInfo>;
     /**
-     * 泰文姓名
+     * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负
      */
-    ThaiName?: string;
+    Angle?: number;
     /**
-     * 英文姓名
+     * 门头照标签
      */
-    EnFirstName?: string;
-    /**
-     * 英文姓名
-     */
-    EnLastName?: string;
-    /**
-     * 泰文签发日期
-     */
-    IssueDate?: string;
-    /**
-     * 泰文到期日期
-     */
-    ExpirationDate?: string;
-    /**
-     * 英文签发日期
-     */
-    EnIssueDate?: string;
-    /**
-     * 英文到期日期
-     */
-    EnExpirationDate?: string;
-    /**
-     * 泰文出生日期
-     */
-    Birthday?: string;
-    /**
-     * 英文出生日期
-     */
-    EnBirthday?: string;
-    /**
-     * 宗教信仰
-     */
-    Religion?: string;
-    /**
-     * 序列号
-     */
-    SerialNumber?: string;
-    /**
-     * 地址
-     */
-    Address?: string;
-    /**
-     * 证件人像照片抠取
-     */
-    PortraitImage?: string;
-    /**
-     * 告警码
-  -9101 证件边框不完整告警
-  -9102 证件复印件告警
-  -9103 证件翻拍告警
-  -9107 证件反光告警
-  -9108 证件模糊告警
-  -9109 告警能力未开通
-     */
-    WarnCardInfos?: Array<number | bigint>;
+    StoreLabel?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3455,23 +3340,91 @@ export interface Key {
     ConfigName?: string;
 }
 /**
- * 通用告警详情
+ * 全电发票（航空运输电子客票行程单）
  */
-export interface GeneralWarnInfo {
+export interface ElectronicAirTransport {
     /**
-     * 是否存在该告警
+     * 发票代码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsWarn?: boolean;
+    Code?: string;
     /**
-     * 告警位置四点坐标
+     * 发票号码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Polygon?: Array<Polygon>;
+    Number?: string;
     /**
-     * 特殊判定，支持包括
+     * 开票日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Date?: string;
+    /**
+     * 金额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Amount?: string;
+    /**
+     * 校验码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckCode?: string;
+    /**
+     * 价税合计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: string;
+    /**
+     * 抵扣标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeductionMark?: string;
+    /**
+     * 发票状态代码，0正常 1 未更新  2作废 3已红冲
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StateCode?: string;
+    /**
+     * 购方识别号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BuyerTaxCode?: string;
+    /**
+     * 购方名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BuyerName?: string;
+    /**
+     * 合计税额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tax?: string;
+    /**
+     * 国内国际标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomesticInternationalMark?: string;
+    /**
+     * 旅客姓名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PassengerName?: string;
+    /**
+     * 有效身份证件号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PassengerNo?: string;
+    /**
+     * 电子客票号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ElectronicNumber?: string;
+    /**
+     * 全电发票（航空运输电子客票行程单）详细信息
   
-  Finger：由手指导致的不完整，仅在不完整告警中返回
+  
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpecificMatter?: string;
+    ElectronicAirTransportDetails?: Array<ElectronicAirTransportDetail>;
 }
 /**
  * ClassifyDetectOCR请求参数结构体
@@ -3674,6 +3627,18 @@ export interface HKIDCardOCRResponse {
     RequestId?: string;
 }
 /**
+ * 反光点覆盖区域详情结果
+ */
+export interface ReflectDetailInfo {
+    /**
+     * NationalEmblem 国徽位置
+  Portrait 人像照片位置
+  RecognitionField 识别字段位置
+  Others 其他位置
+     */
+    Position?: string;
+}
+/**
  * 医疗发票识别结果
  */
 export interface MedicalInvoiceInfo {
@@ -3718,6 +3683,81 @@ export interface VatInvoiceGoodsInfo {
      * 税额
      */
     TaxAmount: string;
+}
+/**
+ * RecognizeThaiIDCardOCR返回参数结构体
+ */
+export interface RecognizeThaiIDCardOCRResponse {
+    /**
+     * 身份证号码
+     */
+    ID?: string;
+    /**
+     * 泰文姓名
+     */
+    ThaiName?: string;
+    /**
+     * 英文姓名
+     */
+    EnFirstName?: string;
+    /**
+     * 英文姓名
+     */
+    EnLastName?: string;
+    /**
+     * 泰文签发日期
+     */
+    IssueDate?: string;
+    /**
+     * 泰文到期日期
+     */
+    ExpirationDate?: string;
+    /**
+     * 英文签发日期
+     */
+    EnIssueDate?: string;
+    /**
+     * 英文到期日期
+     */
+    EnExpirationDate?: string;
+    /**
+     * 泰文出生日期
+     */
+    Birthday?: string;
+    /**
+     * 英文出生日期
+     */
+    EnBirthday?: string;
+    /**
+     * 宗教信仰
+     */
+    Religion?: string;
+    /**
+     * 序列号
+     */
+    SerialNumber?: string;
+    /**
+     * 地址
+     */
+    Address?: string;
+    /**
+     * 证件人像照片抠取
+     */
+    PortraitImage?: string;
+    /**
+     * 告警码
+  -9101 证件边框不完整告警
+  -9102 证件复印件告警
+  -9103 证件翻拍告警
+  -9107 证件反光告警
+  -9108 证件模糊告警
+  -9109 告警能力未开通
+     */
+    WarnCardInfos?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 组在图中的序号
@@ -6965,86 +7005,13 @@ export interface FinanBillSliceOCRRequest {
     ImageUrl?: string;
 }
 /**
- * MLIDPassportOCR返回参数结构体
+ * ClassifyStoreName返回参数结构体
  */
-export interface MLIDPassportOCRResponse {
+export interface ClassifyStoreNameResponse {
     /**
-     * 护照ID（机读码区的解析结果）
+     * 门头照标签
      */
-    ID?: string;
-    /**
-     * 姓名（机读码区的解析结果）
-     */
-    Name?: string;
-    /**
-     * 出生日期（机读码区的解析结果）
-     */
-    DateOfBirth?: string;
-    /**
-     * 性别（F女，M男）（机读码区的解析结果）
-     */
-    Sex?: string;
-    /**
-     * 有效期（机读码区的解析结果）
-     */
-    DateOfExpiration?: string;
-    /**
-     * 发行国（机读码区的解析结果）
-     */
-    IssuingCountry?: string;
-    /**
-     * 国家地区代码（机读码区的解析结果）
-     */
-    Nationality?: string;
-    /**
-     * 告警码：
-  -9103	证照翻拍告警
-  -9102	证照复印件告警（包括黑白复印件、彩色复印件）
-  -9106       证件遮挡告警
-     */
-    Warn?: Array<number | bigint>;
-    /**
-     * 证件中的人像图片base64
-     */
-    Image?: string;
-    /**
-     * 扩展字段:
-  {
-      ID:{
-          Confidence:0.9999
-      },
-      Name:{
-          Confidence:0.9996
-      }
-  }
-     */
-    AdvancedInfo?: string;
-    /**
-     * 最下方第一行 MRZ Code 序列
-     */
-    CodeSet?: string;
-    /**
-     * 最下方第二行 MRZ Code 序列
-     */
-    CodeCrc?: string;
-    /**
-     * 姓（机读码区的解析结果）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Surname?: string;
-    /**
-     * 名（机读码区的解析结果）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GivenName?: string;
-    /**
-     * 类型（机读码区的解析结果）
-     */
-    Type?: string;
-    /**
-     * 信息区证件内容
-     */
-    PassportRecognizeInfos?: PassportRecognizeInfos;
+    StoreLabel?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8528,16 +8495,90 @@ export interface ShipInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
- * 反光点覆盖区域详情结果
+ * MLIDPassportOCR返回参数结构体
  */
-export interface ReflectDetailInfo {
+export interface MLIDPassportOCRResponse {
     /**
-     * NationalEmblem 国徽位置
-  Portrait 人像照片位置
-  RecognitionField 识别字段位置
-  Others 其他位置
+     * 护照ID（机读码区的解析结果）
      */
-    Position?: string;
+    ID?: string;
+    /**
+     * 姓名（机读码区的解析结果）
+     */
+    Name?: string;
+    /**
+     * 出生日期（机读码区的解析结果）
+     */
+    DateOfBirth?: string;
+    /**
+     * 性别（F女，M男）（机读码区的解析结果）
+     */
+    Sex?: string;
+    /**
+     * 有效期（机读码区的解析结果）
+     */
+    DateOfExpiration?: string;
+    /**
+     * 发行国（机读码区的解析结果）
+     */
+    IssuingCountry?: string;
+    /**
+     * 国家地区代码（机读码区的解析结果）
+     */
+    Nationality?: string;
+    /**
+     * 告警码：
+  -9103	证照翻拍告警
+  -9102	证照复印件告警（包括黑白复印件、彩色复印件）
+  -9106       证件遮挡告警
+     */
+    Warn?: Array<number | bigint>;
+    /**
+     * 证件中的人像图片base64
+     */
+    Image?: string;
+    /**
+     * 扩展字段:
+  {
+      ID:{
+          Confidence:0.9999
+      },
+      Name:{
+          Confidence:0.9996
+      }
+  }
+     */
+    AdvancedInfo?: string;
+    /**
+     * 最下方第一行 MRZ Code 序列
+     */
+    CodeSet?: string;
+    /**
+     * 最下方第二行 MRZ Code 序列
+     */
+    CodeCrc?: string;
+    /**
+     * 姓（机读码区的解析结果）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Surname?: string;
+    /**
+     * 名（机读码区的解析结果）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GivenName?: string;
+    /**
+     * 类型（机读码区的解析结果）
+     */
+    Type?: string;
+    /**
+     * 信息区证件内容
+     */
+    PassportRecognizeInfos?: PassportRecognizeInfos;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SealOCR请求参数结构体
@@ -8794,17 +8835,22 @@ export interface BusInvoiceOCRResponse {
  */
 export interface QrcodeResultsInfo {
     /**
-     * 类型（二维码、条形码）
+     * 类型包括
+  二维码：QR_CODE
+  一维码：EAN-13、EAN-8、EAN-2、UPC-A、UPC-E、CODE-39、CODE-93、CODE-128
+  PDF：PDF_417
+  DataMatrix：DATA_MATRIX
+  小程序码：WX_CODE
      */
-    TypeName: string;
+    TypeName?: string;
     /**
      * 二维码/条形码包含的地址
      */
-    Url: string;
+    Url?: string;
     /**
      * 二维码/条形码坐标
      */
-    Position: QrcodePositionObj;
+    Position?: QrcodePositionObj;
 }
 /**
  * MainlandPermitOCR返回参数结构体
@@ -9337,6 +9383,51 @@ export interface EnterpriseLicenseInfo {
      * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
      */
     Value?: string;
+}
+/**
+ * PermitOCR返回参数结构体
+ */
+export interface PermitOCRResponse {
+    /**
+     * 姓名
+     */
+    Name?: string;
+    /**
+     * 英文姓名
+     */
+    EnglishName?: string;
+    /**
+     * 证件号
+     */
+    Number?: string;
+    /**
+     * 性别
+     */
+    Sex?: string;
+    /**
+     * 有效期限
+     */
+    ValidDate?: string;
+    /**
+     * 签发机关
+     */
+    IssueAuthority?: string;
+    /**
+     * 签发地点
+     */
+    IssueAddress?: string;
+    /**
+     * 出生日期
+     */
+    Birthday?: string;
+    /**
+     * 头像照片的base64
+     */
+    PortraitImage?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * InsuranceBillOCR请求参数结构体

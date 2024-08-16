@@ -3469,6 +3469,18 @@ export interface DescribeInstancesRequest {
    * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
    */
   Limit?: number
+  /**
+   * 指定排序字段 。取值范围： "EXPIRED_TIME"：依据实例的到期时间排序。 
+ 不传入此字段时, 优先返回实例状态为“待回收”的实例, 其余实例以“创建时间”倒序返回。
+   */
+  OrderField?: string
+  /**
+   * 输出实例列表的排列顺序。取值范围：
+"ASC"：升序排列。
+"DESC"：降序排列。
+默认按升序排序。当传入该字段时，必须指定OrderField。
+   */
+  Order?: string
 }
 
 /**

@@ -493,6 +493,11 @@ export interface TemplateGroupAction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionType?: string
+  /**
+   * 动作风险等级，1:低风险 2:中风险 3:高风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionRisk?: string
 }
 
 /**

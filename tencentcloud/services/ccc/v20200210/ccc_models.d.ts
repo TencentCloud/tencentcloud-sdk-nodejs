@@ -219,6 +219,10 @@ export interface ModifyStaffRequest {
      */
     Nick?: string;
     /**
+     * 座席工号
+     */
+    StaffNo?: string;
+    /**
      * 绑定技能组ID列表
      */
     SkillGroupIds?: Array<number | bigint>;

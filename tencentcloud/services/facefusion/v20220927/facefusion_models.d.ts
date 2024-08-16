@@ -167,7 +167,7 @@ export interface FuseParam {
  */
 export interface ImageCodecParam {
     /**
-     * 元数据
+     * 元数据，个数不能大于1。
      */
     MetaData?: Array<MetaData>;
 }
@@ -213,15 +213,22 @@ export interface FusionUltraParam {
  */
 export interface MergeInfo {
     /**
-     * 输入图片base64
+     * 输入图片base64。
+  ●base64 和 url 必须提供一个，如果都提供以 url 为准。
+  ●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。
+  ●支持图片格式：支持jpg或png
      */
     Image?: string;
     /**
-     * 输入图片url
+     * 输入图片url。
+  ●base64 和 url 必须提供一个，如果都提供以 url 为准。
+  ●素材图片限制：图片中面部尺寸大于34 * 34；图片尺寸大于64 * 64。（图片编码之后可能会大30%左右，建议合理控制图片大小）。
+  ●支持图片格式：支持jpg或png
      */
     Url?: string;
     /**
      * 上传的图片人脸位置信息（人脸框）
+  Width、Height >= 30。
      */
     InputImageFaceRect?: FaceRect;
     /**
@@ -230,6 +237,7 @@ export interface MergeInfo {
     TemplateFaceID?: string;
     /**
      * 模板中人脸位置信息(人脸框)，不填默认取最大人脸。此字段仅适用于图片融合自定义模板素材场景。
+  Width、Height >= 30。
      */
     TemplateFaceRect?: FaceRect;
 }
@@ -251,7 +259,7 @@ export interface FuseFaceUltraResponse {
  */
 export interface FuseFaceResponse {
     /**
-     * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
+     * RspImgType 为 url 时，返回结果的 url（有效期7天）， RspImgType 为 base64 时返回 base64 数据。
      */
     FusedImage?: string;
     /**
@@ -276,7 +284,7 @@ export interface FuseFaceRequest {
      */
     RspImgType: string;
     /**
-     * 用户人脸图片、素材模板图的人脸位置信息。
+     * 用户人脸图片、素材模板图的人脸位置信息。不能超过6个。
      */
     MergeInfos: Array<MergeInfo>;
     /**
@@ -367,15 +375,19 @@ export interface DescribeMaterialListRequest {
  */
 export interface LogoParam {
     /**
-     * 标识图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+     * 标识图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配。
      */
     LogoRect: FaceRect;
     /**
-     * 标识图片Url地址
+     * 标识图片Url地址。
+  ●base64 和 url 必须提供一个，如果都提供以 url 为准。
+  ●支持图片格式：支持jpg或png。
      */
     LogoUrl?: string;
     /**
      * 标识图片base64
+  ●base64 和 url 必须提供一个，如果都提供以 url 为准。
+  ●支持图片格式：支持jpg或png。
      */
     LogoImage?: string;
 }

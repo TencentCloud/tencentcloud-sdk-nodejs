@@ -499,7 +499,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     *  本接口用于获取仪表盘订阅列表，支持分页
+     * 本接口用于获取仪表盘订阅列表，支持分页
      */
     async DescribeDashboardSubscribes(req, cb) {
         return this.request("DescribeDashboardSubscribes", req, cb);

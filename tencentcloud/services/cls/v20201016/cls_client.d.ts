@@ -174,7 +174,7 @@ export declare class Client extends AbstractClient {
     /**
      * 此接口用于修改仪表盘订阅
      */
-    ModifyDashboardSubscribe(req?: ModifyDashboardSubscribeRequest, cb?: (error: string, rep: ModifyDashboardSubscribeResponse) => void): Promise<ModifyDashboardSubscribeResponse>;
+    ModifyDashboardSubscribe(req: ModifyDashboardSubscribeRequest, cb?: (error: string, rep: ModifyDashboardSubscribeResponse) => void): Promise<ModifyDashboardSubscribeResponse>;
     /**
      * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
      */
@@ -234,7 +234,7 @@ export declare class Client extends AbstractClient {
     /**
      * 此接口用于创建仪表盘订阅
      */
-    CreateDashboardSubscribe(req?: CreateDashboardSubscribeRequest, cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void): Promise<CreateDashboardSubscribeResponse>;
+    CreateDashboardSubscribe(req: CreateDashboardSubscribeRequest, cb?: (error: string, rep: CreateDashboardSubscribeResponse) => void): Promise<CreateDashboardSubscribeResponse>;
     /**
      * 本接口用于预览cos导入信息
      */
@@ -250,7 +250,7 @@ export declare class Client extends AbstractClient {
     /**
      * 此接口用于删除仪表盘订阅
      */
-    DeleteDashboardSubscribe(req?: DeleteDashboardSubscribeRequest, cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void): Promise<DeleteDashboardSubscribeResponse>;
+    DeleteDashboardSubscribe(req: DeleteDashboardSubscribeRequest, cb?: (error: string, rep: DeleteDashboardSubscribeResponse) => void): Promise<DeleteDashboardSubscribeResponse>;
     /**
      * 本接口用于创建数据加工任务。
      */
@@ -323,9 +323,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     *  本接口用于获取仪表盘订阅列表，支持分页
+     * 本接口用于获取仪表盘订阅列表，支持分页
      */
-    DescribeDashboardSubscribes(req?: DescribeDashboardSubscribesRequest, cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void): Promise<DescribeDashboardSubscribesResponse>;
+    DescribeDashboardSubscribes(req: DescribeDashboardSubscribesRequest, cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void): Promise<DescribeDashboardSubscribesResponse>;
     /**
      * 修改机器组
      */
