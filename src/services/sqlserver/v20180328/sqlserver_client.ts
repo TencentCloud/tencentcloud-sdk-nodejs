@@ -31,6 +31,7 @@ import {
   DatabaseTupleStatus,
   DescribeDatabasesNormalRequest,
   DescribeInquiryPriceParameterResponse,
+  ModifyDatabasePrivilegeRequest,
   DescribeCollationTimeZoneResponse,
   CreateBusinessIntelligenceFileResponse,
   ParamRecord,
@@ -80,6 +81,7 @@ import {
   ModifyDBInstanceRenewFlagRequest,
   DescribeUpgradeInstanceCheckResponse,
   DescribeRestoreTimeRangeResponse,
+  ModifyDatabasePrivilegeResponse,
   CreateIncrementalMigrationResponse,
   DescribeZonesResponse,
   UpgradeDBInstanceRequest,
@@ -210,7 +212,7 @@ import {
   ModifyBackupMigrationRequest,
   CloneDBResponse,
   CreateBasicDBInstancesResponse,
-  DescribeAccountsRequest,
+  DataBasePrivilegeModifyInfo,
   DescribeMaintenanceSpanResponse,
   DatabaseTuple,
   CreateCloudDBInstancesResponse,
@@ -279,6 +281,7 @@ import {
   MigrationStep,
   RenewPostpaidDBInstanceRequest,
   DescribeMigrationDetailRequest,
+  SelectAllDB,
   DescribeReadOnlyGroupDetailsRequest,
   CreateDBInstancesRequest,
   ModifyCrossBackupStrategyRequest,
@@ -319,7 +322,6 @@ import {
   ModifyDatabaseShrinkMDFResponse,
   DescribeDatabaseNamesResponse,
   RecycleReadOnlyGroupResponse,
-  DescribeDBPrivilegeByAccountRequest,
   DescribeHASwitchLogRequest,
   SlowlogInfo,
   DescribeMigrationsResponse,
@@ -331,6 +333,7 @@ import {
   DealInstance,
   DescribeBackupUploadSizeResponse,
   DescribeUploadIncrementalInfoRequest,
+  DescribeAccountsRequest,
   DescribeBackupByFlowIdResponse,
   DescribeRegionsRequest,
   AccountPrivilege,
@@ -342,10 +345,11 @@ import {
   RemoveBackupsResponse,
   ModifyCloseWanIpResponse,
   ModifyDBInstanceSecurityGroupsResponse,
-  SecurityGroup,
+  DescribeDBPrivilegeByAccountRequest,
   ReadOnlyInstance,
   MigrateDetail,
   DescribeBackupMigrationRequest,
+  SecurityGroup,
   InstanceDBDetail,
   BalanceReadOnlyGroupRequest,
   ModifyInstanceParamResponse,
@@ -976,6 +980,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
   ): Promise<DescribeInstanceParamsResponse> {
     return this.request("DescribeInstanceParams", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDatabasePrivilege）用于修改实例数据库权限。
+   */
+  async ModifyDatabasePrivilege(
+    req: ModifyDatabasePrivilegeRequest,
+    cb?: (error: string, rep: ModifyDatabasePrivilegeResponse) => void
+  ): Promise<ModifyDatabasePrivilegeResponse> {
+    return this.request("ModifyDatabasePrivilege", req, cb)
   }
 
   /**

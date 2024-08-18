@@ -966,7 +966,12 @@ export interface DescribeMySqlProcessListResponse {
     /**
      * 实时线程列表。
      */
-    ProcessList: Array<MySqlProcess>;
+    ProcessList?: Array<MySqlProcess>;
+    /**
+     * sql会话统计信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Statistics?: Array<StatisticInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1005,6 +1010,31 @@ export interface SessionItem {
      * 当前访问来源总连接数
      */
     AllConn: number;
+}
+/**
+ * 统计分析维度下的统计数据详情
+ */
+export interface StatisticDataInfo {
+    /**
+     * 统计维度的值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 平均时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeAvg?: number;
+    /**
+     * 总时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSum?: number;
+    /**
+     * 数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
 }
 /**
  * 实例健康详情。
@@ -2614,6 +2644,24 @@ export interface DescribeNoPrimaryKeyTablesRequest {
     Product?: string;
 }
 /**
+ * 会话统计的维度信息,可以多个维度
+ */
+export interface StatDimension {
+    /**
+     * 维度名称，目前仅支持：SqlTag。
+     */
+    Dimension: string;
+    /**
+     * SQL 标签过滤与统计信息
+  示例：
+  
+  示例 1：[p=position] 统计包含 p=position 标签的 SQL 会话。
+  示例 2：[p] 统计包含 p 标签的 SQL 会话。
+  示例 3：[p=position, c=idCard] 统计同时包含 p=position 标签和 c=idCard 标签的 SQL 会话。
+     */
+    Data?: Array<string>;
+}
+/**
  * 通知模板
  */
 export interface AlarmProfileList {
@@ -3578,6 +3626,21 @@ export interface DescribeProxyProcessStatisticsRequest {
     OrderDirection?: string;
 }
 /**
+ * sql会话统计信息
+ */
+export interface StatisticInfo {
+    /**
+     * 统计分析的维度。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Dimension?: string;
+    /**
+     * 统计分析的维度下的统计数据详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<StatisticDataInfo>;
+}
+/**
  * 监控数据（浮点型）
  */
 export interface MonitorFloatMetric {
@@ -4343,6 +4406,10 @@ export interface DescribeMySqlProcessListRequest {
      * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
      */
     Product?: string;
+    /**
+     * 会话统计的维度信息,可以多个维度。
+     */
+    StatDimensions?: Array<StatDimension>;
 }
 /**
  * DescribeSecurityAuditLogDownloadUrls返回参数结构体

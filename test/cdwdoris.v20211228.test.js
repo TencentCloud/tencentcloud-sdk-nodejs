@@ -118,6 +118,16 @@ it("cdwdoris.v20211228.DescribeDatabaseAuditDownload", async function () {
     }
 })
 
+it("cdwdoris.v20211228.DescribeUserBindWorkloadGroup", async function () {
+    try {
+       const data = await client.DescribeUserBindWorkloadGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.DescribeInstanceNodesInfo", async function () {
     try {
        const data = await client.DescribeInstanceNodesInfo({})
@@ -138,9 +148,9 @@ it("cdwdoris.v20211228.DescribeInstanceUsedSubnets", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeUserBindWorkloadGroup", async function () {
+it("cdwdoris.v20211228.DescribeTableList", async function () {
     try {
-       const data = await client.DescribeUserBindWorkloadGroup({})
+       const data = await client.DescribeTableList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

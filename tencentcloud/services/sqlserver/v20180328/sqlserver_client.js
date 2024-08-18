@@ -376,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParams", req, cb);
     }
     /**
+     * 本接口（ModifyDatabasePrivilege）用于修改实例数据库权限。
+     */
+    async ModifyDatabasePrivilege(req, cb) {
+        return this.request("ModifyDatabasePrivilege", req, cb);
+    }
+    /**
      * 本接口(ModifyCloseWanIp)用于关闭实例外网。
      */
     async ModifyCloseWanIp(req, cb) {

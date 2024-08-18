@@ -2471,6 +2471,23 @@ export interface DescribeUserBindWorkloadGroupRequest {
     InstanceId?: string;
 }
 /**
+ * ScaleUpInstance请求参数结构体
+ */
+export interface ScaleUpInstanceRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 节点规格
+     */
+    SpecName: string;
+    /**
+     * 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE
+     */
+    Type: string;
+}
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -2903,6 +2920,31 @@ export interface DescribeBackUpJobDetailRequest {
      * 任务id
      */
     BackUpJobId: number;
+}
+/**
+ * DescribeTableList请求参数结构体
+ */
+export interface DescribeTableListRequest {
+    /**
+     * 资源ID，建表所用的TCHouse-D资源ID。
+     */
+    InstanceId: string;
+    /**
+     * 需要获取表列表的库
+     */
+    DbName: string;
+    /**
+     * 使用该用户进行操作，该用户需要有对应的权限。如果该TCHouse-D集群使用CAM用户注册内核账户，则不需要填写
+     */
+    UserName?: string;
+    /**
+     * 用户对应的密码。如果该TCHouse-D集群使用CAM用户注册内核账户，则不需要填写
+     */
+    PassWord?: string;
+    /**
+     * 查询库所在的数据源，不填则默认为内部数据源（internal）。
+     */
+    CatalogName?: string;
 }
 /**
  * DescribeWorkloadGroup返回参数结构体
@@ -3469,21 +3511,23 @@ export interface RecoverBackUpJobResponse {
     RequestId?: string;
 }
 /**
- * ScaleUpInstance请求参数结构体
+ * DescribeTableList返回参数结构体
  */
-export interface ScaleUpInstanceRequest {
+export interface DescribeTableListResponse {
     /**
-     * 集群ID
+     * 表名列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    TableNames?: Array<string>;
     /**
-     * 节点规格
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpecName: string;
+    Message?: string;
     /**
-     * 角色（MATER/CORE），MASTER 对应 FE，CORE对应BE
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Type: string;
+    RequestId?: string;
 }
 /**
  * DescribeReplicaVersion请求参数结构体

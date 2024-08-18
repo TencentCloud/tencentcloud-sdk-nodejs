@@ -16,29 +16,26 @@
  */
 
 /**
- * DetectProductBeta返回参数结构体
+ * RecognizeCarPro请求参数结构体
  */
-export interface DetectProductBetaResponse {
+export interface RecognizeCarProRequest {
   /**
-   * 检测到的图片中的商品位置和品类预测。 
-当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。 
-最多可以输出__3组__检测结果。
+   * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
    */
-  RegionDetected: Array<RegionDetected>
+  ImageUrl?: string
   /**
-   * 图像识别出的商品的详细信息。 
-当图像中检测到多个物品时，会对显著性最高的进行识别。
+   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
    */
-  ProductInfo: ProductInfo
-  /**
-   * 相似商品信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductInfoList: Array<ProductInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ImageBase64?: string
 }
 
 /**
@@ -138,25 +135,6 @@ export interface DetectPetRequest {
 **注意：图片需要base64编码，并且要去掉编码头部。**
    */
   ImageBase64?: string
-}
-
-/**
- * RecognizeCarPro返回参数结构体
- */
-export interface RecognizeCarProResponse {
-  /**
-   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
-   */
-  CarCoords?: Array<Coord>
-  /**
-   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
-注意：置信度是指车牌信息置信度。
-   */
-  CarTags?: Array<CarTagItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -382,27 +360,6 @@ export interface DetectLabelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 检测到的图片中的商品位置和品类预测。 
-当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。 
-最多可以输出__3组__检测结果。
- */
-export interface RegionDetected {
-  /**
-   * 商品的品类预测结果。 
-包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
-   */
-  Category: string
-  /**
-   * 商品品类预测的置信度
-   */
-  CategoryScore: number
-  /**
-   * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
-   */
-  Location: Location
 }
 
 /**
@@ -673,24 +630,6 @@ export interface DetectLabelRequest {
 }
 
 /**
- * RecognizeCar返回参数结构体
- */
-export interface RecognizeCarResponse {
-  /**
-   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
-   */
-  CarCoords: Array<Coord>
-  /**
-   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
-   */
-  CarTags: Array<CarTagItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DetectLabelPro返回参数结构体
  */
 export interface DetectLabelProResponse {
@@ -717,54 +656,6 @@ export interface EnhanceImageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 图像识别出的商品的详细信息。 
-当图像中检测到多个物品时，会对显著性最高的物品进行识别。
- */
-export interface ProductInfo {
-  /**
-   * 1表示找到同款商品，以下字段为同款商品信息； 
-0表示未找到同款商品， 具体商品信息为空（参考价格、名称、品牌等），仅提供商品类目和参考图片（商品库中找到的最相似图片，供参考）。  
-是否找到同款的判断依据为Score分值，分值越大则同款的可能性越大。
-   */
-  FindSKU: number
-  /**
-   * 本商品在图片中的坐标，表示为矩形框的四个顶点坐标。
-   */
-  Location: Location
-  /**
-   * 商品名称
-   */
-  Name: string
-  /**
-   * 商品品牌
-   */
-  Brand: string
-  /**
-   * 参考价格，综合多个信息源，仅供参考。
-   */
-  Price: string
-  /**
-   * 识别结果的商品类目。 
-包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。 
-当类别为“非商品”时，除Location、Score和本字段之外的商品信息为空。
-   */
-  ProductCategory: string
-  /**
-   * 输入图片中的主体物品和输出结果的相似度。分值越大，输出结果与输入图片是同款的可能性越高。
-   */
-  Score: number
-  /**
-   * 搜索到的商品配图URL。
-   */
-  Image: string
-  /**
-   * 百科词条列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LemmaInfoList: Array<LemmaInfo>
 }
 
 /**
@@ -910,23 +801,21 @@ export interface Rect {
 }
 
 /**
- * DetectProductBeta请求参数结构体
+ * RecognizeCar返回参数结构体
  */
-export interface DetectProductBetaRequest {
+export interface RecognizeCarResponse {
   /**
-   * 图片限制：内测版仅支持jpg、jpeg，图片大小不超过1M，分辨率在25万到100万之间。 
-建议先对图片进行压缩，以便提升处理速度。
+   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
    */
-  ImageUrl?: string
+  CarCoords: Array<Coord>
   /**
-   * 图片经过base64编码的内容。最大不超过1M，分辨率在25万到100万之间。 
-与ImageUrl同时存在时优先使用ImageUrl字段。
+   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
    */
-  ImageBase64?: string
+  CarTags: Array<CarTagItem>
   /**
-   * 是否需要百科信息 1：是，0: 否，默认是0
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NeedLemma?: number
+  RequestId?: string
 }
 
 /**
@@ -1336,25 +1225,13 @@ export interface DetectLabelItem {
 }
 
 /**
- * 检测到的主体在图片中的矩形框位置（四个顶点坐标）
+ * UpdateImage返回参数结构体
  */
-export interface Location {
+export interface UpdateImageResponse {
   /**
-   * 位置矩形框的左上角横坐标
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  XMin: number
-  /**
-   * 位置矩形框的左上角纵坐标
-   */
-  YMin: number
-  /**
-   * 位置矩形框的右下角横坐标
-   */
-  XMax: number
-  /**
-   * 位置矩形框的右下角纵坐标
-   */
-  YMax: number
+  RequestId?: string
 }
 
 /**
@@ -1543,26 +1420,22 @@ export interface ImageInfo {
 }
 
 /**
- * RecognizeCarPro请求参数结构体
+ * RecognizeCarPro返回参数结构体
  */
-export interface RecognizeCarProRequest {
+export interface RecognizeCarProResponse {
   /**
-   * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+   * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
    */
-  ImageUrl?: string
+  CarCoords?: Array<Coord>
   /**
-   * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
-支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+   * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+注意：置信度是指车牌信息置信度。
    */
-  ImageBase64?: string
+  CarTags?: Array<CarTagItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1645,27 +1518,6 @@ export interface CarTagItem {
 }
 
 /**
- * 百科词条信息
- */
-export interface LemmaInfo {
-  /**
-   * 词条
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LemmaTitle: string
-  /**
-   * 词条描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LemmaAbstract: string
-  /**
-   * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag: string
-}
-
-/**
  * DescribeImages返回参数结构体
  */
 export interface DescribeImagesResponse {
@@ -1707,16 +1559,6 @@ export interface DetectMisbehaviorRequest {
    **注意：图片需要base64编码，并且要去掉编码头部。**
    */
   ImageBase64?: string
-}
-
-/**
- * UpdateImage返回参数结构体
- */
-export interface UpdateImageResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

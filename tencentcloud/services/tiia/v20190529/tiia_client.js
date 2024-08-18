@@ -47,16 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImages", req, cb);
     }
     /**
-     * 产品不再维护，准备下线。
-
-商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
-本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
-客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
->?
+     * 传入一张图片，识别出图片中是否存在宠物
+>
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    async DetectProductBeta(req, cb) {
-        return this.request("DetectProductBeta", req, cb);
+    async DetectPet(req, cb) {
+        return this.request("DetectPet", req, cb);
     }
     /**
      * 本接口用于创建一个空的图片库，图片库主要用于存储在创建图片时提取的图片特征数据，如果图片库已存在则返回错误。不同的图片库类型对应不同的图像搜索服务类型，根据输入参数GroupType区分。
@@ -306,14 +302,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateImage(req, cb) {
         return this.request("UpdateImage", req, cb);
-    }
-    /**
-     * 传入一张图片，识别出图片中是否存在宠物
->
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-    async DetectPet(req, cb) {
-        return this.request("DetectPet", req, cb);
     }
 }
 exports.Client = Client;

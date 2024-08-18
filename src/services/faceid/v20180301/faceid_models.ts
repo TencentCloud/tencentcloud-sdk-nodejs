@@ -842,14 +842,22 @@ Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
 视频时长最大支持20s，建议时长2～5s。
 建议视频分辨率为480x640，帧率在25fps~30fps之间。
    */
-  FaceInput: string
+  FaceInput?: string
   /**
    * 传入的类型
 1- 传入的是图片类型
 2- 传入的是视频类型
 其他 - 返回错误码InvalidParameter
    */
-  FaceInputType: number
+  FaceInputType?: number
+  /**
+   * 是否需要对请求信息进行全包体加密； 支持的加密算法:AES-256-CBC、SM4-GCM； 有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
+  /**
+   * 加密后的密文； 加密前的数据格式如下:{"FaceInput":"AAAAA","FaceInputType":1}
+   */
+  EncryptedBody?: string
 }
 
 /**

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseAuditDownload", req, cb);
     }
     /**
+     * 获取当前集群各用户绑定的资源信息
+     */
+    async DescribeUserBindWorkloadGroup(req, cb) {
+        return this.request("DescribeUserBindWorkloadGroup", req, cb);
+    }
+    /**
      * 获取BE/FE节点角色
      */
     async DescribeInstanceNodesInfo(req, cb) {
@@ -100,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceUsedSubnets", req, cb);
     }
     /**
-     * 获取当前集群各用户绑定的资源信息
+     * 获取指定数据源和库下的表列表
      */
-    async DescribeUserBindWorkloadGroup(req, cb) {
-        return this.request("DescribeUserBindWorkloadGroup", req, cb);
+    async DescribeTableList(req, cb) {
+        return this.request("DescribeTableList", req, cb);
     }
     /**
      * 获取可备份表信息

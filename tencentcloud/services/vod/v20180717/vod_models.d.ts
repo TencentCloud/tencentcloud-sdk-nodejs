@@ -234,11 +234,27 @@ export interface DescribeRoundPlaysRequest {
      */
     SubAppId?: number;
     /**
-     * 轮播播单标识过滤条件，数组长度限制：100。
+     * 过滤条件：轮播播单标识，数组长度限制：100。
      */
     RoundPlayIds?: Array<string>;
     /**
-     * 分页偏移量，默认值：0。
+     * 过滤条件，轮播播单状态，可选值： <li>Enabled：启动状态；</li> <li>Disabled：停止状态。</li>
+     */
+    Status?: string;
+    /**
+     * 过滤条件：轮播播单创建时间。
+     */
+    CreateTime?: TimeRange;
+    /**
+     * 过滤条件：轮播播单更新时间。
+     */
+    UpdateTime?: TimeRange;
+    /**
+     * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
+     */
+    ScrollToken?: string;
+    /**
+     * 分页偏移量，默认值：0。已经废弃，请根据 ScrollToken 参数进行分批次查询。
      */
     Offset?: number;
     /**
@@ -5984,9 +6000,7 @@ export interface ModifyRoundPlayRequest {
      */
     Desc?: string;
     /**
-     * 播放状态，可选值：
-  <li>Disabled：结束播放，结束后轮播任务不能再次启动。</li>
-  
+     * 播放状态，可选值：<li>Disabled：停止播放。</li><li>Enabled：启播时长到达后启动播放。</li>
      */
     Status?: string;
     /**
@@ -7973,7 +7987,7 @@ export interface ManageTaskRequest {
     SubAppId?: number;
 }
 /**
- * 轮播媒体文件信息
+ * 轮播播放节目信息
  */
 export interface RoundPlayListItemInfo {
     /**
@@ -7987,6 +8001,10 @@ export interface RoundPlayListItemInfo {
   Type 对应的格式必须为 HLS 格式。
      */
     AudioVideoType: string;
+    /**
+     * 播放节目的 ID，由系统分配。
+     */
+    ItemId?: string;
     /**
      * 指定播放的转码模版，当 AudioVideoType 为 Transcode 时必须指定。
      */
@@ -17180,13 +17198,17 @@ export interface WeChatMiniProgramPublishResponse {
  */
 export interface DescribeRoundPlaysResponse {
     /**
-     * 符合过滤条件的轮播播单总数。
+     * 符合过滤条件的轮播播单总数。已经废弃，分批次查询请请使用 ScrollToken 参数。
      */
     TotalCount?: number;
     /**
      * 轮播播单详情列表。
      */
     RoundPlaySet?: Array<RoundPlayInfo>;
+    /**
+     * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。
+     */
+    ScrollToken?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

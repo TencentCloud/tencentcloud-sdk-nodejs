@@ -119,6 +119,7 @@ import {
   ModifySecurityGroupsResponse,
   InstanceInfo,
   DescribeUserBindWorkloadGroupRequest,
+  ScaleUpInstanceRequest,
   DescribeInstancesRequest,
   DescribeBackUpSchedulesRequest,
   DescribeClusterConfigsRequest,
@@ -140,6 +141,7 @@ import {
   ModifyMetricFileStructNew,
   DescribeBackUpJobDetailResponse,
   DescribeBackUpJobDetailRequest,
+  DescribeTableListRequest,
   DescribeWorkloadGroupResponse,
   ModifyMetricFileStruct,
   DescribeInstanceRequest,
@@ -161,7 +163,7 @@ import {
   BackUpJobDisplay,
   ModifyUserBindWorkloadGroupResponse,
   RecoverBackUpJobResponse,
-  ScaleUpInstanceRequest,
+  DescribeTableListResponse,
   DescribeReplicaVersionRequest,
   NodesSummary,
   DescribeDatabaseAuditDownloadRequest,
@@ -289,6 +291,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取当前集群各用户绑定的资源信息
+   */
+  async DescribeUserBindWorkloadGroup(
+    req: DescribeUserBindWorkloadGroupRequest,
+    cb?: (error: string, rep: DescribeUserBindWorkloadGroupResponse) => void
+  ): Promise<DescribeUserBindWorkloadGroupResponse> {
+    return this.request("DescribeUserBindWorkloadGroup", req, cb)
+  }
+
+  /**
    * 获取BE/FE节点角色
    */
   async DescribeInstanceNodesInfo(
@@ -309,13 +321,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取当前集群各用户绑定的资源信息
+   * 获取指定数据源和库下的表列表
    */
-  async DescribeUserBindWorkloadGroup(
-    req: DescribeUserBindWorkloadGroupRequest,
-    cb?: (error: string, rep: DescribeUserBindWorkloadGroupResponse) => void
-  ): Promise<DescribeUserBindWorkloadGroupResponse> {
-    return this.request("DescribeUserBindWorkloadGroup", req, cb)
+  async DescribeTableList(
+    req: DescribeTableListRequest,
+    cb?: (error: string, rep: DescribeTableListResponse) => void
+  ): Promise<DescribeTableListResponse> {
+    return this.request("DescribeTableList", req, cb)
   }
 
   /**

@@ -598,6 +598,16 @@ it("sqlserver.v20180328.DescribeInstanceParams", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDatabasePrivilege", async function () {
+    try {
+       const data = await client.ModifyDatabasePrivilege({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyCloseWanIp", async function () {
     try {
        const data = await client.ModifyCloseWanIp({})

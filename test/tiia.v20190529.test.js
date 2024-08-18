@@ -38,9 +38,9 @@ it("tiia.v20190529.DescribeImages", async function () {
     }
 })
 
-it("tiia.v20190529.DetectProductBeta", async function () {
+it("tiia.v20190529.DetectPet", async function () {
     try {
-       const data = await client.DetectProductBeta({})
+       const data = await client.DetectPet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,16 +231,6 @@ it("tiia.v20190529.SearchImage", async function () {
 it("tiia.v20190529.UpdateImage", async function () {
     try {
        const data = await client.UpdateImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiia.v20190529.DetectPet", async function () {
-    try {
-       const data = await client.DetectPet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

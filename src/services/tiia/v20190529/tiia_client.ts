@@ -18,13 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DetectProductBetaResponse,
+  RecognizeCarProRequest,
   DetectChefDressResponse,
   SearchImageResponse,
   DetectDisgustRequest,
   Pet,
   DetectPetRequest,
-  RecognizeCarProResponse,
   CreateImageRequest,
   BodyAttributes,
   DeleteImagesResponse,
@@ -32,7 +31,6 @@ import {
   DetectProductRequest,
   DetectLabelBetaRequest,
   DetectLabelResponse,
-  RegionDetected,
   DescribeGroupsRequest,
   DetectMisbehaviorResponse,
   AssessQualityResponse,
@@ -41,17 +39,15 @@ import {
   SearchImageRequest,
   AttributesForBody,
   DetectLabelRequest,
-  RecognizeCarResponse,
   DetectLabelProResponse,
   EnhanceImageResponse,
-  ProductInfo,
   AssessQualityRequest,
   DeleteImagesRequest,
   CreateGroupRequest,
   UpdateImageRequest,
   DescribeImagesRequest,
   Rect,
-  DetectProductBetaRequest,
+  RecognizeCarResponse,
   Box,
   DetectSecurityResponse,
   RecognizeCarRequest,
@@ -69,7 +65,7 @@ import {
   ImageRect,
   CreateImageResponse,
   DetectLabelItem,
-  Location,
+  UpdateImageResponse,
   CarPlateContent,
   DetectLabelProRequest,
   DetectLabelBetaResponse,
@@ -77,13 +73,11 @@ import {
   ImageTag,
   Attribute,
   ImageInfo,
-  RecognizeCarProRequest,
+  RecognizeCarProResponse,
   DescribeGroupsResponse,
   CarTagItem,
-  LemmaInfo,
   DescribeImagesResponse,
   DetectMisbehaviorRequest,
-  UpdateImageResponse,
   CreateGroupResponse,
 } from "./tiia_models"
 
@@ -124,19 +118,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 产品不再维护，准备下线。
-
-商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
-本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
-客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
->?   
+     * 传入一张图片，识别出图片中是否存在宠物
+>     
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-  async DetectProductBeta(
-    req: DetectProductBetaRequest,
-    cb?: (error: string, rep: DetectProductBetaResponse) => void
-  ): Promise<DetectProductBetaResponse> {
-    return this.request("DetectProductBeta", req, cb)
+  async DetectPet(
+    req: DetectPetRequest,
+    cb?: (error: string, rep: DetectPetResponse) => void
+  ): Promise<DetectPetResponse> {
+    return this.request("DetectPet", req, cb)
   }
 
   /**
@@ -462,17 +452,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateImageResponse) => void
   ): Promise<UpdateImageResponse> {
     return this.request("UpdateImage", req, cb)
-  }
-
-  /**
-     * 传入一张图片，识别出图片中是否存在宠物
->     
-- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-  async DetectPet(
-    req: DetectPetRequest,
-    cb?: (error: string, rep: DetectPetResponse) => void
-  ): Promise<DetectPetResponse> {
-    return this.request("DetectPet", req, cb)
   }
 }
