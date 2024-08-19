@@ -6682,6 +6682,10 @@ export interface InquiryPriceScaleOutInstanceRequest {
    * 计算资源id
    */
   ComputeResourceId?: string
+  /**
+   * 扩容资源类型
+   */
+  HardwareResourceType?: string
 }
 
 /**

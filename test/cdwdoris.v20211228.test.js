@@ -28,9 +28,9 @@ it("cdwdoris.v20211228.CreateBackUpSchedule", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeFrontEnd", async function () {
+it("cdwdoris.v20211228.OpenCoolDownPolicy", async function () {
     try {
-       const data = await client.DescribeFrontEnd({})
+       const data = await client.OpenCoolDownPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("cdwdoris.v20211228.DestroyInstance", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeDorisMetricFiles", async function () {
+it("cdwdoris.v20211228.DescribeCoolDownTableData", async function () {
     try {
-       const data = await client.DescribeDorisMetricFiles({})
+       const data = await client.DescribeCoolDownTableData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("cdwdoris.v20211228.DescribeBackUpTables", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeRegionZone", async function () {
+it("cdwdoris.v20211228.ScaleOutInstance", async function () {
     try {
-       const data = await client.DescribeRegionZone({})
+       const data = await client.ScaleOutInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("cdwdoris.v20211228.DescribeSlowQueryRecords", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ModifyWorkloadGroupStatus", async function () {
+it("cdwdoris.v20211228.RecoverBackUpJob", async function () {
     try {
-       const data = await client.ModifyWorkloadGroupStatus({})
+       const data = await client.RecoverBackUpJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +248,29 @@ it("cdwdoris.v20211228.DescribeInstances", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ModifyWorkloadGroup", async function () {
+it("cdwdoris.v20211228.ResizeDisk", async function () {
     try {
-       const data = await client.ModifyWorkloadGroup({})
+       const data = await client.ResizeDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.CreateCoolDownPolicy", async function () {
+    try {
+       const data = await client.CreateCoolDownPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.UpdateCoolDown", async function () {
+    try {
+       const data = await client.UpdateCoolDown({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,46 +308,6 @@ it("cdwdoris.v20211228.DeleteWorkloadGroup", async function () {
     }
 })
 
-it("cdwdoris.v20211228.OpenBackUp", async function () {
-    try {
-       const data = await client.OpenBackUp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwdoris.v20211228.DescribeDmsSqlHistory", async function () {
-    try {
-       const data = await client.DescribeDmsSqlHistory({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwdoris.v20211228.DescribeReplicaVersion", async function () {
-    try {
-       const data = await client.DescribeReplicaVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwdoris.v20211228.DescribeFederationToken", async function () {
-    try {
-       const data = await client.DescribeFederationToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
     try {
        const data = await client.ModifySecurityGroups({})
@@ -338,9 +318,19 @@ it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
     }
 })
 
-it("cdwdoris.v20211228.RecoverBackUpJob", async function () {
+it("cdwdoris.v20211228.DescribeCoolDownBackends", async function () {
     try {
-       const data = await client.RecoverBackUpJob({})
+       const data = await client.DescribeCoolDownBackends({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ScaleUpInstance", async function () {
+    try {
+       const data = await client.ScaleUpInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +368,19 @@ it("cdwdoris.v20211228.DescribeInstanceOperations", async function () {
     }
 })
 
-it("cdwdoris.v20211228.FitClsLog", async function () {
+it("cdwdoris.v20211228.ModifyWorkloadGroupStatus", async function () {
     try {
-       const data = await client.FitClsLog({})
+       const data = await client.ModifyWorkloadGroupStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.ModifyCoolDownPolicy", async function () {
+    try {
+       const data = await client.ModifyCoolDownPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,19 +428,9 @@ it("cdwdoris.v20211228.CreateInstanceNew", async function () {
     }
 })
 
-it("cdwdoris.v20211228.DescribeGoodsDetail", async function () {
+it("cdwdoris.v20211228.ModifyWorkloadGroup", async function () {
     try {
-       const data = await client.DescribeGoodsDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwdoris.v20211228.DescribeDatabaseAuditResource", async function () {
-    try {
-       const data = await client.DescribeDatabaseAuditResource({})
+       const data = await client.ModifyWorkloadGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,29 +448,19 @@ it("cdwdoris.v20211228.CancelBackupJob", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ScaleUpInstance", async function () {
-    try {
-       const data = await client.ScaleUpInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwdoris.v20211228.ScaleOutInstance", async function () {
-    try {
-       const data = await client.ScaleOutInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdwdoris.v20211228.DescribeBackUpJobDetail", async function () {
     try {
        const data = await client.DescribeBackUpJobDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.CheckCoolDownWorkingVariableConfigCorrect", async function () {
+    try {
+       const data = await client.CheckCoolDownWorkingVariableConfigCorrect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +508,9 @@ it("cdwdoris.v20211228.DescribeAreaRegion", async function () {
     }
 })
 
-it("cdwdoris.v20211228.ResizeDisk", async function () {
+it("cdwdoris.v20211228.OpenCoolDown", async function () {
     try {
-       const data = await client.ResizeDisk({})
+       const data = await client.OpenCoolDown({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +551,16 @@ it("cdwdoris.v20211228.DescribeSlowQueryRecordsDownload", async function () {
 it("cdwdoris.v20211228.DescribeInstanceNodes", async function () {
     try {
        const data = await client.DescribeInstanceNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwdoris.v20211228.DescribeCoolDownPolicies", async function () {
+    try {
+       const data = await client.DescribeCoolDownPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

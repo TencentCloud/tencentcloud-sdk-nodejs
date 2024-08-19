@@ -73,7 +73,6 @@ import {
   DescribeDailyMostPlayedStatRequest,
   UserDefineFaceReviewTemplateInfo,
   RefreshUrlCacheRequest,
-  DescribeAIAnalysisTemplatesRequest,
   ContentReviewTemplateItem,
   DeleteAIRecognitionTemplateResponse,
   DeleteContentReviewTemplateRequest,
@@ -81,6 +80,8 @@ import {
   AiReviewPoliticalTaskInput,
   VerifyDomainRecordResponse,
   AudioTransform,
+  TranscodeTask2017,
+  DescribeCurrentPlaylistResponse,
   ModifySuperPlayerConfigRequest,
   ResetProcedureTemplateRequest,
   ContentReviewOcrResult,
@@ -98,6 +99,7 @@ import {
   ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
   TextWatermarkTemplateInput,
+  UserDefineAsrTextReviewTemplateInfoForUpdate,
   QualityEvaluationConfigureInfoForUpdate,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
@@ -175,6 +177,7 @@ import {
   WatermarkTemplate,
   CoverBySnapshotTaskOutput,
   ModifyQualityInspectTemplateResponse,
+  DescribeProcedureTemplatesRequest,
   VideoConfigureInfoForUpdate,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   ForbidMediaDistributionRequest,
@@ -274,11 +277,12 @@ import {
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
-  DescribeProcedureTemplatesRequest,
+  DescribeAIAnalysisTemplatesRequest,
   CreateHeadTailTemplateRequest,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
+  FastEditMediaResponse,
   EmptyTrackItem,
   StickerTrackItem,
   DescribeDrmDataKeyResponse,
@@ -551,6 +555,7 @@ import {
   MediaSourceData,
   DescribePrepaidProductsResponse,
   ProhibitedAsrReviewTemplateInfo,
+  HandleCurrentPlaylistResponse,
   PushUrlCacheRequest,
   CreateAIAnalysisTemplateResponse,
   HeadTailConfigureInfo,
@@ -700,7 +705,8 @@ import {
   DescribeTranscodeTemplatesRequest,
   QualityEnhanceTaskOutput,
   ReviewTemplate,
-  UserDefineAsrTextReviewTemplateInfoForUpdate,
+  DescribeCurrentPlaylistRequest,
+  FastEditMediaRequest,
   MediaVideoStreamItem,
   CreateRebuildMediaTemplateRequest,
   ImageOperation,
@@ -781,6 +787,7 @@ import {
   ReviewImageRequest,
   RebuildVideoInfo,
   DescribeHeadTailTemplatesResponse,
+  HandleCurrentPlaylistRequest,
   TerrorismConfigureInfo,
   CreateCLSLogsetResponse,
   PoliticalAsrReviewTemplateInfo,
@@ -796,8 +803,9 @@ import {
   EnhanceMediaQualityResponse,
   SubtitleFormatsOperation,
   MediaTrack,
+  FastEditMediaFileInfo,
   StorageStatData,
-  TranscodeTask2017,
+  RoundPlayFilePlayInfo,
   DescribeFileAttributesRequest,
   QualityInspectResultItem,
   MediaOutputInfo,
@@ -1719,16 +1727,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口返回查询时间范围内每天使用的图片审核用量信息。
-   1. 可以查询最近365天内的图片审核统计数据。
-   2. 查询时间跨度不超过90天。
-   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+   * 操作轮播当前播放列表。支持的操作有：<li> Insert：向当前播列表插入播放节目。</li><li> Delete：删除播列表中的播放节目。</li>
+   */
+  async HandleCurrentPlaylist(
+    req: HandleCurrentPlaylistRequest,
+    cb?: (error: string, rep: HandleCurrentPlaylistResponse) => void
+  ): Promise<HandleCurrentPlaylistResponse> {
+    return this.request("HandleCurrentPlaylist", req, cb)
+  }
+
+  /**
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+创建播放器配置，数量上限：100。
      */
-  async DescribeImageReviewUsageData(
-    req: DescribeImageReviewUsageDataRequest,
-    cb?: (error: string, rep: DescribeImageReviewUsageDataResponse) => void
-  ): Promise<DescribeImageReviewUsageDataResponse> {
-    return this.request("DescribeImageReviewUsageData", req, cb)
+  async CreateSuperPlayerConfig(
+    req: CreateSuperPlayerConfigRequest,
+    cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void
+  ): Promise<CreateSuperPlayerConfigResponse> {
+    return this.request("CreateSuperPlayerConfig", req, cb)
   }
 
   /**
@@ -1785,14 +1801,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于修改轮播播单。
-修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
-     */
-  async ModifyRoundPlay(
-    req: ModifyRoundPlayRequest,
-    cb?: (error: string, rep: ModifyRoundPlayResponse) => void
-  ): Promise<ModifyRoundPlayResponse> {
-    return this.request("ModifyRoundPlay", req, cb)
+   * 查询轮播当前播放列表。
+   */
+  async DescribeCurrentPlaylist(
+    req: DescribeCurrentPlaylistRequest,
+    cb?: (error: string, rep: DescribeCurrentPlaylistResponse) => void
+  ): Promise<DescribeCurrentPlaylistResponse> {
+    return this.request("DescribeCurrentPlaylist", req, cb)
   }
 
   /**
@@ -1940,14 +1955,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
-创建播放器配置，数量上限：100。
+     * 该接口返回查询时间范围内每天使用的图片审核用量信息。
+   1. 可以查询最近365天内的图片审核统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
      */
-  async CreateSuperPlayerConfig(
-    req: CreateSuperPlayerConfigRequest,
-    cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void
-  ): Promise<CreateSuperPlayerConfigResponse> {
-    return this.request("CreateSuperPlayerConfig", req, cb)
+  async DescribeImageReviewUsageData(
+    req: DescribeImageReviewUsageDataRequest,
+    cb?: (error: string, rep: DescribeImageReviewUsageDataResponse) => void
+  ): Promise<DescribeImageReviewUsageDataResponse> {
+    return this.request("DescribeImageReviewUsageData", req, cb)
   }
 
   /**
@@ -2098,6 +2115,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWordSamplesResponse) => void
   ): Promise<DeleteWordSamplesResponse> {
     return this.request("DeleteWordSamples", req, cb)
+  }
+
+  /**
+   * 对 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+   */
+  async FastEditMedia(
+    req: FastEditMediaRequest,
+    cb?: (error: string, rep: FastEditMediaResponse) => void
+  ): Promise<FastEditMediaResponse> {
+    return this.request("FastEditMedia", req, cb)
   }
 
   /**
@@ -2260,6 +2287,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
   ): Promise<ModifySubAppIdInfoResponse> {
     return this.request("ModifySubAppIdInfo", req, cb)
+  }
+
+  /**
+     * 该接口用于修改轮播播单。
+修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
+     */
+  async ModifyRoundPlay(
+    req: ModifyRoundPlayRequest,
+    cb?: (error: string, rep: ModifyRoundPlayResponse) => void
+  ): Promise<ModifyRoundPlayResponse> {
+    return this.request("ModifyRoundPlay", req, cb)
   }
 
   /**

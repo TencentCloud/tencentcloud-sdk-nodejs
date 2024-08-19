@@ -3443,14 +3443,14 @@ export interface DescribeAutoCalloutTasksRequest {
  */
 export interface DescribeChatMessagesRequest {
     /**
+     * 应用 ID，可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
      * 实例 ID（废弃）
      * @deprecated
      */
     InstanceId?: number;
-    /**
-     * 应用 ID，可以查看 https://console.cloud.tencent.com/ccc
-     */
-    SdkAppId?: number;
     /**
      * 服务记录ID（废弃）
      * @deprecated

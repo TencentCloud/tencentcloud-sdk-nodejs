@@ -18,54 +18,48 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeDatabaseAuditResourceRequest,
-  DescribeDorisMetricFilesResponse,
   DescribeInstanceUsedSubnetsResponse,
-  DescribeFrontEndRequest,
   CreateInstanceNewResponse,
   DescribeClusterConfigsHistoryResponse,
   DescribeInstanceOperationsRequest,
   DescribeClusterConfigsResponse,
   ScaleOutInstanceResponse,
   ModifyUserPrivilegesV3Response,
-  DescribeFederationTokenRequest,
+  ModifyUserPrivilegesV3Request,
   ModifyWorkloadGroupStatusResponse,
   BindUser,
   CancelBackupJobRequest,
   ModifyWorkloadGroupRequest,
-  ResourceNodeSpec,
   UserWorkloadGroup,
   DescribeSlowQueryRecordsDownloadResponse,
   DeleteWorkloadGroupRequest,
   WorkloadGroupConfig,
-  FitClsLogRequest,
-  ResourceNodeDiskSpec,
-  DescribeDmsSqlHistoryRequest,
-  DescribeFederationTokenResponse,
+  DescribeInstancesResponse,
   CosSourceInfo,
   ReduceInstanceResponse,
+  ModifyCoolDownPolicyRequest,
   DescribeBackUpTaskDetailRequest,
-  VersionReplicaItem,
   RecoverBackUpJobRequest,
   DiskSpec,
   DescribeInstanceOperationsResponse,
   DescribeUserBindWorkloadGroupResponse,
   ScaleOutInstanceRequest,
   UpdateUserPrivileges,
-  DescribeMetricsFileReq,
   DescribeInstanceStateRequest,
-  OpenBackUpResponse,
   NetworkInfo,
   ZoneInfo,
-  DescribeRestoreTaskDetailResponse,
+  DescribeAreaRegionResponse,
   DeleteBackUpDataRequest,
+  UpdateCoolDownResponse,
   ConfigKeyValue,
   Tag,
   ResizeDiskResponse,
+  OpenCoolDownRequest,
+  DescribeCoolDownTableDataRequest,
+  CheckCoolDownWorkingVariableConfigCorrectResponse,
   ModifyInstanceResponse,
   DescribeSlowQueryRecordsDownloadRequest,
-  DescribeAreaRegionResponse,
-  DescribeDorisMetricFilesRequest,
+  DescribeRestoreTaskDetailResponse,
   ModifyNodeStatusRequest,
   RestartClusterForNodeResponse,
   CancelBackupJobResponse,
@@ -74,36 +68,36 @@ import {
   DescribeInstanceNodesRequest,
   ChargeProperties,
   DescribeWorkloadGroupRequest,
-  OpenBackUpRequest,
+  DescribeCoolDownBackendsRequest,
+  CheckCoolDownWorkingVariableConfigCorrectRequest,
   InstanceOperation,
   BackupTableContent,
   DescribeInstanceNodesResponse,
   DescribeSqlApisRequest,
   ModifySecurityGroupsRequest,
   CreateInstanceNewRequest,
-  DescribeDmsSqlHistoryResponse,
+  UpdateCoolDownRequest,
+  CoolDownPolicyInfo,
+  OpenCoolDownPolicyRequest,
   DorisSourceInfo,
+  OpenCoolDownResponse,
   AttachCBSSpec,
   DataBaseAuditRecord,
   DescribeSlowQueryRecordsResponse,
   ClusterConfigsHistory,
   InstanceConfigItem,
-  DescribeRegionZoneResponse,
   CreateBackUpScheduleRequest,
-  BackupCosInfo,
+  DescribeSpecRequest,
   DescribeClusterConfigsHistoryRequest,
-  DescribeInstanceStateResponse,
+  CreateWorkloadGroupRequest,
   DescribeInstanceNodesInfoRequest,
   DescribeInstancesHealthStateResponse,
   DescribeSlowQueryRecordsRequest,
   DescribeInstanceNodesRoleResponse,
   DestroyInstanceResponse,
-  DescribeBackUpJobRequest,
   ResizeDiskRequest,
   ModifyWorkloadGroupStatusRequest,
-  DescribeRegionZoneRequest,
-  DescribeDatabaseAuditResourceResponse,
-  ModifyUserBindWorkloadGroupRequest,
+  CreateCoolDownPolicyRequest,
   DescribeSqlApisResponse,
   ModifyInstanceRequest,
   DescribeSpecResponse,
@@ -112,71 +106,71 @@ import {
   DescribeBackUpTablesResponse,
   DescribeDatabaseAuditRecordsResponse,
   InstanceNode,
+  ModifyCoolDownPolicyResponse,
   DescribeInstancesHealthStateRequest,
   NodeInfo,
   FrontEndRule,
   RestartClusterForConfigsResponse,
-  ModifySecurityGroupsResponse,
   InstanceInfo,
   DescribeUserBindWorkloadGroupRequest,
   ScaleUpInstanceRequest,
   DescribeInstancesRequest,
   DescribeBackUpSchedulesRequest,
   DescribeClusterConfigsRequest,
+  CreateCoolDownPolicyResponse,
   ModifyWorkloadGroupResponse,
   DescribeRestoreTaskDetailRequest,
-  ModifyUserPrivilegesV3Request,
   CreateBackUpScheduleResponse,
   ModifyNodeStatusResponse,
   DescribeInstanceResponse,
   DescribeBackUpJobResponse,
-  FitClsLogResponse,
   RestartClusterForNodeRequest,
   BackupStatus,
   SearchTags,
-  DescribeInstancesResponse,
   DescribeInstanceUsedSubnetsRequest,
-  SpecExtra,
   DescribeDatabaseAuditRecordsRequest,
-  ModifyMetricFileStructNew,
   DescribeBackUpJobDetailResponse,
   DescribeBackUpJobDetailRequest,
+  DescribeCoolDownBackendsResponse,
+  DescribeCoolDownPoliciesResponse,
   DescribeTableListRequest,
   DescribeWorkloadGroupResponse,
-  ModifyMetricFileStruct,
-  DescribeInstanceRequest,
+  CoolDownTableDataInfo,
+  ModifySecurityGroupsResponse,
+  BackupCosInfo,
+  CoolDownBackend,
   DescribeBackUpTaskDetailResponse,
+  OpenCoolDownPolicyResponse,
   ReduceInstanceRequest,
   DeleteWorkloadGroupResponse,
   ResourceSpec,
-  ClusterConfigsInfoFromEMR,
+  DescribeCoolDownTableDataResponse,
   RestartClusterForConfigsRequest,
   RegionAreaInfo,
   DestroyInstanceRequest,
   RegionInfo,
   CreateWorkloadGroupResponse,
-  CreateWorkloadGroupRequest,
-  DescribeGoodsDetailResponse,
+  DescribeInstanceStateResponse,
+  DescribeCoolDownPoliciesRequest,
   RestoreStatus,
   DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
   BackUpJobDisplay,
   ModifyUserBindWorkloadGroupResponse,
+  ClusterConfigsInfoFromEMR,
   RecoverBackUpJobResponse,
   DescribeTableListResponse,
-  DescribeReplicaVersionRequest,
+  ModifyUserBindWorkloadGroupRequest,
   NodesSummary,
   DescribeDatabaseAuditDownloadRequest,
   CreateInstanceSpec,
-  DescribeFrontEndResponse,
-  DescribeGoodsDetailRequest,
+  DescribeInstanceRequest,
+  DescribeBackUpJobRequest,
   InstanceDetail,
-  DescribeSpecRequest,
   DescribeBackUpTablesRequest,
   DescribeInstanceNodesRoleRequest,
   DescribeDatabaseAuditDownloadResponse,
   NodeInfos,
-  DescribeReplicaVersionResponse,
   DescribeInstanceNodesInfoResponse,
   ScaleUpInstanceResponse,
 } from "./cdwdoris_models"
@@ -201,13 +195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询前端内容
+   * 开通、描述降冷策略接口
    */
-  async DescribeFrontEnd(
-    req: DescribeFrontEndRequest,
-    cb?: (error: string, rep: DescribeFrontEndResponse) => void
-  ): Promise<DescribeFrontEndResponse> {
-    return this.request("DescribeFrontEnd", req, cb)
+  async OpenCoolDownPolicy(
+    req: OpenCoolDownPolicyRequest,
+    cb?: (error: string, rep: OpenCoolDownPolicyResponse) => void
+  ): Promise<OpenCoolDownPolicyResponse> {
+    return this.request("OpenCoolDownPolicy", req, cb)
   }
 
   /**
@@ -241,13 +235,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 展示监控指标文件
+   * 查询冷热分层Table数据
    */
-  async DescribeDorisMetricFiles(
-    req: DescribeDorisMetricFilesRequest,
-    cb?: (error: string, rep: DescribeDorisMetricFilesResponse) => void
-  ): Promise<DescribeDorisMetricFilesResponse> {
-    return this.request("DescribeDorisMetricFiles", req, cb)
+  async DescribeCoolDownTableData(
+    req: DescribeCoolDownTableDataRequest,
+    cb?: (error: string, rep: DescribeCoolDownTableDataResponse) => void
+  ): Promise<DescribeCoolDownTableDataResponse> {
+    return this.request("DescribeCoolDownTableData", req, cb)
   }
 
   /**
@@ -341,13 +335,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买页获取地域及可用区列表、内核版本、网络规则等
+   * 水平扩容节点
    */
-  async DescribeRegionZone(
-    req: DescribeRegionZoneRequest,
-    cb?: (error: string, rep: DescribeRegionZoneResponse) => void
-  ): Promise<DescribeRegionZoneResponse> {
-    return this.request("DescribeRegionZone", req, cb)
+  async ScaleOutInstance(
+    req: ScaleOutInstanceRequest,
+    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
+  ): Promise<ScaleOutInstanceResponse> {
+    return this.request("ScaleOutInstance", req, cb)
   }
 
   /**
@@ -381,13 +375,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或关闭资源组
+   * 备份恢复
    */
-  async ModifyWorkloadGroupStatus(
-    req: ModifyWorkloadGroupStatusRequest,
-    cb?: (error: string, rep: ModifyWorkloadGroupStatusResponse) => void
-  ): Promise<ModifyWorkloadGroupStatusResponse> {
-    return this.request("ModifyWorkloadGroupStatus", req, cb)
+  async RecoverBackUpJob(
+    req: RecoverBackUpJobRequest,
+    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
+  ): Promise<RecoverBackUpJobResponse> {
+    return this.request("RecoverBackUpJob", req, cb)
   }
 
   /**
@@ -421,13 +415,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改资源组信息
+   * 扩容云盘
    */
-  async ModifyWorkloadGroup(
-    req: ModifyWorkloadGroupRequest,
-    cb?: (error: string, rep: ModifyWorkloadGroupResponse) => void
-  ): Promise<ModifyWorkloadGroupResponse> {
-    return this.request("ModifyWorkloadGroup", req, cb)
+  async ResizeDisk(
+    req: ResizeDiskRequest,
+    cb?: (error: string, rep: ResizeDiskResponse) => void
+  ): Promise<ResizeDiskResponse> {
+    return this.request("ResizeDisk", req, cb)
+  }
+
+  /**
+   * 创建冷热分层策略
+   */
+  async CreateCoolDownPolicy(
+    req: CreateCoolDownPolicyRequest,
+    cb?: (error: string, rep: CreateCoolDownPolicyResponse) => void
+  ): Promise<CreateCoolDownPolicyResponse> {
+    return this.request("CreateCoolDownPolicy", req, cb)
+  }
+
+  /**
+   * 更新集群冷热分层信息
+   */
+  async UpdateCoolDown(
+    req: UpdateCoolDownRequest,
+    cb?: (error: string, rep: UpdateCoolDownResponse) => void
+  ): Promise<UpdateCoolDownResponse> {
+    return this.request("UpdateCoolDown", req, cb)
   }
 
   /**
@@ -461,46 +475,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或者关闭策略
-   */
-  async OpenBackUp(
-    req: OpenBackUpRequest,
-    cb?: (error: string, rep: OpenBackUpResponse) => void
-  ): Promise<OpenBackUpResponse> {
-    return this.request("OpenBackUp", req, cb)
-  }
-
-  /**
-   * 查询sql工作区历史运行记录
-   */
-  async DescribeDmsSqlHistory(
-    req: DescribeDmsSqlHistoryRequest,
-    cb?: (error: string, rep: DescribeDmsSqlHistoryResponse) => void
-  ): Promise<DescribeDmsSqlHistoryResponse> {
-    return this.request("DescribeDmsSqlHistory", req, cb)
-  }
-
-  /**
-   * 检查内核版本是否支持新的备份恢复语法
-   */
-  async DescribeReplicaVersion(
-    req: DescribeReplicaVersionRequest,
-    cb?: (error: string, rep: DescribeReplicaVersionResponse) => void
-  ): Promise<DescribeReplicaVersionResponse> {
-    return this.request("DescribeReplicaVersion", req, cb)
-  }
-
-  /**
-   * 获取联合身份临时访问凭证
-   */
-  async DescribeFederationToken(
-    req?: DescribeFederationTokenRequest,
-    cb?: (error: string, rep: DescribeFederationTokenResponse) => void
-  ): Promise<DescribeFederationTokenResponse> {
-    return this.request("DescribeFederationToken", req, cb)
-  }
-
-  /**
    * 更改安全组
    */
   async ModifySecurityGroups(
@@ -511,13 +485,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 备份恢复
+   * 查询冷热分层backend节点信息列表
    */
-  async RecoverBackUpJob(
-    req: RecoverBackUpJobRequest,
-    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
-  ): Promise<RecoverBackUpJobResponse> {
-    return this.request("RecoverBackUpJob", req, cb)
+  async DescribeCoolDownBackends(
+    req: DescribeCoolDownBackendsRequest,
+    cb?: (error: string, rep: DescribeCoolDownBackendsResponse) => void
+  ): Promise<DescribeCoolDownBackendsResponse> {
+    return this.request("DescribeCoolDownBackends", req, cb)
+  }
+
+  /**
+   * 计算资源垂直变配
+   */
+  async ScaleUpInstance(
+    req: ScaleUpInstanceRequest,
+    cb?: (error: string, rep: ScaleUpInstanceResponse) => void
+  ): Promise<ScaleUpInstanceResponse> {
+    return this.request("ScaleUpInstance", req, cb)
   }
 
   /**
@@ -551,13 +535,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 给已存在集群，配置日志服务
+   * 开启或关闭资源组
    */
-  async FitClsLog(
-    req: FitClsLogRequest,
-    cb?: (error: string, rep: FitClsLogResponse) => void
-  ): Promise<FitClsLogResponse> {
-    return this.request("FitClsLog", req, cb)
+  async ModifyWorkloadGroupStatus(
+    req: ModifyWorkloadGroupStatusRequest,
+    cb?: (error: string, rep: ModifyWorkloadGroupStatusResponse) => void
+  ): Promise<ModifyWorkloadGroupStatusResponse> {
+    return this.request("ModifyWorkloadGroupStatus", req, cb)
+  }
+
+  /**
+   * 修改冷热分层策略
+   */
+  async ModifyCoolDownPolicy(
+    req: ModifyCoolDownPolicyRequest,
+    cb?: (error: string, rep: ModifyCoolDownPolicyResponse) => void
+  ): Promise<ModifyCoolDownPolicyResponse> {
+    return this.request("ModifyCoolDownPolicy", req, cb)
   }
 
   /**
@@ -601,23 +595,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成计费相关接口的GoodsDetail结构
+   * 修改资源组信息
    */
-  async DescribeGoodsDetail(
-    req: DescribeGoodsDetailRequest,
-    cb?: (error: string, rep: DescribeGoodsDetailResponse) => void
-  ): Promise<DescribeGoodsDetailResponse> {
-    return this.request("DescribeGoodsDetail", req, cb)
-  }
-
-  /**
-   * 数据库审计数据库、用户等
-   */
-  async DescribeDatabaseAuditResource(
-    req: DescribeDatabaseAuditResourceRequest,
-    cb?: (error: string, rep: DescribeDatabaseAuditResourceResponse) => void
-  ): Promise<DescribeDatabaseAuditResourceResponse> {
-    return this.request("DescribeDatabaseAuditResource", req, cb)
+  async ModifyWorkloadGroup(
+    req: ModifyWorkloadGroupRequest,
+    cb?: (error: string, rep: ModifyWorkloadGroupResponse) => void
+  ): Promise<ModifyWorkloadGroupResponse> {
+    return this.request("ModifyWorkloadGroup", req, cb)
   }
 
   /**
@@ -631,26 +615,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 计算资源垂直变配
-   */
-  async ScaleUpInstance(
-    req: ScaleUpInstanceRequest,
-    cb?: (error: string, rep: ScaleUpInstanceResponse) => void
-  ): Promise<ScaleUpInstanceResponse> {
-    return this.request("ScaleUpInstance", req, cb)
-  }
-
-  /**
-   * 水平扩容节点
-   */
-  async ScaleOutInstance(
-    req: ScaleOutInstanceRequest,
-    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
-  ): Promise<ScaleOutInstanceResponse> {
-    return this.request("ScaleOutInstance", req, cb)
-  }
-
-  /**
    * 查询备份任务详情
    */
   async DescribeBackUpJobDetail(
@@ -658,6 +622,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackUpJobDetailResponse) => void
   ): Promise<DescribeBackUpJobDetailResponse> {
     return this.request("DescribeBackUpJobDetail", req, cb)
+  }
+
+  /**
+   * 查询冷热分层生效变量和配置是否正确
+   */
+  async CheckCoolDownWorkingVariableConfigCorrect(
+    req: CheckCoolDownWorkingVariableConfigCorrectRequest,
+    cb?: (error: string, rep: CheckCoolDownWorkingVariableConfigCorrectResponse) => void
+  ): Promise<CheckCoolDownWorkingVariableConfigCorrectResponse> {
+    return this.request("CheckCoolDownWorkingVariableConfigCorrect", req, cb)
   }
 
   /**
@@ -701,13 +675,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 扩容云盘
+   * 开始启用冷热分层
    */
-  async ResizeDisk(
-    req: ResizeDiskRequest,
-    cb?: (error: string, rep: ResizeDiskResponse) => void
-  ): Promise<ResizeDiskResponse> {
-    return this.request("ResizeDisk", req, cb)
+  async OpenCoolDown(
+    req: OpenCoolDownRequest,
+    cb?: (error: string, rep: OpenCoolDownResponse) => void
+  ): Promise<OpenCoolDownResponse> {
+    return this.request("OpenCoolDown", req, cb)
   }
 
   /**
@@ -748,6 +722,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
   ): Promise<DescribeInstanceNodesResponse> {
     return this.request("DescribeInstanceNodes", req, cb)
+  }
+
+  /**
+   * 查询冷热分层策略列表
+   */
+  async DescribeCoolDownPolicies(
+    req: DescribeCoolDownPoliciesRequest,
+    cb?: (error: string, rep: DescribeCoolDownPoliciesResponse) => void
+  ): Promise<DescribeCoolDownPoliciesResponse> {
+    return this.request("DescribeCoolDownPolicies", req, cb)
   }
 
   /**

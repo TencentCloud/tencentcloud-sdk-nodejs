@@ -464,7 +464,7 @@ export interface SslVpnClient {
  */
 export interface SourceIpTranslationNatRule {
     /**
-     * 资源ID，如果ResourceType为USERDEFINED，可以为空
+     * 资源ID，如果ResourceType为USERDEFINED，可以为空字符串
      */
     ResourceId: string;
     /**

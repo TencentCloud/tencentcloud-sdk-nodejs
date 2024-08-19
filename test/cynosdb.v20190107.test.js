@@ -48,6 +48,16 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyBinlogConfig", async function () {
+    try {
+       const data = await client.ModifyBinlogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateProxyEndPoint", async function () {
     try {
        const data = await client.CreateProxyEndPoint({})
@@ -928,6 +938,16 @@ it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeBinlogConfig", async function () {
+    try {
+       const data = await client.DescribeBinlogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeResourcePackageSaleSpec", async function () {
     try {
        const data = await client.DescribeResourcePackageSaleSpec({})
@@ -958,9 +978,9 @@ it("cynosdb.v20190107.DescribeAuditRuleWithInstanceIds", async function () {
     }
 })
 
-it("cynosdb.v20190107.IsolateInstance", async function () {
+it("cynosdb.v20190107.ExportInstanceErrorLogs", async function () {
     try {
-       const data = await client.IsolateInstance({})
+       const data = await client.ExportInstanceErrorLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1448,9 +1468,9 @@ it("cynosdb.v20190107.DescribeParamTemplateDetail", async function () {
     }
 })
 
-it("cynosdb.v20190107.ExportInstanceErrorLogs", async function () {
+it("cynosdb.v20190107.IsolateInstance", async function () {
     try {
-       const data = await client.ExportInstanceErrorLogs({})
+       const data = await client.IsolateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

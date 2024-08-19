@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupConfig", req, cb);
     }
     /**
+     * 该接口（ModifyBinlogConfig）用于修改Binlog配置
+     */
+    async ModifyBinlogConfig(req, cb) {
+        return this.request("ModifyBinlogConfig", req, cb);
+    }
+    /**
      * 创建数据库代理连接点
      */
     async CreateProxyEndPoint(req, cb) {
@@ -574,6 +580,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
+     * 该接口（DescribeBinlogConfig）用于查询binlog配置
+     */
+    async DescribeBinlogConfig(req, cb) {
+        return this.request("DescribeBinlogConfig", req, cb);
+    }
+    /**
      * 查询资源包规格
      */
     async DescribeResourcePackageSaleSpec(req, cb) {
@@ -592,10 +604,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditRuleWithInstanceIds", req, cb);
     }
     /**
-     * 本接口(IsolateInstance)用于隔离实例。
+     * 此接口（ExportInstanceErrorLogs）用于导出实例错误日志。
      */
-    async IsolateInstance(req, cb) {
-        return this.request("IsolateInstance", req, cb);
+    async ExportInstanceErrorLogs(req, cb) {
+        return this.request("ExportInstanceErrorLogs", req, cb);
     }
     /**
      * 开启多可用区部署
@@ -888,10 +900,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplateDetail", req, cb);
     }
     /**
-     * 此接口（ExportInstanceErrorLogs）用于导出实例错误日志。
+     * 本接口(IsolateInstance)用于隔离实例。
      */
-    async ExportInstanceErrorLogs(req, cb) {
-        return this.request("ExportInstanceErrorLogs", req, cb);
+    async IsolateInstance(req, cb) {
+        return this.request("IsolateInstance", req, cb);
     }
 }
 exports.Client = Client;

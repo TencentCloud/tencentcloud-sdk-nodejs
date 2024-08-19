@@ -698,6 +698,21 @@ export interface CreateParamTemplateRequest {
 }
 
 /**
+ * SearchClusterTables返回参数结构体
+ */
+export interface SearchClusterTablesResponse {
+  /**
+   * 数据表列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<DatabaseTables>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1848,18 +1863,25 @@ export interface DescribeZonesResponse {
 }
 
 /**
- * SearchClusterTables返回参数结构体
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface SearchClusterTablesResponse {
+export interface GrantAccountPrivilegesRequest {
   /**
-   * 数据表列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群id
    */
-  Tables?: Array<DatabaseTables>
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 账号信息
    */
-  RequestId?: string
+  Account: InputAccount
+  /**
+   * 数据库表权限码数组
+   */
+  DbTablePrivileges: Array<string>
+  /**
+   * 数据库表信息
+   */
+  DbTables: Array<DbTable>
 }
 
 /**
@@ -3606,6 +3628,20 @@ export interface CreateResourcePackageResponse {
 }
 
 /**
+ * ModifyBinlogConfig请求参数结构体
+ */
+export interface ModifyBinlogConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * Binlog配置信息
+   */
+  BinlogConfig: BinlogConfigInfo
+}
+
+/**
  * SetRenewFlag返回参数结构体
  */
 export interface SetRenewFlagResponse {
@@ -5075,45 +5111,43 @@ export interface BizTaskModifyParamsData {
 }
 
 /**
- * 实例初始化配置信息
+ * RollBackCluster请求参数结构体
  */
-export interface InstanceInitInfo {
+export interface RollBackClusterRequest {
   /**
-   * 实例cpu
+   * 集群ID
    */
-  Cpu: number
+  ClusterId: string
   /**
-   * 实例内存
+   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
    */
-  Memory: number
+  RollbackStrategy: string
   /**
-   * 实例类型 rw/ro
+   * 备份文件ID。
+回档策略为按备份文件回档时必填。
    */
-  InstanceType: string
+  RollbackId: number
   /**
-   * 实例个数,范围[1,15]
+   * 期望回档时间。
+回档策略为timeRollback按时间点回档时必填。
    */
-  InstanceCount: number
+  ExpectTime?: string
   /**
-   * Serverless实例个数最小值，范围[1,15]
+   * 期望阈值（已废弃）
    */
-  MinRoCount?: number
+  ExpectTimeThresh?: number
   /**
-   * Serverless实例个数最大值，范围[1,15]
+   * 回档数据库列表
    */
-  MaxRoCount?: number
+  RollbackDatabases?: Array<RollbackDatabase>
   /**
-   * Serverless实例最小规格
+   * 回档数据库表列表
    */
-  MinRoCpu?: number
+  RollbackTables?: Array<RollbackTable>
   /**
-   * Serverless实例最大规格
+   * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
    */
-  MaxRoCpu?: number
-  /**
-   * 实例机器类型
-   */
-  DeviceType?: string
+  RollbackMode?: string
 }
 
 /**
@@ -6262,43 +6296,45 @@ export interface Ability {
 }
 
 /**
- * RollBackCluster请求参数结构体
+ * 实例初始化配置信息
  */
-export interface RollBackClusterRequest {
+export interface InstanceInitInfo {
   /**
-   * 集群ID
+   * 实例cpu
    */
-  ClusterId: string
+  Cpu: number
   /**
-   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
+   * 实例内存
    */
-  RollbackStrategy: string
+  Memory: number
   /**
-   * 备份文件ID。
-回档策略为按备份文件回档时必填。
+   * 实例类型 rw/ro
    */
-  RollbackId: number
+  InstanceType: string
   /**
-   * 期望回档时间。
-回档策略为timeRollback按时间点回档时必填。
+   * 实例个数,范围[1,15]
    */
-  ExpectTime?: string
+  InstanceCount: number
   /**
-   * 期望阈值（已废弃）
+   * Serverless实例个数最小值，范围[1,15]
    */
-  ExpectTimeThresh?: number
+  MinRoCount?: number
   /**
-   * 回档数据库列表
+   * Serverless实例个数最大值，范围[1,15]
    */
-  RollbackDatabases?: Array<RollbackDatabase>
+  MaxRoCount?: number
   /**
-   * 回档数据库表列表
+   * Serverless实例最小规格
    */
-  RollbackTables?: Array<RollbackTable>
+  MinRoCpu?: number
   /**
-   * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
+   * Serverless实例最大规格
    */
-  RollbackMode?: string
+  MaxRoCpu?: number
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -7023,6 +7059,16 @@ export interface TradePrice {
    * 计费价格单位
    */
   ChargeUnit: string
+}
+
+/**
+ * DescribeBinlogConfig请求参数结构体
+ */
+export interface DescribeBinlogConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -7931,6 +7977,27 @@ export interface PackageDetail {
 }
 
 /**
+ * binlog配置信息
+ */
+export interface BinlogConfigInfo {
+  /**
+   * binlog保留时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BinlogSaveDays: number
+  /**
+   * binlog异地地域备份是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BinlogCrossRegionsEnable: string
+  /**
+   * binlog异地地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BinlogCrossRegions?: Array<string>
+}
+
+/**
  * DescribeAccountPrivileges请求参数结构体
  */
 export interface DescribeAccountPrivilegesRequest {
@@ -8500,6 +8567,99 @@ export interface PackagePriority {
    * 自定义的抵扣优先级
    */
   DeductionPriority?: number
+}
+
+/**
+ * 实例组信息
+ */
+export interface CynosdbInstanceGroup {
+  /**
+   * 用户appId
+   */
+  AppId?: number
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 删除时间
+   */
+  DeletedTime?: string
+  /**
+   * 实例组ID
+   */
+  InstanceGroupId?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 实例组类型。ha-ha组；ro-只读组
+   */
+  Type?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 内网IP
+   */
+  Vip?: string
+  /**
+   * 内网端口
+   */
+  Vport?: number
+  /**
+   * 外网域名
+   */
+  WanDomain?: string
+  /**
+   * 外网ip
+   */
+  WanIP?: string
+  /**
+   * 外网端口
+   */
+  WanPort?: number
+  /**
+   * 外网状态
+   */
+  WanStatus?: string
+  /**
+   * 实例组包含实例信息
+   */
+  InstanceSet?: Array<CynosdbInstance>
+  /**
+   * VPC的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqSubnetId?: string
+  /**
+   * 正在回收IP信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldAddrInfo?: OldAddrInfo
+  /**
+   * 正在进行的任务
+   */
+  ProcessingTasks?: Array<string>
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * biz_net_service表id
+   */
+  NetServiceId?: number
 }
 
 /**
@@ -9123,25 +9283,17 @@ export interface ParamItemDetail {
 }
 
 /**
- * GrantAccountPrivileges请求参数结构体
+ * DescribeBinlogSaveDays返回参数结构体
  */
-export interface GrantAccountPrivilegesRequest {
+export interface DescribeBinlogSaveDaysResponse {
   /**
-   * 集群id
+   * Binlog保留天数
    */
-  ClusterId: string
+  BinlogSaveDays: number
   /**
-   * 账号信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Account: InputAccount
-  /**
-   * 数据库表权限码数组
-   */
-  DbTablePrivileges: Array<string>
-  /**
-   * 数据库表信息
-   */
-  DbTables: Array<DbTable>
+  RequestId?: string
 }
 
 /**
@@ -9651,20 +9803,6 @@ DISK：存储资源包
 }
 
 /**
- * DescribeBinlogSaveDays返回参数结构体
- */
-export interface DescribeBinlogSaveDaysResponse {
-  /**
-   * Binlog保留天数
-   */
-  BinlogSaveDays: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 计费资源信息
  */
 export interface BillingResourceInfo {
@@ -9973,6 +10111,26 @@ export interface IsolateInstanceRequest {
 }
 
 /**
+ * DescribeBinlogConfig返回参数结构体
+ */
+export interface DescribeBinlogConfigResponse {
+  /**
+   * Binlog跨地域配置更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BinlogCrossRegionsConfigUpdateTime?: string
+  /**
+   * Binlog配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BinlogConfig?: BinlogConfigInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAuditLogFiles请求参数结构体
  */
 export interface DescribeAuditLogFilesRequest {
@@ -10087,96 +10245,13 @@ export interface ClusterParamModifyLog {
 }
 
 /**
- * 实例组信息
+ * ModifyBinlogConfig返回参数结构体
  */
-export interface CynosdbInstanceGroup {
+export interface ModifyBinlogConfigResponse {
   /**
-   * 用户appId
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: number
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 删除时间
-   */
-  DeletedTime?: string
-  /**
-   * 实例组ID
-   */
-  InstanceGroupId?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 实例组类型。ha-ha组；ro-只读组
-   */
-  Type?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
-  /**
-   * 内网IP
-   */
-  Vip?: string
-  /**
-   * 内网端口
-   */
-  Vport?: number
-  /**
-   * 外网域名
-   */
-  WanDomain?: string
-  /**
-   * 外网ip
-   */
-  WanIP?: string
-  /**
-   * 外网端口
-   */
-  WanPort?: number
-  /**
-   * 外网状态
-   */
-  WanStatus?: string
-  /**
-   * 实例组包含实例信息
-   */
-  InstanceSet?: Array<CynosdbInstance>
-  /**
-   * VPC的ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UniqVpcId?: string
-  /**
-   * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UniqSubnetId?: string
-  /**
-   * 正在回收IP信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OldAddrInfo?: OldAddrInfo
-  /**
-   * 正在进行的任务
-   */
-  ProcessingTasks?: Array<string>
-  /**
-   * 任务列表
-   */
-  Tasks?: Array<ObjectTask>
-  /**
-   * biz_net_service表id
-   */
-  NetServiceId?: number
+  RequestId?: string
 }
 
 /**

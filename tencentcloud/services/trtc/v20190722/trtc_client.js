@@ -174,6 +174,12 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StartStreamIngest", req, cb);
     }
     /**
+     * 更新输入在线媒体流任务的StreamUrl
+     */
+    async UpdateStreamIngest(req, cb) {
+        return this.request("UpdateStreamIngest", req, cb);
+    }
+    /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
      */
     async DeletePicture(req, cb) {

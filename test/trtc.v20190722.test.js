@@ -158,6 +158,16 @@ it("trtc.v20190722.StartStreamIngest", async function () {
     }
 })
 
+it("trtc.v20190722.UpdateStreamIngest", async function () {
+    try {
+       const data = await client.UpdateStreamIngest({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DeletePicture", async function () {
     try {
        const data = await client.DeletePicture({})

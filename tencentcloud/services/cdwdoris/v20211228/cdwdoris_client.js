@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackUpSchedule", req, cb);
     }
     /**
-     * 查询前端内容
+     * 开通、描述降冷策略接口
      */
-    async DescribeFrontEnd(req, cb) {
-        return this.request("DescribeFrontEnd", req, cb);
+    async OpenCoolDownPolicy(req, cb) {
+        return this.request("OpenCoolDownPolicy", req, cb);
     }
     /**
      * 获取备份、迁移的调度任务信息
@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyInstance", req, cb);
     }
     /**
-     * 展示监控指标文件
+     * 查询冷热分层Table数据
      */
-    async DescribeDorisMetricFiles(req, cb) {
-        return this.request("DescribeDorisMetricFiles", req, cb);
+    async DescribeCoolDownTableData(req, cb) {
+        return this.request("DescribeCoolDownTableData", req, cb);
     }
     /**
      * 获取数据库审计记录
@@ -118,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackUpTables", req, cb);
     }
     /**
-     * 购买页获取地域及可用区列表、内核版本、网络规则等
+     * 水平扩容节点
      */
-    async DescribeRegionZone(req, cb) {
-        return this.request("DescribeRegionZone", req, cb);
+    async ScaleOutInstance(req, cb) {
+        return this.request("ScaleOutInstance", req, cb);
     }
     /**
      * 修改节点状态
@@ -142,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowQueryRecords", req, cb);
     }
     /**
-     * 开启或关闭资源组
+     * 备份恢复
      */
-    async ModifyWorkloadGroupStatus(req, cb) {
-        return this.request("ModifyWorkloadGroupStatus", req, cb);
+    async RecoverBackUpJob(req, cb) {
+        return this.request("RecoverBackUpJob", req, cb);
     }
     /**
      * 修改用户绑定的资源组
@@ -166,10 +166,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 修改资源组信息
+     * 扩容云盘
      */
-    async ModifyWorkloadGroup(req, cb) {
-        return this.request("ModifyWorkloadGroup", req, cb);
+    async ResizeDisk(req, cb) {
+        return this.request("ResizeDisk", req, cb);
+    }
+    /**
+     * 创建冷热分层策略
+     */
+    async CreateCoolDownPolicy(req, cb) {
+        return this.request("CreateCoolDownPolicy", req, cb);
+    }
+    /**
+     * 更新集群冷热分层信息
+     */
+    async UpdateCoolDown(req, cb) {
+        return this.request("UpdateCoolDown", req, cb);
     }
     /**
      * 集群详情页中显示集群状态、流程进度等
@@ -190,40 +202,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWorkloadGroup", req, cb);
     }
     /**
-     * 开启或者关闭策略
-     */
-    async OpenBackUp(req, cb) {
-        return this.request("OpenBackUp", req, cb);
-    }
-    /**
-     * 查询sql工作区历史运行记录
-     */
-    async DescribeDmsSqlHistory(req, cb) {
-        return this.request("DescribeDmsSqlHistory", req, cb);
-    }
-    /**
-     * 检查内核版本是否支持新的备份恢复语法
-     */
-    async DescribeReplicaVersion(req, cb) {
-        return this.request("DescribeReplicaVersion", req, cb);
-    }
-    /**
-     * 获取联合身份临时访问凭证
-     */
-    async DescribeFederationToken(req, cb) {
-        return this.request("DescribeFederationToken", req, cb);
-    }
-    /**
      * 更改安全组
      */
     async ModifySecurityGroups(req, cb) {
         return this.request("ModifySecurityGroups", req, cb);
     }
     /**
-     * 备份恢复
+     * 查询冷热分层backend节点信息列表
      */
-    async RecoverBackUpJob(req, cb) {
-        return this.request("RecoverBackUpJob", req, cb);
+    async DescribeCoolDownBackends(req, cb) {
+        return this.request("DescribeCoolDownBackends", req, cb);
+    }
+    /**
+     * 计算资源垂直变配
+     */
+    async ScaleUpInstance(req, cb) {
+        return this.request("ScaleUpInstance", req, cb);
     }
     /**
      * 集群缩容
@@ -244,10 +238,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceOperations", req, cb);
     }
     /**
-     * 给已存在集群，配置日志服务
+     * 开启或关闭资源组
      */
-    async FitClsLog(req, cb) {
-        return this.request("FitClsLog", req, cb);
+    async ModifyWorkloadGroupStatus(req, cb) {
+        return this.request("ModifyWorkloadGroupStatus", req, cb);
+    }
+    /**
+     * 修改冷热分层策略
+     */
+    async ModifyCoolDownPolicy(req, cb) {
+        return this.request("ModifyCoolDownPolicy", req, cb);
     }
     /**
      * 针对驱动sql命令查询ck集群接口
@@ -274,16 +274,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceNew", req, cb);
     }
     /**
-     * 生成计费相关接口的GoodsDetail结构
+     * 修改资源组信息
      */
-    async DescribeGoodsDetail(req, cb) {
-        return this.request("DescribeGoodsDetail", req, cb);
-    }
-    /**
-     * 数据库审计数据库、用户等
-     */
-    async DescribeDatabaseAuditResource(req, cb) {
-        return this.request("DescribeDatabaseAuditResource", req, cb);
+    async ModifyWorkloadGroup(req, cb) {
+        return this.request("ModifyWorkloadGroup", req, cb);
     }
     /**
      * 取消对应的备份实例任务
@@ -292,22 +286,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelBackupJob", req, cb);
     }
     /**
-     * 计算资源垂直变配
-     */
-    async ScaleUpInstance(req, cb) {
-        return this.request("ScaleUpInstance", req, cb);
-    }
-    /**
-     * 水平扩容节点
-     */
-    async ScaleOutInstance(req, cb) {
-        return this.request("ScaleOutInstance", req, cb);
-    }
-    /**
      * 查询备份任务详情
      */
     async DescribeBackUpJobDetail(req, cb) {
         return this.request("DescribeBackUpJobDetail", req, cb);
+    }
+    /**
+     * 查询冷热分层生效变量和配置是否正确
+     */
+    async CheckCoolDownWorkingVariableConfigCorrect(req, cb) {
+        return this.request("CheckCoolDownWorkingVariableConfigCorrect", req, cb);
     }
     /**
      * 获取集群节点角色
@@ -334,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAreaRegion", req, cb);
     }
     /**
-     * 扩容云盘
+     * 开始启用冷热分层
      */
-    async ResizeDisk(req, cb) {
-        return this.request("ResizeDisk", req, cb);
+    async OpenCoolDown(req, cb) {
+        return this.request("OpenCoolDown", req, cb);
     }
     /**
      * 集群健康检查
@@ -362,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceNodes(req, cb) {
         return this.request("DescribeInstanceNodes", req, cb);
+    }
+    /**
+     * 查询冷热分层策略列表
+     */
+    async DescribeCoolDownPolicies(req, cb) {
+        return this.request("DescribeCoolDownPolicies", req, cb);
     }
     /**
      * 获取资源组信息

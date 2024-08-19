@@ -1766,6 +1766,20 @@ export interface DescribeTRTCRealTimeScaleMetricDataResponse {
 }
 
 /**
+ * UpdateStreamIngest返回参数结构体
+ */
+export interface UpdateStreamIngestResponse {
+  /**
+   * 任务的状态信息。InProgress：表示当前任务正在进行中。NotExist：表示当前任务不存在。示例值：InProgress
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartMCUMixTranscode请求参数结构体
  */
 export interface StartMCUMixTranscodeRequest {
@@ -3539,6 +3553,24 @@ export interface AgentParams {
    * 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
    */
   MaxIdleTime?: number
+}
+
+/**
+ * UpdateStreamIngest请求参数结构体
+ */
+export interface UpdateStreamIngestRequest {
+  /**
+   * TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同
+   */
+  SdkAppId: number
+  /**
+   * 任务的唯一Id，在启动任务成功后会返回。
+   */
+  TaskId: string
+  /**
+   * 源流URL【必填】。
+   */
+  StreamUrl: string
 }
 
 /**

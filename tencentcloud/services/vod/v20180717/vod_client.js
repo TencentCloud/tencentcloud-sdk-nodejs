@@ -618,13 +618,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMedia", req, cb);
     }
     /**
-     * 该接口返回查询时间范围内每天使用的图片审核用量信息。
-   1. 可以查询最近365天内的图片审核统计数据。
-   2. 查询时间跨度不超过90天。
-   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+     * 操作轮播当前播放列表。支持的操作有：<li> Insert：向当前播列表插入播放节目。</li><li> Delete：删除播列表中的播放节目。</li>
      */
-    async DescribeImageReviewUsageData(req, cb) {
-        return this.request("DescribeImageReviewUsageData", req, cb);
+    async HandleCurrentPlaylist(req, cb) {
+        return this.request("HandleCurrentPlaylist", req, cb);
+    }
+    /**
+     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
+创建播放器配置，数量上限：100。
+     */
+    async CreateSuperPlayerConfig(req, cb) {
+        return this.request("CreateSuperPlayerConfig", req, cb);
     }
     /**
      * 查询点播域名下日志投递的目标主题。
@@ -660,11 +664,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRebuildMediaTemplate", req, cb);
     }
     /**
-     * 该接口用于修改轮播播单。
-修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
+     * 查询轮播当前播放列表。
      */
-    async ModifyRoundPlay(req, cb) {
-        return this.request("ModifyRoundPlay", req, cb);
+    async DescribeCurrentPlaylist(req, cb) {
+        return this.request("DescribeCurrentPlaylist", req, cb);
     }
     /**
      * 该接口用于查询指定日期范围内每天的播放统计数据。
@@ -759,11 +762,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyDomainRecord", req, cb);
     }
     /**
-     * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
-创建播放器配置，数量上限：100。
+     * 该接口返回查询时间范围内每天使用的图片审核用量信息。
+   1. 可以查询最近365天内的图片审核统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
      */
-    async CreateSuperPlayerConfig(req, cb) {
-        return this.request("CreateSuperPlayerConfig", req, cb);
+    async DescribeImageReviewUsageData(req, cb) {
+        return this.request("DescribeImageReviewUsageData", req, cb);
     }
     /**
      * 该接口用于修改域名配置，可以修改域名的防盗链配置。
@@ -862,6 +867,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteWordSamples(req, cb) {
         return this.request("DeleteWordSamples", req, cb);
+    }
+    /**
+     * 对 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+     */
+    async FastEditMedia(req, cb) {
+        return this.request("FastEditMedia", req, cb);
     }
     /**
      * 该接口用于将加速域名添加到点播，一个用户最多添加20个加速域名。
@@ -964,6 +975,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySubAppIdInfo(req, cb) {
         return this.request("ModifySubAppIdInfo", req, cb);
+    }
+    /**
+     * 该接口用于修改轮播播单。
+修改后只有新的播放请求会生效，已经在播放中的用户在七天之内还可以播放修改前的播单。
+     */
+    async ModifyRoundPlay(req, cb) {
+        return this.request("ModifyRoundPlay", req, cb);
     }
     /**
      * 查询转自适应码流模板，支持根据条件，分页查询。

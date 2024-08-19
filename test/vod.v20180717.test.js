@@ -768,9 +768,19 @@ it("vod.v20180717.DeleteMedia", async function () {
     }
 })
 
-it("vod.v20180717.DescribeImageReviewUsageData", async function () {
+it("vod.v20180717.HandleCurrentPlaylist", async function () {
     try {
-       const data = await client.DescribeImageReviewUsageData({})
+       const data = await client.HandleCurrentPlaylist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateSuperPlayerConfig", async function () {
+    try {
+       const data = await client.CreateSuperPlayerConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,9 +838,9 @@ it("vod.v20180717.CreateRebuildMediaTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ModifyRoundPlay", async function () {
+it("vod.v20180717.DescribeCurrentPlaylist", async function () {
     try {
-       const data = await client.ModifyRoundPlay({})
+       const data = await client.DescribeCurrentPlaylist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,9 +978,9 @@ it("vod.v20180717.VerifyDomainRecord", async function () {
     }
 })
 
-it("vod.v20180717.CreateSuperPlayerConfig", async function () {
+it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     try {
-       const data = await client.CreateSuperPlayerConfig({})
+       const data = await client.DescribeImageReviewUsageData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1101,6 +1111,16 @@ it("vod.v20180717.DescribeStorageDetails", async function () {
 it("vod.v20180717.DeleteWordSamples", async function () {
     try {
        const data = await client.DeleteWordSamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.FastEditMedia", async function () {
+    try {
+       const data = await client.FastEditMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1251,6 +1271,16 @@ it("vod.v20180717.DescribeEventConfig", async function () {
 it("vod.v20180717.ModifySubAppIdInfo", async function () {
     try {
        const data = await client.ModifySubAppIdInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyRoundPlay", async function () {
+    try {
+       const data = await client.ModifyRoundPlay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

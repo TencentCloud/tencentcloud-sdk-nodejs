@@ -1,32 +1,4 @@
 /**
- * DescribeDatabaseAuditResource请求参数结构体
- */
-export interface DescribeDatabaseAuditResourceRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-}
-/**
- * DescribeDorisMetricFiles返回参数结构体
- */
-export interface DescribeDorisMetricFilesResponse {
-    /**
-     * ErrorMsg
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrorMsg?: string;
-    /**
-     * 返回数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReturnData?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeInstanceUsedSubnets返回参数结构体
  */
 export interface DescribeInstanceUsedSubnetsResponse {
@@ -44,39 +16,6 @@ export interface DescribeInstanceUsedSubnetsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeFrontEnd请求参数结构体
- */
-export interface DescribeFrontEndRequest {
-    /**
-     * 实例id
-     */
-    InstanceId?: string;
-    /**
-     * 文件类型
-     */
-    ConfigType?: string;
-    /**
-     * 参数1
-     */
-    Param1?: string;
-    /**
-     * 参数2
-     */
-    Param2?: string;
-    /**
-     * 参数3
-     */
-    Param3?: string;
-    /**
-     * 参数4
-     */
-    Param4?: string;
-    /**
-     * 参数5
-     */
-    Param5?: string;
 }
 /**
  * CreateInstanceNew返回参数结构体
@@ -198,9 +137,26 @@ export interface ModifyUserPrivilegesV3Response {
     RequestId?: string;
 }
 /**
- * DescribeFederationToken请求参数结构体
+ * ModifyUserPrivilegesV3请求参数结构体
  */
-export declare type DescribeFederationTokenRequest = null;
+export interface ModifyUserPrivilegesV3Request {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 用户权限
+     */
+    UserPrivileges: UpdateUserPrivileges;
+    /**
+     * 用户链接来自的 IP
+     */
+    WhiteHost?: string;
+}
 /**
  * ModifyWorkloadGroupStatus返回参数结构体
  */
@@ -254,43 +210,6 @@ export interface ModifyWorkloadGroupRequest {
      * 修改的资源组信息
      */
     WorkloadGroup?: WorkloadGroupConfig;
-}
-/**
- * 集群内节点的规格描述
- */
-export interface ResourceNodeSpec {
-    /**
-     * 节点类型，“DATA"数据节点，”COMMON" zookeeper节点
-     */
-    Type: string;
-    /**
-     * 节点规格名称，例如 “SCH1","SCH2”等
-     */
-    SpecName: string;
-    /**
-     * 节点数目
-     */
-    Count: number;
-    /**
-     * 磁盘规格描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DiskSpec?: ResourceNodeDiskSpec;
-    /**
-     * 云盘是否加密，0不加密/1加密  默认为0
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Encrypt?: number;
-    /**
-     * 额外信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Extra?: SpecExtra;
-    /**
-     * 挂载云盘信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AttachCBSSpec?: ResourceNodeDiskSpec;
 }
 /**
  * 用户绑定资源组信息
@@ -364,64 +283,17 @@ export interface WorkloadGroupConfig {
     CpuHardLimit?: string;
 }
 /**
- * FitClsLog请求参数结构体
+ * DescribeInstances返回参数结构体
  */
-export interface FitClsLogRequest {
+export interface DescribeInstancesResponse {
     /**
-     * 集群ID，例如cdwch-xxxx
+     * 实例总数
      */
-    InstanceId: string;
+    TotalCount?: number;
     /**
-     * cls日志集ID
+     * 实例数组
      */
-    ClsLogSetId: string;
-    /**
-     * 日志的类型，es还是cls_topic
-     */
-    LogType?: string;
-}
-/**
- * 集群内节点的规格磁盘规格描述
- */
-export interface ResourceNodeDiskSpec {
-    /**
-     * 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM"
-     */
-    DiskType?: string;
-    /**
-     * 磁盘容量，单位G
-     */
-    DiskSize?: number;
-    /**
-     * 磁盘总数
-     */
-    DiskCount?: number;
-}
-/**
- * DescribeDmsSqlHistory请求参数结构体
- */
-export interface DescribeDmsSqlHistoryRequest {
-    /**
-     * 查询节点ip
-     */
-    QueryNode?: Array<string>;
-    /**
-     * 运行状态
-     */
-    QueryStatus?: Array<string>;
-    /**
-     * 模糊搜索sql
-     */
-    QuerySql?: string;
-    /**
-     * 根据报错原因搜索
-     */
-    QueryErrMsg?: string;
-}
-/**
- * DescribeFederationToken返回参数结构体
- */
-export interface DescribeFederationTokenResponse {
+    InstancesList?: Array<InstanceInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -469,6 +341,27 @@ export interface ReduceInstanceResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCoolDownPolicy请求参数结构体
+ */
+export interface ModifyCoolDownPolicyRequest {
+    /**
+     * 集群id
+     */
+    InstanceId?: string;
+    /**
+     * 策略名称
+     */
+    PolicyName?: string;
+    /**
+     * cooldown_ttl
+     */
+    CoolDownTtl?: string;
+    /**
+     * cooldown_datetime
+     */
+    CoolDownDatetime?: string;
+}
+/**
  * DescribeBackUpTaskDetail请求参数结构体
  */
 export interface DescribeBackUpTaskDetailRequest {
@@ -480,21 +373,6 @@ export interface DescribeBackUpTaskDetailRequest {
      * 任务id
      */
     BackUpJobId: number;
-}
-/**
- * 检查doris内核是否支持新语法。
- */
-export interface VersionReplicaItem {
-    /**
-     * 版本描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReplicaFlag: number;
-    /**
-     * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrorMsg: string;
 }
 /**
  * RecoverBackUpJob请求参数结构体
@@ -640,23 +518,6 @@ export interface UpdateUserPrivileges {
     IsSetGlobalCatalog?: boolean;
 }
 /**
- * 展示doris监控指标请求入参
- */
-export interface DescribeMetricsFileReq {
-    /**
-     * 集群类型
-     */
-    InstanceType: string;
-    /**
-     * 指标类型
-     */
-    MetricType?: string;
-    /**
-     * 是否关注
-     */
-    IfAttention?: number;
-}
-/**
  * DescribeInstanceState请求参数结构体
  */
 export interface DescribeInstanceStateRequest {
@@ -664,15 +525,6 @@ export interface DescribeInstanceStateRequest {
      * 集群实例名称
      */
     InstanceId: string;
-}
-/**
- * OpenBackUp返回参数结构体
- */
-export interface OpenBackUpResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * 网络信息
@@ -717,19 +569,23 @@ export interface ZoneInfo {
     Encrypt?: number;
 }
 /**
- * DescribeRestoreTaskDetail返回参数结构体
+ * DescribeAreaRegion返回参数结构体
  */
-export interface DescribeRestoreTaskDetailResponse {
+export interface DescribeAreaRegionResponse {
     /**
-     * 恢复任务进度详情
+     * 地域列表
+     */
+    Items?: Array<RegionAreaInfo>;
+    /**
+     * 前端规则描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RestoreStatus: Array<RestoreStatus>;
+    FrontEndRules?: Array<FrontEndRule>;
     /**
-     * 错误信息
+     * 返回可用的白名单名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    AvailableWhiteListNames?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -751,6 +607,20 @@ export interface DeleteBackUpDataRequest {
      * 是否删除所有数据
      */
     IsDeleteAll?: boolean;
+}
+/**
+ * UpdateCoolDown返回参数结构体
+ */
+export interface UpdateCoolDownResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 返回配置的文件内容（key-value）
@@ -809,6 +679,42 @@ export interface ResizeDiskResponse {
     FlowId?: string;
     /**
      * 错误信息
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * OpenCoolDown请求参数结构体
+ */
+export interface OpenCoolDownRequest {
+    /**
+     * 集群id
+     */
+    InstanceId?: string;
+}
+/**
+ * DescribeCoolDownTableData请求参数结构体
+ */
+export interface DescribeCoolDownTableDataRequest {
+    /**
+     * 集群id
+     */
+    InstanceId?: string;
+    /**
+     * 数据库名称
+     */
+    DatabaseName?: string;
+}
+/**
+ * CheckCoolDownWorkingVariableConfigCorrect返回参数结构体
+ */
+export interface CheckCoolDownWorkingVariableConfigCorrectResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -879,52 +785,23 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
     CatalogName?: Array<string>;
 }
 /**
- * DescribeAreaRegion返回参数结构体
+ * DescribeRestoreTaskDetail返回参数结构体
  */
-export interface DescribeAreaRegionResponse {
+export interface DescribeRestoreTaskDetailResponse {
     /**
-     * 地域列表
-     */
-    Items?: Array<RegionAreaInfo>;
-    /**
-     * 前端规则描述
+     * 恢复任务进度详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrontEndRules?: Array<FrontEndRule>;
+    RestoreStatus: Array<RestoreStatus>;
     /**
-     * 返回可用的白名单名称
+     * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AvailableWhiteListNames?: Array<string>;
+    ErrorMsg: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeDorisMetricFiles请求参数结构体
- */
-export interface DescribeDorisMetricFilesRequest {
-    /**
-     * 接口类型
-     */
-    ApiType: string;
-    /**
-     * 集群id
-     */
-    InstanceId: string;
-    /**
-     * 展示监控指标入参
-     */
-    DescribeMetricsFileReq?: DescribeMetricsFileReq;
-    /**
-     * 点关注功能入参
-     */
-    ModifyMetricFileReq?: ModifyMetricFileStruct;
-    /**
-     * 监控指标关注功能入参
-     */
-    ModifyAttentionMetricFileReq?: ModifyMetricFileStructNew;
 }
 /**
  * ModifyNodeStatus请求参数结构体
@@ -1117,24 +994,22 @@ export interface DescribeWorkloadGroupRequest {
     InstanceId: string;
 }
 /**
- * OpenBackUp请求参数结构体
+ * DescribeCoolDownBackends请求参数结构体
  */
-export interface OpenBackUpRequest {
+export interface DescribeCoolDownBackendsRequest {
     /**
      * 集群id
      */
-    InstanceId: string;
+    InstanceId?: string;
+}
+/**
+ * CheckCoolDownWorkingVariableConfigCorrect请求参数结构体
+ */
+export interface CheckCoolDownWorkingVariableConfigCorrectRequest {
     /**
-     * 取值：
-  open:打开
-  close:关闭
-  updateBucket:变更桶名
+     * 集群id
      */
-    OperationType: string;
-    /**
-     * 桶名字
-     */
-    CosBucketName: string;
+    InstanceId?: string;
 }
 /**
  * 集群操作描述
@@ -1346,21 +1221,74 @@ export interface CreateInstanceNewRequest {
     UserMultiZoneInfos?: NetworkInfo;
 }
 /**
- * DescribeDmsSqlHistory返回参数结构体
+ * UpdateCoolDown请求参数结构体
  */
-export interface DescribeDmsSqlHistoryResponse {
+export interface UpdateCoolDownRequest {
     /**
-     * 集群所有的查询节点
+     * 集群id
      */
-    QueryNodeList?: Array<string>;
+    InstanceId?: string;
     /**
-     * 集群所有的查询状态
+     * 是否启用 0：不启用 1：启用
      */
-    QueryStatusList?: Array<string>;
+    Enable?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 用户存放冷热分层数据Cos桶地址
      */
-    RequestId?: string;
+    Bucket?: string;
+}
+/**
+ * 冷热分层策略
+ */
+export interface CoolDownPolicyInfo {
+    /**
+     * 策略名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyName?: string;
+    /**
+     * cooldown_ttl
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CooldownDatetime?: string;
+    /**
+     * cooldown_datetime
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CooldownTtl?: string;
+}
+/**
+ * OpenCoolDownPolicy请求参数结构体
+ */
+export interface OpenCoolDownPolicyRequest {
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * db名称
+     */
+    DatabaseName?: string;
+    /**
+     * table名称
+     */
+    TableName?: string;
+    /**
+     * 操作类型
+     */
+    OperationType?: string;
+    /**
+     * 逗号分隔 需要带上db的名字 db1.tb1,db1.tb2,db2.tb1
+     */
+    BatchOpenCoolDownTables?: string;
+    /**
+     * 绑定的时候用 策略名称
+     */
+    PolicyName?: string;
+    /**
+     * 逗号分隔 p1,p2,p3
+     */
+    BatchOpenCoolDownPartitions?: string;
 }
 /**
  * 外部doris集群的连接信息
@@ -1386,6 +1314,20 @@ export interface DorisSourceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Password?: string;
+}
+/**
+ * OpenCoolDown返回参数结构体
+ */
+export interface OpenCoolDownResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 集群内节点的规格磁盘规格描述
@@ -1549,27 +1491,6 @@ export interface InstanceConfigItem {
     ConfValue: string;
 }
 /**
- * DescribeRegionZone返回参数结构体
- */
-export interface DescribeRegionZoneResponse {
-    /**
-     * 地域列表
-     */
-    Items?: Array<RegionAreaInfo>;
-    /**
-     * 内核版本列表
-     */
-    Versions?: Array<string>;
-    /**
-     * 网络规则
-     */
-    VpcRule?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * CreateBackUpSchedule请求参数结构体
  */
 export interface CreateBackUpScheduleRequest {
@@ -1617,24 +1538,25 @@ export interface CreateBackUpScheduleRequest {
     CosSourceInfo?: CosSourceInfo;
 }
 /**
- * 备份实例中关于cos的信息
+ * DescribeSpec请求参数结构体
  */
-export interface BackupCosInfo {
+export interface DescribeSpecRequest {
     /**
-     * 备份文件所在的cos桶
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 地域信息，例如"ap-guangzhou-1"
      */
-    CosBucket?: string;
+    Zone: string;
     /**
-     * 备份文件所在的完整cos路径
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
      */
-    CosPath?: string;
+    PayMode?: string;
     /**
-     * 备份文件名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 多可用区
      */
-    SnapShotPath?: string;
+    Zones?: Array<string>;
+    /**
+     * 机型名称
+     */
+    SpecName?: string;
 }
 /**
  * DescribeClusterConfigsHistory请求参数结构体
@@ -1667,42 +1589,17 @@ export interface DescribeClusterConfigsHistoryRequest {
     ConfigFileNames?: Array<string>;
 }
 /**
- * DescribeInstanceState返回参数结构体
+ * CreateWorkloadGroup请求参数结构体
  */
-export interface DescribeInstanceStateResponse {
+export interface CreateWorkloadGroupRequest {
     /**
-     * 集群状态，例如：Serving
+     * 集群id
      */
-    InstanceState?: string;
+    InstanceId: string;
     /**
-     * 集群操作创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 资源组配置
      */
-    FlowCreateTime?: string;
-    /**
-     * 集群操作名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowName?: string;
-    /**
-     * 集群操作进度
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowProgress?: number;
-    /**
-     * 集群状态描述，例如：运行中
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceStateDesc?: string;
-    /**
-     * 集群流程错误信息，例如：“创建失败，资源不足”
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowMsg?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    WorkloadGroup?: WorkloadGroupConfig;
 }
 /**
  * DescribeInstanceNodesInfo请求参数结构体
@@ -1831,35 +1728,6 @@ export interface DestroyInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeBackUpJob请求参数结构体
- */
-export interface DescribeBackUpJobRequest {
-    /**
-     * 集群id
-     */
-    InstanceId: string;
-    /**
-     * 分页大小
-     */
-    PageSize?: number;
-    /**
-     * 页号
-     */
-    PageNum?: number;
-    /**
-     * 开始时间
-     */
-    BeginTime?: string;
-    /**
-     * 结束时间
-     */
-    EndTime?: string;
-    /**
-     * jobid的string类型
-     */
-    JobIdFiltersStr?: string;
-}
-/**
  * ResizeDisk请求参数结构体
  */
 export interface ResizeDiskRequest {
@@ -1890,64 +1758,25 @@ export interface ModifyWorkloadGroupStatusRequest {
     OperationType?: string;
 }
 /**
- * DescribeRegionZone请求参数结构体
+ * CreateCoolDownPolicy请求参数结构体
  */
-export interface DescribeRegionZoneRequest {
-    /**
-     * 服务
-     */
-    Service?: string;
-    /**
-     * 是否是国际站
-     */
-    IsInternationalSite?: boolean;
-}
-/**
- * DescribeDatabaseAuditResource返回参数结构体
- */
-export interface DescribeDatabaseAuditResourceResponse {
-    /**
-     * 数据库列表
-     */
-    Databases?: Array<string>;
-    /**
-     * 用户列表
-     */
-    Users?: Array<string>;
-    /**
-     * sql类型列表
-     */
-    SqlTypes?: Array<string>;
-    /**
-     * catalog字段
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Catalogs?: Array<string>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifyUserBindWorkloadGroup请求参数结构体
- */
-export interface ModifyUserBindWorkloadGroupRequest {
+export interface CreateCoolDownPolicyRequest {
     /**
      * 集群id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * 需要绑定资源组的用户信息，如果一个账户拥有多个主机信息，需要将这些信息都传入
+     * 策略名称
      */
-    BindUsers?: Array<BindUser>;
+    PolicyName?: string;
     /**
-     * 修改前绑定的资源组名称
+     * cooldown_ttl
      */
-    OldWorkloadGroupName?: string;
+    CoolDownTtl?: string;
     /**
-     * 修改后绑定的资源组名称
+     * cooldown_datetime
      */
-    NewWorkloadGroupName?: string;
+    CoolDownDatetime?: string;
 }
 /**
  * DescribeSqlApis返回参数结构体
@@ -2104,6 +1933,20 @@ export interface InstanceNode {
     UUID?: string;
 }
 /**
+ * ModifyCoolDownPolicy返回参数结构体
+ */
+export interface ModifyCoolDownPolicyResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeInstancesHealthState请求参数结构体
  */
 export interface DescribeInstancesHealthStateRequest {
@@ -2187,20 +2030,6 @@ export interface RestartClusterForConfigsResponse {
     FlowId?: number;
     /**
      * 错误信息
-     */
-    ErrorMsg?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifySecurityGroups返回参数结构体
- */
-export interface ModifySecurityGroupsResponse {
-    /**
-     * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -2542,6 +2371,20 @@ export interface DescribeClusterConfigsRequest {
     IPAddress?: string;
 }
 /**
+ * CreateCoolDownPolicy返回参数结构体
+ */
+export interface CreateCoolDownPolicyResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyWorkloadGroup返回参数结构体
  */
 export interface ModifyWorkloadGroupResponse {
@@ -2566,27 +2409,6 @@ export interface DescribeRestoreTaskDetailRequest {
      * 任务id
      */
     BackUpJobId: number;
-}
-/**
- * ModifyUserPrivilegesV3请求参数结构体
- */
-export interface ModifyUserPrivilegesV3Request {
-    /**
-     * 集群id
-     */
-    InstanceId: string;
-    /**
-     * 用户名
-     */
-    UserName: string;
-    /**
-     * 用户权限
-     */
-    UserPrivileges: UpdateUserPrivileges;
-    /**
-     * 用户链接来自的 IP
-     */
-    WhiteHost?: string;
 }
 /**
  * CreateBackUpSchedule返回参数结构体
@@ -2636,23 +2458,6 @@ export interface DescribeBackUpJobResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BackUpJobs?: Array<BackUpJobDisplay>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * FitClsLog返回参数结构体
- */
-export interface FitClsLogResponse {
-    /**
-     * 流程相关信息
-     */
-    FlowId?: number;
-    /**
-     * 错误信息
-     */
-    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2772,23 +2577,6 @@ export interface SearchTags {
     AllValue?: number;
 }
 /**
- * DescribeInstances返回参数结构体
- */
-export interface DescribeInstancesResponse {
-    /**
-     * 实例总数
-     */
-    TotalCount?: number;
-    /**
-     * 实例数组
-     */
-    InstancesList?: Array<InstanceInfo>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeInstanceUsedSubnets请求参数结构体
  */
 export interface DescribeInstanceUsedSubnetsRequest {
@@ -2796,20 +2584,6 @@ export interface DescribeInstanceUsedSubnetsRequest {
      * 集群id
      */
     InstanceId: string;
-}
-/**
- * 额外参数
- */
-export interface SpecExtra {
-    /**
-     * 要删除的shards
-     * @deprecated
-     */
-    DelShards?: string;
-    /**
-     * 要删除的节点uip
-     */
-    DelHosts?: string;
 }
 /**
  * DescribeDatabaseAuditRecords请求参数结构体
@@ -2873,28 +2647,6 @@ export interface DescribeDatabaseAuditRecordsRequest {
     Catalogs?: Array<string>;
 }
 /**
- * doris监控指标关注（取消关注）功能入参
- */
-export interface ModifyMetricFileStructNew {
-    /**
-     * 集群类型
-     */
-    InstanceType?: string;
-    /**
-     * 指标类型
-     */
-    MetricType?: string;
-    /**
-     * 指标英文名
-     */
-    Name?: string;
-    /**
-     * 1：关注
-  0：取消关注
-     */
-    IfAttention?: number;
-}
-/**
  * DescribeBackUpJobDetail返回参数结构体
  */
 export interface DescribeBackUpJobDetailResponse {
@@ -2920,6 +2672,44 @@ export interface DescribeBackUpJobDetailRequest {
      * 任务id
      */
     BackUpJobId: number;
+}
+/**
+ * DescribeCoolDownBackends返回参数结构体
+ */
+export interface DescribeCoolDownBackendsResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 节点信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<CoolDownBackend>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeCoolDownPolicies返回参数结构体
+ */
+export interface DescribeCoolDownPoliciesResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 冷热分层策略列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<CoolDownPolicyInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTableList请求参数结构体
@@ -2968,26 +2758,88 @@ export interface DescribeWorkloadGroupResponse {
     RequestId?: string;
 }
 /**
- * 用户是否关注监控指标入参
+ * 冷热分层Table数据信息
  */
-export interface ModifyMetricFileStruct {
+export interface CoolDownTableDataInfo {
     /**
-     * 唯一id
+     * 列：DatabaseName
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: number;
+    DatabaseName?: string;
     /**
-     * 是否关注
+     * 列：TableName
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IfAttention?: string;
+    TableName?: string;
+    /**
+     * 列：Size
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: string;
+    /**
+     * 列：RemoteSize
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemoteSize?: string;
 }
 /**
- * DescribeInstance请求参数结构体
+ * ModifySecurityGroups返回参数结构体
  */
-export interface DescribeInstanceRequest {
+export interface ModifySecurityGroupsResponse {
     /**
-     * 集群实例ID
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 备份实例中关于cos的信息
+ */
+export interface BackupCosInfo {
+    /**
+     * 备份文件所在的cos桶
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosBucket?: string;
+    /**
+     * 备份文件所在的完整cos路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosPath?: string;
+    /**
+     * 备份文件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SnapShotPath?: string;
+}
+/**
+ * 冷热分层backend节点信息
+ */
+export interface CoolDownBackend {
+    /**
+     * 字段：Host
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Host?: string;
+    /**
+     * 字段：DataUsedCapacity
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataUsedCapacity?: string;
+    /**
+     * 字段：TotalCapacity
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCapacity?: string;
+    /**
+     * 字段：RemoteUsedCapacity
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemoteUsedCapacity?: string;
 }
 /**
  * DescribeBackUpTaskDetail返回参数结构体
@@ -3003,6 +2855,23 @@ export interface DescribeBackUpTaskDetailResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * OpenCoolDownPolicy返回参数结构体
+ */
+export interface OpenCoolDownPolicyResponse {
+    /**
+     * 错误信息
+     */
+    ErrorMsg?: string;
+    /**
+     * 返回信息
+     */
+    QueryDocument?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3094,45 +2963,23 @@ export interface ResourceSpec {
     InstanceQuota?: number;
 }
 /**
- * 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息
+ * DescribeCoolDownTableData返回参数结构体
  */
-export interface ClusterConfigsInfoFromEMR {
+export interface DescribeCoolDownTableDataResponse {
     /**
-     * 配置文件名称
-     */
-    FileName?: string;
-    /**
-     * 配置文件对应的相关属性信息
-     */
-    FileConf?: string;
-    /**
-     * 配置文件对应的其他属性信息
-     */
-    KeyConf?: string;
-    /**
-     * 配置文件的内容，base64编码
-     */
-    OriParam?: string;
-    /**
-     * 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启
-     */
-    NeedRestart?: number;
-    /**
-     * 配置文件路径
+     * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FilePath?: string;
+    ErrorMsg?: string;
     /**
-     * 配置文件kv值
-  注意：此字段可能返回 null，表示取不到有效值。
-     * @deprecated
-     */
-    FileKeyValues?: string;
-    /**
-     * 配置文件kv值
+     * 冷热分层Table数据列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileKeyValuesNew?: Array<ConfigKeyValue>;
+    List?: Array<CoolDownTableDataInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * RestartClusterForConfigs请求参数结构体
@@ -3227,58 +3074,51 @@ export interface CreateWorkloadGroupResponse {
     RequestId?: string;
 }
 /**
- * CreateWorkloadGroup请求参数结构体
+ * DescribeInstanceState返回参数结构体
  */
-export interface CreateWorkloadGroupRequest {
+export interface DescribeInstanceStateResponse {
     /**
-     * 集群id
+     * 集群状态，例如：Serving
      */
-    InstanceId: string;
+    InstanceState?: string;
     /**
-     * 资源组配置
+     * 集群操作创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkloadGroup?: WorkloadGroupConfig;
-}
-/**
- * DescribeGoodsDetail返回参数结构体
- */
-export interface DescribeGoodsDetailResponse {
+    FlowCreateTime?: string;
     /**
-     * GoodsDetail对象
+     * 集群操作名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GoodsDetail?: string;
+    FlowName?: string;
     /**
-     * GoodsCategoryId 表示操作类型
+     * 集群操作进度
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GoodsCategoryId?: number;
+    FlowProgress?: number;
     /**
-     * 子商品码
+     * 集群状态描述，例如：运行中
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type?: string;
+    InstanceStateDesc?: string;
     /**
-     * 付费模式，0后付费，1预付费
+     * 集群流程错误信息，例如：“创建失败，资源不足”
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMode?: number;
-    /**
-     * 地域ID
-     */
-    RegionId?: number;
-    /**
-     * 可用区ID
-     */
-    ZoneId?: number;
-    /**
-     * 资源标识符
-     */
-    ResourceId?: string;
-    /**
-     * 商品数目
-     */
-    GoodsNum?: number;
+    FlowMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeCoolDownPolicies请求参数结构体
+ */
+export interface DescribeCoolDownPoliciesRequest {
+    /**
+     * 集群id
+     */
+    InstanceId?: string;
 }
 /**
  * 恢复任务信息
@@ -3502,6 +3342,47 @@ export interface ModifyUserBindWorkloadGroupResponse {
     RequestId?: string;
 }
 /**
+ * 用于返回XML格式的配置文件和内容以及其他配置文件有关的信息
+ */
+export interface ClusterConfigsInfoFromEMR {
+    /**
+     * 配置文件名称
+     */
+    FileName?: string;
+    /**
+     * 配置文件对应的相关属性信息
+     */
+    FileConf?: string;
+    /**
+     * 配置文件对应的其他属性信息
+     */
+    KeyConf?: string;
+    /**
+     * 配置文件的内容，base64编码
+     */
+    OriParam?: string;
+    /**
+     * 用于表示当前配置文件是不是有过修改后没有重启，提醒用户需要重启
+     */
+    NeedRestart?: number;
+    /**
+     * 配置文件路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FilePath?: string;
+    /**
+     * 配置文件kv值
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    FileKeyValues?: string;
+    /**
+     * 配置文件kv值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileKeyValuesNew?: Array<ConfigKeyValue>;
+}
+/**
  * RecoverBackUpJob返回参数结构体
  */
 export interface RecoverBackUpJobResponse {
@@ -3530,13 +3411,25 @@ export interface DescribeTableListResponse {
     RequestId?: string;
 }
 /**
- * DescribeReplicaVersion请求参数结构体
+ * ModifyUserBindWorkloadGroup请求参数结构体
  */
-export interface DescribeReplicaVersionRequest {
+export interface ModifyUserBindWorkloadGroupRequest {
     /**
-     * 实例id
+     * 集群id
      */
     InstanceId: string;
+    /**
+     * 需要绑定资源组的用户信息，如果一个账户拥有多个主机信息，需要将这些信息都传入
+     */
+    BindUsers?: Array<BindUser>;
+    /**
+     * 修改前绑定的资源组名称
+     */
+    OldWorkloadGroupName?: string;
+    /**
+     * 修改后绑定的资源组名称
+     */
+    NewWorkloadGroupName?: string;
 }
 /**
  * 节点角色描述信息
@@ -3685,114 +3578,42 @@ export interface CreateInstanceSpec {
     DiskSize: number;
 }
 /**
- * DescribeFrontEnd返回参数结构体
+ * DescribeInstance请求参数结构体
  */
-export interface DescribeFrontEndResponse {
+export interface DescribeInstanceRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 集群实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
- * DescribeGoodsDetail请求参数结构体
+ * DescribeBackUpJob请求参数结构体
  */
-export interface DescribeGoodsDetailRequest {
+export interface DescribeBackUpJobRequest {
     /**
-     * 操作类型，“CREATE"表示创建、”MODIFY"表示变更配置、“RENEW"表示续费
+     * 集群id
      */
-    Case: string;
+    InstanceId: string;
     /**
-     * 可用区，例如"ap-guangzhou-3"表示广州三区等
+     * 分页大小
      */
-    Zone?: string;
+    PageSize?: number;
     /**
-     * 集群的高可用标记，true表示为高可用集群
+     * 页号
      */
-    HaFlag?: boolean;
+    PageNum?: number;
     /**
-     * 高可用类型： 0：非高可用 1：读高可用 2：读写高可用。
+     * 开始时间
      */
-    HaType?: number;
+    BeginTime?: string;
     /**
-     * 用户集群的私有网络
+     * 结束时间
      */
-    UserVPCId?: string;
+    EndTime?: string;
     /**
-     * 用户集群的子网
+     * jobid的string类型
      */
-    UserSubnetId?: string;
-    /**
-     * 用户集群的版本，例如“20.7.2.30”等
-     */
-    ProductVersion?: string;
-    /**
-     * 集群ID，创建时为空，其他情况必须存在
-     */
-    InstanceId?: string;
-    /**
-     * 集群资源规格描述
-     */
-    Resources?: Array<ResourceNodeSpec>;
-    /**
-     * 集群规格修改参数
-     */
-    ModifySpec?: ResourceNodeSpec;
-    /**
-     * 计费信息
-     */
-    ChargeProperties?: ChargeProperties;
-    /**
-     * 创建集群时需要填写InstanceName
-     */
-    InstanceName?: string;
-    /**
-     * 购买页填写的标签列表
-     */
-    Tags?: Array<Tag>;
-    /**
-     * CLS日志集ID
-     */
-    ClsLogSetId?: string;
-    /**
-     * 用户子网剩余ip数量
-     */
-    UserSubnetIPNum?: number;
-    /**
-     * COS桶名称
-     */
-    CosBucketName?: string;
-    /**
-     * 按量计费转包年包月
-     */
-    HourToPrepaid?: boolean;
-    /**
-     * base64密码
-     */
-    DorisUserPwd?: string;
-    /**
-     * 日志的类型，es或者cls_topic
-     */
-    LogType?: string;
-    /**
-     * 表名大小写是否敏感，0：敏感；1：不敏感，表名改为以小写存储；2：不敏感，以小写进行比较
-     */
-    CaseSensitive?: number;
-    /**
-     * true为滚动重启 false为批量重启
-     */
-    RollingRestart?: boolean;
-    /**
-     * 是否为多可用区
-     */
-    EnableMultiZones?: boolean;
-    /**
-     * 用户多可用区的网络信息
-     */
-    UserMultiZoneInfos?: Array<NetworkInfo>;
-    /**
-     * 扩展字段
-     */
-    Details?: InstanceDetail;
+    JobIdFiltersStr?: string;
 }
 /**
  * Instance表detail字段
@@ -3803,27 +3624,6 @@ export interface InstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableAlarmStrategy?: boolean;
-}
-/**
- * DescribeSpec请求参数结构体
- */
-export interface DescribeSpecRequest {
-    /**
-     * 地域信息，例如"ap-guangzhou-1"
-     */
-    Zone: string;
-    /**
-     * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
-     */
-    PayMode?: string;
-    /**
-     * 多可用区
-     */
-    Zones?: Array<string>;
-    /**
-     * 机型名称
-     */
-    SpecName?: string;
 }
 /**
  * DescribeBackUpTables请求参数结构体
@@ -3900,20 +3700,6 @@ export interface NodeInfos {
      * 上一次重启时间
      */
     LastRestartTime?: string;
-}
-/**
- * DescribeReplicaVersion返回参数结构体
- */
-export interface DescribeReplicaVersionResponse {
-    /**
-     * 是否支持新语法
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReplicaFlagItem: VersionReplicaItem;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeInstanceNodesInfo返回参数结构体

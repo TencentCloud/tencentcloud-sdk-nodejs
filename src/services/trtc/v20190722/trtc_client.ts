@@ -92,6 +92,7 @@ import {
   DescribeUserInfoResponse,
   RemoveUserByStrRoomIdResponse,
   DescribeTRTCRealTimeScaleMetricDataResponse,
+  UpdateStreamIngestResponse,
   StartMCUMixTranscodeRequest,
   WebRecordVideoParams,
   McuWaterMarkImage,
@@ -169,6 +170,7 @@ import {
   StartWebRecordRequest,
   MaxVideoUser,
   AgentParams,
+  UpdateStreamIngestRequest,
   StopWebRecordResponse,
   SummarizeTranscriptionResponse,
   DeletePictureRequest,
@@ -410,6 +412,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StartStreamIngestResponse) => void
   ): Promise<StartStreamIngestResponse> {
     return this.request("StartStreamIngest", req, cb)
+  }
+
+  /**
+   * 更新输入在线媒体流任务的StreamUrl
+   */
+  async UpdateStreamIngest(
+    req: UpdateStreamIngestRequest,
+    cb?: (error: string, rep: UpdateStreamIngestResponse) => void
+  ): Promise<UpdateStreamIngestResponse> {
+    return this.request("UpdateStreamIngest", req, cb)
   }
 
   /**
