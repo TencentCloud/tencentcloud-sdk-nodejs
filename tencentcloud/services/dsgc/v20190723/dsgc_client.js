@@ -776,7 +776,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 新增分类分级规则，单个用户最多允许创建200个规则。
-
      */
     async CreateDSPADiscoveryRule(req, cb) {
         return this.request("CreateDSPADiscoveryRule", req, cb);

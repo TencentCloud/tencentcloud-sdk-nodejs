@@ -553,6 +553,15 @@ export interface VideoEncodeParams {
     Gop?: number;
 }
 /**
+ * UpdateAIConversation返回参数结构体
+ */
+export interface UpdateAIConversationResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUserEvent返回参数结构体
  */
 export interface DescribeUserEventResponse {
@@ -3907,6 +3916,35 @@ export interface AbnormalExperience {
      * 异常事件的上报时间
      */
     EventTime: number;
+}
+/**
+ * UpdateAIConversation请求参数结构体
+ */
+export interface UpdateAIConversationRequest {
+    /**
+     * 唯一标识一个任务
+     */
+    TaskId: string;
+    /**
+     * 不填写则不进行更新，机器人的欢迎语
+     */
+    WelcomeMessage?: string;
+    /**
+     * 不填写则不进行更新。智能打断模式，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+     */
+    InterruptMode?: number;
+    /**
+     * 不填写则不进行更新。InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断
+     */
+    InterruptSpeechDuration?: number;
+    /**
+     * 不填写则不进行更新，LLM配置，详情见StartAIConversation接口
+     */
+    LLMConfig?: string;
+    /**
+     * 不填写则不进行更新，TTS配置，详情见StartAIConversation接口
+     */
+    TTSConfig?: string;
 }
 /**
  * 房间信息列表

@@ -117,6 +117,7 @@ import {
   DescribeCloudNativeAPIGatewayRoutesResponse,
   DescribeWafProtectionResponse,
   DescribeZookeeperReplicasRequest,
+  Location,
   DeleteGovernanceInstancesResponse,
   UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,

@@ -18,21 +18,18 @@ export interface DescribeInstanceUsedSubnetsResponse {
     RequestId?: string;
 }
 /**
- * CreateInstanceNew返回参数结构体
+ * DescribeInstanceNodes返回参数结构体
  */
-export interface CreateInstanceNewResponse {
+export interface DescribeInstanceNodesResponse {
     /**
-     * 流程ID
+     * 总数
      */
-    FlowId?: string;
+    TotalCount?: number;
     /**
-     * 实例ID
+     * 实例节点总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId?: string;
-    /**
-     * 错误信息
-     */
-    ErrorMsg?: string;
+    InstanceNodesList?: Array<InstanceNode>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1101,18 +1098,21 @@ export interface BackupTableContent {
     IsOpenCoolDown?: boolean;
 }
 /**
- * DescribeInstanceNodes返回参数结构体
+ * CreateInstanceNew返回参数结构体
  */
-export interface DescribeInstanceNodesResponse {
+export interface CreateInstanceNewResponse {
     /**
-     * 总数
+     * 流程ID
      */
-    TotalCount?: number;
+    FlowId?: string;
     /**
-     * 实例节点总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例ID
      */
-    InstanceNodesList?: Array<InstanceNode>;
+    InstanceId?: string;
+    /**
+     * 错误信息
+     */
+    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1536,6 +1536,20 @@ export interface CreateBackUpScheduleRequest {
      * cos认证的信息
      */
     CosSourceInfo?: CosSourceInfo;
+}
+/**
+ * ActionAlterUser返回参数结构体
+ */
+export interface ActionAlterUserResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSpec请求参数结构体
@@ -2289,6 +2303,16 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: InstanceDetail;
+    /**
+     * 是否启用DLC 0:关闭 1:开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableDlc?: number;
+    /**
+     * 账户类型 0:普通用户 1:CAM用户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccountType?: number;
 }
 /**
  * DescribeUserBindWorkloadGroup请求参数结构体
@@ -2575,6 +2599,39 @@ export interface SearchTags {
      * 1表示只输入标签的键，没有输入值；0表示输入键时且输入值
      */
     AllValue?: number;
+}
+/**
+ * 新增或是修改用户
+ */
+export interface UserInfo {
+    /**
+     * 集群实例id
+     */
+    InstanceId: string;
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 密码
+     */
+    PassWord: string;
+    /**
+     * 用户链接来自的 IP
+     */
+    WhiteHost?: string;
+    /**
+     * 修改前用户链接来自的 IP
+     */
+    OldWhiteHost?: string;
+    /**
+     * 描述
+     */
+    Describe?: string;
+    /**
+     * 旧密码
+     */
+    OldPwd?: string;
 }
 /**
  * DescribeInstanceUsedSubnets请求参数结构体
@@ -2912,55 +2969,14 @@ export interface DeleteWorkloadGroupResponse {
     RequestId?: string;
 }
 /**
- * 资源规格描述信息
+ * Instance表detail字段
  */
-export interface ResourceSpec {
+export interface InstanceDetail {
     /**
-     * 规格名称，例如“SCH1"
-     */
-    Name?: string;
-    /**
-     * cpu核数
-     */
-    Cpu?: number;
-    /**
-     * 内存大小，单位G
-     */
-    Mem?: number;
-    /**
-     * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
-     */
-    Type?: string;
-    /**
-     * 系统盘描述信息
+     * 告警策略是否可用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SystemDisk?: DiskSpec;
-    /**
-     * 数据盘描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DataDisk?: DiskSpec;
-    /**
-     * 最大节点数目限制
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxNodeSize?: number;
-    /**
-     * 是否可用，false代表售罄
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Available?: boolean;
-    /**
-     * 规格描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ComputeSpecDesc?: string;
-    /**
-     * cvm库存
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceQuota?: number;
+    EnableAlarmStrategy?: boolean;
 }
 /**
  * DescribeCoolDownTableData返回参数结构体
@@ -3119,6 +3135,57 @@ export interface DescribeCoolDownPoliciesRequest {
      * 集群id
      */
     InstanceId?: string;
+}
+/**
+ * 资源规格描述信息
+ */
+export interface ResourceSpec {
+    /**
+     * 规格名称，例如“SCH1"
+     */
+    Name?: string;
+    /**
+     * cpu核数
+     */
+    Cpu?: number;
+    /**
+     * 内存大小，单位G
+     */
+    Mem?: number;
+    /**
+     * 分类标记，STANDARD/BIGDATA/HIGHIO分别表示标准型/大数据型/高IO
+     */
+    Type?: string;
+    /**
+     * 系统盘描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SystemDisk?: DiskSpec;
+    /**
+     * 数据盘描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataDisk?: DiskSpec;
+    /**
+     * 最大节点数目限制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxNodeSize?: number;
+    /**
+     * 是否可用，false代表售罄
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Available?: boolean;
+    /**
+     * 规格描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComputeSpecDesc?: string;
+    /**
+     * cvm库存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceQuota?: number;
 }
 /**
  * 恢复任务信息
@@ -3616,14 +3683,21 @@ export interface DescribeBackUpJobRequest {
     JobIdFiltersStr?: string;
 }
 /**
- * Instance表detail字段
+ * ActionAlterUser请求参数结构体
  */
-export interface InstanceDetail {
+export interface ActionAlterUserRequest {
     /**
-     * 告警策略是否可用
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户信息
      */
-    EnableAlarmStrategy?: boolean;
+    UserInfo: UserInfo;
+    /**
+     * api接口类型
+     */
+    ApiType: string;
+    /**
+     * 用户权限类型 0:普通用户 1:管理员
+     */
+    UserPrivilege?: number;
 }
 /**
  * DescribeBackUpTables请求参数结构体

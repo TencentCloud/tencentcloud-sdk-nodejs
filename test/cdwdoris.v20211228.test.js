@@ -388,6 +388,16 @@ it("cdwdoris.v20211228.ModifyCoolDownPolicy", async function () {
     }
 })
 
+it("cdwdoris.v20211228.ActionAlterUser", async function () {
+    try {
+       const data = await client.ActionAlterUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.DescribeSqlApis", async function () {
     try {
        const data = await client.DescribeSqlApis({})

@@ -1475,6 +1475,10 @@ export interface CheckIdCardInformationResponse {
    */
   Encryption?: Encryption
   /**
+   * 加密后的数据
+   */
+  EncryptedBody?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1823,6 +1827,14 @@ Config = {"CopyWarn":true,"ReshootWarn":true}
 其中敏感信息包括：Response.IdNum、Response.Name
    */
   IsEncrypt?: boolean
+  /**
+   * 是否需要对响应体加密
+   */
+  IsEncryptResponse?: boolean
+  /**
+   * 是否需要对返回中的敏感信息进行加密,需指定加密算法Algorithm、CBC加密的初始向量、加密后的对称密钥。
+   */
+  Encryption?: Encryption
 }
 
 /**

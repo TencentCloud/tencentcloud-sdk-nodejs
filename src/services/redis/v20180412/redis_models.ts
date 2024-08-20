@@ -696,7 +696,7 @@ export interface RenewInstanceResponse {
   /**
    * 交易ID。
    */
-  DealId: string
+  DealId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1149,19 +1149,19 @@ export interface DescribeBandwidthRangeResponse {
   /**
    * 标准带宽。指购买实例时，系统为每个节点分配的带宽。
    */
-  BaseBandwidth: number
+  BaseBandwidth?: number
   /**
    * 指实例的附加带宽。标准带宽不满足需求的情况下，用户可自行增加的带宽。<ul><li>开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数 * Max ([只读副本数量, 1])，标准架构的分片数 = 1。</li><li>没有开启副本只读时，实例总带宽 = 附加带宽 * 分片数 + 标准带宽 * 分片数，标准架构的分片数 = 1。</li></ul>
    */
-  AddBandwidth: number
+  AddBandwidth?: number
   /**
    * 附加带宽设置下限。
    */
-  MinAddBandwidth: number
+  MinAddBandwidth?: number
   /**
    * 附加带宽设置上限。
    */
-  MaxAddBandwidth: number
+  MaxAddBandwidth?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1359,11 +1359,11 @@ export interface DescribeInstanceParamRecordsResponse {
   /**
    * 总的修改历史记录数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 修改历史记录信息。
    */
-  InstanceParamHistory: Array<InstanceParamHistory>
+  InstanceParamHistory?: Array<InstanceParamHistory>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1785,7 +1785,7 @@ export interface DisableReplicaReadonlyResponse {
    * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1828,42 +1828,42 @@ export interface DescribeInstanceDTSInfoResponse {
    * DTS任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobId: string
+  JobId?: string
   /**
    * DTS任务名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobName: string
+  JobName?: string
   /**
    * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 状态描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 同步时延，单位：字节
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  Offset?: number
   /**
    * 断开时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CutDownTime: string
+  CutDownTime?: string
   /**
    * 源实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SrcInfo: DescribeInstanceDTSInstanceInfo
+  SrcInfo?: DescribeInstanceDTSInstanceInfo
   /**
    * 目标实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DstInfo: DescribeInstanceDTSInstanceInfo
+  DstInfo?: DescribeInstanceDTSInstanceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3477,7 +3477,7 @@ export interface CleanUpInstanceResponse {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3760,12 +3760,12 @@ export interface EnableReplicaReadonlyResponse {
    * 错误：ERROR，正确OK（已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4001,42 +4001,42 @@ export interface StartupInstanceResponse {
  */
 export interface DescribeInstanceDTSInstanceInfo {
   /**
-   * 地域ID
+   * 地域 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId: number
   /**
-   * 实例ID
+   * 实例 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
-   * 仓库ID
+   * 仓库ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SetId: number
   /**
-   * 可用区ID
+   * 可用区ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId: number
   /**
-   * 实例类型
+   * 实例类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: number
   /**
-   * 实例名称
+   * 实例名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName: string
   /**
-   * 实例访问地址
+   * 实例访问地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip: string
   /**
-   * 状态
+   * 状态。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
@@ -5124,7 +5124,7 @@ export interface CloseSSLResponse {
   /**
    * 任务ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5769,16 +5769,18 @@ export interface DescribeParamTemplateInfoResponse {
   Name?: string
   /**
    * 产品类型。
-- 2：Redis 2.8内存版（标准架构）。
-- 3：CKV 3.2内存版（标准架构）。
-- 4：CKV 3.2内存版（集群架构）。
-- 5：Redis 2.8内存版（单机）。
-- 6：Redis 4.0内存版（标准架构）。
-- 7：Redis 4.0内存版（集群架构）。
-- 8：Redis 5.0内存版（标准架构）。
-- 9：Redis 5.0内存版（集群架构）。
-- 15：Redis 6.2内存版（标准架构）。
-- 16：Redis 6.2内存版（集群架构）。
+- 2：Redis 2.8 内存版（标准架构）。
+- 3：CKV 3.2 内存版（标准架构）。
+- 4：CKV 3.2 内存版（集群架构）。
+- 5：Redis 2.8 内存版（单机）。
+- 6：Redis 4.0 内存版（标准架构）。
+- 7：Redis 4.0 内存版（集群架构）。
+- 8：Redis 5.0 内存版（标准架构）。
+- 9：Redis 5.0 内存版（集群架构）。
+- 15：Redis 6.2 内存版（标准架构）。
+- 16：Redis 6.2 内存版（集群架构）。
+- 17：Redis 7.0 内存版（标准架构）。
+- 18：Redis 7.0 内存版（集群架构）。
    */
   ProductType?: number
   /**
@@ -6054,7 +6056,7 @@ export interface DeleteInstanceAccountResponse {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6464,7 +6466,7 @@ export interface ClearInstanceResponse {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

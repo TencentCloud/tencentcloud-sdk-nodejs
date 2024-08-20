@@ -3736,7 +3736,7 @@ export interface CreateListenerRequest {
    */
   MaxCps?: number
   /**
-   * 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300~900，性能容量型实例支持：300~2000。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。
+   * 空闲连接超时时间，此参数仅适用于TCP监听器，单位：秒。取值范围：共享型实例和独占型实例支持：300-900，性能容量型实例支持：300-2000。如需设置请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)。
    */
   IdleConnectTimeout?: number
   /**

@@ -39,6 +39,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRoomInfo", req, cb);
     }
     /**
+     * 更新AIConversation参数
+     */
+    async UpdateAIConversation(req, cb) {
+        return this.request("UpdateAIConversation", req, cb);
+    }
+    /**
      * 获取TRTC音视频互动的用量明细，单位:分钟。
 - 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
 - 单次查询统计区间最多不能超过31天。
@@ -272,45 +278,12 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StartMCUMixTranscode", req, cb);
     }
     /**
-     * 这个接口调用后，后台会启动转录机器人，实时进行语音识别并下发字幕和转录消息。
+     * 启动转录机器人，后台会通过机器人拉流进行实时进行语音识别并下发字幕和转录消息。
 转录机器人支持两种拉流方式，通过TranscriptionMode字段控制：
 - 拉取全房间的流。
 - 拉取特定用户的流。
 
-服务端通过TRTC的自定义消息实时下发字幕和会议记录，CmdId固定是1。客户端只需监听自定义消息的回调即可，比如[c++回调](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565)。其他客户端比如安卓、Web等同样可在该链接处找到。
-
-服务端实时下发的消息是JSON字符串，实时字幕具体格式如下：
-`{
-    "type": "subtitle",
-    "userid": "xxx",
-    "text": "xxx",
-    "start_time": "00:00:02",
-    "end_time": "00:00:05"
-}`
-字段作用如下：
-- type是subtitle，表示这是实时字幕消息。
-- userid表示是哪个用户说的话。
-- text是语音识别出的文本。
-- start_time和end_time表示该字幕消息从任务开启后的开始和结束时间。
-
-转录消息具体格式如下：
-`{
-    "type": "transcription",
-    "userid": "xxx",
-    "text": "xxx",
-    "start_time": "00:00:02",
-    "end_time": "00:00:05"
-}`
-字段作用如下：
-- type是transcription，表示这是转录消息。
-- 其余字段同实时字幕消息。
-
-转录消息和实时字幕消息的区别是，转录消息是完整的一句话，实时字幕消息则是这一句话的中间阶段。
-假如有一句完整的话，“今天天气怎么样？”，那么服务的下发消息的顺序可能是这样：
-- 字幕消息，“今天”
-- 字幕消息，“今天天气”
-- 字幕消息，“今天天气怎么样”
-- 转录消息，“今天天气怎么样？”
+服务端通过TRTC的自定义消息实时下发字幕以及转录消息，CmdId固定是1。客户端只需监听自定义消息的回调即可，比如[c++回调](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565)。其他客户端比如安卓、Web等同样可在该链接处找到。
      */
     async StartAITranscription(req, cb) {
         return this.request("StartAITranscription", req, cb);

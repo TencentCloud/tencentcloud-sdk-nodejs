@@ -402,7 +402,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通CIC服务
+   * 开通身份中心服务（CIC）
    */
   async OpenIdentityCenter(
     req: OpenIdentityCenterRequest,
@@ -1162,7 +1162,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取cam身份中心服务信息
+   * 获取集团账号身份中心服务信息
    */
   async DescribeIdentityCenter(
     req?: DescribeIdentityCenterRequest,

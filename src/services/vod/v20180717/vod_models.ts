@@ -20632,7 +20632,7 @@ export interface RoundPlayFilePlayInfo {
    */
   Duration?: number
   /**
-   * 播放进度，单位为妙。
+   * 播放进度，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number

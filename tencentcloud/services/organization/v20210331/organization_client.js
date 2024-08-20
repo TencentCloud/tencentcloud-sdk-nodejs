@@ -82,7 +82,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetUser", req, cb);
     }
     /**
-     * 开通CIC服务
+     * 开通身份中心服务（CIC）
      */
     async OpenIdentityCenter(req, cb) {
         return this.request("OpenIdentityCenter", req, cb);
@@ -538,7 +538,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationAuthNode", req, cb);
     }
     /**
-     * 获取cam身份中心服务信息
+     * 获取集团账号身份中心服务信息
      */
     async DescribeIdentityCenter(req, cb) {
         return this.request("DescribeIdentityCenter", req, cb);

@@ -28,6 +28,16 @@ it("trtc.v20190722.DescribeRoomInfo", async function () {
     }
 })
 
+it("trtc.v20190722.UpdateAIConversation", async function () {
+    try {
+       const data = await client.UpdateAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeTrtcUsage", async function () {
     try {
        const data = await client.DescribeTrtcUsage({})

@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCoolDownPolicy", req, cb);
     }
     /**
+     * 新增和修改用户接口
+     */
+    async ActionAlterUser(req, cb) {
+        return this.request("ActionAlterUser", req, cb);
+    }
+    /**
      * 针对驱动sql命令查询ck集群接口
      */
     async DescribeSqlApis(req, cb) {

@@ -2477,6 +2477,10 @@ export interface CreateDSPADiscoveryRuleRequest {
      * COS类敏感数据识别规则
      */
     COSRules?: DspaDiscoveryCOSRules;
+    /**
+     * 规则状态；0 不启用, 1 启用
+     */
+    Status?: number;
 }
 /**
  * AuthorizeDSPAMetaResources返回参数结构体
@@ -2504,32 +2508,37 @@ export interface DspaDiscoveryRuleDetail {
      * 规则ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 规则名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 规则描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 规则来源，取值：0 内置, 1 自定义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Source: number;
+    Source?: number;
     /**
      * RDB规则详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RDBRules: DspaDiscoveryRDBRules;
+    RDBRules?: DspaDiscoveryRDBRules;
     /**
      * COS规则详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    COSRules: DspaDiscoveryCOSRules;
+    COSRules?: DspaDiscoveryCOSRules;
+    /**
+     * 0关闭，1开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * ModifyDSPACategory请求参数结构体
@@ -3774,6 +3783,10 @@ export interface ModifyDSPADiscoveryRuleRequest {
      * COS类敏感数据识别规则
      */
     COSRules?: ScanTaskCOSRules;
+    /**
+     * 规则状态
+     */
+    Status?: number;
 }
 /**
  * DescribeRDBAssetSensitiveDistribution返回参数结构体
@@ -4525,7 +4538,7 @@ export interface CreateDSPADiscoveryRuleResponse {
     /**
      * 规则ID
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7764,6 +7777,21 @@ export interface ExportAssetDetailDataResponse {
     RequestId?: string;
 }
 /**
+ * 分类分级规则数量
+ */
+export interface RuleEffectItem {
+    /**
+     * 规则描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 规则值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: number;
+}
+/**
  * 分类规则信息
  */
 export interface CategoryRule {
@@ -7801,6 +7829,16 @@ export interface CategoryRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasRuleName?: string;
+    /**
+     * 各类分类分级规则数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleEffectItems?: Array<RuleEffectItem>;
+    /**
+     * 规则状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleStatus?: number;
 }
 /**
  * CreateDSPAMetaResources请求参数结构体
@@ -8733,7 +8771,7 @@ export interface DescribeDSPACategoryRulesResponse {
      * 分类规则信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryRules: Array<CategoryRule>;
+    CategoryRules?: Array<CategoryRule>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

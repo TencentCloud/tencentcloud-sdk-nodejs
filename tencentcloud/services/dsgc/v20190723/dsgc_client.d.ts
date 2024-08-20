@@ -520,7 +520,6 @@ export declare class Client extends AbstractClient {
     ModifyDSPAAssessmentRiskLevel(req: ModifyDSPAAssessmentRiskLevelRequest, cb?: (error: string, rep: ModifyDSPAAssessmentRiskLevelResponse) => void): Promise<ModifyDSPAAssessmentRiskLevelResponse>;
     /**
      * 新增分类分级规则，单个用户最多允许创建200个规则。
-
      */
     CreateDSPADiscoveryRule(req: CreateDSPADiscoveryRuleRequest, cb?: (error: string, rep: CreateDSPADiscoveryRuleResponse) => void): Promise<CreateDSPADiscoveryRuleResponse>;
     /**

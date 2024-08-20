@@ -44,7 +44,7 @@ export declare class Client extends AbstractClient {
      */
     GetUser(req: GetUserRequest, cb?: (error: string, rep: GetUserResponse) => void): Promise<GetUserResponse>;
     /**
-     * 开通CIC服务
+     * 开通身份中心服务（CIC）
      */
     OpenIdentityCenter(req: OpenIdentityCenterRequest, cb?: (error: string, rep: OpenIdentityCenterResponse) => void): Promise<OpenIdentityCenterResponse>;
     /**
@@ -348,7 +348,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationAuthNode(req: DescribeOrganizationAuthNodeRequest, cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void): Promise<DescribeOrganizationAuthNodeResponse>;
     /**
-     * 获取cam身份中心服务信息
+     * 获取集团账号身份中心服务信息
      */
     DescribeIdentityCenter(req?: DescribeIdentityCenterRequest, cb?: (error: string, rep: DescribeIdentityCenterResponse) => void): Promise<DescribeIdentityCenterResponse>;
     /**

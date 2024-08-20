@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstanceUsedSubnetsResponse,
-  CreateInstanceNewResponse,
+  DescribeInstanceNodesResponse,
   DescribeClusterConfigsHistoryResponse,
   DescribeInstanceOperationsRequest,
   DescribeClusterConfigsResponse,
@@ -72,7 +72,7 @@ import {
   CheckCoolDownWorkingVariableConfigCorrectRequest,
   InstanceOperation,
   BackupTableContent,
-  DescribeInstanceNodesResponse,
+  CreateInstanceNewResponse,
   DescribeSqlApisRequest,
   ModifySecurityGroupsRequest,
   CreateInstanceNewRequest,
@@ -87,6 +87,7 @@ import {
   ClusterConfigsHistory,
   InstanceConfigItem,
   CreateBackUpScheduleRequest,
+  ActionAlterUserResponse,
   DescribeSpecRequest,
   DescribeClusterConfigsHistoryRequest,
   CreateWorkloadGroupRequest,
@@ -127,6 +128,7 @@ import {
   RestartClusterForNodeRequest,
   BackupStatus,
   SearchTags,
+  UserInfo,
   DescribeInstanceUsedSubnetsRequest,
   DescribeDatabaseAuditRecordsRequest,
   DescribeBackUpJobDetailResponse,
@@ -143,7 +145,7 @@ import {
   OpenCoolDownPolicyResponse,
   ReduceInstanceRequest,
   DeleteWorkloadGroupResponse,
-  ResourceSpec,
+  InstanceDetail,
   DescribeCoolDownTableDataResponse,
   RestartClusterForConfigsRequest,
   RegionAreaInfo,
@@ -152,6 +154,7 @@ import {
   CreateWorkloadGroupResponse,
   DescribeInstanceStateResponse,
   DescribeCoolDownPoliciesRequest,
+  ResourceSpec,
   RestoreStatus,
   DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
@@ -166,7 +169,7 @@ import {
   CreateInstanceSpec,
   DescribeInstanceRequest,
   DescribeBackUpJobRequest,
-  InstanceDetail,
+  ActionAlterUserRequest,
   DescribeBackUpTablesRequest,
   DescribeInstanceNodesRoleRequest,
   DescribeDatabaseAuditDownloadResponse,
@@ -552,6 +555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCoolDownPolicyResponse) => void
   ): Promise<ModifyCoolDownPolicyResponse> {
     return this.request("ModifyCoolDownPolicy", req, cb)
+  }
+
+  /**
+   * 新增和修改用户接口
+   */
+  async ActionAlterUser(
+    req: ActionAlterUserRequest,
+    cb?: (error: string, rep: ActionAlterUserResponse) => void
+  ): Promise<ActionAlterUserResponse> {
+    return this.request("ActionAlterUser", req, cb)
   }
 
   /**

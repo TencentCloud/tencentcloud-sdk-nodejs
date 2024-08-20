@@ -364,6 +364,7 @@ import {
   ModifyDSPACOSTaskResultRequest,
   DescribeDSPASupportedMetasRequest,
   ExportAssetDetailDataResponse,
+  RuleEffectItem,
   CategoryRule,
   CreateDSPAMetaResourcesRequest,
   RiskCountInfo,
@@ -1661,9 +1662,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 新增分类分级规则，单个用户最多允许创建200个规则。
-
-     */
+   * 新增分类分级规则，单个用户最多允许创建200个规则。
+   */
   async CreateDSPADiscoveryRule(
     req: CreateDSPADiscoveryRuleRequest,
     cb?: (error: string, rep: CreateDSPADiscoveryRuleResponse) => void

@@ -2291,6 +2291,26 @@ export interface DescribeZookeeperReplicasRequest {
     Offset?: number;
 }
 /**
+ * 新增Location字段，展示zone/region/campus
+ */
+export interface Location {
+    /**
+     * 大区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 机房
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Campus?: string;
+}
+/**
  * DeleteGovernanceInstances返回参数结构体
  */
 export interface DeleteGovernanceInstancesResponse {
@@ -3046,6 +3066,10 @@ export interface DescribeGovernanceInstancesResponse {
      * 服务里实例列表。
      */
     Content?: Array<GovernanceInstance>;
+    /**
+     * 地域
+     */
+    Location?: Location;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5717,6 +5741,10 @@ export interface DescribeGovernanceInstancesRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: number;
+    /**
+     * 地域
+     */
+    Location?: Location;
 }
 /**
  * DescribeCloudNativeAPIGatewayRouteRateLimit返回参数结构体

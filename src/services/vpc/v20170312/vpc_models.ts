@@ -646,15 +646,15 @@ export interface ServiceTemplateGroup {
   /**
    * 协议端口模板集合实例ID，例如：ppmg-2klmrefu。
    */
-  ServiceTemplateGroupId: string
+  ServiceTemplateGroupId?: string
   /**
    * 协议端口模板集合名称。
    */
-  ServiceTemplateGroupName: string
+  ServiceTemplateGroupName?: string
   /**
    * 协议端口模板实例ID。
    */
-  ServiceTemplateIdSet: Array<string>
+  ServiceTemplateIdSet?: Array<string>
   /**
    * 创建时间。
    */
@@ -662,7 +662,12 @@ export interface ServiceTemplateGroup {
   /**
    * 协议端口模板实例信息。
    */
-  ServiceTemplateSet: Array<ServiceTemplate>
+  ServiceTemplateSet?: Array<ServiceTemplate>
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -1270,15 +1275,15 @@ export interface AddressTemplate {
   /**
    * IP地址模板名称。
    */
-  AddressTemplateName: string
+  AddressTemplateName?: string
   /**
    * IP地址模板实例唯一ID。
    */
-  AddressTemplateId: string
+  AddressTemplateId?: string
   /**
    * IP地址信息。
    */
-  AddressSet: Array<string>
+  AddressSet?: Array<string>
   /**
    * 创建时间。
    */
@@ -1286,7 +1291,12 @@ export interface AddressTemplate {
   /**
    * 带备注的IP地址信息。
    */
-  AddressExtraSet: Array<AddressInfo>
+  AddressExtraSet?: Array<AddressInfo>
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -2141,15 +2151,15 @@ export interface ServiceTemplate {
   /**
    * 协议端口实例ID，例如：ppm-f5n1f8da。
    */
-  ServiceTemplateId: string
+  ServiceTemplateId?: string
   /**
    * 模板名称。
    */
-  ServiceTemplateName: string
+  ServiceTemplateName?: string
   /**
    * 协议端口信息。
    */
-  ServiceSet: Array<string>
+  ServiceSet?: Array<string>
   /**
    * 创建时间。
    */
@@ -2157,7 +2167,12 @@ export interface ServiceTemplate {
   /**
    * 带备注的协议端口信息。
    */
-  ServiceExtraSet: Array<ServicesInfo>
+  ServiceExtraSet?: Array<ServicesInfo>
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -6529,6 +6544,11 @@ NONEXTHOP：无下一跳；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -7971,6 +7991,11 @@ export interface EndPoint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -8309,6 +8334,11 @@ export interface EndPointService {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessIpType?: number
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -9166,15 +9196,15 @@ export interface AddressTemplateGroup {
   /**
    * IP地址模板集合名称。
    */
-  AddressTemplateGroupName: string
+  AddressTemplateGroupName?: string
   /**
    * IP地址模板集合实例ID，例如：ipmg-dih8xdbq。
    */
-  AddressTemplateGroupId: string
+  AddressTemplateGroupId?: string
   /**
    * IP地址模板ID。
    */
-  AddressTemplateIdSet: Array<string>
+  AddressTemplateIdSet?: Array<string>
   /**
    * 创建时间。
    */
@@ -9182,7 +9212,12 @@ export interface AddressTemplateGroup {
   /**
    * IP地址模板实例。
    */
-  AddressTemplateSet: Array<AddressTemplateItem>
+  AddressTemplateSet?: Array<AddressTemplateItem>
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -9282,6 +9317,11 @@ export interface HaVip {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlushedTime?: string
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -9319,27 +9359,36 @@ export interface LocalGateway {
   /**
    * CDC实例ID
    */
-  CdcId: string
+  CdcId?: string
   /**
    * VPC实例ID
    */
-  VpcId: string
+  VpcId?: string
   /**
-   * 本地网关实例ID
+   * 本地网关实例ID（计划弃用）
    */
-  UniqLocalGwId: string
+  UniqLocalGwId?: string
   /**
    * 本地网关名称
    */
-  LocalGatewayName: string
+  LocalGatewayName?: string
   /**
    * 本地网关IP地址
    */
-  LocalGwIp: string
+  LocalGwIp?: string
   /**
    * 本地网关创建时间
    */
-  CreateTime: string
+  CreateTime?: string
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
+  /**
+   * 本地网关实例ID（计划起用）
+   */
+  LocalGatewayId?: string
 }
 
 /**
@@ -12474,6 +12523,11 @@ export interface SnapshotPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
+  /**
+   * 标签键值对。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
