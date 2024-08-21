@@ -3098,7 +3098,7 @@ export interface Context {
  */
 export interface ListDocRequest {
     /**
-     * 机器人ID
+     * 应用ID
      */
     BotBizId: string;
     /**
@@ -3114,7 +3114,7 @@ export interface ListDocRequest {
      */
     Query?: string;
     /**
-     * 文档状态： 7 审核中、8 审核失败、10 待发布、11 发布中、12 已发布、13 学习中、14 学习失败 20 已过期
+     * 文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功  7-审核中  8-审核失败 9-审核成功  10-待发布  11-发布中  12-已发布  13-学习中  14-学习失败  15-更新中  16-更新失败  17-解析中  18-解析失败  19-导入失败   20-已过期 21-超量失效 22-超量失效恢复
      */
     Status?: Array<number | bigint>;
 }

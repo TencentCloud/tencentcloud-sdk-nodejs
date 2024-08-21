@@ -308,6 +308,16 @@ it("cdwdoris.v20211228.DeleteWorkloadGroup", async function () {
     }
 })
 
+it("cdwdoris.v20211228.ModifyClusterConfigs", async function () {
+    try {
+       const data = await client.ModifyClusterConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwdoris.v20211228.ModifySecurityGroups", async function () {
     try {
        const data = await client.ModifySecurityGroups({})

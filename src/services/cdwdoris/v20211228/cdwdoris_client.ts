@@ -26,7 +26,7 @@ import {
   ScaleOutInstanceResponse,
   ModifyUserPrivilegesV3Response,
   ModifyUserPrivilegesV3Request,
-  ModifyWorkloadGroupStatusResponse,
+  DestroyInstanceRequest,
   BindUser,
   CancelBackupJobRequest,
   ModifyWorkloadGroupRequest,
@@ -45,6 +45,7 @@ import {
   DescribeUserBindWorkloadGroupResponse,
   ScaleOutInstanceRequest,
   UpdateUserPrivileges,
+  ModifyClusterConfigsRequest,
   DescribeInstanceStateRequest,
   NetworkInfo,
   ZoneInfo,
@@ -149,12 +150,14 @@ import {
   DescribeCoolDownTableDataResponse,
   RestartClusterForConfigsRequest,
   RegionAreaInfo,
-  DestroyInstanceRequest,
+  ModifyWorkloadGroupStatusResponse,
+  ConfigSubmitContext,
   RegionInfo,
   CreateWorkloadGroupResponse,
   DescribeInstanceStateResponse,
   DescribeCoolDownPoliciesRequest,
   ResourceSpec,
+  ModifyClusterConfigsResponse,
   RestoreStatus,
   DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
@@ -475,6 +478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWorkloadGroupResponse) => void
   ): Promise<DeleteWorkloadGroupResponse> {
     return this.request("DeleteWorkloadGroup", req, cb)
+  }
+
+  /**
+   * 在集群配置页面修改集群配置文件接口，xml模式
+   */
+  async ModifyClusterConfigs(
+    req: ModifyClusterConfigsRequest,
+    cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
+  ): Promise<ModifyClusterConfigsResponse> {
+    return this.request("ModifyClusterConfigs", req, cb)
   }
 
   /**

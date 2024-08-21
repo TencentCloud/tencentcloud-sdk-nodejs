@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWorkloadGroup", req, cb);
     }
     /**
+     * 在集群配置页面修改集群配置文件接口，xml模式
+     */
+    async ModifyClusterConfigs(req, cb) {
+        return this.request("ModifyClusterConfigs", req, cb);
+    }
+    /**
      * 更改安全组
      */
     async ModifySecurityGroups(req, cb) {

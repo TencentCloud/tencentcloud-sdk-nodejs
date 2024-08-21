@@ -236,7 +236,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeManagers(req: DescribeManagersRequest, cb?: (error: string, rep: DescribeManagersResponse) => void): Promise<DescribeManagersResponse>;
     /**
-     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
+     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos
      */
     DescribeCertificateBindResourceTaskDetail(req: DescribeCertificateBindResourceTaskDetailRequest, cb?: (error: string, rep: DescribeCertificateBindResourceTaskDetailResponse) => void): Promise<DescribeCertificateBindResourceTaskDetailResponse>;
     /**

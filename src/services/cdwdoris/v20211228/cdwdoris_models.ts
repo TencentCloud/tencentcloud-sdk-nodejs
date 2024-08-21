@@ -180,17 +180,13 @@ export interface ModifyUserPrivilegesV3Request {
 }
 
 /**
- * ModifyWorkloadGroupStatus返回参数结构体
+ * DestroyInstance请求参数结构体
  */
-export interface ModifyWorkloadGroupStatusResponse {
+export interface DestroyInstanceRequest {
   /**
-   * 错误信息
+   * 集群ID
    */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -556,6 +552,24 @@ export interface UpdateUserPrivileges {
    * 是否设置catalog权限
    */
   IsSetGlobalCatalog?: boolean
+}
+
+/**
+ * ModifyClusterConfigs请求参数结构体
+ */
+export interface ModifyClusterConfigsRequest {
+  /**
+   * 集群ID，例如cdwch-xxxx
+   */
+  InstanceId: string
+  /**
+   * 配置文件修改信息
+   */
+  ModifyConfContext: Array<ConfigSubmitContext>
+  /**
+   * 修改原因
+   */
+  Remark?: string
 }
 
 /**
@@ -3180,13 +3194,39 @@ export interface RegionAreaInfo {
 }
 
 /**
- * DestroyInstance请求参数结构体
+ * ModifyWorkloadGroupStatus返回参数结构体
  */
-export interface DestroyInstanceRequest {
+export interface ModifyWorkloadGroupStatusResponse {
   /**
-   * 集群ID
+   * 错误信息
    */
-  InstanceId: string
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 配置文件修改信息
+ */
+export interface ConfigSubmitContext {
+  /**
+   * 配置文件名称
+   */
+  FileName: string
+  /**
+   * 配置文件新内容，base64编码
+   */
+  NewConfValue: string
+  /**
+   * 配置文件旧内容，base64编码
+   */
+  OldConfValue?: string
+  /**
+   * 文件路径
+   */
+  FilePath?: string
 }
 
 /**
@@ -3339,6 +3379,24 @@ export interface ResourceSpec {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceQuota?: number
+}
+
+/**
+ * ModifyClusterConfigs返回参数结构体
+ */
+export interface ModifyClusterConfigsResponse {
+  /**
+   * 流程相关信息
+   */
+  FlowId?: number
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

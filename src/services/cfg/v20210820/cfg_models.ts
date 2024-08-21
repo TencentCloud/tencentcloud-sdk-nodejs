@@ -1745,7 +1745,7 @@ export interface ActionLibraryListResult {
    */
   ActionCommand?: string
   /**
-   * 动作类型( 0 -- tat   1 -- 云API）
+   * 动作类型（0 -- tat   1 -- 云API）
    */
   ActionCommandType?: number
   /**

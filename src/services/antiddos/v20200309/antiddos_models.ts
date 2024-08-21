@@ -716,6 +716,10 @@ export interface DescribeBGPIPL7RulesRequest {
    * 默认为false，当为true时，将不对各个规则做策略检查，直接导出所有规则
    */
   Export?: boolean
+  /**
+   * 源站，模糊查询
+   */
+  Source?: string
 }
 
 /**
@@ -5468,7 +5472,7 @@ export interface BGPInstance {
    */
   BasicPlusFlag?: number
   /**
-   * 是否是商业模式优化-普惠版
+   * 是否标准版2.0 0: 包含标准版2.0 1: 只查询标准版2.0 2: 不查标准版2.0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanCntFlag?: number
