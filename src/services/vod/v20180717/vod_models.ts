@@ -9534,13 +9534,13 @@ export interface SetVodDomainCertificateResponse {
  */
 export interface ExtractTraceWatermarkTaskOutput {
   /**
-   * 播放者的 ID，以十六进制表示，共6位，该参数用于 [溯源水印](https://cloud.tencent.com/document/product/266/75789) 使用场景。
+   * 播放者的 ID，以十六进制表示，共6位。
    */
-  Uv: string
+  Uv?: string
   /**
    * 该字段已废弃。
    */
-  Uid: string
+  Uid?: string
 }
 
 /**
@@ -13278,11 +13278,11 @@ export interface TranscodeTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
-   * 溯源水印。
+   * 溯源水印，该功能已不再支持使用。
    */
   TraceWatermark?: TraceWatermarkInput
   /**
-   * 版权水印。
+   * 版权水印，该功能已不再支持使用。
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**
@@ -15333,11 +15333,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
-   * 溯源水印。
+   * 溯源水印，该功能已不再支持使用。
    */
   TraceWatermark?: TraceWatermarkInput
   /**
-   * 版权水印。
+   * 版权水印，该功能已不再支持使用。
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**

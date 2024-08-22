@@ -2112,6 +2112,10 @@ export interface DescribeDataLogUrlStatisticsRequest {
    * 环境区分
    */
   Env?: string
+  /**
+   * js异常信息
+   */
+  ErrorMsg?: string
 }
 
 /**

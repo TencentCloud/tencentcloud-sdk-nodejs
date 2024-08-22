@@ -581,7 +581,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 针对驱动sql命令查询ck集群接口
+   * 针对驱动sql命令查询集群接口
    */
   async DescribeSqlApis(
     req: DescribeSqlApisRequest,

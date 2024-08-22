@@ -232,9 +232,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于查询已建立的标签列表。
-
-     */
+   * 用于查询已建立的标签列表。
+   */
   async DescribeTagsSeq(
     req: DescribeTagsSeqRequest,
     cb?: (error: string, rep: DescribeTagsSeqResponse) => void

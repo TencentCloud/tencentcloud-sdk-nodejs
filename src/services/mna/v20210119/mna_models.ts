@@ -364,6 +364,16 @@ export interface DeviceBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowTrunc?: number
+  /**
+   * 设备sn
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sn?: string
+  /**
+   * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vendor?: string
 }
 
 /**

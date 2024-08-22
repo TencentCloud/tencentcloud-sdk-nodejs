@@ -164,7 +164,7 @@ export declare class Client extends AbstractClient {
      */
     ActionAlterUser(req: ActionAlterUserRequest, cb?: (error: string, rep: ActionAlterUserResponse) => void): Promise<ActionAlterUserResponse>;
     /**
-     * 针对驱动sql命令查询ck集群接口
+     * 针对驱动sql命令查询集群接口
      */
     DescribeSqlApis(req: DescribeSqlApisRequest, cb?: (error: string, rep: DescribeSqlApisResponse) => void): Promise<DescribeSqlApisResponse>;
     /**

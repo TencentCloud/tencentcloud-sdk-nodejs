@@ -262,7 +262,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ActionAlterUser", req, cb);
     }
     /**
-     * 针对驱动sql命令查询ck集群接口
+     * 针对驱动sql命令查询集群接口
      */
     async DescribeSqlApis(req, cb) {
         return this.request("DescribeSqlApis", req, cb);

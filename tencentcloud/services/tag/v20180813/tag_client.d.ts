@@ -61,7 +61,6 @@ export declare class Client extends AbstractClient {
     AddProject(req: AddProjectRequest, cb?: (error: string, rep: AddProjectResponse) => void): Promise<AddProjectResponse>;
     /**
      * 用于查询已建立的标签列表。
-
      */
     DescribeTagsSeq(req: DescribeTagsSeqRequest, cb?: (error: string, rep: DescribeTagsSeqResponse) => void): Promise<DescribeTagsSeqResponse>;
     /**

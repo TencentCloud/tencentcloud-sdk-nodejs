@@ -40,7 +40,7 @@ export interface TagWithDelete {
  */
 export interface DetachResourcesTagRequest {
     /**
-     * 资源所属业务名称（资源六段式中的第三段）
+     * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType: string;
     /**
@@ -52,11 +52,11 @@ export interface DetachResourcesTagRequest {
      */
     TagKey: string;
     /**
-     * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
+     * 资源所在地域，示例：ap-guangzhou 。不区分地域的资源则不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion?: string;
     /**
-     * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
      */
     ResourcePrefix?: string;
 }
@@ -159,15 +159,15 @@ export interface DeleteResourceTagResponse {
  */
 export interface DescribeResourceTagsByTagKeysRequest {
     /**
-     * 业务类型
+     * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType: string;
     /**
-     * 资源前缀
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
      */
     ResourcePrefix: string;
     /**
-     * 资源地域
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion: string;
     /**
@@ -225,7 +225,7 @@ export interface DescribeTagsRequest {
      */
     TagKeys?: Array<string>;
     /**
-     * 是否展现项目标签
+     * 是否展现项目标签。1:展示  0:不展示
      */
     ShowProject?: number;
 }
@@ -321,7 +321,7 @@ export interface DescribeResourcesByTagsUnionRequest {
      */
     Limit?: number;
     /**
-     * 资源前缀
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
      */
     ResourcePrefix?: string;
     /**
@@ -329,11 +329,11 @@ export interface DescribeResourcesByTagsUnionRequest {
      */
     ResourceId?: string;
     /**
-     * 资源所在地域
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion?: string;
     /**
-     * 业务类型
+     * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType?: string;
 }
@@ -407,7 +407,7 @@ export interface DescribeTagKeysRequest {
      */
     Limit?: number;
     /**
-     * 是否展现项目
+     * 是否展现项目。1:展示  0:不展示
      */
     ShowProject?: number;
     /**
@@ -521,11 +521,11 @@ export interface DescribeResourceTagsResponse {
  */
 export interface DescribeResourceTagsByResourceIdsRequest {
     /**
-     * 业务类型
+     * 业务类型，示例 cvm 。资源所属业务名称（资源六段式中的第三段）
      */
     ServiceType: string;
     /**
-     * 资源前缀
+     * 资源前缀，示例 instance
      */
     ResourcePrefix: string;
     /**
@@ -533,7 +533,7 @@ export interface DescribeResourceTagsByResourceIdsRequest {
      */
     ResourceIds: Array<string>;
     /**
-     * 资源所在地域
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion: string;
     /**
@@ -621,7 +621,7 @@ export interface GetTagsResponse {
  */
 export interface ModifyResourcesTagValueRequest {
     /**
-     * 资源所属业务名称（资源六段式中的第三段）
+     * 业务类型，示例 cvm 。资源所属业务名称（资源六段式中的第三段）
      */
     ServiceType: string;
     /**
@@ -637,11 +637,11 @@ export interface ModifyResourcesTagValueRequest {
      */
     TagValue: string;
     /**
-     * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion?: string;
     /**
-     * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
+     * 资源前缀（资源六段式中最后一段"/"前面的部分），例如“qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584” 中资源前缀为ckafkaId），cos存储桶不需要传入该字段，其他云资源必填
      */
     ResourcePrefix?: string;
 }
@@ -709,20 +709,20 @@ export interface DescribeResourcesByTagsResponse {
     /**
      * 结果总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 数据位移偏量
      */
-    Offset: number;
+    Offset?: number;
     /**
      * 每页大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Limit: number;
+    Limit?: number;
     /**
      * 资源标签
      */
-    Rows: Array<ResourceTag>;
+    Rows?: Array<ResourceTag>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -837,7 +837,7 @@ export interface DescribeTagsSeqRequest {
      */
     TagKeys?: Array<string>;
     /**
-     * 是否展现项目标签
+     * 是否展现项目标签。1:展示  0:不展示
      */
     ShowProject?: number;
 }
@@ -942,7 +942,7 @@ export interface Tag {
  */
 export interface AttachResourcesTagRequest {
     /**
-     * 业务的英文简称，即资源六段式第三段。资源六段式的描述方式参考：https://cloud.tencent.com/document/product/651/89122
+     * 业务类型，示例 cvm 。资源所属业务名称（资源六段式中的第三段）
      */
     ServiceType: string;
     /**
@@ -962,7 +962,7 @@ export interface AttachResourcesTagRequest {
      */
     ResourceRegion?: string;
     /**
-     * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
+     * 资源前缀（资源六段式中最后一段"/"前面的部分，例如“qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584” 中资源前缀为ckafkaId），cos存储桶不需要传入该字段，其他云资源必填
      */
     ResourcePrefix?: string;
 }
@@ -1246,7 +1246,7 @@ export interface DescribeResourcesByTagsRequest {
      */
     Limit?: number;
     /**
-     * 资源前缀
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
      */
     ResourcePrefix?: string;
     /**
@@ -1254,11 +1254,11 @@ export interface DescribeResourcesByTagsRequest {
      */
     ResourceId?: string;
     /**
-     * 资源所在地域
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion?: string;
     /**
-     * 业务类型
+     * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType?: string;
 }
@@ -1289,7 +1289,7 @@ export interface DeleteResourceTagRequest {
      */
     TagKey: string;
     /**
-     * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
+     * 资源六段式。示例：qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584
      */
     Resource: string;
 }
@@ -1316,23 +1316,23 @@ export interface TagKeyObject {
  */
 export interface DescribeResourceTagsRequest {
     /**
-     * 创建者uin
+     * 资源创建者UIN
      */
     CreateUin?: number;
     /**
-     * 资源所在地域
+     * 资源所在地域，示例：ap-guangzhou 。不区分地域的资源则不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion?: string;
     /**
-     * 业务类型
+     * 业务类型，示例 ckafka。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType?: string;
     /**
-     * 资源前缀
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId
      */
     ResourcePrefix?: string;
     /**
-     * 资源唯一标识。只输入ResourceId进行查询可能会查询较慢，或者无法匹配到结果，建议在输入ResourceId的同时也输入ServiceType、ResourcePrefix和ResourceRegion（不区分地域的资源可忽略该参数）
+     * 资源唯一标识（资源六段式中最后一段"/"后面的部分）。注：只输入ResourceId查询时，如资源量大可能较慢，或无法匹配到结果，建议在输入ResourceId的同时也输入ServiceType、ResourcePrefix和ResourceRegion（不区分地域的资源可忽略该参数）。若传入的是cos资源的Id，则CosResourceId 字段请同时传1。
      */
     ResourceId?: string;
     /**
@@ -1344,7 +1344,7 @@ export interface DescribeResourceTagsRequest {
      */
     Limit?: number;
     /**
-     * 是否是cos的资源（0或者1），输入的ResourceId为cos资源时必填
+     * 是否为cos的资源，取值 0 表示：非cos资源。取值1 表示：cos资源，且此时ResourceId也为必填。不填则默认为 0
      */
     CosResourceId?: number;
 }
@@ -1362,11 +1362,11 @@ export interface UpdateProjectResponse {
  */
 export interface DescribeResourceTagsByResourceIdsSeqRequest {
     /**
-     * 业务类型
+     * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
      */
     ServiceType: string;
     /**
-     * 资源前缀
+     * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
      */
     ResourcePrefix: string;
     /**
@@ -1374,7 +1374,7 @@ export interface DescribeResourceTagsByResourceIdsSeqRequest {
      */
     ResourceIds: Array<string>;
     /**
-     * 资源所在地域
+     * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
      */
     ResourceRegion: string;
     /**

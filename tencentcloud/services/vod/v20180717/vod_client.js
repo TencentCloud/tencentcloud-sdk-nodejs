@@ -54,7 +54,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDefaultStorageRegion", req, cb);
     }
     /**
-     * 用于提取溯源水印。
+     * 该 API 已经<font color='red'>不再维护</font>。如果有盗录溯源需求，请参考 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
      */
     async ExtractTraceWatermark(req, cb) {
         return this.request("ExtractTraceWatermark", req, cb);
@@ -720,7 +720,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDailyMostPlayedStat", req, cb);
     }
     /**
-     * 提取版权水印信息。
+     * 该 API 已经<font color='red'>不再维护</font>。如果有盗录溯源需求，请参考 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
      */
     async ExtractCopyRightWatermark(req, cb) {
         return this.request("ExtractCopyRightWatermark", req, cb);

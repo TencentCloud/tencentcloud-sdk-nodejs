@@ -2767,15 +2767,15 @@ export interface UpdateTriggerStatusRequest {
      */
     TriggerName: string;
     /**
-     * 触发器类型
+     * 触发器类型，触发器类型，目前只支持 timer、 cos  、 ckafka三种类型
      */
     Type: string;
     /**
-     * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
+     * 触发器在创建时所指向的触发别名或版本，默认值为$LATEST
      */
     Qualifier?: string;
     /**
-     * 函数的命名空间
+     * 函数所在的命名空间，默认值为default
      */
     Namespace?: string;
     /**

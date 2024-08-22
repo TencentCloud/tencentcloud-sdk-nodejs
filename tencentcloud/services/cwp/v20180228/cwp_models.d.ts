@@ -217,6 +217,10 @@ export interface ModifyWebHookPolicyRequest {
      * 主机列表
      */
     Quuids?: Array<string>;
+    /**
+     * 需排除的机器列表
+     */
+    ExcludedQuuids?: Array<string>;
 }
 /**
  * DescribeBashPolicies请求参数结构体
@@ -5978,6 +5982,10 @@ export interface ModifyWarningHostConfigRequest {
      * 项目或标签的id列表，自选主机时为空
      */
     ItemLabelIds?: Array<string>;
+    /**
+     * 需排除的机器列表
+     */
+    ExcludedQuuids?: Array<string>;
 }
 /**
  * ExportMalwares返回参数结构体
@@ -12520,6 +12528,10 @@ export interface CreateMalwareWhiteListRequest {
      * 木马事件ID
      */
     EventId?: number;
+    /**
+     * 对历史待处理执行加白操作；0是不处理，1是处理
+     */
+    IsHandleHistoryEvents?: number;
 }
 /**
  * ModifyLicenseUnBinds请求参数结构体
@@ -14170,6 +14182,10 @@ export interface DescribeScanVulSettingResponse {
      * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
      */
     Uuids?: Array<string>;
+    /**
+     * 0版本比对,2版本比对+poc
+     */
+    ScanMethod?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20572,27 +20588,31 @@ export interface DescribeWarningHostConfigResponse {
     /**
      * 告警主机范围类型，0:全部主机，1:按所属项目选，2:按腾讯云标签选，3:按主机安全标签选，4:自选主机
      */
-    HostRange: number;
+    HostRange?: number;
     /**
      * 项目或标签的名称列表，自选主机时为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ItemLabels: Array<string>;
+    ItemLabels?: Array<string>;
     /**
      * 机器列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Quuids: Array<string>;
+    Quuids?: Array<string>;
     /**
      * 机器列表总数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 项目或标签的id列表，自选主机时为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ItemLabelIds: Array<string>;
+    ItemLabelIds?: Array<string>;
+    /**
+     * 需排除的机器列表
+     */
+    ExcludedQuuids?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21392,6 +21412,10 @@ export interface ScanVulSettingRequest {
      * 为空默认扫描全部专业版、旗舰版、普惠版主机，不为空只扫描选中主机
      */
     Uuids?: Array<string>;
+    /**
+     * 0版本比对，2版本比对+poc
+     */
+    ScanMethod?: number;
 }
 /**
  * 项
@@ -27900,6 +27924,10 @@ export interface ScanVulRequest {
      * 需要扫描的漏洞id
      */
     VulIds?: Array<number | bigint>;
+    /**
+     * 0版本比对，2版本比对+poc
+     */
+    ScanMethod?: number;
 }
 /**
  * DeleteBaselineWeakPassword返回参数结构体

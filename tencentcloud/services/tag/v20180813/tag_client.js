@@ -107,7 +107,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 用于查询已建立的标签列表。
-
      */
     async DescribeTagsSeq(req, cb) {
         return this.request("DescribeTagsSeq", req, cb);

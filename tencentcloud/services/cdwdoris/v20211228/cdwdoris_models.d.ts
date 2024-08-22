@@ -452,12 +452,12 @@ export interface DescribeInstanceOperationsResponse {
     /**
      * 操作记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 操作记录具体数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Operations: Array<InstanceOperation>;
+    Operations?: Array<InstanceOperation>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -614,7 +614,7 @@ export interface DeleteBackUpDataRequest {
      */
     BackUpJobId?: number;
     /**
-     * 是否删除所有数据
+     * 是否删除所有实例
      */
     IsDeleteAll?: boolean;
 }
@@ -3806,7 +3806,7 @@ export interface DescribeDatabaseAuditDownloadResponse {
  */
 export interface NodeInfos {
     /**
-     * 节点在doris中明朝n
+     * 节点名称
      */
     NodeName?: string;
     /**
