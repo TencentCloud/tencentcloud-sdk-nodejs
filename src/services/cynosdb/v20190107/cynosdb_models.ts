@@ -1145,6 +1145,11 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
+  /**
+   * 实例存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStorageType?: string
 }
 
 /**
@@ -8425,6 +8430,11 @@ export interface ClusterInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceDeviceType?: string
+  /**
+   * 实例存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStorageType?: string
 }
 
 /**

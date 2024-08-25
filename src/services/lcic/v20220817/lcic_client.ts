@@ -85,6 +85,7 @@ import {
   DescribeRoomForbiddenUserRequest,
   EventInfo,
   DescribeScoreListRequest,
+  DescribeRecordStreamRequest,
   AppConfig,
   DeleteRecordResponse,
   DescribeAnswerListRequest,
@@ -108,6 +109,7 @@ import {
   BatchAddGroupMemberRequest,
   TransferItem,
   DescribeRoomResponse,
+  DescribeRecordStreamResponse,
   DescribeCurrentMemberListRequest,
   SendRoomNotificationMessageRequest,
   DescribeSdkAppIdUsersResponse,
@@ -129,6 +131,7 @@ import {
   MutedAccountList,
   GroupBaseInfo,
   LoginUserRequest,
+  SingleStreamInfo,
   ImageMsgContent,
   AnswerStat,
   SendRoomNormalMessageResponse,
@@ -213,13 +216,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间历史消息(房间历史消息保存7天)
+   * 录制流查询
    */
-  async GetRoomMessage(
-    req: GetRoomMessageRequest,
-    cb?: (error: string, rep: GetRoomMessageResponse) => void
-  ): Promise<GetRoomMessageResponse> {
-    return this.request("GetRoomMessage", req, cb)
+  async DescribeRecordStream(
+    req: DescribeRecordStreamRequest,
+    cb?: (error: string, rep: DescribeRecordStreamResponse) => void
+  ): Promise<DescribeRecordStreamResponse> {
+    return this.request("DescribeRecordStream", req, cb)
   }
 
   /**
@@ -265,13 +268,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从房间里面踢出用户
+   * 获取房间历史消息(房间历史消息保存7天)
    */
-  async KickUserFromRoom(
-    req: KickUserFromRoomRequest,
-    cb?: (error: string, rep: KickUserFromRoomResponse) => void
-  ): Promise<KickUserFromRoomResponse> {
-    return this.request("KickUserFromRoom", req, cb)
+  async GetRoomMessage(
+    req: GetRoomMessageRequest,
+    cb?: (error: string, rep: GetRoomMessageResponse) => void
+  ): Promise<GetRoomMessageResponse> {
+    return this.request("GetRoomMessage", req, cb)
   }
 
   /**
@@ -734,6 +737,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRoomsResponse) => void
   ): Promise<GetRoomsResponse> {
     return this.request("GetRooms", req, cb)
+  }
+
+  /**
+   * 从房间里面踢出用户
+   */
+  async KickUserFromRoom(
+    req: KickUserFromRoomRequest,
+    cb?: (error: string, rep: KickUserFromRoomResponse) => void
+  ): Promise<KickUserFromRoomResponse> {
+    return this.request("KickUserFromRoom", req, cb)
   }
 
   /**

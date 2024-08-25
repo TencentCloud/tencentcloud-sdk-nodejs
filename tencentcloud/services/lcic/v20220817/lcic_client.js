@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendRoomNotificationMessage", req, cb);
     }
     /**
-     * 获取房间历史消息(房间历史消息保存7天)
+     * 录制流查询
      */
-    async GetRoomMessage(req, cb) {
-        return this.request("GetRoomMessage", req, cb);
+    async DescribeRecordStream(req, cb) {
+        return this.request("DescribeRecordStream", req, cb);
     }
     /**
      * 有新接口替换
@@ -78,10 +78,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAppCustomContent", req, cb);
     }
     /**
-     * 从房间里面踢出用户
+     * 获取房间历史消息(房间历史消息保存7天)
      */
-    async KickUserFromRoom(req, cb) {
-        return this.request("KickUserFromRoom", req, cb);
+    async GetRoomMessage(req, cb) {
+        return this.request("GetRoomMessage", req, cb);
     }
     /**
      * 设置水印
@@ -360,6 +360,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetRooms(req, cb) {
         return this.request("GetRooms", req, cb);
+    }
+    /**
+     * 从房间里面踢出用户
+     */
+    async KickUserFromRoom(req, cb) {
+        return this.request("KickUserFromRoom", req, cb);
     }
     /**
      * 删除房间

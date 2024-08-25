@@ -1642,7 +1642,7 @@ export interface DescribeInstanceNodesInfoRequest {
  */
 export interface DescribeInstancesHealthStateResponse {
     /**
-     * 出参
+     * base64编码后的数据，包含了集群的健康信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: string;
@@ -1983,7 +1983,7 @@ export interface DescribeInstancesHealthStateRequest {
      */
     InstanceID?: string;
     /**
-     * "" 或者  某个集群Id
+     * 为空：代表当前appId下所有集群 或者  某个集群Id
      */
     Input?: string;
 }
@@ -2645,6 +2645,10 @@ export interface UserInfo {
      * 旧密码
      */
     OldPwd?: string;
+    /**
+     * 绑定的子用户uin
+     */
+    CamUin?: string;
 }
 /**
  * DescribeInstanceUsedSubnets请求参数结构体

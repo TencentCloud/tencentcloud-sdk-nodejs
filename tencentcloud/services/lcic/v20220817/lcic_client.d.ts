@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRoomRequest, DescribeQuestionListRequest, ModifyRoomResponse, DescribeAppDetailResponse, DeleteSupervisorRequest, DeleteUserRequest, DescribeSupervisorsResponse, DeleteUserResponse, BatchDeleteRecordRequest, ModifyAppResponse, UnblockKickedUserResponse, BatchRegisterRequest, DeleteRoomResponse, ModifyUserProfileRequest, CreateGroupWithMembersRequest, DescribeDocumentsByRoomRequest, BatchCreateGroupWithMembersResponse, GetRoomEventResponse, DeleteAppCustomContentRequest, SendRoomNotificationMessageResponse, BatchAddGroupMemberResponse, ModifyUserProfileResponse, GetWatermarkResponse, LoginOriginIdRequest, BatchRegisterResponse, BindDocumentToRoomResponse, CreateGroupWithSubGroupRequest, DescribeRoomRequest, BatchDescribeDocumentRequest, RegisterUserRequest, BatchCreateRoomResponse, UnbindDocumentFromRoomResponse, CreateDocumentResponse, DescribeGroupResponse, SetAppCustomContentResponse, UnblockKickedUserRequest, LoginUserResponse, ModifyGroupRequest, DescribeAppDetailRequest, KickUserFromRoomResponse, DeleteGroupRequest, StartRoomRequest, AddGroupMemberRequest, DescribeGroupListRequest, GetRoomMessageRequest, DescribeDocumentsResponse, DeleteDocumentResponse, DeleteRecordRequest, BatchDeleteGroupMemberResponse, CreateGroupWithSubGroupResponse, DescribeDocumentsRequest, GetRoomEventRequest, DescribeDocumentResponse, DeleteGroupMemberResponse, DescribeGroupMemberListResponse, ForbidSendMsgRequest, DescribeRoomForbiddenUserRequest, DescribeScoreListRequest, DeleteRecordResponse, DescribeAnswerListRequest, BatchCreateRoomRequest, DescribeGroupMemberListRequest, DescribeRoomForbiddenUserResponse, DescribeUserResponse, DescribeScoreListResponse, DescribeDocumentRequest, BatchDeleteRecordResponse, SetAppCustomContentRequest, DescribeUserRequest, RegisterUserResponse, StartRoomResponse, BindDocumentToRoomRequest, CreateDocumentRequest, GetRoomMessageResponse, BatchAddGroupMemberRequest, DescribeRoomResponse, DescribeCurrentMemberListRequest, SendRoomNotificationMessageRequest, DescribeSdkAppIdUsersResponse, DescribeAnswerListResponse, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSupervisorsRequest, DescribeGroupRequest, EndRoomResponse, GetWatermarkRequest, EndRoomRequest, CreateGroupWithMembersResponse, BatchDeleteGroupMemberRequest, ModifyAppRequest, UnbindDocumentFromRoomRequest, LoginUserRequest, SendRoomNormalMessageResponse, DeleteSupervisorResponse, SetWatermarkResponse, ModifyRoomRequest, DescribeRoomStatisticsRequest, DescribeDocumentsByRoomResponse, LoginOriginIdResponse, DescribeQuestionListResponse, GetRoomsResponse, KickUserFromRoomRequest, SetWatermarkRequest, GetRoomsRequest, ForbidSendMsgResponse, SendRoomNormalMessageRequest, DescribeDeveloperRequest, BatchDescribeDocumentResponse, DeleteGroupResponse, DescribeSdkAppIdUsersRequest, AddGroupMemberResponse, CreateSupervisorResponse, DeleteRoomRequest, BatchCreateGroupWithMembersRequest, DeleteGroupMemberRequest, CreateSupervisorRequest, DeleteAppCustomContentResponse, DescribeCurrentMemberListResponse, ModifyGroupResponse, DescribeGroupListResponse, CreateRoomResponse, DescribeDeveloperResponse } from "./lcic_models";
+import { CreateRoomRequest, DescribeQuestionListRequest, ModifyRoomResponse, DescribeAppDetailResponse, DeleteSupervisorRequest, DeleteUserRequest, DescribeSupervisorsResponse, DeleteUserResponse, BatchDeleteRecordRequest, ModifyAppResponse, UnblockKickedUserResponse, BatchRegisterRequest, DeleteRoomResponse, ModifyUserProfileRequest, CreateGroupWithMembersRequest, DescribeDocumentsByRoomRequest, BatchCreateGroupWithMembersResponse, GetRoomEventResponse, DeleteAppCustomContentRequest, SendRoomNotificationMessageResponse, BatchAddGroupMemberResponse, ModifyUserProfileResponse, GetWatermarkResponse, LoginOriginIdRequest, BatchRegisterResponse, BindDocumentToRoomResponse, CreateGroupWithSubGroupRequest, DescribeRoomRequest, BatchDescribeDocumentRequest, RegisterUserRequest, BatchCreateRoomResponse, UnbindDocumentFromRoomResponse, CreateDocumentResponse, DescribeGroupResponse, SetAppCustomContentResponse, UnblockKickedUserRequest, LoginUserResponse, ModifyGroupRequest, DescribeAppDetailRequest, KickUserFromRoomResponse, DeleteGroupRequest, StartRoomRequest, AddGroupMemberRequest, DescribeGroupListRequest, GetRoomMessageRequest, DescribeDocumentsResponse, DeleteDocumentResponse, DeleteRecordRequest, BatchDeleteGroupMemberResponse, CreateGroupWithSubGroupResponse, DescribeDocumentsRequest, GetRoomEventRequest, DescribeDocumentResponse, DeleteGroupMemberResponse, DescribeGroupMemberListResponse, ForbidSendMsgRequest, DescribeRoomForbiddenUserRequest, DescribeScoreListRequest, DescribeRecordStreamRequest, DeleteRecordResponse, DescribeAnswerListRequest, BatchCreateRoomRequest, DescribeGroupMemberListRequest, DescribeRoomForbiddenUserResponse, DescribeUserResponse, DescribeScoreListResponse, DescribeDocumentRequest, BatchDeleteRecordResponse, SetAppCustomContentRequest, DescribeUserRequest, RegisterUserResponse, StartRoomResponse, BindDocumentToRoomRequest, CreateDocumentRequest, GetRoomMessageResponse, BatchAddGroupMemberRequest, DescribeRoomResponse, DescribeRecordStreamResponse, DescribeCurrentMemberListRequest, SendRoomNotificationMessageRequest, DescribeSdkAppIdUsersResponse, DescribeAnswerListResponse, DescribeRoomStatisticsResponse, DeleteDocumentRequest, DescribeSupervisorsRequest, DescribeGroupRequest, EndRoomResponse, GetWatermarkRequest, EndRoomRequest, CreateGroupWithMembersResponse, BatchDeleteGroupMemberRequest, ModifyAppRequest, UnbindDocumentFromRoomRequest, LoginUserRequest, SendRoomNormalMessageResponse, DeleteSupervisorResponse, SetWatermarkResponse, ModifyRoomRequest, DescribeRoomStatisticsRequest, DescribeDocumentsByRoomResponse, LoginOriginIdResponse, DescribeQuestionListResponse, GetRoomsResponse, KickUserFromRoomRequest, SetWatermarkRequest, GetRoomsRequest, ForbidSendMsgResponse, SendRoomNormalMessageRequest, DescribeDeveloperRequest, BatchDescribeDocumentResponse, DeleteGroupResponse, DescribeSdkAppIdUsersRequest, AddGroupMemberResponse, CreateSupervisorResponse, DeleteRoomRequest, BatchCreateGroupWithMembersRequest, DeleteGroupMemberRequest, CreateSupervisorRequest, DeleteAppCustomContentResponse, DescribeCurrentMemberListResponse, ModifyGroupResponse, DescribeGroupListResponse, CreateRoomResponse, DescribeDeveloperResponse } from "./lcic_models";
 /**
  * lcic client
  * @class
@@ -20,9 +20,9 @@ export declare class Client extends AbstractClient {
      */
     SendRoomNotificationMessage(req: SendRoomNotificationMessageRequest, cb?: (error: string, rep: SendRoomNotificationMessageResponse) => void): Promise<SendRoomNotificationMessageResponse>;
     /**
-     * 获取房间历史消息(房间历史消息保存7天)
+     * 录制流查询
      */
-    GetRoomMessage(req: GetRoomMessageRequest, cb?: (error: string, rep: GetRoomMessageResponse) => void): Promise<GetRoomMessageResponse>;
+    DescribeRecordStream(req: DescribeRecordStreamRequest, cb?: (error: string, rep: DescribeRecordStreamResponse) => void): Promise<DescribeRecordStreamResponse>;
     /**
      * 有新接口替换
 
@@ -42,9 +42,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteAppCustomContent(req: DeleteAppCustomContentRequest, cb?: (error: string, rep: DeleteAppCustomContentResponse) => void): Promise<DeleteAppCustomContentResponse>;
     /**
-     * 从房间里面踢出用户
+     * 获取房间历史消息(房间历史消息保存7天)
      */
-    KickUserFromRoom(req: KickUserFromRoomRequest, cb?: (error: string, rep: KickUserFromRoomResponse) => void): Promise<KickUserFromRoomResponse>;
+    GetRoomMessage(req: GetRoomMessageRequest, cb?: (error: string, rep: GetRoomMessageResponse) => void): Promise<GetRoomMessageResponse>;
     /**
      * 设置水印
      */
@@ -231,6 +231,10 @@ export declare class Client extends AbstractClient {
      * 获取房间列表
      */
     GetRooms(req: GetRoomsRequest, cb?: (error: string, rep: GetRoomsResponse) => void): Promise<GetRoomsResponse>;
+    /**
+     * 从房间里面踢出用户
+     */
+    KickUserFromRoom(req: KickUserFromRoomRequest, cb?: (error: string, rep: KickUserFromRoomResponse) => void): Promise<KickUserFromRoomResponse>;
     /**
      * 删除房间
      */
