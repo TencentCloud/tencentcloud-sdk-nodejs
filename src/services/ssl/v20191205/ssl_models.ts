@@ -684,6 +684,11 @@ export interface Certificates {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportDownloadType?: SupportDownloadType
+  /**
+   * 证书吊销完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertRevokedTime?: string
 }
 
 /**

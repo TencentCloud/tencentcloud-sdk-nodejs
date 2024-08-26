@@ -5579,6 +5579,11 @@ export interface Apply {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApproveProjectName?: string;
+    /**
+     * 审批id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplyId?: string;
 }
 /**
  * 集成任务

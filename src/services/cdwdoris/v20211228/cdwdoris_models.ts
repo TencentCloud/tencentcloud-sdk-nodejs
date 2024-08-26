@@ -2777,6 +2777,10 @@ export interface UserInfo {
    * 绑定的子用户uin
    */
   CamUin?: string
+  /**
+   * ranger group id列表
+   */
+  CamRangerGroupIds?: Array<number | bigint>
 }
 
 /**

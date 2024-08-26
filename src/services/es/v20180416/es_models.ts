@@ -2910,6 +2910,10 @@ export interface CreateInstanceRequest {
    * 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段
    */
   SubProductCode?: string
+  /**
+   * 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离
+   */
+  ReadWriteMode?: number
 }
 
 /**
@@ -3428,6 +3432,16 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
+  /**
+   * 存算分离cos用量，单位M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosBucketStorageSize?: number
+  /**
+   * 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadWriteMode?: number
 }
 
 /**
@@ -4659,6 +4673,10 @@ CLOSE 关闭
    * 分片迁移并发速度
    */
   ShardAllocationBytes?: number
+  /**
+   * 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离
+   */
+  ReadWriteMode?: number
 }
 
 /**

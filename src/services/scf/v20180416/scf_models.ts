@@ -2171,6 +2171,10 @@ export interface PublishLayerVersionRequest {
    * 层的软件许可证
    */
   LicenseInfo?: string
+  /**
+   * 层Tag 参数，以键值对数组形式传入
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3495,10 +3499,12 @@ export interface ImageConfig {
    */
   ContainerImageAccelerate?: boolean
   /**
-   * 镜像函数端口设置
-默认值: 9000
--1: 无端口镜像函数
-其他: 取值范围 0 ~ 65535
+   * 镜像函数端口设置，可指定镜像类型
+Web Server镜像：9000
+Job 镜像：-1
+注意：此字段可能返回 null，表示取不到有效值。
+默认值：9000
+示例值：9000
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImagePort?: number
