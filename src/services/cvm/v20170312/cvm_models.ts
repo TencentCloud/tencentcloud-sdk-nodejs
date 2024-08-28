@@ -988,11 +988,11 @@ export interface DescribeRegionsResponse {
   /**
    * 地域数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 地域列表信息。
    */
-  RegionSet: Array<RegionInfo>
+  RegionSet?: Array<RegionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1207,7 +1207,6 @@ export interface ZoneInfo {
 <li> na-siliconvalley-2 </li>
 <li> eu-frankfurt-1 </li>
 <li> eu-frankfurt-2 </li>
-<li> na-toronto-1 </li>
 <li> na-ashburn-1 </li>
 <li> na-ashburn-2 </li>
 <li> ap-nanjing-1 </li>
@@ -1856,27 +1855,27 @@ export interface CreateDisasterRecoverGroupResponse {
   /**
    * 分散置放群组ID列表。
    */
-  DisasterRecoverGroupId: string
+  DisasterRecoverGroupId?: string
   /**
-   * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+   * 分散置放群组类型，取值范围：<br><li>HOST：物理机</li><li>SW：交换机</li><li>RACK：机架</li>
    */
-  Type: string
+  Type?: string
   /**
    * 分散置放群组名称，长度1-60个字符，支持中、英文。
    */
-  Name: string
+  Name?: string
   /**
    * 置放群组内可容纳的云服务器数量。
    */
-  CvmQuotaTotal: number
+  CvmQuotaTotal?: number
   /**
    * 置放群组内已有的云服务器数量。
    */
-  CurrentNum: number
+  CurrentNum?: number
   /**
    * 置放群组创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2574,7 +2573,7 @@ export interface CreateDisasterRecoverGroupRequest {
    */
   Name: string
   /**
-   * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+   * 分散置放群组类型，取值范围：<br><li>HOST：物理机</li><li>SW：交换机</li><li>RACK：机架</li>
    */
   Type: string
   /**
@@ -5996,7 +5995,10 @@ export interface DisasterRecoverGroup {
    */
   Name?: string
   /**
-   * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+   * 分散置放群组类型，取值范围：<br>
+<li>HOST：物理机<br></li>
+<li>SW：交换机<br></li>
+<li>RACK：机架</li>
    */
   Type?: string
   /**
@@ -6032,7 +6034,7 @@ export interface VirtualPrivateCloud {
    */
   SubnetId: string
   /**
-   * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：<br><li>true：表示用作公网网关<br><li>false：表示不作为公网网关<br><br>默认取值：false。
+   * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：<li>true：表示用作公网网关</li><li>false：表示不作为公网网关</li>默认取值：false。
    */
   AsVpcGateway?: boolean
   /**
@@ -6125,37 +6127,37 @@ export interface LaunchTemplateInfo {
    * 实例启动模版本号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestVersionNumber: number
+  LatestVersionNumber?: number
   /**
    * 实例启动模板ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaunchTemplateId: string
+  LaunchTemplateId?: string
   /**
    * 实例启动模板名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaunchTemplateName: string
+  LaunchTemplateName?: string
   /**
    * 实例启动模板默认版本号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultVersionNumber: number
+  DefaultVersionNumber?: number
   /**
    * 实例启动模板包含的版本总数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaunchTemplateVersionCount: number
+  LaunchTemplateVersionCount?: number
   /**
    * 创建该模板的用户UIN。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedBy: string
+  CreatedBy?: string
   /**
    * 创建该模板的时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreationTime: string
+  CreationTime?: string
 }
 
 /**

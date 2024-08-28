@@ -3823,42 +3823,42 @@ export interface DescribeInstanceDTSInstanceInfo {
      * 地域 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 实例 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 仓库ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SetId: number;
+    SetId?: number;
     /**
      * 可用区ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 实例类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: number;
+    Type?: number;
     /**
      * 实例名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例访问地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 状态。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * 订单交易信息

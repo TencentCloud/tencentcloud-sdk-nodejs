@@ -128,6 +128,16 @@ it("cdb.v20170320.DescribeTimeWindow", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeInstanceUpgradeCheckJob", async function () {
+    try {
+       const data = await client.DescribeInstanceUpgradeCheckJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeBackupOverview", async function () {
     try {
        const data = await client.DescribeBackupOverview({})
@@ -1281,6 +1291,16 @@ it("cdb.v20170320.ResetRootAccount", async function () {
 it("cdb.v20170320.ModifyAuditRuleTemplates", async function () {
     try {
        const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.SubmitInstanceUpgradeCheckJob", async function () {
+    try {
+       const data = await client.SubmitInstanceUpgradeCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -313,15 +313,30 @@ export interface ReceiverDetail {
     /**
      * 收件人地址
      */
-    Email: string;
+    Email?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 模板参数
      */
-    TemplateData: string;
+    TemplateData?: string;
+    /**
+     * 无效原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Reason?: string;
+    /**
+     * 1:有效，2:无效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 收件人地址id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EmailId?: number;
 }
 /**
  * DeleteBlackList请求参数结构体
@@ -562,11 +577,19 @@ export interface ListReceiverDetailsResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 数据记录
      */
-    Data: Array<ReceiverDetail>;
+    Data?: Array<ReceiverDetail>;
+    /**
+     * 有效邮件地址数
+     */
+    ValidCount?: number;
+    /**
+     * 无效邮件地址数
+     */
+    InvalidCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -648,29 +671,34 @@ export interface ReceiverData {
     /**
      * 收件人列表ID
      */
-    ReceiverId: number;
+    ReceiverId?: number;
     /**
      * 收件人列表名称
      */
-    ReceiversName: string;
+    ReceiversName?: string;
     /**
      * 收件人地址总数
      */
-    Count: number;
+    Count?: number;
     /**
      * 收件人列表描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 列表状态(1 待上传 2 上传中 3 上传完成)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReceiversStatus: number;
+    ReceiversStatus?: number;
     /**
      * 创建时间,如:2021-09-28 16:40:35
      */
-    CreateTime: string;
+    CreateTime?: string;
+    /**
+     * 无效收件人数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InvalidCount?: number;
 }
 /**
  * UpdateEmailIdentity返回参数结构体
@@ -857,6 +885,31 @@ export interface ListEmailTemplatesRequest {
  * CreateReceiverDetailWithData返回参数结构体
  */
 export interface CreateReceiverDetailWithDataResponse {
+    /**
+     * 收件人总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 实际上传数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidCount?: number;
+    /**
+     * 数据过长数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TooLongCount?: number;
+    /**
+     * 邮件地址为空数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EmptyEmailCount?: number;
+    /**
+     * 重复数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RepeatCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1256,6 +1309,18 @@ export interface ListReceiverDetailsRequest {
      * 收件人地址，长度0-50，示例：xxx@te.com，支持模糊查询
      */
     Email?: string;
+    /**
+     * 搜索开始时间
+     */
+    CreateTimeBegin?: string;
+    /**
+     * 搜索结束时间
+     */
+    CreateTimeEnd?: string;
+    /**
+     * 1:有效，2:无效
+     */
+    Status?: number;
 }
 /**
  * CreateEmailAddress请求参数结构体

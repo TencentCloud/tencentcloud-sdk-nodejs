@@ -104,8 +104,9 @@ import {
   DescribeInstanceParamsResponse,
   DeleteDatabaseRequest,
   UploadInfo,
-  NodeDistribution,
+  DisassociateSecurityGroupsRequest,
   AuditRuleFilters,
+  SubmitInstanceUpgradeCheckJobRequest,
   ModifyLocalBinlogConfigRequest,
   StartBatchRollbackResponse,
   ModifyAccountHostResponse,
@@ -125,8 +126,9 @@ import {
   ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
-  StartReplicationResponse,
+  DescribeInstanceUpgradeCheckJobRequest,
   DescribeDBFeaturesResponse,
+  SubmitInstanceUpgradeCheckJobResponse,
   ModifyAuditRuleRequest,
   DescribeBinlogsResponse,
   DescribeRoMinScaleRequest,
@@ -248,7 +250,6 @@ import {
   CdbSellType,
   MasterInfo,
   ResetRootAccountResponse,
-  DisassociateSecurityGroupsRequest,
   Account,
   ModifyNameOrDescByDpIdResponse,
   DescribeClusterInfoRequest,
@@ -278,6 +279,7 @@ import {
   SlowLogInfo,
   ModifyLocalBinlogConfigResponse,
   DeleteDatabaseResponse,
+  DescribeInstanceUpgradeCheckJobResponse,
   DescribeCloneListRequest,
   ModifyInstanceTagRequest,
   DescribeProxySupportParamRequest,
@@ -304,6 +306,7 @@ import {
   InstanceInfo,
   DescribeDefaultParamsResponse,
   SwitchCDBProxyRequest,
+  StartReplicationResponse,
   DescribeTagsOfInstanceIdsResponse,
   DescribeDeployGroupListResponse,
   OfflineIsolatedInstancesResponse,
@@ -385,6 +388,7 @@ import {
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
   DeleteDeployGroupsResponse,
+  NodeDistribution,
   DescribeTasksRequest,
   ModifyBackupEncryptionStatusRequest,
   DescribeRollbackTaskDetailResponse,
@@ -585,6 +589,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTimeWindowResponse) => void
   ): Promise<DescribeTimeWindowResponse> {
     return this.request("DescribeTimeWindow", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeInstanceUpgradeCheckJob）查询实例版本升级校验任务。
+   */
+  async DescribeInstanceUpgradeCheckJob(
+    req: DescribeInstanceUpgradeCheckJobRequest,
+    cb?: (error: string, rep: DescribeInstanceUpgradeCheckJobResponse) => void
+  ): Promise<DescribeInstanceUpgradeCheckJobResponse> {
+    return this.request("DescribeInstanceUpgradeCheckJob", req, cb)
   }
 
   /**
@@ -1784,6 +1798,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
   ): Promise<ModifyAuditRuleTemplatesResponse> {
     return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
+   * 该接口（SubmitInstanceUpgradeCheckJob）提交实例版本升级校验任务。
+   */
+  async SubmitInstanceUpgradeCheckJob(
+    req: SubmitInstanceUpgradeCheckJobRequest,
+    cb?: (error: string, rep: SubmitInstanceUpgradeCheckJobResponse) => void
+  ): Promise<SubmitInstanceUpgradeCheckJobResponse> {
+    return this.request("SubmitInstanceUpgradeCheckJob", req, cb)
   }
 
   /**

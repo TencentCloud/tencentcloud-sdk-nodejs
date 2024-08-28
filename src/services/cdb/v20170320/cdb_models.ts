@@ -2178,21 +2178,21 @@ export interface UploadInfo {
 }
 
 /**
- * 独享集群CDB实例的节点分布情况
+ * DisassociateSecurityGroups请求参数结构体
  */
-export interface NodeDistribution {
+export interface DisassociateSecurityGroupsRequest {
   /**
-   * 主实例Master节点所在主机ID或者只读实例所在主机ID
+   * 安全组 ID。
    */
-  Node: string
+  SecurityGroupId: string
   /**
-   * 主实例第一Slave节点所在主机ID
+   * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
    */
-  SlaveNodeOne: string
+  InstanceIds: Array<string>
   /**
-   * 主实例第二Slave节点所在主机ID
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
-  SlaveNodeTwo: string
+  ForReadonlyInstance?: boolean
 }
 
 /**
@@ -2204,6 +2204,20 @@ export interface AuditRuleFilters {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleFilters?: Array<RuleFilters>
+}
+
+/**
+ * SubmitInstanceUpgradeCheckJob请求参数结构体
+ */
+export interface SubmitInstanceUpgradeCheckJobRequest {
+  /**
+   * 实例D
+   */
+  InstanceId: string
+  /**
+   * 目标数据库版本
+   */
+  DstMysqlVersion: string
 }
 
 /**
@@ -2591,18 +2605,17 @@ export interface AssociateSecurityGroupsRequest {
 }
 
 /**
- * StartReplication返回参数结构体
+ * DescribeInstanceUpgradeCheckJob请求参数结构体
  */
-export interface StartReplicationResponse {
+export interface DescribeInstanceUpgradeCheckJobRequest {
   /**
-   * 异步任务 ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  AsyncRequestId: string
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目标数据库版本
    */
-  RequestId?: string
+  DstMysqlVersion: string
 }
 
 /**
@@ -2645,6 +2658,20 @@ export interface DescribeDBFeaturesResponse {
    * 可供升级的内核版本。
    */
   TargetSubVersion?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitInstanceUpgradeCheckJob返回参数结构体
+ */
+export interface SubmitInstanceUpgradeCheckJobResponse {
+  /**
+   * 任务ID
+   */
+  JobId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5448,24 +5475,6 @@ export interface ResetRootAccountResponse {
 }
 
 /**
- * DisassociateSecurityGroups请求参数结构体
- */
-export interface DisassociateSecurityGroupsRequest {
-  /**
-   * 安全组 ID。
-   */
-  SecurityGroupId: string
-  /**
-   * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
-   */
-  ForReadonlyInstance?: boolean
-}
-
-/**
  * 数据库账号信息
  */
 export interface Account {
@@ -6212,6 +6221,24 @@ export interface DeleteDatabaseResponse {
 }
 
 /**
+ * DescribeInstanceUpgradeCheckJob返回参数结构体
+ */
+export interface DescribeInstanceUpgradeCheckJobResponse {
+  /**
+   * 24小时内是否存在历史升级校验任务
+   */
+  ExistUpgradeCheckJob?: boolean
+  /**
+   * 任务id
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloneList请求参数结构体
  */
 export interface DescribeCloneListRequest {
@@ -6933,6 +6960,21 @@ export interface SwitchCDBProxyRequest {
    * 数据库代理ID
    */
   ProxyGroupId: string
+}
+
+/**
+ * StartReplication返回参数结构体
+ */
+export interface StartReplicationResponse {
+  /**
+   * 异步任务 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7672,6 +7714,10 @@ export interface UpgradeDBInstanceEngineVersionRequest {
    * 延迟阈值。取值范围1~10
    */
   MaxDelayTime?: number
+  /**
+   * 5.7升级8.0是否忽略关键字错误，取值范围[0,1]，1表示忽略，0表示不忽略
+   */
+  IgnoreErrKeyword?: number
   /**
    * 版本升级支持指定参数
    */
@@ -8678,6 +8724,24 @@ export interface DeleteDeployGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 独享集群CDB实例的节点分布情况
+ */
+export interface NodeDistribution {
+  /**
+   * 主实例Master节点所在主机ID或者只读实例所在主机ID
+   */
+  Node: string
+  /**
+   * 主实例第一Slave节点所在主机ID
+   */
+  SlaveNodeOne: string
+  /**
+   * 主实例第二Slave节点所在主机ID
+   */
+  SlaveNodeTwo: string
 }
 
 /**

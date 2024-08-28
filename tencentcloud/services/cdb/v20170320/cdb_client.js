@@ -98,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTimeWindow", req, cb);
     }
     /**
+     * 该接口（DescribeInstanceUpgradeCheckJob）查询实例版本升级校验任务。
+     */
+    async DescribeInstanceUpgradeCheckJob(req, cb) {
+        return this.request("DescribeInstanceUpgradeCheckJob", req, cb);
+    }
+    /**
      * 本接口(DescribeBackupOverview)用于查询用户的备份概览。返回用户当前备份总个数、备份总的占用容量、赠送的免费容量、计费容量（容量单位为字节）。
      */
     async DescribeBackupOverview(req, cb) {
@@ -831,6 +837,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAuditRuleTemplates(req, cb) {
         return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
+     * 该接口（SubmitInstanceUpgradeCheckJob）提交实例版本升级校验任务。
+     */
+    async SubmitInstanceUpgradeCheckJob(req, cb) {
+        return this.request("SubmitInstanceUpgradeCheckJob", req, cb);
     }
     /**
      * 关闭实例账户密码轮转
