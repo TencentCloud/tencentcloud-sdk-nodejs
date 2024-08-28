@@ -392,6 +392,7 @@ import {
   DescribeAuditRuleTemplatesResponse,
   RollbackInstancesInfo,
   CreateCloneInstanceRequest,
+  ClusterInfo,
   CloseCDBProxyRequest,
   DeleteBackupResponse,
   DescribeProjectSecurityGroupsResponse,

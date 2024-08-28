@@ -240,6 +240,7 @@ import {
   DescribeIdleLoadBalancersRequest,
   DeleteLoadBalancerSnatIpsRequest,
   InternetAccessible,
+  OAuth,
   DescribeClassicalLBTargetsResponse,
   RewriteLocationMap,
   ModifyTargetPortRequest,

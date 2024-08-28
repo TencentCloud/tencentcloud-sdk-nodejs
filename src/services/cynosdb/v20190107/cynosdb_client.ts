@@ -1153,7 +1153,7 @@ export class Client extends AbstractClient {
    * 开启只读实例组接入
    */
   async OpenClusterReadOnlyInstanceGroupAccess(
-    req?: OpenClusterReadOnlyInstanceGroupAccessRequest,
+    req: OpenClusterReadOnlyInstanceGroupAccessRequest,
     cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void
   ): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse> {
     return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb)

@@ -2553,6 +2553,16 @@ export interface AddShareUnitRequest {
 }
 
 /**
+ * SendOrgMemberAccountBindEmail返回参数结构体
+ */
+export interface SendOrgMemberAccountBindEmailResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 组织成员财务信息。
  */
 export interface OrgMemberFinancial {
@@ -3258,6 +3268,20 @@ export interface ListOrgServiceAssignMemberResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SendOrgMemberAccountBindEmail请求参数结构体
+ */
+export interface SendOrgMemberAccountBindEmailRequest {
+  /**
+   * 成员Uin。
+   */
+  MemberUin: number
+  /**
+   * 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取
+   */
+  BindId: number
 }
 
 /**

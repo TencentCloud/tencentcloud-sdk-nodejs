@@ -26,11 +26,15 @@ import {
   Content,
   SubmitHunyuanImageJobRequest,
   Usage,
+  SubmitHunyuanImageChatJobResponse,
+  QueryHunyuanImageChatJobRequest,
+  SubmitHunyuanImageChatJobRequest,
   QueryHunyuanImageJobRequest,
   Tool,
   SearchResult,
   Choice,
   GetTokenCountResponse,
+  QueryHunyuanImageChatJobResponse,
   EmbeddingData,
   ToolFunction,
   Delta,
@@ -43,6 +47,7 @@ import {
   SubmitHunyuanImageJobResponse,
   ActivateServiceResponse,
   QueryHunyuanImageJobResponse,
+  History,
   GetEmbeddingResponse,
   ErrorMsg,
   SearchInfo,
@@ -60,6 +65,19 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("hunyuan.tencentcloudapi.com", "2023-09-01", clientConfig)
+  }
+
+  /**
+     * 混元生图（多轮对话）接口基于混元大模型，将根据输入的文本描述生成图像，支持通过多轮对话的方式不断调整图像内容。分为提交任务和查询任务2个接口。
+提交任务：输入文本和前置对话 ID 等，提交一个混元生图多轮对话异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得在上一轮对话基础上继续生成的图像结果。
+混元生图（多轮对话）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async QueryHunyuanImageChatJob(
+    req: QueryHunyuanImageChatJobRequest,
+    cb?: (error: string, rep: QueryHunyuanImageChatJobResponse) => void
+  ): Promise<QueryHunyuanImageChatJobResponse> {
+    return this.request("QueryHunyuanImageChatJob", req, cb)
   }
 
   /**
@@ -89,13 +107,26 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于计算文本对应Token数、字符数。
+   * 设置付费模式
    */
-  async GetTokenCount(
-    req: GetTokenCountRequest,
-    cb?: (error: string, rep: GetTokenCountResponse) => void
-  ): Promise<GetTokenCountResponse> {
-    return this.request("GetTokenCount", req, cb)
+  async SetPayMode(
+    req: SetPayModeRequest,
+    cb?: (error: string, rep: SetPayModeResponse) => void
+  ): Promise<SetPayModeResponse> {
+    return this.request("SetPayMode", req, cb)
+  }
+
+  /**
+     * 混元生图（多轮对话）接口基于混元大模型，将根据输入的文本描述生成图像，支持通过多轮对话的方式不断调整图像内容。分为提交任务和查询任务2个接口。
+提交任务：输入文本和前置对话 ID 等，提交一个混元生图多轮对话异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得在上一轮对话基础上继续生成的图像结果。
+混元生图（多轮对话）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async SubmitHunyuanImageChatJob(
+    req: SubmitHunyuanImageChatJobRequest,
+    cb?: (error: string, rep: SubmitHunyuanImageChatJobResponse) => void
+  ): Promise<SubmitHunyuanImageChatJobResponse> {
+    return this.request("SubmitHunyuanImageChatJob", req, cb)
   }
 
   /**
@@ -124,13 +155,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置付费模式
+   * 该接口用于计算文本对应Token数、字符数。
    */
-  async SetPayMode(
-    req: SetPayModeRequest,
-    cb?: (error: string, rep: SetPayModeResponse) => void
-  ): Promise<SetPayModeResponse> {
-    return this.request("SetPayMode", req, cb)
+  async GetTokenCount(
+    req: GetTokenCountRequest,
+    cb?: (error: string, rep: GetTokenCountResponse) => void
+  ): Promise<GetTokenCountResponse> {
+    return this.request("GetTokenCount", req, cb)
   }
 
   /**

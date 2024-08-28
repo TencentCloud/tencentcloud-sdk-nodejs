@@ -550,6 +550,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);
     }
     /**
+     * 重新发送成员绑定邮箱激活邮件
+     */
+    async SendOrgMemberAccountBindEmail(req, cb) {
+        return this.request("SendOrgMemberAccountBindEmail", req, cb);
+    }
+    /**
      * 查询空间的统计信息
      */
     async GetZoneStatistics(req, cb) {

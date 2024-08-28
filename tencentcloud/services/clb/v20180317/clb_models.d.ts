@@ -529,6 +529,10 @@ export interface ModifyRuleRequest {
      * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。
      */
     TrpcFunc?: string;
+    /**
+     * OAuth配置信息。
+     */
+    OAuth?: OAuth;
 }
 /**
  * DescribeCustomizedConfigList返回参数结构体
@@ -3213,6 +3217,11 @@ export interface RuleOutput {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetGroupList?: Array<BasicTargetGroupInfo>;
+    /**
+     * OAuth配置状态信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OAuth?: OAuth;
 }
 /**
  * RegisterFunctionTargets返回参数结构体
@@ -5023,6 +5032,24 @@ export interface InternetAccessible {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BandwidthpkgSubType?: string;
+}
+/**
+ * OAuth配置信息。
+ */
+export interface OAuth {
+    /**
+     * 开启或关闭鉴权。
+  True: 开启;
+  False: 关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OAuthEnable?: boolean;
+    /**
+     * IAP全部故障后，拒绝请求还是放行。BYPASS:通过,
+  REJECT: 拒绝
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OAuthFailureStatus?: string;
 }
 /**
  * DescribeClassicalLBTargets返回参数结构体

@@ -298,7 +298,7 @@ export declare class Client extends AbstractClient {
     /**
      * 开启只读实例组接入
      */
-    OpenClusterReadOnlyInstanceGroupAccess(req?: OpenClusterReadOnlyInstanceGroupAccessRequest, cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
+    OpenClusterReadOnlyInstanceGroupAccess(req: OpenClusterReadOnlyInstanceGroupAccessRequest, cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
     /**
      * 本接口(SearchClusterTables)搜索集群数据表列表
      */

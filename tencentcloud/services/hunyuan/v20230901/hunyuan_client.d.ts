@@ -1,12 +1,19 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ChatCompletionsRequest, GetEmbeddingRequest, ActivateServiceRequest, SubmitHunyuanImageJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, SetPayModeResponse, SetPayModeRequest, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, ActivateServiceResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, TextToImageLiteResponse, ChatCompletionsResponse } from "./hunyuan_models";
+import { ChatCompletionsRequest, GetEmbeddingRequest, ActivateServiceRequest, SubmitHunyuanImageJobRequest, SubmitHunyuanImageChatJobResponse, QueryHunyuanImageChatJobRequest, SubmitHunyuanImageChatJobRequest, QueryHunyuanImageJobRequest, GetTokenCountResponse, QueryHunyuanImageChatJobResponse, SetPayModeResponse, SetPayModeRequest, TextToImageLiteRequest, SubmitHunyuanImageJobResponse, ActivateServiceResponse, QueryHunyuanImageJobResponse, GetEmbeddingResponse, GetTokenCountRequest, TextToImageLiteResponse, ChatCompletionsResponse } from "./hunyuan_models";
 /**
  * hunyuan client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 混元生图（多轮对话）接口基于混元大模型，将根据输入的文本描述生成图像，支持通过多轮对话的方式不断调整图像内容。分为提交任务和查询任务2个接口。
+提交任务：输入文本和前置对话 ID 等，提交一个混元生图多轮对话异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得在上一轮对话基础上继续生成的图像结果。
+混元生图（多轮对话）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    QueryHunyuanImageChatJob(req: QueryHunyuanImageChatJobRequest, cb?: (error: string, rep: QueryHunyuanImageChatJobResponse) => void): Promise<QueryHunyuanImageChatJobResponse>;
     /**
      * 混元生图接口基于混元大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
 提交任务：输入文本等，提交一个混元生图异步任务，获得任务 ID。
@@ -22,9 +29,16 @@ export declare class Client extends AbstractClient {
      */
     QueryHunyuanImageJob(req: QueryHunyuanImageJobRequest, cb?: (error: string, rep: QueryHunyuanImageJobResponse) => void): Promise<QueryHunyuanImageJobResponse>;
     /**
-     * 该接口用于计算文本对应Token数、字符数。
+     * 设置付费模式
      */
-    GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
+    SetPayMode(req: SetPayModeRequest, cb?: (error: string, rep: SetPayModeResponse) => void): Promise<SetPayModeResponse>;
+    /**
+     * 混元生图（多轮对话）接口基于混元大模型，将根据输入的文本描述生成图像，支持通过多轮对话的方式不断调整图像内容。分为提交任务和查询任务2个接口。
+提交任务：输入文本和前置对话 ID 等，提交一个混元生图多轮对话异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得在上一轮对话基础上继续生成的图像结果。
+混元生图（多轮对话）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    SubmitHunyuanImageChatJob(req: SubmitHunyuanImageChatJobRequest, cb?: (error: string, rep: SubmitHunyuanImageChatJobResponse) => void): Promise<SubmitHunyuanImageChatJobResponse>;
     /**
      * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
 
@@ -39,9 +53,9 @@ export declare class Client extends AbstractClient {
      */
     ActivateService(req: ActivateServiceRequest, cb?: (error: string, rep: ActivateServiceResponse) => void): Promise<ActivateServiceResponse>;
     /**
-     * 设置付费模式
+     * 该接口用于计算文本对应Token数、字符数。
      */
-    SetPayMode(req: SetPayModeRequest, cb?: (error: string, rep: SetPayModeResponse) => void): Promise<SetPayModeResponse>;
+    GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
     /**
      * 文生图轻量版接口根据输入的文本描述，智能生成与之相关的结果图。
 文生图轻量版默认提供3个并发任务数，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。

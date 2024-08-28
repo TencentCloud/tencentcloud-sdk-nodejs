@@ -39,10 +39,12 @@ import {
   IntegrationNodeSchemaMapping,
   DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
+  BatchTaskOperateNew,
   DescribeRuleDimStatRequest,
   DescribeRuleTemplatesResponse,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
+  GetCosTokenResponse,
   CreateDsFolderResponse,
   UserFileInfo,
   FreezeOpsTasksRequest,
@@ -52,6 +54,7 @@ import {
   RecordsSpeed,
   ColumnLineageInfo,
   TaskLineageInfoPair,
+  JudgeResourceFileResponse,
   SubmitTaskRequest,
   DescribeTableMetasRequest,
   RuleExecResultDetail,
@@ -64,7 +67,7 @@ import {
   DescribeEventCasesRequest,
   BatchResumeIntegrationTasksResponse,
   DescribeFieldBasicInfoResponse,
-  ColumnItem,
+  DescribeStatisticInstanceStatusTrendOpsResponse,
   RuleGroupExecResult,
   AlarmEventInfo,
   DescribeTaskLineageRequest,
@@ -87,6 +90,7 @@ import {
   DescribeRuleExecResultsRequest,
   InstanceDownloadLogInfo,
   EventCaseDTO,
+  TableScoreStatisticsInfo,
   InstanceOpsDto,
   DescribeDutyScheduleDetailsRequest,
   SubmitWorkflowResponse,
@@ -113,7 +117,7 @@ import {
   UploadContentResponse,
   UploadResourceRequest,
   RuleExecLog,
-  RuleTemplate,
+  AiOpsEventListenerDTO,
   DescribeRuleGroupsByPageRequest,
   BatchDeleteIntegrationTasksResponse,
   SearchConditionInstanceNew,
@@ -122,7 +126,7 @@ import {
   DescribeWorkflowTaskCountResponse,
   TaskTag,
   TaskTypeCnt,
-  SubmitCustomFunctionResponse,
+  ExtResourceFlagDto,
   DescribeTopTableStatRequest,
   SearchCondition,
   Rule,
@@ -139,6 +143,7 @@ import {
   UpdateWorkflowOwnerRequest,
   DescribeSchedulerTaskTypeCntResponse,
   DeleteCustomFunctionResponse,
+  RulePage,
   DimensionScoreInfo,
   DescribeTaskScriptResponse,
   CollectionInstanceOpsDto,
@@ -153,7 +158,7 @@ import {
   BatchModifyOpsOwnersRequest,
   ModifyTaskNameResponse,
   BatchDeleteOpsTasksRequest,
-  ResumeIntegrationTaskResponse,
+  GetCosTokenRequest,
   WorkflowExtOpsDto,
   LineageParamRecord,
   BatchResult,
@@ -231,6 +236,7 @@ import {
   ModifyRuleResponse,
   DescribeInstanceLogFileResponse,
   PairDto,
+  CosTokenResponse,
   DeleteTaskDsResponse,
   DescribeAllByFolderNewResponse,
   DescribeDsParentFolderTreeRequest,
@@ -256,12 +262,13 @@ import {
   TableConfig,
   FilterOptional,
   TaskInstanceCountDto,
-  TableScoreStatisticsInfo,
+  DescribePendingSubmitTaskListResponse,
   BatchForceSuccessIntegrationTaskInstancesResponse,
   InstanceLifeCycleOpsDto,
   AlarmReceiverInfo,
   GeneralTaskParam,
   DescribeTableBasicInfoResponse,
+  WorkflowScheduleDtoDs,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
   TaskByCycle,
@@ -282,6 +289,8 @@ import {
   BatchStopOpsTasksRequest,
   DescribeFunctionTypesResponse,
   ModifyRuleTemplateResponse,
+  RenewWorkflowSchedulerInfoDsResponse,
+  DescribePendingSubmitTaskInfo,
   BatchUpdateIntegrationTasksResponse,
   TaskLogResponse,
   QuietPeriod,
@@ -289,6 +298,7 @@ import {
   DescribeInstanceLastLogRequest,
   DescribeEventRequest,
   TableQualityDetailPage,
+  BatchCreateTaskVersionAsyncRequest,
   TaskTypeOpsDto,
   BatchModifyOpsOwnersResponse,
   CreateTaskAlarmRegularResponse,
@@ -314,6 +324,7 @@ import {
   DeleteTaskAlarmRegularResponse,
   DeleteWorkflowByIdRequest,
   ProjectBaseInfoOpsRequest,
+  DescribeWorkflowSchedulerInfoDsResponse,
   DeleteRuleResponse,
   MakePlanTaskOpsDtoCollection,
   SimpleColumnInfo,
@@ -324,11 +335,12 @@ import {
   DescribeApproveTypeListRequest,
   DeleteIntegrationNodeResponse,
   DescribeDataSourceInfoListRequest,
+  BatchResultDs,
   DescribeIntegrationNodeRequest,
   SetTaskAlarmNewResponse,
   GetOfflineDIInstanceListResponse,
   DescribeDatasourceResponse,
-  DescribeStatisticInstanceStatusTrendOpsRequest,
+  BatchOperationOpsDto,
   RuleExecConfig,
   SuspendIntegrationTaskResponse,
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
@@ -358,6 +370,7 @@ import {
   BatchOperateResultOpsDto,
   DeleteRuleRequest,
   ApproveType,
+  SubmitCustomFunctionResponse,
   TableNameFilter,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
@@ -367,10 +380,10 @@ import {
   DescribeStreamTaskLogListResponse,
   DlcDataGovernPolicy,
   DescribeRuleGroupExecResultsByPageResponse,
-  DescribeInstanceByCycleRequest,
+  DescribeRuleGroupsByPageResponse,
   GetIntegrationNodeColumnSchemaRequest,
   DeleteWorkflowByIdResponse,
-  RulePage,
+  AiopsDLCResourceConfigDto,
   DeleteIntegrationNodeRequest,
   TableBasicInfo,
   ModifyIntegrationNodeResponse,
@@ -428,7 +441,7 @@ import {
   SimpleTaskInfo,
   DescribeSchedulerTaskCntByStatusRequest,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
-  EventCaseAuditLogVOCollection,
+  DescribeWorkflowSchedulerInfoDsRequest,
   DescribeDependTaskListsResponse,
   CreateHiveTableResponse,
   RuleTemplatePage,
@@ -457,9 +470,11 @@ import {
   DescribeColumnsMetaResponse,
   DescribeRuleExecResultsResponse,
   QualityScoreTrend,
+  RuleTemplate,
   DeleteFileResponse,
   ResumeIntegrationTaskRequest,
   ModifyDataSourceRequest,
+  DescribePendingSubmitTaskListRequest,
   TriggerEventResponse,
   TaskAlarmInfo,
   ModifyApproveStatusRequest,
@@ -476,11 +491,11 @@ import {
   DlcMergeManifestsInfo,
   DescribeWorkflowListByProjectIdRequest,
   AlarmIndicatorInfo,
-  DescribeStatisticInstanceStatusTrendOpsResponse,
+  ColumnItem,
   TableMeta,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
-  TriggerDsEventRequest,
+  EventCaseAuditLogVOCollection,
   DescribeQualityScoreTrendRequest,
   RobLockState,
   SubmitTaskTestRunRequest,
@@ -570,7 +585,7 @@ import {
   DescribeTableBasicInfoRequest,
   DescribeDatasourceRequest,
   RuleExecStat,
-  BatchOperationOpsDto,
+  DescribeStatisticInstanceStatusTrendOpsRequest,
   DescribeEventCasesResponse,
   DescribeTableSchemaInfoResponse,
   DiagnoseProResponse,
@@ -590,6 +605,8 @@ import {
   RecordField,
   DescribeIntegrationVersionNodesInfoResponse,
   DescribeRulesRequest,
+  AiopsSimpleTaskDto,
+  ResumeIntegrationTaskResponse,
   DescribeRuleResponse,
   DescribeTaskScriptRequest,
   SchemaDetail,
@@ -624,12 +641,14 @@ import {
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
   RunTasksByMultiWorkflowResponse,
+  RenewWorkflowSchedulerInfoDsRequest,
   DutyScheduleDetailsInfo,
   DescribeInstanceLastLogResponse,
   TableHeat,
   DescribeExecStrategyRequest,
   ScriptInfoResponse,
   CreateHiveTableRequest,
+  AiopsScriptInfo,
   BatchKillIntegrationTaskInstancesResponse,
   RunTasksByMultiWorkflowRequest,
   EventListenerOpsDto,
@@ -637,11 +656,13 @@ import {
   DescribeRuleGroupTableResponse,
   DailyScoreInfo,
   SuspendIntegrationTaskRequest,
+  TaskSubmitPreCheckDetailInfo,
   DescribeDependOpsTasksResponse,
   DeleteRuleTemplateResponse,
   DescribeRuleTemplateRequest,
   SqlExpression,
   DescribeTaskByCycleRequest,
+  TriggerDsEventRequest,
   CommonId,
   CreateRuleTemplateRequest,
   DlcRewriteDataInfo,
@@ -652,9 +673,11 @@ import {
   Pair,
   DeleteIntegrationTaskResponse,
   TableBaseInfo,
-  DescribeRuleGroupsByPageResponse,
+  BatchCreateTaskVersionAsyncResponse,
+  DescribeInstanceByCycleRequest,
   Duty,
   DescribeIntegrationStatisticsTaskStatusResponse,
+  JudgeResourceFileRequest,
   UploadResourceResponse,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
@@ -673,6 +696,7 @@ import {
   DescribeDsFolderTreeResponse,
   PathNodeDsVO,
   DescribeWorkflowCanvasInfoRequest,
+  ParamInfoDs,
   DagInstancesRequest,
   DryRunDIOfflineTaskResponse,
   FolderOpsDto,
@@ -882,14 +906,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-注册事件监听器
-     */
-  async RegisterEventListener(
-    req: RegisterEventListenerRequest,
-    cb?: (error: string, rep: RegisterEventListenerResponse) => void
-  ): Promise<RegisterEventListenerResponse> {
-    return this.request("RegisterEventListener", req, cb)
+   * 数据集成大屏任务状态统计趋势
+   */
+  async DescribeIntegrationStatisticsTaskStatusTrend(
+    req: DescribeIntegrationStatisticsTaskStatusTrendRequest,
+    cb?: (error: string, rep: DescribeIntegrationStatisticsTaskStatusTrendResponse) => void
+  ): Promise<DescribeIntegrationStatisticsTaskStatusTrendResponse> {
+    return this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, cb)
   }
 
   /**
@@ -1163,6 +1186,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新工作流下任务调度信息
+   */
+  async RenewWorkflowSchedulerInfoDs(
+    req: RenewWorkflowSchedulerInfoDsRequest,
+    cb?: (error: string, rep: RenewWorkflowSchedulerInfoDsResponse) => void
+  ): Promise<RenewWorkflowSchedulerInfoDsResponse> {
+    return this.request("RenewWorkflowSchedulerInfoDs", req, cb)
+  }
+
+  /**
    * 获取离线任务长连接Token
    */
   async DescribeOfflineTaskToken(
@@ -1240,6 +1273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityScoreResponse) => void
   ): Promise<DescribeQualityScoreResponse> {
     return this.request("DescribeQualityScore", req, cb)
+  }
+
+  /**
+   * 获取cos token
+   */
+  async GetCosToken(
+    req: GetCosTokenRequest,
+    cb?: (error: string, rep: GetCosTokenResponse) => void
+  ): Promise<GetCosTokenResponse> {
+    return this.request("GetCosToken", req, cb)
   }
 
   /**
@@ -1885,6 +1928,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 资源管理-判断资源文件是否存在
+   */
+  async JudgeResourceFile(
+    req: JudgeResourceFileRequest,
+    cb?: (error: string, rep: JudgeResourceFileResponse) => void
+  ): Promise<JudgeResourceFileResponse> {
+    return this.request("JudgeResourceFile", req, cb)
+  }
+
+  /**
    * 提交集成任务
    */
   async CommitIntegrationTask(
@@ -2045,6 +2098,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeColumnsMetaResponse) => void
   ): Promise<DescribeColumnsMetaResponse> {
     return this.request("DescribeColumnsMeta", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+注册事件监听器
+     */
+  async RegisterEventListener(
+    req: RegisterEventListenerRequest,
+    cb?: (error: string, rep: RegisterEventListenerResponse) => void
+  ): Promise<RegisterEventListenerResponse> {
+    return this.request("RegisterEventListener", req, cb)
   }
 
   /**
@@ -2258,13 +2322,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 数据集成大屏任务状态统计趋势
+   * 异步批量创建任务版本
    */
-  async DescribeIntegrationStatisticsTaskStatusTrend(
-    req: DescribeIntegrationStatisticsTaskStatusTrendRequest,
-    cb?: (error: string, rep: DescribeIntegrationStatisticsTaskStatusTrendResponse) => void
-  ): Promise<DescribeIntegrationStatisticsTaskStatusTrendResponse> {
-    return this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, cb)
+  async BatchCreateTaskVersionAsync(
+    req: BatchCreateTaskVersionAsyncRequest,
+    cb?: (error: string, rep: BatchCreateTaskVersionAsyncResponse) => void
+  ): Promise<BatchCreateTaskVersionAsyncResponse> {
+    return this.request("BatchCreateTaskVersionAsync", req, cb)
   }
 
   /**
@@ -2488,6 +2552,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取待提交任务预提交校验信息
+   */
+  async DescribePendingSubmitTaskList(
+    req: DescribePendingSubmitTaskListRequest,
+    cb?: (error: string, rep: DescribePendingSubmitTaskListResponse) => void
+  ): Promise<DescribePendingSubmitTaskListResponse> {
+    return this.request("DescribePendingSubmitTaskList", req, cb)
+  }
+
+  /**
    * 规则执行结果列表查询
    */
   async DescribeRuleExecResults(
@@ -2596,6 +2670,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void
   ): Promise<ModifyTaskAlarmRegularResponse> {
     return this.request("ModifyTaskAlarmRegular", req, cb)
+  }
+
+  /**
+   * 获取工作流调度信息
+   */
+  async DescribeWorkflowSchedulerInfoDs(
+    req: DescribeWorkflowSchedulerInfoDsRequest,
+    cb?: (error: string, rep: DescribeWorkflowSchedulerInfoDsResponse) => void
+  ): Promise<DescribeWorkflowSchedulerInfoDsResponse> {
+    return this.request("DescribeWorkflowSchedulerInfoDs", req, cb)
   }
 
   /**

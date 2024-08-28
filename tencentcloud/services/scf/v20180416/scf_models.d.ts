@@ -243,11 +243,11 @@ export interface LayerVersionInfo {
     /**
      * 版本号
      */
-    LayerVersion: number;
+    LayerVersion?: number;
     /**
      * 层名称
      */
-    LayerName: string;
+    LayerName?: string;
     /**
      * 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
      */
@@ -257,6 +257,11 @@ export interface LayerVersionInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Stamp?: string;
+    /**
+     * 返回层绑定的标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * PutProvisionedConcurrencyConfig返回参数结构体

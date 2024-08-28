@@ -2727,6 +2727,11 @@ export interface PulsarProClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingLabelVersion?: string
+  /**
+   * 实例到期时间戳，毫秒级精度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
 }
 
 /**

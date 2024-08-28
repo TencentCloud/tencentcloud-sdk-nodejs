@@ -727,6 +727,16 @@ export interface DescribeRealTimeTaskSpeedRequest {
     ProjectId: string;
 }
 /**
+ * 批量操作出参
+ */
+export interface BatchTaskOperateNew {
+    /**
+     * 操作Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobId?: number;
+}
+/**
  * DescribeRuleDimStat请求参数结构体
  */
 export interface DescribeRuleDimStatRequest {
@@ -810,6 +820,35 @@ export interface TaskInnerInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RealWorkflowId?: string;
+}
+/**
+ * GetCosToken返回参数结构体
+ */
+export interface GetCosTokenResponse {
+    /**
+     * cos地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * Token信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Token?: CosTokenResponse;
+    /**
+     * 桶名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bucket?: string;
+    /**
+     * 终止点（针对私有云环境）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndPoint?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateDsFolder返回参数结构体
@@ -1170,6 +1209,19 @@ export interface TaskLineageInfoPair {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetTable?: TaskLineageInfo;
+}
+/**
+ * JudgeResourceFile返回参数结构体
+ */
+export interface JudgeResourceFileResponse {
+    /**
+     * 资源文件完整路径
+     */
+    Data?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SubmitTask请求参数结构体
@@ -1605,19 +1657,18 @@ export interface DescribeFieldBasicInfoResponse {
     RequestId?: string;
 }
 /**
- * ColumnItem
+ * DescribeStatisticInstanceStatusTrendOps返回参数结构体
  */
-export interface ColumnItem {
+export interface DescribeStatisticInstanceStatusTrendOpsResponse {
     /**
-     * ColumnName1
+     * 实例状态统计结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ColumnName?: string;
+    Data?: Array<InstanceStatisticInfo>;
     /**
-     * ColumnName1
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ColumnRef?: string;
+    RequestId?: string;
 }
 /**
  * 规则组执行结果
@@ -2248,6 +2299,26 @@ export interface EventCaseDTO {
      * 描述信息
      */
     Description?: string;
+}
+/**
+ * 表评分统计信息
+ */
+export interface TableScoreStatisticsInfo {
+    /**
+     * 等级 1、2、3、4、5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level: number;
+    /**
+     * 占比
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale: number;
+    /**
+     * 表数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableNumber: number;
 }
 /**
  * 实例运维详情
@@ -3321,108 +3392,44 @@ export interface RuleExecLog {
     Log: string;
 }
 /**
- * 规则模版
+ * 监听事件
  */
-export interface RuleTemplate {
+export interface AiOpsEventListenerDTO {
     /**
-     * 规则模版ID
-     */
-    RuleTemplateId?: number;
-    /**
-     * 规则模版名称
-     */
-    Name?: string;
-    /**
-     * 规则模版描述
-     */
-    Description?: string;
-    /**
-     * 模版类型（1：系统模版，2：自定义）
-     */
-    Type?: number;
-    /**
-     * 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别）
-     */
-    SourceObjectType?: number;
-    /**
-     * 规则适用的源数据对象类型（1：数值，2：字符串）
-     */
-    SourceObjectDataType?: number;
-    /**
-     * 规则模版源侧内容，区分引擎，JSON 结构
+     * 事件名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceContent?: string;
+    EventName?: string;
     /**
-     * 源数据适用类型
+     * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceEngineTypes?: Array<number | bigint>;
+    CreateTime?: string;
     /**
-     * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
+     * 项目展示名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QualityDim?: number;
+    ProjectDisplayName?: string;
     /**
-     * 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降）
+     * 事件周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompareType?: number;
+    EventSubType?: string;
     /**
-     * 引用次数
+     * 事件项目ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CitationCount?: number;
+    ProjectId?: string;
     /**
-     * 创建人id
+     * 扩展名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId?: number;
+    PropertiesList?: Array<ParamInfoDs>;
     /**
-     * 创建人昵称
+     * 事件广播类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserName?: string;
-    /**
-     * 更新时间yyyy-MM-dd HH:mm:ss
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 是否添加where参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WhereFlag?: boolean;
-    /**
-     * 是否关联多个库表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MultiSourceFlag?: boolean;
-    /**
-     * 自定义模板SQL表达式
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SqlExpression?: string;
-    /**
-     * 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubQualityDim?: number;
-    /**
-     * sql表达式解析对象
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResolvedSqlExpression?: SqlExpression;
-    /**
-     * 支持的数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DatasourceTypes?: Array<number | bigint>;
-    /**
-     * 创建人IdStr
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserIdStr?: string;
+    EventBroadcastType?: string;
 }
 /**
  * DescribeRuleGroupsByPage请求参数结构体
@@ -3565,23 +3572,34 @@ export interface TaskTypeCnt {
     TypeName?: string;
 }
 /**
- * SubmitCustomFunction返回参数结构体
+ * 扩展信息参数
  */
-export interface SubmitCustomFunctionResponse {
+export interface ExtResourceFlagDto {
     /**
-     * 函数唯一标识
+     * 父任务信息获取标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FunctionId?: string;
+    ParentTask?: boolean;
     /**
-     * 错误提示
+     * 生产事件获取标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMessage?: string;
+    EventListener?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * Dlc相关配置获取标识
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    DlcResourceConfig?: string;
+    /**
+     * 脚本信息获取标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Script?: string;
+    /**
+     * 离线任务信息获取标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineSyncTask?: string;
 }
 /**
  * DescribeTopTableStat请求参数结构体
@@ -4130,6 +4148,21 @@ export interface DeleteCustomFunctionResponse {
     RequestId?: string;
 }
 /**
+ * 数据质量规则分页
+ */
+export interface RulePage {
+    /**
+     * 记录数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<Rule>;
+}
+/**
  * 维度评分信息
  */
 export interface DimensionScoreInfo {
@@ -4550,17 +4583,29 @@ export interface BatchDeleteOpsTasksRequest {
     ProjectId: string;
 }
 /**
- * ResumeIntegrationTask返回参数结构体
+ * GetCosToken请求参数结构体
  */
-export interface ResumeIntegrationTaskResponse {
+export interface GetCosTokenRequest {
     /**
-     * 操作成功与否标识
+     * 项目id
      */
-    Data?: boolean;
+    ProjectId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 请求域名
      */
-    RequestId?: string;
+    OriginDomain: string;
+    /**
+     * 是否需要跨域
+     */
+    CrossFlag: boolean;
+    /**
+     * 桶名
+     */
+    BucketName?: string;
+    /**
+     * 远程地址
+     */
+    RemotePath?: string;
 }
 /**
  * 工作流
@@ -7125,6 +7170,61 @@ export interface PairDto {
     Value: string;
 }
 /**
+ * cos token信息
+ */
+export interface CosTokenResponse {
+    /**
+     * token id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * token内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Token?: string;
+    /**
+     * 密钥id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecretId?: string;
+    /**
+     * 密钥内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecretKey?: string;
+    /**
+     * 响应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Response?: string;
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerUin?: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredTime?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: number;
+    /**
+     * 操作者uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorUin?: string;
+}
+/**
  * DeleteTaskDs返回参数结构体
  */
 export interface DeleteTaskDsResponse {
@@ -8005,24 +8105,17 @@ export interface TaskInstanceCountDto {
     Stopped: number;
 }
 /**
- * 表评分统计信息
+ * DescribePendingSubmitTaskList返回参数结构体
  */
-export interface TableScoreStatisticsInfo {
+export interface DescribePendingSubmitTaskListResponse {
     /**
-     * 等级 1、2、3、4、5
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 待提交任务信息
      */
-    Level: number;
+    Data?: Array<DescribePendingSubmitTaskInfo>;
     /**
-     * 占比
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Scale: number;
-    /**
-     * 表数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TableNumber: number;
+    RequestId?: string;
 }
 /**
  * BatchForceSuccessIntegrationTaskInstances返回参数结构体
@@ -8184,6 +8277,116 @@ export interface DescribeTableBasicInfoResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 工作流调度信息
+ */
+export interface WorkflowScheduleDtoDs {
+    /**
+     * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 工作流ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowId?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 创建人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creater?: string;
+    /**
+     * 修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 延迟时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DelayTime?: number;
+    /**
+     * 启动时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartupTime?: number;
+    /**
+     * 任务依赖
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfDepend?: string;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 指定运行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskAction?: string;
+    /**
+     * 调度周期时间单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CycleType?: string;
+    /**
+     * 调度周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CycleStep?: number;
+    /**
+     * Cron表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CrontabExpression?: string;
+    /**
+     * 执行时间左闭区间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionStartTime?: string;
+    /**
+     * 执行时间右闭区间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionEndTime?: string;
+    /**
+     * 实例初始化策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceInitStrategy?: string;
+    /**
+     * 工作流依赖
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DependencyWorkflow?: string;
+    /**
+     * 调度计划
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SchedulerDesc?: string;
+    /**
+     * 工作流首次提交时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstSubmitTime?: string;
+    /**
+     * 工作流最近提交时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LatestSubmitTime?: string;
 }
 /**
  * ModifyRuleTemplate请求参数结构体
@@ -8753,6 +8956,65 @@ export interface ModifyRuleTemplateResponse {
     RequestId?: string;
 }
 /**
+ * RenewWorkflowSchedulerInfoDs返回参数结构体
+ */
+export interface RenewWorkflowSchedulerInfoDsResponse {
+    /**
+     * 数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: BatchResultDs;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 待提交任务信息
+ */
+export interface DescribePendingSubmitTaskInfo {
+    /**
+     * 任务编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 修改类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyType?: string;
+    /**
+     * 任务状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskStatus?: string;
+    /**
+     * 提交预检查（Y/N）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubmitPreCheck?: string;
+    /**
+     * 提交预检查提交可能会失败的原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubmitPreCheckDetailList?: Array<TaskSubmitPreCheckDetailInfo>;
+    /**
+     * 资源组编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupId?: string;
+    /**
+     * 资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupName?: string;
+}
+/**
  * BatchUpdateIntegrationTasks返回参数结构体
  */
 export interface BatchUpdateIntegrationTasksResponse {
@@ -8877,6 +9139,35 @@ export interface TableQualityDetailPage {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Items: Array<TableQualityDetail>;
+}
+/**
+ * BatchCreateTaskVersionAsync请求参数结构体
+ */
+export interface BatchCreateTaskVersionAsyncRequest {
+    /**
+     * 任务信息
+     */
+    Tasks: Array<BatchCreateTaskVersionDTO>;
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 是否自动运行
+     */
+    AutoRun?: boolean;
+    /**
+     * 告警方式:email-邮件;sms-短信;wecom-企业微信
+     */
+    AlarmWays?: string;
+    /**
+     * 告警对象:1-项目管理员，2-任务责任人
+     */
+    AlarmRecipientTypes?: string;
+    /**
+     * 是否需要校验父任务已经提交到调度
+     */
+    NeedCheckParentSubmitted?: boolean;
 }
 /**
  * 任务类型基本信息
@@ -9519,6 +9810,20 @@ export interface ProjectBaseInfoOpsRequest {
     IsAdmin?: boolean;
 }
 /**
+ * DescribeWorkflowSchedulerInfoDs返回参数结构体
+ */
+export interface DescribeWorkflowSchedulerInfoDsResponse {
+    /**
+     * 数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: WorkflowScheduleDtoDs;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteRule返回参数结构体
  */
 export interface DeleteRuleResponse {
@@ -9828,6 +10133,26 @@ export interface DescribeDataSourceInfoListRequest {
     DatasourceName?: string;
 }
 /**
+ * 批量执行结果
+ */
+export interface BatchResultDs {
+    /**
+     * 成功数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Success?: number;
+    /**
+     * 失败数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Failed?: number;
+    /**
+     * 总计
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+}
+/**
  * DescribeIntegrationNode请求参数结构体
  */
 export interface DescribeIntegrationNodeRequest {
@@ -9889,65 +10214,24 @@ export interface DescribeDatasourceResponse {
     RequestId?: string;
 }
 /**
- * DescribeStatisticInstanceStatusTrendOps请求参数结构体
+ * 批量操作的结果返回
  */
-export interface DescribeStatisticInstanceStatusTrendOpsRequest {
+export interface BatchOperationOpsDto {
     /**
-     * 项目ID
+     * 批量操作成功数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    SuccessCount?: number;
     /**
-     * 任务类型Id
+     * 批量操作失败数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypeId?: string;
+    FailedCount?: number;
     /**
-     * 时间类型
+     * 批量操作的总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeType?: string;
-    /**
-     * 任务类型名称
-     */
-    TypeName?: string;
-    /**
-     * 开始时间
-     */
-    StartTime?: string;
-    /**
-     * 结束时间
-     */
-    EndTime?: string;
-    /**
-     * 资源组ID
-     */
-    ExecutionGroupId?: string;
-    /**
-     * 资源组名称
-     */
-    ExecutionGroupName?: string;
-    /**
-     * 1
-     */
-    InCharge?: string;
-    /**
-     * 1
-     */
-    TaskType?: number;
-    /**
-     * 1
-     */
-    StateList?: Array<number | bigint>;
-    /**
-     * D代表天，H代表小时
-     */
-    AggregationUnit?: string;
-    /**
-     * 1
-     */
-    AverageWindowSize?: number;
-    /**
-     * 工作流ID
-     */
-    WorkflowId?: string;
+    TotalCount?: number;
 }
 /**
  * 规则执行配置
@@ -10683,6 +10967,25 @@ export interface ApproveType {
     Classification: string;
 }
 /**
+ * SubmitCustomFunction返回参数结构体
+ */
+export interface SubmitCustomFunctionResponse {
+    /**
+     * 函数唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FunctionId?: string;
+    /**
+     * 错误提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 按表名查询的查询条件
  */
 export interface TableNameFilter {
@@ -10925,17 +11228,18 @@ export interface DescribeRuleGroupExecResultsByPageResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceByCycle请求参数结构体
+ * DescribeRuleGroupsByPage返回参数结构体
  */
-export interface DescribeInstanceByCycleRequest {
+export interface DescribeRuleGroupsByPageResponse {
     /**
-     * 1
+     * 规则组列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId?: string;
+    Data?: RuleGroupPage;
     /**
-     * 1
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TenantId?: string;
+    RequestId?: string;
 }
 /**
  * GetIntegrationNodeColumnSchema请求参数结构体
@@ -10965,19 +11269,29 @@ export interface DeleteWorkflowByIdResponse {
     RequestId?: string;
 }
 /**
- * 数据质量规则分页
+ * DLC资源配置信息
  */
-export interface RulePage {
+export interface AiopsDLCResourceConfigDto {
     /**
-     * 记录数
+     * Driver资源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount?: number;
+    DriverSize?: string;
     /**
-     * 规则列表
+     * Executor资源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items?: Array<Rule>;
+    ExecutorSize?: string;
+    /**
+     * Executor数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorNumbers?: string;
+    /**
+     * 资源配置方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsInherit?: string;
 }
 /**
  * DeleteIntegrationNode请求参数结构体
@@ -12406,39 +12720,17 @@ export interface DescribeRealTimeTaskInstanceNodeInfoRequest {
     ProjectId: string;
 }
 /**
- * 事件实例分页查询结果
+ * DescribeWorkflowSchedulerInfoDs请求参数结构体
  */
-export interface EventCaseAuditLogVOCollection {
+export interface DescribeWorkflowSchedulerInfoDsRequest {
     /**
-     * 结果总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目ID
      */
-    TotalCount?: number;
+    ProjectId: string;
     /**
-     * 总页数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 工作流ID
      */
-    TotalPage?: number;
-    /**
-     * 当前页记录数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PageCount?: number;
-    /**
-     * 页码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PageNumber?: number;
-    /**
-     * 分页大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PageSize?: number;
-    /**
-     * 分页数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items?: Array<EventCaseAuditLogOptDto>;
+    WorkflowId: string;
 }
 /**
  * DescribeDependTaskLists返回参数结构体
@@ -13224,6 +13516,110 @@ export interface QualityScoreTrend {
     DailyScoreList: Array<DailyScoreInfo>;
 }
 /**
+ * 规则模版
+ */
+export interface RuleTemplate {
+    /**
+     * 规则模版ID
+     */
+    RuleTemplateId?: number;
+    /**
+     * 规则模版名称
+     */
+    Name?: string;
+    /**
+     * 规则模版描述
+     */
+    Description?: string;
+    /**
+     * 模版类型（1：系统模版，2：自定义）
+     */
+    Type?: number;
+    /**
+     * 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别）
+     */
+    SourceObjectType?: number;
+    /**
+     * 规则适用的源数据对象类型（1：数值，2：字符串）
+     */
+    SourceObjectDataType?: number;
+    /**
+     * 规则模版源侧内容，区分引擎，JSON 结构
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceContent?: string;
+    /**
+     * 源数据适用类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceEngineTypes?: Array<number | bigint>;
+    /**
+     * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualityDim?: number;
+    /**
+     * 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompareType?: number;
+    /**
+     * 引用次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CitationCount?: number;
+    /**
+     * 创建人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserId?: number;
+    /**
+     * 创建人昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserName?: string;
+    /**
+     * 更新时间yyyy-MM-dd HH:mm:ss
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 是否添加where参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WhereFlag?: boolean;
+    /**
+     * 是否关联多个库表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MultiSourceFlag?: boolean;
+    /**
+     * 自定义模板SQL表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SqlExpression?: string;
+    /**
+     * 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubQualityDim?: number;
+    /**
+     * sql表达式解析对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResolvedSqlExpression?: SqlExpression;
+    /**
+     * 支持的数据源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceTypes?: Array<number | bigint>;
+    /**
+     * 创建人IdStr
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserIdStr?: string;
+}
+/**
  * DeleteFile返回参数结构体
  */
 export interface DeleteFileResponse {
@@ -13346,6 +13742,23 @@ export interface ModifyDataSourceRequest {
      * 数据源开发环境配置
      */
     DevelopmentParams?: string;
+}
+/**
+ * DescribePendingSubmitTaskList请求参数结构体
+ */
+export interface DescribePendingSubmitTaskListRequest {
+    /**
+     * 项目编号
+     */
+    ProjectId: string;
+    /**
+     * 工作流编号
+     */
+    WorkflowId?: string;
+    /**
+     * 任务编号列表
+     */
+    TaskIdList?: Array<string>;
 }
 /**
  * TriggerEvent返回参数结构体
@@ -13939,18 +14352,19 @@ export interface AlarmIndicatorInfo {
     Threshold?: number;
 }
 /**
- * DescribeStatisticInstanceStatusTrendOps返回参数结构体
+ * ColumnItem
  */
-export interface DescribeStatisticInstanceStatusTrendOpsResponse {
+export interface ColumnItem {
     /**
-     * 实例状态统计结果
+     * ColumnName1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: Array<InstanceStatisticInfo>;
+    ColumnName?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * ColumnName1
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ColumnRef?: string;
 }
 /**
  * 表的元数据信息
@@ -14272,21 +14686,39 @@ export interface SubscribeReceiver {
     ReceiverUserIdStr?: string;
 }
 /**
- * TriggerDsEvent请求参数结构体
+ * 事件实例分页查询结果
  */
-export interface TriggerDsEventRequest {
+export interface EventCaseAuditLogVOCollection {
     /**
-     * 项目id
+     * 结果总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    TotalCount?: number;
     /**
-     * 事件实例信息
+     * 总页数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventCaseList?: Array<EventCaseDTO>;
+    TotalPage?: number;
     /**
-     * 事件实例信息(连续时间)
+     * 当前页记录数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventBatchCaseList?: Array<EventBatchCaseDTO>;
+    PageCount?: number;
+    /**
+     * 页码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageNumber?: number;
+    /**
+     * 分页大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageSize?: number;
+    /**
+     * 分页数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<EventCaseAuditLogOptDto>;
 }
 /**
  * DescribeQualityScoreTrend请求参数结构体
@@ -15495,6 +15927,36 @@ export interface TaskOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecutorGroupName?: string;
+    /**
+     * 任务扩展信息(目前返沪离线同步的任务详情)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskExtInfo?: string;
+    /**
+     * 任务绑定的事件信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventListenerInfos?: Array<AiOpsEventListenerDTO>;
+    /**
+     * 脚本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScriptInfo?: AiopsScriptInfo;
+    /**
+     * DLC资源配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DLCResourceConfig?: AiopsDLCResourceConfigDto;
+    /**
+     * 父任务simple信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentTaskInfos?: AiopsSimpleTaskDto;
+    /**
+     * 资源获取标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtResourceFlag?: ExtResourceFlagDto;
 }
 /**
  * DescribeOfflineTaskToken请求参数结构体
@@ -17369,24 +17831,65 @@ export interface RuleExecStat {
     LastPipelineCntRatio: number;
 }
 /**
- * 批量操作的结果返回
+ * DescribeStatisticInstanceStatusTrendOps请求参数结构体
  */
-export interface BatchOperationOpsDto {
+export interface DescribeStatisticInstanceStatusTrendOpsRequest {
     /**
-     * 批量操作成功数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目ID
      */
-    SuccessCount?: number;
+    ProjectId: string;
     /**
-     * 批量操作失败数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 任务类型Id
      */
-    FailedCount?: number;
+    TaskTypeId?: string;
     /**
-     * 批量操作的总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 时间类型
      */
-    TotalCount?: number;
+    TimeType?: string;
+    /**
+     * 任务类型名称
+     */
+    TypeName?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
+    /**
+     * 资源组ID
+     */
+    ExecutionGroupId?: string;
+    /**
+     * 资源组名称
+     */
+    ExecutionGroupName?: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
+    /**
+     * 1
+     */
+    TaskType?: number;
+    /**
+     * 1
+     */
+    StateList?: Array<number | bigint>;
+    /**
+     * D代表天，H代表小时
+     */
+    AggregationUnit?: string;
+    /**
+     * 1
+     */
+    AverageWindowSize?: number;
+    /**
+     * 工作流ID
+     */
+    WorkflowId?: string;
 }
 /**
  * DescribeEventCases返回参数结构体
@@ -17701,6 +18204,94 @@ export interface DescribeRulesRequest {
      * 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎
      */
     EngineType?: string;
+}
+/**
+ * 父任务simple信息
+ */
+export interface AiopsSimpleTaskDto {
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 任务名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 任务状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 周期类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CycleType?: string;
+    /**
+     * 任务创建人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creator?: string;
+    /**
+     * 工作流id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowId?: string;
+    /**
+     * 工作流名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowName?: string;
+    /**
+     * 项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 项目标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectIdent?: string;
+    /**
+     * 项目名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
+    /**
+     * 配置策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigType?: string;
+    /**
+     * 时间维度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeDimension?: string;
+    /**
+     * 实例范围
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceScope?: string;
+    /**
+     * 执行策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExectuorPolicy?: string;
+}
+/**
+ * ResumeIntegrationTask返回参数结构体
+ */
+export interface ResumeIntegrationTaskResponse {
+    /**
+     * 操作成功与否标识
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeRule返回参数结构体
@@ -18533,6 +19124,71 @@ export interface RunTasksByMultiWorkflowResponse {
     RequestId?: string;
 }
 /**
+ * RenewWorkflowSchedulerInfoDs请求参数结构体
+ */
+export interface RenewWorkflowSchedulerInfoDsRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 工作流ID
+     */
+    WorkflowId: string;
+    /**
+     * 延迟时间
+     */
+    DelayTime?: number;
+    /**
+     * 启动时间
+     */
+    StartupTime?: number;
+    /**
+     * 任务依赖
+     */
+    SelfDepend?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
+    /**
+     * 指定运行时间
+     */
+    TaskAction?: string;
+    /**
+     * 调度周期时间单位
+     */
+    CycleType?: string;
+    /**
+     * 调度周期
+     */
+    CycleStep?: number;
+    /**
+     * 执行时间左闭区间
+     */
+    ExecutionStartTime?: string;
+    /**
+     * 执行时间右闭区间
+     */
+    ExecutionEndTime?: string;
+    /**
+     * 任务初始化策略，T_PLUS_1、T_PLUS_0、T_MINUS_1
+     */
+    InstanceInitStrategy?: string;
+    /**
+     * 工作流依赖，yes or no
+     */
+    DependencyWorkflow?: string;
+    /**
+     * CrontabExpression
+     */
+    CrontabExpression?: string;
+}
+/**
  * 值班信息表
  */
 export interface DutyScheduleDetailsInfo {
@@ -18727,6 +19383,31 @@ export interface CreateHiveTableRequest {
     Incharge?: string;
 }
 /**
+ * 数据运维脚本信息
+ */
+export interface AiopsScriptInfo {
+    /**
+     * 脚本内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScriptContent: string;
+    /**
+     * 脚本所在COS的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosPath: string;
+    /**
+     * 脚本所在COS的地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosRegion: string;
+    /**
+     * 脚本所在COS的桶名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosBucketName: string;
+}
+/**
  * BatchKillIntegrationTaskInstances返回参数结构体
  */
 export interface BatchKillIntegrationTaskInstancesResponse {
@@ -18867,6 +19548,41 @@ export interface SuspendIntegrationTaskRequest {
     Event?: string;
 }
 /**
+ * 任务提交预校验详细信息
+ */
+export interface TaskSubmitPreCheckDetailInfo {
+    /**
+     * 任务编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 项目编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 项目名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
+    /**
+     * 责任人编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InChargeId?: string;
+    /**
+     * 责任人名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InCharge?: string;
+}
+/**
  * DescribeDependOpsTasks返回参数结构体
  */
 export interface DescribeDependOpsTasksResponse {
@@ -18937,6 +19653,23 @@ export interface DescribeTaskByCycleRequest {
      * 工作流ID
      */
     WorkflowId?: string;
+}
+/**
+ * TriggerDsEvent请求参数结构体
+ */
+export interface TriggerDsEventRequest {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 事件实例信息
+     */
+    EventCaseList?: Array<EventCaseDTO>;
+    /**
+     * 事件实例信息(连续时间)
+     */
+    EventBatchCaseList?: Array<EventBatchCaseDTO>;
 }
 /**
  * Id包装对象
@@ -19178,18 +19911,31 @@ export interface TableBaseInfo {
     DbGovernPolicyIsDisable?: string;
 }
 /**
- * DescribeRuleGroupsByPage返回参数结构体
+ * BatchCreateTaskVersionAsync返回参数结构体
  */
-export interface DescribeRuleGroupsByPageResponse {
+export interface BatchCreateTaskVersionAsyncResponse {
     /**
-     * 规则组列表
+     * 批量操作返回
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: RuleGroupPage;
+    Data?: BatchTaskOperateNew;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeInstanceByCycle请求参数结构体
+ */
+export interface DescribeInstanceByCycleRequest {
+    /**
+     * 1
+     */
+    ProjectId?: string;
+    /**
+     * 1
+     */
+    TenantId?: string;
 }
 /**
  * 值班信息
@@ -19229,6 +19975,19 @@ export interface DescribeIntegrationStatisticsTaskStatusResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * JudgeResourceFile请求参数结构体
+ */
+export interface JudgeResourceFileRequest {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 资源路径
+     */
+    FilePath: string;
 }
 /**
  * UploadResource返回参数结构体
@@ -19789,6 +20548,19 @@ export interface DescribeWorkflowCanvasInfoRequest {
      * 项目id
      */
     ProjectId: string;
+}
+/**
+ * 参数参数
+ */
+export interface ParamInfoDs {
+    /**
+     * 参数名
+     */
+    ParamKey: string;
+    /**
+     * 参数值
+     */
+    ParamValue: string;
 }
 /**
  * DagInstances请求参数结构体

@@ -414,7 +414,7 @@ export interface FileTranslateRequest {
      */
     SourceType?: number;
     /**
-     * 需要翻译文件url，长度不超过256字符。文件限制如下：docx/xIsx/html/markdown文件不超过800万字符，doc/pdf/pptx文件不超过300页，txt/po文件不超过10MB，pdf/docx/pptx/xlsx不超过40MB
+     * 需要翻译文件url，URL长度不能超过1000字符。文件限制如下：docx/xIsx/html/markdown文件不超过800万字符，doc/pdf/pptx文件不超过300页，txt/po文件不超过10MB，pdf/docx/pptx/xlsx不超过40MB
      */
     Url?: string;
     /**
@@ -422,7 +422,7 @@ export interface FileTranslateRequest {
      */
     BasicDocumentType?: string;
     /**
-     * 回调url，文件大于10MB，建议采用回调方式；回调时，所有内容会放入 Body 中，具体请参见[文件翻译回调说明](https://cloud.tencent.com/document/product/551/91138)。
+     * 回调url，URL长度不能超过256字符。文件大于10MB或字符较多时，建议采用回调方式；回调时，所有内容会放入 Body 中，具体请参见[文件翻译回调说明](https://cloud.tencent.com/document/product/551/91138)。
      */
     CallbackUrl?: string;
     /**

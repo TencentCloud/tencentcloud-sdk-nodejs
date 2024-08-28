@@ -1147,6 +1147,14 @@ export interface DescribeSqlApisRequest {
      * catalog集合
      */
     Catalogs?: Array<string>;
+    /**
+     * 数据库名
+     */
+    DatabaseName?: string;
+    /**
+     * 表名
+     */
+    TableName?: string;
 }
 /**
  * ModifySecurityGroups请求参数结构体

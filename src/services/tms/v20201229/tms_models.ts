@@ -16,51 +16,6 @@
  */
 
 /**
- * AnswerQuestion请求参数结构体
- */
-export interface AnswerQuestionRequest {
-  /**
-   * 用户问题
-   */
-  Question: string
-}
-
-/**
- * AnswerQuestion返回参数结构体
- */
-export interface AnswerQuestionResponse {
-  /**
-   * 匹配到的答案
-   */
-  Answer?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 该字段用于返回审核结果明细字段的标签及分数
- */
-export interface Tag {
-  /**
-   * 该字段用于返回命中的关键词
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keyword?: string
-  /**
-   * 该字段用于返回子标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubLabel?: string
-  /**
-   * 该字段用于返回子标签对应的分数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Score?: number
-}
-
-/**
  * 内容审核多级标签结构
  */
 export interface LabelGrade {
@@ -84,6 +39,27 @@ export interface LabelGrade {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Grade3?: string
+}
+
+/**
+ * 该字段用于返回审核结果明细字段的标签及分数
+ */
+export interface Tag {
+  /**
+   * 该字段用于返回命中的关键词
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keyword?: string
+  /**
+   * 该字段用于返回子标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubLabel?: string
+  /**
+   * 该字段用于返回子标签对应的分数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Score?: number
 }
 
 /**

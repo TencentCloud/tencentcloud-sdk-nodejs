@@ -18,6 +18,16 @@ const client = new tencentcloud.hunyuan.v20230901.Client({
 })
 describe("hunyuan.v20230901.test.js", function () {
 
+it("hunyuan.v20230901.QueryHunyuanImageChatJob", async function () {
+    try {
+       const data = await client.QueryHunyuanImageChatJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.SubmitHunyuanImageJob", async function () {
     try {
        const data = await client.SubmitHunyuanImageJob({})
@@ -38,9 +48,19 @@ it("hunyuan.v20230901.QueryHunyuanImageJob", async function () {
     }
 })
 
-it("hunyuan.v20230901.GetTokenCount", async function () {
+it("hunyuan.v20230901.SetPayMode", async function () {
     try {
-       const data = await client.GetTokenCount({})
+       const data = await client.SetPayMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.SubmitHunyuanImageChatJob", async function () {
+    try {
+       const data = await client.SubmitHunyuanImageChatJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +88,9 @@ it("hunyuan.v20230901.ActivateService", async function () {
     }
 })
 
-it("hunyuan.v20230901.SetPayMode", async function () {
+it("hunyuan.v20230901.GetTokenCount", async function () {
     try {
-       const data = await client.SetPayMode({})
+       const data = await client.GetTokenCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

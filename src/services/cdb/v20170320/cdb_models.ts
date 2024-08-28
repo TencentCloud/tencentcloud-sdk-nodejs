@@ -942,6 +942,10 @@ export interface DescribeDBInstancesRequest {
    * 数据库引擎类型。
    */
   EngineTypes?: Array<string>
+  /**
+   * 是否获取集群版实例节点信息，可填：true或false
+   */
+  QueryClusterInfo?: boolean
 }
 
 /**
@@ -6892,6 +6896,11 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpandCpu?: number
+  /**
+   * 实例集群版节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterInfo?: Array<ClusterInfo>
 }
 
 /**
@@ -9084,6 +9093,27 @@ export interface CreateCloneInstanceRequest {
    * 集群版节点拓扑配置。
    */
   ClusterTopology?: ClusterTopology
+}
+
+/**
+ * 集群版节点信息
+ */
+export interface ClusterInfo {
+  /**
+   * 节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeId?: string
+  /**
+   * 节点类型：主节点，从节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Role?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
 }
 
 /**

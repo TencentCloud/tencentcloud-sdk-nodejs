@@ -888,6 +888,16 @@ it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async func
     }
 })
 
+it("organization.v20210331.SendOrgMemberAccountBindEmail", async function () {
+    try {
+       const data = await client.SendOrgMemberAccountBindEmail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.GetZoneStatistics", async function () {
     try {
        const data = await client.GetZoneStatistics({})

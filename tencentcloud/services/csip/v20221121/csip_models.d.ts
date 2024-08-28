@@ -218,6 +218,15 @@ export interface TaskAdvanceCFG {
 }
 /**
  * 主机资产信息
+
+主机防护状态枚举，左边是常量，右边是显示
+0：未安装
+1：基础版防护中
+2：普惠版防护中
+3：专业版防护中
+4：旗舰版防护中
+5：已离线
+6：已关机
  */
 export interface CVMAssetVO {
     /**
@@ -545,6 +554,23 @@ export interface CVMAssetVO {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudType?: number;
+    /**
+     * 主机防护状态枚举
+  0：未安装
+  1：基础版防护中
+  2：普惠版防护中
+  3：专业版防护中
+  4：旗舰版防护中
+  5：已离线
+  6：已关机
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtectStatus?: number;
+    /**
+     * 最后离线时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineTime?: string;
 }
 /**
  * 资产视角配置风险
@@ -936,6 +962,16 @@ export interface AlertInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskTreatment?: string;
+    /**
+     * 日志类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogType?: string;
+    /**
+     * 语句检索
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogSearch?: string;
 }
 /**
  * KeyValue对
@@ -1959,6 +1995,16 @@ export interface RoleInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FromLogAnalysisData?: Array<KeyValue>;
+    /**
+     * 容器名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerName?: string;
+    /**
+     * 容器ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerID?: string;
 }
 /**
  * 产品日志条数
@@ -3094,6 +3140,11 @@ export interface DescribeCVMAssetsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicPrivateAttr?: Array<FilterDataObject>;
+    /**
+     * 主机防护状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtectStatusList?: Array<FilterDataObject>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4573,6 +4624,111 @@ export interface AlertExtraInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HitStrategy?: string;
+    /**
+     * 进程名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessName?: string;
+    /**
+     * PID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PID?: string;
+    /**
+     * 容器Pod名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodName?: string;
+    /**
+     * 容器PodID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodID?: string;
+    /**
+     * Http响应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Response?: string;
+    /**
+     * 系统调用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SystemCall?: string;
+    /**
+     * 操作类型verb
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Verb?: string;
+    /**
+     * 日志ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogID?: string;
+    /**
+     * 变更内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Different?: string;
+    /**
+     * 事件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventType?: string;
+    /**
+     * 事件描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 目标地址(容器反弹shell)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetAddress?: string;
+    /**
+     * 恶意请求域名(容器恶意外联)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaliciousRequestDomain?: string;
+    /**
+     * 规则类型(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleType?: string;
+    /**
+     * 请求资源(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestURI?: string;
+    /**
+     * 发起请求用户(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestUser?: string;
+    /**
+     * 请求对象(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestObject?: string;
+    /**
+     * 响应对象(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResponseObject?: string;
+    /**
+     * 文件类型(容器文件篡改)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileType?: string;
+    /**
+     * 标签特征(容器恶意外联)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TIType?: string;
+    /**
+     * 来源IP(容器K8sAPI异常请求)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceIP?: string;
 }
 /**
  * DescribeDbAssetInfo请求参数结构体

@@ -18,16 +18,6 @@ const client = new tencentcloud.tms.v20201229.Client({
 })
 describe("tms.v20201229.test.js", function () {
 
-it("tms.v20201229.AnswerQuestion", async function () {
-    try {
-       const data = await client.AnswerQuestion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tms.v20201229.ModerateText", async function () {
     try {
        const data = await client.ModerateText({})

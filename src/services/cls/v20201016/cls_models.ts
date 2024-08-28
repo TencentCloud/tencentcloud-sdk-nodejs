@@ -617,7 +617,7 @@ export interface ConsoleSharingConfig {
    */
   DurationMilliseconds: number
   /**
-   * 允许访问的资源列表
+   * 允许访问的资源列表，目前仅支持一个Resource
    */
   Resources: Array<string>
   /**

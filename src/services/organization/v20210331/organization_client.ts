@@ -141,6 +141,7 @@ import {
   AddOrganizationNodeRequest,
   AddShareUnitMembersRequest,
   AddShareUnitRequest,
+  SendOrgMemberAccountBindEmailResponse,
   OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
   OpenIdentityCenterRequest,
@@ -171,6 +172,7 @@ import {
   DetachPolicyRequest,
   UpdateOrganizationIdentityRequest,
   ListOrgServiceAssignMemberResponse,
+  SendOrgMemberAccountBindEmailRequest,
   DeleteRoleAssignmentResponse,
   DisablePolicyTypeRequest,
   DescribeEffectivePolicyResponse,
@@ -1179,6 +1181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationMemberAuthIdentitiesResponse) => void
   ): Promise<DescribeOrganizationMemberAuthIdentitiesResponse> {
     return this.request("DescribeOrganizationMemberAuthIdentities", req, cb)
+  }
+
+  /**
+   * 重新发送成员绑定邮箱激活邮件
+   */
+  async SendOrgMemberAccountBindEmail(
+    req: SendOrgMemberAccountBindEmailRequest,
+    cb?: (error: string, rep: SendOrgMemberAccountBindEmailResponse) => void
+  ): Promise<SendOrgMemberAccountBindEmailResponse> {
+    return this.request("SendOrgMemberAccountBindEmail", req, cb)
   }
 
   /**

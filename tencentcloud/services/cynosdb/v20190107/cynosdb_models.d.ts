@@ -5248,12 +5248,11 @@ export interface ProxyInstanceWeight {
  */
 export interface CreateResourcePackageRequest {
     /**
-     * 实例类型
+     * 实例类型，目前固定传cynosdb-serverless
      */
     InstanceType: string;
     /**
-     * 资源包使用地域
-  china-中国内地通用，overseas-港澳台及海外通用
+     * 资源包使用地域chineseMainland-中国内地通用，overseas-港澳台及海外通用
      */
     PackageRegion: string;
     /**
@@ -6143,6 +6142,10 @@ export interface RenewClustersRequest {
  * OpenClusterReadOnlyInstanceGroupAccess返回参数结构体
  */
 export interface OpenClusterReadOnlyInstanceGroupAccessResponse {
+    /**
+     * 开启流程ID
+     */
+    FlowId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7108,27 +7111,27 @@ export interface DescribeFlowRequest {
  */
 export interface OpenReadOnlyInstanceExclusiveAccessRequest {
     /**
-     * 集群ID
+     * 请使用 集群信息描述（https://cloud.tencent.com/document/api/1003/48086） 获取 clusterId。
      */
     ClusterId: string;
     /**
-     * 需要开通独有访问的只读实例ID
+     * 请使用 集群信息描述（https://cloud.tencent.com/document/api/1003/48086） 获取 instanceId。
      */
     InstanceId: string;
     /**
-     * 指定的vpc ID
+     * 指定的vpc ID，请使用 查询私有网络列表（https://cloud.tencent.com/document/api/215/15778） 获取 vpc ID。
      */
     VpcId: string;
     /**
-     * 指定的子网ID
+     * 指定的子网 ID，如果设置了 vpc ID，则 SubnetId 必填，请使用 查询子网列表（https://cloud.tencent.com/document/api/215/15784）获取 SubnetId。
      */
     SubnetId: string;
     /**
-     * 端口
+     * 用户自定义的端口
      */
     Port: number;
     /**
-     * 安全组
+     * 安全组ID，请使用 查看安全组（https://cloud.tencent.com/document/api/215/15808）获取 SecurityGroupId。
      */
     SecurityGroupIds?: Array<string>;
 }
@@ -9623,7 +9626,20 @@ export interface OpenClusterPasswordComplexityResponse {
 /**
  * OpenClusterReadOnlyInstanceGroupAccess请求参数结构体
  */
-export declare type OpenClusterReadOnlyInstanceGroupAccessRequest = null;
+export interface OpenClusterReadOnlyInstanceGroupAccessRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 端口
+     */
+    Port: string;
+    /**
+     * 安全组ID
+     */
+    SecurityGroupIds?: Array<string>;
+}
 /**
  * DescribeAuditRuleTemplates请求参数结构体
  */

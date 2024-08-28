@@ -18,10 +18,8 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  AnswerQuestionRequest,
-  AnswerQuestionResponse,
-  Tag,
   LabelGrade,
+  Tag,
   SentimentAnalysis,
   Positions,
   RiskDetails,
@@ -46,16 +44,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tms.tencentcloudapi.com", "2020-12-29", clientConfig)
-  }
-
-  /**
-   * "AIGC代答"产品帮助客户在其AIGC场景下，对于敏感类的问题，不是由客户的大模型机器人来回答，而是我们来进行代答，尽最大可能帮助客户规避风险。
-   */
-  async AnswerQuestion(
-    req: AnswerQuestionRequest,
-    cb?: (error: string, rep: AnswerQuestionResponse) => void
-  ): Promise<AnswerQuestionResponse> {
-    return this.request("AnswerQuestion", req, cb)
   }
 
   /**
