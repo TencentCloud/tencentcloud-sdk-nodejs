@@ -78,6 +78,16 @@ it("mariadb.v20170312.ModifyBackupTime", async function () {
     }
 })
 
+it("mariadb.v20170312.ModifyInstanceVport", async function () {
+    try {
+       const data = await client.ModifyInstanceVport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeSaleInfo", async function () {
     try {
        const data = await client.DescribeSaleInfo({})
@@ -608,9 +618,9 @@ it("mariadb.v20170312.DescribePrice", async function () {
     }
 })
 
-it("mariadb.v20170312.ModifyInstanceVport", async function () {
+it("mariadb.v20170312.DescribeBinlogTime", async function () {
     try {
-       const data = await client.ModifyInstanceVport({})
+       const data = await client.DescribeBinlogTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

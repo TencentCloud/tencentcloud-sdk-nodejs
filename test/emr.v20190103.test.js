@@ -238,6 +238,16 @@ it("emr.v20190103.AddUsersForUserManager", async function () {
     }
 })
 
+it("emr.v20190103.ModifyAutoRenewFlag", async function () {
+    try {
+       const data = await client.ModifyAutoRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
     try {
        const data = await client.ModifyAutoScaleStrategy({})

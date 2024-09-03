@@ -153,6 +153,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyBlockTop", req, cb);
     }
     /**
+     * 删除远程运维域名
+     */
+    async DeleteRemoteAccessDomain(req, cb) {
+        return this.request("DeleteRemoteAccessDomain", req, cb);
+    }
+    /**
      * 删除互联网边界访问控制规则
      */
     async RemoveAclRule(req, cb) {

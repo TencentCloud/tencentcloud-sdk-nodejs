@@ -641,6 +641,10 @@ export interface ModifyTaskRunStatusRequest {
    * 演习结论（当演习状态转变为执行结束时，需要填写此字段）
    */
   Summary?: string
+  /**
+   * 问题以及改进
+   */
+  Issue?: string
 }
 
 /**
@@ -1064,6 +1068,16 @@ export interface ObjectType {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectHasNewAction?: boolean
+  /**
+   * 对应在平台架构图中的资源类型名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectPlatformName?: string
+  /**
+   * 1：平台支持的对象 2：应用支持的部分对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectSupportType?: number
 }
 
 /**
@@ -1222,6 +1236,42 @@ export interface Task {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDealType?: number
+  /**
+   * 计划开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskPlanStartTime?: string
+  /**
+   * 计划结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskPlanEndTime?: string
+  /**
+   * 人员组织
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskOrg?: Array<TaskOrg>
+  /**
+   * 问题和改进
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskIssue?: string
+}
+
+/**
+ * 演练人员组织
+ */
+export interface TaskOrg {
+  /**
+   * 演练角色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskRole?: string
+  /**
+   * 负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskOperator?: string
 }
 
 /**
@@ -1231,29 +1281,37 @@ export interface TaskReportInfo {
   /**
    * 0--未开始，1--正在导出，2--导出成功，3--导出失败
    */
-  Stage: number
+  Stage?: number
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 有效期截止时间
    */
-  ExpirationTime: string
+  ExpirationTime?: string
   /**
    * 是否有效
    */
-  Expired: boolean
+  Expired?: boolean
   /**
    * 演练报告cos文件地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CosUrl: string
+  CosUrl?: string
   /**
    * 演练报告导出日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Log: string
+  Log?: string
+  /**
+   * 0--未开始，1--正在归档，2--归档成功，3--归档失败
+   */
+  ArchiveStage?: number
+  /**
+   * 归档时间
+   */
+  ArchiveTime?: string
 }
 
 /**
@@ -1882,10 +1940,12 @@ export interface TemplateListItem {
 export interface TagWithCreate {
   /**
    * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey: string
   /**
    * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
 }

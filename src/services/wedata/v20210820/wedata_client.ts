@@ -119,6 +119,7 @@ import {
   RuleExecLog,
   AiOpsEventListenerDTO,
   DescribeRuleGroupsByPageRequest,
+  FolderDsDto,
   BatchDeleteIntegrationTasksResponse,
   SearchConditionInstanceNew,
   DescribeThirdTaskRunLogRequest,
@@ -202,6 +203,7 @@ import {
   DescribeTableQualityDetailsRequest,
   DescribeScheduleInstancesResponse,
   DeleteProjectParamDsResponse,
+  DescribeTablePartitionsRequest,
   DescribeOpsWorkflowsRequest,
   CreateOfflineTaskResponse,
   DescribeColumnLineageRequest,
@@ -241,7 +243,7 @@ import {
   DescribeAllByFolderNewResponse,
   DescribeDsParentFolderTreeRequest,
   KillScheduleInstancesResponse,
-  UnlockIntegrationTaskRequest,
+  TablePartition,
   DescribeWorkflowTaskCountRequest,
   DescribeInstanceListRequest,
   ModifyWorkflowScheduleResponse,
@@ -530,6 +532,7 @@ import {
   CompareRule,
   CompareRuleItem,
   DescribeInstanceLogFileRequest,
+  UnlockIntegrationTaskRequest,
   DutyPerson,
   DeleteOfflineTaskResponse,
   IntegrationInstanceLog,
@@ -560,7 +563,7 @@ import {
   CompareResultItem,
   ModifyTaskScriptRequest,
   CreateIntegrationNodeRequest,
-  DescribeTableSchemaInfoRequest,
+  DescribeTablePartitionsResponse,
   DescribeTableScoreTrendRequest,
   RuleExecResultPage,
   DescribeTaskByStatusReportRequest,
@@ -622,7 +625,7 @@ import {
   DutySchedule,
   DescribeDimensionScoreRequest,
   FindAllFolderRequest,
-  FolderDsDto,
+  DescribeTableSchemaInfoRequest,
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
   DescribeSuccessorOpsTaskInfosRequest,
@@ -2149,6 +2152,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckIntegrationTaskNameExistsResponse) => void
   ): Promise<CheckIntegrationTaskNameExistsResponse> {
     return this.request("CheckIntegrationTaskNameExists", req, cb)
+  }
+
+  /**
+   * 查询表的分区详情信息
+   */
+  async DescribeTablePartitions(
+    req: DescribeTablePartitionsRequest,
+    cb?: (error: string, rep: DescribeTablePartitionsResponse) => void
+  ): Promise<DescribeTablePartitionsResponse> {
+    return this.request("DescribeTablePartitions", req, cb)
   }
 
   /**

@@ -3474,6 +3474,18 @@ export interface DescribeVideoDownloadUrlRequest {
    * 是否返回内网下载URL，默认是false，返回公网下载URL，true则返回内网下载URL
    */
   IsInternal?: boolean
+  /**
+   * 设置URL的有效期, 最小值是1秒, 最大值是86400秒, 不设置的话, 默认是600秒
+   */
+  Expires?: number
+  /**
+   * 下载的MP4文件是否支持G711音频编码. 
+注意: 如果云端录像中的音频编码为AAC, 那么下载的MP4默认是支持AAC编码的
+如果云端录像中的音频编码为G711且 IsSupportG711设置为true时, 下载的MP4是支持G711音频编码
+如果云端录像中的音频编码为G711且 IsSupportG711设置为false时, 下载的MP4是不支持G711音频编码
+该参数只对FileType为mp4才有效, 不设置的话, 默认是false
+   */
+  IsSupportG711?: boolean
 }
 
 /**

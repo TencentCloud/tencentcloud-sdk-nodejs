@@ -403,6 +403,10 @@ export interface CreateResourceRequest {
    * 部署zone
    */
   DeployZone?: string
+  /**
+   * 0非试用版，1试用版
+   */
+  Trial?: number
 }
 
 /**

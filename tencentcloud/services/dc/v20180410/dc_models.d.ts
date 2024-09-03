@@ -120,15 +120,15 @@ export interface DirectConnect {
     /**
      * 物理专线ID。
      */
-    DirectConnectId: string;
+    DirectConnectId?: string;
     /**
      * 物理专线的名称。
      */
-    DirectConnectName: string;
+    DirectConnectName?: string;
     /**
      * 物理专线的接入点ID。
      */
-    AccessPointId: string;
+    AccessPointId?: string;
     /**
      * 物理专线的状态。
   申请中：PENDING
@@ -140,139 +140,149 @@ export interface DirectConnect {
   删除中 ：DELETING
   已删除：DELETED 。
      */
-    State: string;
+    State?: string;
     /**
      * 物理专线创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 物理专线的开通时间。
      */
-    EnabledTime: string;
+    EnabledTime?: string;
     /**
      * 提供接入物理专线的运营商。ChinaTelecom：中国电信， ChinaMobile：中国移动，ChinaUnicom：中国联通， In-houseWiring：楼内线，ChinaOther：中国其他， InternationalOperator：境外其他。
      */
-    LineOperator: string;
+    LineOperator?: string;
     /**
      * 本地数据中心的地理位置。
      */
-    Location: string;
+    Location?: string;
     /**
      * 物理专线接入接口带宽，单位为Mbps。
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 用户侧物理专线接入端口类型,取值：100Base-T：百兆电口,1000Base-T（默认值）：千兆电口,1000Base-LX：千兆单模光口（10千米）,10GBase-T：万兆电口10GBase-LR：万兆单模光口（10千米），默认值，千兆单模光口（10千米）
      */
-    PortType: string;
+    PortType?: string;
     /**
      * 运营商或者服务商为物理专线提供的电路编码。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CircuitCode: string;
+    CircuitCode?: string;
     /**
      * 冗余物理专线的ID。
      */
-    RedundantDirectConnectId: string;
+    RedundantDirectConnectId?: string;
     /**
      * 物理专线调试VLAN。默认开启VLAN，自动分配VLAN。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vlan: number;
+    Vlan?: number;
     /**
      * 物理专线调试腾讯侧互联IP。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TencentAddress: string;
+    TencentAddress?: string;
     /**
      * 物理专线调试用户侧互联IP。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomerAddress: string;
+    CustomerAddress?: string;
     /**
      * 物理专线申请者姓名。默认从账户体系获取。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomerName: string;
+    CustomerName?: string;
     /**
      * 物理专线申请者联系邮箱。默认从账户体系获取。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomerContactMail: string;
+    CustomerContactMail?: string;
     /**
      * 物理专线申请者联系号码。默认从账户体系获取。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomerContactNumber: string;
+    CustomerContactNumber?: string;
     /**
      * 物理专线的过期时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredTime: string;
+    ExpiredTime?: string;
     /**
      * 物理专线计费类型。 NON_RECURRING_CHARGE：一次性接入费用；PREPAID_BY_YEAR：按年预付费。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 报障联系人。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaultReportContactPerson: string;
+    FaultReportContactPerson?: string;
     /**
      * 报障联系电话。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaultReportContactNumber: string;
+    FaultReportContactNumber?: string;
     /**
      * 标签键值对
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 物理专线的接入点类型。
      */
-    AccessPointType: string;
+    AccessPointType?: string;
     /**
      * IDC所在城市
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdcCity: string;
+    IdcCity?: string;
     /**
      * 计费状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeState: string;
+    ChargeState?: string;
     /**
      * 物理专线开通时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 物理专线是否已签署用户协议
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SignLaw: boolean;
+    SignLaw?: boolean;
     /**
      * 物理专线是否为LocalZone
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocalZone: boolean;
+    LocalZone?: boolean;
     /**
      * 该物理专线下vlan 0的专用通道数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VlanZeroDirectConnectTunnelCount: number;
+    VlanZeroDirectConnectTunnelCount?: number;
     /**
      * 该物理专线下非vlan 0的专用通道数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OtherVlanDirectConnectTunnelCount: number;
+    OtherVlanDirectConnectTunnelCount?: number;
     /**
      * 物理专线最小带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinBandwidth: number;
+    MinBandwidth?: number;
+    /**
+     * 建设模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Construct?: number;
+    /**
+     * 物理专线的接入点名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessPointName?: string;
 }
 /**
  * 互联网地址详细信息
@@ -365,7 +375,7 @@ export interface DescribeAccessPointsResponse {
  */
 export interface DeleteDirectConnectTunnelRequest {
     /**
-     * 专用通道ID
+     * 专用通道ID。
      */
     DirectConnectTunnelId: string;
 }
@@ -661,7 +671,7 @@ export interface CreateDirectConnectTunnelRequest {
      */
     DirectConnectOwnerAccount?: string;
     /**
-     * 网络类型，枚举：VPC、BMVPC、CCN；默认为VPC。VPC：私有网络；BMVPC：黑石网络；CCN：云联网）。
+     * 网络类型，枚举：VPC、CCN、NAT；默认为VPC。VPC：私有网络；CCN：云联网；NAT：NAT网络）。
      */
     NetworkType?: string;
     /**
@@ -669,7 +679,7 @@ export interface CreateDirectConnectTunnelRequest {
      */
     NetworkRegion?: string;
     /**
-     * 私有网络统一ID或黑石网络统一ID。
+     * 私有网络统一ID，在NetworkType为VPC时必填，且与专线网关所属的VPCID一致；NetworkType为其它组网类型时可不填，内部会统一处理。
      */
     VpcId?: string;
     /**
@@ -729,6 +739,10 @@ export interface CreateDirectConnectTunnelRequest {
      * NQA配置信息。
      */
     NqaInfo?: NQAInfo;
+    /**
+     * 标签键值对
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * DeleteDirectConnect返回参数结构体
@@ -791,7 +805,7 @@ export interface DescribeDirectConnectsResponse {
      */
     TotalCount?: number;
     /**
-     * 用户名下物理专线是否都签署了用户协议
+     * 用户名下物理专线是否都签署了用户协议。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllSignLaw?: boolean;
@@ -858,7 +872,7 @@ export interface DescribeDirectConnectTunnelsRequest {
  */
 export interface ModifyDirectConnectAttributeRequest {
     /**
-     * 物理专线的ID。
+     * 物理专线ID。
      */
     DirectConnectId: string;
     /**
@@ -902,11 +916,11 @@ export interface ModifyDirectConnectAttributeRequest {
      */
     FaultReportContactNumber?: string;
     /**
-     * 物理专线申请者补签用户使用协议
+     * 物理专线申请者补签用户使用协议。
      */
     SignLaw?: boolean;
     /**
-     * 物理专线带宽
+     * 物理专线带宽。
      */
     Bandwidth?: number;
 }
@@ -933,27 +947,27 @@ export interface DescribeInternetAddressResponse {
  */
 export interface ModifyDirectConnectTunnelAttributeRequest {
     /**
-     * 专用通道ID
+     * 专用通道ID。
      */
     DirectConnectTunnelId: string;
     /**
-     * 专用通道名称
+     * 专用通道名称。
      */
     DirectConnectTunnelName?: string;
     /**
-     * 用户侧BGP，包括Asn，AuthKey
+     * 用户侧BGP，包括Asn，AuthKey。
      */
     BgpPeer?: BgpPeer;
     /**
-     * 用户侧网段地址
+     * 用户侧网段地址。
      */
     RouteFilterPrefixes?: Array<RouteFilterPrefix>;
     /**
-     * 腾讯侧互联IP
+     * 腾讯侧互联IP。
      */
     TencentAddress?: string;
     /**
-     * 用户侧互联IP
+     * 用户侧互联IP。
      */
     CustomerAddress?: string;
     /**
@@ -961,7 +975,7 @@ export interface ModifyDirectConnectTunnelAttributeRequest {
      */
     Bandwidth?: number;
     /**
-     * 腾讯侧备用互联IP
+     * 腾讯侧备用互联IP。
      */
     TencentBackupAddress?: string;
 }
@@ -1090,6 +1104,10 @@ export interface CreateDirectConnectRequest {
      * 物理专线申请者是否签署了用户使用协议。默认已签署。
      */
     SignLaw?: boolean;
+    /**
+     * 标签键值对
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * EnableInternetAddress请求参数结构体
@@ -1217,19 +1235,19 @@ export interface CreateDirectConnectTunnelResponse {
  */
 export interface DescribeDirectConnectsRequest {
     /**
-     * 过滤条件:
+     * 过滤条件。
      */
     Filters?: Array<Filter>;
     /**
-     * 物理专线 ID数组
+     * 物理专线 ID数组。
      */
     DirectConnectIds?: Array<string>;
     /**
-     * 偏移量，默认为0
+     * 偏移量，默认为0。
      */
     Offset?: number;
     /**
-     * 返回数量，默认为20，最大值为100
+     * 返回数量，默认为20，最大值为100。
      */
     Limit?: number;
 }

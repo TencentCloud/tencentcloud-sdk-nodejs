@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerlessSpaces", req, cb);
     }
     /**
+     * ES集群安装模型接口
+     */
+    async InstallInstanceModel(req, cb) {
+        return this.request("InstallInstanceModel", req, cb);
+    }
+    /**
      * 获取索引列表
      */
     async DescribeIndexList(req, cb) {

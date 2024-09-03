@@ -492,8 +492,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于识别门头照文字识别结果以及对应分类标签信息
-   */
+     * 本接口用于识别门头照文字识别结果以及对应分类标签信息
+默认接口请求频率限制：1次/秒
+     */
   async RecognizeStoreName(
     req: RecognizeStoreNameRequest,
     cb?: (error: string, rep: RecognizeStoreNameResponse) => void
@@ -621,8 +622,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于识别门头照分类标签信息
-   */
+     * 本接口用于识别门头照分类标签信息
+默认接口请求频率限制：1次/秒
+     */
   async ClassifyStoreName(
     req: ClassifyStoreNameRequest,
     cb?: (error: string, rep: ClassifyStoreNameResponse) => void
@@ -917,8 +919,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
-   */
+     * 智慧表单产品已下线，需要下线相关API
+
+支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
+     */
   async GetTaskState(
     req: GetTaskStateRequest,
     cb?: (error: string, rep: GetTaskStateResponse) => void
@@ -1310,7 +1314,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
+     * 智慧表单产品已下线，需要下线相关API
+
+本接口可创建智能表单录入任务，支持多个识别图片和PDF的URL上传，返回含有识别内容的操作页面URL。
 
 智能表单录入产品提供高准确率的表单识别技术和人工核对工具，支持自定义字段，将识别结果自动填入到自定义条目中，并提供人工操作工具，完成整个表单识别过程。适用性强，可对票据、合同、货单等文件的识别，适用于金融、货代、保险、档案等领域。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */

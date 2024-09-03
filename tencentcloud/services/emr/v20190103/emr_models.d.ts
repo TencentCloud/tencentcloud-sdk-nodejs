@@ -3735,6 +3735,15 @@ export interface ModifyResourcesTagsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyAutoRenewFlag返回参数结构体
+ */
+export interface ModifyAutoRenewFlagResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 扩容指定配置组
  */
 export interface ScaleOutServiceConfGroupsInfo {
@@ -4725,6 +4734,97 @@ export interface BootstrapAction {
      * 脚本参数
      */
     Args?: Array<string>;
+}
+/**
+ * ScaleOutCluster请求参数结构体
+ */
+export interface ScaleOutClusterRequest {
+    /**
+     * 节点计费模式。取值范围：
+  <li>PREPAID：预付费，即包年包月。</li>
+  <li>POSTPAID_BY_HOUR：按小时后付费。</li>
+  <li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
+     */
+    InstanceChargeType: string;
+    /**
+     * 集群实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 扩容节点类型以及数量
+     */
+    ScaleOutNodeConfig: ScaleOutNodeConfig;
+    /**
+     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
+     */
+    ClientToken?: string;
+    /**
+     * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+     */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+     * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+     */
+    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
+    /**
+     * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     */
+    SoftDeployInfo?: Array<number | bigint>;
+    /**
+     * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+     */
+    ServiceNodeInfo?: Array<number | bigint>;
+    /**
+     * 分散置放群组ID列表，当前只支持指定一个。
+  该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+     */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+     * 扩容节点绑定标签列表。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
+     */
+    HardwareSourceType?: string;
+    /**
+     * Pod相关资源信息
+     */
+    PodSpecInfo?: PodSpecInfo;
+    /**
+     * 使用clickhouse集群扩容时，选择的机器分组名称
+     */
+    ClickHouseClusterName?: string;
+    /**
+     * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+     */
+    ClickHouseClusterType?: string;
+    /**
+     * 扩容指定 Yarn Node Label
+     */
+    YarnNodeLabel?: string;
+    /**
+     * 扩容后是否启动服务，默认取值否
+  <li>true：是</li>
+  <li>false：否</li>
+     */
+    EnableStartServiceFlag?: boolean;
+    /**
+     * 规格设置
+     */
+    ResourceSpec?: NodeResourceSpec;
+    /**
+     * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+     */
+    Zone?: string;
+    /**
+     * 子网，默认是集群创建时的子网
+     */
+    SubnetId?: string;
+    /**
+     * 扩容指定配置组
+     */
+    ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>;
 }
 /**
  * DescribeClusterNodes请求参数结构体
@@ -5975,95 +6075,21 @@ export interface MultiZoneSetting {
     ResourceSpec?: NewResourceSpec;
 }
 /**
- * ScaleOutCluster请求参数结构体
+ * ModifyAutoRenewFlag请求参数结构体
  */
-export interface ScaleOutClusterRequest {
+export interface ModifyAutoRenewFlagRequest {
     /**
-     * 节点计费模式。取值范围：
-  <li>PREPAID：预付费，即包年包月。</li>
-  <li>POSTPAID_BY_HOUR：按小时后付费。</li>
-  <li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
-     */
-    InstanceChargeType: string;
-    /**
-     * 集群实例ID。
+     * 集群ID
      */
     InstanceId: string;
     /**
-     * 扩容节点类型以及数量
+     * 实例ID
      */
-    ScaleOutNodeConfig: ScaleOutNodeConfig;
+    ResourceIds: Array<string>;
     /**
-     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
+     * NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费  NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费  DISABLE_NOTIFY_AND_MANUAL_RENEW：表示不通知即将过期，也不自动续费。
      */
-    ClientToken?: string;
-    /**
-     * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-     */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
-    /**
-     * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
-     */
-    ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>;
-    /**
-     * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
-     */
-    SoftDeployInfo?: Array<number | bigint>;
-    /**
-     * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
-     */
-    ServiceNodeInfo?: Array<number | bigint>;
-    /**
-     * 分散置放群组ID列表，当前只支持指定一个。
-  该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
-     */
-    DisasterRecoverGroupIds?: Array<string>;
-    /**
-     * 扩容节点绑定标签列表。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
-     */
-    HardwareSourceType?: string;
-    /**
-     * Pod相关资源信息
-     */
-    PodSpecInfo?: PodSpecInfo;
-    /**
-     * 使用clickhouse集群扩容时，选择的机器分组名称
-     */
-    ClickHouseClusterName?: string;
-    /**
-     * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
-     */
-    ClickHouseClusterType?: string;
-    /**
-     * 扩容指定 Yarn Node Label
-     */
-    YarnNodeLabel?: string;
-    /**
-     * 扩容后是否启动服务，默认取值否
-  <li>true：是</li>
-  <li>false：否</li>
-     */
-    EnableStartServiceFlag?: boolean;
-    /**
-     * 规格设置
-     */
-    ResourceSpec?: NodeResourceSpec;
-    /**
-     * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
-     */
-    Zone?: string;
-    /**
-     * 子网，默认是集群创建时的子网
-     */
-    SubnetId?: string;
-    /**
-     * 扩容指定配置组
-     */
-    ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>;
+    RenewFlag: string;
 }
 /**
  * ModifyResourceScheduleConfig请求参数结构体

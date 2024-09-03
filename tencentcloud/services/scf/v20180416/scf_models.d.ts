@@ -1314,7 +1314,7 @@ export interface CreateTriggerRequest {
      */
     TriggerName: string;
     /**
-     * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建函数 URL 请在此填写 http，请参考[创建函数 URL ](https://cloud.tencent.com/document/product/583/100227#33bbbda4-9131-48a6-ac37-ac62ffe01424)。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
+     * 触发器类型，目前支持 cos 、cls 、 timer、 ckafka、http类型。创建函数 URL 请使用 http 类型，参考[创建函数 URL ](https://cloud.tencent.com/document/product/583/100227#33bbbda4-9131-48a6-ac37-ac62ffe01424)。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
      */
     Type: string;
     /**
@@ -1326,7 +1326,7 @@ export interface CreateTriggerRequest {
      */
     Namespace?: string;
     /**
-     * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
+     * 触发器所生效的版本或别名，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布，默认为 $LATEST。
      */
     Qualifier?: string;
     /**
@@ -3397,7 +3397,7 @@ export interface DeleteTriggerRequest {
      */
     TriggerName: string;
     /**
-     * 要删除的触发器类型，目前支持 cos 、cmq、 timer、ckafka 类型
+     * 要删除的触发器类型，目前只支持  timer、ckafka 、apigw 、cls 、cos 、cmq 、http 类型
      */
     Type: string;
     /**
@@ -3409,8 +3409,7 @@ export interface DeleteTriggerRequest {
      */
     TriggerDesc?: string;
     /**
-     * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
-  如果删除的触发器类型为 APIGW 触发器,该字段为必填参数
+     * 要删除的触发器实际所指向的版本或别名，默认值为 $LATEST
      */
     Qualifier?: string;
 }
@@ -3524,7 +3523,7 @@ export interface UpdateTriggerRequest {
      */
     TriggerName: string;
     /**
-     * 触发器类型
+     * 触发器类型，目前只支持timer、ckafka、http三种类型
      */
     Type: string;
     /**
@@ -3532,11 +3531,11 @@ export interface UpdateTriggerRequest {
      */
     Enable?: string;
     /**
-     * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
+     * 触发器创建时所指向的函数版本或别名，默认为 $LATEST
      */
     Qualifier?: string;
     /**
-     * 函数的命名空间
+     * 函数的命名空间，默认值为default
      */
     Namespace?: string;
     /**

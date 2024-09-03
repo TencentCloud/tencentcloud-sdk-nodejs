@@ -186,6 +186,10 @@ export interface DescribeQAResponse {
      */
     ExpireEnd?: string;
     /**
+     * 相似问列表信息
+     */
+    SimilarQuestions?: Array<SimilarQuestion>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -1071,7 +1075,7 @@ export interface CreateCorpResponse {
  */
 export interface ListQARequest {
     /**
-     * 机器人ID
+     * 应用ID
      */
     BotBizId: string;
     /**
@@ -1091,7 +1095,7 @@ export interface ListQARequest {
      */
     AcceptStatus?: Array<number | bigint>;
     /**
-     * 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败)
+     * 发布状态(2待发布 3发布中 4已发布 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复)
      */
     ReleaseStatus?: Array<number | bigint>;
     /**
@@ -1431,6 +1435,10 @@ export interface ModifyQARequest {
      * 有效结束时间，unix时间戳，0代表永久有效
      */
     ExpireEnd?: string;
+    /**
+     * 相似问修改信息(相似问没有修改则不传)
+     */
+    SimilarQuestionModify?: SimilarQuestionModify;
 }
 /**
  * 任务流程信息
@@ -1609,6 +1617,10 @@ export interface CreateQARequest {
      * 有效结束时间，unix时间戳，0代表永久有效
      */
     ExpireEnd?: string;
+    /**
+     * 相似问内容
+     */
+    SimilarQuestions?: Array<string>;
 }
 /**
  * 检索知识
@@ -1744,6 +1756,26 @@ export interface ListQaItem {
      * 问答字符数
      */
     QaCharSize?: string;
+    /**
+     * 有效开始时间，unix时间戳
+     */
+    ExpireStart?: string;
+    /**
+     * 有效结束时间，unix时间戳，0代表永久有效
+     */
+    ExpireEnd?: string;
+    /**
+     * 属性标签适用范围 1：全部，2：按条件
+     */
+    AttrRange?: number;
+    /**
+     * 属性标签
+     */
+    AttrLabels?: Array<AttrLabel>;
+    /**
+     * 相似问个数
+     */
+    SimilarQuestionNum?: number;
 }
 /**
  * DeleteAttributeLabel请求参数结构体
@@ -3616,6 +3648,23 @@ export interface ReconstructDocumentRequest {
     Config?: ReconstructDocumentConfig;
 }
 /**
+ * 相似问修改(更新)信息
+ */
+export interface SimilarQuestionModify {
+    /**
+     * 需要添加的相似问(内容)列表
+     */
+    AddQuestions?: Array<string>;
+    /**
+     * 需要更新的相似问列表
+     */
+    UpdateQuestions?: Array<SimilarQuestion>;
+    /**
+     * 需要删除的相似问列表
+     */
+    DeleteQuestions?: Array<SimilarQuestion>;
+}
+/**
  * RetryDocAudit返回参数结构体
  */
 export interface RetryDocAuditResponse {
@@ -4603,6 +4652,21 @@ export interface DescribeSegmentsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 相似问信息
+ */
+export interface SimilarQuestion {
+    /**
+     * 相似问ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SimBizId?: string;
+    /**
+     * 相似问内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Question?: string;
 }
 /**
  * 标签提取配置

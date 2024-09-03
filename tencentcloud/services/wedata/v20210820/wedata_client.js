@@ -874,6 +874,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckIntegrationTaskNameExists", req, cb);
     }
     /**
+     * 查询表的分区详情信息
+     */
+    async DescribeTablePartitions(req, cb) {
+        return this.request("DescribeTablePartitions", req, cb);
+    }
+    /**
      * 分页查询质量规则
      */
     async DescribeRulesByPage(req, cb) {

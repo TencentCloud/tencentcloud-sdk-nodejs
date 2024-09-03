@@ -778,6 +778,16 @@ it("cynosdb.v20190107.DeleteBackup", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeServerlessStrategy", async function () {
+    try {
+       const data = await client.DescribeServerlessStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.PauseServerless", async function () {
     try {
        const data = await client.PauseServerless({})
@@ -1108,9 +1118,9 @@ it("cynosdb.v20190107.ModifyAccountDescription", async function () {
     }
 })
 
-it("cynosdb.v20190107.SwitchClusterVpc", async function () {
+it("cynosdb.v20190107.ModifyServerlessStrategy", async function () {
     try {
-       const data = await client.SwitchClusterVpc({})
+       const data = await client.ModifyServerlessStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1291,6 +1301,16 @@ it("cynosdb.v20190107.DescribeZones", async function () {
 it("cynosdb.v20190107.DescribeBackupDownloadUrl", async function () {
     try {
        const data = await client.DescribeBackupDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SwitchClusterVpc", async function () {
+    try {
+       const data = await client.SwitchClusterVpc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

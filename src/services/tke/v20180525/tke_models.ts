@@ -96,6 +96,10 @@ export interface InstallLogAgentRequest {
    * kubelet根目录
    */
   KubeletRootDir?: string
+  /**
+   * 集群类型 tke/eks，默认tke
+   */
+  ClusterType?: string
 }
 
 /**

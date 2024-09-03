@@ -158,9 +158,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除物理专线。
-只能删除处于已连接状态的物理专线。
-     */
+   * 删除物理专线。只能删除处于已连接状态的物理专线。
+   */
   async DeleteDirectConnect(
     req: DeleteDirectConnectRequest,
     cb?: (error: string, rep: DeleteDirectConnectResponse) => void
@@ -189,7 +188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除专用通道
+   * 删除专用通道。
    */
   async DeleteDirectConnectTunnel(
     req: DeleteDirectConnectTunnelRequest,
@@ -292,7 +291,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改专用通道属性
+   * 修改专用通道属性。
    */
   async ModifyDirectConnectTunnelAttribute(
     req: ModifyDirectConnectTunnelAttributeRequest,

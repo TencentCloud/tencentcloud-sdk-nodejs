@@ -84,6 +84,7 @@ import {
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
   DescribeChangedParamsAfterUpgradeResponse,
+  ModifyServerlessStrategyResponse,
   ProxyGroupRwInfo,
   DescribeProxyNodesRequest,
   InquirePriceCreateResponse,
@@ -97,6 +98,7 @@ import {
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
+  DescribeServerlessStrategyResponse,
   InstanceCLSDeliveryInfo,
   ModifyMaintainPeriodConfigResponse,
   DisassociateSecurityGroupsRequest,
@@ -396,6 +398,7 @@ import {
   DescribeAuditRuleTemplatesRequest,
   InstanceSpec,
   IsolateInstanceRequest,
+  ModifyServerlessStrategyRequest,
   DescribeBinlogConfigResponse,
   DescribeAuditLogFilesRequest,
   SaleRegion,
@@ -406,6 +409,7 @@ import {
   ResetAccountPasswordRequest,
   ModifiableInfo,
   TaskMaintainInfo,
+  DescribeServerlessStrategyRequest,
   TablePrivileges,
   RemoveClusterSlaveZoneRequest,
   DeleteBackupRequest,
@@ -1190,6 +1194,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询serverless策略
+   */
+  async DescribeServerlessStrategy(
+    req: DescribeServerlessStrategyRequest,
+    cb?: (error: string, rep: DescribeServerlessStrategyResponse) => void
+  ): Promise<DescribeServerlessStrategyResponse> {
+    return this.request("DescribeServerlessStrategy", req, cb)
+  }
+
+  /**
    * 暂停serverless集群
    */
   async PauseServerless(
@@ -1520,13 +1534,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更换集群vpc
+   * 修改serverless策略
    */
-  async SwitchClusterVpc(
-    req: SwitchClusterVpcRequest,
-    cb?: (error: string, rep: SwitchClusterVpcResponse) => void
-  ): Promise<SwitchClusterVpcResponse> {
-    return this.request("SwitchClusterVpc", req, cb)
+  async ModifyServerlessStrategy(
+    req: ModifyServerlessStrategyRequest,
+    cb?: (error: string, rep: ModifyServerlessStrategyResponse) => void
+  ): Promise<ModifyServerlessStrategyResponse> {
+    return this.request("ModifyServerlessStrategy", req, cb)
   }
 
   /**
@@ -1707,6 +1721,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupDownloadUrlResponse) => void
   ): Promise<DescribeBackupDownloadUrlResponse> {
     return this.request("DescribeBackupDownloadUrl", req, cb)
+  }
+
+  /**
+   * 更换集群vpc
+   */
+  async SwitchClusterVpc(
+    req: SwitchClusterVpcRequest,
+    cb?: (error: string, rep: SwitchClusterVpcResponse) => void
+  ): Promise<SwitchClusterVpcResponse> {
+    return this.request("SwitchClusterVpc", req, cb)
   }
 
   /**

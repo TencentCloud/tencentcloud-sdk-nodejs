@@ -1369,6 +1369,153 @@ export interface DescribeAclRuleRequest {
 }
 
 /**
+ * Nat实例卡片详细信息
+ */
+export interface NatInstanceInfo {
+  /**
+   * nat实例id
+   */
+  NatinsId?: string
+  /**
+   * nat实例名称
+   */
+  NatinsName?: string
+  /**
+   * 实例所在地域
+   */
+  Region?: string
+  /**
+   * 0: 新增模式，1:接入模式
+   */
+  FwMode?: number
+  /**
+   * 实例带宽大小 Mbps
+   */
+  BandWidth?: number
+  /**
+   * 入向带宽峰值 bps
+   */
+  InFlowMax?: number
+  /**
+   * 出向带宽峰值 bps
+   */
+  OutFlowMax?: number
+  /**
+   * 地域中文信息
+   */
+  RegionZh?: string
+  /**
+   * 公网ip数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EipAddress?: Array<string>
+  /**
+   * 内外使用ip数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcIp?: Array<string>
+  /**
+   * 实例关联子网数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Subnets?: Array<string>
+  /**
+   * 0 :正常 1：正在初始化
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 地域区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionDetail?: string
+  /**
+   * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneZh?: string
+  /**
+   * 实例所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneZhBak?: string
+  /**
+   * 已使用规则数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleUsed?: number
+  /**
+   * 实例的规则限制最大规格数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleMax?: number
+  /**
+   * 实例引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineVersion?: string
+  /**
+   * 引擎是否可升级：0，不可升级；1，可升级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateEnable?: number
+  /**
+   * 是的需要升级引擎 支持 nat拨测 1需要 0不需要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedProbeEngineUpdate?: number
+  /**
+   * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficMode?: string
+  /**
+   * 实例主所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 实例备所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneBak?: string
+  /**
+   * 引擎预约升级时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveTime?: string
+  /**
+   * 引擎预约升级版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersion?: string
+  /**
+   * 引擎预约升级版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersionState?: string
+  /**
+   * 弹性开关
+1 打开
+0 关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticSwitch?: number
+  /**
+   * 弹性带宽，单位Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidth?: number
+  /**
+   * 是否首次开通按量付费
+1 是
+0 不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFirstAfterPay?: number
+}
+
+/**
  * CreateSecurityGroupRules返回参数结构体
  */
 export interface CreateSecurityGroupRulesResponse {
@@ -2135,59 +2282,17 @@ export interface DescribeVpcAcRuleRequest {
 }
 
 /**
- * NAT防火墙Dnat规则列表
+ * DeleteRemoteAccessDomain返回参数结构体
  */
-export interface DescNatDnatRule {
+export interface DeleteRemoteAccessDomainResponse {
   /**
-   * id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 状态值 0：删除成功，非 0：删除失败
    */
-  Id?: number
+  Status: number
   /**
-   * 网络协议，可选值：TCP、UDP。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IpProtocol?: string
-  /**
-   * 弹性IP。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIpAddress?: string
-  /**
-   * 公网端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicPort?: number
-  /**
-   * 内网地址。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivateIpAddress?: string
-  /**
-   * 内网端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivatePort?: number
-  /**
-   * NAT防火墙转发规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 是否被关联引用，如被远程运维使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsReferenced?: number
-  /**
-   * 所属防火墙实例id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FwInsId?: string
-  /**
-   * 关联的nat网关Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NatGwId?: string
+  RequestId?: string
 }
 
 /**
@@ -2410,150 +2515,13 @@ export interface AddAclRuleResponse {
 }
 
 /**
- * Nat实例卡片详细信息
+ * DeleteRemoteAccessDomain请求参数结构体
  */
-export interface NatInstanceInfo {
+export interface DeleteRemoteAccessDomainRequest {
   /**
-   * nat实例id
+   * 域名列表
    */
-  NatinsId?: string
-  /**
-   * nat实例名称
-   */
-  NatinsName?: string
-  /**
-   * 实例所在地域
-   */
-  Region?: string
-  /**
-   * 0: 新增模式，1:接入模式
-   */
-  FwMode?: number
-  /**
-   * 实例带宽大小 Mbps
-   */
-  BandWidth?: number
-  /**
-   * 入向带宽峰值 bps
-   */
-  InFlowMax?: number
-  /**
-   * 出向带宽峰值 bps
-   */
-  OutFlowMax?: number
-  /**
-   * 地域中文信息
-   */
-  RegionZh?: string
-  /**
-   * 公网ip数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EipAddress?: Array<string>
-  /**
-   * 内外使用ip数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcIp?: Array<string>
-  /**
-   * 实例关联子网数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Subnets?: Array<string>
-  /**
-   * 0 :正常 1：正在初始化
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 地域区域信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionDetail?: string
-  /**
-   * 实例所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ZoneZh?: string
-  /**
-   * 实例所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ZoneZhBak?: string
-  /**
-   * 已使用规则数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleUsed?: number
-  /**
-   * 实例的规则限制最大规格数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleMax?: number
-  /**
-   * 实例引擎版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EngineVersion?: string
-  /**
-   * 引擎是否可升级：0，不可升级；1，可升级
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateEnable?: number
-  /**
-   * 是的需要升级引擎 支持 nat拨测 1需要 0不需要
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NeedProbeEngineUpdate?: number
-  /**
-   * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrafficMode?: string
-  /**
-   * 实例主所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * 实例备所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ZoneBak?: string
-  /**
-   * 引擎预约升级时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReserveTime?: string
-  /**
-   * 引擎预约升级版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReserveVersion?: string
-  /**
-   * 引擎预约升级版本状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReserveVersionState?: string
-  /**
-   * 弹性开关
-1 打开
-0 关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElasticSwitch?: number
-  /**
-   * 弹性带宽，单位Mbps
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElasticBandwidth?: number
-  /**
-   * 是否首次开通按量付费
-1 是
-0 不是
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsFirstAfterPay?: number
+  AccessDomainList: Array<string>
 }
 
 /**
@@ -7391,6 +7359,62 @@ export interface ModifyEnterpriseSecurityDispatchStatusRequest {
 2：关闭立即下发开关情况下，触发开始下发
    */
   Status: number
+}
+
+/**
+ * NAT防火墙Dnat规则列表
+ */
+export interface DescNatDnatRule {
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 网络协议，可选值：TCP、UDP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpProtocol?: string
+  /**
+   * 弹性IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIpAddress?: string
+  /**
+   * 公网端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicPort?: number
+  /**
+   * 内网地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateIpAddress?: string
+  /**
+   * 内网端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivatePort?: number
+  /**
+   * NAT防火墙转发规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 是否被关联引用，如被远程运维使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsReferenced?: number
+  /**
+   * 所属防火墙实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwInsId?: string
+  /**
+   * 关联的nat网关Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatGwId?: string
 }
 
 /**

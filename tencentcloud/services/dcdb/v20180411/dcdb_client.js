@@ -241,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSyncMode", req, cb);
     }
     /**
+     * 获取实例回档时可选的时间范围
+     */
+    async DescribeDCDBBinlogTime(req, cb) {
+        return this.request("DescribeDCDBBinlogTime", req, cb);
+    }
+    /**
      * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
      */
     async DescribeProjectSecurityGroups(req, cb) {

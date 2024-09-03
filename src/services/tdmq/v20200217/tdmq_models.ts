@@ -237,12 +237,12 @@ export interface DescribeCmqQueuesResponse {
   /**
    * 数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 队列列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueList: Array<CmqQueue>
+  QueueList?: Array<CmqQueue>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1358,11 +1358,11 @@ export interface DescribeCmqTopicsResponse {
    * 主题列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicList: Array<CmqTopic>
+  TopicList?: Array<CmqTopic>
   /**
    * 全量主题数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3391,6 +3391,11 @@ DeadLetter 死信
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientProtocol?: string
+  /**
+   * 客户端订阅详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientSubscriptionInfos?: Array<ClientSubscriptionInfo>
 }
 
 /**
@@ -5779,7 +5784,7 @@ export interface DescribeCmqTopicDetailResponse {
   /**
    * 主题详情
    */
-  TopicDescribe: CmqTopic
+  TopicDescribe?: CmqTopic
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5827,16 +5832,46 @@ export interface DescribeRocketMQSubscriptionsResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 订阅关系列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Subscriptions: Array<RocketMQSubscription>
+  Subscriptions?: Array<RocketMQSubscription>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 客户端订阅详情，可用于辅助判断哪些客户端订阅关系不一致
+ */
+export interface ClientSubscriptionInfo {
+  /**
+   * 客户端ID
+   */
+  ClientId?: string
+  /**
+   * 客户端IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientAddr?: string
+  /**
+   * 订阅主题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * 订阅表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubString?: string
+  /**
+   * 订阅方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpressionType?: string
 }
 
 /**
@@ -6074,28 +6109,34 @@ export interface PulsarProClusterSpecInfo {
   /**
    * 集群规格名称
    */
-  SpecName: string
+  SpecName?: string
   /**
    * 峰值tps
    */
-  MaxTps: number
+  MaxTps?: number
   /**
    * 峰值带宽。单位：mbps
    */
-  MaxBandWidth: number
+  MaxBandWidth?: number
   /**
    * 最大命名空间个数
    */
-  MaxNamespaces: number
+  MaxNamespaces?: number
   /**
    * 最大主题分区数
    */
-  MaxTopics: number
+  MaxTopics?: number
   /**
    * 规格外弹性TPS
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScalableTps: number
+  ScalableTps?: number
+  /**
+   * 32或者128
+当前集群topic的最大分区数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxPartitions?: number
 }
 
 /**
@@ -7800,7 +7841,7 @@ export interface DescribeClusterDetailResponse {
   /**
    * 集群的详细信息
    */
-  ClusterSet: Cluster
+  ClusterSet?: Cluster
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8269,155 +8310,155 @@ export interface CmqQueue {
   /**
    * 消息队列ID。
    */
-  QueueId: string
+  QueueId?: string
   /**
    * 消息队列名字。
    */
-  QueueName: string
+  QueueName?: string
   /**
    * 每秒钟生产消息条数的限制，消费消息的大小是该值的1.1倍。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Qps: number
+  Qps?: number
   /**
    * 带宽限制。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bps: number
+  Bps?: number
   /**
    * 飞行消息最大保留时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxDelaySeconds: number
+  MaxDelaySeconds?: number
   /**
    * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
    */
-  MaxMsgHeapNum: number
+  MaxMsgHeapNum?: number
   /**
    * 消息接收长轮询等待时间。取值范围0 - 30秒，默认值0。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PollingWaitSeconds: number
+  PollingWaitSeconds?: number
   /**
    * 消息保留周期。取值范围60-1296000秒（1min-15天），默认值345600秒（4 天）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgRetentionSeconds: number
+  MsgRetentionSeconds?: number
   /**
    * 消息可见性超时。取值范围1 - 43200秒（即12小时内），默认值30。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VisibilityTimeout: number
+  VisibilityTimeout?: number
   /**
    * 消息最大长度。取值范围1024 - 1048576 Byte（即1K - 1024K），默认值65536。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxMsgSize: number
+  MaxMsgSize?: number
   /**
    * 回溯队列的消息回溯时间最大值，取值范围0 - 43200秒，0表示不开启消息回溯。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RewindSeconds: number
+  RewindSeconds?: number
   /**
    * 队列的创建时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 最后一次修改队列属性的时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyTime: number
+  LastModifyTime?: number
   /**
    * 在队列中处于 Active 状态（不处于被消费状态）的消息总数，为近似值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ActiveMsgNum: number
+  ActiveMsgNum?: number
   /**
    * 在队列中处于 Inactive 状态（正处于被消费状态）的消息总数，为近似值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InactiveMsgNum: number
+  InactiveMsgNum?: number
   /**
    * 延迟消息数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DelayMsgNum: number
+  DelayMsgNum?: number
   /**
    * 已调用 DelMsg 接口删除，但还在回溯保留时间内的消息数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RewindMsgNum: number
+  RewindMsgNum?: number
   /**
    * 消息最小未消费时间，单位为秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MinMsgTime: number
+  MinMsgTime?: number
   /**
    * 事务消息队列。true表示是事务消息，false表示不是事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Transaction: boolean
+  Transaction?: boolean
   /**
    * 死信队列。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadLetterSource: Array<CmqDeadLetterSource>
+  DeadLetterSource?: Array<CmqDeadLetterSource>
   /**
    * 死信队列策略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadLetterPolicy: CmqDeadLetterPolicy
+  DeadLetterPolicy?: CmqDeadLetterPolicy
   /**
    * 事务消息策略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransactionPolicy: CmqTransactionPolicy
+  TransactionPolicy?: CmqTransactionPolicy
   /**
    * 创建者Uin。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUin: number
+  CreateUin?: number
   /**
    * 关联的标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 消息轨迹。true表示开启，false表示不开启。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Trace: boolean
+  Trace?: boolean
   /**
    * 租户id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 最大未确认消息数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxUnackedMsgNum: number
+  MaxUnackedMsgNum?: number
   /**
    * 最大消息堆积大小（字节）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxMsgBacklogSize: number
+  MaxMsgBacklogSize?: number
   /**
    * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RetentionSizeInMB: number
+  RetentionSizeInMB?: number
 }
 
 /**
@@ -8743,11 +8784,11 @@ export interface PublishCmqMsgResponse {
   /**
    * true表示发送成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 消息id
    */
-  MsgId: string
+  MsgId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

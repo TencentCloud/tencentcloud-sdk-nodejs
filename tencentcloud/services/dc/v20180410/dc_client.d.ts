@@ -37,8 +37,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDirectConnectTunnelExtra(req: DescribeDirectConnectTunnelExtraRequest, cb?: (error: string, rep: DescribeDirectConnectTunnelExtraResponse) => void): Promise<DescribeDirectConnectTunnelExtraResponse>;
     /**
-     * 删除物理专线。
-只能删除处于已连接状态的物理专线。
+     * 删除物理专线。只能删除处于已连接状态的物理专线。
      */
     DeleteDirectConnect(req: DeleteDirectConnectRequest, cb?: (error: string, rep: DeleteDirectConnectResponse) => void): Promise<DeleteDirectConnectResponse>;
     /**
@@ -50,7 +49,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInternetAddressStatistics(req?: DescribeInternetAddressStatisticsRequest, cb?: (error: string, rep: DescribeInternetAddressStatisticsResponse) => void): Promise<DescribeInternetAddressStatisticsResponse>;
     /**
-     * 删除专用通道
+     * 删除专用通道。
      */
     DeleteDirectConnectTunnel(req: DeleteDirectConnectTunnelRequest, cb?: (error: string, rep: DeleteDirectConnectTunnelResponse) => void): Promise<DeleteDirectConnectTunnelResponse>;
     /**
@@ -93,7 +92,7 @@ export declare class Client extends AbstractClient {
      */
     ReleaseInternetAddress(req: ReleaseInternetAddressRequest, cb?: (error: string, rep: ReleaseInternetAddressResponse) => void): Promise<ReleaseInternetAddressResponse>;
     /**
-     * 修改专用通道属性
+     * 修改专用通道属性。
      */
     ModifyDirectConnectTunnelAttribute(req: ModifyDirectConnectTunnelAttributeRequest, cb?: (error: string, rep: ModifyDirectConnectTunnelAttributeResponse) => void): Promise<ModifyDirectConnectTunnelAttributeResponse>;
 }

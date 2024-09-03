@@ -162,6 +162,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUsersForUserManager", req, cb);
     }
     /**
+     * 前提：预付费集群
+资源级别开启或关闭自动续费
+     */
+    async ModifyAutoRenewFlag(req, cb) {
+        return this.request("ModifyAutoRenewFlag", req, cb);
+    }
+    /**
      * 修改自动扩缩容规则
      */
     async ModifyAutoScaleStrategy(req, cb) {

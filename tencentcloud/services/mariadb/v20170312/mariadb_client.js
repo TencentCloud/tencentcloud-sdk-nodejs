@@ -65,6 +65,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupTime", req, cb);
     }
     /**
+     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     */
+    async ModifyInstanceVport(req, cb) {
+        return this.request("ModifyInstanceVport", req, cb);
+    }
+    /**
      * 本接口(DescribeSaleInfo)用于查询云数据库可售卖的地域和可用区信息。
      */
     async DescribeSaleInfo(req, cb) {
@@ -398,10 +404,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrice", req, cb);
     }
     /**
-     * 本接口（ModifyInstanceVport）用于修改实例VPORT
+     * 本接口（DescribeBinlogTime）用于查询可回档时间范围。
      */
-    async ModifyInstanceVport(req, cb) {
-        return this.request("ModifyInstanceVport", req, cb);
+    async DescribeBinlogTime(req, cb) {
+        return this.request("DescribeBinlogTime", req, cb);
     }
     /**
      * 本接口(UpgradeDedicatedDBInstance)用于扩容独享云数据库实例。

@@ -1941,6 +1941,20 @@ export interface DescribeChangedParamsAfterUpgradeResponse {
 }
 
 /**
+ * ModifyServerlessStrategy返回参数结构体
+ */
+export interface ModifyServerlessStrategyResponse {
+  /**
+   * 异步流程id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库代理组读写分离信息
  */
 export interface ProxyGroupRwInfo {
@@ -2403,6 +2417,42 @@ export interface ModifyClusterDatabaseRequest {
    * 历史授权用户主机权限
    */
   OldUserHostPrivileges?: Array<UserHostPrivilege>
+}
+
+/**
+ * DescribeServerlessStrategy返回参数结构体
+ */
+export interface DescribeServerlessStrategyResponse {
+  /**
+   * cpu负载为 0 时持续多久（秒）发起自动暂停
+   */
+  AutoPauseDelay?: number
+  /**
+   * cpu负载超过当前规格核数时，持续多久（秒）发起自动扩容
+   */
+  AutoScaleUpDelay?: number
+  /**
+   * cpu 负载低于低一级规格核数时，持续多久（秒）发起自动缩容
+   */
+  AutoScaleDownDelay?: number
+  /**
+   * 是否自动暂停，可能值：
+yes
+no
+   */
+  AutoPause?: string
+  /**
+   * 集群是否允许向上扩容，可选范围<li>yes</li><li>no</li>
+   */
+  AutoScaleUp?: string
+  /**
+   * 集群是否允许向下缩容，可选范围<li>yes</li><li>no</li>
+   */
+  AutoScaleDown?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10137,6 +10187,66 @@ export interface IsolateInstanceRequest {
 }
 
 /**
+ * ModifyServerlessStrategy请求参数结构体
+ */
+export interface ModifyServerlessStrategyRequest {
+  /**
+   * serverless集群id
+   */
+  ClusterId: string
+  /**
+   * 集群是否自动暂停，可选范围
+<li>yes</li>
+<li>no</li>
+   */
+  AutoPause?: string
+  /**
+   * 集群自动暂停的延迟，单位秒，可选范围[600,691200]，默认600
+   */
+  AutoPauseDelay?: number
+  /**
+   * 该参数暂时无效
+   */
+  AutoScaleUpDelay?: number
+  /**
+   * 该参数暂时无效
+   */
+  AutoScaleDownDelay?: number
+  /**
+   * cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MinCpu?: number
+  /**
+   * cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MaxCpu?: number
+  /**
+   * 只读实例cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MinRoCpu?: number
+  /**
+   * 只读cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   */
+  MaxRoCpu?: number
+  /**
+   * 只读节点最小个数
+   */
+  MinRoCount?: number
+  /**
+   * 只读节点最大个数
+   */
+  MaxRoCount?: number
+  /**
+   * 集群是否允许扩容，可选范围<li>yes</li><li>no</li>
+   */
+  AutoScaleUp?: string
+  /**
+   * 集群是否允许缩容，可选范围<li>yes</li><li>no</li>
+   */
+  AutoScaleDown?: string
+}
+
+/**
  * DescribeBinlogConfig返回参数结构体
  */
 export interface DescribeBinlogConfigResponse {
@@ -10331,6 +10441,16 @@ export interface TaskMaintainInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaintainWeekDays?: Array<string>
+}
+
+/**
+ * DescribeServerlessStrategy请求参数结构体
+ */
+export interface DescribeServerlessStrategyRequest {
+  /**
+   * serverless集群id
+   */
+  ClusterId: string
 }
 
 /**

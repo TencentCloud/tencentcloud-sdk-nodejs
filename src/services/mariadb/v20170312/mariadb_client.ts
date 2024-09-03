@@ -74,7 +74,7 @@ import {
   CopyAccountPrivilegesResponse,
   DCNReplicaStatus,
   CloneAccountRequest,
-  DescribeDatabaseObjectsRequest,
+  DescribePriceRequest,
   SlowLogData,
   ParamModifyResult,
   DescribeDBInstancesRequest,
@@ -90,7 +90,7 @@ import {
   ViewPrivileges,
   ResetAccountPasswordResponse,
   DescribeDBInstanceDetailResponse,
-  DescribePriceRequest,
+  DescribeDatabaseObjectsRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
   ZonesInfo,
@@ -105,6 +105,7 @@ import {
   DescribeDBEncryptAttributesRequest,
   Deal,
   GrantAccountPrivilegesRequest,
+  DescribeBinlogTimeRequest,
   CreateDedicatedClusterDBInstanceRequest,
   SwitchDBInstanceHARequest,
   DBParamValue,
@@ -124,6 +125,7 @@ import {
   DescribeDatabaseObjectsResponse,
   ModifyDBInstanceNameRequest,
   DeleteAccountRequest,
+  DescribeBinlogTimeResponse,
   UpgradeHourDBInstanceRequest,
   TableColumn,
   CreateTmpInstancesResponse,
@@ -274,6 +276,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBackupTimeResponse) => void
   ): Promise<ModifyBackupTimeResponse> {
     return this.request("ModifyBackupTime", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceVport）用于修改实例VPORT
+   */
+  async ModifyInstanceVport(
+    req: ModifyInstanceVportRequest,
+    cb?: (error: string, rep: ModifyInstanceVportResponse) => void
+  ): Promise<ModifyInstanceVportResponse> {
+    return this.request("ModifyInstanceVport", req, cb)
   }
 
   /**
@@ -822,13 +834,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceVport）用于修改实例VPORT
+   * 本接口（DescribeBinlogTime）用于查询可回档时间范围。
    */
-  async ModifyInstanceVport(
-    req: ModifyInstanceVportRequest,
-    cb?: (error: string, rep: ModifyInstanceVportResponse) => void
-  ): Promise<ModifyInstanceVportResponse> {
-    return this.request("ModifyInstanceVport", req, cb)
+  async DescribeBinlogTime(
+    req: DescribeBinlogTimeRequest,
+    cb?: (error: string, rep: DescribeBinlogTimeResponse) => void
+  ): Promise<DescribeBinlogTimeResponse> {
+    return this.request("DescribeBinlogTime", req, cb)
   }
 
   /**

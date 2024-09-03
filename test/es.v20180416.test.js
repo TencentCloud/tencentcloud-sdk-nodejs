@@ -78,6 +78,16 @@ it("es.v20180416.DescribeServerlessSpaces", async function () {
     }
 })
 
+it("es.v20180416.InstallInstanceModel", async function () {
+    try {
+       const data = await client.InstallInstanceModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeIndexList", async function () {
     try {
        const data = await client.DescribeIndexList({})

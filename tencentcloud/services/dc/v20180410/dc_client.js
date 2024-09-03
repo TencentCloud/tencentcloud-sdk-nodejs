@@ -71,8 +71,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDirectConnectTunnelExtra", req, cb);
     }
     /**
-     * 删除物理专线。
-只能删除处于已连接状态的物理专线。
+     * 删除物理专线。只能删除处于已连接状态的物理专线。
      */
     async DeleteDirectConnect(req, cb) {
         return this.request("DeleteDirectConnect", req, cb);
@@ -90,7 +89,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInternetAddressStatistics", req, cb);
     }
     /**
-     * 删除专用通道
+     * 删除专用通道。
      */
     async DeleteDirectConnectTunnel(req, cb) {
         return this.request("DeleteDirectConnectTunnel", req, cb);
@@ -153,7 +152,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseInternetAddress", req, cb);
     }
     /**
-     * 修改专用通道属性
+     * 修改专用通道属性。
      */
     async ModifyDirectConnectTunnelAttribute(req, cb) {
         return this.request("ModifyDirectConnectTunnelAttribute", req, cb);

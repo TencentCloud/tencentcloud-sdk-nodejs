@@ -20,7 +20,7 @@ export interface DeleteSmsTemplateResponse {
      */
     DeleteTemplateStatus?: DeleteTemplateStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -33,7 +33,7 @@ export interface ModifySmsTemplateResponse {
      */
     ModifyTemplateStatus?: ModifyTemplateStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -181,7 +181,7 @@ export interface DescribeSmsTemplateListResponse {
      */
     DescribeTemplateStatusSet?: Array<DescribeTemplateListStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -229,7 +229,8 @@ export interface AddSmsTemplateRequest {
      */
     TemplateContent: string;
     /**
-     * 短信类型，0表示普通短信, 1表示营销短信。
+     * 短信类型，1表示营销短信，2表示通知短信，3表示验证码短信。
+  注：原“普通短信”类型模板目前仍支持提交申请，为进一步提升短信发送质量、提高短信模板审核通过率，建议按“通知短信”类型或“验证码短信”类型申请新增模板，可参考[关于腾讯云短信模板类型优化公告](https://cloud.tencent.com/document/product/382/106171)。
      */
     SmsType: number;
     /**
@@ -260,7 +261,8 @@ export interface ModifySmsTemplateRequest {
      */
     TemplateContent: string;
     /**
-     * 短信类型，0表示普通短信, 1表示营销短信。
+     * 短信类型，1表示营销短信，2表示通知短信，3表示验证码短信。
+  注：原“普通短信”类型模板目前仍支持提交申请，为进一步提升短信发送质量、提高短信模板审核通过率，建议按“通知短信”类型或“验证码短信”类型申请新增模板，可参考[关于腾讯云短信模板类型优化公告](https://cloud.tencent.com/document/product/382/106171)。
      */
     SmsType: number;
     /**
@@ -316,7 +318,7 @@ export interface CallbackStatusStatisticsResponse {
      */
     CallbackStatusStatistics?: CallbackStatusStatistics;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -387,7 +389,7 @@ export interface PullSmsSendStatusByPhoneNumberResponse {
      */
     PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -411,32 +413,29 @@ export interface DescribeSignListStatus {
     /**
      * 签名Id
      */
-    SignId: number;
+    SignId?: number;
     /**
      * 是否国际/港澳台短信：
   0：表示国内短信。
   1：表示国际/港澳台短信。
      */
-    International: number;
+    International?: number;
     /**
-     * 申请签名状态。其中：
-  0：表示审核通过。
-  1：表示审核中。
-  -1：表示审核未通过或审核失败。
+     * 申请签名状态。其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。
      */
-    StatusCode: number;
+    StatusCode?: number;
     /**
      * 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。
      */
-    ReviewReply: string;
+    ReviewReply?: string;
     /**
      * 签名名称。
      */
-    SignName: string;
+    SignName?: string;
     /**
      * 提交审核时间，UNIX 时间戳（单位：秒）。
      */
-    CreateTime: number;
+    CreateTime?: number;
 }
 /**
  * SendSms返回参数结构体
@@ -447,7 +446,7 @@ export interface SendSmsResponse {
      */
     SendStatusSet?: Array<SendStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -460,7 +459,7 @@ export interface SendStatusStatisticsResponse {
      */
     SendStatusStatistics?: SendStatusStatistics;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -633,7 +632,7 @@ export interface AddSmsTemplateResponse {
      */
     AddTemplateStatus?: AddTemplateStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -683,7 +682,7 @@ export interface DescribeSmsSignListResponse {
      */
     DescribeSignListStatusSet?: Array<DescribeSignListStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -789,7 +788,7 @@ export interface PullSmsReplyStatusByPhoneNumberResponse {
      */
     PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -835,7 +834,7 @@ export interface DeleteSmsSignResponse {
      */
     DeleteSignStatus?: DeleteSignStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -848,7 +847,7 @@ export interface AddSmsSignResponse {
      */
     AddSignStatus?: AddSignStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -901,7 +900,7 @@ export interface ModifySmsSignResponse {
      */
     ModifySignStatus?: ModifySignStatus;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -936,7 +935,7 @@ export interface PullSmsSendStatusResponse {
      */
     PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -949,7 +948,7 @@ export interface SmsPackagesStatisticsResponse {
      */
     SmsPackagesStatisticsSet?: Array<SmsPackagesStatistics>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -977,7 +976,7 @@ export interface PullSmsReplyStatusResponse {
      */
     PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }

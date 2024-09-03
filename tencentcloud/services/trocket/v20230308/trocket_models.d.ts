@@ -202,6 +202,26 @@ export interface ConsumeGroupItem {
      * 备注
      */
     Remark?: string;
+    /**
+     * 4.x的集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterIdV4?: string;
+    /**
+     * 4.x的命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NamespaceV4?: string;
+    /**
+     * 4.x的消费组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerGroupV4?: string;
+    /**
+     * 4.x的完整命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FullNamespaceV4?: string;
 }
 /**
  * ModifyRole返回参数结构体

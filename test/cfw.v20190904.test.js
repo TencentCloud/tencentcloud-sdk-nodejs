@@ -218,6 +218,16 @@ it("cfw.v20190904.ModifyBlockTop", async function () {
     }
 })
 
+it("cfw.v20190904.DeleteRemoteAccessDomain", async function () {
+    try {
+       const data = await client.DeleteRemoteAccessDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.RemoveAclRule", async function () {
     try {
        const data = await client.RemoveAclRule({})

@@ -138,9 +138,39 @@ it("asr.v20190614.DeleteAsrVocab", async function () {
     }
 })
 
+it("asr.v20190614.GetAsrKeyWordLibList", async function () {
+    try {
+       const data = await client.GetAsrKeyWordLibList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.SentenceRecognition", async function () {
     try {
        const data = await client.SentenceRecognition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.UpdateAsrKeyWordLib", async function () {
+    try {
+       const data = await client.UpdateAsrKeyWordLib({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.VoicePrintUpdate", async function () {
+    try {
+       const data = await client.VoicePrintUpdate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +238,9 @@ it("asr.v20190614.VoicePrintDelete", async function () {
     }
 })
 
-it("asr.v20190614.VoicePrintUpdate", async function () {
+it("asr.v20190614.CreateAsrKeyWordLib", async function () {
     try {
-       const data = await client.VoicePrintUpdate({})
+       const data = await client.CreateAsrKeyWordLib({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +271,16 @@ it("asr.v20190614.CloseAsyncRecognitionTask", async function () {
 it("asr.v20190614.GetModelInfo", async function () {
     try {
        const data = await client.GetModelInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.DeleteAsrKeyWordLib", async function () {
+    try {
+       const data = await client.DeleteAsrKeyWordLib({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -56,6 +56,7 @@ import {
   ObjectType,
   DescribeTaskPolicyTriggerLogRequest,
   Task,
+  TaskOrg,
   TaskReportInfo,
   CreateTaskFromTemplateRequest,
   TriggerPolicyRequest,

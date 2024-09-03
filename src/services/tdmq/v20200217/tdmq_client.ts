@@ -229,6 +229,7 @@ import {
   DescribeCmqTopicDetailResponse,
   DescribeRocketMQTopicsRequest,
   DescribeRocketMQSubscriptionsResponse,
+  ClientSubscriptionInfo,
   DescribeCmqSubscriptionDetailResponse,
   VpcBindRecord,
   DescribeRocketMQMsgResponse,

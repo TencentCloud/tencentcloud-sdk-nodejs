@@ -1209,6 +1209,23 @@ export interface CreateInstanceNewResponse {
  */
 export interface DescribeSqlApisRequest {
   /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * GetUsers：获取用户列表；
+GetDatabases：获取数据库列表；
+GetTables：获取数据库表列表；
+GetUserPrivilegesV2：获取用户下的权限，粒度到表级别；
+DeleteUser：删除用户；
+GetCatalog：获取Catalog列表；
+   */
+  ApiType: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
    * 用户链接来自的 IP
    */
   WhiteHost?: string
@@ -1917,6 +1934,16 @@ export interface CreateCoolDownPolicyRequest {
  */
 export interface DescribeSqlApisResponse {
   /**
+   * 返回的查询数据，大部分情况是list，也可能是bool
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReturnData?: string
+  /**
+   * 错误消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2497,7 +2524,7 @@ export interface DescribeInstancesRequest {
    */
   Limit?: number
   /**
-   * 搜索标签列表
+   * 搜索标签列表，没匹配到则不过滤集群列表
    */
   SearchTags?: Array<SearchTags>
 }
@@ -2744,7 +2771,7 @@ export interface SearchTags {
    */
   TagValue?: string
   /**
-   * 1表示只输入标签的键，没有输入值；0表示输入键时且输入值
+   * 1表示只输入标签的键，没有输入值；非1则表示输入键时且输入值
    */
   AllValue?: number
 }

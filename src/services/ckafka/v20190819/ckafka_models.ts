@@ -964,7 +964,7 @@ export interface CancelAuthorizationTokenResponse {
    * 0 成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: number
+  Result?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1245,7 +1245,7 @@ export interface BatchModifyTopicAttributesResponse {
   /**
    * 返回结果
    */
-  Result: Array<BatchModifyTopicResultDTO>
+  Result?: Array<BatchModifyTopicResultDTO>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1794,7 +1794,7 @@ export interface DescribePrometheusResponse {
   /**
    * Prometheus监控映射列表
    */
-  Result: Array<PrometheusDTO>
+  Result?: Array<PrometheusDTO>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2503,7 +2503,7 @@ export interface BatchModifyGroupOffsetsResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2827,7 +2827,7 @@ export interface CreatePostPaidInstanceRequest {
    */
   KafkaVersion?: string
   /**
-   * 实例类型。"standard"：标准版，"profession"：专业版
+   * 实例类型。"standard"：标准版，"profession"：专业版。  (标准版仅国际站支持，国内站目前支持专业版)
    */
   SpecificationsType?: string
   /**
@@ -2870,6 +2870,10 @@ export interface CreatePostPaidInstanceRequest {
    * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍
    */
   PublicNetworkMonthly?: number
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4040,6 +4044,10 @@ export interface TransformParam {
  */
 export interface DeleteRouteTriggerTimeRequest {
   /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
    * 修改时间
    */
   DelayTime: string
@@ -4074,7 +4082,7 @@ export interface DeleteInstancePreResponse {
   /**
    * 返回结果
    */
-  Result: CreateInstancePreResp
+  Result?: CreateInstancePreResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6070,6 +6078,10 @@ export interface CreateInstancePostRequest {
    * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍
    */
   PublicNetworkMonthly?: number
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6230,7 +6242,7 @@ export interface ModifyInstancePreResponse {
   /**
    * 变更预付费实例配置返回结构
    */
-  Result: CreateInstancePreResp
+  Result?: CreateInstancePreResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

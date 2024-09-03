@@ -358,6 +358,16 @@ it("dcdb.v20180411.DescribeDBSyncMode", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeDCDBBinlogTime", async function () {
+    try {
+       const data = await client.DescribeDCDBBinlogTime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeProjectSecurityGroups", async function () {
     try {
        const data = await client.DescribeProjectSecurityGroups({})

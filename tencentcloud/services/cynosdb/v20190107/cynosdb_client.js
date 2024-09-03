@@ -484,6 +484,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBackup", req, cb);
     }
     /**
+     * 查询serverless策略
+     */
+    async DescribeServerlessStrategy(req, cb) {
+        return this.request("DescribeServerlessStrategy", req, cb);
+    }
+    /**
      * 暂停serverless集群
      */
     async PauseServerless(req, cb) {
@@ -682,10 +688,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountDescription", req, cb);
     }
     /**
-     * 更换集群vpc
+     * 修改serverless策略
      */
-    async SwitchClusterVpc(req, cb) {
-        return this.request("SwitchClusterVpc", req, cb);
+    async ModifyServerlessStrategy(req, cb) {
+        return this.request("ModifyServerlessStrategy", req, cb);
     }
     /**
      * 创建数据库
@@ -794,6 +800,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBackupDownloadUrl(req, cb) {
         return this.request("DescribeBackupDownloadUrl", req, cb);
+    }
+    /**
+     * 更换集群vpc
+     */
+    async SwitchClusterVpc(req, cb) {
+        return this.request("SwitchClusterVpc", req, cb);
     }
     /**
      * 创建数据库代理

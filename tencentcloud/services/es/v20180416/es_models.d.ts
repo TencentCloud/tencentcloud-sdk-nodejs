@@ -691,34 +691,21 @@ export interface DeleteServerlessInstanceResponse {
     RequestId?: string;
 }
 /**
- * vpc信息
+ * InstallInstanceModel返回参数结构体
  */
-export interface VpcInfo {
+export interface InstallInstanceModelResponse {
     /**
-     * vpcId信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 发起异步流程的flowId
      */
-    VpcId?: string;
+    FlowId?: string;
     /**
-     * SubnetId信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 调用接口的错误信息
      */
-    SubnetId?: string;
+    ErrMsg?: string;
     /**
-     * VpcUid信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    VpcUid?: number;
-    /**
-     * SubnetUid 信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetUid?: number;
-    /**
-     * 可用ip数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AvailableIpAddressCount?: number;
+    RequestId?: string;
 }
 /**
  * DescribeInstanceOperations返回参数结构体
@@ -1617,6 +1604,19 @@ export interface DescribeLogstashInstancesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * InstallInstanceModel请求参数结构体
+ */
+export interface InstallInstanceModelRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 客户上传到自己cos的地址列表
+     */
+    UsrCosModelUrlList?: Array<string>;
 }
 /**
  * 数据接入serverless目的端信息
@@ -4765,6 +4765,36 @@ export interface DescribeServerlessInstancesRequest {
      * 标签信息
      */
     TagList?: Array<TagInfo>;
+}
+/**
+ * vpc信息
+ */
+export interface VpcInfo {
+    /**
+     * vpcId信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * SubnetId信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * VpcUid信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcUid?: number;
+    /**
+     * SubnetUid 信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetUid?: number;
+    /**
+     * 可用ip数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AvailableIpAddressCount?: number;
 }
 /**
  * 实例Kibana节点相关信息

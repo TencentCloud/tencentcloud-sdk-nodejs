@@ -2688,6 +2688,19 @@ export interface DescribeDcnDetailResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBEncryptAttributes请求参数结构体
+ */
+export interface ModifyDBEncryptAttributesRequest {
+    /**
+     * 实例Id，形如：tdsqlshard-ow728lmc。
+     */
+    InstanceId: string;
+    /**
+     * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+     */
+    EncryptEnabled: number;
+}
+/**
  * 数据库列信息
  */
 export interface TableColumn {
@@ -2843,6 +2856,15 @@ export interface AssociateSecurityGroupsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDCDBBinlogTime请求参数结构体
+ */
+export interface DescribeDCDBBinlogTimeRequest {
+    /**
+     * 需要回档的实例ID
+     */
+    InstanceId: string;
 }
 /**
  * DescribeShardSpec返回参数结构体
@@ -3852,17 +3874,21 @@ export interface DescribeDBTmpInstancesResponse {
     RequestId?: string;
 }
 /**
- * ModifyDBEncryptAttributes请求参数结构体
+ * DescribeDCDBBinlogTime返回参数结构体
  */
-export interface ModifyDBEncryptAttributesRequest {
+export interface DescribeDCDBBinlogTimeResponse {
     /**
-     * 实例Id，形如：tdsqlshard-ow728lmc。
+     * 开始时间
      */
-    InstanceId: string;
+    StartTime: string;
     /**
-     * 是否启用数据加密，开启后暂不支持关闭。本接口的可选值为：1-开启数据加密。
+     * 结束时间
      */
-    EncryptEnabled: number;
+    EndTime: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 升级实例 -- 新增分片类型

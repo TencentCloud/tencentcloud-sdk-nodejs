@@ -71,6 +71,7 @@ import {
   NatFwInstance,
   ModifyNatAcRuleResponse,
   DescribeAclRuleRequest,
+  NatInstanceInfo,
   CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
@@ -99,12 +100,12 @@ import {
   ModifyNatFwReSelectResponse,
   CreateAlertCenterOmitRequest,
   DescribeVpcAcRuleRequest,
-  DescNatDnatRule,
+  DeleteRemoteAccessDomainResponse,
   VpcFwInstanceInfo,
   DescribeSwitchListsRequest,
   ModifyEdgeIpSwitchResponse,
   AddAclRuleResponse,
-  NatInstanceInfo,
+  DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
   DeleteSecurityGroupRuleResponse,
   CreateNatRuleItem,
@@ -299,6 +300,7 @@ import {
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
+  DescNatDnatRule,
   DescribeBlockIgnoreListResponse,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
@@ -523,6 +525,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyBlockTopResponse) => void
   ): Promise<ModifyBlockTopResponse> {
     return this.request("ModifyBlockTop", req, cb)
+  }
+
+  /**
+   * 删除远程运维域名
+   */
+  async DeleteRemoteAccessDomain(
+    req: DeleteRemoteAccessDomainRequest,
+    cb?: (error: string, rep: DeleteRemoteAccessDomainResponse) => void
+  ): Promise<DeleteRemoteAccessDomainResponse> {
+    return this.request("DeleteRemoteAccessDomain", req, cb)
   }
 
   /**

@@ -1619,6 +1619,10 @@ export interface CreateVpnGatewaySslServerRequest {
    * SAML-DATA，开启SSO时传。
    */
   SamlData?: string
+  /**
+   * 指定绑定的标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -10130,6 +10134,10 @@ export interface CreateVpnGatewaySslClientRequest {
    * SSL-VPN-CLIENT实例Name数字。批量创建时使用。不可和SslVpnClientName同时使用。
    */
   SslVpnClientNames?: Array<string>
+  /**
+   * 指定绑定的标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**

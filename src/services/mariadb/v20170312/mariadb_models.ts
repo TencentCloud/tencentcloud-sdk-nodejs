@@ -1131,17 +1131,46 @@ export interface CloneAccountRequest {
 }
 
 /**
- * DescribeDatabaseObjects请求参数结构体
+ * DescribePrice请求参数结构体
  */
-export interface DescribeDatabaseObjectsRequest {
+export interface DescribePriceRequest {
   /**
-   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   * 欲新购实例的可用区ID。
    */
-  InstanceId: string
+  Zone: string
   /**
-   * 数据库名称，通过 DescribeDatabases 接口获取。
+   * 实例节点个数，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
    */
-  DbName: string
+  NodeCount: number
+  /**
+   * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
+   */
+  Memory: number
+  /**
+   * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+   */
+  Storage: number
+  /**
+   * 欲购买的时长，单位：月。
+   */
+  Period?: number
+  /**
+   * 欲购买的数量，默认查询购买1个实例的价格。
+   */
+  Count?: number
+  /**
+   * 付费类型。postpaid：按量付费   prepaid：预付费
+   */
+  Paymode?: string
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**
@@ -1754,46 +1783,17 @@ export interface DescribeDBInstanceDetailResponse {
 }
 
 /**
- * DescribePrice请求参数结构体
+ * DescribeDatabaseObjects请求参数结构体
  */
-export interface DescribePriceRequest {
+export interface DescribeDatabaseObjectsRequest {
   /**
-   * 欲新购实例的可用区ID。
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
    */
-  Zone: string
+  InstanceId: string
   /**
-   * 实例节点个数，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
+   * 数据库名称，通过 DescribeDatabases 接口获取。
    */
-  NodeCount: number
-  /**
-   * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
-   */
-  Memory: number
-  /**
-   * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
-   */
-  Storage: number
-  /**
-   * 欲购买的时长，单位：月。
-   */
-  Period?: number
-  /**
-   * 欲购买的数量，默认查询购买1个实例的价格。
-   */
-  Count?: number
-  /**
-   * 付费类型。postpaid：按量付费   prepaid：预付费
-   */
-  Paymode?: string
-  /**
-   * 价格金额单位，不传默认单位为分，取值：
-   * pent：分
-   * microPent：微分
-   */
-  AmountUnit?: string
+  DbName: string
 }
 
 /**
@@ -2051,6 +2051,16 @@ export interface GrantAccountPrivilegesRequest {
    * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
    */
   ColName?: string
+}
+
+/**
+ * DescribeBinlogTime请求参数结构体
+ */
+export interface DescribeBinlogTimeRequest {
+  /**
+   * 实例 ID，形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
 }
 
 /**
@@ -2596,6 +2606,24 @@ export interface DeleteAccountRequest {
    * 用户允许的访问 host
    */
   Host: string
+}
+
+/**
+ * DescribeBinlogTime返回参数结构体
+ */
+export interface DescribeBinlogTimeResponse {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

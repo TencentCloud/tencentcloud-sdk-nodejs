@@ -3575,6 +3575,67 @@ export interface DescribeRuleGroupsByPageRequest {
 }
 
 /**
+ * 文件夹属性
+ */
+export interface FolderDsDto {
+  /**
+   * 文件夹id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 文件夹名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 所属项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 父文件夹id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentsFolderId?: string
+  /**
+   * 工作流总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 工作流列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Workflows?: Array<WorkflowCanvasOpsDto>
+  /**
+   * 子文件夹总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalFolders?: number
+  /**
+   * 子文件夹列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Folders?: Array<FolderDsDto>
+  /**
+   * 搜索类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FindType?: string
+}
+
+/**
  * BatchDeleteIntegrationTasks返回参数结构体
  */
 export interface BatchDeleteIntegrationTasksResponse {
@@ -6364,6 +6425,32 @@ false 删除失败
 }
 
 /**
+ * DescribeTablePartitions请求参数结构体
+ */
+export interface DescribeTablePartitionsRequest {
+  /**
+   * 表ID
+   */
+  TableId: string
+  /**
+   * 分页number
+   */
+  PageNumber?: number
+  /**
+   * 分页size
+   */
+  PageSize?: number
+  /**
+   * 过滤器
+   */
+  FilterSet?: Array<Filter>
+  /**
+   * 排序字段
+   */
+  OrderFieldSet?: Array<OrderField>
+}
+
+/**
  * DescribeOpsWorkflows请求参数结构体
  */
 export interface DescribeOpsWorkflowsRequest {
@@ -7532,17 +7619,43 @@ export interface KillScheduleInstancesResponse {
 }
 
 /**
- * UnlockIntegrationTask请求参数结构体
+ * 表的分区数据
  */
-export interface UnlockIntegrationTaskRequest {
+export interface TablePartition {
   /**
-   * 任务id
+   * 分区名称
    */
-  TaskId: string
+  PartitionName?: string
   /**
-   * 项目id
+   * 分区记录数
    */
-  ProjectId: string
+  RecordCount?: number
+  /**
+   * 分区数据存储大小，字节数
+   */
+  StorageSize?: string
+  /**
+   * 分区创建时间
+   */
+  CreateTime?: string
+  /**
+   * 分区修改时间
+   */
+  ModifiedTime?: string
+  /**
+   * 分区数据存储大小，已转为适合的单位
+   */
+  StorageSizeWithUnit?: string
+  /**
+   * 文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumFiles?: number
+  /**
+   * 平均文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AverageFileSizeWithUnit?: string
 }
 
 /**
@@ -16753,6 +16866,20 @@ export interface DescribeInstanceLogFileRequest {
 }
 
 /**
+ * UnlockIntegrationTask请求参数结构体
+ */
+export interface UnlockIntegrationTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 项目id
+   */
+  ProjectId: string
+}
+
+/**
  * 值班人员
  */
 export interface DutyPerson {
@@ -17679,49 +17806,22 @@ export interface CreateIntegrationNodeRequest {
 }
 
 /**
- * DescribeTableSchemaInfo请求参数结构体
+ * DescribeTablePartitions返回参数结构体
  */
-export interface DescribeTableSchemaInfoRequest {
+export interface DescribeTablePartitionsResponse {
   /**
-   * 表名称
+   * 分区详情列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  TablePartitionSet: Array<TablePartition>
   /**
-   * 数据库名称
+   * 总记录数
    */
-  DatabaseName: string
+  TotalCount: number
   /**
-   * 数据源的类型（例如MYSQL、HIVE、KAFKA等）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MsType: string
-  /**
-   * 数据源id
-   */
-  DatasourceId: string
-  /**
-   * 连接类型（示例值rpc）
-   */
-  ConnectionType?: string
-  /**
-   * 元数据Database下的Schema名称
-   */
-  SchemaName?: string
-  /**
-   * 项目空间ID
-   */
-  ProjectId?: string
-  /**
-   * 环境信息
-   */
-  Env?: string
-  /**
-   * 空间模式
-   */
-  Model?: string
-  /**
-   * 开发态的datasourceId
-   */
-  DevDatasourceId?: string
+  RequestId?: string
 }
 
 /**
@@ -19189,64 +19289,49 @@ export interface FindAllFolderRequest {
 }
 
 /**
- * 文件夹属性
+ * DescribeTableSchemaInfo请求参数结构体
  */
-export interface FolderDsDto {
+export interface DescribeTableSchemaInfoRequest {
   /**
-   * 文件夹id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表名称
    */
-  Id?: string
+  Name: string
   /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据库名称
    */
-  CreateTime?: string
+  DatabaseName: string
   /**
-   * 文件夹名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据源的类型（例如MYSQL、HIVE、KAFKA等）
    */
-  Name?: string
+  MsType: string
   /**
-   * 所属项目id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据源id
+   */
+  DatasourceId: string
+  /**
+   * 连接类型（示例值rpc）
+   */
+  ConnectionType?: string
+  /**
+   * 元数据Database下的Schema名称
+   */
+  SchemaName?: string
+  /**
+   * 项目空间ID
    */
   ProjectId?: string
   /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境信息
    */
-  UpdateTime?: string
+  Env?: string
   /**
-   * 父文件夹id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 空间模式
    */
-  ParentsFolderId?: string
+  Model?: string
   /**
-   * 工作流总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开发态的datasourceId
    */
-  Total?: number
-  /**
-   * 工作流列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Workflows?: Array<WorkflowCanvasOpsDto>
-  /**
-   * 子文件夹总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalFolders?: number
-  /**
-   * 子文件夹列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Folders?: Array<FolderDsDto>
-  /**
-   * 搜索类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FindType?: string
+  DevDatasourceId?: string
 }
 
 /**

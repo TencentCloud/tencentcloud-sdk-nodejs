@@ -388,7 +388,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicAttributes", req, cb);
     }
     /**
-     * 删除预付费实例
+     * 删除预付费实例，该接口会对实例执行隔离并删除的动作，执行成功后实例会被直接删除销毁
      */
     async DeleteInstancePre(req, cb) {
         return this.request("DeleteInstancePre", req, cb);

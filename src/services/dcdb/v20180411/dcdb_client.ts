@@ -124,6 +124,7 @@ import {
   DescribeDatabaseObjectsResponse,
   ModifyDBInstanceNameRequest,
   DescribeDcnDetailResponse,
+  ModifyDBEncryptAttributesRequest,
   TableColumn,
   SecurityGroupBound,
   ColumnPrivilege,
@@ -132,6 +133,7 @@ import {
   DescribeDCDBRenewalPriceResponse,
   UpgradeDedicatedDCDBInstanceRequest,
   AssociateSecurityGroupsResponse,
+  DescribeDCDBBinlogTimeRequest,
   DescribeShardSpecResponse,
   DescribeDCDBShardsResponse,
   ZonesInfo,
@@ -174,7 +176,7 @@ import {
   UserTaskInfo,
   DatabaseProcedure,
   DescribeDBTmpInstancesResponse,
-  ModifyDBEncryptAttributesRequest,
+  DescribeDCDBBinlogTimeResponse,
   AddShardConfig,
   ModifyDBSyncModeRequest,
   ModifyAccountConfigResponse,
@@ -567,6 +569,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSyncModeResponse) => void
   ): Promise<DescribeDBSyncModeResponse> {
     return this.request("DescribeDBSyncMode", req, cb)
+  }
+
+  /**
+   * 获取实例回档时可选的时间范围
+   */
+  async DescribeDCDBBinlogTime(
+    req: DescribeDCDBBinlogTimeRequest,
+    cb?: (error: string, rep: DescribeDCDBBinlogTimeResponse) => void
+  ): Promise<DescribeDCDBBinlogTimeResponse> {
+    return this.request("DescribeDCDBBinlogTime", req, cb)
   }
 
   /**

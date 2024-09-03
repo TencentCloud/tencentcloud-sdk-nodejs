@@ -113,6 +113,7 @@ import {
   PodNewParameter,
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
+  ModifyAutoRenewFlagResponse,
   ScaleOutServiceConfGroupsInfo,
   DescribeYarnScheduleHistoryResponse,
   DescribeAutoScaleGroupGlobalConfResponse,
@@ -148,6 +149,7 @@ import {
   UserAndGroup,
   AddMetricScaleStrategyResponse,
   BootstrapAction,
+  ScaleOutClusterRequest,
   DescribeClusterNodesRequest,
   DescribeCvmQuotaRequest,
   DescribeImpalaQueriesRequest,
@@ -189,7 +191,7 @@ import {
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
   MultiZoneSetting,
-  ScaleOutClusterRequest,
+  ModifyAutoRenewFlagRequest,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
   DescribeEmrOverviewMetricsRequest,
@@ -464,6 +466,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUsersForUserManagerResponse) => void
   ): Promise<AddUsersForUserManagerResponse> {
     return this.request("AddUsersForUserManager", req, cb)
+  }
+
+  /**
+     * 前提：预付费集群
+资源级别开启或关闭自动续费
+     */
+  async ModifyAutoRenewFlag(
+    req: ModifyAutoRenewFlagRequest,
+    cb?: (error: string, rep: ModifyAutoRenewFlagResponse) => void
+  ): Promise<ModifyAutoRenewFlagResponse> {
+    return this.request("ModifyAutoRenewFlag", req, cb)
   }
 
   /**

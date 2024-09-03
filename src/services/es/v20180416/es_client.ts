@@ -46,7 +46,7 @@ import {
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
   DeleteServerlessInstanceResponse,
-  VpcInfo,
+  InstallInstanceModelResponse,
   DescribeInstanceOperationsResponse,
   LogstashPipeline,
   UpdateRequestTargetNodeTypesResponse,
@@ -82,6 +82,7 @@ import {
   UpdateLogstashInstanceRequest,
   UpdateRequestTargetNodeTypesRequest,
   DescribeLogstashInstancesResponse,
+  InstallInstanceModelRequest,
   DiDataSinkServerless,
   DeleteInstanceResponse,
   SettingDetail,
@@ -184,6 +185,7 @@ import {
   DescribeServerlessMetricsResponse,
   StopLogstashPipelinesResponse,
   DescribeServerlessInstancesRequest,
+  VpcInfo,
   KibanaNodeInfo,
   StartLogstashPipelinesResponse,
   GetDiagnoseSettingsRequest,
@@ -266,6 +268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServerlessSpacesResponse) => void
   ): Promise<DescribeServerlessSpacesResponse> {
     return this.request("DescribeServerlessSpaces", req, cb)
+  }
+
+  /**
+   * ES集群安装模型接口
+   */
+  async InstallInstanceModel(
+    req: InstallInstanceModelRequest,
+    cb?: (error: string, rep: InstallInstanceModelResponse) => void
+  ): Promise<InstallInstanceModelResponse> {
+    return this.request("InstallInstanceModel", req, cb)
   }
 
   /**

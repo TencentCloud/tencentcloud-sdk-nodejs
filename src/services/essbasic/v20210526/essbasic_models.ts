@@ -1037,7 +1037,8 @@ export interface FlowFileInfo {
    */
   FlowType?: string
   /**
-   * 签署流程回调地址，长度不超过255个字符
+   * 已废弃，请使用【应用号配置】中的回调地址统一接收消息
+   * @deprecated
    */
   CallbackUrl?: string
   /**
@@ -1836,12 +1837,8 @@ export interface ChannelCreateFlowByFilesRequest {
    */
   Deadline?: number
   /**
-   * 执行结果的回调URL，长度不超过255个字符，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性。
-腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。
-回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/partner/callback_data_types" target="_blank">回调通知</a>模块。
-
-注:
-`如果不传递回调地址， 则默认是配置应用号时候使用的回调地址`
+   * 该字段已废弃，请使用【应用号配置】中的回调地址
+   * @deprecated
    */
   CallbackUrl?: string
   /**
@@ -2733,7 +2730,8 @@ export interface AutoSignConfig {
    */
   SealImgCallback?: boolean
   /**
-   * 回调链接，如果渠道已经配置了，可以不传
+   * 该字段已废弃，请使用【应用号配置】中的回调地址统一接口消息
+   * @deprecated
    */
   CallbackUrl?: string
   /**
@@ -4088,10 +4086,8 @@ export interface FlowInfo {
    */
   FormFields?: Array<FormField>
   /**
-   * 合同状态变动结的通知回调URL，该URL仅支持HTTP或HTTPS协议，建议采用HTTPS协议以保证数据传输的安全性，最大长度1000个字符。
-
-腾讯电子签服务器将通过POST方式，application/json格式通知执行结果，请确保外网可以正常访问该URL。
-回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/partner/callback_data_types" target="_blank">回调通知</a>模块
+   * 该字段已废弃，请使用【应用号配置】中的回调地址统一接口消息
+   * @deprecated
    */
   CallbackUrl?: string
   /**
