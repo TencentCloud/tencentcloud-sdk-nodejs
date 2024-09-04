@@ -963,6 +963,44 @@ export interface DescribeCompaniesResponse {
     RequestId?: string;
 }
 /**
+ * 部署记录信息
+ */
+export interface UpdateRecordInfo {
+    /**
+     * 记录ID
+     */
+    Id: number;
+    /**
+     * 新证书ID
+     */
+    CertId: string;
+    /**
+     * 原证书ID
+     */
+    OldCertId: string;
+    /**
+     * 部署资源类型列表
+     */
+    ResourceTypes: Array<string>;
+    /**
+     * 部署地域列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Regions: Array<string>;
+    /**
+     * 部署状态
+     */
+    Status: number;
+    /**
+     * 部署时间
+     */
+    CreateTime: string;
+    /**
+     * 最后一次更新时间
+     */
+    UpdateTime: string;
+}
+/**
  * CheckCertificateChain返回参数结构体
  */
 export interface CheckCertificateChainResponse {
@@ -2288,6 +2326,15 @@ export interface DvAuthDetail {
     DvAuths: Array<DvAuths>;
 }
 /**
+ * CheckCertificateDomainVerification请求参数结构体
+ */
+export interface CheckCertificateDomainVerificationRequest {
+    /**
+     * 证书ID。
+     */
+    CertificateId: string;
+}
+/**
  * cdn实例详情 - 异步关联云资源数据结构
  */
 export interface CdnInstanceList {
@@ -3288,6 +3335,20 @@ export interface DescribeHostDeployRecordResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployRecordList?: Array<DeployRecordInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CheckCertificateDomainVerification返回参数结构体
+ */
+export interface CheckCertificateDomainVerificationResponse {
+    /**
+     * 域名验证结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VerificationResults: Array<DomainValidationResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4447,42 +4508,44 @@ export interface Error {
     Message?: string;
 }
 /**
- * 部署记录信息
+ * 域名验证结果
  */
-export interface UpdateRecordInfo {
+export interface DomainValidationResult {
     /**
-     * 记录ID
+     * 域名。
      */
-    Id: number;
+    Domain: string;
     /**
-     * 新证书ID
-     */
-    CertId: string;
-    /**
-     * 原证书ID
-     */
-    OldCertId: string;
-    /**
-     * 部署资源类型列表
-     */
-    ResourceTypes: Array<string>;
-    /**
-     * 部署地域列表
+     * 验证类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Regions: Array<string>;
+    VerifyType: string;
     /**
-     * 部署状态
+     * 本地检查结果。
      */
-    Status: number;
+    LocalCheck: number;
     /**
-     * 部署时间
+     * CA检查结果。
      */
-    CreateTime: string;
+    CaCheck: number;
     /**
-     * 最后一次更新时间
+     * 检查失败原因。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    LocalCheckFailReason: string;
+    /**
+     * 检查到的值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckValue: Array<string>;
+    /**
+     * 是否频繁请求。
+     */
+    Frequently: boolean;
+    /**
+     * 是否已经签发。
+     */
+    Issued: boolean;
 }
 /**
  * DescribeHostApiGatewayInstanceList返回参数结构体

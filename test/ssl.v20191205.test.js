@@ -48,6 +48,16 @@ it("ssl.v20191205.DescribeHostCdnInstanceList", async function () {
     }
 })
 
+it("ssl.v20191205.CheckCertificateDomainVerification", async function () {
+    try {
+       const data = await client.CheckCertificateDomainVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeHostTkeInstanceList", async function () {
     try {
        const data = await client.DescribeHostTkeInstanceList({})

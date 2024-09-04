@@ -27,6 +27,7 @@ import {
   ModifyUserPrivilegesV3Response,
   ModifyUserPrivilegesV3Request,
   DestroyInstanceRequest,
+  ScheduleInfo,
   BindUser,
   CancelBackupJobRequest,
   ModifyWorkloadGroupRequest,

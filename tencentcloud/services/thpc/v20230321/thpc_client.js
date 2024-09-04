@@ -54,10 +54,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
-     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
+     * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
-    async AddClusterStorageOption(req, cb) {
-        return this.request("AddClusterStorageOption", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
@@ -78,6 +78,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNodes(req, cb) {
         return this.request("DescribeNodes", req, cb);
+    }
+    /**
+     * 本接口 (CreateWorkspaces) 用于创建工作空间。
+     */
+    async CreateWorkspaces(req, cb) {
+        return this.request("CreateWorkspaces", req, cb);
     }
     /**
      * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
@@ -122,10 +128,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachNodes", req, cb);
     }
     /**
-     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async AddClusterStorageOption(req, cb) {
+        return this.request("AddClusterStorageOption", req, cb);
     }
     /**
      * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。

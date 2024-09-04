@@ -58,9 +58,9 @@ it("thpc.v20230321.CreateCluster", async function () {
     }
 })
 
-it("thpc.v20230321.AddClusterStorageOption", async function () {
+it("thpc.v20230321.DeleteCluster", async function () {
     try {
-       const data = await client.AddClusterStorageOption({})
+       const data = await client.DeleteCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("thpc.v20230321.AddQueue", async function () {
 it("thpc.v20230321.DescribeNodes", async function () {
     try {
        const data = await client.DescribeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("thpc.v20230321.CreateWorkspaces", async function () {
+    try {
+       const data = await client.CreateWorkspaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +178,9 @@ it("thpc.v20230321.DetachNodes", async function () {
     }
 })
 
-it("thpc.v20230321.DeleteCluster", async function () {
+it("thpc.v20230321.AddClusterStorageOption", async function () {
     try {
-       const data = await client.DeleteCluster({})
+       const data = await client.AddClusterStorageOption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAutoScalingConfigurationResponse,
+  SpaceChargePrepaid,
   DescribeClusterStorageOptionRequest,
   ClusterOverview,
   QueueOverview,
@@ -26,6 +27,7 @@ import {
   SetAutoScalingConfigurationRequest,
   DetachNodesRequest,
   NodeOverview,
+  SpaceDataDisk,
   DescribeNodesRequest,
   DeleteNodesResponse,
   AddClusterStorageOptionResponse,
@@ -35,10 +37,11 @@ import {
   NodeActivity,
   Placement,
   AddQueueRequest,
-  InternetAccessible,
+  CreateWorkspacesResponse,
   AttachNodesResponse,
   ClusterActivity,
   CreateClusterResponse,
+  SpaceVirtualPrivateCloud,
   RunSecurityServiceEnabled,
   DescribeQueuesRequest,
   SetAutoScalingConfigurationResponse,
@@ -48,6 +51,7 @@ import {
   CFSOption,
   GooseFSOptionOverview,
   EnhancedService,
+  CreateWorkspacesRequest,
   InstanceChargePrepaid,
   LoginNodeOverview,
   LoginNode,
@@ -55,6 +59,7 @@ import {
   NodeScript,
   ModifyInitNodeScriptsResponse,
   ManagerNodeOverview,
+  SpaceSystemDisk,
   ManagerNode,
   DeleteClusterRequest,
   ComputeNodeOverview,
@@ -65,9 +70,12 @@ import {
   RunAutomationServiceEnabled,
   DescribeClusterActivitiesRequest,
   QueueConfig,
+  VirtualPrivateCloud,
   DeleteQueueRequest,
   Filter,
+  SpaceInternetAccessible,
   AddNodesRequest,
+  InternetAccessible,
   CFSOptionOverview,
   DeleteClusterStorageOptionRequest,
   AddClusterStorageOptionRequest,
@@ -75,7 +83,7 @@ import {
   RunMonitorServiceEnabled,
   QueueConfigOverview,
   DescribeQueuesResponse,
-  VirtualPrivateCloud,
+  SpacePlacement,
   ExpansionNodeConfigOverview,
   ModifyInitNodeScriptsRequest,
   GooseFSxOptionOverview,
@@ -92,6 +100,7 @@ import {
   DescribeInitNodeScriptsResponse,
   DataDisk,
   DeleteQueueResponse,
+  TagSpecification,
   AddNodesResponse,
 } from "./thpc_models"
 
@@ -147,13 +156,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
+   * 本接口（DeleteCluster）用于删除一个指定的集群。
    */
-  async AddClusterStorageOption(
-    req: AddClusterStorageOptionRequest,
-    cb?: (error: string, rep: AddClusterStorageOptionResponse) => void
-  ): Promise<AddClusterStorageOptionResponse> {
-    return this.request("AddClusterStorageOption", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
@@ -186,6 +195,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNodesResponse) => void
   ): Promise<DescribeNodesResponse> {
     return this.request("DescribeNodes", req, cb)
+  }
+
+  /**
+   * 本接口 (CreateWorkspaces) 用于创建工作空间。
+   */
+  async CreateWorkspaces(
+    req: CreateWorkspacesRequest,
+    cb?: (error: string, rep: CreateWorkspacesResponse) => void
+  ): Promise<CreateWorkspacesResponse> {
+    return this.request("CreateWorkspaces", req, cb)
   }
 
   /**
@@ -259,13 +278,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteCluster）用于删除一个指定的集群。
+   * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async AddClusterStorageOption(
+    req: AddClusterStorageOptionRequest,
+    cb?: (error: string, rep: AddClusterStorageOptionResponse) => void
+  ): Promise<AddClusterStorageOptionResponse> {
+    return this.request("AddClusterStorageOption", req, cb)
   }
 
   /**

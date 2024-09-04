@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DetachNodesRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DescribeInitNodeScriptsRequest, DeleteClusterResponse, AddQueueRequest, AttachNodesResponse, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, DescribeQueuesResponse, ModifyInitNodeScriptsRequest, DetachNodesResponse, DescribeAutoScalingConfigurationRequest, AttachNodesRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DescribeInitNodeScriptsResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
+import { DescribeAutoScalingConfigurationResponse, DescribeClusterStorageOptionRequest, DescribeClustersRequest, SetAutoScalingConfigurationRequest, DetachNodesRequest, DescribeNodesRequest, DeleteNodesResponse, AddClusterStorageOptionResponse, DescribeInitNodeScriptsRequest, DeleteClusterResponse, AddQueueRequest, CreateWorkspacesResponse, AttachNodesResponse, CreateClusterResponse, DescribeQueuesRequest, SetAutoScalingConfigurationResponse, CreateClusterRequest, AddQueueResponse, DescribeClusterStorageOptionResponse, CreateWorkspacesRequest, ModifyInitNodeScriptsResponse, DeleteClusterRequest, DescribeClusterActivitiesRequest, DeleteQueueRequest, AddNodesRequest, DeleteClusterStorageOptionRequest, AddClusterStorageOptionRequest, DescribeQueuesResponse, ModifyInitNodeScriptsRequest, DetachNodesResponse, DescribeAutoScalingConfigurationRequest, AttachNodesRequest, DeleteNodesRequest, DescribeClustersResponse, DeleteClusterStorageOptionResponse, DescribeNodesResponse, DescribeClusterActivitiesResponse, DescribeInitNodeScriptsResponse, DeleteQueueResponse, AddNodesResponse } from "./thpc_models";
 /**
  * thpc client
  * @class
@@ -26,9 +26,9 @@ export declare class Client extends AbstractClient {
      */
     CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
     /**
-     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
+     * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
-    AddClusterStorageOption(req: AddClusterStorageOptionRequest, cb?: (error: string, rep: AddClusterStorageOptionResponse) => void): Promise<AddClusterStorageOptionResponse>;
+    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
      */
@@ -43,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
      */
     DescribeNodes(req: DescribeNodesRequest, cb?: (error: string, rep: DescribeNodesResponse) => void): Promise<DescribeNodesResponse>;
+    /**
+     * 本接口 (CreateWorkspaces) 用于创建工作空间。
+     */
+    CreateWorkspaces(req: CreateWorkspacesRequest, cb?: (error: string, rep: CreateWorkspacesResponse) => void): Promise<CreateWorkspacesResponse>;
     /**
      * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
      */
@@ -72,9 +76,9 @@ export declare class Client extends AbstractClient {
      */
     DetachNodes(req: DetachNodesRequest, cb?: (error: string, rep: DetachNodesResponse) => void): Promise<DetachNodesResponse>;
     /**
-     * 本接口（DeleteCluster）用于删除一个指定的集群。
+     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
      */
-    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
+    AddClusterStorageOption(req: AddClusterStorageOptionRequest, cb?: (error: string, rep: AddClusterStorageOptionResponse) => void): Promise<AddClusterStorageOptionResponse>;
     /**
      * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
      */

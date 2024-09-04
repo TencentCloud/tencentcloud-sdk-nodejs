@@ -24,6 +24,30 @@ export interface DescribeAutoScalingConfigurationResponse {
     RequestId?: string;
 }
 /**
+ * 描述了工作空间的计费模式
+ */
+export interface SpaceChargePrepaid {
+    /**
+     * 购买实例的时长，单位：月。取值范围：1, 2, 3, 12, 24, 36。默认取值为1。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Period?: number;
+    /**
+     * 自动续费标识。取值范围：
+  
+  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费
+  
+  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费
+  
+  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
+  
+  
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: string;
+}
+/**
  * DescribeClusterStorageOption请求参数结构体
  */
 export interface DescribeClusterStorageOptionRequest {
@@ -213,6 +237,100 @@ export interface NodeOverview {
     NodeId?: string;
 }
 /**
+ * 工作空间数据盘配置
+ */
+export interface SpaceDataDisk {
+    /**
+     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br />
+  <li>
+    LOCAL_BASIC：本地硬盘<br />
+    <li>
+      LOCAL_SSD：本地SSD硬盘<br />
+      <li>
+        LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br />
+        <li>
+          LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br />
+          <li>
+            CLOUD_BASIC：普通云硬盘<br />
+            <li>
+              CLOUD_PREMIUM：高性能云硬盘<br />
+              <li>
+                CLOUD_SSD：SSD云硬盘<br />
+                <li>
+                  CLOUD_HSSD：增强型SSD云硬盘<br />
+                  <li>
+                    CLOUD_TSSD：极速型SSD云硬盘<br />
+                    <li>
+                      CLOUD_BSSD：通用型SSD云硬盘<br /><br />默认取值：LOCAL_BASIC。<br /><br />该参数对`ResizeInstanceDisk`接口无效。
+                    </li>
+                  </li>
+                </li>
+              </li>
+            </li>
+          </li>
+        </li>
+      </li>
+    </li>
+  </li>
+     */
+    DiskType?: string;
+    /**
+     * 数据盘
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskId?: string;
+    /**
+     * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+     */
+    DiskSize?: number;
+    /**
+     * 数据盘是否随子机销毁。取值范围：
+  <li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
+  <li>
+    FALSE：子机销毁时，保留数据盘<br />
+    默认取值：TRUE<br />
+    该参数目前仅用于 `RunInstances` 接口。
+  </li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeleteWithInstance?: boolean;
+    /**
+     * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SnapshotId?: string;
+    /**
+     * 数据盘是加密。取值范围：
+  <li>true：加密</li>
+  <li>
+    false：不加密<br />
+    默认取值：false<br />
+    该参数目前仅用于 `RunInstances` 接口。
+  </li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Encrypt?: boolean;
+    /**
+     * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
+  
+  该参数目前仅用于 `CreateWorkspaces` 接口。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KmsKeyId?: string;
+    /**
+     * 云硬盘性能，单位：MB/s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ThroughputPerformance?: number;
+    /**
+     * 突发性能
+  
+  注：内测中。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BurstPerformance?: boolean;
+}
+/**
  * DescribeNodes请求参数结构体
  */
 export interface DescribeNodesRequest {
@@ -364,24 +482,17 @@ export interface AddQueueRequest {
     QueueName: string;
 }
 /**
- * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ * CreateWorkspaces返回参数结构体
  */
-export interface InternetAccessible {
+export interface CreateWorkspacesResponse {
     /**
-     * 网络计费类型。取值范围：
-  BANDWIDTH_PREPAID：预付费按带宽结算
-  TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
-  BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
-  BANDWIDTH_PACKAGE：带宽包用户
-  默认取值：非带宽包用户默认与子机付费类型保持一致。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 工作空间ID
      */
-    InternetChargeType?: string;
+    SpaceIdSet?: Array<string>;
     /**
-     * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    InternetMaxBandwidthOut?: number;
+    RequestId?: string;
 }
 /**
  * AttachNodes返回参数结构体
@@ -459,6 +570,31 @@ export interface CreateClusterResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 描述了工作空间VPC相关信息，包括子网，IP信息等
+ */
+export interface SpaceVirtualPrivateCloud {
+    /**
+     * 私有网络ID
+     */
+    VpcId: string;
+    /**
+     * 私有网络子网ID
+     */
+    SubnetId: string;
+    /**
+     * 是否用作公网网关
+     */
+    AsVpcGateway?: boolean;
+    /**
+     * 私有网络子网 IP 数组
+     */
+    PrivateIpAddresses?: Array<string>;
+    /**
+     * 为弹性网卡指定随机生成
+     */
+    Ipv6AddressCount?: number;
 }
 /**
  * 描述了 “云安全” 服务相关的信息。
@@ -688,6 +824,99 @@ export interface EnhancedService {
     AutomationService?: RunAutomationServiceEnabled;
 }
 /**
+ * CreateWorkspaces请求参数结构体
+ */
+export interface CreateWorkspacesRequest {
+    /**
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
+    ClientToken?: string;
+    /**
+     * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。 <b>注：如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递Placement和LaunchTemplate，则默认覆盖LaunchTemplate中对应的Placement的值。</b>
+     */
+    Placement?: SpacePlacement;
+    /**
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+     */
+    SpaceChargePrepaid?: SpaceChargePrepaid;
+    /**
+     * 工作空间计费类型
+     */
+    SpaceChargeType?: string;
+    /**
+     * 工作空间规格
+     */
+    SpaceType?: string;
+    /**
+     * 镜像ID
+     */
+    ImageId?: string;
+    /**
+     * 工作空间系统盘信息
+     */
+    SystemDisk?: SpaceSystemDisk;
+    /**
+     * 工作空间数据盘信息
+     */
+    DataDisks?: Array<SpaceDataDisk>;
+    /**
+     * 私有网络相关信息
+     */
+    VirtualPrivateCloud?: SpaceVirtualPrivateCloud;
+    /**
+     * 公网带宽相关信息设置
+     */
+    InternetAccessible?: SpaceInternetAccessible;
+    /**
+     * 购买工作空间数量
+     */
+    SpaceCount?: number;
+    /**
+     * 工作空间显示名称
+     */
+    SpaceName?: string;
+    /**
+     * 工作空间登陆设置
+     */
+    LoginSettings?: LoginSettings;
+    /**
+     * 工作空间所属安全组
+     */
+    SecurityGroupIds?: Array<string>;
+    /**
+     * 增强服务
+     */
+    EnhancedService?: EnhancedService;
+    /**
+     * 是否只预检此次请求
+     */
+    DryRun?: boolean;
+    /**
+     * 提供给工作空间使用的用户数据
+     */
+    UserData?: string;
+    /**
+     * 置放群组id
+     */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+     * 标签描述列表
+     */
+    TagSpecification?: Array<TagSpecification>;
+    /**
+     * 高性能计算集群ID
+     */
+    HpcClusterId?: string;
+    /**
+     * CAM角色名称
+     */
+    CamRoleName?: string;
+    /**
+     * 实例主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。</li><br><li>Windows 实例：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。</li><br><li>其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。</li><br><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server{R:3}`，购买1台时，实例主机名为`server3`；购买2台时，实例主机名分别为`server3`，`server4`。支持指定多个模式串`{R:x}`。</li><br><li>购买多台实例，如果不指定模式串，则在实例主机名添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server`，购买2台时，实例主机名分别为`server1`，`server2`。</li>
+     */
+    HostName?: string;
+}
+/**
  * 描述了实例的计费模式
  */
 export interface InstanceChargePrepaid {
@@ -807,6 +1036,21 @@ export interface ManagerNodeOverview {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId: string;
+}
+/**
+ * 工作空间系统盘配置
+ */
+export interface SpaceSystemDisk {
+    /**
+     * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<ul><li>LOCAL_BASIC：本地硬盘</li><li>LOCAL_SSD：本地SSD硬盘</li><li>CLOUD_BASIC：普通云硬盘</li><li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li><li>CLOUD_BSSD：通用性SSD云硬盘</li><li>CLOUD_HSSD：增强型SSD云硬盘</li><li>CLOUD_TSSD：极速型SSD云硬盘</li></ul>默认取值：当前有库存的硬盘类型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskType?: string;
+    /**
+     * 系统盘大小，单位：GB。默认值为 50
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskSize?: number;
 }
 /**
  * 管控节点信息
@@ -1039,6 +1283,21 @@ export interface QueueConfig {
     EnhancedService?: EnhancedService;
 }
 /**
+ * 描述了VPC相关信息
+ */
+export interface VirtualPrivateCloud {
+    /**
+     * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId: string;
+    /**
+     * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId: string;
+}
+/**
  * DeleteQueue请求参数结构体
  */
 export interface DeleteQueueRequest {
@@ -1065,6 +1324,31 @@ export interface Filter {
      * 字段的过滤值。
      */
     Values: Array<string>;
+}
+/**
+ * 描述了工作空间的公网可访问性，声明了工作空间的公网使用计费模式，最大带宽等
+ */
+export interface SpaceInternetAccessible {
+    /**
+     * 网络计费类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetChargeType?: string;
+    /**
+     * 公网出带宽上限，默认为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 是否分配公网IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIpAssigned?: boolean;
+    /**
+     * 带宽包ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BandwidthPackageId?: string;
 }
 /**
  * AddNodes请求参数结构体
@@ -1161,6 +1445,26 @@ export interface AddNodesRequest {
      * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
      */
     ResourceType?: string;
+}
+/**
+ * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ */
+export interface InternetAccessible {
+    /**
+     * 网络计费类型。取值范围：
+  BANDWIDTH_PREPAID：预付费按带宽结算
+  TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+  BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
+  BANDWIDTH_PACKAGE：带宽包用户
+  默认取值：非带宽包用户默认与子机付费类型保持一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetChargeType?: string;
+    /**
+     * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetMaxBandwidthOut?: number;
 }
 /**
  * CFS存储选项概览信息。
@@ -1318,19 +1622,19 @@ export interface DescribeQueuesResponse {
     RequestId?: string;
 }
 /**
- * 描述了VPC相关信息
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目
  */
-export interface VirtualPrivateCloud {
+export interface SpacePlacement {
     /**
-     * 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。
+     * 可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    Zone: string;
     /**
-     * 私有网络子网ID，形如`subnet-xxx`。有效的私有网络子网ID可通过登录[控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口  [DescribeSubnets](/document/api/215/15784) ，从接口返回中的`unSubnetId`字段获取。若在创建子机时SubnetId与VpcId同时传入`DEFAULT`，则强制使用默认vpc网络。
+     * 项目，默认是0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    ProjectId?: number;
 }
 /**
  * 扩容节点配置信息概览。
@@ -1624,6 +1928,21 @@ export interface DeleteQueueResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 创建资源工作空间时同时绑定的标签对说明
+ */
+export interface TagSpecification {
+    /**
+     * 标签绑定的资源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType: string;
+    /**
+     * 标签对列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tag>;
 }
 /**
  * AddNodes返回参数结构体

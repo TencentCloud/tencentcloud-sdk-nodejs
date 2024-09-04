@@ -180,6 +180,10 @@ export interface DeleteJobsRequest {
    * 工作空间Id
    */
   WorkSpaceId?: string
+  /**
+   * 作业名称列表
+   */
+  JobNames?: Array<string>
 }
 
 /**

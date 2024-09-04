@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostCdnInstanceList", req, cb);
     }
     /**
+     * 检查证书域名验证
+     */
+    async CheckCertificateDomainVerification(req, cb) {
+        return this.request("CheckCertificateDomainVerification", req, cb);
+    }
+    /**
      * 查询证书tke云资源部署实例列表
      */
     async DescribeHostTkeInstanceList(req, cb) {

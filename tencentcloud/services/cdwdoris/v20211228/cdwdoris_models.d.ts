@@ -164,6 +164,54 @@ export interface DestroyInstanceRequest {
     InstanceId: string;
 }
 /**
+ * 调度信息
+ */
+export interface ScheduleInfo {
+    /**
+     * 生效时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EffectivePeriod?: string;
+    /**
+     * 调度类型：
+  Day-天
+  Week-周
+  Month-月
+  Once-单次
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleType?: string;
+    /**
+     * 执行调度的日期。调度类型为周和月时以英文逗号分隔；
+  调度类型为单次时，该值是个日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleData?: string;
+    /**
+     * 执行时间：时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleHour?: number;
+    /**
+     * 执行时间：分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleMin?: number;
+    /**
+     * 备份粒度：
+  All-全量
+  Database-按库
+  Table-按表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupScope?: string;
+    /**
+     * 备份库：如果是按库备份，则需要该字段，库之间用英文逗号分割
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupDatabase?: string;
+}
+/**
  * 资源组绑定的用户信息，需要username和host信息进行授权
  */
 export interface BindUser {
@@ -1533,6 +1581,14 @@ export interface InstanceConfigItem {
  */
 export interface CreateBackUpScheduleRequest {
     /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 操作类型 create(创建) update(编辑修改)
+     */
+    OperationType: string;
+    /**
      * 编辑时需要传
      */
     ScheduleId?: number;
@@ -1574,6 +1630,25 @@ export interface CreateBackUpScheduleRequest {
      * cos认证的信息
      */
     CosSourceInfo?: CosSourceInfo;
+    /**
+     * 调度任务名
+     */
+    ScheduleName?: string;
+    /**
+     * 调度信息
+     */
+    ScheduleInfo?: ScheduleInfo;
+    /**
+     * 更新任务状态：
+  3-暂停,
+  2-删除,
+  1-启动
+     */
+    UpdateStatus?: number;
+    /**
+     * 当前任务的cos桶信息
+     */
+    CosBucket?: string;
 }
 /**
  * ActionAlterUser返回参数结构体
