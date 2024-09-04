@@ -45,13 +45,13 @@ export interface UpgradeSmallVersionRequest {
  */
 export interface ModifyInstanceParamsResponse {
     /**
-     * 说明修改参数配置是否成功。<br><li>true：指修改成功；<br><li>false：指修改失败。<br>
+     * 说明修改参数配置是否成功。<br><li>true：指修改成功；</li><li>false：指修改失败。</li>
      */
-    Changed: boolean;
+    Changed?: boolean;
     /**
      * 任务ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -463,7 +463,7 @@ export interface ModifyConnectionConfigResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -986,7 +986,7 @@ export interface ResetPasswordResponse {
     /**
      * 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值）
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2536,11 +2536,11 @@ export interface AllocateWanAddressResponse {
     /**
      * 异步流程ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 开通外网的状态
      */
-    WanStatus: string;
+    WanStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3641,11 +3641,11 @@ export interface ReleaseWanAddressResponse {
     /**
      * 异步流程ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 关闭外网的状态
      */
-    WanStatus: string;
+    WanStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3807,9 +3807,9 @@ export interface SwitchProxyResponse {
  */
 export interface StartupInstanceResponse {
     /**
-     * 任务id
+     * 该字段已废弃，请通过查询实例接口获取到的状态来判断实例是否已解隔离
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4921,7 +4921,7 @@ export interface ModifyMaintenanceWindowResponse {
     /**
      * 修改状态：success 或者 failed
      */
-    Status: string;
+    Status?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4977,7 +4977,7 @@ export interface DestroyPrepaidInstanceResponse {
     /**
      * 订单Id
      */
-    DealId: string;
+    DealId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

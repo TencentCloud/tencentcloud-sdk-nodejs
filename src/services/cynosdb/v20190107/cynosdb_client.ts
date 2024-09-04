@@ -348,6 +348,7 @@ import {
   ModifyClusterStorageResponse,
   ModifyInstanceUpgradeLimitDaysRequest,
   CloseClusterPasswordComplexityRequest,
+  DescribeIsolatedInstancesRequest,
   ModifyAccountParamsRequest,
   AuditLogFile,
   DescribeAuditRuleTemplatesResponse,
@@ -403,6 +404,7 @@ import {
   DescribeAuditLogFilesRequest,
   SaleRegion,
   DeleteAuditLogFileRequest,
+  DescribeIsolatedInstancesResponse,
   GrantAccountPrivilegesResponse,
   ClusterParamModifyLog,
   ModifyBinlogConfigResponse,
@@ -784,13 +786,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁集群
+   * 本接口(DescribeIsolatedInstances)用于查询回收站实例列表。
    */
-  async OfflineCluster(
-    req: OfflineClusterRequest,
-    cb?: (error: string, rep: OfflineClusterResponse) => void
-  ): Promise<OfflineClusterResponse> {
-    return this.request("OfflineCluster", req, cb)
+  async DescribeIsolatedInstances(
+    req: DescribeIsolatedInstancesRequest,
+    cb?: (error: string, rep: DescribeIsolatedInstancesResponse) => void
+  ): Promise<DescribeIsolatedInstancesResponse> {
+    return this.request("DescribeIsolatedInstances", req, cb)
   }
 
   /**
@@ -1111,6 +1113,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchClusterZoneResponse) => void
   ): Promise<SwitchClusterZoneResponse> {
     return this.request("SwitchClusterZone", req, cb)
+  }
+
+  /**
+   * 本接口(SearchClusterDatabases)搜索集群数据库列表
+   */
+  async SearchClusterDatabases(
+    req: SearchClusterDatabasesRequest,
+    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
+  ): Promise<SearchClusterDatabasesResponse> {
+    return this.request("SearchClusterDatabases", req, cb)
   }
 
   /**
@@ -1484,13 +1496,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterDatabases)搜索集群数据库列表
+   * 销毁集群
    */
-  async SearchClusterDatabases(
-    req: SearchClusterDatabasesRequest,
-    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
-  ): Promise<SearchClusterDatabasesResponse> {
-    return this.request("SearchClusterDatabases", req, cb)
+  async OfflineCluster(
+    req: OfflineClusterRequest,
+    cb?: (error: string, rep: OfflineClusterResponse) => void
+  ): Promise<OfflineClusterResponse> {
+    return this.request("OfflineCluster", req, cb)
   }
 
   /**

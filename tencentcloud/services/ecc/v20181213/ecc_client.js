@@ -35,8 +35,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EHOCR", req, cb);
     }
     /**
-     * 接口请求域名： ecc.tencentcloudapi.com
-纯文本英语作文批改
+     * 纯文本英语作文批改
      */
     async ECC(req, cb) {
         return this.request("ECC", req, cb);

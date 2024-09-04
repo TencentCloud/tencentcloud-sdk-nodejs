@@ -13,8 +13,7 @@ export declare class Client extends AbstractClient {
      */
     EHOCR(req: EHOCRRequest, cb?: (error: string, rep: EHOCRResponse) => void): Promise<EHOCRResponse>;
     /**
-     * 接口请求域名： ecc.tencentcloudapi.com
-纯文本英语作文批改
+     * 纯文本英语作文批改
      */
     ECC(req: ECCRequest, cb?: (error: string, rep: ECCResponse) => void): Promise<ECCResponse>;
     /**

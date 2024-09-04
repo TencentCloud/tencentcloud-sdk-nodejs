@@ -58,9 +58,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口请求域名： ecc.tencentcloudapi.com 
-纯文本英语作文批改
-     */
+   * 纯文本英语作文批改
+   */
   async ECC(req: ECCRequest, cb?: (error: string, rep: ECCResponse) => void): Promise<ECCResponse> {
     return this.request("ECC", req, cb)
   }

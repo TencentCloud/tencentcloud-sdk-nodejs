@@ -8559,6 +8559,39 @@ export interface CloseClusterPasswordComplexityRequest {
     ClusterIds: Array<string>;
 }
 /**
+ * DescribeIsolatedInstances请求参数结构体
+ */
+export interface DescribeIsolatedInstancesRequest {
+    /**
+     * 返回数量，默认为 20，最大值为 100
+     */
+    Limit?: number;
+    /**
+     * 记录偏移量，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 排序字段，取值范围：
+  <li> CREATETIME：创建时间</li>
+  <li> PERIODENDTIME：过期时间</li>
+     */
+    OrderBy?: string;
+    /**
+     * 排序类型，取值范围：
+  <li> ASC：升序排序 </li>
+  <li> DESC：降序排序 </li>
+     */
+    OrderByType?: string;
+    /**
+     * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+     */
+    Filters?: Array<QueryFilter>;
+    /**
+     * 引擎类型：目前支持“MYSQL”， “POSTGRESQL”
+     */
+    DbType?: string;
+}
+/**
  * ModifyAccountParams请求参数结构体
  */
 export interface ModifyAccountParamsRequest {
@@ -9929,6 +9962,23 @@ export interface DeleteAuditLogFileRequest {
      * 审计日志文件名称。
      */
     FileName: string;
+}
+/**
+ * DescribeIsolatedInstances返回参数结构体
+ */
+export interface DescribeIsolatedInstancesResponse {
+    /**
+     * 实例个数
+     */
+    TotalCount?: number;
+    /**
+     * 实例列表
+     */
+    InstanceSet?: Array<CynosdbInstance>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * GrantAccountPrivileges返回参数结构体

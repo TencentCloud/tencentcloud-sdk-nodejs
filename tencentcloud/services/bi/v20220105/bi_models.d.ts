@@ -589,6 +589,10 @@ export interface ModifyUserRoleRequest {
      * 企业微信应用用户id
      */
     AppUserId?: string;
+    /**
+     * 是否开启手机验证码登录（0 关闭，1 开启）
+     */
+    LoginSecurityStatus?: number;
 }
 /**
  * 数据源详情列表

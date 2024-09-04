@@ -6838,6 +6838,19 @@ export interface DescribeDSPARDBDataAssetDetailRequest {
      */
     ComplianceId: number;
     /**
+     * 过滤数组。支持的Name：
+  DataSourceID 数据源ID
+  DbName 数据库名称
+  CategoryID 敏感数据分类ID
+  RuleID 规则ID
+  LevelID 敏感分级ID
+  ResourceRegion 资源所在地域
+  SensitiveField 过滤敏感字段，可选值为1，或者无此SensitiveField字段
+  DataSourceType 数据源类型，不填默认过滤非自建的所有关系型数据源类型，填selfbuilt-db只过滤自建类型
+  注意：每个name默认支持最多5个values。
+     */
+    Filters?: Array<Filter>;
+    /**
      * 偏移量，默认为0。
      */
     Offset?: number;

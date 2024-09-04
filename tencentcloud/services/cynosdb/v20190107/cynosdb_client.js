@@ -238,10 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGrps", req, cb);
     }
     /**
-     * 销毁集群
+     * 本接口(DescribeIsolatedInstances)用于查询回收站实例列表。
      */
-    async OfflineCluster(req, cb) {
-        return this.request("OfflineCluster", req, cb);
+    async DescribeIsolatedInstances(req, cb) {
+        return this.request("DescribeIsolatedInstances", req, cb);
     }
     /**
      * 查询实例错误日志列表
@@ -434,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SwitchClusterZone(req, cb) {
         return this.request("SwitchClusterZone", req, cb);
+    }
+    /**
+     * 本接口(SearchClusterDatabases)搜索集群数据库列表
+     */
+    async SearchClusterDatabases(req, cb) {
+        return this.request("SearchClusterDatabases", req, cb);
     }
     /**
      * 本接口（AddInstances）用于集群添加实例
@@ -658,10 +664,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReloadBalanceProxyNode", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群数据库列表
+     * 销毁集群
      */
-    async SearchClusterDatabases(req, cb) {
-        return this.request("SearchClusterDatabases", req, cb);
+    async OfflineCluster(req, cb) {
+        return this.request("OfflineCluster", req, cb);
     }
     /**
      * 修改审计规则模板

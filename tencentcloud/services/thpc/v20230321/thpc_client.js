@@ -28,22 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("thpc.tencentcloudapi.com", "2023-03-21", clientConfig);
     }
     /**
-     * 本接口 (DescribeClusterStorageOption) 用于查询集群存储选项信息。
-     */
-    async DescribeClusterStorageOption(req, cb) {
-        return this.request("DescribeClusterStorageOption", req, cb);
-    }
-    /**
      * 本接口(DeleteNodes)用于删除指定集群中一个或者多个计算节点或者登录节点。
      */
     async DeleteNodes(req, cb) {
         return this.request("DeleteNodes", req, cb);
     }
     /**
-     * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
+     * 本接口 (TerminateWorkspaces) 用于主动退还工作空间。
      */
-    async ModifyInitNodeScripts(req, cb) {
-        return this.request("ModifyInitNodeScripts", req, cb);
+    async TerminateWorkspaces(req, cb) {
+        return this.request("TerminateWorkspaces", req, cb);
+    }
+    /**
+     * 本接口 (ModifyWorkspacesAttribute) 用于修改工作空间的属性（目前只支持修改工作空间的名称）。
+     */
+    async ModifyWorkspacesAttribute(req, cb) {
+        return this.request("ModifyWorkspacesAttribute", req, cb);
     }
     /**
      * 本接口 (CreateCluster) 用于创建并启动集群。
@@ -54,10 +54,58 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 本接口 (CreateWorkspaces) 用于创建工作空间。
+     */
+    async CreateWorkspaces(req, cb) {
+        return this.request("CreateWorkspaces", req, cb);
+    }
+    /**
+     * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
+     */
+    async DescribeQueues(req, cb) {
+        return this.request("DescribeQueues", req, cb);
+    }
+    /**
+     * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
+     */
+    async AddNodes(req, cb) {
+        return this.request("AddNodes", req, cb);
+    }
+    /**
+     * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
+     */
+    async DetachNodes(req, cb) {
+        return this.request("DetachNodes", req, cb);
+    }
+    /**
      * 本接口（DeleteCluster）用于删除一个指定的集群。
      */
     async DeleteCluster(req, cb) {
         return this.request("DeleteCluster", req, cb);
+    }
+    /**
+     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
+     */
+    async DeleteClusterStorageOption(req, cb) {
+        return this.request("DeleteClusterStorageOption", req, cb);
+    }
+    /**
+     * 本接口（DescribeWorkspaces）用于查询工作空间列表。
+     */
+    async DescribeWorkspaces(req, cb) {
+        return this.request("DescribeWorkspaces", req, cb);
+    }
+    /**
+     * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
+     */
+    async DescribeNodes(req, cb) {
+        return this.request("DescribeNodes", req, cb);
+    }
+    /**
+     * 本接口（DescribeClusters）用于查询集群列表。
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
     }
     /**
      * 本接口(SetAutoScalingConfiguration)用于为集群设置集群弹性伸缩配置信息。
@@ -74,18 +122,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddQueue", req, cb);
     }
     /**
-     * 本接口 (DescribeNodes) 用于查询指定集群节点概览信息列表。
-     */
-    async DescribeNodes(req, cb) {
-        return this.request("DescribeNodes", req, cb);
-    }
-    /**
-     * 本接口 (CreateWorkspaces) 用于创建工作空间。
-     */
-    async CreateWorkspaces(req, cb) {
-        return this.request("CreateWorkspaces", req, cb);
-    }
-    /**
      * 本接口 (DescribeInitNodeScripts) 用于查询节点初始化脚本列表。
      */
     async DescribeInitNodeScripts(req, cb) {
@@ -98,40 +134,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachNodes", req, cb);
     }
     /**
-     * 本接口 (DeleteClusterStorageOption) 用于删除集群存储选项信息。
-     */
-    async DeleteClusterStorageOption(req, cb) {
-        return this.request("DeleteClusterStorageOption", req, cb);
-    }
-    /**
-     * 本接口(AddNodes)用于添加一个或者多个计算节点或者登录节点到指定集群。
-     */
-    async AddNodes(req, cb) {
-        return this.request("AddNodes", req, cb);
-    }
-    /**
      * 本接口(DescribeAutoScalingConfiguration)用于查询集群弹性伸缩配置信息。本接口仅适用于弹性伸缩类型为THPC_AS的集群。
      */
     async DescribeAutoScalingConfiguration(req, cb) {
         return this.request("DescribeAutoScalingConfiguration", req, cb);
-    }
-    /**
-     * 本接口（DescribeClusters）用于查询集群列表。
-     */
-    async DescribeClusters(req, cb) {
-        return this.request("DescribeClusters", req, cb);
-    }
-    /**
-     * 本接口 (DetachNodes) 用于将一个或者多个计算节点从集群中移除，但是不销毁指定计算资源。
-     */
-    async DetachNodes(req, cb) {
-        return this.request("DetachNodes", req, cb);
-    }
-    /**
-     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
-     */
-    async AddClusterStorageOption(req, cb) {
-        return this.request("AddClusterStorageOption", req, cb);
     }
     /**
      * 本接口（DescribeClusterActivities）用于查询集群活动历史记录列表。
@@ -140,10 +146,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterActivities", req, cb);
     }
     /**
-     * 本接口(DescribeQueues)用于查询指定集群队列概览信息列表。
+     * 本接口 (DescribeClusterStorageOption) 用于查询集群存储选项信息。
      */
-    async DescribeQueues(req, cb) {
-        return this.request("DescribeQueues", req, cb);
+    async DescribeClusterStorageOption(req, cb) {
+        return this.request("DescribeClusterStorageOption", req, cb);
+    }
+    /**
+     * 本接口 (ModifyInitNodeScripts) 用于修改节点初始化脚本。
+     */
+    async ModifyInitNodeScripts(req, cb) {
+        return this.request("ModifyInitNodeScripts", req, cb);
+    }
+    /**
+     * 本接口（AddClusterStorageOption）用于添加集群存储选项信息。
+     */
+    async AddClusterStorageOption(req, cb) {
+        return this.request("AddClusterStorageOption", req, cb);
     }
     /**
      * 本接口(DeleteQueue)用于从指定集群删除队列。

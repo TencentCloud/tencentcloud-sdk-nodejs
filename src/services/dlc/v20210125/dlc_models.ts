@@ -2800,7 +2800,7 @@ export interface DescribeUserInfoRequest {
    */
   UserId?: string
   /**
-   * 查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限
+   * 必传字段，查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限 RowFilter：行级别权限
    */
   Type?: string
   /**
@@ -5917,7 +5917,7 @@ export interface DescribeUserInfoResponse {
    * 用户详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserInfo: UserDetailInfo
+  UserInfo?: UserDetailInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6429,6 +6429,10 @@ export type DescribeThirdPartyAccessUserRequest = null
  * AssignMangedTableProperties返回参数结构体
  */
 export interface AssignMangedTablePropertiesResponse {
+  /**
+   * 分配的原生表表属性
+   */
+  Properties?: Array<Property>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7145,47 +7149,52 @@ export interface UserDetailInfo {
    * 用户Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: string
+  UserId?: string
   /**
    * 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 用户类型：ADMIN：管理员 COMMON：一般用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserType: string
+  UserType?: string
   /**
    * 用户描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserDescription: string
+  UserDescription?: string
   /**
    * 数据权限信息集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataPolicyInfo: Policys
+  DataPolicyInfo?: Policys
   /**
    * 引擎权限集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnginePolicyInfo: Policys
+  EnginePolicyInfo?: Policys
   /**
    * 绑定到该用户的工作组集合信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkGroupInfo: WorkGroups
+  WorkGroupInfo?: WorkGroups
   /**
    * 用户别名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAlias: string
+  UserAlias?: string
   /**
    * 行过滤集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RowFilterInfo: Policys
+  RowFilterInfo?: Policys
+  /**
+   * 账号类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountType?: string
 }
 
 /**
