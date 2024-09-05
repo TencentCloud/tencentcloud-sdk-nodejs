@@ -59,6 +59,10 @@ export interface SubmitVideoTranslateJobRequest {
      * 是否开启口型驱动，0：不开启，1：开启。默认开启。
      */
     LipSync?: number;
+    /**
+     * 音色 ID
+     */
+    VoiceType?: string;
 }
 /**
  * ConfirmVideoTranslateJob返回参数结构体

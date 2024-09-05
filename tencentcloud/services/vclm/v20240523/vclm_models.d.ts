@@ -6,17 +6,17 @@ export interface AsrTimestamps {
      * 文本片段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Text?: string;
+    Text: string;
     /**
      * 开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartMs?: number;
+    StartMs: number;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndMs?: number;
+    EndMs: number;
 }
 /**
  * SubmitVideoStylizationJob请求参数结构体
@@ -340,6 +340,10 @@ export interface SubmitVideoTranslateJobRequest {
      * 是否开启口型驱动，0：不开启，1：开启。默认开启。
      */
     LipSync?: number;
+    /**
+     * 音色 Id
+     */
+    VoiceType?: string;
 }
 /**
  * SubmitPortraitSingJob返回参数结构体

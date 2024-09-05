@@ -265,7 +265,7 @@ export interface CkUserAlterInfo {
    */
   UserName: string
   /**
-   * 密码
+   * base64加密后的密码
    */
   PassWord: string
   /**
