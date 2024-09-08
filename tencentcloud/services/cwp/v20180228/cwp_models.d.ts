@@ -3368,7 +3368,7 @@ export interface ModifyEventAttackStatusRequest {
      */
     All?: boolean;
     /**
-     * 0：待处理 1：已处理 2： 已加白 3： 已忽略 4：已删除
+     * 0：待处理 1：已处理 3： 已忽略 4：已删除
      */
     Status?: number;
     /**

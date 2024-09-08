@@ -54,7 +54,7 @@ import {
   DeleteNatFwInstanceResponse,
   DeleteBlockIgnoreRuleNewResponse,
   DeleteAllAccessControlRuleRequest,
-  ModifyBlockIgnoreListRequest,
+  ModifyEdgeIpSwitchRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
   DatabaseWhiteListRuleData,
@@ -75,9 +75,9 @@ import {
   CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
-  DeleteVpcInstanceResponse,
+  SyncFwOperateRequest,
   ModifyAssetScanRequest,
-  DnsVpcSwitch,
+  ModifyBlockIgnoreListRequest,
   BanAndAllowRuleDel,
   AddEnterpriseSecurityGroupRulesRequest,
   FwGateway,
@@ -151,7 +151,6 @@ import {
   ModifyEnterpriseSecurityGroupRuleRequest,
   BetaInfoByACL,
   RemoveNatAcRuleRequest,
-  ModifySequenceRulesResponse,
   DescribeAssetSyncRequest,
   DeleteVpcFwGroupRequest,
   IPDefendStatus,
@@ -188,7 +187,7 @@ import {
   VpcDnsInfo,
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
-  ModifyEdgeIpSwitchRequest,
+  ModifySequenceRulesResponse,
   DeleteIdsWhiteRuleResponse,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
@@ -213,7 +212,6 @@ import {
   DescribeAcListsRequest,
   IdsWhiteInfo,
   DescribeGuideScanInfoRequest,
-  SyncFwOperateRequest,
   UnHandleEvent,
   DescribeAssociatedInstanceListRequest,
   ModifyVpcAcRuleResponse,
@@ -265,7 +263,7 @@ import {
   TLogInfo,
   DescribeLogsResponse,
   CreateSecurityGroupRulesRequest,
-  DeleteVpcInstanceRequest,
+  DnsVpcSwitch,
   SwitchListsData,
   CreateVpcFwGroupRequest,
   CreateNatFwInstanceWithDomainRequest,
@@ -483,18 +481,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyNatSequenceRulesResponse) => void
   ): Promise<ModifyNatSequenceRulesResponse> {
     return this.request("ModifyNatSequenceRules", req, cb)
-  }
-
-  /**
-     * 接口废弃
-
-删除防火墙实例
-     */
-  async DeleteVpcInstance(
-    req?: DeleteVpcInstanceRequest,
-    cb?: (error: string, rep: DeleteVpcInstanceResponse) => void
-  ): Promise<DeleteVpcInstanceResponse> {
-    return this.request("DeleteVpcInstance", req, cb)
   }
 
   /**

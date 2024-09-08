@@ -64,16 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImpalaQueries", req, cb);
     }
     /**
-     * 修改YARN资源调度的资源配置
+     * 获取资源调度中的队列信息
      */
-    async ModifyResourceScheduleConfig(req, cb) {
-        return this.request("ModifyResourceScheduleConfig", req, cb);
+    async DescribeYarnQueue(req, cb) {
+        return this.request("DescribeYarnQueue", req, cb);
     }
     /**
-     * 集群续费询价。
+     * 修改资源调度中队列信息
      */
-    async InquirePriceRenewEmr(req, cb) {
-        return this.request("InquirePriceRenewEmr", req, cb);
+    async ModifyYarnQueueV2(req, cb) {
+        return this.request("ModifyYarnQueueV2", req, cb);
+    }
+    /**
+     * yarn资源调度-部署生效
+     */
+    async DeployYarnConf(req, cb) {
+        return this.request("DeployYarnConf", req, cb);
     }
     /**
      * 查询EMR任务运行详情状态
@@ -130,16 +136,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 部署生效
+     * 部署生效。已废弃，请使用`DeployYarnConf`接口进行部署生效
      */
     async ModifyYarnDeploy(req, cb) {
         return this.request("ModifyYarnDeploy", req, cb);
+    }
+    /**
+     * 缩容Task节点
+     */
+    async TerminateTasks(req, cb) {
+        return this.request("TerminateTasks", req, cb);
     }
     /**
      * 销毁集群节点
      */
     async TerminateClusterNodes(req, cb) {
         return this.request("TerminateClusterNodes", req, cb);
+    }
+    /**
+     * 修改YARN资源调度的资源配置
+     */
+    async ResetYarnConfig(req, cb) {
+        return this.request("ResetYarnConfig", req, cb);
     }
     /**
      * 该接口支持安装了OpenLdap组件的集群。
@@ -193,7 +211,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceRenewNodes", req, cb);
     }
     /**
-     * 修改了yarn的资源调度器，点击部署生效
+     * 修改了yarn的资源调度器，点击部署生效。
      */
     async ModifyResourceScheduler(req, cb) {
         return this.request("ModifyResourceScheduler", req, cb);
@@ -229,10 +247,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddMetricScaleStrategy", req, cb);
     }
     /**
-     * 查看yarn资源调度的调度历史
+     * 查看yarn资源调度的调度历史。废弃，请使用流程中心查看历史记录。
      */
     async DescribeYarnScheduleHistory(req, cb) {
         return this.request("DescribeYarnScheduleHistory", req, cb);
+    }
+    /**
+     * 修改YARN资源调度的资源配置。已废弃，请使用`ModifyYarnQueueV2`来修改队列配置
+     */
+    async ModifyResourceScheduleConfig(req, cb) {
+        return this.request("ModifyResourceScheduleConfig", req, cb);
     }
     /**
      * 查询流程任务
@@ -253,10 +277,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEmrOverviewMetrics", req, cb);
     }
     /**
-     * 缩容Task节点
+     * 集群续费询价。
      */
-    async TerminateTasks(req, cb) {
-        return this.request("TerminateTasks", req, cb);
+    async InquirePriceRenewEmr(req, cb) {
+        return this.request("InquirePriceRenewEmr", req, cb);
     }
     /**
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
@@ -271,7 +295,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoScaleStrategies", req, cb);
     }
     /**
-     * 查询YARN资源调度数据信息
+     * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
      */
     async DescribeResourceSchedule(req, cb) {
         return this.request("DescribeResourceSchedule", req, cb);
@@ -301,7 +325,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesList", req, cb);
     }
     /**
-     * 刷新YARN的动态资源池
+     * 刷新YARN的动态资源池。已废弃，请使用`DeployYarnConf`
      */
     async ModifyResourcePools(req, cb) {
         return this.request("ModifyResourcePools", req, cb);

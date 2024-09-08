@@ -1661,6 +1661,10 @@ export interface DescribeMQTTInstanceListRequest {
      * 查询结果限制数量
      */
     Limit?: number;
+    /**
+     * 是否包含新控制台集群
+     */
+    IncludeNew?: boolean;
 }
 /**
  * CreateMQTTInstance返回参数结构体

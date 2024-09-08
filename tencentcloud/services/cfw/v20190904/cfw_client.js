@@ -127,14 +127,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyNatSequenceRules", req, cb);
     }
     /**
-     * 接口废弃
-
-删除防火墙实例
-     */
-    async DeleteVpcInstance(req, cb) {
-        return this.request("DeleteVpcInstance", req, cb);
-    }
-    /**
      * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
      */
     async DescribeUnHandleEventTabList(req, cb) {

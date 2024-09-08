@@ -77,6 +77,20 @@ export interface ClusterSetting {
     RemoteTcpDefaultPort?: boolean;
 }
 /**
+ * 用于创建集群价格清单 不同可用区下价格详情
+ */
+export interface ZoneDetailPriceResult {
+    /**
+     * 可用区Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId: string;
+    /**
+     * 不同节点的价格详情
+     */
+    NodeDetailPrice: Array<NodeDetailPriceResult>;
+}
+/**
  * Pod相关信息
  */
 export interface PodSpecInfo {
@@ -407,24 +421,41 @@ export interface ImpalaQuery {
     RemainingFragmentCount?: number;
 }
 /**
- * Pod的存储设备描述信息。
+ * DescribeHiveQueries请求参数结构体
  */
-export interface PodVolume {
+export interface DescribeHiveQueriesRequest {
     /**
-     * 存储类型，可为"pvc"，"hostpath"。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群ID
      */
-    VolumeType: string;
+    InstanceId: string;
     /**
-     * 当VolumeType为"pvc"时，该字段生效。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 起始时间秒
      */
-    PVCVolume?: PersistentVolumeContext;
+    StartTime: number;
     /**
-     * 当VolumeType为"hostpath"时，该字段生效。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
      */
-    HostVolume?: HostVolumeContext;
+    EndTime: number;
+    /**
+     * 分页起始偏移，从0开始
+     */
+    Offset: number;
+    /**
+     * 分页大小，合法范围[1,100]
+     */
+    Limit: number;
+    /**
+     * 执行状态,ERROR等
+     */
+    State?: Array<string>;
+    /**
+     * 结束时间大于的时间点
+     */
+    EndTimeGte?: number;
+    /**
+     * 结束时间小于时间点
+     */
+    EndTimeLte?: number;
 }
 /**
  * SyncPodState返回参数结构体
@@ -673,6 +704,63 @@ export interface Step {
      * 指定执行Step时的用户名，非必须，默认为hadoop。
      */
     User?: string;
+}
+/**
+ * 预执行脚本配置
+ */
+export interface PreExecuteFileSettings {
+    /**
+     * 脚本在COS上路径，已废弃
+     */
+    Path?: string;
+    /**
+     * 执行脚本参数
+     */
+    Args?: Array<string>;
+    /**
+     * COS的Bucket名称，已废弃
+     */
+    Bucket?: string;
+    /**
+     * COS的Region名称，已废弃
+     */
+    Region?: string;
+    /**
+     * COS的Domain数据，已废弃
+     */
+    Domain?: string;
+    /**
+     * 执行顺序
+     */
+    RunOrder?: number;
+    /**
+     * resourceAfter 或 clusterAfter
+     */
+    WhenRun?: string;
+    /**
+     * 脚本文件名，已废弃
+     */
+    CosFileName?: string;
+    /**
+     * 脚本的cos地址
+     */
+    CosFileURI?: string;
+    /**
+     * cos的SecretId
+     */
+    CosSecretId?: string;
+    /**
+     * Cos的SecretKey
+     */
+    CosSecretKey?: string;
+    /**
+     * cos的appid，已废弃
+     */
+    AppId?: string;
+    /**
+     * 备注
+     */
+    Remark?: string;
 }
 /**
  * 键值对，主要用来做Filter
@@ -1558,18 +1646,21 @@ export interface ScaleOutInstanceRequest {
     ComputeResourceId?: string;
 }
 /**
- * 用于创建集群价格清单 不同可用区下价格详情
+ * ResetYarnConfig请求参数结构体
  */
-export interface ZoneDetailPriceResult {
+export interface ResetYarnConfigRequest {
     /**
-     * 可用区Id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * emr集群的英文id
      */
-    ZoneId: string;
+    InstanceId: string;
     /**
-     * 不同节点的价格详情
+     * 要重置的配置别名，可选值：
+  
+  - capacityLabel：重置标签管理的配置
+  - fair：重置公平调度的配置
+  - capacity：重置容量调度的配置
      */
-    NodeDetailPrice: Array<NodeDetailPriceResult>;
+    Key?: string;
 }
 /**
  * DescribeHBaseTableOverview返回参数结构体
@@ -1686,17 +1777,17 @@ export interface ModifyResourceScheduleConfigResponse {
     /**
      * true为草稿，表示还没有刷新资源池
      */
-    IsDraft: boolean;
+    IsDraft?: boolean;
     /**
      * 校验错误信息，如果不为空，则说明校验失败，配置没有成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 返回数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2137,6 +2228,115 @@ export interface AddUsersForUserManagerResponse {
     RequestId?: string;
 }
 /**
+ * DescribeYarnQueue返回参数结构体
+ */
+export interface DescribeYarnQueueResponse {
+    /**
+     * 队列信息。是一个对象转成的json字符串，对应的golang结构体如下所示，比如`QueueWithConfigSetForFairScheduler`的第一个字段`Name`：
+  
+  ```
+  Name                         string                               `json:"name"` //队列名称
+  ```
+  - `Name`：字段名
+  - `string`：字段类型
+  - `json:"name"`：表示在序列化和反序列化`json`时，对应的`json key`，下面以`json key`来指代
+  - `//`：后面的注释内容对应页面上看到的名称
+  
+  字段类型以`*`开头的表示取值可能为json规范下的null，不同的语言需要使用能表达null的类型来接收，比如java的包装类型；字段类型以`[]`开头的表示是数组类型；`json key`在调用`ModifyYarnQueueV2 `接口也会使用。
+  
+  - 公平调度器
+  
+  ```
+  type QueueWithConfigSetForFairScheduler struct {
+      Name                         string                               `json:"name"` //队列名称
+      MyId                         string                  `json:"myId"` // 队列id，用于编辑、删除、克隆时使用
+      ParentId                     string                  `json:"parentId"`  // 父队列Id
+      Type                         *string                              `json:"type"` // 队列归属。parent或空，当确定某个队列是父队列，且没有子队列时，才可以设置，通常用来支持放置策略nestedUserQueue
+      AclSubmitApps                *AclForYarnQueue                     `json:"aclSubmitApps"` // 提交访问控制
+      AclAdministerApps            *AclForYarnQueue                     `json:"aclAdministerApps"` // 管理访问控制
+      MinSharePreemptionTimeout    *int                                 `json:"minSharePreemptionTimeout"` // 最小共享优先权超时时间
+      FairSharePreemptionTimeout   *int                                 `json:"fairSharePreemptionTimeout"` // 公平份额抢占超时时间
+      FairSharePreemptionThreshold *float32                             `json:"fairSharePreemptionThreshold"` // 公平份额抢占阈值。取值 （0，1]
+      AllowPreemptionFrom          *bool                                `json:"allowPreemptionFrom"`                                        // 抢占模式
+      SchedulingPolicy             *string                              `json:"schedulingPolicy"`  // 调度策略，取值有drf、fair、fifo
+      IsDefault                    *bool                                `json:"isDefault"` // 是否是root.default队列
+      IsRoot                       *bool                                `json:"isRoot"` // 是否是root队列
+      ConfigSets                   []ConfigSetForFairScheduler          `json:"configSets"` // 配置集设置
+      Children                     []QueueWithConfigSetForFairScheduler `json:"queues"` // 子队列信息。递归
+  }
+  
+  type AclForYarnQueue struct {
+      User  *string `json:"user"` //用户名
+      Group *string `json:"group"`//组名
+  }
+  
+  type ConfigSetForFairScheduler struct {
+      Name              string        `json:"name"` // 配置集名称
+      MinResources      *YarnResource `json:"minResources"` // 最小资源量
+      MaxResources      *YarnResource `json:"maxResources"` // 最大资源量
+      MaxChildResources *YarnResource `json:"maxChildResources"` // 能够分配给为未声明子队列的最大资源量
+      MaxRunningApps    *int          `json:"maxRunningApps"` // 最高可同时处于运行的App数量
+      Weight            *float32      `json:"weight"`                   // 权重
+      MaxAMShare        *float32      `json:"maxAMShare"` // App Master最大份额
+  }
+  
+  type YarnResource struct {
+      Vcores *int `json:"vcores"`
+      Memory *int `json:"memory"`
+      Type *string `json:"type"` // 当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值
+  }
+  ```
+  
+  - 容量调度器
+  
+  ```
+  type QueueForCapacitySchedulerV3 struct {
+      Name                       string                `json:"name"` // 队列名称
+      MyId                       string                `json:"myId"` // 队列id，用于编辑、删除、克隆时使用
+      ParentId                   string                `json:"parentId"` // 父队列Id
+      Configs                    []ConfigForCapacityV3 `json:"configs"` //配置集设置
+      State                      *string         `json:"state"` // 资源池状态
+      DefaultNodeLabelExpression *string               `json:"default-node-label-expression"` // 默认标签表达式
+      AclSubmitApps              *AclForYarnQueue      `json:"acl_submit_applications"` // 提交访问控制
+      AclAdminQueue              *AclForYarnQueue      `json:"acl_administer_queue"` //管理访问控制
+      MaxAllocationMB *int32 `json:"maximum-allocation-mb"` // 分配Container最大内存数量
+      MaxAllocationVcores *int32                         `json:"maximum-allocation-vcores"` // Container最大vCore数量
+      IsDefault           *bool                          `json:"isDefault"`// 是否是root.default队列
+      IsRoot              *bool                          `json:"isRoot"` // 是否是root队列
+      Queues              []*QueueForCapacitySchedulerV3 `json:"queues"`//子队列信息。递归
+  }
+  type ConfigForCapacityV3 struct {
+      Name                string          `json:"configName"` // 配置集名称
+      Labels              []CapacityLabel `json:"labels"` // 标签信息
+      MinUserLimitPercent *int32          `json:"minimum-user-limit-percent"` // 用户最小容量
+      UserLimitFactor     *float32        `json:"user-limit-factor" valid:"rangeExcludeLeft(0|)"`  // 用户资源因子
+      MaxApps *int32 `json:"maximum-applications" valid:"rangeExcludeLeft(0|)"` // 最大应用数Max-Applications
+      MaxAmPercent               *float32 `json:"maximum-am-resource-percent"` // 最大AM比例
+      DefaultApplicationPriority *int32   `json:"default-application-priority"` // 资源池优先级
+  }
+  type CapacityLabel struct {
+      Name        string   `json:"labelName"`
+      Capacity    *float32 `json:"capacity"`  // 容量
+      MaxCapacity *float32 `json:"maximum-capacity"` //最大容量
+  }
+  
+  type AclForYarnQueue struct {
+      User  *string `json:"user"` //用户名
+      Group *string `json:"group"`//组名
+  }
+  ```
+     */
+    Queue?: string;
+    /**
+     * 版本
+     */
+    Version?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 集群节点拓扑信息
  */
 export interface TopologyInfo {
@@ -2351,41 +2551,21 @@ export interface VPCSettings {
     SubnetId: string;
 }
 /**
- * DescribeHiveQueries请求参数结构体
+ * DescribeInstancesList返回参数结构体
  */
-export interface DescribeHiveQueriesRequest {
+export interface DescribeInstancesListResponse {
     /**
-     * 集群ID
+     * 符合条件的实例总数。
      */
-    InstanceId: string;
+    TotalCnt?: number;
     /**
-     * 起始时间秒
+     * 集群实例列表
      */
-    StartTime: number;
+    InstancesList?: Array<EmrListInstance>;
     /**
-     * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    EndTime: number;
-    /**
-     * 分页起始偏移，从0开始
-     */
-    Offset: number;
-    /**
-     * 分页大小，合法范围[1,100]
-     */
-    Limit: number;
-    /**
-     * 执行状态,ERROR等
-     */
-    State?: Array<string>;
-    /**
-     * 结束时间大于的时间点
-     */
-    EndTimeGte?: number;
-    /**
-     * 结束时间小于时间点
-     */
-    EndTimeLte?: number;
+    RequestId?: string;
 }
 /**
  * DescribeInstanceRenewNodes请求参数结构体
@@ -3419,46 +3599,52 @@ export interface DescribeUsersForUserManagerRequest {
     NeedKeytabInfo?: boolean;
 }
 /**
- * 集群续费实例信息
+ * 资源调度-配置集信息
  */
-export interface RenewInstancesInfo {
+export interface ConfigSetInfo {
     /**
-     * 节点资源ID
+     * 配置集名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EmrResourceId?: string;
+    ConfigSet: string;
     /**
-     * 节点类型。0:common节点；1:master节点
-  ；2:core节点；3:task节点
+     * 容量调度器会使用，里面设置了标签相关的配置。key的取值与**DescribeYarnQueue**返回的字段一致。
+  key的取值信息如下：
+  - labelName，标签名称，标签管理里的标签。
+  - capacity，容量，取值为**数字字符串**
+  - maximum-capacity，最大容量，取值为**数字字符串**
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Flag?: number;
+    LabelParams?: Array<ItemSeq>;
     /**
-     * 内网IP
+     * 设置配置集相关的参数。key的取值与**DescribeYarnQueue**返回的字段一致。
+  ###### 公平调度器
+  key的取值信息如下：
+  - minResources，最大资源量，取值为**YarnResource类型的json串**或**null**
+  - maxResources，最大资源量，取值为**YarnResource类型的json串**或**null**
+  - maxChildResources，能够分配给为未声明子队列的最大资源量，取值为**数字字符串**或**null**
+  - maxRunningApps，最高可同时处于运行的App数量，取值为**数字字符串**或**null**
+  - weight，权重，取值为**数字字符串**或**null**
+  - maxAMShare，App Master最大份额，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
+  
+  ```
+  type YarnResource struct {
+      Vcores *int `json:"vcores"`
+      Memory *int `json:"memory"`
+      Type *string `json:"type"` // 取值为`percent`或`null`当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值。只有maxResources、maxChildResources才可以取值为`percent`
+  }
+  ```
+  
+  ###### 容量调度器
+  key的取值信息如下：
+  - minimum-user-limit-percent，用户最小容量，取值为**YarnResource类型的json串**或**null**，其中数字的范围是[0，100]
+  - user-limit-factor，用户资源因子，取值为**YarnResource类型的json串**或**null**
+  - maximum-applications，最大应用数Max-Applications，取值为**数字字符串**或**null**，其中数字为正整数
+  - maximum-am-resource-percent，最大AM比例，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
+  - default-application-priority，资源池优先级，取值为**数字字符串**或**null**，其中数字为正整数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ip?: string;
-    /**
-     * 节点内存描述
-     */
-    MemDesc?: string;
-    /**
-     * 节点核数
-     */
-    CpuNum?: number;
-    /**
-     * 硬盘大小
-     */
-    DiskSize?: string;
-    /**
-     * 过期时间
-     */
-    ExpireTime?: string;
-    /**
-     * 节点规格
-     */
-    Spec?: string;
-    /**
-     * 磁盘类型
-     */
-    StorageType?: number;
+    BasicParams?: Array<Item>;
 }
 /**
  * DescribeInsightList请求参数结构体
@@ -3558,148 +3744,33 @@ export interface RunJobFlowResponse {
     RequestId?: string;
 }
 /**
- * POD自定义权限和自定义参数
+ * DescribeYarnQueue请求参数结构体
  */
-export interface PodNewParameter {
+export interface DescribeYarnQueueRequest {
     /**
-     * TKE或EKS集群ID
+     * 集群Id
      */
     InstanceId: string;
     /**
-     * 自定义权限
-  如：
-  {
-    "apiVersion": "v1",
-    "clusters": [
-      {
-        "cluster": {
-          "certificate-authority-data": "xxxxxx==",
-          "server": "https://xxxxx.com"
-        },
-        "name": "cls-xxxxx"
-      }
-    ],
-    "contexts": [
-      {
-        "context": {
-          "cluster": "cls-xxxxx",
-          "user": "100014xxxxx"
-        },
-        "name": "cls-a44yhcxxxxxxxxxx"
-      }
-    ],
-    "current-context": "cls-a4xxxx-context-default",
-    "kind": "Config",
-    "preferences": {},
-    "users": [
-      {
-        "name": "100014xxxxx",
-        "user": {
-          "client-certificate-data": "xxxxxx",
-          "client-key-data": "xxxxxx"
-        }
-      }
-    ]
-  }
+     * 调度器，可选值：
+  
+  1. capacity
+  2. fair
      */
-    Config: string;
-    /**
-     * 自定义参数
-  如：
-  {
-      "apiVersion": "apps/v1",
-      "kind": "Deployment",
-      "metadata": {
-        "name": "test-deployment",
-        "labels": {
-          "app": "test"
-        }
-      },
-      "spec": {
-        "replicas": 3,
-        "selector": {
-          "matchLabels": {
-            "app": "test-app"
-          }
-        },
-        "template": {
-          "metadata": {
-            "annotations": {
-              "your-organization.com/department-v1": "test-example-v1",
-              "your-organization.com/department-v2": "test-example-v2"
-            },
-            "labels": {
-              "app": "test-app",
-              "environment": "production"
-            }
-          },
-          "spec": {
-            "nodeSelector": {
-              "your-organization/node-test": "test-node"
-            },
-            "containers": [
-              {
-                "name": "nginx",
-                "image": "nginx:1.14.2",
-                "ports": [
-                  {
-                    "containerPort": 80
-                  }
-                ]
-              }
-            ],
-            "affinity": {
-              "nodeAffinity": {
-                "requiredDuringSchedulingIgnoredDuringExecution": {
-                  "nodeSelectorTerms": [
-                    {
-                      "matchExpressions": [
-                        {
-                          "key": "disk-type",
-                          "operator": "In",
-                          "values": [
-                            "ssd",
-                            "sas"
-                          ]
-                        },
-                        {
-                          "key": "cpu-num",
-                          "operator": "Gt",
-                          "values": [
-                            "6"
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-     */
-    Parameter: string;
+    Scheduler: string;
 }
 /**
- * DescribeInstanceRenewNodes返回参数结构体
+ * DescribeImpalaQueries返回参数结构体
  */
-export interface DescribeInstanceRenewNodesResponse {
+export interface DescribeImpalaQueriesResponse {
     /**
-     * 查询到的节点总数
+     * 总数
      */
-    TotalCnt: number;
+    Total?: number;
     /**
-     * 节点详细信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 结果列表
      */
-    NodeList: Array<RenewInstancesInfo>;
-    /**
-     * 用户所有的标签键列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MetaInfo: Array<string>;
+    Results?: Array<ImpalaQuery>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3756,6 +3827,37 @@ export interface ScaleOutServiceConfGroupsInfo {
                                                                ConfGroupName参数不传 默认 代表集群维度
      */
     ConfGroupName?: string;
+}
+/**
+ * 用户管理中用户的简要信息
+ */
+export interface UserManagerUserBriefInfo {
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 用户所属的组
+     */
+    UserGroup: string;
+    /**
+     * Manager表示管理员、NormalUser表示普通用户
+     */
+    UserType: string;
+    /**
+     * 用户创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
+     */
+    SupportDownLoadKeyTab: boolean;
+    /**
+     * keytab文件的下载地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownLoadKeyTabUrl: string;
 }
 /**
  * DescribeYarnScheduleHistory返回参数结构体
@@ -4041,6 +4143,26 @@ export interface DeleteUserManagerUserListRequest {
     UserGroupList?: Array<UserAndGroup>;
 }
 /**
+ * Pod的存储设备描述信息。
+ */
+export interface PodVolume {
+    /**
+     * 存储类型，可为"pvc"，"hostpath"。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeType: string;
+    /**
+     * 当VolumeType为"pvc"时，该字段生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PVCVolume?: PersistentVolumeContext;
+    /**
+     * 当VolumeType为"hostpath"时，该字段生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostVolume?: HostVolumeContext;
+}
+/**
  * 价格详情
  */
 export interface PriceDetail {
@@ -4068,19 +4190,19 @@ export interface DescribeResourceScheduleResponse {
     /**
      * 资源调度功能是否开启
      */
-    OpenSwitch: boolean;
+    OpenSwitch?: boolean;
     /**
      * 正在使用的资源调度器
      */
-    Scheduler: string;
+    Scheduler?: string;
     /**
      * 公平调度器的信息
      */
-    FSInfo: string;
+    FSInfo?: string;
     /**
      * 容量调度器的信息
      */
-    CSInfo: string;
+    CSInfo?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4514,6 +4636,82 @@ export interface DeleteAutoScaleStrategyResponse {
     RequestId?: string;
 }
 /**
+ * 任务步骤详情
+ */
+export interface StageInfoDetail {
+    /**
+     * 步骤id
+     */
+    Stage?: string;
+    /**
+     * 步骤名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 是否展示
+     */
+    IsShow?: boolean;
+    /**
+     * 是否子流程
+     */
+    IsSubFlow?: boolean;
+    /**
+     * 子流程标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubFlowFlag?: string;
+    /**
+     * 步骤运行状态：0:未开始 1:进行中 2:已完成 3:部分完成  -1:失败
+     */
+    Status?: number;
+    /**
+     * 步骤运行状态描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Desc?: string;
+    /**
+     * 运行进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Progress?: number;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Starttime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Endtime?: string;
+    /**
+     * 是否有详情信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HadWoodDetail?: boolean;
+    /**
+     * Wood子流程Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WoodJobId?: number;
+    /**
+     * 多语言版本Key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LanguageKey?: string;
+    /**
+     * 如果stage失败，失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailedReason?: string;
+    /**
+     * 步骤耗时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeConsuming?: string;
+}
+/**
  * CreateCluster返回参数结构体
  */
 export interface CreateClusterResponse {
@@ -4877,6 +5075,26 @@ export interface DescribeClusterNodesRequest {
      * 无
      */
     Asc?: number;
+}
+/**
+ * ModifyYarnQueueV2请求参数结构体
+ */
+export interface ModifyYarnQueueV2Request {
+    /**
+     * 集群Id
+     */
+    InstanceId: string;
+    /**
+     * 调度器类型。可选值：
+  
+  1. capacity
+  2. fair
+     */
+    Scheduler: string;
+    /**
+     * 资源池数据
+     */
+    ConfigModifyInfoList: Array<ConfigModifyInfoV2>;
 }
 /**
  * DescribeCvmQuota请求参数结构体
@@ -5380,6 +5598,15 @@ export interface DescribeAutoScaleStrategiesRequest {
     GroupId?: number;
 }
 /**
+ * DeployYarnConf请求参数结构体
+ */
+export interface DeployYarnConfRequest {
+    /**
+     * emr集群的英文id
+     */
+    InstanceId: string;
+}
+/**
  * TerminateClusterNodes请求参数结构体
  */
 export interface TerminateClusterNodesRequest {
@@ -5441,6 +5668,16 @@ export interface DescribeInstancesListRequest {
     Filters?: Array<Filters>;
 }
 /**
+ * 键值对组成的列表
+ */
+export interface ItemSeq {
+    /**
+     * 标签名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items: Array<Item>;
+}
+/**
  * 定时伸缩任务策略
  */
 export interface RepeatStrategy {
@@ -5473,6 +5710,48 @@ export interface RepeatStrategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Expire?: string;
+}
+/**
+ * 集群续费实例信息
+ */
+export interface RenewInstancesInfo {
+    /**
+     * 节点资源ID
+     */
+    EmrResourceId?: string;
+    /**
+     * 节点类型。0:common节点；1:master节点
+  ；2:core节点；3:task节点
+     */
+    Flag?: number;
+    /**
+     * 内网IP
+     */
+    Ip?: string;
+    /**
+     * 节点内存描述
+     */
+    MemDesc?: string;
+    /**
+     * 节点核数
+     */
+    CpuNum?: number;
+    /**
+     * 硬盘大小
+     */
+    DiskSize?: string;
+    /**
+     * 过期时间
+     */
+    ExpireTime?: string;
+    /**
+     * 节点规格
+     */
+    Spec?: string;
+    /**
+     * 磁盘类型
+     */
+    StorageType?: number;
 }
 /**
  * 资源详情
@@ -5556,17 +5835,13 @@ export interface DeleteAutoScaleStrategyRequest {
     GroupId?: number;
 }
 /**
- * DescribeInstancesList返回参数结构体
+ * DeployYarnConf返回参数结构体
  */
-export interface DescribeInstancesListResponse {
+export interface DeployYarnConfResponse {
     /**
-     * 符合条件的实例总数。
+     * 启动流程后的流程ID，可以使用[DescribeClusterFlowStatusDetail](https://cloud.tencent.com/document/product/589/107224)接口来获取流程状态
      */
-    TotalCnt?: number;
-    /**
-     * 集群实例列表
-     */
-    InstancesList?: Array<EmrListInstance>;
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5588,12 +5863,12 @@ export interface ModifyResourcePoolsResponse {
     /**
      * false表示不是草稿，提交刷新请求成功
      */
-    IsDraft: boolean;
+    IsDraft?: boolean;
     /**
      * 扩展字段，暂时没用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6130,6 +6405,131 @@ export interface UserInfoForUserManager {
     ReMark?: string;
 }
 /**
+ * POD自定义权限和自定义参数
+ */
+export interface PodNewParameter {
+    /**
+     * TKE或EKS集群ID
+     */
+    InstanceId: string;
+    /**
+     * 自定义权限
+  如：
+  {
+    "apiVersion": "v1",
+    "clusters": [
+      {
+        "cluster": {
+          "certificate-authority-data": "xxxxxx==",
+          "server": "https://xxxxx.com"
+        },
+        "name": "cls-xxxxx"
+      }
+    ],
+    "contexts": [
+      {
+        "context": {
+          "cluster": "cls-xxxxx",
+          "user": "100014xxxxx"
+        },
+        "name": "cls-a44yhcxxxxxxxxxx"
+      }
+    ],
+    "current-context": "cls-a4xxxx-context-default",
+    "kind": "Config",
+    "preferences": {},
+    "users": [
+      {
+        "name": "100014xxxxx",
+        "user": {
+          "client-certificate-data": "xxxxxx",
+          "client-key-data": "xxxxxx"
+        }
+      }
+    ]
+  }
+     */
+    Config: string;
+    /**
+     * 自定义参数
+  如：
+  {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "test-deployment",
+        "labels": {
+          "app": "test"
+        }
+      },
+      "spec": {
+        "replicas": 3,
+        "selector": {
+          "matchLabels": {
+            "app": "test-app"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "your-organization.com/department-v1": "test-example-v1",
+              "your-organization.com/department-v2": "test-example-v2"
+            },
+            "labels": {
+              "app": "test-app",
+              "environment": "production"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "your-organization/node-test": "test-node"
+            },
+            "containers": [
+              {
+                "name": "nginx",
+                "image": "nginx:1.14.2",
+                "ports": [
+                  {
+                    "containerPort": 80
+                  }
+                ]
+              }
+            ],
+            "affinity": {
+              "nodeAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": {
+                  "nodeSelectorTerms": [
+                    {
+                      "matchExpressions": [
+                        {
+                          "key": "disk-type",
+                          "operator": "In",
+                          "values": [
+                            "ssd",
+                            "sas"
+                          ]
+                        },
+                        {
+                          "key": "cpu-num",
+                          "operator": "Gt",
+                          "values": [
+                            "6"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+     */
+    Parameter: string;
+}
+/**
  * DescribeEmrOverviewMetrics请求参数结构体
  */
 export interface DescribeEmrOverviewMetricsRequest {
@@ -6344,61 +6744,13 @@ export interface RestartPolicy {
     IsDefault: string;
 }
 /**
- * 预执行脚本配置
+ * ModifyYarnQueueV2返回参数结构体
  */
-export interface PreExecuteFileSettings {
+export interface ModifyYarnQueueV2Response {
     /**
-     * 脚本在COS上路径，已废弃
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Path?: string;
-    /**
-     * 执行脚本参数
-     */
-    Args?: Array<string>;
-    /**
-     * COS的Bucket名称，已废弃
-     */
-    Bucket?: string;
-    /**
-     * COS的Region名称，已废弃
-     */
-    Region?: string;
-    /**
-     * COS的Domain数据，已废弃
-     */
-    Domain?: string;
-    /**
-     * 执行顺序
-     */
-    RunOrder?: number;
-    /**
-     * resourceAfter 或 clusterAfter
-     */
-    WhenRun?: string;
-    /**
-     * 脚本文件名，已废弃
-     */
-    CosFileName?: string;
-    /**
-     * 脚本的cos地址
-     */
-    CosFileURI?: string;
-    /**
-     * cos的SecretId
-     */
-    CosSecretId?: string;
-    /**
-     * Cos的SecretKey
-     */
-    CosSecretKey?: string;
-    /**
-     * cos的appid，已废弃
-     */
-    AppId?: string;
-    /**
-     * 备注
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 当前集群共用组件与集群对应关系
@@ -6510,6 +6862,15 @@ export interface InquiryPriceScaleOutInstanceRequest {
      * 扩容资源类型
      */
     HardwareResourceType?: string;
+}
+/**
+ * ResetYarnConfig返回参数结构体
+ */
+export interface ResetYarnConfigResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 负载指标
@@ -6670,17 +7031,23 @@ export interface LoadMetricsCondition {
     Conditions?: Array<TriggerCondition>;
 }
 /**
- * DescribeImpalaQueries返回参数结构体
+ * DescribeInstanceRenewNodes返回参数结构体
  */
-export interface DescribeImpalaQueriesResponse {
+export interface DescribeInstanceRenewNodesResponse {
     /**
-     * 总数
+     * 查询到的节点总数
      */
-    Total?: number;
+    TotalCnt: number;
     /**
-     * 结果列表
+     * 节点详细信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results?: Array<ImpalaQuery>;
+    NodeList: Array<RenewInstancesInfo>;
+    /**
+     * 用户所有的标签键列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetaInfo: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6715,35 +7082,19 @@ export interface CustomMetaDBInfo {
     UnifyMetaInstanceId?: string;
 }
 /**
- * 用户管理中用户的简要信息
+ * 代表一个kv结构
  */
-export interface UserManagerUserBriefInfo {
+export interface Item {
     /**
-     * 用户名
-     */
-    UserName: string;
-    /**
-     * 用户所属的组
-     */
-    UserGroup: string;
-    /**
-     * Manager表示管理员、NormalUser表示普通用户
-     */
-    UserType: string;
-    /**
-     * 用户创建时间
+     * 健值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    Key: string;
     /**
-     * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
-     */
-    SupportDownLoadKeyTab: boolean;
-    /**
-     * keytab文件的下载地址
+     * 值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownLoadKeyTabUrl: string;
+    Value: string;
 }
 /**
  * 表格schema信息
@@ -6778,80 +7129,83 @@ export interface TableSchemaItem {
     Title: string;
 }
 /**
- * 任务步骤详情
+ * 资源调度 - 队列修改信息
  */
-export interface StageInfoDetail {
+export interface ConfigModifyInfoV2 {
     /**
-     * 步骤id
-     */
-    Stage?: string;
-    /**
-     * 步骤名
+     * 操作类型，可选值：
+  
+  - 0：新建队列
+  - 1：编辑-全量覆盖
+  - 2：新建子队列
+  - 3：删除
+  - 4：克隆，与新建子队列的行为一样，特别的对于`fair`，可以复制子队列到新建队列
+  - 6：编辑-增量更新
   注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpType: number;
+    /**
+     * 队列名称，不支持修改。
      */
     Name?: string;
     /**
-     * 是否展示
-     */
-    IsShow?: boolean;
-    /**
-     * 是否子流程
-     */
-    IsSubFlow?: boolean;
-    /**
-     * 子流程标签
+     * 新建队列 传root的MyId；新建子队列 传 选中队列的 myId；克隆 要传 选中队列 parentId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubFlowFlag?: string;
+    ParentId?: string;
     /**
-     * 步骤运行状态：0:未开始 1:进行中 2:已完成 3:部分完成  -1:失败
-     */
-    Status?: number;
-    /**
-     * 步骤运行状态描述
+     * 编辑、删除 传选中队列的 myId。克隆只有在调度器是`fair`时才需要传，用来复制子队列到新队列。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desc?: string;
+    MyId?: string;
     /**
-     * 运行进度
+     * 基础配置信息。key的取值与**DescribeYarnQueue**返回的字段一致。
+  ###### 公平调度器
+  key的取值信息如下：
+  
+  - type，父队列，取值为 **parent** 或 **null**
+  - aclSubmitApps，提交访问控制，取值为**AclForYarnQueue类型的json串**或**null**
+  - aclAdministerApps，管理访问控制，取值为**AclForYarnQueue类型的json串**或**null**
+  - minSharePreemptionTimeout，最小共享优先权超时时间，取值为**数字字符串**或**null**
+  - fairSharePreemptionTimeout，公平份额抢占超时时间，取值为**数字字符串**或**null**
+  - fairSharePreemptionThreshold，公平份额抢占阈值，取值为**数字字符串**或**null**，其中数字的范围是（0，1]
+  - allowPreemptionFrom，抢占模式，取值为**布尔字符串**或**null**
+  - schedulingPolicy，调度策略，取值为**drf**、**fair**、**fifo**或**null**
+  
+  ```
+  type AclForYarnQueue struct {
+      User  *string `json:"user"` //用户名
+      Group *string `json:"group"`//组名
+  }
+  ```
+  ###### 容量调度器
+  key的取值信息如下：
+  
+  - state，队列状态，取值为**STOPPED**或**RUNNING**
+  - default-node-label-expression，默认标签表达式，取值为**标签**或**null**
+  - acl_submit_applications，提交访问控制，取值为**AclForYarnQueue类型的json串**或**null**
+  - acl_administer_queue，管理访问控制，取值为**AclForYarnQueue类型的json串**或**null**
+  - maximum-allocation-mb，分配Container最大内存数量，取值为**数字字符串**或**null**
+  - maximum-allocation-vcores，Container最大vCore数量，取值为**数字字符串**或**null**
+  ```
+  type AclForYarnQueue struct {
+      User  *string `json:"user"` //用户名
+      Group *string `json:"group"`//组名
+  }
+  ```
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Progress?: number;
+    BasicParams?: ItemSeq;
     /**
-     * 开始时间
+     * 配置集信息，取值见该复杂类型的参数说明。配置集是计划模式在队列中表现，表示的是不同时间段不同的配置值，所有队列的配置集名称都一样，对于单个队列，每个配置集中的标签与参数都一样，只是参数值不同。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Starttime?: string;
+    ConfigSetParams?: Array<ConfigSetInfo>;
     /**
-     * 结束时间
+     * 容量调度专用，`OpType`为`6`时才生效，表示要删除这个队列中的哪些标签。优先级高于ConfigSetParams中的LabelParams。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Endtime?: string;
-    /**
-     * 是否有详情信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HadWoodDetail?: boolean;
-    /**
-     * Wood子流程Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WoodJobId?: number;
-    /**
-     * 多语言版本Key
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LanguageKey?: string;
-    /**
-     * 如果stage失败，失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailedReason?: string;
-    /**
-     * 步骤耗时
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeConsuming?: string;
+    DeleteLables?: Array<string>;
 }
 /**
  * InquiryPriceScaleOutInstance返回参数结构体

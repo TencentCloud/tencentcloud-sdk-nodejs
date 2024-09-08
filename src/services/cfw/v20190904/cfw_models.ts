@@ -928,29 +928,30 @@ export interface DeleteAllAccessControlRuleRequest {
 }
 
 /**
- * ModifyBlockIgnoreList请求参数结构体
+ * ModifyEdgeIpSwitch请求参数结构体
  */
-export interface ModifyBlockIgnoreListRequest {
+export interface ModifyEdgeIpSwitchRequest {
   /**
-   * 1封禁列表 2 放通列表
+   * 0 关闭开关
+1 打开开关
+2 不操作开关，此次切换模式
    */
-  RuleType: number
+  Enable?: number
   /**
-   * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
+   * 操作开关详情
    */
-  IOC: Array<IocListData>
+  EdgeIpSwitchLst?: Array<EdgeIpSwitch>
   /**
-   * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
+   * 0 不自动选择子网
+1 自动选择子网创建私有连接
    */
-  IocAction: string
+  AutoChooseSubnet?: number
   /**
-   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
+   * 0 切换为旁路
+1 切换为串行
+2 不切换模式，此次操作开关
    */
-  StartTime?: string
-  /**
-   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
-   */
-  EndTime?: string
+  SwitchMode?: number
 }
 
 /**
@@ -1580,13 +1581,17 @@ export interface ModifyAllPublicIPSwitchStatusResponse {
 }
 
 /**
- * DeleteVpcInstance返回参数结构体
+ * SyncFwOperate请求参数结构体
  */
-export interface DeleteVpcInstanceResponse {
+export interface SyncFwOperateRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 同步操作类型：Route，同步防火墙路由
    */
-  RequestId?: string
+  SyncType: string
+  /**
+   * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
+   */
+  FwType?: string
 }
 
 /**
@@ -1620,17 +1625,29 @@ export interface ModifyAssetScanRequest {
 }
 
 /**
- * 设置nat防火墙的vpc dns 接入开关
+ * ModifyBlockIgnoreList请求参数结构体
  */
-export interface DnsVpcSwitch {
+export interface ModifyBlockIgnoreListRequest {
   /**
-   * vpc id
+   * 1封禁列表 2 放通列表
    */
-  VpcId: string
+  RuleType: number
   /**
-   * 0：设置为关闭 1:设置为打开
+   * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
    */
-  Status: number
+  IOC: Array<IocListData>
+  /**
+   * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
+   */
+  IocAction: string
+  /**
+   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
+   */
+  StartTime?: string
+  /**
+   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
+   */
+  EndTime?: string
 }
 
 /**
@@ -3662,21 +3679,6 @@ export interface RemoveNatAcRuleRequest {
 }
 
 /**
- * ModifySequenceRules返回参数结构体
- */
-export interface ModifySequenceRulesResponse {
-  /**
-   * 0: 修改成功, 非0: 修改失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAssetSync请求参数结构体
  */
 export type DescribeAssetSyncRequest = null
@@ -4521,30 +4523,18 @@ export interface DescribeTableStatusResponse {
 }
 
 /**
- * ModifyEdgeIpSwitch请求参数结构体
+ * ModifySequenceRules返回参数结构体
  */
-export interface ModifyEdgeIpSwitchRequest {
+export interface ModifySequenceRulesResponse {
   /**
-   * 0 关闭开关
-1 打开开关
-2 不操作开关，此次切换模式
+   * 0: 修改成功, 非0: 修改失败
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable?: number
+  Status: number
   /**
-   * 操作开关详情
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EdgeIpSwitchLst?: Array<EdgeIpSwitch>
-  /**
-   * 0 不自动选择子网
-1 自动选择子网创建私有连接
-   */
-  AutoChooseSubnet?: number
-  /**
-   * 0 切换为旁路
-1 切换为串行
-2 不切换模式，此次操作开关
-   */
-  SwitchMode?: number
+  RequestId?: string
 }
 
 /**
@@ -5149,20 +5139,6 @@ export interface IdsWhiteInfo {
  * DescribeGuideScanInfo请求参数结构体
  */
 export type DescribeGuideScanInfoRequest = null
-
-/**
- * SyncFwOperate请求参数结构体
- */
-export interface SyncFwOperateRequest {
-  /**
-   * 同步操作类型：Route，同步防火墙路由
-   */
-  SyncType: string
-  /**
-   * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
-   */
-  FwType?: string
-}
 
 /**
  * 未处置事件详情
@@ -6511,9 +6487,18 @@ export interface CreateSecurityGroupRulesRequest {
 }
 
 /**
- * DeleteVpcInstance请求参数结构体
+ * 设置nat防火墙的vpc dns 接入开关
  */
-export type DeleteVpcInstanceRequest = null
+export interface DnsVpcSwitch {
+  /**
+   * vpc id
+   */
+  VpcId: string
+  /**
+   * 0：设置为关闭 1:设置为打开
+   */
+  Status: number
+}
 
 /**
  * 防火墙开关列表对象

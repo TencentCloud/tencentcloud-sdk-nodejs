@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   MonthRepeatStrategy,
   ClusterSetting,
+  ZoneDetailPriceResult,
   PodSpecInfo,
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
@@ -28,7 +29,7 @@ import {
   SchedulerTaskInfo,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
-  PodVolume,
+  DescribeHiveQueriesRequest,
   SyncPodStateResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
@@ -38,6 +39,7 @@ import {
   DiskSpecInfo,
   HiveQuery,
   Step,
+  PreExecuteFileSettings,
   KeyValue,
   DescribeAutoScaleGroupGlobalConfRequest,
   EmrProductConfigDetail,
@@ -56,7 +58,7 @@ import {
   ClusterInstancesInfo,
   SubnetInfo,
   ScaleOutInstanceRequest,
-  ZoneDetailPriceResult,
+  ResetYarnConfigRequest,
   DescribeHBaseTableOverviewResponse,
   DescribeServiceNodeInfosResponse,
   ModifyAutoScaleStrategyRequest,
@@ -72,13 +74,14 @@ import {
   EmrListInstance,
   ServiceNodeDetailInfo,
   AddUsersForUserManagerResponse,
+  DescribeYarnQueueResponse,
   TopologyInfo,
   SchedulerTaskDetail,
   NodeResourceSpec,
   AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
   VPCSettings,
-  DescribeHiveQueriesRequest,
+  DescribeInstancesListResponse,
   DescribeInstanceRenewNodesRequest,
   YarnApplication,
   JobResult,
@@ -104,17 +107,18 @@ import {
   PodParameter,
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
-  RenewInstancesInfo,
+  ConfigSetInfo,
   DescribeInsightListRequest,
   DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
   DescribeHiveQueriesResponse,
   RunJobFlowResponse,
-  PodNewParameter,
-  DescribeInstanceRenewNodesResponse,
+  DescribeYarnQueueRequest,
+  DescribeImpalaQueriesResponse,
   ModifyResourcesTagsResponse,
   ModifyAutoRenewFlagResponse,
   ScaleOutServiceConfGroupsInfo,
+  UserManagerUserBriefInfo,
   DescribeYarnScheduleHistoryResponse,
   DescribeAutoScaleGroupGlobalConfResponse,
   DescribeEmrApplicationStaticsRequest,
@@ -125,6 +129,7 @@ import {
   DiskGroup,
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
+  PodVolume,
   PriceDetail,
   DescribeResourceScheduleResponse,
   MultiDisk,
@@ -141,6 +146,7 @@ import {
   DescribeInsightListResponse,
   CustomServiceDefine,
   DeleteAutoScaleStrategyResponse,
+  StageInfoDetail,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
   DescribeCvmQuotaResponse,
@@ -151,6 +157,7 @@ import {
   BootstrapAction,
   ScaleOutClusterRequest,
   DescribeClusterNodesRequest,
+  ModifyYarnQueueV2Request,
   DescribeCvmQuotaRequest,
   DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
@@ -165,13 +172,16 @@ import {
   PodNewSpec,
   InquiryPriceUpdateInstanceRequest,
   DescribeAutoScaleStrategiesRequest,
+  DeployYarnConfRequest,
   TerminateClusterNodesRequest,
   DescribeInstancesListRequest,
+  ItemSeq,
   RepeatStrategy,
+  RenewInstancesInfo,
   OutterResource,
   OpScope,
   DeleteAutoScaleStrategyRequest,
-  DescribeInstancesListResponse,
+  DeployYarnConfResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
   TerminateTasksResponse,
@@ -194,6 +204,7 @@ import {
   ModifyAutoRenewFlagRequest,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
+  PodNewParameter,
   DescribeEmrOverviewMetricsRequest,
   PodState,
   ScaleOutClusterResponse,
@@ -201,22 +212,23 @@ import {
   PartDetailPriceItem,
   ExternalService,
   RestartPolicy,
-  PreExecuteFileSettings,
+  ModifyYarnQueueV2Response,
   ClusterExternalServiceInfo,
   SoftDependInfo,
   ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
+  ResetYarnConfigResponse,
   LoadMetricsConditions,
   JobFlowResource,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
   ModifyResourceTags,
   LoadMetricsCondition,
-  DescribeImpalaQueriesResponse,
+  DescribeInstanceRenewNodesResponse,
   CustomMetaDBInfo,
-  UserManagerUserBriefInfo,
+  Item,
   TableSchemaItem,
-  StageInfoDetail,
+  ConfigModifyInfoV2,
   InquiryPriceScaleOutInstanceResponse,
   AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
@@ -307,23 +319,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改YARN资源调度的资源配置
+   * 获取资源调度中的队列信息
    */
-  async ModifyResourceScheduleConfig(
-    req: ModifyResourceScheduleConfigRequest,
-    cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
-  ): Promise<ModifyResourceScheduleConfigResponse> {
-    return this.request("ModifyResourceScheduleConfig", req, cb)
+  async DescribeYarnQueue(
+    req: DescribeYarnQueueRequest,
+    cb?: (error: string, rep: DescribeYarnQueueResponse) => void
+  ): Promise<DescribeYarnQueueResponse> {
+    return this.request("DescribeYarnQueue", req, cb)
   }
 
   /**
-   * 集群续费询价。
+   * 修改资源调度中队列信息
    */
-  async InquirePriceRenewEmr(
-    req: InquirePriceRenewEmrRequest,
-    cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
-  ): Promise<InquirePriceRenewEmrResponse> {
-    return this.request("InquirePriceRenewEmr", req, cb)
+  async ModifyYarnQueueV2(
+    req: ModifyYarnQueueV2Request,
+    cb?: (error: string, rep: ModifyYarnQueueV2Response) => void
+  ): Promise<ModifyYarnQueueV2Response> {
+    return this.request("ModifyYarnQueueV2", req, cb)
+  }
+
+  /**
+   * yarn资源调度-部署生效
+   */
+  async DeployYarnConf(
+    req: DeployYarnConfRequest,
+    cb?: (error: string, rep: DeployYarnConfResponse) => void
+  ): Promise<DeployYarnConfResponse> {
+    return this.request("DeployYarnConf", req, cb)
   }
 
   /**
@@ -417,13 +439,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 部署生效
+   * 部署生效。已废弃，请使用`DeployYarnConf`接口进行部署生效
    */
   async ModifyYarnDeploy(
     req: ModifyYarnDeployRequest,
     cb?: (error: string, rep: ModifyYarnDeployResponse) => void
   ): Promise<ModifyYarnDeployResponse> {
     return this.request("ModifyYarnDeploy", req, cb)
+  }
+
+  /**
+   * 缩容Task节点
+   */
+  async TerminateTasks(
+    req: TerminateTasksRequest,
+    cb?: (error: string, rep: TerminateTasksResponse) => void
+  ): Promise<TerminateTasksResponse> {
+    return this.request("TerminateTasks", req, cb)
   }
 
   /**
@@ -434,6 +466,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateClusterNodesResponse) => void
   ): Promise<TerminateClusterNodesResponse> {
     return this.request("TerminateClusterNodes", req, cb)
+  }
+
+  /**
+   * 修改YARN资源调度的资源配置
+   */
+  async ResetYarnConfig(
+    req: ResetYarnConfigRequest,
+    cb?: (error: string, rep: ResetYarnConfigResponse) => void
+  ): Promise<ResetYarnConfigResponse> {
+    return this.request("ResetYarnConfig", req, cb)
   }
 
   /**
@@ -520,7 +562,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改了yarn的资源调度器，点击部署生效
+   * 修改了yarn的资源调度器，点击部署生效。
    */
   async ModifyResourceScheduler(
     req: ModifyResourceSchedulerRequest,
@@ -580,13 +622,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看yarn资源调度的调度历史
+   * 查看yarn资源调度的调度历史。废弃，请使用流程中心查看历史记录。
    */
   async DescribeYarnScheduleHistory(
     req: DescribeYarnScheduleHistoryRequest,
     cb?: (error: string, rep: DescribeYarnScheduleHistoryResponse) => void
   ): Promise<DescribeYarnScheduleHistoryResponse> {
     return this.request("DescribeYarnScheduleHistory", req, cb)
+  }
+
+  /**
+   * 修改YARN资源调度的资源配置。已废弃，请使用`ModifyYarnQueueV2`来修改队列配置
+   */
+  async ModifyResourceScheduleConfig(
+    req: ModifyResourceScheduleConfigRequest,
+    cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
+  ): Promise<ModifyResourceScheduleConfigResponse> {
+    return this.request("ModifyResourceScheduleConfig", req, cb)
   }
 
   /**
@@ -620,13 +672,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 缩容Task节点
+   * 集群续费询价。
    */
-  async TerminateTasks(
-    req: TerminateTasksRequest,
-    cb?: (error: string, rep: TerminateTasksResponse) => void
-  ): Promise<TerminateTasksResponse> {
-    return this.request("TerminateTasks", req, cb)
+  async InquirePriceRenewEmr(
+    req: InquirePriceRenewEmrRequest,
+    cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
+  ): Promise<InquirePriceRenewEmrResponse> {
+    return this.request("InquirePriceRenewEmr", req, cb)
   }
 
   /**
@@ -650,7 +702,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询YARN资源调度数据信息
+   * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
    */
   async DescribeResourceSchedule(
     req: DescribeResourceScheduleRequest,
@@ -700,7 +752,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新YARN的动态资源池
+   * 刷新YARN的动态资源池。已废弃，请使用`DeployYarnConf`
    */
   async ModifyResourcePools(
     req: ModifyResourcePoolsRequest,

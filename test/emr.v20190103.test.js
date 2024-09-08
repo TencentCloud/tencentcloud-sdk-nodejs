@@ -78,9 +78,9 @@ it("emr.v20190103.DescribeImpalaQueries", async function () {
     }
 })
 
-it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
+it("emr.v20190103.DescribeYarnQueue", async function () {
     try {
-       const data = await client.ModifyResourceScheduleConfig({})
+       const data = await client.DescribeYarnQueue({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,19 @@ it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
     }
 })
 
-it("emr.v20190103.InquirePriceRenewEmr", async function () {
+it("emr.v20190103.ModifyYarnQueueV2", async function () {
     try {
-       const data = await client.InquirePriceRenewEmr({})
+       const data = await client.ModifyYarnQueueV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DeployYarnConf", async function () {
+    try {
+       const data = await client.DeployYarnConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +208,29 @@ it("emr.v20190103.ModifyYarnDeploy", async function () {
     }
 })
 
+it("emr.v20190103.TerminateTasks", async function () {
+    try {
+       const data = await client.TerminateTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateClusterNodes", async function () {
     try {
        const data = await client.TerminateClusterNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ResetYarnConfig", async function () {
+    try {
+       const data = await client.ResetYarnConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +388,16 @@ it("emr.v20190103.DescribeYarnScheduleHistory", async function () {
     }
 })
 
+it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
+    try {
+       const data = await client.ModifyResourceScheduleConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeJobFlow", async function () {
     try {
        const data = await client.DescribeJobFlow({})
@@ -388,9 +428,9 @@ it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     }
 })
 
-it("emr.v20190103.TerminateTasks", async function () {
+it("emr.v20190103.InquirePriceRenewEmr", async function () {
     try {
-       const data = await client.TerminateTasks({})
+       const data = await client.InquirePriceRenewEmr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

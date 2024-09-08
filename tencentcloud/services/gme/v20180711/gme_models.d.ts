@@ -1678,23 +1678,23 @@ export interface ScanDetail {
     /**
      * 违规场景，参照<a href="https://cloud.tencent.com/document/product/607/37622#Label_Value">Label</a>定义
      */
-    Label: string;
+    Label?: string;
     /**
      * 该场景下概率[0.00,100.00],分值越大违规概率越高
      */
-    Rate: string;
+    Rate?: string;
     /**
      * 违规关键字
      */
-    KeyWord: string;
+    KeyWord?: string;
     /**
-     * 关键字在音频的开始时间，从0开始的偏移量，单位为毫秒
+     * 关键字在音频的开始时间，从0开始的偏移量，单位为毫秒，Label=moan时有效
      */
-    StartTime: number;
+    StartTime?: number;
     /**
-     * 关键字在音频的结束时间，从0开始的偏移量,，单位为毫秒
+     * 关键字在音频的结束时间，从0开始的偏移量,，单位为毫秒，Label=moan时有效
      */
-    EndTime: number;
+    EndTime?: number;
 }
 /**
  * ModifyAppStatus返回参数结构体
