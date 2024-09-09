@@ -51,7 +51,7 @@ export interface DirectConnectTunnelRoute {
  */
 export interface RejectDirectConnectTunnelRequest {
     /**
-     * 无
+     * 专用通道ID。
      */
     DirectConnectTunnelId: string;
 }
@@ -86,7 +86,7 @@ export interface CreateDirectConnectResponse {
  */
 export interface DescribeDirectConnectTunnelExtraRequest {
     /**
-     * 专用通道ID
+     * 专用通道ID。
      */
     DirectConnectTunnelId: string;
 }
@@ -362,7 +362,7 @@ export interface DescribeAccessPointsResponse {
      */
     AccessPointSet?: Array<AccessPoint>;
     /**
-     * 符合接入点数量。
+     * 接入点总数量。
      */
     TotalCount?: number;
     /**
@@ -384,7 +384,7 @@ export interface DeleteDirectConnectTunnelRequest {
  */
 export interface AcceptDirectConnectTunnelRequest {
     /**
-     * 物理专线拥有者接受共享专用通道申请
+     * 专用通道ID。
      */
     DirectConnectTunnelId: string;
 }
@@ -402,7 +402,7 @@ export interface ReleaseInternetAddressRequest {
  */
 export interface DescribeDirectConnectTunnelExtraResponse {
     /**
-     * 专用通道扩展信息
+     * 专用通道扩展信息。
      */
     DirectConnectTunnelExtra?: DirectConnectTunnelExtra;
     /**
@@ -819,8 +819,7 @@ export interface DescribeDirectConnectsResponse {
  */
 export interface DescribeAccessPointsRequest {
     /**
-     * 接入点所在的地域。使用DescribeRegions查询
-  
+     * 接入点所在的地域。使用DescribeRegions查询。
   您可以通过调用 DescribeRegions接口获取地域ID。
      */
     RegionId?: string;

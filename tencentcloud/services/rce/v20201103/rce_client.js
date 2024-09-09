@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNameList", req, cb);
     }
     /**
-     * 创建黑白名单列表的数据 包含列表名称 列表名单类型id 关联场景id 数据类型id 记录状态 备注 数据来源 手动输入数据或cos文件key
+     * 创建黑白名单，黑白名单数量上限为100
      */
     async CreateNameList(req, cb) {
         return this.request("CreateNameList", req, cb);
@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNameList", req, cb);
     }
     /**
-     * 新增黑白名单详情数据 手动导入或批量导入
+     * 新增黑白名单数据，所有黑白名单数据总量上限为10000
      */
     async ImportNameListData(req, cb) {
         return this.request("ImportNameListData", req, cb);

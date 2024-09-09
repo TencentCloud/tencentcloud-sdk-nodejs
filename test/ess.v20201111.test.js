@@ -268,6 +268,16 @@ it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
     }
 })
 
+it("ess.v20201111.DescribeOrganizationAuthStatus", async function () {
+    try {
+       const data = await client.DescribeOrganizationAuthStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.RenewAutoSignLicense", async function () {
     try {
        const data = await client.RenewAutoSignLicense({})

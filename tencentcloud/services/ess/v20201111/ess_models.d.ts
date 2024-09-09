@@ -1764,6 +1764,39 @@ export interface Agent {
     ProxyOperator?: string;
 }
 /**
+ * DescribeUserAutoSignStatus返回参数结构体
+ */
+export interface DescribeUserAutoSignStatusResponse {
+    /**
+     * 查询用户是否已开通自动签
+     */
+    IsOpen?: boolean;
+    /**
+     * 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。
+  
+  值为unix时间戳,单位为秒。
+     */
+    LicenseFrom?: number;
+    /**
+     * 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
+  
+  值为unix时间戳,单位为秒。
+     */
+    LicenseTo?: number;
+    /**
+     * 设置用户开通自动签时是否绑定个人自动签账号许可。<ul><li>**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li><li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
+     */
+    LicenseType?: number;
+    /**
+     * 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。
+     */
+    SealId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 签署人详情信息
  */
 export interface FlowApproverDetail {
@@ -2237,6 +2270,24 @@ export interface TemplateInfo {
      * @deprecated
      */
     Seals?: Array<SealInfo>;
+}
+/**
+ * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
+ */
+export interface SignQrCode {
+    /**
+     * 二维码ID，为32位字符串。
+     */
+    QrCodeId?: string;
+    /**
+     * 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。
+     */
+    QrCodeUrl?: string;
+    /**
+     * 二维码的有截止时间，格式为Unix标准时间戳（秒）。
+  一旦超过二维码的有效期限，该二维码将自动失效。
+     */
+    ExpiredTime?: number;
 }
 /**
  * CreateDocument返回参数结构体
@@ -3111,33 +3162,27 @@ export interface CreateLegalSealQrCodeRequest {
     Organization?: OrganizationInfo;
 }
 /**
- * DescribeUserAutoSignStatus返回参数结构体
+ * DescribeOrganizationAuthStatus返回参数结构体
  */
-export interface DescribeUserAutoSignStatusResponse {
+export interface DescribeOrganizationAuthStatusResponse {
     /**
-     * 查询用户是否已开通自动签
+     * 企业是否已认证
      */
-    IsOpen?: boolean;
+    IsVerified?: boolean;
     /**
-     * 自动签许可生效时间。当且仅当已通过许可开通自动签时有值。
-  
-  值为unix时间戳,单位为秒。
+     * 企业认证状态 0-未认证 1-认证中 2-已认证
      */
-    LicenseFrom?: number;
+    AuthStatus?: number;
     /**
-     * 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
-  
-  值为unix时间戳,单位为秒。
+     * 企业认证信息
      */
-    LicenseTo?: number;
+    AuthRecords?: Array<AuthRecord>;
     /**
-     * 设置用户开通自动签时是否绑定个人自动签账号许可。<ul><li>**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li><li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
+     * 企业在腾讯电子签平台的唯一身份标识，为32位字符串。
+  可登录腾讯电子签控制台，在 "更多"->"企业设置"->"企业中心"- 中查看企业电子签账号。
+  p.s. 只有当前企业认证成功的时候返回
      */
-    LicenseType?: number;
-    /**
-     * 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。
-     */
-    SealId?: string;
+    OrganizationId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3494,22 +3539,35 @@ export interface UserThreeFactor {
     IdCardNumber: string;
 }
 /**
- * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
+ * 企业认证信息
  */
-export interface SignQrCode {
+export interface AuthRecord {
     /**
-     * 二维码ID，为32位字符串。
+     * 经办人姓名。
      */
-    QrCodeId?: string;
+    OperatorName?: string;
     /**
-     * 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。
+     * 经办人手机号。
      */
-    QrCodeUrl?: string;
+    OperatorMobile?: string;
     /**
-     * 二维码的有截止时间，格式为Unix标准时间戳（秒）。
-  一旦超过二维码的有效期限，该二维码将自动失效。
+     * 认证授权方式：
+  <ul><li> **0**：未选择授权方式（默认值）</li>
+  <li> **1**：上传授权书</li>
+  <li> **2**：法人授权</li>
+  <li> **3**：法人认证</li></ul>
      */
-    ExpiredTime?: number;
+    AuthType?: number;
+    /**
+     * 企业认证授权书审核状态：
+  <ul><li> **0**：未提交授权书（默认值）</li>
+  <li> **1**：审核通过</li>
+  <li> **2**：审核驳回</li>
+  <li> **3**：审核中</li>
+  <li> **4**：AI识别中</li>
+  <li> **5**：客户确认AI信息</li></ul>
+     */
+    AuditStatus?: number;
 }
 /**
  * CreateSealPolicy返回参数结构体
@@ -3741,31 +3799,26 @@ export interface CreateOrganizationAuthUrlResponse {
     RequestId?: string;
 }
 /**
- * UnbindEmployeeUserIdWithClientOpenId请求参数结构体
+ * DescribeOrganizationAuthStatus请求参数结构体
  */
-export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
+export interface DescribeOrganizationAuthStatusRequest {
     /**
-     * 执行本接口操作的员工信息。使用此接口时，必须填写UserId。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。 支持填入集团子公司经办人 userId 代发合同。  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-  
-  通过<a href="https://qian.tencent.com/developers/companyApis/staffs/DescribeIntegrationEmployees" target="_blank">DescribeIntegrationEmployees</a>接口获取，也可登录腾讯电子签控制台查看
-  ![image](https://qcloudimg.tencent-cloud.cn/raw/97cfffabb0caa61df16999cd395d7850.png)
+     * 组织机构名称。 请确认该名称与企业营业执照中注册的名称一致。 如果名称中包含英文括号()，请使用中文括号（）代替。
      */
-    UserId: string;
+    OrganizationName?: string;
     /**
-     * 员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。
-  该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。
+     * 企业统一社会信用代码
+  注意：OrganizationName和UniformSocialCreditCode不能同时为空
      */
-    OpenId: string;
+    UniformSocialCreditCode?: string;
     /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     * 法人姓名
      */
-    Agent?: Agent;
+    LegalName?: string;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -6502,6 +6555,33 @@ export interface CreateOrganizationBatchSignUrlResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UnbindEmployeeUserIdWithClientOpenId请求参数结构体
+ */
+export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
+    /**
+     * 执行本接口操作的员工信息。使用此接口时，必须填写UserId。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+  
+  通过<a href="https://qian.tencent.com/developers/companyApis/staffs/DescribeIntegrationEmployees" target="_blank">DescribeIntegrationEmployees</a>接口获取，也可登录腾讯电子签控制台查看
+  ![image](https://qcloudimg.tencent-cloud.cn/raw/97cfffabb0caa61df16999cd395d7850.png)
+     */
+    UserId: string;
+    /**
+     * 员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。
+  该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。
+     */
+    OpenId: string;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * 模板中文件的信息结构

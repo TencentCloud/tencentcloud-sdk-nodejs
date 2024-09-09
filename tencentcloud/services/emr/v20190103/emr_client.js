@@ -217,6 +217,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourceScheduler", req, cb);
     }
     /**
+     * YARN资源调度-变更详情
+     */
+    async DescribeResourceScheduleDiffDetail(req, cb) {
+        return this.request("DescribeResourceScheduleDiffDetail", req, cb);
+    }
+    /**
      * EMR同步TKE中POD状态
      */
     async SyncPodState(req, cb) {

@@ -328,6 +328,16 @@ it("emr.v20190103.ModifyResourceScheduler", async function () {
     }
 })
 
+it("emr.v20190103.DescribeResourceScheduleDiffDetail", async function () {
+    try {
+       const data = await client.DescribeResourceScheduleDiffDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.SyncPodState", async function () {
     try {
        const data = await client.SyncPodState({})

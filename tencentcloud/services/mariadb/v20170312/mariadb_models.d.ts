@@ -527,9 +527,9 @@ export interface CreateAccountRequest {
     /**
      * 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。
      */
-    Password: string;
+    Password?: string;
     /**
-     * 是否创建为只读账号，0：否:； 1：只读账号，该账号的sql请求优先选择备机执行，备机延迟时选择主机执行；2：只读账号，优先选择备机执行，备机延迟时操作报错；3：只读账号，优先选择备机执行，忽略备机延迟只读备机；
+     * 是否创建为只读账号，0：否； 1：只读账号，该账号的sql请求优先选择备机执行，备机延迟时选择主机执行；2：只读账号，优先选择备机执行，备机延迟时操作报错；3：只读账号，优先选择备机执行，忽略备机延迟只读备机；
      */
     ReadOnly?: number;
     /**
@@ -548,6 +548,10 @@ export interface CreateAccountRequest {
      * 用户最大连接数限制参数。不传或者传0表示为不限制，对应max_user_connections参数，目前10.1内核版本不支持设置。
      */
     MaxUserConnections?: number;
+    /**
+     * 使用GetPublicKey返回的RSA2048公钥加密后的密码
+     */
+    EncryptedPassword?: string;
 }
 /**
  * InitDBInstances返回参数结构体
@@ -1003,7 +1007,11 @@ export interface ResetAccountPasswordRequest {
     /**
      * 新密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
      */
-    Password: string;
+    Password?: string;
+    /**
+     * 使用GetPublicKey返回的RSA2048公钥加密后的密码
+     */
+    EncryptedPassword?: string;
 }
 /**
  * CopyAccountPrivileges返回参数结构体

@@ -586,7 +586,7 @@ export interface CreateAccountRequest {
   /**
    * 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。
    */
-  Password: string
+  Password?: string
   /**
    * 是否创建为只读账号，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败，3：只从备机读取。
    */
@@ -608,6 +608,10 @@ export interface CreateAccountRequest {
    * 用户最大连接数限制参数。不传或者传0表示为不限制，对应max_user_connections参数，目前10.1内核版本不支持设置。
    */
   MaxUserConnections?: number
+  /**
+   * 使用GetPublicKey返回的RSA2048公钥加密后的密码
+   */
+  EncryptedPassword?: string
 }
 
 /**
@@ -1262,7 +1266,11 @@ export interface ResetAccountPasswordRequest {
   /**
    * 新密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
    */
-  Password: string
+  Password?: string
+  /**
+   * 使用GetPublicKey返回的RSA2048公钥加密后的密码，加密算法是PKCS1v15
+   */
+  EncryptedPassword?: string
 }
 
 /**

@@ -608,6 +608,16 @@ it("cvm.v20170312.ModifyImageAttribute", async function () {
     }
 })
 
+it("cvm.v20170312.ConvertOperatingSystems", async function () {
+    try {
+       const data = await client.ConvertOperatingSystems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DeleteDisasterRecoverGroups", async function () {
     try {
        const data = await client.DeleteDisasterRecoverGroups({})

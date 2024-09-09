@@ -492,6 +492,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyImageAttribute", req, cb);
     }
     /**
+     * 本接口(ConvertOperatingSystem)用于转换实例的操作系统，仅支持源操作系统为 CentOS 7、CentOS 8 的实例。
+     */
+    async ConvertOperatingSystems(req, cb) {
+        return this.request("ConvertOperatingSystems", req, cb);
+    }
+    /**
      * 本接口 (DeleteDisasterRecoverGroups)用于删除[分散置放群组](https://cloud.tencent.com/document/product/213/15486)。只有空的置放群组才能被删除，非空的群组需要先销毁组内所有云服务器，才能执行删除操作，不然会产生删除置放群组失败的错误。
      */
     async DeleteDisasterRecoverGroups(req, cb) {

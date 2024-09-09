@@ -143,7 +143,7 @@ export interface DescribeVideoTranslateJobRequest {
  */
 export interface SubmitVideoTranslateJobResponse {
   /**
-   * 任务ID。
+   * 视频转译任务的Job id
    */
   JobId?: string
   /**

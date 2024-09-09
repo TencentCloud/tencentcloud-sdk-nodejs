@@ -972,29 +972,18 @@ export interface SmartOptimizerPolicy {
 }
 
 /**
- * SparkSQL批任务运行日志
+ * DescribeUserInfo返回参数结构体
  */
-export interface SparkSessionBatchLog {
+export interface DescribeUserInfoResponse {
   /**
-   * 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE
+   * 用户详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Step?: string
+  UserInfo?: UserDetailInfo
   /**
-   * 时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Time?: string
-  /**
-   * 日志提示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-  /**
-   * 日志操作
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operate?: Array<SparkSessionBatchLogOperate>
+  RequestId?: string
 }
 
 /**
@@ -1123,6 +1112,16 @@ export interface DescribeDLCCatalogAccessResponse {
    * DLCCatalog授权列表
    */
   Rows?: Array<DLCCatalogAccess>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteTable返回参数结构体
+ */
+export interface DeleteTableResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2214,6 +2213,20 @@ export interface CheckDataEngineImageCanBeUpgradeRequest {
    * 集群id
    */
   DataEngineId: string
+}
+
+/**
+ * QueryInternalTableWarehouse请求参数结构体
+ */
+export interface QueryInternalTableWarehouseRequest {
+  /**
+   * 库名
+   */
+  DatabaseName: string
+  /**
+   * 表名
+   */
+  TableName: string
 }
 
 /**
@@ -5228,6 +5241,20 @@ export interface ReportHeartbeatMetaDataResponse {
 }
 
 /**
+ * QueryInternalTableWarehouse返回参数结构体
+ */
+export interface QueryInternalTableWarehouseResponse {
+  /**
+   * warehouse路径
+   */
+  WarehousePath: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * script实例。
  */
 export interface Script {
@@ -5627,6 +5654,16 @@ export interface DescribeUpdatableDataEnginesRequest {
 }
 
 /**
+ * DeleteTable请求参数结构体
+ */
+export interface DeleteTableRequest {
+  /**
+   * 表基本信息
+   */
+  TableBaseInfo: TableBaseInfo
+}
+
+/**
  * DescribeStoreLocation请求参数结构体
  */
 export type DescribeStoreLocationRequest = null
@@ -5910,18 +5947,29 @@ export interface BindWorkGroupsToUserResponse {
 }
 
 /**
- * DescribeUserInfo返回参数结构体
+ * SparkSQL批任务运行日志
  */
-export interface DescribeUserInfoResponse {
+export interface SparkSessionBatchLog {
   /**
-   * 用户详细信息
+   * 日志步骤：BEG/CS/DS/DSS/DSF/FINF/RTO/CANCEL/CT/DT/DTS/DTF/FINT/EXCE
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserInfo?: UserDetailInfo
+  Step?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Time?: string
+  /**
+   * 日志提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 日志操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operate?: Array<SparkSessionBatchLogOperate>
 }
 
 /**

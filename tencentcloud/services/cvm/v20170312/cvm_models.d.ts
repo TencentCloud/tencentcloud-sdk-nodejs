@@ -1788,6 +1788,27 @@ export interface RemoveChcAssistVpcRequest {
     ChcIds: Array<string>;
 }
 /**
+ * ConvertOperatingSystems请求参数结构体
+ */
+export interface ConvertOperatingSystemsRequest {
+    /**
+     * 执行操作系统转换的实例 ID
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 是否最小规模转换
+     */
+    MinimalConversion?: boolean;
+    /**
+     * 是否只预检
+     */
+    DryRun?: boolean;
+    /**
+     * 转换的目标操作系统类型。仅支持 TencentOS。
+     */
+    TargetOSType?: string;
+}
+/**
  * StartInstances请求参数结构体
  */
 export interface StartInstancesRequest {
@@ -2860,6 +2881,19 @@ export interface LaunchTemplateVersionData {
     DisableApiTermination?: boolean;
 }
 /**
+ * 操作系统转换的目标操作系统信息
+ */
+export interface TargetOS {
+    /**
+     * 目标操作系统类型
+     */
+    TargetOSType?: string;
+    /**
+     * 目标操作系统版本
+     */
+    TargetOSVersion?: string;
+}
+/**
  * DeleteDisasterRecoverGroups返回参数结构体
  */
 export interface DeleteDisasterRecoverGroupsResponse {
@@ -2967,6 +3001,25 @@ export interface Externals {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageBlockAttr?: StorageBlock;
+}
+/**
+ * ConvertOperatingSystems返回参数结构体
+ */
+export interface ConvertOperatingSystemsResponse {
+    /**
+     * 转换的目标操系统信息，仅在入参 DryRun 为 true 时返回。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportTargetOSList?: Array<TargetOS>;
+    /**
+     * 操作系统转换的任务 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * InquiryPriceModifyInstancesChargeType请求参数结构体

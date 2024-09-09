@@ -53,12 +53,13 @@ import {
   DescribeSparkSessionBatchSQLRequest,
   DescribeUsersResponse,
   SmartOptimizerPolicy,
-  SparkSessionBatchLog,
+  DescribeUserInfoResponse,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
   ElasticsearchInfo,
   DeleteUsersFromWorkGroupResponse,
   DescribeDLCCatalogAccessResponse,
+  DeleteTableResponse,
   DescribeUserRolesResponse,
   CreateExportTaskRequest,
   CreateDMSTableRequest,
@@ -101,6 +102,7 @@ import {
   CreateWorkGroupRequest,
   DescribeDatasourceConnectionRequest,
   CheckDataEngineImageCanBeUpgradeRequest,
+  QueryInternalTableWarehouseRequest,
   CreateResultDownloadRequest,
   DescribeNotebookSessionStatementSqlResultResponse,
   ModifyUserRequest,
@@ -224,6 +226,7 @@ import {
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
   ReportHeartbeatMetaDataResponse,
+  QueryInternalTableWarehouseResponse,
   Script,
   CheckDataEngineImageCanBeUpgradeResponse,
   CreateInternalTableRequest,
@@ -243,6 +246,7 @@ import {
   DescribeSparkSessionBatchSqlLogRequest,
   WorkGroupIdSetOfUserId,
   DescribeUpdatableDataEnginesRequest,
+  DeleteTableRequest,
   DescribeStoreLocationRequest,
   DescribeViewsRequest,
   GrantDLCCatalogAccessRequest,
@@ -253,7 +257,7 @@ import {
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
   BindWorkGroupsToUserResponse,
-  DescribeUserInfoResponse,
+  SparkSessionBatchLog,
   DeleteScriptRequest,
   AddDMSPartitionsRequest,
   DescribeUserRolesRequest,
@@ -1280,6 +1284,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（QueryInternalTableWarehouse）用于获取原生表warehouse路径
+   */
+  async QueryInternalTableWarehouse(
+    req: QueryInternalTableWarehouseRequest,
+    cb?: (error: string, rep: QueryInternalTableWarehouseResponse) => void
+  ): Promise<QueryInternalTableWarehouseResponse> {
+    return this.request("QueryInternalTableWarehouse", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDatasourceConnection）用于查询数据源信息
    */
   async DescribeDatasourceConnection(
@@ -1397,6 +1411,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 删除表
+   */
+  async DeleteTable(
+    req: DeleteTableRequest,
+    cb?: (error: string, rep: DeleteTableResponse) => void
+  ): Promise<DeleteTableResponse> {
+    return this.request("DeleteTable", req, cb)
   }
 
   /**

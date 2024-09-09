@@ -27,6 +27,7 @@ import {
   ScaleOutInstanceResponse,
   DescribeClusterFlowStatusDetailResponse,
   SchedulerTaskInfo,
+  DynamicPodSpec,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
   DescribeHiveQueriesRequest,
@@ -49,7 +50,7 @@ import {
   TrinoQueryInfo,
   WeekRepeatStrategy,
   UserManagerFilter,
-  DynamicPodSpec,
+  DeleteAutoScaleStrategyResponse,
   OverviewRow,
   DiskSpec,
   LoadAutoScaleStrategy,
@@ -70,10 +71,11 @@ import {
   Tag,
   HealthStatus,
   Arg,
-  ClusterIDToFlowID,
+  DiffDetail,
   EmrListInstance,
   ServiceNodeDetailInfo,
   AddUsersForUserManagerResponse,
+  DescribeResourceScheduleDiffDetailResponse,
   DescribeYarnQueueResponse,
   TopologyInfo,
   SchedulerTaskDetail,
@@ -81,6 +83,7 @@ import {
   AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
   VPCSettings,
+  DiffHeader,
   DescribeInstancesListResponse,
   DescribeInstanceRenewNodesRequest,
   YarnApplication,
@@ -108,6 +111,7 @@ import {
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
   ConfigSetInfo,
+  ClusterIDToFlowID,
   DescribeInsightListRequest,
   DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
@@ -145,7 +149,6 @@ import {
   TimeAutoScaleStrategy,
   DescribeInsightListResponse,
   CustomServiceDefine,
-  DeleteAutoScaleStrategyResponse,
   StageInfoDetail,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
@@ -162,6 +165,7 @@ import {
   DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
   CreateInstanceRequest,
+  DiffDetailItem,
   MetaDbInfo,
   Execution,
   UpdateInstanceSettings,
@@ -188,6 +192,7 @@ import {
   DescribeInstancesResponse,
   DescribeYarnApplicationsResponse,
   DescribeUsersForUserManagerResponse,
+  DescribeResourceScheduleDiffDetailRequest,
   FlowExtraDetail,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
@@ -569,6 +574,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceSchedulerResponse) => void
   ): Promise<ModifyResourceSchedulerResponse> {
     return this.request("ModifyResourceScheduler", req, cb)
+  }
+
+  /**
+   * YARN资源调度-变更详情
+   */
+  async DescribeResourceScheduleDiffDetail(
+    req: DescribeResourceScheduleDiffDetailRequest,
+    cb?: (error: string, rep: DescribeResourceScheduleDiffDetailResponse) => void
+  ): Promise<DescribeResourceScheduleDiffDetailResponse> {
+    return this.request("DescribeResourceScheduleDiffDetail", req, cb)
   }
 
   /**

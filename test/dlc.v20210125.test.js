@@ -878,6 +878,16 @@ it("dlc.v20210125.CreateCHDFSBindingProduct", async function () {
     }
 })
 
+it("dlc.v20210125.QueryInternalTableWarehouse", async function () {
+    try {
+       const data = await client.QueryInternalTableWarehouse({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDatasourceConnection", async function () {
     try {
        const data = await client.DescribeDatasourceConnection({})
@@ -991,6 +1001,16 @@ it("dlc.v20210125.DeleteDataEngine", async function () {
 it("dlc.v20210125.DeleteUser", async function () {
     try {
        const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteTable", async function () {
+    try {
+       const data = await client.DeleteTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

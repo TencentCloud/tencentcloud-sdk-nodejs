@@ -475,13 +475,17 @@ export interface KeyValue {
 }
 
 /**
- * UpdateDiagnoseSettings返回参数结构体
+ * 指标数据map
  */
-export interface UpdateDiagnoseSettingsResponse {
+export interface MetricMapByIndexId {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例id
    */
-  RequestId?: string
+  IndexId?: string
+  /**
+   * 指标数据
+   */
+  MetricAllData?: MetricAllData
 }
 
 /**
@@ -1118,6 +1122,32 @@ export interface CheckMigrateIndexMetaDataResponse {
 }
 
 /**
+ * 全部指标数据
+ */
+export interface MetricAllData {
+  /**
+   * 索引流量
+   */
+  IndexTraffic?: number
+  /**
+   * 存储大小
+   */
+  Storage?: number
+  /**
+   * 读请求次数
+   */
+  ReadReqTimes?: number
+  /**
+   * 写请求次数
+   */
+  WriteReqTimes?: number
+  /**
+   * 文档数量
+   */
+  DocCount?: number
+}
+
+/**
  * 配置组信息
  */
 export interface EsConfigSetInfo {
@@ -1392,6 +1422,10 @@ export interface DescribeServerlessMetricsRequest {
    * 时间长度类型DurationType(1: 3小时, 2: 昨天1天,3: 今日0点到现在)
    */
   DurationType?: number
+  /**
+   * 索引数据
+   */
+  BatchIndexList?: Array<string>
 }
 
 /**
@@ -1869,6 +1903,16 @@ export interface UpdatePluginsRequest {
    * 0：系统插件
    */
   PluginType?: number
+}
+
+/**
+ * UpdateDiagnoseSettings返回参数结构体
+ */
+export interface UpdateDiagnoseSettingsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4888,6 +4932,11 @@ export interface DescribeServerlessMetricsResponse {
    * 文档数量，单位个数
    */
   DocCount?: number
+  /**
+   * 指标数据数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricMapList?: Array<MetricMapByIndexId>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

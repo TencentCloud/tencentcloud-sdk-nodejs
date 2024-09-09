@@ -117,9 +117,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询物理专线接入点
-
-     */
+   * 查询物理专线接入点。
+   */
   async DescribeAccessPoints(
     req: DescribeAccessPointsRequest,
     cb?: (error: string, rep: DescribeAccessPointsResponse) => void
@@ -148,7 +147,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDirectConnectTunnelExtra）用于查询专用通道扩展信息
+   * 查询专用通道扩展信息。
    */
   async DescribeDirectConnectTunnelExtra(
     req: DescribeDirectConnectTunnelExtraRequest,
@@ -168,7 +167,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 接受专用通道申请
+   * 接受专用通道申请。
    */
   async AcceptDirectConnectTunnel(
     req: AcceptDirectConnectTunnelRequest,
@@ -261,7 +260,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拒绝专用通道申请
+   * 拒绝专用通道申请。
    */
   async RejectDirectConnectTunnel(
     req: RejectDirectConnectTunnelRequest,

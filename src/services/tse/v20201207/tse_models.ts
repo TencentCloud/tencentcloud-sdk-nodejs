@@ -1463,10 +1463,6 @@ export interface CreateCloudNativeAPIGatewayServiceRequest {
    */
   Protocol: string
   /**
-   * 请求路径
-   */
-  Path: string
-  /**
    * 超时时间，单位ms
    */
   Timeout: number
@@ -1487,6 +1483,10 @@ export interface CreateCloudNativeAPIGatewayServiceRequest {
    * 服务配置信息
    */
   UpstreamInfo: KongUpstreamInfo
+  /**
+   * 请求路径
+   */
+  Path?: string
 }
 
 /**
@@ -5746,10 +5746,6 @@ export interface ModifyCloudNativeAPIGatewayServiceRequest {
    */
   Protocol: string
   /**
-   * 请求路径
-   */
-  Path: string
-  /**
    * 超时时间，单位ms
    */
   Timeout: number
@@ -5774,6 +5770,10 @@ export interface ModifyCloudNativeAPIGatewayServiceRequest {
    * 服务ID
    */
   ID: string
+  /**
+   * 请求路径
+   */
+  Path?: string
 }
 
 /**

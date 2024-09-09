@@ -20,8 +20,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePublicDirectConnectTunnelRoutes(req: DescribePublicDirectConnectTunnelRoutesRequest, cb?: (error: string, rep: DescribePublicDirectConnectTunnelRoutesResponse) => void): Promise<DescribePublicDirectConnectTunnelRoutesResponse>;
     /**
-     * 查询物理专线接入点
-
+     * 查询物理专线接入点。
      */
     DescribeAccessPoints(req: DescribeAccessPointsRequest, cb?: (error: string, rep: DescribeAccessPointsResponse) => void): Promise<DescribeAccessPointsResponse>;
     /**
@@ -33,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDirectConnectTunnel(req: CreateDirectConnectTunnelRequest, cb?: (error: string, rep: CreateDirectConnectTunnelResponse) => void): Promise<CreateDirectConnectTunnelResponse>;
     /**
-     * 本接口（DescribeDirectConnectTunnelExtra）用于查询专用通道扩展信息
+     * 查询专用通道扩展信息。
      */
     DescribeDirectConnectTunnelExtra(req: DescribeDirectConnectTunnelExtraRequest, cb?: (error: string, rep: DescribeDirectConnectTunnelExtraResponse) => void): Promise<DescribeDirectConnectTunnelExtraResponse>;
     /**
@@ -41,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteDirectConnect(req: DeleteDirectConnectRequest, cb?: (error: string, rep: DeleteDirectConnectResponse) => void): Promise<DeleteDirectConnectResponse>;
     /**
-     * 接受专用通道申请
+     * 接受专用通道申请。
      */
     AcceptDirectConnectTunnel(req: AcceptDirectConnectTunnelRequest, cb?: (error: string, rep: AcceptDirectConnectTunnelResponse) => void): Promise<AcceptDirectConnectTunnelResponse>;
     /**
@@ -80,7 +79,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDirectConnect(req: CreateDirectConnectRequest, cb?: (error: string, rep: CreateDirectConnectResponse) => void): Promise<CreateDirectConnectResponse>;
     /**
-     * 拒绝专用通道申请
+     * 拒绝专用通道申请。
      */
     RejectDirectConnectTunnel(req: RejectDirectConnectTunnelRequest, cb?: (error: string, rep: RejectDirectConnectTunnelResponse) => void): Promise<RejectDirectConnectTunnelResponse>;
     /**

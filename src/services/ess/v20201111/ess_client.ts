@@ -76,6 +76,7 @@ import {
   CreateFlowRemindsResponse,
   DescribeOrganizationGroupOrganizationsRequest,
   Agent,
+  DescribeUserAutoSignStatusResponse,
   FlowApproverDetail,
   CreateFlowGroupByFilesRequest,
   DescribeFlowComponentsResponse,
@@ -89,6 +90,7 @@ import {
   CreateUserVerifyUrlResponse,
   DescribeBatchOrganizationRegistrationUrlsRequest,
   TemplateInfo,
+  SignQrCode,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
   UnbindEmployeeUserIdWithClientOpenIdResponse,
@@ -114,7 +116,7 @@ import {
   CreateIntegrationSubOrganizationActiveRecordResponse,
   DeleteSealPoliciesResponse,
   CreateLegalSealQrCodeRequest,
-  DescribeUserAutoSignStatusResponse,
+  DescribeOrganizationAuthStatusResponse,
   CreateUserAutoSignSealUrlResponse,
   FillApproverInfo,
   OccupiedSeal,
@@ -125,7 +127,7 @@ import {
   PdfVerifyResult,
   CreateBatchCancelFlowUrlResponse,
   UserThreeFactor,
-  SignQrCode,
+  AuthRecord,
   CreateSealPolicyResponse,
   FlowApproverUrlInfo,
   DisableUserAutoSignRequest,
@@ -135,7 +137,7 @@ import {
   CreateConvertTaskApiResponse,
   CreateFlowSignReviewRequest,
   CreateOrganizationAuthUrlResponse,
-  UnbindEmployeeUserIdWithClientOpenIdRequest,
+  DescribeOrganizationAuthStatusRequest,
   CreateSchemeUrlResponse,
   CreateFlowByFilesRequest,
   FlowGroupInfo,
@@ -202,6 +204,7 @@ import {
   CreateStaffResult,
   CreateUserAutoSignEnableUrlRequest,
   CreateOrganizationBatchSignUrlResponse,
+  UnbindEmployeeUserIdWithClientOpenIdRequest,
   FileInfo,
   CreateBatchOrganizationRegistrationTasksRequest,
   CreateUserVerifyUrlRequest,
@@ -811,6 +814,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserAutoSignSealUrlResponse) => void
   ): Promise<CreateUserAutoSignSealUrlResponse> {
     return this.request("CreateUserAutoSignSealUrl", req, cb)
+  }
+
+  /**
+   * 查询企业认证状态
+   */
+  async DescribeOrganizationAuthStatus(
+    req: DescribeOrganizationAuthStatusRequest,
+    cb?: (error: string, rep: DescribeOrganizationAuthStatusResponse) => void
+  ): Promise<DescribeOrganizationAuthStatusResponse> {
+    return this.request("DescribeOrganizationAuthStatus", req, cb)
   }
 
   /**

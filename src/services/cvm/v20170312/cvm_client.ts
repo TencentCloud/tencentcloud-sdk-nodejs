@@ -106,6 +106,7 @@ import {
   RenewHostsRequest,
   CreateDisasterRecoverGroupResponse,
   RemoveChcAssistVpcRequest,
+  ConvertOperatingSystemsRequest,
   StartInstancesRequest,
   Tag,
   ProgramFpgaImageResponse,
@@ -149,10 +150,12 @@ import {
   OperationCountLimit,
   ReservedInstanceConfigInfoItem,
   LaunchTemplateVersionData,
+  TargetOS,
   DeleteDisasterRecoverGroupsResponse,
   HostItem,
   OsVersion,
   Externals,
+  ConvertOperatingSystemsResponse,
   InquiryPriceModifyInstancesChargeTypeRequest,
   CreateImageRequest,
   Instance,
@@ -996,6 +999,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyImageAttributeResponse) => void
   ): Promise<ModifyImageAttributeResponse> {
     return this.request("ModifyImageAttribute", req, cb)
+  }
+
+  /**
+   * 本接口(ConvertOperatingSystem)用于转换实例的操作系统，仅支持源操作系统为 CentOS 7、CentOS 8 的实例。
+   */
+  async ConvertOperatingSystems(
+    req: ConvertOperatingSystemsRequest,
+    cb?: (error: string, rep: ConvertOperatingSystemsResponse) => void
+  ): Promise<ConvertOperatingSystemsResponse> {
+    return this.request("ConvertOperatingSystems", req, cb)
   }
 
   /**
