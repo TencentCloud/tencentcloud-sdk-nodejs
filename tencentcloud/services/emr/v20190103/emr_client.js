@@ -173,6 +173,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserManagerUserList", req, cb);
     }
     /**
+     * 本接口（TerminateSLInstance）用于销毁 Lite HBase 实例
+     */
+    async TerminateSLInstance(req, cb) {
+        return this.request("TerminateSLInstance", req, cb);
+    }
+    /**
      * 该接口支持安装了OpenLdap组件的集群。
 新增用户列表（用户管理）。
      */
@@ -185,6 +191,20 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAutoRenewFlag(req, cb) {
         return this.request("ModifyAutoRenewFlag", req, cb);
+    }
+    /**
+     * 本接口（CreateSLInstance）用于创建 Lite HBase 实例
+- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回创建实例的 InstaceId 和请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     */
+    async CreateSLInstance(req, cb) {
+        return this.request("CreateSLInstance", req, cb);
+    }
+    /**
+     * 本接口（DescribeSLInstanceList）用于查询 Lite HBase 实例列表详细信息
+     */
+    async DescribeSLInstanceList(req, cb) {
+        return this.request("DescribeSLInstanceList", req, cb);
     }
     /**
      * 修改自动扩缩容规则
@@ -211,6 +231,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceRenewNodes", req, cb);
     }
     /**
+     * 用于启停服务 重启服务等功能
+     */
+    async StartStopServiceOrMonitor(req, cb) {
+        return this.request("StartStopServiceOrMonitor", req, cb);
+    }
+    /**
      * 修改了yarn的资源调度器，点击部署生效。
      */
     async ModifyResourceScheduler(req, cb) {
@@ -223,16 +249,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceScheduleDiffDetail", req, cb);
     }
     /**
-     * EMR同步TKE中POD状态
+     * 本接口（DescribeSLInstance）用于查询 Lite HBase 实例基本信息
      */
-    async SyncPodState(req, cb) {
-        return this.request("SyncPodState", req, cb);
+    async DescribeSLInstance(req, cb) {
+        return this.request("DescribeSLInstance", req, cb);
     }
     /**
-     * 用于启停服务 重启服务等功能
+     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
+- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
      */
-    async StartStopServiceOrMonitor(req, cb) {
-        return this.request("StartStopServiceOrMonitor", req, cb);
+    async ModifySLInstance(req, cb) {
+        return this.request("ModifySLInstance", req, cb);
     }
     /**
      * 创建EMR集群实例
@@ -281,6 +309,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEmrOverviewMetrics(req, cb) {
         return this.request("DescribeEmrOverviewMetrics", req, cb);
+    }
+    /**
+     * EMR同步TKE中POD状态
+     */
+    async SyncPodState(req, cb) {
+        return this.request("SyncPodState", req, cb);
     }
     /**
      * 集群续费询价。

@@ -117,6 +117,7 @@ import {
   SignUrlInfo,
   CommonFlowApprover,
   FillApproverInfo,
+  CreatePersonAuthCertificateImageResponse,
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
   ChannelCreateUserAutoSignSealUrlRequest,
@@ -163,6 +164,7 @@ import {
   ChannelDescribeBillUsageDetailResponse,
   IntentionActionResult,
   FlowDetailInfo,
+  CreatePersonAuthCertificateImageRequest,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
   ChannelCreateRoleResponse,
@@ -1360,6 +1362,26 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void
   ): Promise<ChannelCreateFlowApproversResponse> {
     return this.request("ChannelCreateFlowApprovers", req, cb)
+  }
+
+  /**
+     * 获取个人用户认证证书图片下载URL
+
+个人用户认证证书图片样式如下图
+
+![image](https://dyn.ess.tencent.cn/guide/capi/CreatePersonAuthCertificateImage.png)
+
+注:  
+<ul>
+<li>只能获取个人用户证明图片, 企业员工的暂不支持</li>
+<li>处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。  </li>
+</ul>
+     */
+  async CreatePersonAuthCertificateImage(
+    req: CreatePersonAuthCertificateImageRequest,
+    cb?: (error: string, rep: CreatePersonAuthCertificateImageResponse) => void
+  ): Promise<CreatePersonAuthCertificateImageResponse> {
+    return this.request("CreatePersonAuthCertificateImage", req, cb)
   }
 
   /**

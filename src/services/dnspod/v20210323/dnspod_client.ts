@@ -25,6 +25,7 @@ import {
   ModifyDomainToGroupRequest,
   RollbackSnapshotRequest,
   DeleteDomainAliasResponse,
+  DescribeDomainShareUserListResponse,
   DescribeVASStatisticRequest,
   DeleteDomainBatchResponse,
   RecordGroupInfo,
@@ -114,6 +115,7 @@ import {
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
   DescribeDomainListResponse,
+  DescribeUserDetailResponse,
   ModifyRecordBatchRequest,
   WhoisContactAddress,
   SnapshotConfig,
@@ -139,7 +141,7 @@ import {
   SubdomainAnalyticsInfo,
   CustomLineInfo,
   ModifyRecordBatchDetail,
-  DescribeUserDetailResponse,
+  DescribeDomainShareUserListRequest,
   DeleteDomainBatchDetail,
   CreateDomainRequest,
   ModifyDomainCustomLineRequest,
@@ -202,6 +204,7 @@ import {
   WhoisInfo,
   DownloadSnapshotResponse,
   PreviewDetail,
+  DomainShareUserInfo,
   TagItem,
   CreateRecordGroupResponse,
   DescribeDomainGroupListRequest,
@@ -729,6 +732,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRecordResponse) => void
   ): Promise<CreateRecordResponse> {
     return this.request("CreateRecord", req, cb)
+  }
+
+  /**
+   * 获取指定域名的已共享列表
+   */
+  async DescribeDomainShareUserList(
+    req: DescribeDomainShareUserListRequest,
+    cb?: (error: string, rep: DescribeDomainShareUserListResponse) => void
+  ): Promise<DescribeDomainShareUserListResponse> {
+    return this.request("DescribeDomainShareUserList", req, cb)
   }
 
   /**

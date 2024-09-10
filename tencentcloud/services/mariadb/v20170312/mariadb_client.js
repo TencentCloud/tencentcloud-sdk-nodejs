@@ -295,6 +295,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDBInstances", req, cb);
     }
     /**
+     * 本接口(UpgradeDedicatedDBInstance)用于扩容独享云数据库实例。
+     */
+    async UpgradeDedicatedDBInstance(req, cb) {
+        return this.request("UpgradeDedicatedDBInstance", req, cb);
+    }
+    /**
      * 本接口（CreateDBInstance）用于创建包年包月的MariaDB云数据库实例，可通过传入实例规格、数据库版本号、购买时长和数量等信息创建云数据库实例。
      */
     async CreateDBInstance(req, cb) {
@@ -410,10 +416,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogTime", req, cb);
     }
     /**
-     * 本接口(UpgradeDedicatedDBInstance)用于扩容独享云数据库实例。
+     * 本接口（TerminateDedicatedDBInstance）用于销毁已隔离的独享云数据库实例。
      */
-    async UpgradeDedicatedDBInstance(req, cb) {
-        return this.request("UpgradeDedicatedDBInstance", req, cb);
+    async TerminateDedicatedDBInstance(req, cb) {
+        return this.request("TerminateDedicatedDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
@@ -440,10 +446,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelDcnJob", req, cb);
     }
     /**
-     * 本接口（TerminateDedicatedDBInstance）用于销毁已隔离的独享云数据库实例。
+     * 本接口(DescribeBackupConfigs)用于查询数据库备份配置信息。
      */
-    async TerminateDedicatedDBInstance(req, cb) {
-        return this.request("TerminateDedicatedDBInstance", req, cb);
+    async DescribeBackupConfigs(req, cb) {
+        return this.request("DescribeBackupConfigs", req, cb);
     }
     /**
      * 本接口（CloneAccount）用于克隆实例账户。
@@ -456,6 +462,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpgradeDBInstance(req, cb) {
         return this.request("UpgradeDBInstance", req, cb);
+    }
+    /**
+     * 本接口(ModifyBackupConfigs)用于修改数据库备份配置信息。
+
+1. 修改数据库超期备份配置，目前按年、按月、按日只支持一种，存在互斥关系，如当前策略按年备份，如果传入按月备份策略将会覆盖当前的按年备份策略，务必注意。
+     */
+    async ModifyBackupConfigs(req, cb) {
+        return this.request("ModifyBackupConfigs", req, cb);
     }
     /**
      * 本接口(DescribeDBInstanceDetail)用于查询指定实例的详细信息。

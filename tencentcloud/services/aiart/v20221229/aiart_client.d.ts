@@ -1,12 +1,17 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ReplaceBackgroundRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, ChangeClothesRequest, ReplaceBackgroundResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ReplaceBackgroundRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ChangeClothesRequest, ReplaceBackgroundResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 线稿生图接口支持上传一张黑白线稿图，按照指定的主体对象以及样式、颜色、材质、风格等的文本描述prompt ，对线稿图进行色彩填充与细节描绘，得到一张完整绘制的图像。生成图分辨率默认为1024:1024。
+线稿生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    SketchToImage(req: SketchToImageRequest, cb?: (error: string, rep: SketchToImageResponse) => void): Promise<SketchToImageResponse>;
     /**
      * 本接口已迁移至腾讯混元大模型-混元生图，即将停止此处维护，可切换至 [混元生图 API](https://cloud.tencent.com/document/product/1729/105969) 继续使用。
 文生图（高级版）接口基于高级版文生图大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。

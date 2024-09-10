@@ -28,10 +28,40 @@ class Client extends abstract_client_1.AbstractClient {
         super("vdb.tencentcloudapi.com", "2023-06-16", clientConfig);
     }
     /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
+     */
+    async AssociateSecurityGroups(req, cb) {
+        return this.request("AssociateSecurityGroups", req, cb);
+    }
+    /**
      * 查询实例列表
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     */
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
+     * 实例节点列表
+     */
+    async DescribeInstanceNodes(req, cb) {
+        return this.request("DescribeInstanceNodes", req, cb);
+    }
+    /**
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     */
+    async DisassociateSecurityGroups(req, cb) {
+        return this.request("DisassociateSecurityGroups", req, cb);
     }
 }
 exports.Client = Client;

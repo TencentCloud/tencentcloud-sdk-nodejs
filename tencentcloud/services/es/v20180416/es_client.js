@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceOperations", req, cb);
     }
     /**
+     * space维度的kibana获取登录token
+     */
+    async DescribeSpaceKibanaTools(req, cb) {
+        return this.request("DescribeSpaceKibanaTools", req, cb);
+    }
+    /**
      * 用于获取Logstash实例管道列表
      */
     async DescribeLogstashPipelines(req, cb) {

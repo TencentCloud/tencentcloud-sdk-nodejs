@@ -1202,6 +1202,11 @@ export interface Task {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskIssue?: string;
+    /**
+     * region信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskRegionName?: string;
 }
 /**
  * 演练人员组织

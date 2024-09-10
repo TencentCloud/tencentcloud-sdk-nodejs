@@ -867,6 +867,116 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
+ * 任务信息详情
+ */
+export interface TaskInfoDetail {
+    /**
+     * 任务 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: number;
+    /**
+     * 任务开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 任务类型。
+  - FLOW_CREATE: "001"，新建实例
+  - FLOW_RESIZE ： "002"，配置变更
+  - FLOW_CLOSE："003"，关闭实例
+  - FLOW_CLEAN： "004"，清空实例
+  - FLOW_STARTUP："005"，实例启用。
+  - FLOW_DELETE："006"，删除实例。
+  - FLOW_SETPWD："007"，重置密码。
+  - FLOW_EXPORTBACKUP："009"，导出备份文件。
+  - FLOW_RESTOREBACKUP："010"，恢复备份。
+  - FLOW_BACKUPINSTANCE："012"，备份实例。
+  - FLOW_MIGRATEINSTANCE："013"，迁移实例。
+  - FLOW_DELBACKUP："014"，删除备份。
+  - FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。
+  - FLOW_AUTOBACKUP："017"，自动备份实例。
+  - FLOW_MIGRATECHECK： "022"，迁移参数校验。
+  - FLOW_MIGRATETASK："023"，数据迁移中。
+  - FLOW_CLEANDB："025"，清空某个数据库。
+  - FLOW_CLONEBACKUP："026"，克隆备份。
+  - FLOW_CHANGEVIP： "027"，改变vip地址。
+  - FLOW_EXPORSHR ："028"，扩缩容。
+  - FLOW_ADDNODES："029"，加（减）节点。
+  - FLOW_CHANGENET："031"，改变网络类型。
+  - FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。
+  - FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。
+  - FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。
+  - FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。
+  - FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。
+  - FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。
+  - FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。
+  - FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。
+  - FLOW_UpgradeArch："041"，实例架构升级，主从升集群。
+  - FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。
+  - FLOW_UpgradeVersion： "043"，版本升级。
+  - FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整。
+  - FLOW_CLEARNETWORK："045"，更换网络，
+  - FLOW_REMOVE_BACKUP_FILE："046"，删除备份。
+  - FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。
+  - FLOW_SHUTDOWN_MASTER："048"，模拟故障。
+  - FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。
+  - FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。
+  - FLOW_OPEN_WAN："052"，开通外网。
+  - FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。
+  - FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。
+  - FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。
+  - FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。
+  - FLOW_MIGRATE_NODE："058"，迁移节点。
+  - FLOW_SWITCH_NODE："059"，切换节点。
+  - FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。
+  - FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。
+  - FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。
+  - FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。
+  - FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。
+  - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。
+  - FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。
+  - FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskType?: string;
+    /**
+     * 实例名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 实例 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 项目 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: number;
+    /**
+     * 任务进度。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Progress?: number;
+    /**
+     * 任务执行结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 任务执行状态。
+  
+  0：任务初始化。
+  1：执行中。
+  2：完成。
+  4：失败。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: number;
+}
+/**
  * DescribeInstanceZoneInfo返回参数结构体
  */
 export interface DescribeInstanceZoneInfoResponse {
@@ -1473,13 +1583,21 @@ export interface DescribeInstanceShardsResponse {
     RequestId?: string;
 }
 /**
- * DestroyPrepaidInstance请求参数结构体
+ * DescribeRedisClusterOverview返回参数结构体
  */
-export interface DestroyPrepaidInstanceRequest {
+export interface DescribeRedisClusterOverviewResponse {
     /**
-     * 实例ID
+     * 资源包总数
      */
-    InstanceId: string;
+    TotalBundle: number;
+    /**
+     * 资源包总内存大小，单位：GB
+     */
+    TotalMemory: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DisableReplicaReadonly请求参数结构体
@@ -1552,114 +1670,13 @@ export interface CDCResource {
     DedicatedClusterId: string;
 }
 /**
- * 任务信息详情
+ * ModifyInstanceLogDelivery返回参数结构体
  */
-export interface TaskInfoDetail {
+export interface ModifyInstanceLogDeliveryResponse {
     /**
-     * 任务 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TaskId?: number;
-    /**
-     * 任务开始时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StartTime?: string;
-    /**
-     * 任务类型。
-  - FLOW_CREATE: "001"，新建实例
-  - FLOW_RESIZE ： "002"，配置变更
-  - FLOW_CLOSE："003"，关闭实例
-  - FLOW_CLEAN： "004"，清空实例
-  - FLOW_STARTUP："005"，实例启用。
-  - FLOW_DELETE："006"，删除实例。
-  - FLOW_SETPWD："007"，重置密码。
-  - FLOW_EXPORTBACKUP："009"，导出备份文件。
-  - FLOW_RESTOREBACKUP："010"，恢复备份。
-  - FLOW_BACKUPINSTANCE："012"，备份实例。
-  - FLOW_MIGRATEINSTANCE："013"，迁移实例。
-  - FLOW_DELBACKUP："014"，删除备份。
-  - FLOW_EXCHANGEINSTANCE： "016"，切换实例流程。
-  - FLOW_AUTOBACKUP："017"，自动备份实例。
-  - FLOW_MIGRATECHECK： "022"，迁移参数校验。
-  - FLOW_MIGRATETASK："023"，数据迁移中。
-  - FLOW_CLEANDB："025"，清空某个数据库。
-  - FLOW_CLONEBACKUP："026"，克隆备份。
-  - FLOW_CHANGEVIP： "027"，改变vip地址。
-  - FLOW_EXPORSHR ："028"，扩缩容。
-  - FLOW_ADDNODES："029"，加（减）节点。
-  - FLOW_CHANGENET："031"，改变网络类型。
-  - FLOW_MODIFYINSTACEREADONLY："033"，只读策略变更。
-  - FLOW_MODIFYINSTANCEPARAMS："034"，修改实例参数。
-  - FLOW_MODIFYINSTANCEPASSWORDFREE："035"，设置免密。
-  - FLOW_SWITCHINSTANCEVIP："036"，实例VIP切换。
-  - FLOW_MODIFYINSTANCEACCOUNT："037"，实例帐号变更。
-  - FLOW_MODIFYINSTANCEBANDWIDTH："038"，实例带宽变更。
-  - FLOW_ENABLEINSTANCE_REPLICATE："039"，开启副本只读。
-  - FLOW_DISABLEINSTANCE_REPLICATE："040"，关闭副本只读。
-  - FLOW_UpgradeArch："041"，实例架构升级，主从升集群。
-  - FLOW_DowngradeArch： "042"，实例架构降级，集群降主从。
-  - FLOW_UpgradeVersion： "043"，版本升级。
-  - FLOW_MODIFYCONNECTIONCONFIG："044"，带宽连接数调整。
-  - FLOW_CLEARNETWORK："045"，更换网络，
-  - FLOW_REMOVE_BACKUP_FILE："046"，删除备份。
-  - FLOW_UPGRADE_SUPPORT_MULTI_AZ："047"，升级实例支持多可用区。
-  - FLOW_SHUTDOWN_MASTER："048"，模拟故障。
-  - FLOW_CHANGE_REPLICA_TO_MASTER："049"，手动提主。
-  - FLOW_CODE_ADD_REPLICATION_INSTANCE："050"，新增复制组。
-  - FLOW_OPEN_WAN："052"，开通外网。
-  - FLOW_CLOSE_WAN："053"，关闭外网FLOW_UPDATE_WAN："054"，更新外网。
-  - FLOW_CODE_DELETE_REPLICATION_INSTANCE："055"，解绑复制组。
-  - FLOW_CODE_CHANGE_MASTER_INSTANCE："056"，复制组实例切主。
-  - FLOW_CODE_CHANGE_INSTANCE_ROLE： "057"，更改复制组实例角色。
-  - FLOW_MIGRATE_NODE："058"，迁移节点。
-  - FLOW_SWITCH_NODE："059"，切换节点。
-  - FLOW_UPGRADE_SMALL_VERSION："060"，升级 Redi s版本。
-  - FLOW_UPGRADE_PROXY_VERSION："061"，升级 Proxy 版本。
-  - FLOW_MODIFY_INSTANCE_NETWORK： "062"，实例修改网络。
-  - FLOW_MIGRATE_PROXY_NODE："063"，迁移proxy节点。
-  - FLOW_MIGRATION_INSTANCE_ZONE："066"，实例可用区迁移中。
-  - FLOW_UPGRADE_INSTANCE_CACHE_AND_PROXY： "067"，实例版本升级中。
-  - FLOW_MODIFY_PROXY_NUM："069"，加（减）Proxy 节点。
-  - FLOW_MODIFYBACKUPMOD："070"，变更实例备份模式。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskType?: string;
-    /**
-     * 实例名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceName?: string;
-    /**
-     * 实例 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceId?: string;
-    /**
-     * 项目 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProjectId?: number;
-    /**
-     * 任务进度。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Progress?: number;
-    /**
-     * 任务执行结束时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EndTime?: string;
-    /**
-     * 任务执行状态。
-  
-  0：任务初始化。
-  1：执行中。
-  2：完成。
-  4：失败。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Result?: number;
+    RequestId?: string;
 }
 /**
  * ModifyBackupDownloadRestriction请求参数结构体
@@ -1707,6 +1724,15 @@ export interface DisableReplicaReadonlyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DestroyPrepaidInstance请求参数结构体
+ */
+export interface DestroyPrepaidInstanceRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * CreateParamTemplate返回参数结构体
@@ -2225,6 +2251,53 @@ export interface DescribeDBSecurityGroupsRequest {
   
      */
     InstanceId: string;
+}
+/**
+ * ModifyInstanceLogDelivery请求参数结构体
+ */
+export interface ModifyInstanceLogDeliveryRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 日志类型。当前仅支持设置为slowlog，指慢查询日志。
+     */
+    LogType: string;
+    /**
+     * 日志投递开启状态。
+  - true：开启。
+  - false：关闭。
+     */
+    Enabled: boolean;
+    /**
+     * 投递的日志集ID。
+     */
+    LogsetId?: string;
+    /**
+     * 投递的日志主题ID。
+     */
+    TopicId?: string;
+    /**
+     * 日志集名称。若**LogsetId**未指定具体的日志集ID，请配置该参数，设置日志集名称，系统会以设置的日志集名称自动创建新的日志集。
+     */
+    LogsetName?: string;
+    /**
+     * 日志主题名称，TopicId为空时必传，会自动创建新的日志主题。
+     */
+    TopicName?: string;
+    /**
+     * 日志集所在地域，不传默认使用实例所在地域。
+     */
+    LogRegion?: string;
+    /**
+     * 日志存储时间，默认为30天，可选范围1-3600天。
+     */
+    Period?: number;
+    /**
+     * 创建日志主题时，是否创建索引。
+     */
+    CreateIndex?: boolean;
 }
 /**
  * DescribeProductInfo请求参数结构体
@@ -2765,17 +2838,13 @@ export interface InstanceTextParam {
     Status?: number;
 }
 /**
- * DescribeRedisClusterOverview返回参数结构体
+ * DescribeInstanceLogDelivery返回参数结构体
  */
-export interface DescribeRedisClusterOverviewResponse {
+export interface DescribeInstanceLogDeliveryResponse {
     /**
-     * 资源包总数
+     * 实例慢日志投递信息。
      */
-    TotalBundle: number;
-    /**
-     * 资源包总内存大小，单位：GB
-     */
-    TotalMemory: number;
+    SlowLog?: LogDeliveryInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3936,29 +4005,29 @@ export interface AssociateSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * 实例节点组信息
+ * 日志投递信息
  */
-export interface ReplicaGroup {
+export interface LogDeliveryInfo {
     /**
-     * 节点组 ID。
+     * 日志投递开启状态，开启：true，关闭：false
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId?: number;
+    Enabled?: boolean;
     /**
-     * 节点组的名称，主节点为空。
+     * 日志集ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName?: string;
+    LogsetId?: string;
     /**
-     * 节点的可用区ID，比如ap-guangzhou-1
+     * 日志主题ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId?: string;
+    TopicId?: string;
     /**
-     * 节点组类型，master为主节点，replica为副本节点。
+     * 日志集所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Role?: string;
-    /**
-     * 节点组节点列表
-     */
-    RedisNodes?: Array<RedisNode>;
+    LogRegion?: string;
 }
 /**
  * DescribeTaskInfo返回参数结构体
@@ -4984,6 +5053,31 @@ export interface DestroyPrepaidInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 实例节点组信息
+ */
+export interface ReplicaGroup {
+    /**
+     * 节点组 ID。
+     */
+    GroupId?: number;
+    /**
+     * 节点组的名称，主节点为空。
+     */
+    GroupName?: string;
+    /**
+     * 节点的可用区ID，比如ap-guangzhou-1
+     */
+    ZoneId?: string;
+    /**
+     * 节点组类型，master为主节点，replica为副本节点。
+     */
+    Role?: string;
+    /**
+     * 节点组节点列表
+     */
+    RedisNodes?: Array<RedisNode>;
+}
+/**
  * DescribeRedisClusterOverview请求参数结构体
  */
 export interface DescribeRedisClusterOverviewRequest {
@@ -5242,6 +5336,15 @@ export interface DescribeInstanceSupportFeatureResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeInstanceLogDelivery请求参数结构体
+ */
+export interface DescribeInstanceLogDeliveryRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
 }
 /**
  * AddReplicationInstance请求参数结构体

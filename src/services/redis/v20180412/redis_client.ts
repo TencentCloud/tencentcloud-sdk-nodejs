@@ -55,6 +55,7 @@ import {
   DescribeBackupUrlRequest,
   DeleteParamTemplateResponse,
   DescribeInstancesResponse,
+  TaskInfoDetail,
   DescribeInstanceZoneInfoResponse,
   Account,
   InstanceProxySlowlogDetail,
@@ -79,12 +80,13 @@ import {
   DescribeProjectSecurityGroupRequest,
   ParameterDetail,
   DescribeInstanceShardsResponse,
-  DestroyPrepaidInstanceRequest,
+  DescribeRedisClusterOverviewResponse,
   DisableReplicaReadonlyRequest,
   CDCResource,
-  TaskInfoDetail,
+  ModifyInstanceLogDeliveryResponse,
   ModifyBackupDownloadRestrictionRequest,
   DisableReplicaReadonlyResponse,
+  DestroyPrepaidInstanceRequest,
   CreateParamTemplateResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
@@ -110,6 +112,7 @@ import {
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
   DescribeDBSecurityGroupsRequest,
+  ModifyInstanceLogDeliveryRequest,
   DescribeProductInfoRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
@@ -140,7 +143,7 @@ import {
   DescribeInstanceMonitorBigKeySizeDistRequest,
   DescribeInstanceAccountRequest,
   InstanceTextParam,
-  DescribeRedisClusterOverviewResponse,
+  DescribeInstanceLogDeliveryResponse,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
   ChangeMasterInstanceResponse,
@@ -186,7 +189,7 @@ import {
   TradeDealDetail,
   ResourceTag,
   AssociateSecurityGroupsResponse,
-  ReplicaGroup,
+  LogDeliveryInfo,
   DescribeTaskInfoResponse,
   DescribeInstanceMonitorBigKeyTypeDistResponse,
   DeleteReplicationInstanceResponse,
@@ -223,6 +226,7 @@ import {
   DescribeInstanceMonitorBigKeyTypeDistRequest,
   DescribeInstanceMonitorTopNCmdTookRequest,
   DestroyPrepaidInstanceResponse,
+  ReplicaGroup,
   DescribeRedisClusterOverviewRequest,
   DescribeCommonDBInstancesResponse,
   InquiryPriceCreateInstanceRequest,
@@ -236,6 +240,7 @@ import {
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
   DescribeInstanceSupportFeatureResponse,
+  DescribeInstanceLogDeliveryRequest,
   AddReplicationInstanceRequest,
   InstanceClusterNode,
   DescribeSSLStatusResponse,
@@ -521,6 +526,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeInstanceLogDelivery）用于查询实例的日志投递配置。
+   */
+  async DescribeInstanceLogDelivery(
+    req: DescribeInstanceLogDeliveryRequest,
+    cb?: (error: string, rep: DescribeInstanceLogDeliveryResponse) => void
+  ): Promise<DescribeInstanceLogDeliveryResponse> {
+    return this.request("DescribeInstanceLogDelivery", req, cb)
+  }
+
+  /**
    * 修改实例相关信息
    */
   async ModifyInstance(
@@ -678,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewInstanceResponse) => void
   ): Promise<RenewInstanceResponse> {
     return this.request("RenewInstance", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceLogDelivery）用于开启或关闭投递实例日志到CLS。
+   */
+  async ModifyInstanceLogDelivery(
+    req: ModifyInstanceLogDeliveryRequest,
+    cb?: (error: string, rep: ModifyInstanceLogDeliveryResponse) => void
+  ): Promise<ModifyInstanceLogDeliveryResponse> {
+    return this.request("ModifyInstanceLogDelivery", req, cb)
   }
 
   /**

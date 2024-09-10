@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConnectionConfig", req, cb);
     }
     /**
+     * 本接口（DescribeInstanceLogDelivery）用于查询实例的日志投递配置。
+     */
+    async DescribeInstanceLogDelivery(req, cb) {
+        return this.request("DescribeInstanceLogDelivery", req, cb);
+    }
+    /**
      * 修改实例相关信息
      */
     async ModifyInstance(req, cb) {
@@ -260,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RenewInstance(req, cb) {
         return this.request("RenewInstance", req, cb);
+    }
+    /**
+     * 本接口（ModifyInstanceLogDelivery）用于开启或关闭投递实例日志到CLS。
+     */
+    async ModifyInstanceLogDelivery(req, cb) {
+        return this.request("ModifyInstanceLogDelivery", req, cb);
     }
     /**
      * 开通外网

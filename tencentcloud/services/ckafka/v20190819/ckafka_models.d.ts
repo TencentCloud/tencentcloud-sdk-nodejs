@@ -2876,7 +2876,7 @@ export interface OperateResponseData {
      * FlowId11
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * RouteIdDto
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4829,7 +4829,7 @@ export interface ModifyRoutineMaintenanceTaskRequest {
      */
     MaintenanceType: string;
     /**
-     * 自动化运维子类别
+     * INSTANCE_STORAGE_CAPACITY(磁盘自动扩容)/MESSAGE_RETENTION_PERIOD(磁盘动态消息保留策略)
      */
     MaintenanceSubtype: string;
     /**
@@ -5163,6 +5163,7 @@ export interface ModifyInstanceAttributesRequest {
     PublicNetwork?: number;
     /**
      * 动态硬盘扩容策略配置
+     * @deprecated
      */
     DynamicDiskConfig?: DynamicDiskConfig;
     /**

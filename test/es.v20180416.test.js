@@ -338,6 +338,16 @@ it("es.v20180416.DescribeInstanceOperations", async function () {
     }
 })
 
+it("es.v20180416.DescribeSpaceKibanaTools", async function () {
+    try {
+       const data = await client.DescribeSpaceKibanaTools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeLogstashPipelines", async function () {
     try {
        const data = await client.DescribeLogstashPipelines({})

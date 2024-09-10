@@ -209,6 +209,20 @@ export interface DeleteDomainAliasResponse {
 }
 
 /**
+ * DescribeDomainShareUserList返回参数结构体
+ */
+export interface DescribeDomainShareUserListResponse {
+  /**
+   * 域名套餐信息
+   */
+  DomainShareList?: Array<DomainShareUserInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVASStatistic请求参数结构体
  */
 export interface DescribeVASStatisticRequest {
@@ -2268,6 +2282,20 @@ export interface DescribeDomainListResponse {
 }
 
 /**
+ * DescribeUserDetail返回参数结构体
+ */
+export interface DescribeUserDetailResponse {
+  /**
+   * 账户信息
+   */
+  UserInfo?: UserInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRecordBatch请求参数结构体
  */
 export interface ModifyRecordBatchRequest {
@@ -2942,17 +2970,17 @@ export interface ModifyRecordBatchDetail {
 }
 
 /**
- * DescribeUserDetail返回参数结构体
+ * DescribeDomainShareUserList请求参数结构体
  */
-export interface DescribeUserDetailResponse {
+export interface DescribeDomainShareUserListRequest {
   /**
-   * 账户信息
+   * 域名
    */
-  UserInfo?: UserInfo
+  Domain: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
-  RequestId?: string
+  DomainId?: number
 }
 
 /**
@@ -4351,6 +4379,41 @@ export interface PreviewDetail {
    * 增值服务数量
    */
   VASCount: number
+}
+
+/**
+ * 域名共享信息
+ */
+export interface DomainShareUserInfo {
+  /**
+   * 共享记录ID
+   */
+  DomainShareId?: number
+  /**
+   * 共享模式。r-只读；w-可写；rw-可读写。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 共享到的用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nickname?: string
+  /**
+   * 共享到的用户UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QCloudUIN?: string
+  /**
+   * 共享状态。enabled-有效；pause-无效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 共享的子域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubDomain?: string
 }
 
 /**

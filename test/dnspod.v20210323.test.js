@@ -518,6 +518,16 @@ it("dnspod.v20210323.CreateRecord", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainShareUserList", async function () {
+    try {
+       const data = await client.DescribeDomainShareUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeRecordLineCategoryList", async function () {
     try {
        const data = await client.DescribeRecordLineCategoryList({})

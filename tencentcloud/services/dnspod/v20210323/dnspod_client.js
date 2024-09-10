@@ -335,6 +335,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRecord", req, cb);
     }
     /**
+     * 获取指定域名的已共享列表
+     */
+    async DescribeDomainShareUserList(req, cb) {
+        return this.request("DescribeDomainShareUserList", req, cb);
+    }
+    /**
      * 按分类返回线路列表
      */
     async DescribeRecordLineCategoryList(req, cb) {

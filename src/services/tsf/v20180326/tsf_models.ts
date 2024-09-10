@@ -9334,6 +9334,10 @@ export interface CreateAllGatewayApiAsyncRequest {
    * 微服务ID
    */
   MicroserviceId: string
+  /**
+   * 命名空间ID
+   */
+  NamespaceId?: string
 }
 
 /**
@@ -11240,25 +11244,25 @@ export interface GatewayGroupApiVo {
   /**
    * API ID
    */
-  ApiId: string
+  ApiId?: string
   /**
    * API 请求路径
    */
-  Path: string
+  Path?: string
   /**
    * API 微服务名称
    */
-  MicroserviceName: string
+  MicroserviceName?: string
   /**
    * API 请求方法
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Method: string
+  Method?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
 }
 
 /**
@@ -14090,52 +14094,67 @@ export interface ApiRateLimitRule {
    * rule Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: string
+  RuleId?: string
   /**
    * API ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiId: string
+  ApiId?: string
   /**
    * 限流名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 最大限流qps
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxQps: number
+  MaxQps?: number
   /**
    * 生效/禁用, enabled/disabled
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsableStatus: string
+  UsableStatus?: string
   /**
    * 规则内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleContent: string
+  RuleContent?: string
   /**
    * Tsf Rule ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TsfRuleId: string
+  TsfRuleId?: string
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
+  /**
+   * 分页参数limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 分页参数offset
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * AppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
 }
 
 /**

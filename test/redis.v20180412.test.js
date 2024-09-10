@@ -248,6 +248,16 @@ it("redis.v20180412.ModifyConnectionConfig", async function () {
     }
 })
 
+it("redis.v20180412.DescribeInstanceLogDelivery", async function () {
+    try {
+       const data = await client.DescribeInstanceLogDelivery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyInstance", async function () {
     try {
        const data = await client.ModifyInstance({})
@@ -401,6 +411,16 @@ it("redis.v20180412.InquiryPriceUpgradeInstance", async function () {
 it("redis.v20180412.RenewInstance", async function () {
     try {
        const data = await client.RenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyInstanceLogDelivery", async function () {
+    try {
+       const data = await client.ModifyInstanceLogDelivery({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

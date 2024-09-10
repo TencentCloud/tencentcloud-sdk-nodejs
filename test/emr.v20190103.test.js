@@ -258,6 +258,16 @@ it("emr.v20190103.DeleteUserManagerUserList", async function () {
     }
 })
 
+it("emr.v20190103.TerminateSLInstance", async function () {
+    try {
+       const data = await client.TerminateSLInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.AddUsersForUserManager", async function () {
     try {
        const data = await client.AddUsersForUserManager({})
@@ -271,6 +281,26 @@ it("emr.v20190103.AddUsersForUserManager", async function () {
 it("emr.v20190103.ModifyAutoRenewFlag", async function () {
     try {
        const data = await client.ModifyAutoRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.CreateSLInstance", async function () {
+    try {
+       const data = await client.CreateSLInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeSLInstanceList", async function () {
+    try {
+       const data = await client.DescribeSLInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +348,16 @@ it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
     }
 })
 
+it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+    try {
+       const data = await client.StartStopServiceOrMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ModifyResourceScheduler", async function () {
     try {
        const data = await client.ModifyResourceScheduler({})
@@ -338,9 +378,9 @@ it("emr.v20190103.DescribeResourceScheduleDiffDetail", async function () {
     }
 })
 
-it("emr.v20190103.SyncPodState", async function () {
+it("emr.v20190103.DescribeSLInstance", async function () {
     try {
-       const data = await client.SyncPodState({})
+       const data = await client.DescribeSLInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +388,9 @@ it("emr.v20190103.SyncPodState", async function () {
     }
 })
 
-it("emr.v20190103.StartStopServiceOrMonitor", async function () {
+it("emr.v20190103.ModifySLInstance", async function () {
     try {
-       const data = await client.StartStopServiceOrMonitor({})
+       const data = await client.ModifySLInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +471,16 @@ it("emr.v20190103.DescribeHiveQueries", async function () {
 it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     try {
        const data = await client.DescribeEmrOverviewMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.SyncPodState", async function () {
+    try {
+       const data = await client.SyncPodState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

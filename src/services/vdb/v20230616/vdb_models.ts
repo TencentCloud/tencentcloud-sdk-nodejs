@@ -16,6 +16,90 @@
  */
 
 /**
+ * 网络信息
+ */
+export interface Network {
+  /**
+   * VpcId(VPC网络下有效)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网Id(VPC网络下有效)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 内网访问IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 内网访问Port。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+}
+
+/**
+ * AssociateSecurityGroups返回参数结构体
+ */
+export interface AssociateSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组出站规则
+ */
+export interface Outbound {
+  /**
+   * 策略，ACCEPT或者DROP。
+   */
+  Action: string
+  /**
+   * 地址组id代表的地址集合。
+   */
+  AddressModule: string
+  /**
+   * 来源Ip或Ip段，例如192.168.0.0/16。
+   */
+  CidrIp: string
+  /**
+   * 描述。
+   */
+  Desc: string
+  /**
+   * 网络协议，支持udp、tcp等。
+   */
+  IpProtocol: string
+  /**
+   * 端口。
+   */
+  PortRange: string
+  /**
+   * 服务组id代表的协议和端口集合。
+   */
+  ServiceModule: string
+  /**
+   * 安全组id代表的地址集合。
+   */
+  Id: string
+}
+
+/**
+ * DescribeDBSecurityGroups请求参数结构体
+ */
+export interface DescribeDBSecurityGroupsRequest {
+  /**
+   * 实例ID，格式如：vdb-c1nl9***。
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -72,6 +156,185 @@ export interface DescribeInstancesRequest {
    */
   ResourceTags?: Array<Tag>
 }
+
+/**
+ * AssociateSecurityGroups请求参数结构体
+ */
+export interface AssociateSecurityGroupsRequest {
+  /**
+   * 要绑定的安全组 ID，类似sg-efil7***。
+   */
+  SecurityGroupIds: Array<string>
+  /**
+   * 实例 ID，格式如：vdb-c1nl9***，支持指定多个实例
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * DisassociateSecurityGroups请求参数结构体
+ */
+export interface DisassociateSecurityGroupsRequest {
+  /**
+   * 要绑定的安全组 ID，类似sg-efil****。
+   */
+  SecurityGroupIds: string
+  /**
+   * 实例 ID，格式如：vdb-c1nl****，支持指定多个实例。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * DescribeInstanceNodes返回参数结构体
+ */
+export interface DescribeInstanceNodesResponse {
+  /**
+   * 实例pod列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<NodeInfo>
+  /**
+   * 查询结果总数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组规则
+ */
+export interface SecurityGroup {
+  /**
+   * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。
+   */
+  CreateTime?: string
+  /**
+   * 项目ID。
+   */
+  ProjectId?: string
+  /**
+   * 安全组ID。
+   */
+  SecurityGroupId?: string
+  /**
+   * 安全组名称。
+   */
+  SecurityGroupName?: string
+  /**
+   * 安全组备注。
+   */
+  SecurityGroupRemark?: string
+  /**
+   * 出站规则。
+   */
+  Outbound?: Array<Outbound>
+  /**
+   * 入站规则。
+   */
+  Inbound?: Array<Inbound>
+  /**
+   * 修改时间，时间格式：yyyy-mm-dd hh:mm:ss。
+   */
+  UpdateTime?: string
+}
+
+/**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组入站规则
+ */
+export interface Inbound {
+  /**
+   * 策略，ACCEPT或者DROP。
+   */
+  Action: string
+  /**
+   * 地址组id代表的地址集合。
+   */
+  AddressModule: string
+  /**
+   * 来源Ip或Ip段，例如192.168.0.0/16。
+   */
+  CidrIp: string
+  /**
+   * 描述。
+   */
+  Desc: string
+  /**
+   * 网络协议，支持udp、tcp等。
+   */
+  IpProtocol: string
+  /**
+   * 端口。
+   */
+  PortRange: string
+  /**
+   * 服务组id代表的协议和端口集合。
+   */
+  ServiceModule: string
+  /**
+   * 安全组id代表的地址集合。
+   */
+  Id: string
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
+}
+
+/**
+ * DescribeDBSecurityGroups返回参数结构体
+ */
+export interface DescribeDBSecurityGroupsResponse {
+  /**
+   * 安全组规则。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Groups?: Array<SecurityGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisassociateSecurityGroups返回参数结构体
+ */
+export interface DisassociateSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceNodes请求参数结构体
+ */
+export type DescribeInstanceNodesRequest = null
 
 /**
  * 实例信息，用于实例列表
@@ -215,19 +478,14 @@ export interface InstanceInfo {
 }
 
 /**
- * 标签键值对
+ * 实例pod信息，仅包含 pod 名称
  */
-export interface Tag {
+export interface NodeInfo {
   /**
-   * 标签键
+   * Pod名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
+  Name?: string
 }
 
 /**
@@ -250,27 +508,15 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * 网络信息
+ * ModifyDBInstanceSecurityGroups请求参数结构体
  */
-export interface Network {
+export interface ModifyDBInstanceSecurityGroupsRequest {
   /**
-   * VpcId(VPC网络下有效)
-注意：此字段可能返回 null，表示取不到有效值。
+   * 要修改的安全组ID列表，一个或者多个安全组 ID 组成的数组。
    */
-  VpcId?: string
+  SecurityGroupIds: Array<string>
   /**
-   * 子网Id(VPC网络下有效)。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID，格式如：vdb-c9s3****。
    */
-  SubnetId?: string
-  /**
-   * 内网访问IP。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Vip?: string
-  /**
-   * 内网访问Port。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
+  InstanceIds: Array<string>
 }

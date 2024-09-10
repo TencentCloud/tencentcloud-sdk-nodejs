@@ -441,7 +441,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserAutoSignSealUrl", req, cb);
     }
     /**
-     * 查询企业认证状态
+     * 查询企业认证状态- 仅通过[CreateOrganizationAuthUrl](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl) 和[CreateBatchOrganizationRegistrationTasks](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)这两个接口进行引导认证的企业，调用方企业可以依据这个接口，查询认证状态。
      */
     async DescribeOrganizationAuthStatus(req, cb) {
         return this.request("DescribeOrganizationAuthStatus", req, cb);

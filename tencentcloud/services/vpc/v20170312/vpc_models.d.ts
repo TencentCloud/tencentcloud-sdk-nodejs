@@ -16082,7 +16082,7 @@ export interface NotifyRoutesResponse {
  */
 export interface Route {
     /**
-     * 目的网段，取值不能在私有网络网段内，例如：112.20.51.0/24。
+     * 创建IPv4目的网段，取值不能在私有网络网段内，例如：112.20.51.0/24。
      */
     DestinationCidrBlock: string;
     /**
@@ -16092,10 +16092,13 @@ export interface Route {
   DIRECTCONNECT：专线网关；
   PEERCONNECTION：对等连接；
   HAVIP：高可用虚拟IP；
-  NAT：NAT网关;
+  NAT：公网NAT网关;
   NORMAL_CVM：普通云服务器；
   EIP：云服务器的公网IP；
-  LOCAL_GATEWAY：本地网关。
+  LOCAL_GATEWAY：CDC本地网关；
+  INTRANAT：私网NAT网关；
+  USER_CCN；云联网（自定义路由）。
+  
      */
     GatewayType: string;
     /**
@@ -16131,7 +16134,7 @@ export interface Route {
      */
     RouteTableId?: string;
     /**
-     * 目的IPv6网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。
+     * 创建IPv6目的网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DestinationIpv6CidrBlock?: string;
@@ -16140,7 +16143,7 @@ export interface Route {
      */
     RouteItemId?: string;
     /**
-     * 路由策略是否发布到云联网。
+     * 路由策略是否发布到云联网。该字段仅做出参使用，作为入参字段时此参数不生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PublishedToVbc?: boolean;

@@ -33,6 +33,7 @@ import {
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
   DeleteLogstashPipelinesResponse,
+  DescribeSpaceKibanaToolsRequest,
   TagInfo,
   KeyValue,
   MetricMapByIndexId,
@@ -173,6 +174,7 @@ import {
   UpdateLogstashPipelineDescRequest,
   UpdateServerlessInstanceRequest,
   NodeView,
+  DescribeSpaceKibanaToolsResponse,
   ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
   CreateServerlessInstanceResponse,
@@ -543,6 +545,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
   ): Promise<DescribeInstanceOperationsResponse> {
     return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
+   * space维度的kibana获取登录token
+   */
+  async DescribeSpaceKibanaTools(
+    req: DescribeSpaceKibanaToolsRequest,
+    cb?: (error: string, rep: DescribeSpaceKibanaToolsResponse) => void
+  ): Promise<DescribeSpaceKibanaToolsResponse> {
+    return this.request("DescribeSpaceKibanaTools", req, cb)
   }
 
   /**

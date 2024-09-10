@@ -448,6 +448,16 @@ it("mariadb.v20170312.InitDBInstances", async function () {
     }
 })
 
+it("mariadb.v20170312.UpgradeDedicatedDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDedicatedDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.CreateDBInstance", async function () {
     try {
        const data = await client.CreateDBInstance({})
@@ -628,9 +638,9 @@ it("mariadb.v20170312.DescribeBinlogTime", async function () {
     }
 })
 
-it("mariadb.v20170312.UpgradeDedicatedDBInstance", async function () {
+it("mariadb.v20170312.TerminateDedicatedDBInstance", async function () {
     try {
-       const data = await client.UpgradeDedicatedDBInstance({})
+       const data = await client.TerminateDedicatedDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +688,9 @@ it("mariadb.v20170312.CancelDcnJob", async function () {
     }
 })
 
-it("mariadb.v20170312.TerminateDedicatedDBInstance", async function () {
+it("mariadb.v20170312.DescribeBackupConfigs", async function () {
     try {
-       const data = await client.TerminateDedicatedDBInstance({})
+       const data = await client.DescribeBackupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +711,16 @@ it("mariadb.v20170312.CloneAccount", async function () {
 it("mariadb.v20170312.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyBackupConfigs", async function () {
+    try {
+       const data = await client.ModifyBackupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

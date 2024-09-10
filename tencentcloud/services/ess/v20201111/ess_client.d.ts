@@ -371,7 +371,7 @@ export declare class Client extends AbstractClient {
      */
     CreateUserAutoSignSealUrl(req: CreateUserAutoSignSealUrlRequest, cb?: (error: string, rep: CreateUserAutoSignSealUrlResponse) => void): Promise<CreateUserAutoSignSealUrlResponse>;
     /**
-     * 查询企业认证状态
+     * 查询企业认证状态- 仅通过[CreateOrganizationAuthUrl](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthUrl) 和[CreateBatchOrganizationRegistrationTasks](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationRegistrationTasks)这两个接口进行引导认证的企业，调用方企业可以依据这个接口，查询认证状态。
      */
     DescribeOrganizationAuthStatus(req: DescribeOrganizationAuthStatusRequest, cb?: (error: string, rep: DescribeOrganizationAuthStatusResponse) => void): Promise<DescribeOrganizationAuthStatusResponse>;
     /**
