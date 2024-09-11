@@ -8902,6 +8902,10 @@ export interface MainlandPermitOCRResponse {
      */
     Profile?: string;
     /**
+     * 国籍
+     */
+    Nationality?: string;
+    /**
      * 背面字段信息
      */
     MainlandTravelPermitBackInfos?: MainlandTravelPermitBackInfos;

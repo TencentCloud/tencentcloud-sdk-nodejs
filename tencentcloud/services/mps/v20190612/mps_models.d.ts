@@ -1,4 +1,14 @@
 /**
+ * 智能横转竖任务输入类型
+ */
+export interface AiAnalysisTaskHorizontalToVerticalInput {
+    /**
+     * 视频智能横转竖模板 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Definition?: number;
+}
+/**
  * ModifySnapshotByTimeOffsetTemplate返回参数结构体
  */
 export interface ModifySnapshotByTimeOffsetTemplateResponse {
@@ -3769,6 +3779,36 @@ export interface DisableScheduleRequest {
     ScheduleId: number;
 }
 /**
+ * 智能横转竖结果类型
+ */
+export interface AiAnalysisTaskHorizontalToVerticalResult {
+    /**
+     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 错误码，0：成功，其他值：失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message?: string;
+    /**
+     * 智能横转竖任务输入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Input?: AiAnalysisTaskHorizontalToVerticalInput;
+    /**
+     * 智能横转竖任务输出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: AiAnalysisTaskHorizontalToVerticalOutput;
+}
+/**
  * 创建的输入RTMP拉流源站配置信息。
  */
 export interface RTMPPullSourceAddress {
@@ -3877,54 +3917,24 @@ export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
     RequestId?: string;
 }
 /**
- * CreateAnimatedGraphicsTemplate请求参数结构体
+ * 查询输出的RTMP配置信息。
  */
-export interface CreateAnimatedGraphicsTemplateRequest {
+export interface DescribeOutputRTMPSettings {
     /**
-     * 帧率，取值范围：[1, 30]，单位：Hz。
+     * 空闲超时时间。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Fps: number;
+    IdleTimeout: number;
     /**
-     * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-  <li>当 Width、Height 均为 0，则分辨率同源；</li>
-  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-  默认值：0。
+     * Chunk大小。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Width?: number;
+    ChunkSize: number;
     /**
-     * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-  <li>当 Width、Height 均为 0，则分辨率同源；</li>
-  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-  默认值：0。
+     * 转推RTMP的目标地址信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Height?: number;
-    /**
-     * 分辨率自适应，可选值：
-  <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-  <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-  默认值：open。
-     */
-    ResolutionAdaptive?: string;
-    /**
-     * 动图格式，取值为 gif 和 webp。默认为 gif。
-     */
-    Format?: string;
-    /**
-     * 图片质量，取值范围：[1, 100]，默认值为 75。
-     */
-    Quality?: number;
-    /**
-     * 转动图模板名称，长度限制：64 个字符。
-     */
-    Name?: string;
-    /**
-     * 模板描述信息，长度限制：256 个字符。
-     */
-    Comment?: string;
+    Destinations: Array<RTMPAddressDestination>;
 }
 /**
  * ParseNotification请求参数结构体
@@ -8033,6 +8043,11 @@ export interface AiAnalysisResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DescriptionTask?: AiAnalysisTaskDescriptionResult;
+    /**
+     * 视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HorizontalToVerticalTask?: AiAnalysisTaskHorizontalToVerticalResult;
 }
 /**
  * 图片水印模板输入参数
@@ -12349,6 +12364,26 @@ export interface ProcessLiveStreamRequest {
     ScheduleId?: number;
 }
 /**
+ * 智能横转竖结果信息
+ */
+export interface AiAnalysisTaskHorizontalToVerticalOutput {
+    /**
+     * 视频智能横转竖列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path?: string;
+    /**
+     * 智能横转竖视频的存储位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStorage?: TaskOutputStorage;
+    /**
+     * 置信度。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Confidence?: number;
+}
+/**
  * ModifyImageSpriteTemplate请求参数结构体
  */
 export interface ModifyImageSpriteTemplateRequest {
@@ -13045,24 +13080,54 @@ export interface DeleteQualityControlTemplateResponse {
     RequestId?: string;
 }
 /**
- * 查询输出的RTMP配置信息。
+ * CreateAnimatedGraphicsTemplate请求参数结构体
  */
-export interface DescribeOutputRTMPSettings {
+export interface CreateAnimatedGraphicsTemplateRequest {
     /**
-     * 空闲超时时间。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 帧率，取值范围：[1, 30]，单位：Hz。
      */
-    IdleTimeout: number;
+    Fps: number;
     /**
-     * Chunk大小。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  默认值：0。
      */
-    ChunkSize: number;
+    Width?: number;
     /**
-     * 转推RTMP的目标地址信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  默认值：0。
      */
-    Destinations: Array<RTMPAddressDestination>;
+    Height?: number;
+    /**
+     * 分辨率自适应，可选值：
+  <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+  <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+  默认值：open。
+     */
+    ResolutionAdaptive?: string;
+    /**
+     * 动图格式，取值为 gif 和 webp。默认为 gif。
+     */
+    Format?: string;
+    /**
+     * 图片质量，取值范围：[1, 100]，默认值为 75。
+     */
+    Quality?: number;
+    /**
+     * 转动图模板名称，长度限制：64 个字符。
+     */
+    Name?: string;
+    /**
+     * 模板描述信息，长度限制：256 个字符。
+     */
+    Comment?: string;
 }
 /**
  * 智能按帧标签任务控制参数
@@ -14654,15 +14719,20 @@ export interface HighlightSegmentItem {
     /**
      * 置信度。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 片段起始时间偏移。
      */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /**
      * 片段结束时间偏移。
      */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
+    /**
+     * 片段标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SegmentTags?: Array<string>;
 }
 /**
  * DeleteWatermarkTemplate返回参数结构体

@@ -28,9 +28,19 @@ it("tke.v20220501.DescribeNodePools", async function () {
     }
 })
 
-it("tke.v20220501.CreateNodePool", async function () {
+it("tke.v20220501.ModifyNodePool", async function () {
     try {
-       const data = await client.CreateNodePool({})
+       const data = await client.ModifyNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.DeleteHealthCheckPolicy", async function () {
+    try {
+       const data = await client.DeleteHealthCheckPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +58,59 @@ it("tke.v20220501.DeleteNodePool", async function () {
     }
 })
 
-it("tke.v20220501.ModifyNodePool", async function () {
+it("tke.v20220501.DescribeHealthCheckPolicies", async function () {
     try {
-       const data = await client.ModifyNodePool({})
+       const data = await client.DescribeHealthCheckPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.ModifyHealthCheckPolicy", async function () {
+    try {
+       const data = await client.ModifyHealthCheckPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.CreateNodePool", async function () {
+    try {
+       const data = await client.CreateNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.DescribeHealthCheckTemplate", async function () {
+    try {
+       const data = await client.DescribeHealthCheckTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.DescribeHealthCheckPolicyBindings", async function () {
+    try {
+       const data = await client.DescribeHealthCheckPolicyBindings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.CreateHealthCheckPolicy", async function () {
+    try {
+       const data = await client.CreateHealthCheckPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

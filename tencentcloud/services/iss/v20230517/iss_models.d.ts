@@ -452,6 +452,16 @@ export interface DescribeCNAMEResponse {
     RequestId?: string;
 }
 /**
+ * ISUP智能安全接入 API返回数据
+ */
+export interface ISAPIOutputData {
+    /**
+     * 输出参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputData?: string;
+}
+/**
  * UpdateOrganization返回参数结构体
  */
 export interface UpdateOrganizationResponse {
@@ -1936,6 +1946,23 @@ export interface ListGatewaysData {
     TotalCount?: number;
 }
 /**
+ * CallISAPI请求参数结构体
+ */
+export interface CallISAPIRequest {
+    /**
+     * 设备ID
+     */
+    DeviceId: string;
+    /**
+     * url 资源
+     */
+    Url: string;
+    /**
+     * 输入参数
+     */
+    InputData?: string;
+}
+/**
  * AddRecordRetrieveTask请求参数结构体
  */
 export interface AddRecordRetrieveTaskRequest {
@@ -2088,6 +2115,19 @@ export interface RecordPlaybackUrl {
     Hls?: string;
 }
 /**
+ * 列举子任务列表
+ */
+export interface ListSubTasksData {
+    /**
+     * 子任务列表
+     */
+    List?: Array<SubTaskData>;
+    /**
+     * 子任务数量
+     */
+    TotalCount?: number;
+}
+/**
  * 组织目录下的未添加到实时上云计划中的通道数量返回数据
  */
 export interface ListOrganizationChannelNumbersData {
@@ -2101,17 +2141,17 @@ export interface ListOrganizationChannelNumbersData {
     NotInPlanCount?: number;
 }
 /**
- * 列举子任务列表
+ * CallISAPI返回参数结构体
  */
-export interface ListSubTasksData {
+export interface CallISAPIResponse {
     /**
-     * 子任务列表
+     * 返回数据
      */
-    List?: Array<SubTaskData>;
+    Data?: ISAPIOutputData;
     /**
-     * 子任务数量
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TotalCount?: number;
+    RequestId?: string;
 }
 /**
  * ListRecordPlanDevices请求参数结构体

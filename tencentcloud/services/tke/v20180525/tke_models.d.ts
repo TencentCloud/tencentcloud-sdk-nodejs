@@ -4693,6 +4693,10 @@ export interface CreateClusterRequest {
      * 需要安装的扩展组件信息
      */
     ExtensionAddons?: Array<ExtensionAddon>;
+    /**
+     * 本地专用集群Id
+     */
+    CdcId?: string;
 }
 /**
  * CreateEdgeCVMInstances请求参数结构体

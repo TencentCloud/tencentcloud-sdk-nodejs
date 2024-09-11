@@ -34,10 +34,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNodePools", req, cb);
     }
     /**
-     * 创建 TKE 节点池
+     * 更新 TKE 节点池
      */
-    async CreateNodePool(req, cb) {
-        return this.request("CreateNodePool", req, cb);
+    async ModifyNodePool(req, cb) {
+        return this.request("ModifyNodePool", req, cb);
+    }
+    /**
+     * 删除健康检测策略
+     */
+    async DeleteHealthCheckPolicy(req, cb) {
+        return this.request("DeleteHealthCheckPolicy", req, cb);
     }
     /**
      * 删除 TKE 节点池
@@ -46,10 +52,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNodePool", req, cb);
     }
     /**
-     * 更新 TKE 节点池
+     * 查询健康检测策略
      */
-    async ModifyNodePool(req, cb) {
-        return this.request("ModifyNodePool", req, cb);
+    async DescribeHealthCheckPolicies(req, cb) {
+        return this.request("DescribeHealthCheckPolicies", req, cb);
+    }
+    /**
+     * 修改健康检测策略
+     */
+    async ModifyHealthCheckPolicy(req, cb) {
+        return this.request("ModifyHealthCheckPolicy", req, cb);
+    }
+    /**
+     * 创建 TKE 节点池
+     */
+    async CreateNodePool(req, cb) {
+        return this.request("CreateNodePool", req, cb);
+    }
+    /**
+     * 查询健康检测策略模板
+     */
+    async DescribeHealthCheckTemplate(req, cb) {
+        return this.request("DescribeHealthCheckTemplate", req, cb);
+    }
+    /**
+     * 查询健康检测策略绑定关系
+     */
+    async DescribeHealthCheckPolicyBindings(req, cb) {
+        return this.request("DescribeHealthCheckPolicyBindings", req, cb);
+    }
+    /**
+     * 创建健康检测策略
+     */
+    async CreateHealthCheckPolicy(req, cb) {
+        return this.request("CreateHealthCheckPolicy", req, cb);
     }
     /**
      * 查询集群下节点实例信息

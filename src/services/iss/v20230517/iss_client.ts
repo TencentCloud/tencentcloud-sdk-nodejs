@@ -37,6 +37,7 @@ import {
   SetForbidPlayChannelsRequest,
   SubTaskData,
   DescribeCNAMEResponse,
+  ISAPIOutputData,
   UpdateOrganizationResponse,
   AddOrgData,
   ListAITasksResponse,
@@ -111,6 +112,7 @@ import {
   RecordPlanOptData,
   DescribeRecordPlanResponse,
   ListGatewaysData,
+  CallISAPIRequest,
   AddRecordRetrieveTaskRequest,
   DescribeRecordPlanRequest,
   ControlDevicePresetResponse,
@@ -121,8 +123,9 @@ import {
   DescribeDomainRequest,
   BatchOperateDeviceData,
   RecordPlaybackUrl,
-  ListOrganizationChannelNumbersData,
   ListSubTasksData,
+  ListOrganizationChannelNumbersData,
+  CallISAPIResponse,
   ListRecordPlanDevicesRequest,
   ListTasksResponse,
   AddStreamAuthResponse,
@@ -359,13 +362,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于删除录像上云模板。
+   * 用于新建取回任务
    */
-  async DeleteRecordBackupTemplate(
-    req: DeleteRecordBackupTemplateRequest,
-    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
-  ): Promise<DeleteRecordBackupTemplateResponse> {
-    return this.request("DeleteRecordBackupTemplate", req, cb)
+  async AddRecordRetrieveTask(
+    req: AddRecordRetrieveTaskRequest,
+    cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void
+  ): Promise<AddRecordRetrieveTaskResponse> {
+    return this.request("AddRecordRetrieveTask", req, cb)
   }
 
   /**
@@ -610,13 +613,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于新建取回任务
+   * 用于删除录像上云模板。
    */
-  async AddRecordRetrieveTask(
-    req: AddRecordRetrieveTaskRequest,
-    cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void
-  ): Promise<AddRecordRetrieveTaskResponse> {
-    return this.request("AddRecordRetrieveTask", req, cb)
+  async DeleteRecordBackupTemplate(
+    req: DeleteRecordBackupTemplateRequest,
+    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
+  ): Promise<DeleteRecordBackupTemplateResponse> {
+    return this.request("DeleteRecordBackupTemplate", req, cb)
   }
 
   /**
@@ -750,13 +753,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改组织。
+   * 本接口可基于海康ISUP 5.0协议实现透传ISAPI的请求数据，调用接口前需确保设备采用ISUP协议成功注册至本平台
    */
-  async UpdateOrganization(
-    req: UpdateOrganizationRequest,
-    cb?: (error: string, rep: UpdateOrganizationResponse) => void
-  ): Promise<UpdateOrganizationResponse> {
-    return this.request("UpdateOrganization", req, cb)
+  async CallISAPI(
+    req: CallISAPIRequest,
+    cb?: (error: string, rep: CallISAPIResponse) => void
+  ): Promise<CallISAPIResponse> {
+    return this.request("CallISAPI", req, cb)
   }
 
   /**
@@ -800,13 +803,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改设备的配置信息。
+   * 用于修改组织。
    */
-  async UpdateUserDevice(
-    req: UpdateUserDeviceRequest,
-    cb?: (error: string, rep: UpdateUserDeviceResponse) => void
-  ): Promise<UpdateUserDeviceResponse> {
-    return this.request("UpdateUserDevice", req, cb)
+  async UpdateOrganization(
+    req: UpdateOrganizationRequest,
+    cb?: (error: string, rep: UpdateOrganizationResponse) => void
+  ): Promise<UpdateOrganizationResponse> {
+    return this.request("UpdateOrganization", req, cb)
   }
 
   /**
@@ -937,6 +940,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAITaskStatusResponse) => void
   ): Promise<UpdateAITaskStatusResponse> {
     return this.request("UpdateAITaskStatus", req, cb)
+  }
+
+  /**
+   * 用于修改设备的配置信息。
+   */
+  async UpdateUserDevice(
+    req: UpdateUserDeviceRequest,
+    cb?: (error: string, rep: UpdateUserDeviceResponse) => void
+  ): Promise<UpdateUserDeviceResponse> {
+    return this.request("UpdateUserDevice", req, cb)
   }
 
   /**

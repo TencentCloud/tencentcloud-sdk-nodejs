@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  AiAnalysisTaskHorizontalToVerticalInput,
   ModifySnapshotByTimeOffsetTemplateResponse,
   ModifySampleSnapshotTemplateResponse,
   ContainerDiagnoseResultItem,
@@ -171,6 +172,7 @@ import {
   DescribeInputRTMPPullSettings,
   MediaProcessTaskInput,
   DisableScheduleRequest,
+  AiAnalysisTaskHorizontalToVerticalResult,
   RTMPPullSourceAddress,
   CosOutputStorage,
   MediaProcessTaskAnimatedGraphicResult,
@@ -178,7 +180,7 @@ import {
   CreateWordSamplesResponse,
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
-  CreateAnimatedGraphicsTemplateRequest,
+  DescribeOutputRTMPSettings,
   ParseNotificationRequest,
   LiveRecordTaskInput,
   CreateWordSamplesRequest,
@@ -526,6 +528,7 @@ import {
   MediaAudioStreamItem,
   LiveStreamAiReviewImageTerrorismResult,
   ProcessLiveStreamRequest,
+  AiAnalysisTaskHorizontalToVerticalOutput,
   ModifyImageSpriteTemplateRequest,
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
@@ -553,7 +556,7 @@ import {
   DescribeWatermarkTemplatesResponse,
   DescribeStreamLinkFlowLogsRequest,
   DeleteQualityControlTemplateResponse,
-  DescribeOutputRTMPSettings,
+  CreateAnimatedGraphicsTemplateRequest,
   FrameTagConfigureInfo,
   DeleteWorkflowResponse,
   ExecuteFunctionRequest,

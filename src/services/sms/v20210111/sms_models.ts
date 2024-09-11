@@ -740,36 +740,36 @@ export interface PullSmsSendStatus {
   /**
    * 用户实际接收到短信的时间，UNIX 时间戳（单位：秒）。
    */
-  UserReceiveTime: number
+  UserReceiveTime?: number
   /**
    * 国家（或地区）码。
    */
-  CountryCode: string
+  CountryCode?: string
   /**
    * 用户号码，普通格式，示例如：13711112222。
    */
-  SubscriberNumber: string
+  SubscriberNumber?: string
   /**
    * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
    */
-  PhoneNumber: string
+  PhoneNumber?: string
   /**
    * 本次发送标识 ID。
    */
-  SerialNo: string
+  SerialNo?: string
   /**
    * 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。
    */
-  ReportStatus: string
+  ReportStatus?: string
   /**
    * 用户接收短信状态描述。
    */
-  Description: string
+  Description?: string
   /**
-   * 用户的 session 内容。与请求中的 SessionContext 一致，默认为空，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
+   * 用户的 session 内容。与请求中的 SessionContext 一致，默认为空，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 评估。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**

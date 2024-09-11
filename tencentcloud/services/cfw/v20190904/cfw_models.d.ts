@@ -829,6 +829,11 @@ export interface BlockIgnoreRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: CustomWhiteRule;
+    /**
+     * 1 border 2 nat 4 vpc 8 border-serial
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwType?: number;
 }
 /**
  * ModifyFwGroupSwitch返回参数结构体
@@ -1583,7 +1588,7 @@ export interface BanAndAllowRuleDel {
      */
     Ioc?: string;
     /**
-     * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的
+     * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 （DeleteBlockIgnoreRuleNew接口，该字段无效）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectionList?: string;
@@ -2523,6 +2528,10 @@ export interface CreateNatRuleItem {
      * 内部id
      */
     InternalUuid?: number;
+    /**
+     * 规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
+     */
+    Scope?: string;
 }
 /**
  * ModifyStorageSetting返回参数结构体
@@ -2870,6 +2879,11 @@ export interface EdgeIpInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
+    /**
+     * IP超量状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OverUsedStatus?: number;
 }
 /**
  * AssetZone
@@ -5439,6 +5453,11 @@ export interface BanAndAllowRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: CustomWhiteRule;
+    /**
+     * 放通的引擎: 1针对互联网边界 2针对nat防火墙 4针对vpc防火墙
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwType?: number;
 }
 /**
  * RemoveAcRule请求参数结构体
@@ -6061,10 +6080,16 @@ export interface DescAcItem {
      */
     BetaList?: Array<BetaInfoByACL>;
     /**
-     * 生效范围：serial，串行；side，旁路；all，全局
+     * （1）互联网边界防火墙，生效范围：serial，串行；side，旁路；all，全局；
+  （2）NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Scope?: string;
+    /**
+     * 生效范围描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScopeDesc?: string;
     /**
      * 互联网边界防火墙使用的内部规则id
   注意：此字段可能返回 null，表示取不到有效值。
@@ -6735,6 +6760,21 @@ export interface NatSwitchListData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Abnormal?: number;
+    /**
+     * nat防火墙出口路由表id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ORTableId?: string;
+    /**
+     * nat防火墙出口路由表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ORTableName?: string;
+    /**
+     * 出口Snat Ip列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ohavips?: Array<string>;
 }
 /**
  * DescribeSwitchLists返回参数结构体

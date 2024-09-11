@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceChannel", req, cb);
     }
     /**
-     * 用于删除录像上云模板。
+     * 用于新建取回任务
      */
-    async DeleteRecordBackupTemplate(req, cb) {
-        return this.request("DeleteRecordBackupTemplate", req, cb);
+    async AddRecordRetrieveTask(req, cb) {
+        return this.request("AddRecordRetrieveTask", req, cb);
     }
     /**
      * 用于用户添加域名时，查询可以绑定的服务节点，结果为平台支持的所有服务节点。（注意：每个服务节点只能绑定一个域名）
@@ -221,10 +221,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRecordTemplate", req, cb);
     }
     /**
-     * 用于新建取回任务
+     * 用于删除录像上云模板。
      */
-    async AddRecordRetrieveTask(req, cb) {
-        return this.request("AddRecordRetrieveTask", req, cb);
+    async DeleteRecordBackupTemplate(req, cb) {
+        return this.request("DeleteRecordBackupTemplate", req, cb);
     }
     /**
      * 用于根据服务节点获取 CNAME 值。
@@ -305,10 +305,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchOperateDevice", req, cb);
     }
     /**
-     * 用于修改组织。
+     * 本接口可基于海康ISUP 5.0协议实现透传ISAPI的请求数据，调用接口前需确保设备采用ISUP协议成功注册至本平台
      */
-    async UpdateOrganization(req, cb) {
-        return this.request("UpdateOrganization", req, cb);
+    async CallISAPI(req, cb) {
+        return this.request("CallISAPI", req, cb);
     }
     /**
      * 用于查询实时上云计划详情
@@ -335,10 +335,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeGateway", req, cb);
     }
     /**
-     * 用于修改设备的配置信息。
+     * 用于修改组织。
      */
-    async UpdateUserDevice(req, cb) {
-        return this.request("UpdateUserDevice", req, cb);
+    async UpdateOrganization(req, cb) {
+        return this.request("UpdateOrganization", req, cb);
     }
     /**
      * 用于删除实时上云计划
@@ -417,6 +417,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateAITaskStatus(req, cb) {
         return this.request("UpdateAITaskStatus", req, cb);
+    }
+    /**
+     * 用于修改设备的配置信息。
+     */
+    async UpdateUserDevice(req, cb) {
+        return this.request("UpdateUserDevice", req, cb);
     }
     /**
      * 用于查询录像上云计划下的设备通道列表。

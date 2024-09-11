@@ -1,35 +1,167 @@
 /**
- * 运行时配置
+ * 节点信息
  */
-export interface RuntimeConfig {
+export interface NativeNodeInfo {
     /**
-     * 运行时类型
+     * 节点名称
+     */
+    MachineName?: string;
+    /**
+     * Machine 状态
+     */
+    MachineState?: string;
+    /**
+     * Machine 所在可用区
+     */
+    Zone?: string;
+    /**
+     * 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；
+     */
+    InstanceChargeType?: string;
+    /**
+     * 创建时间
+     */
+    CreatedAt?: string;
+    /**
+     * Machine 登录状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeType?: string;
+    LoginStatus?: string;
     /**
-     * 运行时版本
+     * 是否开启缩容保护
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeVersion?: string;
+    IsProtectedFromScaleIn?: boolean;
     /**
-     * 运行时根目录
+     * Machine 名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeRootDir?: string;
+    DisplayName?: string;
+    /**
+     * CPU核数，单位：核
+     */
+    CPU?: number;
+    /**
+     * GPU核数，单位：核
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GPU?: number;
+    /**
+     * 自动续费标识
+     */
+    RenewFlag?: string;
+    /**
+     * 节点计费模式（已弃用）
+     */
+    PayMode?: string;
+    /**
+     * 节点内存容量，单位：`GB`
+     */
+    Memory?: number;
+    /**
+     * 公网带宽相关信息设置
+     */
+    InternetAccessible?: InternetAccessible;
+    /**
+     * 机型所属机型族
+     */
+    InstanceFamily?: string;
+    /**
+     * 节点内网 IP
+     */
+    LanIp?: string;
+    /**
+     * 机型
+     */
+    InstanceType?: string;
+    /**
+     * 包年包月节点计费过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredTime?: string;
+    /**
+     * 安全组列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecurityGroupIDs?: Array<string>;
+    /**
+     * VPC 唯一 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 子网唯一 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * OS的名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OsImage?: string;
 }
 /**
- * k8s中标签，一般以数组的方式存在
+ * 健康检测模板规则
  */
-export interface Label {
+export interface HealthCheckTemplateRule {
     /**
-     * map表中的Name
+     * 健康检测项目名称
      */
     Name: string;
     /**
-     * map表中的Value
+     * 健康检测规则描述
      */
-    Value: string;
+    Description: string;
+    /**
+     * 修复动作
+     */
+    RepairAction: string;
+    /**
+     * 修复影响
+     */
+    RepairEffect: string;
+    /**
+     * 是否建议开启检测
+     */
+    ShouldEnable: boolean;
+    /**
+     * 是否建议修复
+     */
+    ShouldRepair: boolean;
+    /**
+     * 问题严重程度
+     */
+    Severity: string;
+}
+/**
+ * 健康检测规则
+ */
+export interface HealthCheckPolicyRule {
+    /**
+     * 健康检测规则
+     */
+    Name: string;
+    /**
+     * 是否检测此项目
+     */
+    Enabled: boolean;
+    /**
+     * 是否启用修复
+     */
+    AutoRepairEnabled: boolean;
+}
+/**
+ * DeleteHealthCheckPolicy请求参数结构体
+ */
+export interface DeleteHealthCheckPolicyRequest {
+    /**
+     * 集群 ID
+     */
+    ClusterId: string;
+    /**
+     * 健康检测策略名称
+     */
+    HealthCheckPolicyName: string;
 }
 /**
  * CreateNodePool返回参数结构体
@@ -235,19 +367,97 @@ export interface AutoscalingAdded {
     Total: number;
 }
 /**
- * 虚拟节点池信息
+ * 集群的实例信息
  */
-export interface SuperNodePoolInfo {
+export interface Instance {
     /**
-     * 子网列表
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+     */
+    InstanceRole: string;
+    /**
+     * 实例异常(或者处于初始化中)的原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetIds?: Array<string>;
+    FailedReason: string;
     /**
-     * 安全组列表
+     * 实例的状态
+  - initializing创建中
+  - running 运行中
+  - failed 异常
+     */
+    InstanceState: string;
+    /**
+     * 是否不可调度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroupIds?: Array<string>;
+    Unschedulable: boolean;
+    /**
+     * 添加时间
+     */
+    CreatedTime: string;
+    /**
+     * 节点内网IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LanIP: string;
+    /**
+     * 资源池ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodePoolId: string;
+    /**
+     * 原生节点参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Native: NativeNodeInfo;
+    /**
+     * 普通节点参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Regular: RegularNodeInfo;
+    /**
+     * 超级节点参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Super: SuperNodeInfo;
+    /**
+     * 第三方节点参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    External: ExternalNodeInfo;
+    /**
+     * 节点类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeType: string;
+}
+/**
+ * DescribeHealthCheckPolicyBindings请求参数结构体
+ */
+export interface DescribeHealthCheckPolicyBindingsRequest {
+    /**
+     * 集群 ID
+     */
+    ClusterId: string;
+    /**
+     * ·  HealthCheckPolicyName
+      按照【健康检测规则名称】进行过滤。
+      类型：String
+      必选：否
+     */
+    Filter?: Array<Filter>;
+    /**
+     * 最大输出条数，默认20，最大为100
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认0
+     */
+    Offset?: number;
 }
 /**
  * 节点统计列表
@@ -265,51 +475,82 @@ export interface NodeCountSummary {
     AutoscalingAdded: AutoscalingAdded;
 }
 /**
- * 普通节点池信息
+ * 虚拟节点池信息
  */
-export interface RegularNodePoolInfo {
+export interface SuperNodePoolInfo {
     /**
-     * LaunchConfigurationId 配置
-     */
-    LaunchConfigurationId: string;
-    /**
-     * AutoscalingGroupId 分组id
-     */
-    AutoscalingGroupId: string;
-    /**
-     * NodeCountSummary 节点列表
-     */
-    NodeCountSummary: NodeCountSummary;
-    /**
-     * 状态信息
+     * 子网列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingGroupStatus: string;
+    SubnetIds?: Array<string>;
     /**
-     * 最大节点数量
+     * 安全组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxNodesNum: number;
+    SecurityGroupIds?: Array<string>;
+}
+/**
+ * 运行时配置
+ */
+export interface RuntimeConfig {
     /**
-     * 最小节点数量
+     * 运行时类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinNodesNum: number;
+    RuntimeType?: string;
     /**
-     * 期望的节点数量
+     * 运行时版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DesiredNodesNum: number;
+    RuntimeVersion?: string;
     /**
-     * 节点池osName
+     * 运行时根目录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodePoolOs: string;
+    RuntimeRootDir?: string;
+}
+/**
+ * k8s中标签，一般以数组的方式存在
+ */
+export interface Label {
     /**
-     * 节点配置
-  注意：此字段可能返回 null，表示取不到有效值。
+     * map表中的Name
      */
-    InstanceAdvancedSettings?: InstanceAdvancedSettings;
+    Name: string;
+    /**
+     * map表中的Value
+     */
+    Value: string;
+}
+/**
+ * 健康检测策略和节点池的绑定关系
+ */
+export interface HealthCheckPolicyBinding {
+    /**
+     * 健康检测策略名称
+     */
+    Name: string;
+    /**
+     * 规则创建时间
+     */
+    CreatedAt: string;
+    /**
+     * 关联节点池数组
+     */
+    NodePools: Array<string>;
+}
+/**
+ * CreateHealthCheckPolicy请求参数结构体
+ */
+export interface CreateHealthCheckPolicyRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 健康检测策略
+     */
+    HealthCheckPolicy: HealthCheckPolicy;
 }
 /**
  * 节点自定义参数
@@ -575,6 +816,15 @@ export interface DescribeClusterInstancesRequest {
     SortBy?: SortBy;
 }
 /**
+ * DeleteHealthCheckPolicy返回参数结构体
+ */
+export interface DeleteHealthCheckPolicyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
  */
 export interface TagSpecification {
@@ -614,6 +864,53 @@ export interface ModifyNodePoolResponse {
     RequestId?: string;
 }
 /**
+ * 普通节点池信息
+ */
+export interface RegularNodePoolInfo {
+    /**
+     * LaunchConfigurationId 配置
+     */
+    LaunchConfigurationId: string;
+    /**
+     * AutoscalingGroupId 分组id
+     */
+    AutoscalingGroupId: string;
+    /**
+     * NodeCountSummary 节点列表
+     */
+    NodeCountSummary: NodeCountSummary;
+    /**
+     * 状态信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoscalingGroupStatus: string;
+    /**
+     * 最大节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxNodesNum: number;
+    /**
+     * 最小节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinNodesNum: number;
+    /**
+     * 期望的节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DesiredNodesNum: number;
+    /**
+     * 节点池osName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodePoolOs: string;
+    /**
+     * 节点配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceAdvancedSettings?: InstanceAdvancedSettings;
+}
+/**
  * kubernetes Taint
  */
 export interface Taint {
@@ -644,24 +941,41 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * 托管节点池Management配置
+ * DescribeHealthCheckPolicies请求参数结构体
  */
-export interface ManagementConfig {
+export interface DescribeHealthCheckPoliciesRequest {
     /**
-     * dns 配置
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群 ID
      */
-    Nameservers?: Array<string>;
+    ClusterId: string;
     /**
-     * hosts 配置
-  注意：此字段可能返回 null，表示取不到有效值。
+     * ·  HealthCheckPolicyName
+      按照【健康检测策略名称】进行过滤。
+      类型：String
+      必选：否
      */
-    Hosts?: Array<string>;
+    Filters?: Array<Filter>;
     /**
-     * 内核参数配置
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 最大输出条数，默认20，最大为100
      */
-    KernelArgs?: Array<string>;
+    Limit?: number;
+    /**
+     * 偏移量，默认0
+     */
+    Offset?: number;
+}
+/**
+ * DescribeHealthCheckTemplate返回参数结构体
+ */
+export interface DescribeHealthCheckTemplateResponse {
+    /**
+     * 健康检测策略模板
+     */
+    HealthCheckTemplate?: HealthCheckTemplate;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateNodePool请求参数结构体
@@ -707,6 +1021,40 @@ export interface CreateNodePoolRequest {
      * 节点 Annotation 列表
      */
     Annotations?: Array<Annotation>;
+}
+/**
+ * 普通节点信息
+ */
+export interface RegularNodeInfo {
+    /**
+     * 节点配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceAdvancedSettings: InstanceAdvancedSettings;
+    /**
+     * 自动伸缩组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoscalingGroupId: string;
+}
+/**
+ * DescribeHealthCheckPolicyBindings返回参数结构体
+ */
+export interface DescribeHealthCheckPolicyBindingsResponse {
+    /**
+     * 健康检测规则数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthCheckPolicyBindings: Array<HealthCheckPolicyBinding>;
+    /**
+     * 健康检测规则数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 原生节点池信息
@@ -1010,175 +1358,36 @@ export interface ExternalNodePoolInfo {
     NodesNum?: number;
 }
 /**
- * 集群的实例信息
+ * DescribeHealthCheckTemplate请求参数结构体
  */
-export interface Instance {
+export declare type DescribeHealthCheckTemplateRequest = null;
+/**
+ * DescribeHealthCheckPolicies返回参数结构体
+ */
+export interface DescribeHealthCheckPoliciesResponse {
     /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
-     */
-    InstanceRole: string;
-    /**
-     * 实例异常(或者处于初始化中)的原因
+     * 健康检测策略数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedReason: string;
+    HealthCheckPolicies: Array<HealthCheckPolicy>;
     /**
-     * 实例的状态
-  - initializing创建中
-  - running 运行中
-  - failed 异常
-     */
-    InstanceState: string;
-    /**
-     * 是否不可调度
+     * 数组总数目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unschedulable: boolean;
+    TotalCount: number;
     /**
-     * 添加时间
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CreatedTime: string;
-    /**
-     * 节点内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LanIP: string;
-    /**
-     * 资源池ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodePoolId: string;
-    /**
-     * 原生节点参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Native: NativeNodeInfo;
-    /**
-     * 普通节点参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Regular: RegularNodeInfo;
-    /**
-     * 超级节点参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Super: SuperNodeInfo;
-    /**
-     * 第三方节点参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    External: ExternalNodeInfo;
-    /**
-     * 节点类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeType: string;
+    RequestId?: string;
 }
 /**
- * 节点信息
+ * 健康检测模板
  */
-export interface NativeNodeInfo {
+export interface HealthCheckTemplate {
     /**
-     * 节点名称
+     * 健康检测项
      */
-    MachineName?: string;
-    /**
-     * Machine 状态
-     */
-    MachineState?: string;
-    /**
-     * Machine 所在可用区
-     */
-    Zone?: string;
-    /**
-     * 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；
-     */
-    InstanceChargeType?: string;
-    /**
-     * 创建时间
-     */
-    CreatedAt?: string;
-    /**
-     * Machine 登录状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LoginStatus?: string;
-    /**
-     * 是否开启缩容保护
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsProtectedFromScaleIn?: boolean;
-    /**
-     * Machine 名字
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DisplayName?: string;
-    /**
-     * CPU核数，单位：核
-     */
-    CPU?: number;
-    /**
-     * GPU核数，单位：核
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GPU?: number;
-    /**
-     * 自动续费标识
-     */
-    RenewFlag?: string;
-    /**
-     * 节点计费模式（已弃用）
-     */
-    PayMode?: string;
-    /**
-     * 节点内存容量，单位：`GB`
-     */
-    Memory?: number;
-    /**
-     * 公网带宽相关信息设置
-     */
-    InternetAccessible?: InternetAccessible;
-    /**
-     * 机型所属机型族
-     */
-    InstanceFamily?: string;
-    /**
-     * 节点内网 IP
-     */
-    LanIp?: string;
-    /**
-     * 机型
-     */
-    InstanceType?: string;
-    /**
-     * 包年包月节点计费过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpiredTime?: string;
-    /**
-     * 安全组列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SecurityGroupIDs?: Array<string>;
-    /**
-     * VPC 唯一 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
-    /**
-     * 子网唯一 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
-    /**
-     * OS的名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OsImage?: string;
+    Rules: Array<HealthCheckTemplateRule>;
 }
 /**
  * 公网带宽
@@ -1196,6 +1405,19 @@ export interface InternetAccessible {
      * 带宽包 ID
      */
     BandwidthPackageId?: string;
+}
+/**
+ * ModifyHealthCheckPolicy请求参数结构体
+ */
+export interface ModifyHealthCheckPolicyRequest {
+    /**
+     * 集群 ID
+     */
+    ClusterId: string;
+    /**
+     * 健康检测策略
+     */
+    HealthCheckPolicy: HealthCheckPolicy;
 }
 /**
  * 超级节点信息
@@ -1294,19 +1516,33 @@ export interface ManuallyAdded {
     Total: number;
 }
 /**
- * 普通节点信息
+ * 托管节点池Management配置
  */
-export interface RegularNodeInfo {
+export interface ManagementConfig {
     /**
-     * 节点配置
+     * dns 配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceAdvancedSettings: InstanceAdvancedSettings;
+    Nameservers?: Array<string>;
     /**
-     * 自动伸缩组ID
+     * hosts 配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingGroupId: string;
+    Hosts?: Array<string>;
+    /**
+     * 内核参数配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KernelArgs?: Array<string>;
+}
+/**
+ * ModifyHealthCheckPolicy返回参数结构体
+ */
+export interface ModifyHealthCheckPolicyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 排序信息
@@ -1320,6 +1556,19 @@ export interface SortBy {
      * 排序方式
      */
     OrderType?: string;
+}
+/**
+ * 健康检测规则
+ */
+export interface HealthCheckPolicy {
+    /**
+     * 健康检测策略名称
+     */
+    Name: string;
+    /**
+     * 健康检测策略规则列表
+     */
+    Rules: Array<HealthCheckPolicyRule>;
 }
 /**
  * 节点系统盘和数据盘配置
@@ -1345,6 +1594,19 @@ export interface Disk {
      * 挂载目录
      */
     MountTarget?: string;
+}
+/**
+ * CreateHealthCheckPolicy返回参数结构体
+ */
+export interface CreateHealthCheckPolicyResponse {
+    /**
+     * 健康检测策略名称
+     */
+    HealthCheckPolicyName: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 描述了k8s节点数据盘相关配置与信息。

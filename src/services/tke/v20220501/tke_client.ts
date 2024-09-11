@@ -18,8 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RuntimeConfig,
-  Label,
+  NativeNodeInfo,
+  HealthCheckTemplateRule,
+  HealthCheckPolicyRule,
+  DeleteHealthCheckPolicyRequest,
   CreateNodePoolResponse,
   CreateNativeNodePoolParam,
   DescribeNodePoolsResponse,
@@ -27,9 +29,14 @@ import {
   DescribeClusterInstancesResponse,
   AutoUpgradeOptions,
   AutoscalingAdded,
-  SuperNodePoolInfo,
+  Instance,
+  DescribeHealthCheckPolicyBindingsRequest,
   NodeCountSummary,
-  RegularNodePoolInfo,
+  SuperNodePoolInfo,
+  RuntimeConfig,
+  Label,
+  HealthCheckPolicyBinding,
+  CreateHealthCheckPolicyRequest,
   InstanceExtraArgs,
   MachineUpgradeSettings,
   UpdateNativeNodePoolParam,
@@ -40,13 +47,18 @@ import {
   ModifyNodePoolRequest,
   Annotation,
   DescribeClusterInstancesRequest,
+  DeleteHealthCheckPolicyResponse,
   TagSpecification,
   LifecycleConfig,
   ModifyNodePoolResponse,
+  RegularNodePoolInfo,
   Taint,
   Filter,
-  ManagementConfig,
+  DescribeHealthCheckPoliciesRequest,
+  DescribeHealthCheckTemplateResponse,
   CreateNodePoolRequest,
+  RegularNodeInfo,
+  DescribeHealthCheckPolicyBindingsResponse,
   NativeNodePoolInfo,
   DescribeNodePoolsRequest,
   NodePool,
@@ -54,14 +66,19 @@ import {
   InstanceAdvancedSettings,
   IntOrString,
   ExternalNodePoolInfo,
-  Instance,
-  NativeNodeInfo,
+  DescribeHealthCheckTemplateRequest,
+  DescribeHealthCheckPoliciesResponse,
+  HealthCheckTemplate,
   InternetAccessible,
+  ModifyHealthCheckPolicyRequest,
   SuperNodeInfo,
   ManuallyAdded,
-  RegularNodeInfo,
+  ManagementConfig,
+  ModifyHealthCheckPolicyResponse,
   SortBy,
+  HealthCheckPolicy,
   Disk,
+  CreateHealthCheckPolicyResponse,
   DataDisk,
 } from "./tke_models"
 
@@ -85,13 +102,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 TKE 节点池
+   * 更新 TKE 节点池
    */
-  async CreateNodePool(
-    req: CreateNodePoolRequest,
-    cb?: (error: string, rep: CreateNodePoolResponse) => void
-  ): Promise<CreateNodePoolResponse> {
-    return this.request("CreateNodePool", req, cb)
+  async ModifyNodePool(
+    req: ModifyNodePoolRequest,
+    cb?: (error: string, rep: ModifyNodePoolResponse) => void
+  ): Promise<ModifyNodePoolResponse> {
+    return this.request("ModifyNodePool", req, cb)
+  }
+
+  /**
+   * 删除健康检测策略
+   */
+  async DeleteHealthCheckPolicy(
+    req: DeleteHealthCheckPolicyRequest,
+    cb?: (error: string, rep: DeleteHealthCheckPolicyResponse) => void
+  ): Promise<DeleteHealthCheckPolicyResponse> {
+    return this.request("DeleteHealthCheckPolicy", req, cb)
   }
 
   /**
@@ -105,13 +132,63 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新 TKE 节点池
+   * 查询健康检测策略
    */
-  async ModifyNodePool(
-    req: ModifyNodePoolRequest,
-    cb?: (error: string, rep: ModifyNodePoolResponse) => void
-  ): Promise<ModifyNodePoolResponse> {
-    return this.request("ModifyNodePool", req, cb)
+  async DescribeHealthCheckPolicies(
+    req: DescribeHealthCheckPoliciesRequest,
+    cb?: (error: string, rep: DescribeHealthCheckPoliciesResponse) => void
+  ): Promise<DescribeHealthCheckPoliciesResponse> {
+    return this.request("DescribeHealthCheckPolicies", req, cb)
+  }
+
+  /**
+   * 修改健康检测策略
+   */
+  async ModifyHealthCheckPolicy(
+    req: ModifyHealthCheckPolicyRequest,
+    cb?: (error: string, rep: ModifyHealthCheckPolicyResponse) => void
+  ): Promise<ModifyHealthCheckPolicyResponse> {
+    return this.request("ModifyHealthCheckPolicy", req, cb)
+  }
+
+  /**
+   * 创建 TKE 节点池
+   */
+  async CreateNodePool(
+    req: CreateNodePoolRequest,
+    cb?: (error: string, rep: CreateNodePoolResponse) => void
+  ): Promise<CreateNodePoolResponse> {
+    return this.request("CreateNodePool", req, cb)
+  }
+
+  /**
+   * 查询健康检测策略模板
+   */
+  async DescribeHealthCheckTemplate(
+    req?: DescribeHealthCheckTemplateRequest,
+    cb?: (error: string, rep: DescribeHealthCheckTemplateResponse) => void
+  ): Promise<DescribeHealthCheckTemplateResponse> {
+    return this.request("DescribeHealthCheckTemplate", req, cb)
+  }
+
+  /**
+   * 查询健康检测策略绑定关系
+   */
+  async DescribeHealthCheckPolicyBindings(
+    req: DescribeHealthCheckPolicyBindingsRequest,
+    cb?: (error: string, rep: DescribeHealthCheckPolicyBindingsResponse) => void
+  ): Promise<DescribeHealthCheckPolicyBindingsResponse> {
+    return this.request("DescribeHealthCheckPolicyBindings", req, cb)
+  }
+
+  /**
+   * 创建健康检测策略
+   */
+  async CreateHealthCheckPolicy(
+    req: CreateHealthCheckPolicyRequest,
+    cb?: (error: string, rep: CreateHealthCheckPolicyResponse) => void
+  ): Promise<CreateHealthCheckPolicyResponse> {
+    return this.request("CreateHealthCheckPolicy", req, cb)
   }
 
   /**

@@ -626,7 +626,7 @@ export interface GetTWeCallActiveStatusRequest {
     /**
      * appId
      */
-    MiniProgramAppId: string;
+    MiniProgramAppId?: string;
     /**
      * 设备列表
      */
@@ -2923,7 +2923,7 @@ export interface ActivateTWeCallLicenseRequest {
     /**
      * appId
      */
-    MiniProgramAppId: string;
+    MiniProgramAppId?: string;
     /**
      * 设备列表
      */
