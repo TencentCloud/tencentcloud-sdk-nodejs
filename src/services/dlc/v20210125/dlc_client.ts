@@ -45,6 +45,7 @@ import {
   DescribeAdvancedStoreLocationRequest,
   CancelNotebookSessionStatementBatchResponse,
   BatchSqlTask,
+  CreateNotebookSessionRequest,
   UpdateDataEngineRequest,
   SmartOptimizerWrittenPolicy,
   DescribeSparkAppJobsRequest,
@@ -137,7 +138,7 @@ import {
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
   DescribeDataEngineRequest,
-  CreateNotebookSessionRequest,
+  GroupInfo,
   KerberosInfo,
   CreateDataEngineRequest,
   DescribeNotebookSessionRequest,
@@ -315,6 +316,7 @@ import {
   WorkGroupMessage,
   DescribeUserDataEngineConfigResponse,
   DescribeSparkAppJobRequest,
+  TCHouseD,
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
   DescribeNotebookSessionResponse,
@@ -353,6 +355,7 @@ import {
   DataSourceInfo,
   DescribeNotebookSessionsResponse,
   DescribeEngineUsageInfoRequest,
+  DataMaskStrategyInfo,
   RollbackDataEngineImageResponse,
   AddOptimizerEnginesRequest,
   Partition,
@@ -584,7 +587,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
+   * 本接口（DescribeDataEngines）用于查询DataEngines信息列表.
    */
   async DescribeDataEngines(
     req: DescribeDataEnginesRequest,

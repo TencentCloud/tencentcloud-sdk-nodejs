@@ -102,55 +102,54 @@ export interface ZoneInfo {
 <li> na-siliconvalley-1 </li>
 <li> na-siliconvalley-2 </li>
 <li> eu-frankfurt-1 </li>
-<li> na-toronto-1 </li>
 <li> na-ashburn-1 </li>
 <li> na-ashburn-2 </li>
 <li> ap-nanjing-1 </li>
 <li> ap-nanjing-2 </li>
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区描述，例如，广州三区
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 可用区ID
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
    */
-  ZoneState: string
+  ZoneState?: string
   /**
    * 父级zone
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentZone: string
+  ParentZone?: string
   /**
    * 父级可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentZoneId: string
+  ParentZoneId?: string
   /**
    * 父级可用区描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentZoneName: string
+  ParentZoneName?: string
   /**
    * zone类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneType: string
+  ZoneType?: string
   /**
    * 控制台类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MachineRoomTypeMC: string
+  MachineRoomTypeMC?: string
   /**
    * 和ZoneId一样，适用于控制台调用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneIdMC: string
+  ZoneIdMC?: string
 }
 
 /**

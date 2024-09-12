@@ -102,13 +102,65 @@ export interface DeleteAclsRequest {
 }
 
 /**
- * DeleteDeviceGroups返回参数结构体
+ * SearchSession请求参数结构体
  */
-export interface DeleteDeviceGroupsResponse {
+export interface SearchSessionRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 内部Ip
    */
-  RequestId?: string
+  PrivateIp?: string
+  /**
+   * 外部Ip
+   */
+  PublicIp?: string
+  /**
+   * 用户名，长度不超过20
+   */
+  UserName?: string
+  /**
+   * 账号，长度不超过64
+   */
+  Account?: string
+  /**
+   * 来源Ip
+   */
+  FromIp?: string
+  /**
+   * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
+   */
+  StartTime?: string
+  /**
+   * 搜索区间的结束时间
+   */
+  EndTime?: string
+  /**
+   * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
+   */
+  Kind?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页的页内记录数，默认为20，最大200
+   */
+  Limit?: number
+  /**
+   * 姓名，长度不超过20
+   */
+  RealName?: string
+  /**
+   * 主机名，长度不超过64
+   */
+  DeviceName?: string
+  /**
+   * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
+   */
+  Status?: number
+  /**
+   * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
+   */
+  Id?: string
 }
 
 /**
@@ -637,6 +689,24 @@ export interface SearchFileRequest {
 }
 
 /**
+ * DescribeDomains返回参数结构体
+ */
+export interface DescribeDomainsResponse {
+  /**
+   * 网络域总数
+   */
+  TotalCount?: number
+  /**
+   * 网络域列表
+   */
+  DomainSet?: Array<Domain>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文件操作搜索结果
  */
 export interface SearchFileBySidResult {
@@ -742,71 +812,45 @@ export interface ImportExternalDeviceRequest {
 }
 
 /**
- * SearchSession请求参数结构体
+ * DescribeResources请求参数结构体
  */
-export interface SearchSessionRequest {
+export interface DescribeResourcesRequest {
   /**
-   * 内部Ip
+   * 地域码, 如: ap-guangzhou
    */
-  PrivateIp?: string
+  ApCode?: string
   /**
-   * 外部Ip
+   * 按照堡垒机开通的 VPC 实例ID查询
    */
-  PublicIp?: string
+  VpcId?: string
   /**
-   * 用户名，长度不超过20
+   * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
    */
-  UserName?: string
+  ResourceIds?: Array<string>
   /**
-   * 账号，长度不超过64
-   */
-  Account?: string
-  /**
-   * 来源Ip
-   */
-  FromIp?: string
-  /**
-   * 搜索区间的开始时间。若入参是Id，则非必传，否则为必传。
-   */
-  StartTime?: string
-  /**
-   * 搜索区间的结束时间
-   */
-  EndTime?: string
-  /**
-   * 会话协议类型，只能是1、2、3或4 对应关系为1-tui 2-gui 3-file 4-数据库。若入参是Id，则非必传，否则为必传。
-   */
-  Kind?: number
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 分页的页内记录数，默认为20，最大200
+   * 每页条目数量
    */
   Limit?: number
   /**
-   * 姓名，长度不超过20
+   * 分页偏移位置
    */
-  RealName?: string
-  /**
-   * 主机名，长度不超过64
-   */
-  DeviceName?: string
-  /**
-   * 状态，1为活跃，2为结束，3为强制离线，4为其他错误
-   */
-  Status?: number
-  /**
-   * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
-   */
-  Id?: string
+  Offset?: number
 }
 
 /**
  * BindDeviceResource返回参数结构体
  */
 export interface BindDeviceResourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResetDeviceAccountPrivateKey返回参数结构体
+ */
+export interface ResetDeviceAccountPrivateKeyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -943,17 +987,41 @@ export interface SearchCommandResult {
 }
 
 /**
- * 资产标签
+ * ModifyOAuthSetting请求参数结构体
  */
-export interface TagFilter {
+export interface ModifyOAuthSettingRequest {
   /**
-   * 标签键
+   * 是否开启OAuth认证，false-不开启，true-开启。
    */
-  TagKey: string
+  Enable: boolean
   /**
-   * 标签值
+   * OAuth认证方式。
    */
-  TagValue?: Array<string>
+  AuthMethod?: string
+  /**
+   * OAuth认证客户端Id
+   */
+  ClientId?: string
+  /**
+   * OAuth认证客户端密钥
+   */
+  ClientSecret?: string
+  /**
+   * 获取OAuth认证授权码URL
+   */
+  CodeUrl?: string
+  /**
+   * 获取OAuth令牌URL
+   */
+  TokenUrl?: string
+  /**
+   * 获取OAuth用户信息URL
+   */
+  UserInfoUrl?: string
+  /**
+   * 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。
+   */
+  Scopes?: Array<string>
 }
 
 /**
@@ -2222,13 +2290,51 @@ export interface Clb {
 }
 
 /**
- * ResetDeviceAccountPrivateKey返回参数结构体
+ * ModifyUser请求参数结构体
  */
-export interface ResetDeviceAccountPrivateKeyResponse {
+export interface ModifyUserRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 用户ID
    */
-  RequestId?: string
+  Id: number
+  /**
+   * 用户姓名，最大长度20个字符，不能包含空格
+   */
+  RealName: string
+  /**
+   * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
+   */
+  Phone?: string
+  /**
+   * 电子邮件
+   */
+  Email?: string
+  /**
+   * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
+   */
+  ValidateFrom?: string
+  /**
+   * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
+生效、失效时间不填则用户长期有效
+   */
+  ValidateTo?: string
+  /**
+   * 所属用户组ID集合
+   */
+  GroupIdSet?: Array<number | bigint>
+  /**
+   * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
+   */
+  AuthType?: number
+  /**
+   * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
+   */
+  ValidateTime?: string
+  /**
+   * 用户所属部门的ID，如1.2.3
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -2551,41 +2657,52 @@ export interface ModifyDeviceGroupRequest {
 }
 
 /**
- * ModifyOAuthSetting请求参数结构体
+ * 网络域
  */
-export interface ModifyOAuthSettingRequest {
+export interface Domain {
   /**
-   * 是否开启OAuth认证，false-不开启，true-开启。
+   * 自增id
    */
-  Enable: boolean
+  Id?: number
   /**
-   * OAuth认证方式。
+   * 网络域id
    */
-  AuthMethod?: string
+  DomainId?: string
   /**
-   * OAuth认证客户端Id
+   * 网络域名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientId?: string
+  DomainName?: string
   /**
-   * OAuth认证客户端密钥
+   * 堡垒机id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientSecret?: string
+  ResourceId?: string
   /**
-   * 获取OAuth认证授权码URL
+   * ip，网段
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeUrl?: string
+  WhiteIpSet?: Array<string>
   /**
-   * 获取OAuth令牌URL
+   * 是否启用  默认 1启用 0禁用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TokenUrl?: string
+  Enabled?: number
   /**
-   * 获取OAuth用户信息URL
+   * 状态 0-已断开  1-已连接
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserInfoUrl?: string
+  Status?: number
   /**
-   * 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。
+   * 网络域创建时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Scopes?: Array<string>
+  CreateTime?: string
+  /**
+   * 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Default?: number
 }
 
 /**
@@ -3132,51 +3249,21 @@ export interface DescribeDeviceAccountsResponse {
 }
 
 /**
- * ModifyUser请求参数结构体
+ * DescribeDomains请求参数结构体
  */
-export interface ModifyUserRequest {
+export interface DescribeDomainsRequest {
   /**
-   * 用户ID
+   * 每页条目数量，默认20，最大500
    */
-  Id: number
+  Limit?: number
   /**
-   * 用户姓名，最大长度20个字符，不能包含空格
+   * 过滤数组
    */
-  RealName: string
+  Filters?: Array<Filter>
   /**
-   * 按照"国家地区代码|手机号"的格式输入。如: "+86|xxxxxxxx"
+   * 分页偏移位置，默认值为0
    */
-  Phone?: string
-  /**
-   * 电子邮件
-   */
-  Email?: string
-  /**
-   * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
-   */
-  ValidateFrom?: string
-  /**
-   * 用户失效时间，如:"2021-09-23T00:00:00+00:00"
-生效、失效时间不填则用户长期有效
-   */
-  ValidateTo?: string
-  /**
-   * 所属用户组ID集合
-   */
-  GroupIdSet?: Array<number | bigint>
-  /**
-   * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
-   */
-  AuthType?: number
-  /**
-   * 访问时间段限制， 由0、1组成的字符串，长度168(7 × 24)，代表该用户在一周中允许访问的时间段。字符串中第N个字符代表在一周中的第N个小时， 0 - 代表不允许访问，1 - 代表允许访问
-   */
-  ValidateTime?: string
-  /**
-   * 用户所属部门的ID，如1.2.3
-   */
-  DepartmentId?: string
+  Offset?: number
 }
 
 /**
@@ -3212,29 +3299,13 @@ export interface ModifyAclResponse {
 }
 
 /**
- * DescribeResources请求参数结构体
+ * DeleteDeviceGroups返回参数结构体
  */
-export interface DescribeResourcesRequest {
+export interface DeleteDeviceGroupsResponse {
   /**
-   * 地域码, 如: ap-guangzhou
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ApCode?: string
-  /**
-   * 按照堡垒机开通的 VPC 实例ID查询
-   */
-  VpcId?: string
-  /**
-   * 资源ID集合，当传入ID集合时忽略 ApCode 和 VpcId
-   */
-  ResourceIds?: Array<string>
-  /**
-   * 每页条目数量
-   */
-  Limit?: number
-  /**
-   * 分页偏移位置
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -3662,6 +3733,20 @@ export interface Acl {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WhiteCmds?: Array<string>
+}
+
+/**
+ * 资产标签
+ */
+export interface TagFilter {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue?: Array<string>
 }
 
 /**

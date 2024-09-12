@@ -1061,6 +1061,10 @@ export interface FlowFileInfo {
    * 本企业(发起方企业)是否需要签署审批
    */
   NeedSignReview?: boolean
+  /**
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   */
+  FlowDisplayType?: number
 }
 
 /**
@@ -1921,6 +1925,10 @@ MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverM
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   */
+  FlowDisplayType?: number
 }
 
 /**
@@ -4183,6 +4191,10 @@ export interface FlowInfo {
 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
    */
   AutoSignScene?: string
+  /**
+   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   */
+  FlowDisplayType?: number
 }
 
 /**
@@ -8278,7 +8290,7 @@ export interface ChannelCreateFlowSignUrlRequest {
 若为子客企业签署方则需传OpenId、OrganizationOpenId，其他可不传。
 
 注:
-`1. 签署人只能有手写签名、时间类型、印章类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。`
+`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。`
 `2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传`
    */
   FlowApproverInfos?: Array<FlowApproverInfo>

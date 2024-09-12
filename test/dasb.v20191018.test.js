@@ -128,6 +128,16 @@ it("dasb.v20191018.DescribeUserGroups", async function () {
     }
 })
 
+it("dasb.v20191018.DescribeDomains", async function () {
+    try {
+       const data = await client.DescribeDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.DeployResource", async function () {
     try {
        const data = await client.DeployResource({})

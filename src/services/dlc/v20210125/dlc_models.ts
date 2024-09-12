@@ -42,31 +42,31 @@ export interface DescribeResultDownloadResponse {
    * 下载文件路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Path: string
+  Path?: string
   /**
    * 任务状态 init | queue | format | compress | success|  timeout | error
    */
-  Status: string
+  Status?: string
   /**
    * 任务异常原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
-   * 临时AK
+   * 临时SecretId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretId: string
+  SecretId?: string
   /**
-   * 临时SK
+   * 临时SecretKey
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretKey: string
+  SecretKey?: string
   /**
    * 临时Token
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Token: string
+  Token?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -437,27 +437,27 @@ export interface DescribeDataEngineEventsResponse {
    * 事件详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Events: Array<HouseEventsInfo>
+  Events?: Array<HouseEventsInfo>
   /**
    * 分页号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Page: number
+  Page?: number
   /**
    * 分页大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Size: number
+  Size?: number
   /**
    * 总页数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalPages: number
+  TotalPages?: number
   /**
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -775,6 +775,79 @@ export interface BatchSqlTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
+}
+
+/**
+ * CreateNotebookSession请求参数结构体
+ */
+export interface CreateNotebookSessionRequest {
+  /**
+   * Session名称
+   */
+  Name: string
+  /**
+   * 类型，当前支持：spark、pyspark、sparkr、sql
+   */
+  Kind: string
+  /**
+   * DLC Spark作业引擎名称
+   */
+  DataEngineName: string
+  /**
+   * session文件地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentFiles?: Array<string>
+  /**
+   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentJars?: Array<string>
+  /**
+   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentPython?: Array<string>
+  /**
+   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramArchives?: Array<string>
+  /**
+   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  DriverSize?: string
+  /**
+   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  ExecutorSize?: string
+  /**
+   * 指定的Executor数量，默认为1
+   */
+  ExecutorNumbers?: number
+  /**
+   * Session相关配置，当前支持：
+1. dlc.eni: 用户配置的eni网关信息，可以通过该字段设置；
+2. dlc.role.arn: 用户配置的roleArn鉴权策略配置信息，可以通过该字段设置；
+3. dlc.sql.set.config: 用户配置的集群配置信息，可以通过该字段设置；
+   */
+  Arguments?: Array<KVPair>
+  /**
+   * 代理用户，默认为root
+   */
+  ProxyUser?: string
+  /**
+   * 指定的Session超时时间，单位秒，默认3600秒
+   */
+  TimeoutInSecond?: number
+  /**
+   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+   */
+  ExecutorMaxNumbers?: number
+  /**
+   * 指定spark版本名称，当前任务使用该spark镜像运行
+   */
+  SparkImage?: string
+  /**
+   * 是否继承集群的资源类配置：0：自定义（默认），1：继承集群；
+   */
+  IsInherit?: number
 }
 
 /**
@@ -2242,7 +2315,7 @@ export interface CreateResultDownloadRequest {
    */
   Format: string
   /**
-   * 是否重新生成下载文件，仅当之前任务为 Timout | Error 时有效
+   * 是否重新生成下载文件，仅当之前任务状态为 timeout | error 时有效
    */
   Force?: boolean
 }
@@ -2335,11 +2408,11 @@ export interface AddDMSPartitionsResponse {
   /**
    * 成功数量
    */
-  Total: number
+  Total?: number
   /**
    * 分区值
    */
-  Partitions: Array<DMSPartition>
+  Partitions?: Array<DMSPartition>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2870,7 +2943,7 @@ export interface DescribeUserTypeResponse {
    * 用户类型。ADMIN：管理员 COMMON：普通用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserType: string
+  UserType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2922,76 +2995,19 @@ export interface DescribeDataEngineRequest {
 }
 
 /**
- * CreateNotebookSession请求参数结构体
+ * 数据脱敏用户组信息
  */
-export interface CreateNotebookSessionRequest {
+export interface GroupInfo {
   /**
-   * Session名称
+   * 用户组ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  WorkGroupId?: number
   /**
-   * 类型，当前支持：spark、pyspark、sparkr、sql
+   * 策略类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Kind: string
-  /**
-   * DLC Spark作业引擎名称
-   */
-  DataEngineName: string
-  /**
-   * session文件地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentFiles?: Array<string>
-  /**
-   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentJars?: Array<string>
-  /**
-   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentPython?: Array<string>
-  /**
-   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramArchives?: Array<string>
-  /**
-   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  DriverSize?: string
-  /**
-   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  ExecutorSize?: string
-  /**
-   * 指定的Executor数量，默认为1
-   */
-  ExecutorNumbers?: number
-  /**
-   * Session相关配置，当前支持：
-1. dlc.eni: 用户配置的eni网关信息，可以通过该字段设置；
-2. dlc.role.arn: 用户配置的roleArn鉴权策略配置信息，可以通过该字段设置；
-3. dlc.sql.set.config: 用户配置的集群配置信息，可以通过该字段设置；
-   */
-  Arguments?: Array<KVPair>
-  /**
-   * 代理用户，默认为root
-   */
-  ProxyUser?: string
-  /**
-   * 指定的Session超时时间，单位秒，默认3600秒
-   */
-  TimeoutInSecond?: number
-  /**
-   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
-   */
-  ExecutorMaxNumbers?: number
-  /**
-   * 指定spark版本名称，当前任务使用该spark镜像运行
-   */
-  SparkImage?: string
-  /**
-   * 是否继承集群的资源类配置：0：自定义（默认），1：继承集群；
-   */
-  IsInherit?: number
+  StrategyType?: string
 }
 
 /**
@@ -3627,11 +3643,11 @@ export interface DescribeDMSPartitionsResponse {
   /**
    * 分区信息
    */
-  Partitions: Array<DMSPartition>
+  Partitions?: Array<DMSPartition>
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4631,6 +4647,11 @@ export interface DatasourceConnectionConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TDSQLPostgreSql?: DataSourceInfo
+  /**
+   * Doris数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TCHouseD?: TCHouseD
 }
 
 /**
@@ -6052,6 +6073,11 @@ export interface ResourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
+  /**
+   * 标准引擎资源组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
 }
 
 /**
@@ -7397,13 +7423,59 @@ export interface DescribeSparkAppJobRequest {
 }
 
 /**
+ * Doirs数据源详细信息
+ */
+export interface TCHouseD {
+  /**
+   * 数据源实例的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 数据源的JDBC
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JdbcUrl?: string
+  /**
+   * 用于访问数据源的用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 数据源访问密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 访问信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessInfo?: string
+}
+
+/**
  * CreateResultDownload返回参数结构体
  */
 export interface CreateResultDownloadResponse {
   /**
    * 下载任务Id
    */
-  DownloadId: string
+  DownloadId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8284,6 +8356,42 @@ export interface DescribeEngineUsageInfoRequest {
 }
 
 /**
+ * 数据脱敏策略信息
+ */
+export interface DataMaskStrategyInfo {
+  /**
+   * 策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName?: string
+  /**
+   * MASK_SHOW_FIRST_4; MASK_SHOW_LAST_4;MASK_HASH; MASK_DATE_SHOW_YEAR; MASK_NULL; MASK_DEFAULT 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyType?: string
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyDesc?: string
+  /**
+   * 用户组策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Groups?: Array<GroupInfo>
+  /**
+   * 用户子账号uin列表，按;拼接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Users?: string
+  /**
+   * 策略Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyId?: string
+}
+
+/**
  * RollbackDataEngineImage返回参数结构体
  */
 export interface RollbackDataEngineImageResponse {
@@ -9014,8 +9122,7 @@ export interface Column {
    */
   Name: string
   /**
-   * 列类型，支持如下类型定义:
-string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array<data_type>|map<primitive_type, data_type>|struct<col_name : data_type [COMMENT col_comment], ...>|uniontype<data_type, data_type, ...>。
+   * string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array|map|struct|uniontype
    */
   Type: string
   /**
@@ -9058,6 +9165,11 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPartition?: boolean
+  /**
+   * 数据脱敏策略信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataMaskStrategyInfo?: DataMaskStrategyInfo
 }
 
 /**
@@ -9464,7 +9576,7 @@ export interface DescribeDataEngineResponse {
   /**
    * 数据引擎详细信息
    */
-  DataEngine: DataEngineInfo
+  DataEngine?: DataEngineInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -92,7 +92,7 @@ export class Client extends AbstractClient {
    * 实例节点列表
    */
   async DescribeInstanceNodes(
-    req?: DescribeInstanceNodesRequest,
+    req: DescribeInstanceNodesRequest,
     cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
   ): Promise<DescribeInstanceNodesResponse> {
     return this.request("DescribeInstanceNodes", req, cb)

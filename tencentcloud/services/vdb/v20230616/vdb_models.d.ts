@@ -303,7 +303,20 @@ export interface DisassociateSecurityGroupsResponse {
 /**
  * DescribeInstanceNodes请求参数结构体
  */
-export declare type DescribeInstanceNodesRequest = null;
+export interface DescribeInstanceNodesRequest {
+    /**
+     * limit
+     */
+    Limit?: number;
+    /**
+     * offset
+     */
+    Offset?: number;
+    /**
+     * component
+     */
+    Component?: string;
+}
 /**
  * 实例信息，用于实例列表
  */

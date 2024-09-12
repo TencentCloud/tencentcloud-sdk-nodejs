@@ -629,7 +629,7 @@ export interface DescribeServiceNodeInfosRequest {
    */
   HealthStateId?: string
   /**
-   * 服务组件名称，都是大写比如YARN
+   * 服务组件名称，都是大写例如YARN
    */
   ServiceName?: string
   /**

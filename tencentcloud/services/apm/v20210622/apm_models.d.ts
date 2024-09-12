@@ -91,6 +91,10 @@ export interface ModifyApmInstanceRequest {
   0为按量付费
      */
     PayMode?: number;
+    /**
+     * 响应时间满意阈值
+     */
+    ResponseDurationWarningThreshold?: number;
 }
 /**
  * apm实例信息
@@ -241,6 +245,11 @@ export interface ApmInstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PayModeEffective?: boolean;
+    /**
+     * 响应时间满意阈值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResponseDurationWarningThreshold?: number;
 }
 /**
  * CreateApmInstance请求参数结构体

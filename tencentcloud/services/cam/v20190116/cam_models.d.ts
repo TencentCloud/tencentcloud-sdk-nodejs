@@ -89,6 +89,54 @@ export interface UpdateUserOIDCConfigResponse {
     RequestId?: string;
 }
 /**
+ * 消息接收人信息
+ */
+export interface Receiver {
+    /**
+     * id
+     */
+    Uid: number;
+    /**
+     * 名字
+     */
+    Name: string;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+    /**
+     * 手机号码
+     */
+    PhoneNumber: string;
+    /**
+     * 手机号码是否验证
+     */
+    PhoneFlag: number;
+    /**
+     * 邮箱
+     */
+    Email: string;
+    /**
+     * 邮箱是否验证
+     */
+    EmailFlag: number;
+    /**
+     * 是否主联系人
+     */
+    IsReceiverOwner: number;
+    /**
+     * 是否允许微信接收通知
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WechatFlag: number;
+    /**
+     * 账号uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin: number;
+}
+/**
  * ListAccessKeys请求参数结构体
  */
 export interface ListAccessKeysRequest {
@@ -548,6 +596,15 @@ export interface DescribeRoleListRequest {
  * DescribeUserSAMLConfig请求参数结构体
  */
 export declare type DescribeUserSAMLConfigRequest = null;
+/**
+ * DeleteMessageReceiver返回参数结构体
+ */
+export interface DeleteMessageReceiverResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * DeleteAccessKey返回参数结构体
  */
@@ -1822,6 +1879,19 @@ export interface SAMLProviderInfo {
     ModifyTime: string;
 }
 /**
+ * ListReceiver请求参数结构体
+ */
+export interface ListReceiverRequest {
+    /**
+     * 分页偏移量
+     */
+    Offset?: number;
+    /**
+     * 分页限制数目
+     */
+    Limit?: number;
+}
+/**
  * DisableUserSSO请求参数结构体
  */
 export declare type DisableUserSSORequest = null;
@@ -2253,6 +2323,23 @@ export interface GetGroupResponse {
      * 用户组成员信息
      */
     UserInfo?: Array<GroupMemberInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ListReceiver返回参数结构体
+ */
+export interface ListReceiverResponse {
+    /**
+     * 总数目
+     */
+    TotalCount?: number;
+    /**
+     * 联系人列表
+     */
+    Receivers?: Array<Receiver>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3434,6 +3521,15 @@ export interface DescribeSafeAuthFlagCollResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteMessageReceiver请求参数结构体
+ */
+export interface DeleteMessageReceiverRequest {
+    /**
+     * 消息接受者的名称
+     */
+    Name: string;
 }
 /**
  * DescribeSafeAuthFlagColl请求参数结构体

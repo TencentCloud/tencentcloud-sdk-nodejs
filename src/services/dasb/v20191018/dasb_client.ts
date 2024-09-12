@@ -23,7 +23,7 @@ import {
   ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
-  DeleteDeviceGroupsResponse,
+  SearchSessionRequest,
   DescribeDeviceGroupsResponse,
   DeleteCmdTemplatesResponse,
   DeleteDevicesResponse,
@@ -44,15 +44,17 @@ import {
   DeleteUserGroupsResponse,
   ModifyDeviceRequest,
   SearchFileRequest,
+  DescribeDomainsResponse,
   SearchFileBySidResult,
   SearchCommandRequest,
   ImportExternalDeviceRequest,
-  SearchSessionRequest,
+  DescribeResourcesRequest,
   BindDeviceResourceResponse,
+  ResetDeviceAccountPrivateKeyResponse,
   DeleteUserGroupMembersResponse,
   CmdTemplate,
   SearchCommandResult,
-  TagFilter,
+  ModifyOAuthSettingRequest,
   CreateUserGroupRequest,
   SearchFileTypeFilter,
   BindDeviceAccountPrivateKeyResponse,
@@ -100,7 +102,7 @@ import {
   Group,
   DescribeAssetSyncStatusRequest,
   Clb,
-  ResetDeviceAccountPrivateKeyResponse,
+  ModifyUserRequest,
   DeleteUsersRequest,
   DeleteDeviceAccountsRequest,
   DeleteDeviceGroupMembersResponse,
@@ -116,7 +118,7 @@ import {
   DescribeDasbImageIdsRequest,
   CreateDeviceAccountResponse,
   ModifyDeviceGroupRequest,
-  ModifyOAuthSettingRequest,
+  Domain,
   Filter,
   DescribeUsersResponse,
   DeployResourceResponse,
@@ -144,10 +146,10 @@ import {
   CreateUserGroupResponse,
   DeleteDevicesRequest,
   DescribeDeviceAccountsResponse,
-  ModifyUserRequest,
+  DescribeDomainsRequest,
   DescribeCmdTemplatesRequest,
   ModifyAclResponse,
-  DescribeResourcesRequest,
+  DeleteDeviceGroupsResponse,
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
@@ -156,6 +158,7 @@ import {
   RunChangePwdTaskResponse,
   BindDeviceResourceRequest,
   Acl,
+  TagFilter,
   DescribeDevicesRequest,
   DescribeDeviceGroupsRequest,
   ACTemplate,
@@ -289,6 +292,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupsResponse) => void
   ): Promise<DescribeUserGroupsResponse> {
     return this.request("DescribeUserGroups", req, cb)
+  }
+
+  /**
+   * 查询网络域
+   */
+  async DescribeDomains(
+    req: DescribeDomainsRequest,
+    cb?: (error: string, rep: DescribeDomainsResponse) => void
+  ): Promise<DescribeDomainsResponse> {
+    return this.request("DescribeDomains", req, cb)
   }
 
   /**

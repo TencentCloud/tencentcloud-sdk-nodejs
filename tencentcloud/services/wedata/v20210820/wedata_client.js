@@ -1120,7 +1120,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTaskAlarmRegular", req, cb);
     }
     /**
-     * 获取待提交任务预提交校验信息
+     * 获取待提交任务预提交校验信息（注意：工作流编号或者任务编号列表，必须填一项）
      */
     async DescribePendingSubmitTaskList(req, cb) {
         return this.request("DescribePendingSubmitTaskList", req, cb);

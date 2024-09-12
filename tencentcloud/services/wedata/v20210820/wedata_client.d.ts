@@ -738,7 +738,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteTaskAlarmRegular(req: DeleteTaskAlarmRegularRequest, cb?: (error: string, rep: DeleteTaskAlarmRegularResponse) => void): Promise<DeleteTaskAlarmRegularResponse>;
     /**
-     * 获取待提交任务预提交校验信息
+     * 获取待提交任务预提交校验信息（注意：工作流编号或者任务编号列表，必须填一项）
      */
     DescribePendingSubmitTaskList(req: DescribePendingSubmitTaskListRequest, cb?: (error: string, rep: DescribePendingSubmitTaskListResponse) => void): Promise<DescribePendingSubmitTaskListResponse>;
     /**

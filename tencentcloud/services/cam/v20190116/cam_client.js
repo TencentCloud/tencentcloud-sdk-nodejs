@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRolePermissionsBoundary", req, cb);
     }
     /**
+     * 获取消息接收人列表
+     */
+    async ListReceiver(req, cb) {
+        return this.request("ListReceiver", req, cb);
+    }
+    /**
      * 本接口（ListAttachedGroupPolicies）可用于查询用户组关联的策略列表。
      */
     async ListAttachedGroupPolicies(req, cb) {
@@ -454,6 +460,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListGroupsForUser(req, cb) {
         return this.request("ListGroupsForUser", req, cb);
+    }
+    /**
+     * 删除消息接收人
+     */
+    async DeleteMessageReceiver(req, cb) {
+        return this.request("DeleteMessageReceiver", req, cb);
     }
     /**
      * 查询SAML身份提供商详情

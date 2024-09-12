@@ -528,6 +528,10 @@ export interface DescribeAnimatedGraphicsTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
    */
   Type?: string
+  /**
+   * 转动图模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -889,7 +893,7 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
    * 用户自定义文本过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
 标签个数最多 10 个，每个标签长度最多 16 个字符。
    */
-  LabelSet?: string
+  LabelSet?: Array<string>
   /**
    * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
    */
@@ -3796,6 +3800,10 @@ export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
    */
   Type?: string
+  /**
+   * 指定时间点截图模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -4900,6 +4908,10 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
    * 是否为纯音频，0表示视频，1表示纯音频
    */
   PureAudio?: number
+  /**
+   * 自适应转码模板标识过滤条件，长度限制：64 个字符
+   */
+  Name?: string
 }
 
 /**
@@ -5245,12 +5257,14 @@ export interface VideoTemplateInfo {
 <li>vp9：VP9 编码</li>
 <li>mpeg2：MPEG2 编码</li>
 <li>dnxhd：DNxHD 编码</li>
+<li>mv-hevc：MV-HEVC 编码</li>
 注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 
 注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
 注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
 注意：VP8、VP9编码容器目前只支持webm，mkv。
 注意：MPEG2、dnxhd 编码容器目前只支持mxf。
+注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。
    */
   Codec: string
   /**
@@ -5292,8 +5306,7 @@ export interface VideoTemplateInfo {
    */
   Height?: number
   /**
-   * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
-当填 0 或不填时，系统将自动设置 gop 长度。
+   * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。 当填 0 或不填时，系统将自动设置 gop 长度。
    */
   Gop?: number
   /**
@@ -5328,6 +5341,14 @@ export interface VideoTemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FpsDenominator?: number
+  /**
+   * 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：
+<li>side_by_side：左右视角</li>
+<li>top_bottom：上下视角</li>
+默认值:side_by_side
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Stereo3dType?: string
 }
 
 /**
@@ -5499,6 +5520,10 @@ export interface DescribeWatermarkTemplatesRequest {
 <li>最大值：100。</li>
    */
   Limit?: number
+  /**
+   * 水印模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -5933,6 +5958,10 @@ export interface DescribeQualityControlTemplatesRequest {
    * "Preset"：预设，Custom":客户魔板
    */
   Type?: string
+  /**
+   * 媒体质检模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -8080,6 +8109,10 @@ export interface DescribeImageSpriteTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
    */
   Type?: string
+  /**
+   * 雪碧图模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -8451,6 +8484,10 @@ export interface DescribeAIAnalysisTemplatesRequest {
    * Custom：用户自定义模板。
    */
   Type?: string
+  /**
+   * 视频内容分析模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -9804,6 +9841,10 @@ export interface DescribeSampleSnapshotTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
    */
   Type?: string
+  /**
+   * 采样截图模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -11237,12 +11278,14 @@ export interface VideoTemplateInfoForUpdate {
 <li>vp9：VP9 编码</li>
 <li>mpeg2：MPEG2 编码</li>
 <li>dnxhd：DNxHD 编码</li>
+<li>mv-hevc：MV-HEVC 编码</li>
 注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 
 注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
 注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
 注意：VP8、VP9编码容器目前只支持webm，mkv。
 注意：MPEG2、dnxhd 编码容器目前只支持mxf。
+注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Codec?: string
@@ -11326,6 +11369,14 @@ export interface VideoTemplateInfoForUpdate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FpsDenominator?: number
+  /**
+   * 3D视频拼接方式，仅mv-hevc，3D视频生效，可选值：
+<li>side_by_side：左右视角</li>
+<li>top_bottom：上下视角</li>
+默认值:side_by_side
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Stereo3dType?: string
 }
 
 /**
@@ -11387,6 +11438,10 @@ export interface DescribeContentReviewTemplatesRequest {
    * Custom：用户自定义模板。
    */
   Type?: string
+  /**
+   * 智能审核模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -13457,6 +13512,10 @@ export interface DescribeTranscodeTemplatesRequest {
 
    */
   TranscodeType?: string
+  /**
+   * 转码模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -15472,6 +15531,10 @@ export interface DescribeAIRecognitionTemplatesRequest {
    * Custom：用户自定义模板。
    */
   Type?: string
+  /**
+   * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**

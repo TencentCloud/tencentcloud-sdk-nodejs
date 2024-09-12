@@ -22,6 +22,7 @@ import {
   ListAttachedRolePoliciesResponse,
   CreateMessageReceiverRequest,
   UpdateUserOIDCConfigResponse,
+  Receiver,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
   UpdateSAMLProviderRequest,
@@ -55,6 +56,7 @@ import {
   GetCustomMFATokenInfoRequest,
   DescribeRoleListRequest,
   DescribeUserSAMLConfigRequest,
+  DeleteMessageReceiverResponse,
   DeleteAccessKeyResponse,
   PutRolePermissionsBoundaryRequest,
   GetGroupRequest,
@@ -121,6 +123,7 @@ import {
   SubAccountInfo,
   CreateGroupRequest,
   SAMLProviderInfo,
+  ListReceiverRequest,
   DisableUserSSORequest,
   ListPoliciesGrantingServiceAccessRequest,
   UpdateSAMLProviderResponse,
@@ -144,6 +147,7 @@ import {
   CreateOIDCConfigRequest,
   AccessKey,
   GetGroupResponse,
+  ListReceiverResponse,
   UpdateOIDCConfigResponse,
   UntagRoleRequest,
   AttachGroupPolicyRequest,
@@ -211,6 +215,7 @@ import {
   UpdateUserSAMLConfigResponse,
   AttachUserPolicyResponse,
   DescribeSafeAuthFlagCollResponse,
+  DeleteMessageReceiverRequest,
   DescribeSafeAuthFlagCollRequest,
   PutRolePermissionsBoundaryResponse,
   SetMfaFlagRequest,
@@ -282,6 +287,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRolePermissionsBoundaryResponse) => void
   ): Promise<DeleteRolePermissionsBoundaryResponse> {
     return this.request("DeleteRolePermissionsBoundary", req, cb)
+  }
+
+  /**
+   * 获取消息接收人列表
+   */
+  async ListReceiver(
+    req: ListReceiverRequest,
+    cb?: (error: string, rep: ListReceiverResponse) => void
+  ): Promise<ListReceiverResponse> {
+    return this.request("ListReceiver", req, cb)
   }
 
   /**
@@ -944,6 +959,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListGroupsForUserResponse) => void
   ): Promise<ListGroupsForUserResponse> {
     return this.request("ListGroupsForUser", req, cb)
+  }
+
+  /**
+   * 删除消息接收人
+   */
+  async DeleteMessageReceiver(
+    req: DeleteMessageReceiverRequest,
+    cb?: (error: string, rep: DeleteMessageReceiverResponse) => void
+  ): Promise<DeleteMessageReceiverResponse> {
+    return this.request("DeleteMessageReceiver", req, cb)
   }
 
   /**

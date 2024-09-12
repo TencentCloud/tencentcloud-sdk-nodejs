@@ -3324,6 +3324,10 @@ export interface AttachMediaSubtitlesRequest {
      */
     SubtitleIds: Array<string>;
     /**
+     * 默认字幕的唯一标识。不填则不设置默认字幕。
+     */
+    DefaultSubtitleId?: string;
+    /**
      * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
      */
     SubAppId?: number;
@@ -14300,21 +14304,21 @@ export interface AdaptiveDynamicStreamingInfoItem {
     /**
      * 转自适应码流规格。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 打包格式，取值范围：
   <li>HLS；</li>
   <li>DASH。</li>
      */
-    Package: string;
+    Package?: string;
     /**
      * 加密类型。
      */
-    DrmType: string;
+    DrmType?: string;
     /**
      * 播放地址。
      */
-    Url: string;
+    Url?: string;
     /**
      * 媒体文件大小，单位：字节。
   <li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；</li>
@@ -14337,6 +14341,14 @@ export interface AdaptiveDynamicStreamingInfoItem {
      * 版权信息。
      */
     CopyRightWatermarkText?: string;
+    /**
+     * 字幕信息列表。
+     */
+    SubtitleSet?: Array<MediaSubtitleItem>;
+    /**
+     * 默认字幕的唯一标识。
+     */
+    DefaultSubtitleId?: string;
 }
 /**
  * 直播即时剪辑流信息

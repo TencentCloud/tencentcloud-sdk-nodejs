@@ -26,7 +26,7 @@ export declare class Client extends AbstractClient {
     /**
      * 实例节点列表
      */
-    DescribeInstanceNodes(req?: DescribeInstanceNodesRequest, cb?: (error: string, rep: DescribeInstanceNodesResponse) => void): Promise<DescribeInstanceNodesResponse>;
+    DescribeInstanceNodes(req: DescribeInstanceNodesRequest, cb?: (error: string, rep: DescribeInstanceNodesResponse) => void): Promise<DescribeInstanceNodesResponse>;
     /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */

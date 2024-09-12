@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchDataEngine", req, cb);
     }
     /**
-     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
+     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表.
      */
     async DescribeDataEngines(req, cb) {
         return this.request("DescribeDataEngines", req, cb);

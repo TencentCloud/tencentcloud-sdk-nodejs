@@ -68,6 +68,16 @@ it("cam.v20190116.DeleteRolePermissionsBoundary", async function () {
     }
 })
 
+it("cam.v20190116.ListReceiver", async function () {
+    try {
+       const data = await client.ListReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ListAttachedGroupPolicies", async function () {
     try {
        const data = await client.ListAttachedGroupPolicies({})
@@ -721,6 +731,16 @@ it("cam.v20190116.DetachUserPolicy", async function () {
 it("cam.v20190116.ListGroupsForUser", async function () {
     try {
        const data = await client.ListGroupsForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.DeleteMessageReceiver", async function () {
+    try {
+       const data = await client.DeleteMessageReceiver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

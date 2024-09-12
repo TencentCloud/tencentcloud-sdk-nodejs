@@ -7563,11 +7563,11 @@ export interface DescribeSSLStatusResponse {
   /**
    * 是否开通 SSL 。ON 代表开通 ，OFF 代表未开通。
    */
-  Status: string
+  Status?: string
   /**
    * 证书下载链接。
    */
-  Url: string
+  Url?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10184,11 +10184,13 @@ export interface LocalBinlogConfigDefault {
  */
 export interface DescribeSSLStatusRequest {
   /**
-   * 实例 ID 。只读组 ID为空时必填。
+   * 实例 ID。
+说明：实例 ID 和实例组 ID 两个参数选其一填写即可。若要查询双节点、三节点实例 SSL 开通情况，请填写实例 ID 参数进行查询。单节点（云盘）、集群版实例不支持开启 SSL，因此不支持查询。
    */
   InstanceId?: string
   /**
-   * 只读组 ID。实例 ID为空时必填。
+   * 只读组 ID。
+说明：实例 ID 和实例组 ID 两个参数选其一填写即可。若要查询只读实例或只读组 SSL 开通情况，请填写 RoGroupId 参数，并注意填写的都是只读组 ID。单节点（云盘）、集群版实例不支持开启 SSL，因此不支持查询。
    */
   RoGroupId?: string
 }

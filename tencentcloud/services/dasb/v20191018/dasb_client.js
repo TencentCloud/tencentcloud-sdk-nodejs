@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroups", req, cb);
     }
     /**
+     * 查询网络域
+     */
+    async DescribeDomains(req, cb) {
+        return this.request("DescribeDomains", req, cb);
+    }
+    /**
      * 开通服务，初始化资源，只针对新购资源
      */
     async DeployResource(req, cb) {
