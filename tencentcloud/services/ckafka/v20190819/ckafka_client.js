@@ -448,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupOffsets", req, cb);
     }
     /**
+     * 根据时间戳查询消息列表
+     */
+    async FetchMessageListByTimestamp(req, cb) {
+        return this.request("FetchMessageListByTimestamp", req, cb);
+    }
+    /**
      * 给实例授权token
      */
     async AuthorizeToken(req, cb) {

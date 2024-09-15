@@ -808,6 +808,16 @@ it("cfw.v20190904.ModifyAclRule", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeEnterpriseSecurityGroupRuleList", async function () {
+    try {
+       const data = await client.DescribeEnterpriseSecurityGroupRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeCfwEips", async function () {
     try {
        const data = await client.DescribeCfwEips({})

@@ -168,7 +168,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRelease", req, cb);
     }
     /**
-     * 是否意图转人工
+     * 点赞点踩消息
      */
     async RateMsgRecord(req, cb) {
         return this.request("RateMsgRecord", req, cb);

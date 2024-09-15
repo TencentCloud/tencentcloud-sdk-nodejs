@@ -120,6 +120,7 @@ import {
   DescribeFwGroupInstanceInfoRequest,
   ModifyBlockIgnoreRuleRequest,
   DescribeEnterpriseSGRuleProgressRequest,
+  FwVpcCidr,
   EdgeIpInfo,
   AssetZone,
   RuleChangeItem,
@@ -179,11 +180,13 @@ import {
   UnHandleEventDetail,
   RemoveEnterpriseSecurityGroupRuleRequest,
   DeleteResourceGroupRequest,
+  SecurityGroupSimplifyRule,
   DescribeBlockByIpTimesListRequest,
   VpcRuleItem,
   DescribeIdsWhiteRuleResponse,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
+  DescribeEnterpriseSecurityGroupRuleListRequest,
   VpcDnsInfo,
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
@@ -196,7 +199,7 @@ import {
   DescribeAddressTemplateListRequest,
   RemoveAclRuleRequest,
   DeleteAcRuleResponse,
-  SecurityGroupSimplifyRule,
+  EnterpriseSecurityGroupRuleRuleInfo,
   IocListData,
   InstanceInfo,
   DescribeIPStatusListRequest,
@@ -246,6 +249,7 @@ import {
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   StopSecurityGroupRuleDispatchRequest,
+  EnterpriseSecurityGroupRuleBetaInfo,
   SetNatFwEipRequest,
   DescribeBlockIgnoreListRequest,
   ModifyBlockTopResponse,
@@ -279,7 +283,7 @@ import {
   DeleteSecurityGroupRuleRequest,
   CreateAlertCenterIsolateRequest,
   DescribeNatAcRuleRequest,
-  FwVpcCidr,
+  DescribeEnterpriseSecurityGroupRuleListResponse,
   ModifyRunSyncAssetRequest,
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
@@ -1115,6 +1119,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyAclRuleResponse) => void
   ): Promise<ModifyAclRuleResponse> {
     return this.request("ModifyAclRule", req, cb)
+  }
+
+  /**
+   * 查询新企业安全组规则  从node接口迁移   原接口DescribeSecurityGroupNewList
+   */
+  async DescribeEnterpriseSecurityGroupRuleList(
+    req: DescribeEnterpriseSecurityGroupRuleListRequest,
+    cb?: (error: string, rep: DescribeEnterpriseSecurityGroupRuleListResponse) => void
+  ): Promise<DescribeEnterpriseSecurityGroupRuleListResponse> {
+    return this.request("DescribeEnterpriseSecurityGroupRuleList", req, cb)
   }
 
   /**

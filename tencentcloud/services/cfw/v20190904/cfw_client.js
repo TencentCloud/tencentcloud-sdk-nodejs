@@ -509,6 +509,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyAclRule", req, cb);
     }
     /**
+     * 查询新企业安全组规则  从node接口迁移   原接口DescribeSecurityGroupNewList
+     */
+    async DescribeEnterpriseSecurityGroupRuleList(req, cb) {
+        return this.request("DescribeEnterpriseSecurityGroupRuleList", req, cb);
+    }
+    /**
      * 查询防火墙弹性公网IP
      */
     async DescribeCfwEips(req, cb) {

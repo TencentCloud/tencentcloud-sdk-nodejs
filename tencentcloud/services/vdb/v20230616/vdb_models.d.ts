@@ -305,6 +305,10 @@ export interface DisassociateSecurityGroupsResponse {
  */
 export interface DescribeInstanceNodesRequest {
     /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
      * limit
      */
     Limit?: number;

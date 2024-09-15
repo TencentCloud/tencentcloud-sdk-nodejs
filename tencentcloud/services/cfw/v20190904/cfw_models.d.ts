@@ -2753,6 +2753,19 @@ export interface ModifyBlockIgnoreRuleRequest {
  */
 export declare type DescribeEnterpriseSGRuleProgressRequest = null;
 /**
+ * vpc的防火墙网段
+ */
+export interface FwVpcCidr {
+    /**
+     * vpc的id
+     */
+    VpcId: string;
+    /**
+     * 防火墙网段，最少/24的网段
+     */
+    FwCidr: string;
+}
+/**
  * 边界防火墙公网IP开关列表
  */
 export interface EdgeIpInfo {
@@ -4042,6 +4055,53 @@ export interface DeleteResourceGroupRequest {
     GroupId: string;
 }
 /**
+ * 安全组规则
+ */
+export interface SecurityGroupSimplifyRule {
+    /**
+     * 访问源示例：
+  net：IP/CIDR(192.168.0.2)
+  template：参数模板(ipm-dyodhpby)
+  instance：资产实例(ins-123456)
+  resourcegroup：资产分组(/全部分组/分组1/子分组1)
+  tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+  region：地域(ap-gaungzhou)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceContent: string;
+    /**
+     * 访问目的示例：
+  net：IP/CIDR(192.168.0.2)
+  template：参数模板(ipm-dyodhpby)
+  instance：资产实例(ins-123456)
+  resourcegroup：资产分组(/全部分组/分组1/子分组1)
+  tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+  region：地域(ap-gaungzhou)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DestContent: string;
+    /**
+     * 协议；TCP/UDP/ICMP/ANY
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol?: string;
+    /**
+     * 描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 规则对应的唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleUuid?: number;
+    /**
+     * 规则序号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sequence?: number;
+}
+/**
  * DescribeBlockByIpTimesList请求参数结构体
  */
 export interface DescribeBlockByIpTimesListRequest {
@@ -4269,6 +4329,39 @@ export interface NetInstancesInfo {
      * 网络实例所在地域
      */
     Region?: string;
+}
+/**
+ * DescribeEnterpriseSecurityGroupRuleList请求参数结构体
+ */
+export interface DescribeEnterpriseSecurityGroupRuleListRequest {
+    /**
+     * 分页每页数量
+     */
+    Limit: number;
+    /**
+     * 分页当前页
+     */
+    Offset: number;
+    /**
+     * 启用状态 1启用 0 未启用
+     */
+    Status?: string;
+    /**
+     * 地域
+     */
+    Area?: string;
+    /**
+     * 规则下发方式筛选  1 新规则和延迟下发  2  仅看新规则
+     */
+    Filter?: number;
+    /**
+     * 查询条件
+     */
+    SearchValue?: string;
+    /**
+     * 查询条件新
+     */
+    SearchFilters?: Array<CommonFilter>;
 }
 /**
  * nat防火墙 vpc dns 开关信息
@@ -4545,51 +4638,159 @@ export interface DeleteAcRuleResponse {
     RequestId?: string;
 }
 /**
- * 安全组规则
+ * 企业安全组规则列表信息
  */
-export interface SecurityGroupSimplifyRule {
+export interface EnterpriseSecurityGroupRuleRuleInfo {
     /**
-     * 访问源示例：
-  net：IP/CIDR(192.168.0.2)
-  template：参数模板(ipm-dyodhpby)
-  instance：资产实例(ins-123456)
-  resourcegroup：资产分组(/全部分组/分组1/子分组1)
-  tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-  region：地域(ap-gaungzhou)
+     * 排序
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceContent: string;
+    OrderIndex?: number;
     /**
-     * 访问目的示例：
-  net：IP/CIDR(192.168.0.2)
-  template：参数模板(ipm-dyodhpby)
-  instance：资产实例(ins-123456)
-  resourcegroup：资产分组(/全部分组/分组1/子分组1)
-  tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
-  region：地域(ap-gaungzhou)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DestContent: string;
-    /**
-     * 协议；TCP/UDP/ICMP/ANY
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Protocol?: string;
-    /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description: string;
-    /**
-     * 规则对应的唯一id
+     * 主键id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleUuid?: number;
     /**
-     * 规则序号
+     * 规则uuid
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sequence?: number;
+    Uuid?: string;
+    /**
+     * 源规则内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceId?: string;
+    /**
+     * 源规则类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceType?: number;
+    /**
+     * 目的规则内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetId?: string;
+    /**
+     * 目的规则类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetType?: number;
+    /**
+     * 协议名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol?: string;
+    /**
+     * 端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: string;
+    /**
+     * 策略，1阻断，2放行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Strategy?: number;
+    /**
+     * 启用状态 ，0未开启，1开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Detail?: string;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AclTags?: string;
+    /**
+     * 是否最新一次改动的规则,0否，1是
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsNew?: number;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 是否延迟下发
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsDelay?: number;
+    /**
+     * 服务模版id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceTemplateId?: string;
+    /**
+     * 源资产名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SouInstanceName?: string;
+    /**
+     * 源资产公网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SouPublicIp?: string;
+    /**
+     * 源资产内网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SouPrivateIp?: string;
+    /**
+     * 源资产网段信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SouCidr?: string;
+    /**
+     * 源模版名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SouParameterName?: string;
+    /**
+     * 目的资产名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 目的资产公网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIp?: string;
+    /**
+     * 目的资产内网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrivateIp?: string;
+    /**
+     * 目的资产网段信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Cidr?: string;
+    /**
+     * 目的模版名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParameterName?: string;
+    /**
+     * 端口模版名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtocolPortName?: string;
+    /**
+     * 自动化任务任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BetaList?: Array<EnterpriseSecurityGroupRuleBetaInfo>;
+    /**
+     * 规则id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
 }
 /**
  * 封禁放通IOC列表
@@ -5797,6 +5998,26 @@ export interface StopSecurityGroupRuleDispatchRequest {
     StopType?: number;
 }
 /**
+ * 企业安全组自动化任务信息
+ */
+export interface EnterpriseSecurityGroupRuleBetaInfo {
+    /**
+     * 任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: number;
+    /**
+     * 任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastTime?: string;
+}
+/**
  * SetNatFwEip请求参数结构体
  */
 export interface SetNatFwEipRequest {
@@ -6611,17 +6832,29 @@ export interface DescribeNatAcRuleRequest {
     By?: string;
 }
 /**
- * vpc的防火墙网段
+ * DescribeEnterpriseSecurityGroupRuleList返回参数结构体
  */
-export interface FwVpcCidr {
+export interface DescribeEnterpriseSecurityGroupRuleListResponse {
     /**
-     * vpc的id
+     * 查询结果总数
      */
-    VpcId: string;
+    Total?: number;
     /**
-     * 防火墙网段，最少/24的网段
+     * 规则总数
      */
-    FwCidr: string;
+    AllTotal?: number;
+    /**
+     * 规则列表
+     */
+    Data?: Array<EnterpriseSecurityGroupRuleRuleInfo>;
+    /**
+     * 规则整体启用状态
+     */
+    Enable?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyRunSyncAsset请求参数结构体

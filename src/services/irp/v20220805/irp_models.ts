@@ -254,9 +254,9 @@ export interface UserIdInfo {
  */
 export interface FeedRecommendResponse {
   /**
-   * 推荐返回的内容信息列表
+   * 推荐返回的内容信息列表，返回结果已按策略规则做好了排序
    */
-  DataList: Array<RecItemData>
+  DataList?: Array<RecItemData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -817,4 +817,8 @@ export interface FeedRecommendRequest {
    * 当场景是相关推荐时该值必填，场景是非相关推荐时该值无效
    */
   CurrentItemId?: string
+  /**
+   * 扩展字段，json字符串，需要base64加密
+   */
+  Extension?: string
 }

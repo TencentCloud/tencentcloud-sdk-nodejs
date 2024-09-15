@@ -9795,6 +9795,10 @@ export interface DescribeSlowLogDataRequest {
      * 仅在实例为主实例或者灾备实例时生效，可选值：slave，代表拉取从机的日志。
      */
     InstType?: string;
+    /**
+     * 节点ID
+     */
+    OpResourceId?: string;
 }
 /**
  * ReleaseIsolatedDBInstances返回参数结构体

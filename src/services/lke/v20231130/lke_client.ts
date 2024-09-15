@@ -120,7 +120,7 @@ import {
   GetEmbeddingResponse,
   ExportUnsatisfiedReplyRequest,
   GroupQAResponse,
-  RetryReleaseRequest,
+  QuoteInfo,
   CreateAppRequest,
   AppConfig,
   DescribeReleaseRequest,
@@ -187,6 +187,7 @@ import {
   QueryRewriteRequest,
   ModifyAppRequest,
   DeleteAttributeLabelResponse,
+  RetryReleaseRequest,
   VerifyQARequest,
   DeleteQACateRequest,
   GenerateQARequest,
@@ -494,7 +495,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 是否意图转人工
+   * 点赞点踩消息
    */
   async RateMsgRecord(
     req: RateMsgRecordRequest,

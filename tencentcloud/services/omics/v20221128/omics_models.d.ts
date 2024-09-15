@@ -172,7 +172,7 @@ export interface RunApplicationRequest {
      */
     NFOption?: NFOption;
     /**
-     * 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。
+     * 工作目录，当前仅支持Nextflow。可填写指定缓存卷内的绝对路径或者COS路径，不填使用默认缓存卷内的默认路径。如果使用COS路径，NFOption中LaunchDir需填写指定缓存卷内的绝对路径作为启动路径。
      */
     WorkDir?: string;
     /**
@@ -1507,12 +1507,16 @@ export interface NFOption {
     Resume?: boolean;
     /**
      * Nextflow引擎版本，取值范围：
-  - 22.10.4
-  - 22.10.8
+  - 22.10.7
   - 23.10.1
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NFVersion?: string;
+    /**
+     * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LaunchDir?: string;
 }
 /**
  * 表格。

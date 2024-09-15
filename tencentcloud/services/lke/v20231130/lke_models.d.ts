@@ -485,6 +485,7 @@ export interface MsgRecord {
     IsLlmGenerated?: boolean;
     /**
      * 图片链接，可公有读
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrls?: Array<string>;
     /**
@@ -526,6 +527,11 @@ export interface MsgRecord {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FileInfos?: Array<FileInfo>;
+    /**
+     * 参考来源引用位置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuoteInfos?: Array<QuoteInfo>;
 }
 /**
  * ListUnsatisfiedReply返回参数结构体
@@ -1169,6 +1175,21 @@ export interface ReferDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgData?: string;
+    /**
+     * 页码信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageInfos?: Array<number | bigint>;
+    /**
+     * sheet信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SheetInfos?: Array<string>;
+    /**
+     * 文档ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocBizId?: string;
 }
 /**
  * ListUnsatisfiedReply请求参数结构体
@@ -2628,17 +2649,19 @@ export interface GroupQAResponse {
     RequestId?: string;
 }
 /**
- * RetryRelease请求参数结构体
+ * 搜索引擎参考来源索引
  */
-export interface RetryReleaseRequest {
+export interface QuoteInfo {
     /**
-     * 机器人ID
+     * 参考来源位置
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BotBizId: string;
+    Position?: number;
     /**
-     * 发布业务ID
+     * 参考来源索引顺序
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReleaseBizId: string;
+    Index?: string;
 }
 /**
  * CreateApp请求参数结构体
@@ -3124,6 +3147,11 @@ export interface Context {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FileInfos?: Array<MsgFileInfo>;
+    /**
+     * 回复方式，15：澄清确认回复
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReplyMethod?: number;
 }
 /**
  * ListDoc请求参数结构体
@@ -4358,6 +4386,19 @@ export interface DeleteAttributeLabelResponse {
     RequestId?: string;
 }
 /**
+ * RetryRelease请求参数结构体
+ */
+export interface RetryReleaseRequest {
+    /**
+     * 机器人ID
+     */
+    BotBizId: string;
+    /**
+     * 发布业务ID
+     */
+    ReleaseBizId: string;
+}
+/**
  * VerifyQA请求参数结构体
  */
 export interface VerifyQARequest {
@@ -5216,7 +5257,7 @@ export interface GetMsgRecordRequest {
      */
     LastRecordId?: string;
     /**
-     * 应用AppKey
+     * 应用AppKey, 当Type=5[API访客]时, 该字段必填
      */
     BotAppKey?: string;
     /**

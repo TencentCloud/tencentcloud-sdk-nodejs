@@ -718,6 +718,16 @@ it("ckafka.v20190819.DescribeGroupOffsets", async function () {
     }
 })
 
+it("ckafka.v20190819.FetchMessageListByTimestamp", async function () {
+    try {
+       const data = await client.FetchMessageListByTimestamp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.AuthorizeToken", async function () {
     try {
        const data = await client.AuthorizeToken({})
