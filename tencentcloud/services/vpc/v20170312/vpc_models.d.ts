@@ -1562,6 +1562,10 @@ export interface CreateVpcEndPointRequest {
      * 安全组ID。
      */
     SecurityGroupId?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * ModifyBandwidthPackageAttribute请求参数结构体

@@ -78,6 +78,16 @@ it("tke.v20180525.InstallEdgeLogAgent", async function () {
     }
 })
 
+it("tke.v20180525.DescribeOpenPolicyList", async function () {
+    try {
+       const data = await client.DescribeOpenPolicyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterVirtualNodePool", async function () {
     try {
        const data = await client.CreateClusterVirtualNodePool({})
@@ -481,6 +491,16 @@ it("tke.v20180525.ModifyClusterVirtualNodePool", async function () {
 it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
     try {
        const data = await client.DescribeAvailableClusterVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyPrometheusConfig", async function () {
+    try {
+       const data = await client.ModifyPrometheusConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1678,9 +1698,9 @@ it("tke.v20180525.SyncPrometheusTemp", async function () {
     }
 })
 
-it("tke.v20180525.ModifyPrometheusConfig", async function () {
+it("tke.v20180525.ModifyOpenPolicyList", async function () {
     try {
-       const data = await client.ModifyPrometheusConfig({})
+       const data = await client.ModifyOpenPolicyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

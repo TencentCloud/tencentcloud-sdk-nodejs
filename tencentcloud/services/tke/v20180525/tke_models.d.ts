@@ -272,6 +272,15 @@ export interface ServiceAccountAuthenticationOptions {
     AutoCreateDiscoveryAnonymousAuth?: boolean;
 }
 /**
+ * ModifyOpenPolicyList返回参数结构体
+ */
+export interface ModifyOpenPolicyListResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 执行步骤信息
  */
 export interface Step {
@@ -480,6 +489,61 @@ export interface Addon {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
+}
+/**
+ * opa策略信息
+ */
+export interface OpenPolicyInfo {
+    /**
+     * 策略分类：cluster集群策略、node节点策略、namespace命名空间策略、configuration配置相关策略、compute计算资源策略、storage存储资源策略、network网络资源策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyCategory?: string;
+    /**
+     * 策略中文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyName?: string;
+    /**
+     * 策略描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyDesc?: string;
+    /**
+     * 策略运行模式：dryrun空跑不生效，deny拦截生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnforcementAction?: string;
+    /**
+     * 关联的事件数量(最近7d)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventNums?: number;
+    /**
+     * 策略英文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 策略模版类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Kind?: string;
+    /**
+     * 策略开关状态：open打开，close关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnabledStatus?: string;
+    /**
+     * 策略的实例的yaml示例base64编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConstraintYamlExample?: string;
+    /**
+     * 策略关联的实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenConstraintInfoList?: Array<OpenConstraintInfo>;
 }
 /**
  * DescribeEdgeClusterUpgradeInfo请求参数结构体
@@ -3112,6 +3176,23 @@ export interface UpdateClusterVersionRequest {
     SkipPreCheck?: boolean;
 }
 /**
+ * ModifyOpenPolicyList请求参数结构体
+ */
+export interface ModifyOpenPolicyListRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 修改的策略列表，目前仅支持修改EnforcementAction字段
+     */
+    OpenPolicyInfoList?: Array<OpenPolicySwitch>;
+    /**
+     * 策略分类 基线：baseline 优选：priority 可选：optional
+     */
+    Category?: string;
+}
+/**
  * 健康检查探测参数
  */
 export interface Probe {
@@ -3896,6 +3977,26 @@ export interface DescribeAvailableTKEEdgeVersionRequest {
     ClusterId?: string;
 }
 /**
+ * 策略实例信息
+ */
+export interface OpenConstraintInfo {
+    /**
+     * 策略实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 策略实例关联事件数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventNums?: number;
+    /**
+     * 实例yaml详情base64编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    YamlDetail?: string;
+}
+/**
  * DescribeClusterInspectionResultsOverview请求参数结构体
  */
 export interface DescribeClusterInspectionResultsOverviewRequest {
@@ -3958,41 +4059,17 @@ export interface ForwardApplicationRequestV3Request {
     EncodedBody?: string;
 }
 /**
- * prometheus告警历史
+ * DescribeOpenPolicyList请求参数结构体
  */
-export interface PrometheusAlertHistoryItem {
+export interface DescribeOpenPolicyListRequest {
     /**
-     * 告警名称
+     * 集群ID
      */
-    RuleName: string;
+    ClusterId: string;
     /**
-     * 告警开始时间
+     * 策略分类 基线：baseline 优选：priority 可选：optional
      */
-    StartTime: string;
-    /**
-     * 告警内容
-     */
-    Content: string;
-    /**
-     * 告警状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    State?: string;
-    /**
-     * 触发的规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuleItem?: string;
-    /**
-     * 告警渠道的id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicId?: string;
-    /**
-     * 告警渠道的名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicName?: string;
+    Category?: string;
 }
 /**
  * 云原生Prometheus模板同步目标
@@ -5309,9 +5386,14 @@ export interface DescribeExternalNodeSupportConfigResponse {
      */
     EnabledPublicConnect?: boolean;
     /**
-     * 公网连接地址
+     * 注册节点公网版公网连接地址
      */
     PublicConnectUrl?: string;
+    /**
+     * 注册节点公网版自定义域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicCustomDomain?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5720,13 +5802,14 @@ export interface UpdateTKEEdgeClusterRequest {
     ClusterLevel?: string;
 }
 /**
- * DescribeTKEEdgeExternalKubeconfig返回参数结构体
+ * DescribeOpenPolicyList返回参数结构体
  */
-export interface DescribeTKEEdgeExternalKubeconfigResponse {
+export interface DescribeOpenPolicyListResponse {
     /**
-     * kubeconfig文件内容
+     * 策略信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Kubeconfig?: string;
+    OpenPolicyInfoList?: Array<OpenPolicyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7359,6 +7442,11 @@ export interface Cluster {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterEtcdNodeNum?: number;
+    /**
+     * 本地专用集群Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CdcId?: string;
 }
 /**
  * DescribeClusterAuthenticationOptions请求参数结构体
@@ -8763,6 +8851,19 @@ export interface DescribePrometheusClusterAgentsRequest {
     Limit?: number;
 }
 /**
+ * DescribeTKEEdgeExternalKubeconfig返回参数结构体
+ */
+export interface DescribeTKEEdgeExternalKubeconfigResponse {
+    /**
+     * kubeconfig文件内容
+     */
+    Kubeconfig?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 边缘容器参数描述
  */
 export interface EdgeArgsFlag {
@@ -9468,6 +9569,43 @@ export interface DescribeClusterAsGroupsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * prometheus告警历史
+ */
+export interface PrometheusAlertHistoryItem {
+    /**
+     * 告警名称
+     */
+    RuleName: string;
+    /**
+     * 告警开始时间
+     */
+    StartTime: string;
+    /**
+     * 告警内容
+     */
+    Content: string;
+    /**
+     * 告警状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State?: string;
+    /**
+     * 触发的规则名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleItem?: string;
+    /**
+     * 告警渠道的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicId?: string;
+    /**
+     * 告警渠道的名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName?: string;
 }
 /**
  * DescribeLogSwitches请求参数结构体
@@ -10281,6 +10419,31 @@ export interface DescribeVersionsResponse {
     RequestId?: string;
 }
 /**
+ * opa策略开关
+ */
+export interface OpenPolicySwitch {
+    /**
+     * 策略运行模式：dryrun空跑不生效，deny拦截生效
+     */
+    EnforcementAction: string;
+    /**
+     * 策略英文名称
+     */
+    Name: string;
+    /**
+     * 策略模版类型
+     */
+    Kind: string;
+    /**
+     * 策略开关状态：open打开，close关闭
+     */
+    EnabledStatus?: string;
+    /**
+     * 策略关联的实例列表
+     */
+    OpenConstraintInfoList?: Array<OpenConstraintInfo>;
+}
+/**
  * ScaleInClusterMaster请求参数结构体
  */
 export interface ScaleInClusterMasterRequest {
@@ -10339,7 +10502,7 @@ export interface ClusterNetworkSettings {
     /**
      * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
      */
-    ClusterCIDR: string;
+    ClusterCIDR?: string;
     /**
      * 是否忽略 ClusterCIDR 冲突错误, 默认不忽略
      */
@@ -10368,38 +10531,38 @@ export interface ClusterNetworkSettings {
      * service的网络模式，当前参数只适用于ipvs+bpf模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KubeProxyMode: string;
+    KubeProxyMode?: string;
     /**
      * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceCIDR: string;
+    ServiceCIDR?: string;
     /**
      * 集群关联的容器子网
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Subnets: Array<string>;
+    Subnets?: Array<string>;
     /**
      * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IgnoreServiceCIDRConflict: boolean;
+    IgnoreServiceCIDRConflict?: boolean;
     /**
      * 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDualStack: boolean;
+    IsDualStack?: boolean;
     /**
      * 用于分配service的IP range，由系统自动分配
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ipv6ServiceCIDR: string;
+    Ipv6ServiceCIDR?: string;
     /**
      * 集群Cilium Mode配置
   - clusterIP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CiliumMode: string;
+    CiliumMode?: string;
 }
 /**
  * DescribeImages返回参数结构体

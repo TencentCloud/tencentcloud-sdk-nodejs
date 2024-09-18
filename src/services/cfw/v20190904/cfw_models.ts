@@ -4920,7 +4920,7 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
    */
   IsDelay?: number
   /**
-   * 服务模版id
+   * 服务模板id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceTemplateId?: string
@@ -4945,7 +4945,7 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
    */
   SouCidr?: string
   /**
-   * 源模版名称
+   * 源模板名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SouParameterName?: string
@@ -4970,12 +4970,12 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
    */
   Cidr?: string
   /**
-   * 目的模版名称
+   * 目的模板名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterName?: string
   /**
-   * 端口模版名称
+   * 端口模板名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProtocolPortName?: string

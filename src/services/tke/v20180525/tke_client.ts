@@ -34,11 +34,13 @@ import {
   DescribeEKSClustersRequest,
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
+  ModifyOpenPolicyListResponse,
   Step,
   SwitchInfo,
   CreateClusterNodePoolRequest,
   UpgradeClusterReleaseRequest,
   Addon,
+  OpenPolicyInfo,
   DescribeEdgeClusterUpgradeInfoRequest,
   RunInstancesForNode,
   DisableVpcCniNetworkTypeResponse,
@@ -170,6 +172,7 @@ import {
   CheckEdgeClusterCIDRRequest,
   CreateImageCacheRequest,
   UpdateClusterVersionRequest,
+  ModifyOpenPolicyListRequest,
   Probe,
   NodeCountSummary,
   EdgeCluster,
@@ -197,10 +200,11 @@ import {
   DescribeTKEEdgeClustersResponse,
   KubeJarvisStateResultObjInfo,
   DescribeAvailableTKEEdgeVersionRequest,
+  OpenConstraintInfo,
   DescribeClusterInspectionResultsOverviewRequest,
   ModifyPrometheusAlertPolicyRequest,
   ForwardApplicationRequestV3Request,
-  PrometheusAlertHistoryItem,
+  DescribeOpenPolicyListRequest,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
   DescribePrometheusAlertPolicyResponse,
@@ -284,7 +288,7 @@ import {
   DescribePrometheusInstanceResponse,
   Capabilities,
   UpdateTKEEdgeClusterRequest,
-  DescribeTKEEdgeExternalKubeconfigResponse,
+  DescribeOpenPolicyListResponse,
   CreateClusterInstancesResponse,
   DeleteReservedInstancesResponse,
   DescribeLogSwitchesResponse,
@@ -429,6 +433,7 @@ import {
   DescribeClusterVirtualNodePoolsResponse,
   CheckEdgeClusterCIDRResponse,
   DescribePrometheusClusterAgentsRequest,
+  DescribeTKEEdgeExternalKubeconfigResponse,
   EdgeArgsFlag,
   CheckInstancesUpgradeAbleResponse,
   CreatePrometheusTempRequest,
@@ -465,6 +470,7 @@ import {
   ModifyClusterAsGroupAttributeRequest,
   DescribeClusterExtraArgsRequest,
   DescribeClusterAsGroupsResponse,
+  PrometheusAlertHistoryItem,
   DescribeLogSwitchesRequest,
   ScaleOutClusterMasterRequest,
   DeleteClusterInstancesResponse,
@@ -505,6 +511,7 @@ import {
   ECMZoneInstanceCountISP,
   DescribeVpcCniPodLimitsResponse,
   DescribeVersionsResponse,
+  OpenPolicySwitch,
   ScaleInClusterMasterRequest,
   DeleteEdgeClusterInstancesRequest,
   EnableEventPersistenceResponse,
@@ -704,6 +711,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InstallEdgeLogAgentResponse) => void
   ): Promise<InstallEdgeLogAgentResponse> {
     return this.request("InstallEdgeLogAgent", req, cb)
+  }
+
+  /**
+   * 查询opa策略列表
+   */
+  async DescribeOpenPolicyList(
+    req: DescribeOpenPolicyListRequest,
+    cb?: (error: string, rep: DescribeOpenPolicyListResponse) => void
+  ): Promise<DescribeOpenPolicyListResponse> {
+    return this.request("DescribeOpenPolicyList", req, cb)
   }
 
   /**
@@ -1114,6 +1131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
   ): Promise<DescribeAvailableClusterVersionResponse> {
     return this.request("DescribeAvailableClusterVersion", req, cb)
+  }
+
+  /**
+   * 修改集群采集配置
+   */
+  async ModifyPrometheusConfig(
+    req: ModifyPrometheusConfigRequest,
+    cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
+  ): Promise<ModifyPrometheusConfigResponse> {
+    return this.request("ModifyPrometheusConfig", req, cb)
   }
 
   /**
@@ -2309,13 +2336,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群采集配置
+   * 批量修改opa策略
    */
-  async ModifyPrometheusConfig(
-    req: ModifyPrometheusConfigRequest,
-    cb?: (error: string, rep: ModifyPrometheusConfigResponse) => void
-  ): Promise<ModifyPrometheusConfigResponse> {
-    return this.request("ModifyPrometheusConfig", req, cb)
+  async ModifyOpenPolicyList(
+    req: ModifyOpenPolicyListRequest,
+    cb?: (error: string, rep: ModifyOpenPolicyListResponse) => void
+  ): Promise<ModifyOpenPolicyListResponse> {
+    return this.request("ModifyOpenPolicyList", req, cb)
   }
 
   /**

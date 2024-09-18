@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InstallEdgeLogAgent", req, cb);
     }
     /**
+     * 查询opa策略列表
+     */
+    async DescribeOpenPolicyList(req, cb) {
+        return this.request("DescribeOpenPolicyList", req, cb);
+    }
+    /**
      * 创建超级节点池
      */
     async CreateClusterVirtualNodePool(req, cb) {
@@ -308,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAvailableClusterVersion(req, cb) {
         return this.request("DescribeAvailableClusterVersion", req, cb);
+    }
+    /**
+     * 修改集群采集配置
+     */
+    async ModifyPrometheusConfig(req, cb) {
+        return this.request("ModifyPrometheusConfig", req, cb);
     }
     /**
      * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
@@ -1026,10 +1038,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 修改集群采集配置
+     * 批量修改opa策略
      */
-    async ModifyPrometheusConfig(req, cb) {
-        return this.request("ModifyPrometheusConfig", req, cb);
+    async ModifyOpenPolicyList(req, cb) {
+        return this.request("ModifyOpenPolicyList", req, cb);
     }
     /**
      * 查询容器实例中容器日志

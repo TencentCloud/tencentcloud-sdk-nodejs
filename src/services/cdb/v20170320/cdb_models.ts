@@ -1097,6 +1097,10 @@ export interface CloseWanServiceRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
+  /**
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   */
+  OpResourceId?: string
 }
 
 /**
@@ -1942,6 +1946,10 @@ export interface SwitchDBInstanceMasterSlaveRequest {
    * 是否时间窗内切换。默认为 False，即不在时间窗内切换。注意，如果设置了 ForceSwitch 参数为 True，则该参数不生效。
    */
   WaitSwitch?: boolean
+  /**
+   * 集群版实例指定节点id发起主从切换。
+   */
+  DstNodeId?: string
 }
 
 /**
@@ -2062,6 +2070,10 @@ export interface OpenWanServiceRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
+  /**
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   */
+  OpResourceId?: string
 }
 
 /**
@@ -7554,6 +7566,10 @@ export interface ModifyDBInstanceVipVportRequest {
    * 进行基础网络转 VPC 网络和 VPC 网络下的子网变更时，原网络中旧IP的回收时间，单位为小时，取值范围为0-168，默认值为24小时。
    */
   ReleaseDuration?: number
+  /**
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   */
+  OpResourceId?: string
 }
 
 /**
@@ -9411,6 +9427,10 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
   ForReadonlyInstance?: boolean
+  /**
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   */
+  OpResourceId?: string
 }
 
 /**
