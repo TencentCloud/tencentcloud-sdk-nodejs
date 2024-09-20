@@ -149,6 +149,7 @@ export { mna } from "./mna";
 export { mongodb } from "./mongodb";
 export { monitor } from "./monitor";
 export { mps } from "./mps";
+export { mqtt } from "./mqtt";
 export { mrs } from "./mrs";
 export { ms } from "./ms";
 export { msp } from "./msp";
