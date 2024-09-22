@@ -949,6 +949,10 @@ export interface ModifyOutputInfo {
    * 绑定的安全组 ID。 仅支持关联一组安全组。
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * 可用区
+   */
+  Zones?: Array<string>
 }
 
 /**
@@ -5955,7 +5959,7 @@ export interface DescribeQualityControlTemplatesRequest {
    */
   Limit?: number
   /**
-   * "Preset"：预设，Custom":客户魔板
+   * "Preset"：预设，Custom":自定义模板
    */
   Type?: string
   /**
@@ -6289,6 +6293,7 @@ export interface ProcessMediaRequest {
   InputInfo: MediaInputInfo
   /**
    * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
    */
   OutputStorage?: TaskOutputStorage
   /**
@@ -11332,7 +11337,7 @@ export interface VideoTemplateInfoForUpdate {
   Gop?: number
   /**
    * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+ <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 <li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
 <li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
@@ -11340,7 +11345,7 @@ export interface VideoTemplateInfoForUpdate {
    */
   FillType?: string
   /**
-   * 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。
+   * 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。 
 如果没有特殊需求，不建议指定该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */

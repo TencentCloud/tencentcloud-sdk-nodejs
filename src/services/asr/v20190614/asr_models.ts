@@ -16,20 +16,6 @@
  */
 
 /**
- * SetVocabState返回参数结构体
- */
-export interface SetVocabStateResponse {
-  /**
-   * 热词表ID
-   */
-  VocabId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateCustomization返回参数结构体
  */
 export interface CreateCustomizationResponse {
@@ -41,27 +27,6 @@ export interface CreateCustomizationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * VoicePrintDelete请求参数结构体
- */
-export interface VoicePrintDeleteRequest {
-  /**
-   * 说话人id，说话人唯一标识
-   */
-  VoicePrintId?: string
-  /**
-   * 说话人分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
-   */
-  GroupId?: string
-  /**
-   * 删除模式: 
-0.默认值，删除该条声纹
-1.从分组中删除该条声纹，声纹本身不删除
-2.从声纹库中删除分组，仅删除分组信息，不会真正删除分组中的声纹
-   */
-  DelMod?: number
 }
 
 /**
@@ -86,11 +51,6 @@ export interface KeyWordResult {
 }
 
 /**
- * DescribeAsyncRecognitionTasks请求参数结构体
- */
-export type DescribeAsyncRecognitionTasksRequest = null
-
-/**
  * ModifyCustomizationState请求参数结构体
  */
 export interface ModifyCustomizationStateRequest {
@@ -105,13 +65,15 @@ export interface ModifyCustomizationStateRequest {
 }
 
 /**
- * GetAsrKeyWordLibList返回参数结构体
+ * CreateRecTask返回参数结构体
  */
-export interface GetAsrKeyWordLibListResponse {
+export interface CreateRecTaskResponse {
   /**
-   * 关键词列表返回数据
+   * 录音文件识别的请求返回结果，包含结果查询需要的TaskId。
+**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。**
+
    */
-  Data?: KeyWordLibListData
+  Data?: Task
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -119,13 +81,13 @@ export interface GetAsrKeyWordLibListResponse {
 }
 
 /**
- * VoicePrintEnroll返回参数结构体
+ * UpdateAsrVocab返回参数结构体
  */
-export interface VoicePrintEnrollResponse {
+export interface UpdateAsrVocabResponse {
   /**
-   * 说话人基本数据
+   * 热词表ID
    */
-  Data?: VoicePrintBaseData
+  VocabId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -133,39 +95,74 @@ export interface VoicePrintEnrollResponse {
 }
 
 /**
- * VoicePrintUpdate请求参数结构体
+ * DeleteAsrKeyWordLib返回参数结构体
  */
-export interface VoicePrintUpdateRequest {
+export interface DeleteAsrKeyWordLibResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAsrKeyWordLib请求参数结构体
+ */
+export interface CreateAsrKeyWordLibRequest {
+  /**
+   * 词表名称，长度在1-20之间
+仅限中英文数字-_
+   */
+  Name: string
+  /**
+   * 词文件（纯文本文件）的二进制base64编码，以行分隔
+格式要求：TXT
+每行只有一个词，不满足格式则报错无法上传
+每个词限制**5个汉字，15个字符**，单个词库最多不超过100个词
+注意不要有空行，尤其是最后一行
+   */
+  KeyWordFile?: string
+}
+
+/**
+ * VoicePrintGroupVerify请求参数结构体
+ */
+export interface VoicePrintGroupVerifyRequest {
   /**
    * 音频格式 0: pcm, 1: wav
    */
   VoiceFormat: number
   /**
-   * 音频采样率 目前仅支持16000 单位Hz
+   * 音频采样率，目前支持16000，单位：Hz，必填
    */
   SampleRate: number
-  /**
-   * 说话人id， 说话人唯一标识
-   */
-  VoicePrintId: string
   /**
    * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
    */
   Data: string
   /**
-   * 说话人昵称  不超过32字节
+   * 分组id, 支持数字，字母，下划线，长度不超过128
    */
-  SpeakerNick?: string
+  GroupId: string
+  /**
+   * 返回打分结果降序排列topN, TopN大于0， 小于可创建声纹最大数量
+   */
+  TopN: number
 }
 
 /**
- * CreateAsrKeyWordLib返回参数结构体
+ * GetCustomizationList返回参数结构体
  */
-export interface CreateAsrKeyWordLibResponse {
+export interface GetCustomizationListResponse {
   /**
-   * 词表ID数据
+   * 自学习模型数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: KeyWordLibIdData
+  Data?: Array<Model>
+  /**
+   * 自学习模型总量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -173,116 +170,100 @@ export interface CreateAsrKeyWordLibResponse {
 }
 
 /**
- * CreateAsyncRecognitionTask请求参数结构体
+ * CloseAsyncRecognitionTask请求参数结构体
  */
-export interface CreateAsyncRecognitionTaskRequest {
+export interface CloseAsyncRecognitionTaskRequest {
   /**
-   * 引擎模型类型。
-• 16k_zh：中文普通话通用；
-• 16k_en：英语；
-• 16k_yue：粤语；
-• 16k_id：印度尼西亚语；
-• 16k_fil：菲律宾语；
-• 16k_th：泰语；
-• 16k_pt：葡萄牙语；
-• 16k_tr：土耳其语；
-• 16k_ar：阿拉伯语；
-• 16k_es：西班牙语；
-• 16k_hi：印地语；
-• 16k_fr：法语；
-• 16k_de：德语；
+   * 语音流异步识别任务的唯一标识，在创建任务时会返回
    */
-  EngineType: string
-  /**
-   * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8)
-   */
-  Url: string
-  /**
-   * 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://cloud.tencent.com/document/product/1093/52633)
-   */
-  CallbackUrl: string
-  /**
-   * 用于生成回调通知中的签名
-   */
-  SignToken?: string
-  /**
-   * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0
-   */
-  FilterDirty?: number
-  /**
-   * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0
-   */
-  FilterModal?: number
-  /**
-   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0
-   */
-  FilterPunc?: number
-  /**
-   * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
-   */
-  ConvertNumMode?: number
-  /**
-   * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认为0
-   */
-  WordInfo?: number
-  /**
-   * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-   */
-  HotwordId?: string
-  /**
-   * 回调数据中，是否需要对应音频数据。
-   */
-  AudioData?: boolean
+  TaskId: number
 }
 
 /**
- * [热词的词和权重](https://cloud.tencent.com/document/product/1093/41111#2.-.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0)
+ * [录音文件识别](https://cloud.tencent.com/document/product/1093/37823#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)、[实时语音异步识别](https://cloud.tencent.com/document/product/1093/52061#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)请求的返回数据
  */
-export interface HotWord {
+export interface Task {
   /**
-   * 热词
+   * 任务ID，可通过此ID在轮询接口获取识别状态与结果。TaskId数据类型为**uint64**。
+   **注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。**
+   */
+  TaskId?: number
+}
+
+/**
+ * [音频流异步识别任务列表](https://cloud.tencent.com/document/product/1093/52060#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ */
+export interface AsyncRecognitionTasks {
+  /**
+   * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Word: string
-  /**
-   * 权重
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight: number
+  Tasks?: Array<AsyncRecognitionTaskInfo>
 }
 
 /**
- * GetModelInfo请求参数结构体
+ * DeleteCustomization返回参数结构体
  */
-export interface GetModelInfoRequest {
-  /**
-   * 模型id
-   */
-  ModelId: string
-}
-
-/**
- * GetAsrVocab请求参数结构体
- */
-export interface GetAsrVocabRequest {
-  /**
-   * 热词表ID
-   */
-  VocabId: string
-}
-
-/**
- * DescribeTaskStatus返回参数结构体
- */
-export interface DescribeTaskStatusResponse {
-  /**
-   * 录音文件识别的请求返回结果。
-   */
-  Data?: TaskStatus
+export interface DeleteCustomizationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * [获取录音识别结果的返回参数](https://cloud.tencent.com/document/product/1093/37822#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ */
+export interface TaskStatus {
+  /**
+   * 任务标识。注意：TaskId数据类型为uint64。
+   */
+  TaskId?: number
+  /**
+   * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
+   */
+  Status?: number
+  /**
+   * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
+   */
+  StatusStr?: string
+  /**
+   * 识别结果。
+   */
+  Result?: string
+  /**
+   * 失败原因说明。
+   */
+  ErrorMsg?: string
+  /**
+   * 识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultDetail?: Array<SentenceDetail>
+  /**
+   * 音频时长(秒)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioDuration?: number
+}
+
+/**
+ * GetCustomizationList请求参数结构体
+ */
+export interface GetCustomizationListRequest {
+  /**
+   * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+   * @deprecated
+   */
+  TagInfos?: Array<string>
+  /**
+   * 分页大小，默认1000
+   */
+  Limit?: number
+  /**
+   * 分页offset，默认0
+   */
+  Offset?: number
 }
 
 /**
@@ -408,6 +389,237 @@ hotword_list：临时热词表。每次请求时直接传入临时热词表来�
 }
 
 /**
+ * VoicePrintCount请求参数结构体
+ */
+export interface VoicePrintCountRequest {
+  /**
+   * 分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
+   */
+  GroupId?: string
+  /**
+   * 统计模式
+0: 统计所有声纹数量
+1: 统计指定分组下的声纹数量
+   */
+  CountMod?: number
+}
+
+/**
+ * VoicePrintCompare返回参数结构体
+ */
+export interface VoicePrintCompareResponse {
+  /**
+   * 音频声纹比对结果，包含相似度打分
+   */
+  Data?: VoicePrintCompareData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 声纹组对比结果top数据
+ */
+export interface VerifyTop {
+  /**
+   * 相似度打分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Score?: string
+  /**
+   * 说话人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoicePrintId?: string
+  /**
+   * 说话人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeakerId?: string
+}
+
+/**
+ * SetVocabState返回参数结构体
+ */
+export interface SetVocabStateResponse {
+  /**
+   * 热词表ID
+   */
+  VocabId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户用量信息
+ */
+export interface UsageByDateInfoData {
+  /**
+   * 用量信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageByDateInfoList?: Array<UsageByDateInfo>
+}
+
+/**
+ * VoicePrintDelete请求参数结构体
+ */
+export interface VoicePrintDeleteRequest {
+  /**
+   * 说话人id，说话人唯一标识
+   */
+  VoicePrintId?: string
+  /**
+   * 说话人分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
+   */
+  GroupId?: string
+  /**
+   * 删除模式: 
+0.默认值，删除该条声纹
+1.从分组中删除该条声纹，声纹本身不删除
+2.从声纹库中删除分组，仅删除分组信息，不会真正删除分组中的声纹
+   */
+  DelMod?: number
+}
+
+/**
+ * DescribeAsyncRecognitionTasks请求参数结构体
+ */
+export type DescribeAsyncRecognitionTasksRequest = null
+
+/**
+ * GetAsrKeyWordLibList返回参数结构体
+ */
+export interface GetAsrKeyWordLibListResponse {
+  /**
+   * 关键词列表返回数据
+   */
+  Data?: KeyWordLibListData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VoicePrintEnroll返回参数结构体
+ */
+export interface VoicePrintEnrollResponse {
+  /**
+   * 说话人基本数据
+   */
+  Data?: VoicePrintBaseData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAsrKeyWordLib返回参数结构体
+ */
+export interface CreateAsrKeyWordLibResponse {
+  /**
+   * 词表ID数据
+   */
+  Data?: KeyWordLibIdData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAsyncRecognitionTask请求参数结构体
+ */
+export interface CreateAsyncRecognitionTaskRequest {
+  /**
+   * 引擎模型类型。
+• 16k_zh：中文普通话通用；
+• 16k_en：英语；
+• 16k_yue：粤语；
+• 16k_id：印度尼西亚语；
+• 16k_fil：菲律宾语；
+• 16k_th：泰语；
+• 16k_pt：葡萄牙语；
+• 16k_tr：土耳其语；
+• 16k_ar：阿拉伯语；
+• 16k_es：西班牙语；
+• 16k_hi：印地语；
+• 16k_fr：法语；
+• 16k_de：德语；
+   */
+  EngineType: string
+  /**
+   * 语音流地址，支持rtmp、rtsp等流媒体协议，以及各类基于http协议的直播流(不支持hls, m3u8)
+   */
+  Url: string
+  /**
+   * 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://cloud.tencent.com/document/product/1093/52633)
+   */
+  CallbackUrl: string
+  /**
+   * 用于生成回调通知中的签名
+   */
+  SignToken?: string
+  /**
+   * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0
+   */
+  FilterDirty?: number
+  /**
+   * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0
+   */
+  FilterModal?: number
+  /**
+   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0
+   */
+  FilterPunc?: number
+  /**
+   * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+   */
+  ConvertNumMode?: number
+  /**
+   * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认为0
+   */
+  WordInfo?: number
+  /**
+   * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+   */
+  HotwordId?: string
+  /**
+   * 回调数据中，是否需要对应音频数据。
+   */
+  AudioData?: boolean
+}
+
+/**
+ * GetAsrVocab请求参数结构体
+ */
+export interface GetAsrVocabRequest {
+  /**
+   * 热词表ID
+   */
+  VocabId: string
+}
+
+/**
+ * DescribeTaskStatus返回参数结构体
+ */
+export interface DescribeTaskStatusResponse {
+  /**
+   * 录音文件识别的请求返回结果。
+   */
+  Data?: TaskStatus
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * [说话人验证数据](https://cloud.tencent.com/document/product/1093/94481#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
  */
 export interface VoicePrintVerifyData {
@@ -429,138 +641,21 @@ export interface VoicePrintVerifyData {
 }
 
 /**
- * 关键词表信息
+ * [一句话识别](https://cloud.tencent.com/document/product/1093/35646#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)返回的词时间戳
  */
-export interface KeyWordLib {
+export interface SentenceWord {
   /**
-   * 关键词表ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 词结果
    */
-  KeyWordLibId?: string
+  Word?: string
   /**
-   * 关键词表名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 词在音频中的开始时间
    */
-  Name?: string
+  StartTime?: number
   /**
-   * 关键词列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 词在音频中的结束时间
    */
-  KeyWordList?: Array<string>
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-}
-
-/**
- * CloseAsyncRecognitionTask返回参数结构体
- */
-export interface CloseAsyncRecognitionTaskResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
- */
-export interface SentenceDetail {
-  /**
-   * 单句最终识别结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FinalSentence?: string
-  /**
-   * 单句中间识别结果，使用空格拆分为多个词
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SliceSentence?: string
-  /**
-   * 口语转书面语结果，开启改功能才有值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WrittenText?: string
-  /**
-   * 单句开始时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartMs?: number
-  /**
-   * 单句结束时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndMs?: number
-  /**
-   * 单句中词个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WordsNum?: number
-  /**
-   * 单句中词详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Words?: Array<SentenceWords>
-  /**
-   * 单句语速，单位：字数/秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpeechSpeed?: number
-  /**
-   * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpeakerId?: number
-  /**
-   * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EmotionalEnergy?: number
-  /**
-   * 本句与上一句之间的静音时长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SilenceTime?: number
-  /**
-   * 情绪类型（可能为空）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EmotionType?: Array<string>
-  /**
-   * 关键词识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyWordResults?: Array<KeyWordResult>
-}
-
-/**
- * CreateCustomization请求参数结构体
- */
-export interface CreateCustomizationRequest {
-  /**
-   * 自学习模型名称，需在1-20字符之间
-   */
-  ModelName: string
-  /**
-   * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
-   */
-  TextUrl: string
-  /**
-   * 自学习模型类型，填写8k或者16k
-   */
-  ModelType: string
-  /**
-   * 标签信息
-   * @deprecated
-   */
-  TagInfos?: Array<string>
+  EndTime?: number
 }
 
 /**
@@ -582,9 +677,229 @@ export interface DownloadAsrVocabResponse {
 }
 
 /**
- * [词表内容](https://cloud.tencent.com/document/product/1093/41484#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ * ModifyCustomization返回参数结构体
  */
-export interface Vocab {
+export interface ModifyCustomizationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAsrVocabList请求参数结构体
+ */
+export interface GetAsrVocabListRequest {
+  /**
+   * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+   */
+  TagInfos?: Array<string>
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 分页Limit
+   */
+  Limit?: number
+}
+
+/**
+ * 统计返回[说话人注册数量](https://cloud.tencent.com/document/product/1093/96061#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ */
+export interface VoicePrintCountData {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 说话人id列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoicePrintList?: Array<VoicePrintBaseData>
+}
+
+/**
+ * VoicePrintUpdate请求参数结构体
+ */
+export interface VoicePrintUpdateRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率 目前仅支持16000 单位Hz
+   */
+  SampleRate: number
+  /**
+   * 说话人id， 说话人唯一标识
+   */
+  VoicePrintId: string
+  /**
+   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   */
+  Data: string
+  /**
+   * 说话人昵称  不超过32字节
+   */
+  SpeakerNick?: string
+}
+
+/**
+ * DeleteAsrVocab请求参数结构体
+ */
+export interface DeleteAsrVocabRequest {
+  /**
+   * 热词表Id
+   */
+  VocabId: string
+}
+
+/**
+ * UpdateAsrVocab请求参数结构体
+ */
+export interface UpdateAsrVocabRequest {
+  /**
+   * 热词表ID
+   */
+  VocabId: string
+  /**
+   * 热词表名称，长度在1-255之间
+   */
+  Name?: string
+  /**
+   * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10个汉字或30个英文字符，权重为[1,11]之间整数或100，数组长度不大于1000 (注意：如果仅更新热词表名称或者描述字段，请求不用带本参数）
+   */
+  WordWeights?: Array<HotWord>
+  /**
+   * 词权重文件（纯文本文件）的二进制base64编码，以行分隔，每行的格式为word|weight，即以英文符号|为分割，左边为词，右边为权重，如：你好|5。
+当用户传此参数（参数长度大于0），即以此参数解析词权重，WordWeights会被忽略
+ (注意：如果仅更新热词表名称或者描述字段，请求不用带本参数）
+   */
+  WordWeightStr?: string
+  /**
+   * 热词表描述，长度在0-1000之间
+   */
+  Description?: string
+}
+
+/**
+ * CreateAsrVocab返回参数结构体
+ */
+export interface CreateAsrVocabResponse {
+  /**
+   * 词表ID，可用于获取词表信息
+   */
+  VocabId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SentenceRecognition返回参数结构体
+ */
+export interface SentenceRecognitionResponse {
+  /**
+   * 识别结果。
+   */
+  Result?: string
+  /**
+   * 请求的音频时长，单位为ms
+   */
+  AudioDuration?: number
+  /**
+   * 词时间戳列表的长度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordSize?: number
+  /**
+   * 词时间戳列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordList?: Array<SentenceWord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * [说话人基础数据](https://cloud.tencent.com/document/product/1093/94483#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，包括说话人id和说话人昵称
+ */
+export interface VoicePrintBaseData {
+  /**
+   * 说话人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoicePrintId?: string
+  /**
+   * 说话人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeakerNick?: string
+}
+
+/**
+ * DescribeAsyncRecognitionTasks返回参数结构体
+ */
+export interface DescribeAsyncRecognitionTasksResponse {
+  /**
+   * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: AsyncRecognitionTasks
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAsrVocabList返回参数结构体
+ */
+export interface GetAsrVocabListResponse {
+  /**
+   * 热词表列表
+   */
+  VocabList?: Array<Vocab>
+  /**
+   * 热词列表总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DownloadCustomization请求参数结构体
+ */
+export interface DownloadCustomizationRequest {
+  /**
+   * 自学习模型ID
+   */
+  ModelId: string
+}
+
+/**
+ * 说话人验证1:N返回结果
+ */
+export interface VerifyTopResult {
+  /**
+   * 对比打分结果，按照打分降序排列返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyTops?: Array<VerifyTop>
+}
+
+/**
+ * GetAsrVocab返回参数结构体
+ */
+export interface GetAsrVocabResponse {
   /**
    * 热词表名称
    */
@@ -614,26 +929,25 @@ export interface Vocab {
    */
   State?: number
   /**
-   * 标签数组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagInfos?: Array<string>
-}
-
-/**
- * CreateRecTask返回参数结构体
- */
-export interface CreateRecTaskResponse {
-  /**
-   * 录音文件识别的请求返回结果，包含结果查询需要的TaskId。
-**注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。**
-
-   */
-  Data?: Task
-  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * [热词的词和权重](https://cloud.tencent.com/document/product/1093/41111#2.-.E8.BE.93.E5.85.A5.E5.8F.82.E6.95.B0)
+ */
+export interface HotWord {
+  /**
+   * 热词
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Word: string
+  /**
+   * 权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight: number
 }
 
 /**
@@ -659,43 +973,13 @@ export interface UpdateAsrKeyWordLibRequest {
 }
 
 /**
- * ModifyCustomization返回参数结构体
+ * GetUsageByDate返回参数结构体
  */
-export interface ModifyCustomizationResponse {
+export interface GetUsageByDateResponse {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 用量次数
    */
-  RequestId?: string
-}
-
-/**
- * DeleteAsrKeyWordLib返回参数结构体
- */
-export interface DeleteAsrKeyWordLibResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteAsrVocab返回参数结构体
- */
-export interface DeleteAsrVocabResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateAsyncRecognitionTask返回参数结构体
- */
-export interface CreateAsyncRecognitionTaskResponse {
-  /**
-   * 请求返回结果，包含本次的任务ID(TaskId)
-   */
-  Data?: Task
+  Data?: UsageByDateInfoData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -714,47 +998,6 @@ export interface VoicePrintDeleteResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * GetAsrKeyWordLibList请求参数结构体
- */
-export interface GetAsrKeyWordLibListRequest {
-  /**
-   * 分页Offset
-   */
-  Offset?: number
-  /**
-   * 分页Limit
-   */
-  Limit?: number
-  /**
-   * 词库名称或者UIN检索
-   */
-  SpecifyNames?: Array<string>
-  /**
-   * 只看用户自己创建的
-   */
-  OnlySelf?: boolean
-}
-
-/**
- * CreateAsrKeyWordLib请求参数结构体
- */
-export interface CreateAsrKeyWordLibRequest {
-  /**
-   * 词表名称，长度在1-20之间
-仅限中英文数字-_
-   */
-  Name: string
-  /**
-   * 词文件（纯文本文件）的二进制base64编码，以行分隔
-格式要求：TXT
-每行只有一个词，不满足格式则报错无法上传
-每个词限制**5个汉字，15个字符**，单个词库最多不超过100个词
-注意不要有空行，尤其是最后一行
-   */
-  KeyWordFile?: string
 }
 
 /**
@@ -1010,46 +1253,90 @@ export interface CreateRecTaskRequest {
 }
 
 /**
- * 关键词ID
+ * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
  */
-export interface KeyWordLibIdData {
+export interface SentenceDetail {
   /**
-   * 关键词ID
+   * 单句最终识别结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyWordLibId?: string
+  FinalSentence?: string
+  /**
+   * 单句中间识别结果，使用空格拆分为多个词
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SliceSentence?: string
+  /**
+   * 口语转书面语结果，开启改功能才有值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WrittenText?: string
+  /**
+   * 单句开始时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartMs?: number
+  /**
+   * 单句结束时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndMs?: number
+  /**
+   * 单句中词个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordsNum?: number
+  /**
+   * 单句中词详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Words?: Array<SentenceWords>
+  /**
+   * 单句语速，单位：字数/秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeechSpeed?: number
+  /**
+   * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeakerId?: number
+  /**
+   * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmotionalEnergy?: number
+  /**
+   * 本句与上一句之间的静音时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SilenceTime?: number
+  /**
+   * 情绪类型（可能为空）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmotionType?: Array<string>
+  /**
+   * 关键词识别结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyWordResults?: Array<KeyWordResult>
 }
 
 /**
- * VoicePrintGroupVerify请求参数结构体
+ * DownloadAsrVocab请求参数结构体
  */
-export interface VoicePrintGroupVerifyRequest {
+export interface DownloadAsrVocabRequest {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * 词表ID。
    */
-  VoiceFormat: number
-  /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
-   */
-  SampleRate: number
-  /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
-   */
-  Data: string
-  /**
-   * 分组id, 支持数字，字母，下划线，长度不超过128
-   */
-  GroupId: string
-  /**
-   * 返回打分结果降序排列topN, TopN大于0， 小于可创建声纹最大数量
-   */
-  TopN: number
+  VocabId: string
 }
 
 /**
- * GetAsrVocab返回参数结构体
+ * [词表内容](https://cloud.tencent.com/document/product/1093/41484#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
  */
-export interface GetAsrVocabResponse {
+export interface Vocab {
   /**
    * 热词表名称
    */
@@ -1079,155 +1366,41 @@ export interface GetAsrVocabResponse {
    */
   State?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetAsrVocabList请求参数结构体
- */
-export interface GetAsrVocabListRequest {
-  /**
-   * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+   * 标签数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagInfos?: Array<string>
-  /**
-   * 分页Offset
-   */
-  Offset?: number
-  /**
-   * 分页Limit
-   */
-  Limit?: number
 }
 
 /**
- * GetCustomizationList返回参数结构体
+ * 关键词表信息
  */
-export interface GetCustomizationListResponse {
+export interface KeyWordLib {
   /**
-   * 自学习模型数组
+   * 关键词表ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<Model>
+  KeyWordLibId?: string
   /**
-   * 自学习模型总量
+   * 关键词表名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * VoicePrintGroupVerify返回参数结构体
- */
-export interface VoicePrintGroupVerifyResponse {
-  /**
-   * TopN 返回结果;系统建议打分70分以上为同一个人音色，评分也取决于音频质量、长度等其他原因影响，您可以按照业务需求适当提高或降低分数要求
-   */
-  Data?: VerifyTopResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DownloadAsrVocab请求参数结构体
- */
-export interface DownloadAsrVocabRequest {
-  /**
-   * 词表ID。
-   */
-  VocabId: string
-}
-
-/**
- * SetVocabState请求参数结构体
- */
-export interface SetVocabStateRequest {
-  /**
-   * 热词表ID。
-   */
-  VocabId: string
-  /**
-   * 热词表状态，1：设为默认状态；0：设为非默认状态。
-   */
-  State: number
-}
-
-/**
- * 查询列表返回数据
- */
-export interface KeyWordLibListData {
-  /**
-   * 关键词表列表
+   * 关键词列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyWordLibList?: Array<KeyWordLib>
+  KeyWordList?: Array<string>
   /**
-   * 关键词列表总数
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
-}
-
-/**
- * CloseAsyncRecognitionTask请求参数结构体
- */
-export interface CloseAsyncRecognitionTaskRequest {
+  CreateTime?: string
   /**
-   * 语音流异步识别任务的唯一标识，在创建任务时会返回
-   */
-  TaskId: number
-}
-
-/**
- * [录音文件识别](https://cloud.tencent.com/document/product/1093/37823#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)、[实时语音异步识别](https://cloud.tencent.com/document/product/1093/52061#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)请求的返回数据
- */
-export interface Task {
-  /**
-   * 任务ID，可通过此ID在轮询接口获取识别状态与结果。TaskId数据类型为**uint64**。
-   **注意：TaskId有效期为24小时，不同日期可能出现重复TaskId，请不要依赖TaskId作为您业务系统里的唯一ID。**
-   */
-  TaskId?: number
-}
-
-/**
- * [音频流异步识别任务列表](https://cloud.tencent.com/document/product/1093/52060#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
- */
-export interface AsyncRecognitionTasks {
-  /**
-   * 任务列表
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks?: Array<AsyncRecognitionTaskInfo>
-}
-
-/**
- * VoicePrintVerify请求参数结构体
- */
-export interface VoicePrintVerifyRequest {
-  /**
-   * 音频格式 0: pcm, 1: wav
-   */
-  VoiceFormat: number
-  /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
-   */
-  SampleRate: number
-  /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
-   */
-  Data: string
-  /**
-   * 说话人id, 说话人唯一标识
-   */
-  VoicePrintId: string
+  UpdateTime?: string
 }
 
 /**
@@ -1253,9 +1426,13 @@ export interface ModifyCustomizationRequest {
 }
 
 /**
- * DeleteCustomization返回参数结构体
+ * VoicePrintVerify返回参数结构体
  */
-export interface DeleteCustomizationResponse {
+export interface VoicePrintVerifyResponse {
+  /**
+   * 说话人验证数据
+   */
+  Data?: VoicePrintVerifyData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1263,82 +1440,74 @@ export interface DeleteCustomizationResponse {
 }
 
 /**
- * [获取录音识别结果的返回参数](https://cloud.tencent.com/document/product/1093/37822#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
+ * GetModelInfo返回参数结构体
  */
-export interface TaskStatus {
+export interface GetModelInfoResponse {
   /**
-   * 任务标识。注意：TaskId数据类型为uint64。
+   * 模型信息
+   */
+  Data?: Model
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ */
+export interface DescribeTaskStatusRequest {
+  /**
+   * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+   **注意：TaskId有效期为24小时，超过24小时的TaskId请不要再查询。**
+   */
+  TaskId: number
+}
+
+/**
+ * VoicePrintCompare请求参数结构体
+ */
+export interface VoicePrintCompareRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav；pcm和wav音频无损压缩，识别准确度更高
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率，目前仅支持16k，请填写16000
+   */
+  SampleRate: number
+  /**
+   * 对比源音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
+   */
+  SrcAudioData: string
+  /**
+   * 对比目标音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
+   */
+  DestAudioData: string
+}
+
+/**
+ * DeleteCustomization请求参数结构体
+ */
+export interface DeleteCustomizationRequest {
+  /**
+   * 要删除的模型ID
+   */
+  ModelId: string
+}
+
+/**
+ * [音频流异步识别](https://cloud.tencent.com/document/api/1093/37824#AsyncRecognitionTasks)任务信息
+ */
+export interface AsyncRecognitionTaskInfo {
+  /**
+   * 任务ID
    */
   TaskId?: number
   /**
-   * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
+   * 音频流Url
    */
-  Status?: number
-  /**
-   * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
-   */
-  StatusStr?: string
-  /**
-   * 识别结果。
-   */
-  Result?: string
-  /**
-   * 失败原因说明。
-   */
-  ErrorMsg?: string
-  /**
-   * 识别结果详情，包含每个句子中的词时间偏移，一般用于生成字幕的场景。(录音识别请求中ResTextFormat=1时该字段不为空)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResultDetail?: Array<SentenceDetail>
-  /**
-   * 音频时长(秒)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AudioDuration?: number
-}
-
-/**
- * DeleteAsrVocab请求参数结构体
- */
-export interface DeleteAsrVocabRequest {
-  /**
-   * 热词表Id
-   */
-  VocabId: string
-}
-
-/**
- * GetCustomizationList请求参数结构体
- */
-export interface GetCustomizationListRequest {
-  /**
-   * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
-   * @deprecated
-   */
-  TagInfos?: Array<string>
-  /**
-   * 分页大小，默认1000
-   */
-  Limit?: number
-  /**
-   * 分页offset，默认0
-   */
-  Offset?: number
-}
-
-/**
- * UpdateAsrVocab返回参数结构体
- */
-export interface UpdateAsrVocabResponse {
-  /**
-   * 热词表ID
-   */
-  VocabId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Url?: string
 }
 
 /**
@@ -1353,6 +1522,163 @@ export interface VoicePrintCountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询列表返回数据
+ */
+export interface KeyWordLibListData {
+  /**
+   * 关键词表列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyWordLibList?: Array<KeyWordLib>
+  /**
+   * 关键词列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+}
+
+/**
+ * CloseAsyncRecognitionTask返回参数结构体
+ */
+export interface CloseAsyncRecognitionTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VoicePrintGroupVerify返回参数结构体
+ */
+export interface VoicePrintGroupVerifyResponse {
+  /**
+   * TopN 返回结果;系统建议打分70分以上为同一个人音色，评分也取决于音频质量、长度等其他原因影响，您可以按照业务需求适当提高或降低分数要求
+   */
+  Data?: VerifyTopResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCustomization请求参数结构体
+ */
+export interface CreateCustomizationRequest {
+  /**
+   * 自学习模型名称，需在1-20字符之间
+   */
+  ModelName: string
+  /**
+   * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
+   */
+  TextUrl: string
+  /**
+   * 自学习模型类型，填写8k或者16k
+   */
+  ModelType: string
+  /**
+   * 标签信息
+   * @deprecated
+   */
+  TagInfos?: Array<string>
+}
+
+/**
+ * 用户用量信息
+ */
+export interface UsageByDateInfo {
+  /**
+   * 业务类型名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizName?: string
+  /**
+   * 识别次数
+单位：次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * 识别时长
+单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+}
+
+/**
+ * UpdateAsrKeyWordLib返回参数结构体
+ */
+export interface UpdateAsrKeyWordLibResponse {
+  /**
+   * 关键词表ID数据
+   */
+  Data?: KeyWordLibIdData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAsyncRecognitionTask返回参数结构体
+ */
+export interface CreateAsyncRecognitionTaskResponse {
+  /**
+   * 请求返回结果，包含本次的任务ID(TaskId)
+   */
+  Data?: Task
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAsrKeyWordLibList请求参数结构体
+ */
+export interface GetAsrKeyWordLibListRequest {
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 分页Limit
+   */
+  Limit?: number
+  /**
+   * 词库名称或者UIN检索
+   */
+  SpecifyNames?: Array<string>
+  /**
+   * 只看用户自己创建的
+   */
+  OnlySelf?: boolean
+}
+
+/**
+ * DeleteAsrVocab返回参数结构体
+ */
+export interface DeleteAsrVocabResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 关键词ID
+ */
+export interface KeyWordLibIdData {
+  /**
+   * 关键词ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyWordLibId?: string
 }
 
 /**
@@ -1372,28 +1698,39 @@ export interface VoicePrintCompareData {
 }
 
 /**
- * VoicePrintVerify返回参数结构体
+ * VoicePrintVerify请求参数结构体
  */
-export interface VoicePrintVerifyResponse {
+export interface VoicePrintVerifyRequest {
   /**
-   * 说话人验证数据
+   * 音频格式 0: pcm, 1: wav
    */
-  Data?: VoicePrintVerifyData
+  VoiceFormat: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 音频采样率，目前支持16000，单位：Hz，必填
    */
-  RequestId?: string
+  SampleRate: number
+  /**
+   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   */
+  Data: string
+  /**
+   * 说话人id, 说话人唯一标识
+   */
+  VoicePrintId: string
 }
 
 /**
- * DescribeTaskStatus请求参数结构体
+ * SetVocabState请求参数结构体
  */
-export interface DescribeTaskStatusRequest {
+export interface SetVocabStateRequest {
   /**
-   * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-   **注意：TaskId有效期为24小时，超过24小时的TaskId请不要再查询。**
+   * 热词表ID。
    */
-  TaskId: number
+  VocabId: string
+  /**
+   * 热词表状态，1：设为默认状态；0：设为非默认状态。
+   */
+  State: number
 }
 
 /**
@@ -1468,13 +1805,13 @@ export interface CreateAsrVocabRequest {
 }
 
 /**
- * GetModelInfo返回参数结构体
+ * VoicePrintUpdate返回参数结构体
  */
-export interface GetModelInfoResponse {
+export interface VoicePrintUpdateResponse {
   /**
-   * 模型信息
+   * 说话人基础数据
    */
-  Data?: Model
+  Data?: VoicePrintBaseData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1482,47 +1819,61 @@ export interface GetModelInfoResponse {
 }
 
 /**
- * UpdateAsrVocab请求参数结构体
+ * DeleteAsrKeyWordLib请求参数结构体
  */
-export interface UpdateAsrVocabRequest {
+export interface DeleteAsrKeyWordLibRequest {
   /**
-   * 热词表ID
+   * 关键词表ID
    */
-  VocabId: string
-  /**
-   * 热词表名称，长度在1-255之间
-   */
-  Name?: string
-  /**
-   * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10个汉字或30个英文字符，权重为[1,11]之间整数或100，数组长度不大于1000 (注意：如果仅更新热词表名称或者描述字段，请求不用带本参数）
-   */
-  WordWeights?: Array<HotWord>
-  /**
-   * 词权重文件（纯文本文件）的二进制base64编码，以行分隔，每行的格式为word|weight，即以英文符号|为分割，左边为词，右边为权重，如：你好|5。
-当用户传此参数（参数长度大于0），即以此参数解析词权重，WordWeights会被忽略
- (注意：如果仅更新热词表名称或者描述字段，请求不用带本参数）
-   */
-  WordWeightStr?: string
-  /**
-   * 热词表描述，长度在0-1000之间
-   */
-  Description?: string
+  KeyWordLibId: string
 }
 
 /**
- * VoicePrintCount请求参数结构体
+ * GetModelInfo请求参数结构体
  */
-export interface VoicePrintCountRequest {
+export interface GetModelInfoRequest {
   /**
-   * 分组ID,仅支持大小写字母和下划线的组合，不超过128个字符
+   * 模型id
    */
-  GroupId?: string
+  ModelId: string
+}
+
+/**
+ * ModifyCustomizationState返回参数结构体
+ */
+export interface ModifyCustomizationStateResponse {
   /**
-   * 统计模式
-0: 统计所有声纹数量
-1: 统计指定分组下的声纹数量
+   * 自学习模型ID
    */
-  CountMod?: number
+  ModelId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetUsageByDate请求参数结构体
+ */
+export interface GetUsageByDateRequest {
+  /**
+   * 需要查询的业务类型名字列表
+- asr_rt 实时识别
+- asr_rec 录音文件识别
+   */
+  BizNameList: Array<string>
+  /**
+   * 查询开始时间
+开始时间包含当天，支持 YYYY-MM-DD 日期以国内时区为准
+开始时间到结束时间需要在3个月以内
+   */
+  StartDate: string
+  /**
+   * 查询结束时间
+结束时间包含当天，，支持 YYYY-MM-DD 日期以国内时区为准
+开始时间到结束时间需要在3个月以内
+   */
+  EndDate: string
 }
 
 /**
@@ -1552,259 +1903,6 @@ export interface VoicePrintEnrollRequest {
 }
 
 /**
- * CreateAsrVocab返回参数结构体
- */
-export interface CreateAsrVocabResponse {
-  /**
-   * 词表ID，可用于获取词表信息
-   */
-  VocabId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SentenceRecognition返回参数结构体
- */
-export interface SentenceRecognitionResponse {
-  /**
-   * 识别结果。
-   */
-  Result?: string
-  /**
-   * 请求的音频时长，单位为ms
-   */
-  AudioDuration?: number
-  /**
-   * 词时间戳列表的长度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WordSize?: number
-  /**
-   * 词时间戳列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WordList?: Array<SentenceWord>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * VoicePrintUpdate返回参数结构体
- */
-export interface VoicePrintUpdateResponse {
-  /**
-   * 说话人基础数据
-   */
-  Data?: VoicePrintBaseData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteAsrKeyWordLib请求参数结构体
- */
-export interface DeleteAsrKeyWordLibRequest {
-  /**
-   * 关键词表ID
-   */
-  KeyWordLibId: string
-}
-
-/**
- * [说话人基础数据](https://cloud.tencent.com/document/product/1093/94483#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，包括说话人id和说话人昵称
- */
-export interface VoicePrintBaseData {
-  /**
-   * 说话人id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VoicePrintId?: string
-  /**
-   * 说话人昵称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpeakerNick?: string
-}
-
-/**
- * UpdateAsrKeyWordLib返回参数结构体
- */
-export interface UpdateAsrKeyWordLibResponse {
-  /**
-   * 关键词表ID数据
-   */
-  Data?: KeyWordLibIdData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 说话人验证1:N返回结果
- */
-export interface VerifyTopResult {
-  /**
-   * 对比打分结果，按照打分降序排列返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyTops?: Array<VerifyTop>
-}
-
-/**
- * VoicePrintCompare请求参数结构体
- */
-export interface VoicePrintCompareRequest {
-  /**
-   * 音频格式 0: pcm, 1: wav；pcm和wav音频无损压缩，识别准确度更高
-   */
-  VoiceFormat: number
-  /**
-   * 音频采样率，目前仅支持16k，请填写16000
-   */
-  SampleRate: number
-  /**
-   * 对比源音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
-   */
-  SrcAudioData: string
-  /**
-   * 对比目标音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
-   */
-  DestAudioData: string
-}
-
-/**
- * VoicePrintCompare返回参数结构体
- */
-export interface VoicePrintCompareResponse {
-  /**
-   * 音频声纹比对结果，包含相似度打分
-   */
-  Data?: VoicePrintCompareData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteCustomization请求参数结构体
- */
-export interface DeleteCustomizationRequest {
-  /**
-   * 要删除的模型ID
-   */
-  ModelId: string
-}
-
-/**
- * 声纹组对比结果top数据
- */
-export interface VerifyTop {
-  /**
-   * 相似度打分
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Score?: string
-  /**
-   * 说话人id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VoicePrintId?: string
-  /**
-   * 说话人昵称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpeakerId?: string
-}
-
-/**
- * [音频流异步识别](https://cloud.tencent.com/document/api/1093/37824#AsyncRecognitionTasks)任务信息
- */
-export interface AsyncRecognitionTaskInfo {
-  /**
-   * 任务ID
-   */
-  TaskId?: number
-  /**
-   * 音频流Url
-   */
-  Url?: string
-}
-
-/**
- * ModifyCustomizationState返回参数结构体
- */
-export interface ModifyCustomizationStateResponse {
-  /**
-   * 自学习模型ID
-   */
-  ModelId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAsyncRecognitionTasks返回参数结构体
- */
-export interface DescribeAsyncRecognitionTasksResponse {
-  /**
-   * 任务列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: AsyncRecognitionTasks
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetAsrVocabList返回参数结构体
- */
-export interface GetAsrVocabListResponse {
-  /**
-   * 热词表列表
-   */
-  VocabList?: Array<Vocab>
-  /**
-   * 热词列表总数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * [一句话识别](https://cloud.tencent.com/document/product/1093/35646#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)返回的词时间戳
- */
-export interface SentenceWord {
-  /**
-   * 词结果
-   */
-  Word?: string
-  /**
-   * 词在音频中的开始时间
-   */
-  StartTime?: number
-  /**
-   * 词在音频中的结束时间
-   */
-  EndTime?: number
-}
-
-/**
  * 识别结果中词文本，以及对应时间偏移
  */
 export interface SentenceWords {
@@ -1823,30 +1921,4 @@ export interface SentenceWords {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffsetEndMs: number
-}
-
-/**
- * 统计返回[说话人注册数量](https://cloud.tencent.com/document/product/1093/96061#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)
- */
-export interface VoicePrintCountData {
-  /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-  /**
-   * 说话人id列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VoicePrintList?: Array<VoicePrintBaseData>
-}
-
-/**
- * DownloadCustomization请求参数结构体
- */
-export interface DownloadCustomizationRequest {
-  /**
-   * 自学习模型ID
-   */
-  ModelId: string
 }

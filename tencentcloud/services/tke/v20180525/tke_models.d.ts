@@ -7806,9 +7806,18 @@ export interface CreatePrometheusClusterAgentRequest {
     Agents: Array<PrometheusClusterAgentBasic>;
 }
 /**
- * DeleteEKSContainerInstances返回参数结构体
+ * DescribeRouteTableConflicts返回参数结构体
  */
-export interface DeleteEKSContainerInstancesResponse {
+export interface DescribeRouteTableConflictsResponse {
+    /**
+     * 路由表是否冲突。
+     */
+    HasConflict?: boolean;
+    /**
+     * 路由表冲突列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RouteTableConflictSet?: Array<RouteTableConflict>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8139,35 +8148,24 @@ export interface DeleteEKSClusterRequest {
     ClusterId: string;
 }
 /**
- * GetUpgradeInstanceProgress返回参数结构体
+ * DescribeLogConfigs返回参数结构体
  */
-export interface GetUpgradeInstanceProgressResponse {
+export interface DescribeLogConfigsResponse {
     /**
-     * 升级节点总数
+     * 分页查找时返回采集规则总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
-     * 已升级节点总数
+     * 指定采集规则名称查找，部分失败时返回失败采集规则名称及最后一个失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Done?: number;
+    Message?: string;
     /**
-     * 升级任务生命周期
-  process 运行中
-  paused 已停止
-  pauing 正在停止
-  done  已完成
-  timeout 已超时
-  aborted 已取消
+     * 采集规则查询结果
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LifeState?: string;
-    /**
-     * 各节点升级进度详情
-     */
-    Instances?: Array<InstanceUpgradeProgressItem>;
-    /**
-     * 集群当前状态
-     */
-    ClusterStatus?: InstanceUpgradeClusterStatus;
+    LogConfigs?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8306,18 +8304,9 @@ export interface EnhancedService {
     AutomationService?: RunAutomationServiceEnabled;
 }
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DeleteEKSContainerInstances返回参数结构体
  */
-export interface DescribeRouteTableConflictsResponse {
-    /**
-     * 路由表是否冲突。
-     */
-    HasConflict?: boolean;
-    /**
-     * 路由表冲突列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RouteTableConflictSet?: Array<RouteTableConflict>;
+export interface DeleteEKSContainerInstancesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9735,47 +9724,39 @@ export interface PrometheusAlertRuleDetail {
     Interval?: string;
 }
 /**
- * 应用市场中部署的应用版本历史
+ * GetUpgradeInstanceProgress返回参数结构体
  */
-export interface ReleaseHistory {
+export interface GetUpgradeInstanceProgressResponse {
     /**
-     * 应用名称
+     * 升级节点总数
      */
-    Name: string;
+    Total?: number;
     /**
-     * 应用命名空间
+     * 已升级节点总数
      */
-    Namespace: string;
+    Done?: number;
     /**
-     * 应用版本
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 升级任务生命周期
+  process 运行中
+  paused 已停止
+  pauing 正在停止
+  done  已完成
+  timeout 已超时
+  aborted 已取消
      */
-    Revision: number;
+    LifeState?: string;
     /**
-     * 应用状态
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 各节点升级进度详情
      */
-    Status: string;
+    Instances?: Array<InstanceUpgradeProgressItem>;
     /**
-     * 应用制品名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群当前状态
      */
-    Chart: string;
+    ClusterStatus?: InstanceUpgradeClusterStatus;
     /**
-     * 应用制品版本
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    AppVersion: string;
-    /**
-     * 应用更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdatedTime: string;
-    /**
-     * 应用描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description: string;
+    RequestId?: string;
 }
 /**
  * DescribeClusterInstances返回参数结构体
@@ -10095,6 +10076,31 @@ export interface DescribeTKEEdgeClusterCredentialRequest {
      * 集群Id
      */
     ClusterId: string;
+}
+/**
+ * DescribeLogConfigs请求参数结构体
+ */
+export interface DescribeLogConfigsRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 当前集群类型支持tke、eks。默认为tke
+     */
+    ClusterType?: string;
+    /**
+     * 按照采集规则名称查找，多个采集规则使用 "," 分隔。
+     */
+    LogConfigNames?: string;
+    /**
+     * 偏移量,默认0
+     */
+    Offset?: number;
+    /**
+     * 最大输出条数，默认20，最大为100
+     */
+    Limit?: number;
 }
 /**
  * 自动变配集群等级
@@ -10966,6 +10972,23 @@ export interface DescribeClusterRouteTablesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteLogConfigs请求参数结构体
+ */
+export interface DeleteLogConfigsRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 待删除采集规则名称，多个采集规则使用","分隔
+     */
+    LogConfigNames: string;
+    /**
+     * 集群集群类型, tke/eks 默认为 tke 集群
+     */
+    ClusterType?: string;
 }
 /**
  * DescribeClusterKubeconfig请求参数结构体
@@ -11852,6 +11875,49 @@ export interface DescribePrometheusTargetsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 应用市场中部署的应用版本历史
+ */
+export interface ReleaseHistory {
+    /**
+     * 应用名称
+     */
+    Name: string;
+    /**
+     * 应用命名空间
+     */
+    Namespace: string;
+    /**
+     * 应用版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Revision: number;
+    /**
+     * 应用状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status: string;
+    /**
+     * 应用制品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Chart: string;
+    /**
+     * 应用制品版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppVersion: string;
+    /**
+     * 应用更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedTime: string;
+    /**
+     * 应用描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
 }
 /**
  * DescribeEnableVpcCniProgress返回参数结构体
@@ -12865,6 +12931,20 @@ export interface InstallAddonResponse {
     RequestId?: string;
 }
 /**
+ * DeleteLogConfigs返回参数结构体
+ */
+export interface DeleteLogConfigsResponse {
+    /**
+     * 删除采集规则遇到错误时返回错误原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyReservedInstanceScope请求参数结构体
  */
 export interface ModifyReservedInstanceScopeRequest {
@@ -12990,37 +13070,37 @@ export interface PendingRelease {
      * 应用状态详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Condition: string;
+    Condition?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ID: string;
+    ID?: string;
     /**
      * 应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 应用命名空间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Namespace: string;
+    Namespace?: string;
     /**
-     * 应用状态
+     * 应用状态(参考helm的发布状态： unknown, deployed, uninstalled, superseded, failed, uninstalling, pending-install, pending-upgrade 或 pending-rollback)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
 }
 /**
  * DescribeBackupStorageLocations请求参数结构体

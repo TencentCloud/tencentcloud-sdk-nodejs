@@ -3382,8 +3382,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从白名单中删除将指定的检测项。
-   */
+     * 产品重构优化，这几个接口已经没有调用了
+
+从白名单中删除将指定的检测项。
+     */
   async DeleteCompliancePolicyItemFromWhitelist(
     req: DeleteCompliancePolicyItemFromWhitelistRequest,
     cb?: (error: string, rep: DeleteCompliancePolicyItemFromWhitelistResponse) => void

@@ -1537,7 +1537,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskDnsEventDetail", req, cb);
     }
     /**
-     * 从白名单中删除将指定的检测项。
+     * 产品重构优化，这几个接口已经没有调用了
+
+从白名单中删除将指定的检测项。
      */
     async DeleteCompliancePolicyItemFromWhitelist(req, cb) {
         return this.request("DeleteCompliancePolicyItemFromWhitelist", req, cb);

@@ -645,6 +645,10 @@ export interface ModifyTaskRunStatusRequest {
    * 问题以及改进
    */
   Issue?: string
+  /**
+   * 演练记录
+   */
+  Record?: string
 }
 
 /**

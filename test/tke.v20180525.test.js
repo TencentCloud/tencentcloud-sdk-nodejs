@@ -608,6 +608,16 @@ it("tke.v20180525.DescribeClusterAuthenticationOptions", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterAsGroupAttribute", async function () {
+    try {
+       const data = await client.ModifyClusterAsGroupAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.InstallAddon", async function () {
     try {
        const data = await client.InstallAddon({})
@@ -1138,9 +1148,9 @@ it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
     }
 })
 
-it("tke.v20180525.ModifyClusterAsGroupAttribute", async function () {
+it("tke.v20180525.DescribeLogConfigs", async function () {
     try {
-       const data = await client.ModifyClusterAsGroupAttribute({})
+       const data = await client.DescribeLogConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1291,16 @@ it("tke.v20180525.DescribeExternalClusterSpec", async function () {
 it("tke.v20180525.DescribeClusterReleaseHistory", async function () {
     try {
        const data = await client.DescribeClusterReleaseHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.RollbackClusterRelease", async function () {
+    try {
+       const data = await client.RollbackClusterRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1898,9 +1918,9 @@ it("tke.v20180525.DescribeEdgeClusterUpgradeInfo", async function () {
     }
 })
 
-it("tke.v20180525.RollbackClusterRelease", async function () {
+it("tke.v20180525.DeleteLogConfigs", async function () {
     try {
-       const data = await client.RollbackClusterRelease({})
+       const data = await client.DeleteLogConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

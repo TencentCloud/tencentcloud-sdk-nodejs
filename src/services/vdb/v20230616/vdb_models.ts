@@ -458,6 +458,11 @@ export interface InstanceInfo {
    */
   EngineVersion?: string
   /**
+   * api版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiVersion?: string
+  /**
    * 计费模式。
 注意：此字段可能返回 null，表示取不到有效值。
    */

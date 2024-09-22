@@ -610,7 +610,7 @@ export declare class Client extends AbstractClient {
     ProcessMedia(req: ProcessMediaRequest, cb?: (error: string, rep: ProcessMediaResponse) => void): Promise<ProcessMediaResponse>;
     /**
      * 创建片头片尾模板。
-- 最大支持模版数量为 100 个。
+- 最大支持模板数量为 100 个。
      */
     CreateHeadTailTemplate(req: CreateHeadTailTemplateRequest, cb?: (error: string, rep: CreateHeadTailTemplateResponse) => void): Promise<CreateHeadTailTemplateResponse>;
     /**

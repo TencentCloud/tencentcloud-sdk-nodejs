@@ -382,6 +382,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAuthenticationOptions", req, cb);
     }
     /**
+     * 修改集群伸缩组属性
+     */
+    async ModifyClusterAsGroupAttribute(req, cb) {
+        return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    }
+    /**
      * 为目标集群安装一个addon
      */
     async InstallAddon(req, cb) {
@@ -700,10 +706,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNodePoolInstanceTypes", req, cb);
     }
     /**
-     * 修改集群伸缩组属性
+     * 查询日志采集规则
      */
-    async ModifyClusterAsGroupAttribute(req, cb) {
-        return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    async DescribeLogConfigs(req, cb) {
+        return this.request("DescribeLogConfigs", req, cb);
     }
     /**
      * 创建一个云原生Prometheus模板
@@ -790,6 +796,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterReleaseHistory(req, cb) {
         return this.request("DescribeClusterReleaseHistory", req, cb);
+    }
+    /**
+     * 在应用市场中集群回滚应用至某个历史版本
+     */
+    async RollbackClusterRelease(req, cb) {
+        return this.request("RollbackClusterRelease", req, cb);
     }
     /**
      * 编辑节点池
@@ -1158,10 +1170,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeClusterUpgradeInfo", req, cb);
     }
     /**
-     * 在应用市场中集群回滚应用至某个历史版本
+     * 删除集群内采集规则
      */
-    async RollbackClusterRelease(req, cb) {
-        return this.request("RollbackClusterRelease", req, cb);
+    async DeleteLogConfigs(req, cb) {
+        return this.request("DeleteLogConfigs", req, cb);
     }
     /**
      * 获取集群采集配置

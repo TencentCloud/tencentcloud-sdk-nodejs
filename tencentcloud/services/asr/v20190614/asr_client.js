@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("asr.tencentcloudapi.com", "2019-06-14", clientConfig);
     }
     /**
+     * 查询用户用量
+     */
+    async GetUsageByDate(req, cb) {
+        return this.request("GetUsageByDate", req, cb);
+    }
+    /**
      * 通过比对两段音频内说话人的声纹，得到一个打分，可通过打分判断两段音频声纹相似度,  打分区间[0 - 100]。 音频要求：16k采样率， 16bit位深，pcm或者wav格式， 单声道，总时长不超过30秒的音频，base64编码数据大小不超过2M，音频内容只有一个说话人声音，并且尽可能清晰，这样结果更加准确。
      */
     async VoicePrintCompare(req, cb) {

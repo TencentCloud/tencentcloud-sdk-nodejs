@@ -213,6 +213,7 @@ import {
   MediaImageSpriteInfo,
   EnhanceMediaQualityRequest,
   ProductInstanceRecource,
+  PersistenceCompleteTask,
   AiRecognitionTaskFaceSegmentItem,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
@@ -2075,7 +2076,7 @@ export class Client extends AbstractClient {
 
   /**
      * 创建片头片尾模板。
-- 最大支持模版数量为 100 个。
+- 最大支持模板数量为 100 个。
      */
   async CreateHeadTailTemplate(
     req: CreateHeadTailTemplateRequest,

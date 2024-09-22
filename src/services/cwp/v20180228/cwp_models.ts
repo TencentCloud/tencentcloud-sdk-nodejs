@@ -3132,16 +3132,6 @@ export interface ReverseShellRule {
 }
 
 /**
- * DescribeAESKey返回参数结构体
- */
-export interface DescribeAESKeyResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeBashRules返回参数结构体
  */
 export interface DescribeBashRulesResponse {
@@ -3455,6 +3445,27 @@ export interface ModifyNetAttackWhiteListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 策略规则表达式
+ */
+export interface PolicyRules {
+  /**
+   * 进程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Process?: CommandLine
+  /**
+   * 父进程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PProcess?: CommandLine
+  /**
+   * 祖先进程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AProcess?: CommandLine
 }
 
 /**
@@ -4166,6 +4177,32 @@ export interface DescribeAlarmIncidentNodesRequest {
 }
 
 /**
+ * DescribeAssetWebAppPluginList请求参数结构体
+ */
+export interface DescribeAssetWebAppPluginListRequest {
+  /**
+   * 主机Quuid
+   */
+  Quuid: string
+  /**
+   * 主机Uuid
+   */
+  Uuid: string
+  /**
+   * Web应用ID
+   */
+  Id: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+}
+
+/**
  * DescribeRansomDefenseMachineList返回参数结构体
  */
 export interface DescribeRansomDefenseMachineListResponse {
@@ -4333,11 +4370,11 @@ export interface DescribeJavaMemShellListResponse {
    * 事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<JavaMemShellInfo>
+  List?: Array<JavaMemShellInfo>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5721,7 +5758,12 @@ export interface DescribeNetAttackWhiteListResponse {
  */
 export interface CheckBashPolicyParamsRequest {
   /**
-   * 校验内容 Name或Rule ，两个都要校验时逗号分割
+   * 校验内容字段,如果需要检测多个字段时,用逗号分割
+<li>Name 策略名称</li>
+<li>Process 进程</li>
+<li>Name PProcess 父进程</li>
+<li>Name AProcess 祖先进程</li>
+
    */
   CheckField: string
   /**
@@ -5733,13 +5775,18 @@ export interface CheckBashPolicyParamsRequest {
    */
   Name?: string
   /**
-   * 用户填入的正则表达式："正则表达式" 需与 "提交EventId对应的命令内容" 相匹配
+   * 该字段不在维护,如果填入该参数,自动替换到Rules.Process
+
    */
   Rule?: string
   /**
    * 编辑时传的规则id
    */
   Id?: number
+  /**
+   * 规则表达式
+   */
+  Rules?: PolicyRules
 }
 
 /**
@@ -8652,6 +8699,31 @@ export interface JavaMemShellInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uuid?: string
+  /**
+   * 类名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClassName?: string
+  /**
+   * 父类名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperClassName?: string
+  /**
+   * 继承的接口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interfaces?: string
+  /**
+   * 注释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Annotations?: string
+  /**
+   * 所属的类加载器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoaderClassName?: string
 }
 
 /**
@@ -8694,11 +8766,11 @@ export interface CheckBashPolicyParamsResponse {
   /**
    * 0=校验通过  1=规则名称校验不通过 2=正则表达式校验不通过
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 校验信息
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13522,7 +13594,9 @@ export interface DeleteMaliciousRequestWhiteListResponse {
  */
 export interface DescribeJavaMemShellListRequest {
   /**
-   * 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
+   * 过滤条件：InstanceID、IP、
+
+MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
    */
   Filters?: Array<Filters>
   /**
@@ -13825,13 +13899,17 @@ export interface AssetWebFrameBaseInfo {
  */
 export interface ModifyJavaMemShellsStatusRequest {
   /**
-   * 事件Id数组
-   */
-  Ids: Array<number | bigint>
-  /**
    * 目标处理状态： 0 - 待处理 1 - 已加白 2 - 已删除 3 - 已忽略 4 - 已手动处理
    */
   Status: number
+  /**
+   * 事件Id数组
+   */
+  Ids?: Array<number | bigint>
+  /**
+   * 是否更新全部，只支持忽略、已处理、删除
+   */
+  UpdateAll?: boolean
 }
 
 /**
@@ -16041,13 +16119,19 @@ export interface DescribeScreenRiskAssetsTopResponse {
 }
 
 /**
- * StopBaselineDetect请求参数结构体
+ * 命令行内容
  */
-export interface StopBaselineDetectRequest {
+export interface CommandLine {
   /**
-   * 取消任务ID集合
+   * 路径,需要base64加密
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskIds: Array<number | bigint>
+  Exe?: string
+  /**
+   * 命令行,需要base64加密
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cmdline?: string
 }
 
 /**
@@ -17965,7 +18049,7 @@ export interface DescribeWarningHostConfigRequest {
 }
 
 /**
- * 高位命令策略
+ * 高危命令策略
  */
 export interface BashPolicy {
   /**
@@ -17985,7 +18069,7 @@ export interface BashPolicy {
    */
   BashAction: number
   /**
-   * 正则表达式
+   * 正则表达式 base64 加密,该字段废弃,如果写入则自动替换为Rules.Process.CmdLine
    */
   Rule: string
   /**
@@ -18036,6 +18120,11 @@ export interface BashPolicy {
    * 老版本兼容可能会用到
    */
   Uuids?: Array<string>
+  /**
+   * 规则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: PolicyRules
 }
 
 /**
@@ -21183,29 +21272,13 @@ export interface DeleteSearchTemplateResponse {
 }
 
 /**
- * DescribeAssetWebAppPluginList请求参数结构体
+ * DescribeAESKey返回参数结构体
  */
-export interface DescribeAssetWebAppPluginListRequest {
+export interface DescribeAESKeyResponse {
   /**
-   * 主机Quuid
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Quuid: string
-  /**
-   * 主机Uuid
-   */
-  Uuid: string
-  /**
-   * Web应用ID
-   */
-  Id: string
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 需要返回的数量，默认为10，最大值为100
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -22411,6 +22484,16 @@ export interface CreateEmergencyVulScanRequest {
    * 扫描超时时长 ，单位秒
    */
   TimeoutPeriod?: number
+}
+
+/**
+ * StopBaselineDetect请求参数结构体
+ */
+export interface StopBaselineDetectRequest {
+  /**
+   * 取消任务ID集合
+   */
+  TaskIds: Array<number | bigint>
 }
 
 /**
@@ -26570,11 +26653,11 @@ export interface DescribeBashPoliciesResponse {
   /**
    * 列表内容
    */
-  List: Array<BashPolicy>
+  List?: Array<BashPolicy>
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

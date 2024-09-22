@@ -380,7 +380,7 @@ import {
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
   CreatePrometheusClusterAgentRequest,
-  DeleteEKSContainerInstancesResponse,
+  DescribeRouteTableConflictsResponse,
   DescribePrometheusInstancesOverviewResponse,
   DescribeEKSClusterCredentialRequest,
   EnableClusterDeletionProtectionRequest,
@@ -396,7 +396,7 @@ import {
   DescribeClusterPendingReleasesResponse,
   DataDisk,
   DeleteEKSClusterRequest,
-  GetUpgradeInstanceProgressResponse,
+  DescribeLogConfigsResponse,
   DescribeExistedInstancesResponse,
   CreatePrometheusTemplateRequest,
   DescribeEKSContainerInstancesResponse,
@@ -406,7 +406,7 @@ import {
   EdgeClusterPublicLB,
   EnableEncryptionProtectionRequest,
   EnhancedService,
-  DescribeRouteTableConflictsResponse,
+  DeleteEKSContainerInstancesResponse,
   DescribePostNodeResourcesResponse,
   DescribePrometheusAlertRuleRequest,
   UninstallLogAgentRequest,
@@ -477,7 +477,7 @@ import {
   CreatePrometheusGlobalNotificationRequest,
   DescribeRIUtilizationDetailResponse,
   PrometheusAlertRuleDetail,
-  ReleaseHistory,
+  GetUpgradeInstanceProgressResponse,
   DescribeClusterInstancesResponse,
   CreatePrometheusAlertRuleRequest,
   UpdateEKSClusterRequest,
@@ -494,6 +494,7 @@ import {
   EdgeAvailableExtraArgs,
   IPAddress,
   DescribeTKEEdgeClusterCredentialRequest,
+  DescribeLogConfigsRequest,
   AutoUpgradeClusterLevel,
   DisableEncryptionProtectionResponse,
   CreateEKSClusterRequest,
@@ -536,6 +537,7 @@ import {
   DeletePrometheusTempRequest,
   DescribeTKEEdgeScriptResponse,
   DescribeClusterRouteTablesResponse,
+  DeleteLogConfigsRequest,
   DescribeClusterKubeconfigRequest,
   DeletePrometheusTempSyncRequest,
   CreatePrometheusTemplateResponse,
@@ -587,6 +589,7 @@ import {
   ClusterProperty,
   EdgeClusterExtraArgs,
   DescribePrometheusTargetsResponse,
+  ReleaseHistory,
   DescribeEnableVpcCniProgressResponse,
   ReservedInstanceSpec,
   PrometheusAgentOverview,
@@ -633,6 +636,7 @@ import {
   GPUArgs,
   RouteTableConflict,
   InstallAddonResponse,
+  DeleteLogConfigsResponse,
   ModifyReservedInstanceScopeRequest,
   DisableEncryptionProtectionRequest,
   PrometheusInstanceOverview,
@@ -1244,6 +1248,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群伸缩组属性
+   */
+  async ModifyClusterAsGroupAttribute(
+    req: ModifyClusterAsGroupAttributeRequest,
+    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
+  ): Promise<ModifyClusterAsGroupAttributeResponse> {
+    return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  }
+
+  /**
    * 为目标集群安装一个addon
    */
   async InstallAddon(
@@ -1774,13 +1788,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群伸缩组属性
+   * 查询日志采集规则
    */
-  async ModifyClusterAsGroupAttribute(
-    req: ModifyClusterAsGroupAttributeRequest,
-    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
-  ): Promise<ModifyClusterAsGroupAttributeResponse> {
-    return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  async DescribeLogConfigs(
+    req: DescribeLogConfigsRequest,
+    cb?: (error: string, rep: DescribeLogConfigsResponse) => void
+  ): Promise<DescribeLogConfigsResponse> {
+    return this.request("DescribeLogConfigs", req, cb)
   }
 
   /**
@@ -1923,6 +1937,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterReleaseHistoryResponse) => void
   ): Promise<DescribeClusterReleaseHistoryResponse> {
     return this.request("DescribeClusterReleaseHistory", req, cb)
+  }
+
+  /**
+   * 在应用市场中集群回滚应用至某个历史版本
+   */
+  async RollbackClusterRelease(
+    req: RollbackClusterReleaseRequest,
+    cb?: (error: string, rep: RollbackClusterReleaseResponse) => void
+  ): Promise<RollbackClusterReleaseResponse> {
+    return this.request("RollbackClusterRelease", req, cb)
   }
 
   /**
@@ -2536,13 +2560,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在应用市场中集群回滚应用至某个历史版本
+   * 删除集群内采集规则
    */
-  async RollbackClusterRelease(
-    req: RollbackClusterReleaseRequest,
-    cb?: (error: string, rep: RollbackClusterReleaseResponse) => void
-  ): Promise<RollbackClusterReleaseResponse> {
-    return this.request("RollbackClusterRelease", req, cb)
+  async DeleteLogConfigs(
+    req: DeleteLogConfigsRequest,
+    cb?: (error: string, rep: DeleteLogConfigsResponse) => void
+  ): Promise<DeleteLogConfigsResponse> {
+    return this.request("DeleteLogConfigs", req, cb)
   }
 
   /**

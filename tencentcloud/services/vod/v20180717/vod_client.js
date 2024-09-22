@@ -842,7 +842,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 创建片头片尾模板。
-- 最大支持模版数量为 100 个。
+- 最大支持模板数量为 100 个。
      */
     async CreateHeadTailTemplate(req, cb) {
         return this.request("CreateHeadTailTemplate", req, cb);

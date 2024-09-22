@@ -1015,7 +1015,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRiskDnsEventDetail(req: DescribeRiskDnsEventDetailRequest, cb?: (error: string, rep: DescribeRiskDnsEventDetailResponse) => void): Promise<DescribeRiskDnsEventDetailResponse>;
     /**
-     * 从白名单中删除将指定的检测项。
+     * 产品重构优化，这几个接口已经没有调用了
+
+从白名单中删除将指定的检测项。
      */
     DeleteCompliancePolicyItemFromWhitelist(req: DeleteCompliancePolicyItemFromWhitelistRequest, cb?: (error: string, rep: DeleteCompliancePolicyItemFromWhitelistResponse) => void): Promise<DeleteCompliancePolicyItemFromWhitelistResponse>;
     /**

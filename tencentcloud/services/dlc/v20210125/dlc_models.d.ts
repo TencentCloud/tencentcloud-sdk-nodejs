@@ -1924,6 +1924,10 @@ export interface CreateTasksRequest {
      * spark集群资源组名称
      */
     ResourceGroupName?: string;
+    /**
+     * 是否使用multi- statement方式运行一批次任务，true: 是，false: 否
+     */
+    IsMultiStatement?: boolean;
 }
 /**
  * SuspendResumeDataEngine请求参数结构体

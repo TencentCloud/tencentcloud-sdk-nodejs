@@ -4872,6 +4872,24 @@ export interface ProductInstanceRecource {
     Left?: number;
 }
 /**
+ * 剪辑固化任务信息。
+ */
+export interface PersistenceCompleteTask {
+    /**
+     * 固化生成的媒体 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileId?: string;
+    /**
+     * 剪辑固化的来源，有以下三种。
+  <li>SimpleHlsClip：来自简单 HLS 剪辑；</li>
+  <li>FastEditMedia：来自快速媒体编辑；</li>
+  <li>LiveRealTimeClip:来自直播即时剪辑。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PersistenceSource?: string;
+}
+/**
  * 人脸识别结果片段
  */
 export interface AiRecognitionTaskFaceSegmentItem {
@@ -8141,6 +8159,10 @@ export interface ModifyEventConfigRequest {
      */
     DeleteMediaCompleteEventSwitch?: string;
     /**
+     * 是否接收剪辑固化完成事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+     */
+    PersistenceCompleteEventSwitch?: string;
+    /**
      * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
      */
     SubAppId?: number;
@@ -11006,6 +11028,10 @@ export interface DescribeEventConfigResponse {
      */
     DeleteMediaCompleteEventSwitch?: string;
     /**
+     * 是否接收剪辑固化完成事件通知，"OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+     */
+    PersistenceCompleteEventSwitch?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -13256,7 +13282,8 @@ export interface EventContent {
   <li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li>
   <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
   <li>QualityInspectComplete：音画质检测完成；</li>
-  <li>QualityEnhanceComplete：音画质重生任务完成。</li>
+  <li>QualityEnhanceComplete：音画质重生任务完成；</li>
+  <li>PersistenceComplete：剪辑固化完成。</li>
   <b>兼容 2017 版的事件类型：</b>
   <li>TranscodeComplete：视频转码完成；</li>
   <li>ConcatComplete：视频拼接完成；</li>
@@ -13390,6 +13417,11 @@ export interface EventContent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MediaCastStatusChangedEvent?: MediaCastEvent;
+    /**
+     * 剪辑固化完成事件，当事件类型为 PersistenceComplete 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PersistenceCompleteEvent?: PersistenceCompleteTask;
 }
 /**
  * 智能精彩片段任务控制参数

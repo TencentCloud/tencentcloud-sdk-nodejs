@@ -600,6 +600,27 @@ export interface ExportAttributeLabelResponse {
 }
 
 /**
+ * 知识库容量饼图详情
+ */
+export interface KnowledgeCapacityPieGraphDetail {
+  /**
+   * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppName?: string
+  /**
+   * 应用使用的字符数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedCharSize?: string
+  /**
+   * 应用占比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Proportion?: number
+}
+
+/**
  * ExportQAList返回参数结构体
  */
 export interface ExportQAListResponse {
@@ -1178,6 +1199,24 @@ export interface ListQARequest {
 }
 
 /**
+ * DescribeKnowledgeUsage返回参数结构体
+ */
+export interface DescribeKnowledgeUsageResponse {
+  /**
+   * 可用字符数
+   */
+  AvailableCharSize?: string
+  /**
+   * 超量字符数
+   */
+  ExceedCharSize?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 引用来源详情
  */
 export interface ReferDetail {
@@ -1353,6 +1392,20 @@ export interface ListReleaseRequest {
 }
 
 /**
+ * IsTransferIntent返回参数结构体
+ */
+export interface IsTransferIntentResponse {
+  /**
+   * 是否意图转人工
+   */
+  Hit?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListModel请求参数结构体
  */
 export interface ListModelRequest {
@@ -1475,6 +1528,24 @@ export interface ListDocResponse {
 }
 
 /**
+ * GetDocPreview请求参数结构体
+ */
+export interface GetDocPreviewRequest {
+  /**
+   * 文档业务ID
+   */
+  DocBizId: string
+  /**
+   * 应用ID
+   */
+  BotBizId: string
+  /**
+   * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
+   */
+  TypeKey?: string
+}
+
+/**
  * ModifyQA请求参数结构体
  */
 export interface ModifyQARequest {
@@ -1564,21 +1635,13 @@ export interface TaskFlowInfo {
 }
 
 /**
- * GetDocPreview请求参数结构体
+ * ExportUnsatisfiedReply返回参数结构体
  */
-export interface GetDocPreviewRequest {
+export interface ExportUnsatisfiedReplyResponse {
   /**
-   * 文档业务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DocBizId: string
-  /**
-   * 应用ID
-   */
-  BotBizId: string
-  /**
-   * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
-   */
-  TypeKey?: string
+  RequestId?: string
 }
 
 /**
@@ -1732,6 +1795,32 @@ export interface KnowledgeSummary {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
+}
+
+/**
+ * 任务流程调试信息
+ */
+export interface TaskFlowSummary {
+  /**
+   * 任务流程名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntentName?: string
+  /**
+   * 实体列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedSlotValues?: Array<ValueInfo>
+  /**
+   * 节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunNodes?: Array<RunNodeInfo>
+  /**
+   * 意图判断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Purposes?: Array<string>
 }
 
 /**
@@ -2130,6 +2219,37 @@ export interface StrValue {
 }
 
 /**
+ * 调试信息
+ */
+export interface ProcedureDebugging {
+  /**
+   * 检索query
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 系统prompt
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  System?: string
+  /**
+   * 多轮历史信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Histories?: Array<HistorySummary>
+  /**
+   * 检索知识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Knowledge?: Array<KnowledgeSummary>
+  /**
+   * 任务流程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlow?: TaskFlowSummary
+}
+
+/**
  * CheckAttributeLabelRefer请求参数结构体
  */
 export interface CheckAttributeLabelReferRequest {
@@ -2213,34 +2333,26 @@ export interface ModifyAttributeLabelRequest {
 }
 
 /**
- * 调试信息
+ * ConvertDocument请求参数结构体
  */
-export interface ProcedureDebugging {
+export interface ConvertDocumentRequest {
   /**
-   * 检索query
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Content?: string
+  FileUrl?: string
   /**
-   * 系统prompt
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  System?: string
+  FileBase64?: string
   /**
-   * 多轮历史信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
    */
-  Histories?: Array<HistorySummary>
+  FileStartPageNumber?: number
   /**
-   * 检索知识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+建议一次请求的页面不超过3页。
    */
-  Knowledge?: Array<KnowledgeSummary>
-  /**
-   * 任务流程
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskFlow?: TaskFlowSummary
+  FileEndPageNumber?: number
 }
 
 /**
@@ -2475,29 +2587,41 @@ export interface GetTaskStatusResponse {
 }
 
 /**
- * 任务流程调试信息
+ * DescribeConcurrencyUsageGraph请求参数结构体
  */
-export interface TaskFlowSummary {
+export interface DescribeConcurrencyUsageGraphRequest {
   /**
-   * 任务流程名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 模型标识
    */
-  IntentName?: string
+  ModelName: string
   /**
-   * 实体列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开始时间
    */
-  UpdatedSlotValues?: Array<ValueInfo>
+  StartTime: string
   /**
-   * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束时间
    */
-  RunNodes?: Array<RunNodeInfo>
+  EndTime: string
   /**
-   * 意图判断
-注意：此字段可能返回 null，表示取不到有效值。
+   * uin
    */
-  Purposes?: Array<string>
+  UinAccount?: Array<string>
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+  /**
+   * 子业务类型
+   */
+  SubBizType?: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
 }
 
 /**
@@ -2512,6 +2636,36 @@ export interface DescribeDocRequest {
    * 文档ID
    */
   DocBizId: string
+}
+
+/**
+ * DescribeTokenUsageGraph请求参数结构体
+ */
+export interface DescribeTokenUsageGraphRequest {
+  /**
+   * 腾讯云主账号
+   */
+  UinAccount?: Array<string>
+  /**
+   * 知识引擎子业务类型:  FileParse(文档解析)、Embedding、Rewrite(多轮改写)、 Concurrency(并发)、KnowledgeSummary(知识总结)   KnowledgeQA(知识问答)、KnowledgeCapacity(知识库容量)、SearchEngine(搜索引擎)
+   */
+  SubBizType?: string
+  /**
+   * 模型标识
+   */
+  ModelName?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
 }
 
 /**
@@ -3187,23 +3341,41 @@ export interface Message {
 }
 
 /**
- * ExportUnsatisfiedReply返回参数结构体
+ * CreateRejectedQuestion请求参数结构体
  */
-export interface ExportUnsatisfiedReplyResponse {
+export interface CreateRejectedQuestionRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用ID
    */
-  RequestId?: string
+  BotBizId: string
+  /**
+   * 拒答问题
+
+
+   */
+  Question: string
+  /**
+   * 拒答问题来源的数据源唯一id，取值1，2
+
+
+   */
+  BusinessSource: number
+  /**
+   * 拒答问题来源的数据源唯一id
+
+
+   */
+  BusinessId?: string
 }
 
 /**
- * RateMsgRecord返回参数结构体
+ * DescribeKnowledgeUsagePieGraph请求参数结构体
  */
-export interface RateMsgRecordResponse {
+export interface DescribeKnowledgeUsagePieGraphRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用ID数组
    */
-  RequestId?: string
+  AppBizIds?: Array<string>
 }
 
 /**
@@ -3377,17 +3549,41 @@ export interface RateMsgRecordRequest {
 }
 
 /**
- * IsTransferIntent返回参数结构体
+ * DescribeCallStatsGraph请求参数结构体
  */
-export interface IsTransferIntentResponse {
+export interface DescribeCallStatsGraphRequest {
   /**
-   * 是否意图转人工
+   * uin
    */
-  Hit?: boolean
+  UinAccount?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 登录用户主账号(集成商模式必填)
    */
-  RequestId?: string
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+  /**
+   * 子业务类型
+   */
+  SubBizType?: string
+  /**
+   * 模型标识
+   */
+  ModelName?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
 }
 
 /**
@@ -3436,6 +3632,11 @@ export interface GetReconstructDocumentResultRequest {
    */
   TaskId: string
 }
+
+/**
+ * DescribeKnowledgeUsage请求参数结构体
+ */
+export type DescribeKnowledgeUsageRequest = null
 
 /**
  * ListQA返回参数结构体
@@ -3520,26 +3721,25 @@ export interface DescribeReleaseResponse {
 }
 
 /**
- * ConvertDocument请求参数结构体
+ * DescribeConcurrencyUsageGraph返回参数结构体
  */
-export interface ConvertDocumentRequest {
+export interface DescribeConcurrencyUsageGraphResponse {
   /**
-   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 统计信息
    */
-  FileUrl?: string
+  X?: Array<string>
   /**
-   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 可用并发y轴坐标
    */
-  FileBase64?: string
+  AvailableY?: Array<number | bigint>
   /**
-   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+   * 成功调用并发y轴坐标
    */
-  FileStartPageNumber?: number
+  SuccessCallY?: Array<number | bigint>
   /**
-   * 当传入文件是PDF类型（FileType=PDF）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
-建议一次请求的页面不超过3页。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileEndPageNumber?: number
+  RequestId?: string
 }
 
 /**
@@ -3786,6 +3986,40 @@ export interface AppModel {
 }
 
 /**
+ * 计费统计信息
+ */
+export interface Stat {
+  /**
+   * x轴时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  X?: string
+  /**
+   * y轴统计值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Y?: number
+}
+
+/**
+ * DescribeKnowledgeUsagePieGraph返回参数结构体
+ */
+export interface DescribeKnowledgeUsagePieGraphResponse {
+  /**
+   * 所有应用已用的字符总数
+   */
+  AvailableCharSize?: string
+  /**
+   * 应用饼图详情列表
+   */
+  List?: Array<KnowledgeCapacityPieGraphDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 标签信息
  */
 export interface ClassifyLabel {
@@ -3830,6 +4064,28 @@ export interface ReconstructDocumentRequest {
    * 配置选项，支持配置是否在生成的Markdown中是否嵌入图片
    */
   Config?: ReconstructDocumentConfig
+}
+
+/**
+ * DescribeTokenUsageGraph返回参数结构体
+ */
+export interface DescribeTokenUsageGraphResponse {
+  /**
+   * 总消耗
+   */
+  Total?: Array<Stat>
+  /**
+   * 输入消耗
+   */
+  Input?: Array<Stat>
+  /**
+   * 输出消耗
+   */
+  Output?: Array<Stat>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4504,6 +4760,28 @@ export interface GetDocPreviewResponse {
 }
 
 /**
+ * DescribeConcurrencyUsage返回参数结构体
+ */
+export interface DescribeConcurrencyUsageResponse {
+  /**
+   * 可用并发数
+   */
+  AvailableConcurrency?: number
+  /**
+   * 并发峰值
+   */
+  ConcurrencyPeak?: number
+  /**
+   * 调用超可用次数
+   */
+  ExceedUsageTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRelease返回参数结构体
  */
 export interface CreateReleaseResponse {
@@ -4765,6 +5043,36 @@ export interface ModifyDocRequest {
 }
 
 /**
+ * DescribeTokenUsage返回参数结构体
+ */
+export interface DescribeTokenUsageResponse {
+  /**
+   * 总token消耗量
+   */
+  TotalTokenUsage?: number
+  /**
+   * 输入token消耗
+   */
+  InputTokenUsage?: number
+  /**
+   * 输出token消耗
+   */
+  OutputTokenUsage?: number
+  /**
+   * 接口调用次数
+   */
+  ApiCallStats?: number
+  /**
+   * 搜索服务调用次数
+   */
+  SearchUsage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteApp返回参数结构体
  */
 export interface DeleteAppResponse {
@@ -4932,6 +5240,28 @@ export interface ClassifyConfig {
 }
 
 /**
+ * DescribeConcurrencyUsage请求参数结构体
+ */
+export interface DescribeConcurrencyUsageRequest {
+  /**
+   * 模型标识
+   */
+  ModelName: string
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
+}
+
+/**
  * UploadAttributeLabel请求参数结构体
  */
 export interface UploadAttributeLabelRequest {
@@ -4989,6 +5319,44 @@ export interface ExportAttributeLabelRequest {
    * 根据筛选数据导出
    */
   Filters?: AttributeFilters
+}
+
+/**
+ * DescribeTokenUsage请求参数结构体
+ */
+export interface DescribeTokenUsageRequest {
+  /**
+   * 腾讯云主账号
+   */
+  UinAccount?: Array<string>
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+  /**
+   * 知识引擎子业务类型:  FileParse(文档解析)、Embedding、Rewrite(多轮改写)、 Concurrency(并发)、KnowledgeSummary(知识总结)   KnowledgeQA(知识问答)、KnowledgeCapacity(知识库容量)、SearchEngine(搜索引擎)
+   */
+  SubBizType?: string
+  /**
+   * 模型标识
+   */
+  ModelName?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
 }
 
 /**
@@ -5192,34 +5560,6 @@ export interface DeleteAppRequest {
    * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
    */
   AppType: string
-}
-
-/**
- * CreateRejectedQuestion请求参数结构体
- */
-export interface CreateRejectedQuestionRequest {
-  /**
-   * 应用ID
-   */
-  BotBizId: string
-  /**
-   * 拒答问题
-
-
-   */
-  Question: string
-  /**
-   * 拒答问题来源的数据源唯一id，取值1，2
-
-
-   */
-  BusinessSource: number
-  /**
-   * 拒答问题来源的数据源唯一id
-
-
-   */
-  BusinessId?: string
 }
 
 /**
@@ -5466,6 +5806,21 @@ export interface DeleteQAResponse {
 }
 
 /**
+ * DescribeCallStatsGraph返回参数结构体
+ */
+export interface DescribeCallStatsGraphResponse {
+  /**
+   * 统计信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<Stat>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetMsgRecord请求参数结构体
  */
 export interface GetMsgRecordRequest {
@@ -5585,6 +5940,16 @@ export interface CheckAttributeLabelReferResponse {
    * 是否引用
    */
   IsRefer?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RateMsgRecord返回参数结构体
+ */
+export interface RateMsgRecordResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5814,6 +6179,59 @@ export interface DescribeSegmentsRequest {
    * 文档ID
    */
   SegBizId?: Array<string>
+}
+
+/**
+ * DescribeSearchStatsGraph请求参数结构体
+ */
+export interface DescribeSearchStatsGraphRequest {
+  /**
+   * 登录用户主账号(集成商模式必填)
+   */
+  LoginUin?: string
+  /**
+   * 登录用户子账号(集成商模式必填)
+   */
+  LoginSubAccountUin?: string
+  /**
+   * uin列表
+   */
+  UinAccount?: Array<string>
+  /**
+   * 子业务类型
+   */
+  SubBizType?: string
+  /**
+   * 模型标识
+   */
+  ModelName?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 应用id列表
+   */
+  AppBizIds?: Array<string>
+}
+
+/**
+ * DescribeSearchStatsGraph返回参数结构体
+ */
+export interface DescribeSearchStatsGraphResponse {
+  /**
+   * 统计结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<Stat>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
