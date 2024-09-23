@@ -65,7 +65,7 @@ import {
   DeleteReadOnlyGroupNetworkAccessRequest,
   DescribeBackupDownloadRestrictionRequest,
   ZoneInfo,
-  DescribeReadOnlyGroupsResponse,
+  CreateDatabaseRequest,
   NormalQueryItem,
   Tag,
   DescribeBackupSummariesRequest,
@@ -170,6 +170,7 @@ import {
   DBInstance,
   DeleteParameterTemplateResponse,
   ModifyAccountPrivilegesResponse,
+  Database,
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
   Filter,
@@ -216,11 +217,13 @@ import {
   InquiryPriceUpgradeDBInstanceResponse,
   DisIsolateDBInstancesResponse,
   CreateParameterTemplateRequest,
+  ModifyDatabaseOwnerResponse,
   ModifySwitchTimePeriodRequest,
   CreateAccountResponse,
   DescribeSlowQueryListRequest,
   DescribeCloneDBInstanceSpecRequest,
   RegionInfo,
+  ModifyDatabaseOwnerRequest,
   DisIsolateDBInstancesRequest,
   RestartDBInstanceResponse,
   LockAccountRequest,
@@ -229,6 +232,7 @@ import {
   DescribeBackupPlansRequest,
   ModifyBaseBackupExpireTimeRequest,
   ModifyDBInstanceHAConfigResponse,
+  CreateDatabaseResponse,
   RebalanceReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
@@ -237,6 +241,7 @@ import {
   ServerlessDBAccount,
   DescribeDBSlowlogsResponse,
   DescribeAccountPrivilegesRequest,
+  DescribeReadOnlyGroupsResponse,
   RestoreDBInstanceObjectsRequest,
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
@@ -620,6 +625,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void
   ): Promise<CreateServerlessDBInstanceResponse> {
     return this.request("CreateServerlessDBInstance", req, cb)
+  }
+
+  /**
+   * 此接口用于创建数据库，需指定数据库名及所有者。
+   */
+  async CreateDatabase(
+    req: CreateDatabaseRequest,
+    cb?: (error: string, rep: CreateDatabaseResponse) => void
+  ): Promise<CreateDatabaseResponse> {
+    return this.request("CreateDatabase", req, cb)
   }
 
   /**
@@ -1125,6 +1140,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
   ): Promise<OpenDBExtranetAccessResponse> {
     return this.request("OpenDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 修改数据库所有者
+   */
+  async ModifyDatabaseOwner(
+    req: ModifyDatabaseOwnerRequest,
+    cb?: (error: string, rep: ModifyDatabaseOwnerResponse) => void
+  ): Promise<ModifyDatabaseOwnerResponse> {
+    return this.request("ModifyDatabaseOwner", req, cb)
   }
 
   /**

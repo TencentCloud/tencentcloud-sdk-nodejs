@@ -148,9 +148,29 @@ it("emr.v20190103.DescribeCvmQuota", async function () {
     }
 })
 
+it("emr.v20190103.ModifyGlobalConfig", async function () {
+    try {
+       const data = await client.ModifyGlobalConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeResourceSchedule", async function () {
+    try {
+       const data = await client.DescribeResourceSchedule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +438,9 @@ it("emr.v20190103.InquiryPriceCreateInstance", async function () {
     }
 })
 
-it("emr.v20190103.AddMetricScaleStrategy", async function () {
+it("emr.v20190103.DescribeGlobalConfig", async function () {
     try {
-       const data = await client.AddMetricScaleStrategy({})
+       const data = await client.DescribeGlobalConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +538,9 @@ it("emr.v20190103.DescribeAutoScaleStrategies", async function () {
     }
 })
 
-it("emr.v20190103.DescribeResourceSchedule", async function () {
+it("emr.v20190103.AddMetricScaleStrategy", async function () {
     try {
-       const data = await client.DescribeResourceSchedule({})
+       const data = await client.AddMetricScaleStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

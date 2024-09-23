@@ -490,6 +490,8 @@ class Client extends abstract_client_1.AbstractClient {
 
 剪辑固化的优势在于其生命周期与原始录制视频相互独立，可以独立管理、长久保存。
 
+<font color='red'>注意：</font>如果剪辑时指定进行固化，通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersitenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对直播录制视频进行删除、降冷等操作，否则剪辑生成的视频播放可能出现异常。
+
 ### 剪辑不固化
 所谓剪辑不固化，是指剪辑所得到的结果（m3u8 文件）与直播录制视频共享相同的 ts 分片，新生成的视频不是一个独立完整的视频（没有独立 FileId，只有播放 URL），其有效期与直播录制的完整视频有效期是一致的。一旦直播录制出来的视频被删除，也会导致该片段无法播放。
 
@@ -869,7 +871,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWordSamples", req, cb);
     }
     /**
-     * 对 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+     * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+
+快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
+
+<font color='red'>注意：</font>通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersitenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则拼接剪辑生成的视频播放可能出现异常。
      */
     async FastEditMedia(req, cb) {
         return this.request("FastEditMedia", req, cb);
@@ -1273,6 +1279,8 @@ class Client extends abstract_client_1.AbstractClient {
 举例如下：一场完整的足球比赛，原始视频可能长达 2 个小时，客户出于节省成本的目的可以对这个视频存储 2 个月，但对于剪辑的「精彩时刻」视频却可以指定存储更长时间，同时可以单独对「精彩时刻」视频进行转码、微信发布等额外的点播操作，这时候可以选择剪辑并且固化的方案。
 
 剪辑固化的优势在于其生命周期与原始输入视频相互独立，可以独立管理、长久保存。
+
+<font color='red'>注意：</font>如果剪辑时指定进行固化，通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersitenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则剪辑生成的视频播放可能出现异常。
 
 ### 剪辑不固化
 所谓剪辑不固化，是指剪辑所得到的结果（m3u8 文件）与原始输入视频共享相同的 ts 分片，新生成的视频不是一个独立完整的视频（没有独立 FileId，只有播放 URL），其有效期与原始输入的完整视频有效期是一致的。一旦原始输入的视频被删除，也会导致该片段无法播放。

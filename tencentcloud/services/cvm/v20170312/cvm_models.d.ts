@@ -470,16 +470,16 @@ export interface RepairTaskInfo {
     /**
      * 维修任务ID
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 任务类型ID，与任务类型中文名的对应关系如下：
   
@@ -493,7 +493,7 @@ export interface RepairTaskInfo {
   
   各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789#.E7.BB.B4.E4.BF.AE.E4.BB.BB.E5.8A.A1.E5.88.86.E7.B1.BB)。
      */
-    TaskTypeId: number;
+    TaskTypeId?: number;
     /**
      * 任务类型中文名
      */
@@ -510,7 +510,7 @@ export interface RepairTaskInfo {
   
   各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789#.E4.BB.BB.E5.8A.A1.E7.8A.B6.E6.80.81)。
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 设备状态ID，与设备状态中文名的对应关系如下：
   
@@ -536,32 +536,32 @@ export interface RepairTaskInfo {
     /**
      * 任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务授权时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthTime: string;
+    AuthTime?: string;
     /**
      * 任务结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskDetail: string;
+    TaskDetail?: string;
     /**
      * 可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 所在私有网络ID
   注意：此字段可能返回 null，表示取不到有效值。

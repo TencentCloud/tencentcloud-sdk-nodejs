@@ -2891,33 +2891,13 @@ export interface ModifySubDomainResponse {
     RequestId?: string;
 }
 /**
- * DescribePlugins请求参数结构体
+ * DescribeExclusiveInstanceRegions返回参数结构体
  */
-export interface DescribePluginsRequest {
+export interface DescribeExclusiveInstanceRegionsResponse {
     /**
-     * 要查询的插件列表。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PluginIds?: Array<string>;
-    /**
-     * 要查询的插件名称。
-     */
-    PluginName?: string;
-    /**
-     * 要查询的插件类型。
-     */
-    PluginType?: string;
-    /**
-     * 返回数量，默认为 20，最大值为 100。
-     */
-    Limit?: number;
-    /**
-     * 偏移量，默认为 0。
-     */
-    Offset?: number;
-    /**
-     * 过滤条件。预留字段，目前不支持过滤。
-     */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * BindSecretIds请求参数结构体
@@ -4523,18 +4503,9 @@ export interface DeleteApiRequest {
     ApiId: string;
 }
 /**
- * DescribeServiceSubDomainMappings请求参数结构体
+ * DescribeExclusiveInstanceRegions请求参数结构体
  */
-export interface DescribeServiceSubDomainMappingsRequest {
-    /**
-     * 服务唯一 ID。
-     */
-    ServiceId: string;
-    /**
-     * 服务绑定的自定义域名。
-     */
-    SubDomain: string;
-}
+export declare type DescribeExclusiveInstanceRegionsRequest = null;
 /**
  * DescribeApiApp返回参数结构体
  */
@@ -5019,17 +4990,46 @@ export interface DescribeAPIDocsResponse {
     RequestId?: string;
 }
 /**
- * DetachPlugin返回参数结构体
+ * DescribeServiceSubDomainMappings请求参数结构体
  */
-export interface DetachPluginResponse {
+export interface DescribeServiceSubDomainMappingsRequest {
     /**
-     * 解绑操作是否成功。
+     * 服务唯一 ID。
      */
-    Result: boolean;
+    ServiceId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 服务绑定的自定义域名。
      */
-    RequestId?: string;
+    SubDomain: string;
+}
+/**
+ * DescribePlugins请求参数结构体
+ */
+export interface DescribePluginsRequest {
+    /**
+     * 要查询的插件列表。
+     */
+    PluginIds?: Array<string>;
+    /**
+     * 要查询的插件名称。
+     */
+    PluginName?: string;
+    /**
+     * 要查询的插件类型。
+     */
+    PluginType?: string;
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 过滤条件。预留字段，目前不支持过滤。
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DeletePlugin返回参数结构体
@@ -6528,6 +6528,19 @@ export interface BuildAPIDocRequest {
      * API文档ID
      */
     ApiDocId: string;
+}
+/**
+ * DetachPlugin返回参数结构体
+ */
+export interface DetachPluginResponse {
+    /**
+     * 解绑操作是否成功。
+     */
+    Result: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 密钥列表

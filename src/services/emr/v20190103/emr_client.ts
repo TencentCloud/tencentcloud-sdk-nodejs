@@ -39,6 +39,7 @@ import {
   DescribeServiceNodeInfosRequest,
   DiskSpecInfo,
   HiveQuery,
+  FairGlobalConfig,
   Step,
   PreExecuteFileSettings,
   KeyValue,
@@ -55,7 +56,7 @@ import {
   DiskSpec,
   LoadAutoScaleStrategy,
   SLInstanceInfo,
-  ModifyUserManagerPwdRequest,
+  DefaultSetting,
   COSSettings,
   ClusterInstancesInfo,
   CreateSLInstanceRequest,
@@ -94,6 +95,7 @@ import {
   Resource,
   FlowParam,
   DescribeAutoScaleStrategiesResponse,
+  ModifyGlobalConfigRequest,
   StopParams,
   DependService,
   PodSpec,
@@ -109,7 +111,7 @@ import {
   ZoneSetting,
   AllNodeResourceSpec,
   Placement,
-  QuotaEntity,
+  DescribeGlobalConfigResponse,
   ModifyYarnDeployRequest,
   PodParameter,
   DescribeClusterFlowStatusDetailRequest,
@@ -122,7 +124,7 @@ import {
   DescribeHiveQueriesResponse,
   RunJobFlowResponse,
   DescribeYarnQueueRequest,
-  DescribeImpalaQueriesResponse,
+  DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
   ModifyAutoRenewFlagResponse,
   ScaleOutServiceConfGroupsInfo,
@@ -151,6 +153,7 @@ import {
   RunJobFlowRequest,
   GroupGlobalConfs,
   PriceResource,
+  ModifyGlobalConfigResponse,
   TimeAutoScaleStrategy,
   ModifySLInstanceRequest,
   DescribeInsightListResponse,
@@ -179,6 +182,7 @@ import {
   UpdateInstanceSettings,
   DescribeSLInstanceResponse,
   ScriptBootstrapActionConfig,
+  CapacityGlobalConfig,
   DescribeInstancesRequest,
   NotRepeatStrategy,
   TerminateSLInstanceResponse,
@@ -190,6 +194,7 @@ import {
   DescribeInstancesListRequest,
   ItemSeq,
   RepeatStrategy,
+  QuotaEntity,
   RenewInstancesInfo,
   OutterResource,
   OpScope,
@@ -241,11 +246,12 @@ import {
   InquirePriceRenewEmrRequest,
   ModifyResourceTags,
   LoadMetricsCondition,
-  DescribeInstanceRenewNodesResponse,
+  DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   Item,
   TableSchemaItem,
   ConfigModifyInfoV2,
+  ModifyUserManagerPwdRequest,
   InquiryPriceScaleOutInstanceResponse,
   AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
@@ -263,6 +269,7 @@ import {
   ModifyResourcePoolsRequest,
   DescribeJobFlowResponse,
   InstanceChargePrepaid,
+  DescribeGlobalConfigRequest,
   TerminateInstanceResponse,
 } from "./emr_models"
 
@@ -406,6 +413,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改YARN资源调度的全局配置
+   */
+  async ModifyGlobalConfig(
+    req: ModifyGlobalConfigRequest,
+    cb?: (error: string, rep: ModifyGlobalConfigResponse) => void
+  ): Promise<ModifyGlobalConfigResponse> {
+    return this.request("ModifyGlobalConfig", req, cb)
+  }
+
+  /**
    * 扩容节点
    */
   async ScaleOutInstance(
@@ -413,6 +430,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleOutInstanceResponse) => void
   ): Promise<ScaleOutInstanceResponse> {
     return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
+   */
+  async DescribeResourceSchedule(
+    req: DescribeResourceScheduleRequest,
+    cb?: (error: string, rep: DescribeResourceScheduleResponse) => void
+  ): Promise<DescribeResourceScheduleResponse> {
+    return this.request("DescribeResourceSchedule", req, cb)
   }
 
   /**
@@ -683,13 +710,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加扩缩容规则，按负载和时间
+   * 查询YARN资源调度的全局配置
    */
-  async AddMetricScaleStrategy(
-    req: AddMetricScaleStrategyRequest,
-    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
-  ): Promise<AddMetricScaleStrategyResponse> {
-    return this.request("AddMetricScaleStrategy", req, cb)
+  async DescribeGlobalConfig(
+    req: DescribeGlobalConfigRequest,
+    cb?: (error: string, rep: DescribeGlobalConfigResponse) => void
+  ): Promise<DescribeGlobalConfigResponse> {
+    return this.request("DescribeGlobalConfig", req, cb)
   }
 
   /**
@@ -783,13 +810,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
+   * 添加扩缩容规则，按负载和时间
    */
-  async DescribeResourceSchedule(
-    req: DescribeResourceScheduleRequest,
-    cb?: (error: string, rep: DescribeResourceScheduleResponse) => void
-  ): Promise<DescribeResourceScheduleResponse> {
-    return this.request("DescribeResourceSchedule", req, cb)
+  async AddMetricScaleStrategy(
+    req: AddMetricScaleStrategyRequest,
+    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
+  ): Promise<AddMetricScaleStrategyResponse> {
+    return this.request("AddMetricScaleStrategy", req, cb)
   }
 
   /**

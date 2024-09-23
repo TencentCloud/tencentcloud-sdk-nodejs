@@ -528,7 +528,7 @@ export interface CallbackStatusStatisticsRequest {
     StartDateTime: number;
     /**
      * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时。
-  注：EndDataTime 必须大于 StartDateTime。
+  注：EndDataTime 必须大于等于 StartDateTime。
      */
     EndDataTime: number;
     /**
@@ -584,11 +584,11 @@ export interface SmsPackagesStatisticsRequest {
     SmsSdkAppid: string;
     /**
      * 最大上限(需要拉取的套餐包个数)。
+  注：Limit默认最大值为500，可结合Offset实现分页查询。
      */
     Limit: number;
     /**
      * 偏移量。
-  注：目前固定设置为0。
      */
     Offset: number;
 }
@@ -752,7 +752,7 @@ export interface SendStatusStatisticsRequest {
     StartDateTime: number;
     /**
      * 结束时间，yyyymmddhh 需要拉取的截止时间，精确到小时
-  注：EndDataTime 必须大于 StartDateTime。
+  注：EndDataTime 必须大于等于 StartDateTime。
      */
     EndDataTime: number;
     /**

@@ -106,10 +106,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCvmQuota", req, cb);
     }
     /**
+     * 修改YARN资源调度的全局配置
+     */
+    async ModifyGlobalConfig(req, cb) {
+        return this.request("ModifyGlobalConfig", req, cb);
+    }
+    /**
      * 扩容节点
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
+     */
+    async DescribeResourceSchedule(req, cb) {
+        return this.request("DescribeResourceSchedule", req, cb);
     }
     /**
      * 修改用户密码（用户管理）
@@ -275,10 +287,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
-     * 添加扩缩容规则，按负载和时间
+     * 查询YARN资源调度的全局配置
      */
-    async AddMetricScaleStrategy(req, cb) {
-        return this.request("AddMetricScaleStrategy", req, cb);
+    async DescribeGlobalConfig(req, cb) {
+        return this.request("DescribeGlobalConfig", req, cb);
     }
     /**
      * 查看yarn资源调度的调度历史。废弃，请使用流程中心查看历史记录。
@@ -335,10 +347,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoScaleStrategies", req, cb);
     }
     /**
-     * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
+     * 添加扩缩容规则，按负载和时间
      */
-    async DescribeResourceSchedule(req, cb) {
-        return this.request("DescribeResourceSchedule", req, cb);
+    async AddMetricScaleStrategy(req, cb) {
+        return this.request("AddMetricScaleStrategy", req, cb);
     }
     /**
      * 获取自动扩缩容全局配置

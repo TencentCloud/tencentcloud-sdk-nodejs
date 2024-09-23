@@ -108,11 +108,11 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
         return this.request("DescribeAPIDocs", req, cb);
     }
     /**
-     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
-API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     * 本接口（CreateUsagePlan）用于创建使用计划。
+用户在使用 API 网关时，需要创建使用计划并将其绑定到服务的环境中使用。
      */
-    async DescribeServiceSubDomainMappings(req, cb) {
-        return this.request("DescribeServiceSubDomainMappings", req, cb);
+    async CreateUsagePlan(req, cb) {
+        return this.request("CreateUsagePlan", req, cb);
     }
     /**
      * 展示插件相关的API列表，包括已绑定的和未绑定的API信息。
@@ -350,6 +350,13 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("CreateApi", req, cb);
     }
     /**
+     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
+API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     */
+    async DescribeServiceSubDomainMappings(req, cb) {
+        return this.request("DescribeServiceSubDomainMappings", req, cb);
+    }
+    /**
      * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
      */
     async DescribeExclusiveInstanceDetail(req, cb) {
@@ -552,11 +559,10 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
         return this.request("DescribeServiceUsagePlan", req, cb);
     }
     /**
-     * 本接口（CreateUsagePlan）用于创建使用计划。
-用户在使用 API 网关时，需要创建使用计划并将其绑定到服务的环境中使用。
+     * Get the list of supported regions for dedicated instances
      */
-    async CreateUsagePlan(req, cb) {
-        return this.request("CreateUsagePlan", req, cb);
+    async DescribeExclusiveInstanceRegions(req, cb) {
+        return this.request("DescribeExclusiveInstanceRegions", req, cb);
     }
     /**
      * 本接口（UpdateApiKey）用于更换用户已创建的一对 API 密钥。

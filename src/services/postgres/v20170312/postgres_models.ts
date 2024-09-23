@@ -1205,17 +1205,33 @@ SUPPORTMODIFYONLY：支持变配。
 }
 
 /**
- * DescribeReadOnlyGroups返回参数结构体
+ * CreateDatabase请求参数结构体
  */
-export interface DescribeReadOnlyGroupsResponse {
+export interface CreateDatabaseRequest {
   /**
-   * 只读组列表
+   * 实例ID，形如postgres-6fego161
    */
-  ReadOnlyGroupList?: Array<ReadOnlyGroup>
+  DBInstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 创建的数据库名
    */
-  RequestId?: string
+  DatabaseName: string
+  /**
+   * 数据库的所有者
+   */
+  DatabaseOwner: string
+  /**
+   * 数据库的字符编码
+   */
+  Encoding?: string
+  /**
+   * 数据库的排序规则
+   */
+  Collate?: string
+  /**
+   * 数据库的字符分类
+   */
+  Ctype?: string
 }
 
 /**
@@ -1826,6 +1842,7 @@ db-pay-mode：按照实例付费模式过滤，类型为string
 db-tag-key：按照标签键过滤，类型为string
 db-private-ip： 按照实例私有网络IP过滤，类型为string
 db-public-address： 按照实例外网地址过滤，类型为string
+db-dedicated-cluster-id: 按照私有集群Id过滤，类型为string
    */
   Filters?: Array<Filter>
   /**
@@ -4121,6 +4138,52 @@ export interface ModifyAccountPrivilegesResponse {
 }
 
 /**
+ * 描述数据库详细信息，包括所有者、字符编码等
+ */
+export interface Database {
+  /**
+   * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 数据库所有者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseOwner?: string
+  /**
+   * 数据库字符编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encoding?: string
+  /**
+   * 数据库排序规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Collate?: string
+  /**
+   * 数据库字符分类
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ctype?: string
+  /**
+   * 数据库是否允许连接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowConn?: boolean
+  /**
+   * 数据库最大连接数，-1表示无限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnLimit?: number
+  /**
+   * 数据库权限列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Privileges?: string
+}
+
+/**
  * DeleteReadOnlyGroup请求参数结构体
  */
 export interface DeleteReadOnlyGroupRequest {
@@ -4283,7 +4346,7 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 /**
- * 描述实例节点信息，包括节点类型、节点所在可用区。
+ * 描述实例节点信息，包括节点类型、节点所在可用区、节点所在专属集群。
  */
 export interface DBNode {
   /**
@@ -4439,29 +4502,29 @@ export interface CreateReadOnlyDBInstanceRequest {
   InstanceCount: number
   /**
    * 购买时长，单位：月。
-<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
-<li>后付费：只支持1
+<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
+<li>后付费：只支持1</li>
    */
   Period: number
   /**
-   * 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。
+   * 私有网络ID，形如vpc-xxxxxxxx（该参数当前必传）。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。
    */
   VpcId?: string
   /**
-   * 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。
+   * 私有网络子网ID，形如subnet-xxxxxxxx（该参数当前必传）。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。
    */
   SubnetId?: string
   /**
    * 实例计费类型，目前支持：
-<li>PREPAID：预付费，即包年包月。
-<li>POSTPAID_BY_HOUR：后付费，即按量计费。
+<li>PREPAID：预付费，即包年包月。</li>
+<li>POSTPAID_BY_HOUR：后付费，即按量计费。</li>
 默认值：PREPAID。如果主实例为后付费，只读实例必须也为后付费。
    */
   InstanceChargeType?: string
   /**
    * 是否自动使用代金券：
-<li>0：否
-<li>1：是
+<li>0：否</li>
+<li>1：是</li>
 默认值：0
    */
   AutoVoucher?: number
@@ -4471,8 +4534,8 @@ export interface CreateReadOnlyDBInstanceRequest {
   VoucherIds?: Array<string>
   /**
    * 续费标记：
-<li>0：手动续费
-<li>1：自动续费
+<li>0：手动续费</li>
+<li>1：自动续费</li>
 默认值：0
    */
   AutoRenewFlag?: number
@@ -4499,8 +4562,8 @@ export interface CreateReadOnlyDBInstanceRequest {
   SecurityGroupIds?: Array<string>
   /**
    * 是否需要支持Ipv6：
-<li>0：否
-<li>1：是
+<li>0：否</li>
+<li>1：是</li>
 默认值：0
    */
   NeedSupportIpv6?: number
@@ -4576,6 +4639,10 @@ export interface DescribeDatabasesResponse {
    * 数据库总数
    */
   TotalCount?: number
+  /**
+   * 数据库详情列表
+   */
+  Databases?: Array<Database>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5037,6 +5104,16 @@ export interface CreateParameterTemplateRequest {
 }
 
 /**
+ * ModifyDatabaseOwner返回参数结构体
+ */
+export interface ModifyDatabaseOwnerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySwitchTimePeriod请求参数结构体
  */
 export interface ModifySwitchTimePeriodRequest {
@@ -5141,6 +5218,24 @@ export interface RegionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportInternational: number
+}
+
+/**
+ * ModifyDatabaseOwner请求参数结构体
+ */
+export interface ModifyDatabaseOwnerRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+  /**
+   * 数据库名称
+   */
+  DatabaseName: string
+  /**
+   * 数据库新所有者
+   */
+  DatabaseOwner: string
 }
 
 /**
@@ -5262,6 +5357,16 @@ export interface ModifyBaseBackupExpireTimeRequest {
  * ModifyDBInstanceHAConfig返回参数结构体
  */
 export interface ModifyDBInstanceHAConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDatabase返回参数结构体
+ */
+export interface CreateDatabaseResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5413,6 +5518,20 @@ export interface DescribeAccountPrivilegesRequest {
    * 要查询的数据库对象信息
    */
   DatabaseObjectSet: Array<DatabaseObject>
+}
+
+/**
+ * DescribeReadOnlyGroups返回参数结构体
+ */
+export interface DescribeReadOnlyGroupsResponse {
+  /**
+   * 只读组列表
+   */
+  ReadOnlyGroupList?: Array<ReadOnlyGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

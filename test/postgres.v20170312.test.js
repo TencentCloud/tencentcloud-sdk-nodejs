@@ -368,6 +368,16 @@ it("postgres.v20170312.CreateServerlessDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.CreateDatabase", async function () {
+    try {
+       const data = await client.CreateDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.CreateAccount", async function () {
     try {
        const data = await client.CreateAccount({})
@@ -861,6 +871,16 @@ it("postgres.v20170312.ModifySwitchTimePeriod", async function () {
 it("postgres.v20170312.OpenDBExtranetAccess", async function () {
     try {
        const data = await client.OpenDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyDatabaseOwner", async function () {
+    try {
+       const data = await client.ModifyDatabaseOwner({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

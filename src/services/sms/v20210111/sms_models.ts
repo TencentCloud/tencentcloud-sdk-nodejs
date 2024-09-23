@@ -133,6 +133,7 @@ export interface SmsPackagesStatisticsRequest {
   SmsSdkAppId: string
   /**
    * 最大上限(需要拉取的套餐包个数)。
+注：Limit默认最大值为500，可结合Offset实现分页查询。
    */
   Limit: number
   /**
@@ -140,12 +141,12 @@ export interface SmsPackagesStatisticsRequest {
    */
   Offset: number
   /**
-   * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
+   * 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。
 注：接口会返回 BeginTime 到 EndTime 之间创建的套餐包的统计信息。
    */
   BeginTime: string
   /**
-   * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
+   * 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。
 注：EndTime 必须大于 BeginTime 且小于当前时间。
    */
   EndTime: string
@@ -616,12 +617,12 @@ export interface SendStatusStatistics {
  */
 export interface CallbackStatusStatisticsRequest {
   /**
-   * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
+   * 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。
    */
   BeginTime: string
   /**
-   * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
-注：EndTime 必须大于 BeginTime，且相差不超过32天。
+   * 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。
+注：EndTime 必须大于等于 BeginTime，且相差不超过32天。
    */
   EndTime: string
   /**
@@ -894,12 +895,12 @@ export interface PhoneNumberInfo {
  */
 export interface SendStatusStatisticsRequest {
   /**
-   * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
+   * 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。
    */
   BeginTime: string
   /**
-   * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
-注：EndTime 必须大于 BeginTime。
+   * 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。
+注：EndTime 必须大于等于 BeginTime。
    */
   EndTime: string
   /**

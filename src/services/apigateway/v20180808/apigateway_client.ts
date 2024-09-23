@@ -144,7 +144,7 @@ import {
   CreatePluginRequest,
   MicroServiceReq,
   ModifySubDomainResponse,
-  DescribePluginsRequest,
+  DescribeExclusiveInstanceRegionsResponse,
   BindSecretIdsRequest,
   ParameterInfo,
   ModifyUpstreamResultInfo,
@@ -197,7 +197,7 @@ import {
   UsagePlanBindEnvironment,
   InstanceInfo,
   DeleteApiRequest,
-  DescribeServiceSubDomainMappingsRequest,
+  DescribeExclusiveInstanceRegionsRequest,
   DescribeApiAppResponse,
   DescribeServiceSubDomainMappingsResponse,
   OauthConfig,
@@ -222,7 +222,8 @@ import {
   ApiUsagePlan,
   IPStrategyApi,
   DescribeAPIDocsResponse,
-  DetachPluginResponse,
+  DescribeServiceSubDomainMappingsRequest,
+  DescribePluginsRequest,
   DeletePluginResponse,
   DescribeUpstreamBindApis,
   ModifyServiceEnvironmentStrategyRequest,
@@ -287,6 +288,7 @@ import {
   UsagePlanStatusInfo,
   DescribeLogSearchRequest,
   BuildAPIDocRequest,
+  DetachPluginResponse,
   ApiKeysStatus,
   APIDoc,
   DescribeServiceUsagePlanResponse,
@@ -454,14 +456,14 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
-API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     * 本接口（CreateUsagePlan）用于创建使用计划。
+用户在使用 API 网关时，需要创建使用计划并将其绑定到服务的环境中使用。
      */
-  async DescribeServiceSubDomainMappings(
-    req: DescribeServiceSubDomainMappingsRequest,
-    cb?: (error: string, rep: DescribeServiceSubDomainMappingsResponse) => void
-  ): Promise<DescribeServiceSubDomainMappingsResponse> {
-    return this.request("DescribeServiceSubDomainMappings", req, cb)
+  async CreateUsagePlan(
+    req: CreateUsagePlanRequest,
+    cb?: (error: string, rep: CreateUsagePlanResponse) => void
+  ): Promise<CreateUsagePlanResponse> {
+    return this.request("CreateUsagePlan", req, cb)
   }
 
   /**
@@ -852,6 +854,17 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
+     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
+API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     */
+  async DescribeServiceSubDomainMappings(
+    req: DescribeServiceSubDomainMappingsRequest,
+    cb?: (error: string, rep: DescribeServiceSubDomainMappingsResponse) => void
+  ): Promise<DescribeServiceSubDomainMappingsResponse> {
+    return this.request("DescribeServiceSubDomainMappings", req, cb)
+  }
+
+  /**
    * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
    */
   async DescribeExclusiveInstanceDetail(
@@ -1182,14 +1195,13 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
-     * 本接口（CreateUsagePlan）用于创建使用计划。
-用户在使用 API 网关时，需要创建使用计划并将其绑定到服务的环境中使用。
-     */
-  async CreateUsagePlan(
-    req: CreateUsagePlanRequest,
-    cb?: (error: string, rep: CreateUsagePlanResponse) => void
-  ): Promise<CreateUsagePlanResponse> {
-    return this.request("CreateUsagePlan", req, cb)
+   * Get the list of supported regions for dedicated instances
+   */
+  async DescribeExclusiveInstanceRegions(
+    req?: DescribeExclusiveInstanceRegionsRequest,
+    cb?: (error: string, rep: DescribeExclusiveInstanceRegionsResponse) => void
+  ): Promise<DescribeExclusiveInstanceRegionsResponse> {
+    return this.request("DescribeExclusiveInstanceRegions", req, cb)
   }
 
   /**

@@ -652,6 +652,11 @@ export interface DiskSpecInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize: number;
+    /**
+     * 额外性能
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraPerformance?: number;
 }
 /**
  * Hive查询详情
@@ -702,6 +707,16 @@ export interface HiveQuery {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
+}
+/**
+ * 资源调度-公平调度器的全局配置
+ */
+export interface FairGlobalConfig {
+    /**
+     * 对应与页面的<p>程序上限</p>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserMaxAppsDefault?: number;
 }
 /**
  * 执行步骤
@@ -1299,21 +1314,30 @@ export interface SLInstanceInfo {
     Tags?: Array<Tag>;
 }
 /**
- * ModifyUserManagerPwd请求参数结构体
+ * 资源调度的默认设置
  */
-export interface ModifyUserManagerPwdRequest {
+export interface DefaultSetting {
     /**
-     * 集群实例ID
+     * 名称，作为入参的key
      */
-    InstanceId: string;
+    Name?: string;
     /**
-     * 用户名
+     * 描述
      */
-    UserName: string;
+    Desc?: string;
     /**
-     * 密码
+     * 提示
      */
-    PassWord: string;
+    Prompt?: string;
+    /**
+     * key，用于展示，该配置对应与配置文件中的配置项
+     */
+    Key?: string;
+    /**
+     * Name对应的值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * COS 相关配置
@@ -2880,6 +2904,27 @@ export interface DescribeAutoScaleStrategiesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyGlobalConfig请求参数结构体
+ */
+export interface ModifyGlobalConfigRequest {
+    /**
+     * emr集群的英文id
+     */
+    InstanceId: string;
+    /**
+     * 修改的配置列表。其中Key的取值与`DescribeGlobalConfig`接口的出参一一对应，不区分大小写（如果报错找不到Key，以出参为准），分别为：
+  1. 开启或关闭资源调度：enableResourceSchedule；在关闭时会有一个同步的选项，Key为sync，取值为true或false。
+  2. 调度器类型：scheduler。
+  2. 开启或关闭标签：enableLabel，取值为true或false。
+  2. 标签目录：labelDir。
+  3. 是否覆盖用户指定队列：queueMappingOverride，取值为true、false。
+  4. 程序上限：userMaxAppsDefault。
+  5. 动态配置项：`DescribeGlobalConfig`接口返回的DefaultSettings中的Name字段。
+  Value的取值都是字符串，对于**是否覆盖用户指定队列**、**程序上限**，json规范中的null表示清空该配置的值。支持修改单个配置项的值。对于**动态配置项**则需要全量传递以进行覆盖。
+     */
+    Items: Array<Item>;
+}
+/**
  * 停止服务时的参数
  */
 export interface StopParams {
@@ -3317,29 +3362,35 @@ export interface Placement {
     ProjectId?: number;
 }
 /**
- * 获取CVM配额
+ * DescribeGlobalConfig返回参数结构体
  */
-export interface QuotaEntity {
+export interface DescribeGlobalConfigResponse {
     /**
-     * 已使用配额
+     * 是否开启了资源调度功能
+     */
+    EnableResourceSchedule?: boolean;
+    /**
+     * 当前生效的资源调度器
+     */
+    ActiveScheduler?: string;
+    /**
+     * 公平调度器的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsedQuota: number;
+    CapacityGlobalConfig?: CapacityGlobalConfig;
     /**
-     * 剩余配额
+     * 容量调度器的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemainingQuota: number;
+    FairGlobalConfig?: FairGlobalConfig;
     /**
-     * 总配额
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 最新的资源调度器
      */
-    TotalQuota: number;
+    Scheduler?: string;
     /**
-     * 可用区
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Zone: string;
+    RequestId?: string;
 }
 /**
  * ModifyYarnDeploy请求参数结构体
@@ -3712,17 +3763,23 @@ export interface DescribeYarnQueueRequest {
     Scheduler: string;
 }
 /**
- * DescribeImpalaQueries返回参数结构体
+ * DescribeInstanceRenewNodes返回参数结构体
  */
-export interface DescribeImpalaQueriesResponse {
+export interface DescribeInstanceRenewNodesResponse {
     /**
-     * 总数
+     * 查询到的节点总数
      */
-    Total?: number;
+    TotalCnt: number;
     /**
-     * 结果列表
+     * 节点详细信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results?: Array<ImpalaQuery>;
+    NodeList: Array<RenewInstancesInfo>;
+    /**
+     * 用户所有的标签键列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetaInfo: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4450,6 +4507,15 @@ export interface PriceResource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalDiskNum: number;
+}
+/**
+ * ModifyGlobalConfig返回参数结构体
+ */
+export interface ModifyGlobalConfigResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 时间扩缩容规则
@@ -5547,6 +5613,30 @@ export interface ScriptBootstrapActionConfig {
     Remark?: string;
 }
 /**
+ * 资源调度-容量调度器的全局设置
+ */
+export interface CapacityGlobalConfig {
+    /**
+     * 是否开启了标签调度
+     */
+    EnableLabel?: boolean;
+    /**
+     * 如果开启了标签调度，标签信息存放的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LabelDir?: string;
+    /**
+     * 是否覆盖用户指定队列，为true表示覆盖。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueueMappingOverride?: boolean;
+    /**
+     * 高级设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultSettings?: Array<DefaultSetting>;
+}
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -5833,6 +5923,31 @@ export interface RepeatStrategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Expire?: string;
+}
+/**
+ * 获取CVM配额
+ */
+export interface QuotaEntity {
+    /**
+     * 已使用配额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedQuota: number;
+    /**
+     * 剩余配额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemainingQuota: number;
+    /**
+     * 总配额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalQuota: number;
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone: string;
 }
 /**
  * 集群续费实例信息
@@ -6506,6 +6621,11 @@ export interface MultiDiskMC {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
+    /**
+     * 磁盘大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: string;
     /**
      * 云盘大小
   注意：此字段可能返回 null，表示取不到有效值。
@@ -7435,23 +7555,17 @@ export interface LoadMetricsCondition {
     Conditions?: Array<TriggerCondition>;
 }
 /**
- * DescribeInstanceRenewNodes返回参数结构体
+ * DescribeImpalaQueries返回参数结构体
  */
-export interface DescribeInstanceRenewNodesResponse {
+export interface DescribeImpalaQueriesResponse {
     /**
-     * 查询到的节点总数
+     * 总数
      */
-    TotalCnt: number;
+    Total?: number;
     /**
-     * 节点详细信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 结果列表
      */
-    NodeList: Array<RenewInstancesInfo>;
-    /**
-     * 用户所有的标签键列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MetaInfo: Array<string>;
+    Results?: Array<ImpalaQuery>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7610,6 +7724,23 @@ export interface ConfigModifyInfoV2 {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteLables?: Array<string>;
+}
+/**
+ * ModifyUserManagerPwd请求参数结构体
+ */
+export interface ModifyUserManagerPwdRequest {
+    /**
+     * 集群实例ID
+     */
+    InstanceId: string;
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 密码
+     */
+    PassWord: string;
 }
 /**
  * InquiryPriceScaleOutInstance返回参数结构体
@@ -8185,6 +8316,16 @@ export interface NodeHardwareInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
+    /**
+     * 共享集群id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SharedClusterId?: string;
+    /**
+     * 共享集群id描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SharedClusterIdDesc?: string;
 }
 /**
  * 操作的服务范围
@@ -8292,6 +8433,15 @@ export interface InstanceChargePrepaid {
   <li>false：否</li>
      */
     RenewFlag: boolean;
+}
+/**
+ * DescribeGlobalConfig请求参数结构体
+ */
+export interface DescribeGlobalConfigRequest {
+    /**
+     * emr集群的英文id
+     */
+    InstanceId: string;
 }
 /**
  * TerminateInstance返回参数结构体

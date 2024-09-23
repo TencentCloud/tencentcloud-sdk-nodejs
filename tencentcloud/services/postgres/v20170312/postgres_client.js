@@ -240,6 +240,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServerlessDBInstance", req, cb);
     }
     /**
+     * 此接口用于创建数据库，需指定数据库名及所有者。
+     */
+    async CreateDatabase(req, cb) {
+        return this.request("CreateDatabase", req, cb);
+    }
+    /**
      * 此接口用于创建数据账号，返回的Oid为账号唯一标识。与数据库系统表pg_roles中记录的oid一致。
      */
     async CreateAccount(req, cb) {
@@ -543,6 +549,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OpenDBExtranetAccess(req, cb) {
         return this.request("OpenDBExtranetAccess", req, cb);
+    }
+    /**
+     * 修改数据库所有者
+     */
+    async ModifyDatabaseOwner(req, cb) {
+        return this.request("ModifyDatabaseOwner", req, cb);
     }
     /**
      * 此接口用于删除数据库账号，需要同时输入Oid与UserName，避免误删。

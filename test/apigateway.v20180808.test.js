@@ -148,9 +148,9 @@ it("apigateway.v20180808.DescribeAPIDocs", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeServiceSubDomainMappings", async function () {
+it("apigateway.v20180808.CreateUsagePlan", async function () {
     try {
-       const data = await client.DescribeServiceSubDomainMappings({})
+       const data = await client.CreateUsagePlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,6 +538,16 @@ it("apigateway.v20180808.CreateApi", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeServiceSubDomainMappings", async function () {
+    try {
+       const data = await client.DescribeServiceSubDomainMappings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeExclusiveInstanceDetail", async function () {
     try {
        const data = await client.DescribeExclusiveInstanceDetail({})
@@ -858,9 +868,9 @@ it("apigateway.v20180808.DescribeServiceUsagePlan", async function () {
     }
 })
 
-it("apigateway.v20180808.CreateUsagePlan", async function () {
+it("apigateway.v20180808.DescribeExclusiveInstanceRegions", async function () {
     try {
-       const data = await client.CreateUsagePlan({})
+       const data = await client.DescribeExclusiveInstanceRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
