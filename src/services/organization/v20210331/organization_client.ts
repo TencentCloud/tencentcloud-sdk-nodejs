@@ -85,6 +85,7 @@ import {
   OrganizationServiceAssign,
   DeleteOrganizationResponse,
   DismantleRoleConfigurationRequest,
+  UpdateCustomPolicyForRoleConfigurationResponse,
   DescribeShareUnitMembersResponse,
   MemberMainInfo,
   CreateRoleAssignmentRequest,
@@ -115,6 +116,7 @@ import {
   ClearExternalSAMLIdentityProviderResponse,
   AddExternalSAMLIdPCertificateResponse,
   CreateOrganizationMemberResponse,
+  UpdateCustomPolicyForRoleConfigurationRequest,
   MoveOrganizationNodeMembersRequest,
   GetTaskStatusResponse,
   UserSyncProvisioning,
@@ -126,6 +128,7 @@ import {
   EnablePolicyTypeRequest,
   CreatePolicyResponse,
   EffectivePolicy,
+  Tag,
   AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
   DeletePolicyRequest,
@@ -136,6 +139,7 @@ import {
   GetZoneStatisticsRequest,
   NodeMainInfo,
   RemovePermissionPolicyFromRoleConfigurationRequest,
+  InviteOrganizationMemberRequest,
   QuitOrganizationRequest,
   ListTasksResponse,
   AddOrganizationNodeRequest,
@@ -231,6 +235,7 @@ import {
   OrgMember,
   OrgMemberAuthAccount,
   CreateOrganizationMemberRequest,
+  AuthRelationFile,
   CreatePolicyRequest,
   OrgMemberAuthIdentity,
   PolicyDetail,
@@ -264,6 +269,7 @@ import {
   GetZoneSAMLServiceProviderInfoRequest,
   ListRoleConfigurationsResponse,
   DescribeOrganizationNodesRequest,
+  InviteOrganizationMemberResponse,
   BindOrganizationMemberAuthAccountResponse,
   ListOrgServiceAssignMemberRequest,
   UpdateOrganizationIdentityResponse,
@@ -1304,6 +1310,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 邀请组织成员
+   */
+  async InviteOrganizationMember(
+    req: InviteOrganizationMemberRequest,
+    cb?: (error: string, rep: InviteOrganizationMemberResponse) => void
+  ): Promise<InviteOrganizationMemberResponse> {
+    return this.request("InviteOrganizationMember", req, cb)
+  }
+
+  /**
    * 添加共享单元资源
    */
   async AddShareUnitResources(
@@ -1461,6 +1477,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListOrganizationServiceResponse) => void
   ): Promise<ListOrganizationServiceResponse> {
     return this.request("ListOrganizationService", req, cb)
+  }
+
+  /**
+   * 为权限配置修改自定义策略
+   */
+  async UpdateCustomPolicyForRoleConfiguration(
+    req: UpdateCustomPolicyForRoleConfigurationRequest,
+    cb?: (error: string, rep: UpdateCustomPolicyForRoleConfigurationResponse) => void
+  ): Promise<UpdateCustomPolicyForRoleConfigurationResponse> {
+    return this.request("UpdateCustomPolicyForRoleConfiguration", req, cb)
   }
 
   /**

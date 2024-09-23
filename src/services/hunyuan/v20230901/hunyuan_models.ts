@@ -117,6 +117,7 @@ export interface ChatCompletionsRequest {
   EnableSpeedSearch?: boolean
   /**
    * 图文并茂开关。
+详细介绍请阅读 [图文并茂](https://cloud.tencent.com/document/product/1729/111178) 中的说明。
 说明：
 1. 该参数仅在功能增强（如搜索）开关开启（EnableEnhancement=true）时生效。
 2. hunyuan-lite 无图文并茂能力，该参数对 hunyuan-lite 版本不生效。

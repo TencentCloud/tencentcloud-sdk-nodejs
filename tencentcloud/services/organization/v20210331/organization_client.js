@@ -622,6 +622,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRoleConfigurations", req, cb);
     }
     /**
+     * 邀请组织成员
+     */
+    async InviteOrganizationMember(req, cb) {
+        return this.request("InviteOrganizationMember", req, cb);
+    }
+    /**
      * 添加共享单元资源
      */
     async AddShareUnitResources(req, cb) {
@@ -716,6 +722,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListOrganizationService(req, cb) {
         return this.request("ListOrganizationService", req, cb);
+    }
+    /**
+     * 为权限配置修改自定义策略
+     */
+    async UpdateCustomPolicyForRoleConfiguration(req, cb) {
+        return this.request("UpdateCustomPolicyForRoleConfiguration", req, cb);
     }
     /**
      * 删除组织成员访问授权

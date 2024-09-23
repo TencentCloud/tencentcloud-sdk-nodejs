@@ -1417,6 +1417,15 @@ export interface DismantleRoleConfigurationRequest {
     TargetUin: number;
 }
 /**
+ * UpdateCustomPolicyForRoleConfiguration返回参数结构体
+ */
+export interface UpdateCustomPolicyForRoleConfigurationResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeShareUnitMembers返回参数结构体
  */
 export interface DescribeShareUnitMembersResponse {
@@ -1602,15 +1611,15 @@ export interface AddPermissionPolicyToRoleConfigurationRequest {
      */
     RoleConfigurationId: string;
     /**
-     * 权限策略类型。取值：  System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。 前期只支持系统策略，自定义策略后期在支持
+     * 权限策略类型。取值：  System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。
      */
     RolePolicyType: string;
     /**
-     * 权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。
+     * 权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。如果要添加系统策略，建议使用RolePolicies参数。自定义策略时，数组长度最大为1。
      */
     RolePolicyNames?: Array<string>;
     /**
-     * 策略详情。
+     * 添加的系统策略详情。
      */
     RolePolicies?: Array<PolicyDetail>;
     /**
@@ -1936,6 +1945,27 @@ export interface CreateOrganizationMemberResponse {
     RequestId?: string;
 }
 /**
+ * UpdateCustomPolicyForRoleConfiguration请求参数结构体
+ */
+export interface UpdateCustomPolicyForRoleConfigurationRequest {
+    /**
+     * 空间 ID
+     */
+    ZoneId: string;
+    /**
+     * 权限配置 ID
+     */
+    RoleConfigurationId: string;
+    /**
+     * 权限策略名称，长度最大为 32 个字符。
+     */
+    CustomPolicyName: string;
+    /**
+     * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
+     */
+    NewCustomPolicyDocument?: string;
+}
+/**
  * MoveOrganizationNodeMembers请求参数结构体
  */
 export interface MoveOrganizationNodeMembersRequest {
@@ -2105,6 +2135,21 @@ export interface EffectivePolicy {
      * 有效策略更新时间。
      */
     LastUpdatedTimestamp: number;
+}
+/**
+ * 标签键值对
+ */
+export interface Tag {
+    /**
+     * 标签键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue: string;
 }
 /**
  * AddOrganizationMemberEmail请求参数结构体
@@ -2320,6 +2365,55 @@ export interface RemovePermissionPolicyFromRoleConfigurationRequest {
     RolePolicyId?: number;
 }
 /**
+ * InviteOrganizationMember请求参数结构体
+ */
+export interface InviteOrganizationMemberRequest {
+    /**
+     * 被邀请账号Uin。
+     */
+    MemberUin: number;
+    /**
+     * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+     */
+    Name: string;
+    /**
+     * 关系策略。取值：Financial
+     */
+    PolicyType: string;
+    /**
+     * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
+     */
+    PermissionIds: Array<number | bigint>;
+    /**
+     * 成员所属部门的节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
+     */
+    NodeId: number;
+    /**
+     * 备注。
+     */
+    Remark?: string;
+    /**
+     * 是否允许成员退出。允许：Allow，不允许：Denied。
+     */
+    IsAllowQuit?: string;
+    /**
+     * 代付者Uin。成员代付费时需要
+     */
+    PayUin?: string;
+    /**
+     * 互信实名主体名称。
+     */
+    RelationAuthName?: string;
+    /**
+     * 互信主体证明文件列表。
+     */
+    AuthFile?: Array<AuthRelationFile>;
+    /**
+     * 成员标签列表。最大10个
+     */
+    Tags?: Array<Tag>;
+}
+/**
  * QuitOrganization请求参数结构体
  */
 export interface QuitOrganizationRequest {
@@ -2373,6 +2467,10 @@ export interface AddOrganizationNodeRequest {
      * 备注。
      */
     Remark?: string;
+    /**
+     * 部门标签列表。最大10个
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * AddShareUnitMembers请求参数结构体
@@ -2619,32 +2717,37 @@ export interface OrgNode {
      * 组织节点ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeId: number;
+    NodeId?: number;
     /**
      * 名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 父节点ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ParentNodeId: number;
+    ParentNodeId?: number;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
+    /**
+     * 成员标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * 标签键值对
@@ -4105,87 +4208,92 @@ export interface OrgMember {
      * 成员Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberUin: number;
+    MemberUin?: number;
     /**
      * 成员名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 成员类型，邀请：Invite， 创建：Create
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberType: string;
+    MemberType?: string;
     /**
      * 关系策略类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgPolicyType: string;
+    OrgPolicyType?: string;
     /**
      * 关系策略名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgPolicyName: string;
+    OrgPolicyName?: string;
     /**
      * 关系策略权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgPermission: Array<OrgPermission>;
+    OrgPermission?: Array<OrgPermission>;
     /**
      * 所属节点ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeId: number;
+    NodeId?: number;
     /**
      * 所属节点名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 是否允许成员退出。允许：Allow，不允许：Denied。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsAllowQuit: string;
+    IsAllowQuit?: string;
     /**
      * 代付者Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayUin: string;
+    PayUin?: string;
     /**
      * 代付者名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayName: string;
+    PayName?: string;
     /**
      * 管理身份
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgIdentity: Array<MemberIdentity>;
+    OrgIdentity?: Array<MemberIdentity>;
     /**
      * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BindStatus: string;
+    BindStatus?: string;
     /**
      * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PermissionStatus: string;
+    PermissionStatus?: string;
+    /**
+     * 成员标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * 成员和子账号的授权关系
@@ -4281,6 +4389,25 @@ export interface CreateOrganizationMemberRequest {
      * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
      */
     AuthRelationId?: number;
+    /**
+     * 成员标签列表。最大10个
+     */
+    Tags?: Array<Tag>;
+}
+/**
+ * 野鹤实名互信申请证明文件
+ */
+export interface AuthRelationFile {
+    /**
+     * 文件名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * 文件路径。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url: string;
 }
 /**
  * CreatePolicy请求参数结构体
@@ -4908,6 +5035,10 @@ export interface DescribeOrganizationMembersRequest {
      * 可信服务产品简称。可信服务管理员查询时必须指定
      */
     Product?: string;
+    /**
+     * 成员标签搜索列表，最大10个
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * GetZoneSAMLServiceProviderInfo请求参数结构体
@@ -4959,6 +5090,19 @@ export interface DescribeOrganizationNodesRequest {
      * 偏移量。取值是limit的整数倍。默认值 : 0。
      */
     Offset: number;
+    /**
+     * 部门标签搜索列表，最大10个
+     */
+    Tags?: Array<Tag>;
+}
+/**
+ * InviteOrganizationMember返回参数结构体
+ */
+export interface InviteOrganizationMemberResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * BindOrganizationMemberAuthAccount返回参数结构体

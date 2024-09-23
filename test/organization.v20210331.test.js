@@ -1008,6 +1008,16 @@ it("organization.v20210331.ListRoleConfigurations", async function () {
     }
 })
 
+it("organization.v20210331.InviteOrganizationMember", async function () {
+    try {
+       const data = await client.InviteOrganizationMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.AddShareUnitResources", async function () {
     try {
        const data = await client.AddShareUnitResources({})
@@ -1161,6 +1171,16 @@ it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
 it("organization.v20210331.ListOrganizationService", async function () {
     try {
        const data = await client.ListOrganizationService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateCustomPolicyForRoleConfiguration", async function () {
+    try {
+       const data = await client.UpdateCustomPolicyForRoleConfiguration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
