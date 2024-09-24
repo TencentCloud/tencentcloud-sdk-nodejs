@@ -108,6 +108,16 @@ it("postgres.v20170312.ModifyDBInstanceName", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeDedicatedClusters", async function () {
+    try {
+       const data = await client.DescribeDedicatedClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DeleteParameterTemplate", async function () {
     try {
        const data = await client.DeleteParameterTemplate({})

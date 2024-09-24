@@ -1189,13 +1189,13 @@ export interface ImportNameListDataRequest {
  */
 export interface DataAuthorizationInfo {
     /**
-     * 客户主体名称。
+     * 数据委托方、需求方：客户主体名称。
   
   示例值：某某有限公司。
      */
     DataProviderName: string;
     /**
-     * 接收方主体名称。
+     * 数据受托方、提供方：腾讯云主体名称。
   
   固定填：腾讯云计算（北京）有限责任公司
   
@@ -1203,7 +1203,7 @@ export interface DataAuthorizationInfo {
      */
     DataRecipientName: string;
     /**
-     * 客户请求RCE所涉及的用户敏感数据类型，支持多选。实际以接口请求传参为准。
+     * 客户请求RCE所提供的用户数据类型，支持多选。实际以接口请求传参为准。
   
   1-手机号；
   
@@ -1213,29 +1213,23 @@ export interface DataAuthorizationInfo {
   
   4-IP地址；
   
-  5-设备指纹；
-  
   999-其它；
   
   示例值：[1, 4]
      */
     UserDataType: Array<number | bigint>;
     /**
-     * 客户是否已经获取用户授权。
-  
+     * 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意客户委托腾讯云处理入参信息
   1-已授权；其它值为未授权。
-  
   示例值：1
      */
     IsAuthorize: number;
     /**
-     * 是否是用户个人敏感数据。
-  
-  固定填：1。
-  
+     * 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意腾讯云结合客户提供的信息，对已合法收集的用户数据进行必要处理得出服务结果，并返回给客户。
+  1-已授权；其它值为未授权。
   示例值：1
      */
-    IsPersonalData: number;
+    IsOrderHandling?: number;
     /**
      * 客户获得的用户授权期限时间戳（单位秒）。
   
@@ -1245,11 +1239,20 @@ export interface DataAuthorizationInfo {
      */
     AuthorizationTerm?: number;
     /**
-     * 客户获得用户授权所依赖的协议地址。
+     *
+  客户获得用户授权所依赖的协议地址。
   
-  示例值：https://www.*****.com/*****
+  示例值：https://www.*****.com/*
      */
     PrivacyPolicyLink?: string;
+    /**
+     * 是否是用户个人敏感数据。
+  
+  固定填：1。
+  
+  示例值：1
+     */
+    IsPersonalData?: number;
 }
 /**
  * DeleteNameList返回参数结构体

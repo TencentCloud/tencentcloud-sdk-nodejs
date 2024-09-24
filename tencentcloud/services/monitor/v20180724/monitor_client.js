@@ -146,12 +146,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusClusterAgents", req, cb);
     }
     /**
-     * 接口功能是检查是否为prometheus新用户，已有其他功能更加全面的接口替代
-
-判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
+     * 列出 Prometheus 服务可用区。
      */
-    async CheckIsPrometheusNewUser(req, cb) {
-        return this.request("CheckIsPrometheusNewUser", req, cb);
+    async DescribePrometheusZones(req, cb) {
+        return this.request("DescribePrometheusZones", req, cb);
     }
     /**
      * 列出 Grafana 环境变量
@@ -322,12 +320,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetPrometheusAgentManagementCommand(req, cb) {
         return this.request("GetPrometheusAgentManagementCommand", req, cb);
-    }
-    /**
-     * 更新 exporter 集成配置
-     */
-    async UpdateExporterIntegration(req, cb) {
-        return this.request("UpdateExporterIntegration", req, cb);
     }
     /**
      * 更新 Prometheus Agent 抓取任务
@@ -714,12 +706,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTempSync", req, cb);
     }
     /**
-     * 列出 Prometheus 服务可用区。
-     */
-    async DescribePrometheusZones(req, cb) {
-        return this.request("DescribePrometheusZones", req, cb);
-    }
-    /**
      * 查询告警指标列表
      */
     async DescribeAlarmMetrics(req, cb) {
@@ -887,12 +873,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyGroupInfo", req, cb);
     }
     /**
-     * DescribePrometheusRecordRules 接口可完全代替该接口。近30天仅有3次调用，且都是报错请求
-
-拉取Prometheus聚合规则yaml列表
+     * 更新 exporter 集成配置
      */
-    async DescribePrometheusRecordRuleYaml(req, cb) {
-        return this.request("DescribePrometheusRecordRuleYaml", req, cb);
+    async UpdateExporterIntegration(req, cb) {
+        return this.request("UpdateExporterIntegration", req, cb);
     }
     /**
      * 查询所有名字空间

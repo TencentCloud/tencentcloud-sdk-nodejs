@@ -152,7 +152,6 @@ import {
   CreatePrometheusScrapeJobResponse,
   CreateAlarmPolicyRequest,
   PrometheusZoneItem,
-  PrometheusAlertCustomReceiver,
   DescribeAlarmSmsQuotaQuota,
   ModifyPrometheusAlertPolicyRequest,
   ModifyPrometheusInstanceAttributesResponse,
@@ -203,7 +202,6 @@ import {
   CreatePrometheusAgentResponse,
   DescribePrometheusAlertPolicyRequest,
   DescribeAlarmMetricsResponse,
-  DescribePrometheusRecordRuleYamlRequest,
   DescribeGrafanaWhiteListRequest,
   DescribePrometheusConfigRequest,
   CreateGrafanaInstanceResponse,
@@ -287,7 +285,7 @@ import {
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
-  DescribePrometheusRecordRuleYamlResponse,
+  PrometheusInstanceGrantInfo,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   UpdateGrafanaIntegrationResponse,
@@ -306,7 +304,6 @@ import {
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
-  PrometheusInstanceGrantInfo,
   DeletePolicyGroupRequest,
   EnableSSOCamCheckRequest,
   DeleteGrafanaIntegrationResponse,
@@ -349,7 +346,7 @@ import {
   DescribeAlarmNoticesRequest,
   RunPrometheusInstanceResponse,
   UpdateExporterIntegrationRequest,
-  CheckIsPrometheusNewUserRequest,
+  PrometheusAlertCustomReceiver,
   DescribeAlarmNoticeResponse,
   DeleteAlertRulesRequest,
   SyncPrometheusTempRequest,
@@ -371,7 +368,6 @@ import {
   UpdateGrafanaWhiteListRequest,
   UpdatePrometheusAgentStatusRequest,
   DescribeGrafanaInstancesResponse,
-  CheckIsPrometheusNewUserResponse,
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
   ModifyPrometheusRecordRuleYamlRequest,
@@ -670,15 +666,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口功能是检查是否为prometheus新用户，已有其他功能更加全面的接口替代
-
-判断用户是否为云原生监控新用户，即在任何地域下均未创建过监控实例的用户
-     */
-  async CheckIsPrometheusNewUser(
-    req?: CheckIsPrometheusNewUserRequest,
-    cb?: (error: string, rep: CheckIsPrometheusNewUserResponse) => void
-  ): Promise<CheckIsPrometheusNewUserResponse> {
-    return this.request("CheckIsPrometheusNewUser", req, cb)
+   * 列出 Prometheus 服务可用区。
+   */
+  async DescribePrometheusZones(
+    req: DescribePrometheusZonesRequest,
+    cb?: (error: string, rep: DescribePrometheusZonesResponse) => void
+  ): Promise<DescribePrometheusZonesResponse> {
+    return this.request("DescribePrometheusZones", req, cb)
   }
 
   /**
@@ -961,16 +955,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetPrometheusAgentManagementCommandResponse) => void
   ): Promise<GetPrometheusAgentManagementCommandResponse> {
     return this.request("GetPrometheusAgentManagementCommand", req, cb)
-  }
-
-  /**
-   * 更新 exporter 集成配置
-   */
-  async UpdateExporterIntegration(
-    req: UpdateExporterIntegrationRequest,
-    cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void
-  ): Promise<UpdateExporterIntegrationResponse> {
-    return this.request("UpdateExporterIntegration", req, cb)
   }
 
   /**
@@ -1606,16 +1590,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Prometheus 服务可用区。
-   */
-  async DescribePrometheusZones(
-    req: DescribePrometheusZonesRequest,
-    cb?: (error: string, rep: DescribePrometheusZonesResponse) => void
-  ): Promise<DescribePrometheusZonesResponse> {
-    return this.request("DescribePrometheusZones", req, cb)
-  }
-
-  /**
    * 查询告警指标列表
    */
   async DescribeAlarmMetrics(
@@ -1887,15 +1861,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DescribePrometheusRecordRules 接口可完全代替该接口。近30天仅有3次调用，且都是报错请求
-
-拉取Prometheus聚合规则yaml列表
-     */
-  async DescribePrometheusRecordRuleYaml(
-    req: DescribePrometheusRecordRuleYamlRequest,
-    cb?: (error: string, rep: DescribePrometheusRecordRuleYamlResponse) => void
-  ): Promise<DescribePrometheusRecordRuleYamlResponse> {
-    return this.request("DescribePrometheusRecordRuleYaml", req, cb)
+   * 更新 exporter 集成配置
+   */
+  async UpdateExporterIntegration(
+    req: UpdateExporterIntegrationRequest,
+    cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void
+  ): Promise<UpdateExporterIntegrationResponse> {
+    return this.request("UpdateExporterIntegration", req, cb)
   }
 
   /**

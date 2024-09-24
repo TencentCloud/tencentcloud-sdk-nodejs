@@ -3328,39 +3328,6 @@ export interface PrometheusZoneItem {
 }
 
 /**
- * Prometheus告警自定义通知模板
- */
-export interface PrometheusAlertCustomReceiver {
-  /**
-   * 自定义通知类型
-alertmanager -- vpc内自建alertmanager
-webhook -- vpc内webhook地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * alertmanager/webhook地址。（prometheus实例同vpc内ip）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * 允许发送告警的时间范围
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AllowedTimeRanges?: Array<PrometheusAlertAllowTimeRange>
-  /**
-   * alertmanager所在的内网集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterId?: string
-  /**
-   * alertmanager所在的内网集群类型(tke/eks/tdcc)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterType?: string
-}
-
-/**
  * DescribeAlarmSmsQuota接口的配额信息
  */
 export interface DescribeAlarmSmsQuotaQuota {
@@ -4470,30 +4437,6 @@ export interface DescribeAlarmMetricsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribePrometheusRecordRuleYaml请求参数结构体
- */
-export interface DescribePrometheusRecordRuleYamlRequest {
-  /**
-   * 实例id
-   */
-  InstanceId: string
-  /**
-   * 分页
-   */
-  Offset?: number
-  /**
-   * 分页
-   */
-  Limit?: number
-  /**
-   * 过滤，当前支持
-Name = Name
-Values = 目标名称列表
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -6437,13 +6380,33 @@ export interface MetricSet {
 }
 
 /**
- * DescribePrometheusRecordRuleYaml返回参数结构体
+ * 实例的授权信息
  */
-export interface DescribePrometheusRecordRuleYamlResponse {
+export interface PrometheusInstanceGrantInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否有计费操作权限(1=有，2=无)
    */
-  RequestId?: string
+  HasChargeOperation: number
+  /**
+   * 是否显示VPC信息的权限(1=有，2=无)
+   */
+  HasVpcDisplay: number
+  /**
+   * 是否可修改Grafana的状态(1=有，2=无)
+   */
+  HasGrafanaStatusChange: number
+  /**
+   * 是否有管理agent的权限(1=有，2=无)
+   */
+  HasAgentManage: number
+  /**
+   * 是否有管理TKE集成的权限(1=有，2=无)
+   */
+  HasTkeManage: number
+  /**
+   * 是否显示API等信息(1=有, 2=无)
+   */
+  HasApiOperation: number
 }
 
 /**
@@ -6953,36 +6916,6 @@ export interface DescribeAlarmHistoriesRequest {
    * 收敛历史的唯一id
    */
   ConvergenceHistoryIDs?: Array<string>
-}
-
-/**
- * 实例的授权信息
- */
-export interface PrometheusInstanceGrantInfo {
-  /**
-   * 是否有计费操作权限(1=有，2=无)
-   */
-  HasChargeOperation: number
-  /**
-   * 是否显示VPC信息的权限(1=有，2=无)
-   */
-  HasVpcDisplay: number
-  /**
-   * 是否可修改Grafana的状态(1=有，2=无)
-   */
-  HasGrafanaStatusChange: number
-  /**
-   * 是否有管理agent的权限(1=有，2=无)
-   */
-  HasAgentManage: number
-  /**
-   * 是否有管理TKE集成的权限(1=有，2=无)
-   */
-  HasTkeManage: number
-  /**
-   * 是否显示API等信息(1=有, 2=无)
-   */
-  HasApiOperation: number
 }
 
 /**
@@ -8273,9 +8206,37 @@ export interface UpdateExporterIntegrationRequest {
 }
 
 /**
- * CheckIsPrometheusNewUser请求参数结构体
+ * Prometheus告警自定义通知模板
  */
-export type CheckIsPrometheusNewUserRequest = null
+export interface PrometheusAlertCustomReceiver {
+  /**
+   * 自定义通知类型
+alertmanager -- vpc内自建alertmanager
+webhook -- vpc内webhook地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * alertmanager/webhook地址。（prometheus实例同vpc内ip）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 允许发送告警的时间范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowedTimeRanges?: Array<PrometheusAlertAllowTimeRange>
+  /**
+   * alertmanager所在的内网集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * alertmanager所在的内网集群类型(tke/eks/tdcc)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType?: string
+}
 
 /**
  * DescribeAlarmNotice返回参数结构体
@@ -8776,16 +8737,6 @@ export interface DescribeGrafanaInstancesResponse {
    * 实例列表
    */
   Instances?: Array<GrafanaInstanceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CheckIsPrometheusNewUser返回参数结构体
- */
-export interface CheckIsPrometheusNewUserResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

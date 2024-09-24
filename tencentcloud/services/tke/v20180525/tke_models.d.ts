@@ -1266,25 +1266,25 @@ export interface DescribeClusterReleaseDetailsResponse {
     RequestId?: string;
 }
 /**
- * 自动扩所容的节点
+ * 自动扩缩容的节点
  */
 export interface AutoscalingAdded {
     /**
      * 正在加入中的节点数量
      */
-    Joining: number;
+    Joining?: number;
     /**
      * 初始化中的节点数量
      */
-    Initializing: number;
+    Initializing?: number;
     /**
      * 正常的节点数量
      */
-    Normal: number;
+    Normal?: number;
     /**
      * 节点总数
      */
-    Total: number;
+    Total?: number;
 }
 /**
  * SyncPrometheusTemp返回参数结构体

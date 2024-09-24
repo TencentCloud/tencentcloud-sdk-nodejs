@@ -58,9 +58,9 @@ it("tsf.v20180326.DescribeMicroservices", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeApplicationBusinessLogConfig", async function () {
+it("tsf.v20180326.ModifyContainerReplicas", async function () {
     try {
-       const data = await client.DescribeApplicationBusinessLogConfig({})
+       const data = await client.ModifyContainerReplicas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2031,16 +2031,6 @@ it("tsf.v20180326.DescribeEnabledUnitRule", async function () {
 it("tsf.v20180326.CreateProgram", async function () {
     try {
        const data = await client.CreateProgram({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tsf.v20180326.ModifyContainerReplicas", async function () {
-    try {
-       const data = await client.ModifyContainerReplicas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -5804,6 +5804,16 @@ export interface RuleFilter {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Values?: Array<string>;
+    /**
+     * 操作符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Operator?: string;
+    /**
+     * header或query对应的name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体

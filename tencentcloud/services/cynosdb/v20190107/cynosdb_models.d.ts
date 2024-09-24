@@ -2250,23 +2250,6 @@ export interface RollBackClusterResponse {
     RequestId?: string;
 }
 /**
- * DescribeRollbackTimeValidity请求参数结构体
- */
-export interface DescribeRollbackTimeValidityRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * 期望回滚的时间点
-     */
-    ExpectTime: string;
-    /**
-     * 回滚时间点的允许误差范围
-     */
-    ExpectTimeThresh: number;
-}
-/**
  * DescribeClusterInstanceGrps返回参数结构体
  */
 export interface DescribeClusterInstanceGrpsResponse {
@@ -3940,31 +3923,6 @@ export interface OpenWanRequest {
  * ModifyAccountPrivileges返回参数结构体
  */
 export interface ModifyAccountPrivilegesResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeRollbackTimeValidity返回参数结构体
- */
-export interface DescribeRollbackTimeValidityResponse {
-    /**
-     * 存储poolID
-     */
-    PoolId?: number;
-    /**
-     * 回滚任务ID，后续按该时间点回滚时，需要传入
-     */
-    QueryId?: number;
-    /**
-     * 时间点是否有效：pass，检测通过；fail，检测失败
-     */
-    Status?: string;
-    /**
-     * 建议时间点，在Status为fail时，该值才有效
-     */
-    SuggestTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

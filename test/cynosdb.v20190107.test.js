@@ -1438,16 +1438,6 @@ it("cynosdb.v20190107.DescribeClusterInstanceGroups", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeRollbackTimeValidity", async function () {
-    try {
-       const data = await client.DescribeRollbackTimeValidity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cynosdb.v20190107.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})

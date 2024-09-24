@@ -4252,6 +4252,10 @@ export interface DescribeAssetSummaryResponse {
      */
     ScannedImageCnt?: number;
     /**
+     * 待扫描镜像个数
+     */
+    UnScannedImageCnt?: number;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -5820,6 +5824,10 @@ export declare type DescribeContainerSecEventSummaryRequest = null;
  */
 export interface DescribeAssetImageRegistrySummaryResponse {
     /**
+     * 待扫描镜像个数
+     */
+    UnScannedImageCnt?: number;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -5889,6 +5897,14 @@ export interface DescribeImageAuthorizedInfoResponse {
      * 是否可免费领取镜像授权数
      */
     CanApplyFreeImageAuthorize?: boolean;
+    /**
+     * 镜像扫描计费信息
+     */
+    ImageScanInquireInfo?: ImageScanInquireInfo;
+    /**
+     * 重复镜像数(本地镜像和仓库镜像)
+     */
+    RepeatImageIdCnt?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6324,6 +6340,15 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExcludeImageAssetIds?: Array<number | bigint>;
+    /**
+     * 最近扫描时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastScanTime?: string;
+    /**
+     * 扫描结果(Success|InsufficientLicense|ImageNeedIsEmpty|InternalError)
+     */
+    ScanResult?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15234,7 +15259,19 @@ export interface DescribeAssetImageScanTaskResponse {
     /**
      * 任务id
      */
-    TaskID: string;
+    TaskID?: string;
+    /**
+     * 最近扫描时间
+     */
+    LastScanTime?: string;
+    /**
+     * 扫描状态(READY:准备 SCANNING:扫描中 END:完成)
+     */
+    Status?: string;
+    /**
+     * 扫描子状态(Success:成功 Timeout:超时 Cancel:取消 Error:错误)
+     */
+    SubStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16037,12 +16074,16 @@ export interface DescribeAssetImageRegistryAssetStatusResponse {
     /**
      * 更新进度状态,doing更新中，success更新成功，failed失败
      */
-    Status: string;
+    Status?: string;
     /**
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Err: string;
+    Err?: string;
+    /**
+     * 最后一次同步成功时间
+     */
+    LatestSyncSuccessTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18010,6 +18051,16 @@ export interface DescribeAssetImageScanSettingResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExcludeImages?: Array<string>;
+    /**
+     * 最后一次扫描时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastScanTime?: string;
+    /**
+     * 扫描结果(Success|InsufficientLicense|ImageNeedIsEmpty|InternalError)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScanResult?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20608,6 +20659,42 @@ export interface DescribeABTestConfigResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 镜像扫描计费信息
+ */
+export interface ImageScanInquireInfo {
+    /**
+     * 计费项
+     */
+    InquireKey?: string;
+    /**
+     * 容量
+     */
+    Capcity?: number;
+    /**
+     * 已使用量
+     */
+    Useage?: number;
+    /**
+     * 起始时间
+     */
+    StartTime?: string;
+    /**
+     * 截止时间
+     */
+    EndTime?: string;
+    /**
+     * 计费状态
+  (Pending:待购)
+  (Normal:正常)
+  (Isolate:隔离)
+     */
+    PurchaseStatus?: string;
+    /**
+     * 资源ID
+     */
+    ResourceID?: string;
 }
 /**
  * 快速搜索模板

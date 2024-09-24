@@ -53,6 +53,7 @@ import {
   CreateAccountRequest,
   InitDBInstancesResponse,
   DescribeDefaultParametersRequest,
+  DescribeDedicatedClustersResponse,
   RenewInstanceRequest,
   DescribeBackupOverviewRequest,
   DescribeRegionsResponse,
@@ -108,6 +109,7 @@ import {
   NetworkAccess,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
+  RawSlowQuery,
   DescribeDatabaseObjectsRequest,
   DescribeParameterTemplatesResponse,
   ParamSpecRelation,
@@ -138,6 +140,7 @@ import {
   CreateReadOnlyGroupRequest,
   DescribeParamsEventResponse,
   ModifyDBInstanceSecurityGroupsRequest,
+  DescribeDedicatedClustersRequest,
   CloseServerlessDBExtranetAccessResponse,
   EventItem,
   RestartDBInstanceRequest,
@@ -237,7 +240,7 @@ import {
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceParametersRequest,
-  RawSlowQuery,
+  DedicatedCluster,
   ServerlessDBAccount,
   DescribeDBSlowlogsResponse,
   DescribeAccountPrivilegesRequest,
@@ -365,6 +368,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void
   ): Promise<ModifyDBInstanceNameResponse> {
     return this.request("ModifyDBInstanceName", req, cb)
+  }
+
+  /**
+   * 查询专属集群
+   */
+  async DescribeDedicatedClusters(
+    req: DescribeDedicatedClustersRequest,
+    cb?: (error: string, rep: DescribeDedicatedClustersResponse) => void
+  ): Promise<DescribeDedicatedClustersResponse> {
+    return this.request("DescribeDedicatedClusters", req, cb)
   }
 
   /**

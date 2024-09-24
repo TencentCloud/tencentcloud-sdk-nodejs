@@ -902,6 +902,19 @@ export interface DescribeDefaultParametersRequest {
     DBEngine: string;
 }
 /**
+ * DescribeDedicatedClusters返回参数结构体
+ */
+export interface DescribeDedicatedClustersResponse {
+    /**
+     * 专属集群信息
+     */
+    DedicatedClusterSet?: Array<DedicatedCluster>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * RenewInstance请求参数结构体
  */
 export interface RenewInstanceRequest {
@@ -2168,6 +2181,35 @@ export interface RemoveDBInstanceFromReadOnlyGroupResponse {
     RequestId?: string;
 }
 /**
+ * 慢SQL查询接口返回 慢SQL列表详情
+ */
+export interface RawSlowQuery {
+    /**
+     * 慢SQL 语句
+     */
+    RawQuery: string;
+    /**
+     * 慢SQL 查询的数据库
+     */
+    DatabaseName: string;
+    /**
+     * 慢SQL执行 耗时
+     */
+    Duration: number;
+    /**
+     * 执行慢SQL的客户端
+     */
+    ClientAddr: string;
+    /**
+     * 执行慢SQL的用户名
+     */
+    UserName: string;
+    /**
+     * 慢SQL执行的开始时间
+     */
+    SessionStartTime: string;
+}
+/**
  * DescribeDatabaseObjects请求参数结构体
  */
 export interface DescribeDatabaseObjectsRequest {
@@ -3092,6 +3134,16 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
      * 只读组ID，DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId
      */
     ReadOnlyGroupId?: string;
+}
+/**
+ * DescribeDedicatedClusters请求参数结构体
+ */
+export interface DescribeDedicatedClustersRequest {
+    /**
+     * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+  dedicated-cluster-id: 按照专属集群ID筛选，类型为string
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * CloseServerlessDBExtranetAccess返回参数结构体
@@ -4179,6 +4231,11 @@ export interface DBNode {
      * 节点所在可用区，例如 ap-guangzhou-1。
      */
     Zone: string;
+    /**
+     * 专属集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DedicatedClusterId?: string;
 }
 /**
  * ModifyDBInstanceName返回参数结构体
@@ -4390,6 +4447,10 @@ export interface CreateReadOnlyDBInstanceRequest {
      * 【废弃】不再需要指定，内核版本号与主实例保持一致
      */
     DBVersion?: string;
+    /**
+     * 专属集群ID
+     */
+    DedicatedClusterId?: string;
 }
 /**
  * DescribeCloneDBInstanceSpec返回参数结构体
@@ -5198,33 +5259,64 @@ export interface ModifyDBInstanceParametersRequest {
     ParamList: Array<ParamEntry>;
 }
 /**
- * 慢SQL查询接口返回 慢SQL列表详情
+ * 专属集群相关信息，用于查询用户的专属集群列表
  */
-export interface RawSlowQuery {
+export interface DedicatedCluster {
     /**
-     * 慢SQL 语句
+     * 专属集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RawQuery: string;
+    DedicatedClusterId?: string;
     /**
-     * 慢SQL 查询的数据库
+     * 专属集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatabaseName: string;
+    Name?: string;
     /**
-     * 慢SQL执行 耗时
+     * 专属集群所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Duration: number;
+    Zone?: string;
     /**
-     * 执行慢SQL的客户端
+     * 灾备集群
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientAddr: string;
+    StandbyDedicatedClusterSet?: Array<string>;
     /**
-     * 执行慢SQL的用户名
+     * 实例数量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserName: string;
+    InstanceCount?: number;
     /**
-     * 慢SQL执行的开始时间
+     * Cpu总量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionStartTime: string;
+    CpuTotal?: number;
+    /**
+     * Cpu可用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CpuAvailable?: number;
+    /**
+     * 内存总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemTotal?: number;
+    /**
+     * 内存可用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemAvailable?: number;
+    /**
+     * 磁盘总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskTotal?: number;
+    /**
+     * 磁盘可用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskAvailable?: number;
 }
 /**
  * serverless账号描述

@@ -96,6 +96,7 @@ import {
   PSTNSessionInfo,
   Message,
   AbortPredictiveDialingCampaignResponse,
+  CreateAICallRequest,
   DescribeNumbersRequest,
   ExtensionInfo,
   BindNumberCallOutSkillGroupRequest,
@@ -140,6 +141,7 @@ import {
   UploadIvrAudioFailedInfo,
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
+  CreateAICallResponse,
   DescribeCompanyListRequest,
   CreateIVRSessionResponse,
   IMSatisfaction,
@@ -215,13 +217,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取坐席信息列表
+   * 创建ai外呼会话(仅支持高级版座席)
    */
-  async DescribeStaffInfoList(
-    req: DescribeStaffInfoListRequest,
-    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
-  ): Promise<DescribeStaffInfoListResponse> {
-    return this.request("DescribeStaffInfoList", req, cb)
+  async CreateAICall(
+    req: CreateAICallRequest,
+    cb?: (error: string, rep: CreateAICallResponse) => void
+  ): Promise<CreateAICallResponse> {
+    return this.request("CreateAICall", req, cb)
   }
 
   /**
@@ -554,6 +556,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyStaffPasswordResponse) => void
   ): Promise<ModifyStaffPasswordResponse> {
     return this.request("ModifyStaffPassword", req, cb)
+  }
+
+  /**
+   * 获取坐席信息列表
+   */
+  async DescribeStaffInfoList(
+    req: DescribeStaffInfoListRequest,
+    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
+  ): Promise<DescribeStaffInfoListResponse> {
+    return this.request("DescribeStaffInfoList", req, cb)
   }
 
   /**

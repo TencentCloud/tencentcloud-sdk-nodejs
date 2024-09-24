@@ -2880,20 +2880,6 @@ export interface DescribePublicConfigRequest {
     ConfigId: string;
 }
 /**
- * AddClusterInstances返回参数结构体
- */
-export interface AddClusterInstancesResponse {
-    /**
-     * 添加云主机的返回列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Result: AddInstanceResult;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 镜像仓库
  */
 export interface ImageRepository {
@@ -4850,15 +4836,6 @@ export interface Namespace {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KubeInjectEnable?: boolean;
-}
-/**
- * DescribeApplicationBusinessLogConfig返回参数结构体
- */
-export interface DescribeApplicationBusinessLogConfigResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeGroup返回参数结构体
@@ -10634,13 +10611,18 @@ export interface DescribeMicroservicesRequest {
     ConfigCenterInstanceId?: string;
 }
 /**
- * DescribeApplicationBusinessLogConfig请求参数结构体
+ * AddClusterInstances返回参数结构体
  */
-export interface DescribeApplicationBusinessLogConfigRequest {
+export interface AddClusterInstancesResponse {
     /**
-     * TSF应用ID
+     * 添加云主机的返回列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    Result: AddInstanceResult;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeInvocationMetricDataCurve请求参数结构体

@@ -16068,6 +16068,11 @@ export interface TaskOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtResourceFlag?: ExtResourceFlagDto;
+    /**
+     * 父任务simple信息(新)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewParentTaskInfos?: Array<AiopsSimpleTaskDto>;
 }
 /**
  * DescribeOfflineTaskToken请求参数结构体

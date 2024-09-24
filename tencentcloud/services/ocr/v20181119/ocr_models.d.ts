@@ -3212,7 +3212,7 @@ export interface ClassifyDetectOCRResponse {
     /**
      * 智能卡证分类结果。当图片类型不支持分类识别或者识别出的类型不在请求参数DiscernType指定的范围内时，返回结果中的Type字段将为空字符串，Name字段将返回"其它"
      */
-    ClassifyDetectInfos: Array<ClassifyDetectInfo>;
+    ClassifyDetectInfos?: Array<ClassifyDetectInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3470,6 +3470,8 @@ export interface ClassifyDetectOCRRequest {
   HmtResidentPermitBack: 港澳台居住证背面
   EstateCert: 不动产证
   BizLicense: 营业执照
+  ForeignPermanentResidentFront: 外国人永居证正面识别
+  ForeignPermanentResidentBack: 外国人永居证背面识别
      */
     DiscernType?: Array<string>;
 }

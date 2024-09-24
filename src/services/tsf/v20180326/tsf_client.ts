@@ -148,7 +148,6 @@ import {
   TaskLastExecuteStatus,
   DescribeProgramsRequest,
   DescribePublicConfigRequest,
-  AddClusterInstancesResponse,
   ImageRepository,
   DescribeOverviewInvocationResponse,
   CreatePublicConfigResponse,
@@ -231,7 +230,6 @@ import {
   DescribeContainerEventsRequest,
   DisableUnitRuleRequest,
   Namespace,
-  DescribeApplicationBusinessLogConfigResponse,
   DescribeGroupResponse,
   Env,
   ModifyClusterRequest,
@@ -461,7 +459,7 @@ import {
   DescribeInvocationMetricScatterPlotRequest,
   CreateTaskFlowResponse,
   DescribeMicroservicesRequest,
-  DescribeApplicationBusinessLogConfigRequest,
+  AddClusterInstancesResponse,
   DescribeInvocationMetricDataCurveRequest,
   VmGroupOther,
   DescribeTaskLastStatusResponse,
@@ -697,15 +695,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口未使用，废弃录用
-
-查询应用关联日志配置项信息
-     */
-  async DescribeApplicationBusinessLogConfig(
-    req: DescribeApplicationBusinessLogConfigRequest,
-    cb?: (error: string, rep: DescribeApplicationBusinessLogConfigResponse) => void
-  ): Promise<DescribeApplicationBusinessLogConfigResponse> {
-    return this.request("DescribeApplicationBusinessLogConfig", req, cb)
+   * 修改容器部署组实例数
+   */
+  async ModifyContainerReplicas(
+    req: ModifyContainerReplicasRequest,
+    cb?: (error: string, rep: ModifyContainerReplicasResponse) => void
+  ): Promise<ModifyContainerReplicasResponse> {
+    return this.request("ModifyContainerReplicas", req, cb)
   }
 
   /**
@@ -2679,16 +2675,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreateProgramResponse) => void
   ): Promise<CreateProgramResponse> {
     return this.request("CreateProgram", req, cb)
-  }
-
-  /**
-   * 修改容器部署组实例数
-   */
-  async ModifyContainerReplicas(
-    req: ModifyContainerReplicasRequest,
-    cb?: (error: string, rep: ModifyContainerReplicasResponse) => void
-  ): Promise<ModifyContainerReplicasResponse> {
-    return this.request("ModifyContainerReplicas", req, cb)
   }
 
   /**

@@ -94,7 +94,6 @@ import {
   DescribeResourcePackageSaleSpecRequest,
   UnbindClusterResourcePackagesResponse,
   RollBackClusterResponse,
-  DescribeRollbackTimeValidityRequest,
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
@@ -174,7 +173,6 @@ import {
   NetAddr,
   OpenWanRequest,
   ModifyAccountPrivilegesResponse,
-  DescribeRollbackTimeValidityResponse,
   InquirePriceCreateRequest,
   ModifyAuditServiceRequest,
   ModifyClusterNameResponse,
@@ -1853,18 +1851,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterInstanceGroupsResponse) => void
   ): Promise<DescribeClusterInstanceGroupsResponse> {
     return this.request("DescribeClusterInstanceGroups", req, cb)
-  }
-
-  /**
-     * 历史废弃接口，从云API下线
-
-指定时间和集群查询是否可回滚
-     */
-  async DescribeRollbackTimeValidity(
-    req: DescribeRollbackTimeValidityRequest,
-    cb?: (error: string, rep: DescribeRollbackTimeValidityResponse) => void
-  ): Promise<DescribeRollbackTimeValidityResponse> {
-    return this.request("DescribeRollbackTimeValidity", req, cb)
   }
 
   /**

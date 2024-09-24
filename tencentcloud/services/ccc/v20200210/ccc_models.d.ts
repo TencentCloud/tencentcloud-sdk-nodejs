@@ -1970,6 +1970,136 @@ export interface AbortPredictiveDialingCampaignResponse {
     RequestId?: string;
 }
 /**
+ * CreateAICall请求参数结构体
+ */
+export interface CreateAICallRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 被叫
+     */
+    Callee: string;
+    /**
+     * 用于设定AI座席人设、说话规则、任务等的全局提示词。
+     */
+    SystemPrompt: string;
+    /**
+     * LLM类型
+     */
+    LLMType: string;
+    /**
+     * 模型（当前仅支持openai协议的模型）
+     */
+    Model: string;
+    /**
+     * API密钥
+     */
+    APIKey: string;
+    /**
+     * API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions
+     */
+    APIUrl: string;
+    /**
+     * 音色，目前仅支持以下音色:
+  汉语：
+  ZhiMei：智美，客服女声
+  ZhiXi： 智希 通用女声
+  ZhiQi：智琪 客服女声
+  ZhiTian：智甜 女童声
+  AiXiaoJing：爱小静 对话女声
+  
+  英语:
+  WeRose：英文女声
+  Monika：英文女声
+  
+  日语：
+  Nanami
+  
+  韩语：
+  SunHi
+  
+  印度尼西亚语(印度尼西亚)：
+  Gadis
+  
+  马来语（马来西亚）:
+  Yasmin
+  
+   泰米尔语（马来西亚）:
+  Kani
+  
+  泰语（泰国）:
+  Achara
+  
+  越南语(越南):
+  HoaiMy
+  
+  
+     */
+    VoiceType: string;
+    /**
+     * 主叫号码列表
+     */
+    Callers?: Array<string>;
+    /**
+     * 用于设定AI座席欢迎语。
+     */
+    WelcomeMessage?: string;
+    /**
+     * 0：使用welcomeMessage(为空时，被叫先说话；不为空时，机器人先说话)
+  1:   使用ai根据prompt自动生成welcomeMessage并先说话
+     */
+    WelcomeType?: number;
+    /**
+     * 最大等待时长(毫秒)，默认60秒，超过这个时间用户没说话，自动挂断
+     */
+    MaxDuration?: number;
+    /**
+     * 语音识别支持的语言, 默认是"zh" 中文,
+  填写数组,最长4个语言，第一个语言为主要识别语言，后面为可选语言，
+  注意:主要语言为中国方言时，可选语言无效
+  目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循ISO639：
+  1. Chinese = "zh" # 中文
+  2. Chinese_TW = "zh-TW" # 中国台湾
+  3. Chinese_DIALECT = "zh-dialect" # 中国方言
+  4. English = "en" # 英语
+  5. Vietnamese = "vi" # 越南语
+  6. Japanese = "ja" # 日语
+  7. Korean = "ko" # 汉语
+  8. Indonesia = "id" # 印度尼西亚语
+  9. Thai = "th" # 泰语
+  10. Portuguese = "pt" # 葡萄牙语
+  11. Turkish = "tr" # 土耳其语
+  12. Arabic = "ar" # 阿拉伯语
+  13. Spanish = "es" # 西班牙语
+  14. Hindi = "hi" # 印地语
+  15. French = "fr" # 法语
+  16. Malay = "ms" # 马来语
+  17. Filipino = "fil" # 菲律宾语
+  18. German = "de" # 德语
+  19. Italian = "it" # 意大利语
+  20. Russian = "ru" # 俄语
+     */
+    Languages?: Array<string>;
+    /**
+     * 打断AI说话模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
+     */
+    InterruptMode?: number;
+    /**
+     * InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。
+     */
+    InterruptSpeechDuration?: number;
+    /**
+     * 模型是否支持(或者开启)call_end function calling
+     */
+    EndFunctionEnable?: boolean;
+    /**
+     * EndFunctionEnable为true时生效；call_end function calling的desc，默认为 "End the call when user has to leave (like says bye) or you are instructed to do so."
+     */
+    EndFunctionDesc?: string;
+}
+/**
  * DescribeNumbers请求参数结构体
  */
 export interface DescribeNumbersRequest {
@@ -3088,6 +3218,19 @@ export interface ModifyCompanyApplyRequest {
      * 企业资质信息
      */
     CompanyInfo: CompanyApplyInfo;
+}
+/**
+ * CreateAICall返回参数结构体
+ */
+export interface CreateAICallResponse {
+    /**
+     * 新创建的会话 ID
+     */
+    SessionId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCompanyList请求参数结构体

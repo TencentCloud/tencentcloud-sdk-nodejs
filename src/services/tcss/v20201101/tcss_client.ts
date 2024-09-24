@@ -820,6 +820,7 @@ import {
   DescribeCompliancePolicyItemAffectedAssetListResponse,
   DescribeComplianceAssetPolicyItemListRequest,
   DescribeABTestConfigResponse,
+  ImageScanInquireInfo,
   SearchTemplate,
   DescribeContainerSecEventSummaryResponse,
   ProcessDetailBaseInfo,

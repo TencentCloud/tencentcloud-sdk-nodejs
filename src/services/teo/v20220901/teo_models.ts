@@ -2139,29 +2139,20 @@ export interface CustomErrorPage {
 }
 
 /**
- * 安全数据维度值信息
+ * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
  */
-export interface SecEntryValue {
+export interface MaxAge {
   /**
-   * 指标名称。
+   * 是否遵循源站，取值有：
+<li>on：遵循源站，忽略MaxAge 时间设置；</li>
+<li>off：不遵循源站，使用MaxAge 时间设置。</li>
    */
-  Metric: string
+  FollowOrigin?: string
   /**
-   * 时序数据详情。
+   * MaxAge 时间设置，单位秒，最大365天。
+注意：时间为0，即不缓存。
    */
-  Detail: Array<TimingDataItem>
-  /**
-   * 最大值。
-   */
-  Max: number
-  /**
-   * 平均值。
-   */
-  Avg: number
-  /**
-   * 数据总和。
-   */
-  Sum: number
+  MaxAgeTime?: number
 }
 
 /**
@@ -2437,6 +2428,29 @@ export interface DescribeSecurityTemplateBindingsRequest {
 }
 
 /**
+ * 四层远程鉴权信息
+ */
+export interface L4ProxyRemoteAuth {
+  /**
+   * 四层远程鉴权开关，取值有：
+<li>on：表示开启;</li>
+<li>off：表示关闭。</li>
+   */
+  Switch: string
+  /**
+   * 远程鉴权服务地址，格式为: domain/ip:port。例：example.auth.com:8888
+
+   */
+  Address: string
+  /**
+   * 远程鉴权服务不可访问后，经过四层转发规则默认回源行为，取值有：
+<li>reject：表示进行拦截，拒绝访问;</li>
+<li>allow：表示允许通过。</li>
+   */
+  ServerFaultyBehavior: string
+}
+
+/**
  * Bot主动特征识别校验结果。
  */
 export interface AlgDetectResult {
@@ -2621,20 +2635,29 @@ export interface ExceptUserRuleCondition {
 }
 
 /**
- * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ * 安全数据维度值信息
  */
-export interface MaxAge {
+export interface SecEntryValue {
   /**
-   * 是否遵循源站，取值有：
-<li>on：遵循源站，忽略MaxAge 时间设置；</li>
-<li>off：不遵循源站，使用MaxAge 时间设置。</li>
+   * 指标名称。
    */
-  FollowOrigin?: string
+  Metric: string
   /**
-   * MaxAge 时间设置，单位秒，最大365天。
-注意：时间为0，即不缓存。
+   * 时序数据详情。
    */
-  MaxAgeTime?: number
+  Detail: Array<TimingDataItem>
+  /**
+   * 最大值。
+   */
+  Max: number
+  /**
+   * 平均值。
+   */
+  Avg: number
+  /**
+   * 数据总和。
+   */
+  Sum: number
 }
 
 /**
@@ -7961,6 +7984,12 @@ export interface L4ProxyRule {
    * BuID。
    */
   BuId?: string
+  /**
+   * 远程鉴权信息。
+注意：RemoteAuth 在 CreateL4ProxyRules 或 ModifyL4ProxyRules 不可作为入参使用，如有传此参数，会忽略。在 DescribeL4ProxyRules 返回为空时，表示没有开启远程鉴权。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteAuth?: L4ProxyRemoteAuth
 }
 
 /**

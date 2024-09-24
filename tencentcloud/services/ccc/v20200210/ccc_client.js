@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoCalloutTasks", req, cb);
     }
     /**
-     * 获取坐席信息列表
+     * 创建ai外呼会话(仅支持高级版座席)
      */
-    async DescribeStaffInfoList(req, cb) {
-        return this.request("DescribeStaffInfoList", req, cb);
+    async CreateAICall(req, cb) {
+        return this.request("CreateAICall", req, cb);
     }
     /**
      * 停用号码
@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyStaffPassword(req, cb) {
         return this.request("ModifyStaffPassword", req, cb);
+    }
+    /**
+     * 获取坐席信息列表
+     */
+    async DescribeStaffInfoList(req, cb) {
+        return this.request("DescribeStaffInfoList", req, cb);
     }
     /**
      * 查询预测式外呼任务

@@ -48,9 +48,9 @@ it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeStaffInfoList", async function () {
+it("ccc.v20200210.CreateAICall", async function () {
     try {
-       const data = await client.DescribeStaffInfoList({})
+       const data = await client.CreateAICall({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +381,16 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
 it("ccc.v20200210.ModifyStaffPassword", async function () {
     try {
        const data = await client.ModifyStaffPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeStaffInfoList", async function () {
+    try {
+       const data = await client.DescribeStaffInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

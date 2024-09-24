@@ -3539,7 +3539,7 @@ export interface CreateListenerRequest {
      */
     Scheduler?: string;
     /**
-     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示开启，1表示未开启。
+     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。
      */
     SniSwitch?: number;
     /**
@@ -3586,6 +3586,14 @@ export interface CreateListenerRequest {
      * 全端口段监听器的结束端口
      */
     FullEndPorts?: Array<number | bigint>;
+    /**
+     * 内网http监听器开启h2c开关
+     */
+    H2cSwitch?: boolean;
+    /**
+     * TCP_SSL监听器支持关闭SSL后仍然支持混绑，此参数为关闭开关
+     */
+    SslCloseSwitch?: boolean;
 }
 /**
  * CreateClsLogSet请求参数结构体

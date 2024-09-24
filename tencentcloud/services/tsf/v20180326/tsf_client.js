@@ -52,12 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMicroservices", req, cb);
     }
     /**
-     * 接口未使用，废弃录用
-
-查询应用关联日志配置项信息
+     * 修改容器部署组实例数
      */
-    async DescribeApplicationBusinessLogConfig(req, cb) {
-        return this.request("DescribeApplicationBusinessLogConfig", req, cb);
+    async ModifyContainerReplicas(req, cb) {
+        return this.request("ModifyContainerReplicas", req, cb);
     }
     /**
      * 虚拟机部署组下线实例
@@ -1243,12 +1241,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async CreateProgram(req, cb) {
         return this.request("CreateProgram", req, cb);
-    }
-    /**
-     * 修改容器部署组实例数
-     */
-    async ModifyContainerReplicas(req, cb) {
-        return this.request("ModifyContainerReplicas", req, cb);
     }
     /**
      * 查询仓库信息

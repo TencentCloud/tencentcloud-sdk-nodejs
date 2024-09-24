@@ -2578,7 +2578,7 @@ export interface TextSlotInfo {
   /**
    * 文本内容。
    */
-  Text: string
+  Text?: string
 }
 
 /**
@@ -2977,7 +2977,7 @@ export interface SlotInfo {
   /**
    * 卡槽 Id。
    */
-  Id: number
+  Id?: number
   /**
    * 卡槽类型，可取值有：
 <li> AUDIO：音频卡槽，可替换素材类型为 AUDIO 的音频素材;</li>
@@ -2985,20 +2985,24 @@ export interface SlotInfo {
 <li> IMAGE：图片卡槽，可替换素材类型为 IMAGE 的图片素材;</li>
 <li> TEXT：文本卡槽，可替换文本内容。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 默认素材ID。当卡槽类型为 AUDIO，VIDEO，或 IMAGE 中的一种时有效。
    */
-  DefaultMaterialId: string
+  DefaultMaterialId?: string
   /**
    * 默认文本卡槽信息。当卡槽类型为 TEXT 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultTextSlotInfo: TextSlotInfo
+  DefaultTextSlotInfo?: TextSlotInfo
   /**
    * 素材时长，单位秒。
    */
-  Duration: number
+  Duration?: number
+  /**
+   * 卡槽起始时间，单位秒。
+   */
+  StartTime?: number
 }
 
 /**

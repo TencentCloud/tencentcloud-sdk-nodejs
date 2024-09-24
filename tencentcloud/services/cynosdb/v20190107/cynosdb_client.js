@@ -880,14 +880,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGroups", req, cb);
     }
     /**
-     * 历史废弃接口，从云API下线
-
-指定时间和集群查询是否可回滚
-     */
-    async DescribeRollbackTimeValidity(req, cb) {
-        return this.request("DescribeRollbackTimeValidity", req, cb);
-    }
-    /**
      * 查询实例安全组信息
      */
     async DescribeDBSecurityGroups(req, cb) {

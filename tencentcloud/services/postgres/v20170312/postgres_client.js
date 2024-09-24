@@ -84,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
+     * 查询专属集群
+     */
+    async DescribeDedicatedClusters(req, cb) {
+        return this.request("DescribeDedicatedClusters", req, cb);
+    }
+    /**
      * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
      */
     async DeleteParameterTemplate(req, cb) {

@@ -208,9 +208,9 @@ it("monitor.v20180724.DescribePrometheusClusterAgents", async function () {
     }
 })
 
-it("monitor.v20180724.CheckIsPrometheusNewUser", async function () {
+it("monitor.v20180724.DescribePrometheusZones", async function () {
     try {
-       const data = await client.CheckIsPrometheusNewUser({})
+       const data = await client.DescribePrometheusZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,16 +491,6 @@ it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
 it("monitor.v20180724.GetPrometheusAgentManagementCommand", async function () {
     try {
        const data = await client.GetPrometheusAgentManagementCommand({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.UpdateExporterIntegration", async function () {
-    try {
-       const data = await client.UpdateExporterIntegration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1128,16 +1118,6 @@ it("monitor.v20180724.DescribePrometheusTempSync", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusZones", async function () {
-    try {
-       const data = await client.DescribePrometheusZones({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.DescribeAlarmMetrics", async function () {
     try {
        const data = await client.DescribeAlarmMetrics({})
@@ -1398,9 +1378,9 @@ it("monitor.v20180724.DescribePolicyGroupInfo", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusRecordRuleYaml", async function () {
+it("monitor.v20180724.UpdateExporterIntegration", async function () {
     try {
-       const data = await client.DescribePrometheusRecordRuleYaml({})
+       const data = await client.UpdateExporterIntegration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
