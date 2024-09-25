@@ -297,6 +297,7 @@ class Client extends abstract_client_1.AbstractClient {
 - 有对应合同撤销权限的人:  <font color='red'>**合同的发起人（并已经授予撤销权限）或者发起人所在企业的超管、法人**</font>
 - 签署完毕的合同需要双方走解除流程将合同作废，可以参考<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateReleaseFlow" target="_blank">发起解除合同流程接口</a>
 - <font color='red'>只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。</font>
+- 撤销后可以看合同PDF内容的人员： 发起方的超管， 发起方自己，发起方撤销合同的操作人员，已经签署合同、已经填写合同、邀请填写已经补充信息的参与人员， 其他参与人员看不到合同的内容。
      */
     async ChannelCancelFlow(req, cb) {
         return this.request("ChannelCancelFlow", req, cb);
@@ -328,15 +329,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCreateSealPolicy", req, cb);
     }
     /**
-     * 该接口用于发起合同后，生成个人用户的批量签署链接, 暂时不支持企业端签署。
-**注意**：
-1. 该接口目前仅支持签署人类型是**个人签署方的批量签署场景**(ApproverType=PERSON)。
-2. 该接口可生成批量签署链接的C端签署人**必须仅有手写签名(控件类型为SIGN_SIGNATURE)和时间类型的签署控件**，**不支持填写控件** 。
-3. 请确保C端签署人在批量签署合同中**为待签署状态**，如需顺序签署请待前一位参与人签署完成后，再创建该C端用户的签署链接。
-4. 该签署链接**有效期为30分钟**，过期后将失效，如需签署可重新创建批量签署链接 。
-5. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。
+     * 该接口用于发起合同后，生成个人用户的批量待办链接, 暂时不支持企业端签署。
+**注意：**
+1. 该接口目前仅支持签署人类型是**个人签署方的批量签署场景**(ApproverType=1)。
+2. 该接口可生成C端签署人的批量签署/查看链接，**签署控件仅支持手写签名(控件类型为SIGN_SIGNATURE)和时间类型的签署控件** 。
+3. 该签署链接**有效期为30分钟**，过期后将失效，如需签署可重新创建批量签署链接 。
+4. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。
 跳转到小程序的实现，参考微信官方文档(分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式)，如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
-6.  因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
+6. 因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
      */
     async ChannelCreateBatchQuickSignUrl(req, cb) {
         return this.request("ChannelCreateBatchQuickSignUrl", req, cb);
@@ -590,7 +590,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 2. 若您认证中发现信息有误需要重新认证，**可通过更换用户OpenID重新生成链接的方式，来清理掉已有的流程**。
 
 系统的渠道企业, 应用, 子客企业, 子客员工的组织形式
-![image](https://qcloudimg.tencent-cloud.cn/raw/bee4b7375fe7a097f3573b18a1c1e30b.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/77677faeea26c9d7f37474597c81fe01.png)
 
 
 <font color="red">相关视频指引</font> <br>
@@ -661,6 +661,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 注:
 - 签署完毕的合同需要双方走解除流程将合同作废，可以参考<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateReleaseFlow" target="_blank">发起解除合同流程接口</a>
 - <font color='red'>只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。</font>
+- 撤销后可以看合同PDF内容的人员： 发起方的超管， 发起方自己，发起方撤销合同的操作人员，已经签署合同、已经填写合同、邀请填写已经补充信息的参与人员， 其他参与人员看不到合同的内容。
      */
     async ChannelCreateBatchCancelFlowUrl(req, cb) {
         return this.request("ChannelCreateBatchCancelFlowUrl", req, cb);
@@ -850,6 +851,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 - 有对应合同撤销权限的人:  <font color='red'>**合同的发起人（并已经授予撤销权限）或者发起人所在企业的超管、法人**</font>
 - 签署完毕的合同需要双方走解除流程将合同作废，可以参考<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateReleaseFlow" target="_blank">发起解除合同流程接口</a>
 - <font color='red'>只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。</font>
+- 撤销后可以看合同PDF内容的人员： 发起方的超管， 发起方自己，发起方撤销合同的操作人员，已经签署合同、已经填写合同、邀请填写已经补充信息的参与人员， 其他参与人员看不到合同的内容。
      */
     async ChannelBatchCancelFlows(req, cb) {
         return this.request("ChannelBatchCancelFlows", req, cb);

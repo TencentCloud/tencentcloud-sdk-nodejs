@@ -823,15 +823,15 @@ export interface CmdTemplate {
     /**
      * 高危命令模板ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 高危命令模板名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 命令列表，命令之间用换行符（"\n"）分隔
      */
-    CmdList: string;
+    CmdList?: string;
 }
 /**
  * 命令执行检索结果
@@ -1338,6 +1338,10 @@ export interface CreateAclRequest {
      * 是否允许使用访问串，默认允许
      */
     AllowAccessCredential?: boolean;
+    /**
+     * 是否允许记录键盘
+     */
+    AllowKeyboardLogger?: boolean;
 }
 /**
  * DescribeLoginEvent返回参数结构体
@@ -1679,6 +1683,10 @@ export interface ModifyAclRequest {
      * 是否允许使用访问串
      */
     AllowAccessCredential?: boolean;
+    /**
+     * 是否允许键盘记录
+     */
+    AllowKeyboardLogger?: boolean;
 }
 /**
  * SearchAuditLog请求参数结构体
@@ -3577,6 +3585,11 @@ export interface Acl {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WhiteCmds?: Array<string>;
+    /**
+     * 是否允许记录键盘
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AllowKeyboardLogger?: boolean;
 }
 /**
  * 资产标签

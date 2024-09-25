@@ -661,6 +661,16 @@ export interface Certificates {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CertRevokedTime?: string;
+    /**
+     * 托管资源类型列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostingResourceTypes?: Array<string>;
+    /**
+     * 托管配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostingConfig?: HostingConfig;
 }
 /**
  * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。
@@ -4546,6 +4556,21 @@ export interface DomainValidationResult {
      * 是否已经签发。
      */
     Issued: boolean;
+}
+/**
+ * 托管配置
+ */
+export interface HostingConfig {
+    /**
+     * 托管资源替换时间， 默认为证书过期前30天存在续费证书则替换
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReplaceTime?: number;
+    /**
+     * 托管发送消息类型：0，托管开始前消息提醒（没有续费证书也会收到该提示消息）； 1， 托管开始消息提醒（存在续费证书才会收到消息提醒）； 2， 托管资源替换失败消息提醒； 3 托管资源替换成功消息提醒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageTypes?: Array<number | bigint>;
 }
 /**
  * DescribeHostApiGatewayInstanceList返回参数结构体

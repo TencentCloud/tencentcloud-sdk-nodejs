@@ -185,6 +185,7 @@ import {
   CreateCertificateResponse,
   Error,
   DomainValidationResult,
+  HostingConfig,
   DescribeHostApiGatewayInstanceListResponse,
   DescribeCertificateDetailResponse,
   DescribeCertificateBindResourceTaskResultResponse,

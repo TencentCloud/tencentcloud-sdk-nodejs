@@ -63,6 +63,7 @@ import {
   ResourceIds,
   DescribeRunGroupsResponse,
   Volume,
+  VolumeInfo,
   TerminateRunGroupRequest,
   EnvironmentConfig,
   DescribeTablesRowsResponse,

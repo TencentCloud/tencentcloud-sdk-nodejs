@@ -429,7 +429,8 @@ export interface DescribeRunsRequest {
 - RunGroupId：任务批次ID
 - Status：任务状态
 - RunUuid：任务UUID
-- UserDefinedId：用户定义ID
+- ApplicationId：应用ID
+- UserDefinedId：用户定义ID（批量运行表格第一列）
    */
   Filters?: Array<Filter>
 }
@@ -854,22 +855,27 @@ export interface DescribeVolumesResponse {
 export interface GitInfo {
   /**
    * Git地址。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GitHttpPath: string
   /**
    * Git用户名。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GitUserName?: string
   /**
    * Git密码或者Token。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GitTokenOrPassword?: string
   /**
    * 分支。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Branch?: string
   /**
    * 标签。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: string
 }
@@ -921,8 +927,14 @@ export interface ApplicationVersion {
   /**
    * Git信息。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   GitInfo?: string
+  /**
+   * Git信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitSource?: GitInfo
 }
 
 /**
@@ -974,6 +986,18 @@ export interface RunGroup {
    */
   ApplicationType?: string
   /**
+   * 应用版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationVersion?: ApplicationVersion
+  /**
+   * 应用访问类型：
+- PRIVATE 私有应用
+- PUBLIC 公共应用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessMode?: string
+  /**
    * 环境ID。
    */
   EnvironmentId?: string
@@ -999,9 +1023,39 @@ export interface RunGroup {
    */
   Status?: string
   /**
+   * 任务批次类型 ：
+- WDL
+- NEXTFLOW
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 工作目录。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkDir?: string
+  /**
    * 任务输入。
    */
   Input?: string
+  /**
+   * 任务输入类型：
+- JSON: 导入JSON
+- MANUAL: 手动输入
+- COS: COS文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputType?: string
+  /**
+   * 输入COS地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputCosUri?: string
+  /**
+   * 输入模版ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputTemplateId?: string
   /**
    * WDL运行选项。
    */
@@ -1011,6 +1065,11 @@ export interface RunGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NFOption?: NFOption
+  /**
+   * 使用的缓存卷。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Volumes?: Array<VolumeInfo>
   /**
    * 任务总数量。
    */
@@ -1027,6 +1086,11 @@ export interface RunGroup {
    * 错误信息。
    */
   ErrorMessage?: string
+  /**
+   * 运行结果通知方式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultNotify?: string
   /**
    * 创建时间。
    */
@@ -1045,16 +1109,6 @@ export interface RunGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorId?: string
-  /**
-   * 运行结果通知方式。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResultNotify?: string
-  /**
-   * 应用版本。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ApplicationVersion?: ApplicationVersion
 }
 
 /**
@@ -1240,6 +1294,27 @@ export interface Volume {
 }
 
 /**
+ * 缓存卷信息。
+ */
+export interface VolumeInfo {
+  /**
+   * 缓存卷ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeId?: string
+  /**
+   * 名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 挂载路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPath?: string
+}
+
+/**
  * TerminateRunGroup请求参数结构体
  */
 export interface TerminateRunGroupRequest {
@@ -1415,6 +1490,8 @@ export interface DescribeRunGroupsRequest {
 - Name：任务批次名称
 - RunGroupId：任务批次ID
 - Status：任务批次状态
+- ApplicationId：应用ID
+- Type：类型（支持WDL，NEXTFLOW）
    */
   Filters?: Array<Filter>
 }
@@ -1556,6 +1633,11 @@ export interface RunOption {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseRelativeOutputPaths?: boolean
+  /**
+   * 是否添加运行信息到输出目录中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddRunInfoToOutputDir?: boolean
 }
 
 /**
@@ -1745,6 +1827,11 @@ export interface RunMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallCached?: boolean
+  /**
+   * 工作目录。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkDir?: string
   /**
    * 标准输出。
 注意：此字段可能返回 null，表示取不到有效值。

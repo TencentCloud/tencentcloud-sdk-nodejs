@@ -4196,8 +4196,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取索引列表
-   */
+     * 接口已废弃
+
+获取索引列表
+     */
   async DescribeIndexList(
     req?: DescribeIndexListRequest,
     cb?: (error: string, rep: DescribeIndexListResponse) => void

@@ -265,7 +265,7 @@ export interface DeleteCloudBaseRunServerVersionResponse {
    * 返回结果，succ为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1311,6 +1311,11 @@ export interface CloudBaseRunVolumeMount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NfsVolumes?: Array<CloudBaseRunNfsVolumeSource>
+  /**
+   * 挂载配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPropagation?: string
 }
 
 /**
@@ -3245,6 +3250,10 @@ export interface DeleteCloudBaseRunServerVersionRequest {
    * 操作备注
    */
   OperatorRemark?: string
+  /**
+   * 延迟删除版本时间
+   */
+  DelayedDeletionTime?: number
 }
 
 /**

@@ -2607,11 +2607,11 @@ export interface ConfigureSyncJobRequest {
      */
     SrcConnectType?: string;
     /**
-     * 源端信息，单节点数据库使用，且SrcNodeType传single
+     * 源端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。
      */
     SrcInfo?: Endpoint;
     /**
-     * 源端信息，多节点数据库使用，且SrcNodeType传cluster
+     * 源端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等。
      */
     SrcInfos?: SyncDBEndpointInfos;
     /**
@@ -2619,11 +2619,11 @@ export interface ConfigureSyncJobRequest {
      */
     SrcNodeType?: string;
     /**
-     * 目标端信息，单节点数据库使用
+     * 目标端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。
      */
     DstInfo?: Endpoint;
     /**
-     * 目标端信息，多节点数据库使用，且DstNodeType传cluster
+     * 目标端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等。
      */
     DstInfos?: SyncDBEndpointInfos;
     /**
