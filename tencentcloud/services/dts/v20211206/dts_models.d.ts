@@ -1750,7 +1750,7 @@ export interface MigrateOption {
      */
     DatabaseTable: DatabaseTableObject;
     /**
-     * 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement
+     * 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement;注意redis,keewidb产品只支持fullAndIncrement类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MigrateType?: string;
@@ -1760,7 +1760,7 @@ export interface MigrateOption {
      */
     Consistency?: ConsistencyOption;
     /**
-     * 是否迁移账号，yes(迁移账号)，no(不迁移账号)
+     * 是否迁移账号，true(迁移账号)，false(不迁移账号)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsMigrateAccount?: boolean;
@@ -1776,7 +1776,7 @@ export interface MigrateOption {
     IsDstReadOnly?: boolean;
     /**
      * 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:
-  ["DstWriteMode":normal, 	目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作) 	"IsDstReadOnly":true, 	是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) 	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒)]
+  ["DstWriteMode":normal, 	目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作) 	"IsDstReadOnly":true, 	是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) 	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒) 	"IsExpireKey":"true",过期key自动淘汰]
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraAttr?: Array<KeyValuePairOption>;
@@ -2335,17 +2335,17 @@ export interface DBInfo {
      */
     AccountMode?: string;
     /**
-     * 临时密钥Id，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretId?: string;
     /**
-     * 临时密钥Key，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretKey?: string;
     /**
-     * 临时Token，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpToken?: string;
@@ -2750,15 +2750,15 @@ export interface DescribeMigrateDBInstancesRequest {
      */
     AccountMode?: string;
     /**
-     * 临时密钥Id，若为跨账号资源此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
      */
     TmpSecretId?: string;
     /**
-     * 临时密钥Key，若为跨账号资源此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
      */
     TmpSecretKey?: string;
     /**
-     * 临时密钥Token，若为跨账号资源此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
      */
     TmpToken?: string;
 }
@@ -4511,17 +4511,17 @@ export interface Endpoint {
      */
     RoleExternalId?: string;
     /**
-     * 临时密钥Id，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，如果为跨账号实例此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretId?: string;
     /**
-     * 临时密钥Key，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpSecretKey?: string;
     /**
-     * 临时Token，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
+     * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号同步文档(https://cloud.tencent.com/document/product/571/68729)第4节中关于角色的定义。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpToken?: string;

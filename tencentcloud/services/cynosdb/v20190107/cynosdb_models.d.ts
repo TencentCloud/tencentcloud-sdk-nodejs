@@ -9112,7 +9112,7 @@ export interface ModifyVipVportResponse {
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
     /**
-     * 实例组ID
+     * 网络组id(cynosdbmysql-grp-前缀开头)或集群id
      */
     InstanceId: string;
     /**

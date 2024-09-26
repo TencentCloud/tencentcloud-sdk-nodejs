@@ -1,0 +1,119 @@
+/**
+ * CreateVerifyReport请求参数结构体
+ */
+export interface CreateVerifyReportRequest {
+    /**
+     * 客户类型 1:个人，2:企业
+     */
+    ApplyCustomerType: string;
+    /**
+     * 申请企业 or 自然人名称
+     */
+    ApplyCustomerName: string;
+    /**
+     * 验签申请人姓名
+     */
+    ApplyName: string;
+    /**
+     * 验签申请人电弧
+     */
+    ApplyMobile: string;
+    /**
+     * 验签文件id
+     */
+    FileId: string;
+    /**
+     * 验签申请人邮箱
+     */
+    ApplyEmail?: string;
+}
+/**
+ * CreateVerifyReport返回参数结构体
+ */
+export interface CreateVerifyReportResponse {
+    /**
+     * 签名id
+     */
+    SignatureId?: string;
+    /**
+     * code
+     */
+    Code?: string;
+    /**
+     * message
+     */
+    Message?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeVerifyReport请求参数结构体
+ */
+export interface DescribeVerifyReportRequest {
+    /**
+     * 签名id
+     */
+    SignatureId: string;
+}
+/**
+ * UploadFile请求参数结构体
+ */
+export interface UploadFileRequest {
+    /**
+     * 验签源文件信息列表
+     */
+    FileInfos: Array<FileInfo>;
+}
+/**
+ * UploadFile返回参数结构体
+ */
+export interface UploadFileResponse {
+    /**
+     * 文件id列表
+     */
+    FileIds?: Array<string>;
+    /**
+     * 文件id总数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeVerifyReport返回参数结构体
+ */
+export interface DescribeVerifyReportResponse {
+    /**
+     * 下载url
+     */
+    ReportUrl?: string;
+    /**
+     * code
+     */
+    Code?: string;
+    /**
+     * message
+     */
+    Message?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 文件列表信息
+ */
+export interface FileInfo {
+    /**
+     * BASE64编码后的文件内容
+     */
+    FileBody?: string;
+    /**
+     * 文件名，最大长度不超过200字符
+     */
+    FileName?: string;
+}

@@ -3544,6 +3544,10 @@ export interface IMCdrInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Satisfaction?: IMSatisfaction;
+    /**
+     * 用户ID
+     */
+    ClientUserId?: string;
 }
 /**
  * DescribeIMCdrList请求参数结构体

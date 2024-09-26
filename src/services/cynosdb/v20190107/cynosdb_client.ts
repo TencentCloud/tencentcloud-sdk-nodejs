@@ -1134,7 +1134,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例小版本升级限制时间
+   * 本接口（ModifyInstanceUpgradeLimitDays）用于修改实例内核小版本的升级限制时间。
    */
   async ModifyInstanceUpgradeLimitDays(
     req: ModifyInstanceUpgradeLimitDaysRequest,
@@ -1474,7 +1474,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启日志投递
+   * 本接口（StartCLSDelivery）用于开启日志投递功能。
    */
   async StartCLSDelivery(
     req: StartCLSDeliveryRequest,
@@ -1494,7 +1494,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁集群
+   * 本接口（OfflineCluster）用于销毁集群。
    */
   async OfflineCluster(
     req: OfflineClusterRequest,
@@ -1514,7 +1514,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止日志投递
+   * 本接口（StopCLSDelivery）用于停止日志投递功能。
    */
   async StopCLSDelivery(
     req: StopCLSDeliveryRequest,
@@ -1624,7 +1624,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新内核小版本
+   * 本接口（UpgradeClusterVersion）用于更新内核小版本。
    */
   async UpgradeClusterVersion(
     req: UpgradeClusterVersionRequest,
@@ -1824,7 +1824,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例变配
+   * 本接口（UpgradeInstance）用于实例变配。
    */
   async UpgradeInstance(
     req: UpgradeInstanceRequest,

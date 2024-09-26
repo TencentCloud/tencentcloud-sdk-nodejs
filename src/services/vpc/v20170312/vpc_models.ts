@@ -545,17 +545,21 @@ export interface SourceIpTranslationNatRule {
 }
 
 /**
- * DisableCcnRoutes请求参数结构体
+ * DescribeRoutes返回参数结构体
  */
-export interface DisableCcnRoutesRequest {
+export interface DescribeRoutesResponse {
   /**
-   * CCN实例ID。形如：ccn-f49l6u0z。
+   * 路由对象。
    */
-  CcnId: string
+  RouteSet?: Array<Route>
   /**
-   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+   * 符合条件的实例数量。
    */
-  RouteIds: Array<string>
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -572,6 +576,16 @@ export interface ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse {
  * ModifyIp6Rule返回参数结构体
  */
 export interface ModifyIp6RuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCdcLDCXList返回参数结构体
+ */
+export interface DeleteCdcLDCXListResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -699,6 +713,20 @@ export interface DeleteVpnGatewaySslServerResponse {
 }
 
 /**
+ * CreateHighPriorityRouteTable返回参数结构体
+ */
+export interface CreateHighPriorityRouteTableResponse {
+  /**
+   * 高优路由表信息
+   */
+  HighPriorityRouteTable?: HighPriorityRouteTable
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIpGeolocationInfos请求参数结构体
  */
 export interface DescribeIpGeolocationInfosRequest {
@@ -720,6 +748,20 @@ export interface AddTemplateMemberResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReplaceHighPriorityRouteTableAssociation请求参数结构体
+ */
+export interface ReplaceHighPriorityRouteTableAssociationRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 子网唯一 ID
+   */
+  SubnetId: string
 }
 
 /**
@@ -1158,31 +1200,81 @@ export interface DeleteVpnGatewaySslClientResponse {
 }
 
 /**
- * 云联网路由接收策略
+ * DescribeCrossBorderCompliance请求参数结构体
  */
-export interface CcnRouteTableInputPolicy {
+export interface DescribeCrossBorderComplianceRequest {
   /**
-   * 路由条件。
+   * （精确匹配）服务商，可选值：`UNICOM`。
    */
-  RouteConditions: Array<CcnRouteBroadcastPolicyRouteCondition>
+  ServiceProvider?: string
   /**
-   * 路由行为，`accept` 允许，`drop` 拒绝。
+   * （精确匹配）合规化审批单`ID`。
    */
-  Action: string
+  ComplianceId?: number
   /**
-   * 策略描述。
+   * （模糊查询）公司名称。
    */
-  Description: string
+  Company?: string
   /**
-   * as-path操作
-注意：此字段可能返回 null，表示取不到有效值。
+   * （精确匹配）统一社会信用代码。
    */
-  OperateAsPath?: string
+  UniformSocialCreditCode?: string
   /**
-   * as-path操作模式
-注意：此字段可能返回 null，表示取不到有效值。
+   * （模糊查询）法定代表人。
    */
-  AsPathOperateMode?: string
+  LegalPerson?: string
+  /**
+   * （模糊查询）发证机关。
+   */
+  IssuingAuthority?: string
+  /**
+   * （模糊查询）营业执照住所。
+   */
+  BusinessAddress?: string
+  /**
+   * （精确匹配）邮编。
+   */
+  PostCode?: number
+  /**
+   * （模糊查询）经办人。
+   */
+  Manager?: string
+  /**
+   * （精确查询）经办人身份证号。
+   */
+  ManagerId?: string
+  /**
+   * （模糊查询）经办人身份证地址。
+   */
+  ManagerAddress?: string
+  /**
+   * （精确匹配）经办人联系电话。
+   */
+  ManagerTelephone?: string
+  /**
+   * （精确匹配）电子邮箱。
+   */
+  Email?: string
+  /**
+   * （精确匹配）服务开始日期，如：`2020-07-28`。
+   */
+  ServiceStartDate?: string
+  /**
+   * （精确匹配）服务结束日期，如：`2021-07-28`。
+   */
+  ServiceEndDate?: string
+  /**
+   * （精确匹配）状态。待审批：`PENDING`，通过：`APPROVED `，拒绝：`DENY`。
+   */
+  State?: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 返回数量
+   */
+  Limit?: number
 }
 
 /**
@@ -1325,6 +1417,22 @@ export interface VpnGatewayQuota {
    * 配额英文名称
    */
   Name: string
+}
+
+/**
+ * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+ */
+export interface RouteECMPAlgorithm {
+  /**
+   *  目标网段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DestinationCidrBlock?: string
+  /**
+   * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetRouteAlgorithm?: string
 }
 
 /**
@@ -1498,21 +1606,29 @@ export interface CcnRegionBandwidthLimitInfo {
 }
 
 /**
- * DescribeCcnRouteTableInputPolicys请求参数结构体
+ * CloneSecurityGroup请求参数结构体
  */
-export interface DescribeCcnRouteTableInputPolicysRequest {
+export interface CloneSecurityGroupRequest {
   /**
-   * 云联网ID。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
-  CcnId: string
+  SecurityGroupId: string
   /**
-   * 云联网路由表ID。
+   * 安全组名称，可任意命名，但不得超过60个字符。未提供参数时，克隆后的安全组名称和SecurityGroupId对应的安全组名称相同。
    */
-  RouteTableId: string
+  GroupName?: string
   /**
-   * 路由接收策略版本号。
+   * 安全组备注，最多100个字符。未提供参数时，克隆后的安全组备注和SecurityGroupId对应的安全组备注相同。
    */
-  PolicyVersion?: number
+  GroupDescription?: string
+  /**
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
+   */
+  ProjectId?: string
+  /**
+   * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
+   */
+  RemoteRegion?: string
 }
 
 /**
@@ -1561,6 +1677,16 @@ export interface DescribeFlowLogsResponse {
    * 流日志总数目。
    */
   TotalNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyHighPriorityRouteAttribute返回参数结构体
+ */
+export interface ModifyHighPriorityRouteAttributeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1751,6 +1877,34 @@ export interface SecurityGroupPolicySet {
 }
 
 /**
+ * DescribeHighPriorityRoutes请求参数结构体
+ */
+export interface DescribeHighPriorityRoutesRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * <li>gateway-id - String - （过滤条件）网关ID。</li>
+<li>description - String - （过滤条件）路由描述。</li>
+<li>dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。</li>
+<li>subnet-route-algorithm - String - （过滤条件）现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。</li>
+<li>is-cdc - String - （过滤条件）CDC属性高优路由表。</li>
+<li>cdc-id - String - （过滤条件）CDC 集群唯一 ID 。</li>
+
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+  /**
+   * 请求对象个数。
+   */
+  Limit?: number
+}
+
+/**
  * ModifyFlowLogAttribute请求参数结构体
  */
 export interface ModifyFlowLogAttributeRequest {
@@ -1776,6 +1930,24 @@ export interface ModifyFlowLogAttributeRequest {
  * UnassignIpv6SubnetCidrBlock返回参数结构体
  */
 export interface UnassignIpv6SubnetCidrBlockResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReplaceHighPriorityRoutes返回参数结构体
+ */
+export interface ReplaceHighPriorityRoutesResponse {
+  /**
+   * 新的高优路由表条目列表。
+   */
+  NewHighPriorityRouteSet?: Array<HighPriorityRoute>
+  /**
+   * 旧的高优路由表条目列表。
+   */
+  OldHighPriorityRouteSet?: Array<HighPriorityRoute>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1908,6 +2080,28 @@ export interface ResetRoutesRequest {
    * 路由策略。
    */
   Routes: Array<Route>
+}
+
+/**
+ * 弹性网卡绑定关系
+ */
+export interface NetworkInterfaceAttachment {
+  /**
+   * 云主机实例ID。
+   */
+  InstanceId: string
+  /**
+   * 网卡在云主机实例内的序号。
+   */
+  DeviceIndex: number
+  /**
+   * 云主机所有者账户信息。
+   */
+  InstanceAccountId: string
+  /**
+   * 绑定时间。
+   */
+  AttachTime: string
 }
 
 /**
@@ -2497,35 +2691,21 @@ export interface DescribeNatGatewaySourceIpTranslationNatRulesResponse {
 }
 
 /**
- * DescribeVpcs请求参数结构体
+ * DescribeHighPriorityRouteTables返回参数结构体
  */
-export interface DescribeVpcsRequest {
+export interface DescribeHighPriorityRouteTablesResponse {
   /**
-   * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+   * 高优路由表对象。
    */
-  VpcIds?: Array<string>
+  HighPriorityRouteTableSet?: Array<HighPriorityRouteTable>
   /**
-   * 过滤条件，不支持同时指定VpcIds和Filters参数。
-支持的过滤条件如下：
-<li>vpc-name：VPC实例名称，支持模糊查询。</li>
-<li>is-default ：是否默认VPC。</li>
-<li>vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。</li>
-<li>cidr-block：VPC的CIDR。</li>
-<li>tag-key ：按照标签键进行过滤，非必填参数。</li>
-<li>tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。</li>
-  **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。
-<li>ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。</li>
-<li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。</li>
+   * 符合条件的实例数量。
    */
-  Filters?: Array<Filter>
+  TotalCount?: number
   /**
-   * 偏移量，默认为0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: string
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: string
+  RequestId?: string
 }
 
 /**
@@ -2676,17 +2856,25 @@ export interface DeleteFlowLogRequest {
 }
 
 /**
- * 网络探测验证结果。
+ * DownloadVpnGatewaySslClientCert返回参数结构体
  */
-export interface NetDetectState {
+export interface DownloadVpnGatewaySslClientCertResponse {
   /**
-   * 网络探测实例ID。形如：netd-12345678。
+   * SSL-VPN 客户端配置。
    */
-  NetDetectId: string
+  SslClientConfigsSet?: string
   /**
-   * 网络探测目的IP验证结果对象数组。
+   * SSL-VPN 客户端配置。
    */
-  NetDetectIpStateSet: Array<NetDetectIpState>
+  SslClientConfig?: Array<SslClientConfig>
+  /**
+   * 是否鉴权成功 只有传入SamlToken 才生效，1为成功，0为失败。
+   */
+  Authenticated?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3008,81 +3196,31 @@ export interface ModifyDhcpIpAttributeRequest {
 }
 
 /**
- * DescribeCrossBorderCompliance请求参数结构体
+ * 云联网路由接收策略
  */
-export interface DescribeCrossBorderComplianceRequest {
+export interface CcnRouteTableInputPolicy {
   /**
-   * （精确匹配）服务商，可选值：`UNICOM`。
+   * 路由条件。
    */
-  ServiceProvider?: string
+  RouteConditions: Array<CcnRouteBroadcastPolicyRouteCondition>
   /**
-   * （精确匹配）合规化审批单`ID`。
+   * 路由行为，`accept` 允许，`drop` 拒绝。
    */
-  ComplianceId?: number
+  Action: string
   /**
-   * （模糊查询）公司名称。
+   * 策略描述。
    */
-  Company?: string
+  Description: string
   /**
-   * （精确匹配）统一社会信用代码。
+   * as-path操作
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniformSocialCreditCode?: string
+  OperateAsPath?: string
   /**
-   * （模糊查询）法定代表人。
+   * as-path操作模式
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LegalPerson?: string
-  /**
-   * （模糊查询）发证机关。
-   */
-  IssuingAuthority?: string
-  /**
-   * （模糊查询）营业执照住所。
-   */
-  BusinessAddress?: string
-  /**
-   * （精确匹配）邮编。
-   */
-  PostCode?: number
-  /**
-   * （模糊查询）经办人。
-   */
-  Manager?: string
-  /**
-   * （精确查询）经办人身份证号。
-   */
-  ManagerId?: string
-  /**
-   * （模糊查询）经办人身份证地址。
-   */
-  ManagerAddress?: string
-  /**
-   * （精确匹配）经办人联系电话。
-   */
-  ManagerTelephone?: string
-  /**
-   * （精确匹配）电子邮箱。
-   */
-  Email?: string
-  /**
-   * （精确匹配）服务开始日期，如：`2020-07-28`。
-   */
-  ServiceStartDate?: string
-  /**
-   * （精确匹配）服务结束日期，如：`2021-07-28`。
-   */
-  ServiceEndDate?: string
-  /**
-   * （精确匹配）状态。待审批：`PENDING`，通过：`APPROVED `，拒绝：`DENY`。
-   */
-  State?: string
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 返回数量
-   */
-  Limit?: number
+  AsPathOperateMode?: string
 }
 
 /**
@@ -3153,6 +3291,16 @@ export interface NatGatewayAddress {
 }
 
 /**
+ * ModifyHighPriorityRouteECMPAlgorithm返回参数结构体
+ */
+export interface ModifyHighPriorityRouteECMPAlgorithmResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVpcEndPointService返回参数结构体
  */
 export interface DescribeVpcEndPointServiceResponse {
@@ -3174,6 +3322,16 @@ export interface DescribeVpcEndPointServiceResponse {
  * ModifyNetworkAclEntries返回参数结构体
  */
 export interface ModifyNetworkAclEntriesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCdcNetPlanes返回参数结构体
+ */
+export interface DescribeCdcNetPlanesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3267,6 +3425,11 @@ export interface TrafficFlow {
    */
   FormatUnit: string
 }
+
+/**
+ * DescribeAccountAttributes请求参数结构体
+ */
+export type DescribeAccountAttributesRequest = null
 
 /**
  * AddIp6Rules请求参数结构体
@@ -3508,22 +3671,9 @@ export interface DisassociateNetworkAclSubnetsResponse {
 }
 
 /**
- * SetCcnRegionBandwidthLimits请求参数结构体
+ * CreateCdcLDCXList请求参数结构体
  */
-export interface SetCcnRegionBandwidthLimitsRequest {
-  /**
-   * CCN实例ID，形如：ccn-f49l6u0z。
-   */
-  CcnId: string
-  /**
-   * 云联网（CCN）各地域出带宽上限。
-   */
-  CcnRegionBandwidthLimits: Array<CcnRegionBandwidthLimit>
-  /**
-   * 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。
-   */
-  SetDefaultLimitFlag?: boolean
-}
+export type CreateCdcLDCXListRequest = null
 
 /**
  * ModifyAddressInternetChargeType请求参数结构体
@@ -3626,25 +3776,13 @@ export interface AddBandwidthPackageResourcesResponse {
 }
 
 /**
- * IPV6转换规则
+ * DeleteHighPriorityRouteTables请求参数结构体
  */
-export interface Ip6RuleInfo {
+export interface DeleteHighPriorityRouteTablesRequest {
   /**
-   * IPV6端口号，可在0~65535范围取值
+   * 高优路由表表唯一ID 列表。
    */
-  Vport6: number
-  /**
-   * 协议类型，支持TCP/UDP
-   */
-  Protocol: string
-  /**
-   * IPV4地址
-   */
-  Vip: string
-  /**
-   * IPV4端口号，可在0~65535范围取值
-   */
-  Vport: number
+  HighPriorityRouteTableIds?: Array<string>
 }
 
 /**
@@ -3703,6 +3841,16 @@ export interface ResetNatGatewayConnectionRequest {
    * NAT网关并发连接上限，形如：1000000、3000000、10000000。
    */
   MaxConcurrentConnection: number
+}
+
+/**
+ * ResetHighPriorityRoutes返回参数结构体
+ */
+export interface ResetHighPriorityRoutesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3911,6 +4059,24 @@ export interface ModifyAddressTemplateAttributeRequest {
    * 支持添加备注的地址信息，支持 IP、CIDR、IP 范围。
    */
   AddressesExtra?: Array<AddressInfo>
+}
+
+/**
+ * SetCcnRegionBandwidthLimits请求参数结构体
+ */
+export interface SetCcnRegionBandwidthLimitsRequest {
+  /**
+   * CCN实例ID，形如：ccn-f49l6u0z。
+   */
+  CcnId: string
+  /**
+   * 云联网（CCN）各地域出带宽上限。
+   */
+  CcnRegionBandwidthLimits: Array<CcnRegionBandwidthLimit>
+  /**
+   * 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。
+   */
+  SetDefaultLimitFlag?: boolean
 }
 
 /**
@@ -4922,6 +5088,11 @@ export interface DescribeCustomerGatewayVendorsResponse {
 }
 
 /**
+ * DeleteCdcLDCXList请求参数结构体
+ */
+export type DeleteCdcLDCXListRequest = null
+
+/**
  * 路由冲突对象
  */
 export interface RouteConflict {
@@ -5088,6 +5259,24 @@ export interface AllocateIp6AddressesBandwidthRequest {
 }
 
 /**
+ * ResumeSnapshotInstance请求参数结构体
+ */
+export interface ResumeSnapshotInstanceRequest {
+  /**
+   * 快照策略Id。
+   */
+  SnapshotPolicyId: string
+  /**
+   * 快照文件Id。
+   */
+  SnapshotFileId: string
+  /**
+   * 实例Id。
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeVpcIpv6Addresses返回参数结构体
  */
 export interface DescribeVpcIpv6AddressesResponse {
@@ -5113,6 +5302,28 @@ export interface ResetAttachCcnInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IPV6转换规则
+ */
+export interface Ip6RuleInfo {
+  /**
+   * IPV6端口号，可在0~65535范围取值
+   */
+  Vport6: number
+  /**
+   * 协议类型，支持TCP/UDP
+   */
+  Protocol: string
+  /**
+   * IPV4地址
+   */
+  Vip: string
+  /**
+   * IPV4端口号，可在0~65535范围取值
+   */
+  Vport: number
 }
 
 /**
@@ -5308,6 +5519,24 @@ export interface AdjustPublicAddressResponse {
 }
 
 /**
+ * DescribeVpnConnections返回参数结构体
+ */
+export interface DescribeVpnConnectionsResponse {
+  /**
+   * 符合条件的实例数量。
+   */
+  TotalCount?: number
+  /**
+   * VPN通道实例。
+   */
+  VpnConnectionSet?: Array<VpnConnection>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RenewVpnGateway请求参数结构体
  */
 export interface RenewVpnGatewayRequest {
@@ -5382,6 +5611,11 @@ export interface SecurityGroupPolicy {
    */
   ModifyTime?: string
 }
+
+/**
+ * DescribeCdcNetPlanes请求参数结构体
+ */
+export type DescribeCdcNetPlanesRequest = null
 
 /**
  * DescribePrivateNatGatewayRegions请求参数结构体
@@ -5485,6 +5719,11 @@ export interface DescribeCcnsResponse {
 }
 
 /**
+ * ModifyCdcNetPlaneAttribute请求参数结构体
+ */
+export type ModifyCdcNetPlaneAttributeRequest = null
+
+/**
  * 参数模板配额
  */
 export interface TemplateLimit {
@@ -5533,9 +5772,9 @@ export interface PolicyStatistics {
 }
 
 /**
- * ModifyRouteTableSelectionPolicies返回参数结构体
+ * CreateCdcLDCXList返回参数结构体
  */
-export interface ModifyRouteTableSelectionPoliciesResponse {
+export interface CreateCdcLDCXListResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5881,17 +6120,17 @@ export interface DeleteServiceTemplateGroupResponse {
 }
 
 /**
- * DisassociateAddress请求参数结构体
+ * IDC子网信息
  */
-export interface DisassociateAddressRequest {
+export interface DirectConnectSubnet {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+   * 专线网关ID
    */
-  AddressId: string
+  DirectConnectGatewayId: string
   /**
-   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<br><li>TRUE：表示解绑 EIP 之后分配普通公网 IP。<br><li>FALSE：表示解绑 EIP 之后不分配普通公网 IP。<br>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<br><li> 只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。<br><li>解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。
+   * IDC子网网段
    */
-  ReallocateNormalPublicIp?: boolean
+  CidrBlock: string
 }
 
 /**
@@ -6245,6 +6484,24 @@ export interface PrivateNatDestinationIpPortTranslationNatRule {
 }
 
 /**
+ * CreateHighPriorityRouteTable请求参数结构体
+ */
+export interface CreateHighPriorityRouteTableRequest {
+  /**
+   * 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   */
+  VpcId: string
+  /**
+   * 高优路由表名称，最大长度不能超过60个字节。
+   */
+  Name: string
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * DeleteNetworkAcl请求参数结构体
  */
 export interface DeleteNetworkAclRequest {
@@ -6252,6 +6509,20 @@ export interface DeleteNetworkAclRequest {
    * 网络ACL实例ID。例如：acl-12345678。
    */
   NetworkAclId: string
+}
+
+/**
+ * CreateHighPriorityRoutes请求参数结构体
+ */
+export interface CreateHighPriorityRoutesRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表条目信息。
+   */
+  HighPriorityRoutes: Array<HighPriorityRoute>
 }
 
 /**
@@ -6401,6 +6672,16 @@ export interface CreateVpnConnectionResponse {
    * 通道实例对象。
    */
   VpnConnection?: VpnConnection
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCdcUsedIdcVlan返回参数结构体
+ */
+export interface DescribeCdcUsedIdcVlanResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6612,21 +6893,31 @@ export interface ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleReque
 }
 
 /**
- * ResumeSnapshotInstance请求参数结构体
+ * ReplaceHighPriorityRoutes请求参数结构体
  */
-export interface ResumeSnapshotInstanceRequest {
+export interface ReplaceHighPriorityRoutesRequest {
   /**
-   * 快照策略Id。
+   * 高优路由表唯一 ID。
    */
-  SnapshotPolicyId: string
+  HighPriorityRouteTableId: string
   /**
-   * 快照文件Id。
+   * 高优路由表条目信息。
    */
-  SnapshotFileId: string
+  HighPriorityRoutes: Array<HighPriorityRoute>
+}
+
+/**
+ * DeleteHighPriorityRoutes返回参数结构体
+ */
+export interface DeleteHighPriorityRoutesResponse {
   /**
-   * 实例Id。
+   * 高优路由表条目信息。
    */
-  InstanceId: string
+  HighPriorityRouteSet?: Array<HighPriorityRoute>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7386,6 +7677,38 @@ export interface DescribeAddressesRequest {
 }
 
 /**
+ * DescribeVpcs请求参数结构体
+ */
+export interface DescribeVpcsRequest {
+  /**
+   * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+   */
+  VpcIds?: Array<string>
+  /**
+   * 过滤条件，不支持同时指定VpcIds和Filters参数。
+支持的过滤条件如下：
+<li>vpc-name：VPC实例名称，支持模糊查询。</li>
+<li>is-default ：是否默认VPC。</li>
+<li>vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。</li>
+<li>cidr-block：VPC的CIDR。</li>
+<li>tag-key ：按照标签键进行过滤，非必填参数。</li>
+<li>tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。</li>
+  **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。
+<li>ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。</li>
+<li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: string
+}
+
+/**
  * DescribeSecurityGroupPolicies请求参数结构体
  */
 export interface DescribeSecurityGroupPoliciesRequest {
@@ -7450,6 +7773,24 @@ export interface DescribeIp6TranslatorQuotaRequest {
    * 待查询IPV6转换实例的唯一ID列表，形如ip6-xxxxxxxx
    */
   Ip6TranslatorIds?: Array<string>
+}
+
+/**
+ * DescribeHighPriorityRoutes返回参数结构体
+ */
+export interface DescribeHighPriorityRoutesResponse {
+  /**
+   * 高优路由表条目信息。
+   */
+  HighPriorityRouteSet?: Array<HighPriorityRoute>
+  /**
+   * 高优路由表条目个数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7663,6 +8004,20 @@ export interface DescribeNetworkAclQuintupleEntriesRequest {
 <li>network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。</li>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 网络探测验证结果。
+ */
+export interface NetDetectState {
+  /**
+   * 网络探测实例ID。形如：netd-12345678。
+   */
+  NetDetectId: string
+  /**
+   * 网络探测目的IP验证结果对象数组。
+   */
+  NetDetectIpStateSet: Array<NetDetectIpState>
 }
 
 /**
@@ -8000,6 +8355,11 @@ export interface EndPoint {
    */
   ServiceName?: string
   /**
+   * CDC 集群唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
+  /**
    * 标签键值对。	
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -8333,6 +8693,11 @@ export interface EndPointService {
    */
   ServiceType?: string
   /**
+   * CDC 集群唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
+  /**
    * Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -8420,6 +8785,20 @@ export interface CreateNetworkAclQuintupleEntriesRequest {
 }
 
 /**
+ * DeleteHighPriorityRoutes请求参数结构体
+ */
+export interface DeleteHighPriorityRoutesRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表条目唯一 ID 列表。
+   */
+  HighPriorityRouteIds: Array<string>
+}
+
+/**
  * DescribeClassicLinkInstances返回参数结构体
  */
 export interface DescribeClassicLinkInstancesResponse {
@@ -8436,6 +8815,11 @@ export interface DescribeClassicLinkInstancesResponse {
    */
   RequestId?: string
 }
+
+/**
+ * ModifyCdcLDCXAttribute请求参数结构体
+ */
+export type ModifyCdcLDCXAttributeRequest = null
 
 /**
  * EnableVpnGatewaySslClientCert请求参数结构体
@@ -8733,13 +9117,40 @@ export interface DescribeNetworkAccountTypeResponse {
 }
 
 /**
- * ResetVpnConnection返回参数结构体
+ * DescribeRoutes请求参数结构体
  */
-export interface ResetVpnConnectionResponse {
+export interface DescribeRoutesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤条件，参数不支持同时指定RouteTableIds和Filters。
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+<li>gateway-id - String - （过滤条件）网关ID。</li>
+<li>description - String - （过滤条件）路由描述。</li>
+<li>route-table-id - String - （过滤条件）路由表实例ID。</li>
+<li>dest-cidr - String - （过滤条件）目的端地址，支持模糊左匹配。</li>
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+  /**
+   * 请求对象个数。
+   */
+  Limit?: number
+}
+
+/**
+ * ModifyHighPriorityRouteTableAttribute请求参数结构体
+ */
+export interface ModifyHighPriorityRouteTableAttributeRequest {
+  /**
+   * 高优路由表表唯一ID
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表表名称
+   */
+  Name: string
 }
 
 /**
@@ -9321,6 +9732,11 @@ export interface HaVip {
    */
   CheckAssociate?: boolean
   /**
+   * CDC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
+  /**
    * HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -9410,29 +9826,21 @@ export interface RejectAttachCcnInstancesResponse {
 }
 
 /**
- * CloneSecurityGroup请求参数结构体
+ * DescribeCcnRouteTableInputPolicys请求参数结构体
  */
-export interface CloneSecurityGroupRequest {
+export interface DescribeCcnRouteTableInputPolicysRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
+   * 云联网ID。
    */
-  SecurityGroupId: string
+  CcnId: string
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。未提供参数时，克隆后的安全组名称和SecurityGroupId对应的安全组名称相同。
+   * 云联网路由表ID。
    */
-  GroupName?: string
+  RouteTableId: string
   /**
-   * 安全组备注，最多100个字符。未提供参数时，克隆后的安全组备注和SecurityGroupId对应的安全组备注相同。
+   * 路由接收策略版本号。
    */
-  GroupDescription?: string
-  /**
-   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
-   */
-  ProjectId?: string
-  /**
-   * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
-   */
-  RemoteRegion?: string
+  PolicyVersion?: number
 }
 
 /**
@@ -9456,9 +9864,14 @@ export interface ReplaceCcnRouteTableInputPolicysResponse {
 }
 
 /**
- * DescribeAccountAttributes请求参数结构体
+ * DeleteCdcNetPlanes返回参数结构体
  */
-export type DescribeAccountAttributesRequest = null
+export interface DeleteCdcNetPlanesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * RenewAddresses返回参数结构体
@@ -9790,26 +10203,9 @@ export interface CcnRouteBroadcastPolicyRouteCondition {
 }
 
 /**
- * DownloadVpnGatewaySslClientCert返回参数结构体
+ * DeleteCdcNetPlanes请求参数结构体
  */
-export interface DownloadVpnGatewaySslClientCertResponse {
-  /**
-   * SSL-VPN 客户端配置。
-   */
-  SslClientConfigsSet?: string
-  /**
-   * SSL-VPN 客户端配置。
-   */
-  SslClientConfig?: Array<SslClientConfig>
-  /**
-   * 是否鉴权成功 只有传入SamlToken 才生效，1为成功，0为失败。
-   */
-  Authenticated?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DeleteCdcNetPlanesRequest = null
 
 /**
  * DeleteNetDetect返回参数结构体
@@ -9944,6 +10340,24 @@ export interface DescribeDhcpIpsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResetHighPriorityRoutes请求参数结构体
+ */
+export interface ResetHighPriorityRoutesRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表名称。
+   */
+  Name: string
+  /**
+   * 高优路由表条目信息。
+   */
+  HighPriorityRoutes: Array<HighPriorityRoute>
 }
 
 /**
@@ -10149,9 +10563,24 @@ export interface CreateVpnGatewaySslClientRequest {
 }
 
 /**
- * UnlockCcns请求参数结构体
+ * ResetVpnConnection返回参数结构体
  */
-export type UnlockCcnsRequest = null
+export interface ResetVpnConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCdcNetPlanes返回参数结构体
+ */
+export interface CreateCdcNetPlanesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeVpnGatewaySslServers返回参数结构体
@@ -10546,6 +10975,20 @@ export interface ModifyTemplateMemberRequest {
 }
 
 /**
+ * DisableCcnRoutes请求参数结构体
+ */
+export interface DisableCcnRoutesRequest {
+  /**
+   * CCN实例ID。形如：ccn-f49l6u0z。
+   */
+  CcnId: string
+  /**
+   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+   */
+  RouteIds: Array<string>
+}
+
+/**
  * EnableSnapshotPolicies请求参数结构体
  */
 export interface EnableSnapshotPoliciesRequest {
@@ -10726,6 +11169,16 @@ export interface DetachSnapshotInstancesRequest {
    * 实例信息。
    */
   Instances: Array<SnapshotInstance>
+}
+
+/**
+ * ReplaceHighPriorityRouteTableAssociation返回参数结构体
+ */
+export interface ReplaceHighPriorityRouteTableAssociationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11425,17 +11878,13 @@ export interface DisassociateNatGatewayAddressRequest {
 }
 
 /**
- * DescribeTrafficPackages返回参数结构体
+ * CreateHighPriorityRoutes返回参数结构体
  */
-export interface DescribeTrafficPackagesResponse {
+export interface CreateHighPriorityRoutesResponse {
   /**
-   * 按照条件查询出来的流量包数量
+   * 高优路由表信息。
    */
-  TotalCount?: number
-  /**
-   * 流量包信息
-   */
-  TrafficPackageSet?: Array<TrafficPackage>
+  HighPriorityRouteSet?: Array<HighPriorityRoute>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11725,21 +12174,13 @@ VPN网关实例ID，形如，`vpn-ltjahce6`。
 }
 
 /**
- * ReplaceCcnRouteTableInputPolicys请求参数结构体
+ * ModifyHighPriorityRouteTableAttribute返回参数结构体
  */
-export interface ReplaceCcnRouteTableInputPolicysRequest {
+export interface ModifyHighPriorityRouteTableAttributeResponse {
   /**
-   * 云联网ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CcnId: string
-  /**
-   * 云联网路由表ID。
-   */
-  RouteTableId: string
-  /**
-   * 新的路由接收策略。
-   */
-  Policys?: Array<CcnRouteTableInputPolicy>
+  RequestId?: string
 }
 
 /**
@@ -12300,6 +12741,16 @@ export interface CreateAndAttachNetworkInterfaceResponse {
    * 弹性网卡实例。
    */
   NetworkInterface?: NetworkInterface
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCdcNetPlaneAttribute返回参数结构体
+ */
+export interface ModifyCdcNetPlaneAttributeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12868,6 +13319,42 @@ export interface Resource {
 }
 
 /**
+ * 高优路由表信息
+ */
+export interface HighPriorityRouteTable {
+  /**
+   * 高优路由表唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighPriorityRouteTableId?: string
+  /**
+   * VPC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 高优路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 高优路由表关联的子网列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetSet?: Array<string>
+  /**
+   * 高优路由表条目信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighPriorityRouteSet?: Array<HighPriorityRoute>
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+}
+
+/**
  * DescribePrivateNatGatewayDestinationIpPortTranslationNatRules返回参数结构体
  */
 export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse {
@@ -12914,22 +13401,9 @@ export interface AllocateAddressesResponse {
 }
 
 /**
- * DescribeVpnConnections返回参数结构体
+ * DescribeCdcUsedIdcVlan请求参数结构体
  */
-export interface DescribeVpnConnectionsResponse {
-  /**
-   * 符合条件的实例数量。
-   */
-  TotalCount?: number
-  /**
-   * VPN通道实例。
-   */
-  VpnConnectionSet?: Array<VpnConnection>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeCdcUsedIdcVlanRequest = null
 
 /**
  * 描述带宽包信息的结构
@@ -13672,6 +14146,20 @@ export interface NetworkAclQuintupleEntry {
 }
 
 /**
+ * ModifyHighPriorityRouteAttribute请求参数结构体
+ */
+export interface ModifyHighPriorityRouteAttributeRequest {
+  /**
+   * 高优路由表唯一 ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表条目修改属性。
+   */
+  HighPriorityModifyItems: Array<HighPriorityModifyItem>
+}
+
+/**
  * InquirePriceCreateDirectConnectGateway返回参数结构体
  */
 export interface InquirePriceCreateDirectConnectGatewayResponse {
@@ -13922,6 +14410,20 @@ export interface InquiryPriceRenewVpnGatewayRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
    */
   InstanceChargePrepaid: InstanceChargePrepaid
+}
+
+/**
+ * 高优路由表条目修改属性。
+ */
+export interface HighPriorityModifyItem {
+  /**
+   * 高优路由条目唯一ID。
+   */
+  HighPriorityRouteId?: string
+  /**
+   * 高优路由条目描述。
+   */
+  Description?: string
 }
 
 /**
@@ -14442,6 +14944,20 @@ export interface CreateLocalGatewayResponse {
 }
 
 /**
+ * ModifyHighPriorityRouteECMPAlgorithm请求参数结构体
+ */
+export interface ModifyHighPriorityRouteECMPAlgorithmRequest {
+  /**
+   * 高优路由表实例唯一ID。
+   */
+  HighPriorityRouteTableId: string
+  /**
+   * 高优路由表HASH策略。
+   */
+  RouteECMPAlgorithms: Array<RouteECMPAlgorithm>
+}
+
+/**
  * 协议端口模板信息
  */
 export interface ServicesInfo {
@@ -14540,6 +15056,16 @@ export interface DeleteRouteTableRequest {
    * 路由表实例ID，例如：rtb-azd4dt1c。
    */
   RouteTableId: string
+}
+
+/**
+ * DescribeCdcLDCXList返回参数结构体
+ */
+export interface DescribeCdcLDCXListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14748,6 +15274,62 @@ export interface ReleaseAddressesResponse {
 }
 
 /**
+ * 高优路由表条目信息
+ */
+export interface HighPriorityRoute {
+  /**
+   * 高优路由表唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighPriorityRouteTableId?: string
+  /**
+   * 高优路由表条目唯一 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighPriorityRouteId?: string
+  /**
+   * 目标网段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DestinationCidrBlock?: string
+  /**
+   * 网关类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayType?: string
+  /**
+   * 网关唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 高优路由条目描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * ECMP算法，支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetRouteAlgorithm?: string
+  /**
+   * 出参展示，是否为CDC属性高优路由
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCdc?: boolean
+  /**
+   * 出参展示，CDC 唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+}
+
+/**
  * AuditCrossBorderCompliance返回参数结构体
  */
 export interface AuditCrossBorderComplianceResponse {
@@ -14940,6 +15522,11 @@ export interface DeleteNetworkAclEntriesResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeCdcLDCXList请求参数结构体
+ */
+export type DescribeCdcLDCXListRequest = null
 
 /**
  * CreateNetworkInterface返回参数结构体
@@ -15407,6 +15994,16 @@ export interface CreatePrivateNatGatewayResponse {
 }
 
 /**
+ * ModifyRouteTableSelectionPolicies返回参数结构体
+ */
+export interface ModifyRouteTableSelectionPoliciesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AttachNetworkInterface请求参数结构体
  */
 export interface AttachNetworkInterfaceRequest {
@@ -15543,17 +16140,21 @@ export interface DisassociateAddressResponse {
 }
 
 /**
- * IDC子网信息
+ * DescribeTrafficPackages返回参数结构体
  */
-export interface DirectConnectSubnet {
+export interface DescribeTrafficPackagesResponse {
   /**
-   * 专线网关ID
+   * 按照条件查询出来的流量包数量
    */
-  DirectConnectGatewayId: string
+  TotalCount?: number
   /**
-   * IDC子网网段
+   * 流量包信息
    */
-  CidrBlock: string
+  TrafficPackageSet?: Array<TrafficPackage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15785,25 +16386,38 @@ export interface DeleteLocalGatewayResponse {
 }
 
 /**
- * 弹性网卡绑定关系
+ * DescribeHighPriorityRouteTables请求参数结构体
  */
-export interface NetworkInterfaceAttachment {
+export interface DescribeHighPriorityRouteTablesRequest {
   /**
-   * 云主机实例ID。
+   * 过滤条件，参数不支持同时指定HighPriorityRouteTableIds和Filters。
+<li>high-priority-route-table-id - String - （过滤条件）高优路由表实例ID。</li>
+<li>name - String - （过滤条件）高优路由表名称。</li>
+<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+<li>tag-key - String -是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
+<li>next-hop-type - String - 是否必填：否 - （过滤条件）按下一跳类型进行过滤。使用next-hop-type进行过滤时，必须同时携带route-table-id与vpc-id。
+目前我们支持的类型有：
+HAVIP：高可用虚拟IP；
+NORMAL_CVM：普通云服务器；
+</li>
    */
-  InstanceId: string
+  Filters?: Array<Filter>
   /**
-   * 网卡在云主机实例内的序号。
+   * 高优路由表实例ID，例如：hprtb-18mot1fm。
    */
-  DeviceIndex: number
+  HighPriorityRouteTableIds?: Array<string>
   /**
-   * 云主机所有者账户信息。
+   * 偏移量。
    */
-  InstanceAccountId: string
+  Offset?: string
   /**
-   * 绑定时间。
+   * 返回数量，默认为20，最大值为100。
    */
-  AttachTime: string
+  Limit?: string
+  /**
+   * 是否需要获取路由策略信息，默认获取，当控制台不需要拉取路由策略信息时，改为False。
+   */
+  NeedRouterInfo?: boolean
 }
 
 /**
@@ -16090,6 +16704,25 @@ export interface DescribeAddressQuotaResponse {
 }
 
 /**
+ * DescribePrivateNatGatewayLimits请求参数结构体
+ */
+export interface DescribePrivateNatGatewayLimitsRequest {
+  /**
+   * 查询VPC下可创建的私网网关配额数量，可选值：
+<li>VpcId - String - 所在VpcId</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 返回数目，默认值为20。
+   */
+  Limit?: number
+}
+
+/**
  * CreateCustomerGateway请求参数结构体
  */
 export interface CreateCustomerGatewayRequest {
@@ -16311,6 +16944,11 @@ export interface ReplaceCcnRouteTableBroadcastPolicysRequest {
 }
 
 /**
+ * UnlockCcns请求参数结构体
+ */
+export type UnlockCcnsRequest = null
+
+/**
  * DescribeSnapshotAttachedInstances请求参数结构体
  */
 export interface DescribeSnapshotAttachedInstancesRequest {
@@ -16395,6 +17033,16 @@ export interface AssociateNetworkInterfaceSecurityGroupsRequest {
  * DeleteVpnGatewayRoutes返回参数结构体
  */
 export interface DeleteVpnGatewayRoutesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteHighPriorityRouteTables返回参数结构体
+ */
+export interface DeleteHighPriorityRouteTablesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16764,28 +17412,24 @@ export interface AcceptVpcPeeringConnectionRequest {
 }
 
 /**
- * DescribePrivateNatGatewayLimits请求参数结构体
+ * CreateCdcNetPlanes请求参数结构体
  */
-export interface DescribePrivateNatGatewayLimitsRequest {
-  /**
-   * 查询VPC下可创建的私网网关配额数量，可选值：
-<li>VpcId - String - 所在VpcId</li>
-   */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 返回数目，默认值为20。
-   */
-  Limit?: number
-}
+export type CreateCdcNetPlanesRequest = null
 
 /**
  * CreatePrivateNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
  */
 export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCdcLDCXAttribute返回参数结构体
+ */
+export interface ModifyCdcLDCXAttributeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17038,6 +17682,11 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
    * 路由策略创建时间
    */
   CreatedTime?: string
+  /**
+   * CDC 集群唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
 }
 
 /**
@@ -17083,6 +17732,20 @@ export interface ModifyVpcEndPointServiceWhiteListResponse {
 }
 
 /**
+ * DisassociateAddress请求参数结构体
+ */
+export interface DisassociateAddressRequest {
+  /**
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。
+   */
+  AddressId: string
+  /**
+   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<br><li>TRUE：表示解绑 EIP 之后分配普通公网 IP。<br><li>FALSE：表示解绑 EIP 之后不分配普通公网 IP。<br>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<br><li> 只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。<br><li>解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。
+   */
+  ReallocateNormalPublicIp?: boolean
+}
+
+/**
  * DescribeCrossBorderFlowMonitor返回参数结构体
  */
 export interface DescribeCrossBorderFlowMonitorResponse {
@@ -17110,6 +17773,24 @@ export interface DeleteVpcResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReplaceCcnRouteTableInputPolicys请求参数结构体
+ */
+export interface ReplaceCcnRouteTableInputPolicysRequest {
+  /**
+   * 云联网ID。
+   */
+  CcnId: string
+  /**
+   * 云联网路由表ID。
+   */
+  RouteTableId: string
+  /**
+   * 新的路由接收策略。
+   */
+  Policys?: Array<CcnRouteTableInputPolicy>
 }
 
 /**

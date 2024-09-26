@@ -32,6 +32,7 @@ export { bpaas } from "./bpaas";
 export { bri } from "./bri";
 export { bsca } from "./bsca";
 export { btoe } from "./btoe";
+export { ca } from "./ca";
 export { cam } from "./cam";
 export { captcha } from "./captcha";
 export { car } from "./car";

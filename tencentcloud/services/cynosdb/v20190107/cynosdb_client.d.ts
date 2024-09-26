@@ -288,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     AddInstances(req: AddInstancesRequest, cb?: (error: string, rep: AddInstancesResponse) => void): Promise<AddInstancesResponse>;
     /**
-     * 修改实例小版本升级限制时间
+     * 本接口（ModifyInstanceUpgradeLimitDays）用于修改实例内核小版本的升级限制时间。
      */
     ModifyInstanceUpgradeLimitDays(req: ModifyInstanceUpgradeLimitDaysRequest, cb?: (error: string, rep: ModifyInstanceUpgradeLimitDaysResponse) => void): Promise<ModifyInstanceUpgradeLimitDaysResponse>;
     /**
@@ -424,7 +424,7 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceRenew(req: InquirePriceRenewRequest, cb?: (error: string, rep: InquirePriceRenewResponse) => void): Promise<InquirePriceRenewResponse>;
     /**
-     * 开启日志投递
+     * 本接口（StartCLSDelivery）用于开启日志投递功能。
      */
     StartCLSDelivery(req: StartCLSDeliveryRequest, cb?: (error: string, rep: StartCLSDeliveryResponse) => void): Promise<StartCLSDeliveryResponse>;
     /**
@@ -432,7 +432,7 @@ export declare class Client extends AbstractClient {
      */
     ReloadBalanceProxyNode(req: ReloadBalanceProxyNodeRequest, cb?: (error: string, rep: ReloadBalanceProxyNodeResponse) => void): Promise<ReloadBalanceProxyNodeResponse>;
     /**
-     * 销毁集群
+     * 本接口（OfflineCluster）用于销毁集群。
      */
     OfflineCluster(req: OfflineClusterRequest, cb?: (error: string, rep: OfflineClusterResponse) => void): Promise<OfflineClusterResponse>;
     /**
@@ -440,7 +440,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAuditRuleTemplates(req: ModifyAuditRuleTemplatesRequest, cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void): Promise<ModifyAuditRuleTemplatesResponse>;
     /**
-     * 停止日志投递
+     * 本接口（StopCLSDelivery）用于停止日志投递功能。
      */
     StopCLSDelivery(req: StopCLSDeliveryRequest, cb?: (error: string, rep: StopCLSDeliveryResponse) => void): Promise<StopCLSDeliveryResponse>;
     /**
@@ -484,7 +484,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 更新内核小版本
+     * 本接口（UpgradeClusterVersion）用于更新内核小版本。
      */
     UpgradeClusterVersion(req: UpgradeClusterVersionRequest, cb?: (error: string, rep: UpgradeClusterVersionResponse) => void): Promise<UpgradeClusterVersionResponse>;
     /**
@@ -564,7 +564,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
-     * 实例变配
+     * 本接口（UpgradeInstance）用于实例变配。
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**

@@ -3790,6 +3790,10 @@ export interface DescribeInsightListRequest {
    * 分页查询时的页号，从1开始
    */
   Page: number
+  /**
+   * 查询类型,支持HIVE,SPARK,MAPREDUCE,TRINO等类型,默认查询全部
+   */
+  Type?: string
 }
 
 /**

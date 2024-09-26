@@ -2311,6 +2311,10 @@ export interface InquiryPriceRunInstancesRequest {
      */
     HpcClusterId?: string;
     /**
+     * 描述了实例CPU拓扑结构的相关信息。若不指定该参数，则按系统资源情况决定。
+     */
+    CpuTopology?: CpuTopology;
+    /**
      * 实例启动模板。
      */
     LaunchTemplate?: LaunchTemplate;

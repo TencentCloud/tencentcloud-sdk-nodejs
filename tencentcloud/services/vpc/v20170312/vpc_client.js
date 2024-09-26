@@ -248,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AllocateAddresses", req, cb);
     }
     /**
+     * 删除 IDC通道
+     */
+    async DeleteCdcLDCXList(req, cb) {
+        return this.request("DeleteCdcLDCXList", req, cb);
+    }
+    /**
      * 该接口用于查询IPV6地址信息
      */
     async DescribeIp6Addresses(req, cb) {
@@ -286,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNetDetectStates(req, cb) {
         return this.request("DescribeNetDetectStates", req, cb);
+    }
+    /**
+     * 修改虚拟连接
+     */
+    async ModifyCdcNetPlaneAttribute(req, cb) {
+        return this.request("ModifyCdcNetPlaneAttribute", req, cb);
     }
     /**
      * 本接口（DescribeCcns）用于查询云联网（CCN）列表。
@@ -440,6 +452,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("WithdrawNotifyRoutes", req, cb);
     }
     /**
+     * 创建虚拟连接，用于支持 CDC 多租户模式
+     */
+    async CreateCdcNetPlanes(req, cb) {
+        return this.request("CreateCdcNetPlanes", req, cb);
+    }
+    /**
      * 本接口(DeleteRoutes)用于对某个路由表批量删除路由策略（Route）。
      */
     async DeleteRoutes(req, cb) {
@@ -452,6 +470,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateVpnGateway", req, cb);
     }
     /**
+     * 删除高优路由表
+     */
+    async DeleteHighPriorityRouteTables(req, cb) {
+        return this.request("DeleteHighPriorityRouteTables", req, cb);
+    }
+    /**
      * 本接口（DescribeCrossBorderCompliance）用于查询用户创建的合规化资质审批单。
 服务商可以查询服务名下的任意 `APPID` 创建的审批单；非服务商，只能查询自己审批单。
      */
@@ -459,11 +483,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCrossBorderCompliance", req, cb);
     }
     /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
+* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+* 创建安全组同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
      */
-    async ReturnNormalAddresses(req, cb) {
-        return this.request("ReturnNormalAddresses", req, cb);
+    async CreateSecurityGroup(req, cb) {
+        return this.request("CreateSecurityGroup", req, cb);
     }
     /**
      * 本接口（ModifyNetworkInterfaceAttribute）用于修改弹性网卡属性。
@@ -644,10 +670,10 @@ LimitTypes取值范围：
         return this.request("ReleaseAddresses", req, cb);
     }
     /**
-     * 本接口（ModifyGatewayFlowQos）用于调整网关流控带宽。
+     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
      */
-    async ModifyGatewayFlowQos(req, cb) {
-        return this.request("ModifyGatewayFlowQos", req, cb);
+    async ReplaceRoutes(req, cb) {
+        return this.request("ReplaceRoutes", req, cb);
     }
     /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
@@ -959,10 +985,16 @@ LimitTypes取值范围：
         return this.request("DescribeVpcPeeringConnections", req, cb);
     }
     /**
-     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
+     * 高优路由表创建
      */
-    async ReplaceRoutes(req, cb) {
-        return this.request("ReplaceRoutes", req, cb);
+    async CreateHighPriorityRouteTable(req, cb) {
+        return this.request("CreateHighPriorityRouteTable", req, cb);
+    }
+    /**
+     * 本接口（ModifyGatewayFlowQos）用于调整网关流控带宽。
+     */
+    async ModifyGatewayFlowQos(req, cb) {
+        return this.request("ModifyGatewayFlowQos", req, cb);
     }
     /**
      * 本接口（DescribeRouteConflicts）用于查询自定义路由策略与云联网路由策略冲突列表。
@@ -1410,6 +1442,12 @@ LimitTypes取值范围：
         return this.request("DescribeCustomerGatewayVendors", req, cb);
     }
     /**
+     * 删除虚拟连接
+     */
+    async DeleteCdcNetPlanes(req, cb) {
+        return this.request("DeleteCdcNetPlanes", req, cb);
+    }
+    /**
      * 本接口（DeleteLocalGateway）用于删除CDC的本地网关。
      */
     async DeleteLocalGateway(req, cb) {
@@ -1523,10 +1561,10 @@ LimitTypes取值范围：
         return this.request("DescribePrivateNatGatewayDestinationIpPortTranslationNatRules", req, cb);
     }
     /**
-     * 禁用SSL-VPN-CLIENT 证书
+     * 查询高优路由表条目信息。
      */
-    async DisableVpnGatewaySslClientCert(req, cb) {
-        return this.request("DisableVpnGatewaySslClientCert", req, cb);
+    async DescribeHighPriorityRoutes(req, cb) {
+        return this.request("DescribeHighPriorityRoutes", req, cb);
     }
     /**
      * 本接口 (DisassociateAddress) 用于解绑[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
@@ -1536,6 +1574,12 @@ LimitTypes取值范围：
      */
     async DisassociateAddress(req, cb) {
         return this.request("DisassociateAddress", req, cb);
+    }
+    /**
+     * 查询 IDC通道信息
+     */
+    async DescribeCdcLDCXList(req, cb) {
+        return this.request("DescribeCdcLDCXList", req, cb);
     }
     /**
      * 该接口用于修改IPV6转换规则，当前仅支持修改转换规则名称，IPV4地址和IPV4端口号
@@ -1587,6 +1631,12 @@ LimitTypes取值范围：
      */
     async ModifyCcnRouteTables(req, cb) {
         return this.request("ModifyCcnRouteTables", req, cb);
+    }
+    /**
+     * 修改高优路由表 HASH 策略。
+     */
+    async ModifyHighPriorityRouteECMPAlgorithm(req, cb) {
+        return this.request("ModifyHighPriorityRouteECMPAlgorithm", req, cb);
     }
     /**
      * 本接口（DeleteNatGatewaySourceIpTranslationNatRule）用于删除NAT网关端口SNAT转发规则。
@@ -1657,6 +1707,12 @@ LimitTypes取值范围：
         return this.request("DeleteVpcEndPoint", req, cb);
     }
     /**
+     * 删除高优路由表的路由条目。
+     */
+    async DeleteHighPriorityRoutes(req, cb) {
+        return this.request("DeleteHighPriorityRoutes", req, cb);
+    }
+    /**
      * 本接口（CreateServiceTemplate）用于创建协议端口模板。
      */
     async CreateServiceTemplate(req, cb) {
@@ -1699,10 +1755,10 @@ LimitTypes取值范围：
         return this.request("DescribeCcnRouteTableBroadcastPolicys", req, cb);
     }
     /**
-     * 本接口（SetVpnGatewaysRenewFlag）用于设置VPNGW续费标记。
+     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合。
      */
-    async SetVpnGatewaysRenewFlag(req, cb) {
-        return this.request("SetVpnGatewaysRenewFlag", req, cb);
+    async CreateAddressTemplateGroup(req, cb) {
+        return this.request("CreateAddressTemplateGroup", req, cb);
     }
     /**
      * 本接口（AssociateNetworkAclSubnets）用于网络ACL关联VPC下的子网。
@@ -1723,16 +1779,34 @@ LimitTypes取值范围：
         return this.request("AssociateNetworkInterfaceSecurityGroups", req, cb);
     }
     /**
+     * 替换高优路由表和子网绑定关系。
+     */
+    async ReplaceHighPriorityRouteTableAssociation(req, cb) {
+        return this.request("ReplaceHighPriorityRouteTableAssociation", req, cb);
+    }
+    /**
      * 本接口（EnableFlowLogs）用于启动流日志。
      */
     async EnableFlowLogs(req, cb) {
         return this.request("EnableFlowLogs", req, cb);
     }
     /**
+     * 创建 IDC 通道
+     */
+    async CreateCdcLDCXList(req, cb) {
+        return this.request("CreateCdcLDCXList", req, cb);
+    }
+    /**
      * 本接口（ModifyNatGatewayDestinationIpPortTranslationNatRule）用于修改NAT网关端口转发规则。
      */
     async ModifyNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
         return this.request("ModifyNatGatewayDestinationIpPortTranslationNatRule", req, cb);
+    }
+    /**
+     * 禁用SSL-VPN-CLIENT 证书
+     */
+    async DisableVpnGatewaySslClientCert(req, cb) {
+        return this.request("DisableVpnGatewaySslClientCert", req, cb);
     }
     /**
      * 本接口（DescribeHaVips）用于查询高可用虚拟IP（HAVIP）列表。
@@ -1785,6 +1859,12 @@ LimitTypes取值范围：
      */
     async DescribeTenantCcns(req, cb) {
         return this.request("DescribeTenantCcns", req, cb);
+    }
+    /**
+     * 创建高优路由表条目。
+     */
+    async CreateHighPriorityRoutes(req, cb) {
+        return this.request("CreateHighPriorityRoutes", req, cb);
     }
     /**
      * 本接口（LockCcns）用于锁定云联网实例
@@ -1926,6 +2006,12 @@ LimitTypes取值范围：
         return this.request("ModifyVpcEndPointAttribute", req, cb);
     }
     /**
+     * 修改高优路由表条目属性。
+     */
+    async ModifyHighPriorityRouteAttribute(req, cb) {
+        return this.request("ModifyHighPriorityRouteAttribute", req, cb);
+    }
+    /**
      * 本接口（DisassociateVpcEndPointSecurityGroups）用于终端节点解绑安全组。
      */
     async DisassociateVpcEndPointSecurityGroups(req, cb) {
@@ -1969,10 +2055,22 @@ LimitTypes取值范围：
         return this.request("DescribeNatGateways", req, cb);
     }
     /**
+     * 重置高优路由表。
+     */
+    async ResetHighPriorityRoutes(req, cb) {
+        return this.request("ResetHighPriorityRoutes", req, cb);
+    }
+    /**
      * 本接口（DescribeVpcs）用于查询私有网络列表。
      */
     async DescribeVpcs(req, cb) {
         return this.request("DescribeVpcs", req, cb);
+    }
+    /**
+     * 查询高优路由表。
+     */
+    async DescribeHighPriorityRouteTables(req, cb) {
+        return this.request("DescribeHighPriorityRouteTables", req, cb);
     }
     /**
      * 本接口（AcceptAttachCcnInstances）用于跨账号关联实例时，云联网所有者接受并同意关联操作。
@@ -2092,10 +2190,22 @@ LimitTypes取值范围：
         return this.request("DeleteIp6Translators", req, cb);
     }
     /**
+     * 本接口（DescribeRoutes）用于查询路由列表。
+     */
+    async DescribeRoutes(req, cb) {
+        return this.request("DescribeRoutes", req, cb);
+    }
+    /**
      * 本接口（DeleteVpnGatewayRoutes）用于删除VPN网关路由
      */
     async DeleteVpnGatewayRoutes(req, cb) {
         return this.request("DeleteVpnGatewayRoutes", req, cb);
+    }
+    /**
+     * 替换高优路由表条目信息。
+     */
+    async ReplaceHighPriorityRoutes(req, cb) {
+        return this.request("ReplaceHighPriorityRoutes", req, cb);
     }
     /**
      * 修改CCN关联实例属性，目前仅修改备注description
@@ -2115,6 +2225,18 @@ LimitTypes取值范围：
      */
     async CreateNetDetect(req, cb) {
         return this.request("CreateNetDetect", req, cb);
+    }
+    /**
+     * 修改高优路由表属性
+     */
+    async ModifyHighPriorityRouteTableAttribute(req, cb) {
+        return this.request("ModifyHighPriorityRouteTableAttribute", req, cb);
+    }
+    /**
+     * 修改 IDC通道信息
+     */
+    async ModifyCdcLDCXAttribute(req, cb) {
+        return this.request("ModifyCdcLDCXAttribute", req, cb);
     }
     /**
      * 本接口（DeleteVpcEndPointService）用于删除终端节点服务。
@@ -2178,6 +2300,12 @@ LimitTypes取值范围：
      */
     async DescribeSecurityGroupLimits(req, cb) {
         return this.request("DescribeSecurityGroupLimits", req, cb);
+    }
+    /**
+     * 查询IDC使用的 VLAN
+     */
+    async DescribeCdcUsedIdcVlan(req, cb) {
+        return this.request("DescribeCdcUsedIdcVlan", req, cb);
     }
     /**
      * 本接口（DescribeSecurityGroupReferences）用于查询安全组被引用信息。
@@ -2357,16 +2485,22 @@ LimitTypes取值范围：
         return this.request("CreateDhcpIp", req, cb);
     }
     /**
+     * 查询虚拟连接
+     */
+    async DescribeCdcNetPlanes(req, cb) {
+        return this.request("DescribeCdcNetPlanes", req, cb);
+    }
+    /**
      * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
      */
     async ResumeSnapshotInstance(req, cb) {
         return this.request("ResumeSnapshotInstance", req, cb);
     }
     /**
-     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合。
+     * 本接口（SetVpnGatewaysRenewFlag）用于设置VPNGW续费标记。
      */
-    async CreateAddressTemplateGroup(req, cb) {
-        return this.request("CreateAddressTemplateGroup", req, cb);
+    async SetVpnGatewaysRenewFlag(req, cb) {
+        return this.request("SetVpnGatewaysRenewFlag", req, cb);
     }
     /**
      * 本接口（DescribeSnapshotPolicies）用于查询快照策略。
@@ -2407,13 +2541,11 @@ LimitTypes取值范围：
         return this.request("CreateSecurityGroupWithPolicies", req, cb);
     }
     /**
-     * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
-* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
-* 创建安全组同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
      */
-    async CreateSecurityGroup(req, cb) {
-        return this.request("CreateSecurityGroup", req, cb);
+    async ReturnNormalAddresses(req, cb) {
+        return this.request("ReturnNormalAddresses", req, cb);
     }
     /**
      * 本接口（ModifyVpcAttribute）用于修改私有网络（VPC）的相关属性。
