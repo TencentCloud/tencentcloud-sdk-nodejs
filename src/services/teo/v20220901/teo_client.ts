@@ -21,13 +21,16 @@ import {
   DeployConfigGroupVersionRequest,
   RenewFlag,
   Compression,
+  DescribeFunctionsResponse,
   DeleteL4ProxyRulesRequest,
   DescribeOriginGroupResponse,
   DescribeSecurityIPGroupInfoResponse,
   SlowPostConfig,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
-  PrepaidPlanParam,
+  RealtimeLogDeliveryTask,
+  ModifyApplicationProxyResponse,
+  BindSharedCNAMEResponse,
   ModifyAccelerationDomainResponse,
   TopEntryValue,
   DescribeHostsSettingResponse,
@@ -53,15 +56,18 @@ import {
   CLSTopic,
   CreatePrefetchTaskRequest,
   DescribeApplicationProxiesResponse,
+  VanityNameServers,
   DescribeTopL7AnalysisDataRequest,
   DescribeAccelerationDomainsResponse,
   SwitchConfig,
   IdentifyZoneResponse,
   ModifyL4ProxyResponse,
+  CreateFunctionRuleRequest,
   DescribeAliasDomainsResponse,
   EnvInfo,
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
+  CreateFunctionRequest,
   S3,
   DescribeDDoSAttackEventResponse,
   DescribePrefetchTasksRequest,
@@ -74,8 +80,9 @@ import {
   RulesProperties,
   RuleCodeActionParams,
   OriginGroupReference,
+  ModifyFunctionRulePriorityResponse,
   ExceptUserRule,
-  AccelerateType,
+  SecEntry,
   ModifyCustomErrorPageResponse,
   SubRule,
   ConfigGroupVersionInfo,
@@ -92,16 +99,18 @@ import {
   DeleteCustomErrorPageRequest,
   CustomField,
   DeleteZoneRequest,
+  SecurityType,
   BotManagedRule,
   SecurityConfig,
   L4OfflineLog,
   ModifyPlanRequest,
-  CustomErrorPage,
+  ExceptUserRuleScope,
   MaxAge,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
   EntityStatus,
   ModifyAliasDomainRequest,
+  CreateFunctionRuleResponse,
   RuleNormalActionParams,
   PrivateParameter,
   CreateSecurityIPGroupRequest,
@@ -139,10 +148,12 @@ import {
   BotUserRule,
   Task,
   DescribeL4ProxyRulesResponse,
+  DescribeFunctionsRequest,
   DeleteAliasDomainRequest,
   DescribeIdentificationsResponse,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
+  DeleteAccelerationDomainsResponse,
   ExceptConfig,
   DeleteOriginGroupRequest,
   AclCondition,
@@ -162,12 +173,13 @@ import {
   DescribeZonesRequest,
   OriginRecord,
   Tag,
-  BindSharedCNAMEResponse,
+  ModifyFunctionRulePriorityRequest,
   DeleteSharedCNAMERequest,
   ModifyRealtimeLogDeliveryTaskRequest,
-  VanityNameServers,
+  DescribeHostsSettingRequest,
   DestroyPlanRequest,
   CreatePlanRequest,
+  DescribeFunctionRuntimeEnvironmentRequest,
   IPGroup,
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
@@ -181,6 +193,7 @@ import {
   DetailHost,
   DescribeRealtimeLogDeliveryTasksResponse,
   DescribeConfigGroupVersionsResponse,
+  FunctionEnvironmentVariable,
   DeleteRealtimeLogDeliveryTaskResponse,
   RuleCondition,
   DescribeOverviewL7DataResponse,
@@ -190,6 +203,8 @@ import {
   CreatePlanForZoneRequest,
   CreateL4ProxyRulesResponse,
   ModifyCustomErrorPageRequest,
+  ModifyFunctionRuleResponse,
+  DescribeFunctionRulesResponse,
   CacheKey,
   DownloadL4LogsResponse,
   BindSharedCNAMERequest,
@@ -206,11 +221,13 @@ import {
   IdentifyZoneRequest,
   CacheConfig,
   UpgradePlanResponse,
+  AclConfig,
   CreateL4ProxyRulesRequest,
   CreateConfigGroupVersionRequest,
   AclUserRule,
   DescribeDDoSAttackEventRequest,
-  CreateL4ProxyResponse,
+  FunctionRuleCondition,
+  ModifyFunctionResponse,
   DescribeOriginGroupRequest,
   DescribeIPRegionRequest,
   TimingTypeValue,
@@ -227,7 +244,7 @@ import {
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
   RenewPlanResponse,
-  RealtimeLogDeliveryTask,
+  CustomErrorPage,
   DescribeDeployHistoryRequest,
   BillingData,
   DeleteZoneResponse,
@@ -236,13 +253,14 @@ import {
   WafRule,
   ModifyApplicationProxyRequest,
   ModifyAliasDomainStatusRequest,
+  DeleteFunctionRequest,
   BindSharedCNAMEMap,
   DeleteRealtimeLogDeliveryTaskRequest,
   RulesSettingAction,
   MutualTLS,
   Ipv6,
   ModifyApplicationProxyRuleRequest,
-  AclConfig,
+  CreateFunctionResponse,
   AlgDetectJS,
   SubRuleItem,
   DeleteSecurityIPGroupRequest,
@@ -253,11 +271,14 @@ import {
   FileAscriptionInfo,
   CreateRealtimeLogDeliveryTaskResponse,
   DescribeTopL7CacheDataResponse,
+  DescribeFunctionRuntimeEnvironmentResponse,
   RuleChoicePropertiesItem,
   DescribeSecurityTemplateBindingsResponse,
   ModifyAliasDomainStatusResponse,
+  DeleteFunctionRulesRequest,
   DescribeTimingL7AnalysisDataRequest,
   NoCache,
+  ModifyFunctionRequest,
   ModifyApplicationProxyStatusRequest,
   CreateZoneRequest,
   AscriptionInfo,
@@ -279,22 +300,22 @@ import {
   CertificateInfo,
   CreateApplicationProxyRequest,
   CC,
+  HandleFunctionRuntimeEnvironmentRequest,
   ModifyL4ProxyRulesStatusRequest,
   DescribeCustomErrorPagesRequest,
   DescribeTimingL4DataResponse,
   Action,
   ApplicationProxy,
-  ModifyApplicationProxyResponse,
+  PrepaidPlanParam,
   ModifySecurityIPGroupResponse,
   ZoneSetting,
   ModifyL4ProxyRequest,
   RuleAndConditions,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
-  ExceptUserRuleScope,
   PartialModule,
   ModifyApplicationProxyRuleStatusRequest,
-  SecEntry,
+  AccelerateType,
   DeliveryCondition,
   FollowOrigin,
   IPRegionInfo,
@@ -303,12 +324,12 @@ import {
   RuleRewriteActionParams,
   ModifyAliasDomainResponse,
   ModifyHostsCertificateRequest,
-  DeleteAccelerationDomainsResponse,
+  DeleteFunctionRulesResponse,
   DescribeTopL7AnalysisDataResponse,
   ClientIpHeader,
   Resource,
   DescribeOriginProtectionRequest,
-  DescribeHostsSettingRequest,
+  HandleFunctionRuntimeEnvironmentResponse,
   DeleteRulesResponse,
   OriginGroup,
   ModifySecurityIPGroupRequest,
@@ -339,7 +360,9 @@ import {
   OriginProtectionInfo,
   AliasDomain,
   IpTableRule,
+  ModifyFunctionRuleRequest,
   IncreasePlanQuotaRequest,
+  FunctionRule,
   DescribeDDoSAttackTopDataRequest,
   Quic,
   CreateCLSIndexRequest,
@@ -356,7 +379,7 @@ import {
   DDoSBlockData,
   DeleteL4ProxyRulesResponse,
   BindZoneToPlanRequest,
-  SecurityType,
+  DeleteFunctionResponse,
   IPWhitelist,
   CreateCustomizeErrorPageRequest,
   DescribeSecurityIPGroupRequest,
@@ -375,6 +398,7 @@ import {
   CreateAccelerationDomainResponse,
   ModifyAccelerationDomainStatusesRequest,
   CreateZoneResponse,
+  CreateL4ProxyResponse,
   ModifySecurityPolicyResponse,
   ModifyOriginGroupRequest,
   SecurityTemplateBinding,
@@ -384,6 +408,7 @@ import {
   DescribeConfigGroupVersionsRequest,
   DescribeL4ProxyRulesRequest,
   AiRule,
+  Function,
   Quota,
   CheckCnameStatusRequest,
   ModifyZoneStatusResponse,
@@ -391,6 +416,7 @@ import {
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DescribePurgeTasksResponse,
+  DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
   RateLimitIntelligence,
   DescribeDeployHistoryResponse,
@@ -424,6 +450,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyPlanResponse) => void
   ): Promise<DestroyPlanResponse> {
     return this.request("DestroyPlan", req, cb)
+  }
+
+  /**
+   * 删除边缘函数，删除后函数无法恢复，关联的触发规则会一并删除。
+   */
+  async DeleteFunction(
+    req: DeleteFunctionRequest,
+    cb?: (error: string, rep: DeleteFunctionResponse) => void
+  ): Promise<DeleteFunctionResponse> {
+    return this.request("DeleteFunction", req, cb)
   }
 
   /**
@@ -501,6 +537,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建边缘函数的触发规则。
+   */
+  async CreateFunctionRule(
+    req: CreateFunctionRuleRequest,
+    cb?: (error: string, rep: CreateFunctionRuleResponse) => void
+  ): Promise<CreateFunctionRuleResponse> {
+    return this.request("CreateFunctionRule", req, cb)
+  }
+
+  /**
+   * 删除边缘函数触发规则。
+   */
+  async DeleteFunctionRules(
+    req: DeleteFunctionRulesRequest,
+    cb?: (error: string, rep: DeleteFunctionRulesResponse) => void
+  ): Promise<DeleteFunctionRulesResponse> {
+    return this.request("DeleteFunctionRules", req, cb)
+  }
+
+  /**
    * 用于验证站点所有权。
    */
   async IdentifyZone(
@@ -528,6 +584,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccelerationDomainsResponse) => void
   ): Promise<DescribeAccelerationDomainsResponse> {
     return this.request("DescribeAccelerationDomains", req, cb)
+  }
+
+  /**
+   * 查询边缘函数运行环境，包括环境变量。
+   */
+  async DescribeFunctionRuntimeEnvironment(
+    req: DescribeFunctionRuntimeEnvironmentRequest,
+    cb?: (error: string, rep: DescribeFunctionRuntimeEnvironmentResponse) => void
+  ): Promise<DescribeFunctionRuntimeEnvironmentResponse> {
+    return this.request("DescribeFunctionRuntimeEnvironment", req, cb)
   }
 
   /**
@@ -837,16 +903,6 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口（DescribeTopL7CacheData）用于查询七层缓存分析topN流量数据。
-   */
-  async DescribeTopL7CacheData(
-    req: DescribeTopL7CacheDataRequest,
-    cb?: (error: string, rep: DescribeTopL7CacheDataResponse) => void
-  ): Promise<DescribeTopL7CacheDataResponse> {
-    return this.request("DescribeTopL7CacheData", req, cb)
-  }
-
-  /**
    * 本接口（DescribeTimingL4Data）用于查询四层时序流量数据列表。
    */
   async DescribeTimingL4Data(
@@ -854,6 +910,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeTimingL4DataResponse) => void
   ): Promise<DescribeTimingL4DataResponse> {
     return this.request("DescribeTimingL4Data", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTopL7CacheData）用于查询七层缓存分析topN流量数据。
+   */
+  async DescribeTopL7CacheData(
+    req: DescribeTopL7CacheDataRequest,
+    cb?: (error: string, rep: DescribeTopL7CacheDataResponse) => void
+  ): Promise<DescribeTopL7CacheDataResponse> {
+    return this.request("DescribeTopL7CacheData", req, cb)
   }
 
   /**
@@ -988,6 +1054,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 创建并部署边缘函数至 EdgeOne 的边缘节点。
+   */
+  async CreateFunction(
+    req: CreateFunctionRequest,
+    cb?: (error: string, rep: CreateFunctionResponse) => void
+  ): Promise<CreateFunctionResponse> {
+    return this.request("CreateFunction", req, cb)
+  }
+
+  /**
    * 本接口为旧版，如需调用请尽快迁移至新版，新版接口中将四层代理实例列表的查询和四层转发规则的查询拆分成两个接口，详情请参考 [查询四层代理实例列表](https://cloud.tencent.com/document/product/1552/103413) 和 [查询四层代理转发规则列表](https://cloud.tencent.com/document/product/1552/103412)。
    */
   async DescribeApplicationProxies(
@@ -1028,6 +1104,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 修改边缘函数，支持修改函数的内容及描述信息，修改且重新部署后，函数立刻生效。
+   */
+  async ModifyFunction(
+    req: ModifyFunctionRequest,
+    cb?: (error: string, rep: ModifyFunctionResponse) => void
+  ): Promise<ModifyFunctionResponse> {
+    return this.request("ModifyFunction", req, cb)
+  }
+
+  /**
      * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理实例
 ](https://cloud.tencent.com/document/product/1552/103411) 。
      */
@@ -1048,6 +1134,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: CreateZoneResponse) => void
   ): Promise<CreateZoneResponse> {
     return this.request("CreateZone", req, cb)
+  }
+
+  /**
+   * 修改边缘函数触发规则，支持修改规则条件、执行函数以及描述信息。
+   */
+  async ModifyFunctionRule(
+    req: ModifyFunctionRuleRequest,
+    cb?: (error: string, rep: ModifyFunctionRuleResponse) => void
+  ): Promise<ModifyFunctionRuleResponse> {
+    return this.request("ModifyFunctionRule", req, cb)
   }
 
   /**
@@ -1091,13 +1187,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改安全 IP 组。
+   * 查询边缘函数触发规则列表，支持按照规则 ID、函数 ID、规则描述等条件进行过滤。
    */
-  async ModifySecurityIPGroup(
-    req: ModifySecurityIPGroupRequest,
-    cb?: (error: string, rep: ModifySecurityIPGroupResponse) => void
-  ): Promise<ModifySecurityIPGroupResponse> {
-    return this.request("ModifySecurityIPGroup", req, cb)
+  async DescribeFunctionRules(
+    req: DescribeFunctionRulesRequest,
+    cb?: (error: string, rep: DescribeFunctionRulesResponse) => void
+  ): Promise<DescribeFunctionRulesResponse> {
+    return this.request("DescribeFunctionRules", req, cb)
   }
 
   /**
@@ -1171,6 +1267,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+     * 操作边缘函数运行环境，支持环境变量的相关设置。
+设置环境变量后，可在函数代码中使用，具体参考 [边缘函数引入环境变量](https://cloud.tencent.com/document/product/1552/109151#0151fd9a-8b0e-407b-ae37-54553a60ded6)。
+     */
+  async HandleFunctionRuntimeEnvironment(
+    req: HandleFunctionRuntimeEnvironmentRequest,
+    cb?: (error: string, rep: HandleFunctionRuntimeEnvironmentResponse) => void
+  ): Promise<HandleFunctionRuntimeEnvironmentResponse> {
+    return this.request("HandleFunctionRuntimeEnvironment", req, cb)
+  }
+
+  /**
      * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
 > 不同类型 Edgeone 计费套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
 计费套餐升级规则以及资费详情参考 [Edgeone计费套餐升配说明](https://cloud.tencent.com/document/product/1552/95291)
@@ -1181,6 +1288,26 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: UpgradePlanResponse) => void
   ): Promise<UpgradePlanResponse> {
     return this.request("UpgradePlan", req, cb)
+  }
+
+  /**
+   * 修改边缘函数触发规则的优先级。
+   */
+  async ModifyFunctionRulePriority(
+    req: ModifyFunctionRulePriorityRequest,
+    cb?: (error: string, rep: ModifyFunctionRulePriorityResponse) => void
+  ): Promise<ModifyFunctionRulePriorityResponse> {
+    return this.request("ModifyFunctionRulePriority", req, cb)
+  }
+
+  /**
+   * 修改安全 IP 组。
+   */
+  async ModifySecurityIPGroup(
+    req: ModifySecurityIPGroupRequest,
+    cb?: (error: string, rep: ModifySecurityIPGroupResponse) => void
+  ): Promise<ModifySecurityIPGroupResponse> {
+    return this.request("ModifySecurityIPGroup", req, cb)
   }
 
   /**
@@ -1406,6 +1533,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeZonesResponse) => void
   ): Promise<DescribeZonesResponse> {
     return this.request("DescribeZones", req, cb)
+  }
+
+  /**
+   * 查询边缘函数列表，支持函数 ID、函数名称、描述等条件的过滤。
+   */
+  async DescribeFunctions(
+    req: DescribeFunctionsRequest,
+    cb?: (error: string, rep: DescribeFunctionsResponse) => void
+  ): Promise<DescribeFunctionsResponse> {
+    return this.request("DescribeFunctions", req, cb)
   }
 
   /**

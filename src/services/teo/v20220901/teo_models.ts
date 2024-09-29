@@ -69,6 +69,24 @@ export interface Compression {
 }
 
 /**
+ * DescribeFunctions返回参数结构体
+ */
+export interface DescribeFunctionsResponse {
+  /**
+   * 符合查询条件的函数总数。
+   */
+  TotalCount?: number
+  /**
+   * 符合查询条件的所有函数信息。
+   */
+  Functions?: Array<Function>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteL4ProxyRules请求参数结构体
  */
 export interface DeleteL4ProxyRulesRequest {
@@ -240,22 +258,103 @@ export interface OriginDetail {
 }
 
 /**
- * 预付费套餐计费参数
+ * 实时日志投递任务。
  */
-export interface PrepaidPlanParam {
+export interface RealtimeLogDeliveryTask {
   /**
-   * 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
+   * 实时日志投递任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 实时日志投递任务的名称。
+   */
+  TaskName?: string
+  /**
+   * 实时日志投递任务的状态，取值有： <li>enabled: 已启用；</li> <li>disabled: 已停用；</li><li>deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。</li>
+   */
+  DeliveryStatus?: string
+  /**
+   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址。</li>
+   */
+  TaskType?: string
+  /**
+   * 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： <li>七层域名：domain.example.com；</li> <li>四层代理实例：sid-2s69eb5wcms7。</li>
+   */
+  EntityList?: Array<string>
+  /**
+   * 数据投递类型，取值有： <li>domain：站点加速日志；</li> <li>application：四层代理日志；</li> <li>web-rateLiming：速率限制和 CC 攻击防护日志；</li> <li>web-attack：托管规则日志；</li> <li>web-rule：自定义规则日志；</li> <li>web-bot：Bot管理日志。</li>
+   */
+  LogType?: string
+  /**
+   * 数据投递区域，取值有： <li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li>
+   */
+  Area?: string
+  /**
+   * 投递的预设字段列表。
+   */
+  Fields?: Array<string>
+  /**
+   * 投递的自定义字段列表。
+   */
+  CustomFields?: Array<CustomField>
+  /**
+   * 日志投递的过滤条件。
+   */
+  DeliveryConditions?: Array<DeliveryCondition>
+  /**
+   * 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。
+   */
+  Sample?: number
+  /**
+   * 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：
+<li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
+<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFormat?: LogFormat
+  /**
+   * CLS 的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CLS?: CLSTopic
+  /**
+   * 自定义 HTTP 服务的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomEndpoint?: CustomEndpoint
+  /**
+   * AWS S3 兼容存储桶的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  S3?: S3
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
+}
 
-不填写使用默认值 1。
-   */
-  Period?: number
+/**
+ * ModifyApplicationProxy返回参数结构体
+ */
+export interface ModifyApplicationProxyResponse {
   /**
-   * 预付费套餐的自动续费标志，取值有：
-<li> on：开启自动续费；</li>
-<li> off：不开启自动续费。</li>
-不填写使用默认值 off，自动续费时，默认续费1个月。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RenewFlag?: string
+  RequestId?: string
+}
+
+/**
+ * BindSharedCNAME返回参数结构体
+ */
+export interface BindSharedCNAMEResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -900,6 +999,22 @@ export interface DescribeApplicationProxiesResponse {
 }
 
 /**
+ * 自定义 nameservers
+ */
+export interface VanityNameServers {
+  /**
+   * 自定义 ns 开关，取值有：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 自定义 ns 列表。
+   */
+  Servers?: Array<string>
+}
+
+/**
  * DescribeTopL7AnalysisData请求参数结构体
  */
 export interface DescribeTopL7AnalysisDataRequest {
@@ -1038,6 +1153,28 @@ export interface ModifyL4ProxyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateFunctionRule请求参数结构体
+ */
+export interface CreateFunctionRuleRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 规则条件列表，相同触发规则的不同条件匹配项之间为或关系。
+   */
+  FunctionRuleConditions: Array<FunctionRuleCondition>
+  /**
+   * 函数 ID，命中触发规则条件后执行的函数。
+   */
+  FunctionId: string
+  /**
+   * 规则描述，最大支持 60 个字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -1209,6 +1346,28 @@ export interface DescribeTimingL7CacheDataRequest {
 <li>global：全球数据。</li>不填默认取值为global。
    */
   Area?: string
+}
+
+/**
+ * CreateFunction请求参数结构体
+ */
+export interface CreateFunctionRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数名称，只能包含小写字母、数字、连字符，以数字或字母开头，以数字或字母结尾，最大支持 30 个字符。
+   */
+  Name: string
+  /**
+   * 函数内容，当前仅支持 JavaScript 代码，最大支持 5MB 大小。
+   */
+  Content: string
+  /**
+   * 函数描述，最大支持 60 个字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -1498,6 +1657,16 @@ export interface OriginGroupReference {
 }
 
 /**
+ * ModifyFunctionRulePriority返回参数结构体
+ */
+export interface ModifyFunctionRulePriorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 例外规则的配置，包含生效的条件，生效的范围。
  */
 export interface ExceptUserRule {
@@ -1541,15 +1710,17 @@ export interface ExceptUserRule {
 }
 
 /**
- * 加速类型
+ * 安全数据Entry返回值
  */
-export interface AccelerateType {
+export interface SecEntry {
   /**
-   * 加速开关。取值范围：
-<li> on：打开;</li>
-<li>off：关闭。</li>
+   * 查询维度值。
    */
-  Switch: string
+  Key: string
+  /**
+   * 查询维度下详细数据。
+   */
+  Value: Array<SecEntryValue>
 }
 
 /**
@@ -1952,6 +2123,18 @@ export interface DeleteZoneRequest {
 }
 
 /**
+ * 安全类型配置项。
+ */
+export interface SecurityType {
+  /**
+   * 安全类型开关，取值为：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
  * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
  */
 export interface BotManagedRule {
@@ -2105,37 +2288,35 @@ export interface ModifyPlanRequest {
 }
 
 /**
- * 自定义错误码页面结构体。
+ * 例外规则的生效范围。
  */
-export interface CustomErrorPage {
+export interface ExceptUserRuleScope {
   /**
-   * 自定义错误页面 ID。
+   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+<li>complete：完全跳过模式；</li>
+<li>partial：部分跳过模式。</li>
    */
-  PageId?: string
+  Type?: string
   /**
-   * 站点 ID。
+   * 生效的模块，该字段取值有：
+<li>waf：托管规则；</li>
+<li>rate：速率限制；</li>
+<li>acl：自定义规则；</li>
+<li>cc：cc攻击防护；</li>
+<li>bot：Bot防护。</li>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId?: string
+  Modules?: Array<string>
   /**
-   * 自定义错误页面名称。
+   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  PartialModules?: Array<PartialModule>
   /**
-   * 自定义错误页面类型。
+   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContentType?: string
-  /**
-   * 自定义错误页面描述。
-   */
-  Description?: string
-  /**
-   * 自定义错误页面内容。
-   */
-  Content?: string
-  /**
-   * 自定义错误页面引用。
-   */
-  References?: Array<ErrorPageReference>
+  SkipConditions?: Array<SkipCondition>
 }
 
 /**
@@ -2225,6 +2406,20 @@ export interface ModifyAliasDomainRequest {
    * 当 CertType 取值为 hosting 时填入相应证书 ID。
    */
   CertId?: Array<string>
+}
+
+/**
+ * CreateFunctionRule返回参数结构体
+ */
+export interface CreateFunctionRuleResponse {
+  /**
+   * 规则 ID。
+   */
+  RuleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3051,6 +3246,34 @@ export interface DescribeL4ProxyRulesResponse {
 }
 
 /**
+ * DescribeFunctions请求参数结构体
+ */
+export interface DescribeFunctionsRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 按照函数 ID 列表过滤。
+   */
+  FunctionIds?: Array<string>
+  /**
+   * 过滤条件列表，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：
+<li>name：按照【函数名称】进行模糊匹配。</li>
+<li>remark：按照【函数描述】进行模糊匹配。</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：200。
+   */
+  Limit?: number
+}
+
+/**
  * DeleteAliasDomain请求参数结构体
  */
 export interface DeleteAliasDomainRequest {
@@ -3105,6 +3328,16 @@ export interface CreatePurgeTaskResponse {
  * DeleteApplicationProxyRule返回参数结构体
  */
 export interface DeleteApplicationProxyRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccelerationDomains返回参数结构体
+ */
+export interface DeleteAccelerationDomainsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3740,13 +3973,17 @@ export interface Tag {
 }
 
 /**
- * BindSharedCNAME返回参数结构体
+ * ModifyFunctionRulePriority请求参数结构体
  */
-export interface BindSharedCNAMEResponse {
+export interface ModifyFunctionRulePriorityRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 站点 ID。
    */
-  RequestId?: string
+  ZoneId: string
+  /**
+   * 规则 ID 列表，必须填入调整优先级后的所有规则 ID，多条规则执行顺序依次从上往下，不填写保持原优先级顺序。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -3823,19 +4060,26 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
 }
 
 /**
- * 自定义 nameservers
+ * DescribeHostsSetting请求参数结构体
  */
-export interface VanityNameServers {
+export interface DescribeHostsSettingRequest {
   /**
-   * 自定义 ns 开关，取值有：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 站点ID。
    */
-  Switch: string
+  ZoneId: string
   /**
-   * 自定义 ns 列表。
+   * 分页查询偏移量。默认值： 0，最小值：0。
    */
-  Servers?: Array<string>
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值： 100，最大值：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>host：按照域名进行过滤。</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3868,6 +4112,20 @@ export interface CreatePlanRequest {
 不填该参数时，默认开通套餐时长为 1 个月，不开启自动续费。
    */
   PrepaidPlanParam?: PrepaidPlanParam
+}
+
+/**
+ * DescribeFunctionRuntimeEnvironment请求参数结构体
+ */
+export interface DescribeFunctionRuntimeEnvironmentRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
 }
 
 /**
@@ -4230,6 +4488,26 @@ export interface DescribeConfigGroupVersionsResponse {
 }
 
 /**
+ * 边缘函数环境变量
+ */
+export interface FunctionEnvironmentVariable {
+  /**
+   * 变量的名称，限制只能包含大小写字母、数字，特殊字符仅支持 @ . - _ ，最大 64 个字节，不支持重复。
+   */
+  Key: string
+  /**
+   * 变量的值，限制最大 5000 字节，默认值为空。
+   */
+  Value?: string
+  /**
+   * 变量的类型，取值有：
+<li>string：字符串类型；</li>
+<li>json：json 对象类型。</li>默认值为：string。
+   */
+  Type?: string
+}
+
+/**
  * DeleteRealtimeLogDeliveryTask返回参数结构体
  */
 export interface DeleteRealtimeLogDeliveryTaskResponse {
@@ -4490,6 +4768,30 @@ export interface ModifyCustomErrorPageRequest {
    * 自定义错误页面内容。内容不超过 2KB。
    */
   Content?: string
+}
+
+/**
+ * ModifyFunctionRule返回参数结构体
+ */
+export interface ModifyFunctionRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFunctionRules返回参数结构体
+ */
+export interface DescribeFunctionRulesResponse {
+  /**
+   * 规则详情列表。
+   */
+  FunctionRules?: Array<FunctionRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4809,6 +5111,27 @@ export interface UpgradePlanResponse {
 }
 
 /**
+ * ACL配置
+ */
+export interface AclConfig {
+  /**
+   * 开关，取值有：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 用户自定义规则。
+   */
+  AclUserRules: Array<AclUserRule>
+  /**
+   * 托管定制规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Customizes?: Array<AclUserRule>
+}
+
+/**
  * CreateL4ProxyRules请求参数结构体
  */
 export interface CreateL4ProxyRulesRequest {
@@ -4977,13 +5300,19 @@ export interface DescribeDDoSAttackEventRequest {
 }
 
 /**
- * CreateL4Proxy返回参数结构体
+ * 边缘函数触发规则条件。
  */
-export interface CreateL4ProxyResponse {
+export interface FunctionRuleCondition {
   /**
-   * 四层实例 ID。
+   * 边缘函数触发规则条件，该列表内所有项全部满足即判断该条件满足。
    */
-  ProxyId?: string
+  RuleConditions: Array<RuleCondition>
+}
+
+/**
+ * ModifyFunction返回参数结构体
+ */
+export interface ModifyFunctionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5255,83 +5584,37 @@ export interface RenewPlanResponse {
 }
 
 /**
- * 实时日志投递任务。
+ * 自定义错误码页面结构体。
  */
-export interface RealtimeLogDeliveryTask {
+export interface CustomErrorPage {
   /**
-   * 实时日志投递任务 ID。
+   * 自定义错误页面 ID。
    */
-  TaskId?: string
+  PageId?: string
   /**
-   * 实时日志投递任务的名称。
+   * 站点 ID。
    */
-  TaskName?: string
+  ZoneId?: string
   /**
-   * 实时日志投递任务的状态，取值有： <li>enabled: 已启用；</li> <li>disabled: 已停用；</li><li>deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。</li>
+   * 自定义错误页面名称。
    */
-  DeliveryStatus?: string
+  Name?: string
   /**
-   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址。</li>
+   * 自定义错误页面类型。
    */
-  TaskType?: string
+  ContentType?: string
   /**
-   * 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： <li>七层域名：domain.example.com；</li> <li>四层代理实例：sid-2s69eb5wcms7。</li>
+   * 自定义错误页面描述。
    */
-  EntityList?: Array<string>
+  Description?: string
   /**
-   * 数据投递类型，取值有： <li>domain：站点加速日志；</li> <li>application：四层代理日志；</li> <li>web-rateLiming：速率限制和 CC 攻击防护日志；</li> <li>web-attack：托管规则日志；</li> <li>web-rule：自定义规则日志；</li> <li>web-bot：Bot管理日志。</li>
+   * 自定义错误页面内容。
    */
-  LogType?: string
+  Content?: string
   /**
-   * 数据投递区域，取值有： <li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li>
+   * 自定义错误页面引用。
    */
-  Area?: string
-  /**
-   * 投递的预设字段列表。
-   */
-  Fields?: Array<string>
-  /**
-   * 投递的自定义字段列表。
-   */
-  CustomFields?: Array<CustomField>
-  /**
-   * 日志投递的过滤条件。
-   */
-  DeliveryConditions?: Array<DeliveryCondition>
-  /**
-   * 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。
-   */
-  Sample?: number
-  /**
-   * 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：
-<li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
-<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogFormat?: LogFormat
-  /**
-   * CLS 的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CLS?: CLSTopic
-  /**
-   * 自定义 HTTP 服务的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomEndpoint?: CustomEndpoint
-  /**
-   * AWS S3 兼容存储桶的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  S3?: S3
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。
-   */
-  UpdateTime?: string
+  References?: Array<ErrorPageReference>
 }
 
 /**
@@ -5476,6 +5759,20 @@ export interface ModifyAliasDomainStatusRequest {
    * 待修改状态的别称域名名称。如果为空，则不执行修改状态操作。
    */
   AliasNames?: Array<string>
+}
+
+/**
+ * DeleteFunction请求参数结构体
+ */
+export interface DeleteFunctionRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
 }
 
 /**
@@ -5649,24 +5946,17 @@ export interface ModifyApplicationProxyRuleRequest {
 }
 
 /**
- * ACL配置
+ * CreateFunction返回参数结构体
  */
-export interface AclConfig {
+export interface CreateFunctionResponse {
   /**
-   * 开关，取值有：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 函数 ID。
    */
-  Switch: string
+  FunctionId?: string
   /**
-   * 用户自定义规则。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AclUserRules: Array<AclUserRule>
-  /**
-   * 托管定制规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Customizes?: Array<AclUserRule>
+  RequestId?: string
 }
 
 /**
@@ -5835,6 +6125,20 @@ export interface DescribeTopL7CacheDataResponse {
 }
 
 /**
+ * DescribeFunctionRuntimeEnvironment返回参数结构体
+ */
+export interface DescribeFunctionRuntimeEnvironmentResponse {
+  /**
+   * 环境变量列表。
+   */
+  EnvironmentVariables?: Array<FunctionEnvironmentVariable>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 规则引擎可应用于匹配请求的设置详细信息，可选参数配置项
  */
 export interface RuleChoicePropertiesItem {
@@ -5908,6 +6212,20 @@ export interface ModifyAliasDomainStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteFunctionRules请求参数结构体
+ */
+export interface DeleteFunctionRulesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 规则 ID 列表。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -5985,6 +6303,28 @@ export interface NoCache {
 <li>off：关闭。</li>
    */
   Switch: string
+}
+
+/**
+ * ModifyFunction请求参数结构体
+ */
+export interface ModifyFunctionRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 函数描述，最大支持 60 个字符，不填写保持原有配置。
+   */
+  Remark?: string
+  /**
+   * 函数内容，当前仅支持 JavaScript 代码，最大支持 5MB 大小，不填写保持原有配置。
+   */
+  Content?: string
 }
 
 /**
@@ -6578,6 +6918,32 @@ export interface CC {
 }
 
 /**
+ * HandleFunctionRuntimeEnvironment请求参数结构体
+ */
+export interface HandleFunctionRuntimeEnvironmentRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 操作类型，取值有：
+<li>setEnvironmentVariable：设置环境变量，当环境变量存在时为修改行为，否则为添加行为；</li>
+<li>deleteEnvironmentVariable：删除环境变量变量；</li>
+<li>clearEnvironmentVariable：清空环境变量变量；</li>
+<li>resetEnvironmentVariable：重置环境变量变量。</li>
+   */
+  Operation: string
+  /**
+   * 环境变量列表，函数运行环境最多支持 64 个变量。当 Operation 取值为 setEnvironmentVariable、deleteEnvironmentVariable、resetEnvironmentVariable 时必填。
+   */
+  EnvironmentVariables?: Array<FunctionEnvironmentVariable>
+}
+
+/**
  * ModifyL4ProxyRulesStatus请求参数结构体
  */
 export interface ModifyL4ProxyRulesStatusRequest {
@@ -6799,13 +7165,22 @@ export interface ApplicationProxy {
 }
 
 /**
- * ModifyApplicationProxy返回参数结构体
+ * 预付费套餐计费参数
  */
-export interface ModifyApplicationProxyResponse {
+export interface PrepaidPlanParam {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
+
+不填写使用默认值 1。
    */
-  RequestId?: string
+  Period?: number
+  /**
+   * 预付费套餐的自动续费标志，取值有：
+<li> on：开启自动续费；</li>
+<li> off：不开启自动续费。</li>
+不填写使用默认值 off，自动续费时，默认续费1个月。
+   */
+  RenewFlag?: string
 }
 
 /**
@@ -7017,38 +7392,6 @@ export interface DescribeSecurityIPGroupInfoRequest {
 }
 
 /**
- * 例外规则的生效范围。
- */
-export interface ExceptUserRuleScope {
-  /**
-   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-<li>complete：完全跳过模式；</li>
-<li>partial：部分跳过模式。</li>
-   */
-  Type?: string
-  /**
-   * 生效的模块，该字段取值有：
-<li>waf：托管规则；</li>
-<li>rate：速率限制；</li>
-<li>acl：自定义规则；</li>
-<li>cc：cc攻击防护；</li>
-<li>bot：Bot防护。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Modules?: Array<string>
-  /**
-   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartialModules?: Array<PartialModule>
-  /**
-   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SkipConditions?: Array<SkipCondition>
-}
-
-/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
@@ -7089,17 +7432,15 @@ export interface ModifyApplicationProxyRuleStatusRequest {
 }
 
 /**
- * 安全数据Entry返回值
+ * 加速类型
  */
-export interface SecEntry {
+export interface AccelerateType {
   /**
-   * 查询维度值。
+   * 加速开关。取值范围：
+<li> on：打开;</li>
+<li>off：关闭。</li>
    */
-  Key: string
-  /**
-   * 查询维度下详细数据。
-   */
-  Value: Array<SecEntryValue>
+  Switch: string
 }
 
 /**
@@ -7266,9 +7607,9 @@ export interface ModifyHostsCertificateRequest {
 }
 
 /**
- * DeleteAccelerationDomains返回参数结构体
+ * DeleteFunctionRules返回参数结构体
  */
-export interface DeleteAccelerationDomainsResponse {
+export interface DeleteFunctionRulesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7411,26 +7752,13 @@ export interface DescribeOriginProtectionRequest {
 }
 
 /**
- * DescribeHostsSetting请求参数结构体
+ * HandleFunctionRuntimeEnvironment返回参数结构体
  */
-export interface DescribeHostsSettingRequest {
+export interface HandleFunctionRuntimeEnvironmentResponse {
   /**
-   * 站点ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-  /**
-   * 分页查询偏移量。默认值： 0，最小值：0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目。默认值： 100，最大值：1000。
-   */
-  Limit?: number
-  /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>host：按照域名进行过滤。</li>
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -8401,6 +8729,32 @@ export interface IpTableRule {
 }
 
 /**
+ * ModifyFunctionRule请求参数结构体
+ */
+export interface ModifyFunctionRuleRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 规则 ID。
+   */
+  RuleId: string
+  /**
+   * 规则条件列表，相同触发规则的不同条件匹配项之间为或关系，不填写保持原有配置。
+   */
+  FunctionRuleConditions?: Array<FunctionRuleCondition>
+  /**
+   * 函数 ID，命中触发规则条件后执行的函数，不填写保持原有配置。
+   */
+  FunctionId?: string
+  /**
+   * 规则描述，最大支持 60 个字符，不填写保持原有配置。
+   */
+  Remark?: string
+}
+
+/**
  * IncreasePlanQuota请求参数结构体
  */
 export interface IncreasePlanQuotaRequest {
@@ -8416,6 +8770,44 @@ export interface IncreasePlanQuotaRequest {
    * 新增的配额个数。单次新增的配额个数上限为 100。
    */
   QuotaNumber: number
+}
+
+/**
+ * 边缘函数触发规则。
+ */
+export interface FunctionRule {
+  /**
+   * 规则ID。
+   */
+  RuleId?: string
+  /**
+   * 规则条件列表，列表项之间为或关系。
+   */
+  FunctionRuleConditions?: Array<FunctionRuleCondition>
+  /**
+   * 函数 ID，命中触发规则条件后执行的函数。
+   */
+  FunctionId?: string
+  /**
+   * 规则描述。
+   */
+  Remark?: string
+  /**
+   * 函数名称。
+   */
+  FunctionName?: string
+  /**
+   * 函数触发规则优先级，数值越大，优先级越高。
+   */
+  Priority?: number
+  /**
+   * 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -8810,15 +9202,13 @@ export interface BindZoneToPlanRequest {
 }
 
 /**
- * 安全类型配置项。
+ * DeleteFunction返回参数结构体
  */
-export interface SecurityType {
+export interface DeleteFunctionResponse {
   /**
-   * 安全类型开关，取值为：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Switch: string
+  RequestId?: string
 }
 
 /**
@@ -9168,6 +9558,20 @@ Type = noDomainAccess 时，该值为空，不需要进行任何操作。
 }
 
 /**
+ * CreateL4Proxy返回参数结构体
+ */
+export interface CreateL4ProxyResponse {
+  /**
+   * 四层实例 ID。
+   */
+  ProxyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySecurityPolicy返回参数结构体
  */
 export interface ModifySecurityPolicyResponse {
@@ -9343,6 +9747,44 @@ export interface AiRule {
 }
 
 /**
+ * 边缘函数详情
+ */
+export interface Function {
+  /**
+   * 函数 ID。
+   */
+  FunctionId?: string
+  /**
+   * 站点 ID。
+   */
+  ZoneId?: string
+  /**
+   * 函数名字。
+   */
+  Name?: string
+  /**
+   * 函数描述。
+   */
+  Remark?: string
+  /**
+   * 函数内容。
+   */
+  Content?: string
+  /**
+   * 函数默认域名。
+   */
+  Domain?: string
+  /**
+   * 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  UpdateTime?: string
+}
+
+/**
  * 刷新/预热 可用量及配额
  */
 export interface Quota {
@@ -9478,6 +9920,23 @@ export interface DescribePurgeTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeFunctionRules请求参数结构体
+ */
+export interface DescribeFunctionRulesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 过滤条件列表，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：
+<li>rule-id：按照【规则 ID】进行精确匹配。</li>
+<li>function-id：按照【函数 ID】进行精确匹配。</li>
+<li>remark：按照【规则描述】进行模糊匹配。</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**

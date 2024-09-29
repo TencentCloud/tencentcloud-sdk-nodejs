@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyPlan", req, cb);
     }
     /**
+     * 删除边缘函数，删除后函数无法恢复，关联的触发规则会一并删除。
+     */
+    async DeleteFunction(req, cb) {
+        return this.request("DeleteFunction", req, cb);
+    }
+    /**
      * 当源站资源更新，但节点缓存 TTL 未过期时，用户仍会访问到旧的资源，此时可以通过该接口实现节点资源更新。触发更新的方法有以下两种：<li>直接删除：不做任何校验，直接删除节点缓存，用户请求时触发回源拉取；</li><li>标记过期：将节点资源置为过期，用户请求时触发回源校验，即发送带有 If-None-Match 和 If-Modified-Since 头部的 HTTP 条件请求。若源站响应 200，则节点会回源拉取新的资源并更新缓存；若源站响应 304，则节点不会更新缓存；</li>
 
 清除缓存任务详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。
@@ -87,6 +93,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyOwnership", req, cb);
     }
     /**
+     * 创建边缘函数的触发规则。
+     */
+    async CreateFunctionRule(req, cb) {
+        return this.request("CreateFunctionRule", req, cb);
+    }
+    /**
+     * 删除边缘函数触发规则。
+     */
+    async DeleteFunctionRules(req, cb) {
+        return this.request("DeleteFunctionRules", req, cb);
+    }
+    /**
      * 用于验证站点所有权。
      */
     async IdentifyZone(req, cb) {
@@ -103,6 +121,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccelerationDomains(req, cb) {
         return this.request("DescribeAccelerationDomains", req, cb);
+    }
+    /**
+     * 查询边缘函数运行环境，包括环境变量。
+     */
+    async DescribeFunctionRuntimeEnvironment(req, cb) {
+        return this.request("DescribeFunctionRuntimeEnvironment", req, cb);
     }
     /**
      * 修改源站组配置，新提交的源站记录将会覆盖原有源站组中的源站记录。
@@ -291,16 +315,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateL4ProxyRules", req, cb);
     }
     /**
-     * 本接口（DescribeTopL7CacheData）用于查询七层缓存分析topN流量数据。
-     */
-    async DescribeTopL7CacheData(req, cb) {
-        return this.request("DescribeTopL7CacheData", req, cb);
-    }
-    /**
      * 本接口（DescribeTimingL4Data）用于查询四层时序流量数据列表。
      */
     async DescribeTimingL4Data(req, cb) {
         return this.request("DescribeTimingL4Data", req, cb);
+    }
+    /**
+     * 本接口（DescribeTopL7CacheData）用于查询七层缓存分析topN流量数据。
+     */
+    async DescribeTopL7CacheData(req, cb) {
+        return this.request("DescribeTopL7CacheData", req, cb);
     }
     /**
      * 修改规则引擎规则。
@@ -382,6 +406,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeTimingL7AnalysisData", req, cb);
     }
     /**
+     * 创建并部署边缘函数至 EdgeOne 的边缘节点。
+     */
+    async CreateFunction(req, cb) {
+        return this.request("CreateFunction", req, cb);
+    }
+    /**
      * 本接口为旧版，如需调用请尽快迁移至新版，新版接口中将四层代理实例列表的查询和四层转发规则的查询拆分成两个接口，详情请参考 [查询四层代理实例列表](https://cloud.tencent.com/document/product/1552/103413) 和 [查询四层代理转发规则列表](https://cloud.tencent.com/document/product/1552/103412)。
      */
     async DescribeApplicationProxies(req, cb) {
@@ -406,6 +436,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateConfigGroupVersion", req, cb);
     }
     /**
+     * 修改边缘函数，支持修改函数的内容及描述信息，修改且重新部署后，函数立刻生效。
+     */
+    async ModifyFunction(req, cb) {
+        return this.request("ModifyFunction", req, cb);
+    }
+    /**
      * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理实例
 ](https://cloud.tencent.com/document/product/1552/103411) 。
      */
@@ -419,6 +455,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async CreateZone(req, cb) {
         return this.request("CreateZone", req, cb);
+    }
+    /**
+     * 修改边缘函数触发规则，支持修改规则条件、执行函数以及描述信息。
+     */
+    async ModifyFunctionRule(req, cb) {
+        return this.request("ModifyFunctionRule", req, cb);
     }
     /**
      * 查询当前账户可用套餐信息列表
@@ -445,10 +487,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyAccelerationDomainStatuses", req, cb);
     }
     /**
-     * 修改安全 IP 组。
+     * 查询边缘函数触发规则列表，支持按照规则 ID、函数 ID、规则描述等条件进行过滤。
      */
-    async ModifySecurityIPGroup(req, cb) {
-        return this.request("ModifySecurityIPGroup", req, cb);
+    async DescribeFunctionRules(req, cb) {
+        return this.request("DescribeFunctionRules", req, cb);
     }
     /**
      * 通过本接口删除实时日志投递任务。
@@ -493,6 +535,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DeleteCustomErrorPage", req, cb);
     }
     /**
+     * 操作边缘函数运行环境，支持环境变量的相关设置。
+设置环境变量后，可在函数代码中使用，具体参考 [边缘函数引入环境变量](https://cloud.tencent.com/document/product/1552/109151#0151fd9a-8b0e-407b-ae37-54553a60ded6)。
+     */
+    async HandleFunctionRuntimeEnvironment(req, cb) {
+        return this.request("HandleFunctionRuntimeEnvironment", req, cb);
+    }
+    /**
      * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
 > 不同类型 Edgeone 计费套餐区别参考 [Edgeone计费套餐选型对比](https://cloud.tencent.com/document/product/1552/94165)
 计费套餐升级规则以及资费详情参考 [Edgeone计费套餐升配说明](https://cloud.tencent.com/document/product/1552/95291)
@@ -500,6 +549,18 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async UpgradePlan(req, cb) {
         return this.request("UpgradePlan", req, cb);
+    }
+    /**
+     * 修改边缘函数触发规则的优先级。
+     */
+    async ModifyFunctionRulePriority(req, cb) {
+        return this.request("ModifyFunctionRulePriority", req, cb);
+    }
+    /**
+     * 修改安全 IP 组。
+     */
+    async ModifySecurityIPGroup(req, cb) {
+        return this.request("ModifySecurityIPGroup", req, cb);
     }
     /**
      * 查询规则引擎规则。
@@ -637,6 +698,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
+    }
+    /**
+     * 查询边缘函数列表，支持函数 ID、函数名称、描述等条件的过滤。
+     */
+    async DescribeFunctions(req, cb) {
+        return this.request("DescribeFunctions", req, cb);
     }
     /**
      * 删除站点。
