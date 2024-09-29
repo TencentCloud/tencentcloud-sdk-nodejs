@@ -393,6 +393,10 @@ export interface ImageToObjectRequest {
   （3）入院记录29、出院记录 28、病历记录 216、病程记录 217、门诊记录 210，默认使用 V1，最高支持 V2。
      */
     ReportTypeVersion?: Array<ReportTypeVersion>;
+    /**
+     * 可选。 图片OCR信息列表，每一个元素是一张图片的OCR结果。适用于不想将医疗报告图片传入腾讯云的客户，客户可对图片OCR信息中的敏感信息去除之后再传入。与 ImageInfoList 二选一，同时存在则使用OcrInfoList
+     */
+    OcrInfoList?: Array<OcrInfo>;
 }
 /**
  * 储存条件
@@ -433,6 +437,16 @@ export interface Molecular {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Coords?: Array<Coord>;
+}
+/**
+ * 体检报告-眼科-色觉
+ */
+export interface OphthalmologyColourVision {
+    /**
+     * 色觉总体描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Text?: KeyValueItem;
 }
 /**
  * 结节
@@ -1673,14 +1687,17 @@ export interface GynaecologyVulva {
     Text?: KeyValueItem;
 }
 /**
- * 体检报告-眼科-色觉
+ * 图片完整的OCR信息
  */
-export interface OphthalmologyColourVision {
+export interface OcrInfo {
     /**
-     * 色觉总体描述
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 图片进行OCR之后得到的所有包含字块的OCR信息
      */
-    Text?: KeyValueItem;
+    Items?: Array<OcrItem>;
+    /**
+     * 图片进行OCR之后得到的所有字符
+     */
+    Text?: string;
 }
 /**
  * 核酸报告结论
@@ -1926,6 +1943,23 @@ export interface IndicatorItemV2 {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InferNormal?: string;
+}
+/**
+ * 图片进行OCR之后,包含字符块的信息，包含字符与坐标，一个图片进行OCR之后可能分为多个这样的块
+ */
+export interface OcrItem {
+    /**
+     * 图片中文字的字符串
+     */
+    Words?: string;
+    /**
+     * Words 中每个文字的坐标数组，顺序与Words中的字符顺序一致
+     */
+    Coords?: Array<Coordinate>;
+    /**
+     * 整个字符块的坐标信息
+     */
+    WordCoords?: Coordinate;
 }
 /**
  * TurnPDFToObjectAsync返回参数结构体

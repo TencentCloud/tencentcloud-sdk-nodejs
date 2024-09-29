@@ -20,7 +20,7 @@
  */
 export interface CreateVerifyReportRequest {
   /**
-   * 客户类型 1:个人，2:企业
+   * 申请者类型 1:个人，2:企业
    */
   ApplyCustomerType: string
   /**
@@ -28,11 +28,11 @@ export interface CreateVerifyReportRequest {
    */
   ApplyCustomerName: string
   /**
-   * 验签申请人姓名
+   * 验签申请经办人姓名
    */
   ApplyName: string
   /**
-   * 验签申请人电弧
+   * 验签申请经办人电话
    */
   ApplyMobile: string
   /**
@@ -40,7 +40,7 @@ export interface CreateVerifyReportRequest {
    */
   FileId: string
   /**
-   * 验签申请人邮箱
+   * 验签申请经办人邮箱
    */
   ApplyEmail?: string
 }
@@ -136,7 +136,7 @@ export interface FileInfo {
    */
   FileBody?: string
   /**
-   * 文件名，最大长度不超过200字符
+   * 文件名及类型，最大长度不超过200字符
    */
   FileName?: string
 }

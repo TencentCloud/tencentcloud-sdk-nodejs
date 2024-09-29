@@ -160,7 +160,7 @@ export interface InquiryPriceRenewHostsRequest {
    */
   HostChargePrepaid: ChargePrepaid
   /**
-   * 试运行，测试使用，不执行具体逻辑。取值范围：<br><li>TRUE：跳过执行逻辑<br><li>FALSE：执行逻辑<br><br>默认取值：FALSE。
+   * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例
    */
   DryRun?: boolean
 }
@@ -961,24 +961,13 @@ export interface AllocateHostsRequest {
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * DescribeImageFromFamily请求参数结构体
  */
-export interface LoginSettings {
+export interface DescribeImageFromFamilyRequest {
   /**
-   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 镜像族
    */
-  Password?: string
-  /**
-   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyIds?: Array<string>
-  /**
-   * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeepImageLogin?: string
+  ImageFamily?: string
 }
 
 /**
@@ -1499,6 +1488,14 @@ export interface ModifyImageAttributeRequest {
    * 设置新的镜像描述；必须满足下列限制： <li> 不得超过 256 个字符。</li>
    */
   ImageDescription?: string
+  /**
+   * 设置镜像族；
+   */
+  ImageFamily?: string
+  /**
+   * 设置镜像是否废弃；
+   */
+  ImageDeprecated?: boolean
 }
 
 /**
@@ -1645,19 +1642,29 @@ export interface ReservedInstancePrice {
   /**
    * 预支合计费用的原价，单位：元。
    */
-  OriginalFixedPrice: number
+  OriginalFixedPrice?: number
   /**
    * 预支合计费用的折扣价，单位：元。
    */
-  DiscountFixedPrice: number
+  DiscountFixedPrice?: number
   /**
    * 后续合计费用的原价，单位：元/小时
    */
-  OriginalUsagePrice: number
+  OriginalUsagePrice?: number
   /**
    * 后续合计费用的折扣价，单位：元/小时
    */
-  DiscountUsagePrice: number
+  DiscountUsagePrice?: number
+  /**
+   * 预支费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FixedPriceDiscount?: number
+  /**
+   * 后续费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsagePriceDiscount?: number
 }
 
 /**
@@ -2534,6 +2541,15 @@ IMPORTFAILED-导入失败
    * 镜像许可类型
    */
   LicenseType?: string
+  /**
+   * 镜像族
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageFamily?: string
+  /**
+   * 镜像是否废弃
+   */
+  ImageDeprecated?: boolean
 }
 
 /**
@@ -3220,7 +3236,7 @@ export interface CreateImageRequest {
   ImageDescription?: string
   /**
    * 是否执行强制关机以制作镜像。
-取值范围：<br><li>true：表示关机之后制作镜像<br><li>false：表示开机状态制作镜像<br><br>默认取值：false。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
+取值范围：<br><li>true：表示关机之后制作镜像</li><br><li>false：表示开机状态制作镜像</li><br><br>默认取值：false。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
    */
   ForcePoweroff?: string
   /**
@@ -3246,6 +3262,10 @@ export interface CreateImageRequest {
    * 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。
    */
   TagSpecification?: Array<TagSpecification>
+  /**
+   * 镜像族
+   */
+  ImageFamily?: string
 }
 
 /**
@@ -5334,6 +5354,14 @@ export interface ReservedInstancePriceItem {
 返回项： Linux 。
    */
   ProductDescription?: string
+  /**
+   * 预支合计费用，单位：元。
+   */
+  DiscountUsagePrice?: number
+  /**
+   * 后续合计费用的折扣价，单位：元/小时
+   */
+  DiscountFixedPrice?: number
 }
 
 /**
@@ -5665,17 +5693,18 @@ export interface DescribeReservedInstancesConfigInfosResponse {
 }
 
 /**
- * InquiryPriceResetInstancesType请求参数结构体
+ * DescribeImageFromFamily返回参数结构体
  */
-export interface InquiryPriceResetInstancesTypeRequest {
+export interface DescribeImageFromFamilyResponse {
   /**
-   * 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
+   * 镜像信息，没有可用镜像是返回为空
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceIds: Array<string>
+  Image?: Image
   /**
-   * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceType: string
+  RequestId?: string
 }
 
 /**
@@ -5783,6 +5812,27 @@ export interface ResizeInstanceDisksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了实例登录相关配置与信息。
+ */
+export interface LoginSettings {
+  /**
+   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。</li><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。</li>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyIds?: Array<string>
+  /**
+   * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：<li>true：表示保持镜像的登录设置</li><li>false：表示不保持镜像的登录设置</li>默认取值：false。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeepImageLogin?: string
 }
 
 /**
@@ -6408,4 +6458,18 @@ export interface Price {
    * 描述了网络价格。
    */
   BandwidthPrice?: ItemPrice
+}
+
+/**
+ * InquiryPriceResetInstancesType请求参数结构体
+ */
+export interface InquiryPriceResetInstancesTypeRequest {
+  /**
+   * 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
+   */
+  InstanceIds: Array<string>
+  /**
+   * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。
+   */
+  InstanceType: string
 }

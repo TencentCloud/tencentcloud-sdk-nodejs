@@ -129,6 +129,10 @@ export interface ModifyLaunchConfigurationAttributesRequest {
   该参数会覆盖原有的实例标签列表，如需新增标签，需将新标签和原有标签一并传入。
      */
     InstanceTags?: Array<InstanceTag>;
+    /**
+     * 镜像族名称。
+     */
+    ImageFamily?: string;
 }
 /**
  * DisableAutoScalingGroup请求参数结构体
@@ -521,6 +525,11 @@ export interface LaunchConfiguration {
      * 置放群组id，仅支持指定一个。
      */
     DisasterRecoverGroupIds?: Array<string>;
+    /**
+     * 镜像族名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageFamily?: string;
 }
 /**
  * DescribeAccountLimits返回参数结构体
@@ -960,11 +969,11 @@ export interface DescribeLaunchConfigurationsResponse {
     /**
      * 符合条件的启动配置数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 启动配置详细信息列表。
      */
-    LaunchConfigurationSet: Array<LaunchConfiguration>;
+    LaunchConfigurationSet?: Array<LaunchConfiguration>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1175,9 +1184,9 @@ export interface CreateLaunchConfigurationRequest {
      */
     LaunchConfigurationName: string;
     /**
-     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+     * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像Id与镜像族名称，二者必填一个且只能填写一个。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 启动配置所属项目ID。不填为默认项目。
   注意：伸缩组内实例所属项目ID取伸缩组项目ID，与这里取值无关。
@@ -1285,6 +1294,10 @@ export interface CreateLaunchConfigurationRequest {
      * 置放群组id，仅支持指定一个。
      */
     DisasterRecoverGroupIds?: Array<string>;
+    /**
+     * 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。
+     */
+    ImageFamily?: string;
 }
 /**
  * 伸缩组
@@ -3073,8 +3086,7 @@ export interface DescribeLaunchConfigurationsRequest {
   <li> vague-launch-configuration-name - String - 是否必填：否 -（过滤条件）按照启动配置名称模糊搜索。</li>
   <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
   <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
-  <li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3
-  </li>
+  <li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3</li>
   每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchConfigurationIds`和`Filters`。
      */
     Filters?: Array<Filter>;

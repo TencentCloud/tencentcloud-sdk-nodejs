@@ -590,6 +590,7 @@ import {
   CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
   CreateFlowLogRequest,
   UsedDetail,
+  Tags,
   InquirePriceCreateDirectConnectGatewayRequest,
   AttachNetworkInterfaceResponse,
   DisassociateNatGatewayAddressRequest,

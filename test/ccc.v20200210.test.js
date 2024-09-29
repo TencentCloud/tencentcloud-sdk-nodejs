@@ -58,6 +58,16 @@ it("ccc.v20200210.CreateAICall", async function () {
     }
 })
 
+it("ccc.v20200210.StopAutoCalloutTask", async function () {
+    try {
+       const data = await client.StopAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
     try {
        const data = await client.DisableCCCPhoneNumber({})
@@ -81,6 +91,16 @@ it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
 it("ccc.v20200210.DeleteExtension", async function () {
     try {
        const data = await client.DeleteExtension({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeChatMessages", async function () {
+    try {
+       const data = await client.DescribeChatMessages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +308,9 @@ it("ccc.v20200210.UnbindNumberCallOutSkillGroup", async function () {
     }
 })
 
-it("ccc.v20200210.StopAutoCalloutTask", async function () {
+it("ccc.v20200210.ModifyOwnNumberApply", async function () {
     try {
-       const data = await client.StopAutoCalloutTask({})
+       const data = await client.ModifyOwnNumberApply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +348,9 @@ it("ccc.v20200210.UploadIvrAudio", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeChatMessages", async function () {
+it("ccc.v20200210.CreateOwnNumberApply", async function () {
     try {
-       const data = await client.DescribeChatMessages({})
+       const data = await client.CreateOwnNumberApply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

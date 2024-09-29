@@ -8,7 +8,7 @@ import { UpgradeProxyVersionResponse, DescribeInstanceCLSLogDeliveryResponse, Mo
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 恢复serverless集群
+     * 本接口（ResumeServerless）用于恢复 serverless 集群（启动暂停的集群）。
      */
     ResumeServerless(req: ResumeServerlessRequest, cb?: (error: string, rep: ResumeServerlessResponse) => void): Promise<ResumeServerlessResponse>;
     /**
@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeProxyVersion(req: UpgradeProxyVersionRequest, cb?: (error: string, rep: UpgradeProxyVersionResponse) => void): Promise<UpgradeProxyVersionResponse>;
     /**
-     * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
+     * 本接口（DescribeBackupConfig）用于获取指定集群的备份配置信息，包括全量备份时间段、备份文件保留时间。
      */
     DescribeBackupConfig(req: DescribeBackupConfigRequest, cb?: (error: string, rep: DescribeBackupConfigResponse) => void): Promise<DescribeBackupConfigResponse>;
     /**
@@ -40,15 +40,15 @@ export declare class Client extends AbstractClient {
      */
     GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
-     * 本接口（DescribeClusterParamLogs）查询参数修改记录
+     * 本接口（DescribeClusterParamLogs）用于查询参数修改记录。
      */
     DescribeClusterParamLogs(req: DescribeClusterParamLogsRequest, cb?: (error: string, rep: DescribeClusterParamLogsResponse) => void): Promise<DescribeClusterParamLogsResponse>;
     /**
-     * 修改维护时间配置
+     * 本接口（ModifyMaintainPeriodConfig）用于修改维护时间配置。
      */
     ModifyMaintainPeriodConfig(req: ModifyMaintainPeriodConfigRequest, cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void): Promise<ModifyMaintainPeriodConfigResponse>;
     /**
-     * 本接口（CopyClusterPasswordComplexity）用于复制集群密码复杂度
+     * 本接口（CopyClusterPasswordComplexity）用于复制集群密码复杂度。
      */
     CopyClusterPasswordComplexity(req: CopyClusterPasswordComplexityRequest, cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void): Promise<CopyClusterPasswordComplexityResponse>;
     /**
@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     RenewClusters(req: RenewClustersRequest, cb?: (error: string, rep: RenewClustersResponse) => void): Promise<RenewClustersResponse>;
     /**
-     * 关闭数据库代理
+     * 本接口（CloseProxy）用于关闭集群的数据库代理服务。
      */
     CloseProxy(req: CloseProxyRequest, cb?: (error: string, rep: CloseProxyResponse) => void): Promise<CloseProxyResponse>;
     /**
@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
     /**
-     * 本接口（DescribeInstanceSpecs）用于查询购买页可购买的实例规格
+     * 本接口（DescribeInstanceSpecs）用于查询购买页可购买的实例规格。
      */
     DescribeInstanceSpecs(req: DescribeInstanceSpecsRequest, cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void): Promise<DescribeInstanceSpecsResponse>;
     /**
@@ -112,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProxyNodes(req: DescribeProxyNodesRequest, cb?: (error: string, rep: DescribeProxyNodesResponse) => void): Promise<DescribeProxyNodesResponse>;
     /**
-     * 安全组批量解绑云资源
+     * 本接口（DisassociateSecurityGroups）用于安全组批量解绑云资源。
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCLSDelivery(req: DeleteCLSDeliveryRequest, cb?: (error: string, rep: DeleteCLSDeliveryResponse) => void): Promise<DeleteCLSDeliveryResponse>;
     /**
-     * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比
+     * 本接口（DescribeChangedParamsAfterUpgrade）用于查询升降配运行参数对比。
      */
     DescribeChangedParamsAfterUpgrade(req: DescribeChangedParamsAfterUpgradeRequest, cb?: (error: string, rep: DescribeChangedParamsAfterUpgradeResponse) => void): Promise<DescribeChangedParamsAfterUpgradeResponse>;
     /**
@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccountPrivileges(req: DescribeAccountPrivilegesRequest, cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void): Promise<DescribeAccountPrivilegesResponse>;
     /**
-     * 本接口（CloseClusterPasswordComplexity）用于关闭集群密码复杂度
+     * 本接口（CloseClusterPasswordComplexity）用于关闭集群密码复杂度。
      */
     CloseClusterPasswordComplexity(req: CloseClusterPasswordComplexityRequest, cb?: (error: string, rep: CloseClusterPasswordComplexityResponse) => void): Promise<CloseClusterPasswordComplexityResponse>;
     /**
@@ -156,7 +156,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceErrorLogs(req: DescribeInstanceErrorLogsRequest, cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void): Promise<DescribeInstanceErrorLogsResponse>;
     /**
-     * 修改集群名称
+     * 本接口（ModifyClusterName）用于修改集群名称。
      */
     ModifyClusterName(req: ModifyClusterNameRequest, cb?: (error: string, rep: ModifyClusterNameResponse) => void): Promise<ModifyClusterNameResponse>;
     /**
@@ -180,7 +180,7 @@ export declare class Client extends AbstractClient {
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
-     * 变更备可用区
+     * 本接口（ModifyClusterSlaveZone）用于变更集群的备可用区。
      */
     ModifyClusterSlaveZone(req: ModifyClusterSlaveZoneRequest, cb?: (error: string, rep: ModifyClusterSlaveZoneResponse) => void): Promise<ModifyClusterSlaveZoneResponse>;
     /**
@@ -188,7 +188,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountParams(req: ModifyAccountParamsRequest, cb?: (error: string, rep: ModifyAccountParamsResponse) => void): Promise<ModifyAccountParamsResponse>;
     /**
-     * 本接口（ModifyClusterPasswordComplexity）用于修改/开启集群密码复杂度
+     * 本接口（ModifyClusterPasswordComplexity）用于修改/开启集群密码复杂度。
      */
     ModifyClusterPasswordComplexity(req: ModifyClusterPasswordComplexityRequest, cb?: (error: string, rep: ModifyClusterPasswordComplexityResponse) => void): Promise<ModifyClusterPasswordComplexityResponse>;
     /**
@@ -216,15 +216,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
-     * 本接口（CloseWan）用于关闭外网
+     * 本接口（CloseWan）用于关闭外网。
      */
     CloseWan(req: CloseWanRequest, cb?: (error: string, rep: CloseWanResponse) => void): Promise<CloseWanResponse>;
     /**
-     * 查询项目安全组信息
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息。
      */
     DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
     /**
-     * 修改数据库
+     * 本接口（ModifyClusterDatabase）用于修改数据库的账号授权。
      */
     ModifyClusterDatabase(req: ModifyClusterDatabaseRequest, cb?: (error: string, rep: ModifyClusterDatabaseResponse) => void): Promise<ModifyClusterDatabaseResponse>;
     /**
@@ -260,11 +260,11 @@ export declare class Client extends AbstractClient {
      */
     CreateAccounts(req: CreateAccountsRequest, cb?: (error: string, rep: CreateAccountsResponse) => void): Promise<CreateAccountsResponse>;
     /**
-     * 回档到新集群
+     * 本接口（RollbackToNewCluster）用于回档到新集群。
      */
     RollbackToNewCluster(req: RollbackToNewClusterRequest, cb?: (error: string, rep: RollbackToNewClusterResponse) => void): Promise<RollbackToNewClusterResponse>;
     /**
-     * 新购资源包
+     * 本接口（CreateResourcePackage）用于新购资源包。
      */
     CreateResourcePackage(req: CreateResourcePackageRequest, cb?: (error: string, rep: CreateResourcePackageResponse) => void): Promise<CreateResourcePackageResponse>;
     /**
@@ -272,19 +272,19 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuditLogFiles(req: DescribeAuditLogFilesRequest, cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void): Promise<DescribeAuditLogFilesResponse>;
     /**
-     * 删除数据库
+     * 本接口（DeleteClusterDatabase）用于删除数据库。
      */
     DeleteClusterDatabase(req: DeleteClusterDatabaseRequest, cb?: (error: string, rep: DeleteClusterDatabaseResponse) => void): Promise<DeleteClusterDatabaseResponse>;
     /**
-     * 主备可用区切换
+     * 本接口（SwitchClusterZone）用于切换集群的主备可用区。
      */
     SwitchClusterZone(req: SwitchClusterZoneRequest, cb?: (error: string, rep: SwitchClusterZoneResponse) => void): Promise<SwitchClusterZoneResponse>;
     /**
-     * 本接口(SearchClusterDatabases)搜索集群数据库列表
+     * 本接口（SearchClusterDatabases）用于搜索集群数据库列表。
      */
     SearchClusterDatabases(req: SearchClusterDatabasesRequest, cb?: (error: string, rep: SearchClusterDatabasesResponse) => void): Promise<SearchClusterDatabasesResponse>;
     /**
-     * 本接口（AddInstances）用于集群添加实例
+     * 本接口（AddInstances）用于集群添加实例。
      */
     AddInstances(req: AddInstancesRequest, cb?: (error: string, rep: AddInstancesResponse) => void): Promise<AddInstancesResponse>;
     /**
@@ -296,11 +296,11 @@ export declare class Client extends AbstractClient {
      */
     DeleteAccounts(req: DeleteAccountsRequest, cb?: (error: string, rep: DeleteAccountsResponse) => void): Promise<DeleteAccountsResponse>;
     /**
-     * 批量回收账号权限
+     * 本接口（RevokeAccountPrivileges）用于批量回收账号权限。
      */
     RevokeAccountPrivileges(req: RevokeAccountPrivilegesRequest, cb?: (error: string, rep: RevokeAccountPrivilegesResponse) => void): Promise<RevokeAccountPrivilegesResponse>;
     /**
-     * 开启只读实例组接入
+     * 本接口（OpenClusterReadOnlyInstanceGroupAccess）用于开启只读实例组接入。
      */
     OpenClusterReadOnlyInstanceGroupAccess(req: OpenClusterReadOnlyInstanceGroupAccessRequest, cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse>;
     /**
@@ -312,7 +312,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
-     * 为集群删除手动备份，无法删除自动备份
+     * 本接口（DeleteBackup）用于为集群删除手动备份，无法删除自动备份。
      */
     DeleteBackup(req: DeleteBackupRequest, cb?: (error: string, rep: DeleteBackupResponse) => void): Promise<DeleteBackupResponse>;
     /**
@@ -320,7 +320,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeServerlessStrategy(req: DescribeServerlessStrategyRequest, cb?: (error: string, rep: DescribeServerlessStrategyResponse) => void): Promise<DescribeServerlessStrategyResponse>;
     /**
-     * 暂停serverless集群
+     * 本接口（PauseServerless）用于暂停 serverless 集群。
      */
     PauseServerless(req: PauseServerlessRequest, cb?: (error: string, rep: PauseServerlessResponse) => void): Promise<PauseServerlessResponse>;
     /**
@@ -340,11 +340,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuditInstanceList(req: DescribeAuditInstanceListRequest, cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void): Promise<DescribeAuditInstanceListResponse>;
     /**
-     * 查询回档时间范围
+     * 本接口（DescribeRollbackTimeRange）用于查询回档时间范围。
      */
     DescribeRollbackTimeRange(req: DescribeRollbackTimeRangeRequest, cb?: (error: string, rep: DescribeRollbackTimeRangeResponse) => void): Promise<DescribeRollbackTimeRangeResponse>;
     /**
-     * 本接口（DescribeFlow）用于查询任务流信息
+     * 本接口（DescribeFlow）用于查询任务流信息。
      */
     DescribeFlow(req: DescribeFlowRequest, cb?: (error: string, rep: DescribeFlowResponse) => void): Promise<DescribeFlowResponse>;
     /**
@@ -372,15 +372,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeProxies(req: DescribeProxiesRequest, cb?: (error: string, rep: DescribeProxiesResponse) => void): Promise<DescribeProxiesResponse>;
     /**
-     * 本接口（OpenWan）用于开通外网
+     * 本接口（OpenWan）用于开通外网。
      */
     OpenWan(req: OpenWanRequest, cb?: (error: string, rep: OpenWanResponse) => void): Promise<OpenWanResponse>;
     /**
-     * 查询新购集群价格
+     * 本接口（InquirePriceCreate）用于新购集群的价格查询。
      */
     InquirePriceCreate(req: InquirePriceCreateRequest, cb?: (error: string, rep: InquirePriceCreateResponse) => void): Promise<InquirePriceCreateResponse>;
     /**
-     * 安全组批量绑定云资源
+     * 本接口（AssociateSecurityGroups）用于安全组批量绑定云资源。
      */
     AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
     /**
@@ -404,7 +404,7 @@ export declare class Client extends AbstractClient {
      */
     ExportInstanceErrorLogs(req: ExportInstanceErrorLogsRequest, cb?: (error: string, rep: ExportInstanceErrorLogsResponse) => void): Promise<ExportInstanceErrorLogsResponse>;
     /**
-     * 开启多可用区部署
+     * 本接口（AddClusterSlaveZone）用于对集群开启多可用区部署。
      */
     AddClusterSlaveZone(req: AddClusterSlaveZoneRequest, cb?: (error: string, rep: AddClusterSlaveZoneResponse) => void): Promise<AddClusterSlaveZoneResponse>;
     /**
@@ -412,7 +412,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupName(req: ModifyBackupNameRequest, cb?: (error: string, rep: ModifyBackupNameResponse) => void): Promise<ModifyBackupNameResponse>;
     /**
-     * 本接口(DescribeAccounts)用于查询数据库账号列表
+     * 本接口（DescribeAccounts）用于查询数据库账号列表。
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
@@ -444,7 +444,7 @@ export declare class Client extends AbstractClient {
      */
     StopCLSDelivery(req: StopCLSDeliveryRequest, cb?: (error: string, rep: StopCLSDeliveryResponse) => void): Promise<StopCLSDeliveryResponse>;
     /**
-     * 查询备份文件列表
+     * 本接口（DescribeBackupList）用于查询集群的备份文件列表。
      */
     DescribeBackupList(req: DescribeBackupListRequest, cb?: (error: string, rep: DescribeBackupListResponse) => void): Promise<DescribeBackupListResponse>;
     /**
@@ -476,7 +476,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourcePackageDetail(req: DescribeResourcePackageDetailRequest, cb?: (error: string, rep: DescribeResourcePackageDetailResponse) => void): Promise<DescribeResourcePackageDetailResponse>;
     /**
-     * 修改指定集群的备份配置
+     * 本接口（ModifyBackupConfig）用于修改指定集群的备份配置。
      */
     ModifyBackupConfig(req: ModifyBackupConfigRequest, cb?: (error: string, rep: ModifyBackupConfigResponse) => void): Promise<ModifyBackupConfigResponse>;
     /**
@@ -504,7 +504,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceName(req: ModifyInstanceNameRequest, cb?: (error: string, rep: ModifyInstanceNameResponse) => void): Promise<ModifyInstanceNameResponse>;
     /**
-     * 查询实例维护时间窗
+     * 本接口（DescribeMaintainPeriod）用于查询实例维护时间窗。
      */
     DescribeMaintainPeriod(req: DescribeMaintainPeriodRequest, cb?: (error: string, rep: DescribeMaintainPeriodResponse) => void): Promise<DescribeMaintainPeriodResponse>;
     /**
@@ -512,7 +512,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProxySpecs(req?: DescribeProxySpecsRequest, cb?: (error: string, rep: DescribeProxySpecsResponse) => void): Promise<DescribeProxySpecsResponse>;
     /**
-     * 查询数据库列表
+     * 本接口（DescribeClusterDetailDatabases）用于查询数据库列表。
      */
     DescribeClusterDetailDatabases(req: DescribeClusterDetailDatabasesRequest, cb?: (error: string, rep: DescribeClusterDetailDatabasesResponse) => void): Promise<DescribeClusterDetailDatabasesResponse>;
     /**
@@ -532,7 +532,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchClusterVpc(req: SwitchClusterVpcRequest, cb?: (error: string, rep: SwitchClusterVpcResponse) => void): Promise<SwitchClusterVpcResponse>;
     /**
-     * 创建数据库代理
+     * 本接口（CreateProxy）用于开启集群的数据库代理。
      */
     CreateProxy(req: CreateProxyRequest, cb?: (error: string, rep: CreateProxyResponse) => void): Promise<CreateProxyResponse>;
     /**
@@ -548,11 +548,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyBinlogSaveDays(req: ModifyBinlogSaveDaysRequest, cb?: (error: string, rep: ModifyBinlogSaveDaysResponse) => void): Promise<ModifyBinlogSaveDaysResponse>;
     /**
-     * 查询账号所有可授予权限
+     * 本接口（DescribeAccountAllGrantPrivileges）用于查询账号所有可授予的权限。
      */
     DescribeAccountAllGrantPrivileges(req: DescribeAccountAllGrantPrivilegesRequest, cb?: (error: string, rep: DescribeAccountAllGrantPrivilegesResponse) => void): Promise<DescribeAccountAllGrantPrivilegesResponse>;
     /**
-     * 开通只读实例独有访问接入组
+     * 本接口（OpenReadOnlyInstanceExclusiveAccess）用于开通只读实例独有访问接入组。
      */
     OpenReadOnlyInstanceExclusiveAccess(req: OpenReadOnlyInstanceExclusiveAccessRequest, cb?: (error: string, rep: OpenReadOnlyInstanceExclusiveAccessResponse) => void): Promise<OpenReadOnlyInstanceExclusiveAccessResponse>;
     /**
@@ -580,7 +580,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
     /**
-     * 本接口（OpenClusterPasswordComplexity）用于开启自定义密码复杂度功能
+     * 本接口（OpenClusterPasswordComplexity）用于开启自定义密码复杂度功能。
      */
     OpenClusterPasswordComplexity(req: OpenClusterPasswordComplexityRequest, cb?: (error: string, rep: OpenClusterPasswordComplexityResponse) => void): Promise<OpenClusterPasswordComplexityResponse>;
     /**
@@ -588,7 +588,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourcePackageName(req: ModifyResourcePackageNameRequest, cb?: (error: string, rep: ModifyResourcePackageNameResponse) => void): Promise<ModifyResourcePackageNameResponse>;
     /**
-     * 关闭多可用区部署
+     * 本接口（RemoveClusterSlaveZone）用于关闭集群多可用区部署。
      */
     RemoveClusterSlaveZone(req: RemoveClusterSlaveZoneRequest, cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void): Promise<RemoveClusterSlaveZoneResponse>;
     /**

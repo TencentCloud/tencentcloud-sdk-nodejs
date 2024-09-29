@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, CreateIVRSessionRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, DescribeIvrAudioListResponse, BindNumberCallOutSkillGroupResponse, ResetExtensionPasswordRequest, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateAdminURLResponse, PausePredictiveDialingCampaignRequest, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, ModifyStaffPasswordResponse, CreatePredictiveDialingCampaignRequest, DescribeChatMessagesResponse, DescribeTelCallInfoResponse, DescribeExtensionsResponse, DeleteExtensionRequest, DescribePredictiveDialingCampaignResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, DescribeIMCdrListResponse, CreateStaffResponse, DescribePredictiveDialingCampaignsRequest, DescribeSkillGroupInfoListResponse, DescribeNumbersResponse, DeletePredictiveDialingCampaignRequest, UploadIvrAudioRequest, DescribeStaffInfoListResponse, UnbindNumberCallOutSkillGroupRequest, CreateAutoCalloutTaskRequest, ResumePredictiveDialingCampaignResponse, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCompanyApplyRequest, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribePredictiveDialingCampaignRequest, UpdateCCCSkillGroupResponse, DescribePredictiveDialingSessionsResponse, PausePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignRequest, DescribeStaffInfoListRequest, DescribeIvrAudioListRequest, ResetExtensionPasswordResponse, UpdateCCCSkillGroupRequest, ModifyStaffPasswordRequest, ModifyStaffResponse, ModifyExtensionRequest, CreatePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignResponse, AbortPredictiveDialingCampaignResponse, CreateAICallRequest, DescribeNumbersRequest, BindNumberCallOutSkillGroupRequest, DeletePredictiveDialingCampaignResponse, UnbindNumberCallOutSkillGroupResponse, CreateAutoCalloutTaskResponse, UploadIvrAudioResponse, DescribeCompanyListResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribePredictiveDialingCampaignsResponse, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateCarrierPrivilegeNumberApplicantRequest, UnbindStaffSkillGroupListRequest, HangUpCallResponse, StopAutoCalloutTaskResponse, AbortPredictiveDialingCampaignRequest, ModifyCompanyApplyResponse, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, ResumePredictiveDialingCampaignRequest, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, ModifyCompanyApplyRequest, CreateAICallResponse, DescribeCompanyListRequest, CreateIVRSessionResponse, DescribeActiveCarrierPrivilegeNumberResponse, HangUpCallRequest, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, DeleteStaffResponse, CreateStaffRequest, CreateCompanyApplyResponse, DescribePSTNActiveSessionListResponse, DescribeIMCdrListRequest, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, CreateAdminURLRequest, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, DescribePredictiveDialingSessionsRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
+import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, CreateIVRSessionRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, DescribeIvrAudioListResponse, BindNumberCallOutSkillGroupResponse, ResetExtensionPasswordRequest, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateAdminURLResponse, PausePredictiveDialingCampaignRequest, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, ModifyStaffPasswordResponse, CreatePredictiveDialingCampaignRequest, DescribeChatMessagesResponse, DescribeTelCallInfoResponse, DescribeExtensionsResponse, DeleteExtensionRequest, DescribePredictiveDialingCampaignResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, DescribeIMCdrListResponse, CreateStaffResponse, DescribePredictiveDialingCampaignsRequest, DescribeSkillGroupInfoListResponse, DescribeNumbersResponse, DeletePredictiveDialingCampaignRequest, UploadIvrAudioRequest, DescribeStaffInfoListResponse, UnbindNumberCallOutSkillGroupRequest, CreateAutoCalloutTaskRequest, ResumePredictiveDialingCampaignResponse, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCompanyApplyRequest, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribePredictiveDialingCampaignRequest, UpdateCCCSkillGroupResponse, DescribePredictiveDialingSessionsResponse, PausePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignRequest, DescribeStaffInfoListRequest, DescribeIvrAudioListRequest, ResetExtensionPasswordResponse, UpdateCCCSkillGroupRequest, ModifyStaffPasswordRequest, ModifyStaffResponse, ModifyExtensionRequest, CreatePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignResponse, ModifyOwnNumberApplyRequest, AbortPredictiveDialingCampaignResponse, CreateAICallRequest, DescribeNumbersRequest, BindNumberCallOutSkillGroupRequest, DeletePredictiveDialingCampaignResponse, UnbindNumberCallOutSkillGroupResponse, CreateAutoCalloutTaskResponse, UploadIvrAudioResponse, DescribeCompanyListResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribePredictiveDialingCampaignsResponse, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateCarrierPrivilegeNumberApplicantRequest, UnbindStaffSkillGroupListRequest, CreateOwnNumberApplyResponse, HangUpCallResponse, StopAutoCalloutTaskResponse, AbortPredictiveDialingCampaignRequest, ModifyCompanyApplyResponse, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, ResumePredictiveDialingCampaignRequest, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, ModifyCompanyApplyRequest, ModifyOwnNumberApplyResponse, CreateAICallResponse, DescribeCompanyListRequest, CreateIVRSessionResponse, DescribeActiveCarrierPrivilegeNumberResponse, HangUpCallRequest, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, DeleteStaffResponse, CreateStaffRequest, CreateCompanyApplyResponse, DescribePSTNActiveSessionListResponse, DescribeIMCdrListRequest, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, CreateAdminURLRequest, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, DescribePredictiveDialingSessionsRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, CreateOwnNumberApplyRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     CreateAICall(req: CreateAICallRequest, cb?: (error: string, rep: CreateAICallResponse) => void): Promise<CreateAICallResponse>;
     /**
+     * 停止自动外呼任务
+     */
+    StopAutoCalloutTask(req: StopAutoCalloutTaskRequest, cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void): Promise<StopAutoCalloutTaskResponse>;
+    /**
      * 停用号码
      */
     DisableCCCPhoneNumber(req: DisableCCCPhoneNumberRequest, cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void): Promise<DisableCCCPhoneNumberResponse>;
@@ -35,6 +39,12 @@ export declare class Client extends AbstractClient {
      * 删除话机账号
      */
     DeleteExtension(req: DeleteExtensionRequest, cb?: (error: string, rep: DeleteExtensionResponse) => void): Promise<DeleteExtensionResponse>;
+    /**
+     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
+
+文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     */
+    DescribeChatMessages(req: DescribeChatMessagesRequest, cb?: (error: string, rep: DescribeChatMessagesResponse) => void): Promise<DescribeChatMessagesResponse>;
     /**
      * 绑定座席所属技能组
      */
@@ -116,9 +126,9 @@ export declare class Client extends AbstractClient {
      */
     UnbindNumberCallOutSkillGroup(req: UnbindNumberCallOutSkillGroupRequest, cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void): Promise<UnbindNumberCallOutSkillGroupResponse>;
     /**
-     * 停止自动外呼任务
+     * 修改客户自携号码审批单
      */
-    StopAutoCalloutTask(req: StopAutoCalloutTaskRequest, cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void): Promise<StopAutoCalloutTaskResponse>;
+    ModifyOwnNumberApply(req: ModifyOwnNumberApplyRequest, cb?: (error: string, rep: ModifyOwnNumberApplyResponse) => void): Promise<ModifyOwnNumberApplyResponse>;
     /**
      * 创建预测式外呼任务
      */
@@ -132,11 +142,9 @@ export declare class Client extends AbstractClient {
      */
     UploadIvrAudio(req: UploadIvrAudioRequest, cb?: (error: string, rep: UploadIvrAudioResponse) => void): Promise<UploadIvrAudioResponse>;
     /**
-     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
-
-文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     * 创建客户自携号码接入审核
      */
-    DescribeChatMessages(req: DescribeChatMessagesRequest, cb?: (error: string, rep: DescribeChatMessagesResponse) => void): Promise<DescribeChatMessagesResponse>;
+    CreateOwnNumberApply(req: CreateOwnNumberApplyRequest, cb?: (error: string, rep: CreateOwnNumberApplyResponse) => void): Promise<CreateOwnNumberApplyResponse>;
     /**
      * 获取用户购买信息列表
      */

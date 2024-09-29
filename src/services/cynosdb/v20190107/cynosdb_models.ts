@@ -2509,7 +2509,8 @@ export interface ModifyMaintainPeriodConfigResponse {
  */
 export interface DisassociateSecurityGroupsRequest {
   /**
-   * 实例组ID数组
+   * 实例组 ID 数组，cynosdbmysql-grp-前缀开头或集群 ID。
+说明：要获取集群的实例组 ID，可通过 [查询集群实例组](https://cloud.tencent.com/document/product/1003/103934) 进行。
    */
   InstanceIds: Array<string>
   /**
@@ -2517,7 +2518,8 @@ export interface DisassociateSecurityGroupsRequest {
    */
   SecurityGroupIds: Array<string>
   /**
-   * 可用区
+   * 可用区。
+说明：请正确输入集群所在的主可用区，若输入非集群所在的主可用区可能显示调用成功，但实际执行会失败。
    */
   Zone: string
 }
@@ -2958,7 +2960,8 @@ export interface ModifyParamItem {
  */
 export interface AssociateSecurityGroupsRequest {
   /**
-   * 实例组ID数组
+   * 实例组 ID 数组，cynosdbmysql-grp-前缀开头或集群 ID。
+说明：要获取集群的实例组 ID，可通过 [查询集群实例组](https://cloud.tencent.com/document/product/1003/103934) 进行。
    */
   InstanceIds: Array<string>
   /**

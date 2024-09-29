@@ -1983,6 +1983,28 @@ export interface UpdatePredictiveDialingCampaignResponse {
 }
 
 /**
+ * ModifyOwnNumberApply请求参数结构体
+ */
+export interface ModifyOwnNumberApplyRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 线路相关参数
+   */
+  DetailList: Array<OwnNumberApplyDetailItem>
+  /**
+   * 审批单号
+   */
+  ApplyId?: number
+  /**
+   * 送号前缀
+   */
+  Prefix?: string
+}
+
+/**
  * PSTN 会话信息
  */
 export interface PSTNSessionInfo {
@@ -2800,6 +2822,28 @@ export interface DescribeCCCBuyInfoListRequest {
 }
 
 /**
+ * 用户自带号码审批明细数据类型
+ */
+export interface OwnNumberApplyDetailItem {
+  /**
+   * 号码类型：0-呼入|1-呼出|2-呼入呼出
+   */
+  CallType: number
+  /**
+   * 线路号码
+   */
+  PhoneNumber: string
+  /**
+   * 最大并发呼叫数
+   */
+  MaxCallCount: number
+  /**
+   * 每秒最大并发数
+   */
+  MaxCallPSec: number
+}
+
+/**
  * DescribePredictiveDialingCampaigns返回参数结构体
  */
 export interface DescribePredictiveDialingCampaignsResponse {
@@ -2961,6 +3005,20 @@ export interface UnbindStaffSkillGroupListRequest {
    * 解绑技能组列表
    */
   SkillGroupList: Array<number | bigint>
+}
+
+/**
+ * CreateOwnNumberApply返回参数结构体
+ */
+export interface CreateOwnNumberApplyResponse {
+  /**
+   * 审批单号
+   */
+  ApplyId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3357,6 +3415,16 @@ export interface ModifyCompanyApplyRequest {
    * 企业资质信息
    */
   CompanyInfo: CompanyApplyInfo
+}
+
+/**
+ * ModifyOwnNumberApply返回参数结构体
+ */
+export interface ModifyOwnNumberApplyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4063,6 +4131,28 @@ export interface StaffBuyInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SipNum?: number
+}
+
+/**
+ * CreateOwnNumberApply请求参数结构体
+ */
+export interface CreateOwnNumberApplyRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * SIP通道ID
+   */
+  SipTrunkId: number
+  /**
+   * 线路相关参数
+   */
+  DetailList: Array<OwnNumberApplyDetailItem>
+  /**
+   * 送号前缀
+   */
+  Prefix?: string
 }
 
 /**

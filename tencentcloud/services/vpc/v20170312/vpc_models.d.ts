@@ -253,6 +253,10 @@ export interface CreateVpcPeeringConnectionRequest {
      * 服务分级：PT、AU、AG。
      */
     QosLevel?: string;
+    /**
+     * 标签键值对
+     */
+    Tags?: Array<Tags>;
 }
 /**
  * DescribeBandwidthPackageResources请求参数结构体
@@ -11258,6 +11262,21 @@ export interface UsedDetail {
      * 流量包到期时间
      */
     Deadline: string;
+}
+/**
+ * 标签描述信息
+ */
+export interface Tags {
+    /**
+     * 标签键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * InquirePriceCreateDirectConnectGateway请求参数结构体

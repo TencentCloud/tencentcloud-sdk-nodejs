@@ -738,6 +738,16 @@ it("cvm.v20170312.InquiryPriceRenewHosts", async function () {
     }
 })
 
+it("cvm.v20170312.DescribeImageFromFamily", async function () {
+    try {
+       const data = await client.DescribeImageFromFamily({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.StopInstances", async function () {
     try {
        const data = await client.StopInstances({})

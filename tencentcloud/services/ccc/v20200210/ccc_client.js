@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAICall", req, cb);
     }
     /**
+     * 停止自动外呼任务
+     */
+    async StopAutoCalloutTask(req, cb) {
+        return this.request("StopAutoCalloutTask", req, cb);
+    }
+    /**
      * 停用号码
      */
     async DisableCCCPhoneNumber(req, cb) {
@@ -68,6 +74,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteExtension(req, cb) {
         return this.request("DeleteExtension", req, cb);
+    }
+    /**
+     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
+
+文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     */
+    async DescribeChatMessages(req, cb) {
+        return this.request("DescribeChatMessages", req, cb);
     }
     /**
      * 绑定座席所属技能组
@@ -190,10 +204,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindNumberCallOutSkillGroup", req, cb);
     }
     /**
-     * 停止自动外呼任务
+     * 修改客户自携号码审批单
      */
-    async StopAutoCalloutTask(req, cb) {
-        return this.request("StopAutoCalloutTask", req, cb);
+    async ModifyOwnNumberApply(req, cb) {
+        return this.request("ModifyOwnNumberApply", req, cb);
     }
     /**
      * 创建预测式外呼任务
@@ -214,12 +228,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadIvrAudio", req, cb);
     }
     /**
-     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
-
-文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     * 创建客户自携号码接入审核
      */
-    async DescribeChatMessages(req, cb) {
-        return this.request("DescribeChatMessages", req, cb);
+    async CreateOwnNumberApply(req, cb) {
+        return this.request("CreateOwnNumberApply", req, cb);
     }
     /**
      * 获取用户购买信息列表

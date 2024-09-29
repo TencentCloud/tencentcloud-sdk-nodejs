@@ -56,7 +56,7 @@ import {
   InstanceTypeConfig,
   RepairTaskControlRequest,
   AllocateHostsRequest,
-  LoginSettings,
+  DescribeImageFromFamilyRequest,
   DescribeRegionsResponse,
   PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
@@ -251,13 +251,14 @@ import {
   DescribeInstanceTypeConfigsRequest,
   RegionInfo,
   DescribeReservedInstancesConfigInfosResponse,
-  InquiryPriceResetInstancesTypeRequest,
+  DescribeImageFromFamilyResponse,
   ModifyLaunchTemplateDefaultVersionRequest,
   ModifyInstancesAttributeResponse,
   ChcHostDeniedActions,
   DescribeImagesRequest,
   InquiryPriceRenewHostsResponse,
   ResizeInstanceDisksResponse,
+  LoginSettings,
   InquirePricePurchaseReservedInstancesOfferingResponse,
   DisassociateSecurityGroupsRequest,
   ModifyHostsAttributeRequest,
@@ -290,6 +291,7 @@ import {
   ModifyInstancesProjectResponse,
   InstanceChargePrepaid,
   Price,
+  InquiryPriceResetInstancesTypeRequest,
 } from "./cvm_models"
 
 /**
@@ -1171,6 +1173,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: InquiryPriceRenewHostsResponse) => void
   ): Promise<InquiryPriceRenewHostsResponse> {
     return this.request("InquiryPriceRenewHosts", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeImageFromFamily) 用于查看镜像族内可用镜像信息。
+   */
+  async DescribeImageFromFamily(
+    req: DescribeImageFromFamilyRequest,
+    cb?: (error: string, rep: DescribeImageFromFamilyResponse) => void
+  ): Promise<DescribeImageFromFamilyResponse> {
+    return this.request("DescribeImageFromFamily", req, cb)
   }
 
   /**

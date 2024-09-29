@@ -93,6 +93,7 @@ import {
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
   UpdatePredictiveDialingCampaignResponse,
+  ModifyOwnNumberApplyRequest,
   PSTNSessionInfo,
   Message,
   AbortPredictiveDialingCampaignResponse,
@@ -112,6 +113,7 @@ import {
   DeleteStaffRequest,
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
+  OwnNumberApplyDetailItem,
   DescribePredictiveDialingCampaignsResponse,
   DescribeTelCallInfoRequest,
   Variable,
@@ -121,6 +123,7 @@ import {
   CreateCarrierPrivilegeNumberApplicantRequest,
   Filter,
   UnbindStaffSkillGroupListRequest,
+  CreateOwnNumberApplyResponse,
   DescribePredictiveDialingCampaignsElement,
   HangUpCallResponse,
   StopAutoCalloutTaskResponse,
@@ -141,6 +144,7 @@ import {
   UploadIvrAudioFailedInfo,
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
+  ModifyOwnNumberApplyResponse,
   CreateAICallResponse,
   DescribeCompanyListRequest,
   CreateIVRSessionResponse,
@@ -173,6 +177,7 @@ import {
   CreateSDKLoginTokenRequest,
   DescribeActiveCarrierPrivilegeNumberRequest,
   StaffBuyInfo,
+  CreateOwnNumberApplyRequest,
   DescribeCallInMetricsRequest,
   DescribeExtensionResponse,
 } from "./ccc_models"
@@ -227,6 +232,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止自动外呼任务
+   */
+  async StopAutoCalloutTask(
+    req: StopAutoCalloutTaskRequest,
+    cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
+  ): Promise<StopAutoCalloutTaskResponse> {
+    return this.request("StopAutoCalloutTask", req, cb)
+  }
+
+  /**
    * 停用号码
    */
   async DisableCCCPhoneNumber(
@@ -254,6 +269,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteExtensionResponse) => void
   ): Promise<DeleteExtensionResponse> {
     return this.request("DeleteExtension", req, cb)
+  }
+
+  /**
+     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
+
+文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
+     */
+  async DescribeChatMessages(
+    req: DescribeChatMessagesRequest,
+    cb?: (error: string, rep: DescribeChatMessagesResponse) => void
+  ): Promise<DescribeChatMessagesResponse> {
+    return this.request("DescribeChatMessages", req, cb)
   }
 
   /**
@@ -457,13 +484,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止自动外呼任务
+   * 修改客户自携号码审批单
    */
-  async StopAutoCalloutTask(
-    req: StopAutoCalloutTaskRequest,
-    cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
-  ): Promise<StopAutoCalloutTaskResponse> {
-    return this.request("StopAutoCalloutTask", req, cb)
+  async ModifyOwnNumberApply(
+    req: ModifyOwnNumberApplyRequest,
+    cb?: (error: string, rep: ModifyOwnNumberApplyResponse) => void
+  ): Promise<ModifyOwnNumberApplyResponse> {
+    return this.request("ModifyOwnNumberApply", req, cb)
   }
 
   /**
@@ -497,15 +524,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。
-
-文本聊天记录只保存了 1 年内的，1 年之前会自动清理。
-     */
-  async DescribeChatMessages(
-    req: DescribeChatMessagesRequest,
-    cb?: (error: string, rep: DescribeChatMessagesResponse) => void
-  ): Promise<DescribeChatMessagesResponse> {
-    return this.request("DescribeChatMessages", req, cb)
+   * 创建客户自携号码接入审核
+   */
+  async CreateOwnNumberApply(
+    req: CreateOwnNumberApplyRequest,
+    cb?: (error: string, rep: CreateOwnNumberApplyResponse) => void
+  ): Promise<CreateOwnNumberApplyResponse> {
+    return this.request("CreateOwnNumberApply", req, cb)
   }
 
   /**

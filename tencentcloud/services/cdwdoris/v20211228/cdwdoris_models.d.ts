@@ -1396,7 +1396,7 @@ export interface DorisSourceInfo {
      */
     User?: string;
     /**
-     * doris集群的密码
+     * base64编码的doris集群对应用户的密码
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Password?: string;

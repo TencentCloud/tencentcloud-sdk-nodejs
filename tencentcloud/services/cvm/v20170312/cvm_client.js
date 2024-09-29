@@ -612,6 +612,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("InquiryPriceRenewHosts", req, cb);
     }
     /**
+     * 本接口(DescribeImageFromFamily) 用于查看镜像族内可用镜像信息。
+     */
+    async DescribeImageFromFamily(req, cb) {
+        return this.request("DescribeImageFromFamily", req, cb);
+    }
+    /**
      * 本接口 (StopInstances) 用于关闭一个或多个实例。
 
 * 只有状态为`RUNNING`的实例才可以进行此操作。
