@@ -616,7 +616,7 @@ export class Client extends AbstractClient {
    * 批量删除证书，删除证书前支持查询证书是否关联了腾讯云云资源 （需自定义配置参数，参数名称：IsSync）
    */
   async DeleteCertificates(
-    req?: DeleteCertificatesRequest,
+    req: DeleteCertificatesRequest,
     cb?: (error: string, rep: DeleteCertificatesResponse) => void
   ): Promise<DeleteCertificatesResponse> {
     return this.request("DeleteCertificates", req, cb)
