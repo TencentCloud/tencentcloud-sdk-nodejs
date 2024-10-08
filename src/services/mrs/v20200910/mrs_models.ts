@@ -395,14 +395,6 @@ export interface PathologicalDiagnosisDetailBlock {
  */
 export interface ImageToObjectRequest {
   /**
-   * 图片列表，允许传入多张图片，目前只支持传入图片base64编码，图片url暂不支持
-   */
-  ImageInfoList: Array<ImageInfo>
-  /**
-   * 图片处理参数
-   */
-  HandleParam: HandleParam
-  /**
    * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图），27（内窥镜检查），215（处方单），219（免疫接种证明），301（C14呼气试验）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
    */
   Type: number
@@ -411,6 +403,14 @@ export interface ImageToObjectRequest {
 注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
    */
   IsUsedClassify: boolean
+  /**
+   * 图片处理参数
+   */
+  HandleParam?: HandleParam
+  /**
+   * 图片列表，允许传入多张图片，目前只支持传入图片base64编码，图片url暂不支持
+   */
+  ImageInfoList?: Array<ImageInfo>
   /**
    * 后付费的用户类型，新客户传1，老客户可不传或传 0。2022 年 12 月 15 新增了计费项，在此时间之前已经通过商务指定优惠价格的大客户，请不传这个字段或传 0，如果传 1 会导致以前获得的折扣价格失效。在 2022 年 12 月 15 日之后，通过商务指定优惠价格的大客户请传 1。
    */

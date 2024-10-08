@@ -111,6 +111,11 @@ export interface DescribeClusterConfigsResponse {
    */
   BuildVersion?: string
   /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -673,6 +678,11 @@ export interface ZoneInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Encrypt?: number
+  /**
+   * 是否为主力园区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Main?: boolean
 }
 
 /**
@@ -1056,6 +1066,16 @@ export interface SlowQueryRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationSec?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * Catalog  Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
 }
 
 /**
@@ -2118,6 +2138,11 @@ export interface DescribeDatabaseAuditRecordsResponse {
    */
   SlowQueryRecords?: DataBaseAuditRecord
   /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2246,6 +2271,11 @@ export interface NodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
+  /**
+   * Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
 }
 
 /**
@@ -4123,6 +4153,16 @@ export interface NodeInfos {
    * 上一次重启时间
    */
   LastRestartTime?: string
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
 }
 
 /**
