@@ -22077,6 +22077,10 @@ export interface UpdateAssetImageRegistryRegistryDetailRequest {
    * 联通性检测的配置
    */
   ConnDetectConfig?: Array<ConnDetectConfig>
+  /**
+   * 仓库唯一id
+   */
+  RegistryId?: number
 }
 
 /**

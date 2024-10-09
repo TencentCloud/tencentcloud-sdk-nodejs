@@ -308,6 +308,16 @@ it("essbasic.v20210526.CreateBatchOrganizationRegistrationTasks", async function
     }
 })
 
+it("essbasic.v20210526.CreateChannelSubOrganizationActive", async function () {
+    try {
+       const data = await client.CreateChannelSubOrganizationActive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.UploadFiles", async function () {
     try {
        const data = await client.UploadFiles({})

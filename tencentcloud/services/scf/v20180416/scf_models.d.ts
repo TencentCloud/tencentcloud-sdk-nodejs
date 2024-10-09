@@ -2548,12 +2548,12 @@ export interface GetRequestStatusResponse {
      * 函数运行状态的总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 函数运行状态数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<RequestStatus>;
+    Data?: Array<RequestStatus>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

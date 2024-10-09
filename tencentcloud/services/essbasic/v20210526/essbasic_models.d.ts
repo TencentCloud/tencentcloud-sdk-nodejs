@@ -2085,6 +2085,35 @@ export interface ChannelCreateOrganizationModifyQrCodeRequest {
     Agent: Agent;
 }
 /**
+ * CreateChannelSubOrganizationActive请求参数结构体
+ */
+export interface CreateChannelSubOrganizationActiveRequest {
+    /**
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
+     */
+    Agent: Agent;
+    /**
+     * 要进行激活或者续期的子客企业OrganizationOpenId列表，请确保所有列出的子客企业均已完成认证。
+     */
+    SubOrganizationOpenIds?: Array<string>;
+    /**
+     * 操作类型，可以选择如下：
+  
+  **false**：（默认）激活子客企业
+  **true**：续期子客企业
+  
+     */
+    Renew?: boolean;
+}
+/**
  * ChannelRenewAutoSignLicense返回参数结构体
  */
 export interface ChannelRenewAutoSignLicenseResponse {
@@ -5973,6 +6002,18 @@ export interface ChannelOrganizationInfo {
   </ul>
      */
     AuthorizationType?: string;
+    /**
+     * 子企业激活状态。值如下：
+  <ul>
+    <li>**0**： 未激活</li>
+    <li>**1**： 已激活</li>
+  </ul>
+     */
+    ActiveStatus?: number;
+    /**
+     * 账号过期时间，时间戳
+     */
+    LicenseExpireTime?: number;
 }
 /**
  * CreateSignUrls返回参数结构体
@@ -6306,6 +6347,15 @@ export interface ChannelDescribeRolesResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ChannelRoles?: Array<ChannelRole>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateChannelSubOrganizationActive返回参数结构体
+ */
+export interface CreateChannelSubOrganizationActiveResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

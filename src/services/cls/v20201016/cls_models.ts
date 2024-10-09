@@ -742,6 +742,10 @@ export interface DescribeShippersRequest {
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+  /**
+   * 控制Filters相关字段是否为精确匹配。  0: 默认值，shipperName模糊匹配 1: shipperName 精确匹配
+   */
+  PreciseSearch?: number
 }
 
 /**

@@ -598,9 +598,9 @@ it("mariadb.v20170312.DescribeDBTmpInstances", async function () {
     }
 })
 
-it("mariadb.v20170312.IsolateHourDBInstance", async function () {
+it("mariadb.v20170312.DescribeDBSyncMode", async function () {
     try {
-       const data = await client.IsolateHourDBInstance({})
+       const data = await client.DescribeDBSyncMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +701,16 @@ it("mariadb.v20170312.DescribeBackupConfigs", async function () {
 it("mariadb.v20170312.CloneAccount", async function () {
     try {
        const data = await client.CloneAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.IsolateHourDBInstance", async function () {
+    try {
+       const data = await client.IsolateHourDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1594,6 +1594,12 @@ export interface Strategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Arg: string;
+    /**
+     * 0：大小写敏感
+  1：大小写不敏感
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CaseNotSensitive?: number;
 }
 /**
  * UpsertCCRule返回参数结构体
@@ -2094,13 +2100,41 @@ export interface ModifySpartaProtectionRequest {
      */
     UpstreamHost?: string;
     /**
-     * 是否开启缓存 0-关闭 1-开启
+     * 是否开启缓存。 0：关闭 1：开启
      */
     ProxyBuffer?: number;
     /**
-     * 0: 禁用拨测, 1: 启用拨测。默认启用拨测
+     * 是否开启拨测。 0: 禁用拨测 1: 启用拨测。默认启用拨测
      */
     ProbeStatus?: number;
+    /**
+     * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
+     */
+    GmType?: number;
+    /**
+     * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+     */
+    GmCertType?: number;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+     */
+    GmCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+     */
+    GmPrivateKey?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+     */
+    GmEncCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+     */
+    GmEncPrivateKey?: string;
+    /**
+     * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+     */
+    GmSSLId?: string;
 }
 /**
  * DeleteAttackDownloadRecord请求参数结构体
@@ -2832,6 +2866,11 @@ export interface DomainInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessStatus?: number;
+    /**
+     * 域名标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Labels?: Array<string>;
 }
 /**
  * DescribeAreaBanAreas返回参数结构体
@@ -3746,6 +3785,11 @@ export interface GoodsDetailNew {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
+    /**
+     * 模式clb-waf或者saas-waf
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MicroVersion?: string;
 }
 /**
  * DescribeAreaBanSupportAreas请求参数结构体
@@ -4454,7 +4498,12 @@ export interface DescribeUserSignatureRuleRequest {
 /**
  * DescribeUserClbWafRegions请求参数结构体
  */
-export declare type DescribeUserClbWafRegionsRequest = null;
+export interface DescribeUserClbWafRegionsRequest {
+    /**
+     * 流量来源，不填默认clb。clb：负载均衡器，tsegw：云原生API网关，scf：云函数，apisix：腾讯云上其他网关
+     */
+    AlbType?: string;
+}
 /**
  * AddAntiInfoLeakRules返回参数结构体
  */
@@ -4798,6 +4847,11 @@ export interface ClbObject {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectFlowMode?: number;
+    /**
+     * 数值形式的私有网络 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NumericalVpcId?: number;
 }
 /**
  * ModifyUserLevel返回参数结构体
@@ -4907,9 +4961,9 @@ export interface DescribeCertificateVerifyResultRequest {
      */
     Domain: string;
     /**
-     * 证书类型。 0：仅配置HTTP监听端口，没有证书 1：证书来源为自有证书 2：证书来源为托管证书
+     * 证书类型。 0：不检测国际标准证书 1：证书来源为自有证书 2：证书来源为托管证书
      */
-    CertType: number;
+    CertType?: number;
     /**
      * CertType为1时，需要填充此参数，表示自有证书的证书链
      */
@@ -4922,6 +4976,30 @@ export interface DescribeCertificateVerifyResultRequest {
      * CertType为1时，需要填充此参数，表示自有证书的私钥
      */
     PrivateKey?: string;
+    /**
+     * 国密证书类型。0：不检测国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+     */
+    GmCertType?: number;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+     */
+    GmCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+     */
+    GmPrivateKey?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+     */
+    GmEncCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+     */
+    GmEncPrivateKey?: string;
+    /**
+     * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+     */
+    GmSSLId?: string;
 }
 /**
  * DescribeUserCdcClbWafRegions请求参数结构体
@@ -6643,11 +6721,11 @@ export interface DeleteIpAccessControlV2Request {
      */
     Domain: string;
     /**
-     * 规则ID列表，支持批量删除
+     * 规则ID列表，支持批量删除，在DeleteAll参数为true的时候可以不传
      */
-    RuleIds: Array<number | bigint>;
+    RuleIds?: Array<number | bigint>;
     /**
-     * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单
+     * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定IP名单，批量防护不支持
      */
     DeleteAll?: boolean;
     /**
@@ -6655,7 +6733,7 @@ export interface DeleteIpAccessControlV2Request {
      */
     SourceType?: string;
     /**
-     * IP黑白名单类型，40为IP白名单，42为IP黑名单
+     * IP黑白名单类型，40为IP白名单，42为IP黑名单，在DeleteAll为true的时候必传此参数
      */
     ActionType?: number;
 }
@@ -7278,7 +7356,7 @@ export interface DescribeDomainsRequest {
      */
     Limit: number;
     /**
-     * 过滤数组
+     * 过滤数组，过滤字段包括：Edition：实例版本，sparta-waf或clb-waf Domain：域名 DomainId：域名ID InstanceName：实例名称 InstanceId：实例ID FlowMode：流量接入模式，仅支持CLBWAF FlowCheckMode：流量体检模式，仅支持CLBWAF ClsStatus：日志开关 Status：WAF开关BotStatus：BOT开关 ApiStatus：API安全开关 Engine：引擎模式 UpstreamIP：源站IP，仅支持SAAS型WAF UpstreamDomain：源站域名，仅支持SAAS型WAF DomainState：域名状态，仅支持SAAS型WAF SgState：安全组状态，仅支持SAAS型WAF Label：分组标签，同时仅支持一种标签过滤
      */
     Filters?: Array<FiltersItemNew>;
 }
@@ -8421,6 +8499,46 @@ export interface DomainsPartInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyBuffer?: number;
+    /**
+     * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmType?: number;
+    /**
+     * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmCertType?: number;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmPrivateKey?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmEncCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmEncPrivateKey?: string;
+    /**
+     * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GmSSLId?: string;
+    /**
+     * 域名标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Labels?: Array<string>;
 }
 /**
  * DescribeAutoDenyIP请求参数结构体
@@ -8652,9 +8770,7 @@ export interface AddSpartaProtectionRequest {
      */
     SniHost?: string;
     /**
-     * 是否开启XFF重置。
-  0：关闭
-  1：开启
+     * 是否开启XFF重置。0：关闭 1：开启
      */
     XFFReset?: number;
     /**
@@ -8666,13 +8782,41 @@ export interface AddSpartaProtectionRequest {
      */
     UpstreamHost?: string;
     /**
-     * 是否开启缓存 0-关闭 1-开启
+     * 是否开启缓存。 0：关闭 1：开启
      */
     ProxyBuffer?: number;
     /**
-     * 0: 禁用拨测, 1: 启用拨测。默认启用拨测
+     * 是否开启拨测。 0: 禁用拨测  1: 启用拨测。默认启用拨测
      */
     ProbeStatus?: number;
+    /**
+     * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
+     */
+    GmType?: number;
+    /**
+     * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+     */
+    GmCertType?: number;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+     */
+    GmCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+     */
+    GmPrivateKey?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+     */
+    GmEncCert?: string;
+    /**
+     * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+     */
+    GmEncPrivateKey?: string;
+    /**
+     * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+     */
+    GmSSLId?: string;
 }
 /**
  * ModifyAreaBanAreas请求参数结构体
@@ -9692,6 +9836,11 @@ export interface ClbDomainsInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
+    /**
+     * 域名标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Labels?: Array<string>;
 }
 /**
  * DescribeObjects返回参数结构体

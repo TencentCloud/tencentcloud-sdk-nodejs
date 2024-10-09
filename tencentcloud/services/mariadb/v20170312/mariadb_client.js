@@ -392,10 +392,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBTmpInstances", req, cb);
     }
     /**
-     * 隔离MariaDB按量计费实例
+     * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
      */
-    async IsolateHourDBInstance(req, cb) {
-        return this.request("IsolateHourDBInstance", req, cb);
+    async DescribeDBSyncMode(req, cb) {
+        return this.request("DescribeDBSyncMode", req, cb);
     }
     /**
      * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。
@@ -456,6 +456,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CloneAccount(req, cb) {
         return this.request("CloneAccount", req, cb);
+    }
+    /**
+     * 隔离MariaDB按量计费实例
+     */
+    async IsolateHourDBInstance(req, cb) {
+        return this.request("IsolateHourDBInstance", req, cb);
     }
     /**
      * 本接口(UpgradeDBInstance)用于扩容云数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。

@@ -504,17 +504,25 @@ export interface DestroyHourDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * 数据库账号信息
+ * DescribeDBSyncMode返回参数结构体
  */
-export interface Account {
+export interface DescribeDBSyncModeResponse {
     /**
-     * 账户的名称
+     * 同步模式：0 异步，1 强同步， 2 强同步可退化
      */
-    User: string;
+    SyncMode: number;
     /**
-     * 账户的域名
+     * 是否有修改流程在执行中：1 是， 0 否。
      */
-    Host: string;
+    IsModifying: number;
+    /**
+     * 当前复制方式，0 异步，1 同步
+     */
+    CurrentSyncMode: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeProjectSecurityGroups请求参数结构体
@@ -704,6 +712,19 @@ export interface DescribeDatabaseTableRequest {
      * 表名称，通过 DescribeDatabaseObjects 接口获取。
      */
     Table: string;
+}
+/**
+ * ModifyDBInstanceName返回参数结构体
+ */
+export interface ModifyDBInstanceNameResponse {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeLogFileRetentionPeriod请求参数结构体
@@ -3249,17 +3270,13 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * ModifyDBInstanceName返回参数结构体
+ * DescribeDBSyncMode请求参数结构体
  */
-export interface ModifyDBInstanceNameResponse {
+export interface DescribeDBSyncModeRequest {
     /**
-     * 实例ID
+     * 实例ID，形如：tdsql-ow728lmc
      */
     InstanceId: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * CloseDBExtranetAccess返回参数结构体
@@ -3621,6 +3638,19 @@ export interface ModifyAccountPrivilegesRequest {
   注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
      */
     ProcedurePrivileges?: Array<ProcedurePrivilege>;
+}
+/**
+ * 数据库账号信息
+ */
+export interface Account {
+    /**
+     * 账户的名称
+     */
+    User: string;
+    /**
+     * 账户的域名
+     */
+    Host: string;
 }
 /**
  * ModifyBackupConfigs返回参数结构体

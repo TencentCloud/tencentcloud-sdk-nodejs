@@ -43,7 +43,7 @@ import {
   DescribeFileDownloadUrlRequest,
   DescribeDBInstanceSpecsResponse,
   DestroyHourDBInstanceResponse,
-  Account,
+  DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
@@ -53,6 +53,7 @@ import {
   IsolateDBInstanceResponse,
   ModifyLogFileRetentionPeriodRequest,
   DescribeDatabaseTableRequest,
+  ModifyDBInstanceNameResponse,
   DescribeLogFileRetentionPeriodRequest,
   DescribeFlowResponse,
   CloneAccountResponse,
@@ -153,7 +154,7 @@ import {
   ReservedNetResource,
   DatabasePrivilege,
   ModifyDBInstanceSecurityGroupsResponse,
-  ModifyDBInstanceNameResponse,
+  DescribeDBSyncModeRequest,
   CloseDBExtranetAccessResponse,
   FunctionPrivilege,
   ModifyAccountDescriptionRequest,
@@ -173,6 +174,7 @@ import {
   DescribeFlowRequest,
   DCNReplicaConfig,
   ModifyAccountPrivilegesRequest,
+  Account,
   ModifyBackupConfigsResponse,
   DatabaseProcedure,
   DescribeDBTmpInstancesResponse,
@@ -820,13 +822,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离MariaDB按量计费实例
+   * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
    */
-  async IsolateHourDBInstance(
-    req: IsolateHourDBInstanceRequest,
-    cb?: (error: string, rep: IsolateHourDBInstanceResponse) => void
-  ): Promise<IsolateHourDBInstanceResponse> {
-    return this.request("IsolateHourDBInstance", req, cb)
+  async DescribeDBSyncMode(
+    req: DescribeDBSyncModeRequest,
+    cb?: (error: string, rep: DescribeDBSyncModeResponse) => void
+  ): Promise<DescribeDBSyncModeResponse> {
+    return this.request("DescribeDBSyncMode", req, cb)
   }
 
   /**
@@ -927,6 +929,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloneAccountResponse) => void
   ): Promise<CloneAccountResponse> {
     return this.request("CloneAccount", req, cb)
+  }
+
+  /**
+   * 隔离MariaDB按量计费实例
+   */
+  async IsolateHourDBInstance(
+    req: IsolateHourDBInstanceRequest,
+    cb?: (error: string, rep: IsolateHourDBInstanceResponse) => void
+  ): Promise<IsolateHourDBInstanceResponse> {
+    return this.request("IsolateHourDBInstance", req, cb)
   }
 
   /**

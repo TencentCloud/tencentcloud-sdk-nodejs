@@ -1684,7 +1684,7 @@ export class Client extends AbstractClient {
    * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
    */
   async DescribeUserClbWafRegions(
-    req?: DescribeUserClbWafRegionsRequest,
+    req: DescribeUserClbWafRegionsRequest,
     cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
   ): Promise<DescribeUserClbWafRegionsResponse> {
     return this.request("DescribeUserClbWafRegions", req, cb)
