@@ -2567,6 +2567,25 @@ export interface DescribeBinlogsRequest {
     Limit?: number;
 }
 /**
+ * InquirePriceModify返回参数结构体
+ */
+export interface InquirePriceModifyResponse {
+    /**
+     * 实例价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstancePrice?: TradePrice;
+    /**
+     * 存储价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StoragePrice?: TradePrice;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 审计日志搜索条件
  */
 export interface InstanceAuditLogFilter {
@@ -6095,6 +6114,39 @@ export interface InstanceInitInfo {
      * 实例机器类型
      */
     DeviceType?: string;
+}
+/**
+ * InquirePriceModify请求参数结构体
+ */
+export interface InquirePriceModifyRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * CPU核数
+     */
+    Cpu?: number;
+    /**
+     * 内存大小
+     */
+    Memory?: number;
+    /**
+     * 存储大小，存储资源变配：ClusterId,StorageLimit
+     */
+    StorageLimit?: number;
+    /**
+     * 实例ID，计算资源变配必传: ClusterId,InstanceId,Cpu,Memory
+     */
+    InstanceId?: string;
+    /**
+     * 实例设备类型
+     */
+    DeviceType?: string;
+    /**
+     * serverless实例ccu大小
+     */
+    Ccu?: number;
 }
 /**
  * ModifyResourcePackagesDeductionPriority请求参数结构体

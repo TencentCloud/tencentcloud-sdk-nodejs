@@ -3909,6 +3909,10 @@ export interface ImportImageRequest {
      * 启动模式
      */
     BootMode?: string;
+    /**
+     *  镜像族
+     */
+    ImageFamily?: string;
 }
 /**
  * 竞价相关选项

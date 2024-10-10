@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportResourcePackageDeductDetails", req, cb);
     }
     /**
+     * 变配预付费集群询价
+     */
+    async InquirePriceModify(req, cb) {
+        return this.request("InquirePriceModify", req, cb);
+    }
+    /**
      * 本接口(SwitchProxyVpc)更换数据库代理vpc
      */
     async SwitchProxyVpc(req, cb) {

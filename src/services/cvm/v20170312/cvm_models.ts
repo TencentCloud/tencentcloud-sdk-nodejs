@@ -4087,6 +4087,10 @@ BYOL: 自带许可（Bring Your Own License）
    * 启动模式
    */
   BootMode?: string
+  /**
+   *  镜像族
+   */
+  ImageFamily?: string
 }
 
 /**

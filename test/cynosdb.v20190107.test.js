@@ -188,6 +188,16 @@ it("cynosdb.v20190107.ExportResourcePackageDeductDetails", async function () {
     }
 })
 
+it("cynosdb.v20190107.InquirePriceModify", async function () {
+    try {
+       const data = await client.InquirePriceModify({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SwitchProxyVpc", async function () {
     try {
        const data = await client.SwitchProxyVpc({})

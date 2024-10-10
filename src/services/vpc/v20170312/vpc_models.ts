@@ -14101,9 +14101,8 @@ export interface CCN {
   /**
    * 是否支持ipv6路由表
 注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
    */
-  Ipv6Flag?: string
+  Ipv6Flag?: boolean
   /**
    * 是否支持路由表聚合策略
 注意：此字段可能返回 null，表示取不到有效值。

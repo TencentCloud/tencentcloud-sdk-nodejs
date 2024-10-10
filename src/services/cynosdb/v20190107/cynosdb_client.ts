@@ -110,6 +110,7 @@ import {
   CreateCLSDeliveryResponse,
   ManualBackupData,
   DescribeBinlogsRequest,
+  InquirePriceModifyResponse,
   InstanceAuditLogFilter,
   SlaveZoneStockInfo,
   ModifyProxyRwSplitRequest,
@@ -255,6 +256,7 @@ import {
   SwitchClusterZoneRequest,
   Ability,
   InstanceInitInfo,
+  InquirePriceModifyRequest,
   ModifyResourcePackagesDeductionPriorityRequest,
   RemoveClusterSlaveZoneResponse,
   RenewClustersRequest,
@@ -601,6 +603,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportResourcePackageDeductDetailsResponse) => void
   ): Promise<ExportResourcePackageDeductDetailsResponse> {
     return this.request("ExportResourcePackageDeductDetails", req, cb)
+  }
+
+  /**
+   * 变配预付费集群询价
+   */
+  async InquirePriceModify(
+    req: InquirePriceModifyRequest,
+    cb?: (error: string, rep: InquirePriceModifyResponse) => void
+  ): Promise<InquirePriceModifyResponse> {
+    return this.request("InquirePriceModify", req, cb)
   }
 
   /**

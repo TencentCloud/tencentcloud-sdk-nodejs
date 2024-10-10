@@ -451,6 +451,31 @@ export interface DeleteExtendedServiceAuthInfosResponse {
     RequestId?: string;
 }
 /**
+ * CreateDynamicFlowApprover请求参数结构体
+ */
+export interface CreateDynamicFlowApproverRequest {
+    /**
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 合同流程ID，为32位字符串
+     */
+    FlowId: string;
+    /**
+     * 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。
+     */
+    Approvers: Array<ApproverInfo>;
+    /**
+     * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：<ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签）  </li><li> **OTHER** :  通用场景</li></ul>注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
+     */
+    AutoSignScene?: string;
+}
+/**
  * CreateFlowApprovers返回参数结构体
  */
 export interface CreateFlowApproversResponse {
@@ -1365,6 +1390,21 @@ export interface OrganizationInfo {
      * @deprecated
      */
     ProxyIp?: string;
+}
+/**
+ * 动态签署2.0合同参与人信息
+ */
+export interface ArchiveDynamicApproverData {
+    /**
+     * 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。 注意：不指定该字段时默认为发起方
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SignId?: string;
+    /**
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。 模板发起合同时，该参数为必填项。 文件发起合同是，该参数无需传值。 如果开发者后序用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecipientId?: string;
 }
 /**
  * CreateOrganizationAuthUrl请求参数结构体
@@ -2703,6 +2743,23 @@ export interface DescribeThirdPartyAuthCodeRequest {
     Agent?: Agent;
 }
 /**
+ * CreateDynamicFlowApprover返回参数结构体
+ */
+export interface CreateDynamicFlowApproverResponse {
+    /**
+     * 合同流程ID，为32位字符串
+     */
+    FlowId?: string;
+    /**
+     * 补充动态合同签署人的结果数组
+     */
+    DynamicFlowApproverList?: Array<DynamicFlowApproverResult>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateBatchOrganizationRegistrationTasks返回参数结构体
  */
 export interface CreateBatchOrganizationRegistrationTasksResponse {
@@ -3135,6 +3192,23 @@ export interface CreateIntegrationSubOrganizationActiveRecordResponse {
      * 激活失败的成员企业ID集合
      */
     FailedSubOrganizationIds?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ArchiveDynamicFlow返回参数结构体
+ */
+export interface ArchiveDynamicFlowResponse {
+    /**
+     * 合同流程ID
+     */
+    FlowId?: string;
+    /**
+     * 动态签署人的参与人信息
+     */
+    Approvers?: Array<ArchiveDynamicApproverData>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4008,6 +4082,12 @@ export interface CreateFlowByFilesRequest {
      * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
      */
     FlowDisplayType?: number;
+    /**
+     * 是否开启动态签署合同：
+  <ul><li> **true**：开启动态签署合同，可在签署过程中追加签署人（必须满足：1，发起方企业开启了模块化计费能力；2，发起方企业在企业应用管理中开启了动态签署人2.0能力）    。</li>
+  <li> **false**：不开启动态签署合同。</li></ul>
+     */
+    OpenDynamicSignFlow?: boolean;
 }
 /**
  * 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息
@@ -4512,6 +4592,27 @@ export interface CreatePartnerAutoSignAuthUrlResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ArchiveDynamicFlow请求参数结构体
+ */
+export interface ArchiveDynamicFlowRequest {
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 合同流程ID, 为32位字符串。
+  
+  可登录腾讯电子签控制台，[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
+     */
+    FlowId: string;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * CreateUserAutoSignSealUrl请求参数结构体
@@ -6287,7 +6388,9 @@ export interface ApproverInfo {
   
   
   
-  注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
+  注:
+  1. <b>其他证件类型为白名单功能</b>，使用前请联系对接的客户经理沟通。
+  2. 港澳居民来往内地通行证 和  港澳台居民居住证 类型的签署人<b>至少要过一次大陆的海关</b>才能使用。
      */
     ApproverIdCardType?: string;
     /**
@@ -6588,6 +6691,26 @@ export interface CreateOrganizationBatchSignUrlResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 动态添加签署人的结果信息
+ */
+export interface DynamicFlowApproverResult {
+    /**
+     * 签署方角色编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecipientId?: string;
+    /**
+     * 签署方唯一编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SignId?: string;
+    /**
+     * 签署方当前状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproverStatus?: number;
 }
 /**
  * UnbindEmployeeUserIdWithClientOpenId请求参数结构体

@@ -1031,6 +1031,13 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreateWebThemeConfig", req, cb);
     }
     /**
+     * 此接口（CreateDynamicFlowApprover）用来补充动态合同的签署人信息。<br/>
+适用场景：使用CreateFlowByFiles指定：OpenDynamicSignFlow=true发起的合同，可以使用该接口补充后续签署人。<br/>
+     */
+    async CreateDynamicFlowApprover(req, cb) {
+        return this.request("CreateDynamicFlowApprover", req, cb);
+    }
+    /**
      * 此接口（CreateIntegrationEmployees）用于创建企业员工。创建的员工初始化为未实名，如下图所示。
 
 ![image](https://qcloudimg.tencent-cloud.cn/raw/2bdcc0d91ac3146b5e8c28811a78ffe9.png)
@@ -1256,6 +1263,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async GetTaskResultApi(req, cb) {
         return this.request("GetTaskResultApi", req, cb);
+    }
+    /**
+     * 该接口用于结束动态签署流程，若当前合同还存在签署方未签署，无法结束。
+     */
+    async ArchiveDynamicFlow(req, cb) {
+        return this.request("ArchiveDynamicFlow", req, cb);
     }
     /**
      * 此接口（UpdateIntegrationEmployees）<font color="red"><b>用于修改未实名企业员工信息(姓名，手机号，邮件、部门)</b></font>。
