@@ -2765,6 +2765,11 @@ export interface RecordTimeLine {
    * 时间片段结束时间，UTC秒数，例如：1662114146
    */
   End?: number
+  /**
+   * 对应时间片段的播放url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsUrl?: string
 }
 
 /**
@@ -3706,6 +3711,10 @@ export interface DescribeRecordFileRequest {
    * 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天
    */
   EndTime: number
+  /**
+   * 是否携带每个时间段的播放url
+   */
+  WithUrl?: boolean
 }
 
 /**
