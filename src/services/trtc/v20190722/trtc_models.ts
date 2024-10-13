@@ -951,7 +951,6 @@ export interface CloudStorage {
 0：腾讯云对象存储 COS
 1：AWS
 【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中
-示例值：0
    */
   Vendor: number
   /**
@@ -959,7 +958,6 @@ export interface CloudStorage {
 示例值：cn-shanghai-1
 
 AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions）
-示例值：ap-southeast-3	
    */
   Region: string
   /**
@@ -969,18 +967,15 @@ AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using
   /**
    * 云存储的access_key账号信息。
 若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。
-示例值：test-accesskey
    */
   AccessKey: string
   /**
    * 云存储的secret_key账号信息。
 若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。
-示例值：test-secretkey
    */
   SecretKey: string
   /**
    * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。
-示例值：["prefix1", "prefix2"]
    */
   FileNamePrefix?: Array<string>
 }
@@ -3540,6 +3535,10 @@ export interface StartWebRecordRequest {
    * 若您想要推流到CDN，可以使用PublishCdnParams.N参数设置，支持最多同时推流到10个CDN地址。若转推地址是腾讯云CDN时，请将IsTencentCdn明确设置为1
    */
   PublishCdnParams?: Array<McuPublishCdnParam>
+  /**
+   * 录制页面资源加载的超时时间，单位：秒。默认值为 0 秒，该值需大于等于 0秒，且小于等于 60秒。录制页面未启用页面加载超时检测时，请勿设置此参数。
+   */
+  ReadyTimeout?: number
 }
 
 /**
@@ -3755,6 +3754,10 @@ https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.9
    * TranscriptionMode为1时必填，机器人只会拉该userid的流，忽略房间里其他用户。
    */
   TargetUserId?: string
+  /**
+   * 机器人订阅的用户列表
+   */
+  TargetUserIdList?: Array<string>
 }
 
 /**

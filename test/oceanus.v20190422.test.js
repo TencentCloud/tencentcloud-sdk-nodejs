@@ -158,6 +158,16 @@ it("oceanus.v20190422.DescribeResources", async function () {
     }
 })
 
+it("oceanus.v20190422.DescribeJobRuntimeInfo", async function () {
+    try {
+       const data = await client.DescribeJobRuntimeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.FetchSqlGatewayStatementResult", async function () {
     try {
        const data = await client.FetchSqlGatewayStatementResult({})

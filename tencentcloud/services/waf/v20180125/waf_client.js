@@ -108,6 +108,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceQpsLimit", req, cb);
     }
     /**
+     * api资产列表
+     */
+    async DescribeApiListVersionTwo(req, cb) {
+        return this.request("DescribeApiListVersionTwo", req, cb);
+    }
+    /**
      * waf斯巴达-获取防护域名信息
      */
     async DescribeSpartaProtectionInfo(req, cb) {
@@ -132,10 +138,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAttackDownloadRecords", req, cb);
     }
     /**
-     * 增加访问控制（自定义策略）
+     * 获取Api请求详情信息
      */
-    async AddCustomRule(req, cb) {
-        return this.request("AddCustomRule", req, cb);
+    async DescribeApiDetail(req, cb) {
+        return this.request("DescribeApiDetail", req, cb);
     }
     /**
      * 删除自定义规则
@@ -208,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIpHitItems(req, cb) {
         return this.request("DescribeIpHitItems", req, cb);
+    }
+    /**
+     * 删除CC攻击的session设置
+     */
+    async DeleteSession(req, cb) {
+        return this.request("DeleteSession", req, cb);
     }
     /**
      * 查询多种条件的聚类分析
@@ -617,10 +629,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafAutoDenyRules", req, cb);
     }
     /**
-     * 删除CC攻击的session设置
+     * 增加访问控制（自定义策略）
      */
-    async DeleteSession(req, cb) {
-        return this.request("DeleteSession", req, cb);
+    async AddCustomRule(req, cb) {
+        return this.request("AddCustomRule", req, cb);
     }
     /**
      * 获取域名的规则白名单

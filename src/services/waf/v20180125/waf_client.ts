@@ -23,6 +23,7 @@ import {
   DescribeUserClbWafRegionsResponse,
   AddAntiFakeUrlRequest,
   ModifyIpAccessControlRequest,
+  DescribeApiListVersionTwoResponse,
   DescribePeakValueResponse,
   ProductInfo,
   DescribeAntiLeakageItem,
@@ -65,7 +66,7 @@ import {
   DeleteIpAccessControlRequest,
   DescribeDomainCountInfoResponse,
   ModifyHostModeRequest,
-  PageInfo,
+  ModifyAntiInfoLeakRuleStatusRequest,
   DescribeCiphersDetailResponse,
   DescribeCustomRuleListRequest,
   DeleteIpAccessControlV2Response,
@@ -135,6 +136,7 @@ import {
   PostAttackDownloadTaskRequest,
   ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
+  ApiAsset,
   DescribeCCRuleListRequest,
   ResponseCode,
   ModifyAttackWhiteRuleResponse,
@@ -156,7 +158,9 @@ import {
   DescribeTlsVersionRequest,
   DealData,
   DescribeDomainDetailsSaasRequest,
+  ApiDataFilter,
   CreateDealsGoodsDetail,
+  ApiDetailSampleHistory,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
   DescribePeakPointsResponse,
@@ -172,10 +176,12 @@ import {
   PortInfo,
   AddAttackWhiteRuleRequest,
   FraudPkg,
+  DescribeDomainDetailsClbResponse,
   ExportAccessInfo,
   DescribeAntiFakeUrlResponse,
   DescribeIpAccessControlRequest,
   ModifyWafThreatenIntelligenceRequest,
+  DescribeApiListVersionTwoRequest,
   ModifyInstanceQpsLimitResponse,
   ReqUserRule,
   DescribeIpHitItemsRequest,
@@ -288,6 +294,7 @@ import {
   DescribeCCRuleRequest,
   DescribeCCRuleListResponse,
   GetAttackDownloadRecordsResponse,
+  DescribeApiDetailResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
   DescribeTopAttackDomainResponse,
@@ -301,7 +308,7 @@ import {
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
-  ModifyAntiInfoLeakRuleStatusRequest,
+  PageInfo,
   ModifyProtectionStatusResponse,
   DescribeDomainsRequest,
   ModifyDomainPostActionRequest,
@@ -321,6 +328,7 @@ import {
   DescribePeakPointsRequest,
   ModifyHostFlowModeResponse,
   DescribeAntiInfoLeakRulesStrategyItem,
+  ApiParameterType,
   BotStatPointItem,
   DescribeCiphersDetailRequest,
   CCRuleItems,
@@ -359,7 +367,7 @@ import {
   DeleteDownloadRecordResponse,
   DescribePeakValueRequest,
   BotQPS,
-  DescribeDomainDetailsClbResponse,
+  DescribeApiDetailRequest,
   DescribePolicyStatusResponse,
   CdcRegion,
   GetAttackTotalCountResponse,
@@ -546,6 +554,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * api资产列表
+   */
+  async DescribeApiListVersionTwo(
+    req: DescribeApiListVersionTwoRequest,
+    cb?: (error: string, rep: DescribeApiListVersionTwoResponse) => void
+  ): Promise<DescribeApiListVersionTwoResponse> {
+    return this.request("DescribeApiListVersionTwo", req, cb)
+  }
+
+  /**
    * waf斯巴达-获取防护域名信息
    */
   async DescribeSpartaProtectionInfo(
@@ -586,13 +604,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增加访问控制（自定义策略）
+   * 获取Api请求详情信息
    */
-  async AddCustomRule(
-    req: AddCustomRuleRequest,
-    cb?: (error: string, rep: AddCustomRuleResponse) => void
-  ): Promise<AddCustomRuleResponse> {
-    return this.request("AddCustomRule", req, cb)
+  async DescribeApiDetail(
+    req: DescribeApiDetailRequest,
+    cb?: (error: string, rep: DescribeApiDetailResponse) => void
+  ): Promise<DescribeApiDetailResponse> {
+    return this.request("DescribeApiDetail", req, cb)
   }
 
   /**
@@ -713,6 +731,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
+  }
+
+  /**
+   * 删除CC攻击的session设置
+   */
+  async DeleteSession(
+    req: DeleteSessionRequest,
+    cb?: (error: string, rep: DeleteSessionResponse) => void
+  ): Promise<DeleteSessionResponse> {
+    return this.request("DeleteSession", req, cb)
   }
 
   /**
@@ -1391,13 +1419,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除CC攻击的session设置
+   * 增加访问控制（自定义策略）
    */
-  async DeleteSession(
-    req: DeleteSessionRequest,
-    cb?: (error: string, rep: DeleteSessionResponse) => void
-  ): Promise<DeleteSessionResponse> {
-    return this.request("DeleteSession", req, cb)
+  async AddCustomRule(
+    req: AddCustomRuleRequest,
+    cb?: (error: string, rep: AddCustomRuleResponse) => void
+  ): Promise<AddCustomRuleResponse> {
+    return this.request("AddCustomRule", req, cb)
   }
 
   /**

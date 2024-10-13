@@ -678,6 +678,16 @@ it("redis.v20180412.UpgradeSmallVersion", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstancePassword", async function () {
+    try {
+       const data = await client.ModifyInstancePassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.CreateReplicationGroup", async function () {
     try {
        const data = await client.CreateReplicationGroup({})

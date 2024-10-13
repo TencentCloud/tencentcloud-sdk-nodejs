@@ -638,41 +638,17 @@ export interface DescribeTaskListResponse {
 }
 
 /**
- * ModifyInstance请求参数结构体
+ * ModifyInstancePassword返回参数结构体
  */
-export interface ModifyInstanceRequest {
+export interface ModifyInstancePasswordResponse {
   /**
-   * 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记
+   * 任务 ID。
    */
-  Operation: string
+  TaskId?: number
   /**
-   * 实例Id，每次请求的实例的上限为10。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceIds?: Array<string>
-  /**
-   * 实例的新名称
-   */
-  InstanceNames?: Array<string>
-  /**
-   * 项目Id
-   */
-  ProjectId?: number
-  /**
-   * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
-   */
-  AutoRenews?: Array<number | bigint>
-  /**
-   * 已经废弃
-   */
-  InstanceId?: string
-  /**
-   * 已经废弃
-   */
-  InstanceName?: string
-  /**
-   * 已经废弃
-   */
-  AutoRenew?: number
+  RequestId?: string
 }
 
 /**
@@ -1412,7 +1388,7 @@ export interface UpgradeVersionToMultiAvailabilityZonesResponse {
   /**
    * 任务ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1970,7 +1946,7 @@ export interface DestroyPostpaidInstanceResponse {
   /**
    * 任务Id
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2218,11 +2194,11 @@ export interface DescribeTendisSlowLogResponse {
   /**
    * 慢查询总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 慢查询详情
    */
-  TendisSlowLogDetail: Array<TendisSlowLogDetail>
+  TendisSlowLogDetail?: Array<TendisSlowLogDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2514,7 +2490,7 @@ export interface UpgradeProxyVersionResponse {
   /**
    * 异步流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3565,7 +3541,7 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    */
   Product: string
   /**
-   * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。
+   * 更换为新的安全组 ID 列表，即一个或者多个安全组 ID 组成的数组。若实例第一次配置安全组，请使用接口[AssociateSecurityGroups](https://cloud.tencent.com/document/product/239/41260)先绑定安全组。
    */
   SecurityGroupIds: Array<string>
   /**
@@ -3842,6 +3818,44 @@ export interface EnableReplicaReadonlyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 修改实例操作，如填写：rename-表示实例重命名；modifyProject-修改实例所属项目；modifyAutoRenew-修改实例续费标记
+   */
+  Operation: string
+  /**
+   * 实例Id，每次请求的实例的上限为10。
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 实例的新名称
+   */
+  InstanceNames?: Array<string>
+  /**
+   * 项目Id
+   */
+  ProjectId?: number
+  /**
+   * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+   */
+  AutoRenews?: Array<number | bigint>
+  /**
+   * 已经废弃
+   */
+  InstanceId?: string
+  /**
+   * 已经废弃
+   */
+  InstanceName?: string
+  /**
+   * 已经废弃
+   */
+  AutoRenew?: number
 }
 
 /**
@@ -4610,6 +4624,27 @@ export interface DescribeSlowLogRequest {
 - slave：从节点。
    */
   Role?: string
+}
+
+/**
+ * ModifyInstancePassword请求参数结构体
+ */
+export interface ModifyInstancePasswordRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 实例旧密码。
+   */
+  OldPassword: string
+  /**
+   * 实例新密码。密码复杂度要求如下：
+- 长度8 - 30位, 推荐使用12位以上的密码。
+- 不能以"/"开头。
+- 至少包含小写字母a - z、大写字母A - Z、数字0 - 9、特殊字符 ()~!@#$%^&*-+=_|{}[]:;<>,.?/中的两项。
+   */
+  Password: string
 }
 
 /**
@@ -5449,7 +5484,7 @@ export interface UpgradeSmallVersionResponse {
   /**
    * 异步流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResources", req, cb);
     }
     /**
+     * 获取作业运行时的信息
+     */
+    async DescribeJobRuntimeInfo(req, cb) {
+        return this.request("DescribeJobRuntimeInfo", req, cb);
+    }
+    /**
      * 查询Sql Gateway的Statement执行结果
      */
     async FetchSqlGatewayStatementResult(req, cb) {

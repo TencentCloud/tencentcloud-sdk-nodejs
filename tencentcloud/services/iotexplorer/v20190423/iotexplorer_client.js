@@ -340,6 +340,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetCloudStorage", req, cb);
     }
     /**
+     * 创建外部视频 AI 分析任务
+     */
+    async InvokeExternalSourceAIServiceTask(req, cb) {
+        return this.request("InvokeExternalSourceAIServiceTask", req, cb);
+    }
+    /**
      * 提供查询LoRa自定义频点详情的能力
      */
     async DescribeLoRaFrequency(req, cb) {
@@ -656,6 +662,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBatchProduction(req, cb) {
         return this.request("DescribeBatchProduction", req, cb);
+    }
+    /**
+     * 创建外部视频 AI 分析任务
+     */
+    async CreateExternalSourceAIServiceTask(req, cb) {
+        return this.request("CreateExternalSourceAIServiceTask", req, cb);
     }
     /**
      * 激活

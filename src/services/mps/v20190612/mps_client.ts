@@ -58,6 +58,7 @@ import {
   NumberFormat,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
+  ManageTaskRequest,
   EnhanceConfig,
   MediaInputInfo,
   CreateWorkflowRequest,
@@ -95,6 +96,7 @@ import {
   AiRecognitionTaskAsrWordsSegmentItem,
   AiContentReviewResult,
   ParseLiveStreamProcessNotificationResponse,
+  DescribeVideoDatabaseEntryTaskDetailRequest,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
   ExecuteFunctionResponse,
@@ -147,6 +149,7 @@ import {
   ComposeTrackTime,
   AiSampleFaceInfo,
   CreateInputRTSPPullSettings,
+  CreateVideoDatabaseEntryTaskRequest,
   CreateStreamLinkFlowRequest,
   CreateOutputSRTSettingsDestinations,
   RecognizeMediaForZhiXueRequest,
@@ -161,6 +164,7 @@ import {
   LiveStreamAiReviewResultInfo,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
+  TEHDConfig,
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
   PornAsrReviewTemplateInfoForUpdate,
@@ -200,7 +204,9 @@ import {
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
+  ModifyPersonSampleResponse,
   AiQualityControlTaskInput,
+  VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
   AiAnalysisTaskSegmentInput,
   AiReviewPornAsrTaskOutput,
@@ -278,7 +284,7 @@ import {
   DescribeSchedulesResponse,
   ImageQualityEnhanceConfig,
   DescribeStreamLinkRegionsResponse,
-  ManageTaskRequest,
+  DescribeVideoSearchTaskDetailResponse,
   AiAnalysisTaskSegmentResult,
   AiRecognitionTaskAsrFullTextResultInput,
   DescribeStreamLinkFlowStatisticsResponse,
@@ -327,6 +333,8 @@ import {
   OutputSRTSourceAddressResp,
   CreateScheduleRequest,
   StreamLinkRegionInfo,
+  CreateVideoSearchTaskResponse,
+  CreateVideoSearchTaskRequest,
   LiveStreamTagRecognitionResult,
   FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
@@ -390,6 +398,7 @@ import {
   SegmentRecognitionItem,
   AiReviewPoliticalAsrTaskInput,
   LiveStreamAiAnalysisResultInfo,
+  SegmentSpecificInfo,
   ActionConfigInfo,
   MediaAiAnalysisTagItem,
   TranscodeTemplate,
@@ -400,6 +409,7 @@ import {
   DescribeInputRTSPPullSettings,
   SubtitleTemplate,
   DescribeFlow,
+  CreateVideoDatabaseEntryTaskResponse,
   AiReviewProhibitedAsrTaskInput,
   DescribeMediaMetaDataResponse,
   TerrorismOcrReviewTemplateInfo,
@@ -509,9 +519,10 @@ import {
   AiRecognitionTaskTransTextResultOutput,
   ModifySnapshotByTimeOffsetTemplateRequest,
   LiveStreamAiReviewResultItem,
-  TEHDConfig,
+  DescribeVideoSearchTaskDetailRequest,
   CreateInputRTPSettings,
   TaskSimpleInfo,
+  SearchTaskResult,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
   SnapshotByTimeOffsetTemplate,
@@ -562,7 +573,7 @@ import {
   ExecuteFunctionRequest,
   DescribeStreamLinkFlowLogsResponse,
   AiAnalysisTaskHeadTailOutput,
-  ModifyPersonSampleResponse,
+  DescribeVideoDatabaseEntryTaskDetailResponse,
   DeleteTranscodeTemplateResponse,
   LiveStreamObjectRecognitionResult,
   MediaSampleSnapshotItem,
@@ -601,6 +612,7 @@ import {
   FlowAudio,
   ActivityResItem,
   LiveActivityResItem,
+  SearchValueInput,
   EditMediaFileInfo,
   AiAnalysisTaskDelLogoResult,
   SampleSnapshotTaskInput,
@@ -906,13 +918,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量启动媒体传输流。
+   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
    */
-  async BatchStartStreamLinkFlow(
-    req: BatchStartStreamLinkFlowRequest,
-    cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void
-  ): Promise<BatchStartStreamLinkFlowResponse> {
-    return this.request("BatchStartStreamLinkFlow", req, cb)
+  async CreateWordSamples(
+    req: CreateWordSamplesRequest,
+    cb?: (error: string, rep: CreateWordSamplesResponse) => void
+  ): Promise<CreateWordSamplesResponse> {
+    return this.request("CreateWordSamples", req, cb)
   }
 
   /**
@@ -1025,6 +1037,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMediaMetaDataResponse) => void
   ): Promise<DescribeMediaMetaDataResponse> {
     return this.request("DescribeMediaMetaData", req, cb)
+  }
+
+  /**
+   * 根据任务ID查询视频检索任务的状态。
+   */
+  async DescribeVideoSearchTaskDetail(
+    req: DescribeVideoSearchTaskDetailRequest,
+    cb?: (error: string, rep: DescribeVideoSearchTaskDetailResponse) => void
+  ): Promise<DescribeVideoSearchTaskDetailResponse> {
+    return this.request("DescribeVideoSearchTaskDetail", req, cb)
   }
 
   /**
@@ -1298,13 +1320,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
+   * 使用检索值检索库中最接近检索值的若干视频。
    */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
+  async CreateVideoSearchTask(
+    req: CreateVideoSearchTaskRequest,
+    cb?: (error: string, rep: CreateVideoSearchTaskResponse) => void
+  ): Promise<CreateVideoSearchTaskResponse> {
+    return this.request("CreateVideoSearchTask", req, cb)
   }
 
   /**
@@ -1369,6 +1391,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于批量删除关键词样本。
+   */
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
+  }
+
+  /**
    * 对已发起的任务进行管理。
    */
   async ManageTask(
@@ -1376,6 +1408,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageTaskResponse) => void
   ): Promise<ManageTaskResponse> {
     return this.request("ManageTask", req, cb)
+  }
+
+  /**
+   * 根据任务ID查询视频入库任务的状态。
+   */
+  async DescribeVideoDatabaseEntryTaskDetail(
+    req: DescribeVideoDatabaseEntryTaskDetailRequest,
+    cb?: (error: string, rep: DescribeVideoDatabaseEntryTaskDetailResponse) => void
+  ): Promise<DescribeVideoDatabaseEntryTaskDetailResponse> {
+    return this.request("DescribeVideoDatabaseEntryTaskDetail", req, cb)
   }
 
   /**
@@ -1389,13 +1431,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+   * 批量启动媒体传输流。
    */
-  async CreateWordSamples(
-    req: CreateWordSamplesRequest,
-    cb?: (error: string, rep: CreateWordSamplesResponse) => void
-  ): Promise<CreateWordSamplesResponse> {
-    return this.request("CreateWordSamples", req, cb)
+  async BatchStartStreamLinkFlow(
+    req: BatchStartStreamLinkFlowRequest,
+    cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void
+  ): Promise<BatchStartStreamLinkFlowResponse> {
+    return this.request("BatchStartStreamLinkFlow", req, cb)
   }
 
   /**
@@ -1588,6 +1630,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableScheduleResponse) => void
   ): Promise<EnableScheduleResponse> {
     return this.request("EnableSchedule", req, cb)
+  }
+
+  /**
+     * 对URL链接或COS中的视频发起入库任务。
+可选在任务完成后向回调方发送任务完成状态信息。
+     */
+  async CreateVideoDatabaseEntryTask(
+    req: CreateVideoDatabaseEntryTaskRequest,
+    cb?: (error: string, rep: CreateVideoDatabaseEntryTaskResponse) => void
+  ): Promise<CreateVideoDatabaseEntryTaskResponse> {
+    return this.request("CreateVideoDatabaseEntryTask", req, cb)
   }
 
   /**

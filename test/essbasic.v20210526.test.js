@@ -718,6 +718,16 @@ it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeAccountBillDetail", async function () {
+    try {
+       const data = await client.ChannelDescribeAccountBillDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.DescribeChannelFlowEvidenceReport", async function () {
     try {
        const data = await client.DescribeChannelFlowEvidenceReport({})

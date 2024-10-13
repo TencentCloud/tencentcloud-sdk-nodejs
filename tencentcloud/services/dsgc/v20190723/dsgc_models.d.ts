@@ -479,6 +479,10 @@ export interface DSPACosMetaDataInfo {
      * COS桶存储量
      */
     Storage?: number;
+    /**
+     * 治理授权状态，0:关闭 1：开启
+     */
+    GovernAuthStatus?: number;
 }
 /**
  * DSPA评估模板
@@ -789,6 +793,11 @@ export interface ReportInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgressPercent?: number;
+    /**
+     * 报告模版名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReportTemplateName?: string;
 }
 /**
  * DescribeDSPAESDataAssetByComplianceId请求参数结构体
@@ -1824,14 +1833,6 @@ export interface CreateDSPASelfBuildMetaResourceRequest {
      */
     ResourceId: string;
     /**
-     * 可用于访问自建云资源的IP。
-     */
-    ResourceVip: string;
-    /**
-     * 可用于访问自建云资源的端口。
-     */
-    ResourceVPort: number;
-    /**
      * 自建云资源的VPC ID。
      */
     ResourceUniqueVpcId: string;
@@ -1846,11 +1847,21 @@ export interface CreateDSPASelfBuildMetaResourceRequest {
      */
     ResourceAccessType: string;
     /**
-     * 账户名。
+     * 可用于访问自建云资源的IP。
+  emr的连接不需要使用该字段
+     */
+    ResourceVip: string;
+    /**
+     * 可用于访问自建云资源的端口。
+  emr的连接不需要使用该字段
+     */
+    ResourceVPort: number;
+    /**
+     * 账户名。如果emr_hive的连接方式为“LDAP”，则复用该字段
      */
     UserName: string;
     /**
-     * 账户密码。
+     * 账户密码。如果emr_hive的连接方式为“LDAP”，则复用该字段
      */
     Password: string;
     /**
@@ -1868,6 +1879,10 @@ export interface CreateDSPASelfBuildMetaResourceRequest {
      * 实例值
      */
     InstanceValue?: string;
+    /**
+     * 授权范围（all:授权整个数据源 manual:手动指定数据库）
+     */
+    AuthRange?: string;
 }
 /**
  * ModifyDSPACategoryRelation请求参数结构体
@@ -2978,6 +2993,8 @@ export interface ListDSPAMetaResourcesRequest {
   MetaType - cdb（云数据Mysql）、dcdb（TDSQL MySQL版）、mariadb（云数据库 MariaDB）、postgres（云数据库 PostgreSQL）、cynosdbmysql（TDSQL-C MySQL版）、cos（对象存储）、mysql_like_proto（自建型Mysql协议类关系型数据库）、postgre_like_proto（自建型Postgre协议类关系型数据库）。
   
   ResourceId - 资源ID，支持模糊搜索。
+  
+  CvmID - 自建资源对应CvmId，如：ins-xxxxxxxx。该字段用于casb调用dsgc接口时，根据cvmId和vport确定具体的自建实例
      */
     Filters?: Array<DspaDataSourceMngFilter>;
     /**
@@ -5240,6 +5257,14 @@ export interface AuthorizeDSPAMetaResourcesRequest {
      * 用户授权的账户信息，如果是一键自动授权模式，则不需要填写账户名与密码。
      */
     ResourcesAccount: Array<DspaResourceAccount>;
+    /**
+     * 创建默认主模板扫描任务
+     */
+    CreateDefaultTask?: boolean;
+    /**
+     * 授权范围（all:授权整个数据源 manual:手动指定数据库）
+     */
+    AuthRange?: string;
 }
 /**
  * 绑定的实例信息
@@ -5417,6 +5442,18 @@ export interface GetUserQuotaInfoResponse {
      * cos月解绑次数
      */
     COSUnbindNum?: number;
+    /**
+     * 用户购买的实例配额。
+     */
+    InsTotalQuota?: number;
+    /**
+     * 用户可用的实例配额。
+     */
+    InsRemainQuota?: number;
+    /**
+     * 用户购买的版本
+     */
+    Version?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5726,6 +5763,15 @@ export interface DspaUserResourceMeta {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceValue?: string;
+    /**
+     * //治理授权状态（0：关闭 1：开启）
+     */
+    GovernAuthStatus?: number;
+    /**
+     * 授权范围：all - 授权整个数据源 manual:手动指定数据源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthRange?: string;
 }
 /**
  * 敏感数据分类
@@ -6572,6 +6618,16 @@ export interface DspaInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Channel?: string;
+    /**
+     * 已授权的实例数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InsAuthCount?: number;
+    /**
+     * 已购买的实例数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InsTotalQuota?: number;
 }
 /**
  * CreateDSPASelfBuildMetaResource返回参数结构体
@@ -7032,6 +7088,10 @@ export interface UpdateDSPASelfBuildResourceRequest {
   UserName和Password必须同时填写或同时为空。
      */
     Password: string;
+    /**
+     * 授权范围：all 授权全部  manual：手动指定
+     */
+    AuthRange?: string;
 }
 /**
  * DescribeDSPAAssessmentTasks请求参数结构体

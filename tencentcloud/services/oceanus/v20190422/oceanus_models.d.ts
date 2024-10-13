@@ -445,6 +445,52 @@ export interface TriggerJobSavepointRequest {
     WorkSpaceId?: string;
 }
 /**
+ * 日志查询的每行日志信息
+ */
+export interface LogContent {
+    /**
+     * 日志内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Log: string;
+    /**
+     * 毫秒级时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Time: number;
+    /**
+     * 日志组Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PkgId: string;
+    /**
+     * 日志Id，在日志组范围里唯一
+     */
+    PkgLogId: number;
+    /**
+     * 日志所属的容器名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerName: string;
+}
+/**
+ * DeleteJobConfigs请求参数结构体
+ */
+export interface DeleteJobConfigsRequest {
+    /**
+     * 作业ID
+     */
+    JobId: string;
+    /**
+     * 作业配置版本数组
+     */
+    JobConfigVersions: Array<number | bigint>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
  * 事件信息
  */
 export interface JobEventInfo {
@@ -728,23 +774,6 @@ export interface ResourceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
-}
-/**
- * DescribeClusters返回参数结构体
- */
-export interface DescribeClustersResponse {
-    /**
-     * 集群总数
-     */
-    TotalCount?: number;
-    /**
-     * 集群列表
-     */
-    ClusterSet?: Array<Cluster>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * 依赖作业分状态计数信息
@@ -1044,19 +1073,17 @@ export interface SqlGatewayItem {
     Properties?: Array<Property>;
 }
 /**
- * 作业运行图
+ * DescribeJobRuntimeInfo返回参数结构体
  */
-export interface JobGraph {
+export interface DescribeJobRuntimeInfoResponse {
     /**
-     * 运行图的点集合
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 作业运行时信息
      */
-    Nodes?: Array<JobGraphNode>;
+    JobRuntimeInfo?: Array<JobRuntimeInfo>;
     /**
-     * 运行图的边集合
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Edges?: Array<JobGraphEdge>;
+    RequestId?: string;
 }
 /**
  * 停止作业的描述信息
@@ -1420,6 +1447,23 @@ export interface DeleteWorkSpaceRequest {
     WorkSpaceId: string;
 }
 /**
+ * DescribeJobRuntimeInfo请求参数结构体
+ */
+export interface DescribeJobRuntimeInfoRequest {
+    /**
+     * 作业ID
+     */
+    JobId: string;
+    /**
+     * 工作空间ID
+     */
+    WorkSpaceId: string;
+    /**
+     * 作业运行信息 key
+     */
+    IncludeInfo: Array<string>;
+}
+/**
  * DescribeWorkSpaces返回参数结构体
  */
 export interface DescribeWorkSpacesResponse {
@@ -1776,21 +1820,19 @@ export interface CheckSavepointRequest {
     WorkSpaceId: string;
 }
 /**
- * DeleteJobConfigs请求参数结构体
+ * 作业运行时信息
  */
-export interface DeleteJobConfigsRequest {
+export interface JobRuntimeInfo {
     /**
-     * 作业ID
+     * 运行信息的key，目前支持：TaskManagers：taskmanager pod 列表； StreamGraph：作业对应的 StreamGraph；SubTasks：作业的 subtask 列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    Key?: string;
     /**
-     * 作业配置版本数组
+     * 运行信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobConfigVersions: Array<number | bigint>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
+    Value?: string;
 }
 /**
  * StopJobs请求参数结构体
@@ -2261,43 +2303,24 @@ export interface TreeResourceItem {
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
 }
 /**
- * DescribeTreeResources返回参数结构体
+ * 作业配置 -- 专家模式的详细配置
  */
-export interface DescribeTreeResourcesResponse {
+export interface ExpertModeConfiguration {
     /**
-     * 父节点ID
+     * Job graph
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ParentId?: string;
+    JobGraph?: JobGraph;
     /**
-     * 文件夹ID
+     * Node configuration
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id?: string;
+    NodeConfig?: Array<NodeConfig>;
     /**
-     * 文件夹名
+     * Slot sharing groups
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
-    /**
-     * 文件列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items?: Array<TreeResourceItem>;
-    /**
-     * 子目录列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Children?: Array<DescribeTreeResourcesRsp>;
-    /**
-     * 资源总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    SlotSharingGroups?: Array<SlotSharingGroup>;
 }
 /**
  * RunJobs返回参数结构体
@@ -2754,6 +2777,21 @@ export interface Cluster {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MemRatio?: number;
+}
+/**
+ * 作业运行图
+ */
+export interface JobGraph {
+    /**
+     * 运行图的点集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nodes?: Array<JobGraphNode>;
+    /**
+     * 运行图的边集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Edges?: Array<JobGraphEdge>;
 }
 /**
  * DescribeJobSubmissionLog请求参数结构体
@@ -3472,33 +3510,21 @@ export interface StopJobsResponse {
     RequestId?: string;
 }
 /**
- * 日志查询的每行日志信息
+ * DescribeClusters返回参数结构体
  */
-export interface LogContent {
+export interface DescribeClustersResponse {
     /**
-     * 日志内容
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群总数
      */
-    Log: string;
+    TotalCount?: number;
     /**
-     * 毫秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群列表
      */
-    Time: number;
+    ClusterSet?: Array<Cluster>;
     /**
-     * 日志组Id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PkgId: string;
-    /**
-     * 日志Id，在日志组范围里唯一
-     */
-    PkgLogId: number;
-    /**
-     * 日志所属的容器名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ContainerName: string;
+    RequestId?: string;
 }
 /**
  * DescribeResources请求参数结构体
@@ -3590,24 +3616,43 @@ export interface DescribeJobsResponse {
     RequestId?: string;
 }
 /**
- * 作业配置 -- 专家模式的详细配置
+ * DescribeTreeResources返回参数结构体
  */
-export interface ExpertModeConfiguration {
+export interface DescribeTreeResourcesResponse {
     /**
-     * Job graph
+     * 父节点ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobGraph?: JobGraph;
+    ParentId?: string;
     /**
-     * Node configuration
+     * 文件夹ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeConfig?: Array<NodeConfig>;
+    Id?: string;
     /**
-     * Slot sharing groups
+     * 文件夹名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlotSharingGroups?: Array<SlotSharingGroup>;
+    Name?: string;
+    /**
+     * 文件列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<TreeResourceItem>;
+    /**
+     * 子目录列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Children?: Array<DescribeTreeResourcesRsp>;
+    /**
+     * 资源总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 集群购买、扩缩容、续费订单信息

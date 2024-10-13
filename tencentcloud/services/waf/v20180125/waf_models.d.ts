@@ -151,6 +151,25 @@ export interface ModifyIpAccessControlRequest {
     JobDateTime?: JobDateTime;
 }
 /**
+ * DescribeApiListVersionTwo返回参数结构体
+ */
+export interface DescribeApiListVersionTwoResponse {
+    /**
+     * api资产列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<ApiAsset>;
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribePeakValue返回参数结构体
  */
 export interface DescribePeakValueResponse {
@@ -1219,17 +1238,21 @@ export interface ModifyHostModeRequest {
     Edition?: string;
 }
 /**
- * 公共翻页参数
+ * ModifyAntiInfoLeakRuleStatus请求参数结构体
  */
-export interface PageInfo {
+export interface ModifyAntiInfoLeakRuleStatusRequest {
     /**
-     * 页码
+     * 域名
      */
-    PageNumber: string;
+    Domain: string;
     /**
-     * 页条目数量
+     * 规则
      */
-    PageSize: string;
+    RuleId: number;
+    /**
+     * 状态
+     */
+    Status: number;
 }
 /**
  * DescribeCiphersDetail返回参数结构体
@@ -3079,6 +3102,86 @@ export interface ModifyAntiFakeUrlStatusRequest {
     Ids: Array<number | bigint>;
 }
 /**
+ * api列表
+ */
+export interface ApiAsset {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 请求方法
+     */
+    Method?: string;
+    /**
+     * api名称
+     */
+    ApiName?: string;
+    /**
+     * 场景
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scene?: string;
+    /**
+     * 数据标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Label?: Array<string>;
+    /**
+     * 过去7天是否活跃
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Active?: boolean;
+    /**
+     * 最近更新时间
+     */
+    Timestamp?: number;
+    /**
+     * api发现时间
+     */
+    InsertTime?: number;
+    /**
+     * 资产状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Mode?: string;
+    /**
+     * 风险等级，100,200,300对应低中高
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level?: string;
+    /**
+     * 近30天调用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 是否鉴权，1标识是，0表示否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAuth?: number;
+    /**
+     * 如果添加了api入参检测规则，则此id返回值不为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiRequestRuleId?: number;
+    /**
+     * 如果添加了api限流规则，则此id返回值不为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiLimitRuleId?: number;
+    /**
+     * 对象接入和泛域名接入时，展示host列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostList?: Array<string>;
+}
+/**
  * DescribeCCRuleList请求参数结构体
  */
 export interface DescribeCCRuleListRequest {
@@ -3478,6 +3581,23 @@ export interface DescribeDomainDetailsSaasRequest {
     InstanceId: string;
 }
 /**
+ * api资产列表过滤器
+ */
+export interface ApiDataFilter {
+    /**
+     * 数据标签，是否活跃，功能场景
+     */
+    Entity: string;
+    /**
+     * 等于
+     */
+    Operator: string;
+    /**
+     * 日期，手机号，邮箱等
+     */
+    Value: string;
+}
+/**
  * 产品明细
  */
 export interface CreateDealsGoodsDetail {
@@ -3583,6 +3703,26 @@ export interface CreateDealsGoodsDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
+}
+/**
+ * api历史样例返回结构体
+ */
+export interface ApiDetailSampleHistory {
+    /**
+     * 样例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SampleNme?: string;
+    /**
+     * 请求样例
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RepLog?: string;
+    /**
+     * 响应样例
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RspLog?: string;
 }
 /**
  * 当前WAF威胁情报封禁模块详情
@@ -4173,6 +4313,19 @@ export interface FraudPkg {
     RenewFlag?: number;
 }
 /**
+ * DescribeDomainDetailsClb返回参数结构体
+ */
+export interface DescribeDomainDetailsClbResponse {
+    /**
+     * clb域名详情
+     */
+    DomainsClbPartInfo?: ClbDomainsInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAccessExports接口
  */
 export interface ExportAccessInfo {
@@ -4331,6 +4484,43 @@ export interface ModifyWafThreatenIntelligenceRequest {
      * 配置WAF威胁情报封禁模块详情
      */
     WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
+}
+/**
+ * DescribeApiListVersionTwo请求参数结构体
+ */
+export interface DescribeApiListVersionTwoRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 页面索引，第几页
+     */
+    PageIndex: number;
+    /**
+     * 页面大小
+     */
+    PageSize: number;
+    /**
+     * 过滤条件
+     */
+    Filters?: Array<ApiDataFilter>;
+    /**
+     * 排序方法，1 升序，-1 降序
+     */
+    Sort?: Array<string>;
+    /**
+     * 是否进行总数查询
+     */
+    NeedTotalCount?: boolean;
+    /**
+     * 查询开始时间
+     */
+    StartTs?: number;
+    /**
+     * 查询结束时间
+     */
+    EndTs?: number;
 }
 /**
  * ModifyInstanceQpsLimit返回参数结构体
@@ -6974,6 +7164,79 @@ export interface GetAttackDownloadRecordsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeApiDetail返回参数结构体
+ */
+export interface DescribeApiDetailResponse {
+    /**
+     * 请求样例，json字符串格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Log?: string;
+    /**
+     * 请求参数样例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParameterList?: Array<ApiParameterType>;
+    /**
+     * 当前场景标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scene?: string;
+    /**
+     * 敏感字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SensitiveFields?: Array<string>;
+    /**
+     * 7天内是否活跃
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsActive?: boolean;
+    /**
+     * 访问ip数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpCount?: number;
+    /**
+     * 访问地域数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionCount?: number;
+    /**
+     * 关联事件数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventCount?: number;
+    /**
+     * 涉敏数据条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SensitiveCount?: number;
+    /**
+     * 风险等级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level?: number;
+    /**
+     * 响应体
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RspLog?: string;
+    /**
+     * 昨日访问峰值QPS
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxQPS?: number;
+    /**
+     * 历史样例
+     */
+    ApiDetailSampleHistory?: Array<ApiDetailSampleHistory>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * Vip信息
  */
 export interface VipInfo {
@@ -7318,21 +7581,17 @@ export interface UpsertCCRuleRequest {
     Length?: number;
 }
 /**
- * ModifyAntiInfoLeakRuleStatus请求参数结构体
+ * 公共翻页参数
  */
-export interface ModifyAntiInfoLeakRuleStatusRequest {
+export interface PageInfo {
     /**
-     * 域名
+     * 页码
      */
-    Domain: string;
+    PageNumber: string;
     /**
-     * 规则
+     * 页条目数量
      */
-    RuleId: number;
-    /**
-     * 状态
-     */
-    Status: number;
+    PageSize: string;
 }
 /**
  * ModifyProtectionStatus返回参数结构体
@@ -7891,6 +8150,56 @@ export interface DescribeAntiInfoLeakRulesStrategyItem {
      * 内容
      */
     Content: string;
+}
+/**
+ * api请求参数类型
+ */
+export interface ApiParameterType {
+    /**
+     * 参数名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParameterName?: string;
+    /**
+     * 参数类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 参数位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Location?: string;
+    /**
+     * 数据标签(敏感字段)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Label?: Array<string>;
+    /**
+     * 时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timestamp?: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 来源是请求或者响应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Source?: string;
+    /**
+     * 是否需要泛化 ，0表示不需要，1表示需要
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPan?: number;
+    /**
+     * 是否鉴权，1表示是，0表示否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAuth?: number;
 }
 /**
  * bot的趋势图对象
@@ -9182,17 +9491,29 @@ export interface BotQPS {
     RenewFlag: number;
 }
 /**
- * DescribeDomainDetailsClb返回参数结构体
+ * DescribeApiDetail请求参数结构体
  */
-export interface DescribeDomainDetailsClbResponse {
+export interface DescribeApiDetailRequest {
     /**
-     * clb域名详情
+     * 域名
      */
-    DomainsClbPartInfo?: ClbDomainsInfo;
+    Domain: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * Api名称
      */
-    RequestId?: string;
+    ApiName: string;
+    /**
+     * 请求方法
+     */
+    Method: string;
+    /**
+     * 是否仅查询敏感的，1表示查询，0表示不查询
+     */
+    IsSensitive?: number;
+    /**
+     * 是否仅查询泛化的，1表示查询，0表示不查询
+     */
+    IsPan?: number;
 }
 /**
  * DescribePolicyStatus返回参数结构体

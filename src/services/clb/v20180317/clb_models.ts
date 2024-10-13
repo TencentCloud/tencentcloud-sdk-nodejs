@@ -3158,23 +3158,28 @@ export interface DescribeCustomizedConfigAssociateListResponse {
  */
 export interface SetCustomizedConfigForLoadBalancerRequest {
   /**
-   * 操作类型：'ADD', 'DELETE', 'UPDATE', 'BIND', 'UNBIND'
+   * 操作类型。
+- ADD：添加
+- DELETE：删除
+- UPDATE：修改
+- BIND：绑定
+- UNBIND：解绑
    */
   OperationType: string
   /**
-   * 除了创建个性化配置外，必传此字段，如：pz-1234abcd
+   * 个性化配置ID。除了创建个性化配置外，必传此字段，如：pz-1234abcd
    */
   UconfigId?: string
   /**
-   * 创建个性化配置或修改个性化配置的内容时，必传此字段
+   * 个性化配置内容。创建个性化配置或修改个性化配置的内容时，必传此字段
    */
   ConfigContent?: string
   /**
-   * 创建个性化配置或修改个性化配置的名字时，必传此字段
+   * 个性化配置名称。创建个性化配置或修改个性化配置的名字时，必传此字段
    */
   ConfigName?: string
   /**
-   * 绑定解绑时，必传此字段
+   * 负载均衡实例ID。绑定解绑时，必传此字段
    */
   LoadBalancerIds?: Array<string>
 }
@@ -3916,7 +3921,7 @@ export interface SetCustomizedConfigForLoadBalancerResponse {
   /**
    * 个性化配置ID，如：pz-1234abcd
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

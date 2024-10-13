@@ -424,6 +424,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeSmallVersion", req, cb);
     }
     /**
+     * 本接口（ModifyInstancePassword）用于修改实例访问密码。
+     */
+    async ModifyInstancePassword(req, cb) {
+        return this.request("ModifyInstancePassword", req, cb);
+    }
+    /**
      * 该接口（CreateReplicationGroup）用于创建复制组。
      */
     async CreateReplicationGroup(req, cb) {
@@ -610,7 +616,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceAvailabilityZones", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 本接口（ModifyDBInstanceSecurityGroups）用于对实例原有的安全组列表进行修改。
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);

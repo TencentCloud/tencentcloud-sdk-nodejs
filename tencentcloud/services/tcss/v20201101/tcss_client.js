@@ -46,7 +46,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySecLogDeliveryClsSetting", req, cb);
     }
     /**
-     * 查询运行时异常进程事件列表信息导出
+     * 接口已废弃
+
+查询运行时异常进程事件列表信息导出
      */
     async DescribeAbnormalProcessEventsExport(req, cb) {
         return this.request("DescribeAbnormalProcessEventsExport", req, cb);
@@ -112,7 +114,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusAutoIsolateSampleDetail", req, cb);
     }
     /**
-     * 查询运行时异常进程策略列表信息导出
+     * 接口已废弃
+
+查询运行时异常进程策略列表信息导出
      */
     async DescribeAbnormalProcessRulesExport(req, cb) {
         return this.request("DescribeAbnormalProcessRulesExport", req, cb);
@@ -377,7 +381,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkFirewallPolicyYamlDetail", req, cb);
     }
     /**
-     * DescribeEscapeEventsExport  查询容器逃逸事件列表导出
+     * 接口已废弃
+
+DescribeEscapeEventsExport  查询容器逃逸事件列表导出
      */
     async DescribeEscapeEventsExport(req, cb) {
         return this.request("DescribeEscapeEventsExport", req, cb);
@@ -401,7 +407,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetworkFirewallNamespaceList", req, cb);
     }
     /**
-     * 容器安全搜索查询镜像列表导出
+     * 接口已废弃
+
+容器安全搜索查询镜像列表导出
      */
     async DescribeAssetImageListExport(req, cb) {
         return this.request("DescribeAssetImageListExport", req, cb);
@@ -1995,7 +2003,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskSyscallWhiteLists", req, cb);
     }
     /**
-     * 查询运行时访问控制策略列表导出
+     * 接口已废弃
+
+查询运行时访问控制策略列表导出
      */
     async DescribeAccessControlRulesExport(req, cb) {
         return this.request("DescribeAccessControlRulesExport", req, cb);

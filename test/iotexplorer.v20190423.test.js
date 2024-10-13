@@ -538,6 +538,16 @@ it("iotexplorer.v20190423.ResetCloudStorage", async function () {
     }
 })
 
+it("iotexplorer.v20190423.InvokeExternalSourceAIServiceTask", async function () {
+    try {
+       const data = await client.InvokeExternalSourceAIServiceTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
     try {
        const data = await client.DescribeLoRaFrequency({})
@@ -1061,6 +1071,16 @@ it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
 it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     try {
        const data = await client.DescribeBatchProduction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateExternalSourceAIServiceTask", async function () {
+    try {
+       const data = await client.CreateExternalSourceAIServiceTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -900,8 +900,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询运行时异常进程事件列表信息导出
-   */
+     * 接口已废弃
+
+查询运行时异常进程事件列表信息导出
+     */
   async DescribeAbnormalProcessEventsExport(
     req: DescribeAbnormalProcessEventsExportRequest,
     cb?: (error: string, rep: DescribeAbnormalProcessEventsExportResponse) => void
@@ -1010,8 +1012,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询运行时异常进程策略列表信息导出
-   */
+     * 接口已废弃
+
+查询运行时异常进程策略列表信息导出
+     */
   async DescribeAbnormalProcessRulesExport(
     req: DescribeAbnormalProcessRulesExportRequest,
     cb?: (error: string, rep: DescribeAbnormalProcessRulesExportResponse) => void
@@ -1451,8 +1455,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeEscapeEventsExport  查询容器逃逸事件列表导出
-   */
+     * 接口已废弃
+
+DescribeEscapeEventsExport  查询容器逃逸事件列表导出
+     */
   async DescribeEscapeEventsExport(
     req: DescribeEscapeEventsExportRequest,
     cb?: (error: string, rep: DescribeEscapeEventsExportResponse) => void
@@ -1491,8 +1497,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器安全搜索查询镜像列表导出
-   */
+     * 接口已废弃
+
+容器安全搜索查询镜像列表导出
+     */
   async DescribeAssetImageListExport(
     req: DescribeAssetImageListExportRequest,
     cb?: (error: string, rep: DescribeAssetImageListExportResponse) => void
@@ -4145,8 +4153,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询运行时访问控制策略列表导出
-   */
+     * 接口已废弃
+
+查询运行时访问控制策略列表导出
+     */
   async DescribeAccessControlRulesExport(
     req: DescribeAccessControlRulesExportRequest,
     cb?: (error: string, rep: DescribeAccessControlRulesExportResponse) => void

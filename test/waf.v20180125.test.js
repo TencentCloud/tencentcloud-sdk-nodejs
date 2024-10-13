@@ -148,6 +148,16 @@ it("waf.v20180125.ModifyInstanceQpsLimit", async function () {
     }
 })
 
+it("waf.v20180125.DescribeApiListVersionTwo", async function () {
+    try {
+       const data = await client.DescribeApiListVersionTwo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeSpartaProtectionInfo", async function () {
     try {
        const data = await client.DescribeSpartaProtectionInfo({})
@@ -188,9 +198,9 @@ it("waf.v20180125.GetAttackDownloadRecords", async function () {
     }
 })
 
-it("waf.v20180125.AddCustomRule", async function () {
+it("waf.v20180125.DescribeApiDetail", async function () {
     try {
-       const data = await client.AddCustomRule({})
+       const data = await client.DescribeApiDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +321,16 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteSession", async function () {
+    try {
+       const data = await client.DeleteSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +1008,9 @@ it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     }
 })
 
-it("waf.v20180125.DeleteSession", async function () {
+it("waf.v20180125.AddCustomRule", async function () {
     try {
-       const data = await client.DeleteSession({})
+       const data = await client.AddCustomRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

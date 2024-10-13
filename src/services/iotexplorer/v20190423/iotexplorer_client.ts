@@ -79,6 +79,7 @@ import {
   ModifyProjectResponse,
   DescribeCloudStorageThumbnailRequest,
   ModifyProductCloudStorageAIServiceRequest,
+  CreateExternalSourceAIServiceTaskRequest,
   GetDeviceSumStatisticsResponse,
   InheritCloudStorageUserRequest,
   ModifyProjectRequest,
@@ -107,6 +108,7 @@ import {
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
   DescribeDevicePositionListRequest,
+  InvokeExternalSourceAIServiceTaskResponse,
   CreateStudioProductRequest,
   TransferCloudStorageRequest,
   FenceAlarmPoint,
@@ -175,7 +177,6 @@ import {
   DescribeDeviceDataResponse,
   DescribePositionFenceListRequest,
   CreatePositionSpaceRequest,
-  DescribeCloudStorageThumbnailResponse,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
   DescribeDeviceLocationSolveRequest,
@@ -222,7 +223,7 @@ import {
   DescribeFenceEventListResponse,
   TRTCParams,
   ModifyCloudStorageAIServiceRequest,
-  SearchStudioProductResponse,
+  GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
   DisableTopicRuleResponse,
   TopicRuleInfo,
@@ -247,7 +248,7 @@ import {
   WXDeviceInfo,
   DescribeDevicePackagesResponse,
   DescribeGatewaySubDeviceListResponse,
-  GetStudioProductListRequest,
+  SearchStudioProductResponse,
   DescribePackageConsumeTasksRequest,
   GetFamilyDeviceUserListResponse,
   SearchTopicRuleResponse,
@@ -262,6 +263,7 @@ import {
   BindProductsResponse,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
+  CreateExternalSourceAIServiceTaskResponse,
   BindProductsRequest,
   ModifyLoRaGatewayResponse,
   DescribeCloudStorageAIServiceRequest,
@@ -304,6 +306,7 @@ import {
   CloudStorageAIServiceTask,
   ListTopicPolicyRequest,
   DeleteLoRaFrequencyRequest,
+  InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
   ModifyTopicPolicyResponse,
@@ -318,6 +321,7 @@ import {
   CreateFenceBindRequest,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
+  UploadFirmwareRequest,
   GetDeviceLocationHistoryResponse,
   ModifyFenceBindRequest,
   GetLoRaGatewayListResponse,
@@ -350,7 +354,7 @@ import {
   DescribeCloudStorageRequest,
   GenerateSignedVideoURLResponse,
   CreatePositionFenceRequest,
-  UploadFirmwareRequest,
+  DescribeCloudStorageThumbnailResponse,
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
   ResetCloudStorageAIServiceRequest,
@@ -894,6 +898,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建外部视频 AI 分析任务
+   */
+  async InvokeExternalSourceAIServiceTask(
+    req: InvokeExternalSourceAIServiceTaskRequest,
+    cb?: (error: string, rep: InvokeExternalSourceAIServiceTaskResponse) => void
+  ): Promise<InvokeExternalSourceAIServiceTaskResponse> {
+    return this.request("InvokeExternalSourceAIServiceTask", req, cb)
+  }
+
+  /**
    * 提供查询LoRa自定义频点详情的能力
    */
   async DescribeLoRaFrequency(
@@ -1421,6 +1435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchProductionResponse) => void
   ): Promise<DescribeBatchProductionResponse> {
     return this.request("DescribeBatchProduction", req, cb)
+  }
+
+  /**
+   * 创建外部视频 AI 分析任务
+   */
+  async CreateExternalSourceAIServiceTask(
+    req: CreateExternalSourceAIServiceTaskRequest,
+    cb?: (error: string, rep: CreateExternalSourceAIServiceTaskResponse) => void
+  ): Promise<CreateExternalSourceAIServiceTaskResponse> {
+    return this.request("CreateExternalSourceAIServiceTask", req, cb)
   }
 
   /**

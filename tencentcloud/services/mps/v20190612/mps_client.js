@@ -194,10 +194,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 批量启动媒体传输流。
+     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
      */
-    async BatchStartStreamLinkFlow(req, cb) {
-        return this.request("BatchStartStreamLinkFlow", req, cb);
+    async CreateWordSamples(req, cb) {
+        return this.request("CreateWordSamples", req, cb);
     }
     /**
      * 创建用户自定义转码模板，数量上限：1000
@@ -266,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMediaMetaData(req, cb) {
         return this.request("DescribeMediaMetaData", req, cb);
+    }
+    /**
+     * 根据任务ID查询视频检索任务的状态。
+     */
+    async DescribeVideoSearchTaskDetail(req, cb) {
+        return this.request("DescribeVideoSearchTaskDetail", req, cb);
     }
     /**
      * 修改用户自定义采样截图模板。
@@ -430,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWatermarkTemplate", req, cb);
     }
     /**
-     * 该接口用于批量删除关键词样本。
+     * 使用检索值检索库中最接近检索值的若干视频。
      */
-    async DeleteWordSamples(req, cb) {
-        return this.request("DeleteWordSamples", req, cb);
+    async CreateVideoSearchTask(req, cb) {
+        return this.request("CreateVideoSearchTask", req, cb);
     }
     /**
      * 查询媒体传输开通状态。
@@ -473,10 +479,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAnimatedGraphicsTemplates", req, cb);
     }
     /**
+     * 该接口用于批量删除关键词样本。
+     */
+    async DeleteWordSamples(req, cb) {
+        return this.request("DeleteWordSamples", req, cb);
+    }
+    /**
      * 对已发起的任务进行管理。
      */
     async ManageTask(req, cb) {
         return this.request("ManageTask", req, cb);
+    }
+    /**
+     * 根据任务ID查询视频入库任务的状态。
+     */
+    async DescribeVideoDatabaseEntryTaskDetail(req, cb) {
+        return this.request("DescribeVideoDatabaseEntryTaskDetail", req, cb);
     }
     /**
      * 修改用户自定义指定时间点截图模板。
@@ -485,10 +503,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySnapshotByTimeOffsetTemplate", req, cb);
     }
     /**
-     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+     * 批量启动媒体传输流。
      */
-    async CreateWordSamples(req, cb) {
-        return this.request("CreateWordSamples", req, cb);
+    async BatchStartStreamLinkFlow(req, cb) {
+        return this.request("BatchStartStreamLinkFlow", req, cb);
     }
     /**
      * 对 COS 中指定 Bucket 的目录下上传的媒体文件，设置处理规则，包括：
@@ -613,6 +631,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async EnableSchedule(req, cb) {
         return this.request("EnableSchedule", req, cb);
+    }
+    /**
+     * 对URL链接或COS中的视频发起入库任务。
+可选在任务完成后向回调方发送任务完成状态信息。
+     */
+    async CreateVideoDatabaseEntryTask(req, cb) {
+        return this.request("CreateVideoDatabaseEntryTask", req, cb);
     }
     /**
      * 对直播流媒体发起处理任务，功能包括：

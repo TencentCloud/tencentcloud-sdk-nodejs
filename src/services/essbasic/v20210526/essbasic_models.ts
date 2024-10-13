@@ -4972,6 +4972,10 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 禁止个人用户重复签署，默认不禁止，即同一用户可多次扫码签署多份合同。若要求同一用户仅能扫码签署一份合同，请传入true。
+   */
+  ForbidPersonalMultipleSign?: boolean
 }
 
 /**
@@ -5614,6 +5618,21 @@ export interface CreateFlowsByTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 同步员工失败原因
+ */
+export interface SyncFailReason {
+  /**
+   * 企业员工标识(即OpenId)
+   */
+  Id?: string
+  /**
+   * 新增员工或者员工离职失败原因, 可能存证ID不符合规范、证件号码不合法等原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
 }
 
 /**
@@ -6357,6 +6376,36 @@ export interface ChannelCreateBatchCancelFlowUrlRequest {
 }
 
 /**
+ * ChannelDescribeAccountBillDetail返回参数结构体
+ */
+export interface ChannelDescribeAccountBillDetailResponse {
+  /**
+   * 当前绑定中账号数量
+   */
+  BoundAccountsNumber?: number
+  /**
+   * 剩余可绑定账号数量
+   */
+  RemainAvailableAccountsNumber?: number
+  /**
+   * 已失效账号数量
+   */
+  InvalidAccountsNumber?: number
+  /**
+   * 购买数量
+   */
+  TotalBuyAccountsNumber?: number
+  /**
+   * 赠送数量
+   */
+  TotalGiftAccountsNumber?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 指定签署人限制项
  */
 export interface ApproverRestriction {
@@ -6855,11 +6904,13 @@ export interface ProxyOrganizationOperator {
  */
 export interface ModifyExtendedServiceResponse {
   /**
-   * 操作跳转链接，有效期24小时
-若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。
+   * 操作跳转链接
+<ul><li><strong>链接有效期：</strong> 跳转链接的有效期为24小时。</li>
+<li><strong>没有返回链接的情形：</strong> 如果在操作时没有返回跳转链接，说明此次操作无需进行跳转，服务将会直接被开通或关闭。</li>
+<li><strong>返回链接的情形：</strong> 当操作类型为“OPEN”（开通服务），并且扩展服务类型为“AUTO_SIGN”（自动签名）、“DOWNLOAD_FLOW”（下载流程）或“OVERSEA_SIGN”（海外签名）时，系统将返回一个操作链接。收到操作链接后，贵方需主动联系超级管理员（超管）或法人。由超管或法人点击链接，以完成服务的开通操作。</li>
+</ul>
 
-当操作类型是 OPEN 且 扩展服务类型是 AUTO_SIGN 或 DOWNLOAD_FLOW 或者 OVERSEA_SIGN 时返回操作链接，
-返回的链接需要平台方自行触达超管或法人，超管或法人点击链接完成服务开通操作
+
    */
   OperateUrl?: string
   /**
@@ -8151,18 +8202,19 @@ export interface CreateChannelFlowEvidenceReportResponse {
 }
 
 /**
- * 同步员工失败原因
+ * ChannelDescribeAccountBillDetail请求参数结构体
  */
-export interface SyncFailReason {
+export interface ChannelDescribeAccountBillDetailRequest {
   /**
-   * 企业员工标识(即OpenId)
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+</ul>
+第三方平台子客企业必须已经经过实名认证
    */
-  Id?: string
-  /**
-   * 新增员工或者员工离职失败原因, 可能存证ID不符合规范、证件号码不合法等原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
+  Agent: Agent
 }
 
 /**

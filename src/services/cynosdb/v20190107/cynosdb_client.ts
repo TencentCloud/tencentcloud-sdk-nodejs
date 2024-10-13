@@ -177,6 +177,7 @@ import {
   InquirePriceCreateRequest,
   ModifyAuditServiceRequest,
   ModifyClusterNameResponse,
+  CrossRegionBackupItem,
   ExportInstanceSlowQueriesRequest,
   ModifyAuditServiceResponse,
   ResumeServerlessResponse,
@@ -208,7 +209,7 @@ import {
   BizTaskModifyParamsData,
   RollBackClusterRequest,
   Module,
-  ModifyBackupConfigRequest,
+  ProxyVersionInfo,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
   BizTaskInfo,
@@ -403,6 +404,7 @@ import {
   DescribeBinlogConfigResponse,
   DescribeAuditLogFilesRequest,
   SaleRegion,
+  ModifyBackupConfigRequest,
   DeleteAuditLogFileRequest,
   DescribeIsolatedInstancesResponse,
   GrantAccountPrivilegesResponse,
@@ -636,7 +638,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务列表
+   * 本接口（DescribeTasks）用于查询任务列表。
    */
   async DescribeTasks(
     req: DescribeTasksRequest,

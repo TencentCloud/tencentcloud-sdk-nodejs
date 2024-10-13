@@ -2605,12 +2605,7 @@ export interface CreateSchemeUrlRequest {
      */
     FlowGroupId?: string;
     /**
-     * 要跳转到的页面类型
-  
-  <ul><li> **0** : 腾讯电子签小程序个人首页 (默认) <a href="https://qcloudimg.tencent-cloud.cn/raw/a2667ea84ec993cc060321afe3191d65.jpg" target="_blank" >点击查看示例页面</a></li>
-  <li> **1** : 腾讯电子签小程序流程合同的详情页 (即合同签署页面)<a href="https://qcloudimg.tencent-cloud.cn/raw/446a679f09b1b7f40eb84e67face8acc.jpg" target="_blank" >点击查看示例页面</a></li>
-  <li> **2** : 腾讯电子签小程序合同列表页 <a href="https://qcloudimg.tencent-cloud.cn/raw/c7b80e44c1d68ae3270a6fc4939c7214.jpg" target="_blank" >点击查看示例页面</a> </li>
-  <li> **3** : 腾讯电子签小程序合同封面页  （注：`生成动态签署人补充链接时，必须指定为封面页`）<a href="https://qcloudimg.tencent-cloud.cn/raw/0d22cc587be4bf084877c151350c3bf7.jpg" target="_blank" >点击查看示例页面</a></li></ul>
+     * 要跳转到的页面类型 <ul><li> **0** : 腾讯电子签小程序个人首页 (默认) <a href="https://qcloudimg.tencent-cloud.cn/raw/a2667ea84ec993cc060321afe3191d65.jpg" target="_blank" >点击查看示例页面</a></li><li> **1** : 腾讯电子签小程序流程合同的详情页,即合同签署页面(注:`仅生成短链或者小程序Path时支持跳转合同详情页,即EndPoint传HTTP_SHORT_URL或者APP`)<a href="https://qcloudimg.tencent-cloud.cn/raw/446a679f09b1b7f40eb84e67face8acc.jpg" target="_blank" >点击查看示例页面</a></li><li> **2** : 腾讯电子签小程序合同列表页 <a href="https://qcloudimg.tencent-cloud.cn/raw/c7b80e44c1d68ae3270a6fc4939c7214.jpg" target="_blank" >点击查看示例页面</a> </li><li> **3** : 腾讯电子签小程序合同封面页  （注：`生成动态签署人补充链接时，必须指定为封面页`）<a href="https://qcloudimg.tencent-cloud.cn/raw/0d22cc587be4bf084877c151350c3bf7.jpg" target="_blank" >点击查看示例页面</a></li></ul>
      */
     PathType?: number;
     /**
@@ -3369,49 +3364,54 @@ export interface OccupiedSeal {
     /**
      * 电子印章编号
      */
-    SealId: string;
+    SealId?: string;
     /**
      * 电子印章名称
      */
-    SealName: string;
+    SealName?: string;
     /**
      * 电子印章授权时间戳，单位秒
      */
-    CreateOn: number;
+    CreateOn?: number;
     /**
      * 电子印章授权人的UserId
      */
-    Creator: string;
+    Creator?: string;
     /**
      * 电子印章策略Id
      */
-    SealPolicyId: string;
+    SealPolicyId?: string;
     /**
      * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
      */
-    SealStatus: string;
+    SealStatus?: string;
     /**
      * 审核失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailReason: string;
+    FailReason?: string;
     /**
      * 印章图片url，5分钟内有效
      */
-    Url: string;
+    Url?: string;
     /**
      * 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章
      */
-    SealType: string;
+    SealType?: string;
     /**
      * 用印申请是否为永久授权，true-是，false-否
      */
-    IsAllTime: boolean;
+    IsAllTime?: boolean;
     /**
      * 授权人列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthorizedUsers: Array<AuthorizedUser>;
+    AuthorizedUsers?: Array<AuthorizedUser>;
+    /**
+     * 印章扩展数据信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtendScene?: ExtendScene;
 }
 /**
  * 意愿核身点头确认模式结果详细数据
@@ -6322,6 +6322,26 @@ export interface DescribeBillUsageRequest {
     DisplaySubEnterprise?: boolean;
 }
 /**
+ * 印章扩展信息
+ */
+export interface ExtendScene {
+    /**
+     * 印章来源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GenerateType?: string;
+    /**
+     * 印章来源类型描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GenerateTypeDesc?: string;
+    /**
+     * 印章来源logo
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GenerateTypeLogo?: string;
+}
+/**
  * DescribeBillUsage返回参数结构体
  */
 export interface DescribeBillUsageResponse {
@@ -7539,11 +7559,17 @@ export interface CreateEmbedWebUrlResponse {
  */
 export interface ModifyExtendedServiceResponse {
     /**
-     * 操作跳转链接，有效期24小时
-  若操作时没有返回跳转链接，表示无需跳转操作，此时会直接开通/关闭服务。
+     * 操作跳转链接
+  <ul>
+  <li><strong>有效期：</strong> 跳转链接的有效期为24小时。</li>
+  <li><strong>无跳转链接返回的情况：</strong> 如果在操作过程中没有返回跳转链接，这意味着无需进行跳转操作。在这种情况下，服务将会直接被开通或关闭。
+  <li><strong>有跳转链接返回的情况：</strong> 当操作类型为“OPEN”（开通服务），并且扩展服务类型为以下之一时，  系统将返回一个操作链接。当前操作人（超级管理员或法人）需要点击此链接，以完成服务的开通操作。
   
-  当操作类型是 OPEN 且 扩展服务类型是  OPEN_SERVER_SIGN 或者 OVERSEA_SIGN 时返回操作链接，
-  返回的链接当前操作人（超管或法人）点击链接完成服务开通操作。
+  <ul>
+  <li><strong>OPEN_SERVER_SIGN</strong>（开放服务器签名）</li>
+  <li><strong>OVERSEA_SIGN</strong>（海外签名）</li>
+  </ul></li></li>
+  </ul>
      */
     OperateUrl?: string;
     /**
@@ -7608,7 +7634,7 @@ export interface DescribeOrganizationSealsRequest {
     /**
      * 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。
      */
-    Limit: number;
+    Limit?: number;
     /**
      * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。
      */
@@ -8986,6 +9012,10 @@ export interface CreateMultiFlowSignQRCodeRequest {
      * 指定签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式：自由书写、正楷临摹、系统签名、个人印章。
      */
     ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>;
+    /**
+     * 禁止个人用户重复签署，默认不禁止，即同一用户可多次扫码签署多份合同。若要求同一用户仅能扫码签署一份合同，请传入true。
+     */
+    ForbidPersonalMultipleSign?: boolean;
 }
 /**
  * VerifyPdf请求参数结构体

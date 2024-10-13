@@ -1074,6 +1074,25 @@ export interface AiReviewPoliticalOcrTaskInput {
 }
 
 /**
+ * ManageTask请求参数结构体
+ */
+export interface ManageTaskRequest {
+  /**
+   * 操作类型，取值范围：
+<ul>
+<li>Abort：终止任务。使用说明：
+<ul><li>若 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）或处理中（PROCESSING）的任务；</li>
+<li>否则，对于其他 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，只支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）的任务。</li></ul>
+</li></ul>
+   */
+  OperationType: string
+  /**
+   * 视频处理的任务 ID。
+   */
+  TaskId: string
+}
+
+/**
  * 音视频增强配置
  */
 export interface EnhanceConfig {
@@ -2254,6 +2273,16 @@ export interface ParseLiveStreamProcessNotificationResponse {
 }
 
 /**
+ * DescribeVideoDatabaseEntryTaskDetail请求参数结构体
+ */
+export interface DescribeVideoDatabaseEntryTaskDetailRequest {
+  /**
+   * 待查询的任务Id
+   */
+  TaskId: string
+}
+
+/**
  * 视频内容识别输入参数类型
  */
 export interface AiRecognitionTaskInput {
@@ -3414,6 +3443,20 @@ export interface CreateInputRTSPPullSettings {
 }
 
 /**
+ * CreateVideoDatabaseEntryTask请求参数结构体
+ */
+export interface CreateVideoDatabaseEntryTaskRequest {
+  /**
+   * 待入库视频信息
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * 可选，入库任务完成后向指定的回调地址传递任务结果，目前仅支持URL
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+}
+
+/**
  * CreateStreamLinkFlow请求参数结构体
  */
 export interface CreateStreamLinkFlowRequest {
@@ -3733,6 +3776,24 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 极速高清参数配置。
+ */
+export interface TEHDConfig {
+  /**
+   * 极速高清类型，可选值：
+<li>TEHD-100：极速高清-100（视频极速高清）。</li>
+<li>TEHD-200：极速高清-200（音频极速高清）。</li>
+不填代表不启用极速高清。
+   */
+  Type: string
+  /**
+   * 视频码率上限，当 Type 指定了极速高清类型时有效。
+不填或填0表示不设视频码率上限。
+   */
+  MaxVideoBitrate?: number
 }
 
 /**
@@ -4537,6 +4598,25 @@ export interface EditMediaOutputConfig {
 }
 
 /**
+ * ModifyPersonSample返回参数结构体
+ */
+export interface ModifyPersonSampleResponse {
+  /**
+   * 素材信息。
+   */
+  Person?: AiSamplePerson
+  /**
+   * 处理失败的五官信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 媒体质检输入参数类型
  */
 export interface AiQualityControlTaskInput {
@@ -4555,6 +4635,17 @@ export interface AiQualityControlTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelExtPara?: string
+}
+
+/**
+ * 视频检索入库任务的结果
+ */
+export interface VideoDBEntryTaskResult {
+  /**
+   * 入库的视频ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoId?: string
 }
 
 /**
@@ -5262,7 +5353,6 @@ export interface VideoTemplateInfo {
 <li>mpeg2：MPEG2 编码</li>
 <li>dnxhd：DNxHD 编码</li>
 <li>mv-hevc：MV-HEVC 编码</li>
-注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 
 注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
 注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
@@ -5310,25 +5400,46 @@ export interface VideoTemplateInfo {
    */
   Height?: number
   /**
-   * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。 当填 0 或不填时，系统将自动设置 gop 长度。
+   * 关键帧 I 帧之间的间隔，允许按帧或秒自定义GOP长度，取值范围：0 和 [1, 100000]，
+当填 0 或不填时，系统将自动设置 gop 长度。
    */
   Gop?: number
+  /**
+   * Gop数值单位，可选值：
+frame：表示帧
+second：表示秒
+默认值：frame
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GopUnit?: string
   /**
    * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 <li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
 <li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
+<li>smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。</li>
 默认值：black 。
 注意：自适应码流只支持 stretch、black。
    */
   FillType?: string
   /**
-   * 视频恒定码率控制因子，取值范围为[1, 51]。
+   * 视频恒定码率控制因子，取值范围为[0, 51]。
 如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）。
 如果没有特殊需求，不建议指定该参数。
+注意：
+若Mode选择ABR，无需配置Vcrf值
+若Mode选择CBR，无需配置Vcrf值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Vcrf?: number
+  /**
+   * 分片平均时长，范围：（0-10]，单位：秒
+默认值：10
+注意：只能在封装格式hls的情况下使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsTime?: number
   /**
    * hls 分片类型，可选值 ：
 <li>0：HLS+TS 切片</li>
@@ -5353,6 +5464,78 @@ export interface VideoTemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stereo3dType?: string
+  /**
+   * Profile，适用于不同场景。
+baseline: 只支持I/P帧，并只支持无交错的场景，适用于视频通话、手机视频等场景。
+main: 主流Profile，提供I帧、P帧、B帧，并支持无交错模式和交错模式。主要用在主流的音视频消费产品如视频播放器、流媒体传输设备上。
+high: 最高编码等级，在Main Profile上添加了8X8的预测，并支持自定义量化。广泛应用在蓝光存储、高清电视等场景。
+default：随原视频自动填充。    
+
+仅编码标准选择h264时出现该配置， 支持 baseline/main/high，默认为：default
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoProfile?: string
+  /**
+   * 编码器级别，默认为自动（""）
+若编码标准选择H264: 支持以下选项：""，1 , 1.1 , 1.2 , 1.3 , 2 , 2.1 , 2.2 , 3 , 3.1 , 3.2 , 4 , 4.1 , 4.2 , 5 , 5.1
+若编码标准选择H265: 支持以下选项：""，1 , 2 , 2.1 , 3 , 3.1 , 4 , 4.1 , 5 , 5.1 , 5.2 , 6 , 6.1 , 6.2 , 8.5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoLevel?: string
+  /**
+   * 参考帧之间的B帧数，默认选自动，支持 0 - 16
+注意：不填表示使用自动
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bframes?: number
+  /**
+   * 码率控制模式：可选值：
+VBR（Variable Bit Rate）：动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。
+ABR（Average Bit Rate）：平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。
+CBR（Constant Bit Rate）：恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。
+VCRF（Constant Rate Factor）：恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。
+默认选择 VBR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 显示高宽比，可选值：[1:1，2:1，default]
+默认值：default
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sar?: string
+  /**
+   * 自适应I帧决策，开启后，媒体处理将自动识别视频中不同场景之间的过渡点（通常是视觉上显著不同的帧，比如从一个镜头切换到另一个镜头），在这些点自适应插入关键帧（I帧），从而提高视频的随机访问性和编码效率。可选值：
+0：关闭自适应I帧决策 
+1：使用自适应I帧决策
+默认值：0
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoScenecut?: number
+  /**
+   * 比特位：支持8/10，默认为8
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BitDepth?: number
+  /**
+   * 保持原始时间戳：可选值：
+0：表示关闭
+1：表示打开
+默认是关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawPts?: number
+  /**
+   * 按比例压缩码率，开启后，将根据比例来调整输出视频的码率。填写压缩率后，系统会根据视频源码率自动计算目标输出码率。压缩率范围0-100
+不填此值表示不开启，默认不开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compress?: number
+  /**
+   * 切片特殊配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSpecificInfo?: SegmentSpecificInfo
 }
 
 /**
@@ -6592,22 +6775,28 @@ export interface DescribeStreamLinkRegionsResponse {
 }
 
 /**
- * ManageTask请求参数结构体
+ * DescribeVideoSearchTaskDetail返回参数结构体
  */
-export interface ManageTaskRequest {
+export interface DescribeVideoSearchTaskDetailResponse {
   /**
-   * 操作类型，取值范围：
-<ul>
-<li>Abort：终止任务。使用说明：
-<ul><li>若 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）或处理中（PROCESSING）的任务；</li>
-<li>否则，对于其他 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，只支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）的任务。</li></ul>
-</li></ul>
+   * 查询的任务Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperationType: string
+  TaskId?: string
   /**
-   * 视频处理的任务 ID。
+   * 查询的任务的状态，可能为WAITING、PROCESSING、FAIL、SUCCESS。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  Status?: string
+  /**
+   * 查询的任务的结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchTaskResults?: Array<SearchTaskResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7782,6 +7971,39 @@ export interface StreamLinkRegionInfo {
    * 媒体直传输的地区信息列表。
    */
   Regions: Array<RegionInfo>
+}
+
+/**
+ * CreateVideoSearchTask返回参数结构体
+ */
+export interface CreateVideoSearchTaskResponse {
+  /**
+   * 检索任务的Id，用于后续查询任务状态和返回任务结果时标识任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateVideoSearchTask请求参数结构体
+ */
+export interface CreateVideoSearchTaskRequest {
+  /**
+   * 用于检索任务的输入
+   */
+  SearchValueInput: SearchValueInput
+  /**
+   * 返回视频的最大数量，取值范围[1,20]，将返回最相近的前Limit条视频,默认为5
+   */
+  Limit?: number
+  /**
+   * 可选，用于检索任务完成后向回调方发送检索结果，目前仅支持URL方式
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
 }
 
 /**
@@ -9359,6 +9581,30 @@ export interface LiveStreamAiAnalysisResultInfo {
 }
 
 /**
+ * 切片特殊配置信息。
+ */
+export interface SegmentSpecificInfo {
+  /**
+   * 启动分片时长开关，可选值：
+on：打开
+off：关闭
+默认off
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 启动时分片时长，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentTime?: number
+  /**
+   * 生效分片数，表示前FragmentEndNum个分片以FragmentTime时长切片，取值>=1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentEndNum?: number
+}
+
+/**
  * 动作识别参数配置
  */
 export interface ActionConfigInfo {
@@ -9630,6 +9876,21 @@ export interface DescribeFlow {
    * 媒体传输输入流所属的区域，取值和InputRegion相同。
    */
   Region: string
+}
+
+/**
+ * CreateVideoDatabaseEntryTask返回参数结构体
+ */
+export interface CreateVideoDatabaseEntryTaskResponse {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11284,7 +11545,6 @@ export interface VideoTemplateInfoForUpdate {
 <li>mpeg2：MPEG2 编码</li>
 <li>dnxhd：DNxHD 编码</li>
 <li>mv-hevc：MV-HEVC 编码</li>
-注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 
 注意：av1 编码容器目前只支持 mp4 ，webm，mkv。
 注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。
@@ -11331,22 +11591,38 @@ export interface VideoTemplateInfoForUpdate {
    */
   Height?: number
   /**
-   * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 时，系统将自动设置 gop 长度。
+   * 关键帧 I 帧之间的间隔，允许按帧或秒自定义GOP长度，取值范围：0 和 [1, 100000]。
+当填 0 时，系统将自动设置 gop 长度。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Gop?: number
+  /**
+   * Gop数值单位，可选值： 
+frame：表示帧 
+second：表示秒
+默认值：frame
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GopUnit?: string
   /**
    * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
  <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 <li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
 <li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
+<li>smarttailor：智能剪裁：智能选取视频画面，来保证画面比例裁剪。</li>
+默认值：black 。
+注意：自适应码流只支持 stretch、black。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FillType?: string
   /**
-   * 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。 
+   * 视频恒定码率控制因子。取值范围为[0, 51]和100。
 如果没有特殊需求，不建议指定该参数。
+注意：
+需要修改为自动时，填100
+若Mode选择ABR，无需配置Vcrf值
+若Mode选择CBR，无需配置Vcrf值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vcrf?: number
@@ -11358,6 +11634,13 @@ export interface VideoTemplateInfoForUpdate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentAdaptStream?: number
+  /**
+   * 分片平均时长，取值范围：（0-10]，单位：秒
+默认值：10
+注意：只在封装格式HLS时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsTime?: number
   /**
    * hls 分片类型，可选值：
 <li>0：HLS+TS 切片</li>
@@ -11382,6 +11665,79 @@ export interface VideoTemplateInfoForUpdate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stereo3dType?: string
+  /**
+   * Profile，适用于不同场景。 
+baseline: 只支持I/P帧，并只支持无交错的场景，适用于视频通话、手机视频等场景。 
+main: 主流Profile，提供I帧、P帧、B帧，并支持无交错模式和交错模式。主要用在主流的音视频消费产品如视频播放器、流媒体传输设备上。 
+high: 最高编码等级，在Main Profile上添加了8X8的预测，并支持自定义量化。广泛应用在蓝光存储、高清电视等场景。
+default：随原视频自动填充
+
+仅编码标准选择h264时出现该配置，默认为：default
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoProfile?: string
+  /**
+   * 编码器级别，默认为自动（""）
+若编码标准选择H264: 支持以下选项：""，1 , 1.1 , 1.2 , 1.3 , 2 , 2.1 , 2.2 , 3 , 3.1 , 3.2 , 4 , 4.1 , 4.2 , 5 , 5.1 
+若编码标准选择H265: 支持以下选项：""，1 , 2 , 2.1 , 3 , 3.1 , 4 , 4.1 , 5 , 5.1 , 5.2 , 6 , 6.1 , 6.2 , 8.5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoLevel?: string
+  /**
+   * 最大连续B帧数，默认选自动，支持 0 - 16和-1
+注意：
+-1表示修改为自动值	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bframes?: number
+  /**
+   * 码率控制模式：可选值： 
+VBR（Variable Bit Rate）：动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。 
+ABR（Average Bit Rate）：平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。 
+CBR（Constant Bit Rate）：恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。 
+VCRF（Constant Rate Factor）：恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。 
+默认选择 VBR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 显示高宽比，可选值：[1:1，2:1，default]
+默认值：default
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sar?: string
+  /**
+   * 自适应I帧决策，开启后，媒体处理将自动识别视频中不同场景之间的过渡点（通常是视觉上显著不同的帧，比如从一个镜头切换到另一个镜头），在这些点自适应插入关键帧（I帧），从而提高视频的随机访问性和编码效率。可选值： 
+0：关闭自适应I帧决策 
+1：使用自适应I帧决策 
+默认值：0	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoScenecut?: number
+  /**
+   * 比特位：支持8/10，默认为8	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BitDepth?: number
+  /**
+   * 保持原始时间戳：可选值： 
+0：表示关闭 
+1：表示打开 
+默认是关闭	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawPts?: number
+  /**
+   * 按比例压缩码率，开启后，将根据比例来调整输出视频的码率。填写压缩率后，系统会根据视频源码率自动计算目标输出码率。压缩率范围0-100，可选值：[0-100]和-1 
+注意：-1表示修改为自动	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compress?: number
+  /**
+   * 切片特殊配置	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSpecificInfo?: SegmentSpecificInfo
 }
 
 /**
@@ -12400,21 +12756,13 @@ export interface LiveStreamAiReviewResultItem {
 }
 
 /**
- * 极速高清参数配置。
+ * DescribeVideoSearchTaskDetail请求参数结构体
  */
-export interface TEHDConfig {
+export interface DescribeVideoSearchTaskDetailRequest {
   /**
-   * 极速高清类型，可选值：
-<li>TEHD-100：极速高清-100（视频极速高清）。</li>
-<li>TEHD-200：极速高清-200（音频极速高清）。</li>
-不填代表不启用极速高清。
+   * 待查询的任务Id
    */
-  Type: string
-  /**
-   * 视频码率上限，当 Type 指定了极速高清类型时有效。
-不填或填0表示不设视频码率上限。
-   */
-  MaxVideoBitrate?: number
+  TaskId: string
 }
 
 /**
@@ -12462,6 +12810,22 @@ export interface TaskSimpleInfo {
    * 子任务类型。
    */
   SubTaskTypes?: Array<string>
+}
+
+/**
+ * 视频检索的检索结果
+ */
+export interface SearchTaskResult {
+  /**
+   * 视频在本次检索中的得分，得分越高和检索值越相似，取值范围[0,1]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Score?: number
+  /**
+   * 检索获得的视频ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoId?: string
 }
 
 /**
@@ -13832,18 +14196,24 @@ export interface AiAnalysisTaskHeadTailOutput {
 }
 
 /**
- * ModifyPersonSample返回参数结构体
+ * DescribeVideoDatabaseEntryTaskDetail返回参数结构体
  */
-export interface ModifyPersonSampleResponse {
+export interface DescribeVideoDatabaseEntryTaskDetailResponse {
   /**
-   * 素材信息。
-   */
-  Person?: AiSamplePerson
-  /**
-   * 处理失败的五官信息。
+   * 查询的任务Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
+  TaskId?: string
+  /**
+   * 查询的任务的状态，可能为WAITING、PROCESSING、FAIL、SUCCESS。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 查询的任务的结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoDBEntryTaskResults?: Array<VideoDBEntryTaskResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14789,6 +15159,22 @@ export interface LiveActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveQualityControlTask?: ScheduleQualityControlTaskResult
+}
+
+/**
+ * 视频检索的检索输入
+ */
+export interface SearchValueInput {
+  /**
+   * 检索输入的类型，目前支持：
+Text：文本检索
+   */
+  SearchValueType: string
+  /**
+   * 当SearchValueType为Text时有效且必填，用于检索视频的文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextInput?: string
 }
 
 /**

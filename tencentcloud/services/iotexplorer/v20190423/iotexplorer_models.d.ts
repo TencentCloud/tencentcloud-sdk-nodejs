@@ -1095,6 +1095,38 @@ export interface ModifyProductCloudStorageAIServiceRequest {
     Enabled?: boolean;
 }
 /**
+ * CreateExternalSourceAIServiceTask请求参数结构体
+ */
+export interface CreateExternalSourceAIServiceTaskRequest {
+    /**
+     * 产品 ID
+     */
+    ProductId: string;
+    /**
+     * 云存 AI 服务类型。可选值：
+  - `RealtimeObjectDetect`：目标检测
+  - `Highlight`：视频浓缩
+  - `VideoToText`：视频语义理解
+     */
+    ServiceType: string;
+    /**
+     * 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等）
+     */
+    VideoURLs: Array<string>;
+    /**
+     * 自定义任务 ID
+     */
+    CustomId?: string;
+    /**
+     * 视频分析配置参数
+     */
+    Config?: string;
+    /**
+     * 视频分析识别区域
+     */
+    ROI?: string;
+}
+/**
  * GetDeviceSumStatistics返回参数结构体
  */
 export interface GetDeviceSumStatisticsResponse {
@@ -1748,6 +1780,28 @@ export interface DescribeDevicePositionListRequest {
      * 分页的大小
      */
     Limit?: number;
+}
+/**
+ * InvokeExternalSourceAIServiceTask返回参数结构体
+ */
+export interface InvokeExternalSourceAIServiceTaskResponse {
+    /**
+     * 任务是否执行完成
+     */
+    Completed?: boolean;
+    /**
+     * 任务 ID
+     */
+    TaskId?: string;
+    /**
+     * 任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskInfo?: CloudStorageAIServiceTask;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateStudioProduct请求参数结构体
@@ -2998,23 +3052,6 @@ export interface CreatePositionSpaceRequest {
     Icon?: string;
 }
 /**
- * DescribeCloudStorageThumbnail返回参数结构体
- */
-export interface DescribeCloudStorageThumbnailResponse {
-    /**
-     * 缩略图访问地址
-     */
-    ThumbnailURL?: string;
-    /**
-     * 缩略图访问地址的过期时间
-     */
-    ExpireTime?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DismissRoomByStrRoomIdFromTRTC请求参数结构体
  */
 export interface DismissRoomByStrRoomIdFromTRTCRequest {
@@ -3903,21 +3940,25 @@ export interface ModifyCloudStorageAIServiceRequest {
     Config?: string;
 }
 /**
- * SearchStudioProduct返回参数结构体
+ * GetStudioProductList请求参数结构体
  */
-export interface SearchStudioProductResponse {
+export interface GetStudioProductListRequest {
     /**
-     * 产品列表
+     * 项目ID
      */
-    Products?: Array<ProductEntry>;
+    ProjectId?: string;
     /**
-     * 产品数量
+     * 产品DevStatus
      */
-    Total?: number;
+    DevStatus?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 偏移量
      */
-    RequestId?: string;
+    Offset?: number;
+    /**
+     * 数量限制
+     */
+    Limit?: number;
 }
 /**
  * DescribeFirmwareTask返回参数结构体
@@ -4417,25 +4458,21 @@ export interface DescribeGatewaySubDeviceListResponse {
     RequestId?: string;
 }
 /**
- * GetStudioProductList请求参数结构体
+ * SearchStudioProduct返回参数结构体
  */
-export interface GetStudioProductListRequest {
+export interface SearchStudioProductResponse {
     /**
-     * 项目ID
+     * 产品列表
      */
-    ProjectId?: string;
+    Products?: Array<ProductEntry>;
     /**
-     * 产品DevStatus
+     * 产品数量
      */
-    DevStatus?: string;
+    Total?: number;
     /**
-     * 偏移量
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset?: number;
-    /**
-     * 数量限制
-     */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribePackageConsumeTasks请求参数结构体
@@ -4731,6 +4768,19 @@ export interface DescribeGatewaySubProductsRequest {
      * 是否跨账号产品
      */
     ProductSource?: number;
+}
+/**
+ * CreateExternalSourceAIServiceTask返回参数结构体
+ */
+export interface CreateExternalSourceAIServiceTaskResponse {
+    /**
+     * 任务 ID
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * BindProducts请求参数结构体
@@ -5656,6 +5706,38 @@ export interface DeleteLoRaFrequencyRequest {
     FreqId?: string;
 }
 /**
+ * InvokeExternalSourceAIServiceTask请求参数结构体
+ */
+export interface InvokeExternalSourceAIServiceTaskRequest {
+    /**
+     * 产品 ID
+     */
+    ProductId: string;
+    /**
+     * 云存 AI 服务类型。可选值：
+  - `RealtimeObjectDetect`：目标检测
+  - `Highlight`：视频浓缩
+  - `VideoToText`：视频语义理解
+     */
+    ServiceType: string;
+    /**
+     * 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等）
+     */
+    VideoURLs: Array<string>;
+    /**
+     * 自定义任务 ID
+     */
+    CustomId?: string;
+    /**
+     * 视频分析配置参数
+     */
+    Config?: string;
+    /**
+     * 视频分析识别区域
+     */
+    ROI?: string;
+}
+/**
  * DescribeProductCloudStorageAIService请求参数结构体
  */
 export interface DescribeProductCloudStorageAIServiceRequest {
@@ -5992,6 +6074,43 @@ export interface FamilySubDevice {
      * 设备更新时间戳
      */
     UpdateTime: number;
+}
+/**
+ * UploadFirmware请求参数结构体
+ */
+export interface UploadFirmwareRequest {
+    /**
+     * 产品ID
+     */
+    ProductID: string;
+    /**
+     * 固件版本号
+     */
+    FirmwareVersion: string;
+    /**
+     * 固件的MD5值
+     */
+    Md5sum: string;
+    /**
+     * 固件的大小
+     */
+    FileSize: number;
+    /**
+     * 固件名称
+     */
+    FirmwareName?: string;
+    /**
+     * 固件描述
+     */
+    FirmwareDescription?: string;
+    /**
+     * 固件升级模块；可选值 mcu|moudule
+     */
+    FwType?: string;
+    /**
+     * 固件用户自定义配置信息
+     */
+    FirmwareUserDefined?: string;
 }
 /**
  * GetDeviceLocationHistory返回参数结构体
@@ -6564,41 +6683,21 @@ export interface CreatePositionFenceRequest {
     FenceDesc?: string;
 }
 /**
- * UploadFirmware请求参数结构体
+ * DescribeCloudStorageThumbnail返回参数结构体
  */
-export interface UploadFirmwareRequest {
+export interface DescribeCloudStorageThumbnailResponse {
     /**
-     * 产品ID
+     * 缩略图访问地址
      */
-    ProductID: string;
+    ThumbnailURL?: string;
     /**
-     * 固件版本号
+     * 缩略图访问地址的过期时间
      */
-    FirmwareVersion: string;
+    ExpireTime?: number;
     /**
-     * 固件的MD5值
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Md5sum: string;
-    /**
-     * 固件的大小
-     */
-    FileSize: number;
-    /**
-     * 固件名称
-     */
-    FirmwareName?: string;
-    /**
-     * 固件描述
-     */
-    FirmwareDescription?: string;
-    /**
-     * 固件升级模块；可选值 mcu|moudule
-     */
-    FwType?: string;
-    /**
-     * 固件用户自定义配置信息
-     */
-    FirmwareUserDefined?: string;
+    RequestId?: string;
 }
 /**
  * PublishFirmwareUpdateMessage请求参数结构体

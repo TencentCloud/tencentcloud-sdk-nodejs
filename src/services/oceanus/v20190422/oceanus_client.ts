@@ -33,6 +33,8 @@ import {
   CopyJobsRequest,
   CopyJobsResponse,
   TriggerJobSavepointRequest,
+  LogContent,
+  DeleteJobConfigsRequest,
   JobEventInfo,
   ResourceLocParam,
   NodeConfig,
@@ -41,7 +43,6 @@ import {
   ResultColumn,
   TreeJobSets,
   ResourceItem,
-  DescribeClustersResponse,
   RefJobStatusCountItem,
   RunSqlGatewayStatementRequest,
   DescribeFolderResponse,
@@ -56,7 +57,7 @@ import {
   CreateWorkSpaceResponse,
   CreateJobResponse,
   SqlGatewayItem,
-  JobGraph,
+  DescribeJobRuntimeInfoResponse,
   StopJobDescription,
   CreateFolderRequest,
   DeleteJobConfigsResponse,
@@ -75,6 +76,7 @@ import {
   DescribeJobSavepointResponse,
   DeleteFoldersRequest,
   DeleteWorkSpaceRequest,
+  DescribeJobRuntimeInfoRequest,
   DescribeWorkSpacesResponse,
   GatewayRefItem,
   CreateResourceResponse,
@@ -90,7 +92,7 @@ import {
   SubEks,
   WorkSpaceClusterItem,
   CheckSavepointRequest,
-  DeleteJobConfigsRequest,
+  JobRuntimeInfo,
   StopJobsRequest,
   TraceModeConfiguration,
   RunJobsRequest,
@@ -107,7 +109,7 @@ import {
   DescribeTreeResourcesRsp,
   ResourceRefDetail,
   TreeResourceItem,
-  DescribeTreeResourcesResponse,
+  ExpertModeConfiguration,
   RunJobsResponse,
   Filter,
   DeleteResourcesRequest,
@@ -118,6 +120,7 @@ import {
   ResultData,
   DeleteResourceConfigsResponse,
   Cluster,
+  JobGraph,
   DescribeJobSubmissionLogRequest,
   DescribeJobsRequest,
   JobV1,
@@ -135,12 +138,12 @@ import {
   ClusterSession,
   CreateResourceConfigRequest,
   StopJobsResponse,
-  LogContent,
+  DescribeClustersResponse,
   DescribeResourcesRequest,
   DescribeJobEventsRequest,
   CheckSavepointResponse,
   DescribeJobsResponse,
-  ExpertModeConfiguration,
+  DescribeTreeResourcesResponse,
   Order,
   CopyJobItem,
   DescribeTreeJobsRequest,
@@ -296,6 +299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourcesResponse) => void
   ): Promise<DescribeResourcesResponse> {
     return this.request("DescribeResources", req, cb)
+  }
+
+  /**
+   * 获取作业运行时的信息
+   */
+  async DescribeJobRuntimeInfo(
+    req: DescribeJobRuntimeInfoRequest,
+    cb?: (error: string, rep: DescribeJobRuntimeInfoResponse) => void
+  ): Promise<DescribeJobRuntimeInfoResponse> {
+    return this.request("DescribeJobRuntimeInfo", req, cb)
   }
 
   /**

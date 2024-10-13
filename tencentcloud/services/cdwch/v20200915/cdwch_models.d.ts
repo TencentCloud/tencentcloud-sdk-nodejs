@@ -923,6 +923,16 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: InstanceDetail;
+    /**
+     * 安全组白名单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsWhiteSGs?: boolean;
+    /**
+     * 绑定的安全组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindSGs?: Array<string>;
 }
 /**
  * 创建集群时的规格
