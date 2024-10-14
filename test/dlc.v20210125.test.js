@@ -1208,6 +1208,16 @@ it("dlc.v20210125.RegisterThirdPartyAccessUser", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTasksAnalysis", async function () {
+    try {
+       const data = await client.DescribeTasksAnalysis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteUsersFromWorkGroup", async function () {
     try {
        const data = await client.DeleteUsersFromWorkGroup({})

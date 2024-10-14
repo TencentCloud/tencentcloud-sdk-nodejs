@@ -6202,7 +6202,7 @@ export interface EnableCcnRoutesRequest {
    */
   CcnId: string
   /**
-   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。可通过DescribeCcnRoutes接口获取。
    */
   RouteIds: Array<string>
 }
@@ -10987,7 +10987,7 @@ export interface DisableCcnRoutesRequest {
    */
   CcnId: string
   /**
-   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+   * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。可通过DescribeCcnRoutes获取。
    */
   RouteIds: Array<string>
 }
@@ -13489,7 +13489,7 @@ export interface CcnBatchRouteTable {
   /**
    * 云联网路由表描述。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -14537,7 +14537,7 @@ export interface CcnRouteTableBroadcastPolicy {
   /**
    * 策略描述
    */
-  Description: string
+  Description?: string
   /**
    * as-path操作
 注意：此字段可能返回 null，表示取不到有效值。
@@ -16257,6 +16257,10 @@ export interface AssociateAddressRequest {
    * 指定绑定时是否设置直通。弹性公网 IP 直通请参见 [EIP 直通](https://cloud.tencent.com/document/product/1199/41709)。取值：True、False，默认值为 False。当绑定 CVM 实例、EKS 弹性集群时，可设定此参数为 True。此参数目前处于内测中，如需使用，请提交 [工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2)。
    */
   EipDirectConnection?: boolean
+  /**
+   * 要绑定的实例所在的地域
+   */
+  InstanceRegion?: string
 }
 
 /**
@@ -16475,11 +16479,11 @@ export interface ModifyRouteTableInfo {
    */
   RouteTableId: string
   /**
-   * 云联网路由表名称。
+   * 云联网路由表名称。Name和Description 两者必传一个。
    */
   Name?: string
   /**
-   * 云联网路由表描述。
+   * 云联网路由表描述。Name和Description 两者必传一个。
    */
   Description?: string
 }

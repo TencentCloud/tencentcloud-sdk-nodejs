@@ -742,6 +742,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterThirdPartyAccessUser", req, cb);
     }
     /**
+     * 该接口用于洞察分析列表
+     */
+    async DescribeTasksAnalysis(req, cb) {
+        return this.request("DescribeTasksAnalysis", req, cb);
+    }
+    /**
      * 从工作组中删除用户
      */
     async DeleteUsersFromWorkGroup(req, cb) {

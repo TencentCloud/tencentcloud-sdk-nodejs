@@ -1278,16 +1278,6 @@ it("tke.v20180525.CreateClusterRoute", async function () {
     }
 })
 
-it("tke.v20180525.DescribeExternalClusterSpec", async function () {
-    try {
-       const data = await client.DescribeExternalClusterSpec({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tke.v20180525.DescribeClusterReleaseHistory", async function () {
     try {
        const data = await client.DescribeClusterReleaseHistory({})

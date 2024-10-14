@@ -3732,141 +3732,6 @@ export interface BackupStorageLocation {
     LastValidationTime?: string;
 }
 /**
- * 节点池描述
- */
-export interface NodePool {
-    /**
-     * NodePoolId 资源池id
-     */
-    NodePoolId?: string;
-    /**
-     * Name 资源池名称
-     */
-    Name?: string;
-    /**
-     * ClusterInstanceId 集群实例id
-     */
-    ClusterInstanceId?: string;
-    /**
-     * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
-     */
-    LifeState?: string;
-    /**
-     * LaunchConfigurationId 配置
-     */
-    LaunchConfigurationId?: string;
-    /**
-     * AutoscalingGroupId 分组id
-     */
-    AutoscalingGroupId?: string;
-    /**
-     * Labels 标签
-     */
-    Labels?: Array<Label>;
-    /**
-     * Taints 污点标记
-     */
-    Taints?: Array<Taint>;
-    /**
-     * 节点 Annotation 列表
-     */
-    Annotations?: Array<AnnotationValue>;
-    /**
-     * NodeCountSummary 节点列表
-     */
-    NodeCountSummary?: NodeCountSummary;
-    /**
-     * 状态信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoscalingGroupStatus?: string;
-    /**
-     * 最大节点数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxNodesNum?: number;
-    /**
-     * 最小节点数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MinNodesNum?: number;
-    /**
-     * 期望的节点数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DesiredNodesNum?: number;
-    /**
-     * 运行时描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuntimeConfig?: RuntimeConfig;
-    /**
-     * 节点池osName
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodePoolOs?: string;
-    /**
-     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OsCustomizeType?: string;
-    /**
-     * 镜像id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImageId?: string;
-    /**
-     * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DesiredPodNum?: number;
-    /**
-     * 用户自定义脚本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserScript?: string;
-    /**
-     * 资源标签
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 删除保护开关
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeletionProtection?: boolean;
-    /**
-     * 节点配置
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExtraArgs?: InstanceExtraArgs;
-    /**
-     * GPU驱动相关参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GPUArgs?: GPUArgs;
-    /**
-     * dockerd --graph 指定值, 默认为 /var/lib/docker
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DockerGraphPath?: string;
-    /**
-     * 多盘数据盘挂载信息：新建节点时请确保购买CVM的参数传递了购买多个数据盘的信息，如CreateClusterInstances API的RunInstancesPara下的DataDisks也需要设置购买多个数据盘, 具体可以参考CreateClusterInstances接口的添加集群节点(多块数据盘)样例；添加已有节点时，请确保填写的分区信息在节点上真实存在
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DataDisks?: Array<DataDisk>;
-    /**
-     * 是否不可调度
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Unschedulable?: number;
-    /**
-     * 用户自定义脚本,在UserScript前执行
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PreStartUserScript?: string;
-}
-/**
  * DescribeEKSClusters返回参数结构体
  */
 export interface DescribeEKSClustersResponse {
@@ -5478,23 +5343,6 @@ export interface RunAutomationServiceEnabled {
     Enabled?: boolean;
 }
 /**
- * DescribeExternalClusterSpec返回参数结构体
- */
-export interface DescribeExternalClusterSpecResponse {
-    /**
-     * 导入第三方集群YAML定义
-     */
-    Spec: string;
-    /**
-     * agent.yaml文件过期时间字符串，时区UTC
-     */
-    Expiration: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * AddExistedInstances返回参数结构体
  */
 export interface AddExistedInstancesResponse {
@@ -7015,21 +6863,139 @@ export interface CreateReservedInstancesRequest {
     ClientToken?: string;
 }
 /**
- * DescribeExternalClusterSpec请求参数结构体
+ * 节点池描述
  */
-export interface DescribeExternalClusterSpecRequest {
+export interface NodePool {
     /**
-     * 注册集群ID
+     * NodePoolId 资源池id
      */
-    ClusterId: string;
+    NodePoolId?: string;
     /**
-     * 默认false 获取内网，是否获取外网版注册命令
+     * Name 资源池名称
      */
-    IsExtranet?: boolean;
+    Name?: string;
     /**
-     * 默认false 不刷新有效时间 ，true刷新有效时间
+     * ClusterInstanceId 集群实例id
      */
-    IsRefreshExpirationTime?: boolean;
+    ClusterInstanceId?: string;
+    /**
+     * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
+     */
+    LifeState?: string;
+    /**
+     * LaunchConfigurationId 配置
+     */
+    LaunchConfigurationId?: string;
+    /**
+     * AutoscalingGroupId 分组id
+     */
+    AutoscalingGroupId?: string;
+    /**
+     * Labels 标签
+     */
+    Labels?: Array<Label>;
+    /**
+     * Taints 污点标记
+     */
+    Taints?: Array<Taint>;
+    /**
+     * 节点 Annotation 列表
+     */
+    Annotations?: Array<AnnotationValue>;
+    /**
+     * NodeCountSummary 节点列表
+     */
+    NodeCountSummary?: NodeCountSummary;
+    /**
+     * 状态信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoscalingGroupStatus?: string;
+    /**
+     * 最大节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxNodesNum?: number;
+    /**
+     * 最小节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinNodesNum?: number;
+    /**
+     * 期望的节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DesiredNodesNum?: number;
+    /**
+     * 运行时描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeConfig?: RuntimeConfig;
+    /**
+     * 节点池osName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodePoolOs?: string;
+    /**
+     * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OsCustomizeType?: string;
+    /**
+     * 镜像id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageId?: string;
+    /**
+     * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DesiredPodNum?: number;
+    /**
+     * 用户自定义脚本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserScript?: string;
+    /**
+     * 资源标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 删除保护开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeletionProtection?: boolean;
+    /**
+     * 节点配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraArgs?: InstanceExtraArgs;
+    /**
+     * GPU驱动相关参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GPUArgs?: GPUArgs;
+    /**
+     * dockerd --graph 指定值, 默认为 /var/lib/docker
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DockerGraphPath?: string;
+    /**
+     * 多盘数据盘挂载信息：新建节点时请确保购买CVM的参数传递了购买多个数据盘的信息，如CreateClusterInstances API的RunInstancesPara下的DataDisks也需要设置购买多个数据盘, 具体可以参考CreateClusterInstances接口的添加集群节点(多块数据盘)样例；添加已有节点时，请确保填写的分区信息在节点上真实存在
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataDisks?: Array<DataDisk>;
+    /**
+     * 是否不可调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Unschedulable?: number;
+    /**
+     * 用户自定义脚本,在UserScript前执行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PreStartUserScript?: string;
 }
 /**
  * ModifyPrometheusGlobalNotification返回参数结构体

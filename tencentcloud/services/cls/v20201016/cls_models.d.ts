@@ -1974,6 +1974,14 @@ export interface ExtractRuleInfo {
      * Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。
      */
     EventLogRules?: Array<EventLog>;
+    /**
+     * 日志过滤规则列表（新版）。
+  注意：
+  - 2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。
+  - 自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdvanceFilterRules?: Array<AdvanceFilterRuleInfo>;
 }
 /**
  * CreateAlarmShield返回参数结构体
@@ -2056,6 +2064,15 @@ export interface DeleteConfigFromMachineGroupResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDashboardSubscribe返回参数结构体
+ */
+export interface ModifyDashboardSubscribeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyDashboardSubscribe请求参数结构体
  */
 export interface ModifyDashboardSubscribeRequest {
@@ -2084,19 +2101,6 @@ export interface ModifyDashboardSubscribeRequest {
  * CreateConsumer返回参数结构体
  */
 export interface CreateConsumerResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * CreateConfig返回参数结构体
- */
-export interface CreateConfigResponse {
-    /**
-     * 采集配置ID
-     */
-    ConfigId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2688,77 +2692,103 @@ export interface DeleteScheduledSqlResponse {
     RequestId?: string;
 }
 /**
- * 告警历史详情
+ * CreateConfigExtra请求参数结构体
  */
-export interface AlertHistoryRecord {
+export interface CreateConfigExtraRequest {
     /**
-     * 告警历史ID
+     * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
      */
-    RecordId: string;
+    Name: string;
     /**
-     * 告警策略ID
-     */
-    AlarmId: string;
-    /**
-     * 告警策略名称
-     */
-    AlarmName: string;
-    /**
-     * 监控对象ID
+     * 日志主题id
      */
     TopicId: string;
     /**
-     * 监控对象名称
+     * 日志源类型。支持 container_stdout：容器标准输出；container_file：容器文件路径；host_file：节点文件路径。
+     */
+    Type: string;
+    /**
+     * 采集的日志类型，默认为minimalist_log。支持以下类型：
+  - json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+  - delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+  - minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+  - fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+  - multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+  - multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+  - user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。
+     */
+    LogType: string;
+    /**
+     * 采集配置标记。
+  - 目前只支持label_k8s，用于标记自建k8s集群使用的采集配置
+  
+     */
+    ConfigFlag: string;
+    /**
+     * 日志集id
+     */
+    LogsetId: string;
+    /**
+     * 日志集name
+     */
+    LogsetName: string;
+    /**
+     * 日志主题名称
      */
     TopicName: string;
     /**
-     * 监控对象所属地域
+     * 节点文件路径类型配置。
      */
-    Region: string;
+    HostFile?: HostFileInfo;
     /**
-     * 触发条件
+     * 容器文件路径类型配置。
      */
-    Trigger: string;
+    ContainerFile?: ContainerFileInfo;
     /**
-     * 持续周期，持续满足触发条件TriggerCount个周期后，再进行告警
+     * 容器标准输出类型配置。
      */
-    TriggerCount: number;
+    ContainerStdout?: ContainerStdoutInfo;
     /**
-     * 告警通知发送频率，单位为分钟
+     * 日志格式化方式，用于容器采集场景。
+  - stdout-docker-json：用于docker容器采集场景
+  - stdout-containerd：用于containerd容器采集场景
      */
-    AlarmPeriod: number;
+    LogFormat?: string;
     /**
-     * 通知渠道组
+     * 提取规则，如果设置了ExtractRule，则必须设置LogType
      */
-    Notices: Array<AlertHistoryNotice>;
+    ExtractRule?: ExtractRuleInfo;
     /**
-     * 告警持续时间，单位为分钟
+     * 采集黑名单路径列表
      */
-    Duration: number;
+    ExcludePaths?: Array<ExcludePathInfo>;
     /**
-     * 告警状态，0代表未恢复，1代表已恢复，2代表已失效
+     * 组合解析采集规则，用于复杂场景下的日志采集。
+  - 取值参考：[使用组合解析提取模式采集日志
+  ](https://cloud.tencent.com/document/product/614/61310)
      */
-    Status: number;
+    UserDefineRule?: string;
     /**
-     * 告警发生时间，毫秒级Unix时间戳
+     * 绑定的机器组id
      */
-    CreateTime: number;
+    GroupId?: string;
     /**
-     * 告警分组触发时对应的分组信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 绑定的机器组id列表
      */
-    GroupTriggerCondition?: Array<GroupTriggerConditionInfo>;
+    GroupIds?: Array<string>;
     /**
-     * 告警级别，0代表警告(Warn)，1代表提醒(Info)，2代表紧急 (Critical)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 采集相关配置信息。详情见CollectInfo复杂类型配置。
      */
-    AlarmLevel?: number;
+    CollectInfos?: Array<CollectInfo>;
     /**
-     * 监控对象类型。
-  0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  - ClsAgentDefault(自定义默认值，无特殊含义，用于清空其他选项)，建议取值0
+  
      */
-    MonitorObjectType?: number;
+    AdvancedConfig?: string;
 }
 /**
  * 黑名单path信息
@@ -2898,17 +2928,24 @@ export interface ConfigExtraInfo {
     AdvancedConfig?: string;
 }
 /**
- * CreateMachineGroup返回参数结构体
+ * 高级过滤规则
  */
-export interface CreateMachineGroupResponse {
+export interface AdvanceFilterRuleInfo {
     /**
-     * 机器组ID
+     * 过滤字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId?: string;
+    Key: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 过滤规则，0:等于，1:字段存在，2:字段不存在
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Rule: number;
+    /**
+     * 过滤值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * SplitPartition请求参数结构体
@@ -3286,46 +3323,17 @@ export interface DescribeExportsRequest {
     Limit?: number;
 }
 /**
- * DescribeMachineGroups请求参数结构体
+ * CreateMachineGroup返回参数结构体
  */
-export interface DescribeMachineGroupsRequest {
+export interface CreateMachineGroupResponse {
     /**
-     * machineGroupName
-  - 按照【机器组名称】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  machineGroupId
-  - 按照【机器组ID】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  osType
-  - 按照【操作系统类型】进行过滤。
-  - 类型：Int
-  - 必选：否
-  
-  tagKey
-  - 按照【标签键】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  tag:tagKey
-  - 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-  - 类型：String
-  - 必选：否
-  
-  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     * 机器组ID
      */
-    Filters?: Array<Filter>;
+    GroupId?: string;
     /**
-     * 分页的偏移量，默认值为0
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset?: number;
-    /**
-     * 分页单页的限制数目，默认值为20，最大值100
-     */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeCosRecharges请求参数结构体
@@ -3550,6 +3558,48 @@ export interface QueryRangeMetricResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeMachineGroups请求参数结构体
+ */
+export interface DescribeMachineGroupsRequest {
+    /**
+     * machineGroupName
+  - 按照【机器组名称】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  machineGroupId
+  - 按照【机器组ID】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  osType
+  - 按照【操作系统类型】进行过滤。
+  - 类型：Int
+  - 必选：否
+  
+  tagKey
+  - 按照【标签键】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  tag:tagKey
+  - 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+  - 类型：String
+  - 必选：否
+  
+  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 分页单页的限制数目，默认值为20，最大值100
+     */
+    Limit?: number;
 }
 /**
  * DeleteIndex请求参数结构体
@@ -4446,13 +4496,77 @@ export interface CreateShipperResponse {
     RequestId?: string;
 }
 /**
- * ModifyDashboardSubscribe返回参数结构体
+ * 告警历史详情
  */
-export interface ModifyDashboardSubscribeResponse {
+export interface AlertHistoryRecord {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 告警历史ID
      */
-    RequestId?: string;
+    RecordId: string;
+    /**
+     * 告警策略ID
+     */
+    AlarmId: string;
+    /**
+     * 告警策略名称
+     */
+    AlarmName: string;
+    /**
+     * 监控对象ID
+     */
+    TopicId: string;
+    /**
+     * 监控对象名称
+     */
+    TopicName: string;
+    /**
+     * 监控对象所属地域
+     */
+    Region: string;
+    /**
+     * 触发条件
+     */
+    Trigger: string;
+    /**
+     * 持续周期，持续满足触发条件TriggerCount个周期后，再进行告警
+     */
+    TriggerCount: number;
+    /**
+     * 告警通知发送频率，单位为分钟
+     */
+    AlarmPeriod: number;
+    /**
+     * 通知渠道组
+     */
+    Notices: Array<AlertHistoryNotice>;
+    /**
+     * 告警持续时间，单位为分钟
+     */
+    Duration: number;
+    /**
+     * 告警状态，0代表未恢复，1代表已恢复，2代表已失效
+     */
+    Status: number;
+    /**
+     * 告警发生时间，毫秒级Unix时间戳
+     */
+    CreateTime: number;
+    /**
+     * 告警分组触发时对应的分组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupTriggerCondition?: Array<GroupTriggerConditionInfo>;
+    /**
+     * 告警级别，0代表警告(Warn)，1代表提醒(Info)，2代表紧急 (Critical)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmLevel?: number;
+    /**
+     * 监控对象类型。
+  0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MonitorObjectType?: number;
 }
 /**
  * DescribeKafkaRecharges返回参数结构体
@@ -5308,103 +5422,17 @@ export interface RuleInfo {
     DynamicIndex?: DynamicIndex;
 }
 /**
- * CreateConfigExtra请求参数结构体
+ * CreateConfig返回参数结构体
  */
-export interface CreateConfigExtraRequest {
+export interface CreateConfigResponse {
     /**
-     * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
+     * 采集配置ID
      */
-    Name: string;
+    ConfigId?: string;
     /**
-     * 日志主题id
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TopicId: string;
-    /**
-     * 日志源类型。支持 container_stdout：容器标准输出；container_file：容器文件路径；host_file：节点文件路径。
-     */
-    Type: string;
-    /**
-     * 采集的日志类型，默认为minimalist_log。支持以下类型：
-  - json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
-  - delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
-  - minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
-  - fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
-  - multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
-  - multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
-  - user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）。
-     */
-    LogType: string;
-    /**
-     * 采集配置标记。
-  - 目前只支持label_k8s，用于标记自建k8s集群使用的采集配置
-  
-     */
-    ConfigFlag: string;
-    /**
-     * 日志集id
-     */
-    LogsetId: string;
-    /**
-     * 日志集name
-     */
-    LogsetName: string;
-    /**
-     * 日志主题名称
-     */
-    TopicName: string;
-    /**
-     * 节点文件路径类型配置。
-     */
-    HostFile?: HostFileInfo;
-    /**
-     * 容器文件路径类型配置。
-     */
-    ContainerFile?: ContainerFileInfo;
-    /**
-     * 容器标准输出类型配置。
-     */
-    ContainerStdout?: ContainerStdoutInfo;
-    /**
-     * 日志格式化方式，用于容器采集场景。
-  - stdout-docker-json：用于docker容器采集场景
-  - stdout-containerd：用于containerd容器采集场景
-     */
-    LogFormat?: string;
-    /**
-     * 提取规则，如果设置了ExtractRule，则必须设置LogType
-     */
-    ExtractRule?: ExtractRuleInfo;
-    /**
-     * 采集黑名单路径列表
-     */
-    ExcludePaths?: Array<ExcludePathInfo>;
-    /**
-     * 组合解析采集规则，用于复杂场景下的日志采集。
-  - 取值参考：[使用组合解析提取模式采集日志
-  ](https://cloud.tencent.com/document/product/614/61310)
-     */
-    UserDefineRule?: string;
-    /**
-     * 绑定的机器组id
-     */
-    GroupId?: string;
-    /**
-     * 绑定的机器组id列表
-     */
-    GroupIds?: Array<string>;
-    /**
-     * 采集相关配置信息。详情见CollectInfo复杂类型配置。
-     */
-    CollectInfos?: Array<CollectInfo>;
-    /**
-     * 高级采集配置。 Json字符串， Key/Value定义为如下：
-  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
-  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
-  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-  - ClsAgentDefault(自定义默认值，无特殊含义，用于清空其他选项)，建议取值0
-  
-     */
-    AdvancedConfig?: string;
+    RequestId?: string;
 }
 /**
  * CreateConsumer请求参数结构体

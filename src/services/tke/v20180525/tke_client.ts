@@ -193,7 +193,6 @@ import {
   DescribeRIUtilizationDetailRequest,
   ClusterCondition,
   BackupStorageLocation,
-  NodePool,
   DescribeEKSClustersResponse,
   VolumeMount,
   DeleteClusterRequest,
@@ -277,7 +276,6 @@ import {
   CreatePrometheusConfigResponse,
   DescribeClusterEndpointStatusResponse,
   RunAutomationServiceEnabled,
-  DescribeExternalClusterSpecResponse,
   AddExistedInstancesResponse,
   RestartEKSContainerInstancesResponse,
   DisableClusterDeletionProtectionResponse,
@@ -349,7 +347,7 @@ import {
   DescribeClusterReleasesResponse,
   AddNodeToNodePoolRequest,
   CreateReservedInstancesRequest,
-  DescribeExternalClusterSpecRequest,
+  NodePool,
   ModifyPrometheusGlobalNotificationResponse,
   UninstallClusterReleaseRequest,
   ModifyPrometheusTempResponse,
@@ -1915,18 +1913,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterRouteResponse) => void
   ): Promise<CreateClusterRouteResponse> {
     return this.request("CreateClusterRoute", req, cb)
-  }
-
-  /**
-     * tdcc接口已迁移至tdcc产品下，tke下的接口下线
-
-获取导入第三方集群YAML定义
-     */
-  async DescribeExternalClusterSpec(
-    req: DescribeExternalClusterSpecRequest,
-    cb?: (error: string, rep: DescribeExternalClusterSpecResponse) => void
-  ): Promise<DescribeExternalClusterSpecResponse> {
-    return this.request("DescribeExternalClusterSpec", req, cb)
   }
 
   /**

@@ -4118,24 +4118,80 @@ export interface DetachUserPolicyResponse {
 }
 
 /**
- * SparkSQL批任务日志操作信息。
+ * 洞察分析结果返回体
  */
-export interface SparkSessionBatchLogOperate {
+export interface AnalysisTaskResults {
   /**
-   * 操作提示
+   * 任务Id
+   */
+  Id?: string
+  /**
+   * 任务创建时间，毫秒时间戳
+   */
+  InstanceStartTime?: number
+  /**
+   * 任务结束时间，毫秒时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text?: string
+  InstanceCompleteTime?: number
   /**
-   * 操作类型：COPY、LOG、UI、RESULT、List、TAB
+   * 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。
+   */
+  State?: number
+  /**
+   * 任务SQL语句
+   */
+  SQL?: string
+  /**
+   * 计算资源名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operate?: string
+  DataEngineName?: string
   /**
-   * 补充信息：如：taskid、sessionid、sparkui等
+   * 单位毫秒，引擎内执行耗时
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Supplement?: Array<KVPair>
+  JobTimeSum?: number
+  /**
+   * 单位秒，CU资源消耗
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTimeSum?: number
+  /**
+   * 数据扫描总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputRecordsSum?: number
+  /**
+   * 数据扫描总 bytes
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputBytesSum?: number
+  /**
+   * 输出总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputRecordsSum?: number
+  /**
+   * 输出总 bytes
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputBytesSum?: number
+  /**
+   * shuffle read 总 bytes
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleReadBytesSum?: number
+  /**
+   * shuffle read 总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleReadRecordsSum?: number
+  /**
+   * 洞察结果类型分类，一个 json 数组，有如下几种类型：SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisStatus?: string
 }
 
 /**
@@ -4849,6 +4905,24 @@ export interface IpPortPair {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
+}
+
+/**
+ * DescribeTasksAnalysis返回参数结构体
+ */
+export interface DescribeTasksAnalysisResponse {
+  /**
+   * 洞察结果分页列表
+   */
+  TaskList?: Array<AnalysisTaskResults>
+  /**
+   * 洞察结果总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6133,6 +6207,44 @@ export interface RenewDataEngineRequest {
    * 自动续费标志，0，初始状态，默认不自动续费，若用户有预付费不停服特权，自动续费。1：自动续费。2：明确不自动续费。不传该参数默认为0
    */
   RenewFlag?: number
+}
+
+/**
+ * DescribeTasksAnalysis请求参数结构体
+ */
+export interface DescribeTasksAnalysisRequest {
+  /**
+   * 数据引擎名称，用于筛选
+   */
+  DataEngineName?: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个: task-id - String - （任务ID准确过滤）task-id 取值形如：e386471f-139a-4e59-877f-50ece8135b99。task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)，rule-id - String - （洞察类型）取值范围 SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段，支持如下字段类型，instance-start-time (任务开始时间）, instance-complete-time (任务结束时间）,job-time-sum （单位毫秒，引擎内执行耗时）,task-time-sum （CU资源消耗，单位秒）,input-bytes-sum（数据扫描总大小，单位bytes）,shuffle-read-bytes-sum（数据shuffle总大小，单位bytes）
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+   */
+  Sorting?: string
+  /**
+   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS
+   */
+  StartTime?: string
+  /**
+   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
+   */
+  EndTime?: string
 }
 
 /**
@@ -8230,6 +8342,27 @@ export interface ListTaskJobLogDetailRequest {
    * SparkSQL任务唯一ID
    */
   BatchId?: string
+}
+
+/**
+ * SparkSQL批任务日志操作信息。
+ */
+export interface SparkSessionBatchLogOperate {
+  /**
+   * 操作提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 操作类型：COPY、LOG、UI、RESULT、List、TAB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operate?: string
+  /**
+   * 补充信息：如：taskid、sessionid、sparkui等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Supplement?: Array<KVPair>
 }
 
 /**

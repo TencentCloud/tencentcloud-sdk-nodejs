@@ -191,7 +191,7 @@ import {
   AlterDMSPartitionResponse,
   DescribeTableResponse,
   DetachUserPolicyResponse,
-  SparkSessionBatchLogOperate,
+  AnalysisTaskResults,
   UnbindWorkGroupsFromUserResponse,
   AlterDMSDatabaseResponse,
   CancelNotebookSessionStatementResponse,
@@ -216,6 +216,7 @@ import {
   DeleteDataEngineResponse,
   CosPermission,
   IpPortPair,
+  DescribeTasksAnalysisResponse,
   RestartDataEngineResponse,
   SwitchDataEngineImageResponse,
   DescribeSparkAppTasksResponse,
@@ -266,6 +267,7 @@ import {
   CreateImportTaskResponse,
   SmartOptimizerIndexPolicy,
   RenewDataEngineRequest,
+  DescribeTasksAnalysisRequest,
   DescribeScriptsResponse,
   UnbindWorkGroupsFromUserRequest,
   ViewResponseInfo,
@@ -349,6 +351,7 @@ import {
   UnlockMetaDataRequest,
   CreateSparkAppTaskResponse,
   ListTaskJobLogDetailRequest,
+  SparkSessionBatchLogOperate,
   RevokeDLCCatalogAccessResponse,
   DeleteCHDFSBindingProductRequest,
   RenewDataEngineResponse,
@@ -1614,6 +1617,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterThirdPartyAccessUserResponse) => void
   ): Promise<RegisterThirdPartyAccessUserResponse> {
     return this.request("RegisterThirdPartyAccessUser", req, cb)
+  }
+
+  /**
+   * 该接口用于洞察分析列表
+   */
+  async DescribeTasksAnalysis(
+    req: DescribeTasksAnalysisRequest,
+    cb?: (error: string, rep: DescribeTasksAnalysisResponse) => void
+  ): Promise<DescribeTasksAnalysisResponse> {
+    return this.request("DescribeTasksAnalysis", req, cb)
   }
 
   /**
