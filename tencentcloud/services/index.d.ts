@@ -110,6 +110,7 @@ export { goosefs } from "./goosefs";
 export { gpm } from "./gpm";
 export { gs } from "./gs";
 export { gse } from "./gse";
+export { gwlb } from "./gwlb";
 export { habo } from "./habo";
 export { hai } from "./hai";
 export { hasim } from "./hasim";

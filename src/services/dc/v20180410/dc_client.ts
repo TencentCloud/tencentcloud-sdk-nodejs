@@ -23,6 +23,7 @@ import {
   DirectConnectTunnelRoute,
   RejectDirectConnectTunnelRequest,
   Coordinate,
+  CreateCloudAttachServiceResponse,
   CreateDirectConnectResponse,
   DescribeDirectConnectTunnelExtraRequest,
   DescribePublicDirectConnectTunnelRoutesRequest,
@@ -33,8 +34,9 @@ import {
   AcceptDirectConnectTunnelRequest,
   ReleaseInternetAddressRequest,
   DescribeDirectConnectTunnelExtraResponse,
+  ReleaseInternetAddressResponse,
   ModifyDirectConnectTunnelAttributeResponse,
-  RouteFilterPrefix,
+  AccessPoint,
   ApplyInternetAddressResponse,
   BGPStatus,
   DirectConnectTunnelExtra,
@@ -44,6 +46,7 @@ import {
   ModifyDirectConnectTunnelExtraResponse,
   EnableInternetAddressResponse,
   ApplyInternetAddressRequest,
+  CreateCloudAttachServiceRequest,
   DescribeDirectConnectsResponse,
   DescribeAccessPointsRequest,
   AcceptDirectConnectTunnelResponse,
@@ -66,13 +69,14 @@ import {
   BFDInfo,
   DeleteDirectConnectRequest,
   DescribeDirectConnectTunnelsResponse,
-  AccessPoint,
+  CloudAttachInfo,
+  RouteFilterPrefix,
   DescribeInternetAddressStatisticsResponse,
   NQAInfo,
   DescribeInternetAddressRequest,
   DescribePublicDirectConnectTunnelRoutesResponse,
   DescribeInternetAddressQuotaResponse,
-  ReleaseInternetAddressResponse,
+  CreateCasInput,
   DirectConnectTunnel,
   DisableInternetAddressRequest,
 } from "./dc_models"
@@ -97,6 +101,89 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户互联网公网地址分配统计信息
+   */
+  async DescribeInternetAddressStatistics(
+    req?: DescribeInternetAddressStatisticsRequest,
+    cb?: (error: string, rep: DescribeInternetAddressStatisticsResponse) => void
+  ): Promise<DescribeInternetAddressStatisticsResponse> {
+    return this.request("DescribeInternetAddressStatistics", req, cb)
+  }
+
+  /**
+   * 删除物理专线。只能删除处于已连接状态的物理专线。
+   */
+  async DeleteDirectConnect(
+    req: DeleteDirectConnectRequest,
+    cb?: (error: string, rep: DeleteDirectConnectResponse) => void
+  ): Promise<DeleteDirectConnectResponse> {
+    return this.request("DeleteDirectConnect", req, cb)
+  }
+
+  /**
+   * 删除专用通道。
+   */
+  async DeleteDirectConnectTunnel(
+    req: DeleteDirectConnectTunnelRequest,
+    cb?: (error: string, rep: DeleteDirectConnectTunnelResponse) => void
+  ): Promise<DeleteDirectConnectTunnelResponse> {
+    return this.request("DeleteDirectConnectTunnel", req, cb)
+  }
+
+  /**
+     * 申请物理专线接入。
+调用该接口时，请注意：
+账号要进行实名认证，否则不允许申请物理专线；
+若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
+     */
+  async CreateDirectConnect(
+    req: CreateDirectConnectRequest,
+    cb?: (error: string, rep: CreateDirectConnectResponse) => void
+  ): Promise<CreateDirectConnectResponse> {
+    return this.request("CreateDirectConnect", req, cb)
+  }
+
+  /**
+   * 查询物理专线列表。
+   */
+  async DescribeDirectConnects(
+    req: DescribeDirectConnectsRequest,
+    cb?: (error: string, rep: DescribeDirectConnectsResponse) => void
+  ): Promise<DescribeDirectConnectsResponse> {
+    return this.request("DescribeDirectConnects", req, cb)
+  }
+
+  /**
+   * 启用已停用的互联网公网地址
+   */
+  async EnableInternetAddress(
+    req: EnableInternetAddressRequest,
+    cb?: (error: string, rep: EnableInternetAddressResponse) => void
+  ): Promise<EnableInternetAddressResponse> {
+    return this.request("EnableInternetAddress", req, cb)
+  }
+
+  /**
+   * 修改物理专线的属性。
+   */
+  async ModifyDirectConnectAttribute(
+    req: ModifyDirectConnectAttributeRequest,
+    cb?: (error: string, rep: ModifyDirectConnectAttributeResponse) => void
+  ): Promise<ModifyDirectConnectAttributeResponse> {
+    return this.request("ModifyDirectConnectAttribute", req, cb)
+  }
+
+  /**
+   * 查询专用通道扩展信息。
+   */
+  async DescribeDirectConnectTunnelExtra(
+    req: DescribeDirectConnectTunnelExtraRequest,
+    cb?: (error: string, rep: DescribeDirectConnectTunnelExtraResponse) => void
+  ): Promise<DescribeDirectConnectTunnelExtraResponse> {
+    return this.request("DescribeDirectConnectTunnelExtra", req, cb)
+  }
+
+  /**
    * 停用用户申请的公网互联网地址
    */
   async DisableInternetAddress(
@@ -117,26 +204,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询物理专线接入点。
-   */
-  async DescribeAccessPoints(
-    req: DescribeAccessPointsRequest,
-    cb?: (error: string, rep: DescribeAccessPointsResponse) => void
-  ): Promise<DescribeAccessPointsResponse> {
-    return this.request("DescribeAccessPoints", req, cb)
-  }
-
-  /**
-   * 修改物理专线的属性。
-   */
-  async ModifyDirectConnectAttribute(
-    req: ModifyDirectConnectAttributeRequest,
-    cb?: (error: string, rep: ModifyDirectConnectAttributeResponse) => void
-  ): Promise<ModifyDirectConnectAttributeResponse> {
-    return this.request("ModifyDirectConnectAttribute", req, cb)
-  }
-
-  /**
    * 创建专用通道。
    */
   async CreateDirectConnectTunnel(
@@ -144,119 +211,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDirectConnectTunnelResponse) => void
   ): Promise<CreateDirectConnectTunnelResponse> {
     return this.request("CreateDirectConnectTunnel", req, cb)
-  }
-
-  /**
-   * 查询专用通道扩展信息。
-   */
-  async DescribeDirectConnectTunnelExtra(
-    req: DescribeDirectConnectTunnelExtraRequest,
-    cb?: (error: string, rep: DescribeDirectConnectTunnelExtraResponse) => void
-  ): Promise<DescribeDirectConnectTunnelExtraResponse> {
-    return this.request("DescribeDirectConnectTunnelExtra", req, cb)
-  }
-
-  /**
-   * 删除物理专线。只能删除处于已连接状态的物理专线。
-   */
-  async DeleteDirectConnect(
-    req: DeleteDirectConnectRequest,
-    cb?: (error: string, rep: DeleteDirectConnectResponse) => void
-  ): Promise<DeleteDirectConnectResponse> {
-    return this.request("DeleteDirectConnect", req, cb)
-  }
-
-  /**
-   * 接受专用通道申请。
-   */
-  async AcceptDirectConnectTunnel(
-    req: AcceptDirectConnectTunnelRequest,
-    cb?: (error: string, rep: AcceptDirectConnectTunnelResponse) => void
-  ): Promise<AcceptDirectConnectTunnelResponse> {
-    return this.request("AcceptDirectConnectTunnel", req, cb)
-  }
-
-  /**
-   * 获取用户互联网公网地址分配统计信息
-   */
-  async DescribeInternetAddressStatistics(
-    req?: DescribeInternetAddressStatisticsRequest,
-    cb?: (error: string, rep: DescribeInternetAddressStatisticsResponse) => void
-  ): Promise<DescribeInternetAddressStatisticsResponse> {
-    return this.request("DescribeInternetAddressStatistics", req, cb)
-  }
-
-  /**
-   * 删除专用通道。
-   */
-  async DeleteDirectConnectTunnel(
-    req: DeleteDirectConnectTunnelRequest,
-    cb?: (error: string, rep: DeleteDirectConnectTunnelResponse) => void
-  ): Promise<DeleteDirectConnectTunnelResponse> {
-    return this.request("DeleteDirectConnectTunnel", req, cb)
-  }
-
-  /**
-   * 申请互联网CIDR地址
-   */
-  async ApplyInternetAddress(
-    req: ApplyInternetAddressRequest,
-    cb?: (error: string, rep: ApplyInternetAddressResponse) => void
-  ): Promise<ApplyInternetAddressResponse> {
-    return this.request("ApplyInternetAddress", req, cb)
-  }
-
-  /**
-   * 启用已停用的互联网公网地址
-   */
-  async EnableInternetAddress(
-    req: EnableInternetAddressRequest,
-    cb?: (error: string, rep: EnableInternetAddressResponse) => void
-  ): Promise<EnableInternetAddressResponse> {
-    return this.request("EnableInternetAddress", req, cb)
-  }
-
-  /**
-   * 获取用户互联网公网地址配额
-   */
-  async DescribeInternetAddressQuota(
-    req?: DescribeInternetAddressQuotaRequest,
-    cb?: (error: string, rep: DescribeInternetAddressQuotaResponse) => void
-  ): Promise<DescribeInternetAddressQuotaResponse> {
-    return this.request("DescribeInternetAddressQuota", req, cb)
-  }
-
-  /**
-   * 获取用户互联网公网地址信息
-   */
-  async DescribeInternetAddress(
-    req: DescribeInternetAddressRequest,
-    cb?: (error: string, rep: DescribeInternetAddressResponse) => void
-  ): Promise<DescribeInternetAddressResponse> {
-    return this.request("DescribeInternetAddress", req, cb)
-  }
-
-  /**
-   * 查询专用通道列表。
-   */
-  async DescribeDirectConnectTunnels(
-    req: DescribeDirectConnectTunnelsRequest,
-    cb?: (error: string, rep: DescribeDirectConnectTunnelsResponse) => void
-  ): Promise<DescribeDirectConnectTunnelsResponse> {
-    return this.request("DescribeDirectConnectTunnels", req, cb)
-  }
-
-  /**
-     * 申请物理专线接入。
-调用该接口时，请注意：
-账号要进行实名认证，否则不允许申请物理专线；
-若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
-     */
-  async CreateDirectConnect(
-    req: CreateDirectConnectRequest,
-    cb?: (error: string, rep: CreateDirectConnectResponse) => void
-  ): Promise<CreateDirectConnectResponse> {
-    return this.request("CreateDirectConnect", req, cb)
   }
 
   /**
@@ -270,23 +224,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询物理专线列表。
+   * 申请互联网CIDR地址
    */
-  async DescribeDirectConnects(
-    req: DescribeDirectConnectsRequest,
-    cb?: (error: string, rep: DescribeDirectConnectsResponse) => void
-  ): Promise<DescribeDirectConnectsResponse> {
-    return this.request("DescribeDirectConnects", req, cb)
+  async ApplyInternetAddress(
+    req: ApplyInternetAddressRequest,
+    cb?: (error: string, rep: ApplyInternetAddressResponse) => void
+  ): Promise<ApplyInternetAddressResponse> {
+    return this.request("ApplyInternetAddress", req, cb)
   }
 
   /**
-   * 释放已申请的互联网地址
+   * 获取用户互联网公网地址配额
    */
-  async ReleaseInternetAddress(
-    req: ReleaseInternetAddressRequest,
-    cb?: (error: string, rep: ReleaseInternetAddressResponse) => void
-  ): Promise<ReleaseInternetAddressResponse> {
-    return this.request("ReleaseInternetAddress", req, cb)
+  async DescribeInternetAddressQuota(
+    req?: DescribeInternetAddressQuotaRequest,
+    cb?: (error: string, rep: DescribeInternetAddressQuotaResponse) => void
+  ): Promise<DescribeInternetAddressQuotaResponse> {
+    return this.request("DescribeInternetAddressQuota", req, cb)
+  }
+
+  /**
+   * 查询专用通道列表。
+   */
+  async DescribeDirectConnectTunnels(
+    req: DescribeDirectConnectTunnelsRequest,
+    cb?: (error: string, rep: DescribeDirectConnectTunnelsResponse) => void
+  ): Promise<DescribeDirectConnectTunnelsResponse> {
+    return this.request("DescribeDirectConnectTunnels", req, cb)
+  }
+
+  /**
+   * 查询物理专线接入点。
+   */
+  async DescribeAccessPoints(
+    req: DescribeAccessPointsRequest,
+    cb?: (error: string, rep: DescribeAccessPointsResponse) => void
+  ): Promise<DescribeAccessPointsResponse> {
+    return this.request("DescribeAccessPoints", req, cb)
+  }
+
+  /**
+   * 创建敏捷上云服务
+   */
+  async CreateCloudAttachService(
+    req: CreateCloudAttachServiceRequest,
+    cb?: (error: string, rep: CreateCloudAttachServiceResponse) => void
+  ): Promise<CreateCloudAttachServiceResponse> {
+    return this.request("CreateCloudAttachService", req, cb)
   }
 
   /**
@@ -297,5 +281,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDirectConnectTunnelAttributeResponse) => void
   ): Promise<ModifyDirectConnectTunnelAttributeResponse> {
     return this.request("ModifyDirectConnectTunnelAttribute", req, cb)
+  }
+
+  /**
+   * 接受专用通道申请。
+   */
+  async AcceptDirectConnectTunnel(
+    req: AcceptDirectConnectTunnelRequest,
+    cb?: (error: string, rep: AcceptDirectConnectTunnelResponse) => void
+  ): Promise<AcceptDirectConnectTunnelResponse> {
+    return this.request("AcceptDirectConnectTunnel", req, cb)
+  }
+
+  /**
+   * 获取用户互联网公网地址信息
+   */
+  async DescribeInternetAddress(
+    req: DescribeInternetAddressRequest,
+    cb?: (error: string, rep: DescribeInternetAddressResponse) => void
+  ): Promise<DescribeInternetAddressResponse> {
+    return this.request("DescribeInternetAddress", req, cb)
+  }
+
+  /**
+   * 释放已申请的互联网地址
+   */
+  async ReleaseInternetAddress(
+    req: ReleaseInternetAddressRequest,
+    cb?: (error: string, rep: ReleaseInternetAddressResponse) => void
+  ): Promise<ReleaseInternetAddressResponse> {
+    return this.request("ReleaseInternetAddress", req, cb)
   }
 }

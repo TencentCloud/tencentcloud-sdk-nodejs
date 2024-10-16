@@ -76,16 +76,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZoneList", req, cb);
     }
     /**
-     * 获取私有域记录列表
+     * 创建终端节点
      */
-    async DescribePrivateZoneRecordList(req, cb) {
-        return this.request("DescribePrivateZoneRecordList", req, cb);
+    async CreateEndPoint(req, cb) {
+        return this.request("CreateEndPoint", req, cb);
     }
     /**
      * 追加与私有域关联的VPC
      */
     async AddSpecifyPrivateZoneVpc(req, cb) {
         return this.request("AddSpecifyPrivateZoneVpc", req, cb);
+    }
+    /**
+     * 获取私有域记录列表
+     */
+    async DescribePrivateZoneRecordList(req, cb) {
+        return this.request("DescribePrivateZoneRecordList", req, cb);
     }
     /**
      * 查询异步绑定vpc操作状态

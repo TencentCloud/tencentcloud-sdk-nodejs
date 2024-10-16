@@ -521,83 +521,41 @@ export interface SearchCosRechargeInfoRequest {
 }
 
 /**
- * Kafka导入配置信息
+ * DeleteScheduledSql返回参数结构体
  */
-export interface KafkaRechargeInfo {
+export interface DeleteScheduledSqlResponse {
   /**
-   * Kafka数据订阅配置的ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeNoticeContents请求参数结构体
+ */
+export interface DescribeNoticeContentsRequest {
   /**
-   * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * <li> name
+按照【通知内容模版名称】进行过滤。
+类型：String
+必选：否
+</li>
+<li> noticeContentId
+按照【通知内容模版ID】进行过滤。
+类型：String
+必选：否
+</li>
+每次请求的Filters的上限为10，Filter.Values的上限为100。
    */
-  TopicId?: string
+  Filters?: Array<Filter>
   /**
-   * Kafka导入任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KafkaType?: number
-  /**
-   * 腾讯云CKafka实例ID，KafkaType为0时必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KafkaInstance?: string
-  /**
-   * 服务地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServerAddr?: string
-  /**
-   * ServerAddr是否为加密连接	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsEncryptionAddr?: boolean
-  /**
-   * 加密访问协议，IsEncryptionAddr参数为true时必填
-   */
-  Protocol?: KafkaProtocolInfo
-  /**
-   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserKafkaTopics?: string
-  /**
-   * 用户Kafka消费组名称	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumerGroupName?: string
-  /**
-   * 状态 ，1：运行中；2：暂停。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 导入数据位置，-2:最早（默认），-1：最晚
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页的偏移量，默认值为0。
    */
   Offset?: number
   /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页单页限制数目，默认值为20，最大值100。
    */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 日志导入规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogRechargeRule?: LogRechargeRuleInfo
+  Limit?: number
 }
 
 /**
@@ -815,63 +773,9 @@ export interface LogItem {
 }
 
 /**
- * SearchLog返回参数结构体
+ * DeleteNoticeContent返回参数结构体
  */
-export interface SearchLogResponse {
-  /**
-   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。
-注意：
-* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
-   */
-  Context?: string
-  /**
-   * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
-注意：仅当检索分析语句(Query)不包含SQL时有效
-   */
-  ListOver?: boolean
-  /**
-   * 返回的是否为统计分析（即SQL）结果
-   */
-  Analysis?: boolean
-  /**
-   * 匹配检索条件的原始日志
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Results?: Array<LogInfo>
-  /**
-   * 日志统计分析结果的列名
-当UseNewAnalysis为false时生效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ColNames?: Array<string>
-  /**
-   * 日志统计分析结果
-当UseNewAnalysis为false时生效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AnalysisResults?: Array<LogItems>
-  /**
-   * 日志统计分析结果
-当UseNewAnalysis为true时生效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AnalysisRecords?: Array<string>
-  /**
-   * 日志统计分析结果的列属性
-当UseNewAnalysis为true时生效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Columns?: Array<Column>
-  /**
-   * 本次统计分析使用的采样率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SamplingRate?: number
-  /**
-   * 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Topics?: SearchLogTopics
+export interface DeleteNoticeContentResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1212,13 +1116,83 @@ export interface CreateConfigExtraResponse {
 }
 
 /**
- * ModifyShipper返回参数结构体
+ * Kafka导入配置信息
  */
-export interface ModifyShipperResponse {
+export interface KafkaRechargeInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Kafka数据订阅配置的ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Id?: string
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * Kafka导入任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaType?: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserKafkaTopics?: string
+  /**
+   * 用户Kafka消费组名称	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerGroupName?: string
+  /**
+   * 状态 ，1：运行中；2：暂停。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 导入数据位置，-2:最早（默认），-1：最晚
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 日志导入规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogRechargeRule?: LogRechargeRuleInfo
 }
 
 /**
@@ -1421,6 +1395,20 @@ export interface AlarmTargetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BizType?: number
+}
+
+/**
+ * 键值索引配置
+ */
+export interface RuleKeyValueInfo {
+  /**
+   * 是否大小写敏感
+   */
+  CaseSensitive: boolean
+  /**
+   * 需要建立索引的键值对信息
+   */
+  KeyValues?: Array<KeyValueInfo>
 }
 
 /**
@@ -1870,6 +1858,63 @@ export interface MetaTagInfo {
 }
 
 /**
+ * ModifyTopic请求参数结构体
+ */
+export interface ModifyTopicRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 主题是否开启采集，true：开启采集；false：关闭采集。
+控制台目前不支持修改此参数。
+   */
+  Status?: boolean
+  /**
+   * 是否开启自动分裂
+   */
+  AutoSplit?: boolean
+  /**
+   * 若开启最大分裂，该主题能够能够允许的最大分区数
+   */
+  MaxSplitPartitions?: number
+  /**
+   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
+   */
+  Period?: number
+  /**
+   * 日志主题描述
+   */
+  Describes?: string
+  /**
+   * 0：关闭日志沉降。
+非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
+   */
+  HotPeriod?: number
+  /**
+   * 免鉴权开关。 false：关闭； true：开启。
+开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+   */
+  IsWebTracking?: boolean
+  /**
+   * 日志主题扩展信息
+   */
+  Extends?: TopicExtendInfo
+  /**
+   * 日志主题分区数量
+   */
+  PartitionCount?: number
+}
+
+/**
  * CreateCosRecharge请求参数结构体
  */
 export interface CreateCosRechargeRequest {
@@ -1940,137 +1985,22 @@ export interface DescribeConfigsResponse {
 }
 
 /**
- * 日志提取规则
+ * DescribeNoticeContents返回参数结构体
  */
-export interface ExtractRuleInfo {
+export interface DescribeNoticeContentsResponse {
   /**
-   * 时间字段的key名字，TikeKey和TimeFormat必须成对出现
+   * 通知内容模版列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeKey?: string
+  NoticeContents?: Array<NoticeContentTemplate>
   /**
-   * 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 符合条件的通知内容模版总数。
    */
-  TimeFormat?: string
+  TotalCount?: number
   /**
-   * 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Delimiter?: string
-  /**
-   * 整条日志匹配规则，只有LogType为fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogRegex?: string
-  /**
-   * 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BeginRegex?: string
-  /**
-   * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有LogType为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keys?: Array<string>
-  /**
-   * 日志过滤规则列表（旧版），需要过滤日志的key，及其对应的regex。
- 注意：2.9.3及以上版本LogListener ，建议使用AdvanceFilterRules配置日志过滤规则。
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilterKeyRegex?: Array<KeyRegexInfo>
-  /**
-   * 解析失败日志是否上传，true表示上传，false表示不上传
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnMatchUpLoadSwitch?: boolean
-  /**
-   * 失败日志的key，当UnMatchUpLoadSwitch为true时必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnMatchLogKey?: string
-  /**
-   * 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。
-注意：
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Backtracking?: number
-  /**
-   * 是否为Gbk编码。 0：否；1：是。
-注意
-- 目前取0值时，表示UTF-8编码
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsGBK?: number
-  /**
-   * 是否为标准json。  0：否； 1：是。
-- 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JsonStandard?: number
-  /**
-   * syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。
-注意：
-- 该字段适用于：创建采集规则配置、修改采集规则配置。
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Protocol?: string
-  /**
-   * syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。
-注意：
-- 该字段适用于：创建采集规则配置、修改采集规则配置。
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Address?: string
-  /**
-   * rfc3164：指定系统日志采集使用RFC3164协议解析日志。
-rfc5424：指定系统日志采集使用RFC5424协议解析日志。
-auto：自动匹配rfc3164或者rfc5424其中一种协议。
-只有在LogType为service_syslog时生效，其余类型无需填写。
-注意：
-- 该字段适用于：创建采集规则配置、修改采集规则配置
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParseProtocol?: string
-  /**
-   * 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。
-注意：
-- COS导入不支持此字段。
-   */
-  MetadataType?: number
-  /**
-   * 采集配置路径正则表达式。
-注意：
-- MetadataType为3时必填。
-- COS导入不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PathRegex?: string
-  /**
-   * 用户自定义元数据信息。
-注意：
-- MetadataType为2时必填。
-- COS导入不支持此字段。
-   */
-  MetaTags?: Array<MetaTagInfo>
-  /**
-   * Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。
-   */
-  EventLogRules?: Array<EventLog>
-  /**
-   * 日志过滤规则列表（新版）。
-注意：
-- 2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。
-- 自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AdvanceFilterRules?: Array<AdvanceFilterRuleInfo>
+  RequestId?: string
 }
 
 /**
@@ -2354,6 +2284,16 @@ export interface ModifyLogsetRequest {
    * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * ModifyNoticeContent返回参数结构体
+ */
+export interface ModifyNoticeContentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2807,9 +2747,70 @@ export interface PartitionInfo {
 }
 
 /**
- * DeleteScheduledSql返回参数结构体
+ * 通知内容模板信息
  */
-export interface DeleteScheduledSqlResponse {
+export interface NoticeContentTemplate {
+  /**
+   * 通知内容模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentId?: string
+  /**
+   * 通知内容模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 语言类型。
+
+0： 中文
+1： 英文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 通知内容模板信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContents?: Array<NoticeContent>
+  /**
+   * 通知内容模板标记。
+
+0： 用户自定义
+1： 系统内置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Flag?: number
+  /**
+   * 创建者主账号。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: number
+  /**
+   * 创建/修改者子账号。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubUin?: number
+  /**
+   * 创建时间 秒级时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 更新时间 秒级时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+}
+
+/**
+ * CreateNoticeContent返回参数结构体
+ */
+export interface CreateNoticeContentResponse {
+  /**
+   * 通知内容配置ID
+   */
+  NoticeContentId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3699,21 +3700,26 @@ export interface DeleteConsumerRequest {
 }
 
 /**
- * QueryRangeMetric返回参数结构体
+ * 通知模板内容
  */
-export interface QueryRangeMetricResponse {
+export interface NoticeContentInfo {
   /**
-   * 指标查询结果类型
+   * 通知内容模板标题信息。
+部分通知渠道类型不支持“标题”，请参照腾讯云控制台页面。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultType?: string
+  Title?: string
   /**
-   * 指标查询结果
+   * 通知内容模板正文信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: string
+  Content?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 请求头（Request Headers）：在HTTP请求中，请求头包含了客户端向服务器发送的附加信息，如用户代理、授权凭证、期望的响应格式等。
+仅“自定义回调”支持该配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Headers?: Array<string>
 }
 
 /**
@@ -3784,13 +3790,137 @@ export interface AnonymousInfo {
 }
 
 /**
- * RetryShipperTask返回参数结构体
+ * 日志提取规则
  */
-export interface RetryShipperTaskResponse {
+export interface ExtractRuleInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 时间字段的key名字，TikeKey和TimeFormat必须成对出现
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  TimeKey?: string
+  /**
+   * 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeFormat?: string
+  /**
+   * 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Delimiter?: string
+  /**
+   * 整条日志匹配规则，只有LogType为fullregex_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogRegex?: string
+  /**
+   * 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginRegex?: string
+  /**
+   * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有LogType为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: Array<string>
+  /**
+   * 日志过滤规则列表（旧版），需要过滤日志的key，及其对应的regex。
+ 注意：2.9.3及以上版本LogListener ，建议使用AdvanceFilterRules配置日志过滤规则。
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterKeyRegex?: Array<KeyRegexInfo>
+  /**
+   * 解析失败日志是否上传，true表示上传，false表示不上传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnMatchUpLoadSwitch?: boolean
+  /**
+   * 失败日志的key，当UnMatchUpLoadSwitch为true时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnMatchLogKey?: string
+  /**
+   * 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。
+注意：
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Backtracking?: number
+  /**
+   * 是否为Gbk编码。 0：否；1：是。
+注意
+- 目前取0值时，表示UTF-8编码
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsGBK?: number
+  /**
+   * 是否为标准json。  0：否； 1：是。
+- 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JsonStandard?: number
+  /**
+   * syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。
+注意：
+- 该字段适用于：创建采集规则配置、修改采集规则配置。
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。
+注意：
+- 该字段适用于：创建采集规则配置、修改采集规则配置。
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
+  /**
+   * rfc3164：指定系统日志采集使用RFC3164协议解析日志。
+rfc5424：指定系统日志采集使用RFC5424协议解析日志。
+auto：自动匹配rfc3164或者rfc5424其中一种协议。
+只有在LogType为service_syslog时生效，其余类型无需填写。
+注意：
+- 该字段适用于：创建采集规则配置、修改采集规则配置
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParseProtocol?: string
+  /**
+   * 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。
+注意：
+- COS导入不支持此字段。
+   */
+  MetadataType?: number
+  /**
+   * 采集配置路径正则表达式。
+注意：
+- MetadataType为3时必填。
+- COS导入不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathRegex?: string
+  /**
+   * 用户自定义元数据信息。
+注意：
+- MetadataType为2时必填。
+- COS导入不支持此字段。
+   */
+  MetaTags?: Array<MetaTagInfo>
+  /**
+   * Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。
+   */
+  EventLogRules?: Array<EventLog>
+  /**
+   * 日志过滤规则列表（新版）。
+注意：
+- 2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。
+- 自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdvanceFilterRules?: Array<AdvanceFilterRuleInfo>
 }
 
 /**
@@ -5289,6 +5419,92 @@ export interface DescribeLogContextResponse {
 }
 
 /**
+ * SearchLog返回参数结构体
+ */
+export interface SearchLogResponse {
+  /**
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。
+注意：
+* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+   */
+  Context?: string
+  /**
+   * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
+注意：仅当检索分析语句(Query)不包含SQL时有效
+   */
+  ListOver?: boolean
+  /**
+   * 返回的是否为统计分析（即SQL）结果
+   */
+  Analysis?: boolean
+  /**
+   * 匹配检索条件的原始日志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Results?: Array<LogInfo>
+  /**
+   * 日志统计分析结果的列名
+当UseNewAnalysis为false时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColNames?: Array<string>
+  /**
+   * 日志统计分析结果
+当UseNewAnalysis为false时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisResults?: Array<LogItems>
+  /**
+   * 日志统计分析结果
+当UseNewAnalysis为true时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisRecords?: Array<string>
+  /**
+   * 日志统计分析结果的列属性
+当UseNewAnalysis为true时生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<Column>
+  /**
+   * 本次统计分析使用的采样率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SamplingRate?: number
+  /**
+   * 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topics?: SearchLogTopics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 通知内容模版详细配置
+ */
+export interface NoticeContent {
+  /**
+   * 渠道类型
+
+Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
+   */
+  Type: string
+  /**
+   * 告警触发通知内容模版。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerContent?: NoticeContentInfo
+  /**
+   * 告警恢复通知内容模版。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecoveryContent?: NoticeContentInfo
+}
+
+/**
  * CheckFunction返回参数结构体
  */
 export interface CheckFunctionResponse {
@@ -5552,6 +5768,11 @@ export interface NoticeReceiver {
 - 出参时有效。
    */
   Index?: number
+  /**
+   * 通知内容模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentId?: string
 }
 
 /**
@@ -5760,6 +5981,30 @@ export interface ModifyConfigResponse {
 }
 
 /**
+ * ModifyNoticeContent请求参数结构体
+ */
+export interface ModifyNoticeContentRequest {
+  /**
+   * 通知内容模版ID。
+   */
+  NoticeContentId: string
+  /**
+   * 通知内容模版名称。
+   */
+  Name?: string
+  /**
+   * 通知内容语言。
+
+0：中文 1：英文
+   */
+  Type?: number
+  /**
+   * 通知内容模版详细信息。
+   */
+  NoticeContents?: Array<NoticeContent>
+}
+
+/**
  * OpenKafkaConsumer请求参数结构体
  */
 export interface OpenKafkaConsumerRequest {
@@ -5775,6 +6020,24 @@ export interface OpenKafkaConsumerRequest {
    * kafka协议消费数据格式
    */
   ConsumerContent?: KafkaConsumerContent
+}
+
+/**
+ * QueryRangeMetric返回参数结构体
+ */
+export interface QueryRangeMetricResponse {
+  /**
+   * 指标查询结果类型
+   */
+  ResultType?: string
+  /**
+   * 指标查询结果
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6533,60 +6796,21 @@ export interface MetricLabel {
 }
 
 /**
- * ModifyTopic请求参数结构体
+ * CreateNoticeContent请求参数结构体
  */
-export interface ModifyTopicRequest {
+export interface CreateNoticeContentRequest {
   /**
-   * 日志主题ID
+   * 模版名称。
    */
-  TopicId: string
+  Name: string
   /**
-   * 日志主题名称
+   * 模版内容语言。0：中文1：英文
    */
-  TopicName?: string
+  Type?: number
   /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
+   * 模版详细配置。
    */
-  Tags?: Array<Tag>
-  /**
-   * 主题是否开启采集，true：开启采集；false：关闭采集。
-控制台目前不支持修改此参数。
-   */
-  Status?: boolean
-  /**
-   * 是否开启自动分裂
-   */
-  AutoSplit?: boolean
-  /**
-   * 若开启最大分裂，该主题能够能够允许的最大分区数
-   */
-  MaxSplitPartitions?: number
-  /**
-   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
-   */
-  Period?: number
-  /**
-   * 日志主题描述
-   */
-  Describes?: string
-  /**
-   * 0：关闭日志沉降。
-非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
-   */
-  HotPeriod?: number
-  /**
-   * 免鉴权开关。 false：关闭； true：开启。
-开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
-   */
-  IsWebTracking?: boolean
-  /**
-   * 日志主题扩展信息
-   */
-  Extends?: TopicExtendInfo
-  /**
-   * 日志主题分区数量
-   */
-  PartitionCount?: number
+  NoticeContents?: Array<NoticeContent>
 }
 
 /**
@@ -6811,6 +7035,12 @@ export interface MonitorTime {
 当type为`Period`,`Fixed`时，time字段生效。
    */
   Time?: number
+  /**
+   * 执行的周期cron表达式。示例：`"* /1 * * * *"` 从左到右每个field的含义 Minutes field, Hours field,Day of month field,Month field,Day of week field， 不支持秒级别。
+当type为`Cron`时，CronExpression字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronExpression?: string
 }
 
 /**
@@ -7225,6 +7455,16 @@ export interface CreateAlarmNoticeRequest {
 
    */
   NoticeRules?: Array<NoticeRule>
+}
+
+/**
+ * ModifyShipper返回参数结构体
+ */
+export interface ModifyShipperResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7720,17 +7960,13 @@ export interface CosRechargeInfo {
 }
 
 /**
- * 键值索引配置
+ * DeleteNoticeContent请求参数结构体
  */
-export interface RuleKeyValueInfo {
+export interface DeleteNoticeContentRequest {
   /**
-   * 是否大小写敏感
+   * 通知内容模版ID
    */
-  CaseSensitive: boolean
-  /**
-   * 需要建立索引的键值对信息
-   */
-  KeyValues?: Array<KeyValueInfo>
+  NoticeContentId: string
 }
 
 /**
@@ -8026,4 +8262,14 @@ export interface CreateScheduledSqlRequest {
    * 查询语法规则。 默认值为0。0：Lucene语法，1：CQL语法
    */
   SyntaxRule?: number
+}
+
+/**
+ * RetryShipperTask返回参数结构体
+ */
+export interface RetryShipperTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

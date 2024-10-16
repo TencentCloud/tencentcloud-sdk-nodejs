@@ -674,7 +674,7 @@ export interface CreateRealtimeLogDeliveryTaskRequest {
      */
     Fields: Array<string>;
     /**
-     * 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie 中提取指定字段值。自定义字段名称不能重复，且最多不能超过 200 个字段。
+     * 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，且最多不能超过 200 个字段。单个实时日志推送任务最多添加 5 个请求正文类型的自定义字段。目前仅站点加速日志（LogType=domain）支持添加自定义字段。
      */
     CustomFields?: Array<CustomField>;
     /**
@@ -1997,15 +1997,18 @@ export interface DeleteCustomErrorPageRequest {
  */
 export interface CustomField {
     /**
-     * 从 HTTP 请求和响应中的指定位置提取数据，取值有：
+     * 自定义日志字段类型。从 HTTP 请求和响应中的指定位置提取数据，取值有：
   <li>ReqHeader：从 HTTP 请求头中提取指定字段值；</li>
   <li>RspHeader：从 HTTP 响应头中提取指定字段值；</li>
-  <li>Cookie: 从 Cookie 中提取指定字段值。</li>
+  <li>Cookie: 从 Cookie 中提取指定字段值；</li>
+  <li>ReqBody: 从 HTTP 请求正文中通过 Google RE2 正则表达式提取指定内容。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
-     * 需要提取值的参数名称，例如：Accept-Language。
+     * 根据字段类型（Name）填入字段值的定义。需要区分大小写。
+  <li>当字段类型为 ReqHeader、RspHeader、Cookie 时，填入需要提取值的参数名称，例如：Accept-Language。可输入 1-100 个字符，允许的字符开头为字母，中间为字母、数字、-，结尾为字母、数字；</li>
+  <li>当字段类型为 ReqBody 时，填入 Google RE2 正则表达式，正则表达式长度上限为 4KB。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
@@ -3859,7 +3862,7 @@ export interface ModifyRealtimeLogDeliveryTaskRequest {
      */
     Fields?: Array<string>;
     /**
-     * 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie 中提取指定字段值。自定义字段名称不能重复，且最多不能超过 200 个字段。不填保持原有配置。
+     * 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。不填保持原有配置。自定义字段名称不能重复，且最多不能超过 200 个字段。单个实时日志推送任务最多添加 5 个请求正文类型的自定义字段。目前仅站点加速日志（LogType=domain）支持添加自定义字段。
      */
     CustomFields?: Array<CustomField>;
     /**

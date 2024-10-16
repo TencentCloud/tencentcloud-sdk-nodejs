@@ -98,9 +98,9 @@ it("privatedns.v20201028.DescribePrivateZoneList", async function () {
     }
 })
 
-it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
+it("privatedns.v20201028.CreateEndPoint", async function () {
     try {
-       const data = await client.DescribePrivateZoneRecordList({})
+       const data = await client.CreateEndPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
 it("privatedns.v20201028.AddSpecifyPrivateZoneVpc", async function () {
     try {
        const data = await client.AddSpecifyPrivateZoneVpc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
+    try {
+       const data = await client.DescribePrivateZoneRecordList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -63,11 +63,13 @@ import {
   DescribeAuditLogRequest,
   DescribeDashboardRequest,
   DeletePrivateZoneRequest,
+  CreateEndPointResponse,
   AuditLog,
   SubscribePrivateZoneServiceResponse,
   DeletePrivateDNSAccountRequest,
   DeletePrivateZoneRecordRequest,
   Filter,
+  CreateEndPointRequest,
   DeletePrivateZoneResponse,
   ModifyRecordsStatusRequest,
   CreatePrivateDNSAccountRequest,
@@ -175,13 +177,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取私有域记录列表
+   * 创建终端节点
    */
-  async DescribePrivateZoneRecordList(
-    req: DescribePrivateZoneRecordListRequest,
-    cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void
-  ): Promise<DescribePrivateZoneRecordListResponse> {
-    return this.request("DescribePrivateZoneRecordList", req, cb)
+  async CreateEndPoint(
+    req: CreateEndPointRequest,
+    cb?: (error: string, rep: CreateEndPointResponse) => void
+  ): Promise<CreateEndPointResponse> {
+    return this.request("CreateEndPoint", req, cb)
   }
 
   /**
@@ -192,6 +194,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddSpecifyPrivateZoneVpcResponse) => void
   ): Promise<AddSpecifyPrivateZoneVpcResponse> {
     return this.request("AddSpecifyPrivateZoneVpc", req, cb)
+  }
+
+  /**
+   * 获取私有域记录列表
+   */
+  async DescribePrivateZoneRecordList(
+    req: DescribePrivateZoneRecordListRequest,
+    cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void
+  ): Promise<DescribePrivateZoneRecordListResponse> {
+    return this.request("DescribePrivateZoneRecordList", req, cb)
   }
 
   /**

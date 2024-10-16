@@ -6331,6 +6331,11 @@ export interface Ability {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoSupportTransparentDataEncryptionReason?: string
+  /**
+   * 是否支持手动发起逻辑备份
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportManualLogic?: string
 }
 
 /**

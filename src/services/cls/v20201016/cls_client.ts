@@ -39,7 +39,8 @@ import {
   DescribeAlarmShieldsResponse,
   ModifyConfigExtraResponse,
   SearchCosRechargeInfoRequest,
-  KafkaRechargeInfo,
+  DeleteScheduledSqlResponse,
+  DescribeNoticeContentsRequest,
   ConsoleSharingConfig,
   DeleteConsoleSharingRequest,
   UploadLogRequest,
@@ -50,7 +51,7 @@ import {
   DescribeDashboardsRequest,
   CreateConsoleSharingRequest,
   LogItem,
-  SearchLogResponse,
+  DeleteNoticeContentResponse,
   DeleteTopicRequest,
   DescribePartitionsRequest,
   ContainerStdoutInfo,
@@ -64,7 +65,7 @@ import {
   TopicIdAndRegion,
   DescribeKafkaConsumerResponse,
   CreateConfigExtraResponse,
-  ModifyShipperResponse,
+  KafkaRechargeInfo,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
   DescribeConfigExtrasResponse,
@@ -73,6 +74,7 @@ import {
   CallBackInfo,
   OpenKafkaConsumerResponse,
   AlarmTargetInfo,
+  RuleKeyValueInfo,
   AlarmClassification,
   ScheduledSqlResouceInfo,
   FilePathInfo,
@@ -88,9 +90,10 @@ import {
   ScheduledSqlTaskInfo,
   DescribeConfigMachineGroupsRequest,
   MetaTagInfo,
+  ModifyTopicRequest,
   CreateCosRechargeRequest,
   DescribeConfigsResponse,
-  ExtractRuleInfo,
+  DescribeNoticeContentsResponse,
   CreateAlarmShieldResponse,
   DeleteDataTransformResponse,
   DeleteConfigExtraResponse,
@@ -109,6 +112,7 @@ import {
   QueryMetricResponse,
   DescribeAlarmShieldsRequest,
   ModifyLogsetRequest,
+  ModifyNoticeContentResponse,
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
   DescribeConfigMachineGroupsResponse,
@@ -125,7 +129,8 @@ import {
   SearchLogInfos,
   DeleteMachineGroupResponse,
   PartitionInfo,
-  DeleteScheduledSqlResponse,
+  NoticeContentTemplate,
+  CreateNoticeContentResponse,
   CreateConfigExtraRequest,
   ExcludePathInfo,
   FilterRuleInfo,
@@ -157,11 +162,11 @@ import {
   ModifyAlarmShieldResponse,
   CreateDeliverCloudFunctionRequest,
   DeleteConsumerRequest,
-  QueryRangeMetricResponse,
+  NoticeContentInfo,
   DescribeMachineGroupsRequest,
   DeleteIndexRequest,
   AnonymousInfo,
-  RetryShipperTaskResponse,
+  ExtractRuleInfo,
   ModifyConsumerResponse,
   DescribeAlertRecordHistoryRequest,
   DescribeConfigsRequest,
@@ -215,6 +220,8 @@ import {
   TopicInfo,
   GroupTriggerConditionInfo,
   DescribeLogContextResponse,
+  SearchLogResponse,
+  NoticeContent,
   CheckFunctionResponse,
   DeleteExportRequest,
   PreviewKafkaRechargeRequest,
@@ -231,7 +238,9 @@ import {
   MultiTopicSearchInformation,
   AlarmNotice,
   ModifyConfigResponse,
+  ModifyNoticeContentRequest,
   OpenKafkaConsumerRequest,
+  QueryRangeMetricResponse,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
   DashboardInfo,
@@ -263,7 +272,7 @@ import {
   DeleteDashboardSubscribeRequest,
   DescribeConsumerResponse,
   MetricLabel,
-  ModifyTopicRequest,
+  CreateNoticeContentRequest,
   Ckafka,
   DescribeMachinesRequest,
   MultiCondition,
@@ -285,6 +294,7 @@ import {
   CsvInfo,
   DescribeConfigExtrasRequest,
   CreateAlarmNoticeRequest,
+  ModifyShipperResponse,
   DescribeIndexResponse,
   HistogramInfo,
   DescribeMachineGroupConfigsRequest,
@@ -298,7 +308,7 @@ import {
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
-  RuleKeyValueInfo,
+  DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
   ConsoleSharingParam,
   ModifyDataTransformResponse,
@@ -312,6 +322,7 @@ import {
   GetAlarmLogRequest,
   MergePartitionResponse,
   CreateScheduledSqlRequest,
+  RetryShipperTaskResponse,
 } from "./cls_models"
 
 /**
@@ -614,13 +625,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改投递Ckafka任务
+   * 该接口用于创建通知内容。
    */
-  async ModifyConsumer(
-    req: ModifyConsumerRequest,
-    cb?: (error: string, rep: ModifyConsumerResponse) => void
-  ): Promise<ModifyConsumerResponse> {
-    return this.request("ModifyConsumer", req, cb)
+  async CreateNoticeContent(
+    req: CreateNoticeContentRequest,
+    cb?: (error: string, rep: CreateNoticeContentResponse) => void
+  ): Promise<CreateNoticeContentResponse> {
+    return this.request("CreateNoticeContent", req, cb)
   }
 
   /**
@@ -894,6 +905,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于修改通知内容配置
+   */
+  async ModifyNoticeContent(
+    req: ModifyNoticeContentRequest,
+    cb?: (error: string, rep: ModifyNoticeContentResponse) => void
+  ): Promise<ModifyNoticeContentResponse> {
+    return this.request("ModifyNoticeContent", req, cb)
+  }
+
+  /**
    * 本接口用于预览cos导入信息
    */
   async SearchCosRechargeInfo(
@@ -951,6 +972,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddMachineGroupInfoResponse) => void
   ): Promise<AddMachineGroupInfoResponse> {
     return this.request("AddMachineGroupInfo", req, cb)
+  }
+
+  /**
+   * 该接口用于删除通知内容配置
+   */
+  async DeleteNoticeContent(
+    req: DeleteNoticeContentRequest,
+    cb?: (error: string, rep: DeleteNoticeContentResponse) => void
+  ): Promise<DeleteNoticeContentResponse> {
+    return this.request("DeleteNoticeContent", req, cb)
   }
 
   /**
@@ -1399,6 +1430,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于修改投递Ckafka任务
+   */
+  async ModifyConsumer(
+    req: ModifyConsumerRequest,
+    cb?: (error: string, rep: ModifyConsumerResponse) => void
+  ): Promise<ModifyConsumerResponse> {
+    return this.request("ModifyConsumer", req, cb)
+  }
+
+  /**
    * 本接口用于修改数据加工任务
    */
   async ModifyDataTransform(
@@ -1437,6 +1478,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
     cb?: (error: string, rep: DescribeConsumerResponse) => void
   ): Promise<DescribeConsumerResponse> {
     return this.request("DescribeConsumer", req, cb)
+  }
+
+  /**
+   * 获取通知内容列表
+   */
+  async DescribeNoticeContents(
+    req: DescribeNoticeContentsRequest,
+    cb?: (error: string, rep: DescribeNoticeContentsResponse) => void
+  ): Promise<DescribeNoticeContentsResponse> {
+    return this.request("DescribeNoticeContents", req, cb)
   }
 
   /**

@@ -564,7 +564,7 @@ export interface OpenPolicyInfo {
    */
   Name?: string
   /**
-   * 策略模版类型
+   * 策略模板类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Kind?: string
@@ -10912,7 +10912,7 @@ export interface OpenPolicySwitch {
    */
   Name: string
   /**
-   * 策略模版类型
+   * 策略模板类型
    */
   Kind: string
   /**

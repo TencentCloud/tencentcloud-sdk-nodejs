@@ -224,6 +224,8 @@ var gs_1 = require("./gs");
 Object.defineProperty(exports, "gs", { enumerable: true, get: function () { return gs_1.gs; } });
 var gse_1 = require("./gse");
 Object.defineProperty(exports, "gse", { enumerable: true, get: function () { return gse_1.gse; } });
+var gwlb_1 = require("./gwlb");
+Object.defineProperty(exports, "gwlb", { enumerable: true, get: function () { return gwlb_1.gwlb; } });
 var habo_1 = require("./habo");
 Object.defineProperty(exports, "habo", { enumerable: true, get: function () { return habo_1.habo; } });
 var hai_1 = require("./hai");

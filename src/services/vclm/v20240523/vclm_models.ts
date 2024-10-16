@@ -385,6 +385,10 @@ zh(简体中文)、en(英语)、ar(阿拉伯语)、de(德语)、es(西班牙语)
    */
   AudioUrl?: string
   /**
+   * 是否需要去除VideoUrl或AudioUrl中背景音，取值范围：0-不需要，1-需要，默认0 。
+   */
+  RemoveVocal?: number
+  /**
    * 是否需要确认翻译结果0：不需要，1：需要
    */
   Confirm?: number

@@ -308,9 +308,9 @@ it("cls.v20201016.CreateShipper", async function () {
     }
 })
 
-it("cls.v20201016.ModifyConsumer", async function () {
+it("cls.v20201016.CreateNoticeContent", async function () {
     try {
-       const data = await client.ModifyConsumer({})
+       const data = await client.CreateNoticeContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +588,16 @@ it("cls.v20201016.CreateDashboardSubscribe", async function () {
     }
 })
 
+it("cls.v20201016.ModifyNoticeContent", async function () {
+    try {
+       const data = await client.ModifyNoticeContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.SearchCosRechargeInfo", async function () {
     try {
        const data = await client.SearchCosRechargeInfo({})
@@ -641,6 +651,16 @@ it("cls.v20201016.CreateDataTransform", async function () {
 it("cls.v20201016.AddMachineGroupInfo", async function () {
     try {
        const data = await client.AddMachineGroupInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteNoticeContent", async function () {
+    try {
+       const data = await client.DeleteNoticeContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,6 +968,16 @@ it("cls.v20201016.ModifyLogset", async function () {
     }
 })
 
+it("cls.v20201016.ModifyConsumer", async function () {
+    try {
+       const data = await client.ModifyConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyDataTransform", async function () {
     try {
        const data = await client.ModifyDataTransform({})
@@ -981,6 +1011,16 @@ it("cls.v20201016.DescribeLogContext", async function () {
 it("cls.v20201016.DescribeConsumer", async function () {
     try {
        const data = await client.DescribeConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeNoticeContents", async function () {
+    try {
+       const data = await client.DescribeNoticeContents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

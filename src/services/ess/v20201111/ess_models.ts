@@ -2802,10 +2802,9 @@ export interface AutoSignConfig {
    */
   VerifyChannels?: Array<string>
   /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。
+   * 设置用户自动签合同的扣费方式。
 
-<ul><li>**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li>
-<li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
+<ul><li><b>1</b>: (默认)使用合同份额进行扣减</li></ul>
    */
   LicenseType?: number
   /**
@@ -7828,8 +7827,8 @@ export interface ModifyExtendedServiceResponse {
 <li><strong>有跳转链接返回的情况：</strong> 当操作类型为“OPEN”（开通服务），并且扩展服务类型为以下之一时，  系统将返回一个操作链接。当前操作人（超级管理员或法人）需要点击此链接，以完成服务的开通操作。
 
 <ul>
-<li><strong>OPEN_SERVER_SIGN</strong>（开放服务器签名）</li>
-<li><strong>OVERSEA_SIGN</strong>（海外签名）</li>
+<li><strong>OPEN_SERVER_SIGN</strong>（企业自动签署）</li>
+<li><strong>OVERSEA_SIGN</strong>（企业与港澳台居民签署合同）</li>
 </ul></li></li>
 </ul>
    */

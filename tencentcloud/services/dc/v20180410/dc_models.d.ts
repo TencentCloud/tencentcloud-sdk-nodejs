@@ -69,6 +69,19 @@ export interface Coordinate {
     Lng: number;
 }
 /**
+ * CreateCloudAttachService返回参数结构体
+ */
+export interface CreateCloudAttachServiceResponse {
+    /**
+     * 敏捷上云服务详情
+     */
+    CloudAttach?: CloudAttachInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateDirectConnect返回参数结构体
  */
 export interface CreateDirectConnectResponse {
@@ -411,6 +424,15 @@ export interface DescribeDirectConnectTunnelExtraResponse {
     RequestId?: string;
 }
 /**
+ * ReleaseInternetAddress返回参数结构体
+ */
+export interface ReleaseInternetAddressResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyDirectConnectTunnelAttribute返回参数结构体
  */
 export interface ModifyDirectConnectTunnelAttributeResponse {
@@ -420,14 +442,58 @@ export interface ModifyDirectConnectTunnelAttributeResponse {
     RequestId?: string;
 }
 /**
- * 用户侧网段地址
+ * 接入点信息。
  */
-export interface RouteFilterPrefix {
+export interface AccessPoint {
     /**
-     * 用户侧网段地址
+     * 接入点的名称。
+     */
+    AccessPointName: string;
+    /**
+     * 接入点唯一ID。
+     */
+    AccessPointId: string;
+    /**
+     * 接入点的状态。可用，不可用。
+     */
+    State: string;
+    /**
+     * 接入点的位置。
+     */
+    Location: string;
+    /**
+     * 接入点支持的运营商列表。
+     */
+    LineOperator: Array<string>;
+    /**
+     * 接入点管理的大区ID。
+     */
+    RegionId: string;
+    /**
+     * 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cidr?: string;
+    AvailablePortType: Array<string>;
+    /**
+     * 接入点经纬度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Coordinate: Coordinate;
+    /**
+     * 接入点所在城市
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    City: string;
+    /**
+     * 接入点地域名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Area: string;
+    /**
+     * 接入点类型。VXLAN/QCPL/QCAR
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessPointType: string;
 }
 /**
  * ApplyInternetAddress返回参数结构体
@@ -791,6 +857,15 @@ export interface ApplyInternetAddressRequest {
   1:IPv6
      */
     AddrProto: number;
+}
+/**
+ * CreateCloudAttachService请求参数结构体
+ */
+export interface CreateCloudAttachServiceRequest {
+    /**
+     * 创建敏捷上云入参
+     */
+    Data: CreateCasInput;
 }
 /**
  * DescribeDirectConnects返回参数结构体
@@ -1299,58 +1374,105 @@ export interface DescribeDirectConnectTunnelsResponse {
     RequestId?: string;
 }
 /**
- * 接入点信息。
+ * 敏捷上云服务信息
  */
-export interface AccessPoint {
+export interface CloudAttachInfo {
     /**
-     * 接入点的名称。
+     * 敏捷上云实例id
      */
-    AccessPointName: string;
+    InstanceId?: string;
     /**
-     * 接入点唯一ID。
+     * 敏捷上云名称
      */
-    AccessPointId: string;
+    Name?: string;
     /**
-     * 接入点的状态。可用，不可用。
+     * 合作伙伴的AppId
      */
-    State: string;
+    IapId?: string;
     /**
-     * 接入点的位置。
+     * 需要接入敏捷上云的IDC的地址
      */
-    Location: string;
+    IdcAddress?: string;
     /**
-     * 接入点支持的运营商列表。
+     * 需要接入敏捷上云的IDC的互联网服务提供商类型
      */
-    LineOperator: Array<string>;
+    IdcType?: string;
     /**
-     * 接入点管理的大区ID。
+     * 敏捷上云的带宽，单位为MB
      */
-    RegionId: string;
+    Bandwidth?: number;
     /**
-     * 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km
+     * 联系电话
+     */
+    Telephone?: string;
+    /**
+     * 敏捷上云的状态
+  available：就绪状态
+  applying：申请，待审核状态
+  pendingpay：代付款状态
+  building：建设中状态
+  confirming：待确认状态
+  isolate: 隔离状态
+  stoped：终止状态
+     */
+    Status?: string;
+    /**
+     * 敏捷上云申请的时间
+     */
+    ApplyTime?: string;
+    /**
+     * 敏捷上云建设完成的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AvailablePortType: Array<string>;
+    ReadyTime?: string;
     /**
-     * 接入点经纬度
+     * 敏捷上云过期时间
+     */
+    ExpireTime?: string;
+    /**
+     * 备注信息
+     */
+    Remarks?: string;
+    /**
+     * 敏捷上云的地域状态。
+  same-region：同地域
+  cross-region：跨地域
+     */
+    RegionStatus?: string;
+    /**
+     * 用户的AppId
+     */
+    AppId?: string;
+    /**
+     * 用户的Uin
+     */
+    Uin?: string;
+    /**
+     * 用户注册名称
+     */
+    CustomerAuthName?: string;
+    /**
+     * 物理专线实例ID
+     */
+    DirectConnectId?: string;
+    /**
+     * 敏捷上云是否支持创建高速上云专线网关
+     */
+    CloudAttachServiceGatewaysSupport?: boolean;
+    /**
+     * 敏捷上云服务是否处于升降配中
+     */
+    BUpdateBandwidth?: boolean;
+}
+/**
+ * 用户侧网段地址
+ */
+export interface RouteFilterPrefix {
+    /**
+     * 用户侧网段地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Coordinate: Coordinate;
-    /**
-     * 接入点所在城市
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    City: string;
-    /**
-     * 接入点地域名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Area: string;
-    /**
-     * 接入点类型。VXLAN/QCPL/QCAR
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AccessPointType: string;
+    Cidr?: string;
 }
 /**
  * DescribeInternetAddressStatistics返回参数结构体
@@ -1461,13 +1583,33 @@ export interface DescribeInternetAddressQuotaResponse {
     RequestId?: string;
 }
 /**
- * ReleaseInternetAddress返回参数结构体
+ * 创建敏捷上云入参
  */
-export interface ReleaseInternetAddressResponse {
+export interface CreateCasInput {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 敏捷上云名称
      */
-    RequestId?: string;
+    Name: string;
+    /**
+     * 需要接入敏捷上云的IDC的地址
+     */
+    IdcAddress: string;
+    /**
+     * 需要接入敏捷上云的IDC的互联网服务提供商类型
+     */
+    IdcType: string;
+    /**
+     * 敏捷上云的带宽，单位为MB
+     */
+    Bandwidth: number;
+    /**
+     * 联系电话
+     */
+    Telephone: string;
+    /**
+     * 备注信息
+     */
+    Remarks: string;
 }
 /**
  * 专用通道信息列表
