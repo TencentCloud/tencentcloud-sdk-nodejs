@@ -215,7 +215,7 @@ export class Client extends AbstractClient {
    * 获取备份、迁移的调度任务信息
    */
   async DescribeBackUpSchedules(
-    req?: DescribeBackUpSchedulesRequest,
+    req: DescribeBackUpSchedulesRequest,
     cb?: (error: string, rep: DescribeBackUpSchedulesResponse) => void
   ): Promise<DescribeBackUpSchedulesResponse> {
     return this.request("DescribeBackUpSchedules", req, cb)

@@ -98,6 +98,16 @@ it("emr.v20190103.ModifyYarnQueueV2", async function () {
     }
 })
 
+it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
+    try {
+       const data = await client.DescribeInstanceRenewNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DeployYarnConf", async function () {
     try {
        const data = await client.DeployYarnConf({})
@@ -178,9 +188,9 @@ it("emr.v20190103.DescribeResourceSchedule", async function () {
     }
 })
 
-it("emr.v20190103.ModifyUserManagerPwd", async function () {
+it("emr.v20190103.DescribeStarRocksQueryInfo", async function () {
     try {
-       const data = await client.ModifyUserManagerPwd({})
+       const data = await client.DescribeStarRocksQueryInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +278,16 @@ it("emr.v20190103.DescribeUsersForUserManager", async function () {
     }
 })
 
+it("emr.v20190103.ModifyUserManagerPwd", async function () {
+    try {
+       const data = await client.ModifyUserManagerPwd({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DeleteUserManagerUserList", async function () {
     try {
        const data = await client.DeleteUserManagerUserList({})
@@ -338,6 +358,16 @@ it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
     }
 })
 
+it("emr.v20190103.DescribeKyuubiQueryInfo", async function () {
+    try {
+       const data = await client.DescribeKyuubiQueryInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DeleteAutoScaleStrategy", async function () {
     try {
        const data = await client.DeleteAutoScaleStrategy({})
@@ -358,9 +388,9 @@ it("emr.v20190103.DescribeEmrApplicationStatics", async function () {
     }
 })
 
-it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
+it("emr.v20190103.DescribeHDFSStorageInfo", async function () {
     try {
-       const data = await client.DescribeInstanceRenewNodes({})
+       const data = await client.DescribeHDFSStorageInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +438,9 @@ it("emr.v20190103.DescribeSLInstance", async function () {
     }
 })
 
-it("emr.v20190103.ModifySLInstance", async function () {
+it("emr.v20190103.DescribeSparkQueries", async function () {
     try {
-       const data = await client.ModifySLInstance({})
+       const data = await client.DescribeSparkQueries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +551,16 @@ it("emr.v20190103.InquirePriceRenewEmr", async function () {
 it("emr.v20190103.TerminateInstance", async function () {
     try {
        const data = await client.TerminateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifySLInstance", async function () {
+    try {
+       const data = await client.ModifySLInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

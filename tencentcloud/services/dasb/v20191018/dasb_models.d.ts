@@ -3183,11 +3183,11 @@ export interface DescribeDeviceGroupMembersResponse {
     /**
      * 资产组成员总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 资产组成员列表
      */
-    DeviceSet: Array<Device>;
+    DeviceSet?: Array<Device>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3883,13 +3883,17 @@ export interface DeleteAclsResponse {
  */
 export interface DescribeDeviceGroupMembersRequest {
     /**
-     * 资产组ID
-     */
-    Id: number;
-    /**
      * true - 查询已在该资产组的资产，false - 查询未在该资产组的资产
      */
     Bound: boolean;
+    /**
+     * 资产组ID，Id和IdSet二选一
+     */
+    Id?: number;
+    /**
+     * 资产组ID集合，传Id，IdSet不生效。
+     */
+    IdSet?: Array<number | bigint>;
     /**
      * 资产名或资产IP，模糊查询
      */

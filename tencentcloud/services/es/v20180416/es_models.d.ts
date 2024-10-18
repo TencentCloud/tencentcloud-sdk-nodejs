@@ -1656,7 +1656,7 @@ export interface InstallInstanceModelRequest {
      */
     InstanceId: string;
     /**
-     * 客户上传到自己cos的地址列表
+     * 客户上传到cos的模型地址，单次请求限制一个。cos文件为压缩文件，格式包括：zip、tgz和tar.gz
      */
     UsrCosModelUrlList?: Array<string>;
 }
@@ -2844,6 +2844,14 @@ export interface CreateInstanceRequest {
      * 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离
      */
     ReadWriteMode?: number;
+    /**
+     * 置放群组是否开启异步任务
+     */
+    EnableScheduleRecoverGroup?: boolean;
+    /**
+     * 置放群组开启异步任务的可维护时间段
+     */
+    EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 /**
  * CreateLogstashInstance请求参数结构体
@@ -4070,6 +4078,31 @@ export interface UpdateJdkRequest {
     ForceRestart?: boolean;
 }
 /**
+ * 置放群组异步任务维护的时间段
+ */
+export interface EnableScheduleOperationDuration {
+    /**
+     * 支持开启异步任务的日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Periods?: Array<string>;
+    /**
+     * 支持开启异步的开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeStart?: string;
+    /**
+     * 支持开启异步的结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeEnd?: string;
+    /**
+     * 支持开启异步的时区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeZone?: string;
+}
+/**
  * UpdateLogstashInstance返回参数结构体
  */
 export interface UpdateLogstashInstanceResponse {
@@ -4359,6 +4392,16 @@ export interface NodeView {
      * CVM运行状态
      */
     CVMStatus?: string;
+    /**
+     * cvm绑定的置放群组的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVMDisasterRecoverGroupId?: string;
+    /**
+     * cvm绑定置放群组的状态。2: 已绑定；1: 绑定中；0: 未开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVMDisasterRecoverGroupStatus?: number;
 }
 /**
  * DescribeSpaceKibanaTools返回参数结构体
@@ -4575,6 +4618,14 @@ export interface UpdateInstanceRequest {
      * 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离
      */
     ReadWriteMode?: number;
+    /**
+     * 是否开启置放群组异步任务
+     */
+    EnableScheduleRecoverGroup?: boolean;
+    /**
+     * 置放群组异步任务可维护时间段
+     */
+    EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 /**
  * CreateServerlessInstance返回参数结构体
@@ -4994,6 +5045,14 @@ export interface RestartNodesRequest {
      * 分片迁移并发速度
      */
     ShardAllocationBytes?: number;
+    /**
+     * 是否开启置放群组异步任务
+     */
+    EnableScheduleRecoverGroup?: boolean;
+    /**
+     * 置放群组异步任务时间段
+     */
+    EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 /**
  * DescribeServerlessInstances返回参数结构体
@@ -5071,6 +5130,14 @@ export interface UpgradeInstanceRequest {
      * 分片迁移并发速度
      */
     ShardAllocationBytes?: number;
+    /**
+     * 是否开启置放群组异步任务
+     */
+    EnableScheduleRecoverGroup?: boolean;
+    /**
+     * 置放群组异步任务时间段
+     */
+    EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
 }
 /**
  * DescribeViews返回参数结构体

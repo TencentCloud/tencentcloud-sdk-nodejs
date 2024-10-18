@@ -67,7 +67,7 @@ export interface ModifyGatewayLoadBalancerAttributeRequest {
      */
     LoadBalancerId: string;
     /**
-     * 网关负载均衡名称。
+     * 网关负载均衡实例名称。可支持输入1-60个字符。
      */
     LoadBalancerName?: string;
 }
@@ -214,7 +214,10 @@ export interface TargetGroupHealthCheck {
      */
     HealthSwitch: boolean;
     /**
-     * 健康检查使用的协议。支持icmp和tcp，默认为icmp。
+     * 健康检查使用的协议。支持ping和tcp，默认为ping。
+  
+  - PING: icmp
+  - TCP: tcp
      */
     Protocol?: string;
     /**
@@ -248,7 +251,7 @@ export interface ModifyTargetGroupInstancesWeightRequest {
      */
     TargetGroupId: string;
     /**
-     * 待修改权重的服务器数组。
+     * 实例绑定配置数组。
      */
     TargetGroupInstances: Array<TargetGroupInstance>;
 }
@@ -271,7 +274,7 @@ export interface Price {
      */
     InstancePrice?: ItemPrice;
     /**
-     * 描述了实例价格。
+     * 描述了GLCU的价格。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LcuPrice?: ItemPrice;
@@ -458,7 +461,7 @@ export interface DescribeTargetGroupInstancesResponse {
  */
 export interface CreateTargetGroupRequest {
     /**
-     * 目标组名称，限定50个字符
+     * 目标组名称，限定60个字符。
      */
     TargetGroupName?: string;
     /**
@@ -467,7 +470,6 @@ export interface CreateTargetGroupRequest {
     VpcId?: string;
     /**
      * 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。
-  
      */
     Port?: number;
     /**
@@ -476,16 +478,16 @@ export interface CreateTargetGroupRequest {
     TargetGroupInstances?: Array<TargetGroupInstance>;
     /**
      * 网关负载均衡目标组协议。
-  - AWS_GENEVE：GENEVE 兼容协议
   - TENCENT_GENEVE ：GENEVE 标准协议
+  - AWS_GENEVE：GENEVE 兼容协议（需要提交工单申请开白）
      */
     Protocol?: string;
     /**
-     * 健康检查。
+     * 健康检查设置。
      */
     HealthCheck?: TargetGroupHealthCheck;
     /**
-     * RS调度算法。
+     * 均衡算法。
   - IP_HASH_3_ELASTIC：弹性哈希
      */
     ScheduleAlgorithm?: string;
@@ -507,7 +509,7 @@ export interface CreateGatewayLoadBalancerRequest {
      */
     SubnetId: string;
     /**
-     * 网关负载均衡实例名称。可支持输入1-60个字符，允许英文字母、数字、中文字符、“-”、“_”、“.”。不填写时默认自动生成。
+     * 网关负载均衡实例名称。可支持输入1-60个字符。不填写时默认自动生成。
      */
     LoadBalancerName?: string;
     /**
@@ -683,7 +685,7 @@ export interface RegisterTargetGroupInstancesRequest {
  */
 export interface DeleteTargetGroupsRequest {
     /**
-     * 目标组列表。
+     * 目标组ID列表。
      */
     TargetGroupIds: Array<string>;
 }
@@ -727,7 +729,7 @@ export interface ItemPrice {
  */
 export interface TargetGroupAssociation {
     /**
-     * 负载均衡ID。
+     * 网关负载均衡实例ID。
      */
     LoadBalancerId: string;
     /**
@@ -766,11 +768,11 @@ export interface ModifyTargetGroupAttributeResponse {
  */
 export interface AssociationItem {
     /**
-     * 关联到的负载均衡ID
+     * 关联到的网关负载均衡实例ID
      */
     LoadBalancerId?: string;
     /**
-     * 负载均衡名称
+     * 网关负载均衡实例名称
      */
     LoadBalancerName?: string;
 }
@@ -836,8 +838,7 @@ export interface TargetGroupInfo {
     Protocol?: string;
     /**
      * 调度算法。
-  ip_hash_3：3元组对称弹性Hash
-  ip_hash_3_consistent：3元组对称一致性Hash
+  ip_hash_3：弹性哈希
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleAlgorithm?: string;

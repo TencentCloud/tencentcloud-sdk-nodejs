@@ -4140,31 +4140,31 @@ export interface SaleZone {
     /**
      * 可用区英文名
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 可用区数字ID
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 可用区中文名
      */
-    ZoneZh: string;
+    ZoneZh?: string;
     /**
      * 是否支持serverless集群<br>
   0:不支持<br>
   1:支持
      */
-    IsSupportServerless: number;
+    IsSupportServerless?: number;
     /**
      * 是否支持普通集群<br>
   0:不支持<br>
   1:支持
      */
-    IsSupportNormal: number;
+    IsSupportNormal?: number;
     /**
      * 物理区
      */
-    PhysicalZone: string;
+    PhysicalZone?: string;
     /**
      * 用户是否有可用区权限
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4174,6 +4174,10 @@ export interface SaleZone {
      * 是否为全链路RDMA可用区
      */
     IsWholeRdmaZone?: string;
+    /**
+     * 当前可用区是否允许新购集群，1:允许，0:不允许
+     */
+    IsSupportCreateCluster?: number;
 }
 /**
  * SwitchProxyVpc返回参数结构体

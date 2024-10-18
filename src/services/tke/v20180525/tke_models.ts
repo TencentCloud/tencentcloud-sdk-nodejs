@@ -2009,6 +2009,21 @@ second：二级目录
 }
 
 /**
+ * ModifyClusterTags返回参数结构体
+ */
+export interface ModifyClusterTagsResponse {
+  /**
+   * 集群标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 服务事件
  */
 export interface Event {
@@ -3740,6 +3755,37 @@ export interface RIUtilizationDetail {
 }
 
 /**
+ * DescribeBatchModifyTagsStatus返回参数结构体
+ */
+export interface DescribeBatchModifyTagsStatusResponse {
+  /**
+   * 失败资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedResources?: Array<FailedResource>
+  /**
+   * 任务状态：
+- running 运行中
+- failed 失败
+- done 成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 是否同步集群内子资源标签
+   */
+  SyncSubresource?: boolean
+  /**
+   * 集群标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * amp告警渠道配置
  */
 export interface PrometheusNotification {
@@ -4344,6 +4390,11 @@ export interface DescribePrometheusGlobalNotificationResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeBatchModifyTagsStatus请求参数结构体
+ */
+export type DescribeBatchModifyTagsStatusRequest = null
 
 /**
  * Probe中的HttpGet
@@ -11492,6 +11543,24 @@ export interface DeleteLogConfigsRequest {
 }
 
 /**
+ * ModifyClusterTags请求参数结构体
+ */
+export interface ModifyClusterTagsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 集群标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 是否同步集群内子资源标签
+   */
+  SyncSubresource?: boolean
+}
+
+/**
  * DescribeClusterKubeconfig请求参数结构体
  */
 export interface DescribeClusterKubeconfigRequest {
@@ -11627,6 +11696,22 @@ export interface ModifyPrometheusGlobalNotificationRequest {
    * 告警通知渠道
    */
   Notification: PrometheusNotificationItem
+}
+
+/**
+ * 修改标签失败的资源
+ */
+export interface FailedResource {
+  /**
+   * 资源六段式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource?: string
+  /**
+   * 执行失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Error?: string
 }
 
 /**

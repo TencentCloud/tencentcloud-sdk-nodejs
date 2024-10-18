@@ -287,7 +287,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVideoDownloadUrl", req, cb);
     }
     /**
-     * 用于刷新国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
+     * 用于同步国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
      */
     async RefreshDeviceChannel(req, cb) {
         return this.request("RefreshDeviceChannel", req, cb);

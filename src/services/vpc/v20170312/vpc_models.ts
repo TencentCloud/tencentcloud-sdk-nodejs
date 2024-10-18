@@ -2091,21 +2091,21 @@ export interface ResetRoutesRequest {
  */
 export interface NetworkInterfaceAttachment {
   /**
-   * 云主机实例ID。
-   */
-  InstanceId: string
-  /**
    * 网卡在云主机实例内的序号。
    */
-  DeviceIndex: number
+  DeviceIndex?: number
   /**
    * 云主机所有者账户信息。
    */
-  InstanceAccountId: string
+  InstanceAccountId?: string
   /**
    * 绑定时间。
    */
-  AttachTime: string
+  AttachTime?: string
+  /**
+   * 云主机实例ID。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -5949,7 +5949,7 @@ export interface NatGateway {
    */
   RestrictState?: string
   /**
-   * NAT网关大版本号，传统型=1，标准型=2
+   * NAT网关类型，1表示传统型NAT网关，2表示标准型NAT网关
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NatProductVersion?: number
@@ -11628,7 +11628,7 @@ export interface DestinationIpPortTranslationNatRule {
   /**
    * NAT网关转发规则描述。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -12589,19 +12589,19 @@ export interface CreateNatGatewayRequest {
    */
   VpcId: string
   /**
-   * NAT网关最大外网出带宽(单位:Mbps)，支持的参数值：`20, 50, 100, 200, 500, 1000, 2000, 5000`，默认: `100Mbps`。
+   * NAT网关最大外网出带宽(单位：Mbps)，支持的参数值：20, 50, 100, 200, 500, 1000, 2000, 5000，默认: 100Mbps。  当以下NatProductVersion参数值为2即标准型时，此参数无需填写，默认为5000Mbps。
    */
   InternetMaxBandwidthOut?: number
   /**
-   * NAT网关并发连接上限，支持参数值：`1000000、3000000、10000000`，默认值为`100000`。
+   * NAT网关并发连接数上限，支持参数值：1000000、3000000、10000000，默认值为100000。  当以下NatProductVersion参数值为2即标准型时，此参数无需填写，默认为2000000。
    */
   MaxConcurrentConnection?: number
   /**
-   * 需要申请的弹性IP个数，系统会按您的要求生产N个弹性IP，其中AddressCount和PublicAddresses至少传递一个。
+   * 新建弹性公网IP个数，系统会按您的要求创建对应数量的弹性公网IP，其中AddressCount和PublicAddresses两个参数至少填写一个。
    */
   AddressCount?: number
   /**
-   * 绑定NAT网关的弹性IP数组，其中AddressCount和PublicAddresses至少传递一个。
+   * 绑定NAT网关的已有弹性公网IP数组，其中AddressCount和PublicAddresses两个参数至少填写一个。 示例值：["139.199.232.119"]
    */
   PublicIpAddresses?: Array<string>
   /**
@@ -12613,11 +12613,12 @@ export interface CreateNatGatewayRequest {
    */
   Tags?: Array<Tag>
   /**
-   * NAT网关所属子网
+   * NAT网关所属子网，已废弃
+   * @deprecated
    */
   SubnetId?: string
   /**
-   * 绑定NAT网关的弹性IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
+   * 绑定NAT网关的弹性公网IP带宽值（单位：Mbps）。不填写此参数时：则该参数默认为弹性公网IP的带宽值，部分用户默认为该用户类型的弹性公网IP的带宽上限。
    */
   StockPublicIpAddressesBandwidthOut?: number
   /**
@@ -12629,7 +12630,7 @@ export interface CreateNatGatewayRequest {
    */
   PublicIpFromSameZone?: boolean
   /**
-   * NAT网关大版本号，1是传统型，2是标准型，默认是1
+   * NAT网关类型，1表示传统型NAT网关，2表示标准型NAT网关，默认值是1。
    */
   NatProductVersion?: number
 }

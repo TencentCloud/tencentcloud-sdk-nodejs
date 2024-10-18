@@ -28,7 +28,8 @@ export declare class Client extends AbstractClient {
      */
     CreateIndex(req: CreateIndexRequest, cb?: (error: string, rep: CreateIndexResponse) => void): Promise<CreateIndexResponse>;
     /**
-     * 查询指定时刻指标的最新值
+     * 查询指定时刻指标的最新值。
+如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
      */
     QueryMetric(req: QueryMetricRequest, cb?: (error: string, rep: QueryMetricResponse) => void): Promise<QueryMetricResponse>;
     /**

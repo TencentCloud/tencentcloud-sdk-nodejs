@@ -181,7 +181,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeVideoDownloadUrl(req: DescribeVideoDownloadUrlRequest, cb?: (error: string, rep: DescribeVideoDownloadUrlResponse) => void): Promise<DescribeVideoDownloadUrlResponse>;
     /**
-     * 用于刷新国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
+     * 用于同步国标设备的通道（接口调用后，触发向设备请求通道列表，新增的通道入库，设备上已删除的通道需自行删除、后台不自动删除）。
      */
     RefreshDeviceChannel(req: RefreshDeviceChannelRequest, cb?: (error: string, rep: RefreshDeviceChannelResponse) => void): Promise<RefreshDeviceChannelResponse>;
     /**

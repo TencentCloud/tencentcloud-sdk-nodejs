@@ -1912,6 +1912,10 @@ export interface ModifyTopicRequest {
    * 日志主题分区数量
    */
   PartitionCount?: number
+  /**
+   * 取消切换存储任务的id
+   */
+  CancelTopicAsyncTaskID?: string
 }
 
 /**
@@ -4053,33 +4057,33 @@ export interface LogsetInfo {
   /**
    * 日志集ID
    */
-  LogsetId: string
+  LogsetId?: string
   /**
    * 日志集名称
    */
-  LogsetName: string
+  LogsetName?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 云产品标识，日志集由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssumerName: string
+  AssumerName?: string
   /**
    * 日志集绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 日志集下日志主题的数目
    */
-  TopicCount: number
+  TopicCount?: number
   /**
    * 若AssumerName非空，则表示创建该日志集的服务方角色
    */
-  RoleName: string
+  RoleName?: string
 }
 
 /**
@@ -4691,13 +4695,13 @@ export interface WebCallback {
   Method?: string
   /**
    * 请求头。
-注意：该参数已废弃，请在<a href="https://cloud.tencent.com/document/product/614/56466">创建告警策略</a>接口CallBack参数中指定请求头。
+注意：该参数已废弃，请使用NoticeContentId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<string>
   /**
    * 请求内容。
-注意：该参数已废弃，请在<a href="https://cloud.tencent.com/document/product/614/56466">创建告警策略</a>接口CallBack参数中指定请求内容。
+注意：该参数已废弃，请使用NoticeContentId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Body?: string
@@ -4707,6 +4711,16 @@ export interface WebCallback {
 - 出参有效。
    */
   Index?: number
+  /**
+   * 通知内容模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentId?: string
+  /**
+   * 集成配置ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebCallbackId?: string
 }
 
 /**
@@ -5380,6 +5394,21 @@ HotPeriod=0为没有开启日志沉降。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extends?: TopicExtendInfo
+  /**
+   * 异步迁移任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicAsyncTaskID?: string
+  /**
+   * 异步迁移状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrationStatus?: number
+  /**
+   * 异步迁移完成后，预计生效日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveDate?: string
 }
 
 /**
@@ -6502,7 +6531,8 @@ export interface QueryMetricRequest {
    */
   TopicId: string
   /**
-   * 查询时间，秒级Unix时间戳
+   * 查询时间，秒级Unix时间戳。为空时代表当前时间戳。
+
    */
   Time?: number
 }

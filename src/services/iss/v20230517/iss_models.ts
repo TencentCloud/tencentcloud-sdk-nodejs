@@ -873,7 +873,7 @@ export interface UpdateUserDeviceRequest {
    */
   DeviceId: string
   /**
-   * 设备名称（仅支持中文、英文、数字、_、-，长度不超过32个字符）
+   * 设备名称（仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位）
    */
   Name?: string
   /**
@@ -881,11 +881,11 @@ export interface UpdateUserDeviceRequest {
    */
   TransportProtocol?: number
   /**
-   * 设备密码（仅国标，网关设备支持）
+   * 设备密码（仅国标，网关设备支持，长度不超过 64 位）
    */
   Password?: string
   /**
-   * 设备描述（仅支持中文、英文、数字、_、-，长度不超过128位）
+   * 设备描述（长度不超过128位）
    */
   Description?: string
   /**
@@ -1927,6 +1927,10 @@ export interface AddRecordPlanRequest {
    * 添加组织目录下所有设备通道，Json数组，可以为空，通道总数量不超过5000个（包括Channel字段的数量）
    */
   OrganizationId?: Array<string>
+  /**
+   * 录像补录模式（0:不启用，1:启用），无该字段，默认不启用
+   */
+  RepairMode?: number
 }
 
 /**
@@ -2024,6 +2028,10 @@ export interface RecordPlanOptData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamType?: string
+  /**
+   * 录像补录模式（0:不启用，1:启用）
+   */
+  RepairMode?: number
 }
 
 /**
@@ -2079,7 +2087,7 @@ export interface CallISAPIRequest {
  */
 export interface AddRecordRetrieveTaskRequest {
   /**
-   * 任务名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复
+   * 任务名称，仅支持中文、英文、数字、_、-，长度不超过32个字符，名称全局唯一，不能为空，不能重复
    */
   TaskName: string
   /**
@@ -2986,7 +2994,7 @@ export interface DescribeDeviceData {
  */
 export interface AddUserDeviceRequest {
   /**
-   * 设备名称，仅支持中文、英文、数字、_、-，长度不超过32个字符；（设备名称无需全局唯一，可以重复）
+   * 设备名称，仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位；（设备名称无需全局唯一，可以重复）
    */
   Name: string
   /**
@@ -3010,11 +3018,11 @@ export interface AddUserDeviceRequest {
    */
   TransportProtocol?: number
   /**
-   * 设备密码（国标，网关设备必填，仅支持数字组合，长度为1-64个字符）
+   * 设备密码（国标，网关设备必填，长度为1-64个字符）
    */
   Password?: string
   /**
-   * 设备描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
+   * 设备描述，长度不超过128个字符
    */
   Description?: string
   /**
@@ -3042,11 +3050,11 @@ export interface AddUserDeviceRequest {
    */
   SNCode?: string
   /**
-   * RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字组合限制32个字符内）
+   * RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字、_、-、.、长度不超过64位）
    */
   AppName?: string
   /**
-   * RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字组合限制32个字符内）
+   * RTMP推流地址自定义StreamName（仅RTMP需要，支持英文、数字、_、-、.、长度不超过64位）
    */
   StreamName?: string
 }
@@ -4017,6 +4025,10 @@ export interface RecordPlanBaseInfo {
    * 通道总数
    */
   ChannelCount?: number
+  /**
+   * 录像补录模式（0:不启用，1:启用）
+   */
+  RepairMode?: number
 }
 
 /**
@@ -4599,6 +4611,10 @@ export interface RecordPlanChannelInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrganizationName?: string
+  /**
+   * 通道所属设备的接入协议类型
+   */
+  AccessProtocol?: number
 }
 
 /**
@@ -4815,6 +4831,10 @@ export interface UpdateRecordPlanData {
    * 组织目录ID，添加组织目录下所有设备通道，Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量）
    */
   OrganizationId?: Array<string>
+  /**
+   * 录像补录模式（0:不启用，1:启用）
+   */
+  RepairMode?: number
 }
 
 /**
@@ -4855,7 +4875,7 @@ export interface UpdateOrganizationRequest {
    */
   OrganizationId: string
   /**
-   * 组织名称
+   * 组织名称，支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复
    */
   Name: string
 }
@@ -5033,7 +5053,7 @@ export interface BatchOperateDeviceRequest {
    */
   DeviceIds: Array<string>
   /**
-   * 操作命令（enable：启用；disable：禁用；delete：删除；upgrade：固件升级；reset：恢复出厂设置；reboot：重启）
+   * 操作命令（enable：启用；disable：禁用；delete：删除；sync：同步设备通道；upgrade：固件升级；reset：恢复出厂设置；reboot：重启）
    */
   Cmd: string
 }
@@ -5234,7 +5254,7 @@ export interface DescribeDomainRegionData {
  */
 export interface AddOrganizationRequest {
   /**
-   * 组织名称（仅支持中文、英文、数字、_、-的组合，长度不超过16个字符，且组织名称不能重复）
+   * 组织名称（仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复）
    */
   Name: string
   /**

@@ -106,6 +106,7 @@ import {
   CUDNN,
   DescribeReservedInstancesResponse,
   KubeJarvisStateCatalogue,
+  ModifyClusterTagsResponse,
   Event,
   Exec,
   DescribeEdgeAvailableExtraArgsResponse,
@@ -189,6 +190,7 @@ import {
   DescribeClusterCommonNamesRequest,
   NfsVolume,
   RIUtilizationDetail,
+  DescribeBatchModifyTagsStatusResponse,
   PrometheusNotification,
   DescribeRIUtilizationDetailRequest,
   ClusterCondition,
@@ -215,6 +217,7 @@ import {
   SyncPrometheusTempRequest,
   DeleteBackupStorageLocationResponse,
   DescribePrometheusGlobalNotificationResponse,
+  DescribeBatchModifyTagsStatusRequest,
   HttpGet,
   ResourceUsage,
   CreateClusterVirtualNodeRequest,
@@ -536,6 +539,7 @@ import {
   DescribeTKEEdgeScriptResponse,
   DescribeClusterRouteTablesResponse,
   DeleteLogConfigsRequest,
+  ModifyClusterTagsRequest,
   DescribeClusterKubeconfigRequest,
   DeletePrometheusTempSyncRequest,
   CreatePrometheusTemplateResponse,
@@ -546,6 +550,7 @@ import {
   DescribePrometheusGlobalConfigRequest,
   CreateECMInstancesResponse,
   ModifyPrometheusGlobalNotificationRequest,
+  FailedResource,
   DescribeClusterNodePoolsResponse,
   UnavailableReason,
   GetUpgradeInstanceProgressRequest,
@@ -1086,6 +1091,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群标签
+   */
+  async ModifyClusterTags(
+    req: ModifyClusterTagsRequest,
+    cb?: (error: string, rep: ModifyClusterTagsResponse) => void
+  ): Promise<ModifyClusterTagsResponse> {
+    return this.request("ModifyClusterTags", req, cb)
+  }
+
+  /**
    * 创建日志采集配置
    */
   async CreateCLSLogConfig(
@@ -1486,6 +1501,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询批量修改标签状态
+   */
+  async DescribeBatchModifyTagsStatus(
+    req?: DescribeBatchModifyTagsStatusRequest,
+    cb?: (error: string, rep: DescribeBatchModifyTagsStatusResponse) => void
+  ): Promise<DescribeBatchModifyTagsStatusResponse> {
+    return this.request("DescribeBatchModifyTagsStatus", req, cb)
+  }
+
+  /**
    * 获取容器服务支持的所有地域
    */
   async DescribeRegions(
@@ -1586,13 +1611,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群规模
+   * 用于查询Kubernetes的各个原生控制器是否开启
    */
-  async DescribeClusterLevelAttribute(
-    req: DescribeClusterLevelAttributeRequest,
-    cb?: (error: string, rep: DescribeClusterLevelAttributeResponse) => void
-  ): Promise<DescribeClusterLevelAttributeResponse> {
-    return this.request("DescribeClusterLevelAttribute", req, cb)
+  async DescribeClusterControllers(
+    req: DescribeClusterControllersRequest,
+    cb?: (error: string, rep: DescribeClusterControllersResponse) => void
+  ): Promise<DescribeClusterControllersResponse> {
+    return this.request("DescribeClusterControllers", req, cb)
   }
 
   /**
@@ -2126,13 +2151,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询Kubernetes的各个原生控制器是否开启
+   * 获取集群规模
    */
-  async DescribeClusterControllers(
-    req: DescribeClusterControllersRequest,
-    cb?: (error: string, rep: DescribeClusterControllersResponse) => void
-  ): Promise<DescribeClusterControllersResponse> {
-    return this.request("DescribeClusterControllers", req, cb)
+  async DescribeClusterLevelAttribute(
+    req: DescribeClusterLevelAttributeRequest,
+    cb?: (error: string, rep: DescribeClusterLevelAttributeResponse) => void
+  ): Promise<DescribeClusterLevelAttributeResponse> {
+    return this.request("DescribeClusterLevelAttribute", req, cb)
   }
 
   /**

@@ -1280,13 +1280,13 @@ export interface CreateUserOIDCConfigResponse {
  */
 export interface ListAttachedUserAllPoliciesResponse {
     /**
-     * 策略列表数据
+     * 策略列表数据。
      */
-    PolicyList: Array<AttachedUserPolicy>;
+    PolicyList?: Array<AttachedUserPolicy>;
     /**
-     * 策略总数
+     * 策略总数。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2706,23 +2706,23 @@ export interface CreatePolicyRequest {
  */
 export interface ListAttachedUserAllPoliciesRequest {
     /**
-     * 目标用户ID
+     * 目标用户Uin
      */
     TargetUin: number;
     /**
-     * 每页数量，必须大于 0 且小于或等于 200
+     * 每页数量，必须大于 0 且小于等于 200。
      */
     Rp: number;
     /**
-     * 页码，从 1开始，不能大于 200
+     * 页码，从 1开始，不能大于 200。
      */
     Page: number;
     /**
-     * 0:返回直接关联和随组关联策略，1:只返回直接关联策略，2:只返回随组关联策略
+     * 关联类型。0:返回直接关联和随组关联策略，1:只返回直接关联策略，2:只返回随组关联策略。
      */
     AttachType: number;
     /**
-     * 策略类型
+     * 策略类型。1表示自定义策略，2表示预设策略。
      */
     StrategyType?: number;
     /**
@@ -2924,7 +2924,7 @@ export interface ListPolicyVersionsResponse {
  */
 export interface GetPolicyRequest {
     /**
-     * 策略Id
+     * 策略Id。
      */
     PolicyId: number;
 }
@@ -3275,42 +3275,42 @@ export interface ListUsersForGroupResponse {
  */
 export interface GetPolicyResponse {
     /**
-     * 策略名
+     * 策略名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyName?: string;
     /**
-     * 策略描述
+     * 策略描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
-     * 1 表示自定义策略，2 表示预设策略
+     * 1 表示自定义策略，2 表示预设策略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
-     * 创建时间
+     * 策略创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AddTime?: string;
     /**
-     * 最近更新时间
+     * 策略最近更新时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
-     * 策略文档
+     * 策略文档。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyDocument?: string;
     /**
-     * 备注
+     * 备注。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PresetAlias?: string;
     /**
-     * 是否服务相关策略
+     * 是否是服务相关策略，0代表不是服务相关策略，1代表是服务相关策略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsServiceLinkedRolePolicy?: number;

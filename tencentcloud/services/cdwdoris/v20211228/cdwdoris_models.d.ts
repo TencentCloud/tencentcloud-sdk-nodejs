@@ -2521,7 +2521,15 @@ export interface DescribeInstancesRequest {
 /**
  * DescribeBackUpSchedules请求参数结构体
  */
-export declare type DescribeBackUpSchedulesRequest = null;
+export interface DescribeBackUpSchedulesRequest {
+    /**
+     * 任务类型
+  0-不限制，或使用TypeFilters过滤；
+  1-备份恢复（包括周期备份和一次性备份）；
+  2-数据迁移（包括跨集群迁移和cos迁移）
+     */
+    ApplicationType?: number;
+}
 /**
  * DescribeClusterConfigs请求参数结构体
  */
@@ -3864,6 +3872,13 @@ export interface DescribeBackUpJobRequest {
      * 集群id
      */
     InstanceId: string;
+    /**
+     * 任务类型：
+  0-不限制，或使用TypeFilters过滤；
+  1-备份恢复（包括周期备份和一次性备份）；
+  2-数据迁移（包括跨集群迁移和cos迁移）
+     */
+    ApplicationType?: number;
     /**
      * 分页大小
      */

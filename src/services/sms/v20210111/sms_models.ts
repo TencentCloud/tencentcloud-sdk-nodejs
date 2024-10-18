@@ -1070,7 +1070,7 @@ export interface ReportConversionRequest {
    */
   SmsSdkAppId: string
   /**
-   * 发送短信返回的流水号。
+   * 发送短信返回的流水号。对应SendSms接口返回的SendStatusSet参数中的SerialNo字段。
    */
   SerialNo: string
   /**

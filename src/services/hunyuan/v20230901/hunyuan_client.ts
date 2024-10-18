@@ -41,6 +41,7 @@ import {
   ToolFunction,
   Delta,
   SetPayModeResponse,
+  SongExt,
   ToolCall,
   ToolCallFunction,
   SetPayModeRequest,

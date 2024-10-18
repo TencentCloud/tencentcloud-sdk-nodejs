@@ -162,6 +162,7 @@ import {
   UpdatePluginsResponse,
   UpdateIndexResponse,
   UpdateJdkRequest,
+  EnableScheduleOperationDuration,
   UpdateLogstashInstanceResponse,
   StopLogstashPipelinesRequest,
   DiagnoseJobResult,

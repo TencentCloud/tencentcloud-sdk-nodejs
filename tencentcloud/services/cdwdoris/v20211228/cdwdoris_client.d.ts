@@ -18,7 +18,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取备份、迁移的调度任务信息
      */
-    DescribeBackUpSchedules(req?: DescribeBackUpSchedulesRequest, cb?: (error: string, rep: DescribeBackUpSchedulesResponse) => void): Promise<DescribeBackUpSchedulesResponse>;
+    DescribeBackUpSchedules(req: DescribeBackUpSchedulesRequest, cb?: (error: string, rep: DescribeBackUpSchedulesResponse) => void): Promise<DescribeBackUpSchedulesResponse>;
     /**
      * 查询备份实例列表
      */

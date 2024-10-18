@@ -1143,49 +1143,62 @@ export interface SecLogJoinObjectInfo {
     /**
      * 主机ID
      */
-    HostID: string;
+    HostID?: string;
     /**
      * 主机名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 主机IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 主机状态
      */
-    HostStatus: string;
+    HostStatus?: string;
     /**
      * 集群ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterID: string;
+    ClusterID?: string;
     /**
      * 集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 外网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIP: string;
+    PublicIP?: string;
     /**
      * 接入状态(true:已接入  false:未接入)
      */
-    JoinState: boolean;
+    JoinState?: boolean;
     /**
      * 集群版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterVersion: string;
+    ClusterVersion?: string;
     /**
      * 集群主节点地址
      */
-    ClusterMainAddress: string;
+    ClusterMainAddress?: string;
+    /**
+     * 容器数
+     */
+    ContainerCnt?: number;
+    /**
+     * 集群类型
+     */
+    ClusterType?: string;
+    /**
+     * 集群状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterStatus?: string;
 }
 /**
  * DescribeVulImageSummary请求参数结构体
@@ -1858,7 +1871,7 @@ export interface DescribeSearchExportListResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2427,7 +2440,7 @@ export interface DescribeESAggregationsResponse {
     /**
      * ES聚合结果JSON
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3494,7 +3507,7 @@ export interface SecLogJoinInfo {
     /**
      * 已接入普通主机数量
      */
-    Count: number;
+    Count?: number;
     /**
      * 已接入超级节点数量
      */
@@ -3502,7 +3515,7 @@ export interface SecLogJoinInfo {
     /**
      * 是否已接入(true:已接入 false:未接入)
      */
-    IsJoined: boolean;
+    IsJoined?: boolean;
     /**
      * 日志类型(
   容器bash:  "container_bash"
@@ -3510,7 +3523,11 @@ export interface SecLogJoinInfo {
   k8sApi: "k8s_api"
   )
      */
-    LogType: string;
+    LogType?: string;
+    /**
+     * 已接入集群数量
+     */
+    ClusterCount?: number;
 }
 /**
  * 促销活动内容
@@ -3736,6 +3753,18 @@ export interface DescribeSecLogJoinObjectListResponse {
      * 接入对象列表
      */
     List?: Array<SecLogJoinObjectInfo>;
+    /**
+     * 日志节点范围类型,0自选 1全部
+     */
+    RangeType?: number;
+    /**
+     * 新增资产是否自动加入，节点范围为全部时生效
+     */
+    AutoJoin?: boolean;
+    /**
+     * 剔除节点数
+     */
+    ExcludedCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4666,6 +4695,10 @@ export interface DescribeESHitsRequest {
      * 返回数量，最大值为100。
      */
     Limit?: number;
+    /**
+     * 日志类型列表
+     */
+    LogTypes?: Array<string>;
 }
 /**
  * DescribeTcssSummary返回参数结构体
@@ -6180,6 +6213,10 @@ export interface DescribeSearchExportListRequest {
      * ES查询条件JSON
      */
     Query: string;
+    /**
+     * 日志类型列表
+     */
+    LogTypes?: Array<string>;
 }
 /**
  * DescribeReverseShellWhiteListDetail请求参数结构体
@@ -6266,7 +6303,7 @@ export interface DescribeESHitsResponse {
     /**
      * ES查询结果JSON
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9453,6 +9490,10 @@ export interface DescribeESAggregationsRequest {
      * ES聚合条件JSON
      */
     Query: string;
+    /**
+     * 日志类型列表
+     */
+    LogTypes?: Array<string>;
 }
 /**
  * 网络集群pod返回的结构体
@@ -15929,11 +15970,11 @@ export interface ModifySecLogJoinObjectsRequest {
      */
     LogType: string;
     /**
-     * 绑定主机quuid列表
+     * 绑定列表
      */
     BindList?: Array<string>;
     /**
-     * 待解绑主机quuid列表
+     * 待解绑列表，节点范围为全部时，含义为需剔除资产列表
      */
     UnBindList?: Array<string>;
     /**
@@ -15943,6 +15984,14 @@ export interface ModifySecLogJoinObjectsRequest {
   
      */
     NodeType?: string;
+    /**
+     * 日志节点范围类型,0自选 1全部
+     */
+    RangeType?: number;
+    /**
+     * 新增资产是否自动加入，节点范围为全部时生效
+     */
+    AutoJoin?: boolean;
 }
 /**
  * DescribeK8sApiAbnormalRuleList请求参数结构体

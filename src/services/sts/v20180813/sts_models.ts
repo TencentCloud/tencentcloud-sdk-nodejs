@@ -44,15 +44,15 @@ export interface ApiKey {
   /**
    * 密钥ID
    */
-  SecretId: string
+  SecretId?: string
   /**
    * 创建时间(时间戳)
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 状态(2:有效, 3:禁用, 4:已删除)
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -131,7 +131,7 @@ export interface GetFederationTokenResponse {
  */
 export interface QueryApiKeyResponse {
   /**
-   * 密钥ID列表
+   * 密钥ID列表。
    */
   IdKeys?: Array<ApiKey>
   /**
@@ -167,7 +167,7 @@ export interface AssumeRoleResponse {
  */
 export interface QueryApiKeyRequest {
   /**
-   * 待查询的账号(不填默认查当前账号)
+   * 待查询的账号uin(不填默认查当前账号uin)
    */
   TargetUin?: number
 }

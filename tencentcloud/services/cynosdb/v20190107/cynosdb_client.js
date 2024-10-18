@@ -826,7 +826,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProxy", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例绑定的安全组。
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);

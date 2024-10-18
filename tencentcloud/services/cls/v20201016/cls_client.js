@@ -58,7 +58,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
-     * 查询指定时刻指标的最新值
+     * 查询指定时刻指标的最新值。
+如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
      */
     async QueryMetric(req, cb) {
         return this.request("QueryMetric", req, cb);

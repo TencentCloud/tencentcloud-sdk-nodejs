@@ -28,6 +28,7 @@ import {
   DescribeClusterFlowStatusDetailResponse,
   SchedulerTaskInfo,
   DynamicPodSpec,
+  DescribeHDFSStorageInfoResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
   DescribeHiveQueriesRequest,
@@ -43,13 +44,15 @@ import {
   Step,
   PreExecuteFileSettings,
   KeyValue,
-  DescribeAutoScaleGroupGlobalConfRequest,
+  DescribeServiceNodeInfosResponse,
   EmrProductConfigDetail,
   DescribeInstancesResponse,
   DescribeTrinoQueryInfoResponse,
   PriceResult,
   TrinoQueryInfo,
   WeekRepeatStrategy,
+  SparkQuery,
+  Dps,
   UserManagerFilter,
   DeleteAutoScaleStrategyResponse,
   OverviewRow,
@@ -62,16 +65,18 @@ import {
   CreateSLInstanceRequest,
   ScaleOutInstanceRequest,
   ResetYarnConfigRequest,
+  KyuubiQueryInfo,
   DescribeHBaseTableOverviewResponse,
-  DescribeServiceNodeInfosResponse,
+  DescribeAutoScaleGroupGlobalConfRequest,
   ModifyAutoScaleStrategyRequest,
   FlowParamsDesc,
+  DescribeSparkQueriesRequest,
   ModifyYarnDeployResponse,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
   NodeDetailPriceResult,
   Tag,
-  HealthStatus,
+  DescribeKyuubiQueryInfoResponse,
   TerminateSLInstanceRequest,
   Arg,
   ClusterIDToFlowID,
@@ -90,7 +95,7 @@ import {
   DiffHeader,
   DescribeInstancesListResponse,
   DescribeInstanceRenewNodesRequest,
-  ResetYarnConfigResponse,
+  DescribeSparkQueriesResponse,
   JobResult,
   Resource,
   FlowParam,
@@ -103,9 +108,12 @@ import {
   DescribeJobFlowRequest,
   InquiryPriceCreateInstanceResponse,
   StartStopServiceOrMonitorRequest,
+  StarRocksQueryInfo,
+  DescribeHDFSStorageInfoRequest,
   OverviewMetricData,
   AutoScaleRecord,
   JobFlowResourceSpec,
+  HealthStatus,
   Configuration,
   DescribeResourceScheduleRequest,
   ZoneSetting,
@@ -126,7 +134,7 @@ import {
   DescribeYarnQueueRequest,
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
-  ModifyAutoRenewFlagResponse,
+  GroupGlobalConfs,
   ScaleOutServiceConfGroupsInfo,
   CreateSLInstanceResponse,
   UserManagerUserBriefInfo,
@@ -151,7 +159,7 @@ import {
   ModifyResourceSchedulerRequest,
   LoginSettings,
   RunJobFlowRequest,
-  GroupGlobalConfs,
+  DescribeKyuubiQueryInfoRequest,
   PriceResource,
   ModifyGlobalConfigResponse,
   TimeAutoScaleStrategy,
@@ -187,6 +195,7 @@ import {
   NotRepeatStrategy,
   TerminateSLInstanceResponse,
   PodNewSpec,
+  ModifyAutoRenewFlagResponse,
   InquiryPriceUpdateInstanceRequest,
   DescribeAutoScaleStrategiesRequest,
   DeployYarnConfRequest,
@@ -216,12 +225,13 @@ import {
   MultiDiskMC,
   AddUsersForUserManagerRequest,
   ZoneResourceConfiguration,
-  SyncPodStateRequest,
+  StorageSummaryDistribution,
   DescribeSLInstanceRequest,
   CustomMetaInfo,
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
   DescribeEmrOverviewMetricsResponse,
+  SyncPodStateRequest,
   MultiZoneSetting,
   ModifyAutoRenewFlagRequest,
   ModifyResourceScheduleConfigRequest,
@@ -239,6 +249,7 @@ import {
   SoftDependInfo,
   ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
+  DescribeStarRocksQueryInfoRequest,
   ModifySLInstanceResponse,
   LoadMetricsConditions,
   JobFlowResource,
@@ -249,6 +260,8 @@ import {
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   Item,
+  ResetYarnConfigResponse,
+  DescribeStarRocksQueryInfoResponse,
   TableSchemaItem,
   ConfigModifyInfoV2,
   ModifyUserManagerPwdRequest,
@@ -363,6 +376,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询待续费节点信息
+   */
+  async DescribeInstanceRenewNodes(
+    req: DescribeInstanceRenewNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void
+  ): Promise<DescribeInstanceRenewNodesResponse> {
+    return this.request("DescribeInstanceRenewNodes", req, cb)
+  }
+
+  /**
    * yarn资源调度-部署生效
    */
   async DeployYarnConf(
@@ -443,13 +466,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户密码（用户管理）
+   * 查询StarRocks查询信息
    */
-  async ModifyUserManagerPwd(
-    req: ModifyUserManagerPwdRequest,
-    cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void
-  ): Promise<ModifyUserManagerPwdResponse> {
-    return this.request("ModifyUserManagerPwd", req, cb)
+  async DescribeStarRocksQueryInfo(
+    req: DescribeStarRocksQueryInfoRequest,
+    cb?: (error: string, rep: DescribeStarRocksQueryInfoResponse) => void
+  ): Promise<DescribeStarRocksQueryInfoResponse> {
+    return this.request("DescribeStarRocksQueryInfo", req, cb)
   }
 
   /**
@@ -534,6 +557,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户密码（用户管理）
+   */
+  async ModifyUserManagerPwd(
+    req: ModifyUserManagerPwdRequest,
+    cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void
+  ): Promise<ModifyUserManagerPwdResponse> {
+    return this.request("ModifyUserManagerPwd", req, cb)
+  }
+
+  /**
    * 删除用户列表（用户管理）
    */
   async DeleteUserManagerUserList(
@@ -608,6 +641,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Kyuubi查询信息
+   */
+  async DescribeKyuubiQueryInfo(
+    req: DescribeKyuubiQueryInfoRequest,
+    cb?: (error: string, rep: DescribeKyuubiQueryInfoResponse) => void
+  ): Promise<DescribeKyuubiQueryInfoResponse> {
+    return this.request("DescribeKyuubiQueryInfo", req, cb)
+  }
+
+  /**
    * 删除自动扩缩容规则，后台销毁根据该规则扩缩容出来的节点
    */
   async DeleteAutoScaleStrategy(
@@ -628,13 +671,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询待续费节点信息
+   * 查询HDFS存储文件信息
    */
-  async DescribeInstanceRenewNodes(
-    req: DescribeInstanceRenewNodesRequest,
-    cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void
-  ): Promise<DescribeInstanceRenewNodesResponse> {
-    return this.request("DescribeInstanceRenewNodes", req, cb)
+  async DescribeHDFSStorageInfo(
+    req: DescribeHDFSStorageInfoRequest,
+    cb?: (error: string, rep: DescribeHDFSStorageInfoResponse) => void
+  ): Promise<DescribeHDFSStorageInfoResponse> {
+    return this.request("DescribeHDFSStorageInfo", req, cb)
   }
 
   /**
@@ -678,15 +721,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
-- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
-- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
-     */
-  async ModifySLInstance(
-    req: ModifySLInstanceRequest,
-    cb?: (error: string, rep: ModifySLInstanceResponse) => void
-  ): Promise<ModifySLInstanceResponse> {
-    return this.request("ModifySLInstance", req, cb)
+   * 查询Spark查询信息列表
+   */
+  async DescribeSparkQueries(
+    req: DescribeSparkQueriesRequest,
+    cb?: (error: string, rep: DescribeSparkQueriesResponse) => void
+  ): Promise<DescribeSparkQueriesResponse> {
+    return this.request("DescribeSparkQueries", req, cb)
   }
 
   /**
@@ -797,6 +838,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateInstanceResponse) => void
   ): Promise<TerminateInstanceResponse> {
     return this.request("TerminateInstance", req, cb)
+  }
+
+  /**
+     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
+- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     */
+  async ModifySLInstance(
+    req: ModifySLInstanceRequest,
+    cb?: (error: string, rep: ModifySLInstanceResponse) => void
+  ): Promise<ModifySLInstanceResponse> {
+    return this.request("ModifySLInstance", req, cb)
   }
 
   /**

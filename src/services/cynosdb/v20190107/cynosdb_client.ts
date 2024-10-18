@@ -1768,7 +1768,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例绑定的安全组。
    */
   async ModifyDBInstanceSecurityGroups(
     req: ModifyDBInstanceSecurityGroupsRequest,

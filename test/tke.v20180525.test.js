@@ -448,6 +448,16 @@ it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterTags", async function () {
+    try {
+       const data = await client.ModifyClusterTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateCLSLogConfig", async function () {
     try {
        const data = await client.CreateCLSLogConfig({})
@@ -848,6 +858,16 @@ it("tke.v20180525.UpdateImageCache", async function () {
     }
 })
 
+it("tke.v20180525.DescribeBatchModifyTagsStatus", async function () {
+    try {
+       const data = await client.DescribeBatchModifyTagsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
@@ -948,9 +968,9 @@ it("tke.v20180525.DescribeEdgeCVMInstances", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterLevelAttribute", async function () {
+it("tke.v20180525.DescribeClusterControllers", async function () {
     try {
-       const data = await client.DescribeClusterLevelAttribute({})
+       const data = await client.DescribeClusterControllers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1488,9 +1508,9 @@ it("tke.v20180525.ModifyPrometheusRecordRuleYaml", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterControllers", async function () {
+it("tke.v20180525.DescribeClusterLevelAttribute", async function () {
     try {
-       const data = await client.DescribeClusterControllers({})
+       const data = await client.DescribeClusterLevelAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

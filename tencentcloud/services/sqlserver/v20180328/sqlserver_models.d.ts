@@ -3112,6 +3112,10 @@ export interface DescribeRestoreTaskRequest {
      * 排序规则（desc-降序，asc-升序），默认desc
      */
     OrderByType?: string;
+    /**
+     * 回档异步任务ID
+     */
+    FlowId?: number;
 }
 /**
  * DescribeInstanceTradeParameter请求参数结构体
@@ -7736,6 +7740,10 @@ export interface RestoreTask {
      * 回档状态，0-初始化，1-运行中，2-成功，3-失败
      */
     Status?: number;
+    /**
+     * 回档异步任务ID
+     */
+    FlowId?: number;
 }
 /**
  * DescribeUploadBackupInfo返回参数结构体

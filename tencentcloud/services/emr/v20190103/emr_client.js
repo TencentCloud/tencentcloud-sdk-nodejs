@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyYarnQueueV2", req, cb);
     }
     /**
+     * 查询待续费节点信息
+     */
+    async DescribeInstanceRenewNodes(req, cb) {
+        return this.request("DescribeInstanceRenewNodes", req, cb);
+    }
+    /**
      * yarn资源调度-部署生效
      */
     async DeployYarnConf(req, cb) {
@@ -124,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceSchedule", req, cb);
     }
     /**
-     * 修改用户密码（用户管理）
+     * 查询StarRocks查询信息
      */
-    async ModifyUserManagerPwd(req, cb) {
-        return this.request("ModifyUserManagerPwd", req, cb);
+    async DescribeStarRocksQueryInfo(req, cb) {
+        return this.request("DescribeStarRocksQueryInfo", req, cb);
     }
     /**
      * 获取Hbase表级监控数据概览接口
@@ -179,6 +185,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsersForUserManager", req, cb);
     }
     /**
+     * 修改用户密码（用户管理）
+     */
+    async ModifyUserManagerPwd(req, cb) {
+        return this.request("ModifyUserManagerPwd", req, cb);
+    }
+    /**
      * 删除用户列表（用户管理）
      */
     async DeleteUserManagerUserList(req, cb) {
@@ -225,6 +237,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoScaleStrategy", req, cb);
     }
     /**
+     * 查询Kyuubi查询信息
+     */
+    async DescribeKyuubiQueryInfo(req, cb) {
+        return this.request("DescribeKyuubiQueryInfo", req, cb);
+    }
+    /**
      * 删除自动扩缩容规则，后台销毁根据该规则扩缩容出来的节点
      */
     async DeleteAutoScaleStrategy(req, cb) {
@@ -237,10 +255,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEmrApplicationStatics", req, cb);
     }
     /**
-     * 查询待续费节点信息
+     * 查询HDFS存储文件信息
      */
-    async DescribeInstanceRenewNodes(req, cb) {
-        return this.request("DescribeInstanceRenewNodes", req, cb);
+    async DescribeHDFSStorageInfo(req, cb) {
+        return this.request("DescribeHDFSStorageInfo", req, cb);
     }
     /**
      * 用于启停服务 重启服务等功能
@@ -267,12 +285,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSLInstance", req, cb);
     }
     /**
-     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
-- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
-- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     * 查询Spark查询信息列表
      */
-    async ModifySLInstance(req, cb) {
-        return this.request("ModifySLInstance", req, cb);
+    async DescribeSparkQueries(req, cb) {
+        return this.request("DescribeSparkQueries", req, cb);
     }
     /**
      * 创建EMR集群实例
@@ -339,6 +355,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateInstance(req, cb) {
         return this.request("TerminateInstance", req, cb);
+    }
+    /**
+     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
+- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     */
+    async ModifySLInstance(req, cb) {
+        return this.request("ModifySLInstance", req, cb);
     }
     /**
      * 获取自动扩缩容规则

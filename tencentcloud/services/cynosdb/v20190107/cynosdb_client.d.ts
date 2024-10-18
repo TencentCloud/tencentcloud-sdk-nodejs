@@ -540,7 +540,7 @@ export declare class Client extends AbstractClient {
      */
     CreateProxy(req: CreateProxyRequest, cb?: (error: string, rep: CreateProxyResponse) => void): Promise<CreateProxyResponse>;
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例绑定的安全组。
      */
     ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**

@@ -320,6 +320,26 @@ export interface DynamicPodSpec {
 }
 
 /**
+ * DescribeHDFSStorageInfo返回参数结构体
+ */
+export interface DescribeHDFSStorageInfoResponse {
+  /**
+   * 采样时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SampleTime?: number
+  /**
+   * hdfs存储详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSummaryDistribution?: Array<StorageSummaryDistribution>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUserManagerPwd返回参数结构体
  */
 export interface ModifyUserManagerPwdResponse {
@@ -856,13 +876,33 @@ export interface KeyValue {
 }
 
 /**
- * DescribeAutoScaleGroupGlobalConf请求参数结构体
+ * DescribeServiceNodeInfos返回参数结构体
  */
-export interface DescribeAutoScaleGroupGlobalConfRequest {
+export interface DescribeServiceNodeInfosResponse {
   /**
-   * 实例ID。
+   * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  TotalCnt?: number
+  /**
+   * 进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceNodeList?: Array<ServiceNodeDetailInfo>
+  /**
+   * 集群所有节点的别名序列化
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AliasInfo?: string
+  /**
+   * 支持的FlagNode列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportNodeFlagFilterList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1140,6 +1180,99 @@ export interface WeekRepeatStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DaysOfWeek: Array<number | bigint>
+}
+
+/**
+ * spark查询详情
+ */
+export interface SparkQuery {
+  /**
+   * 执行语句
+   */
+  Statement?: string
+  /**
+   * 执行时长（单位毫秒）
+   */
+  Duration?: number
+  /**
+   * 执行状态
+   */
+  Status?: string
+  /**
+   * 查询ID
+   */
+  Id?: string
+  /**
+   * 扫描分区数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanPartitionNum?: number
+  /**
+   * 扫描总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanRowNum?: number
+  /**
+   * 扫描总文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanFileNum?: number
+  /**
+   * 查询扫描总数据量(单位B)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanTotalData?: number
+  /**
+   * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationId?: Array<string>
+  /**
+   * 输出总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputRowNum?: number
+  /**
+   * 输出总文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputFileNum?: number
+  /**
+   * 输出分区数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputPartitionNum?: number
+  /**
+   * 输出总数据量（单位B）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputTotalData?: number
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: number
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: number
+}
+
+/**
+ * 采样序列
+ */
+export interface Dps {
+  /**
+   * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: string
+  /**
+   * 采样值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -1850,6 +1983,72 @@ export interface ResetYarnConfigRequest {
 }
 
 /**
+ * Kyuubi查询信息
+ */
+export interface KyuubiQueryInfo {
+  /**
+   * 提交IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIP?: string
+  /**
+   * 执行时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: number
+  /**
+   * Engine Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineID?: string
+  /**
+   * 计算引擎
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineType?: string
+  /**
+   * ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * Session Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionID?: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: number
+  /**
+   * 执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionState?: string
+  /**
+   * 执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionStatement?: string
+  /**
+   * Statement Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatementID?: string
+  /**
+   * 提交用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+}
+
+/**
  * DescribeHBaseTableOverview返回参数结构体
  */
 export interface DescribeHBaseTableOverviewResponse {
@@ -1872,33 +2071,13 @@ export interface DescribeHBaseTableOverviewResponse {
 }
 
 /**
- * DescribeServiceNodeInfos返回参数结构体
+ * DescribeAutoScaleGroupGlobalConf请求参数结构体
  */
-export interface DescribeServiceNodeInfosResponse {
+export interface DescribeAutoScaleGroupGlobalConfRequest {
   /**
-   * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID。
    */
-  TotalCnt?: number
-  /**
-   * 进程信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceNodeList?: Array<ServiceNodeDetailInfo>
-  /**
-   * 集群所有节点的别名序列化
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AliasInfo?: string
-  /**
-   * 支持的FlagNode列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SupportNodeFlagFilterList?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -1940,6 +2119,36 @@ export interface FlowParamsDesc {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PValue: string
+}
+
+/**
+ * DescribeSparkQueries请求参数结构体
+ */
+export interface DescribeSparkQueriesRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
+  /**
+   * 执行状态:RUNNING,COMPLETED,FAILED
+   */
+  Status?: Array<string>
 }
 
 /**
@@ -2110,21 +2319,22 @@ export interface Tag {
 }
 
 /**
- * 进程健康状态
+ * DescribeKyuubiQueryInfo返回参数结构体
  */
-export interface HealthStatus {
+export interface DescribeKyuubiQueryInfoResponse {
   /**
-   * 运行正常
+   * 总数，分页查询时使用
    */
-  Code: number
+  TotalCount?: number
   /**
-   * 运行正常
+   * Kyuubi查询信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text: string
+  KyuubiQueryInfoList?: Array<KyuubiQueryInfo>
   /**
-   * 运行正常
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Desc: string
+  RequestId?: string
 }
 
 /**
@@ -2751,9 +2961,18 @@ export interface DescribeInstanceRenewNodesRequest {
 }
 
 /**
- * ResetYarnConfig返回参数结构体
+ * DescribeSparkQueries返回参数结构体
  */
-export interface ResetYarnConfigResponse {
+export interface DescribeSparkQueriesResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Results?: Array<SparkQuery>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3132,6 +3351,125 @@ export interface StartStopServiceOrMonitorRequest {
 }
 
 /**
+ * StarRocks 查询信息
+ */
+export interface StarRocksQueryInfo {
+  /**
+   * 提交IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIP?: string
+  /**
+   * CPU总时间(ns)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CPUCost?: number
+  /**
+   * 默认DB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultDB?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: number
+  /**
+   * 执行IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionIP?: string
+  /**
+   * 查询ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryID?: string
+  /**
+   * 查询类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryType?: string
+  /**
+   * 消耗总内存(bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemCost?: number
+  /**
+   * plan阶段CPU占用(ns)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlanCpuCosts?: number
+  /**
+   * plan阶段内存占用(bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlanMemCosts?: number
+  /**
+   * 执行时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryTime?: number
+  /**
+   * 资源组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroup?: string
+  /**
+   * 获取行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReturnRows?: number
+  /**
+   * 扫描数据量(bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanBytes?: number
+  /**
+   * 扫描行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanRows?: number
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: number
+  /**
+   * 执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionState?: string
+  /**
+   * 执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionStatement?: string
+  /**
+   * 用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+}
+
+/**
+ * DescribeHDFSStorageInfo请求参数结构体
+ */
+export interface DescribeHDFSStorageInfoRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 获取查询信息开始时间 (s)
+   */
+  StartTime: number
+  /**
+   * 获取查询信息结束时间 (s)
+   */
+  EndTime: number
+}
+
+/**
  * 概览数据
  */
 export interface OverviewMetricData {
@@ -3275,6 +3613,24 @@ export interface JobFlowResourceSpec {
    * Common节点配置。
    */
   CommonResourceSpec?: JobFlowResource
+}
+
+/**
+ * 进程健康状态
+ */
+export interface HealthStatus {
+  /**
+   * 运行正常
+   */
+  Code: number
+  /**
+   * 运行正常
+   */
+  Text: string
+  /**
+   * 运行正常
+   */
+  Desc: string
 }
 
 /**
@@ -3852,13 +4208,29 @@ export interface ModifyResourcesTagsResponse {
 }
 
 /**
- * ModifyAutoRenewFlag返回参数结构体
+ * 集群所有伸缩组全局参数信息
  */
-export interface ModifyAutoRenewFlagResponse {
+export interface GroupGlobalConfs {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 伸缩组信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  GroupGlobalConf?: AutoScaleResourceConf
+  /**
+   * 当前伸缩组扩容出来的节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentNodes?: number
+  /**
+   * 当前伸缩组扩容出来的后付费节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentPostPaidNodes?: number
+  /**
+   * 当前伸缩组扩容出来的竞价实例节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentSpotPaidNodes?: number
 }
 
 /**
@@ -4476,29 +4848,29 @@ true 表示安装kerberos，false表示不安装kerberos。
 }
 
 /**
- * 集群所有伸缩组全局参数信息
+ * DescribeKyuubiQueryInfo请求参数结构体
  */
-export interface GroupGlobalConfs {
+export interface DescribeKyuubiQueryInfoRequest {
   /**
-   * 伸缩组信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群ID
    */
-  GroupGlobalConf?: AutoScaleResourceConf
+  InstanceId: string
   /**
-   * 当前伸缩组扩容出来的节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 获取查询信息开始时间 (s)
    */
-  CurrentNodes?: number
+  StartTime: number
   /**
-   * 当前伸缩组扩容出来的后付费节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 获取查询信息结束时间 (s)
    */
-  CurrentPostPaidNodes?: number
+  EndTime: number
   /**
-   * 当前伸缩组扩容出来的竞价实例节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页查询时的分页大小，最小1，最大100
    */
-  CurrentSpotPaidNodes?: number
+  PageSize: number
+  /**
+   * 分页查询时的页号，从1开始
+   */
+  Page: number
 }
 
 /**
@@ -5856,6 +6228,16 @@ export interface PodNewSpec {
 }
 
 /**
+ * ModifyAutoRenewFlag返回参数结构体
+ */
+export interface ModifyAutoRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InquiryPriceUpdateInstance请求参数结构体
  */
 export interface InquiryPriceUpdateInstanceRequest {
@@ -6801,13 +7183,24 @@ export interface ZoneResourceConfiguration {
 }
 
 /**
- * SyncPodState请求参数结构体
+ * HDFS文件存储详情
  */
-export interface SyncPodStateRequest {
+export interface StorageSummaryDistribution {
   /**
-   * EmrService中pod状态信息
+   * 数据项
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: PodState
+  MetricItem?: string
+  /**
+   * 数据项描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricName?: string
+  /**
+   * 采样值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dps?: Array<Dps>
 }
 
 /**
@@ -6978,6 +7371,16 @@ export interface DescribeEmrOverviewMetricsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SyncPodState请求参数结构体
+ */
+export interface SyncPodStateRequest {
+  /**
+   * EmrService中pod状态信息
+   */
+  Message: PodState
 }
 
 /**
@@ -7538,6 +7941,32 @@ export interface InquiryPriceScaleOutInstanceRequest {
 }
 
 /**
+ * DescribeStarRocksQueryInfo请求参数结构体
+ */
+export interface DescribeStarRocksQueryInfoRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 获取查询信息开始时间 (s)
+   */
+  StartTime: number
+  /**
+   * 获取查询信息结束时间 (s)
+   */
+  EndTime: number
+  /**
+   * 分页查询时的分页大小，最小1，最大100
+   */
+  PageSize: number
+  /**
+   * 分页查询时的页号，从1开始
+   */
+  Page: number
+}
+
+/**
  * ModifySLInstance返回参数结构体
  */
 export interface ModifySLInstanceResponse {
@@ -7772,6 +8201,35 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
+}
+
+/**
+ * ResetYarnConfig返回参数结构体
+ */
+export interface ResetYarnConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStarRocksQueryInfo返回参数结构体
+ */
+export interface DescribeStarRocksQueryInfoResponse {
+  /**
+   * 总数，分页查询时使用
+   */
+  TotalCount?: number
+  /**
+   * Starrocks 查询信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StarRocksQueryInfoList?: Array<StarRocksQueryInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

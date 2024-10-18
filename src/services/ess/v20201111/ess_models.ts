@@ -397,7 +397,7 @@ export interface CreatePreparedPersonalEsignRequest {
    */
   Mobile?: string
   /**
-   * 是否开通自动签，该功能需联系运营工作人员开通后使用
+   * 此字段已废弃，请勿继续使用。
    */
   EnableAutoSign?: boolean
   /**
@@ -938,6 +938,7 @@ export interface ModifyExtendedServiceRequest {
 <ul>
 <li>WEIXINAPP : 短链直接跳转到电子签小程序  (默认值)</li>
 <li>APP : 第三方APP或小程序跳转电子签小程序</li>
+<li>WEIXIN_QRCODE_URL：直接跳转至电子签小程序的二维码链接，无需通过中转页。<font color="red">您需要自行将其转换为二维码，使用微信扫码后可直接进入。请注意，直接点击链接是无效的。</font></li>
 </ul>
    */
   Endpoint?: string

@@ -385,8 +385,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定时刻指标的最新值
-   */
+     * 查询指定时刻指标的最新值。
+如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
+     */
   async QueryMetric(
     req: QueryMetricRequest,
     cb?: (error: string, rep: QueryMetricResponse) => void

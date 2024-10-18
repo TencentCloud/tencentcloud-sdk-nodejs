@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTKEEdgeExternalKubeconfig", req, cb);
     }
     /**
+     * 修改集群标签
+     */
+    async ModifyClusterTags(req, cb) {
+        return this.request("ModifyClusterTags", req, cb);
+    }
+    /**
      * 创建日志采集配置
      */
     async CreateCLSLogConfig(req, cb) {
@@ -526,6 +532,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateImageCache", req, cb);
     }
     /**
+     * 查询批量修改标签状态
+     */
+    async DescribeBatchModifyTagsStatus(req, cb) {
+        return this.request("DescribeBatchModifyTagsStatus", req, cb);
+    }
+    /**
      * 获取容器服务支持的所有地域
      */
     async DescribeRegions(req, cb) {
@@ -586,10 +598,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeCVMInstances", req, cb);
     }
     /**
-     * 获取集群规模
+     * 用于查询Kubernetes的各个原生控制器是否开启
      */
-    async DescribeClusterLevelAttribute(req, cb) {
-        return this.request("DescribeClusterLevelAttribute", req, cb);
+    async DescribeClusterControllers(req, cb) {
+        return this.request("DescribeClusterControllers", req, cb);
     }
     /**
      * 获取一个addon的参数
@@ -910,10 +922,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusRecordRuleYaml", req, cb);
     }
     /**
-     * 用于查询Kubernetes的各个原生控制器是否开启
+     * 获取集群规模
      */
-    async DescribeClusterControllers(req, cb) {
-        return this.request("DescribeClusterControllers", req, cb);
+    async DescribeClusterLevelAttribute(req, cb) {
+        return this.request("DescribeClusterLevelAttribute", req, cb);
     }
     /**
      * 集群的密钥信息

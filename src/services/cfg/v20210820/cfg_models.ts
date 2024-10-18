@@ -1321,6 +1321,11 @@ export interface TaskReportInfo {
    * 归档时间
    */
   ArchiveTime?: string
+  /**
+   * 归档ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArchiveUuid?: string
 }
 
 /**
@@ -1854,6 +1859,11 @@ export interface ActionLibraryListResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNewAction?: boolean
+  /**
+   * 对象类型ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectTypeId?: number
 }
 
 /**
