@@ -4178,7 +4178,12 @@ export interface DescribePrometheusGlobalNotificationResponse {
 /**
  * DescribeBatchModifyTagsStatus请求参数结构体
  */
-export declare type DescribeBatchModifyTagsStatusRequest = null;
+export interface DescribeBatchModifyTagsStatusRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+}
 /**
  * Probe中的HttpGet
  */

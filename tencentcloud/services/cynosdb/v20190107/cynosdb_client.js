@@ -334,7 +334,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartInstance", req, cb);
     }
     /**
-     * 升级数据库代理配置
+     * 本接口（UpgradeProxy）用于升级数据库代理配置。
      */
     async UpgradeProxy(req, cb) {
         return this.request("UpgradeProxy", req, cb);

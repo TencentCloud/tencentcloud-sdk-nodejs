@@ -212,7 +212,7 @@ export declare class Client extends AbstractClient {
      */
     RestartInstance(req: RestartInstanceRequest, cb?: (error: string, rep: RestartInstanceResponse) => void): Promise<RestartInstanceResponse>;
     /**
-     * 升级数据库代理配置
+     * 本接口（UpgradeProxy）用于升级数据库代理配置。
      */
     UpgradeProxy(req: UpgradeProxyRequest, cb?: (error: string, rep: UpgradeProxyResponse) => void): Promise<UpgradeProxyResponse>;
     /**

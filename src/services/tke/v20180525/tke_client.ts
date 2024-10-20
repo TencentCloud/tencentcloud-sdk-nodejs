@@ -1504,7 +1504,7 @@ export class Client extends AbstractClient {
    * 查询批量修改标签状态
    */
   async DescribeBatchModifyTagsStatus(
-    req?: DescribeBatchModifyTagsStatusRequest,
+    req: DescribeBatchModifyTagsStatusRequest,
     cb?: (error: string, rep: DescribeBatchModifyTagsStatusResponse) => void
   ): Promise<DescribeBatchModifyTagsStatusResponse> {
     return this.request("DescribeBatchModifyTagsStatus", req, cb)

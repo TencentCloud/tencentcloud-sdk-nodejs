@@ -2008,6 +2008,9 @@ export interface CreateAICallRequest {
     SystemPrompt: string;
     /**
      * LLM类型
+  目前有两种
+  openai(兼容openai协议的模型)
+  azure
      */
     LLMType: string;
     /**
@@ -2019,7 +2022,8 @@ export interface CreateAICallRequest {
      */
     APIKey: string;
     /**
-     * API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions
+     * API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；
+  llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮你填充后缀
      */
     APIUrl: string;
     /**

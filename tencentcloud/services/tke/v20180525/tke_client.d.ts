@@ -346,7 +346,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询批量修改标签状态
      */
-    DescribeBatchModifyTagsStatus(req?: DescribeBatchModifyTagsStatusRequest, cb?: (error: string, rep: DescribeBatchModifyTagsStatusResponse) => void): Promise<DescribeBatchModifyTagsStatusResponse>;
+    DescribeBatchModifyTagsStatus(req: DescribeBatchModifyTagsStatusRequest, cb?: (error: string, rep: DescribeBatchModifyTagsStatusResponse) => void): Promise<DescribeBatchModifyTagsStatusResponse>;
     /**
      * 获取容器服务支持的所有地域
      */

@@ -6223,7 +6223,7 @@ export interface ChannelOrganizationInfo {
  */
 export interface CreateSignUrlsResponse {
   /**
-   * 签署参与者签署H5链接信息数组
+   * 生成的签署参与者的签署链接信息数组。
    */
   SignUrlInfos?: Array<SignUrlInfo>
   /**
