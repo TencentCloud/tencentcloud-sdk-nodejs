@@ -738,6 +738,16 @@ it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
     }
 })
 
+it("tdmq.v20200217.CreateRabbitMQBinding", async function () {
+    try {
+       const data = await client.CreateRabbitMQBinding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeMsgTrace", async function () {
     try {
        const data = await client.DescribeMsgTrace({})

@@ -102,7 +102,9 @@ export interface AuthorizationPolicyItem {
    */
   Qos?: string
   /**
-   * 1、2、3
+   * 1：表示匹配retain消息
+2：表示匹配非retain消息
+3：表示匹配retain和非retain消息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Retain?: number
@@ -916,7 +918,7 @@ export interface DescribeInstanceRequest {
  */
 export interface MQTTAuthenticatorItem {
   /**
-   * 认证器类型
+   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 BYOC：一端一证认证器
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string

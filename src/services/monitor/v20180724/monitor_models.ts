@@ -6916,6 +6916,10 @@ export interface DescribeAlarmHistoriesRequest {
    * 收敛历史的唯一id
    */
   ConvergenceHistoryIDs?: Array<string>
+  /**
+   * 告警类型
+   */
+  AlarmTypes?: Array<string>
 }
 
 /**
@@ -7884,6 +7888,11 @@ export interface AlarmHistory {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName?: string
+  /**
+   * 策略是否有权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyPermissions?: number
 }
 
 /**

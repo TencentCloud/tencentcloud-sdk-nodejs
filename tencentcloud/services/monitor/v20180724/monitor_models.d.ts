@@ -6614,6 +6614,10 @@ export interface DescribeAlarmHistoriesRequest {
      * 收敛历史的唯一id
      */
     ConvergenceHistoryIDs?: Array<string>;
+    /**
+     * 告警类型
+     */
+    AlarmTypes?: Array<string>;
 }
 /**
  * DeletePolicyGroup请求参数结构体
@@ -7550,6 +7554,11 @@ export interface AlarmHistory {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MetricName?: string;
+    /**
+     * 策略是否有权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyPermissions?: number;
 }
 /**
  * 与腾讯云可观测平台融合托管 Prometheus 实例，关联集群基础信息

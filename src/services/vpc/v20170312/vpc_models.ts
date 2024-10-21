@@ -1710,13 +1710,13 @@ export interface CreateVpnGatewaySslServerRequest {
    */
   SslVpnServerName: string
   /**
-   * 云端地址（CIDR）列表。
-   */
-  LocalAddress: Array<string>
-  /**
    * 客户端地址网段。
    */
   RemoteAddress: string
+  /**
+   * 云端地址（CIDR）列表。
+   */
+  LocalAddress?: Array<string>
   /**
    * SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。
    */

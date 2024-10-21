@@ -3274,7 +3274,12 @@ export interface DescribeSupportProxyVersionRequest {
 /**
  * DescribeProxySpecs请求参数结构体
  */
-export type DescribeProxySpecsRequest = null
+export interface DescribeProxySpecsRequest {
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+}
 
 /**
  * ResumeServerless请求参数结构体

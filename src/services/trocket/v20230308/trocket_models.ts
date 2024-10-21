@@ -129,7 +129,7 @@ export interface DeleteMQTTTopicRequest {
  */
 export interface CreateInstanceResponse {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId?: string
   /**
@@ -194,6 +194,21 @@ Failure 失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImportStatus?: string
+  /**
+   * 4.x的命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceV4?: string
+  /**
+   * 4.x的主题名，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNameV4?: string
+  /**
+   * 4.x的完整命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullNamespaceV4?: string
 }
 
 /**
@@ -497,11 +512,11 @@ export interface ImportSourceClusterConsumerGroupsResponse {
  */
 export interface DeleteTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
 }
@@ -511,7 +526,7 @@ export interface DeleteTopicRequest {
  */
 export interface ModifyMQTTInstanceRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -584,17 +599,17 @@ export interface DescribeMQTTProductSKUListResponse {
  */
 export interface DescribeRoleListRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
    * 查询起始位置
    */
-  Offset: number
+  Offset?: number
   /**
    * 查询结果限制数量
    */
-  Limit: number
+  Limit?: number
   /**
    * 查询条件列表
    */
@@ -707,7 +722,7 @@ export interface ImportSourceClusterConsumerGroupsRequest {
  */
 export interface DescribeConsumerLagRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -812,10 +827,8 @@ export interface MQTTInstanceItem {
   Version?: string
   /**
    * 实例类型，
-EXPERIMENT，体验版
 BASIC，基础版
 PRO，专业版
-PLATINUM，铂金版
    */
   InstanceType?: string
   /**
@@ -905,13 +918,9 @@ export interface ModifyInstanceResponse {
  */
 export interface CreateConsumerGroupRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
-  /**
-   * 消费组名称
-   */
-  ConsumerGroup: string
   /**
    * 最大重试次数
    */
@@ -925,6 +934,10 @@ export interface CreateConsumerGroupRequest {
 并发投递：false
    */
   ConsumeMessageOrderly: boolean
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
   /**
    * 备注
    */
@@ -1072,7 +1085,7 @@ export interface DescribeInstanceListRequest {
  */
 export interface DeleteMQTTUserRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1122,7 +1135,7 @@ export interface CreateMQTTTopicResponse {
  */
 export interface DescribeMQTTInstanceRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
 }
@@ -1227,7 +1240,7 @@ export interface DeleteMQTTInsPublicEndpointResponse {
  */
 export interface DeleteInstanceRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
 }
@@ -1237,7 +1250,7 @@ export interface DeleteInstanceRequest {
  */
 export interface ModifyRoleRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1292,11 +1305,11 @@ export interface DescribeFusionInstanceListResponse {
  */
 export interface CreateTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -1327,7 +1340,7 @@ TRANSACTION:事务消息
  */
 export interface DeleteRoleRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1427,13 +1440,13 @@ export interface TagFilter {
  */
 export interface DeleteConsumerGroupRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
    * 消费组名称
    */
-  ConsumerGroup: string
+  ConsumerGroup?: string
 }
 
 /**
@@ -1441,11 +1454,11 @@ export interface DeleteConsumerGroupRequest {
  */
 export interface CreateConsumerGroupResponse {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId?: string
   /**
-   * 消费组
+   * 消费组名称
    */
   ConsumerGroup?: string
   /**
@@ -1537,7 +1550,7 @@ export interface MQTTUserItem {
  */
 export interface ModifyMQTTInsPublicEndpointRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1681,11 +1694,11 @@ export interface DeleteMQTTInstanceResponse {
  */
 export interface DescribeTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -1717,11 +1730,11 @@ export interface DeleteMQTTInstanceRequest {
  */
 export interface CreateTopicResponse {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId?: string
   /**
-   * 主题
+   * 主题名
    */
   Topic?: string
   /**
@@ -1747,7 +1760,7 @@ export interface DescribeMQTTInstanceListRequest {
    */
   Limit?: number
   /**
-   * 是否包含新控制台集群
+   * 是否包含新控制台集群：默认为包含
    */
   IncludeNew?: boolean
 }
@@ -1894,7 +1907,7 @@ export interface ImportSourceClusterTopicsResponse {
  */
 export interface DescribeTopicListRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1916,7 +1929,7 @@ export interface DescribeTopicListRequest {
  */
 export interface ModifyConsumerGroupRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1947,7 +1960,7 @@ export interface ModifyConsumerGroupRequest {
  */
 export interface DescribeConsumerGroupRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -1961,21 +1974,21 @@ export interface DescribeConsumerGroupRequest {
  */
 export interface DescribeConsumerGroupListRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
-  /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
   /**
    * 查询条件列表
    */
   Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
   /**
    * 查询指定主题下的消费组
    */
@@ -1996,6 +2009,10 @@ export interface TopicItem {
   Topic?: string
   /**
    * 主题类型
+NORMAL:普通消息,
+FIFO:顺序消息,
+DELAY:延时消息,
+TRANSACTION:事务消息
    */
   TopicType?: string
   /**
@@ -2004,7 +2021,6 @@ export interface TopicItem {
   QueueNum?: number
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -2229,6 +2245,12 @@ export interface DescribeConsumerGroupResponse {
    */
   Remark?: string
   /**
+   * 消费模式：
+BROADCASTING 广播模式
+CLUSTERING 集群模式
+   */
+  MessageModel?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2263,7 +2285,7 @@ export interface DescribeConsumerLagResponse {
  */
 export interface DescribeMQTTInsPublicEndpointsRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
 }
@@ -2343,11 +2365,11 @@ export interface MQTTClientSubscription {
  */
 export interface ModifyTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -2549,7 +2571,7 @@ export interface ModifyConsumerGroupResponse {
  */
 export interface DescribeMQTTInstanceCertRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
 }
@@ -2569,7 +2591,7 @@ export interface ModifyMQTTInsPublicEndpointResponse {
  */
 export interface CreateMQTTUserRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -2601,11 +2623,11 @@ export interface DescribeFusionInstanceListRequest {
   /**
    * 查询起始位置
    */
-  Offset: number
+  Offset?: number
   /**
    * 查询结果限制数量
    */
-  Limit: number
+  Limit?: number
   /**
    * 查询条件列表
    */
@@ -2621,11 +2643,11 @@ export interface DescribeFusionInstanceListRequest {
  */
 export interface DescribeMQTTMessageRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -2772,28 +2794,7 @@ PLATINUM 铂金版
   Name: string
   /**
    * 商品规格，可用规格如下：
-experiment_500,
 basic_1k,
-basic_2k,
-basic_4k,
-basic_6k,
-pro_4k,
-pro_6k,
-pro_1w,
-pro_2w,
-pro_3w,
-pro_4w,
-pro_5w,
-platinum_6k,
-platinum_1w,
-platinum_2w,
-platinum_4w,
-platinum_10w,
-platinum_15w,
-platinum_20w,
-platinum_40w,
-platinum_60w,
-platinum_100w
    */
   SkuCode: string
   /**
@@ -2868,7 +2869,7 @@ export interface DescribeMQTTTopicRequest {
  */
 export interface CreateRoleRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -2949,6 +2950,11 @@ POSTPAID 按量付费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpRules?: Array<IpRule>
+  /**
+   * 公网是否按流量计费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingFlow?: boolean
 }
 
 /**
@@ -2956,11 +2962,11 @@ POSTPAID 按量付费
  */
 export interface ModifyMQTTTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -3011,7 +3017,15 @@ export interface RoleItem {
   /**
    * 角色名称
    */
-  RoleName?: string
+  RoleName: string
+  /**
+   * 是否开启消费
+   */
+  PermRead: boolean
+  /**
+   * 是否开启生产
+   */
+  PermWrite: boolean
   /**
    * Access Key
    */
@@ -3020,14 +3034,6 @@ export interface RoleItem {
    * Secret Key
    */
   SecretKey?: string
-  /**
-   * 是否开启消费
-   */
-  PermRead?: boolean
-  /**
-   * 是否开启生产
-   */
-  PermWrite?: boolean
   /**
    * 备注信息
    */
@@ -3085,7 +3091,7 @@ export interface DescribeConsumerGroupListResponse {
  */
 export interface ModifyMQTTUserRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
@@ -3129,11 +3135,11 @@ export interface CreateMQTTInsPublicEndpointRequest {
  */
 export interface CreateMQTTTopicRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 主题
+   * 主题名称
    */
   Topic: string
   /**
@@ -3208,7 +3214,7 @@ export interface DescribeMQTTTopicResponse {
  */
 export interface DescribeInstanceRequest {
   /**
-   * 实例ID
+   * 集群ID
    */
   InstanceId: string
 }

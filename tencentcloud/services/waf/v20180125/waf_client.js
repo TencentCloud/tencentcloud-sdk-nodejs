@@ -186,10 +186,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserDomainInfo", req, cb);
     }
     /**
-     * Waf  CC V2 Delete接口
+     * 查询Tiga引擎大类规则及其防护模式
      */
-    async DeleteCCRule(req, cb) {
-        return this.request("DeleteCCRule", req, cb);
+    async DescribeProtectionModes(req, cb) {
+        return this.request("DescribeProtectionModes", req, cb);
     }
     /**
      * 取得信息防泄漏规则列表
@@ -831,6 +831,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCCRuleList(req, cb) {
         return this.request("DescribeCCRuleList", req, cb);
+    }
+    /**
+     * Waf  CC V2 Delete接口
+     */
+    async DeleteCCRule(req, cb) {
+        return this.request("DeleteCCRule", req, cb);
     }
     /**
      * clb-waf中添加防护域名

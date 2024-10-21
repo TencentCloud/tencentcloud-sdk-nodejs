@@ -204,7 +204,7 @@ export interface PullSmsSendStatusByPhoneNumberRequest {
      */
     Limit: number;
     /**
-     * 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
     PhoneNumber: string;
     /**
@@ -283,31 +283,31 @@ export interface PullSmsReplyStatus {
     /**
      * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773)。
      */
-    ExtendCode: string;
+    ExtendCode?: string;
     /**
      * 国家（或地区）码。
      */
-    NationCode: string;
+    NationCode?: string;
     /**
-     * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
-    PhoneNumber: string;
+    PhoneNumber?: string;
     /**
      * 短信签名。
      */
-    Sign: string;
+    Sign?: string;
     /**
      * 用户回复的内容。
      */
-    ReplyContent: string;
+    ReplyContent?: string;
     /**
      * 回复时间（例如：2019-10-08 17:18:37）。
      */
-    ReplyTime: string;
+    ReplyTime?: string;
     /**
      * 回复时间，UNIX 时间戳（单位：秒）。
      */
-    ReplyUnixTime: number;
+    ReplyUnixTime?: number;
 }
 /**
  * CallbackStatusStatistics返回参数结构体
@@ -468,8 +468,8 @@ export interface SendStatusStatisticsResponse {
  */
 export interface SendSmsRequest {
     /**
-     * 下发手机号码，采用 e.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。
-  例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。
+  例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
     PhoneNumberSet: Array<string>;
     /**
@@ -643,35 +643,35 @@ export interface PullSmsSendStatus {
     /**
      * 用户实际接收到短信的时间。
      */
-    UserReceiveTime: string;
+    UserReceiveTime?: string;
     /**
      * 用户实际接收到短信的时间，UNIX 时间戳（单位：秒）。
      */
-    UserReceiveUnixTime: number;
+    UserReceiveUnixTime?: number;
     /**
      * 国家（或地区）码。
      */
-    NationCode: string;
+    NationCode?: string;
     /**
-     * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
-    PurePhoneNumber: string;
+    PurePhoneNumber?: string;
     /**
-     * 手机号码，普通格式，示例如：13711112222。
+     * 手机号码，普通格式，示例如：18501234444。
      */
-    PhoneNumber: string;
+    PhoneNumber?: string;
     /**
      * 本次发送标识 ID。
      */
-    SerialNo: string;
+    SerialNo?: string;
     /**
      * 实际是否收到短信接收状态，SUCCESS（成功）、FAIL（失败）。
      */
-    ReportStatus: string;
+    ReportStatus?: string;
     /**
      * 用户接收短信状态描述。
      */
-    Description: string;
+    Description?: string;
 }
 /**
  * DescribeSmsSignList返回参数结构体
@@ -799,31 +799,31 @@ export interface SendStatus {
     /**
      * 发送流水号。
      */
-    SerialNo: string;
+    SerialNo?: string;
     /**
-     * 手机号码,e.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
-    PhoneNumber: string;
+    PhoneNumber?: string;
     /**
      * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
      */
-    Fee: number;
+    Fee?: number;
     /**
      * 用户Session内容。
      */
-    SessionContext: string;
+    SessionContext?: string;
     /**
      * 短信请求错误码，具体含义请参考错误码。
      */
-    Code: string;
+    Code?: string;
     /**
      * 短信请求错误码描述。
      */
-    Message: string;
+    Message?: string;
     /**
      * 国家码或地区码，例如CN,US等，对于未识别出国家码或者地区码，默认返回DEF,具体支持列表请参考国际/港澳台计费总览。
      */
-    IsoCode: string;
+    IsoCode?: string;
 }
 /**
  * DeleteSmsSign返回参数结构体
@@ -879,7 +879,7 @@ export interface PullSmsReplyStatusByPhoneNumberRequest {
      */
     Limit: number;
     /**
-     * 下发目的手机号码，依据 e.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+     * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
      */
     PhoneNumber: string;
     /**
@@ -958,12 +958,10 @@ export interface SmsPackagesStatisticsResponse {
 export interface DeleteSignStatus {
     /**
      * 删除状态信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteStatus: string;
     /**
      * 删除时间，UNIX 时间戳（单位：秒）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteTime: number;
 }

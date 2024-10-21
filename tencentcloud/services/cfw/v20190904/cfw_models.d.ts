@@ -715,7 +715,7 @@ export interface DescribeTLogInfoRequest {
  */
 export interface BlockIgnoreRule {
     /**
-     * 1 封禁 2外部IP 3域名 4情报 5assets 6udf  7入侵防御规则id （2-7属于白名单类型）
+     * 规则类型，取值：1 封禁，2外部IP，3域名，4情报，5assets，6自定义策略，7入侵防御规则id （2-7属于白名单类型）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleType?: number;
@@ -2740,7 +2740,7 @@ export interface DescribeFwGroupInstanceInfoRequest {
  */
 export interface ModifyBlockIgnoreRuleRequest {
     /**
-     * 规则
+     * 规则列表
      */
     Rule: IntrusionDefenseRule;
     /**
@@ -2945,13 +2945,13 @@ export interface IntrusionDefenseRule {
      */
     Domain?: string;
     /**
-     * 备注信息，长度不能超过50
-     */
-    Comment?: string;
-    /**
      * 规则开始时间
      */
     StartTime?: string;
+    /**
+     * 备注信息，长度不能超过50
+     */
+    Comment?: string;
 }
 /**
  * DescribeTLogIpList请求参数结构体
@@ -4582,11 +4582,11 @@ export interface DescribeAddressTemplateListRequest {
      */
     Limit?: number;
     /**
-     * 排序字段，取值 'UpdateTime' | 'RulesNum'
+     * 排序字段，取值：UpdateTime最近更新时间，RulesNum关联规则数
      */
     By?: string;
     /**
-     * 排序，取值 'asc'|'desc'
+     * 排序，取值 ：asc正序，desc逆序
      */
     Order?: string;
     /**
@@ -4598,7 +4598,7 @@ export interface DescribeAddressTemplateListRequest {
      */
     Uuid?: string;
     /**
-     * 1：ip模板，5：域名模板，6：协议端口模板
+     * 模板类型，取值：1：ip模板，5：域名模板，6：协议端口模板
      */
     TemplateType?: string;
     /**
@@ -4663,6 +4663,18 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
     SourceId?: string;
     /**
      * 源规则类型
+  取值范围 0/1/2/3/4/5/6/7/8/9/100
+  0表示ip(net),
+  1表示VPC实例(intance)
+  2表示子网实例(intance)
+  3表示CVM实例(intance)
+  4表示CLB实例(intance)
+  5表示ENI实例(intance)
+  6表示数据库实例(intance)
+  7表示模版(template)
+  8表示标签(tag)
+  9表示地域(region)
+  100表示资产分组(resourcegroup)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceType?: number;
@@ -4673,11 +4685,26 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
     TargetId?: string;
     /**
      * 目的规则类型
+  取值范围 0/1/2/3/4/5/6/7/8/9/100
+  0表示ip(net),
+  1表示VPC实例(intance)
+  2表示子网实例(intance)
+  3表示CVM实例(intance)
+  4表示CLB实例(intance)
+  5表示ENI实例(intance)
+  6表示数据库实例(intance)
+  7表示模版(template)
+  8表示标签(tag)
+  9表示地域(region)
+  100表示资产分组(resourcegroup)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetType?: number;
     /**
      * 协议名称
+  取值范围:TCP/ANY/ICMP/UDP
+  ANY:表示所有
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
@@ -4687,12 +4714,18 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
      */
     Port?: string;
     /**
-     * 策略，1阻断，2放行
+     * 规则策略
+  取值范围:1/2
+  1:阻断
+  2:放行
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Strategy?: number;
     /**
-     * 启用状态 ，0未开启，1开启
+     * 规则启用状态
+  取值范围： 0/1
+  0:未开启
+  1:开启
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
@@ -4707,7 +4740,10 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
      */
     AclTags?: string;
     /**
-     * 是否最新一次改动的规则,0否，1是
+     * 规则最新一次是否有改动
+  取值范围：0/1
+  0:否
+  1:是
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNew?: number;
@@ -4717,7 +4753,9 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
      */
     Region?: string;
     /**
-     * 是否延迟下发
+     * 是否延迟下发规则
+  取值范围：0/1
+  0:立即下发 1:延迟下发
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDelay?: number;
@@ -4782,12 +4820,12 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
      */
     ProtocolPortName?: string;
     /**
-     * 自动化任务任务信息
+     * 自动化任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BetaList?: Array<EnterpriseSecurityGroupRuleBetaInfo>;
     /**
-     * 规则id
+     * 规则id  等同RuleUuid
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
@@ -5550,6 +5588,11 @@ export interface TemplateListInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IPNum?: number;
+    /**
+     * IP版本,0,IPv4;1,IPv6
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpVersion?: number;
 }
 /**
  * VPC防火墙接入的网络实例类型及数量
@@ -6848,7 +6891,11 @@ export interface DescribeEnterpriseSecurityGroupRuleListResponse {
      */
     Data?: Array<EnterpriseSecurityGroupRuleRuleInfo>;
     /**
-     * 规则整体启用状态
+     * 规则列表整体启用状态
+  取值范围 0/1/2
+  0.表示没有启用的(可以批量启用)
+  1.表示没有禁用的(可以批量禁用)
+  2 表示混合情况（不可批量操作）
      */
     Enable?: number;
     /**

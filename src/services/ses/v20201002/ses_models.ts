@@ -524,27 +524,22 @@ export interface GetStatisticsReportRequest {
 export interface CreateCustomBlacklistResponse {
   /**
    * 收件人总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 实际上传数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidCount?: number
   /**
    * 数据过长数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TooLongCount?: number
   /**
    * 重复数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepeatCount?: number
   /**
    * 格式不正确数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvalidCount?: number
   /**
@@ -1277,27 +1272,22 @@ export interface DeleteEmailAddressRequest {
 export interface BlackAddressDetail {
   /**
    * 黑名单地址id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * 邮箱地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireDate?: string
   /**
    * 黑名单状态，0:已过期，1:生效中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
 }

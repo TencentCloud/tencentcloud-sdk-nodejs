@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResumeServerless", req, cb);
     }
     /**
-     * 升级数据库代理版本
+     * 本接口（UpgradeProxyVersion）用于升级数据库代理版本。
      */
     async UpgradeProxyVersion(req, cb) {
         return this.request("UpgradeProxyVersion", req, cb);
@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBinlogConfig", req, cb);
     }
     /**
-     * 创建数据库代理连接点
+     * 本接口（CreateProxyEndPoint）用于创建数据库代理连接点。
      */
     async CreateProxyEndPoint(req, cb) {
         return this.request("CreateProxyEndPoint", req, cb);
@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditRuleTemplate", req, cb);
     }
     /**
-     * 批量授权账号权限
+     * 本接口（GrantAccountPrivileges）用于批量授权账号权限。
      */
     async GrantAccountPrivileges(req, cb) {
         return this.request("GrantAccountPrivileges", req, cb);
@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseAuditService", req, cb);
     }
     /**
-     * 查询支持的数据库代理版本
+     * 本接口（DescribeSupportProxyVersion）用于查询支持的数据库代理版本。
      */
     async DescribeSupportProxyVersion(req, cb) {
         return this.request("DescribeSupportProxyVersion", req, cb);
@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceModify", req, cb);
     }
     /**
-     * 本接口(SwitchProxyVpc)更换数据库代理vpc
+     * 本接口（SwitchProxyVpc）用于更换数据库代理vpc。
      */
     async SwitchProxyVpc(req, cb) {
         return this.request("SwitchProxyVpc", req, cb);
@@ -166,13 +166,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogDownloadUrl", req, cb);
     }
     /**
-     * 查询订单关联实例
+     * 本接口（DescribeResourcesByDealName）用于查询订单关联实例。
      */
     async DescribeResourcesByDealName(req, cb) {
         return this.request("DescribeResourcesByDealName", req, cb);
     }
     /**
-     * 调整包年包月存储容量
+     * 本接口（ModifyClusterStorage）用于调整包年包月存储容量。
      */
     async ModifyClusterStorage(req, cb) {
         return this.request("ModifyClusterStorage", req, cb);
@@ -214,7 +214,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeChangedParamsAfterUpgrade", req, cb);
     }
     /**
-     * 查询账号已有权限
+     * 本接口（DescribeAccountPrivileges）用于查询账号已有权限。
      */
     async DescribeAccountPrivileges(req, cb) {
         return this.request("DescribeAccountPrivileges", req, cb);
@@ -226,7 +226,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseClusterPasswordComplexity", req, cb);
     }
     /**
-     * 本接口（RollBackCluster）用于集群回档
+     * 本接口（RollBackCluster）用于集群回档。
      */
     async RollBackCluster(req, cb) {
         return this.request("RollBackCluster", req, cb);
@@ -250,7 +250,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIsolatedInstances", req, cb);
     }
     /**
-     * 查询实例错误日志列表
+     * 本接口（DescribeInstanceErrorLogs）用于查询实例错误日志列表。
      */
     async DescribeInstanceErrorLogs(req, cb) {
         return this.request("DescribeInstanceErrorLogs", req, cb);
@@ -262,31 +262,31 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterName", req, cb);
     }
     /**
-     * 配置数据库代理读写分离
+     * 本接口（ModifyProxyRwSplit）用于配置数据库代理读写分离。
      */
     async ModifyProxyRwSplit(req, cb) {
         return this.request("ModifyProxyRwSplit", req, cb);
     }
     /**
-     * 修改实例组ip，端口
+     * 本接口（ModifyVipVport）用于修改实例组ip，端口。
      */
     async ModifyVipVport(req, cb) {
         return this.request("ModifyVipVport", req, cb);
     }
     /**
-     * 删除审计规则模板
+     * 本接口（DeleteAuditRuleTemplates）用于删除审计规则模板。
      */
     async DeleteAuditRuleTemplates(req, cb) {
         return this.request("DeleteAuditRuleTemplates", req, cb);
     }
     /**
-     * 修改数据库代理描述
+     * 本接口（ModifyProxyDesc）用于修改数据库代理描述。
      */
     async ModifyProxyDesc(req, cb) {
         return this.request("ModifyProxyDesc", req, cb);
     }
     /**
-     * 本接口（CreateParamTemplate）用于创建参数模板
+     * 本接口（CreateParamTemplate）用于创建参数模板。
      */
     async CreateParamTemplate(req, cb) {
         return this.request("CreateParamTemplate", req, cb);
@@ -298,7 +298,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterSlaveZone", req, cb);
     }
     /**
-     * 修改账号配置
+     * 本接口（ModifyAccountParams）用于修改账号配置。
      */
     async ModifyAccountParams(req, cb) {
         return this.request("ModifyAccountParams", req, cb);
@@ -310,13 +310,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterPasswordComplexity", req, cb);
     }
     /**
-     * 为集群创建手动备份
+     * 本接口（CreateBackup）用于为集群创建手动备份。
      */
     async CreateBackup(req, cb) {
         return this.request("CreateBackup", req, cb);
     }
     /**
-     * 销毁实例
+     * 本接口（OfflineInstance）用于销毁实例。
      */
     async OfflineInstance(req, cb) {
         return this.request("OfflineInstance", req, cb);
@@ -328,7 +328,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateCluster", req, cb);
     }
     /**
-     * 重启实例
+     * 本接口（RestartInstance）用于重启实例。
      */
     async RestartInstance(req, cb) {
         return this.request("RestartInstance", req, cb);
@@ -376,7 +376,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourcePackagesDeductionPriority", req, cb);
     }
     /**
-     * 该接口(DescribeInstanceParams)查询实例参数列表
+     * 本接口（DescribeInstanceParams）用于查询实例参数列表。
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterDatabases", req, cb);
     }
     /**
-     * 修改集群参数
+     * 本接口（ModifyClusterParam）用于修改集群参数。
      */
     async ModifyClusterParam(req, cb) {
         return this.request("ModifyClusterParam", req, cb);
@@ -406,7 +406,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusters", req, cb);
     }
     /**
-     * 创建用户账号
+     * 本接口（CreateAccounts）用于创建用户账号。
      */
     async CreateAccounts(req, cb) {
         return this.request("CreateAccounts", req, cb);
@@ -460,7 +460,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceUpgradeLimitDays", req, cb);
     }
     /**
-     * 删除用户账号
+     * 本接口（DeleteAccounts）用于删除用户账号。
      */
     async DeleteAccounts(req, cb) {
         return this.request("DeleteAccounts", req, cb);
@@ -478,13 +478,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb);
     }
     /**
-     * 本接口(SearchClusterTables)搜索集群数据表列表
+     * 本接口（SearchClusterTables）用于搜索集群数据表列表。
      */
     async SearchClusterTables(req, cb) {
         return this.request("SearchClusterTables", req, cb);
     }
     /**
-     * 查询用户指定产品下的所有参数模板信息
+     * 本接口（DescribeParamTemplates）用于查询用户指定产品下的所有参数模板信息。
      */
     async DescribeParamTemplates(req, cb) {
         return this.request("DescribeParamTemplates", req, cb);
@@ -508,13 +508,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PauseServerless", req, cb);
     }
     /**
-     * 修改账号主机
+     * 本接口（ModifyAccountHost）用于修改账号主机。
      */
     async ModifyAccountHost(req, cb) {
         return this.request("ModifyAccountHost", req, cb);
     }
     /**
-     * 本接口(ResetAccountPassword)用于修改数据库账号密码
+     * 本接口（ResetAccountPassword）用于修改数据库账号密码。
      */
     async ResetAccountPassword(req, cb) {
         return this.request("ResetAccountPassword", req, cb);
@@ -574,7 +574,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindClusterResourcePackages", req, cb);
     }
     /**
-     * 查询数据库代理列表
+     * 本接口（DescribeProxies）用于查询数据库代理列表。
      */
     async DescribeProxies(req, cb) {
         return this.request("DescribeProxies", req, cb);
@@ -610,7 +610,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcePackageSaleSpec", req, cb);
     }
     /**
-     * 修改账号库表权限
+     * 本接口（ModifyAccountPrivileges）用于修改账号库表权限。
      */
     async ModifyAccountPrivileges(req, cb) {
         return this.request("ModifyAccountPrivileges", req, cb);
@@ -646,13 +646,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 本接口（SetRenewFlag）用于设置实例的自动续费功能。
      */
     async SetRenewFlag(req, cb) {
         return this.request("SetRenewFlag", req, cb);
     }
     /**
-     * 查询续费集群价格
+     * 本接口（InquirePriceRenew）用于查询续费集群价格。
      */
     async InquirePriceRenew(req, cb) {
         return this.request("InquirePriceRenew", req, cb);
@@ -664,7 +664,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartCLSDelivery", req, cb);
     }
     /**
-     * 负载均衡数据库代理
+     * 本接口（ReloadBalanceProxyNode）用于负载均衡数据库代理。
      */
     async ReloadBalanceProxyNode(req, cb) {
         return this.request("ReloadBalanceProxyNode", req, cb);
@@ -706,7 +706,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyServerlessStrategy", req, cb);
     }
     /**
-     * 创建数据库
+     * 本接口（CreateClusterDatabase）用于创建数据库。
      */
     async CreateClusterDatabase(req, cb) {
         return this.request("CreateClusterDatabase", req, cb);
@@ -724,7 +724,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuditLogFile", req, cb);
     }
     /**
-     * 查询审计规则模板信息
+     * 本接口（DescribeAuditRuleTemplates）用于查询审计规则模板信息。
      */
     async DescribeAuditRuleTemplates(req, cb) {
         return this.request("DescribeAuditRuleTemplates", req, cb);
@@ -760,7 +760,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcePackageList", req, cb);
     }
     /**
-     * 本接口（DescribeClusterParams）用于查询集群参数
+     * 本接口（DescribeClusterParams）用于查询集群参数。
      */
     async DescribeClusterParams(req, cb) {
         return this.request("DescribeClusterParams", req, cb);
@@ -814,7 +814,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadUrl", req, cb);
     }
     /**
-     * 更换集群vpc
+     * 本接口（SwitchClusterVpc）用于更换集群vpc。
      */
     async SwitchClusterVpc(req, cb) {
         return this.request("SwitchClusterVpc", req, cb);
@@ -856,7 +856,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenReadOnlyInstanceExclusiveAccess", req, cb);
     }
     /**
-     * 本接口（DescribeClusterPasswordComplexity）用于查看集群密码复杂度详情
+     * 本接口（DescribeClusterPasswordComplexity）用于查看集群密码复杂度详情。
      */
     async DescribeClusterPasswordComplexity(req, cb) {
         return this.request("DescribeClusterPasswordComplexity", req, cb);
@@ -886,7 +886,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGroups", req, cb);
     }
     /**
-     * 查询实例安全组信息
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息。
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);
@@ -910,7 +910,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveClusterSlaveZone", req, cb);
     }
     /**
-     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情
+     * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情。
      */
     async DescribeParamTemplateDetail(req, cb) {
         return this.request("DescribeParamTemplateDetail", req, cb);

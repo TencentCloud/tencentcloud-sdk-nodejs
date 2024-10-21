@@ -1938,9 +1938,9 @@ it("wedata.v20210820.DescribeIntegrationVersionNodesInfo", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskAlarmRegular", async function () {
+it("wedata.v20210820.DescribeProjectUsers", async function () {
     try {
-       const data = await client.ModifyTaskAlarmRegular({})
+       const data = await client.DescribeProjectUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2131,6 +2131,16 @@ it("wedata.v20210820.DescribeDatabaseMetas", async function () {
 it("wedata.v20210820.CreateTaskFolder", async function () {
     try {
        const data = await client.CreateTaskFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyTaskAlarmRegular", async function () {
+    try {
+       const data = await client.ModifyTaskAlarmRegular({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -258,7 +258,7 @@ export interface DescribeSmsTemplateListResponse {
 export interface DescribePhoneNumberInfoRequest {
   /**
    * 查询手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号。
-例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
   PhoneNumberSet: Array<string>
 }
@@ -282,7 +282,7 @@ export interface PullSmsSendStatusByPhoneNumberRequest {
    */
   Limit: number
   /**
-   * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+   * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
   PhoneNumber: string
   /**
@@ -379,31 +379,31 @@ export interface PullSmsReplyStatus {
   /**
    * 短信码号扩展号，默认未开通，如需开通请联系 [sms helper](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81)。
    */
-  ExtendCode: string
+  ExtendCode?: string
   /**
    * 国家（或地区）码。
    */
-  CountryCode: string
+  CountryCode?: string
   /**
-   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
-  PhoneNumber: string
+  PhoneNumber?: string
   /**
    * 短信签名名称。
    */
-  SignName: string
+  SignName?: string
   /**
    * 用户回复的内容。
    */
-  ReplyContent: string
+  ReplyContent?: string
   /**
    * 回复时间，UNIX 时间戳（单位：秒）。
    */
-  ReplyTime: number
+  ReplyTime?: number
   /**
-   * 用户号码，普通格式，示例如：13711112222。
+   * 用户号码，普通格式，示例如：18501234444。
    */
-  SubscriberNumber: string
+  SubscriberNumber?: string
 }
 
 /**
@@ -556,7 +556,7 @@ export interface SendStatusStatisticsResponse {
 export interface SendSmsRequest {
   /**
    * 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为境内手机号或全为境外手机号。
-例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
 注：发送国内短信格式还支持0086、86或无任何国家或地区码的11位手机号码，前缀默认为+86。
    */
   PhoneNumberSet: Array<string>
@@ -747,11 +747,11 @@ export interface PullSmsSendStatus {
    */
   CountryCode?: string
   /**
-   * 用户号码，普通格式，示例如：13711112222。
+   * 用户号码，普通格式，示例如：18501234444。
    */
   SubscriberNumber?: string
   /**
-   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
   PhoneNumber?: string
   /**
@@ -768,7 +768,6 @@ export interface PullSmsSendStatus {
   Description?: string
   /**
    * 用户的 session 内容。与请求中的 SessionContext 一致，默认为空，如需开通请联系 [腾讯云短信小助手](https://cloud.tencent.com/document/product/382/3773#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) 评估。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionContext?: string
 }
@@ -863,31 +862,31 @@ export interface PhoneNumberInfo {
   /**
    * 号码信息查询错误码，查询成功返回 "Ok"。
    */
-  Code: string
+  Code?: string
   /**
    * 号码信息查询错误码描述。
    */
-  Message: string
+  Message?: string
   /**
    * 国家（或地区）码。
    */
-  NationCode: string
+  NationCode?: string
   /**
-   * 用户号码，去除国家或地区码前缀的普通格式，示例如：13711112222。
+   * 用户号码，去除国家或地区码前缀的普通格式，示例如：18501234444。
    */
-  SubscriberNumber: string
+  SubscriberNumber?: string
   /**
    * 解析后的规范的 E.164 号码，与下发短信的号码解析结果一致。解析失败时会原样返回。
    */
-  PhoneNumber: string
+  PhoneNumber?: string
   /**
    * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF。
    */
-  IsoCode: string
+  IsoCode?: string
   /**
    * 国家码或地区名，例如 China，可参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051#.E6.97.A5.E7.BB.93.E5.90.8E.E4.BB.98.E8.B4.B9.3Ca-id.3D.22post-payment.22.3E.3C.2Fa.3E)
    */
-  IsoName: string
+  IsoName?: string
 }
 
 /**
@@ -950,31 +949,31 @@ export interface SendStatus {
   /**
    * 发送流水号。
    */
-  SerialNo: string
+  SerialNo?: string
   /**
-   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
-  PhoneNumber: string
+  PhoneNumber?: string
   /**
    * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
    */
-  Fee: number
+  Fee?: number
   /**
    * 用户 session 内容。
    */
-  SessionContext: string
+  SessionContext?: string
   /**
    * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/api/382/55981#6.-.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
    */
-  Code: string
+  Code?: string
   /**
    * 短信请求错误码描述。
    */
-  Message: string
+  Message?: string
   /**
    * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051)。
    */
-  IsoCode: string
+  IsoCode?: string
 }
 
 /**
@@ -1034,7 +1033,7 @@ export interface PullSmsReplyStatusByPhoneNumberRequest {
    */
   Limit: number
   /**
-   * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+   * 下发目的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
    */
   PhoneNumber: string
   /**
@@ -1133,12 +1132,10 @@ export interface SmsPackagesStatisticsResponse {
 export interface DeleteSignStatus {
   /**
    * 删除状态信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteStatus: string
   /**
    * 删除时间，UNIX 时间戳（单位：秒）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteTime: number
 }

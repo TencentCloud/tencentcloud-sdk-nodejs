@@ -98,6 +98,7 @@ import {
   WorkflowTaskCountOpsDto,
   StageCloudApiRequest,
   DescribeDependOpsTasksRequest,
+  RolePrivilege,
   RuleGroupTable,
   DescribeInstanceLogRequest,
   DescribeRuleGroupSubscriptionResponse,
@@ -107,6 +108,7 @@ import {
   SaveCustomFunctionRequest,
   DescribeSchedulerTaskTypeCntRequest,
   MakePlanTaskOpsDto,
+  ProjectUserRole,
   RuleGroupExecStrategy,
   ModifyWorkflowScheduleRequest,
   CreateDsFolderRequest,
@@ -253,6 +255,7 @@ import {
   GetFileInfoRequest,
   TableLineageBaseInfo,
   InstanceList,
+  ProjectUsersPage,
   SqlExpressionTable,
   OrderFieldOptional,
   DryRunDIOfflineTaskRequest,
@@ -475,6 +478,7 @@ import {
   RuleTemplate,
   DeleteFileResponse,
   ResumeIntegrationTaskRequest,
+  TriggerDsEventRequest,
   ModifyDataSourceRequest,
   DescribePendingSubmitTaskListRequest,
   TriggerEventResponse,
@@ -485,6 +489,7 @@ import {
   DescribeDutyScheduleDetailsResponse,
   TaskLineageInfo,
   DescribeTableQualityDetailsResponse,
+  DescribeProjectUsersRequest,
   CommonIdOpsDto,
   BatchStopWorkflowsByIdsResponse,
   RuleGroupSchedulerInfo,
@@ -558,6 +563,7 @@ import {
   SubmitWorkflowRequest,
   DescribeResourceManagePathTreesResponse,
   RunRerunScheduleInstancesRequest,
+  SystemRole,
   RuleGroupTableInnerInfo,
   DeleteIntegrationTaskRequest,
   CompareResultItem,
@@ -665,7 +671,7 @@ import {
   DescribeRuleTemplateRequest,
   SqlExpression,
   DescribeTaskByCycleRequest,
-  TriggerDsEventRequest,
+  DescribeProjectUsersResponse,
   CommonId,
   CreateRuleTemplateRequest,
   DlcRewriteDataInfo,
@@ -2676,13 +2682,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改任务告警规则
+   * 获取项目下的用户，分页返回
    */
-  async ModifyTaskAlarmRegular(
-    req: ModifyTaskAlarmRegularRequest,
-    cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void
-  ): Promise<ModifyTaskAlarmRegularResponse> {
-    return this.request("ModifyTaskAlarmRegular", req, cb)
+  async DescribeProjectUsers(
+    req: DescribeProjectUsersRequest,
+    cb?: (error: string, rep: DescribeProjectUsersResponse) => void
+  ): Promise<DescribeProjectUsersResponse> {
+    return this.request("DescribeProjectUsers", req, cb)
   }
 
   /**
@@ -2875,6 +2881,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTaskFolderResponse) => void
   ): Promise<CreateTaskFolderResponse> {
     return this.request("CreateTaskFolder", req, cb)
+  }
+
+  /**
+   * 修改任务告警规则
+   */
+  async ModifyTaskAlarmRegular(
+    req: ModifyTaskAlarmRegularRequest,
+    cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void
+  ): Promise<ModifyTaskAlarmRegularResponse> {
+    return this.request("ModifyTaskAlarmRegular", req, cb)
   }
 
   /**

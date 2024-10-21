@@ -389,7 +389,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodes", req, cb);
     }
     /**
-     * 获取trino查询结果
+     * 查询Trino(PrestoSQL)查询信息
      */
     async DescribeTrinoQueryInfo(req, cb) {
         return this.request("DescribeTrinoQueryInfo", req, cb);

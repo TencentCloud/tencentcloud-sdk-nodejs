@@ -899,8 +899,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps
-   */
+     * 历史接口，已经废弃，产品有新的替代接口
+
+防火墙开关列表，已废弃，请使用DescribeFwEdgeIps
+     */
   async DescribeSwitchLists(
     req: DescribeSwitchListsRequest,
     cb?: (error: string, rep: DescribeSwitchListsResponse) => void

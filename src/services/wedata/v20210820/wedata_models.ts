@@ -2890,6 +2890,47 @@ export interface DescribeDependOpsTasksRequest {
 }
 
 /**
+ * 角色权限对象
+ */
+export interface RolePrivilege {
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeId?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeName?: string
+  /**
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestPath?: string
+  /**
+   * 方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestMethod?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 模块id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModuleId?: string
+  /**
+   * 权限类型 N、R、RW、RWD
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * 表绑定规则组信息
  */
 export interface RuleGroupTable {
@@ -3168,6 +3209,47 @@ export interface MakePlanTaskOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTotalCount?: number
+}
+
+/**
+ * 项目的用户对象
+ */
+export interface ProjectUserRole {
+  /**
+   * 用户角色对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Roles: Array<SystemRole>
+  /**
+   * mc
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 是否创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator: boolean
+  /**
+   * 显示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 是否项目管理员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsProjectAdmin?: boolean
 }
 
 /**
@@ -8125,6 +8207,37 @@ export interface InstanceList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TryLimit?: number
+}
+
+/**
+ * 项目下的用户集合
+ */
+export interface ProjectUsersPage {
+  /**
+   * 用户集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows: Array<ProjectUserRole>
+  /**
+   * 分页大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize: number
+  /**
+   * 分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber: number
+  /**
+   * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 总分页页码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPageNumber: number
 }
 
 /**
@@ -14244,6 +14357,24 @@ export interface ResumeIntegrationTaskRequest {
 }
 
 /**
+ * TriggerDsEvent请求参数结构体
+ */
+export interface TriggerDsEventRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 事件实例信息
+   */
+  EventCaseList?: Array<EventCaseDTO>
+  /**
+   * 事件实例信息(连续时间)
+   */
+  EventBatchCaseList?: Array<EventBatchCaseDTO>
+}
+
+/**
  * ModifyDataSource请求参数结构体
  */
 export interface ModifyDataSourceRequest {
@@ -14666,6 +14797,32 @@ export interface DescribeTableQualityDetailsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeProjectUsers请求参数结构体
+ */
+export interface DescribeProjectUsersRequest {
+  /**
+   * 分页号
+   */
+  PageNumber: number
+  /**
+   * 分页大小
+   */
+  PageSize: number
+  /**
+   * 【过滤参数】自定义条件查询
+   */
+  Filters?: Array<FilterOptional>
+  /**
+   * 【排序参数】排序字段
+   */
+  OrderFields?: Array<OrderFieldOptional>
+  /**
+   * 是否项目管理员
+   */
+  IsProjectAdmin?: boolean
 }
 
 /**
@@ -17665,6 +17822,56 @@ export interface RunRerunScheduleInstancesRequest {
 }
 
 /**
+ * 角色对象
+ */
+export interface SystemRole {
+  /**
+   * 角色id
+   */
+  RoleId: string
+  /**
+   * 角色名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 角色昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NameCn: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 角色权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Privileges: Array<RolePrivilege>
+  /**
+   * 方法路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MethodPaths: Array<string>
+  /**
+   * 角色类型, 分为System,Tenant,Project,Commercial
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleType?: string
+  /**
+   * 是否系统默认
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystemInit?: boolean
+  /**
+   * 自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: string
+}
+
+/**
  * 规则组关联表信息
  */
 export interface RuleGroupTableInnerInfo {
@@ -20406,21 +20613,17 @@ export interface DescribeTaskByCycleRequest {
 }
 
 /**
- * TriggerDsEvent请求参数结构体
+ * DescribeProjectUsers返回参数结构体
  */
-export interface TriggerDsEventRequest {
+export interface DescribeProjectUsersResponse {
   /**
-   * 项目id
+   * 项目列表
    */
-  ProjectId: string
+  Data?: ProjectUsersPage
   /**
-   * 事件实例信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EventCaseList?: Array<EventCaseDTO>
-  /**
-   * 事件实例信息(连续时间)
-   */
-  EventBatchCaseList?: Array<EventBatchCaseDTO>
+  RequestId?: string
 }
 
 /**

@@ -70,6 +70,7 @@ export interface CreateRoomRequest {
     Assistants?: Array<string>;
     /**
      * rtc人数。
+     * @deprecated
      */
     RTCAudienceNumber?: number;
     /**

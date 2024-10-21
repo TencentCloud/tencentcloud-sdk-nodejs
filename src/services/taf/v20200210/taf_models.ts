@@ -38,7 +38,24 @@ export interface ManagePortraitRiskOutput {
 /**
  * 业务入参
  */
-export type InputBusinessEncryptData = null
+export interface InputBusinessEncryptData {
+  /**
+   * 加密方式；0：AES;1:DES
+   */
+  EncryptMethod: number
+  /**
+   * 业务数据加密字符串
+   */
+  EncryptData: string
+  /**
+   * 加密模式；0：ECB,1:CBC;2:CTR;3:CFB;4:OFB
+   */
+  EncryptMode: number
+  /**
+   * 填充模式;0:ZERO ;1:PKCS5;3:PKCS7
+   */
+  PaddingType: number
+}
 
 /**
  * RecognizeCustomizedAudience请求参数结构体

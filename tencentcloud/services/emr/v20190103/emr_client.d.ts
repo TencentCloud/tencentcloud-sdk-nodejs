@@ -251,7 +251,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterNodes(req: DescribeClusterNodesRequest, cb?: (error: string, rep: DescribeClusterNodesResponse) => void): Promise<DescribeClusterNodesResponse>;
     /**
-     * 获取trino查询结果
+     * 查询Trino(PrestoSQL)查询信息
      */
     DescribeTrinoQueryInfo(req: DescribeTrinoQueryInfoRequest, cb?: (error: string, rep: DescribeTrinoQueryInfoResponse) => void): Promise<DescribeTrinoQueryInfoResponse>;
     /**

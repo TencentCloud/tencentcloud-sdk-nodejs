@@ -87,6 +87,7 @@ video 纯视频
   Assistants?: Array<string>
   /**
    * rtc人数。
+   * @deprecated
    */
   RTCAudienceNumber?: number
   /**

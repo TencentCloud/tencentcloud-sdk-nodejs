@@ -1404,7 +1404,7 @@ export interface DescribeAssetTypesResponse {
   /**
    * 资产指纹类型列表
    */
-  Types: Array<AssetType>
+  Types?: Array<AssetType>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5012,7 +5012,7 @@ export interface DescribeScreenMachineRegionsResponse {
    * 列表详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ScreenRegionInfo>
+  List?: Array<ScreenRegionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6377,7 +6377,7 @@ export interface ScanTaskDetails {
    */
   Id?: number
   /**
-   * 失败详情
+   * 失败类型  3离线、4超时、5失败、8agent版本过低
    */
   FailType?: number
   /**
@@ -7932,7 +7932,7 @@ export interface DescribeCanNotSeparateMachineResponse {
   /**
    * 不可隔离主机列表
    */
-  List: Array<CanNotSeparateInfo>
+  List?: Array<CanNotSeparateInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9452,27 +9452,27 @@ export interface VulStoreListInfo {
   /**
    * 漏洞ID
    */
-  VulId: number
+  VulId?: number
   /**
    * 漏洞级别
    */
-  Level: number
+  Level?: number
   /**
    * 漏洞名称
    */
-  Name: string
+  Name?: string
   /**
    * cve编号
    */
-  CveId: string
+  CveId?: string
   /**
    * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
    */
-  VulCategory: number
+  VulCategory?: number
   /**
    * 发布时间
    */
-  PublishDate: string
+  PublishDate?: string
   /**
    * 漏洞检测方法 0 - 版本比对, 1 - POC验证
    */
@@ -9483,7 +9483,7 @@ export interface VulStoreListInfo {
   AttackLevel?: number
   /**
    * 漏洞是否支持自动修复
-0-windows/linux均关闭; 1-windows/linux均打开; 2-仅linux; 3-仅windows
+0-Windows/Linux均关闭; 1-Windows/Linux均打开; 2-仅Linux; 3-仅Windows
    */
   FixSwitch?: number
   /**
@@ -16111,7 +16111,7 @@ export interface DescribeScreenRiskAssetsTopResponse {
    * 统计详情图标数据 Name：展示主机ip 和地域， value：事件数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Chart: Array<ScreenNameValue>
+  Chart?: Array<ScreenNameValue>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20451,7 +20451,7 @@ export interface DescribeScreenProtectionStatResponse {
 漏洞扫描status: 0:从未检测过，或0资产付费情况, 1:存在漏洞风险, 2:无风险
 基线检测status: 0:从未检测过，或0资产付费情况, 1:存在基线风险,2:无风险
    */
-  Info: Array<ScreenProtection>
+  Info?: Array<ScreenProtection>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21814,7 +21814,7 @@ export interface DescribeScreenProtectionCntResponse {
   /**
    * 主机安全防护引擎介绍 内容
    */
-  List: Array<ScreenProtectionCnt>
+  List?: Array<ScreenProtectionCnt>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22262,7 +22262,7 @@ export interface DescribeScreenMachinesResponse {
    * 列表详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ScreenRegionMachines>
+  List?: Array<ScreenRegionMachines>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23267,7 +23267,7 @@ export interface DescribeScreenAttackHotspotResponse {
    * 攻击热点列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ScreenAttackHotspot>
+  List?: Array<ScreenAttackHotspot>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23565,32 +23565,32 @@ export interface ScreenBaselineInfo {
    * 基线名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 危害等级：1-低危；2-中危；3-高危；4-严重
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level: number
+  Level?: number
   /**
    * 基线id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryId: number
+  CategoryId?: number
   /**
    * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastScanTime: string
+  LastScanTime?: string
   /**
    * 基线风险项
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BaselineFailCount: number
+  BaselineFailCount?: number
   /**
    * 主机uuid
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uuid: string
+  Uuid?: string
 }
 
 /**
@@ -24046,7 +24046,7 @@ export interface DescribeScreenBroadcastsResponse {
    * 播报文章列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ScreenBroadcasts>
+  List?: Array<ScreenBroadcasts>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26336,7 +26336,7 @@ export interface DescribeScreenDefenseTrendsResponse {
    * 统计详情图标数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrendsChart: Array<ScreenTrendsChart>
+  TrendsChart?: Array<ScreenTrendsChart>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26728,27 +26728,27 @@ export interface DescribeBaselineAnalysisDataResponse {
    * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestScanTime: string
+  LatestScanTime?: string
   /**
    * 是否全部服务器：1-是 0-否
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 服务器总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanHostCount: number
+  ScanHostCount?: number
   /**
    * 检测项总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRuleCount: number
+  ScanRuleCount?: number
   /**
    * 是否是第一次检测  1是 0不是
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IfFirstScan: number
+  IfFirstScan?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27453,110 +27453,110 @@ export interface VulInfoList {
   /**
    * 漏洞包含的事件id串，多个用“,”分割
    */
-  Ids: string
+  Ids?: string
   /**
    * 漏洞名
    */
-  Name: string
+  Name?: string
   /**
    * 0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中  8:修复失败
    */
-  Status: number
+  Status?: number
   /**
    * 漏洞id
    */
-  VulId: number
+  VulId?: number
   /**
    * 漏洞披露事件
    */
-  PublishTime: string
+  PublishTime?: string
   /**
    * 最后检测时间
    */
-  LastTime: string
+  LastTime?: string
   /**
    * 影响主机数
    */
-  HostCount: number
+  HostCount?: number
   /**
    * 漏洞等级 1:低 2:中 3:高 4:严重
    */
-  Level: number
+  Level?: number
   /**
    * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  From: number
+  From?: number
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Descript: string
+  Descript?: string
   /**
    * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublishTimeWisteria: string
+  PublishTimeWisteria?: string
   /**
    * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NameWisteria: string
+  NameWisteria?: string
   /**
    * 废弃字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DescriptWisteria: string
+  DescriptWisteria?: string
   /**
    * 聚合后事件状态串
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusStr: string
+  StatusStr?: string
   /**
    * cve编号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CveId: string
+  CveId?: string
   /**
    * CVSS评分
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CvssScore: number
+  CvssScore?: number
   /**
    * 漏洞标签 多个逗号分割
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Labels: string
+  Labels?: string
   /**
    * 是否能自动修复且包含能自动修复的主机， 0=否  1=是
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FixSwitch: number
+  FixSwitch?: number
   /**
    * 最后扫描任务的id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 是否支持防御， 0:不支持 1:支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSupportDefense: number
+  IsSupportDefense?: number
   /**
    * 已防御的攻击次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefenseAttackCount: number
+  DefenseAttackCount?: number
   /**
    * 首次出现时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FirstAppearTime: string
+  FirstAppearTime?: string
   /**
    * 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulCategory: number
+  VulCategory?: number
   /**
    * 攻击热度级别
 注意：此字段可能返回 null，表示取不到有效值。
@@ -27572,6 +27572,11 @@ export interface VulInfoList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: number
+  /**
+   * 漏洞是否支持修复 0不支持，1支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulFixSwitch?: number
 }
 
 /**
@@ -27948,27 +27953,27 @@ export interface DescribeBaselineStrategyDetailResponse {
    * 策略扫描通过率
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PassRate: number
+  PassRate?: number
   /**
    * 策略名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StrategyName: string
+  StrategyName?: string
   /**
    * 策略扫描周期(天)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanCycle: string
+  ScanCycle?: string
   /**
    * 定期检测时间, 该时间下发扫描
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanAt: string
+  ScanAt?: string
   /**
    * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 云服务器类型：
 cvm：腾讯云服务器
@@ -27978,27 +27983,27 @@ lh: 轻量应用服务器
 ohter: 混合云机器
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 主机地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 用户该策略下的所有主机id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quuids: Array<string>
+  Quuids?: Array<string>
   /**
    * 用户该策略下所有的基线id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryIds: Array<string>
+  CategoryIds?: Array<string>
   /**
    * 1 表示扫描过, 0没扫描过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IfScanned: number
+  IfScanned?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28093,20 +28098,20 @@ export interface DescribeScreenHostInvasionResponse {
   /**
    * 网络攻击事件列表
    */
-  DefendAttackLog: Array<ScreenDefendAttackLog>
+  DefendAttackLog?: Array<ScreenDefendAttackLog>
   /**
    * 入侵检测事件列表
    */
-  InvasionEvents: Array<ScreenInvasion>
+  InvasionEvents?: Array<ScreenInvasion>
   /**
    * 漏洞事件列表
    */
-  Vul: Array<ScreenVulInfo>
+  Vul?: Array<ScreenVulInfo>
   /**
    * 基线事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Baseline: Array<ScreenBaselineInfo>
+  Baseline?: Array<ScreenBaselineInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28814,7 +28819,7 @@ export interface DescribeScreenEventsCntResponse {
    * 事件统计详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Info: Array<ScreenEventsCnt>
+  Info?: Array<ScreenEventsCnt>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28886,7 +28891,7 @@ export interface DescribeScreenEmergentMsgResponse {
   /**
    * 通知内容
    */
-  MessageInfo: Array<ScreenEmergentMsg>
+  MessageInfo?: Array<ScreenEmergentMsg>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -30105,68 +30110,68 @@ export interface DescribeScanTaskDetailsResponse {
   /**
    * 扫描任务信息列表
    */
-  ScanTaskDetailList: Array<ScanTaskDetails>
+  ScanTaskDetailList?: Array<ScanTaskDetails>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 扫描机器总数
    */
-  ScanMachineCount: number
+  ScanMachineCount?: number
   /**
    * 发现风险机器数
    */
-  RiskMachineCount: number
+  RiskMachineCount?: number
   /**
    * 扫描开始时间
    */
-  ScanBeginTime: string
+  ScanBeginTime?: string
   /**
    * 扫描结束时间
    */
-  ScanEndTime: string
+  ScanEndTime?: string
   /**
    * 检测时间
    */
-  ScanTime: number
+  ScanTime?: number
   /**
    * 扫描进度
    */
-  ScanProgress: number
+  ScanProgress?: number
   /**
    * 扫描剩余时间
    */
-  ScanLeftTime: number
+  ScanLeftTime?: number
   /**
    * 扫描内容
    */
-  ScanContent: Array<string>
+  ScanContent?: Array<string>
   /**
    * 漏洞信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulInfo: Array<VulDetailInfo>
+  VulInfo?: Array<VulDetailInfo>
   /**
    * 风险事件个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskEventCount: number
+  RiskEventCount?: number
   /**
    * 0一键检测 1定时检测
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: number
+  Type?: number
   /**
    * 任务是否全部正在被停止 ture是
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StoppingAll: boolean
+  StoppingAll?: boolean
   /**
    * 扫描出漏洞个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulCount: number
+  VulCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -22,35 +22,60 @@ export interface RocketMQNamespace {
   /**
    * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
    */
-  NamespaceId: string
+  NamespaceId?: string
   /**
    * 已废弃，未消费消息的保留时间，以毫秒单位，范围60秒到15天
    */
-  Ttl: number
+  Ttl?: number
   /**
    * 消息持久化后保留的时间，以毫秒单位
    */
-  RetentionTime: number
+  RetentionTime?: number
   /**
    * 说明
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 公网接入点地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicEndpoint: string
+  PublicEndpoint?: string
   /**
    * VPC接入点地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcEndpoint: string
+  VpcEndpoint?: string
   /**
    * 内部接入点地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalEndpoint?: string
+}
+
+/**
+ * CreateRabbitMQBinding返回参数结构体
+ */
+export interface CreateRabbitMQBindingResponse {
+  /**
+   * 队列名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * vhost参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualHost?: string
+  /**
+   * 路由关系Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5416,31 +5441,17 @@ export interface DeleteRabbitMQVipInstanceRequest {
 }
 
 /**
- * ModifyEnvironmentAttributes返回参数结构体
+ * 过滤参数
  */
-export interface ModifyEnvironmentAttributesResponse {
+export interface Filter {
   /**
-   * 命名空间名称。
+   * 过滤参数的名字
    */
-  EnvironmentId?: string
+  Name?: string
   /**
-   * 未消费消息过期时间，单位：秒。
+   * 数值
    */
-  MsgTTL?: number
-  /**
-   * 备注，字符串最长不超过128。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamespaceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Values?: Array<string>
 }
 
 /**
@@ -6279,11 +6290,11 @@ export interface DescribeRocketMQNamespacesResponse {
   /**
    * 命名空间列表
    */
-  Namespaces: Array<RocketMQNamespace>
+  Namespaces?: Array<RocketMQNamespace>
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8005,6 +8016,36 @@ export interface ModifyRocketMQRoleResponse {
 }
 
 /**
+ * CreateRabbitMQBinding请求参数结构体
+ */
+export interface CreateRabbitMQBindingRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * Vhost参数
+   */
+  VirtualHost: string
+  /**
+   * 源exchange
+   */
+  Source: string
+  /**
+   * 目标类型,取值queue或exchange
+   */
+  DestinationType: string
+  /**
+   * 目标
+   */
+  Destination: string
+  /**
+   * 绑定key
+   */
+  RoutingKey?: string
+}
+
+/**
  * DescribePulsarProInstanceDetail请求参数结构体
  */
 export interface DescribePulsarProInstanceDetailRequest {
@@ -9477,6 +9518,7 @@ export interface DescribeRocketMQVipInstancesRequest {
    * 查询条件过滤器，支持的查询条件如下：
 instanceIds - 实例ID
 instanceName - 实例名称
+status - 实例状态
    */
   Filters?: Array<Filter>
   /**
@@ -9524,17 +9566,31 @@ export interface CreateRabbitMQVipInstanceResponse {
 }
 
 /**
- * 过滤参数
+ * ModifyEnvironmentAttributes返回参数结构体
  */
-export interface Filter {
+export interface ModifyEnvironmentAttributesResponse {
   /**
-   * 过滤参数的名字
+   * 命名空间名称。
    */
-  Name?: string
+  EnvironmentId?: string
   /**
-   * 数值
+   * 未消费消息过期时间，单位：秒。
    */
-  Values?: Array<string>
+  MsgTTL?: number
+  /**
+   * 备注，字符串最长不超过128。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

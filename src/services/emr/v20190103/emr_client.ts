@@ -893,7 +893,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取trino查询结果
+   * 查询Trino(PrestoSQL)查询信息
    */
   async DescribeTrinoQueryInfo(
     req: DescribeTrinoQueryInfoRequest,

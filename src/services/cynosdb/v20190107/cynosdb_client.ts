@@ -448,7 +448,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级数据库代理版本
+   * 本接口（UpgradeProxyVersion）用于升级数据库代理版本。
    */
   async UpgradeProxyVersion(
     req: UpgradeProxyVersionRequest,
@@ -478,7 +478,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建数据库代理连接点
+   * 本接口（CreateProxyEndPoint）用于创建数据库代理连接点。
    */
   async CreateProxyEndPoint(
     req: CreateProxyEndPointRequest,
@@ -508,7 +508,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量授权账号权限
+   * 本接口（GrantAccountPrivileges）用于批量授权账号权限。
    */
   async GrantAccountPrivileges(
     req: GrantAccountPrivilegesRequest,
@@ -558,7 +558,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询支持的数据库代理版本
+   * 本接口（DescribeSupportProxyVersion）用于查询支持的数据库代理版本。
    */
   async DescribeSupportProxyVersion(
     req: DescribeSupportProxyVersionRequest,
@@ -618,7 +618,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SwitchProxyVpc)更换数据库代理vpc
+   * 本接口（SwitchProxyVpc）用于更换数据库代理vpc。
    */
   async SwitchProxyVpc(
     req: SwitchProxyVpcRequest,
@@ -668,7 +668,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询订单关联实例
+   * 本接口（DescribeResourcesByDealName）用于查询订单关联实例。
    */
   async DescribeResourcesByDealName(
     req: DescribeResourcesByDealNameRequest,
@@ -678,7 +678,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调整包年包月存储容量
+   * 本接口（ModifyClusterStorage）用于调整包年包月存储容量。
    */
   async ModifyClusterStorage(
     req: ModifyClusterStorageRequest,
@@ -748,7 +748,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询账号已有权限
+   * 本接口（DescribeAccountPrivileges）用于查询账号已有权限。
    */
   async DescribeAccountPrivileges(
     req: DescribeAccountPrivilegesRequest,
@@ -768,7 +768,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RollBackCluster）用于集群回档
+   * 本接口（RollBackCluster）用于集群回档。
    */
   async RollBackCluster(
     req: RollBackClusterRequest,
@@ -808,7 +808,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例错误日志列表
+   * 本接口（DescribeInstanceErrorLogs）用于查询实例错误日志列表。
    */
   async DescribeInstanceErrorLogs(
     req: DescribeInstanceErrorLogsRequest,
@@ -828,7 +828,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 配置数据库代理读写分离
+   * 本接口（ModifyProxyRwSplit）用于配置数据库代理读写分离。
    */
   async ModifyProxyRwSplit(
     req: ModifyProxyRwSplitRequest,
@@ -838,7 +838,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例组ip，端口
+   * 本接口（ModifyVipVport）用于修改实例组ip，端口。
    */
   async ModifyVipVport(
     req: ModifyVipVportRequest,
@@ -848,7 +848,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除审计规则模板
+   * 本接口（DeleteAuditRuleTemplates）用于删除审计规则模板。
    */
   async DeleteAuditRuleTemplates(
     req: DeleteAuditRuleTemplatesRequest,
@@ -858,7 +858,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改数据库代理描述
+   * 本接口（ModifyProxyDesc）用于修改数据库代理描述。
    */
   async ModifyProxyDesc(
     req: ModifyProxyDescRequest,
@@ -868,7 +868,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateParamTemplate）用于创建参数模板
+   * 本接口（CreateParamTemplate）用于创建参数模板。
    */
   async CreateParamTemplate(
     req: CreateParamTemplateRequest,
@@ -888,7 +888,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改账号配置
+   * 本接口（ModifyAccountParams）用于修改账号配置。
    */
   async ModifyAccountParams(
     req: ModifyAccountParamsRequest,
@@ -908,7 +908,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为集群创建手动备份
+   * 本接口（CreateBackup）用于为集群创建手动备份。
    */
   async CreateBackup(
     req: CreateBackupRequest,
@@ -918,7 +918,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁实例
+   * 本接口（OfflineInstance）用于销毁实例。
    */
   async OfflineInstance(
     req: OfflineInstanceRequest,
@@ -938,7 +938,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启实例
+   * 本接口（RestartInstance）用于重启实例。
    */
   async RestartInstance(
     req: RestartInstanceRequest,
@@ -1018,7 +1018,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口(DescribeInstanceParams)查询实例参数列表
+   * 本接口（DescribeInstanceParams）用于查询实例参数列表。
    */
   async DescribeInstanceParams(
     req: DescribeInstanceParamsRequest,
@@ -1048,7 +1048,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群参数
+   * 本接口（ModifyClusterParam）用于修改集群参数。
    */
   async ModifyClusterParam(
     req: ModifyClusterParamRequest,
@@ -1068,7 +1068,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户账号
+   * 本接口（CreateAccounts）用于创建用户账号。
    */
   async CreateAccounts(
     req: CreateAccountsRequest,
@@ -1158,7 +1158,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户账号
+   * 本接口（DeleteAccounts）用于删除用户账号。
    */
   async DeleteAccounts(
     req: DeleteAccountsRequest,
@@ -1188,7 +1188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterTables)搜索集群数据表列表
+   * 本接口（SearchClusterTables）用于搜索集群数据表列表。
    */
   async SearchClusterTables(
     req: SearchClusterTablesRequest,
@@ -1198,7 +1198,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户指定产品下的所有参数模板信息
+   * 本接口（DescribeParamTemplates）用于查询用户指定产品下的所有参数模板信息。
    */
   async DescribeParamTemplates(
     req: DescribeParamTemplatesRequest,
@@ -1238,7 +1238,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改账号主机
+   * 本接口（ModifyAccountHost）用于修改账号主机。
    */
   async ModifyAccountHost(
     req: ModifyAccountHostRequest,
@@ -1248,7 +1248,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ResetAccountPassword)用于修改数据库账号密码
+   * 本接口（ResetAccountPassword）用于修改数据库账号密码。
    */
   async ResetAccountPassword(
     req: ResetAccountPasswordRequest,
@@ -1348,7 +1348,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理列表
+   * 本接口（DescribeProxies）用于查询数据库代理列表。
    */
   async DescribeProxies(
     req: DescribeProxiesRequest,
@@ -1408,7 +1408,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改账号库表权限
+   * 本接口（ModifyAccountPrivileges）用于修改账号库表权限。
    */
   async ModifyAccountPrivileges(
     req: ModifyAccountPrivilegesRequest,
@@ -1468,7 +1468,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SetRenewFlag设置实例的自动续费功能
+   * 本接口（SetRenewFlag）用于设置实例的自动续费功能。
    */
   async SetRenewFlag(
     req: SetRenewFlagRequest,
@@ -1478,7 +1478,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询续费集群价格
+   * 本接口（InquirePriceRenew）用于查询续费集群价格。
    */
   async InquirePriceRenew(
     req: InquirePriceRenewRequest,
@@ -1498,7 +1498,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 负载均衡数据库代理
+   * 本接口（ReloadBalanceProxyNode）用于负载均衡数据库代理。
    */
   async ReloadBalanceProxyNode(
     req: ReloadBalanceProxyNodeRequest,
@@ -1568,7 +1568,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建数据库
+   * 本接口（CreateClusterDatabase）用于创建数据库。
    */
   async CreateClusterDatabase(
     req: CreateClusterDatabaseRequest,
@@ -1598,7 +1598,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询审计规则模板信息
+   * 本接口（DescribeAuditRuleTemplates）用于查询审计规则模板信息。
    */
   async DescribeAuditRuleTemplates(
     req: DescribeAuditRuleTemplatesRequest,
@@ -1658,7 +1658,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeClusterParams）用于查询集群参数
+   * 本接口（DescribeClusterParams）用于查询集群参数。
    */
   async DescribeClusterParams(
     req: DescribeClusterParamsRequest,
@@ -1701,7 +1701,7 @@ export class Client extends AbstractClient {
    * 查询数据库代理规格
    */
   async DescribeProxySpecs(
-    req?: DescribeProxySpecsRequest,
+    req: DescribeProxySpecsRequest,
     cb?: (error: string, rep: DescribeProxySpecsResponse) => void
   ): Promise<DescribeProxySpecsResponse> {
     return this.request("DescribeProxySpecs", req, cb)
@@ -1748,7 +1748,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更换集群vpc
+   * 本接口（SwitchClusterVpc）用于更换集群vpc。
    */
   async SwitchClusterVpc(
     req: SwitchClusterVpcRequest,
@@ -1818,7 +1818,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeClusterPasswordComplexity）用于查看集群密码复杂度详情
+   * 本接口（DescribeClusterPasswordComplexity）用于查看集群密码复杂度详情。
    */
   async DescribeClusterPasswordComplexity(
     req: DescribeClusterPasswordComplexityRequest,
@@ -1868,7 +1868,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例安全组信息
+   * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息。
    */
   async DescribeDBSecurityGroups(
     req: DescribeDBSecurityGroupsRequest,
@@ -1908,7 +1908,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情
+   * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情。
    */
   async DescribeParamTemplateDetail(
     req: DescribeParamTemplateDetailRequest,

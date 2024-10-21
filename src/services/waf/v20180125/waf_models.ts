@@ -3655,6 +3655,22 @@ export interface DescribeAreaBanSupportAreasResponse {
 }
 
 /**
+ * Tiga引擎中Mainclass的TypeID和防护模式
+ */
+export interface TigaMainClassMode {
+  /**
+   * MainclassID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TypeID?: string
+  /**
+   * 防护模式，0表示观察，1表示拦截
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: number
+}
+
+/**
  * DescribeAccessFastAnalysis接口的出参
  */
 export interface AccessFieldValueRatioInfo {
@@ -6609,6 +6625,20 @@ export interface DomainRuleId {
 }
 
 /**
+ * DescribeProtectionModes请求参数结构体
+ */
+export interface DescribeProtectionModesRequest {
+  /**
+   * sparta-waf或clb
+   */
+  Edition: string
+  /**
+   * 域名
+   */
+  Domain: string
+}
+
+/**
  * 防护域名端口配置信息
  */
 export interface PortItem {
@@ -8029,6 +8059,20 @@ export interface UpsertCCAutoStatusRequest {
    * 版本：clb-waf, spart-waf
    */
   Edition?: string
+}
+
+/**
+ * DescribeProtectionModes返回参数结构体
+ */
+export interface DescribeProtectionModesResponse {
+  /**
+   * 规则大类ID及防护模式
+   */
+  Modes?: Array<TigaMainClassMode>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

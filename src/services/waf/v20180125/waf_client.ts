@@ -152,6 +152,7 @@ import {
   SearchItem,
   ApiPkg,
   DescribeAreaBanSupportAreasResponse,
+  TigaMainClassMode,
   AccessFieldValueRatioInfo,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
@@ -262,6 +263,7 @@ import {
   ModifyBotStatusResponse,
   ModifyCustomRuleStatusResponse,
   DomainRuleId,
+  DescribeProtectionModesRequest,
   PortItem,
   DescribeCCAutoStatusResponse,
   ModifyCustomRuleStatusRequest,
@@ -314,6 +316,7 @@ import {
   ModifyDomainPostActionRequest,
   BotPkg,
   UpsertCCAutoStatusRequest,
+  DescribeProtectionModesResponse,
   DescribeWafAutoDenyRulesResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
@@ -684,13 +687,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf  CC V2 Delete接口
+   * 查询Tiga引擎大类规则及其防护模式
    */
-  async DeleteCCRule(
-    req: DeleteCCRuleRequest,
-    cb?: (error: string, rep: DeleteCCRuleResponse) => void
-  ): Promise<DeleteCCRuleResponse> {
-    return this.request("DeleteCCRule", req, cb)
+  async DescribeProtectionModes(
+    req: DescribeProtectionModesRequest,
+    cb?: (error: string, rep: DescribeProtectionModesResponse) => void
+  ): Promise<DescribeProtectionModesResponse> {
+    return this.request("DescribeProtectionModes", req, cb)
   }
 
   /**
@@ -1756,6 +1759,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCCRuleListResponse) => void
   ): Promise<DescribeCCRuleListResponse> {
     return this.request("DescribeCCRuleList", req, cb)
+  }
+
+  /**
+   * Waf  CC V2 Delete接口
+   */
+  async DeleteCCRule(
+    req: DeleteCCRuleRequest,
+    cb?: (error: string, rep: DeleteCCRuleResponse) => void
+  ): Promise<DeleteCCRuleResponse> {
+    return this.request("DeleteCCRule", req, cb)
   }
 
   /**

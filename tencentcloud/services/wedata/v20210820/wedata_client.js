@@ -1187,10 +1187,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIntegrationVersionNodesInfo", req, cb);
     }
     /**
-     * 修改任务告警规则
+     * 获取项目下的用户，分页返回
      */
-    async ModifyTaskAlarmRegular(req, cb) {
-        return this.request("ModifyTaskAlarmRegular", req, cb);
+    async DescribeProjectUsers(req, cb) {
+        return this.request("DescribeProjectUsers", req, cb);
     }
     /**
      * 获取工作流调度信息
@@ -1307,6 +1307,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTaskFolder(req, cb) {
         return this.request("CreateTaskFolder", req, cb);
+    }
+    /**
+     * 修改任务告警规则
+     */
+    async ModifyTaskAlarmRegular(req, cb) {
+        return this.request("ModifyTaskAlarmRegular", req, cb);
     }
     /**
      * 批量继续执行集成实时任务

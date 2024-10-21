@@ -462,6 +462,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
     }
     /**
+     * 创建RabbitMQ路由关系
+     */
+    async CreateRabbitMQBinding(req, cb) {
+        return this.request("CreateRabbitMQBinding", req, cb);
+    }
+    /**
      * 查询消息轨迹
      */
     async DescribeMsgTrace(req, cb) {

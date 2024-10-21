@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   RocketMQNamespace,
+  CreateRabbitMQBindingResponse,
   ModifyRocketMQInstanceSpecRequest,
   DeleteClusterResponse,
   CreateCmqTopicRequest,
@@ -208,7 +209,7 @@ import {
   ModifyRocketMQEnvironmentRoleResponse,
   CreateCmqQueueResponse,
   DeleteRabbitMQVipInstanceRequest,
-  ModifyEnvironmentAttributesResponse,
+  Filter,
   DescribeRocketMQPublicAccessMonitorDataRequest,
   DescribeRolesResponse,
   DeleteRabbitMQUserRequest,
@@ -307,6 +308,7 @@ import {
   ExportRocketMQMessageDetailRequest,
   CreateRabbitMQUserResponse,
   ModifyRocketMQRoleResponse,
+  CreateRabbitMQBindingRequest,
   DescribePulsarProInstanceDetailRequest,
   BindCluster,
   ModifyClusterResponse,
@@ -360,7 +362,7 @@ import {
   DescribeRocketMQVipInstancesRequest,
   DeleteRabbitMQVirtualHostRequest,
   CreateRabbitMQVipInstanceResponse,
-  Filter,
+  ModifyEnvironmentAttributesResponse,
   CmqTransactionPolicy,
   ModifyTopicRequest,
   Consumer,
@@ -1121,6 +1123,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
   ): Promise<ResetMsgSubOffsetByTimestampResponse> {
     return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
+  }
+
+  /**
+   * 创建RabbitMQ路由关系
+   */
+  async CreateRabbitMQBinding(
+    req: CreateRabbitMQBindingRequest,
+    cb?: (error: string, rep: CreateRabbitMQBindingResponse) => void
+  ): Promise<CreateRabbitMQBindingResponse> {
+    return this.request("CreateRabbitMQBinding", req, cb)
   }
 
   /**

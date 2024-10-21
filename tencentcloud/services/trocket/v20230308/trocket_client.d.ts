@@ -37,7 +37,7 @@ export declare class Client extends AbstractClient {
      */
     ImportSourceClusterConsumerGroups(req: ImportSourceClusterConsumerGroupsRequest, cb?: (error: string, rep: ImportSourceClusterConsumerGroupsResponse) => void): Promise<ImportSourceClusterConsumerGroupsResponse>;
     /**
-     * 删除实例
+     * 删除 RocketMQ 5.x 集群。
      */
     DeleteInstance(req: DeleteInstanceRequest, cb?: (error: string, rep: DeleteInstanceResponse) => void): Promise<DeleteInstanceResponse>;
     /**
@@ -144,7 +144,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteMQTTTopic(req: DeleteMQTTTopicRequest, cb?: (error: string, rep: DeleteMQTTTopicResponse) => void): Promise<DeleteMQTTTopicResponse>;
     /**
-     * 查询实例信息
+     * 查询 RocketMQ 5.x 集群信息。
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
     /**
@@ -198,11 +198,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceList(req: DescribeInstanceListRequest, cb?: (error: string, rep: DescribeInstanceListResponse) => void): Promise<DescribeInstanceListResponse>;
     /**
-     * 获取实例列表，Filters参数使用说明如下：
+     * 查询集群列表，支持 4.x 和 5.x 集群，其中 Filters 参数使用说明如下：
 1. InstanceName, 名称模糊查询
-2. InstanceId，实例ID查询
-3. InstanceType, 实例类型查询，支持多选
-4. Version，实例版本查询
+2. InstanceId，集群ID查询
+3. InstanceType, 集群类型查询，支持多选
+4. Version，集群版本查询
 当使用TagFilters查询时，Filters参数失效。
      */
     DescribeFusionInstanceList(req: DescribeFusionInstanceListRequest, cb?: (error: string, rep: DescribeFusionInstanceListResponse) => void): Promise<DescribeFusionInstanceListResponse>;

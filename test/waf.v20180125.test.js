@@ -278,9 +278,9 @@ it("waf.v20180125.DescribeUserDomainInfo", async function () {
     }
 })
 
-it("waf.v20180125.DeleteCCRule", async function () {
+it("waf.v20180125.DescribeProtectionModes", async function () {
     try {
-       const data = await client.DeleteCCRule({})
+       const data = await client.DescribeProtectionModes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1341,6 +1341,16 @@ it("waf.v20180125.DeleteAntiFakeUrl", async function () {
 it("waf.v20180125.DescribeCCRuleList", async function () {
     try {
        const data = await client.DescribeCCRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteCCRule", async function () {
+    try {
+       const data = await client.DeleteCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

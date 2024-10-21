@@ -713,6 +713,11 @@ export interface DescribeCaptchaResultResponse {
      */
     SubmitCaptchaTime?: number;
     /**
+     * 设备风险大类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceRiskCategory?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -963,7 +968,7 @@ export interface DescribeCaptchaDataResponse {
  */
 export interface DescribeCaptchaResultRequest {
     /**
-     * 固定填值：9。可在控制台配置不同验证码类型。
+     * 固定填值：9。
      */
     CaptchaType: number;
     /**
@@ -1235,7 +1240,7 @@ export interface DescribeCaptchaAppIdInfoResponse {
  */
 export interface DescribeCaptchaRceResultRequest {
     /**
-     * 固定填值：9。可在控制台配置不同验证码类型。
+     * 固定填值：9。
      */
     CaptchaType: number;
     /**
@@ -1328,7 +1333,7 @@ export interface DescribeCaptchaDataRequest {
  */
 export interface DescribeCaptchaMiniResultRequest {
     /**
-     * 固定填值：9（滑块验证码）
+     * 固定填值：9
      */
     CaptchaType: number;
     /**
