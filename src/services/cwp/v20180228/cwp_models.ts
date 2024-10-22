@@ -395,7 +395,7 @@ export interface DescribeAssetAppCountResponse {
    * 各软件应用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Apps: Array<AssetKeyVal>
+  Apps?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1276,31 +1276,31 @@ export interface DescribeHistoryServiceResponse {
   /**
    * 1 可购买 2 只能升降配 3 只能跳到续费管理页
    */
-  BuyStatus: number
+  BuyStatus?: number
   /**
    * 用户已购容量 单位 G
    */
-  InquireNum: number
+  InquireNum?: number
   /**
    * 到期时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 是否自动续费,0 初始值, 1 开通 2 没开通
    */
-  IsAutoOpenRenew: number
+  IsAutoOpenRenew?: number
   /**
    * 资源ID
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 0 没开通 1 正常 2隔离 3销毁
    */
-  Status: number
+  Status?: number
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1733,7 +1733,7 @@ export interface DescribeAssetUserInfoResponse {
   /**
    * 用户详细信息
    */
-  User: AssetUserDetail
+  User?: AssetUserDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1809,23 +1809,23 @@ export interface DescribeServersAndRiskAndFirstInfoResponse {
   /**
    * 风险文件数
    */
-  RiskFileCount: number
+  RiskFileCount?: number
   /**
    * 今日新增风险文件数
    */
-  AddRiskFileCount: number
+  AddRiskFileCount?: number
   /**
    * 受影响服务器台数
    */
-  ServersCount: number
+  ServersCount?: number
   /**
    * 是否试用：true-是，false-否
    */
-  IsFirstCheck: boolean
+  IsFirstCheck?: boolean
   /**
    * 木马最近检测时间
    */
-  ScanTime: string
+  ScanTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3210,7 +3210,7 @@ export interface ExportAssetWebLocationListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3695,27 +3695,27 @@ export interface DescribeServerRelatedDirInfoResponse {
   /**
    * 服务器名称
    */
-  HostName: string
+  HostName?: string
   /**
    * 服务器IP
    */
-  HostIp: string
+  HostIp?: string
   /**
    * 防护目录数量
    */
-  ProtectDirNum: number
+  ProtectDirNum?: number
   /**
    * 防护文件数量
    */
-  ProtectFileNum: number
+  ProtectFileNum?: number
   /**
    * 防篡改数量
    */
-  ProtectTamperNum: number
+  ProtectTamperNum?: number
   /**
    * 防护软链数量
    */
-  ProtectLinkNum: number
+  ProtectLinkNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3947,7 +3947,7 @@ export interface DescribeRansomDefenseStrategyDetailResponse {
    * 策略详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Strategy: RansomDefenseStrategyDetail
+  Strategy?: RansomDefenseStrategyDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4147,7 +4147,7 @@ export interface DescribeRiskBatchStatusResponse {
    * Handling:正在执行删除操作，
 Pending：没有任务执行
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4210,12 +4210,12 @@ export interface DescribeRansomDefenseMachineListResponse {
    * 主机列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<RansomDefenseStrategyMachineBackupInfo>
+  List?: Array<RansomDefenseStrategyMachineBackupInfo>
   /**
    * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5079,7 +5079,7 @@ export interface DescribeESAggregationsResponse {
   /**
    * ES聚合结果JSON
    */
-  Data: string
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5664,13 +5664,13 @@ export interface CKafkaRouteInfo {
  */
 export interface SeparateMalwaresResponse {
   /**
-   * 隔离成功的id数组，若无则返回空数组
+   * 隔离成功的ID数组，若无则返回空数组
    */
-  SuccessIds: Array<number | bigint>
+  SuccessIds?: Array<number | bigint>
   /**
-   * 隔离失败的id数组，若无则返回空数组
+   * 隔离失败的ID数组，若无则返回空数组
    */
-  FailedIds: Array<number | bigint>
+  FailedIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5713,7 +5713,7 @@ export interface ExportAssetJarListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5944,7 +5944,7 @@ export interface ExportAssetProcessInfoListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6780,12 +6780,12 @@ export interface DescribeRansomDefenseStrategyMachinesResponse {
    * 主机列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<RansomDefenseStrategyMachineDetail>
+  List?: Array<RansomDefenseStrategyMachineDetail>
   /**
    * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7288,121 +7288,121 @@ export interface AssetUserDetail {
   /**
    * 主机内网IP
    */
-  MachineIp: string
+  MachineIp?: string
   /**
    * 主机名称
    */
-  MachineName: string
+  MachineName?: string
   /**
    * 主机Uuid
    */
-  Uuid: string
+  Uuid?: string
   /**
    * 主机Quuid
    */
-  Quuid: string
+  Quuid?: string
   /**
    * 账号UID
    */
-  Uid: string
+  Uid?: string
   /**
    * 账号GID
    */
-  Gid: string
+  Gid?: string
   /**
    * 账号状态：0-禁用；1-启用
    */
-  Status: number
+  Status?: number
   /**
    * 是否有root权限：0-否；1是，999为空: 仅linux
    */
-  IsRoot: number
+  IsRoot?: number
   /**
    * 上次登录时间
    */
-  LastLoginTime: string
+  LastLoginTime?: string
   /**
    * 账号名称
    */
-  Name: string
+  Name?: string
   /**
-   * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows
+   * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅Windows
    */
-  UserType: number
+  UserType?: number
   /**
-   * 是否域账号：0否， 1是, 999为空  仅windows
+   * 是否域账号：0否， 1是, 999为空  仅Windows
    */
-  IsDomain: number
+  IsDomain?: number
   /**
    * 是否允许ssh登录，1是，0否, 999为空, 仅linux
    */
-  IsSshLogin: number
+  IsSshLogin?: number
   /**
    * Home目录
    */
-  HomePath: string
+  HomePath?: string
   /**
    * Shell路径  仅linux
    */
-  Shell: string
+  Shell?: string
   /**
    * 是否shell登录性，0不是；1是 仅linux
    */
-  ShellLoginStatus: number
+  ShellLoginStatus?: number
   /**
    * 密码修改时间
    */
-  PasswordChangeTime: string
+  PasswordChangeTime?: string
   /**
    * 密码过期时间  仅linux
    */
-  PasswordDueTime: string
+  PasswordDueTime?: string
   /**
    * 密码锁定时间：单位天, -1为永不锁定 999为空，仅linux
    */
-  PasswordLockDays: number
+  PasswordLockDays?: number
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 用户组名
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 账号到期时间
    */
-  DisableTime: string
+  DisableTime?: string
   /**
    * 最近登录终端
    */
-  LastLoginTerminal: string
+  LastLoginTerminal?: string
   /**
    * 最近登录位置
    */
-  LastLoginLoc: string
+  LastLoginLoc?: string
   /**
    * 最近登录IP
    */
-  LastLoginIp: string
+  LastLoginIp?: string
   /**
    * 密码过期提醒：单位天
    */
-  PasswordWarnDays: number
+  PasswordWarnDays?: number
   /**
    * 密码修改设置：0-不可修改，1-可修改
    */
-  PasswordChangeType: number
+  PasswordChangeType?: number
   /**
    * 用户公钥列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Keys: Array<AssetUserKeyInfo>
+  Keys?: Array<AssetUserKeyInfo>
   /**
    * 数据更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -7522,12 +7522,12 @@ export interface DescribeRansomDefenseBackupListResponse {
    * 备份列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<RansomDefenseBackup>
+  List?: Array<RansomDefenseBackup>
   /**
    * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8189,12 +8189,12 @@ export interface DescribeAssetWebLocationPathListResponse {
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Paths: Array<AssetWebLocationPath>
+  Paths?: Array<AssetWebLocationPath>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9135,11 +9135,11 @@ export interface DescribeAssetUserKeyListResponse {
    * 公钥列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Keys: Array<AssetUserKeyInfo>
+  Keys?: Array<AssetUserKeyInfo>
   /**
    * 分区总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10254,11 +10254,11 @@ export interface DescribeAssetDiskListResponse {
    * 磁盘分区列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Disks: Array<AssetDiskPartitionInfo>
+  Disks?: Array<AssetDiskPartitionInfo>
   /**
    * 分区总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10345,7 +10345,7 @@ initservice:启动服务
 env: 环境变量
 coremodule: 内核模块
    */
-  Types: Array<AssetKeyVal>
+  Types?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10999,7 +10999,7 @@ export interface DescribeFileTamperRuleInfoResponse {
   /**
    * 规则详情信息
    */
-  FileTamperRuleDetail: FileTamperRuleDetail
+  FileTamperRuleDetail?: FileTamperRuleDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11238,7 +11238,7 @@ export interface DescribeAssetDatabaseCountResponse {
   /**
    * 各数据库数量
    */
-  Databases: Array<AssetKeyVal>
+  Databases?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11375,11 +11375,11 @@ export interface AssetUserBaseInfo {
    */
   ProjectId?: number
   /**
-   * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅windows
+   * 账号类型：0访客用户，1标准用户，2管理员用户 ,999为空,仅Windows
    */
   UserType?: number
   /**
-   * 是否域账号：0否， 1是，2否, 999为空  仅windows
+   * 是否域账号：0否， 1是，2否, 999为空  仅Windows
    */
   IsDomain?: number
   /**
@@ -12011,12 +12011,12 @@ export interface DescribeMalwareWhiteListAffectListResponse {
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 白名单规则影响事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AffectList: Array<MalwareWhiteListAffectEvent>
+  AffectList?: Array<MalwareWhiteListAffectEvent>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12170,6 +12170,11 @@ export interface RansomDefenseStrategyMachineBackupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupSuccessCount: number
+  /**
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-普惠版
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostVersion?: number
 }
 
 /**
@@ -12208,7 +12213,7 @@ export interface ExportAssetPlanTaskListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13439,39 +13444,39 @@ export interface DescribeWebPageServiceInfoResponse {
   /**
    * 是否已购服务：true-是，false-否
    */
-  Status: boolean
+  Status?: boolean
   /**
    * 已使用授权数
    */
-  UsedNum: number
+  UsedNum?: number
   /**
    * 剩余授权数
    */
-  ResidueNum: number
+  ResidueNum?: number
   /**
    * 已购授权数
    */
-  BuyNum: number
+  BuyNum?: number
   /**
    * 临近到期数量
    */
-  ExpireNum: number
+  ExpireNum?: number
   /**
    * 所有授权机器信息
    */
-  AllAuthorizedMachines: Array<ProtectMachineInfo>
+  AllAuthorizedMachines?: Array<ProtectMachineInfo>
   /**
    * 临近到期授权机器信息
    */
-  ExpireAuthorizedMachines: Array<ProtectMachine>
+  ExpireAuthorizedMachines?: Array<ProtectMachine>
   /**
    * 已过期授权数
    */
-  ExpiredNum: number
+  ExpiredNum?: number
   /**
    * 防护目录数
    */
-  ProtectDirNum: number
+  ProtectDirNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14962,11 +14967,11 @@ export interface DescribeSecurityBroadcastsResponse {
   /**
    * 列表
    */
-  List: Array<Broadcasts>
+  List?: Array<Broadcasts>
   /**
    * 总共多少条
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16057,7 +16062,7 @@ export interface DescribeMalwareFileResponse {
   /**
    * 木马文件下载地址
    */
-  FileUrl: string
+  FileUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16082,7 +16087,7 @@ export interface DescribeSecurityBroadcastInfoResponse {
    * 安全播报文章详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BroadcastInfo: BroadcastInfo
+  BroadcastInfo?: BroadcastInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16321,7 +16326,7 @@ export interface DescribeAssetWebAppCountResponse {
   /**
    * 各Web应用数量
    */
-  WebApps: Array<AssetKeyVal>
+  WebApps?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16914,7 +16919,7 @@ export interface DescribeAssetWebFrameCountResponse {
   /**
    * 各Web框架数量
    */
-  WebFrames: Array<AssetKeyVal>
+  WebFrames?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16928,11 +16933,11 @@ export interface DescribeWebPageEventListResponse {
   /**
    * 防护事件列表信息
    */
-  List: Array<ProtectEventLists>
+  List?: Array<ProtectEventLists>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16976,7 +16981,7 @@ export interface DescribeAssetWebLocationCountResponse {
   /**
    * 各Web站点数量
    */
-  WebLocations: Array<AssetKeyVal>
+  WebLocations?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17294,7 +17299,7 @@ export interface DescribeFileTamperRuleCountResponse {
    * 主机关联核心文件规则数量信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<FileTamperRuleCount>
+  List?: Array<FileTamperRuleCount>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17611,7 +17616,7 @@ export interface DescribeAssetProcessCountResponse {
    * 各进程数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Process: Array<AssetKeyVal>
+  Process?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17960,7 +17965,7 @@ export interface ExportAssetDatabaseListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18144,7 +18149,7 @@ export interface ExportAssetWebServiceInfoListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18362,47 +18367,51 @@ export interface MalwareWhiteListInfo {
   /**
    * 唯一ID。
    */
-  Id: number
+  Id?: number
   /**
    * cvm quuid 按,分割。
    */
-  QuuidList: string
+  QuuidList?: string
   /**
    * md5列表 按,分割
    */
-  Md5List: string
+  Md5List?: string
   /**
    * 是否全部主机； 0否，1是
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 白名单模式；0 MD5 ，1自定义
    */
-  Mode: number
+  Mode?: number
   /**
    * 匹配模式；0精确匹配，1模糊匹配
    */
-  MatchType: number
+  MatchType?: number
   /**
    * 文件名；按,分割
    */
-  FileName: string
+  FileName?: string
   /**
    * 文件目录；按,分割
    */
-  FileDirectory: string
+  FileDirectory?: string
   /**
    * 文件后缀；按,分割
    */
-  FileExtension: string
+  FileExtension?: string
   /**
    * 规则创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 受影响记录
    */
-  EventsCount: number
+  EventsCount?: number
+  /**
+   * 规则修改时间
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -18707,12 +18716,12 @@ export interface DescribeRansomDefenseRollBackTaskListResponse {
    * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<RansomDefenseRollbackTask>
+  List?: Array<RansomDefenseRollbackTask>
   /**
    * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19030,7 +19039,7 @@ export interface ExportAssetInitServiceListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19762,11 +19771,11 @@ export interface DescribeSecurityDynamicsResponse {
   /**
    * 安全事件消息数组。
    */
-  SecurityDynamics: Array<SecurityDynamic>
+  SecurityDynamics?: Array<SecurityDynamic>
   /**
    * 记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19790,7 +19799,7 @@ export interface ExportAssetEnvListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20161,7 +20170,7 @@ export interface DescribeMalwareWhiteListRequest {
    */
   Order?: string
   /**
-   * 可选排序列: [EventsCount]
+   * 可选排序列: [EventsCount|CreateTime|ModifyTime]
    */
   By?: string
 }
@@ -20213,7 +20222,7 @@ export interface ScanAssetResponse {
    * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20501,7 +20510,7 @@ export interface DescribeMalwareInfoResponse {
   /**
    * 恶意文件详情信息
    */
-  MalwareInfo: MalwareInfo
+  MalwareInfo?: MalwareInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20654,11 +20663,11 @@ export interface DescribeAssetEnvListResponse {
    * 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Envs: Array<AssetEnvBaseInfo>
+  Envs?: Array<AssetEnvBaseInfo>
   /**
    * 总数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20691,7 +20700,7 @@ export interface DescribeSecurityBroadcastsRequest {
    */
   EndDate?: string
   /**
-   * 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布
+   * 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布，4-最佳实践
    */
   BroadcastType?: string
 }
@@ -21630,22 +21639,7 @@ export interface ExportAssetAppListRequest {
    */
   Quuid?: string
   /**
-   * 过滤条件。
-<li>AppName- string - 是否必填：否 - 应用名搜索</li>
-<li>IP - String - 是否必填：否 - 主机ip</li>
-<li>MachineName - String - 是否必填：否 - 主机名称</li>
-<li>InstanceID - string - 是否必填：否 - 实例ID</li>
-<li>Type - int - 是否必填：否 - 类型	: 仅linux
-0: 全部
-1: 运维
-2 : 数据库
-3 : 安全
-4 : 可疑应用
-5 : 系统架构
-6 : 系统应用
-7 : WEB服务
-99:其他</li>
-<li>OsType - uint64 - 是否必填：否 - windows/linux</li>
+   * 过滤条件。<li>AppName- string - 是否必填：否 - 应用名搜索</li><li>IP - String - 是否必填：否 - 主机ip</li><li>MachineName - String - 是否必填：否 - 主机名称</li><li>InstanceID - string - 是否必填：否 - 实例ID</li><li>Type - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他</li><li>OsType - uint64 - 是否必填：否 - Windows/Linux</li>
    */
   Filters?: Array<AssetFilters>
   /**
@@ -21758,12 +21752,12 @@ export interface DescribeRansomDefenseEventsListResponse {
    * 事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<RansomDefenseEvent>
+  List?: Array<RansomDefenseEvent>
   /**
    * 分页查询记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22565,7 +22559,7 @@ export interface DescribeAssetWebServiceCountResponse {
   /**
    * 各Web服务数量
    */
-  WebServices: Array<AssetKeyVal>
+  WebServices?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23114,7 +23108,7 @@ export interface ExportAssetWebAppListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23158,21 +23152,21 @@ export interface DescribeMalwareRiskWarningResponse {
   /**
    * 是否开启自动扫描：true-开启，false-未开启
    */
-  IsCheckRisk: boolean
+  IsCheckRisk?: boolean
   /**
    * 风险文件列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<MalwareRisk>
+  List?: Array<MalwareRisk>
   /**
    * 是否弹出提示 true 弹出, false不弹
    */
-  IsPop: boolean
+  IsPop?: boolean
   /**
    * 异常进程列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessList: Array<MalwareRisk>
+  ProcessList?: Array<MalwareRisk>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23316,95 +23310,95 @@ export interface DescribeSecurityEventStatResponse {
   /**
    * 木马事件统计
    */
-  MalwareStat: EventStat
+  MalwareStat?: EventStat
   /**
    * 异地事件统计
    */
-  HostLoginStat: EventStat
+  HostLoginStat?: EventStat
   /**
    * 爆破事件统计
    */
-  BruteAttackStat: EventStat
+  BruteAttackStat?: EventStat
   /**
    * 恶意请求事件统计
    */
-  MaliciousRequestStat: EventStat
+  MaliciousRequestStat?: EventStat
   /**
    * 本地提权事件统计
    */
-  PrivilegeStat: EventStat
+  PrivilegeStat?: EventStat
   /**
    * 反弹Shell事件统计
    */
-  ReverseShellStat: EventStat
+  ReverseShellStat?: EventStat
   /**
    * 高危命令事件统计
    */
-  HighRiskBashStat: EventStat
+  HighRiskBashStat?: EventStat
   /**
    * 网络攻击事件统计
    */
-  AttackLogsStat: EventStat
+  AttackLogsStat?: EventStat
   /**
    * 高危漏洞事件统计
    */
-  VulHighStat: EventStat
+  VulHighStat?: EventStat
   /**
    * 中危漏洞事件统计
    */
-  VulNormalStat: EventStat
+  VulNormalStat?: EventStat
   /**
    * 低危漏洞事件统计
    */
-  VulLowStat: EventStat
+  VulLowStat?: EventStat
   /**
    * 高危基线漏洞事件统计
    */
-  BaselineHighStat: EventStat
+  BaselineHighStat?: EventStat
   /**
    * 中危基线漏事件统计
    */
-  BaselineNormalStat: EventStat
+  BaselineNormalStat?: EventStat
   /**
    * 低危基线漏事件统计
    */
-  BaselineLowStat: EventStat
+  BaselineLowStat?: EventStat
   /**
    * 有未处理安全事件的机器总数
    */
-  MachineTotalAffectNum: number
+  MachineTotalAffectNum?: number
   /**
    * 有未处理入侵安全事件的机器总数
    */
-  InvasionTotalAffectNum: number
+  InvasionTotalAffectNum?: number
   /**
    * 有未处理漏洞安全事件的机器总数
    */
-  VulTotalAffectNum: number
+  VulTotalAffectNum?: number
   /**
    * 有未处理基线安全事件的机器总数
    */
-  BaseLineTotalAffectNum: number
+  BaseLineTotalAffectNum?: number
   /**
    * 有未处理网络攻击安全事件的机器总数
    */
-  CyberAttackTotalAffectNum: number
+  CyberAttackTotalAffectNum?: number
   /**
    * 严重漏洞事件统计
    */
-  VulRiskStat: EventStat
+  VulRiskStat?: EventStat
   /**
    * 严重基线漏洞事件统计
    */
-  BaselineRiskStat: EventStat
+  BaselineRiskStat?: EventStat
   /**
    * 漏洞数统计
    */
-  VulStat: EventStat
+  VulStat?: EventStat
   /**
    * 安全得分
    */
-  Score: number
+  Score?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25183,7 +25177,7 @@ export interface ExportAssetPortInfoListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26228,6 +26222,11 @@ export interface MalwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MachineExtraInfo?: MachineExtraInfo
+  /**
+   * 参考链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  References?: Array<string>
 }
 
 /**
@@ -26858,12 +26857,12 @@ export interface DescribeScreenGeneralStatResponse {
    * name 的值: 在线，关机/离线,未安装，
 value : 表示对应的数量
    */
-  Machines: Array<ScreenNameValue>
+  Machines?: Array<ScreenNameValue>
   /**
    * name 的值: 旗舰版，专业版，基础版
 value : 表示对应的数量
    */
-  Protection: Array<ScreenNameValue>
+  Protection?: Array<ScreenNameValue>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26970,6 +26969,11 @@ export interface RansomDefenseRollbackTask {
    * 可用区信息
    */
   RegionInfo: RegionInfo
+  /**
+   * 主机示例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -28722,7 +28726,7 @@ export interface DescribeVulDefenceOverviewResponse {
   /**
    * 漏洞防御概览信息
    */
-  Overview: VulDefenceOverview
+  Overview?: VulDefenceOverview
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -29069,11 +29073,11 @@ export interface DescribeMalwareWhiteListResponse {
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 白名单列表
    */
-  WhiteList: Array<MalwareWhiteListInfo>
+  WhiteList?: Array<MalwareWhiteListInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

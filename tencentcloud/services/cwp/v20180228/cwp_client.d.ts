@@ -864,7 +864,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBaselinePolicy(req: ModifyBaselinePolicyRequest, cb?: (error: string, rep: ModifyBaselinePolicyResponse) => void): Promise<ModifyBaselinePolicyResponse>;
     /**
-     * 查询攻击溯源事件
+     * 已废弃
+
+查询攻击溯源事件
      */
     DescribeAttackSourceEvents(req: DescribeAttackSourceEventsRequest, cb?: (error: string, rep: DescribeAttackSourceEventsResponse) => void): Promise<DescribeAttackSourceEventsResponse>;
     /**
@@ -1201,7 +1203,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetAppList(req: DescribeAssetAppListRequest, cb?: (error: string, rep: DescribeAssetAppListResponse) => void): Promise<DescribeAssetAppListResponse>;
     /**
-     * 查询攻击溯源
+     * 已废弃
+
+查询攻击溯源
      */
     DescribeAttackSource(req: DescribeAttackSourceRequest, cb?: (error: string, rep: DescribeAttackSourceResponse) => void): Promise<DescribeAttackSourceResponse>;
     /**

@@ -188,7 +188,7 @@ export declare class Client extends AbstractClient {
      */
     CreateMQTTInstance(req: CreateMQTTInstanceRequest, cb?: (error: string, rep: CreateMQTTInstanceResponse) => void): Promise<CreateMQTTInstanceResponse>;
     /**
-     * 获取集群列表，仅支持 5.x 集群，Filters参数使用说明如下：
+     * 查询集群列表，仅支持 5.x 集群。Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，集群ID查询
 3. InstanceType, 集群类型查询，支持多选
@@ -225,7 +225,7 @@ ConsumerGroup，消费组名称过滤
      */
     DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
     /**
-     * 修改实例属性
+     * 修改 RocketMQ 5.x 集群属性。
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
     /**

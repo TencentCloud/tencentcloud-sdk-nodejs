@@ -423,7 +423,7 @@ export interface DescribeRocketMQEnvironmentRolesRequest {
    */
   ClusterId: string
   /**
-   * 环境（命名空间）名称。
+   * 命名空间
    */
   EnvironmentId?: string
   /**
@@ -439,10 +439,7 @@ export interface DescribeRocketMQEnvironmentRolesRequest {
    */
   RoleName?: string
   /**
-   * * RoleName
-按照角色名进行过滤，精确查询。
-类型：String
-必选：否
+   * RoleName按照角色名进行过滤，精确查询。类型：String必选：否
    */
   Filters?: Array<Filter>
 }
@@ -2204,6 +2201,31 @@ export interface RocketMQGroupConfigOutput {
 }
 
 /**
+ * DeleteRabbitMQBinding返回参数结构体
+ */
+export interface DeleteRabbitMQBindingResponse {
+  /**
+   * 队列名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * vhost参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualHost?: string
+  /**
+   * 路由关系Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRabbitMQVipInstance返回参数结构体
  */
 export interface ModifyRabbitMQVipInstanceResponse {
@@ -2412,44 +2434,66 @@ export interface SetRocketMQPublicAccessPointResponse {
 }
 
 /**
- * RocketMQ主题配置信息
+ * DescribeRocketMQTopicMsgs请求参数结构体
  */
-export interface RocketMQTopicConfigOutput {
+export interface DescribeRocketMQTopicMsgsRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
   /**
    * 命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace?: string
+  EnvironmentId: string
   /**
-   * 主题名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 主题名称，查询死信时为groupId
    */
-  TopicName?: string
+  TopicName: string
   /**
-   * 主题类型：
-Normal，普通
-GlobalOrder， 全局顺序
-PartitionedOrder, 分区顺序
-Transaction，事务消息
-DelayScheduled，延迟/定时消息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开始时间
    */
-  Type?: string
+  StartTime: string
   /**
-   * 分区个数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束时间
    */
-  Partitions?: number
+  EndTime: string
   /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消息 ID
    */
-  Remark?: string
+  MsgId?: string
   /**
-   * 是否导入
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消息 key
    */
-  Imported?: boolean
+  MsgKey?: string
+  /**
+   * 查询偏移
+   */
+  Offset?: number
+  /**
+   * 查询限额
+   */
+  Limit?: number
+  /**
+   * 标志一次分页事务
+   */
+  TaskRequestId?: string
+  /**
+   * 死信查询时该值为true，只对Rocketmq有效
+   * @deprecated
+   */
+  QueryDlqMsg?: boolean
+  /**
+   * 查询最近N条消息 最大不超过1024，默认-1为其他查询条件
+   */
+  NumOfLatestMsg?: number
+  /**
+   * TAG表达式
+   */
+  Tag?: string
+  /**
+   * 死信查询时该值为true，只对Rocketmq有效
+   */
+  QueryDeadLetterMessage?: boolean
 }
 
 /**
@@ -2776,27 +2820,27 @@ export interface EnvironmentRole {
   /**
    * 环境（命名空间）。
    */
-  EnvironmentId: string
+  EnvironmentId?: string
   /**
    * 角色名称。
    */
-  RoleName: string
+  RoleName?: string
   /**
    * 授权项，最多只能包含produce、consume两项的非空字符串数组。
    */
-  Permissions: Array<string>
+  Permissions?: Array<string>
   /**
    * 角色描述。
    */
-  RoleDescribe: string
+  RoleDescribe?: string
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -3165,66 +3209,44 @@ filterType = 2表示用户使用 bindingKey 过滤。
 }
 
 /**
- * DescribeRocketMQTopicMsgs请求参数结构体
+ * RocketMQ主题配置信息
  */
-export interface DescribeRocketMQTopicMsgsRequest {
-  /**
-   * 集群 ID
-   */
-  ClusterId: string
+export interface RocketMQTopicConfigOutput {
   /**
    * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvironmentId: string
+  Namespace?: string
   /**
-   * 主题名称，查询死信时为groupId
+   * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TopicName?: string
   /**
-   * 开始时间
+   * 主题类型：
+Normal，普通
+GlobalOrder， 全局顺序
+PartitionedOrder, 分区顺序
+Transaction，事务消息
+DelayScheduled，延迟/定时消息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  Type?: string
   /**
-   * 结束时间
+   * 分区个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  Partitions?: number
   /**
-   * 消息 ID
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgId?: string
+  Remark?: string
   /**
-   * 消息 key
+   * 是否导入
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgKey?: string
-  /**
-   * 查询偏移
-   */
-  Offset?: number
-  /**
-   * 查询限额
-   */
-  Limit?: number
-  /**
-   * 标志一次分页事务
-   */
-  TaskRequestId?: string
-  /**
-   * 死信查询时该值为true，只对Rocketmq有效
-   * @deprecated
-   */
-  QueryDlqMsg?: boolean
-  /**
-   * 查询最近N条消息 最大不超过1024，默认-1为其他查询条件
-   */
-  NumOfLatestMsg?: number
-  /**
-   * TAG表达式
-   */
-  Tag?: string
-  /**
-   * 死信查询时该值为true，只对Rocketmq有效
-   */
-  QueryDeadLetterMessage?: boolean
+  Imported?: boolean
 }
 
 /**
@@ -3393,6 +3415,8 @@ DeadLetter 死信
   IsOnline?: boolean
   /**
    * 消费类型
+0: 广播消费
+1: 集群消费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumeType?: number
@@ -3554,16 +3578,16 @@ export interface DescribeRocketMQConsumerConnectionsResponse {
   /**
    * 总数目
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 在线消费者信息
    */
-  Connections: Array<RocketMQConsumerConnection>
+  Connections?: Array<RocketMQConsumerConnection>
   /**
    * 订阅组信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupDetail: RocketMQGroup
+  GroupDetail?: RocketMQGroup
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4042,7 +4066,7 @@ export interface ClearCmqQueueRequest {
  */
 export interface CreateRocketMQEnvironmentRoleRequest {
   /**
-   * 环境（命名空间）名称。
+   * 命名空间
    */
   EnvironmentId: string
   /**
@@ -4119,6 +4143,26 @@ export interface ModifyAMQPClusterRequest {
    * 说明信息，不超过128个字符
    */
   Remark?: string
+}
+
+/**
+ * DescribeRabbitMQBindings返回参数结构体
+ */
+export interface DescribeRabbitMQBindingsResponse {
+  /**
+   * 路由关系列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingInfoList?: Array<RabbitMQBindingListInfo>
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5076,6 +5120,24 @@ TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入,
 }
 
 /**
+ * DeleteRabbitMQBinding请求参数结构体
+ */
+export interface DeleteRabbitMQBindingRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * Vhost参数
+   */
+  VirtualHost: string
+  /**
+   * 路由关系Id
+   */
+  BindingId: number
+}
+
+/**
  * DescribeRocketMQSmoothMigrationTask返回参数结构体
  */
 export interface DescribeRocketMQSmoothMigrationTaskResponse {
@@ -5232,7 +5294,7 @@ export interface VerifyRocketMQConsumeRequest {
    */
   ClientId: string
   /**
-   * topic名称
+   * 主题名称
    */
   TopicName: string
 }
@@ -5256,17 +5318,13 @@ export interface DescribeRabbitMQQueueDetailRequest {
 }
 
 /**
- * RocketMQtopic分布情况
+ * DescribePulsarProInstanceDetail请求参数结构体
  */
-export interface RocketMQTopicDistribution {
+export interface DescribePulsarProInstanceDetailRequest {
   /**
-   * topic类型
+   * 集群ID
    */
-  TopicType: string
-  /**
-   * topic数量
-   */
-  Count: number
+  ClusterId: string
 }
 
 /**
@@ -5384,10 +5442,7 @@ export interface DescribeRocketMQRolesRequest {
    */
   RoleName?: string
   /**
-   * * RoleName
-按照角色名进行过滤，精确查询。
-类型：String
-必选：否
+   * RoleName按照角色名进行过滤，精确查询。类型：String必选：否
    */
   Filters?: Array<Filter>
 }
@@ -5609,23 +5664,23 @@ export interface Role {
   /**
    * 角色名称。
    */
-  RoleName: string
+  RoleName?: string
   /**
    * 角色token值。
    */
-  Token: string
+  Token?: string
   /**
    * 备注说明。
    */
-  Remark: string
+  Remark?: string
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -6000,28 +6055,28 @@ export interface RocketMQConsumerTopic {
   /**
    * 主题名称
    */
-  Topic: string
+  Topic?: string
   /**
-   * 主题类型，Default表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
+   * 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
    */
-  Type: string
+  Type?: string
   /**
    * 分区数
    */
-  PartitionNum: number
+  PartitionNum?: number
   /**
    * 消息堆积数
    */
-  Accumulative: number
+  Accumulative?: number
   /**
    * 最后消费时间，以毫秒为单位
    */
-  LastConsumptionTime: number
+  LastConsumptionTime?: number
   /**
    * 订阅规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubRule: string
+  SubRule?: string
 }
 
 /**
@@ -6056,6 +6111,57 @@ export interface DescribePublishersRequest {
    * 排序器
    */
   Sort?: Sort
+}
+
+/**
+ * Rabbitmq路由关系列表成员
+ */
+export interface RabbitMQBindingListInfo {
+  /**
+   * 路由关系id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingId?: number
+  /**
+   * Vhost参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualHost?: string
+  /**
+   * 源exchange名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * 目标类型,queue或exchange
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DestinationType?: string
+  /**
+   * 目标资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Destination?: string
+  /**
+   * 绑定key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingKey?: string
+  /**
+   * 源exchange类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceExchangeType?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -6261,7 +6367,7 @@ export interface RocketMQMessageTrack {
   /**
    * 消费者组
    */
-  Group: string
+  Group?: string
   /**
    * 消费状态,
 CONSUMED: 已消费
@@ -6271,16 +6377,16 @@ ENTER_RETRY: 进入重试队列
 ENTER_DLQ: 进入死信队列
 UNKNOWN: 查询不到消费状态
    */
-  ConsumeStatus: string
+  ConsumeStatus?: string
   /**
    * 消息track类型
    */
-  TrackType: string
+  TrackType?: string
   /**
    * 异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExceptionDesc: string
+  ExceptionDesc?: string
 }
 
 /**
@@ -6694,6 +6800,44 @@ export interface DeleteRolesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRabbitMQBindings请求参数结构体
+ */
+export interface DescribeRabbitMQBindingsRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * Vhost参数
+   */
+  VirtualHost: string
+  /**
+   * 分页offset
+   */
+  Offset?: number
+  /**
+   * 分页limit
+   */
+  Limit?: number
+  /**
+   * 搜索关键词，根据源exchange名称/目标资源名称/绑定key进行模糊搜索
+   */
+  SearchWord?: string
+  /**
+   * 根据源Exchange精准搜索过滤
+   */
+  SourceExchange?: string
+  /**
+   * 根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置
+   */
+  QueueName?: string
+  /**
+   * 根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置
+   */
+  DestinationExchange?: string
 }
 
 /**
@@ -7808,7 +7952,7 @@ export interface DeleteRocketMQEnvironmentRolesRequest {
    */
   RoleNames: Array<string>
   /**
-   * 必填字段，集群的ID
+   * 集群的ID
    */
   ClusterId: string
 }
@@ -8046,13 +8190,17 @@ export interface CreateRabbitMQBindingRequest {
 }
 
 /**
- * DescribePulsarProInstanceDetail请求参数结构体
+ * RocketMQtopic分布情况
  */
-export interface DescribePulsarProInstanceDetailRequest {
+export interface RocketMQTopicDistribution {
   /**
-   * 集群ID
+   * topic类型
    */
-  ClusterId: string
+  TopicType: string
+  /**
+   * topic数量
+   */
+  Count: number
 }
 
 /**
@@ -9336,11 +9484,11 @@ export interface DescribeRocketMQConsumerConnectionDetailResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 消费端主题信息列表
    */
-  Details: Array<RocketMQConsumerTopic>
+  Details?: Array<RocketMQConsumerTopic>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9801,11 +9949,11 @@ export interface DescribeRocketMQTopicsByGroupResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 主题列表
    */
-  Topics: Array<string>
+  Topics?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9975,48 +10123,7 @@ export interface DescribeRocketMQGroupsRequest {
  */
 export interface DescribeRocketMQMsgTraceResponse {
   /**
-   * [
-    {
-        "Stage": "produce",
-        "Data": {
-            "ProducerName": "生产者名",
-            "ProduceTime": "消息生产时间",
-            "ProducerAddr": "客户端地址",
-            "Duration": "耗时ms",
-            "Status": "状态（0：成功，1：失败）"
-        }
-    },
-    {
-        "Stage": "persist",
-        "Data": {
-            "PersistTime": "存储时间",
-            "Duration": "耗时ms",
-            "Status": "状态（0：成功，1：失败）"
-        }
-    },
-    {
-        "Stage": "consume",
-        "Data": {
-            "TotalCount": 2,
-            "RocketMqConsumeLogs": [
-                {
-                    "ConsumerGroup": "消费组",
-                    "ConsumeModel": "消费模式",
-                    "ConsumerAddr": "消费者地址",
-                    "ConsumeTime": "推送时间",
-                    "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）"
-                },
-                {
-                    "ConsumerGroup": "消费组",
-                    "ConsumeModel": "消费模式",
-                    "ConsumerAddr": "消费者地址",
-                    "ConsumeTime": "推送时间",
-                    "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）"
-                }
-            ]    
-        }
-    }
-]
+   * 轨迹详情列表
    */
   Result?: Array<TraceResult>
   /**

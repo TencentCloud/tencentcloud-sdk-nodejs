@@ -327,11 +327,11 @@ export interface DescribeHTTPSListenersResponse {
   /**
    * 监听器数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * HTTPS监听器列表
    */
-  ListenerSet: Array<HTTPSListener>
+  ListenerSet?: Array<HTTPSListener>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -579,11 +579,15 @@ export interface BandwidthPriceGradient {
  */
 export interface DescribeHTTPListenersRequest {
   /**
-   * 通道ID
+   * 通道ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
    */
   ProxyId?: string
   /**
-   * 过滤条件，按照监听器ID进行精确查询
+   * 通道组ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
+   */
+  GroupId?: string
+  /**
+   * 过滤条件，按照监听器ID进行精确查询。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
    */
   ListenerId?: string
   /**
@@ -606,10 +610,6 @@ export interface DescribeHTTPListenersRequest {
    * 过滤条件，支持按照端口或监听器名称进行模糊查询，该参数不能与ListenerName和Port同时使用
    */
   SearchValue?: string
-  /**
-   * 通道组ID
-   */
-  GroupId?: string
 }
 
 /**
@@ -756,11 +756,15 @@ export interface DescribeProxyGroupStatisticsRequest {
  */
 export interface DescribeHTTPSListenersRequest {
   /**
-   * 过滤条件，通道ID
+   * 通道ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
    */
   ProxyId?: string
   /**
-   * 过滤条件，根据监听器ID进行精确查询。
+   * 通道组ID。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
+   */
+  GroupId?: string
+  /**
+   * 过滤条件，根据监听器ID进行精确查询。ListenerId、ProxyId、GroupId须至少填写一个，且ProxyId与GroupId至多只能填写其中一个。
    */
   ListenerId?: string
   /**
@@ -783,10 +787,6 @@ export interface DescribeHTTPSListenersRequest {
    * 过滤条件，支持按照端口或监听器名称进行模糊查询
    */
   SearchValue?: string
-  /**
-   * 过滤条件，通道组ID
-   */
-  GroupId?: string
   /**
    * 支持Http3的开关，其中：
 0，表示不需要支持Http3接入；
@@ -907,15 +907,15 @@ export interface DescribeProxiesResponse {
   /**
    * 通道个数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * （旧参数，请切换到ProxySet）通道实例信息列表。
    */
-  InstanceSet: Array<ProxyInfo>
+  InstanceSet?: Array<ProxyInfo>
   /**
    * （新参数）通道实例信息列表。
    */
-  ProxySet: Array<ProxyInfo>
+  ProxySet?: Array<ProxyInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1221,19 +1221,19 @@ export interface DescribeListenerRealServersResponse {
   /**
    * 可绑定源站的个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 源站信息列表
    */
-  RealServerSet: Array<RealServer>
+  RealServerSet?: Array<RealServer>
   /**
    * 已绑定源站的个数
    */
-  BindRealServerTotalCount: number
+  BindRealServerTotalCount?: number
   /**
    * 已绑定源站信息列表
    */
-  BindRealServerSet: Array<BindRealServer>
+  BindRealServerSet?: Array<BindRealServer>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1277,11 +1277,11 @@ export interface SetTlsVersionRequest {
    */
   ListenerId: string
   /**
-   * TLS版本
+   * TLS版本,可选TLSv1.0、TLSv1.1、TLSv1.2、TLSv1.3
    */
   TLSSupportVersion: Array<string>
   /**
-   * 密码套件包
+   * 密码套件包,可选 GAAP_TLS_CIPHERS_STRICT，GAAP_TLS_CIPHERS_GENERAL，GAAP_TLS_CIPHERS_WIDE(默认)
    */
   TLSCiphers: string
 }
@@ -1438,7 +1438,7 @@ export interface CreateProxyGroupRequest {
    */
   GroupName: string
   /**
-   * 源站地域，参考接口DescribeDestRegions 返回参数RegionDetail中的RegionId
+   * 源站地域，参考接口 [https://cloud.tencent.com/document/api/608/36964] 返回参数RegionDetail中的RegionId
    */
   RealServerRegion: string
   /**
@@ -1586,11 +1586,11 @@ export interface DescribeTCPListenersResponse {
   /**
    * 满足条件的监听器总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * TCP监听器列表
    */
-  ListenerSet: Array<TCPListener>
+  ListenerSet?: Array<TCPListener>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1781,7 +1781,7 @@ export interface DeleteListenersRequest {
    */
   Force: number
   /**
-   * 通道组ID，该参数和GroupId必须设置一个，但不能同时设置。
+   * 通道组ID，该参数和ProxyId必须设置一个，但不能同时设置。
    */
   GroupId?: string
   /**
@@ -1807,11 +1807,11 @@ export interface DescribeDestRegionsResponse {
   /**
    * 源站区域总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 源站区域详情列表
    */
-  DestRegionSet: Array<RegionDetail>
+  DestRegionSet?: Array<RegionDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1974,11 +1974,11 @@ export interface DescribeUDPListenersResponse {
   /**
    * 监听器个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * UDP监听器列表
    */
-  ListenerSet: Array<UDPListener>
+  ListenerSet?: Array<UDPListener>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2417,11 +2417,11 @@ export type BanAndRecoverProxyRequest = null
  */
 export interface CloseSecurityPolicyRequest {
   /**
-   * 通道ID
+   * 通道ID。操作通道组时无需填此参数。
    */
   ProxyId?: string
   /**
-   * 安全组策略ID
+   * 安全组策略ID。操作通道组时须填此参数。
    */
   PolicyId?: string
 }
@@ -2536,7 +2536,7 @@ export interface ModifyTCPListenerAttributeRequest {
    */
   ListenerName?: string
   /**
-   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
+   * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。注意：lrtt需要开通白名单；RealServerType 为 DOMAIN 不支持wrr 和 lrtt。
    */
   Scheduler?: string
   /**
@@ -2774,25 +2774,25 @@ export interface ProxyGroupInfo {
   /**
    * 通道组id
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 通道组域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 通道组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 目标地域
    */
-  RealServerRegionInfo: RegionDetail
+  RealServerRegionInfo?: RegionDetail
   /**
    * 通道组状态。
 其中，
@@ -2800,35 +2800,36 @@ RUNNING表示运行中；
 CREATING表示创建中；
 DESTROYING表示销毁中；
 MOVING表示通道迁移中；
+CLOSED表示已关闭；
 CHANGING表示部分部署中。
    */
-  Status: string
+  Status?: string
   /**
    * 标签列表。
    */
-  TagSet: Array<TagPair>
+  TagSet?: Array<TagPair>
   /**
    * 通道组版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 通道组是否包含微软通道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyType: number
+  ProxyType?: number
   /**
    * 支持Http3特性的标识，其中：
 0表示关闭；
 1表示启用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Http3Supported: number
+  Http3Supported?: number
   /**
    * 特性位图，每个bit位代表一种特性，其中：
 0，表示不支持该特性；
@@ -2844,7 +2845,7 @@ CHANGING表示部分部署中。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FeatureBitmap: number
+  FeatureBitmap?: number
 }
 
 /**
@@ -3465,7 +3466,7 @@ export interface ProxyGroupDetail {
    */
   FeatureBitmap?: number
   /**
-   * 是否支持设置TSL设置
+   * 是否支持设置TLS设置
 0表示不支持；
 1表示支持。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3502,7 +3503,7 @@ export interface CloseSecurityPolicyResponse {
   /**
    * 异步流程ID，可以通过DescribeAsyncTaskStatus 查询流程执行进展和状态
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3627,7 +3628,12 @@ export interface DescribeBlackHeaderResponse {
 /**
  * DescribeDestRegions请求参数结构体
  */
-export type DescribeDestRegionsRequest = null
+export interface DescribeDestRegionsRequest {
+  /**
+   * 通道质量:0表示金牌，1表示银牌。默认不传该参数，表示金牌。本参数确定查询指定通道质量的源站区域
+   */
+  QualityType?: number
+}
 
 /**
  * HTTPS类型监听器信息
@@ -4005,11 +4011,11 @@ export interface DescribeHTTPListenersResponse {
   /**
    * 监听器数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * HTTP监听器列表
    */
-  ListenerSet: Array<HTTPListener>
+  ListenerSet?: Array<HTTPListener>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4089,15 +4095,15 @@ export interface DeleteListenersResponse {
   /**
    * 删除操作失败的监听器ID列表
    */
-  OperationFailedListenerSet: Array<string>
+  OperationFailedListenerSet?: Array<string>
   /**
    * 删除操作成功的监听器ID列表
    */
-  OperationSucceedListenerSet: Array<string>
+  OperationSucceedListenerSet?: Array<string>
   /**
    * 无效的监听器ID列表，如：监听器不存在，监听器对应实例不匹配
    */
-  InvalidStatusListenerSet: Array<string>
+  InvalidStatusListenerSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4395,7 +4401,7 @@ export interface CreateProxyGroupResponse {
   /**
    * 通道组ID
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5035,7 +5041,7 @@ export interface ModifyProxyGroupAttributeRequest {
    */
   GroupId: string
   /**
-   * 修改后的通道组名称：不超过30个字符，超过部分会被截断。
+   * 修改后的通道组名称：不超过30个字符，否则修改失败。
    */
   GroupName?: string
   /**
@@ -5189,7 +5195,7 @@ export interface ModifyProxiesAttributeRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 通道名称。可任意命名，但不得超过30个字符。
+   * 通道名称。可任意命名，但不得超过32个字符。
    */
   ProxyName?: string
   /**
@@ -5460,7 +5466,7 @@ export interface InquiryPriceCreateProxyRequest {
    */
   DestRegion?: string
   /**
-   * （旧参数，请切换到Concurrent）通道并发量上限，表示同时在线的连接数，单位：万。
+   * （此参数为旧参数，请填写新参数Concurrent，二者必须填写一个）通道并发量上限，表示同时在线的连接数，单位：万。
    */
   Concurrency?: number
   /**
@@ -5971,11 +5977,11 @@ export interface DescribeGlobalDomainsResponse {
   /**
    * 域名信息列表
    */
-  Domains: Array<Domain>
+  Domains?: Array<Domain>
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -43,6 +43,10 @@ export interface DisplayInfo {
      *  当前句子是否已结束
      */
     IsEnd?: boolean;
+    /**
+     * base64编码的wav/mp3音频数据
+     */
+    Audio?: string;
 }
 /**
  * TongChuanRecognize返回参数结构体
@@ -69,6 +73,45 @@ export interface TongChuanDisplayRequest {
      * 最多返回几句，目前只支持 5 条数据
      */
     SeMax: number;
+}
+/**
+ * 同传TTS请求参数
+ */
+export interface TTS {
+    /**
+     * 返回音频格式，可取值：wav，mp3，pcm
+     */
+    Codec: string;
+    /**
+     * 音色 ID，只包括标准音色（注，日文只有一个固定音色）。
+  完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。
+     */
+    VoiceType: number;
+    /**
+     * 音量大小，范围[-10，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。
+     */
+    Volume?: number;
+    /**
+     * 语速，范围：[-2，6]，分别对应不同语速：
+  
+  - -2代表0.6倍
+  - -1代表0.8倍
+  - 0代表1.0倍（默认）
+  - 1代表1.2倍
+  - 2代表1.5倍
+  - 6代表2.5倍
+  
+  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。
+  参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz)
+     */
+    Speed?: number;
+    /**
+     * 音频采样率：
+  
+  - 16000：16k（默认）
+  - 8000：8k
+     */
+    SampleRate?: number;
 }
 /**
  * TongChuanRecognize请求参数结构体
@@ -120,6 +163,10 @@ export interface TongChuanRecognizeRequest {
      * 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。
      */
     Data: string;
+    /**
+     * TTS播报控制参数
+     */
+    TTS?: TTS;
 }
 /**
  * TongChuanDisplay返回参数结构体
@@ -184,4 +231,8 @@ export interface TongChuanSyncRequest {
      * 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。
      */
     Data: string;
+    /**
+     * TTS播报控制参数
+     */
+    TTS?: TTS;
 }

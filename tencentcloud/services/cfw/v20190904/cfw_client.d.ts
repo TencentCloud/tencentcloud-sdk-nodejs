@@ -265,7 +265,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     CreateChooseVpcs(req: CreateChooseVpcsRequest, cb?: (error: string, rep: CreateChooseVpcsResponse) => void): Promise<CreateChooseVpcsResponse>;
     /**
-     * 查询NAT边界防火墙开关列表
+     * 旧接口，不再维护
+
+查询NAT边界防火墙开关列表
      */
     DescribeNatSwitchList(req: DescribeNatSwitchListRequest, cb?: (error: string, rep: DescribeNatSwitchListResponse) => void): Promise<DescribeNatSwitchListResponse>;
     /**

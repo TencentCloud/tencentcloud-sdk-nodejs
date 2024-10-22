@@ -601,7 +601,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BanAndRecoverProxy", req, cb);
     }
     /**
-     * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称。
+     * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称与项目ID。
      */
     async ModifyProxyGroupAttribute(req, cb) {
         return this.request("ModifyProxyGroupAttribute", req, cb);

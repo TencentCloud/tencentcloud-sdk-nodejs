@@ -707,23 +707,23 @@ export interface AiRecognitionTaskAsrFullTextResultOutput {
      * 语音全文识别片段列表。
   <font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
      */
-    SegmentSet: Array<AiRecognitionTaskAsrFullTextSegmentItem>;
+    SegmentSet?: Array<AiRecognitionTaskAsrFullTextSegmentItem>;
     /**
      * 语音全文识别片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
      */
-    SegmentSetFileUrl: string;
+    SegmentSetFileUrl?: string;
     /**
      * 语音全文识别片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    SegmentSetFileUrlExpireTime: string;
+    SegmentSetFileUrlExpireTime?: string;
     /**
      * 生成的字幕列表，对应 [语音全文识别任务控制参数](https://cloud.tencent.com/document/api/266/31773#AsrFullTextConfigureInfo) SubtitleFormats。
      */
-    SubtitleSet: Array<AiRecognitionTaskAsrFullTextResultOutputSubtitleItem>;
+    SubtitleSet?: Array<AiRecognitionTaskAsrFullTextResultOutputSubtitleItem>;
     /**
      * 生成的字幕文件 Url，对应 [语音全文识别任务控制参数](https://cloud.tencent.com/document/api/266/31773#AsrFullTextConfigureInfo) SubtitleFormat。
      */
-    SubtitleUrl: string;
+    SubtitleUrl?: string;
 }
 /**
  * Ocr 文字涉违禁信息
@@ -833,24 +833,6 @@ export interface ModifyEventConfigResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 智能封面结果信息
- */
-export interface AiAnalysisTaskCoverOutput {
-    /**
-     * 智能封面列表。
-  <font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 CoverSetFileUrl 对应的文件中获取。
-     */
-    CoverSet: Array<MediaAiAnalysisCoverItem>;
-    /**
-     * 智能封面列表文件 URL。文件的内容为 JSON，数据结构与 CoverSet 字段一致。 （文件不会永久存储，到达 CoverSetFileUrlExpireTime 时间点后文件将被删除）。
-     */
-    CoverSetFileUrl: string;
-    /**
-     * 智能封面列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-     */
-    CoverSetFileUrlExpireTime: string;
 }
 /**
  * 音画质检测任务的输出。
@@ -2294,67 +2276,78 @@ export interface AIRecognitionTemplateItem {
     /**
      * 视频内容识别模板唯一标识。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 视频内容识别模板名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 视频内容识别模板描述信息。
      */
-    Comment: string;
+    Comment?: string;
+    /**
+     * 模板类型，取值：
+  <li>Preset：系统预置模板；</li>
+  <li>Custom：用户自定义模板。</li>
+     */
+    Type?: string;
     /**
      * 头尾识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeadTailConfigure: HeadTailConfigureInfo;
+    HeadTailConfigure?: HeadTailConfigureInfo;
     /**
      * 拆条识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SegmentConfigure: SegmentConfigureInfo;
+    SegmentConfigure?: SegmentConfigureInfo;
     /**
      * 人脸识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaceConfigure: FaceConfigureInfo;
+    FaceConfigure?: FaceConfigureInfo;
     /**
      * 文本全文识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrFullTextConfigure: OcrFullTextConfigureInfo;
+    OcrFullTextConfigure?: OcrFullTextConfigureInfo;
     /**
      * 文本关键词识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrWordsConfigure: OcrWordsConfigureInfo;
+    OcrWordsConfigure?: OcrWordsConfigureInfo;
     /**
      * 语音全文识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrFullTextConfigure: AsrFullTextConfigureInfo;
+    AsrFullTextConfigure?: AsrFullTextConfigureInfo;
     /**
      * 语音关键词识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrWordsConfigure: AsrWordsConfigureInfo;
+    AsrWordsConfigure?: AsrWordsConfigureInfo;
+    /**
+     * 语音翻译控制参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfo;
     /**
      * 物体识别控制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ObjectConfigure: ObjectConfigureInfo;
+    ObjectConfigure?: ObjectConfigureInfo;
     /**
      * 截图时间间隔，单位：秒。
      */
-    ScreenshotInterval: number;
+    ScreenshotInterval?: number;
     /**
      * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * 音视频审核 Asr 文字涉及令人反感的信息的任务输入参数类型
@@ -5292,9 +5285,19 @@ export interface MediaSubtitleItem {
     Name?: string;
     /**
      * 字幕语言。常见的取值如下：
-  <li>cn：中文</li>
-  <li>ja：日文</li>
-  <li>en-US：英文</li>
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>vi：越南语；</li>
+  <li>ms：马来语；</li>
+  <li>th：泰语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>es：西班牙语；</li>
+  <li>hi：印地语；</li>
+  <li>fr：法语。</li>
   其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646)
      */
     Language?: string;
@@ -5307,6 +5310,12 @@ export interface MediaSubtitleItem {
      * 字幕 URL。
      */
     Url?: string;
+    /**
+     * 字幕来源，取值范围：
+  <li>UserUploaded：用户上传；</li>
+  <li>AIRecognition：AI 识别，通过语音识别或语音翻译生成。</li>
+     */
+    Source?: string;
 }
 /**
  * 音视频审核任务的输出。
@@ -5384,6 +5393,31 @@ export interface ModifyAnimatedGraphicsTemplateResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 语音翻译片段。
+ */
+export interface AiRecognitionTaskAsrTranslateSegmentItem {
+    /**
+     * 语音翻译片段置信度。取值：0~100。
+     */
+    Confidence?: number;
+    /**
+     * 语音翻译片段起始的偏移时间，单位：秒。
+     */
+    StartTimeOffset?: number;
+    /**
+     * 语音翻译片段终止的偏移时间，单位：秒。
+     */
+    EndTimeOffset?: number;
+    /**
+     * 识别文本。
+     */
+    Text?: string;
+    /**
+     * 翻译文本。
+     */
+    Translation?: string;
 }
 /**
  * DeleteCLSTopic返回参数结构体
@@ -5603,6 +5637,20 @@ export interface AiReviewPornAsrTaskOutput {
  */
 export interface AiRecognitionTaskAsrFullTextResultOutputSubtitleItem {
     /**
+     * 媒资字幕 ID，用于媒资字幕管理，仅当 Format 为 vtt 时有效。
+  <font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
+     */
+    Id?: string;
+    /**
+     * 媒资字幕名字，用于播放器展示，仅当 Format 为 vtt 时有效。
+  <font color=red>注意：</font>2024-11-01T10:00:00Z 之前的任务返回此字段无效。
+     */
+    Name?: string;
+    /**
+     * 字幕语言。
+     */
+    Language?: string;
+    /**
      * 字幕文件格式，取值范围：
   <li>vtt：WebVTT 字幕文件；</li>
   <li>srt：SRT 字幕文件。</li>
@@ -5716,6 +5764,48 @@ export interface EditMediaRequest {
      * 保留字段，特殊用途时使用。
      */
     ExtInfo?: string;
+}
+/**
+ * 语音翻译结果。
+ */
+export interface AiRecognitionTaskAsrTranslateResult {
+    /**
+     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+     */
+    Status?: string;
+    /**
+     * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+     */
+    ErrCodeExt?: string;
+    /**
+     * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 语音翻译任务输入信息。
+     */
+    Input?: AiRecognitionTaskAsrTranslateResultInput;
+    /**
+     * 语音翻译任务输出信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: AiRecognitionTaskAsrTranslateResultOutput;
+    /**
+     * 语音翻译任务进度，取值范围 [0-100] 。
+     */
+    Progress?: number;
+    /**
+     * 语音翻译任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    BeginProcessTime?: string;
+    /**
+     * 语音翻译任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    FinishTime?: string;
 }
 /**
  * DescribeFileAttributes返回参数结构体
@@ -6209,6 +6299,10 @@ export interface AsrFullTextConfigureInfoForUpdate {
   <li>zh-ca：粤语。</li>
      */
     SrcLanguage?: string;
+    /**
+     * 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示。
+     */
+    SubtitleName?: string;
 }
 /**
  * DeleteHeadTailTemplate返回参数结构体
@@ -7250,6 +7344,15 @@ export interface MediaAnimatedGraphicsItem {
     EndTimeOffset?: number;
 }
 /**
+ * 语音翻译的输入。
+ */
+export interface AiRecognitionTaskAsrTranslateResultInput {
+    /**
+     * 语音翻译模板 ID。
+     */
+    Definition?: number;
+}
+/**
  * 全景录制信息
  */
 export interface WebPageRecordInfo {
@@ -7732,9 +7835,19 @@ export interface MediaSubtitleInput {
     Name: string;
     /**
      * 字幕语言。常见的取值如下：
-  <li>cn：中文</li>
-  <li>ja：日文</li>
-  <li>en-US：英文</li>
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>vi：越南语；</li>
+  <li>ms：马来语；</li>
+  <li>th：泰语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>es：西班牙语；</li>
+  <li>hi：印地语；</li>
+  <li>fr：法语。</li>
   其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646)
      */
     Language: string;
@@ -9971,6 +10084,127 @@ export interface MediaKeyFrameDescItem {
     Content: string;
 }
 /**
+ * 语音翻译控制参数
+ */
+export interface AsrTranslateConfigureInfoForUpdate {
+    /**
+     * 语音翻译任务开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+     */
+    Switch?: string;
+    /**
+     * 媒体源语言，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>vi：越南语；</li>
+  <li>ms：马来语；</li>
+  <li>th：泰语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>es：西班牙语；</li>
+  <li>hi：印地语；</li>
+  <li>fr：法语。</li>
+     */
+    SrcLanguage?: string;
+    /**
+     * 翻译目标语言。
+  当 SrcLanguage 为 zh（中文）时，取值范围：
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>vi：越南语；</li>
+  <li>id：印尼语；</li>
+  <li>th：泰语；</li>
+  <li>ms：马来语。</li>
+  当 SrcLanguage 为 en（英文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>vi：越南语；</li>
+  <li>id：印尼语；</li>
+  <li>th：泰语；</li>
+  <li>ms：马来语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>hi：印地语。</li>
+  当 SrcLanguage 为 ja（日文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ko：韩文。</li>
+  当 SrcLanguage 为 ko（韩文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文。</li>
+  当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文。</li>
+  当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语。</li>
+  当 SrcLanguage 为 tr（土耳其语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+  当 SrcLanguage 为 es（西班牙语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+  当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：
+  <li>en：英文。</li>
+  当 SrcLanguage 为 fr（法语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+     */
+    DstLanguage?: string;
+    /**
+     * 字幕格式列表操作信息。
+     */
+    SubtitleFormatsOperation?: SubtitleFormatsOperation;
+    /**
+     * 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示。
+     */
+    SubtitleName?: string;
+}
+/**
  * RebuildMediaByTemplate请求参数结构体
  */
 export interface RebuildMediaByTemplateRequest {
@@ -10445,38 +10679,13 @@ export interface ReduceMediaBitrateAdaptiveDynamicStreamingResult {
     Output?: AdaptiveDynamicStreamingInfoItem;
 }
 /**
- * 图片水印模板输入参数
+ * AttachMediaSubtitles返回参数结构体
  */
-export interface ImageWatermarkInputForUpdate {
+export interface AttachMediaSubtitlesResponse {
     /**
-     * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ImageContent?: string;
-    /**
-     * 水印的宽度。支持 %、px 两种格式：
-  <li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-  <li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
-     */
-    Width?: string;
-    /**
-     * 水印的高度。支持 %、px 两种格式：
-  <li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-  <li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
-     */
-    Height?: string;
-    /**
-     * 水印重复类型。使用场景：水印为动态图像。取值范围：
-  <li>once：动态水印播放完后，不再出现；</li>
-  <li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
-  <li>repeat：水印循环播放，直到视频结束。</li>
-     */
-    RepeatType?: string;
-    /**
-     * 图片透明度，取值范围：[0, 100]
-  <li>0：完全不透明</li>
-  <li>100：完全透明。</li>
-     */
-    Transparency?: number;
+    RequestId?: string;
 }
 /**
  * CreateDomainVerifyRecord返回参数结构体
@@ -11315,13 +11524,22 @@ export interface DeleteReviewTemplateRequest {
     SubAppId?: number;
 }
 /**
- * AttachMediaSubtitles返回参数结构体
+ * 智能封面结果信息
  */
-export interface AttachMediaSubtitlesResponse {
+export interface AiAnalysisTaskCoverOutput {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 智能封面列表。
+  <font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 CoverSetFileUrl 对应的文件中获取。
      */
-    RequestId?: string;
+    CoverSet: Array<MediaAiAnalysisCoverItem>;
+    /**
+     * 智能封面列表文件 URL。文件的内容为 JSON，数据结构与 CoverSet 字段一致。 （文件不会永久存储，到达 CoverSetFileUrlExpireTime 时间点后文件将被删除）。
+     */
+    CoverSetFileUrl: string;
+    /**
+     * 智能封面列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    CoverSetFileUrlExpireTime: string;
 }
 /**
  * 音视频审核任务类型
@@ -12873,6 +13091,10 @@ export interface ModifyAIRecognitionTemplateRequest {
      */
     AsrWordsConfigure?: AsrWordsConfigureInfoForUpdate;
     /**
+     * 语音翻译控制参数。
+     */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfoForUpdate;
+    /**
      * 物体识别控制参数。
      */
     ObjectConfigure?: ObjectConfigureInfoForUpdate;
@@ -13728,7 +13950,7 @@ export interface AsrFullTextConfigureInfo {
     /**
      * 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：
   <li>vtt：生成 WebVTT 字幕文件；</li>
-  <li>srt：生成 SRT 字幕文件。</li>
+  <li>srt：生成 SRT 字幕文件。</li><font color=red>注意：</font>云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。
      */
     SubtitleFormats?: Array<string>;
     /**
@@ -13747,6 +13969,11 @@ export interface AsrFullTextConfigureInfo {
   <font color=red>注意：</font> 填空字符串，或者不填该参数，则自动识别（效果较难保证，推荐填写原始媒体对应的语言，以提高识别的准确率）。
      */
     SrcLanguage?: string;
+    /**
+     * 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。
+  <font color=red>注意：</font>仅当 SubtitleFormats 包含 vtt 时，该字段有效。
+     */
+    SubtitleName?: string;
 }
 /**
  * 图片画面审核涉及令人不安全的信息的任务结果类型
@@ -13859,6 +14086,10 @@ export interface CreateAIRecognitionTemplateRequest {
      * 语音关键词识别控制参数。
      */
     AsrWordsConfigure?: AsrWordsConfigureInfo;
+    /**
+     * 语音翻译控制参数。
+     */
+    AsrTranslateConfigure?: AsrTranslateConfigureInfo;
     /**
      * 物体识别控制参数。
      */
@@ -14067,6 +14298,28 @@ export interface PlayStatInfo {
      * 播放流量，单位：字节。
      */
     Traffic?: number;
+}
+/**
+ * 语音翻译结果。
+ */
+export interface AiRecognitionTaskAsrTranslateResultOutput {
+    /**
+     * 语音翻译片段列表。
+  <font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+     */
+    SegmentSet?: Array<AiRecognitionTaskAsrTranslateSegmentItem>;
+    /**
+     * 语音翻译片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+     */
+    SegmentSetFileUrl?: string;
+    /**
+     * 语音翻译片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    SegmentSetFileUrlExpireTime?: string;
+    /**
+     * 生成的字幕列表。
+     */
+    SubtitleSet?: Array<AiRecognitionTaskAsrFullTextResultOutputSubtitleItem>;
 }
 /**
  * 画面鉴别涉及令人不适宜的信息的任务控制参数
@@ -16779,6 +17032,132 @@ export interface ExtractCopyRightWatermarkTaskInput {
     Url?: string;
 }
 /**
+ * 语音翻译任务控制参数
+ */
+export interface AsrTranslateConfigureInfo {
+    /**
+     * 语音翻译任务开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li><font color=red>注意：</font>语音翻译任务本身会返回 ASR 全文识别结果，为避免重复收费，因此禁止同时开启语音翻译和 ASR 全文识别功能项。
+  
+     */
+    Switch: string;
+    /**
+     * 媒体源语言，当 Switch 为 ON 时，此参数必填。取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>vi：越南语；</li>
+  <li>ms：马来语；</li>
+  <li>th：泰语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>es：西班牙语；</li>
+  <li>hi：印地语；</li>
+  <li>fr：法语。</li>
+     */
+    SrcLanguage?: string;
+    /**
+     * 翻译目标语言，当 Switch 为 ON 时，此参数必填。
+  当 SrcLanguage 为 zh（中文）时，取值范围：
+  <li>en：英文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>vi：越南语；</li>
+  <li>id：印尼语；</li>
+  <li>th：泰语；</li>
+  <li>ms：马来语。</li>
+  当 SrcLanguage 为 en（英文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>ja：日文；</li>
+  <li>ko：韩文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语；</li>
+  <li>vi：越南语；</li>
+  <li>id：印尼语；</li>
+  <li>th：泰语；</li>
+  <li>ms：马来语；</li>
+  <li>ar：阿拉伯语；</li>
+  <li>hi：印地语。</li>
+  当 SrcLanguage 为 ja（日文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ko：韩文。</li>
+  当 SrcLanguage 为 ko（韩文）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>ja：日文。</li>
+  当 SrcLanguage 为 vi（越南语）或 ms（马来语）或 th（泰语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文。</li>
+  当 SrcLanguage 为 pt（葡萄牙语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语。</li>
+  当 SrcLanguage 为 tr（土耳其语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+  当 SrcLanguage 为 es（西班牙语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>fr：法语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+  当 SrcLanguage 为 ar（阿拉伯语）或 hi（印地语）时，取值范围：
+  <li>en：英文。</li>
+  当 SrcLanguage 为 fr（法语）时，取值范围：
+  <li>zh：中文；</li>
+  <li>en：英文；</li>
+  <li>es：西班牙语；</li>
+  <li>it：意大利语；</li>
+  <li>de：德语；</li>
+  <li>tr：土耳其语；</li>
+  <li>ru：俄语；</li>
+  <li>pt：葡萄牙语。</li>
+     */
+    DstLanguage?: string;
+    /**
+     * 生成的字幕文件格式列表，不填或者填空数组表示不生成字幕文件，可选值：
+  <li>vtt：生成 WebVTT 字幕文件；</li>
+  <li>srt：生成 SRT 字幕文件。</li><font color=red>注意：</font> 云点播媒资信息仅支持添加 vtt 字幕，因此当且仅当 SubtitleFormats 包含 vtt 时，云点播将生成的字幕添加到媒资。
+     */
+    SubtitleFormats?: Array<string>;
+    /**
+     * 指定字幕名称，长度限制：64 个字符。该值将用于播放器展示，若不填则云点播自动生成。
+  <font color=red>注意：</font>仅当 SubtitleFormats 包含 vtt 时，该字段有效。
+  
+     */
+    SubtitleName?: string;
+}
+/**
  * DescribeSampleSnapshotTemplates返回参数结构体
  */
 export interface DescribeSampleSnapshotTemplatesResponse {
@@ -18603,6 +18982,40 @@ export interface EditMediaFileInfo {
     EndTimeOffset?: number;
 }
 /**
+ * 图片水印模板输入参数
+ */
+export interface ImageWatermarkInputForUpdate {
+    /**
+     * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+     */
+    ImageContent?: string;
+    /**
+     * 水印的宽度。支持 %、px 两种格式：
+  <li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+  <li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
+     */
+    Width?: string;
+    /**
+     * 水印的高度。支持 %、px 两种格式：
+  <li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+  <li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
+     */
+    Height?: string;
+    /**
+     * 水印重复类型。使用场景：水印为动态图像。取值范围：
+  <li>once：动态水印播放完后，不再出现；</li>
+  <li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+  <li>repeat：水印循环播放，直到视频结束。</li>
+     */
+    RepeatType?: string;
+    /**
+     * 图片透明度，取值范围：[0, 100]
+  <li>0：完全不透明</li>
+  <li>100：完全透明。</li>
+     */
+    Transparency?: number;
+}
+/**
  * ProcessMediaByProcedure返回参数结构体
  */
 export interface ProcessMediaByProcedureResponse {
@@ -20196,6 +20609,10 @@ export interface DescribeAIRecognitionTemplatesRequest {
      */
     Definitions?: Array<number | bigint>;
     /**
+     * 模板类型过滤条件，可选值：<li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li>不填默认为空，即不对模板类型过滤。
+     */
+    Type?: string;
+    /**
      * 分页偏移量，默认值：0。
      */
     Offset?: number;
@@ -20249,57 +20666,63 @@ export interface AiRecognitionResult {
   <li>AsrWordsRecognition：语音关键词识别，</li>
   <li>OcrWordsRecognition：文本关键词识别，</li>
   <li>AsrFullTextRecognition：语音全文识别，</li>
+  <li>AsrTranslateRecognition：语音翻译识别，</li>
   <li>OcrFullTextRecognition：文本全文识别，</li>
   <li>HeadTailRecognition：视频片头片尾识别，</li>
   <li>ObjectRecognition：物体识别。</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * 视频片头片尾识别结果，当 Type 为
    HeadTailRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeadTailTask: AiRecognitionTaskHeadTailResult;
+    HeadTailTask?: AiRecognitionTaskHeadTailResult;
     /**
      * 视频拆条识别结果，当 Type 为
    SegmentRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SegmentTask: AiRecognitionTaskSegmentResult;
+    SegmentTask?: AiRecognitionTaskSegmentResult;
     /**
      * 人脸识别结果，当 Type 为
    FaceRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaceTask: AiRecognitionTaskFaceResult;
+    FaceTask?: AiRecognitionTaskFaceResult;
     /**
      * 语音关键词识别结果，当 Type 为
    AsrWordsRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrWordsTask: AiRecognitionTaskAsrWordsResult;
+    AsrWordsTask?: AiRecognitionTaskAsrWordsResult;
     /**
      * 语音全文识别结果，当 Type 为
    AsrFullTextRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrFullTextTask: AiRecognitionTaskAsrFullTextResult;
+    AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult;
+    /**
+     * 语音翻译结果，当 Type 为 AsrTranslateRecognition 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AsrTranslateTask?: AiRecognitionTaskAsrTranslateResult;
     /**
      * 文本关键词识别结果，当 Type 为
    OcrWordsRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrWordsTask: AiRecognitionTaskOcrWordsResult;
+    OcrWordsTask?: AiRecognitionTaskOcrWordsResult;
     /**
      * 文本全文识别结果，当 Type 为
    OcrFullTextRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrFullTextTask: AiRecognitionTaskOcrFullTextResult;
+    OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult;
     /**
      * 物体识别结果，当 Type 为
    ObjectRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ObjectTask: AiRecognitionTaskObjectResult;
+    ObjectTask?: AiRecognitionTaskObjectResult;
 }

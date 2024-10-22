@@ -504,7 +504,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeDestRegions）用于查询源站区域，即源站服务器所在区域。
    */
   async DescribeDestRegions(
-    req?: DescribeDestRegionsRequest,
+    req: DescribeDestRegionsRequest,
     cb?: (error: string, rep: DescribeDestRegionsResponse) => void
   ): Promise<DescribeDestRegionsResponse> {
     return this.request("DescribeDestRegions", req, cb)
@@ -1243,7 +1243,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称。
+   * 本接口（ModifyProxyGroupAttribute）用于修改通道组属性，目前仅支持修改通道组名称与项目ID。
    */
   async ModifyProxyGroupAttribute(
     req: ModifyProxyGroupAttributeRequest,

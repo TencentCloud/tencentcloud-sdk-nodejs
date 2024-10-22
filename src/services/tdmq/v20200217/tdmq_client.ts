@@ -93,6 +93,7 @@ import {
   SendMsgResponse,
   DescribeMsgRequest,
   RocketMQGroupConfigOutput,
+  DeleteRabbitMQBindingResponse,
   ModifyRabbitMQVipInstanceResponse,
   DescribeRocketMQSourceClusterGroupListRequest,
   DescribePulsarProInstancesRequest,
@@ -104,7 +105,7 @@ import {
   DeleteRabbitMQUserResponse,
   DescribeRabbitMQVirtualHostListResponse,
   SetRocketMQPublicAccessPointResponse,
-  RocketMQTopicConfigOutput,
+  DescribeRocketMQTopicMsgsRequest,
   ModifyEnvironmentRoleRequest,
   DescribeRocketMQRolesResponse,
   SubscriptionTopic,
@@ -129,7 +130,7 @@ import {
   DescribeRocketMQSmoothMigrationTaskRequest,
   DeleteClusterRequest,
   CmqSubscription,
-  DescribeRocketMQTopicMsgsRequest,
+  RocketMQTopicConfigOutput,
   RocketMQSmoothMigrationTaskItem,
   VpcInfo,
   DeleteCmqTopicResponse,
@@ -163,6 +164,7 @@ import {
   SetRocketMQPublicAccessPointRequest,
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
+  DescribeRabbitMQBindingsResponse,
   FilterSubscription,
   TopicStats,
   DescribeClustersResponse,
@@ -195,12 +197,13 @@ import {
   DescribePulsarProInstancesResponse,
   RocketMQInstanceConfig,
   MigrateTopic,
+  DeleteRabbitMQBindingRequest,
   DescribeRocketMQSmoothMigrationTaskResponse,
   DeleteRabbitMQVirtualHostResponse,
   CreateRabbitMQVirtualHostRequest,
   VerifyRocketMQConsumeRequest,
   DescribeRabbitMQQueueDetailRequest,
-  RocketMQTopicDistribution,
+  DescribePulsarProInstanceDetailRequest,
   DescribeRocketMQConsumerConnectionsRequest,
   CreateRoleRequest,
   DescribeEnvironmentAttributesResponse,
@@ -237,6 +240,7 @@ import {
   DescribeEnvironmentAttributesRequest,
   RocketMQConsumerTopic,
   DescribePublishersRequest,
+  RabbitMQBindingListInfo,
   ModifyRoleResponse,
   DescribeRocketMQTopicStatsRequest,
   SendRocketMQMessageResponse,
@@ -254,6 +258,7 @@ import {
   VerifyRocketMQConsumeResponse,
   DescribeRocketMQConsumerConnectionDetailRequest,
   DeleteRolesResponse,
+  DescribeRabbitMQBindingsRequest,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
   ModifyRocketMQInstanceResponse,
@@ -309,7 +314,7 @@ import {
   CreateRabbitMQUserResponse,
   ModifyRocketMQRoleResponse,
   CreateRabbitMQBindingRequest,
-  DescribePulsarProInstanceDetailRequest,
+  RocketMQTopicDistribution,
   BindCluster,
   ModifyClusterResponse,
   RocketMQClusterRecentStats,
@@ -1578,6 +1583,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * 查询RabbitMQ路由关系列表
+   */
+  async DescribeRabbitMQBindings(
+    req: DescribeRabbitMQBindingsRequest,
+    cb?: (error: string, rep: DescribeRabbitMQBindingsResponse) => void
+  ): Promise<DescribeRabbitMQBindingsResponse> {
+    return this.request("DescribeRabbitMQBindings", req, cb)
+  }
+
+  /**
    * 运营端获节点健康状态
    */
   async DescribeNodeHealthOpt(
@@ -1795,6 +1810,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribeRocketMQPublicAccessPointResponse) => void
   ): Promise<DescribeRocketMQPublicAccessPointResponse> {
     return this.request("DescribeRocketMQPublicAccessPoint", req, cb)
+  }
+
+  /**
+   * 解绑RabbitMQ路由关系
+   */
+  async DeleteRabbitMQBinding(
+    req: DeleteRabbitMQBindingRequest,
+    cb?: (error: string, rep: DeleteRabbitMQBindingResponse) => void
+  ): Promise<DeleteRabbitMQBindingResponse> {
+    return this.request("DeleteRabbitMQBinding", req, cb)
   }
 
   /**

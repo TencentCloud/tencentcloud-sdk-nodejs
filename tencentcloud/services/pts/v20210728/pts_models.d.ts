@@ -1317,6 +1317,11 @@ export interface Job {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ScenarioName?: string;
+    /**
+     * 付费类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: number;
 }
 /**
  * DescribeAvailableMetrics请求参数结构体

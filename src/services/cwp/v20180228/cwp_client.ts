@@ -3463,8 +3463,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询攻击溯源事件
-   */
+     * 已废弃
+
+查询攻击溯源事件
+     */
   async DescribeAttackSourceEvents(
     req: DescribeAttackSourceEventsRequest,
     cb?: (error: string, rep: DescribeAttackSourceEventsResponse) => void
@@ -4298,8 +4300,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询攻击溯源
-   */
+     * 已废弃
+
+查询攻击溯源
+     */
   async DescribeAttackSource(
     req: DescribeAttackSourceRequest,
     cb?: (error: string, rep: DescribeAttackSourceResponse) => void

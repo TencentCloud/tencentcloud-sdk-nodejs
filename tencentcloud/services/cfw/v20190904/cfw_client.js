@@ -409,7 +409,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("CreateChooseVpcs", req, cb);
     }
     /**
-     * 查询NAT边界防火墙开关列表
+     * 旧接口，不再维护
+
+查询NAT边界防火墙开关列表
      */
     async DescribeNatSwitchList(req, cb) {
         return this.request("DescribeNatSwitchList", req, cb);

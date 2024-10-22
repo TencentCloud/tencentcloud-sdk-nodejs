@@ -857,19 +857,19 @@ export interface DescribeCaptchaMiniRiskResultResponse {
 26 system internal error 系统内部错误
 100 param err 参数校验错误
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 拦截策略返回信息
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ManageMarketingRiskValue: OutputManageMarketingRiskValue
+  ManageMarketingRiskValue?: OutputManageMarketingRiskValue
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

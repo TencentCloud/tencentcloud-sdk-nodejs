@@ -261,7 +261,7 @@ export interface DeleteMQTTInsPublicEndpointRequest {
  */
 export interface ModifyInstanceRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
@@ -289,9 +289,17 @@ export interface ModifyInstanceRequest {
      */
     ScaledTpsEnabled?: boolean;
     /**
+     * 是否开启ACL
+     */
+    AclEnabled?: boolean;
+    /**
      * 最大可创建主题数
      */
     MaxTopicNum?: number;
+    /**
+     * 免费额度之外的主题个数
+     */
+    ExtraTopicNum?: string;
 }
 /**
  * 实例列表页中的实例信息

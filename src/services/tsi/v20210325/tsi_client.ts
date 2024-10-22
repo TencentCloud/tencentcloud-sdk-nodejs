@@ -22,6 +22,7 @@ import {
   DisplayInfo,
   TongChuanRecognizeResponse,
   TongChuanDisplayRequest,
+  TTS,
   TongChuanRecognizeRequest,
   TongChuanDisplayResponse,
   TongChuanSyncRequest,

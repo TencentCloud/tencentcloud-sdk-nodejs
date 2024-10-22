@@ -742,6 +742,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyTopic", req, cb);
     }
     /**
+     * 查询RabbitMQ路由关系列表
+     */
+    async DescribeRabbitMQBindings(req, cb) {
+        return this.request("DescribeRabbitMQBindings", req, cb);
+    }
+    /**
      * 运营端获节点健康状态
      */
     async DescribeNodeHealthOpt(req, cb) {
@@ -872,6 +878,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async DescribeRocketMQPublicAccessPoint(req, cb) {
         return this.request("DescribeRocketMQPublicAccessPoint", req, cb);
+    }
+    /**
+     * 解绑RabbitMQ路由关系
+     */
+    async DeleteRabbitMQBinding(req, cb) {
+        return this.request("DeleteRabbitMQBinding", req, cb);
     }
     /**
      * 角色修改
