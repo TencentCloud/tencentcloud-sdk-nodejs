@@ -180,6 +180,15 @@ export interface SubnetInfos {
     Arch?: string;
 }
 /**
+ * ModifyClusterImage返回参数结构体
+ */
+export interface ModifyClusterImageResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * EKS Instnace CBS volume
  */
 export interface CbsVolume {
@@ -2573,6 +2582,19 @@ export interface UpgradeAbleInstancesItem {
      * RuntimeLatestVersion
      */
     RuntimeLatestVersion?: string;
+}
+/**
+ * ModifyClusterImage请求参数结构体
+ */
+export interface ModifyClusterImageRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 指定有效的镜像ID，格式形如img-xxxx。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。
+     */
+    ImageId: string;
 }
 /**
  * UpgradeClusterInstances返回参数结构体

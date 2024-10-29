@@ -7,7 +7,7 @@ export interface CreateResourceRequest {
      */
     EnvironmentId: string;
     /**
-     * 资源类型，目前支持文件系统：CFS；日志服务：CLS；注册中心：TSE_SRE
+     * 资源类型，目前支持文件系统：CFS；注册中心：TSE_SRE
      */
     ResourceType: string;
     /**
@@ -34,7 +34,7 @@ export interface DescribeConfigDataResponse {
     /**
      * 配置
      */
-    Result: ConfigData;
+    Result?: ConfigData;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -180,7 +180,7 @@ export interface ResumeDeployApplicationResponse {
     /**
      * 是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -329,7 +329,7 @@ export interface DeleteIngressResponse {
     /**
      * 是否删除成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -432,7 +432,7 @@ export interface ModifyLogConfigResponse {
     /**
      * 编辑是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -915,7 +915,7 @@ export interface DescribeApplicationServiceListResponse {
     /**
      * 应用 EKS Service 列表
      */
-    Result: EksService;
+    Result?: EksService;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1557,7 +1557,7 @@ export interface TemServiceVersionInfo {
  */
 export interface ServicePortMapping {
     /**
-     * 服务类型
+     * 服务类型：如：EXTERNAL，VPC，CLUSTER
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
@@ -1711,7 +1711,7 @@ export interface ModifyConfigDataResponse {
     /**
      * 编辑是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1896,7 +1896,7 @@ export interface CreateConfigDataResponse {
     /**
      * 创建是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2241,7 +2241,7 @@ export interface DescribeApplicationsStatusResponse {
     /**
      * 返回结果
      */
-    Result: Array<ServiceVersionBrief>;
+    Result?: Array<ServiceVersionBrief>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2648,7 +2648,7 @@ export interface DescribeApplicationServiceListRequest {
      */
     ApplicationId: string;
     /**
-     * xx
+     * 来源渠道
      */
     SourceChannel?: number;
 }
@@ -2893,18 +2893,22 @@ export interface DescribeConfigDataRequest {
 export interface MountedSettingConf {
     /**
      * 配置名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigDataName: string;
     /**
      * 挂载路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MountedPath: string;
     /**
      * 配置内容
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<Pair>;
     /**
      * 加密配置名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretDataName?: string;
 }
@@ -2915,7 +2919,7 @@ export interface CreateLogConfigResponse {
     /**
      * 创建是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2928,7 +2932,7 @@ export interface DescribeConfigDataListResponse {
     /**
      * 配置列表
      */
-    Result: DescribeConfigDataListPage;
+    Result?: DescribeConfigDataListPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3067,12 +3071,12 @@ export interface Autoscaler {
      */
     MaxReplicas: number;
     /**
-     * 指标弹性伸缩策略
+     * 指标弹性伸缩策略(指标策略和定时策略必须填写一个)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HorizontalAutoscaler?: Array<HorizontalAutoscaler>;
     /**
-     * 定时弹性伸缩策略
+     * 定时弹性伸缩策略(指标策略和定时策略必须填写一个)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CronHorizontalAutoscaler?: Array<CronHorizontalAutoscaler>;
@@ -3165,11 +3169,11 @@ export interface DeployApplicationRequest {
      */
     InitPodNum: number;
     /**
-     * cpu规格
+     * cpu规格 单位：核
      */
     CpuSpec: number;
     /**
-     * 内存规格
+     * 内存规格 单位：G
      */
     MemorySpec: number;
     /**
@@ -3373,7 +3377,7 @@ export interface DescribeApplicationAutoscalerListResponse {
      * 弹性伸缩策略组合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: Array<Autoscaler>;
+    Result?: Array<Autoscaler>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3403,7 +3407,7 @@ export interface DestroyConfigDataResponse {
     /**
      * 返回结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3697,7 +3701,7 @@ export interface GenerateApplicationPackageDownloadUrlResponse {
      * 包下载临时链接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3858,7 +3862,7 @@ export interface DescribeLogConfigResponse {
     /**
      * 配置
      */
-    Result: LogConfig;
+    Result?: LogConfig;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3975,7 +3979,7 @@ export interface ModifyApplicationServiceResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4009,65 +4013,65 @@ export interface LogConfig {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 收集类型，container_stdout 为标准输出；container_file 为文件；
      */
-    InputType: string;
+    InputType?: string;
     /**
      * 日志集 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * 日志主题 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志提取模式，minimalist_log 为单行全文；multiline_log 为多行全文；  fullregex_log 为单行正则； multiline_fullregex_log 为多行正则； json_log 为 json；
      */
-    LogType: string;
+    LogType?: string;
     /**
      * 首行正则表达式，当 LogType 为多行全文、多行正则时生效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BeginningRegex: string;
+    BeginningRegex?: string;
     /**
      * 收集文件目录，当 InputType=container_file 时生效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogPath: string;
+    LogPath?: string;
     /**
      * 收集文件名模式，当 InputType=container_file 时生效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FilePattern: string;
+    FilePattern?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateDate: string;
+    CreateDate?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifyDate: string;
+    ModifyDate?: string;
     /**
      * 应用 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 应用名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * 导出规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtractRule: LogConfigExtractRule;
+    ExtractRule?: LogConfigExtractRule;
 }
 /**
  * ModifyEnvironment返回参数结构体

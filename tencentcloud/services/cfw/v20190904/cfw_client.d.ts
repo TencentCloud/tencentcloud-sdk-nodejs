@@ -30,12 +30,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     StopSecurityGroupRuleDispatch(req: StopSecurityGroupRuleDispatchRequest, cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void): Promise<StopSecurityGroupRuleDispatchResponse>;
     /**
      * ModifyResourceGroup-资产中心资产组信息修改
-
-
      */
     ModifyResourceGroup(req: ModifyResourceGroupRequest, cb?: (error: string, rep: ModifyResourceGroupResponse) => void): Promise<ModifyResourceGroupResponse>;
     /**
-     * DescribeResourceGroupNew资产中心资产树信息
+     * 资产中心资产组数数据信息查询
      */
     DescribeResourceGroupNew(req: DescribeResourceGroupNewRequest, cb?: (error: string, rep: DescribeResourceGroupNewResponse) => void): Promise<DescribeResourceGroupNewResponse>;
     /**
@@ -112,7 +110,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     ModifyEdgeIpSwitch(req: ModifyEdgeIpSwitchRequest, cb?: (error: string, rep: ModifyEdgeIpSwitchResponse) => void): Promise<ModifyEdgeIpSwitchResponse>;
     /**
      * DescribeBlockByIpTimesList 告警中心阻断IP折线图
-
      */
     DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;
     /**
@@ -407,8 +404,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifyEnterpriseSecurityDispatchStatus(req: ModifyEnterpriseSecurityDispatchStatusRequest, cb?: (error: string, rep: ModifyEnterpriseSecurityDispatchStatusResponse) => void): Promise<ModifyEnterpriseSecurityDispatchStatusResponse>;
     /**
-     * DescribeTLogInfo告警中心概况
-
+     * DescribeTLogInfo告警中心概况查询
      */
     DescribeTLogInfo(req: DescribeTLogInfoRequest, cb?: (error: string, rep: DescribeTLogInfoResponse) => void): Promise<DescribeTLogInfoResponse>;
     /**
@@ -416,7 +412,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifyRunSyncAsset(req: ModifyRunSyncAssetRequest, cb?: (error: string, rep: ModifyRunSyncAssetResponse) => void): Promise<ModifyRunSyncAssetResponse>;
     /**
-     * VPC防火墙一键开关
+     * 该接口已不再使用
+
+VPC防火墙一键开关
      */
     ModifyAllVPCSwitchStatus(req: ModifyAllVPCSwitchStatusRequest, cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void): Promise<ModifyAllVPCSwitchStatusResponse>;
     /**
@@ -461,7 +459,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     ModifyNatFwSwitch(req: ModifyNatFwSwitchRequest, cb?: (error: string, rep: ModifyNatFwSwitchResponse) => void): Promise<ModifyNatFwSwitchResponse>;
     /**
      * DescribeTLogIpList告警中心IP柱形图
-
      */
     DescribeTLogIpList(req: DescribeTLogIpListRequest, cb?: (error: string, rep: DescribeTLogIpListResponse) => void): Promise<DescribeTLogIpListResponse>;
     /**
@@ -469,12 +466,11 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     CreateAddressTemplate(req: CreateAddressTemplateRequest, cb?: (error: string, rep: CreateAddressTemplateResponse) => void): Promise<CreateAddressTemplateResponse>;
     /**
-     * 添加nat访问控制规则(地域必填)
+     * 添加nat访问控制规则
      */
     AddNatAcRule(req: AddNatAcRuleRequest, cb?: (error: string, rep: AddNatAcRuleResponse) => void): Promise<AddNatAcRuleResponse>;
     /**
      * DescribeBlockStaticList 告警中心柱形图
-
      */
     DescribeBlockStaticList(req: DescribeBlockStaticListRequest, cb?: (error: string, rep: DescribeBlockStaticListResponse) => void): Promise<DescribeBlockStaticListResponse>;
     /**

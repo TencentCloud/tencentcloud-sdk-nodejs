@@ -310,13 +310,22 @@ export interface RealtimeLogDeliveryTask {
     UpdateTime?: string;
 }
 /**
- * ModifyApplicationProxy返回参数结构体
+ * 预付费套餐计费参数
  */
-export interface ModifyApplicationProxyResponse {
+export interface PrepaidPlanParam {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
+  
+  不填写使用默认值 1。
      */
-    RequestId?: string;
+    Period?: number;
+    /**
+     * 预付费套餐的自动续费标志，取值有：
+  <li> on：开启自动续费；</li>
+  <li> off：不开启自动续费。</li>
+  不填写使用默认值 off，自动续费时，默认续费1个月。
+     */
+    RenewFlag?: string;
 }
 /**
  * BindSharedCNAME返回参数结构体
@@ -1088,6 +1097,15 @@ export interface IdentifyZoneResponse {
     RequestId?: string;
 }
 /**
+ * ModifyLoadBalancer返回参数结构体
+ */
+export interface ModifyLoadBalancerResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyL4Proxy返回参数结构体
  */
 export interface ModifyL4ProxyResponse {
@@ -1095,6 +1113,73 @@ export interface ModifyL4ProxyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 负载均衡实例健康检查策略。
+ */
+export interface HealthChecker {
+    /**
+     * 健康检查策略，取值有：
+  <li>HTTP；</li>
+  <li>HTTPS；</li>
+  <li>TCP；</li>
+  <li>UDP；</li>
+  <li>ICMP Ping；</li>
+  <li>NoCheck。</li>
+  注意：NoCheck 表示不启用健康检查策略。
+     */
+    Type: string;
+    /**
+     * 检查端口。当 Type=HTTP 或 Type=HTTPS 或 Type=TCP 或 Type=UDP 时为必填。
+     */
+    Port?: number;
+    /**
+     * 检查频率，表示多久发起一次健康检查任务，单位为秒。可取值有：30，60，180，300 或 600。
+     */
+    Interval?: number;
+    /**
+     * 每一次健康检查的超时时间，若健康检查消耗时间大于此值，则检查结果判定为”不健康“， 单位为秒，默认值为 5s，取值必须小于 Interval。
+     */
+    Timeout?: number;
+    /**
+     * 健康阈值，表示连续几次健康检查结果为"健康"，则判断源站为"健康"，单位为次，默认 3 次，最小取值 1 次。
+     */
+    HealthThreshold?: number;
+    /**
+     * 不健康阈值，表示连续几次健康检查结果为"不健康"，则判断源站为"不健康"，单位为次，默认 2 次。
+     */
+    CriticalThreshold?: number;
+    /**
+     * 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测路径，需要填写完整的 host/path，不包含协议部分，例如：www.example.com/test。
+  
+     */
+    Path?: string;
+    /**
+     * 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示请求方法，取值有：
+  <li>GET；</li>
+  <li>HEAD。</li>
+     */
+    Method?: string;
+    /**
+     * 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测节点向源站发起健康检查时，响应哪些状态码可用于认定探测结果为健康。
+     */
+    ExpectedCodes?: Array<string>;
+    /**
+     * 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测请求携带的自定义  HTTP 请求头，至多可配置 10 个。
+     */
+    Headers?: Array<CustomizedHeader>;
+    /**
+     * 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示是否启用遵循 301/302 重定向。启用后，301/302 默认为"健康"的状态码，默认跳转 3 次。
+     */
+    FollowRedirect?: string;
+    /**
+     * 该参数仅当 Type=UDP 时有效，表示健康检查发送的内容。只允许 ASCII 可见字符，最大长度限制 500 个字符。
+     */
+    SendContext?: string;
+    /**
+     * 该参数仅当 Type=UDP 时有效，表示健康检查期望源站返回结果。只允许 ASCII 可见字符，最大长度限制 500 个字符。
+     */
+    RecvContext?: string;
 }
 /**
  * CreateFunctionRule请求参数结构体
@@ -1174,6 +1259,42 @@ export interface EnvInfo {
      * 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
      */
     UpdateTime?: string;
+}
+/**
+ * ModifyLoadBalancer请求参数结构体
+ */
+export interface ModifyLoadBalancerRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 负载均衡实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。不填写表示维持原有配置。
+     */
+    Name?: string;
+    /**
+     * 源站组列表及其对应的容灾调度优先级。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223) 中的示例场景。不填写表示维持原有配置。
+     */
+    OriginGroups?: Array<OriginGroupInLoadBalancer>;
+    /**
+     * 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。不填写表示维持原有配置。
+     */
+    HealthChecker?: HealthChecker;
+    /**
+     * 源站组间的流量调度策略，取值有：
+  <li>Pritory：按优先级顺序进行故障转移 。</li>不填写表示维持原有配置。
+     */
+    SteeringPolicy?: string;
+    /**
+     * 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：
+  <li>OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；</li>
+  <li>OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。</li>不填写表示维持原有配置。
+     */
+    FailoverPolicy?: string;
 }
 /**
  * edgeone套餐信息
@@ -1353,36 +1474,16 @@ export interface DescribeDDoSAttackEventResponse {
     RequestId?: string;
 }
 /**
- * DescribePrefetchTasks请求参数结构体
+ * DeleteL4ProxyRules返回参数结构体
  */
-export interface DescribePrefetchTasksRequest {
+export interface DeleteL4ProxyRulesResponse {
     /**
-     * 站点ID。该参数必填。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ZoneId?: string;
-    /**
-     * 查询起始时间，时间与 job-id 必填一个。
-     */
-    StartTime?: string;
-    /**
-     * 查询结束时间，时间与 job-id 必填一个。
-     */
-    EndTime?: string;
-    /**
-     * 分页查询偏移量，默认为 0。
-     */
-    Offset?: number;
-    /**
-     * 分页查询限制数目，默认值：20，上限：1000。
-     */
-    Limit?: number;
-    /**
-     * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
-     */
-    Filters?: Array<AdvancedFilter>;
+    RequestId?: string;
 }
 /**
- * 访问协议强制https跳转配置
+ * 访问协议强制 HTTPS 跳转配置。
  */
 export interface ForceRedirect {
     /**
@@ -1910,6 +2011,37 @@ export interface ModifyZoneSettingRequest {
      * 标准 Debug 配置。
      */
     StandardDebug?: StandardDebug;
+    /**
+     * 视频即时处理配置。不填写表示保持原有配置。
+     */
+    JITVideoProcess?: JITVideoProcess;
+}
+/**
+ * 源站组健康状态。
+ */
+export interface OriginGroupHealthStatus {
+    /**
+     * 源站组 ID。
+     */
+    OriginGroupID?: string;
+    /**
+     * 源站组名。
+     */
+    OriginGroupName?: string;
+    /**
+     * 源站组类型，取值有：
+  <li>HTTP：HTTP 专用型；</li>
+  <li>GENERAL：通用型。</li>
+     */
+    OriginType?: string;
+    /**
+     * 优先级。
+     */
+    Priority?: string;
+    /**
+     * 源站组里各源站的健康状态。
+     */
+    OriginHealthStatus?: Array<OriginHealthStatus>;
 }
 /**
  * 计费数据过滤条件。
@@ -2645,6 +2777,59 @@ export interface DescribeDDoSAttackTopDataResponse {
     RequestId?: string;
 }
 /**
+ * 负载均衡实例信息。
+ */
+export interface LoadBalancer {
+    /**
+     * 实例 ID。
+     */
+    InstanceId?: string;
+    /**
+     * 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。
+     */
+    Name?: string;
+    /**
+     * 实例类型，取值有：
+  <li>HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；</li>
+  <li>GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。</li>
+     */
+    Type?: string;
+    /**
+     * 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。
+     */
+    HealthChecker?: HealthChecker;
+    /**
+     * 源站组间的流量调度策略，取值有：
+  <li>Pritory：按优先级顺序进行故障转移 。</li>
+     */
+    SteeringPolicy?: string;
+    /**
+     * 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：
+  <li>OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；</li>
+  <li>OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。</li>
+     */
+    FailoverPolicy?: string;
+    /**
+     * 源站组健康状态。
+     */
+    OriginGroupHealthStatus?: Array<OriginGroupHealthStatus>;
+    /**
+     * 负载均衡状态，取值有：
+  <li>Pending：部署中；</li>
+  <li>Deleting：删除中；</li>
+  <li>Running：已生效。</li>
+     */
+    Status?: string;
+    /**
+     * 该负载均衡实例绑的定四层层代理实例的列表。
+     */
+    L4UsedList?: Array<string>;
+    /**
+     * 该负载均衡实例绑定的七层域名列表。
+     */
+    L7UsedList?: Array<string>;
+}
+/**
  * DeleteRules请求参数结构体
  */
 export interface DeleteRulesRequest {
@@ -3102,6 +3287,38 @@ export interface DescribeL4ProxyRulesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 源站组里的源站健康状态。
+ */
+export interface OriginHealthStatus {
+    /**
+     * 源站。
+     */
+    Origin?: string;
+    /**
+     * 源站健康状态，取值有：
+  <li>Healthy：健康；</li>
+  <li>Unhealthy：不健康；</li>
+  <li>Undetected：未探测到数据。</li>
+  
+     */
+    Healthy?: string;
+}
+/**
+ * 负载均衡实例 HTTP/HTTPS 健康检查策略下可配置的自定义头部。
+ */
+export interface CustomizedHeader {
+    /**
+     * 自定义头部 Key。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key: string;
+    /**
+     * 自定义头部 Value。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value: string;
 }
 /**
  * DescribeFunctions请求参数结构体
@@ -3682,7 +3899,8 @@ export interface CnameStatus {
  */
 export interface ServerCertInfo {
     /**
-     * 服务器证书 ID。
+     * 服务器证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId: string;
@@ -4916,6 +5134,17 @@ export interface AclConfig {
     Customizes?: Array<AclUserRule>;
 }
 /**
+ * 视频即时处理配置
+ */
+export interface JITVideoProcess {
+    /**
+     * 视频即时处理配置开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+}
+/**
  * CreateL4ProxyRules请求参数结构体
  */
 export interface CreateL4ProxyRulesRequest {
@@ -4932,6 +5161,19 @@ export interface CreateL4ProxyRulesRequest {
   注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
      */
     L4ProxyRules: Array<L4ProxyRule>;
+}
+/**
+ * CreateLoadBalancer返回参数结构体
+ */
+export interface CreateLoadBalancerResponse {
+    /**
+     * 负载均衡实例 ID。
+     */
+    InstanceId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateConfigGroupVersion请求参数结构体
@@ -5026,6 +5268,30 @@ export interface AclUserRule {
      * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
      */
     RedirectUrl?: string;
+}
+/**
+ * DescribeLoadBalancerList请求参数结构体
+ */
+export interface DescribeLoadBalancerListRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 分页查询偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目，默认值：20，最大值：100。
+     */
+    Limit?: number;
+    /**
+     * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有负载均衡实例信息。详细的过滤条件如下：
+  <li>InstanceName：按照负载均衡实例名称进行过滤；</li>
+  <li>InstanceId：按照负载均衡实例 ID 进行过滤。</li>
+  
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeDDoSAttackEvent请求参数结构体
@@ -5410,6 +5676,37 @@ export interface BillingData {
     Value?: number;
 }
 /**
+ * ModifyOriginGroup请求参数结构体
+ */
+export interface ModifyOriginGroupRequest {
+    /**
+     * 站点 ID
+     */
+    ZoneId: string;
+    /**
+     * 源站组 ID，此参数必填。
+     */
+    GroupId?: string;
+    /**
+     * 源站组名称，不填保持原有配置，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。
+     */
+    Name?: string;
+    /**
+     * 源站组类型，取值有：
+  <li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；</li>
+  <li>HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。</li>不填保持原有配置。
+     */
+    Type?: string;
+    /**
+     * 源站记录信息，不填保持原有配置。
+     */
+    Records?: Array<OriginRecord>;
+    /**
+     * 回源 Host Header，仅 Type = HTTP 时生效， 不填或者填空表示不配置回源Host，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。
+     */
+    HostHeader?: string;
+}
+/**
  * DeleteZone返回参数结构体
  */
 export interface DeleteZoneResponse {
@@ -5439,6 +5736,65 @@ export interface BindZoneToPlanResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 加速域名源站信息。
+ */
+export interface OriginInfo {
+    /**
+     * 源站类型，取值有：
+  <li>IP_DOMAIN：IPV4、IPV6 或域名类型源站；</li>
+  <li>COS：腾讯云 COS 对象存储源站；</li>
+  <li>AWS_S3：AWS S3 对象存储源站；</li>
+  <li>ORIGIN_GROUP：源站组类型源站；</li>
+   <li>VOD：云点播；</li>
+  <li>SPACE：源站卸载，当前仅白名单开放；</li>
+  <li>LB：负载均衡，当前仅白名单开放。</li>
+     */
+    OriginType: string;
+    /**
+     * 源站地址，根据 OriginType 的取值分为以下情况：
+  <li>当 OriginType = IP_DOMAIN 时，该参数请填写 IPv4、IPv6 地址或域名；</li>
+  <li>当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；</li>
+  <li>当 OriginType = AWS_S3，该参数请填写 S3 桶的访问域名；</li>
+  <li>当 OriginType = ORIGIN_GROUP 时，该参数请填写源站组 ID；</li>
+  <li>当 OriginType = VOD 时，该参数请填写云点播应用 ID ；</li>
+  <li>当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；</li>
+  <li>当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。</li>
+     */
+    Origin: string;
+    /**
+     * 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 时生效，该字段为旧版能力，调用后控制台无法进行配置修改，如需使用请提交工单咨询。
+     */
+    BackupOrigin?: string;
+    /**
+     * 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWS_S3 时会生效，取值有：
+  <li>on：使用私有鉴权；</li>
+  <li>off：不使用私有鉴权。</li>
+  不填写时，默认值为off。
+     */
+    PrivateAccess?: string;
+    /**
+     * 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。
+     */
+    PrivateParameters?: Array<PrivateParameter>;
+    /**
+     * VODEO 子应用 ID。该参数当 OriginType = VODEO 时必填。
+     * @deprecated
+     */
+    VodeoSubAppId?: number;
+    /**
+     * VODEO 分发范围，该参数当 OriginType = VODEO 时必填。取值有：
+  <li>All：当前应用下所有存储桶；</li>
+  <li>Bucket：指定的某一个存储桶。</li>
+     * @deprecated
+     */
+    VodeoDistributionRange?: string;
+    /**
+     * VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
+     * @deprecated
+     */
+    VodeoBucketId?: string;
 }
 /**
  * Waf规则
@@ -5605,7 +5961,7 @@ export interface MutualTLS {
     Switch: string;
     /**
      * 双向认证证书列表。
-  注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。
+  注意：MutualTLS 在 ModifyHostsCertificate 作为入参使用时，该参数传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
      */
     CertInfos?: Array<CertificateInfo>;
 }
@@ -5699,6 +6055,23 @@ export interface CreateFunctionResponse {
      * 函数 ID。
      */
     FunctionId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeLoadBalancerList返回参数结构体
+ */
+export interface DescribeLoadBalancerListResponse {
+    /**
+     * 负载均衡实例总数。
+     */
+    TotalCount?: number;
+    /**
+     * 负载均衡实例列表。
+     */
+    LoadBalancerList?: Array<LoadBalancer>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6140,6 +6513,23 @@ export interface AscriptionInfo {
     RecordValue: string;
 }
 /**
+ * 源站组健康状态详情。
+ */
+export interface OriginGroupHealthStatusDetail {
+    /**
+     * 源站组 ID。
+     */
+    OriginGroupId?: string;
+    /**
+     * 根据所有探测区域的结果综合决策出来的源站组下各个源站的健康状态。超过一半的地域判定该源站不健康，则对应状态为不健康，否则为健康。
+     */
+    OriginHealthStatus?: Array<OriginHealthStatus>;
+    /**
+     * 各个健康检查区域下源站的健康状态。
+     */
+    CheckRegionHealthStatus?: Array<CheckRegionHealthStatus>;
+}
+/**
  * 慢速攻击的首段包配置。
  */
 export interface FirstPartConfig {
@@ -6402,17 +6792,26 @@ export interface Hsts {
     Preload?: string;
 }
 /**
- * CreateOriginGroup返回参数结构体
+ * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
  */
-export interface CreateOriginGroupResponse {
+export interface OwnershipVerification {
     /**
-     * 源站组ID。
+     * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
+  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginGroupId?: string;
+    DnsVerification?: DnsVerification;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
+  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    FileVerification?: FileVerification;
+    /**
+     * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NsVerification?: NsVerification;
 }
 /**
  * CreateRule请求参数结构体
@@ -6518,7 +6917,7 @@ export interface CreateApplicationProxyRuleResponse {
  */
 export interface CertificateInfo {
     /**
-     * 证书 ID。
+     * 证书 ID。来源于 SSL 侧，您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
      */
     CertId: string;
     /**
@@ -6866,22 +7265,13 @@ export interface ApplicationProxy {
     AccelerateMainland?: AccelerateMainland;
 }
 /**
- * 预付费套餐计费参数
+ * ModifyApplicationProxy返回参数结构体
  */
-export interface PrepaidPlanParam {
+export interface ModifyApplicationProxyResponse {
     /**
-     * 订阅预付费套餐的周期，单位：月，取值有：1，2，3，4，5，6，7，8，9，10，11，12，24，36。
-  
-  不填写使用默认值 1。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Period?: number;
-    /**
-     * 预付费套餐的自动续费标志，取值有：
-  <li> on：开启自动续费；</li>
-  <li> off：不开启自动续费。</li>
-  不填写使用默认值 off，自动续费时，默认续费1个月。
-     */
-    RenewFlag?: string;
+    RequestId?: string;
 }
 /**
  * ModifySecurityIPGroup返回参数结构体
@@ -7011,6 +7401,11 @@ export interface ZoneSetting {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StandardDebug?: StandardDebug;
+    /**
+     * 视频即时处理配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JITVideoProcess?: JITVideoProcess;
 }
 /**
  * ModifyL4Proxy请求参数结构体
@@ -7148,7 +7543,7 @@ export interface DeliveryCondition {
     Conditions?: Array<QueryCondition>;
 }
 /**
- * 缓存遵循源站配置
+ * 缓存遵循源站配置。
  */
 export interface FollowOrigin {
     /**
@@ -7158,20 +7553,24 @@ export interface FollowOrigin {
      */
     Switch: string;
     /**
-     * 源站未返回 Cache-Control 头时, 设置默认的缓存时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DefaultCacheTime?: number;
-    /**
-     * 源站未返回 Cache-Control 头时, 设置缓存/不缓存
+     * 源站未返回 Cache-Control 头时，缓存/不缓存开关。当 Switch 为 on 时，此字段必填，否则此字段不生效。取值有：
+  <li>on：缓存；</li>
+  <li>off：不缓存。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultCache?: string;
     /**
-     * 源站未返回 Cache-Control 头时, 使用/不使用默认缓存策略
+     * 源站未返回 Cache-Control 头时，使用/不使用默认缓存策略开关。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheTime 不为 0 时，此字段必须为 off。取值有：
+  <li>on：使用默认缓存策略；</li>
+  <li>off：不使用默认缓存策略。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultCacheStrategy?: string;
+    /**
+     * 源站未返回 Cache-Control 头时，表示默认的缓存时间，单位为秒，取值：0～315360000。当 DefaultCache 为 on 时，此字段必填，否则此字段不生效；当 DefaultCacheStrategy 为 on 时， 此字段必须为 0。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultCacheTime?: number;
 }
 /**
  * IP 归属信息查询
@@ -7272,7 +7671,7 @@ export interface ModifyHostsCertificateRequest {
      */
     Mode?: string;
     /**
-     * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/certoverview) 查看 CertId。
+     * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
      */
     ServerCertInfo?: Array<ServerCertInfo>;
     /**
@@ -7284,8 +7683,7 @@ export interface ModifyHostsCertificateRequest {
      */
     ApplyType?: string;
     /**
-     * 边缘双向认证配置。
-  不填写表示边缘双向认证保持原有配置。
+     * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 的入口侧，用于客户端对 EO 节点进行认证。不填写表示保持原有配置。
      */
     ClientCertInfo?: MutualTLS;
 }
@@ -7327,8 +7725,7 @@ export interface ClientIpHeader {
      */
     Switch: string;
     /**
-     * 回源时，存放客户端 IP 的请求头名称。
-  为空则使用默认值：X-Forwarded-IP。
+     * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HeaderName?: string;
@@ -7777,63 +8174,42 @@ export interface DescribeTopL7CacheDataRequest {
     Area?: string;
 }
 /**
- * 加速域名源站信息。
+ * CreateLoadBalancer请求参数结构体
  */
-export interface OriginInfo {
+export interface CreateLoadBalancerRequest {
     /**
-     * 源站类型，取值有：
-  <li>IP_DOMAIN：IPV4、IPV6 或域名类型源站；</li>
-  <li>COS：腾讯云 COS 对象存储源站；</li>
-  <li>AWS_S3：AWS S3 对象存储源站；</li>
-  <li>ORIGIN_GROUP：源站组类型源站；</li>
-   <li>VOD：云点播；</li>
-  <li>SPACE：源站卸载，当前仅白名单开放；</li>
-  <li>LB：负载均衡，当前仅白名单开放。</li>
+     * 站点 ID。
      */
-    OriginType: string;
+    ZoneId: string;
     /**
-     * 源站地址，根据 OriginType 的取值分为以下情况：
-  <li>当 OriginType = IP_DOMAIN 时，该参数请填写 IPv4、IPv6 地址或域名；</li>
-  <li>当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；</li>
-  <li>当 OriginType = AWS_S3，该参数请填写 S3 桶的访问域名；</li>
-  <li>当 OriginType = ORIGIN_GROUP 时，该参数请填写源站组 ID；</li>
-  <li>当 OriginType = VOD 时，该参数请填写云点播应用 ID ；</li>
-  <li>当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；</li>
-  <li>当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。</li>
+     * 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。
      */
-    Origin: string;
+    Name: string;
     /**
-     * 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 时生效，该字段为旧版能力，调用后控制台无法进行配置修改，如需使用请提交工单咨询。
+     * 实例类型，取值有：
+  <li>HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；</li>
+  <li>GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。</li>
      */
-    BackupOrigin?: string;
+    Type: string;
     /**
-     * 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWS_S3 时会生效，取值有：
-  <li>on：使用私有鉴权；</li>
-  <li>off：不使用私有鉴权。</li>
-  不填写时，默认值为off。
+     * 源站组列表及其对应的容灾调度优先级。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223) 中的示例场景。
      */
-    PrivateAccess?: string;
+    OriginGroups: Array<OriginGroupInLoadBalancer>;
     /**
-     * 私有鉴权使用参数，该参数仅当源站类型 PrivateAccess = on 时会生效。
+     * 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。不填写时，默认为不启用健康检查。
      */
-    PrivateParameters?: Array<PrivateParameter>;
+    HealthChecker?: HealthChecker;
     /**
-     * VODEO 子应用 ID。该参数当 OriginType = VODEO 时必填。
-     * @deprecated
+     * 源站组间的流量调度策略，取值有：
+  <li>Pritory：按优先级顺序进行故障转移。</li>默认值为 Pritory。
      */
-    VodeoSubAppId?: number;
+    SteeringPolicy?: string;
     /**
-     * VODEO 分发范围，该参数当 OriginType = VODEO 时必填。取值有：
-  <li>All：当前应用下所有存储桶；</li>
-  <li>Bucket：指定的某一个存储桶。</li>
-     * @deprecated
+     * 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：
+  <li>OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；</li>
+  <li>OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。</li>默认值为 OtherRecordInOriginGroup。
      */
-    VodeoDistributionRange?: string;
-    /**
-     * VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
-     * @deprecated
-     */
-    VodeoBucketId?: string;
+    FailoverPolicy?: string;
 }
 /**
  * 域名 https 加速配置，默认为关闭状态
@@ -7887,6 +8263,23 @@ export interface Https {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CipherSuite?: string;
+}
+/**
+ * DescribeOriginGroupHealthStatus请求参数结构体
+ */
+export interface DescribeOriginGroupHealthStatusRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 负载均衡实例 ID。
+     */
+    LBInstanceId: string;
+    /**
+     * 源站组 ID。不填写时默认获取负载均衡下所有源站组的健康状态。
+     */
+    OriginGroupIds?: Array<string>;
 }
 /**
  * 四层代理转发规则详情。
@@ -8808,13 +9201,33 @@ export interface DDoSBlockData {
     BlockArea: string;
 }
 /**
- * DeleteL4ProxyRules返回参数结构体
+ * DescribePrefetchTasks请求参数结构体
  */
-export interface DeleteL4ProxyRulesResponse {
+export interface DescribePrefetchTasksRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 站点ID。该参数必填。
      */
-    RequestId?: string;
+    ZoneId?: string;
+    /**
+     * 查询起始时间，时间与 job-id 必填一个。
+     */
+    StartTime?: string;
+    /**
+     * 查询结束时间，时间与 job-id 必填一个。
+     */
+    EndTime?: string;
+    /**
+     * 分页查询偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目，默认值：20，上限：1000。
+     */
+    Limit?: number;
+    /**
+     * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
+     */
+    Filters?: Array<AdvancedFilter>;
 }
 /**
  * BindZoneToPlan请求参数结构体
@@ -8850,6 +9263,19 @@ export interface IPWhitelist {
      * IPv6列表。
      */
     IPv6: Array<string>;
+}
+/**
+ * DeleteLoadBalancer请求参数结构体
+ */
+export interface DeleteLoadBalancerRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 负载均衡实例 ID。
+     */
+    InstanceId: string;
 }
 /**
  * CreateCustomizeErrorPage请求参数结构体
@@ -8932,6 +9358,22 @@ export interface Identification {
      * 站点归属权校验：文件校验信息。
      */
     FileAscription?: FileAscriptionInfo;
+}
+/**
+ * 负载均衡实例中需要绑定的源站组和优先级关系。
+ */
+export interface OriginGroupInLoadBalancer {
+    /**
+     * 优先级，填写格式为 "priority_" + "数字"，最高优先级为 "priority_1"。参考取值有：
+  <li>priority_1：第一优先级；</li>
+  <li>priority_2：第二优先级；</li>
+  <li>priority_3：第三优先级。</li>其他优先级可以将数字递增，最多可以递增至 "priority_10"。
+     */
+    Priority: string;
+    /**
+     * 源站组 ID。
+     */
+    OriginGroupId: string;
 }
 /**
  * TopN的Entry数据
@@ -9189,35 +9631,26 @@ export interface ModifySecurityPolicyResponse {
     RequestId?: string;
 }
 /**
- * ModifyOriginGroup请求参数结构体
+ * DeleteLoadBalancer返回参数结构体
  */
-export interface ModifyOriginGroupRequest {
+export interface DeleteLoadBalancerResponse {
     /**
-     * 站点 ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ZoneId: string;
+    RequestId?: string;
+}
+/**
+ * DescribeOriginGroupHealthStatus返回参数结构体
+ */
+export interface DescribeOriginGroupHealthStatusResponse {
     /**
-     * 源站组 ID，此参数必填。
+     * 源站组下源站的健康状态。
      */
-    GroupId?: string;
+    OriginGroupHealthStatusList?: Array<OriginGroupHealthStatusDetail>;
     /**
-     * 源站组名称，不填保持原有配置，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Name?: string;
-    /**
-     * 源站组类型，取值有：
-  <li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；</li>
-  <li>HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。</li>不填保持原有配置。
-     */
-    Type?: string;
-    /**
-     * 源站记录信息，不填保持原有配置。
-     */
-    Records?: Array<OriginRecord>;
-    /**
-     * 回源 Host Header，仅 Type = HTTP 时生效， 不填或者填空表示不配置回源Host，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。
-     */
-    HostHeader?: string;
+    RequestId?: string;
 }
 /**
  * 安全策略模板的绑定关系。
@@ -9259,26 +9692,17 @@ export interface DescribeDefaultCertificatesResponse {
     RequestId?: string;
 }
 /**
- * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
+ * CreateOriginGroup返回参数结构体
  */
-export interface OwnershipVerification {
+export interface CreateOriginGroupResponse {
     /**
-     * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
-  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 源站组ID。
      */
-    DnsVerification?: DnsVerification;
+    OriginGroupId?: string;
     /**
-     * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
-  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    FileVerification?: FileVerification;
-    /**
-     * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NsVerification?: NsVerification;
+    RequestId?: string;
 }
 /**
  * DescribeConfigGroupVersions请求参数结构体
@@ -9512,6 +9936,26 @@ export interface DescribePurgeTasksResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 各个健康检查区域下源站的健康状态。
+ */
+export interface CheckRegionHealthStatus {
+    /**
+     * 健康检查区域，ISO-3166-1 两位字母代码。
+     */
+    Region?: string;
+    /**
+     * 单健康检查区域下探测源站的健康状态，取值有：
+  <li>Healthy：健康；</li>
+  <li>Unhealthy：不健康；</li>
+  <li> Undetected：未探测到数据。</li>说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。
+     */
+    Healthy?: string;
+    /**
+     * 源站健康状态。
+     */
+    OriginHealthStatus?: Array<OriginHealthStatus>;
 }
 /**
  * DescribeFunctionRules请求参数结构体

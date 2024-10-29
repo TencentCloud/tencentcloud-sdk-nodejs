@@ -173,16 +173,17 @@ export interface DestroyInstanceRequest {
  */
 export interface ScheduleInfo {
     /**
-     * 生效时间
+     * 生效周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EffectivePeriod?: string;
     /**
-     * 调度类型：
+     * 调度类型，不传该参数时为立即执行：
   Day-天
   Week-周
   Month-月
   Once-单次
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleType?: string;
@@ -2093,6 +2094,11 @@ export interface InstanceNode {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UUID?: string;
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
 }
 /**
  * ModifyCoolDownPolicy返回参数结构体
@@ -3605,6 +3611,11 @@ export interface BackUpJobDisplay {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupCosInfo?: BackupCosInfo;
+    /**
+     * 是否使用的自定义桶
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsUserDefineBucket?: boolean;
 }
 /**
  * ModifyUserBindWorkloadGroup返回参数结构体

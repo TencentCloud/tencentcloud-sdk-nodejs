@@ -518,6 +518,16 @@ it("essbasic.v20210526.ChannelDescribeEmployees", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateCloseOrganizationUrl", async function () {
+    try {
+       const data = await client.CreateCloseOrganizationUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
     try {
        const data = await client.ChannelBatchCancelFlows({})
@@ -801,6 +811,16 @@ it("essbasic.v20210526.ChannelDescribeBillUsageDetail", async function () {
 it("essbasic.v20210526.ChannelCreateUserAutoSignEnableUrl", async function () {
     try {
        const data = await client.ChannelCreateUserAutoSignEnableUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DeleteOrganizationAuthorizations", async function () {
+    try {
+       const data = await client.DeleteOrganizationAuthorizations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

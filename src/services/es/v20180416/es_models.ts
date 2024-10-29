@@ -437,6 +437,20 @@ export interface DescribeInstanceLogsRequest {
 }
 
 /**
+ * RestoreClusterSnapshot返回参数结构体
+ */
+export interface RestoreClusterSnapshotResponse {
+  /**
+   * 集群实例id
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLogstashPipelines返回参数结构体
  */
 export interface DeleteLogstashPipelinesResponse {
@@ -471,17 +485,21 @@ export interface TagInfo {
 }
 
 /**
- * OperationDetail使用此结构的数组描述新旧配置
+ * DescribeClusterSnapshot请求参数结构体
  */
-export interface KeyValue {
+export interface DescribeClusterSnapshotRequest {
   /**
-   * 键
+   * 集群实例Id，格式：es-xxxx
    */
-  Key: string
+  InstanceId: string
   /**
-   * 值
+   * 快照仓库名称
    */
-  Value: string
+  RepositoryName?: string
+  /**
+   * 集群快照名称
+   */
+  SnapshotName?: string
 }
 
 /**
@@ -864,6 +882,32 @@ export interface JobParam {
 }
 
 /**
+ * 索引备份失败的数据结构
+ */
+export interface Failures {
+  /**
+   * 备份失败的索引名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: string
+  /**
+   * 快照失败的分片号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShardId?: number
+  /**
+   * 快照失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
+  /**
+   * 快照失败的状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+}
+
+/**
  * DeleteLogstashInstance返回参数结构体
  */
 export interface DeleteLogstashInstanceResponse {
@@ -1072,6 +1116,24 @@ export interface ServerlessSpace {
 }
 
 /**
+ * DeleteClusterSnapshot请求参数结构体
+ */
+export interface DeleteClusterSnapshotRequest {
+  /**
+   * 集群实例Id，格式：es-xxxx
+   */
+  InstanceId: string
+  /**
+   * 快照仓库名称
+   */
+  RepositoryName: string
+  /**
+   * 集群快照名称
+   */
+  SnapshotName: string
+}
+
+/**
  * 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项）
  */
 export interface SubTaskDetail {
@@ -1125,6 +1187,20 @@ export interface CheckMigrateIndexMetaDataResponse {
    * 索引的创建时间不在 serverless的存储周期内
    */
   SettingCheckFailedIndexArr?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteClusterSnapshot返回参数结构体
+ */
+export interface DeleteClusterSnapshotResponse {
+  /**
+   * 集群id
+   */
+  InstanceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1523,41 +1599,19 @@ export interface CreateServerlessInstanceRequest {
 }
 
 /**
- * DescribeServerlessSpaces请求参数结构体
+ * tke pod标签
  */
-export interface DescribeServerlessSpacesRequest {
+export interface DiSourceTkePodLabel {
   /**
-   * 过滤的空间ID
+   * 标签key
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpaceIds?: Array<string>
+  Key?: string
   /**
-   * 过滤的空间名
+   * 标签value
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpaceNames?: Array<string>
-  /**
-   * 排序顺序，支持升序asc、降序desc
-   */
-  Order?: string
-  /**
-   * 排序字段，支持空间创建时间SpaceCreateTime
-   */
-  OrderBy?: string
-  /**
-   * vpcId信息数组
-   */
-  VpcIds?: Array<string>
-  /**
-   * 分页起始
-   */
-  Offset?: number
-  /**
-   * 分页条数
-   */
-  Limit?: number
-  /**
-   * 标签信息
-   */
-  TagList?: Array<TagInfo>
+  Value?: string
 }
 
 /**
@@ -1627,19 +1681,17 @@ export interface UpgradeLicenseResponse {
 }
 
 /**
- * 索引配置字段
+ * OperationDetail使用此结构的数组描述新旧配置
  */
-export interface ServerlessIndexSettingsField {
+export interface KeyValue {
   /**
-   * 索引主分片数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 键
    */
-  NumberOfShards?: string
+  Key: string
   /**
-   * 索引刷新频率
-注意：此字段可能返回 null，表示取不到有效值。
+   * 值
    */
-  RefreshInterval?: string
+  Value: string
 }
 
 /**
@@ -1759,6 +1811,16 @@ export interface DiDataSinkServerless {
  * DeleteInstance返回参数结构体
  */
 export interface DeleteInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDiagnoseSettings返回参数结构体
+ */
+export interface UpdateDiagnoseSettingsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1916,13 +1978,49 @@ export interface UpdatePluginsRequest {
 }
 
 /**
- * UpdateDiagnoseSettings返回参数结构体
+ * RestoreClusterSnapshot请求参数结构体
  */
-export interface UpdateDiagnoseSettingsResponse {
+export interface RestoreClusterSnapshotRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群实例Id，格式：es-xxxx
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 仓库名称
+   */
+  RepositoryName: string
+  /**
+   * 集群快照名称
+   */
+  SnapshotName: string
+  /**
+   * 目标集群实例Id，格式：es-xxxx，如果是恢复到本地，则和InstanceId一致
+   */
+  TargetInstanceId: string
+  /**
+   * elastic用户名对应的密码信息
+   */
+  Password?: string
+  /**
+   * 要在所有恢复的索引中添加或更改的设置的逗号分隔列表。使用此参数可以在恢复快照时覆盖索引设置。
+   */
+  IndexSettings?: string
+  /**
+   * 不应从快照还原的以逗号分隔的索引设置列表。
+   */
+  IncludeGlobalState?: Array<string>
+  /**
+   * 需要恢复的索引名称，非必填，为空则表示恢复所有
+
+支持传多个索引名称
+   */
+  Indices?: string
+  /**
+   * 如果为 false，则如果快照中包含的一个或多个索引没有所有主分片可用，则整个恢复操作将失败。默认为 false,
+
+如果为 true，则允许恢复具有不可用分片的索引的部分快照。只有成功包含在快照中的分片才会被恢复。所有丢失的碎片将被重新创建为空
+   */
+  Partial?: string
 }
 
 /**
@@ -2462,6 +2560,24 @@ export interface InquirePriceRenewInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateClusterSnapshot请求参数结构体
+ */
+export interface CreateClusterSnapshotRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+  /**
+   * 快照名称
+   */
+  SnapshotName: string
+  /**
+   * 索引名称
+   */
+  Indices?: string
 }
 
 /**
@@ -4016,6 +4132,85 @@ export interface DescribeIndexMetaRequest {
 }
 
 /**
+ * 集群快照数据结构
+ */
+export interface Snapshots {
+  /**
+   * 快照名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnapshotName?: string
+  /**
+   * 快照Uuid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uuid?: string
+  /**
+   * 该快照所属集群的版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 备份的索引列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Indices?: Array<string>
+  /**
+   * 备份的datastream列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataStreams?: Array<string>
+  /**
+   * 备份的状态
+
+FAILED            备份失败
+
+IN_PROGRESS 备份执行中
+
+PARTIAL          备份部分成功，部分失败，备份失败的索引和原因会在Failures字段中展示
+
+SUCCESS     备份成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * 快照备份的开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 快照备份的结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 快照备份的耗时时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DurationInMillis?: number
+  /**
+   * 备份的总分片数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalShards?: number
+  /**
+   * 备份失败的分片数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedShards?: number
+  /**
+   * 备份成功的分片数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessfulShards?: number
+  /**
+   * 备份失败的索引分片和失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Failures?: Array<Failures>
+}
+
+/**
  * UpdateJdk返回参数结构体
  */
 export interface UpdateJdkResponse {
@@ -4217,25 +4412,48 @@ export interface UpdateIndexResponse {
 }
 
 /**
- * UpdateJdk请求参数结构体
+ * 智能运维诊断项结果
  */
-export interface UpdateJdkRequest {
+export interface DiagnoseJobResult {
   /**
-   * ES实例ID
+   * 诊断项名
    */
-  InstanceId: string
+  JobName: string
   /**
-   * Jdk类型，支持kona和oracle
+   * 诊断项状态：-2失败，-1待重试，0运行中，1成功
    */
-  Jdk?: string
+  Status: number
   /**
-   * Gc类型，支持g1和cms
+   * 诊断项得分
    */
-  Gc?: string
+  Score: number
   /**
-   * 是否强制重启
+   * 诊断摘要
    */
-  ForceRestart?: boolean
+  Summary: string
+  /**
+   * 诊断建议
+   */
+  Advise: string
+  /**
+   * 诊断详情
+   */
+  Detail: string
+  /**
+   * 诊断指标详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricDetails: Array<MetricDetail>
+  /**
+   * 诊断日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogDetails: Array<LogDetail>
+  /**
+   * 诊断配置详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SettingDetails: Array<SettingDetail>
 }
 
 /**
@@ -4289,48 +4507,39 @@ export interface StopLogstashPipelinesRequest {
 }
 
 /**
- * 智能运维诊断项结果
+ * 多可用区部署时可用区的详细信息
  */
-export interface DiagnoseJobResult {
+export interface ZoneDetail {
   /**
-   * 诊断项名
+   * 可用区
    */
-  JobName: string
+  Zone: string
   /**
-   * 诊断项状态：-2失败，-1待重试，0运行中，1成功
+   * 子网ID
    */
-  Status: number
+  SubnetId: string
+}
+
+/**
+ * DescribeClusterSnapshot返回参数结构体
+ */
+export interface DescribeClusterSnapshotResponse {
   /**
-   * 诊断项得分
+   * 集群实例Id，格式：es-xxxx
    */
-  Score: number
+  InstanceId?: string
   /**
-   * 诊断摘要
+   * 快照备份详情列表
    */
-  Summary: string
+  Snapshots?: Array<Snapshots>
   /**
-   * 诊断建议
+   * 快照仓库名称
    */
-  Advise: string
+  RepositoryName?: string
   /**
-   * 诊断详情
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Detail: string
-  /**
-   * 诊断指标详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetricDetails: Array<MetricDetail>
-  /**
-   * 诊断日志详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogDetails: Array<LogDetail>
-  /**
-   * 诊断配置详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SettingDetails: Array<SettingDetail>
+  RequestId?: string
 }
 
 /**
@@ -4824,6 +5033,22 @@ export interface CreateServerlessInstanceResponse {
 }
 
 /**
+ * 索引配置字段
+ */
+export interface ServerlessIndexSettingsField {
+  /**
+   * 索引主分片数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfShards?: string
+  /**
+   * 索引刷新频率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefreshInterval?: string
+}
+
+/**
  * DescribeDiagnose请求参数结构体
  */
 export interface DescribeDiagnoseRequest {
@@ -4919,19 +5144,41 @@ export interface CosSnapShotInfo {
 }
 
 /**
- * tke pod标签
+ * DescribeServerlessSpaces请求参数结构体
  */
-export interface DiSourceTkePodLabel {
+export interface DescribeServerlessSpacesRequest {
   /**
-   * 标签key
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤的空间ID
    */
-  Key?: string
+  SpaceIds?: Array<string>
   /**
-   * 标签value
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤的空间名
    */
-  Value?: string
+  SpaceNames?: Array<string>
+  /**
+   * 排序顺序，支持升序asc、降序desc
+   */
+  Order?: string
+  /**
+   * 排序字段，支持空间创建时间SpaceCreateTime
+   */
+  OrderBy?: string
+  /**
+   * vpcId信息数组
+   */
+  VpcIds?: Array<string>
+  /**
+   * 分页起始
+   */
+  Offset?: number
+  /**
+   * 分页条数
+   */
+  Limit?: number
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -4957,17 +5204,25 @@ export interface RestartInstanceRequest {
 }
 
 /**
- * 多可用区部署时可用区的详细信息
+ * UpdateJdk请求参数结构体
  */
-export interface ZoneDetail {
+export interface UpdateJdkRequest {
   /**
-   * 可用区
+   * ES实例ID
    */
-  Zone: string
+  InstanceId: string
   /**
-   * 子网ID
+   * Jdk类型，支持kona和oracle
    */
-  SubnetId: string
+  Jdk?: string
+  /**
+   * Gc类型，支持g1和cms
+   */
+  Gc?: string
+  /**
+   * 是否强制重启
+   */
+  ForceRestart?: boolean
 }
 
 /**
@@ -5371,6 +5626,21 @@ export interface KibanaPublicAcl {
    * kibana访问白名单
    */
   WhiteIpList?: Array<string>
+}
+
+/**
+ * CreateClusterSnapshot返回参数结构体
+ */
+export interface CreateClusterSnapshotResponse {
+  /**
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

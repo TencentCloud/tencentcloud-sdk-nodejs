@@ -1016,6 +1016,11 @@ export interface TimeShiftStreamInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
+  /**
+   * 时移自适应码率子流列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeShiftSubStreams?: Array<TimeShiftSubStream>
 }
 
 /**
@@ -4844,6 +4849,16 @@ export interface EnableOptimalSwitchingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 时移自适应码率子流信息。
+ */
+export interface TimeShiftSubStream {
+  /**
+   * 时移自适应码率子流转码模板ID。
+   */
+  TransCodeId?: number
 }
 
 /**

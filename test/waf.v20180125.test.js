@@ -1088,6 +1088,16 @@ it("waf.v20180125.DescribeHost", async function () {
     }
 })
 
+it("waf.v20180125.ModifyUserSignatureRuleV2", async function () {
+    try {
+       const data = await client.ModifyUserSignatureRuleV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAccessExports", async function () {
     try {
        const data = await client.DescribeAccessExports({})

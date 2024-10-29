@@ -178,6 +178,16 @@ it("scf.v20180416.PublishLayerVersion", async function () {
     }
 })
 
+it("scf.v20180416.ListCustomDomains", async function () {
+    try {
+       const data = await client.ListCustomDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.DeleteProvisionedConcurrencyConfig", async function () {
     try {
        const data = await client.DeleteProvisionedConcurrencyConfig({})
@@ -278,6 +288,16 @@ it("scf.v20180416.PutProvisionedConcurrencyConfig", async function () {
     }
 })
 
+it("scf.v20180416.DeleteCustomDomain", async function () {
+    try {
+       const data = await client.DeleteCustomDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.UpdateFunctionEventInvokeConfig", async function () {
     try {
        const data = await client.UpdateFunctionEventInvokeConfig({})
@@ -338,9 +358,9 @@ it("scf.v20180416.UpdateTrigger", async function () {
     }
 })
 
-it("scf.v20180416.GetReservedConcurrencyConfig", async function () {
+it("scf.v20180416.CreateCustomDomain", async function () {
     try {
-       const data = await client.GetReservedConcurrencyConfig({})
+       const data = await client.CreateCustomDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +448,39 @@ it("scf.v20180416.GetAlias", async function () {
     }
 })
 
+it("scf.v20180416.GetReservedConcurrencyConfig", async function () {
+    try {
+       const data = await client.GetReservedConcurrencyConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.PutTotalConcurrencyConfig", async function () {
     try {
        const data = await client.PutTotalConcurrencyConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.GetCustomDomain", async function () {
+    try {
+       const data = await client.GetCustomDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.UpdateCustomDomain", async function () {
+    try {
+       const data = await client.UpdateCustomDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

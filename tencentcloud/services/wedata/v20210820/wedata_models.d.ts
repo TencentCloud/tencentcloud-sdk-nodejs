@@ -1224,6 +1224,31 @@ export interface JudgeResourceFileResponse {
     RequestId?: string;
 }
 /**
+ * 获取数据服务API的发布态信息列表过滤条件
+ */
+export interface DataServicePublishedApiListFilter {
+    /**
+     * 请求路径关键词筛选
+     */
+    PathUrl?: string;
+    /**
+     * Api名称关键词筛选
+     */
+    Keyword?: string;
+    /**
+     * Api认证方式筛选 0:免认证 1:应用认证
+     */
+    AuthTypes?: Array<number | bigint>;
+    /**
+     * 服务Api状态 1:已上线  3:已下线
+     */
+    ApiStatus?: Array<number | bigint>;
+    /**
+     * API配置方式 0:向导、1、脚本、2、注册Api
+     */
+    ConfigTypes?: Array<number | bigint>;
+}
+/**
  * SubmitTask请求参数结构体
  */
 export interface SubmitTaskRequest {
@@ -1657,18 +1682,19 @@ export interface DescribeFieldBasicInfoResponse {
     RequestId?: string;
 }
 /**
- * DescribeStatisticInstanceStatusTrendOps返回参数结构体
+ * ColumnItem
  */
-export interface DescribeStatisticInstanceStatusTrendOpsResponse {
+export interface ColumnItem {
     /**
-     * 实例状态统计结果
+     * ColumnName1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: Array<InstanceStatisticInfo>;
+    ColumnName?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * ColumnName1
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ColumnRef?: string;
 }
 /**
  * 规则组执行结果
@@ -2060,21 +2086,54 @@ export interface DescribeInstanceByCycleResponse {
     RequestId?: string;
 }
 /**
- * DescribeIntegrationStatisticsRecordsTrend请求参数结构体
+ * 数据服务入参
  */
-export interface DescribeIntegrationStatisticsRecordsTrendRequest {
+export interface DataServiceRequestParam {
     /**
-     * 任务类型（实时：201，离线：202）
+     * 参数名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskType: number;
+    ParamName: string;
     /**
-     * 项目id
+     * 绑定字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    BindField: string;
     /**
-     * 查询日期
+     * 参数类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    QueryDate?: string;
+    ParamType: string;
+    /**
+     * 参数位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParamPosition: string;
+    /**
+     * 操作符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Operator: string;
+    /**
+     * 是否为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NonEmpty: number;
+    /**
+     * 默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultValue?: string;
+    /**
+     * 示例值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExampleValue?: string;
+    /**
+     * 参数描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
 }
 /**
  * DescribeDataCheckStat请求参数结构体
@@ -4267,6 +4326,31 @@ export interface DescribeSchedulerTaskTypeCntResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 数据质量生产调度任务业务实体
+ */
+export interface ProdSchedulerTask {
+    /**
+     * 生产调度任务工作流ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowId: string;
+    /**
+     * 生产调度任务Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 生产调度任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 生产调度任务任务类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CycleType?: number;
 }
 /**
  * DeleteCustomFunction返回参数结构体
@@ -6743,24 +6827,29 @@ export interface FindAllFolderResponse {
     RequestId?: string;
 }
 /**
- * 表生命周期相关信息
+ * DescribeDataServicePublishedApiList请求参数结构体
  */
-export interface LifecycleInfo {
+export interface DescribeDataServicePublishedApiListRequest {
     /**
-     * 生命周期值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 页码
      */
-    Lifecycle?: number;
+    PageNumber: number;
     /**
-     * 列名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 每页大小
      */
-    Columns?: Array<string>;
+    PageSize: number;
     /**
-     * 日期格式
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目ID
      */
-    DateFormat?: Array<string>;
+    ProjectId: string;
+    /**
+     * 查询参数
+     */
+    Filters?: DataServicePublishedApiListFilter;
+    /**
+     * 排序配置
+     */
+    OrderFields?: Array<DataServiceRequestListOrder>;
 }
 /**
  * 资源管理目录树节点
@@ -6985,6 +7074,36 @@ export interface KillOpsMakePlanInstancesResponse {
     RequestId?: string;
 }
 /**
+ * 数据服务入参
+ */
+export interface DataServiceResponseParam {
+    /**
+     * 参数名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParamName: string;
+    /**
+     * 绑定字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindField: string;
+    /**
+     * 参数类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParamType: string;
+    /**
+     * 示例值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExampleValue: string;
+    /**
+     * 参数描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+}
+/**
  * TaskLog请求参数结构体
  */
 export interface TaskLogRequest {
@@ -7042,6 +7161,106 @@ export interface OpsTaskLinkInfoDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LinkStyle?: string;
+}
+/**
+ * 开发空间-脚本相关响应
+ */
+export interface ScriptInfoResponse {
+    /**
+     * 资源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId?: string;
+    /**
+     * 脚本名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 文件扩展名类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileExtensionType?: string;
+    /**
+     * 文件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * md5值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Md5Value?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: number;
+    /**
+     * 本地路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalPath?: string;
+    /**
+     * 远程路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemotePath?: string;
+    /**
+     * 用户名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerName?: string;
+    /**
+     * 用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Owner?: string;
+    /**
+     * 路径深度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PathDepth?: number;
+    /**
+     * 项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 附加信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraInfo?: string;
+    /**
+     * 本地临时文件路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalTempPath?: string;
+    /**
+     * 本地压缩文件路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZipPath?: string;
+    /**
+     * cos桶名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bucket?: string;
+    /**
+     * cos地区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
 }
 /**
  * DescribeIntegrationStatisticsTaskStatus请求参数结构体
@@ -7404,6 +7623,26 @@ export interface DeleteTaskDsResponse {
     RequestId?: string;
 }
 /**
+ * 表生命周期相关信息
+ */
+export interface LifecycleInfo {
+    /**
+     * 生命周期值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lifecycle?: number;
+    /**
+     * 列名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Columns?: Array<string>;
+    /**
+     * 日期格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DateFormat?: Array<string>;
+}
+/**
  * DescribeAllByFolderNew返回参数结构体
  */
 export interface DescribeAllByFolderNewResponse {
@@ -7442,6 +7681,57 @@ export interface DescribeDsParentFolderTreeRequest {
   -    catalog:目录展示
      */
     DisplayType?: string;
+}
+/**
+ * 获取数据服务API的发布态信息列表响应内容
+ */
+export interface DescribeDataServicePublishedApiListResp {
+    /**
+     * 服务id
+     */
+    Id?: string;
+    /**
+     * 服务Api名称
+     */
+    ApiName?: string;
+    /**
+     * 所属目录名称
+     */
+    ApiFolderName?: string;
+    /**
+     * 服务Api标签名称集合
+     */
+    ApiTagNames?: string;
+    /**
+     * 服务负责人
+     */
+    OwnerName?: string;
+    /**
+     * 服务创建时间
+     */
+    CreateTime?: string;
+    /**
+     * Api的id
+     */
+    ApiId?: string;
+    /**
+     * 服务Api认证方式 0:免认证 1:应用认证
+     */
+    AuthType?: number;
+    /**
+     * 服务Api状态 0:创建 1:已上线 2:已删除 3:已下线
+     */
+    ApiStatus?: number;
+    /**
+     * 配置方式 0:向导、1、脚本、2、注册Api
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigType?: number;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
 }
 /**
  * KillScheduleInstances返回参数结构体
@@ -9658,6 +9948,20 @@ export interface DescribeAlarmReceiverRequest {
      * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
      */
     MonitorType?: number;
+}
+/**
+ * DescribeStatisticInstanceStatusTrendOps返回参数结构体
+ */
+export interface DescribeStatisticInstanceStatusTrendOpsResponse {
+    /**
+     * 实例状态统计结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<InstanceStatisticInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 集成离线任务实例信息
@@ -12488,29 +12792,17 @@ export interface DescribeTopTableStatResponse {
     RequestId?: string;
 }
 /**
- * 数据质量生产调度任务业务实体
+ * DescribeDataServicePublishedApiDetail请求参数结构体
  */
-export interface ProdSchedulerTask {
+export interface DescribeDataServicePublishedApiDetailRequest {
     /**
-     * 生产调度任务工作流ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务Id
      */
-    WorkflowId: string;
+    Id: string;
     /**
-     * 生产调度任务Id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目ID
      */
-    TaskId?: string;
-    /**
-     * 生产调度任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskName?: string;
-    /**
-     * 生产调度任务任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CycleType?: number;
+    ProjectId: string;
 }
 /**
  * 工作流调度详情
@@ -12723,6 +13015,23 @@ export interface AdhocRecord {
     InstanceId?: string;
 }
 /**
+ * DescribeDataServicePublishedApiList返回参数结构体
+ */
+export interface DescribeDataServicePublishedApiListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 服务列表
+     */
+    DataSet?: Array<DescribeDataServicePublishedApiListResp>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TriggerDsEvent返回参数结构体
  */
 export interface TriggerDsEventResponse {
@@ -12903,29 +13212,21 @@ export interface SimpleTaskInfo {
     TaskName: string;
 }
 /**
- * DescribeSchedulerTaskCntByStatus请求参数结构体
+ * DescribeIntegrationStatisticsRecordsTrend请求参数结构体
  */
-export interface DescribeSchedulerTaskCntByStatusRequest {
+export interface DescribeIntegrationStatisticsRecordsTrendRequest {
     /**
-     * 1
+     * 任务类型（实时：201，离线：202）
      */
-    TaskType?: number;
+    TaskType: number;
     /**
-     * Y
+     * 项目id
      */
-    TypeName?: string;
+    ProjectId: string;
     /**
-     * 111
+     * 查询日期
      */
-    ProjectId?: string;
-    /**
-     * 1
-     */
-    InCharge?: string;
-    /**
-     * 工作流ID
-     */
-    WorkflowId?: string;
+    QueryDate?: string;
 }
 /**
  * DescribeRealTimeTaskInstanceNodeInfo请求参数结构体
@@ -14175,6 +14476,31 @@ export interface TaskAlarmInfo {
     DingDingWebHooks?: string;
 }
 /**
+ * DescribeSchedulerTaskCntByStatus请求参数结构体
+ */
+export interface DescribeSchedulerTaskCntByStatusRequest {
+    /**
+     * 1
+     */
+    TaskType?: number;
+    /**
+     * Y
+     */
+    TypeName?: string;
+    /**
+     * 111
+     */
+    ProjectId?: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
+    /**
+     * 工作流ID
+     */
+    WorkflowId?: string;
+}
+/**
  * ModifyApproveStatus请求参数结构体
  */
 export interface ModifyApproveStatusRequest {
@@ -14615,19 +14941,17 @@ export interface AlarmIndicatorInfo {
     Threshold?: number;
 }
 /**
- * ColumnItem
+ * DescribeDataServicePublishedApiDetail返回参数结构体
  */
-export interface ColumnItem {
+export interface DescribeDataServicePublishedApiDetailResponse {
     /**
-     * ColumnName1
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务详情
      */
-    ColumnName?: string;
+    Data?: DescribeDataServicePublishedApiDetailResp;
     /**
-     * ColumnName1
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ColumnRef?: string;
+    RequestId?: string;
 }
 /**
  * 表的元数据信息
@@ -19223,6 +19547,22 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
     SortType?: string;
 }
 /**
+ * 数据服务通用排序参数
+ */
+export interface DataServiceRequestListOrder {
+    /**
+     * 排序参数名称
+  取值：
+    CreateTime 表示按照创建时间排序
+    ModifyTime 表示按照更新时间排序
+     */
+    Name?: string;
+    /**
+     * 排序参数顺序
+     */
+    Direction?: string;
+}
+/**
  * map
  */
 export interface StrToStrMap {
@@ -19542,104 +19882,91 @@ export interface DescribeExecStrategyRequest {
     ProjectId?: string;
 }
 /**
- * 开发空间-脚本相关响应
+ * 查询数据服务API的发布态信息详情出参
  */
-export interface ScriptInfoResponse {
+export interface DescribeDataServicePublishedApiDetailResp {
     /**
-     * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务Api名称
      */
-    ResourceId?: string;
+    ApiName?: string;
     /**
-     * 脚本名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务请求Path
      */
-    FileName?: string;
+    PathUrl?: string;
     /**
-     * 文件扩展名类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FileExtensionType?: string;
-    /**
-     * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Type?: string;
-    /**
-     * md5值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Md5Value?: string;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 文件大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Size?: number;
-    /**
-     * 本地路径
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LocalPath?: string;
-    /**
-     * 远程路径
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RemotePath?: string;
-    /**
-     * 用户名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务责任人名称
      */
     OwnerName?: string;
     /**
-     * 用户id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务请求方式
      */
-    Owner?: string;
+    RequestType?: string;
     /**
-     * 路径深度
+     * 服务标签名称集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PathDepth?: number;
+    ApiTagNames?: string;
     /**
-     * 项目id
+     * 服务描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId?: string;
+    ApiDescription?: string;
     /**
-     * 附加信息
+     * 服务请求返回示例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtraInfo?: string;
+    RequestExample?: string;
     /**
-     * 本地临时文件路径
+     * 服务请求成功返回示例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocalTempPath?: string;
+    RequestSuccess?: string;
     /**
-     * 本地压缩文件路径
+     * 服务请求失败返回示例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZipPath?: string;
+    RequestError?: string;
     /**
-     * cos桶名
+     * 服务请求参数列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Bucket?: string;
+    RequestParam?: Array<DataServiceRequestParam>;
     /**
-     * cos地区
+     * 服务响应参数列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region?: string;
+    ResponseParam?: Array<DataServiceResponseParam>;
+    /**
+     * 最大qps
+     */
+    MaxAllowQps?: number;
+    /**
+     * 最大记录数
+     */
+    MaxAllowPageSize?: number;
+    /**
+     * 超时时间，单位ms
+     */
+    TimeoutPeriod?: number;
+    /**
+     * ApiId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiId?: string;
+    /**
+     * 0:免认证 1:应用认证
+     */
+    AuthType?: number;
+    /**
+     * 请求地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayApiUrl?: string;
+    /**
+     * 服务Api状态 1:已上线  3:已下线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiStatus?: number;
 }
 /**
  * CreateHiveTable请求参数结构体

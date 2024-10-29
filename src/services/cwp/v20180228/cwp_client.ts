@@ -5669,9 +5669,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 编辑反弹Shell规则（支持多服务器选择）
-
-     */
+   * 编辑反弹Shell规则（支持多服务器选择）
+   */
   async EditReverseShellRules(
     req: EditReverseShellRulesRequest,
     cb?: (error: string, rep: EditReverseShellRulesResponse) => void

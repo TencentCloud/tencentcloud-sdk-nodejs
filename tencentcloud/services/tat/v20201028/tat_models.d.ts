@@ -551,11 +551,11 @@ export interface DescribeInvokerRecordsResponse {
     /**
      * 符合条件的历史记录数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 执行器执行历史记录。
      */
-    InvokerRecordSet: Array<InvokerRecord>;
+    InvokerRecordSet?: Array<InvokerRecord>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -916,7 +916,7 @@ export interface DescribeAutomationAgentStatusRequest {
      */
     InstanceIds?: Array<string>;
     /**
-     * 过滤条件。<br> <li> agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。<br> <li> environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
+     * <li>agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。</li><br><li>environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。</li><br><li>instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。</li>
      */
     Filters?: Array<Filter>;
     /**
@@ -1408,7 +1408,7 @@ export interface CreateInvokerResponse {
     /**
      * 执行器ID。
      */
-    InvokerId: string;
+    InvokerId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1470,27 +1470,22 @@ export interface DeleteCommandsResponse {
 export interface Scene {
     /**
      * 场景 ID 。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneId?: string;
     /**
      * 场景名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneName?: string;
     /**
      * 场景创建者。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedBy?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedTime?: string;
     /**
      * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedTime?: string;
 }

@@ -1063,7 +1063,7 @@ export interface CreateRecTaskRequest {
 
 注意：
 • 16k音频：仅支持单声道识别，**需设置ChannelNum=1**；
-• 8k电话音频：支持单声道、双声道识别，**建议设置ChannelNum=2，即双声道**。双声道能够物理区分说话人、避免说话双方重叠产生的识别错误，能达到最好的说话人分离效果和识别效果。设置双声道后，将自动区分说话人，因此**无需再开启说话人分离功能**，相关参数（**SpeakerDiarization、SpeakerNumber**）使用默认值即可
+• 8k电话音频：支持单声道、双声道识别，**建议设置ChannelNum=2，即双声道**。双声道能够物理区分说话人、避免说话双方重叠产生的识别错误，能达到最好的说话人分离效果和识别效果。设置双声道后，将自动区分说话人，因此**无需再开启说话人分离功能**，相关参数（**SpeakerDiarization、SpeakerNumber**）使用默认值即可，返回的ResultDetail中的speakerId的值为0代表左声道，值为1代表右声道。
    */
   ChannelNum: number
   /**
@@ -1298,6 +1298,7 @@ export interface SentenceDetail {
   SpeechSpeed?: number
   /**
    * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
+单声道话者分离时不同的值代表不同的说话人； 8k双声道话者分离时speakerId的值为0代表左声道，值为1代表右声道。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpeakerId?: number
@@ -1312,7 +1313,7 @@ export interface SentenceDetail {
    */
   SilenceTime?: number
   /**
-   * 情绪类型（可能为空）
+   * 情绪类型（可能为空，有2种情况 1、没有对应资源包；2、情绪跟语音效果相关，如果情绪不够强烈时可能无法识别）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EmotionType?: Array<string>

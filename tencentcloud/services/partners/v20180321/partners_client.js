@@ -43,6 +43,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAgentSelfPayDealsV2", req, cb);
     }
     /**
+     * 代理商名下客户解绑记录查询接口
+     */
+    async DescribeUnbindClientList(req, cb) {
+        return this.request("DescribeUnbindClientList", req, cb);
+    }
+    /**
      * 代理商可以对名下客户添加备注、修改备注
      */
     async ModifyClientRemark(req, cb) {
@@ -97,10 +103,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClientBalanceNew", req, cb);
     }
     /**
-     * 代理商名下客户解绑记录查询接口
+     * 根据大订单号查询关联申请合并支付的其他订单号
      */
-    async DescribeUnbindClientList(req, cb) {
-        return this.request("DescribeUnbindClientList", req, cb);
+    async DescribeAgentRelateBigDealIds(req, cb) {
+        return this.request("DescribeAgentRelateBigDealIds", req, cb);
     }
     /**
      * 代理商可查询自己名下待审核客户列表

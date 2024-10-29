@@ -16,53 +16,6 @@
  */
 
 /**
- * 内容审核多级标签结构
- */
-export interface LabelGrade {
-  /**
-   * 内容审核结果客户定制标签码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Code?: string
-  /**
-   * 内容审核结果客户定制一级标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Grade1?: string
-  /**
-   * 内容审核结果客户定制二级标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Grade2?: string
-  /**
-   * 内容审核结果客户定制三级标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Grade3?: string
-}
-
-/**
- * 该字段用于返回审核结果明细字段的标签及分数
- */
-export interface Tag {
-  /**
-   * 该字段用于返回命中的关键词
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keyword?: string
-  /**
-   * 该字段用于返回子标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubLabel?: string
-  /**
-   * 该字段用于返回子标签对应的分数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Score?: number
-}
-
-/**
  * 情感分析结果
  */
 export interface SentimentAnalysis {
@@ -120,49 +73,6 @@ export interface RiskDetails {
    * 该字段用于返回账号信息检测对应的风险等级，取值为：**1**（疑似存在风险）和**2**（存在恶意风险）。
    */
   Level: number
-}
-
-/**
- * ModerateText返回参数结构体
- */
-export interface ModerateTextResponse {
-  /**
-   * 该字段用于返回检测对象对应请求参数中的DataId，与输入的DataId字段中的内容对应
-   */
-  DataId?: string
-  /**
-   * 该字段用于返回请求参数中的BizType参数
-   */
-  BizType?: string
-  /**
-   * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。
-返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过
-   */
-  Suggestion?: string
-  /**
-   * 命中标签，可参阅对应数据结构（LabelGrade）的详细描述
-   */
-  Label?: LabelGrade
-  /**
-   * 命中标签对应腾讯侧定义的标签
-   */
-  TcLabelCodes?: Array<string>
-  /**
-   * 该字段用于返回当前标签（Label）下被检测文本命中的关键词信息，用于标注文本违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值
-   */
-  Keywords?: Array<string>
-  /**
-   * 该字段用于返回文本审核的详细结果，返回值信息可参阅对应数据结构（ModerationDetail）的详细描述
-   */
-  ModerationDetails?: Array<ModerationDetail>
-  /**
-   * 该字段用于返回审核结果置信度，使用百分制。分数越高表示结果可信度越高。
-   */
-  Score?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -247,22 +157,6 @@ export interface DetailResults {
 }
 
 /**
- * 模型检测结果
- */
-export interface ModelResult {
-  /**
-   * 模型检测出的违规内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Content?: string
-  /**
-   * 模型检测出的违规内容的位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Positions?: Array<Positions>
-}
-
-/**
  * 关键词命中位置信息
  */
 export interface HitInfo {
@@ -289,72 +183,85 @@ export interface HitInfo {
 }
 
 /**
- * 文本审核明细结果
+ * 该字段用于返回审核结果明细字段的标签及分数
  */
-export interface ModerationDetail {
+export interface Tag {
   /**
-   * 审核建议，Block表示建议拦截，Review表示建议人工复审，Pass表示建议放行
+   * 该字段用于返回命中的关键词
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion?: string
+  Keyword?: string
   /**
-   * 命中标签，含标签码和一二三级标签名
+   * 该字段用于返回子标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label?: LabelGrade
+  SubLabel?: string
   /**
-   * 标签得分
+   * 该字段用于返回子标签对应的分数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Score?: number
-  /**
-   * label对应腾讯侧命中标签码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TcLabelCodes?: Array<string>
-  /**
-   * 库检测命中详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LibResults?: Array<LibCheckResult>
-  /**
-   * 模型检测详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelResults?: Array<ModelResult>
-  /**
-   * 情绪正负向检测结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SentimentResult?: SentimentDetail
 }
 
 /**
- * ModerateText请求参数结构体
+ * 用于表示业务用户的账号相关信息
  */
-export interface ModerateTextRequest {
+export interface User {
   /**
-   * 该字段表示待检测对象的文本内容，文本需要按utf-8格式编码，长度不能超过10000个字符（按unicode编码计算），并进行 Base64加密
+   * 该字段表示业务用户ID,填写后，系统可根据账号过往违规历史优化审核结果判定，有利于存在可疑违规风险时的辅助判断。<br>
+备注：该字段可传入微信openid、QQopenid、字符串等账号信息，与账号类别参数（AccountType）配合使用可确定唯一账号。
    */
-  Content: string
+  UserId?: string
   /**
-   * 该字段表示策略的具体编号，用于接口调度，在内容安全控制台中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。
-备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype
+   * 该字段表示业务用户对应的账号昵称信息。
    */
-  BizType?: string
+  Nickname?: string
   /**
-   * 该字段表示您为待检测对象分配的数据ID，传入后可方便您对文件进行标识和管理。
-取值：由英文字母（大小写均可）、数字及四个特殊符号（_，-，@，#）组成，长度不超过64个字符
+   * 该字段表示业务用户ID对应的账号类型，取值：**1**-微信uin，**2**-QQ号，**3**-微信群uin，**4**-qq群号，**5**-微信openid，**6**-QQopenid，**7**-其它string。<br>
+该字段与账号ID参数（UserId）配合使用可确定唯一账号。
    */
-  DataId?: string
+  AccountType?: number
   /**
-   * 该字段表示待检测对象对应的用户相关信息，传入后可便于甄别相应违规风险用户
+   * 该字段表示业务用户对应账号的性别信息。<br>
+取值：**0**（默认值，代表性别未知）、**1**（男性）、**2**（女性）。
    */
-  User?: User
+  Gender?: number
   /**
-   * 该字段表示待检测对象对应的设备相关信息，传入后可便于甄别相应违规风险设备
+   * 该字段表示业务用户对应账号的年龄信息。<br>
+取值：**0**（默认值，代表年龄未知）-（**自定义年龄上限**）之间的整数。
    */
-  Device?: Device
+  Age?: number
+  /**
+   * 该字段表示业务用户对应账号的等级信息。<br>
+取值：**0**（默认值，代表等级未知）、**1**（等级较低）、**2**（等级中等）、**3**（等级较高），目前**暂不支持自定义等级**。
+   */
+  Level?: number
+  /**
+   * 该字段表示业务用户对应账号的手机号信息，支持全球各地区手机号的记录。<br>
+备注：请保持手机号格式的统一，如区号格式（086/+86）等。
+   */
+  Phone?: string
+  /**
+   * 该字段表示业务用户头像图片的访问链接(URL)，支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。
+备注：头像图片大小不超过5MB，建议分辨率不低于256x256；图片下载时间限制为3秒，超过则会返回下载超时。
+   */
+  HeadUrl?: string
+  /**
+   * 该字段表示业务用户的简介信息，支持汉字、英文及特殊符号，长度不超过5000个汉字字符。
+   */
+  Desc?: string
+  /**
+   * 该字段表示业务群聊场景时的房间ID。
+   */
+  RoomId?: string
+  /**
+   * 该字段表示消息接受者ID
+   */
+  ReceiverId?: string
+  /**
+   * 消息生成时间，精确到毫秒
+   */
+  SendTime?: number
 }
 
 /**
@@ -473,96 +380,4 @@ export interface TextModerationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 库检测结果
- */
-export interface LibCheckResult {
-  /**
-   * 库ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LibId?: string
-  /**
-   * 库名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LibName?: string
-  /**
-   * 库类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LibType?: number
-  /**
-   * 命中的关键词
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keyword?: string
-  /**
-   * 命中的关键词在送审文本的位置，可能存在多个位置，每个位置显示开始位置和结束位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Positions?: Array<Positions>
-}
-
-/**
- * 用于表示业务用户的账号相关信息
- */
-export interface User {
-  /**
-   * 该字段表示业务用户ID,填写后，系统可根据账号过往违规历史优化审核结果判定，有利于存在可疑违规风险时的辅助判断。<br>
-备注：该字段可传入微信openid、QQopenid、字符串等账号信息，与账号类别参数（AccountType）配合使用可确定唯一账号。
-   */
-  UserId?: string
-  /**
-   * 该字段表示业务用户对应的账号昵称信息。
-   */
-  Nickname?: string
-  /**
-   * 该字段表示业务用户ID对应的账号类型，取值：**1**-微信uin，**2**-QQ号，**3**-微信群uin，**4**-qq群号，**5**-微信openid，**6**-QQopenid，**7**-其它string。<br>
-该字段与账号ID参数（UserId）配合使用可确定唯一账号。
-   */
-  AccountType?: number
-  /**
-   * 该字段表示业务用户对应账号的性别信息。<br>
-取值：**0**（默认值，代表性别未知）、**1**（男性）、**2**（女性）。
-   */
-  Gender?: number
-  /**
-   * 该字段表示业务用户对应账号的年龄信息。<br>
-取值：**0**（默认值，代表年龄未知）-（**自定义年龄上限**）之间的整数。
-   */
-  Age?: number
-  /**
-   * 该字段表示业务用户对应账号的等级信息。<br>
-取值：**0**（默认值，代表等级未知）、**1**（等级较低）、**2**（等级中等）、**3**（等级较高），目前**暂不支持自定义等级**。
-   */
-  Level?: number
-  /**
-   * 该字段表示业务用户对应账号的手机号信息，支持全球各地区手机号的记录。<br>
-备注：请保持手机号格式的统一，如区号格式（086/+86）等。
-   */
-  Phone?: string
-  /**
-   * 该字段表示业务用户头像图片的访问链接(URL)，支持PNG、JPG、JPEG、BMP、GIF、WEBP格式。
-备注：头像图片大小不超过5MB，建议分辨率不低于256x256；图片下载时间限制为3秒，超过则会返回下载超时。
-   */
-  HeadUrl?: string
-  /**
-   * 该字段表示业务用户的简介信息，支持汉字、英文及特殊符号，长度不超过5000个汉字字符。
-   */
-  Desc?: string
-  /**
-   * 该字段表示业务群聊场景时的房间ID。
-   */
-  RoomId?: string
-  /**
-   * 该字段表示消息接受者ID
-   */
-  ReceiverId?: string
-  /**
-   * 消息生成时间，精确到毫秒
-   */
-  SendTime?: number
 }

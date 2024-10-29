@@ -290,7 +290,7 @@ export interface CreateAuthorizationPolicyRequest {
    */
   ClientId?: string
   /**
-   * ip
+   * IP地址
    */
   Ip?: string
   /**
@@ -890,7 +890,7 @@ export interface ModifyAuthorizationPolicyRequest {
    */
   ClientId?: string
   /**
-   * ip
+   * IP
    */
   Ip?: string
   /**

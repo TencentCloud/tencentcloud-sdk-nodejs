@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeBillAdjustInfoResponse,
   DescribeCostSummaryByProductRequest,
   DescribeCostExplorerSummaryResponse,
   ConsumptionBusinessSummaryDataItem,
@@ -36,7 +37,7 @@ import {
   BillDetailComponentConfig,
   DescribeCostSummaryByResourceResponse,
   DescribeBillSummaryByRegionRequest,
-  DescribeCostSummaryByProjectRequest,
+  AdjustInfoDetail,
   DescribeAllocateConditionsRequest,
   ConsumptionRegionSummaryDataItem,
   DescribeBillSummaryRequest,
@@ -106,7 +107,7 @@ import {
   BillZoneId,
   BillRegion,
   DescribeBillSummaryByProjectResponse,
-  DescribeBillDownloadUrlResponse,
+  DescribeBillAdjustInfoRequest,
   TagDataInfo,
   PayDealsRequest,
   SummaryTotal,
@@ -151,6 +152,7 @@ import {
   BillOperateUin,
   DescribeTagListRequest,
   DescribeBillResourceSummaryForOrganizationResponse,
+  DescribeCostSummaryByProjectRequest,
   DescribeCostSummaryByResourceRequest,
   CreateAllocationTagRequest,
   ExcludedProducts,
@@ -165,6 +167,7 @@ import {
   SavingPlanUsageDetail,
   DescribeBillSummaryByRegionResponse,
   CreateAllocationTagResponse,
+  DescribeBillDownloadUrlResponse,
   ConsumptionResourceSummaryDataItem,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
@@ -485,6 +488,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void
   ): Promise<DescribeSavingPlanUsageResponse> {
     return this.request("DescribeSavingPlanUsage", req, cb)
+  }
+
+  /**
+   * 可以通过API获取当前UIN是否有调账，客户可以更快地主动地获取调账情况。
+   */
+  async DescribeBillAdjustInfo(
+    req: DescribeBillAdjustInfoRequest,
+    cb?: (error: string, rep: DescribeBillAdjustInfoResponse) => void
+  ): Promise<DescribeBillAdjustInfoResponse> {
+    return this.request("DescribeBillAdjustInfo", req, cb)
   }
 
   /**

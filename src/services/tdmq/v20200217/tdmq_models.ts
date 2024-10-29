@@ -7323,12 +7323,12 @@ export interface CmqDeadLetterSource {
    * 消息队列ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueId: string
+  QueueId?: string
   /**
    * 消息队列名字。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QueueName: string
+  QueueName?: string
 }
 
 /**
@@ -7874,7 +7874,7 @@ export interface ModifyCmqQueueAttributeRequest {
    */
   DeadLetterQueueName?: string
   /**
-   * MaxTimeToLivepolicy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds
+   * policy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds
    */
   MaxTimeToLive?: number
   /**
@@ -8063,22 +8063,22 @@ export interface CmqDeadLetterPolicy {
    * 死信队列。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadLetterQueue: string
+  DeadLetterQueue?: string
   /**
-   * 死信队列策略。
+   * 死信队列策略。0:最大接收次数;1:最大未消费时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Policy: number
+  Policy?: number
   /**
    * 最大未消费过期时间。Policy为1时必选。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxTimeToLive: number
+  MaxTimeToLive?: number
   /**
-   * 最大接收次数。
+   * 最大接收次数。Policy为0时必选，范围在1到1000。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxReceiveCount: number
+  MaxReceiveCount?: number
 }
 
 /**
@@ -8515,7 +8515,7 @@ export interface CmqQueue {
    */
   Bps?: number
   /**
-   * 飞行消息最大保留时间。
+   * 飞行消息最大保留时间，需要小于消息保留周期。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDelaySeconds?: number
@@ -9121,7 +9121,7 @@ export interface CmqTopic {
    */
   MsgRetentionSeconds?: number
   /**
-   * 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。
+   * 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为1048576。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMsgSize?: number

@@ -25,7 +25,6 @@ import {
   Storage,
   DescribeAuditTracksResponse,
   StartLoggingRequest,
-  DeleteAuditResponse,
   ModifyAuditTrackResponse,
   InquireAuditCreditRequest,
   DescribeEventsResponse,
@@ -34,18 +33,20 @@ import {
   DescribeAuditTrackRequest,
   UpdateAuditRequest,
   DescribeAuditTracksRequest,
-  Tracks,
-  CreateAuditResponse,
+  CreateEventsAuditTrackResponse,
   DeleteAuditTrackRequest,
   StartLoggingResponse,
   AttributeKeyDetail,
   ListCosEnableRegionRequest,
   ListKeyAliasByRegionResponse,
   CreateAuditTrackResponse,
+  Tracks,
   Resource,
   ListAuditsRequest,
   ModifyAuditTrackRequest,
   StopLoggingResponse,
+  Filter,
+  ResourceField,
   CreateAuditTrackRequest,
   LookupAttribute,
   ListAuditsResponse,
@@ -54,15 +55,16 @@ import {
   UpdateAuditResponse,
   DescribeAuditRequest,
   ListKeyAliasByRegionRequest,
-  CreateAuditRequest,
-  DeleteAuditRequest,
   ListCmqEnableRegionRequest,
   GetAttributeKeyResponse,
+  ModifyEventsAuditTrackResponse,
   ListCmqEnableRegionResponse,
   LookUpEventsResponse,
+  CreateEventsAuditTrackRequest,
   DeleteAuditTrackResponse,
   CosRegionInfo,
   DescribeAuditTrackResponse,
+  ModifyEventsAuditTrackRequest,
   DescribeAuditResponse,
   Event,
   AuditSummary,
@@ -138,13 +140,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除跟踪集
+   * 创建操作审计跟踪集
    */
-  async DeleteAudit(
-    req: DeleteAuditRequest,
-    cb?: (error: string, rep: DeleteAuditResponse) => void
-  ): Promise<DeleteAuditResponse> {
-    return this.request("DeleteAudit", req, cb)
+  async CreateEventsAuditTrack(
+    req: CreateEventsAuditTrackRequest,
+    cb?: (error: string, rep: CreateEventsAuditTrackResponse) => void
+  ): Promise<CreateEventsAuditTrackResponse> {
+    return this.request("CreateEventsAuditTrack", req, cb)
   }
 
   /**
@@ -155,6 +157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEventsResponse) => void
   ): Promise<DescribeEventsResponse> {
     return this.request("DescribeEvents", req, cb)
+  }
+
+  /**
+   * 修改操作审计跟踪集
+   */
+  async ModifyEventsAuditTrack(
+    req: ModifyEventsAuditTrackRequest,
+    cb?: (error: string, rep: ModifyEventsAuditTrackResponse) => void
+  ): Promise<ModifyEventsAuditTrackResponse> {
+    return this.request("ModifyEventsAuditTrack", req, cb)
   }
 
   /**
@@ -229,20 +241,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditResponse) => void
   ): Promise<DescribeAuditResponse> {
     return this.request("DescribeAudit", req, cb)
-  }
-
-  /**
-     * 参数要求：
-1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-     */
-  async CreateAudit(
-    req: CreateAuditRequest,
-    cb?: (error: string, rep: CreateAuditResponse) => void
-  ): Promise<CreateAuditResponse> {
-    return this.request("CreateAudit", req, cb)
   }
 
   /**

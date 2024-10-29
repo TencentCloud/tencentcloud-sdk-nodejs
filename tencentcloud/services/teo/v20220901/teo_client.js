@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyPlan", req, cb);
     }
     /**
+     * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     */
+    async DescribeOriginGroupHealthStatus(req, cb) {
+        return this.request("DescribeOriginGroupHealthStatus", req, cb);
+    }
+    /**
      * 删除边缘函数，删除后函数无法恢复，关联的触发规则会一并删除。
      */
     async DeleteFunction(req, cb) {
@@ -242,6 +248,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DeleteOriginGroup", req, cb);
     }
     /**
+     * 查询负载均衡实例列表。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     */
+    async DescribeLoadBalancerList(req, cb) {
+        return this.request("DescribeLoadBalancerList", req, cb);
+    }
+    /**
      * 创建安全 IP 组
      */
     async CreateSecurityIPGroup(req, cb) {
@@ -252,6 +264,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeIPRegion(req, cb) {
         return this.request("DescribeIPRegion", req, cb);
+    }
+    /**
+     * 修改负载均衡实例配置。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     */
+    async ModifyLoadBalancer(req, cb) {
+        return this.request("ModifyLoadBalancer", req, cb);
     }
     /**
      * 批量删除加速域名
@@ -475,6 +493,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeCustomErrorPages", req, cb);
     }
     /**
+     * 删除负载均衡实例，若负载均衡示例被其他服务（例如：四层代理等）引用的时候，示例无法被删除，需要先解除引用关系。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     */
+    async DeleteLoadBalancer(req, cb) {
+        return this.request("DeleteLoadBalancer", req, cb);
+    }
+    /**
      * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
      */
     async DescribeRulesSetting(req, cb) {
@@ -591,6 +615,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async ModifyAliasDomain(req, cb) {
         return this.request("ModifyAliasDomain", req, cb);
+    }
+    /**
+     * 创建负载均衡实例。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223)。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     */
+    async CreateLoadBalancer(req, cb) {
+        return this.request("CreateLoadBalancer", req, cb);
     }
     /**
      * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理转发规则

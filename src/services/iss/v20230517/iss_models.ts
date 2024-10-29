@@ -912,6 +912,10 @@ export interface UpdateUserDeviceRequest {
    * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效
    */
   SubscribeSwitch?: number
+  /**
+   * 是否开启静音帧（0：关闭；1 开启）
+   */
+  SilentFrameSwitch?: number
 }
 
 /**
@@ -2987,6 +2991,11 @@ export interface DescribeDeviceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamName?: string
+  /**
+   * 是否开启静音帧（0：关闭；1 开启）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SilentFrameSwitch?: number
 }
 
 /**

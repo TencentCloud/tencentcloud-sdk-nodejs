@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAICall", req, cb);
     }
     /**
+     * 拉取会话录音转文本信息
+     */
+    async DescribeTelRecordAsr(req, cb) {
+        return this.request("DescribeTelRecordAsr", req, cb);
+    }
+    /**
      * 停止自动外呼任务
      */
     async StopAutoCalloutTask(req, cb) {

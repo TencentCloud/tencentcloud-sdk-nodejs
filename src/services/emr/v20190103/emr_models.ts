@@ -4585,6 +4585,10 @@ export interface DeleteUserManagerUserListRequest {
    * 用户组
    */
   UserGroupList?: Array<UserAndGroup>
+  /**
+   * 是否删除家目录，只针对cvm集群
+   */
+  DeleteHomeDir?: boolean
 }
 
 /**

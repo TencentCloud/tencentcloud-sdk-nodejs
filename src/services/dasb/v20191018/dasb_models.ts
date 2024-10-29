@@ -2625,6 +2625,16 @@ export interface Device {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainName?: string
+  /**
+   * 是否启用SSL，仅支持Redis资产。0：禁用 1：启用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableSSL?: number
+  /**
+   * 已上传的SSL证书名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLCertName?: string
 }
 
 /**
@@ -3581,6 +3591,21 @@ export interface Resource {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Trial?: number
+  /**
+   * cdc集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcClusterId?: string
+  /**
+   * 日志投递规格信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogDelivery?: string
+  /**
+   * 部署模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployModel?: number
 }
 
 /**
@@ -3983,6 +4008,18 @@ export interface ExternalDevice {
    * 资产多节点：字段ip和端口
    */
   IpPortSet?: Array<string>
+  /**
+   * 是否启用SSL,1:启用 0：禁用，仅支持Redis资产
+   */
+  EnableSSL?: number
+  /**
+   * SSL证书，EnableSSL时必填
+   */
+  SSLCert?: string
+  /**
+   * SSL证书名称，EnableSSL时必填
+   */
+  SSLCertName?: string
 }
 
 /**

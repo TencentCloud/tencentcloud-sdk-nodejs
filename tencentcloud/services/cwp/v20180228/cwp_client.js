@@ -2643,7 +2643,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 编辑反弹Shell规则（支持多服务器选择）
-
      */
     async EditReverseShellRules(req, cb) {
         return this.request("EditReverseShellRules", req, cb);

@@ -68,7 +68,6 @@ export { cms } from "./cms";
 export { config } from "./config";
 export { controlcenter } from "./controlcenter";
 export { cpdp } from "./cpdp";
-export { cr } from "./cr";
 export { csip } from "./csip";
 export { csxg } from "./csxg";
 export { cvm } from "./cvm";

@@ -2917,6 +2917,80 @@ export interface DeleteAbnormalProcessRulesResponse {
     RequestId?: string;
 }
 /**
+ * 容器安全镜像仓库列表
+ */
+export interface ImageRepoRegistryInfo {
+    /**
+     * 仓库id
+     */
+    RegistryId?: number;
+    /**
+     * 仓库名
+     */
+    Name?: string;
+    /**
+     * 仓库类型，列表：harbor、tcr
+     */
+    RegistryType?: string;
+    /**
+     * 仓库url
+     */
+    Url?: string;
+    /**
+     * 网络类型，列表：public
+     */
+    NetType?: string;
+    /**
+     * 区域，列表：default
+     */
+    RegistryRegion?: string;
+    /**
+     * 仓库版本
+     */
+    RegistryVersion?: string;
+    /**
+     * 仓库连接错误信息，待废弃，请使用ConnDetectException
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectMsg?: string;
+    /**
+     * 联通性检测方式
+     */
+    ConnDetectType?: string;
+    /**
+     * 联通性检测主机数
+     */
+    ConnDetectHostCount?: number;
+    /**
+     * 联通性检测详情
+     */
+    ConnDetectDetail?: Array<RegistryConnDetectResult>;
+    /**
+     * tcr情况下的instance_id
+     */
+    InstanceID?: string;
+    /**
+     * 最近同步成功时间
+     */
+    LatestSyncTime?: string;
+    /**
+     * 同步状态
+     */
+    SyncStatus?: string;
+    /**
+     * 同步失败原因
+     */
+    SyncFailReason?: string;
+    /**
+     * 同步失败解决方案
+     */
+    SyncSolution?: string;
+    /**
+     * 同步失败信息
+     */
+    SyncMessage?: string;
+}
+/**
  * 运行时安全，策略基本信息
  */
 export interface RuleBaseInfo {
@@ -13552,7 +13626,29 @@ export interface DescribeUserClusterResponse {
 /**
  * DescribeAssetImageRegistryRegistryList请求参数结构体
  */
-export declare type DescribeAssetImageRegistryRegistryListRequest = null;
+export interface DescribeAssetImageRegistryRegistryListRequest {
+    /**
+     * 需要返回的数量，默认为10，最大值为100
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为0
+     */
+    Offset?: number;
+    /**
+     * 过滤字段
+  IsAuthorized是否授权，取值全部all，未授权0，已授权1
+     */
+    Filters?: Array<AssetFilters>;
+    /**
+     * 排序字段
+     */
+    By?: string;
+    /**
+     * 排序方式，asc，desc
+     */
+    Order?: string;
+}
 /**
  * DescribeVulDefenceHost返回参数结构体
  */
@@ -19733,6 +19829,16 @@ export interface VulInfo {
  * DescribeAssetImageRegistryRegistryList返回参数结构体
  */
 export interface DescribeAssetImageRegistryRegistryListResponse {
+    /**
+     * 镜像仓库列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<ImageRepoRegistryInfo>;
+    /**
+     * 总数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

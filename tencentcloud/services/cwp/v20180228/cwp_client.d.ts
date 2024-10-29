@@ -1757,7 +1757,6 @@ export declare class Client extends AbstractClient {
     ExportAssetSystemPackageList(req: ExportAssetSystemPackageListRequest, cb?: (error: string, rep: ExportAssetSystemPackageListResponse) => void): Promise<ExportAssetSystemPackageListResponse>;
     /**
      * 编辑反弹Shell规则（支持多服务器选择）
-
      */
     EditReverseShellRules(req: EditReverseShellRulesRequest, cb?: (error: string, rep: EditReverseShellRulesResponse) => void): Promise<EditReverseShellRulesResponse>;
     /**

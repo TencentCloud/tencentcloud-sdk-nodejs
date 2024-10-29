@@ -194,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSavingPlanUsage", req, cb);
     }
     /**
+     * 可以通过API获取当前UIN是否有调账，客户可以更快地主动地获取调账情况。
+     */
+    async DescribeBillAdjustInfo(req, cb) {
+        return this.request("DescribeBillAdjustInfo", req, cb);
+    }
+    /**
      * 查询分账账单明细
      */
     async DescribeAllocationBillDetail(req, cb) {

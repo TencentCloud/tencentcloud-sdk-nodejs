@@ -1611,16 +1611,6 @@ export interface CreateLogsetResponse {
  */
 export interface NoticeRule {
   /**
-   * 告警通知模板接收者信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NoticeReceivers?: Array<NoticeReceiver>
-  /**
-   * 告警通知模板回调信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebCallbacks?: Array<WebCallback>
-  /**
    * 匹配规则 JSON串。
 **rule规则树格式为嵌套结构体JSON字符串**
 `{"Value":"AND","Type":"Operation","Children":[{"Value":"OR","Type":"Operation","Children":[{"Type":"Condition","Value":"Level","Children":[{"Value":"In","Type":"Compare"},{"Value":"[1,0]","Type":"Value"}]},{"Type":"Condition","Value":"Level","Children":[{"Value":"NotIn","Type":"Compare"},{"Value":"[2]","Type":"Value"}]}]}]}`
@@ -1682,6 +1672,39 @@ export interface NoticeRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: string
+  /**
+   * 告警通知接收者信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeReceivers?: Array<NoticeReceiver>
+  /**
+   * 告警通知模板回调信息，包括企业微信、钉钉、飞书。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebCallbacks?: Array<WebCallback>
+  /**
+   * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Escalate?: boolean
+  /**
+   * 告警升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1
+- 无人认领且未恢复：告警没有恢复并且没有人认领则升级
+- 未恢复：当前告警持续未恢复则升级
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 告警升级间隔。单位：分钟，范围`[1，14400]`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: number
+  /**
+   * 告警升级后下一个环节的通知渠道配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EscalateNotice?: EscalateNoticeInfo
 }
 
 /**
@@ -2658,9 +2681,14 @@ Classifications元素的Value长度不能超过200个字符。
 }
 
 /**
- * DescribeConsoleSharingList请求参数结构体
+ * DeleteDataTransform请求参数结构体
  */
-export type DescribeConsoleSharingListRequest = null
+export interface DeleteDataTransformRequest {
+  /**
+   * 数据加工任务id
+   */
+  TaskId: string
+}
 
 /**
  * DeleteExport返回参数结构体
@@ -2819,6 +2847,43 @@ export interface CreateNoticeContentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 升级通知
+ */
+export interface EscalateNoticeInfo {
+  /**
+   * 告警通知模板接收者信息。
+   */
+  NoticeReceivers: Array<NoticeReceiver>
+  /**
+   * 告警通知模板回调信息。
+   */
+  WebCallbacks: Array<WebCallback>
+  /**
+   * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Escalate?: boolean
+  /**
+   * 告警升级间隔。单位：分钟，范围`[1，14400]`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: number
+  /**
+   * 升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1
+- 无人认领且未恢复：告警没有恢复并且没有人认领则升级
+- 未恢复：当前告警持续未恢复则升级
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EscalateNotice?: EscalateNoticeInfo
 }
 
 /**
@@ -4391,13 +4456,56 @@ export interface DescribeAlarmNoticesResponse {
 }
 
 /**
- * DeleteDataTransform请求参数结构体
+ * ModifyAlarmShield请求参数结构体
  */
-export interface DeleteDataTransformRequest {
+export interface ModifyAlarmShieldRequest {
   /**
-   * 数据加工任务id
+   * 屏蔽规则ID。
    */
   TaskId: string
+  /**
+   * 通知渠道组id。
+   */
+  AlarmNoticeId: string
+  /**
+   * 屏蔽开始时间（秒级时间戳）。
+   */
+  StartTime?: number
+  /**
+   * 屏蔽结束时间（秒级时间戳）。
+   */
+  EndTime?: number
+  /**
+   * 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。
+   */
+  Type?: number
+  /**
+   * 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178#rule)。
+   */
+  Rule?: string
+  /**
+   * 屏蔽原因。
+   */
+  Reason?: string
+  /**
+   * 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。
+   */
+  Status?: number
+}
+
+/**
+ * 通知渠道投递日志配置信息
+ */
+export interface AlarmNoticeDeliverConfig {
+  /**
+   * 通知渠道投递日志配置信息。
+   */
+  DeliverConfig?: DeliverConfig
+  /**
+   * 投递失败原因。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -4672,36 +4780,62 @@ export interface DeleteAlarmResponse {
  */
 export interface WebCallback {
   /**
-   * 回调地址。最大支持1024个字节数。
-   */
-  Url: string
-  /**
    * 回调的类型。可选值：
-- WeCom
 - Http
+- WeCom
 - DingTalk
 - Lark
    */
   CallbackType: string
+  /**
+   * 回调地址，最大支持1024个字节。
+也可使用WebCallbackId引用集成配置中的URL，此时该字段请填写为空字符串。
+   */
+  Url: string
+  /**
+   * 集成配置ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebCallbackId?: string
   /**
    * 回调方法。可选值：
 - POST（默认值）
 - PUT
 
 注意：
-- 参数CallbackType为Http时为必选。
+- 参数CallbackType为Http时为必选，其它回调方式无需填写。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
-   * 请求头。
-注意：该参数已废弃，请使用NoticeContentId。
+   * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentId?: string
+  /**
+   * 提醒类型。
+
+0：不提醒；1：指定人；2：所有人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemindType?: number
+  /**
+   * 电话列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mobiles?: Array<string>
+  /**
+   * 用户ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIds?: Array<string>
+  /**
+   * 该参数已废弃，请使用NoticeContentId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<string>
   /**
-   * 请求内容。
-注意：该参数已废弃，请使用NoticeContentId。
+   * 该参数已废弃，请使用NoticeContentId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Body?: string
@@ -4711,16 +4845,6 @@ export interface WebCallback {
 - 出参有效。
    */
   Index?: number
-  /**
-   * 通知内容模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NoticeContentId?: string
-  /**
-   * 集成配置ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebCallbackId?: string
 }
 
 /**
@@ -5783,11 +5907,16 @@ export interface NoticeReceiver {
    */
   ReceiverChannels: Array<string>
   /**
-   * 允许接收信息的开始时间。格式：`15:04:05`，必填。
+   * 通知内容模板ID，使用Default-zh引用默认模板（中文），使用Default-en引用DefaultTemplate(English)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeContentId?: string
+  /**
+   * 允许接收信息的开始时间。格式：`15:04:05`。必填
    */
   StartTime?: string
   /**
-   * 允许接收信息的结束时间。格式：`15:04:05`，必填。
+   * 允许接收信息的结束时间。格式：`15:04:05`。必填
    */
   EndTime?: string
   /**
@@ -5797,11 +5926,6 @@ export interface NoticeReceiver {
 - 出参时有效。
    */
   Index?: number
-  /**
-   * 通知内容模板ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NoticeContentId?: string
 }
 
 /**
@@ -5953,13 +6077,18 @@ export interface MultiTopicSearchInformation {
 }
 
 /**
- * 告警通知模板类型
+ * 告警通知渠道组详细配置
  */
 export interface AlarmNotice {
   /**
-   * 告警通知模板名称。
+   * 告警通知渠道组名称。
    */
   Name?: string
+  /**
+   * 告警通知渠道组绑定的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
   /**
    * 告警模板的类型。可选值：
 <br><li> Trigger - 告警触发</li>
@@ -5983,6 +6112,27 @@ export interface AlarmNotice {
    */
   AlarmNoticeId?: string
   /**
+   * 通知规则。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoticeRules?: Array<NoticeRule>
+  /**
+   * 免登录操作告警开关。
+参数值： 1：关闭 2：开启（默认开启）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmShieldStatus?: number
+  /**
+   * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JumpDomain?: string
+  /**
+   * 投递相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmNoticeDeliverConfig?: AlarmNoticeDeliverConfig
+  /**
    * 创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -5992,11 +6142,6 @@ export interface AlarmNotice {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
-  /**
-   * 通知规则。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NoticeRules?: Array<NoticeRule>
 }
 
 /**
@@ -7242,41 +7387,17 @@ export interface Tag {
 }
 
 /**
- * ModifyAlarmShield请求参数结构体
+ * 需要过滤日志的key，及其对应的regex
  */
-export interface ModifyAlarmShieldRequest {
+export interface KeyRegexInfo {
   /**
-   * 屏蔽规则ID。
+   * 需要过滤日志的key
    */
-  TaskId: string
+  Key: string
   /**
-   * 通知渠道组id。
+   * key对应的过滤规则regex
    */
-  AlarmNoticeId: string
-  /**
-   * 屏蔽开始时间（秒级时间戳）。
-   */
-  StartTime?: number
-  /**
-   * 屏蔽结束时间（秒级时间戳）。
-   */
-  EndTime?: number
-  /**
-   * 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。
-   */
-  Type?: number
-  /**
-   * 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178#rule)。
-   */
-  Rule?: string
-  /**
-   * 屏蔽原因。
-   */
-  Reason?: string
-  /**
-   * 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。
-   */
-  Status?: number
+  Regex: string
 }
 
 /**
@@ -7447,44 +7568,53 @@ export interface CreateAlarmNoticeRequest {
    */
   Name: string
   /**
-   * 通知类型。可选值：
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
+需要发送通知的告警类型。可选值：
 - Trigger - 告警触发
 - Recovery - 告警恢复
 - All - 告警触发和告警恢复
-
-
- 注意:  
-- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
-- 2组rule配置互斥
-- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
    */
   Type?: string
   /**
-   * 通知接收对象。
- 注意:  
-- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
-- 2组rule配置互斥
-- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
+   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
+通知接收对象。
    */
   NoticeReceivers?: Array<NoticeReceiver>
   /**
-   * 接口回调信息（包括企业微信）。
- 注意:  
-- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
-- 2组rule配置互斥
-- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
+   * 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）
+接口回调信息（包括企业微信、钉钉、飞书）。
    */
   WebCallbacks?: Array<WebCallback>
   /**
-   * 通知规则。
- 注意:  
-- Type、NoticeReceivers和WebCallbacks是一组rule配置，其中Type必填，NoticeReceivers和WebCallbacks至少一个不为空；NoticeRules是另一组rule配置，其中rule不许为空
-- 2组rule配置互斥
-- rule配置 与 deliver配置（DeliverStatus与DeliverConfig）至少填写一组配置
-
-
+   * 【高级模式】（简易模式/告警模式二选一，分别配置相应参数）
+通知规则。
    */
   NoticeRules?: Array<NoticeRule>
+  /**
+   * 查询数据链接。http:// 或者 https:// 开头，不能/结尾
+   */
+  JumpDomain?: string
+  /**
+   * 投递日志开关。可取值如下：
+1：关闭（默认值）；
+2：开启 
+投递日志开关开启时， DeliverConfig参数必填。
+   */
+  DeliverStatus?: number
+  /**
+   * 投递日志配置参数。当DeliverStatus开启时，必填。
+   */
+  DeliverConfig?: DeliverConfig
+  /**
+   * 免登录操作告警开关。可取值如下：
+-      1：关闭
+-      2：开启（默认值）
+   */
+  AlarmShieldStatus?: number
 }
 
 /**
@@ -8102,6 +8232,36 @@ JsonType为1：转义。示例：
 }
 
 /**
+ * 投递配置入参
+ */
+export interface DeliverConfig {
+  /**
+   * 地域信息。
+
+示例：
+ ap-guangzhou  广州地域；
+ap-nanjing 南京地域。
+
+详细信息请查看官网：
+
+https://cloud.tencent.com/document/product/614/18940
+   */
+  Region: string
+  /**
+   * 日志主题ID。
+   */
+  TopicId: string
+  /**
+   * 投递数据范围。
+
+0: 全部日志, 包括告警策略日常周期执行的所有日志，也包括告警策略变更产生的日志，默认值
+
+1:仅告警触发及恢复日志
+   */
+  Scope: number
+}
+
+/**
  * 日志内容高亮描述信息
  */
 export interface HighLightItem {
@@ -8163,18 +8323,9 @@ export interface HostFileInfo {
 }
 
 /**
- * 需要过滤日志的key，及其对应的regex
+ * DescribeConsoleSharingList请求参数结构体
  */
-export interface KeyRegexInfo {
-  /**
-   * 需要过滤日志的key
-   */
-  Key: string
-  /**
-   * key对应的过滤规则regex
-   */
-  Regex: string
-}
+export type DescribeConsoleSharingListRequest = null
 
 /**
  * GetAlarmLog请求参数结构体

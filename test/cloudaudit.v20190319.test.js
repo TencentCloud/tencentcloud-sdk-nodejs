@@ -78,9 +78,9 @@ it("cloudaudit.v20190319.ListCmqEnableRegion", async function () {
     }
 })
 
-it("cloudaudit.v20190319.DeleteAudit", async function () {
+it("cloudaudit.v20190319.CreateEventsAuditTrack", async function () {
     try {
-       const data = await client.DeleteAudit({})
+       const data = await client.CreateEventsAuditTrack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("cloudaudit.v20190319.DeleteAudit", async function () {
 it("cloudaudit.v20190319.DescribeEvents", async function () {
     try {
        const data = await client.DescribeEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudaudit.v20190319.ModifyEventsAuditTrack", async function () {
+    try {
+       const data = await client.ModifyEventsAuditTrack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,16 +171,6 @@ it("cloudaudit.v20190319.ListKeyAliasByRegion", async function () {
 it("cloudaudit.v20190319.DescribeAudit", async function () {
     try {
        const data = await client.DescribeAudit({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cloudaudit.v20190319.CreateAudit", async function () {
-    try {
-       const data = await client.CreateAudit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

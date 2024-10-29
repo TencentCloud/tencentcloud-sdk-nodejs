@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AccessInfo,
   UpdateAliasRequest,
+  CertConf,
   Trigger,
   ListTriggersResponse,
   ListAliasesResponse,
@@ -27,23 +28,28 @@ import {
   GetReservedConcurrencyConfigResponse,
   ProtocolParams,
   RoutingConfig,
+  UpdateCustomDomainResponse,
   DeleteProvisionedConcurrencyConfigResponse,
   VersionWeight,
+  GetCustomDomainResponse,
   TimeInterval,
   LayerVersionInfo,
   PutProvisionedConcurrencyConfigResponse,
   UpdateFunctionConfigurationResponse,
   PublishLayerVersionResponse,
   UsageInfo,
+  DomainInfo,
   NamespaceResourceEnvTKE,
   PublicNetConfigIn,
+  ListCustomDomainsResponse,
   DeleteProvisionedConcurrencyConfigRequest,
   DeleteReservedConcurrencyConfigResponse,
+  GetCustomDomainRequest,
   GetAliasResponse,
   UpdateAliasResponse,
   VersionProvisionedConcurrencyInfo,
   GetFunctionLogsRequest,
-  StatusReason,
+  PathRewriteRule,
   Tag,
   GetRequestStatusRequest,
   LogFilter,
@@ -54,6 +60,7 @@ import {
   InvokeFunctionResponse,
   Namespace,
   GetFunctionRequest,
+  EndpointsConf,
   ListNamespacesRequest,
   PublishVersionRequest,
   DeleteAliasRequest,
@@ -67,7 +74,9 @@ import {
   DeleteReservedConcurrencyConfigRequest,
   GetFunctionEventInvokeConfigResponse,
   GetProvisionedConcurrencyConfigRequest,
+  UpdateCustomDomainRequest,
   TerminateAsyncEventRequest,
+  DeleteCustomDomainResponse,
   ListLayersRequest,
   CopyFunctionRequest,
   DeleteNamespaceResponse,
@@ -102,6 +111,7 @@ import {
   InvokeRequest,
   CreateAliasRequest,
   VersionMatch,
+  WafConf,
   UpdateFunctionEventInvokeConfigResponse,
   PutReservedConcurrencyConfigRequest,
   ListLayerVersionsRequest,
@@ -118,6 +128,7 @@ import {
   GetFunctionEventInvokeConfigRequest,
   Code,
   PutTotalConcurrencyConfigRequest,
+  DeleteCustomDomainRequest,
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
   GetRequestStatusResponse,
@@ -134,9 +145,11 @@ import {
   LimitsInfo,
   ListLayersResponse,
   FunctionVersion,
+  CreateCustomDomainRequest,
   AsyncTriggerConfig,
   DeadLetterConfig,
-  ListVersionByFunctionRequest,
+  CreateCustomDomainResponse,
+  StatusReason,
   ListFunctionsResponse,
   GetAsyncEventStatusResponse,
   ListTriggersRequest,
@@ -148,6 +161,7 @@ import {
   NamespaceUsage,
   IntranetConfigOut,
   ListAliasesRequest,
+  ListCustomDomainsRequest,
   EipOutConfig,
   Alias,
   GetLayerVersionRequest,
@@ -165,6 +179,7 @@ import {
   NamespaceResourceEnv,
   UpdateFunctionCodeResponse,
   UpdateTriggerRequest,
+  ListVersionByFunctionRequest,
 } from "./scf_models"
 
 /**
@@ -343,6 +358,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 遍历域名列表信息
+   */
+  async ListCustomDomains(
+    req: ListCustomDomainsRequest,
+    cb?: (error: string, rep: ListCustomDomainsResponse) => void
+  ): Promise<ListCustomDomainsResponse> {
+    return this.request("ListCustomDomains", req, cb)
+  }
+
+  /**
    * 删除函数版本的预置并发配置。
    */
   async DeleteProvisionedConcurrencyConfig(
@@ -444,6 +469,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除自定义域名
+   */
+  async DeleteCustomDomain(
+    req: DeleteCustomDomainRequest,
+    cb?: (error: string, rep: DeleteCustomDomainResponse) => void
+  ): Promise<DeleteCustomDomainResponse> {
+    return this.request("DeleteCustomDomain", req, cb)
+  }
+
+  /**
    * 更新函数的异步重试配置，包括重试次数和消息保留时间
    */
   async UpdateFunctionEventInvokeConfig(
@@ -519,13 +554,13 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
   }
 
   /**
-   * 获取函数的最大独占配额详情。
+   * 创建自定义域名
    */
-  async GetReservedConcurrencyConfig(
-    req: GetReservedConcurrencyConfigRequest,
-    cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void
-  ): Promise<GetReservedConcurrencyConfigResponse> {
-    return this.request("GetReservedConcurrencyConfig", req, cb)
+  async CreateCustomDomain(
+    req: CreateCustomDomainRequest,
+    cb?: (error: string, rep: CreateCustomDomainResponse) => void
+  ): Promise<CreateCustomDomainResponse> {
+    return this.request("CreateCustomDomain", req, cb)
   }
 
   /**
@@ -609,6 +644,16 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
   }
 
   /**
+   * 获取函数的最大独占配额详情。
+   */
+  async GetReservedConcurrencyConfig(
+    req: GetReservedConcurrencyConfigRequest,
+    cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void
+  ): Promise<GetReservedConcurrencyConfigResponse> {
+    return this.request("GetReservedConcurrencyConfig", req, cb)
+  }
+
+  /**
    * 修改账号并发限制配额
    */
   async PutTotalConcurrencyConfig(
@@ -616,6 +661,26 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
     cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void
   ): Promise<PutTotalConcurrencyConfigResponse> {
     return this.request("PutTotalConcurrencyConfig", req, cb)
+  }
+
+  /**
+   * 查看云函数自定义域名详情
+   */
+  async GetCustomDomain(
+    req: GetCustomDomainRequest,
+    cb?: (error: string, rep: GetCustomDomainResponse) => void
+  ): Promise<GetCustomDomainResponse> {
+    return this.request("GetCustomDomain", req, cb)
+  }
+
+  /**
+   * 更新自定义域名相关配置
+   */
+  async UpdateCustomDomain(
+    req: UpdateCustomDomainRequest,
+    cb?: (error: string, rep: UpdateCustomDomainResponse) => void
+  ): Promise<UpdateCustomDomainResponse> {
+    return this.request("UpdateCustomDomain", req, cb)
   }
 
   /**

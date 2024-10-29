@@ -474,6 +474,28 @@ export interface DescribeIntegrationDepartmentsResponse {
 }
 
 /**
+ * 模板中文件的信息结构
+ */
+export interface FileInfo {
+  /**
+   * 文件ID
+   */
+  FileId?: string
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 文件大小，单位为Byte
+   */
+  FileSize?: number
+  /**
+   * 文件上传时间，格式为Unix标准时间戳（秒）
+   */
+  CreatedOn?: number
+}
+
+/**
  * DeleteExtendedServiceAuthInfos返回参数结构体
  */
 export interface DeleteExtendedServiceAuthInfosResponse {
@@ -655,6 +677,24 @@ export interface AuthInfoDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthOrganizationTotal?: number
+}
+
+/**
+ * 清理的企业认证流信息
+ */
+export interface DeleteOrganizationAuthorizationInfo {
+  /**
+   * 认证流 Id 是指在企业认证过程中，当前操作人的认证流程的唯一标识。每个企业在认证过程中只能有一条认证流认证成功。这意味着在同一认证过程内，一个企业只能有一个认证流程处于成功状态，以确保认证的唯一性和有效性。
+   */
+  AuthorizationId?: string
+  /**
+   * 认证的企业名称
+   */
+  OrganizationName?: string
+  /**
+   * 清除认证流产生的错误信息
+   */
+  Errormessage?: string
 }
 
 /**
@@ -2663,8 +2703,7 @@ export interface CreateSchemeUrlRequest {
    */
   Operator: UserInfo
   /**
-   * 合同流程签署方的组织机构名称。
-如果名称中包含英文括号()，请使用中文括号（）代替。
+   * 合同流程签署方的组织机构名称。如果名称中包含英文括号()，请使用中文括号（）代替。注: `获取B端动态签署人领取链接时,可指定此字段来预先设定签署人的企业,预设后只能以该企业身份去领取合同并完成签署`
    */
   OrganizationName?: string
   /**
@@ -2981,64 +3020,25 @@ export interface CreateOrganizationInfoChangeUrlResponse {
 }
 
 /**
- * 权限树节点权限
+ * DeleteOrganizationAuthorizations返回参数结构体
  */
-export interface Permission {
+export interface DeleteOrganizationAuthorizationsResponse {
   /**
-   * 权限名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 清理的认证流的详细信息，其中包括企业名称，认证流唯一 Id 以及清理过程中产生的错误信息
    */
-  Name?: string
+  DeleteOrganizationAuthorizationInfos?: Array<DeleteOrganizationAuthorizationInfo>
   /**
-   * 权限key
-注意：此字段可能返回 null，表示取不到有效值。
+   * 批量清理认证流返回的状态值
+其中包括
+- 1 全部成功
+- 2 部分成功
+- 3 全部失败
    */
-  Key?: string
+  Status?: number
   /**
-   * 权限类型 1前端，2后端
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: number
-  /**
-   * 是否隐藏
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Hide?: number
-  /**
-   * 数据权限标签 1:表示根节点，2:表示叶子结点
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataLabel?: number
-  /**
-   * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataType?: number
-  /**
-   * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataRange?: number
-  /**
-   * 关联权限, 表示这个功能权限要受哪个数据权限管控
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataTo?: string
-  /**
-   * 父级权限key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentKey?: string
-  /**
-   * 是否选中
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsChecked?: boolean
-  /**
-   * 子权限集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Children?: Array<Permission>
+  RequestId?: string
 }
 
 /**
@@ -3342,6 +3342,67 @@ export interface DeleteSealPoliciesResponse {
 }
 
 /**
+ * 权限树节点权限
+ */
+export interface Permission {
+  /**
+   * 权限名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 权限key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 权限类型 1前端，2后端
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 是否隐藏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hide?: number
+  /**
+   * 数据权限标签 1:表示根节点，2:表示叶子结点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLabel?: number
+  /**
+   * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataType?: number
+  /**
+   * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataRange?: number
+  /**
+   * 关联权限, 表示这个功能权限要受哪个数据权限管控
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataTo?: string
+  /**
+   * 父级权限key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentKey?: string
+  /**
+   * 是否选中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsChecked?: boolean
+  /**
+   * 子权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<Permission>
+}
+
+/**
  * CreateLegalSealQrCode请求参数结构体
  */
 export interface CreateLegalSealQrCodeRequest {
@@ -3479,7 +3540,9 @@ WEWORKAPP: 企业微信
    */
   ApproverIdCardNumber?: string
   /**
-   * 合同流程ID，补充合同组子合同动态签署人时必传。
+   * 合同流程ID
+- 补充合同组子合同动态签署人时必传。
+- 补充普通合同时，请阅读：<a href="https://qian.tencent.com/developers/companyApis/operateFlows/CreateFlowApprovers/" target="_blank">补充签署人接口</a>的接口使用说明
    */
   FlowId?: string
 }
@@ -4877,8 +4940,9 @@ export interface CreateFlowApproversRequest {
   Approvers: Array<FillApproverInfo>
   /**
    * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+- 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+- 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+- <font color="red">不建议继续使用</font>，请使用<a href="https://qian.tencent.com/developers/companyApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId来指定需要补充的合同id
    */
   FlowId?: string
   /**
@@ -5792,10 +5856,18 @@ export interface CreateEmbedWebUrlRequest {
   EmbedType: string
   /**
    * WEB嵌入的业务资源ID
-<ul><li>PREVIEW_SEAL_DETAIL，必填，取值为印章id</li>
-<li>MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id</li>
-<li>PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id</li>
+
+当EmbedType取值
+<ul>
+<li>为PREVIEW_SEAL_DETAIL，必填，取值为印章id。</li>
+<li>为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*</li>
+<li>为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。</li>
+<li>为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。</li>
 </ul>
+
+注意：
+ 1. CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口[创建文件转换任务
+](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi) 和[查询转换任务状态](https://qian.tencent.com/developers/companyApis/templatesAndFiles/GetTaskResultApi) 来进行转换成PDF资源。
    */
   BusinessId?: string
   /**
@@ -6056,6 +6128,11 @@ export interface FillError {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMessage?: string
+  /**
+   * 合同流程ID，为32位字符串。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: string
 }
 
 /**
@@ -6994,25 +7071,38 @@ export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
 }
 
 /**
- * 模板中文件的信息结构
+ * DeleteOrganizationAuthorizations请求参数结构体
  */
-export interface FileInfo {
+export interface DeleteOrganizationAuthorizationsRequest {
   /**
-   * 文件ID
+   * 执行本接口操作的员工信息, userId 必填。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  FileId?: string
+  Operator: UserInfo
   /**
-   * 文件名
+   * 认证流Ids数组
+认证流 Id 是指在企业认证过程中，当前操作人的认证流程的唯一标识。每个企业在认证过程中只能有一条认证流认证成功。这意味着在同一认证过程内，一个企业只能有一个认证流程处于成功状态，以确保认证的唯一性和有效性。
+
+
+认证流 Id可以通过回调 [授权书认证审核结果回调](https://qian.tencent.com/developers/company/callback_types_staffs/#%E5%8D%81%E5%9B%9B-%E6%8E%88%E6%9D%83%E4%B9%A6%E8%AE%A4%E8%AF%81%E5%AE%A1%E6%A0%B8%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83) 获取
+
+注意：
+如果传递了认证流Id，则下面的参数 超管二要素不会生效
    */
-  FileName?: string
+  AuthorizationIds?: Array<string>
   /**
-   * 文件大小，单位为Byte
+   * 认证人姓名，组织机构超管姓名。 
+在注册流程中，必须是超管本人进行操作。 
    */
-  FileSize?: number
+  AdminName?: string
   /**
-   * 文件上传时间，格式为Unix标准时间戳（秒）
+   * 认证人手机号，组织机构超管手机号。 在注册流程中，必须是超管本人进行操作。
    */
-  CreatedOn?: number
+  AdminMobile?: string
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -7762,7 +7852,7 @@ export interface ApproverOption {
   /**
    * 签署人信息补充类型，默认无需补充。
 
-<ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`</li></ul>
+<ul><li> **1** :  动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`</li></ul>
 
 注：
 `使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关`
@@ -8828,6 +8918,8 @@ export interface ReleasedApprover {
 
 如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
 
+![image](https://qcloudimg.tencent-cloud.cn/raw/973a820ab66d1ce57082c160c2b2d44a.png)
+
    */
   ApproverSignRole?: string
   /**
@@ -9160,6 +9252,15 @@ export interface EmbedUrlOption {
 <li> <b>false</b> :（默认）不允许在模板预览页展示控件</li></ul>
    */
   ShowTemplateComponent?: boolean
+  /**
+   * 跳过上传文件，默认为false(展示上传文件页）![image](https://qcloudimg.tencent-cloud.cn/raw/8ca33745cf772e79831dbe5a70e82400.png)
+- false: 展示上传文件页
+- true: 不展示上传文件页
+ 
+
+注意: 此参数仅针对**EmbedType=CREATE_TEMPLATE(创建模板)有效**，
+   */
+  SkipUploadFile?: boolean
 }
 
 /**

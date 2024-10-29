@@ -18,23 +18,17 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  LabelGrade,
-  Tag,
   SentimentAnalysis,
   Positions,
   RiskDetails,
-  ModerateTextResponse,
   TextModerationRequest,
   DetailResults,
-  ModelResult,
   HitInfo,
-  ModerationDetail,
-  ModerateTextRequest,
+  Tag,
+  User,
   Device,
   SentimentDetail,
   TextModerationResponse,
-  LibCheckResult,
-  User,
 } from "./tms_models"
 
 /**
@@ -44,16 +38,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tms.tencentcloudapi.com", "2020-12-29", clientConfig)
-  }
-
-  /**
-   * 天御文本内容安全定制标签文本审核接口为定制接口，会按照客户定制标签输出审核结果，如需使用请联系商务经理或[在线客服](https://cloud.tencent.com/online-service?from=doc_1125)咨询。
-   */
-  async ModerateText(
-    req: ModerateTextRequest,
-    cb?: (error: string, rep: ModerateTextResponse) => void
-  ): Promise<ModerateTextResponse> {
-    return this.request("ModerateText", req, cb)
   }
 
   /**

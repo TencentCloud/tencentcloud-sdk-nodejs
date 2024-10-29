@@ -64,16 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListCmqEnableRegion", req, cb);
     }
     /**
-     * 删除跟踪集
+     * 创建操作审计跟踪集
      */
-    async DeleteAudit(req, cb) {
-        return this.request("DeleteAudit", req, cb);
+    async CreateEventsAuditTrack(req, cb) {
+        return this.request("CreateEventsAuditTrack", req, cb);
     }
     /**
      * 查询操作审计日志
      */
     async DescribeEvents(req, cb) {
         return this.request("DescribeEvents", req, cb);
+    }
+    /**
+     * 修改操作审计跟踪集
+     */
+    async ModifyEventsAuditTrack(req, cb) {
+        return this.request("ModifyEventsAuditTrack", req, cb);
     }
     /**
      * 关闭跟踪集
@@ -120,16 +126,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAudit(req, cb) {
         return this.request("DescribeAudit", req, cb);
-    }
-    /**
-     * 参数要求：
-1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-     */
-    async CreateAudit(req, cb) {
-        return this.request("CreateAudit", req, cb);
     }
     /**
      * 删除操作审计跟踪集

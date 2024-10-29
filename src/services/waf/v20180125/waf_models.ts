@@ -7385,6 +7385,28 @@ export interface CacheUrlItems {
 }
 
 /**
+ * ModifyUserSignatureRuleV2请求参数结构体
+ */
+export interface ModifyUserSignatureRuleV2Request {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 主类id
+   */
+  MainClassID?: string
+  /**
+   * 主类开关0=关闭，1=开启，2=只告警
+   */
+  Status?: number
+  /**
+   * 下发修改的规则列表
+   */
+  RuleID?: Array<ReqUserRule>
+}
+
+/**
  * ModifyWebshellStatus返回参数结构体
  */
 export interface ModifyWebshellStatusResponse {
@@ -8300,6 +8322,16 @@ export interface ModifyModuleStatusRequest {
    * 限流模块开关，0或1
    */
   RateLimit?: number
+}
+
+/**
+ * ModifyUserSignatureRuleV2返回参数结构体
+ */
+export interface ModifyUserSignatureRuleV2Response {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

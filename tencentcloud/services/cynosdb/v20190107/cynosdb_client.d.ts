@@ -28,11 +28,11 @@ export declare class Client extends AbstractClient {
      */
     CreateProxyEndPoint(req: CreateProxyEndPointRequest, cb?: (error: string, rep: CreateProxyEndPointResponse) => void): Promise<CreateProxyEndPointResponse>;
     /**
-     * 给资源包绑定集群
+     * 本接口（ModifyResourcePackageClusters）用于修改资源包与集群之间的绑定关系。
      */
     ModifyResourcePackageClusters(req: ModifyResourcePackageClustersRequest, cb?: (error: string, rep: ModifyResourcePackageClustersResponse) => void): Promise<ModifyResourcePackageClustersResponse>;
     /**
-     * 创建审计规则模板
+     * 本接口（CreateAuditRuleTemplate）用于创建审计规则模板。
      */
     CreateAuditRuleTemplate(req: CreateAuditRuleTemplateRequest, cb?: (error: string, rep: CreateAuditRuleTemplateResponse) => void): Promise<CreateAuditRuleTemplateResponse>;
     /**
@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     CopyClusterPasswordComplexity(req: CopyClusterPasswordComplexityRequest, cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void): Promise<CopyClusterPasswordComplexityResponse>;
     /**
-     * TDSQL-C for MySQL实例关闭审计服务
+     * 本接口（CloseAuditService）用于关闭 TDSQL-C MySQL 实例的数据库审计服务。
      */
     CloseAuditService(req: CloseAuditServiceRequest, cb?: (error: string, rep: CloseAuditServiceResponse) => void): Promise<CloseAuditServiceResponse>;
     /**
@@ -84,7 +84,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchProxyVpc(req: SwitchProxyVpcRequest, cb?: (error: string, rep: SwitchProxyVpcResponse) => void): Promise<SwitchProxyVpcResponse>;
     /**
-     * 该接口（DescribeClusterDetail）显示集群详情
+     * 该接口（DescribeClusterDetail）用于显示集群详情。
      */
     DescribeClusterDetail(req: DescribeClusterDetailRequest, cb?: (error: string, rep: DescribeClusterDetailResponse) => void): Promise<DescribeClusterDetailResponse>;
     /**
@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     ExportInstanceSlowQueries(req: ExportInstanceSlowQueriesRequest, cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void): Promise<ExportInstanceSlowQueriesResponse>;
     /**
-     * 删除日志投递
+     * 本接口（DeleteCLSDelivery）用于删除日志投递。
      */
     DeleteCLSDelivery(req: DeleteCLSDeliveryRequest, cb?: (error: string, rep: DeleteCLSDeliveryResponse) => void): Promise<DeleteCLSDeliveryResponse>;
     /**
@@ -204,7 +204,7 @@ export declare class Client extends AbstractClient {
      */
     OfflineInstance(req: OfflineInstanceRequest, cb?: (error: string, rep: OfflineInstanceResponse) => void): Promise<OfflineInstanceResponse>;
     /**
-     * 隔离集群
+     * 本接口（IsolateCluster）用于隔离集群。
      */
     IsolateCluster(req: IsolateClusterRequest, cb?: (error: string, rep: IsolateClusterResponse) => void): Promise<IsolateClusterResponse>;
     /**
@@ -248,7 +248,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceSlowQueries(req: DescribeInstanceSlowQueriesRequest, cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void): Promise<DescribeInstanceSlowQueriesResponse>;
     /**
-     * 获取集群数据库列表
+     * 本接口（DescribeClusterDatabases）用于获取集群数据库列表。
      */
     DescribeClusterDatabases(req: DescribeClusterDatabasesRequest, cb?: (error: string, rep: DescribeClusterDatabasesResponse) => void): Promise<DescribeClusterDatabasesResponse>;
     /**
@@ -256,7 +256,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyClusterParam(req: ModifyClusterParamRequest, cb?: (error: string, rep: ModifyClusterParamResponse) => void): Promise<ModifyClusterParamResponse>;
     /**
-     * 购买新集群
+     * 本接口（CreateClusters）用于新购集群。
      */
     CreateClusters(req: CreateClustersRequest, cb?: (error: string, rep: CreateClustersResponse) => void): Promise<CreateClustersResponse>;
     /**
@@ -340,7 +340,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceDetail(req: DescribeInstanceDetailRequest, cb?: (error: string, rep: DescribeInstanceDetailResponse) => void): Promise<DescribeInstanceDetailResponse>;
     /**
-     * 获取审计实例列表
+     * 本接口（DescribeAuditInstanceList）用于获取数据库审计的实例列表。
      */
     DescribeAuditInstanceList(req: DescribeAuditInstanceListRequest, cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void): Promise<DescribeAuditInstanceListResponse>;
     /**
@@ -356,11 +356,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceParam(req: ModifyInstanceParamRequest, cb?: (error: string, rep: ModifyInstanceParamResponse) => void): Promise<ModifyInstanceParamResponse>;
     /**
-     * 查询实例日志投递信息
+     * 本接口（DescribeInstanceCLSLogDelivery）用于查询实例日志投递信息。
      */
     DescribeInstanceCLSLogDelivery(req: DescribeInstanceCLSLogDeliveryRequest, cb?: (error: string, rep: DescribeInstanceCLSLogDeliveryResponse) => void): Promise<DescribeInstanceCLSLogDeliveryResponse>;
     /**
-     * 为集群绑定资源包
+     * 本接口（BindClusterResourcePackages）用于为集群绑定资源包。
      */
     BindClusterResourcePackages(req: BindClusterResourcePackagesRequest, cb?: (error: string, rep: BindClusterResourcePackagesResponse) => void): Promise<BindClusterResourcePackagesResponse>;
     /**
@@ -368,7 +368,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuditLogs(req: DescribeAuditLogsRequest, cb?: (error: string, rep: DescribeAuditLogsResponse) => void): Promise<DescribeAuditLogsResponse>;
     /**
-     * cynos解绑资源包
+     * 本接口（UnbindClusterResourcePackages）用于解除资源包与集群之间的绑定关系。
      */
     UnbindClusterResourcePackages(req: UnbindClusterResourcePackagesRequest, cb?: (error: string, rep: UnbindClusterResourcePackagesResponse) => void): Promise<UnbindClusterResourcePackagesResponse>;
     /**
@@ -392,7 +392,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBinlogConfig(req: DescribeBinlogConfigRequest, cb?: (error: string, rep: DescribeBinlogConfigResponse) => void): Promise<DescribeBinlogConfigResponse>;
     /**
-     * 查询资源包规格
+     * 本接口（DescribeResourcePackageSaleSpec）用于查询资源包规格。
      */
     DescribeResourcePackageSaleSpec(req: DescribeResourcePackageSaleSpecRequest, cb?: (error: string, rep: DescribeResourcePackageSaleSpecResponse) => void): Promise<DescribeResourcePackageSaleSpecResponse>;
     /**
@@ -440,7 +440,7 @@ export declare class Client extends AbstractClient {
      */
     OfflineCluster(req: OfflineClusterRequest, cb?: (error: string, rep: OfflineClusterResponse) => void): Promise<OfflineClusterResponse>;
     /**
-     * 修改审计规则模板
+     * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
      */
     ModifyAuditRuleTemplates(req: ModifyAuditRuleTemplatesRequest, cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void): Promise<ModifyAuditRuleTemplatesResponse>;
     /**
@@ -464,7 +464,7 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterDatabase(req: CreateClusterDatabaseRequest, cb?: (error: string, rep: CreateClusterDatabaseResponse) => void): Promise<CreateClusterDatabaseResponse>;
     /**
-     * TDSQL-C for MySQL实例开通审计服务
+     * 本接口（OpenAuditService）用于为实例开通数据库审计服务。
      */
     OpenAuditService(req: OpenAuditServiceRequest, cb?: (error: string, rep: OpenAuditServiceResponse) => void): Promise<OpenAuditServiceResponse>;
     /**
@@ -476,7 +476,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuditRuleTemplates(req: DescribeAuditRuleTemplatesRequest, cb?: (error: string, rep: DescribeAuditRuleTemplatesResponse) => void): Promise<DescribeAuditRuleTemplatesResponse>;
     /**
-     * 查询资源包使用详情
+     * 本接口（DescribeResourcePackageDetail）用于查询资源包使用详情。
      */
     DescribeResourcePackageDetail(req: DescribeResourcePackageDetailRequest, cb?: (error: string, rep: DescribeResourcePackageDetailResponse) => void): Promise<DescribeResourcePackageDetailResponse>;
     /**
@@ -492,7 +492,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeClusterVersion(req: UpgradeClusterVersionRequest, cb?: (error: string, rep: UpgradeClusterVersionResponse) => void): Promise<UpgradeClusterVersionResponse>;
     /**
-     * 查询资源包列表
+     * 本接口（DescribeResourcePackageList）用于查询资源包列表。
      */
     DescribeResourcePackageList(req: DescribeResourcePackageListRequest, cb?: (error: string, rep: DescribeResourcePackageListResponse) => void): Promise<DescribeResourcePackageListResponse>;
     /**
@@ -500,7 +500,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterParams(req: DescribeClusterParamsRequest, cb?: (error: string, rep: DescribeClusterParamsResponse) => void): Promise<DescribeClusterParamsResponse>;
     /**
-     * 退款资源包
+     * 本接口（RefundResourcePackage）用于资源包退款。
      */
     RefundResourcePackage(req: RefundResourcePackageRequest, cb?: (error: string, rep: RefundResourcePackageResponse) => void): Promise<RefundResourcePackageResponse>;
     /**
@@ -512,7 +512,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMaintainPeriod(req: DescribeMaintainPeriodRequest, cb?: (error: string, rep: DescribeMaintainPeriodResponse) => void): Promise<DescribeMaintainPeriodResponse>;
     /**
-     * 查询数据库代理规格
+     * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
      */
     DescribeProxySpecs(req: DescribeProxySpecsRequest, cb?: (error: string, rep: DescribeProxySpecsResponse) => void): Promise<DescribeProxySpecsResponse>;
     /**
@@ -544,7 +544,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
-     * 创建日志投递
+     * 本接口（CreateCLSDelivery）用于创建日志投递。
      */
     CreateCLSDelivery(req: CreateCLSDeliveryRequest, cb?: (error: string, rep: CreateCLSDeliveryResponse) => void): Promise<CreateCLSDeliveryResponse>;
     /**
@@ -588,7 +588,7 @@ export declare class Client extends AbstractClient {
      */
     OpenClusterPasswordComplexity(req: OpenClusterPasswordComplexityRequest, cb?: (error: string, rep: OpenClusterPasswordComplexityResponse) => void): Promise<OpenClusterPasswordComplexityResponse>;
     /**
-     * 修改资源包名称
+     * 本接口（ModifyResourcePackageName）用于修改资源包名称。
      */
     ModifyResourcePackageName(req: ModifyResourcePackageNameRequest, cb?: (error: string, rep: ModifyResourcePackageNameResponse) => void): Promise<ModifyResourcePackageNameResponse>;
     /**

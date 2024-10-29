@@ -91,11 +91,11 @@ export interface LogFilters {
  */
 export interface CreateEventBusRequest {
   /**
-   * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   * 事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
    */
   EventBusName: string
   /**
-   * 事件集描述，不限字符类型，200字符描述以内
+   * 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符
    */
   Description?: string
   /**
@@ -288,7 +288,7 @@ export interface CreateRuleResponse {
   /**
    * 事件规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -535,7 +535,7 @@ export interface UpdateRuleRequest {
    */
   Enable?: boolean
   /**
-   * 规则描述，不限字符类型，200字符描述以内。
+   * 规则描述，只能包含数字、中英文及常用标点符号，不超过200个字符
    */
   Description?: string
   /**
@@ -543,7 +543,7 @@ export interface UpdateRuleRequest {
    */
   EventPattern?: string
   /**
-   * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   * 事件规则名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
    */
   RuleName?: string
 }
@@ -571,13 +571,13 @@ export interface ListTargetsRequest {
    */
   EventBusId: string
   /**
+   * 事件规则ID
+   */
+  RuleId: string
+  /**
    * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
    */
   OrderBy?: string
-  /**
-   * 事件规则ID
-   */
-  RuleId?: string
   /**
    * 返回数量，默认为20，最大值为100。
    */
@@ -1059,11 +1059,11 @@ export interface CreateRuleRequest {
    */
   EventPattern: string
   /**
-   * 事件集ID。
+   * 事件集ID
    */
   EventBusId: string
   /**
-   * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   * 事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
    */
   RuleName: string
   /**
@@ -1071,7 +1071,7 @@ export interface CreateRuleRequest {
    */
   Enable?: boolean
   /**
-   * 事件集描述，不限字符类型，200字符描述以内
+   * 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符
    */
   Description?: string
 }

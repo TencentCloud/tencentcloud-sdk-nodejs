@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TimeValue,
   AgentConfig,
   CreatePictureRequest,
   AudioEncodeParams,
@@ -48,6 +49,7 @@ import {
   PictureInfo,
   DescribeCallDetailInfoRequest,
   DescribeTRTCMarketScaleDataResponse,
+  McuTencentVod,
   ModifyPictureRequest,
   DescribeWebRecordResponse,
   DescribeUserInfoRequest,
@@ -58,7 +60,7 @@ import {
   StartMCUMixTranscodeByStrRoomIdResponse,
   CloudStorage,
   DescribeTrtcUsageResponse,
-  TimeValue,
+  McuRecordParams,
   DismissRoomByStrRoomIdRequest,
   DescribeTRTCMarketQualityMetricDataRequest,
   DescribeWebRecordRequest,
@@ -108,6 +110,7 @@ import {
   DescribeRecordingUsageRequest,
   StorageFile,
   WaterMark,
+  McuStorageParams,
   DescribeScaleInfoResponse,
   MixLayoutParams,
   StopMCUMixTranscodeResponse,
@@ -193,6 +196,7 @@ import {
   StopAITranscriptionResponse,
   SeriesInfo,
   WaterMarkTimestamp,
+  McuCloudVod,
   SingleSubscribeParams,
   PublishCdnParams,
   DescribeAITranscriptionResponse,

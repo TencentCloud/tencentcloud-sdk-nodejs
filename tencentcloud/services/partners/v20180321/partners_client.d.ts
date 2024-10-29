@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentDealsByCacheRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AssignClientsToSalesResponse, AuditApplyClientResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, AssignClientsToSalesRequest, DescribeClientBalanceNewResponse } from "./partners_models";
+import { DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, DescribeRebateInfosNewRequest, RemovePayRelationForClientRequest, DescribeRebateInfosNewResponse, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeAgentPayDealsV2Response, AgentTransferMoneyRequest, DescribeAgentPayDealsV2Request, RemovePayRelationForClientResponse, DescribeAgentRelateBigDealIdsRequest, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeAgentRelateBigDealIdsResponse, DescribeAgentSelfPayDealsV2Request, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentDealsByCacheRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, DescribeAgentSelfPayDealsV2Response, AssignClientsToSalesResponse, AuditApplyClientResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeClientBalanceNewRequest, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest, AssignClientsToSalesRequest, DescribeClientBalanceNewResponse } from "./partners_models";
 /**
  * partners client
  * @class
@@ -18,6 +18,10 @@ export declare class Client extends AbstractClient {
      * 查询代理商名下指定代客的自付订单（预付费）
      */
     DescribeAgentSelfPayDealsV2(req: DescribeAgentSelfPayDealsV2Request, cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void): Promise<DescribeAgentSelfPayDealsV2Response>;
+    /**
+     * 代理商名下客户解绑记录查询接口
+     */
+    DescribeUnbindClientList(req: DescribeUnbindClientListRequest, cb?: (error: string, rep: DescribeUnbindClientListResponse) => void): Promise<DescribeUnbindClientListResponse>;
     /**
      * 代理商可以对名下客户添加备注、修改备注
      */
@@ -55,9 +59,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClientBalanceNew(req: DescribeClientBalanceNewRequest, cb?: (error: string, rep: DescribeClientBalanceNewResponse) => void): Promise<DescribeClientBalanceNewResponse>;
     /**
-     * 代理商名下客户解绑记录查询接口
+     * 根据大订单号查询关联申请合并支付的其他订单号
      */
-    DescribeUnbindClientList(req: DescribeUnbindClientListRequest, cb?: (error: string, rep: DescribeUnbindClientListResponse) => void): Promise<DescribeUnbindClientListResponse>;
+    DescribeAgentRelateBigDealIds(req: DescribeAgentRelateBigDealIdsRequest, cb?: (error: string, rep: DescribeAgentRelateBigDealIdsResponse) => void): Promise<DescribeAgentRelateBigDealIdsResponse>;
     /**
      * 代理商可查询自己名下待审核客户列表
      */

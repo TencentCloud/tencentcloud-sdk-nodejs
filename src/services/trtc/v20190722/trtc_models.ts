@@ -16,6 +16,20 @@
  */
 
 /**
+ * 返回的质量数据，时间:值
+ */
+export interface TimeValue {
+  /**
+   * 时间，unix时间戳（1590065877s)
+   */
+  Time: number
+  /**
+   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
+   */
+  Value: number
+}
+
+/**
  * 机器人参数
  */
 export interface AgentConfig {
@@ -756,6 +770,41 @@ export interface DescribeTRTCMarketScaleDataResponse {
 }
 
 /**
+ * Mcu转推录制，腾讯云点播相关参数。
+ */
+export interface McuTencentVod {
+  /**
+   * 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 创建任务流模板 并为模板命名。
+   */
+  Procedure?: string
+  /**
+   * 媒体文件过期时间，为当前时间的绝对过期时间；保存一天，就填"86400"，永久保存就填"0"，默认永久保存。
+   */
+  ExpireTime?: number
+  /**
+   * 指定上传园区，仅适用于对上传地域有特殊需求的用户。
+   */
+  StorageRegion?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。
+默认值：0，表示其他分类。
+   */
+  ClassId?: number
+  /**
+   * 点播 子应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
+  /**
+   * 任务流上下文，任务完成回调时透传。
+   */
+  SessionContext?: string
+  /**
+   * 上传上下文，上传完成回调时透传。
+   */
+  SourceContext?: string
+}
+
+/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -992,17 +1041,53 @@ export interface DescribeTrtcUsageResponse {
 }
 
 /**
- * 返回的质量数据，时间:值
+ * 转推录制参数
  */
-export interface TimeValue {
+export interface McuRecordParams {
   /**
-   * 时间，unix时间戳（1590065877s)
+   * 转推录制模式， 
+0/不填: 暂不支持，行为未定义；
+1: 不开启录制；
+2: 开启录制（使用控制台自动录制模板参数，参考：[跳转文档](https://cloud.tencent.com/document/product/647/111748#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88)）；
+3: 开启录制（使用API指定参数）。
    */
-  Time: number
+  UniRecord?: number
   /**
-   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
+   * 录制任务 key，标识一个录制任务；您可以通过该参数，将多个转推任务录制成一个文件。不指定该参数时，只录制当前转推任务。
+【限制长度为128字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
    */
-  Value: number
+  RecordKey?: string
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+续录等待时间，对应录制模板“续录等待时长”，单位：秒。该值需大于等于 5，且小于等于 86400(24小时)，默认值为 30。启用续录时，录制任务空闲超过RecordWaitTime的时长，自动结束。
+   */
+  RecordWaitTime?: number
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制输出文件格式列表，对应录制模板“文件格式”，支持“hls”、"mp4"、"aac"三种格式，默认值为"mp4"。其中"mp4"和"aac"格式，不能同时指定。
+只录制 mp4格式，示例值：["mp4"]。同时录制mp4 和 HLS 格式，示例值：["mp4","hls"]。
+   */
+  RecordFormat?: Array<string>
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+单个文件录制时长，对应录制模板“单个录制文件时长”，单位：分钟。该值需大于等于 1，且小于等于 1440(24小时)，默认值为 1440。只对"mp4"或"aac"格式生效。实际单文件录制时长还受单文件大小不超过 2G 限制，超过2G则强制拆分。
+   */
+  MaxMediaFileDuration?: number
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制的音视频类型，对应录制模板“录制格式”，0:音视频，1：纯音频，2：纯视频。最终录制文件内容是录制指定类型和转推内容的交集。
+   */
+  StreamType?: number
+  /**
+   * 录制文件名前缀，不超过64字符。只有存储为vod时生效。
+【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
+   */
+  UserDefineRecordPrefix?: string
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制文件存储参数，对应控制台“存储位置”及相关参数。目前支持云点播VOD和对象存储COS两种存储方式，只能填写一种。
+   */
+  McuStorageParams?: McuStorageParams
 }
 
 /**
@@ -1524,7 +1609,7 @@ export interface DescribeRoomInfoResponse {
  */
 export interface McuLayoutParams {
   /**
-   * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
+   * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。最多支持混入16路音视频流，如果用户只上行音频，也会被算作一路；自定义布局中，如果子画面只设置占位图，也被算作一路。
    */
   MixLayoutMode?: number
   /**
@@ -1532,7 +1617,7 @@ export interface McuLayoutParams {
    */
   PureAudioHoldPlaceMode?: number
   /**
-   * 自定义模板中有效，指定用户视频在混合画面中的位置。
+   * 自定义模板中有效，指定用户视频在混合画面中的位置，最多支持设置16个输入流。
    */
   MixLayoutList?: Array<McuLayout>
   /**
@@ -2129,6 +2214,20 @@ export interface WaterMark {
    * 水印为时间戳时的参数列表，水印为时间戳时校验必填。
    */
   WaterMarkTimestamp?: WaterMarkTimestamp
+}
+
+/**
+ * Mcu转推录制，第三方存储参数。
+ */
+export interface McuStorageParams {
+  /**
+   * 第三方云存储的账号信息（特别说明：若您选择存储至对象存储COS将会收取录制文件投递至COS的费用，详见云端录制收费说明，存储至VOD将不收取此项费用。）。
+   */
+  CloudStorage?: CloudStorage
+  /**
+   * 腾讯云云点播的账号信息。
+   */
+  McuCloudVod?: McuCloudVod
 }
 
 /**
@@ -2766,6 +2865,12 @@ export interface StopPublishCdnStreamRequest {
    * 唯一标识转推任务。
    */
   TaskId: string
+  /**
+   * 录制任务 key，标识一个录制任务，对应转推任务发起时指定 RecordKey；
+如果填写该参数，表示调用者希望立即结束该录制任务。当RecordKey 指定的录制任务正在录制当前转推任务时，录制任务立即结束，否则录制任务不受影响。
+如果没有填写该参数，但是转推任务发起时填写了 RecordKey，则表示在续录等待时间结束后才结束录制任务，续录等待期间可以使用相同的 RecordKey 发起新的转推任务，和当前转推任务录制到同一文件。
+   */
+  RecordKey?: string
 }
 
 /**
@@ -2888,7 +2993,7 @@ export interface StartPublishCdnStreamRequest {
    */
   SingleSubscribeParams?: SingleSubscribeParams
   /**
-   * 转推的CDN参数。和回推房间参数必须要有一个。
+   * 转推的CDN参数，一个任务最多支持10个推流URL。和回推房间参数必须要有一个。
    */
   PublishCdnParams?: Array<McuPublishCdnParam>
   /**
@@ -2896,9 +3001,13 @@ export interface StartPublishCdnStreamRequest {
    */
   SeiParams?: McuSeiParams
   /**
-   * 回推房间信息，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。
+   * 回推房间信息，一个任务最多支持回推10个房间，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。
    */
   FeedBackRoomParams?: Array<McuFeedBackRoomParams>
+  /**
+   * 转推录制参数，[参考文档](https://cloud.tencent.com/document/product/647/111748)。
+   */
+  RecordParams?: McuRecordParams
 }
 
 /**
@@ -4014,6 +4123,16 @@ export interface WaterMarkTimestamp {
 2. SourceHanSans
    */
   Font?: string
+}
+
+/**
+ * Mcu转推录制，点播相关参数。
+ */
+export interface McuCloudVod {
+  /**
+   * 腾讯云点播相关参数。
+   */
+  McuTencentVod?: McuTencentVod
 }
 
 /**

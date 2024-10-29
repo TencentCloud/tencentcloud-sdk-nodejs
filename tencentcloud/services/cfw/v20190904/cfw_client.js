@@ -60,14 +60,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     }
     /**
      * ModifyResourceGroup-资产中心资产组信息修改
-
-
      */
     async ModifyResourceGroup(req, cb) {
         return this.request("ModifyResourceGroup", req, cb);
     }
     /**
-     * DescribeResourceGroupNew资产中心资产树信息
+     * 资产中心资产组数数据信息查询
      */
     async DescribeResourceGroupNew(req, cb) {
         return this.request("DescribeResourceGroupNew", req, cb);
@@ -182,7 +180,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     }
     /**
      * DescribeBlockByIpTimesList 告警中心阻断IP折线图
-
      */
     async DescribeBlockByIpTimesList(req, cb) {
         return this.request("DescribeBlockByIpTimesList", req, cb);
@@ -621,8 +618,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb);
     }
     /**
-     * DescribeTLogInfo告警中心概况
-
+     * DescribeTLogInfo告警中心概况查询
      */
     async DescribeTLogInfo(req, cb) {
         return this.request("DescribeTLogInfo", req, cb);
@@ -634,7 +630,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyRunSyncAsset", req, cb);
     }
     /**
-     * VPC防火墙一键开关
+     * 该接口已不再使用
+
+VPC防火墙一键开关
      */
     async ModifyAllVPCSwitchStatus(req, cb) {
         return this.request("ModifyAllVPCSwitchStatus", req, cb);
@@ -701,7 +699,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     }
     /**
      * DescribeTLogIpList告警中心IP柱形图
-
      */
     async DescribeTLogIpList(req, cb) {
         return this.request("DescribeTLogIpList", req, cb);
@@ -713,14 +710,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("CreateAddressTemplate", req, cb);
     }
     /**
-     * 添加nat访问控制规则(地域必填)
+     * 添加nat访问控制规则
      */
     async AddNatAcRule(req, cb) {
         return this.request("AddNatAcRule", req, cb);
     }
     /**
      * DescribeBlockStaticList 告警中心柱形图
-
      */
     async DescribeBlockStaticList(req, cb) {
         return this.request("DescribeBlockStaticList", req, cb);

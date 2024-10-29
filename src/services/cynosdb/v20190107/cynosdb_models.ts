@@ -3987,6 +3987,16 @@ export interface InstanceAuditStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTemplateIds?: Array<string>
+  /**
+   * 是否开启日志投递：ON，OFF
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deliver?: string
+  /**
+   * 日志投递类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverSummary?: Array<DeliverSummary>
 }
 
 /**
@@ -4415,6 +4425,22 @@ export interface SlaveZoneAttrItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BinlogSyncWay?: string
+}
+
+/**
+ * 日志投递信息
+ */
+export interface DeliverSummary {
+  /**
+   * 投递类型，store（存储类），mq（消息通道）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverType?: string
+  /**
+   * 投递子类型：cls，ckafka。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverSubType?: string
 }
 
 /**

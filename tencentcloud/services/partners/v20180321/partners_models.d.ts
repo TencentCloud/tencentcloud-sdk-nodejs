@@ -384,6 +384,15 @@ export interface RemovePayRelationForClientResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAgentRelateBigDealIds请求参数结构体
+ */
+export interface DescribeAgentRelateBigDealIdsRequest {
+    /**
+     * 大订单号
+     */
+    BigDealId: string;
+}
+/**
  * DescribeRebateInfos请求参数结构体
  */
 export interface DescribeRebateInfosRequest {
@@ -678,6 +687,20 @@ export interface DescribeAgentClientsRequest {
      * 业务员姓名（模糊查询）
      */
     SalesName?: string;
+}
+/**
+ * DescribeAgentRelateBigDealIds返回参数结构体
+ */
+export interface DescribeAgentRelateBigDealIdsResponse {
+    /**
+     * 申请合并支付的关联大订单号列表（不包含请求的订单号）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BigDealIdList?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAgentSelfPayDealsV2请求参数结构体

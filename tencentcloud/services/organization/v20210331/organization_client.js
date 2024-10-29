@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListGroupMembers", req, cb);
     }
     /**
+     * 获取组织成员访问身份列表
+     */
+    async ListOrganizationIdentity(req, cb) {
+        return this.request("ListOrganizationIdentity", req, cb);
+    }
+    /**
      * 添加企业组织节点
      */
     async AddOrganizationNode(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RemovePermissionPolicyFromRoleConfiguration(req, cb) {
         return this.request("RemovePermissionPolicyFromRoleConfiguration", req, cb);
+    }
+    /**
+     * 启用/禁用SCIM密钥
+     */
+    async UpdateSCIMCredentialStatus(req, cb) {
+        return this.request("UpdateSCIMCredentialStatus", req, cb);
     }
     /**
      * 修改用户信息
@@ -130,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveUserFromGroup", req, cb);
     }
     /**
-     * 获取组织成员访问身份列表
+     * 以产品维度获取组织财务信息
      */
-    async ListOrganizationIdentity(req, cb) {
-        return this.request("ListOrganizationIdentity", req, cb);
+    async DescribeOrganizationFinancialByProduct(req, cb) {
+        return this.request("DescribeOrganizationFinancialByProduct", req, cb);
     }
     /**
      * 获取组织节点列表
@@ -212,12 +224,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ClearExternalSAMLIdentityProvider(req, cb) {
         return this.request("ClearExternalSAMLIdentityProvider", req, cb);
-    }
-    /**
-     * 以产品维度获取组织财务信息
-     */
-    async DescribeOrganizationFinancialByProduct(req, cb) {
-        return this.request("DescribeOrganizationFinancialByProduct", req, cb);
     }
     /**
      * 更新组织身份
@@ -442,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGroup", req, cb);
     }
     /**
+     * 获取SCIM同步状态
+     */
+    async GetSCIMSynchronizationStatus(req, cb) {
+        return this.request("GetSCIMSynchronizationStatus", req, cb);
+    }
+    /**
      * 配置SAML身份提供商信息
      */
     async SetExternalSAMLIdentityProvider(req, cb) {
@@ -460,6 +472,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListPoliciesForTarget", req, cb);
     }
     /**
+     * 删除SCIM密钥
+     */
+    async DeleteSCIMCredential(req, cb) {
+        return this.request("DeleteSCIMCredential", req, cb);
+    }
+    /**
      * 创建子用户同步任务
      */
     async UpdateUserSyncProvisioning(req, cb) {
@@ -476,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrganization(req, cb) {
         return this.request("DescribeOrganization", req, cb);
+    }
+    /**
+     * 启用/禁用用户SCIM同步
+     */
+    async UpdateSCIMSynchronizationStatus(req, cb) {
+        return this.request("UpdateSCIMSynchronizationStatus", req, cb);
     }
     /**
      * 查询用户组列表
@@ -544,6 +568,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIdentityCenter", req, cb);
     }
     /**
+     * 创建SCIM密钥
+     */
+    async CreateSCIMCredential(req, cb) {
+        return this.request("CreateSCIMCredential", req, cb);
+    }
+    /**
      * 获取组织成员访问授权列表
      */
     async DescribeOrganizationMemberAuthIdentities(req, cb) {
@@ -566,6 +596,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DetachPolicy(req, cb) {
         return this.request("DetachPolicy", req, cb);
+    }
+    /**
+     * 查询用户SCIM密钥列表
+     */
+    async ListSCIMCredentials(req, cb) {
+        return this.request("ListSCIMCredentials", req, cb);
     }
     /**
      * 添加组织成员访问授权

@@ -29,7 +29,7 @@ import {
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
   RealtimeLogDeliveryTask,
-  ModifyApplicationProxyResponse,
+  PrepaidPlanParam,
   BindSharedCNAMEResponse,
   ModifyAccelerationDomainResponse,
   TopEntryValue,
@@ -61,16 +61,19 @@ import {
   DescribeAccelerationDomainsResponse,
   SwitchConfig,
   IdentifyZoneResponse,
+  ModifyLoadBalancerResponse,
   ModifyL4ProxyResponse,
+  HealthChecker,
   CreateFunctionRuleRequest,
   DescribeAliasDomainsResponse,
   EnvInfo,
+  ModifyLoadBalancerRequest,
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
   CreateFunctionRequest,
   S3,
   DescribeDDoSAttackEventResponse,
-  DescribePrefetchTasksRequest,
+  DeleteL4ProxyRulesResponse,
   ForceRedirect,
   CodeAction,
   CachePrefresh,
@@ -91,6 +94,7 @@ import {
   Rule,
   DownloadL4LogsRequest,
   ModifyZoneSettingRequest,
+  OriginGroupHealthStatus,
   BillingDataFilter,
   DeleteCustomErrorPageResponse,
   DescribeTimingL7CacheDataResponse,
@@ -128,6 +132,7 @@ import {
   DefaultServerCertInfo,
   OfflineCache,
   DescribeDDoSAttackTopDataResponse,
+  LoadBalancer,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
   SecEntryValue,
@@ -148,6 +153,8 @@ import {
   BotUserRule,
   Task,
   DescribeL4ProxyRulesResponse,
+  OriginHealthStatus,
+  CustomizedHeader,
   DescribeFunctionsRequest,
   DeleteAliasDomainRequest,
   DescribeIdentificationsResponse,
@@ -222,9 +229,12 @@ import {
   CacheConfig,
   UpgradePlanResponse,
   AclConfig,
+  JITVideoProcess,
   CreateL4ProxyRulesRequest,
+  CreateLoadBalancerResponse,
   CreateConfigGroupVersionRequest,
   AclUserRule,
+  DescribeLoadBalancerListRequest,
   DescribeDDoSAttackEventRequest,
   FunctionRuleCondition,
   ModifyFunctionResponse,
@@ -247,9 +257,11 @@ import {
   CustomErrorPage,
   DescribeDeployHistoryRequest,
   BillingData,
+  ModifyOriginGroupRequest,
   DeleteZoneResponse,
   CreateRuleResponse,
   BindZoneToPlanResponse,
+  OriginInfo,
   WafRule,
   ModifyApplicationProxyRequest,
   ModifyAliasDomainStatusRequest,
@@ -261,6 +273,7 @@ import {
   Ipv6,
   ModifyApplicationProxyRuleRequest,
   CreateFunctionResponse,
+  DescribeLoadBalancerListResponse,
   AlgDetectJS,
   SubRuleItem,
   DeleteSecurityIPGroupRequest,
@@ -282,6 +295,7 @@ import {
   ModifyApplicationProxyStatusRequest,
   CreateZoneRequest,
   AscriptionInfo,
+  OriginGroupHealthStatusDetail,
   FirstPartConfig,
   Waf,
   ModifyZoneRequest,
@@ -292,7 +306,7 @@ import {
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
   Hsts,
-  CreateOriginGroupResponse,
+  OwnershipVerification,
   CreateRuleRequest,
   ModifyL4ProxyStatusRequest,
   RateLimitTemplateDetail,
@@ -306,7 +320,7 @@ import {
   DescribeTimingL4DataResponse,
   Action,
   ApplicationProxy,
-  PrepaidPlanParam,
+  ModifyApplicationProxyResponse,
   ModifySecurityIPGroupResponse,
   ZoneSetting,
   ModifyL4ProxyRequest,
@@ -341,8 +355,9 @@ import {
   BotConfig,
   DnsVerification,
   DescribeTopL7CacheDataRequest,
-  OriginInfo,
+  CreateLoadBalancerRequest,
   Https,
+  DescribeOriginGroupHealthStatusRequest,
   L4ProxyRule,
   AdvancedFilter,
   DescribeDDoSAttackDataResponse,
@@ -377,14 +392,16 @@ import {
   DescribeOverviewL7DataRequest,
   DeleteSharedCNAMEResponse,
   DDoSBlockData,
-  DeleteL4ProxyRulesResponse,
+  DescribePrefetchTasksRequest,
   BindZoneToPlanRequest,
   DeleteFunctionResponse,
   IPWhitelist,
+  DeleteLoadBalancerRequest,
   CreateCustomizeErrorPageRequest,
   DescribeSecurityIPGroupRequest,
   ModifyApplicationProxyStatusResponse,
   Identification,
+  OriginGroupInLoadBalancer,
   TopEntry,
   NsVerification,
   AccelerateMainland,
@@ -400,11 +417,12 @@ import {
   CreateZoneResponse,
   CreateL4ProxyResponse,
   ModifySecurityPolicyResponse,
-  ModifyOriginGroupRequest,
+  DeleteLoadBalancerResponse,
+  DescribeOriginGroupHealthStatusResponse,
   SecurityTemplateBinding,
   CacheTag,
   DescribeDefaultCertificatesResponse,
-  OwnershipVerification,
+  CreateOriginGroupResponse,
   DescribeConfigGroupVersionsRequest,
   DescribeL4ProxyRulesRequest,
   AiRule,
@@ -416,6 +434,7 @@ import {
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DescribePurgeTasksResponse,
+  CheckRegionHealthStatus,
   DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
   RateLimitIntelligence,
@@ -450,6 +469,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyPlanResponse) => void
   ): Promise<DestroyPlanResponse> {
     return this.request("DestroyPlan", req, cb)
+  }
+
+  /**
+   * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async DescribeOriginGroupHealthStatus(
+    req: DescribeOriginGroupHealthStatusRequest,
+    cb?: (error: string, rep: DescribeOriginGroupHealthStatusResponse) => void
+  ): Promise<DescribeOriginGroupHealthStatusResponse> {
+    return this.request("DescribeOriginGroupHealthStatus", req, cb)
   }
 
   /**
@@ -782,6 +811,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询负载均衡实例列表。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async DescribeLoadBalancerList(
+    req: DescribeLoadBalancerListRequest,
+    cb?: (error: string, rep: DescribeLoadBalancerListResponse) => void
+  ): Promise<DescribeLoadBalancerListResponse> {
+    return this.request("DescribeLoadBalancerList", req, cb)
+  }
+
+  /**
    * 创建安全 IP 组
    */
   async CreateSecurityIPGroup(
@@ -799,6 +838,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeIPRegionResponse) => void
   ): Promise<DescribeIPRegionResponse> {
     return this.request("DescribeIPRegion", req, cb)
+  }
+
+  /**
+   * 修改负载均衡实例配置。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async ModifyLoadBalancer(
+    req: ModifyLoadBalancerRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerResponse) => void
+  ): Promise<ModifyLoadBalancerResponse> {
+    return this.request("ModifyLoadBalancer", req, cb)
   }
 
   /**
@@ -1167,6 +1216,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 删除负载均衡实例，若负载均衡示例被其他服务（例如：四层代理等）引用的时候，示例无法被删除，需要先解除引用关系。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async DeleteLoadBalancer(
+    req: DeleteLoadBalancerRequest,
+    cb?: (error: string, rep: DeleteLoadBalancerResponse) => void
+  ): Promise<DeleteLoadBalancerResponse> {
+    return this.request("DeleteLoadBalancer", req, cb)
+  }
+
+  /**
    * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
    */
   async DescribeRulesSetting(
@@ -1358,6 +1417,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyAliasDomainResponse) => void
   ): Promise<ModifyAliasDomainResponse> {
     return this.request("ModifyAliasDomain", req, cb)
+  }
+
+  /**
+   * 创建负载均衡实例。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223)。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   */
+  async CreateLoadBalancer(
+    req: CreateLoadBalancerRequest,
+    cb?: (error: string, rep: CreateLoadBalancerResponse) => void
+  ): Promise<CreateLoadBalancerResponse> {
+    return this.request("CreateLoadBalancer", req, cb)
   }
 
   /**

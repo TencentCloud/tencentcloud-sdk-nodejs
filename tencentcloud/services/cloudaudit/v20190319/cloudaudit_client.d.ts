@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DescribeAuditTracksResponse, StartLoggingRequest, DeleteAuditResponse, ModifyAuditTrackResponse, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, DescribeAuditTrackRequest, UpdateAuditRequest, DescribeAuditTracksRequest, CreateAuditResponse, DeleteAuditTrackRequest, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, CreateAuditTrackResponse, ListAuditsRequest, ModifyAuditTrackRequest, StopLoggingResponse, CreateAuditTrackRequest, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DeleteAuditTrackResponse, DescribeAuditTrackResponse, DescribeAuditResponse } from "./cloudaudit_models";
+import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DescribeAuditTracksResponse, StartLoggingRequest, ModifyAuditTrackResponse, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, DescribeAuditTrackRequest, UpdateAuditRequest, DescribeAuditTracksRequest, CreateEventsAuditTrackResponse, DeleteAuditTrackRequest, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, CreateAuditTrackResponse, ListAuditsRequest, ModifyAuditTrackRequest, StopLoggingResponse, CreateAuditTrackRequest, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ModifyEventsAuditTrackResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, CreateEventsAuditTrackRequest, DeleteAuditTrackResponse, DescribeAuditTrackResponse, ModifyEventsAuditTrackRequest, DescribeAuditResponse } from "./cloudaudit_models";
 /**
  * cloudaudit client
  * @class
@@ -32,13 +32,17 @@ export declare class Client extends AbstractClient {
      */
     ListCmqEnableRegion(req: ListCmqEnableRegionRequest, cb?: (error: string, rep: ListCmqEnableRegionResponse) => void): Promise<ListCmqEnableRegionResponse>;
     /**
-     * 删除跟踪集
+     * 创建操作审计跟踪集
      */
-    DeleteAudit(req: DeleteAuditRequest, cb?: (error: string, rep: DeleteAuditResponse) => void): Promise<DeleteAuditResponse>;
+    CreateEventsAuditTrack(req: CreateEventsAuditTrackRequest, cb?: (error: string, rep: CreateEventsAuditTrackResponse) => void): Promise<CreateEventsAuditTrackResponse>;
     /**
      * 查询操作审计日志
      */
     DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
+    /**
+     * 修改操作审计跟踪集
+     */
+    ModifyEventsAuditTrack(req: ModifyEventsAuditTrackRequest, cb?: (error: string, rep: ModifyEventsAuditTrackResponse) => void): Promise<ModifyEventsAuditTrackResponse>;
     /**
      * 关闭跟踪集
      */
@@ -71,14 +75,6 @@ export declare class Client extends AbstractClient {
      * 查询跟踪集详情
      */
     DescribeAudit(req: DescribeAuditRequest, cb?: (error: string, rep: DescribeAuditResponse) => void): Promise<DescribeAuditResponse>;
-    /**
-     * 参数要求：
-1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-     */
-    CreateAudit(req: CreateAuditRequest, cb?: (error: string, rep: CreateAuditResponse) => void): Promise<CreateAuditResponse>;
     /**
      * 删除操作审计跟踪集
      */

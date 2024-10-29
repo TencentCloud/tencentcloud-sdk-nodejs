@@ -1102,7 +1102,7 @@ export interface DescribeListenerStatisticsResponse {
     /**
      * 通道组统计数据
      */
-    StatisticsData: Array<MetricStatisticsInfo>;
+    StatisticsData?: Array<MetricStatisticsInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1195,7 +1195,7 @@ export interface SetTlsVersionRequest {
      */
     ListenerId: string;
     /**
-     * TLS版本,可选TLSv1.0、TLSv1.1、TLSv1.2、TLSv1.3
+     * TLS版本,可选TLSv1、TLSv1.1、TLSv1.2、TLSv1.3
      */
     TLSSupportVersion: Array<string>;
     /**
@@ -2715,11 +2715,11 @@ export interface DescribeCertificatesResponse {
     /**
      * 服务器证书列表，包括证书ID 和证书名称。
      */
-    CertificateSet: Array<Certificate>;
+    CertificateSet?: Array<Certificate>;
     /**
      * 满足查询条件的服务器证书总数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2792,11 +2792,11 @@ export interface DestroyProxiesResponse {
     /**
      * 处于不可销毁状态下的通道实例ID列表。
      */
-    InvalidStatusInstanceSet: Array<string>;
+    InvalidStatusInstanceSet?: Array<string>;
     /**
      * 销毁操作失败的通道实例ID列表。
      */
-    OperationFailedInstanceSet: Array<string>;
+    OperationFailedInstanceSet?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2809,19 +2809,19 @@ export interface DescribeRuleRealServersResponse {
     /**
      * 可绑定的源站个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 可绑定的源站信息列表
      */
-    RealServerSet: Array<RealServer>;
+    RealServerSet?: Array<RealServer>;
     /**
      * 已绑定的源站个数
      */
-    BindRealServerTotalCount: number;
+    BindRealServerTotalCount?: number;
     /**
      * 已绑定的源站信息列表
      */
-    BindRealServerSet: Array<BindRealServer>;
+    BindRealServerSet?: Array<BindRealServer>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3595,11 +3595,11 @@ export interface DescribeRulesByRuleIdsResponse {
     /**
      * 返回的规则总个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的规则列表。
      */
-    RuleSet: Array<RuleInfo>;
+    RuleSet?: Array<RuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3658,6 +3658,16 @@ export interface SetAuthenticationRequest {
      * 多源站CA证书ID，从证书管理页获取。源站认证时，填写该参数或RealServerCertificateId参数
      */
     PolyRealServerCertificateIds?: Array<string>;
+    /**
+     * TLS支持的版本
+  支持TLSv1，TLSv1.1,TLSv1.2,TLSv1.3
+     */
+    TLSSupportVersion?: Array<string>;
+    /**
+     * 支持的TLS密码套件，可选值为：
+  [GAAP_TLS_CIPHERS_WIDE,GAAPTLS_CIPHERS_GENERAL,GAAPTLS_CIPHERS_STRICT]
+     */
+    TLSCiphers?: string;
 }
 /**
  * 域名解析就近访问配置详情
@@ -3830,7 +3840,7 @@ export interface DescribeHTTPListenersResponse {
  */
 export interface DescribeTaskStatusRequest {
     /**
-     * 任务ID，值为异步接口返回的RequestId
+     * 任务ID，值为异步接口返回的RequestId，此参数不能传空值。
      */
     TaskId?: string;
 }
@@ -4558,7 +4568,18 @@ export interface DescribeProxyStatisticsRequest {
      */
     EndTime: string;
     /**
-     * 统计指标名称列表，支持: 入带宽:InBandwidth, 出带宽:OutBandwidth, 并发:Concurrent, 入包量:InPackets, 出包量:OutPackets, 丢包率:PacketLoss, 延迟:Latency，http请求量：HttpQPS, Https请求量：HttpsQPS
+     * 统计指标名称列表，支持:
+  入带宽:InBandwidth,
+  出带宽:OutBandwidth,
+  并发:Concurrent,
+  入包量:InPackets,
+  出包量:OutPackets,
+  丢包率:PacketLoss,
+  延迟:Latency，
+  HTTP请求量：HttpQPS,
+  HTTP请求量利用率：HttpQPSPercent,
+  HTTPS请求量：HttpsQPS,
+  HTTPS请求量利用率：HttpsQPSPercent
      */
     MetricNames: Array<string>;
     /**
@@ -4753,7 +4774,7 @@ export interface CreateCertificateResponse {
     /**
      * 证书ID
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4770,7 +4791,7 @@ export interface DescribeProxyStatisticsResponse {
     /**
      * 通道统计数据
      */
-    StatisticsData: Array<MetricStatisticsInfo>;
+    StatisticsData?: Array<MetricStatisticsInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5164,7 +5185,7 @@ export interface CreateProxyResponse {
     /**
      * 通道的实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

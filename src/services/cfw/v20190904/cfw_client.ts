@@ -376,10 +376,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * ModifyResourceGroup-资产中心资产组信息修改
-
-
-     */
+   * ModifyResourceGroup-资产中心资产组信息修改
+   */
   async ModifyResourceGroup(
     req: ModifyResourceGroupRequest,
     cb?: (error: string, rep: ModifyResourceGroupResponse) => void
@@ -388,7 +386,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * DescribeResourceGroupNew资产中心资产树信息
+   * 资产中心资产组数数据信息查询
    */
   async DescribeResourceGroupNew(
     req: DescribeResourceGroupNewRequest,
@@ -578,9 +576,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
-
-     */
+   * DescribeBlockByIpTimesList 告警中心阻断IP折线图
+   */
   async DescribeBlockByIpTimesList(
     req: DescribeBlockByIpTimesListRequest,
     cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void
@@ -1306,9 +1303,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * DescribeTLogInfo告警中心概况
-
-     */
+   * DescribeTLogInfo告警中心概况查询
+   */
   async DescribeTLogInfo(
     req: DescribeTLogInfoRequest,
     cb?: (error: string, rep: DescribeTLogInfoResponse) => void
@@ -1327,8 +1323,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * VPC防火墙一键开关
-   */
+     * 该接口已不再使用
+
+VPC防火墙一键开关
+     */
   async ModifyAllVPCSwitchStatus(
     req: ModifyAllVPCSwitchStatusRequest,
     cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void
@@ -1437,9 +1435,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * DescribeTLogIpList告警中心IP柱形图
-
-     */
+   * DescribeTLogIpList告警中心IP柱形图
+   */
   async DescribeTLogIpList(
     req: DescribeTLogIpListRequest,
     cb?: (error: string, rep: DescribeTLogIpListResponse) => void
@@ -1458,7 +1455,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 添加nat访问控制规则(地域必填)
+   * 添加nat访问控制规则
    */
   async AddNatAcRule(
     req: AddNatAcRuleRequest,
@@ -1468,9 +1465,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * DescribeBlockStaticList 告警中心柱形图
-
-     */
+   * DescribeBlockStaticList 告警中心柱形图
+   */
   async DescribeBlockStaticList(
     req: DescribeBlockStaticListRequest,
     cb?: (error: string, rep: DescribeBlockStaticListResponse) => void

@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ListTasksRequest,
   ListRoleConfigurationsRequest,
-  GetProvisioningTaskStatusResponse,
+  DeleteSCIMCredentialRequest,
   ListGroupMembersResponse,
   SetExternalSAMLIdentityProviderRequest,
   ListGroupMembersRequest,
@@ -64,6 +64,7 @@ import {
   ListOrganizationServiceResponse,
   DeleteUserSyncProvisioningResponse,
   ProvisionRoleConfigurationResponse,
+  ListUserSyncProvisioningsResponse,
   DeletePolicyResponse,
   DescribeOrganizationResponse,
   ListNonCompliantResourceRequest,
@@ -89,7 +90,6 @@ import {
   DescribeShareUnitMembersResponse,
   MemberMainInfo,
   CreateRoleAssignmentRequest,
-  CreateUserResponse,
   DeleteShareUnitResourcesRequest,
   MemberIdentity,
   RejectJoinShareUnitInvitationResponse,
@@ -107,6 +107,7 @@ import {
   GetZoneSAMLServiceProviderInfoResponse,
   DeleteOrganizationMembersResponse,
   ManagerShareUnit,
+  UpdateSCIMCredentialStatusResponse,
   ShareUnitResource,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberAuthIdentityResponse,
@@ -116,7 +117,7 @@ import {
   ClearExternalSAMLIdentityProviderResponse,
   AddExternalSAMLIdPCertificateResponse,
   CreateOrganizationMemberResponse,
-  UpdateCustomPolicyForRoleConfigurationRequest,
+  RoleAssignments,
   MoveOrganizationNodeMembersRequest,
   GetTaskStatusResponse,
   UserSyncProvisioning,
@@ -131,11 +132,12 @@ import {
   Tag,
   AddOrganizationMemberEmailRequest,
   ListOrganizationIdentityResponse,
+  ShareArea,
   DeletePolicyRequest,
   ShareResource,
   GetUserSyncProvisioningResponse,
   GroupInfo,
-  RoleAssignments,
+  GetSCIMSynchronizationStatusResponse,
   GetZoneStatisticsRequest,
   NodeMainInfo,
   RemovePermissionPolicyFromRoleConfigurationRequest,
@@ -149,7 +151,9 @@ import {
   OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
   OpenIdentityCenterRequest,
+  GetProvisioningTaskStatusResponse,
   DescribeOrganizationMemberAuthAccountsRequest,
+  SCIMCredential,
   GetUserRequest,
   UpdateOrganizationNodeResponse,
   AcceptJoinShareUnitInvitationResponse,
@@ -160,6 +164,7 @@ import {
   OrgNode,
   Tags,
   ListRoleConfigurationProvisioningsRequest,
+  GetSCIMSynchronizationStatusRequest,
   OrgIdentity,
   DescribeIdentityCenterRequest,
   DescribeOrganizationMembersResponse,
@@ -206,6 +211,7 @@ import {
   ListPolicyNode,
   ResourceTagMapping,
   CreateOrganizationMemberPolicyResponse,
+  UpdateSCIMSynchronizationStatusRequest,
   AcceptJoinShareUnitInvitationRequest,
   CancelOrganizationMemberAuthAccountResponse,
   GetTaskStatusRequest,
@@ -236,6 +242,7 @@ import {
   OrgMemberAuthAccount,
   CreateOrganizationMemberRequest,
   AuthRelationFile,
+  UpdateSCIMSynchronizationStatusResponse,
   CreatePolicyRequest,
   OrgMemberAuthIdentity,
   PolicyDetail,
@@ -268,18 +275,21 @@ import {
   DescribeOrganizationMembersRequest,
   GetZoneSAMLServiceProviderInfoRequest,
   ListRoleConfigurationsResponse,
+  ListSCIMCredentialsResponse,
   DescribeOrganizationNodesRequest,
+  UpdateCustomPolicyForRoleConfigurationRequest,
   InviteOrganizationMemberResponse,
   BindOrganizationMemberAuthAccountResponse,
   ListOrgServiceAssignMemberRequest,
   UpdateOrganizationIdentityResponse,
   DescribeShareAreasResponse,
+  CreateUserResponse,
   DeleteShareUnitResourcesResponse,
-  ListUserSyncProvisioningsResponse,
   DeleteUserSyncProvisioningRequest,
   DescribeOrganizationNodesResponse,
   CreateUserSyncProvisioningRequest,
   DeleteOrganizationMembersPolicyRequest,
+  CreateSCIMCredentialRequest,
   DescribePolicyRequest,
   DeleteGroupResponse,
   UpdateUserStatusRequest,
@@ -294,6 +304,7 @@ import {
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
   AddUserToGroupResponse,
+  CreateSCIMCredentialResponse,
   ProductResource,
   DeleteShareUnitRequest,
   DeleteOrgServiceAssignResponse,
@@ -301,13 +312,15 @@ import {
   DescribeShareUnitsRequest,
   UserProvisioningsTask,
   UserProvisioning,
+  ListSCIMCredentialsRequest,
+  UpdateSCIMCredentialStatusRequest,
   SAMLIdentityProviderConfiguration,
   RolePolicie,
   UpdateUserSyncProvisioningResponse,
-  ShareArea,
+  CreateGroupResponse,
   UpdateZoneRequest,
   DeleteAccountResponse,
-  CreateGroupResponse,
+  DeleteSCIMCredentialResponse,
 } from "./organization_models"
 
 /**
@@ -340,6 +353,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取组织成员访问身份列表
+   */
+  async ListOrganizationIdentity(
+    req: ListOrganizationIdentityRequest,
+    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
+  ): Promise<ListOrganizationIdentityResponse> {
+    return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
    * 添加企业组织节点
    */
   async AddOrganizationNode(
@@ -367,6 +390,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemovePermissionPolicyFromRoleConfigurationResponse) => void
   ): Promise<RemovePermissionPolicyFromRoleConfigurationResponse> {
     return this.request("RemovePermissionPolicyFromRoleConfiguration", req, cb)
+  }
+
+  /**
+   * 启用/禁用SCIM密钥
+   */
+  async UpdateSCIMCredentialStatus(
+    req: UpdateSCIMCredentialStatusRequest,
+    cb?: (error: string, rep: UpdateSCIMCredentialStatusResponse) => void
+  ): Promise<UpdateSCIMCredentialStatusResponse> {
+    return this.request("UpdateSCIMCredentialStatus", req, cb)
   }
 
   /**
@@ -490,13 +523,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员访问身份列表
+   * 以产品维度获取组织财务信息
    */
-  async ListOrganizationIdentity(
-    req: ListOrganizationIdentityRequest,
-    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
-  ): Promise<ListOrganizationIdentityResponse> {
-    return this.request("ListOrganizationIdentity", req, cb)
+  async DescribeOrganizationFinancialByProduct(
+    req: DescribeOrganizationFinancialByProductRequest,
+    cb?: (error: string, rep: DescribeOrganizationFinancialByProductResponse) => void
+  ): Promise<DescribeOrganizationFinancialByProductResponse> {
+    return this.request("DescribeOrganizationFinancialByProduct", req, cb)
   }
 
   /**
@@ -627,16 +660,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearExternalSAMLIdentityProviderResponse) => void
   ): Promise<ClearExternalSAMLIdentityProviderResponse> {
     return this.request("ClearExternalSAMLIdentityProvider", req, cb)
-  }
-
-  /**
-   * 以产品维度获取组织财务信息
-   */
-  async DescribeOrganizationFinancialByProduct(
-    req: DescribeOrganizationFinancialByProductRequest,
-    cb?: (error: string, rep: DescribeOrganizationFinancialByProductResponse) => void
-  ): Promise<DescribeOrganizationFinancialByProductResponse> {
-    return this.request("DescribeOrganizationFinancialByProduct", req, cb)
   }
 
   /**
@@ -1010,6 +1033,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取SCIM同步状态
+   */
+  async GetSCIMSynchronizationStatus(
+    req: GetSCIMSynchronizationStatusRequest,
+    cb?: (error: string, rep: GetSCIMSynchronizationStatusResponse) => void
+  ): Promise<GetSCIMSynchronizationStatusResponse> {
+    return this.request("GetSCIMSynchronizationStatus", req, cb)
+  }
+
+  /**
    * 配置SAML身份提供商信息
    */
   async SetExternalSAMLIdentityProvider(
@@ -1040,6 +1073,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除SCIM密钥
+   */
+  async DeleteSCIMCredential(
+    req: DeleteSCIMCredentialRequest,
+    cb?: (error: string, rep: DeleteSCIMCredentialResponse) => void
+  ): Promise<DeleteSCIMCredentialResponse> {
+    return this.request("DeleteSCIMCredential", req, cb)
+  }
+
+  /**
    * 创建子用户同步任务
    */
   async UpdateUserSyncProvisioning(
@@ -1067,6 +1110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationResponse) => void
   ): Promise<DescribeOrganizationResponse> {
     return this.request("DescribeOrganization", req, cb)
+  }
+
+  /**
+   * 启用/禁用用户SCIM同步
+   */
+  async UpdateSCIMSynchronizationStatus(
+    req: UpdateSCIMSynchronizationStatusRequest,
+    cb?: (error: string, rep: UpdateSCIMSynchronizationStatusResponse) => void
+  ): Promise<UpdateSCIMSynchronizationStatusResponse> {
+    return this.request("UpdateSCIMSynchronizationStatus", req, cb)
   }
 
   /**
@@ -1180,6 +1233,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建SCIM密钥
+   */
+  async CreateSCIMCredential(
+    req: CreateSCIMCredentialRequest,
+    cb?: (error: string, rep: CreateSCIMCredentialResponse) => void
+  ): Promise<CreateSCIMCredentialResponse> {
+    return this.request("CreateSCIMCredential", req, cb)
+  }
+
+  /**
    * 获取组织成员访问授权列表
    */
   async DescribeOrganizationMemberAuthIdentities(
@@ -1217,6 +1280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachPolicyResponse) => void
   ): Promise<DetachPolicyResponse> {
     return this.request("DetachPolicy", req, cb)
+  }
+
+  /**
+   * 查询用户SCIM密钥列表
+   */
+  async ListSCIMCredentials(
+    req: ListSCIMCredentialsRequest,
+    cb?: (error: string, rep: ListSCIMCredentialsResponse) => void
+  ): Promise<ListSCIMCredentialsResponse> {
+    return this.request("ListSCIMCredentials", req, cb)
   }
 
   /**

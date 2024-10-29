@@ -4286,6 +4286,11 @@ export interface DataEngineInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineNetworkName?: string;
+    /**
+     * 是否使用预留池
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPoolMode?: string;
 }
 /**
  * LockMetaData返回参数结构体

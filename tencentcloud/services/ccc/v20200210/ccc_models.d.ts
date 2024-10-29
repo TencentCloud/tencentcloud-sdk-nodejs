@@ -199,7 +199,7 @@ export interface CreateSDKLoginTokenResponse {
  */
 export interface ModifyStaffRequest {
     /**
-     * 应用ID
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -398,7 +398,7 @@ export interface CreateCallOutSessionResponse {
  */
 export interface DescribeCarrierPrivilegeNumberApplicantsRequest {
     /**
-     * 实例Id
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -1185,7 +1185,7 @@ export interface CreateUserSigRequest {
  */
 export interface CreateCCCSkillGroupRequest {
     /**
-     * 应用 ID（必填）
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -1201,6 +1201,23 @@ export interface CreateCCCSkillGroupRequest {
   2、若技能组类型为电话、音频、视频，则接待上线必须只能为1
      */
     MaxConcurrency?: number;
+}
+/**
+ * DescribePredictiveDialingSessions返回参数结构体
+ */
+export interface DescribePredictiveDialingSessionsResponse {
+    /**
+     * 数据总量
+     */
+    TotalCount?: number;
+    /**
+     * 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单
+     */
+    SessionList?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAutoCalloutTask返回参数结构体
@@ -1421,21 +1438,32 @@ export interface UpdateCCCSkillGroupResponse {
     RequestId?: string;
 }
 /**
- * DescribePredictiveDialingSessions返回参数结构体
+ * 语音转文本信息
  */
-export interface DescribePredictiveDialingSessionsResponse {
+export interface AsrData {
     /**
-     * 数据总量
+     * 用户方
      */
-    TotalCount?: number;
+    User?: string;
     /**
-     * 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单
+     * 消息内容
      */
-    SessionList?: Array<string>;
+    Message?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 时间戳
+     * @deprecated
      */
-    RequestId?: string;
+    Timestamp?: number;
+    /**
+     * 句子开始时间，Unix 毫秒时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Start?: number;
+    /**
+     * 句子结束时间，Unix 毫秒时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    End?: number;
 }
 /**
  * 运营商白名单号码申请单
@@ -1797,7 +1825,7 @@ export interface ResetExtensionPasswordResponse {
  */
 export interface UpdateCCCSkillGroupRequest {
     /**
-     * 应用 ID（必填）
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -2023,7 +2051,7 @@ export interface CreateAICallRequest {
     APIKey: string;
     /**
      * API URL，仅支持兼容openai协议的模型，填写url时后缀不要带/chat/completions；
-  llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮你填充后缀
+  llmType为azure时,URL填写格式需为：https://{your-resource-name}.openai.azure.com?api-version={api-version},填写url时后缀不要带/openai/deployments/{deployment-id}/chat/completions，系统会自动帮您填充后缀
      */
     APIUrl: string;
     /**
@@ -2314,15 +2342,35 @@ export interface DeletePredictiveDialingCampaignResponse {
  */
 export interface IVRKeyPressedElement {
     /**
-     * 按键
+     * 命中的关键字或者按键
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Key?: string;
     /**
      * 按键关联的标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
+    /**
+     * Unix 毫秒时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timestamp?: number;
+    /**
+     * 节点标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeLabel?: string;
+    /**
+     * 用户原始输入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginalContent?: string;
+    /**
+     * TTS 提示音内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TTSPrompt?: string;
 }
 /**
  * UnbindNumberCallOutSkillGroup返回参数结构体
@@ -2826,6 +2874,10 @@ export interface OwnNumberApplyDetailItem {
      * 每秒最大并发数
      */
     MaxCallPSec: number;
+    /**
+     * 呼出被叫格式，使用 {+E.164} 或 {E.164},
+     */
+    OutboundCalleeFormat?: string;
 }
 /**
  * DescribePredictiveDialingCampaigns返回参数结构体
@@ -2936,7 +2988,7 @@ export interface StaffSkillGroupList {
  */
 export interface CreateCarrierPrivilegeNumberApplicantRequest {
     /**
-     * SdkAppId
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -3920,6 +3972,20 @@ export interface BindStaffSkillGroupListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTelRecordAsr返回参数结构体
+ */
+export interface DescribeTelRecordAsrResponse {
+    /**
+     * 录音转文本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AsrDataList?: Array<AsrData>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeExtensions请求参数结构体
  */
 export interface DescribeExtensionsRequest {
@@ -4016,7 +4082,7 @@ export interface CreateSDKLoginTokenRequest {
  */
 export interface DescribeActiveCarrierPrivilegeNumberRequest {
     /**
-     * 实例Id
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
@@ -4124,4 +4190,17 @@ export interface DescribeExtensionResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeTelRecordAsr请求参数结构体
+ */
+export interface DescribeTelRecordAsrRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 会话 ID
+     */
+    SessionId: string;
 }

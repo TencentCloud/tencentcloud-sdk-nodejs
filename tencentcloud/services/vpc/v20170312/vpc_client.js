@@ -1633,6 +1633,12 @@ LimitTypes取值范围：
         return this.request("ModifyCcnRouteTables", req, cb);
     }
     /**
+     * 调整EIP续费标识
+     */
+    async ModifyAddressesRenewFlag(req, cb) {
+        return this.request("ModifyAddressesRenewFlag", req, cb);
+    }
+    /**
      * 修改高优路由表 HASH 策略。
      */
     async ModifyHighPriorityRouteECMPAlgorithm(req, cb) {

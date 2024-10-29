@@ -3468,13 +3468,17 @@ export interface DescribeAccountAttributesResponse {
 }
 
 /**
- * ReturnNormalAddresses请求参数结构体
+ * ModifyAddressesRenewFlag请求参数结构体
  */
-export interface ReturnNormalAddressesRequest {
+export interface ModifyAddressesRenewFlagRequest {
   /**
-   * 普通公网IP 的 IP 地址,示例：101.35.139.183
+   * EIP唯一标识ID列表，形如'eip-xxxx'
    */
-  AddressIps?: Array<string>
+  AddressIds: Array<string>
+  /**
+   * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费  若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。 示例值：NOTIFY_AND_AUTO_RENEW
+   */
+  RenewFlag: string
 }
 
 /**
@@ -4027,6 +4031,10 @@ export interface ReplaceDirectConnectGatewayCcnRoutesRequest {
    * 需要连通的IDC网段列表
    */
   Routes: Array<DirectConnectGatewayCcnRoute>
+  /**
+   * 地址类型，支持：IPv4、IPv6。默认IPv4。
+   */
+  AddressType?: string
 }
 
 /**
@@ -5580,12 +5588,12 @@ export interface SecurityGroupPolicy {
    */
   ServiceTemplate?: ServiceTemplateSpecification
   /**
-   * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。
+   * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CidrBlock?: string
   /**
-   * 网段或IPv6(互斥)。
+   * 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6CidrBlock?: string
@@ -5605,7 +5613,7 @@ export interface SecurityGroupPolicy {
    */
   Action?: string
   /**
-   * 安全组规则描述。
+   * 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyDescription?: string
@@ -6538,21 +6546,21 @@ export interface NatGatewayDestinationIpPortTranslationNatRule {
    */
   IpProtocol?: string
   /**
-   * 弹性IP。
+   * 弹性公网IP。
    */
-  PublicIpAddress: string
+  PublicIpAddress?: string
   /**
    * 公网端口。
    */
-  PublicPort: number
+  PublicPort?: number
   /**
    * 内网地址。
    */
-  PrivateIpAddress: string
+  PrivateIpAddress?: string
   /**
    * 内网端口。
    */
-  PrivatePort: number
+  PrivatePort?: number
   /**
    * NAT网关转发规则描述。
    */
@@ -6561,17 +6569,17 @@ export interface NatGatewayDestinationIpPortTranslationNatRule {
    * NAT网关的ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NatGatewayId: string
+  NatGatewayId?: string
   /**
    * 私有网络VPC的ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * NAT网关转发规则创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
 }
 
 /**
@@ -9125,8 +9133,7 @@ export interface DescribeNetworkAccountTypeResponse {
  */
 export interface DescribeRoutesRequest {
   /**
-   * 过滤条件，参数不支持同时指定RouteTableIds和Filters。
-<li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+   * <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
 <li>gateway-id - String - （过滤条件）网关ID。</li>
 <li>description - String - （过滤条件）路由描述。</li>
 <li>route-table-id - String - （过滤条件）路由表实例ID。</li>
@@ -10605,6 +10612,16 @@ export interface DescribeVpnGatewaySslServersResponse {
 }
 
 /**
+ * ModifyAddressesRenewFlag返回参数结构体
+ */
+export interface ModifyAddressesRenewFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 子网对象
  */
 export interface Subnet {
@@ -10742,6 +10759,10 @@ export interface DescribeDirectConnectGatewayCcnRoutesRequest {
 <li>`STATIC` - 静态，即用户配置，默认值。</li>
    */
   CcnRouteType?: string
+  /**
+   * 地址类型，支持：IPv4、IPv6。默认IPv4。
+   */
+  AddressType?: string
   /**
    * 偏移量。
    */
@@ -11715,6 +11736,10 @@ export interface DeleteDirectConnectGatewayCcnRoutesRequest {
    * 路由ID。形如：ccnr-f49l6u0z。
    */
   RouteIds: Array<string>
+  /**
+   * 地址类型，支持：IPv4、IPv6。默认IPv4。
+   */
+  AddressType?: string
 }
 
 /**
@@ -14885,7 +14910,7 @@ export interface ModifyNetworkInterfaceQosRequest {
   /**
    * 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
-  QosLevel: string
+  QosLevel?: string
   /**
    * DirectSend端口范围最大值。
    */
@@ -14921,23 +14946,23 @@ export interface DirectConnectGatewayCcnRoute {
   /**
    * 路由ID。
    */
-  RouteId: string
+  RouteId?: string
   /**
    * IDC网段。
    */
-  DestinationCidrBlock: string
+  DestinationCidrBlock?: string
   /**
    * `BGP`的`AS-Path`属性。
    */
-  ASPath: Array<string>
+  ASPath?: Array<string>
   /**
    * 备注
    */
-  Description: string
+  Description?: string
   /**
    * 最后更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -15522,6 +15547,16 @@ export interface DescribeCrossBorderCcnRegionBandwidthLimitsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReturnNormalAddresses请求参数结构体
+ */
+export interface ReturnNormalAddressesRequest {
+  /**
+   * 普通公网IP 的 IP 地址,示例：101.35.139.183
+   */
+  AddressIps?: Array<string>
 }
 
 /**
@@ -17005,11 +17040,11 @@ export interface DescribeDirectConnectGatewayCcnRoutesResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 云联网路由（IDC网段）列表。
    */
-  RouteSet: Array<DirectConnectGatewayCcnRoute>
+  RouteSet?: Array<DirectConnectGatewayCcnRoute>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

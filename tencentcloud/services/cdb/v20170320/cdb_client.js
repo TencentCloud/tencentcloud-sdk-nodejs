@@ -652,7 +652,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartReplication", req, cb);
     }
     /**
-     * 调整数据库代理地址配置
+     * 本接口（AdjustCdbProxyAddress）用于调整数据库代理地址配置。
      */
     async AdjustCdbProxyAddress(req, cb) {
         return this.request("AdjustCdbProxyAddress", req, cb);

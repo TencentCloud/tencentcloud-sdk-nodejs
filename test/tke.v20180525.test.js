@@ -1168,6 +1168,16 @@ it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterImage", async function () {
+    try {
+       const data = await client.ModifyClusterImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeLogConfigs", async function () {
     try {
        const data = await client.DescribeLogConfigs({})

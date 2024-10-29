@@ -76,6 +76,26 @@ export interface DescribeKBComponentVersionListRequest {
    * 要查询的组件 PURL
    */
   PURL: PURL
+  /**
+   * 页号
+   */
+  PageNumber?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 排序方式，可以是"ASC"或"DESC"，默认"DESC"
+   */
+  Order?: string
+  /**
+   * 排序字段，可能的字段包括“Version”、"PublishTime"
+   */
+  OrderBy?: Array<string>
+  /**
+   * Tag筛选
+   */
+  Filter?: ComponentTagFilter
 }
 
 /**
@@ -115,6 +135,14 @@ export interface DescribeKBComponentVulnerabilityResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VulnerabilityList?: Array<ComponentVulnerabilityUnion>
+  /**
+   * 组件purl
+   */
+  PURL?: PURL
+  /**
+   * 推荐版本，当前版本中的所有漏洞都修复了的版本
+   */
+  RecommendedVersion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -270,29 +298,44 @@ export interface Component {
   /**
    * 第三方组件的PURL
    */
-  PURL: PURL
+  PURL?: PURL
   /**
    * 第三方组件的主页
    */
-  Homepage: string
+  Homepage?: string
   /**
    * 第三方组件的简介
    */
-  Summary: string
+  Summary?: string
   /**
    * 第三方组件的别名列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NicknameList: Array<string>
+  NicknameList?: Array<string>
   /**
    * 第三方组件的代码位置列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeLocationList: Array<string>
+  CodeLocationList?: Array<string>
   /**
    * 第三方组件的许可证表达式
    */
-  LicenseExpression: string
+  LicenseExpression?: string
+  /**
+   * 第三方组件的版本信息(如果匹配到版本)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionInfo?: ComponentVersionInfo
+  /**
+   * 第三方组件的最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: string
+  /**
+   * 第三方组件的类型标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<string>
 }
 
 /**
@@ -330,7 +373,7 @@ export interface DescribeKBLicenseResponse {
 }
 
 /**
- * 描述组件的一条版本信息。
+ * 描述一个组件版本。
  */
 export interface ComponentVersion {
   /**
@@ -343,6 +386,11 @@ export interface ComponentVersion {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseExpression?: string
+  /**
+   * 组件的版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionInfo?: ComponentVersionInfo
 }
 
 /**
@@ -353,6 +401,27 @@ export interface MatchKBPURLListRequest {
    * SHA1。
    */
   SHA1?: string
+}
+
+/**
+ * 描述组件版本的详情，包含组件发布时间、Copyright列表、组件描述Tag。
+ */
+export interface ComponentVersionInfo {
+  /**
+   * 版本发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishTime?: string
+  /**
+   * 当前版本的所有copyright
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CopyrightList?: Array<string>
+  /**
+   * 版本标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<string>
 }
 
 /**
@@ -460,6 +529,10 @@ export interface VulnerabilityDetail {
    */
   SubmitTime?: string
   /**
+   * 漏洞更新时间
+   */
+  UpdateTime?: string
+  /**
    * CWE编号
    */
   CWEID?: string
@@ -484,7 +557,7 @@ export interface DescribeKBComponentResponse {
   /**
    * 匹配的组件信息
    */
-  Component: Component
+  Component?: Component
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -541,6 +614,37 @@ export interface VulnerabilitySummary {
 <li>Low</li>
    */
   Severity?: string
+  /**
+   * 架构信息，如x86、ARM等，废弃，请使用ArchitectureList
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Architecture?: Array<string>
+  /**
+   * 架构信息，如x86、ARM等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArchitectureList?: Array<string>
+  /**
+   * patch链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PatchUrlList?: Array<string>
+}
+
+/**
+ * 筛选条件，同一个Tag不能同时出现在IncludeTags和ExcludeTags，可能的Tag包括："CopyrightUpdated", "LicenseUpdated", "ContainsVulnerability"
+ */
+export interface ComponentTagFilter {
+  /**
+   * 包括的Tag
+
+   */
+  IncludeTags?: Array<string>
+  /**
+   * 排除的Tag
+   */
+  ExcludeTags?: Array<string>
 }
 
 /**

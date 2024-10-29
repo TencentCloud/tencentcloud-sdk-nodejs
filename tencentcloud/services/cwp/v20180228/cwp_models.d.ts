@@ -136,11 +136,11 @@ export interface DescribeAssetWebServiceInfoListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WebServices: Array<AssetWebServiceBaseInfo>;
+    WebServices?: Array<AssetWebServiceBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -167,11 +167,11 @@ export interface DescribeAssetAppProcessListResponse {
      * 进程列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: Array<AssetAppProcessInfo>;
+    Process?: Array<AssetAppProcessInfo>;
     /**
      * 分区总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -659,12 +659,12 @@ export interface DescribeLoginWhiteCombinedListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 合并后的白名单列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoginWhiteCombinedInfos: Array<LoginWhiteCombinedInfo>;
+    LoginWhiteCombinedInfos?: Array<LoginWhiteCombinedInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -972,11 +972,11 @@ export interface DescribeDirectConnectInstallCommandResponse {
     /**
      * 安装命令的ip
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 安装命令的token
      */
-    Token: string;
+    Token?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1074,11 +1074,11 @@ export interface ExportVulListResponse {
      * 导出的文件下载url（已弃用！）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 导出文件Id 可通过ExportTasks接口下载
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1377,87 +1377,87 @@ export interface DescribeVulInfoCvssResponse {
      * 漏洞id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulId: number;
+    VulId?: number;
     /**
      * 漏洞名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulName: string;
+    VulName?: string;
     /**
      * 危害等级：1-低危；2-中危；3-高危；4-严重
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulLevel: number;
+    VulLevel?: number;
     /**
      * 漏洞分类 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulType: number;
+    VulType?: number;
     /**
      * 漏洞描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 修复方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RepairPlan: string;
+    RepairPlan?: string;
     /**
      * 漏洞CVEID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CveId: string;
+    CveId?: string;
     /**
      * 参考链接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reference: string;
+    Reference?: string;
     /**
      * CVSS信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVSS: string;
+    CVSS?: string;
     /**
      * 发布时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicDate: string;
+    PublicDate?: string;
     /**
      * Cvss分数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CvssScore: number;
+    CvssScore?: number;
     /**
      * cvss详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CveInfo: string;
+    CveInfo?: string;
     /**
      * cvss 分数 浮点型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CvssScoreFloat: number;
+    CvssScoreFloat?: number;
     /**
      * 漏洞标签 多个逗号分割
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: string;
+    Labels?: string;
     /**
      * 已防御的攻击次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefenseAttackCount: number;
+    DefenseAttackCount?: number;
     /**
      * 全网修复成功次数, 不支持自动修复的漏洞默认返回0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuccessFixCount: number;
+    SuccessFixCount?: number;
     /**
      * 修复是否支持：0-windows/linux均不支持修复 ;1-windows/linux 均支持修复 ;2-仅linux支持修复;3-仅windows支持修复
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FixSwitch: number;
+    FixSwitch?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3007,11 +3007,11 @@ export interface DescribeBashRulesResponse {
     /**
      * 列表内容
      */
-    List: Array<BashRule>;
+    List?: Array<BashRule>;
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4299,11 +4299,11 @@ export interface DescribeMachinesSimpleResponse {
     /**
      * 主机列表
      */
-    Machines: Array<MachineSimple>;
+    Machines?: Array<MachineSimple>;
     /**
      * 主机数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5802,50 +5802,50 @@ export interface AssetJarDetail {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 类型：1应用程序，2系统类库，3Web服务自带库，8:其他，
      */
-    Type: number;
+    Type?: number;
     /**
      * 是否可执行：0未知，1是，2否
      */
-    Status: number;
+    Status?: number;
     /**
      * 版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 路径
      */
-    Path: string;
+    Path?: string;
     /**
      * 服务器IP
      */
-    MachineIp: string;
+    MachineIp?: string;
     /**
      * 服务器名称
      */
-    MachineName: string;
+    MachineName?: string;
     /**
      * 操作系统
      */
-    OsInfo: string;
+    OsInfo?: string;
     /**
      * 引用进程列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: Array<AssetAppProcessInfo>;
+    Process?: Array<AssetAppProcessInfo>;
     /**
      * Jar包Md5
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Md5: string;
+    Md5?: string;
     /**
      * 数据更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * ModifyFileTamperRule返回参数结构体
@@ -6738,11 +6738,11 @@ export interface DescribeAssetWebServiceProcessListResponse {
      * 进程列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: Array<AssetAppProcessInfo>;
+    Process?: Array<AssetAppProcessInfo>;
     /**
      * 总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7302,19 +7302,19 @@ export interface AssetWebAppPluginInfo {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 描述
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 链接
      */
-    Link: string;
+    Link?: string;
 }
 /**
  * DeletePrivilegeRules请求参数结构体
@@ -7522,7 +7522,8 @@ export interface MachineSimple {
      */
     RegionInfo?: RegionInfo;
     /**
-     * 实例状态 TERMINATED_PRO_VERSION 已销毁
+     * 实例状态请参考CVM实例列表InstanceState值
+  https://cloud.tencent.com/document/api/213/15753#Instance
      */
     InstanceState?: string;
     /**
@@ -9122,7 +9123,7 @@ export interface DescribeBashEventsInfoNewResponse {
      * 事件详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BashEventsInfo: BashEventsInfoNew;
+    BashEventsInfo?: BashEventsInfoNew;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9369,7 +9370,7 @@ export interface DescribeBanRegionsResponse {
     /**
      * 地域信息列表
      */
-    RegionSet: Array<RegionSet>;
+    RegionSet?: Array<RegionSet>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9490,7 +9491,7 @@ export interface DescribeAssetCoreModuleInfoResponse {
     /**
      * 内核模块详情
      */
-    Module: AssetCoreModuleDetail;
+    Module?: AssetCoreModuleDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9631,11 +9632,11 @@ export interface DescribeBashEventsResponse {
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 高危命令事件列表
      */
-    List: Array<BashEvent>;
+    List?: Array<BashEvent>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10082,44 +10083,44 @@ export interface AssetWebLocationInfo {
     /**
      * 域名
      */
-    Name: string;
+    Name?: string;
     /**
      * 站点端口
      */
-    Port: string;
+    Port?: string;
     /**
      * 站点协议
      */
-    Proto: string;
+    Proto?: string;
     /**
      * 服务类型
      */
-    ServiceType: string;
+    ServiceType?: string;
     /**
      * 安全模块状态：0未启用，1启用，999空，仅nginx
      */
-    SafeStatus: number;
+    SafeStatus?: number;
     /**
      * 运行用户
      */
-    User: string;
+    User?: string;
     /**
      * 主目录
      */
-    MainPath: string;
+    MainPath?: string;
     /**
      * 启动命令
      */
-    Command: string;
+    Command?: string;
     /**
      * 绑定IP
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 数据更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * ChangeRuleEventsIgnoreStatus返回参数结构体
@@ -10581,7 +10582,7 @@ export interface DescribeReverseShellEventInfoResponse {
      * 反弹shell详情信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReverseShellEventInfo: ReverseShellEventInfo;
+    ReverseShellEventInfo?: ReverseShellEventInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10633,7 +10634,7 @@ export interface CreateVulFixResponse {
     /**
      * 任务id
      */
-    FixId: number;
+    FixId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12225,11 +12226,11 @@ export interface DescribeReverseShellRulesResponse {
     /**
      * 列表内容
      */
-    List: Array<ReverseShellRule>;
+    List?: Array<ReverseShellRule>;
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12268,7 +12269,9 @@ export interface DescribeBruteAttackListRequest {
   <li>CreateEndTime - String - 是否必填：否 - 首次攻击时间筛选，结束时间</li>
   <li>ModifyBeginTime - String - 是否必填：否 - 最近攻击时间筛选，开始时间</li>
   <li>ModifyEndTime - String - 是否必填：否 - 最近攻击时间筛选，结束时间</li>
-  <li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断</li>
+  <li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-阻断成功(已完成)，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断，10-阻断成功(生效中)</li>
+  <li>DataFrom - Int - 命中规则：0-登录规则，1-情报规则</li>
+  <li>EventType - String - 是否必填：否 - 破解状态筛选：200-破解失败(密码错误),300-破解成功,400-破解失败(账号不存在)</li>
      */
     Filters?: Array<Filter>;
     /**
@@ -12981,7 +12984,7 @@ export interface DescribeMalwareRiskOverviewResponse {
     /**
      * 无
      */
-    Data: MalwareRiskOverview;
+    Data?: MalwareRiskOverview;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13035,7 +13038,7 @@ export interface DescribeAgentInstallationTokenResponse {
     /**
      * 安装命令token
      */
-    Token: string;
+    Token?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13066,7 +13069,7 @@ export interface DescribeAssetMachineTagTopResponse {
      * Top5标签及数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<AssetKeyVal>;
+    Tags?: Array<AssetKeyVal>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13247,7 +13250,7 @@ export interface AssetWebFrameBaseInfo {
      */
     Tag?: Array<MachineTag>;
     /**
-     * 数据库名
+     * Web应用名
      */
     Name?: string;
     /**
@@ -13422,7 +13425,7 @@ export interface DescribeAssetWebLocationInfoResponse {
      * 站点信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WebLocation: AssetWebLocationInfo;
+    WebLocation?: AssetWebLocationInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14364,7 +14367,7 @@ export interface DescribeAssetDatabaseInfoResponse {
     /**
      * 数据库详情
      */
-    Database: AssetDatabaseDetail;
+    Database?: AssetDatabaseDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14483,7 +14486,7 @@ export interface ReverseShell {
      */
     ParentProcPath?: string;
     /**
-     * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
+     * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略 6-已拦截
      */
     Status?: number;
     /**
@@ -14525,27 +14528,27 @@ export interface AssetAppProcessInfo {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 进程状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 进程版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 路径
      */
-    Path: string;
+    Path?: string;
     /**
      * 用户
      */
-    User: string;
+    User?: string;
     /**
      * 启动时间
      */
-    StartTime: string;
+    StartTime?: string;
 }
 /**
  * DescribeBaselineEffectHostList返回参数结构体
@@ -15630,84 +15633,84 @@ export interface AssetDatabaseDetail {
     /**
      * 主机内网IP
      */
-    MachineIp: string;
+    MachineIp?: string;
     /**
      * 主机外网IP
      */
-    MachineWanIp: string;
+    MachineWanIp?: string;
     /**
      * 主机Quuid
      */
-    Quuid: string;
+    Quuid?: string;
     /**
      * 主机Uuid
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 操作系统信息
      */
-    OsInfo: string;
+    OsInfo?: string;
     /**
      * 数据库名
      */
-    Name: string;
+    Name?: string;
     /**
      * 版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 监听端口
      */
-    Port: string;
+    Port?: string;
     /**
      * 协议
      */
-    Proto: string;
+    Proto?: string;
     /**
      * 运行用户
      */
-    User: string;
+    User?: string;
     /**
      * 绑定IP
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 配置文件路径
      */
-    ConfigPath: string;
+    ConfigPath?: string;
     /**
      * 日志文件路径
      */
-    LogPath: string;
+    LogPath?: string;
     /**
      * 数据路径
      */
-    DataPath: string;
+    DataPath?: string;
     /**
      * 运行权限
      */
-    Permission: string;
+    Permission?: string;
     /**
      * 错误日志路径
      */
-    ErrorLogPath: string;
+    ErrorLogPath?: string;
     /**
      * 插件路径
      */
-    PlugInPath: string;
+    PlugInPath?: string;
     /**
      * 二进制路径
      */
-    BinPath: string;
+    BinPath?: string;
     /**
      * 启动参数
      */
-    Param: string;
+    Param?: string;
     /**
      * 数据更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeScanTaskStatus请求参数结构体
@@ -15751,11 +15754,11 @@ export interface DescribeLoginWhiteHostListResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 服务器列表
      */
-    Hosts: Array<HostDesc>;
+    Hosts?: Array<HostDesc>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16045,17 +16048,17 @@ export interface DescribeAssetLoadInfoResponse {
      * 系统负载
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CpuLoad: AssetLoadSummary;
+    CpuLoad?: AssetLoadSummary;
     /**
      * 内存使用率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemLoad: AssetLoadSummary;
+    MemLoad?: AssetLoadSummary;
     /**
      * 硬盘使用率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiskLoad: AssetLoadSummary;
+    DiskLoad?: AssetLoadSummary;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16623,15 +16626,15 @@ export interface CreateBanWhiteListResponse {
     /**
      * 是否全局规则
      */
-    IsGlobal: boolean;
+    IsGlobal?: boolean;
     /**
      * 添加规则是否重复
      */
-    IsDuplicate: boolean;
+    IsDuplicate?: boolean;
     /**
      * 重复机器的信息
      */
-    DuplicateHosts: Array<DuplicateHosts>;
+    DuplicateHosts?: Array<DuplicateHosts>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17132,7 +17135,7 @@ export interface DescribeDefenceEventDetailResponse {
     /**
      * 漏洞事件详细信息
      */
-    Data: VulDefenceEventDetail;
+    Data?: VulDefenceEventDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17489,7 +17492,7 @@ export interface ExportAssetMachineDetailResponse {
     /**
      * 下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18060,7 +18063,7 @@ export interface DescribeAssetJarInfoResponse {
     /**
      * Jar包详情
      */
-    Jar: AssetJarDetail;
+    Jar?: AssetJarDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18161,11 +18164,11 @@ export interface DescribeLoginWhiteListResponse {
     /**
      * 记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 异地登录白名单数组
      */
-    LoginWhiteLists: Array<LoginWhiteLists>;
+    LoginWhiteLists?: Array<LoginWhiteLists>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18549,7 +18552,7 @@ export interface DescribeAssetUserCountResponse {
     /**
      * 各账号数量
      */
-    Users: Array<AssetKeyVal>;
+    Users?: Array<AssetKeyVal>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18823,48 +18826,48 @@ export interface AssetSystemPackageInfo {
     /**
      * 数据库名
      */
-    Name: string;
+    Name?: string;
     /**
      * 描述
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 安装时间
      */
-    InstallTime: string;
+    InstallTime?: string;
     /**
      * 类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 主机名称
      */
-    MachineName: string;
+    MachineName?: string;
     /**
      * 主机IP
      */
-    MachineIp: string;
+    MachineIp?: string;
     /**
      * 操作系统
      */
-    OsInfo: string;
+    OsInfo?: string;
     /**
      * 数据更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 首次采集时间
      */
-    FirstTime: string;
+    FirstTime?: string;
     /**
      * 是否新增[0:否|1:是]
      */
-    IsNew: number;
+    IsNew?: number;
     /**
      * 附加信息
      */
@@ -19060,7 +19063,7 @@ export interface AddLoginWhiteListsResponse {
      * 重复添加的提示列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DuplicateHosts: Array<DuplicateHosts>;
+    DuplicateHosts?: Array<DuplicateHosts>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19157,7 +19160,7 @@ export interface AssetWebServiceBaseInfo {
      */
     Tag?: Array<MachineTag>;
     /**
-     * 数据库名
+     * 服务名
      */
     Name?: string;
     /**
@@ -19808,7 +19811,7 @@ export interface DescribeSecurityBroadcastsRequest {
      */
     EndDate?: string;
     /**
-     * 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布，4-最佳实践
+     * 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布，4-实践教程
      */
     BroadcastType?: string;
 }
@@ -19819,12 +19822,12 @@ export interface DescribeVulDefenceEventResponse {
     /**
      * 数据总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞防御事件列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<VulDefenceEvent>;
+    List?: Array<VulDefenceEvent>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20065,12 +20068,12 @@ export interface DescribeVulEffectModulesResponse {
     /**
      * 列表总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 影响主机列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulEffectModuleInfo: Array<VulEffectModuleInfo>;
+    VulEffectModuleInfo?: Array<VulEffectModuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20208,11 +20211,11 @@ export interface DescribeAssetWebAppPluginListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Plugins: Array<AssetWebAppPluginInfo>;
+    Plugins?: Array<AssetWebAppPluginInfo>;
     /**
      * 分区总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20268,11 +20271,7 @@ export interface DescribeLoginWhiteCombinedListRequest {
      */
     Offset?: number;
     /**
-     * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-  <li>UserName - String - 是否必填：否 - 用户名筛选</li>
-  <li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li>
-  <li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li>
+     * 过滤条件。<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li><li>UserName - String - 是否必填：否 - 用户名筛选</li><li>SrcIP - String - 是否必填：否 - 来源IP筛选</li><li>Location - String - 是否必填：否 - 登录地筛选</li><li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li><li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li>
      */
     Filters?: Array<Filter>;
 }
@@ -21389,43 +21388,43 @@ export interface PrivilegeRule {
     /**
      * 规则ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 客户端ID
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 进程名
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 是否S权限
      */
-    SMode: number;
+    SMode?: number;
     /**
      * 操作人
      */
-    Operator: string;
+    Operator?: string;
     /**
      * 是否全局规则
      */
-    IsGlobal: number;
+    IsGlobal?: number;
     /**
      * 状态(0: 有效 1: 无效)
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 修改时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 主机IP
      */
-    Hostip: string;
+    Hostip?: string;
 }
 /**
  * ScanVulSetting请求参数结构体
@@ -21609,41 +21608,41 @@ export interface AssetCoreModuleDetail {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 描述
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 路径
      */
-    Path: string;
+    Path?: string;
     /**
      * 版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 大小
      */
-    Size: number;
+    Size?: number;
     /**
      * 依赖进程
      */
-    Processes: string;
+    Processes?: string;
     /**
      * 被依赖模块
      */
-    Modules: string;
+    Modules?: string;
     /**
      * 参数信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Params: Array<AssetCoreModuleParam>;
+    Params?: Array<AssetCoreModuleParam>;
     /**
      * 数据更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * ExportScanTaskDetails返回参数结构体
@@ -21796,22 +21795,22 @@ export interface DescribeAssetRecentMachineInfoResponse {
      * 总数量列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalList: Array<AssetKeyVal>;
+    TotalList?: Array<AssetKeyVal>;
     /**
      * 在线数量列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LiveList: Array<AssetKeyVal>;
+    LiveList?: Array<AssetKeyVal>;
     /**
      * 离线数量列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OfflineList: Array<AssetKeyVal>;
+    OfflineList?: Array<AssetKeyVal>;
     /**
      * 风险数量列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskList: Array<AssetKeyVal>;
+    RiskList?: Array<AssetKeyVal>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22198,7 +22197,13 @@ export interface DescribeBashRulesRequest {
     Offset?: number;
     /**
      * 过滤条件。
-  <li>Keywords - String - 是否必填：否 - 关键字(规则名称)</li>
+  <li>Name - String - 是否必填：否 - 规则名称</li>
+  <li>Rule - String - 是否必填：否 - 规则内容</li>
+  <li>Level - Int - 是否必填：否 - 威胁等级</li>
+  <li>White - Int - 是否必填：否 - 白名单类型</li>
+  <li>RuleCategory - Int - 是否必填：否 - 策略类型</li>
+  <li>BashAction - Int - 是否必填：否 - 操作动作</li>
+  <li>Status - Int - 是否必填：否 - 生效状态</li>
      */
     Filters?: Array<Filter>;
 }
@@ -22661,12 +22666,12 @@ export interface DescribeVulDefencePluginDetailResponse {
     /**
      * 数据总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞防御插件信息详情列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<VulDefencePluginDetail>;
+    List?: Array<VulDefencePluginDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22767,93 +22772,93 @@ export interface RiskDnsList {
     /**
      * 对外访问域名
      */
-    Url: string;
+    Url?: string;
     /**
      * 访问次数
      */
-    AccessCount: number;
+    AccessCount?: number;
     /**
      * 进程名
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 进程MD5
      */
-    ProcessMd5: string;
+    ProcessMd5?: string;
     /**
      * 是否为全局规则，0否，1是
      */
-    GlobalRuleId: number;
+    GlobalRuleId?: number;
     /**
      * 用户规则id
      */
-    UserRuleId: number;
+    UserRuleId?: number;
     /**
      * 状态；0-待处理，2-已加白，3-非信任状态，4-已处理，5-已忽略
      */
-    Status: number;
+    Status?: number;
     /**
      * 首次访问时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近访问时间
      */
-    MergeTime: string;
+    MergeTime?: string;
     /**
      * 唯一 Quuid
      */
-    Quuid: string;
+    Quuid?: string;
     /**
      * 主机ip
      */
-    HostIp: string;
+    HostIp?: string;
     /**
      * 别名
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 唯一ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 参考
      */
-    Reference: string;
+    Reference?: string;
     /**
      * 命令行
      */
-    CmdLine: string;
+    CmdLine?: string;
     /**
      * 进程号
      */
-    Pid: number;
+    Pid?: number;
     /**
      * 唯一UUID
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 建议方案
      */
-    SuggestScheme: string;
+    SuggestScheme?: string;
     /**
      * 标签特性
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 外网ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MachineWanIp: string;
+    MachineWanIp?: string;
     /**
      * 主机在线状态[OFFLINE:离线|ONLINE:在线|UNKNOWN:未知]
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MachineStatus: string;
+    MachineStatus?: string;
 }
 /**
  * SyncAssetScan返回参数结构体
@@ -22862,20 +22867,20 @@ export interface SyncAssetScanResponse {
     /**
      * 枚举值有(大写)：NOTASK（没有同步任务），SYNCING（同步中），FINISHED（同步完成）
      */
-    State: string;
+    State?: string;
     /**
      * 最新开始同步时间
      */
-    LatestStartTime: string;
+    LatestStartTime?: string;
     /**
      * 最新结束同步时间
      */
-    LatestEndTime: string;
+    LatestEndTime?: string;
     /**
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23150,11 +23155,11 @@ export interface DescribePrivilegeRulesResponse {
     /**
      * 列表内容
      */
-    List: Array<PrivilegeRule>;
+    List?: Array<PrivilegeRule>;
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23167,11 +23172,11 @@ export interface DescribeReverseShellEventsResponse {
     /**
      * 列表内容
      */
-    List: Array<ReverseShell>;
+    List?: Array<ReverseShell>;
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23595,7 +23600,7 @@ export interface DescribeAssetPortCountResponse {
     /**
      * 各进程数量
      */
-    Ports: Array<AssetKeyVal>;
+    Ports?: Array<AssetKeyVal>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -24449,7 +24454,7 @@ export interface AssetProcessBaseInfo {
      */
     Status?: string;
     /**
-     * 数字签名:0无，1有， 999 空，仅windows
+     * 数字签名:0无，1有， 999 空，仅Windows
      */
     HasSign?: number;
     /**
@@ -25121,18 +25126,22 @@ export interface MalwareInfo {
 export interface Place {
     /**
      * 城市 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     CityId: number;
     /**
      * 省份 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProvinceId: number;
     /**
      * 国家ID，暂只支持国内：1。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     CountryId: number;
     /**
      * 位置名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Location?: string;
 }
@@ -25169,7 +25178,7 @@ export interface DescribeHostInfoResponse {
      * 主机信息与标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostInfoList: Array<HostTagInfo>;
+    HostInfoList?: Array<HostTagInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25343,7 +25352,7 @@ export interface DescribePrivilegeEventInfoResponse {
      * 本地提权详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivilegeEventInfo: PrivilegeEventInfo;
+    PrivilegeEventInfo?: PrivilegeEventInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25764,6 +25773,26 @@ export interface EditBashRulesRequest {
      * 是否处理旧事件为白名单 0=不处理 1=处理
      */
     DealOldEvents?: number;
+    /**
+     * 策略描述
+     */
+    Descript?: string;
+    /**
+     * 生效与否  0:不生效 1:生效
+     */
+    Status?: number;
+    /**
+     * 0:告警  1:白名单  2:拦截
+     */
+    BashAction?: number;
+    /**
+     * 生效范围（0:一组quuid 1:所有专业版 2:所有专业版+旗舰版 3:所有主机）
+     */
+    Scope?: number;
+    /**
+     * 生效主机的QUUID集合
+     */
+    Quuids?: Array<string>;
 }
 /**
  * ExportIgnoreBaselineRule请求参数结构体
@@ -26745,11 +26774,11 @@ export interface ExportVulEffectHostListResponse {
      * 已废弃
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 导出任务Id , 可通过ExportTasks 接口下载
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -28070,7 +28099,7 @@ export interface DescribeBashEventsInfoResponse {
      * 事件详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BashEventsInfo: BashEventsInfo;
+    BashEventsInfo?: BashEventsInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -28456,65 +28485,65 @@ export interface DescribeVulFixStatusResponse {
      * 开始修复时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FixStartTime: string;
+    FixStartTime?: string;
     /**
      * 修复结束时间，为空表示还没结束
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FixEndTime: string;
+    FixEndTime?: string;
     /**
      * 修复成功的主机数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FixSuccessCnt: number;
+    FixSuccessCnt?: number;
     /**
      * 修复失败的主机数
      */
-    FixFailCnt: number;
+    FixFailCnt?: number;
     /**
-     * 主机总是
+     * 主机总数
      */
-    HostCnt: number;
+    HostCnt?: number;
     /**
      * 修复的任务id
      */
-    FixId: number;
+    FixId?: number;
     /**
      * 修复快照状态列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SnapshotList: Array<VulFixStatusSnapshotInfo>;
+    SnapshotList?: Array<VulFixStatusSnapshotInfo>;
     /**
      * 修复漏洞详情列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulFixList: Array<VulFixStatusInfo>;
+    VulFixList?: Array<VulFixStatusInfo>;
     /**
      * 快照创建进度0-100
      */
-    SnapshotProgress: number;
+    SnapshotProgress?: number;
     /**
-     * 修复精度 0-100
+     * 修复进度 0-100
      */
-    FixProgress: number;
+    FixProgress?: number;
     /**
      * 预计剩余时间（单位秒）
      */
-    RemainingTime: number;
+    RemainingTime?: number;
     /**
      * 快照是否是重试状态 0=非重试  1=重试
      */
-    IsRetrySnapshot: number;
+    IsRetrySnapshot?: number;
     /**
      * 快照创建失败数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SnapshotFailCnt: number;
+    SnapshotFailCnt?: number;
     /**
      * 是否允许重试 0:不允许 1：允许
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsAllowRetry: number;
+    IsAllowRetry?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -28689,6 +28718,8 @@ export interface BruteAttackInfo {
   83-不阻断(已加白名单)
   86-不阻断(系统白名单)
   87-不阻断(客户端离线)
+  88-不阻断(来源Ip归属相同客户)
+  89-不阻断(ipv6不支持阻断)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BanStatus?: number;

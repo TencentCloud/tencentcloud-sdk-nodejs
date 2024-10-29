@@ -75,6 +75,7 @@ import {
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
   UploadFilesResponse,
+  Permission,
   Agent,
   ChannelCreatePreparedPersonalEsignResponse,
   FlowApproverDetail,
@@ -106,7 +107,7 @@ import {
   CreateChannelFlowEvidenceReportRequest,
   ChannelDescribeBillUsageDetailRequest,
   ChannelCancelUserAutoSignEnableUrlRequest,
-  Permission,
+  DeleteOrganizationAuthorizationsResponse,
   DescribeExtendedServiceAuthDetailRequest,
   OrganizationAuthUrl,
   FlowBatchApproverInfo,
@@ -115,6 +116,7 @@ import {
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   CreateLegalSealQrCodeRequest,
+  CreateCloseOrganizationUrlRequest,
   SignUrlInfo,
   CommonFlowApprover,
   FillApproverInfo,
@@ -130,6 +132,7 @@ import {
   ChannelDescribeOrganizationSealsRequest,
   DescribeUsageRequest,
   DescribeExtendedServiceAuthInfoRequest,
+  CreateCloseOrganizationUrlResponse,
   DescribeChannelSealPolicyWorkflowUrlRequest,
   CreatePartnerAutoSignAuthUrlResponse,
   FlowInfo,
@@ -143,6 +146,7 @@ import {
   ResourceUrlInfo,
   ChannelCreateBatchQuickSignUrlRequest,
   ChannelCreateBoundFlowsRequest,
+  DeleteOrganizationAuthorizationInfo,
   ChannelDescribeEmployeesRequest,
   AuthorizedUser,
   Intention,
@@ -202,6 +206,7 @@ import {
   ChannelCreateReleaseFlowRequest,
   ChannelDescribeFlowComponentsResponse,
   WebThemeConfig,
+  DeleteOrganizationAuthorizationsRequest,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
@@ -1083,9 +1088,10 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      * 此接口（ChannelGetTaskResultApi）用来查询转换任务的状态。如需发起转换任务，请使用<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行资源文件的转换操作<br />
 前提条件：已调用 <a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行文件转换，并得到了返回的转换任务Id。<br />
 
-适用场景：已创建一个文件转换任务，想查询该文件转换任务的状态，或获取转换后的文件资源Id。<br />
+适用场景：已创建一个文件转换任务，想查询该文件转换任务的状态，或获取转换后的文件资源ID。<br />
 注：
-1. `大文件转换所需的时间可能会比较长`
+1. `大文件转换所需的时间可能会比较长。`
+2. `本接口返回的文件资源ID就是PDF资源ID，可以直接用于【用PDF文件创建签署流程】接口发起合同。`
      */
   async ChannelGetTaskResultApi(
     req: ChannelGetTaskResultApiRequest,
@@ -1262,7 +1268,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 
   /**
      * 发起解除协议的主要应用场景为：基于一份已经签署的合同(签署流程)，进行解除操作。
-解除协议的模板是官方提供，经过提供法务审核，暂不支持自定义。
+解除协议的模板是官方提供，经过提供法务审核，暂不支持自定义。具体用法可以参考文档[合同解除](https://qian.tencent.com/developers/partner/flow_release)。
 
 注意：
 <ul><li><code>原合同必须签署完</code>成后才能发起解除协议。</li>
@@ -1291,6 +1297,20 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelDescribeEmployeesResponse) => void
   ): Promise<ChannelDescribeEmployeesResponse> {
     return this.request("ChannelDescribeEmployees", req, cb)
+  }
+
+  /**
+     * 创建企业注销链接
+
+系统将返回操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成企业的注销操作。
+
+注意： `在调用此接口以管理企业扩展服务时，操作者（ Agent.ProxyOperator.OpenId）必须是企业的超级管理员（超管）或法人。`
+     */
+  async CreateCloseOrganizationUrl(
+    req: CreateCloseOrganizationUrlRequest,
+    cb?: (error: string, rep: CreateCloseOrganizationUrlResponse) => void
+  ): Promise<CreateCloseOrganizationUrlResponse> {
+    return this.request("CreateCloseOrganizationUrl", req, cb)
   }
 
   /**
@@ -1374,10 +1394,25 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 适用场景：
+     * **适用场景**：
 当通过模板或文件发起合同时，若未指定企业签署人信息，则可调用此接口动态补充签署人。同一签署人只允许补充一人，最终实际签署人取决于谁先领取合同完成签署。
 
-限制条件：
+**接口使用说明**：
+
+1.本接口现已支持批量补充签署人
+
+2.当<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中指定需要补充的FlowId时，可以对指定合同补充签署人；可以指定多个相同发起方的不同合同在完成批量补充
+
+3.当<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中指定需要补充的FlowId时，是对指定的合同补充多个指定的签署人
+
+4.如果同时指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，仅使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId作为补充的合同
+
+5.如果部分指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，又指定了<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId；那么<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>存在指定的FlowId，则使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，不存在则使用<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId作为补充的合同
+
+
+6.如果同时未指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，则传参错误
+
+**限制条件**：
 1. 本企业（发起方企业）企业签署人仅支持通过企业名称+姓名+手机号进行补充。
 2. 个人签署人支持通过姓名+手机号进行补充，补充动态签署人时：若个人用户已完成实名，则可通过姓名+证件号码进行补充。
      */
@@ -1440,10 +1475,18 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 获取合同流程PDF的下载链接，可以下载签署中、签署完的此子企业创建的合同
+     * 获取合同流程PDF的下载链接，可以下载签署中、签署完的此子企业创建的合同。
 
-**注意**:   
-有两种开通权限的途径
+
+
+
+### 1. 确保合同的PDF已经合成后，再调用本接口。
+ 用户创建合同或者提交签署动作后，后台需要1~3秒的时间就进行合同PDF合成或者签名，为了确保您下载的是签署完成的完整合同文件，我们建议采取下面两种方式的一种来<font color="red"><b>确保PDF已经合成完成，然后在调用本接口</b></font>。
+
+**第一种**：请确保您的系统配置了[接收合同完成通知的回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign)功能。一旦所有参与方签署完毕，我们的系统将自动向您提供的回调地址发送完成通知。
+**第二种**：通过调用我们的[获取合同信息](https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo)接口来主动检查合同的签署状态。请仅在确认合同状态为“全部签署完成”后，进行文件的下载操作。
+
+### 2. 有两种开通下载权限的途径。
 
 **第一种**:   需第三方应用的子企业登录控制台进行授权,  授权在**企业中心**的**授权管理**区域,  界面如下图。
 授权过程需要**子企业超管**扫描跳转到电子签小程序签署<<渠道端下载渠道子客合同功能授权委托书>>
@@ -1937,6 +1980,22 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: ChannelCreateUserAutoSignEnableUrlResponse) => void
   ): Promise<ChannelCreateUserAutoSignEnableUrlResponse> {
     return this.request("ChannelCreateUserAutoSignEnableUrl", req, cb)
+  }
+
+  /**
+     * 批量清理未认证的企业认证流程。
+
+此接口用来清除企业方认证信息填写错误，批量清理认证中的认证流信息。
+为接口[提交子企业批量认证链接创建任务](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks) 和[查询子企业批量认证链接](https://qian.tencent.com/developers/partnerApis/accounts/DescribeBatchOrganizationRegistrationUrls) 接口的扩展接口。即在批量认证过程中，当发起认证企业发现超管信息错误的时候，可以将当前超管下的所有认证流企业清除。
+
+注意：
+**这个接口的操作人必须跟生成批量认证链接接口的应用号一致，才可以调用，否则会返回当前操作人没有认证中的企业认证流**
+     */
+  async DeleteOrganizationAuthorizations(
+    req: DeleteOrganizationAuthorizationsRequest,
+    cb?: (error: string, rep: DeleteOrganizationAuthorizationsResponse) => void
+  ): Promise<DeleteOrganizationAuthorizationsResponse> {
+    return this.request("DeleteOrganizationAuthorizations", req, cb)
   }
 
   /**

@@ -1727,6 +1727,10 @@ export interface ReadonlyNode {
    * 指定该节点分布在哪个可用区。
    */
   Zone?: string
+  /**
+   * 升级集群版实例时，如果要调整只读节点可用区，需要指定节点id。
+   */
+  NodeId?: string
 }
 
 /**
@@ -8255,6 +8259,10 @@ export interface DeleteRotationPasswordRequest {
    * 关闭密码轮转后实例账户的最新密码
    */
   Password: string
+  /**
+   * 传入不为空则对密码进行了加密处理
+   */
+  EncryptMethod?: string
 }
 
 /**
@@ -10402,7 +10410,7 @@ export interface DeleteBackupRequest {
    */
   InstanceId: string
   /**
-   * 备份任务 ID。该任务 ID 为 [创建云数据库备份](https://cloud.tencent.com/document/api/236/15844) 接口返回的任务 ID。
+   * 备份任务 ID。您可通过 [查询数据备份文件列表](https://cloud.tencent.com/document/api/236/15842)  来获取目标备份任务 ID。
    */
   BackupId: number
 }

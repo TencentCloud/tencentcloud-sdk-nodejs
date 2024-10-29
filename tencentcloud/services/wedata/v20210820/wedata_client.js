@@ -970,6 +970,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DagInstances", req, cb);
     }
     /**
+     * 获取数据服务API的发布态信息列表
+     */
+    async DescribeDataServicePublishedApiList(req, cb) {
+        return this.request("DescribeDataServicePublishedApiList", req, cb);
+    }
+    /**
      * 修改审批单状态
      */
     async ModifyApproveStatus(req, cb) {
@@ -1221,6 +1227,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIntegrationTask(req, cb) {
         return this.request("DescribeIntegrationTask", req, cb);
+    }
+    /**
+     * 查询数据服务API的发布态信息
+     */
+    async DescribeDataServicePublishedApiDetail(req, cb) {
+        return this.request("DescribeDataServicePublishedApiDetail", req, cb);
     }
     /**
      * 查询工作流任务数

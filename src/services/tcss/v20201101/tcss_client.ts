@@ -143,6 +143,7 @@ import {
   UpdateAssetImageRegistryRegistryDetailResponse,
   ModifySecLogDeliveryKafkaSettingResponse,
   DeleteAbnormalProcessRulesResponse,
+  ImageRepoRegistryInfo,
   RuleBaseInfo,
   ProcessInfo,
   ImageInfo,
@@ -1378,7 +1379,7 @@ export class Client extends AbstractClient {
    * 镜像仓库仓库列表
    */
   async DescribeAssetImageRegistryRegistryList(
-    req?: DescribeAssetImageRegistryRegistryListRequest,
+    req: DescribeAssetImageRegistryRegistryListRequest,
     cb?: (error: string, rep: DescribeAssetImageRegistryRegistryListResponse) => void
   ): Promise<DescribeAssetImageRegistryRegistryListResponse> {
     return this.request("DescribeAssetImageRegistryRegistryList", req, cb)

@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PublishLayerVersion", req, cb);
     }
     /**
+     * 遍历域名列表信息
+     */
+    async ListCustomDomains(req, cb) {
+        return this.request("ListCustomDomains", req, cb);
+    }
+    /**
      * 删除函数版本的预置并发配置。
      */
     async DeleteProvisionedConcurrencyConfig(req, cb) {
@@ -191,6 +197,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutProvisionedConcurrencyConfig", req, cb);
     }
     /**
+     * 删除自定义域名
+     */
+    async DeleteCustomDomain(req, cb) {
+        return this.request("DeleteCustomDomain", req, cb);
+    }
+    /**
      * 更新函数的异步重试配置，包括重试次数和消息保留时间
      */
     async UpdateFunctionEventInvokeConfig(req, cb) {
@@ -242,10 +254,10 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
         return this.request("UpdateTrigger", req, cb);
     }
     /**
-     * 获取函数的最大独占配额详情。
+     * 创建自定义域名
      */
-    async GetReservedConcurrencyConfig(req, cb) {
-        return this.request("GetReservedConcurrencyConfig", req, cb);
+    async CreateCustomDomain(req, cb) {
+        return this.request("CreateCustomDomain", req, cb);
     }
     /**
      * 该接口根据传入的查询参数返回相关函数信息。
@@ -296,10 +308,28 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
         return this.request("GetAlias", req, cb);
     }
     /**
+     * 获取函数的最大独占配额详情。
+     */
+    async GetReservedConcurrencyConfig(req, cb) {
+        return this.request("GetReservedConcurrencyConfig", req, cb);
+    }
+    /**
      * 修改账号并发限制配额
      */
     async PutTotalConcurrencyConfig(req, cb) {
         return this.request("PutTotalConcurrencyConfig", req, cb);
+    }
+    /**
+     * 查看云函数自定义域名详情
+     */
+    async GetCustomDomain(req, cb) {
+        return this.request("GetCustomDomain", req, cb);
+    }
+    /**
+     * 更新自定义域名相关配置
+     */
+    async UpdateCustomDomain(req, cb) {
+        return this.request("UpdateCustomDomain", req, cb);
     }
     /**
      * 该接口根据传入参数创建新的函数。

@@ -58,6 +58,7 @@ import {
   AllocateHostsRequest,
   DescribeImageFromFamilyRequest,
   DescribeRegionsResponse,
+  ImportImageDataDisk,
   PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
   InstanceTypeConfigStatus,

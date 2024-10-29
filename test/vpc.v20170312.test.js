@@ -2308,6 +2308,16 @@ it("vpc.v20170312.ModifyCcnRouteTables", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyAddressesRenewFlag", async function () {
+    try {
+       const data = await client.ModifyAddressesRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyHighPriorityRouteECMPAlgorithm", async function () {
     try {
        const data = await client.ModifyHighPriorityRouteECMPAlgorithm({})

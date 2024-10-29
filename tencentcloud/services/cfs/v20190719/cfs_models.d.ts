@@ -821,7 +821,7 @@ export interface DescribeAvailableZoneInfoResponse {
     /**
      * 各可用区的资源售卖情况以及支持的存储类型、存储协议等信息
      */
-    RegionZones: Array<AvailableRegion>;
+    RegionZones?: Array<AvailableRegion>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1385,7 +1385,7 @@ export interface DescribeCfsSnapshotOverviewResponse {
     /**
      * 统计信息
      */
-    StatisticsList: Array<SnapshotStatistics>;
+    StatisticsList?: Array<SnapshotStatistics>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1663,7 +1663,7 @@ export interface DescribeCfsServiceStatusResponse {
     /**
      * 该用户当前 CFS 服务的状态，none 为未开通，creating 为开通中，created 为已开通
      */
-    CfsServiceStatus: string;
+    CfsServiceStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

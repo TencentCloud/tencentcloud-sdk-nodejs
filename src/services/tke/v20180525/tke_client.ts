@@ -29,6 +29,7 @@ import {
   ContainerState,
   CreateClusterRouteTableResponse,
   SubnetInfos,
+  ModifyClusterImageResponse,
   CbsVolume,
   DescribeAddonResponse,
   DescribeEKSClustersRequest,
@@ -140,6 +141,7 @@ import {
   DescribePrometheusTemplateSyncRequest,
   DescribeExternalNodeSupportConfigRequest,
   UpgradeAbleInstancesItem,
+  ModifyClusterImageRequest,
   UpgradeClusterInstancesResponse,
   CustomDriver,
   DescribeClusterAsGroupOptionRequest,
@@ -1808,6 +1810,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
   ): Promise<ModifyNodePoolInstanceTypesResponse> {
     return this.request("ModifyNodePoolInstanceTypes", req, cb)
+  }
+
+  /**
+   * 修改集群镜像
+   */
+  async ModifyClusterImage(
+    req: ModifyClusterImageRequest,
+    cb?: (error: string, rep: ModifyClusterImageResponse) => void
+  ): Promise<ModifyClusterImageResponse> {
+    return this.request("ModifyClusterImage", req, cb)
   }
 
   /**

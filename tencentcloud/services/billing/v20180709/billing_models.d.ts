@@ -1,4 +1,21 @@
 /**
+ * DescribeBillAdjustInfo返回参数结构体
+ */
+export interface DescribeBillAdjustInfoResponse {
+    /**
+     * 数据总量
+     */
+    Total?: number;
+    /**
+     * 明细数据
+     */
+    Data?: Array<AdjustInfoDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCostSummaryByProduct请求参数结构体
  */
 export interface DescribeCostSummaryByProductRequest {
@@ -449,33 +466,42 @@ export interface DescribeBillSummaryByRegionRequest {
     PayerUin?: string;
 }
 /**
- * DescribeCostSummaryByProject请求参数结构体
+ * UIN异常调整明细
  */
-export interface DescribeCostSummaryByProjectRequest {
+export interface AdjustInfoDetail {
     /**
-     * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
-     */
-    BeginTime: string;
-    /**
-     * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
-     */
-    EndTime: string;
-    /**
-     * 每次获取数据量，最大值为100
-     */
-    Limit: number;
-    /**
-     * 偏移量,默认从0开始
-     */
-    Offset: number;
-    /**
-     * 查询账单数据的用户UIN
+     * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayerUin?: string;
     /**
-     * 是否需要返回记录数量，0不需要，1需要，默认不需要
+     * 账单月份，格式：yyyy-MM
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NeedRecordNum?: number;
+    Month?: string;
+    /**
+     * 调整类型
+  调账：manualAdjustment
+  补结算：supplementarySettlement
+  重结算：reSettlement
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdjustType?: string;
+    /**
+     * 调整单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdjustNum?: string;
+    /**
+     * 异常调整完成时间，格式：yyyy-MM-dd HH:mm:ss
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdjustCompletionTime?: string;
+    /**
+     * 调整金额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdjustAmount?: number;
 }
 /**
  * DescribeAllocateConditions请求参数结构体
@@ -882,6 +908,41 @@ export interface AllocationSummaryByItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ComponentConfig?: string;
+    /**
+     * SPDeduction
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SPDeduction?: string;
+    /**
+     * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SPDeductionRate?: string;
+    /**
+     * AssociatedOrder
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssociatedOrder?: string;
+    /**
+     * 当前消费项的优惠对象，例如：官网折扣、用户折扣、活动折扣。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountObject?: string;
+    /**
+     * 当前消费项的优惠类型，例如：折扣、合同价。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountType?: string;
+    /**
+     * 对优惠类型的补充描述，例如：商务折扣8折，则优惠类型为“折扣”，优惠内容为“0.8”。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountContent?: string;
+    /**
+     * 账单月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * 按标签汇总消费详情
@@ -2964,6 +3025,16 @@ export interface AllocationSummaryByResource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ComponentConfig?: string;
+    /**
+     * SPDeduction
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SPDeduction?: string;
+    /**
+     * 账单月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * 分账账单月概览详情
@@ -3494,22 +3565,24 @@ export interface DescribeBillSummaryByProjectResponse {
     RequestId?: string;
 }
 /**
- * DescribeBillDownloadUrl返回参数结构体
+ * DescribeBillAdjustInfo请求参数结构体
  */
-export interface DescribeBillDownloadUrlResponse {
+export interface DescribeBillAdjustInfoRequest {
     /**
-     * 账单文件是否准备就绪，0文件生成中，1文件已生成
+     * 格式：yyyy-MM
+  账单月份，month和timeFrom&timeTo必传一个，如果有传timeFrom&timeTo则month字段无效
      */
-    Ready?: number;
+    Month?: string;
     /**
-     * 账单文件下载链接，有效时长为一天
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 格式：yyyy-MM-dd
+  开始时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据
      */
-    DownloadUrl?: string;
+    TimeFrom?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 格式：yyyy-MM-dd
+  截止时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据
      */
-    RequestId?: string;
+    TimeTo?: string;
 }
 /**
  * 标签信息
@@ -3674,6 +3747,11 @@ export interface DescribeAllocationBillConditionsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllocationTreeNode?: Array<AllocationTreeNode>;
+    /**
+     * 分账标签键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4582,6 +4660,36 @@ export interface AllocationDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllocationType?: number;
+    /**
+     * 当前消费项的优惠对象，例如：官网折扣、用户折扣、活动折扣。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountObject?: string;
+    /**
+     * 当前消费项的优惠类型，例如：折扣、合同价。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountType?: string;
+    /**
+     * 对优惠类型的补充描述，例如：商务折扣8折，则优惠类型为“折扣”，优惠内容为“0.8”。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiscountContent?: string;
+    /**
+     * SPDeduction
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SPDeduction?: string;
+    /**
+     * SPDeduction
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SPDeductionRate?: string;
+    /**
+     * 账单月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * 代金券相关信息
@@ -5506,6 +5614,35 @@ export interface DescribeBillResourceSummaryForOrganizationResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCostSummaryByProject请求参数结构体
+ */
+export interface DescribeCostSummaryByProjectRequest {
+    /**
+     * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+     */
+    BeginTime: string;
+    /**
+     * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+     */
+    EndTime: string;
+    /**
+     * 每次获取数据量，最大值为100
+     */
+    Limit: number;
+    /**
+     * 偏移量,默认从0开始
+     */
+    Offset: number;
+    /**
+     * 查询账单数据的用户UIN
+     */
+    PayerUin?: string;
+    /**
+     * 是否需要返回记录数量，0不需要，1需要，默认不需要
+     */
+    NeedRecordNum?: number;
+}
+/**
  * DescribeCostSummaryByResource请求参数结构体
  */
 export interface DescribeCostSummaryByResourceRequest {
@@ -5942,6 +6079,24 @@ export interface DescribeBillSummaryByRegionResponse {
  * CreateAllocationTag返回参数结构体
  */
 export interface CreateAllocationTagResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBillDownloadUrl返回参数结构体
+ */
+export interface DescribeBillDownloadUrlResponse {
+    /**
+     * 账单文件是否准备就绪，0文件生成中，1文件已生成
+     */
+    Ready?: number;
+    /**
+     * 账单文件下载链接，有效时长为一天
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

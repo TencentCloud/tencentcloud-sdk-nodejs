@@ -1578,6 +1578,16 @@ it("wedata.v20210820.DagInstances", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeDataServicePublishedApiList", async function () {
+    try {
+       const data = await client.DescribeDataServicePublishedApiList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ModifyApproveStatus", async function () {
     try {
        const data = await client.ModifyApproveStatus({})
@@ -1991,6 +2001,16 @@ it("wedata.v20210820.DescribeFolderWorkflowList", async function () {
 it("wedata.v20210820.DescribeIntegrationTask", async function () {
     try {
        const data = await client.DescribeIntegrationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDataServicePublishedApiDetail", async function () {
+    try {
+       const data = await client.DescribeDataServicePublishedApiDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -288,6 +288,16 @@ it("billing.v20180709.DescribeSavingPlanUsage", async function () {
     }
 })
 
+it("billing.v20180709.DescribeBillAdjustInfo", async function () {
+    try {
+       const data = await client.DescribeBillAdjustInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeAllocationBillDetail", async function () {
     try {
        const data = await client.DescribeAllocationBillDetail({})

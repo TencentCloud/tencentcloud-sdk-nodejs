@@ -140,8 +140,6 @@ var controlcenter_1 = require("./controlcenter");
 Object.defineProperty(exports, "controlcenter", { enumerable: true, get: function () { return controlcenter_1.controlcenter; } });
 var cpdp_1 = require("./cpdp");
 Object.defineProperty(exports, "cpdp", { enumerable: true, get: function () { return cpdp_1.cpdp; } });
-var cr_1 = require("./cr");
-Object.defineProperty(exports, "cr", { enumerable: true, get: function () { return cr_1.cr; } });
 var csip_1 = require("./csip");
 Object.defineProperty(exports, "csip", { enumerable: true, get: function () { return csip_1.csip; } });
 var csxg_1 = require("./csxg");

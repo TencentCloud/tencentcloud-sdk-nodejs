@@ -436,7 +436,7 @@ export declare class Client extends AbstractClient {
      */
     StartReplication(req: StartReplicationRequest, cb?: (error: string, rep: StartReplicationResponse) => void): Promise<StartReplicationResponse>;
     /**
-     * 调整数据库代理地址配置
+     * 本接口（AdjustCdbProxyAddress）用于调整数据库代理地址配置。
      */
     AdjustCdbProxyAddress(req: AdjustCdbProxyAddressRequest, cb?: (error: string, rep: AdjustCdbProxyAddressResponse) => void): Promise<AdjustCdbProxyAddressResponse>;
     /**

@@ -185,6 +185,7 @@ import {
   SwitchProxyVpcResponse,
   StartCLSDeliveryRequest,
   SlaveZoneAttrItem,
+  DeliverSummary,
   DescribeChangedParamsAfterUpgradeRequest,
   CLSInfo,
   SwitchProxyVpcRequest,
@@ -488,7 +489,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 给资源包绑定集群
+   * 本接口（ModifyResourcePackageClusters）用于修改资源包与集群之间的绑定关系。
    */
   async ModifyResourcePackageClusters(
     req: ModifyResourcePackageClustersRequest,
@@ -498,7 +499,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建审计规则模板
+   * 本接口（CreateAuditRuleTemplate）用于创建审计规则模板。
    */
   async CreateAuditRuleTemplate(
     req: CreateAuditRuleTemplateRequest,
@@ -548,7 +549,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * TDSQL-C for MySQL实例关闭审计服务
+   * 本接口（CloseAuditService）用于关闭 TDSQL-C MySQL 实例的数据库审计服务。
    */
   async CloseAuditService(
     req: CloseAuditServiceRequest,
@@ -628,7 +629,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeClusterDetail）显示集群详情
+   * 该接口（DescribeClusterDetail）用于显示集群详情。
    */
   async DescribeClusterDetail(
     req: DescribeClusterDetailRequest,
@@ -728,7 +729,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除日志投递
+   * 本接口（DeleteCLSDelivery）用于删除日志投递。
    */
   async DeleteCLSDelivery(
     req: DeleteCLSDeliveryRequest,
@@ -928,7 +929,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 隔离集群
+   * 本接口（IsolateCluster）用于隔离集群。
    */
   async IsolateCluster(
     req: IsolateClusterRequest,
@@ -1038,7 +1039,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群数据库列表
+   * 本接口（DescribeClusterDatabases）用于获取集群数据库列表。
    */
   async DescribeClusterDatabases(
     req: DescribeClusterDatabasesRequest,
@@ -1058,7 +1059,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买新集群
+   * 本接口（CreateClusters）用于新购集群。
    */
   async CreateClusters(
     req: CreateClustersRequest,
@@ -1268,7 +1269,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取审计实例列表
+   * 本接口（DescribeAuditInstanceList）用于获取数据库审计的实例列表。
    */
   async DescribeAuditInstanceList(
     req: DescribeAuditInstanceListRequest,
@@ -1308,7 +1309,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例日志投递信息
+   * 本接口（DescribeInstanceCLSLogDelivery）用于查询实例日志投递信息。
    */
   async DescribeInstanceCLSLogDelivery(
     req: DescribeInstanceCLSLogDeliveryRequest,
@@ -1318,7 +1319,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为集群绑定资源包
+   * 本接口（BindClusterResourcePackages）用于为集群绑定资源包。
    */
   async BindClusterResourcePackages(
     req: BindClusterResourcePackagesRequest,
@@ -1338,7 +1339,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * cynos解绑资源包
+   * 本接口（UnbindClusterResourcePackages）用于解除资源包与集群之间的绑定关系。
    */
   async UnbindClusterResourcePackages(
     req: UnbindClusterResourcePackagesRequest,
@@ -1398,7 +1399,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源包规格
+   * 本接口（DescribeResourcePackageSaleSpec）用于查询资源包规格。
    */
   async DescribeResourcePackageSaleSpec(
     req: DescribeResourcePackageSaleSpecRequest,
@@ -1518,7 +1519,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改审计规则模板
+   * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
    */
   async ModifyAuditRuleTemplates(
     req: ModifyAuditRuleTemplatesRequest,
@@ -1578,7 +1579,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * TDSQL-C for MySQL实例开通审计服务
+   * 本接口（OpenAuditService）用于为实例开通数据库审计服务。
    */
   async OpenAuditService(
     req: OpenAuditServiceRequest,
@@ -1608,7 +1609,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源包使用详情
+   * 本接口（DescribeResourcePackageDetail）用于查询资源包使用详情。
    */
   async DescribeResourcePackageDetail(
     req: DescribeResourcePackageDetailRequest,
@@ -1648,7 +1649,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源包列表
+   * 本接口（DescribeResourcePackageList）用于查询资源包列表。
    */
   async DescribeResourcePackageList(
     req: DescribeResourcePackageListRequest,
@@ -1668,7 +1669,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 退款资源包
+   * 本接口（RefundResourcePackage）用于资源包退款。
    */
   async RefundResourcePackage(
     req: RefundResourcePackageRequest,
@@ -1698,7 +1699,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理规格
+   * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
    */
   async DescribeProxySpecs(
     req: DescribeProxySpecsRequest,
@@ -1778,7 +1779,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建日志投递
+   * 本接口（CreateCLSDelivery）用于创建日志投递。
    */
   async CreateCLSDelivery(
     req: CreateCLSDeliveryRequest,
@@ -1888,7 +1889,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改资源包名称
+   * 本接口（ModifyResourcePackageName）用于修改资源包名称。
    */
   async ModifyResourcePackageName(
     req: ModifyResourcePackageNameRequest,

@@ -283,7 +283,8 @@ export interface ApplyEmbedIntervalRequest {
      */
     ProjectId?: number;
     /**
-     * 分享页面id，嵌出看板时此为空值0
+     * 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传
+  
      */
     PageId?: number;
     /**
@@ -295,7 +296,13 @@ export interface ApplyEmbedIntervalRequest {
      */
     ExtraParam?: string;
     /**
-     * panel,看板；page，页面
+     * embed：页面/看板嵌出
+  chatBIEmbed：ChatBI嵌出
+     */
+    Intention?: string;
+    /**
+     * panel, 看板；page，页面
+  project，ChatBI嵌出时
      */
     Scope?: string;
 }
@@ -378,6 +385,11 @@ export interface EmbedTokenInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GlobalParam?: string;
+    /**
+     * embed表示页面看板嵌出，chatBIEmbed表示ChatBI嵌出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Intention?: string;
 }
 /**
  * 定制化查询
@@ -729,11 +741,15 @@ export interface CreateEmbedTokenRequest {
      */
     ProjectId?: number;
     /**
-     * 分享页面id，嵌出看板时此为空值0
+     * 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传
      */
     PageId?: number;
     /**
-     * page表示嵌出页面，panel表示嵌出整个看板
+     * embed表示页面看板嵌出，chatBIEmbed表示ChatBI嵌出
+     */
+    Intention?: string;
+    /**
+     * page表示嵌出页面，panel表示嵌出整个看板，ChatBI嵌出时使用project
      */
     Scope?: string;
     /**

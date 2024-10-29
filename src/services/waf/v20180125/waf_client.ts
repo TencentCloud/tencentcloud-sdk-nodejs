@@ -291,6 +291,7 @@ import {
   DeleteAntiFakeUrlRequest,
   DescribeSpartaProtectionInfoRequest,
   CacheUrlItems,
+  ModifyUserSignatureRuleV2Request,
   ModifyWebshellStatusResponse,
   GenerateDealsAndPayNewResponse,
   DescribeCCRuleRequest,
@@ -323,6 +324,7 @@ import {
   WebshellStatus,
   DescribeSpartaProtectionInfoResponse,
   ModifyModuleStatusRequest,
+  ModifyUserSignatureRuleV2Response,
   AccessLogItems,
   ModifyInstanceNameRequest,
   DescribePortsResponse,
@@ -1499,6 +1501,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostResponse) => void
   ): Promise<DescribeHostResponse> {
     return this.request("DescribeHost", req, cb)
+  }
+
+  /**
+   * 修改用户防护规则，开启关闭具体的某条规则
+   */
+  async ModifyUserSignatureRuleV2(
+    req: ModifyUserSignatureRuleV2Request,
+    cb?: (error: string, rep: ModifyUserSignatureRuleV2Response) => void
+  ): Promise<ModifyUserSignatureRuleV2Response> {
+    return this.request("ModifyUserSignatureRuleV2", req, cb)
   }
 
   /**

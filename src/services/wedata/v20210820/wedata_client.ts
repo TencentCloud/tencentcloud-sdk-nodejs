@@ -55,6 +55,7 @@ import {
   ColumnLineageInfo,
   TaskLineageInfoPair,
   JudgeResourceFileResponse,
+  DataServicePublishedApiListFilter,
   SubmitTaskRequest,
   DescribeTableMetasRequest,
   RuleExecResultDetail,
@@ -67,7 +68,7 @@ import {
   DescribeEventCasesRequest,
   BatchResumeIntegrationTasksResponse,
   DescribeFieldBasicInfoResponse,
-  DescribeStatisticInstanceStatusTrendOpsResponse,
+  ColumnItem,
   RuleGroupExecResult,
   AlarmEventInfo,
   DescribeTaskLineageRequest,
@@ -80,7 +81,7 @@ import {
   ModifyIntegrationTaskResponse,
   DescribeDataSourceListRequest,
   DescribeInstanceByCycleResponse,
-  DescribeIntegrationStatisticsRecordsTrendRequest,
+  DataServiceRequestParam,
   DescribeDataCheckStatRequest,
   TablePropertyScore,
   GetOfflineInstanceListRequest,
@@ -145,6 +146,7 @@ import {
   MoveTasksToFolderResponse,
   UpdateWorkflowOwnerRequest,
   DescribeSchedulerTaskTypeCntResponse,
+  ProdSchedulerTask,
   DeleteCustomFunctionResponse,
   RulePage,
   DimensionScoreInfo,
@@ -213,7 +215,7 @@ import {
   ModifyRuleRequest,
   DataSourceInfo,
   FindAllFolderResponse,
-  LifecycleInfo,
+  DescribeDataServicePublishedApiListRequest,
   ResourcePathTree,
   DescribeRuleExecLogResponse,
   ParamInfo,
@@ -221,8 +223,10 @@ import {
   TableMetaProperty,
   BatchDeleteIntegrationTasksRequest,
   KillOpsMakePlanInstancesResponse,
+  DataServiceResponseParam,
   TaskLogRequest,
   OpsTaskLinkInfoDto,
+  ScriptInfoResponse,
   DescribeIntegrationStatisticsTaskStatusRequest,
   GetFileInfoResponse,
   BaseUser,
@@ -242,8 +246,10 @@ import {
   PairDto,
   CosTokenResponse,
   DeleteTaskDsResponse,
+  LifecycleInfo,
   DescribeAllByFolderNewResponse,
   DescribeDsParentFolderTreeRequest,
+  DescribeDataServicePublishedApiListResp,
   KillScheduleInstancesResponse,
   TablePartition,
   DescribeWorkflowTaskCountRequest,
@@ -316,6 +322,7 @@ import {
   DescribeIntegrationTasksResponse,
   DeleteProjectUsersResponse,
   DescribeAlarmReceiverRequest,
+  DescribeStatisticInstanceStatusTrendOpsResponse,
   SchedulerTaskInstanceInfo,
   DescribeSchedulerTaskCntByStatusResponse,
   TaskExtInfo,
@@ -431,20 +438,21 @@ import {
   DeleteFilePathRequest,
   DescribeRulesByPageRequest,
   DescribeTopTableStatResponse,
-  ProdSchedulerTask,
+  DescribeDataServicePublishedApiDetailRequest,
   WorkflowSchedulerOpsDto,
   SourceFieldInfo,
   DeleteDsFolderRequest,
   SaveCustomFunctionResponse,
   ModifyDsFolderRequest,
   AdhocRecord,
+  DescribeDataServicePublishedApiListResponse,
   TriggerDsEventResponse,
   EventBatchCaseDTO,
   CreateTaskRequest,
   DescribeDatabaseMetasRequest,
   SearchColumnDocVO,
   SimpleTaskInfo,
-  DescribeSchedulerTaskCntByStatusRequest,
+  DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
   DescribeWorkflowSchedulerInfoDsRequest,
   DescribeDependTaskListsResponse,
@@ -483,6 +491,7 @@ import {
   DescribePendingSubmitTaskListRequest,
   TriggerEventResponse,
   TaskAlarmInfo,
+  DescribeSchedulerTaskCntByStatusRequest,
   ModifyApproveStatusRequest,
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
@@ -498,7 +507,7 @@ import {
   DlcMergeManifestsInfo,
   DescribeWorkflowListByProjectIdRequest,
   AlarmIndicatorInfo,
-  ColumnItem,
+  DescribeDataServicePublishedApiDetailResponse,
   TableMeta,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
@@ -643,6 +652,7 @@ import {
   RuleFieldConfig,
   CheckTaskNameExistResponse,
   DescribeSchedulerRunTimeInstanceCntByStatusRequest,
+  DataServiceRequestListOrder,
   StrToStrMap,
   WorkflowCanvasOpsDto,
   DlcRemoveOrphanFilesInfo,
@@ -655,7 +665,7 @@ import {
   DescribeInstanceLastLogResponse,
   TableHeat,
   DescribeExecStrategyRequest,
-  ScriptInfoResponse,
+  DescribeDataServicePublishedApiDetailResp,
   CreateHiveTableRequest,
   AiopsScriptInfo,
   BatchKillIntegrationTaskInstancesResponse,
@@ -2321,6 +2331,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取数据服务API的发布态信息列表
+   */
+  async DescribeDataServicePublishedApiList(
+    req: DescribeDataServicePublishedApiListRequest,
+    cb?: (error: string, rep: DescribeDataServicePublishedApiListResponse) => void
+  ): Promise<DescribeDataServicePublishedApiListResponse> {
+    return this.request("DescribeDataServicePublishedApiList", req, cb)
+  }
+
+  /**
    * 修改审批单状态
    */
   async ModifyApproveStatus(
@@ -2739,6 +2759,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationTaskResponse) => void
   ): Promise<DescribeIntegrationTaskResponse> {
     return this.request("DescribeIntegrationTask", req, cb)
+  }
+
+  /**
+   * 查询数据服务API的发布态信息
+   */
+  async DescribeDataServicePublishedApiDetail(
+    req: DescribeDataServicePublishedApiDetailRequest,
+    cb?: (error: string, rep: DescribeDataServicePublishedApiDetailResponse) => void
+  ): Promise<DescribeDataServicePublishedApiDetailResponse> {
+    return this.request("DescribeDataServicePublishedApiDetail", req, cb)
   }
 
   /**

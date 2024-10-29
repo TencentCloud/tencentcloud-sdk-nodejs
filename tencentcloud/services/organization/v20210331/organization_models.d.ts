@@ -73,17 +73,17 @@ export interface ListRoleConfigurationsRequest {
     PrincipalId?: string;
 }
 /**
- * GetProvisioningTaskStatus返回参数结构体
+ * DeleteSCIMCredential请求参数结构体
  */
-export interface GetProvisioningTaskStatusResponse {
+export interface DeleteSCIMCredentialRequest {
     /**
-     * 任务状态信息。
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
      */
-    TaskStatus?: TaskStatus;
+    ZoneId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。
      */
-    RequestId?: string;
+    CredentialId: string;
 }
 /**
  * ListGroupMembers返回参数结构体
@@ -808,6 +808,10 @@ export interface CreateGroupRequest {
      * 用户组的描述。  长度：最大 1024 个字符。
      */
     Description?: string;
+    /**
+     * 用户组类型  Manual：手动创建，Synchronized：外部导入
+     */
+    GroupType?: string;
 }
 /**
  * ListUsers返回参数结构体
@@ -908,6 +912,35 @@ export interface ProvisionRoleConfigurationResponse {
      * 任务详情。
      */
     Task?: RoleProvisioningsTask;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ListUserSyncProvisionings返回参数结构体
+ */
+export interface ListUserSyncProvisioningsResponse {
+    /**
+     * 查询返回结果下一页的令牌。  说明 只有IsTruncated为true时，才显示该参数。
+     */
+    NextToken?: string;
+    /**
+     * 符合请求参数条件的数据总条数。
+     */
+    TotalCounts?: number;
+    /**
+     * 每页的最大数据条数。
+     */
+    MaxResults?: number;
+    /**
+     * 返回结果是否被截断。取值：  true：已截断。 false：未截断。
+     */
+    IsTruncated?: boolean;
+    /**
+     * CAM同步的用户列表。
+     */
+    UserProvisionings?: Array<UserProvisioning>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1473,19 +1506,6 @@ export interface CreateRoleAssignmentRequest {
     RoleAssignmentInfo?: Array<RoleAssignmentInfo>;
 }
 /**
- * CreateUser返回参数结构体
- */
-export interface CreateUserResponse {
-    /**
-     * 用户详情
-     */
-    UserInfo?: UserInfo;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DeleteShareUnitResources请求参数结构体
  */
 export interface DeleteShareUnitResourcesRequest {
@@ -1795,6 +1815,15 @@ export interface ManagerShareUnit {
     ShareScope?: number;
 }
 /**
+ * UpdateSCIMCredentialStatus返回参数结构体
+ */
+export interface UpdateSCIMCredentialStatusResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 共享单元资源
  */
 export interface ShareUnitResource {
@@ -1945,25 +1974,49 @@ export interface CreateOrganizationMemberResponse {
     RequestId?: string;
 }
 /**
- * UpdateCustomPolicyForRoleConfiguration请求参数结构体
+ * 成员账号的授权详情
  */
-export interface UpdateCustomPolicyForRoleConfigurationRequest {
+export interface RoleAssignments {
     /**
-     * 空间 ID
+     * 权限配置ID。
      */
-    ZoneId: string;
+    RoleConfigurationId?: string;
     /**
-     * 权限配置 ID
+     * 权限配置名称。
      */
-    RoleConfigurationId: string;
+    RoleConfigurationName?: string;
     /**
-     * 权限策略名称，长度最大为 32 个字符。
+     * 集团账号目标账号的UIN。
      */
-    CustomPolicyName: string;
+    TargetUin?: number;
     /**
-     * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
+     * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号。
      */
-    NewCustomPolicyDocument?: string;
+    TargetType?: string;
+    /**
+     * CAM 用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC 用户组 ID（g-********）。 当PrincipalType取值为User时，该值为CIC 用户 ID（u-********）。
+     */
+    PrincipalId?: string;
+    /**
+     * CAM 用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。
+     */
+    PrincipalType?: string;
+    /**
+     * 用户名称或者用户组名称
+     */
+    PrincipalName?: string;
+    /**
+     * 创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间。
+     */
+    UpdateTime?: string;
+    /**
+     * 集团账号目标账号的名称。
+     */
+    TargetName?: string;
 }
 /**
  * MoveOrganizationNodeMembers请求参数结构体
@@ -2192,6 +2245,23 @@ export interface ListOrganizationIdentityResponse {
     RequestId?: string;
 }
 /**
+ * 共享地域
+ */
+export interface ShareArea {
+    /**
+     * 地域名称。
+     */
+    Name?: string;
+    /**
+     * 地域标识。
+     */
+    Area?: string;
+    /**
+     * 地域ID。
+     */
+    AreaId?: number;
+}
+/**
  * DeletePolicy请求参数结构体
  */
 export interface DeletePolicyRequest {
@@ -2271,49 +2341,17 @@ export interface GroupInfo {
     IsSelected?: boolean;
 }
 /**
- * 成员账号的授权详情
+ * GetSCIMSynchronizationStatus返回参数结构体
  */
-export interface RoleAssignments {
+export interface GetSCIMSynchronizationStatusResponse {
     /**
-     * 权限配置ID。
+     * SCIM 同步状态。Enabled：启用。 Disabled：禁用。
      */
-    RoleConfigurationId?: string;
+    SCIMSynchronizationStatus?: string;
     /**
-     * 权限配置名称。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    RoleConfigurationName?: string;
-    /**
-     * 集团账号目标账号的UIN。
-     */
-    TargetUin?: number;
-    /**
-     * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号。
-     */
-    TargetType?: string;
-    /**
-     * CAM 用户同步的身份 ID。取值： 当PrincipalType取值为Group时，该值为CIC 用户组 ID（g-********）。 当PrincipalType取值为User时，该值为CIC 用户 ID（u-********）。
-     */
-    PrincipalId?: string;
-    /**
-     * CAM 用户同步的身份类型。取值： User：表示该 CAM 用户同步的身份是CIC用户。 Group：表示该 CAM 用户同步的身份是CIC用户组。
-     */
-    PrincipalType?: string;
-    /**
-     * 用户名称或者用户组名称
-     */
-    PrincipalName?: string;
-    /**
-     * 创建时间。
-     */
-    CreateTime?: string;
-    /**
-     * 更新时间。
-     */
-    UpdateTime?: string;
-    /**
-     * 集团账号目标账号的名称。
-     */
-    TargetName?: string;
+    RequestId?: string;
 }
 /**
  * GetZoneStatistics请求参数结构体
@@ -2571,6 +2609,19 @@ export interface OpenIdentityCenterRequest {
     ZoneName: string;
 }
 /**
+ * GetProvisioningTaskStatus返回参数结构体
+ */
+export interface GetProvisioningTaskStatusResponse {
+    /**
+     * 任务状态信息。
+     */
+    TaskStatus?: TaskStatus;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeOrganizationMemberAuthAccounts请求参数结构体
  */
 export interface DescribeOrganizationMemberAuthAccountsRequest {
@@ -2590,6 +2641,35 @@ export interface DescribeOrganizationMemberAuthAccountsRequest {
      * 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
      */
     PolicyId: number;
+}
+/**
+ * SCIM密钥
+ */
+export interface SCIMCredential {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId?: string;
+    /**
+     * SCIM密钥状态，Enabled已开启，Disabled已关闭。
+     */
+    Status?: string;
+    /**
+     * SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。
+     */
+    CredentialId?: string;
+    /**
+     * SCIM密钥类型。
+     */
+    CredentialType?: string;
+    /**
+     * SCIM 密钥的创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * SCIM 密钥的过期时间。
+     */
+    ExpireTime?: string;
 }
 /**
  * GetUser请求参数结构体
@@ -2800,6 +2880,15 @@ export interface ListRoleConfigurationProvisioningsRequest {
      * 支持配置名称搜索。
      */
     Filter?: string;
+}
+/**
+ * GetSCIMSynchronizationStatus请求参数结构体
+ */
+export interface GetSCIMSynchronizationStatusRequest {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId: string;
 }
 /**
  * 组织身份
@@ -3119,6 +3208,10 @@ export interface ListGroupsRequest {
      * 排序类型：Desc 倒序 Asc  正序，需要你和SortField一起设置
      */
     SortType?: string;
+    /**
+     * 翻页offset. 不要与NextToken同时使用，优先使用NextToken
+     */
+    Offset?: number;
 }
 /**
  * UpdateRoleConfiguration请求参数结构体
@@ -3751,6 +3844,19 @@ export interface CreateOrganizationMemberPolicyResponse {
     RequestId?: string;
 }
 /**
+ * UpdateSCIMSynchronizationStatus请求参数结构体
+ */
+export interface UpdateSCIMSynchronizationStatusRequest {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId: string;
+    /**
+     * SCIM 同步状态。Enabled：启用。Disabled：禁用。
+     */
+    SCIMSynchronizationStatus: string;
+}
+/**
  * AcceptJoinShareUnitInvitation请求参数结构体
  */
 export interface AcceptJoinShareUnitInvitationRequest {
@@ -3971,6 +4077,10 @@ export interface ListUsersRequest {
      * 排序类型：Desc 倒序 Asc  正序，需要你和SortField一起设置
      */
     SortType?: string;
+    /**
+     * 翻页offset. 不要与NextToken同时使用，优先使用NextToken
+     */
+    Offset?: number;
 }
 /**
  * DescribeOrganizationMemberAuthIdentities返回参数结构体
@@ -4085,6 +4195,10 @@ export interface CreateUserRequest {
      * 用户的状态。取值：  Enabled（默认值）：启用。 Disabled：禁用。
      */
     UserStatus?: string;
+    /**
+     * 用户类型  Manual：手动创建，Synchronized：外部导入
+     */
+    UserType?: string;
 }
 /**
  * QuitOrganization返回参数结构体
@@ -4408,6 +4522,15 @@ export interface AuthRelationFile {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Url: string;
+}
+/**
+ * UpdateSCIMSynchronizationStatus返回参数结构体
+ */
+export interface UpdateSCIMSynchronizationStatusResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreatePolicy请求参数结构体
@@ -5079,6 +5202,23 @@ export interface ListRoleConfigurationsResponse {
     RequestId?: string;
 }
 /**
+ * ListSCIMCredentials返回参数结构体
+ */
+export interface ListSCIMCredentialsResponse {
+    /**
+     * SCIM密钥数量。
+     */
+    TotalCounts?: number;
+    /**
+     * SCIM 密钥信息。
+     */
+    SCIMCredentials?: Array<SCIMCredential>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeOrganizationNodes请求参数结构体
  */
 export interface DescribeOrganizationNodesRequest {
@@ -5094,6 +5234,27 @@ export interface DescribeOrganizationNodesRequest {
      * 部门标签搜索列表，最大10个
      */
     Tags?: Array<Tag>;
+}
+/**
+ * UpdateCustomPolicyForRoleConfiguration请求参数结构体
+ */
+export interface UpdateCustomPolicyForRoleConfigurationRequest {
+    /**
+     * 空间 ID
+     */
+    ZoneId: string;
+    /**
+     * 权限配置 ID
+     */
+    RoleConfigurationId: string;
+    /**
+     * 权限策略名称，长度最大为 32 个字符。
+     */
+    CustomPolicyName: string;
+    /**
+     * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
+     */
+    NewCustomPolicyDocument?: string;
 }
 /**
  * InviteOrganizationMember返回参数结构体
@@ -5154,38 +5315,22 @@ export interface DescribeShareAreasResponse {
     RequestId?: string;
 }
 /**
- * DeleteShareUnitResources返回参数结构体
+ * CreateUser返回参数结构体
  */
-export interface DeleteShareUnitResourcesResponse {
+export interface CreateUserResponse {
+    /**
+     * 用户详情
+     */
+    UserInfo?: UserInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * ListUserSyncProvisionings返回参数结构体
+ * DeleteShareUnitResources返回参数结构体
  */
-export interface ListUserSyncProvisioningsResponse {
-    /**
-     * 查询返回结果下一页的令牌。  说明 只有IsTruncated为true时，才显示该参数。
-     */
-    NextToken?: string;
-    /**
-     * 符合请求参数条件的数据总条数。
-     */
-    TotalCounts?: number;
-    /**
-     * 每页的最大数据条数。
-     */
-    MaxResults?: number;
-    /**
-     * 返回结果是否被截断。取值：  true：已截断。 false：未截断。
-     */
-    IsTruncated?: boolean;
-    /**
-     * CAM同步的用户列表。
-     */
-    UserProvisionings?: Array<UserProvisioning>;
+export interface DeleteShareUnitResourcesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5244,6 +5389,15 @@ export interface DeleteOrganizationMembersPolicyRequest {
      * 访问策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
      */
     PolicyId: number;
+}
+/**
+ * CreateSCIMCredential请求参数结构体
+ */
+export interface CreateSCIMCredentialRequest {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId: string;
 }
 /**
  * DescribePolicy请求参数结构体
@@ -5534,6 +5688,43 @@ export interface AddUserToGroupResponse {
     RequestId?: string;
 }
 /**
+ * CreateSCIMCredential返回参数结构体
+ */
+export interface CreateSCIMCredentialResponse {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母。
+     */
+    ZoneId?: string;
+    /**
+     * SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。
+     */
+    CredentialId?: string;
+    /**
+     * SCIM密钥类型。
+     */
+    CredentialType?: string;
+    /**
+     * SCIM 密钥的创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * SCIM 密钥的过期时间。
+     */
+    ExpireTime?: string;
+    /**
+     * SCIM密钥状态，Enabled已开启，Disabled已关闭。
+     */
+    CredentialStatus?: string;
+    /**
+     * SCIM密钥。
+     */
+    CredentialSecret?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 产品资源
  */
 export interface ProductResource {
@@ -5724,6 +5915,36 @@ export interface UserProvisioning {
     TargetType?: string;
 }
 /**
+ * ListSCIMCredentials请求参数结构体
+ */
+export interface ListSCIMCredentialsRequest {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId: string;
+    /**
+     * SCIM密钥ID
+     */
+    CredentialId?: string;
+}
+/**
+ * UpdateSCIMCredentialStatus请求参数结构体
+ */
+export interface UpdateSCIMCredentialStatusRequest {
+    /**
+     * 空间ID。z-前缀开头，后面是12位随机数字/小写字母
+     */
+    ZoneId: string;
+    /**
+     * SCIM密钥ID。scimcred-前缀开头，后面是12位随机数字/小写字母。
+     */
+    CredentialId: string;
+    /**
+     * SCIM密钥状态。Enabled：启用。 Disabled：禁用。
+     */
+    NewStatus: string;
+}
+/**
  * saml 身份提供商配置信息。
  */
 export interface SAMLIdentityProviderConfiguration {
@@ -5792,21 +6013,17 @@ export interface UpdateUserSyncProvisioningResponse {
     RequestId?: string;
 }
 /**
- * 共享地域
+ * CreateGroup返回参数结构体
  */
-export interface ShareArea {
+export interface CreateGroupResponse {
     /**
-     * 地域名称。
+     * 用户组信息。
      */
-    Name?: string;
+    GroupInfo?: GroupInfo;
     /**
-     * 地域标识。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Area?: string;
-    /**
-     * 地域ID。
-     */
-    AreaId?: number;
+    RequestId?: string;
 }
 /**
  * UpdateZone请求参数结构体
@@ -5831,13 +6048,9 @@ export interface DeleteAccountResponse {
     RequestId?: string;
 }
 /**
- * CreateGroup返回参数结构体
+ * DeleteSCIMCredential返回参数结构体
  */
-export interface CreateGroupResponse {
-    /**
-     * 用户组信息。
-     */
-    GroupInfo?: GroupInfo;
+export interface DeleteSCIMCredentialResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

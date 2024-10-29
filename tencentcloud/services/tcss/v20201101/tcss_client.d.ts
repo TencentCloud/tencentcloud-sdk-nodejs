@@ -215,7 +215,7 @@ export declare class Client extends AbstractClient {
     /**
      * 镜像仓库仓库列表
      */
-    DescribeAssetImageRegistryRegistryList(req?: DescribeAssetImageRegistryRegistryListRequest, cb?: (error: string, rep: DescribeAssetImageRegistryRegistryListResponse) => void): Promise<DescribeAssetImageRegistryRegistryListResponse>;
+    DescribeAssetImageRegistryRegistryList(req: DescribeAssetImageRegistryRegistryListRequest, cb?: (error: string, rep: DescribeAssetImageRegistryRegistryListResponse) => void): Promise<DescribeAssetImageRegistryRegistryListResponse>;
     /**
      * 运行时文件查杀事件列表导出
      */

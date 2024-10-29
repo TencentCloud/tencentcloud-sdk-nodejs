@@ -149,11 +149,11 @@ export interface ErrorDetails {
    * 用户信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: string
+  UserId?: string
   /**
    * 失败原因
    */
-  Error: string
+  Error?: string
 }
 
 /**
@@ -203,32 +203,32 @@ export interface UserGroup {
   /**
    * 用户组ID
    */
-  UserGroupId: string
+  UserGroupId?: string
   /**
    * 用户组名称
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 用户组描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 用户目录ID
    */
-  UserStoreId: string
+  UserStoreId?: string
   /**
    * 租户ID
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 创建时间
    */
-  CreatedDate: number
+  CreatedDate?: number
   /**
    * 最近更新时间
    */
-  LastModifyDate: number
+  LastModifyDate?: number
 }
 
 /**
@@ -238,58 +238,58 @@ export interface UserStore {
   /**
    * 租户ID
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 用户池logo
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreLogo: string
+  UserStoreLogo?: string
   /**
    * 用户池描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreDesc: string
+  UserStoreDesc?: string
   /**
    * 用户池名称
    */
-  UserStoreName: string
+  UserStoreName?: string
   /**
    * 用户数量
    */
-  UserNum: number
+  UserNum?: number
   /**
    * 用户池ID
    */
-  UserStoreId: string
+  UserStoreId?: string
   /**
    * 应用数量
    */
-  AppNum: number
+  AppNum?: number
   /**
    * 上次切换的用户池
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastStatus: boolean
+  LastStatus?: boolean
   /**
    * 默认用户池
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultStatus: boolean
+  DefaultStatus?: boolean
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateDate: number
+  CreateDate?: number
   /**
    * 上次切换时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastStatusTime: number
+  LastStatusTime?: number
   /**
    * 用户目录域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreProtocolHost: string
+  UserStoreProtocolHost?: string
 }
 
 /**
@@ -464,12 +464,12 @@ export interface FailedUsers {
    * 失败用户标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedUserIdentification: string
+  FailedUserIdentification?: string
   /**
    * 导入的用户失败原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedReason: string
+  FailedReason?: string
 }
 
 /**
@@ -505,7 +505,7 @@ export interface CreateUserResponse {
    * 创建的用户信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  User: User
+  User?: User
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -573,7 +573,7 @@ export interface ResetPasswordResponse {
   /**
    * 重置后的用户密码
    */
-  Password: string
+  Password?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -622,7 +622,7 @@ export interface ListUserByPropertyResponse {
    * 用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Users: Array<User>
+  Users?: Array<User>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -674,7 +674,7 @@ export interface DescribeUserByIdResponse {
    * 用户信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  User: User
+  User?: User
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -698,7 +698,7 @@ export interface Job {
   /**
    * 任务ID
    */
-  Id: string
+  Id?: string
   /**
    * 任务状态
 
@@ -707,18 +707,18 @@ export interface Job {
 <li> **COMPLETED** </li>  完成
 <li> **FAILED** </li>  失败
    */
-  Status: string
+  Status?: string
   /**
    * 任务类型
 
 <li> **IMPORT_USER** </li>  用户导入
 <li> **EXPORT_USER** </li>  用户导出
    */
-  Type: string
+  Type?: string
   /**
    * 任务创建时间
    */
-  CreatedDate: number
+  CreatedDate?: number
   /**
    * 任务的数据类型
 
@@ -726,22 +726,22 @@ export interface Job {
 <li> **CSV** </li>  Comma-Separated Values
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Format: string
+  Format?: string
   /**
    * 任务结果下载地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Location: string
+  Location?: string
   /**
    * 失败详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorDetails: Array<ErrorDetails>
+  ErrorDetails?: Array<ErrorDetails>
   /**
    * 失败的用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedUsers: Array<FailedUsers>
+  FailedUsers?: Array<FailedUsers>
 }
 
 /**
@@ -1006,17 +1006,17 @@ export interface AppAssociatedUserGroupIds {
    * 用户组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserGroupId: string
+  UserGroupId?: string
   /**
    * 应用id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationId: string
+  ApplicationId?: string
   /**
    * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationName: string
+  ApplicationName?: string
 }
 
 /**
@@ -1049,12 +1049,12 @@ export interface UserGroupDeleteResp {
    * 错误详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 用户组关联的应用信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppAssociatedUserGroupIds: Array<AppAssociatedUserGroupIds>
+  AppAssociatedUserGroupIds?: Array<AppAssociatedUserGroupIds>
 }
 
 /**
@@ -1079,7 +1079,7 @@ export interface DeleteUserGroupsResponse {
    * 删除的用户组关联的应用信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserGroupDeletedInfo: UserGroupDeleteResp
+  UserGroupDeletedInfo?: UserGroupDeleteResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1094,17 +1094,17 @@ export interface ListUserGroupsResponse {
    * 用户组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<UserGroup>
+  Content?: Array<UserGroup>
   /**
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 分页
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pageable: Pageable
+  Pageable?: Pageable
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1119,7 +1119,7 @@ export interface UpdateUserResponse {
    * 更新之后的用户信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  User: User
+  User?: User
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1206,7 +1206,7 @@ export interface ListJobsResponse {
    * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobSet: Array<Job>
+  JobSet?: Array<Job>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1354,7 +1354,7 @@ export interface CreateFileExportUserJobResponse {
   /**
    * 数据流任务
    */
-  Job: Job
+  Job?: Job
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1368,7 +1368,7 @@ export interface CreateApiImportUserJobResponse {
   /**
    * 数据流任务
    */
-  Job: Job
+  Job?: Job
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1517,7 +1517,7 @@ export interface ListUserStoreResponse {
    * 用户目录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreSet: Array<UserStore>
+  UserStoreSet?: Array<UserStore>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1532,17 +1532,17 @@ export interface DescribeUserResponse {
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 分页对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pageable: Pageable
+  Pageable?: Pageable
   /**
    * 用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<User>
+  Content?: Array<User>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1557,17 +1557,17 @@ export interface ListUserResponse {
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 分页对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pageable: Pageable
+  Pageable?: Pageable
   /**
    * 用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<User>
+  Content?: Array<User>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1581,32 +1581,32 @@ export interface LogMessage {
   /**
    * 日志标识
    */
-  LogId: string
+  LogId?: string
   /**
    * 租户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 用户池ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserStoreId: string
+  UserStoreId?: string
   /**
    * 事件编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventCode: string
+  EventCode?: string
   /**
    * 事件发生时间戳，单位：毫秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventDate: number
+  EventDate?: number
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 事件参与者
 
@@ -1614,57 +1614,62 @@ export interface LogMessage {
 <li> **USER** </li>  用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Participant: string
+  Participant?: string
   /**
    * 应用clientId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationClientId: string
+  ApplicationClientId?: string
   /**
    * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationName: string
+  ApplicationName?: string
   /**
    * 认证源ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthSourceId: string
+  AuthSourceId?: string
   /**
    * 认证源名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthSourceName: string
+  AuthSourceName?: string
   /**
    * 认证源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthSourceType: string
+  AuthSourceType?: string
   /**
    * 认证源类别
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthSourceCategory: string
+  AuthSourceCategory?: string
   /**
    * IP地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip: string
+  Ip?: string
   /**
    * 用户代理
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAgent: string
+  UserAgent?: string
   /**
    * 用户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: string
+  UserId?: string
   /**
    * 详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Detail: string
+  Detail?: string
+  /**
+   * 日志结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionResult?: string
 }
 
 /**
@@ -1674,16 +1679,16 @@ export interface ListLogMessageByConditionResponse {
   /**
    * 总条数
    */
-  Total: number
+  Total?: number
   /**
    * 分页对象
    */
-  Pageable: Pageable
+  Pageable?: Pageable
   /**
    * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<LogMessage>
+  Content?: Array<LogMessage>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

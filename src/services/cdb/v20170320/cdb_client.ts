@@ -1494,7 +1494,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调整数据库代理地址配置
+   * 本接口（AdjustCdbProxyAddress）用于调整数据库代理地址配置。
    */
   async AdjustCdbProxyAddress(
     req: AdjustCdbProxyAddressRequest,

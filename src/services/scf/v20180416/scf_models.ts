@@ -60,6 +60,17 @@ export interface UpdateAliasRequest {
 }
 
 /**
+ * 证书配置
+ */
+export interface CertConf {
+  /**
+   * ssl证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateId?: string
+}
+
+/**
  * 触发器类型
  */
 export interface Trigger {
@@ -209,6 +220,16 @@ export interface RoutingConfig {
 }
 
 /**
+ * UpdateCustomDomain返回参数结构体
+ */
+export interface UpdateCustomDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProvisionedConcurrencyConfig返回参数结构体
  */
 export interface DeleteProvisionedConcurrencyConfigResponse {
@@ -230,6 +251,36 @@ export interface VersionWeight {
    * 该版本的权重
    */
   Weight: number
+}
+
+/**
+ * GetCustomDomain返回参数结构体
+ */
+export interface GetCustomDomainResponse {
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 路由配置
+   */
+  EndpointsConfig?: Array<EndpointsConf>
+  /**
+   * 证书配置信息
+   */
+  CertConfig?: CertConf
+  /**
+   * web 应用防火墙配置
+   */
+  WafConfig?: WafConf
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -354,6 +405,35 @@ export interface UsageInfo {
 }
 
 /**
+ * 云函数自定义域名详情
+ */
+export interface DomainInfo {
+  /**
+   * 域名，不支持泛域名
+   */
+  Domain: string
+  /**
+   * 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS
+   */
+  Protocol?: string
+  /**
+   * 路由配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointsConfig?: Array<EndpointsConf>
+  /**
+   * 证书配置信息，HTTPS协议必传路由配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertConfig?: CertConf
+  /**
+   * web 应用防火墙配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafConfig?: WafConf
+}
+
+/**
  * 基于TKE的资源池选项
  */
 export interface NamespaceResourceEnvTKE {
@@ -414,6 +494,25 @@ export interface PublicNetConfigIn {
 }
 
 /**
+ * ListCustomDomains返回参数结构体
+ */
+export interface ListCustomDomainsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 域名列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domains?: Array<DomainInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProvisionedConcurrencyConfig请求参数结构体
  */
 export interface DeleteProvisionedConcurrencyConfigRequest {
@@ -439,6 +538,16 @@ export interface DeleteReservedConcurrencyConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetCustomDomain请求参数结构体
+ */
+export interface GetCustomDomainRequest {
+  /**
+   * 域名
+   */
+  Domain?: string
 }
 
 /**
@@ -576,17 +685,24 @@ export interface GetFunctionLogsRequest {
 }
 
 /**
- * 状态原因描述
+ * 路径路由重写规则
  */
-export interface StatusReason {
+export interface PathRewriteRule {
   /**
-   * 错误码
+   * 需要重路由的路径，取值规范：/，/*，/xxx，/xxx/a，/xxx/*
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorCode: string
+  Path: string
   /**
-   * 错误描述
+   * 匹配规，取值范围： WildcardRules 通配符匹配， ExactRules 精确匹配
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  Type: string
+  /**
+   * 替换值：比如/, /$
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rewrite: string
 }
 
 /**
@@ -759,6 +875,37 @@ export interface GetFunctionRequest {
    * 是否显示代码, TRUE表示显示代码，FALSE表示不显示代码,大于1M的入口文件不会显示
    */
   ShowCode?: string
+}
+
+/**
+ * 后端路由配置信息
+ */
+export interface EndpointsConf {
+  /**
+   * 函数命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace: string
+  /**
+   * 函数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FunctionName: string
+  /**
+   * 函数别名或版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qualifier: string
+  /**
+   * 路径,取值规范：/，/*，/xxx，/xxx/a，/xxx/*"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathMatch: string
+  /**
+   * 路径重写策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathRewrite?: Array<PathRewriteRule>
 }
 
 /**
@@ -1104,6 +1251,32 @@ export interface GetProvisionedConcurrencyConfigRequest {
 }
 
 /**
+ * UpdateCustomDomain请求参数结构体
+ */
+export interface UpdateCustomDomainRequest {
+  /**
+   * 自定义域名
+   */
+  Domain: string
+  /**
+   * 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS
+   */
+  Protocol?: string
+  /**
+   * 证书配置信息，HTTPS协议必穿
+   */
+  CertConfig?: CertConf
+  /**
+   * web 应用防火墙配置
+   */
+  WafConfig?: WafConf
+  /**
+   * 	路由配置
+   */
+  EndpointsConfig?: Array<EndpointsConf>
+}
+
+/**
  * TerminateAsyncEvent请求参数结构体
  */
 export interface TerminateAsyncEventRequest {
@@ -1123,6 +1296,16 @@ export interface TerminateAsyncEventRequest {
    * true，向指定请求[发送 SIGTERM 终止信号](https://cloud.tencent.com/document/product/583/63969#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]， ，默认值为 false。
    */
   GraceShutdown?: boolean
+}
+
+/**
+ * DeleteCustomDomain返回参数结构体
+ */
+export interface DeleteCustomDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2097,6 +2280,22 @@ exact 匹配规则要求：
 }
 
 /**
+ * web应用防火墙配置信息
+ */
+export interface WafConf {
+  /**
+   * web应用防火墙是否打开， 取值范围:OPEN, CLOSE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafOpen?: string
+  /**
+   * web应用防火墙实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafInstanceId?: string
+}
+
+/**
  * UpdateFunctionEventInvokeConfig返回参数结构体
  */
 export interface UpdateFunctionEventInvokeConfigResponse {
@@ -2600,6 +2799,16 @@ export interface PutTotalConcurrencyConfigRequest {
 }
 
 /**
+ * DeleteCustomDomain请求参数结构体
+ */
+export interface DeleteCustomDomainRequest {
+  /**
+   * 域名
+   */
+  Domain?: string
+}
+
+/**
  * UpdateNamespace请求参数结构体
  */
 export interface UpdateNamespaceRequest {
@@ -3010,6 +3219,32 @@ export interface FunctionVersion {
 }
 
 /**
+ * CreateCustomDomain请求参数结构体
+ */
+export interface CreateCustomDomainRequest {
+  /**
+   * 域名，不支持泛域名
+   */
+  Domain: string
+  /**
+   * 协议，取值范围：HTTP, HTTPS, HTTP&HTTPS
+   */
+  Protocol: string
+  /**
+   * 路由配置
+   */
+  EndpointsConfig: Array<EndpointsConf>
+  /**
+   * 证书配置信息，HTTPS协议必穿
+   */
+  CertConfig?: CertConf
+  /**
+   * web 应用防火墙配置
+   */
+  WafConfig?: WafConf
+}
+
+/**
  * 函数的异步重试配置详情
  */
 export interface AsyncTriggerConfig {
@@ -3042,33 +3277,27 @@ export interface DeadLetterConfig {
 }
 
 /**
- * ListVersionByFunction请求参数结构体
+ * CreateCustomDomain返回参数结构体
  */
-export interface ListVersionByFunctionRequest {
+export interface CreateCustomDomainResponse {
   /**
-   * 函数名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FunctionName: string
+  RequestId?: string
+}
+
+/**
+ * 状态原因描述
+ */
+export interface StatusReason {
   /**
-   * 函数所在命名空间
+   * 错误码
    */
-  Namespace?: string
+  ErrorCode: string
   /**
-   * 数据偏移量，默认值为 0
+   * 错误描述
    */
-  Offset?: number
-  /**
-   * 返回数据长度，默认值为 20
-   */
-  Limit?: number
-  /**
-   * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
-   */
-  Order?: string
-  /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime
-   */
-  OrderBy?: string
+  ErrorMessage: string
 }
 
 /**
@@ -3367,6 +3596,32 @@ export interface ListAliasesRequest {
    * 返回数据长度，默认值为 20
    */
   Limit?: string
+}
+
+/**
+ * ListCustomDomains请求参数结构体
+ */
+export interface ListCustomDomainsRequest {
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+  /**
+   * 容量，默认20
+   */
+  Limit?: number
+  /**
+   * 取值范围：AddTime，ModTime， 默认AddTime
+   */
+  OrderBy?: string
+  /**
+   * 取值范围：DESC, ASC 默认DESC
+   */
+  Order?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3713,4 +3968,34 @@ export interface UpdateTriggerRequest {
    * 用户附加信息
    */
   CustomArgument?: string
+}
+
+/**
+ * ListVersionByFunction请求参数结构体
+ */
+export interface ListVersionByFunctionRequest {
+  /**
+   * 函数名
+   */
+  FunctionName: string
+  /**
+   * 函数所在命名空间
+   */
+  Namespace?: string
+  /**
+   * 数据偏移量，默认值为 0
+   */
+  Offset?: number
+  /**
+   * 返回数据长度，默认值为 20
+   */
+  Limit?: number
+  /**
+   * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
+   */
+  Order?: string
+  /**
+   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime
+   */
+  OrderBy?: string
 }

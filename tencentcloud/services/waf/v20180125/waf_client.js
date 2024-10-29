@@ -677,6 +677,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHost", req, cb);
     }
     /**
+     * 修改用户防护规则，开启关闭具体的某条规则
+     */
+    async ModifyUserSignatureRuleV2(req, cb) {
+        return this.request("ModifyUserSignatureRuleV2", req, cb);
+    }
+    /**
      * 本接口用于获取访问日志导出列表
      */
     async DescribeAccessExports(req, cb) {

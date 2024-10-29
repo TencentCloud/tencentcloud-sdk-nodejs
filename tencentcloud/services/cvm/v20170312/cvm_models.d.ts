@@ -932,6 +932,15 @@ export interface DescribeRegionsResponse {
     RequestId?: string;
 }
 /**
+ * 导入镜像的数据盘信息
+ */
+export interface ImportImageDataDisk {
+    /**
+     * 数据盘镜像 COS 链接
+     */
+    ImageUrl: string;
+}
+/**
  * PurchaseReservedInstancesOffering请求参数结构体
  */
 export interface PurchaseReservedInstancesOfferingRequest {
@@ -1971,6 +1980,18 @@ export interface SyncImagesRequest {
   默认值: false
      */
     ImageSetRequired?: boolean;
+    /**
+     * 是否复制为加密自定义镜像。
+  默认值为 false。
+  复制加密自定义镜像仅支持同地域。
+     */
+    Encrypt?: boolean;
+    /**
+     * 加密自定义镜像使用的 KMS 密钥 ID。
+  仅当复制加密镜像时，即 Encrypt 为 true 时，此参数有效；
+  不指定 KmsKeyId，默认使用 CBS 云产品 KMS 密钥。
+     */
+    KmsKeyId?: string;
 }
 /**
  * DisassociateInstancesKeyPairs请求参数结构体
@@ -3912,6 +3933,10 @@ export interface ImportImageRequest {
      *  镜像族
      */
     ImageFamily?: string;
+    /**
+     * 导入的数据盘列表
+     */
+    ImportImageDataDiskList?: Array<ImportImageDataDisk>;
 }
 /**
  * 竞价相关选项

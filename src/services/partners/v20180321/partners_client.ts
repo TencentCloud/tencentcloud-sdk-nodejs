@@ -34,6 +34,7 @@ import {
   ProductInfoElem,
   UnbindClientElem,
   RemovePayRelationForClientResponse,
+  DescribeAgentRelateBigDealIdsRequest,
   DescribeRebateInfosRequest,
   CreatePayRelationForClientResponse,
   DescribeAgentAuditedClientsResponse,
@@ -43,6 +44,7 @@ import {
   DescribeAgentClientsResponse,
   AgentDealNewElem,
   DescribeAgentClientsRequest,
+  DescribeAgentRelateBigDealIdsResponse,
   DescribeAgentSelfPayDealsV2Request,
   DescribeSalesmansResponse,
   AgentAuditedClient,
@@ -99,6 +101,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
   ): Promise<DescribeAgentSelfPayDealsV2Response> {
     return this.request("DescribeAgentSelfPayDealsV2", req, cb)
+  }
+
+  /**
+   * 代理商名下客户解绑记录查询接口
+   */
+  async DescribeUnbindClientList(
+    req: DescribeUnbindClientListRequest,
+    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
+  ): Promise<DescribeUnbindClientListResponse> {
+    return this.request("DescribeUnbindClientList", req, cb)
   }
 
   /**
@@ -192,13 +204,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商名下客户解绑记录查询接口
+   * 根据大订单号查询关联申请合并支付的其他订单号
    */
-  async DescribeUnbindClientList(
-    req: DescribeUnbindClientListRequest,
-    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
-  ): Promise<DescribeUnbindClientListResponse> {
-    return this.request("DescribeUnbindClientList", req, cb)
+  async DescribeAgentRelateBigDealIds(
+    req: DescribeAgentRelateBigDealIdsRequest,
+    cb?: (error: string, rep: DescribeAgentRelateBigDealIdsResponse) => void
+  ): Promise<DescribeAgentRelateBigDealIdsResponse> {
+    return this.request("DescribeAgentRelateBigDealIds", req, cb)
   }
 
   /**

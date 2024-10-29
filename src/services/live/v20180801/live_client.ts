@@ -213,6 +213,7 @@ import {
   RestartLivePullStreamTaskRequest,
   DelayInfo,
   EnableOptimalSwitchingResponse,
+  TimeShiftSubStream,
   DescribeLiveStreamMonitorRequest,
   DescribeLiveSnapshotRulesRequest,
   DeleteLiveRecordRuleResponse,

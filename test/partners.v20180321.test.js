@@ -38,6 +38,16 @@ it("partners.v20180321.DescribeAgentSelfPayDealsV2", async function () {
     }
 })
 
+it("partners.v20180321.DescribeUnbindClientList", async function () {
+    try {
+       const data = await client.DescribeUnbindClientList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.ModifyClientRemark", async function () {
     try {
        const data = await client.ModifyClientRemark({})
@@ -128,9 +138,9 @@ it("partners.v20180321.DescribeClientBalanceNew", async function () {
     }
 })
 
-it("partners.v20180321.DescribeUnbindClientList", async function () {
+it("partners.v20180321.DescribeAgentRelateBigDealIds", async function () {
     try {
-       const data = await client.DescribeUnbindClientList({})
+       const data = await client.DescribeAgentRelateBigDealIds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

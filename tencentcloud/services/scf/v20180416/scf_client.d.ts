@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAliasRequest, ListTriggersResponse, ListAliasesResponse, DeleteLayerVersionResponse, GetReservedConcurrencyConfigResponse, DeleteProvisionedConcurrencyConfigResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, DeleteProvisionedConcurrencyConfigRequest, DeleteReservedConcurrencyConfigResponse, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, GetRequestStatusRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, InvokeFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PublishVersionRequest, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, GetFunctionEventInvokeConfigResponse, GetProvisionedConcurrencyConfigRequest, TerminateAsyncEventRequest, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, UpdateNamespaceResponse, GetAccountResponse, DeleteFunctionResponse, ListAsyncEventsRequest, CreateAliasResponse, CreateFunctionRequest, GetAccountRequest, PutTotalConcurrencyConfigResponse, GetAsyncEventStatusRequest, DeleteAliasResponse, PublishVersionResponse, TerminateAsyncEventResponse, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, UpdateFunctionEventInvokeConfigResponse, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, UpdateTriggerStatusResponse, UpdateFunctionEventInvokeConfigRequest, DeleteLayerVersionRequest, GetFunctionResponse, GetFunctionEventInvokeConfigRequest, PutTotalConcurrencyConfigRequest, UpdateNamespaceRequest, GetLayerVersionResponse, GetRequestStatusResponse, PutReservedConcurrencyConfigResponse, InvokeFunctionRequest, GetFunctionAddressResponse, UpdateTriggerStatusRequest, ListLayersResponse, ListVersionByFunctionRequest, ListFunctionsResponse, GetAsyncEventStatusResponse, ListTriggersRequest, UpdateTriggerResponse, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetProvisionedConcurrencyConfigResponse, ListAsyncEventsResponse, ListNamespacesResponse, UpdateFunctionCodeResponse, UpdateTriggerRequest } from "./scf_models";
+import { UpdateAliasRequest, ListTriggersResponse, ListAliasesResponse, DeleteLayerVersionResponse, GetReservedConcurrencyConfigResponse, UpdateCustomDomainResponse, DeleteProvisionedConcurrencyConfigResponse, GetCustomDomainResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, ListCustomDomainsResponse, DeleteProvisionedConcurrencyConfigRequest, DeleteReservedConcurrencyConfigResponse, GetCustomDomainRequest, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, GetRequestStatusRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, InvokeFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PublishVersionRequest, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, GetFunctionEventInvokeConfigResponse, GetProvisionedConcurrencyConfigRequest, UpdateCustomDomainRequest, TerminateAsyncEventRequest, DeleteCustomDomainResponse, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, UpdateNamespaceResponse, GetAccountResponse, DeleteFunctionResponse, ListAsyncEventsRequest, CreateAliasResponse, CreateFunctionRequest, GetAccountRequest, PutTotalConcurrencyConfigResponse, GetAsyncEventStatusRequest, DeleteAliasResponse, PublishVersionResponse, TerminateAsyncEventResponse, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, UpdateFunctionEventInvokeConfigResponse, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, UpdateTriggerStatusResponse, UpdateFunctionEventInvokeConfigRequest, DeleteLayerVersionRequest, GetFunctionResponse, GetFunctionEventInvokeConfigRequest, PutTotalConcurrencyConfigRequest, DeleteCustomDomainRequest, UpdateNamespaceRequest, GetLayerVersionResponse, GetRequestStatusResponse, PutReservedConcurrencyConfigResponse, InvokeFunctionRequest, GetFunctionAddressResponse, UpdateTriggerStatusRequest, ListLayersResponse, CreateCustomDomainRequest, CreateCustomDomainResponse, ListFunctionsResponse, GetAsyncEventStatusResponse, ListTriggersRequest, UpdateTriggerResponse, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, ListCustomDomainsRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetProvisionedConcurrencyConfigResponse, ListAsyncEventsResponse, ListNamespacesResponse, UpdateFunctionCodeResponse, UpdateTriggerRequest, ListVersionByFunctionRequest } from "./scf_models";
 /**
  * scf client
  * @class
@@ -78,6 +78,10 @@ export declare class Client extends AbstractClient {
      */
     PublishLayerVersion(req: PublishLayerVersionRequest, cb?: (error: string, rep: PublishLayerVersionResponse) => void): Promise<PublishLayerVersionResponse>;
     /**
+     * 遍历域名列表信息
+     */
+    ListCustomDomains(req: ListCustomDomainsRequest, cb?: (error: string, rep: ListCustomDomainsResponse) => void): Promise<ListCustomDomainsResponse>;
+    /**
      * 删除函数版本的预置并发配置。
      */
     DeleteProvisionedConcurrencyConfig(req: DeleteProvisionedConcurrencyConfigRequest, cb?: (error: string, rep: DeleteProvisionedConcurrencyConfigResponse) => void): Promise<DeleteProvisionedConcurrencyConfigResponse>;
@@ -119,6 +123,10 @@ export declare class Client extends AbstractClient {
      */
     PutProvisionedConcurrencyConfig(req: PutProvisionedConcurrencyConfigRequest, cb?: (error: string, rep: PutProvisionedConcurrencyConfigResponse) => void): Promise<PutProvisionedConcurrencyConfigResponse>;
     /**
+     * 删除自定义域名
+     */
+    DeleteCustomDomain(req: DeleteCustomDomainRequest, cb?: (error: string, rep: DeleteCustomDomainResponse) => void): Promise<DeleteCustomDomainResponse>;
+    /**
      * 更新函数的异步重试配置，包括重试次数和消息保留时间
      */
     UpdateFunctionEventInvokeConfig(req: UpdateFunctionEventInvokeConfigRequest, cb?: (error: string, rep: UpdateFunctionEventInvokeConfigResponse) => void): Promise<UpdateFunctionEventInvokeConfigResponse>;
@@ -158,9 +166,9 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
      */
     UpdateTrigger(req: UpdateTriggerRequest, cb?: (error: string, rep: UpdateTriggerResponse) => void): Promise<UpdateTriggerResponse>;
     /**
-     * 获取函数的最大独占配额详情。
+     * 创建自定义域名
      */
-    GetReservedConcurrencyConfig(req: GetReservedConcurrencyConfigRequest, cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void): Promise<GetReservedConcurrencyConfigResponse>;
+    CreateCustomDomain(req: CreateCustomDomainRequest, cb?: (error: string, rep: CreateCustomDomainResponse) => void): Promise<CreateCustomDomainResponse>;
     /**
      * 该接口根据传入的查询参数返回相关函数信息。
      */
@@ -194,9 +202,21 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
      */
     GetAlias(req: GetAliasRequest, cb?: (error: string, rep: GetAliasResponse) => void): Promise<GetAliasResponse>;
     /**
+     * 获取函数的最大独占配额详情。
+     */
+    GetReservedConcurrencyConfig(req: GetReservedConcurrencyConfigRequest, cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void): Promise<GetReservedConcurrencyConfigResponse>;
+    /**
      * 修改账号并发限制配额
      */
     PutTotalConcurrencyConfig(req: PutTotalConcurrencyConfigRequest, cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void): Promise<PutTotalConcurrencyConfigResponse>;
+    /**
+     * 查看云函数自定义域名详情
+     */
+    GetCustomDomain(req: GetCustomDomainRequest, cb?: (error: string, rep: GetCustomDomainResponse) => void): Promise<GetCustomDomainResponse>;
+    /**
+     * 更新自定义域名相关配置
+     */
+    UpdateCustomDomain(req: UpdateCustomDomainRequest, cb?: (error: string, rep: UpdateCustomDomainResponse) => void): Promise<UpdateCustomDomainResponse>;
     /**
      * 该接口根据传入参数创建新的函数。
      */

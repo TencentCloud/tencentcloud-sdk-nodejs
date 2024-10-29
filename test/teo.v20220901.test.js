@@ -28,6 +28,16 @@ it("teo.v20220901.DestroyPlan", async function () {
     }
 })
 
+it("teo.v20220901.DescribeOriginGroupHealthStatus", async function () {
+    try {
+       const data = await client.DescribeOriginGroupHealthStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})
@@ -348,6 +358,16 @@ it("teo.v20220901.DeleteOriginGroup", async function () {
     }
 })
 
+it("teo.v20220901.DescribeLoadBalancerList", async function () {
+    try {
+       const data = await client.DescribeLoadBalancerList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateSecurityIPGroup", async function () {
     try {
        const data = await client.CreateSecurityIPGroup({})
@@ -361,6 +381,16 @@ it("teo.v20220901.CreateSecurityIPGroup", async function () {
 it("teo.v20220901.DescribeIPRegion", async function () {
     try {
        const data = await client.DescribeIPRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyLoadBalancer", async function () {
+    try {
+       const data = await client.ModifyLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +758,16 @@ it("teo.v20220901.DescribeCustomErrorPages", async function () {
     }
 })
 
+it("teo.v20220901.DeleteLoadBalancer", async function () {
+    try {
+       const data = await client.DeleteLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeRulesSetting", async function () {
     try {
        const data = await client.DescribeRulesSetting({})
@@ -911,6 +951,16 @@ it("teo.v20220901.DescribeOriginGroup", async function () {
 it("teo.v20220901.ModifyAliasDomain", async function () {
     try {
        const data = await client.ModifyAliasDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateLoadBalancer", async function () {
+    try {
+       const data = await client.CreateLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

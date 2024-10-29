@@ -192,7 +192,7 @@ import {
   DescribeAccountAttributesRequest,
   AddIp6RulesRequest,
   DescribeAccountAttributesResponse,
-  ReturnNormalAddressesRequest,
+  ModifyAddressesRenewFlagRequest,
   ModifyPrivateNatGatewayTranslationNatRuleRequest,
   AssignPrivateIpAddressesResponse,
   DescribeSecurityGroupsRequest,
@@ -526,6 +526,7 @@ import {
   ResetVpnConnectionResponse,
   CreateCdcNetPlanesResponse,
   DescribeVpnGatewaySslServersResponse,
+  ModifyAddressesRenewFlagResponse,
   Subnet,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteVpnGatewayRequest,
@@ -778,6 +779,7 @@ import {
   CcnBandwidthInfo,
   CreateVpcPeeringConnectionResponse,
   DescribeCrossBorderCcnRegionBandwidthLimitsResponse,
+  ReturnNormalAddressesRequest,
   DeleteSecurityGroupResponse,
   DeleteNetworkAclEntriesResponse,
   DescribeCdcLDCXListRequest,
@@ -3465,6 +3467,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyCcnRouteTablesResponse) => void
   ): Promise<ModifyCcnRouteTablesResponse> {
     return this.request("ModifyCcnRouteTables", req, cb)
+  }
+
+  /**
+   * 调整EIP续费标识
+   */
+  async ModifyAddressesRenewFlag(
+    req: ModifyAddressesRenewFlagRequest,
+    cb?: (error: string, rep: ModifyAddressesRenewFlagResponse) => void
+  ): Promise<ModifyAddressesRenewFlagResponse> {
+    return this.request("ModifyAddressesRenewFlag", req, cb)
   }
 
   /**

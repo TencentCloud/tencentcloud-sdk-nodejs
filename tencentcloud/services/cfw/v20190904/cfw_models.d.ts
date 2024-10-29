@@ -1034,7 +1034,7 @@ export interface DescribeTLogInfoResponse {
     "OutNum": 失陷主机
   "BruteForceNum": 0
      */
-    Data: TLogInfo;
+    Data?: TLogInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2511,7 +2511,7 @@ export interface CreateNatRuleItem {
     /**
      * 规则状态，true表示启用，false表示禁用
      */
-    Enable: string;
+    Enable?: string;
     /**
      * 规则对应的唯一id，创建规则时无需填写
      */
@@ -2923,6 +2923,10 @@ export interface RuleChangeItem {
      * 新的sequence 值
      */
     NewOrderIndex: number;
+    /**
+     * Ip版本，0：IPv4，1：IPv6，默认为IPv4
+     */
+    IpVersion?: number;
 }
 /**
  * 入侵防御封禁列表、放通列表添加规则入参
@@ -3157,7 +3161,7 @@ export interface CreateNatFwInstanceResponse {
     /**
      * 防火墙实例id
      */
-    CfwInsId: string;
+    CfwInsId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3289,7 +3293,7 @@ export interface CreateIdsWhiteRuleResponse {
  */
 export interface ModifyResourceGroupRequest {
     /**
-     * 组id
+     * 资产组id
      */
     GroupId: string;
     /**
@@ -3297,7 +3301,7 @@ export interface ModifyResourceGroupRequest {
      */
     GroupName: string;
     /**
-     * 上级组id
+     * 上级组资产组id
      */
     ParentId: string;
 }
@@ -3747,6 +3751,10 @@ export interface CreateAddressTemplateRequest {
      * 协议端口模板，协议类型，4:4层协议，7:7层协议，Type=6时必填
      */
     ProtocolType?: string;
+    /**
+     * IP版本,0 IPV4;1 IPV6
+     */
+    IpVersion?: number;
 }
 /**
  * CreateBlockIgnoreRuleNew返回参数结构体
@@ -4202,10 +4210,6 @@ export interface VpcRuleItem {
      */
     OrderIndex: number;
     /**
-     * 规则对应的唯一id
-     */
-    Uuid: number;
-    /**
      * 规则状态，true表示启用，false表示禁用
      */
     Enable: string;
@@ -4213,6 +4217,10 @@ export interface VpcRuleItem {
      * 规则生效的范围，是在哪对vpc之间还是针对所有vpc间生效
      */
     EdgeId: string;
+    /**
+     * 规则对应的唯一id，添加规则时忽略该字段，修改该规则时需要填写Uuid;查询返回时会返回该参数
+     */
+    Uuid?: number;
     /**
      * 规则的命中次数，增删改查规则时无需传入此参数，主要用于返回查询结果数据
      */
@@ -4264,6 +4272,11 @@ export interface VpcRuleItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceName?: string;
+    /**
+     * Ip版本，0：IPv4，1：IPv6，默认为IPv4
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpVersion?: number;
 }
 /**
  * DescribeIdsWhiteRule返回参数结构体
@@ -5644,7 +5657,7 @@ export interface DescribeTLogIpListResponse {
     /**
      * 数据集合
      */
-    Data: Array<StaticInfo>;
+    Data?: Array<StaticInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6144,7 +6157,7 @@ export interface DescribeBlockByIpTimesListResponse {
     /**
      * 返回数据
      */
-    Data: Array<IpStatic>;
+    Data?: Array<IpStatic>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7115,7 +7128,7 @@ export interface RemoveVpcAcRuleResponse {
     /**
      * 删除成功后返回被删除策略的uuid列表
      */
-    RuleUuids: Array<number | bigint>;
+    RuleUuids?: Array<number | bigint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7255,6 +7268,12 @@ export interface CreateRuleItem {
     TargetType: string;
     /**
      * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+  1. 入方向  旁路防火墙/全局规则 仅支持TCP
+  
+  2.出方向  旁路防火墙/全局规则 仅支持TCP HTTP/HTTPS TLS/SSL
+  
+  3.domain  请选择七层协议 如HTTP/HTTPS
+  
      */
     Protocol: string;
     /**
@@ -7517,7 +7536,11 @@ export interface DescribeBlockStaticListResponse {
     /**
      * 无
      */
-    Data: Array<StaticInfo>;
+    Data?: Array<StaticInfo>;
+    /**
+     * 异步查询状态，1查询执行中，0查询已结束
+     */
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

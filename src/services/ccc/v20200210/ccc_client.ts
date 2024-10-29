@@ -66,6 +66,7 @@ import {
   CreateExtensionResponse,
   CreateUserSigRequest,
   CreateCCCSkillGroupRequest,
+  DescribePredictiveDialingSessionsResponse,
   DescribeAutoCalloutTaskResponse,
   CreateCompanyApplyRequest,
   CreateCCCSkillGroupResponse,
@@ -76,7 +77,7 @@ import {
   DescribePredictiveDialingCampaignRequest,
   SeatUserInfo,
   UpdateCCCSkillGroupResponse,
-  DescribePredictiveDialingSessionsResponse,
+  AsrData,
   CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
   PausePredictiveDialingCampaignResponse,
@@ -171,6 +172,7 @@ import {
   DescribeCarrierPrivilegeNumberApplicantsResponse,
   CreateCallOutSessionRequest,
   BindStaffSkillGroupListResponse,
+  DescribeTelRecordAsrResponse,
   DescribeExtensionsRequest,
   DescribeProtectedTelCdrRequest,
   DescribePredictiveDialingSessionsRequest,
@@ -180,6 +182,7 @@ import {
   CreateOwnNumberApplyRequest,
   DescribeCallInMetricsRequest,
   DescribeExtensionResponse,
+  DescribeTelRecordAsrRequest,
 } from "./ccc_models"
 
 /**
@@ -229,6 +232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAICallResponse) => void
   ): Promise<CreateAICallResponse> {
     return this.request("CreateAICall", req, cb)
+  }
+
+  /**
+   * 拉取会话录音转文本信息
+   */
+  async DescribeTelRecordAsr(
+    req: DescribeTelRecordAsrRequest,
+    cb?: (error: string, rep: DescribeTelRecordAsrResponse) => void
+  ): Promise<DescribeTelRecordAsrResponse> {
+    return this.request("DescribeTelRecordAsr", req, cb)
   }
 
   /**

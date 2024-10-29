@@ -38,6 +38,16 @@ it("organization.v20210331.ListGroupMembers", async function () {
     }
 })
 
+it("organization.v20210331.ListOrganizationIdentity", async function () {
+    try {
+       const data = await client.ListOrganizationIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.AddOrganizationNode", async function () {
     try {
        const data = await client.AddOrganizationNode({})
@@ -61,6 +71,16 @@ it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function ()
 it("organization.v20210331.RemovePermissionPolicyFromRoleConfiguration", async function () {
     try {
        const data = await client.RemovePermissionPolicyFromRoleConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateSCIMCredentialStatus", async function () {
+    try {
+       const data = await client.UpdateSCIMCredentialStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +208,9 @@ it("organization.v20210331.RemoveUserFromGroup", async function () {
     }
 })
 
-it("organization.v20210331.ListOrganizationIdentity", async function () {
+it("organization.v20210331.DescribeOrganizationFinancialByProduct", async function () {
     try {
-       const data = await client.ListOrganizationIdentity({})
+       const data = await client.DescribeOrganizationFinancialByProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,16 +341,6 @@ it("organization.v20210331.GetExternalSAMLIdentityProvider", async function () {
 it("organization.v20210331.ClearExternalSAMLIdentityProvider", async function () {
     try {
        const data = await client.ClearExternalSAMLIdentityProvider({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DescribeOrganizationFinancialByProduct", async function () {
-    try {
-       const data = await client.DescribeOrganizationFinancialByProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,6 +718,16 @@ it("organization.v20210331.DeleteGroup", async function () {
     }
 })
 
+it("organization.v20210331.GetSCIMSynchronizationStatus", async function () {
+    try {
+       const data = await client.GetSCIMSynchronizationStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.SetExternalSAMLIdentityProvider", async function () {
     try {
        const data = await client.SetExternalSAMLIdentityProvider({})
@@ -738,6 +758,16 @@ it("organization.v20210331.ListPoliciesForTarget", async function () {
     }
 })
 
+it("organization.v20210331.DeleteSCIMCredential", async function () {
+    try {
+       const data = await client.DeleteSCIMCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.UpdateUserSyncProvisioning", async function () {
     try {
        const data = await client.UpdateUserSyncProvisioning({})
@@ -761,6 +791,16 @@ it("organization.v20210331.GetUserSyncProvisioning", async function () {
 it("organization.v20210331.DescribeOrganization", async function () {
     try {
        const data = await client.DescribeOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateSCIMSynchronizationStatus", async function () {
+    try {
+       const data = await client.UpdateSCIMSynchronizationStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,6 +918,16 @@ it("organization.v20210331.DescribeIdentityCenter", async function () {
     }
 })
 
+it("organization.v20210331.CreateSCIMCredential", async function () {
+    try {
+       const data = await client.CreateSCIMCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async function () {
     try {
        const data = await client.DescribeOrganizationMemberAuthIdentities({})
@@ -911,6 +961,16 @@ it("organization.v20210331.GetZoneStatistics", async function () {
 it("organization.v20210331.DetachPolicy", async function () {
     try {
        const data = await client.DetachPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.ListSCIMCredentials", async function () {
+    try {
+       const data = await client.ListSCIMCredentials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

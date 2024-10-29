@@ -718,6 +718,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNodePoolInstanceTypes", req, cb);
     }
     /**
+     * 修改集群镜像
+     */
+    async ModifyClusterImage(req, cb) {
+        return this.request("ModifyClusterImage", req, cb);
+    }
+    /**
      * 查询日志采集规则
      */
     async DescribeLogConfigs(req, cb) {
