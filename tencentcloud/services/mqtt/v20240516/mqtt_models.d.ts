@@ -25,11 +25,11 @@ export interface UpdateAuthorizationPolicyPriorityRequest {
  */
 export interface AuthorizationPolicyItem {
     /**
-     * 规则id
+     * 规则ID
      */
     Id?: number;
     /**
-     * 集群id
+     * 集群ID
      */
     InstanceId?: string;
     /**

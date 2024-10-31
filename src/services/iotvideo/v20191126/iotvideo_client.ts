@@ -32,7 +32,7 @@ import {
   DeleteTraceIdsRequest,
   IotModelData,
   CreateStorageServiceRequest,
-  DescribeOsListResponse,
+  DescribeDevicesResponse,
   ModifyProductResponse,
   ModifyProductRequest,
   DisableDeviceStreamRequest,
@@ -94,13 +94,16 @@ import {
   RunTestOtaVersionRequest,
   DescribeDeviceResponse,
   SetMessageQueueResponse,
+  RenewUploadTestResponse,
   Contents,
+  RenewCertificate,
   DeleteOtaVersionResponse,
   UploadOtaVersionRequest,
   DescribeIotModelsRequest,
   DescribeModelDataRetRequest,
   CreateTraceIdsResponse,
-  DescribeDevicesResponse,
+  DescribeOsListResponse,
+  CosCertificate,
   ModifyVerContentRequest,
   DeleteBindingRequest,
   DescribeOtaVersionsResponse,
@@ -114,6 +117,7 @@ import {
   SendOnlineMsgRequest,
   Data,
   DescribeDeviceRequest,
+  CertificateInfo,
   DescribeRunLogResponse,
   DeliverStorageServiceResponse,
   DescribeIotModelRequest,
@@ -136,6 +140,7 @@ import {
   BindDevInfo,
   DescribeBindDevRequest,
   StorageOrder,
+  RenewUploadTestRequest,
   MsgQueueData,
   RegisteredStatus,
   CreateAnonymousAccessTokenRequest,
@@ -161,8 +166,10 @@ import {
   DescribeMessageQueueResponse,
   DescribeOsListRequest,
   DescribeDevicesRequest,
+  CreateUploadTestResponse,
   CreateIotDataTypeResponse,
   ModifyDevicePropertyResponse,
+  CreateUploadTestRequest,
   DeleteBindingResponse,
   RefundStorageServiceRequest,
   CreateStorageResponse,
@@ -201,6 +208,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableOtaVersionResponse) => void
   ): Promise<DisableOtaVersionResponse> {
     return this.request("DisableOtaVersion", req, cb)
+  }
+
+  /**
+   * 设备申请cos上传证书
+   */
+  async CreateUploadTest(
+    req: CreateUploadTestRequest,
+    cb?: (error: string, rep: CreateUploadTestResponse) => void
+  ): Promise<CreateUploadTestResponse> {
+    return this.request("CreateUploadTest", req, cb)
   }
 
   /**
@@ -479,13 +496,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteOtaVersion）用于删除固件版本信息。
+   * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
    */
-  async DeleteOtaVersion(
-    req: DeleteOtaVersionRequest,
-    cb?: (error: string, rep: DeleteOtaVersionResponse) => void
-  ): Promise<DeleteOtaVersionResponse> {
-    return this.request("DeleteOtaVersion", req, cb)
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
   }
 
   /**
@@ -574,13 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
+   * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
+  async DeleteProduct(
+    req: DeleteProductRequest,
+    cb?: (error: string, rep: DeleteProductResponse) => void
+  ): Promise<DeleteProductResponse> {
+    return this.request("DeleteProduct", req, cb)
   }
 
   /**
@@ -604,13 +621,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
+   * 本接口（DeleteOtaVersion）用于删除固件版本信息。
    */
-  async DeleteProduct(
-    req: DeleteProductRequest,
-    cb?: (error: string, rep: DeleteProductResponse) => void
-  ): Promise<DeleteProductResponse> {
-    return this.request("DeleteProduct", req, cb)
+  async DeleteOtaVersion(
+    req: DeleteOtaVersionRequest,
+    cb?: (error: string, rep: DeleteOtaVersionResponse) => void
+  ): Promise<DeleteOtaVersionResponse> {
+    return this.request("DeleteOtaVersion", req, cb)
   }
 
   /**
@@ -731,6 +748,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunDeviceStreamResponse) => void
   ): Promise<RunDeviceStreamResponse> {
     return this.request("RunDeviceStream", req, cb)
+  }
+
+  /**
+   * 设备刷新cos上传证书
+   */
+  async RenewUploadTest(
+    req: RenewUploadTestRequest,
+    cb?: (error: string, rep: RenewUploadTestResponse) => void
+  ): Promise<RenewUploadTestResponse> {
+    return this.request("RenewUploadTest", req, cb)
   }
 
   /**

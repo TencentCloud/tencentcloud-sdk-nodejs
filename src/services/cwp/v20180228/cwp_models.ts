@@ -2392,15 +2392,15 @@ export interface CreateLicenseOrderResponse {
   /**
    * 订单号列表
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 资源ID列表,预付费订单该字段空值
    */
-  ResourceIds: Array<string>
+  ResourceIds?: Array<string>
   /**
    * 大订单号 , 后付费该字段空值
    */
-  BigDealId: string
+  BigDealId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

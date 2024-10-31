@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitVideoStylizationJobRequest, ConfirmVideoTranslateJobRequest, DescribeVideoStylizationJobRequest, DescribePortraitSingJobRequest, DescribeImageAnimateJobResponse, SubmitPortraitSingJobRequest, SubmitImageAnimateJobResponse, ConfirmVideoTranslateJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, SubmitVideoStylizationJobResponse, DescribeVideoStylizationJobResponse, SubmitImageAnimateJobRequest, DescribeImageAnimateJobRequest, DescribePortraitSingJobResponse, SubmitVideoTranslateJobRequest, SubmitPortraitSingJobResponse, DescribeVideoTranslateJobResponse } from "./vclm_models";
+import { SubmitVideoStylizationJobRequest, SubmitImageAnimateJobRequest, SubmitVideoStylizationJobResponse, ConfirmVideoTranslateJobRequest, DescribePortraitSingJobRequest, SubmitImageAnimateJobResponse, SubmitPortraitSingJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobResponse, DescribeVideoStylizationJobRequest, DescribeImageAnimateJobResponse, SubmitPortraitSingJobRequest, DescribeVideoStylizationJobResponse, SubmitVideoTranslateJobRequest, ConfirmVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, DescribeImageAnimateJobRequest, DescribePortraitSingJobResponse } from "./vclm_models";
 /**
  * vclm client
  * @class

@@ -59,117 +59,94 @@ export interface CreateIVRSessionRequest {
 export interface CompanyApplyInfo {
     /**
      * 申请人身份，0-公司法定代表人，1-经办人（受法定代表人委托）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicantType: number;
     /**
      * 企业名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompanyName: string;
     /**
      * 统一社会信用代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId: string;
     /**
      * 营业执照扫描件(加盖公章)。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessIdPicUrl: string;
     /**
      * 法定代表人名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationName: string;
     /**
      * 法定代表人身份证号码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationId: string;
     /**
      * 法定代表人身份证正反面扫描件。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationIdPicUrl: string;
     /**
      * 安全合规使用承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkCommitmentPicUrl: string;
     /**
      * 是否与腾讯云账号的资质一致,0-不一致,1-一致
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsEqualTencentCloud: number;
     /**
      * 法定代表人手机号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationMobile: string;
     /**
      * 法定代表人手机号码实名认证。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationMobilePicUrl: string;
     /**
      * 通话话术。(支持doc、docx格式的文档不超过50MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UseDescribeFileUrl: string;
     /**
      * 公司授权函。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompanyAuthLetterPicUrl: string;
     /**
      * 电话受理单。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AcceptPicUrl: string;
     /**
      * 法定代表人手持身份证照，申请人类型为法定代表人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorporationHoldingOnIdPicUrl?: string;
     /**
      * 经办人名称，申请人类型为经办人时必填。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorName?: string;
     /**
      * 经办人证件号码，申请人类型为经办人时必填。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorId?: string;
     /**
      * 经办人身份证正反面扫描件，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorIdPicUrl?: string;
     /**
      * 经办人手持身份证照，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorHoldingOnIdPicUrl?: string;
     /**
      * 委托授权书，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CommissionPicUrl?: string;
     /**
      * 经办人手机号，申请人类型为经办人时必填。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorMobile?: string;
     /**
      * 经办人邮箱，申请人类型为经办人时必填。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorEmail?: string;
     /**
      * 经办人手机号码实名认证，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模板参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperatorMobilePicUrl?: string;
 }
@@ -507,7 +484,6 @@ export interface DescribeChatMessagesResponse {
     TotalCount?: number;
     /**
      * 消息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Messages?: Array<MessageBody>;
     /**
@@ -521,92 +497,74 @@ export interface DescribeChatMessagesResponse {
 export interface ServeParticipant {
     /**
      * 座席邮箱
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mail?: string;
     /**
      * 座席电话
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Phone?: string;
     /**
      * 振铃时间戳，Unix 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RingTimestamp?: number;
     /**
      * 接听时间戳，Unix 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AcceptTimestamp?: number;
     /**
      * 结束时间戳，Unix 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndedTimestamp?: number;
     /**
      * 录音 ID，能够索引到座席侧的录音
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordId?: string;
     /**
      * 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 转接来源座席信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferFrom?: string;
     /**
      * 转接来源参与者类型，取值与 Type 一致
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferFromType?: string;
     /**
      * 转接去向座席信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferTo?: string;
     /**
      * 转接去向参与者类型，取值与 Type 一致
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferToType?: string;
     /**
      * 技能组 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupId?: number;
     /**
      * 结束状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndStatusString?: string;
     /**
      * 录音 URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordURL?: string;
     /**
      * 参与者序号，从 0 开始
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Sequence?: number;
     /**
      * 开始时间戳，Unix 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTimestamp?: number;
     /**
      * 技能组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupName?: string;
     /**
      * 录音转存第三方COS地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRecordURL?: string;
 }
@@ -930,7 +888,6 @@ export interface DescribeIMCdrListResponse {
     TotalCount?: number;
     /**
      * 服务记录列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IMCdrList?: Array<IMCdrInfo>;
     /**
@@ -944,7 +901,6 @@ export interface DescribeIMCdrListResponse {
 export interface CreateStaffResponse {
     /**
      * 错误坐席列表及错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorStaffList?: Array<ErrStaffItem>;
     /**
@@ -1399,7 +1355,6 @@ export interface SeatUserInfo {
     Mail: string;
     /**
      * 工号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StaffNumber: string;
     /**
@@ -1416,7 +1371,6 @@ export interface SeatUserInfo {
     UserId?: string;
     /**
      * 座席关联的技能组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupNameList?: Array<string>;
     /**
@@ -1424,7 +1378,6 @@ export interface SeatUserInfo {
   2:质检员
   3:普通座席
   else:自定义角色ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Role?: number;
 }
@@ -1456,12 +1409,10 @@ export interface AsrData {
     Timestamp?: number;
     /**
      * 句子开始时间，Unix 毫秒时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Start?: number;
     /**
      * 句子结束时间，Unix 毫秒时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     End?: number;
 }
@@ -1487,7 +1438,6 @@ export interface CarrierPrivilegeNumberApplicant {
     Callees?: Array<string>;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -1778,32 +1728,26 @@ export interface SkillGroupInfoItem {
     Type?: string;
     /**
      * 会话分配策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoutePolicy?: string;
     /**
      * 会话分配是否优先上次服务座席
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsingLastSeat?: number;
     /**
      * 单客服最大并发数（电话类型默认1）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxConcurrency?: number;
     /**
      * 最后修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastModifyTimestamp?: number;
     /**
      * 技能组类型0-电话，1-在线，3-音频，4-视频
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupType?: number;
     /**
      * 技能组内线号码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
 }
@@ -2343,32 +2287,26 @@ export interface DeletePredictiveDialingCampaignResponse {
 export interface IVRKeyPressedElement {
     /**
      * 命中的关键字或者按键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 按键关联的标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: string;
     /**
      * Unix 毫秒时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * 节点标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeLabel?: string;
     /**
      * 用户原始输入
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalContent?: string;
     /**
      * TTS 提示音内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TTSPrompt?: string;
 }
@@ -2387,7 +2325,6 @@ export interface UnbindNumberCallOutSkillGroupResponse {
 export interface StaffInfo {
     /**
      * 座席名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
@@ -2396,17 +2333,14 @@ export interface StaffInfo {
     Mail?: string;
     /**
      * 座席电话号码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Phone?: string;
     /**
      * 座席昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 座席工号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StaffNumber?: string;
     /**
@@ -2415,12 +2349,10 @@ export interface StaffInfo {
     RoleId?: number;
     /**
      * 所属技能组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupList?: Array<SkillGroupItem>;
     /**
      * 最后修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastModifyTimestamp?: number;
 }
@@ -2467,7 +2399,6 @@ export interface TelCdrInfo {
     RecordURL?: string;
     /**
      * 录音 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordId?: string;
     /**
@@ -2541,42 +2472,34 @@ export interface TelCdrInfo {
     CallerLocation?: string;
     /**
      * IVR 阶段耗时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IVRDuration?: number;
     /**
      * 振铃时间戳，UNIX 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RingTimestamp?: number;
     /**
      * 接听时间戳，UNIX 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AcceptTimestamp?: number;
     /**
      * 结束时间戳，UNIX 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndedTimestamp?: number;
     /**
      * IVR 按键信息 ，e.g. ["1","2","3"]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IVRKeyPressed?: Array<string>;
     /**
      * 挂机方 seat 座席 user 用户 system 系统
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HungUpSide?: string;
     /**
      * 服务参与者列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServeParticipants?: Array<ServeParticipant>;
     /**
      * 技能组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupId?: number;
     /**
@@ -2634,42 +2557,34 @@ export interface TelCdrInfo {
   
   电话呼入&呼出	211    clientError    客户端错误
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndStatusString?: string;
     /**
      * 会话开始时间戳，UNIX 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTimestamp?: number;
     /**
      * 进入排队时间，Unix 秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueuedTimestamp?: number;
     /**
      * 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PostIVRKeyPressed?: Array<IVRKeyPressedElement>;
     /**
      * 排队技能组Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueuedSkillGroupId?: number;
     /**
      * 会话 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionId?: string;
     /**
      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtectedCaller?: string;
     /**
      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtectedCallee?: string;
     /**
@@ -2680,17 +2595,14 @@ export interface TelCdrInfo {
     Uui?: string;
     /**
      * 客户自定义数据（User-to-User Interface）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UUI?: string;
     /**
      * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IVRKeyPressedEx?: Array<IVRKeyPressedElement>;
     /**
      * 获取录音ASR文本信息地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsrUrl?: string;
     /**
@@ -2700,32 +2612,26 @@ export interface TelCdrInfo {
   正在生成中;
   NotExists
   无记录(未开启生成离线asr或者无套餐包)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsrStatus?: string;
     /**
      * 录音转存第三方COS地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRecordURL?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 排队技能组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueuedSkillGroupName?: string;
     /**
      * 通话中语音留言录音URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VoicemailRecordURL?: Array<string>;
     /**
      * 通话中语音留言ASR文本信息地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VoicemailAsrURL?: Array<string>;
 }
@@ -2735,12 +2641,10 @@ export interface TelCdrInfo {
 export interface UploadIvrAudioResponse {
     /**
      * 上传失败的文件列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedFileList?: Array<UploadIvrAudioFailedInfo>;
     /**
      * 上传成功文件列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SuccessFileList?: Array<AudioFileInfo>;
     /**
@@ -2754,7 +2658,6 @@ export interface UploadIvrAudioResponse {
 export interface DescribeCompanyListResponse {
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2885,12 +2788,10 @@ export interface OwnNumberApplyDetailItem {
 export interface DescribePredictiveDialingCampaignsResponse {
     /**
      * 数据总量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CampaignList?: Array<DescribePredictiveDialingCampaignsElement>;
     /**
@@ -3053,42 +2954,34 @@ export interface CreateOwnNumberApplyResponse {
 export interface DescribePredictiveDialingCampaignsElement {
     /**
      * 任务 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CampaignId?: number;
     /**
      * 任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 任务状态原因 0 正常 1 手动结束 2 超时结束
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusReason?: number;
     /**
      * 被叫号码个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CalleeCount?: number;
     /**
      * 已完成的被叫个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FinishedCalleeCount?: number;
     /**
      * 相同应用内多个任务运行优先级，从高到底 1 - 5
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Priority?: number;
     /**
      * 使用的座席技能组 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupId?: number;
 }
@@ -3286,37 +3179,30 @@ export interface CompanyStateInfo {
     Id?: number;
     /**
      * 公司名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompanyName?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 审核时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckTime?: number;
     /**
      * 审核备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckMsg?: string;
     /**
      * 审核状态，1-待审核，2-审核通过，3-驳回
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: number;
     /**
      * 公司统一社会信用代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessId?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: number;
 }
@@ -3489,14 +3375,12 @@ export interface CreateIVRSessionResponse {
 export interface IMSatisfaction {
     /**
      * 满意度值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: number;
+    Id?: number;
     /**
      * 满意度标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
 }
 /**
  * DescribeActiveCarrierPrivilegeNumber返回参数结构体
@@ -3581,7 +3465,6 @@ export interface DescribeStaffStatusMetricsRequest {
 export interface DeleteStaffResponse {
     /**
      * 无法删除的状态为在线的客服列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnlineStaffList?: Array<string>;
     /**
@@ -3675,7 +3558,6 @@ export interface SdkAppIdBuyInfo {
     PhoneNumBuyList?: Array<PhoneNumBuyInfo>;
     /**
      * 办公电话购买数（还在有效期内）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SipBuyNum?: number;
 }
@@ -3739,17 +3621,14 @@ export interface IMCdrInfo {
     Timestamp?: number;
     /**
      * 会话ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionId?: string;
     /**
      * 技能组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupId?: string;
     /**
      * 技能组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupName?: string;
     /**
@@ -3888,22 +3767,18 @@ export interface DescribeStaffStatusMetricsResponse {
 export interface AudioFileInfo {
     /**
      * 文件ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileId?: number;
     /**
      * 文件别名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomFileName?: string;
     /**
      * 文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AudioFileName?: string;
     /**
      * 审核状态，0-未审核，1-审核通过，2-审核拒绝
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }
@@ -4116,7 +3991,6 @@ export interface StaffBuyInfo {
     EndTime?: number;
     /**
      * 购买办公电话数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SipNum?: number;
 }

@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableOtaVersion", req, cb);
     }
     /**
+     * 设备申请cos上传证书
+     */
+    async CreateUploadTest(req, cb) {
+        return this.request("CreateUploadTest", req, cb);
+    }
+    /**
      * 清除设备激活码
      */
     async ClearDeviceActiveCode(req, cb) {
@@ -211,10 +217,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDevToken", req, cb);
     }
     /**
-     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
+     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
      */
-    async DeleteOtaVersion(req, cb) {
-        return this.request("DeleteOtaVersion", req, cb);
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
     }
     /**
      * 本接口（DeleteAppUsr）用于删除终端用户。
@@ -270,10 +276,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountBalance", req, cb);
     }
     /**
-     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
+     * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
+    async DeleteProduct(req, cb) {
+        return this.request("DeleteProduct", req, cb);
     }
     /**
      * 查看操作系统支持的芯片列表
@@ -288,10 +294,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIotModels", req, cb);
     }
     /**
-     * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
+     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
      */
-    async DeleteProduct(req, cb) {
-        return this.request("DeleteProduct", req, cb);
+    async DeleteOtaVersion(req, cb) {
+        return this.request("DeleteOtaVersion", req, cb);
     }
     /**
      * 将已购买的云存服务转移到另一设备
@@ -364,6 +370,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RunDeviceStream(req, cb) {
         return this.request("RunDeviceStream", req, cb);
+    }
+    /**
+     * 设备刷新cos上传证书
+     */
+    async RenewUploadTest(req, cb) {
+        return this.request("RenewUploadTest", req, cb);
     }
     /**
      * 编辑版本描述信息

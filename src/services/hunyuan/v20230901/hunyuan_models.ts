@@ -126,6 +126,10 @@ export interface ChatCompletionsRequest {
 5. 开启并搜索到对应的多媒体信息时，会输出对应的多媒体地址，可以定制个性化的图文消息。
    */
   EnableMultimedia?: boolean
+  /**
+   * 说明：1. 确保模型的输出是可复现的。2. 取值区间为非0正整数，最大值10000。3. 非必要不建议使用，不合理的取值会影响效果。
+   */
+  Seed?: number
 }
 
 /**

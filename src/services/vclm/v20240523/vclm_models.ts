@@ -62,6 +62,89 @@ export interface SubmitVideoStylizationJobRequest {
 }
 
 /**
+ * logo参数
+ */
+export interface LogoParam {
+  /**
+   * 水印 Url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoUrl?: string
+  /**
+   * 水印 Base64，Url 和 Base64 二选一传入，如果都提供以 Url 为准
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoImage?: string
+  /**
+   * 水印图片位于生成结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoRect?: LogoRect
+}
+
+/**
+ * SubmitImageAnimateJob请求参数结构体
+ */
+export interface SubmitImageAnimateJobRequest {
+  /**
+   * 图片格式：支持PNG、JPG、JPEG格式；
+图片分辨率：长边分辨率不超过2056；
+图片大小：不超过10M；
+图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   */
+  ImageUrl?: string
+  /**
+   * 图片base64数据。图片格式：支持PNG、JPG、JPEG格式；图片分辨率：长边分辨率不超过2056；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   */
+  ImageBase64?: string
+  /**
+   * 动作模板ID。取值说明：ke3 科目三；tuziwu 兔子舞；huajiangwu 划桨舞。
+
+   */
+  TemplateId?: string
+  /**
+   * 结果视频是否保留模板音频。默认为true
+   */
+  EnableAudio?: boolean
+  /**
+   * 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。
+   */
+  EnableBodyJoins?: boolean
+  /**
+   * 最终视频是否保留原图的背景（该模式对于tuziwu、huajiangwu不生效）
+
+   */
+  EnableSegment?: boolean
+  /**
+   * 为生成视频添加标识的开关，默认为0。
+1：添加标识。
+0：不添加标识。
+其他数值：默认按1处理。
+建议您使用显著标识来提示，该视频是 AI 生成的视频。
+   */
+  LogoAdd?: number
+  /**
+   * 标识内容设置。
+默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+   */
+  LogoParam?: LogoParam
+}
+
+/**
+ * SubmitVideoStylizationJob返回参数结构体
+ */
+export interface SubmitVideoStylizationJobResponse {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ConfirmVideoTranslateJob请求参数结构体
  */
 export interface ConfirmVideoTranslateJobRequest {
@@ -76,9 +159,9 @@ export interface ConfirmVideoTranslateJobRequest {
 }
 
 /**
- * DescribeVideoStylizationJob请求参数结构体
+ * DescribePortraitSingJob请求参数结构体
  */
-export interface DescribeVideoStylizationJobRequest {
+export interface DescribePortraitSingJobRequest {
   /**
    * 任务ID
    */
@@ -86,9 +169,113 @@ export interface DescribeVideoStylizationJobRequest {
 }
 
 /**
- * DescribePortraitSingJob请求参数结构体
+ * SubmitImageAnimateJob返回参数结构体
  */
-export interface DescribePortraitSingJobRequest {
+export interface SubmitImageAnimateJobResponse {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitPortraitSingJob返回参数结构体
+ */
+export interface SubmitPortraitSingJobResponse {
+  /**
+   * 任务ID
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitVideoTranslateJob返回参数结构体
+ */
+export interface SubmitVideoTranslateJobResponse {
+  /**
+   * 视频转译任务的Job id
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVideoTranslateJob返回参数结构体
+ */
+export interface DescribeVideoTranslateJobResponse {
+  /**
+   * 任务状态。 1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+   */
+  JobStatus?: number
+  /**
+   * 任务错误码。
+   */
+  JobErrorCode?: string
+  /**
+   * 任务错误信息。
+   */
+  JobErrorMsg?: string
+  /**
+   * 视频翻译结果。
+   */
+  ResultVideoUrl?: string
+  /**
+   * 音频翻译结果。
+   */
+  TranslateResults?: Array<TranslateResult>
+  /**
+   * 是否需要确认翻译结果。0：不需要，1：需要
+   */
+  JobConfirm?: number
+  /**
+   * 音频任务 ID
+   */
+  JobAudioTaskId?: string
+  /**
+   * 视频审核任务ID
+   */
+  JobVideoModerationId?: string
+  /**
+   * 音频审核任务 ID
+   */
+  JobAudioModerationId?: string
+  /**
+   * 口型驱动任务 ID
+   */
+  JobVideoId?: string
+  /**
+   * 视频素材原始 URL
+   */
+  OriginalVideoUrl?: string
+  /**
+   * 文本片段及其时间戳
+   */
+  AsrTimestamps?: Array<AsrTimestamps>
+  /**
+   * 提交视频翻译任务时的 requestId
+   */
+  JobSubmitReqId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVideoStylizationJob请求参数结构体
+ */
+export interface DescribeVideoStylizationJobRequest {
   /**
    * 任务ID
    */
@@ -158,101 +345,29 @@ Pet：宠物模式，支持宠物等非人像图片，固定生成512:512分辨�
 }
 
 /**
- * 音频翻译结果
+ * 输入框
  */
-export interface TranslateResult {
+export interface LogoRect {
   /**
-   * 翻译源文字
+   * 左上角X坐标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceText?: string
+  X?: number
   /**
-   * 翻译后文字。
+   * 左上角Y坐标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetText?: string
-}
-
-/**
- * SubmitImageAnimateJob返回参数结构体
- */
-export interface SubmitImageAnimateJobResponse {
+  Y?: number
   /**
-   * 任务ID。
+   * 方框宽度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobId?: string
+  Width?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 方框高度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
-}
-
-/**
- * ConfirmVideoTranslateJob返回参数结构体
- */
-export interface ConfirmVideoTranslateJobResponse {
-  /**
-   * 视频翻译任务 ID
-   */
-  JobId?: string
-  /**
-   * 音频转换任务 ID
-   */
-  TaskId?: string
-  /**
-   * 音频翻译结果确认 session
-   */
-  SessionId?: string
-  /**
-   * 视频转译任务状态
-   */
-  Status?: number
-  /**
-   * 视频转译任务信息
-   */
-  Message?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitVideoTranslateJob返回参数结构体
- */
-export interface SubmitVideoTranslateJobResponse {
-  /**
-   * 视频转译任务的Job id
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeVideoTranslateJob请求参数结构体
- */
-export interface DescribeVideoTranslateJobRequest {
-  /**
-   * 视频转译任务 ID
-   */
-  JobId: string
-}
-
-/**
- * SubmitVideoStylizationJob返回参数结构体
- */
-export interface SubmitVideoStylizationJobResponse {
-  /**
-   * 任务ID
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Height?: number
 }
 
 /**
@@ -287,87 +402,19 @@ JobSuccess: "处理完成"。
 }
 
 /**
- * SubmitImageAnimateJob请求参数结构体
+ * 音频翻译结果
  */
-export interface SubmitImageAnimateJobRequest {
+export interface TranslateResult {
   /**
-   * 图片格式：支持PNG、JPG、JPEG格式；
-图片分辨率：长边分辨率不超过2056；
-图片大小：不超过10M；
-图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   * 翻译源文字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageUrl?: string
+  SourceText?: string
   /**
-   * 图片base64数据。图片格式：支持PNG、JPG、JPEG格式；图片分辨率：长边分辨率不超过2056；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   * 翻译后文字。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageBase64?: string
-  /**
-   * 动作模板ID。取值说明：ke3 科目三；tuziwu 兔子舞；huajiangwu 划桨舞。
-
-   */
-  TemplateId?: string
-  /**
-   * 结果视频是否保留模板音频。默认为true
-   */
-  EnableAudio?: boolean
-  /**
-   * 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。
-   */
-  EnableBodyJoins?: boolean
-  /**
-   * 最终视频是否保留原图的背景（该模式对于tuziwu、huajiangwu不生效）
-
-   */
-  EnableSegment?: boolean
-}
-
-/**
- * DescribeImageAnimateJob请求参数结构体
- */
-export interface DescribeImageAnimateJobRequest {
-  /**
-   * 任务ID。
-   */
-  JobId?: string
-}
-
-/**
- * DescribePortraitSingJob返回参数结构体
- */
-export interface DescribePortraitSingJobResponse {
-  /**
-   * 任务ID
-   */
-  JobId?: string
-  /**
-   * 任务状态码
-—RUN：处理中
-—FAIL：处理失败
-—STOP：处理终止
-—DONE：处理完成
-   */
-  StatusCode?: string
-  /**
-   * 任务状态信息
-   */
-  StatusMsg?: string
-  /**
-   * 错误码
-   */
-  ErrorCode?: string
-  /**
-   * 错误信息
-   */
-  ErrorMessage?: string
-  /**
-   * 生成视频的URL地址
-有效期24小时
-   */
-  ResultVideoUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TargetText?: string
 }
 
 /**
@@ -422,13 +469,29 @@ zh(简体中文)、en(英语)、ar(阿拉伯语)、de(德语)、es(西班牙语)
 }
 
 /**
- * SubmitPortraitSingJob返回参数结构体
+ * ConfirmVideoTranslateJob返回参数结构体
  */
-export interface SubmitPortraitSingJobResponse {
+export interface ConfirmVideoTranslateJobResponse {
   /**
-   * 任务ID
+   * 视频翻译任务 ID
    */
   JobId?: string
+  /**
+   * 音频转换任务 ID
+   */
+  TaskId?: string
+  /**
+   * 音频翻译结果确认 session
+   */
+  SessionId?: string
+  /**
+   * 视频转译任务状态
+   */
+  Status?: number
+  /**
+   * 视频转译任务信息
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -436,61 +499,58 @@ export interface SubmitPortraitSingJobResponse {
 }
 
 /**
- * DescribeVideoTranslateJob返回参数结构体
+ * DescribeVideoTranslateJob请求参数结构体
  */
-export interface DescribeVideoTranslateJobResponse {
+export interface DescribeVideoTranslateJobRequest {
   /**
-   * 任务状态。 1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+   * 视频转译任务 ID
    */
-  JobStatus?: number
+  JobId: string
+}
+
+/**
+ * DescribeImageAnimateJob请求参数结构体
+ */
+export interface DescribeImageAnimateJobRequest {
   /**
-   * 任务错误码。
+   * 任务ID。
    */
-  JobErrorCode?: string
+  JobId?: string
+}
+
+/**
+ * DescribePortraitSingJob返回参数结构体
+ */
+export interface DescribePortraitSingJobResponse {
   /**
-   * 任务错误信息。
+   * 任务ID
    */
-  JobErrorMsg?: string
+  JobId?: string
   /**
-   * 视频翻译结果。
+   * 任务状态码
+—RUN：处理中
+—FAIL：处理失败
+—STOP：处理终止
+—DONE：处理完成
+   */
+  StatusCode?: string
+  /**
+   * 任务状态信息
+   */
+  StatusMsg?: string
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误信息
+   */
+  ErrorMessage?: string
+  /**
+   * 生成视频的URL地址
+有效期24小时
    */
   ResultVideoUrl?: string
-  /**
-   * 音频翻译结果。
-   */
-  TranslateResults?: Array<TranslateResult>
-  /**
-   * 是否需要确认翻译结果。0：不需要，1：需要
-   */
-  JobConfirm?: number
-  /**
-   * 音频任务 ID
-   */
-  JobAudioTaskId?: string
-  /**
-   * 视频审核任务ID
-   */
-  JobVideoModerationId?: string
-  /**
-   * 音频审核任务 ID
-   */
-  JobAudioModerationId?: string
-  /**
-   * 口型驱动任务 ID
-   */
-  JobVideoId?: string
-  /**
-   * 视频素材原始 URL
-   */
-  OriginalVideoUrl?: string
-  /**
-   * 文本片段及其时间戳
-   */
-  AsrTimestamps?: Array<AsrTimestamps>
-  /**
-   * 提交视频翻译任务时的 requestId
-   */
-  JobSubmitReqId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

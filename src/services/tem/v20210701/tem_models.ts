@@ -178,7 +178,7 @@ export interface DestroyLogConfigResponse {
   /**
    * 返回结果
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -899,7 +899,7 @@ export interface CreateEnvironmentRequest {
    */
   SourceChannel?: number
   /**
-   * 是否开启tsw服务
+   * 是否开启tsw服务。默认值：false
    */
   EnableTswTraceService?: boolean
   /**
@@ -907,7 +907,7 @@ export interface CreateEnvironmentRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 环境类型：test、pre、prod
+   * 环境类型：test、pre、prod。默认值：prod
    */
   EnvType?: string
   /**
@@ -915,11 +915,11 @@ export interface CreateEnvironmentRequest {
    */
   CreateRegion?: string
   /**
-   * 是否创建私有网络
+   * 是否创建私有网络.默认值:true
    */
   SetupVpc?: boolean
   /**
-   * 是否创建 Prometheus 实例
+   * 是否创建 Prometheus 实例。默认值：false
    */
   SetupPrometheus?: boolean
   /**
@@ -1706,7 +1706,7 @@ export interface IngressInfo {
   /**
    * 环境namespace
    */
-  ClusterNamespace: string
+  ClusterNamespace?: string
   /**
    * tls 配置
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2001,7 +2001,7 @@ export interface DescribeIngressResponse {
   /**
    * Ingress 规则配置
    */
-  Result: IngressInfo
+  Result?: IngressInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3312,6 +3312,11 @@ export interface DeployApplicationRequest {
    */
   EnvironmentId: string
   /**
+   * 部署类型为 IMAGE 时，该参数表示镜像 tag。
+部署类型为 JAR/WAR 时，该参数表示包版本号。
+   */
+  DeployVersion: string
+  /**
    * 镜像仓库
    */
   ImgRepo?: string
@@ -3350,11 +3355,6 @@ export interface DeployApplicationRequest {
 - IMAGE：通过镜像部署
    */
   DeployMode?: string
-  /**
-   * 部署类型为 IMAGE 时，该参数表示镜像 tag。
-部署类型为 JAR/WAR 时，该参数表示包版本号。
-   */
-  DeployVersion?: string
   /**
    * 传入内容为 /jar包名字 的形式。也就是在 jar包名字前增加一个/。
 

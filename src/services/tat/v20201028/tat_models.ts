@@ -97,42 +97,34 @@ export interface DisableInvokerRequest {
 export interface RegisterInstanceInfo {
   /**
    * 注册码ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisterCodeId?: string
   /**
    * 实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 实例名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
    * 机器ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MachineId?: string
   /**
    * 系统名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemName?: string
   /**
    * 主机名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostName?: string
   /**
    * 内网IP。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalIp?: string
   /**
    * 公钥。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicKey?: string
   /**
@@ -142,12 +134,10 @@ export interface RegisterInstanceInfo {
   Status?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 上次更新时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
 }
@@ -347,17 +337,14 @@ export interface Invocation {
 export interface GeneralResourceQuotaSet {
   /**
    * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
   /**
    * 已使用额度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceQuotaUsed?: number
   /**
    * 总额度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceQuotaTotal?: number
 }
@@ -1710,57 +1697,47 @@ export interface DescribeQuotasResponse {
 export interface RegisterCodeInfo {
   /**
    * 注册码ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisterCodeId?: string
   /**
    * 注册码描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 注册实例名称前缀。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceNamePrefix?: string
   /**
    * 该注册码允许注册的实例数目。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisterLimit?: number
   /**
    * 该注册码的过期时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
 格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredTime?: string
   /**
    * 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IpAddressRange?: string
   /**
    * 该注册码是否可用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
   /**
    * 该注册码已注册数目。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisteredCount?: number
   /**
    * 注册码创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
 格式为： YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 注册码最近一次更新时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
 格式为： YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
@@ -1861,46 +1838,46 @@ export interface Invoker {
   /**
    * 执行器ID。
    */
-  InvokerId: string
+  InvokerId?: string
   /**
    * 执行器名称。
    */
-  Name: string
+  Name?: string
   /**
    * 执行器类型。
    */
-  Type: string
+  Type?: string
   /**
    * 命令ID。
    */
-  CommandId: string
+  CommandId?: string
   /**
    * 用户名。
    */
-  Username: string
+  Username?: string
   /**
    * 自定义参数。
    */
-  Parameters: string
+  Parameters?: string
   /**
    * 实例ID列表。
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
   /**
    * 执行器是否启用。
    */
-  Enable: boolean
+  Enable?: boolean
   /**
    * 执行器周期计划。周期执行器会返回此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduleSettings: ScheduleSettings
+  ScheduleSettings?: ScheduleSettings
   /**
    * 创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 修改时间。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
 }

@@ -38,6 +38,16 @@ it("iotvideo.v20191126.DisableOtaVersion", async function () {
     }
 })
 
+it("iotvideo.v20191126.CreateUploadTest", async function () {
+    try {
+       const data = await client.CreateUploadTest({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20191126.ClearDeviceActiveCode", async function () {
     try {
        const data = await client.ClearDeviceActiveCode({})
@@ -298,9 +308,9 @@ it("iotvideo.v20191126.CreateDevToken", async function () {
     }
 })
 
-it("iotvideo.v20191126.DeleteOtaVersion", async function () {
+it("iotvideo.v20191126.DeleteDevice", async function () {
     try {
-       const data = await client.DeleteOtaVersion({})
+       const data = await client.DeleteDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +398,9 @@ it("iotvideo.v20191126.DescribeAccountBalance", async function () {
     }
 })
 
-it("iotvideo.v20191126.DeleteDevice", async function () {
+it("iotvideo.v20191126.DeleteProduct", async function () {
     try {
-       const data = await client.DeleteDevice({})
+       const data = await client.DeleteProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +428,9 @@ it("iotvideo.v20191126.DescribeIotModels", async function () {
     }
 })
 
-it("iotvideo.v20191126.DeleteProduct", async function () {
+it("iotvideo.v20191126.DeleteOtaVersion", async function () {
     try {
-       const data = await client.DeleteProduct({})
+       const data = await client.DeleteOtaVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +551,16 @@ it("iotvideo.v20191126.DescribePubVersions", async function () {
 it("iotvideo.v20191126.RunDeviceStream", async function () {
     try {
        const data = await client.RunDeviceStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.RenewUploadTest", async function () {
+    try {
+       const data = await client.RenewUploadTest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

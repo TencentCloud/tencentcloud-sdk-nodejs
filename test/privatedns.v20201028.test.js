@@ -38,9 +38,9 @@ it("privatedns.v20201028.DescribePrivateZone", async function () {
     }
 })
 
-it("privatedns.v20201028.DeleteEndPoint", async function () {
+it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
     try {
-       const data = await client.DeleteEndPoint({})
+       const data = await client.DescribePrivateZoneRecordList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +71,16 @@ it("privatedns.v20201028.DescribeAuditLog", async function () {
 it("privatedns.v20201028.CreatePrivateZoneRecord", async function () {
     try {
        const data = await client.CreatePrivateZoneRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribeEndPointList", async function () {
+    try {
+       const data = await client.DescribeEndPointList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +128,9 @@ it("privatedns.v20201028.AddSpecifyPrivateZoneVpc", async function () {
     }
 })
 
-it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
+it("privatedns.v20201028.DeleteEndPoint", async function () {
     try {
-       const data = await client.DescribePrivateZoneRecordList({})
+       const data = await client.DeleteEndPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +228,16 @@ it("privatedns.v20201028.DescribeAccountVpcList", async function () {
     }
 })
 
+it("privatedns.v20201028.CreateEndPointAndEndPointService", async function () {
+    try {
+       const data = await client.CreateEndPointAndEndPointService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.ModifyRecordsStatus", async function () {
     try {
        const data = await client.ModifyRecordsStatus({})
@@ -238,9 +258,29 @@ it("privatedns.v20201028.DeleteSpecifyPrivateZoneVpc", async function () {
     }
 })
 
+it("privatedns.v20201028.CreateForwardRule", async function () {
+    try {
+       const data = await client.CreateForwardRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DescribePrivateZoneService", async function () {
     try {
        const data = await client.DescribePrivateZoneService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribeForwardRuleList", async function () {
+    try {
+       const data = await client.DescribeForwardRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

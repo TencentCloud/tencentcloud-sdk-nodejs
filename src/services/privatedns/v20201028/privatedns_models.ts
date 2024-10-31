@@ -48,13 +48,25 @@ export interface ModifyPrivateZoneVpcRequest {
 }
 
 /**
- * DescribeAuditLog返回参数结构体
+ * CreateEndPointAndEndPointService返回参数结构体
  */
-export interface DescribeAuditLogResponse {
+export interface CreateEndPointAndEndPointServiceResponse {
   /**
-   * 操作日志列表
+   * 终端节点id
    */
-  Data?: Array<AuditLog>
+  EndPointId?: string
+  /**
+   * 终端节点名
+   */
+  EndPointName?: string
+  /**
+   * 终端节点服务ID
+   */
+  EndPointServiceId?: string
+  /**
+   * 终端节点的IP列表
+   */
+  EndPointVipSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -80,25 +92,25 @@ export interface DescribePrivateDNSAccountListResponse {
 }
 
 /**
- * DescribePrivateZoneRecordList请求参数结构体
+ * CreateForwardRule请求参数结构体
  */
-export interface DescribePrivateZoneRecordListRequest {
+export interface CreateForwardRuleRequest {
   /**
-   * 私有域ID: zone-xxxxxx
+   * 转发规则名称
+   */
+  RuleName: string
+  /**
+   * 转发规则类型：云上到云下DOWN，云下到云上UP
+   */
+  RuleType: string
+  /**
+   * 私有域ID，可在私有域列表页面查看
    */
   ZoneId: string
   /**
-   * 过滤参数（支持使用Value、RecordType过滤）
+   * 终端节点ID
    */
-  Filters?: Array<Filter>
-  /**
-   * 分页偏移量，从0开始
-   */
-  Offset?: number
-  /**
-   * 分页限制数目， 最大200，默认20
-   */
-  Limit?: number
+  EndPointId: string
 }
 
 /**
@@ -120,23 +132,35 @@ export interface PrivateDNSAccount {
 }
 
 /**
- * QueryAsyncBindVpcStatus返回参数结构体
+ * DeletePrivateDNSAccount请求参数结构体
  */
-export interface QueryAsyncBindVpcStatusResponse {
+export interface DeletePrivateDNSAccountRequest {
   /**
-   * processing 处理中，success 执行成功，
-failed 执行失败
+   * 私有域解析账号
    */
-  Status?: string
+  Account: PrivateDNSAccount
+}
+
+/**
+ * DescribePrivateZoneRecordList请求参数结构体
+ */
+export interface DescribePrivateZoneRecordListRequest {
   /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 私有域ID: zone-xxxxxx
    */
-  ErrorMsg?: string
+  ZoneId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤参数（支持使用Value、RecordType过滤）
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 分页偏移量，从0开始
+   */
+  Offset?: number
+  /**
+   * 分页限制数目， 最大200，默认20
+   */
+  Limit?: number
 }
 
 /**
@@ -194,13 +218,17 @@ export interface AccountVpcInfoOutput {
 }
 
 /**
- * DescribePrivateZone请求参数结构体
+ * DescribeAuditLog返回参数结构体
  */
-export interface DescribePrivateZoneRequest {
+export interface DescribeAuditLogResponse {
   /**
-   * 域名，格式必须是标准的TLD
+   * 操作日志列表
    */
-  ZoneId: string
+  Data?: Array<AuditLog>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -439,6 +467,28 @@ export interface AddSpecifyPrivateZoneVpcRequest {
 }
 
 /**
+ * ModifyPrivateZone请求参数结构体
+ */
+export interface ModifyPrivateZoneRequest {
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 是否开启子域名递归, ENABLED， DISABLED
+   */
+  DnsForwardStatus?: string
+  /**
+   * 是否开启CNAME加速：ENABLED， DISABLED
+   */
+  CnameSpeedupStatus?: string
+}
+
+/**
  * DescribeRequestData请求参数结构体
  */
 export interface DescribeRequestDataRequest {
@@ -489,6 +539,11 @@ export interface DescribeAccountVpcListRequest {
 }
 
 /**
+ * SubscribePrivateZoneService请求参数结构体
+ */
+export type SubscribePrivateZoneServiceRequest = null
+
+/**
  * DescribeRequestData返回参数结构体
  */
 export interface DescribeRequestDataResponse {
@@ -507,25 +562,36 @@ export interface DescribeRequestDataResponse {
 }
 
 /**
- * ModifyPrivateZone请求参数结构体
+ * DescribeEndPointList返回参数结构体
  */
-export interface ModifyPrivateZoneRequest {
+export interface DescribeEndPointListResponse {
   /**
-   * 私有域ID
+   * 终端节点总数
    */
-  ZoneId: string
+  TotalCount?: number
   /**
-   * 备注
+   * 终端节点列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark?: string
+  EndPointSet?: Array<EndPointInfo>
   /**
-   * 是否开启子域名递归, ENABLED， DISABLED
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DnsForwardStatus?: string
+  RequestId?: string
+}
+
+/**
+ * Vpc信息
+ */
+export interface VpcInfo {
   /**
-   * 是否开启CNAME加速：ENABLED， DISABLED
+   * VpcId： vpc-xadsafsdasd
    */
-  CnameSpeedupStatus?: string
+  UniqVpcId: string
+  /**
+   * Vpc所属地区: ap-guangzhou, ap-shanghai
+   */
+  Region: string
 }
 
 /**
@@ -603,39 +669,21 @@ export interface CreatePrivateZoneRequest {
 }
 
 /**
- * Vpc信息
+ * DescribeEndPointList请求参数结构体
  */
-export interface VpcInfo {
+export interface DescribeEndPointListRequest {
   /**
-   * VpcId： vpc-xadsafsdasd
+   * 分页偏移量，从0开始
    */
-  UniqVpcId: string
+  Offset?: number
   /**
-   * Vpc所属地区: ap-guangzhou, ap-shanghai
+   * 分页限制数目， 最大100，默认20
    */
-  Region: string
-}
-
-/**
- * 查询关联账号VPC列表出参
- */
-export interface AccountVpcInfoOut {
+  Limit?: number
   /**
-   * VpcId： vpc-xadsafsdasd
+   * 过滤参数，支持EndPointName,EndPointId,EndPointServiceId,EndPointVip
    */
-  VpcId: string
-  /**
-   * Vpc所属地区: ap-guangzhou, ap-shanghai
-   */
-  Region: string
-  /**
-   * Vpc所属账号: 123456789
-   */
-  Uin: string
-  /**
-   * vpc资源名称：testname
-   */
-  VpcName: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -674,6 +722,62 @@ export interface ModifyPrivateZoneResponse {
 }
 
 /**
+ * 转发规则详情
+ */
+export interface ForwardRule {
+  /**
+   * 私有域名
+   */
+  Domain?: string
+  /**
+   * 转发规则名称
+   */
+  RuleName?: string
+  /**
+   * 规则id
+   */
+  RuleId?: string
+  /**
+   * 转发规则类型：云上到云下DOWN、云下到云上DOWN
+   */
+  RuleType?: string
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 终端节点名称
+   */
+  EndPointName?: string
+  /**
+   * 终端节点ID
+   */
+  EndPointId?: string
+  /**
+   * 转发地址
+   */
+  ForwardAddress?: Array<string>
+  /**
+   * 私有域绑定的vpc列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcSet?: Array<VpcInfo>
+  /**
+   * 绑定的私有域ID
+   */
+  ZoneId?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagInfo>
+}
+
+/**
  * DeleteSpecifyPrivateZoneVpc请求参数结构体
  */
 export interface DeleteSpecifyPrivateZoneVpcRequest {
@@ -696,9 +800,22 @@ export interface DeleteSpecifyPrivateZoneVpcRequest {
 }
 
 /**
- * SubscribePrivateZoneService请求参数结构体
+ * DescribePrivateDNSAccountList请求参数结构体
  */
-export type SubscribePrivateZoneServiceRequest = null
+export interface DescribePrivateDNSAccountListRequest {
+  /**
+   * 分页偏移量，从0开始
+   */
+  Offset?: number
+  /**
+   * 分页限制数目， 最大100，默认20
+   */
+  Limit?: number
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * DescribePrivateZone返回参数结构体
@@ -773,6 +890,24 @@ export interface CreatePrivateZoneRecordResponse {
 }
 
 /**
+ * DescribeForwardRuleList请求参数结构体
+ */
+export interface DescribeForwardRuleListRequest {
+  /**
+   * 分页偏移量，从0开始
+   */
+  Offset?: number
+  /**
+   * 分页限制数目， 最大100，默认20
+   */
+  Limit?: number
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribePrivateZoneService返回参数结构体
  */
 export interface DescribePrivateZoneServiceResponse {
@@ -784,6 +919,56 @@ export interface DescribePrivateZoneServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeForwardRuleList返回参数结构体
+ */
+export interface DescribeForwardRuleListResponse {
+  /**
+   * 私有域数量
+   */
+  TotalCount?: number
+  /**
+   * 私有域列表
+   */
+  ForwardRuleSet?: Array<ForwardRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 终端节点信息
+ */
+export interface EndPointInfo {
+  /**
+   * 终端节点ID
+   */
+  EndPointId?: string
+  /**
+   * 终端节点名称
+   */
+  EndPointName?: string
+  /**
+   * 终端节点服务ID
+   */
+  EndPointServiceId?: string
+  /**
+   * 终端节点VIP列表
+   */
+  EndPointVipSet?: Array<string>
+  /**
+   * ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionCode?: string
+  /**
+   * 标签键值对集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -904,13 +1089,25 @@ export interface SubscribePrivateZoneServiceResponse {
 }
 
 /**
- * DeletePrivateDNSAccount请求参数结构体
+ * 查询关联账号VPC列表出参
  */
-export interface DeletePrivateDNSAccountRequest {
+export interface AccountVpcInfoOut {
   /**
-   * 私有域解析账号
+   * VpcId： vpc-xadsafsdasd
    */
-  Account: PrivateDNSAccount
+  VpcId: string
+  /**
+   * Vpc所属地区: ap-guangzhou, ap-shanghai
+   */
+  Region: string
+  /**
+   * Vpc所属账号: 123456789
+   */
+  Uin: string
+  /**
+   * vpc资源名称：testname
+   */
+  VpcName: string
 }
 
 /**
@@ -943,6 +1140,26 @@ export interface Filter {
    * 参数值数组
    */
   Values: Array<string>
+}
+
+/**
+ * QueryAsyncBindVpcStatus返回参数结构体
+ */
+export interface QueryAsyncBindVpcStatusResponse {
+  /**
+   * processing 处理中，success 执行成功，
+failed 执行失败
+   */
+  Status?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1039,21 +1256,13 @@ export interface MetricData {
 }
 
 /**
- * DescribePrivateDNSAccountList请求参数结构体
+ * DeletePrivateZoneRecord返回参数结构体
  */
-export interface DescribePrivateDNSAccountListRequest {
+export interface DeletePrivateZoneRecordResponse {
   /**
-   * 分页偏移量，从0开始
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 分页限制数目， 最大100，默认20
-   */
-  Limit?: number
-  /**
-   * 过滤参数
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -1182,9 +1391,57 @@ export interface CreatePrivateZoneRecordRequest {
 }
 
 /**
+ * DescribePrivateZone请求参数结构体
+ */
+export interface DescribePrivateZoneRequest {
+  /**
+   * 域名，格式必须是标准的TLD
+   */
+  ZoneId: string
+}
+
+/**
  * DescribeQuotaUsage请求参数结构体
  */
 export type DescribeQuotaUsageRequest = null
+
+/**
+ * CreateEndPointAndEndPointService请求参数结构体
+ */
+export interface CreateEndPointAndEndPointServiceRequest {
+  /**
+   * VPC实例ID
+   */
+  VpcId: string
+  /**
+   * 是否自动接受
+   */
+  AutoAcceptFlag: boolean
+  /**
+   * 后端服务ID
+   */
+  ServiceInstanceId: string
+  /**
+   * 终端节点名称
+   */
+  EndPointName: string
+  /**
+   * 终端节点地域，必须要和终端节点服务所属地域一致
+   */
+  EndPointRegion: string
+  /**
+   * 终端节点服务名称
+   */
+  EndPointServiceName?: string
+  /**
+   * 挂载的PAAS服务类型，CLB,CDB,CRS
+   */
+  ServiceType?: string
+  /**
+   * 终端节点ip数量
+   */
+  IpNum?: number
+}
 
 /**
  * ModifyPrivateZoneRecord请求参数结构体
@@ -1271,9 +1528,29 @@ export interface FlowUsage {
 }
 
 /**
- * DeletePrivateZoneRecord返回参数结构体
+ * CreateForwardRule返回参数结构体
  */
-export interface DeletePrivateZoneRecordResponse {
+export interface CreateForwardRuleResponse {
+  /**
+   * 转发规则ID
+   */
+  RuleId: string
+  /**
+   * 转发规则名称
+   */
+  RuleName: string
+  /**
+   * 转发规则类型
+   */
+  RuleType: string
+  /**
+   * 私有域ID
+   */
+  ZoneId: string
+  /**
+   * 终端节点ID
+   */
+  EndPointId: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

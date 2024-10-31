@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZone", req, cb);
     }
     /**
-     * 删除终端节点
+     * 获取私有域记录列表
      */
-    async DeleteEndPoint(req, cb) {
-        return this.request("DeleteEndPoint", req, cb);
+    async DescribePrivateZoneRecordList(req, cb) {
+        return this.request("DescribePrivateZoneRecordList", req, cb);
     }
     /**
      * 查询额度使用情况
@@ -62,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePrivateZoneRecord(req, cb) {
         return this.request("CreatePrivateZoneRecord", req, cb);
+    }
+    /**
+     * 获取终端节点列表
+     */
+    async DescribeEndPointList(req, cb) {
+        return this.request("DescribeEndPointList", req, cb);
     }
     /**
      * 创建私有域
@@ -88,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddSpecifyPrivateZoneVpc", req, cb);
     }
     /**
-     * 获取私有域记录列表
+     * 删除终端节点
      */
-    async DescribePrivateZoneRecordList(req, cb) {
-        return this.request("DescribePrivateZoneRecordList", req, cb);
+    async DeleteEndPoint(req, cb) {
+        return this.request("DeleteEndPoint", req, cb);
     }
     /**
      * 查询异步绑定vpc操作状态
@@ -148,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountVpcList", req, cb);
     }
     /**
+     * 同时创建终端节点和终端节点服务
+     */
+    async CreateEndPointAndEndPointService(req, cb) {
+        return this.request("CreateEndPointAndEndPointService", req, cb);
+    }
+    /**
      * 修改解析记录状态
      */
     async ModifyRecordsStatus(req, cb) {
@@ -160,10 +172,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSpecifyPrivateZoneVpc", req, cb);
     }
     /**
+     * 创建自定义转发规则
+     */
+    async CreateForwardRule(req, cb) {
+        return this.request("CreateForwardRule", req, cb);
+    }
+    /**
      * 查询私有域解析开通状态
      */
     async DescribePrivateZoneService(req, cb) {
         return this.request("DescribePrivateZoneService", req, cb);
+    }
+    /**
+     * 查询转发规则列表
+     */
+    async DescribeForwardRuleList(req, cb) {
+        return this.request("DescribeForwardRuleList", req, cb);
     }
     /**
      * 删除私有域解析记录

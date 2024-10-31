@@ -537,7 +537,7 @@ success 成功
  */
 export interface ModifyNatAcRuleRequest {
   /**
-   * 需要编辑的规则数组
+   * 需要编辑的规则数组,基于Uuid唯一id来修改该规则
    */
   Rules: Array<CreateNatRuleItem>
 }
@@ -547,7 +547,7 @@ export interface ModifyNatAcRuleRequest {
  */
 export interface ModifyAclRuleRequest {
   /**
-   * 需要编辑的规则数组
+   * 需要编辑的规则数组，基于Uuid唯一id修改该规则
    */
   Rules: Array<CreateRuleItem>
 }

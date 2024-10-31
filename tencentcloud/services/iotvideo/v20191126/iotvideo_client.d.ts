@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeRechargeRecordsResponse, UploadOtaVersionResponse, CreateGencodeResponse, DescribeLogsRequest, CreateIotDataTypeRequest, DescribePubVersionsRequest, RefundStorageServiceResponse, DescribeIotModelResponse, DisableDeviceResponse, DescribeRunLogRequest, DescribeProductsRequest, DeleteTraceIdsRequest, CreateStorageServiceRequest, DescribeOsListResponse, ModifyProductResponse, ModifyProductRequest, DisableDeviceStreamRequest, CreateIotModelRequest, DescribeTraceStatusResponse, CreateUploadPathRequest, CreateDevTokenRequest, DescribeStorageServiceResponse, DeleteIotDataTypeRequest, DescribeRechargeRecordsRequest, ModifyVerContentResponse, DescribeMessageQueueRequest, DeleteAppUsrResponse, DescribeRegistrationStatusResponse, DescribeProductRequest, DescribeProductsResponse, UpgradeDeviceRequest, DescribeModelDataRetResponse, CreateDevTokenResponse, RunIotModelResponse, RunIotModelRequest, DeleteProductRequest, DescribeBindUsrResponse, DescribeStreamRequest, DeleteOtaVersionRequest, DescribeIotDataTypeResponse, CreateBindingRequest, DeleteDeviceRequest, CreateAppUsrRequest, ModifyDevicePropertyRequest, RunDeviceStreamRequest, RunDeviceResponse, DeleteIotDataTypeResponse, DescribeTraceStatusRequest, CreateUsrTokenResponse, CreateTraceIdsRequest, DeleteMessageQueueResponse, DescribeOtaVersionsRequest, DescribeTraceIdsResponse, ClearDeviceActiveCodeResponse, CreateProductResponse, DescribeRegistrationStatusRequest, CreateStorageRequest, UpgradeDeviceResponse, DisableOtaVersionResponse, DescribeBindDevResponse, CreateProductRequest, RunTestOtaVersionResponse, RunTestOtaVersionRequest, DescribeDeviceResponse, SetMessageQueueResponse, DeleteOtaVersionResponse, UploadOtaVersionRequest, DescribeIotModelsRequest, DescribeModelDataRetRequest, CreateTraceIdsResponse, DescribeDevicesResponse, ModifyVerContentRequest, DeleteBindingRequest, DescribeOtaVersionsResponse, DeleteProductResponse, RunOtaVersionRequest, CreateDevicesResponse, SetMessageQueueRequest, CreateStorageServiceResponse, DescribeIotDataTypeRequest, SendOnlineMsgRequest, DescribeDeviceRequest, DescribeRunLogResponse, DeliverStorageServiceResponse, DescribeIotModelRequest, DescribeTraceIdsRequest, CreateAppUsrResponse, DeleteTraceIdsResponse, DeleteMessageQueueRequest, CreateUsrTokenRequest, RunDeviceRequest, RunOtaVersionResponse, ModifyDeviceRequest, DescribeDeviceModelResponse, DescribeStorageServiceRequest, CreateGencodeRequest, DescribePubVersionsResponse, ClearDeviceActiveCodeRequest, ModifyDeviceActionRequest, CreateIotModelResponse, DescribeBindDevRequest, CreateAnonymousAccessTokenRequest, DeliverStorageServiceRequest, RunDeviceStreamResponse, ModifyDeviceResponse, DescribeDeviceModelRequest, DescribeLogsResponse, ModifyDeviceActionResponse, CreateBindingResponse, DescribeAccountBalanceRequest, CreateDevicesRequest, DisableDeviceRequest, DescribeStreamResponse, DescribeAccountBalanceResponse, DisableOtaVersionRequest, DescribeProductResponse, CreateAnonymousAccessTokenResponse, DescribeBindUsrRequest, SendOnlineMsgResponse, DeleteAppUsrRequest, DescribeIotModelsResponse, DescribeMessageQueueResponse, DescribeOsListRequest, DescribeDevicesRequest, CreateIotDataTypeResponse, ModifyDevicePropertyResponse, DeleteBindingResponse, RefundStorageServiceRequest, CreateStorageResponse, DisableDeviceStreamResponse, DeleteDeviceResponse, CreateUploadPathResponse } from "./iotvideo_models";
+import { DescribeRechargeRecordsResponse, UploadOtaVersionResponse, CreateGencodeResponse, DescribeLogsRequest, CreateIotDataTypeRequest, DescribePubVersionsRequest, RefundStorageServiceResponse, DescribeIotModelResponse, DisableDeviceResponse, DescribeRunLogRequest, DescribeProductsRequest, DeleteTraceIdsRequest, CreateStorageServiceRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, DisableDeviceStreamRequest, CreateIotModelRequest, DescribeTraceStatusResponse, CreateUploadPathRequest, CreateDevTokenRequest, DescribeStorageServiceResponse, DeleteIotDataTypeRequest, DescribeRechargeRecordsRequest, ModifyVerContentResponse, DescribeMessageQueueRequest, DeleteAppUsrResponse, DescribeRegistrationStatusResponse, DescribeProductRequest, DescribeProductsResponse, UpgradeDeviceRequest, DescribeModelDataRetResponse, CreateDevTokenResponse, RunIotModelResponse, RunIotModelRequest, DeleteProductRequest, DescribeBindUsrResponse, DescribeStreamRequest, DeleteOtaVersionRequest, DescribeIotDataTypeResponse, CreateBindingRequest, DeleteDeviceRequest, CreateAppUsrRequest, ModifyDevicePropertyRequest, RunDeviceStreamRequest, RunDeviceResponse, DeleteIotDataTypeResponse, DescribeTraceStatusRequest, CreateUsrTokenResponse, CreateTraceIdsRequest, DeleteMessageQueueResponse, DescribeOtaVersionsRequest, DescribeTraceIdsResponse, ClearDeviceActiveCodeResponse, CreateProductResponse, DescribeRegistrationStatusRequest, CreateStorageRequest, UpgradeDeviceResponse, DisableOtaVersionResponse, DescribeBindDevResponse, CreateProductRequest, RunTestOtaVersionResponse, RunTestOtaVersionRequest, DescribeDeviceResponse, SetMessageQueueResponse, RenewUploadTestResponse, DeleteOtaVersionResponse, UploadOtaVersionRequest, DescribeIotModelsRequest, DescribeModelDataRetRequest, CreateTraceIdsResponse, DescribeOsListResponse, ModifyVerContentRequest, DeleteBindingRequest, DescribeOtaVersionsResponse, DeleteProductResponse, RunOtaVersionRequest, CreateDevicesResponse, SetMessageQueueRequest, CreateStorageServiceResponse, DescribeIotDataTypeRequest, SendOnlineMsgRequest, DescribeDeviceRequest, DescribeRunLogResponse, DeliverStorageServiceResponse, DescribeIotModelRequest, DescribeTraceIdsRequest, CreateAppUsrResponse, DeleteTraceIdsResponse, DeleteMessageQueueRequest, CreateUsrTokenRequest, RunDeviceRequest, RunOtaVersionResponse, ModifyDeviceRequest, DescribeDeviceModelResponse, DescribeStorageServiceRequest, CreateGencodeRequest, DescribePubVersionsResponse, ClearDeviceActiveCodeRequest, ModifyDeviceActionRequest, CreateIotModelResponse, DescribeBindDevRequest, RenewUploadTestRequest, CreateAnonymousAccessTokenRequest, DeliverStorageServiceRequest, RunDeviceStreamResponse, ModifyDeviceResponse, DescribeDeviceModelRequest, DescribeLogsResponse, ModifyDeviceActionResponse, CreateBindingResponse, DescribeAccountBalanceRequest, CreateDevicesRequest, DisableDeviceRequest, DescribeStreamResponse, DescribeAccountBalanceResponse, DisableOtaVersionRequest, DescribeProductResponse, CreateAnonymousAccessTokenResponse, DescribeBindUsrRequest, SendOnlineMsgResponse, DeleteAppUsrRequest, DescribeIotModelsResponse, DescribeMessageQueueResponse, DescribeOsListRequest, DescribeDevicesRequest, CreateUploadTestResponse, CreateIotDataTypeResponse, ModifyDevicePropertyResponse, CreateUploadTestRequest, DeleteBindingResponse, RefundStorageServiceRequest, CreateStorageResponse, DisableDeviceStreamResponse, DeleteDeviceResponse, CreateUploadPathResponse } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DisableOtaVersion）用于禁用固件版本。
      */
     DisableOtaVersion(req: DisableOtaVersionRequest, cb?: (error: string, rep: DisableOtaVersionResponse) => void): Promise<DisableOtaVersionResponse>;
+    /**
+     * 设备申请cos上传证书
+     */
+    CreateUploadTest(req: CreateUploadTestRequest, cb?: (error: string, rep: CreateUploadTestResponse) => void): Promise<CreateUploadTestResponse>;
     /**
      * 清除设备激活码
      */
@@ -135,9 +139,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDevToken(req: CreateDevTokenRequest, cb?: (error: string, rep: CreateDevTokenResponse) => void): Promise<CreateDevTokenResponse>;
     /**
-     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
+     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
      */
-    DeleteOtaVersion(req: DeleteOtaVersionRequest, cb?: (error: string, rep: DeleteOtaVersionResponse) => void): Promise<DeleteOtaVersionResponse>;
+    DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
     /**
      * 本接口（DeleteAppUsr）用于删除终端用户。
      */
@@ -176,9 +180,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccountBalance(req: DescribeAccountBalanceRequest, cb?: (error: string, rep: DescribeAccountBalanceResponse) => void): Promise<DescribeAccountBalanceResponse>;
     /**
-     * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
+     * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
      */
-    DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
+    DeleteProduct(req: DeleteProductRequest, cb?: (error: string, rep: DeleteProductResponse) => void): Promise<DeleteProductResponse>;
     /**
      * 查看操作系统支持的芯片列表
      */
@@ -188,9 +192,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeIotModels(req: DescribeIotModelsRequest, cb?: (error: string, rep: DescribeIotModelsResponse) => void): Promise<DescribeIotModelsResponse>;
     /**
-     * 本接口（DeleteProduct）用于删除一个物联网智能视频产品。
+     * 本接口（DeleteOtaVersion）用于删除固件版本信息。
      */
-    DeleteProduct(req: DeleteProductRequest, cb?: (error: string, rep: DeleteProductResponse) => void): Promise<DeleteProductResponse>;
+    DeleteOtaVersion(req: DeleteOtaVersionRequest, cb?: (error: string, rep: DeleteOtaVersionResponse) => void): Promise<DeleteOtaVersionResponse>;
     /**
      * 将已购买的云存服务转移到另一设备
      */
@@ -239,6 +243,10 @@ export declare class Client extends AbstractClient {
      * 本接口（RunDeviceStream）用于开启设备推流，可进行批量操作，每次操作最多100台设备。
      */
     RunDeviceStream(req: RunDeviceStreamRequest, cb?: (error: string, rep: RunDeviceStreamResponse) => void): Promise<RunDeviceStreamResponse>;
+    /**
+     * 设备刷新cos上传证书
+     */
+    RenewUploadTest(req: RenewUploadTestRequest, cb?: (error: string, rep: RenewUploadTestResponse) => void): Promise<RenewUploadTestResponse>;
     /**
      * 编辑版本描述信息
      */

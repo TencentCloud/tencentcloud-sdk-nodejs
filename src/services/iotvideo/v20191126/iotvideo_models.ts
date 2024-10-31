@@ -298,14 +298,18 @@ ye1w7d : 事件7天存储周套餐。
 }
 
 /**
- * DescribeOsList返回参数结构体
+ * DescribeDevices返回参数结构体
  */
-export interface DescribeOsListResponse {
+export interface DescribeDevicesResponse {
   /**
-   * 系统类型
+   * 设备信息 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: SystemType
+  Data?: Array<DevicesData>
+  /**
+   * 设备总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1441,6 +1445,21 @@ export interface SetMessageQueueResponse {
 }
 
 /**
+ * RenewUploadTest返回参数结构体
+ */
+export interface RenewUploadTestResponse {
+  /**
+   * 刷新证书返回的信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: RenewCertificate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 版本发布的描述信息，需要国际化，可以为空
  */
 export interface Contents {
@@ -1464,6 +1483,17 @@ export interface Contents {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default?: string
+}
+
+/**
+ * 刷新证书信息
+ */
+export interface RenewCertificate {
+  /**
+   * 刷新证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TempCertificate: CertificateInfo
 }
 
 /**
@@ -1545,22 +1575,49 @@ export interface CreateTraceIdsResponse {
 }
 
 /**
- * DescribeDevices返回参数结构体
+ * DescribeOsList返回参数结构体
  */
-export interface DescribeDevicesResponse {
+export interface DescribeOsListResponse {
   /**
-   * 设备信息 列表
+   * 系统类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<DevicesData>
-  /**
-   * 设备总数
-   */
-  TotalCount?: number
+  Data?: SystemType
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 申请上传证书回包
+ */
+export interface CosCertificate {
+  /**
+   * cos存储桶
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageBucket: string
+  /**
+   * cos存储园区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageRegion: string
+  /**
+   * 存储路径，录制场景下该值为存储目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StoragePath: string
+  /**
+   * 证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TempCertificate: CertificateInfo
+  /**
+   * SessionKey
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionKey: string
 }
 
 /**
@@ -1873,6 +1930,32 @@ export interface DescribeDeviceRequest {
    * 设备TID
    */
   Tid: string
+}
+
+/**
+ * 证书信息
+ */
+export interface CertificateInfo {
+  /**
+   * SecretId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretId: string
+  /**
+   * SecretKey
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * Token
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Token: string
+  /**
+   * 过期时间，UNIX时间戳，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime: number
 }
 
 /**
@@ -2296,6 +2379,24 @@ export interface StorageOrder {
 }
 
 /**
+ * RenewUploadTest请求参数结构体
+ */
+export interface RenewUploadTestRequest {
+  /**
+   * package ID
+   */
+  PkgId: string
+  /**
+   * 设备TID
+   */
+  Tid: string
+  /**
+   * SessionKeys
+   */
+  SessionKey: string
+}
+
+/**
  * 产品转发消息队列配置
  */
 export interface MsgQueueData {
@@ -2714,6 +2815,21 @@ export interface DescribeDevicesRequest {
 }
 
 /**
+ * CreateUploadTest返回参数结构体
+ */
+export interface CreateUploadTestResponse {
+  /**
+   * 申请设备证书返回的信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CosCertificate
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIotDataType返回参数结构体
  */
 export interface CreateIotDataTypeResponse {
@@ -2731,6 +2847,20 @@ export interface ModifyDevicePropertyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUploadTest请求参数结构体
+ */
+export interface CreateUploadTestRequest {
+  /**
+   * package ID
+   */
+  PkgId: string
+  /**
+   * 设备TID
+   */
+  Tid: string
 }
 
 /**
