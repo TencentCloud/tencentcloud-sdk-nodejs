@@ -18,27 +18,34 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeAccountGroupsResponse,
-  DescribeRootAccountGroupResponse,
-  DescribeDevicesPageRsp,
-  DeviceDetail,
-  DescribeLocalAccountsData,
-  DescribeLocalAccountsRequest,
-  FilterGroup,
-  DescribeDevicesResponse,
+  RuleItem,
   DescribeLocalAccountAccountGroupsData,
-  DescribeLocalAccountsPage,
-  DescribeDevicesRequest,
-  Paging,
+  CreateDeviceVirtualGroupResponse,
+  ComplexRule,
   Sort,
-  Condition,
-  Filter,
+  DescribeRootAccountGroupResponse,
+  DescribeDevicesResponse,
+  GetAccountGroupData,
   DescribeLocalAccountsResponse,
   DescribeAccountGroupsData,
+  RuleExpression,
   DescribeRootAccountGroupRequest,
-  GetAccountGroupData,
   DescribeAccountGroupsPageResp,
   DescribeAccountGroupsRequest,
+  DescribeAccountGroupsResponse,
+  DescribeDevicesPageRsp,
+  FilterGroup,
+  CreateDeviceVirtualGroupRequest,
+  DescribeDevicesRequest,
+  Paging,
+  DeviceDetail,
+  DescribeLocalAccountsData,
+  Filter,
+  DescribeLocalAccountsRequest,
+  DescribeLocalAccountsPage,
+  Condition,
+  CreateDeviceVirtualGroupRspData,
+  SimpleRule,
 } from "./ioa_models"
 
 /**
@@ -51,8 +58,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询账户根分组详情，私有化调用path为：capi/Assets/DescribeRootAccountGroup
-   */
+     * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+私有化调用path为：capi/Assets/DescribeRootAccountGroup
+     */
   async DescribeRootAccountGroup(
     req?: DescribeRootAccountGroupRequest,
     cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void
@@ -71,7 +79,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 以分页的方式查询账户目录列表,私有化调用path为：/capi/Assets/DescribeAccountGroups
+   * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
+   */
+  async CreateDeviceVirtualGroup(
+    req: CreateDeviceVirtualGroupRequest,
+    cb?: (error: string, rep: CreateDeviceVirtualGroupResponse) => void
+  ): Promise<CreateDeviceVirtualGroupResponse> {
+    return this.request("CreateDeviceVirtualGroup", req, cb)
+  }
+
+  /**
+   * 以分页的方式查询账号分组列表，私有化调用path为：/capi/Assets/DescribeAccountGroups
    */
   async DescribeAccountGroups(
     req: DescribeAccountGroupsRequest,

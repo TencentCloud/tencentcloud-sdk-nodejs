@@ -7917,7 +7917,7 @@ export interface RecognizeEncryptedIDCardOCRRequest {
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
@@ -10401,15 +10401,15 @@ WARN_RESHOOT_CARD翻拍件告警
    */
   Angle?: number
   /**
-   * 是否有国徽。0为没有，1为有。
+   * 是否有国徽。false为没有，true为有。
    */
   NationalEmblem?: boolean
   /**
-   * 是否有二维码。0为没有，1为有。
+   * 是否有二维码。false为没有，true为有。
    */
   QRCode?: boolean
   /**
-   * 是否有印章。0为没有，1为有。
+   * 是否有印章。false为没有，true为有。
    */
   Seal?: boolean
   /**
@@ -10425,7 +10425,7 @@ WARN_RESHOOT_CARD翻拍件告警
    */
   RegistrationAuthority?: string
   /**
-   * 是否是电子营业执照。0为不是，1为是。
+   * 是否是电子营业执照。false为没有，true为有。
    */
   Electronic?: boolean
   /**

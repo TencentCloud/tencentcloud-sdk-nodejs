@@ -883,6 +883,11 @@ export interface CmdTemplate {
    * 命令列表，命令之间用换行符（"\n"）分隔
    */
   CmdList?: string
+  /**
+   * 命令模板类型 1-内置 2-自定义	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
 }
 
 /**
@@ -1216,6 +1221,10 @@ export interface ModifyCmdTemplateRequest {
 0：否，1：是
    */
   Encoding?: number
+  /**
+   * 命令模板类型 1-内置模板 2-自定义模板
+   */
+  Type?: number
 }
 
 /**
@@ -1531,11 +1540,11 @@ export interface DescribeAclsResponse {
   /**
    * 访问权限总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 访问权限列表
    */
-  AclSet: Array<Acl>
+  AclSet?: Array<Acl>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2946,11 +2955,11 @@ export interface DescribeCmdTemplatesResponse {
   /**
    * 命令模板列表
    */
-  CmdTemplateSet: Array<CmdTemplate>
+  CmdTemplateSet?: Array<CmdTemplate>
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3296,6 +3305,10 @@ export interface DescribeCmdTemplatesRequest {
    * 命令模板名，模糊查询，最大长度64字符
    */
   Name?: string
+  /**
+   * 命令模板类型 1-内置模板  2-自定义模板
+   */
+  Type?: number
   /**
    * 分页偏移位置，默认值为0
    */
@@ -4164,6 +4177,10 @@ export interface DescribeAclsRequest {
    * 部门ID，用于过滤属于某个部门的访问权限
    */
   DepartmentId?: string
+  /**
+   * 过滤数组
+   */
+  Filters?: Array<Filter>
 }
 
 /**

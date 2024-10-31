@@ -916,7 +916,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVertexDetail", req, cb);
     }
     /**
-     * 按分页形式展示网络攻击日志列表
+     * DescribeAttackEvents 代替
+
+按分页形式展示网络攻击日志列表
      */
     async DescribeAttackLogs(req, cb) {
         return this.request("DescribeAttackLogs", req, cb);

@@ -808,7 +808,7 @@ export interface DescribeBinlogDownloadUrlResponse {
     /**
      * 下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2916,12 +2916,12 @@ export interface DescribeBinlogsResponse {
     /**
      * 记录总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * Binlog列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Binlogs: Array<BinlogItem>;
+    Binlogs?: Array<BinlogItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6536,23 +6536,23 @@ export interface BinlogItem {
     /**
      * Binlog文件名称
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件大小，单位：字节
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 事务最早时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 事务最晚时间
      */
-    FinishTime: string;
+    FinishTime?: string;
     /**
      * Binlog文件ID
      */
-    BinlogId: number;
+    BinlogId?: number;
 }
 /**
  * ModifyProxyDesc请求参数结构体
@@ -6849,7 +6849,7 @@ export interface DescribeBackupDownloadUrlResponse {
     /**
      * 备份下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -20,7 +20,7 @@
  */
 export interface DescribeExtensionRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -34,7 +34,7 @@ export interface DescribeExtensionRequest {
  */
 export interface StopAutoCalloutTaskRequest {
   /**
-   * 呼叫中心实例Id
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -291,7 +291,7 @@ export interface BindNumberCallOutSkillGroupResponse {
  */
 export interface ResetExtensionPasswordRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -712,7 +712,7 @@ export interface DescribeExtensionsResponse {
  */
 export interface DeleteExtensionRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -1966,7 +1966,7 @@ export interface ModifyStaffResponse {
  */
 export interface ModifyExtensionRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -3068,7 +3068,7 @@ export interface CallInNumberMetrics {
  */
 export interface CreateExtensionRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -3674,7 +3674,7 @@ export interface DescribeActiveCarrierPrivilegeNumberResponse {
  */
 export interface HangUpCallRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
@@ -4162,7 +4162,7 @@ export interface DescribeTelRecordAsrResponse {
  */
 export interface DescribeExtensionsRequest {
   /**
-   * TCCC 实例应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**

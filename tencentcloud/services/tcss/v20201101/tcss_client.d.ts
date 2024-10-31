@@ -498,7 +498,7 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
      */
     DescribeAgentInstallCommand(req: DescribeAgentInstallCommandRequest, cb?: (error: string, rep: DescribeAgentInstallCommandResponse) => void): Promise<DescribeAgentInstallCommandResponse>;
     /**
-     * 查询导出任务的结果
+     * 查询导出接口进度
      */
     DescribeExportJobResult(req: DescribeExportJobResultRequest, cb?: (error: string, rep: DescribeExportJobResultResponse) => void): Promise<DescribeExportJobResultResponse>;
     /**

@@ -946,16 +946,44 @@ export interface GetServiceStatusResponse {
   /**
    * true表示服务已开通，false 表示服务尚未开通。
    */
-  ServiceEnabled: boolean
+  ServiceEnabled?: boolean
   /**
    * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放。
    */
-  InvalidType: number
+  InvalidType?: number
   /**
    * true表示用户已经可以使用密钥安全托管功能，
 false表示用户暂时不能使用密钥安全托管功能。
    */
-  AccessKeyEscrowEnabled: boolean
+  AccessKeyEscrowEnabled?: boolean
+  /**
+   * 过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 计算性能限制
+   */
+  QPSLimit?: number
+  /**
+   * 凭据个数限制
+   */
+  SecretLimit?: number
+  /**
+   * 付费模式
+   */
+  PayModel?: string
+  /**
+   * 自动续费标识，0:手动续费 1:自动续费 2:到期不续
+   */
+  RenewFlag?: number
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+  /**
+   * 已托管凭据个数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

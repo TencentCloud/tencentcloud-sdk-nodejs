@@ -686,6 +686,11 @@ export interface AssetViewCFGRisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
+  /**
+   * 当资产类型为LBL的时候，展示该字段，方便定位具体的LB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClbId?: string
 }
 
 /**
@@ -888,7 +893,7 @@ CSIP:云安全中心
    */
   Victim?: RoleInfo
   /**
-   * 证据数据(例如攻击内容等)
+   * 证据数据(例如攻击内容等，base64编码)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EvidenceData?: string
@@ -1325,6 +1330,16 @@ export interface DataSearchBug {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CWPFix?: number
+  /**
+   * 产品支持状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSupport?: Array<ProductSupport>
+  /**
+   * cveId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CveId?: string
 }
 
 /**
@@ -1743,7 +1758,7 @@ export interface DescribeDomainAssetsRequest {
    */
   MemberId?: Array<string>
   /**
-   * -
+   * 过滤器参数
    */
   Filter?: Filter
   /**
@@ -2968,6 +2983,10 @@ export interface StopRiskCenterTaskResponse {
  */
 export interface DescribeVpcAssetsRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 过滤参数
    */
   Filter?: Filter
@@ -3146,9 +3165,49 @@ export interface PublicIpDomainListKey {
  */
 export interface DescribeTopAttackInfoRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 被调用的集团账号的成员id
    */
   OperatedMemberId?: Array<string>
+}
+
+/**
+ * 漏洞信息产品支持状态
+ */
+export interface ProductSupport {
+  /**
+   * true支持扫描。false不支持扫描
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VSSScan?: boolean
+  /**
+   * 0不支持，1支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPScan?: string
+  /**
+   * 1支持虚拟补丁，0或空不支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CFWPatch?: string
+  /**
+   * 0不支持，1支持	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafPatch?: number
+  /**
+   * 0不支持，1支持	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPFix?: number
+  /**
+   * cveid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CveId?: string
 }
 
 /**
@@ -3156,12 +3215,12 @@ export interface DescribeTopAttackInfoRequest {
  */
 export interface DescribeCVMAssetsResponse {
   /**
-   * -
+   * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * -
+   * 机器列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<CVMAssetVO>
@@ -3379,7 +3438,7 @@ export interface DescribePublicIpAssetsRequest {
    */
   MemberId?: Array<string>
   /**
-   * filte过滤条件
+   * 过滤器参数
    */
   Filter?: Filter
   /**
@@ -3868,6 +3927,10 @@ export interface UpdateAlertStatusListRequest {
    */
   OperateType: number
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * 被调用的集团账号的成员id
    */
   OperatedMemberId?: Array<string>
@@ -4242,6 +4305,10 @@ export interface VULRiskInfo {
  * DescribeClusterPodAssets请求参数结构体
  */
 export interface DescribeClusterPodAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤
    */
@@ -4978,6 +5045,10 @@ export interface ServerRiskSuggestion {
  * DescribeSubnetAssets请求参数结构体
  */
 export interface DescribeSubnetAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤参数
    */
@@ -5840,7 +5911,7 @@ export interface DescribeDbAssetsRequest {
    */
   MemberId?: Array<string>
   /**
-   * -
+   * 过滤器参数
    */
   Filter?: Filter
   /**
@@ -6250,6 +6321,10 @@ export interface ModifyOrganizationAccountStatusRequest {
    * 修改集团账号状态，1 开启， 2关闭
    */
   Status: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -6393,12 +6468,12 @@ export interface BugInfoDetail {
  */
 export interface DescribeDomainAssetsResponse {
   /**
-   * -
+   * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * -
+   * 域名列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<DomainAssetVO>
@@ -6554,7 +6629,7 @@ export interface DescribeCVMAssetsRequest {
    */
   MemberId?: Array<string>
   /**
-   * -
+   * 过滤器参数
    */
   Filter?: Filter
 }
@@ -6749,7 +6824,7 @@ export interface DescribeListenerListRequest {
    */
   MemberId?: Array<string>
   /**
-   * -
+   * 过滤器参数
    */
   Filter?: Filter
 }

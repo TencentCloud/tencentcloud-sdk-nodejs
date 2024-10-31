@@ -432,7 +432,7 @@ export interface CreateCorporationOrderResponse {
    * 企业ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -447,7 +447,7 @@ export interface ModifyProductResponse {
    * 商品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -792,7 +792,7 @@ export interface CreateMerchantRequest {
    */
   CorpId?: number
   /**
-   * 码包来源 0:自建, 1:第三发
+   * 码包来源 0:自建, 1:第三方
    */
   CodeType?: number
   /**
@@ -905,7 +905,7 @@ export interface CreateTraceChainResponse {
   /**
    * 溯源ID
    */
-  TraceId: string
+  TraceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -917,13 +917,13 @@ export interface CreateTraceChainResponse {
  */
 export interface DescribeTraceDataListResponse {
   /**
-   * 数量
+   * 溯源阶段数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
-   * 无
+   * 溯源明细
    */
-  TraceDataList: Array<TraceData>
+  TraceDataList?: Array<TraceData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1341,7 +1341,7 @@ export interface ModifyTraceDataRanksResponse {
    * 批次ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1385,7 +1385,7 @@ export interface DescribeCodeBatchByIdResponse {
   /**
    * 批次
    */
-  CodeBatch: CodeBatch
+  CodeBatch?: CodeBatch
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1400,12 +1400,12 @@ export interface DescribeCorpQuotasResponse {
    * 子企业额度使用情况
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpQuotas: Array<CorpQuota>
+  CorpQuotas?: Array<CorpQuota>
   /**
    * 记录总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1579,7 +1579,7 @@ export interface ModifyCustomRuleResponse {
    * 码规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomId: string
+  CustomId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1594,7 +1594,7 @@ export interface ModifyMerchantResponse {
    * 商户标识码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1624,7 +1624,7 @@ export interface CreateProductResponse {
    * 商品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2218,7 +2218,7 @@ export interface ModifyCustomRuleStatusResponse {
    * 码规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomId: string
+  CustomId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2260,7 +2260,7 @@ export interface ModifyMerchantRequest {
    */
   CorpId?: number
   /**
-   * 码包来源 0:自建, 1:第三码包，暂不支持修改
+   * 码包来源 0:自建, 1:第三方码包，暂不支持修改
    */
   CodeType?: number
   /**
@@ -2356,7 +2356,7 @@ export interface DeleteTraceDataResponse {
    * 溯源id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TraceId: string
+  TraceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2403,7 +2403,7 @@ export interface DescribeMerchantByIdResponse {
    * 商户信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Merchant: Merchant
+  Merchant?: Merchant
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2427,7 +2427,7 @@ export interface DescribeTraceDataByIdResponse {
   /**
    * 无
    */
-  TraceData: TraceData
+  TraceData?: TraceData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2451,7 +2451,7 @@ export interface CreateTraceDataResponse {
   /**
    * 溯源ID
    */
-  TraceId: string
+  TraceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2466,7 +2466,7 @@ export interface DescribeCustomRuleByIdResponse {
    * 码规则信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomRule: CustomRule
+  CustomRule?: CustomRule
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2501,7 +2501,7 @@ export interface CreateCustomRuleResponse {
    * 码规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomId: string
+  CustomId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2604,7 +2604,7 @@ export interface CreateTraceCodesAsyncResponse {
    * 批次ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3011,7 +3011,7 @@ export interface DescribeCodeBatchesRequest {
    */
   CorpId?: number
   /**
-   * 批次状态
+   * 批次状态 0: 未激活 1: 已激活 -1: 已冻结
    */
   Status?: number
 }
@@ -3257,7 +3257,7 @@ export interface CreateMerchantResponse {
    * 商户标识码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3272,12 +3272,12 @@ export interface DescribeMerchantsResponse {
    * 商户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Merchants: Array<Merchant>
+  Merchants?: Array<Merchant>
   /**
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3319,7 +3319,7 @@ export interface DescribeTraceDataListRequest {
    */
   PageNumber?: number
   /**
-   * 二维码
+   * 溯源码
    */
   Code?: string
   /**
@@ -3361,7 +3361,7 @@ export interface DeleteMerchantResponse {
    * 商户标识码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3375,7 +3375,7 @@ export interface DeleteCodeBatchResponse {
   /**
    * 批次ID
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3432,7 +3432,7 @@ export interface DescribeProductByIdResponse {
    * 商品信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Product: Product
+  Product?: Product
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3504,12 +3504,12 @@ export interface DescribeCustomRulesResponse {
    * 码规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomRules: Array<CustomRule>
+  CustomRules?: Array<CustomRule>
   /**
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

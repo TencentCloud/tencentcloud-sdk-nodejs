@@ -9260,6 +9260,16 @@ export interface Ipv6Address {
 <li>`AVAILABLE`：可用的</li>
    */
   State?: string
+  /**
+   * 如果 IPv6地址是 ULA 类型，绑定的公网IP地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIpAddress?: string
+  /**
+   * `IPv6`地址的类型: `GUA`, `OTHER`, `ULA`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressType?: string
 }
 
 /**
@@ -10792,7 +10802,7 @@ export interface CcnInstance {
 <li>`BMVPC`：黑石私有网络</li>
 <li>`VPNGW`：VPNGW类型</li>
    */
-  InstanceType?: string
+  InstanceType: string
   /**
    * 备注
    */
@@ -17850,7 +17860,7 @@ export interface ReplaceCcnRouteTableInputPolicysRequest {
   /**
    * 新的路由接收策略。
    */
-  Policys?: Array<CcnRouteTableInputPolicy>
+  Policys: Array<CcnRouteTableInputPolicy>
 }
 
 /**

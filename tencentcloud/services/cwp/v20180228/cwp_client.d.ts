@@ -600,7 +600,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeVertexDetail(req: DescribeVertexDetailRequest, cb?: (error: string, rep: DescribeVertexDetailResponse) => void): Promise<DescribeVertexDetailResponse>;
     /**
-     * 按分页形式展示网络攻击日志列表
+     * DescribeAttackEvents 代替
+
+按分页形式展示网络攻击日志列表
      */
     DescribeAttackLogs(req: DescribeAttackLogsRequest, cb?: (error: string, rep: DescribeAttackLogsResponse) => void): Promise<DescribeAttackLogsResponse>;
     /**

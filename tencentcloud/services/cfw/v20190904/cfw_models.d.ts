@@ -5,11 +5,11 @@ export interface ModifyEWRuleStatusResponse {
     /**
      * 状态值，0：修改成功，非0：修改失败
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * 状态信息，success：查询成功，fail：查询失败
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2549,50 +2549,122 @@ export interface AcListsData {
     /**
      * 规则id
      */
-    Id: number;
+    Id?: number;
     /**
      * 访问源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceIp: string;
+    SourceIp?: string;
     /**
      * 访问目的
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetIp: string;
+    TargetIp?: string;
     /**
      * 协议
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port: string;
+    Port?: string;
     /**
      * 策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Strategy: number;
+    Strategy?: number;
     /**
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: string;
+    Detail?: string;
     /**
      * 命中次数
      */
-    Count: number;
+    Count?: number;
     /**
      * 执行顺序
      */
-    OrderIndex: number;
+    OrderIndex?: number;
     /**
      * 告警规则id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogId: string;
+    LogId?: string;
+    /**
+     * 规则开关状态 1打开 0关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 规则源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcType?: number;
+    /**
+     * 规则目的类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstType?: number;
+    /**
+     * 规则唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uuid?: string;
+    /**
+     * 规则有效性
+  1 有效
+  0 无效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Invalid?: number;
+    /**
+     * 是否地域规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsRegion?: number;
+    /**
+     * 云厂商代码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudCode?: string;
+    /**
+     * 自动化助手信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoTask?: string;
+    /**
+     * 实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 地域码信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionCode?: string;
+    /**
+     * 国家代码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Country?: number;
+    /**
+     * 城市代码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    City?: number;
+    /**
+     * 国家名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegName1?: string;
+    /**
+     * 城市名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegName2?: string;
 }
 /**
  * ModifySecurityGroupItemRuleStatus请求参数结构体
@@ -3214,15 +3286,6 @@ export interface DescribeNatFwInfoCountResponse {
     RequestId?: string;
 }
 /**
- * SyncFwOperate返回参数结构体
- */
-export interface SyncFwOperateResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeDefenseSwitch请求参数结构体
  */
 export declare type DescribeDefenseSwitchRequest = null;
@@ -3490,7 +3553,7 @@ export interface CreateNatFwInstanceWithDomainResponse {
      * nat实例信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CfwInsId: string;
+    CfwInsId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3683,20 +3746,20 @@ export interface DescribeAcListsResponse {
     /**
      * 总条数
      */
-    Total: number;
+    Total?: number;
     /**
      * 访问控制列表数据
      */
-    Data: Array<AcListsData>;
+    Data?: Array<AcListsData>;
     /**
      * 不算筛选条数的总条数
      */
-    AllTotal: number;
+    AllTotal?: number;
     /**
      * 访问控制规则全部启用/全部停用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3837,17 +3900,9 @@ export interface DeleteBlockIgnoreRuleListRequest {
     RuleType: number;
 }
 /**
- * DescribeNatSwitchList返回参数结构体
+ * SyncFwOperate返回参数结构体
  */
-export interface DescribeNatSwitchListResponse {
-    /**
-     * 总数
-     */
-    Total?: number;
-    /**
-     * NAT边界防火墙开关列表数据
-     */
-    Data?: Array<NatSwitchListData>;
+export interface SyncFwOperateResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5430,43 +5485,6 @@ export interface CustomWhiteRule {
     IdsRuleId?: string;
 }
 /**
- * DescribeNatSwitchList请求参数结构体
- */
-export interface DescribeNatSwitchListRequest {
-    /**
-     * 偏移量，分页用
-     */
-    Offset: number;
-    /**
-     * 条数，分页用
-     */
-    Limit: number;
-    /**
-     * 搜索值
-     */
-    SearchValue?: string;
-    /**
-     * 开关，1打开，0关闭
-     */
-    Status?: number;
-    /**
-     * 筛选NAT防火墙子网开关所属VPC
-     */
-    VpcId?: string;
-    /**
-     * 筛选NAT防火墙子网开关所属NAT网关
-     */
-    NatId?: string;
-    /**
-     * 筛选NAT防火墙子网开关所属NAT防火墙实例
-     */
-    NatInsId?: string;
-    /**
-     * 筛选NAT防火墙子网开关所属地域
-     */
-    Area?: string;
-}
-/**
  * DescribeFwEdgeIps返回参数结构体
  */
 export interface DescribeFwEdgeIpsResponse {
@@ -6966,110 +6984,6 @@ export interface DescribeEnterpriseSGRuleProgressResponse {
     RequestId?: string;
 }
 /**
- * NAT防火墙开关列表数据
- */
-export interface NatSwitchListData {
-    /**
-     * 列表ID
-     */
-    Id?: number;
-    /**
-     * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
-    /**
-     * 子网名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetName?: string;
-    /**
-     * IPv4 CIDR
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetCidr?: string;
-    /**
-     * 关联路由ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RouteId?: string;
-    /**
-     * 关联路由名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RouteName?: string;
-    /**
-     * 云服务器个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CvmNum?: number;
-    /**
-     * 所属VPC ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
-    /**
-     * 所属VPC名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcName?: string;
-    /**
-     * 是否生效
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Enable?: number;
-    /**
-     * 开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * NAT网关ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NatId?: string;
-    /**
-     * NAT网关名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NatName?: string;
-    /**
-     * NAT防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NatInsId?: string;
-    /**
-     * NAT防火墙实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NatInsName?: string;
-    /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
-    /**
-     * 开关是否异常,0:正常,1:异常
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Abnormal?: number;
-    /**
-     * nat防火墙出口路由表id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ORTableId?: string;
-    /**
-     * nat防火墙出口路由表名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ORTableName?: string;
-    /**
-     * 出口Snat Ip列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Ohavips?: Array<string>;
-}
-/**
  * DescribeSwitchLists返回参数结构体
  */
 export interface DescribeSwitchListsResponse {
@@ -7190,7 +7104,7 @@ export interface DescribeNatFwInstanceResponse {
     /**
      * 实例数组
      */
-    NatinsLst: Array<NatFwInstance>;
+    NatinsLst?: Array<NatFwInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

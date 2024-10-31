@@ -89,11 +89,11 @@ export interface DescribeScanIgnoreVulListResponse {
     /**
      * 总是
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞列表
      */
-    List: Array<ScanIgnoreVul>;
+    List?: Array<ScanIgnoreVul>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -163,7 +163,7 @@ export interface CreateVulExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -200,10 +200,6 @@ export interface CreateComponentExportJobRequest {
      */
     ImageID: string;
     /**
-     * 导出字段
-     */
-    ExportField: Array<string>;
-    /**
      * 需要返回的数量，默认为10000，最大值为10000
      */
     Limit?: number;
@@ -224,6 +220,10 @@ export interface CreateComponentExportJobRequest {
      * 排序方式desc ，asc
      */
     Order?: string;
+    /**
+     * 导出字段
+     */
+    ExportField?: Array<string>;
 }
 /**
  * 表示是否启用合规标准。
@@ -279,7 +279,7 @@ export interface CreateVulDefenceHostExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -431,7 +431,7 @@ export interface CreateVulImageExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -444,38 +444,38 @@ export interface AbnormalProcessEventDescription {
     /**
      * 事件规则
      */
-    Description: string;
+    Description?: string;
     /**
      * 解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 命中规则详细信息
      */
-    MatchRule: AbnormalProcessChildRuleInfo;
+    MatchRule?: AbnormalProcessChildRuleInfo;
     /**
      * 命中规则名称，PROXY_TOOL：代理软件，TRANSFER_CONTROL：横向渗透，ATTACK_CMD：恶意命令，REVERSE_SHELL：反弹shell，FILELESS：无文件程序执行，RISK_CMD：高危命令，ABNORMAL_CHILD_PROC：敏感服务异常子进程启动，USER_DEFINED_RULE：用户自定义规则
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 命中规则的id
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 事件最后一次处理的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OperationTime: string;
+    OperationTime?: string;
     /**
      * 命中策略名称：SYSTEM_DEFINED_RULE （系统策略）或  用户自定义的策略名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
 }
 /**
  * 表示一个定时任务的周期设置
@@ -516,11 +516,11 @@ export interface DescribeVulImageListResponse {
     /**
      * 受影响的镜像列表
      */
-    List: Array<VulAffectedImageInfo>;
+    List?: Array<VulAffectedImageInfo>;
     /**
      * 镜像总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -902,7 +902,7 @@ export interface DescribeAssetImageRegistryVirusListExportResponse {
      * excel文件下载地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -915,7 +915,7 @@ export interface DescribeSecEventsTendencyResponse {
     /**
      * 运行时安全事件趋势信息列表
      */
-    EventTendencySet: Array<SecTendencyEventInfo>;
+    EventTendencySet?: Array<SecTendencyEventInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1049,7 +1049,7 @@ export interface ClusterPodInfo {
      */
     ClusterType?: string;
     /**
-     * abc
+     * 节点名称
      */
     NodeName?: string;
     /**
@@ -1077,7 +1077,7 @@ export interface CreateAccessControlsRuleExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1248,47 +1248,47 @@ export interface DescribeVirusAutoIsolateSampleDetailResponse {
     /**
      * 文件Md5值
      */
-    MD5: string;
+    MD5?: string;
     /**
      * 文件大小(B)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Size: number;
+    Size?: number;
     /**
      * 病毒名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirusName: string;
+    VirusName?: string;
     /**
      * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 查杀引擎
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KillEngine: Array<string>;
+    KillEngine?: Array<string>;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 事件描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HarmDescribe: string;
+    HarmDescribe?: string;
     /**
      * 建议方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuggestScheme: string;
+    SuggestScheme?: string;
     /**
      * 参考链接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReferenceLink: string;
+    ReferenceLink?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1592,11 +1592,11 @@ export interface UpdateAndPublishNetworkFirewallPolicyDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1699,7 +1699,7 @@ export interface DescribeVulTendencyResponse {
     /**
      * 漏洞趋势列表
      */
-    VulTendencySet: Array<VulTendencyInfo>;
+    VulTendencySet?: Array<VulTendencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1789,6 +1789,14 @@ export interface DescribeAgentDaemonSetCmdResponse {
      */
     Command?: string;
     /**
+     * 文件url
+     */
+    URL?: string;
+    /**
+     * 文件内容(base64编码)
+     */
+    FileContent?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -1854,11 +1862,11 @@ export interface OpenTcssTrialResponse {
     /**
      * 试用开通结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 试用开通开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1928,33 +1936,33 @@ export interface AccessControlEventDescription {
     /**
      * 事件规则
      */
-    Description: string;
+    Description?: string;
     /**
      * 解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 命中规则详细信息
      */
-    MatchRule: AccessControlChildRuleInfo;
+    MatchRule?: AccessControlChildRuleInfo;
     /**
      * 命中规则名字
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 命中规则id
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 事件最后一次处理的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OperationTime: string;
+    OperationTime?: string;
 }
 /**
  * DescribeAccessControlEvents返回参数结构体
@@ -2002,11 +2010,11 @@ export interface DescribeRiskSyscallWhiteListsResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 白名单信息列表
      */
-    WhiteListSet: Array<RiskSyscallWhiteListBaseInfo>;
+    WhiteListSet?: Array<RiskSyscallWhiteListBaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2019,11 +2027,11 @@ export interface CreateNetworkFirewallPolicyDiscoverResponse {
     /**
      * 返回创建的集群检查任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2036,27 +2044,27 @@ export interface ComplianceAssetDetailInfo {
     /**
      * 客户资产的ID。
      */
-    CustomerAssetId: number;
+    CustomerAssetId?: number;
     /**
      * 资产类别。
      */
-    AssetType: string;
+    AssetType?: string;
     /**
      * 资产的名称。
      */
-    AssetName: string;
+    AssetName?: string;
     /**
      * 资产所属的节点的名称。
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 资产所在的主机的名称。
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 资产所在的主机的IP。
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 检测状态
   CHECK_INIT, 待检测
@@ -2064,31 +2072,31 @@ export interface ComplianceAssetDetailInfo {
   CHECK_FINISHED, 检测完成
   CHECK_FAILED, 检测失败
      */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
      * 此类资产通过的检测项的数目。
      */
-    PassedPolicyItemCount: number;
+    PassedPolicyItemCount?: number;
     /**
      * 此类资产未通过的检测的数目。
      */
-    FailedPolicyItemCount: number;
+    FailedPolicyItemCount?: number;
     /**
      * 上次检测的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastCheckTime: string;
+    LastCheckTime?: string;
     /**
      * 检测结果：
   RESULT_FAILED: 未通过。
   RESULT_PASSED: 通过。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckResult: string;
+    CheckResult?: string;
     /**
      * 资产的运行状态。
      */
-    AssetStatus: string;
+    AssetStatus?: string;
     /**
      * 创建资产的时间。
   ASSET_NORMAL: 正常运行，
@@ -2096,7 +2104,7 @@ export interface ComplianceAssetDetailInfo {
   ASSET_STOPPED: 停止运行，
   ASSET_ABNORMAL: 异常
      */
-    AssetCreateTime: string;
+    AssetCreateTime?: string;
 }
 /**
  * 未授权核数趋势
@@ -2135,29 +2143,29 @@ export interface AssetClusterListItem {
     /**
      * 集群ID
      */
-    ClusterID: string;
+    ClusterID?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群状态
   CSR_RUNNING: 运行中
   CSR_EXCEPTION:异常
   CSR_DEL:已经删除
      */
-    Status: string;
+    Status?: string;
     /**
      * 绑定规则名称
      */
-    BindRuleName: string;
+    BindRuleName?: string;
     /**
      * 集群类型:
   CT_TKE:TKE集群;
   CT_USER_CREATE:用户自建集群;
   CT_TKE_SERVERLESS:TKE Serverless集群;
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 集群版本
      */
@@ -2264,11 +2272,11 @@ export interface DescribeAssetImageRiskListResponse {
     /**
      * 镜像病毒列表
      */
-    List: Array<ImageRiskInfo>;
+    List?: Array<ImageRiskInfo>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2281,7 +2289,7 @@ export interface CreateEmergencyVulExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2389,6 +2397,10 @@ export interface ImageSimpleInfo {
      * 关联容器数
      */
     ContainerCnt: number;
+    /**
+     * 关联主机数
+     */
+    HostCnt: number;
 }
 /**
  * DescribeComplianceAssetDetailInfo请求参数结构体
@@ -2454,7 +2466,7 @@ export interface CreateExportComplianceStatusListJobResponse {
      * 返回创建的导出任务的ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2519,23 +2531,23 @@ export interface ComplianceBenchmarkStandard {
     /**
      * 合规标准的ID
      */
-    StandardId: number;
+    StandardId?: number;
     /**
      * 合规标准的名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 合规标准包含的数目
      */
-    PolicyItemCount: number;
+    PolicyItemCount?: number;
     /**
      * 是否启用此标准
      */
-    Enabled: boolean;
+    Enabled?: boolean;
     /**
      * 标准的描述
      */
-    Description: string;
+    Description?: string;
 }
 /**
  * DescribeEscapeRuleInfo返回参数结构体
@@ -2544,7 +2556,7 @@ export interface DescribeEscapeRuleInfoResponse {
     /**
      * 规则信息
      */
-    RuleSet: Array<EscapeRule>;
+    RuleSet?: Array<EscapeRule>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2741,11 +2753,11 @@ export interface DescribeAssetClusterListResponse {
     /**
      * 集群列表
      */
-    List: Array<AssetClusterListItem>;
+    List?: Array<AssetClusterListItem>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2791,7 +2803,7 @@ export interface CompliancePeriodTask {
     /**
      * 周期任务的ID
      */
-    PeriodTaskId: number;
+    PeriodTaskId?: number;
     /**
      * 资产类型。
   ASSET_CONTAINER, 容器
@@ -2799,24 +2811,24 @@ export interface CompliancePeriodTask {
   ASSET_HOST, 主机
   ASSET_K8S, K8S资产
      */
-    AssetType: string;
+    AssetType?: string;
     /**
      * 最近一次触发的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastTriggerTime: string;
+    LastTriggerTime?: string;
     /**
      * 总的检查项数目
      */
-    TotalPolicyItemCount: number;
+    TotalPolicyItemCount?: number;
     /**
      * 周期设置
      */
-    PeriodRule: CompliancePeriodTaskRule;
+    PeriodRule?: CompliancePeriodTaskRule;
     /**
      * 合规标准列表
      */
-    BenchmarkStandardSet: Array<ComplianceBenchmarkStandard>;
+    BenchmarkStandardSet?: Array<ComplianceBenchmarkStandard>;
 }
 /**
  * DescribeAssetImageRegistryRiskListExport返回参数结构体
@@ -2826,7 +2838,7 @@ export interface DescribeAssetImageRegistryRiskListExportResponse {
      * excel文件下载地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2839,15 +2851,15 @@ export interface SecLogAlertMsgInfo {
     /**
      * 告警类型
      */
-    MsgType: string;
+    MsgType?: string;
     /**
      * 告警值
      */
-    MsgValue: string;
+    MsgValue?: string;
     /**
      * 状态(0:关闭 1:开启)
      */
-    State: boolean;
+    State?: boolean;
 }
 /**
  * 镜像自动授权结果信息
@@ -2997,32 +3009,32 @@ export interface RuleBaseInfo {
     /**
      * true: 默认策略，false:自定义策略
      */
-    IsDefault: boolean;
+    IsDefault?: boolean;
     /**
      * 策略生效镜像数量
      */
-    EffectImageCount: number;
+    EffectImageCount?: number;
     /**
      * 策略Id
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 策略更新时间, 存在为空的情况
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 策略名字
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 编辑用户名称
      */
-    EditUserName: string;
+    EditUserName?: string;
     /**
      * true: 策略启用，false：策略禁用
      */
-    IsEnable: boolean;
+    IsEnable?: boolean;
 }
 /**
  * 容器安全进程列表
@@ -3175,7 +3187,7 @@ export interface DescribePublicKeyResponse {
     /**
      * 公钥
      */
-    PublicKey: string;
+    PublicKey?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3503,7 +3515,7 @@ export interface DescribeK8sApiAbnormalTendencyResponse {
     /**
      * 趋势列表
      */
-    List: Array<K8sApiAbnormalTendencyItem>;
+    List?: Array<K8sApiAbnormalTendencyItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3516,63 +3528,63 @@ export interface K8sApiAbnormalEventListItem {
     /**
      * 事件ID
      */
-    ID: number;
+    ID?: number;
     /**
      * 命中规则类型
      */
-    MatchRuleType: string;
+    MatchRuleType?: string;
     /**
      * 威胁等级
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 集群ID
      */
-    ClusterID: string;
+    ClusterID?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群运行状态
      */
-    ClusterRunningStatus: string;
+    ClusterRunningStatus?: string;
     /**
      * 初次生成时间
      */
-    FirstCreateTime: string;
+    FirstCreateTime?: string;
     /**
      * 最近一次生成时间
      */
-    LastCreateTime: string;
+    LastCreateTime?: string;
     /**
      * 告警数量
      */
-    AlarmCount: number;
+    AlarmCount?: number;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 规则类型
      */
-    RuleType: string;
+    RuleType?: string;
     /**
      * 描述信息
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 解决方案
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 命中规则
      */
-    MatchRule: K8sApiAbnormalRuleScopeInfo;
+    MatchRule?: K8sApiAbnormalRuleScopeInfo;
 }
 /**
  * 安全日志接入详情
@@ -3714,70 +3726,70 @@ export interface ReverseShellEventInfo {
     /**
      * 进程名称
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 进程路径
      */
-    ProcessPath: string;
+    ProcessPath?: string;
     /**
      * 镜像id
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器id
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 镜像名
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 容器名
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 生成时间
      */
-    FoundTime: string;
+    FoundTime?: string;
     /**
      * 事件解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件详细描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 状态，EVENT_UNDEAL:事件未处理
       EVENT_DEALED:事件已经处理
       EVENT_INGNORE：事件已经忽略
       EVENT_ADD_WHITE：时间已经加白
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件id
      */
-    EventId: string;
+    EventId?: string;
     /**
      * 备注
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 父进程名
      */
-    PProcessName: string;
+    PProcessName?: string;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 最近生成时间
      */
-    LatestFoundTime: string;
+    LatestFoundTime?: string;
     /**
      * 目标地址
      */
-    DstAddress: string;
+    DstAddress?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -3787,7 +3799,7 @@ export interface ReverseShellEventInfo {
   解除隔离中  RESTORING
   解除隔离失败 RESTORE_FAILED
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -3798,11 +3810,11 @@ export interface ReverseShellEventInfo {
       "RESOURCE_LIMIT"      //隔离操作资源超限
       "UNKNOW"              // 原因未知
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -3813,7 +3825,51 @@ export interface ReverseShellEventInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
+    /**
+     * 集群id
+     */
+    ClusterID?: string;
+    /**
+     * 节点类型：NORMAL普通节点、SUPER超级节点
+     */
+    NodeType?: string;
+    /**
+     * pod name
+     */
+    PodName?: string;
+    /**
+     * pod ip
+     */
+    PodIP?: string;
+    /**
+     * 节点唯一id
+     */
+    NodeUniqueID?: string;
+    /**
+     * 节点公网ip
+     */
+    PublicIP?: string;
+    /**
+     * 节点名称
+     */
+    NodeName?: string;
+    /**
+     * uuid
+     */
+    HostID?: string;
+    /**
+     * 节点内网ip
+     */
+    HostIP?: string;
+    /**
+     * 节点 id
+     */
+    NodeID?: string;
+    /**
+     * 集群名称
+     */
+    ClusterName?: string;
 }
 /**
  * DescribeSecLogJoinObjectList返回参数结构体
@@ -4000,11 +4056,11 @@ export interface DescribeAssetImageVirusListResponse {
     /**
      * 镜像病毒列表
      */
-    List: Array<ImageVirusInfo>;
+    List?: Array<ImageVirusInfo>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 病毒扫描状态
   0:未扫描
@@ -4013,7 +4069,7 @@ export interface DescribeAssetImageVirusListResponse {
   3:扫描出错
   4:扫描取消
      */
-    VirusScanStatus: number;
+    VirusScanStatus?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4035,23 +4091,23 @@ export interface DescribeK8sApiAbnormalSummaryResponse {
     /**
      * 待处理事件个数
      */
-    UnhandleEventCount: number;
+    UnhandleEventCount?: number;
     /**
      * 待处理高危事件个数
      */
-    UnhandleHighLevelEventCount: number;
+    UnhandleHighLevelEventCount?: number;
     /**
      * 待处理中危事件个数
      */
-    UnhandleMediumLevelEventCount: number;
+    UnhandleMediumLevelEventCount?: number;
     /**
      * 待处理低危事件个数
      */
-    UnhandleLowLevelEventCount: number;
+    UnhandleLowLevelEventCount?: number;
     /**
      * 待处理提示级别事件个数
      */
-    UnhandleNoticeLevelEventCount: number;
+    UnhandleNoticeLevelEventCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4198,11 +4254,11 @@ export interface CreateNetworkFirewallUndoPublishResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4215,7 +4271,7 @@ export interface DescribeIndexListResponse {
     /**
      * ES 索引信息
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4370,11 +4426,11 @@ export interface CreateNetworkFirewallClusterRefreshResponse {
     /**
      * 返回创建的集群检查任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4387,7 +4443,7 @@ export interface CreateComponentExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4400,11 +4456,11 @@ export interface DescribeReverseShellWhiteListsResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 白名单信息列表
      */
-    WhiteListSet: Array<ReverseShellWhiteListBaseInfo>;
+    WhiteListSet?: Array<ReverseShellWhiteListBaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4479,7 +4535,7 @@ export interface CheckRepeatAssetImageRegistryResponse {
      * 是否重复
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsRepeat: boolean;
+    IsRepeat?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4629,6 +4685,14 @@ export interface VulDefenceEvent {
      * 集群名称
      */
     ClusterName?: string;
+    /**
+     * pod名称
+     */
+    PodName?: string;
+    /**
+     * pod ip
+     */
+    PodIP?: string;
 }
 /**
  * DescribeAccessControlEventsExport请求参数结构体
@@ -4688,11 +4752,11 @@ export interface DescribeNetworkFirewallAuditRecordResponse {
     /**
      * 集群审计总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群的审计详细信息
      */
-    AuditList: Array<NetworkAuditRecord>;
+    AuditList?: Array<NetworkAuditRecord>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4726,11 +4790,11 @@ export interface UpdateNetworkFirewallPolicyYamlDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4743,11 +4807,11 @@ export interface DescribeAssetImageBindRuleInfoResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像绑定规则列表
      */
-    ImageBindRuleSet: Array<ImagesBindRuleInfo>;
+    ImageBindRuleSet?: Array<ImagesBindRuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4924,7 +4988,7 @@ export interface DescribeEscapeSafeStateResponse {
     /**
      * Unsafe：存在风险，Safe：暂无风险,UnKnown:未知风险
      */
-    IsSafe: string;
+    IsSafe?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4941,7 +5005,7 @@ export interface CreateDefenceVulExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5053,35 +5117,35 @@ export interface ComplianceWhitelistItem {
     /**
      * 白名单项的ID。
      */
-    WhitelistItemId: number;
+    WhitelistItemId?: number;
     /**
      * 客户检测项的ID。
      */
-    CustomerPolicyItemId: number;
+    CustomerPolicyItemId?: number;
     /**
      * 检测项的名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 合规标准的名称。
      */
-    StandardName: string;
+    StandardName?: string;
     /**
      * 合规标准的ID。
      */
-    StandardId: number;
+    StandardId?: number;
     /**
      * 检测项影响的资产的数目。
      */
-    AffectedAssetCount: number;
+    AffectedAssetCount?: number;
     /**
      * 最后更新的时间
      */
-    LastUpdateTime: string;
+    LastUpdateTime?: string;
     /**
      * 加入到白名单的时间
      */
-    InsertTime: string;
+    InsertTime?: string;
 }
 /**
  * DescribeAssetPortList请求参数结构体
@@ -5135,12 +5199,12 @@ export interface ComplianceContainerDetailInfo {
     /**
      * 容器在主机上的ID。
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 容器所属的Pod的名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PodName: string;
+    PodName?: string;
 }
 /**
  * DescribeReverseShellEvents请求参数结构体
@@ -5175,11 +5239,11 @@ export interface AddNetworkFirewallPolicyDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5202,12 +5266,12 @@ export interface DescribeSecLogKafkaUINResponse {
      * 目标UIN
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstUIN: string;
+    DstUIN?: string;
     /**
      * 授权状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: boolean;
+    Status?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5245,31 +5309,31 @@ export interface VirusInfo {
     /**
      * 文件名称
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件路径
      */
-    FilePath: string;
+    FilePath?: string;
     /**
      * 病毒名称
      */
-    VirusName: string;
+    VirusName?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 容器名称
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 容器id
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -5280,15 +5344,15 @@ export interface VirusInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 镜像名称
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 镜像id
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * DEAL_NONE:文件待处理
   DEAL_IGNORE:已经忽略
@@ -5300,19 +5364,19 @@ export interface VirusInfo {
   DEAL_RECOVERING:恢复中
   DEAL_RECOVER_FAILED: 恢复失败
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件id
      */
-    Id: string;
+    Id?: string;
     /**
      * 事件描述
      */
-    HarmDescribe: string;
+    HarmDescribe?: string;
     /**
      * 建议方案
      */
-    SuggestScheme: string;
+    SuggestScheme?: string;
     /**
      * 失败子状态:
   FILE_NOT_FOUND:文件不存在
@@ -5327,7 +5391,7 @@ export interface VirusInfo {
   INTERNAL: 服务内部错误
   VALIDATION: 参数非法
      */
-    SubStatus: string;
+    SubStatus?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -5337,7 +5401,7 @@ export interface VirusInfo {
   解除隔离中  RESTORING
   解除隔离失败 RESTORE_FAILED
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -5348,21 +5412,21 @@ export interface VirusInfo {
       "RESOURCE_LIMIT"      //隔离操作资源超限
       "UNKNOW"              // 原因未知
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * md5值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MD5: string;
+    MD5?: string;
     /**
      * 风险等级 RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, RISK_NOTICE。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 检测平台
   1: 云查杀引擎
@@ -5372,7 +5436,7 @@ export interface VirusInfo {
   5: 威胁情报
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckPlatform: Array<string>;
+    CheckPlatform?: Array<string>;
     /**
      * 节点ID
      */
@@ -5752,7 +5816,7 @@ export interface DescribeUnauthorizedCoresTendencyResponse {
     /**
      * 未授权核数趋势
      */
-    List: Array<UnauthorizedCoresTendency>;
+    List?: Array<UnauthorizedCoresTendency>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5765,12 +5829,12 @@ export interface DescribeNetworkFirewallPolicyStatusResponse {
     /**
      * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * NameRepeat,K8sRuleIngressPortError等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskResult: Array<string>;
+    TaskResult?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5950,11 +6014,11 @@ export interface DescribeVulScanAuthorizedImageSummaryResponse {
     /**
      * 全部已授权的本地镜像数
      */
-    AllAuthorizedImageCount: number;
+    AllAuthorizedImageCount?: number;
     /**
      * 已授权未扫描的本地镜像数
      */
-    UnScanAuthorizedImageCount: number;
+    UnScanAuthorizedImageCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6096,6 +6160,10 @@ export interface DescribeVirusListRequest {
 export interface DescribeComplianceAssetListRequest {
     /**
      * 资产类型列表。
+  ASSET_CONTAINER, 容器
+  ASSET_IMAGE, 镜像
+  ASSET_HOST, 主机
+  ASSET_K8S, K8S资产
      */
     AssetTypeSet?: Array<string>;
     /**
@@ -6207,7 +6275,7 @@ export interface DescribePromotionActivityResponse {
     /**
      * 促销活动内容
      */
-    List: Array<PromotionActivityContent>;
+    List?: Array<PromotionActivityContent>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6269,11 +6337,11 @@ export interface AddAndPublishNetworkFirewallPolicyDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6317,11 +6385,11 @@ export interface DescribeVulContainerListResponse {
     /**
      * 容器列表
      */
-    List: Array<VulAffectedContainerInfo>;
+    List?: Array<VulAffectedContainerInfo>;
     /**
      * 容器总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6364,7 +6432,7 @@ export interface DescribeK8sApiAbnormalRuleInfoResponse {
     /**
      * 规则详情
      */
-    Info: K8sApiAbnormalRuleInfo;
+    Info?: K8sApiAbnormalRuleInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6506,6 +6574,10 @@ export interface ClusterInfoItem {
      */
     ClusterStatus?: string;
     /**
+     * 集群运行子状态
+     */
+    ClusterSubStatus?: string;
+    /**
      * 集群的检测模式，为Cluster_Normal或者Cluster_Actived.
      */
     ClusterCheckMode?: string;
@@ -6595,6 +6667,15 @@ export interface ClusterInfoItem {
      * 核数
      */
     CoresCnt?: number;
+    /**
+     * 集群审计开关状态：
+  已关闭Closed/关闭中Closing/关闭失败CloseFailed/已开启Opened/开启中Opening/开启失败OpenFailed
+     */
+    ClusterAuditStatus?: string;
+    /**
+     * 集群审计开关失败信息
+     */
+    ClusterAuditFailedInfo?: string;
 }
 /**
  * DescribeComplianceScanFailedAssetList返回参数结构体
@@ -6603,12 +6684,12 @@ export interface DescribeComplianceScanFailedAssetListResponse {
     /**
      * 返回检测失败的资产的总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回各类检测失败的资产的汇总信息的列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScanFailedAssetList: Array<ComplianceScanFailedAsset>;
+    ScanFailedAssetList?: Array<ComplianceScanFailedAsset>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6652,11 +6733,11 @@ export interface DescribeEscapeWhiteListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 逃逸白名单列表
      */
-    List: Array<EscapeWhiteListInfo>;
+    List?: Array<EscapeWhiteListInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6678,27 +6759,27 @@ export interface AbnormalProcessEventInfo {
     /**
      * 进程目录
      */
-    ProcessPath: string;
+    ProcessPath?: string;
     /**
      * 事件类型，MALICE_PROCESS_START:恶意进程启动
      */
-    EventType: string;
+    EventType?: string;
     /**
      * 命中规则名称，PROXY_TOOL：代理软件，TRANSFER_CONTROL：横向渗透，ATTACK_CMD：恶意命令，REVERSE_SHELL：反弹shell，FILELESS：无文件程序执行，RISK_CMD：高危命令，ABNORMAL_CHILD_PROC：敏感服务异常子进程启动，USER_DEFINED_RULE：用户自定义规则
      */
-    MatchRuleName: string;
+    MatchRuleName?: string;
     /**
      * 生成时间
      */
-    FoundTime: string;
+    FoundTime?: string;
     /**
      * 容器名
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 镜像名
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 动作执行结果，    BEHAVIOR_NONE: 无
       BEHAVIOR_ALERT: 告警
@@ -6706,72 +6787,72 @@ export interface AbnormalProcessEventInfo {
       BEHAVIOR_HOLDUP_FAILED:拦截失败
       BEHAVIOR_HOLDUP_SUCCESSED：拦截失败
      */
-    Behavior: string;
+    Behavior?: string;
     /**
      * 状态，EVENT_UNDEAL:事件未处理
       EVENT_DEALED:事件已经处理
       EVENT_INGNORE：事件已经忽略
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件记录的唯一id
      */
-    Id: string;
+    Id?: string;
     /**
      * 镜像id，用于跳转
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器id，用于跳转
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 事件解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件详细描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 命中策略id
      */
-    MatchRuleId: string;
+    MatchRuleId?: string;
     /**
      * 命中规则行为：
   RULE_MODE_RELEASE 放行
   RULE_MODE_ALERT  告警
   RULE_MODE_HOLDUP 拦截
      */
-    MatchAction: string;
+    MatchAction?: string;
     /**
      * 命中规则进程信息
      */
-    MatchProcessPath: string;
+    MatchProcessPath?: string;
     /**
      * 规则是否存在
      */
-    RuleExist: boolean;
+    RuleExist?: boolean;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 最近生成时间
      */
-    LatestFoundTime: string;
+    LatestFoundTime?: string;
     /**
      * 规则组Id
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 命中策略名称：SYSTEM_DEFINED_RULE （系统策略）或  用户自定义的策略名字
      */
-    MatchGroupName: string;
+    MatchGroupName?: string;
     /**
      * 命中规则等级，HIGH：高危，MIDDLE：中危，LOW：低危。
      */
-    MatchRuleLevel: string;
+    MatchRuleLevel?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -6782,7 +6863,7 @@ export interface AbnormalProcessEventInfo {
   解除隔离失败 RESTORE_FAILED
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -6794,12 +6875,12 @@ export interface AbnormalProcessEventInfo {
   "UNKNOW"              // 原因未知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -6810,7 +6891,7 @@ export interface AbnormalProcessEventInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 集群ID
      */
@@ -6910,7 +6991,7 @@ export interface DescribeSecLogAlertMsgResponse {
     /**
      * 告警消息队列
      */
-    List: Array<SecLogAlertMsgInfo>;
+    List?: Array<SecLogAlertMsgInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6970,11 +7051,11 @@ export interface AddNetworkFirewallPolicyYamlDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6987,23 +7068,23 @@ export interface AccessControlEventInfo {
     /**
      * 进程名称
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 命中规则名称
      */
-    MatchRuleName: string;
+    MatchRuleName?: string;
     /**
      * 生成时间
      */
-    FoundTime: string;
+    FoundTime?: string;
     /**
      * 容器名
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 镜像名
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 动作执行结果，   BEHAVIOR_NONE: 无
       BEHAVIOR_ALERT: 告警
@@ -7011,80 +7092,80 @@ export interface AccessControlEventInfo {
       BEHAVIOR_HOLDUP_FAILED:拦截失败
       BEHAVIOR_HOLDUP_SUCCESSED：拦截失败
      */
-    Behavior: string;
+    Behavior?: string;
     /**
      * 状态0:未处理  “EVENT_UNDEAL”:事件未处理
       "EVENT_DEALED":事件已经处理
       "EVENT_INGNORE"：事件已经忽略
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件记录的唯一id
      */
-    Id: string;
+    Id?: string;
     /**
      * 文件名称
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 事件类型， FILE_ABNORMAL_READ:文件异常读取
      */
-    EventType: string;
+    EventType?: string;
     /**
      * 镜像id, 用于跳转
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器id, 用于跳转
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 事件解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件详细描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 命中策略id
      */
-    MatchRuleId: string;
+    MatchRuleId?: string;
     /**
      * 命中规则行为：
   RULE_MODE_RELEASE 放行
   RULE_MODE_ALERT  告警
   RULE_MODE_HOLDUP 拦截
      */
-    MatchAction: string;
+    MatchAction?: string;
     /**
      * 命中规则进程信息
      */
-    MatchProcessPath: string;
+    MatchProcessPath?: string;
     /**
      * 命中规则文件信息
      */
-    MatchFilePath: string;
+    MatchFilePath?: string;
     /**
      * 文件路径，包含名字
      */
-    FilePath: string;
+    FilePath?: string;
     /**
      * 规则是否存在
      */
-    RuleExist: boolean;
+    RuleExist?: boolean;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 最近生成时间
      */
-    LatestFoundTime: string;
+    LatestFoundTime?: string;
     /**
      * 规则组id
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -7094,7 +7175,7 @@ export interface AccessControlEventInfo {
   解除隔离中  RESTORING
   解除隔离失败 RESTORE_FAILED
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -7105,11 +7186,11 @@ export interface AccessControlEventInfo {
   "RESOURCE_LIMIT"      //隔离操作资源超限
   "UNKNOW"              // 原因未知
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -7120,7 +7201,7 @@ export interface AccessControlEventInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 节点名称：如果是超级节点，展示的实质上是它的node_id
      */
@@ -7245,11 +7326,11 @@ export interface DescribeSecLogDeliveryClsOptionsResponse {
     /**
      * cls可选日志集合列表(仅当入参ClsRegion不为空时返回)
      */
-    LogSetList: Array<ClsLogsetInfo>;
+    LogSetList?: Array<ClsLogsetInfo>;
     /**
      * 可选地域列表(仅当入参ClsRegion为空时返回)
      */
-    RegionList: Array<RegionInfo>;
+    RegionList?: Array<RegionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7327,7 +7408,7 @@ export interface DescribeCompliancePolicyItemAffectedSummaryResponse {
     /**
      * 返回各检测项影响的资产的汇总信息。
      */
-    PolicyItemSummary: CompliancePolicyItemSummary;
+    PolicyItemSummary?: CompliancePolicyItemSummary;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7361,11 +7442,11 @@ export interface DescribeAutoAuthorizedRuleHostResponse {
     /**
      * 镜像自动授权规则授权范围主机列表
      */
-    List: Array<AutoAuthorizedRuleHostInfo>;
+    List?: Array<AutoAuthorizedRuleHostInfo>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7500,11 +7581,11 @@ export interface DescribeAffectedWorkloadListResponse {
     /**
      * 受影响的workload列表数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 受影响的workload列表
      */
-    AffectedWorkloadList: Array<AffectedWorkloadItem>;
+    AffectedWorkloadList?: Array<AffectedWorkloadItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7517,7 +7598,7 @@ export interface CreateComplianceTaskResponse {
     /**
      * 返回创建的合规检查任务的ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7585,7 +7666,7 @@ export interface DescribeAbnormalProcessEventTendencyResponse {
     /**
      * 待处理异常进程事件趋势
      */
-    List: Array<AbnormalProcessEventTendencyInfo>;
+    List?: Array<AbnormalProcessEventTendencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7784,11 +7865,11 @@ export interface DescribeEmergencyVulListResponse {
     /**
      * 漏洞总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞列表
      */
-    List: Array<EmergencyVulInfo>;
+    List?: Array<EmergencyVulInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8036,42 +8117,42 @@ export interface DescribeVirusSummaryResponse {
     /**
      * 最近的一次扫描任务id
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 木马影响容器个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskContainerCnt: number;
+    RiskContainerCnt?: number;
     /**
      * 待处理风险个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskCnt: number;
+    RiskCnt?: number;
     /**
      * 病毒库更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirusDataBaseModifyTime: string;
+    VirusDataBaseModifyTime?: string;
     /**
      * 木马影响容器个数较昨日增长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskContainerIncrease: number;
+    RiskContainerIncrease?: number;
     /**
      * 待处理风险个数较昨日增长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskIncrease: number;
+    RiskIncrease?: number;
     /**
      * 隔离事件个数较昨日新增
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateIncrease: number;
+    IsolateIncrease?: number;
     /**
      * 隔离事件总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateCnt: number;
+    IsolateCnt?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8124,36 +8205,36 @@ export interface DescribeProVersionInfoResponse {
      * 专业版开始时间，补充购买时才不为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 专业版结束时间，补充购买时才不为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 需购买的机器核数
      */
-    CoresCnt: number;
+    CoresCnt?: number;
     /**
      * 弹性计费上限
      */
-    MaxPostPayCoresCnt: number;
+    MaxPostPayCoresCnt?: number;
     /**
      * 资源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 购买状态
   待购: Pending
   已购: Normal
   隔离: Isolate
      */
-    BuyStatus: string;
+    BuyStatus?: string;
     /**
      * 是否曾经购买过(false:未曾 true:曾经购买过)
      */
-    IsPurchased: boolean;
+    IsPurchased?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8227,7 +8308,7 @@ export interface DescribeRiskSyscallWhiteListDetailResponse {
     /**
      * 白名单基本信息
      */
-    WhiteListDetailInfo: RiskSyscallWhiteListInfo;
+    WhiteListDetailInfo?: RiskSyscallWhiteListInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8261,43 +8342,43 @@ export interface DescribeVulLevelImageSummaryResponse {
     /**
      * 高危漏洞最新本地镜像占比
      */
-    HighLevelVulLocalImagePercent: number;
+    HighLevelVulLocalImagePercent?: number;
     /**
      * 中危漏洞最新本地镜像占比
      */
-    MediumLevelVulLocalImagePercent: number;
+    MediumLevelVulLocalImagePercent?: number;
     /**
      * 低危漏洞最新本地镜像占比
      */
-    LowLevelVulLocalImagePercent: number;
+    LowLevelVulLocalImagePercent?: number;
     /**
      * 严重漏洞最新本地镜像占比
      */
-    CriticalLevelVulLocalImagePercent: number;
+    CriticalLevelVulLocalImagePercent?: number;
     /**
      * 影响的最新版本本地镜像数
      */
-    LocalNewestImageCount: number;
+    LocalNewestImageCount?: number;
     /**
      * 影响的最新版本仓库镜像数
      */
-    RegistryNewestImageCount: number;
+    RegistryNewestImageCount?: number;
     /**
      * 高危漏洞最新仓库镜像占比
      */
-    HighLevelVulRegistryImagePercent: number;
+    HighLevelVulRegistryImagePercent?: number;
     /**
      * 中危漏洞最新仓库镜像占比
      */
-    MediumLevelVulRegistryImagePercent: number;
+    MediumLevelVulRegistryImagePercent?: number;
     /**
      * 低危漏洞最新仓库镜像占比
      */
-    LowLevelVulRegistryImagePercent: number;
+    LowLevelVulRegistryImagePercent?: number;
     /**
      * 严重漏洞最新仓库镜像占比
      */
-    CriticalLevelVulRegistryImagePercent: number;
+    CriticalLevelVulRegistryImagePercent?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8370,7 +8451,7 @@ export interface CreateAssetImageVirusExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8387,7 +8468,7 @@ export interface CreateWebVulExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8400,7 +8481,7 @@ export interface DescribeReverseShellWhiteListDetailResponse {
     /**
      * 事件基本信息
      */
-    WhiteListDetailInfo: ReverseShellWhiteListInfo;
+    WhiteListDetailInfo?: ReverseShellWhiteListInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8716,22 +8797,22 @@ export interface DescribeExportJobResultResponse {
     /**
      * 导出的状态。取值为, SUCCESS:成功、FAILURE:失败，RUNNING: 进行中。
      */
-    ExportStatus: string;
+    ExportStatus?: string;
     /**
      * 返回下载URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadURL: string;
+    DownloadURL?: string;
     /**
      * 当ExportStatus为RUNNING时，返回导出进度。0~100范围的浮点数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExportProgress: number;
+    ExportProgress?: number;
     /**
      * 失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureMsg: string;
+    FailureMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8744,39 +8825,39 @@ export interface ReverseShellWhiteListBaseInfo {
     /**
      * 白名单id
      */
-    Id: string;
+    Id?: string;
     /**
      * 镜像数量
      */
-    ImageCount: number;
+    ImageCount?: number;
     /**
      * 连接进程名字
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 目标地址ip
      */
-    DstIp: string;
+    DstIp?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 目标端口
      */
-    DstPort: string;
+    DstPort?: string;
     /**
      * 是否是全局白名单，true全局
      */
-    IsGlobal: boolean;
+    IsGlobal?: boolean;
     /**
      * 镜像id数组，为空代表全部
      */
-    ImageIds: Array<string>;
+    ImageIds?: Array<string>;
 }
 /**
  * 容器运行时，访问控制策略信息
@@ -9297,11 +9378,11 @@ export interface DescribeVirusManualScanEstimateTimeoutResponse {
     /**
      * 预估超时时间(h)
      */
-    Timeout: number;
+    Timeout?: number;
     /**
      * 单台主机并行扫描容器数
      */
-    ContainerScanConcurrencyCount: number;
+    ContainerScanConcurrencyCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9314,19 +9395,19 @@ export interface DescribeTaskResultSummaryResponse {
     /**
      * 严重风险影响的节点数量,返回7天数据
      */
-    SeriousRiskNodeCount: Array<number | bigint>;
+    SeriousRiskNodeCount?: Array<number | bigint>;
     /**
      * 高风险影响的节点的数量,返回7天数据
      */
-    HighRiskNodeCount: Array<number | bigint>;
+    HighRiskNodeCount?: Array<number | bigint>;
     /**
      * 中风险检查项的节点数量,返回7天数据
      */
-    MiddleRiskNodeCount: Array<number | bigint>;
+    MiddleRiskNodeCount?: Array<number | bigint>;
     /**
      * 提示风险检查项的节点数量,返回7天数据
      */
-    HintRiskNodeCount: Array<number | bigint>;
+    HintRiskNodeCount?: Array<number | bigint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9501,11 +9582,11 @@ export interface DescribeK8sApiAbnormalEventListResponse {
     /**
      * 事件列表
      */
-    List: Array<K8sApiAbnormalEventListItem>;
+    List?: Array<K8sApiAbnormalEventListItem>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9522,15 +9603,15 @@ export interface DescribeAbnormalProcessLevelSummaryResponse {
     /**
      * 异常进程高危待处理事件数
      */
-    HighLevelEventCount: number;
+    HighLevelEventCount?: number;
     /**
      * 异常进程中危待处理事件数
      */
-    MediumLevelEventCount: number;
+    MediumLevelEventCount?: number;
     /**
      * 异常进程低危待处理事件数
      */
-    LowLevelEventCount: number;
+    LowLevelEventCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9710,7 +9791,7 @@ export interface CreateProcessEventsExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9869,7 +9950,7 @@ export interface CreateSystemVulExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9882,11 +9963,11 @@ export interface DescribeRiskSyscallNamesResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 系统调用名称列表
      */
-    SyscallNames: Array<string>;
+    SyscallNames?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10020,11 +10101,11 @@ export interface DescribeK8sApiAbnormalRuleListResponse {
     /**
      * 规则列表
      */
-    List: Array<K8sApiAbnormalRuleListItem>;
+    List?: Array<K8sApiAbnormalRuleListItem>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10342,7 +10423,7 @@ export interface ScanCompliancePolicyItemsResponse {
     /**
      * 返回重新检测任务的ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10364,39 +10445,39 @@ export interface DescribeVulImageSummaryResponse {
     /**
      * 受严重或高危漏洞影响的镜像数
      */
-    SeriousVulImageCount: number;
+    SeriousVulImageCount?: number;
     /**
      * 已扫描的镜像数
      */
-    ScannedImageCount: number;
+    ScannedImageCount?: number;
     /**
      * 漏洞总数量
      */
-    VulTotalCount: number;
+    VulTotalCount?: number;
     /**
      * 系统漏洞数
      */
-    SysTemVulCount: number;
+    SysTemVulCount?: number;
     /**
      * web应用漏洞数
      */
-    WebVulCount: number;
+    WebVulCount?: number;
     /**
      * 已授权镜像数
      */
-    AllAuthorizedImageCount: number;
+    AllAuthorizedImageCount?: number;
     /**
      * 应急漏洞数
      */
-    EmergencyVulCount: number;
+    EmergencyVulCount?: number;
     /**
      * 支持扫描的漏洞总数量
      */
-    SupportVulTotalCount: number;
+    SupportVulTotalCount?: number;
     /**
      * 漏洞库更新时间
      */
-    VulLibraryUpdateTime: string;
+    VulLibraryUpdateTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10438,11 +10519,11 @@ export interface DescribeComplianceWhitelistItemListResponse {
     /**
      * 白名单项的列表。
      */
-    WhitelistItemSet: Array<ComplianceWhitelistItem>;
+    WhitelistItemSet?: Array<ComplianceWhitelistItem>;
     /**
      * 白名单项的总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10553,11 +10634,11 @@ export interface DescribeInspectionReportResponse {
     /**
      * 报告名称
      */
-    ReportName: string;
+    ReportName?: string;
     /**
      * 下载链接
      */
-    ReportUrl: string;
+    ReportUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10632,11 +10713,11 @@ export interface DescribeVirusAutoIsolateSampleListResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 木马自动隔离样本列表
      */
-    List: Array<VirusAutoIsolateSampleInfo>;
+    List?: Array<VirusAutoIsolateSampleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10746,7 +10827,7 @@ export interface DescribeVulDetailResponse {
     /**
      * 漏洞详情信息
      */
-    VulInfo: VulDetailInfo;
+    VulInfo?: VulDetailInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10797,78 +10878,78 @@ export interface RiskSyscallEventInfo {
     /**
      * 进程名称
      */
-    ProcessName: string;
+    ProcessName?: string;
     /**
      * 进程路径
      */
-    ProcessPath: string;
+    ProcessPath?: string;
     /**
      * 镜像id
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器id
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 镜像名
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 容器名
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 生成时间
      */
-    FoundTime: string;
+    FoundTime?: string;
     /**
      * 事件解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件详细描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 系统调用名称
      */
-    SyscallName: string;
+    SyscallName?: string;
     /**
      * 状态，EVENT_UNDEAL:事件未处理
       EVENT_DEALED:事件已经处理
       EVENT_INGNORE：事件已经忽略
       EVENT_ADD_WHITE：时间已经加白
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件id
      */
-    EventId: string;
+    EventId?: string;
     /**
      * 节点名称
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * pod(实例)的名字
      */
-    PodName: string;
+    PodName?: string;
     /**
      * 备注
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 系统监控名称是否存在
      */
-    RuleExist: boolean;
+    RuleExist?: boolean;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 最近生成时间
      */
-    LatestFoundTime: string;
+    LatestFoundTime?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -10878,7 +10959,7 @@ export interface RiskSyscallEventInfo {
   解除隔离中  RESTORING
   解除隔离失败 RESTORE_FAILED
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -10889,11 +10970,11 @@ export interface RiskSyscallEventInfo {
   "RESOURCE_LIMIT"      //隔离操作资源超限
   "UNKNOW"              // 原因未知
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -10904,7 +10985,7 @@ export interface RiskSyscallEventInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 节点类型：NORMAL普通节点、SUPER超级节点
      */
@@ -10949,7 +11030,7 @@ export interface DescribeEscapeEventTendencyResponse {
     /**
      * 待处理逃逸事件趋势
      */
-    List: Array<EscapeEventTendencyInfo>;
+    List?: Array<EscapeEventTendencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10963,96 +11044,96 @@ export interface ClusterCheckItem {
      * 唯一的检测项的ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckItemId: number;
+    CheckItemId?: number;
     /**
      * 风险项的名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 检测项详细描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ItemDetail: string;
+    ItemDetail?: string;
     /**
      * 威胁等级。严重Serious,高危High,中危Middle,提示Hint
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 检查对象、风险对象.Runc,Kubelet,Containerd,Pods
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskTarget: string;
+    RiskTarget?: string;
     /**
      * 风险类别,漏洞风险CVERisk,配置风险ConfigRisk
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskType: string;
+    RiskType?: string;
     /**
      * 检测项所属的风险类型,权限提升:PrivilegePromotion,拒绝服务:RefuseService,目录穿越:DirectoryEscape,未授权访问:UnauthorizedAccess,权限许可和访问控制问题:PrivilegeAndAccessControl,敏感信息泄露:SensitiveInfoLeak
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskAttribute: string;
+    RiskAttribute?: string;
     /**
      * 风险特征,Tag.存在EXP:ExistEXP,存在POD:ExistPOC,无需重启:NoNeedReboot, 服务重启:ServerRestart,远程信息泄露:RemoteInfoLeak,远程拒绝服务:RemoteRefuseService,远程利用:RemoteExploit,远程执行:RemoteExecute
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskProperty: string;
+    RiskProperty?: string;
     /**
      * CVE编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVENumber: string;
+    CVENumber?: string;
     /**
      * 披露时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiscoverTime: string;
+    DiscoverTime?: string;
     /**
      * 解决方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution: string;
+    Solution?: string;
     /**
      * CVSS信息,用于画图
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVSS: string;
+    CVSS?: string;
     /**
      * CVSS分数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVSSScore: string;
+    CVSSScore?: string;
     /**
      * 参考连接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelateLink: string;
+    RelateLink?: string;
     /**
      * 影响类型，为Node或者Workload
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AffectedType: string;
+    AffectedType?: string;
     /**
      * 受影响的版本信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AffectedVersion: string;
+    AffectedVersion?: string;
     /**
      * 忽略的资产数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IgnoredAssetNum: number;
+    IgnoredAssetNum?: number;
     /**
      * 是否忽略该检测项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsIgnored: boolean;
+    IsIgnored?: boolean;
     /**
      * 受影响评估
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskAssessment: string;
+    RiskAssessment?: string;
 }
 /**
  * DescribeAssetImageVulList返回参数结构体
@@ -11061,11 +11142,11 @@ export interface DescribeAssetImageVulListResponse {
     /**
      * 镜像漏洞列表
      */
-    List: Array<ImagesVul>;
+    List?: Array<ImagesVul>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11119,60 +11200,60 @@ export interface DescribeNetworkFirewallPolicyDetailResponse {
     /**
      * 集群Id
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 策略名
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 命名空间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 入站类型
      */
-    FromPolicyRule: number;
+    FromPolicyRule?: number;
     /**
      * 出站类型
      */
-    ToPolicyRule: number;
+    ToPolicyRule?: number;
     /**
      * 自定义规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomPolicy: Array<NetworkCustomPolicy>;
+    CustomPolicy?: Array<NetworkCustomPolicy>;
     /**
      * pod选择器
      */
-    PodSelector: string;
+    PodSelector?: string;
     /**
      * 策略描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 策略创建时间
      */
-    PolicyCreateTime: string;
+    PolicyCreateTime?: string;
     /**
      * 策略源类型，分为System和Manual，分别代表手动和系统添加
      */
-    PolicySourceType: string;
+    PolicySourceType?: string;
     /**
      * 网络策略对应的网络插件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkPolicyPlugin: string;
+    NetworkPolicyPlugin?: string;
     /**
      * 网络策略状态
      */
-    PublishStatus: string;
+    PublishStatus?: string;
     /**
      * 网络发布结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublishResult: string;
+    PublishResult?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11186,7 +11267,7 @@ export interface DescribePostPayDetailResponse {
      * 弹性计费扣费详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SoftQuotaDayDetail: Array<SoftQuotaDayInfo>;
+    SoftQuotaDayDetail?: Array<SoftQuotaDayInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11199,7 +11280,7 @@ export interface DescribeK8sApiAbnormalEventInfoResponse {
     /**
      * 事件详情
      */
-    Info: K8sApiAbnormalEventInfo;
+    Info?: K8sApiAbnormalEventInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11276,11 +11357,11 @@ export interface ComplianceScanFailedAsset {
     /**
      * 客户资产的ID。
      */
-    CustomerAssetId: number;
+    CustomerAssetId?: number;
     /**
      * 资产类别。
      */
-    AssetType: string;
+    AssetType?: string;
     /**
      * 检测状态
   CHECK_INIT, 待检测
@@ -11288,23 +11369,23 @@ export interface ComplianceScanFailedAsset {
   CHECK_FINISHED, 检测完成
   CHECK_FAILED, 检测失败
      */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
      * 资产的名称。
      */
-    AssetName: string;
+    AssetName?: string;
     /**
      * 资产检测失败的原因。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 检测失败的处理建议。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 检测的时间。
      */
-    CheckTime: string;
+    CheckTime?: string;
 }
 /**
  * ScanComplianceAssets请求参数结构体
@@ -11326,7 +11407,7 @@ export interface DescribeAbnormalProcessRuleDetailResponse {
     /**
      * 异常进程策略详细信息
      */
-    RuleDetail: AbnormalProcessRuleInfo;
+    RuleDetail?: AbnormalProcessRuleInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11404,7 +11485,7 @@ export interface CreateVulContainerExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11459,7 +11540,7 @@ export interface CreateK8sApiAbnormalRuleInfoResponse {
     /**
      * 规则ID
      */
-    RuleID: string;
+    RuleID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11559,11 +11640,11 @@ export interface DescribeAbnormalProcessRulesResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 异常进程策略信息列表
      */
-    RuleSet: Array<RuleBaseInfo>;
+    RuleSet?: Array<RuleBaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11585,31 +11666,41 @@ export interface SupportDefenceVul {
     /**
      * 漏洞PocID
      */
-    PocID: string;
+    PocID?: string;
     /**
      * 漏洞名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 漏洞标签
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 漏洞CVSS
      */
-    CVSSV3Score: number;
+    CVSSV3Score?: number;
     /**
      * 漏洞威胁等级
      */
-    Level: string;
+    Level?: string;
     /**
      * 漏洞CVEID
      */
-    CVEID: string;
+    CVEID?: string;
     /**
      * 漏洞披露时间
      */
-    SubmitTime: string;
+    SubmitTime?: string;
+    /**
+     * 漏洞id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulId?: number;
+    /**
+     * 状态，0:防御中，1：已加白，指的是在白名单列表中有这个漏洞的，不一定是全局型白名单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * DescribeCheckItemList请求参数结构体
@@ -11641,11 +11732,11 @@ export interface DescribeImageComponentListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像组件列表
      */
-    List: Array<ImageComponent>;
+    List?: Array<ImageComponent>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11742,7 +11833,7 @@ export interface DescribeAccessControlRuleDetailResponse {
     /**
      * 运行时策略详细信息
      */
-    RuleDetail: AccessControlRuleInfo;
+    RuleDetail?: AccessControlRuleInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11768,7 +11859,7 @@ export interface CreateHostExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11956,11 +12047,11 @@ export interface DescribeK8sApiAbnormalRuleScopeListResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 列表
      */
-    List: Array<K8sApiAbnormalRuleScopeInfo>;
+    List?: Array<K8sApiAbnormalRuleScopeInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12043,11 +12134,11 @@ export interface UpdateNetworkFirewallPolicyDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12178,7 +12269,7 @@ export interface SecTendencyEventInfo {
     /**
      * 趋势列表
      */
-    EventSet: Array<RunTimeTendencyInfo>;
+    EventSet?: Array<RunTimeTendencyInfo>;
     /**
      * 事件类型：
   ET_ESCAPE : 容器逃逸
@@ -12189,7 +12280,7 @@ export interface SecTendencyEventInfo {
   ET_VIRUS 木马事件
   ET_MALICIOUS_CONNECTION 恶意外连事件
      */
-    EventType: string;
+    EventType?: string;
 }
 /**
  * 容器逃逸事件列表
@@ -12205,35 +12296,35 @@ export interface EscapeEventInfo {
      PRIVILEGE_CONTAINER_START：特权容器
      PRIVILEGE：程序提权逃逸
      */
-    EventType: string;
+    EventType?: string;
     /**
      * 容器名
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 镜像名
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 状态，EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
      */
-    Status: string;
+    Status?: string;
     /**
      * 事件记录的唯一id
      */
-    EventId: string;
+    EventId?: string;
     /**
      * 节点名称
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * pod(实例)的名字
      */
-    PodName: string;
+    PodName?: string;
     /**
      * 生成时间
      */
-    FoundTime: string;
+    FoundTime?: string;
     /**
      * 事件名字，
   宿主机文件访问逃逸、
@@ -12243,41 +12334,41 @@ export interface EscapeEventInfo {
   特权容器启动逃逸、
   敏感路径挂载
      */
-    EventName: string;
+    EventName?: string;
     /**
      * 镜像id，用于跳转
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器id，用于跳转
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 事件解决方案
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 事件描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 最近生成时间
      */
-    LatestFoundTime: string;
+    LatestFoundTime?: string;
     /**
      * 节点IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeIP: string;
+    NodeIP?: string;
     /**
      * 主机IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostID: string;
+    HostID?: string;
     /**
      * 网络状态
   未隔离  	NORMAL
@@ -12288,7 +12379,7 @@ export interface EscapeEventInfo {
   解除隔离失败 RESTORE_FAILED
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -12300,12 +12391,12 @@ export interface EscapeEventInfo {
   "UNKNOW"              // 原因未知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -12316,7 +12407,7 @@ export interface EscapeEventInfo {
   正在重启中: RESTARTING
   迁移中: REMOVING
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 节点所属集群ID
      */
@@ -12529,35 +12620,35 @@ export interface VulAffectedContainerInfo {
     /**
      * 内网IP
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 容器ID
      */
-    ContainerID: string;
+    ContainerID?: string;
     /**
      * 容器名称
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * Pod名称
      */
-    PodName: string;
+    PodName?: string;
     /**
      * PodIP值
      */
-    PodIP: string;
+    PodIP?: string;
     /**
      * 主机名称
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 主机ID
      */
-    HostID: string;
+    HostID?: string;
     /**
      * 外网IP
      */
-    PublicIP: string;
+    PublicIP?: string;
     /**
      * 集群ID
      */
@@ -12582,6 +12673,11 @@ export interface VulAffectedContainerInfo {
      * 超级节点名称
      */
     NodeName?: string;
+    /**
+     * 容器状态 "RUNNING":运行,"PAUSED":暂停,"STOPPED":停止,"CREATED":已经创建,"DESTROYED":已销毁,"RESTARTING":重启中,"REMOVING":迁移中,"DEAD":DEAD,"UNKNOWN":未知
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerStatus?: string;
 }
 /**
  * DescribeLogStorageStatistic返回参数结构体
@@ -12853,43 +12949,43 @@ export interface DescribeNetworkFirewallPolicyYamlDetailResponse {
     /**
      * 集群Id
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 策略名
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * base64编码的yaml字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Yaml: string;
+    Yaml?: string;
     /**
      * 策略描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 策略创建时间
      */
-    PolicyCreateTime: string;
+    PolicyCreateTime?: string;
     /**
      * 策略源类型，分为System和Manual，分别代表手动和系统添加
      */
-    PolicySourceType: string;
+    PolicySourceType?: string;
     /**
      * 网络策略对应的网络插件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkPolicyPlugin: string;
+    NetworkPolicyPlugin?: string;
     /**
      * 网络策略状态
      */
-    PublishStatus: string;
+    PublishStatus?: string;
     /**
      * 网络发布结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublishResult: string;
+    PublishResult?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12957,11 +13053,11 @@ export interface DescribeNetworkFirewallPolicyListResponse {
     /**
      * 集群总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群的详细信息
      */
-    NetPolicy: Array<NetworkPolicyInfoItem>;
+    NetPolicy?: Array<NetworkPolicyInfoItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12995,6 +13091,10 @@ export interface DescribeAgentInstallCommandRequest {
      * 标签ID列表，IsCloud=false时才会生效
      */
     TagIds?: Array<number | bigint>;
+    /**
+     * 虚拟ip
+     */
+    Vip?: string;
 }
 /**
  * ResetSecLogTopicConfig请求参数结构体
@@ -13016,11 +13116,11 @@ export interface DescribeAssetImageVirusListExportResponse {
     /**
      * excel文件下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 任务ID
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13069,19 +13169,19 @@ export interface VirusAutoIsolateSampleInfo {
     /**
      * 文件MD5值
      */
-    MD5: string;
+    MD5?: string;
     /**
      * 病毒名
      */
-    VirusName: string;
+    VirusName?: string;
     /**
      * 最近编辑时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 自动隔离开关(true:开 false:关)
      */
-    AutoIsolateSwitch: boolean;
+    AutoIsolateSwitch?: boolean;
 }
 /**
  * DescribeExportJobDownloadURL请求参数结构体
@@ -13103,11 +13203,11 @@ export interface DescribeVulIgnoreRegistryImageListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像列表
      */
-    List: Array<VulIgnoreRegistryImage>;
+    List?: Array<VulIgnoreRegistryImage>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13221,11 +13321,11 @@ export interface ClsTopicInfo {
     /**
      * 主题ID
      */
-    TopicID: string;
+    TopicID?: string;
     /**
      * 主题名称
      */
-    TopicName: string;
+    TopicName?: string;
 }
 /**
  * DescribeCompliancePolicyItemAffectedAssetList请求参数结构体
@@ -13279,15 +13379,15 @@ export interface ComplianceAffectedAsset {
     /**
      * 为客户分配的唯一的资产项的ID。
      */
-    CustomerAssetId: number;
+    CustomerAssetId?: number;
     /**
      * 资产项的名称。
      */
-    AssetName: string;
+    AssetName?: string;
     /**
      * 资产项的类型
      */
-    AssetType: string;
+    AssetType?: string;
     /**
      * 检测状态
   
@@ -13299,17 +13399,17 @@ export interface ComplianceAffectedAsset {
   
   CHECK_FAILED, 检测失败
      */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
      * 节点名称。
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 上次检测的时间，格式为”YYYY-MM-DD HH:m::SS“。
   
   如果没有检测过，此处为”0000-00-00 00:00:00“。
      */
-    LastCheckTime: string;
+    LastCheckTime?: string;
     /**
      * 检测结果。取值为：
   
@@ -13317,27 +13417,39 @@ export interface ComplianceAffectedAsset {
   
   RESULT_PASSED: 通过
      */
-    CheckResult: string;
+    CheckResult?: string;
     /**
      * 主机IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 镜像的tag
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageTag: string;
+    ImageTag?: string;
     /**
      * 检查项验证信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VerifyInfo: string;
+    VerifyInfo?: string;
     /**
      * 主机实例id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
+    /**
+     * 镜像仓库信息
+     */
+    ImageRegistryInfo?: ImageRegistryInfo;
+    /**
+     * 集群id
+     */
+    ClusterID?: string;
+    /**
+     * 集群名称
+     */
+    ClusterName?: string;
 }
 /**
  * DescribeVirusMonitorSetting请求参数结构体
@@ -13389,11 +13501,11 @@ export interface DescribeNetworkFirewallClusterListResponse {
     /**
      * 集群总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群的详细信息
      */
-    ClusterInfoList: Array<NetworkClusterInfoItem>;
+    ClusterInfoList?: Array<NetworkClusterInfoItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13406,19 +13518,19 @@ export interface EscapeEventTendencyInfo {
     /**
      * 待处理风险容器事件总数
      */
-    RiskContainerEventCount: number;
+    RiskContainerEventCount?: number;
     /**
      * 待处理程序特权事件总数
      */
-    ProcessPrivilegeEventCount: number;
+    ProcessPrivilegeEventCount?: number;
     /**
      * 待处理容器逃逸事件总数
      */
-    ContainerEscapeEventCount: number;
+    ContainerEscapeEventCount?: number;
     /**
      * 日期
      */
-    Date: string;
+    Date?: string;
 }
 /**
  * DescribeImageRiskTendency返回参数结构体
@@ -13427,7 +13539,7 @@ export interface DescribeImageRiskTendencyResponse {
     /**
      * 本地镜像新增风险趋势信息列表
      */
-    ImageRiskTendencySet: Array<ImageRiskTendencyInfo>;
+    ImageRiskTendencySet?: Array<ImageRiskTendencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13508,19 +13620,19 @@ export interface DescribeEscapeEventTypeSummaryResponse {
     /**
      * 容器逃逸事件数
      */
-    ContainerEscapeEventCount: number;
+    ContainerEscapeEventCount?: number;
     /**
      * 程序提权事件数
      */
-    ProcessPrivilegeEventCount: number;
+    ProcessPrivilegeEventCount?: number;
     /**
      * 风险容器事件数
      */
-    RiskContainerEventCount: number;
+    RiskContainerEventCount?: number;
     /**
      * 逃逸事件待处理数
      */
-    PendingEscapeEventCount: number;
+    PendingEscapeEventCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13560,11 +13672,11 @@ export interface DescribeImageSimpleListResponse {
     /**
      * 镜像列表
      */
-    ImageList: Array<ImageSimpleInfo>;
+    ImageList?: Array<ImageSimpleInfo>;
     /**
      * 镜像数
      */
-    ImageCnt: number;
+    ImageCnt?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13600,7 +13712,7 @@ export interface CreateK8sApiAbnormalEventExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13742,33 +13854,33 @@ export interface K8sApiAbnormalRuleListItem {
     /**
      * 规则ID
      */
-    RuleID: string;
+    RuleID?: string;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 规则类型
   RT_SYSTEM 系统规则
   RT_USER 用户自定义
      */
-    RuleType: string;
+    RuleType?: string;
     /**
      * 受影响集群总数
      */
-    EffectClusterCount: number;
+    EffectClusterCount?: number;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 编辑账号
      */
-    OprUin: string;
+    OprUin?: string;
     /**
      * 状态
      */
-    Status: boolean;
+    Status?: boolean;
 }
 /**
  * DescribeVirusScanTaskStatus返回参数结构体
@@ -13846,20 +13958,20 @@ export interface ComplianceImageDetailInfo {
     /**
      * 镜像在主机上的ID。
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 镜像的名称。
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 镜像的Tag。
      */
-    ImageTag: string;
+    ImageTag?: string;
     /**
      * 镜像所在远程仓库的路径。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Repository: string;
+    Repository?: string;
 }
 /**
  * DescribeVulScanLocalImageList返回参数结构体
@@ -13868,11 +13980,11 @@ export interface DescribeVulScanLocalImageListResponse {
     /**
      * 镜像总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像列表
      */
-    List: Array<VulScanImageInfo>;
+    List?: Array<VulScanImageInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14185,15 +14297,15 @@ export interface DescribeImageRiskSummaryResponse {
     /**
      * 安全漏洞
      */
-    VulnerabilityCnt: Array<RunTimeRiskInfo>;
+    VulnerabilityCnt?: Array<RunTimeRiskInfo>;
     /**
      * 木马病毒
      */
-    MalwareVirusCnt: Array<RunTimeRiskInfo>;
+    MalwareVirusCnt?: Array<RunTimeRiskInfo>;
     /**
      * 敏感信息
      */
-    RiskCnt: Array<RunTimeRiskInfo>;
+    RiskCnt?: Array<RunTimeRiskInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14659,11 +14771,11 @@ export interface DescribeSystemVulListResponse {
     /**
      * 漏洞总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞列表
      */
-    List: Array<VulInfo>;
+    List?: Array<VulInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14695,12 +14807,12 @@ export interface DescribeAssetImageRegistryVirusListResponse {
      * 镜像漏洞列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<ImageVirus>;
+    List?: Array<ImageVirus>;
     /**
      * 总数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14794,14 +14906,14 @@ export interface ImageRiskTendencyInfo {
     /**
      * 趋势列表
      */
-    ImageRiskSet: Array<RunTimeTendencyInfo>;
+    ImageRiskSet?: Array<RunTimeTendencyInfo>;
     /**
      * 风险类型：
   IRT_VULNERABILITY : 安全漏洞
   IRT_MALWARE_VIRUS: 木马病毒
   IRT_RISK:敏感信息
      */
-    ImageRiskType: string;
+    ImageRiskType?: string;
 }
 /**
  * DescribeVulTopRanking返回参数结构体
@@ -14810,7 +14922,7 @@ export interface DescribeVulTopRankingResponse {
     /**
      * 漏洞Top排名信息列表
      */
-    List: Array<VulTopRankingInfo>;
+    List?: Array<VulTopRankingInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14954,19 +15066,19 @@ export interface DescribeVulLevelSummaryResponse {
     /**
      * 高危漏洞数
      */
-    HighLevelVulCount: number;
+    HighLevelVulCount?: number;
     /**
      * 中危漏洞数
      */
-    MediumLevelVulCount: number;
+    MediumLevelVulCount?: number;
     /**
      * 低危漏洞数
      */
-    LowLevelVulCount: number;
+    LowLevelVulCount?: number;
     /**
      * 严重漏洞数
      */
-    CriticalLevelVulCount: number;
+    CriticalLevelVulCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15228,7 +15340,7 @@ export interface DescribeVirusEventTendencyResponse {
     /**
      * 趋势列表
      */
-    List: Array<VirusTendencyInfo>;
+    List?: Array<VirusTendencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15295,7 +15407,7 @@ export interface DescribeVirusSampleDownloadUrlResponse {
     /**
      * 样本下载地址
      */
-    FileUrl: string;
+    FileUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15308,15 +15420,15 @@ export interface DescribeValueAddedSrvInfoResponse {
     /**
      * 仓库镜像未授权数量
      */
-    RegistryImageCnt: number;
+    RegistryImageCnt?: number;
     /**
      * 本地镜像未授权数量
      */
-    LocalImageCnt: number;
+    LocalImageCnt?: number;
     /**
      * 未使用的镜像安全扫描授权数
      */
-    UnusedAuthorizedCnt: number;
+    UnusedAuthorizedCnt?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15329,7 +15441,7 @@ export interface RunTimeRiskInfo {
     /**
      * 数量
      */
-    Cnt: number;
+    Cnt?: number;
     /**
      * 风险等级：
   CRITICAL: 严重
@@ -15337,7 +15449,7 @@ export interface RunTimeRiskInfo {
   MEDIUM：中
   LOW: 低
      */
-    Level: string;
+    Level?: string;
 }
 /**
  * CreateVirusScanTask请求参数结构体
@@ -15592,7 +15704,7 @@ export interface DescribeVirusAutoIsolateSampleDownloadURLResponse {
     /**
      * 样本下载链接
      */
-    FileUrl: string;
+    FileUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15609,7 +15721,7 @@ export interface DescribeNetworkFirewallPolicyDiscoverResponse {
     /**
      * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15889,7 +16001,7 @@ export interface ImagesInfo {
  */
 export interface ModifyVirusAutoIsolateExampleSwitchRequest {
     /**
-     * 文件Md5值
+     * 文件MD5值
      */
     MD5: string;
     /**
@@ -16159,11 +16271,11 @@ export interface CreateImageExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * excel文件下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16300,32 +16412,32 @@ export interface DescribeSecLogDeliveryKafkaSettingResponse {
      * 消息队列实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceID: string;
+    InstanceID?: string;
     /**
      * 消息队列实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 日志类型队列
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogTypeList: Array<SecLogDeliveryKafkaSettingInfo>;
+    LogTypeList?: Array<SecLogDeliveryKafkaSettingInfo>;
     /**
      * 用户名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    User: string;
+    User?: string;
     /**
      * 地域ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionID: string;
+    RegionID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16336,17 +16448,7 @@ export interface DescribeSecLogDeliveryKafkaSettingResponse {
  */
 export interface CreateHostExportJobRequest {
     /**
-     * 过滤条件。
-  <li>Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"</li>
-  <li>HostName - String - 是否必填：否 - 主机名筛选</li>
-  <li>Group- String - 是否必填：否 - 主机群组搜索</li>
-  <li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
-  <li>HostID- string - 是否必填：否 - 主机id搜索</li>
-  <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
-  <li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li>
-  <li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
-  <li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li>
-  <li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li>
+     * 过滤条件。<li>Status-String-是否必填：否-agent状态筛选，"ALL": "全部"(或不传该字段), "UNINSTALL"："未安装", "OFFLINE"："离线", "ONLINE"："防护中"</li><li>HostName-String-是否必填：否-主机名筛选</li><li>Group-String-是否必填：否-主机群组搜索</li><li>HostIP-string-是否必填：否-主机ip搜索</li><li>HostID-string-是否必填：否-主机id搜索</li><li>DockerVersion-string-是否必填：否-docker版本搜索</li><li>MachineType-string-是否必填：否-主机来源MachineType搜索，"ALL": "全部"(或不传该字段), 主机来源：[     "CVM",     "ECM",     "LH",     "BM" ]中的之一为腾讯云服务器；[     "Other" ]之一非腾讯云服务器；</li><li>DockerStatus-string-是否必填：否-docker安装状态，"ALL": "全部"(或不传该字段), "INSTALL": "已安装", "UNINSTALL": "未安装"</li><li>ProjectID-string-是否必填：否-所属项目id搜索</li><li>Tag:(tag: key)-string-是否必填：否-标签键值搜索示例Filters":[{"Name":"tag: tke-kind","Values":["service"]}]</li>
      */
     Filters?: Array<AssetFilters>;
     /**
@@ -16545,6 +16647,10 @@ export interface DescribeClusterDetailResponse {
      */
     ClusterStatus?: string;
     /**
+     * 集群运行子状态
+     */
+    ClusterSubStatus?: string;
+    /**
      * 集群类型：为托管集群MANAGED_CLUSTER、独立集群INDEPENDENT_CLUSTER
      */
     ClusterType?: string;
@@ -16628,31 +16734,31 @@ export interface ComplianceAssetPolicyItem {
     /**
      * 为客户分配的唯一的检测项的ID。
      */
-    CustomerPolicyItemId: number;
+    CustomerPolicyItemId?: number;
     /**
      * 检测项的原始ID
      */
-    BasePolicyItemId: number;
+    BasePolicyItemId?: number;
     /**
      * 检测项的名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 检测项所属的类型的名称
      */
-    Category: string;
+    Category?: string;
     /**
      * 所属的合规标准的ID
      */
-    BenchmarkStandardId: number;
+    BenchmarkStandardId?: number;
     /**
      * 所属的合规标准的名称
      */
-    BenchmarkStandardName: string;
+    BenchmarkStandardName?: string;
     /**
      * 威胁等级
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 检测状态
   CHECK_INIT, 待检测
@@ -16660,33 +16766,33 @@ export interface ComplianceAssetPolicyItem {
   CHECK_FINISHED, 检测完成
   CHECK_FAILED, 检测失败
      */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
      * 检测结果
   RESULT_PASSED: 通过
   RESULT_FAILED: 未通过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckResult: string;
+    CheckResult?: string;
     /**
      * 检测项对应的白名单项的ID。如果存在且非0，表示检测项被用户忽略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WhitelistId: number;
+    WhitelistId?: number;
     /**
      * 处理建议。
      */
-    FixSuggestion: string;
+    FixSuggestion?: string;
     /**
      * 最近检测的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastCheckTime: string;
+    LastCheckTime?: string;
     /**
      * 验证信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VerifyInfo: string;
+    VerifyInfo?: string;
 }
 /**
  * InitializeUserComplianceEnvironment请求参数结构体
@@ -16699,11 +16805,11 @@ export interface DescribeSupportDefenceVulResponse {
     /**
      * 支持防御的漏洞列表
      */
-    List: Array<SupportDefenceVul>;
+    List?: Array<SupportDefenceVul>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16769,11 +16875,11 @@ export interface CreateVulScanTaskResponse {
     /**
      * 本地镜像重新漏洞扫描时的任务ID
      */
-    LocalTaskID: number;
+    LocalTaskID?: number;
     /**
      * 仓库镜像重新漏洞扫描时的任务ID
      */
-    RegistryTaskID: number;
+    RegistryTaskID?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16921,35 +17027,35 @@ export interface RiskSyscallWhiteListBaseInfo {
     /**
      * 白名单id
      */
-    Id: string;
+    Id?: string;
     /**
      * 镜像数量
      */
-    ImageCount: number;
+    ImageCount?: number;
     /**
      * 连接进程路径
      */
-    ProcessPath: string;
+    ProcessPath?: string;
     /**
      * 系统调用名称列表
      */
-    SyscallNames: Array<string>;
+    SyscallNames?: Array<string>;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 是否是全局白名单，true全局
      */
-    IsGlobal: boolean;
+    IsGlobal?: boolean;
     /**
      * 镜像id数组
      */
-    ImageIds: Array<string>;
+    ImageIds?: Array<string>;
 }
 /**
  * DeleteAbnormalProcessRules请求参数结构体
@@ -17043,11 +17149,11 @@ export interface DescribeRiskListResponse {
     /**
      * 风险详情数组
      */
-    ClusterRiskItems: Array<ClusterRiskItem>;
+    ClusterRiskItems?: Array<ClusterRiskItem>;
     /**
      * 风险项的总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17157,11 +17263,11 @@ export interface ConfirmNetworkFirewallPolicyResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建确认任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17174,11 +17280,11 @@ export interface CreateNetworkFirewallPublishResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17243,11 +17349,11 @@ export interface DescribeVulRegistryImageListResponse {
     /**
      * 镜像总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 仓库镜像列表
      */
-    List: Array<VulAffectedRegistryImageInfo>;
+    List?: Array<VulAffectedRegistryImageInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17260,7 +17366,7 @@ export interface CreateVulDefenceEventExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17376,11 +17482,11 @@ export interface AddAndPublishNetworkFirewallPolicyYamlDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17795,11 +17901,11 @@ export interface UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17830,12 +17936,12 @@ export interface DescribeRiskSyscallEventsExportResponse {
      * Excel下载地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 任务Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18038,11 +18144,11 @@ export interface DescribeImageAutoAuthorizedLogListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 自动授权结果镜像列表
      */
-    List: Array<AutoAuthorizedImageInfo>;
+    List?: Array<AutoAuthorizedImageInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18218,24 +18324,24 @@ export interface DescribeReverseShellDetailResponse {
     /**
      * 事件基本信息
      */
-    EventBaseInfo: RunTimeEventBaseInfo;
+    EventBaseInfo?: RunTimeEventBaseInfo;
     /**
      * 进程信息
      */
-    ProcessInfo: ProcessDetailInfo;
+    ProcessInfo?: ProcessDetailInfo;
     /**
      * 父进程信息
      */
-    ParentProcessInfo: ProcessDetailBaseInfo;
+    ParentProcessInfo?: ProcessDetailBaseInfo;
     /**
      * 事件描述
      */
-    EventDetail: ReverseShellEventDescription;
+    EventDetail?: ReverseShellEventDescription;
     /**
      * 祖先进程信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AncestorProcessInfo: ProcessBaseInfo;
+    AncestorProcessInfo?: ProcessBaseInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18261,7 +18367,7 @@ export interface CreateEscapeWhiteListExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18311,35 +18417,35 @@ export interface ExportJobInfo {
     /**
      * 任务ID
      */
-    JobID: string;
+    JobID?: string;
     /**
      * 任务名称
      */
-    JobName: string;
+    JobName?: string;
     /**
      * 来源
      */
-    Source: string;
+    Source?: string;
     /**
      * 导出状态
      */
-    ExportStatus: string;
+    ExportStatus?: string;
     /**
      * 导出进度
      */
-    ExportProgress: number;
+    ExportProgress?: number;
     /**
      * 失败原因
      */
-    FailureMsg: string;
+    FailureMsg?: string;
     /**
      * 超时时间
      */
-    Timeout: string;
+    Timeout?: string;
     /**
      * 插入时间
      */
-    InsertTime: string;
+    InsertTime?: string;
 }
 /**
  * DescribeContainerAssetSummary返回参数结构体
@@ -18565,23 +18671,27 @@ export interface DescribeAgentInstallCommandResponse {
     /**
      * linux系统安装命令
      */
-    LinuxCommand: string;
+    LinuxCommand?: string;
     /**
      * windows系统安装命令（windows2008及以上）
      */
-    WindowsCommand: string;
+    WindowsCommand?: string;
     /**
      * windows系统安装命令第一步（windows2003）
      */
-    WindowsStepOne: string;
+    WindowsStepOne?: string;
     /**
      * windows系统安装命令第二步（windows2003）
      */
-    WindowsStepTwo: string;
+    WindowsStepTwo?: string;
     /**
      * windows版agent下载链接
      */
-    WindowsDownloadUrl: string;
+    WindowsDownloadUrl?: string;
+    /**
+     * arm架构系统安装命令
+     */
+    ARMCommand?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18616,7 +18726,7 @@ export interface DescribeExportJobDownloadURLResponse {
     /**
      * 下载链接
      */
-    DownloadURL: string;
+    DownloadURL?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18630,12 +18740,12 @@ export interface DescribeAssetImageRegistryRiskInfoListResponse {
      * 镜像漏洞列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<ImageRisk>;
+    List?: Array<ImageRisk>;
     /**
      * 总数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18648,11 +18758,11 @@ export interface DescribeVulIgnoreLocalImageListResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 镜像列表
      */
-    List: Array<VulIgnoreLocalImage>;
+    List?: Array<VulIgnoreLocalImage>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18917,39 +19027,39 @@ export interface K8sApiAbnormalEventInfo {
     /**
      * 命中规则名称
      */
-    MatchRuleName: string;
+    MatchRuleName?: string;
     /**
      * 命中规则类型
      */
-    MatchRuleType: string;
+    MatchRuleType?: string;
     /**
      * 告警等级
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 集群ID
      */
-    ClusterID: string;
+    ClusterID?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
-     * 集群运行状态
+     * 集群运行状态，CSR_RUNNING-运行中，CSR_EXCEPTION-异常，CSR_CREATING-创建中
      */
-    ClusterRunningStatus: string;
+    ClusterRunningStatus?: string;
     /**
      * 初次生成时间
      */
-    FirstCreateTime: string;
+    FirstCreateTime?: string;
     /**
      * 最近一次生成时间
      */
-    LastCreateTime: string;
+    LastCreateTime?: string;
     /**
      * 告警数量
      */
-    AlarmCount: number;
+    AlarmCount?: number;
     /**
      * 状态
   "EVENT_UNDEAL":未处理
@@ -18958,43 +19068,43 @@ export interface K8sApiAbnormalEventInfo {
   "EVENT_DEL": 删除
   "EVENT_ADD_WHITE": 加白
      */
-    Status: string;
+    Status?: string;
     /**
      * 集群masterIP
      */
-    ClusterMasterIP: string;
+    ClusterMasterIP?: string;
     /**
      * k8s版本
      */
-    K8sVersion: string;
+    K8sVersion?: string;
     /**
      * 运行时组件
      */
-    RunningComponent: Array<string>;
+    RunningComponent?: Array<string>;
     /**
      * 描述
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 建议
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 请求信息
      */
-    Info: string;
+    Info?: string;
     /**
      * 规则ID
      */
-    MatchRuleID: string;
+    MatchRuleID?: string;
     /**
      * 高亮字段数组
      */
-    HighLightFields: Array<string>;
+    HighLightFields?: Array<string>;
     /**
      * 命中规则
      */
-    MatchRule: K8sApiAbnormalRuleScopeInfo;
+    MatchRule?: K8sApiAbnormalRuleScopeInfo;
 }
 /**
  * DescribeVulDefenceEventTendency返回参数结构体
@@ -19003,11 +19113,11 @@ export interface DescribeVulDefenceEventTendencyResponse {
     /**
      * 漏洞防御事件趋势
      */
-    DefendedList: Array<VulDefenceEventTendency>;
+    DefendedList?: Array<VulDefenceEventTendency>;
     /**
      * 漏洞攻击事件趋势
      */
-    AttackList: Array<VulDefenceEventTendency>;
+    AttackList?: Array<VulDefenceEventTendency>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19037,7 +19147,7 @@ export interface CreateK8sApiAbnormalRuleExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19105,7 +19215,7 @@ export interface DescribeSearchLogsResponse {
     /**
      * 历史搜索记录 保留最新的10条
      */
-    Data: Array<string>;
+    Data?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19145,12 +19255,12 @@ export interface DescribeReverseShellEventsExportResponse {
      * execle下载地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19221,28 +19331,28 @@ export interface ComplianceAssetInfo {
     /**
      * 客户资产的ID。
      */
-    CustomerAssetId: number;
+    CustomerAssetId?: number;
     /**
      * 资产类别。
      */
-    AssetType: string;
+    AssetType?: string;
     /**
      * 资产的名称。
      */
-    AssetName: string;
+    AssetName?: string;
     /**
      * 当资产为镜像时，这个字段为镜像Tag。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageTag: string;
+    ImageTag?: string;
     /**
      * 资产所在的主机IP。
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 资产所属的节点的名称
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 检测状态
   
@@ -19254,34 +19364,46 @@ export interface ComplianceAssetInfo {
   
   CHECK_FAILED, 检测失败
      */
-    CheckStatus: string;
+    CheckStatus?: string;
     /**
      * 此类资产通过的检测项的数目。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PassedPolicyItemCount: number;
+    PassedPolicyItemCount?: number;
     /**
      * 此类资产未通过的检测的数目。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedPolicyItemCount: number;
+    FailedPolicyItemCount?: number;
     /**
      * 上次检测的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastCheckTime: string;
+    LastCheckTime?: string;
     /**
      * 检测结果：
   RESULT_FAILED: 未通过。
   RESULT_PASSED: 通过。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckResult: string;
+    CheckResult?: string;
     /**
      * 主机节点的实例id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
+    /**
+     * 镜像仓库信息
+     */
+    ImageRegistryInfo?: ImageRegistryInfo;
+    /**
+     * 集群id
+     */
+    ClusterID?: string;
+    /**
+     * 集群名称
+     */
+    ClusterName?: string;
 }
 /**
  * DescribeAssetImageRegistryVirusList请求参数结构体
@@ -19355,11 +19477,11 @@ export interface CheckNetworkFirewallPolicyYamlResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19376,11 +19498,11 @@ export interface DescribeComplianceTaskAssetSummaryResponse {
   USER_INITIALIZING，表示用户正在初始化环境。
   USER_NORMAL: 正常状态。
      */
-    Status: string;
+    Status?: string;
     /**
      * 返回各类资产的汇总信息的列表。
      */
-    AssetSummaryList: Array<ComplianceAssetSummary>;
+    AssetSummaryList?: Array<ComplianceAssetSummary>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19432,7 +19554,7 @@ export interface DescribeNetworkFirewallClusterRefreshStatusResponse {
     /**
      * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19445,27 +19567,27 @@ export interface VirusTaskInfo {
     /**
      * 容器名称
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 容器id
      */
-    ContainerId: string;
+    ContainerId?: string;
     /**
      * 镜像名称
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 镜像Id
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 节点名
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 节点内网ip
      */
-    HostIp: string;
+    HostIp?: string;
     /**
      * 扫描状态：
   WAIT: 等待扫描
@@ -19476,23 +19598,23 @@ export interface VirusTaskInfo {
   CANCELED: 已取消
   CANCEL_FAILED： 取消失败
      */
-    Status: string;
+    Status?: string;
     /**
      * 检测开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 检测结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 风险个数
      */
-    RiskCnt: number;
+    RiskCnt?: number;
     /**
      * 事件id
      */
-    Id: string;
+    Id?: string;
     /**
      * 错误原因:
   SEND_SUCCESSED: 下发成功
@@ -19509,7 +19631,7 @@ export interface VirusTaskInfo {
   UNAUTH: 所在镜像未授权
   SEND_CANCEL_SUCCESSED:下发成功
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 节点类型：NORMAL普通节点、SUPER超级节点
      */
@@ -19596,6 +19718,30 @@ export interface CreateComplianceTaskRequest {
     PeriodTaskId?: number;
 }
 /**
+ * 镜像仓库详情
+ */
+export interface ImageRegistryInfo {
+    /**
+     * 仓库名称
+     */
+    Name?: string;
+    /**
+     * 仓库类型
+  aws
+  ccr
+  harbor
+  jfrog
+  other-tcr
+  quay
+  tcr
+     */
+    Type?: string;
+    /**
+     * 仓库地址
+     */
+    Address?: string;
+}
+/**
  * DescribeAccessControlRulesExport请求参数结构体
  */
 export interface DescribeAccessControlRulesExportRequest {
@@ -19635,7 +19781,7 @@ export interface CreateEscapeEventsExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20070,11 +20216,11 @@ export interface DescribeAccessControlRulesResponse {
     /**
      * 事件总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 访问控制策略信息列表
      */
-    RuleSet: Array<RuleBaseInfo>;
+    RuleSet?: Array<RuleBaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20099,35 +20245,35 @@ export interface DescribeSecLogVasInfoResponse {
   已购: Normal
   隔离: Isolate
      */
-    BuyStatus: string;
+    BuyStatus?: string;
     /**
      * 存储时长(月)
      */
-    LogSaveMonth: number;
+    LogSaveMonth?: number;
     /**
      * 起始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 截止时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 存储容量(GB)
      */
-    LogCapacity: number;
+    LogCapacity?: number;
     /**
      * 资源ID
      */
-    ResourceID: string;
+    ResourceID?: string;
     /**
      * 是否曾经购买过(false:未曾 true:曾经购买过)
      */
-    IsPurchased: boolean;
+    IsPurchased?: boolean;
     /**
      * 试用存储容量(GB)
      */
-    TrialCapacity: number;
+    TrialCapacity?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20504,11 +20650,11 @@ export interface DescribeImageAutoAuthorizedTaskListResponse {
     /**
      * 自动授权任务列表
      */
-    List: Array<ImageAutoAuthorizedTask>;
+    List?: Array<ImageAutoAuthorizedTask>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20521,12 +20667,12 @@ export interface DescribeComplianceAssetListResponse {
     /**
      * 返回资产的总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回各类资产的列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssetInfoList: Array<ComplianceAssetInfo>;
+    AssetInfoList?: Array<ComplianceAssetInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20580,7 +20726,7 @@ export interface DescribeSecLogDeliveryClsSettingResponse {
     /**
      * 日志类型列表
      */
-    LogTypeList: Array<SecLogDeliveryClsSettingInfo>;
+    LogTypeList?: Array<SecLogDeliveryClsSettingInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20690,11 +20836,11 @@ export interface DeleteNetworkFirewallPolicyDetailResponse {
     /**
      * 返回创建的任务的ID，为0表示创建失败。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 创建删除任务的结果，"Succ"为成功，"Failed"为失败
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20737,23 +20883,23 @@ export interface DescribeNewestVulResponse {
     /**
      * 漏洞PocID
      */
-    PocID: string;
+    PocID?: string;
     /**
      * 漏洞名称
      */
-    VulName: string;
+    VulName?: string;
     /**
      * 披露时间
      */
-    SubmitTime: string;
+    SubmitTime?: string;
     /**
      * 应急漏洞风险情况：NOT_SCAN：未扫描，SCANNING：扫描中，SCANNED：已扫描
      */
-    Status: string;
+    Status?: string;
     /**
      * 漏洞CVEID
      */
-    CVEID: string;
+    CVEID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20766,11 +20912,11 @@ export interface DescribeCompliancePolicyItemAffectedAssetListResponse {
     /**
      * 返回各检测项所影响的资产的列表。
      */
-    AffectedAssetList: Array<ComplianceAffectedAsset>;
+    AffectedAssetList?: Array<ComplianceAffectedAsset>;
     /**
      * 检测项影响的资产的总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20895,36 +21041,36 @@ export interface DescribeContainerSecEventSummaryResponse {
     /**
      * 未处理逃逸事件
      */
-    UnhandledEscapeCnt: number;
+    UnhandledEscapeCnt?: number;
     /**
      * 未处理反弹shell事件
      */
-    UnhandledReverseShellCnt: number;
+    UnhandledReverseShellCnt?: number;
     /**
      * 未处理高危系统调用
      */
-    UnhandledRiskSyscallCnt: number;
+    UnhandledRiskSyscallCnt?: number;
     /**
      * 未处理异常进程
      */
-    UnhandledAbnormalProcessCnt: number;
+    UnhandledAbnormalProcessCnt?: number;
     /**
      * 未处理文件篡改
      */
-    UnhandledFileCnt: number;
+    UnhandledFileCnt?: number;
     /**
      * 未处理木马事件
      */
-    UnhandledVirusEventCnt: number;
+    UnhandledVirusEventCnt?: number;
     /**
      * 未处理恶意外连事件
      */
-    UnhandledMaliciousConnectionEventCnt: number;
+    UnhandledMaliciousConnectionEventCnt?: number;
     /**
      * 未处理k8sApi事件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnhandledK8sApiEventCnt: number;
+    UnhandledK8sApiEventCnt?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20972,7 +21118,7 @@ export interface DescribeAssetHostListRequest {
      */
     Offset?: number;
     /**
-     * 过滤条件。 <li>Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"</li> <li>HostName - String - 是否必填：否 - 主机名筛选</li> <li>Group- String - 是否必填：否 - 主机群组搜索</li> <li>HostIP- string - 是否必填：否 - 主机ip搜索</li> <li>HostID- string - 是否必填：否 - 主机id搜索</li> <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li> <li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；</li> <li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li> <li>ProjectID- string - 是否必填：否 - 所属项目id搜索</li> <li>Tag:xxx(tag:key)- string- 是否必填：否 - 标签键值搜索 示例Filters":[{"Name":"tag:tke-kind","Values":["service"]}]</li> <li>NonClusterNode: 是否查询非集群节点(true: 是,false: 否)</li>
+     * 过滤条件。<li>Status-String-是否必填：否-agent状态筛选，"ALL": "全部"(或不传该字段), "UNINSTALL"："未安装", "OFFLINE"："离线", "ONLINE"："防护中"</li><li>HostName-String-是否必填：否-主机名筛选</li><li>Group-String-是否必填：否-主机群组搜索</li><li>HostIP-string-是否必填：否-主机ip搜索</li><li>HostID-string-是否必填：否-主机id搜索</li><li>DockerVersion-string-是否必填：否-docker版本搜索</li><li>MachineType-string-是否必填：否-主机来源MachineType搜索，"ALL": "全部"(或不传该字段), 主机来源：[     "CVM",     "ECM",     "LH",     "BM" ]中的之一为腾讯云服务器；[     "Other" ]之一非腾讯云服务器；</li><li>DockerStatus-string-是否必填：否-docker安装状态，"ALL": "全部"(或不传该字段), "INSTALL": "已安装", "UNINSTALL": "未安装"</li><li>ProjectID-string-是否必填：否-所属项目id搜索</li><li>Tag:(tag: key)-string-是否必填：否-标签键值搜索示例Filters":[{"Name":"tag: tke-kind","Values":["service"]}]</li> <li>NonClusterNode: 是否查询非集群节点(true: 是,false: 否)</li>
      */
     Filters?: Array<AssetFilters>;
     /**
@@ -21621,7 +21767,7 @@ export interface CreateRiskDnsEventExportJobResponse {
     /**
      * 导出任务ID，前端拿着任务ID查询任务进度
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21665,11 +21811,11 @@ export interface DescribeWebVulListResponse {
     /**
      * 漏洞总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 漏洞列表
      */
-    List: Array<VulInfo>;
+    List?: Array<VulInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21682,55 +21828,55 @@ export interface DescribeVulScanInfoResponse {
     /**
      * 本次扫描的本地镜像总数
      */
-    LocalImageScanCount: number;
+    LocalImageScanCount?: number;
     /**
      * 忽略的漏洞数量
      */
-    IgnoreVulCount: number;
+    IgnoreVulCount?: number;
     /**
      * 漏洞扫描的开始时间
      */
-    ScanStartTime: string;
+    ScanStartTime?: string;
     /**
      * 漏洞扫描的结束时间
      */
-    ScanEndTime: string;
+    ScanEndTime?: string;
     /**
      * 发现风险镜像数量
      */
-    FoundRiskImageCount: number;
+    FoundRiskImageCount?: number;
     /**
      * 本地发现漏洞数量
      */
-    FoundVulCount: number;
+    FoundVulCount?: number;
     /**
      * 扫描进度
      */
-    ScanProgress: number;
+    ScanProgress?: number;
     /**
      * 本次扫描的仓库镜像总数
      */
-    RegistryImageScanCount: number;
+    RegistryImageScanCount?: number;
     /**
      * 本地镜像最近一次的漏洞任务扫描ID
      */
-    LocalTaskID: number;
+    LocalTaskID?: number;
     /**
      * 扫描状态:NOT_SCAN:未扫描，SCANNING:扫描中,SCANNED:完成，CANCELED：扫描停止
      */
-    Status: string;
+    Status?: string;
     /**
      * 剩余时间，秒
      */
-    RemainingTime: number;
+    RemainingTime?: number;
     /**
      * 仓库镜像最近一次的漏洞任务扫描ID
      */
-    RegistryTaskID: number;
+    RegistryTaskID?: number;
     /**
      * 仓库发现漏洞数量
      */
-    RegistryFoundVulCount: number;
+    RegistryFoundVulCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21835,11 +21981,11 @@ export interface DescribeSecLogDeliveryKafkaOptionsResponse {
     /**
      * 实例列表
      */
-    InstanceList: Array<CKafkaInstanceInfo>;
+    InstanceList?: Array<CKafkaInstanceInfo>;
     /**
      * 地域列表
      */
-    RegionList: Array<RegionInfo>;
+    RegionList?: Array<RegionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22026,12 +22172,13 @@ export interface SuperNodeListItem {
 export interface EscapeRuleEnabled {
     /**
      * 规则类型
-     ESCAPE_HOST_ACESS_FILE:宿主机文件访问逃逸
-     ESCAPE_MOUNT_NAMESPACE:MountNamespace逃逸
-     ESCAPE_PRIVILEDGE:程序提权逃逸
-     ESCAPE_PRIVILEDGE_CONTAINER_START:特权容器启动逃逸
-     ESCAPE_MOUNT_SENSITIVE_PTAH:敏感路径挂载
-     ESCAPE_SYSCALL:Syscall逃逸
+     ESCAPE_CGROUPS：利用cgroup机制逃逸
+     ESCAPE_TAMPER_SENSITIVE_FILE：篡改敏感文件逃逸
+     ESCAPE_DOCKER_API：访问Docker API接口逃逸
+     ESCAPE_VUL_OCCURRED：逃逸漏洞利用
+     MOUNT_SENSITIVE_PTAH：敏感路径挂载
+     PRIVILEGE_CONTAINER_START：特权容器
+     PRIVILEGE：程序提权逃逸
      */
     Type: string;
     /**

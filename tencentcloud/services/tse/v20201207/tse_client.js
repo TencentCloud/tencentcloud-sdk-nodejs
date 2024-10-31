@@ -382,6 +382,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGovernanceServices", req, cb);
     }
     /**
+     * 重启微服务引擎实例
+     */
+    async RestartSREInstance(req, cb) {
+        return this.request("RestartSREInstance", req, cb);
+    }
+    /**
      * 创建治理中心服务别名
      */
     async CreateGovernanceAlias(req, cb) {

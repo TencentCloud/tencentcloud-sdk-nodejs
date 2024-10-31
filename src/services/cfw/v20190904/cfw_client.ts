@@ -137,7 +137,6 @@ import {
   CreateNatFwInstanceResponse,
   NewModeItems,
   DescribeNatFwInfoCountResponse,
-  SyncFwOperateResponse,
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
@@ -166,7 +165,7 @@ import {
   ModifySecurityGroupSequenceRulesRequest,
   CreateDatabaseWhiteListRulesResponse,
   DeleteBlockIgnoreRuleListRequest,
-  DescribeNatSwitchListResponse,
+  SyncFwOperateResponse,
   DeleteVpcFwGroupResponse,
   CreateChooseVpcsResponse,
   DescribeUnHandleEventTabListResponse,
@@ -226,7 +225,6 @@ import {
   DeleteBlockIgnoreRuleNewRequest,
   RemoveNatAcRuleResponse,
   CustomWhiteRule,
-  DescribeNatSwitchListRequest,
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
@@ -288,7 +286,6 @@ import {
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
   DescribeEnterpriseSGRuleProgressResponse,
-  NatSwitchListData,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
   RemoveVpcAcRuleResponse,
@@ -948,18 +945,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateChooseVpcsResponse) => void
   ): Promise<CreateChooseVpcsResponse> {
     return this.request("CreateChooseVpcs", req, cb)
-  }
-
-  /**
-     * 旧接口，不再维护
-
-查询NAT边界防火墙开关列表
-     */
-  async DescribeNatSwitchList(
-    req: DescribeNatSwitchListRequest,
-    cb?: (error: string, rep: DescribeNatSwitchListResponse) => void
-  ): Promise<DescribeNatSwitchListResponse> {
-    return this.request("DescribeNatSwitchList", req, cb)
   }
 
   /**

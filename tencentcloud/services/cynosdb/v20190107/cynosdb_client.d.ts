@@ -96,7 +96,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceSpecs(req: DescribeInstanceSpecsRequest, cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void): Promise<DescribeInstanceSpecsResponse>;
     /**
-     * 此接口（DescribeBinlogDownloadUrl）用于查询Binlog的下载地址。
+     * 本接口（DescribeBinlogDownloadUrl）用于查询 Binlog 的下载地址。
      */
     DescribeBinlogDownloadUrl(req: DescribeBinlogDownloadUrlRequest, cb?: (error: string, rep: DescribeBinlogDownloadUrlResponse) => void): Promise<DescribeBinlogDownloadUrlResponse>;
     /**
@@ -120,7 +120,7 @@ export declare class Client extends AbstractClient {
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
-     * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
+     * 本接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
     ExportInstanceSlowQueries(req: ExportInstanceSlowQueriesRequest, cb?: (error: string, rep: ExportInstanceSlowQueriesResponse) => void): Promise<ExportInstanceSlowQueriesResponse>;
     /**
@@ -216,7 +216,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeProxy(req: UpgradeProxyRequest, cb?: (error: string, rep: UpgradeProxyResponse) => void): Promise<UpgradeProxyResponse>;
     /**
-     * 查询集群列表
+     * 本接口（DescribeClusters）用于查询集群列表。
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
@@ -524,11 +524,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyAuditService(req: ModifyAuditServiceRequest, cb?: (error: string, rep: ModifyAuditServiceResponse) => void): Promise<ModifyAuditServiceResponse>;
     /**
-     * 本接口(DescribeZones)用于查询可售卖地域可用区信息。
+     * 本接口（DescribeZones）用于查询可售卖地域可用区信息。
      */
     DescribeZones(req: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
-     * 此接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
+     * 本接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
      */
     DescribeBackupDownloadUrl(req: DescribeBackupDownloadUrlRequest, cb?: (error: string, rep: DescribeBackupDownloadUrlResponse) => void): Promise<DescribeBackupDownloadUrlResponse>;
     /**
@@ -572,7 +572,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**
-     * 此接口（DescribeBinlogs）用来查询集群Binlog日志列表。
+     * 本接口（DescribeBinlogs）用来查询集群 Binlog 日志列表。
      */
     DescribeBinlogs(req: DescribeBinlogsRequest, cb?: (error: string, rep: DescribeBinlogsResponse) => void): Promise<DescribeBinlogsResponse>;
     /**

@@ -2803,8 +2803,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按分页形式展示网络攻击日志列表
-   */
+     * DescribeAttackEvents 代替
+
+按分页形式展示网络攻击日志列表
+     */
   async DescribeAttackLogs(
     req: DescribeAttackLogsRequest,
     cb?: (error: string, rep: DescribeAttackLogsResponse) => void

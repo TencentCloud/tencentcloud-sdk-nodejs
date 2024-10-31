@@ -81,6 +81,7 @@ import {
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
   DescribeTopAttackInfoRequest,
+  ProductSupport,
   DescribeCVMAssetsResponse,
   VulImpactComponentInfo,
   VULRiskAdvanceCFGList,

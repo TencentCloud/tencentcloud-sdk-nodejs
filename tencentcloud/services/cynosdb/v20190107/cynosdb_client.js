@@ -160,7 +160,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSpecs", req, cb);
     }
     /**
-     * 此接口（DescribeBinlogDownloadUrl）用于查询Binlog的下载地址。
+     * 本接口（DescribeBinlogDownloadUrl）用于查询 Binlog 的下载地址。
      */
     async DescribeBinlogDownloadUrl(req, cb) {
         return this.request("DescribeBinlogDownloadUrl", req, cb);
@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 此接口（ExportInstanceSlowQueries）用于导出实例慢日志。
+     * 本接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
     async ExportInstanceSlowQueries(req, cb) {
         return this.request("ExportInstanceSlowQueries", req, cb);
@@ -340,7 +340,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeProxy", req, cb);
     }
     /**
-     * 查询集群列表
+     * 本接口（DescribeClusters）用于查询集群列表。
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
@@ -802,13 +802,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditService", req, cb);
     }
     /**
-     * 本接口(DescribeZones)用于查询可售卖地域可用区信息。
+     * 本接口（DescribeZones）用于查询可售卖地域可用区信息。
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
     }
     /**
-     * 此接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
+     * 本接口（DescribeBackupDownloadUrl）用于查询集群备份文件下载地址。
      */
     async DescribeBackupDownloadUrl(req, cb) {
         return this.request("DescribeBackupDownloadUrl", req, cb);
@@ -874,7 +874,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeInstance", req, cb);
     }
     /**
-     * 此接口（DescribeBinlogs）用来查询集群Binlog日志列表。
+     * 本接口（DescribeBinlogs）用来查询集群 Binlog 日志列表。
      */
     async DescribeBinlogs(req, cb) {
         return this.request("DescribeBinlogs", req, cb);

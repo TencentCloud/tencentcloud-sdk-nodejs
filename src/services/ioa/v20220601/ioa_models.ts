@@ -16,14 +16,51 @@
  */
 
 /**
- * DescribeAccountGroups返回参数结构体
+ * 规则元数据
  */
-export interface DescribeAccountGroupsResponse {
+export interface RuleItem {
   /**
-   * 账户分组详情响应数据
+   * 字段名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: DescribeAccountGroupsPageResp
+  Key?: string
+  /**
+   * 操作关系（等于、不等于、包含、不包含）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operate?: string
+  /**
+   * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 内容，v2多值版本使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+}
+
+/**
+ * 所属组
+ */
+export interface DescribeLocalAccountAccountGroupsData {
+  /**
+   * 组Id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupId?: number
+}
+
+/**
+ * CreateDeviceVirtualGroup返回参数结构体
+ */
+export interface CreateDeviceVirtualGroupResponse {
+  /**
+   * 响应返回的data
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateDeviceVirtualGroupRspData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -31,14 +68,354 @@ export interface DescribeAccountGroupsResponse {
 }
 
 /**
+ * 自动划分规则数据
+ */
+export interface ComplexRule {
+  /**
+   * 简单规则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimpleRules?: Array<SimpleRule>
+  /**
+   * 表达式间逻辑关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Relation?: string
+}
+
+/**
+ * Sort 排序字段
+ */
+export interface Sort {
+  /**
+   * 排序字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Field?: string
+  /**
+   * 排序方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Order?: string
+}
+
+/**
  * DescribeRootAccountGroup返回参数结构体
  */
 export interface DescribeRootAccountGroupResponse {
   /**
-   * 账户分组详情响应数据
+   * 账号根分组响应详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: GetAccountGroupData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDevices返回参数结构体
+ */
+export interface DescribeDevicesResponse {
+  /**
+   * 分页的data数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeDevicesPageRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 账号分组详情响应数据
+ */
+export interface GetAccountGroupData {
+  /**
+   * 分组名称全路径，点分格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamePath?: string
+  /**
+   * 分组ID全路径，数组格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdPathArr?: Array<number | bigint>
+  /**
+   * 分组扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: string
+  /**
+   * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Utime?: string
+  /**
+   * 当前分组的父分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 源账号组ID，该字段仅适用于第三方同步的组织架构，通过OrgId-Id构成源组织架构分组ID-现组织架构分组ID映射关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgId?: string
+  /**
+   * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 分组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 分组导入源(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: number
+  /**
+   * 分组ID全路径，点分格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdPath?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Itime?: string
+  /**
+   * 父源账号组ID，该字段仅适用于第三方同步的组织架构
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentOrgId?: string
+  /**
+   * 导入信息,json格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Import?: string
+  /**
+   * 是否开启导入架构
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportEnable?: boolean
+  /**
+   * 导入类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportType?: string
+  /**
+   * miniIAMId，MiniIAM源才有
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MiniIamId?: string
+}
+
+/**
+ * DescribeLocalAccounts返回参数结构体
+ */
+export interface DescribeLocalAccountsResponse {
+  /**
+   * 获取账号列表响应的分页对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeLocalAccountsPage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 账号分组信息
+ */
+export interface DescribeAccountGroupsData {
+  /**
+   * 账号分组名全路径，点分格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamePath?: string
+  /**
+   * 账号分组ID全路径，数组格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdPathArr?: Array<number | bigint>
+  /**
+   * 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: string
+  /**
+   * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Utime?: string
+  /**
+   * 父分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgId?: string
+  /**
+   * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 分组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 同步数据源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: number
+  /**
+   * 账号分组ID全路径，点分格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdPath?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Itime?: string
+  /**
+   * 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentOrgId?: string
+  /**
+   * 导入类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportType?: string
+  /**
+   * miniIAM id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MiniIamId?: string
+  /**
+   * 该分组下含子组的所有用户总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserTotal?: number
+  /**
+   * 是否叶子节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLeaf?: boolean
+  /**
+   * 是否该账户的直接权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadOnly?: boolean
+  /**
+   * 最新一次同步任务的结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestSyncResult?: string
+  /**
+   * 最新一次同步任务的结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestSyncTime?: string
+}
+
+/**
+ * 规则表达式
+ */
+export interface RuleExpression {
+  /**
+   * 规则元数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<RuleItem>
+  /**
+   * 关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Relation?: string
+}
+
+/**
+ * DescribeRootAccountGroup请求参数结构体
+ */
+export type DescribeRootAccountGroupRequest = null
+
+/**
+ * 账户分组详情响应数据
+ */
+export interface DescribeAccountGroupsPageResp {
+  /**
+   * 账户分响应对象集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeAccountGroupsData>
+  /**
+   * 分页公共对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: Paging
+}
+
+/**
+ * DescribeAccountGroups请求参数结构体
+ */
+export interface DescribeAccountGroupsRequest {
+  /**
+   * 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。
+   */
+  Deepin?: number
+  /**
+   * 查询条件
+
+过滤参数
+1、Name，string类型，按分组名过滤
+是否必填：否
+操作符: like
+
+排序条件
+1、Itime，string类型，按分组创建时间排序
+是否必填：否
+2、Utime，string类型，按分组更新时间排序
+是否必填：否
+   */
+  Condition?: Condition
+  /**
+   * 父分组ID，获取该分组下的子组信息。默认查询全网根分组下子组信息。
+   */
+  ParentId?: number
+}
+
+/**
+ * DescribeAccountGroups返回参数结构体
+ */
+export interface DescribeAccountGroupsResponse {
+  /**
+   * 账号分组详情响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeAccountGroupsPageResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -59,6 +436,183 @@ export interface DescribeDevicesPageRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<DeviceDetail>
+}
+
+/**
+ * FilterGroups 条件过滤组
+ */
+export interface FilterGroup {
+  /**
+   * Filters 条件过滤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * CreateDeviceVirtualGroup请求参数结构体
+ */
+export interface CreateDeviceVirtualGroupRequest {
+  /**
+   * 终端自定义分组名
+   */
+  DeviceVirtualGroupName?: string
+  /**
+   * 详情
+   */
+  Description?: string
+  /**
+   * 系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）(只支持32位)
+   */
+  OsType?: number
+  /**
+   * 时间设置类型（1:自动小时、2:自动每天、3:自定义、0:手动分组）(只支持32位)
+   */
+  TimeType?: number
+  /**
+   * 自动划分时间（单位min）(只支持32位)
+   */
+  AutoMinute?: number
+  /**
+   * 自动划分规则数据
+   */
+  AutoRules?: ComplexRule
+}
+
+/**
+ * DescribeDevices请求参数结构体
+ */
+export interface DescribeDevicesRequest {
+  /**
+   * 过滤条件参数（字段含义请参考接口返回值）
+
+- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序
+- Name, 类型String，支持操作：【eq，like，ilike】，支持排序
+- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序
+- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序
+- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序
+- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序
+- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序
+- Tags，类型String，支持操作：【eq，like，ilike】，支持排序
+- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序
+- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序
+- Version，类型String，支持操作：【eq，like，ilike】，支持排序
+- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序
+- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**
+- HostName，类型String，支持操作：【eq，like，ilike】，支持排序
+- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序
+- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序
+- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**
+- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**
+- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**
+- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**
+- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**
+- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序
+- Os，类型String，支持操作：【eq，like，ilike】，支持排序
+- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**
+- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**
+- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序
+- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序
+- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序
+- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序
+- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序
+- Memory，类型String，支持操作：【eq，like，ilike】，支持排序
+- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序
+- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序
+- AccountName，类型String，支持操作：【like.ilike】，支持排序
+- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序
+- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序
+- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序
+
+
+
+
+
+分页参数
+- PageNum 从1开始，小于等于0时使用默认参数
+- PageSize 最大值5000，最好不超过100
+   */
+  Condition?: Condition
+  /**
+   * 【和GroupIds必须有一个填写】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：
+id-名称-操作系统
+1	全网终端	Win
+2	未分组终端	Win
+30000000	服务器	Win
+40000101	全网终端	Linux
+40000102	未分组终端	Linux
+40000103	服务器	Linux
+40000201	全网终端	macOS
+40000202	未分组终端	macOS
+40000203	服务器	macOS
+40000401	全网终端	Android
+40000402	未分组终端	Android
+40000501	全网终端	iOS
+40000502	未分组终端	iOS
+
+
+SaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
+   */
+  GroupId?: number
+  /**
+   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   */
+  OsType?: number
+  /**
+   * 在线状态 （2表示在线，0或者1表示离线）
+   */
+  OnlineStatus?: number
+  /**
+   * 过滤条件--兼容旧接口,参数同Condition
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段--兼容旧接口,参数同Condition
+   */
+  Sort?: Sort
+  /**
+   * 获取第几页--兼容旧接口,参数同Condition
+   */
+  PageNum?: number
+  /**
+   * 每页获取数--兼容旧接口,参数同Condition
+   */
+  PageSize?: number
+  /**
+   * 授权状态： 4基础授权 5高级授权
+   */
+  Status?: number
+  /**
+   * 【和GroupId必须有一个填写】设备分组id列表（需要和OsType匹配）
+
+   */
+  GroupIds?: Array<number | bigint>
+}
+
+/**
+ * 页码
+ */
+export interface Paging {
+  /**
+   * 每页条数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 页码(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNum?: number
+  /**
+   * 总页数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageCount?: number
+  /**
+   * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
 }
 
 /**
@@ -131,7 +685,7 @@ export interface DeviceDetail {
    */
   LocalIpList?: string
   /**
-   * 主机ID(只支持32位)
+   * 宿主机id（需要宿主机也安装iOA才能显示）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostId?: number
@@ -241,7 +795,7 @@ export interface DeviceDetail {
    */
   NGNNewStrategyVer?: string
   /**
-   * 主机名称
+   * 宿主机名称（需要宿主机也安装iOA才能显示）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostName?: string
@@ -251,7 +805,7 @@ export interface DeviceDetail {
    */
   BaseBoardSn?: string
   /**
-   * 绑定账户只有名字
+   * 绑定账户名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountUsers?: string
@@ -389,61 +943,54 @@ export interface DescribeLocalAccountsData {
 }
 
 /**
+ * Filters 条件过滤
+ */
+export interface Filter {
+  /**
+   * 过滤字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Field?: string
+  /**
+   * 过滤方式 eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * 过滤条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+}
+
+/**
  * DescribeLocalAccounts请求参数结构体
  */
 export interface DescribeLocalAccountsRequest {
   /**
-   * 滤条件、分页参数
-<li>UserName - String - 是否必填：否 - 操作符: eq,like  - 排序支持：否- 按账号UserName过滤。</li>
-<li>UserId - string - 是否必填：否 - 操作符: eq,like  - 排序支持：否 - 按账号UserNd过滤。</li>
-<li>Phone - string - 是否必填：否 - 操作符: eq,like - 排序支持：否 - 按手机号过滤。</li>
+   * 查询条件：过滤或排序
+1、UserName，string类型，姓名
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+2、UserId，string类型，账户
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+3、Phone，string类型，手机号
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
    */
   Condition?: Condition
   /**
-   * 获取账号的分组Id，不传默认获取全部(只支持32位)
+   * 获取账号的分组ID，不传默认获取全网根账号组
    */
   AccountGroupId?: number
   /**
    * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户(只支持32位)
    */
   ShowFlag?: number
-}
-
-/**
- * FilterGroups 条件过滤组
- */
-export interface FilterGroup {
-  /**
-   * Filters 条件过滤
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DescribeDevices返回参数结构体
- */
-export interface DescribeDevicesResponse {
-  /**
-   * 分页的data数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: DescribeDevicesPageRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 所属组
- */
-export interface DescribeLocalAccountAccountGroupsData {
-  /**
-   * 组Id(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccountGroupId?: number
 }
 
 /**
@@ -460,110 +1007,6 @@ export interface DescribeLocalAccountsPage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<DescribeLocalAccountsData>
-}
-
-/**
- * DescribeDevices请求参数结构体
- */
-export interface DescribeDevicesRequest {
-  /**
-   * 过滤条件<br>
-<li>Ip - String - 是否必填：否 - 操作符: eq  - 排序支持：否- 按照Ip进行过滤。</li>
-<li>MacAddr - String - 是否必填：否 - 操作符: eq  - 排序支持：否- 按照mac地址进行过滤。</li>
-<li>IoaUserName - String - 是否必填：否 - 操作符: eq  - 排序支持：否- 按照ioa用户名进行过滤。</li>
-分页参数<br>
-<li>PageNum 从1开始，小于等于0时使用默认参数。</li>
-<li>PageSize 最大值5000，最好不超过100。</li>
-   */
-  Condition?: Condition
-  /**
-   * 【和GroupIds必须有一个填写】设备分组id（需要和OsType匹配）
-id-名称-操作系统
-1	全网终端	Win
-2	未分组终端	Win
-30000000	服务器	Win
-40000101	全网终端	Linux
-40000102	未分组终端	Linux
-40000103	服务器	Linux
-40000201	全网终端	macOS
-40000202	未分组终端	macOS
-40000203	服务器	macOS
-40000401	全网终端	Android
-40000402	未分组终端	Android
-40000501	全网终端	iOS
-40000502	未分组终端	iOS
-   */
-  GroupId?: number
-  /**
-   * 【必填】操作系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
-   */
-  OsType?: number
-  /**
-   * 在线状态 （2表示在线，0或者1表示离线）
-   */
-  OnlineStatus?: number
-  /**
-   * 过滤条件--兼容旧接口,参数同Condition
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序字段--兼容旧接口,参数同Condition
-   */
-  Sort?: Sort
-  /**
-   * 获取第几页--兼容旧接口,参数同Condition
-   */
-  PageNum?: number
-  /**
-   * 每页获取数--兼容旧接口,参数同Condition
-   */
-  PageSize?: number
-  /**
-   * 授权状态 4未授权 5已授权
-   */
-  Status?: number
-}
-
-/**
- * 页码
- */
-export interface Paging {
-  /**
-   * 每页条数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageSize?: number
-  /**
-   * 页码(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageNum?: number
-  /**
-   * 总页数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageCount?: number
-  /**
-   * 记录总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-}
-
-/**
- * Sort 排序字段
- */
-export interface Sort {
-  /**
-   * 排序字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Field?: string
-  /**
-   * 排序方式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Order?: string
 }
 
 /**
@@ -603,277 +1046,28 @@ export interface Condition {
 }
 
 /**
- * Filters 条件过滤
+ * 响应返回的data
  */
-export interface Filter {
+export interface CreateDeviceVirtualGroupRspData {
   /**
-   * 过滤字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Field?: string
-  /**
-   * 过滤方式 eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operator?: string
-  /**
-   * 过滤条件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Values?: Array<string>
-}
-
-/**
- * DescribeLocalAccounts返回参数结构体
- */
-export interface DescribeLocalAccountsResponse {
-  /**
-   * 获取账号列表响应的分页对象
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: DescribeLocalAccountsPage
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 分组名称
- */
-export interface DescribeAccountGroupsData {
-  /**
-   * 名称path
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamePath?: string
-  /**
-   * id patch数组(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdPathArr?: Array<number | bigint>
-  /**
-   * 扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtraInfo?: string
-  /**
-   * 最后更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Utime?: string
-  /**
-   * 父id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentId?: number
-  /**
-   * 组织id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgId?: string
-  /**
-   * 账户组名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * id
+   * 返回的自定义分组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 同步数据源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Source?: number
-  /**
-   * id path
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdPath?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Itime?: string
-  /**
-   * 父组织id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentOrgId?: string
-  /**
-   * 导入类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportType?: string
-  /**
-   * miniIAM id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MiniIamId?: string
-  /**
-   * 该分组下用户总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserTotal?: number
-  /**
-   * 是否叶子节点
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsLeaf?: boolean
-  /**
-   * 是否该账户的直接权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReadOnly?: boolean
-  /**
-   * 最新一次同步任务的结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LatestSyncResult?: string
-  /**
-   * 最新一次同步任务的结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LatestSyncTime?: string
 }
 
 /**
- * DescribeRootAccountGroup请求参数结构体
+ * 简单规则表达式
  */
-export type DescribeRootAccountGroupRequest = null
-
-/**
- * 账户分组详情响应数据
- */
-export interface GetAccountGroupData {
+export interface SimpleRule {
   /**
-   * 分组Namepath
+   * 规则表达式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamePath?: string
+  Expressions?: Array<RuleExpression>
   /**
-   * 分组Id path arr(只支持32位)
+   * 表达式间逻辑关系
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdPathArr?: Array<number | bigint>
-  /**
-   * 分组扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtraInfo?: string
-  /**
-   * 最后更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Utime?: string
-  /**
-   * 父分组id(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentId?: number
-  /**
-   * 组织id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgId?: string
-  /**
-   * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 分组id(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id?: number
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * 分组导入源(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Source?: number
-  /**
-   * Id Path
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdPath?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Itime?: string
-  /**
-   * 父组织id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParentOrgId?: string
-  /**
-   * 导入信息,json格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Import?: string
-  /**
-   * 是否开启导入架构
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportEnable?: boolean
-  /**
-   * 导入类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportType?: string
-  /**
-   * miniIAMId，MiniIAM源才有
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MiniIamId?: string
-}
-
-/**
- * 账户分组详情响应数据
- */
-export interface DescribeAccountGroupsPageResp {
-  /**
-   * 账户分响应对象集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<DescribeAccountGroupsData>
-  /**
-   * 分页公共对象
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Page?: Paging
-}
-
-/**
- * DescribeAccountGroups请求参数结构体
- */
-export interface DescribeAccountGroupsRequest {
-  /**
-   * 搜索范围,0-仅搜直接子组,1-深层搜索(只支持32位)
-   */
-  Deepin?: number
-  /**
-   * 滤条件、分页参数
-<li>Name - String - 是否必填：否 - 操作符: like  - 排序支持：否- 按账号分组过滤。</li>
-排序条件
-<li>Itime - string - 是否必填：否 - 排序支持：是 - 按账号分组创建时间排序。</li>
-<li>Utime - string - 是否必填：否 - 排序支持：是 - 按账号分组更新时间排序。</li>
-   */
-  Condition?: Condition
-  /**
-   * 父分组id
-   */
-  ParentId?: number
+  Relation?: string
 }

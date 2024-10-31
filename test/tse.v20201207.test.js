@@ -608,6 +608,16 @@ it("tse.v20201207.DeleteGovernanceServices", async function () {
     }
 })
 
+it("tse.v20201207.RestartSREInstance", async function () {
+    try {
+       const data = await client.RestartSREInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateGovernanceAlias", async function () {
     try {
        const data = await client.CreateGovernanceAlias({})

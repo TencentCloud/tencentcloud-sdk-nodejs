@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAccountGroupsResponse, DescribeRootAccountGroupResponse, DescribeLocalAccountsRequest, DescribeDevicesResponse, DescribeDevicesRequest, DescribeLocalAccountsResponse, DescribeRootAccountGroupRequest, DescribeAccountGroupsRequest } from "./ioa_models";
+import { CreateDeviceVirtualGroupResponse, DescribeRootAccountGroupResponse, DescribeDevicesResponse, DescribeLocalAccountsResponse, DescribeRootAccountGroupRequest, DescribeAccountGroupsRequest, DescribeAccountGroupsResponse, CreateDeviceVirtualGroupRequest, DescribeDevicesRequest, DescribeLocalAccountsRequest } from "./ioa_models";
 /**
  * ioa client
  * @class
@@ -8,7 +8,8 @@ import { DescribeAccountGroupsResponse, DescribeRootAccountGroupResponse, Descri
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 查询账户根分组详情，私有化调用path为：capi/Assets/DescribeRootAccountGroup
+     * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
+私有化调用path为：capi/Assets/DescribeRootAccountGroup
      */
     DescribeRootAccountGroup(req?: DescribeRootAccountGroupRequest, cb?: (error: string, rep: DescribeRootAccountGroupResponse) => void): Promise<DescribeRootAccountGroupResponse>;
     /**
@@ -16,7 +17,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeDevices(req: DescribeDevicesRequest, cb?: (error: string, rep: DescribeDevicesResponse) => void): Promise<DescribeDevicesResponse>;
     /**
-     * 以分页的方式查询账户目录列表,私有化调用path为：/capi/Assets/DescribeAccountGroups
+     * 创建终端自定义分组，私有化调用path为：/capi/Assets/Device/CreateDeviceVirtualGroup
+     */
+    CreateDeviceVirtualGroup(req: CreateDeviceVirtualGroupRequest, cb?: (error: string, rep: CreateDeviceVirtualGroupResponse) => void): Promise<CreateDeviceVirtualGroupResponse>;
+    /**
+     * 以分页的方式查询账号分组列表，私有化调用path为：/capi/Assets/DescribeAccountGroups
      */
     DescribeAccountGroups(req: DescribeAccountGroupsRequest, cb?: (error: string, rep: DescribeAccountGroupsResponse) => void): Promise<DescribeAccountGroupsResponse>;
     /**

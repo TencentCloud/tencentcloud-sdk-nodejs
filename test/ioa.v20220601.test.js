@@ -38,6 +38,16 @@ it("ioa.v20220601.DescribeDevices", async function () {
     }
 })
 
+it("ioa.v20220601.CreateDeviceVirtualGroup", async function () {
+    try {
+       const data = await client.CreateDeviceVirtualGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeAccountGroups", async function () {
     try {
        const data = await client.DescribeAccountGroups({})

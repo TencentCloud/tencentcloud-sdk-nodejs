@@ -758,7 +758,7 @@ DescribeEscapeEventsExport  查询容器逃逸事件列表导出
         return this.request("DescribeAgentInstallCommand", req, cb);
     }
     /**
-     * 查询导出任务的结果
+     * 查询导出接口进度
      */
     async DescribeExportJobResult(req, cb) {
         return this.request("DescribeExportJobResult", req, cb);

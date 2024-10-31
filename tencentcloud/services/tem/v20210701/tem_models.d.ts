@@ -73,7 +73,7 @@ export interface DescribeApplicationInfoResponse {
     /**
      * 返回结果
      */
-    Result: TemServiceVersionInfo;
+    Result?: TemServiceVersionInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -100,19 +100,19 @@ export interface DeleteApplicationServiceRequest {
     /**
      * 服务id
      */
-    ApplicationId?: string;
+    ApplicationId: string;
+    /**
+     * 环境ID
+     */
+    EnvironmentId: string;
+    /**
+     * 访问方式服务名
+     */
+    ServiceName: string;
     /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 环境ID
-     */
-    EnvironmentId?: string;
-    /**
-     * 访问方式服务名
-     */
-    ServiceName?: string;
 }
 /**
  * RestartApplicationPod请求参数结构体
@@ -356,7 +356,7 @@ export interface ModifyApplicationAutoscalerResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -460,13 +460,13 @@ export interface StopApplicationRequest {
      */
     ApplicationId: string;
     /**
+     * 环境ID/命名空间ID
+     */
+    EnvironmentId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 环境ID/命名空间ID
-     */
-    EnvironmentId?: string;
 }
 /**
  * ModifyApplicationInfo请求参数结构体
@@ -498,7 +498,7 @@ export interface DestroyEnvironmentRequest {
      */
     EnvironmentId: string;
     /**
-     * Namespace
+     * 来源渠道 示例值：0
      */
     SourceChannel?: number;
 }
@@ -536,7 +536,7 @@ export interface RevertDeployApplicationResponse {
     /**
      * 是否成功
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -578,7 +578,7 @@ export interface DescribeApplicationsResponse {
     /**
      * 返回结果
      */
-    Result: ServicePage;
+    Result?: ServicePage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -614,11 +614,11 @@ export interface CreateCosTokenRequest {
  */
 export interface DescribeEnvironmentsRequest {
     /**
-     * 分页limit
+     * 分页limit，默认：20
      */
     Limit?: number;
     /**
-     * 分页下标
+     * 分页下标，默认：0
      */
     Offset?: number;
     /**
@@ -936,7 +936,7 @@ export interface DescribeLogConfigRequest {
     /**
      * 应用 ID
      */
-    ApplicationId?: string;
+    ApplicationId: string;
 }
 /**
  * 分批发布详情
@@ -1020,7 +1020,7 @@ export interface DescribeEnvironmentStatusResponse {
     /**
      * 返回状态列表
      */
-    Result: Array<NamespaceStatusInfo>;
+    Result?: Array<NamespaceStatusInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1058,7 +1058,7 @@ export interface DescribeApplicationPodsResponse {
     /**
      * 返回结果
      */
-    Result: DescribeRunPodPage;
+    Result?: DescribeRunPodPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1093,7 +1093,7 @@ export interface EnableApplicationAutoscalerResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1622,10 +1622,6 @@ export interface IngressInfo {
      */
     EnvironmentId: string;
     /**
-     * 环境namespace
-     */
-    ClusterNamespace: string;
-    /**
      * ip version
      */
     AddressIPVersion: string;
@@ -1641,7 +1637,11 @@ export interface IngressInfo {
      * clb ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClbId?: string;
+    ClbId: string;
+    /**
+     * 环境namespace
+     */
+    ClusterNamespace: string;
     /**
      * tls 配置
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1692,17 +1692,17 @@ export interface ModifyApplicationAutoscalerRequest {
      */
     EnvironmentId: string;
     /**
-     * 来源渠道
-     */
-    SourceChannel?: number;
-    /**
      * 弹性伸缩策略ID
      */
-    AutoscalerId?: string;
+    AutoscalerId: string;
     /**
      * 弹性伸缩策略
      */
-    Autoscaler?: Autoscaler;
+    Autoscaler: Autoscaler;
+    /**
+     * 来源渠道
+     */
+    SourceChannel?: number;
 }
 /**
  * ModifyConfigData返回参数结构体
@@ -1765,11 +1765,11 @@ export interface DescribeIngressesRequest {
     /**
      * 环境 id
      */
-    EnvironmentId?: string;
+    EnvironmentId: string;
     /**
      * 环境 namespace
      */
-    ClusterNamespace?: string;
+    ClusterNamespace: string;
     /**
      * 来源渠道
      */
@@ -1811,7 +1811,7 @@ export interface CreateLogConfigRequest {
     /**
      * 应用 ID
      */
-    ApplicationId?: string;
+    ApplicationId: string;
     /**
      * 日志集 ID
      */
@@ -1862,7 +1862,7 @@ export interface DescribeIngressesResponse {
      * ingress 数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: Array<IngressInfo>;
+    Result?: Array<IngressInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1881,13 +1881,13 @@ export interface ModifyConfigDataRequest {
      */
     Name: string;
     /**
+     * 配置信息
+     */
+    Data: Array<Pair>;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 配置信息
-     */
-    Data?: Array<Pair>;
 }
 /**
  * CreateConfigData返回参数结构体
@@ -1907,13 +1907,13 @@ export interface CreateConfigDataResponse {
  */
 export interface DescribeApplicationsStatusRequest {
     /**
+     * 环境ID
+     */
+    EnvironmentId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 环境ID
-     */
-    EnvironmentId?: string;
 }
 /**
  * DescribeIngress返回参数结构体
@@ -2030,7 +2030,7 @@ export interface ModifyApplicationInfoResponse {
      * 成功与否
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2045,13 +2045,13 @@ export interface RestartApplicationRequest {
      */
     ApplicationId: string;
     /**
+     * 环境ID/命名空间ID
+     */
+    EnvironmentId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 环境ID/命名空间ID
-     */
-    EnvironmentId?: string;
 }
 /**
  * DestroyEnvironment返回参数结构体
@@ -2060,7 +2060,7 @@ export interface DestroyEnvironmentResponse {
     /**
      * 返回结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2074,7 +2074,7 @@ export interface DisableApplicationAutoscalerResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2135,7 +2135,7 @@ export interface RestartApplicationPodResponse {
      * 返回结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2190,7 +2190,7 @@ export interface CreateApplicationAutoscalerResponse {
      * 弹性伸缩策略组合ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2209,13 +2209,13 @@ export interface DeleteApplicationAutoscalerRequest {
      */
     EnvironmentId: string;
     /**
+     * 弹性伸缩策略ID
+     */
+    AutoscalerId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 弹性伸缩策略ID
-     */
-    AutoscalerId?: string;
 }
 /**
  * DescribeApplicationAutoscalerList请求参数结构体
@@ -2254,11 +2254,11 @@ export interface DescribeDeployApplicationDetailRequest {
     /**
      * 服务id
      */
-    ApplicationId?: string;
+    ApplicationId: string;
     /**
      * 环境id
      */
-    EnvironmentId?: string;
+    EnvironmentId: string;
     /**
      * 版本部署id
      */
@@ -2298,13 +2298,13 @@ export interface DisableApplicationAutoscalerRequest {
      */
     EnvironmentId: string;
     /**
+     * 弹性伸缩策略ID
+     */
+    AutoscalerId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 弹性伸缩策略ID
-     */
-    AutoscalerId?: string;
 }
 /**
  * DescribeRelatedIngresses请求参数结构体
@@ -2313,19 +2313,19 @@ export interface DescribeRelatedIngressesRequest {
     /**
      * 环境 id
      */
-    EnvironmentId?: string;
+    EnvironmentId: string;
     /**
      * 环境 namespace
      */
-    ClusterNamespace?: string;
+    ClusterNamespace: string;
+    /**
+     * 应用 ID
+     */
+    ApplicationId: string;
     /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 应用 ID
-     */
-    ApplicationId?: string;
 }
 /**
  * Cos token
@@ -2396,7 +2396,7 @@ export interface DescribeEnvironmentsResponse {
     /**
      * 返回结果
      */
-    Result: NamespacePage;
+    Result?: NamespacePage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2410,7 +2410,7 @@ export interface DeleteApplicationAutoscalerResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2424,7 +2424,7 @@ export interface DescribeRelatedIngressesResponse {
      * ingress 数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: Array<IngressInfo>;
+    Result?: Array<IngressInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2659,7 +2659,7 @@ export interface DescribeDeployApplicationDetailResponse {
     /**
      * 分批发布结果详情
      */
-    Result: TemDeployApplicationDetailInfo;
+    Result?: TemDeployApplicationDetailInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2681,7 +2681,7 @@ export interface DescribeEnvironmentResponse {
     /**
      * 环境信息
      */
-    Result: NamespaceInfo;
+    Result?: NamespaceInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2814,13 +2814,13 @@ export interface CreateApplicationAutoscalerRequest {
      */
     EnvironmentId: string;
     /**
+     * 弹性伸缩策略
+     */
+    Autoscaler: Autoscaler;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 弹性伸缩策略
-     */
-    Autoscaler?: Autoscaler;
 }
 /**
  * DeleteApplicationService返回参数结构体
@@ -2830,7 +2830,7 @@ export interface DeleteApplicationServiceResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2864,11 +2864,11 @@ export interface ResumeDeployApplicationRequest {
     /**
      * 需要开始下一批次的服务id
      */
-    ApplicationId?: string;
+    ApplicationId: string;
     /**
      * 环境id
      */
-    EnvironmentId?: string;
+    EnvironmentId: string;
 }
 /**
  * DescribeConfigData请求参数结构体
@@ -2970,7 +2970,7 @@ export interface DescribePagedLogConfigListResponse {
     /**
      * 日志收集配置列表
      */
-    Result: LogConfigListPage;
+    Result?: LogConfigListPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3129,13 +3129,13 @@ export interface CreateConfigDataRequest {
      */
     Name: string;
     /**
+     * 配置信息
+     */
+    Data: Array<Pair>;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 配置信息
-     */
-    Data?: Array<Pair>;
 }
 /**
  * 配置信息的分页列表
@@ -3422,11 +3422,11 @@ export interface DescribeApplicationsRequest {
      */
     EnvironmentId?: string;
     /**
-     * 分页Limit
+     * 分页Limit，默认值：20
      */
     Limit?: number;
     /**
-     * 分页offset
+     * 分页offset,默认值：0
      */
     Offset?: number;
     /**
@@ -3602,13 +3602,13 @@ export interface CreateApplicationServiceRequest {
      */
     EnvironmentId: string;
     /**
+     * 访问方式详情
+     */
+    Service: ServicePortMapping;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 访问方式详情
-     */
-    Service?: ServicePortMapping;
 }
 /**
  * ModifyApplicationReplicas返回参数结构体
@@ -3669,7 +3669,7 @@ export interface ModifyEnvironmentRequest {
      */
     EnvironmentId: string;
     /**
-     * 环境名称
+     * 环境名称。环境名称不可修改
      */
     EnvironmentName?: string;
     /**
@@ -3728,7 +3728,7 @@ export interface CreateApplicationServiceResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3895,11 +3895,11 @@ export interface RevertDeployApplicationRequest {
     /**
      * 需要回滚的服务id
      */
-    ApplicationId?: string;
+    ApplicationId: string;
     /**
      * 需要回滚的服务所在环境id
      */
-    EnvironmentId?: string;
+    EnvironmentId: string;
 }
 /**
  * 查询过滤器
@@ -4081,7 +4081,7 @@ export interface ModifyEnvironmentResponse {
      * 成功时为环境ID，失败为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4123,11 +4123,11 @@ export interface ModifyLogConfigRequest {
     /**
      * 日志收集配置信息
      */
-    Data?: LogConfig;
+    Data: LogConfig;
     /**
      * 应用 ID
      */
-    ApplicationId?: string;
+    ApplicationId: string;
 }
 /**
  * DestroyLogConfig请求参数结构体
@@ -4159,13 +4159,13 @@ export interface EnableApplicationAutoscalerRequest {
      */
     EnvironmentId: string;
     /**
+     * 弹性伸缩策略ID
+     */
+    AutoscalerId: string;
+    /**
      * 来源渠道
      */
     SourceChannel?: number;
-    /**
-     * 弹性伸缩策略ID
-     */
-    AutoscalerId?: string;
 }
 /**
  * eks service info

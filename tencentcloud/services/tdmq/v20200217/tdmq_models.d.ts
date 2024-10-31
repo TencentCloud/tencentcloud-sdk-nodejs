@@ -3595,7 +3595,7 @@ export interface ModifyClusterRequest {
      */
     ClusterName?: string;
     /**
-     * 说明信息。
+     * 说明信息。长度限制为 128 字节
      */
     Remark?: string;
     /**
@@ -7905,7 +7905,7 @@ export interface ModifyClusterResponse {
     /**
      * Pulsar 集群的ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8652,7 +8652,7 @@ export interface PublishCmqMsgResponse {
  */
 export interface AcknowledgeMessageResponse {
     /**
-     * 如果为“”，则说明没有错误返回
+     * 如果为""，则说明没有错误返回，否则返回具体的错误信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
