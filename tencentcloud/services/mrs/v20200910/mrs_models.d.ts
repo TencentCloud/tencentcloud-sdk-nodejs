@@ -5666,8 +5666,14 @@ export interface NormPart {
     /**
      * 部位详情
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     PartDetail?: PartDesc;
+    /**
+     * 部位详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartDetailList?: Array<PartDesc>;
 }
 /**
  * 体检报告-妇科-月经史

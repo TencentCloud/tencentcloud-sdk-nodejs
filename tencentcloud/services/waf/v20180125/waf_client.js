@@ -511,14 +511,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessHistogram", req, cb);
     }
     /**
-     * 废弃接口，无有效调用
-
-删除访问日志下载记录
-     */
-    async DeleteDownloadRecord(req, cb) {
-        return this.request("DeleteDownloadRecord", req, cb);
-    }
-    /**
      * 查询SaaS型WAF支持的TLS版本
      */
     async DescribeTlsVersion(req, cb) {

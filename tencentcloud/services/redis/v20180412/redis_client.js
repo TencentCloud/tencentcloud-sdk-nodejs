@@ -41,6 +41,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DescribeTaskList）用于查询指定实例的任务列表信息。
+
+- 可查询近30天内任务列表数据。
      */
     async DescribeTaskList(req, cb) {
         return this.request("DescribeTaskList", req, cb);

@@ -22,19 +22,19 @@ export interface PlanDetailInfo {
   /**
    * 默认策略，1为默认，0为非默认
    */
-  IsDefault: number
+  IsDefault?: number
   /**
    * 策略id
    */
-  PlanId: number
+  PlanId?: number
   /**
    * 策略名称
    */
-  PlanName: string
+  PlanName?: string
   /**
    * 策略信息
    */
-  PlanInfo: PlanInfo
+  PlanInfo?: PlanInfo
 }
 
 /**
@@ -44,35 +44,35 @@ export interface AppSetInfo {
   /**
    * 任务唯一标识
    */
-  ItemId: string
+  ItemId?: string
   /**
    * app的名称
    */
-  AppName: string
+  AppName?: string
   /**
    * app的包名
    */
-  AppPkgName: string
+  AppPkgName?: string
   /**
    * app的版本号
    */
-  AppVersion: string
+  AppVersion?: string
   /**
    * app的md5
    */
-  AppMd5: string
+  AppMd5?: string
   /**
    * app的大小
    */
-  AppSize: number
+  AppSize?: number
   /**
    * 加固服务版本
    */
-  ServiceEdition: string
+  ServiceEdition?: string
   /**
    * 加固结果返回码
    */
-  ShieldCode: number
+  ShieldCode?: number
   /**
    * 加固后的APP下载地址
    */
@@ -80,27 +80,27 @@ export interface AppSetInfo {
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  TaskStatus: number
+  TaskStatus?: number
   /**
    * 请求的客户端ip
    */
-  ClientIp: string
+  ClientIp?: string
   /**
    * 提交加固时间
    */
-  TaskTime: number
+  TaskTime?: number
   /**
    * app的图标url
    */
-  AppIconUrl: string
+  AppIconUrl?: string
   /**
    * 加固后app的md5
    */
-  ShieldMd5: string
+  ShieldMd5?: string
   /**
    * 加固后app的大小
    */
-  ShieldSize: number
+  ShieldSize?: number
 }
 
 /**
@@ -110,11 +110,11 @@ export interface CreateShieldPlanInstanceResponse {
   /**
    * 策略id
    */
-  PlanId: number
+  PlanId?: number
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress: number
+  Progress?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -146,15 +146,15 @@ export interface ResourceServiceInfo {
   /**
    * 创建时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 到期时间戳
    */
-  ExpireTime: number
+  ExpireTime?: number
   /**
    * 资源名称，如应用加固，源码混淆
    */
-  ResourceName: string
+  ResourceName?: string
 }
 
 /**
@@ -186,11 +186,11 @@ export interface DescribeShieldInstancesResponse {
   /**
    * 符合要求的app数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 一个关于app详细信息的结构体，主要包括app的基本信息和加固信息。
    */
-  AppSet: Array<AppSetInfo>
+  AppSet?: Array<AppSetInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -204,7 +204,7 @@ export interface ShieldInfo {
   /**
    * 加固结果的返回码
    */
-  ShieldCode: number
+  ShieldCode?: number
   /**
    * 加固后app的大小
    */
@@ -220,15 +220,15 @@ export interface ShieldInfo {
   /**
    * 加固的提交时间
    */
-  TaskTime: number
+  TaskTime?: number
   /**
    * 任务唯一标识
    */
-  ItemId: string
+  ItemId?: string
   /**
    * 加固版本，basic基础版，professional专业版，enterprise企业版
    */
-  ServiceEdition: string
+  ServiceEdition?: string
 }
 
 /**
@@ -546,11 +546,11 @@ export interface ShieldPlanInfo {
   /**
    * 加固策略数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 加固策略具体信息数组
    */
-  PlanSet: Array<PlanDetailInfo>
+  PlanSet?: Array<PlanDetailInfo>
 }
 
 /**
@@ -582,11 +582,11 @@ export interface CreateShieldInstanceResponse {
   /**
    * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
    */
-  Progress: number
+  Progress?: number
   /**
    * 任务唯一标识
    */
-  ItemId: string
+  ItemId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -626,31 +626,31 @@ export interface ResourceInfo {
   /**
    * 用户购买的资源id，全局唯一
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 资源的pid，MTP加固-12767，应用加固-12750 MTP反作弊-12766 源代码混淆-12736
    */
-  Pid: number
+  Pid?: number
   /**
    * 购买时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 到期时间戳
    */
-  ExpireTime: number
+  ExpireTime?: number
   /**
    * 0-未绑定，1-已绑定
    */
-  IsBind: number
+  IsBind?: number
   /**
    * 用户绑定app的基本信息
    */
-  BindInfo: BindInfo
+  BindInfo?: BindInfo
   /**
    * 资源名称，如应用加固，漏洞扫描
    */
-  ResourceName: string
+  ResourceName?: string
 }
 
 /**
@@ -998,7 +998,7 @@ export interface IOSResult {
    */
   ResourceId?: string
   /**
-   * 加固状态
+   * 加固状态：0等待，1成功，2任务中，3失败，4重试中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptState?: number
@@ -1094,15 +1094,15 @@ export interface DescribeShieldPlanInstanceResponse {
   /**
    * 绑定资源信息
    */
-  BindInfo: BindInfo
+  BindInfo?: BindInfo
   /**
    * 加固策略信息
    */
-  ShieldPlanInfo: ShieldPlanInfo
+  ShieldPlanInfo?: ShieldPlanInfo
   /**
    * 加固资源信息
    */
-  ResourceServiceInfo: ResourceServiceInfo
+  ResourceServiceInfo?: ResourceServiceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1210,7 +1210,7 @@ export interface SoInfo {
   /**
    * so文件列表
    */
-  SoFileNames: Array<string>
+  SoFileNames?: Array<string>
 }
 
 /**
@@ -1220,15 +1220,15 @@ export interface PluginListItem {
   /**
    * 数字类型，分别为 1-通知栏广告，2-积分墙广告，3-banner广告，4- 悬浮窗图标广告，5-精品推荐列表广告, 6-插播广告
    */
-  PluginType: string
+  PluginType?: string
   /**
    * 广告插件名称
    */
-  PluginName: string
+  PluginName?: string
   /**
    * 广告插件描述
    */
-  PluginDesc: string
+  PluginDesc?: string
 }
 
 /**
@@ -1252,67 +1252,67 @@ export interface ResultListItem {
   /**
    * banner广告软件标记，分别为-1-不确定，0-否，1-是
    */
-  Banner: string
+  Banner?: string
   /**
    * 精品推荐列表广告标记，分别为-1-不确定，0-否，1-是
    */
-  BoutiqueRecommand: string
+  BoutiqueRecommand?: string
   /**
    * 悬浮窗图标广告标记,分别为-1-不确定，0-否，1-是
    */
-  FloatWindows: string
+  FloatWindows?: string
   /**
    * 积分墙广告软件标记，分别为 -1 -不确定，0-否，1-是
    */
-  IntegralWall: string
+  IntegralWall?: string
   /**
    * 安装包的md5
    */
-  Md5: string
+  Md5?: string
   /**
    * 通知栏广告软件标记，分别为-1-不确定，0-否，1-是
    */
-  NotifyBar: string
+  NotifyBar?: string
   /**
    * 1表示官方，0表示非官方
    */
-  Official: string
+  Official?: string
   /**
    * 广告插件结果列表
    */
-  PluginList: Array<PluginListItem>
+  PluginList?: Array<PluginListItem>
   /**
    * 非广告插件结果列表(SDK、风险插件等)
    */
-  OptPluginList: Array<OptPluginListItem>
+  OptPluginList?: Array<OptPluginListItem>
   /**
    * 数字类型，分别为0-未知， 1-安全软件，2-风险软件，3-病毒软件
    */
-  SafeType: string
+  SafeType?: string
   /**
    * Session id，合作方可以用来区分回调数据，需要唯一。
    */
-  Sid: string
+  Sid?: string
   /**
    * 安装包名称
    */
-  SoftName: string
+  SoftName?: string
   /**
    * 插播广告软件标记，取值：-1 不确定，0否， 1 是
    */
-  Spot: string
+  Spot?: string
   /**
    * 病毒名称，utf8编码
    */
-  VirusName: string
+  VirusName?: string
   /**
    * 病毒描述，utf8编码
    */
-  VirusDesc: string
+  VirusDesc?: string
   /**
    * 二次打包状态：0-表示默认；1-表示二次
    */
-  RepackageStatus: string
+  RepackageStatus?: string
   /**
    * 应用错误码：0、1-表示正常；                  
 
@@ -1337,12 +1337,40 @@ export interface ResultListItem {
 1001表示APP md5 different between real md5, please confirm it.
 
 1002表示App md5 uncollect, please offer downloadlink.
+   * @deprecated
    */
-  Errno: string
+  Errno?: string
   /**
    * 对应errno的错误信息描述
    */
-  ErrMsg: string
+  ErrMsg?: string
+  /**
+   * 应用错误码：0、1-表示正常；                  
+
+2表示System Error(engine analysis error).
+
+3表示App analysis error, please confirm it.
+
+4表示App have not cert, please confirm it.
+
+5表示App size is zero, please confirm it.
+
+6表示App have not package name, please confirm it.
+
+7表示App build time is empty, please confirm it.
+
+8表示App have not valid cert, please confirm it.
+
+99表示Other error.
+
+1000表示App downloadlink download fail, please confirm it.
+
+1001表示APP md5 different between real md5, please confirm it.
+
+1002表示App md5 uncollect, please offer downloadlink.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrNo?: string
 }
 
 /**
@@ -1612,31 +1640,31 @@ export interface AppDetailInfo {
   /**
    * app的名称
    */
-  AppName: string
+  AppName?: string
   /**
    * app的包名
    */
-  AppPkgName: string
+  AppPkgName?: string
   /**
    * app的版本号
    */
-  AppVersion: string
+  AppVersion?: string
   /**
    * app的大小
    */
-  AppSize: number
+  AppSize?: number
   /**
    * app的md5
    */
-  AppMd5: string
+  AppMd5?: string
   /**
    * app的图标url
    */
-  AppIconUrl: string
+  AppIconUrl?: string
   /**
    * app的文件名称
    */
-  FileName: string
+  FileName?: string
 }
 
 /**
@@ -1822,15 +1850,15 @@ export interface DescribeApkDetectionResultResponse {
   /**
    * 响应结果，ok表示正常，error表示错误
    */
-  Result: string
+  Result?: string
   /**
    * Result为error错误时的原因说明
    */
-  Reason: string
+  Reason?: string
   /**
    * APK检测结果数组
    */
-  ResultList: Array<ResultListItem>
+  ResultList?: Array<ResultListItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1844,11 +1872,11 @@ export interface DescribeResourceInstancesResponse {
   /**
    * 符合要求的资源数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 符合要求的资源数组
    */
-  ResourceSet: Array<ResourceInfo>
+  ResourceSet?: Array<ResourceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2082,6 +2110,11 @@ export interface CreateEncryptInstanceRequest {
  */
 export interface PlanInfo {
   /**
+   * Dex分离，0关闭，1开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetFile?: string
+  /**
    * apk大小优化，0关闭，1开启
    */
   ApkSizeOpt?: number
@@ -2102,19 +2135,9 @@ export interface PlanInfo {
    */
   AntiRepack?: number
   /**
-   * Dex分离，0关闭，1开启
-   * @deprecated
-   */
-  SeperateDex?: number
-  /**
    * 内存保护，0关闭，1开启
    */
   Db?: number
-  /**
-   * Dex签名校验，0关闭，1开启
-   * @deprecated
-   */
-  DexSig?: number
   /**
    * So文件信息
    */
@@ -2132,11 +2155,6 @@ export interface PlanInfo {
    */
   AntiLogLeak?: number
   /**
-   * root检测，0关闭，1开启
-   * @deprecated
-   */
-  AntiQemuRoot?: number
-  /**
    * 资源防篡改，0关闭，1开启
    */
   AntiAssets?: number
@@ -2149,11 +2167,6 @@ export interface PlanInfo {
    */
   AntiSSL?: number
   /**
-   * Dex分离，0关闭，1开启
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SetFile?: string
-  /**
    * Dex签名校验，0关闭，1开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2163,6 +2176,21 @@ export interface PlanInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AntiRoot?: string
+  /**
+   * Dex分离，0关闭，1开启
+   * @deprecated
+   */
+  SeperateDex?: number
+  /**
+   * Dex签名校验，0关闭，1开启
+   * @deprecated
+   */
+  DexSig?: number
+  /**
+   * root检测，0关闭，1开启
+   * @deprecated
+   */
+  AntiQemuRoot?: number
 }
 
 /**
@@ -2216,15 +2244,15 @@ export interface BindInfo {
   /**
    * app的icon的url
    */
-  AppIconUrl: string
+  AppIconUrl?: string
   /**
    * app的名称
    */
-  AppName: string
+  AppName?: string
   /**
    * app的包名
    */
-  AppPkgName: string
+  AppPkgName?: string
 }
 
 /**
@@ -2248,15 +2276,15 @@ export interface OptPluginListItem {
   /**
    * 非广告类型
    */
-  PluginType: string
+  PluginType?: string
   /**
    * 非广告插件名称
    */
-  PluginName: string
+  PluginName?: string
   /**
    * 非广告插件描述
    */
-  PluginDesc: string
+  PluginDesc?: string
 }
 
 /**

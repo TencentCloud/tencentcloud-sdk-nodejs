@@ -1792,11 +1792,11 @@ export interface DescribeInstanceDTSInfoResponse {
  */
 export interface DescribeInstanceEventsRequest {
     /**
-     * 配置查询事件执行计划的起始日期。
+     * 配置查询事件执行计划的起始日期，查询日期最大跨度30天。
      */
     ExecutionStartDate: string;
     /**
-     * 配置查询事件执行计划的结束日期。
+     * 配置查询事件执行计划的结束日期，查询日期最大跨度30天。
      */
     ExecutionEndDate: string;
     /**
@@ -1804,7 +1804,7 @@ export interface DescribeInstanceEventsRequest {
      */
     InstanceId?: string;
     /**
-     * 输出每页显示事件的数量，默认：10。
+     * 输出每页显示事件的数量，默认：10，最大100。
      */
     PageSize?: number;
     /**
@@ -2930,11 +2930,11 @@ export interface DescribeTaskListRequest {
      */
     TaskTypes?: Array<string>;
     /**
-     * 任务执行的起始时间。格式如：2021-12-30 00:00:00。
+     * 任务执行的起始时间，格式如：2021-12-30 00:00:00，支持查询近30天内数据。
      */
     BeginTime?: string;
     /**
-     * 任务运行的终止时间。格式如：2021-12-30 20:59:35
+     * 任务运行的终止时间。格式如：2021-12-30 20:59:35，支持查询近30天内数据。
      */
     EndTime?: string;
     /**
@@ -4401,11 +4401,11 @@ export interface DescribeSlowLogRequest {
      */
     InstanceId: string;
     /**
-     * 预查询慢日志的起始时间。
+     * 预查询慢日志的起始时间，查询时间最大跨度30天。
      */
     BeginTime: string;
     /**
-     * 预查询慢日志的结束时间。
+     * 预查询慢日志的结束时间，查询时间最大跨度30天
      */
     EndTime: string;
     /**
@@ -4413,7 +4413,7 @@ export interface DescribeSlowLogRequest {
      */
     MinQueryTime?: number;
     /**
-     * 每个页面展示的慢查询条数，默认值为20。取值范围：[20,1000]。
+     * 每个页面展示的慢查询条数，默认值为20，最大100。
      */
     Limit?: number;
     /**
@@ -5536,11 +5536,11 @@ export interface DescribeProxySlowLogRequest {
      */
     InstanceId: string;
     /**
-     * 慢查询的开始时间。
+     * 慢查询的开始时间，查询时间最大跨度30天。
      */
     BeginTime: string;
     /**
-     * 慢查询的结束时间。
+     * 慢查询的结束时间，查询时间最大跨度30天。
      */
     EndTime: string;
     /**
@@ -5548,11 +5548,11 @@ export interface DescribeProxySlowLogRequest {
      */
     MinQueryTime?: number;
     /**
-     * 分页大小。默认为 20，取值范围[20,1000]。
+     * 每页输出的任务列表大小，默认为 20，最多输出100条。
      */
     Limit?: number;
     /**
-     * 偏移量，取Limit整数倍。
+     * 分页偏移量，取Limit整数倍，计算公式：offset=limit*(页码-1)。
      */
     Offset?: number;
 }
@@ -5845,11 +5845,11 @@ export interface DescribeInstanceBackupsRequest {
      */
     InstanceId?: string;
     /**
-     * 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。
+     * 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。
      */
     BeginTime?: string;
     /**
-     * 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表。
+     * 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。
      */
     EndTime?: string;
     /**

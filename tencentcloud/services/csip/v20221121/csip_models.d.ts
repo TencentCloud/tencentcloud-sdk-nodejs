@@ -68,7 +68,6 @@ export interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
 export interface DescribeVULRiskAdvanceCFGListResponse {
     /**
      * 配置项列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<VULRiskAdvanceCFGList>;
     /**
@@ -77,22 +76,18 @@ export interface DescribeVULRiskAdvanceCFGListResponse {
     TotalCount?: number;
     /**
      * 风险等级过滤列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelLists?: Array<FilterDataObject>;
     /**
      * 漏洞类型过滤列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VULTypeLists?: Array<FilterDataObject>;
     /**
      * 识别来源过滤列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckFromLists?: Array<FilterDataObject>;
     /**
      * 漏洞标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulTagList?: Array<FilterDataObject>;
     /**
@@ -650,17 +645,14 @@ export interface AssetViewCFGRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 当资产类型为LBL的时候，展示该字段，方便定位具体的LB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClbId?: string;
 }
@@ -723,12 +715,10 @@ export interface AssetViewVULRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
@@ -801,7 +791,6 @@ export interface AssetViewVULRisk {
     Payload?: string;
     /**
      * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EMGCVulType?: number;
 }
@@ -1437,12 +1426,10 @@ export interface OrganizationUserInfo {
 export interface AssetTag {
     /**
      * 标签的key值,可以是字母、数字、下划线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey?: string;
     /**
      * 标签的vale值,可以是字母、数字、下划线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue?: string;
 }
@@ -2170,12 +2157,10 @@ export interface GateWayAsset {
 export interface DescribeScanReportListResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 任务日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<ScanTaskInfo>;
     /**
@@ -2206,22 +2191,18 @@ export interface DescribeSearchBugInfoRequest {
 export interface TaskLogURL {
     /**
      * 报告下载临时链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     URL?: string;
     /**
      * 任务报告id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogId?: string;
     /**
      * 任务报告名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskLogName?: string;
     /**
      * APP ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
 }
@@ -2413,12 +2394,10 @@ export interface AssetViewVULRiskData {
 export interface DescribeOrganizationUserInfoResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 集团用户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<OrganizationUserInfo>;
     /**
@@ -2548,12 +2527,10 @@ export interface NICAsset {
 export interface DescribeListenerListResponse {
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 监听器列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<ClbListenerListInfo>;
     /**
@@ -2687,52 +2664,42 @@ export interface DBAssetVO {
 export interface AssetInfoDetail {
     /**
      * 用户appid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppID?: string;
     /**
      * CVE编号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CVEId?: string;
     /**
      * 是扫描，0默认未扫描，1正在扫描，2扫描完成，3扫描出错
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsScan?: number;
     /**
      * 影响资产数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InfluenceAsset?: number;
     /**
      * 未修复资产数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotRepairAsset?: number;
     /**
      * 未防护资产数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotProtectAsset?: number;
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
     /**
      * 任务百分比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskPercent?: number;
     /**
      * 任务时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTime?: number;
     /**
      * 扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanTime?: string;
 }
@@ -2923,17 +2890,14 @@ export interface DescribeVpcAssetsRequest {
 export interface TaskAssetObject {
     /**
      * 资产名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetName?: string;
     /**
      * 资产类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 资产分类
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetType?: string;
     /**
@@ -2942,12 +2906,10 @@ export interface TaskAssetObject {
     Asset?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 多云资产唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Arn?: string;
 }
@@ -3212,12 +3174,10 @@ export interface DescribeCVMAssetsResponse {
 export interface VulImpactComponentInfo {
     /**
      * 组件名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Component?: string;
     /**
      * 版本名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
 }
@@ -3243,7 +3203,6 @@ export interface VULRiskAdvanceCFGList {
     CheckFrom?: string;
     /**
      * 是否启用，1-启用，0-禁用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: number;
     /**
@@ -3256,7 +3215,6 @@ export interface VULRiskAdvanceCFGList {
     ImpactVersion?: string;
     /**
      * CVE
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CVE?: string;
     /**
@@ -3265,57 +3223,46 @@ export interface VULRiskAdvanceCFGList {
     VULTag?: Array<string>;
     /**
      * 修复方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FixMethod?: Array<string>;
     /**
      * 披露时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReleaseTime?: string;
     /**
      * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EMGCVulType?: number;
     /**
      * 漏洞描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VULDescribe?: string;
     /**
      * 影响组件
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImpactComponent?: string;
     /**
      * 漏洞Payload
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Payload?: string;
     /**
      * 技术参考
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     References?: string;
     /**
      * cvss评分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CVSS?: string;
     /**
      * 攻击热度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AttackHeat?: string;
     /**
      * 安全产品支持情况
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceSupport?: Array<ServiceSupport>;
     /**
      * 最新检测时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecentScanTime?: string;
 }
@@ -3377,7 +3324,6 @@ export interface AssetClusterPod {
     Nick?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
@@ -3390,72 +3336,58 @@ export interface AssetClusterPod {
     AssetName?: string;
     /**
      * pod创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCreateTime?: string;
     /**
      * 命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Namespace?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 集群id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterId?: string;
     /**
      * 集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
     /**
      * 主机id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineId?: string;
     /**
      * 主机名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineName?: string;
     /**
      * pod ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodIp?: string;
     /**
      * 关联service数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceCount?: number;
     /**
      * 关联容器数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ContainerCount?: number;
     /**
      * 公网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 内网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIp?: string;
     /**
      * 是否核心：1:核心，2:非核心
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsCore?: number;
     /**
      * 是否新资产 1新
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNewAsset?: number;
 }
@@ -3526,12 +3458,10 @@ export interface AssetViewWeakPassRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
@@ -3605,12 +3535,10 @@ export interface WebsiteRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
@@ -3649,22 +3577,18 @@ export interface ServiceSupport {
     /**
      * 产品名称:
   "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceName?: string;
     /**
      * 已处理的资产总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportHandledCount?: number;
     /**
      * 支持的资产总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportTotalCount?: number;
     /**
      * 是否支持该产品1支持；0不支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSupport?: boolean;
 }
@@ -3870,22 +3794,18 @@ export interface StopRiskCenterTaskRequest {
 export interface DescribeScanTaskListResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 任务日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<ScanTaskInfoList>;
     /**
      * 主账户ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UINList?: Array<string>;
     /**
      * 体检模式过滤列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskModeList?: Array<FilterDataObject>;
     /**
@@ -3899,62 +3819,50 @@ export interface DescribeScanTaskListResponse {
 export interface ScanTaskInfo {
     /**
      * 任务Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: string;
     /**
      * 任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 任务状态码：1等待开始  2正在扫描  3扫描出错 4扫描完成
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 任务进度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Progress?: number;
     /**
      * 任务完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskTime?: string;
     /**
      * 报告ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportId?: string;
     /**
      * 报告名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportName?: string;
     /**
      * 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanPlan?: number;
     /**
      * 关联的资产数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetCount?: number;
     /**
      * APP ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 用户主账户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UIN?: string;
     /**
      * 用户名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
 }
@@ -3983,13 +3891,11 @@ export interface AssetInstanceTypeMap {
  */
 export interface Tags {
     /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主机标签key
      */
     TagKey?: string;
     /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主机标签value
      */
     TagValue?: string;
 }
@@ -4075,7 +3981,6 @@ export interface VULViewVULRisk {
     VULURL?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
@@ -4084,17 +3989,14 @@ export interface VULViewVULRisk {
     AppId?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 修复建议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Fix?: string;
     /**
      * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EMGCVulType?: number;
 }
@@ -4156,12 +4058,10 @@ export interface PortViewPortRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
@@ -4305,22 +4205,18 @@ export interface DescribeTaskLogURLResponse {
 export interface VulTrend {
     /**
      * 影响的资产数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AffectAssetCount?: number;
     /**
      * 影响的用户数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AffectUserCount?: number;
     /**
      * 攻击数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AttackCount?: number;
     /**
      * 时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Date?: string;
 }
@@ -5122,12 +5018,10 @@ export interface AssetViewPortRisk {
     AppId?: string;
     /**
      * 用户昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
      * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
@@ -5788,7 +5682,6 @@ export interface DescribeDbAssetsRequest {
 export interface TaskLogInfo {
     /**
      * 报告名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskLogName?: string;
     /**
@@ -5797,62 +5690,50 @@ export interface TaskLogInfo {
     TaskLogId?: string;
     /**
      * 关联资产个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetsNumber?: number;
     /**
      * 安全风险数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskNumber?: number;
     /**
      * 报告生成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Time?: string;
     /**
      * 任务状态码：0 初始值  1正在扫描  2扫描完成  3扫描出错，4停止，5暂停，6该任务已被重启过
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 关联任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 扫描开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 任务中心扫描任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskCenterTaskId?: string;
     /**
      * 租户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 主账户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UIN?: string;
     /**
      * 用户名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 报告类型： 1安全体检 2日报 3周报 4月报
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportType?: number;
     /**
      * 报告模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: number;
 }
@@ -6186,22 +6067,18 @@ export interface ModifyOrganizationAccountStatusRequest {
 export interface DescribeTaskLogListResponse {
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 报告列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<TaskLogInfo>;
     /**
      * 待查看数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotViewNumber?: number;
     /**
      * 报告模板数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportTemplateNumber?: number;
     /**

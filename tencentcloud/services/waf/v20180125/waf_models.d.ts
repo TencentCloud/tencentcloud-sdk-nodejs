@@ -70,12 +70,10 @@ export interface WafRuleLimit {
 export interface DescribeUserClbWafRegionsResponse {
     /**
      * 地域（标准的ap-格式）列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<string>;
     /**
      * 包含详细属性的地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RichDatas?: Array<ClbWafRegionItem>;
     /**
@@ -118,13 +116,14 @@ export interface ModifyIpAccessControlRequest {
      */
     ActionType: number;
     /**
-     * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
-     */
-    ValidTS: number;
-    /**
      * 规则ID
      */
     RuleId: number;
+    /**
+     * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+     * @deprecated
+     */
+    ValidTS?: number;
     /**
      * 实例Id
      */
@@ -142,7 +141,7 @@ export interface ModifyIpAccessControlRequest {
      */
     Note?: string;
     /**
-     * 定时配置类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -156,12 +155,10 @@ export interface ModifyIpAccessControlRequest {
 export interface DescribeApiListVersionTwoResponse {
     /**
      * api资产列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<ApiAsset>;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -176,23 +173,23 @@ export interface DescribePeakValueResponse {
     /**
      * QPS峰值
      */
-    Access: number;
+    Access?: number;
     /**
      * 上行带宽峰值，单位B
      */
-    Up: number;
+    Up?: number;
     /**
      * 下行带宽峰值，单位B
      */
-    Down: number;
+    Down?: number;
     /**
      * Web攻击总数
      */
-    Attack: number;
+    Attack?: number;
     /**
      * CC攻击总数
      */
-    Cc: number;
+    Cc?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -204,12 +201,10 @@ export interface DescribePeakValueResponse {
 export interface ProductInfo {
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
 }
@@ -249,7 +244,6 @@ export interface DescribeAntiLeakageItem {
     Uri?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
 }
@@ -259,27 +253,22 @@ export interface DescribeAntiLeakageItem {
 export interface LoadBalancerPackageNew {
     /**
      * 监听id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ListenerId: string;
     /**
      * 监听名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ListenerName: string;
     /**
      * 负载均衡id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerId: string;
     /**
      * 负载均衡名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerName: string;
     /**
      * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol: string;
     /**
@@ -312,37 +301,30 @@ export interface LoadBalancerPackageNew {
       "上海": "sh",
       "新加坡": "sg",
       "清远": "qy"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region: string;
     /**
      * 接入IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip: string;
     /**
      * 接入端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vport: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone: string;
     /**
      * VPCID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NumericalVpcId: number;
     /**
      * CLB类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerType: string;
     /**
      * 负载均衡器的域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerDomain?: string;
 }
@@ -379,7 +361,6 @@ export interface DescribeCertificateVerifyResultResponse {
      * 证书是否改变。
   0：未变化
   1：有变化
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Changed?: number;
     /**
@@ -438,7 +419,7 @@ export interface DeleteCustomWhiteRuleResponse {
     /**
      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
      */
-    Success: ResponseCode;
+    Success?: ResponseCode;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -450,7 +431,6 @@ export interface DeleteCustomWhiteRuleResponse {
 export interface ModifyHostModeResponse {
     /**
      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Success?: ResponseCode;
     /**
@@ -468,52 +448,42 @@ export declare type GetAttackDownloadRecordsRequest = null;
 export interface MajorEventsPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 申请数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InquireNum?: number;
     /**
      * 使用数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedNum?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
     /**
      * 护网包状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HWState?: number;
 }
@@ -525,15 +495,6 @@ export interface DescribeDomainRulesRequest {
      * 需要查询的域名
      */
     Domain?: string;
-}
-/**
- * DeleteDownloadRecord请求参数结构体
- */
-export interface DeleteDownloadRecordRequest {
-    /**
-     * 记录id
-     */
-    Flow: string;
 }
 /**
  * DeleteAccessExport返回参数结构体
@@ -587,14 +548,12 @@ export interface DescribeModuleStatusResponse {
 export interface AccessKeyValueInfo {
     /**
      * 需要配置键值或者元字段索引的字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Key?: string;
     /**
      * 字段的索引描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value: AccessValueInfo;
+    Value?: AccessValueInfo;
 }
 /**
  * Key-Value的形式，Value为Int
@@ -603,11 +562,11 @@ export interface KVInt {
     /**
      * Key
      */
-    Key: string;
+    Key?: string;
     /**
      * Value
      */
-    Value: number;
+    Value?: number;
 }
 /**
  * AddAntiInfoLeakRules请求参数结构体
@@ -712,11 +671,11 @@ export interface PiechartItem {
     /**
      * 类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 数量
      */
-    Count: number;
+    Count?: number;
 }
 /**
  * DeleteHost返回参数结构体
@@ -737,17 +696,14 @@ export interface DeleteHostResponse {
 export interface ModifyApiAnalyzeStatusResponse {
     /**
      * 已经开启的数量,如果返回值为3（大于支持的域名开启数量），则表示开启失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 不支持开启的域名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnSupportedList?: Array<string>;
     /**
      * 开启/关闭失败的域名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailDomainList?: Array<string>;
     /**
@@ -875,31 +831,28 @@ export interface HostRecord {
     ClsStatus: number;
     /**
      * 防护等级，可选值100,200,300
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: number;
     /**
      * 域名需要下发到的cdc集群列表。仅CDC场景下填充
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcClusters?: Array<string>;
     /**
      * 应用型负载均衡类型，默认clb。
   clb：七层负载均衡器类型
   apisix：apisix网关型
-  注意：此字段可能返回 null，表示取不到有效值。
+  tsegw：云原生API网关
+  scf：云函数
      */
     AlbType?: string;
     /**
      * IsCdn=3时，需要填此参数，表示自定义header
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpHeaders?: Array<string>;
     /**
      * 规则引擎类型。
   1: menshen
   2: tiga
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: number;
     /**
@@ -907,12 +860,10 @@ export interface HostRecord {
   public:公有云
   private:私有云
   hybrid:混合云
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudType?: string;
     /**
      * 域名备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
 }
@@ -960,7 +911,7 @@ export interface ModifyAreaBanStatusRequest {
  */
 export interface SpartaProtectionPort {
     /**
-     * nginx Id
+     * 分配的服务器id
      */
     NginxServerId: number;
     /**
@@ -1014,77 +965,62 @@ export interface PeakPointsItem {
     BotAccess?: number;
     /**
      * WAF返回给客户端状态码5xx次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusServerError?: number;
     /**
      * WAF返回给客户端状态码4xx次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusClientError?: number;
     /**
      * WAF返回给客户端状态码302次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusRedirect?: number;
     /**
      * WAF返回给客户端状态码202次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusOk?: number;
     /**
      * 源站返回给WAF状态码5xx次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamServerError?: number;
     /**
      * 源站返回给WAF状态码4xx次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamClientError?: number;
     /**
      * 源站返回给WAF状态码302次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamRedirect?: number;
     /**
      * 黑名单次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BlackIP?: number;
     /**
      * 防篡改次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tamper?: number;
     /**
      * 信息防泄露次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Leak?: number;
     /**
      * 访问控制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ACL?: number;
     /**
      * 小程序 qps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WxAccess?: number;
     /**
      * 小程序请求数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WxCount?: number;
     /**
      * 小程序上行带宽峰值，单位B
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WxUp?: number;
     /**
      * 小程序下行带宽峰值，单位B
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WxDown?: number;
 }
@@ -1184,23 +1120,23 @@ export interface DescribeDomainCountInfoResponse {
     /**
      * 域名总数
      */
-    AllDomain: number;
+    AllDomain?: number;
     /**
      * 最近发现时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 接入域名总数
      */
-    WafDomainCount: number;
+    WafDomainCount?: number;
     /**
      * 剩下配额
      */
-    LeftDomainCount: number;
+    LeftDomainCount?: number;
     /**
      * 开启防护域名数
      */
-    OpenWafDomain: number;
+    OpenWafDomain?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1260,7 +1196,6 @@ export interface ModifyAntiInfoLeakRuleStatusRequest {
 export interface DescribeCiphersDetailResponse {
     /**
      * 加密套件信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ciphers?: Array<TLSCiphers>;
     /**
@@ -1398,42 +1333,34 @@ export declare type DescribeUserDomainInfoRequest = null;
 export interface HybridPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 申请数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InquireNum?: number;
     /**
      * 使用数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedNum?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
 }
@@ -1443,13 +1370,12 @@ export interface HybridPkg {
 export interface IpAccessControlData {
     /**
      * ip黑白名单
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Res: Array<IpAccessControlItem>;
+    Res?: Array<IpAccessControlItem>;
     /**
      * 计数
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * DescribeHost返回参数结构体
@@ -1487,7 +1413,6 @@ export interface DescribeUserSignatureRuleResponse {
     Total?: number;
     /**
      * 规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rules?: Array<UserSignatureRule>;
     /**
@@ -1501,25 +1426,21 @@ export interface DescribeUserSignatureRuleResponse {
 export interface AccessValueInfo {
     /**
      * 字段类型，目前支持的类型有：long、text、double
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 字段的分词符，只有当字段类型为text时才有意义；输入字符串中的每个字符代表一个分词符
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tokenizer: string;
+    Tokenizer?: string;
     /**
      * 字段是否开启分析功能
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SqlFlag: boolean;
+    SqlFlag?: boolean;
     /**
      * 是否包含中文
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainZH: boolean;
+    ContainZH?: boolean;
 }
 /**
  * 规则列表详情
@@ -1571,7 +1492,6 @@ export interface Strategy {
   
       匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
   <table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr></tbody></table>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Field: string;
     /**
@@ -1593,7 +1513,6 @@ export interface Strategy {
           ipnmatch （ 不属于）
       各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompareFunc: string;
     /**
@@ -1601,7 +1520,6 @@ export interface Strategy {
   
       目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content: string;
     /**
@@ -1614,13 +1532,11 @@ export interface Strategy {
           ARGS_COOKIE（Cookie参数值）
           ARGS_HEADER（Header参数值）
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Arg: string;
     /**
      * 0：大小写敏感
   1：大小写不敏感
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaseNotSensitive?: number;
 }
@@ -1665,20 +1581,17 @@ export interface DescribeHostRequest {
 export interface AccessFullTextInfo {
     /**
      * 是否大小写敏感
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CaseSensitive: boolean;
+    CaseSensitive?: boolean;
     /**
      * 全文索引的分词符，字符串中每个字符代表一个分词符
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tokenizer: string;
+    Tokenizer?: string;
     /**
      * 是否包含中文
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainZH: boolean;
+    ContainZH?: boolean;
 }
 /**
  * DeleteCustomRule请求参数结构体
@@ -1750,7 +1663,6 @@ export interface JobDateTime {
     Cron?: Array<CronJob>;
     /**
      * 时区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeTZone?: string;
 }
@@ -1802,22 +1714,18 @@ export interface ModifyCustomWhiteRuleStatusRequest {
 export interface ClbWafRegionItem {
     /**
      * 地域ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
     /**
      * 地域中文说明
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Text?: string;
     /**
      * 地域英文全拼
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
     /**
      * 地域编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: string;
 }
@@ -1877,7 +1785,7 @@ export interface TargetEntity {
  */
 export interface CCRuleItem {
     /**
-     * 动作
+     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验
      */
     ActionType?: number;
     /**
@@ -1927,27 +1835,22 @@ export interface CCRuleItem {
     OptionsArr?: string;
     /**
      * url长度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Length?: number;
     /**
      * 规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 事件id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventId?: string;
     /**
      * 关联的Session规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionApplied?: Array<number | bigint>;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
 }
@@ -2235,11 +2138,11 @@ export interface DescribeFindDomainListResponse {
     /**
      * 域名总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 域名信息列表
      */
-    List: Array<FindAllDomainDetail>;
+    List?: Array<FindAllDomainDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2335,14 +2238,12 @@ export interface DescribeUserDomainInfoResponse {
 export interface TLSVersion {
     /**
      * TLSVERSION的ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionId: number;
+    VersionId?: number;
     /**
      * TLSVERSION的NAME
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionName: string;
+    VersionName?: string;
 }
 /**
  * 负载均衡的监听器
@@ -2386,17 +2287,14 @@ export interface LoadBalancer {
     Zone: string;
     /**
      * 负载均衡的VPCID，公网为-1，内网按实际填写
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NumericalVpcId?: number;
     /**
-     * 负载均衡的网络类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 负载均衡的网络类型。OPEN： 公网 INTERNAL ：内网
      */
     LoadBalancerType?: string;
     /**
      * 负载均衡的域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerDomain?: string;
 }
@@ -2410,7 +2308,6 @@ export interface CdcCluster {
     Id: string;
     /**
      * cdc的集群名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
 }
@@ -2419,7 +2316,7 @@ export interface CdcCluster {
  */
 export interface DescribeCustomRulesRspRuleListItem {
     /**
-     * 动作类型
+     * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验
      */
     ActionType?: string;
     /**
@@ -2460,52 +2357,42 @@ export interface DescribeCustomRulesRspRuleListItem {
     Strategies?: Array<Strategy>;
     /**
      * 事件id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventId?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
      * 生效状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidStatus?: number;
     /**
      * 来源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
      * 定时任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobType?: string;
     /**
      * 定时任务配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobDateTime?: JobDateTime;
     /**
      * 周期任务粒度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronType?: string;
     /**
      * 自定义标签，风控规则用，用来表示是内置规则还是用户自定义的
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: string;
     /**
      * 拦截页面id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PageId?: string;
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
 }
@@ -2524,27 +2411,22 @@ export interface ModifyAntiInfoLeakRulesResponse {
 export interface QpsData {
     /**
      * 弹性qps默认值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBillingDefault?: number;
     /**
      * 弹性qps最小值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBillingMin?: number;
     /**
      * 弹性qps最大值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBillingMax?: number;
     /**
      * 业务扩展包最大qps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QPSExtendMax?: number;
     /**
-     * 海外业务扩展包最大qps
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 境外业务扩展包最大qps
      */
     QPSExtendIntlMax?: number;
 }
@@ -2558,7 +2440,6 @@ export interface AddCustomWhiteRuleResponse {
     Success?: ResponseCode;
     /**
      * 添加成功的规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
@@ -2645,7 +2526,6 @@ export interface DescribeHostsResponse {
     TotalCount?: number;
     /**
      * 防护域名的列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostList?: Array<HostRecord>;
     /**
@@ -2827,21 +2707,18 @@ export interface DomainInfo {
     PostCKafkaStatus?: number;
     /**
      * cdc实例域名接入的集群信息,非cdc实例忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcClusters?: string;
     /**
      * api安全开关状态。
   0：关闭
   1：开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiStatus?: number;
     /**
      * 应用型负载均衡类型，默认clb。
   clb：七层负载均衡器类型
   apisix：apisix网关型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlbType?: string;
     /**
@@ -2850,48 +2727,39 @@ export interface DomainInfo {
   1：非腾讯云源站
   2：安全组绑定失败
   3：安全组发生变更
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SgState?: number;
     /**
      * 安全组状态的详细解释
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SgDetail?: string;
     /**
      * 域名云环境。hybrid：混合云域名
   public：公有云域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudType?: string;
     /**
      * 域名备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
     /**
      * SAASWAF源站IP列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcList?: Array<string>;
     /**
      * SAASWAF源站域名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamDomainList?: Array<string>;
     /**
      * 安全组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SgID?: string;
     /**
      * clbwaf接入状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessStatus?: number;
     /**
      * 域名标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Labels?: Array<string>;
 }
@@ -2901,7 +2769,6 @@ export interface DomainInfo {
 export interface DescribeAreaBanAreasResponse {
     /**
      * 回包内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DescribeAreaBanAreasRsp;
     /**
@@ -2919,7 +2786,6 @@ export interface DescribeDomainsResponse {
     Total?: number;
     /**
      * domain列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domains?: Array<DomainInfo>;
     /**
@@ -2988,7 +2854,6 @@ export interface ModifySpartaProtectionResponse {
 export interface DescribeUserCdcClbWafRegionsResponse {
     /**
      * CdcRegion的类型描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<CdcRegion>;
     /**
@@ -3014,19 +2879,19 @@ export interface AccessRuleInfo {
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FullText: AccessFullTextInfo;
+    FullText?: AccessFullTextInfo;
     /**
      * 键值索引配置
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeyValue: AccessRuleKeyValueInfo;
+    KeyValue?: AccessRuleKeyValueInfo;
     /**
      * 元字段索引配置
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tag: AccessRuleTagInfo;
+    Tag?: AccessRuleTagInfo;
 }
 /**
  * CC规则总览
@@ -3119,17 +2984,14 @@ export interface ApiAsset {
     ApiName?: string;
     /**
      * 场景
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scene?: string;
     /**
      * 数据标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: Array<string>;
     /**
      * 过去7天是否活跃
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Active?: boolean;
     /**
@@ -3142,42 +3004,34 @@ export interface ApiAsset {
     InsertTime?: number;
     /**
      * 资产状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mode?: string;
     /**
      * 风险等级，100,200,300对应低中高
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 近30天调用量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 是否鉴权，1标识是，0表示否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAuth?: number;
     /**
      * 如果添加了api入参检测规则，则此id返回值不为0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiRequestRuleId?: number;
     /**
      * 如果添加了api限流规则，则此id返回值不为0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiLimitRuleId?: number;
     /**
      * 对象接入和泛域名接入时，展示host列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostList?: Array<string>;
 }
@@ -3256,18 +3110,19 @@ export interface SearchAccessLogResponse {
      * 如果Analysis为True，则返回分析结果的列名，否则为空
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     ColNames?: Array<string>;
     /**
      * 日志查询结果；当Analysis为True时，可能返回为null
   注意：此字段可能返回 null，表示取不到有效值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Results?: Array<AccessLogInfo>;
     /**
      * 日志分析结果；当Analysis为False时，可能返回为null
   注意：此字段可能返回 null，表示取不到有效值
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     AnalysisResults?: Array<AccessLogItems>;
     /**
@@ -3441,52 +3296,42 @@ export interface SearchItem {
 export interface ApiPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 申请数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InquireNum?: number;
     /**
      * 使用数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedNum?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
     /**
      * api安全7天试用标识。1试用。0没试用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAPISecurityTrial?: number;
 }
@@ -3509,12 +3354,10 @@ export interface DescribeAreaBanSupportAreasResponse {
 export interface TigaMainClassMode {
     /**
      * MainclassID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TypeID?: string;
     /**
      * 防护模式，0表示观察，1表示拦截
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mode?: number;
 }
@@ -3618,12 +3461,10 @@ export interface ApiDataFilter {
 export interface CreateDealsGoodsDetail {
     /**
      * 时间间隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeSpan?: number;
     /**
      * 单位，支持购买d、m、y 即（日、月、年）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeUnit?: string;
     /**
@@ -3641,7 +3482,6 @@ export interface CreateDealsGoodsDetail {
    业务扩展包-CLB：sp_wsm_waf_qpsep_clb
   域名扩展包-CLB：sp_wsm_waf_domain_clb
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubProductCode?: string;
     /**
@@ -3657,22 +3497,18 @@ export interface CreateDealsGoodsDetail {
   域名包-CLB: 1001156
   业务扩展包-CLB : 1001160
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Pid?: number;
     /**
      * waf实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 1:自动续费，0:不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * waf购买的实际地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealRegion?: number;
     /**
@@ -3695,27 +3531,22 @@ export interface CreateDealsGoodsDetail {
   业务扩展包CLB sv_wsm_waf_qps_ep_clb
   域名扩展包CLB  sv_wsm_waf_domain_clb
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelTypes?: Array<string>;
     /**
      * 计费细项标签数量，一般和SvLabelType一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelCounts?: Array<number | bigint>;
     /**
      * 变配使用，实例到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurDeadline?: string;
     /**
      * 对存在的实例购买bot 或api 安全
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
 }
@@ -3725,17 +3556,14 @@ export interface CreateDealsGoodsDetail {
 export interface ApiDetailSampleHistory {
     /**
      * 样例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SampleNme?: string;
     /**
      * 请求样例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RepLog?: string;
     /**
      * 响应样例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RspLog?: string;
 }
@@ -3830,7 +3658,6 @@ export interface UserWhiteRuleItem {
     MatchContent: string;
     /**
      * 匹配参数名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchParams?: string;
 }
@@ -3840,12 +3667,10 @@ export interface UserWhiteRuleItem {
 export interface GoodsDetailNew {
     /**
      * 时间间隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeSpan?: number;
     /**
      * 单位，支持购买d、m、y 即（日、月、年）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeUnit?: string;
     /**
@@ -3863,7 +3688,6 @@ export interface GoodsDetailNew {
    业务扩展包-CLB：sp_wsm_waf_qpsep_clb
   域名扩展包-CLB：sp_wsm_waf_domain_clb
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubProductCode?: string;
     /**
@@ -3879,22 +3703,18 @@ export interface GoodsDetailNew {
   域名包-CLB: 1001156
   业务扩展包-CLB : 1001160
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Pid?: number;
     /**
      * waf实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 1:自动续费，0:不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * waf购买的实际地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealRegion?: number;
     /**
@@ -3917,32 +3737,26 @@ export interface GoodsDetailNew {
   业务扩展包CLB sv_wsm_waf_qps_ep_clb
   域名扩展包CLB  sv_wsm_waf_domain_clb
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelTypes?: Array<string>;
     /**
      * 计费细项标签数量，一般和SvLabelType一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelCounts?: Array<number | bigint>;
     /**
      * 变配使用，实例到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurDeadline?: string;
     /**
      * 对存在的实例购买bot 或api 安全
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * 模式clb-waf或者saas-waf
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MicroVersion?: string;
 }
@@ -3976,57 +3790,46 @@ export interface GoodsDetail {
     Pid: number;
     /**
      * waf产品码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductInfo?: Array<ProductInfo>;
     /**
      * waf实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * QPS数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticQps?: number;
     /**
      * 弹性账单
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlexBill?: number;
     /**
      * 1:自动续费，0:不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * waf购买的实际地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealRegion?: number;
     /**
      * Waf实例对应的二级产品码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 计费细项标签数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelTypes?: Array<string>;
     /**
      * 计费细项标签数量，一般和SvLabelType一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelCounts?: Array<number | bigint>;
     /**
      * 变配使用，实例到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurDeadline?: string;
     /**
      * 对存在的实例购买bot 或api 安全
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
 }
@@ -4036,12 +3839,10 @@ export interface GoodsDetail {
 export interface DeleteIpAccessControlResponse {
     /**
      * 删除失败的条目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedItems?: string;
     /**
      * 删除失败的条目数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedCount?: number;
     /**
@@ -4055,7 +3856,6 @@ export interface DeleteIpAccessControlResponse {
 export interface BatchIpAccessControlItem {
     /**
      * mongo表自增Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
     /**
@@ -4088,37 +3888,30 @@ export interface BatchIpAccessControlItem {
     Hosts?: Array<string>;
     /**
      * 55101145
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * IP列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpList?: Array<string>;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 定时任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobType?: string;
     /**
      * 周期任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronType?: string;
     /**
      * 定时任务配置详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobDateTime?: JobDateTime;
     /**
      * 生效状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidStatus?: number;
 }
@@ -4161,7 +3954,6 @@ export interface UserWhiteRule {
     MatchField?: string;
     /**
      * 匹配参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchParams?: string;
     /**
@@ -4182,37 +3974,30 @@ export interface UserWhiteRule {
     ModifyTime?: string;
     /**
      * 规则ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SignatureIds?: Array<string>;
     /**
      * 大类规则ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TypeIds?: Array<string>;
     /**
      * 大类规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TypeId?: string;
     /**
      * 0:按照特定规则ID加白, 1:按照规则类型加白
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mode?: number;
     /**
      * 规则名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 匹配规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchInfo?: Array<UserWhiteRuleItem>;
     /**
      * MatchInfo字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchInfoStr?: string;
 }
@@ -4288,42 +4073,34 @@ export interface AddAttackWhiteRuleRequest {
 export interface FraudPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 申请数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InquireNum?: number;
     /**
      * 使用数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedNum?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
 }
@@ -4346,58 +4123,52 @@ export interface DescribeDomainDetailsClbResponse {
 export interface ExportAccessInfo {
     /**
      * 日志导出任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExportId: string;
+    ExportId?: string;
     /**
      * 日志导出查询语句
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Query: string;
+    Query?: string;
     /**
      * 日志导出文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 日志文件大小
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 日志导出时间排序
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Order: string;
+    Order?: string;
     /**
      * 日志导出格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Format: string;
+    Format?: string;
     /**
      * 日志导出数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Count: number;
+    Count?: number;
     /**
      * 日志下载状态。Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期）
      */
-    Status: string;
+    Status?: string;
     /**
      * 日志导出起始时间
      */
-    From: number;
+    From?: number;
     /**
      * 日志导出结束时间
      */
-    To: number;
+    To?: number;
     /**
      * 日志导出路径
      */
-    CosPath: string;
+    CosPath?: string;
     /**
      * 日志导出创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * DescribeAntiFakeUrl返回参数结构体
@@ -4660,14 +4431,12 @@ export interface GoodNews {
   域名包-CLB: 101207(新购),101208(续费),101209(变配)
   业务扩展包-CLB: 101210(新购),101211(续费),101212(变配)
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsCategoryId?: number;
     /**
      * 购买waf实例区域ID
   1 表示购买大陆资源;
   9表示购买非中国大陆资源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
 }
@@ -4729,7 +4498,7 @@ export interface DescribeWafThreatenIntelligenceResponse {
     /**
      * WAF 威胁情报封禁信息
      */
-    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+    WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4776,27 +4545,27 @@ export interface IpHitItem {
     /**
      * 动作
      */
-    Action: number;
+    Action?: number;
     /**
      * 类别
      */
-    Category: string;
+    Category?: string;
     /**
      * ip
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 规则名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 时间戳
      */
-    TsVersion: number;
+    TsVersion?: number;
     /**
      * 有效截止时间戳
      */
-    ValidTs: number;
+    ValidTs?: number;
 }
 /**
  * 用户特征规则描述
@@ -4848,7 +4617,6 @@ export interface UserSignatureRule {
     Reason?: number;
     /**
      * 1: 高危 2:中危 3:低危
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevel?: number;
 }
@@ -5019,42 +4787,34 @@ export interface ClbObject {
     PostCKafkaStatus?: number;
     /**
      * 对象类型：CLB:负载均衡器，TSE:云原生网关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 对象地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Proxy?: number;
     /**
      * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpHeaders?: Array<string>;
     /**
      * bot防护开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotStatus?: number;
     /**
      * api防护开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiStatus?: number;
     /**
      * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ObjectFlowMode?: number;
     /**
      * 数值形式的私有网络 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NumericalVpcId?: number;
 }
@@ -5136,7 +4896,6 @@ export interface DescribeAntiInfoLeakRulesResponse {
 export interface DescribeIpHitItemsResponse {
     /**
      * 结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: IpHitItemsData;
     /**
@@ -5238,8 +4997,9 @@ export interface CreateIpAccessControlRequest {
     ActionType: number;
     /**
      * valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+     * @deprecated
      */
-    ValidTS: number;
+    ValidTS?: number;
     /**
      * 实例Id
      */
@@ -5257,7 +5017,7 @@ export interface CreateIpAccessControlRequest {
      */
     Note?: string;
     /**
-     * 定时配置类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -5287,47 +5047,39 @@ export interface DescribeFlowTrendRequest {
  */
 export declare type DescribeWafAutoDenyStatusRequest = null;
 /**
- * API安全资源信息
+ * 小程序安全资源信息
  */
 export interface MiniPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 购买数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
 }
@@ -5359,12 +5111,10 @@ export interface AddDomainWhiteRuleResponse {
 export interface DescribeIpAccessControlResponse {
     /**
      * 输出
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: IpAccessControlData;
     /**
      * 已经使用的IP黑白名单的IP总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedTotal?: number;
     /**
@@ -5396,11 +5146,11 @@ export interface CCRuleData {
     /**
      * cc规则
      */
-    Res: Array<CCRuleItem>;
+    Res?: Array<CCRuleItem>;
     /**
      * 规则数目
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * DescribeInstances返回参数结构体
@@ -5425,14 +5175,12 @@ export interface DescribeInstancesResponse {
 export interface AccessRuleTagInfo {
     /**
      * 是否大小写敏感
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CaseSensitive: boolean;
+    CaseSensitive?: boolean;
     /**
      * 标签索引配置中的字段信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeyValues: Array<AccessKeyValueInfo>;
+    KeyValues?: Array<AccessKeyValueInfo>;
 }
 /**
  * ip黑白名单
@@ -5440,7 +5188,6 @@ export interface AccessRuleTagInfo {
 export interface IpAccessControlItem {
     /**
      * mongo表自增Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
     /**
@@ -5461,7 +5208,6 @@ export interface IpAccessControlItem {
     Source?: string;
     /**
      * 更新时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TsVersion?: number;
     /**
@@ -5470,37 +5216,30 @@ export interface IpAccessControlItem {
     ValidTs?: number;
     /**
      * 生效状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidStatus?: number;
     /**
      * 55000001
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * IP列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpList?: Array<string>;
     /**
      * 规则创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 定时任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobType?: string;
     /**
      * 周期任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronType?: string;
     /**
      * 定时任务配置详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobDateTime?: JobDateTime;
 }
@@ -5510,7 +5249,6 @@ export interface IpAccessControlItem {
 export interface UpsertCCAutoStatusResponse {
     /**
      * 正常情况为null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: string;
     /**
@@ -5524,7 +5262,6 @@ export interface UpsertCCAutoStatusResponse {
 export interface ModifyGenerateDealsResponse {
     /**
      * 计费下单响应结构体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DealData;
     /**
@@ -5533,7 +5270,6 @@ export interface ModifyGenerateDealsResponse {
     Status?: number;
     /**
      * 返回message
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReturnMessage?: string;
     /**
@@ -5552,7 +5288,6 @@ export interface UpsertSessionResponse {
     Data?: string;
     /**
      * SessionID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionID?: number;
     /**
@@ -5566,14 +5301,12 @@ export interface UpsertSessionResponse {
 export interface AccessLogItem {
     /**
      * 日记Key
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Key?: string;
     /**
      * 日志Value
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value: string;
+    Value?: string;
 }
 /**
  * SwitchDomainRules请求参数结构体
@@ -5661,7 +5394,6 @@ export interface AddCustomRuleResponse {
     Success?: ResponseCode;
     /**
      * 添加成功的规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
@@ -5688,7 +5420,6 @@ export interface DescribeFlowTrendResponse {
 export interface CreateIpAccessControlResponse {
     /**
      * 新增的规则对应的ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
@@ -5756,22 +5487,18 @@ export interface SessionItem {
     TsVersion?: string;
     /**
      * SessionID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionId?: number;
     /**
      * Session名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionName?: string;
     /**
      * Session是否正在被启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionInUsed?: boolean;
     /**
      * Session关联的CC规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RelatedRuleID?: Array<number | bigint>;
 }
@@ -5930,7 +5657,7 @@ export interface SessionData {
     /**
      * session定义
      */
-    Res: Array<SessionItem>;
+    Res?: Array<SessionItem>;
 }
 /**
  * ModifyUserLevel请求参数结构体
@@ -6027,37 +5754,30 @@ export interface UserDomainInfo {
     Edition?: string;
     /**
      * 版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 指定域名访问日志字段的开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WriteConfig?: string;
     /**
      * 指定域名是否写cls的开关 1:写 0:不写
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cls?: number;
     /**
      * 标记是否是混合云接入。hybrid表示混合云接入域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudType?: string;
     /**
      * 标记clbwaf类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlbType?: string;
     /**
      * BOT开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotStatus?: number;
     /**
      * API开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiStatus?: number;
 }
@@ -6071,7 +5791,6 @@ export interface DescribeAntiFakeRulesResponse {
     Total?: number;
     /**
      * 返回值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<CacheUrlItems>;
     /**
@@ -6144,27 +5863,22 @@ export interface DescribeAttackOverviewResponse {
     ApiAssetsCount?: number;
     /**
      * api风险事件数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiRiskEventCount?: number;
     /**
      * 黑名单总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IPBlackCount?: number;
     /**
      * 防篡改总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TamperCount?: number;
     /**
      * 信息泄露总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LeakCount?: number;
     /**
      * API风险事件周环比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiRiskEventCircleCount?: number;
     /**
@@ -6189,7 +5903,7 @@ export interface AddAreaBanAreasRequest {
      */
     Edition?: string;
     /**
-     * 定时任务类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -6204,27 +5918,27 @@ export interface CacheUrlItem {
     /**
      * Id
      */
-    Id: string;
+    Id?: string;
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * uri
      */
-    Uri: string;
+    Uri?: string;
     /**
      * 协议
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * DescribeCCAutoStatus请求参数结构体
@@ -6258,42 +5972,35 @@ export interface DescribeDomainDetailsClbRequest {
 export interface TimedJob {
     /**
      * 开始时间戳，单位为秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartDateTime?: number;
     /**
      * 结束时间戳，单位为秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndDateTime?: number;
 }
 /**
- * clb-waf 域名扩展套餐
+ * waf 域名扩展套餐
  */
 export interface DomainPackageNew {
     /**
      * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds: string;
     /**
      * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidTime: string;
     /**
      * 是否自动续费，1：自动续费，0：不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag: number;
     /**
      * 套餐购买个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count: number;
     /**
      * 套餐购买地域，clb-waf暂时没有用到
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region: string;
 }
@@ -6353,12 +6060,10 @@ export interface ModifyCustomRuleStatusResponse {
 export interface DomainRuleId {
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: string;
 }
@@ -6396,7 +6101,7 @@ export interface PortItem {
      */
     UpstreamProtocol: string;
     /**
-     * Nginx的服务器ID
+     * Nginx的服务器ID,新增域名时填"0"
      */
     NginxServerId: string;
 }
@@ -6478,6 +6183,10 @@ export interface ModifySpartaProtectionModeRequest {
      * 0是修改规则引擎状态，1是修改AI的状态
      */
     Type?: number;
+    /**
+     * 实例id
+     */
+    InstanceID?: string;
 }
 /**
  * DescribeAttackOverview请求参数结构体
@@ -6609,32 +6318,26 @@ export interface InstanceInfo {
     Edition: string;
     /**
      * 业务安全包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FraudPkg?: FraudPkg;
     /**
      * Bot资源包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotPkg?: BotPkg;
     /**
      * bot的qps详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotQPS?: BotQPS;
     /**
      * qps弹性计费上限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBilling?: number;
     /**
      * 攻击日志投递开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AttackLogPost?: number;
     /**
      * 带宽峰值，单位为B/s(字节每秒)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxBandwidth?: number;
     /**
@@ -6643,77 +6346,62 @@ export interface InstanceInfo {
     APISecurity?: number;
     /**
      * 购买的qps规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QpsStandard?: number;
     /**
      * 购买的带宽规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BandwidthStandard?: number;
     /**
      * 实例状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 实例沙箱qps值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SandboxQps?: number;
     /**
      * 是否api 安全试用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAPISecurityTrial?: number;
     /**
      * 重保包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MajorEventsPkg?: MajorEventsPkg;
     /**
      * 混合云子节点包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HybridPkg?: HybridPkg;
     /**
      * API安全资源包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiPkg?: ApiPkg;
     /**
      * 小程序安全加速包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniPkg?: MiniPkg;
     /**
      * 小程序qps规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniQpsStandard?: number;
     /**
      * 小程序qps峰值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniMaxQPS?: number;
     /**
      * 最近一次超量时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastQpsExceedTime?: string;
     /**
      * 小程序安全接入ID数量扩张包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniExtendPkg?: MiniExtendPkg;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
     /**
      * 实例延期释放标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FreeDelayFlag?: number;
 }
@@ -6756,7 +6444,7 @@ export interface ModifyAntiFakeUrlResponse {
  */
 export interface DescribeBatchIpAccessControlRequest {
     /**
-     * 筛选条件，支持 ActionType 40/42，Ip：ip地址，Domain：域名三类
+     * 筛选条件，支持 ActionType，可选的值为40（白名单）42（黑名单），ValidStatus，可选的值为1（生效）0（过期）
      */
     Filters: Array<FiltersItemNew>;
     /**
@@ -6824,45 +6512,44 @@ export interface ModifyAntiInfoLeakRulesRequest {
 export interface AccessLogInfo {
     /**
      * 日志时间，单位ms
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Time: number;
+    Time?: number;
     /**
      * 日志主题ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志主题名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 日志来源IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Source: string;
+    Source?: string;
     /**
      * 日志文件名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 日志上报请求包的ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PkgId: string;
+    PkgId?: string;
     /**
      * 请求包内日志的ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PkgLogId: string;
+    PkgLogId?: string;
     /**
      * 日志内容的Json序列化字符串
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogJson: string;
+    LogJson?: string;
 }
 /**
  * DescribeBatchIpAccessControl返回参数结构体
@@ -6870,7 +6557,6 @@ export interface AccessLogInfo {
 export interface DescribeBatchIpAccessControlResponse {
     /**
      * 输出
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: BatchIpAccessControlData;
     /**
@@ -7017,7 +6703,6 @@ export interface ModifyDomainIpv6StatusResponse {
 export interface DescribeHostLimitResponse {
     /**
      * 成功返回的状态码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Success?: ResponseCode;
     /**
@@ -7085,12 +6770,10 @@ export interface CacheUrlItems {
     Status?: number;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
 }
@@ -7134,7 +6817,6 @@ export interface ModifyWebshellStatusResponse {
 export interface GenerateDealsAndPayNewResponse {
     /**
      * 计费下单响应结构体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DealData;
     /**
@@ -7143,12 +6825,10 @@ export interface GenerateDealsAndPayNewResponse {
     Status?: number;
     /**
      * 返回message
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReturnMessage?: string;
     /**
      * 购买的实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -7206,7 +6886,7 @@ export interface GetAttackDownloadRecordsResponse {
     /**
      * 下载攻击日志记录数组
      */
-    Records: Array<DownloadAttackRecordInfo>;
+    Records?: Array<DownloadAttackRecordInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7218,62 +6898,50 @@ export interface GetAttackDownloadRecordsResponse {
 export interface DescribeApiDetailResponse {
     /**
      * 请求样例，json字符串格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Log?: string;
     /**
      * 请求参数样例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterList?: Array<ApiParameterType>;
     /**
      * 当前场景标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scene?: string;
     /**
      * 敏感字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFields?: Array<string>;
     /**
      * 7天内是否活跃
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsActive?: boolean;
     /**
      * 访问ip数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpCount?: number;
     /**
      * 访问地域数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionCount?: number;
     /**
      * 关联事件数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventCount?: number;
     /**
      * 涉敏数据条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveCount?: number;
     /**
      * 风险等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: number;
     /**
      * 响应体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RspLog?: string;
     /**
      * 昨日访问峰值QPS
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxQPS?: number;
     /**
@@ -7290,15 +6958,37 @@ export interface DescribeApiDetailResponse {
  */
 export interface VipInfo {
     /**
-     * Virtual IP
-  注意：此字段可能返回 null，表示取不到有效值。
+     * VIP地址
      */
     Vip?: string;
     /**
      * waf实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
+    /**
+     * 创建时间
+     */
+    InstanceCreateTime?: string;
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * 地域ID
+     */
+    RegionId?: number;
+    /**
+     * ip运营商类型
+     */
+    ISP?: string;
+    /**
+     * ip类型
+     */
+    VipType?: string;
+    /**
+     * 域名信息
+     */
+    AddressName?: string;
 }
 /**
  * DescribeAccessHistogram返回参数结构体
@@ -7329,11 +7019,11 @@ export interface DescribeTopAttackDomainResponse {
     /**
      * CC攻击域名列表
      */
-    CC: Array<KVInt>;
+    CC?: Array<KVInt>;
     /**
      * Web攻击域名列表
      */
-    Web: Array<KVInt>;
+    Web?: Array<KVInt>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7357,22 +7047,18 @@ export interface Goods {
     GoodsDetail: GoodsDetail;
     /**
      * 默认为0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId: number;
     /**
      * 计费类目ID，对应cid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsCategoryId?: number;
     /**
      * 平台类型，默认1
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Platform?: number;
     /**
      * 购买waf实例区域ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
 }
@@ -7382,17 +7068,14 @@ export interface Goods {
 export interface UpsertIpAccessControlResponse {
     /**
      * 添加或修改失败的条目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedItems?: string;
     /**
      * 添加或修改失败的数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedCount?: number;
     /**
      * 添加或修改的IP数据Id列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ids?: Array<string>;
     /**
@@ -7436,12 +7119,11 @@ export interface DescribeAccessExportsResponse {
     /**
      * 日志导出ID。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 日志导出列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Exports: Array<ExportAccessInfo>;
+    Exports?: Array<ExportAccessInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7525,7 +7207,6 @@ export interface DescribeAreaBanAreasRsp {
     Status?: string;
     /**
      * 数据来源 custom-自定义(默认)、batch-批量防护
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
@@ -7534,7 +7215,6 @@ export interface DescribeAreaBanAreasRsp {
     Areas?: Array<string>;
     /**
      * 定时任务类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobType?: string;
     /**
@@ -7544,7 +7224,6 @@ export interface DescribeAreaBanAreasRsp {
     JobDateTime?: JobDateTime;
     /**
      * 周期任务配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronType?: string;
 }
@@ -7585,7 +7264,7 @@ export interface UpsertCCRuleRequest {
      */
     MatchFunc: number;
     /**
-     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截
+     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，26表示精准人机识别，27表示JS校验
      */
     ActionType: string;
     /**
@@ -7673,7 +7352,7 @@ export interface DescribeDomainsRequest {
  */
 export interface ModifyDomainPostActionRequest {
     /**
-     * www.tx.com
+     * 域名
      */
     Domain: string;
     /**
@@ -7691,62 +7370,50 @@ export interface ModifyDomainPostActionRequest {
 export interface BotPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 申请数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InquireNum?: number;
     /**
      * 使用数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedNum?: number;
     /**
      * 子产品code
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 购买页bot6折
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotCPWaf?: number;
     /**
      * 控制台买bot5折
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BotNPWaf?: number;
     /**
      * 7天bot试用标识 1 试用 0 没有试用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsBotTrial?: number;
 }
@@ -7831,11 +7498,11 @@ export interface IpHitItemsData {
     /**
      * 数组封装
      */
-    Res: Array<IpHitItem>;
+    Res?: Array<IpHitItem>;
     /**
      * 总数目
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * 域名的webshell开启状态
@@ -7857,108 +7524,108 @@ export interface DescribeSpartaProtectionInfoResponse {
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 域名ID
      */
-    DomainId: string;
+    DomainId?: string;
     /**
      * cname取值
      */
-    Cname: string;
+    Cname?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 源IP地址列表
      */
-    SrcList: Array<string>;
+    SrcList?: Array<string>;
     /**
      * 证书类型
      */
-    CertType: string;
+    CertType?: string;
     /**
      * 证书
      */
-    Cert: string;
+    Cert?: string;
     /**
      * 私有密钥
      */
-    PrivateKey: string;
+    PrivateKey?: string;
     /**
      * ssl的id
      */
-    Sslid: string;
+    Sslid?: string;
     /**
      * 是否是cdn
      */
-    IsCdn: string;
+    IsCdn?: string;
     /**
      * 灰度区域列表
      */
-    GrayAreas: Array<string>;
+    GrayAreas?: Array<string>;
     /**
      * 引擎
      */
-    Engine: string;
+    Engine?: string;
     /**
      * HTTPS重写
      */
-    HttpsRewrite: string;
+    HttpsRewrite?: string;
     /**
      * upstreamType取值
      */
-    UpstreamType: string;
+    UpstreamType?: string;
     /**
      * upstreamDomain取值
      */
-    UpstreamDomain: string;
+    UpstreamDomain?: string;
     /**
      * upstreamScheme取值
      */
-    UpstreamScheme: string;
+    UpstreamScheme?: string;
     /**
      * 是否是HTTP2
      */
-    IsHttp2: string;
+    IsHttp2?: string;
     /**
      * 是否含有websocket
      */
-    IsWebsocket: string;
+    IsWebsocket?: string;
     /**
      * loadBalance信息
      */
-    LoadBalance: string;
+    LoadBalance?: string;
     /**
      * httpsUpstreamPort取值
      */
-    HttpsUpstreamPort: string;
+    HttpsUpstreamPort?: string;
     /**
      * port信息
      */
-    Ports: Array<PortItem>;
+    Ports?: Array<PortItem>;
     /**
      * 是否灰度
      */
-    IsGray: string;
+    IsGray?: string;
     /**
      * 模式
      */
-    Mode: string;
+    Mode?: string;
     /**
      * 防御等级,100,200,300
      */
-    Level: string;
+    Level?: string;
     /**
      * 与源站是否保持长连接
      */
-    IsKeepAlive: string;
+    IsKeepAlive?: string;
     /**
      * 0：BGP 1：Anycast
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Anycast: string;
+    Anycast?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8016,9 +7683,8 @@ export interface ModifyUserSignatureRuleV2Response {
 export interface AccessLogItems {
     /**
      * 分析结果返回的KV数据对
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<AccessLogItem>;
+    Data?: Array<AccessLogItem>;
 }
 /**
  * ModifyInstanceName请求参数结构体
@@ -8033,7 +7699,7 @@ export interface ModifyInstanceNameRequest {
      */
     InstanceID: string;
     /**
-     * 版本
+     * 实例版本，支持clb-waf、sparta-waf
      */
     Edition: string;
 }
@@ -8071,7 +7737,7 @@ export interface ModifyCustomRuleRequest {
      */
     RuleName: string;
     /**
-     * 执行动作，0：放行、1：阻断、2：人机识别、3：观察、4：重定向
+     * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验
      */
     RuleAction: string;
     /**
@@ -8102,7 +7768,7 @@ export interface ModifyCustomRuleRequest {
      */
     ExpireTime?: number;
     /**
-     * 定时任务类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -8212,15 +7878,15 @@ export interface DescribeAntiInfoLeakRulesStrategyItem {
     /**
      * 字段
      */
-    Field: string;
+    Field?: string;
     /**
      * 条件
      */
-    CompareFunc: string;
+    CompareFunc?: string;
     /**
      * 内容
      */
-    Content: string;
+    Content?: string;
 }
 /**
  * api请求参数类型
@@ -8228,47 +7894,38 @@ export interface DescribeAntiInfoLeakRulesStrategyItem {
 export interface ApiParameterType {
     /**
      * 参数名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterName?: string;
     /**
      * 参数类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 参数位置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Location?: string;
     /**
      * 数据标签(敏感字段)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: Array<string>;
     /**
      * 时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 来源是请求或者响应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
      * 是否需要泛化 ，0表示不需要，1表示需要
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPan?: number;
     /**
      * 是否鉴权，1表示是，0表示否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAuth?: number;
 }
@@ -8330,7 +7987,7 @@ export interface CCRuleItems {
      */
     MatchFunc?: number;
     /**
-     * 动作
+     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验
      */
     ActionType?: number;
     /**
@@ -8360,7 +8017,6 @@ export interface CCRuleItems {
     EventId?: string;
     /**
      * 关联的Session规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionApplied?: Array<number | bigint>;
     /**
@@ -8467,7 +8123,6 @@ export interface RuleList {
     Status?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
 }
@@ -8533,7 +8188,7 @@ export interface ModifyCustomWhiteRuleRequest {
      */
     Strategies: Array<Strategy>;
     /**
-     * 定时任务类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -8614,7 +8269,7 @@ export interface AddCustomWhiteRuleRequest {
      */
     Bypass: string;
     /**
-     * 定时任务类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -8628,22 +8283,18 @@ export interface AddCustomWhiteRuleRequest {
 export interface CronJob {
     /**
      * 每个月的几号执行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Days?: Array<number | bigint>;
     /**
      * 每个星期的星期几执行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WDays?: Array<number | bigint>;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
 }
@@ -8796,17 +8447,14 @@ export interface DomainsPartInfo {
      * 是否开启主动健康检测。
   0：不开启
   1：开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActiveCheck?: number;
     /**
      * TLS版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TLSVersion?: number;
     /**
      * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ciphers?: Array<number | bigint>;
     /**
@@ -8815,17 +8463,14 @@ export interface DomainsPartInfo {
   1：通用型模板
   2：安全型模板
   3：自定义模板
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CipherTemplate?: number;
     /**
      * WAF与源站的读超时时间，默认300s。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyReadTimeout?: number;
     /**
      * WAF与源站的写超时时间，默认300s。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxySendTimeout?: number;
     /**
@@ -8834,89 +8479,72 @@ export interface DomainsPartInfo {
   1：开启SNI，client_hello中的server_name为防护域名
   2：开启SNI，SNI为域名回源时的源站域名
   3：开启SNI，SNI为自定义域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SniType?: number;
     /**
      * SniType为3时，需要填此参数，表示自定义的SNI；
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SniHost?: string;
     /**
      * 回源IP权重
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Weights?: Array<string>;
     /**
      * IsCdn=3时，表示自定义header
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpHeaders?: Array<string>;
     /**
      * 是否开启XFF重置。
   0：关闭
   1：开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     XFFReset?: number;
     /**
      * 域名备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
     /**
      * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamHost?: string;
     /**
      * 防护规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 是否开启缓存 0-关闭 1-开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyBuffer?: number;
     /**
      * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmType?: number;
     /**
      * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmCertType?: number;
     /**
      * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmCert?: string;
     /**
      * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmPrivateKey?: string;
     /**
      * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmEncCert?: string;
     /**
      * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmEncPrivateKey?: string;
     /**
      * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GmSSLId?: string;
     /**
      * 域名标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Labels?: Array<string>;
 }
@@ -9211,7 +8839,7 @@ export interface ModifyAreaBanAreasRequest {
      */
     Areas: Array<string>;
     /**
-     * 定时任务类型
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
      */
     JobType?: string;
     /**
@@ -9285,32 +8913,26 @@ export interface DescribeAntiInfoLeakRulesRequest {
 export interface QPSPackageNew {
     /**
      * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds: string;
     /**
      * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidTime: string;
     /**
      * 是否自动续费，1：自动续费，0：不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag: number;
     /**
      * 套餐购买个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count: number;
     /**
      * 套餐购买地域，clb-waf暂时没有用到
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region: string;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
 }
@@ -9321,11 +8943,11 @@ export interface LogHistogramInfo {
     /**
      * 日志条数
      */
-    Count: number;
+    Count?: number;
     /**
      * 时间戳
      */
-    TimeStamp: number;
+    TimeStamp?: number;
 }
 /**
  * DeleteDomainWhiteRules请求参数结构体
@@ -9379,14 +9001,12 @@ export interface CreateDealsGoods {
   域名包-CLB: 101207(新购),101208(续费),101209(变配)
   业务扩展包-CLB: 101210(新购),101211(续费),101212(变配)
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsCategoryId?: number;
     /**
      * 购买waf实例区域ID
   1 表示购买大陆资源;
   9表示购买非中国大陆资源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
 }
@@ -9415,7 +9035,7 @@ export interface ModifyCustomWhiteRuleStatusResponse {
     /**
      * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
      */
-    Success: ResponseCode;
+    Success?: ResponseCode;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9453,11 +9073,11 @@ export interface BatchIpAccessControlData {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 黑白名单条目
      */
-    Res: Array<BatchIpAccessControlItem>;
+    Res?: Array<BatchIpAccessControlItem>;
 }
 /**
  * DescribeAntiInfoLeakRules返回的规则列表元素
@@ -9466,36 +9086,27 @@ export interface DescribeAntiInfoLeakRulesRuleItem {
     /**
      * 规则ID
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 规则名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 规则状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 规则动作类型
      */
-    ActionType: string;
+    ActionType?: string;
     /**
      * 规则创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 详细的规则
      */
-    Strategies: Array<DescribeAntiInfoLeakRulesStrategyItem>;
-}
-/**
- * DeleteDownloadRecord返回参数结构体
- */
-export interface DeleteDownloadRecordResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Strategies?: Array<DescribeAntiInfoLeakRulesStrategyItem>;
 }
 /**
  * DescribePeakValue请求参数结构体
@@ -9557,7 +9168,6 @@ export interface BotQPS {
     MaxBotQPS: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag: number;
 }
@@ -9593,11 +9203,11 @@ export interface DescribePolicyStatusResponse {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 防护状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9649,7 +9259,6 @@ export interface DescribeDomainRulesResponse {
 export interface CreateDealsResponse {
     /**
      * 计费下单响应结构体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DealData;
     /**
@@ -9658,7 +9267,6 @@ export interface CreateDealsResponse {
     Status?: number;
     /**
      * 返回message
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReturnMessage?: string;
     /**
@@ -9672,19 +9280,16 @@ export interface CreateDealsResponse {
 export interface TLSCiphers {
     /**
      * TLS版本ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionId: number;
+    VersionId?: number;
     /**
      * 加密套件ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CipherId: number;
+    CipherId?: number;
     /**
      * 加密套件
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CipherName: string;
+    CipherName?: string;
 }
 /**
  * DescribeDomainVerifyResult返回参数结构体
@@ -9724,7 +9329,7 @@ export interface AddCustomRuleRequest {
      */
     Domain: string;
     /**
-     * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向
+     * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验
      */
     ActionType: string;
     /**
@@ -9740,7 +9345,7 @@ export interface AddCustomRuleRequest {
      */
     Edition?: string;
     /**
-     * 放行的详情
+     * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。默认是"geoip,cc,owasp,ai,antileakage"
      */
     Bypass?: string;
     /**
@@ -9800,7 +9405,7 @@ export interface DescribeAttackTypeResponse {
     /**
      * 数量
      */
-    Piechart: Array<PiechartItem>;
+    Piechart?: Array<PiechartItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10061,7 +9666,7 @@ export interface DeleteAccessExportRequest {
  */
 export interface DescribeTlsVersionResponse {
     /**
-     * TLS key value
+     * TLS信息
      */
     TLS?: Array<TLSVersion>;
     /**
@@ -10200,37 +9805,30 @@ export interface ClbDomainsInfo {
     FlowMode?: number;
     /**
      * 域名绑定负载均衡器状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: number;
     /**
      * 负载均衡类型，clb或者apisix
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlbType?: string;
     /**
      * IsCdn=3时，表示自定义header
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpHeaders?: Array<string>;
     /**
      * cdc-clb-waf类型WAF的CDC集群信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcClusters?: string;
     /**
      * 云类型:public:公有云；private:私有云;hybrid:混合云
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudType?: string;
     /**
      * 域名备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
     /**
      * 域名标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Labels?: Array<string>;
 }
@@ -10290,42 +9888,34 @@ export interface SearchAccessLogRequest {
 export interface MiniExtendPkg {
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: number;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 购买数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
     /**
      * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItem?: string;
 }
@@ -10343,7 +9933,6 @@ export interface DomainURI {
     Edition: string;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceID?: string;
 }
@@ -10371,27 +9960,19 @@ export interface DescribeAttackWhiteRuleResponse {
 export interface AccessRuleKeyValueInfo {
     /**
      * 是否大小写敏感
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CaseSensitive: boolean;
+    CaseSensitive?: boolean;
     /**
      * 需要建立索引的键值对信息；最大只能配置100个键值对
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeyValues: Array<AccessKeyValueInfo>;
+    KeyValues?: Array<AccessKeyValueInfo>;
 }
 /**
  * DescribeObjects请求参数结构体
  */
 export interface DescribeObjectsRequest {
     /**
-     * 支持的过滤器:
-      ObjectId: clb实例ID
-      VIP: clb实例的公网IP
-      InstanceId: waf实例ID
-      Domain: 精准域名
-      Status: waf防护开关状态: 0关闭，1开启
-      ClsStatus: waf日志开关: 0关闭，1开启
+     * 支持的过滤器:	ObjectId: clb实例ID	VIP: clb实例的公网IP	InstanceId: waf实例ID	Domain: 精准域名	Status: waf防护开关状态: 0关闭，1开启	ClsStatus: waf日志开关: 0关闭，1开启
      */
     Filters?: Array<FiltersItemNew>;
 }

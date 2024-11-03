@@ -818,16 +818,6 @@ it("waf.v20180125.DescribeAccessHistogram", async function () {
     }
 })
 
-it("waf.v20180125.DeleteDownloadRecord", async function () {
-    try {
-       const data = await client.DeleteDownloadRecord({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.DescribeTlsVersion", async function () {
     try {
        const data = await client.DescribeTlsVersion({})

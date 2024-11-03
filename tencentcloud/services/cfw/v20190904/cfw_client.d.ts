@@ -237,9 +237,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifyAddressTemplate(req: ModifyAddressTemplateRequest, cb?: (error: string, rep: ModifyAddressTemplateResponse) => void): Promise<ModifyAddressTemplateResponse>;
     /**
-     * 历史接口，已经废弃，产品有新的替代接口
-
-防火墙开关列表，已废弃，请使用DescribeFwEdgeIps
+     * 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps
      */
     DescribeSwitchLists(req: DescribeSwitchListsRequest, cb?: (error: string, rep: DescribeSwitchListsResponse) => void): Promise<DescribeSwitchListsResponse>;
     /**

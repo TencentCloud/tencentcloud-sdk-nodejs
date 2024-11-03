@@ -12,7 +12,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetPortInfoList(req: DescribeAssetPortInfoListRequest, cb?: (error: string, rep: DescribeAssetPortInfoListResponse) => void): Promise<DescribeAssetPortInfoListResponse>;
     /**
-     * 本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
+     * 接口已无效
+
+本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
      */
     DescribeComponentStatistics(req: DescribeComponentStatisticsRequest, cb?: (error: string, rep: DescribeComponentStatisticsResponse) => void): Promise<DescribeComponentStatisticsResponse>;
     /**

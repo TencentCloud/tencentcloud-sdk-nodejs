@@ -128,9 +128,8 @@ export interface ModifyAssetSyncResponse {
 export interface ModifyNatFwVpcDnsSwitchResponse {
     /**
      * 修改成功
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -190,29 +189,24 @@ export interface ModifyAddressTemplateRequest {
 export interface DescribeRuleOverviewResponse {
     /**
      * 规则总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AllTotal: number;
+    AllTotal?: number;
     /**
      * 阻断策略规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StrategyNum: number;
+    StrategyNum?: number;
     /**
      * 启用规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartRuleNum: number;
+    StartRuleNum?: number;
     /**
      * 停用规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StopRuleNum: number;
+    StopRuleNum?: number;
     /**
      * 剩余配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemainingNum: number;
+    RemainingNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -252,21 +246,21 @@ export interface CfwNatDnatRule {
  */
 export interface ScanInfo {
     /**
+     * 进度
+     */
+    ScanPercent?: number;
+    /**
      * 扫描结果信息
      */
-    ScanResultInfo: ScanResultInfo;
+    ScanResultInfo?: ScanResultInfo;
     /**
      * 扫描状态 0扫描中 1完成  2未勾选自动扫描
      */
-    ScanStatus: number;
-    /**
-     * 进度
-     */
-    ScanPercent: number;
+    ScanStatus?: number;
     /**
      * 预计完成时间
      */
-    ScanTime: string;
+    ScanTime?: string;
 }
 /**
  * ModifyEnterpriseSecurityGroupRule返回参数结构体
@@ -304,33 +298,32 @@ export interface FwCidrInfo {
 }
 /**
  * StaticInfo 告警柱形图统计信息
- 
  */
 export interface StaticInfo {
     /**
-     * 数
-     */
-    Num: number;
-    /**
-     * 端口
-     */
-    Port: string;
-    /**
-     * ip信息
-     */
-    Ip: string;
-    /**
      * 地址
      */
-    Address: string;
+    Address?: string;
     /**
      * 资产id
      */
-    InsID: string;
+    InsID?: string;
     /**
      * 资产名称
      */
-    InsName: string;
+    InsName?: string;
+    /**
+     * ip信息
+     */
+    Ip?: string;
+    /**
+     * 数
+     */
+    Num?: number;
+    /**
+     * 端口
+     */
+    Port?: string;
 }
 /**
  * ModifySequenceRules请求参数结构体
@@ -363,7 +356,6 @@ export interface DescribeNatAcRuleResponse {
     Total?: number;
     /**
      * nat访问控制列表数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<DescAcItem>;
     /**
@@ -380,13 +372,13 @@ export interface DescribeNatAcRuleResponse {
  */
 export interface ModifyBlockTopRequest {
     /**
-     * 记录id
-     */
-    UniqueId: string;
-    /**
      * 操作类型 1 置顶 0取消
      */
     OpeType: string;
+    /**
+     * 记录id
+     */
+    UniqueId: string;
 }
 /**
  * AddAclRule请求参数结构体
@@ -517,12 +509,11 @@ export interface ModifyAcRuleResponse {
     /**
      * 状态值，0:操作成功，非0：操作失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 返回多余的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: string;
+    Info?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -534,18 +525,16 @@ export interface ModifyAcRuleResponse {
 export interface ModifyAssetScanResponse {
     /**
      * 接口返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 接口返回错误码，0请求成功  非0失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * 状态值 0：成功，1 执行扫描中,其他：失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -574,7 +563,6 @@ export interface DescribeAclRuleResponse {
     Total?: number;
     /**
      * nat访问控制列表数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<DescAcItem>;
     /**
@@ -694,10 +682,6 @@ export interface AddAcRuleRequest {
  */
 export interface DescribeTLogInfoRequest {
     /**
-     * 开始时间
-     */
-    StartTime: string;
-    /**
      * 结束时间
      */
     EndTime: string;
@@ -705,6 +689,10 @@ export interface DescribeTLogInfoRequest {
      * 类型 1 告警 2阻断
      */
     QueryType: string;
+    /**
+     * 开始时间
+     */
+    StartTime: string;
     /**
      * 查询条件
      */
@@ -716,122 +704,98 @@ export interface DescribeTLogInfoRequest {
 export interface BlockIgnoreRule {
     /**
      * 规则类型，取值：1 封禁，2外部IP，3域名，4情报，5assets，6自定义策略，7入侵防御规则id （2-7属于白名单类型）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleType?: number;
     /**
      * 规则ip或白名单内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ioc?: string;
     /**
      * 资产实例名称、自定义策略名称等
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IocName?: string;
     /**
      * 白名单信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IocInfo?: string;
     /**
      * 域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IP?: string;
     /**
      * 危险等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 来源事件名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventName?: string;
     /**
      * 方向：1入站，0出站
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Direction?: number;
     /**
      * 所有方向聚合成字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectionList?: string;
     /**
      * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 地理位置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Address?: string;
     /**
      * 规则类型：1封禁，2放通
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Action?: number;
     /**
      * 规则生效开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 规则生效结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 忽略原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IgnoreReason?: string;
     /**
      * 安全事件来源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
      * 规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqueId?: string;
     /**
      * 规则命中次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchTimes?: number;
     /**
      * 国家
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Country?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Comment?: string;
     /**
      * 上次命中时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastHitTime?: string;
     /**
      * 自定义规则细节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: CustomWhiteRule;
     /**
      * 1 border 2 nat 4 vpc 8 border-serial
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwType?: number;
 }
@@ -1099,11 +1063,11 @@ export interface DescribeNatFwDnatRuleRequest {
      */
     EndTime?: string;
     /**
-     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，可不传
      */
     Order?: string;
     /**
-     * 排序所用到的字段
+     * 排序所用到的字段，可不传
      */
     By?: string;
 }
@@ -1113,12 +1077,10 @@ export interface DescribeNatFwDnatRuleRequest {
 export interface DescribeAssociatedInstanceListResponse {
     /**
      * 实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<AssociatedInstanceInfo>;
     /**
@@ -1132,52 +1094,42 @@ export interface DescribeAssociatedInstanceListResponse {
 export interface AssociatedInstanceInfo {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName: string;
     /**
      * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: number;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId: string;
     /**
      * 私有网络名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcName: string;
     /**
      * 公网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp: string;
     /**
      * 内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip: string;
     /**
      * 关联安全组数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupCount: number;
     /**
      * 关联安全组规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupRuleCount?: number;
     /**
      * 关联数据库代理Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdbId?: string;
 }
@@ -1205,17 +1157,15 @@ export interface RemoveAcRuleResponse {
     /**
      * 删除成功后返回被删除策略的uuid
      */
-    RuleUuid: number;
+    RuleUuid?: number;
     /**
      * 0代表成功，-1代表失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * success代表成功，failed代表失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1228,31 +1178,27 @@ export interface NatFwInstance {
     /**
      * nat实例id
      */
-    NatinsId: string;
+    NatinsId?: string;
     /**
      * nat实例名称
      */
-    NatinsName: string;
+    NatinsName?: string;
     /**
      * 实例所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 0:新增模式，1:接入模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FwMode: number;
+    FwMode?: number;
     /**
      * 0:正常状态， 1: 正在创建
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * nat公网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatIp: string;
+    NatIp?: string;
 }
 /**
  * ModifyNatAcRule返回参数结构体
@@ -1296,11 +1242,11 @@ export interface DescribeAclRuleRequest {
      */
     EndTime?: string;
     /**
-     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc
      */
     Order?: string;
     /**
-     * 排序所用到的字段
+     * 排序所用到的字段，默认为sequence
      */
     By?: string;
 }
@@ -1342,111 +1288,90 @@ export interface NatInstanceInfo {
     RegionZh?: string;
     /**
      * 公网ip数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EipAddress?: Array<string>;
     /**
      * 内外使用ip数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcIp?: Array<string>;
     /**
      * 实例关联子网数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Subnets?: Array<string>;
     /**
      * 0 :正常 1：正在初始化
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 地域区域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionDetail?: string;
     /**
      * 实例所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneZh?: string;
     /**
      * 实例所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneZhBak?: string;
     /**
      * 已使用规则数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleUsed?: number;
     /**
      * 实例的规则限制最大规格数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleMax?: number;
     /**
      * 实例引擎版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineVersion?: string;
     /**
      * 引擎是否可升级：0，不可升级；1，可升级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateEnable?: number;
     /**
      * 是的需要升级引擎 支持 nat拨测 1需要 0不需要
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NeedProbeEngineUpdate?: number;
     /**
      * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrafficMode?: string;
     /**
      * 实例主所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * 实例备所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneBak?: string;
     /**
      * 引擎预约升级时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveTime?: string;
     /**
      * 引擎预约升级版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveVersion?: string;
     /**
-     * 引擎预约升级版本状态
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 引擎预约升级版本状态 stable:稳定版；previewed:预览版
      */
     ReserveVersionState?: string;
     /**
      * 弹性开关
   1 打开
   0 关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticSwitch?: number;
     /**
      * 弹性带宽，单位Mbps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBandwidth?: number;
     /**
      * 是否首次开通按量付费
   1 是
   0 不是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFirstAfterPay?: number;
 }
@@ -1457,7 +1382,7 @@ export interface CreateSecurityGroupRulesResponse {
     /**
      * 状态值，0：添加成功，非0：添加失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1498,14 +1423,12 @@ export interface ExpandCfwVerticalRequest {
 export interface ModifyAllPublicIPSwitchStatusResponse {
     /**
      * 接口返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 接口返回错误码，0请求成功  非0失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1584,17 +1507,15 @@ export interface ModifyBlockIgnoreListRequest {
 export interface BanAndAllowRuleDel {
     /**
      * 封禁和放通对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ioc?: string;
     /**
      * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的 （DeleteBlockIgnoreRuleNew接口，该字段无效）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectionList?: string;
     /**
      * 规则类型
-  注意：此字段可能返回 null，表示取不到有效值。
+  RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
      */
     RuleType?: number;
 }
@@ -1623,7 +1544,7 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
      */
     From?: string;
     /**
-     * 是否使用id 默认不需要
+     * 是否复用rule id，1为是，默认不需要
      */
     IsUseId?: number;
 }
@@ -1637,12 +1558,10 @@ export interface FwGateway {
     GatewayId: string;
     /**
      * 网关所属vpc id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId: string;
     /**
      * 网关ip地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpAddress: string;
 }
@@ -1653,7 +1572,7 @@ export interface ModifySecurityGroupSequenceRulesResponse {
     /**
      * 状态值，0：修改成功，非0：修改失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1707,19 +1626,16 @@ export interface SecurityGroupRule {
     OrderIndex: string;
     /**
      * 协议；TCP/UDP/ICMP/ANY
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 访问控制策略的端口。取值：
   -1/-1：全部端口
   80：80端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: string;
     /**
      * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceTemplateId?: string;
     /**
@@ -1833,7 +1749,7 @@ export interface ModifySecurityGroupItemRuleStatusResponse {
     /**
      * 状态值，0：修改成功，非0：修改失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1870,42 +1786,34 @@ export interface DescribeEnterpriseSecurityGroupRuleResponse {
 export interface VpcFwGroupInfo {
     /**
      * 防火墙(组)ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupId?: string;
     /**
      * 防火墙(组)名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupName?: string;
     /**
      * 防火墙组涉及到的开关个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwSwitchNum?: number;
     /**
      * 防火墙(组)部署的地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionLst?: Array<string>;
     /**
      * 模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mode?: number;
     /**
      * 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchMode?: number;
     /**
      * VPC防火墙实例卡片信息数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInstanceLst?: Array<VpcFwInstanceInfo>;
     /**
      * 防火墙(状态) 0：正常 1: 初始化或操作中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
@@ -1915,27 +1823,22 @@ export interface VpcFwGroupInfo {
     FwVpcCidr?: string;
     /**
      * cdc专用集群场景时表示部署所属的cdc
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcId?: string;
     /**
      * cdc专用集群场景时表示cdc名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcName?: string;
     /**
      * 跨租户模式 1管理员 2单边 0 非跨租户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossUserMode?: string;
     /**
      * 云联网模式下，当前实例是否需要开启重叠路由开关，1：需要开启，0：不需要开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NeedSwitchCcnOverlap?: number;
     /**
      * 云联网模式下，实例关联的云联网id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CcnId?: string;
 }
@@ -1955,11 +1858,11 @@ export interface IpStatic {
     /**
      * 值
      */
-    Num: number;
+    Num?: number;
     /**
      * 折线图横坐标时间
      */
-    StatTime: string;
+    StatTime?: string;
 }
 /**
  * CreateVpcFwGroup返回参数结构体
@@ -1967,7 +1870,6 @@ export interface IpStatic {
 export interface CreateVpcFwGroupResponse {
     /**
      * 防火墙组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupId?: string;
     /**
@@ -1981,47 +1883,38 @@ export interface CreateVpcFwGroupResponse {
 export interface VpcFwCvmInsInfo {
     /**
      * VPC防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsId: string;
     /**
      * CVM所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * CVM所在地域中文
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionZh?: string;
     /**
      * CVM所在地域详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionDetail?: string;
     /**
      * 主机所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneZh?: string;
     /**
      * 备机所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneZhBack?: string;
     /**
      * 防火墙CVM带宽值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BandWidth?: number;
     /**
      * 实例主机所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
      * 实例备机所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneBak?: string;
 }
@@ -2211,7 +2104,7 @@ export interface DeleteRemoteAccessDomainResponse {
     /**
      * 状态值 0：删除成功，非 0：删除失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2223,102 +2116,82 @@ export interface DeleteRemoteAccessDomainResponse {
 export interface VpcFwInstanceInfo {
     /**
      * VPC防火墙实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsName: string;
     /**
      * VPC防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsId: string;
     /**
      * VPC防火墙实例模式 0: 旧VPC模式防火墙 1: CCN模式防火墙
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwMode: number;
     /**
      * VPC防火墙接入网络实例个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JoinInsNum: number;
     /**
      * VPC防火墙开关个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwSwitchNum: number;
     /**
      * VPC防火墙状态 0:正常 ， 1：创建中 2: 变更中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: number;
     /**
      * VPC防火墙创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Time: string;
     /**
      * VPC 相关云联网ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CcnId?: Array<string>;
     /**
      * VPC 相关云联网名称列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CcnName?: Array<string>;
     /**
      * VPC 相关对等连接ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PeerConnectionId?: Array<string>;
     /**
      * VPC 相关对等连接名称列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PeerConnectionName?: Array<string>;
     /**
      * VPC防火墙CVM的列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwCvmLst?: Array<VpcFwCvmInsInfo>;
     /**
      * VPC防火墙接入网络实例类型列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JoinInsLst?: Array<VpcFwJoinInstanceType>;
     /**
      * 防火墙网关信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGateway?: Array<FwGateway>;
     /**
      * 防火墙(组)ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupId?: string;
     /**
      * 已使用规则数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleUsed?: number;
     /**
      * 最大规则数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleMax?: number;
     /**
      * 防火墙实例带宽
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Width?: number;
     /**
      * 用户VPC墙总带宽
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserVpcWidth?: number;
     /**
      * 接入的vpc列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JoinInsIdLst?: Array<string>;
     /**
@@ -2327,49 +2200,40 @@ export interface VpcFwInstanceInfo {
     FlowMax?: number;
     /**
      * 实例引擎版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineVersion?: string;
     /**
      * 引擎是否可升级：0，不可升级；1，可升级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateEnable?: number;
     /**
      * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrafficMode?: string;
     /**
      * 引擎预约升级时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveTime?: string;
     /**
      * 预约引擎升级版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveVersion?: string;
     /**
      * 引擎预约升级版本状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveVersionState?: string;
     /**
      * 弹性开关 1打开 0关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticSwitch?: number;
     /**
      * 弹性带宽，单位Mbps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticBandwidth?: number;
     /**
      * 是否首次开通按量付费
   1 是
   0 不是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFirstAfterPay?: number;
 }
@@ -2457,12 +2321,11 @@ export interface DeleteSecurityGroupRuleResponse {
     /**
      * 状态值，0：成功，非0：失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 返回多余的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: string;
+    Info?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2552,32 +2415,26 @@ export interface AcListsData {
     Id?: number;
     /**
      * 访问源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceIp?: string;
     /**
      * 访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetIp?: string;
     /**
      * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: string;
     /**
      * 策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Strategy?: number;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Detail?: string;
     /**
@@ -2590,79 +2447,64 @@ export interface AcListsData {
     OrderIndex?: number;
     /**
      * 告警规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogId?: string;
     /**
      * 规则开关状态 1打开 0关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 规则源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcType?: number;
     /**
      * 规则目的类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstType?: number;
     /**
      * 规则唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: string;
     /**
      * 规则有效性
   1 有效
   0 无效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Invalid?: number;
     /**
      * 是否地域规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsRegion?: number;
     /**
      * 云厂商代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudCode?: string;
     /**
      * 自动化助手信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoTask?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 地域码信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionCode?: string;
     /**
      * 国家代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Country?: number;
     /**
      * 城市代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     City?: number;
     /**
      * 国家名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegName1?: string;
     /**
      * 城市名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegName2?: string;
 }
@@ -2697,6 +2539,10 @@ export interface ModifyBlockIgnoreRuleNewResponse {
  */
 export interface DescribeSourceAssetRequest {
     /**
+     * ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产
+     */
+    ChooseType?: string;
+    /**
      * 模糊查询
      */
     FuzzySearch?: string;
@@ -2705,14 +2551,6 @@ export interface DescribeSourceAssetRequest {
      */
     InsType?: string;
     /**
-     * ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产
-     */
-    ChooseType?: string;
-    /**
-     * 地域
-     */
-    Zone?: string;
-    /**
      * 查询单页的最大值；eg：10；则最多返回10条结果
      */
     Limit?: number;
@@ -2720,6 +2558,10 @@ export interface DescribeSourceAssetRequest {
      * 查询结果的偏移量
      */
     Offset?: number;
+    /**
+     * 地域
+     */
+    Zone?: string;
 }
 /**
  * 企业安全组规则执行顺序修改对象
@@ -2739,13 +2581,11 @@ export interface SecurityGroupOrderIndexData {
  */
 export interface DescribeFwGroupInstanceInfoResponse {
     /**
-     * 防火墙(组)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 防火墙(组)详细信息
      */
     VpcFwGroupLst?: Array<VpcFwGroupInfo>;
     /**
      * 防火墙(组)个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -2758,10 +2598,6 @@ export interface DescribeFwGroupInstanceInfoResponse {
  */
 export interface DescribeSourceAssetResponse {
     /**
-     * 地域集合
-     */
-    ZoneList?: Array<AssetZone>;
-    /**
      * 数据
      */
     Data?: Array<InstanceInfo>;
@@ -2769,6 +2605,10 @@ export interface DescribeSourceAssetResponse {
      * 返回数据总数
      */
     Total?: number;
+    /**
+     * 地域集合
+     */
+    ZoneList?: Array<AssetZone>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2847,85 +2687,70 @@ export interface EdgeIpInfo {
     PublicIp?: string;
     /**
      * 公网 IP 类型 1 公网,2 弹性,3 弹性ipv6,4 anycastIP, 6 HighQualityEIP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIpType?: number;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntranetIp?: string;
     /**
      * 资产类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetType?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 风险端口数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PortRiskCount?: number;
     /**
      * 最近扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastScanTime?: string;
     /**
      * 是否为region eip
   0 不为region eip，不能选择串行
   1 为region eip 可以选择串行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsRegionEip?: number;
     /**
      * EIP 所关联的VPC
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 0: 该地域暂未支持串行
   1: 该用户未在该地域配置串行带宽
   2: 该用户已在该地域配置串行带宽，可以开启串行开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSerialRegion?: number;
     /**
      * 0: 不是公网CLB 可以开启串行开关
   1: 是公网CLB 不可以开启串行开关
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPublicClb?: number;
     /**
      * 0: 开启开关时提示要创建私有连接。
   1: 关闭该开关是提示删除私有连接。
   如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndpointBindEipNum?: number;
     /**
      * 扫描深度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanMode?: string;
     /**
      * 扫描状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanStatus?: number;
     /**
@@ -2935,17 +2760,14 @@ export interface EdgeIpInfo {
   2 : 开启中
   3 : 关闭中
   4 : 异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 私有连接ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndpointId?: string;
     /**
      * 私有连接IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndpointIp?: string;
     /**
@@ -2956,17 +2778,14 @@ export interface EdgeIpInfo {
     SwitchMode?: number;
     /**
      * 开关权重
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchWeight?: number;
     /**
      * 域名化CLB的域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * IP超量状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OverUsedStatus?: number;
 }
@@ -2977,11 +2796,11 @@ export interface AssetZone {
     /**
      * 地域
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 地域英文
      */
-    ZoneEng: string;
+    ZoneEng?: string;
 }
 /**
  * 规则顺序变更项，由原始id值变为新的id值。
@@ -3034,10 +2853,6 @@ export interface IntrusionDefenseRule {
  */
 export interface DescribeTLogIpListRequest {
     /**
-     * 开始时间
-     */
-    StartTime: string;
-    /**
      * 结束时间
      */
     EndTime: string;
@@ -3045,6 +2860,10 @@ export interface DescribeTLogIpListRequest {
      * 类型 1 告警 2阻断
      */
     QueryType: string;
+    /**
+     * 开始时间
+     */
+    StartTime: string;
     /**
      * top数
      */
@@ -3062,10 +2881,6 @@ export interface CommonFilter {
      * 检索的键值
      */
     Name: string;
-    /**
-     * 检索的值，各检索值间为OR关系
-     */
-    Values: Array<string>;
     /**
      * 枚举类型，代表Name与Values之间的匹配关系
   enum FilterOperatorType {
@@ -3088,6 +2903,10 @@ export interface CommonFilter {
   }
      */
     OperatorType: number;
+    /**
+     * 检索的值，各检索值间为OR关系
+     */
+    Values: Array<string>;
 }
 /**
  * DescribeNatFwInstancesInfo请求参数结构体
@@ -3261,23 +3080,19 @@ export interface NewModeItems {
  */
 export interface DescribeNatFwInfoCountResponse {
     /**
-     * 返回参数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回参数 success 成功 failed 失败
      */
     ReturnMsg?: string;
     /**
-     * 当前租户的nat实例个数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前租户的nat防火墙实例个数
      */
     NatFwInsCount?: number;
     /**
-     * 当前租户接入子网个数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前租户接入防火墙的子网个数
      */
     SubnetCount?: number;
     /**
-     * 打开开关个数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 打开NAT防火墙开关个数
      */
     OpenSwitchCount?: number;
     /**
@@ -3316,7 +3131,6 @@ export interface ModifyVpcFwGroupRequest {
 export interface ModifyEnterpriseSecurityDispatchStatusResponse {
     /**
      * 0: 修改成功, 其他: 修改失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
@@ -3426,42 +3240,34 @@ export interface SecurityGroupListData {
     IsNew?: number;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 公网IP，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 内网IP，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIp?: string;
     /**
      * 掩码地址，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cidr?: string;
     /**
      * 端口协议类型参数模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceTemplateId?: string;
     /**
      * 生成双向下发规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BothWayInfo?: Array<SecurityGroupBothWayInfo>;
     /**
@@ -3474,27 +3280,22 @@ export interface SecurityGroupListData {
     ProtocolPortType?: number;
     /**
      * Uuid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 资产分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetGroupNameIn?: string;
     /**
      * 资产分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetGroupNameOut?: string;
     /**
      * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterName?: string;
     /**
@@ -3551,7 +3352,6 @@ export interface ModifyVpcAcRuleRequest {
 export interface CreateNatFwInstanceWithDomainResponse {
     /**
      * nat实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CfwInsId?: string;
     /**
@@ -3595,17 +3395,14 @@ export interface ModifyEnterpriseSecurityGroupRuleRequest {
 export interface BetaInfoByACL {
     /**
      * 任务id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 上次执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastTime?: string;
 }
@@ -3757,7 +3554,6 @@ export interface DescribeAcListsResponse {
     AllTotal?: number;
     /**
      * 访问控制规则全部启用/全部停用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: number;
     /**
@@ -3835,17 +3631,15 @@ export interface NatFwEipsInfo {
     /**
      * 弹性公网ip
      */
-    Eip: string;
+    Eip?: string;
     /**
      * 所属的Nat网关Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatGatewayId: string;
+    NatGatewayId?: string;
     /**
      * Nat网关名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatGatewayName: string;
+    NatGatewayName?: string;
 }
 /**
  * AddNatAcRule请求参数结构体
@@ -3880,7 +3674,7 @@ export interface CreateDatabaseWhiteListRulesResponse {
     /**
      * 状态值，0:添加成功，非0：添加失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3932,7 +3726,6 @@ export interface CreateChooseVpcsResponse {
 export interface DescribeUnHandleEventTabListResponse {
     /**
      * 租户伪攻击链未处置事件
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: UnHandleEvent;
     /**
@@ -3962,38 +3755,33 @@ export interface NatFwFilter {
     FilterContent: string;
 }
 /**
- * 新手引导扫描结果信息PortNum   int
-    LeakNum   int
-    IPNum     int
-    IPStatus  bool
-    IdpStatus bool
-    BanStatus bool
+ * 新手引导扫描结果信息
  */
 export interface ScanResultInfo {
     /**
-     * 暴露漏洞数量
+     * 是否禁封端口
      */
-    LeakNum: number;
+    BanStatus?: boolean;
     /**
      * 防护ip数量
      */
-    IPNum: number;
-    /**
-     * 暴露端口数量
-     */
-    PortNum: number;
+    IPNum?: number;
     /**
      * 是否开启防护
      */
-    IPStatus: boolean;
+    IPStatus?: boolean;
     /**
      * 是否拦截攻击
      */
-    IdpStatus: boolean;
+    IdpStatus?: boolean;
     /**
-     * 是否禁封端口
+     * 暴露漏洞数量
      */
-    BanStatus: boolean;
+    LeakNum?: number;
+    /**
+     * 暴露端口数量
+     */
+    PortNum?: number;
 }
 /**
  * ModifyRunSyncAsset返回参数结构体
@@ -4028,20 +3816,19 @@ export interface DescribeSecurityGroupListResponse {
     /**
      * 列表当前规则总条数
      */
-    Total: number;
+    Total?: number;
     /**
      * 安全组规则列表数据
      */
-    Data: Array<SecurityGroupListData>;
+    Data?: Array<SecurityGroupListData>;
     /**
      * 不算筛选条数的总条数
      */
-    AllTotal: number;
+    AllTotal?: number;
     /**
      * 访问控制规则全部启用/全部停用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4073,8 +3860,7 @@ export interface AddEnterpriseSecurityGroupRulesResponse {
      */
     Status?: number;
     /**
-     * 规则uuid
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 添加成功的规则详情
      */
     Rules?: Array<SecurityGroupSimplifyRule>;
     /**
@@ -4129,9 +3915,8 @@ export interface SecurityGroupSimplifyRule {
   resourcegroup：资产分组(/全部分组/分组1/子分组1)
   tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
   region：地域(ap-gaungzhou)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceContent: string;
+    SourceContent?: string;
     /**
      * 访问目的示例：
   net：IP/CIDR(192.168.0.2)
@@ -4140,27 +3925,22 @@ export interface SecurityGroupSimplifyRule {
   resourcegroup：资产分组(/全部分组/分组1/子分组1)
   tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
   region：地域(ap-gaungzhou)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DestContent: string;
+    DestContent?: string;
     /**
      * 协议；TCP/UDP/ICMP/ANY
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 规则对应的唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleUuid?: number;
     /**
      * 规则序号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Sequence?: number;
 }
@@ -4168,10 +3948,6 @@ export interface SecurityGroupSimplifyRule {
  * DescribeBlockByIpTimesList请求参数结构体
  */
 export interface DescribeBlockByIpTimesListRequest {
-    /**
-     * 开始时间
-     */
-    StartTime: string;
     /**
      * 结束时间
      */
@@ -4181,17 +3957,13 @@ export interface DescribeBlockByIpTimesListRequest {
      */
     Ip: string;
     /**
-     * 地域
+     * 开始时间
      */
-    Zone?: string;
+    StartTime: string;
     /**
      * 方向
      */
     Direction?: string;
-    /**
-     * 来源
-     */
-    Source?: string;
     /**
      * vpc间防火墙开关边id
      */
@@ -4200,6 +3972,14 @@ export interface DescribeBlockByIpTimesListRequest {
      * 日志来源 move：vpc间防火墙
      */
     LogSource?: string;
+    /**
+     * 来源
+     */
+    Source?: string;
+    /**
+     * 地域
+     */
+    Zone?: string;
 }
 /**
  * VPC内网间规则
@@ -4239,7 +4019,6 @@ export interface VpcRuleItem {
   FTP
   DNS
   TLS/SSL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol: string;
     /**
@@ -4253,7 +4032,6 @@ export interface VpcRuleItem {
      * 访问控制策略的端口。取值：
   -1/-1：全部端口
   80：80端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port: string;
     /**
@@ -4294,44 +4072,40 @@ export interface VpcRuleItem {
     Deleted?: number;
     /**
      * 规则生效的防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupId?: string;
     /**
      * 防火墙名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupName?: string;
     /**
      * beta任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BetaList?: Array<BetaInfoByACL>;
     /**
      * 端口协议组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParamTemplateId?: string;
     /**
      * 端口协议组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParamTemplateName?: string;
     /**
      * 访问目的名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetName?: string;
     /**
      * 访问源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceName?: string;
     /**
      * Ip版本，0：IPv4，1：IPv6，默认为IPv4
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpVersion?: number;
+    /**
+     * 是否是无效规则，0 表示有效规则，1 表示无效规则，出参场景返回使用
+     */
+    Invalid?: number;
 }
 /**
  * DescribeIdsWhiteRule返回参数结构体
@@ -4365,12 +4139,11 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
     /**
      * 删除成功后返回被删除策略的uuid
      */
-    RuleUuid: number;
+    RuleUuid?: number;
     /**
      * 0代表成功，-1代表失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4382,9 +4155,8 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
 export interface NetInstancesInfo {
     /**
      * 网络实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 网络实例名称
      */
@@ -4438,45 +4210,41 @@ export interface VpcDnsInfo {
     /**
      * vpc id
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * vpc 名称
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * nat 防火墙模式 0：新增模式， 1: 接入模式
      */
-    FwMode: number;
+    FwMode?: number;
     /**
      * vpc ipv4网段范围 CIDR（Classless Inter-Domain Routing，无类域间路由选择）
      */
-    VpcIpv4Cidr: string;
+    VpcIpv4Cidr?: string;
     /**
      * 外网弹性ip，防火墙 dns解析地址
      */
-    DNSEip: string;
+    DNSEip?: string;
     /**
      * nat网关id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatInsId: string;
+    NatInsId?: string;
     /**
      * nat网关名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatInsName: string;
+    NatInsName?: string;
     /**
      * 0：开关关闭 ， 1: 开关打开
      */
-    SwitchStatus: number;
+    SwitchStatus?: number;
     /**
      * 0：未防护， 1: 已防护，2：忽略此字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtectedStatus?: number;
     /**
      * 是否支持DNS FW，0-不支持、1-支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportDNSFW?: number;
 }
@@ -4503,9 +4271,8 @@ export interface CreateAddressTemplateResponse {
 export interface DescribeTableStatusResponse {
     /**
      * 0：正常，其它：不正常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4517,9 +4284,8 @@ export interface DescribeTableStatusResponse {
 export interface ModifySequenceRulesResponse {
     /**
      * 0: 修改成功, 非0: 修改失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4590,17 +4356,17 @@ export interface DescribeResourceGroupNewResponse {
      */
     Data?: string;
     /**
-     * 未分类实例数量
+     * 返回码；0为请求成功
      */
-    UnResourceNum?: number;
+    ReturnCode?: number;
     /**
      * 接口返回消息
      */
     ReturnMsg?: string;
     /**
-     * 返回码；0为请求成功
+     * 未分类实例数量
      */
-    ReturnCode?: number;
+    UnResourceNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4612,9 +4378,8 @@ export interface DescribeResourceGroupNewResponse {
 export interface DescribeNatFwInstanceWithRegionResponse {
     /**
      * 实例数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatinsLst: Array<NatFwInstance>;
+    NatinsLst?: Array<NatFwInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4694,12 +4459,11 @@ export interface DeleteAcRuleResponse {
     /**
      * 状态值 0: 删除成功, !0: 删除失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 返回多余的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: string;
+    Info?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4711,22 +4475,18 @@ export interface DeleteAcRuleResponse {
 export interface EnterpriseSecurityGroupRuleRuleInfo {
     /**
      * 排序
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderIndex?: number;
     /**
      * 主键id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleUuid?: number;
     /**
      * 规则uuid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: string;
     /**
      * 源规则内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceId?: string;
     /**
@@ -4743,12 +4503,10 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   8表示标签(tag)
   9表示地域(region)
   100表示资产分组(resourcegroup)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceType?: number;
     /**
      * 目的规则内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetId?: string;
     /**
@@ -4765,7 +4523,6 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   8表示标签(tag)
   9表示地域(region)
   100表示资产分组(resourcegroup)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetType?: number;
     /**
@@ -4773,12 +4530,10 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   取值范围:TCP/ANY/ICMP/UDP
   ANY:表示所有
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: string;
     /**
@@ -4786,7 +4541,6 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   取值范围:1/2
   1:阻断
   2:放行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Strategy?: number;
     /**
@@ -4794,17 +4548,14 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   取值范围： 0/1
   0:未开启
   1:开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Detail?: string;
     /**
      * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AclTags?: string;
     /**
@@ -4812,89 +4563,72 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
   取值范围：0/1
   0:否
   1:是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNew?: number;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 是否延迟下发规则
   取值范围：0/1
   0:立即下发 1:延迟下发
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDelay?: number;
     /**
      * 服务模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceTemplateId?: string;
     /**
      * 源资产名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SouInstanceName?: string;
     /**
      * 源资产公网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SouPublicIp?: string;
     /**
      * 源资产内网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SouPrivateIp?: string;
     /**
      * 源资产网段信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SouCidr?: string;
     /**
      * 源模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SouParameterName?: string;
     /**
      * 目的资产名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 目的资产公网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 目的资产内网ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIp?: string;
     /**
      * 目的资产网段信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cidr?: string;
     /**
      * 目的模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterName?: string;
     /**
      * 端口模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtocolPortName?: string;
     /**
      * 自动化任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BetaList?: Array<EnterpriseSecurityGroupRuleBetaInfo>;
     /**
      * 规则id  等同RuleUuid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
 }
@@ -4904,110 +4638,87 @@ export interface EnterpriseSecurityGroupRuleRuleInfo {
 export interface IocListData {
     /**
      * 待处置IP地址，IP/Domain字段二选一
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IP: string;
     /**
      * 只能为0或者1   0代表出站 1代表入站
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Direction: number;
     /**
      * 待处置域名，IP/Domain字段二选一
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
 }
 /**
- * // InstanceInfo 实例详情结果
-type InstanceInfo struct {
-    AppID        string `json:"AppId" gorm:"column:appid"`
-    Region       string `json:"Region" gorm:"column:region"`
-    VPCID        string `json:"VpcId" gorm:"column:vpc_id"`
-    SubNetID     string `json:"SubnetId" gorm:"column:subnet_id"`
-    InstanceID   string `json:"InstanceId" gorm:"column:instance_id"`
-    InstanceName string `json:"InstanceName" gorm:"column:instance_name"`
-    //InsType common.CVM 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA
-    InsType   int    `json:"InsType" gorm:"column:instance_type"`
-    PublicIP  string `json:"PublicIp" gorm:"column:public_ip"`
-    PrivateIP string `json:"PrivateIp" gorm:"column:ip"`
-
-    //规则下发无需管，前端展示用
-    PortNum          string `json:"PortNum" gorm:"column:port_num"`
-    LeakNum          string `json:"LeakNum" gorm:"column:leak_num"`
-    ResourceGroupNum int    `json:"ResourceGroupNum"`
-    VPCName          string `json:"VPCName" gorm:"column:VPCName"`
-}
+ * 实例详情结果
  */
 export interface InstanceInfo {
     /**
      * appid信息
      */
-    AppId: string;
+    AppId?: string;
     /**
-     * 地域
+     * 资产来源
+  1公网 2内网
      */
-    Region: string;
-    /**
-     * vpcid信息
-     */
-    VpcId: string;
-    /**
-     * vpc名称
-     */
-    VPCName: string;
-    /**
-     * 子网id
-     */
-    SubnetId: string;
-    /**
-     * 资产id
-     */
-    InstanceId: string;
-    /**
-     * 资产名
-     */
-    InstanceName: string;
+    InsSource?: string;
     /**
      * 资产类型
    3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA 13 NATFW
      */
-    InsType: number;
+    InsType?: number;
     /**
-     * 公网ip
+     * 资产id
      */
-    PublicIp: string;
+    InstanceId?: string;
     /**
-     * 内网ip
+     * 资产名
      */
-    PrivateIp: string;
-    /**
-     * 端口数
-     */
-    PortNum: string;
+    InstanceName?: string;
     /**
      * 漏洞数
      */
-    LeakNum: string;
+    LeakNum?: string;
     /**
-     * 1，公网 2内网
+     * 端口数
      */
-    InsSource: string;
+    PortNum?: string;
     /**
-     * [a,b]
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 内网ip
      */
-    ResourcePath: Array<string>;
+    PrivateIp?: string;
+    /**
+     * 公网ip
+     */
+    PublicIp?: string;
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * 地域
+     */
+    RegionKey?: string;
+    /**
+     * 资产路径
+     */
+    ResourcePath?: Array<string>;
     /**
      * 扫描结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Server?: Array<string>;
     /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 子网id
      */
-    RegionKey?: string;
+    SubnetId?: string;
+    /**
+     * vpc名称
+     */
+    VPCName?: string;
+    /**
+     * vpcid信息
+     */
+    VpcId?: string;
 }
 /**
  * DescribeIPStatusList请求参数结构体
@@ -5024,7 +4735,6 @@ export interface DescribeIPStatusListRequest {
 export interface DescribeNatFwDnatRuleResponse {
     /**
      * Dnat规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<DescNatDnatRule>;
     /**
@@ -5111,12 +4821,10 @@ export interface VpcFwInstanceShow {
     FwInsId?: string;
     /**
      * VPC防火墙实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsName?: string;
     /**
      * 网络经过VPC防火墙CVM所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsRegion?: string;
 }
@@ -5217,32 +4925,26 @@ export interface DescribeAcListsRequest {
 export interface IdsWhiteInfo {
     /**
      * 白名单唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 源IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcIp?: string;
     /**
      * 目的IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstIp?: string;
     /**
      * 规则类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WhiteRuleType?: string;
     /**
      * 白名单生效防火墙范围： 1 边界防火墙 2 nat防火墙 4 vpc防火墙 7 = 1+2+4 所有防火墙
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwType?: number;
     /**
      * 入侵防御规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: string;
 }
@@ -5257,24 +4959,23 @@ export interface UnHandleEvent {
     /**
      * 伪攻击链类型
      */
-    EventTableListStruct: Array<UnHandleEventDetail>;
+    EventTableListStruct?: Array<UnHandleEventDetail>;
     /**
      * 1 是  0否
      */
-    BaseLineUser: number;
+    BaseLineUser?: number;
     /**
      * 1 打开 0 关闭
      */
-    BaseLineInSwitch: number;
+    BaseLineInSwitch?: number;
     /**
      * 1 打开 0 关闭
      */
-    BaseLineOutSwitch: number;
+    BaseLineOutSwitch?: number;
     /**
      * vpc间防火墙实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcFwCount: number;
+    VpcFwCount?: number;
 }
 /**
  * DescribeAssociatedInstanceList请求参数结构体
@@ -5392,12 +5093,11 @@ export interface DeleteAllAccessControlRuleResponse {
     /**
      * 状态值 0: 修改成功, 非0: 修改失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 删除了几条访问控制规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: number;
+    Info?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5464,25 +5164,21 @@ export interface RemoveNatAcRuleResponse {
  */
 export interface CustomWhiteRule {
     /**
-     * 访问源
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SrcIP?: string;
-    /**
      * 访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstIP?: string;
     /**
+     * 规则ID
+     */
+    IdsRuleId?: string;
+    /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdsRuleName?: string;
     /**
-     * 规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 访问源
      */
-    IdsRuleId?: string;
+    SrcIP?: string;
 }
 /**
  * DescribeFwEdgeIps返回参数结构体
@@ -5490,22 +5186,18 @@ export interface CustomWhiteRule {
 export interface DescribeFwEdgeIpsResponse {
     /**
      * ip 开关列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<EdgeIpInfo>;
     /**
      * ip 开关列表个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 地域列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionLst?: Array<string>;
     /**
      * 实例类型列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTypeLst?: Array<string>;
     /**
@@ -5566,62 +5258,50 @@ export interface FwGroupSwitch {
 export interface TemplateListInfo {
     /**
      * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: string;
     /**
      * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Detail?: string;
     /**
      * IP模板
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpString?: string;
     /**
      * 插入时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InsertTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 模板类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
      * 关联规则条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RulesNum?: number;
     /**
      * 模板Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: string;
     /**
      * 协议端口模板，协议类型，4:4层协议，7:7层协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtocolType?: string;
     /**
      * 模板包含地址数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IPNum?: number;
     /**
      * IP版本,0,IPv4;1,IPv6
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpVersion?: number;
 }
@@ -5631,12 +5311,10 @@ export interface TemplateListInfo {
 export interface VpcFwJoinInstanceType {
     /**
      * 接入实例类型，VPC、DIRECTCONNECT、 VPNGW 等
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JoinType: string;
     /**
      * 接入的对应网络实例类型的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Num: number;
 }
@@ -5646,12 +5324,10 @@ export interface VpcFwJoinInstanceType {
 export interface DescribeVpcFwGroupSwitchResponse {
     /**
      * 开关列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchList?: Array<FwGroupSwitchShow>;
     /**
      * 开关总个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -5687,9 +5363,8 @@ export interface DescribeTLogIpListResponse {
 export interface StopSecurityGroupRuleDispatchResponse {
     /**
      * true代表成功，false代表错误
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: boolean;
+    Status?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5704,35 +5379,29 @@ export declare type DescribeNatFwInfoCountRequest = null;
  */
 export interface BanAndAllowRule {
     /**
-     * 封禁和放通对象
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Ioc?: string;
-    /**
-     * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DirectionList?: string;
-    /**
-     * 规则截止时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EndTime?: string;
-    /**
      * 规则评论
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Comment?: string;
     /**
      * 自定义白名单规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: CustomWhiteRule;
     /**
+     * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的
+     */
+    DirectionList?: string;
+    /**
+     * 规则截止时间
+     */
+    EndTime?: string;
+    /**
      * 放通的引擎: 1针对互联网边界 2针对nat防火墙 4针对vpc防火墙
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwType?: number;
+    /**
+     * 封禁和放通对象
+     */
+    Ioc?: string;
 }
 /**
  * RemoveAcRule请求参数结构体
@@ -5774,7 +5443,6 @@ export interface FwGroupSwitchShow {
     SwitchId?: string;
     /**
      * 防火墙开关NAME
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchName?: string;
     /**
@@ -5783,81 +5451,70 @@ export interface FwGroupSwitchShow {
     SwitchMode?: number;
     /**
      * 开关边连接类型 0：对等连接， 1：云连网
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectType?: number;
     /**
      * 连接ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectId?: string;
     /**
      * 连接名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectName?: string;
     /**
      * 源实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcInstancesInfo?: Array<NetInstancesInfo>;
     /**
      * 目的实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstInstancesInfo?: Array<NetInstancesInfo>;
     /**
      * 防火墙(组)数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupId?: string;
     /**
      * 防火墙(组)名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwGroupName?: string;
     /**
      * 开关状态 0：关 ， 1：开
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: number;
     /**
      * 开关的状态 0：正常， 1：转换中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 0-非sase实例，忽略，1-未绑定状态，2-已绑定
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AttachWithEdge?: number;
     /**
      * 对等防火墙和开关状态 0：正常， 1：对等未创建防火墙，2：对等已创建防火墙，未打开开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossEdgeStatus?: number;
     /**
      * 网络经过VPC防火墙CVM所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsRegion?: Array<string>;
     /**
      * 0 观察 1 拦截 2 严格 3 关闭 4 不支持ips 前端展示tag
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpsAction?: number;
     /**
      * 开关关联的防火墙实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsLst?: Array<VpcFwInstanceShow>;
     /**
      * 开关是否处于bypass状态
   0：正常状态
   1：bypass状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BypassStatus?: number;
+    /**
+     * 0: ipv4 , 1:ipv6
+     */
+    IpVersion?: number;
 }
 /**
  * ModifyNatFwReSelect请求参数结构体
@@ -5941,47 +5598,38 @@ export interface ModifyAllVPCSwitchStatusRequest {
 export interface SecurityGroupBothWayInfo {
     /**
      * 执行顺序
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderIndex: number;
     /**
      * 访问源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceId: string;
     /**
      * 访问源类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceType: number;
     /**
      * 访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetId: string;
     /**
      * 访问目的类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetType: number;
     /**
      * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol: string;
     /**
      * 目的端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port: string;
     /**
      * 策略, 1：阻断，2：放行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Strategy: number;
     /**
      * 方向，0：出站，1：入站，默认1
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Direction: number;
     /**
@@ -5990,57 +5638,46 @@ export interface SecurityGroupBothWayInfo {
     Region: string;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Detail?: string;
     /**
      * 是否开关开启，0：未开启，1：开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 是否是正常规则，0：正常，1：异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNew?: number;
     /**
      * 单/双向下发，0:单向下发，1：双向下发
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BothWay?: number;
     /**
      * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 公网IP，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 内网IP，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIp?: string;
     /**
      * 掩码地址，多个以英文逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cidr?: string;
     /**
      * 端口协议类型参数模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceTemplateId?: string;
     /**
@@ -6054,9 +5691,8 @@ export interface SecurityGroupBothWayInfo {
 export interface ModifyAllRuleStatusResponse {
     /**
      * 0: 修改成功, 其他: 修改失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6077,17 +5713,14 @@ export interface StopSecurityGroupRuleDispatchRequest {
 export interface EnterpriseSecurityGroupRuleBetaInfo {
     /**
      * 任务id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastTime?: string;
 }
@@ -6229,17 +5862,14 @@ export declare type ModifyAssetSyncRequest = null;
 export interface DescribeNatFwVpcDnsLstResponse {
     /**
      * nat防火墙vpc dns 信息数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcDnsSwitchLst?: Array<VpcDnsInfo>;
     /**
-     * 返回参数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回参数 success成功 failed 失败
      */
     ReturnMsg?: string;
     /**
      * 开关总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -6253,32 +5883,26 @@ export interface DescribeNatFwVpcDnsLstResponse {
 export interface DescAcItem {
     /**
      * 访问源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceContent?: string;
     /**
      * 访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetContent?: string;
     /**
      * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: string;
     /**
      * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleAction?: string;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -6291,128 +5915,103 @@ export interface DescAcItem {
     OrderIndex?: number;
     /**
      * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceType?: string;
     /**
      * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location,dnsparse
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetType?: string;
     /**
      * 规则对应的唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: number;
     /**
      * 规则有效性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Invalid?: number;
     /**
      * 0为正常规则,1为地域规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsRegion?: number;
     /**
      * 国家id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CountryCode?: number;
     /**
      * 城市id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CityCode?: number;
     /**
      * 国家名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CountryName?: string;
     /**
      * 省名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CityName?: string;
     /**
      * 云厂商code
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudCode?: string;
     /**
      * 0为正常规则,1为云厂商规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsCloud?: number;
     /**
      * 规则状态，true表示启用，false表示禁用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: string;
     /**
      * 规则方向：1，入向；0，出向
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Direction?: number;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 内部使用的uuid，一般情况下不会使用到该字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InternalUuid?: number;
     /**
      * 规则状态，查询规则命中详情时该字段有效，0：新增，1: 已删除, 2: 编辑删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 关联任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BetaList?: Array<BetaInfoByACL>;
     /**
      * （1）互联网边界防火墙，生效范围：serial，串行；side，旁路；all，全局；
   （2）NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scope?: string;
     /**
      * 生效范围描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScopeDesc?: string;
     /**
      * 互联网边界防火墙使用的内部规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InternetBorderUuid?: string;
     /**
      * 协议端口组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParamTemplateName?: string;
     /**
      * 协议端口组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParamTemplateId?: string;
     /**
      * 访问源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceName?: string;
     /**
      * 访问目的名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetName?: string;
     /**
      * 规则最近命中时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastHitTime?: string;
 }
@@ -6443,10 +6042,6 @@ export interface ExpandCfwVerticalResponse {
  */
 export interface DescribeBlockStaticListRequest {
     /**
-     * 开始时间
-     */
-    StartTime: string;
-    /**
      * 结束时间
      */
     EndTime: string;
@@ -6454,6 +6049,10 @@ export interface DescribeBlockStaticListRequest {
      * 列表类型，只能是下面三种之一：port、address、ip
      */
     QueryType: string;
+    /**
+     * 开始时间
+     */
+    StartTime: string;
     /**
      * top数
      */
@@ -6465,33 +6064,32 @@ export interface DescribeBlockStaticListRequest {
 }
 /**
  * 告警中心概览数据
-
  */
 export interface TLogInfo {
     /**
-     * 失陷主机
-     */
-    OutNum: number;
-    /**
-     * 待处置告警
-     */
-    HandleNum: number;
-    /**
-     * 漏洞攻击
-     */
-    VulNum: number;
-    /**
-     * 网络探测
-     */
-    NetworkNum: number;
-    /**
      * 封禁列表
      */
-    BanNum: number;
+    BanNum?: number;
     /**
      * 暴力破解
      */
-    BruteForceNum: number;
+    BruteForceNum?: number;
+    /**
+     * 待处置告警
+     */
+    HandleNum?: number;
+    /**
+     * 网络探测
+     */
+    NetworkNum?: number;
+    /**
+     * 失陷主机
+     */
+    OutNum?: number;
+    /**
+     * 漏洞攻击
+     */
+    VulNum?: number;
 }
 /**
  * DescribeLogs返回参数结构体
@@ -6515,7 +6113,6 @@ export interface DescribeLogsResponse {
     ReturnMsg?: string;
     /**
      * 七层协议，NTA日志有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppProtocolList?: Array<string>;
     /**
@@ -6563,22 +6160,18 @@ export interface DnsVpcSwitch {
 export interface SwitchListsData {
     /**
      * 公网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntranetIp?: string;
     /**
      * 实例名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -6587,7 +6180,6 @@ export interface SwitchListsData {
     AssetType?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Area?: string;
     /**
@@ -6600,27 +6192,22 @@ export interface SwitchListsData {
     Id?: number;
     /**
      * 公网 IP 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIpType?: number;
     /**
      * 风险端口数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PortTimes?: number;
     /**
      * 最近扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastTime?: string;
     /**
      * 扫描深度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanMode?: string;
     /**
      * 扫描状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanStatus?: number;
 }
@@ -6723,6 +6310,10 @@ export interface RemoveVpcAcRuleRequest {
      * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
      */
     RuleUuids: Array<number | bigint>;
+    /**
+     * 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则
+     */
+    IpVersion?: number;
 }
 /**
  * 标签信息
@@ -6885,7 +6476,7 @@ export interface DescribeNatAcRuleRequest {
      */
     Index?: string;
     /**
-     * 过滤条件组合
+     * 过滤条件组合，Direction 为0时表述查询出向规则，为1时表示查询入向规则
      */
     Filters?: Array<CommonFilter>;
     /**
@@ -6897,11 +6488,11 @@ export interface DescribeNatAcRuleRequest {
      */
     EndTime?: string;
     /**
-     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc
      */
     Order?: string;
     /**
-     * 排序所用到的字段
+     * 排序所用到的字段，默认为sequence
      */
     By?: string;
 }
@@ -6959,12 +6550,11 @@ export interface CreateAcRulesResponse {
     /**
      * 状态值，0:操作成功
      */
-    Status: number;
+    Status?: number;
     /**
      * 返回多余的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: string;
+    Info?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7001,12 +6591,10 @@ export interface DescribeSwitchListsResponse {
     AreaLists?: Array<string>;
     /**
      * 打开个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnNum?: number;
     /**
      * 关闭个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OffNum?: number;
     /**
@@ -7054,14 +6642,12 @@ export interface RemoveVpcAcRuleResponse {
 export interface DescribeNatFwInstancesInfoResponse {
     /**
      * 实例卡片信息数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatinsLst: Array<NatInstanceInfo>;
+    NatinsLst?: Array<NatInstanceInfo>;
     /**
      * nat 防火墙个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7117,11 +6703,11 @@ export interface ModifySecurityGroupRuleResponse {
     /**
      * 状态值，0：编辑成功，非0：编辑失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 编辑后新生成规则的Id
      */
-    NewRuleId: number;
+    NewRuleId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7308,52 +6894,42 @@ export interface ModifyEnterpriseSecurityDispatchStatusRequest {
 export interface DescNatDnatRule {
     /**
      * id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 网络协议，可选值：TCP、UDP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpProtocol?: string;
     /**
      * 弹性IP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIpAddress?: string;
     /**
      * 公网端口。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicPort?: number;
     /**
      * 内网地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIpAddress?: string;
     /**
      * 内网端口。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivatePort?: number;
     /**
      * NAT防火墙转发规则描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 是否被关联引用，如被远程运维使用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsReferenced?: number;
     /**
      * 所属防火墙实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FwInsId?: string;
     /**
      * 关联的nat网关Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NatGwId?: string;
 }
@@ -7435,9 +7011,8 @@ export interface ModifyTableStatusRequest {
 export interface ModifyTableStatusResponse {
     /**
      * 0：正常，-1：不正常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

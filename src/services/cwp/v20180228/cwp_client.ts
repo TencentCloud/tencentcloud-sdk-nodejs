@@ -1333,8 +1333,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
-   */
+     * 接口已无效
+
+本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
+     */
   async DescribeComponentStatistics(
     req: DescribeComponentStatisticsRequest,
     cb?: (error: string, rep: DescribeComponentStatisticsResponse) => void

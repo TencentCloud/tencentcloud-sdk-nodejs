@@ -39,7 +39,6 @@ import {
   GetAttackDownloadRecordsRequest,
   MajorEventsPkg,
   DescribeDomainRulesRequest,
-  DeleteDownloadRecordRequest,
   DeleteAccessExportResponse,
   DescribeModuleStatusResponse,
   AccessKeyValueInfo,
@@ -369,7 +368,6 @@ import {
   DescribeTopAttackDomainRequest,
   BatchIpAccessControlData,
   DescribeAntiInfoLeakRulesRuleItem,
-  DeleteDownloadRecordResponse,
   DescribePeakValueRequest,
   BotQPS,
   DescribeApiDetailRequest,
@@ -1227,18 +1225,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessHistogramResponse) => void
   ): Promise<DescribeAccessHistogramResponse> {
     return this.request("DescribeAccessHistogram", req, cb)
-  }
-
-  /**
-     * 废弃接口，无有效调用
-
-删除访问日志下载记录
-     */
-  async DeleteDownloadRecord(
-    req: DeleteDownloadRecordRequest,
-    cb?: (error: string, rep: DeleteDownloadRecordResponse) => void
-  ): Promise<DeleteDownloadRecordResponse> {
-    return this.request("DeleteDownloadRecord", req, cb)
   }
 
   /**

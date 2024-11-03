@@ -200,19 +200,19 @@ export interface DescribeBasicDiagnosisResourceUsageInfoResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Ret: number;
+    Ret?: number;
     /**
      * 资源类型
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 资源总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 资源未使用次数
      */
-    UnusedCount: number;
+    UnusedCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -308,11 +308,11 @@ export interface CreateFlySecMiniAppScanTaskResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Ret: number;
+    Ret?: number;
     /**
      * 任务id
      */
-    TaskID: string;
+    TaskID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -358,7 +358,7 @@ export interface CreateFlySecMiniAppProfessionalScanTaskResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Ret: number;
+    Ret?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -670,11 +670,11 @@ export interface CreateAppScanTaskResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Result: number;
+    Result?: number;
     /**
      * 任务id
      */
-    TaskID: string;
+    TaskID?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -705,17 +705,17 @@ export interface DescribeScanTaskListResponse {
     /**
      * 返回值, 0:成功, 其他值请查看“返回值”定义
      */
-    Result: number;
+    Result?: number;
     /**
      * 诊断任务数据列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<AppTaskData>;
+    Data?: Array<AppTaskData>;
     /**
      * 任务总数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -890,36 +890,36 @@ export interface AppTaskData {
     /**
      * 任务id
      */
-    TaskID: string;
+    TaskID?: string;
     /**
      * 任务类型, 0:基础版, 1:专家版, 2:本地化
      */
-    TaskType: number;
+    TaskType?: number;
     /**
      * 0:默认值(待检测/待咨询), 1.检测中, 2:待评估, 3:评估中, 4:任务完成/咨询完成, 5:任务失败, 6:咨询中;
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskErrMsg: string;
+    TaskErrMsg?: string;
     /**
      * 任务来源,0:小程序诊断, 1:预留字段(暂未使用), 2:app诊断(android);
      */
-    Source: number;
+    Source?: number;
     /**
      * 应用信息
      */
-    AppInfo: AppInfoItem;
+    AppInfo?: AppInfoItem;
     /**
      * 任务启动时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务完成时间(更新时间)
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 联系人信息
   注意：此字段可能返回 null，表示取不到有效值。

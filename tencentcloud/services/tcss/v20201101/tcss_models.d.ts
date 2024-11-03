@@ -16015,69 +16015,56 @@ export interface ModifyVirusAutoIsolateExampleSwitchRequest {
 export interface ImageVirus {
     /**
      * 路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Path: string;
+    Path?: string;
     /**
      * 风险等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLevel: string;
+    RiskLevel?: string;
     /**
      * 分类
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Category: string;
+    Category?: string;
     /**
      * 病毒名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirusName: string;
+    VirusName?: string;
     /**
      * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 解决方案
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileType: string;
+    FileType?: string;
     /**
      * 文件路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件md5
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileMd5: string;
+    FileMd5?: string;
     /**
      * 大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 首次发现时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstScanTime: string;
+    FirstScanTime?: string;
     /**
      * 最近扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestScanTime: string;
+    LatestScanTime?: string;
 }
 /**
  * ModifySecLogDeliveryKafkaSetting请求参数结构体
