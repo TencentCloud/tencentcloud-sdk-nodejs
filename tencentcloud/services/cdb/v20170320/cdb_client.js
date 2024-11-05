@@ -918,12 +918,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb);
     }
     /**
-     * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
-
-本接口(InitDBInstances)用于初始化云数据库实例，包括初始化密码、默认字符集、实例端口号等。该接口已经废弃，在发货接口CreateDBInstance、CreateDBInstanceHour可以直接使用参数Password设置密码，使用参数ParamList设置字符集，使用参数Port设置端口号。
+     * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
      */
-    async InitDBInstances(req, cb) {
-        return this.request("InitDBInstances", req, cb);
+    async ModifyDBInstanceProject(req, cb) {
+        return this.request("ModifyDBInstanceProject", req, cb);
     }
     /**
      * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过AppId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
@@ -972,12 +970,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StartBatchRollback(req, cb) {
         return this.request("StartBatchRollback", req, cb);
-    }
-    /**
-     * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
-     */
-    async ModifyDBInstanceProject(req, cb) {
-        return this.request("ModifyDBInstanceProject", req, cb);
     }
     /**
      * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。

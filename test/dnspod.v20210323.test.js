@@ -158,9 +158,9 @@ it("dnspod.v20210323.DescribeSnapshotList", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifyRecordFields", async function () {
+it("dnspod.v20210323.CreateTXTRecord", async function () {
     try {
-       const data = await client.ModifyRecordFields({})
+       const data = await client.CreateTXTRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +428,16 @@ it("dnspod.v20210323.DeleteRecord", async function () {
     }
 })
 
+it("dnspod.v20210323.ModifyRecordFields", async function () {
+    try {
+       const data = await client.ModifyRecordFields({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeRecord", async function () {
     try {
        const data = await client.DescribeRecord({})
@@ -681,6 +691,16 @@ it("dnspod.v20210323.ModifyRecordToGroup", async function () {
 it("dnspod.v20210323.DescribeDomainPreview", async function () {
     try {
        const data = await client.DescribeDomainPreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.ModifyTXTRecord", async function () {
+    try {
+       const data = await client.ModifyTXTRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2714,7 +2714,7 @@ export interface GetLayerVersionResponse {
      */
     AddTime?: string;
     /**
-     * 版本的描述
+     * 版本的描述信息
      */
     Description?: string;
     /**

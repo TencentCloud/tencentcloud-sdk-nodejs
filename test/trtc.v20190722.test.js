@@ -48,16 +48,6 @@ it("trtc.v20190722.DescribeTrtcUsage", async function () {
     }
 })
 
-it("trtc.v20190722.SummarizeTranscription", async function () {
-    try {
-       const data = await client.SummarizeTranscription({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.StopAIConversation", async function () {
     try {
        const data = await client.StopAIConversation({})

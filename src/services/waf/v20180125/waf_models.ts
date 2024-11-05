@@ -259,12 +259,10 @@ export interface DescribeAntiLeakageItem {
   CreateTime?: string
   /**
    * 匹配条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Strategies?: Array<DescribeAntiInfoLeakRulesStrategyItem>
   /**
    * 匹配的URL
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uri?: string
   /**
@@ -535,6 +533,16 @@ export interface DescribeDomainRulesRequest {
 }
 
 /**
+ * DescribeScanIp请求参数结构体
+ */
+export interface DescribeScanIpRequest {
+  /**
+   * 要查询的ip地址
+   */
+  Ip: string
+}
+
+/**
  * DeleteAccessExport返回参数结构体
  */
 export interface DeleteAccessExportResponse {
@@ -642,7 +650,6 @@ export interface AddAntiInfoLeakRulesRequest {
 export interface DeleteAttackWhiteRuleResponse {
   /**
    * 删除失败的规则序号组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailIds?: Array<number | bigint>
   /**
@@ -1531,7 +1538,6 @@ export interface Rule {
   Id?: number
   /**
    * 规则类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
@@ -1540,12 +1546,10 @@ export interface Rule {
   Level?: string
   /**
    * 规则描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 规则防护的CVE编号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CVE?: string
   /**
@@ -1558,7 +1562,6 @@ export interface Rule {
   ModifyTime?: string
   /**
    * 门神规则新增/更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddTime?: string
 }
@@ -1627,7 +1630,6 @@ export interface Strategy {
 export interface UpsertCCRuleResponse {
   /**
    * 一般为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -1739,12 +1741,10 @@ export interface ModifyApiSecEventChangeRequest {
 export interface JobDateTime {
   /**
    * 定时执行的时间参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timed?: Array<TimedJob>
   /**
    * 周期执行的时间参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cron?: Array<CronJob>
   /**
@@ -1836,7 +1836,7 @@ export interface DescribeFindDomainListRequest {
    */
   Key: string
   /**
-   * 是否接入waf
+   * 是否接入waf；传"1"返回接入域名的详情，传"0"返回未接入域名的详情，传""返回接入和未接入域名的详情
    */
   IsWafDomain: string
   /**
@@ -1923,7 +1923,6 @@ export interface CCRuleItem {
   ValidTime?: number
   /**
    * 高级参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionsArr?: string
   /**
@@ -2256,7 +2255,6 @@ export interface DescribeFindDomainListResponse {
 export interface DeleteSessionResponse {
   /**
    * 结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -2275,7 +2273,6 @@ export interface DescribeAccessIndexResponse {
   Status?: boolean
   /**
    * 索引配置信息
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rule?: AccessRuleInfo
@@ -2605,20 +2602,6 @@ export interface DescribeModuleStatusRequest {
    * 要查询状态的域名
    */
   Domain: string
-}
-
-/**
- * DescribeAntiFakeUrl请求参数结构体
- */
-export interface DescribeAntiFakeUrlRequest {
-  /**
-   * 域名
-   */
-  Domain: string
-  /**
-   * 翻页参数
-   */
-  PageInfo: PageInfo
 }
 
 /**
@@ -3006,18 +2989,15 @@ export interface AccessRuleInfo {
   /**
    * 全文索引配置
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FullText?: AccessFullTextInfo
   /**
    * 键值索引配置
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyValue?: AccessRuleKeyValueInfo
   /**
    * 元字段索引配置
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: AccessRuleTagInfo
@@ -3030,12 +3010,11 @@ export interface CCRuleLists {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Res: Array<CCRuleItems>
+  Res?: Array<CCRuleItems>
 }
 
 /**
@@ -3247,7 +3226,6 @@ export interface SearchAccessLogResponse {
   /**
    * 如果Analysis为True，则返回分析结果的列名，否则为空
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ColNames?: Array<string>
@@ -3259,7 +3237,6 @@ export interface SearchAccessLogResponse {
   /**
    * 日志分析结果；当Analysis为False时，可能返回为null
 注意：此字段可能返回 null，表示取不到有效值
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   AnalysisResults?: Array<AccessLogItems>
@@ -3513,24 +3490,6 @@ export interface TigaMainClassMode {
 }
 
 /**
- * DescribeAccessFastAnalysis接口的出参
- */
-export interface AccessFieldValueRatioInfo {
-  /**
-   * 日志条数
-   */
-  Count?: number
-  /**
-   * 对应的Value值的百分比
-   */
-  Ratio?: number
-  /**
-   * 字段对应的值
-   */
-  Value?: string
-}
-
-/**
  * DescribePorts请求参数结构体
  */
 export interface DescribePortsRequest {
@@ -3733,7 +3692,6 @@ export interface ApiDetailSampleHistory {
 export interface WafThreatenIntelligenceDetails {
   /**
    * 封禁属性标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<string>
   /**
@@ -4348,24 +4306,6 @@ export interface ExportAccessInfo {
 }
 
 /**
- * DescribeAntiFakeUrl返回参数结构体
- */
-export interface DescribeAntiFakeUrlResponse {
-  /**
-   * 总数
-   */
-  Total?: string
-  /**
-   * 信息
-   */
-  List?: Array<CacheUrlItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeIpAccessControl请求参数结构体
  */
 export interface DescribeIpAccessControlRequest {
@@ -4626,6 +4566,38 @@ export interface GoodNews {
 }
 
 /**
+ * 扫描ip信息
+ */
+export interface ScanIpInfo {
+  /**
+   * 所属业务
+
+   */
+  Bussiness?: string
+  /**
+   * 扫描对象
+   */
+  Target?: string
+  /**
+   * ip列表
+   */
+  IpList?: Array<string>
+  /**
+   * 扫描说明
+   */
+  Descibe?: string
+  /**
+   * 官方公告
+
+   */
+  Referer?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeUserSignatureRule请求参数结构体
  */
 export interface DescribeUserSignatureRuleRequest {
@@ -4820,47 +4792,47 @@ export interface DownloadAttackRecordInfo {
   /**
    * 记录ID
    */
-  Id: number
+  Id?: number
   /**
    * 下载任务名
    */
-  TaskName: string
+  TaskName?: string
   /**
    * 任务ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 域名
    */
-  Host: string
+  Host?: string
   /**
    * 当前下载任务的日志条数
    */
-  Count: number
+  Count?: number
   /**
    * 下载任务运行状态：-1-下载超时，0-下载等待，1-下载完成，2-下载失败，4-正在下载
    */
-  Status: number
+  Status?: number
   /**
    * 下载文件URL
    */
-  Url: string
+  Url?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后更新修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 下载任务需下载的日志总条数
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -5069,24 +5041,6 @@ export interface DescribeAutoDenyIPResponse {
    * 查询IP封禁状态返回结果
    */
   Data?: IpHitItemsData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAntiInfoLeakRules返回参数结构体
- */
-export interface DescribeAntiInfoLeakRulesResponse {
-  /**
-   * 记录条数
-   */
-  TotalCount?: string
-  /**
-   * 规则列表
-   */
-  RuleList?: Array<DescribeAntiInfoLeakRulesRuleItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5505,7 +5459,6 @@ export interface ModifyGenerateDealsResponse {
 export interface UpsertSessionResponse {
   /**
    * 结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -6074,7 +6027,6 @@ export interface GetAttackTotalCountRequest {
 export interface DeleteDomainWhiteRulesResponse {
   /**
    * 出参
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -6164,33 +6116,17 @@ export interface AddAreaBanAreasRequest {
 }
 
 /**
- * 防篡改url元素
+ * DescribeCCRuleList返回参数结构体
  */
-export interface CacheUrlItem {
+export interface DescribeCCRuleListResponse {
   /**
-   * Id
+   * 查询到的CC规则的列表
    */
-  Id?: string
+  Data?: CCRuleLists
   /**
-   * 名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 域名
-   */
-  Domain?: string
-  /**
-   * uri
-   */
-  Uri?: string
-  /**
-   * 协议
-   */
-  Protocol?: string
-  /**
-   * 状态
-   */
-  Status?: string
+  RequestId?: string
 }
 
 /**
@@ -6277,17 +6213,14 @@ export interface ModifyDomainsCLSStatusResponse {
 export interface ModifyBotStatusResponse {
   /**
    * 正常情况为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
    * 未购买BOT的域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnSupportedList?: Array<string>
   /**
    * 已购买但操作失败的域名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailDomainList?: Array<string>
   /**
@@ -6791,37 +6724,30 @@ export interface AccessLogInfo {
   Time?: number
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
    * 日志主题名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
    * 日志来源IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
   /**
    * 日志文件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
   /**
    * 日志上报请求包的ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PkgId?: string
   /**
    * 请求包内日志的ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PkgLogId?: string
   /**
    * 日志内容的Json序列化字符串
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogJson?: string
@@ -6955,7 +6881,6 @@ export interface ModifyWafAutoDenyRulesRequest {
 export interface DescribeAccessFastAnalysisResponse {
   /**
    * 注意：此字段可能返回 null，表示取不到有效值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FieldValueRatioInfos?: Array<AccessFieldValueRatioInfo>
   /**
@@ -7159,21 +7084,6 @@ export interface DescribeCCRuleRequest {
 }
 
 /**
- * DescribeCCRuleList返回参数结构体
- */
-export interface DescribeCCRuleListResponse {
-  /**
-   * 查询到的CC规则的列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: CCRuleLists
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * GetAttackDownloadRecords返回参数结构体
  */
 export interface GetAttackDownloadRecordsResponse {
@@ -7301,7 +7211,6 @@ export interface DescribeAccessHistogramResponse {
   TotalCount?: number
   /**
    * 注意：此字段可能返回 null，表示取不到有效值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HistogramInfos?: Array<AccessHistogramItem>
   /**
@@ -7448,6 +7357,32 @@ export interface DeleteCustomRuleResponse {
 }
 
 /**
+ * DescribeTopAttackDomain请求参数结构体
+ */
+export interface DescribeTopAttackDomainRequest {
+  /**
+   * 查询起始时间
+   */
+  FromTime: string
+  /**
+   * 查询结束时间
+   */
+  ToTime: string
+  /**
+   * TOP N,可从0-10选择，默认是10
+   */
+  Count?: number
+  /**
+   * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
+   */
+  Edition?: string
+  /**
+   * WAF实例ID，不传则不过滤
+   */
+  InstanceID?: string
+}
+
+/**
  * DescribeHistogram请求参数结构体
  */
 export interface DescribeHistogramRequest {
@@ -7491,7 +7426,6 @@ export interface DescribeHistogramRequest {
 export interface DeleteCCRuleResponse {
   /**
    * 一般为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -7526,7 +7460,6 @@ export interface DescribeAreaBanAreasRsp {
   JobType?: string
   /**
    * 定时任务详细配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobDateTime?: JobDateTime
   /**
@@ -7615,20 +7548,6 @@ export interface UpsertCCRuleRequest {
    * url长度
    */
   Length?: number
-}
-
-/**
- * 公共翻页参数
- */
-export interface PageInfo {
-  /**
-   * 页码
-   */
-  PageNumber: string
-  /**
-   * 页条目数量
-   */
-  PageSize: string
 }
 
 /**
@@ -7786,7 +7705,6 @@ export interface DescribeWafAutoDenyRulesResponse {
   /**
    * 数据来源Source字段 custom-自定义(默认)、batch-domain-批量域名
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
   /**
@@ -7943,7 +7861,6 @@ export interface DescribeSpartaProtectionInfoResponse {
   IsKeepAlive?: string
   /**
    * 0：BGP 1：Anycast
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Anycast?: string
   /**
@@ -8346,7 +8263,6 @@ export interface CCRuleItems {
   RuleId?: number
   /**
    * 事件id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventId?: string
   /**
@@ -8355,7 +8271,6 @@ export interface CCRuleItems {
   SessionApplied?: Array<number | bigint>
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
 }
@@ -8404,6 +8319,60 @@ export interface DescribeAntiInfoLeakageRulesResponse {
  * AddAreaBanAreas返回参数结构体
  */
 export interface AddAreaBanAreasResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeScanIp返回参数结构体
+ */
+export interface DescribeScanIpResponse {
+  /**
+   * ip列表,当入参Ip为all时，返回该值
+   */
+  IpList?: Array<ScanIpInfo>
+  /**
+   * 所属业务
+   */
+  Bussiness?: string
+  /**
+   * 业务特征
+   */
+  Characteristic?: string
+  /**
+   * 扫描说明
+   */
+  Descibe?: string
+  /**
+   * 官方公告
+   */
+  Referer?: string
+  /**
+   * 扫描示例
+   */
+  Demo?: string
+  /**
+   * 扫描对象
+   */
+  Target?: string
+  /**
+   * 扫描目的
+   */
+  Purpose?: string
+  /**
+   * 产品文案
+   */
+  Announcement?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * ipowner
+   */
+  IpOwner?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9246,24 +9215,6 @@ export interface ModifyHostStatusResponse {
 }
 
 /**
- * DescribeAntiInfoLeakRules请求参数结构体
- */
-export interface DescribeAntiInfoLeakRulesRequest {
-  /**
-   * 域名
-   */
-  Domain: string
-  /**
-   * 动作类型
-   */
-  ActionType?: number
-  /**
-   * 翻页
-   */
-  PageInfo?: PageInfo
-}
-
-/**
  * clb-waf QPS套餐 New
  */
 export interface QPSPackageNew {
@@ -9406,29 +9357,21 @@ export interface ModifyCustomWhiteRuleStatusResponse {
 }
 
 /**
- * DescribeTopAttackDomain请求参数结构体
+ * DescribeAccessFastAnalysis接口的出参
  */
-export interface DescribeTopAttackDomainRequest {
+export interface AccessFieldValueRatioInfo {
   /**
-   * 查询起始时间
-   */
-  FromTime: string
-  /**
-   * 查询结束时间
-   */
-  ToTime: string
-  /**
-   * TOP N,可从0-10选择，默认是10
+   * 日志条数
    */
   Count?: number
   /**
-   * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
+   * 对应的Value值的百分比
    */
-  Edition?: string
+  Ratio?: number
   /**
-   * WAF实例ID，不传则不过滤
+   * 字段对应的值
    */
-  InstanceID?: string
+  Value?: string
 }
 
 /**
@@ -9443,36 +9386,6 @@ export interface BatchIpAccessControlData {
    * 黑白名单条目
    */
   Res?: Array<BatchIpAccessControlItem>
-}
-
-/**
- * DescribeAntiInfoLeakRules返回的规则列表元素
- */
-export interface DescribeAntiInfoLeakRulesRuleItem {
-  /**
-   * 规则ID
-   */
-  RuleId?: string
-  /**
-   * 规则名称
-   */
-  Name?: string
-  /**
-   * 规则状态
-   */
-  Status?: string
-  /**
-   * 规则动作类型
-   */
-  ActionType?: string
-  /**
-   * 规则创建时间
-   */
-  CreateTime?: string
-  /**
-   * 详细的规则
-   */
-  Strategies?: Array<DescribeAntiInfoLeakRulesStrategyItem>
 }
 
 /**
@@ -9594,7 +9507,6 @@ export interface CdcRegion {
   Region: string
   /**
    * 该地域对应的集群信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Clusters: Array<CdcCluster>
 }
@@ -9797,7 +9709,6 @@ export interface DescribeAttackTypeResponse {
 export interface DescribeCCRuleResponse {
   /**
    * 结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CCRuleData
   /**
@@ -9937,35 +9848,35 @@ export interface FindAllDomainDetail {
   /**
    * 用户id
    */
-  Appid: number
+  Appid?: number
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名ip
    */
-  Ips: Array<string>
+  Ips?: Array<string>
   /**
    * 发现时间
    */
-  FindTime: string
+  FindTime?: string
   /**
    * 实例id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 域名id
    */
-  DomainId: string
+  DomainId?: string
   /**
    * waf类型
    */
-  Edition: string
+  Edition?: string
   /**
    * 是否接入waf
    */
-  IsWafDomain: number
+  IsWafDomain?: number
 }
 
 /**
@@ -10096,7 +10007,6 @@ export interface DescribeDomainWhiteRulesResponse {
 export interface DescribeSessionResponse {
   /**
    * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: SessionData
   /**
@@ -10353,7 +10263,6 @@ export interface DescribeAttackWhiteRuleResponse {
   Total?: number
   /**
    * 规则白名单列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<UserWhiteRule>
   /**

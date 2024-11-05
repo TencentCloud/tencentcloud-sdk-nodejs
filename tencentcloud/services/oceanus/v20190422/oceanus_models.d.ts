@@ -3033,6 +3033,22 @@ export interface JobV1 {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
+    /**
+     * 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScalingType?: number;
+    /**
+     * 使用CPU数目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningCpu?: number;
+    /**
+     * 使用内存数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningMem?: number;
 }
 /**
  * 作业配置详情
@@ -3455,6 +3471,11 @@ export interface ClusterSession {
      */
     Properties?: Array<Property>;
     /**
+     * 引用资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceRefs?: Array<SessionClusterRefItem>;
+    /**
      * JobManager的规格
      */
     JobManagerCuSpec?: number;
@@ -3474,6 +3495,22 @@ export interface ClusterSession {
      * 更新时间
      */
     UpdateTime?: string;
+    /**
+     * JobManagerCpu
+     */
+    JobManagerCpu?: number;
+    /**
+     * JobManagerMem
+     */
+    JobManagerMem?: number;
+    /**
+     * TaskManagerCpu
+     */
+    TaskManagerCpu?: number;
+    /**
+     * TaskManagerMem
+     */
+    TaskManagerMem?: number;
 }
 /**
  * CreateResourceConfig请求参数结构体
@@ -3763,6 +3800,31 @@ export interface FetchSqlGatewayStatementResultRequest {
      * 下一条结果的获取url，首次获取执行结果时可以为空，当获取下一批查询结果时需要传递
      */
     ResultUri?: string;
+}
+/**
+ * session集群引用资源信息
+ */
+export interface SessionClusterRefItem {
+    /**
+     * 空间唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkspaceId: string;
+    /**
+     * 资源唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId: string;
+    /**
+     * 版本号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version: number;
+    /**
+     * 引用类型，0:用户资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type: number;
 }
 /**
  * DescribeJobEvents返回参数结构体

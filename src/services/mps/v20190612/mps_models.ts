@@ -4591,7 +4591,10 @@ export interface EditMediaOutputConfig {
    */
   Container?: string
   /**
-   * 剪辑模式，可选值 normal、fast。默认是精确剪辑 normal
+   * 剪辑模式，可选值：
+normal（默认）：精准编辑
+fast：快速编辑，处理速度更快但精准度一定程度降低
+注意：fast只支持单文件，normal默认输出转码格式是h264
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
@@ -9557,6 +9560,16 @@ export interface SegmentRecognitionItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Summary?: string
+  /**
+   * 直播切片对应直播起始时间点，采用 ISO 日期格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: string
+  /**
+   * 直播切片对应直播结束时间点，采用 ISO 日期格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**

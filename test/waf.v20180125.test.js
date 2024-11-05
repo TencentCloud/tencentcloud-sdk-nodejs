@@ -98,16 +98,6 @@ it("waf.v20180125.DeleteIpAccessControl", async function () {
     }
 })
 
-it("waf.v20180125.DescribeAntiInfoLeakRules", async function () {
-    try {
-       const data = await client.DescribeAntiInfoLeakRules({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.DescribeAreaBanAreas", async function () {
     try {
        const data = await client.DescribeAreaBanAreas({})
@@ -201,6 +191,16 @@ it("waf.v20180125.GetAttackDownloadRecords", async function () {
 it("waf.v20180125.DescribeApiDetail", async function () {
     try {
        const data = await client.DescribeApiDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeScanIp", async function () {
+    try {
+       const data = await client.DescribeScanIp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -861,16 +861,6 @@ it("waf.v20180125.AddAntiFakeUrl", async function () {
 it("waf.v20180125.DescribeFlowTrend", async function () {
     try {
        const data = await client.DescribeFlowTrend({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.DescribeAntiFakeUrl", async function () {
-    try {
-       const data = await client.DescribeAntiFakeUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

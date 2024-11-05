@@ -19,9 +19,10 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateVerifyReportRequest,
-  CreateVerifyReportResponse,
+  CertificateIdentityUser,
   DescribeVerifyReportRequest,
   UploadFileRequest,
+  CreateVerifyReportResponse,
   UploadFileResponse,
   DescribeVerifyReportResponse,
   FileInfo,

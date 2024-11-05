@@ -56,14 +56,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrtcUsage", req, cb);
     }
     /**
-     * 接口不再支持
-
-对转录的文本进行总结。
-     */
-    async SummarizeTranscription(req, cb) {
-        return this.request("SummarizeTranscription", req, cb);
-    }
-    /**
      * 停止AI对话任务
      */
     async StopAIConversation(req, cb) {

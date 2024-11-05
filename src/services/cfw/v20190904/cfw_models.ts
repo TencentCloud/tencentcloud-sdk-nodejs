@@ -5656,15 +5656,15 @@ export interface AddAcRuleResponse {
   /**
    * 创建成功后返回新策略的uuid
    */
-  RuleUuid: number
+  RuleUuid?: number
   /**
    * 0代表成功，-1代表失败
    */
-  ReturnCode: number
+  ReturnCode?: number
   /**
    * success代表成功，failed代表失败
    */
-  ReturnMsg: string
+  ReturnMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

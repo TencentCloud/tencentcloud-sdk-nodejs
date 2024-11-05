@@ -498,7 +498,7 @@ export interface DestroyEnvironmentRequest {
      */
     EnvironmentId: string;
     /**
-     * 来源渠道 示例值：0
+     * 来源渠道
      */
     SourceChannel?: number;
 }

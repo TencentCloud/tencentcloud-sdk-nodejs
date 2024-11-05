@@ -2549,6 +2549,11 @@ export interface ServerlessIndexOptionsField {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SinkCycleAge?: string;
+    /**
+     * 标准存储时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StandardStorageAge?: string;
 }
 /**
  * UpdateDictionaries请求参数结构体

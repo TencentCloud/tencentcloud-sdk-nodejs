@@ -5,21 +5,21 @@ export interface SaleParam {
     /**
      * 售卖参数标识
      */
-    ParamKey?: string;
+    ParamKey: string;
     /**
      * 售卖参数值
      */
-    ParamValue?: string;
+    ParamValue: string;
     /**
      * 售卖参数的展示名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ParamKeyName?: string;
+    ParamKeyName: string;
     /**
      * 售卖参数值的展示名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ParamValueName?: string;
+    ParamValueName: string;
 }
 /**
  * VerifyLicense请求参数结构体

@@ -329,7 +329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * cvm列表
+   * 获取cvm列表
    */
   async DescribeCVMAssets(
     req: DescribeCVMAssetsRequest,

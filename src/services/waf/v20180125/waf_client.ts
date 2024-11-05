@@ -39,6 +39,7 @@ import {
   GetAttackDownloadRecordsRequest,
   MajorEventsPkg,
   DescribeDomainRulesRequest,
+  DescribeScanIpRequest,
   DeleteAccessExportResponse,
   DescribeModuleStatusResponse,
   AccessKeyValueInfo,
@@ -118,7 +119,6 @@ import {
   SwitchElasticModeRequest,
   HostDel,
   DescribeModuleStatusRequest,
-  DescribeAntiFakeUrlRequest,
   DeleteAttackWhiteRuleRequest,
   DescribeHostsResponse,
   DescribeAccessIndexRequest,
@@ -152,7 +152,6 @@ import {
   ApiPkg,
   DescribeAreaBanSupportAreasResponse,
   TigaMainClassMode,
-  AccessFieldValueRatioInfo,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
   DescribeTlsVersionRequest,
@@ -178,7 +177,6 @@ import {
   FraudPkg,
   DescribeDomainDetailsClbResponse,
   ExportAccessInfo,
-  DescribeAntiFakeUrlResponse,
   DescribeIpAccessControlRequest,
   ModifyWafThreatenIntelligenceRequest,
   DescribeApiListVersionTwoRequest,
@@ -186,6 +184,7 @@ import {
   ReqUserRule,
   DescribeIpHitItemsRequest,
   GoodNews,
+  ScanIpInfo,
   DescribeUserSignatureRuleRequest,
   DescribeUserClbWafRegionsRequest,
   AddAntiInfoLeakRulesResponse,
@@ -203,7 +202,6 @@ import {
   ModifyUserLevelResponse,
   CreateAccessExportRequest,
   DescribeAutoDenyIPResponse,
-  DescribeAntiInfoLeakRulesResponse,
   DescribeIpHitItemsResponse,
   ModifyHostResponse,
   DescribeCertificateVerifyResultRequest,
@@ -253,7 +251,7 @@ import {
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
   AddAreaBanAreasRequest,
-  CacheUrlItem,
+  DescribeCCRuleListResponse,
   DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
   TimedJob,
@@ -294,7 +292,6 @@ import {
   ModifyWebshellStatusResponse,
   GenerateDealsAndPayNewResponse,
   DescribeCCRuleRequest,
-  DescribeCCRuleListResponse,
   GetAttackDownloadRecordsResponse,
   DescribeApiDetailResponse,
   VipInfo,
@@ -306,11 +303,11 @@ import {
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
+  DescribeTopAttackDomainRequest,
   DescribeHistogramRequest,
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
-  PageInfo,
   ModifyProtectionStatusResponse,
   DescribeDomainsRequest,
   ModifyDomainPostActionRequest,
@@ -339,6 +336,7 @@ import {
   ModifyDomainIpv6StatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
+  DescribeScanIpResponse,
   GetAttackHistogramRequest,
   RuleList,
   DescribeAttackTypeRequest,
@@ -356,7 +354,6 @@ import {
   ModifyModuleStatusResponse,
   AttackLogInfo,
   ModifyHostStatusResponse,
-  DescribeAntiInfoLeakRulesRequest,
   QPSPackageNew,
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
@@ -365,9 +362,8 @@ import {
   ModifySpartaProtectionModeResponse,
   ModifyApiSecEventChangeResponse,
   ModifyCustomWhiteRuleStatusResponse,
-  DescribeTopAttackDomainRequest,
+  AccessFieldValueRatioInfo,
   BatchIpAccessControlData,
-  DescribeAntiInfoLeakRulesRuleItem,
   DescribePeakValueRequest,
   BotQPS,
   DescribeApiDetailRequest,
@@ -505,18 +501,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 老接口已经不再使用。
-
-获取信息防泄漏规则列表
-     */
-  async DescribeAntiInfoLeakRules(
-    req: DescribeAntiInfoLeakRulesRequest,
-    cb?: (error: string, rep: DescribeAntiInfoLeakRulesResponse) => void
-  ): Promise<DescribeAntiInfoLeakRulesResponse> {
-    return this.request("DescribeAntiInfoLeakRules", req, cb)
-  }
-
-  /**
    * 获取地域封禁配置包括地域封禁开关，设置封禁的地区信息
    */
   async DescribeAreaBanAreas(
@@ -614,6 +598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApiDetailResponse) => void
   ): Promise<DescribeApiDetailResponse> {
     return this.request("DescribeApiDetail", req, cb)
+  }
+
+  /**
+   * 查询扫描ip
+   */
+  async DescribeScanIp(
+    req: DescribeScanIpRequest,
+    cb?: (error: string, rep: DescribeScanIpResponse) => void
+  ): Promise<DescribeScanIpResponse> {
+    return this.request("DescribeScanIp", req, cb)
   }
 
   /**
@@ -1275,18 +1269,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowTrendResponse) => void
   ): Promise<DescribeFlowTrendResponse> {
     return this.request("DescribeFlowTrend", req, cb)
-  }
-
-  /**
-     * 废弃接口
-
-获取防篡改url
-     */
-  async DescribeAntiFakeUrl(
-    req: DescribeAntiFakeUrlRequest,
-    cb?: (error: string, rep: DescribeAntiFakeUrlResponse) => void
-  ): Promise<DescribeAntiFakeUrlResponse> {
-    return this.request("DescribeAntiFakeUrl", req, cb)
   }
 
   /**

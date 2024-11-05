@@ -926,62 +926,50 @@ export interface AndroidPlan {
 export interface IOSResult {
     /**
      * 加固任务结果Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultId?: string;
     /**
      * 用户uid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpUin?: number;
     /**
      * 加固类型，这里为ios
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptType?: string;
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * 加固状态：0等待，1成功，2任务中，3失败，4重试中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptState?: number;
     /**
      * 业务错误码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptErrno?: number;
     /**
      * 业务错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptErrDesc?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatTime?: string;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 消耗时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CostTime?: number;
     /**
      * 加固（混淆）包结果url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptPkgUrl?: string;
 }
@@ -1306,7 +1294,6 @@ export interface ResultListItem {
   1001表示APP md5 different between real md5, please confirm it.
   
   1002表示App md5 uncollect, please offer downloadlink.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrNo?: string;
 }
@@ -1526,22 +1513,18 @@ export interface DescribeEncryptPlanResponse {
     ResourceId?: string;
     /**
      * 上次加固策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AndroidPlan?: AndroidPlan;
     /**
      * 上次小程序加固策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppletPlan?: AppletPlan;
     /**
      * 上次ios源码混淆加固配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IOSPlan?: IOSPlan;
     /**
      * 上次sdk加固配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SDKPlan?: SDKPlan;
     /**
@@ -2026,7 +2009,6 @@ export interface CreateEncryptInstanceRequest {
 export interface PlanInfo {
     /**
      * Dex分离，0关闭，1开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SetFile?: string;
     /**
@@ -2083,12 +2065,10 @@ export interface PlanInfo {
     AntiSSL?: number;
     /**
      * Dex签名校验，0关闭，1开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSign?: string;
     /**
      * root检测，0关闭，1开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AntiRoot?: string;
     /**
@@ -2234,22 +2214,18 @@ export interface EncryptResults {
     OrderId?: string;
     /**
      * 对应PlatformType平台类型值   1-android加固结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AndroidResult?: AndroidResult;
     /**
      * 对应PlatformType平台类型值   2-ios源码混淆加固结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IOSResult?: IOSResult;
     /**
      * 对应PlatformType平台类型值   3-sdk加固结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SDKResult?: SDKResult;
     /**
      * 对应PlatformType平台类型值   4-applet小程序加固结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppletResult?: AppletResult;
 }

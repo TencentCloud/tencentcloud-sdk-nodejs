@@ -91,7 +91,7 @@ export interface DeleteClusterResponse {
     /**
      * 集群的ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3566,17 +3566,17 @@ export interface DescribeMsgTraceResponse {
      * 生产信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerLog: ProducerLog;
+    ProducerLog?: ProducerLog;
     /**
      * 服务方信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerLog: ServerLog;
+    ServerLog?: ServerLog;
     /**
      * 消费信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerLogs: ConsumerLogs;
+    ConsumerLogs?: ConsumerLogs;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4468,7 +4468,7 @@ export interface ConsumerLog {
      */
     ConsumerGroup: string;
     /**
-     * 消费组名称。
+     * 消费者名称。
      */
     ConsumerName: string;
     /**
@@ -5471,11 +5471,11 @@ export interface DescribeTopicMsgsResponse {
     /**
      * 总记录数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 消息日志列表。
      */
-    TopicMsgLogSets: Array<MsgLog>;
+    TopicMsgLogSets?: Array<MsgLog>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6019,101 +6019,101 @@ export interface Subscription {
     /**
      * 主题名称。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 环境（命名空间）名称。
      */
-    EnvironmentId: string;
+    EnvironmentId?: string;
     /**
      * 消费者开始连接的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectedSince: string;
+    ConnectedSince?: string;
     /**
      * 消费者地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerAddr: string;
+    ConsumerAddr?: string;
     /**
      * 消费者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerCount: string;
+    ConsumerCount?: string;
     /**
      * 消费者名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerName: string;
+    ConsumerName?: string;
     /**
      * 堆积的消息数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgBacklog: string;
+    MsgBacklog?: string;
     /**
      * 于TTL，此订阅下没有被发送而是被丢弃的比例。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateExpired: string;
+    MsgRateExpired?: string;
     /**
      * 消费者每秒分发消息的数量之和。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateOut: string;
+    MsgRateOut?: string;
     /**
      * 消费者每秒消息的byte。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputOut: string;
+    MsgThroughputOut?: string;
     /**
      * 订阅名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubscriptionName: string;
+    SubscriptionName?: string;
     /**
      * 消费者集合。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerSets: Array<Consumer>;
+    ConsumerSets?: Array<Consumer>;
     /**
      * 是否在线。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsOnline: boolean;
+    IsOnline?: boolean;
     /**
      * 消费进度集合。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumersScheduleSets: Array<ConsumersSchedule>;
+    ConsumersScheduleSets?: Array<ConsumersSchedule>;
     /**
      * 备注。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近修改时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知，
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubType: string;
+    SubType?: string;
     /**
      * 是否由于未 ack 数到达上限而被 block
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BlockedSubscriptionOnUnackedMsgs: boolean;
+    BlockedSubscriptionOnUnackedMsgs?: boolean;
     /**
      * 未 ack 消息数上限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxUnackedMsgNum: number;
+    MaxUnackedMsgNum?: number;
 }
 /**
  * Rocketmq消息消费track信息
@@ -7158,30 +7158,30 @@ export interface ConsumersSchedule {
      * 当前分区id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partitions: number;
+    Partitions?: number;
     /**
      * 消息数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NumberOfEntries: number;
+    NumberOfEntries?: number;
     /**
      * 消息积压数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgBacklog: number;
+    MsgBacklog?: number;
     /**
      * 消费者每秒分发消息的数量之和。
      */
-    MsgRateOut: string;
+    MsgRateOut?: string;
     /**
      * 消费者每秒消息的byte。
      */
-    MsgThroughputOut: string;
+    MsgThroughputOut?: string;
     /**
      * 超时丢弃比例。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateExpired: string;
+    MsgRateExpired?: string;
 }
 /**
  * DescribeRocketMQClusters返回参数结构体
@@ -9420,34 +9420,34 @@ export interface ModifyTopicRequest {
     MsgTTL?: number;
 }
 /**
- *  消费者
+ * 消费者
  */
 export interface Consumer {
     /**
      * 消费者开始连接的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectedSince: string;
+    ConnectedSince?: string;
     /**
      * 消费者地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerAddr: string;
+    ConsumerAddr?: string;
     /**
      * 消费者名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerName: string;
+    ConsumerName?: string;
     /**
      * 消费者版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientVersion: string;
+    ClientVersion?: string;
     /**
      * 消费者连接的主题分区号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partition: number;
+    Partition?: number;
 }
 /**
  * CreateCmqSubscribe请求参数结构体

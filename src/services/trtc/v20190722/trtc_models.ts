@@ -3552,11 +3552,6 @@ h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数�
 }
 
 /**
- * SummarizeTranscription请求参数结构体
- */
-export type SummarizeTranscriptionRequest = null
-
-/**
  * UpdatePublishCdnStream请求参数结构体
  */
 export interface UpdatePublishCdnStreamRequest {
@@ -3693,16 +3688,6 @@ export interface UpdateStreamIngestRequest {
  * StopWebRecord返回参数结构体
  */
 export interface StopWebRecordResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SummarizeTranscription返回参数结构体
- */
-export interface SummarizeTranscriptionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

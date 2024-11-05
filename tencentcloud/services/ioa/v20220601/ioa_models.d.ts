@@ -29,7 +29,6 @@ export interface RuleItem {
 export interface DescribeLocalAccountAccountGroupsData {
     /**
      * 组Id(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountGroupId?: number;
 }
@@ -39,7 +38,6 @@ export interface DescribeLocalAccountAccountGroupsData {
 export interface CreateDeviceVirtualGroupResponse {
     /**
      * 响应返回的data
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: CreateDeviceVirtualGroupRspData;
     /**
@@ -83,7 +81,6 @@ export interface Sort {
 export interface DescribeRootAccountGroupResponse {
     /**
      * 账号根分组响应详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: GetAccountGroupData;
     /**
@@ -97,7 +94,6 @@ export interface DescribeRootAccountGroupResponse {
 export interface DescribeDevicesResponse {
     /**
      * 分页的data数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DescribeDevicesPageRsp;
     /**
@@ -111,87 +107,70 @@ export interface DescribeDevicesResponse {
 export interface GetAccountGroupData {
     /**
      * 分组名称全路径，点分格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamePath?: string;
     /**
      * 分组ID全路径，数组格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdPathArr?: Array<number | bigint>;
     /**
      * 分组扩展信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraInfo?: string;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Utime?: string;
     /**
      * 当前分组的父分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParentId?: number;
     /**
      * 源账号组ID，该字段仅适用于第三方同步的组织架构，通过OrgId-Id构成源组织架构分组ID-现组织架构分组ID映射关系
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgId?: string;
     /**
      * 分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 分组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 分组导入源(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: number;
     /**
      * 分组ID全路径，点分格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdPath?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Itime?: string;
     /**
      * 父源账号组ID，该字段仅适用于第三方同步的组织架构
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParentOrgId?: string;
     /**
      * 导入信息,json格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Import?: string;
     /**
      * 是否开启导入架构
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImportEnable?: boolean;
     /**
      * 导入类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImportType?: string;
     /**
      * miniIAMId，MiniIAM源才有
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniIamId?: string;
 }
@@ -201,7 +180,6 @@ export interface GetAccountGroupData {
 export interface DescribeLocalAccountsResponse {
     /**
      * 获取账号列表响应的分页对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DescribeLocalAccountsPage;
     /**
@@ -215,102 +193,82 @@ export interface DescribeLocalAccountsResponse {
 export interface DescribeAccountGroupsData {
     /**
      * 账号分组名全路径，点分格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamePath?: string;
     /**
      * 账号分组ID全路径，数组格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdPathArr?: Array<number | bigint>;
     /**
      * 扩展信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraInfo?: string;
     /**
      * 最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Utime?: string;
     /**
      * 父分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParentId?: number;
     /**
      * 源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgId?: string;
     /**
      * 分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 分组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 同步数据源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: number;
     /**
      * 账号分组ID全路径，点分格式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdPath?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Itime?: string;
     /**
      * 父源账号组织ID。使用第三方导入用户源时，记录该分组在源组织架构下的分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParentOrgId?: string;
     /**
      * 导入类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImportType?: string;
     /**
      * miniIAM id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniIamId?: string;
     /**
      * 该分组下含子组的所有用户总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserTotal?: number;
     /**
      * 是否叶子节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsLeaf?: boolean;
     /**
      * 是否该账户的直接权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: boolean;
     /**
      * 最新一次同步任务的结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestSyncResult?: string;
     /**
      * 最新一次同步任务的结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestSyncTime?: string;
 }
@@ -339,12 +297,10 @@ export declare type DescribeRootAccountGroupRequest = null;
 export interface DescribeAccountGroupsPageResp {
     /**
      * 账户分响应对象集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DescribeAccountGroupsData>;
     /**
      * 分页公共对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Page?: Paging;
 }
@@ -382,7 +338,6 @@ export interface DescribeAccountGroupsRequest {
 export interface DescribeAccountGroupsResponse {
     /**
      * 账号分组详情响应数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: DescribeAccountGroupsPageResp;
     /**
@@ -396,12 +351,10 @@ export interface DescribeAccountGroupsResponse {
 export interface DescribeDevicesPageRsp {
     /**
      * 数据分页信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Paging?: Paging;
     /**
      * 业务响应数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DeviceDetail>;
 }
@@ -420,7 +373,7 @@ export interface FilterGroup {
  */
 export interface CreateDeviceVirtualGroupRequest {
     /**
-     * 终端自定义分组名
+     * 必填，终端自定义分组名
      */
     DeviceVirtualGroupName?: string;
     /**
@@ -428,19 +381,19 @@ export interface CreateDeviceVirtualGroupRequest {
      */
     Description?: string;
     /**
-     * 系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios   默认值0）(只支持32位)
+     * 必填，系统类型（0: win，1：linux，2: mac，3: win_srv，4：android，5：ios ）(只支持32位)
      */
     OsType?: number;
     /**
-     * 时间设置类型（1:自动小时、2:自动每天、3:自定义、0:手动分组）(只支持32位)
+     * 必填，分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组）(只支持32位)
      */
     TimeType?: number;
     /**
-     * 自动划分时间（单位min）(只支持32位)
+     * 选填，TimeType=3时的自动划分时间，其他情况为0（单位min）(只支持32位)
      */
     AutoMinute?: number;
     /**
-     * 自动划分规则数据
+     * 选填，手动分组不填，自动划分分组的划分规则数据
      */
     AutoRules?: ComplexRule;
 }
@@ -558,23 +511,19 @@ export interface DescribeDevicesRequest {
  */
 export interface Paging {
     /**
-     * 每页条数(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 每页条数
      */
     PageSize?: number;
     /**
-     * 页码(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 页码
      */
     PageNum?: number;
     /**
-     * 总页数(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 总页数
      */
     PageCount?: number;
     /**
      * 记录总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
 }
@@ -584,217 +533,174 @@ export interface Paging {
 export interface DeviceDetail {
     /**
      * 设备ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 设备唯一标识码，在ioa中每个设备有唯一标识码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mid?: string;
     /**
      * 终端名（设备名）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 设备所在分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: number;
     /**
      * OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OsType?: number;
     /**
      * 设备IP地址（出口IP）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 在线状态，2：在线、0或者1:离线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnlineStatus?: number;
     /**
      * 客户端版本号-大整数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
     /**
      * 客户端版本号-点分字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StrVersion?: string;
     /**
      * 首次在线时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Itime?: string;
     /**
      * 最后一次在线时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnActiveTime?: string;
     /**
      * 设备是否加锁 ，1：锁定 0或者2：未锁定。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Locked?: number;
     /**
      * 设备本地IP列表, 包括IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalIpList?: string;
     /**
      * 宿主机id（需要宿主机也安装iOA才能显示）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostId?: number;
     /**
      * 设备所属分组名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 设备所属分组路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupNamePath?: string;
     /**
      * 未修复高危漏洞数(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CriticalVulListCount?: number;
     /**
      * 设备名，和Name相同
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComputerName?: string;
     /**
      * 登录域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainName?: string;
     /**
      * MAC地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MacAddr?: string;
     /**
      * 漏洞数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulCount?: number;
     /**
      * 病毒风险数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskCount?: number;
     /**
      * 病毒库版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VirusVer?: string;
     /**
      * 漏洞库版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulVersion?: string;
     /**
      * 系统修复引擎版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SysRepVersion?: string;
     /**
      * 高危补丁列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulCriticalList?: Array<string>;
     /**
      * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: string;
     /**
      * 终端用户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 防火墙状态，不等于0表示开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FirewallStatus?: number;
     /**
      * SN序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialNum?: string;
     /**
      * 设备管控策略版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceStrategyVer?: string;
     /**
      * NGN策略版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NGNStrategyVer?: string;
     /**
      * 最近登录账户的账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IOAUserName?: string;
     /**
      * 设备管控新策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceNewStrategyVer?: string;
     /**
      * NGN策略新版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NGNNewStrategyVer?: string;
     /**
      * 宿主机名称（需要宿主机也安装iOA才能显示）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostName?: string;
     /**
      * 主板序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BaseBoardSn?: string;
     /**
      * 绑定账户名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountUsers?: string;
     /**
      * 身份策略版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityStrategyVer?: string;
     /**
      * 身份策略新版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityNewStrategyVer?: string;
     /**
      * 最近登录账号部门
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountGroupName?: string;
     /**
      * 最近登录账户的姓名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountName?: string;
     /**
      * 账号组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountGroupId?: number;
 }
@@ -804,102 +710,82 @@ export interface DeviceDetail {
 export interface DescribeLocalAccountsData {
     /**
      * uid，数据库中唯一
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 账号，登录账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
      * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 账号id，同Id字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountId?: number;
     /**
      * 账号所在的分组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: number;
     /**
      * 账号所在的分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 账号所在的分组名称路径，用英文.分割
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NamePath?: string;
     /**
      * 账号来源,0表示本地账号(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: number;
     /**
      * 账号状态,0禁用，1启用(只支持32位)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 账号的创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Itime?: string;
     /**
      * 账号的最后更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Utime?: string;
     /**
      * 账号的扩展信息，包含邮箱、手机号、身份证、职位等信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraInfo?: string;
     /**
      * 用户风险等级，枚举：none, low, middle, high
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevel?: string;
     /**
      * 所属组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountGroups?: Array<DescribeLocalAccountAccountGroupsData>;
     /**
      * 绑定手机端设备数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MobileBindNum?: number;
     /**
      * 绑定Pc端设备数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PcBindNum?: number;
     /**
      * 账号在线状态 1：在线 2：离线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnlineStatus?: number;
     /**
      * 账号活跃状态 1：活跃 2：非活跃
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActiveStatus?: number;
     /**
      * 账号登录时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoginTime?: string;
     /**
      * 账号登出时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogoutTime?: string;
 }
@@ -958,12 +844,10 @@ export interface DescribeLocalAccountsRequest {
 export interface DescribeLocalAccountsPage {
     /**
      * 公共分页对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Page?: Paging;
     /**
      * 获取账号列表响应的单个对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DescribeLocalAccountsData>;
 }
@@ -1008,7 +892,6 @@ export interface Condition {
 export interface CreateDeviceVirtualGroupRspData {
     /**
      * 返回的自定义分组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
 }

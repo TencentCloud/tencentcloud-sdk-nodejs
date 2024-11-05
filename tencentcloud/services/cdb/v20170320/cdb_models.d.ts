@@ -2001,19 +2001,6 @@ export interface DeleteAuditPolicyResponse {
     RequestId?: string;
 }
 /**
- * InitDBInstances返回参数结构体
- */
-export interface InitDBInstancesResponse {
-    /**
-     * 异步任务的请求ID数组，可使用此ID查询异步任务的执行结果
-     */
-    AsyncRequestIds: Array<string>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeParamTemplateInfo返回参数结构体
  */
 export interface DescribeParamTemplateInfoResponse {
@@ -2099,21 +2086,21 @@ export interface UploadInfo {
     CompleteNum: number;
 }
 /**
- * DisassociateSecurityGroups请求参数结构体
+ * 独享集群CDB实例的节点分布情况
  */
-export interface DisassociateSecurityGroupsRequest {
+export interface NodeDistribution {
     /**
-     * 安全组 ID。
+     * 主实例Master节点所在主机ID或者只读实例所在主机ID
      */
-    SecurityGroupId: string;
+    Node: string;
     /**
-     * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
+     * 主实例第一Slave节点所在主机ID
      */
-    InstanceIds: Array<string>;
+    SlaveNodeOne: string;
     /**
-     * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+     * 主实例第二Slave节点所在主机ID
      */
-    ForReadonlyInstance?: boolean;
+    SlaveNodeTwo: string;
 }
 /**
  * 审计规则的过滤条件
@@ -3848,61 +3835,39 @@ export interface DescribeInstanceUpgradeTypeRequest {
     ClusterTopology?: ClusterTopology;
 }
 /**
- * DescribeDBPrice请求参数结构体
+ * DescribeDBInstanceConfig返回参数结构体
  */
-export interface DescribeDBPriceRequest {
+export interface DescribeDBInstanceConfigResponse {
     /**
-     * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
+     * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
      */
-    Period: number;
+    ProtectMode: number;
     /**
-     * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。InstanceId为空时该参数为必填项。
+     * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
      */
-    Zone?: string;
+    DeployMode: number;
     /**
-     * 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。
+     * 实例可用区信息，格式如 "ap-shanghai-1"。
      */
-    GoodsNum?: number;
+    Zone: string;
     /**
-     * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
+     * 备库的配置信息。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Memory?: number;
+    SlaveConfig: SlaveConfig;
     /**
-     * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
+     * 强同步实例第二备库的配置信息。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Volume?: number;
+    BackupConfig: BackupConfig;
     /**
-     * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。InstanceId为空时该参数为必填项。
+     * 是否切换备库。
      */
-    InstanceRole?: string;
+    Switched: boolean;
     /**
-     * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。InstanceId为空时该参数为必填项。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PayType?: string;
-    /**
-     * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
-     */
-    ProtectMode?: number;
-    /**
-     * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - 单节点云盘版实例。 不指定则默认为通用型实例。
-     */
-    DeviceType?: string;
-    /**
-     * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
-     */
-    InstanceNodes?: number;
-    /**
-     * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
-     */
-    Cpu?: number;
-    /**
-     * 询价续费实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
-     */
-    InstanceId?: string;
-    /**
-     * 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。
-     */
-    Ladder?: number;
+    RequestId?: string;
 }
 /**
  * 从库的配置信息
@@ -4169,41 +4134,6 @@ export interface DescribeDBInstanceLogToCLSRequest {
      * CLS服务所在地域
      */
     ClsRegion?: string;
-}
-/**
- * DescribeDBInstanceConfig返回参数结构体
- */
-export interface DescribeDBInstanceConfigResponse {
-    /**
-     * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
-     */
-    ProtectMode: number;
-    /**
-     * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
-     */
-    DeployMode: number;
-    /**
-     * 实例可用区信息，格式如 "ap-shanghai-1"。
-     */
-    Zone: string;
-    /**
-     * 备库的配置信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SlaveConfig: SlaveConfig;
-    /**
-     * 强同步实例第二备库的配置信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BackupConfig: BackupConfig;
-    /**
-     * 是否切换备库。
-     */
-    Switched: boolean;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * StartBatchRollback请求参数结构体
@@ -5248,6 +5178,23 @@ export interface ResetRootAccountResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DisassociateSecurityGroups请求参数结构体
+ */
+export interface DisassociateSecurityGroupsRequest {
+    /**
+     * 安全组 ID。
+     */
+    SecurityGroupId: string;
+    /**
+     * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+     */
+    ForReadonlyInstance?: boolean;
 }
 /**
  * 数据库账号信息
@@ -8372,23 +8319,6 @@ export interface DeleteDeployGroupsResponse {
     RequestId?: string;
 }
 /**
- * 独享集群CDB实例的节点分布情况
- */
-export interface NodeDistribution {
-    /**
-     * 主实例Master节点所在主机ID或者只读实例所在主机ID
-     */
-    Node: string;
-    /**
-     * 主实例第一Slave节点所在主机ID
-     */
-    SlaveNodeOne: string;
-    /**
-     * 主实例第二Slave节点所在主机ID
-     */
-    SlaveNodeTwo: string;
-}
-/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -9319,25 +9249,61 @@ export interface DescribeUploadedFilesResponse {
     RequestId?: string;
 }
 /**
- * InitDBInstances请求参数结构体
+ * DescribeDBPrice请求参数结构体
  */
-export interface InitDBInstancesRequest {
+export interface DescribeDBPriceRequest {
     /**
-     * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+     * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
      */
-    InstanceIds: Array<string>;
+    Period: number;
     /**
-     * 实例新的密码，密码规则：8-64个字符，至少包含字母、数字、字符（支持的字符：!@#$%^*()）中的两种。
+     * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。InstanceId为空时该参数为必填项。
      */
-    NewPassword: string;
+    Zone?: string;
     /**
-     * 实例的参数列表，目前支持设置“character_set_server”、“lower_case_table_names”参数。其中，“character_set_server”参数可选值为["utf8","latin1","gbk","utf8mb4"]；“lower_case_table_names”可选值为[“0”,“1”]。
+     * 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。
      */
-    Parameters: Array<ParamInfo>;
+    GoodsNum?: number;
     /**
-     * 实例的端口，取值范围为[1024, 65535]
+     * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
      */
-    Vport?: number;
+    Memory?: number;
+    /**
+     * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
+     */
+    Volume?: number;
+    /**
+     * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。InstanceId为空时该参数为必填项。
+     */
+    InstanceRole?: string;
+    /**
+     * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。InstanceId为空时该参数为必填项。
+     */
+    PayType?: string;
+    /**
+     * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+     */
+    ProtectMode?: number;
+    /**
+     * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC_V2" - 单节点云盘版实例。 不指定则默认为通用型实例。
+     */
+    DeviceType?: string;
+    /**
+     * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
+     */
+    InstanceNodes?: number;
+    /**
+     * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
+     */
+    Cpu?: number;
+    /**
+     * 询价续费实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
+     */
+    InstanceId?: string;
+    /**
+     * 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。
+     */
+    Ladder?: number;
 }
 /**
  * CreateBackup返回参数结构体

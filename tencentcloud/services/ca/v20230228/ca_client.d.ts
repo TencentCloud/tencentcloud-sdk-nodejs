@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateVerifyReportRequest, CreateVerifyReportResponse, DescribeVerifyReportRequest, UploadFileRequest, UploadFileResponse, DescribeVerifyReportResponse } from "./ca_models";
+import { CreateVerifyReportRequest, DescribeVerifyReportRequest, UploadFileRequest, CreateVerifyReportResponse, UploadFileResponse, DescribeVerifyReportResponse } from "./ca_models";
 /**
  * ca client
  * @class

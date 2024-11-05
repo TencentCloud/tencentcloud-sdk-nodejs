@@ -114,6 +114,20 @@ export interface DownloadSnapshotRequest {
 }
 
 /**
+ * CreateTXTRecord返回参数结构体
+ */
+export interface CreateTXTRecordResponse {
+  /**
+   * 记录ID
+   */
+  RecordId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查看任务详情返回结构
  */
 export interface DescribeBatchTaskDetail {
@@ -2185,6 +2199,52 @@ export interface ModifyRecordToGroupResponse {
 }
 
 /**
+ * ModifyTXTRecord请求参数结构体
+ */
+export interface ModifyTXTRecordRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   */
+  RecordLine: string
+  /**
+   * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+   */
+  Value: string
+  /**
+   * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+   */
+  RecordId: number
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   */
+  DomainId?: number
+  /**
+   * 主机记录，如 www，如果不传，默认为 @。
+   */
+  SubDomain?: string
+  /**
+   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   */
+  RecordLineId?: string
+  /**
+   * TTL，范围1-604800，不同等级域名最小值不同。
+   */
+  TTL?: number
+  /**
+   * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
+   */
+  Status?: string
+  /**
+   * 记录的备注信息。传空删除备注。
+   */
+  Remark?: string
+}
+
+/**
  * 快照解析记录
  */
 export interface SnapshotRecord {
@@ -3241,6 +3301,52 @@ export interface PayOrderWithBalanceRequest {
 }
 
 /**
+ * CreateTXTRecord请求参数结构体
+ */
+export interface CreateTXTRecordRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+   */
+  RecordLine: string
+  /**
+   * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+   */
+  Value: string
+  /**
+   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   */
+  DomainId?: number
+  /**
+   * 主机记录，如 www，如果不传，默认为 @。
+   */
+  SubDomain?: string
+  /**
+   * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   */
+  RecordLineId?: string
+  /**
+   * TTL，范围1-604800，不同套餐域名最小值不同。
+   */
+  TTL?: number
+  /**
+   * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
+   */
+  Status?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
+   */
+  GroupId?: number
+}
+
+/**
  * DescribePackageDetail请求参数结构体
  */
 export type DescribePackageDetailRequest = null
@@ -4234,6 +4340,20 @@ export interface DescribeRecordExistExceptDefaultNSResponse {
    * true 是 false 否
    */
   Exist?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTXTRecord返回参数结构体
+ */
+export interface ModifyTXTRecordResponse {
+  /**
+   * 记录ID
+   */
+  RecordId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

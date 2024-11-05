@@ -138,6 +138,16 @@ it("ocr.v20181119.HKIDCardOCR", async function () {
     }
 })
 
+it("ocr.v20181119.MixedInvoiceOCR", async function () {
+    try {
+       const data = await client.MixedInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.PermitOCR", async function () {
     try {
        const data = await client.PermitOCR({})
@@ -668,9 +678,9 @@ it("ocr.v20181119.FinanBillOCR", async function () {
     }
 })
 
-it("ocr.v20181119.MixedInvoiceOCR", async function () {
+it("ocr.v20181119.SmartStructuralPro", async function () {
     try {
-       const data = await client.MixedInvoiceOCR({})
+       const data = await client.SmartStructuralPro({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

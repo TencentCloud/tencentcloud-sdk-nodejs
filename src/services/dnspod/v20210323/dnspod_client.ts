@@ -21,6 +21,7 @@ import {
   CreateRecordRequest,
   DescribeRecordFilterListResponse,
   DownloadSnapshotRequest,
+  CreateTXTRecordResponse,
   DescribeBatchTaskDetail,
   ModifyDomainToGroupRequest,
   RollbackSnapshotRequest,
@@ -111,6 +112,7 @@ import {
   DescribeRecordResponse,
   DescribeRecordLineCategoryListRequest,
   ModifyRecordToGroupResponse,
+  ModifyTXTRecordRequest,
   SnapshotRecord,
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
@@ -154,6 +156,7 @@ import {
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
+  CreateTXTRecordRequest,
   DescribePackageDetailRequest,
   DescribeRecordFilterListRequest,
   ModifyVasAutoRenewStatusResponse,
@@ -200,6 +203,7 @@ import {
   LineItem,
   CreateDealResponse,
   DescribeRecordExistExceptDefaultNSResponse,
+  ModifyTXTRecordResponse,
   ModifyVasAutoRenewStatusRequest,
   WhoisInfo,
   DownloadSnapshotResponse,
@@ -371,13 +375,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改记录可选字段
-   */
-  async ModifyRecordFields(
-    req: ModifyRecordFieldsRequest,
-    cb?: (error: string, rep: ModifyRecordFieldsResponse) => void
-  ): Promise<ModifyRecordFieldsResponse> {
-    return this.request("ModifyRecordFields", req, cb)
+     * 添加TXT记录
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
+     */
+  async CreateTXTRecord(
+    req: CreateTXTRecordRequest,
+    cb?: (error: string, rep: CreateTXTRecordResponse) => void
+  ): Promise<CreateTXTRecordResponse> {
+    return this.request("CreateTXTRecord", req, cb)
   }
 
   /**
@@ -644,6 +649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改记录可选字段
+   */
+  async ModifyRecordFields(
+    req: ModifyRecordFieldsRequest,
+    cb?: (error: string, rep: ModifyRecordFieldsResponse) => void
+  ): Promise<ModifyRecordFieldsResponse> {
+    return this.request("ModifyRecordFields", req, cb)
+  }
+
+  /**
    * 获取记录信息
    */
   async DescribeRecord(
@@ -836,8 +851,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加域名
-   */
+     * 添加域名
+
+备注：该接口不支持添加子域名。
+     */
   async CreateDomain(
     req: CreateDomainRequest,
     cb?: (error: string, rep: CreateDomainResponse) => void
@@ -904,6 +921,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainPreviewResponse) => void
   ): Promise<DescribeDomainPreviewResponse> {
     return this.request("DescribeDomainPreview", req, cb)
+  }
+
+  /**
+   * 修改TXT记录
+   */
+  async ModifyTXTRecord(
+    req: ModifyTXTRecordRequest,
+    cb?: (error: string, rep: ModifyTXTRecordResponse) => void
+  ): Promise<ModifyTXTRecordResponse> {
+    return this.request("ModifyTXTRecord", req, cb)
   }
 
   /**

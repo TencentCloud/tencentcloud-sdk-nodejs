@@ -26,6 +26,58 @@ export interface CreateVerifyReportRequest {
      * 验签申请经办人邮箱
      */
     ApplyEmail?: string;
+    /**
+     * 证书用户身份及身份鉴别信息
+     */
+    CertificateIdentityUsers?: Array<CertificateIdentityUser>;
+}
+/**
+ * 证书用户信息和身份鉴别信息。则该字段无需传入，默认为空。对电子签名者身份鉴别类型及措施有特殊展示要求的可使用该字段。
+ */
+export interface CertificateIdentityUser {
+    /**
+     * 姓名
+     */
+    Name?: string;
+    /**
+     * 唯一身份id
+     */
+    IdentityUniqueId?: string;
+    /**
+     * 身份证号
+     */
+    IdCardNumber?: string;
+    /**
+     * 身份鉴别类型
+  1：授权金融机构身份鉴别
+     */
+    IdentificationType?: string;
+    /**
+     * 身份鉴别措施
+  1、身份证鉴别
+  2、银行卡鉴别
+  3、支付账户密码验证
+  4、人脸识别验证
+     */
+    IdentificationMeasures?: Array<string>;
+}
+/**
+ * DescribeVerifyReport请求参数结构体
+ */
+export interface DescribeVerifyReportRequest {
+    /**
+     * 签名id
+     */
+    SignatureId: string;
+}
+/**
+ * UploadFile请求参数结构体
+ */
+export interface UploadFileRequest {
+    /**
+     * 验签源文件信息列表
+     */
+    FileInfos: Array<FileInfo>;
 }
 /**
  * CreateVerifyReport返回参数结构体
@@ -47,24 +99,6 @@ export interface CreateVerifyReportResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeVerifyReport请求参数结构体
- */
-export interface DescribeVerifyReportRequest {
-    /**
-     * 签名id
-     */
-    SignatureId: string;
-}
-/**
- * UploadFile请求参数结构体
- */
-export interface UploadFileRequest {
-    /**
-     * 验签源文件信息列表
-     */
-    FileInfos: Array<FileInfo>;
 }
 /**
  * UploadFile返回参数结构体

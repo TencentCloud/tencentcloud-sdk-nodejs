@@ -5751,11 +5751,11 @@ export interface DescribeTendisSlowLogRequest {
    */
   InstanceId: string
   /**
-   * 开始时间：2019-09-08 12:12:41
+   * 开始时间：2019-09-08 12:12:41，查询时间最大跨度30天。
    */
   BeginTime: string
   /**
-   * 结束时间：2019-09-09 12:12:41
+   * 结束时间：2019-09-09 12:12:41，查询时间最大跨度30天。
    */
   EndTime: string
   /**
@@ -5763,11 +5763,11 @@ export interface DescribeTendisSlowLogRequest {
    */
   MinQueryTime?: number
   /**
-   * 页面大小：默认20
+   * 页面大小：默认20，最大100。
    */
   Limit?: number
   /**
-   * 偏移量，取Limit整数倍
+   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
    */
   Offset?: number
 }

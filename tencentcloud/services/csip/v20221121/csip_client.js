@@ -118,7 +118,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskCenterServerRiskList", req, cb);
     }
     /**
-     * cvm列表
+     * 获取cvm列表
      */
     async DescribeCVMAssets(req, cb) {
         return this.request("DescribeCVMAssets", req, cb);

@@ -229,6 +229,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("HKIDCardOCR", req, cb);
     }
     /**
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+    async MixedInvoiceOCR(req, cb) {
+        return this.request("MixedInvoiceOCR", req, cb);
+    }
+    /**
      * 本接口支持对卡式港澳台通行证的识别，包括签发地点、签发机关、有效期限、性别、出生日期、英文姓名、姓名、证件号等字段。
 
 默认接口请求频率限制：10次/秒。
@@ -921,12 +929,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FinanBillOCR", req, cb);
     }
     /**
-     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+     * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
-默认接口请求频率限制：5次/秒。
+默认接口请求频率限制：1次/秒。
      */
-    async MixedInvoiceOCR(req, cb) {
-        return this.request("MixedInvoiceOCR", req, cb);
+    async SmartStructuralPro(req, cb) {
+        return this.request("SmartStructuralPro", req, cb);
     }
     /**
      * 文本图像增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度。

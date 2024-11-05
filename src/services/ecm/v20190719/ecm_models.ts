@@ -3700,7 +3700,7 @@ export interface CreateLoadBalancerResponse {
    * 由负载均衡实例ID组成的数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoadBalancerIds: Array<string>
+  LoadBalancerIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6109,7 +6109,7 @@ export interface CreateLoadBalancerRequest {
    */
   AddressIPVersion?: string
   /**
-   * 在购买IPV6负载均衡实例的情况下，必须指定子网 ID, 此参数必填。
+   * 在购买IPV6负载均衡实例的情况下，必须指定子网 ID, 此参数必填；IPv4实例不支持该参数。
    */
   SubnetId?: string
 }

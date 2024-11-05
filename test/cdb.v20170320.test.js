@@ -1428,9 +1428,9 @@ it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
     }
 })
 
-it("cdb.v20170320.InitDBInstances", async function () {
+it("cdb.v20170320.ModifyDBInstanceProject", async function () {
     try {
-       const data = await client.InitDBInstances({})
+       const data = await client.ModifyDBInstanceProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1511,16 +1511,6 @@ it("cdb.v20170320.ModifyCdbProxyParam", async function () {
 it("cdb.v20170320.StartBatchRollback", async function () {
     try {
        const data = await client.StartBatchRollback({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.ModifyDBInstanceProject", async function () {
-    try {
-       const data = await client.ModifyDBInstanceProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

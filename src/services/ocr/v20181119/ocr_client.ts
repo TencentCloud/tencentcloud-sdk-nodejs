@@ -73,7 +73,7 @@ import {
   VehicleInvoiceInfo,
   DriverLicenseOCRRequest,
   OtherInvoiceItem,
-  TextDetection,
+  SmartStructuralProRequest,
   RecognizeTableOCRResponse,
   TextEduPaper,
   VatInvoiceItemInfo,
@@ -90,6 +90,7 @@ import {
   StructuralItem,
   OnlineTaxiItineraryInfo,
   FlightItemInfo,
+  TextDetection,
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
@@ -276,6 +277,7 @@ import {
   CandWord,
   RecognizeContainerOCRResponse,
   EnterpriseLicenseInfo,
+  SmartStructuralProResponse,
   PermitOCRResponse,
   InsuranceBillOCRRequest,
   QrcodeOCRRequest,
@@ -572,6 +574,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: HKIDCardOCRResponse) => void
   ): Promise<HKIDCardOCRResponse> {
     return this.request("HKIDCardOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async MixedInvoiceOCR(
+    req: MixedInvoiceOCRRequest,
+    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
+  ): Promise<MixedInvoiceOCRResponse> {
+    return this.request("MixedInvoiceOCR", req, cb)
   }
 
   /**
@@ -1479,15 +1493,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持 单张、多张、多类型 票据的混合识别，同时支持自选需要识别的票据类型，已支持票种包括：增值税发票（专票、普票、卷票）、全电发票、非税发票、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共14种标准报销发票，并支持其他类发票的识别。
+     * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
-默认接口请求频率限制：5次/秒。
+默认接口请求频率限制：1次/秒。
      */
-  async MixedInvoiceOCR(
-    req: MixedInvoiceOCRRequest,
-    cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
-  ): Promise<MixedInvoiceOCRResponse> {
-    return this.request("MixedInvoiceOCR", req, cb)
+  async SmartStructuralPro(
+    req: SmartStructuralProRequest,
+    cb?: (error: string, rep: SmartStructuralProResponse) => void
+  ): Promise<SmartStructuralProResponse> {
+    return this.request("SmartStructuralPro", req, cb)
   }
 
   /**

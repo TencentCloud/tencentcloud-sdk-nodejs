@@ -76,14 +76,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIpAccessControl", req, cb);
     }
     /**
-     * 老接口已经不再使用。
-
-获取信息防泄漏规则列表
-     */
-    async DescribeAntiInfoLeakRules(req, cb) {
-        return this.request("DescribeAntiInfoLeakRules", req, cb);
-    }
-    /**
      * 获取地域封禁配置包括地域封禁开关，设置封禁的地区信息
      */
     async DescribeAreaBanAreas(req, cb) {
@@ -142,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeApiDetail(req, cb) {
         return this.request("DescribeApiDetail", req, cb);
+    }
+    /**
+     * 查询扫描ip
+     */
+    async DescribeScanIp(req, cb) {
+        return this.request("DescribeScanIp", req, cb);
     }
     /**
      * 删除自定义规则
@@ -539,14 +537,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFlowTrend(req, cb) {
         return this.request("DescribeFlowTrend", req, cb);
-    }
-    /**
-     * 废弃接口
-
-获取防篡改url
-     */
-    async DescribeAntiFakeUrl(req, cb) {
-        return this.request("DescribeAntiFakeUrl", req, cb);
     }
     /**
      * 查看防护对象列表

@@ -1047,7 +1047,7 @@ export interface CreateDeviceGroupResponse {
     /**
      * 新建成功的资产组ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1089,31 +1089,31 @@ export interface OperationEvent {
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 姓名
      */
-    RealName: string;
+    RealName?: string;
     /**
      * 操作时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 来源IP
      */
-    SourceIp: string;
+    SourceIp?: string;
     /**
      * 操作类型
      */
-    Kind: number;
+    Kind?: number;
     /**
      * 具体操作内容
      */
-    Operation: string;
+    Operation?: string;
     /**
      * 操作结果，1-成功，2-失败
      */
-    Result: number;
+    Result?: number;
 }
 /**
  * 部门信息
@@ -1193,7 +1193,7 @@ export interface DescribeAssetSyncStatusResponse {
     /**
      * 资产同步结果
      */
-    Status: AssetSyncStatus;
+    Status?: AssetSyncStatus;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1359,11 +1359,11 @@ export interface DescribeLoginEventResponse {
     /**
      * 登录日志列表
      */
-    LoginEventSet: Array<LoginEvent>;
+    LoginEventSet?: Array<LoginEvent>;
     /**
      * 总记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1806,15 +1806,15 @@ export interface AssetSyncStatus {
     /**
      * 上一次同步完成的时间
      */
-    LastTime: string;
+    LastTime?: string;
     /**
      * 上一次同步的结果。 0 - 从未进行, 1 - 成功， 2 - 失败
      */
-    LastStatus: number;
+    LastStatus?: number;
     /**
      * 同步任务是否正在进行中
      */
-    InProcess: boolean;
+    InProcess?: boolean;
 }
 /**
  * DescribeResources返回参数结构体
@@ -1973,47 +1973,47 @@ export interface AuditLogResult {
     /**
      * 被审计会话的Sid
      */
-    Sid: string;
+    Sid?: string;
     /**
      * 审计者的编号
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 审计动作发生的时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 审计者的Ip
      */
-    ClientIp: string;
+    ClientIp?: string;
     /**
      * 审计动作类型，1--回放、2--中断、3--监控
      */
-    Operation: number;
+    Operation?: number;
     /**
      * 被审计主机的Id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 被审计主机的主机名
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 被审计会话所属的类型，如字符会话
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 被审计主机的内部Ip
      */
-    PrivateIp: string;
+    PrivateIp?: string;
     /**
      * 被审计主机的外部Ip
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 审计者的子账号
      */
-    SubAccountUin: string;
+    SubAccountUin?: string;
 }
 /**
  * ResetDeviceAccountPrivateKey请求参数结构体
@@ -2543,7 +2543,7 @@ export interface CreateDeviceAccountResponse {
     /**
      * 新建成功后返回的记录ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3060,27 +3060,27 @@ export interface LoginEvent {
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 姓名
      */
-    RealName: string;
+    RealName?: string;
     /**
      * 操作时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 来源IP
      */
-    SourceIp: string;
+    SourceIp?: string;
     /**
      * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
      */
-    Entry: number;
+    Entry?: number;
     /**
      * 操作结果，1-成功，2-失败
      */
-    Result: number;
+    Result?: number;
 }
 /**
  * DeleteChangePwdTask返回参数结构体
@@ -3098,7 +3098,7 @@ export interface CreateUserGroupResponse {
     /**
      * 新建成功的用户组ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3223,11 +3223,11 @@ export interface SearchAuditLogResponse {
     /**
      * 审计日志
      */
-    AuditLogSet: Array<AuditLogResult>;
+    AuditLogSet?: Array<AuditLogResult>;
     /**
      * 日志总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3819,11 +3819,11 @@ export interface DescribeOperationEventResponse {
     /**
      * 操作日志列表
      */
-    OperationEventSet: Array<OperationEvent>;
+    OperationEventSet?: Array<OperationEvent>;
     /**
      * 总记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -261,28 +261,28 @@ export interface TextArithmetic {
   /**
    * 识别出的文本行内容
    */
-  DetectedText: string
+  DetectedText?: string
   /**
    * 算式运算结果，true-正确   false-错误或非法参数
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 保留字段，暂不支持
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 原图文本行坐标，以四个顶点坐标表示（保留字段，暂不支持）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Polygon: Array<Coord>
+  Polygon?: Array<Coord>
   /**
    * 保留字段，暂不支持
    */
-  AdvancedInfo: string
+  AdvancedInfo?: string
   /**
    * 文本行旋转纠正之后在图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
    */
-  ItemCoord: ItemCoord
+  ItemCoord?: ItemCoord
   /**
    * 算式题型编号：
 ‘1’: 加减乘除四则
@@ -297,11 +297,11 @@ export interface TextArithmetic {
 ‘10’: 脱式计算
 ‘11’: 解方程
    */
-  ExpressionType: string
+  ExpressionType?: string
   /**
-   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如1<10<7）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
+   * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如`1<10<7`）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
    */
-  Answer: string
+  Answer?: string
 }
 
 /**
@@ -1814,39 +1814,33 @@ export interface OtherInvoiceItem {
 }
 
 /**
- * 文字识别结果
+ * SmartStructuralPro请求参数结构体
  */
-export interface TextDetection {
+export interface SmartStructuralProRequest {
   /**
-   * 识别出的文本行内容
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  DetectedText: string
+  ImageUrl?: string
   /**
-   * 置信度 0 ~100
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Confidence: number
+  ImageBase64?: string
   /**
-   * 文本行坐标，以四个顶点坐标表示
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
-  Polygon: Array<Coord>
+  PdfPageNumber?: number
   /**
-   * 此字段为扩展字段。
-GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
+   * 自定义结构化功能需返回的字段名称，例：若客户只想返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
    */
-  AdvancedInfo: string
+  ItemNames?: Array<string>
   /**
-   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   * 是否开启全文字段识别
    */
-  ItemPolygon: ItemCoord
+  ReturnFullText?: boolean
   /**
-   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   * 配置id支持：General -- 通用场景 InvoiceEng -- 海运提单、国际invoice模版 WayBillEng --海运订单模板
    */
-  Words: Array<DetectedWords>
-  /**
-   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
-   */
-  WordCoordPoint: Array<DetectedWordCoordPoint>
+  ConfigId?: string
 }
 
 /**
@@ -2319,6 +2313,42 @@ export interface FlightItemInfo {
    * 免费行李额
    */
   Allow?: string
+}
+
+/**
+ * 文字识别结果
+ */
+export interface TextDetection {
+  /**
+   * 识别出的文本行内容
+   */
+  DetectedText: string
+  /**
+   * 置信度 0 ~100
+   */
+  Confidence: number
+  /**
+   * 文本行坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Polygon: Array<Coord>
+  /**
+   * 此字段为扩展字段。
+GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
+   */
+  AdvancedInfo: string
+  /**
+   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   */
+  ItemPolygon: ItemCoord
+  /**
+   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   */
+  Words: Array<DetectedWords>
+  /**
+   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   */
+  WordCoordPoint: Array<DetectedWordCoordPoint>
 }
 
 /**
@@ -9666,6 +9696,28 @@ export interface EnterpriseLicenseInfo {
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
   Value?: string
+}
+
+/**
+ * SmartStructuralPro返回参数结构体
+ */
+export interface SmartStructuralProResponse {
+  /**
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
+   */
+  Angle?: number
+  /**
+   * 配置结构化文本信息
+   */
+  StructuralList?: Array<GroupInfo>
+  /**
+   * 还原文本信息
+   */
+  WordList?: Array<WordItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

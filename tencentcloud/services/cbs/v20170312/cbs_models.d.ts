@@ -1097,7 +1097,7 @@ export interface Placement {
      */
     CageId?: string;
     /**
-     * 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。
+     * 实例所属项目ID。不填为默认项目。
      */
     ProjectId?: number;
     /**

@@ -52,7 +52,9 @@ export declare class Client extends AbstractClient {
      */
     RetryDocAudit(req: RetryDocAuditRequest, cb?: (error: string, rep: RetryDocAuditResponse) => void): Promise<RetryDocAuditResponse>;
     /**
-     * 接口支持图片和PDF转可编辑word格式文件，将文件中的图片、文本、表格等元素识别，并根据位置进行还原。
+     * 产品规划
+
+接口支持图片和PDF转可编辑word格式文件，将文件中的图片、文本、表格等元素识别，并根据位置进行还原。
      */
     ConvertDocument(req: ConvertDocumentRequest, cb?: (error: string, rep: ConvertDocumentResponse) => void): Promise<ConvertDocumentResponse>;
     /**

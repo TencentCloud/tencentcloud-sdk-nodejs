@@ -169,14 +169,12 @@ import {
   MixUserInfo,
   EventMessage,
   DescribeTRTCMarketQualityDataRequest,
-  SummarizeTranscriptionRequest,
   UpdatePublishCdnStreamRequest,
   StartWebRecordRequest,
   MaxVideoUser,
   AgentParams,
   UpdateStreamIngestRequest,
   StopWebRecordResponse,
-  SummarizeTranscriptionResponse,
   DeletePictureRequest,
   StopWebRecordRequest,
   McuSeiParams,
@@ -256,18 +254,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrtcUsageResponse) => void
   ): Promise<DescribeTrtcUsageResponse> {
     return this.request("DescribeTrtcUsage", req, cb)
-  }
-
-  /**
-     * 接口不再支持
-
-对转录的文本进行总结。
-     */
-  async SummarizeTranscription(
-    req?: SummarizeTranscriptionRequest,
-    cb?: (error: string, rep: SummarizeTranscriptionResponse) => void
-  ): Promise<SummarizeTranscriptionResponse> {
-    return this.request("SummarizeTranscription", req, cb)
   }
 
   /**

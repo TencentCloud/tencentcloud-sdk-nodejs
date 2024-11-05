@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRiskCenterServerRiskList(req: DescribeRiskCenterServerRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterServerRiskListResponse) => void): Promise<DescribeRiskCenterServerRiskListResponse>;
     /**
-     * cvm列表
+     * 获取cvm列表
      */
     DescribeCVMAssets(req: DescribeCVMAssetsRequest, cb?: (error: string, rep: DescribeCVMAssetsResponse) => void): Promise<DescribeCVMAssetsResponse>;
     /**

@@ -149,6 +149,7 @@ import {
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
   FetchSqlGatewayStatementResultRequest,
+  SessionClusterRefItem,
   DescribeJobEventsResponse,
 } from "./oceanus_models"
 

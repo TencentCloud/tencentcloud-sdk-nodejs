@@ -115,10 +115,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotList", req, cb);
     }
     /**
-     * 修改记录可选字段
+     * 添加TXT记录
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
-    async ModifyRecordFields(req, cb) {
-        return this.request("ModifyRecordFields", req, cb);
+    async CreateTXTRecord(req, cb) {
+        return this.request("CreateTXTRecord", req, cb);
     }
     /**
      * 批量删除域名
@@ -280,6 +281,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRecord", req, cb);
     }
     /**
+     * 修改记录可选字段
+     */
+    async ModifyRecordFields(req, cb) {
+        return this.request("ModifyRecordFields", req, cb);
+    }
+    /**
      * 获取记录信息
      */
     async DescribeRecord(req, cb) {
@@ -397,6 +404,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 添加域名
+
+备注：该接口不支持添加子域名。
      */
     async CreateDomain(req, cb) {
         return this.request("CreateDomain", req, cb);
@@ -437,6 +446,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDomainPreview(req, cb) {
         return this.request("DescribeDomainPreview", req, cb);
+    }
+    /**
+     * 修改TXT记录
+     */
+    async ModifyTXTRecord(req, cb) {
+        return this.request("ModifyTXTRecord", req, cb);
     }
     /**
      * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
