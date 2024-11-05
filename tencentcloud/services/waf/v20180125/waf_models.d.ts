@@ -7995,7 +7995,7 @@ export interface AddAreaBanAreasResponse {
  */
 export interface DescribeScanIpResponse {
     /**
-     * ip列表,当入参Ip为all时，返回该值
+     * ip列表,当入参Ip为all时，返回所有已知ip列表
      */
     IpList?: Array<ScanIpInfo>;
     /**

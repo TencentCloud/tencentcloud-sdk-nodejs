@@ -95,6 +95,14 @@ export interface ModifyApmInstanceRequest {
      * 响应时间满意阈值
      */
     ResponseDurationWarningThreshold?: number;
+    /**
+     * 是否关联dashboard： 0 关 1 开
+     */
+    IsRelatedDashboard?: number;
+    /**
+     * dashboard ID
+     */
+    DashboardTopicID?: string;
 }
 /**
  * apm实例信息

@@ -2617,7 +2617,7 @@ export interface DescribePackageConsumeTaskResponse {
   /**
    * 文件下载的url，文件详情是套餐包消耗详情
    */
-  URL: string
+  URL?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

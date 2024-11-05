@@ -119,6 +119,26 @@ export interface ChatCompletionsRequest {
     Seed?: number;
 }
 /**
+ * 搜索引文信息
+ */
+export interface SearchResult {
+    /**
+     * 搜索引文序号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: number;
+    /**
+     * 搜索引文标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * 搜索引文链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
+}
+/**
  * logo参数
  */
 export interface LogoParam {
@@ -134,6 +154,19 @@ export interface LogoParam {
      * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
      */
     LogoRect?: LogoRect;
+}
+/**
+ * FilesUploads请求参数结构体
+ */
+export interface FilesUploadsRequest {
+    /**
+     * 文件名。
+     */
+    Name: string;
+    /**
+     * 文件链接。目前仅支持 pdf 格式，单文件大小限制为100M。
+     */
+    URL: string;
 }
 /**
  * GetEmbedding请求参数结构体
@@ -215,6 +248,15 @@ export interface ActivateServiceRequest {
     PayMode?: number;
 }
 /**
+ * GetThread请求参数结构体
+ */
+export interface GetThreadRequest {
+    /**
+     * 会话 ID
+     */
+    ThreadID: string;
+}
+/**
  * 可以传入多种类型的内容，如图片或文本。当前只支持传入单张图片，传入多张图片时，以第一个图片为准。
  */
 export interface Content {
@@ -236,6 +278,19 @@ export interface Content {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: ImageUrl;
+}
+/**
+ * GetThreadMessage请求参数结构体
+ */
+export interface GetThreadMessageRequest {
+    /**
+     * 会话 ID
+     */
+    ThreadID: string;
+    /**
+     * 消息 ID
+     */
+    MessageID: string;
 }
 /**
  * SubmitHunyuanImageJob请求参数结构体
@@ -343,6 +398,55 @@ export interface QueryHunyuanImageChatJobRequest {
     JobId?: string;
 }
 /**
+ * RunThread请求参数结构体
+ */
+export interface RunThreadRequest {
+    /**
+     * 会话 ID
+     */
+    ThreadID: string;
+    /**
+     * 助手 ID
+     */
+    AssistantID?: string;
+    /**
+     * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo。各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。注意：不同的模型计费不同，请根据 [购买指南](https://cloud.tencent.com/document/product/1729/97731) 按需调用。
+     */
+    Model?: string;
+    /**
+     * 附加消息
+     */
+    AdditionalMessages?: Array<ThreadAdditionalMessage>;
+    /**
+     * 说明：1. 影响模型输出多样性，模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。2. 取值区间为 [0.0, 2.0]。较高的数值会使输出更加多样化和不可预测，而较低的数值会使其更加集中和确定。
+     */
+    Temperature?: number;
+    /**
+     * 说明：1. 影响输出文本的多样性。模型已有默认参数，不传值时使用各模型推荐值，不推荐用户修改。2. 取值区间为 [0.0, 1.0]。取值越大，生成文本的多样性越强。
+     */
+    TopP?: number;
+    /**
+     * 是否流式输出，当前只允许 true
+     */
+    Stream?: boolean;
+    /**
+     * 运行过程中可使用的 token 最大数量。
+     */
+    MaxPromptTokens?: number;
+    /**
+     * 运行过程中可使用的完成 token 的最大数量。
+     */
+    MaxCompletionTokens?: number;
+    /**
+     * 可调用的工具列表，仅对 hunyuan-pro、hunyuan-turbo、hunyuan-functioncall 模型生效。
+     */
+    Tools?: Array<Tool>;
+    /**
+     * 工具使用选项，可选值包括 none、auto、custom。说明：1. 仅对 hunyuan-pro、hunyuan-turbo、hunyuan-functioncall 模型生效。2. none：不调用工具；auto：模型自行选择生成回复或调用工具；custom：强制模型调用指定的工具。3. 未设置时，默认值为auto
+     */
+    ToolChoice?: string;
+}
+/**
  * SubmitHunyuanImageChatJob请求参数结构体
  */
 export interface SubmitHunyuanImageChatJobRequest {
@@ -386,6 +490,82 @@ export interface QueryHunyuanImageJobRequest {
     JobId: string;
 }
 /**
+ * GetThreadMessage返回参数结构体
+ */
+export interface GetThreadMessageResponse {
+    /**
+     * 消息 ID
+     */
+    ID?: string;
+    /**
+     * 对象类型
+     */
+    Object?: string;
+    /**
+     * 创建时间
+     */
+    CreatedAt?: number;
+    /**
+     * 会话 ID
+     */
+    ThreadID?: string;
+    /**
+     * 状态，处理中 in_progress，已完成 completed，未完成 incomplete。
+     */
+    Status?: string;
+    /**
+     * 未完成原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InCompleteDetails?: ThreadMessageInCompleteDetailsObject;
+    /**
+     * 完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompletedAt?: number;
+    /**
+     * 未完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InCompleteAt?: number;
+    /**
+     * 角色
+     */
+    Role?: string;
+    /**
+     * 内容
+     */
+    Content?: string;
+    /**
+     * 助手 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssistantID?: string;
+    /**
+     * 运行 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunID?: string;
+    /**
+     * 附件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Attachments?: Array<ThreadMessageAttachmentObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
+ * 会话消息未完成原因
+ */
+export interface ThreadMessageInCompleteDetailsObject {
+    /**
+     * 会话消息未完成原因
+     */
+    Reason?: string;
+}
+/**
  * 用户指定模型使用的工具
  */
 export interface Tool {
@@ -399,24 +579,21 @@ export interface Tool {
     Function: ToolFunction;
 }
 /**
- * 搜索引文信息
+ * GetThreadMessageList请求参数结构体
  */
-export interface SearchResult {
+export interface GetThreadMessageListRequest {
     /**
-     * 搜索引文序号
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 会话 ID
      */
-    Index?: number;
+    ThreadID: string;
     /**
-     * 搜索引文标题
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回的消息条数，1 - 100 条
      */
-    Title?: string;
+    Limit?: number;
     /**
-     * 搜索引文链接
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 排序方式，按创建时间升序（asc）或降序（desc），默认为 desc
      */
-    Url?: string;
+    Order?: string;
 }
 /**
  * 返回的回复, 支持多个
@@ -611,6 +788,24 @@ export interface ToolCall {
     Function: ToolCallFunction;
 }
 /**
+ * 会话额外消息
+ */
+export interface ThreadAdditionalMessage {
+    /**
+     * 角色
+     */
+    Role?: string;
+    /**
+     * 内容
+     */
+    Content?: string;
+    /**
+     * 附件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Attachments?: Array<ThreadMessageAttachmentObject>;
+}
+/**
  * 具体的function调用
  */
 export interface ToolCallFunction {
@@ -631,27 +826,6 @@ export interface SetPayModeRequest {
      * 设置后付费状态，0：后付费；1：预付费
      */
     PayMode: number;
-}
-/**
- * 输入框
- */
-export interface LogoRect {
-    /**
-     * 左上角X坐标
-     */
-    X?: number;
-    /**
-     * 左上角Y坐标
-     */
-    Y?: number;
-    /**
-     * 方框宽度
-     */
-    Width?: number;
-    /**
-     * 方框高度
-     */
-    Height?: number;
 }
 /**
  * TextToImageLite请求参数结构体
@@ -698,6 +872,73 @@ export interface TextToImageLiteRequest {
     RspImgType?: string;
 }
 /**
+ * 输入框
+ */
+export interface LogoRect {
+    /**
+     * 左上角X坐标
+     */
+    X?: number;
+    /**
+     * 左上角Y坐标
+     */
+    Y?: number;
+    /**
+     * 方框宽度
+     */
+    Width?: number;
+    /**
+     * 方框高度
+     */
+    Height?: number;
+}
+/**
+ * 相关组织及人物
+ */
+export interface RelevantEntity {
+    /**
+     * 相关组织及人物名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * 相关组织及人物内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content: string;
+    /**
+     * 相关事件引用文章标号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Reference: Array<number | bigint>;
+}
+/**
+ * CreateThread返回参数结构体
+ */
+export interface CreateThreadResponse {
+    /**
+     * 会话 ID
+     */
+    ID?: string;
+    /**
+     * 对象类型
+     */
+    Object?: string;
+    /**
+     * 创建时间，Unix 时间戳，单位为秒。
+     */
+    CreatedAt?: number;
+    /**
+     * 提供给工具的资源列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ToolResources?: ThreadToolResources;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
  * SubmitHunyuanImageJob返回参数结构体
  */
 export interface SubmitHunyuanImageJobResponse {
@@ -707,6 +948,32 @@ export interface SubmitHunyuanImageJobResponse {
     JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetThread返回参数结构体
+ */
+export interface GetThreadResponse {
+    /**
+     * 会话 ID
+     */
+    ID?: string;
+    /**
+     * 对象类型
+     */
+    Object?: string;
+    /**
+     * 创建时间，Unix 时间戳，单位为秒。
+     */
+    CreatedAt?: number;
+    /**
+     * 提供给工具的资源列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ToolResources?: ThreadToolResources;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
      */
     RequestId?: string;
 }
@@ -763,6 +1030,180 @@ export interface QueryHunyuanImageJobResponse {
     RequestId?: string;
 }
 /**
+ * FilesUploads返回参数结构体
+ */
+export interface FilesUploadsResponse {
+    /**
+     * 文件标识符，可在各个API中引用。
+     */
+    ID?: string;
+    /**
+     * 对象类型，始终为 file。
+     */
+    Object?: string;
+    /**
+     * 文件大小，单位为字节。
+     */
+    Bytes?: number;
+    /**
+     * 文件创建时的 Unix 时间戳（秒）。
+     */
+    CreatedAt?: number;
+    /**
+     * 文件名。
+     */
+    Filename?: string;
+    /**
+     * 上传文件的用途。
+     */
+    Purpose?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
+ * FilesDeletions返回参数结构体
+ */
+export interface FilesDeletionsResponse {
+    /**
+     * 文件标识符。
+     */
+    ID?: string;
+    /**
+     * 对象类型，始终为 file。
+     */
+    Object?: string;
+    /**
+     * 是否删除成功。
+     */
+    Deleted?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
+ * 脑图
+ */
+export interface Mindmap {
+    /**
+     * 脑图缩略图链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ThumbUrl: string;
+    /**
+     * 脑图图片链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url: string;
+}
+/**
+ * 在会话中提供给助手工具的一系列资源。不同类型的工具会有各自对应的资源。比如代码解释器需要一个文件 ID 的列表，而文件搜索工具则需要一个向量存储 ID 的列表。
+ */
+export interface ThreadToolResources {
+    /**
+     * 文件 ID 列表
+     */
+    CodeInterpreter?: Array<string>;
+    /**
+     * 向量存储 ID 列表
+     */
+    VectorStoreIDs?: Array<string>;
+}
+/**
+ * 会话消息
+ */
+export interface ThreadMessage {
+    /**
+     * 消息 ID
+     */
+    ID?: string;
+    /**
+     * 对象类型
+     */
+    Object?: string;
+    /**
+     * 创建时间
+     */
+    CreatedAt?: number;
+    /**
+     * 会话 ID
+     */
+    ThreadID?: string;
+    /**
+     * 状态，处理中 in_progress，已完成 completed，未完成 incomplete。
+     */
+    Status?: string;
+    /**
+     * 未完成原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InCompleteDetails?: ThreadMessageInCompleteDetailsObject;
+    /**
+     * 完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompletedAt?: number;
+    /**
+     * 未完成时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InCompleteAt?: number;
+    /**
+     * 角色
+     */
+    Role?: string;
+    /**
+     * 内容
+     */
+    Content?: string;
+    /**
+     * 助手 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssistantID?: string;
+    /**
+     * 运行 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunID?: string;
+    /**
+     * 附件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Attachments?: Array<ThreadMessageAttachmentObject>;
+}
+/**
+ * 已上传的文件对象。
+ */
+export interface FileObject {
+    /**
+     * 文件标识符，可在各个API中引用。
+     */
+    ID?: string;
+    /**
+     * 对象类型，始终为 file。
+     */
+    Object?: string;
+    /**
+     * 文件大小，单位为字节。
+     */
+    Bytes?: number;
+    /**
+     * 文件创建时的 Unix 时间戳（秒）。
+     */
+    CreatedAt?: number;
+    /**
+     * 文件名。
+     */
+    Filename?: string;
+    /**
+     * 上传文件的用途。
+     */
+    Purpose?: string;
+}
+/**
  * 混元生图多轮对话历史记录。
  */
 export interface History {
@@ -805,6 +1246,50 @@ export interface GetEmbeddingResponse {
     RequestId?: string;
 }
 /**
+ * GetThreadMessageList返回参数结构体
+ */
+export interface GetThreadMessageListResponse {
+    /**
+     * 消息列表
+     */
+    Data?: Array<ThreadMessage>;
+    /**
+     * 第一条消息 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstID?: string;
+    /**
+     * 最后一条消息 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastID?: number;
+    /**
+     * 是否还有更多消息
+     */
+    HasMore?: boolean;
+    /**
+     * 对象类型
+     */
+    Object?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
+ * FilesList请求参数结构体
+ */
+export interface FilesListRequest {
+    /**
+     * 分页偏移量。
+     */
+    Offset?: number;
+    /**
+     * 每页数量，最大 100。
+     */
+    Limit?: number;
+}
+/**
  * 运行时异常信息。
  */
 export interface ErrorMsg {
@@ -829,6 +1314,75 @@ export interface SearchInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SearchResults?: Array<SearchResult>;
+    /**
+     * 脑图（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Mindmap?: Mindmap;
+    /**
+     * 相关事件（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelevantEvents?: Array<RelevantEvent>;
+    /**
+     * 相关组织及人物（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelevantEntities?: Array<RelevantEntity>;
+    /**
+     * 时间线（回复中不一定存在，流式协议中，仅在最后一条流式数据中返回，深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timeline?: Array<Timeline>;
+    /**
+     * 是否命中搜索深度模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportDeepSearch?: boolean;
+    /**
+     * 搜索回复大纲（深度模式下返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Outline?: Array<string>;
+}
+/**
+ * RunThread返回参数结构体
+ */
+export interface RunThreadResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
+}
+/**
+ * FilesDeletions请求参数结构体
+ */
+export interface FilesDeletionsRequest {
+    /**
+     * 文件标识符。
+     */
+    ID: string;
+}
+/**
+ * FilesList返回参数结构体
+ */
+export interface FilesListResponse {
+    /**
+     * 文件数量。
+     */
+    Total?: number;
+    /**
+     * 对象类型，始终为 list。
+     */
+    Object?: string;
+    /**
+     * FileObject 列表。
+     */
+    Data?: Array<FileObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+     */
+    RequestId?: string;
 }
 /**
  * GetTokenCount请求参数结构体
@@ -853,6 +1407,65 @@ export interface TextToImageLiteResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateThread请求参数结构体
+ */
+export declare type CreateThreadRequest = null;
+/**
+ * 会话消息附件
+ */
+export interface ThreadMessageAttachmentObject {
+    /**
+     * 文件 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileID?: string;
+}
+/**
+ * 时间线
+ */
+export interface Timeline {
+    /**
+     * 标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * 时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Datetime?: string;
+    /**
+     * 相关网页链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
+}
+/**
+ * 相关事件
+ */
+export interface RelevantEvent {
+    /**
+     * 相关事件标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title: string;
+    /**
+     * 相关事件内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content: string;
+    /**
+     * 相关事件时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Datetime: string;
+    /**
+     * 相关事件引用文章标号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Reference: Array<number | bigint>;
 }
 /**
  * 会话内容

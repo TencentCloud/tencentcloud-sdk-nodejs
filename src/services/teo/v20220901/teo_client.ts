@@ -167,6 +167,7 @@ import {
   L7OfflineLog,
   ModifyRuleResponse,
   ApplicationProxyRule,
+  UpstreamCertInfo,
   Zone,
   DescribeRulesSettingResponse,
   BindSecurityTemplateToEntityResponse,

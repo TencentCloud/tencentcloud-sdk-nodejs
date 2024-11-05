@@ -272,7 +272,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifySequenceRules(req: ModifySequenceRulesRequest, cb?: (error: string, rep: ModifySequenceRulesResponse) => void): Promise<ModifySequenceRulesResponse>;
     /**
-     * 添加互联网边界规则
+     * 接口不再使用，已有新接口AddAclRule
+
+添加互联网边界规则
      */
     AddAcRule(req: AddAcRuleRequest, cb?: (error: string, rep: AddAcRuleResponse) => void): Promise<AddAcRuleResponse>;
     /**

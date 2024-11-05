@@ -198,6 +198,19 @@ export interface DeleteDomainAliasResponse {
     RequestId?: string;
 }
 /**
+ * CreateLineGroup返回参数结构体
+ */
+export interface CreateLineGroupResponse {
+    /**
+     * 自定义线路分组详情
+     */
+    Data?: LineGroupDetail;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomainShareUserList返回参数结构体
  */
 export interface DescribeDomainShareUserListResponse {
@@ -502,6 +515,19 @@ export interface PayOrderWithBalanceResponse {
      * 此次操作支付成功的订单号数组
      */
     DealNameList?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordType返回参数结构体
+ */
+export interface DescribeRecordTypeResponse {
+    /**
+     * 记录类型列表
+     */
+    TypeList?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -888,6 +914,23 @@ export interface DeleteDomainBatchRequest {
     DomainList: Array<string>;
 }
 /**
+ * 自定义线路分组详细信息
+ */
+export interface LineGroupDetail {
+    /**
+     * 自定义线路分组ID
+     */
+    Id: number;
+    /**
+     * 自定线路分组名称
+     */
+    Name: string;
+    /**
+     * 自定义线路分组包含的线路列表
+     */
+    Lines: Array<string>;
+}
+/**
  * DeleteDomainCustomLine请求参数结构体
  */
 export interface DeleteDomainCustomLineRequest {
@@ -976,19 +1019,6 @@ export interface TagItemFilter {
     TagValue?: Array<string>;
 }
 /**
- * DescribeRecordType返回参数结构体
- */
-export interface DescribeRecordTypeResponse {
-    /**
-     * 记录类型列表
-     */
-    TypeList?: Array<string>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeRecordLineCategoryList返回参数结构体
  */
 export interface DescribeRecordLineCategoryListResponse {
@@ -1000,6 +1030,48 @@ export interface DescribeRecordLineCategoryListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateLineGroupCopy请求参数结构体
+ */
+export interface CreateLineGroupCopyRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 要复制的域名ID。要从多个域名复制线路分组时，用英文逗号分隔，例如1002,1005
+     */
+    DomainIds: string;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
+}
+/**
+ * DescribeLineGroupList请求参数结构体
+ */
+export interface DescribeLineGroupListRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 限制数量，传0或不传会返回所有。
+     */
+    Length?: number;
+    /**
+     * 按自定义线路分组名称排序的方向。升序传asc，降序传desc。
+     */
+    SortType?: string;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
 }
 /**
  * ModifyRecord返回参数结构体
@@ -1060,6 +1132,31 @@ export interface DescribeDomainAliasListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyLineGroup请求参数结构体
+ */
+export interface ModifyLineGroupRequest {
+    /**
+     * 自定义线路分组的名称。
+     */
+    Name: string;
+    /**
+     * 自定义线路分组包含的线路列表，包含多个线路时用英文逗号分隔。例如，铁通,奇虎
+     */
+    Lines: string;
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 自定义线路分组ID
+     */
+    LineGroupId: number;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
 }
 /**
  * RollbackRecordSnapshot请求参数结构体
@@ -1424,17 +1521,13 @@ export interface LineInfo {
     LineId: string;
 }
 /**
- * DescribeRecordExistExceptDefaultNS请求参数结构体
+ * DeleteLineGroup返回参数结构体
  */
-export interface DescribeRecordExistExceptDefaultNSRequest {
+export interface DeleteLineGroupResponse {
     /**
-     * 域名
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Domain: string;
-    /**
-     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-     */
-    DomainId?: number;
+    RequestId?: string;
 }
 /**
  * DescribeRecordLineList请求参数结构体
@@ -1781,6 +1874,23 @@ export interface GroupInfo {
     Size: number;
 }
 /**
+ * DeleteLineGroup请求参数结构体
+ */
+export interface DeleteLineGroupRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 自定义线路分组ID
+     */
+    LineGroupId: number;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
+}
+/**
  * ModifyRecordStatus请求参数结构体
  */
 export interface ModifyRecordStatusRequest {
@@ -2088,49 +2198,21 @@ export interface ModifyRecordToGroupResponse {
     RequestId?: string;
 }
 /**
- * ModifyTXTRecord请求参数结构体
+ * DescribeLineGroupList返回参数结构体
  */
-export interface ModifyTXTRecordRequest {
+export interface DescribeLineGroupListResponse {
     /**
-     * 域名
+     * 自定义线路分组列表
      */
-    Domain: string;
+    LineGroups?: Array<LineGroupItem>;
     /**
-     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+     * 自定义线路分组数量信息
      */
-    RecordLine: string;
+    Info?: LineGroupSum;
     /**
-     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Value: string;
-    /**
-     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
-     */
-    RecordId: number;
-    /**
-     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-     */
-    DomainId?: number;
-    /**
-     * 主机记录，如 www，如果不传，默认为 @。
-     */
-    SubDomain?: string;
-    /**
-     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
-     */
-    RecordLineId?: string;
-    /**
-     * TTL，范围1-604800，不同等级域名最小值不同。
-     */
-    TTL?: number;
-    /**
-     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
-     */
-    Status?: string;
-    /**
-     * 记录的备注信息。传空删除备注。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 快照解析记录
@@ -3031,6 +3113,51 @@ export interface ModifyDomainRemarkRequest {
     Remark?: string;
 }
 /**
+ * ModifyTXTRecord请求参数结构体
+ */
+export interface ModifyTXTRecordRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+     */
+    RecordLine: string;
+    /**
+     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+     */
+    Value: string;
+    /**
+     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+     */
+    RecordId: number;
+    /**
+     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+     */
+    DomainId?: number;
+    /**
+     * 主机记录，如 www，如果不传，默认为 @。
+     */
+    SubDomain?: string;
+    /**
+     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+     */
+    RecordLineId?: string;
+    /**
+     * TTL，范围1-604800，不同等级域名最小值不同。
+     */
+    TTL?: number;
+    /**
+     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
+     */
+    Status?: string;
+    /**
+     * 记录的备注信息。传空删除备注。
+     */
+    Remark?: string;
+}
+/**
  * 键值对
  */
 export interface KeyValue {
@@ -3045,22 +3172,9 @@ export interface KeyValue {
     Value?: string;
 }
 /**
- * DescribeDomainLogList返回参数结构体
+ * CreateLineGroupCopy返回参数结构体
  */
-export interface DescribeDomainLogListResponse {
-    /**
-     * 域名信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogList?: Array<string>;
-    /**
-     * 分页大小
-     */
-    PageSize?: number;
-    /**
-     * 日志总条数
-     */
-    TotalCount?: number;
+export interface CreateLineGroupCopyResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3458,6 +3572,35 @@ export interface DescribeRecordGroupListResponse {
     RequestId?: string;
 }
 /**
+ * 自定义线路分组元素
+ */
+export interface LineGroupItem {
+    /**
+     * 域名ID
+     */
+    DomainId: number;
+    /**
+     * 自定义线路分组ID
+     */
+    Id: number;
+    /**
+     * 自定义线路分组名称
+     */
+    Name: string;
+    /**
+     * 自定义线路分组包含的线路
+     */
+    Lines: Array<string>;
+    /**
+     * 创建时间
+     */
+    CreatedOn: string;
+    /**
+     * 更新时间
+     */
+    UpdatedOn: string;
+}
+/**
  * CreateDomainGroup请求参数结构体
  */
 export interface CreateDomainGroupRequest {
@@ -3631,6 +3774,15 @@ export interface VASStatisticItem {
     UseCount?: number;
 }
 /**
+ * ModifyLineGroup返回参数结构体
+ */
+export interface ModifyLineGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 快照信息
  */
 export interface SnapshotInfo {
@@ -3716,6 +3868,23 @@ export interface DescribeRecordGroupListRequest {
      * 分页每页数
      */
     Limit?: number;
+}
+/**
+ * 自定义线路数量信息
+ */
+export interface LineGroupSum {
+    /**
+     * 本次请求返回自定义线路分组个数
+     */
+    NowTotal: number;
+    /**
+     * 自定义线路分组总数
+     */
+    Total: number;
+    /**
+     * 还可允许添加的自定义线路分组个数
+     */
+    AvailableCount: number;
 }
 /**
  * DescribeDomainFilterList请求参数结构体
@@ -3813,25 +3982,17 @@ export interface PurviewInfo {
     Value: string;
 }
 /**
- * ModifyRecordRemark请求参数结构体
+ * DescribeRecordExistExceptDefaultNS请求参数结构体
  */
-export interface ModifyRecordRemarkRequest {
+export interface DescribeRecordExistExceptDefaultNSRequest {
     /**
      * 域名
      */
     Domain: string;
     /**
-     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
-     */
-    RecordId: number;
-    /**
      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
      */
     DomainId?: number;
-    /**
-     * 解析记录备注，删除备注请提交空内容。
-     */
-    Remark?: string;
 }
 /**
  * ModifySnapshotConfig返回参数结构体
@@ -3953,6 +4114,27 @@ export interface DescribeDomainCustomLineListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyRecordRemark请求参数结构体
+ */
+export interface ModifyRecordRemarkRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+     */
+    RecordId: number;
+    /**
+     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+     */
+    DomainId?: number;
+    /**
+     * 解析记录备注，删除备注请提交空内容。
+     */
+    Remark?: string;
+}
+/**
  * DeleteRecordBatch请求参数结构体
  */
 export interface DeleteRecordBatchRequest {
@@ -4059,6 +4241,27 @@ export interface ModifyDomainLockResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateLineGroup请求参数结构体
+ */
+export interface CreateLineGroupRequest {
+    /**
+     * 自定义线路分组的名称。
+     */
+    Name: string;
+    /**
+     * 自定义线路分组包含的线路列表，包含多个线路时用英文逗号分隔。例如，铁通,奇虎
+     */
+    Lines: string;
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
 }
 /**
  * CreateDomainCustomLine请求参数结构体
@@ -4341,6 +4544,19 @@ export interface TagItem {
     TagValue?: string;
 }
 /**
+ * DescribeDomainWhois返回参数结构体
+ */
+export interface DescribeDomainWhoisResponse {
+    /**
+     * 域名Whois信息
+     */
+    Info?: WhoisInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateRecordGroup返回参数结构体
  */
 export interface CreateRecordGroupResponse {
@@ -4537,13 +4753,22 @@ export interface DescribeSnapshotRollbackResultRequest {
     DomainId?: number;
 }
 /**
- * DescribeDomainWhois返回参数结构体
+ * DescribeDomainLogList返回参数结构体
  */
-export interface DescribeDomainWhoisResponse {
+export interface DescribeDomainLogListResponse {
     /**
-     * 域名Whois信息
+     * 域名信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info?: WhoisInfo;
+    LogList?: Array<string>;
+    /**
+     * 分页大小
+     */
+    PageSize?: number;
+    /**
+     * 日志总条数
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -40,7 +40,7 @@ export interface RocketMQNamespace {
  */
 export interface CreateRabbitMQBindingResponse {
     /**
-     * 队列名称
+     * 实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
@@ -2816,8 +2816,7 @@ export interface RabbitMQClusterAccessInfo {
      */
     PrometheusEndpointInfo?: PrometheusEndpointInfo;
     /**
-     * http://amqp-k3eb47gm.dashboard.rabbitmq.cq.public.tencenttdmq.com:15672/
-  公网域名接入点
+     * 公网域名接入点
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WebConsoleDomainEndpoint?: string;
@@ -6314,7 +6313,7 @@ export interface DescribeRabbitMQExchangesResponse {
  */
 export interface DescribeRabbitMQQueueDetailResponse {
     /**
-     * 队列名称
+     * 实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;

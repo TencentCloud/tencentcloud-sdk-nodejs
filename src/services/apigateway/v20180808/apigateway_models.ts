@@ -331,7 +331,7 @@ export interface DisableApiKeyResponse {
    * 禁用密钥操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2428,7 +2428,7 @@ export interface DeleteApiKeyResponse {
    * 删除操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2862,7 +2862,7 @@ export interface EnableApiKeyResponse {
    * 启动密钥操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2968,7 +2968,7 @@ export interface DescribeUsagePlanSecretIdsResponse {
    * 使用计划绑定的密钥列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: UsagePlanBindSecretStatus
+  Result?: UsagePlanBindSecretStatus
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3311,7 +3311,7 @@ export interface DescribeApiKeyResponse {
    * 密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiKey
+  Result?: ApiKey
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4466,7 +4466,7 @@ export interface UpdateApiKeyResponse {
    * 更换后的密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiKey
+  Result?: ApiKey
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7072,7 +7072,7 @@ export interface UnBindSecretIdsResponse {
    * 解绑操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

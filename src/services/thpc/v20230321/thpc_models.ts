@@ -73,7 +73,7 @@ export interface ClusterOverview {
    */
   LoginNodeCount?: number
   /**
-   * 弹性伸缩类型。取值范围：<li>THPC_AS：集群自动扩缩容由THPC产品内部实现。</li><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。</li>
+   * 弹性伸缩类型。
    */
   AutoScalingType?: string
   /**
@@ -319,7 +319,7 @@ export interface AttachNodesRequest {
    */
   ClusterId: string
   /**
-   * 节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
+   * 节点的实例id列表
    */
   ResourceSet: Array<string>
   /**
@@ -1164,7 +1164,7 @@ false（默认）：发送正常请求，通过检查后直接创建实例
    */
   Tags?: Array<Tag>
   /**
-   * 弹性伸缩类型。默认值：THPC_AS<li>THPC_AS：集群自动扩缩容由THPC产品内部实现。</li><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。</li>
+   * 弹性伸缩类型。默认值：THPC_AS
    */
   AutoScalingType?: string
   /**

@@ -7958,6 +7958,26 @@ export interface ProcessImageRequest {
     SubAppId?: number;
 }
 /**
+ * 自适应码流任务信息。
+ */
+export interface ComplexAdaptiveDynamicStreamingTask {
+    /**
+     * 任务 ID。
+     */
+    TaskId?: string;
+    /**
+     * 任务状态，取值：
+  <li>PROCESSING：处理中；</li>
+  <li>FINISH：已完成。</li>
+  
+     */
+    Status?: string;
+    /**
+     * 自适应码流任务的执行状态与结果，每个元素对应一个自适应码流模版。
+     */
+    ComplexAdaptiveDynamicStreamingTaskResultSet?: Array<ComplexAdaptiveDynamicStreamingTaskResult>;
+}
+/**
  * ModifyMediaInfo返回参数结构体
  */
 export interface ModifyMediaInfoResponse {
@@ -9388,15 +9408,14 @@ export interface CreateWatermarkTemplateRequest {
     SvgTemplate?: SvgWatermarkInput;
 }
 /**
- * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+ * 自适应码流任务的输入参数。
  */
-export interface BlackWhiteEdgeConfigureInfo {
+export interface ComplexAdaptiveDynamicStreamingTaskInput {
     /**
-     * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
-  <li>ON：开启；</li>
-  <li>OFF：关闭。</li>
+     * 自适应码流参数。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Switch: string;
+    StreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara;
 }
 /**
  * 排序依据
@@ -10288,6 +10307,33 @@ export interface AiSampleTagOperation {
     Tags: Array<string>;
 }
 /**
+ * 自适应码流任务的输出结果。
+ */
+export interface ComplexAdaptiveDynamicStreamingTaskOutput {
+    /**
+     * 自适应码流模版 ID。
+     */
+    Definition?: number;
+    /**
+     * 自适应码流打包格式。可选值：
+  <li>HLS；</li>
+  <li>MPEG-DASH。</li>
+     */
+    Format?: string;
+    /**
+     * DRM 方案类型。可选值：
+  <li>空字符串：无加密；</li>
+  <li>SimpleAES；</li>
+  <li>Widevine；</li>
+  <li>FairPlay。</li>
+     */
+    DrmType?: string;
+    /**
+     * 自适应码流的播放地址。
+     */
+    Url?: string;
+}
+/**
  * 播放器配置详情
  */
 export interface PlayerConfig {
@@ -10358,6 +10404,39 @@ export interface PlayerConfig {
      * 模板描述信息。
      */
     Comment?: string;
+}
+/**
+ * 自适应码流任务信息。
+ */
+export interface ComplexAdaptiveDynamicStreamingTaskResult {
+    /**
+     * 任务状态，取值：
+  <li>PROCESSING：处理中；</li>
+  <li>SUCCESS：已完成；</li>
+  <li>FAIL：失败。</li>
+     */
+    Status?: string;
+    /**
+     * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+     */
+    ErrCodeExt?: string;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 转码进度，取值范围 [0-100] 。
+     */
+    Progress?: number;
+    /**
+     * 自适应码流任务的输入。
+     */
+    Input?: ComplexAdaptiveDynamicStreamingTaskInput;
+    /**
+     * 自适应码流任务的输出。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: ComplexAdaptiveDynamicStreamingTaskOutput;
 }
 /**
  * ConfirmEvents请求参数结构体
@@ -13505,7 +13584,8 @@ export interface EventContent {
   <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
   <li>QualityInspectComplete：音画质检测完成；</li>
   <li>QualityEnhanceComplete：音画质重生任务完成；</li>
-  <li>PersistenceComplete：剪辑固化完成。</li>
+  <li>PersistenceComplete：剪辑固化完成；</li>
+  <li>ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。</li>
   <b>兼容 2017 版的事件类型：</b>
   <li>TranscodeComplete：视频转码完成；</li>
   <li>ConcatComplete：视频拼接完成；</li>
@@ -13644,6 +13724,11 @@ export interface EventContent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PersistenceCompleteEvent?: PersistenceCompleteTask;
+    /**
+     * 自适应码流任务信息，仅当 EventType 为ComplexAdaptiveDynamicStreamingComplete 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask;
 }
 /**
  * 智能精彩片段任务控制参数
@@ -15370,23 +15455,7 @@ export interface RebuildMediaRequest {
  */
 export interface DescribeTaskDetailResponse {
     /**
-     * 任务类型，取值：
-  <li>Procedure：视频处理任务；</li>
-  <li>EditMedia：视频编辑任务；</li>
-  <li>SplitMedia：视频拆条任务；</li>
-  <li>ComposeMedia：制作媒体文件任务；</li>
-  <li>WechatPublish：微信发布任务；</li>
-  <li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
-  <li>PullUpload：拉取上传媒体文件任务；</li>
-  <li>FastClipMedia：快速剪辑任务；</li>
-  <li>RemoveWatermarkTask：智能去除水印任务；</li>
-  <li>DescribeFileAttributesTask：获取文件属性任务；</li>
-  <li>RebuildMedia：音画质重生任务（不推荐使用）；</li>
-  <li>ReviewAudioVideo：音视频审核任务；</li>
-  <li>ExtractTraceWatermark：提取溯源水印任务；</li>
-  <li>ExtractCopyRightWatermark：提取版权水印任务；</li>
-  <li>QualityInspect：音画质检测任务；</li>
-  <li>QualityEnhance：音画质重生任务。</li>
+     * 任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务。</li>
      */
     TaskType?: string;
     /**
@@ -15514,6 +15583,11 @@ export interface DescribeTaskDetailResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QualityEnhanceTask?: QualityEnhanceTask;
+    /**
+     * 复杂自适应码流任务信息，仅当 TaskType 为 ComplexAdaptiveDynamicStreaming，该字段有值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComplexAdaptiveDynamicStreamingTask?: ComplexAdaptiveDynamicStreamingTask;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16659,6 +16733,15 @@ export interface AiReviewTerrorismTaskInput {
      * 鉴别涉及令人不安全的信息的模板 ID。
      */
     Definition?: number;
+}
+/**
+ * 自适应码流任务的流参数。
+ */
+export interface ComplexAdaptiveDynamicStreamingTaskStreamPara {
+    /**
+     * 自适应码流模版 ID。
+     */
+    Definition: number;
 }
 /**
  * RebuildMediaByTemplate返回参数结构体
@@ -18980,6 +19063,17 @@ export interface EditMediaFileInfo {
      * 视频剪辑结束的偏移时间，单位：秒。
      */
     EndTimeOffset?: number;
+}
+/**
+ * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+ */
+export interface BlackWhiteEdgeConfigureInfo {
+    /**
+     * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+     */
+    Switch: string;
 }
 /**
  * 图片水印模板输入参数

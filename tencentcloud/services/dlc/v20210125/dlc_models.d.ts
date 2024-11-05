@@ -6300,42 +6300,47 @@ export interface WorkGroupDetailInfo {
      * 工作组Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupId: number;
+    WorkGroupId?: number;
     /**
      * 工作组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupName: string;
+    WorkGroupName?: string;
     /**
      * 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 工作组上绑定的用户集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserInfo: Users;
+    UserInfo?: Users;
     /**
      * 数据权限集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataPolicyInfo: Policys;
+    DataPolicyInfo?: Policys;
     /**
      * 引擎权限集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnginePolicyInfo: Policys;
+    EnginePolicyInfo?: Policys;
     /**
      * 工作组描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupDescription: string;
+    WorkGroupDescription?: string;
     /**
      * 行过滤信息集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RowFilterInfo: Policys;
+    RowFilterInfo?: Policys;
+    /**
+     * 数据目录权限集
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CatalogPolicyInfo?: Policy;
 }
 /**
  * DescribeThirdPartyAccessUser请求参数结构体

@@ -26,6 +26,7 @@ import {
   ModifyDomainToGroupRequest,
   RollbackSnapshotRequest,
   DeleteDomainAliasResponse,
+  CreateLineGroupResponse,
   DescribeDomainShareUserListResponse,
   DescribeVASStatisticRequest,
   DeleteDomainBatchResponse,
@@ -43,6 +44,7 @@ import {
   DescribeDomainCustomLineListRequest,
   DeleteRecordGroupRequest,
   PayOrderWithBalanceResponse,
+  DescribeRecordTypeResponse,
   DescribeDomainResponse,
   DescribeSnapshotListRequest,
   DescribePackageDetailResponse,
@@ -55,15 +57,18 @@ import {
   DescribeDomainShareInfoRequest,
   DomainListItem,
   DeleteDomainBatchRequest,
+  LineGroupDetail,
   DeleteDomainCustomLineRequest,
   DescribeSnapshotRollbackResultResponse,
   TagItemFilter,
-  DescribeRecordTypeResponse,
   DescribeRecordLineCategoryListResponse,
+  CreateLineGroupCopyRequest,
+  DescribeLineGroupListRequest,
   ModifyRecordResponse,
   DeleteSnapshotRequest,
   DeleteRecordBatchResponse,
   DescribeDomainAliasListResponse,
+  ModifyLineGroupRequest,
   RollbackRecordSnapshotRequest,
   ModifyRecordToGroupRequest,
   DescribeSnapshotConfigResponse,
@@ -80,7 +85,7 @@ import {
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
   LineInfo,
-  DescribeRecordExistExceptDefaultNSRequest,
+  DeleteLineGroupResponse,
   DescribeRecordLineListRequest,
   DescribeRecordListResponse,
   CreateRecordBatchRequest,
@@ -99,6 +104,7 @@ import {
   DeleteRecordRequest,
   DescribeDomainRequest,
   GroupInfo,
+  DeleteLineGroupRequest,
   ModifyRecordStatusRequest,
   CreateRecordResponse,
   DeleteRecordGroupResponse,
@@ -112,7 +118,7 @@ import {
   DescribeRecordResponse,
   DescribeRecordLineCategoryListRequest,
   ModifyRecordToGroupResponse,
-  ModifyTXTRecordRequest,
+  DescribeLineGroupListResponse,
   SnapshotRecord,
   ModifyDomainUnlockResponse,
   DescribeDomainLogListRequest,
@@ -151,8 +157,9 @@ import {
   DescribeDomainGroupListResponse,
   ModifyPackageAutoRenewRequest,
   ModifyDomainRemarkRequest,
+  ModifyTXTRecordRequest,
   KeyValue,
-  DescribeDomainLogListResponse,
+  CreateLineGroupCopyResponse,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
@@ -170,6 +177,7 @@ import {
   CreateRecordGroupRequest,
   RollbackSnapshotResponse,
   DescribeRecordGroupListResponse,
+  LineGroupItem,
   CreateDomainGroupRequest,
   CreateSnapshotRequest,
   DeleteDomainResponse,
@@ -179,12 +187,14 @@ import {
   CreateDomainAliasRequest,
   DeleteShareDomainRequest,
   VASStatisticItem,
+  ModifyLineGroupResponse,
   SnapshotInfo,
   ModifyDynamicDNSRequest,
   DescribeRecordGroupListRequest,
+  LineGroupSum,
   DescribeDomainFilterListRequest,
   PurviewInfo,
-  ModifyRecordRemarkRequest,
+  DescribeRecordExistExceptDefaultNSRequest,
   ModifySnapshotConfigResponse,
   RollbackRecordSnapshotResponse,
   DescribeUserDetailRequest,
@@ -193,12 +203,14 @@ import {
   DescribeDomainListRequest,
   DomainCreateInfo,
   DescribeDomainCustomLineListResponse,
+  ModifyRecordRemarkRequest,
   DeleteRecordBatchRequest,
   DescribeDomainPurviewRequest,
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
   DescribeRecordSnapshotRollbackResultRequest,
   ModifyDomainLockResponse,
+  CreateLineGroupRequest,
   CreateDomainCustomLineRequest,
   LineItem,
   CreateDealResponse,
@@ -210,6 +222,7 @@ import {
   PreviewDetail,
   DomainShareUserInfo,
   TagItem,
+  DescribeDomainWhoisResponse,
   CreateRecordGroupResponse,
   DescribeDomainGroupListRequest,
   DescribeBatchTaskResponse,
@@ -219,7 +232,7 @@ import {
   ModifyDynamicDNSResponse,
   ModifyRecordRequest,
   DescribeSnapshotRollbackResultRequest,
-  DescribeDomainWhoisResponse,
+  DescribeDomainLogListResponse,
 } from "./dnspod_models"
 
 /**
@@ -285,6 +298,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建域名的线路分组
+   */
+  async CreateLineGroup(
+    req: CreateLineGroupRequest,
+    cb?: (error: string, rep: CreateLineGroupResponse) => void
+  ): Promise<CreateLineGroupResponse> {
+    return this.request("CreateLineGroup", req, cb)
+  }
+
+  /**
    * 获取域名权限
    */
   async DescribeDomainPurview(
@@ -295,13 +318,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停子域名的解析记录
+   * 获取域名的线路分组列表
    */
-  async ModifySubdomainStatus(
-    req: ModifySubdomainStatusRequest,
-    cb?: (error: string, rep: ModifySubdomainStatusResponse) => void
-  ): Promise<ModifySubdomainStatusResponse> {
-    return this.request("ModifySubdomainStatus", req, cb)
+  async DescribeLineGroupList(
+    req: DescribeLineGroupListRequest,
+    cb?: (error: string, rep: DescribeLineGroupListResponse) => void
+  ): Promise<DescribeLineGroupListResponse> {
+    return this.request("DescribeLineGroupList", req, cb)
   }
 
   /**
@@ -529,6 +552,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 锁定域名
+   */
+  async ModifyDomainLock(
+    req: ModifyDomainLockRequest,
+    cb?: (error: string, rep: ModifyDomainLockResponse) => void
+  ): Promise<ModifyDomainLockResponse> {
+    return this.request("ModifyDomainLock", req, cb)
+  }
+
+  /**
    * 按账号删除域名共享
    */
   async DeleteShareDomain(
@@ -559,13 +592,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改记录分组
+   * 修改域名的线路分组
    */
-  async ModifyRecordGroup(
-    req: ModifyRecordGroupRequest,
-    cb?: (error: string, rep: ModifyRecordGroupResponse) => void
-  ): Promise<ModifyRecordGroupResponse> {
-    return this.request("ModifyRecordGroup", req, cb)
+  async ModifyLineGroup(
+    req: ModifyLineGroupRequest,
+    cb?: (error: string, rep: ModifyLineGroupResponse) => void
+  ): Promise<ModifyLineGroupResponse> {
+    return this.request("ModifyLineGroup", req, cb)
+  }
+
+  /**
+   * 删除域名的线路分组
+   */
+  async DeleteLineGroup(
+    req: DeleteLineGroupRequest,
+    cb?: (error: string, rep: DeleteLineGroupResponse) => void
+  ): Promise<DeleteLineGroupResponse> {
+    return this.request("DeleteLineGroup", req, cb)
   }
 
   /**
@@ -619,13 +662,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取账户信息
+   * 获取任务详情
    */
-  async DescribeUserDetail(
-    req?: DescribeUserDetailRequest,
-    cb?: (error: string, rep: DescribeUserDetailResponse) => void
-  ): Promise<DescribeUserDetailResponse> {
-    return this.request("DescribeUserDetail", req, cb)
+  async DescribeBatchTask(
+    req: DescribeBatchTaskRequest,
+    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
+  ): Promise<DescribeBatchTaskResponse> {
+    return this.request("DescribeBatchTask", req, cb)
   }
 
   /**
@@ -649,6 +692,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 暂停子域名的解析记录
+   */
+  async ModifySubdomainStatus(
+    req: ModifySubdomainStatusRequest,
+    cb?: (error: string, rep: ModifySubdomainStatusResponse) => void
+  ): Promise<ModifySubdomainStatusResponse> {
+    return this.request("ModifySubdomainStatus", req, cb)
+  }
+
+  /**
    * 修改记录可选字段
    */
   async ModifyRecordFields(
@@ -656,6 +709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRecordFieldsResponse) => void
   ): Promise<ModifyRecordFieldsResponse> {
     return this.request("ModifyRecordFields", req, cb)
+  }
+
+  /**
+   * 修改记录分组
+   */
+  async ModifyRecordGroup(
+    req: ModifyRecordGroupRequest,
+    cb?: (error: string, rep: ModifyRecordGroupResponse) => void
+  ): Promise<ModifyRecordGroupResponse> {
+    return this.request("ModifyRecordGroup", req, cb)
   }
 
   /**
@@ -719,13 +782,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取任务详情
-   */
-  async DescribeBatchTask(
-    req: DescribeBatchTaskRequest,
-    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
-  ): Promise<DescribeBatchTaskResponse> {
-    return this.request("DescribeBatchTask", req, cb)
+     * 批量删除解析记录
+备注：因存储限制， 建议一次批量删除最多2000条
+     */
+  async DeleteRecordBatch(
+    req: DeleteRecordBatchRequest,
+    cb?: (error: string, rep: DeleteRecordBatchResponse) => void
+  ): Promise<DeleteRecordBatchResponse> {
+    return this.request("DeleteRecordBatch", req, cb)
   }
 
   /**
@@ -820,14 +884,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 批量删除解析记录
-备注：因存储限制， 建议一次批量删除最多2000条
-     */
-  async DeleteRecordBatch(
-    req: DeleteRecordBatchRequest,
-    cb?: (error: string, rep: DeleteRecordBatchResponse) => void
-  ): Promise<DeleteRecordBatchResponse> {
-    return this.request("DeleteRecordBatch", req, cb)
+   * 复制域名的线路分组
+   */
+  async CreateLineGroupCopy(
+    req: CreateLineGroupCopyRequest,
+    cb?: (error: string, rep: CreateLineGroupCopyResponse) => void
+  ): Promise<CreateLineGroupCopyResponse> {
+    return this.request("CreateLineGroupCopy", req, cb)
   }
 
   /**
@@ -984,13 +1047,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 锁定域名
+   * 获取账户信息
    */
-  async ModifyDomainLock(
-    req: ModifyDomainLockRequest,
-    cb?: (error: string, rep: ModifyDomainLockResponse) => void
-  ): Promise<ModifyDomainLockResponse> {
-    return this.request("ModifyDomainLock", req, cb)
+  async DescribeUserDetail(
+    req?: DescribeUserDetailRequest,
+    cb?: (error: string, rep: DescribeUserDetailResponse) => void
+  ): Promise<DescribeUserDetailResponse> {
+    return this.request("DescribeUserDetail", req, cb)
   }
 
   /**

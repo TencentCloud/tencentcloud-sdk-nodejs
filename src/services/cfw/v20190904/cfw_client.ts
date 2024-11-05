@@ -976,8 +976,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 添加互联网边界规则
-   */
+     * 接口不再使用，已有新接口AddAclRule
+
+添加互联网边界规则
+     */
   async AddAcRule(
     req: AddAcRuleRequest,
     cb?: (error: string, rep: AddAcRuleResponse) => void

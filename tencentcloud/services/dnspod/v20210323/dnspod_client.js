@@ -61,16 +61,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVasAutoRenewStatus", req, cb);
     }
     /**
+     * 创建域名的线路分组
+     */
+    async CreateLineGroup(req, cb) {
+        return this.request("CreateLineGroup", req, cb);
+    }
+    /**
      * 获取域名权限
      */
     async DescribeDomainPurview(req, cb) {
         return this.request("DescribeDomainPurview", req, cb);
     }
     /**
-     * 暂停子域名的解析记录
+     * 获取域名的线路分组列表
      */
-    async ModifySubdomainStatus(req, cb) {
-        return this.request("ModifySubdomainStatus", req, cb);
+    async DescribeLineGroupList(req, cb) {
+        return this.request("DescribeLineGroupList", req, cb);
     }
     /**
      * 删除域名的自定义线路
@@ -209,6 +215,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotConfig", req, cb);
     }
     /**
+     * 锁定域名
+     */
+    async ModifyDomainLock(req, cb) {
+        return this.request("ModifyDomainLock", req, cb);
+    }
+    /**
      * 按账号删除域名共享
      */
     async DeleteShareDomain(req, cb) {
@@ -227,10 +239,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomain", req, cb);
     }
     /**
-     * 修改记录分组
+     * 修改域名的线路分组
      */
-    async ModifyRecordGroup(req, cb) {
-        return this.request("ModifyRecordGroup", req, cb);
+    async ModifyLineGroup(req, cb) {
+        return this.request("ModifyLineGroup", req, cb);
+    }
+    /**
+     * 删除域名的线路分组
+     */
+    async DeleteLineGroup(req, cb) {
+        return this.request("DeleteLineGroup", req, cb);
     }
     /**
      * 修改解析记录的状态
@@ -263,10 +281,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainCustomLine", req, cb);
     }
     /**
-     * 获取账户信息
+     * 获取任务详情
      */
-    async DescribeUserDetail(req, cb) {
-        return this.request("DescribeUserDetail", req, cb);
+    async DescribeBatchTask(req, cb) {
+        return this.request("DescribeBatchTask", req, cb);
     }
     /**
      * 回滚快照
@@ -281,10 +299,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRecord", req, cb);
     }
     /**
+     * 暂停子域名的解析记录
+     */
+    async ModifySubdomainStatus(req, cb) {
+        return this.request("ModifySubdomainStatus", req, cb);
+    }
+    /**
      * 修改记录可选字段
      */
     async ModifyRecordFields(req, cb) {
         return this.request("ModifyRecordFields", req, cb);
+    }
+    /**
+     * 修改记录分组
+     */
+    async ModifyRecordGroup(req, cb) {
+        return this.request("ModifyRecordGroup", req, cb);
     }
     /**
      * 获取记录信息
@@ -323,10 +353,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPackageAutoRenew", req, cb);
     }
     /**
-     * 获取任务详情
+     * 批量删除解析记录
+备注：因存储限制， 建议一次批量删除最多2000条
      */
-    async DescribeBatchTask(req, cb) {
-        return this.request("DescribeBatchTask", req, cb);
+    async DeleteRecordBatch(req, cb) {
+        return this.request("DeleteRecordBatch", req, cb);
     }
     /**
      * 创建域名别名
@@ -384,11 +415,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDomainAlias", req, cb);
     }
     /**
-     * 批量删除解析记录
-备注：因存储限制， 建议一次批量删除最多2000条
+     * 复制域名的线路分组
      */
-    async DeleteRecordBatch(req, cb) {
-        return this.request("DeleteRecordBatch", req, cb);
+    async CreateLineGroupCopy(req, cb) {
+        return this.request("CreateLineGroupCopy", req, cb);
     }
     /**
      * 回滚前检查单条记录
@@ -484,10 +514,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainLogList", req, cb);
     }
     /**
-     * 锁定域名
+     * 获取账户信息
      */
-    async ModifyDomainLock(req, cb) {
-        return this.request("ModifyDomainLock", req, cb);
+    async DescribeUserDetail(req, cb) {
+        return this.request("DescribeUserDetail", req, cb);
     }
     /**
      * 创建快照

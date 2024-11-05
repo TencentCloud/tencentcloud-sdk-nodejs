@@ -2739,14 +2739,18 @@ export interface AccelerationDomainCertificate {
    */
   Mode?: string
   /**
-   * 服务端证书列表。
+   * 服务端证书列表，相关证书部署在 EO 的入口侧。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<CertificateInfo>
   /**
-   * 边缘双向认证配置。
+   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于 EO 节点认证客户端证书。
    */
   ClientCertInfo?: MutualTLS
+  /**
+   * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
+   */
+  UpstreamCertInfo?: UpstreamCertInfo
 }
 
 /**
@@ -3788,6 +3792,16 @@ export interface ApplicationProxyRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleTag?: string
+}
+
+/**
+ * 用于 EO 节点回源时携带的证书，源站启用双向认证握手时使用，用于源站认证客户端证书是否有效，确保请求来源于受信任的 EO 节点。
+ */
+export interface UpstreamCertInfo {
+  /**
+   * 在回源双向认证场景下，该字段为 EO 节点回源时携带的证书（包含公钥、私钥即可），部署在 EO 节点，用于源站对 EO 节点进行认证。在作为入参使用时，不填写表示保持原有配置。
+   */
+  UpstreamMutualTLS?: MutualTLS
 }
 
 /**
@@ -8019,7 +8033,7 @@ export interface ModifyHostsCertificateRequest {
    */
   ApplyType?: string
   /**
-   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 的入口侧，用于客户端对 EO 节点进行认证。不填写表示保持原有配置。
+   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
    */
   ClientCertInfo?: MutualTLS
 }

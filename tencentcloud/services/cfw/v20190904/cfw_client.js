@@ -422,7 +422,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifySequenceRules", req, cb);
     }
     /**
-     * 添加互联网边界规则
+     * 接口不再使用，已有新接口AddAclRule
+
+添加互联网边界规则
      */
     async AddAcRule(req, cb) {
         return this.request("AddAcRule", req, cb);

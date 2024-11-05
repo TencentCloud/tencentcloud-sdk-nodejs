@@ -497,12 +497,12 @@ export interface DeleteScheduledSqlResponse {
 export interface DescribeNoticeContentsRequest {
     /**
      * <li> name
-  按照【通知内容模版名称】进行过滤。
+  按照【通知内容模板名称】进行过滤。
   类型：String
   必选：否
   </li>
   <li> noticeContentId
-  按照【通知内容模版ID】进行过滤。
+  按照【通知内容模板ID】进行过滤。
   类型：String
   必选：否
   </li>
@@ -1924,12 +1924,12 @@ export interface DescribeConfigsResponse {
  */
 export interface DescribeNoticeContentsResponse {
     /**
-     * 通知内容模版列表。
+     * 通知内容模板列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NoticeContents?: Array<NoticeContentTemplate>;
     /**
-     * 符合条件的通知内容模版总数。
+     * 符合条件的通知内容模板总数。
      */
     TotalCount?: number;
     /**
@@ -5414,7 +5414,7 @@ export interface SearchLogResponse {
     RequestId?: string;
 }
 /**
- * 通知内容模版详细配置
+ * 通知内容模板详细配置
  */
 export interface NoticeContent {
     /**
@@ -5424,12 +5424,12 @@ export interface NoticeContent {
      */
     Type: string;
     /**
-     * 告警触发通知内容模版。
+     * 告警触发通知内容模板。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TriggerContent?: NoticeContentInfo;
     /**
-     * 告警恢复通知内容模版。
+     * 告警恢复通知内容模板。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecoveryContent?: NoticeContentInfo;
@@ -5920,11 +5920,11 @@ export interface ModifyConfigResponse {
  */
 export interface ModifyNoticeContentRequest {
     /**
-     * 通知内容模版ID。
+     * 通知内容模板ID。
      */
     NoticeContentId: string;
     /**
-     * 通知内容模版名称。
+     * 通知内容模板名称。
      */
     Name?: string;
     /**
@@ -5934,7 +5934,7 @@ export interface ModifyNoticeContentRequest {
      */
     Type?: number;
     /**
-     * 通知内容模版详细信息。
+     * 通知内容模板详细信息。
      */
     NoticeContents?: Array<NoticeContent>;
 }
@@ -6702,15 +6702,15 @@ export interface MetricLabel {
  */
 export interface CreateNoticeContentRequest {
     /**
-     * 模版名称。
+     * 模板名称。
      */
     Name: string;
     /**
-     * 模版内容语言。0：中文1：英文
+     * 模板内容语言。0：中文1：英文
      */
     Type?: number;
     /**
-     * 模版详细配置。
+     * 模板详细配置。
      */
     NoticeContents?: Array<NoticeContent>;
 }
@@ -7815,7 +7815,7 @@ export interface CosRechargeInfo {
  */
 export interface DeleteNoticeContentRequest {
     /**
-     * 通知内容模版ID
+     * 通知内容模板ID
      */
     NoticeContentId: string;
 }

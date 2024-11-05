@@ -435,6 +435,14 @@ export interface FileSystemInfo {
      */
     BandwidthLimit?: number;
     /**
+     * 文件系统关联的快照策略
+     */
+    AutoSnapshotPolicyId?: string;
+    /**
+     * 文件系统处理快照状态
+     */
+    SnapStatus?: string;
+    /**
      * 文件系统容量规格上限
   单位:GiB
      */
@@ -454,6 +462,16 @@ export interface FileSystemInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TieringDetail?: TieringDetailInfo;
+    /**
+     * 文件系统自动扩容策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoScaleUpRule?: AutoScaleUpRule;
+    /**
+     * 文件系统版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version?: string;
 }
 /**
  * BindAutoSnapshotPolicy请求参数结构体
@@ -589,22 +607,9 @@ export interface BindAutoSnapshotPolicyResponse {
     RequestId?: string;
 }
 /**
- * StopMigrationTask返回参数结构体
+ * SignUpCfsService请求参数结构体
  */
-export interface StopMigrationTaskResponse {
-    /**
-     * 迁移任务Id
-     */
-    TaskId?: string;
-    /**
-     * 迁移状态。0: 已完成；1: 进行中；2: 已终止
-     */
-    Status?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type SignUpCfsServiceRequest = null;
 /**
  * SignUpCfsService返回参数结构体
  */
@@ -977,23 +982,6 @@ export interface DescribeSnapshotOperationLogsResponse {
      * 操作日志
      */
     SnapshotOperates: Array<SnapshotOperateLog>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * UpdateCfsFileSystemPGroup返回参数结构体
- */
-export interface UpdateCfsFileSystemPGroupResponse {
-    /**
-     * 权限组 ID
-     */
-    PGroupId: string;
-    /**
-     * 文件系统 ID
-     */
-    FileSystemId: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1390,6 +1378,23 @@ export interface DescribeCfsSnapshotOverviewResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 自动扩容规则
+ */
+export interface AutoScaleUpRule {
+    /**
+     * 自动扩容策略开启，关闭
+     */
+    Status?: string;
+    /**
+     * 集群用量占比，到达这个值后开始扩容,范围[10-90]
+     */
+    ScaleThreshold?: number;
+    /**
+     * 扩容后使用量跟集群总量比例,范围[1-90]
+     */
+    TargetThreshold?: number;
 }
 /**
  * DeleteCfsSnapshot请求参数结构体
@@ -1812,9 +1817,22 @@ export interface DescribeCfsRulesResponse {
     RequestId?: string;
 }
 /**
- * SignUpCfsService请求参数结构体
+ * UpdateCfsFileSystemPGroup返回参数结构体
  */
-export declare type SignUpCfsServiceRequest = null;
+export interface UpdateCfsFileSystemPGroupResponse {
+    /**
+     * 权限组 ID
+     */
+    PGroupId: string;
+    /**
+     * 文件系统 ID
+     */
+    FileSystemId: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * UpdateAutoSnapshotPolicy返回参数结构体
  */
@@ -2207,6 +2225,23 @@ export interface CreateCfsRuleResponse {
      * 优先级
      */
     Priority?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * StopMigrationTask返回参数结构体
+ */
+export interface StopMigrationTaskResponse {
+    /**
+     * 迁移任务Id
+     */
+    TaskId?: string;
+    /**
+     * 迁移状态。0: 已完成；1: 进行中；2: 已终止
+     */
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

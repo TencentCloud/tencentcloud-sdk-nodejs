@@ -1290,6 +1290,14 @@ export interface KeyMetadata {
    * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
    */
   HsmClusterId?: string
+  /**
+   * 密钥轮转周期（天）
+   */
+  RotateDays?: number
+  /**
+   * 上次乱转时间（Unix timestamp）
+   */
+  LastRotateTime?: number
 }
 
 /**
