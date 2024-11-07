@@ -1385,6 +1385,11 @@ JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
+  /**
+   * job VUM用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Usage?: number
 }
 
 /**

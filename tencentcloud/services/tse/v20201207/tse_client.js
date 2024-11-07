@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb);
     }
     /**
+     * 更新云原生网关证书
+     */
+    async ModifyCloudNativeAPIGatewayCertificate(req, cb) {
+        return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb);
+    }
+    /**
      * 删除公网网络配置
      */
     async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
@@ -208,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoScalerResourceStrategy", req, cb);
     }
     /**
-     * 更新云原生网关证书
+     * 查看实例的标签信息
      */
-    async ModifyCloudNativeAPIGatewayCertificate(req, cb) {
-        return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb);
+    async DescribeInstanceTagInfos(req, cb) {
+        return this.request("DescribeInstanceTagInfos", req, cb);
     }
     /**
      * 发布配置文件

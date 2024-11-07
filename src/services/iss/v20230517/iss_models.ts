@@ -74,7 +74,7 @@ export interface ListDevicesRequest {
    */
   PageNumber?: number
   /**
-   * 每页数量，默认为20。
+   * 每页数量，默认为20，单页最大10000条
    */
   PageSize?: number
 }

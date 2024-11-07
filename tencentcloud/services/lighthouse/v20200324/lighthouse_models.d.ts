@@ -2595,6 +2595,11 @@ export interface Instance {
      * 创建实例后自动执行TAT命令的调用ID。
      */
     InitInvocationId?: string;
+    /**
+     * 实例违规详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceViolationDetail?: InstanceViolationDetail;
 }
 /**
  * Docker容器挂载卷
@@ -2639,6 +2644,31 @@ export interface CreateKeyPairResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 实例违规详情。
+ */
+export interface InstanceViolationDetail {
+    /**
+     *  来源：RESTRICT：封禁、FREEZW：冻结
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Source?: string;
+    /**
+     * 是否允许自助解封：1是，2否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State?: string;
+    /**
+     * 违规类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Reason?: string;
+    /**
+     * 违规内容（URL、关联域名）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content?: string;
 }
 /**
  * DescribeInstanceVncUrl返回参数结构体

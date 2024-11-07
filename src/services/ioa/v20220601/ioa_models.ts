@@ -71,12 +71,10 @@ export interface CreateDeviceVirtualGroupResponse {
 export interface ComplexRule {
   /**
    * 简单规则表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SimpleRules?: Array<SimpleRule>
   /**
    * 表达式间逻辑关系
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Relation?: string
 }
@@ -87,12 +85,10 @@ export interface ComplexRule {
 export interface Sort {
   /**
    * 排序字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Field?: string
   /**
    * 排序方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Order?: string
 }
@@ -397,7 +393,6 @@ export interface DescribeDevicesPageRsp {
 export interface FilterGroup {
   /**
    * Filters 条件过滤
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Filters?: Array<Filter>
 }
@@ -834,17 +829,14 @@ export interface DescribeLocalAccountsData {
 export interface Filter {
   /**
    * 过滤字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Field?: string
   /**
-   * 过滤方式 eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤方式： eq:等于,net:不等于,like,nlike,gt:大于,lt:小于,egt:大于等于,elt:小于等于。具体支持哪些过滤方式，结合具体接口字段描述来定
    */
   Operator?: string
   /**
    * 过滤条件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
 }
@@ -874,7 +866,7 @@ export interface DescribeLocalAccountsRequest {
    */
   AccountGroupId?: number
   /**
-   * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户(只支持32位)
+   * 是否仅展示当前目录下用户 1： 递归显示 2：仅显示当前目录下用户
    */
   ShowFlag?: number
 }
@@ -894,37 +886,27 @@ export interface DescribeLocalAccountsPage {
 }
 
 /**
- * - [ ] 过滤条件<br>
-
-<li>Name - String - 是否必填：否 - 操作符: ilike  - 排序支持：否- 根据分组名称进行查询。</li>
-分页参数<br>
-<li>PageNum 从1开始，小于等于0时使用默认参数。</li>
-<li>PageSize 最大值5000，最好不超过100。</li>
+ * 这是一个多接口的公共数据结构，用于接口根据条件进行过滤和分页。具体支持哪些过滤条件，参考具体使用该结构的接口字段描述
  */
 export interface Condition {
   /**
    * Filters 条件过滤
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Filters?: Array<Filter>
   /**
    * FilterGroups 条件过滤组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterGroups?: Array<FilterGroup>
   /**
    * Sort 排序字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sort?: Sort
   /**
    * PageSize 每页获取数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
    * PageNum 获取第几页(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNum?: number
 }

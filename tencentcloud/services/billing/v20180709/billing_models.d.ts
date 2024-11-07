@@ -6551,55 +6551,55 @@ export interface DescribeAccountBalanceResponse {
     /**
      * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
      */
-    Balance: number;
+    Balance?: number;
     /**
      * 查询的用户Uin
      */
-    Uin: number;
+    Uin?: number;
     /**
      * 当前真实可用余额,单位 分
      */
-    RealBalance: number;
+    RealBalance?: number;
     /**
      * 现金账户余额,单位 分
      */
-    CashAccountBalance: number;
+    CashAccountBalance?: number;
     /**
      * 收益转入账户余额,单位 分
      */
-    IncomeIntoAccountBalance: number;
+    IncomeIntoAccountBalance?: number;
     /**
      * 赠送账户余额,单位 分
      */
-    PresentAccountBalance: number;
+    PresentAccountBalance?: number;
     /**
      * 冻结金额,单位 分
      */
-    FreezeAmount: number;
+    FreezeAmount?: number;
     /**
      * 欠费金额,单位 分
      */
-    OweAmount: number;
+    OweAmount?: number;
     /**
      * 是否允许欠费消费
      */
-    IsAllowArrears: boolean;
+    IsAllowArrears?: boolean;
     /**
      * 是否限制信用额度
      */
-    IsCreditLimited: boolean;
+    IsCreditLimited?: boolean;
     /**
-     * 信用额度
+     * 信用额度,单位 分
      */
-    CreditAmount: number;
+    CreditAmount?: number;
     /**
-     * 可用信用额度
+     * 可用信用额度,单位 分
      */
-    CreditBalance: number;
+    CreditBalance?: number;
     /**
-     * 真实可用信用额度
+     * 真实可用信用额度,单位 分
      */
-    RealCreditBalance: number;
+    RealCreditBalance?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

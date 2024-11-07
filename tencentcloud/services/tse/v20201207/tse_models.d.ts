@@ -6308,6 +6308,15 @@ export interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceTagInfos请求参数结构体
+ */
+export interface DescribeInstanceTagInfosRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+}
+/**
  * 治理中心命名空间输入参数
  */
 export interface GovernanceNamespaceInput {
@@ -6921,6 +6930,23 @@ export interface ZookeeperRegionInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OtherRegions?: Array<ZookeeperRegionMyIdInfo>;
+}
+/**
+ * DescribeInstanceTagInfos返回参数结构体
+ */
+export interface DescribeInstanceTagInfosResponse {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 实例标签集合
+     */
+    TagInfos?: Array<InstanceTagInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteConfigFiles请求参数结构体

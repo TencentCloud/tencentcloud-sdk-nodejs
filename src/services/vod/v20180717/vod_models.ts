@@ -2803,13 +2803,31 @@ export interface EditMediaTaskInput {
 }
 
 /**
- * DeleteAIAnalysisTemplate返回参数结构体
+ * DescribeImageSpriteTemplates请求参数结构体
  */
-export interface DeleteAIAnalysisTemplateResponse {
+export interface DescribeImageSpriteTemplatesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  RequestId?: string
+  SubAppId?: number
+  /**
+   * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
 }
 
 /**
@@ -3302,6 +3320,22 @@ export interface MediaAiAnalysisCoverItem {
    * 智能封面的可信度，取值范围是 0 到 100。
    */
   Confidence: number
+}
+
+/**
+ * 自适应码流任务多语言字幕的输入参数。
+ */
+export interface ComplexAdaptiveDynamicStreamingTaskSubtitleInput {
+  /**
+   * 字幕 ID。该字幕必须归属于自适应码流任务的输入主媒体。
+   */
+  Id: string
+  /**
+   * 是否设置为自适应码流的默认字幕。取值：
+<li>YES：设置为默认字幕；</li>
+<li>NO：不设置为默认字幕（默认值）。</li>
+   */
+  Default?: string
 }
 
 /**
@@ -6015,6 +6049,36 @@ export interface EditMediaRequest {
 }
 
 /**
+ * CreateComplexAdaptiveDynamicStreamingTask请求参数结构体
+ */
+export interface CreateComplexAdaptiveDynamicStreamingTaskRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 主媒体文件的媒体 ID。
+   */
+  FileId: string
+  /**
+   * 自适应码流参数，最大支持8个。
+   */
+  StreamParaSet: Array<ComplexAdaptiveDynamicStreamingTaskStreamPara>
+  /**
+   * 片头片尾列表，支持多片头片尾，最大可支持 4 个。如果填写了该字段，AudioSet 和 SubtitleSet 中指定的媒体的起始时间将会自动调整，和主媒体保持同步。
+   */
+  HeadTailSet?: Array<HeadTailTaskInput>
+  /**
+   * 多语言音频流参数，最大支持16个。每个数组元素对应自适应码流中的一条音频流。如果要将主媒体文件中的音频流添加到输出的自适应码流中，那么也需要在此处指定。数组中元素的顺序将决定自适应码流中的音频流顺序。如果输入的媒体文件同时带有视频流和音频流，那么视频流将被忽略。
+   */
+  AudioSet?: Array<ComplexAdaptiveDynamicStreamingTaskAudioInput>
+  /**
+   * 多语言字幕参数，最大可支持16个。每个数组元素对应自适应码流中的一条字幕流。数组中元素的顺序将决定自适应码流中的字幕流顺序。
+   */
+  SubtitleSet?: Array<ComplexAdaptiveDynamicStreamingTaskSubtitleInput>
+}
+
+/**
  * 语音翻译结果。
  */
 export interface AiRecognitionTaskAsrTranslateResult {
@@ -8578,6 +8642,31 @@ export interface CreateJustInTimeTranscodeTemplateRequest {
 }
 
 /**
+ * 自适应码流任务多语言音频流输入参数。
+ */
+export interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
+  /**
+   * 音频源的媒体 ID。固定取该媒体中的首个音频流，视频流和其它音频流（如有）将被忽略。
+   */
+  FileId: string
+  /**
+   * 输出的自适应码流中的音频流名称，长度限制为16个字符。
+   */
+  Name: string
+  /**
+   * 输出的自适应码流中的音频流语言，长度限制为16个字符。要求符合 RFC5646 规范。
+   */
+  Language: string
+  /**
+   * 是否设置为自适应码流的默认音频。取值：
+<li>YES：设置为默认音频；</li>
+<li>NO：不设置为默认音频（默认值）。</li>
+
+   */
+  Default?: string
+}
+
+/**
  * ManageTask请求参数结构体
  */
 export interface ManageTaskRequest {
@@ -10429,31 +10518,13 @@ export interface VideoConfigureInfo {
 }
 
 /**
- * DescribeImageSpriteTemplates请求参数结构体
+ * DeleteAIAnalysisTemplate返回参数结构体
  */
-export interface DescribeImageSpriteTemplatesRequest {
+export interface DeleteAIAnalysisTemplateResponse {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SubAppId?: number
-  /**
-   * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
-   */
-  Definitions?: Array<number | bigint>
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：100。
-   */
-  Limit?: number
-  /**
-   * 模板类型过滤条件，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -15708,6 +15779,20 @@ export interface DescribeContentReviewTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
+}
+
+/**
+ * CreateComplexAdaptiveDynamicStreamingTask返回参数结构体
+ */
+export interface CreateComplexAdaptiveDynamicStreamingTaskResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

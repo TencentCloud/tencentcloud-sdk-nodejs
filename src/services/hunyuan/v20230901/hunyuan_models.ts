@@ -20,7 +20,7 @@
  */
 export interface ChatCompletionsRequest {
   /**
-   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest。
+   * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest、 hunyuan-large。
 各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。
 
 注意：
@@ -834,6 +834,10 @@ export interface ToolCall {
    * 具体的function调用
    */
   Function: ToolCallFunction
+  /**
+   * 索引值
+   */
+  Index?: number
 }
 
 /**
@@ -874,7 +878,7 @@ export interface ToolCallFunction {
  */
 export interface SetPayModeRequest {
   /**
-   * 设置后付费状态，0：后付费；1：预付费
+   * 设置后付费状态，0：后付费打开；1：后付费关闭
    */
   PayMode: number
 }

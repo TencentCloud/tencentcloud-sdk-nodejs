@@ -1976,27 +1976,37 @@ export interface DescribeBatchProductionResponse {
     /**
      * 量产数量。
      */
-    BatchCnt: number;
+    BatchCnt?: number;
     /**
      * 烧录方式。
      */
-    BurnMethod: number;
+    BurnMethod?: number;
     /**
      * 创建时间。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 下载URL。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 生成方式。
      */
-    GenerationMethod: number;
+    GenerationMethod?: number;
     /**
      * 上传URL。
      */
-    UploadUrl: string;
+    UploadUrl?: string;
+    /**
+     * 成功数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SuccessCount?: number;
+    /**
+     * 量产最后失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastFailedReason?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

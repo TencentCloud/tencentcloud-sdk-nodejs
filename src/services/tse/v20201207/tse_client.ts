@@ -282,6 +282,7 @@ import {
   DescribeGovernanceAliasesRequest,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeAutoScalerResourceStrategyBindingGroupsResponse,
+  DescribeInstanceTagInfosRequest,
   GovernanceNamespaceInput,
   DeleteGovernanceServicesResponse,
   DeleteCloudNativeAPIGatewayCertificateResponse,
@@ -313,6 +314,7 @@ import {
   DeleteCloudNativeAPIGatewayServiceRequest,
   DescribePublicNetworkResponse,
   ZookeeperRegionInfo,
+  DescribeInstanceTagInfosResponse,
   DeleteConfigFilesRequest,
   DescribeGovernanceServicesResponse,
   CloseWafProtectionResponse,
@@ -399,6 +401,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServiceRateLimitResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse> {
     return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb)
+  }
+
+  /**
+   * 更新云原生网关证书
+   */
+  async ModifyCloudNativeAPIGatewayCertificate(
+    req: ModifyCloudNativeAPIGatewayCertificateRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCertificateResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayCertificateResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb)
   }
 
   /**
@@ -672,13 +684,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新云原生网关证书
+   * 查看实例的标签信息
    */
-  async ModifyCloudNativeAPIGatewayCertificate(
-    req: ModifyCloudNativeAPIGatewayCertificateRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCertificateResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayCertificateResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb)
+  async DescribeInstanceTagInfos(
+    req: DescribeInstanceTagInfosRequest,
+    cb?: (error: string, rep: DescribeInstanceTagInfosResponse) => void
+  ): Promise<DescribeInstanceTagInfosResponse> {
+    return this.request("DescribeInstanceTagInfos", req, cb)
   }
 
   /**

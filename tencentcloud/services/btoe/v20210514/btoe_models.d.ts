@@ -5,11 +5,11 @@ export interface GetDepositFileResponse {
     /**
      * 存证编号
      */
-    EvidenceId: string;
+    EvidenceId?: string;
     /**
      * 存证文件临时链接
      */
-    EvidenceFile: string;
+    EvidenceFile?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -444,11 +444,11 @@ export interface GetDepositCertResponse {
     /**
      * 存证编码
      */
-    EvidenceId: string;
+    EvidenceId?: string;
     /**
      * 存证证书文件临时链接
      */
-    EvidenceCert: string;
+    EvidenceCert?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

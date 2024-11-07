@@ -120,7 +120,7 @@ import {
   FaceConfigureInfoForUpdate,
   ModifyTranscodeTemplateRequest,
   EditMediaTaskInput,
-  DeleteAIAnalysisTemplateResponse,
+  DescribeImageSpriteTemplatesRequest,
   DeleteImageProcessingTemplateRequest,
   DescribeDailyPlayStatFileListResponse,
   CLSTopicInfo,
@@ -142,6 +142,7 @@ import {
   StorageRegionInfo,
   MediaTransitionItem,
   MediaAiAnalysisCoverItem,
+  ComplexAdaptiveDynamicStreamingTaskSubtitleInput,
   TagConfigureInfo,
   SharpEnhanceInfo,
   ModifySuperPlayerConfigResponse,
@@ -250,6 +251,7 @@ import {
   DeleteAIAnalysisTemplateRequest,
   VideoFrameInterpolationInfo,
   EditMediaRequest,
+  CreateComplexAdaptiveDynamicStreamingTaskRequest,
   AiRecognitionTaskAsrTranslateResult,
   DescribeFileAttributesResponse,
   LicenseUsageDataItem,
@@ -352,6 +354,7 @@ import {
   ModifyEnhanceMediaTemplateResponse,
   EnhanceMediaByTemplateResponse,
   CreateJustInTimeTranscodeTemplateRequest,
+  ComplexAdaptiveDynamicStreamingTaskAudioInput,
   ManageTaskRequest,
   RoundPlayListItemInfo,
   ModifyEventConfigRequest,
@@ -427,7 +430,7 @@ import {
   ModifyVodDomainConfigResponse,
   MediaSnapshotByTimeOffsetInfo,
   VideoConfigureInfo,
-  DescribeImageSpriteTemplatesRequest,
+  DeleteAIAnalysisTemplateResponse,
   ModifyRebuildMediaTemplateResponse,
   CreateEnhanceMediaTemplateRequest,
   MediaKeyFrameDescItem,
@@ -622,6 +625,7 @@ import {
   VideoTemplateInfoForUpdate,
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
+  CreateComplexAdaptiveDynamicStreamingTaskResponse,
   AdaptiveDynamicStreamingTaskInput,
   DescribeImageSpriteTemplatesResponse,
   DescribeCLSLogsetsRequest,
@@ -2022,6 +2026,27 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ProcessMediaByUrlResponse) => void
   ): Promise<ProcessMediaByUrlResponse> {
     return this.request("ProcessMediaByUrl", req, cb)
+  }
+
+  /**
+     * 发起复杂自适应码流处理任务，功能包括：
+1. 按指定的自适应码流模版输出 HLS、DASH 自适应码流；
+2. 自适应码流的内容保护方案可选择无加密、Widevine 或 FairPlay；
+3. 支持添加片头片尾；
+4. 输出的自适应码流可包含多语言音频流，每种语言分别来自不同的媒体文件；
+5. 输出的自适应码流可包含多语言字幕流。
+
+注意事项：
+1. 当使用片头时，片头媒体中的视频流需要和音频流对齐，否则将导致输出的内容音画不同步；
+2. 如果输出的自适应码流需要包含主媒体的音频，那么需要在 AudioSet 参数中指定主媒体的 FileId；
+3. 使用字幕时，需要先将字幕添加到主媒体，可通过 ModifyMediaInfo 接口或控制台的音视频详情页进行添加；
+4. 暂不支持极速高清、水印。
+     */
+  async CreateComplexAdaptiveDynamicStreamingTask(
+    req: CreateComplexAdaptiveDynamicStreamingTaskRequest,
+    cb?: (error: string, rep: CreateComplexAdaptiveDynamicStreamingTaskResponse) => void
+  ): Promise<CreateComplexAdaptiveDynamicStreamingTaskResponse> {
+    return this.request("CreateComplexAdaptiveDynamicStreamingTask", req, cb)
   }
 
   /**

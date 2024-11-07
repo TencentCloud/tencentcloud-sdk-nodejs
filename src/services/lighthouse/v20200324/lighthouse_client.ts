@@ -168,6 +168,7 @@ import {
   StopInstancesRequest,
   IsolateInstancesResponse,
   CreateKeyPairResponse,
+  InstanceViolationDetail,
   DescribeInstanceVncUrlResponse,
   DescribeDockerActivitiesResponse,
   DescribeFirewallTemplateRuleQuotaRequest,

@@ -48,6 +48,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayServiceRateLimit", async function
     }
 })
 
+it("tse.v20201207.ModifyCloudNativeAPIGatewayCertificate", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayPublicNetwork", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayPublicNetwork({})
@@ -318,9 +328,9 @@ it("tse.v20201207.ModifyAutoScalerResourceStrategy", async function () {
     }
 })
 
-it("tse.v20201207.ModifyCloudNativeAPIGatewayCertificate", async function () {
+it("tse.v20201207.DescribeInstanceTagInfos", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayCertificate({})
+       const data = await client.DescribeInstanceTagInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
