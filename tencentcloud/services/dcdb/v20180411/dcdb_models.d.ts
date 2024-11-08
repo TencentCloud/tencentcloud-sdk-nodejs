@@ -643,6 +643,19 @@ export interface UpgradeDedicatedDCDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * CreateOnlineDDLJob返回参数结构体
+ */
+export interface CreateOnlineDDLJobResponse {
+    /**
+     * 在线DDL任务Id
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDBParameters返回参数结构体
  */
 export interface DescribeDBParametersResponse {
@@ -673,45 +686,21 @@ export interface Tag {
     TagValue?: string;
 }
 /**
- * DescribeBackupFiles请求参数结构体
+ * DescribeDatabaseTable请求参数结构体
  */
-export interface DescribeBackupFilesRequest {
+export interface DescribeDatabaseTableRequest {
     /**
-     * 按实例ID查询
+     * 实例 ID，形如：dcdbt-ow7t8lmc。
      */
-    InstanceId?: string;
+    InstanceId: string;
     /**
-     * 按分片ID查询
+     * 数据库名称，通过 DescribeDatabases 接口获取。
      */
-    ShardId?: string;
+    DbName: string;
     /**
-     * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
+     * 表名称，通过 DescribeDatabaseObjects 接口获取。
      */
-    BackupType?: string;
-    /**
-     * 按开始时间查询
-     */
-    StartTime?: string;
-    /**
-     * 按结束时间查询
-     */
-    EndTime?: string;
-    /**
-     * 分页参数
-     */
-    Limit?: number;
-    /**
-     * 分页参数
-     */
-    Offset?: number;
-    /**
-     * 排序参数，可选值：Time,Size
-     */
-    OrderBy?: string;
-    /**
-     * 排序参数，可选值：DESC,ASC
-     */
-    OrderType?: string;
+    Table: string;
 }
 /**
  * IsolateHourDCDBInstance请求参数结构体
@@ -2657,21 +2646,45 @@ export interface SecurityGroup {
     Outbound: Array<SecurityGroupBound>;
 }
 /**
- * DescribeDatabaseTable请求参数结构体
+ * DescribeBackupFiles请求参数结构体
  */
-export interface DescribeDatabaseTableRequest {
+export interface DescribeBackupFilesRequest {
     /**
-     * 实例 ID，形如：dcdbt-ow7t8lmc。
+     * 按实例ID查询
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * 数据库名称，通过 DescribeDatabases 接口获取。
+     * 按分片ID查询
      */
-    DbName: string;
+    ShardId?: string;
     /**
-     * 表名称，通过 DescribeDatabaseObjects 接口获取。
+     * 备份类型，Data:数据备份，Binlog:Binlog备份，Errlog:错误日志，Slowlog:慢日志
      */
-    Table: string;
+    BackupType?: string;
+    /**
+     * 按开始时间查询
+     */
+    StartTime?: string;
+    /**
+     * 按结束时间查询
+     */
+    EndTime?: string;
+    /**
+     * 分页参数
+     */
+    Limit?: number;
+    /**
+     * 分页参数
+     */
+    Offset?: number;
+    /**
+     * 排序参数，可选值：Time,Size
+     */
+    OrderBy?: string;
+    /**
+     * 排序参数，可选值：DESC,ASC
+     */
+    OrderType?: string;
 }
 /**
  * DescribeDCDBInstanceNodeInfo返回参数结构体
@@ -3603,6 +3616,55 @@ export interface SlowLogData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Host?: string;
+}
+/**
+ * CreateOnlineDDLJob请求参数结构体
+ */
+export interface CreateOnlineDDLJobRequest {
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+    /**
+     * 要执行的 DDL 语句。常用的在线DDL参考此API文档示例部分
+     */
+    Alter: string;
+    /**
+     * 要修改的数据库
+     */
+    DbName: string;
+    /**
+     * 要修改的表
+     */
+    Table: string;
+    /**
+     * 指定账号执行DDL，需确保账号有 ALTER, CREATE, INSERT, UPDATE, DROP, DELETE, INDEX, CREATE TEMPORARY TABLES, LOCK TABLES, TRIGGER, REPLICATION CLIENT, REPLICATION SLAVE 等相关权限 （若不填写将默认使用系统账号）
+     */
+    User?: string;
+    /**
+     * 指定账号的密码
+     */
+    Password?: string;
+    /**
+     * 运行线程数大于此值时，将终止DDL。不填则默认58
+     */
+    CriticalLoad?: number;
+    /**
+     * 是否检查自增字段。为1则不允许修改自增字段，0或不填写则不检查
+     */
+    CheckAutoInc?: number;
+    /**
+     * 允许的主备延迟时间(单位s)，0或不填写则不检查延迟
+     */
+    MaxDelay?: number;
+    /**
+     * 是否使用pt-osc工具做DDL
+     */
+    UsePt?: number;
+    /**
+     * 开始执行时间
+     */
+    StartTime?: string;
 }
 /**
  * DescribeDatabases返回参数结构体

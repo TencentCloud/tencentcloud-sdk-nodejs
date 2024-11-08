@@ -238,9 +238,9 @@ it("dcdb.v20180411.InitDCDBInstances", async function () {
     }
 })
 
-it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
+it("dcdb.v20180411.DescribeDCDBInstanceDetail", async function () {
     try {
-       const data = await client.IsolateDedicatedDBInstance({})
+       const data = await client.DescribeDCDBInstanceDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("dcdb.v20180411.ModifyDBInstancesProject", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDCDBInstanceDetail", async function () {
+it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
     try {
-       const data = await client.DescribeDCDBInstanceDetail({})
+       const data = await client.CreateTmpDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +548,16 @@ it("dcdb.v20180411.GrantAccountPrivileges", async function () {
     }
 })
 
+it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
+    try {
+       const data = await client.IsolateDedicatedDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.CopyAccountPrivileges", async function () {
     try {
        const data = await client.CopyAccountPrivileges({})
@@ -698,9 +708,9 @@ it("dcdb.v20180411.CloneAccount", async function () {
     }
 })
 
-it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
+it("dcdb.v20180411.CreateOnlineDDLJob", async function () {
     try {
-       const data = await client.CreateTmpDCDBInstance({})
+       const data = await client.CreateOnlineDDLJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditTrack", req, cb);
     }
     /**
-     * 查询云审计支持的cmq的可用区
+     * 查询操作审计支持的cmq的可用区
      */
     async ListCmqEnableRegion(req, cb) {
         return this.request("ListCmqEnableRegion", req, cb);
@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopLogging", req, cb);
     }
     /**
-     * 查询云审计支持的cos可用区
+     * 查询操作审计支持的cos可用区
      */
     async ListCosEnableRegion(req, cb) {
         return this.request("ListCosEnableRegion", req, cb);

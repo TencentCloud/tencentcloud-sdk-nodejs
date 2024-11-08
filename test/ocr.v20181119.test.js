@@ -378,6 +378,16 @@ it("ocr.v20181119.RecognizePhilippinesUMIDOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
+    try {
+       const data = await client.RecognizeValidIDCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.BankCardOCR", async function () {
     try {
        const data = await client.BankCardOCR({})

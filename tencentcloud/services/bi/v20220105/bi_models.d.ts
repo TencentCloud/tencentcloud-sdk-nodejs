@@ -390,6 +390,23 @@ export interface EmbedTokenInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Intention?: string;
+    /**
+     * 100 无绑定用户
+  200 单用户单token
+  300 单用户 多token
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TokenType?: number;
+    /**
+     * token 数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TokenNum?: number;
+    /**
+     * 是否单用户多token
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SingleUserMultiToken?: boolean;
 }
 /**
  * 定制化查询
@@ -815,6 +832,14 @@ export interface CreateEmbedTokenRequest {
   
      */
     GlobalParam?: string;
+    /**
+     * 100 不绑定用户  200 单用户单token  300 单用户多token
+     */
+    TokenType?: number;
+    /**
+     * 一次创建的token数
+     */
+    TokenNum?: number;
 }
 /**
  * CreateUserRoleProject返回参数结构体

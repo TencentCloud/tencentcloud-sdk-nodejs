@@ -2814,42 +2814,43 @@ export interface UsageQuota {
    * 企业ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 商户配额
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FactoryCnt: number
+  FactoryCnt?: number
   /**
    * 商品数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ItemCnt: number
+  ItemCnt?: number
   /**
    * 溯源码量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrackCnt: number
+  TrackCnt?: number
   /**
    * 营销码额度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SaleCnt: number
+  SaleCnt?: number
   /**
    * 区块链上链次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChainCnt: number
+  ChainCnt?: number
   /**
-   * 营销风控次数
+   * 风险检测次数
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  RiskCnt: number
+  RiskCnt?: number
   /**
    * 时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**

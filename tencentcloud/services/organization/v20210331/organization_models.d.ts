@@ -60,7 +60,7 @@ export interface ListRoleConfigurationsRequest {
      */
     MaxResults?: number;
     /**
-     * 过滤条件。不区分大小写。目前，只支持 RoleConfigurationName，只支持 eq（Equals）和 sw（Start With）。 示例：Filter = "RoleConfigurationName，只支持 sw test"，表示查询名称以 test 开头的全部权限配置。Filter = "RoleConfigurationName，只支持 eq TestRoleConfiguration"，表示查询名称为 TestRoleConfiguration 的权限配置。
+     * 过滤文本。不区分大小写。目前，支持 RoleConfigurationName和Description. 示例：Filter = "test"，表示查询名称或描述里包含 test 的权限配置。
      */
     Filter?: string;
     /**
@@ -1646,6 +1646,10 @@ export interface AddPermissionPolicyToRoleConfigurationRequest {
      * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
      */
     CustomPolicyDocument?: string;
+    /**
+     * 自定义策略内容列表（跟RolePolicyNames一一对应）
+     */
+    CustomPolicyDocuments?: Array<string>;
 }
 /**
  * DescribeOrganizationAuthNode返回参数结构体
@@ -3205,7 +3209,7 @@ export interface ListGroupsRequest {
      */
     SortField?: string;
     /**
-     * 排序类型：Desc 倒序 Asc  正序，需要你和SortField一起设置
+     * 排序类型：Desc 倒序 Asc  正序，需要您和SortField一起设置
      */
     SortType?: string;
     /**
@@ -4074,7 +4078,7 @@ export interface ListUsersRequest {
      */
     SortField?: string;
     /**
-     * 排序类型：Desc 倒序 Asc  正序，需要你和SortField一起设置
+     * 排序类型：Desc 倒序 Asc  正序，需要您和SortField一起设置
      */
     SortType?: string;
     /**

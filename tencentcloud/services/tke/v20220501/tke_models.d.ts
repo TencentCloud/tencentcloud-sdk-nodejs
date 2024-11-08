@@ -260,6 +260,10 @@ export interface CreateNativeNodePoolParam {
      * 节点池ssh公钥id数组
      */
     KeyIds?: Array<string>;
+    /**
+     * 节点池类型
+     */
+    MachineType?: string;
 }
 /**
  * DescribeNodePools返回参数结构体
@@ -1160,6 +1164,11 @@ export interface NativeNodePoolInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DataDisks?: Array<DataDisk>;
+    /**
+     * 原生节点机型 Native, NativeCVM
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MachineType?: string;
 }
 /**
  * DescribeNodePools请求参数结构体

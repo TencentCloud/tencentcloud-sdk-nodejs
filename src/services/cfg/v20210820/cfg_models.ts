@@ -134,6 +134,10 @@ export interface TaskGroupAction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskGroupActionExecuteTime?: number
+  /**
+   * 动作开始执行时间
+   */
+  TaskGroupActionStartTime?: string
 }
 
 /**

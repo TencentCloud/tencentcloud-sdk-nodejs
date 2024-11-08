@@ -38,9 +38,9 @@ it("privatedns.v20201028.DescribePrivateZone", async function () {
     }
 })
 
-it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
+it("privatedns.v20201028.DeleteEndPoint", async function () {
     try {
-       const data = await client.DescribePrivateZoneRecordList({})
+       const data = await client.DeleteEndPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("privatedns.v20201028.AddSpecifyPrivateZoneVpc", async function () {
     }
 })
 
-it("privatedns.v20201028.DeleteEndPoint", async function () {
+it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
     try {
-       const data = await client.DeleteEndPoint({})
+       const data = await client.DescribePrivateZoneRecordList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +178,16 @@ it("privatedns.v20201028.DeletePrivateDNSAccount", async function () {
     }
 })
 
+it("privatedns.v20201028.DeleteForwardRule", async function () {
+    try {
+       const data = await client.DeleteForwardRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.SubscribePrivateZoneService", async function () {
     try {
        const data = await client.SubscribePrivateZoneService({})
@@ -191,6 +201,16 @@ it("privatedns.v20201028.SubscribePrivateZoneService", async function () {
 it("privatedns.v20201028.DescribeDashboard", async function () {
     try {
        const data = await client.DescribeDashboard({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.ModifyForwardRule", async function () {
+    try {
+       const data = await client.ModifyForwardRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +278,16 @@ it("privatedns.v20201028.DeleteSpecifyPrivateZoneVpc", async function () {
     }
 })
 
+it("privatedns.v20201028.DescribeForwardRule", async function () {
+    try {
+       const data = await client.DescribeForwardRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.CreateForwardRule", async function () {
     try {
        const data = await client.CreateForwardRule({})
@@ -271,6 +301,16 @@ it("privatedns.v20201028.CreateForwardRule", async function () {
 it("privatedns.v20201028.DescribePrivateZoneService", async function () {
     try {
        const data = await client.DescribePrivateZoneService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DescribeEndPointRegion", async function () {
+    try {
+       const data = await client.DescribeEndPointRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

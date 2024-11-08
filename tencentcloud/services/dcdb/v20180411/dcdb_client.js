@@ -169,10 +169,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDCDBInstances", req, cb);
     }
     /**
-     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
      */
-    async IsolateDedicatedDBInstance(req, cb) {
-        return this.request("IsolateDedicatedDBInstance", req, cb);
+    async DescribeDCDBInstanceDetail(req, cb) {
+        return this.request("DescribeDCDBInstanceDetail", req, cb);
     }
     /**
      * 创建TDSQL独享集群实例
@@ -205,10 +205,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
+     * 回档TDSQL实例
      */
-    async DescribeDCDBInstanceDetail(req, cb) {
-        return this.request("DescribeDCDBInstanceDetail", req, cb);
+    async CreateTmpDCDBInstance(req, cb) {
+        return this.request("CreateTmpDCDBInstance", req, cb);
     }
     /**
      * 本接口（KillSession）用于杀死指定会话。
@@ -361,6 +361,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     */
+    async IsolateDedicatedDBInstance(req, cb) {
+        return this.request("IsolateDedicatedDBInstance", req, cb);
+    }
+    /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
      */
@@ -452,10 +458,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
-     * 回档TDSQL实例
+     * 创建在线DDL任务
      */
-    async CreateTmpDCDBInstance(req, cb) {
-        return this.request("CreateTmpDCDBInstance", req, cb);
+    async CreateOnlineDDLJob(req, cb) {
+        return this.request("CreateOnlineDDLJob", req, cb);
     }
     /**
      * 本接口(ModifyBackupConfigs)用于修改数据库备份配置信息。

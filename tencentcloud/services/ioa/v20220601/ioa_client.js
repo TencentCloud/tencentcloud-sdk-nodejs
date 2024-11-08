@@ -29,7 +29,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查询账号根分组详情。对应“用户与授权管理”里内置不可见的全网根账号组，所有新建的目录，都挂在该全网根账号组下。
-私有化调用path为：capi/Assets/DescribeRootAccountGroup
      */
     async DescribeRootAccountGroup(req, cb) {
         return this.request("DescribeRootAccountGroup", req, cb);

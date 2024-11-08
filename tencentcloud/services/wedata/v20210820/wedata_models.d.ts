@@ -236,6 +236,36 @@ export interface DescribeStreamTaskLogListRequest {
     Keyword?: string;
 }
 /**
+ * 数据源信息
+ */
+export interface GovDatasourceInfo {
+    /**
+     * 数据源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 数据源名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName?: string;
+    /**
+     * 数据源集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceClusterId?: string;
+    /**
+     * 数据源urn
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceUrn?: string;
+    /**
+     * 数据源环境
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceEnv?: string;
+}
+/**
  * DescribeIntegrationNode返回参数结构体
  */
 export interface DescribeIntegrationNodeResponse {
@@ -1805,6 +1835,29 @@ export interface RuleGroupExecResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DsEnvType?: string;
+    /**
+     * 项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 项目名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
+    /**
+     * 实例状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStatus?: string;
+    /**
+     * 实例运行的开始时间
+     */
+    StartTime?: string;
+    /**
+     * 实例运行的结束时间
+     */
+    FinishTime?: string;
 }
 /**
  * 告警事件详情
@@ -2693,6 +2746,16 @@ export interface InstanceOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CirculateInstanceList?: Array<InstanceOpsDto>;
+    /**
+     * 并发策略, 0: 等待并发, 1: kill自身
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConcurrentStrategy?: number;
+    /**
+     * 调度运行方式, 0: 周期调度, 1: 空跑调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleRunType?: number;
 }
 /**
  * DescribeDutyScheduleDetails请求参数结构体
@@ -3171,27 +3234,27 @@ export interface ProjectUserRole {
      * 用户角色对象
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Roles: Array<SystemRole>;
+    Roles?: Array<SystemRole>;
     /**
      * mc
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 用户id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 是否创建者
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creator: boolean;
+    Creator?: boolean;
     /**
      * 显示名称
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3202,6 +3265,26 @@ export interface ProjectUserRole {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsProjectAdmin?: boolean;
+    /**
+     * 手机号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PhoneNum?: string;
+    /**
+     * 邮箱
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Email?: string;
+    /**
+     * 主账号id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerUin?: string;
+    /**
+     * 租户iD
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: string;
 }
 /**
  * 质量规则执行策略
@@ -4082,6 +4165,16 @@ export interface Rule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetSchemaName?: string;
+    /**
+     * 项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 项目名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
 }
 /**
  * DescribeTableLineage返回参数结构体
@@ -4185,13 +4278,25 @@ export interface DescribeInstanceLogDetailRequest {
      */
     CurRunDate: string;
     /**
+     * 日志级别，Info/Debug/Warn/Error/All
+     */
+    LogLevelType?: string;
+    /**
+     * 文件类型,Log/Code
+     */
+    ExecutionFileType?: string;
+    /**
+     * 统一执行平台执行id
+     */
+    ExecutionJobId?: string;
+    /**
      * 服务器Ip
      */
-    BrokerIp: string;
+    BrokerIp?: string;
     /**
      * 文件Name
      */
-    OriginFileName: string;
+    OriginFileName?: string;
     /**
      * 起始行
      */
@@ -4200,6 +4305,14 @@ export interface DescribeInstanceLogDetailRequest {
      * 每次查询行数
      */
     LineCount?: number;
+    /**
+     * 查询日志扩展信息,通过统一执行平台接口分页查询日志时需要带上,第一页时为null
+     */
+    ExtInfo?: string;
+    /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+     */
+    RequestFromSource?: string;
 }
 /**
  * BatchSuspendIntegrationTasks请求参数结构体
@@ -4830,6 +4943,10 @@ export interface GetCosTokenRequest {
      * 远程地址
      */
     RemotePath?: string;
+    /**
+     * 地域
+     */
+    RemoteRegion?: string;
 }
 /**
  * 工作流
@@ -5406,11 +5523,11 @@ export interface DescribeOrganizationalFunctionsRequest {
     /**
      * 过滤条件
      */
-    Filters?: Filter;
+    Filters?: Array<Filter>;
     /**
      * 排序条件
      */
-    OrderFields?: OrderField;
+    OrderFields?: Array<OrderField>;
 }
 /**
  * DescribeRuleTemplate返回参数结构体
@@ -5538,6 +5655,36 @@ export interface DatabaseMeta {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
+    /**
+     * 总表数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableCount?: number;
+    /**
+     * 数据源信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceList?: Array<GovDatasourceInfo>;
+    /**
+     * 采集任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectJobId?: string;
+    /**
+     * 采集任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectJobName?: string;
+    /**
+     * 引擎id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName?: string;
 }
 /**
  * DescribeAllByFolderNew请求参数结构体
@@ -6363,6 +6510,11 @@ export interface DescribeTableQualityDetailsRequest {
  * DescribeScheduleInstances返回参数结构体
  */
 export interface DescribeScheduleInstancesResponse {
+    /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestFromSource?: string;
     /**
      * 实例结果集
      */
@@ -8065,6 +8217,11 @@ export interface InstanceLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtensionInfo?: Array<AttributeItemDTO>;
+    /**
+     * 统一执行平台，下发执行Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionJobId?: string;
 }
 /**
  * GetFileInfo请求参数结构体
@@ -8708,6 +8865,21 @@ export interface InstanceLifeCycleOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceState?: string;
+    /**
+     * 调度运行方式, 0: 周期调度, 1: 空跑调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleRunType?: number;
+    /**
+     * 统一执行平台，下发执行Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionJobId?: string;
+    /**
+     * 实例运行类型: 0: 普通运行, 1: 空跑运行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceRunType?: number;
 }
 /**
  * 告警接收人详情
@@ -8898,6 +9070,21 @@ export interface WorkflowScheduleDtoDs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestSubmitTime?: string;
+    /**
+     * 日历调度是否开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CalendarOpen?: string;
+    /**
+     * 日历调度名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CalendarName?: string;
+    /**
+     * 日历调度id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CalendarId?: string;
 }
 /**
  * ModifyRuleTemplate请求参数结构体
@@ -13509,6 +13696,10 @@ export interface InstanceApiOpsRequest {
      * 资源组id,多个资源组id用英文逗号分隔
      */
     ExecutorGroupIdList?: Array<string>;
+    /**
+     * true 只过滤重跑过的实例，false 忽略此过滤条件，结果集过滤条件中不包括是否重跑
+     */
+    OnlyRerun?: boolean;
 }
 /**
  * SubmitSqlTask请求参数结构体
@@ -13717,6 +13908,21 @@ export interface InstanceLogInfoOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LineCount?: number;
+    /**
+     * 统一执行平台日志分页查询参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtInfo?: string;
+    /**
+     * 日志分页查询，是否最后一页
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsEnd?: boolean;
+    /**
+     * 文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileSize?: string;
 }
 /**
  * DeleteFilePath返回参数结构体
@@ -15238,6 +15444,31 @@ export interface TableMeta {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Schema?: string;
+    /**
+     * 关联数据眼信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectDatasourceList?: Array<GovDatasourceInfo>;
+    /**
+     * 采集任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectJobId?: string;
+    /**
+     * 采集任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectJobName?: string;
+    /**
+     * 数据源urn
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Urn?: string;
+    /**
+     * 是否有修改业务权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasBizPermission?: boolean;
 }
 /**
  * CountOpsInstanceState返回参数结构体
@@ -16807,13 +17038,29 @@ export interface DescribeInstanceLogFileRequest {
      */
     CurRunDate: string;
     /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+     */
+    RequestFromSource?: string;
+    /**
      * 执行机IP
      */
-    BrokerIp: string;
+    BrokerIp?: string;
     /**
      * 日志文件名
      */
-    OriginFileName: string;
+    OriginFileName?: string;
+    /**
+     * 执行平台下发执行id
+     */
+    ExecutionJobId?: string;
+    /**
+     * 日志级别，Info/Debug/Warn/Error/All
+     */
+    LogLevelType?: string;
+    /**
+     * 文件类型,Log/Code
+     */
+    ExecutionFileType?: string;
 }
 /**
  * UnlockIntegrationTask请求参数结构体
@@ -17309,6 +17556,11 @@ export interface RuleExecResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmLevel?: number;
+    /**
+     * 触发条件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerCondition?: string;
 }
 /**
  * Table
@@ -17590,32 +17842,32 @@ export interface SystemRole {
     /**
      * 角色id
      */
-    RoleId: string;
+    RoleId?: string;
     /**
      * 角色名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 角色昵称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NameCn: string;
+    NameCn?: string;
     /**
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 角色权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Privileges: Array<RolePrivilege>;
+    Privileges?: Array<RolePrivilege>;
     /**
      * 方法路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MethodPaths: Array<string>;
+    MethodPaths?: Array<string>;
     /**
      * 角色类型, 分为System,Tenant,Project,Commercial
   注意：此字段可能返回 null，表示取不到有效值。
@@ -19342,6 +19594,10 @@ export interface DescribeSchedulerInstanceStatusRequest {
  */
 export interface DescribeScheduleInstancesRequest {
     /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+     */
+    RequestFromSource?: string;
+    /**
      * 实例列表
      */
     Instances?: Array<InstanceOpsDto>;
@@ -19413,6 +19669,10 @@ export interface DescribeScheduleInstancesRequest {
      * 是否计算总数
      */
     IsCount?: boolean;
+    /**
+     * 项目ID列表，用于多项目实例列表筛选，请注意，该字段传入时 ProjectId 字段也必须传，且传入的 ProjectIds 中的项目ID必须是当前用户有权限的项目ID，否则会由于权限校验失败报错
+     */
+    ProjectIds?: Array<string>;
 }
 /**
  * DescribeRealTimeTaskSpeed返回参数结构体
@@ -19815,6 +20075,23 @@ export interface RenewWorkflowSchedulerInfoDsRequest {
      * CrontabExpression
      */
     CrontabExpression?: string;
+    /**
+     * 0：不修改
+  1：将任务的上游依赖配置改为默认值
+     */
+    ModifyCycleValue?: string;
+    /**
+     * 是否开启日历调度 1 开启 0关闭
+     */
+    CalendarOpen?: string;
+    /**
+     * 日历名称
+     */
+    CalendarName?: string;
+    /**
+     * 日历id
+     */
+    CalendarId?: string;
 }
 /**
  * 值班信息表
@@ -21845,6 +22122,11 @@ export interface OrganizationalFunction {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvType?: string;
+    /**
+     * 函数资源文件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FunctionResourceFileType?: string;
 }
 /**
  * 通用排序字段

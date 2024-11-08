@@ -255,6 +255,7 @@ import {
   DescribeRabbitMQExchangesResponse,
   DescribeRabbitMQQueueDetailResponse,
   DescribeRocketMQTopicMsgsResponse,
+  SecurityPolicy,
   VerifyRocketMQConsumeResponse,
   DescribeRocketMQConsumerConnectionDetailRequest,
   DeleteRolesResponse,

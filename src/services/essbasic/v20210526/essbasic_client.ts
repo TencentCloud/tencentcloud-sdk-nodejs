@@ -545,6 +545,7 @@ export class Client extends AbstractClient {
 
   /**
      * 此接口（DescribeUsage）用于获取此应用下子客企业的合同消耗数量。
+<font color="red">此接口即将下线， 请使用新接口[查询渠道计费消耗情况](https://qian.tencent.com/developers/partnerApis/fee/ChannelDescribeBillUsageDetail)</font>
 
 注: 此接口**每日限频50次**，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
      */
@@ -1074,7 +1075,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   /**
      * 此接口（ChannelDeleteRole）用来删除企业自定义角色。
 
-注意：系统角色不可删除。
+注：**系统角色不可删除。**
      */
   async ChannelDeleteRole(
     req: ChannelDeleteRoleRequest,

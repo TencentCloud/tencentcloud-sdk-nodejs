@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAuditTrack(req: CreateAuditTrackRequest, cb?: (error: string, rep: CreateAuditTrackResponse) => void): Promise<CreateAuditTrackResponse>;
     /**
-     * 查询云审计支持的cmq的可用区
+     * 查询操作审计支持的cmq的可用区
      */
     ListCmqEnableRegion(req: ListCmqEnableRegionRequest, cb?: (error: string, rep: ListCmqEnableRegionResponse) => void): Promise<ListCmqEnableRegionResponse>;
     /**
@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     StopLogging(req: StopLoggingRequest, cb?: (error: string, rep: StopLoggingResponse) => void): Promise<StopLoggingResponse>;
     /**
-     * 查询云审计支持的cos可用区
+     * 查询操作审计支持的cos可用区
      */
     ListCosEnableRegion(req: ListCosEnableRegionRequest, cb?: (error: string, rep: ListCosEnableRegionResponse) => void): Promise<ListCosEnableRegionResponse>;
     /**

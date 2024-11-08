@@ -640,11 +640,21 @@ export interface CreateLogsetRequest {
  */
 export interface DescribeShippersRequest {
     /**
-     * - shipperName：按照【投递规则名称】进行过滤。类型：String。必选：否
-  - shipperId：按照【投递规则ID】进行过滤。类型：String。必选：否
-  - topicId：按照【日志主题】进行过滤。类型：String。必选：否
+     * - shipperName：按照【投递规则名称】进行过滤。
+      类型：String。
+      必选：否
+  - shipperId：按照【投递规则ID】进行过滤。
+      类型：String。
+      必选：否
+  - topicId：按照【日志主题】进行过滤。
+      类型：String。
+      必选：否
+  - taskStatus
+  按照【任务运行状态】进行过滤。 支持`0`：停止，`1`：运行中，`2`：异常
+  类型：String
+  必选：否
   
-  每次请求的Filters的上限为10，Filter.Values的上限为5。
+  每次请求的Filters的上限为10，Filter.Values的上限为10。
      */
     Filters?: Array<Filter>;
     /**
@@ -6108,6 +6118,16 @@ export interface DataTransformTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DataTransformType?: number;
+    /**
+     * 保留失败日志状态。 1:不保留，2:保留
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeepFailureLog?: number;
+    /**
+     * 失败日志的字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailureLogKey?: string;
 }
 /**
  * DescribeMachines返回参数结构体
@@ -6658,25 +6678,25 @@ export interface DescribeConsumerResponse {
     /**
      * 投递任务是否生效
      */
-    Effective: boolean;
+    Effective?: boolean;
     /**
      * 是否投递日志的元数据信息
      */
-    NeedContent: boolean;
+    NeedContent?: boolean;
     /**
      * 如果需要投递元数据信息，元数据信息的描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: ConsumerContent;
+    Content?: ConsumerContent;
     /**
      * CKafka的描述
      */
-    Ckafka: Ckafka;
+    Ckafka?: Ckafka;
     /**
      * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Compression: number;
+    Compression?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

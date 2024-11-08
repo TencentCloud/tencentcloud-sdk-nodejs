@@ -50,9 +50,10 @@ import {
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   UpgradeDedicatedDCDBInstanceResponse,
+  CreateOnlineDDLJobResponse,
   DescribeDBParametersResponse,
   Tag,
-  DescribeBackupFilesRequest,
+  DescribeDatabaseTableRequest,
   IsolateHourDCDBInstanceRequest,
   ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
@@ -120,7 +121,7 @@ import {
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
-  DescribeDatabaseTableRequest,
+  DescribeBackupFilesRequest,
   DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   TerminateDedicatedDBInstanceRequest,
@@ -163,6 +164,7 @@ import {
   KillSessionResponse,
   DescribeProjectsRequest,
   SlowLogData,
+  CreateOnlineDDLJobRequest,
   DescribeDatabasesResponse,
   ViewPrivileges,
   DescribeOrdersRequest,
@@ -458,13 +460,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+   * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
    */
-  async IsolateDedicatedDBInstance(
-    req: IsolateDedicatedDBInstanceRequest,
-    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
-  ): Promise<IsolateDedicatedDBInstanceResponse> {
-    return this.request("IsolateDedicatedDBInstance", req, cb)
+  async DescribeDCDBInstanceDetail(
+    req: DescribeDCDBInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeDCDBInstanceDetailResponse) => void
+  ): Promise<DescribeDCDBInstanceDetailResponse> {
+    return this.request("DescribeDCDBInstanceDetail", req, cb)
   }
 
   /**
@@ -518,13 +520,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
+   * 回档TDSQL实例
    */
-  async DescribeDCDBInstanceDetail(
-    req: DescribeDCDBInstanceDetailRequest,
-    cb?: (error: string, rep: DescribeDCDBInstanceDetailResponse) => void
-  ): Promise<DescribeDCDBInstanceDetailResponse> {
-    return this.request("DescribeDCDBInstanceDetail", req, cb)
+  async CreateTmpDCDBInstance(
+    req: CreateTmpDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void
+  ): Promise<CreateTmpDCDBInstanceResponse> {
+    return this.request("CreateTmpDCDBInstance", req, cb)
   }
 
   /**
@@ -774,6 +776,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+   */
+  async IsolateDedicatedDBInstance(
+    req: IsolateDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
+  ): Promise<IsolateDedicatedDBInstanceResponse> {
+    return this.request("IsolateDedicatedDBInstance", req, cb)
+  }
+
+  /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
      */
@@ -925,13 +937,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回档TDSQL实例
+   * 创建在线DDL任务
    */
-  async CreateTmpDCDBInstance(
-    req: CreateTmpDCDBInstanceRequest,
-    cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void
-  ): Promise<CreateTmpDCDBInstanceResponse> {
-    return this.request("CreateTmpDCDBInstance", req, cb)
+  async CreateOnlineDDLJob(
+    req: CreateOnlineDDLJobRequest,
+    cb?: (error: string, rep: CreateOnlineDDLJobResponse) => void
+  ): Promise<CreateOnlineDDLJobResponse> {
+    return this.request("CreateOnlineDDLJob", req, cb)
   }
 
   /**

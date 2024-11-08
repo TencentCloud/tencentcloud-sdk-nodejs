@@ -45,10 +45,12 @@ export interface StopLoggingRequest {
 export interface CmqRegionInfo {
   /**
    * 地域描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CmqRegionName?: string
   /**
    * cmq地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CmqRegion?: string
 }
@@ -171,9 +173,9 @@ export interface DescribeEventsResponse {
  */
 export interface ListCosEnableRegionResponse {
   /**
-   * 云审计支持的cos可用区
+   * 操作审计支持的cos可用区
    */
-  EnableRegions: Array<CosRegionInfo>
+  EnableRegions?: Array<CosRegionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -205,7 +207,7 @@ export interface LookUpEventsRequest {
    */
   MaxResults?: number
   /**
-   * 云审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式
+   * 操作审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式
    */
   Mode?: string
 }
@@ -550,6 +552,14 @@ export interface CreateAuditTrackRequest {
    */
   Name: string
   /**
+   * 跟踪集状态（未开启：0；开启：1）
+   */
+  Status: number
+  /**
+   * 数据投递存储（目前支持 cos、cls）
+   */
+  Storage: Storage
+  /**
    * 跟踪事件类型（读：Read；写：Write；全部：*）
    */
   ActionType: string
@@ -558,17 +568,9 @@ export interface CreateAuditTrackRequest {
    */
   ResourceType: string
   /**
-   * 跟踪集状态（未开启：0；开启：1）
-   */
-  Status: number
-  /**
    * 跟踪事件接口名列表（ResourceType为 * 时，EventNames必须为全部：["*"]；指定ResourceType时，支持全部接口：["*"]；支持部分接口：["cos", "cls"]，接口列表上限10个）
    */
   EventNames: Array<string>
-  /**
-   * 数据投递存储（目前支持 cos、cls）
-   */
-  Storage: Storage
   /**
    * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号(0：未开启，1：开启，只能集团管理账号或者可信服务管理账号开启此项功能)
    */
@@ -729,9 +731,9 @@ export interface ModifyEventsAuditTrackResponse {
  */
 export interface ListCmqEnableRegionResponse {
   /**
-   * 云审计支持的cmq的可用区
+   * 操作审计支持的cmq的可用区
    */
-  EnableRegions: Array<CmqRegionInfo>
+  EnableRegions?: Array<CmqRegionInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -746,17 +748,22 @@ export interface LookUpEventsResponse {
    * 查看更多日志的凭证
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextToken: string
+  NextToken?: string
   /**
    * 日志集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Events: Array<Event>
+  Events?: Array<Event>
   /**
    * 日志集合是否结束
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListOver: boolean
+  ListOver?: boolean
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -805,10 +812,12 @@ export interface DeleteAuditTrackResponse {
 export interface CosRegionInfo {
   /**
    * cos地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CosRegion?: string
   /**
    * 地域描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CosRegionName?: string
 }

@@ -26,6 +26,7 @@ import {
   UnlockIntegrationTaskResponse,
   SubmitTaskTestRunResponse,
   DescribeStreamTaskLogListRequest,
+  GovDatasourceInfo,
   DescribeIntegrationNodeResponse,
   LogContentInfo,
   ModifyIntegrationTaskRequest,

@@ -21,22 +21,18 @@
 export interface RuleItem {
   /**
    * 字段名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 操作关系（等于、不等于、包含、不包含）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operate?: string
   /**
    * 内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * 内容，v2多值版本使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
 }
@@ -301,12 +297,10 @@ export interface DescribeAccountGroupsData {
 export interface RuleExpression {
   /**
    * 规则元数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<RuleItem>
   /**
    * 关系
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Relation?: string
 }
@@ -927,12 +921,10 @@ export interface CreateDeviceVirtualGroupRspData {
 export interface SimpleRule {
   /**
    * 规则表达式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expressions?: Array<RuleExpression>
   /**
    * 表达式间逻辑关系
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Relation?: string
 }

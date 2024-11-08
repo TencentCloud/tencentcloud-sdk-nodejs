@@ -64,71 +64,67 @@ export interface CdsAuditInstance {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 用户AppId
    */
-  AppId: string
+  AppId?: string
   /**
    * 用户Uin
    */
-  Uin: string
+  Uin?: string
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 续费标识
    */
-  RenewFlag: number
+  RenewFlag?: number
   /**
    * 所属地域
    */
-  Region: string
+  Region?: string
   /**
    * 付费模式（数据安全审计只支持预付费：1）
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 实例状态： 0，未生效；1：正常运行； 2：被隔离； 3，已过期
    */
-  Status: number
+  Status?: number
   /**
    * 实例被隔离时间，格式：yyyy-mm-dd HH:ii:ss
    */
-  IsolatedTimestamp: string
+  IsolatedTimestamp?: string
   /**
    * 实例创建时间，格式： yyyy-mm-dd HH:ii:ss
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例过期时间，格式：yyyy-mm-dd HH:ii:ss
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 实例公网IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicIp: string
+  PublicIp?: string
   /**
    * 实例私网IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateIp: string
+  PrivateIp?: string
   /**
    * 实例类型（版本）
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pdomain: string
+  Pdomain?: string
 }
 
 /**
@@ -189,19 +185,19 @@ export interface RegionInfo {
   /**
    * 地域ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 地域名称
    */
-  Region: string
+  Region?: string
   /**
    * 地域描述
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域可用状态
    */
-  RegionState: number
+  RegionState?: number
 }
 
 /**
@@ -229,31 +225,31 @@ export interface DbauditTypesInfo {
   /**
    * 规格描述
    */
-  InstanceVersionName: string
+  InstanceVersionName?: string
   /**
    * 规格名称
    */
-  InstanceVersionKey: string
+  InstanceVersionKey?: string
   /**
    * 最大吞吐量
    */
-  Qps: number
+  Qps?: number
   /**
    * 最大实例数
    */
-  MaxInstances: number
+  MaxInstances?: number
   /**
    * 入库速率（每小时）
    */
-  InsertSpeed: number
+  InsertSpeed?: number
   /**
    * 最大在线存储量，单位：条
    */
-  OnlineStorageCapacity: number
+  OnlineStorageCapacity?: number
   /**
    * 最大归档存储量，单位：条
    */
-  ArchivingStorageCapacity: number
+  ArchivingStorageCapacity?: number
 }
 
 /**

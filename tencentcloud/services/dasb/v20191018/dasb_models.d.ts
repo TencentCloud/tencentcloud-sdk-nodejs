@@ -147,11 +147,11 @@ export interface DescribeDeviceGroupsResponse {
     /**
      * 资产组总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 资产组列表
      */
-    GroupSet: Array<Group>;
+    GroupSet?: Array<Group>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -181,7 +181,6 @@ export interface DeleteDevicesResponse {
 export interface ChangePwdTaskInfo {
     /**
      * id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
@@ -190,97 +189,78 @@ export interface ChangePwdTaskInfo {
     OperationId?: string;
     /**
      * 任务名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 所属部门信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Department?: Department;
     /**
      * 改密方式。1：使用执行账号。2：修改自身密码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChangeMethod?: number;
     /**
      * 执行账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RunAccount?: string;
     /**
      * 密码生成策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthGenerationStrategy?: number;
     /**
      * 密码长度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PasswordLength?: number;
     /**
      * 包含小写字母
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SmallLetter?: number;
     /**
      * 包含大写字母
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BigLetter?: number;
     /**
      * 包含数字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Digit?: number;
     /**
      * 包含的特殊字符，base64
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Symbol?: string;
     /**
      * 改密完成通知。0-通知，1-不通知
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompleteNotify?: number;
     /**
      * 通知人邮箱
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotifyEmails?: Array<string>;
     /**
      * 加密附件密码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FilePassword?: string;
     /**
      * 需要改密的账户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountSet?: Array<string>;
     /**
      * 需要改密的主机
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceSet?: Array<Device>;
     /**
      * 任务类型：4手动，5自动
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
      * 周期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Period?: number;
     /**
      * 首次执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FirstTime?: string;
     /**
      * 下次执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NextTime?: string;
 }
@@ -304,23 +284,23 @@ export interface DeviceAccount {
     /**
      * 账号ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 主机ID
      */
-    DeviceId: number;
+    DeviceId?: number;
     /**
      * 账号名
      */
-    Account: string;
+    Account?: string;
     /**
      * true-已托管密码，false-未托管密码
      */
-    BoundPassword: boolean;
+    BoundPassword?: boolean;
     /**
      * true-已托管私钥，false-未托管私钥
      */
-    BoundPrivateKey: boolean;
+    BoundPrivateKey?: boolean;
 }
 /**
  * BindDeviceAccountPassword返回参数结构体
@@ -460,51 +440,51 @@ export interface SessionCommand {
     /**
      * 开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 账号
      */
-    RealName: string;
+    RealName?: string;
     /**
      * 设备名
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 内部Ip
      */
-    PrivateIp: string;
+    PrivateIp?: string;
     /**
      * 外部Ip
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 命令列表
      */
-    Commands: Array<Command>;
+    Commands?: Array<Command>;
     /**
      * 记录数
      */
-    Count: number;
+    Count?: number;
     /**
      * 会话Id
      */
-    Id: string;
+    Id?: string;
     /**
      * 设备id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 设备所属的地域
      */
-    ApCode: string;
+    ApCode?: string;
 }
 /**
  * DeleteUserGroupMembers请求参数结构体
@@ -546,7 +526,6 @@ export interface DescribeChangePwdTaskDetailResponse {
     TotalCount?: number;
     /**
      * 任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: Array<ChangePwdTaskDetail>;
     /**
@@ -669,33 +648,31 @@ export interface SearchFileBySidResult {
     /**
      * 文件操作时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 1-上传文件 2-下载文件 3-删除文件 4-移动文件 5-重命名文件 6-新建文件夹 7-移动文件夹 8-重命名文件夹 9-删除文件夹
      */
-    Method: number;
+    Method?: number;
     /**
      * 文件传输协议
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * method为上传、下载、删除时文件在服务器上的位置, 或重命名、移动文件前文件的位置
      */
-    FileCurr: string;
+    FileCurr?: string;
     /**
      * method为重命名、移动文件时代表移动后的新位置.其他情况为null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileNew: string;
+    FileNew?: string;
     /**
      * method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Size: number;
+    Size?: number;
     /**
      * 堡垒机拦截情况, 1-已执行，  2-被阻断
      */
-    Action: number;
+    Action?: number;
 }
 /**
  * SearchCommand请求参数结构体
@@ -834,7 +811,6 @@ export interface CmdTemplate {
     CmdList?: string;
     /**
      * 命令模板类型 1-内置 2-自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
 }
@@ -888,17 +864,14 @@ export interface SearchCommandResult {
     TimeOffset?: number;
     /**
      * 账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Account?: string;
     /**
      * source ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FromIp?: string;
     /**
      * 该命令所属会话的会话开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionTime?: string;
     /**
@@ -909,32 +882,26 @@ export interface SearchCommandResult {
     SessTime?: string;
     /**
      * 复核时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfirmTime?: string;
     /**
      * 部门id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserDepartmentId?: string;
     /**
      * 用户部门名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserDepartmentName?: string;
     /**
      * 设备部门id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentId?: string;
     /**
      * 设备部门名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentName?: string;
     /**
      * 会话大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
 }
@@ -1129,12 +1096,10 @@ export interface Department {
     Name?: string;
     /**
      * 部门管理员账号ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Managers?: Array<string>;
     /**
      * 管理员用户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagerUsers?: Array<DepartmentManagerUser>;
 }
@@ -1418,12 +1383,10 @@ export interface SearchCommandResponse {
 export interface DescribeChangePwdTaskResponse {
     /**
      * 任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tasks?: Array<ChangePwdTaskInfo>;
     /**
      * 任务总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1509,32 +1472,26 @@ export interface Command {
     Action?: number;
     /**
      * 会话id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Sid?: string;
     /**
      * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 设备account
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Account?: string;
     /**
      * 设备ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * source ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FromIp?: string;
     /**
      * 该命令所属会话的会话开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SessionTime?: string;
     /**
@@ -1545,32 +1502,26 @@ export interface Command {
     SessTime?: string;
     /**
      * 复核时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfirmTime?: string;
     /**
      * 用户部门id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserDepartmentId?: string;
     /**
      * 用户部门name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserDepartmentName?: string;
     /**
      * 设备部门id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentId?: string;
     /**
      * 设备部门name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentName?: string;
     /**
      * 会话大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
 }
@@ -1724,7 +1675,6 @@ export interface SearchAuditLogRequest {
 export interface CreateResourceResponse {
     /**
      * 实例Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
@@ -1826,7 +1776,6 @@ export interface DescribeResourcesResponse {
     ResourceSet?: Array<Resource>;
     /**
      * 堡垒机资源数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1937,11 +1886,11 @@ export interface SearchSessionResponse {
     /**
      * 记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 会话信息列表
      */
-    SessionSet: Array<SessionResult>;
+    SessionSet?: Array<SessionResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2030,12 +1979,10 @@ export interface ResetDeviceAccountPrivateKeyRequest {
 export interface DepartmentManagerUser {
     /**
      * 管理员Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagerId?: string;
     /**
      * 管理员姓名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagerName?: string;
 }
@@ -2177,12 +2124,10 @@ export interface Group {
     Name?: string;
     /**
      * 所属部门信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Department?: Department;
     /**
      * 个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
 }
@@ -2201,7 +2146,6 @@ export interface DescribeAssetSyncStatusRequest {
 export interface Clb {
     /**
      * 负载均衡IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClbIp?: string;
 }
@@ -2304,11 +2248,11 @@ export interface DescribeUserGroupMembersResponse {
     /**
      * 用户组成员总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 用户组成员列表
      */
-    UserSet: Array<User>;
+    UserSet?: Array<User>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2320,7 +2264,6 @@ export interface DescribeUserGroupMembersResponse {
 export interface ImportExternalDeviceResponse {
     /**
      * 资产ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceIdSet?: Array<number | bigint>;
     /**
@@ -2402,32 +2345,26 @@ export interface User {
     ValidateTime?: string;
     /**
      * 用户所属部门（用于出参）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Department?: Department;
     /**
      * 用户所属部门（用于入参）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DepartmentId?: string;
     /**
      * 激活状态 0 - 未激活 1 - 激活
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActiveStatus?: number;
     /**
      * 锁定状态 0 - 未锁定 1 - 锁定
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LockStatus?: number;
     /**
      * 状态 与Filter中一致
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 权限版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AclVersion?: number;
 }
@@ -2498,37 +2435,30 @@ export interface Device {
     SubnetId?: string;
     /**
      * 堡垒机服务信息，注意没有绑定服务时为null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resource?: Resource;
     /**
      * 资产所属部门
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Department?: Department;
     /**
      * 数据库资产的多节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpPortSet?: Array<string>;
     /**
      * 网络域Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainId?: string;
     /**
      * 网络域名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainName?: string;
     /**
      * 是否启用SSL，仅支持Redis资产。0：禁用 1：启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableSSL?: number;
     /**
      * 已上传的SSL证书名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SSLCertName?: string;
 }
@@ -2585,32 +2515,26 @@ export interface Domain {
     DomainName?: string;
     /**
      * 堡垒机id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * ip，网段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WhiteIpSet?: Array<string>;
     /**
      * 是否启用  默认 1启用 0禁用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: number;
     /**
      * 状态 0-已断开  1-已连接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 网络域创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Default?: number;
 }
@@ -2730,12 +2654,11 @@ export interface SearchFileBySidResponse {
     /**
      * 记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 某会话的文件操作列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SearchFileBySidResult: Array<SearchFileBySidResult>;
+    SearchFileBySidResult?: Array<SearchFileBySidResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2806,17 +2729,14 @@ export interface ModifyUserResponse {
 export interface ChangePwdTaskDetail {
     /**
      * 资产信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Device?: Device;
     /**
      * 资产账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Account?: string;
     /**
      * 上次改密结果。0-未改密  1-改密成功 2-改密失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastChangeStatus?: number;
 }
@@ -2884,11 +2804,11 @@ export interface DescribeUserGroupsResponse {
     /**
      * 用户组总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 用户组列表
      */
-    GroupSet: Array<Group>;
+    GroupSet?: Array<Group>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3120,11 +3040,11 @@ export interface DescribeDeviceAccountsResponse {
     /**
      * 记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 账号信息列表
      */
-    DeviceAccountSet: Array<DeviceAccount>;
+    DeviceAccountSet?: Array<DeviceAccount>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3240,75 +3160,75 @@ export interface SessionResult {
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 姓名
      */
-    RealName: string;
+    RealName?: string;
     /**
      * 主机账号
      */
-    Account: string;
+    Account?: string;
     /**
      * 开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 会话大小
      */
-    Size: number;
+    Size?: number;
     /**
      * 设备ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 设备名
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 内部Ip
      */
-    PrivateIp: string;
+    PrivateIp?: string;
     /**
      * 外部Ip
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 来源Ip
      */
-    FromIp: string;
+    FromIp?: string;
     /**
      * 会话持续时长
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 该会话内命令数量 ，搜索图形会话时该字段无意义
      */
-    Count: number;
+    Count?: number;
     /**
      * 该会话内高危命令数，搜索图形时该字段无意义
      */
-    DangerCount: number;
+    DangerCount?: number;
     /**
      * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
      */
-    Status: number;
+    Status?: number;
     /**
      * 会话Id
      */
-    Id: string;
+    Id?: string;
     /**
      * 设备所属的地域
      */
-    ApCode: string;
+    ApCode?: string;
     /**
      * 会话协议
      */
-    Protocol: string;
+    Protocol?: string;
 }
 /**
  * 堡垒机服务信息
@@ -3428,37 +3348,30 @@ export interface Resource {
     PackageNode?: number;
     /**
      * 日志投递规格信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogDeliveryArgs?: string;
     /**
      * 堡垒机资源LB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClbSet?: Array<Clb>;
     /**
      * 网络域个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainCount?: number;
     /**
      * 已使用网络域个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedDomainCount?: number;
     /**
      * 0 非试用版，1 试用版
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Trial?: number;
     /**
      * cdc集群id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcClusterId?: string;
     /**
      * 日志投递规格信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogDelivery?: string;
     /**
@@ -3605,27 +3518,22 @@ export interface Acl {
     Status?: number;
     /**
      * 所属部门的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Department?: Department;
     /**
      * 是否允许使用访问串，默认允许
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowAccessCredential?: boolean;
     /**
      * 关联的数据库高危命令列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ACTemplateSet?: Array<ACTemplate>;
     /**
      * 关联的白命令命令
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WhiteCmds?: Array<string>;
     /**
      * 是否允许记录键盘
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowKeyboardLogger?: boolean;
 }
@@ -3663,7 +3571,7 @@ export interface DescribeDevicesRequest {
      */
     ApCodeSet?: Array<string>;
     /**
-     * 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
+     * 操作系统类型, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer, 5 - TDSQL MySQL, 6 - TDSQL-C MySQL, 7 - MariaDB, 8 - PostgreSQL, 9 - MongoDB副本集群, 10 - MongoDB分片集群, 11 - Redis
      */
     Kind?: number;
     /**
@@ -3683,7 +3591,7 @@ export interface DescribeDevicesRequest {
      */
     ResourceIdSet?: Array<string>;
     /**
-     * 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
+     * 可提供按照多种类型过滤, 取值范围与Kind一致
      */
     KindSet?: Array<number | bigint>;
     /**
@@ -3735,17 +3643,14 @@ export interface DescribeDeviceGroupsRequest {
 export interface ACTemplate {
     /**
      * 模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: string;
     /**
      * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateName?: string;
     /**
      * 模板描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -3877,47 +3782,47 @@ export interface SearchFileResult {
     /**
      * 文件传输的时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 姓名
      */
-    RealName: string;
+    RealName?: string;
     /**
      * 资产ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 资产名称
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 资产公网IP
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 资产内网IP
      */
-    PrivateIp: string;
+    PrivateIp?: string;
     /**
      * 操作结果：1 - 已执行，2 - 已阻断
      */
-    Action: number;
+    Action?: number;
     /**
      * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
      */
-    Method: number;
+    Method?: number;
     /**
      * 下载的文件（夹）路径及名称
      */
-    FileCurr: string;
+    FileCurr?: string;
     /**
      * 上传或新建文件（夹）路径及名称
      */
-    FileNew: string;
+    FileNew?: string;
 }
 /**
  * DeleteAcls返回参数结构体
@@ -4043,12 +3948,11 @@ export interface SearchFileResponse {
     /**
      * 记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 文件操作列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Files: Array<SearchFileResult>;
+    Files?: Array<SearchFileResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

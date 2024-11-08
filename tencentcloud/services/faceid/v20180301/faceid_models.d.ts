@@ -44,17 +44,19 @@ export interface GetFaceidRiskInfoTokenResponse {
 export interface CheckIdNameDateResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 一致
-  -1: 不一致
-  不收费结果码：
-  -2: 非法身份证号（长度、校验位等不正确）
-  -3: 非法姓名（长度、格式等不正确）
-  -4: 非法有效期（长度、格式等不正确）
-  -5: 身份信息无效
-  -6: 证件库服务异常
-  -7: 证件库中无此身份证记录
-  -8: 认证次数超过当日限制，请次日重试
+  
+  - 收费结果码：
+  0: 一致。
+  -1: 不一致。
+  
+  - 不收费结果码：
+  -2: 非法身份证号（长度、校验位等不正确）。
+  -3: 非法姓名（长度、格式等不正确）。
+  -4: 非法有效期（长度、格式等不正确）。
+  -5: 身份信息无效。
+  -6: 证件库服务异常。
+  -7: 证件库中无此身份证记录。
+  -8: 认证次数超过当日限制，请次日重试。
      */
     Result?: string;
     /**
@@ -71,15 +73,16 @@ export interface CheckIdNameDateResponse {
  */
 export interface IdCardVerificationRequest {
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -258,11 +261,12 @@ export interface RuleIdConfig {
  */
 export interface MobileStatusRequest {
     /**
-     * 手机号码
+     * 手机号码。
      */
     Mobile: string;
     /**
-     * 敏感数据加密信息。对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -430,13 +434,13 @@ export interface LivenessRecognitionRequest {
  */
 export interface CheckEidTokenStatusResponse {
     /**
-     * 枚举：
-  init：token未验证
-  doing: 验证中
-  finished: 验证完成
-  timeout: token已超时
+     * 状态。
+  - init：EidToken未验证。
+  - doing: EidToken验证中。
+  - finished: EidToken验证完成。
+  - timeout: EidToken已超时。
      */
-    Status: string;
+    Status?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -572,27 +576,33 @@ export interface GetFaceIdRiskInfoResponse {
  */
 export interface LivenessCompareResponse {
     /**
-     * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+     * 验证通过后的视频最佳截图照片。
+  - 照片为BASE64编码后的值，jpg格式。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BestFrameBase64: string;
+    BestFrameBase64?: string;
     /**
-     * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+     * 相似度。
+  - 取值范围 [0.00, 100.00]。
+  - 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
      */
-    Sim: number;
+    Sim?: number;
     /**
-     * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+     * 业务错误码。
+  - 成功情况返回Success。
+  - 错误情况请参考下方错误码，列表中FailedOperation部分。
      */
-    Result: string;
+    Result?: string;
     /**
      * 业务结果描述。
      */
-    Description: string;
+    Description?: string;
     /**
-     * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+     * 最佳截图列表。
+  - 仅在配置了返回多张最佳截图时返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BestFrameList: Array<string>;
+    BestFrameList?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -603,27 +613,28 @@ export interface LivenessCompareResponse {
  */
 export interface BankCard2EVerificationResponse {
     /**
-     * 认证结果码
-  计费结果码：
-    '0': '认证通过'
-    '-1': '认证未通过'
-   '-4': '持卡人信息有误'
-    '-5': '未开通无卡支付'
-    '-6': '此卡被没收'
-    '-7': '无效卡号'
-    '-8': '此卡无对应发卡行'
-    '-9': '该卡未初始化或睡眠卡'
-    '-10': '作弊卡、吞卡'
-    '-11': '此卡已挂失'
-    '-12': '该卡已过期'
-    '-13': '受限制的卡'
-    '-14': '密码错误次数超限'
-    '-15': '发卡行不支持此交易'
-  不计费结果码：
-    '-2': '姓名校验不通过'
-    '-3': '银行卡号码有误'
-    '-16': '验证中心服务繁忙'
-    '-17': '验证次数超限，请次日重试'
+     * 认证结果码。
+  - 计费结果码：
+    '0': '认证通过'。
+    '-1': '认证未通过'。
+   '-4': '持卡人信息有误'。
+    '-5': '未开通无卡支付'。
+    '-6': '此卡被没收'。
+    '-7': '无效卡号'。
+    '-8': '此卡无对应发卡行'。
+    '-9': '该卡未初始化或睡眠卡'。
+    '-10': '作弊卡、吞卡'。
+    '-11': '此卡已挂失'。
+    '-12': '该卡已过期'。
+    '-13': '受限制的卡'。
+    '-14': '密码错误次数超限'。
+    '-15': '发卡行不支持此交易'。
+  
+  - 不计费结果码：
+    '-2': '姓名校验不通过'。
+    '-3': '银行卡号码有误'。
+    '-16': '验证中心服务繁忙'。
+    '-17': '验证次数超限，请次日重试'。
   
      */
     Result?: string;
@@ -642,13 +653,14 @@ export interface BankCard2EVerificationResponse {
 export interface MobileStatusResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0：成功
-  不收费结果码：
-  -1：未查询到结果
-  -2：手机号格式不正确
-  -3：验证中心服务繁忙
-  -4：认证次数超过当日限制，请次日重试
+  - 收费结果码：
+  0：成功。
+  
+  - 不收费结果码：
+  -1：未查询到结果。
+  -2：手机号格式不正确。
+  -3：验证中心服务繁忙。
+  -4：认证次数超过当日限制，请次日重试。
      */
     Result?: string;
     /**
@@ -656,13 +668,14 @@ export interface MobileStatusResponse {
      */
     Description?: string;
     /**
-     * 状态码：
-  0：正常
-  1：停机
-  2：销号
-  3：空号
-  4：不在网
-  99：未知状态
+     * 状态码。
+  - 取值范围：
+  0：正常。
+  1：停机。
+  2：销号。
+  3：空号。
+  4：不在网。
+  99：未知状态。
      */
     StatusCode?: number;
     /**
@@ -798,12 +811,12 @@ export interface LivenessRequest {
 export interface DetectAIFakeFacesRequest {
     /**
      * 传入需要进行检测的带有人脸的图片或视频，使用base64编码的形式。
+  - 图片的Base64值：
+  建议整体图像480x640的分辨率，脸部 大小 100X100 以上。
+  Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+  请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
   
-  图片的Base64值：
-  建议整体图像480x640的分辨率，脸部 大小 100X100 以上；
-  Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-  
-  视频的Base64值：
+  - 视频的Base64值：
   Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
   请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
   视频时长最大支持20s，建议时长2～5s。
@@ -811,18 +824,22 @@ export interface DetectAIFakeFacesRequest {
      */
     FaceInput?: string;
     /**
-     * 传入的类型
-  1- 传入的是图片类型
-  2- 传入的是视频类型
-  其他 - 返回错误码InvalidParameter
+     * 传入的类型。
+  - 取值范围：
+  1：传入的是图片类型。
+  2：传入的是视频类型。
+  其他：返回错误码InvalidParameter。
      */
     FaceInputType?: number;
     /**
-     * 是否需要对请求信息进行全包体加密； 支持的加密算法:AES-256-CBC、SM4-GCM； 有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 是否需要对请求信息进行全包体加密。
+  - 支持的加密算法:AES-256-CBC、SM4-GCM。
+  - 有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
     /**
-     * 加密后的密文； 加密前的数据格式如下:{"FaceInput":"AAAAA","FaceInputType":1}
+     * 加密后的密文。
+  - 加密前的数据格式如下:{"FaceInput":"AAAAA","FaceInputType":1}。
      */
     EncryptedBody?: string;
 }
@@ -832,10 +849,11 @@ export interface DetectAIFakeFacesRequest {
 export interface CheckBankCardInformationResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
+  - 收费结果码：
   0: 查询成功
   -1: 未查到信息
-  不收费结果码：
+  
+  - 不收费结果码：
   -2：验证中心服务繁忙
   -3：银行卡不存在
   -4：认证次数超过当日限制，请次日重试
@@ -843,15 +861,20 @@ export interface CheckBankCardInformationResponse {
      */
     Result?: string;
     /**
-     * 业务结果描述
+     * 业务结果描述。
      */
     Description?: string;
     /**
-     * 开户行
+     * 开户行。
      */
     AccountBank?: string;
     /**
-     * 卡性质：1. 借记卡；2. 贷记卡；3. 预付费卡；4. 准贷记卡
+     * 卡性质。
+  - 取值范围：
+  1：借记卡。
+  2：贷记卡。
+  3：预付费卡。
+  4：准贷记卡
      */
     AccountType?: number;
     /**
@@ -898,23 +921,26 @@ export interface GetEidTokenRequest {
  */
 export interface CheckIdNameDateRequest {
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 身份证有效期开始时间，格式：YYYYMMDD。如：20210701
+     * 身份证有效期开始时间。
+  - 格式：YYYYMMDD，如：20210701。
      */
     ValidityBegin: string;
     /**
-     * 身份证有效期到期时间，格式：YYYYMMDD，长期用“00000000”代替；如：20210701
+     * 身份证有效期到期时间。
+  格式：YYYYMMDD，长期用“00000000”代替，如：20210701。
      */
     ValidityEnd: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1059,20 +1085,20 @@ export interface GetFaceIdResultResponse {
  */
 export interface DetectAIFakeFacesResponse {
     /**
-     * 检测到的图片是否存在攻击：
-  Low：无攻击风险
-  Mid：中度疑似攻击
-  High：高度疑似攻击
+     * 检测到的图片是否存在攻击。
+  - Low：无攻击风险。
+  - Mid：中度疑似攻击。
+  - High：高度疑似攻击。
      */
     AttackRiskLevel?: string;
     /**
-     * 检测到疑似的攻击痕迹列表
-  说明：未检测到攻击痕迹时，返回空数组
-  此出参仅作为结果判断的参考，实际应用仍建议使用AttackRiskLevel的结果。
+     * 检测到疑似的攻击痕迹列表。
+  - 说明：未检测到攻击痕迹时，返回空数组。
+  - 此出参仅作为结果判断的参考，实际应用仍建议使用AttackRiskLevel的结果。
      */
     AttackRiskDetailList?: Array<AttackRiskDetail>;
     /**
-     * 额外信息
+     * 额外信息。
      */
     ExtraInfo?: ExtraInfo;
     /**
@@ -1121,53 +1147,55 @@ export interface IntentionVerifyData {
  */
 export interface LivenessCompareRequest {
     /**
-     * 活体检测类型，取值：LIP/ACTION/SILENT。
-  LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+     * 活体检测类型。
+  - 取值：LIP/ACTION/SILENT。
+  - LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
      */
     LivenessType: string;
     /**
-     * 用于人脸比对的照片的Base64值；
-  Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-  请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-  
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
+     * 用于人脸比对的照片的Base64值。
+  - Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+  - 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+  - 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
      */
     ImageBase64?: string;
     /**
-     * 用于人脸比对照片的URL地址；图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。
-  
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
-  
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 用于人脸比对照片的URL地址。
+  - 图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。
+  - 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
+  - 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  - 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
     /**
-     * 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
-  动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
-  静默模式传参：空。
+     * 验证数据。
+  - 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
+  - 动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
+  - 静默模式传参：空。
      */
     ValidateData?: string;
     /**
      * 额外配置，传入JSON字符串。
+  
+  - 格式如下：
   {
   "BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
   }
      */
     Optional?: string;
     /**
-     * 用于活体检测的视频，视频的Base64值；
-  Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
-  请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-  
-  视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
+     * 用于活体检测的视频，视频的Base64值。
+  - Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
+  - 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+  - 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
      */
     VideoBase64?: string;
     /**
-     * 用于活体检测的视频Url 地址。视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
-  
-  视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
-  
-  建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 用于活体检测的视频Url 地址。
+  - 视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
+  - 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
+  - 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。
+  - 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     VideoUrl?: string;
 }
@@ -1293,7 +1321,8 @@ export interface CheckBankCardInformationRequest {
      */
     BankCard: string;
     /**
-     * 敏感数据加密信息。对传入信息（银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1302,24 +1331,27 @@ export interface CheckBankCardInformationRequest {
  */
 export interface BankCardVerificationRequest {
     /**
-     * 开户证件号，与CertType参数的证件类型一致，如：身份证，则传入身份证号。
+     * 开户证件号。
+  - 与CertType参数的证件类型一致，如：身份证，则传入身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 银行卡
+     * 银行卡。
      */
     BankCard: string;
     /**
-     * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
-  目前默认：0 身份证，其他证件类型暂不支持。
+     * 证件类型。
+  - 请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
+  - 目前默认：0 身份证，其他证件类型暂不支持。
      */
     CertType?: number;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1364,11 +1396,15 @@ export interface GetWeChatBillDetailsResponse {
  */
 export interface CheckIdCardInformationResponse {
     /**
-     * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+     * 相似度。
+  - 取值范围 [0.00, 100.00]。
+  - 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
      */
     Sim?: number;
     /**
-     * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+     * 业务错误码。
+  - 成功情况返回Success,。
+  - 错误情况请参考下方错误码 列表中FailedOperation部分
      */
     Result?: string;
     /**
@@ -1376,27 +1412,27 @@ export interface CheckIdCardInformationResponse {
      */
     Description?: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name?: string;
     /**
-     * 性别
+     * 性别。
      */
     Sex?: string;
     /**
-     * 民族
+     * 民族。
      */
     Nation?: string;
     /**
-     * 出生日期
+     * 出生日期。
      */
     Birth?: string;
     /**
-     * 地址
+     * 地址。
      */
     Address?: string;
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdNum?: string;
     /**
@@ -1404,20 +1440,24 @@ export interface CheckIdCardInformationResponse {
      */
     Portrait?: string;
     /**
-     * 告警信息，当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息，Code 告警码列表和释义：
+     * 告警信息。
+  - 当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。
+  - Code 告警码列表和释义：
+  '-9101'：身份证边框不完整告警。
+  '-9102'：身份证复印件告警。
+  '-9103'：身份证翻拍告警。
+  '-9105'：身份证框内遮挡告警。
+  '-9104'：临时身份证告警。
+  '-9106'：身份证 PS 告警（疑似存在PS痕迹）。
+  '-8001'：图片模糊告警。
   
-  -9101 身份证边框不完整告警，
-  -9102 身份证复印件告警，
-  -9103 身份证翻拍告警，
-  -9105 身份证框内遮挡告警，
-  -9104 临时身份证告警，
-  -9106 身份证 PS 告警（疑似存在PS痕迹）。
-  -8001 图片模糊告警
-  多个会 |  隔开如 "-9101|-9106|-9104"
+  - 多个会用“|” 隔开，如 "-9101|-9106|-9104"。
      */
     Warnings?: string;
     /**
-     * 图片质量分数，当请求Config中配置图片模糊告警该参数才有意义，取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。
+     * 图片质量分数。
+  - 当请求Config中配置图片模糊告警该参数才有意义。
+  - 取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。
      */
     Quality?: number;
     /**
@@ -1426,7 +1466,7 @@ export interface CheckIdCardInformationResponse {
      */
     Encryption?: Encryption;
     /**
-     * 加密后的数据
+     * 加密后的数据。
      */
     EncryptedBody?: string;
     /**
@@ -1484,17 +1524,18 @@ export interface DetectAuthResponse {
  */
 export interface PhoneVerificationResponse {
     /**
-     * 认证结果码:
-  收费结果码
-  0: 三要素信息一致
-  -4: 三要素信息不一致
-  不收费结果码
-  -6: 手机号码不合法
-  -7: 身份证号码有误
-  -8: 姓名校验不通过
-  -9: 没有记录
-  -11: 验证中心服务繁忙
-  -12: 认证次数超过当日限制，请次日重试
+     * 认证结果码。
+  - 收费结果码
+  0: 三要素信息一致。
+  -4: 三要素信息不一致。
+  
+  - 不收费结果码
+  -6: 手机号码不合法。
+  -7: 身份证号码有误。
+  -8: 姓名校验不通过。
+  -9: 没有记录。
+  -11: 验证中心服务繁忙。
+  -12: 认证次数超过当日限制，请次日重试。
      */
     Result?: string;
     /**
@@ -1503,17 +1544,18 @@ export interface PhoneVerificationResponse {
     Description?: string;
     /**
      * 运营商名称。
-  取值范围为["","移动","电信","联通"]
+  - 取值范围为["","移动","电信","联通"]
      */
     Isp?: string;
     /**
-     * 业务结果详细信息。（当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回）
-  枚举值：
-  PhoneIdCardMismatch：手机号码与姓名一致，与身份证号不一致；
-  PhoneNameMismatch：手机号码身份证号一致，与姓名不一致；
-  PhoneNameIdCardMismatch：手机号码与姓名和身份证号均不一致；
-  NameIdCardMismatch：姓名和身份证号不一致；
-  OtherMismatch：其他不一致；
+     * 业务结果详细信息。
+  - 当VerifyMode配置"详版"，且Result为"-4: 三要素信息不一致"时返回。
+  - 枚举值：
+  PhoneIdCardMismatch：手机号码与姓名一致，与身份证号不一致。
+  PhoneNameMismatch：手机号码身份证号一致，与姓名不一致。
+  PhoneNameIdCardMismatch：手机号码与姓名和身份证号均不一致。
+  NameIdCardMismatch：姓名和身份证号不一致。
+  OtherMismatch：其他不一致。
      */
     ResultDetail?: string;
     /**
@@ -1526,30 +1568,32 @@ export interface PhoneVerificationResponse {
  */
 export interface IdCardOCRVerificationRequest {
     /**
-     * 身份证号
-  姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
+     * 身份证号。
+  - 姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。
+  - 若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。
      */
     IdCard?: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name?: string;
     /**
-     * 身份证人像面的 Base64 值
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+     * 身份证人像面的 Base64 值。
+  - 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  - 支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
      */
     ImageBase64?: string;
     /**
-     * 身份证人像面的 Url 地址
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 身份证人像面的 Url 地址。
+  - 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  - 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+  - 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  - 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1558,30 +1602,31 @@ export interface IdCardOCRVerificationRequest {
  */
 export interface BankCard4EVerificationResponse {
     /**
-     * 认证结果码
-  收费结果码：
-  '0': '认证通过'
-  '-1': '认证未通过'
-  '-6': '持卡人信息有误'
-  '-7': '未开通无卡支付'
-  '-8': '此卡被没收'
-  '-9': '无效卡号'
-  '-10': '此卡无对应发卡行'
-  '-11': '该卡未初始化或睡眠卡'
-  '-12': '作弊卡、吞卡'
-  '-13': '此卡已挂失'
-  '-14': '该卡已过期'
-  '-15': '受限制的卡'
-  '-16': '密码错误次数超限'
-  '-17': '发卡行不支持此交易'
-  不收费结果码：
-  '-2': '姓名校验不通过'
-  '-3': '身份证号码有误'
-  '-4': '银行卡号码有误'
-  '-5': '手机号码不合法'
-  '-18': '验证中心服务繁忙'
-  '-19': '验证次数超限，请次日重试'
-  '-20': '该证件号暂不支持核验，当前仅支持二代身份证'
+     * 认证结果码。
+  - 收费结果码：
+  '0': '认证通过'。
+  '-1': '认证未通过'。
+  '-6': '持卡人信息有误'。
+  '-7': '未开通无卡支付'。
+  '-8': '此卡被没收'。
+  '-9': '无效卡号'。
+  '-10': '此卡无对应发卡行'。
+  '-11': '该卡未初始化或睡眠卡'。
+  '-12': '作弊卡、吞卡'。
+  '-13': '此卡已挂失'。
+  '-14': '该卡已过期'。
+  '-15': '受限制的卡'。
+  '-16': '密码错误次数超限'。
+  '-17': '发卡行不支持此交易'。
+  
+  - 不收费结果码：
+  '-2': '姓名校验不通过'。
+  '-3': '身份证号码有误'。
+  '-4': '银行卡号码有误'。
+  '-5': '手机号码不合法'。
+  '-18': '验证中心服务繁忙'。
+  '-19': '验证次数超限，请次日重试'。
+  '-20': '该证件号暂不支持核验，当前仅支持二代身份证'。
      */
     Result?: string;
     /**
@@ -1628,11 +1673,12 @@ export interface Encryption {
  */
 export interface MobileNetworkTimeVerificationRequest {
     /**
-     * 手机号码
+     * 手机号码。
      */
     Mobile: string;
     /**
-     * 敏感数据加密信息。对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1642,20 +1688,21 @@ export interface MobileNetworkTimeVerificationRequest {
 export interface PhoneVerificationCMCCResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 认证通过
-  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
-  不收费结果码：
-  -6: 手机号码不合法
-  -7: 身份证号码有误
-  -8: 姓名校验不通过
-  -9: 没有记录
-  -11: 验证中心服务繁忙
+  - 收费结果码：
+  0: 认证通过。
+  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）。
+  
+  - 不收费结果码：
+  -6: 手机号码不合法。
+  -7: 身份证号码有误。
+  -8: 姓名校验不通过。
+  -9: 没有记录。
+  -11: 验证中心服务繁忙。
      */
     Result?: string;
     /**
      * 运营商名称。
-  取值范围为["移动","联通","电信",""]
+  - 取值范围为["移动","联通","电信",""]。
      */
     Isp?: string;
     /**
@@ -1673,14 +1720,15 @@ export interface PhoneVerificationCMCCResponse {
 export interface MobileNetworkTimeVerificationResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 成功
-  -2: 手机号不存在
-  -3: 手机号存在，但无法查询到在网时长
-  不收费结果码：
-  -1: 手机号格式不正确
-  -4: 验证中心服务繁忙
-  -5：认证次数超过当日限制，请次日重试
+  - 收费结果码：
+  0: 成功。
+  -2: 手机号不存在。
+  -3: 手机号存在，但无法查询到在网时长。
+  
+  - 不收费结果码：
+  -1: 手机号格式不正确。
+  -4: 验证中心服务繁忙。
+  -5：认证次数超过当日限制，请次日重试。
      */
     Result?: string;
     /**
@@ -1689,7 +1737,8 @@ export interface MobileNetworkTimeVerificationResponse {
     Description?: string;
     /**
      * 在网时长区间。
-  格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
+  - 格式为(a,b]，表示在网时长在a个月以上，b个月以下。
+  - 若b为+时表示没有上限。
      */
     Range?: string;
     /**
@@ -1703,20 +1752,21 @@ export interface MobileNetworkTimeVerificationResponse {
 export interface PhoneVerificationCUCCResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 认证通过
-  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
-  不收费结果码：
-  -6: 手机号码不合法
-  -7: 身份证号码有误
-  -8: 姓名校验不通过
-  -9: 没有记录
-  -11: 验证中心服务繁忙
+  - 收费结果码：
+  0: 认证通过。
+  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）。
+  
+  - 不收费结果码：
+  -6: 手机号码不合法。
+  -7: 身份证号码有误。
+  -8: 姓名校验不通过。
+  -9: 没有记录。
+  -11: 验证中心服务繁忙。
      */
     Result?: string;
     /**
      * 运营商名称。
-  取值范围为["移动","联通","电信",""]
+  - 取值范围为["移动","联通","电信",""]。
      */
     Isp?: string;
     /**
@@ -1733,43 +1783,46 @@ export interface PhoneVerificationCUCCResponse {
  */
 export interface CheckIdCardInformationRequest {
     /**
-     * 身份证人像面的 Base64 值
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。
-  请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-  ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
+     * 身份证人像面的 Base64 值。
+  - 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  - 支持的图片大小：所下载图片经Base64编码后不超过 7M。
+  - 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+  - ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
      */
     ImageBase64?: string;
     /**
      * 身份证人像面的 Url 地址
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+  - 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  - 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+  - 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  - 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
     /**
-     * 以下可选字段均为bool 类型，默认false：
-  CopyWarn，复印件告警
-  BorderCheckWarn，边框和框内遮挡告警
-  ReshootWarn，翻拍告警
-  DetectPsWarn，PS检测告警（疑似存在PS痕迹）
-  TempIdWarn，临时身份证告警
-  Quality，图片质量告警（评价图片模糊程度）
+     * 配置。
+  - 以下可选字段均为bool 类型，默认false。
+  CopyWarn，复印件告警。
+  BorderCheckWarn，边框和框内遮挡告警。
+  ReshootWarn，翻拍告警。
+  DetectPsWarn，PS检测告警（疑似存在PS痕迹）。
+  TempIdWarn，临时身份证告警。
+  Quality，图片质量告警（评价图片模糊程度）。
   
-  SDK 设置方式参考：
-  Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
-  API 3.0 Explorer 设置方式参考：
-  Config = {"CopyWarn":true,"ReshootWarn":true}
+  - SDK 设置方式参考：
+  Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})。
+  
+  - API 3.0 Explorer 设置方式参考：
+  Config = {"CopyWarn":true,"ReshootWarn":true}。
      */
     Config?: string;
     /**
-     * 是否需要对返回中的敏感信息进行加密。默认false。
-  其中敏感信息包括：Response.IdNum、Response.Name
+     * 是否需要对返回中的敏感信息进行加密。
+  - 默认false。
+  - 敏感信息包括：Response.IdNum、Response.Name。
      */
     IsEncrypt?: boolean;
     /**
-     * 是否需要对响应体加密
+     * 是否需要对响应体加密。
      */
     IsEncryptResponse?: boolean;
     /**
@@ -1887,29 +1940,30 @@ export interface GetWeChatBillDetailsRequest {
  */
 export interface BankCardVerificationResponse {
     /**
-     * 认证结果码
-  收费结果码：
-  '0': '认证通过'
-  '-1': '认证未通过'
-  '-5': '持卡人信息有误'
-  '-6': '未开通无卡支付'
-  '-7': '此卡被没收'
-  '-8': '无效卡号'
-  '-9': '此卡无对应发卡行'
-  '-10': '该卡未初始化或睡眠卡'
-  '-11': '作弊卡、吞卡'
-  '-12': '此卡已挂失'
-  '-13': '该卡已过期'
-  '-14': '受限制的卡'
-  '-15': '密码错误次数超限'
-  '-16': '发卡行不支持此交易'
-  不收费结果码：
-  '-2': '姓名校验不通过'
-  '-3': '身份证号码有误'
-  '-4': '银行卡号码有误'
-  '-17': '验证中心服务繁忙'
-  '-18': '验证次数超限，请次日重试'
-  '-19': '该证件号暂不支持核验，当前仅支持二代身份证'
+     * 认证结果码。
+  - 收费结果码：
+  '0': '认证通过'。
+  '-1': '认证未通过'。
+  '-5': '持卡人信息有误'。
+  '-6': '未开通无卡支付'。
+  '-7': '此卡被没收'。
+  '-8': '无效卡号'。
+  '-9': '此卡无对应发卡行'。
+  '-10': '该卡未初始化或睡眠卡'。
+  '-11': '作弊卡、吞卡'。
+  '-12': '此卡已挂失'。
+  '-13': '该卡已过期'。
+  '-14': '受限制的卡'。
+  '-15': '密码错误次数超限'。
+  '-16': '发卡行不支持此交易'。
+  
+  - 不收费结果码：
+  '-2': '姓名校验不通过'。
+  '-3': '身份证号码有误'。
+  '-4': '银行卡号码有误'。
+  '-17': '验证中心服务繁忙'。
+  '-18': '验证次数超限，请次日重试'。
+  '-19': '该证件号暂不支持核验，当前仅支持二代身份证'。
      */
     Result?: string;
     /**
@@ -1926,19 +1980,20 @@ export interface BankCardVerificationResponse {
  */
 export interface PhoneVerificationCUCCRequest {
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 手机号
+     * 手机号。
      */
     Phone: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -1947,19 +2002,20 @@ export interface PhoneVerificationCUCCRequest {
  */
 export interface PhoneVerificationCMCCRequest {
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 手机号
+     * 手机号。
      */
     Phone: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -2233,50 +2289,50 @@ export interface GetDetectInfoResponse {
 export interface IdCardOCRVerificationResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 姓名和身份证号一致
-  -1: 姓名和身份证号不一致
-  不收费结果码：
-  -2: 非法身份证号（长度、校验位等不正确）
-  -3: 非法姓名（长度、格式等不正确）
-  -4: 证件库服务异常
-  -5: 证件库中无此身份证记录
-  -6: 权威比对系统升级中，请稍后再试
-  -7: 认证次数超过当日限制
+  - 收费结果码：
+  0: 姓名和身份证号一致。
+  -1: 姓名和身份证号不一致。
+  - 不收费结果码：
+  -2: 非法身份证号（长度、校验位等不正确）。
+  -3: 非法姓名（长度、格式等不正确）。
+  -4: 证件库服务异常。
+  -5: 证件库中无此身份证记录。
+  -6: 权威比对系统升级中，请稍后再试。
+  -7: 认证次数超过当日限制。
      */
-    Result: string;
+    Result?: string;
     /**
      * 业务结果描述。
      */
-    Description: string;
+    Description?: string;
     /**
-     * 用于验证的姓名
+     * 用于验证的姓名。
      */
-    Name: string;
+    Name?: string;
     /**
-     * 用于验证的身份证号
+     * 用于验证的身份证号。
      */
-    IdCard: string;
+    IdCard?: string;
     /**
-     * OCR得到的性别
+     * OCR得到的性别。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sex: string;
+    Sex?: string;
     /**
-     * OCR得到的民族
+     * OCR得到的民族。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Nation: string;
+    Nation?: string;
     /**
-     * OCR得到的生日
+     * OCR得到的生日。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Birth: string;
+    Birth?: string;
     /**
-     * OCR得到的地址
+     * OCR得到的地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2288,7 +2344,7 @@ export interface IdCardOCRVerificationResponse {
 export interface IdCardVerificationResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
+  - 收费结果码：
   0: 姓名和身份证号一致
   -1: 姓名和身份证号不一致
   不收费结果码：
@@ -2314,7 +2370,7 @@ export interface IdCardVerificationResponse {
  */
 export interface GetActionSequenceRequest {
     /**
-     * 默认不需要使用
+     * 默认不需要使用。
      */
     ActionType?: string;
 }
@@ -2466,29 +2522,31 @@ export interface WeChatBillDetail {
  */
 export interface PhoneVerificationRequest {
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 手机号
+     * 手机号。
      */
     Phone: string;
     /**
-     * 验证模式（详版/简版）。简版与详版价格不一致，详见[价格说明](https://cloud.tencent.com/document/product/1007/84321)。
-  
-  枚举值：0（简版），1（详版）。默认值为0。
+     * 验证模式（详版/简版）。
+  - 简版与详版价格不一致，详见[价格说明](https://cloud.tencent.com/document/product/1007/84321)。
+  - 枚举值：0（简版）；1（详版）。
+  - 默认值为0。
      */
     VerifyMode?: string;
     /**
-     * 有加密需求的用户，传入kms的CiphertextBlob，关于数据加密可查阅 <a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
+     * 有加密需求的用户，传入kms的CiphertextBlob。关于数据加密可查阅 <a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
      */
     CiphertextBlob?: string;
     /**
-     * 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的IdCard，Name，Phone中的一个或多个。
+     * 在使用加密服务时，填入要被加密的字段。
+  - 本接口中可填入加密后的IdCard，Name，Phone中的一个或多个。
      */
     EncryptList?: Array<string>;
     /**
@@ -2519,20 +2577,21 @@ export interface GetFaceIdResultRequest {
 export interface CheckPhoneAndNameResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 验证结果一致
-  1: 验证结果不一致
-  不收费结果码：
-  -1:查无记录
-  -2:引擎未知错误
-  -3:引擎服务异常
-  -4:姓名校验不通过
-  -5:手机号码不合法
-  -6: 认证次数超过当日限制，请次日重试
+  - 收费结果码：
+  0: 验证结果一致。
+  1: 验证结果不一致。
+  
+  - 不收费结果码：
+  -1:查无记录。
+  -2:引擎未知错误。
+  -3:引擎服务异常。
+  -4:姓名校验不通过。
+  -5:手机号码不合法。
+  -6: 认证次数超过当日限制，请次日重试。
      */
     Result?: string;
     /**
-     * 业务结果描述
+     * 业务结果描述。
      */
     Description?: string;
     /**
@@ -2642,15 +2701,16 @@ export interface GetFaceidRiskInfoTokenRequest {
  */
 export interface BankCard2EVerificationRequest {
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 银行卡
+     * 银行卡。
      */
     BankCard: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -2687,20 +2747,21 @@ export interface ImageRecognitionV2Request {
 export interface PhoneVerificationCTCCResponse {
     /**
      * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 认证通过
-  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
-  不收费结果码：
-  -6: 手机号码不合法
-  -7: 身份证号码有误
-  -8: 姓名校验不通过
-  -9: 没有记录
-  -11: 验证中心服务繁忙
+  - 收费结果码：
+  0: 认证通过。
+  -4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）。
+  
+  - 不收费结果码：
+  -6: 手机号码不合法。
+  -7: 身份证号码有误。
+  -8: 姓名校验不通过。
+  -9: 没有记录。
+  -11: 验证中心服务繁忙。
      */
     Result?: string;
     /**
      * 运营商名称。
-  取值范围为["移动","联通","电信",""]
+  - 取值范围为["移动","联通","电信",""]。
      */
     Isp?: string;
     /**
@@ -2772,19 +2833,20 @@ export interface ParseNfcDataRequest {
  */
 export interface PhoneVerificationCTCCRequest {
     /**
-     * 身份证号
+     * 身份证号。
      */
     IdCard: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 手机号
+     * 手机号。
      */
     Phone: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -2820,28 +2882,31 @@ export interface ImageRecognitionRequest {
  */
 export interface BankCard4EVerificationRequest {
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 银行卡
+     * 银行卡。
      */
     BankCard: string;
     /**
-     * 手机号码
+     * 手机号码。
      */
     Phone: string;
     /**
-     * 开户证件号，与CertType参数的证件类型一致，如：身份证，则传入身份证号。
+     * 开户证件号。
+  - 与CertType参数的证件类型一致，如：身份证，则传入身份证号。
      */
     IdCard: string;
     /**
-     * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
-  目前默认为0：身份证，其他证件类型暂不支持。
+     * 证件类型。
+  - 请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
+  - 目前默认为0：身份证，其他证件类型暂不支持。
      */
     CertType?: number;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、身份证号、手机号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }
@@ -2850,7 +2915,8 @@ export interface BankCard4EVerificationRequest {
  */
 export interface GetActionSequenceResponse {
     /**
-     * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
+     * 动作顺序，例如：2,1 or 1,2。
+  - 1代表张嘴，2代表闭眼。
      */
     ActionSequence?: string;
     /**
@@ -2872,9 +2938,9 @@ export interface GetFaceIdRiskInfoRequest {
  */
 export interface GetLiveCodeResponse {
     /**
-     * 数字验证码，如：1234
+     * 数字验证码。
      */
-    LiveCode: string;
+    LiveCode?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2960,15 +3026,16 @@ export interface DetectInfoIdCardData {
  */
 export interface CheckPhoneAndNameRequest {
     /**
-     * ⼿机号
+     * ⼿机号。
      */
     Mobile: string;
     /**
-     * 姓名
+     * 姓名。
      */
     Name: string;
     /**
-     * 敏感数据加密信息。对传入信息（姓名、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+     * 敏感数据加密信息。
+  - 对传入信息（姓名、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
 }

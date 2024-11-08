@@ -27,6 +27,7 @@ import {
   BankSlipOCRRequest,
   BusinessCardOCRResponse,
   TextArithmetic,
+  ResidencePermitInfo,
   BankCardOCRRequest,
   CarInvoiceOCRRequest,
   TextDetectionResult,
@@ -34,7 +35,7 @@ import {
   RecognizeTravelCardOCRRequest,
   TrainTicketOCRRequest,
   EstateCertOCRResponse,
-  GeneralHandwritingOCRResponse,
+  FlightInvoiceOCRRequest,
   RecognizePhilippinesDrivingLicenseOCRRequest,
   WordItem,
   MLIDPassportOCRRequest,
@@ -56,10 +57,10 @@ import {
   Rect,
   LicensePlateInfo,
   RideHailingTransportLicenseOCRRequest,
-  FlightInvoiceOCRRequest,
+  VatRollItem,
   TextFormula,
   HmtResidentPermitOCRResponse,
-  VatInvoiceItem,
+  OtherInvoiceList,
   VehicleRegCertInfo,
   GeneralWarnInfo,
   FlightItem,
@@ -97,6 +98,7 @@ import {
   RecognizePhilippinesTinIDOCRResponse,
   TollInvoiceInfo,
   BankSlipInfo,
+  SmartStructuralOCRResponse,
   ArithmeticOCRResponse,
   FormulaOCRResponse,
   BusInvoiceInfo,
@@ -110,7 +112,7 @@ import {
   GeneralAccurateOCRResponse,
   ElectronicTrainTicketFull,
   BusInvoice,
-  QuotaInvoice,
+  QrcodeOCRRequest,
   TaxiInvoiceOCRResponse,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
@@ -118,6 +120,7 @@ import {
   OtherInvoice,
   CellContent,
   RecognizeMedicalInvoiceOCRResponse,
+  RecognizeValidIDCardOCRRequest,
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
   VatInvoiceVerifyNewRequest,
@@ -161,9 +164,11 @@ import {
   PassportRecognizeInfos,
   PropOwnerCertOCRRequest,
   ImageEnhancementResponse,
+  PortraitImageInfo,
   QrcodeImgSize,
   PassportOCRResponse,
   FinancialBillItemDetails,
+  CardWarnInfo,
   VehicleRegCertOCRRequest,
   RecognizeTravelCardOCRResponse,
   ElectronicAirTransportDetail,
@@ -183,9 +188,9 @@ import {
   EnglishOCRRequest,
   VatInvoiceVerifyResponse,
   VatElectronicInfo,
-  SmartStructuralOCRResponse,
+  RecognizeValidIDCardOCRResponse,
   DetectedWords,
-  OtherInvoiceList,
+  IDCardInfo,
   IDCardOCRResponse,
   ShipInvoiceInfo,
   MedicalInvoiceItem,
@@ -250,6 +255,7 @@ import {
   Polygon,
   GetTaskStateResponse,
   InsuranceBillInfo,
+  ContentInfo,
   GetTaskStateRequest,
   RecognizeMedicalInvoiceOCRRequest,
   InsuranceBillOCRResponse,
@@ -270,23 +276,26 @@ import {
   MLIDCardOCRRequest,
   TaxiTicket,
   EnglishOCRResponse,
+  ImageCoordinates,
   RecognizeForeignPermanentResidentIdCardResponse,
   BusInvoiceOCRRequest,
   OrgCodeCertOCRResponse,
+  TemporaryIDCardInfo,
+  VatInvoiceItem,
   RideHailingTransportLicenseOCRResponse,
   CandWord,
   RecognizeContainerOCRResponse,
   EnterpriseLicenseInfo,
   SmartStructuralProResponse,
   PermitOCRResponse,
+  QuotaInvoice,
   InsuranceBillOCRRequest,
-  QrcodeOCRRequest,
+  GeneralHandwritingOCRResponse,
   MainlandTravelPermitBackInfos,
   TableCell,
   TableOCRResponse,
   DetectedWordCoordPoint,
   QuestionBlockObj,
-  VatRollItem,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
   VatRollInvoiceInfo,
@@ -302,6 +311,7 @@ import {
   RecognizePhilippinesTinIDOCRRequest,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
+  PermanentResidencePermitInfo,
   BizLicenseOCRResponse,
   TableOCRRequest,
   VatInvoiceOCRResponse,
@@ -1078,6 +1088,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizePhilippinesUMIDOCRResponse) => void
   ): Promise<RecognizePhilippinesUMIDOCRResponse> {
     return this.request("RecognizePhilippinesUMIDOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持二代身份证、临时身份证、港澳台居住证、外国人永久居留证，字段内容识别功能，包括姓名、性别、民族、出生、出生日期、住址、公民身份号码、签发机关、有效期限、国籍、通行证号码、持证人持有号码；支持返回证件类型；支持翻拍、复印、边框不完整、遮挡、字段级反光和字段级完整性告警；支持卡片主体框裁剪和头像裁剪。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async RecognizeValidIDCardOCR(
+    req: RecognizeValidIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeValidIDCardOCRResponse) => void
+  ): Promise<RecognizeValidIDCardOCRResponse> {
+    return this.request("RecognizeValidIDCardOCR", req, cb)
   }
 
   /**

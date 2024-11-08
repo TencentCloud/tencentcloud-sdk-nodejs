@@ -273,11 +273,11 @@ export interface DescribeAllTenantsResponse {
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 虚拟集群列表
      */
-    Tenants: Array<InternalTenant>;
+    Tenants?: Array<InternalTenant>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1132,47 +1132,47 @@ export interface Publisher {
      * 生产者id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerId: number;
+    ProducerId?: number;
     /**
      * 生产者名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerName: string;
+    ProducerName?: string;
     /**
      * 生产者地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
     /**
      * 客户端版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientVersion: string;
+    ClientVersion?: string;
     /**
      * 消息生产速率（条/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateIn: number;
+    MsgRateIn?: number;
     /**
      * 消息生产吞吐速率（字节/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputIn: number;
+    MsgThroughputIn?: number;
     /**
      * 平均消息大小（字节）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AverageMsgSize: number;
+    AverageMsgSize?: number;
     /**
      * 连接时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectedSince: string;
+    ConnectedSince?: string;
     /**
      * 生产者连接的主题分区号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partition: number;
+    Partition?: number;
 }
 /**
  * ModifyRole请求参数结构体
@@ -1450,95 +1450,95 @@ export interface InternalTenant {
     /**
      * 虚拟集群ID
      */
-    TenantId: string;
+    TenantId?: string;
     /**
      * 虚拟集群名称
      */
-    TenantName: string;
+    TenantName?: string;
     /**
      * 客户UIN
      */
-    CustomerUin: string;
+    CustomerUin?: string;
     /**
      * 客户的APPID
      */
-    CustomerAppId: string;
+    CustomerAppId?: string;
     /**
      * 物理集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ
      */
-    Type: string;
+    Type?: string;
     /**
      * 命名空间配额
      */
-    MaxNamespaces: number;
+    MaxNamespaces?: number;
     /**
      * 已使用命名空间配额
      */
-    UsedNamespaces: number;
+    UsedNamespaces?: number;
     /**
      * Topic配额
      */
-    MaxTopics: number;
+    MaxTopics?: number;
     /**
      * 已使用Topic配额
      */
-    UsedTopics: number;
+    UsedTopics?: number;
     /**
      * Topic分区数配额
      */
-    MaxPartitions: number;
+    MaxPartitions?: number;
     /**
      * 已使用Topic分区数配额
      */
-    UsedPartitions: number;
+    UsedPartitions?: number;
     /**
      * 存储配额, byte为单位
      */
-    MaxMsgBacklogSize: number;
+    MaxMsgBacklogSize?: number;
     /**
      * 命名空间最大生产TPS
      */
-    MaxPublishTps: number;
+    MaxPublishTps?: number;
     /**
      * 消息最大保留时间，秒为单位
      */
-    MaxRetention: number;
+    MaxRetention?: number;
     /**
      * 创建时间，毫秒为单位
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 修改时间，毫秒为单位
      */
-    UpdateTime: number;
+    UpdateTime?: number;
     /**
      * 命名空间最大消费TPS
      */
-    MaxDispatchTps: number;
+    MaxDispatchTps?: number;
     /**
      * 命名空间最大消费带宽，byte为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxDispatchRateInBytes: number;
+    MaxDispatchRateInBytes?: number;
     /**
      * 命名空间最大生产带宽，byte为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxPublishRateInBytes: number;
+    MaxPublishRateInBytes?: number;
     /**
      * 消息最大保留空间，MB为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxRetentionSizeInMB: number;
+    MaxRetentionSizeInMB?: number;
     /**
      * public Access Enabled
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicAccessEnabled: boolean;
+    PublicAccessEnabled?: boolean;
 }
 /**
  * DeleteEnvironments请求参数结构体
@@ -1847,6 +1847,25 @@ export interface PulsarNetworkAccessPointInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessPointsType?: string;
+    /**
+     * 带宽，目前只有公网会有这个值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bandwidth?: number;
+    /**
+     * 类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecurityPolicy?: Array<SecurityPolicy>;
+    /**
+     * 是否是标准的接入点 true是标准的 false不是标准的
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StandardAccessPoint?: boolean;
+    /**
+     * 可用区信息
+     */
+    ZoneName?: string;
 }
 /**
  * DescribeRabbitMQVipInstance请求参数结构体
@@ -2595,27 +2614,27 @@ export interface ProducerLog {
     /**
      * 消息ID。
      */
-    MsgId: string;
+    MsgId?: string;
     /**
      * 生产者名称。
      */
-    ProducerName: string;
+    ProducerName?: string;
     /**
      * 消息生产时间。
      */
-    ProduceTime: string;
+    ProduceTime?: string;
     /**
      * 生产者客户端。
      */
-    ProducerAddr: string;
+    ProducerAddr?: string;
     /**
      * 生产耗时（秒）。
      */
-    ProduceUseTime: number;
+    ProduceUseTime?: number;
     /**
      * 状态。
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * DescribePublisherSummary请求参数结构体
@@ -2686,6 +2705,17 @@ export interface PulsarProClusterInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: number;
+    /**
+     * 是否开启自动创建主题
+  true就是开启了，false是关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoCreateTopicStatus?: boolean;
+    /**
+     * 自动创建主题的默认分区数，如果没开启就是0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultPartitionNumber?: number;
 }
 /**
  * ModifyRocketMQGroup返回参数结构体
@@ -2828,11 +2858,11 @@ export interface DescribeBindClustersResponse {
     /**
      * 专享集群的数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 专享集群的列表
      */
-    ClusterSet: Array<BindCluster>;
+    ClusterSet?: Array<BindCluster>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3551,11 +3581,11 @@ export interface ServerLog {
     /**
      * 存储时间。
      */
-    SaveTime: string;
+    SaveTime?: string;
     /**
      * 状态。
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * DescribeMsgTrace返回参数结构体
@@ -4063,11 +4093,11 @@ export interface DescribeClustersResponse {
     /**
      * 集群列表数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群信息列表
      */
-    ClusterSet: Array<Cluster>;
+    ClusterSet?: Array<Cluster>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5391,15 +5421,19 @@ export interface InstanceNodeDistribution {
     /**
      * 可用区
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 可用区id
      */
-    ZoneId: string;
+    ZoneId?: string;
     /**
      * 节点数
      */
-    NodeCount: number;
+    NodeCount?: number;
+    /**
+     * 有调度任务且没有切回的可用区，此标识为true
+     */
+    NodePermWipeFlag?: boolean;
 }
 /**
  * CreateRocketMQGroup请求参数结构体
@@ -5731,28 +5765,28 @@ export interface VpcBindRecord {
     /**
      * 租户Vpc Id
      */
-    UniqueVpcId: string;
+    UniqueVpcId?: string;
     /**
      * 租户Vpc子网Id
      */
-    UniqueSubnetId: string;
+    UniqueSubnetId?: string;
     /**
      * 路由Id
      */
-    RouterId: string;
+    RouterId?: string;
     /**
      * Vpc的Id
      */
-    Ip: string;
+    Ip?: string;
     /**
      * Vpc的Port
      */
-    Port: number;
+    Port?: number;
     /**
      * 说明，128个字符以内
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * DescribeRocketMQMsg返回参数结构体
@@ -6229,11 +6263,11 @@ export interface DescribeEnvironmentRolesResponse {
     /**
      * 记录数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 命名空间角色集合。
      */
-    EnvironmentRoleSets: Array<EnvironmentRole>;
+    EnvironmentRoleSets?: Array<EnvironmentRole>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6488,6 +6522,27 @@ export interface DescribeRocketMQTopicMsgsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 安全策略
+ */
+export interface SecurityPolicy {
+    /**
+     * ip或者网段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Route?: string;
+    /**
+     * 策略 true就是允许，白名单或者 false 拒绝 黑名单
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Policy?: boolean;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
 }
 /**
  * VerifyRocketMQConsume返回参数结构体
@@ -6747,67 +6802,67 @@ export interface PartitionsTopic {
      * 最后一次间隔内发布消息的平均byte大小。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AverageMsgSize: string;
+    AverageMsgSize?: string;
     /**
      * 消费者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerCount: string;
+    ConsumerCount?: string;
     /**
      * 被记录下来的消息总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastConfirmedEntry: string;
+    LastConfirmedEntry?: string;
     /**
      * 最后一个ledger创建的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastLedgerCreatedTimestamp: string;
+    LastLedgerCreatedTimestamp?: string;
     /**
      * 本地和复制的发布者每秒发布消息的速率。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateIn: string;
+    MsgRateIn?: string;
     /**
      * 本地和复制的消费者每秒分发消息的数量之和。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateOut: string;
+    MsgRateOut?: string;
     /**
      * 本地和复制的发布者每秒发布消息的byte。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputIn: string;
+    MsgThroughputIn?: string;
     /**
      * 本地和复制的消费者每秒分发消息的byte。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputOut: string;
+    MsgThroughputOut?: string;
     /**
      * 被记录下来的消息总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NumberOfEntries: string;
+    NumberOfEntries?: string;
     /**
      * 子分区id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partitions: number;
+    Partitions?: number;
     /**
      * 生产者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerCount: string;
+    ProducerCount?: string;
     /**
      * 以byte计算的所有消息存储总量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalSize: string;
+    TotalSize?: string;
     /**
      * topic类型描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicType: number;
+    TopicType?: number;
 }
 /**
  * ResetMsgSubOffsetByTimestamp返回参数结构体
@@ -7380,60 +7435,19 @@ export interface ConsumerLogs {
      * 记录数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 消费日志。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerLogSets: Array<ConsumerLog>;
+    ConsumerLogSets?: Array<ConsumerLog>;
 }
 /**
  * DescribeMqMsgTrace返回参数结构体
  */
 export interface DescribeMqMsgTraceResponse {
     /**
-     * [
-      {
-          "Stage": "produce",
-          "Data": {
-              "ProducerName": "生产者名",
-              "ProduceTime": "消息生产时间",
-              "ProducerAddr": "客户端地址",
-              "Duration": "耗时ms",
-              "Status": "状态（0：成功，1：失败）"
-          }
-      },
-      {
-          "Stage": "persist",
-          "Data": {
-              "PersistTime": "存储时间",
-              "Duration": "耗时ms",
-              "Status": "状态（0：成功，1：失败）"
-          }
-      },
-      {
-          "Stage": "consume",
-          "Data": {
-              "TotalCount": 2,
-              "RocketMqConsumeLogs": [
-                  {
-                      "ConsumerGroup": "消费组",
-                      "ConsumeModel": "消费模式",
-                      "ConsumerAddr": "消费者地址",
-                      "ConsumeTime": "推送时间",
-                      "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）"
-                  },
-                  {
-                      "ConsumerGroup": "消费组",
-                      "ConsumeModel": "消费模式",
-                      "ConsumerAddr": "消费者地址",
-                      "ConsumeTime": "推送时间",
-                      "Status": "状态（0:已推送未确认, 2:已确认, 3:转入重试, 4:已重试未确认, 5:已转入死信队列）"
-                  }
-              ]
-          }
-      }
-  ]
+     * 消息内容
      */
     Result?: Array<TraceResult>;
     /**
@@ -7895,7 +7909,7 @@ export interface BindCluster {
     /**
      * 物理集群的名称
      */
-    ClusterName: string;
+    ClusterName?: string;
 }
 /**
  * ModifyCluster返回参数结构体
@@ -8741,19 +8755,19 @@ export interface MsgLog {
     /**
      * 消息ID。
      */
-    MsgId: string;
+    MsgId?: string;
     /**
      * 生产者名称。
      */
-    ProducerName: string;
+    ProducerName?: string;
     /**
      * 生产时间。
      */
-    ProduceTime: string;
+    ProduceTime?: string;
     /**
      * 生产客户端地址。
      */
-    ProducerAddr: string;
+    ProducerAddr?: string;
 }
 /**
  * cmq topic返回信息展示字段
@@ -9492,7 +9506,7 @@ export interface DeleteSubscriptionsResponse {
     /**
      * 成功删除的订阅关系数组。
      */
-    SubscriptionTopicSets: Array<SubscriptionTopic>;
+    SubscriptionTopicSets?: Array<SubscriptionTopic>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
