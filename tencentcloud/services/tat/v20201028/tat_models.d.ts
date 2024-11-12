@@ -692,17 +692,14 @@ export interface EnableInvokerRequest {
 export interface DefaultParameterConf {
     /**
      * 参数名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterName: string;
     /**
      * 参数默认值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterValue: string;
     /**
      * 参数描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParameterDescription?: string;
 }
@@ -773,11 +770,11 @@ export interface DescribeInvokersResponse {
     /**
      * 满足条件的执行器数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 执行器信息。
      */
-    InvokerSet: Array<Invoker>;
+    InvokerSet?: Array<Invoker>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1001,11 +998,7 @@ export interface DescribeInvokersRequest {
      */
     InvokerIds?: Array<string>;
     /**
-     * 过滤条件：
-  
-  <li> invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。
-  <li> command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。
-  <li> type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。
+     * 过滤条件：<li> invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。</li> <li> command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。</li> <li> type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。</li>
      */
     Filters?: Array<Filter>;
     /**
@@ -1193,12 +1186,10 @@ export interface Command {
     DefaultParameters?: string;
     /**
      * 自定义参数的默认取值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultParameterConfs?: Array<DefaultParameterConf>;
     /**
      * 命令关联的场景
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scenes?: Array<string>;
     /**

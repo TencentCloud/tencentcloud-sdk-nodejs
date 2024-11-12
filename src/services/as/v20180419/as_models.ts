@@ -623,19 +623,19 @@ export interface Advice {
   /**
    * 问题描述。
    */
-  Problem: string
+  Problem?: string
   /**
    * 问题详情。
    */
-  Detail: string
+  Detail?: string
   /**
    * 建议解决方案。
    */
-  Solution: string
+  Solution?: string
   /**
-   * 伸缩建议警告级别。取值范围：<br>
-<li>WARNING：警告级别<br>
-<li>CRITICAL：严重级别<br>
+   * 伸缩建议警告级别。取值范围：
+<li>WARNING：警告级别</li>
+<li>CRITICAL：严重级别</li>
    */
   Level?: string
 }
@@ -647,7 +647,7 @@ export interface CreateLifecycleHookResponse {
   /**
    * 生命周期挂钩ID
    */
-  LifecycleHookId: string
+  LifecycleHookId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -671,11 +671,11 @@ export interface DescribeAutoScalingGroupsResponse {
   /**
    * 伸缩组详细信息列表。
    */
-  AutoScalingGroupSet: Array<AutoScalingGroup>
+  AutoScalingGroupSet?: Array<AutoScalingGroup>
   /**
    * 符合条件的伸缩组数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -838,31 +838,31 @@ export interface DetailedStatusMessage {
   /**
    * 错误类型。
    */
-  Code: string
+  Code?: string
   /**
    * 可用区信息。
    */
-  Zone: string
+  Zone?: string
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例计费类型。
    */
-  InstanceChargeType: string
+  InstanceChargeType?: string
   /**
    * 子网ID。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 错误描述。
    */
-  Message: string
+  Message?: string
   /**
    * 实例类型。
    */
-  InstanceType: string
+  InstanceType?: string
 }
 
 /**
@@ -882,7 +882,7 @@ export interface AttachLoadBalancersResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1001,7 +1001,7 @@ export interface DescribeRefreshActivitiesRequest {
 <li> refresh-activity-status-code - String - 是否必填：否 -（过滤条件）按照刷新活动状态过滤。（INIT：初始化中 | RUNNING：运行中 | SUCCESSFUL：活动成功 | FAILED_PAUSE：失败暂停 | AUTO_PAUSE：自动暂停 | MANUAL_PAUSE：手动暂停 | CANCELLED：活动取消 | FAILED：活动失败）</li>
 <li> refresh-activity-type - String - 是否必填：否 -（过滤条件）按照刷新活动类型过滤。（NORMAL：正常刷新活动 | ROLLBACK：回滚刷新活动）</li>
 <li> refresh-activity-id - String - 是否必填：否 -（过滤条件）按照刷新活动ID过滤。</li>
-<li> 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。
+<li> 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -1136,8 +1136,8 @@ export interface ModifyLoadBalancersRequest {
   ForwardLoadBalancers?: Array<ForwardLoadBalancer>
   /**
    * 负载均衡器校验策略，取值包括 ALL 和 DIFF，默认取值为 ALL。
-<br><li> ALL，所有负载均衡器都合法则通过校验，否则校验报错。
-<br><li> DIFF，仅校验负载均衡器参数中实际变化的部分，如果合法则通过校验，否则校验报错。
+<li> ALL，所有负载均衡器都合法则通过校验，否则校验报错。</li> 
+<li> DIFF，仅校验负载均衡器参数中实际变化的部分，如果合法则通过校验，否则校验报错。</li> 
    */
   LoadBalancersCheckPolicy?: string
 }
@@ -1388,17 +1388,17 @@ export interface AutoScalingGroup {
    */
   AutoScalingGroupName?: string
   /**
-   * 伸缩组当前状态。取值范围：<br>
-<li>NORMAL：正常<br>
-<li>CVM_ABNORMAL：启动配置异常<br>
-<li>LB_ABNORMAL：负载均衡器异常<br>
-<li>LB_LISTENER_ABNORMAL：负载均衡器监听器异常<br>
-<li>LB_LOCATION_ABNORMAL：负载均衡器监听器转发配置异常<br>
-<li>VPC_ABNORMAL：VPC网络异常<br>
-<li>SUBNET_ABNORMAL：VPC子网异常<br>
-<li>INSUFFICIENT_BALANCE：余额不足<br>
-<li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配<br>
-<li>LB_BACKEND_VPC_NOT_MATCH：CLB实例VPC与伸缩组VPC不匹配
+   * 伸缩组当前状态。取值范围：
+<li>NORMAL：正常</li>
+<li>CVM_ABNORMAL：启动配置异常</li>
+<li>LB_ABNORMAL：负载均衡器异常</li>
+<li>LB_LISTENER_ABNORMAL：负载均衡器监听器异常</li>
+<li>LB_LOCATION_ABNORMAL：负载均衡器监听器转发配置异常</li>
+<li>VPC_ABNORMAL：VPC网络异常</li>
+<li>SUBNET_ABNORMAL：VPC子网异常</li>
+<li>INSUFFICIENT_BALANCE：余额不足</li>
+<li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配</li>
+<li>LB_BACKEND_VPC_NOT_MATCH：CLB实例VPC与伸缩组VPC不匹配</li>
    */
   AutoScalingGroupStatus?: string
   /**
@@ -1491,12 +1491,14 @@ export interface AutoScalingGroup {
   Ipv6AddressCount?: number
   /**
    * 多可用区/子网策略。
-<br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
-<br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
+<li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。</li>
+<li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。</li>
    */
   MultiZoneSubnetPolicy?: string
   /**
-   * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)
+   * 伸缩组实例健康检查类型，取值如下：
+<li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)</li>
+<li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)</li>
    */
   HealthCheckType?: string
   /**
@@ -1505,8 +1507,8 @@ export interface AutoScalingGroup {
   LoadBalancerHealthCheckGracePeriod?: number
   /**
    * 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED。
-<br><li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。
-<br><li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。
+<li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。</li>
+<li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。</li>
    */
   InstanceAllocationPolicy?: string
   /**
@@ -1516,8 +1518,8 @@ export interface AutoScalingGroup {
   SpotMixedAllocationPolicy?: SpotMixedAllocationPolicy
   /**
    * 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围：
-<br><li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。
-<br><li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。
+<li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。</li>
+<li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。</li>
    */
   CapacityRebalance?: boolean
   /**
@@ -1548,7 +1550,7 @@ export interface DescribeAutoScalingGroupLastActivitiesResponse {
   /**
    * 符合条件的伸缩活动信息集合。说明：伸缩组伸缩活动不存在的则不返回，如传50个伸缩组ID，返回45条数据，说明其中有5个伸缩组伸缩活动不存在。
    */
-  ActivitySet: Array<Activity>
+  ActivitySet?: Array<Activity>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1595,7 +1597,7 @@ export interface DetachLoadBalancersResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1609,11 +1611,11 @@ export interface ScalingPolicy {
   /**
    * 伸缩组ID。
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
    * 告警触发策略ID。
    */
-  AutoScalingPolicyId: string
+  AutoScalingPolicyId?: string
   /**
    * 告警触发策略类型。取值：
 - SIMPLE：简单策略
@@ -1623,52 +1625,52 @@ export interface ScalingPolicy {
   /**
    * 告警触发策略名称。
    */
-  ScalingPolicyName: string
+  ScalingPolicyName?: string
   /**
    * 告警触发后，期望实例数修改方式，仅适用于简单策略。取值范围：<br><li>CHANGE_IN_CAPACITY：增加或减少若干期望实例数</li><li>EXACT_CAPACITY：调整至指定期望实例数</li> <li>PERCENT_CHANGE_IN_CAPACITY：按百分比调整期望实例数</li>
    */
-  AdjustmentType: string
+  AdjustmentType?: string
   /**
    * 告警触发后，期望实例数的调整值，仅适用于简单策略。
    */
-  AdjustmentValue: number
+  AdjustmentValue?: number
   /**
    * 冷却时间，仅适用于简单策略。
    */
-  Cooldown: number
+  Cooldown?: number
   /**
    * 简单告警触发策略告警监控指标，仅适用于简单策略。
    */
-  MetricAlarm: MetricAlarm
+  MetricAlarm?: MetricAlarm
   /**
    * 预定义监控项，仅适用于目标追踪策略。取值范围：<br><li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li><li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li><li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li><li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li><li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PredefinedMetricType: string
+  PredefinedMetricType?: string
   /**
    * 目标值，仅适用于目标追踪策略。<br><li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li><li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetValue: number
+  TargetValue?: number
   /**
    * 实例预热时间，单位为秒，仅适用于目标追踪策略。取值范围为0-3600。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EstimatedInstanceWarmup: number
+  EstimatedInstanceWarmup?: number
   /**
    * 是否禁用缩容，仅适用于目标追踪策略。取值范围：<br><li>true：目标追踪策略仅触发扩容</li><li>false：目标追踪策略触发扩容和缩容</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisableScaleIn: boolean
+  DisableScaleIn?: boolean
   /**
    * 告警监控指标列表，仅适用于目标追踪策略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricAlarms: Array<MetricAlarm>
+  MetricAlarms?: Array<MetricAlarm>
   /**
    * 通知组ID，即为用户组ID集合。
    */
-  NotificationUserGroupIds: Array<string>
+  NotificationUserGroupIds?: Array<string>
 }
 
 /**
@@ -1718,7 +1720,7 @@ export interface ModifyLoadBalancersResponse {
   /**
    * 伸缩活动ID
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1775,11 +1777,11 @@ export interface DescribeScheduledActionsResponse {
   /**
    * 符合条件的定时任务数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 定时任务详细信息列表。
    */
-  ScheduledActionSet: Array<ScheduledAction>
+  ScheduledActionSet?: Array<ScheduledAction>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1875,32 +1877,32 @@ export interface InvocationResult {
    * 实例ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 执行活动ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvocationId: string
+  InvocationId?: string
   /**
    * 执行任务ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvocationTaskId: string
+  InvocationTaskId?: string
   /**
    * 命令ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CommandId: string
+  CommandId?: string
   /**
    * 执行任务状态。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskStatus: string
+  TaskStatus?: string
   /**
    * 执行异常信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
 }
 
 /**
@@ -1978,7 +1980,7 @@ export interface RefreshBatch {
    */
   RefreshBatchNum?: number
   /**
-   * 刷新批次状态。取值如下：<br><li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED:  刷新失败</li><li>PARTIALLY_SUCCESSFUL：批次部分成功</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功
+   * 刷新批次状态。取值如下：<li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED:  刷新失败</li><li>PARTIALLY_SUCCESSFUL：批次部分成功</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功</li>
    */
   RefreshBatchStatus?: string
   /**
@@ -2114,8 +2116,8 @@ export interface CreateAutoScalingGroupRequest {
   SubnetIds?: Array<string>
   /**
    * 销毁策略，目前长度上限为1。取值包括 OLDEST_INSTANCE 和 NEWEST_INSTANCE，默认取值为 OLDEST_INSTANCE。
-<br><li> OLDEST_INSTANCE 优先销毁伸缩组中最旧的实例。
-<br><li> NEWEST_INSTANCE，优先销毁伸缩组中最新的实例。
+<li> OLDEST_INSTANCE 优先销毁伸缩组中最旧的实例。</li>
+<li> NEWEST_INSTANCE，优先销毁伸缩组中最新的实例。</li>
    */
   TerminationPolicies?: Array<string>
   /**
@@ -2124,15 +2126,15 @@ export interface CreateAutoScalingGroupRequest {
   Zones?: Array<string>
   /**
    * 重试策略，取值包括 IMMEDIATE_RETRY、 INCREMENTAL_INTERVALS、NO_RETRY，默认取值为 IMMEDIATE_RETRY。部分成功的伸缩活动判定为一次失败活动。
-<br><li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。
-<br><li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大，重试间隔从秒级到1天不等。
-<br><li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。
+<li> IMMEDIATE_RETRY，立即重试，在较短时间内快速重试，连续失败超过一定次数（5次）后不再重试。</li> 
+<li> INCREMENTAL_INTERVALS，间隔递增重试，随着连续失败次数的增加，重试间隔逐渐增大。前 10 次重试间隔与立即重试模式相同，后续逐步递增至 10 分钟、30 分钟、60 分钟、一天。</li> 
+<li> NO_RETRY，不进行重试，直到再次收到用户调用或者告警信息后才会重试。</li> 
    */
   RetryPolicy?: string
   /**
    * 可用区校验策略，取值包括 ALL 和 ANY，默认取值为ANY。
-<br><li> ALL，所有可用区（Zone）或子网（SubnetId）都可用则通过校验，否则校验报错。
-<br><li> ANY，存在任何一个可用区（Zone）或子网（SubnetId）可用则通过校验，否则校验报错。
+<li> ALL，所有可用区（Zone）或子网（SubnetId）都可用则通过校验，否则校验报错。</li>
+<li> ANY，存在任何一个可用区（Zone）或子网（SubnetId）可用则通过校验，否则校验报错。</li>
 
 可用区或子网不可用的常见原因包括该可用区CVM实例类型售罄、该可用区CBS云盘售罄、该可用区配额不足、该子网IP不足等。
 如果 Zones/SubnetIds 中可用区或者子网不存在，则无论 ZonesCheckPolicy 采用何种取值，都会校验报错。
@@ -2152,17 +2154,20 @@ export interface CreateAutoScalingGroupRequest {
   Ipv6AddressCount?: number
   /**
    * 多可用区/子网策略，取值包括 PRIORITY 和 EQUALITY，默认为 PRIORITY。
-<br><li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。
-<br><li> EQUALITY：扩容出的实例会打散到多个可用区/子网，保证扩容后的各个可用区/子网实例数相对均衡。
+<li> PRIORITY，按照可用区/子网列表的顺序，作为优先级来尝试创建实例，如果优先级最高的可用区/子网可以创建成功，则总在该可用区/子网创建。</li>
+<li> EQUALITY：扩容出的实例会打散到多个可用区/子网，保证扩容后的各个可用区/子网实例数相对均衡。</li>
 
 与本策略相关的注意点：
-<br><li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。
-<br><li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。
-<br><li> 按照 PRIORITY 策略创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3，会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。
+<li> 当伸缩组为基础网络时，本策略适用于多可用区；当伸缩组为VPC网络时，本策略适用于多子网，此时不再考虑可用区因素，例如四个子网ABCD，其中ABC处于可用区1，D处于可用区2，此时考虑子网ABCD进行排序，而不考虑可用区1、2。</li>
+<li> 本策略适用于多可用区/子网，不适用于启动配置的多机型。多机型按照优先级策略进行选择。</li>
+<li> 按照 PRIORITY 策略创建实例时，先保证多机型的策略，后保证多可用区/子网的策略。例如多机型A、B，多子网1、2、3，会按照A1、A2、A3、B1、B2、B3 进行尝试，如果A1售罄，会尝试A2（而非B1）。</li>
    */
   MultiZoneSubnetPolicy?: string
   /**
-   * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) <br>如果选择了`CLB`类型，伸缩组将同时检查实例网络状态与CLB健康检查状态，如果出现实例网络状态不健康，实例将被标记为 UNHEALTHY 状态；如果出现 CLB 健康检查状态异常，实例将被标记为CLB_UNHEALTHY 状态，如果两个异常状态同时出现，实例`HealthStatus`字段将返回 UNHEALTHY|CLB_UNHEALTHY。默认值：CLB
+   * 伸缩组实例健康检查类型，取值如下：
+<li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)</li>
+<li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) </li>
+如果选择了`CLB`类型，伸缩组将同时检查实例网络状态与CLB健康检查状态，如果出现实例网络状态不健康，实例将被标记为 UNHEALTHY 状态；如果出现 CLB 健康检查状态异常，实例将被标记为CLB_UNHEALTHY 状态，如果两个异常状态同时出现，实例`HealthStatus`字段将返回 UNHEALTHY|CLB_UNHEALTHY。默认值：CLB
    */
   HealthCheckType?: string
   /**
@@ -2171,8 +2176,8 @@ export interface CreateAutoScalingGroupRequest {
   LoadBalancerHealthCheckGracePeriod?: number
   /**
    * 实例分配策略，取值包括 LAUNCH_CONFIGURATION 和 SPOT_MIXED，默认取 LAUNCH_CONFIGURATION。
-<br><li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。
-<br><li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。
+<li> LAUNCH_CONFIGURATION，代表传统的按照启动配置模式。</li>
+<li> SPOT_MIXED，代表竞价混合模式。目前仅支持启动配置为按量计费模式时使用混合模式，混合模式下，伸缩组将根据设定扩容按量或竞价机型。使用混合模式时，关联的启动配置的计费类型不可被修改。</li>
    */
   InstanceAllocationPolicy?: string
   /**
@@ -2182,9 +2187,8 @@ export interface CreateAutoScalingGroupRequest {
   SpotMixedAllocationPolicy?: SpotMixedAllocationPolicy
   /**
    * 容量重平衡功能，仅对伸缩组内的竞价实例有效。取值范围：
-<br><li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。
-<br><li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。
-
+<li> TRUE，开启该功能，当伸缩组内的竞价实例即将被竞价实例服务自动回收前，AS 主动发起竞价实例销毁流程，如果有配置过缩容 hook，则销毁前 hook 会生效。销毁流程启动后，AS 会异步开启一个扩容活动，用于补齐期望实例数。</li>
+<li> FALSE，不开启该功能，则 AS 等待竞价实例被销毁后才会去扩容补齐伸缩组期望实例数。</li>
 默认取 FALSE。
    */
   CapacityRebalance?: boolean
@@ -2315,11 +2319,11 @@ export interface DescribeAutoScalingActivitiesResponse {
   /**
    * 符合条件的伸缩活动数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 符合条件的伸缩活动信息集合。
    */
-  ActivitySet: Array<Activity>
+  ActivitySet?: Array<Activity>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2333,11 +2337,11 @@ export interface DescribeNotificationConfigurationsResponse {
   /**
    * 符合条件的通知数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 弹性伸缩事件通知详细信息列表。
    */
-  AutoScalingNotificationSet: Array<AutoScalingNotification>
+  AutoScalingNotificationSet?: Array<AutoScalingNotification>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2567,11 +2571,11 @@ export interface DescribeAutoScalingInstancesResponse {
   /**
    * 实例详细信息列表。
    */
-  AutoScalingInstanceSet: Array<Instance>
+  AutoScalingInstanceSet?: Array<Instance>
   /**
    * 符合条件的实例数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2675,7 +2679,10 @@ export interface DescribeScheduledActionsRequest {
  */
 export interface RunSecurityServiceEnabled {
   /**
-   * 是否开启[云安全](https://cloud.tencent.com/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+   * 是否开启[云安全](https://cloud.tencent.com/document/product/296)服务。取值范围：
+<li>TRUE：表示开启云安全服务</li>
+<li>FALSE：表示不开启云安全服务</li>
+默认取值：TRUE。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
@@ -2780,7 +2787,7 @@ export interface CreateScheduledActionResponse {
   /**
    * 定时任务ID
    */
-  ScheduledActionId: string
+  ScheduledActionId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2850,47 +2857,49 @@ export interface ScheduledAction {
   /**
    * 定时任务ID。
    */
-  ScheduledActionId: string
+  ScheduledActionId?: string
   /**
    * 定时任务名称。
    */
-  ScheduledActionName: string
+  ScheduledActionName?: string
   /**
    * 定时任务所在伸缩组ID。
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
    * 定时任务的开始时间。取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 定时任务的重复方式。
    */
-  Recurrence: string
+  Recurrence?: string
   /**
    * 定时任务的结束时间。取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 定时任务设置的最大实例数。
    */
-  MaxSize: number
+  MaxSize?: number
   /**
    * 定时任务设置的期望实例数。
    */
-  DesiredCapacity: number
+  DesiredCapacity?: number
   /**
    * 定时任务设置的最小实例数。
    */
-  MinSize: number
+  MinSize?: number
   /**
    * 定时任务的创建时间。取值为`UTC`时间，按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ssZ`。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
-   * 定时任务的执行类型。取值范围：<br><li>CRONTAB：代表定时任务为重复执行。<br><li>ONCE：代表定时任务为单次执行。
+   * 定时任务的执行类型。取值范围：
+<li>CRONTAB：代表定时任务为重复执行。</li>
+<li>ONCE：代表定时任务为单次执行。</li>
    */
-  ScheduledType: string
+  ScheduledType?: string
 }
 
 /**
@@ -2907,14 +2916,14 @@ export interface ModifyLifecycleHookRequest {
   LifecycleHookName?: string
   /**
    * 进入生命周期挂钩场景，取值包括：
-<li> INSTANCE_LAUNCHING：实例启动后
-<li> INSTANCE_TERMINATING：实例销毁前
+<li> INSTANCE_LAUNCHING：实例启动后</li>
+<li> INSTANCE_TERMINATING：实例销毁前</li>
    */
   LifecycleTransition?: string
   /**
    * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值包括：
-<li> CONTINUE： 超时后继续伸缩活动
-<li> ABANDON：超时后终止伸缩活动
+<li> CONTINUE： 超时后继续伸缩活动</li> 
+<li> ABANDON：超时后终止伸缩活动</li> 
    */
   DefaultResult?: string
   /**
@@ -2973,7 +2982,7 @@ export interface RefreshSettings {
    */
   RollingUpdateSettings: RollingUpdateSettings
   /**
-   * 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：<br><li>TRUE：开启检查</li><li>FALSE：不开启检查
+   * 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：<li>TRUE：开启检查</li><li>FALSE：不开启检查</li>
    */
   CheckInstanceTargetHealth?: boolean
 }
@@ -3113,11 +3122,11 @@ export interface DescribeLifecycleHooksResponse {
   /**
    * 生命周期挂钩数组
    */
-  LifecycleHookSet: Array<LifecycleHook>
+  LifecycleHookSet?: Array<LifecycleHook>
   /**
    * 总体数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3145,7 +3154,10 @@ export interface CreateScalingPolicyRequest {
    */
   AdjustmentType?: string
   /**
-   * 告警触发后，期望实例数的调整值，仅适用于简单策略。<br><li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> <li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> <li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。
+   * 告警触发后，期望实例数的调整值，仅适用于简单策略。
+<li>当 AdjustmentType 为 CHANGE_IN_CAPACITY 时，AdjustmentValue 为正数表示告警触发后增加实例，为负数表示告警触发后减少实例 </li> 
+<li> 当 AdjustmentType 为 EXACT_CAPACITY 时，AdjustmentValue 的值即为告警触发后新的期望实例数，需要大于或等于0 </li> 
+<li> 当 AdjustmentType 为 PERCENT_CHANGE_IN_CAPACITY 时，AdjusmentValue 为正数表示告警触发后按百分比增加实例，为负数表示告警触发后按百分比减少实例，单位是：%。</li>
    */
   AdjustmentValue?: number
   /**
@@ -3157,11 +3169,21 @@ export interface CreateScalingPolicyRequest {
    */
   MetricAlarm?: MetricAlarm
   /**
-   * 预定义监控项，仅适用于目标追踪策略。取值范围：<br><li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li><li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li><li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li><li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li><li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
+   * 预定义监控项，仅适用于目标追踪策略。取值范围：
+<li>ASG_AVG_CPU_UTILIZATION：平均CPU使用率</li>
+<li>ASG_AVG_LAN_TRAFFIC_OUT：平均内网出带宽</li>
+<li>ASG_AVG_LAN_TRAFFIC_IN：平均内网入带宽</li>
+<li>ASG_AVG_WAN_TRAFFIC_OUT：平均外网出带宽</li>
+<li>ASG_AVG_WAN_TRAFFIC_IN：平均外网出带宽</li>
    */
   PredefinedMetricType?: string
   /**
-   * 目标值，仅适用于目标追踪策略。<br><li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li><li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
+   * 目标值，仅适用于目标追踪策略。
+<li>ASG_AVG_CPU_UTILIZATION：[1, 100)，单位：%</li>
+<li>ASG_AVG_LAN_TRAFFIC_OUT：>0，单位：Mbps</li>
+<li>ASG_AVG_LAN_TRAFFIC_IN：>0，单位：Mbps</li>
+<li>ASG_AVG_WAN_TRAFFIC_OUT：>0，单位：Mbps</li>
+<li>ASG_AVG_WAN_TRAFFIC_IN：>0，单位：Mbps</li>
    */
   TargetValue?: number
   /**
@@ -3169,7 +3191,9 @@ export interface CreateScalingPolicyRequest {
    */
   EstimatedInstanceWarmup?: number
   /**
-   * 是否禁用缩容，仅适用于目标追踪策略，默认值为 false。取值范围：<br><li>true：目标追踪策略仅触发扩容</li><li>false：目标追踪策略触发扩容和缩容</li>
+   * 是否禁用缩容，仅适用于目标追踪策略，默认值为 false。取值范围：
+<li>true：目标追踪策略仅触发扩容</li>
+<li>false：目标追踪策略触发扩容和缩容</li>
    */
   DisableScaleIn?: boolean
   /**
@@ -3482,11 +3506,21 @@ export interface RefreshActivity {
    */
   RefreshSettings?: RefreshSettings
   /**
-   * 刷新活动类型。取值如下：<br><li>NORMAL：正常刷新活动</li><li>ROLLBACK：回滚刷新活动
+   * 刷新活动类型。取值如下：
+<li>NORMAL：正常刷新活动</li>
+<li>ROLLBACK：回滚刷新活动</li>
    */
   ActivityType?: string
   /**
-   * 刷新活动状态。取值如下：<br><li>INIT：初始化中</li><li>RUNNING：运行中</li><li>SUCCESSFUL：活动成功</li><li>FAILED_PAUSE：因刷新批次失败暂停</li><li>AUTO_PAUSE：因暂停策略自动暂停</li><li>MANUAL_PAUSE：手动暂停</li><li>CANCELLED：活动取消</li><li>FAILED：活动失败
+   * 刷新活动状态。取值如下：
+<li>INIT：初始化中</li>
+<li>RUNNING：运行中</li>
+<li>SUCCESSFUL：活动成功</li>
+<li>FAILED_PAUSE：因刷新批次失败暂停</li>
+<li>AUTO_PAUSE：因暂停策略自动暂停</li>
+<li>MANUAL_PAUSE：手动暂停</li>
+<li>CANCELLED：活动取消</li>
+<li>FAILED：活动失败</li>
    */
   Status?: string
   /**
@@ -3557,48 +3591,48 @@ export interface LifecycleHook {
   /**
    * 生命周期挂钩ID
    */
-  LifecycleHookId: string
+  LifecycleHookId?: string
   /**
    * 生命周期挂钩名称
    */
-  LifecycleHookName: string
+  LifecycleHookName?: string
   /**
    * 伸缩组ID
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
    * 生命周期挂钩默认结果
    */
-  DefaultResult: string
+  DefaultResult?: string
   /**
    * 生命周期挂钩等待超时时间
    */
-  HeartbeatTimeout: number
+  HeartbeatTimeout?: number
   /**
    * 生命周期挂钩适用场景
    */
-  LifecycleTransition: string
+  LifecycleTransition?: string
   /**
    * 通知目标的附加信息
    */
-  NotificationMetadata: string
+  NotificationMetadata?: string
   /**
    * 创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 通知目标
    */
-  NotificationTarget: NotificationTarget
+  NotificationTarget?: NotificationTarget
   /**
    * 生命周期挂钩适用场景
    */
-  LifecycleTransitionType: string
+  LifecycleTransitionType?: string
   /**
    * 远程命令执行对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LifecycleCommand: LifecycleCommand
+  LifecycleCommand?: LifecycleCommand
 }
 
 /**
@@ -3703,18 +3737,18 @@ export interface AutoScalingAdvice {
   /**
    * 伸缩组ID。
    */
-  AutoScalingGroupId: string
+  AutoScalingGroupId?: string
   /**
-   * 伸缩组警告级别。取值范围：<br>
-<li>NORMAL：正常<br>
-<li>WARNING：警告级别<br>
-<li>CRITICAL：严重级别<br>
+   * 伸缩组警告级别。取值范围：
+<li>NORMAL：正常</li>
+<li>WARNING：警告级别</li>
+<li>CRITICAL：严重级别</li>
    */
-  Level: string
+  Level?: string
   /**
    * 伸缩组配置建议集合。
    */
-  Advices: Array<Advice>
+  Advices?: Array<Advice>
 }
 
 /**
@@ -3889,21 +3923,27 @@ export interface Activity {
    */
   ActivityId?: string
   /**
-   * 伸缩活动类型。取值如下：<br>
-<li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例
-<li>START_INSTANCES：开启实例
-<li>STOP_INSTANCES：关闭实例
-<li>INVOKE_COMMAND：执行命令
+   * 伸缩活动类型。取值如下：
+<li>SCALE_OUT：扩容活动</li>
+<li>SCALE_IN：缩容活动</li>
+<li>ATTACH_INSTANCES：添加实例</li>
+<li>REMOVE_INSTANCES：销毁实例</li>
+<li>DETACH_INSTANCES：移出实例</li>
+<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁</li>
+<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例</li>
+<li>START_INSTANCES：开启实例</li>
+<li>STOP_INSTANCES：关闭实例</li>
+<li>INVOKE_COMMAND：执行命令</li>
    */
   ActivityType?: string
   /**
-   * 伸缩活动状态。取值如下：<br>
-<li>INIT：初始化中
-<li>RUNNING：运行中
-<li>SUCCESSFUL：活动成功
-<li>PARTIALLY_SUCCESSFUL：活动部分成功
-<li>FAILED：活动失败
-<li>CANCELLED：活动取消
+   * 伸缩活动状态。取值如下
+<li>INIT：初始化中</li>
+<li>RUNNING：运行中</li>
+<li>SUCCESSFUL：活动成功</li>
+<li>PARTIALLY_SUCCESSFUL：活动部分成功</li>
+<li>FAILED：活动失败</li>
+<li>CANCELLED：活动取消</li>
    */
   StatusCode?: string
   /**
@@ -3993,7 +4033,10 @@ STOP_CHARGING：关机停止收费
  */
 export interface RunMonitorServiceEnabled {
   /**
-   * 是否开启[云监控](https://cloud.tencent.com/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
+   * 是否开启[云监控](https://cloud.tencent.com/document/product/248)服务。取值范围：
+<li>TRUE：表示开启云监控服务</li>
+<li>FALSE：表示不开启云监控服务</li>
+默认取值：TRUE。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
@@ -4018,11 +4061,7 @@ export interface ActivtyRelatedInstance {
    */
   InstanceId?: string
   /**
-   * 实例在伸缩活动中的状态。取值如下：
-<li>INIT：初始化中
-<li>RUNNING：实例操作中
-<li>SUCCESSFUL：活动成功
-<li>FAILED：活动失败
+   * 实例在伸缩活动中的状态。取值如下：<br><li>INIT：初始化中</li><li>RUNNING：实例操作中</li><li>SUCCESSFUL：活动成功</li><li>FAILED：活动失败
    */
   InstanceStatus?: string
 }

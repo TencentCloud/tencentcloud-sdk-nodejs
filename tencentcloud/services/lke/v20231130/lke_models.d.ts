@@ -1463,7 +1463,7 @@ export interface ListDocResponse {
  */
 export interface GetDocPreviewRequest {
     /**
-     * 文档业务ID
+     * 文档BizID
      */
     DocBizId: string;
     /**
@@ -3000,7 +3000,7 @@ export interface ListReleaseDocPreviewRequest {
      */
     Query?: string;
     /**
-     * 发布业务ID
+     * 发布单ID
      */
     ReleaseBizId?: string;
     /**
@@ -3368,7 +3368,7 @@ export interface GroupQARequest {
      */
     BotBizId: string;
     /**
-     * QA业务ID列表
+     * QaBizID列表
      */
     QaBizIds: Array<string>;
     /**
@@ -3474,7 +3474,7 @@ export interface DescribeAppRequest {
  */
 export interface GetReconstructDocumentResultRequest {
     /**
-     * 任务唯一id
+     * 任务唯一Id。[CreateReconstructDocumentFlow](https://cloud.tencent.com/document/product/1759/107506) 返回的TaskId。
      */
     TaskId: string;
 }
@@ -3950,15 +3950,15 @@ export interface RetryDocAuditResponse {
  */
 export interface GetReconstructDocumentResultResponse {
     /**
-     * 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行；
+     * 任务状态: Success->执行完成；Processing->执行中；Failed->执行失败；WaitExecute->等待执行。
      */
     Status?: string;
     /**
-     * 输入文件中嵌入的图片中文字内容的识别结果，存储在腾讯云cos的下载地址
+     * 本次文档解析的结果文件，存储在腾讯云COS的下载URL，下载URL的有效期为10分钟。
      */
     DocumentRecognizeResultUrl?: string;
     /**
-     * 文档解析失败的页码
+     * 本次文档解析失败的页码信息。
      */
     FailedPages?: Array<ReconstructDocumentFailedPage>;
     /**
@@ -5373,7 +5373,7 @@ export interface DescribeStorageCredentialRequest {
      */
     FileType?: string;
     /**
-     * IsPublic为空用于上传文件时选择场景，当上传为图片文件是IsPublic为true，上传文档文件时场景IsPublic为false
+     * IsPublic用于上传文件时选择场景，当上传为对话端文件时IsPublic为true，上传文档库文件时场景IsPublic为false
      */
     IsPublic?: boolean;
     /**

@@ -113,6 +113,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 云产品接入使用相关接口
+     */
+    async DescribeCloudProductLogTasks(req, cb) {
+        return this.request("DescribeCloudProductLogTasks", req, cb);
+    }
+    /**
+     * 内部云产品接入使用相关接口
+     */
+    async DeleteCloudProductLogTask(req, cb) {
+        return this.request("DeleteCloudProductLogTask", req, cb);
+    }
+    /**
      * 该接口用于删除通知渠道组
      */
     async DeleteAlarmNotice(req, cb) {
@@ -207,6 +219,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateNoticeContent(req, cb) {
         return this.request("CreateNoticeContent", req, cb);
+    }
+    /**
+     * 内部云产品接入使用相关接口
+     */
+    async ModifyCloudProductLogTask(req, cb) {
+        return this.request("ModifyCloudProductLogTask", req, cb);
     }
     /**
      * 本接口用于删除投递配置
@@ -311,10 +329,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmShield", req, cb);
     }
     /**
-     * 此接口用于预览仪表盘订阅
+     * 内部云产品接入使用相关接口
      */
-    async SearchDashboardSubscribe(req, cb) {
-        return this.request("SearchDashboardSubscribe", req, cb);
+    async CreateCloudProductLogTask(req, cb) {
+        return this.request("CreateCloudProductLogTask", req, cb);
     }
     /**
      * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
@@ -547,6 +565,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeConfigExtras(req, cb) {
         return this.request("DescribeConfigExtras", req, cb);
+    }
+    /**
+     * 此接口用于预览仪表盘订阅
+     */
+    async SearchDashboardSubscribe(req, cb) {
+        return this.request("SearchDashboardSubscribe", req, cb);
     }
     /**
      * 本接口用于校验Kafka服务集群是否可以正常访问

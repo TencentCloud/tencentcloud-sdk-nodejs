@@ -412,6 +412,64 @@ export interface DescribeCosRechargesResponse {
 }
 
 /**
+ * CreateCloudProductLogTask请求参数结构体
+ */
+export interface CreateCloudProductLogTaskRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   */
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT:  gz
+- MongoDB-AUDIT:  gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
+  /**
+   * CLS目标地域
+   */
+  ClsRegion: string
+  /**
+   * 日志集名称，未填LogsetId时必填。若日志集不存在, 将自动创建
+   */
+  LogsetName?: string
+  /**
+   * 日志集ID，若指定则代表选择已有日志集。选择已有日志集时，LogsetName可以不填
+   */
+  LogsetId?: string
+  /**
+   * 日志主题名称，在未填TopicId时必填。 若日志主题不存在，将自动创建
+   */
+  TopicName?: string
+  /**
+   * 日志主题ID，若指定则代表选择已有日志主题，选择已有日志主题时，TopicName可以不填
+   */
+  TopicId?: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   */
+  Extend?: string
+}
+
+/**
  * DescribeShipperTasks返回参数结构体
  */
 export interface DescribeShipperTasksResponse {
@@ -634,22 +692,40 @@ export interface DeleteConsoleSharingRequest {
 }
 
 /**
- * UploadLog请求参数结构体
+ * 升级通知
  */
-export interface UploadLogRequest {
+export interface EscalateNoticeInfo {
   /**
-   * 主题id
+   * 告警通知模板接收者信息。
    */
-  TopicId: string
+  NoticeReceivers: Array<NoticeReceiver>
   /**
-   * 该参数已废弃，请勿使用
-   * @deprecated
+   * 告警通知模板回调信息。
    */
-  HashKey?: string
+  WebCallbacks: Array<WebCallback>
   /**
-   * 压缩方法
+   * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompressType?: string
+  Escalate?: boolean
+  /**
+   * 告警升级间隔。单位：分钟，范围`[1，14400]`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: number
+  /**
+   * 升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1
+- 无人认领且未恢复：告警没有恢复并且没有人认领则升级
+- 未恢复：当前告警持续未恢复则升级
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EscalateNotice?: EscalateNoticeInfo
 }
 
 /**
@@ -769,17 +845,29 @@ export interface CreateConsoleSharingRequest {
 }
 
 /**
- * 日志中的KV对
+ * CreateCloudProductLogTask返回参数结构体
  */
-export interface LogItem {
+export interface CreateCloudProductLogTaskResponse {
   /**
-   * 日志Key
+   * 日志主题ID
    */
-  Key: string
+  TopicId?: string
   /**
-   * 日志Value
+   * 日志主题名称
    */
-  Value: string
+  TopicName?: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+  /**
+   * 日志集名称
+   */
+  LogsetName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1216,6 +1304,22 @@ export interface DeleteKafkaRechargeResponse {
 }
 
 /**
+ * 创建资源实例时同时绑定的标签对说明
+ */
+export interface Tag {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+}
+
+/**
  * 自建k8s-工作负载信息
  */
 export interface ContainerWorkLoadInfo {
@@ -1240,22 +1344,35 @@ export interface ContainerWorkLoadInfo {
 }
 
 /**
- * DescribeConfigExtras返回参数结构体
+ * 云产品日志投递任务信息
  */
-export interface DescribeConfigExtrasResponse {
+export interface CloudProductLogTaskInfo {
   /**
-   * 采集配置列表
+   * 日志服务地域
+   */
+  ClsRegion?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Configs?: Array<ConfigExtraInfo>
+  Extend?: string
   /**
-   * 过滤到的总数目
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  LogType?: string
 }
 
 /**
@@ -1507,6 +1624,58 @@ export interface ModifyScheduledSqlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 投递日志的过滤规则
+ */
+export interface FilterRuleInfo {
+  /**
+   * 过滤规则Key
+   */
+  Key: string
+  /**
+   * 过滤规则
+   */
+  Regex: string
+  /**
+   * 过滤规则Value
+   */
+  Value: string
+}
+
+/**
+ * DeleteCloudProductLogTask请求参数结构体
+ */
+export interface DeleteCloudProductLogTaskRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   */
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT: gz
+- MongoDB-AUDIT: gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
 }
 
 /**
@@ -2890,40 +3059,13 @@ export interface CreateNoticeContentResponse {
 }
 
 /**
- * 升级通知
+ * DeleteCloudProductLogTask返回参数结构体
  */
-export interface EscalateNoticeInfo {
+export interface DeleteCloudProductLogTaskResponse {
   /**
-   * 告警通知模板接收者信息。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NoticeReceivers: Array<NoticeReceiver>
-  /**
-   * 告警通知模板回调信息。
-   */
-  WebCallbacks: Array<WebCallback>
-  /**
-   * 告警升级开关。`true`：开启告警升级、`false`：关闭告警升级，默认：false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Escalate?: boolean
-  /**
-   * 告警升级间隔。单位：分钟，范围`[1，14400]`
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Interval?: number
-  /**
-   * 升级条件。`1`：无人认领且未恢复、`2`：未恢复，默认为1
-- 无人认领且未恢复：告警没有恢复并且没有人认领则升级
-- 未恢复：当前告警持续未恢复则升级
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: number
-  /**
-   * 告警升级后下一个环节的通知渠道配置，最多可配置5个环节。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EscalateNotice?: EscalateNoticeInfo
+  RequestId?: string
 }
 
 /**
@@ -3041,21 +3183,21 @@ export interface ExcludePathInfo {
 }
 
 /**
- * 投递日志的过滤规则
+ * DescribeCloudProductLogTasks返回参数结构体
  */
-export interface FilterRuleInfo {
+export interface DescribeCloudProductLogTasksResponse {
   /**
-   * 过滤规则Key
+   * 日志配置详情列表
    */
-  Key: string
+  Tasks?: Array<CloudProductLogTaskInfo>
   /**
-   * 过滤规则
+   * 日志配置总数
    */
-  Regex: string
+  TotalCount?: number
   /**
-   * 过滤规则Value
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
+  RequestId?: string
 }
 
 /**
@@ -4354,45 +4496,13 @@ export interface LogRechargeRuleInfo {
 }
 
 /**
- * 投递任务信息
+ * ModifyCloudProductLogTask返回参数结构体
  */
-export interface ShipperTaskInfo {
+export interface ModifyCloudProductLogTaskResponse {
   /**
-   * 投递任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId: string
-  /**
-   * 投递信息ID
-   */
-  ShipperId: string
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-  /**
-   * 本批投递的日志的开始时间戳，毫秒
-   */
-  RangeStart: number
-  /**
-   * 本批投递的日志的结束时间戳， 毫秒
-   */
-  RangeEnd: number
-  /**
-   * 本次投递任务的开始时间戳， 毫秒
-   */
-  StartTime: number
-  /**
-   * 本次投递任务的结束时间戳， 毫秒
-   */
-  EndTime: number
-  /**
-   * 本次投递的结果，"success","running","failed"
-   */
-  Status: string
-  /**
-   * 结果的详细信息
-   */
-  Message: string
+  RequestId?: string
 }
 
 /**
@@ -4406,17 +4516,41 @@ export interface CloseKafkaConsumerRequest {
 }
 
 /**
- * 元字段索引配置
+ * ModifyCloudProductLogTask请求参数结构体
  */
-export interface RuleTagInfo {
+export interface ModifyCloudProductLogTaskRequest {
   /**
-   * 是否大小写敏感
+   * 实例ID
    */
-  CaseSensitive: boolean
+  InstanceId: string
   /**
-   * 元字段索引配置中的字段信息
+   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
    */
-  KeyValues: Array<KeyValueInfo>
+  AssumerName: string
+  /**
+   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   */
+  LogType: string
+  /**
+   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
+- CDS所有日志类型：ap-guangzhou
+- CDB-AUDIT: gz
+- TDSQL-C-AUDIT: gz
+- MongoDB-AUDIT: gz
+- MongoDB-SlowLog：ap-guangzhou
+- MongoDB-ErrorLog：ap-guangzhou
+- TDMYSQL-SLOW：gz
+- DCDB所有日志类型：gz
+- MariaDB所有日志类型：gz
+- PostgreSQL所有日志类型：gz
+- BH所有日志类型：overseas-polaris(国内站海外)/fsi-polaris(国内站金融)/general-polaris(国内站普通)/intl-sg-prod(国际站)
+- APIS所有日志类型：gz
+   */
+  CloudProductRegion: string
+  /**
+   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   */
+  Extend?: string
 }
 
 /**
@@ -5382,6 +5516,20 @@ export interface ModifyKafkaConsumerRequest {
 }
 
 /**
+ * 元字段索引配置
+ */
+export interface RuleTagInfo {
+  /**
+   * 是否大小写敏感
+   */
+  CaseSensitive: boolean
+  /**
+   * 元字段索引配置中的字段信息
+   */
+  KeyValues: Array<KeyValueInfo>
+}
+
+/**
  * 日志导出信息
  */
 export interface ExportInfo {
@@ -5695,6 +5843,48 @@ Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecoveryContent?: NoticeContentInfo
+}
+
+/**
+ * 投递任务信息
+ */
+export interface ShipperTaskInfo {
+  /**
+   * 投递任务ID
+   */
+  TaskId: string
+  /**
+   * 投递信息ID
+   */
+  ShipperId: string
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 本批投递的日志的开始时间戳，毫秒
+   */
+  RangeStart: number
+  /**
+   * 本批投递的日志的结束时间戳， 毫秒
+   */
+  RangeEnd: number
+  /**
+   * 本次投递任务的开始时间戳， 毫秒
+   */
+  StartTime: number
+  /**
+   * 本次投递任务的结束时间戳， 毫秒
+   */
+  EndTime: number
+  /**
+   * 本次投递的结果，"success","running","failed"
+   */
+  Status: string
+  /**
+   * 结果的详细信息
+   */
+  Message: string
 }
 
 /**
@@ -7421,17 +7611,15 @@ export interface CreateMachineGroupRequest {
 }
 
 /**
- * 创建资源实例时同时绑定的标签对说明
+ * 日志中的KV对
  */
-export interface Tag {
+export interface LogItem {
   /**
-   * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志Key
    */
   Key: string
   /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志Value
    */
   Value: string
 }
@@ -7608,6 +7796,11 @@ machineGroupId
    */
   Limit?: number
 }
+
+/**
+ * DescribeCloudProductLogTasks请求参数结构体
+ */
+export type DescribeCloudProductLogTasksRequest = null
 
 /**
  * CreateAlarmNotice请求参数结构体
@@ -8282,6 +8475,25 @@ JsonType为1：转义。示例：
 }
 
 /**
+ * UploadLog请求参数结构体
+ */
+export interface UploadLogRequest {
+  /**
+   * 主题id
+   */
+  TopicId: string
+  /**
+   * 该参数已废弃，请勿使用
+   * @deprecated
+   */
+  HashKey?: string
+  /**
+   * 压缩方法
+   */
+  CompressType?: string
+}
+
+/**
  * 投递配置入参
  */
 export interface DeliverConfig {
@@ -8499,6 +8711,25 @@ export interface CreateScheduledSqlRequest {
  * RetryShipperTask返回参数结构体
  */
 export interface RetryShipperTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConfigExtras返回参数结构体
+ */
+export interface DescribeConfigExtrasResponse {
+  /**
+   * 采集配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configs?: Array<ConfigExtraInfo>
+  /**
+   * 过滤到的总数目
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

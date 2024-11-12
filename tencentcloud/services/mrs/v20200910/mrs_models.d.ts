@@ -1070,6 +1070,10 @@ export interface ImageMaskAsyncRequest {
      * 图片脱敏选项, 不传默认都脱敏
      */
     MaskFlag?: ImageMaskFlags;
+    /**
+     * 是否自动矫正图片方向
+     */
+    AutoFixImageDirection?: boolean;
 }
 /**
  * 基础类型
@@ -5697,6 +5701,10 @@ export interface ImageMaskRequest {
      * 图片脱敏选项, 不传默认都脱敏
      */
     MaskFlag?: ImageMaskFlags;
+    /**
+     * 是否自动矫正图片方向
+     */
+    AutoFixImageDirection?: boolean;
 }
 /**
  * 生命体征

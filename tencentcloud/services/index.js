@@ -244,6 +244,8 @@ var ie_1 = require("./ie");
 Object.defineProperty(exports, "ie", { enumerable: true, get: function () { return ie_1.ie; } });
 var iecp_1 = require("./iecp");
 Object.defineProperty(exports, "iecp", { enumerable: true, get: function () { return iecp_1.iecp; } });
+var ig_1 = require("./ig");
+Object.defineProperty(exports, "ig", { enumerable: true, get: function () { return ig_1.ig; } });
 var iir_1 = require("./iir");
 Object.defineProperty(exports, "iir", { enumerable: true, get: function () { return iir_1.iir; } });
 var ims_1 = require("./ims");

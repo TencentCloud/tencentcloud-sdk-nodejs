@@ -22,42 +22,42 @@ export interface SentenceInfo {
   /**
    * 句子序号，在段落、自由说模式下有效，表示断句序号，最后的综合结果的为-1.
    */
-  SentenceId: number
+  SentenceId?: number
   /**
    * 详细发音评估结果
    */
-  Words: Array<WordRsp>
+  Words?: Array<WordRsp>
   /**
    * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值，在reftext中但未识别出来的词不计入分数中。
    */
-  PronAccuracy: number
+  PronAccuracy?: number
   /**
    * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
    */
-  PronFluency: number
+  PronFluency?: number
   /**
    * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
    */
-  PronCompletion: number
+  PronCompletion?: number
   /**
-   * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）* 完整度（PronCompletionfloat）*（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
+   * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）× 完整度（PronCompletionfloat）×（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
    */
-  SuggestedScore: number
+  SuggestedScore?: number
   /**
    * 匹配候选文本的序号，在句子多分支、情景对 话、段落模式下表示匹配到的文本序号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RefTextId: number
+  RefTextId?: number
   /**
    * 主题词命中标志，0表示没命中，1表示命中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyWordHits: Array<number>
+  KeyWordHits?: Array<number>
   /**
    * 负向主题词命中标志，0表示没命中，1表示命中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnKeyWordHits: Array<number>
+  UnKeyWordHits?: Array<number>
 }
 
 /**

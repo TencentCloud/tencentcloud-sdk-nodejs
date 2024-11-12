@@ -362,7 +362,7 @@ export interface DescribeDedicatedSupportedZonesResponse {
   /**
    * 支持的可用区列表
    */
-  ZoneSet: Array<RegionZoneInfo>
+  ZoneSet?: Array<RegionZoneInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -404,7 +404,7 @@ export interface CreateDedicatedClusterOrderRequest {
    */
   PurchaseSource?: string
   /**
-   * 当调用API接口提交订单时，需要提交DedicatedClusterOrderId
+   * 当调用API接口提交订单时，需要提交DedicatedClusterOrderId，此处DedicatedClusterOrderId是之前创建的订单，可通过DescribeDedicatedClusterOrders接口查询，这里传入DedicatedClusterOrderId用于调整订单和支付。
    */
   DedicatedClusterOrderId?: string
 }
@@ -418,11 +418,11 @@ export interface ModifyOrderStatusRequest {
    */
   Status: string
   /**
-   * 大订单ID
+   * 大订单ID，可以在本地专用集群的基础信息页获取大订单ID
    */
   DedicatedClusterOrderId?: string
   /**
-   * 小订单ID
+   * 小订单ID，进入大订单的详情页，可以看到小订单ID
    */
   SubOrderIds?: Array<string>
 }
@@ -545,7 +545,7 @@ export interface CreateSiteRequest {
    */
   Note?: string
   /**
-   * 您将使用光纤类型将CDC设备连接到网络。有单模和多模两种选项。
+   * 您将使用光纤类型将CDC设备连接到网络。有单模和多模两种选项。取值范围："MM","SM"
    */
   FiberType?: string
   /**
@@ -557,7 +557,7 @@ export interface CreateSiteRequest {
    */
   PowerConnectors?: string
   /**
-   * 从机架上方还是下方供电。
+   * 从机架上方还是下方供电。取值范围：["UP","DOWN"]
    */
   PowerFeedDrop?: string
   /**
@@ -569,7 +569,7 @@ export interface CreateSiteRequest {
    */
   PowerDrawKva?: number
   /**
-   * 网络到腾讯云Region区域的上行链路速度
+   * 网络到腾讯云Region区域的上行链路速度(Gbps)
    */
   UplinkSpeedGbps?: number
   /**
@@ -1638,7 +1638,7 @@ export interface ModifySiteDeviceInfoRequest {
    */
   PowerConnectors?: string
   /**
-   * 从机架上方还是下方供电。
+   * 从机架上方还是下方供电。取值范围：["UP","DOWN"]
    */
   PowerFeedDrop?: string
   /**
@@ -1789,7 +1789,7 @@ export interface DescribeDedicatedClusterHostStatisticsRequest {
    */
   EndTime?: string
   /**
-   * 时间范围精度，1分钟/5分钟
+   * 时间范围精度，1分钟(ONE_MINUTE)/5分钟(FIVE_MINUTE)
    */
   Period?: string
 }

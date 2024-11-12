@@ -33,6 +33,7 @@ import {
   UploadLogResponse,
   ParquetKeyInfo,
   DescribeCosRechargesResponse,
+  CreateCloudProductLogTaskRequest,
   DescribeShipperTasksResponse,
   CheckFunctionRequest,
   Filter,
@@ -43,14 +44,14 @@ import {
   DescribeNoticeContentsRequest,
   ConsoleSharingConfig,
   DeleteConsoleSharingRequest,
-  UploadLogRequest,
+  EscalateNoticeInfo,
   ModifyConsoleSharingRequest,
   CreateLogsetRequest,
   DescribeShippersRequest,
   CreateScheduledSqlResponse,
   DescribeDashboardsRequest,
   CreateConsoleSharingRequest,
-  LogItem,
+  CreateCloudProductLogTaskResponse,
   DeleteNoticeContentResponse,
   DeleteTopicRequest,
   DescribePartitionsRequest,
@@ -67,8 +68,9 @@ import {
   CreateConfigExtraResponse,
   KafkaRechargeInfo,
   DeleteKafkaRechargeResponse,
+  Tag,
   ContainerWorkLoadInfo,
-  DescribeConfigExtrasResponse,
+  CloudProductLogTaskInfo,
   ModifyDataTransformRequest,
   DescribeScheduledSqlInfoResponse,
   CallBackInfo,
@@ -80,6 +82,8 @@ import {
   FilePathInfo,
   DescribeIndexRequest,
   ModifyScheduledSqlResponse,
+  FilterRuleInfo,
+  DeleteCloudProductLogTaskRequest,
   ConditionInfo,
   MachineGroupInfo,
   DeleteMachineGroupInfoRequest,
@@ -131,10 +135,10 @@ import {
   PartitionInfo,
   NoticeContentTemplate,
   CreateNoticeContentResponse,
-  EscalateNoticeInfo,
+  DeleteCloudProductLogTaskResponse,
   CreateConfigExtraRequest,
   ExcludePathInfo,
-  FilterRuleInfo,
+  DescribeCloudProductLogTasksResponse,
   ConfigExtraInfo,
   AdvanceFilterRuleInfo,
   SplitPartitionRequest,
@@ -177,9 +181,9 @@ import {
   DeleteConfigRequest,
   AnalysisDimensional,
   LogRechargeRuleInfo,
-  ShipperTaskInfo,
+  ModifyCloudProductLogTaskResponse,
   CloseKafkaConsumerRequest,
-  RuleTagInfo,
+  ModifyCloudProductLogTaskRequest,
   CreateExportRequest,
   DashboardTemplateVariable,
   DescribeAlarmNoticesResponse,
@@ -217,6 +221,7 @@ import {
   DeleteConfigResponse,
   DeleteShipperResponse,
   ModifyKafkaConsumerRequest,
+  RuleTagInfo,
   ExportInfo,
   ModifyIndexResponse,
   TopicInfo,
@@ -224,6 +229,7 @@ import {
   DescribeLogContextResponse,
   SearchLogResponse,
   NoticeContent,
+  ShipperTaskInfo,
   CheckFunctionResponse,
   DeleteExportRequest,
   PreviewKafkaRechargeRequest,
@@ -287,7 +293,7 @@ import {
   SearchLogTopics,
   SearchLogRequest,
   CreateMachineGroupRequest,
-  Tag,
+  LogItem,
   KeyRegexInfo,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
@@ -295,6 +301,7 @@ import {
   ContainerFileInfo,
   CsvInfo,
   DescribeConfigExtrasRequest,
+  DescribeCloudProductLogTasksRequest,
   CreateAlarmNoticeRequest,
   ModifyShipperResponse,
   DescribeIndexResponse,
@@ -316,6 +323,7 @@ import {
   ModifyDataTransformResponse,
   DescribeDataTransformInfoResponse,
   ConsumerContent,
+  UploadLogRequest,
   DeliverConfig,
   HighLightItem,
   RetryShipperTaskRequest,
@@ -326,6 +334,7 @@ import {
   MergePartitionResponse,
   CreateScheduledSqlRequest,
   RetryShipperTaskResponse,
+  DescribeConfigExtrasResponse,
 } from "./cls_models"
 
 /**
@@ -476,6 +485,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicResponse) => void
   ): Promise<CreateTopicResponse> {
     return this.request("CreateTopic", req, cb)
+  }
+
+  /**
+   * 云产品接入使用相关接口
+   */
+  async DescribeCloudProductLogTasks(
+    req?: DescribeCloudProductLogTasksRequest,
+    cb?: (error: string, rep: DescribeCloudProductLogTasksResponse) => void
+  ): Promise<DescribeCloudProductLogTasksResponse> {
+    return this.request("DescribeCloudProductLogTasks", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async DeleteCloudProductLogTask(
+    req: DeleteCloudProductLogTaskRequest,
+    cb?: (error: string, rep: DeleteCloudProductLogTaskResponse) => void
+  ): Promise<DeleteCloudProductLogTaskResponse> {
+    return this.request("DeleteCloudProductLogTask", req, cb)
   }
 
   /**
@@ -636,6 +665,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateNoticeContentResponse) => void
   ): Promise<CreateNoticeContentResponse> {
     return this.request("CreateNoticeContent", req, cb)
+  }
+
+  /**
+   * 内部云产品接入使用相关接口
+   */
+  async ModifyCloudProductLogTask(
+    req: ModifyCloudProductLogTaskRequest,
+    cb?: (error: string, rep: ModifyCloudProductLogTaskResponse) => void
+  ): Promise<ModifyCloudProductLogTaskResponse> {
+    return this.request("ModifyCloudProductLogTask", req, cb)
   }
 
   /**
@@ -809,13 +848,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于预览仪表盘订阅
+   * 内部云产品接入使用相关接口
    */
-  async SearchDashboardSubscribe(
-    req: SearchDashboardSubscribeRequest,
-    cb?: (error: string, rep: SearchDashboardSubscribeResponse) => void
-  ): Promise<SearchDashboardSubscribeResponse> {
-    return this.request("SearchDashboardSubscribe", req, cb)
+  async CreateCloudProductLogTask(
+    req: CreateCloudProductLogTaskRequest,
+    cb?: (error: string, rep: CreateCloudProductLogTaskResponse) => void
+  ): Promise<CreateCloudProductLogTaskResponse> {
+    return this.request("CreateCloudProductLogTask", req, cb)
   }
 
   /**
@@ -1196,6 +1235,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConfigExtrasResponse) => void
   ): Promise<DescribeConfigExtrasResponse> {
     return this.request("DescribeConfigExtras", req, cb)
+  }
+
+  /**
+   * 此接口用于预览仪表盘订阅
+   */
+  async SearchDashboardSubscribe(
+    req: SearchDashboardSubscribeRequest,
+    cb?: (error: string, rep: SearchDashboardSubscribeResponse) => void
+  ): Promise<SearchDashboardSubscribeResponse> {
+    return this.request("SearchDashboardSubscribe", req, cb)
   }
 
   /**
