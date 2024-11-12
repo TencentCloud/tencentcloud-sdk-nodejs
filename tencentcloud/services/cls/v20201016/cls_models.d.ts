@@ -2405,6 +2405,10 @@ export interface ModifyAlarmNoticeRequest {
      */
     AlarmNoticeId: string;
     /**
+     * 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。
+     */
+    Tags?: Array<Tag>;
+    /**
      * 通知渠道组名称。
      */
     Name?: string;
@@ -2420,7 +2424,7 @@ export interface ModifyAlarmNoticeRequest {
      */
     NoticeReceivers?: Array<NoticeReceiver>;
     /**
-     * 接口回调信息（包括企业微信）。
+     * 接口回调信息（包括企业微信等）。
      */
     WebCallbacks?: Array<WebCallback>;
     /**
@@ -2432,6 +2436,32 @@ export interface ModifyAlarmNoticeRequest {
   - 传其中一组数据，则另一组数据置空。
      */
     NoticeRules?: Array<NoticeRule>;
+    /**
+     * 调用链接域名。http:// 或者 https:// 开头，不能/结尾
+     */
+    JumpDomain?: string;
+    /**
+     * 投递日志开关。
+  
+  参数值：
+  1：关闭；
+  
+  2：开启
+  
+     */
+    DeliverStatus?: number;
+    /**
+     * 投递日志配置。
+     */
+    DeliverConfig?: DeliverConfig;
+    /**
+     * 免登录操作告警开关。
+  
+  参数值：
+          1：关闭
+          2：开启（默认开启）
+     */
+    AlarmShieldStatus?: number;
 }
 /**
  * 日志主题扩展信息

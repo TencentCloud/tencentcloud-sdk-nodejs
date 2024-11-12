@@ -278,6 +278,11 @@ export interface Price {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudDiskPrice?: ItemPrice;
+    /**
+     * 分实例价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PriceDetailSet?: Array<ItemPriceDetail>;
 }
 /**
  * TerminateInstances请求参数结构体
@@ -467,7 +472,7 @@ export interface DescribeInstancesRequest {
      */
     InstanceIds?: Array<string>;
     /**
-     * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态
+     * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态；charge-type，付费方式；public-ip-address，公网IP过滤
      */
     Filters?: Array<Filter>;
     /**
@@ -551,6 +556,14 @@ export interface InquirePriceRunInstancesRequest {
      * DryRun为True就是只验接口连通性，默认为False
      */
     DryRun?: boolean;
+    /**
+     * 付费方式，POSTPAID_BY_HOUR按量后付费，PREPAID_BY_MONTH预付费按月，PREPAID_BY_DAY预付费按天
+     */
+    InstanceChargeType?: string;
+    /**
+     * 预付费参数
+     */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
 }
 /**
  * StartInstance返回参数结构体
@@ -632,6 +645,31 @@ export interface ApplicationInfo {
     ApplicationSize?: number;
 }
 /**
+ * 分实例价格
+ */
+export interface ItemPriceDetail {
+    /**
+     * 实例id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 实例价格详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstancePrice?: ItemPrice;
+    /**
+     * 磁盘价格详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudDiskPrice?: ItemPrice;
+    /**
+     * 该实例的总价钱
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceTotalPrice?: ItemPrice;
+}
+/**
  * DescribeApplications返回参数结构体
  */
 export interface DescribeApplicationsResponse {
@@ -670,7 +708,7 @@ export interface ItemPrice {
      */
     Discount?: number;
     /**
-     * 单位：时
+     * 单位：时/月
   
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -712,6 +750,28 @@ export interface StopInstanceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 实例预付费入参
+ */
+export interface InstanceChargePrepaid {
+    /**
+     * 时长，默认值：1
+     */
+    Period?: number;
+    /**
+     * 续费标志可选参数：
+  NOTIFY_AND_MANUAL_RENEW：表示默认状态(用户未设置，即初始状态：若用户有预付费不停服特权，也会对该值进行自动续费)
+  NOTIFY_AND_AUTO_RENEW：表示自动续费
+  DISABLE_NOTIFY_AND_MANUAL_RENEW：表示明确不自动续费(用户设置)
+  默认值：NOTIFY_AND_MANUAL_RENEW
+  
+     */
+    RenewFlag?: string;
+    /**
+     * 时长单位，默认值MONTH
+     */
+    TimeUnit?: string;
 }
 /**
  * 场景详情

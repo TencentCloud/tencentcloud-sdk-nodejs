@@ -4129,7 +4129,7 @@ export interface RunJobFlowResponse {
   /**
    * 作业流程ID。
    */
-  JobFlowId: number
+  JobFlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4160,17 +4160,17 @@ export interface DescribeInstanceRenewNodesResponse {
   /**
    * 查询到的节点总数
    */
-  TotalCnt: number
+  TotalCnt?: number
   /**
    * 节点详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeList: Array<RenewInstancesInfo>
+  NodeList?: Array<RenewInstancesInfo>
   /**
    * 用户所有的标签键列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaInfo: Array<string>
+  MetaInfo?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6482,6 +6482,21 @@ export interface RenewInstancesInfo {
    * 磁盘类型
    */
   StorageType?: number
+  /**
+   * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootSize?: number
+  /**
+   * 系统盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootStorageType?: number
+  /**
+   * 数据盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MCMultiDisk?: Array<MultiDiskMC>
 }
 
 /**
@@ -7607,7 +7622,7 @@ export interface DescribeEmrOverviewMetricsRequest {
    */
   End: number
   /**
-   * 指标名
+   * 指标名，NODE.CPU：节点平均CPU利用率和总核数；NODE.CPU.SLHBASE：Serverless实例平均CPU利用率和总核数；HDFS.NN.CAPACITY：存储使用率和总量
    */
   Metric: string
   /**

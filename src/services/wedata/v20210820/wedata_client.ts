@@ -40,6 +40,7 @@ import {
   IntegrationNodeSchemaMapping,
   DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
+  UpdateDataModelRegistryInfoRequest,
   BatchTaskOperateNew,
   DescribeRuleDimStatRequest,
   DescribeRuleTemplatesResponse,
@@ -185,6 +186,7 @@ import {
   DescribeColumnsMetaRequest,
   DescribeOrganizationalFunctionsRequest,
   DescribeRuleTemplateResponse,
+  CreateDataModelResponse,
   DescribeDependTaskListsRequest,
   DatabaseMeta,
   DescribeAllByFolderNewRequest,
@@ -349,6 +351,7 @@ import {
   DeleteIntegrationNodeResponse,
   DescribeDataSourceInfoListRequest,
   BatchResultDs,
+  DeleteDataModelResponse,
   DescribeIntegrationNodeRequest,
   SetTaskAlarmNewResponse,
   GetOfflineDIInstanceListResponse,
@@ -494,6 +497,7 @@ import {
   TaskAlarmInfo,
   DescribeSchedulerTaskCntByStatusRequest,
   ModifyApproveStatusRequest,
+  UpdateDataModelRegistryInfoResponse,
   DescribeOperateOpsTasksResponse,
   DescribeResourceManagePathTreesRequest,
   DescribeDutyScheduleDetailsResponse,
@@ -702,6 +706,7 @@ import {
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
   DescribeIntegrationTaskResponse,
+  CreateDataModelRequest,
   DescribeQualityScoreTrendResponse,
   RuleDimStat,
   CreateHiveTableByDDLRequest,
@@ -747,6 +752,7 @@ import {
   DescribeRuleExecLogRequest,
   BatchRerunIntegrationTaskInstancesResponse,
   RuleGroupPage,
+  DeleteDataModelRequest,
   DescribeApproveListResponse,
   DescribeIntegrationTasksRequest,
   BatchMakeUpIntegrationTasksResponse,
@@ -1233,6 +1239,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRuleTemplateResponse) => void
   ): Promise<DeleteRuleTemplateResponse> {
     return this.request("DeleteRuleTemplate", req, cb)
+  }
+
+  /**
+   * 数语向wedata注册，提供自身cam角色信息，跳转域名、ip、端口信息等
+   */
+  async UpdateDataModelRegistryInfo(
+    req: UpdateDataModelRegistryInfoRequest,
+    cb?: (error: string, rep: UpdateDataModelRegistryInfoResponse) => void
+  ): Promise<UpdateDataModelRegistryInfoResponse> {
+    return this.request("UpdateDataModelRegistryInfo", req, cb)
   }
 
   /**
@@ -3047,6 +3063,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建数据建模，提供给云应用使用，实现“Wedata数据建模”的下单发货
+   */
+  async CreateDataModel(
+    req: CreateDataModelRequest,
+    cb?: (error: string, rep: CreateDataModelResponse) => void
+  ): Promise<CreateDataModelResponse> {
+    return this.request("CreateDataModel", req, cb)
+  }
+
+  /**
    * 提取数据集成节点字段Schema
    */
   async GetIntegrationNodeColumnSchema(
@@ -3134,5 +3160,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDrInstancePageResponse) => void
   ): Promise<DescribeDrInstancePageResponse> {
     return this.request("DescribeDrInstancePage", req, cb)
+  }
+
+  /**
+   * 销毁数据建模，提供给云应用使用，实现“Wedata数据建模”的销毁
+   */
+  async DeleteDataModel(
+    req: DeleteDataModelRequest,
+    cb?: (error: string, rep: DeleteDataModelResponse) => void
+  ): Promise<DeleteDataModelResponse> {
+    return this.request("DeleteDataModel", req, cb)
   }
 }

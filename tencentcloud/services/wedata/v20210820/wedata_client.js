@@ -310,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRuleTemplate", req, cb);
     }
     /**
+     * 数语向wedata注册，提供自身cam角色信息，跳转域名、ip、端口信息等
+     */
+    async UpdateDataModelRegistryInfo(req, cb) {
+        return this.request("UpdateDataModelRegistryInfo", req, cb);
+    }
+    /**
      * 获取待审批列表
      */
     async DescribeApproveList(req, cb) {
@@ -1401,6 +1407,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableMeta", req, cb);
     }
     /**
+     * 创建数据建模，提供给云应用使用，实现“Wedata数据建模”的下单发货
+     */
+    async CreateDataModel(req, cb) {
+        return this.request("CreateDataModel", req, cb);
+    }
+    /**
      * 提取数据集成节点字段Schema
      */
     async GetIntegrationNodeColumnSchema(req, cb) {
@@ -1453,6 +1465,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDrInstancePage(req, cb) {
         return this.request("DescribeDrInstancePage", req, cb);
+    }
+    /**
+     * 销毁数据建模，提供给云应用使用，实现“Wedata数据建模”的销毁
+     */
+    async DeleteDataModel(req, cb) {
+        return this.request("DeleteDataModel", req, cb);
     }
 }
 exports.Client = Client;

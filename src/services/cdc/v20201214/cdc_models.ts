@@ -992,7 +992,7 @@ export interface DescribeDedicatedClusterCbsStatisticsRequest {
    */
   EndTime?: string
   /**
-   * 时间范围精度，1分钟/5分钟
+   * 时间范围精度，1分钟(ONE_MINUTE)/5分钟(FIVE_MINUTE)
    */
   Period?: string
   /**
@@ -1650,7 +1650,7 @@ export interface ModifySiteDeviceInfoRequest {
    */
   PowerDrawKva?: number
   /**
-   * 网络到腾讯云Region区域的上行链路速度
+   * 网络到腾讯云Region区域的上行链路速度(Gbps)
    */
   UplinkSpeedGbps?: number
   /**

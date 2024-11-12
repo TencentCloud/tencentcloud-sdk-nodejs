@@ -110,7 +110,7 @@ export interface ChatCompletionsRequest {
      */
     EnableMultimedia?: boolean;
     /**
-     * 是否开启搜索深度模式，默认是false，在值为true且命中搜索时，会请求深度搜索。
+     * 是否开启深度研究该问题，默认是false，在值为true且命中深度研究该问题时，会返回深度研究该问题信息。
      */
     EnableDeepSearch?: boolean;
     /**
@@ -175,7 +175,11 @@ export interface GetEmbeddingRequest {
     /**
      * 输入文本。总长度不超过 1024 个 Token，超过则会截断最后面的内容。
      */
-    Input: string;
+    Input?: string;
+    /**
+     * 输入文本数组。输入数组总长度不超过 200 。
+     */
+    InputList?: Array<string>;
 }
 /**
  * 具体的图片内容
@@ -1237,7 +1241,7 @@ export interface History {
  */
 export interface GetEmbeddingResponse {
     /**
-     * 返回的 Embedding 信息。当前不支持批量，所以数组元素数目为 1。
+     * 返回的 Embedding 信息。
      */
     Data?: Array<EmbeddingData>;
     /**

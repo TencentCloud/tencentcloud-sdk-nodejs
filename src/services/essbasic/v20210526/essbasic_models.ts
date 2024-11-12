@@ -6760,7 +6760,7 @@ export interface ChannelCreateReleaseFlowRequest {
 
 注意：
 <ul>
-<li>只能更换自己企业的签署人，不支持更换个人类型或者其他企业的签署人</li>
+<li>只能更换自己企业的签署人，不支持更换个人类型签署人</li>
 <li>可以不指定替换签署人，使用原流程的签署人</li>
 </ul>
    */

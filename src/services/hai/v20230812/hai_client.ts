@@ -45,11 +45,13 @@ import {
   StartInstanceResponse,
   DescribeServiceLoginSettingsRequest,
   ApplicationInfo,
+  ItemPriceDetail,
   DescribeApplicationsResponse,
   ItemPrice,
   DescribeInstanceNetworkStatusRequest,
   LoginService,
   StopInstanceResponse,
+  InstanceChargePrepaid,
   SceneInfo,
 } from "./hai_models"
 

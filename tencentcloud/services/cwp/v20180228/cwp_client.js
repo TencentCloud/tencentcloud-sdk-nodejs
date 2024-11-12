@@ -2399,14 +2399,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLicenseList", req, cb);
     }
     /**
-     * 云护航计费产品已下线
-
-云护航服务使用完成后，该接口可以确认收货
-     */
-    async CreateCloudProtectServiceOrderRecord(req, cb) {
-        return this.request("CreateCloudProtectServiceOrderRecord", req, cb);
-    }
-    /**
      * 检测基线
      */
     async StartBaselineDetect(req, cb) {

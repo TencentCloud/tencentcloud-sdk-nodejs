@@ -110,7 +110,7 @@ export declare class Client extends AbstractClient {
      */
     GetEmbedding(req: GetEmbeddingRequest, cb?: (error: string, rep: GetEmbeddingResponse) => void): Promise<GetEmbeddingResponse>;
     /**
-     * 上传用于不同用途的的文件。
+     * 上传用于不同用途的文件。
 当前用途仅支持 hunyuan 等模型的文档理解。
      */
     FilesUploads(req: FilesUploadsRequest, cb?: (error: string, rep: FilesUploadsResponse) => void): Promise<FilesUploadsResponse>;

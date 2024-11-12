@@ -88,9 +88,9 @@ it("iss.v20230517.DescribeDeviceChannel", async function () {
     }
 })
 
-it("iss.v20230517.AddRecordRetrieveTask", async function () {
+it("iss.v20230517.DeleteRecordBackupTemplate", async function () {
     try {
-       const data = await client.AddRecordRetrieveTask({})
+       const data = await client.DeleteRecordBackupTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,16 +121,6 @@ it("iss.v20230517.DescribeRecordSlice", async function () {
 it("iss.v20230517.DescribeGatewayProtocol", async function () {
     try {
        const data = await client.DescribeGatewayProtocol({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iss.v20230517.DescribeRecordPlaybackUrl", async function () {
-    try {
-       const data = await client.DescribeRecordPlaybackUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +328,9 @@ it("iss.v20230517.UpdateRecordTemplate", async function () {
     }
 })
 
-it("iss.v20230517.DeleteRecordBackupTemplate", async function () {
+it("iss.v20230517.AddRecordRetrieveTask", async function () {
     try {
-       const data = await client.DeleteRecordBackupTemplate({})
+       const data = await client.AddRecordRetrieveTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +388,9 @@ it("iss.v20230517.DeleteOrganization", async function () {
     }
 })
 
-it("iss.v20230517.CheckDomain", async function () {
+it("iss.v20230517.DescribeRecordPlaybackUrl", async function () {
     try {
-       const data = await client.CheckDomain({})
+       const data = await client.DescribeRecordPlaybackUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

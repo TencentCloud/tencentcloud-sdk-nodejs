@@ -2269,6 +2269,12 @@ LimitTypes取值范围：
         return this.request("DescribeVpcEndPointServiceWhiteList", req, cb);
     }
     /**
+     * 接口用于调整[共享带宽包](https://cloud.tencent.com/document/product/684/15245)(BWP)带宽
+     */
+    async ModifyBandwidthPackageBandwidth(req, cb) {
+        return this.request("ModifyBandwidthPackageBandwidth", req, cb);
+    }
+    /**
      * 本接口（DescribePrivateNatGatewayLimits）用于查询可创建的私网NAT网关配额数量
      */
     async DescribePrivateNatGatewayLimits(req, cb) {

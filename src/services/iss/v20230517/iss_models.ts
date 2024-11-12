@@ -375,20 +375,6 @@ export interface OperTimeSlot {
 }
 
 /**
- * CheckDomain返回参数结构体
- */
-export interface CheckDomainResponse {
-  /**
-   * 是否备案
-   */
-  Data?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * SetForbidPlayChannels请求参数结构体
  */
 export interface SetForbidPlayChannelsRequest {
@@ -513,49 +499,165 @@ export interface UpdateOrganizationResponse {
 }
 
 /**
- * 增加组织接口返回数据
+ * 查询设备接口返回数据
  */
-export interface AddOrgData {
+export interface DescribeDeviceData {
   /**
-   * 组织 ID
+   * 设备ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrganizationId?: string
+  DeviceId?: string
   /**
-   * 组织名称
+   * 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: string
+  /**
+   * 设备名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 组织父节点 ID
+   * 设备接入协议，1:RTMP,2:GB,3:GW 
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentId?: string
+  AccessProtocol?: number
   /**
-   * 组织层级
+   * 设备类型，1:IPC,2:NVR
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level?: number
+  Type?: number
   /**
-   * 用户ID
+   * 设备接入服务节点id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId?: number
+  ClusterId?: string
   /**
-   * 组织结构
+   * 设备接入服务节点名称
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentIds?: string
+  ClusterName?: string
   /**
-   * 设备总数
+   * 设备流传输协议，1:UDP,2:TCP 
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
+  TransportProtocol?: number
   /**
-   * 设备在线数量
+   * 设备密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Online?: number
+  Password?: string
+  /**
+   * 设备描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * sip服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SipId?: string
+  /**
+   * sip服务域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SipDomain?: string
+  /**
+   * sip服务IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SipIp?: string
+  /**
+   * sip服务端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SipPort?: number
+  /**
+   * Rtmp设备推流地址(仅rtmp设备有效)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PushStreamUrl?: string
+  /**
+   * 设备状态，0:未注册,1:在线,2:离线,3:禁用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 设备所属组织ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationId?: string
+  /**
+   * 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 设备所属网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayName?: string
+  /**
+   * 设备网关协议名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtocolTypeName?: string
+  /**
+   * 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtocolType?: number
+  /**
+   * 设备接入IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 设备Port
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 设备用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * 设备地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 设备厂商
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Manufacturer?: string
+  /**
+   * 音频关开（0：关闭；1：开启）关闭时丢弃音频	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioSwitch?: number
+  /**
+   * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeSwitch?: number
+  /**
+   * RTMP推流地址自定义appName
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppName?: string
+  /**
+   * RTMP推流地址自定义streamName
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamName?: string
+  /**
+   * 是否开启静音帧（0：关闭；1 开启）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SilentFrameSwitch?: number
 }
 
 /**
@@ -2841,165 +2943,49 @@ export interface ControlDevicePTZResponse {
 export type ListRecordBackupPlansRequest = null
 
 /**
- * 查询设备接口返回数据
+ * 增加组织接口返回数据
  */
-export interface DescribeDeviceData {
+export interface AddOrgData {
   /**
-   * 设备ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeviceId?: string
-  /**
-   * 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Code?: string
-  /**
-   * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 设备接入协议，1:RTMP,2:GB,3:GW 
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccessProtocol?: number
-  /**
-   * 设备类型，1:IPC,2:NVR
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: number
-  /**
-   * 设备接入服务节点id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterId?: string
-  /**
-   * 设备接入服务节点名称
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterName?: string
-  /**
-   * 设备流传输协议，1:UDP,2:TCP 
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TransportProtocol?: number
-  /**
-   * 设备密码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
-  /**
-   * 设备描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * sip服务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SipId?: string
-  /**
-   * sip服务域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SipDomain?: string
-  /**
-   * sip服务IP地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SipIp?: string
-  /**
-   * sip服务端口
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SipPort?: number
-  /**
-   * Rtmp设备推流地址(仅rtmp设备有效)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PushStreamUrl?: string
-  /**
-   * 设备状态，0:未注册,1:在线,2:离线,3:禁用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 设备所属组织ID
+   * 组织 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrganizationId?: string
   /**
-   * 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）
+   * 组织名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId?: string
+  Name?: string
   /**
-   * 设备所属网关名称
+   * 组织父节点 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayName?: string
+  ParentId?: string
   /**
-   * 设备网关协议名称
+   * 组织层级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtocolTypeName?: string
+  Level?: number
   /**
-   * 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）
+   * 用户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtocolType?: number
+  AppId?: number
   /**
-   * 设备接入IP
+   * 组织结构
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip?: string
+  ParentIds?: string
   /**
-   * 设备Port
+   * 设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port?: number
+  Total?: number
   /**
-   * 设备用户名
+   * 设备在线数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Username?: string
-  /**
-   * 设备地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * 设备厂商
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Manufacturer?: string
-  /**
-   * 音频关开（0：关闭；1：开启）关闭时丢弃音频	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AudioSwitch?: number
-  /**
-   * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubscribeSwitch?: number
-  /**
-   * RTMP推流地址自定义appName
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppName?: string
-  /**
-   * RTMP推流地址自定义streamName
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StreamName?: string
-  /**
-   * 是否开启静音帧（0：关闭；1 开启）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SilentFrameSwitch?: number
+  Online?: number
 }
 
 /**
@@ -3874,20 +3860,6 @@ export interface QueryForbidPlayChannelListRequest {
    * 第几页
    */
   PageNumber: number
-}
-
-/**
- * CheckDomain请求参数结构体
- */
-export interface CheckDomainRequest {
-  /**
-   * 播放域名
-   */
-  PlayDomain: string
-  /**
-   * CNAME 记录值
-   */
-  InternalDomain: string
 }
 
 /**

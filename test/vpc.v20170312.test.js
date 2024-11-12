@@ -3298,6 +3298,16 @@ it("vpc.v20170312.DescribeVpcEndPointServiceWhiteList", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyBandwidthPackageBandwidth", async function () {
+    try {
+       const data = await client.ModifyBandwidthPackageBandwidth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribePrivateNatGatewayLimits", async function () {
     try {
        const data = await client.DescribePrivateNatGatewayLimits({})

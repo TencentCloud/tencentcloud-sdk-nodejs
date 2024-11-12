@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceChannel", req, cb);
     }
     /**
-     * 用于新建取回任务
+     * 用于删除录像上云模板。
      */
-    async AddRecordRetrieveTask(req, cb) {
-        return this.request("AddRecordRetrieveTask", req, cb);
+    async DeleteRecordBackupTemplate(req, cb) {
+        return this.request("DeleteRecordBackupTemplate", req, cb);
     }
     /**
      * 用于用户添加域名时，查询可以绑定的服务节点，结果为平台支持的所有服务节点。（注意：每个服务节点只能绑定一个域名）
@@ -93,12 +93,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGatewayProtocol(req, cb) {
         return this.request("DescribeGatewayProtocol", req, cb);
-    }
-    /**
-     * 用于获取云端录像回放url地址
-     */
-    async DescribeRecordPlaybackUrl(req, cb) {
-        return this.request("DescribeRecordPlaybackUrl", req, cb);
     }
     /**
      * 用于查询录像上云模板详情。
@@ -221,10 +215,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRecordTemplate", req, cb);
     }
     /**
-     * 用于删除录像上云模板。
+     * 用于新建取回任务
      */
-    async DeleteRecordBackupTemplate(req, cb) {
-        return this.request("DeleteRecordBackupTemplate", req, cb);
+    async AddRecordRetrieveTask(req, cb) {
+        return this.request("AddRecordRetrieveTask", req, cb);
     }
     /**
      * 用于根据服务节点获取 CNAME 值。
@@ -257,10 +251,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOrganization", req, cb);
     }
     /**
-     * 用于检测域名是否备案。
+     * 用于获取云端录像回放url地址
      */
-    async CheckDomain(req, cb) {
-        return this.request("CheckDomain", req, cb);
+    async DescribeRecordPlaybackUrl(req, cb) {
+        return this.request("DescribeRecordPlaybackUrl", req, cb);
     }
     /**
      * 用于批量更改设备的组织。

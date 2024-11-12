@@ -1238,6 +1238,116 @@ export interface LighthouseInstanceDetail {
 }
 
 /**
+ * SubmitCertificateInformation请求参数结构体
+ */
+export interface SubmitCertificateInformationRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+  /**
+   * CSR 生成方式：online = 在线生成, parse = 手动上传。
+   */
+  CsrType?: string
+  /**
+   * 上传的 CSR 内容。
+   */
+  CsrContent?: string
+  /**
+   * 绑定证书的域名。
+   */
+  CertificateDomain?: string
+  /**
+   * 上传的域名数组（多域名证书可以上传）。
+   */
+  DomainList?: Array<string>
+  /**
+   * 私钥密码（非必填）。
+   */
+  KeyPassword?: string
+  /**
+   * 公司名称。
+   */
+  OrganizationName?: string
+  /**
+   * 部门名称。
+   */
+  OrganizationDivision?: string
+  /**
+   * 公司详细地址。
+   */
+  OrganizationAddress?: string
+  /**
+   * 国家名称，如中国：CN 。
+   */
+  OrganizationCountry?: string
+  /**
+   * 公司所在城市。
+   */
+  OrganizationCity?: string
+  /**
+   * 公司所在省份。
+   */
+  OrganizationRegion?: string
+  /**
+   * 公司邮编。
+   */
+  PostalCode?: string
+  /**
+   * 公司座机区号。
+   */
+  PhoneAreaCode?: string
+  /**
+   * 公司座机号码。
+   */
+  PhoneNumber?: string
+  /**
+   * 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
+   */
+  VerifyType?: string
+  /**
+   * 管理人名。
+   */
+  AdminFirstName?: string
+  /**
+   * 管理人姓。
+   */
+  AdminLastName?: string
+  /**
+   * 管理人手机号码。
+   */
+  AdminPhoneNum?: string
+  /**
+   * 管理人邮箱地址。
+   */
+  AdminEmail?: string
+  /**
+   * 管理人职位。
+   */
+  AdminPosition?: string
+  /**
+   * 联系人名。
+   */
+  ContactFirstName?: string
+  /**
+   * 联系人姓。
+   */
+  ContactLastName?: string
+  /**
+   * 联系人邮箱地址。
+   */
+  ContactEmail?: string
+  /**
+   * 联系人手机号码。
+   */
+  ContactNumber?: string
+  /**
+   * 联系人职位。
+   */
+  ContactPosition?: string
+}
+
+/**
  * DescribeCertificateOperateLogs请求参数结构体
  */
 export interface DescribeCertificateOperateLogsRequest {
@@ -2529,21 +2639,29 @@ export interface DescribeDeployedResourcesResponse {
 }
 
 /**
- * CreateCertificateByPackage返回参数结构体
+ * 证书基本信息
  */
-export interface CreateCertificateByPackageResponse {
+export interface CertBasicInfo {
   /**
-   * 证书ID。
+   * 颁发者
    */
-  CertificateId?: string
+  Issuer?: string
   /**
-   * 批量购买证书时返回多个证书ID。
+   * 颁发给
    */
-  CertificateIds?: Array<string>
+  Subject?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 证书指纹
    */
-  RequestId?: string
+  Fingerprint?: string
+  /**
+   * 证书有效期开始时间
+   */
+  ValidFrom?: string
+  /**
+   * 证书有效期结束时间
+   */
+  ValidTo?: string
 }
 
 /**
@@ -2694,113 +2812,21 @@ export interface LiveInstanceDetail {
 }
 
 /**
- * SubmitCertificateInformation请求参数结构体
+ * CreateCertificateByPackage返回参数结构体
  */
-export interface SubmitCertificateInformationRequest {
+export interface CreateCertificateByPackageResponse {
   /**
-   * 证书 ID。
+   * 证书ID。
    */
-  CertificateId: string
+  CertificateId?: string
   /**
-   * CSR 生成方式：online = 在线生成, parse = 手动上传。
+   * 批量购买证书时返回多个证书ID。
    */
-  CsrType?: string
+  CertificateIds?: Array<string>
   /**
-   * 上传的 CSR 内容。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CsrContent?: string
-  /**
-   * 绑定证书的域名。
-   */
-  CertificateDomain?: string
-  /**
-   * 上传的域名数组（多域名证书可以上传）。
-   */
-  DomainList?: Array<string>
-  /**
-   * 私钥密码（非必填）。
-   */
-  KeyPassword?: string
-  /**
-   * 公司名称。
-   */
-  OrganizationName?: string
-  /**
-   * 部门名称。
-   */
-  OrganizationDivision?: string
-  /**
-   * 公司详细地址。
-   */
-  OrganizationAddress?: string
-  /**
-   * 国家名称，如中国：CN 。
-   */
-  OrganizationCountry?: string
-  /**
-   * 公司所在城市。
-   */
-  OrganizationCity?: string
-  /**
-   * 公司所在省份。
-   */
-  OrganizationRegion?: string
-  /**
-   * 公司邮编。
-   */
-  PostalCode?: string
-  /**
-   * 公司座机区号。
-   */
-  PhoneAreaCode?: string
-  /**
-   * 公司座机号码。
-   */
-  PhoneNumber?: string
-  /**
-   * 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
-   */
-  VerifyType?: string
-  /**
-   * 管理人名。
-   */
-  AdminFirstName?: string
-  /**
-   * 管理人姓。
-   */
-  AdminLastName?: string
-  /**
-   * 管理人手机号码。
-   */
-  AdminPhoneNum?: string
-  /**
-   * 管理人邮箱地址。
-   */
-  AdminEmail?: string
-  /**
-   * 管理人职位。
-   */
-  AdminPosition?: string
-  /**
-   * 联系人名。
-   */
-  ContactFirstName?: string
-  /**
-   * 联系人姓。
-   */
-  ContactLastName?: string
-  /**
-   * 联系人邮箱地址。
-   */
-  ContactEmail?: string
-  /**
-   * 联系人手机号码。
-   */
-  ContactNumber?: string
-  /**
-   * 联系人职位。
-   */
-  ContactPosition?: string
+  RequestId?: string
 }
 
 /**
@@ -4776,6 +4802,14 @@ export interface HostingConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTypes?: Array<number | bigint>
+  /**
+   * 资源替换开始时间
+   */
+  ReplaceStartTime?: string
+  /**
+   * 资源替换结束时间
+   */
+  ReplaceEndTime?: string
 }
 
 /**
@@ -5006,6 +5040,11 @@ export interface DescribeCertificateDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DvRevokeAuthDetail?: Array<DvAuths>
+  /**
+   * 证书链信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertChainInfo?: Array<CertBasicInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

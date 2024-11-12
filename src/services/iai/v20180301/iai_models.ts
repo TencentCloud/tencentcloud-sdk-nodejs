@@ -1150,13 +1150,13 @@ export interface ResultsReturnsByGroup {
  */
 export interface Point {
   /**
-   * x坐标
+   * x坐标。
    */
-  X: number
+  X?: number
   /**
-   * Y坐标
+   * Y坐标。
    */
-  Y: number
+  Y?: number
 }
 
 /**

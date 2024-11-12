@@ -162,6 +162,7 @@ import {
   DescribeUsualLoginPlacesResponse,
   DescribeAttackEventsRequest,
   DescribeRiskDnsListRequest,
+  DescribeAttackVulTypeListResponse,
   CreateWhiteListOrderRequest,
   BaselineItem,
   DescribeRansomDefenseStrategyDetailResponse,
@@ -182,7 +183,6 @@ import {
   DescribeScreenAttackHotspotRequest,
   ScanVulAgainRequest,
   DeleteSearchTemplateRequest,
-  CreateCloudProtectServiceOrderRecordRequest,
   ExportJavaMemShellPluginsResponse,
   DescribeAssetTotalCountResponse,
   ExportNonlocalLoginPlacesRequest,
@@ -1009,7 +1009,6 @@ import {
   ExportBaselineRuleDetectListResponse,
   ABTestConfig,
   ScreenBaselineInfo,
-  DescribeProductStatusRequest,
   ExportBaselineWeakPasswordListRequest,
   Filter,
   DescribeAssetMachineTagTopRequest,
@@ -1190,7 +1189,7 @@ import {
   DescribeBaselineListRequest,
   DescribePublicProxyInstallCommandRequest,
   ExportJavaMemShellsResponse,
-  CreateCloudProtectServiceOrderRecordResponse,
+  DescribeProductStatusRequest,
   DescribeRiskProcessEventsResponse,
   DescribeScreenHostInvasionResponse,
   ExportBaselineFixListResponse,
@@ -1268,7 +1267,7 @@ import {
   DeleteMachineTagResponse,
   UpdateMachineTagsResponse,
   BruteAttackInfo,
-  DescribeAttackVulTypeListResponse,
+  CloudFromCnt,
   DescribeVulFixStatusRequest,
   UpdateMachineTagsRequest,
   DescribeBaselineItemDetectListResponse,
@@ -5263,18 +5262,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLicenseListResponse) => void
   ): Promise<DescribeLicenseListResponse> {
     return this.request("DescribeLicenseList", req, cb)
-  }
-
-  /**
-     * 云护航计费产品已下线
-
-云护航服务使用完成后，该接口可以确认收货
-     */
-  async CreateCloudProtectServiceOrderRecord(
-    req: CreateCloudProtectServiceOrderRecordRequest,
-    cb?: (error: string, rep: CreateCloudProtectServiceOrderRecordResponse) => void
-  ): Promise<CreateCloudProtectServiceOrderRecordResponse> {
-    return this.request("CreateCloudProtectServiceOrderRecord", req, cb)
   }
 
   /**

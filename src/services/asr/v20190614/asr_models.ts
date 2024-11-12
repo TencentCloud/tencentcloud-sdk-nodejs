@@ -1911,15 +1911,15 @@ export interface SentenceWords {
    * 词文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Word: string
+  Word?: string
   /**
    * 在句子中的开始时间偏移量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OffsetStartMs: number
+  OffsetStartMs?: number
   /**
    * 在句子中的结束时间偏移量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OffsetEndMs: number
+  OffsetEndMs?: number
 }

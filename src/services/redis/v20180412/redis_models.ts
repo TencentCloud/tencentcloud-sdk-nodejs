@@ -3760,7 +3760,7 @@ export interface CreateInstanceAccountRequest {
   AccountName: string
   /**
    * 设置自定义账号的密码。密码复杂度要求如下：
-- 字符个数为[8,32]。
+- 字符个数为[8,64]。
 - 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。
 - 不能以"/"开头。
 
@@ -5409,13 +5409,11 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    */
   ZoneId?: number
   /**
-   * 实例分片数量。
-Redis2.8标准架构、CKV标准架构、Redis4.0标准架构无需填写。
+   * 实例分片数量。2.8 标准架构无需配置分片，其余版本标准架构需要配置分片数量为1。集群架构需指定需购买的分片数量。
    */
   RedisShardNum?: number
   /**
-   * 实例副本数量。
-Redis2.8标准架构、CKV标准架构无需填写。
+   * 实例副本数量。2.8 标准架构无需配置副本数量。
    */
   RedisReplicasNum?: number
   /**

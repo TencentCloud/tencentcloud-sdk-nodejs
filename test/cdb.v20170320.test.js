@@ -1468,6 +1468,16 @@ it("cdb.v20170320.CreateCdbProxy", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyDBInstanceReadOnlyStatus", async function () {
+    try {
+       const data = await client.ModifyDBInstanceReadOnlyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyAutoRenewFlag", async function () {
     try {
        const data = await client.ModifyAutoRenewFlag({})

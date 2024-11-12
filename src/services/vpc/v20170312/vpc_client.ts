@@ -471,6 +471,7 @@ import {
   Ipv6Address,
   DescribePrivateNatGatewayTranslationAclRulesResponse,
   CreateNetworkInterfaceRequest,
+  ModifyBandwidthPackageBandwidthRequest,
   BandwidthPackageBillBandwidth,
   DescribePrivateNatGatewayTranslationAclRulesRequest,
   ConflictItem,
@@ -532,6 +533,7 @@ import {
   DeleteVpnGatewayRequest,
   ReplaceRouteTableAssociationResponse,
   AttachCcnInstancesRequest,
+  ModifyBandwidthPackageBandwidthResponse,
   DescribeDirectConnectGatewayCcnRoutesRequest,
   CcnInstance,
   DescribeLocalGatewayResponse,
@@ -4499,6 +4501,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeVpcEndPointServiceWhiteListResponse) => void
   ): Promise<DescribeVpcEndPointServiceWhiteListResponse> {
     return this.request("DescribeVpcEndPointServiceWhiteList", req, cb)
+  }
+
+  /**
+   * 接口用于调整[共享带宽包](https://cloud.tencent.com/document/product/684/15245)(BWP)带宽
+   */
+  async ModifyBandwidthPackageBandwidth(
+    req: ModifyBandwidthPackageBandwidthRequest,
+    cb?: (error: string, rep: ModifyBandwidthPackageBandwidthResponse) => void
+  ): Promise<ModifyBandwidthPackageBandwidthResponse> {
+    return this.request("ModifyBandwidthPackageBandwidth", req, cb)
   }
 
   /**

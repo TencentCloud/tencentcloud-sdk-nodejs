@@ -22,6 +22,7 @@ import {
   CdbZoneSellConf,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
+  ModifyDBInstanceReadOnlyStatusResponse,
   CreateCdbProxyRequest,
   CreateCdbProxyResponse,
   InstanceRollbackRangeTime,
@@ -103,7 +104,7 @@ import {
   DescribeInstanceParamsResponse,
   DeleteDatabaseRequest,
   UploadInfo,
-  NodeDistribution,
+  DisassociateSecurityGroupsRequest,
   AuditRuleFilters,
   SubmitInstanceUpgradeCheckJobRequest,
   ModifyLocalBinlogConfigRequest,
@@ -248,7 +249,6 @@ import {
   CdbSellType,
   MasterInfo,
   ResetRootAccountResponse,
-  DisassociateSecurityGroupsRequest,
   Account,
   ModifyNameOrDescByDpIdResponse,
   DescribeClusterInfoRequest,
@@ -387,12 +387,13 @@ import {
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
   DeleteDeployGroupsResponse,
+  NodeDistribution,
   DescribeTasksRequest,
   ModifyBackupEncryptionStatusRequest,
   DescribeRollbackTaskDetailResponse,
   CreateDBInstanceHourRequest,
   DescribeAuditRuleTemplatesResponse,
-  RollbackInstancesInfo,
+  ModifyDBInstanceReadOnlyStatusRequest,
   CreateCloneInstanceRequest,
   ClusterInfo,
   CloseCDBProxyRequest,
@@ -451,6 +452,7 @@ import {
   ReleaseIsolatedDBInstancesResponse,
   DeleteAuditLogFileRequest,
   Parameter,
+  RollbackInstancesInfo,
   DeleteTimeWindowRequest,
   SwitchCDBProxyResponse,
   RestartDBInstancesRequest,
@@ -516,7 +518,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBFeatures)用于查询云数据库版本属性，包括是否支持数据库加密、数据库审计等功能。
+   * 本接口（DescribeDBFeatures）用于查询云数据库版本属性，包括是否支持数据库加密、数据库审计等功能。
    */
   async DescribeDBFeatures(
     req: DescribeDBFeaturesRequest,
@@ -556,10 +558,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(RestartDBInstances)用于重启云数据库实例。
+     * 本接口（RestartDBInstances）用于重启云数据库实例。
 
 注意：
-1、本接口只支持主实例进行重启操作；
+1、本接口支持主实例、只读实例、灾备实例进行重启操作。
 2、实例状态必须为正常，并且没有其他异步任务在执行中。
      */
   async RestartDBInstances(
@@ -610,7 +612,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止 RO 复制，中断从主实例同步数据。
+   * 本接口（StopReplication）用于停止 RO 复制，中断从主实例同步数据。
    */
   async StopReplication(
     req: StopReplicationRequest,
@@ -680,7 +682,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeInstanceUpgradeType)用于查询数据库实例升级类型。
+   * 本接口（DescribeInstanceUpgradeType）用于查询数据库实例升级类型。
    */
   async DescribeInstanceUpgradeType(
     req: DescribeInstanceUpgradeTypeRequest,
@@ -744,7 +746,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 高可用实例一键迁移到集群版校验
+   * 本接口（CheckMigrateCluster）用于高可用实例一键迁移到集群版校验。
    */
   async CheckMigrateCluster(
     req?: CheckMigrateClusterRequest,
@@ -794,7 +796,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(OpenDBInstanceEncryption)用于启用实例数据存储加密功能，支持用户指定自定义密钥。
+     * 本接口（OpenDBInstanceEncryption）用于启用实例数据存储加密功能，支持用户指定自定义密钥。
 
 注意，启用实例数据存储加密之前，需要进行以下操作：
 
@@ -1083,7 +1085,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(AddTimeWindow)用于添加云数据库实例的维护时间窗口，以指定实例在哪些时间段可以自动执行切换访问操作。
+   * 本接口（AddTimeWindow）用于添加云数据库实例的维护时间窗口，以指定实例在哪些时间段可以自动执行切换访问操作。
    */
   async AddTimeWindow(
     req: AddTimeWindowRequest,
@@ -1382,7 +1384,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SwitchDrInstanceToMaster)用于将云数据库灾备实例切换为主实例，注意请求必须发到灾备实例所在的地域。
+   * 本接口（SwitchDrInstanceToMaster）用于将云数据库灾备实例切换为主实例，注意请求必须发到灾备实例所在的地域。
    */
   async SwitchDrInstanceToMaster(
     req: SwitchDrInstanceToMasterRequest,
@@ -1402,7 +1404,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例基本信息（实例 ID ，实例名称，是否开通加密 ）
+   * 本接口（DescribeDBInstanceInfo）用于查询实例基本信息（实例 ID，实例名称，是否开通加密）。
    */
   async DescribeDBInstanceInfo(
     req: DescribeDBInstanceInfoRequest,
@@ -1412,7 +1414,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeClusterInfo)用于查询集群版实例信息。
+   * 本接口（DescribeClusterInfo）用于查询集群版实例信息。
    */
   async DescribeClusterInfo(
     req: DescribeClusterInfoRequest,
@@ -1482,7 +1484,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启 RO 复制，从主实例同步数据。
+   * 本接口（StartReplication）用于开启 RO 复制，从主实例同步数据。
    */
   async StartReplication(
     req: StartReplicationRequest,
@@ -1592,7 +1594,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBInstanceRebootTime)用于查询云数据库实例重启预计所需的时间。
+   * 本接口（DescribeDBInstanceRebootTime）用于查询云数据库实例重启预计所需的时间。
    */
   async DescribeDBInstanceRebootTime(
     req: DescribeDBInstanceRebootTimeRequest,
@@ -1652,7 +1654,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(DescribeDBPrice)用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
+     * 本接口（DescribeDBPrice）用于查询购买或续费云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。可传入实例名称来查询实例续费价格。
 
 注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
      */
@@ -1970,7 +1972,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyAutoRenewFlag)用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
+   * 本接口（ModifyDBInstanceReadOnlyStatus）用户设置MySQL云数据库实例为只读
+   */
+  async ModifyDBInstanceReadOnlyStatus(
+    req: ModifyDBInstanceReadOnlyStatusRequest,
+    cb?: (error: string, rep: ModifyDBInstanceReadOnlyStatusResponse) => void
+  ): Promise<ModifyDBInstanceReadOnlyStatusResponse> {
+    return this.request("ModifyDBInstanceReadOnlyStatus", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyAutoRenewFlag）用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
    */
   async ModifyAutoRenewFlag(
     req: ModifyAutoRenewFlagRequest,
@@ -2132,7 +2144,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeRoGroups)用于查询云数据库实例的所有的RO组的信息。
+   * 本接口（DescribeRoGroups）用于查询云数据库实例的所有的 RO 组的信息。
    */
   async DescribeRoGroups(
     req: DescribeRoGroupsRequest,
@@ -2152,7 +2164,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例发生的事件信息
+   * 本接口（DescribeInstanceAlarmEvents）用于查询实例发生的事件信息。
    */
   async DescribeInstanceAlarmEvents(
     req?: DescribeInstanceAlarmEventsRequest,

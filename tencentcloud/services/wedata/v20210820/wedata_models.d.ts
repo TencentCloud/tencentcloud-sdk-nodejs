@@ -757,6 +757,43 @@ export interface DescribeRealTimeTaskSpeedRequest {
     ProjectId: string;
 }
 /**
+ * UpdateDataModelRegistryInfo请求参数结构体
+ */
+export interface UpdateDataModelRegistryInfoRequest {
+    /**
+     * 云应用的实例id
+     */
+    CloudappId: string;
+    /**
+     * 数语的CAM角色
+     */
+    AppCamRole: string;
+    /**
+     * 数语的ip
+     */
+    Vip: string;
+    /**
+     * 数语的端口
+     */
+    Vport: number;
+    /**
+     * 数语的CAM角色id
+     */
+    AppCamRoleId?: string;
+    /**
+     * 服务提供方
+     */
+    Provider?: string;
+    /**
+     * 租户id
+     */
+    TenantId?: string;
+    /**
+     * 主账号id
+     */
+    OwnId?: string;
+}
+/**
  * 批量操作出参
  */
 export interface BatchTaskOperateNew {
@@ -5538,6 +5575,19 @@ export interface DescribeRuleTemplateResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: RuleTemplate;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateDataModel返回参数结构体
+ */
+export interface CreateDataModelResponse {
+    /**
+     * “Wedata数据建模”的实例id
+     */
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10865,6 +10915,19 @@ export interface BatchResultDs {
     Total?: number;
 }
 /**
+ * DeleteDataModel返回参数结构体
+ */
+export interface DeleteDataModelResponse {
+    /**
+     * 是否销毁成功
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeIntegrationNode请求参数结构体
  */
 export interface DescribeIntegrationNodeRequest {
@@ -14722,6 +14785,19 @@ export interface ModifyApproveStatusRequest {
      * 状态
      */
     Status?: string;
+}
+/**
+ * UpdateDataModelRegistryInfo返回参数结构体
+ */
+export interface UpdateDataModelRegistryInfoResponse {
+    /**
+     * 数语向wedata注册成功
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeOperateOpsTasks返回参数结构体
@@ -20942,6 +21018,35 @@ export interface DescribeIntegrationTaskResponse {
     RequestId?: string;
 }
 /**
+ * CreateDataModel请求参数结构体
+ */
+export interface CreateDataModelRequest {
+    /**
+     * 云应用的实例id
+     */
+    CloudappId: string;
+    /**
+     * 用户的子账号id
+     */
+    UserId: string;
+    /**
+     * Wedata数据建模购买参数，包年包月类型单位，年：y，月：m，默认m
+     */
+    TimeUnit?: string;
+    /**
+     * Wedata数据建模购买参数，购买时长，默认1
+     */
+    TimeSpan?: number;
+    /**
+     * Wedata数据建模购买参数，是否自动续费，是：1，否：0，默认0
+     */
+    AutoRenewFlag?: number;
+    /**
+     * Wedata数据建模购买参数，标准版：DATA_MODEL_STANDARD，企业版：DATA_MODEL_PRO，默认DATA_MODEL_STANDARD
+     */
+    DataModelVersion?: string;
+}
+/**
  * DescribeQualityScoreTrend返回参数结构体
  */
 export interface DescribeQualityScoreTrendResponse {
@@ -22316,6 +22421,23 @@ export interface RuleGroupPage {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Items: Array<RuleGroup>;
+}
+/**
+ * DeleteDataModel请求参数结构体
+ */
+export interface DeleteDataModelRequest {
+    /**
+     * 云应用的实例id
+     */
+    CloudappId: string;
+    /**
+     * 数据建模的实例id
+     */
+    DataModelId: string;
+    /**
+     * 用户的子账号id
+     */
+    UserId: string;
 }
 /**
  * DescribeApproveList返回参数结构体

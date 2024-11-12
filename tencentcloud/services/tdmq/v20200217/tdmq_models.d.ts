@@ -3899,11 +3899,11 @@ export interface DescribeRabbitMQVipInstancesResponse {
     /**
      * 未分页的总数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例信息列表
      */
-    Instances: Array<RabbitMQVipInstance>;
+    Instances?: Array<RabbitMQVipInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

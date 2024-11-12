@@ -235,6 +235,16 @@ export interface DescribeDatabasesRequest {
 }
 
 /**
+ * ModifyDBInstanceReadOnlyStatus返回参数结构体
+ */
+export interface ModifyDBInstanceReadOnlyStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCdbProxy请求参数结构体
  */
 export interface CreateCdbProxyRequest {
@@ -479,10 +489,20 @@ export interface ModifyTimeWindowRequest {
   InstanceId: string
   /**
    * 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。
+说明：设置两个时间段的 json 示例如下。
+[
+    "01:00-01:30",
+    "02:00-02:30"
+  ]
    */
   TimeRanges: Array<string>
   /**
-   * 指定修改哪一天的客户时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
+   * 指定修改哪一天的可维护时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
+说明：指定修改多天的 json 示例如下。
+[
+    "monday",
+    "tuesday"
+  ]
    */
   Weekdays?: Array<string>
   /**
@@ -1035,7 +1055,7 @@ export interface ReadWriteNode {
  */
 export interface DescribeRoGroupsRequest {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv或者cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
 }
@@ -1045,11 +1065,11 @@ export interface DescribeRoGroupsRequest {
  */
 export interface DescribeInstanceUpgradeTypeResponse {
   /**
-   * 实例id
+   * 实例 ID。
    */
   InstanceId?: string
   /**
-   * 实例升级类型
+   * 实例升级类型。
    */
   UpgradeType?: string
   /**
@@ -1959,7 +1979,7 @@ export interface SwitchDBInstanceMasterSlaveRequest {
    */
   WaitSwitch?: boolean
   /**
-   * 集群版实例指定节点id发起主从切换。
+   * 集群版实例指定节点 ID 发起主从切换。
    */
   DstNodeId?: string
 }
@@ -2004,6 +2024,11 @@ export interface ModifyCdbProxyAddressVipAndVPortRequest {
 export interface ModifyAutoRenewFlagRequest {
   /**
    * 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+说明：可输入多个实例 ID 进行修改，json 格式如下。
+[
+    "cdb-30z11v8s",
+    "cdb-93h11efg"
+  ]
    */
   InstanceIds: Array<string>
   /**
@@ -2188,21 +2213,21 @@ export interface UploadInfo {
 }
 
 /**
- * 独享集群CDB实例的节点分布情况
+ * DisassociateSecurityGroups请求参数结构体
  */
-export interface NodeDistribution {
+export interface DisassociateSecurityGroupsRequest {
   /**
-   * 主实例Master节点所在主机ID或者只读实例所在主机ID
+   * 安全组 ID。
    */
-  Node: string
+  SecurityGroupId: string
   /**
-   * 主实例第一Slave节点所在主机ID
+   * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
    */
-  SlaveNodeOne: string
+  InstanceIds: Array<string>
   /**
-   * 主实例第二Slave节点所在主机ID
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
-  SlaveNodeTwo: string
+  ForReadonlyInstance?: boolean
 }
 
 /**
@@ -2221,11 +2246,11 @@ export interface AuditRuleFilters {
  */
 export interface SubmitInstanceUpgradeCheckJobRequest {
   /**
-   * 实例D
+   * 实例 ID。
    */
   InstanceId: string
   /**
-   * 目标数据库版本
+   * 目标数据库版本。
    */
   DstMysqlVersion: string
 }
@@ -2327,15 +2352,15 @@ export interface ReleaseResult {
   /**
    * 实例 ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例解隔离操作的结果值。返回值为0表示成功。
    */
-  Code: number
+  Code?: number
   /**
    * 实例解隔离操作的错误信息。
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -2566,30 +2591,30 @@ export interface DescribeDBInstanceInfoResponse {
   /**
    * 实例 ID 。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 是否开通加密，YES 已开通，NO 未开通。
    */
-  Encryption: string
+  Encryption?: string
   /**
    * 加密使用的密钥 ID 。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyId: string
+  KeyId?: string
   /**
    * 密钥所在地域。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyRegion: string
+  KeyRegion?: string
   /**
    * 当前 CDB 后端服务使用的 KMS 服务的默认地域。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultKmsRegion: string
+  DefaultKmsRegion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2679,7 +2704,7 @@ export interface DescribeDBFeaturesResponse {
  */
 export interface SubmitInstanceUpgradeCheckJobResponse {
   /**
-   * 任务ID
+   * 任务 ID
    */
   JobId?: number
   /**
@@ -2993,7 +3018,12 @@ export interface ModifyAccountPasswordResponse {
  */
 export interface ReleaseIsolatedDBInstancesRequest {
   /**
-   * 实例 ID 数组，单个实例 ID 格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 实例 ID，单个实例 ID 格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+说明：可输入多个实例 ID 进行操作，json 格式如下。
+[
+    "cdb-30z11v8s",
+    "cdb-93h11efg"
+  ]
    */
   InstanceIds: Array<string>
 }
@@ -3100,7 +3130,7 @@ export interface DescribeErrorLogDataResponse {
  */
 export interface AddTimeWindowRequest {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
   /**
@@ -3132,7 +3162,7 @@ export interface AddTimeWindowRequest {
    */
   Sunday?: Array<string>
   /**
-   * 最大延迟阈值，仅对主实例和灾备实例有效
+   * 最大延迟阈值，仅对主实例和灾备实例有效。
    */
   MaxDelayTime?: number
 }
@@ -3263,11 +3293,11 @@ export interface DescribeDBSwitchRecordsResponse {
   /**
    * 实例切换记录的总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例切换记录详情。
    */
-  Items: Array<DBSwitchInfo>
+  Items?: Array<DBSwitchInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3371,7 +3401,7 @@ export interface DescribeDBSwitchRecordsRequest {
    */
   Offset?: number
   /**
-   * 分页大小，默认值为 50，最小值为 1，最大值为 2000。
+   * 分页大小，默认值为50，最小值为1，最大值为1000。
    */
   Limit?: number
 }
@@ -3971,51 +4001,51 @@ export interface DescribeDeviceMonitorInfoRequest {
  */
 export interface DescribeInstanceUpgradeTypeRequest {
   /**
-   * 实例id
+   * 实例 ID。
    */
   InstanceId: string
   /**
-   * 目标实例cpu
+   * 目标实例 CPU 的核数。
    */
   DstCpu: number
   /**
-   * 目标实例内存
+   * 目标实例内存大小，单位：MB。
    */
   DstMemory: number
   /**
-   * 目标实例磁盘
+   * 目标实例磁盘大小，单位：GB。
    */
   DstDisk: number
   /**
-   * 目标实例版本
+   * 目标实例数据库版本。
    */
   DstVersion?: string
   /**
-   * 目标实例部署模型
+   * 目标实例部署模型。
    */
   DstDeployMode?: number
   /**
-   * 目标实例复制类型
+   * 目标实例复制类型。
    */
   DstProtectMode?: number
   /**
-   * 目标实例备机1可用区
+   * 目标实例备机1可用区。
    */
   DstSlaveZone?: number
   /**
-   * 目标实例备机2可用区
+   * 目标实例备机2可用区。
    */
   DstBackupZone?: number
   /**
-   * 目标实例类型
+   * 目标实例类型。
    */
   DstCdbType?: string
   /**
-   * 目标实例主可用区
+   * 目标实例主可用区。
    */
   DstZoneId?: number
   /**
-   * 独享集群CDB实例的节点分布情况
+   * 独享集群 CDB 实例的节点分布情况。
    */
   NodeDistribution?: NodeDistribution
   /**
@@ -4243,7 +4273,7 @@ export interface SwitchDrInstanceToMasterResponse {
   /**
    * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4361,11 +4391,11 @@ export interface OpenDBInstanceEncryptionRequest {
    */
   InstanceId: string
   /**
-   * 用户自定义密钥ID，CMK唯一标识符。该值为空时，将使用腾讯云自动生成的密钥KMS-CDB。
+   * 用户自定义密钥 ID，CMK 唯一标识符。该值为空时，将使用腾讯云自动生成的密钥 KMS-CDB。
    */
   KeyId?: string
   /**
-   * 用户自定义密钥的存储地域。如：ap-guangzhou 。KeyId不为空时，该参数必填。
+   * 用户自定义密钥的存储地域。如：ap-guangzhou 。KeyId 不为空时，该参数必填。
    */
   KeyRegion?: string
 }
@@ -5268,6 +5298,11 @@ export interface DescribeAuditLogFilesResponse {
 export interface DescribeDBInstanceRebootTimeRequest {
   /**
    * 实例的 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+说明：可输入多个实例 ID 进行查询，json 格式如下。
+[
+    "cdb-30z11v8s",
+    "cdb-93h11efg"
+  ]
    */
   InstanceIds: Array<string>
 }
@@ -5427,24 +5462,6 @@ export interface ResetRootAccountResponse {
 }
 
 /**
- * DisassociateSecurityGroups请求参数结构体
- */
-export interface DisassociateSecurityGroupsRequest {
-  /**
-   * 安全组 ID。
-   */
-  SecurityGroupId: string
-  /**
-   * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
-   */
-  ForReadonlyInstance?: boolean
-}
-
-/**
  * 数据库账号信息
  */
 export interface Account {
@@ -5475,7 +5492,7 @@ export interface ModifyNameOrDescByDpIdResponse {
  */
 export interface DescribeClusterInfoRequest {
   /**
-   * 实例id。
+   * 实例 ID。
    */
   InstanceId: string
 }
@@ -5623,11 +5640,11 @@ export interface DescribeDBInstanceRebootTimeResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 返回的参数信息。
    */
-  Items: Array<InstanceRebootTime>
+  Items?: Array<InstanceRebootTime>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5639,7 +5656,7 @@ export interface DescribeDBInstanceRebootTimeResponse {
  */
 export interface SwitchDrInstanceToMasterRequest {
   /**
-   * 灾备实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   * 灾备实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
 }
@@ -6940,7 +6957,7 @@ export interface StartReplicationResponse {
    * 异步任务 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7182,9 +7199,9 @@ export interface TaskAttachInfo {
  */
 export interface DescribeRoGroupsResponse {
   /**
-   * RO组信息数组，一个实例可关联多个RO组。
+   * RO 组信息数组，一个实例可关联多个 RO 组。
    */
-  RoGroups: Array<RoGroup>
+  RoGroups?: Array<RoGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7657,7 +7674,7 @@ export interface StopReplicationResponse {
    * 异步任务 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7713,7 +7730,7 @@ export interface DescribeDataBackupOverviewRequest {
  */
 export interface DescribeDBInstanceInfoRequest {
   /**
-   * 实例 ID 。
+   * 实例 ID。
    */
   InstanceId: string
 }
@@ -7737,11 +7754,16 @@ export interface BackupLimitVpcItem {
  */
 export interface ModifyDBInstanceProjectRequest {
   /**
-   * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+说明：可输入多个实例 ID 进行修改，json 格式如下。
+[
+    "cdb-30z11v8s",
+    "cdb-93h11efg"
+  ]
    */
   InstanceIds: Array<string>
   /**
-   * 项目的 ID。
+   * 实例所属项目的 ID，可在账号中心下的项目管理页面查询。
    */
   NewProjectId?: number
 }
@@ -8372,12 +8394,14 @@ export interface DeleteParamTemplateResponse {
 export interface DBSwitchInfo {
   /**
    * 切换时间，格式为：2017-09-03 01:34:31
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SwitchTime: string
+  SwitchTime?: string
   /**
    * 切换类型，可能的返回值为：TRANSFER - 数据迁移；MASTER2SLAVE - 主备切换；RECOVERY - 主从恢复
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SwitchType: string
+  SwitchType?: string
 }
 
 /**
@@ -8705,6 +8729,24 @@ export interface DeleteDeployGroupsResponse {
 }
 
 /**
+ * 独享集群CDB实例的节点分布情况
+ */
+export interface NodeDistribution {
+  /**
+   * 主实例Master节点所在主机ID或者只读实例所在主机ID
+   */
+  Node: string
+  /**
+   * 主实例第一Slave节点所在主机ID
+   */
+  SlaveNodeOne: string
+  /**
+   * 主实例第二Slave节点所在主机ID
+   */
+  SlaveNodeTwo: string
+}
+
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -8987,32 +9029,17 @@ export interface DescribeAuditRuleTemplatesResponse {
 }
 
 /**
- * 用于回档的实例详情
+ * ModifyDBInstanceReadOnlyStatus请求参数结构体
  */
-export interface RollbackInstancesInfo {
+export interface ModifyDBInstanceReadOnlyStatusRequest {
   /**
-   * 云数据库实例ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
   /**
-   * 回档策略。可选值为：table、db、full；默认值为full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
+   * 是否设置为只读。其中：1表示设置实例为只读，0表示解除只读状态
    */
-  Strategy: string
-  /**
-   * 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss
-   */
-  RollbackTime: string
-  /**
-   * 待回档的数据库信息，表示整库回档
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Databases?: Array<RollbackDBName>
-  /**
-   * 待回档的数据库表信息，表示按表回档
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tables?: Array<RollbackTables>
+  ReadOnly: number
 }
 
 /**
@@ -9686,11 +9713,11 @@ export interface DescribeDBPriceRequest {
    */
   GoodsNum?: number
   /**
-   * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
+   * 实例内存大小，单位：MB。InstanceId 为空时该参数为必填项。为保证传入值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的实例内存大小范围。
    */
   Memory?: number
   /**
-   * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
+   * 实例硬盘大小，单位：GB。InstanceId 为空时该参数为必填项。为保证传入值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的硬盘大小范围。
    */
   Volume?: number
   /**
@@ -9921,12 +9948,14 @@ export interface DescribeCpuExpandStrategyResponse {
 export interface InstanceRebootTime {
   /**
    * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 预期重启时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeInSeconds: number
+  TimeInSeconds?: number
 }
 
 /**
@@ -10289,6 +10318,35 @@ export interface Parameter {
    * 参数值
    */
   CurrentValue?: string
+}
+
+/**
+ * 用于回档的实例详情
+ */
+export interface RollbackInstancesInfo {
+  /**
+   * 云数据库实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId: string
+  /**
+   * 回档策略。可选值为：table、db、full；默认值为full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
+   */
+  Strategy: string
+  /**
+   * 数据库回档时间，时间格式为：yyyy-mm-dd hh:mm:ss
+   */
+  RollbackTime: string
+  /**
+   * 待回档的数据库信息，表示整库回档
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Databases?: Array<RollbackDBName>
+  /**
+   * 待回档的数据库表信息，表示按表回档
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<RollbackTables>
 }
 
 /**

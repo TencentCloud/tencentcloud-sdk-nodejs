@@ -488,6 +488,16 @@ it("wedata.v20210820.DeleteRuleTemplate", async function () {
     }
 })
 
+it("wedata.v20210820.UpdateDataModelRegistryInfo", async function () {
+    try {
+       const data = await client.UpdateDataModelRegistryInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeApproveList", async function () {
     try {
        const data = await client.DescribeApproveList({})
@@ -2288,6 +2298,16 @@ it("wedata.v20210820.DescribeTableMeta", async function () {
     }
 })
 
+it("wedata.v20210820.CreateDataModel", async function () {
+    try {
+       const data = await client.CreateDataModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.GetIntegrationNodeColumnSchema", async function () {
     try {
        const data = await client.GetIntegrationNodeColumnSchema({})
@@ -2371,6 +2391,16 @@ it("wedata.v20210820.BatchStopWorkflowsByIds", async function () {
 it("wedata.v20210820.DescribeDrInstancePage", async function () {
     try {
        const data = await client.DescribeDrInstancePage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DeleteDataModel", async function () {
+    try {
+       const data = await client.DeleteDataModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

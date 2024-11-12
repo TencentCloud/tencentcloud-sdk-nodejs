@@ -33,13 +33,12 @@ import {
   ControlRecordTimelineRequest,
   DeleteOrganizationRequest,
   OperTimeSlot,
-  CheckDomainResponse,
   SetForbidPlayChannelsRequest,
   SubTaskData,
   DescribeCNAMEResponse,
   ISAPIOutputData,
   UpdateOrganizationResponse,
-  AddOrgData,
+  DescribeDeviceData,
   ListAITasksResponse,
   AIConfig,
   UpdateDeviceOrganizationRequest,
@@ -153,7 +152,7 @@ import {
   ControlRecordRequest,
   ControlDevicePTZResponse,
   ListRecordBackupPlansRequest,
-  DescribeDeviceData,
+  AddOrgData,
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
   GatewayDevice,
@@ -196,7 +195,6 @@ import {
   PlayRecordRequest,
   UpdateRecordBackupTemplateModify,
   QueryForbidPlayChannelListRequest,
-  CheckDomainRequest,
   PlateContent,
   UpgradeGatewayRequest,
   DescribeRecordFileResponse,
@@ -362,13 +360,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于新建取回任务
+   * 用于删除录像上云模板。
    */
-  async AddRecordRetrieveTask(
-    req: AddRecordRetrieveTaskRequest,
-    cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void
-  ): Promise<AddRecordRetrieveTaskResponse> {
-    return this.request("AddRecordRetrieveTask", req, cb)
+  async DeleteRecordBackupTemplate(
+    req: DeleteRecordBackupTemplateRequest,
+    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
+  ): Promise<DeleteRecordBackupTemplateResponse> {
+    return this.request("DeleteRecordBackupTemplate", req, cb)
   }
 
   /**
@@ -400,16 +398,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewayProtocolResponse) => void
   ): Promise<DescribeGatewayProtocolResponse> {
     return this.request("DescribeGatewayProtocol", req, cb)
-  }
-
-  /**
-   * 用于获取云端录像回放url地址
-   */
-  async DescribeRecordPlaybackUrl(
-    req: DescribeRecordPlaybackUrlRequest,
-    cb?: (error: string, rep: DescribeRecordPlaybackUrlResponse) => void
-  ): Promise<DescribeRecordPlaybackUrlResponse> {
-    return this.request("DescribeRecordPlaybackUrl", req, cb)
   }
 
   /**
@@ -613,13 +601,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于删除录像上云模板。
+   * 用于新建取回任务
    */
-  async DeleteRecordBackupTemplate(
-    req: DeleteRecordBackupTemplateRequest,
-    cb?: (error: string, rep: DeleteRecordBackupTemplateResponse) => void
-  ): Promise<DeleteRecordBackupTemplateResponse> {
-    return this.request("DeleteRecordBackupTemplate", req, cb)
+  async AddRecordRetrieveTask(
+    req: AddRecordRetrieveTaskRequest,
+    cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void
+  ): Promise<AddRecordRetrieveTaskResponse> {
+    return this.request("AddRecordRetrieveTask", req, cb)
   }
 
   /**
@@ -673,13 +661,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于检测域名是否备案。
+   * 用于获取云端录像回放url地址
    */
-  async CheckDomain(
-    req: CheckDomainRequest,
-    cb?: (error: string, rep: CheckDomainResponse) => void
-  ): Promise<CheckDomainResponse> {
-    return this.request("CheckDomain", req, cb)
+  async DescribeRecordPlaybackUrl(
+    req: DescribeRecordPlaybackUrlRequest,
+    cb?: (error: string, rep: DescribeRecordPlaybackUrlResponse) => void
+  ): Promise<DescribeRecordPlaybackUrlResponse> {
+    return this.request("DescribeRecordPlaybackUrl", req, cb)
   }
 
   /**
