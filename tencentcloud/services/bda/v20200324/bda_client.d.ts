@@ -33,7 +33,6 @@ export declare class Client extends AbstractClient {
     DetectBody(req: DetectBodyRequest, cb?: (error: string, rep: DetectBodyResponse) => void): Promise<DetectBodyResponse>;
     /**
      * 即二分类人像分割，识别传入图片中人体的完整轮廓，进行抠像。
-
      */
     SegmentPortraitPic(req: SegmentPortraitPicRequest, cb?: (error: string, rep: SegmentPortraitPicResponse) => void): Promise<SegmentPortraitPicResponse>;
     /**

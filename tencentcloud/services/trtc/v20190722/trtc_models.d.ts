@@ -295,6 +295,11 @@ export interface STTConfig {
      */
     AlternativeLanguage?: Array<string>;
     /**
+     * 自定义参数，联系后台使用
+  
+     */
+    CustomParam?: string;
+    /**
      * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
      */
     VadSilenceTime?: number;
@@ -1229,6 +1234,25 @@ export interface EncodeParams {
      * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过2MB。
      */
     BackgroundImageUrl?: string;
+}
+/**
+ * 渲染移动模式参数，不渲染移动模式时，请勿设置此参数。
+ */
+export interface EmulateMobileParams {
+    /**
+     * 移动设备类型，
+  0: 手机
+  1: 平板
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MobileDeviceType?: number;
+    /**
+     * 屏幕方向，
+  0: 竖屏，
+  1: 横屏
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScreenOrientation?: number;
 }
 /**
  * DescribeCallDetailInfo返回参数结构体
@@ -3254,7 +3278,6 @@ export interface DescribeCloudRecordingResponse {
     Status?: string;
     /**
      * 录制文件信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageFileList?: Array<StorageFile>;
     /**
@@ -3467,6 +3490,10 @@ export interface StartWebRecordRequest {
      * 录制页面资源加载的超时时间，单位：秒。默认值为 0 秒，该值需大于等于 0秒，且小于等于 60秒。录制页面未启用页面加载超时检测时，请勿设置此参数。
      */
     ReadyTimeout?: number;
+    /**
+     * 渲染移动模式参数；不准备渲染移动模式页面时，请勿设置此参数。
+     */
+    EmulateMobileParams?: EmulateMobileParams;
 }
 /**
  * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。

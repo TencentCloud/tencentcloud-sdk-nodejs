@@ -4078,16 +4078,6 @@ it("cwp.v20180228.DescribeVulLabels", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeCloudProtectServiceOrderList", async function () {
-    try {
-       const data = await client.DescribeCloudProtectServiceOrderList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.StopBaselineDetect", async function () {
     try {
        const data = await client.StopBaselineDetect({})

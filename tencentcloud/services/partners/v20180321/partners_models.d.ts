@@ -5,50 +5,47 @@ export interface AgentClientElem {
     /**
      * 代理商账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 代客账号ID
      */
-    ClientUin: string;
+    ClientUin?: string;
     /**
      * 代客申请时间戳
      */
-    ApplyTime: number;
+    ApplyTime?: number;
     /**
-     * 代客类型，可能值为a/b/c
+     * 代客类型，可能值为a/b/c/other
      */
-    ClientFlag: string;
+    ClientFlag?: string;
     /**
      * 代客邮箱，打码显示
      */
-    Mail: string;
+    Mail?: string;
     /**
      * 代客手机，打码显示
      */
-    Phone: string;
+    Phone?: string;
     /**
      * 0表示不欠费，1表示欠费
      */
-    HasOverdueBill: number;
+    HasOverdueBill?: number;
     /**
      * 1:待代理商审核;2:待腾讯云审核4:待腾讯云渠道审批
      */
-    Status: number;
+    Status?: number;
     /**
      * 业务员ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SalesUin: string;
+    SalesUin?: string;
     /**
      * 业务员姓名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SalesName: string;
+    SalesName?: string;
     /**
      * 客户名称，此字段和控制台返回一致。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientName: string;
+    ClientName?: string;
 }
 /**
  * DescribeSalesmans请求参数结构体
@@ -165,11 +162,11 @@ export interface DescribeRebateInfosNewResponse {
     /**
      * 返佣信息列表
      */
-    RebateInfoSet: Array<RebateInfoElemNew>;
+    RebateInfoSet?: Array<RebateInfoElemNew>;
     /**
      * 符合查询条件返佣信息数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -199,19 +196,19 @@ export interface DescribeAgentClientGradeResponse {
     /**
      * 审核状态：0待审核，1，已审核
      */
-    AuditStatus: number;
+    AuditStatus?: number;
     /**
      * 实名认证状态：0，未实名认证，1实名认证
      */
-    AuthState: number;
+    AuthState?: number;
     /**
      * 客户级别
      */
-    ClientGrade: string;
+    ClientGrade?: string;
     /**
      * 客户类型：1，个人；2，企业；3，其他
      */
-    ClientType: number;
+    ClientType?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -240,28 +237,34 @@ export interface DescribeAgentDealsByCacheResponse {
 export interface RebateInfoElem {
     /**
      * 代理商账号ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 返佣月份，如2018-02
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RebateMonth: string;
+    RebateMonth?: string;
     /**
      * 返佣金额，单位分
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Amt: number;
+    Amt?: number;
     /**
      * 月度业绩，单位分
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MonthSales: number;
+    MonthSales?: number;
     /**
      * 季度业绩，单位分
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    QuarterSales: number;
+    QuarterSales?: number;
     /**
      * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExceptionFlag: string;
+    ExceptionFlag?: string;
 }
 /**
  * DescribeAgentPayDealsV2返回参数结构体
@@ -341,11 +344,11 @@ export interface ProductInfoElem {
     /**
      * 产品属性
      */
-    Name: string;
+    Name?: string;
     /**
      * 产品属性值
      */
-    Value: string;
+    Value?: string;
 }
 /**
  * 解绑客户信息
@@ -354,25 +357,23 @@ export interface UnbindClientElem {
     /**
      * 解绑账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 状态：0:审核中；1：已解绑；2：已撤销 3：关联撤销 4: 已驳回
      */
-    Status: number;
+    Status?: number;
     /**
      * 申请时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplyTime: string;
+    ApplyTime?: string;
     /**
      * 解绑/撤销时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActionTime: string;
+    ActionTime?: string;
 }
 /**
  * RemovePayRelationForClient返回参数结构体
@@ -425,11 +426,11 @@ export interface DescribeAgentAuditedClientsResponse {
     /**
      * 已审核代客列表
      */
-    AgentClientSet: Array<AgentAuditedClient>;
+    AgentClientSet?: Array<AgentAuditedClient>;
     /**
      * 符合条件的代客总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -442,11 +443,11 @@ export interface DescribeAgentBillsResponse {
     /**
      * 符合查询条件列表总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 业务明细列表
      */
-    AgentBillSet: Array<AgentBillElem>;
+    AgentBillSet?: Array<AgentBillElem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -485,11 +486,11 @@ export interface DescribeAgentClientsResponse {
     /**
      * 待审核代客列表
      */
-    AgentClientSet: Array<AgentClientElem>;
+    AgentClientSet?: Array<AgentClientElem>;
     /**
      * 符合条件的代客总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -517,137 +518,110 @@ export interface AgentDealNewElem {
     OwnerUin?: string;
     /**
      * 订单所有者对应 appId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 商品数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsNum?: string;
     /**
      * 价格详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsPrice?: DealGoodsPriceNewElem;
     /**
      * 下单人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Creater?: string;
     /**
      * 下单时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatTime?: string;
     /**
      * 支付结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayEndTime?: string;
     /**
      * 扣费流水号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillId?: string;
     /**
      * 支付人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Payer?: string;
     /**
      * 订单状态，中文描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DealStatus?: string;
     /**
      * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GoodsName?: string;
     /**
      * 客户备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientRemark?: string;
     /**
      * 订单操作类型，"purchase":"新购","upgrade":"升配","upConvertExpire":"升配","downgrade":"降配","downConvertExpire":"降配","renew":"续费","refund":"退货","modifyNetworkMode":"调整带宽模式","modifyNetworkSize":"调整带宽大小","preMoveOut":"资源迁出","preMoveIn":"资源迁入","preToPost":"包年包月转按量","modify":"变配","postMoveOut":"资源迁出","postMoveIn":"资源迁入","recoverRefundForward":"调账补偿","recoverPayReserve":"调账补偿","recoverPayForward":"调账扣费","recoverRefundReserve":"调账扣费"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionType?: string;
     /**
      * 代金券抵扣金额，单位分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VoucherDecline?: string;
     /**
      * 大订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BigDealId?: string;
     /**
      * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientType?: string;
     /**
      * 项目类型（self：自拓；repeat：直销；platform：官网合作）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectType?: string;
     /**
      * 业务员账号ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SalesUin?: string;
     /**
      * 支付方式，0：自付；1：代付
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayerMode?: string;
     /**
      * 活动ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActivityId?: string;
     /**
      * 订单过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OverdueTime?: string;
     /**
      * 产品详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductInfo?: Array<ProductInfoElem>;
     /**
      * 付款方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PaymentMethod?: string;
     /**
      * 订单更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 资源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: Array<string>;
     /**
      * 退款单的原订单信息。当前仅 DescribeClientDealsByCache 接口会返回该字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RefundMap?: Array<RefundMap>;
     /**
      * 子产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubGoodsName?: string;
 }
@@ -694,7 +668,6 @@ export interface DescribeAgentClientsRequest {
 export interface DescribeAgentRelateBigDealIdsResponse {
     /**
      * 申请合并支付的关联大订单号列表（不包含请求的订单号）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BigDealIdList?: Array<string>;
     /**
@@ -750,11 +723,11 @@ export interface DescribeSalesmansResponse {
     /**
      * 业务员列表
      */
-    AgentSalesmanSet: Array<AgentSalesmanElem>;
+    AgentSalesmanSet?: Array<AgentSalesmanElem>;
     /**
      * 符合条件的代客总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -818,22 +791,18 @@ export interface AgentAuditedClient {
     ProjectType?: string;
     /**
      * 业务员ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SalesUin?: string;
     /**
      * 业务员姓名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SalesName?: string;
     /**
      * 代客邮箱
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mail?: string;
     /**
      * 交易类型:交易类型 1-原类型 2-代理型  3-代采型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransactionType?: string;
 }
@@ -953,11 +922,11 @@ export interface DescribeUnbindClientListResponse {
     /**
      * 符合条件的解绑客户数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 符合条件的解绑客户列表
      */
-    UnbindClientList: Array<UnbindClientElem>;
+    UnbindClientList?: Array<UnbindClientElem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -986,12 +955,10 @@ export interface DescribeAgentSelfPayDealsV2Response {
 export interface AssignClientsToSalesResponse {
     /**
      * 处理成功的代客uin列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SucceedUins?: Array<string>;
     /**
      * 处理失败的代客uin列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedUins?: Array<string>;
     /**
@@ -1006,58 +973,55 @@ export interface AgentBillElem {
     /**
      * 代理商账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 订单号，仅对预付费账单有意义
      */
-    OrderId: string;
+    OrderId?: string;
     /**
      * 代客账号ID
      */
-    ClientUin: string;
+    ClientUin?: string;
     /**
      * 代客备注名称
      */
-    ClientRemark: string;
+    ClientRemark?: string;
     /**
      * 支付时间
      */
-    PayTime: string;
+    PayTime?: string;
     /**
      * 云产品名称
      */
-    GoodsType: string;
+    GoodsType?: string;
     /**
      * 预付费/后付费
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 支付月份
      */
-    SettleMonth: string;
+    SettleMonth?: string;
     /**
      * 支付金额，单位分
      */
-    Amt: number;
+    Amt?: number;
     /**
      * agentpay：代付；selfpay：自付
      */
-    PayerMode: string;
+    PayerMode?: string;
     /**
      * 客户类型：可以为new(自拓)/assign(指定)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientType: string;
+    ClientType?: string;
     /**
      * 项目类型：可以为self(自拓项目)/platform(合作项目)/repeat(复算项目  )/空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectType: string;
+    ProjectType?: string;
     /**
      * 活动ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActivityId: string;
+    ActivityId?: string;
 }
 /**
  * AuditApplyClient返回参数结构体
@@ -1066,20 +1030,19 @@ export interface AuditApplyClientResponse {
     /**
      * 代理商账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 客户账号ID
      */
-    ClientUin: string;
+    ClientUin?: string;
     /**
      * 审核结果，包括accept/reject/qcloudaudit（腾讯云审核）
      */
-    AuditResult: string;
+    AuditResult?: string;
     /**
      * 关联时间对应的时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AgentTime: number;
+    AgentTime?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1133,12 +1096,10 @@ export interface AgentPayDealsResponse {
 export interface RefundMap {
     /**
      * 退款单关联的原始子订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DealName?: string;
     /**
      * 退款金额，单位分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RefundAmount?: number;
 }
@@ -1149,19 +1110,19 @@ export interface AgentSalesmanElem {
     /**
      * 代理商账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 业务员ID
      */
-    SalesUin: string;
+    SalesUin?: string;
     /**
      * 业务员姓名
      */
-    SalesName: string;
+    SalesName?: string;
     /**
      * 业务员创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * DescribeClientBalanceNew请求参数结构体
@@ -1218,27 +1179,27 @@ export interface RebateInfoElemNew {
     /**
      * 代理商账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 返佣月份，如2018-02
      */
-    RebateMonth: string;
+    RebateMonth?: string;
     /**
      * 返佣金额，单位分
      */
-    Amt: number;
+    Amt?: number;
     /**
      * 月度业绩，单位分
      */
-    MonthSales: number;
+    MonthSales?: number;
     /**
      * 季度业绩，单位分
      */
-    QuarterSales: number;
+    QuarterSales?: number;
     /**
      * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
      */
-    ExceptionFlag: string;
+    ExceptionFlag?: string;
 }
 /**
  * AssignClientsToSales请求参数结构体

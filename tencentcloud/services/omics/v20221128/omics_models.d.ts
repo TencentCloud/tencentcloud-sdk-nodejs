@@ -210,7 +210,6 @@ export interface GetRunMetadataFileResponse {
 export interface CreateVolumeResponse {
     /**
      * 缓存卷ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VolumeId?: string;
     /**
@@ -289,12 +288,10 @@ export interface Environment {
     ResourceIds?: ResourceIds;
     /**
      * 上个工作流UUID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastWorkflowUuid?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreationTime?: string;
 }
@@ -594,12 +591,10 @@ export interface ModifyVolumeResponse {
 export interface LimitRange {
     /**
      * 最大CPU设置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxCPU?: string;
     /**
      * 最大内存设置（单位：Mi，Gi，Ti，M，G，T）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxMemory?: string;
 }
@@ -651,17 +646,14 @@ export interface VPCOption {
 export interface ResourceQuota {
     /**
      * CPU Limit设置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CPULimit?: string;
     /**
      * 内存Limit设置（单位：Mi，Gi，Ti，M，G，T）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemoryLimit?: string;
     /**
      * Pods数量设置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Pods?: string;
 }
@@ -785,12 +777,10 @@ export interface TerminateRunGroupResponse {
 export interface DescribeVolumesResponse {
     /**
      * 缓存卷。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Volumes?: Array<Volume>;
     /**
      * 符合条件的数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1100,27 +1090,22 @@ export interface Filter {
 export interface ResourceIds {
     /**
      * 私有网络ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VPCId?: string;
     /**
      * 子网ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetId?: string;
     /**
      * 安全组ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupId?: string;
     /**
      * TDSQL-C Mysql版数据库ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TDSQLCId?: string;
     /**
      * 文件存储ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CFSId?: string;
     /**
@@ -1129,17 +1114,14 @@ export interface ResourceIds {
   - HP：通用性能型
   - TB：turbo标准型
   - TP：turbo性能型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CFSStorageType?: string;
     /**
      * 云服务器ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CVMId?: string;
     /**
      * 弹性容器集群ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EKSId?: string;
 }
@@ -1166,28 +1148,23 @@ export interface DescribeRunGroupsResponse {
 export interface Volume {
     /**
      * 缓存卷ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VolumeId?: string;
     /**
      * 名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 环境ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvironmentId?: string;
     /**
      * 缓存卷类型，取值范围：
   * SHARED：多点挂载共享存储
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
@@ -1197,37 +1174,30 @@ export interface Volume {
   - HP：通用性能型
   - TB：turbo标准型
   - TP：turbo性能型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Spec?: string;
     /**
      * 缓存卷大小（GB）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Capacity?: number;
     /**
      * 缓存卷使用量（Byte）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Usage?: number;
     /**
      * 缓存卷吞吐上限（MiB/s）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BandwidthLimit?: number;
     /**
      * 默认挂载路径。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultMountPath?: string;
     /**
      * 是否为默认缓存卷。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDefault?: boolean;
     /**
      * 状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
 }

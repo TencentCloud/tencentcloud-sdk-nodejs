@@ -342,11 +342,11 @@ export interface DescribeFraudUltimateResponse {
  */
 export interface RiskInfo {
     /**
-     * 风险类型
+     * 风险类型。更多详情请参见：[Android](https://cloud.tencent.com/document/product/1628/85898)、[iOS](https://cloud.tencent.com/document/product/1628/85896)、[H5](https://cloud.tencent.com/document/product/1628/85897)、[小程序](https://cloud.tencent.com/document/product/1628/85895)、[场景风险](https://cloud.tencent.com/document/product/1628/88912)
      */
-    Type: number;
+    Type?: number;
     /**
-     * 风险等级
+     * [风险等级](https://cloud.tencent.com/document/product/1628/85308)
      */
-    Level: number;
+    Level?: number;
 }

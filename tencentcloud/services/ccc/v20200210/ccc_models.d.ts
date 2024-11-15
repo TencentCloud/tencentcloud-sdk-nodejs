@@ -3229,6 +3229,10 @@ export interface CompanyStateInfo {
      * 修改时间
      */
     ModifyTime?: number;
+    /**
+     * 合同编号
+     */
+    ContractNo?: string;
 }
 /**
  * DeleteExtension返回参数结构体

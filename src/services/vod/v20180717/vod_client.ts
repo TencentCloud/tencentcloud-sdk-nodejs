@@ -571,6 +571,7 @@ import {
   HeadTailConfigureInfo,
   EventContent,
   HighlightsConfigureInfoForUpdate,
+  IPFilterPolicy,
   UserDefineConfigureInfoForUpdate,
   ExtractTraceWatermarkTaskInput,
   AiReviewPoliticalAsrTaskOutput,

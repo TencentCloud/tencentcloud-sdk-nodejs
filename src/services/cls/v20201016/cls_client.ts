@@ -491,7 +491,7 @@ export class Client extends AbstractClient {
    * 云产品接入使用相关接口
    */
   async DescribeCloudProductLogTasks(
-    req?: DescribeCloudProductLogTasksRequest,
+    req: DescribeCloudProductLogTasksRequest,
     cb?: (error: string, rep: DescribeCloudProductLogTasksResponse) => void
   ): Promise<DescribeCloudProductLogTasksResponse> {
     return this.request("DescribeCloudProductLogTasks", req, cb)

@@ -21,6 +21,7 @@ import {
   DescribeCloudDedicatedZoneResourceSummaryRequest,
   CloudDedicatedZoneResourceStatisticsInfo,
   DescribeCloudDedicatedZoneHostsResponse,
+  ExtraInfo,
   CloudDedicatedZoneHostsInfo,
   DescribeCloudDedicatedZoneHostsRequest,
   CloudDedicatedZoneResourceSummaryInfo,

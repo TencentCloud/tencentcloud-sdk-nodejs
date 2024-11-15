@@ -238,67 +238,59 @@ export interface WorkspaceStatusInfo {
   /**
    * 工作空间 ID
    */
-  Id: number
+  Id?: number
   /**
    * 工作空间名称
    */
-  Name: string
+  Name?: string
   /**
    * 工作空间标识
    */
-  SpaceKey: string
+  SpaceKey?: string
   /**
    * 工作空间状态
    */
-  Status: string
+  Status?: string
   /**
    * CPU数量
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存
    */
-  Memory: number
+  Memory?: number
   /**
    * 工作空间图标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Icon?: string
   /**
    * 工作空间状态, 异常原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusReason?: string
   /**
    * 工作空间描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 工作空间类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceType?: string
   /**
    * Git 仓库 HTTPS 地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionControlUrl: string
+  VersionControlUrl?: string
   /**
    * Git 仓库引用。指定分支使用 /refs/heads/{分支名}, 指定 Tag 用 /refs/tags/{Tag名}
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionControlRef: string
+  VersionControlRef?: string
   /**
    * 最后操作时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastOpsDate: string
+  LastOpsDate?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateDate: string
+  CreateDate?: string
 }
 
 /**
@@ -371,7 +363,6 @@ export interface Image {
 export interface DescribeConfigResponse {
   /**
    * 配置值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**

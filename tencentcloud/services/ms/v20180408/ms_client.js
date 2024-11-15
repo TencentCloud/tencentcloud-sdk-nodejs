@@ -93,7 +93,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateShieldPlanInstance", req, cb);
     }
     /**
-     * 用户可以使用该接口自建资源，只支持白名单用户
+     * 不再使用
+
+用户可以使用该接口自建资源，只支持白名单用户
      */
     async CreateResourceInstances(req, cb) {
         return this.request("CreateResourceInstances", req, cb);

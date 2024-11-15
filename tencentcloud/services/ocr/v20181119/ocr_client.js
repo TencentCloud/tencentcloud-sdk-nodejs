@@ -664,6 +664,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 菲律宾驾驶证识别
+
+默认接口请求频率限制：20次/秒。
      */
     async RecognizePhilippinesDrivingLicenseOCR(req, cb) {
         return this.request("RecognizePhilippinesDrivingLicenseOCR", req, cb);
@@ -891,12 +893,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankSlipOCR", req, cb);
     }
     /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
 
 默认接口请求频率限制：5次/秒。
      */
-    async ResidenceBookletOCR(req, cb) {
-        return this.request("ResidenceBookletOCR", req, cb);
+    async VehicleRegCertOCR(req, cb) {
+        return this.request("VehicleRegCertOCR", req, cb);
     }
     /**
      * 本接口支持通信大数据行程卡识别，包括行程卡颜色、更新时间、途经地、存在中高风险地区的城市、电话号码，五个字段的识别结果输出。
@@ -905,6 +907,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RecognizeTravelCardOCR(req, cb) {
         return this.request("RecognizeTravelCardOCR", req, cb);
+    }
+    /**
+     * 韩国身份证识别
+     */
+    async RecognizeKoreanIDCardOCR(req, cb) {
+        return this.request("RecognizeKoreanIDCardOCR", req, cb);
     }
     /**
      * 本接口支持OFD格式的 增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
@@ -927,6 +935,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DriverLicenseOCR(req, cb) {
         return this.request("DriverLicenseOCR", req, cb);
+    }
+    /**
+     * 韩国驾驶证识别
+     */
+    async RecognizeKoreanDrivingLicenseOCR(req, cb) {
+        return this.request("RecognizeKoreanDrivingLicenseOCR", req, cb);
     }
     /**
      * 本接口支持常见银行票据的自动分类和识别。整单识别包括支票（含现金支票、普通支票、转账支票），承兑汇票（含银行承兑汇票、商业承兑汇票）以及进账单等，适用于中国人民银行印发的 2010 版银行票据凭证版式（银发[2010]299 号）。
@@ -1092,12 +1106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AdvertiseOCR", req, cb);
     }
     /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
 
 默认接口请求频率限制：5次/秒。
      */
-    async VehicleRegCertOCR(req, cb) {
-        return this.request("VehicleRegCertOCR", req, cb);
+    async ResidenceBookletOCR(req, cb) {
+        return this.request("ResidenceBookletOCR", req, cb);
     }
     /**
      * 本接口支持机动车销售统一发票和二手车销售统一发票的识别，包括发票号码、发票代码、合计金额、合计税额等二十多个字段。

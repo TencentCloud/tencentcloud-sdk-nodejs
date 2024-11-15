@@ -70,6 +70,7 @@ import {
   StorageParams,
   CloudVod,
   EncodeParams,
+  EmulateMobileParams,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
   McuCustomCrop,

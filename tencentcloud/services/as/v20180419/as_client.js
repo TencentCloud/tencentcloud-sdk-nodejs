@@ -382,7 +382,6 @@ class Client extends abstract_client_1.AbstractClient {
      * 本接口（UpgradeLifecycleHook）用于升级生命周期挂钩。
 
 * 本接口用于升级生命周期挂钩，采用“完全覆盖”风格，无论之前参数如何，统一按照接口参数设置为新的配置。对于非必填字段，不填写则按照默认值赋值。
-
      */
     async UpgradeLifecycleHook(req, cb) {
         return this.request("UpgradeLifecycleHook", req, cb);

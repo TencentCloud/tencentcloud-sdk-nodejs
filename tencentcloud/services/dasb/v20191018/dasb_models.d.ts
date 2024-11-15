@@ -3375,6 +3375,22 @@ export interface Resource {
      * 部署模式
      */
     DeployModel?: number;
+    /**
+     * 0 默认值，非内网访问，1 内网访问
+     */
+    IntranetAccess?: number;
+    /**
+     * 内网访问的ip
+     */
+    IntranetPrivateIpSet?: Array<string>;
+    /**
+     * 开通内网访问的vpc
+     */
+    IntranetVpcId?: string;
+    /**
+     * 开通内网访问vpc的网段
+     */
+    IntranetVpcCidr?: string;
 }
 /**
  * RunChangePwdTask返回参数结构体

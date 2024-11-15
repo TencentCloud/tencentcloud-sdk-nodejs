@@ -2994,6 +2994,7 @@ export interface DescribeMediaProcessUsageDataRequest {
   <li> VideoProduce: 视频制作</li>
   <li> MediaCast: 媒体转推</li>
   <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
+  <li>VoiceTranslation: 语音翻译</li>
      */
     Type?: string;
 }
@@ -4687,6 +4688,7 @@ export interface TaskStatData {
   <li> RebuildMedia: 音画质重生</li>
   <li> QualityInspect: 音画质检测</li>
   <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
+  <li>VoiceTranslation: 语音翻译</li>
      */
     TaskType?: string;
     /**
@@ -10360,6 +10362,10 @@ export interface ModifyVodDomainConfigRequest {
      * QUIC 配置。
      */
     QUICConfig?: DomainQUICConfig;
+    /**
+     * IP 访问限制规则。
+     */
+    IPFilterPolicy?: IPFilterPolicy;
 }
 /**
  * AI 样本管理，标签操作。
@@ -11270,6 +11276,11 @@ export interface DomainDetailInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QUICConfig?: DomainQUICConfig;
+    /**
+     * IP 访问限制配置信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPFilterPolicy?: IPFilterPolicy;
 }
 /**
  * 音视频审核涉及令人不安全的信息的任务结果类型
@@ -13808,6 +13819,26 @@ export interface HighlightsConfigureInfoForUpdate {
   <li>OFF：关闭智能精彩片段任务。</li>
      */
     Switch?: string;
+}
+/**
+ * IP 访问限制规则，当前支持配置 IP 黑名单和白名单。
+ */
+export interface IPFilterPolicy {
+    /**
+     * IP 访问限制状态，可选值：
+  <li>Enabled：启用；</li>
+  <li>Disabled：禁用。</li>
+     */
+    Status: string;
+    /**
+     * IP 访问限制类型：  <li>Black：黑名单方式校验。只有来自 IPList 列表中的 IP 请求会被拦截。</li>
+  <li>White：白名单方式校验。只有来自 IPList 列表中的 IP 请求会被放行。</li>当 Status 取值为 Enabled 时，FilterType  必须赋值。
+     */
+    FilterType?: string;
+    /**
+     * IP 列表，支持 X.X.X.X 格式 IPV4 地址，或 X:X:X:X:X:X:X:X 格式 IPV6 地址，或网段格式 /N（IPV4:1≤N≤32；IPV6:1≤N≤128）；最多可填充 200 个 IP 或网段。当 Status 取值为 Enabled 时，IPList 必须赋值。
+     */
+    IPList?: Array<string>;
 }
 /**
  * 用户自定义音视频审核任务控制参数。

@@ -7500,7 +7500,33 @@ export interface DescribeConfigExtrasRequest {
 /**
  * DescribeCloudProductLogTasks请求参数结构体
  */
-export declare type DescribeCloudProductLogTasksRequest = null;
+export interface DescribeCloudProductLogTasksRequest {
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为100，最大值100。
+     */
+    Limit?: number;
+    /**
+     * - assumerName
+    - 按照【云产品标识】进行过滤。
+    - 类型：String
+    - 必选：否
+    - 枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+  - logType
+    - 按照【日志类型】进行过滤。
+    - 类型：String
+    - 必选：否
+    - 枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+  - instanceId
+    - 按照【实例ID】进行过滤。
+    - 类型：String
+    - 必选：否
+     */
+    Filters?: Array<Filter>;
+}
 /**
  * CreateAlarmNotice请求参数结构体
  */

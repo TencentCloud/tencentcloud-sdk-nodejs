@@ -96,6 +96,10 @@ export interface ModifyApmInstanceRequest {
      */
     ResponseDurationWarningThreshold?: number;
     /**
+     * （0=付费版；1=tsf受限免费版；2=免费版）
+     */
+    Free?: number;
+    /**
      * 是否关联dashboard： 0 关 1 开
      */
     IsRelatedDashboard?: number;
@@ -103,6 +107,14 @@ export interface ModifyApmInstanceRequest {
      * dashboard ID
      */
     DashboardTopicID?: string;
+    /**
+     * 是否开启SQL注入检测
+     */
+    IsSqlInjectionAnalysis?: number;
+    /**
+     * 是否开启组件漏洞检测
+     */
+    IsInstrumentationVulnerabilityScan?: number;
 }
 /**
  * apm实例信息
@@ -268,6 +280,26 @@ export interface ApmInstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultTSF?: number;
+    /**
+     * 是否关联dashboard： 0 关 1 开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsRelatedDashboard?: number;
+    /**
+     * dashboard ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardTopicID?: string;
+    /**
+     * 是否开启组件漏洞检测
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsInstrumentationVulnerabilityScan?: number;
+    /**
+     * 是否开启SQL注入分析
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSqlInjectionAnalysis?: number;
 }
 /**
  * CreateApmInstance请求参数结构体
@@ -297,6 +329,10 @@ export interface CreateApmInstanceRequest {
      * 实例的计费模式
      */
     PayMode?: number;
+    /**
+     * （0=付费版；1=tsf受限免费版；2=免费版）
+     */
+    Free?: number;
 }
 /**
  * ModifyGeneralApmApplicationConfig请求参数结构体

@@ -438,11 +438,11 @@ export interface TextDetectionResult {
   /**
    * 识别出的文本行内容
    */
-  Value: string
+  Value?: string
   /**
    * 坐标，以四个顶点坐标表示
    */
-  Polygon: Array<Coord>
+  Polygon?: Array<Coord>
 }
 
 /**
@@ -1568,30 +1568,57 @@ export interface EnterpriseLicenseOCRResponse {
 }
 
 /**
- * 印章信息
+ * RecognizeKoreanDrivingLicenseOCR返回参数结构体
  */
-export interface SealInfo {
+export interface RecognizeKoreanDrivingLicenseOCRResponse {
   /**
-   * 印章主体内容
+   * 身份证号码
    */
-  SealBody: string
+  ID?: string
   /**
-   * 印章坐标
+   * 驾照号码
    */
-  Location: Rect
+  LicenseNumber?: string
   /**
-   * 印章其它文本内容
+   * 居民登记号码
    */
-  OtherTexts: Array<string>
+  Number?: string
   /**
-   * 印章类型，表示为:
-圆形印章：0
-椭圆形印章：1
-方形印章：2
-菱形印章：3
-三角形印章：4
+   * 驾照类型
    */
-  SealShape: string
+  Type?: string
+  /**
+   * 地址
+   */
+  Address?: string
+  /**
+   * 姓名
+   */
+  Name?: string
+  /**
+   * 换证时间
+   */
+  AptitudeTesDate?: string
+  /**
+   * 发证日期
+   */
+  DateOfIssue?: string
+  /**
+   * 人像截图Base64后的结果
+   */
+  Photo?: string
+  /**
+   * 性别
+   */
+  Sex?: string
+  /**
+   * 生日，格式为dd/mm/yyyy
+   */
+  Birthday?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1624,6 +1651,31 @@ V1
 V2
    */
   Scene?: string
+}
+
+/**
+ * RecognizeKoreanDrivingLicenseOCR请求参数结构体
+ */
+export interface RecognizeKoreanDrivingLicenseOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
 }
 
 /**
@@ -2504,27 +2556,27 @@ export interface RecognizePhilippinesTinIDOCRResponse {
   /**
    * 人像照片Base64后的结果
    */
-  HeadPortrait: TextDetectionResult
+  HeadPortrait?: TextDetectionResult
   /**
    * 编码
    */
-  LicenseNumber: TextDetectionResult
+  LicenseNumber?: TextDetectionResult
   /**
    * 姓名
    */
-  FullName: TextDetectionResult
+  FullName?: TextDetectionResult
   /**
    * 地址
    */
-  Address: TextDetectionResult
+  Address?: TextDetectionResult
   /**
    * 生日
    */
-  Birthday: TextDetectionResult
+  Birthday?: TextDetectionResult
   /**
    * 发证日期
    */
-  IssueDate: TextDetectionResult
+  IssueDate?: TextDetectionResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5671,24 +5723,41 @@ export interface CardWarnInfo {
 }
 
 /**
- * VehicleRegCertOCR请求参数结构体
+ * RecognizeKoreanIDCardOCR返回参数结构体
  */
-export interface VehicleRegCertOCRRequest {
+export interface RecognizeKoreanIDCardOCRResponse {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 身份证号码
    */
-  ImageBase64?: string
+  ID?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 地址
    */
-  ImageUrl?: string
+  Address?: string
+  /**
+   * 姓名
+   */
+  Name?: string
+  /**
+   * 发证日期
+   */
+  DateOfIssue?: string
+  /**
+   * 人像截图Base64后的结果
+   */
+  Photo?: string
+  /**
+   * 性别
+   */
+  Sex?: string
+  /**
+   * 生日，格式为dd/mm/yyyy
+   */
+  Birthday?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6892,7 +6961,7 @@ export interface ReconstructDocumentRequest {
    */
   FileType: string
   /**
-   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
    */
   FileBase64?: string
   /**
@@ -7195,12 +7264,12 @@ export interface RideHailingDriverLicenseOCRRequest {
  */
 export interface Encryption {
   /**
-   * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。
+   * 有加密需求的用户，接入传入kms的CiphertextBlob（Base64编码），关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CiphertextBlob: string
   /**
-   * 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。
+   * 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符，Base64编码）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Iv: string
@@ -7600,11 +7669,11 @@ export interface Coord {
   /**
    * 横坐标
    */
-  X: number
+  X?: number
   /**
    * 纵坐标
    */
-  Y: number
+  Y?: number
 }
 
 /**
@@ -7782,7 +7851,7 @@ WarnInfos，告警信息，Code 告警码列表和释义：
    */
   ReflectDetailInfos?: Array<ReflectDetailInfo>
   /**
-   * 加密后的数据
+   * 加密后的数据（Base64编码）
    */
   EncryptedBody?: string
   /**
@@ -8116,7 +8185,7 @@ export interface LineInfo {
  */
 export interface RecognizeEncryptedIDCardOCRRequest {
   /**
-   * 请求体被加密后的密文，本接口只支持加密传输
+   * 请求体被加密后的密文（Base64编码），本接口只支持加密传输
    */
   EncryptedBody: string
   /**
@@ -10210,11 +10279,16 @@ export interface GeneralHandwritingOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  TextDetections: Array<TextGeneralHandwriting>
+  TextDetections?: Array<TextGeneralHandwriting>
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   * @deprecated
+   */
+  Angel?: number
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel: number
+  Angle?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10313,6 +10387,27 @@ export interface TableOCRResponse {
 }
 
 /**
+ * VehicleRegCertOCR请求参数结构体
+ */
+export interface VehicleRegCertOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+}
+
+/**
  * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。
  */
 export interface DetectedWordCoordPoint {
@@ -10334,6 +10429,31 @@ export interface QuestionBlockObj {
    * 题目主体区域检测框在图片中的像素坐标
    */
   QuestionBboxCoord: Rect
+}
+
+/**
+ * RecognizeKoreanIDCardOCR请求参数结构体
+ */
+export interface RecognizeKoreanIDCardOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 是否返回人像照片。
+   */
+  ReturnHeadImage?: boolean
 }
 
 /**
@@ -11019,33 +11139,33 @@ export interface BankCardOCRResponse {
   /**
    * 卡号
    */
-  CardNo: string
+  CardNo?: string
   /**
    * 银行信息
    */
-  BankInfo: string
+  BankInfo?: string
   /**
    * 有效期，格式如：07/2023
    */
-  ValidDate: string
+  ValidDate?: string
   /**
    * 卡类型
    */
-  CardType: string
+  CardType?: string
   /**
    * 卡名字
    */
-  CardName: string
+  CardName?: string
   /**
    * 切片图片数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BorderCutImage: string
+  BorderCutImage?: string
   /**
    * 卡号图片数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CardNoImage: string
+  CardNoImage?: string
   /**
    * WarningCode 告警码列表和释义：
 -9110:银行卡日期无效; 
@@ -11056,16 +11176,43 @@ export interface BankCardOCRResponse {
 （告警码可以同时存在多个）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarningCode: Array<number | bigint>
+  WarningCode?: Array<number | bigint>
   /**
    * 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QualityValue: number
+  QualityValue?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 印章信息
+ */
+export interface SealInfo {
+  /**
+   * 印章主体内容
+   */
+  SealBody: string
+  /**
+   * 印章坐标
+   */
+  Location: Rect
+  /**
+   * 印章其它文本内容
+   */
+  OtherTexts: Array<string>
+  /**
+   * 印章类型，表示为:
+圆形印章：0
+椭圆形印章：1
+方形印章：2
+菱形印章：3
+三角形印章：4
+   */
+  SealShape: string
 }
 
 /**
@@ -11108,51 +11255,51 @@ export interface RecognizePhilippinesDrivingLicenseOCRResponse {
   /**
    * 人像照片Base64后的结果
    */
-  HeadPortrait: TextDetectionResult
+  HeadPortrait?: TextDetectionResult
   /**
    * 姓名
    */
-  Name: TextDetectionResult
+  Name?: TextDetectionResult
   /**
    * 姓氏
    */
-  LastName: TextDetectionResult
+  LastName?: TextDetectionResult
   /**
    * 首姓名
    */
-  FirstName: TextDetectionResult
+  FirstName?: TextDetectionResult
   /**
    * 中间姓名
    */
-  MiddleName: TextDetectionResult
+  MiddleName?: TextDetectionResult
   /**
    * 国籍
    */
-  Nationality: TextDetectionResult
+  Nationality?: TextDetectionResult
   /**
    * 性别
    */
-  Sex: TextDetectionResult
+  Sex?: TextDetectionResult
   /**
    * 地址
    */
-  Address: TextDetectionResult
+  Address?: TextDetectionResult
   /**
    * 证号
    */
-  LicenseNo: TextDetectionResult
+  LicenseNo?: TextDetectionResult
   /**
    * 有效期
    */
-  ExpiresDate: TextDetectionResult
+  ExpiresDate?: TextDetectionResult
   /**
    * 机构代码
    */
-  AgencyCode: TextDetectionResult
+  AgencyCode?: TextDetectionResult
   /**
    * 出生日期
    */
-  Birthday: TextDetectionResult
+  Birthday?: TextDetectionResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

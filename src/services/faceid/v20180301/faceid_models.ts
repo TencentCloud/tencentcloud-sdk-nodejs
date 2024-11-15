@@ -113,11 +113,15 @@ export interface IdCardVerificationRequest {
  */
 export interface ImageRecognitionV2Response {
   /**
-   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * 相似度。
+- 取值范围 [0.00, 100.00]。
+- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
    */
   Sim?: number
   /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   * 业务错误码。
+- 成功情况返回Success。
+- 错误情况请参考下方错误码 列表中FailedOperation部分
    */
   Result?: string
   /**
@@ -160,22 +164,26 @@ export interface GetDetectInfoEnhancedResponse {
    */
   Encryption?: Encryption
   /**
-   * 意愿核身朗读模式结果信息。若未使用意愿核身功能，该字段返回值可以不处理。
+   * 意愿核身朗读模式结果信息。
+- 若未使用意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionVerifyData?: IntentionVerifyData
   /**
-   * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+   * 意愿核身问答模式结果。
+
+- 若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionQuestionResult?: IntentionQuestionResult
   /**
-   * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
+   * 意愿核身点头确认模式的结果信息。
+- 若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionActionResult?: IntentionActionResult
   /**
-   * 加密后的数据
+   * 加密后的数据。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptedBody?: string
@@ -186,69 +194,75 @@ export interface GetDetectInfoEnhancedResponse {
 }
 
 /**
- * 意愿核身问答模式结果
+ * 意愿核身问答模式结果。
  */
 export interface IntentionQuestionResult {
   /**
-   * 意愿核身错误码：
-0: "成功"       
--1: "参数错误"    
--2: "系统异常"    
--101: "请保持人脸在框内"    
--102: "检测到多张人脸"   
--103: "人脸检测失败"   
--104: "人脸检测不完整"   
--105: "请勿遮挡眼睛"    
--106: "请勿遮挡嘴巴"     
--107: "请勿遮挡鼻子"     
--201: "人脸比对相似度低"    
--202: "人脸比对失败"    
--301: "意愿核验不通过"       
--302: "用户回答阶段未检测到张嘴动作"  
--800: "前端不兼容错误"    
--801: "用户未授权摄像头和麦克风权限"   
--802: "核验流程异常中断，请勿切屏或进行其他操作"   
--803: "用户主动关闭链接/异常断开链接"   
--998: "系统数据异常"   
--999: "系统未知错误，请联系人工核实"   
-若在人脸核身过程失败、未进入意愿确认过程，则该参数返回为空，请参考人脸核身错误码结果（DetectInfoText.ErrCode)
+   * 意愿核身错误码。
+- 取值范围：
+    0: "成功"       
+    -1: "参数错误"    
+    -2: "系统异常"    
+    -101: "请保持人脸在框内"    
+    -102: "检测到多张人脸"   
+    -103: "人脸检测失败"   
+    -104: "人脸检测不完整"   
+    -105: "请勿遮挡眼睛"    
+    -106: "请勿遮挡嘴巴"     
+    -107: "请勿遮挡鼻子"     
+    -201: "人脸比对相似度低"    
+    -202: "人脸比对失败"    
+    -301: "意愿核验不通过"       
+    -302: "用户回答阶段未检测到张嘴动作"  
+    -800: "前端不兼容错误"    
+    -801: "用户未授权摄像头和麦克风权限"   
+    -802: "核验流程异常中断，请勿切屏或进行其他操作"   
+    -803: "用户主动关闭链接/异常断开链接"   
+    -998: "系统数据异常"   
+    -999: "系统未知错误，请联系人工核实"   
+- 若在人脸核身过程失败、未进入意愿确认过程，则该参数返回为空，请参考人脸核身错误码结果（DetectInfoText.ErrCode)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinalResultDetailCode?: number
   /**
-   * 意愿核身错误信息
+   * 意愿核身错误信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinalResultMessage?: string
   /**
-   * 视频base64（其中包含全程问题和回答音频，mp4格式）
+   * 视频base64。
+- 其中包含全程问题和回答音频，mp4格式。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Video?: string
   /**
-   * 屏幕截图base64列表
+   * 屏幕截图base64列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScreenShot?: Array<string>
   /**
-   * 和答案匹配结果列表
-0：成功，-1：不匹配
+   * 和答案匹配结果列表。
+- 取值范围（0：成功；-1：不匹配）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultCode?: Array<string>
   /**
-   * 回答问题语音识别结果列表
+   * 回答问题语音识别结果列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrResult?: Array<string>
   /**
-   * 答案录音音频
+   * 答案录音音频。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Audios?: Array<string>
   /**
-   * 意愿核身最终结果：
-0：认证通过，-1：认证未通过，-2：浏览器内核不兼容，无法进行意愿校验。建议使用“FinalResultDetailCode”参数获取详细的错误码信息。
+   * 意愿核身最终结果。
+- 取值范围：
+0：认证通过。
+-1：认证未通过。
+-2：浏览器内核不兼容，无法进行意愿校验。
+- 建议使用“FinalResultDetailCode”参数获取详细的错误码信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinalResultCode?: string
@@ -302,107 +316,126 @@ export interface MobileStatusRequest {
  */
 export interface ParseNfcDataResponse {
   /**
-   * 0为首次查询成功，-1为查询失败。
+   * 结果码。
+- 取值范围：0为首次查询成功，-1为查询失败。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: string
+  ResultCode?: string
   /**
-   * 身份证号
+   * 身份证号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdNum: string
+  IdNum?: string
   /**
-   * 姓名
+   * 姓名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
-   * 照片
+   * 照片。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Picture: string
+  Picture?: string
   /**
-   * 出生日期
+   * 出生日期。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BirthDate: string
+  BirthDate?: string
   /**
-   * 有效期起始时间
+   * 有效期起始时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BeginTime: string
+  BeginTime?: string
   /**
-   * 有效期结束时间
+   * 有效期结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
-   * 住址
+   * 住址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
-   * 民族
+   * 民族。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nation: string
+  Nation?: string
   /**
-   * 性别
+   * 性别。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sex: string
+  Sex?: string
   /**
-   * 身份证 01 中国护照 03 军官证 04 武警证 05 港澳通行证 06 台胞证 07 外国护照 08 士兵证 09 临时身份证 10 户口本 11 警官证 12 外国人永久居留证 13 港澳台居民居住证 14 回乡证 15 大陆居民来往台湾通行证 16 其他证件 99
+   * 类型。
+- 取值范围：
+01：身份证。 
+03 ：中国护照。
+04 ：军官证。
+05 ：武警证。
+06：港澳通行证 。
+07 ：台胞证 。
+08：外国护照 。
+09 ：士兵证。
+09 ：临时身份证。
+11：户口本  。
+12 ：警官证 。
+13：外国人永久居留证。
+14：港澳台居民居住证。
+15：回乡证。
+16：大陆居民来往台湾通行证。
+99：其他证件。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdType: string
+  IdType?: string
   /**
-   * 英文姓名
+   * 英文姓名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnName: string
+  EnName?: string
   /**
    * 签发机关
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SigningOrganization: string
+  SigningOrganization?: string
   /**
-   * 港澳台居民居住证，通行证号码
+   * 港澳台居民居住证，通行证号码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OtherIdNum: string
+  OtherIdNum?: string
   /**
-   * 旅行证件国籍
+   * 旅行证件国籍。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nationality: string
+  Nationality?: string
   /**
-   * 旅行证件机读区第二行 29~42 位
+   * 旅行证件机读区第二行 29~42 位。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersonalNumber: string
+  PersonalNumber?: string
   /**
-   * 旅行证件类的核验结果。JSON格式如下：
-{"result_issuer ":"签发者证书合法性验证结果 ","result_pape r":"证件安全对象合法性验证 结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"} 
- 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真
+   * 旅行证件类的核验结果。
+- JSON格式如下：
+{"result_issuer ":"签发者证书合法性验证结果 ","result_pape r":"证件安全对象合法性验证 结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"} 。
+- 取值范围： 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckMRTD: string
+  CheckMRTD?: string
   /**
-   * 身份证照片面合成图片
+   * 身份证照片面合成图片。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageA: string
+  ImageA?: string
   /**
-   * 身份证国徽面合成图片
+   * 身份证国徽面合成图片。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageB: string
+  ImageB?: string
   /**
-   * 对result code的结果描述
+   * 对result code的结果描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultDescription: string
+  ResultDescription?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -414,16 +447,18 @@ export interface ParseNfcDataResponse {
  */
 export interface LivenessRecognitionRequest {
   /**
-   * 身份证号
+   * 身份证号。
    */
   IdCard: string
   /**
-   * 姓名。中文请使用UTF-8编码。
+   * 姓名。
+- 中文请使用UTF-8编码。
    */
   Name: string
   /**
-   * 活体检测类型，取值：LIP/ACTION/SILENT。
-LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+   * 活体检测类型。
+- 取值：LIP/ACTION/SILENT。
+- LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
    */
   LivenessType: string
   /**
@@ -432,28 +467,31 @@ BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
    */
   VideoBase64?: string
   /**
-   * 用于活体检测的视频Url 地址。视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
-
-视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
-
-建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 用于活体检测的视频Url 地址。
+- 视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
+- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
+- 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。
+- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   VideoUrl?: string
   /**
-   * 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
-动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
-静默模式传参：空。
+   * 验证数据。
+- 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
+- 动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
+- 静默模式传参：空。
    */
   ValidateData?: string
   /**
    * 额外配置，传入JSON字符串。
+- 格式如下：
 {
 "BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
 }
    */
   Optional?: string
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * 敏感数据加密信息。
+- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
 }
@@ -481,21 +519,21 @@ export interface CheckEidTokenStatusResponse {
  */
 export interface EidInfo {
   /**
-   * 商户方 appeIDcode 的数字证书
+   * 商户方 appeIDcode 的数字证书。
    */
-  EidCode: string
+  EidCode?: string
   /**
-   * Eid中心针对商户方EidCode的电子签名
+   * Eid中心针对商户方EidCode的电子签名。
    */
-  EidSign: string
+  EidSign?: string
   /**
-   * 商户方公钥加密的会话密钥的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)
+   * 商户方公钥加密的会话密钥的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)。
    */
-  DesKey: string
+  DesKey?: string
   /**
-   * 会话密钥sm2加密后的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)
+   * 会话密钥sm2加密后的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)。
    */
-  UserInfo: string
+  UserInfo?: string
 }
 
 /**
@@ -503,7 +541,10 @@ export interface EidInfo {
  */
 export interface DetectAuthRequest {
   /**
-   * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行咨询。
+   * 业务流程ID。
+- 用于细分客户使用场景, 可为业务配置不同的业务流程。
+- 申请开通服务后，登录腾讯云[慧眼人脸核身控制](https://console.cloud.tencent.com/faceid)进行创建，审核通过后即可调用。
+- 如有疑问，请添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行咨询。
    */
   RuleId: string
   /**
@@ -511,17 +552,20 @@ export interface DetectAuthRequest {
    */
   TerminalType?: string
   /**
-   * 身份标识（是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示）。
-规则：a-z，A-Z，0-9组合。最长长度32位。
+   * 验证人的身份证号码。
+- 是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示。
+
    */
   IdCard?: string
   /**
-   * 姓名。（是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示）。
-最长长度32位。中文请使用UTF-8编码。
+   * 验证人的姓名。
+- 是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示。
+- 最长长度32位。中文请使用UTF-8编码。
    */
   Name?: string
   /**
-   * 认证结束后重定向的回调链接地址。最长长度1024位。
+   * 认证结束后重定向的回调链接地址。
+- 最长长度1024位。
    */
   RedirectUrl?: string
   /**
@@ -529,8 +573,10 @@ export interface DetectAuthRequest {
    */
   Extra?: string
   /**
-   * 用于人脸比对的照片，图片的Base64值；
-Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+   * 用于人脸比对的图像数据，使用base64编码。
+- Base64编码后的图片数据大小不超过3M。
+- 仅支持jpg、png格式。
+- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
    */
   ImageBase64?: string
   /**
@@ -538,21 +584,27 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
    */
   Encryption?: Encryption
   /**
-   * 意愿核身（朗读模式）使用的文案，若未使用意愿核身（朗读模式），则该字段无需传入。默认为空，最长可接受120的字符串长度。
+   * 意愿核身（朗读模式）使用的文案。
+- 若未使用意愿核身（朗读模式），则该字段无需传入。
+- 最长可接受120的字符串长度。
    */
   IntentionVerifyText?: string
   /**
-   * 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。
+   * 意愿核身（语音播报+语音回答模式）使用的文案。
+- 包括：系统语音播报的文本、需要核验的标准文本。
+- 当前仅支持1轮问答。
    */
   IntentionQuestions?: Array<IntentionQuestion>
   /**
-   * RuleId相关配置
-   */
-  Config?: RuleIdConfig
-  /**
-   * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+   * 意愿核身（点头确认模式）使用的文案。
+- 若未使用意愿核身（点头确认模式），则该字段无需传入。
+- 当前仅支持一个提示文本。
    */
   IntentionActions?: Array<IntentionActionConfig>
+  /**
+   * 意愿核身流程配置。
+   */
+  Config?: RuleIdConfig
 }
 
 /**
@@ -570,32 +622,60 @@ export interface CheckEidTokenStatusRequest {
  */
 export interface GetFaceIdRiskInfoResponse {
   /**
-   * 描述当前请求所在设备的风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备
+   * 描述当前请求所在设备的风险标签
+- 详情如下：
+01-设备疑似被Root/设备疑似越狱。
+02-设备疑似被注入。
+03-设备疑似为模拟器。
+04-设备疑似存在风险操作。
+05-摄像头疑似被劫持。
+06-疑似黑产设备。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoTag?: string
   /**
-   * 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级
+   * 描述当前请求所在设备的风险等级，共4级。
+- 详情如下：
+ 1 - 低风险。
+ 2 - 中风险。
+ 3 - 高风险。
+ 4 - 攻击。 
+-1表示未获取到风险等级。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoLevel?: number
   /**
-   * 设备id标识
+   * 设备id标识。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenId?: string
   /**
-   * 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级
+   * 描述当前请求所在设备的相机指纹风险等级，共4级。
+- 详情如下：
+ 1 - 低风险。
+ 2 - 中风险。
+ 3 - 高风险。
+ 4 - 攻击。
+ -1表示未获取到风险等级。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CameraInfoLevel?: number
   /**
-   * 描述当前请求所在设备的相机指纹风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备，空表示没有相机指纹风险
+   * 描述当前请求所在设备的相机指纹风险标签。
+
+- 详情如下：
+ 01-设备疑似被Root/设备疑似越狱。
+ 02-设备疑似被注入。
+ 03-设备疑似为模拟器。
+ 04-设备疑似存在风险操作。
+ 05-摄像头疑似被劫持。
+ 06-疑似黑产设备。
+ 空表示没有相机指纹风险。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CameraInfoTag?: string
   /**
-   * 获取token时透传的信息	
+   * 获取token时透传的信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
@@ -808,14 +888,14 @@ export interface EncryptedPhoneVerificationResponse {
 }
 
 /**
- * 核身视频信息
+ * 核身视频信息。
  */
 export interface DetectInfoVideoData {
   /**
-   * 活体视频的base64编码
+   * 活体视频的base64编码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LivenessVideo: string
+  LivenessVideo?: string
 }
 
 /**
@@ -931,20 +1011,27 @@ export interface CheckBankCardInformationResponse {
  */
 export interface GetEidTokenRequest {
   /**
-   * EID商户id，字段长度最长50位。
+   * EID商户id。
+- 字段长度最长50位。
    */
   MerchantId: string
   /**
-   * 身份标识（未使用OCR服务时，必须传入）。
-规则：a-z，A-Z，0-9组合。最长长度32位。
+   * 身份标识。
+- 未使用OCR服务时，必须传入。
+- 规则：a-z，A-Z，0-9组合。
+- 最长长度32位。
    */
   IdCard?: string
   /**
-   * 姓名。（未使用OCR服务时，必须传入）最长长度32位。中文请使用UTF-8编码。
+   * 姓名。
+- 未使用OCR服务时，必须传入。
+- 最长长度32位。
+- 中文请使用UTF-8编码。
    */
   Name?: string
   /**
-   * 透传字段，在获取验证结果时返回。最长长度1024位。
+   * 透传字段，在获取验证结果时返回。
+- 最长长度1024位。
    */
   Extra?: string
   /**
@@ -952,11 +1039,14 @@ export interface GetEidTokenRequest {
    */
   Config?: GetEidTokenConfig
   /**
-   * 最长长度1024位。用户从Url中进入核身认证结束后重定向的回调链接地址。EidToken会在该链接的query参数中。
+   * 用户从Url中进入核身认证结束后重定向的回调链接地址。
+- 最长长度1024位。
+- EidToken会在该链接的query参数中。
    */
   RedirectUrl?: string
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * 敏感数据加密信息。
+- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
 }
@@ -995,7 +1085,7 @@ export interface CheckIdNameDateRequest {
  */
 export interface GetFaceIdTokenResponse {
   /**
-   * 有效期 10分钟。只能完成1次核身。
+   * token值。- 有效期 10分钟。- 只能完成1次核身。
    */
   FaceIdToken?: string
   /**
@@ -1055,72 +1145,97 @@ export interface MinorsVerificationRequest {
  */
 export interface GetFaceIdResultResponse {
   /**
-   * 身份证
+   * 身份证。
    */
   IdCard?: string
   /**
-   * 姓名
+   * 姓名。
    */
   Name?: string
   /**
-   * 业务核验结果，参考https://cloud.tencent.com/document/product/1007/47912
+   * 业务核验结果。
+- 参考：https://cloud.tencent.com/document/product/1007/47912。
    */
   Result?: string
   /**
-   * 业务核验描述
+   * 业务核验描述。
    */
   Description?: string
   /**
-   * 相似度，0-100，数值越大相似度越高
+   * 相似度。
+- 取值：0-100。
+- 数值越大相似度越高。
    */
   Similarity?: number
   /**
-   * 用户核验的视频base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
+   * 用户核验的视频base64。
+- 如果选择了使用cos，返回完整cos地址，如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoBase64?: string
   /**
-   * 用户核验视频的截帧base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
+   * 用户核验视频的截帧base64。
+- 如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameBase64?: string
   /**
-   * 获取token时透传的信息
+   * 获取token时透传的信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * plus版：描述当前请求所在设备的风险标签，详情如下：
-01-设备疑似被Root/设备疑似越狱
-02-设备疑似被注入
-03-设备疑似为模拟器
-04-设备疑似存在风险操作
-05-摄像头疑似被劫持
-06-疑似黑产设备
-null-无设备风险
-增强版：此字段不生效，默认为null
+   * plus版：描述当前请求所在设备的风险标签。
+- 详情如下：
+01-设备疑似被Root/设备疑似越狱。
+02-设备疑似被注入。
+03-设备疑似为模拟器。
+04-设备疑似存在风险操作。
+05-摄像头疑似被劫持。
+06-疑似黑产设备。
+null-无设备风险。
+- 增强版：此字段不生效，默认为null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoTag?: string
   /**
-   * 行为风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：
+   * 行为风险标签。
+- 仅错误码返回1007（设备疑似被劫持）时返回风险标签。
+- 标签说明：
 02：攻击风险
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskInfoTag?: string
   /**
-   * plus版：描述当前请求活体阶段被拒绝的详细原因，详情如下：01-用户全程闭眼02-用户未完成指定动作03-疑似翻拍攻击04-疑似合成图片05-疑似合成视频06-疑似合成动作07-疑似黑产模板08-疑似存在水印09-反光校验未通过10-最佳帧校验未通过11-人脸质量过差12-人脸距离不匹配13-疑似对抗样本攻击null-无增强版：此字段不生效，默认为null
+   * plus版：描述当前请求活体阶段被拒绝的详细原因。
+- 详情如下：
+01-用户全程闭眼。
+02-用户未完成指定动作。
+03-疑似翻拍攻击。
+04-疑似合成图片。
+05-疑似合成视频。
+06-疑似合成动作。
+07-疑似黑产模板。
+08-疑似存在水印。
+09-反光校验未通过。
+10-最佳帧校验未通过。
+11-人脸质量过差。
+12-人脸距离不匹配。
+13-疑似对抗样本攻击。
+null-无。
+- 增强版：此字段不生效，默认为null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessInfoTag?: string
   /**
-   * plus版：描述当前请求所在设备的风险等级，共4级，详情如下：
-1 - 安全
-2 - 低风险
-3 - 中风险
-4 - 高危
-null - 未获取到风险等级
-增强版：此字段不生效，默认为null
+   * plus版：描述当前请求所在设备的风险等级，共4级。
+- 详情如下：
+1 - 安全。
+2 - 低风险。
+3 - 中风险。
+4 - 高危。
+null - 未获取到风险等级。
+- 增强版：此字段不生效，默认为null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoLevel?: string
@@ -1158,21 +1273,24 @@ export interface DetectAIFakeFacesResponse {
 }
 
 /**
- * 意愿核身相关结果
+ * 意愿核身相关结果。
  */
 export interface IntentionVerifyData {
   /**
-   * 意愿确认环节中录制的视频（base64）。若不存在则为空字符串。
+   * 意愿确认环节中录制的视频（base64）。
+- 若不存在则为空字符串。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionVerifyVideo?: string
   /**
-   * 意愿确认环节中用户语音转文字的识别结果。若不存在则为空字符串。
+   * 意愿确认环节中用户语音转文字的识别结果。
+- 若不存在则为空字符串。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrResult?: string
   /**
-   * 意愿确认环节的结果码。当该结果码为0时，语音朗读的视频与语音识别结果才会返回。
+   * 意愿确认环节的结果码。
+- 当该结果码为0时，语音朗读的视频与语音识别结果才会返回。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorCode?: number
@@ -1182,7 +1300,8 @@ export interface IntentionVerifyData {
    */
   ErrorMessage?: string
   /**
-   * 意愿确认环节中录制视频的最佳帧（base64）。若不存在则为空字符串。
+   * 意愿确认环节中录制视频的最佳帧（base64）。
+- 若不存在则为空字符串。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionVerifyBestFrame?: string
@@ -1414,19 +1533,19 @@ export interface BankCardVerificationRequest {
 }
 
 /**
- * 核身最佳帧信息
+ * 核身最佳帧信息。
  */
 export interface DetectInfoBestFrame {
   /**
    * 活体比对最佳帧Base64编码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BestFrame: string
+  BestFrame?: string
   /**
    * 自截帧Base64编码数组。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BestFrames: Array<string>
+  BestFrames?: Array<string>
 }
 
 /**
@@ -1544,21 +1663,34 @@ export interface GetEidResultRequest {
    */
   EidToken: string
   /**
-   * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息；5：意愿核身朗读模式相关结果；6：意愿核身问答模式相关结果）。
-如 13表示拉取文本类、最佳截图信息。
-默认值：0
+   * 指定拉取的结果信息。
+- 取值范围：
+     0：全部。
+    1：文本类。
+    2：身份证信息。
+    3：最佳截图信息。
+    5：意愿核身朗读模式相关结果。
+    6：意愿核身问答模式相关结果。
+- 例如 13表示拉取文本类、最佳截图信息。
+- 默认值：0
    */
   InfoType?: string
   /**
-   * 从活体视频中截取一定张数的最佳帧。默认为0，最大为3，超出3的最多只给3张。（InfoType需要包含3）
+   * 从活体视频中截取一定张数的最佳帧。
+- 默认为0，最大为3，超出3的最多只给3张。
+- InfoType需要包含3。
    */
   BestFramesCount?: number
   /**
-   * 是否对身份证照片进行裁边。默认为false。（InfoType需要包含2）
+   * 是否对身份证照片进行裁边。
+- 默认为false。
+- InfoType需要包含2。
    */
   IsCutIdCardImage?: boolean
   /**
-   * 是否需要从身份证中抠出头像。默认为false。（InfoType需要包含2）
+   * 是否需要从身份证中抠出头像。
+- 默认为false。
+- InfoType需要包含2。
    */
   IsNeedIdCardAvatar?: boolean
 }
@@ -1572,8 +1704,9 @@ export interface DetectAuthResponse {
    */
   Url?: string
   /**
-   * 一次核身流程的标识，有效时间为7,200秒；
-完成核身后，可用该标识获取验证结果信息。
+   * 一次核验流程的唯一标识。
+- 有效时间为7,200秒，超过有效期再进行人脸核验会报错，请在有效期内进行核验。
+- 完成人脸核验后，需根据此标识调用[获取实名核身结果信息增强版](https://cloud.tencent.com/document/api/1007/41957)获取用户最终验证结果信息。
    */
   BizToken?: string
   /**
@@ -1908,48 +2041,73 @@ Config = {"CopyWarn":true,"ReshootWarn":true}。
 export interface GetEidTokenConfig {
   /**
    * 姓名身份证输入方式。
-1：传身份证正反面OCR   
-2：传身份证正面OCR  
-3：用户手动输入  
-4：客户后台传入  
-默认1
-注：使用OCR时仅支持用户修改结果中的姓名
+- 取值范围：
+1：传身份证正反面OCR。
+2：传身份证正面OCR。
+3：用户手动输入。
+4：客户后台传入。
+- 默认值：1。
+- 注意：使用OCR时仅支持用户修改结果中的姓名。
    */
   InputType?: string
   /**
-   * 是否使用意愿核身，默认不使用。注意：如开启使用，则计费标签按【意愿核身】计费标签计价；如不开启，则计费标签按【E证通】计费标签计价，价格详见：[价格说明](https://cloud.tencent.com/document/product/1007/56804)。
+   * 是否使用意愿核身。
+
+- 默认不使用。
+- 注意：如开启使用，则计费标签按【意愿核身】计费标签计价；如不开启，则计费标签按【E证通】计费标签计价，价格详见：[价格说明](https://cloud.tencent.com/document/product/1007/56804)。
    */
   UseIntentionVerify?: boolean
   /**
-   * 意愿核身模式。枚举值：1( 语音朗读模式)，2（语音问答模式） ，3（点头确认模式）。默认值为1。
+   * 意愿核身模式。
+- 取值范围：
+1：语音朗读模式。
+2：语音问答模式。
+3：点头确认模式。
+- 默认值为1。
    */
   IntentionMode?: string
   /**
-   * 意愿核身朗读模式使用的文案，若未使用意愿核身朗读功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
+   * 意愿核身朗读模式使用的文案。
+- 若未使用意愿核身朗读功能，该字段无需传入。
+- 默认为空，最长可接受120的字符串长度。
    */
   IntentionVerifyText?: string
   /**
-   * 意愿核身问答模式的配置列表。当前仅支持一个问答。
+   * 意愿核身问答模式的配置列表。
+- 当前仅支持一个问答。
    */
   IntentionQuestions?: Array<IntentionQuestion>
   /**
-   * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。默认为空，最长可接受150的字符串长度。
+   * 意愿核身（点头确认模式）使用的文案。
+- 若未使用意愿核身（点头确认模式），则该字段无需传入。
+- 默认为空，最长可接受150的字符串长度。
    */
   IntentionActions?: Array<IntentionActionConfig>
   /**
-   * 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认开启。
+   * 意愿核身过程中识别用户的回答意图。
+- 开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过。
+- 默认开启。
    */
   IntentionRecognition?: boolean
   /**
-   * 是否支持港澳台居住证识别
+   * 是否支持港澳台居住证识别。
    */
   IsSupportHMTResidentPermitOCR?: boolean
   /**
-   * 用户语音回答过程中是否开启张嘴识别检测，默认不开启，仅在意愿核身问答模式中使用。
+   * 用户语音回答过程中是否开启张嘴识别检测。
+- 默认不开启。
+- 仅在意愿核身问答模式中使用。
    */
   MouthOpenRecognition?: boolean
   /**
-   * 意愿核身语音播报速度，配置后问答模式和点头模式的语音播报环节都会生效，默认值为0： 0：智能语速（根据播报文案的长度自动调整语音播报速度） 1：固定1倍速 2：固定1.2倍速 3：固定1.5倍速
+   * 意愿核身语音播报速度。
+- 配置后问答模式和点头模式的语音播报环节都会生效。
+- 默认值为0。
+- 取值范围： 
+0：智能语速（根据播报文案的长度自动调整语音播报速度）。
+1：固定1倍速。
+2：固定1.2倍速。
+3：固定1.5倍速。
    */
   Speed?: number
 }
@@ -2098,16 +2256,19 @@ export interface PhoneVerificationCMCCRequest {
 }
 
 /**
- * 核身文本信息
+ * 核身文本信息。
  */
 export interface DetectInfoText {
   /**
-   * 本次流程最终验证结果。0为成功（仅包含活体人脸核身结果，不包含意愿核身结果）
+   * 本次流程最终验证结果。
+- 取值范围：0为成功。
+- 仅包含活体人脸核身结果，不包含意愿核身结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrCode?: number
   /**
-   * 本次流程最终验证结果描述。（仅描述用，文案更新时不会通知。）
+   * 本次流程最终验证结果描述。
+- 仅描述用，文案更新时不会通知。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
@@ -2117,10 +2278,11 @@ export interface DetectInfoText {
    */
   IdCard?: string
   /**
-   * 用户认证时使用的证件号码类型：
-0：二代身份证的证件号码
-1：港澳台居住证的证件号码
-2：其他（核验使用的证件号码非合法身份号码）
+   * 用户认证时使用的证件号码类型。
+- 取值范围：
+    0：二代身份证的证件号码。
+    1：港澳台居住证的证件号码。
+    2：其他（核验使用的证件号码非合法身份号码）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseIDType?: number
@@ -2140,7 +2302,8 @@ export interface DetectInfoText {
    */
   OcrAddress?: string
   /**
-   * 身份校验环节识别结果：生日。格式为：YYYY/M/D
+   * 身份校验环节识别结果：生日。
+- 格式为：YYYY/M/D
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrBirth?: string
@@ -2150,7 +2313,8 @@ export interface DetectInfoText {
    */
   OcrAuthority?: string
   /**
-   * 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD
+   * 身份校验环节识别结果：有效日期。
+- 格式为：YYYY.MM.DD-YYYY.MM.DD。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrValidDate?: string
@@ -2171,32 +2335,39 @@ export interface DetectInfoText {
   OcrGender?: string
   /**
    * 身份校验环节采用的信息上传方式。
-取值有"NFC"、"OCR"、"手动输入"、"其他"
+- 取值有"NFC"、"OCR"、"手动输入"、"其他"
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdInfoFrom?: string
   /**
-   * 本次流程最终活体结果。0为成功
+   * 本次流程最终活体结果。
+- 0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveStatus?: number
   /**
-   * 本次流程最终活体结果描述。（仅描述用，文案更新时不会通知。）
+   * 本次流程最终活体结果描述。
+- 仅描述用，文案更新时不会通知。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveMsg?: string
   /**
-   * 本次流程最终一比一结果。0为成功
+   * 本次流程最终一比一结果。
+- 0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comparestatus?: number
   /**
-   * 本次流程最终一比一结果描述。（仅描述用，文案更新时不会通知。）
+   * 本次流程最终一比一结果描述。
+- 仅描述用，文案更新时不会通知。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comparemsg?: string
   /**
-   * 本次流程活体一比一的分数，取值范围 [0.00, 100.00]。相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * 本次流程活体一比一的分数。
+- 取值范围 [0.00, 100.00]。
+- 相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值。
+- 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Sim?: string
@@ -2216,21 +2387,22 @@ export interface DetectInfoText {
    */
   LivenessDetail?: Array<DetectDetail>
   /**
-   * 描述当前请求活体阶段被拒绝的详细原因，详情如下：
-01-用户全程闭眼
-02-用户未完成指定动作
-03-疑似翻拍攻击
-04-疑似合成攻击
-05-疑似黑产模版
-06-疑似存在水印
-07-反光校验未通过
-08-疑似中途换人
-09-人脸质量过差
-10-距离校验不通过
-11-疑似对抗样本攻击
-12-嘴巴区域疑似存在攻击痕迹
-13-眼睛区域疑似存在攻击痕迹
-14-眼睛或嘴巴被遮挡
+   * 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。
+- 详情如下：
+    01-用户全程闭眼
+    02-用户未完成指定动作
+    03-疑似翻拍攻击
+    04-疑似合成攻击
+    05-疑似黑产模版
+    06-疑似存在水印
+    07-反光校验未通过
+    08-疑似中途换人
+    09-人脸质量过差
+    10-距离校验不通过
+    11-疑似对抗样本攻击
+    12-嘴巴区域疑似存在攻击痕迹
+    13-眼睛区域疑似存在攻击痕迹
+    14-眼睛或嘴巴被遮挡
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessInfoTag?: Array<string>
@@ -2240,41 +2412,43 @@ export interface DetectInfoText {
    */
   Mobile?: string
   /**
-   * 本次流程最终比对库源类型。包括：
-权威库；
-业务方自有库（用户上传照片、客户的混合库、混合部署库）；
-二次验证库；
-人工审核库；
+   * 本次流程最终比对库源类型。
+- 取值范围：
+    权威库。
+    业务方自有库（用户上传照片、客户的混合库、混合部署库）。
+    二次验证库。
+    人工审核库。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompareLibType?: string
   /**
-   * 本次流程最终活体类型。包括：
-0：未知
-1：数字活体
-2：动作活体
-3：静默活体
-4：一闪活体（动作+光线）
+   * 本次流程最终活体类型。
+- 取值范围：
+    0：未知
+    1：数字活体
+    2：动作活体
+    3：静默活体
+    4：一闪活体（动作+光线）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessMode?: number
   /**
-   * nfc重复计费requestId列表
+   * nfc重复计费requestId列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NFCRequestIds?: Array<string>
   /**
-   * nfc重复计费计数
+   * nfc重复计费计数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NFCBillingCounts?: number
   /**
-   * 港澳台居住证通行证号码
+   * 港澳台居住证通行证号码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PassNo?: string
   /**
-   * 港澳台居住证签发次数
+   * 港澳台居住证签发次数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VisaNum?: string
@@ -2471,21 +2645,29 @@ export interface GetDetectInfoEnhancedRequest {
    */
   RuleId: string
   /**
-   * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：视频最佳截图信息）。
-如 13表示拉取文本类、视频最佳截图信息。
-默认值：0
+   * 指定拉取的结果信息。
+- 取值（0：全部；1：文本类；2：身份证信息；3：视频最佳截图信息）。
+- 例如 13 表示拉取文本类、视频最佳截图信息。
+- 默认值：0
    */
   InfoType?: string
   /**
-   * 从活体视频中截取一定张数的最佳帧（仅部分服务支持，若需使用请与慧眼小助手沟通）。默认为0，最大为10，超出10的最多只给10张。（InfoType需要包含3）
+   * 从活体视频中截取一定张数的最佳帧。
+- 仅部分服务支持，若需使用请与慧眼小助手沟通。
+- 默认值为0，最大值为10，超出10的最多只给10张。
+- InfoType需要包含3。
    */
   BestFramesCount?: number
   /**
-   * 是否对身份证照片进行裁边。默认为false。（InfoType需要包含2）
+   * 是否对身份证照片进行裁边。
+- 默认为false。
+- InfoType需要包含2。
    */
   IsCutIdCardImage?: boolean
   /**
-   * 是否需要从身份证中抠出头像。默认为false。（InfoType需要包含2）
+   * 是否需要从身份证中抠出头像。
+- 默认为false。
+- InfoType需要包含2。
    */
   IsNeedIdCardAvatar?: boolean
   /**
@@ -2493,11 +2675,13 @@ export interface GetDetectInfoEnhancedRequest {
    */
   IsEncrypt?: boolean
   /**
-   * 是否需要对返回中的敏感信息进行加密。仅指定加密算法Algorithm即可，其余字段传入默认值。其中敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName
+   * 是否需要对返回中的敏感信息进行加密。
+- 只需指定加密算法Algorithm即可，其余字段传入默认值。
+- 敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName。
    */
   Encryption?: Encryption
   /**
-   * 是否对回包整体进行加密
+   * 是否对回包整体进行加密。
    */
   IsEncryptResponse?: boolean
 }
@@ -2507,16 +2691,21 @@ export interface GetDetectInfoEnhancedRequest {
  */
 export interface LivenessRecognitionResponse {
   /**
-   * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+   * 验证通过后的视频最佳截图照片。
+- 照片为BASE64编码后的值，jpg格式。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameBase64?: string
   /**
-   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * 相似度。
+- 取值范围 [0.00, 100.00]。
+- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
    */
   Sim?: number
   /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   * 业务错误码。
+- 成功情况返回Success。
+- 错误情况请参考下方错误码 列表中FailedOperation部分
    */
   Result?: string
   /**
@@ -2544,7 +2733,9 @@ export type GetLiveCodeRequest = null
  */
 export interface GetEidResultResponse {
   /**
-   * 文本类信息。（基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从Eidinfo参数中返回，如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
+   * 文本类信息。
+- 基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从EidInfo参数中返回。
+- 如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: DetectInfoText
@@ -2559,22 +2750,27 @@ export interface GetEidResultResponse {
    */
   BestFrame?: DetectInfoBestFrame
   /**
-   * Eid信息。（包括商户下用户唯一标识以及加密后的姓名、身份证号信息。解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
+   * Eid信息。
+- 包括商户下用户唯一标识以及加密后的姓名、身份证号信息。
+- 解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EidInfo?: EidInfo
   /**
-   * 意愿核身朗读模式相关信息。若未使用意愿核身朗读功能，该字段返回值可以不处理。
+   * 意愿核身朗读模式相关信息。
+- 若未使用意愿核身朗读功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionVerifyData?: IntentionVerifyData
   /**
-   * 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。
+   * 意愿核身问答模式相关信息。
+- 若未使用意愿核身问答模式功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionQuestionResult?: IntentionQuestionResult
   /**
-   * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
+   * 意愿核身点头确认模式的结果信息。
+- 若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntentionActionResult?: IntentionActionResult
@@ -2649,15 +2845,18 @@ export interface PhoneVerificationRequest {
  */
 export interface GetFaceIdResultRequest {
   /**
-   * SDK人脸核身流程的标识，调用GetFaceIdToken接口时生成。
+   * SDK人脸核身流程的标识。
+- 调用GetFaceIdToken接口时生成。
    */
   FaceIdToken: string
   /**
-   * 是否需要拉取视频，默认false不需要
+   * 是否需要拉取视频。
+- 默认false：不需要。
    */
   IsNeedVideo?: boolean
   /**
-   * 是否需要拉取截帧，默认false不需要
+   * 是否需要拉取截帧。
+- 默认false：不需要。
    */
   IsNeedBestFrame?: boolean
 }
@@ -2696,33 +2895,44 @@ export interface CheckPhoneAndNameResponse {
  */
 export interface GetFaceIdTokenRequest {
   /**
-   * 本地上传照片(LOCAL)、商业库(BUSINESS)
+   * 比对库。
+- 取值范围：
+LOCAL：本地上传照片。
+BUSINESS：商业库。
    */
   CompareLib: string
   /**
-   * CompareLib为商业库时必传。
+   * 身份证。
+- CompareLib为商业库时必传。
    */
   IdCard?: string
   /**
-   * CompareLib为商业库时必传。
+   * 姓名。
+- CompareLib为商业库时必传。
    */
   Name?: string
   /**
-   * CompareLib为上传照片比对时必传，Base64后图片最大8MB。
-请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+   * 图片的Base64。
+- CompareLib为上传照片比对时必传。
+- Base64后图片最大8MB。
+- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
    */
   ImageBase64?: string
   /**
-   * SDK中生成的Meta字符串
+   * SDK中生成的Meta字符串。
    */
   Meta?: string
   /**
-   * 透传参数 1000长度字符串
+   * 透传参数。
+- 1000长度字符串
    */
   Extra?: string
   /**
-   * 默认为false，设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。开通地址见https://console.cloud.tencent.com/faceid/cos
-【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。
+   * 是否使用cos桶。
+- 默认为false。
+- 设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。
+- 开通地址见https://console.cloud.tencent.com/faceid/cos
+- 【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。
    */
   UseCos?: boolean
   /**
@@ -2730,8 +2940,9 @@ export interface GetFaceIdTokenRequest {
    */
   Encryption?: Encryption
   /**
-   * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加腾讯云人脸核身小助手进行咨询。
-示例值：1
+   * 用于细分客户使用场景。
+- 申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。
+- 如有疑问，请添加腾讯云人脸核身小助手进行咨询。
    */
   RuleId?: string
 }
@@ -2782,11 +2993,11 @@ export interface IntentionActionResult {
  */
 export interface GetFaceidRiskInfoTokenRequest {
   /**
-   * SDK中生成的Meta字符串
+   * SDK中生成的Meta字符串。
    */
   Meta?: string
   /**
-   * 透传参数 1000长度字符串
+   * 透传参数 1000长度字符串。
    */
   Extra?: string
 }
@@ -2815,11 +3026,12 @@ export interface BankCard2EVerificationRequest {
  */
 export interface ImageRecognitionV2Request {
   /**
-   * 身份证号
+   * 身份证号。
    */
   IdCard: string
   /**
-   * 姓名。中文请使用UTF-8编码。
+   * 姓名。
+- 中文请使用UTF-8编码。
    */
   Name: string
   /**
@@ -2833,7 +3045,8 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
    */
   Optional?: string
   /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * 敏感数据加密信息。
+- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
 }
@@ -2923,7 +3136,7 @@ export interface ChargeDetail {
  */
 export interface ParseNfcDataRequest {
   /**
-   * 前端SDK返回
+   * 前端SDK返回。
    */
   ReqId: string
 }
@@ -3073,7 +3286,7 @@ export interface GetDetectInfoRequest {
 }
 
 /**
- * 核身身份证图片信息
+ * 核身身份证图片信息。
  */
 export interface DetectInfoIdCardData {
   /**
@@ -3082,7 +3295,7 @@ export interface DetectInfoIdCardData {
    */
   OcrFront?: string
   /**
-   * OCR反面照片的base64编码
+   * OCR反面照片的base64编码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrBack?: string
@@ -3102,28 +3315,32 @@ export interface DetectInfoIdCardData {
    */
   Avatar?: string
   /**
-   * 身份证人像面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
--9100 身份证有效日期不合法告警，
--9101 身份证边框不完整告警，
--9102 身份证复印件告警，
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证 PS 告警（疑似存在PS痕迹），
--9107 身份证反光告警。
+   * 身份证人像面告警码。
+- 开启身份证告警功能后才会返回。
+- 返回数组中可能出现的告警码如下：
+    - -9100 身份证有效日期不合法告警。
+    - -9101 身份证边框不完整告警。
+    - -9102 身份证复印件告警。
+    - -9103 身份证翻拍告警。
+    - -9105 身份证框内遮挡告警。
+    - -9104 临时身份证告警。
+    - -9106 身份证 PS 告警（疑似存在PS痕迹）。
+    - -9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarnInfos?: Array<number | bigint>
   /**
-   * 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
--9100 身份证有效日期不合法告警，
--9101 身份证边框不完整告警，
--9102 身份证复印件告警，
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证 PS 告警（疑似存在PS痕迹），
--9107 身份证反光告警。
+   * 身份证国徽面告警码。
+- 开启身份证告警功能后才会返回。
+- 返回数组中可能出现的告警码如下：
+    -   -9100 身份证有效日期不合法告警，
+    -     -9101 身份证边框不完整告警，
+    -     -9102 身份证复印件告警，
+    -     -9103 身份证翻拍告警，
+    -     -9105 身份证框内遮挡告警，
+    -     -9104 临时身份证告警，
+    -     -9106 身份证 PS 告警（疑似存在PS痕迹），
+    -     -9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackWarnInfos?: Array<number | bigint>
@@ -3153,12 +3370,14 @@ export interface CheckPhoneAndNameRequest {
  */
 export interface GetEidTokenResponse {
   /**
-   * 一次核身流程的标识，有效时间为600秒；
-完成核身后，可用该标识获取验证结果信息。
+   * 一次核身流程的标识。
+- 有效时间为600秒。
+- 完成核身后，可用该标识获取验证结果信息。
    */
   EidToken?: string
   /**
-   * 发起核身流程的URL，用于H5场景核身。
+   * 发起核身流程的URL。
+- 用于H5场景核身。
    */
   Url?: string
   /**
@@ -3172,11 +3391,14 @@ export interface GetEidTokenResponse {
  */
 export interface IntentionQuestion {
   /**
-   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。
+   * 当选择语音问答模式时，系统自动播报的问题文本。
+- 最大长度为150个字符。
    */
   Question: string
   /**
-   * 当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表，传入后可自动判断用户回答文本是否在标准文本列表中。列表长度最大为50，单个答案长度限制10个字符。
+   * 当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表。
+- 传入后可自动判断用户回答文本是否在标准文本列表中。
+- 列表长度最大为50，单个答案长度限制10个字符。
    */
   Answers: Array<string>
 }

@@ -638,9 +638,9 @@ it("ocr.v20181119.BankSlipOCR", async function () {
     }
 })
 
-it("ocr.v20181119.ResidenceBookletOCR", async function () {
+it("ocr.v20181119.VehicleRegCertOCR", async function () {
     try {
-       const data = await client.ResidenceBookletOCR({})
+       const data = await client.VehicleRegCertOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +651,16 @@ it("ocr.v20181119.ResidenceBookletOCR", async function () {
 it("ocr.v20181119.RecognizeTravelCardOCR", async function () {
     try {
        const data = await client.RecognizeTravelCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RecognizeKoreanIDCardOCR", async function () {
+    try {
+       const data = await client.RecognizeKoreanIDCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -671,6 +681,16 @@ it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
 it("ocr.v20181119.DriverLicenseOCR", async function () {
     try {
        const data = await client.DriverLicenseOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RecognizeKoreanDrivingLicenseOCR", async function () {
+    try {
+       const data = await client.RecognizeKoreanDrivingLicenseOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +828,9 @@ it("ocr.v20181119.AdvertiseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VehicleRegCertOCR", async function () {
+it("ocr.v20181119.ResidenceBookletOCR", async function () {
     try {
-       const data = await client.VehicleRegCertOCR({})
+       const data = await client.ResidenceBookletOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -22,17 +22,17 @@ export interface QueryFaceMorphJobResponse {
   /**
    * 当前任务状态：排队中、处理中、处理失败或者处理完成
    */
-  JobStatus: string
+  JobStatus?: string
   /**
    * 人像渐变输出的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FaceMorphOutput: FaceMorphOutput
+  FaceMorphOutput?: FaceMorphOutput
   /**
    * 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobStatusCode: number
+  JobStatusCode?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -169,17 +169,17 @@ export interface FaceMorphOutput {
    * 人像渐变输出的url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MorphUrl: string
+  MorphUrl?: string
   /**
    * 人像渐变输出的结果MD5，用于校验
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MorphMd5: string
+  MorphMd5?: string
   /**
    * 人像渐变输出的结果封面图base64字符串
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverImage: string
+  CoverImage?: string
 }
 
 /**
@@ -325,11 +325,11 @@ export interface FaceCartoonPicResponse {
   /**
    * 结果图片Base64信息。
    */
-  ResultImage: string
+  ResultImage?: string
   /**
    * RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64)
    */
-  ResultUrl: string
+  ResultUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -343,11 +343,11 @@ export interface MorphFaceResponse {
   /**
    * 人像渐变任务的Job id
    */
-  JobId: string
+  JobId?: string
   /**
    * 预估处理时间，粒度为秒
    */
-  EstimatedProcessTime: number
+  EstimatedProcessTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

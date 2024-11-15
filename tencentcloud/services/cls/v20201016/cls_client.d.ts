@@ -67,7 +67,7 @@ export declare class Client extends AbstractClient {
     /**
      * 云产品接入使用相关接口
      */
-    DescribeCloudProductLogTasks(req?: DescribeCloudProductLogTasksRequest, cb?: (error: string, rep: DescribeCloudProductLogTasksResponse) => void): Promise<DescribeCloudProductLogTasksResponse>;
+    DescribeCloudProductLogTasks(req: DescribeCloudProductLogTasksRequest, cb?: (error: string, rep: DescribeCloudProductLogTasksResponse) => void): Promise<DescribeCloudProductLogTasksResponse>;
     /**
      * 内部云产品接入使用相关接口
      */

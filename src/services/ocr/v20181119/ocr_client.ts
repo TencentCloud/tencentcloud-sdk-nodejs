@@ -66,8 +66,9 @@ import {
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
-  SealInfo,
+  RecognizeKoreanDrivingLicenseOCRResponse,
   RecognizeIndonesiaIDCardOCRRequest,
+  RecognizeKoreanDrivingLicenseOCRRequest,
   InvoiceGeneralInfo,
   TextVatInvoice,
   InstitutionOCRResponse,
@@ -169,7 +170,7 @@ import {
   PassportOCRResponse,
   FinancialBillItemDetails,
   CardWarnInfo,
-  VehicleRegCertOCRRequest,
+  RecognizeKoreanIDCardOCRResponse,
   RecognizeTravelCardOCRResponse,
   ElectronicAirTransportDetail,
   FinancialBill,
@@ -294,8 +295,10 @@ import {
   MainlandTravelPermitBackInfos,
   TableCell,
   TableOCRResponse,
+  VehicleRegCertOCRRequest,
   DetectedWordCoordPoint,
   QuestionBlockObj,
+  RecognizeKoreanIDCardOCRRequest,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
   VatRollInvoiceInfo,
@@ -317,6 +320,7 @@ import {
   VatInvoiceOCRResponse,
   QuotaInvoiceOCRRequest,
   BankCardOCRResponse,
+  SealInfo,
   BusinessCardOCRRequest,
   RecognizePhilippinesDrivingLicenseOCRResponse,
   FinanBillOCRRequest,
@@ -1129,8 +1133,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 菲律宾驾驶证识别
-   */
+     * 菲律宾驾驶证识别
+
+默认接口请求频率限制：20次/秒。
+     */
   async RecognizePhilippinesDrivingLicenseOCR(
     req: RecognizePhilippinesDrivingLicenseOCRRequest,
     cb?: (error: string, rep: RecognizePhilippinesDrivingLicenseOCRResponse) => void
@@ -1449,15 +1455,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async ResidenceBookletOCR(
-    req: ResidenceBookletOCRRequest,
-    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
-  ): Promise<ResidenceBookletOCRResponse> {
-    return this.request("ResidenceBookletOCR", req, cb)
+  async VehicleRegCertOCR(
+    req: VehicleRegCertOCRRequest,
+    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
+  ): Promise<VehicleRegCertOCRResponse> {
+    return this.request("VehicleRegCertOCR", req, cb)
   }
 
   /**
@@ -1470,6 +1476,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeTravelCardOCRResponse) => void
   ): Promise<RecognizeTravelCardOCRResponse> {
     return this.request("RecognizeTravelCardOCR", req, cb)
+  }
+
+  /**
+   * 韩国身份证识别
+   */
+  async RecognizeKoreanIDCardOCR(
+    req: RecognizeKoreanIDCardOCRRequest,
+    cb?: (error: string, rep: RecognizeKoreanIDCardOCRResponse) => void
+  ): Promise<RecognizeKoreanIDCardOCRResponse> {
+    return this.request("RecognizeKoreanIDCardOCR", req, cb)
   }
 
   /**
@@ -1500,6 +1516,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DriverLicenseOCRResponse) => void
   ): Promise<DriverLicenseOCRResponse> {
     return this.request("DriverLicenseOCR", req, cb)
+  }
+
+  /**
+   * 韩国驾驶证识别
+   */
+  async RecognizeKoreanDrivingLicenseOCR(
+    req: RecognizeKoreanDrivingLicenseOCRRequest,
+    cb?: (error: string, rep: RecognizeKoreanDrivingLicenseOCRResponse) => void
+  ): Promise<RecognizeKoreanDrivingLicenseOCRResponse> {
+    return this.request("RecognizeKoreanDrivingLicenseOCR", req, cb)
   }
 
   /**
@@ -1718,15 +1744,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async VehicleRegCertOCR(
-    req: VehicleRegCertOCRRequest,
-    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
-  ): Promise<VehicleRegCertOCRResponse> {
-    return this.request("VehicleRegCertOCR", req, cb)
+  async ResidenceBookletOCR(
+    req: ResidenceBookletOCRRequest,
+    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
+  ): Promise<ResidenceBookletOCRResponse> {
+    return this.request("ResidenceBookletOCR", req, cb)
   }
 
   /**

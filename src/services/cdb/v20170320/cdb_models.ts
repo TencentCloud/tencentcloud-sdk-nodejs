@@ -4961,7 +4961,7 @@ export interface CreateDBInstanceRequest {
    */
   InstanceRole?: string
   /**
-   * 实例 ID，购买只读实例时必填，该字段表示只读实例的主实例ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。
+   * 实例 ID，购买只读实例时必填，该字段表示只读实例的主实例 ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。
    */
   MasterInstanceId?: string
   /**
@@ -6363,12 +6363,10 @@ export interface ProxyInst {
   Zone?: string
   /**
    * 实例节点ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstNodeId?: string
   /**
    * 节点角色
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstNodeRole?: string
 }
@@ -9007,6 +9005,10 @@ export interface CreateDBInstanceHourRequest {
    * 磁盘类型，基础版或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。
    */
   DiskType?: string
+  /**
+   * 集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群
+   */
+  ClusterType?: string
 }
 
 /**

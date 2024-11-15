@@ -1276,14 +1276,13 @@ export interface Dps {
 }
 
 /**
- * 用户管理列表过滤器
+ * TerminateTasks返回参数结构体
  */
-export interface UserManagerFilter {
+export interface TerminateTasksResponse {
   /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName?: string
+  RequestId?: string
 }
 
 /**
@@ -1434,7 +1433,7 @@ export interface LoadAutoScaleStrategy {
 }
 
 /**
- * EMR Lite HBase 实例信息
+ * Serverless HBase 实例信息
  */
 export interface SLInstanceInfo {
   /**
@@ -1499,6 +1498,18 @@ export interface SLInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念，设置为0
+   */
+  AutoRenewFlag?: number
+  /**
+   * 隔离时间，未隔离返回0000-00-00 00:00:00。
+   */
+  IsolateTime?: string
+  /**
+   * 过期时间，后付费返回0000-00-00 00:00:00
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -1833,6 +1844,10 @@ export interface CreateSLInstanceRequest {
    * 实例要绑定的标签列表。
    */
   Tags?: Array<Tag>
+  /**
+   * 预付费参数
+   */
+  PrePaySetting?: PrePaySetting
 }
 
 /**
@@ -3013,79 +3028,19 @@ export interface JobResult {
 }
 
 /**
- * 资源详情
+ * Serverless HBase 预付费设置
  */
-export interface Resource {
+export interface PrePaySetting {
   /**
-   * 节点规格描述，如CVM.SA2。
+   * 时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Spec: string
+  Period: Period
   /**
-   * 存储类型
-取值范围：
-<li>4：表示云SSD。</li>
-<li>5：表示高效云盘。</li>
-<li>6：表示增强型SSD云硬盘。</li>
-<li>11：表示吞吐型云硬盘。</li>
-<li>12：表示极速型SSD云硬盘。</li>
+   * 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageType: number
-  /**
-   * 磁盘类型
-取值范围：
-<li>CLOUD_SSD：表示云SSD。</li>
-<li>CLOUD_PREMIUM：表示高效云盘。</li>
-<li>CLOUD_BASIC：表示云硬盘。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskType: string
-  /**
-   * 内存容量,单位为M
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemSize: number
-  /**
-   * CPU核数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cpu: number
-  /**
-   * 数据盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskSize: number
-  /**
-   * 系统盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RootSize?: number
-  /**
-   * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MultiDisks?: Array<MultiDisk>
-  /**
-   * 需要绑定的标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 规格类型，如S2.MEDIUM8
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 本地盘数量，该字段已废弃
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LocalDiskNum?: number
-  /**
-   * 本地盘数量，如2
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskNum?: number
+  AutoRenewFlag: number
 }
 
 /**
@@ -4342,6 +4297,82 @@ export interface DescribeAutoScaleGroupGlobalConfResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源详情
+ */
+export interface Resource {
+  /**
+   * 节点规格描述，如CVM.SA2。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec: string
+  /**
+   * 存储类型
+取值范围：
+<li>4：表示云SSD。</li>
+<li>5：表示高效云盘。</li>
+<li>6：表示增强型SSD云硬盘。</li>
+<li>11：表示吞吐型云硬盘。</li>
+<li>12：表示极速型SSD云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType: number
+  /**
+   * 磁盘类型
+取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType: string
+  /**
+   * 内存容量,单位为M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize: number
+  /**
+   * CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * 数据盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize: number
+  /**
+   * 系统盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootSize?: number
+  /**
+   * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiDisks?: Array<MultiDisk>
+  /**
+   * 需要绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 规格类型，如S2.MEDIUM8
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 本地盘数量，该字段已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalDiskNum?: number
+  /**
+   * 本地盘数量，如2
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskNum?: number
 }
 
 /**
@@ -6018,6 +6049,10 @@ export interface UpdateInstanceSettings {
  */
 export interface DescribeSLInstanceResponse {
   /**
+   * 实例字符串标识。
+   */
+  InstanceId?: string
+  /**
    * 实例名称。
    */
   InstanceName?: string
@@ -6046,6 +6081,42 @@ export interface DescribeSLInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * 实例数字标识。
+   */
+  ClusterId?: number
+  /**
+   * 实例区域ID。
+   */
+  RegionId?: number
+  /**
+   * 实例主可用区。
+   */
+  Zone?: string
+  /**
+   * 实例过期时间，后付费返回0000-00-00 00:00:00
+   */
+  ExpireTime?: string
+  /**
+   * 实例隔离时间，未隔离返回0000-00-00 00:00:00。
+   */
+  IsolateTime?: string
+  /**
+   * 实例创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 实例状态码，-2:  "TERMINATED", 2:   "RUNNING", 14:  "TERMINATING", 19:  "ISOLATING", 22:  "ADJUSTING", 201: "ISOLATED"。
+   */
+  Status?: number
+  /**
+   * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0
+   */
+  AutoRenewFlag?: number
+  /**
+   * 实例节点总数。
+   */
+  NodeNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6627,13 +6698,19 @@ export interface ModifyResourcePoolsResponse {
 }
 
 /**
- * TerminateTasks返回参数结构体
+ * Serverless HBase包年包月时间
  */
-export interface TerminateTasksResponse {
+export interface Period {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 时间跨度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  TimeSpan: number
+  /**
+   * 时间单位，"m"代表月。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeUnit?: string
 }
 
 /**
@@ -7445,6 +7522,17 @@ export interface ModifyAutoRenewFlagRequest {
    * 计算资源id
    */
   ComputeResourceId?: string
+}
+
+/**
+ * 用户管理列表过滤器
+ */
+export interface UserManagerFilter {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
 }
 
 /**

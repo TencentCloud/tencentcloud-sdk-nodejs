@@ -210,8 +210,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户可以使用该接口自建资源，只支持白名单用户
-   */
+     * 不再使用
+
+用户可以使用该接口自建资源，只支持白名单用户
+     */
   async CreateResourceInstances(
     req: CreateResourceInstancesRequest,
     cb?: (error: string, rep: CreateResourceInstancesResponse) => void

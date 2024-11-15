@@ -2923,55 +2923,55 @@ export interface FunctionLog {
   /**
    * 函数的名称
    */
-  FunctionName: string
+  FunctionName?: string
   /**
    * 函数执行完成后的返回值
    */
-  RetMsg: string
+  RetMsg?: string
   /**
    * 执行该函数对应的requestId
    */
-  RequestId: string
+  RequestId?: string
   /**
    * 函数开始执行时的时间点
    */
-  StartTime: string
+  StartTime?: string
   /**
-   * 函数执行结果，如果是 0 表示执行成功，其他值表示失败
+   * 函数执行结果，如果是 0 表示执行成功，2表示函数运行中，3表示函数执行中断，其他值表示失败
    */
-  RetCode: number
+  RetCode?: number
   /**
    * 函数调用是否结束，如果是 1 表示执行结束，其他值表示调用异常
    */
-  InvokeFinished: number
+  InvokeFinished?: number
   /**
    * 函数执行耗时，单位为 ms
    */
-  Duration: number
+  Duration?: number
   /**
    * 函数计费时间，根据 duration 向上取最近的 100ms，单位为ms
    */
-  BillDuration: number
+  BillDuration?: number
   /**
    * 函数执行时消耗实际内存大小，单位为 Byte
    */
-  MemUsage: number
+  MemUsage?: number
   /**
    * 函数执行过程中的日志输出
    */
-  Log: string
+  Log?: string
   /**
    * 日志等级
    */
-  Level: string
+  Level?: string
   /**
    * 日志来源
    */
-  Source: string
+  Source?: string
   /**
    * 重试次数
    */
-  RetryNum: number
+  RetryNum?: number
 }
 
 /**

@@ -918,11 +918,11 @@ export interface DeleteRouteTriggerTimeRequest {
  */
 export interface CreatePostPaidInstanceRequest {
   /**
-   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * ckafka集群实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   InstanceName?: string
   /**
-   * 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
+   * 私有网络Id  创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
    */
   VpcId?: string
   /**
@@ -993,6 +993,10 @@ export interface CreatePostPaidInstanceRequest {
    * 标签
    */
   Tags?: Array<Tag>
+  /**
+   * 弹性带宽开关 0不开启  1开启（0默认
+   */
+  ElasticBandwidthSwitch?: number
 }
 
 /**
@@ -1958,17 +1962,17 @@ export interface CreateInstancePostData {
    * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 订单号列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
-   * 实例Id，当购买多个实例时，默认返回购买的第一个实例 id
+   * ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 订单和购买实例对应映射列表
 注意：此字段可能返回 null，表示取不到有效值。
@@ -7923,16 +7927,16 @@ export interface CreateInstancePostResp {
   /**
    * 返回的code，0为正常，非0为错误
    */
-  ReturnCode: string
+  ReturnCode?: string
   /**
    * 接口返回消息，当接口报错时提示错误信息
    */
-  ReturnMessage: string
+  ReturnMessage?: string
   /**
    * 返回的Data数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CreateInstancePostData
+  Data?: CreateInstancePostData
 }
 
 /**

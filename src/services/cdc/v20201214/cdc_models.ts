@@ -88,63 +88,63 @@ export interface DedicatedClusterInstanceType {
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 规格名称
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 网卡类型，例如：25代表25G网卡
    */
-  NetworkCard: number
+  NetworkCard?: number
   /**
    * 实例的CPU核数，单位：核。
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 实例内存容量，单位：`GB`。
    */
-  Memory: number
+  Memory?: number
   /**
    * 实例机型系列。
    */
-  InstanceFamily: string
+  InstanceFamily?: string
   /**
    * 机型名称。
    */
-  TypeName: string
+  TypeName?: string
   /**
    * 本地存储块数量。
    */
-  StorageBlockAmount: number
+  StorageBlockAmount?: number
   /**
    * 内网带宽，单位Gbps。
    */
-  InstanceBandwidth: number
+  InstanceBandwidth?: number
   /**
    * 网络收发包能力，单位万PPS。
    */
-  InstancePps: number
+  InstancePps?: number
   /**
    * 处理器型号。
    */
-  CpuType: string
+  CpuType?: string
   /**
    * 实例的GPU数量。
    */
-  Gpu: number
+  Gpu?: number
   /**
    * 实例的FPGA数量。
    */
-  Fpga: number
+  Fpga?: number
   /**
    * 机型描述
    */
-  Remark: string
+  Remark?: string
   /**
-   * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br><li>SOLD_OUT：表示实例已售罄。
+   * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br></li><li>SOLD_OUT：表示实例已售罄。</li>
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -225,19 +225,19 @@ export interface ZoneInfo {
   /**
    * 可用区名称
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区描述
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 可用区ID
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 可用区状态，包含AVAILABLE和UNAVAILABLE。AVAILABLE代表可用，UNAVAILABLE代表不可用。
    */
-  ZoneState: string
+  ZoneState?: string
 }
 
 /**
@@ -274,17 +274,14 @@ export interface DescribeDedicatedClusterOverviewResponse {
   VpnConnectionBandwidthData?: Array<VpngwBandwidthData>
   /**
    * 宿主机资源概览信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostDetailInfo?: Array<HostDetailInfo>
   /**
    * 热备宿主机数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostStandbyCount?: number
   /**
    * 普通宿主机数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostNormalCount?: number
   /**
@@ -434,82 +431,82 @@ export interface DedicatedClusterOrderItem {
   /**
    * 专用集群类型id
    */
-  DedicatedClusterTypeId: string
+  DedicatedClusterTypeId?: string
   /**
    * 支持的存储类型列表
    */
-  SupportedStorageType: Array<string>
+  SupportedStorageType?: Array<string>
   /**
    * 支持的上连交换机的链路传输速率(GiB)
    */
-  SupportedUplinkSpeed: Array<number | bigint>
+  SupportedUplinkSpeed?: Array<number | bigint>
   /**
    * 支持的实例族列表
    */
-  SupportedInstanceFamily: Array<string>
+  SupportedInstanceFamily?: Array<string>
   /**
    * 地板承重要求(KG)
    */
-  Weight: number
+  Weight?: number
   /**
    * 功率要求(KW)
    */
-  PowerDraw: number
+  PowerDraw?: number
   /**
    * 订单状态
    */
-  SubOrderStatus: string
+  SubOrderStatus?: string
   /**
    * 订单创建的时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 子订单ID
    */
-  SubOrderId: string
+  SubOrderId?: string
   /**
    * 关联的集群规格数量
    */
-  Count: number
+  Count?: number
   /**
    * 规格简单描述
    */
-  Name: string
+  Name?: string
   /**
    * 规格详细描述
    */
-  Description: string
+  Description?: string
   /**
    * CPU数
    */
-  TotalCpu: number
+  TotalCpu?: number
   /**
    * 内存数
    */
-  TotalMem: number
+  TotalMem?: number
   /**
    * GPU数
    */
-  TotalGpu: number
+  TotalGpu?: number
   /**
    * 规格英文名
    */
-  TypeName: string
+  TypeName?: string
   /**
    * 规格展示
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComputeFormat: string
+  ComputeFormat?: string
   /**
    * 规格类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TypeFamily: string
+  TypeFamily?: string
   /**
    * 0未支付，1已支付
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubOrderPayStatus: number
+  SubOrderPayStatus?: number
 }
 
 /**
@@ -752,11 +749,11 @@ export interface VpngwBandwidthData {
    * 出带宽流量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutBandwidth: OutBandwidth
+  OutBandwidth?: OutBandwidth
   /**
    * 入带宽流量
    */
-  InBandwidth: InBandwidth
+  InBandwidth?: InBandwidth
 }
 
 /**
@@ -805,12 +802,10 @@ export interface DescribeSitesDetailRequest {
 export interface DetailData {
   /**
    * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamps?: Array<number>
   /**
    * 对应的具体值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<number>
 }
@@ -910,37 +905,30 @@ export interface DedicatedClusterOrder {
   OrderType?: string
   /**
    * 验收状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckStatus?: string
   /**
    * 交付预期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliverExpectTime?: string
   /**
    * 交付实际完成时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeliverFinishTime?: string
   /**
    * 验收预期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckExpectTime?: string
   /**
    * 验收实际完成时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckFinishTime?: string
   /**
    * 订单SLA
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderSLA?: string
   /**
    * 订单支付计划
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderPayPlan?: string
 }
@@ -1059,11 +1047,11 @@ export interface RegionZoneInfo {
   /**
    * Region id
    */
-  RegionId: number
+  RegionId?: number
   /**
    * ZoneInfo数组
    */
-  Zones: Array<ZoneInfo>
+  Zones?: Array<ZoneInfo>
 }
 
 /**
@@ -1087,32 +1075,32 @@ export interface DedicatedCluster {
   /**
    * 专用集群id。如"cluster-xxxxx"。
    */
-  DedicatedClusterId: string
+  DedicatedClusterId?: string
   /**
    * 专用集群所属可用区名称。
    */
-  Zone: string
+  Zone?: string
   /**
    * 专用集群的描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 专用集群的名称。
    */
-  Name: string
+  Name?: string
   /**
    * 专用集群的生命周期。如"PENDING"。
    */
-  LifecycleStatus: string
+  LifecycleStatus?: string
   /**
    * 专用集群的创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 专用集群所属的站点id。
    */
-  SiteId: string
+  SiteId?: string
 }
 
 /**
@@ -1211,37 +1199,30 @@ export interface HostStatistic {
   Count?: number
   /**
    * 平均cpu负载百分比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuAverage?: number
   /**
    * 平均内存使用率百分比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemAverage?: number
   /**
    * 平均网络流量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetAverage?: number
   /**
    * cpu详细监控数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuDetailData?: DetailData
   /**
    * 内存详细数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemDetailData?: DetailData
   /**
    * 网络速率详细数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetRateDetailData?: DetailData
   /**
    * 网速包详细数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetPacketDetailData?: DetailData
 }
@@ -1252,27 +1233,22 @@ export interface HostStatistic {
 export interface HostDetailInfo {
   /**
    * 类型族
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HostTypeFamily?: string
   /**
    * 总CPU
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuTotal?: number
   /**
    * 可用CPU
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuAvailable?: number
   /**
    * 总内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemTotal?: number
   /**
    * 可用内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemAvailable?: number
 }
@@ -1307,12 +1283,10 @@ export interface ModifySiteDeviceInfoResponse {
 export interface DescribeDedicatedClusterCbsStatisticsResponse {
   /**
    * 云硬盘仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SetList?: Array<SetInfo>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -1435,51 +1409,51 @@ export interface SiteDetail {
   /**
    * 站点id
    */
-  SiteId: string
+  SiteId?: string
   /**
    * 站点名称
    */
-  Name: string
+  Name?: string
   /**
    * 站点描述
    */
-  Description: string
+  Description?: string
   /**
    * 站点创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 光纤类型
    */
-  FiberType: string
+  FiberType?: string
   /**
    * 网络到腾讯云Region区域的上行链路速度
    */
-  UplinkSpeedGbps: number
+  UplinkSpeedGbps?: number
   /**
    * 将CDC连接到网络时，每台CDC网络设备(每个机架 2 台设备)使用的上行链路数量。
    */
-  UplinkCount: number
+  UplinkCount?: number
   /**
    * 将CDC连接到网络时采用的光学标准
    */
-  OpticalStandard: string
+  OpticalStandard?: string
   /**
    * 是否提供冗余的上游设备(交换机或路由器)，以便两台  网络设备都能连接到网络设备。
    */
-  RedundantNetworking: boolean
+  RedundantNetworking?: boolean
   /**
    * 电源连接器类型
    */
-  PowerConnectors: string
+  PowerConnectors?: string
   /**
    * 从机架上方还是下方供电。
    */
-  PowerFeedDrop: string
+  PowerFeedDrop?: string
   /**
    * 功耗(KW)
    */
-  PowerDrawKva: number
+  PowerDrawKva?: number
   /**
    * 是否满足下面环境条件：
 1、场地没有材料要求或验收标准会影响 CDC 设备配送和安装。
@@ -1488,54 +1462,54 @@ export interface SiteDetail {
 湿度范围为 10°F (-12°C)和 8% RH (相对湿度)到 70°F(21°C)和 80% RH。
 机架位置的气流方向为从前向后，且应具有足够的 CFM (每分钟立方英尺)。CFM 必须是 CDC 配置的 kVA 功耗值的 145.8 倍。
    */
-  ConditionRequirement: boolean
+  ConditionRequirement?: boolean
   /**
    * 是否满足下面的尺寸条件：
 您的装货站台可以容纳一个机架箱(高 x 宽 x 深 = 94" x 54" x 48")。
 您可以提供从机架(高 x 宽 x 深 = 80" x 24" x 48")交货地点到机架最终安置位置的明确通道。测量深度时，应包括站台、走廊通道、门、转弯、坡道、货梯，并将其他通道限制考虑在内。
 在最终的 CDC安置位置，前部间隙可以为 48" 或更大，后部间隙可以为 24" 或更大。
    */
-  DimensionRequirement: boolean
+  DimensionRequirement?: boolean
   /**
    * 最大承重(KG)
    */
-  MaxWeight: number
+  MaxWeight?: number
   /**
    * 站点地址
    */
-  AddressLine: string
+  AddressLine?: string
   /**
    * 站点所在地区的详细地址信息（补充）
    */
-  OptionalAddressLine: string
+  OptionalAddressLine?: string
   /**
    * 是否需要腾讯云团队协助完成机架支撑工作
    */
-  NeedHelp: boolean
+  NeedHelp?: boolean
   /**
    * 上游断路器是否具备
    */
-  BreakerRequirement: boolean
+  BreakerRequirement?: boolean
   /**
    * 是否电源冗余
    */
-  RedundantPower: boolean
+  RedundantPower?: boolean
   /**
    * 站点所在国家
    */
-  Country: string
+  Country?: string
   /**
    * 站点所在省份
    */
-  Province: string
+  Province?: string
   /**
    * 站点所在城市
    */
-  City: string
+  City?: string
   /**
    * 站点所在地区的邮编
    */
-  PostalCode: number
+  PostalCode?: number
 }
 
 /**
@@ -1712,20 +1686,20 @@ export interface Site {
   /**
    * 站点名称
    */
-  Name: string
+  Name?: string
   /**
    * 站点id
    */
-  SiteId: string
+  SiteId?: string
   /**
    * 站点描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 站点创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**

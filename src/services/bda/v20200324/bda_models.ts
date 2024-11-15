@@ -23,27 +23,27 @@ export interface SegmentPortraitPicResponse {
    * 处理后的图片 base64 数据，透明背景图。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultImage: string
+  ResultImage?: string
   /**
    * 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMask: string
+  ResultMask?: string
   /**
    * 图片是否存在前景。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasForeground: boolean
+  HasForeground?: boolean
   /**
    * 支持将处理过的图片 base64 数据，透明背景图以Url的形式返回值，Url有效期为30分钟。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultImageUrl: string
+  ResultImageUrl?: string
   /**
    * 一个通过 base64 编码的文件，解码后文件由 Float 型浮点数组成。支持以Url形式的返回值；Url有效期为30分钟。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultMaskUrl: string
+  ResultMaskUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -417,11 +417,11 @@ export interface CreateSegmentationTaskResponse {
   /**
    * 任务标识ID,可以用与追溯任务状态，查看任务结果
    */
-  TaskID: string
+  TaskID?: string
   /**
    * 预估处理时间，单位为秒
    */
-  EstimatedProcessingTime: number
+  EstimatedProcessingTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

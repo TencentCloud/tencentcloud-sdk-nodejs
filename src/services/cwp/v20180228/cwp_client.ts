@@ -134,7 +134,6 @@ import {
   ReverseShellRule,
   DescribeBashRulesResponse,
   DescribeAvailableExpertServiceDetailResponse,
-  DescribeCloudProtectServiceOrderListRequest,
   DescribeLogStorageConfigRequest,
   ExportAssetWebLocationListResponse,
   ScreenBroadcasts,
@@ -374,7 +373,7 @@ import {
   AssetAppBaseInfo,
   DescribeJavaMemShellInfoRequest,
   DescribePrivilegeRulesRequest,
-  DescribeCloudProtectServiceOrderListResponse,
+  ExportAssetAppListRequest,
   ModifyFileTamperEventsRequest,
   ModifyOrderAttributeRequest,
   JavaMemShellInfo,
@@ -631,11 +630,9 @@ import {
   CreateLogExportResponse,
   EmergencyResponseInfo,
   ExportVulDefenceListResponse,
-  CloudProtectService,
   ModifyLogKafkaDeliverTypeResponse,
   DescribeProtectNetListRequest,
   DescribeBaselineScanScheduleRequest,
-  ScreenDefendAttackLog,
   RetryCreateSnapshotRequest,
   ExportVulDefenceEventRequest,
   DescribeVulDefenceSettingResponse,
@@ -932,7 +929,7 @@ import {
   ModifyRansomDefenseStrategyStatusRequest,
   DescribeAssetAppListResponse,
   DescribeWarningHostConfigResponse,
-  ExportAssetAppListRequest,
+  ScreenDefendAttackLog,
   DescribeVulDefencePluginStatusResponse,
   BaselineFix,
   ExportAssetWebLocationListRequest,
@@ -5392,18 +5389,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulLabelsResponse) => void
   ): Promise<DescribeVulLabelsResponse> {
     return this.request("DescribeVulLabels", req, cb)
-  }
-
-  /**
-     * 云护航计费产品已下线
-
-查询云护航服务订单列表
-     */
-  async DescribeCloudProtectServiceOrderList(
-    req: DescribeCloudProtectServiceOrderListRequest,
-    cb?: (error: string, rep: DescribeCloudProtectServiceOrderListResponse) => void
-  ): Promise<DescribeCloudProtectServiceOrderListResponse> {
-    return this.request("DescribeCloudProtectServiceOrderList", req, cb)
   }
 
   /**

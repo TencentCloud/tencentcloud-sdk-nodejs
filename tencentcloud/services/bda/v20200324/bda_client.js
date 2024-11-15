@@ -61,7 +61,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 即二分类人像分割，识别传入图片中人体的完整轮廓，进行抠像。
-
      */
     async SegmentPortraitPic(req, cb) {
         return this.request("SegmentPortraitPic", req, cb);

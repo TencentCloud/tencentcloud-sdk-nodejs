@@ -1472,9 +1472,13 @@ export interface DeleteRoomMemberRequest {
    */
   BizId: number
   /**
-   * 要剔除的用户列表
+   * 要剔除的用户列表（整型）
    */
   Uids?: Array<string>
+  /**
+   * 要剔除的用户列表（字符串类型）
+   */
+  StrUids?: Array<string>
 }
 
 /**

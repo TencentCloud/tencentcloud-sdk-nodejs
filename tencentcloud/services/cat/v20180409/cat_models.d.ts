@@ -464,6 +464,10 @@ export interface UpdateProbeTaskConfigurationListRequest {
      * 拨测节点的IP类型，0-不限，1-IPv4，2-IPv6
      */
     NodeIpType?: number;
+    /**
+     * 批量任务名-地址
+     */
+    BatchTasks?: Array<ProbeTaskBasicConfiguration>;
 }
 /**
  * CreateProbeTasks请求参数结构体

@@ -2477,14 +2477,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulLabels", req, cb);
     }
     /**
-     * 云护航计费产品已下线
-
-查询云护航服务订单列表
-     */
-    async DescribeCloudProtectServiceOrderList(req, cb) {
-        return this.request("DescribeCloudProtectServiceOrderList", req, cb);
-    }
-    /**
      * 停止基线检测
      */
     async StopBaselineDetect(req, cb) {

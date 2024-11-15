@@ -26,32 +26,26 @@ export interface DeleteProjectRequest {
 export interface License {
     /**
      * 该类型的license个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * license状态：0:未绑定；1:已绑定；2:已停服；3:已退费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 到期时间戳：s
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: string;
     /**
      * 服务时长：s
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Duration?: string;
     /**
      * 剩余天数：天
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemainDay?: number;
     /**
      * 该类型的licenseId列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseIds?: Array<string>;
 }
@@ -155,31 +149,31 @@ export interface SessionInfo {
     /**
      * 会话ID
      */
-    SessionId: string;
+    SessionId?: string;
     /**
      * 远端设备ID
      */
-    RemoteDeviceId: string;
+    RemoteDeviceId?: string;
     /**
      * 现场设备ID
      */
-    FieldDeviceId: string;
+    FieldDeviceId?: string;
     /**
      * 分辨率
      */
-    Resolution: string;
+    Resolution?: string;
     /**
      * 会话开始时间
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 会话结束时间
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 通话质量：good|normal|bad，对应优良差
      */
-    Quality: string;
+    Quality?: string;
 }
 /**
  * DescribeDeviceInfo请求参数结构体
@@ -243,27 +237,27 @@ export interface RecentSessionInfo {
     /**
      * 会话ID
      */
-    SessionId: string;
+    SessionId?: string;
     /**
      * 远端设备ID
      */
-    RemoteDeviceId: string;
+    RemoteDeviceId?: string;
     /**
      * 现场设备ID
      */
-    FieldDeviceId: string;
+    FieldDeviceId?: string;
     /**
      * 分辨率
      */
-    Resolution: string;
+    Resolution?: string;
     /**
      * 会话开始时间
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 最后更新时间
      */
-    LatestUpdateTime: number;
+    LatestUpdateTime?: number;
 }
 /**
  * DescribeProjectInfo请求参数结构体
@@ -439,14 +433,12 @@ export interface DescribePolicyRequest {
 export interface ModifyPolicyResponse {
     /**
      * 添加关联失败的现场设备ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedInsertIds: Array<string>;
+    FailedInsertIds?: Array<string>;
     /**
      * 解除关联失败的现场设备ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedDeleteIds: Array<string>;
+    FailedDeleteIds?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -524,9 +516,8 @@ export interface DescribeSessionStatisticsRequest {
 export interface BatchDeleteDevicesResponse {
     /**
      * 删除失败的设备ID列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedDeviceIds: Array<string>;
+    FailedDeviceIds?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -615,23 +606,23 @@ export interface ProjectInfo {
     /**
      * 项目ID
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 项目名称
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 项目描述
      */
-    ProjectDescription: string;
+    ProjectDescription?: string;
     /**
      * 项目权限模式，black为黑名单，white为白名单
      */
-    PolicyMode: string;
+    PolicyMode?: string;
     /**
      * 项目信息修改时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
 }
 /**
  * BatchDeletePolicy请求参数结构体
@@ -972,32 +963,26 @@ export interface CreateDeviceResponse {
 export interface MultiNet {
     /**
      * 网卡序号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetId?: number;
     /**
      * 网卡IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetIp?: string;
     /**
      * 时延，单位ms
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rtt?: Array<number | bigint>;
     /**
      * 丢包率，单位%
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Lost?: Array<number | bigint>;
     /**
      * 发送bps，单位kbps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SendBps?: Array<number | bigint>;
     /**
      * 接收bps，单位kbps
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecvBps?: Array<number | bigint>;
 }
@@ -1222,7 +1207,7 @@ export interface CreateProjectResponse {
     /**
      * 项目ID，长度为16位
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

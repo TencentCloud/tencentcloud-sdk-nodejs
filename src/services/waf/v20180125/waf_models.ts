@@ -8864,6 +8864,10 @@ https：使用https协议回源
    * 域名标签
    */
   Labels?: Array<string>
+  /**
+   * 拨测状态。 0: 禁用拨测, 1: 启用拨测
+   */
+  ProbeStatus?: number
 }
 
 /**

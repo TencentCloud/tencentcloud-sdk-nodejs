@@ -3016,20 +3016,6 @@ export interface DescribeAvailableExpertServiceDetailResponse {
     RequestId?: string;
 }
 /**
- * DescribeCloudProtectServiceOrderList请求参数结构体
- */
-export interface DescribeCloudProtectServiceOrderListRequest {
-    /**
-     * 排序字段,当前支持: BeginTime
-     */
-    Order?: string;
-    /**
-     * 排序方式,当前支持:
-  ASC 正序,DESC 倒序
-     */
-    By?: string;
-}
-/**
  * DescribeLogStorageConfig请求参数结构体
  */
 export declare type DescribeLogStorageConfigRequest = null;
@@ -8070,17 +8056,25 @@ export interface DescribePrivilegeRulesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * DescribeCloudProtectServiceOrderList返回参数结构体
+ * ExportAssetAppList请求参数结构体
  */
-export interface DescribeCloudProtectServiceOrderListResponse {
+export interface ExportAssetAppListRequest {
     /**
-     * 云护航订单列表信息
+     * 查询指定Quuid主机的信息
      */
-    Data?: Array<CloudProtectService>;
+    Quuid?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 过滤条件。<li>AppName- string - 是否必填：否 - 应用名搜索</li><li>IP - String - 是否必填：否 - 主机ip</li><li>MachineName - String - 是否必填：否 - 主机名称</li><li>InstanceID - string - 是否必填：否 - 实例ID</li><li>Type - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他</li><li>OsType - uint64 - 是否必填：否 - Windows/Linux</li>
      */
-    RequestId?: string;
+    Filters?: Array<AssetFilters>;
+    /**
+     * 排序方式，asc升序 或 desc降序
+     */
+    Order?: string;
+    /**
+     * 排序方式：[FirstTime|ProcessCount]
+     */
+    By?: string;
 }
 /**
  * ModifyFileTamperEvents请求参数结构体
@@ -13442,31 +13436,6 @@ export interface ExportVulDefenceListResponse {
     RequestId?: string;
 }
 /**
- * 云护航服务详情信息
- */
-export interface CloudProtectService {
-    /**
-     * 资源ID
-     */
-    ResourceId?: string;
-    /**
-     * 类型： 这里为新购
-     */
-    Type?: string;
-    /**
-     * 配置：购买的配置信息
-     */
-    Config?: string;
-    /**
-     * 服务名称
-     */
-    ServiceName?: string;
-    /**
-     * 购买时间
-     */
-    BeginTime?: string;
-}
-/**
  * ModifyLogKafkaDeliverType返回参数结构体
  */
 export interface ModifyLogKafkaDeliverTypeResponse {
@@ -13510,51 +13479,6 @@ export interface DescribeBaselineScanScheduleRequest {
      * 任务id
      */
     TaskId: number;
-}
-/**
- * 大屏网络攻击日志
- */
-export interface ScreenDefendAttackLog {
-    /**
-     * 日志ID
-     */
-    Id?: number;
-    /**
-     * 客户端ID
-     */
-    Uuid?: string;
-    /**
-     * 来源IP
-     */
-    SrcIp?: string;
-    /**
-     * 来源端口
-     */
-    SrcPort?: number;
-    /**
-     * 攻击方式
-     */
-    HttpMethod?: string;
-    /**
-     * 威胁类型
-     */
-    VulType?: string;
-    /**
-     * 攻击时间
-     */
-    CreatedTime?: string;
-    /**
-     * 目标端口
-     */
-    DstPort?: number;
-    /**
-     * 主机 quuid
-     */
-    Quuid?: string;
-    /**
-     * 目标IP
-     */
-    DstIp?: string;
 }
 /**
  * RetryCreateSnapshot请求参数结构体
@@ -20201,25 +20125,49 @@ export interface DescribeWarningHostConfigResponse {
     RequestId?: string;
 }
 /**
- * ExportAssetAppList请求参数结构体
+ * 大屏网络攻击日志
  */
-export interface ExportAssetAppListRequest {
+export interface ScreenDefendAttackLog {
     /**
-     * 查询指定Quuid主机的信息
+     * 日志ID
+     */
+    Id?: number;
+    /**
+     * 客户端ID
+     */
+    Uuid?: string;
+    /**
+     * 来源IP
+     */
+    SrcIp?: string;
+    /**
+     * 来源端口
+     */
+    SrcPort?: number;
+    /**
+     * 攻击方式
+     */
+    HttpMethod?: string;
+    /**
+     * 威胁类型
+     */
+    VulType?: string;
+    /**
+     * 攻击时间
+     */
+    CreatedTime?: string;
+    /**
+     * 目标端口
+     */
+    DstPort?: number;
+    /**
+     * 主机 quuid
      */
     Quuid?: string;
     /**
-     * 过滤条件。<li>AppName- string - 是否必填：否 - 应用名搜索</li><li>IP - String - 是否必填：否 - 主机ip</li><li>MachineName - String - 是否必填：否 - 主机名称</li><li>InstanceID - string - 是否必填：否 - 实例ID</li><li>Type - int - 是否必填：否 - 类型	: 仅linux0: 全部1: 运维2 : 数据库3 : 安全4 : 可疑应用5 : 系统架构6 : 系统应用7 : WEB服务99:其他</li><li>OsType - uint64 - 是否必填：否 - Windows/Linux</li>
+     * 目标IP
      */
-    Filters?: Array<AssetFilters>;
-    /**
-     * 排序方式，asc升序 或 desc降序
-     */
-    Order?: string;
-    /**
-     * 排序方式：[FirstTime|ProcessCount]
-     */
-    By?: string;
+    DstIp?: string;
 }
 /**
  * DescribeVulDefencePluginStatus返回参数结构体

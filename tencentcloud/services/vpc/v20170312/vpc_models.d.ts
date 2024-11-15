@@ -485,7 +485,7 @@ export interface SourceIpTranslationNatRule {
      */
     PublicIpAddresses: Array<string>;
     /**
-     * 描述
+     * 规则描述
      */
     Description: string;
     /**
@@ -1226,20 +1226,20 @@ export interface AssistantCidr {
     /**
      * `VPC`实例`ID`。形如：`vpc-6v2ht8q5`
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 辅助CIDR。形如：`172.16.0.0/16`
      */
-    CidrBlock: string;
+    CidrBlock?: string;
     /**
      * 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。
      */
-    AssistantType: number;
+    AssistantType?: number;
     /**
      * 辅助CIDR拆分的子网。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetSet: Array<Subnet>;
+    SubnetSet?: Array<Subnet>;
 }
 /**
  * ModifyVpnGatewaySslClientCert请求参数结构体
@@ -2665,7 +2665,7 @@ export interface IpGeolocationInfo {
      * IP地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddressIp: string;
+    AddressIp?: string;
 }
 /**
  * 私网网关Snat转发规则入参
@@ -3230,17 +3230,17 @@ export interface TrafficFlow {
     /**
      * 实际流量，单位为 字节
      */
-    Value: number;
+    Value?: number;
     /**
      * 格式化后的流量，单位见参数 FormatUnit
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FormatValue: number;
+    FormatValue?: number;
     /**
      * 格式化后流量的单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FormatUnit: string;
+    FormatUnit?: string;
 }
 /**
  * DescribeAccountAttributes请求参数结构体
@@ -6973,7 +6973,7 @@ export interface ModifyVpnGatewayRoutesResponse {
  */
 export interface AddressTemplateItem {
     /**
-     * ipm-xxxxxxxx
+     * IP地址模板ID
      */
     AddressTemplateId?: string;
     /**
@@ -8930,13 +8930,17 @@ export interface DescribePrivateNatGatewayTranslationAclRulesRequest {
  */
 export interface ConflictItem {
     /**
-     * 冲突资源的ID
+     * 冲突资源的ID。已废弃
      */
-    ConfilctId: string;
+    ConfilctId?: string;
     /**
      * 冲突目的资源
      */
-    DestinationItem: string;
+    DestinationItem?: string;
+    /**
+     * 冲突资源的ID
+     */
+    ConflictId?: string;
 }
 /**
  * CreateDirectConnectGateway请求参数结构体
@@ -9796,6 +9800,10 @@ export interface AllocateAddressesRequest {
      */
     AnycastZone?: string;
     /**
+     * 指定IP地址申请EIP，每个账户每个月只有三次配额
+     */
+    VipCluster?: Array<string>;
+    /**
      * <b>[已废弃]</b> AnycastEIP不再区分是否负载均衡。原参数说明如下：
   AnycastEIP是否用于绑定负载均衡。
   <ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>TRUE：AnycastEIP可绑定对象为负载均衡</li>
@@ -10331,18 +10339,22 @@ export interface DescribeLocalGatewayResponse {
 export interface ItemPrice {
     /**
      * 按量计费后付费单价，单位：元。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPrice?: number;
     /**
      * 按量计费后付费计价单元，可取值范围： HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）： GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeUnit?: string;
     /**
      * 预付费商品的原价，单位：元。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPrice?: number;
     /**
      * 预付费商品的折扣价，单位：元。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPrice?: number;
 }
@@ -10544,19 +10556,19 @@ export interface GatewayQos {
     /**
      * VPC实例ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 云服务器内网IP。
      */
-    IpAddress: string;
+    IpAddress?: string;
     /**
      * 流控带宽值。
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * DescribePrivateNatGatewayTranslationNatRules请求参数结构体
@@ -11069,11 +11081,11 @@ export interface AlgType {
     /**
      * Ftp协议Alg功能是否开启
      */
-    Ftp: boolean;
+    Ftp?: boolean;
     /**
      * Sip协议Alg功能是否开启
      */
-    Sip: boolean;
+    Sip?: boolean;
 }
 /**
  * NAT网关的端口转发规则
@@ -11280,44 +11292,44 @@ export interface UsedDetail {
     /**
      * 流量包唯一ID
      */
-    TrafficPackageId: string;
+    TrafficPackageId?: string;
     /**
      * 流量包名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrafficPackageName: string;
+    TrafficPackageName?: string;
     /**
      * 流量包总量
      */
-    TotalAmount: TrafficFlow;
+    TotalAmount?: TrafficFlow;
     /**
      * 本次抵扣
      */
-    Deduction: TrafficFlow;
+    Deduction?: TrafficFlow;
     /**
      * 本次抵扣后剩余量
      */
-    RemainingAmount: TrafficFlow;
+    RemainingAmount?: TrafficFlow;
     /**
      * 抵扣时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 资源类型。可能的值: CVM, LB, NAT, HAVIP, EIP
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 流量包到期时间
      */
-    Deadline: string;
+    Deadline?: string;
 }
 /**
  * 标签描述信息
@@ -13570,35 +13582,35 @@ export interface Ip6Translator {
     /**
      * IPV6转换实例唯一ID，形如ip6-xxxxxxxx
      */
-    Ip6TranslatorId: string;
+    Ip6TranslatorId?: string;
     /**
      * IPV6转换实例名称
      */
-    Ip6TranslatorName: string;
+    Ip6TranslatorName?: string;
     /**
      * IPV6地址
      */
-    Vip6: string;
+    Vip6?: string;
     /**
      * IPV6转换地址所属运营商
      */
-    IspName: string;
+    IspName?: string;
     /**
      * 转换实例状态，限于CREATING,RUNNING,DELETING,MODIFYING
      */
-    TranslatorStatus: string;
+    TranslatorStatus?: string;
     /**
      * IPV6转换实例创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 绑定的IPV6转换规则数量
      */
-    Ip6RuleCount: number;
+    Ip6RuleCount?: number;
     /**
      * IPV6转换规则信息
      */
-    IP6RuleSet: Array<Ip6Rule>;
+    IP6RuleSet?: Array<Ip6Rule>;
 }
 /**
  * CheckAssistantCidr请求参数结构体
@@ -15118,39 +15130,39 @@ export interface Ip6Rule {
     /**
      * IPV6转换规则唯一ID，形如rule6-xxxxxxxx
      */
-    Ip6RuleId: string;
+    Ip6RuleId?: string;
     /**
      * IPV6转换规则名称
      */
-    Ip6RuleName: string;
+    Ip6RuleName?: string;
     /**
      * IPV6地址
      */
-    Vip6: string;
+    Vip6?: string;
     /**
      * IPV6端口号
      */
-    Vport6: number;
+    Vport6?: number;
     /**
      * 协议类型，支持TCP/UDP
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * IPV4地址
      */
-    Vip: string;
+    Vip?: string;
     /**
      * IPV4端口号
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 转换规则状态，限于CREATING,RUNNING,DELETING,MODIFYING
      */
-    RuleStatus: string;
+    RuleStatus?: string;
     /**
      * 转换规则创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * AttachClassicLinkVpc返回参数结构体
@@ -15880,6 +15892,10 @@ export interface CreateHaVipRequest {
      * 是否开启`HAVIP`漂移时子机或网卡范围的校验。默认不开启。
      */
     CheckAssociate?: boolean;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * IPv6子网段对象。

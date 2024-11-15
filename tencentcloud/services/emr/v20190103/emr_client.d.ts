@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeHBaseTableOverviewRequest, ScaleOutInstanceResponse, DescribeClusterFlowStatusDetailResponse, DescribeHDFSStorageInfoResponse, ModifyUserManagerPwdResponse, DescribeHiveQueriesRequest, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeServiceNodeInfosRequest, DescribeServiceNodeInfosResponse, DescribeInstancesResponse, DescribeTrinoQueryInfoResponse, DeleteAutoScaleStrategyResponse, CreateSLInstanceRequest, ScaleOutInstanceRequest, ResetYarnConfigRequest, DescribeHBaseTableOverviewResponse, DescribeAutoScaleGroupGlobalConfRequest, ModifyAutoScaleStrategyRequest, DescribeSparkQueriesRequest, ModifyYarnDeployResponse, ModifyResourceScheduleConfigResponse, DescribeKyuubiQueryInfoResponse, TerminateSLInstanceRequest, AddUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailResponse, DescribeYarnQueueResponse, AddMetricScaleStrategyRequest, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, DescribeSparkQueriesResponse, DescribeAutoScaleStrategiesResponse, ModifyGlobalConfigRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, DescribeHDFSStorageInfoRequest, DescribeResourceScheduleRequest, DescribeGlobalConfigResponse, ModifyYarnDeployRequest, DescribeClusterFlowStatusDetailRequest, DescribeUsersForUserManagerRequest, DescribeInsightListRequest, DescribeYarnScheduleHistoryRequest, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, RunJobFlowResponse, DescribeYarnQueueRequest, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, CreateSLInstanceResponse, DescribeYarnScheduleHistoryResponse, DescribeAutoScaleGroupGlobalConfResponse, DescribeEmrApplicationStaticsRequest, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateInstanceRequest, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeKyuubiQueryInfoRequest, ModifyGlobalConfigResponse, ModifySLInstanceRequest, DescribeInsightListResponse, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, DescribeSLInstanceListRequest, CreateClusterRequest, AddMetricScaleStrategyResponse, ScaleOutClusterRequest, DescribeClusterNodesRequest, ModifyYarnQueueV2Request, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeSLInstanceListResponse, DescribeSLInstanceResponse, DescribeInstancesRequest, TerminateSLInstanceResponse, ModifyAutoRenewFlagResponse, InquiryPriceUpdateInstanceRequest, DescribeAutoScaleStrategiesRequest, DeployYarnConfRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteAutoScaleStrategyRequest, DeployYarnConfResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailRequest, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, DescribeSLInstanceRequest, InquiryPriceCreateInstanceRequest, DescribeEmrOverviewMetricsResponse, SyncPodStateRequest, ModifyAutoRenewFlagRequest, ModifyResourceScheduleConfigRequest, DescribeEmrOverviewMetricsRequest, ScaleOutClusterResponse, ModifyYarnQueueV2Response, ModifyAutoScaleStrategyResponse, InquiryPriceScaleOutInstanceRequest, DescribeStarRocksQueryInfoRequest, ModifySLInstanceResponse, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, ResetYarnConfigResponse, DescribeStarRocksQueryInfoResponse, ModifyUserManagerPwdRequest, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeTrinoQueryInfoRequest, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, DescribeJobFlowResponse, DescribeGlobalConfigRequest, TerminateInstanceResponse } from "./emr_models";
+import { DescribeHBaseTableOverviewRequest, ScaleOutInstanceResponse, DescribeClusterFlowStatusDetailResponse, DescribeHDFSStorageInfoResponse, ModifyUserManagerPwdResponse, DescribeHiveQueriesRequest, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeServiceNodeInfosRequest, DescribeServiceNodeInfosResponse, DescribeInstancesResponse, DescribeTrinoQueryInfoResponse, TerminateTasksResponse, DeleteAutoScaleStrategyResponse, CreateSLInstanceRequest, ScaleOutInstanceRequest, ResetYarnConfigRequest, DescribeHBaseTableOverviewResponse, DescribeAutoScaleGroupGlobalConfRequest, ModifyAutoScaleStrategyRequest, DescribeSparkQueriesRequest, ModifyYarnDeployResponse, ModifyResourceScheduleConfigResponse, DescribeKyuubiQueryInfoResponse, TerminateSLInstanceRequest, AddUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailResponse, DescribeYarnQueueResponse, AddMetricScaleStrategyRequest, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, DescribeSparkQueriesResponse, DescribeAutoScaleStrategiesResponse, ModifyGlobalConfigRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, DescribeHDFSStorageInfoRequest, DescribeResourceScheduleRequest, DescribeGlobalConfigResponse, ModifyYarnDeployRequest, DescribeClusterFlowStatusDetailRequest, DescribeUsersForUserManagerRequest, DescribeInsightListRequest, DescribeYarnScheduleHistoryRequest, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, RunJobFlowResponse, DescribeYarnQueueRequest, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, CreateSLInstanceResponse, DescribeYarnScheduleHistoryResponse, DescribeAutoScaleGroupGlobalConfResponse, DescribeEmrApplicationStaticsRequest, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateInstanceRequest, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeKyuubiQueryInfoRequest, ModifyGlobalConfigResponse, ModifySLInstanceRequest, DescribeInsightListResponse, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, DescribeSLInstanceListRequest, CreateClusterRequest, AddMetricScaleStrategyResponse, ScaleOutClusterRequest, DescribeClusterNodesRequest, ModifyYarnQueueV2Request, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeSLInstanceListResponse, DescribeSLInstanceResponse, DescribeInstancesRequest, TerminateSLInstanceResponse, ModifyAutoRenewFlagResponse, InquiryPriceUpdateInstanceRequest, DescribeAutoScaleStrategiesRequest, DeployYarnConfRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteAutoScaleStrategyRequest, DeployYarnConfResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailRequest, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, DescribeSLInstanceRequest, InquiryPriceCreateInstanceRequest, DescribeEmrOverviewMetricsResponse, SyncPodStateRequest, ModifyAutoRenewFlagRequest, ModifyResourceScheduleConfigRequest, DescribeEmrOverviewMetricsRequest, ScaleOutClusterResponse, ModifyYarnQueueV2Response, ModifyAutoScaleStrategyResponse, InquiryPriceScaleOutInstanceRequest, DescribeStarRocksQueryInfoRequest, ModifySLInstanceResponse, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, ResetYarnConfigResponse, DescribeStarRocksQueryInfoResponse, ModifyUserManagerPwdRequest, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeTrinoQueryInfoRequest, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, DescribeJobFlowResponse, DescribeGlobalConfigRequest, TerminateInstanceResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -121,7 +121,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteUserManagerUserList(req: DeleteUserManagerUserListRequest, cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void): Promise<DeleteUserManagerUserListResponse>;
     /**
-     * 本接口（TerminateSLInstance）用于销毁 Lite HBase 实例
+     * 本接口（TerminateSLInstance）用于销毁Serverless HBase实例
      */
     TerminateSLInstance(req: TerminateSLInstanceRequest, cb?: (error: string, rep: TerminateSLInstanceResponse) => void): Promise<TerminateSLInstanceResponse>;
     /**
@@ -135,13 +135,13 @@ export declare class Client extends AbstractClient {
      */
     ModifyAutoRenewFlag(req: ModifyAutoRenewFlagRequest, cb?: (error: string, rep: ModifyAutoRenewFlagResponse) => void): Promise<ModifyAutoRenewFlagResponse>;
     /**
-     * 本接口（CreateSLInstance）用于创建 Lite HBase 实例
-- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回创建实例的 InstaceId 和请求的 RequestID。
-- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     * 本接口（CreateSLInstance）用于创建Serverless HBase实例
+- 接口调用成功，会创建Serverless HBase实例，创建实例请求成功会返回创建实例的InstaceId和请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用DescribeInstancesList查看当前实例的StatusDesc状态。
      */
     CreateSLInstance(req: CreateSLInstanceRequest, cb?: (error: string, rep: CreateSLInstanceResponse) => void): Promise<CreateSLInstanceResponse>;
     /**
-     * 本接口（DescribeSLInstanceList）用于查询 Lite HBase 实例列表详细信息
+     * 本接口（DescribeSLInstanceList）用于查询Serverless HBase实例列表详细信息
      */
     DescribeSLInstanceList(req: DescribeSLInstanceListRequest, cb?: (error: string, rep: DescribeSLInstanceListResponse) => void): Promise<DescribeSLInstanceListResponse>;
     /**
@@ -177,7 +177,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceScheduleDiffDetail(req: DescribeResourceScheduleDiffDetailRequest, cb?: (error: string, rep: DescribeResourceScheduleDiffDetailResponse) => void): Promise<DescribeResourceScheduleDiffDetailResponse>;
     /**
-     * 本接口（DescribeSLInstance）用于查询 Lite HBase 实例基本信息
+     * 本接口（DescribeSLInstance）用于查询 Serverless HBase实例基本信息
      */
     DescribeSLInstance(req: DescribeSLInstanceRequest, cb?: (error: string, rep: DescribeSLInstanceResponse) => void): Promise<DescribeSLInstanceResponse>;
     /**
@@ -229,9 +229,9 @@ export declare class Client extends AbstractClient {
      */
     TerminateInstance(req: TerminateInstanceRequest, cb?: (error: string, rep: TerminateInstanceResponse) => void): Promise<TerminateInstanceResponse>;
     /**
-     * 本接口（ModifySLInstance）用于修改Lite HBase 实例节点数。
-- 接口调用成功，会创建Lite HBase实例，创建实例请求成功会返回请求的 RequestID。
-- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用 DescribeInstancesList 查看当前实例的 StatusDesc 状态。
+     * 本接口（ModifySLInstance）用于Serverless HBase变配实例。
+- 接口调用成功，会创建Serverless HBase实例，创建实例请求成功会返回请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用DescribeInstancesList查看当前实例的StatusDesc状态。
      */
     ModifySLInstance(req: ModifySLInstanceRequest, cb?: (error: string, rep: ModifySLInstanceResponse) => void): Promise<ModifySLInstanceResponse>;
     /**

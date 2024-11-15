@@ -3554,11 +3554,11 @@ export interface DescribeDownloadCertificateUrlResponse {
   /**
    * 下载链接
    */
-  DownloadCertificateUrl: string
+  DownloadCertificateUrl?: string
   /**
    * 下载文件的名称
    */
-  DownloadFilename: string
+  DownloadFilename?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4029,7 +4029,7 @@ export interface DescribeDownloadCertificateUrlRequest {
    */
   CertificateId: string
   /**
-   * 下载的服务类型: nginx tomcat apache iis jks other root
+   * 必填选项，下载的服务类型: nginx tomcat apache iis jks other root
    */
   ServiceType?: string
 }

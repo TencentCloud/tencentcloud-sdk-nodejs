@@ -53,7 +53,9 @@ export declare class Client extends AbstractClient {
      */
     CreateShieldPlanInstance(req: CreateShieldPlanInstanceRequest, cb?: (error: string, rep: CreateShieldPlanInstanceResponse) => void): Promise<CreateShieldPlanInstanceResponse>;
     /**
-     * 用户可以使用该接口自建资源，只支持白名单用户
+     * 不再使用
+
+用户可以使用该接口自建资源，只支持白名单用户
      */
     CreateResourceInstances(req: CreateResourceInstancesRequest, cb?: (error: string, rep: CreateResourceInstancesResponse) => void): Promise<CreateResourceInstancesResponse>;
     /**

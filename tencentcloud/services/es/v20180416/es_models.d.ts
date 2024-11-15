@@ -1707,6 +1707,14 @@ export interface InstallInstanceModelRequest {
      * 客户上传到cos的模型地址，单次请求限制一个。cos文件为压缩文件，格式包括：zip、tgz和tar.gz
      */
     UsrCosModelUrlList?: Array<string>;
+    /**
+     * 客户指定安装的模型名称，可为空，默认为模型文件名
+     */
+    ModelNames?: Array<string>;
+    /**
+     * 模型使用的任务类型，包括：fill_mask, ner, question_answering, text_classification, text_embedding, text_expansion, text_similarity和zero_shot_classification，默认为text_embedding
+     */
+    TaskTypes?: Array<string>;
 }
 /**
  * 数据接入serverless目的端信息

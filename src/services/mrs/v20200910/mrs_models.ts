@@ -5204,6 +5204,7 @@ export interface ChemicalProductInfoName {
   /**
    * 品牌名
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   BarndName?: string
   /**
@@ -5216,6 +5217,10 @@ export interface ChemicalProductInfoName {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Pinyin?: string
+  /**
+   * 品牌名
+   */
+  BrandName?: string
 }
 
 /**
@@ -7082,6 +7087,7 @@ export interface BiologicalProductInfoName {
   /**
    * 品牌名
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   BarndName?: string
   /**

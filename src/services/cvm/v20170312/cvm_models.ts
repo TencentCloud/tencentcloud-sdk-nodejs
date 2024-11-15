@@ -273,23 +273,23 @@ export interface AccountQuota {
   /**
    * 后付费配额列表
    */
-  PostPaidQuotaSet: Array<PostPaidQuota>
+  PostPaidQuotaSet?: Array<PostPaidQuota>
   /**
    * 预付费配额列表
    */
-  PrePaidQuotaSet: Array<PrePaidQuota>
+  PrePaidQuotaSet?: Array<PrePaidQuota>
   /**
    * spot配额列表
    */
-  SpotPaidQuotaSet: Array<SpotPaidQuota>
+  SpotPaidQuotaSet?: Array<SpotPaidQuota>
   /**
    * 镜像配额列表
    */
-  ImageQuotaSet: Array<ImageQuota>
+  ImageQuotaSet?: Array<ImageQuota>
   /**
    * 置放群组配额列表
    */
-  DisasterRecoverGroupQuotaSet: Array<DisasterRecoverGroupQuota>
+  DisasterRecoverGroupQuotaSet?: Array<DisasterRecoverGroupQuota>
 }
 
 /**
@@ -728,11 +728,11 @@ export interface DescribeHostsResponse {
   /**
    * 符合查询条件的cdh实例总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * cdh实例详细信息列表
    */
-  HostSet: Array<HostItem>
+  HostSet?: Array<HostItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -754,7 +754,16 @@ export interface DeleteKeyPairsRequest {
  */
 export interface SystemDisk {
   /**
-   * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_BSSD：通用性SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：当前有库存的硬盘类型。
+   * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br>
+<li>LOCAL_BASIC：本地硬盘</li>
+<li>LOCAL_SSD：本地SSD硬盘</li>
+<li>CLOUD_BASIC：普通云硬盘</li>
+<li>CLOUD_SSD：SSD云硬盘</li>
+<li>CLOUD_PREMIUM：高性能云硬盘</li>
+<li>CLOUD_BSSD：通用性SSD云硬盘</li>
+<li>CLOUD_HSSD：增强型SSD云硬盘</li>
+<li>CLOUD_TSSD：极速型SSD云硬盘</li><br>
+默认取值：当前有库存的硬盘类型。
    */
   DiskType?: string
   /**
@@ -1096,15 +1105,15 @@ export interface DeleteInstancesActionTimerRequest {
  */
 export interface AssociateInstancesKeyPairsRequest {
   /**
-   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。<br><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的`InstanceId`获取实例ID。
+   * 一个或多个待操作的实例ID，每次请求批量实例的上限为100。<br>可以通过以下方式获取可用的实例ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/index)查询实例ID。</li><li>通过调用接口 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) ，取返回信息中的`InstanceId`获取实例ID。</li>
    */
   InstanceIds: Array<string>
   /**
-   * 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-3glfot13`。<br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。<br><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。
+   * 一个或多个待操作的密钥对ID，每次请求批量密钥对的上限为100。密钥对ID形如：`skey-3glfot13`。<br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。</li><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的`KeyId`获取密钥对ID。</li>
    */
   KeyIds: Array<string>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。<br><li>false：表示在正常关机失败后不进行强制关机。<br>默认取值：false。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。</li><li>false：表示在正常关机失败后不进行强制关机。</li>默认取值：false。
    */
   ForceStop?: boolean
 }
@@ -1126,7 +1135,7 @@ export interface DescribeChcDeniedActionsResponse {
   /**
    * CHC实例禁止操作信息
    */
-  ChcHostDeniedActionSet: Array<ChcHostDeniedActions>
+  ChcHostDeniedActionSet?: Array<ChcHostDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1449,7 +1458,7 @@ export interface DescribeInstancesActionTimerResponse {
   /**
    * 定时任务信息列表。
    */
-  ActionTimers: Array<ActionTimer>
+  ActionTimers?: Array<ActionTimer>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2276,7 +2285,7 @@ export interface DescribeImageSharePermissionResponse {
   /**
    * 镜像共享信息
    */
-  SharePermissionSet: Array<SharePermission>
+  SharePermissionSet?: Array<SharePermission>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3500,7 +3509,7 @@ export interface CreateLaunchTemplateVersionRequest {
    */
   InstanceType?: string
   /**
-   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>云镜像市场</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`云镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
    */
   ImageId?: string
   /**
@@ -3536,7 +3545,7 @@ export interface CreateLaunchTemplateVersionRequest {
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
+   * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与云镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
    */
   EnhancedService?: EnhancedService
   /**
@@ -3793,6 +3802,23 @@ export interface ActionTimer {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Externals?: Externals
+  /**
+   * 定时器ID。
+   */
+  ActionTimerId?: string
+  /**
+   * 定时器状态，取值范围：
+
+UNDO：未触发
+DOING：触发中
+DONE：已经触发
+
+   */
+  Status?: string
+  /**
+   * 定时器对应的实例ID。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -4235,7 +4261,7 @@ export interface AllocateHostsResponse {
   /**
    * 新创建云子机的实例ID列表。
    */
-  HostIdSet: Array<string>
+  HostIdSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4578,7 +4604,7 @@ export interface ChargePrepaid {
    */
   Period: number
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 自动续费标识。取值范围：<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
   RenewFlag?: string
 }
@@ -4654,11 +4680,11 @@ export interface AccountQuotaOverview {
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 配额数据
    */
-  AccountQuota: AccountQuota
+  AccountQuota?: AccountQuota
 }
 
 /**
@@ -5078,13 +5104,16 @@ export interface DescribeHostsRequest {
    * <li><strong>zone</strong></li>
 <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>project-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/651/81952)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>host-id</strong></li>
 <p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>host-name</strong></li>
 <p style="padding-left: 30px;">按照【<strong>CDH实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>host-state</strong></li>
 <p style="padding-left: 30px;">按照【<strong>CDH实例状态</strong>】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>CDH机型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例。</p>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
    */
   Filters?: Array<Filter>
@@ -5849,7 +5878,6 @@ export interface ResizeInstanceDisksResponse {
 export interface LoginSettings {
   /**
    * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。</li><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。</li>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
   /**
@@ -6241,7 +6269,7 @@ export interface DescribeInstancesActionTimerRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 定时任务执行时间，格式如：2018-05-01 19:00:00，必须大于当前时间5分钟。
+   * 定时器动作，目前仅支持销毁一个值：TerminateInstances。
    */
   TimerAction?: string
   /**
@@ -6253,7 +6281,7 @@ export interface DescribeInstancesActionTimerRequest {
    */
   StartActionTime?: string
   /**
-   * 定时任务状态列表。<br><li>UNDO：未执行<br><li>DOING：正在执行<br><li>DONE：执行完成。
+   * 定时任务状态列表。<br><li>UNDO：未执行</li> <br><li>DOING：正在执行</li><br><li>DONE：执行完成。</li>
    */
   StatusList?: Array<string>
 }
