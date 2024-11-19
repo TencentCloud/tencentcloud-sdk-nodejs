@@ -98,6 +98,16 @@ it("rce.v20201103.DeleteNameList", async function () {
     }
 })
 
+it("rce.v20201103.DescribeUserUsageCnt", async function () {
+    try {
+       const data = await client.DescribeUserUsageCnt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rce.v20201103.ImportNameListData", async function () {
     try {
        const data = await client.ImportNameListData({})

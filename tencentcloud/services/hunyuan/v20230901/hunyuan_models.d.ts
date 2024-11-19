@@ -307,6 +307,10 @@ export interface SubmitHunyuanImageJobRequest {
      */
     Prompt: string;
     /**
+     * 反向提示词。 推荐使用中文。最多可传1024个 utf-8 字符。
+     */
+    NegativePrompt?: string;
+    /**
      * 绘画风格。
   请在 [混元生图风格列表](https://cloud.tencent.com/document/product/1729/105846) 中选择期望的风格，传入风格编号。
   不传默认不指定风格。
@@ -620,6 +624,10 @@ export interface Choice {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: Message;
+    /**
+     * 索引值，流式调用时使用该字段。
+     */
+    Index?: number;
 }
 /**
  * GetTokenCount返回参数结构体

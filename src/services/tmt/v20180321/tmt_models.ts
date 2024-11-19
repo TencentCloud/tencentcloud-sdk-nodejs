@@ -32,6 +32,10 @@ export interface TextTranslateResponse {
    */
   Target?: string
   /**
+   * 本次翻译消耗的字符数
+   */
+  UsedAmount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -82,7 +86,7 @@ export interface ImageTranslateRequest {
 }
 
 /**
- * 查询文件翻译任务
+ * 文件翻译任务结果
  */
 export interface GetFileTranslateData {
   /**
@@ -90,7 +94,12 @@ export interface GetFileTranslateData {
    */
   TaskId?: string
   /**
-   * 状态
+   * 任务状态
+
+- init：任务已初始化
+- wait：任务等待执行
+- success：任务执行成功
+- fail：任务执行失败
    */
   Status?: string
   /**
@@ -104,9 +113,13 @@ export interface GetFileTranslateData {
    */
   Message?: string
   /**
-   * 翻译进度
+   * 任务进度
    */
   Progress?: number
+  /**
+   * 本次翻译消耗的字符数
+   */
+  UsedAmount?: number
 }
 
 /**
@@ -217,6 +230,10 @@ export interface TextTranslateBatchResponse {
    * 翻译后的文本列表
    */
   TargetTextList?: Array<string>
+  /**
+   * 本次翻译消耗的字符数
+   */
+  UsedAmount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

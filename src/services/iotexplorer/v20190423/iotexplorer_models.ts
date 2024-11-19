@@ -247,7 +247,7 @@ export interface ControlDeviceDataRequest {
  */
 export interface DeviceActiveResult {
   /**
-   * 模版ID
+   * 模板ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
@@ -3162,7 +3162,7 @@ export interface DisableTopicRuleRequest {
  */
 export interface ActivateTWeCallLicenseRequest {
   /**
-   * TWecall类型： 0-测试激活码； 1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+   * TWecall类型：1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
    */
   PkgType: number
   /**
@@ -5671,7 +5671,7 @@ export interface WXIoTDeviceInfo {
    */
   SNTicket?: string
   /**
-   * 模版ID
+   * 模板ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelId?: string
@@ -5864,7 +5864,7 @@ export interface ProductEntry {
    */
   CategoryId?: number
   /**
-   * 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
+   * 加密类型。1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
    */
   EncryptionType?: string
   /**

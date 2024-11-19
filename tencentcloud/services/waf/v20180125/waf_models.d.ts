@@ -1616,6 +1616,35 @@ export interface DeleteCustomRuleRequest {
     DomainRuleIdList?: Array<DomainRuleId>;
 }
 /**
+ * DescribeUserSignatureRuleV2请求参数结构体
+ */
+export interface DescribeUserSignatureRuleV2Request {
+    /**
+     * 需要查询的域名
+     */
+    Domain: string;
+    /**
+     * 分页
+     */
+    Offset: number;
+    /**
+     * 每页容量
+     */
+    Limit: number;
+    /**
+     * 排序字段，支持 signature_id, modify_time
+     */
+    By?: string;
+    /**
+     * 排序方式
+     */
+    Order?: string;
+    /**
+     * 筛选条件，支持 MainClassName，SubClassID ,CveID, Status, ID;  ID为规则id
+     */
+    Filters?: Array<FiltersItemNew>;
+}
+/**
  * ModifyApiSecEventChange请求参数结构体
  */
 export interface ModifyApiSecEventChangeRequest {
@@ -2887,37 +2916,17 @@ export interface CCRuleLists {
     Res?: Array<CCRuleItems>;
 }
 /**
- * PostAttackDownloadTask请求参数结构体
+ * BatchOperateUserSignatureRules返回参数结构体
  */
-export interface PostAttackDownloadTaskRequest {
+export interface BatchOperateUserSignatureRulesResponse {
     /**
-     * 查询的域名，所有域名使用all
+     * 操作结果
      */
-    Domain: string;
+    CommonRsp?: CommonRspData;
     /**
-     * 查询起始时间
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    StartTime: string;
-    /**
-     * 查询结束时间
-     */
-    EndTime: string;
-    /**
-     * Lucene语法
-     */
-    QueryString: string;
-    /**
-     * 任务名称
-     */
-    TaskName: string;
-    /**
-     * 默认为desc，可以取值desc和asc
-     */
-    Sort?: string;
-    /**
-     * 下载的日志条数
-     */
-    Count?: number;
+    RequestId?: string;
 }
 /**
  * ModifyAreaBanAreas返回参数结构体
@@ -3337,6 +3346,23 @@ export interface TigaMainClassMode {
      * 防护模式，0表示观察，1表示拦截
      */
     Mode?: number;
+}
+/**
+ * DescribeUserSignatureClass返回参数结构体
+ */
+export interface DescribeUserSignatureClassResponse {
+    /**
+     * 规则类型数量
+     */
+    Total?: number;
+    /**
+     * 规则类型列表及信息
+     */
+    RuleTypeList?: Array<RuleType>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribePorts请求参数结构体
@@ -6041,6 +6067,36 @@ export interface PortItem {
     NginxServerId: string;
 }
 /**
+ * Tiga规则
+ */
+export interface RuleType {
+    /**
+     * 规则ID
+     */
+    TypeID?: string;
+    /**
+     * 规则名称
+     */
+    Name?: string;
+    /**
+     * 规则类型描述
+  
+     */
+    Desc?: string;
+    /**
+     * 规则类型状态，即类型生效开关，0：关闭，1：开启
+     */
+    RuleTypeStatus?: number;
+    /**
+     * 类型下生效的规则数量
+     */
+    ActiveRuleCount?: number;
+    /**
+     * 类型下的规则总数量
+     */
+    TotalRuleCount?: number;
+}
+/**
  * DescribeCCAutoStatus返回参数结构体
  */
 export interface DescribeCCAutoStatusResponse {
@@ -6341,6 +6397,23 @@ export interface InstanceInfo {
     FreeDelayFlag?: number;
 }
 /**
+ * DescribeUserSignatureRuleV2返回参数结构体
+ */
+export interface DescribeUserSignatureRuleV2Response {
+    /**
+     * 规则总数
+     */
+    Total?: number;
+    /**
+     * 规则列表
+     */
+    Rules?: Array<UserSignatureRule>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 设置WAF状态的结构体
  */
 export interface HostStatus {
@@ -6442,6 +6515,15 @@ export interface ModifyAntiInfoLeakRulesRequest {
     Strategies: Array<StrategyForAntiInfoLeak>;
 }
 /**
+ * DescribeUserSignatureClass请求参数结构体
+ */
+export interface DescribeUserSignatureClassRequest {
+    /**
+     * 查询域名
+     */
+    Domain: string;
+}
+/**
  * 单条日志数据描述
  */
 export interface AccessLogInfo {
@@ -6478,6 +6560,19 @@ export interface AccessLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LogJson?: string;
+}
+/**
+ * 通用返回
+ */
+export interface CommonRspData {
+    /**
+     * 操作结果
+     */
+    Code?: number;
+    /**
+     * 输出信息
+     */
+    Msg?: string;
 }
 /**
  * DescribeBatchIpAccessControl返回参数结构体
@@ -6791,6 +6886,35 @@ export interface DescribeCCRuleRequest {
      * 过滤条件
      */
     Name?: string;
+}
+/**
+ * BatchOperateUserSignatureRules请求参数结构体
+ */
+export interface BatchOperateUserSignatureRulesRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 0:关闭，1:开启，2:仅观察
+     */
+    Status: string;
+    /**
+     * 如果SelectedAll为true，则表示反选的规则，否则表示手动选择的规则ID
+     */
+    RuleIds?: Array<string>;
+    /**
+     * 仅观察原因
+     */
+    Reason?: number;
+    /**
+     * 是否全选
+     */
+    SelectedAll?: boolean;
+    /**
+     * 过滤
+     */
+    Filters?: Array<FiltersItemNew>;
 }
 /**
  * GetAttackDownloadRecords返回参数结构体
@@ -8800,6 +8924,39 @@ export interface AddSpartaProtectionRequest {
      * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
      */
     GmSSLId?: string;
+}
+/**
+ * PostAttackDownloadTask请求参数结构体
+ */
+export interface PostAttackDownloadTaskRequest {
+    /**
+     * 查询的域名，所有域名使用all
+     */
+    Domain: string;
+    /**
+     * 查询起始时间
+     */
+    StartTime: string;
+    /**
+     * 查询结束时间
+     */
+    EndTime: string;
+    /**
+     * Lucene语法
+     */
+    QueryString: string;
+    /**
+     * 任务名称
+     */
+    TaskName: string;
+    /**
+     * 默认为desc，可以取值desc和asc
+     */
+    Sort?: string;
+    /**
+     * 下载的日志条数
+     */
+    Count?: number;
 }
 /**
  * ModifyAreaBanAreas请求参数结构体

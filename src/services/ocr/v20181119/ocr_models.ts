@@ -70,31 +70,31 @@ export interface TextWaybill {
   /**
    * 收件人姓名
    */
-  RecName: WaybillObj
+  RecName?: WaybillObj
   /**
    * 收件人手机号
    */
-  RecNum: WaybillObj
+  RecNum?: WaybillObj
   /**
    * 收件人地址
    */
-  RecAddr: WaybillObj
+  RecAddr?: WaybillObj
   /**
    * 寄件人姓名
    */
-  SenderName: WaybillObj
+  SenderName?: WaybillObj
   /**
    * 寄件人手机号
    */
-  SenderNum: WaybillObj
+  SenderNum?: WaybillObj
   /**
    * 寄件人地址
    */
-  SenderAddr: WaybillObj
+  SenderAddr?: WaybillObj
   /**
    * 运单号
    */
-  WaybillNum: WaybillObj
+  WaybillNum?: WaybillObj
 }
 
 /**
@@ -455,7 +455,7 @@ OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持�
 FailedOperation.UnKnowError：表示识别失败；
 其它错误码见各个票据接口的定义。
    */
-  Code: string
+  Code?: string
   /**
    * 识别出的图片所属的票据类型。
 -1：未知类型
@@ -473,19 +473,19 @@ FailedOperation.UnKnowError：表示识别失败；
 15：非税发票
 16：全电发票
    */
-  Type: number
+  Type?: number
   /**
    * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
    */
-  Rect: Rect
+  Rect?: Rect
   /**
    * 识别出的图片在混贴票据图片中的旋转角度。
    */
-  Angle: number
+  Angle?: number
   /**
    * 识别到的内容。
    */
-  SingleInvoiceInfos: Array<SingleInvoiceInfo>
+  SingleInvoiceInfos?: Array<SingleInvoiceInfo>
   /**
    * 发票处于识别图片或PDF文件中的页教，默认从1开始。
    */
@@ -549,51 +549,51 @@ export interface EstateCertOCRResponse {
   /**
    * 权利人
    */
-  Obligee: string
+  Obligee?: string
   /**
    * 共有情况
    */
-  Ownership: string
+  Ownership?: string
   /**
    * 坐落
    */
-  Location: string
+  Location?: string
   /**
    * 不动产单元号
    */
-  Unit: string
+  Unit?: string
   /**
    * 权利类型
    */
-  Type: string
+  Type?: string
   /**
    * 权利性质
    */
-  Property: string
+  Property?: string
   /**
    * 用途
    */
-  Usage: string
+  Usage?: string
   /**
    * 面积
    */
-  Area: string
+  Area?: string
   /**
    * 使用期限
    */
-  Term: string
+  Term?: string
   /**
    * 权利其他状况，多行会用换行符\n连接。
    */
-  Other: string
+  Other?: string
   /**
    * 图片旋转角度
    */
-  Angle: number
+  Angle?: number
   /**
    * 不动产权号
    */
-  Number: string
+  Number?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1289,19 +1289,19 @@ export interface Rect {
   /**
    * 左上角x
    */
-  X: number
+  X?: number
   /**
    * 左上角y
    */
-  Y: number
+  Y?: number
   /**
    * 宽度
    */
-  Width: number
+  Width?: number
   /**
    * 高度
    */
-  Height: number
+  Height?: number
 }
 
 /**
@@ -1686,15 +1686,15 @@ export interface InvoiceGeneralInfo {
    * 识别出的字段名称(关键字)，支持以下字段识别（注：下划线表示一个字段）：
 发票代码、发票号码、日期、合计金额(小写)、合计金额(大写)、购买方识别号、销售方识别号、校验码、购买方名称、销售方名称、时间、种类、发票消费类型、省、市、是否有公司印章、发票名称、<span style="text-decoration:underline">购买方地址、电话</span>、<span style="text-decoration:underline">销售方地址、电话</span>、购买方开户行及账号、销售方开户行及账号、经办人取票用户、经办人支付信息、经办人商户号、经办人订单号、<span style="text-decoration:underline">货物或应税劳务、服务名称</span>、数量、单价、税率、税额、金额、单位、规格型号、合计税额、合计金额、备注、收款人、复核、开票人、密码区、行业分类
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -1705,17 +1705,17 @@ export interface TextVatInvoice {
    * 识别出的字段名称（关键字）。支持以下字段的识别：
 发票代码、 发票号码、 打印发票代码、 打印发票号码、 开票日期、 购买方识别号、 小写金额、 价税合计(大写)、 销售方识别号、 校验码、 购买方名称、 销售方名称、 税额、 复核、 联次名称、 备注、 联次、 密码区、 开票人、 收款人、 （货物或应税劳务、服务名称）、省、 市、 服务类型、 通行费标志、 是否代开、 是否收购、 合计金额、 是否有公司印章、 发票消费类型、 车船税、 机器编号、 成品油标志、 税率、 合计税额、 （购买方地址、电话）、 （销售方地址、电话）、 单价、 金额、 销售方开户行及账号、 购买方开户行及账号、 规格型号、 发票名称、 单位、 数量、 校验码备选、 校验码后六位备选、发票号码备选、车牌号、类型、通行日期起、通行日期止、发票类型。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 字段在原图中的中的四点坐标。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Polygon: Polygon
+  Polygon?: Polygon
 }
 
 /**
@@ -2044,7 +2044,7 @@ export interface InvoiceDetectInfo {
   /**
    * 识别出的图片在混贴票据图片中的旋转角度。
    */
-  Angle: number
+  Angle?: number
   /**
    * 识别出的图片所属的票据类型。
 -1：未知类型
@@ -2064,16 +2064,16 @@ export interface InvoiceDetectInfo {
 13：过路过桥费发票
 14：购物小票
    */
-  Type: number
+  Type?: number
   /**
    * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
    */
-  Rect: Rect
+  Rect?: Rect
   /**
    * 入参 ReturnImage 为 True 时返回 Base64 编码后的图片。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Image: string
+  Image?: string
 }
 
 /**
@@ -2316,15 +2316,15 @@ export interface OnlineTaxiItineraryInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 字段所在行，下标从0开始，非行字段或未能识别行号的返回-1
    */
-  Row: number
+  Row?: number
 }
 
 /**
@@ -2452,11 +2452,11 @@ export interface FinanBillInfo {
 【银行承兑汇票】或【商业承兑汇票】
 出票日期、行号1、行号2、出票人全称、出票人账号、付款行全称、收款人全称、收款人账号、收款人开户行、出票金额大写、出票金额小写、汇票到期日、付款行行号、付款行地址。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -2591,15 +2591,15 @@ export interface TollInvoiceInfo {
    * 识别出的字段名称（关键字）。支持以下字段的识别：
 发票代码、发票号码、日期、金额、入口、出口、时间、发票消费类型、高速标志。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -2610,15 +2610,15 @@ export interface BankSlipInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -2629,11 +2629,11 @@ export interface SmartStructuralOCRResponse {
    * 图片旋转角度(角度制)，文本的水平方向
 为 0；顺时针为正，逆时针为负
    */
-  Angle: number
+  Angle?: number
   /**
    * 识别信息
    */
-  StructuralItems: Array<StructuralItem>
+  StructuralItems?: Array<StructuralItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2684,15 +2684,15 @@ export interface BusInvoiceInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、身份证号、省、市、开票日期、乘车地点、检票口、客票类型、车型、座位号、车次。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -4740,15 +4740,15 @@ export interface SingleInvoiceInfo {
   /**
    * 识别出的字段名称
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
    */
-  Row: number
+  Row?: number
 }
 
 /**
@@ -4962,15 +4962,15 @@ export interface EduPaperOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  EduPaperInfos: Array<TextEduPaper>
+  EduPaperInfos?: Array<TextEduPaper>
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。
    */
-  Angle: number
+  Angle?: number
   /**
    * 结构化方式输出，具体内容请点击左侧链接。
    */
-  QuestionBlockInfos: Array<QuestionBlockObj>
+  QuestionBlockInfos?: Array<QuestionBlockObj>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6016,7 +6016,7 @@ export interface GeneralBasicOCRRequest {
    */
   ImageBase64?: string
   /**
-   * 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
   /**
@@ -6825,15 +6825,15 @@ export interface ShipInvoiceInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -6873,7 +6873,7 @@ export interface GeneralAccurateOCRRequest {
   ImageBase64?: string
   /**
    * 图片的 Url 地址。
-要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。
+要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
@@ -7236,11 +7236,11 @@ export interface FinanBillSliceInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 大写金额、小写金额、账号、票号1、票号2、收款人、大写日期、同城交换号、地址-省份、地址-城市、付款行全称、支票密码、支票用途。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -7719,15 +7719,15 @@ export interface DutyPaidProofInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**
@@ -8840,19 +8840,19 @@ export interface Polygon {
   /**
    * 左上顶点坐标
    */
-  LeftTop: Coord
+  LeftTop?: Coord
   /**
    * 右上顶点坐标
    */
-  RightTop: Coord
+  RightTop?: Coord
   /**
    * 右下顶点坐标
    */
-  RightBottom: Coord
+  RightBottom?: Coord
   /**
    * 左下顶点坐标
    */
-  LeftBottom: Coord
+  LeftBottom?: Coord
 }
 
 /**
@@ -8976,7 +8976,7 @@ export interface InsuranceBillOCRResponse {
   /**
    * 保险单据识别结果，具体内容请点击左侧链接。
    */
-  InsuranceBillInfos: Array<InsuranceBillInfo>
+  InsuranceBillInfos?: Array<InsuranceBillInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10505,15 +10505,15 @@ export interface VatRollInvoiceInfo {
    * 识别出的字段名称(关键字)，支持以下字段：
 发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。
    */
-  Name: string
+  Name?: string
   /**
    * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
    */
-  Value: string
+  Value?: string
   /**
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
-  Rect: Rect
+  Rect?: Rect
 }
 
 /**

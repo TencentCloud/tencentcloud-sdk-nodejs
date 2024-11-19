@@ -263,32 +263,26 @@ export interface DescribeAgentDealsByCacheResponse {
 export interface RebateInfoElem {
   /**
    * 代理商账号ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 返佣月份，如2018-02
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RebateMonth?: string
   /**
    * 返佣金额，单位分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Amt?: number
   /**
    * 月度业绩，单位分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonthSales?: number
   /**
    * 季度业绩，单位分
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QuarterSales?: number
   /**
    * NORMAL(正常)/HAS_OVERDUE_BILL(欠费)/NO_CONTRACT(缺合同)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionFlag?: string
 }

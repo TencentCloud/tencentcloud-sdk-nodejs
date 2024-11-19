@@ -488,9 +488,9 @@ it("waf.v20180125.ModifyDomainsCLSStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
+it("waf.v20180125.DescribeUserSignatureRuleV2", async function () {
     try {
-       const data = await client.ModifyAntiFakeUrlStatus({})
+       const data = await client.DescribeUserSignatureRuleV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +738,16 @@ it("waf.v20180125.ModifyHost", async function () {
     }
 })
 
+it("waf.v20180125.DescribeUserSignatureClass", async function () {
+    try {
+       const data = await client.DescribeUserSignatureClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyBotStatus", async function () {
     try {
        const data = await client.ModifyBotStatus({})
@@ -801,6 +811,16 @@ it("waf.v20180125.DescribeAntiFakeRules", async function () {
 it("waf.v20180125.DescribeFindDomainList", async function () {
     try {
        const data = await client.DescribeFindDomainList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyAntiFakeUrlStatus", async function () {
+    try {
+       const data = await client.ModifyAntiFakeUrlStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1381,6 +1401,16 @@ it("waf.v20180125.DescribeCCAutoStatus", async function () {
 it("waf.v20180125.DescribeUserSignatureRule", async function () {
     try {
        const data = await client.DescribeUserSignatureRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.BatchOperateUserSignatureRules", async function () {
+    try {
+       const data = await client.BatchOperateUserSignatureRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

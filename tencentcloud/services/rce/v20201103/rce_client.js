@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNameList", req, cb);
     }
     /**
+     * RCE控制台预付费和后付费次数展示
+     */
+    async DescribeUserUsageCnt(req, cb) {
+        return this.request("DescribeUserUsageCnt", req, cb);
+    }
+    /**
      * 新增黑白名单数据，所有黑白名单数据总量上限为10000
      */
     async ImportNameListData(req, cb) {

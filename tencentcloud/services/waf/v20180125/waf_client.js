@@ -311,10 +311,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomainsCLSStatus", req, cb);
     }
     /**
-     * 切换防篡改开关
+     * 获取用户特征规则列表
      */
-    async ModifyAntiFakeUrlStatus(req, cb) {
-        return this.request("ModifyAntiFakeUrlStatus", req, cb);
+    async DescribeUserSignatureRuleV2(req, cb) {
+        return this.request("DescribeUserSignatureRuleV2", req, cb);
     }
     /**
      * 根据过滤条件查询VIP信息
@@ -461,6 +461,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHost", req, cb);
     }
     /**
+     * 查询Tiga引擎规则类型及状态
+     */
+    async DescribeUserSignatureClass(req, cb) {
+        return this.request("DescribeUserSignatureClass", req, cb);
+    }
+    /**
      * Bot_V2 bot总开关更新
      */
     async ModifyBotStatus(req, cb) {
@@ -501,6 +507,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFindDomainList(req, cb) {
         return this.request("DescribeFindDomainList", req, cb);
+    }
+    /**
+     * 切换防篡改开关
+     */
+    async ModifyAntiFakeUrlStatus(req, cb) {
+        return this.request("ModifyAntiFakeUrlStatus", req, cb);
     }
     /**
      * 本接口用于访问日志柱状趋势图
@@ -849,6 +861,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUserSignatureRule(req, cb) {
         return this.request("DescribeUserSignatureRule", req, cb);
+    }
+    /**
+     * 批量操作tiga子规则
+     */
+    async BatchOperateUserSignatureRules(req, cb) {
+        return this.request("BatchOperateUserSignatureRules", req, cb);
     }
     /**
      * 刷新防篡改url

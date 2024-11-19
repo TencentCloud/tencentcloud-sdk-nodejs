@@ -391,31 +391,31 @@ export interface DescribeStorageServiceResponse {
     /**
      * 云存服务ID
      */
-    ServiceId: string;
+    ServiceId?: string;
     /**
      * 云存服务所在的区域
      */
-    StorageRegion: string;
+    StorageRegion?: string;
     /**
      * 设备TID
      */
-    Tid: string;
+    Tid?: string;
     /**
      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
      */
-    ChnNum: number;
+    ChnNum?: number;
     /**
      * 终端用户在IoT Video平台的注册ID
      */
-    AccessId: string;
+    AccessId?: string;
     /**
      * 服务开始时间
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 服务失效时间
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 服务状态
   1：正常使用中
@@ -423,11 +423,11 @@ export interface DescribeStorageServiceResponse {
   3：已过期。查询不到设备保存在云端的数据。
   4：等待服务生效。
      */
-    Status: number;
+    Status?: number;
     /**
-     * 云存定单列表
+     * 云存订单列表
      */
-    Data: Array<StorageOrder>;
+    Data?: Array<StorageOrder>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1862,35 +1862,35 @@ export interface DeliverStorageServiceResponse {
     /**
      * 被转出的云存服务ID
      */
-    SrcServiceId: string;
+    SrcServiceId?: string;
     /**
      * 被转入的云存服务ID
      */
-    ServiceId: string;
+    ServiceId?: string;
     /**
      * 云存服务所在的区域
      */
-    StorageRegion: string;
+    StorageRegion?: string;
     /**
      * 设备TID
      */
-    Tid: string;
+    Tid?: string;
     /**
      * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
      */
-    ChnNum: number;
+    ChnNum?: number;
     /**
      * 终端用户在IoT Video平台的注册ID
      */
-    AccessId: string;
+    AccessId?: string;
     /**
      * 服务开始时间
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 服务失效时间
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 服务状态
   1：正常使用中
@@ -1898,11 +1898,11 @@ export interface DeliverStorageServiceResponse {
   3：已过期。查询不到设备保存在云端的数据。
   4：等待服务生效。
      */
-    Status: number;
+    Status?: number;
     /**
-     * 新增的云存定单列表
+     * 新增的云存订单列表
      */
-    Data: Array<StorageOrder>;
+    Data?: Array<StorageOrder>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

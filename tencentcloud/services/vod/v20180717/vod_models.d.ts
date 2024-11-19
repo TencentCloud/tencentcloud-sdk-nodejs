@@ -16851,7 +16851,7 @@ export interface AiReviewTerrorismTaskInput {
  */
 export interface ComplexAdaptiveDynamicStreamingTaskStreamPara {
     /**
-     * 自适应码流模版 ID。
+     * 自适应码流模板 ID。
      */
     Definition: number;
 }

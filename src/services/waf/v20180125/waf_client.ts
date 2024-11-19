@@ -87,6 +87,7 @@ import {
   DescribeHostRequest,
   AccessFullTextInfo,
   DeleteCustomRuleRequest,
+  DescribeUserSignatureRuleV2Request,
   ModifyApiSecEventChangeRequest,
   JobDateTime,
   DescribeHostsRequest,
@@ -132,7 +133,7 @@ import {
   SwitchElasticModeResponse,
   AccessRuleInfo,
   CCRuleLists,
-  PostAttackDownloadTaskRequest,
+  BatchOperateUserSignatureRulesResponse,
   ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
   ApiAsset,
@@ -152,6 +153,7 @@ import {
   ApiPkg,
   DescribeAreaBanSupportAreasResponse,
   TigaMainClassMode,
+  DescribeUserSignatureClassResponse,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
   DescribeTlsVersionRequest,
@@ -262,6 +264,7 @@ import {
   DomainRuleId,
   DescribeProtectionModesRequest,
   PortItem,
+  RuleType,
   DescribeCCAutoStatusResponse,
   ModifyCustomRuleStatusRequest,
   AccessHistogramItem,
@@ -269,12 +272,15 @@ import {
   DescribeAttackOverviewRequest,
   DescribeUserLevelRequest,
   InstanceInfo,
+  DescribeUserSignatureRuleV2Response,
   HostStatus,
   ModifyAntiFakeUrlResponse,
   DescribeBatchIpAccessControlRequest,
   DescribeInstancesRequest,
   ModifyAntiInfoLeakRulesRequest,
+  DescribeUserSignatureClassRequest,
   AccessLogInfo,
+  CommonRspData,
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
   ModifyApiAnalyzeStatusRequest,
@@ -292,6 +298,7 @@ import {
   ModifyWebshellStatusResponse,
   GenerateDealsAndPayNewResponse,
   DescribeCCRuleRequest,
+  BatchOperateUserSignatureRulesRequest,
   GetAttackDownloadRecordsResponse,
   DescribeApiDetailResponse,
   VipInfo,
@@ -350,6 +357,7 @@ import {
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AddSpartaProtectionRequest,
+  PostAttackDownloadTaskRequest,
   ModifyAreaBanAreasRequest,
   ModifyModuleStatusResponse,
   AttackLogInfo,
@@ -892,13 +900,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换防篡改开关
+   * 获取用户特征规则列表
    */
-  async ModifyAntiFakeUrlStatus(
-    req: ModifyAntiFakeUrlStatusRequest,
-    cb?: (error: string, rep: ModifyAntiFakeUrlStatusResponse) => void
-  ): Promise<ModifyAntiFakeUrlStatusResponse> {
-    return this.request("ModifyAntiFakeUrlStatus", req, cb)
+  async DescribeUserSignatureRuleV2(
+    req: DescribeUserSignatureRuleV2Request,
+    cb?: (error: string, rep: DescribeUserSignatureRuleV2Response) => void
+  ): Promise<DescribeUserSignatureRuleV2Response> {
+    return this.request("DescribeUserSignatureRuleV2", req, cb)
   }
 
   /**
@@ -1142,6 +1150,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Tiga引擎规则类型及状态
+   */
+  async DescribeUserSignatureClass(
+    req: DescribeUserSignatureClassRequest,
+    cb?: (error: string, rep: DescribeUserSignatureClassResponse) => void
+  ): Promise<DescribeUserSignatureClassResponse> {
+    return this.request("DescribeUserSignatureClass", req, cb)
+  }
+
+  /**
    * Bot_V2 bot总开关更新
    */
   async ModifyBotStatus(
@@ -1209,6 +1227,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFindDomainListResponse) => void
   ): Promise<DescribeFindDomainListResponse> {
     return this.request("DescribeFindDomainList", req, cb)
+  }
+
+  /**
+   * 切换防篡改开关
+   */
+  async ModifyAntiFakeUrlStatus(
+    req: ModifyAntiFakeUrlStatusRequest,
+    cb?: (error: string, rep: ModifyAntiFakeUrlStatusResponse) => void
+  ): Promise<ModifyAntiFakeUrlStatusResponse> {
+    return this.request("ModifyAntiFakeUrlStatus", req, cb)
   }
 
   /**
@@ -1789,6 +1817,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserSignatureRuleResponse) => void
   ): Promise<DescribeUserSignatureRuleResponse> {
     return this.request("DescribeUserSignatureRule", req, cb)
+  }
+
+  /**
+   * 批量操作tiga子规则
+   */
+  async BatchOperateUserSignatureRules(
+    req: BatchOperateUserSignatureRulesRequest,
+    cb?: (error: string, rep: BatchOperateUserSignatureRulesResponse) => void
+  ): Promise<BatchOperateUserSignatureRulesResponse> {
+    return this.request("BatchOperateUserSignatureRules", req, cb)
   }
 
   /**

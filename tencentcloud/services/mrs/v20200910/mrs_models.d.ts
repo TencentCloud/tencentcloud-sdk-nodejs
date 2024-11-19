@@ -6582,12 +6582,12 @@ export interface LymphTotal {
      * 转移数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransferNum?: string;
+    TransferNum?: number;
     /**
      * 总数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total?: string;
+    Total?: number;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -8257,12 +8257,10 @@ export interface OphthalmologyBriefSummary {
 export interface ImageToObjectResponse {
     /**
      * 报告结构化结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Template?: Template;
     /**
      * 多级分类结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TextTypeList?: Array<TextType>;
     /**

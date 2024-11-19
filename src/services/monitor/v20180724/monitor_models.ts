@@ -9964,64 +9964,69 @@ export interface Condition {
   /**
    * 告警通知频率
    */
-  AlarmNotifyPeriod: number
+  AlarmNotifyPeriod?: number
   /**
    * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
    */
-  AlarmNotifyType: number
+  AlarmNotifyType?: number
   /**
    * 检测方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CalcType: string
+  CalcType?: string
   /**
    * 检测值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CalcValue: string
+  CalcValue?: string
   /**
    * 持续时间，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContinueTime: string
+  ContinueTime?: string
   /**
    * 指标ID
    */
-  MetricID: number
+  MetricID?: number
   /**
    * 指标展示名称（对外）
    */
-  MetricDisplayName: string
+  MetricDisplayName?: string
   /**
    * 周期
    */
-  Period: number
+  Period?: number
   /**
    * 规则ID
    */
-  RuleID: number
+  RuleID?: number
   /**
    * 指标单位
    */
-  Unit: string
+  Unit?: string
   /**
    * 是否为高级指标，0：否；1：是
    */
-  IsAdvanced: number
+  IsAdvanced?: number
   /**
    * 是否开通高级指标，0：否；1：是
    */
-  IsOpen: number
+  IsOpen?: number
   /**
    * 产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 告警分级阈值配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HierarchicalValue: AlarmHierarchicalValue
+  HierarchicalValue?: AlarmHierarchicalValue
+  /**
+   * 指标类型，用于区分动态指标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleType?: string
 }
 
 /**

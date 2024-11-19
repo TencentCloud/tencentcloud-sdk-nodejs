@@ -55,6 +55,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
   <li>POSTPAID_BY_HOUR：按小时后付费</li>
   <li>SPOTPAID：竞价付费</li>
   <li>PREPAID：预付费，即包年包月</li>
+  <li>CDCPAID：专用集群付费</li>
      */
     InstanceChargeType?: string;
     /**
@@ -133,6 +134,10 @@ export interface ModifyLaunchConfigurationAttributesRequest {
      * 镜像族名称。
      */
     ImageFamily?: string;
+    /**
+     * 本地专用集群ID。
+     */
+    DedicatedClusterId?: string;
 }
 /**
  * DisableAutoScalingGroup请求参数结构体
@@ -530,6 +535,10 @@ export interface LaunchConfiguration {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageFamily?: string;
+    /**
+     * 本地专用集群 ID。
+     */
+    DedicatedClusterId?: string;
 }
 /**
  * DescribeAccountLimits返回参数结构体
@@ -1238,6 +1247,7 @@ export interface CreateLaunchConfigurationRequest {
   <li>POSTPAID_BY_HOUR：按小时后付费</li>
   <li>SPOTPAID：竞价付费</li>
   <li>PREPAID：预付费，即包年包月</li>
+  <li>CDCPAID：专用集群付费</li>
      */
     InstanceChargeType?: string;
     /**
@@ -1306,6 +1316,10 @@ export interface CreateLaunchConfigurationRequest {
      * 镜像族名称。镜像Id与镜像族名称，二者必填一个且只能填写一个。
      */
     ImageFamily?: string;
+    /**
+     * 本地专用集群ID。
+     */
+    DedicatedClusterId?: string;
 }
 /**
  * 伸缩组

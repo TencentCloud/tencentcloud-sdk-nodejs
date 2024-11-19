@@ -24,7 +24,7 @@ export interface DeleteVolumeDataRequest {
    */
   VolumeId: string
   /**
-   * 需要删除的路径
+   * 需要删除的路径。
    */
   Path: string
 }
@@ -35,7 +35,6 @@ export interface DeleteVolumeDataRequest {
 export interface RetryRunsResponse {
   /**
    * 新的任务批次ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunGroupId?: string
   /**
@@ -64,17 +63,14 @@ export interface RunApplicationResponse {
 export interface ExecutionTime {
   /**
    * 提交时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubmitTime?: string
   /**
    * 开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
 }
@@ -222,7 +218,6 @@ export interface GetRunMetadataFileResponse {
   CosSignedUrl?: string
   /**
    * 批量文件预签名链接，一分钟内有效。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosSignedUrls?: Array<string>
   /**
@@ -458,17 +453,14 @@ export interface Run {
   EnvironmentId?: string
   /**
    * 用户定义ID，单例运行为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefinedId?: string
   /**
    * 表格ID，单例运行为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableId?: string
   /**
    * 表格行UUID，单例运行为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableRowUuid?: string
   /**
@@ -490,7 +482,6 @@ export interface Run {
   ExecutionTime?: ExecutionTime
   /**
    * 缓存信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Cache?: CacheInfo
   /**
@@ -513,12 +504,10 @@ export interface Run {
 export interface TableColumn {
   /**
    * 列名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Header?: string
   /**
    * 列数据类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataType?: string
 }
@@ -658,6 +647,24 @@ export interface DescribeTablesResponse {
 }
 
 /**
+ * COS 文件信息
+ */
+export interface CosFileInfo {
+  /**
+   * 存储桶。
+   */
+  Bucket?: string
+  /**
+   * COS文件地址。
+   */
+  Uri?: string
+  /**
+   * 地域。
+   */
+  Region?: string
+}
+
+/**
  * 私有网络配置。
  */
 export interface VPCOption {
@@ -769,17 +776,14 @@ export interface DeleteVolumeResponse {
 export interface CacheInfo {
   /**
    * 缓存清理时间(小时)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheClearDelay?: number
   /**
    * 缓存清理计划时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheClearTime?: string
   /**
    * 缓存是否已被清理。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheCleared?: boolean
 }
@@ -845,27 +849,22 @@ export interface DescribeVolumesResponse {
 export interface GitInfo {
   /**
    * Git地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GitHttpPath: string
   /**
    * Git用户名。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GitUserName?: string
   /**
    * Git密码或者Token。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GitTokenOrPassword?: string
   /**
    * 分支。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Branch?: string
   /**
    * 标签。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: string
 }
@@ -876,55 +875,49 @@ export interface GitInfo {
 export interface ApplicationVersion {
   /**
    * 版本类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 版本ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationVersionId?: string
   /**
    * 发布名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 发布描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 入口文件。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Entrypoint?: string
   /**
    * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 创建者名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorName?: string
   /**
    * 创建者ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorId?: string
   /**
    * Git信息。
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   GitInfo?: string
   /**
    * Git信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GitSource?: GitInfo
+  /**
+   * COS信息。
+   */
+  CosSource?: CosFileInfo
 }
 
 /**
@@ -977,14 +970,12 @@ export interface RunGroup {
   ApplicationType?: string
   /**
    * 应用版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationVersion?: ApplicationVersion
   /**
    * 应用访问类型：
 - PRIVATE 私有应用
 - PUBLIC 公共应用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessMode?: string
   /**
@@ -997,7 +988,6 @@ export interface RunGroup {
   EnvironmentName?: string
   /**
    * 表格ID，单例运行为空。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableId?: string
   /**
@@ -1016,12 +1006,10 @@ export interface RunGroup {
    * 任务批次类型 ：
 - WDL
 - NEXTFLOW
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 工作目录。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkDir?: string
   /**
@@ -1033,17 +1021,14 @@ export interface RunGroup {
 - JSON: 导入JSON
 - MANUAL: 手动输入
 - COS: COS文件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputType?: string
   /**
    * 输入COS地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputCosUri?: string
   /**
    * 输入模版ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InputTemplateId?: string
   /**
@@ -1052,12 +1037,10 @@ export interface RunGroup {
   Option?: RunOption
   /**
    * Nextflow运行选项。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NFOption?: NFOption
   /**
    * 使用的缓存卷。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Volumes?: Array<VolumeInfo>
   /**
@@ -1078,7 +1061,6 @@ export interface RunGroup {
   ErrorMessage?: string
   /**
    * 运行结果通知方式。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultNotify?: string
   /**
@@ -1091,12 +1073,10 @@ export interface RunGroup {
   UpdateTime?: string
   /**
    * 创建者。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
   /**
    * 创建者ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorId?: string
 }
@@ -1269,17 +1249,14 @@ export interface Volume {
 export interface VolumeInfo {
   /**
    * 缓存卷ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeId?: string
   /**
    * 名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 挂载路径。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPath?: string
 }
@@ -1534,12 +1511,10 @@ export interface DescribeTablesRequest {
 export interface TableRow {
   /**
    * 表格行UUID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableRowUuid?: string
   /**
    * 表格行内容。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<string>
 }
@@ -1595,17 +1570,14 @@ export interface RunOption {
   UseErrorOnHold: boolean
   /**
    * 输出归档COS路径。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinalWorkflowOutputsDir?: string
   /**
    * 是否使用相对目录归档输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UseRelativeOutputPaths?: boolean
   /**
    * 是否添加运行信息到输出目录中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddRunInfoToOutputDir?: boolean
 }
@@ -1616,34 +1588,28 @@ export interface RunOption {
 export interface NFOption {
   /**
    * Config。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Config?: string
   /**
    * Profile。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Profile?: string
   /**
    * Report。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Report?: boolean
   /**
    * Resume。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resume?: boolean
   /**
    * Nextflow引擎版本，取值范围：
 - 22.10.7
 - 23.10.1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NFVersion?: string
   /**
    * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LaunchDir?: string
 }
@@ -1654,39 +1620,36 @@ export interface NFOption {
 export interface Table {
   /**
    * 表格ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableId?: string
   /**
    * 关联项目ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
    * 表格名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 表格描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 表格列
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<TableColumn>
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 创建人
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
+  /**
+   * 创建人ID
+   */
+  CreatorId?: string
 }
 
 /**
@@ -1709,112 +1672,90 @@ export interface CVMOption {
 export interface RunMetadata {
   /**
    * 任务类型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunType?: string
   /**
    * 任务ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunId?: string
   /**
    * 父层ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentId?: string
   /**
    * 作业ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
    * 作业名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallName?: string
   /**
    * Scatter索引。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScatterIndex?: string
   /**
    * 输入。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: string
   /**
    * 输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
    * 提交时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubmitTime?: string
   /**
    * 结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 命令行。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Command?: string
   /**
    * 运行时。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Runtime?: string
   /**
    * 预处理。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Preprocess?: boolean
   /**
    * 后处理。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PostProcess?: boolean
   /**
    * Cache命中
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallCached?: boolean
   /**
    * 工作目录。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkDir?: string
   /**
    * 标准输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Stdout?: string
   /**
    * 错误输出。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Stderr?: string
   /**
    * 其他信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Meta?: string
 }

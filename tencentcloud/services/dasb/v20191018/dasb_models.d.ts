@@ -673,6 +673,10 @@ export interface SearchFileBySidResult {
      * 堡垒机拦截情况, 1-已执行，  2-被阻断
      */
     Action?: number;
+    /**
+     * 签名值
+     */
+    SignValue?: string;
 }
 /**
  * SearchCommand请求参数结构体
@@ -903,6 +907,10 @@ export interface SearchCommandResult {
      * 会话大小
      */
     Size?: number;
+    /**
+     * 签名值
+     */
+    SignValue?: string;
 }
 /**
  * ModifyOAuthSetting请求参数结构体
@@ -1080,6 +1088,10 @@ export interface OperationEvent {
      * 操作结果，1-成功，2-失败
      */
     Result?: number;
+    /**
+     * 签名值
+     */
+    SignValue?: string;
 }
 /**
  * 部门信息
@@ -1522,6 +1534,10 @@ export interface Command {
      * 会话大小
      */
     Size?: number;
+    /**
+     * 签名值
+     */
+    SignValue?: string;
 }
 /**
  * ModifyAcl请求参数结构体
@@ -2357,6 +2373,10 @@ export interface User {
      * 锁定状态 0 - 未锁定 1 - 锁定
      */
     LockStatus?: number;
+    /**
+     * ukey绑定状态 0 - 未绑定 1 - 已绑定
+     */
+    UKeyStatus?: number;
     /**
      * 状态 与Filter中一致
      */
@@ -3376,7 +3396,7 @@ export interface Resource {
      */
     DeployModel?: number;
     /**
-     * 0 默认值，非内网访问，1 内网访问
+     * 0 默认值，非内网访问，1 内网访问，2 内网访问开通中，3 内网访问关闭中
      */
     IntranetAccess?: number;
     /**
@@ -3835,6 +3855,10 @@ export interface SearchFileResult {
      * 上传或新建文件（夹）路径及名称
      */
     FileNew?: string;
+    /**
+     * 签名值
+     */
+    SignValue?: string;
 }
 /**
  * DeleteAcls返回参数结构体

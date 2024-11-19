@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeNameListResponse, ManageMarketingRiskRequest, ModifyNameListDataRequest, CreateNameListRequest, DeleteNameListDataResponse, ImportNameListDataResponse, DeleteNameListRequest, DescribeNameListDetailResponse, ManageMarketingRiskResponse, ModifyNameListRequest, DescribeNameListDetailRequest, DescribeNameListDataListResponse, DeleteNameListDataRequest, DescribeNameListDataListRequest, DescribeNameListRequest, CreateNameListResponse, ModifyNameListDataResponse, ModifyNameListResponse, ImportNameListDataRequest, DeleteNameListResponse } from "./rce_models";
+import { DescribeNameListResponse, ManageMarketingRiskRequest, ModifyNameListDataRequest, CreateNameListRequest, DeleteNameListDataResponse, DescribeUserUsageCntRequest, ImportNameListDataResponse, DeleteNameListRequest, DescribeNameListDetailResponse, ManageMarketingRiskResponse, ModifyNameListRequest, DescribeNameListDetailRequest, DescribeNameListDataListResponse, DeleteNameListDataRequest, DescribeNameListDataListRequest, DescribeNameListRequest, CreateNameListResponse, ModifyNameListDataResponse, ModifyNameListResponse, ImportNameListDataRequest, DeleteNameListResponse, DescribeUserUsageCntResponse } from "./rce_models";
 /**
  * rce client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 修改黑白名单状态 关闭 开启 删除
      */
     DeleteNameList(req: DeleteNameListRequest, cb?: (error: string, rep: DeleteNameListResponse) => void): Promise<DeleteNameListResponse>;
+    /**
+     * RCE控制台预付费和后付费次数展示
+     */
+    DescribeUserUsageCnt(req?: DescribeUserUsageCntRequest, cb?: (error: string, rep: DescribeUserUsageCntResponse) => void): Promise<DescribeUserUsageCntResponse>;
     /**
      * 新增黑白名单数据，所有黑白名单数据总量上限为10000
      */

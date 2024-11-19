@@ -473,6 +473,18 @@ export interface CreatePredictiveDialingCampaignRequest {
      * 呼叫重试次数，0 - 2
      */
     RetryTimes?: number;
+    /**
+     * 自定义变量
+     */
+    Variables?: Array<Variable>;
+    /**
+     * UUI
+     */
+    UUI?: string;
+    /**
+     * 被叫属性
+     */
+    CalleeAttributes?: Array<CalleeAttribute>;
 }
 /**
  * DescribeChatMessages返回参数结构体
@@ -1608,6 +1620,18 @@ export interface UpdatePredictiveDialingCampaignRequest {
      * 呼叫重试次数，0 - 2
      */
     RetryTimes?: number;
+    /**
+     * 自定义变量
+     */
+    Variables?: Array<Variable>;
+    /**
+     * 	UUI
+     */
+    UUI?: string;
+    /**
+     * 被叫属性
+     */
+    CalleeAttributes?: Array<CalleeAttribute>;
 }
 /**
  * DescribeStaffInfoList请求参数结构体

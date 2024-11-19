@@ -1859,6 +1859,10 @@ export interface DescribeReleaseFileSignRequest {
      * 获取临时签名的bucket是国内站还是国际站（1表示国际站，其它表示国内站）
      */
     Site?: number;
+    /**
+     * ProjectID
+     */
+    ID?: number;
 }
 /**
  * DeleteWhitelist请求参数结构体

@@ -771,11 +771,11 @@ export interface UpdateDataModelRegistryInfoRequest {
     /**
      * 数语的ip
      */
-    Vip: string;
+    Ip?: string;
     /**
      * 数语的端口
      */
-    Vport: number;
+    Port?: number;
     /**
      * 数语的CAM角色id
      */

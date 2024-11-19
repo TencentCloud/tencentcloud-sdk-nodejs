@@ -43,6 +43,7 @@ import {
   ModifyVolumeResponse,
   LimitRange,
   DescribeTablesResponse,
+  CosFileInfo,
   VPCOption,
   ResourceQuota,
   RetryRunsRequest,

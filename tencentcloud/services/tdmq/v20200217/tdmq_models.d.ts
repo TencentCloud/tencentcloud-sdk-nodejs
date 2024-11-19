@@ -45,7 +45,7 @@ export interface CreateRabbitMQBindingResponse {
      */
     InstanceId?: string;
     /**
-     * vhost参数
+     * vhost名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VirtualHost?: string;
@@ -657,6 +657,10 @@ export interface RabbitMQVipInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
+    /**
+     * 实例类型，0 专享版、1 Serverless 版
+     */
+    InstanceType?: number;
 }
 /**
  * RabbiteMQ集群基本信息
@@ -762,6 +766,10 @@ export interface RabbitMQClusterInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: number;
+    /**
+     * 实例类型，0 专享版、1 Serverless 版
+     */
+    InstanceType?: number;
 }
 /**
  * vhost概览统计信息
@@ -2132,7 +2140,7 @@ export interface RocketMQGroupConfigOutput {
  */
 export interface DeleteRabbitMQBindingResponse {
     /**
-     * 队列名称
+     * 实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
@@ -6608,7 +6616,7 @@ export interface DescribeRabbitMQBindingsRequest {
      */
     InstanceId: string;
     /**
-     * Vhost参数
+     * Vhost名称
      */
     VirtualHost: string;
     /**
@@ -7869,7 +7877,7 @@ export interface CreateRabbitMQBindingRequest {
      */
     InstanceId: string;
     /**
-     * Vhost参数
+     * Vhost名称
      */
     VirtualHost: string;
     /**
@@ -7885,7 +7893,7 @@ export interface CreateRabbitMQBindingRequest {
      */
     Destination: string;
     /**
-     * 绑定key
+     * 路由键
      */
     RoutingKey?: string;
 }

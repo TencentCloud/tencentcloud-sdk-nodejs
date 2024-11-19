@@ -408,6 +408,10 @@ export interface DeleteNameListDataResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUserUsageCnt请求参数结构体
+ */
+export declare type DescribeUserUsageCntRequest = null;
+/**
  * ImportNameListData返回参数结构体
  */
 export interface ImportNameListDataResponse {
@@ -428,6 +432,46 @@ export interface DeleteNameListRequest {
      * 业务入参
      */
     BusinessSecurityData: InputDeleteNameListFront;
+}
+/**
+ * 预付费 后付费 总数显示接口出参
+ */
+export interface OutputDescribeUserUsageCnt {
+    /**
+     * 当前付费模式，0 后付费 1 预付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: number;
+    /**
+     * 后付费本月使用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AfterPayModeThisMonthUsedCnt?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 超出时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 后付费上月使用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AfterPayModeLastMonthUsedCnt?: number;
+    /**
+     * 预付费总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeforePayModeTotalUsedCnt?: number;
+    /**
+     * 预付费剩余用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeforePayModeRemainUsedCnt?: number;
 }
 /**
  * DescribeNameListDetail返回参数结构体
@@ -1136,6 +1180,24 @@ export interface OutputCreateNameListFront {
     Value?: Array<string>;
 }
 /**
+ * RCE控制台预付费和后付费次数展示出参数据
+ */
+export interface OutputDescribeUserUsageCntData {
+    /**
+     * 错误码，0 表示成功，非0表示失败错误码。 0：成功 4300：未开通服务
+     */
+    Code?: number;
+    /**
+     * 错误信息
+     */
+    Message?: string;
+    /**
+     * 业务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: OutputDescribeUserUsageCnt;
+}
+/**
  * ModifyNameList返回参数结构体
  */
 export interface ModifyNameListResponse {
@@ -1275,4 +1337,17 @@ export interface InputModifyNameListDataFrontListData {
      * 名单数据集合
      */
     DataList?: Array<InputModifyNameListDataFront>;
+}
+/**
+ * DescribeUserUsageCnt返回参数结构体
+ */
+export interface DescribeUserUsageCntResponse {
+    /**
+     * 业务出参
+     */
+    Data?: OutputDescribeUserUsageCntData;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

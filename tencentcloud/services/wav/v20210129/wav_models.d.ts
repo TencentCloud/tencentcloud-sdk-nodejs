@@ -1176,12 +1176,12 @@ export interface QueryExternalContactListResponse {
      * 外部联系人信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageData: Array<ExternalContactSimpleInfo>;
+    PageData?: Array<ExternalContactSimpleInfo>;
     /**
      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NextCursor: string;
+    NextCursor?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1399,12 +1399,12 @@ export interface ExternalUserMappingInfo {
     /**
      * 企业主体对应的外部联系人userId
      */
-    CorpExternalUserId: string;
+    CorpExternalUserId?: string;
     /**
      * 乐销车应用主体对应的外部联系人, 当不存在好友关系时，该字段值为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalUserId: string;
+    ExternalUserId?: string;
 }
 /**
  * 发生过到店的潜客到店信息
@@ -1518,34 +1518,34 @@ export interface FollowUser {
     /**
      * 添加了此外部联系人的企业成员userid
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 该成员对此外部联系人的备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 该成员对此外部联系人的描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 该成员添加此外部联系人的时间戳，单位为秒
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 该成员添加此客户的来源，具体含义详见<a href="https://work.weixin.qq.com/api/doc/90000/90135/92114#%E6%9D%A5%E6%BA%90%E5%AE%9A%E4%B9%89">来源定义</a>
      */
-    AddWay: number;
+    AddWay?: number;
     /**
      * 发起添加的userid，如果成员主动添加，为成员的userid；如果是客户主动添加，则为客户的外部联系人userid；如果是内部成员共享/管理员分配，则为对应的成员/管理员userid
      */
-    OperUserId: string;
+    OperUserId?: string;
     /**
      * 该成员添加此外部联系人所打标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<ExternalContactTag>;
+    Tags?: Array<ExternalContactTag>;
 }
 /**
  * QueryExternalContactDetailByDate请求参数结构体
@@ -1850,29 +1850,29 @@ export interface ExternalContact {
     /**
      * 外部联系人的userId
      */
-    ExternalUserId: string;
+    ExternalUserId?: string;
     /**
      * 外部联系人性别 0-未知 1-男性 2-女性
      */
-    Gender: number;
+    Gender?: number;
     /**
      * 外部联系人的名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 外部联系人的类型，1表示该外部联系人是微信用户，2表示该外部联系人是企业微信用户
      */
-    Type: number;
+    Type?: number;
     /**
      * 外部联系人在微信开放平台的唯一身份标识（微信unionid），通过此字段企业可将外部联系人与公众号/小程序用户关联起来。仅当联系人类型是微信用户，且企业或第三方服务商绑定了微信开发者ID有此字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnionId: string;
+    UnionId?: string;
     /**
      * 外部联系人联系电话
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Phone: string;
+    Phone?: string;
 }
 /**
  * license相关信息
@@ -1960,7 +1960,7 @@ export interface QueryExternalUserMappingInfoResponse {
      * 外部联系人映射信息, 只返回映射成功的记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalUserIdMapping: Array<ExternalUserMappingInfo>;
+    ExternalUserIdMapping?: Array<ExternalUserMappingInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1994,67 +1994,67 @@ export interface ChannelCodeInnerDetail {
     /**
      * 渠道活码id
      */
-    Id: number;
+    Id?: number;
     /**
      * 欢迎语类型，0：普通欢迎语、1:渠道欢迎语
      */
-    Type: number;
+    Type?: number;
     /**
      * 渠道来源
      */
-    Source: string;
+    Source?: string;
     /**
      * 渠道来源名称
      */
-    SourceName: string;
+    SourceName?: string;
     /**
      * 二维码名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 使用成员用户id集
      */
-    UseUserIdList: Array<number | bigint>;
+    UseUserIdList?: Array<number | bigint>;
     /**
      * 使用成员企微账号id集
      */
-    UseUserOpenIdList: Array<string>;
+    UseUserOpenIdList?: Array<string>;
     /**
      * 标签
      */
-    TagList: Array<WeComTagDetail>;
+    TagList?: Array<WeComTagDetail>;
     /**
      * 自动通过好友，0：开启、1：关闭，默认0开启
      */
-    SkipVerify: number;
+    SkipVerify?: number;
     /**
      * 添加好友人数
      */
-    Friends: number;
+    Friends?: number;
     /**
      * 备注
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 欢迎语id（通过欢迎语新增返回的id）
      */
-    MsgId: number;
+    MsgId?: number;
     /**
      * 联系我config_id
      */
-    ConfigId: string;
+    ConfigId?: string;
     /**
      * 联系我二维码地址
      */
-    QrCodeUrl: string;
+    QrCodeUrl?: string;
     /**
      * 记录状态， 0：有效、1：无效
      */
-    RecStatus: number;
+    RecStatus?: number;
     /**
      * 应用ID
      */
-    AppId: string;
+    AppId?: string;
 }
 /**
  * QueryExternalUserEventList请求参数结构体
@@ -2153,20 +2153,20 @@ export interface ExternalContactSimpleInfo {
     /**
      * 外部联系人的userId
      */
-    ExternalUserId: string;
+    ExternalUserId?: string;
     /**
      * 添加了此外部联系人的企业成员userId
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 添加了此外部联系人的企业成员的姓名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SalesName: string;
+    SalesName?: string;
     /**
      * 添加了此外部联系人的企业成员的归属部门id列表
      */
-    DepartmentIdList: Array<number | bigint>;
+    DepartmentIdList?: Array<number | bigint>;
 }
 /**
  * 潜客客户档案信息

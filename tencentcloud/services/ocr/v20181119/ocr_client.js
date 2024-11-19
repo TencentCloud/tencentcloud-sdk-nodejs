@@ -624,8 +624,6 @@ class Client extends abstract_client_1.AbstractClient {
      * 本接口支持不动产权证关键字段的识别，包括使用期限、面积、用途、权利性质、权利类型、坐落、共有情况、权利人、权利其他状况等。
 
 默认接口请求频率限制：5次/秒。
-
-
      */
     async EstateCertOCR(req, cb) {
         return this.request("EstateCertOCR", req, cb);
@@ -953,7 +951,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
-默认接口请求频率限制：1次/秒。
+默认接口请求频率限制：5次/秒。
      */
     async SmartStructuralPro(req, cb) {
         return this.request("SmartStructuralPro", req, cb);

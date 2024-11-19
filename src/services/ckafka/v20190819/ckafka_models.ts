@@ -661,16 +661,16 @@ export interface JgwOperateResponse {
   /**
    * 返回的code，0为正常，非0为错误
    */
-  ReturnCode: string
+  ReturnCode?: string
   /**
    * 成功消息
    */
-  ReturnMessage: string
+  ReturnMessage?: string
   /**
    * 操作型返回的Data数据,可能有flowId等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: OperateResponseData
+  Data?: OperateResponseData
 }
 
 /**
@@ -2921,7 +2921,7 @@ export interface CreateInstancePostResponse {
  */
 export interface RouteDTO {
   /**
-   * RouteId11
+   * 路由Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteId?: number
@@ -5289,17 +5289,17 @@ export interface CreateInstancePreData {
    * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 订单号列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
-   * 实例Id，当购买多个实例时，默认返回购买的第一个实例 id
+   * ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 订单和购买实例对应映射列表
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6297,11 +6297,11 @@ export interface DescribeInstancesRequest {
  */
 export interface CreateInstancePostRequest {
   /**
-   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   InstanceName: string
   /**
-   * 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
+   * 私有网络Id 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
    */
   VpcId: string
   /**
@@ -6372,6 +6372,10 @@ export interface CreateInstancePostRequest {
    * 标签
    */
   Tags?: Array<Tag>
+  /**
+   * 弹性带宽开关 0不开启  1开启（0默认）
+   */
+  ElasticBandwidthSwitch?: number
 }
 
 /**
@@ -6916,7 +6920,7 @@ export interface ModifyTopicAttributesRequest {
  */
 export interface CreateInstancePreRequest {
   /**
-   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * ckafka集群实例Name，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
   InstanceName: string
   /**
@@ -6932,7 +6936,7 @@ export interface CreateInstancePreRequest {
    */
   InstanceType: number
   /**
-   * vpcId，必填
+   * 私有网络Id，必填
    */
   VpcId?: string
   /**
@@ -6964,7 +6968,7 @@ export interface CreateInstancePreRequest {
    */
   DiskSize?: number
   /**
-   * 带宽，如果跟控制台规格配比不相符，则无法创建成功
+   * 实例带宽,单位MB/s; 最小值:20MB/s, 高级版最大值:360MB/s,专业版最大值:100000MB/s  标准版固定带宽规格: 40MB/s, 100MB/s, 150MB/s
    */
   BandWidth?: number
   /**
@@ -6999,6 +7003,10 @@ export interface CreateInstancePreRequest {
    * 是否自动选择代金券:1-是;0否。默认为0
    */
   AutoVoucher?: number
+  /**
+   * 弹性带宽开关 0不开启  1开启（0默认）
+   */
+  ElasticBandwidthSwitch?: number
 }
 
 /**
@@ -7619,16 +7627,16 @@ export interface CreateInstancePreResp {
   /**
    * 返回的code，0为正常，非0为错误
    */
-  ReturnCode: string
+  ReturnCode?: string
   /**
    * 成功消息
    */
-  ReturnMessage: string
+  ReturnMessage?: string
   /**
    * 操作型返回的Data数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CreateInstancePreData
+  Data?: CreateInstancePreData
   /**
    * 删除时间。目前该参数字段已废弃，将会在未来被删除
 注意：此字段可能返回 null，表示取不到有效值。
@@ -7972,7 +7980,7 @@ export interface CreateCdcClusterResponse {
  */
 export interface OperateResponseData {
   /**
-   * FlowId11
+   * 流程Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number

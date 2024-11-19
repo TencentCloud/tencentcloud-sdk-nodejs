@@ -940,26 +940,26 @@ export interface FlowLog {
     /**
      * 标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 是否启用，true-启用，false-停用。
      */
-    Enable: boolean;
+    Enable?: boolean;
     /**
      * 消费端类型：cls、ckafka。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageType: string;
+    StorageType?: string;
     /**
      * 消费端信息，当消费端类型为ckafka时返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowLogStorage: FlowLogStorage;
+    FlowLogStorage?: FlowLogStorage;
     /**
      * 流日志存储ID对应的地域信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CloudLogRegion: string;
+    CloudLogRegion?: string;
 }
 /**
  * DescribeVpcLimits返回参数结构体
@@ -1153,6 +1153,10 @@ export interface DescribeCrossBorderComplianceRequest {
      * （模糊查询）法定代表人。
      */
     LegalPerson?: string;
+    /**
+     * （精确查询）法人身份证号。
+     */
+    LegalPersonId?: string;
     /**
      * （模糊查询）发证机关。
      */
@@ -1869,7 +1873,7 @@ export interface ModifyVpcEndPointServiceAttributeRequest {
      */
     EndPointServiceName?: string;
     /**
-     * 是否自动接受终端节点的连接请求。<ui><li>true：自动接受<li>false：不自动接受</ul>
+     * 是否自动接受终端节点的连接请求。<ul><li>true：自动接受</li><li>false：不自动接受</li></ul>
      */
     AutoAcceptFlag?: boolean;
     /**
@@ -3548,6 +3552,10 @@ export interface CreateLocalGatewayRequest {
      * CDC实例ID。
      */
     CdcId: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeDirectConnectGateways返回参数结构体
@@ -3942,23 +3950,23 @@ export interface VpcEndPointServiceUser {
     /**
      * AppId。
      */
-    Owner: number;
+    Owner?: number;
     /**
      * Uin。
      */
-    UserUin: string;
+    UserUin?: string;
     /**
      * 描述信息。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 终端节点服务ID。
      */
-    EndPointServiceId: string;
+    EndPointServiceId?: string;
 }
 /**
  * ModifyRouteTableSelectionPolicies请求参数结构体
@@ -5955,7 +5963,7 @@ export interface DescribeIp6TranslatorsRequest {
   <li> ip6-translator-id - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的唯一ID过滤,形如ip6-xxxxxxx。</li>
   <li> ip6-translator-vip6 - String - 是否必填：否 - （过滤条件）按照IPV6地址过滤。不支持模糊过滤。</li>
   <li> ip6-translator-name - String - 是否必填：否 - （过滤条件）按照IPV6转换实例名称过滤。不支持模糊过滤。</li>
-  <li> ip6-translator-status - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的状态过滤。状态取值范围为"CREATING","RUNNING","DELETING","MODIFYING"
+  <li> ip6-translator-status - String - 是否必填：否 - （过滤条件）按照IPV6转换实例的状态过滤。状态取值范围为"CREATING","RUNNING","DELETING","MODIFYING"。</li>
      */
     Filters?: Array<Filter>;
     /**
@@ -6896,6 +6904,10 @@ export interface CreateNetDetectRequest {
      * 网络探测描述。
      */
     NetDetectDescription?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * CreateAddressTemplate返回参数结构体
@@ -8187,11 +8199,11 @@ export interface DescribeCrossBorderComplianceResponse {
     /**
      * 合规化审批单列表。
      */
-    CrossBorderComplianceSet: Array<CrossBorderCompliance>;
+    CrossBorderComplianceSet?: Array<CrossBorderCompliance>;
     /**
      * 合规化审批单总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8843,6 +8855,7 @@ export interface CreateNetworkInterfaceRequest {
     NetworkInterfaceDescription?: string;
     /**
      * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。
+  配额数查询：[DescribeVpcLimits](https://cloud.tencent.com/document/api/215/42942)。
      */
     SecondaryPrivateIpAddressCount?: number;
     /**
@@ -11811,45 +11824,50 @@ export interface DhcpIp {
     /**
      * `DhcpIp`的`ID`，是`DhcpIp`的唯一标识。
      */
-    DhcpIpId: string;
+    DhcpIpId?: string;
     /**
      * `DhcpIp`所在私有网络`ID`。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * `DhcpIp`所在子网`ID`。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * `DhcpIp`的名称。
      */
-    DhcpIpName: string;
+    DhcpIpName?: string;
     /**
      * IP地址。
      */
-    PrivateIpAddress: string;
+    PrivateIpAddress?: string;
     /**
      * 绑定`EIP`。
      */
-    AddressIp: string;
+    AddressIp?: string;
     /**
      * `DhcpIp`关联弹性网卡`ID`。
      */
-    NetworkInterfaceId: string;
+    NetworkInterfaceId?: string;
     /**
      * 被绑定的实例`ID`。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 状态：
   <li>`AVAILABLE`：运行中</li>
   <li>`UNBIND`：未绑定</li>
      */
-    State: string;
+    State?: string;
     /**
      * 创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
+    /**
+     * 标签键值对。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagSet?: Array<Tag>;
 }
 /**
  * DeleteAssistantCidr请求参数结构体
@@ -16539,6 +16557,10 @@ export interface CreateDhcpIpRequest {
      * 新申请的内网IP地址个数。总数不能超过64个，为了兼容性，当前参数必填。
      */
     SecondaryPrivateIpAddressCount?: number;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * DeleteTrafficPackages返回参数结构体

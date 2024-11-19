@@ -34,8 +34,10 @@ import {
   OutputManageMarketingRiskValue,
   CreateNameListRequest,
   DeleteNameListDataResponse,
+  DescribeUserUsageCntRequest,
   ImportNameListDataResponse,
   DeleteNameListRequest,
+  OutputDescribeUserUsageCnt,
   DescribeNameListDetailResponse,
   OutputDescribeNameListInfo,
   ManageMarketingRiskResponse,
@@ -68,6 +70,7 @@ import {
   ModifyNameListDataResponse,
   InputManageMarketingRisk,
   OutputCreateNameListFront,
+  OutputDescribeUserUsageCntData,
   ModifyNameListResponse,
   OutputDeleteNameListFront,
   InputDeleteNameListData,
@@ -75,6 +78,7 @@ import {
   DataAuthorizationInfo,
   DeleteNameListResponse,
   InputModifyNameListDataFrontListData,
+  DescribeUserUsageCntResponse,
 } from "./rce_models"
 
 /**
@@ -164,6 +168,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNameListResponse) => void
   ): Promise<DeleteNameListResponse> {
     return this.request("DeleteNameList", req, cb)
+  }
+
+  /**
+   * RCE控制台预付费和后付费次数展示
+   */
+  async DescribeUserUsageCnt(
+    req?: DescribeUserUsageCntRequest,
+    cb?: (error: string, rep: DescribeUserUsageCntResponse) => void
+  ): Promise<DescribeUserUsageCntResponse> {
+    return this.request("DescribeUserUsageCnt", req, cb)
   }
 
   /**
