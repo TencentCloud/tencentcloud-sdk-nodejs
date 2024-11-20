@@ -1037,7 +1037,7 @@ export interface QueryHunyuanImageJobResponse {
      */
     ResultDetails?: Array<string>;
     /**
-     * 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。
+     * 对应 SubmitHunyuanImageJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。
      */
     RevisedPrompt?: Array<string>;
     /**

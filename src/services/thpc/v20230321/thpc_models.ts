@@ -2103,7 +2103,7 @@ export interface AddClusterStorageOptionRequest {
    */
   ClusterId: string
   /**
-   * 集群存储选项。
+   * 集群存储选项；集群已存在的节点和新增节点都会挂载此存储。
    */
   StorageOption: StorageOption
 }

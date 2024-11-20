@@ -18,6 +18,16 @@ const client = new tencentcloud.live.v20180801.Client({
 })
 describe("live.v20180801.test.js", function () {
 
+it("live.v20180801.DescribeCasterList", async function () {
+    try {
+       const data = await client.DescribeCasterList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DropLiveStream", async function () {
     try {
        const data = await client.DropLiveStream({})
@@ -798,6 +808,16 @@ it("live.v20180801.DescribeStreamPlayInfoList", async function () {
     }
 })
 
+it("live.v20180801.DescribeCasterUserStatus", async function () {
+    try {
+       const data = await client.DescribeCasterUserStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLivePullStreamTaskStatus", async function () {
     try {
        const data = await client.DescribeLivePullStreamTaskStatus({})
@@ -1391,6 +1411,16 @@ it("live.v20180801.DescribeAllStreamPlayInfoList", async function () {
 it("live.v20180801.DescribeLivePlayAuthKey", async function () {
     try {
        const data = await client.DescribeLivePlayAuthKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeCasterTransitionTypes", async function () {
+    try {
+       const data = await client.DescribeCasterTransitionTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

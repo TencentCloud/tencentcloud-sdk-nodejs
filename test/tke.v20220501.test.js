@@ -38,6 +38,16 @@ it("tke.v20220501.ModifyNodePool", async function () {
     }
 })
 
+it("tke.v20220501.RebootMachines", async function () {
+    try {
+       const data = await client.RebootMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.DeleteHealthCheckPolicy", async function () {
     try {
        const data = await client.DeleteHealthCheckPolicy({})
@@ -78,6 +88,16 @@ it("tke.v20220501.ModifyHealthCheckPolicy", async function () {
     }
 })
 
+it("tke.v20220501.StopMachines", async function () {
+    try {
+       const data = await client.StopMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.CreateNodePool", async function () {
     try {
        const data = await client.CreateNodePool({})
@@ -111,6 +131,16 @@ it("tke.v20220501.DescribeHealthCheckPolicyBindings", async function () {
 it("tke.v20220501.CreateHealthCheckPolicy", async function () {
     try {
        const data = await client.CreateHealthCheckPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20220501.StartMachines", async function () {
+    try {
+       const data = await client.StartMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

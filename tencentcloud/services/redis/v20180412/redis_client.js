@@ -306,7 +306,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateInstance", req, cb);
     }
     /**
-     * 修改复制组信息
+     * 本接口（ModifyReplicationGroup）用于修改复制组信息。
      */
     async ModifyReplicationGroup(req, cb) {
         return this.request("ModifyReplicationGroup", req, cb);

@@ -1255,41 +1255,41 @@ export interface AppStatisticsItem {
      * 实时语音统计数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealtimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem;
+    RealtimeSpeechStatisticsItem?: RealTimeSpeechStatisticsItem;
     /**
      * 语音消息统计数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VoiceMessageStatisticsItem: VoiceMessageStatisticsItem;
+    VoiceMessageStatisticsItem?: VoiceMessageStatisticsItem;
     /**
      * 语音过滤统计数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VoiceFilterStatisticsItem: VoiceFilterStatisticsItem;
+    VoiceFilterStatisticsItem?: VoiceFilterStatisticsItem;
     /**
      * 统计时间
      */
-    Date: string;
+    Date?: string;
     /**
      * 录音转文本用量统计数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AudioTextStatisticsItem: AudioTextStatisticsItem;
+    AudioTextStatisticsItem?: AudioTextStatisticsItem;
     /**
      * 流式转文本用量数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StreamTextStatisticsItem: StreamTextStatisticsItem;
+    StreamTextStatisticsItem?: StreamTextStatisticsItem;
     /**
      * 海外转文本用量数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OverseaTextStatisticsItem: OverseaTextStatisticsItem;
+    OverseaTextStatisticsItem?: OverseaTextStatisticsItem;
     /**
      * 实时语音转文本用量数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealtimeTextStatisticsItem: RealtimeTextStatisticsItem;
+    RealtimeTextStatisticsItem?: RealtimeTextStatisticsItem;
 }
 /**
  * CreateAgeDetectTask返回参数结构体

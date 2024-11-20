@@ -20,6 +20,7 @@ export { asw } from "./asw";
 export { ba } from "./ba";
 export { batch } from "./batch";
 export { bda } from "./bda";
+export { bh } from "./bh";
 export { bi } from "./bi";
 export { billing } from "./billing";
 export { bizlive } from "./bizlive";

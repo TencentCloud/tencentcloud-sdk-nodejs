@@ -44,6 +44,8 @@ var batch_1 = require("./batch");
 Object.defineProperty(exports, "batch", { enumerable: true, get: function () { return batch_1.batch; } });
 var bda_1 = require("./bda");
 Object.defineProperty(exports, "bda", { enumerable: true, get: function () { return bda_1.bda; } });
+var bh_1 = require("./bh");
+Object.defineProperty(exports, "bh", { enumerable: true, get: function () { return bh_1.bh; } });
 var bi_1 = require("./bi");
 Object.defineProperty(exports, "bi", { enumerable: true, get: function () { return bi_1.bi; } });
 var billing_1 = require("./billing");

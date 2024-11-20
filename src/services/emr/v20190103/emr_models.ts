@@ -1829,7 +1829,7 @@ export interface CreateSLInstanceRequest {
    */
   DiskType: string
   /**
-   * 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于10000，容量调整步长为20。
+   * 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。
    */
   DiskSize: number
   /**

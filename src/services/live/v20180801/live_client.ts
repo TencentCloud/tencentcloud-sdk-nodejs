@@ -26,7 +26,7 @@ import {
   DescribeBackupStreamListResponse,
   DescribeLiveSnapshotTemplateRequest,
   DescribePlayErrorCodeDetailInfoListRequest,
-  DescribeBillBandwidthAndFluxListRequest,
+  PublishTime,
   CommonMixOutputParams,
   DescribeLiveTranscodeDetailInfoResponse,
   DescribeLiveStreamPublishedListRequest,
@@ -118,6 +118,7 @@ import {
   DescribeLiveTranscodeTotalInfoRequest,
   LiveDomainCertBindings,
   DescribeLivePushAuthKeyRequest,
+  DescribeCasterTransitionTypesResponse,
   DescribeUploadStreamNumsResponse,
   DeleteLiveTranscodeTemplateResponse,
   CreateScreenshotTaskResponse,
@@ -170,6 +171,7 @@ import {
   DescribeStreamPushInfoListRequest,
   ResumeLiveStreamResponse,
   DeletePullStreamConfigRequest,
+  TransitionTypeInfo,
   DescribeLiveWatermarksResponse,
   CreatePullStreamConfigResponse,
   ModifyLivePadTemplateResponse,
@@ -211,6 +213,8 @@ import {
   DescribeLivePushAuthKeyResponse,
   DescribeLivePullStreamTaskStatusRequest,
   RestartLivePullStreamTaskRequest,
+  CasterBriefInfo,
+  DescribeCasterTransitionTypesRequest,
   DelayInfo,
   EnableOptimalSwitchingResponse,
   TimeShiftSubStream,
@@ -220,7 +224,7 @@ import {
   DeleteLiveRecordRuleRequest,
   StopScreenshotTaskRequest,
   DescribePullTransformPushInfoRequest,
-  PublishTime,
+  DescribeBillBandwidthAndFluxListRequest,
   FlvSpecialParam,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
@@ -249,10 +253,12 @@ import {
   DescribeTimeShiftStreamListRequest,
   ModifyLivePlayDomainRequest,
   DescribeLiveWatermarkRequest,
+  DescribeCasterListResponse,
   DescribeLiveDomainsResponse,
   ModifyLiveTimeShiftTemplateRequest,
   ModifyLiveDomainCertBindingsResponse,
   DescribeLiveRecordRulesRequest,
+  DescribeCasterUserStatusRequest,
   DescribeLiveStreamMonitorResponse,
   ModifyPullStreamStatusResponse,
   DeleteLiveTimeShiftRuleRequest,
@@ -304,6 +310,7 @@ import {
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
   PlayStatInfo,
+  DescribeCasterUserStatusResponse,
   PadTemplate,
   DescribeLogDownloadListRequest,
   DeleteLiveWatermarkResponse,
@@ -347,6 +354,7 @@ import {
   DeleteLiveRecordTemplateResponse,
   DescribePullStreamConfigsRequest,
   DescribePlayErrorCodeSumInfoListResponse,
+  DescribeCasterListRequest,
   UnBindLiveDomainCertRequest,
   TimeValue,
   CreateLiveRecordResponse,
@@ -425,6 +433,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("live.tencentcloudapi.com", "2018-08-01", clientConfig)
+  }
+
+  /**
+   * 该接口用来查询账号下所有的导播台列表
+   */
+  async DescribeCasterList(
+    req?: DescribeCasterListRequest,
+    cb?: (error: string, rep: DescribeCasterListResponse) => void
+  ): Promise<DescribeCasterListResponse> {
+    return this.request("DescribeCasterList", req, cb)
   }
 
   /**
@@ -1273,6 +1291,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 本接口用来查询当前APPID导播台业务状态
+   */
+  async DescribeCasterUserStatus(
+    req?: DescribeCasterUserStatusRequest,
+    cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
+  ): Promise<DescribeCasterUserStatusResponse> {
+    return this.request("DescribeCasterUserStatus", req, cb)
+  }
+
+  /**
    * 查询直播拉流任务状态信息。
    */
   async DescribeLivePullStreamTaskStatus(
@@ -1907,6 +1935,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLivePlayAuthKeyResponse) => void
   ): Promise<DescribeLivePlayAuthKeyResponse> {
     return this.request("DescribeLivePlayAuthKey", req, cb)
+  }
+
+  /**
+   * 该接口用来获取所有的转场名称及其对应的素材url。
+   */
+  async DescribeCasterTransitionTypes(
+    req: DescribeCasterTransitionTypesRequest,
+    cb?: (error: string, rep: DescribeCasterTransitionTypesResponse) => void
+  ): Promise<DescribeCasterTransitionTypesResponse> {
+    return this.request("DescribeCasterTransitionTypes", req, cb)
   }
 
   /**

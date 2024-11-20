@@ -41,7 +41,6 @@ export interface PublicMaterialInfos {
     MaterialName?: string;
     /**
      * 审核原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuditResult?: string;
 }
@@ -69,19 +68,19 @@ export interface FaceInfo {
     /**
      * 人脸框的横坐标
      */
-    X: number;
+    X?: number;
     /**
      * 人脸框的纵坐标
      */
-    Y: number;
+    Y?: number;
     /**
      * 人脸框的宽度
      */
-    Width: number;
+    Width?: number;
     /**
      * 人脸框的高度
      */
-    Height: number;
+    Height?: number;
 }
 /**
  * FuseFaceUltra请求参数结构体
@@ -181,7 +180,6 @@ export interface FusionUltraParam {
   取值范围：0-1之间。默认取值0.7。
   
   该参数仅对SwapModelType（模型类型）取值1-5生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WarpRadio?: number;
     /**
@@ -189,7 +187,6 @@ export interface FusionUltraParam {
   取值范围：0-1之间。默认取值1。
   
   该参数仅对SwapModelType（模型类型）取值1-5生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnhanceRadio?: number;
     /**
@@ -197,7 +194,6 @@ export interface FusionUltraParam {
   取值范围：0-1之间。默认取值1。
   
   该参数仅对SwapModelType（模型类型）取值1-5生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MpRadio?: number;
     /**
@@ -205,7 +201,6 @@ export interface FusionUltraParam {
   当生成人脸比较清晰时，将人脸模糊到接近模板的清晰度的程度
   
   该参数仅对SwapModelType（模型类型）取值1-5生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BlurRadio?: number;
     /**
@@ -214,7 +209,6 @@ export interface FusionUltraParam {
   0：牙齿增强关闭
   1：牙齿增强打开
   该参数仅对SwapModelType（模型类型）取值1-5生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TeethEnhanceRadio?: number;
 }

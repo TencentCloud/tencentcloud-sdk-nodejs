@@ -108,23 +108,23 @@ export interface SecurityGroupLimitSet {
   /**
    * 每个项目每个地域可创建安全组数
    */
-  SecurityGroupLimit: number
+  SecurityGroupLimit?: number
   /**
    * 安全组下的最大规则数
    */
-  SecurityGroupPolicyLimit: number
+  SecurityGroupPolicyLimit?: number
   /**
    * 安全组下嵌套安全组规则数
    */
-  ReferedSecurityGroupLimit: number
+  ReferedSecurityGroupLimit?: number
   /**
    * 单安全组关联实例数
    */
-  SecurityGroupInstanceLimit: number
+  SecurityGroupInstanceLimit?: number
   /**
    * 实例关联安全组数
    */
-  InstanceSecurityGroupLimit: number
+  InstanceSecurityGroupLimit?: number
   /**
    * 安全组展开后的规则数限制
    */
@@ -183,35 +183,35 @@ export interface SecurityGroupAssociationStatistics {
   /**
    * 安全组实例ID。
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 云服务器实例数。
    */
-  CVM: number
+  CVM?: number
   /**
    * MySQL数据库实例数。
    */
-  CDB: number
+  CDB?: number
   /**
    * 弹性网卡实例数。
    */
-  ENI: number
+  ENI?: number
   /**
    * 被安全组引用数。
    */
-  SG: number
+  SG?: number
   /**
    * 负载均衡实例数。
    */
-  CLB: number
+  CLB?: number
   /**
    * 全量实例的绑定统计。
    */
-  InstanceStatistics: Array<InstanceStatistic>
+  InstanceStatistics?: Array<InstanceStatistic>
   /**
    * 所有资源的总计数（不包含被安全组引用数）。
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -773,7 +773,7 @@ export interface ReplaceHighPriorityRouteTableAssociationRequest {
  */
 export interface CreateDefaultSecurityGroupRequest {
   /**
-   * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
    */
   ProjectId?: string
 }
@@ -843,15 +843,15 @@ export interface ResourceStatisticsItem {
   /**
    * 资源类型。比如，CVM，ENI等。
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 资源名称。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 资源个数。
    */
-  ResourceCount: number
+  ResourceCount?: number
 }
 
 /**
@@ -2256,12 +2256,14 @@ NONEXTHOP：无下一跳；
 export interface RouteTableAssociation {
   /**
    * 子网实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 路由表实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RouteTableId: string
+  RouteTableId?: string
 }
 
 /**
@@ -4052,11 +4054,11 @@ export interface ReferredSecurityGroup {
   /**
    * 安全组实例ID。
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 引用安全组实例ID（SecurityGroupId）的所有安全组实例ID。
    */
-  ReferredSecurityGroupIds: Array<string>
+  ReferredSecurityGroupIds?: Array<string>
 }
 
 /**
@@ -4640,11 +4642,11 @@ export interface InstanceStatistic {
   /**
    * 实例的类型
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例的个数
    */
-  InstanceCount: number
+  InstanceCount?: number
 }
 
 /**
@@ -4839,10 +4841,7 @@ export interface DescribeTrafficPackagesRequest {
    */
   TrafficPackageIds?: Array<string>
   /**
-   * 每次请求的`Filters`的上限为10。参数不支持同时指定`TrafficPackageIds`和`Filters`。详细的过滤条件如下：
-<li> traffic-package_id - String - 是否必填：否 - （过滤条件）按照共享流量包的唯一标识ID过滤。</li>
-<li> traffic-package-name - String - 是否必填：否 - （过滤条件）按照共享流量包名称过滤。不支持模糊过滤。</li>
-<li> status - String - 是否必填：否 - （过滤条件）按照共享流量包状态过滤。可选状态：[AVAILABLE|EXPIRED|EXHAUSTED]</li>
+   * 每次请求的`Filters`的上限为10。参数不支持同时指定`TrafficPackageIds`和`Filters`。详细的过滤条件如下：<li> traffic-package_id - String - 是否必填：否 - （过滤条件）按照共享流量包的唯一标识ID过滤。</li><li> traffic-package-name - String - 是否必填：否 - （过滤条件）按照共享流量包名称过滤。不支持模糊过滤。</li><li> status - String - 是否必填：否 - （过滤条件）按照共享流量包状态过滤。可选状态：[AVAILABLE|EXPIRED|EXHAUSTED]</li>
    */
   Filters?: Array<Filter>
   /**
@@ -5119,15 +5118,15 @@ export interface RouteConflict {
   /**
    * 路由表实例ID，例如：rtb-azd4dt1c。
    */
-  RouteTableId: string
+  RouteTableId?: string
   /**
    * 要检查的与之冲突的目的端
    */
-  DestinationCidrBlock: string
+  DestinationCidrBlock?: string
   /**
    * 冲突的路由策略列表
    */
-  ConflictSet: Array<Route>
+  ConflictSet?: Array<Route>
 }
 
 /**
@@ -5750,19 +5749,19 @@ export interface TemplateLimit {
   /**
    * 参数模板IP地址成员配额。
    */
-  AddressTemplateMemberLimit: number
+  AddressTemplateMemberLimit?: number
   /**
    * 参数模板IP地址组成员配额。
    */
-  AddressTemplateGroupMemberLimit: number
+  AddressTemplateGroupMemberLimit?: number
   /**
    * 参数模板I协议端口成员配额。
    */
-  ServiceTemplateMemberLimit: number
+  ServiceTemplateMemberLimit?: number
   /**
    * 参数模板协议端口组成员配额。
    */
-  ServiceTemplateGroupMemberLimit: number
+  ServiceTemplateGroupMemberLimit?: number
 }
 
 /**
@@ -6729,19 +6728,19 @@ export interface VpcIpv6Address {
   /**
    * `VPC`内`IPv6`地址。
    */
-  Ipv6Address: string
+  Ipv6Address?: string
   /**
    * 所属子网 `IPv6` `CIDR`。
    */
-  CidrBlock: string
+  CidrBlock?: string
   /**
    * `IPv6`类型。
    */
-  Ipv6AddressType: string
+  Ipv6AddressType?: string
   /**
    * `IPv6`申请时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
 }
 
 /**
@@ -7455,7 +7454,7 @@ export interface NetDetectIpState {
   /**
    * 探测目的IPv4地址。
    */
-  DetectDestinationIp: string
+  DetectDestinationIp?: string
   /**
    * 探测结果。
 0：成功；
@@ -7464,15 +7463,15 @@ export interface NetDetectIpState {
 -3：IN ACL丢包；
 -4：其他错误；
    */
-  State: number
+  State?: number
   /**
    * 时延，单位毫秒
    */
-  Delay: number
+  Delay?: number
   /**
    * 丢包率
    */
-  PacketLossRate: number
+  PacketLossRate?: number
 }
 
 /**
@@ -7564,7 +7563,7 @@ export interface ModifyServiceTemplateAttributeRequest {
    */
   ServiceTemplateName?: string
   /**
-   * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
+   * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。协议后面的端口部分长度不能超过128个字符。
    */
   Services?: Array<string>
   /**
@@ -7719,7 +7718,7 @@ export interface DescribeVpcsRequest {
 <li>tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。</li>
   **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。
 <li>ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。</li>
-<li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。</li>
+<li>isp-type  - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。</li>
    */
   Filters?: Array<Filter>
   /**
@@ -8037,11 +8036,11 @@ export interface NetDetectState {
   /**
    * 网络探测实例ID。形如：netd-12345678。
    */
-  NetDetectId: string
+  NetDetectId?: string
   /**
    * 网络探测目的IP验证结果对象数组。
    */
-  NetDetectIpStateSet: Array<NetDetectIpState>
+  NetDetectIpStateSet?: Array<NetDetectIpState>
 }
 
 /**
@@ -8051,11 +8050,11 @@ export interface DescribeSnapshotPoliciesResponse {
   /**
    * 快照策略。
    */
-  SnapshotPolicySet: Array<SnapshotPolicy>
+  SnapshotPolicySet?: Array<SnapshotPolicy>
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9475,19 +9474,19 @@ export interface VpcPrivateIpAddress {
   /**
    * `VPC`内网`IP`。
    */
-  PrivateIpAddress: string
+  PrivateIpAddress?: string
   /**
    * 所属子网`CIDR`。
    */
-  CidrBlock: string
+  CidrBlock?: string
   /**
    * 内网`IP`类型。
    */
-  PrivateIpAddressType: string
+  PrivateIpAddressType?: string
   /**
    * `IP`申请时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
 }
 
 /**
@@ -9497,51 +9496,51 @@ export interface CvmInstance {
   /**
    * VPC实例ID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网实例ID。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 云主机实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 云主机名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 云主机状态。
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 实例的CPU核数，单位：核。
    */
-  CPU: number
+  CPU?: number
   /**
    * 实例内存容量，单位：GB。
    */
-  Memory: number
+  Memory?: number
   /**
    * 创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 实例机型。
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例弹性网卡配额（包含主网卡）。
    */
-  EniLimit: number
+  EniLimit?: number
   /**
    * 实例弹性网卡内网IP配额（包含主网卡）。
    */
-  EniIpLimit: number
+  EniIpLimit?: number
   /**
    * 实例已绑定弹性网卡的个数（包含主网卡）。
    */
-  InstanceEniCount: number
+  InstanceEniCount?: number
 }
 
 /**
@@ -11776,11 +11775,11 @@ export interface AccountAttribute {
   /**
    * 属性名
    */
-  AttributeName: string
+  AttributeName?: string
   /**
    * 属性值
    */
-  AttributeValues: Array<string>
+  AttributeValues?: Array<string>
 }
 
 /**
@@ -12045,6 +12044,10 @@ LOCAL_GATEWAY：本地网关。
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: string
+  /**
+   * 是否需要获取路由策略信息，默认获取，当控制台不需要拉取路由策略信息时，改为False。
+   */
+  NeedRouterInfo?: boolean
 }
 
 /**
@@ -12383,23 +12386,23 @@ export interface ProductQuota {
   /**
    * 产品配额ID
    */
-  QuotaId: string
+  QuotaId?: string
   /**
    * 产品配额名称
    */
-  QuotaName: string
+  QuotaName?: string
   /**
    * 产品当前配额
    */
-  QuotaCurrent: number
+  QuotaCurrent?: number
   /**
    * 产品配额上限
    */
-  QuotaLimit: number
+  QuotaLimit?: number
   /**
    * 产品配额是否有地域属性
    */
-  QuotaRegion: boolean
+  QuotaRegion?: boolean
 }
 
 /**
@@ -12936,19 +12939,19 @@ export interface ResourceStatistics {
   /**
    * Vpc实例ID，例如：vpc-f1xjkw1b。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网实例ID，例如：subnet-bthucmmy。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 当前已使用的IP总数。
    */
-  Ip: number
+  Ip?: number
   /**
    * 资源统计信息。
    */
-  ResourceStatisticsItemSet: Array<ResourceStatisticsItem>
+  ResourceStatisticsItemSet?: Array<ResourceStatisticsItem>
 }
 
 /**
@@ -16491,12 +16494,14 @@ export interface CreateDefaultSecurityGroupResponse {
 export interface ClassicLinkInstance {
   /**
    * VPC实例ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 云服务器实例唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
 }
 
 /**
@@ -16655,11 +16660,11 @@ export interface VpcLimit {
   /**
    * 私有网络配额描述
    */
-  LimitType: string
+  LimitType?: string
   /**
    * 私有网络配额值
    */
-  LimitValue: number
+  LimitValue?: number
 }
 
 /**

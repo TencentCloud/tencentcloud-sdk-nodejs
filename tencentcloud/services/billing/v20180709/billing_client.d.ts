@@ -41,7 +41,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAllocateConditions(req: DescribeAllocateConditionsRequest, cb?: (error: string, rep: DescribeAllocateConditionsResponse) => void): Promise<DescribeAllocateConditionsResponse>;
     /**
-     * 查用当前用户明细节省计划总览查询时段内的使用情况
+     * 接口迁移到其他业务
+
+查用当前用户明细节省计划总览查询时段内的使用情况
      */
     DescribeSavingPlanOverview(req: DescribeSavingPlanOverviewRequest, cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void): Promise<DescribeSavingPlanOverviewResponse>;
     /**
@@ -116,7 +118,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDosageDetailByDate(req: DescribeDosageDetailByDateRequest, cb?: (error: string, rep: DescribeDosageDetailByDateResponse) => void): Promise<DescribeDosageDetailByDateResponse>;
     /**
-     * 查用当前用户明细节省计划查询时段内的使用情况
+     * 接口迁移到其他业务
+
+查用当前用户明细节省计划查询时段内的使用情况
      */
     DescribeSavingPlanUsage(req: DescribeSavingPlanUsageRequest, cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void): Promise<DescribeSavingPlanUsageResponse>;
     /**
@@ -168,7 +172,9 @@ export declare class Client extends AbstractClient {
      */
     PayDeals(req: PayDealsRequest, cb?: (error: string, rep: PayDealsResponse) => void): Promise<PayDealsResponse>;
     /**
-     * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+     * 接口迁移到其他业务
+
+创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
      */
     CreateSavingPlanOrder(req: CreateSavingPlanOrderRequest, cb?: (error: string, rep: CreateSavingPlanOrderResponse) => void): Promise<CreateSavingPlanOrderResponse>;
     /**

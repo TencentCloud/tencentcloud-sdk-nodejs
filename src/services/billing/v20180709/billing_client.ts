@@ -298,8 +298,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查用当前用户明细节省计划总览查询时段内的使用情况
-   */
+     * 接口迁移到其他业务
+
+查用当前用户明细节省计划总览查询时段内的使用情况
+     */
   async DescribeSavingPlanOverview(
     req: DescribeSavingPlanOverviewRequest,
     cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void
@@ -481,8 +483,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查用当前用户明细节省计划查询时段内的使用情况
-   */
+     * 接口迁移到其他业务
+
+查用当前用户明细节省计划查询时段内的使用情况
+     */
   async DescribeSavingPlanUsage(
     req: DescribeSavingPlanUsageRequest,
     cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void
@@ -611,8 +615,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
-   */
+     * 接口迁移到其他业务
+
+创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+     */
   async CreateSavingPlanOrder(
     req: CreateSavingPlanOrderRequest,
     cb?: (error: string, rep: CreateSavingPlanOrderResponse) => void

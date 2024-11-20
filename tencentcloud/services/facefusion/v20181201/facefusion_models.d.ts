@@ -5,43 +5,43 @@ export interface PublicMaterialInfos {
     /**
      * 素材Id
      */
-    MaterialId: string;
+    MaterialId?: string;
     /**
      * 素材状态
      */
-    MaterialStatus: number;
+    MaterialStatus?: number;
     /**
      * 脸型参数P图
      */
-    BlendParamPtu: number;
+    BlendParamPtu?: number;
     /**
      * 五官参数P图
      */
-    PositionParamPtu: number;
+    PositionParamPtu?: number;
     /**
      * 脸型参数优图
      */
-    BlendParamYoutu: number;
+    BlendParamYoutu?: number;
     /**
      * 五官参数优图
      */
-    PositionParamYoutu: number;
+    PositionParamYoutu?: number;
     /**
      * 素材COS地址
      */
-    Url: string;
+    Url?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 修改时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 人脸信息
      */
-    MaterialFaceList: Array<MaterialFaceList>;
+    MaterialFaceList?: Array<MaterialFaceList>;
 }
 /**
  * FaceFusion请求参数结构体
@@ -135,19 +135,19 @@ export interface FaceInfo {
     /**
      * 人脸框的横坐标
      */
-    X: number;
+    X?: number;
     /**
      * 人脸框的纵坐标
      */
-    Y: number;
+    Y?: number;
     /**
      * 人脸框的宽度
      */
-    Width: number;
+    Width?: number;
     /**
      * 人脸框的高度
      */
-    Height: number;
+    Height?: number;
 }
 /**
  * 人脸图片和待被融合的素材模板图的人脸位置信息。

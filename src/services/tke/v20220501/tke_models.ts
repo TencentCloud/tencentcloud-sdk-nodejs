@@ -16,6 +16,16 @@
  */
 
 /**
+ * StartMachines返回参数结构体
+ */
+export interface StartMachinesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节点信息
  */
 export interface NativeNodeInfo {
@@ -630,88 +640,27 @@ export interface MachineUpgradeSettings {
 }
 
 /**
- * 修改原生节点池参数
+ * StartMachines请求参数结构体
  */
-export interface UpdateNativeNodePoolParam {
+export interface StartMachinesRequest {
   /**
-   * 伸缩配置
+   * 集群 ID
    */
-  Scaling?: MachineSetScaling
+  ClusterId: string
   /**
-   * 子网列表
+   * 节点名字列表，一次请求，传入节点数量上限为100个
    */
-  SubnetIds?: Array<string>
-  /**
-   * 安全组列表
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 自动升级配置
-   */
-  UpgradeSettings?: MachineUpgradeSettings
-  /**
-   * 是否开启自愈能力
-   */
-  AutoRepair?: boolean
-  /**
-   * 节点计费类型变更
-当前仅支持按量计费转包年包月：
-- PREPAID
+  MachineNames: Array<string>
+}
 
-   */
-  InstanceChargeType?: string
+/**
+ * RebootMachines返回参数结构体
+ */
+export interface RebootMachinesResponse {
   /**
-   * 包年包月机型计费配置
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceChargePrepaid?: InstanceChargePrepaid
-  /**
-   * 系统盘配置
-   */
-  SystemDisk?: Disk
-  /**
-   * Machine 系统配置
-   */
-  Management?: ManagementConfig
-  /**
-   * 故障自愈规则名称
-   */
-  HealthCheckPolicyName?: string
-  /**
-   * 原生节点池hostName模式串
-   */
-  HostNamePattern?: string
-  /**
-   * kubelet 自定义参数
-   */
-  KubeletArgs?: Array<string>
-  /**
-   * 预定义脚本
-   */
-  Lifecycle?: LifecycleConfig
-  /**
-   * 运行时根目录
-   */
-  RuntimeRootDir?: string
-  /**
-   * 是否开启弹性伸缩
-   */
-  EnableAutoscaling?: boolean
-  /**
-   * 机型列表
-   */
-  InstanceTypes?: Array<string>
-  /**
-   * 期望节点数
-   */
-  Replicas?: number
-  /**
-   * 数据盘列表
-   */
-  DataDisks?: Array<DataDisk>
-  /**
-   * ssh公钥id数组
-   */
-  KeyIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -825,6 +774,91 @@ export interface ModifyNodePoolRequest {
 }
 
 /**
+ * 修改原生节点池参数
+ */
+export interface UpdateNativeNodePoolParam {
+  /**
+   * 伸缩配置
+   */
+  Scaling?: MachineSetScaling
+  /**
+   * 子网列表
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 安全组列表
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 自动升级配置
+   */
+  UpgradeSettings?: MachineUpgradeSettings
+  /**
+   * 是否开启自愈能力
+   */
+  AutoRepair?: boolean
+  /**
+   * 节点计费类型变更
+当前仅支持按量计费转包年包月：
+- PREPAID
+
+   */
+  InstanceChargeType?: string
+  /**
+   * 包年包月机型计费配置
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * 系统盘配置
+   */
+  SystemDisk?: Disk
+  /**
+   * Machine 系统配置
+   */
+  Management?: ManagementConfig
+  /**
+   * 故障自愈规则名称
+   */
+  HealthCheckPolicyName?: string
+  /**
+   * 原生节点池hostName模式串
+   */
+  HostNamePattern?: string
+  /**
+   * kubelet 自定义参数
+   */
+  KubeletArgs?: Array<string>
+  /**
+   * 预定义脚本
+   */
+  Lifecycle?: LifecycleConfig
+  /**
+   * 运行时根目录
+   */
+  RuntimeRootDir?: string
+  /**
+   * 是否开启弹性伸缩
+   */
+  EnableAutoscaling?: boolean
+  /**
+   * 机型列表
+   */
+  InstanceTypes?: Array<string>
+  /**
+   * 期望节点数
+   */
+  Replicas?: number
+  /**
+   * 数据盘列表
+   */
+  DataDisks?: Array<DataDisk>
+  /**
+   * ssh公钥id数组
+   */
+  KeyIds?: Array<string>
+}
+
+/**
  * k8s中标注，一般以数组的方式存在
  */
 export interface Annotation {
@@ -908,6 +942,27 @@ export interface LifecycleConfig {
 }
 
 /**
+ * RebootMachines请求参数结构体
+ */
+export interface RebootMachinesRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点名字列表，一次请求，传入节点数量上限为100个
+   */
+  MachineNames: Array<string>
+  /**
+   * 实例的关闭模式。取值范围：
+soft_first：表示在正常关闭失败后进行强制关闭
+hard：直接强制关闭
+soft：仅软关机默认取值：soft。
+   */
+  StopType?: string
+}
+
+/**
  * ModifyNodePool返回参数结构体
  */
 export interface ModifyNodePoolResponse {
@@ -963,6 +1018,27 @@ export interface RegularNodePoolInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceAdvancedSettings?: InstanceAdvancedSettings
+}
+
+/**
+ * StopMachines请求参数结构体
+ */
+export interface StopMachinesRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 节点名字列表，一次请求，传入节点数量上限为100个
+   */
+  MachineNames: Array<string>
+  /**
+   * 实例的关闭模式。取值范围：
+soft_first：表示在正常关闭失败后进行强制关闭
+hard：直接强制关闭
+soft：仅软关机
+   */
+  StopType?: string
 }
 
 /**
@@ -1429,6 +1505,16 @@ export interface ExternalNodePoolInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodesNum?: number
+}
+
+/**
+ * StopMachines返回参数结构体
+ */
+export interface StopMachinesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("live.tencentcloudapi.com", "2018-08-01", clientConfig);
     }
     /**
+     * 该接口用来查询账号下所有的导播台列表
+     */
+    async DescribeCasterList(req, cb) {
+        return this.request("DescribeCasterList", req, cb);
+    }
+    /**
      * 断开推流连接，但可以重新推流。
 注：对已经不活跃的流，调用该断流接口时，接口返回成功。
      */
@@ -561,6 +567,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeStreamPlayInfoList", req, cb);
     }
     /**
+     * 本接口用来查询当前APPID导播台业务状态
+     */
+    async DescribeCasterUserStatus(req, cb) {
+        return this.request("DescribeCasterUserStatus", req, cb);
+    }
+    /**
      * 查询直播拉流任务状态信息。
      */
     async DescribeLivePullStreamTaskStatus(req, cb) {
@@ -956,6 +968,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLivePlayAuthKey(req, cb) {
         return this.request("DescribeLivePlayAuthKey", req, cb);
+    }
+    /**
+     * 该接口用来获取所有的转场名称及其对应的素材url。
+     */
+    async DescribeCasterTransitionTypes(req, cb) {
+        return this.request("DescribeCasterTransitionTypes", req, cb);
     }
     /**
      * 该接口用来停止直播流监播任务。

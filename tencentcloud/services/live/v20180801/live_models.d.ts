@@ -119,59 +119,14 @@ export interface DescribePlayErrorCodeDetailInfoListRequest {
     MainlandOrOversea?: string;
 }
 /**
- * DescribeBillBandwidthAndFluxList请求参数结构体
+ * 推流时间。
  */
-export interface DescribeBillBandwidthAndFluxListRequest {
+export interface PublishTime {
     /**
-     * 起始时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+     * 推流时间。
+  UTC 格式，例如：2018-06-29T19:00:00Z。
      */
-    StartTime: string;
-    /**
-     * 结束时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-  起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
-     */
-    EndTime: string;
-    /**
-     * 直播播放域名，若不填，表示总体数据。
-     */
-    PlayDomains?: Array<string>;
-    /**
-     * 可选值：
-  Mainland：查询国内数据，
-  Oversea：则查询国外数据，
-  默认：查询国内+国外的数据。
-  注：LEB（快直播）只支持国内+国外数据查询。
-     */
-    MainlandOrOversea?: string;
-    /**
-     * 数据粒度，支持如下粒度：
-  5：5分钟粒度，（跨度不支持超过1天），
-  60：1小时粒度（跨度不支持超过一个月），
-  1440：天粒度（跨度不支持超过一个月）。
-  默认值：5。
-     */
-    Granularity?: number;
-    /**
-     * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
-     */
-    ServiceName?: string;
-    /**
-     * 大区，映射表如下：
-  China Mainland 中国大陆
-  Asia Pacific I 亚太一区
-  Asia Pacific II 亚太二区
-  Asia Pacific III 亚太三区
-  Europe 欧洲
-  North America 北美
-  South America 南美
-  Middle East 中东
-  Africa 非洲。
-     */
-    RegionNames?: Array<string>;
+    PublishTime: string;
 }
 /**
  * 通用混流输出参数。
@@ -2396,6 +2351,20 @@ export interface DescribeLivePushAuthKeyRequest {
     DomainName: string;
 }
 /**
+ * DescribeCasterTransitionTypes返回参数结构体
+ */
+export interface DescribeCasterTransitionTypesResponse {
+    /**
+     * 转场信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransitionTypes?: Array<TransitionTypeInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUploadStreamNums返回参数结构体
  */
 export interface DescribeUploadStreamNumsResponse {
@@ -3532,6 +3501,26 @@ export interface DeletePullStreamConfigRequest {
     ConfigId: string;
 }
 /**
+ * 转场信息
+ */
+export interface TransitionTypeInfo {
+    /**
+     * 转场名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransitionType?: string;
+    /**
+     * 素材url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceUrl?: string;
+    /**
+     * 转场的下标，可用来排序，从1开始递增
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: number;
+}
+/**
  * DescribeLiveWatermarks返回参数结构体
  */
 export interface DescribeLiveWatermarksResponse {
@@ -4591,6 +4580,70 @@ export interface RestartLivePullStreamTaskRequest {
     Operator: string;
 }
 /**
+ * 导播台简略信息
+ */
+export interface CasterBriefInfo {
+    /**
+     * 导播台ID
+     */
+    CasterId?: number;
+    /**
+     * 导播台名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CasterName?: string;
+    /**
+     * 导播台的描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 开始计费时间，值为unix时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartBillingTime?: number;
+    /**
+     * 结束计费时间，值为unix时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StopBillingTime?: number;
+    /**
+     * 创建时间，值为unix时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 导播台状态
+  0：停止状态，无预监，无输出
+  1：无预监，有输出状态（非法状态）
+  2：有预监，无输出状态
+  3：有预监，有输出状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 导播台的过期时间，值为-1或unix时间戳。
+  当值为-1时，代表永不过期。
+  当值为特定unix时间戳时，代表过期时间为对应的时间，导播台在该时间自动停止。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: number;
+    /**
+     * 计费字段，该字段暂无作用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FeeType?: number;
+}
+/**
+ * DescribeCasterTransitionTypes请求参数结构体
+ */
+export interface DescribeCasterTransitionTypesRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+}
+/**
  * 延播信息。
  */
 export interface DelayInfo {
@@ -4725,14 +4778,59 @@ export interface DescribePullTransformPushInfoRequest {
     MainlandOrOversea?: string;
 }
 /**
- * 推流时间。
+ * DescribeBillBandwidthAndFluxList请求参数结构体
  */
-export interface PublishTime {
+export interface DescribeBillBandwidthAndFluxListRequest {
     /**
-     * 推流时间。
-  UTC 格式，例如：2018-06-29T19:00:00Z。
+     * 起始时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
      */
-    PublishTime: string;
+    StartTime: string;
+    /**
+     * 结束时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+  起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
+     */
+    EndTime: string;
+    /**
+     * 直播播放域名，若不填，表示总体数据。
+     */
+    PlayDomains?: Array<string>;
+    /**
+     * 可选值：
+  Mainland：查询国内数据，
+  Oversea：则查询国外数据，
+  默认：查询国内+国外的数据。
+  注：LEB（快直播）只支持国内+国外数据查询。
+     */
+    MainlandOrOversea?: string;
+    /**
+     * 数据粒度，支持如下粒度：
+  5：5分钟粒度，（跨度不支持超过1天），
+  60：1小时粒度（跨度不支持超过一个月），
+  1440：天粒度（跨度不支持超过一个月）。
+  默认值：5。
+     */
+    Granularity?: number;
+    /**
+     * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
+     */
+    ServiceName?: string;
+    /**
+     * 大区，映射表如下：
+  China Mainland 中国大陆
+  Asia Pacific I 亚太一区
+  Asia Pacific II 亚太二区
+  Asia Pacific III 亚太三区
+  Europe 欧洲
+  North America 北美
+  South America 南美
+  Middle East 中东
+  Africa 非洲。
+     */
+    RegionNames?: Array<string>;
 }
 /**
  * flv格式特殊配置
@@ -5564,6 +5662,20 @@ export interface DescribeLiveWatermarkRequest {
     WatermarkId: number;
 }
 /**
+ * DescribeCasterList返回参数结构体
+ */
+export interface DescribeCasterListResponse {
+    /**
+     * 用户对应的导播台简要信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CasterList?: Array<CasterBriefInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLiveDomains返回参数结构体
  */
 export interface DescribeLiveDomainsResponse {
@@ -5662,6 +5774,10 @@ export interface ModifyLiveDomainCertBindingsResponse {
  * DescribeLiveRecordRules请求参数结构体
  */
 export declare type DescribeLiveRecordRulesRequest = null;
+/**
+ * DescribeCasterUserStatus请求参数结构体
+ */
+export declare type DescribeCasterUserStatusRequest = null;
 /**
  * DescribeLiveStreamMonitor返回参数结构体
  */
@@ -6836,6 +6952,22 @@ export interface PlayStatInfo {
     Value: number;
 }
 /**
+ * DescribeCasterUserStatus返回参数结构体
+ */
+export interface DescribeCasterUserStatusResponse {
+    /**
+     * 0: 未开通导播台
+  1:开通了导播台，且处于正常状态
+  2:开通了导播台，但处于欠费状态
+  3:开通了导播台，但处于封禁状态
+     */
+    UserStatus: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 直播垫片模板。
  */
 export interface PadTemplate {
@@ -7777,6 +7909,10 @@ export interface DescribePlayErrorCodeSumInfoListResponse {
      */
     RequestId?: string;
 }
+/**
+ * DescribeCasterList请求参数结构体
+ */
+export declare type DescribeCasterListRequest = null;
 /**
  * UnBindLiveDomainCert请求参数结构体
  */

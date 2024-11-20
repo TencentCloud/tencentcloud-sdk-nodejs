@@ -194,7 +194,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceCreateInstance(req: InquiryPriceCreateInstanceRequest, cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void): Promise<InquiryPriceCreateInstanceResponse>;
     /**
-     * 修改复制组信息
+     * 本接口（ModifyReplicationGroup）用于修改复制组信息。
      */
     ModifyReplicationGroup(req: ModifyReplicationGroupRequest, cb?: (error: string, rep: ModifyReplicationGroupResponse) => void): Promise<ModifyReplicationGroupResponse>;
     /**

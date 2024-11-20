@@ -9302,13 +9302,17 @@ export interface CreateTaskFolderRequest {
      */
     FolderName: string;
     /**
-     * 工作量ID
+     * 工作流ID
      */
     WorkflowId: string;
     /**
      * 父文件夹ID
      */
     ParentFolderId?: string;
+    /**
+     * 目录分类
+     */
+    TaskNodeType?: string;
 }
 /**
  * 集成节点详情
