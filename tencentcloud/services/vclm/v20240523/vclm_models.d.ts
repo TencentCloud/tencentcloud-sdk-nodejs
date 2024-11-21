@@ -23,7 +23,11 @@ export interface AsrTimestamps {
  */
 export interface SubmitVideoStylizationJobRequest {
     /**
-     * 风格ID，取值说明：2d_anime 2D动漫；3d_cartoon 3D卡通；3d_china 3D国潮；pixel_art	像素风。
+     * 风格ID。取值说明：
+  2d_anime：2D动漫；
+  3d_cartoon：3D卡通；
+  3d_china：3D国潮；
+  pixel_art：像素风。
      */
     StyleId: string;
     /**
@@ -36,9 +40,11 @@ export interface SubmitVideoStylizationJobRequest {
      */
     VideoUrl: string;
     /**
-     * 风格化强度 可选参数["low","medium","high"]
-  "low":风格化强度弱,"medium":"风格化强度中等","high":"风格化强度强"
-  默认为medium
+     * 风格化强度。取值说明：
+  low：风格化强度弱；
+  medium：风格化强度中等；
+  high：风格化强度强。
+  默认值为medium。
      */
     StyleStrength?: string;
 }
@@ -111,7 +117,7 @@ export interface SubmitImageAnimateJobRequest {
  */
 export interface SubmitVideoStylizationJobResponse {
     /**
-     * 任务ID
+     * 任务ID。任务有效期为48小时。
      */
     JobId?: string;
     /**
@@ -124,7 +130,7 @@ export interface SubmitVideoStylizationJobResponse {
  */
 export interface ConfirmVideoTranslateJobRequest {
     /**
-     * 视频翻译任务 ID
+     * 视频转译任务 ID
      */
     JobId: string;
     /**
@@ -185,55 +191,56 @@ export interface SubmitVideoTranslateJobResponse {
  */
 export interface DescribeVideoTranslateJobResponse {
     /**
-     * 任务状态。 1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+     * 任务状态。0: 任务初始化。 1：音频转译中。 2：音频转译失败。 3：音频转译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频转译中。 7：视频转译失败。 8：视频转译成功。
      */
     JobStatus?: number;
     /**
-     * 任务错误码。
+     * 本次任务出错的错误码，用来定位问题原因。
      */
     JobErrorCode?: string;
     /**
-     * 任务错误信息。
+     * 任务错误信息，错误码出现的原因。
      */
     JobErrorMsg?: string;
     /**
-     * 视频翻译结果。
+     * 视频转译生成结果视频url，有效期1天。当JobStatus为8时，该字段返回视频Url。
      */
     ResultVideoUrl?: string;
     /**
-     * 音频翻译结果。
+     * 音频转译后分句翻译内容，包含分句起始时间、源识别文本以及翻译后文本。
+  当JobStatus为3、4时，该字段返回分句翻译数据。
      */
     TranslateResults?: Array<TranslateResult>;
     /**
-     * 是否需要确认翻译结果。0：不需要，1：需要
+     * 是否需要确认翻译结果。0：不需要，1：需要。
      */
     JobConfirm?: number;
     /**
-     * 音频任务 ID
+     * 音频任务 ID。
      */
     JobAudioTaskId?: string;
     /**
-     * 视频审核任务ID
+     * 视频审核任务ID。
      */
     JobVideoModerationId?: string;
     /**
-     * 音频审核任务 ID
+     * 音频审核任务 ID。
      */
     JobAudioModerationId?: string;
     /**
-     * 口型驱动任务 ID
+     * 口型驱动任务 ID。
      */
     JobVideoId?: string;
     /**
-     * 视频素材原始 URL
+     * 视频素材原始 URL。
      */
     OriginalVideoUrl?: string;
     /**
-     * 文本片段及其时间戳
+     * 文本片段及其时间戳。
      */
     AsrTimestamps?: Array<AsrTimestamps>;
     /**
-     * 提交视频翻译任务时的 requestId
+     * 提交视频转译任务时的 requestId。
      */
     JobSubmitReqId?: string;
     /**
@@ -360,16 +367,21 @@ export interface DescribeVideoStylizationJobResponse {
      */
     JobId?: string;
     /**
-     * 任务状态码：
-  JobInit:  "初始化中"
-  JobModerationFailed: "审核失败",
-  JobRunning: "处理中",
-  JobFailed: "处理失败",
+     * 任务状态码。取值说明：
+  JobInit:  "初始化中"；
+  JobModerationFailed: "审核失败"；
+  JobRunning: "处理中"；
+  JobFailed: "处理失败"；
   JobSuccess: "处理完成"。
      */
     StatusCode?: string;
     /**
-     * 任务状态描述。
+     * 任务状态描述。取值说明：
+  JobInit:  "初始化中"；
+  JobModerationFailed: "审核失败"；
+  JobRunning: "处理中"；
+  JobFailed: "处理失败"；
+  JobSuccess: "处理完成"。
      */
     StatusMsg?: string;
     /**
@@ -417,7 +429,7 @@ export interface SubmitVideoTranslateJobRequest {
     SrcLang: string;
     /**
      * 当音频 URL 不为空时，不经过语音AI处理，直接以视频为素材用音频内容做视频口型驱动。
-  格式要求：支持 mp3、m4a、acc、wav 格式。
+  格式要求：支持 mp3、m4a、aac、wav 格式。
   时长要求：【5~600】秒，音频时长要匹配视频时长。
   大小要求：不超过 100Mb。
      */
@@ -459,23 +471,23 @@ export interface SubmitVideoTranslateJobRequest {
  */
 export interface ConfirmVideoTranslateJobResponse {
     /**
-     * 视频翻译任务 ID
+     * 视频转译任务 ID。
      */
     JobId?: string;
     /**
-     * 音频转换任务 ID
+     * 音频转译任务 ID。
      */
     TaskId?: string;
     /**
-     * 音频翻译结果确认 session
+     * 音频转译结果确认 session。
      */
     SessionId?: string;
     /**
-     * 视频转译任务状态
+     * 该字段与 DescribeVideoTranslateJob 接口的 Status 功能相同，均表示任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
      */
     Status?: number;
     /**
-     * 视频转译任务信息
+     * 视频转译任务信息。
      */
     Message?: string;
     /**

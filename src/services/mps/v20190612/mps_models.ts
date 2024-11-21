@@ -921,7 +921,7 @@ export interface ModifyOutputInfo {
    */
   Description: string
   /**
-   * 输出的转推协议，支持SRT|RTP|RTMP。
+   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。
    */
   Protocol: string
   /**
@@ -953,6 +953,10 @@ export interface ModifyOutputInfo {
    * 可用区
    */
   Zones?: Array<string>
+  /**
+   * 转推RIST的配置。
+   */
+  RISTSettings?: CreateOutputRistSettings
 }
 
 /**
@@ -4147,15 +4151,21 @@ export interface CreateWordSamplesResponse {
 }
 
 /**
- * 智能分类任务控制参数
+ * 创建媒体传输流的输出的RIST配置。
  */
-export interface ClassificationConfigureInfoForUpdate {
+export interface CreateOutputRistSettings {
   /**
-   * 智能分类任务开关，可选值：
-<li>ON：开启智能分类任务；</li>
-<li>OFF：关闭智能分类任务。</li>
+   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
    */
-  Switch?: string
+  Mode?: string
+  /**
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   */
+  Profile?: string
+  /**
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   */
+  Buffer?: number
 }
 
 /**
@@ -5729,7 +5739,7 @@ export interface CreateOutputInfo {
    */
   Description: string
   /**
-   * 输出协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
+   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP|RIST。
    */
   Protocol: string
   /**
@@ -5765,6 +5775,14 @@ export interface CreateOutputInfo {
    * 可用区，output最多只支持输入一个可用区。
    */
   Zones?: Array<string>
+  /**
+   * 输出类型：Internet/TencentCSS/StreamLive
+   */
+  OutputType?: string
+  /**
+   * 输出的RIST的配置。
+   */
+  RISTSettings?: CreateOutputRistSettings
 }
 
 /**
@@ -7454,7 +7472,7 @@ export interface CreateInput {
    */
   InputName: string
   /**
-   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL]。
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。
    */
   Protocol: string
   /**
@@ -7501,6 +7519,14 @@ export interface CreateInput {
    * 可用区，非必填，如果开启容灾必须输入两个不同的可用区，否则最多只允许输入一个可用区。
    */
   Zones?: Array<string>
+  /**
+   * 输入的RIST配置信息。
+   */
+  RISTSettings?: CreateInputRISTSettings
+  /**
+   * 输入节点的地区
+   */
+  InputRegion?: string
 }
 
 /**
@@ -7672,6 +7698,24 @@ export interface ModifyImageSpriteTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建的输入RIST的配置信息。
+ */
+export interface CreateInputRISTSettings {
+  /**
+   * RIST模式，可选[LISTENER]，默认为LISTENER。
+   */
+  Mode?: string
+  /**
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   */
+  Profile?: string
+  /**
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   */
+  Buffer?: number
 }
 
 /**
@@ -7929,6 +7973,18 @@ export interface OutputSRTSourceAddressResp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
+}
+
+/**
+ * 智能分类任务控制参数
+ */
+export interface ClassificationConfigureInfoForUpdate {
+  /**
+   * 智能分类任务开关，可选值：
+<li>ON：开启智能分类任务；</li>
+<li>OFF：关闭智能分类任务。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -8488,6 +8544,11 @@ export interface DescribeInput {
    * 可用区配置，开启容灾情况下最多有两个，顺序和pipeline 0、1对应，否则最多只有一个可用区。
    */
   Zones?: Array<string>
+  /**
+   * 输入的RIST配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RISTSettings?: DescribeInputRISTSettings
 }
 
 /**
@@ -8974,6 +9035,11 @@ export interface DescribeOutput {
    * 可用区，output目前最多只支持一个。
    */
   Zones?: Array<string>
+  /**
+   * 输出的RIST配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RISTSettings?: DescribeOutputRISTSettings
 }
 
 /**
@@ -9262,19 +9328,21 @@ export interface DeleteSampleSnapshotTemplateRequest {
 }
 
 /**
- * AI 视频智能分析输入参数类型
+ * DescribeTranscodeTemplates返回参数结构体
  */
-export interface AiAnalysisTaskInput {
+export interface DescribeTranscodeTemplatesResponse {
   /**
-   * 视频内容分析模板 ID。
+   * 符合过滤条件的记录总数。
    */
-  Definition: number
+  TotalCount?: number
   /**
-   * 扩展参数，其值为序列化的 json字符串。
-注意：此参数为定制需求参数，需要线下对接。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 转码模板详情列表。
    */
-  ExtendedParameter?: string
+  TranscodeTemplateSet?: Array<TranscodeTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10615,6 +10683,22 @@ export interface MediaProcessTaskSampleSnapshotResult {
 }
 
 /**
+ * RIST输出的监听地址。
+ */
+export interface OutputRISTSourceAddressResp {
+  /**
+   * 监听IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 监听端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+}
+
+/**
  * 用户自定义审核任务控制参数。
  */
 export interface UserDefineConfigureInfoForUpdate {
@@ -10820,6 +10904,24 @@ export interface AsrFullTextConfigureInfo {
    * 视频源语言。
    */
   SourceLanguage?: string
+}
+
+/**
+ * 查询输入的RIST配置信息。
+ */
+export interface DescribeInputRISTSettings {
+  /**
+   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   */
+  Mode?: string
+  /**
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   */
+  Profile?: string
+  /**
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   */
+  Buffer?: number
 }
 
 /**
@@ -13599,6 +13701,29 @@ export interface QualityControlData {
 }
 
 /**
+ * 查询输出的RIST拉流配置信息。
+ */
+export interface DescribeOutputRISTSettings {
+  /**
+   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   */
+  Mode?: string
+  /**
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   */
+  Profile?: string
+  /**
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   */
+  Buffer?: number
+  /**
+   * 服务器监听地址，RIST模式为LISTENER时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceAddresses?: Array<OutputRISTSourceAddressResp>
+}
+
+/**
  * Drm 加密信息。
  */
 export interface DrmInfo {
@@ -14405,7 +14530,7 @@ export interface ModifyInput {
    */
   RTPSettings: CreateInputRTPSettings
   /**
-   * 输入的协议，可选[SRT|RTP|RTMP]。
+   * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。
 当输出包含RTP时，输入只能是RTP。
 当输出包含RTMP时，输入可以是SRT/RTMP。
 当输出包含SRT时，输入只能是SRT。
@@ -14439,6 +14564,14 @@ export interface ModifyInput {
    * 可用区，非必填，最多支持输入两个可用区，对于需改接口，只要第二个可用区会参与到资源分配。如果input开启容灾或者涉及RTSP_PULL协议切换时有效(会重新分配地址)。
    */
   Zones?: Array<string>
+  /**
+   * RIST的配置信息。
+   */
+  RISTSettings?: CreateInputRISTSettings
+  /**
+   * 输入节点的地区
+   */
+  InputRegion?: string
 }
 
 /**
@@ -15029,21 +15162,19 @@ export interface OcrFullTextConfigureInfo {
 }
 
 /**
- * DescribeTranscodeTemplates返回参数结构体
+ * AI 视频智能分析输入参数类型
  */
-export interface DescribeTranscodeTemplatesResponse {
+export interface AiAnalysisTaskInput {
   /**
-   * 符合过滤条件的记录总数。
+   * 视频内容分析模板 ID。
    */
-  TotalCount?: number
+  Definition: number
   /**
-   * 转码模板详情列表。
+   * 扩展参数，其值为序列化的 json字符串。
+注意：此参数为定制需求参数，需要线下对接。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranscodeTemplateSet?: Array<TranscodeTemplate>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ExtendedParameter?: string
 }
 
 /**

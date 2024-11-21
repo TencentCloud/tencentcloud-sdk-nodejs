@@ -2022,6 +2022,10 @@ export interface StartStreamIngestRequest {
      * 循环播放最大时长,仅支持RepeatNum设置-1时生效，取值范围[1, 10080]，单位分钟。
      */
     MaxDuration?: number;
+    /**
+     * 音量，取值范围[0, 100]，默认100，表示原音量。
+     */
+    Volume?: number;
 }
 /**
  * DescribeRecordingUsage返回参数结构体
@@ -3534,9 +3538,13 @@ export interface UpdateStreamIngestRequest {
      */
     TaskId: string;
     /**
-     * 源流URL【必填】。
+     * 源流URL。
      */
-    StreamUrl: string;
+    StreamUrl?: string;
+    /**
+     * 音量，取值范围[0, 100]，默认100，表示原音量。
+     */
+    Volume?: number;
 }
 /**
  * StopWebRecord返回参数结构体

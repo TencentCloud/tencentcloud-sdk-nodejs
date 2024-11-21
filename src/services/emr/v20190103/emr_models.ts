@@ -653,13 +653,7 @@ export interface DescribeServiceNodeInfosRequest {
    */
   ServiceName?: string
   /**
-   * 节点名称
-master
-core
-task
-common
-router
-
+   * 节点名称master,core,task,common,router
    */
   NodeTypeName?: string
   /**
@@ -2652,12 +2646,12 @@ export interface AddUsersForUserManagerResponse {
    * 添加成功的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessUserList: Array<string>
+  SuccessUserList?: Array<string>
   /**
    * 添加失败的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedUserList: Array<string>
+  FailedUserList?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5623,11 +5617,11 @@ export interface DescribeClusterNodesRequest {
    */
   SearchFields?: Array<SearchItem>
   /**
-   * 无
+   * 排序字段
    */
   OrderField?: string
   /**
-   * 无
+   * 是否升序，1:升序，0:降序
    */
   Asc?: number
 }
@@ -7434,11 +7428,7 @@ export interface InquiryPriceCreateInstanceRequest {
    */
   ProductId?: number
   /**
-   * 场景化取值：
-Hadoop-Kudu
-Hadoop-Zookeeper
-Hadoop-Presto
-Hadoop-Hbase
+   * 场景化取值：Hadoop-Kudu，Hadoop-Zookeeper，Hadoop-Presto，Hadoop-Hbase
    */
   SceneName?: string
   /**

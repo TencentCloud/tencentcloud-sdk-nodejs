@@ -348,6 +348,16 @@ it("lcic.v20220817.SendRoomNormalMessage", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeRecord", async function () {
+    try {
+       const data = await client.DescribeRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeGroupList", async function () {
     try {
        const data = await client.DescribeGroupList({})
@@ -538,6 +548,16 @@ it("lcic.v20220817.DeleteDocument", async function () {
     }
 })
 
+it("lcic.v20220817.StopRecord", async function () {
+    try {
+       const data = await client.StopRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.BatchDeleteRecord", async function () {
     try {
        const data = await client.BatchDeleteRecord({})
@@ -591,6 +611,16 @@ it("lcic.v20220817.DeleteRoom", async function () {
 it("lcic.v20220817.DescribeDocument", async function () {
     try {
        const data = await client.DescribeDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.StartRecord", async function () {
+    try {
+       const data = await client.StartRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

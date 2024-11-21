@@ -2015,7 +2015,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOpenPortStatistics", req, cb);
     }
     /**
-     * 获取安全防护状态汇总
+     * 接口已无效
+
+获取安全防护状态汇总
      */
     async DescribeSecurityProtectionStat(req, cb) {
         return this.request("DescribeSecurityProtectionStat", req, cb);

@@ -31,6 +31,7 @@ import {
   ModifyAppResponse,
   UnblockKickedUserResponse,
   BatchRegisterRequest,
+  StartRecordRequest,
   DeleteRoomResponse,
   ModifyUserProfileRequest,
   CreateGroupWithMembersRequest,
@@ -46,6 +47,7 @@ import {
   LoginOriginIdRequest,
   BatchRegisterResponse,
   BindDocumentToRoomResponse,
+  StopRecordResponse,
   CreateGroupWithSubGroupRequest,
   RoomItem,
   ClassScoreItem,
@@ -53,6 +55,7 @@ import {
   BatchDescribeDocumentRequest,
   RegisterUserRequest,
   BatchCreateRoomResponse,
+  StartRecordResponse,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
   DescribeGroupResponse,
@@ -69,6 +72,7 @@ import {
   DescribeGroupListRequest,
   GetRoomMessageRequest,
   DescribeDocumentsResponse,
+  DescribeRecordRequest,
   DocumentInfo,
   DeleteDocumentResponse,
   DeleteRecordRequest,
@@ -78,6 +82,7 @@ import {
   MessageItem,
   GroupInfo,
   GetRoomEventRequest,
+  DescribeRecordResponse,
   DescribeDocumentResponse,
   DeleteGroupMemberResponse,
   DescribeGroupMemberListResponse,
@@ -131,6 +136,7 @@ import {
   MutedAccountList,
   GroupBaseInfo,
   LoginUserRequest,
+  StopRecordRequest,
   SingleStreamInfo,
   ImageMsgContent,
   AnswerStat,
@@ -156,6 +162,7 @@ import {
   AppCustomContent,
   BatchDescribeDocumentResponse,
   DeleteGroupResponse,
+  CreateRoomResponse,
   DescribeSdkAppIdUsersRequest,
   AddGroupMemberResponse,
   MsgBody,
@@ -170,7 +177,7 @@ import {
   DescribeCurrentMemberListResponse,
   ModifyGroupResponse,
   DescribeGroupListResponse,
-  CreateRoomResponse,
+  CustomRecordInfo,
   DescribeDeveloperResponse,
   TextMsgContent,
   TextMarkConfig,
@@ -518,6 +525,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询录制信息
+   */
+  async DescribeRecord(
+    req: DescribeRecordRequest,
+    cb?: (error: string, rep: DescribeRecordResponse) => void
+  ): Promise<DescribeRecordResponse> {
+    return this.request("DescribeRecord", req, cb)
+  }
+
+  /**
    * 获取群组列表
    */
   async DescribeGroupList(
@@ -710,6 +727,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止录制
+   */
+  async StopRecord(
+    req: StopRecordRequest,
+    cb?: (error: string, rep: StopRecordResponse) => void
+  ): Promise<StopRecordResponse> {
+    return this.request("StopRecord", req, cb)
+  }
+
+  /**
    * 批量删除多个房间的录制文件
    */
   async BatchDeleteRecord(
@@ -767,6 +794,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDocumentResponse) => void
   ): Promise<DescribeDocumentResponse> {
     return this.request("DescribeDocument", req, cb)
+  }
+
+  /**
+   * 开始录制
+   */
+  async StartRecord(
+    req: StartRecordRequest,
+    cb?: (error: string, rep: StartRecordResponse) => void
+  ): Promise<StartRecordResponse> {
+    return this.request("StartRecord", req, cb)
   }
 
   /**

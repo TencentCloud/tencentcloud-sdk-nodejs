@@ -86,7 +86,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitVideoTranslateJob", req, cb);
     }
     /**
-     * 查询视频翻译任务
+     * 查询视频转译任务
      */
     async DescribeVideoTranslateJob(req, cb) {
         return this.request("DescribeVideoTranslateJob", req, cb);

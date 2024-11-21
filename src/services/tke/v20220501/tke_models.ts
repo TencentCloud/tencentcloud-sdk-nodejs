@@ -126,6 +126,14 @@ export interface NativeNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OsImage?: string
+  /**
+   * **原生节点对应的实例 ID**
+
+- ins-q47ofw6 表示这个实例是一个 CVM 的实例
+- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**

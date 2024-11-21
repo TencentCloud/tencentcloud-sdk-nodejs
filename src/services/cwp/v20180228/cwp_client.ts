@@ -4622,8 +4622,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取安全防护状态汇总
-   */
+     * 接口已无效
+
+获取安全防护状态汇总
+     */
   async DescribeSecurityProtectionStat(
     req?: DescribeSecurityProtectionStatRequest,
     cb?: (error: string, rep: DescribeSecurityProtectionStatResponse) => void

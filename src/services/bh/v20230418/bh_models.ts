@@ -1925,7 +1925,7 @@ export interface BindDeviceAccountPrivateKeyRequest {
    */
   Id: number
   /**
-   * 主机账号私钥，最新长度128字节，最大长度8192字节
+   * 主机账号私钥，最小长度128字节，最大长度8192字节
    */
   PrivateKey: string
   /**

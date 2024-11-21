@@ -228,6 +228,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendRoomNormalMessage", req, cb);
     }
     /**
+     * 查询录制信息
+     */
+    async DescribeRecord(req, cb) {
+        return this.request("DescribeRecord", req, cb);
+    }
+    /**
      * 获取群组列表
      */
     async DescribeGroupList(req, cb) {
@@ -344,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDocument", req, cb);
     }
     /**
+     * 停止录制
+     */
+    async StopRecord(req, cb) {
+        return this.request("StopRecord", req, cb);
+    }
+    /**
      * 批量删除多个房间的录制文件
      */
     async BatchDeleteRecord(req, cb) {
@@ -378,6 +390,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDocument(req, cb) {
         return this.request("DescribeDocument", req, cb);
+    }
+    /**
+     * 开始录制
+     */
+    async StartRecord(req, cb) {
+        return this.request("StartRecord", req, cb);
     }
     /**
      * 此接口会聚合子群组创建联合群组

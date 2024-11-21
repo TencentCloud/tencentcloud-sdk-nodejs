@@ -7608,7 +7608,7 @@ export interface DescribeNetworkAclQuintupleEntriesRequest {
      */
     Limit?: number;
     /**
-     * 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。
+     * 过滤条件，参数不支持同时指定`NetworkAclId`和`Filters`。
   <li>protocol - String - 协议，形如：`TCP`。</li>
   <li>description - String - 描述。</li>
   <li>destination-cidr - String - 目的CIDR， 形如：'192.168.0.0/24'。</li>
@@ -9105,11 +9105,11 @@ export interface DescribeNetworkAclQuintupleEntriesResponse {
     /**
      * 网络ACL条目列表（NetworkAclTuple5Entry）
      */
-    NetworkAclQuintupleSet: Array<NetworkAclQuintupleEntry>;
+    NetworkAclQuintupleSet?: Array<NetworkAclQuintupleEntry>;
     /**
      * 符合条件的实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14499,8 +14499,7 @@ export interface CreateVpnGatewayRequest {
  */
 export interface DescribeVpcInstancesRequest {
     /**
-     * 过滤条件，参数不支持同时指定RouteTableIds和Filters。
-  <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+     * <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
   <li>instance-id - String - （过滤条件）云主机实例ID。</li>
   <li>instance-name - String - （过滤条件）云主机名称。</li>
      */
@@ -16532,15 +16531,15 @@ export interface ConflictSource {
     /**
      * 冲突资源ID
      */
-    ConflictSourceId: string;
+    ConflictSourceId?: string;
     /**
      * 冲突资源
      */
-    SourceItem: string;
+    SourceItem?: string;
     /**
      * 冲突资源条目信息
      */
-    ConflictItemSet: Array<ConflictItem>;
+    ConflictItemSet?: Array<ConflictItem>;
 }
 /**
  * CreateDhcpIp请求参数结构体

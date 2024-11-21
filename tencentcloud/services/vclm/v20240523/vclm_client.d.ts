@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     SubmitVideoTranslateJob(req: SubmitVideoTranslateJobRequest, cb?: (error: string, rep: SubmitVideoTranslateJobResponse) => void): Promise<SubmitVideoTranslateJobResponse>;
     /**
-     * 查询视频翻译任务
+     * 查询视频转译任务
      */
     DescribeVideoTranslateJob(req: DescribeVideoTranslateJobRequest, cb?: (error: string, rep: DescribeVideoTranslateJobResponse) => void): Promise<DescribeVideoTranslateJobResponse>;
     /**

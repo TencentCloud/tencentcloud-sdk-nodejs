@@ -7233,29 +7233,29 @@ export interface CreateNoticeContentRequest {
  */
 export interface Ckafka {
   /**
-   * Ckafka 的 Vip
-   */
-  Vip: string
-  /**
-   * Ckafka 的 Vport
-   */
-  Vport: string
-  /**
    * Ckafka 的 InstanceId
    */
   InstanceId: string
   /**
-   * Ckafka 的 InstanceName
-   */
-  InstanceName: string
-  /**
-   * Ckafka 的 TopicId
-   */
-  TopicId: string
-  /**
    * Ckafka 的 TopicName
    */
   TopicName: string
+  /**
+   * Ckafka 的 Vip
+   */
+  Vip?: string
+  /**
+   * Ckafka 的 Vport
+   */
+  Vport?: string
+  /**
+   * Ckafka 的 InstanceName
+   */
+  InstanceName?: string
+  /**
+   * Ckafka 的 TopicId
+   */
+  TopicId?: string
 }
 
 /**

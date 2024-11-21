@@ -7573,15 +7573,15 @@ export interface PrometheusClusterAgentBasic {
      */
     ClusterType: string;
     /**
-     * 集群ID
+     * 集群 ID
      */
     ClusterId: string;
     /**
-     * 是否开启公网CLB
+     * 是否开启公网 CLB
      */
     EnableExternal: boolean;
     /**
-     * 集群内部署组件的pod配置
+     * 集群内部署组件的pod 配置
      */
     InClusterPodConfig?: PrometheusClusterAgentPodConfig;
     /**
@@ -7589,13 +7589,17 @@ export interface PrometheusClusterAgentBasic {
      */
     ExternalLabels?: Array<Label>;
     /**
-     * 是否安装默认采集配置
+     * 是否安装默认采集 exporter 和采集配置
      */
     NotInstallBasicScrape?: boolean;
     /**
-     * 是否采集指标，true代表drop所有指标，false代表采集默认指标
+     * 是否安装采集配置，true 只安装采集 exporter 不会安装采集配置，false 会同时安装采集配置
      */
     NotScrape?: boolean;
+    /**
+     * 是否丢弃所有指标，true 代表丢弃所有指标，false 代表采集默认指标
+     */
+    DropAll?: boolean;
     /**
      * 是否开启默认预聚合规则
      */

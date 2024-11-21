@@ -1337,7 +1337,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeOpenPortStatistics(req: DescribeOpenPortStatisticsRequest, cb?: (error: string, rep: DescribeOpenPortStatisticsResponse) => void): Promise<DescribeOpenPortStatisticsResponse>;
     /**
-     * 获取安全防护状态汇总
+     * 接口已无效
+
+获取安全防护状态汇总
      */
     DescribeSecurityProtectionStat(req?: DescribeSecurityProtectionStatRequest, cb?: (error: string, rep: DescribeSecurityProtectionStatResponse) => void): Promise<DescribeSecurityProtectionStatResponse>;
     /**

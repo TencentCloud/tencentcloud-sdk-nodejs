@@ -352,6 +352,20 @@ export interface BatchRegisterRequest {
 }
 
 /**
+ * StartRecord请求参数结构体
+ */
+export interface StartRecordRequest {
+  /**
+   * 学校ID
+   */
+  SdkAppId: number
+  /**
+   * 房间ID
+   */
+  RoomId: number
+}
+
+/**
  * DeleteRoom返回参数结构体
  */
 export interface DeleteRoomResponse {
@@ -677,6 +691,16 @@ export interface BindDocumentToRoomResponse {
 }
 
 /**
+ * StopRecord返回参数结构体
+ */
+export interface StopRecordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateGroupWithSubGroup请求参数结构体
  */
 export interface CreateGroupWithSubGroupRequest {
@@ -935,6 +959,20 @@ export interface BatchCreateRoomResponse {
    * 创建成功课堂ID，与传入课堂信息顺序一致
    */
   RoomIds?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartRecord返回参数结构体
+ */
+export interface StartRecordResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1228,6 +1266,20 @@ export interface DescribeDocumentsResponse {
 }
 
 /**
+ * DescribeRecord请求参数结构体
+ */
+export interface DescribeRecordRequest {
+  /**
+   * 学校ID
+   */
+  SdkAppId: number
+  /**
+   * 房间ID
+   */
+  RoomId: number
+}
+
+/**
  * 文档信息
  */
 export interface DocumentInfo {
@@ -1517,6 +1569,28 @@ VisibleOn: 页面可见
 VisibleOff: 页面不可见
    */
   Keyword?: string
+}
+
+/**
+ * DescribeRecord返回参数结构体
+ */
+export interface DescribeRecordResponse {
+  /**
+   * 学校ID
+   */
+  SchoolId?: number
+  /**
+   * 课堂ID
+   */
+  ClassId?: number
+  /**
+   * 录制信息
+   */
+  RecordInfo?: Array<CustomRecordInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2736,6 +2810,24 @@ export interface LoginUserRequest {
 }
 
 /**
+ * StopRecord请求参数结构体
+ */
+export interface StopRecordRequest {
+  /**
+   * 学校ID
+   */
+  SdkAppId: number
+  /**
+   * 房间ID
+   */
+  RoomId: number
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * 录制流信息
  */
 export interface SingleStreamInfo {
@@ -3498,6 +3590,20 @@ export interface DeleteGroupResponse {
 }
 
 /**
+ * CreateRoom返回参数结构体
+ */
+export interface CreateRoomResponse {
+  /**
+   * 房间ID。
+   */
+  RoomId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSdkAppIdUsers请求参数结构体
  */
 export interface DescribeSdkAppIdUsersRequest {
@@ -3724,17 +3830,41 @@ export interface DescribeGroupListResponse {
 }
 
 /**
- * CreateRoom返回参数结构体
+ * 自定义录制信息
  */
-export interface CreateRoomResponse {
+export interface CustomRecordInfo {
   /**
-   * 房间ID。
+   * 开始时间
    */
-  RoomId?: number
+  StartTime?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间
    */
-  RequestId?: string
+  StopTime?: number
+  /**
+   * 总时长
+   */
+  Duration?: number
+  /**
+   * 文件格式
+   */
+  FileFormat?: string
+  /**
+   * 流url
+   */
+  RecordUrl?: string
+  /**
+   * 流大小
+   */
+  RecordSize?: number
+  /**
+   * 流ID
+   */
+  VideoId?: string
+  /**
+   * 任务Id
+   */
+  TaskId?: string
 }
 
 /**
