@@ -1402,17 +1402,17 @@ export interface InstanceDetailResponse {
  */
 export interface ModifyInstancePreRequest {
     /**
-     * 实例名称
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
      * 预计磁盘，根据磁盘步长，规格向上调整。
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 预计带宽，根据带宽步长，规格向上调整。
      */
-    BandWidth: number;
+    BandWidth?: number;
     /**
      * 预计分区，根据带宽步长，规格向上调整。
      */

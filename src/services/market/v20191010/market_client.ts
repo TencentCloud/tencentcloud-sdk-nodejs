@@ -34,9 +34,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口可以根据InstanceId查询实例的api的使用情况。
-
-     */
+   * 该接口可以根据InstanceId查询实例的api的使用情况。
+   */
   async GetUsagePlanUsageAmount(
     req: GetUsagePlanUsageAmountRequest,
     cb?: (error: string, rep: GetUsagePlanUsageAmountResponse) => void

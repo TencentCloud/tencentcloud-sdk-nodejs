@@ -298,7 +298,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置实例输入模式
+   * 本接口（ModifyInstanceReadOnly）用于设置实例输入模式。
    */
   async ModifyInstanceReadOnly(
     req: ModifyInstanceReadOnlyRequest,
@@ -330,7 +330,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
+   * 本接口（DeleteReplicationInstance）移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
    */
   async DeleteReplicationInstance(
     req: DeleteReplicationInstanceRequest,
@@ -340,7 +340,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回收站实例立即下线
+   * 本接口（CleanUpInstance）用于立即下线回收站的实例。
    */
   async CleanUpInstance(
     req: CleanUpInstanceRequest,
@@ -390,7 +390,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
+   * 本接口（UpgradeInstanceVersion）用于将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
    */
   async UpgradeInstanceVersion(
     req: UpgradeInstanceVersionRequest,
@@ -430,7 +430,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例子账号
+   * 本接口（ModifyInstanceAccount）用于修改实例子账号。
    */
   async ModifyInstanceAccount(
     req: ModifyInstanceAccountRequest,
@@ -460,7 +460,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级实例支持多AZ
+   * 本接口（UpgradeVersionToMultiAvailabilityZones）用于升级实例支持多AZ。
    */
   async UpgradeVersionToMultiAvailabilityZones(
     req: UpgradeVersionToMultiAvailabilityZonesRequest,
@@ -480,7 +480,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
+   * 本接口（ModifyInstanceParams）用于修改 Redis 实例的参数配置。
    */
   async ModifyInstanceParams(
     req: ModifyInstanceParamsRequest,
@@ -490,7 +490,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清空Redis实例的实例数据。
+   * 本接口（ClearInstance）用于清空实例数据。
    */
   async ClearInstance(
     req: ClearInstanceRequest,
@@ -510,7 +510,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除实例子账号
+   * 本接口（DeleteInstanceAccount）用于删除实例子账号。
    */
   async DeleteInstanceAccount(
     req: DeleteInstanceAccountRequest,
@@ -520,7 +520,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的连接配置，包括带宽和最大连接数。
+   * 本接口（ModifyConnectionConfig）用于修改实例的连接配置，包括带宽和最大连接数。
    */
   async ModifyConnectionConfig(
     req: ModifyConnectionConfigRequest,
@@ -540,7 +540,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例相关信息
+   * 本接口（ModifyInstance）用于修改实例相关信息。
    */
   async ModifyInstance(
     req: ModifyInstanceRequest,
@@ -550,7 +550,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 复制组实例更换角色
+   * 本接口（ChangeInstanceRole）用于更换复制组内实例的角色。
    */
   async ChangeInstanceRole(
     req: ChangeInstanceRoleRequest,
@@ -570,7 +570,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
+   * 本接口（CreateInstanceAccount）用于自定义访问实例的账号。
    */
   async CreateInstanceAccount(
     req: CreateInstanceAccountRequest,
@@ -590,7 +590,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例proxy版本升级
+   * 本接口（UpgradeProxyVersion）用于升级实例 Proxy 版本。
    */
   async UpgradeProxyVersion(
     req: UpgradeProxyVersionRequest,
@@ -600,7 +600,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例CPU耗时
+   * 本接口（DescribeInstanceMonitorTopNCmdTook）用于查询实例 CPU 耗时。
    */
   async DescribeInstanceMonitorTopNCmdTook(
     req: DescribeInstanceMonitorTopNCmdTookRequest,
@@ -630,7 +630,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加复制组成员
+   * 本接口（AddReplicationInstance）用于为全球复制组添加实例成员。
    */
   async AddReplicationInstance(
     req: AddReplicationInstanceRequest,
@@ -660,7 +660,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 禁用读写分离
+   * 本接口（DisableReplicaReadonly）用于禁用读写分离功能。
    */
   async DisableReplicaReadonly(
     req: DisableReplicaReadonlyRequest,
@@ -670,7 +670,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例DTS信息
+   * 本接口（DescribeInstanceDTSInfo）用于查询实例 DTS 信息。
    */
   async DescribeInstanceDTSInfo(
     req: DescribeInstanceDTSInfoRequest,
@@ -680,7 +680,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例扩容价格
+   * 本接口（InquiryPriceUpgradeInstance）用于查询实例扩容价格。
    */
   async InquiryPriceUpgradeInstance(
     req: InquiryPriceUpgradeInstanceRequest,
@@ -710,7 +710,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通外网
+   * 本接口（AllocateWanAddress）用于开通实例外网访问。
    */
   async AllocateWanAddress(
     req: AllocateWanAddressRequest,
@@ -720,7 +720,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+   * 本接口（DescribeProjectSecurityGroups）用于查询项目的安全组详情。
    */
   async DescribeProjectSecurityGroups(
     req: DescribeProjectSecurityGroupsRequest,
@@ -730,7 +730,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Tendis慢查询
+   * 本接口（DescribeTendisSlowLog）用于查询 Tendis 实例慢查询。
    */
   async DescribeTendisSlowLog(
     req: DescribeTendisSlowLogRequest,
@@ -740,7 +740,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改参数模板
+   * 本接口（ModifyParamTemplate）用于修改参数模板。
    */
   async ModifyParamTemplate(
     req: ModifyParamTemplateRequest,
@@ -750,7 +750,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询新购实例价格
+   * 本接口（InquiryPriceCreateInstance）用于查询新购实例价格。
    */
   async InquiryPriceCreateInstance(
     req: InquiryPriceCreateInstanceRequest,
@@ -800,7 +800,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关闭外网
+   * 本接口（ReleaseWanAddress）用于关闭外网访问。
    */
   async ReleaseWanAddress(
     req: ReleaseWanAddressRequest,
@@ -810,7 +810,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+   * 本接口（DisassociateSecurityGroups）用于安全组批量解绑实例。
    */
   async DisassociateSecurityGroups(
     req: DisassociateSecurityGroupsRequest,
@@ -840,7 +840,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Proxy模拟故障接口
+   * 本接口（SwitchProxy）为 Proxy 模拟故障接口。
    */
   async SwitchProxy(
     req: SwitchProxyRequest,
@@ -850,7 +850,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 包年包月实例退还
+   * 本接口（DestroyPrepaidInstance）用于退还包年包月计费的 Redis 实例。
    */
   async DestroyPrepaidInstance(
     req: DestroyPrepaidInstanceRequest,
@@ -880,7 +880,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按量计费实例销毁
+   * 本接口（DestroyPostpaidInstance）用于销毁按量计费实例。
    */
   async DestroyPostpaidInstance(
     req: DestroyPostpaidInstanceRequest,
@@ -890,7 +890,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例解隔离
+   * 本接口（StartupInstance）用于实例解隔离。
    */
   async StartupInstance(
     req: StartupInstanceRequest,
@@ -900,7 +900,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例访问的耗时分布
+   * 本接口（DescribeInstanceMonitorTookDist）用于查询实例访问的耗时分布。
    */
   async DescribeInstanceMonitorTookDist(
     req: DescribeInstanceMonitorTookDistRequest,
@@ -930,7 +930,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置密码
+   * 本接口（ResetPassword）用于重置实例访问密码。
    */
   async ResetPassword(
     req: ResetPasswordRequest,
@@ -940,7 +940,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移除复制组成员
+   * 本接口（RemoveReplicationInstance）用于移除复制组中的实例。
    */
   async RemoveReplicationInstance(
     req: RemoveReplicationInstanceRequest,
@@ -950,7 +950,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例小版本升级
+   * 本接口（UpgradeSmallVersion）用于实例小版本升级。
    */
   async UpgradeSmallVersion(
     req: UpgradeSmallVersionRequest,
@@ -970,7 +970,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateReplicationGroup）用于创建复制组。
+   * 本接口（CreateReplicationGroup）用于创建复制组。
    */
   async CreateReplicationGroup(
     req: CreateReplicationGroupRequest,
@@ -990,7 +990,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询项目安全组信息
+   * 本接口（DescribeProjectSecurityGroup）用于查询项目安全组信息。
    */
   async DescribeProjectSecurityGroup(
     req: DescribeProjectSecurityGroupRequest,
@@ -1020,7 +1020,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用读写分离
+   * 本接口（EnableReplicaReadonly）用于启用读写分离功能。
    */
   async EnableReplicaReadonly(
     req: EnableReplicaReadonlyRequest,
@@ -1060,7 +1060,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Redis独享集群列表
+   * 本接口（DescribeRedisClusters）用于查询Redis独享集群列表。
    */
   async DescribeRedisClusters(
     req: DescribeRedisClustersRequest,
@@ -1070,7 +1070,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（KillMasterGroup）模拟故障。
+   * 本接口（KillMasterGroup）用于模拟故障。
    */
   async KillMasterGroup(
     req: KillMasterGroupRequest,
@@ -1080,7 +1080,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Redis实例列表信息。该接口已废弃。
+   * 本接口（DescribeCommonDBInstances）用于查询Redis实例列表信息。当前该接口已废弃。
    */
   async DescribeCommonDBInstances(
     req: DescribeCommonDBInstancesRequest,
@@ -1130,7 +1130,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+   * 在通过 DTS 支持跨可用区灾备的场景中，通过该接口（SwitchInstanceVip）交换实例 VIP 完成实例灾备切换。交换 VIP 后目标实例可写，源和目标实例VIP互换，同时源与目标实例间 DTS 同步任务断开。
    */
   async SwitchInstanceVip(
     req: SwitchInstanceVipRequest,
@@ -1170,7 +1170,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
+   * 本接口（ModifyMaintenanceWindow）用于修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
    */
   async ModifyMaintenanceWindow(
     req: ModifyMaintenanceWindowRequest,
@@ -1220,7 +1220,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启SSL
+   * 本接口（OpenSSL）用于开启 SSL 加密认证功能。
    */
   async OpenSSL(
     req: OpenSSLRequest,
@@ -1250,7 +1250,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询复制组信息
+   * 本接口（DescribeReplicationGroupInstance）用于查询复制组信息。
    */
   async DescribeReplicationGroupInstance(
     req: DescribeReplicationGroupInstanceRequest,
@@ -1310,7 +1310,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Redis独享集群概览信息
+   * 本接口（DescribeRedisClusterOverview）用于查询 Redis 独享集群概览信息。
    */
   async DescribeRedisClusterOverview(
     req: DescribeRedisClusterOverviewRequest,
@@ -1320,7 +1320,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 应用参数模板到实例
+   * 本接口（ApplyParamsTemplate）用于应用参数模板到实例。
    */
   async ApplyParamsTemplate(
     req: ApplyParamsTemplateRequest,
@@ -1360,7 +1360,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关闭SSL
+   * 本接口（CloseSSL）用于关闭SSL加密认证。
    */
   async CloseSSL(
     req: CloseSSLRequest,

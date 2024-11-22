@@ -25696,6 +25696,14 @@ export interface VulInfoList {
     CvssScore?: number;
     /**
      * 漏洞标签 多个逗号分割
+  
+  存在EXP:EXP
+  在野攻击:KNOWN_EXPLOITED
+  本地利用:LOCAL
+  必修漏洞:NEED_FIX
+  远程利用:NETWORK
+  存在POC:POC
+  系统重启:RESTART
      */
     Labels?: string;
     /**

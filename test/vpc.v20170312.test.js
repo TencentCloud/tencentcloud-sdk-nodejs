@@ -838,6 +838,16 @@ it("vpc.v20170312.DetachCcnInstances", async function () {
     }
 })
 
+it("vpc.v20170312.CreateReserveIpAddresses", async function () {
+    try {
+       const data = await client.CreateReserveIpAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.EnableRoutes", async function () {
     try {
        const data = await client.EnableRoutes({})
@@ -881,6 +891,16 @@ it("vpc.v20170312.ModifyHaVipAttribute", async function () {
 it("vpc.v20170312.ReleaseAddresses", async function () {
     try {
        const data = await client.ReleaseAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeReserveIpAddresses", async function () {
+    try {
+       const data = await client.DescribeReserveIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1051,6 +1071,16 @@ it("vpc.v20170312.DescribeCcnAttachedInstances", async function () {
 it("vpc.v20170312.DescribePrivateNatGatewayRegions", async function () {
     try {
        const data = await client.DescribePrivateNatGatewayRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyReserveIpAddress", async function () {
+    try {
+       const data = await client.ModifyReserveIpAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3241,6 +3271,16 @@ it("vpc.v20170312.CreateNetDetect", async function () {
 it("vpc.v20170312.ModifyHighPriorityRouteTableAttribute", async function () {
     try {
        const data = await client.ModifyHighPriorityRouteTableAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DeleteReserveIpAddresses", async function () {
+    try {
+       const data = await client.DeleteReserveIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

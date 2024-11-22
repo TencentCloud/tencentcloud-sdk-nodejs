@@ -2111,28 +2111,28 @@ export interface ConfigListItem {
   /**
    * 配置ID
    */
-  UconfigId: string
+  UconfigId?: string
   /**
    * 配置类型
    */
-  ConfigType: string
+  ConfigType?: string
   /**
    * 配置名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigName: string
+  ConfigName?: string
   /**
    * 配置内容
    */
-  ConfigContent: string
+  ConfigContent?: string
   /**
    * 增加配置时间
    */
-  CreateTimestamp: string
+  CreateTimestamp?: string
   /**
    * 修改配置时间
    */
-  UpdateTimestamp: string
+  UpdateTimestamp?: string
 }
 
 /**

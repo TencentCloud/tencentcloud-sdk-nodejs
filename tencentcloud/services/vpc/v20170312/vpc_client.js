@@ -643,6 +643,12 @@ LimitTypes取值范围：
         return this.request("DetachCcnInstances", req, cb);
     }
     /**
+     * 创建内网保留IP
+     */
+    async CreateReserveIpAddresses(req, cb) {
+        return this.request("CreateReserveIpAddresses", req, cb);
+    }
+    /**
      * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
 本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */
@@ -674,6 +680,12 @@ LimitTypes取值范围：
      */
     async ReleaseAddresses(req, cb) {
         return this.request("ReleaseAddresses", req, cb);
+    }
+    /**
+     * 查询内网保留 IP
+     */
+    async DescribeReserveIpAddresses(req, cb) {
+        return this.request("DescribeReserveIpAddresses", req, cb);
     }
     /**
      * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
@@ -780,6 +792,12 @@ LimitTypes取值范围：
      */
     async DescribePrivateNatGatewayRegions(req, cb) {
         return this.request("DescribePrivateNatGatewayRegions", req, cb);
+    }
+    /**
+     * 修改内网保留 IP
+     */
+    async ModifyReserveIpAddress(req, cb) {
+        return this.request("ModifyReserveIpAddress", req, cb);
     }
     /**
      * 本接口（DisassociateNatGatewayAddress）用于NAT网关解绑弹性IP。
@@ -2028,7 +2046,7 @@ LimitTypes取值范围：
         return this.request("DisassociateVpcEndPointSecurityGroups", req, cb);
     }
     /**
-     * 本接口（CloneSecurityGroup）用于根据存量的安全组，克隆创建出同样规则配置的安全组。仅克隆安全组及其规则信息，不会克隆安全组标签信息。
+     * 本接口（CloneSecurityGroup）用于根据存量的安全组，克隆创建出同样规则配置的安全组。默认仅克隆安全组及其规则信息，可通过入参开启克隆安全组标签信息。
      */
     async CloneSecurityGroup(req, cb) {
         return this.request("CloneSecurityGroup", req, cb);
@@ -2241,6 +2259,12 @@ LimitTypes取值范围：
      */
     async ModifyHighPriorityRouteTableAttribute(req, cb) {
         return this.request("ModifyHighPriorityRouteTableAttribute", req, cb);
+    }
+    /**
+     * 删除内网保留IP
+     */
+    async DeleteReserveIpAddresses(req, cb) {
+        return this.request("DeleteReserveIpAddresses", req, cb);
     }
     /**
      * 修改 IDC通道信息

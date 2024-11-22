@@ -9223,6 +9223,11 @@ export interface SegmentRecognitionItem {
      */
     SegmentUrl?: string;
     /**
+     * 拆条片段封面。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CovImgUrl?: string;
+    /**
      * 分段标题。
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -9232,6 +9237,10 @@ export interface SegmentRecognitionItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Summary?: string;
+    /**
+     * 分段关键词。
+     */
+    Keywords?: Array<string>;
     /**
      * 直播切片对应直播起始时间点，采用 ISO 日期格式。
   注意：此字段可能返回 null，表示取不到有效值。

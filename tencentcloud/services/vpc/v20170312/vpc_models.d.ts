@@ -1025,54 +1025,37 @@ export interface IpField {
     Comment?: boolean;
 }
 /**
- * 云联网实例绑定路由表信息
+ * DescribeReserveIpAddresses请求参数结构体
  */
-export interface InstanceBind {
+export interface DescribeReserveIpAddressesRequest {
     /**
-     * 云联网ID。
+     * 内网保留IP唯一ID 列表
      */
-    CcnId?: string;
+    ReserveIpIds?: Array<string>;
     /**
-     * 实例类型：VPC，DIRECTCONNECT，BMVPC，EDGE，EDGE_TUNNEL，EDGE_VPNGW，VPNGW。
+     * 过滤条件，参数不支持同时指定ReserveIpIds和Filters。
+  
+  reserve-ip-id  - String - （过滤条件）内网保留 IP唯一 ID，形如：rsvip-pvqgv9vi。
+  vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。
+  subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。
+  address-ip - String - （过滤条件）内网保留 IP 地址，形如：192.168.0.10。
+  ip-type - String - （过滤条件）业务类型 ipType，0。
+  name - String - （过滤条件）名称。
+  state - String - （过滤条件）状态，可选值：Bind， UnBind。
+  resource-id - String - （过滤条件）绑定的实例资源，形如：eni-059qmnif。
+  tag-key - String -（过滤条件）按照标签键进行过滤。
+  tag:tag-key - String - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
+  
      */
-    InstanceType?: string;
+    Filters?: Array<Filter>;
     /**
-     * 实例ID。
+     * 偏移量。
      */
-    InstanceId?: string;
+    Offset?: number;
     /**
-     * 实例绑定路由表的时间。
+     * 请求对象个数。
      */
-    InstanceBindTime?: string;
-    /**
-     * 路由表ID。
-     */
-    RouteTableId?: string;
-    /**
-     * 实例名称。
-     */
-    InstanceName?: string;
-    /**
-     * 实例所在地域。
-     */
-    InstanceRegion?: string;
-    /**
-     * 实例所属的账户uin。
-     */
-    InstanceUin?: string;
-    /**
-     * 关联实例状态：
-  <li>`PENDING`：申请中</li>
-  <li>`ACTIVE`：已连接</li>
-  <li>`EXPIRED`：已过期</li>
-  <li>`REJECTED`：已拒绝</li>
-  <li>`DELETED`：已删除</li>
-  <li>`FAILED`：失败的（2小时后将异步强制解关联）</li>
-  <li>`ATTACHING`：关联中</li>
-  <li>`DETACHING`：解关联中</li>
-  <li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
-     */
-    State?: string;
+    Limit?: number;
 }
 /**
  * AddBandwidthPackageResources请求参数结构体
@@ -1476,11 +1459,11 @@ export interface DescribeFlowLogsRequest {
      */
     CloudLogState?: string;
     /**
-     * 按某个字段排序,支持字段：flowLogName,createTime，默认按createTime。
+     * 按某个字段排序,支持字段：flowLogName,createTime，默认按CreatedTime。
      */
     OrderField?: string;
     /**
-     * 升序（asc）还是降序（desc）,默认：desc。
+     * 升序（ASC）还是降序（DESC）,默认：DESC。
      */
     OrderDirection?: string;
     /**
@@ -1546,6 +1529,11 @@ export interface CloneSecurityGroupRequest {
      * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
      */
     RemoteRegion?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+  若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。
+     */
+    Tags?: Tag;
 }
 /**
  * AssociateNatGatewayAddress请求参数结构体
@@ -1596,6 +1584,56 @@ export interface DescribeFlowLogsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 云联网实例绑定路由表信息
+ */
+export interface InstanceBind {
+    /**
+     * 云联网ID。
+     */
+    CcnId?: string;
+    /**
+     * 实例类型：VPC，DIRECTCONNECT，BMVPC，EDGE，EDGE_TUNNEL，EDGE_VPNGW，VPNGW。
+     */
+    InstanceType?: string;
+    /**
+     * 实例ID。
+     */
+    InstanceId?: string;
+    /**
+     * 实例绑定路由表的时间。
+     */
+    InstanceBindTime?: string;
+    /**
+     * 路由表ID。
+     */
+    RouteTableId?: string;
+    /**
+     * 实例名称。
+     */
+    InstanceName?: string;
+    /**
+     * 实例所在地域。
+     */
+    InstanceRegion?: string;
+    /**
+     * 实例所属的账户uin。
+     */
+    InstanceUin?: string;
+    /**
+     * 关联实例状态：
+  <li>`PENDING`：申请中</li>
+  <li>`ACTIVE`：已连接</li>
+  <li>`EXPIRED`：已过期</li>
+  <li>`REJECTED`：已拒绝</li>
+  <li>`DELETED`：已删除</li>
+  <li>`FAILED`：失败的（2小时后将异步强制解关联）</li>
+  <li>`ATTACHING`：关联中</li>
+  <li>`DETACHING`：解关联中</li>
+  <li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
+     */
+    State?: string;
 }
 /**
  * ModifyHighPriorityRouteAttribute返回参数结构体
@@ -2374,17 +2412,9 @@ export interface InquiryPriceRenewVpnGatewayResponse {
     RequestId?: string;
 }
 /**
- * DescribeBandwidthPackages返回参数结构体
+ * DeleteReserveIpAddresses返回参数结构体
  */
-export interface DescribeBandwidthPackagesResponse {
-    /**
-     * 符合条件的带宽包数量
-     */
-    TotalCount?: number;
-    /**
-     * 描述带宽包详细信息
-     */
-    BandwidthPackageSet?: Array<BandwidthPackage>;
+export interface DeleteReserveIpAddressesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4128,12 +4158,10 @@ export interface AssociateInstancesToCcnRouteTableResponse {
 export interface DescribeNetDetectStatesResponse {
     /**
      * 符合条件的网络探测验证结果对象数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetDetectStateSet?: Array<NetDetectState>;
     /**
      * 符合条件的网络探测验证结果对象数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -4294,7 +4322,6 @@ export interface HaVipAssociation {
 export interface DescribeAssistantCidrResponse {
     /**
      * 符合条件的辅助CIDR数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssistantCidrSet?: Array<AssistantCidr>;
     /**
@@ -5181,6 +5208,26 @@ export interface ReplaceRouteTableAssociationRequest {
     RouteTableId: string;
 }
 /**
+ * 私网NAT网关跨域信息
+ */
+export interface PrivateNatCrossDomainInfo {
+    /**
+     * 跨域私网NAT关联的云联网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
+    /**
+     * 跨域私网NAT本端Vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalVpcId?: string;
+    /**
+     * 跨域私网NAT对端Vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeerVpcId?: string;
+}
+/**
  * 本端目的IP端口转换复杂结构
  */
 export interface LocalDestinationIpPortTranslationNatRule {
@@ -5769,6 +5816,179 @@ export interface WithdrawNotifyRoutesRequest {
     RouteItemIds: Array<string>;
 }
 /**
+ * VPC资源看板（各资源个数）
+ */
+export interface ResourceDashboard {
+    /**
+     * Vpc实例ID，例如：vpc-bq4bzxpj。
+     */
+    VpcId: string;
+    /**
+     * 子网实例ID，例如：subnet-bthucmmy。
+     */
+    SubnetId: string;
+    /**
+     * 基础网络互通。
+     */
+    Classiclink: number;
+    /**
+     * 专线网关。
+     */
+    Dcg: number;
+    /**
+     * 对等连接。
+     */
+    Pcx: number;
+    /**
+     * 统计当前除云服务器 IP、弹性网卡IP和网络探测IP以外的所有已使用的IP总数。云服务器 IP、弹性网卡IP和网络探测IP单独计数。
+     */
+    Ip: number;
+    /**
+     * NAT网关。
+     */
+    Nat: number;
+    /**
+     * VPN网关。
+     */
+    Vpngw: number;
+    /**
+     * 流日志。
+     */
+    FlowLog: number;
+    /**
+     * 网络探测。
+     */
+    NetworkDetect: number;
+    /**
+     * 网络ACL。
+     */
+    NetworkACL: number;
+    /**
+     * 云主机。
+     */
+    CVM: number;
+    /**
+     * 负载均衡。
+     */
+    LB: number;
+    /**
+     * 关系型数据库。
+     */
+    CDB: number;
+    /**
+     * 云数据库 TencentDB for Memcached。
+     */
+    Cmem: number;
+    /**
+     * 时序数据库。
+     */
+    CTSDB: number;
+    /**
+     * 数据库 TencentDB for MariaDB（TDSQL）。
+     */
+    MariaDB: number;
+    /**
+     * 数据库 TencentDB for SQL Server。
+     */
+    SQLServer: number;
+    /**
+     * 云数据库 TencentDB for PostgreSQL。
+     */
+    Postgres: number;
+    /**
+     * 网络附加存储。
+     */
+    NAS: number;
+    /**
+     * Snova云数据仓库。
+     */
+    Greenplumn: number;
+    /**
+     * 消息队列 CKAFKA。
+     */
+    Ckafka: number;
+    /**
+     * Grocery。
+     */
+    Grocery: number;
+    /**
+     * 数据加密服务。
+     */
+    HSM: number;
+    /**
+     * 游戏存储 Tcaplus。
+     */
+    Tcaplus: number;
+    /**
+     * Cnas。
+     */
+    Cnas: number;
+    /**
+     * HTAP 数据库 TiDB。
+     */
+    TiDB: number;
+    /**
+     * EMR 集群。
+     */
+    Emr: number;
+    /**
+     * SEAL。
+     */
+    SEAL: number;
+    /**
+     * 文件存储 CFS。
+     */
+    CFS: number;
+    /**
+     * Oracle。
+     */
+    Oracle: number;
+    /**
+     * ElasticSearch服务。
+     */
+    ElasticSearch: number;
+    /**
+     * 区块链服务。
+     */
+    TBaaS: number;
+    /**
+     * Itop。
+     */
+    Itop: number;
+    /**
+     * 云数据库审计。
+     */
+    DBAudit: number;
+    /**
+     * 企业级云数据库 CynosDB for Postgres。
+     */
+    CynosDBPostgres: number;
+    /**
+     * 数据库 TencentDB for Redis。
+     */
+    Redis: number;
+    /**
+     * 数据库 TencentDB for MongoDB。
+     */
+    MongoDB: number;
+    /**
+     * 分布式数据库 TencentDB for TDSQL。
+     */
+    DCDB: number;
+    /**
+     * 企业级云数据库 CynosDB for MySQL。
+     */
+    CynosDBMySQL: number;
+    /**
+     * 子网。
+     */
+    Subnet: number;
+    /**
+     * 路由表。
+     */
+    RouteTable: number;
+}
+/**
  * DescribeSubnetResourceDashboard请求参数结构体
  */
 export interface DescribeSubnetResourceDashboardRequest {
@@ -6252,7 +6472,6 @@ export interface NatGatewayDestinationIpPortTranslationNatRule {
 export interface CloneSecurityGroupResponse {
     /**
      * 安全组对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroup?: SecurityGroup;
     /**
@@ -6616,177 +6835,21 @@ export interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRespo
     RequestId?: string;
 }
 /**
- * VPC资源看板（各资源个数）
+ * DescribeReserveIpAddresses返回参数结构体
  */
-export interface ResourceDashboard {
+export interface DescribeReserveIpAddressesResponse {
     /**
-     * Vpc实例ID，例如：vpc-bq4bzxpj。
+     * 内网保留 IP返回信息。
      */
-    VpcId: string;
+    ReserveIpAddressSet?: Array<ReserveIpAddressInfo>;
     /**
-     * 子网实例ID，例如：subnet-bthucmmy。
+     * 返回内网保留IP的个数。
      */
-    SubnetId: string;
+    TotalCount?: number;
     /**
-     * 基础网络互通。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Classiclink: number;
-    /**
-     * 专线网关。
-     */
-    Dcg: number;
-    /**
-     * 对等连接。
-     */
-    Pcx: number;
-    /**
-     * 统计当前除云服务器 IP、弹性网卡IP和网络探测IP以外的所有已使用的IP总数。云服务器 IP、弹性网卡IP和网络探测IP单独计数。
-     */
-    Ip: number;
-    /**
-     * NAT网关。
-     */
-    Nat: number;
-    /**
-     * VPN网关。
-     */
-    Vpngw: number;
-    /**
-     * 流日志。
-     */
-    FlowLog: number;
-    /**
-     * 网络探测。
-     */
-    NetworkDetect: number;
-    /**
-     * 网络ACL。
-     */
-    NetworkACL: number;
-    /**
-     * 云主机。
-     */
-    CVM: number;
-    /**
-     * 负载均衡。
-     */
-    LB: number;
-    /**
-     * 关系型数据库。
-     */
-    CDB: number;
-    /**
-     * 云数据库 TencentDB for Memcached。
-     */
-    Cmem: number;
-    /**
-     * 时序数据库。
-     */
-    CTSDB: number;
-    /**
-     * 数据库 TencentDB for MariaDB（TDSQL）。
-     */
-    MariaDB: number;
-    /**
-     * 数据库 TencentDB for SQL Server。
-     */
-    SQLServer: number;
-    /**
-     * 云数据库 TencentDB for PostgreSQL。
-     */
-    Postgres: number;
-    /**
-     * 网络附加存储。
-     */
-    NAS: number;
-    /**
-     * Snova云数据仓库。
-     */
-    Greenplumn: number;
-    /**
-     * 消息队列 CKAFKA。
-     */
-    Ckafka: number;
-    /**
-     * Grocery。
-     */
-    Grocery: number;
-    /**
-     * 数据加密服务。
-     */
-    HSM: number;
-    /**
-     * 游戏存储 Tcaplus。
-     */
-    Tcaplus: number;
-    /**
-     * Cnas。
-     */
-    Cnas: number;
-    /**
-     * HTAP 数据库 TiDB。
-     */
-    TiDB: number;
-    /**
-     * EMR 集群。
-     */
-    Emr: number;
-    /**
-     * SEAL。
-     */
-    SEAL: number;
-    /**
-     * 文件存储 CFS。
-     */
-    CFS: number;
-    /**
-     * Oracle。
-     */
-    Oracle: number;
-    /**
-     * ElasticSearch服务。
-     */
-    ElasticSearch: number;
-    /**
-     * 区块链服务。
-     */
-    TBaaS: number;
-    /**
-     * Itop。
-     */
-    Itop: number;
-    /**
-     * 云数据库审计。
-     */
-    DBAudit: number;
-    /**
-     * 企业级云数据库 CynosDB for Postgres。
-     */
-    CynosDBPostgres: number;
-    /**
-     * 数据库 TencentDB for Redis。
-     */
-    Redis: number;
-    /**
-     * 数据库 TencentDB for MongoDB。
-     */
-    MongoDB: number;
-    /**
-     * 分布式数据库 TencentDB for TDSQL。
-     */
-    DCDB: number;
-    /**
-     * 企业级云数据库 CynosDB for MySQL。
-     */
-    CynosDBMySQL: number;
-    /**
-     * 子网。
-     */
-    Subnet: number;
-    /**
-     * 路由表。
-     */
-    RouteTable: number;
+    RequestId?: string;
 }
 /**
  * DescribeSnapshotFiles返回参数结构体
@@ -7448,22 +7511,18 @@ export interface DescribeNetworkInterfaceLimitResponse {
     EniPrivateIpAddressQuantity?: number;
     /**
      * 扩展型网卡配额。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendEniQuantity?: number;
     /**
      * 每个扩展型弹性网卡可以分配的IP配额。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendEniPrivateIpAddressQuantity?: number;
     /**
      * 中继网卡配额。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubEniQuantity?: number;
     /**
      * 每个中继网卡可以分配的IP配额。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubEniPrivateIpAddressQuantity?: number;
     /**
@@ -8408,6 +8467,19 @@ export interface EnableVpnGatewaySslClientCertRequest {
      * SSL-VPN-CLIENT 实例ID列表。批量启用时使用。不可和SslVpnClientId同时使用。
      */
     SslVpnClientIds?: Array<string>;
+}
+/**
+ * DeleteReserveIpAddresses请求参数结构体
+ */
+export interface DeleteReserveIpAddressesRequest {
+    /**
+     * VPC唯一 ID。
+     */
+    VpcId: string;
+    /**
+     * 内网保留IP地址列表。
+     */
+    ReserveIpIds: Array<string>;
 }
 /**
  * DescribeVpnGatewayCcnRoutes返回参数结构体
@@ -9852,24 +9924,13 @@ export interface AllocateAddressesRequest {
     ClientToken?: string;
 }
 /**
- * 私网NAT网关跨域信息
+ * DeleteAssistantCidr返回参数结构体
  */
-export interface PrivateNatCrossDomainInfo {
+export interface DeleteAssistantCidrResponse {
     /**
-     * 跨域私网NAT关联的云联网ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CcnId?: string;
-    /**
-     * 跨域私网NAT本端Vpc
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LocalVpcId?: string;
-    /**
-     * 跨域私网NAT对端Vpc
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PeerVpcId?: string;
+    RequestId?: string;
 }
 /**
  * DescribeDhcpIps返回参数结构体
@@ -9878,11 +9939,11 @@ export interface DescribeDhcpIpsResponse {
     /**
      * 实例详细信息列表。
      */
-    DhcpIpSet: Array<DhcpIp>;
+    DhcpIpSet?: Array<DhcpIp>;
     /**
      * 符合条件的实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9921,6 +9982,19 @@ export interface ModifyAssistantCidrRequest {
      * 待删除的辅助CIDR。CIDR数组，格式如["10.0.0.0/16", "172.16.0.0/16"]，入参NewCidrBlocks和OldCidrBlocks至少需要其一。
      */
     OldCidrBlocks?: Array<string>;
+}
+/**
+ * CreateReserveIpAddresses返回参数结构体
+ */
+export interface CreateReserveIpAddressesResponse {
+    /**
+     * 内网保留 IP返回信息
+     */
+    ReserveIpAddressSet?: Array<ReserveIpAddressInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateIp6Translators请求参数结构体
@@ -10471,13 +10545,41 @@ export interface CreateVpcEndPointResponse {
     RequestId?: string;
 }
 /**
- * DeleteAssistantCidr返回参数结构体
+ * CreateReserveIpAddresses请求参数结构体
  */
-export interface DeleteAssistantCidrResponse {
+export interface CreateReserveIpAddressesRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * VPC唯一 ID。
      */
-    RequestId?: string;
+    VpcId: string;
+    /**
+     * 指定IP申请的内网保留IP地址。
+     */
+    IpAddresses?: Array<string>;
+    /**
+     * 不指定IP地址，指定个数自动分配保留内网IP。
+     */
+    IpAddressCount?: number;
+    /**
+     * 子网唯一 ID。
+     */
+    SubnetId?: string;
+    /**
+     * 内网保留 IP名称。
+     */
+    Name?: string;
+    /**
+     * 内网保留 IP描述。
+     */
+    Description?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
+    ClientToken?: string;
 }
 /**
  * DescribeCcnRegionBandwidthLimits返回参数结构体
@@ -11530,6 +11632,27 @@ export interface DescribeVpcPrivateIpAddressesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyReserveIpAddress请求参数结构体
+ */
+export interface ModifyReserveIpAddressRequest {
+    /**
+     * VPC唯一 ID。
+     */
+    VpcId: string;
+    /**
+     * 内网保留IP唯一ID。
+     */
+    ReserveIpId: string;
+    /**
+     * 内网保留 IP名称。
+     */
+    Name?: string;
+    /**
+     * 内网保留 IP描述。
+     */
+    Description?: string;
+}
+/**
  * DisableRoutes请求参数结构体
  */
 export interface DisableRoutesRequest {
@@ -11748,17 +11871,13 @@ export interface DescribeCustomerGatewaysRequest {
     Limit?: number;
 }
 /**
- * RenewAddresses请求参数结构体
+ * ModifyReserveIpAddress返回参数结构体
  */
-export interface RenewAddressesRequest {
+export interface ModifyReserveIpAddressResponse {
     /**
-     * EIP唯一标识ID列表，形如'eip-xxxx'
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    AddressIds: Array<string>;
-    /**
-     * 续费参数
-     */
-    AddressChargePrepaid: AddressChargePrepaid;
+    RequestId?: string;
 }
 /**
  * 描述网络中心每个产品的配额信息
@@ -14407,6 +14526,23 @@ export interface RefreshDirectConnectGatewayRouteToNatGatewayResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBandwidthPackages返回参数结构体
+ */
+export interface DescribeBandwidthPackagesResponse {
+    /**
+     * 符合条件的带宽包数量
+     */
+    TotalCount?: number;
+    /**
+     * 描述带宽包详细信息
+     */
+    BandwidthPackageSet?: Array<BandwidthPackage>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteRouteTable请求参数结构体
  */
 export interface DeleteRouteTableRequest {
@@ -14949,7 +15085,6 @@ export interface CreateRoutesResponse {
 export interface DescribeSecurityGroupsResponse {
     /**
      * 安全组对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupSet?: Array<SecurityGroup>;
     /**
@@ -15142,6 +15277,55 @@ export interface DescribeSnapshotAttachedInstancesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 内网保留IP数据
+ */
+export interface ReserveIpAddressInfo {
+    /**
+     * 内网保留IP唯一 ID。
+     */
+    ReserveIpId?: string;
+    /**
+     * VPC唯一 ID。
+     */
+    VpcId?: string;
+    /**
+     * 子网唯一 ID。
+     */
+    SubnetId?: string;
+    /**
+     * 内网保留IP地址。
+     */
+    ReserveIpAddress?: string;
+    /**
+     * 内网保留 IP绑定的资源实例 ID。
+     */
+    ResourceId?: string;
+    /**
+     * 产品申请的IpType。
+     */
+    IpType?: number;
+    /**
+     * 绑定状态，UnBind-未绑定， Bind-绑定。
+     */
+    State?: string;
+    /**
+     * 保留 IP名称。
+     */
+    Name?: string;
+    /**
+     * 保留 IP描述。
+     */
+    Description?: string;
+    /**
+     * 创建时间。
+     */
+    CreatedTime?: string;
+    /**
+     * 标签键值对。
+     */
+    TagSet?: Array<Tag>;
 }
 /**
  * IPV6转换规则
@@ -16475,7 +16659,6 @@ export interface HealthCheckConfig {
 export interface CreateAssistantCidrResponse {
     /**
      * 辅助CIDR数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssistantCidrSet?: Array<AssistantCidr>;
     /**
@@ -16950,6 +17133,19 @@ export interface ModifySubnetAttributeRequest {
     EnableBroadcast?: string;
 }
 /**
+ * RenewAddresses请求参数结构体
+ */
+export interface RenewAddressesRequest {
+    /**
+     * EIP唯一标识ID列表，形如'eip-xxxx'
+     */
+    AddressIds: Array<string>;
+    /**
+     * 续费参数
+     */
+    AddressChargePrepaid: AddressChargePrepaid;
+}
+/**
  * ModifyVpcEndPointServiceWhiteList返回参数结构体
  */
 export interface ModifyVpcEndPointServiceWhiteListResponse {
@@ -17081,12 +17277,10 @@ export interface AcceptAttachCcnInstancesResponse {
 export interface DescribeUsedIpAddressResponse {
     /**
      * 占用ip地址的资源信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IpAddressStates?: Array<IpAddressStates>;
     /**
      * 返回占用资源的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -17100,12 +17294,10 @@ export interface DescribeUsedIpAddressResponse {
 export interface DescribeNetDetectsResponse {
     /**
      * 符合条件的网络探测对象数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetDetectSet?: Array<NetDetect>;
     /**
      * 符合条件的网络探测对象数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**

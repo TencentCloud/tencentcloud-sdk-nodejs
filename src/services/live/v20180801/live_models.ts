@@ -16,6 +16,40 @@
  */
 
 /**
+ * DescribeCasterDisplayInfo返回参数结构体
+ */
+export interface DescribeCasterDisplayInfoResponse {
+  /**
+   * 导播台状态
+0：停止状态，无预监，无主监 
+1：无预监，有主监 
+2：有预监，无主监 
+3：有预监，有主监
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 预监使用的展示参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PvwDisplayInfo?: CasterDisplayInfo
+  /**
+   * 主监使用的展示参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PgmDisplayInfo?: CasterDisplayInfo
+  /**
+   * 启动直播的时间，值为unix时间戳。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartLiveTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveXP2PDetailInfoList返回参数结构体
  */
 export interface DescribeLiveXP2PDetailInfoListResponse {
@@ -65,6 +99,16 @@ export interface DeleteLiveRecordTemplateRequest {
    * DescribeRecordTemplates接口获取到的模板 ID。
    */
   TemplateId: number
+}
+
+/**
+ * ModifyLiveTimeShiftTemplate返回参数结构体
+ */
+export interface ModifyLiveTimeShiftTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -622,6 +666,29 @@ export interface DescribeMonitorReportResponse {
 }
 
 /**
+ * DescribeCasterPlayUrl返回参数结构体
+ */
+export interface DescribeCasterPlayUrlResponse {
+  /**
+   * 播放url。
+当导播台不存在预监或主监时，若请求预监或主监的播放地址，该字段为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlayUrl?: string
+  /**
+   * webrtc协议播放地址。
+当导播台不存在预监或主监时，若请求预监或主监的webrtc播放地址，该字段为空。
+注：webrtc协议播放地址需配合腾讯云快直播播放sdk方可使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebRTCPlayUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelCommonMixStream返回参数结构体
  */
 export interface CancelCommonMixStreamResponse {
@@ -706,6 +773,61 @@ export interface DescribeCallbackRecordsListRequest {
 0为成功，其他为失败。
    */
   ResultCode?: number
+}
+
+/**
+ * 导播台展示信息，包括使用的布局、水印、字幕、转场、音频等信息
+ */
+export interface CasterDisplayInfo {
+  /**
+   * 布局Index。
+如果使用自定义布局，为自定义布局下标。
+如果使用单输入布局，如使用输入1，则LayoutIndexType=1， 且LayoutIndex=1，以此类推。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LayoutIndex?: number
+  /**
+   * 使用的水印Index列表。
+注：当作为入参使用时，列表中的水印Index需要已经存在。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MarkPicIndexList?: Array<number | bigint>
+  /**
+   * 使用的文字水印Index列表。
+注：作为入参使用时，列表中的Index需要已经存在。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MarkWordIndexList?: Array<number | bigint>
+  /**
+   * 使用的转场类型。
+注：支持的转场类型可通过DescribeCasterTransitionTypes接口获取。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransitionType?: string
+  /**
+   * 使用的音频输入Index列表。
+注：当该字段非空时，表示使用布局中对应的输入源的视频，AudioIndexList中对应的输入源的音频。且这些输入源需已存在。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioIndexList?: Array<number | bigint>
+  /**
+   * 作为入参时，表示使用点播输入源，单画面输入时，点播文件是否从头开始播放。
+默认为0。
+有效值，0,1。
+0代表不从头播放
+1代表从头播放
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputStartType?: number
+  /**
+   * LayoutIndex类型，
+默认值:0
+可选值[0,1]
+0:默认类型，代表普通布局
+1:单输入类型，代表单输入布局
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LayoutIndexType?: number
 }
 
 /**
@@ -1325,6 +1447,27 @@ export interface DescribeLogDownloadListResponse {
 }
 
 /**
+ * 转场信息
+ */
+export interface TransitionTypeInfo {
+  /**
+   * 转场名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransitionType?: string
+  /**
+   * 素材url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceUrl?: string
+  /**
+   * 转场的下标，可用来排序，从1开始递增
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: number
+}
+
+/**
  * DeleteLivePadTemplate返回参数结构体
  */
 export interface DeleteLivePadTemplateResponse {
@@ -1332,6 +1475,63 @@ export interface DeleteLivePadTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 域名证书信息
+ */
+export interface DomainCertInfo {
+  /**
+   * 证书Id。
+   */
+  CertId?: number
+  /**
+   * 证书名称。
+   */
+  CertName?: string
+  /**
+   * 描述信息。
+   */
+  Description?: string
+  /**
+   * 创建时间，UTC格式。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  CreateTime?: string
+  /**
+   * 证书内容。
+   */
+  HttpsCrt?: string
+  /**
+   * 证书类型。
+0：用户添加证书，
+1：腾讯云托管证书。
+   */
+  CertType?: number
+  /**
+   * 证书过期时间，UTC格式。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  CertExpireTime?: string
+  /**
+   * 使用此证书的域名名称。
+   */
+  DomainName?: string
+  /**
+   * 证书状态。
+   */
+  Status?: number
+  /**
+   * 证书本身标识的域名列表。
+比如: ["*.x.com"]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertDomains?: Array<string>
+  /**
+   * 腾讯云ssl的证书Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudCertId?: string
 }
 
 /**
@@ -1725,122 +1925,9 @@ export interface PlayAuthKeyInfo {
 }
 
 /**
- * ModifyLiveTranscodeTemplate请求参数结构体
+ * ModifyLiveStreamMonitor返回参数结构体
  */
-export interface ModifyLiveTranscodeTemplateRequest {
-  /**
-   * 模板 Id。
-   */
-  TemplateId: number
-  /**
-   * 视频编码：h264/h265/origin，默认origin。
-
-origin: 保持原始编码格式
-   */
-  Vcodec?: string
-  /**
-   * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
-   */
-  Acodec?: string
-  /**
-   * 音频码率，默认0。
-范围：0-500。
-   */
-  AudioBitrate?: number
-  /**
-   * 模板描述。
-   */
-  Description?: string
-  /**
-   * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-   */
-  VideoBitrate?: number
-  /**
-   * 宽。0-3000。
-数值必须是2的倍数，0是原始宽度
-   */
-  Width?: number
-  /**
-   * 是否保留视频，0：否，1：是。默认1。
-   */
-  NeedVideo?: number
-  /**
-   * 是否保留音频，0：否，1：是。默认1。
-   */
-  NeedAudio?: number
-  /**
-   * 高。0-3000。
-数值必须是2的倍数，0是原始宽度
-   */
-  Height?: number
-  /**
-   * 帧率，默认0。
-范围0-60
-   */
-  Fps?: number
-  /**
-   * 关键帧间隔，单位：秒。
-范围2-6
-   */
-  Gop?: number
-  /**
-   * 旋转角度，默认0。
-可取值：0，90，180，270
-   */
-  Rotate?: number
-  /**
-   * 编码质量：
-baseline/main/high。
-   */
-  Profile?: string
-  /**
-   * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
-   */
-  BitrateToOrig?: number
-  /**
-   * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
-   */
-  HeightToOrig?: number
-  /**
-   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
-   */
-  FpsToOrig?: number
-  /**
-   * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
-   */
-  AdaptBitratePercent?: number
-  /**
-   * 是否以短边作为高度，0：否，1：是。默认0。
-   */
-  ShortEdgeAsHeight?: number
-  /**
-   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
-不传递或者为空字符串，清空之前的DRM配置。
-   */
-  DRMType?: string
-  /**
-   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
-不传递或者为空字符串，清空之前的DRM配置。
-   */
-  DRMTracks?: string
-}
-
-/**
- * ForbidLiveDomain返回参数结构体
- */
-export interface ForbidLiveDomainResponse {
+export interface ModifyLiveStreamMonitorResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2483,6 +2570,76 @@ export interface DescribeCasterTransitionTypesResponse {
 }
 
 /**
+ * CreateCaster请求参数结构体
+ */
+export interface CreateCasterRequest {
+  /**
+   * 导播台名称
+   */
+  CasterName?: string
+  /**
+   * 导播台的描述
+最大允许长度256
+   */
+  Description?: string
+  /**
+   * 导播台的过期时间戳。值为-1或unix时间戳。
+默认值为-1。
+当值为-1时，表示该导播台永不过期。
+当值为正常unix时间戳时，导播台将在该时间过期。
+导播台过期后，预监与主监画面将自动停止，转推自动停止。
+点播、直播url将停止转拉，推流url需自行停止推流。
+   */
+  ExpireTime?: number
+  /**
+   * 导播台延时播放时间，单位为秒。
+默认为0，最大支持300秒
+   */
+  DelayTime?: number
+  /**
+   * 导播台转场类型。
+默认为空。
+允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。
+   */
+  TransitionType?: string
+  /**
+   * 导播台主监输出的宽度，单位为像素。
+默认为1280，最大允许4096。
+   */
+  PgmWidth?: number
+  /**
+   * 导播台主监输出的高度，单位为像素。
+默认为720，最大允许2160。
+   */
+  PgmHeight?: number
+  /**
+   * 导播台主监输出的帧率。
+默认为0，表示随源输出。
+最大支持60。
+   */
+  PgmFps?: number
+  /**
+   * 导播台主监输出的码率，单位为kbps。
+默认为0，表示随源的码率输出。
+最大允许10000kbps。
+   */
+  PgmBitRate?: number
+  /**
+   * 导播台的计费类型。
+0 通用型 
+1 播单型。
+注： 本参数暂无作用。
+   */
+  FeeType?: number
+  /**
+   * 导播台主监输出的音频码率，单位为kbps。
+可选项：[0, 128, 192, 256]
+默认值为0，表示随源的音频码率输出。
+   */
+  PgmAudioBitRate?: number
+}
+
+/**
  * DescribeUploadStreamNums返回参数结构体
  */
 export interface DescribeUploadStreamNumsResponse {
@@ -2567,6 +2724,16 @@ export interface DescribeStreamPlayInfoListRequest {
    * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
    */
   ServiceName?: string
+}
+
+/**
+ * DescribeCasterDisplayInfo请求参数结构体
+ */
+export interface DescribeCasterDisplayInfoRequest {
+  /**
+   * 导播台ID
+   */
+  CasterId: number
 }
 
 /**
@@ -2782,6 +2949,20 @@ export interface DeleteLivePullStreamTaskRequest {
 }
 
 /**
+ * CopyCaster返回参数结构体
+ */
+export interface CopyCasterResponse {
+  /**
+   * 复制生成的导播台ID
+   */
+  CasterId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestartLivePullStreamTask返回参数结构体
  */
 export interface RestartLivePullStreamTaskResponse {
@@ -2802,6 +2983,16 @@ export interface StopLiveRecordResponse {
 }
 
 /**
+ * DeleteCaster返回参数结构体
+ */
+export interface DeleteCasterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteScreenshotTask请求参数结构体
  */
 export interface DeleteScreenshotTaskRequest {
@@ -2812,13 +3003,44 @@ export interface DeleteScreenshotTaskRequest {
 }
 
 /**
- * ModifyLiveTimeShiftTemplate返回参数结构体
+ * DescribePlayErrorCodeSumInfoList请求参数结构体
  */
-export interface ModifyLiveTimeShiftTemplateResponse {
+export interface DescribePlayErrorCodeSumInfoListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 起始时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
    */
-  RequestId?: string
+  StartTime: string
+  /**
+   * 结束时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+   */
+  EndTime: string
+  /**
+   * 播放域名列表，不填表示总体数据。
+   */
+  PlayDomains?: Array<string>
+  /**
+   * 页数，范围[1,1000]，默认值是1。
+   */
+  PageNum?: number
+  /**
+   * 每页个数，范围：[1,1000]，默认值是20。
+   */
+  PageSize?: number
+  /**
+   * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+   */
+  MainlandOrOversea?: string
+  /**
+   * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
+   */
+  GroupType?: string
+  /**
+   * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
+   */
+  OutLanguage?: string
 }
 
 /**
@@ -3054,145 +3276,49 @@ export interface DescribeDeliverLogDownListResponse {
 }
 
 /**
- * ModifyLivePullStreamTask请求参数结构体
+ * 直播垫片模板。
  */
-export interface ModifyLivePullStreamTaskRequest {
+export interface PadTemplate {
   /**
-   * 任务Id。
+   * 模板id。
    */
-  TaskId: string
+  TemplateId: number
   /**
-   * 操作人姓名。
+   * 模板名称。
    */
-  Operator: string
+  TemplateName: string
   /**
-   * 拉流源url列表。
-SourceType为直播（PullLivePushLive）只可以填1个，
-SourceType为点播（PullVodPushLive）可以填多个，上限30个。
+   * 垫片内容。
    */
-  SourceUrls?: Array<string>
+  Url: string
   /**
-   * 开始时间。
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#I)。
+   * 模板创建时间。
    */
-  StartTime?: string
+  CreateTime: string
   /**
-   * 结束时间，注意：
-1. 结束时间必须大于开始时间；
-2. 结束时间和开始时间必须大于当前时间；
-3. 结束时间 和 开始时间 间隔必须小于七天。
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#I)。
+   * 模板修改时间。
    */
-  EndTime?: string
+  UpdateTime: string
   /**
-   * 点播拉流转推循环次数。
--1：无限循环，直到任务结束。
-0：不循环。
->0：具体循环次数。次数和时间以先结束的为准。
-注意：拉流源为点播，该配置生效。
+   * 模板描述。
    */
-  VodLoopTimes?: number
+  Description?: string
   /**
-   * 点播更新SourceUrls后的播放方式：
-ImmediateNewSource：立即从更新的拉流源开始播放；
-ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
-注意：拉流源为点播，该配置生效。
+   * 断流等待时间。
+取值范围：0-30000。
+单位：ms。
    */
-  VodRefreshType?: string
+  WaitDuration?: number
   /**
-   * 任务状态：
-enable - 启用，
-pause - 暂停。
+   * 最大垫片时长。
+取值范围：0 - 正无穷。
+单位：ms。
    */
-  Status?: string
+  MaxDuration?: number
   /**
-   * 选择需要回调的事件（不填则回调全部）：
-TaskStart：任务启动回调，
-TaskExit：任务停止回调，
-VodSourceFileStart：从点播源文件开始拉流回调，
-VodSourceFileFinish：从点播源文件拉流结束回调，
-ResetTaskConfig：任务更新回调。
+   * 垫片内容类型： 1：图片，2：视频。 默认值：1。
    */
-  CallbackEvents?: Array<string>
-  /**
-   * 自定义回调地址。
-相关事件会回调到该地址。
-   */
-  CallbackUrl?: string
-  /**
-   * 指定播放文件索引。
-注意： 从1开始，不大于SourceUrls中文件个数。
-   */
-  FileIndex?: number
-  /**
-   * 指定播放文件偏移。
-注意：
-1. 单位：秒，配合FileIndex使用。
-   */
-  OffsetTime?: number
-  /**
-   * 指定任务 ID 修改任务。
-
-注意：该自定义任务 ID 只有在创建任务时指定了，才可在此处修改时使用。否则请使用系统返回的任务 ID。
-   */
-  SpecifyTaskId?: string
-  /**
-   * 目标 Url。
-换目标地址，会断流重推到新地址。
-   */
-  ToUrl?: string
-  /**
-   * 任务备注。
-   */
-  Comment?: string
-  /**
-   * 备源的类型：
-PullLivePushLive -直播，
-PullVodPushLive -点播。
-注意：
-1. 仅当主源类型为直播源时，备源才会生效。
-2. 将该参数置为空，则可将任务去除备源信息。
-3. 主直播源拉流中断时，自动使用备源进行拉流。
-4. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。
-   */
-  BackupSourceType?: string
-  /**
-   * 备源 URL。
-只允许填一个备源 URL
-   */
-  BackupSourceUrl?: string
-  /**
-   * 水印信息列表。
-注意：
-1. 最多支持4个不同位置的水印。
-2. 水印图片 URL 请使用合法外网可访问地址。
-3. 支持的水印图片格式：png，jpg等。
-4. 轮播任务修改水印后，轮播到下一个文件时新水印生效。
-5. 直播源任务修改水印后，水印立即生效。
-6. 清除水印时，需携带该水印列表参数，内容为空数组。
-7. 暂不支持动图水印。
-   */
-  WatermarkList?: Array<PullPushWatermarkInfo>
-  /**
-   * 点播源是否启用本地推流模式，默认0，不启用。
-0 - 不启用。
-1 - 启用。
-注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。
-   */
-  VodLocalMode?: number
-  /**
-   * 新的目标地址。传空值，则取消该地址的推流。
-传入新值，则替换原有地址。
-   */
-  BackupToUrl?: string
-  /**
-   * 点播垫片文件地址。注意：用于在主源拉不到时自动兜底到垫片文件，切到垫片文件后，每次播完垫片会尝试拉主源，如果主源恢复则自动切回主源。可根据需要的轮询检查时长来传入对应时长的垫片文件。
-   */
-  BackupVodUrl?: string
+  Type?: number
 }
 
 /**
@@ -3671,24 +3797,13 @@ export interface DeletePullStreamConfigRequest {
 }
 
 /**
- * 转场信息
+ * ModifyCaster返回参数结构体
  */
-export interface TransitionTypeInfo {
+export interface ModifyCasterResponse {
   /**
-   * 转场名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TransitionType?: string
-  /**
-   * 素材url
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceUrl?: string
-  /**
-   * 转场的下标，可用来排序，从1开始递增
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: number
+  RequestId?: string
 }
 
 /**
@@ -3867,66 +3982,21 @@ URL中禁止包含的字符：
 }
 
 /**
- * CreateLiveRecord请求参数结构体
+ * DescribePlayErrorCodeDetailInfoList返回参数结构体
  */
-export interface CreateLiveRecordRequest {
+export interface DescribePlayErrorCodeDetailInfoListResponse {
   /**
-   * 流名称。
+   * 统计信息列表。
    */
-  StreamName: string
+  HttpCodeList?: Array<HttpCodeInfo>
   /**
-   * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
+   * 统计类型。
    */
-  AppName?: string
+  StatType?: string
   /**
-   * 推流域名。多域名推流必须设置。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DomainName?: string
-  /**
-   * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
-定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
-   */
-  StartTime?: string
-  /**
-   * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
-定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
-   */
-  EndTime?: string
-  /**
-   * 录制类型。
-“video” : 音视频录制【默认】。
-“audio” : 纯音频录制。
-在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-   */
-  RecordType?: string
-  /**
-   * 录制文件格式。其值为：
-“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
-在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-   */
-  FileFormat?: string
-  /**
-   * 开启实时视频录制模式标志。
-0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-   */
-  Highlight?: number
-  /**
-   * 开启 A+B=C混流C流录制标志。
-0：不开启 A+B=C混流C流录制【默认】。
-1：开启 A+B=C混流C流录制。
-在定时录制模式或实时视频录制模式下，该参数均有效。
-   */
-  MixStream?: number
-  /**
-   * 录制流参数。当前支持以下参数：
-record_interval - 录制分片时长，单位 秒，1800 - 7200。
-storage_time - 录制文件存储时长，单位 秒。
-eg. record_interval=3600&storage_time=2592000。
-注：参数需要url encode。
-在定时录制模式或实时视频录制模式下，该参数均有效。
-   */
-  StreamParam?: string
+  RequestId?: string
 }
 
 /**
@@ -4093,6 +4163,32 @@ export interface CancelCommonMixStreamRequest {
 该值与CreateCommonMixStream中的MixStreamSessionId保持一致。
    */
   MixStreamSessionId: string
+}
+
+/**
+ * 直播时移写入量数据。
+ */
+export interface TimeShiftWriteSizeData {
+  /**
+   * 区域。
+   */
+  Area: string
+  /**
+   * 时间，格式为：yyyy-mm-ddTHH:MM:SSZ。
+   */
+  Time: string
+  /**
+   * 写入量（单位：字节）
+   */
+  WriteSize: number
+  /**
+   * 域名。
+   */
+  Domain: string
+  /**
+   * 时移天数。
+   */
+  StorageDays: number
 }
 
 /**
@@ -4272,21 +4368,66 @@ export interface UnBindLiveDomainCertResponse {
 }
 
 /**
- * DescribePlayErrorCodeDetailInfoList返回参数结构体
+ * CreateLiveRecord请求参数结构体
  */
-export interface DescribePlayErrorCodeDetailInfoListResponse {
+export interface CreateLiveRecordRequest {
   /**
-   * 统计信息列表。
+   * 流名称。
    */
-  HttpCodeList?: Array<HttpCodeInfo>
+  StreamName: string
   /**
-   * 统计类型。
+   * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
    */
-  StatType?: string
+  AppName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 推流域名。多域名推流必须设置。
    */
-  RequestId?: string
+  DomainName?: string
+  /**
+   * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
+定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
+   */
+  StartTime?: string
+  /**
+   * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
+定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
+   */
+  EndTime?: string
+  /**
+   * 录制类型。
+“video” : 音视频录制【默认】。
+“audio” : 纯音频录制。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+   */
+  RecordType?: string
+  /**
+   * 录制文件格式。其值为：
+“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+   */
+  FileFormat?: string
+  /**
+   * 开启实时视频录制模式标志。
+0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+   */
+  Highlight?: number
+  /**
+   * 开启 A+B=C混流C流录制标志。
+0：不开启 A+B=C混流C流录制【默认】。
+1：开启 A+B=C混流C流录制。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+   */
+  MixStream?: number
+  /**
+   * 录制流参数。当前支持以下参数：
+record_interval - 录制分片时长，单位 秒，1800 - 7200。
+storage_time - 录制文件存储时长，单位 秒。
+eg. record_interval=3600&storage_time=2592000。
+注：参数需要url encode。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+   */
+  StreamParam?: string
 }
 
 /**
@@ -4440,6 +4581,25 @@ export interface CreateLivePadTemplateRequest {
 默认值：1。
    */
   Type?: number
+}
+
+/**
+ * CopyCaster请求参数结构体
+ */
+export interface CopyCasterRequest {
+  /**
+   * 源导播台的ID
+   */
+  CasterId: number
+  /**
+   * 复制产生的新导播台名称
+   */
+  CasterName?: string
+  /**
+   * 复制产生的导播台推送到云直播的流id
+注意：该流id不能与云直播中的流id重复
+   */
+  OutputStreamId?: string
 }
 
 /**
@@ -5067,6 +5227,119 @@ export interface FlvSpecialParam {
 }
 
 /**
+ * ModifyLiveTranscodeTemplate请求参数结构体
+ */
+export interface ModifyLiveTranscodeTemplateRequest {
+  /**
+   * 模板 Id。
+   */
+  TemplateId: number
+  /**
+   * 视频编码：h264/h265/origin，默认origin。
+
+origin: 保持原始编码格式
+   */
+  Vcodec?: string
+  /**
+   * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+   */
+  Acodec?: string
+  /**
+   * 音频码率，默认0。
+范围：0-500。
+   */
+  AudioBitrate?: number
+  /**
+   * 模板描述。
+   */
+  Description?: string
+  /**
+   * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+   */
+  VideoBitrate?: number
+  /**
+   * 宽。0-3000。
+数值必须是2的倍数，0是原始宽度
+   */
+  Width?: number
+  /**
+   * 是否保留视频，0：否，1：是。默认1。
+   */
+  NeedVideo?: number
+  /**
+   * 是否保留音频，0：否，1：是。默认1。
+   */
+  NeedAudio?: number
+  /**
+   * 高。0-3000。
+数值必须是2的倍数，0是原始宽度
+   */
+  Height?: number
+  /**
+   * 帧率，默认0。
+范围0-60
+   */
+  Fps?: number
+  /**
+   * 关键帧间隔，单位：秒。
+范围2-6
+   */
+  Gop?: number
+  /**
+   * 旋转角度，默认0。
+可取值：0，90，180，270
+   */
+  Rotate?: number
+  /**
+   * 编码质量：
+baseline/main/high。
+   */
+  Profile?: string
+  /**
+   * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+   */
+  BitrateToOrig?: number
+  /**
+   * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+   */
+  HeightToOrig?: number
+  /**
+   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+   */
+  FpsToOrig?: number
+  /**
+   * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+   */
+  AdaptBitratePercent?: number
+  /**
+   * 是否以短边作为高度，0：否，1：是。默认0。
+   */
+  ShortEdgeAsHeight?: number
+  /**
+   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+不传递或者为空字符串，清空之前的DRM配置。
+   */
+  DRMType?: string
+  /**
+   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+不传递或者为空字符串，清空之前的DRM配置。
+   */
+  DRMTracks?: string
+}
+
+/**
  * DescribeLiveCallbackTemplate返回参数结构体
  */
 export interface DescribeLiveCallbackTemplateResponse {
@@ -5328,60 +5601,17 @@ export interface CreateScreenshotTaskRequest {
 }
 
 /**
- * 域名证书信息
+ * DescribeCaster返回参数结构体
  */
-export interface DomainCertInfo {
+export interface DescribeCasterResponse {
   /**
-   * 证书Id。
+   * 导播台信息
    */
-  CertId?: number
+  CasterInfo?: CasterInfo
   /**
-   * 证书名称。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CertName?: string
-  /**
-   * 描述信息。
-   */
-  Description?: string
-  /**
-   * 创建时间，UTC格式。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  CreateTime?: string
-  /**
-   * 证书内容。
-   */
-  HttpsCrt?: string
-  /**
-   * 证书类型。
-0：用户添加证书，
-1：腾讯云托管证书。
-   */
-  CertType?: number
-  /**
-   * 证书过期时间，UTC格式。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  CertExpireTime?: string
-  /**
-   * 使用此证书的域名名称。
-   */
-  DomainName?: string
-  /**
-   * 证书状态。
-   */
-  Status?: number
-  /**
-   * 证书本身标识的域名列表。
-比如: ["*.x.com"]
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertDomains?: Array<string>
-  /**
-   * 腾讯云ssl的证书Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CloudCertId?: string
+  RequestId?: string
 }
 
 /**
@@ -6299,6 +6529,20 @@ export interface CreateCommonMixStreamRequest {
 }
 
 /**
+ * CreateCaster返回参数结构体
+ */
+export interface CreateCasterResponse {
+  /**
+   * 导播台ID
+   */
+  CasterId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 推流数据信息
  */
 export interface PushDataInfo {
@@ -6375,17 +6619,89 @@ export interface PushDataInfo {
 }
 
 /**
- * DescribeLiveSnapshotTemplate返回参数结构体
+ * 导播台信息
  */
-export interface DescribeLiveSnapshotTemplateResponse {
+export interface CasterInfo {
   /**
-   * 截图模板信息。
+   * 导播台ID
    */
-  Template?: SnapshotTemplateInfo
+  CasterId?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 导播台名称
    */
-  RequestId?: string
+  CasterName?: string
+  /**
+   * 导播台上一次启动pgm的时间，值为unix时间戳。
+   */
+  StartLiveTime?: number
+  /**
+   * 导播台的描述
+   */
+  Description?: string
+  /**
+   * 导播台创建时间，值为unix时间戳。
+   */
+  CreateTime?: number
+  /**
+   * 导播台状态 
+0：停止状态，无预监，无主监
+1：无预监，有主监
+2：有预监，无主监
+3：有预监，有主监
+   */
+  Status?: number
+  /**
+   * 导播台的过期时间戳。值为-1或unix时间戳。 
+默认值为-1。 当值为-1时，表示该导播台永不过期。 
+当值为正常unix时间戳时，导播台将在该时间过期。 
+导播台过期后，预监与主监画面将自动停止，转推自动停止。 
+点播、直播url将停止转拉，推流url需自行停止推流。
+   */
+  ExpireTime?: number
+  /**
+   * 导播台延时播放时间，单位为秒。
+   */
+  DelayTime?: number
+  /**
+   * 导播台主监输出的宽度，单位为像素。
+   */
+  PgmWidth?: number
+  /**
+   * 导播台主监输出的高度，单位为像素。
+   */
+  PgmHeight?: number
+  /**
+   * 导播台主监输出的帧率。
+   */
+  PgmFps?: number
+  /**
+   * 导播台主监输出的码率，单位为kbps
+   */
+  PgmBitRate?: number
+  /**
+   * 导播台主监输出的音频码率，单位为kbps。
+   */
+  PgmAudioBitRate?: number
+  /**
+   * 导播台的计费类型。 
+0 通用型 1 播单型。
+注： 本参数暂无作用。
+   */
+  FeeType?: number
+  /**
+   * 录制模板id。
+   */
+  RecordTemplateId?: number
+  /**
+   * 录制状态。 
+0：未录制 
+1：录制中
+   */
+  RecordStatus?: number
+  /**
+   * 录制接口返回的taskid
+   */
+  RecordTaskId?: string
 }
 
 /**
@@ -6487,6 +6803,16 @@ export interface StartLiveStreamMonitorRequest {
 不填默认无声音输出。
    */
   AudibleInputIndexList?: Array<number | bigint>
+}
+
+/**
+ * DescribeCaster请求参数结构体
+ */
+export interface DescribeCasterRequest {
+  /**
+   * 需查询的导播台ID
+   */
+  CasterId: number
 }
 
 /**
@@ -6865,6 +7191,20 @@ export interface CertInfo {
  * DescribeLiveCallbackRules请求参数结构体
  */
 export type DescribeLiveCallbackRulesRequest = null
+
+/**
+ * DescribeLiveSnapshotTemplate返回参数结构体
+ */
+export interface DescribeLiveSnapshotTemplateResponse {
+  /**
+   * 截图模板信息。
+   */
+  Template?: SnapshotTemplateInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeLivePadProcessorList请求参数结构体
@@ -7246,6 +7586,49 @@ export interface ModifyLiveDomainRefererRequest {
 }
 
 /**
+ * DescribeLiveTimeShiftWriteSizeInfoList请求参数结构体
+ */
+export interface DescribeLiveTimeShiftWriteSizeInfoListRequest {
+  /**
+   * 起始时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+支持最近六个月的查询，查询开始和结束时间跨度不支持超过31天。
+   */
+  StartTime: string
+  /**
+   * 结束时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+支持最近六个月的查询，查询开始和结束时间跨度不支持超过31天。
+   */
+  EndTime: string
+  /**
+   * 域名。
+   */
+  DomainNames?: Array<string>
+  /**
+   * 维度
+Area地区、Domain 域名、StorageDays 时移天数
+   */
+  Dimensions?: Array<string>
+  /**
+   * 时移天数。
+   */
+  StorageDays?: Array<number | bigint>
+  /**
+   * 时间跨度（分钟）
+默认5，可选 5、60或者1440。
+   */
+  Granularity?: number
+  /**
+   * 区域
+可选Mainland、Oversea。
+   */
+  MainlandOrOversea?: string
+}
+
+/**
  * 按省份运营商查询的播放信息。
  */
 export interface PlayStatInfo {
@@ -7278,49 +7661,145 @@ export interface DescribeCasterUserStatusResponse {
 }
 
 /**
- * 直播垫片模板。
+ * ModifyLivePullStreamTask请求参数结构体
  */
-export interface PadTemplate {
+export interface ModifyLivePullStreamTaskRequest {
   /**
-   * 模板id。
+   * 任务Id。
    */
-  TemplateId: number
+  TaskId: string
   /**
-   * 模板名称。
+   * 操作人姓名。
    */
-  TemplateName: string
+  Operator: string
   /**
-   * 垫片内容。
+   * 拉流源url列表。
+SourceType为直播（PullLivePushLive）只可以填1个，
+SourceType为点播（PullVodPushLive）可以填多个，上限30个。
    */
-  Url: string
+  SourceUrls?: Array<string>
   /**
-   * 模板创建时间。
+   * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#I)。
    */
-  CreateTime: string
+  StartTime?: string
   /**
-   * 模板修改时间。
+   * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#I)。
    */
-  UpdateTime: string
+  EndTime?: string
   /**
-   * 模板描述。
+   * 点播拉流转推循环次数。
+-1：无限循环，直到任务结束。
+0：不循环。
+>0：具体循环次数。次数和时间以先结束的为准。
+注意：拉流源为点播，该配置生效。
    */
-  Description?: string
+  VodLoopTimes?: number
   /**
-   * 断流等待时间。
-取值范围：0-30000。
-单位：ms。
+   * 点播更新SourceUrls后的播放方式：
+ImmediateNewSource：立即从更新的拉流源开始播放；
+ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
+注意：拉流源为点播，该配置生效。
    */
-  WaitDuration?: number
+  VodRefreshType?: string
   /**
-   * 最大垫片时长。
-取值范围：0 - 正无穷。
-单位：ms。
+   * 任务状态：
+enable - 启用，
+pause - 暂停。
    */
-  MaxDuration?: number
+  Status?: string
   /**
-   * 垫片内容类型： 1：图片，2：视频。 默认值：1。
+   * 选择需要回调的事件（不填则回调全部）：
+TaskStart：任务启动回调，
+TaskExit：任务停止回调，
+VodSourceFileStart：从点播源文件开始拉流回调，
+VodSourceFileFinish：从点播源文件拉流结束回调，
+ResetTaskConfig：任务更新回调。
    */
-  Type?: number
+  CallbackEvents?: Array<string>
+  /**
+   * 自定义回调地址。
+相关事件会回调到该地址。
+   */
+  CallbackUrl?: string
+  /**
+   * 指定播放文件索引。
+注意： 从1开始，不大于SourceUrls中文件个数。
+   */
+  FileIndex?: number
+  /**
+   * 指定播放文件偏移。
+注意：
+1. 单位：秒，配合FileIndex使用。
+   */
+  OffsetTime?: number
+  /**
+   * 指定任务 ID 修改任务。
+
+注意：该自定义任务 ID 只有在创建任务时指定了，才可在此处修改时使用。否则请使用系统返回的任务 ID。
+   */
+  SpecifyTaskId?: string
+  /**
+   * 目标 Url。
+换目标地址，会断流重推到新地址。
+   */
+  ToUrl?: string
+  /**
+   * 任务备注。
+   */
+  Comment?: string
+  /**
+   * 备源的类型：
+PullLivePushLive -直播，
+PullVodPushLive -点播。
+注意：
+1. 仅当主源类型为直播源时，备源才会生效。
+2. 将该参数置为空，则可将任务去除备源信息。
+3. 主直播源拉流中断时，自动使用备源进行拉流。
+4. 如果备源为点播文件时，则每次轮播完点播文件就检查主源是否恢复，如果主源恢复则自动切回到主源，否则继续拉备源。
+   */
+  BackupSourceType?: string
+  /**
+   * 备源 URL。
+只允许填一个备源 URL
+   */
+  BackupSourceUrl?: string
+  /**
+   * 水印信息列表。
+注意：
+1. 最多支持4个不同位置的水印。
+2. 水印图片 URL 请使用合法外网可访问地址。
+3. 支持的水印图片格式：png，jpg等。
+4. 轮播任务修改水印后，轮播到下一个文件时新水印生效。
+5. 直播源任务修改水印后，水印立即生效。
+6. 清除水印时，需携带该水印列表参数，内容为空数组。
+7. 暂不支持动图水印。
+   */
+  WatermarkList?: Array<PullPushWatermarkInfo>
+  /**
+   * 点播源是否启用本地推流模式，默认0，不启用。
+0 - 不启用。
+1 - 启用。
+注意：启用本地模式后，会将源列表中的 MP4 文件进行本地下载，优先使用本地已下载文件进行推流，提高点播源推流稳定性。使用本地下载文件推流时，会产生增值费用。
+   */
+  VodLocalMode?: number
+  /**
+   * 新的目标地址。传空值，则取消该地址的推流。
+传入新值，则替换原有地址。
+   */
+  BackupToUrl?: string
+  /**
+   * 点播垫片文件地址。注意：用于在主源拉不到时自动兜底到垫片文件，切到垫片文件后，每次播完垫片会尝试拉主源，如果主源恢复则自动切回主源。可根据需要的轮询检查时长来传入对应时长的垫片文件。
+   */
+  BackupVodUrl?: string
 }
 
 /**
@@ -7787,6 +8266,11 @@ export interface DescribeLivePullStreamTasksRequest {
 取值范围：1~20 之前的任意整数。
    */
   PageSize?: number
+  /**
+   * 使用指定任务 ID 查询任务信息。
+注意：仅供使用指定 ID 创建的任务查询。
+   */
+  SpecifyTaskId?: string
 }
 
 /**
@@ -8063,6 +8547,16 @@ export interface EnableLiveDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteCaster请求参数结构体
+ */
+export interface DeleteCasterRequest {
+  /**
+   * 待删除的导播台ID
+   */
+  CasterId: number
 }
 
 /**
@@ -8374,44 +8868,13 @@ export interface LiveCertDomainInfo {
 export type DescribeLiveTimeShiftRulesRequest = null
 
 /**
- * DescribePlayErrorCodeSumInfoList请求参数结构体
+ * ForbidLiveDomain返回参数结构体
  */
-export interface DescribePlayErrorCodeSumInfoListRequest {
+export interface ForbidLiveDomainResponse {
   /**
-   * 起始时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-  /**
-   * 结束时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
-注：EndTime 和 StartTime 只支持最近1天的数据查询。
-   */
-  EndTime: string
-  /**
-   * 播放域名列表，不填表示总体数据。
-   */
-  PlayDomains?: Array<string>
-  /**
-   * 页数，范围[1,1000]，默认值是1。
-   */
-  PageNum?: number
-  /**
-   * 每页个数，范围：[1,1000]，默认值是20。
-   */
-  PageSize?: number
-  /**
-   * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-   */
-  MainlandOrOversea?: string
-  /**
-   * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
-   */
-  GroupType?: string
-  /**
-   * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
-   */
-  OutLanguage?: string
+  RequestId?: string
 }
 
 /**
@@ -8468,6 +8931,98 @@ export interface RecordTask {
    * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
    */
   Stopped: number
+}
+
+/**
+ * ModifyCaster请求参数结构体
+ */
+export interface ModifyCasterRequest {
+  /**
+   * 导播台ID
+   */
+  CasterId: number
+  /**
+   * 导播台名称
+   */
+  CasterName?: string
+  /**
+   * 导播台的描述
+最大允许长度256
+   */
+  Description?: string
+  /**
+   * 录制模板id。
+默认为0。
+当使用直播录制功能时，可将使用的录制模版填入。
+该接口仅保存字段，不涉及任何录制功能。
+   */
+  RecordTemplateId?: number
+  /**
+   * 录制状态，当调用录制接口后，可通过该字段保存录制状态。
+0：未录制 
+1：录制中
+该接口仅保存字段，不涉及任何录制处理。
+   */
+  RecordStatus?: number
+  /**
+   * 导播台的过期时间戳。值为-1或unix时间戳。
+默认值为-1。 
+当值为-1时，表示该导播台永不过期。 
+当值为正常unix时间戳时，导播台将在该时间过期。
+导播台过期后，预监与主监画面将自动停止，转推自动停止。 
+点播、直播url将停止转拉，推流url需自行停止推流。
+   */
+  ExpireTime?: number
+  /**
+   * 导播台延时播放时间，单位为秒。 
+默认为0，最大支持300秒
+   */
+  DelayTime?: number
+  /**
+   * 导播台转场类型。 
+默认为空。 
+允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。
+   */
+  TransitionType?: string
+  /**
+   * 导播台主监输出的宽度，单位为像素。 
+默认为1280，最大允许4096。
+   */
+  PgmWidth?: number
+  /**
+   * 导播台主监输出的高度，单位为像素。 
+默认为720，最大允许2160。
+   */
+  PgmHeight?: number
+  /**
+   * 导播台主监输出的帧率。 
+默认为0，表示随源输出。 最大支持60。
+   */
+  PgmFps?: number
+  /**
+   * 导播台主监输出的码率，单位为kbps。 
+默认为0，表示随源的码率输出。 
+最大允许10000kbps。
+   */
+  PgmBitRate?: number
+  /**
+   * 导播台的计费类型。 
+0 通用型 
+1 播单型。 
+注： 本参数暂无作用。
+   */
+  FeeType?: number
+  /**
+   * 录制接口返回的taskid
+注：该接口只做字段保存，不涉及录制操作。
+   */
+  RecordTaskId?: string
+  /**
+   * 导播台主监输出的音频码率，单位为kbps。 
+可选项：[0, 128, 192, 256] 
+默认值为0，表示随源的音频码率输出。
+   */
+  PgmAudioBitRate?: number
 }
 
 /**
@@ -9160,16 +9715,6 @@ export interface LiveStreamMonitorNotifyPolicy {
 }
 
 /**
- * ModifyLiveStreamMonitor返回参数结构体
- */
-export interface ModifyLiveStreamMonitorResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 直播监播任务信息。
  */
 export interface LiveStreamMonitorInfo {
@@ -9346,6 +9891,29 @@ export interface DescribeRecordTaskResponse {
 }
 
 /**
+ * DescribeCasterPlayUrl请求参数结构体
+ */
+export interface DescribeCasterPlayUrlRequest {
+  /**
+   * 导播台ID
+   */
+  CasterId: number
+  /**
+   * 请求播放url的类型。
+取值范围[1，2，3]
+1：获取输入源的播放url
+2：获取pvw的播放url
+3：获取pgm的播放url
+   */
+  PlayUrlType: number
+  /**
+   * 仅在PlayUrlType为1时生效，此时该参数表示请求的输入源Index。
+注：对应的输入源必须存在。
+   */
+  PlayUrlIndex?: number
+}
+
+/**
  * DescribeAreaBillBandwidthAndFluxList返回参数结构体
  */
 export interface DescribeAreaBillBandwidthAndFluxListResponse {
@@ -9367,6 +9935,20 @@ export interface ForbidLiveDomainRequest {
    * 待停用的直播域名。
    */
   DomainName: string
+}
+
+/**
+ * DescribeLiveTimeShiftWriteSizeInfoList返回参数结构体
+ */
+export interface DescribeLiveTimeShiftWriteSizeInfoListResponse {
+  /**
+   * 直播时移写入量数据明细。
+   */
+  DataInfoList?: Array<TimeShiftWriteSizeData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

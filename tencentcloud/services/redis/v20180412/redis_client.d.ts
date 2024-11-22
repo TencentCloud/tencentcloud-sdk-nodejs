@@ -8,7 +8,7 @@ import { UpgradeProxyVersionRequest, UpgradeSmallVersionRequest, ModifyInstanceP
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 设置实例输入模式
+     * 本接口（ModifyInstanceReadOnly）用于设置实例输入模式。
      */
     ModifyInstanceReadOnly(req: ModifyInstanceReadOnlyRequest, cb?: (error: string, rep: ModifyInstanceReadOnlyResponse) => void): Promise<ModifyInstanceReadOnlyResponse>;
     /**
@@ -22,11 +22,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskList(req: DescribeTaskListRequest, cb?: (error: string, rep: DescribeTaskListResponse) => void): Promise<DescribeTaskListResponse>;
     /**
-     * 移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
+     * 本接口（DeleteReplicationInstance）移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
      */
     DeleteReplicationInstance(req: DeleteReplicationInstanceRequest, cb?: (error: string, rep: DeleteReplicationInstanceResponse) => void): Promise<DeleteReplicationInstanceResponse>;
     /**
-     * 回收站实例立即下线
+     * 本接口（CleanUpInstance）用于立即下线回收站的实例。
      */
     CleanUpInstance(req: CleanUpInstanceRequest, cb?: (error: string, rep: CleanUpInstanceResponse) => void): Promise<CleanUpInstanceResponse>;
     /**
@@ -46,7 +46,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorTopNCmd(req: DescribeInstanceMonitorTopNCmdRequest, cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdResponse) => void): Promise<DescribeInstanceMonitorTopNCmdResponse>;
     /**
-     * 将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
+     * 本接口（UpgradeInstanceVersion）用于将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
      */
     UpgradeInstanceVersion(req: UpgradeInstanceVersionRequest, cb?: (error: string, rep: UpgradeInstanceVersionResponse) => void): Promise<UpgradeInstanceVersionResponse>;
     /**
@@ -62,7 +62,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
     /**
-     * 修改实例子账号
+     * 本接口（ModifyInstanceAccount）用于修改实例子账号。
      */
     ModifyInstanceAccount(req: ModifyInstanceAccountRequest, cb?: (error: string, rep: ModifyInstanceAccountResponse) => void): Promise<ModifyInstanceAccountResponse>;
     /**
@@ -74,7 +74,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupDetail(req: DescribeBackupDetailRequest, cb?: (error: string, rep: DescribeBackupDetailResponse) => void): Promise<DescribeBackupDetailResponse>;
     /**
-     * 升级实例支持多AZ
+     * 本接口（UpgradeVersionToMultiAvailabilityZones）用于升级实例支持多AZ。
      */
     UpgradeVersionToMultiAvailabilityZones(req: UpgradeVersionToMultiAvailabilityZonesRequest, cb?: (error: string, rep: UpgradeVersionToMultiAvailabilityZonesResponse) => void): Promise<UpgradeVersionToMultiAvailabilityZonesResponse>;
     /**
@@ -82,11 +82,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeGlobalReplicationArea(req?: DescribeGlobalReplicationAreaRequest, cb?: (error: string, rep: DescribeGlobalReplicationAreaResponse) => void): Promise<DescribeGlobalReplicationAreaResponse>;
     /**
-     * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
+     * 本接口（ModifyInstanceParams）用于修改 Redis 实例的参数配置。
      */
     ModifyInstanceParams(req: ModifyInstanceParamsRequest, cb?: (error: string, rep: ModifyInstanceParamsResponse) => void): Promise<ModifyInstanceParamsResponse>;
     /**
-     * 清空Redis实例的实例数据。
+     * 本接口（ClearInstance）用于清空实例数据。
      */
     ClearInstance(req: ClearInstanceRequest, cb?: (error: string, rep: ClearInstanceResponse) => void): Promise<ClearInstanceResponse>;
     /**
@@ -94,11 +94,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupUrl(req: DescribeBackupUrlRequest, cb?: (error: string, rep: DescribeBackupUrlResponse) => void): Promise<DescribeBackupUrlResponse>;
     /**
-     * 删除实例子账号
+     * 本接口（DeleteInstanceAccount）用于删除实例子账号。
      */
     DeleteInstanceAccount(req: DeleteInstanceAccountRequest, cb?: (error: string, rep: DeleteInstanceAccountResponse) => void): Promise<DeleteInstanceAccountResponse>;
     /**
-     * 修改实例的连接配置，包括带宽和最大连接数。
+     * 本接口（ModifyConnectionConfig）用于修改实例的连接配置，包括带宽和最大连接数。
      */
     ModifyConnectionConfig(req: ModifyConnectionConfigRequest, cb?: (error: string, rep: ModifyConnectionConfigResponse) => void): Promise<ModifyConnectionConfigResponse>;
     /**
@@ -106,11 +106,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceLogDelivery(req: DescribeInstanceLogDeliveryRequest, cb?: (error: string, rep: DescribeInstanceLogDeliveryResponse) => void): Promise<DescribeInstanceLogDeliveryResponse>;
     /**
-     * 修改实例相关信息
+     * 本接口（ModifyInstance）用于修改实例相关信息。
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
     /**
-     * 复制组实例更换角色
+     * 本接口（ChangeInstanceRole）用于更换复制组内实例的角色。
      */
     ChangeInstanceRole(req: ChangeInstanceRoleRequest, cb?: (error: string, rep: ChangeInstanceRoleResponse) => void): Promise<ChangeInstanceRoleResponse>;
     /**
@@ -118,7 +118,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceNodeInfo(req: DescribeInstanceNodeInfoRequest, cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void): Promise<DescribeInstanceNodeInfoResponse>;
     /**
-     * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
+     * 本接口（CreateInstanceAccount）用于自定义访问实例的账号。
      */
     CreateInstanceAccount(req: CreateInstanceAccountRequest, cb?: (error: string, rep: CreateInstanceAccountResponse) => void): Promise<CreateInstanceAccountResponse>;
     /**
@@ -126,11 +126,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceEvent(req: ModifyInstanceEventRequest, cb?: (error: string, rep: ModifyInstanceEventResponse) => void): Promise<ModifyInstanceEventResponse>;
     /**
-     * 实例proxy版本升级
+     * 本接口（UpgradeProxyVersion）用于升级实例 Proxy 版本。
      */
     UpgradeProxyVersion(req: UpgradeProxyVersionRequest, cb?: (error: string, rep: UpgradeProxyVersionResponse) => void): Promise<UpgradeProxyVersionResponse>;
     /**
-     * 查询实例CPU耗时
+     * 本接口（DescribeInstanceMonitorTopNCmdTook）用于查询实例 CPU 耗时。
      */
     DescribeInstanceMonitorTopNCmdTook(req: DescribeInstanceMonitorTopNCmdTookRequest, cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdTookResponse) => void): Promise<DescribeInstanceMonitorTopNCmdTookResponse>;
     /**
@@ -142,7 +142,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
-     * 添加复制组成员
+     * 本接口（AddReplicationInstance）用于为全球复制组添加实例成员。
      */
     AddReplicationInstance(req: AddReplicationInstanceRequest, cb?: (error: string, rep: AddReplicationInstanceResponse) => void): Promise<AddReplicationInstanceResponse>;
     /**
@@ -154,15 +154,15 @@ export declare class Client extends AbstractClient {
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
-     * 禁用读写分离
+     * 本接口（DisableReplicaReadonly）用于禁用读写分离功能。
      */
     DisableReplicaReadonly(req: DisableReplicaReadonlyRequest, cb?: (error: string, rep: DisableReplicaReadonlyResponse) => void): Promise<DisableReplicaReadonlyResponse>;
     /**
-     * 查询实例DTS信息
+     * 本接口（DescribeInstanceDTSInfo）用于查询实例 DTS 信息。
      */
     DescribeInstanceDTSInfo(req: DescribeInstanceDTSInfoRequest, cb?: (error: string, rep: DescribeInstanceDTSInfoResponse) => void): Promise<DescribeInstanceDTSInfoResponse>;
     /**
-     * 查询实例扩容价格
+     * 本接口（InquiryPriceUpgradeInstance）用于查询实例扩容价格。
      */
     InquiryPriceUpgradeInstance(req: InquiryPriceUpgradeInstanceRequest, cb?: (error: string, rep: InquiryPriceUpgradeInstanceResponse) => void): Promise<InquiryPriceUpgradeInstanceResponse>;
     /**
@@ -174,23 +174,23 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceLogDelivery(req: ModifyInstanceLogDeliveryRequest, cb?: (error: string, rep: ModifyInstanceLogDeliveryResponse) => void): Promise<ModifyInstanceLogDeliveryResponse>;
     /**
-     * 开通外网
+     * 本接口（AllocateWanAddress）用于开通实例外网访问。
      */
     AllocateWanAddress(req: AllocateWanAddressRequest, cb?: (error: string, rep: AllocateWanAddressResponse) => void): Promise<AllocateWanAddressResponse>;
     /**
-     * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目的安全组详情。
      */
     DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
     /**
-     * 查询Tendis慢查询
+     * 本接口（DescribeTendisSlowLog）用于查询 Tendis 实例慢查询。
      */
     DescribeTendisSlowLog(req: DescribeTendisSlowLogRequest, cb?: (error: string, rep: DescribeTendisSlowLogResponse) => void): Promise<DescribeTendisSlowLogResponse>;
     /**
-     * 修改参数模板
+     * 本接口（ModifyParamTemplate）用于修改参数模板。
      */
     ModifyParamTemplate(req: ModifyParamTemplateRequest, cb?: (error: string, rep: ModifyParamTemplateResponse) => void): Promise<ModifyParamTemplateResponse>;
     /**
-     * 查询新购实例价格
+     * 本接口（InquiryPriceCreateInstance）用于查询新购实例价格。
      */
     InquiryPriceCreateInstance(req: InquiryPriceCreateInstanceRequest, cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void): Promise<InquiryPriceCreateInstanceResponse>;
     /**
@@ -210,11 +210,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorBigKeyTypeDist(req: DescribeInstanceMonitorBigKeyTypeDistRequest, cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse>;
     /**
-     * 关闭外网
+     * 本接口（ReleaseWanAddress）用于关闭外网访问。
      */
     ReleaseWanAddress(req: ReleaseWanAddressRequest, cb?: (error: string, rep: ReleaseWanAddressResponse) => void): Promise<ReleaseWanAddressResponse>;
     /**
-     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     * 本接口（DisassociateSecurityGroups）用于安全组批量解绑实例。
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
@@ -226,11 +226,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceSpecBandwidth(req?: DescribeInstanceSpecBandwidthRequest, cb?: (error: string, rep: DescribeInstanceSpecBandwidthResponse) => void): Promise<DescribeInstanceSpecBandwidthResponse>;
     /**
-     * Proxy模拟故障接口
+     * 本接口（SwitchProxy）为 Proxy 模拟故障接口。
      */
     SwitchProxy(req: SwitchProxyRequest, cb?: (error: string, rep: SwitchProxyResponse) => void): Promise<SwitchProxyResponse>;
     /**
-     * 包年包月实例退还
+     * 本接口（DestroyPrepaidInstance）用于退还包年包月计费的 Redis 实例。
      */
     DestroyPrepaidInstance(req: DestroyPrepaidInstanceRequest, cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void): Promise<DestroyPrepaidInstanceResponse>;
     /**
@@ -242,15 +242,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeParamTemplateInfo(req: DescribeParamTemplateInfoRequest, cb?: (error: string, rep: DescribeParamTemplateInfoResponse) => void): Promise<DescribeParamTemplateInfoResponse>;
     /**
-     * 按量计费实例销毁
+     * 本接口（DestroyPostpaidInstance）用于销毁按量计费实例。
      */
     DestroyPostpaidInstance(req: DestroyPostpaidInstanceRequest, cb?: (error: string, rep: DestroyPostpaidInstanceResponse) => void): Promise<DestroyPostpaidInstanceResponse>;
     /**
-     * 实例解隔离
+     * 本接口（StartupInstance）用于实例解隔离。
      */
     StartupInstance(req: StartupInstanceRequest, cb?: (error: string, rep: StartupInstanceResponse) => void): Promise<StartupInstanceResponse>;
     /**
-     * 查询实例访问的耗时分布
+     * 本接口（DescribeInstanceMonitorTookDist）用于查询实例访问的耗时分布。
      */
     DescribeInstanceMonitorTookDist(req: DescribeInstanceMonitorTookDistRequest, cb?: (error: string, rep: DescribeInstanceMonitorTookDistResponse) => void): Promise<DescribeInstanceMonitorTookDistResponse>;
     /**
@@ -262,15 +262,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceBackups(req: DescribeInstanceBackupsRequest, cb?: (error: string, rep: DescribeInstanceBackupsResponse) => void): Promise<DescribeInstanceBackupsResponse>;
     /**
-     * 重置密码
+     * 本接口（ResetPassword）用于重置实例访问密码。
      */
     ResetPassword(req: ResetPasswordRequest, cb?: (error: string, rep: ResetPasswordResponse) => void): Promise<ResetPasswordResponse>;
     /**
-     * 移除复制组成员
+     * 本接口（RemoveReplicationInstance）用于移除复制组中的实例。
      */
     RemoveReplicationInstance(req: RemoveReplicationInstanceRequest, cb?: (error: string, rep: RemoveReplicationInstanceResponse) => void): Promise<RemoveReplicationInstanceResponse>;
     /**
-     * 实例小版本升级
+     * 本接口（UpgradeSmallVersion）用于实例小版本升级。
      */
     UpgradeSmallVersion(req: UpgradeSmallVersionRequest, cb?: (error: string, rep: UpgradeSmallVersionResponse) => void): Promise<UpgradeSmallVersionResponse>;
     /**
@@ -278,7 +278,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstancePassword(req: ModifyInstancePasswordRequest, cb?: (error: string, rep: ModifyInstancePasswordResponse) => void): Promise<ModifyInstancePasswordResponse>;
     /**
-     * 该接口（CreateReplicationGroup）用于创建复制组。
+     * 本接口（CreateReplicationGroup）用于创建复制组。
      */
     CreateReplicationGroup(req: CreateReplicationGroupRequest, cb?: (error: string, rep: CreateReplicationGroupResponse) => void): Promise<CreateReplicationGroupResponse>;
     /**
@@ -286,7 +286,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorSIP(req: DescribeInstanceMonitorSIPRequest, cb?: (error: string, rep: DescribeInstanceMonitorSIPResponse) => void): Promise<DescribeInstanceMonitorSIPResponse>;
     /**
-     * 查询项目安全组信息
+     * 本接口（DescribeProjectSecurityGroup）用于查询项目安全组信息。
      */
     DescribeProjectSecurityGroup(req: DescribeProjectSecurityGroupRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupResponse) => void): Promise<DescribeProjectSecurityGroupResponse>;
     /**
@@ -298,7 +298,7 @@ export declare class Client extends AbstractClient {
      */
     ModfiyInstancePassword(req: ModfiyInstancePasswordRequest, cb?: (error: string, rep: ModfiyInstancePasswordResponse) => void): Promise<ModfiyInstancePasswordResponse>;
     /**
-     * 启用读写分离
+     * 本接口（EnableReplicaReadonly）用于启用读写分离功能。
      */
     EnableReplicaReadonly(req: EnableReplicaReadonlyRequest, cb?: (error: string, rep: EnableReplicaReadonlyResponse) => void): Promise<EnableReplicaReadonlyResponse>;
     /**
@@ -314,15 +314,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorBigKey(req: DescribeInstanceMonitorBigKeyRequest, cb?: (error: string, rep: DescribeInstanceMonitorBigKeyResponse) => void): Promise<DescribeInstanceMonitorBigKeyResponse>;
     /**
-     * 查询Redis独享集群列表
+     * 本接口（DescribeRedisClusters）用于查询Redis独享集群列表。
      */
     DescribeRedisClusters(req: DescribeRedisClustersRequest, cb?: (error: string, rep: DescribeRedisClustersResponse) => void): Promise<DescribeRedisClustersResponse>;
     /**
-     * 本接口（KillMasterGroup）模拟故障。
+     * 本接口（KillMasterGroup）用于模拟故障。
      */
     KillMasterGroup(req: KillMasterGroupRequest, cb?: (error: string, rep: KillMasterGroupResponse) => void): Promise<KillMasterGroupResponse>;
     /**
-     * 查询Redis实例列表信息。该接口已废弃。
+     * 本接口（DescribeCommonDBInstances）用于查询Redis实例列表信息。当前该接口已废弃。
      */
     DescribeCommonDBInstances(req: DescribeCommonDBInstancesRequest, cb?: (error: string, rep: DescribeCommonDBInstancesResponse) => void): Promise<DescribeCommonDBInstancesResponse>;
     /**
@@ -342,7 +342,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceEvents(req: DescribeInstanceEventsRequest, cb?: (error: string, rep: DescribeInstanceEventsResponse) => void): Promise<DescribeInstanceEventsResponse>;
     /**
-     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * 在通过 DTS 支持跨可用区灾备的场景中，通过该接口（SwitchInstanceVip）交换实例 VIP 完成实例灾备切换。交换 VIP 后目标实例可写，源和目标实例VIP互换，同时源与目标实例间 DTS 同步任务断开。
      */
     SwitchInstanceVip(req: SwitchInstanceVipRequest, cb?: (error: string, rep: SwitchInstanceVipResponse) => void): Promise<SwitchInstanceVipResponse>;
     /**
@@ -358,7 +358,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceRenewInstance(req: InquiryPriceRenewInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void): Promise<InquiryPriceRenewInstanceResponse>;
     /**
-     * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
+     * 本接口（ModifyMaintenanceWindow）用于修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
      */
     ModifyMaintenanceWindow(req: ModifyMaintenanceWindowRequest, cb?: (error: string, rep: ModifyMaintenanceWindowResponse) => void): Promise<ModifyMaintenanceWindowResponse>;
     /**
@@ -378,7 +378,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 开启SSL
+     * 本接口（OpenSSL）用于开启 SSL 加密认证功能。
      */
     OpenSSL(req: OpenSSLRequest, cb?: (error: string, rep: OpenSSLResponse) => void): Promise<OpenSSLResponse>;
     /**
@@ -390,7 +390,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBandwidthRange(req: DescribeBandwidthRangeRequest, cb?: (error: string, rep: DescribeBandwidthRangeResponse) => void): Promise<DescribeBandwidthRangeResponse>;
     /**
-     * 查询复制组信息
+     * 本接口（DescribeReplicationGroupInstance）用于查询复制组信息。
      */
     DescribeReplicationGroupInstance(req: DescribeReplicationGroupInstanceRequest, cb?: (error: string, rep: DescribeReplicationGroupInstanceResponse) => void): Promise<DescribeReplicationGroupInstanceResponse>;
     /**
@@ -414,11 +414,11 @@ export declare class Client extends AbstractClient {
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**
-     * 查询Redis独享集群概览信息
+     * 本接口（DescribeRedisClusterOverview）用于查询 Redis 独享集群概览信息。
      */
     DescribeRedisClusterOverview(req: DescribeRedisClusterOverviewRequest, cb?: (error: string, rep: DescribeRedisClusterOverviewResponse) => void): Promise<DescribeRedisClusterOverviewResponse>;
     /**
-     * 应用参数模板到实例
+     * 本接口（ApplyParamsTemplate）用于应用参数模板到实例。
      */
     ApplyParamsTemplate(req: ApplyParamsTemplateRequest, cb?: (error: string, rep: ApplyParamsTemplateResponse) => void): Promise<ApplyParamsTemplateResponse>;
     /**
@@ -434,7 +434,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceDealDetail(req: DescribeInstanceDealDetailRequest, cb?: (error: string, rep: DescribeInstanceDealDetailResponse) => void): Promise<DescribeInstanceDealDetailResponse>;
     /**
-     * 关闭SSL
+     * 本接口（CloseSSL）用于关闭SSL加密认证。
      */
     CloseSSL(req: CloseSSLRequest, cb?: (error: string, rep: CloseSSLResponse) => void): Promise<CloseSSLResponse>;
 }

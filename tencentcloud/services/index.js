@@ -238,6 +238,8 @@ var hunyuan_1 = require("./hunyuan");
 Object.defineProperty(exports, "hunyuan", { enumerable: true, get: function () { return hunyuan_1.hunyuan; } });
 var iai_1 = require("./iai");
 Object.defineProperty(exports, "iai", { enumerable: true, get: function () { return iai_1.iai; } });
+var iap_1 = require("./iap");
+Object.defineProperty(exports, "iap", { enumerable: true, get: function () { return iap_1.iap; } });
 var ic_1 = require("./ic");
 Object.defineProperty(exports, "ic", { enumerable: true, get: function () { return ic_1.ic; } });
 var icr_1 = require("./icr");

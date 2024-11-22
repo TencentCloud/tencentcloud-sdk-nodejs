@@ -117,6 +117,7 @@ export { hasim } from "./hasim";
 export { hcm } from "./hcm";
 export { hunyuan } from "./hunyuan";
 export { iai } from "./iai";
+export { iap } from "./iap";
 export { ic } from "./ic";
 export { icr } from "./icr";
 export { ie } from "./ie";

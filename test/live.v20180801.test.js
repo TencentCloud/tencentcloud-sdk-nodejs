@@ -238,6 +238,16 @@ it("live.v20180801.DescribeLiveDomainReferer", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTimeShiftWriteSizeInfoList", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftWriteSizeInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeTopClientIpSumInfoList", async function () {
     try {
        const data = await client.DescribeTopClientIpSumInfoList({})
@@ -428,6 +438,16 @@ it("live.v20180801.DeleteLiveCallbackTemplate", async function () {
     }
 })
 
+it("live.v20180801.DescribeCasterPlayUrl", async function () {
+    try {
+       const data = await client.DescribeCasterPlayUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLivePushAuthKey", async function () {
     try {
        const data = await client.DescribeLivePushAuthKey({})
@@ -521,6 +541,16 @@ it("live.v20180801.DescribeLiveStreamMonitor", async function () {
 it("live.v20180801.DeleteLiveWatermark", async function () {
     try {
        const data = await client.DeleteLiveWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyCaster", async function () {
+    try {
+       const data = await client.ModifyCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -901,6 +931,16 @@ it("live.v20180801.StopLiveRecord", async function () {
 it("live.v20180801.ModifyLivePlayAuthKey", async function () {
     try {
        const data = await client.ModifyLivePlayAuthKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteCaster", async function () {
+    try {
+       const data = await client.DeleteCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1378,6 +1418,16 @@ it("live.v20180801.DeleteLiveStreamMonitor", async function () {
     }
 })
 
+it("live.v20180801.DescribeCaster", async function () {
+    try {
+       const data = await client.DescribeCaster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveTimeShiftTemplate", async function () {
     try {
        const data = await client.DeleteLiveTimeShiftTemplate({})
@@ -1428,9 +1478,29 @@ it("live.v20180801.DescribeCasterTransitionTypes", async function () {
     }
 })
 
+it("live.v20180801.DescribeCasterDisplayInfo", async function () {
+    try {
+       const data = await client.DescribeCasterDisplayInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.StopLiveStreamMonitor", async function () {
     try {
        const data = await client.StopLiveStreamMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateCaster", async function () {
+    try {
+       const data = await client.CreateCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1461,6 +1531,16 @@ it("live.v20180801.ModifyLiveDomainReferer", async function () {
 it("live.v20180801.DeleteLiveRecordTemplate", async function () {
     try {
        const data = await client.DeleteLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CopyCaster", async function () {
+    try {
+       const data = await client.CopyCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

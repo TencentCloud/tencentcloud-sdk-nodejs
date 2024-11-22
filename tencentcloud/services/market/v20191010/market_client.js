@@ -29,7 +29,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
-
      */
     async GetUsagePlanUsageAmount(req, cb) {
         return this.request("GetUsagePlanUsageAmount", req, cb);

@@ -828,19 +828,23 @@ export interface DescribeConfigFileReleaseRequest {
     /**
      * 命名空间名称
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 配置分组名称
      */
-    Group: string;
+    Group?: string;
     /**
      * 配置文件名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 配置文件发布名称
      */
     ReleaseName?: string;
+    /**
+     * 配置文件发布Id
+     */
+    Id?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayConfig请求参数结构体
@@ -1483,7 +1487,7 @@ export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
  */
 export interface ReleaseVersion {
     /**
-     * 名称
+     * 配置发布的版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
@@ -1492,6 +1496,26 @@ export interface ReleaseVersion {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Active?: boolean;
+    /**
+     * 配置发布的ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 配置发布的命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * 配置发布的分组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Group?: string;
+    /**
+     * 配置发布的文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
 }
 /**
  * 查询Limiter的接入地址
@@ -1895,7 +1919,7 @@ export interface DescribeConfigFilesRequest {
      */
     Group?: string;
     /**
-     * 名称
+     * 配置文件名称
      */
     Name?: string;
     /**
@@ -1910,6 +1934,10 @@ export interface DescribeConfigFilesRequest {
      * 偏移量，默认为0。
      */
     Offset?: number;
+    /**
+     * 配置文件ID
+     */
+    Id?: string;
 }
 /**
  * DeleteCloudNativeAPIGatewayRoute请求参数结构体
@@ -1969,6 +1997,10 @@ export interface DescribeConfigFileReleasesRequest {
      * 排序，asc/desc，默认 desc
      */
     OrderDesc?: string;
+    /**
+     * 配置发布ID
+     */
+    Id?: string;
 }
 /**
  * ModifyCloudNativeAPIGatewayServiceRateLimit返回参数结构体
@@ -2312,6 +2344,10 @@ export interface CreateOrUpdateConfigFileAndReleaseRequest {
      * 配置文件列表详情
      */
     ConfigFilePublishInfo: ConfigFilePublishInfo;
+    /**
+     * 控制开启校验配置版本是否已经存在
+     */
+    StrictEnable?: boolean;
 }
 /**
  * Apollo 环境配置参数
@@ -3254,6 +3290,11 @@ export interface ConfigFileRelease {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Format?: string;
+    /**
+     * 配置文件ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigFileId?: string;
 }
 /**
  * 云原生网关路由信息
@@ -4197,6 +4238,11 @@ export interface PublishConfigFilesResponse {
      */
     Result?: boolean;
     /**
+     * 配置文件发布Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigFileReleaseId?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4638,6 +4684,10 @@ export interface DescribeConfigFileReleaseVersionsRequest {
      * 文件名称
      */
     FileName?: string;
+    /**
+     * 配置文件ID
+     */
+    ConfigFileId?: string;
 }
 /**
  * 服务契约版本信息
@@ -5085,6 +5135,11 @@ export interface ConfigFileReleaseDeletion {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReleaseVersion?: string;
+    /**
+     * 配置发布ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
 }
 /**
  * CreateCloudNativeAPIGatewayServiceRateLimit返回参数结构体
@@ -5908,6 +5963,10 @@ export interface PublishConfigFilesRequest {
      * 配置文件发布
      */
     ConfigFileReleases: ConfigFileRelease;
+    /**
+     * 控制开启校验配置版本是否已经存在
+     */
+    StrictEnable?: boolean;
 }
 /**
  * DescribeConfigFileReleaseHistories请求参数结构体
@@ -5933,6 +5992,10 @@ export interface DescribeConfigFileReleaseHistoriesRequest {
      * 发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续
      */
     EndId?: number;
+    /**
+     * 配置文件ID
+     */
+    ConfigFileId?: string;
     /**
      * 返回数量，默认为20，最大值为100。
      */
@@ -6470,6 +6533,11 @@ export interface CreateConfigFileResponse {
      */
     Result?: boolean;
     /**
+     * 创建的配置文件Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigFileId?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -6537,15 +6605,19 @@ export interface DescribeConfigFileRequest {
     /**
      * 命名空间
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 组
      */
-    Group: string;
+    Group?: string;
     /**
-     * 名称
+     * 配置文件名称
      */
-    Name: string;
+    Name?: string;
+    /**
+     * 配置文件Id
+     */
+    Id?: string;
 }
 /**
  * 实例监听端口信息
@@ -6959,15 +7031,19 @@ export interface DeleteConfigFilesRequest {
     /**
      * 命名空间
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 配置分组名称
      */
-    Group: string;
+    Group?: string;
     /**
      * 配置文件名称
      */
-    Name: string;
+    Name?: string;
+    /**
+     * 配置文件Id
+     */
+    Id?: string;
 }
 /**
  * DescribeGovernanceServices返回参数结构体
@@ -7458,6 +7534,16 @@ export interface CreateOrUpdateConfigFileAndReleaseResponse {
      * 操作是否成功
      */
     Result?: boolean;
+    /**
+     * 配置发布Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigFileReleaseId?: string;
+    /**
+     * 配置文件Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigFileId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

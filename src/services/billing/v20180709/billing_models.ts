@@ -375,7 +375,7 @@ export interface DescribeCostSummaryByProductResponse {
    */
   Data?: Array<ConsumptionBusinessSummaryDataItem>
   /**
-   * 记录数量，NeedRecordNum为0是返回null
+   * 记录数量，NeedRecordNum为0时返回null
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordNum?: number
@@ -2626,12 +2626,12 @@ export interface ConsumptionSummaryTrend {
   /**
    * 趋势类型，upward上升/downward下降/none无
    */
-  Type: string
+  Type?: string
   /**
    * 趋势值，Type为none是该字段值为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -6813,43 +6813,43 @@ export interface BusinessSummaryOverviewItem {
    * 产品编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BusinessCode: string
+  BusinessCode?: string
   /**
    * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
    */
-  BusinessCodeName: string
+  BusinessCodeName?: string
   /**
    * 费用所占百分比，两位小数
    */
-  RealTotalCostRatio: string
+  RealTotalCostRatio?: string
   /**
    * 优惠后总价
    */
-  RealTotalCost: string
+  RealTotalCost?: string
   /**
    * 现金账户支出：通过现金账户支付的金额
    */
-  CashPayAmount: string
+  CashPayAmount?: string
   /**
    * 赠送账户支出：使用赠送金支付的金额
    */
-  IncentivePayAmount: string
+  IncentivePayAmount?: string
   /**
    * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
    */
-  VoucherPayAmount: string
+  VoucherPayAmount?: string
   /**
    * 分成金账户支出：通过分成金账户支付的金额
    */
-  TransferPayAmount: string
+  TransferPayAmount?: string
   /**
    * 账单月份，格式2019-08
    */
-  BillMonth: string
+  BillMonth?: string
   /**
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
-  TotalCost: string
+  TotalCost?: string
 }
 
 /**

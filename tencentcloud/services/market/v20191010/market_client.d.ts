@@ -9,7 +9,6 @@ export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
-
      */
     GetUsagePlanUsageAmount(req: GetUsagePlanUsageAmountRequest, cb?: (error: string, rep: GetUsagePlanUsageAmountResponse) => void): Promise<GetUsagePlanUsageAmountResponse>;
     /**

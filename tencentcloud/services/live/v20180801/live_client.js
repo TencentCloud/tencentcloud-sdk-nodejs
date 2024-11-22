@@ -191,6 +191,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveDomainReferer", req, cb);
     }
     /**
+     * 支持直播时移写入量数据查询。
+     */
+    async DescribeLiveTimeShiftWriteSizeInfoList(req, cb) {
+        return this.request("DescribeLiveTimeShiftWriteSizeInfoList", req, cb);
+    }
+    /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
 查询某段时间top n客户端ip汇总信息（暂支持top 1000）
      */
@@ -319,6 +325,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLiveCallbackTemplate", req, cb);
     }
     /**
+     * 该接口用来获取导播台视频流的播放url，用来在页面上拉流展示。
+     */
+    async DescribeCasterPlayUrl(req, cb) {
+        return this.request("DescribeCasterPlayUrl", req, cb);
+    }
+    /**
      * 查询直播推流鉴权key
      */
     async DescribeLivePushAuthKey(req, cb) {
@@ -377,6 +389,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLiveWatermark(req, cb) {
         return this.request("DeleteLiveWatermark", req, cb);
+    }
+    /**
+     * 该接口用来设置导播台的描述、名称、录制模板id等参数。
+     */
+    async ModifyCaster(req, cb) {
+        return this.request("ModifyCaster", req, cb);
     }
     /**
      * 查询绑定证书的域名列表。
@@ -625,6 +643,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async ModifyLivePlayAuthKey(req, cb) {
         return this.request("ModifyLivePlayAuthKey", req, cb);
+    }
+    /**
+     * 该接口用来删除一个导播台的所有信息。
+注意，调用该接口后，所有的导播台信息将被清除，包括正在直播的内容也将直接中断。
+     */
+    async DeleteCaster(req, cb) {
+        return this.request("DeleteCaster", req, cb);
     }
     /**
      * 获取单个直播垫片模板
@@ -944,6 +969,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DeleteLiveStreamMonitor", req, cb);
     }
     /**
+     * 查询导播台信息接口，用来查询导播台状态、描述、输出长、宽等信息
+     */
+    async DescribeCaster(req, cb) {
+        return this.request("DescribeCaster", req, cb);
+    }
+    /**
      * 删除直播时移模板。
      */
     async DeleteLiveTimeShiftTemplate(req, cb) {
@@ -976,10 +1007,22 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeCasterTransitionTypes", req, cb);
     }
     /**
+     * 查询导播台PVW任务和PGM任务的展示信息，包括使用的布局、水印、字幕等信息。
+     */
+    async DescribeCasterDisplayInfo(req, cb) {
+        return this.request("DescribeCasterDisplayInfo", req, cb);
+    }
+    /**
      * 该接口用来停止直播流监播任务。
      */
     async StopLiveStreamMonitor(req, cb) {
         return this.request("StopLiveStreamMonitor", req, cb);
+    }
+    /**
+     * 该接口用来创建新的导播台
+     */
+    async CreateCaster(req, cb) {
+        return this.request("CreateCaster", req, cb);
     }
     /**
      * 返回直播中、无推流或者禁播等状态。
@@ -1008,6 +1051,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DeleteLiveRecordTemplate(req, cb) {
         return this.request("DeleteLiveRecordTemplate", req, cb);
+    }
+    /**
+     * 该接口用来复制导播台配置
+     */
+    async CopyCaster(req, cb) {
+        return this.request("CopyCaster", req, cb);
     }
     /**
      * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。

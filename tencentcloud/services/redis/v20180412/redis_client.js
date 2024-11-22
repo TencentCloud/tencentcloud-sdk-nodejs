@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("redis.tencentcloudapi.com", "2018-04-12", clientConfig);
     }
     /**
-     * 设置实例输入模式
+     * 本接口（ModifyInstanceReadOnly）用于设置实例输入模式。
      */
     async ModifyInstanceReadOnly(req, cb) {
         return this.request("ModifyInstanceReadOnly", req, cb);
@@ -48,13 +48,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskList", req, cb);
     }
     /**
-     * 移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
+     * 本接口（DeleteReplicationInstance）移除复制组成员。注：该接口下线中，请使用 [RemoveReplicationInstance](https://cloud.tencent.com/document/product/239/90099)。
      */
     async DeleteReplicationInstance(req, cb) {
         return this.request("DeleteReplicationInstance", req, cb);
     }
     /**
-     * 回收站实例立即下线
+     * 本接口（CleanUpInstance）用于立即下线回收站的实例。
      */
     async CleanUpInstance(req, cb) {
         return this.request("CleanUpInstance", req, cb);
@@ -84,7 +84,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmd", req, cb);
     }
     /**
-     * 将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
+     * 本接口（UpgradeInstanceVersion）用于将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
      */
     async UpgradeInstanceVersion(req, cb) {
         return this.request("UpgradeInstanceVersion", req, cb);
@@ -108,7 +108,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupDownloadRestriction", req, cb);
     }
     /**
-     * 修改实例子账号
+     * 本接口（ModifyInstanceAccount）用于修改实例子账号。
      */
     async ModifyInstanceAccount(req, cb) {
         return this.request("ModifyInstanceAccount", req, cb);
@@ -126,7 +126,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDetail", req, cb);
     }
     /**
-     * 升级实例支持多AZ
+     * 本接口（UpgradeVersionToMultiAvailabilityZones）用于升级实例支持多AZ。
      */
     async UpgradeVersionToMultiAvailabilityZones(req, cb) {
         return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb);
@@ -138,13 +138,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGlobalReplicationArea", req, cb);
     }
     /**
-     * 本接口(ModifyInstanceParams)用于修改Redis实例的参数配置。
+     * 本接口（ModifyInstanceParams）用于修改 Redis 实例的参数配置。
      */
     async ModifyInstanceParams(req, cb) {
         return this.request("ModifyInstanceParams", req, cb);
     }
     /**
-     * 清空Redis实例的实例数据。
+     * 本接口（ClearInstance）用于清空实例数据。
      */
     async ClearInstance(req, cb) {
         return this.request("ClearInstance", req, cb);
@@ -156,13 +156,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupUrl", req, cb);
     }
     /**
-     * 删除实例子账号
+     * 本接口（DeleteInstanceAccount）用于删除实例子账号。
      */
     async DeleteInstanceAccount(req, cb) {
         return this.request("DeleteInstanceAccount", req, cb);
     }
     /**
-     * 修改实例的连接配置，包括带宽和最大连接数。
+     * 本接口（ModifyConnectionConfig）用于修改实例的连接配置，包括带宽和最大连接数。
      */
     async ModifyConnectionConfig(req, cb) {
         return this.request("ModifyConnectionConfig", req, cb);
@@ -174,13 +174,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLogDelivery", req, cb);
     }
     /**
-     * 修改实例相关信息
+     * 本接口（ModifyInstance）用于修改实例相关信息。
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
     }
     /**
-     * 复制组实例更换角色
+     * 本接口（ChangeInstanceRole）用于更换复制组内实例的角色。
      */
     async ChangeInstanceRole(req, cb) {
         return this.request("ChangeInstanceRole", req, cb);
@@ -192,7 +192,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceNodeInfo", req, cb);
     }
     /**
-     * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
+     * 本接口（CreateInstanceAccount）用于自定义访问实例的账号。
      */
     async CreateInstanceAccount(req, cb) {
         return this.request("CreateInstanceAccount", req, cb);
@@ -204,13 +204,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceEvent", req, cb);
     }
     /**
-     * 实例proxy版本升级
+     * 本接口（UpgradeProxyVersion）用于升级实例 Proxy 版本。
      */
     async UpgradeProxyVersion(req, cb) {
         return this.request("UpgradeProxyVersion", req, cb);
     }
     /**
-     * 查询实例CPU耗时
+     * 本接口（DescribeInstanceMonitorTopNCmdTook）用于查询实例 CPU 耗时。
      */
     async DescribeInstanceMonitorTopNCmdTook(req, cb) {
         return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb);
@@ -228,7 +228,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteParamTemplate", req, cb);
     }
     /**
-     * 添加复制组成员
+     * 本接口（AddReplicationInstance）用于为全球复制组添加实例成员。
      */
     async AddReplicationInstance(req, cb) {
         return this.request("AddReplicationInstance", req, cb);
@@ -246,19 +246,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateParamTemplate", req, cb);
     }
     /**
-     * 禁用读写分离
+     * 本接口（DisableReplicaReadonly）用于禁用读写分离功能。
      */
     async DisableReplicaReadonly(req, cb) {
         return this.request("DisableReplicaReadonly", req, cb);
     }
     /**
-     * 查询实例DTS信息
+     * 本接口（DescribeInstanceDTSInfo）用于查询实例 DTS 信息。
      */
     async DescribeInstanceDTSInfo(req, cb) {
         return this.request("DescribeInstanceDTSInfo", req, cb);
     }
     /**
-     * 查询实例扩容价格
+     * 本接口（InquiryPriceUpgradeInstance）用于查询实例扩容价格。
      */
     async InquiryPriceUpgradeInstance(req, cb) {
         return this.request("InquiryPriceUpgradeInstance", req, cb);
@@ -276,31 +276,31 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceLogDelivery", req, cb);
     }
     /**
-     * 开通外网
+     * 本接口（AllocateWanAddress）用于开通实例外网访问。
      */
     async AllocateWanAddress(req, cb) {
         return this.request("AllocateWanAddress", req, cb);
     }
     /**
-     * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目的安全组详情。
      */
     async DescribeProjectSecurityGroups(req, cb) {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
-     * 查询Tendis慢查询
+     * 本接口（DescribeTendisSlowLog）用于查询 Tendis 实例慢查询。
      */
     async DescribeTendisSlowLog(req, cb) {
         return this.request("DescribeTendisSlowLog", req, cb);
     }
     /**
-     * 修改参数模板
+     * 本接口（ModifyParamTemplate）用于修改参数模板。
      */
     async ModifyParamTemplate(req, cb) {
         return this.request("ModifyParamTemplate", req, cb);
     }
     /**
-     * 查询新购实例价格
+     * 本接口（InquiryPriceCreateInstance）用于查询新购实例价格。
      */
     async InquiryPriceCreateInstance(req, cb) {
         return this.request("InquiryPriceCreateInstance", req, cb);
@@ -330,13 +330,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb);
     }
     /**
-     * 关闭外网
+     * 本接口（ReleaseWanAddress）用于关闭外网访问。
      */
     async ReleaseWanAddress(req, cb) {
         return this.request("ReleaseWanAddress", req, cb);
     }
     /**
-     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     * 本接口（DisassociateSecurityGroups）用于安全组批量解绑实例。
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
@@ -354,13 +354,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSpecBandwidth", req, cb);
     }
     /**
-     * Proxy模拟故障接口
+     * 本接口（SwitchProxy）为 Proxy 模拟故障接口。
      */
     async SwitchProxy(req, cb) {
         return this.request("SwitchProxy", req, cb);
     }
     /**
-     * 包年包月实例退还
+     * 本接口（DestroyPrepaidInstance）用于退还包年包月计费的 Redis 实例。
      */
     async DestroyPrepaidInstance(req, cb) {
         return this.request("DestroyPrepaidInstance", req, cb);
@@ -378,19 +378,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplateInfo", req, cb);
     }
     /**
-     * 按量计费实例销毁
+     * 本接口（DestroyPostpaidInstance）用于销毁按量计费实例。
      */
     async DestroyPostpaidInstance(req, cb) {
         return this.request("DestroyPostpaidInstance", req, cb);
     }
     /**
-     * 实例解隔离
+     * 本接口（StartupInstance）用于实例解隔离。
      */
     async StartupInstance(req, cb) {
         return this.request("StartupInstance", req, cb);
     }
     /**
-     * 查询实例访问的耗时分布
+     * 本接口（DescribeInstanceMonitorTookDist）用于查询实例访问的耗时分布。
      */
     async DescribeInstanceMonitorTookDist(req, cb) {
         return this.request("DescribeInstanceMonitorTookDist", req, cb);
@@ -408,19 +408,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceBackups", req, cb);
     }
     /**
-     * 重置密码
+     * 本接口（ResetPassword）用于重置实例访问密码。
      */
     async ResetPassword(req, cb) {
         return this.request("ResetPassword", req, cb);
     }
     /**
-     * 移除复制组成员
+     * 本接口（RemoveReplicationInstance）用于移除复制组中的实例。
      */
     async RemoveReplicationInstance(req, cb) {
         return this.request("RemoveReplicationInstance", req, cb);
     }
     /**
-     * 实例小版本升级
+     * 本接口（UpgradeSmallVersion）用于实例小版本升级。
      */
     async UpgradeSmallVersion(req, cb) {
         return this.request("UpgradeSmallVersion", req, cb);
@@ -432,7 +432,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstancePassword", req, cb);
     }
     /**
-     * 该接口（CreateReplicationGroup）用于创建复制组。
+     * 本接口（CreateReplicationGroup）用于创建复制组。
      */
     async CreateReplicationGroup(req, cb) {
         return this.request("CreateReplicationGroup", req, cb);
@@ -444,7 +444,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorSIP", req, cb);
     }
     /**
-     * 查询项目安全组信息
+     * 本接口（DescribeProjectSecurityGroup）用于查询项目安全组信息。
      */
     async DescribeProjectSecurityGroup(req, cb) {
         return this.request("DescribeProjectSecurityGroup", req, cb);
@@ -462,7 +462,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModfiyInstancePassword", req, cb);
     }
     /**
-     * 启用读写分离
+     * 本接口（EnableReplicaReadonly）用于启用读写分离功能。
      */
     async EnableReplicaReadonly(req, cb) {
         return this.request("EnableReplicaReadonly", req, cb);
@@ -486,19 +486,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKey", req, cb);
     }
     /**
-     * 查询Redis独享集群列表
+     * 本接口（DescribeRedisClusters）用于查询Redis独享集群列表。
      */
     async DescribeRedisClusters(req, cb) {
         return this.request("DescribeRedisClusters", req, cb);
     }
     /**
-     * 本接口（KillMasterGroup）模拟故障。
+     * 本接口（KillMasterGroup）用于模拟故障。
      */
     async KillMasterGroup(req, cb) {
         return this.request("KillMasterGroup", req, cb);
     }
     /**
-     * 查询Redis实例列表信息。该接口已废弃。
+     * 本接口（DescribeCommonDBInstances）用于查询Redis实例列表信息。当前该接口已废弃。
      */
     async DescribeCommonDBInstances(req, cb) {
         return this.request("DescribeCommonDBInstances", req, cb);
@@ -528,7 +528,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceEvents", req, cb);
     }
     /**
-     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * 在通过 DTS 支持跨可用区灾备的场景中，通过该接口（SwitchInstanceVip）交换实例 VIP 完成实例灾备切换。交换 VIP 后目标实例可写，源和目标实例VIP互换，同时源与目标实例间 DTS 同步任务断开。
      */
     async SwitchInstanceVip(req, cb) {
         return this.request("SwitchInstanceVip", req, cb);
@@ -552,7 +552,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewInstance", req, cb);
     }
     /**
-     * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
+     * 本接口（ModifyMaintenanceWindow）用于修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
      */
     async ModifyMaintenanceWindow(req, cb) {
         return this.request("ModifyMaintenanceWindow", req, cb);
@@ -582,7 +582,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 开启SSL
+     * 本接口（OpenSSL）用于开启 SSL 加密认证功能。
      */
     async OpenSSL(req, cb) {
         return this.request("OpenSSL", req, cb);
@@ -600,7 +600,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBandwidthRange", req, cb);
     }
     /**
-     * 查询复制组信息
+     * 本接口（DescribeReplicationGroupInstance）用于查询复制组信息。
      */
     async DescribeReplicationGroupInstance(req, cb) {
         return this.request("DescribeReplicationGroupInstance", req, cb);
@@ -636,13 +636,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeInstance", req, cb);
     }
     /**
-     * 查询Redis独享集群概览信息
+     * 本接口（DescribeRedisClusterOverview）用于查询 Redis 独享集群概览信息。
      */
     async DescribeRedisClusterOverview(req, cb) {
         return this.request("DescribeRedisClusterOverview", req, cb);
     }
     /**
-     * 应用参数模板到实例
+     * 本接口（ApplyParamsTemplate）用于应用参数模板到实例。
      */
     async ApplyParamsTemplate(req, cb) {
         return this.request("ApplyParamsTemplate", req, cb);
@@ -666,7 +666,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceDealDetail", req, cb);
     }
     /**
-     * 关闭SSL
+     * 本接口（CloseSSL）用于关闭SSL加密认证。
      */
     async CloseSSL(req, cb) {
         return this.request("CloseSSL", req, cb);
