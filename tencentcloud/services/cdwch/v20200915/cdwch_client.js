@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
+     * open-api接口提供弹性伸缩云原生集群能力
+     */
+    async ScaleCNOutUpInstance(req, cb) {
+        return this.request("ScaleCNOutUpInstance", req, cb);
+    }
+    /**
      * 备份恢复
      */
     async RecoverBackUpJob(req, cb) {

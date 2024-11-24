@@ -33,6 +33,7 @@ import {
   DescribeBackUpScheduleRequest,
   DescribeSpecResponse,
   DescribeSpecRequest,
+  ScaleCNOutUpInstanceResponse,
   DestroyInstanceRequest,
   ModifyUserNewPrivilegeRequest,
   DescribeBackUpTablesResponse,
@@ -94,6 +95,7 @@ import {
   DestroyInstanceResponse,
   ResizeDiskResponse,
   DescribeBackUpScheduleResponse,
+  ScaleCNOutUpInstanceRequest,
   DescribeCkSqlApisResponse,
   DescribeBackUpJobRequest,
   ScaleUpInstanceResponse,
@@ -267,6 +269,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
   ): Promise<ModifyClusterConfigsResponse> {
     return this.request("ModifyClusterConfigs", req, cb)
+  }
+
+  /**
+   * open-api接口提供弹性伸缩云原生集群能力
+   */
+  async ScaleCNOutUpInstance(
+    req: ScaleCNOutUpInstanceRequest,
+    cb?: (error: string, rep: ScaleCNOutUpInstanceResponse) => void
+  ): Promise<ScaleCNOutUpInstanceResponse> {
+    return this.request("ScaleCNOutUpInstance", req, cb)
   }
 
   /**

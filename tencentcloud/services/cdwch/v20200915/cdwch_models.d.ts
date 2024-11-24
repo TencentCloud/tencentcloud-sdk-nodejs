@@ -298,6 +298,30 @@ export interface DescribeSpecRequest {
     CaseType?: number;
 }
 /**
+ * ScaleCNOutUpInstance返回参数结构体
+ */
+export interface ScaleCNOutUpInstanceResponse {
+    /**
+     * 流程ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: string;
+    /**
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DestroyInstance请求参数结构体
  */
 export interface DestroyInstanceRequest {
@@ -1901,6 +1925,31 @@ export interface DescribeBackUpScheduleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ScaleCNOutUpInstance请求参数结构体
+ */
+export interface ScaleCNOutUpInstanceRequest {
+    /**
+     * 实例唯一ID
+     */
+    InstanceId: string;
+    /**
+     * warehouse名称
+     */
+    VirtualCluster: string;
+    /**
+     * 子网id
+     */
+    UserSubnetID: string;
+    /**
+     * 新的warehouse的个数
+     */
+    NewCount: number;
+    /**
+     * 集群的规格2X-Small、X-Small、Small
+     */
+    NewSpecName: string;
 }
 /**
  * DescribeCkSqlApis返回参数结构体

@@ -2899,6 +2899,22 @@ export interface CreatePersonSampleRequest {
 }
 
 /**
+ * 图片任务输入参数
+ */
+export interface ImageTaskInput {
+  /**
+   * 图片编码配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncodeConfig?: ImageEncodeConfig
+  /**
+   * 图片增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnhanceConfig?: ImageEnhanceConfig
+}
+
+/**
  * 查询输出的HLS拉流URL信息。
  */
 export interface DescribeOutputHLSPullServerUrl {
@@ -6561,6 +6577,20 @@ export interface ProcessMediaRequest {
 }
 
 /**
+ * ProcessImage返回参数结构体
+ */
+export interface ProcessImageResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询输入的RTSP配置信息。
  */
 export interface DescribeRTSPPullSourceAddress {
@@ -8814,6 +8844,28 @@ export interface AiRecognitionTaskOcrWordsResultItem {
 }
 
 /**
+ * ProcessImage请求参数结构体
+ */
+export interface ProcessImageRequest {
+  /**
+   * 图片处理的文件输入信息。
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * 图片处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 图片处理生成的文件输出的路径。如果不填表示与 InputInfo 中文件所在的目录一致。如果是目录，如`/image/201907/`，表示继承原文件名输出到该目录。
+   */
+  OutputDir?: string
+  /**
+   * 图片处理参数。
+   */
+  ImageTask?: ImageTaskInput
+}
+
+/**
  * DeleteSampleSnapshotTemplate返回参数结构体
  */
 export interface DeleteSampleSnapshotTemplateResponse {
@@ -10044,6 +10096,22 @@ export interface SharpEnhanceConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Intensity?: number
+}
+
+/**
+ * 图片编码格式参数
+ */
+export interface ImageEncodeConfig {
+  /**
+   * 图片格式，取值范围：JPG、BMP、GIF、PNG、WebP，缺省为原图格式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Format?: string
+  /**
+   * 图片的相对质量，取值范围：1 - 100，数值以原图质量为标准，缺省为原图质量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Quality?: number
 }
 
 /**
@@ -11331,6 +11399,17 @@ export interface DeleteStreamLinkOutputResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 图片增强参数
+ */
+export interface ImageEnhanceConfig {
+  /**
+   * 超分配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperResolution?: SuperResolutionConfig
 }
 
 /**

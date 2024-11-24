@@ -468,6 +468,16 @@ it("mps.v20190612.StartStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.ProcessImage", async function () {
+    try {
+       const data = await client.ProcessImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyStreamLinkInput", async function () {
     try {
        const data = await client.ModifyStreamLinkInput({})

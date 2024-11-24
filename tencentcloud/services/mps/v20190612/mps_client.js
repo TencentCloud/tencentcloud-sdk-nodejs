@@ -328,6 +328,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartStreamLinkFlow", req, cb);
     }
     /**
+     * 发起图片处理，功能包括：
+1. 格式转换；
+2. 图像增强；
+     */
+    async ProcessImage(req, cb) {
+        return this.request("ProcessImage", req, cb);
+    }
+    /**
      * 修改媒体传输流的输入信息。
      */
     async ModifyStreamLinkInput(req, cb) {

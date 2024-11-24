@@ -7899,7 +7899,7 @@ pausing
    */
   DbType?: string
   /**
-   * 数据库类型，normal，serverless
+   * Db类型：<li>NORMAL</li><li>SERVERLESS</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DbMode?: string
@@ -8550,6 +8550,10 @@ export interface ClusterInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStorageType?: string
+  /**
+   * 数据库类型
+   */
+  DbMode?: string
 }
 
 /**

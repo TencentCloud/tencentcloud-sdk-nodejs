@@ -122,6 +122,7 @@ import {
   ScheduleTask,
   CreateStreamLinkEventRequest,
   CreatePersonSampleRequest,
+  ImageTaskInput,
   DescribeOutputHLSPullServerUrl,
   DescribeStreamLinkFlowSRTStatisticsRequest,
   MediaAiAnalysisCoverItem,
@@ -273,6 +274,7 @@ import {
   CreateStreamLinkEventResponse,
   AdaptiveDynamicStreamingInfoItem,
   ProcessMediaRequest,
+  ProcessImageResponse,
   DescribeRTSPPullSourceAddress,
   DescribeOutputRTSPPullSettings,
   AiRecognitionTaskOcrFullTextResult,
@@ -365,6 +367,7 @@ import {
   DescribeAIAnalysisTemplatesRequest,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
+  ProcessImageRequest,
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
   AiAnalysisTaskDescriptionResult,
@@ -416,6 +419,7 @@ import {
   DescribeMediaMetaDataResponse,
   TerrorismOcrReviewTemplateInfo,
   SharpEnhanceConfig,
+  ImageEncodeConfig,
   AiReviewTaskPornResult,
   DescribeStreamLinkFlowRealtimeStatusRequest,
   AiAnalysisTaskDelLogoOutput,
@@ -469,6 +473,7 @@ import {
   FlowLogInfo,
   DeleteWordSamplesResponse,
   DeleteStreamLinkOutputResponse,
+  ImageEnhanceConfig,
   WatermarkInput,
   EnableWorkflowResponse,
   Activity,
@@ -1142,6 +1147,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartStreamLinkFlowResponse) => void
   ): Promise<StartStreamLinkFlowResponse> {
     return this.request("StartStreamLinkFlow", req, cb)
+  }
+
+  /**
+     * 发起图片处理，功能包括：
+1. 格式转换；
+2. 图像增强；
+     */
+  async ProcessImage(
+    req: ProcessImageRequest,
+    cb?: (error: string, rep: ProcessImageResponse) => void
+  ): Promise<ProcessImageResponse> {
+    return this.request("ProcessImage", req, cb)
   }
 
   /**
