@@ -626,7 +626,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuditRuleTemplateModifyHistory(req: DescribeAuditRuleTemplateModifyHistoryRequest, cb?: (error: string, rep: DescribeAuditRuleTemplateModifyHistoryResponse) => void): Promise<DescribeAuditRuleTemplateModifyHistoryResponse>;
     /**
-     * 主实例创建数据库代理
+     * 本接口（CreateCdbProxy）用于主实例创建数据库代理。
      */
     CreateCdbProxy(req: CreateCdbProxyRequest, cb?: (error: string, rep: CreateCdbProxyResponse) => void): Promise<CreateCdbProxyResponse>;
     /**

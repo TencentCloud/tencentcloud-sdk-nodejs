@@ -38,9 +38,9 @@ it("cfg.v20210820.CreateTaskFromTemplate", async function () {
     }
 })
 
-it("cfg.v20210820.DescribeTemplate", async function () {
+it("cfg.v20210820.CreateTaskFromMultiAction", async function () {
     try {
-       const data = await client.DescribeTemplate({})
+       const data = await client.CreateTaskFromMultiAction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +171,16 @@ it("cfg.v20210820.DescribeActionFieldConfigList", async function () {
 it("cfg.v20210820.DescribeTask", async function () {
     try {
        const data = await client.DescribeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfg.v20210820.DescribeTemplate", async function () {
+    try {
+       const data = await client.DescribeTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

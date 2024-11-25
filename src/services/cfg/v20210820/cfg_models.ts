@@ -594,6 +594,20 @@ export interface Template {
 }
 
 /**
+ * DescribeObjectTypeList返回参数结构体
+ */
+export interface DescribeObjectTypeListResponse {
+  /**
+   * 对象类型列表
+   */
+  ObjectTypeList?: Array<ObjectType>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskExecuteLogs请求参数结构体
  */
 export interface DescribeTaskExecuteLogsRequest {
@@ -609,20 +623,6 @@ export interface DescribeTaskExecuteLogsRequest {
    * 日志起始的行数。
    */
   Offset: number
-}
-
-/**
- * DescribeObjectTypeList返回参数结构体
- */
-export interface DescribeObjectTypeListResponse {
-  /**
-   * 对象类型列表
-   */
-  ObjectTypeList?: Array<ObjectType>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -738,6 +738,16 @@ export interface PolicyTriggerLog {
 }
 
 /**
+ * ModifyTaskRunStatus返回参数结构体
+ */
+export interface ModifyTaskRunStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTemplate请求参数结构体
  */
 export interface DescribeTemplateRequest {
@@ -778,60 +788,21 @@ export interface ExecuteTaskInstanceRequest {
 }
 
 /**
- * 任务分组动作实例
+ * 演练动作组简易配置
  */
-export interface TaskGroupInstance {
+export interface TaskGroupForAction {
   /**
-   * 实例ID
+   * 动作ID
    */
-  TaskGroupInstanceId: number
+  TaskActionId?: number
   /**
-   * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * {"ActionTimeout":1800}
    */
-  TaskGroupInstanceObjectId: string
+  TaskActionGeneralConfiguration?: string
   /**
-   * 实例动作执行状态
+   * {"ip": "0.0.0.0"}
    */
-  TaskGroupInstanceStatus: number
-  /**
-   * 实例创建时间
-   */
-  TaskGroupInstanceCreateTime: string
-  /**
-   * 实例更新时间
-   */
-  TaskGroupInstanceUpdateTime: string
-  /**
-   * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过
-   */
-  TaskGroupInstanceStatusType: number
-  /**
-   * 执行开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskGroupInstanceStartTime: string
-  /**
-   * 执行结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskGroupInstanceEndTime: string
-  /**
-   * 实例动作执行日志
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  TaskGroupInstanceExecuteLog?: string
-  /**
-   * 实例是否可重试
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskGroupInstanceIsRedo?: boolean
-  /**
-   * 动作实例执行时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskGroupInstanceExecuteTime?: number
+  TaskActionCustomConfiguration?: string
 }
 
 /**
@@ -1347,6 +1318,32 @@ export interface CreateTaskFromTemplateRequest {
 }
 
 /**
+ * CreateTaskFromMultiAction请求参数结构体
+ */
+export interface CreateTaskFromMultiActionRequest {
+  /**
+   * 参与演练的实例ID
+   */
+  TaskInstances: Array<string>
+  /**
+   * 演练名称，不填则默认取动作名称
+   */
+  TaskTitle?: string
+  /**
+   * 演练描述，不填则默认取动作描述
+   */
+  TaskDescription?: string
+  /**
+   * 演练自动暂停时间，单位分钟, 不填则默认为60
+   */
+  TaskPauseDuration?: number
+  /**
+   * 演练动作组配置
+   */
+  TaskAction?: Array<TaskGroupForAction>
+}
+
+/**
  * TriggerPolicy请求参数结构体
  */
 export interface TriggerPolicyRequest {
@@ -1737,6 +1734,63 @@ export interface TemplatePolicy {
 }
 
 /**
+ * 任务分组动作实例
+ */
+export interface TaskGroupInstance {
+  /**
+   * 实例ID
+   */
+  TaskGroupInstanceId: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskGroupInstanceObjectId: string
+  /**
+   * 实例动作执行状态
+   */
+  TaskGroupInstanceStatus: number
+  /**
+   * 实例创建时间
+   */
+  TaskGroupInstanceCreateTime: string
+  /**
+   * 实例更新时间
+   */
+  TaskGroupInstanceUpdateTime: string
+  /**
+   * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过
+   */
+  TaskGroupInstanceStatusType: number
+  /**
+   * 执行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskGroupInstanceStartTime: string
+  /**
+   * 执行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskGroupInstanceEndTime: string
+  /**
+   * 实例动作执行日志
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  TaskGroupInstanceExecuteLog?: string
+  /**
+   * 实例是否可重试
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskGroupInstanceIsRedo?: boolean
+  /**
+   * 动作实例执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskGroupInstanceExecuteTime?: number
+}
+
+/**
  * 动作栏位配置结果
  */
 export interface ActionFieldConfigResult {
@@ -1871,9 +1925,13 @@ export interface ActionLibraryListResult {
 }
 
 /**
- * ModifyTaskRunStatus返回参数结构体
+ * CreateTaskFromMultiAction返回参数结构体
  */
-export interface ModifyTaskRunStatusResponse {
+export interface CreateTaskFromMultiActionResponse {
+  /**
+   * 创建成功的演练ID
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

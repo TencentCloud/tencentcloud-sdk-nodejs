@@ -181,7 +181,7 @@ import {
   ListAppResponse,
   AppInfo,
   CreateReconstructDocumentFlowRequest,
-  ValueInfo,
+  RunReRankResponse,
   QueryParseDocResultRequest,
   KnowledgeQaConfig,
   Coord,
@@ -198,6 +198,7 @@ import {
   CreateReleaseResponse,
   QueryRewriteRequest,
   ModifyAppRequest,
+  RunReRankRequest,
   DeleteAttributeLabelResponse,
   RetryReleaseRequest,
   VerifyQARequest,
@@ -224,6 +225,7 @@ import {
   RetryReleaseResponse,
   CreateAttributeLabelResponse,
   CreateQAResponse,
+  ReRankDataObject,
   StopDocParseResponse,
   ParseDocResponse,
   ListQACateRequest,
@@ -234,6 +236,7 @@ import {
   DeleteAppRequest,
   TaskParams,
   ListAppCategoryRspOption,
+  ValueInfo,
   DescribeStorageCredentialRequest,
   QAList,
   DescribeCorpResponse,
@@ -420,6 +423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListRejectedQuestionPreviewResponse) => void
   ): Promise<ListRejectedQuestionPreviewResponse> {
     return this.request("ListRejectedQuestionPreview", req, cb)
+  }
+
+  /**
+   * 重排序
+   */
+  async RunReRank(
+    req: RunReRankRequest,
+    cb?: (error: string, rep: RunReRankResponse) => void
+  ): Promise<RunReRankResponse> {
+    return this.request("RunReRank", req, cb)
   }
 
   /**

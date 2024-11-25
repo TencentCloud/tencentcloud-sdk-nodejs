@@ -3305,7 +3305,7 @@ export interface KongCertificatesPreview {
    * Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
   /**
    * 绑定的域名
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5451,7 +5451,7 @@ export interface DescribeCloudNativeAPIGatewaysResponse {
   /**
    * 获取云原生API网关实例列表响应结果。
    */
-  Result: ListCloudNativeAPIGatewayResult
+  Result?: ListCloudNativeAPIGatewayResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

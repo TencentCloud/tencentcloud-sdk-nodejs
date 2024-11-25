@@ -4241,49 +4241,21 @@ export interface CreateReconstructDocumentFlowRequest {
     Config?: CreateReconstructDocumentFlowConfig;
 }
 /**
- * 任务流程参数信息
+ * RunReRank返回参数结构体
  */
-export interface ValueInfo {
+export interface RunReRankResponse {
     /**
-     * 值ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 相关性, 数值越大越相关
      */
-    Id?: string;
+    ScoreList?: Array<number>;
     /**
-     * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 消耗量，仅返回TotalToken
      */
-    Name?: string;
+    Usage?: Usage;
     /**
-     * 值类型：0:未知或者空, 1:string, 2:int, 3:float, 4:bool, 5:array(字符串数组), 6: object_array(结构体数组), 7: object(结构体)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ValueType?: number;
-    /**
-     * string
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ValueStr?: string;
-    /**
-     * int（避免精度丢失使用字符串返回）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ValueInt?: string;
-    /**
-     * float
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ValueFloat?: number;
-    /**
-     * bool
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ValueBool?: boolean;
-    /**
-     * array
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ValueStrArray?: Array<string>;
+    RequestId?: string;
 }
 /**
  * QueryParseDocResult请求参数结构体
@@ -4640,6 +4612,33 @@ export interface ModifyAppRequest {
      * 应用配置
      */
     AppConfig?: AppConfig;
+}
+/**
+ * RunReRank请求参数结构体
+ */
+export interface RunReRankRequest {
+    /**
+     * 模型名称, 必填，默认: lke-reranker-base
+     */
+    Query?: string;
+    /**
+     * 文档列表，必填，最多20个
+     */
+    Docs?: Array<string>;
+    /**
+     * 模型名称, 非必填，默认: lke-reranker-base
+     */
+    Model?: string;
+    /**
+     * 需要计算关联性的2段内容
+     * @deprecated
+     */
+    DataList?: Array<ReRankDataObject>;
+    /**
+     * 是否在线, 后台异步任务使用离线, 实时任务使用在线, 默认值: false
+     * @deprecated
+     */
+    Online?: boolean;
 }
 /**
  * DeleteAttributeLabel返回参数结构体
@@ -5185,6 +5184,19 @@ export interface CreateQAResponse {
     RequestId?: string;
 }
 /**
+ * 重排数据, 计算2段内容的关联性
+ */
+export interface ReRankDataObject {
+    /**
+     * 第一段内容
+     */
+    PromptA: string;
+    /**
+     * 第二段内容
+     */
+    PromptB: string;
+}
+/**
  * StopDocParse返回参数结构体
  */
 export interface StopDocParseResponse {
@@ -5359,6 +5371,51 @@ export interface ListAppCategoryRspOption {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Logo?: string;
+}
+/**
+ * 任务流程参数信息
+ */
+export interface ValueInfo {
+    /**
+     * 值ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 值类型：0:未知或者空, 1:string, 2:int, 3:float, 4:bool, 5:array(字符串数组), 6: object_array(结构体数组), 7: object(结构体)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueType?: number;
+    /**
+     * string
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueStr?: string;
+    /**
+     * int（避免精度丢失使用字符串返回）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueInt?: string;
+    /**
+     * float
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueFloat?: number;
+    /**
+     * bool
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueBool?: boolean;
+    /**
+     * array
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValueStrArray?: Array<string>;
 }
 /**
  * DescribeStorageCredential请求参数结构体

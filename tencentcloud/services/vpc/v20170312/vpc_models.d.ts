@@ -3079,12 +3079,10 @@ export interface CcnRouteTableInputPolicy {
     Description: string;
     /**
      * as-path操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateAsPath?: string;
     /**
      * as-path操作模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsPathOperateMode?: string;
 }
@@ -3107,7 +3105,6 @@ export interface DescribeSecurityGroupAssociationStatisticsResponse {
 export interface ModifyAssistantCidrResponse {
     /**
      * 辅助CIDR数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssistantCidrSet?: Array<AssistantCidr>;
     /**

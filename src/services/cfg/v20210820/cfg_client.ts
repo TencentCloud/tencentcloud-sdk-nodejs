@@ -32,16 +32,17 @@ import {
   ActionFieldConfigDetail,
   TemplateGroupAction,
   Template,
-  DescribeTaskExecuteLogsRequest,
   DescribeObjectTypeListResponse,
+  DescribeTaskExecuteLogsRequest,
   ModifyTaskRunStatusRequest,
   DescribeTemplateResponse,
   DescribePolicy,
   ActionFilter,
   PolicyTriggerLog,
+  ModifyTaskRunStatusResponse,
   DescribeTemplateRequest,
   ExecuteTaskInstanceRequest,
-  TaskGroupInstance,
+  TaskGroupForAction,
   ExecuteTaskRequest,
   DescribeTaskListResponse,
   ResourceOffline,
@@ -59,6 +60,7 @@ import {
   TaskOrg,
   TaskReportInfo,
   CreateTaskFromTemplateRequest,
+  CreateTaskFromMultiActionRequest,
   TriggerPolicyRequest,
   TaskConfig,
   TriggerPolicyResponse,
@@ -72,10 +74,11 @@ import {
   TemplateMonitor,
   TemplateGroup,
   TemplatePolicy,
+  TaskGroupInstance,
   ActionFieldConfigResult,
   TaskGroupActionConfig,
   ActionLibraryListResult,
-  ModifyTaskRunStatusResponse,
+  CreateTaskFromMultiActionResponse,
   DescribeTaskResponse,
   CreateTaskFromActionResponse,
   TemplateListItem,
@@ -114,13 +117,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询经验库
+   * 以多个动作创建演练
    */
-  async DescribeTemplate(
-    req: DescribeTemplateRequest,
-    cb?: (error: string, rep: DescribeTemplateResponse) => void
-  ): Promise<DescribeTemplateResponse> {
-    return this.request("DescribeTemplate", req, cb)
+  async CreateTaskFromMultiAction(
+    req: CreateTaskFromMultiActionRequest,
+    cb?: (error: string, rep: CreateTaskFromMultiActionResponse) => void
+  ): Promise<CreateTaskFromMultiActionResponse> {
+    return this.request("CreateTaskFromMultiAction", req, cb)
   }
 
   /**
@@ -251,5 +254,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskResponse) => void
   ): Promise<DescribeTaskResponse> {
     return this.request("DescribeTask", req, cb)
+  }
+
+  /**
+   * 查询经验库
+   */
+  async DescribeTemplate(
+    req: DescribeTemplateRequest,
+    cb?: (error: string, rep: DescribeTemplateResponse) => void
+  ): Promise<DescribeTemplateResponse> {
+    return this.request("DescribeTemplate", req, cb)
   }
 }

@@ -390,8 +390,6 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
 
 注意：
 + 仅支持 90 天内数据查询，且从2021年09月20日开始有数据
-+ 本接口为beta版，尚未正式全量发布
-
      */
     DescribeTopData(req: DescribeTopDataRequest, cb?: (error: string, rep: DescribeTopDataResponse) => void): Promise<DescribeTopDataResponse>;
     /**

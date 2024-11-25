@@ -4616,6 +4616,11 @@ export interface CynosdbInstanceDetail {
      * serverless实例cpu上限
      */
     MaxCpu?: number;
+    /**
+     * Db类型:<li>NORMAL</li><li>SERVERLESS</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbMode?: string;
 }
 /**
  * 回档数据库及表

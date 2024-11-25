@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTaskFromTemplate", req, cb);
     }
     /**
-     * 查询经验库
+     * 以多个动作创建演练
      */
-    async DescribeTemplate(req, cb) {
-        return this.request("DescribeTemplate", req, cb);
+    async CreateTaskFromMultiAction(req, cb) {
+        return this.request("CreateTaskFromMultiAction", req, cb);
     }
     /**
      * 触发混沌演练任务的动作，对于实例进行演练操作
@@ -122,6 +122,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTask(req, cb) {
         return this.request("DescribeTask", req, cb);
+    }
+    /**
+     * 查询经验库
+     */
+    async DescribeTemplate(req, cb) {
+        return this.request("DescribeTemplate", req, cb);
     }
 }
 exports.Client = Client;

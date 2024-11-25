@@ -1960,7 +1960,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 主实例创建数据库代理
+   * 本接口（CreateCdbProxy）用于主实例创建数据库代理。
    */
   async CreateCdbProxy(
     req: CreateCdbProxyRequest,

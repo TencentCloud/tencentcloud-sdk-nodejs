@@ -934,7 +934,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditRuleTemplateModifyHistory", req, cb);
     }
     /**
-     * 主实例创建数据库代理
+     * 本接口（CreateCdbProxy）用于主实例创建数据库代理。
      */
     async CreateCdbProxy(req, cb) {
         return this.request("CreateCdbProxy", req, cb);

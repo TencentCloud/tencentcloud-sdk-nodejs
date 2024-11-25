@@ -114,6 +114,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRejectedQuestionPreview", req, cb);
     }
     /**
+     * 重排序
+     */
+    async RunReRank(req, cb) {
+        return this.request("RunReRank", req, cb);
+    }
+    /**
      * 文档解析重试
      */
     async RetryDocParse(req, cb) {

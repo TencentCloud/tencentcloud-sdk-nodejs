@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTaskRequest, DescribeActionFieldConfigListRequest, CreateTaskFromActionRequest, DeleteTaskRequest, DescribeActionLibraryListRequest, ExecuteTaskResponse, DescribeActionFieldConfigListResponse, DescribeTaskExecuteLogsRequest, DescribeObjectTypeListResponse, ModifyTaskRunStatusRequest, DescribeTemplateResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, DescribeTemplateListRequest, DescribeObjectTypeListRequest, DescribeTaskPolicyTriggerLogResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskPolicyTriggerLogRequest, CreateTaskFromTemplateRequest, TriggerPolicyRequest, TriggerPolicyResponse, DescribeTaskListRequest, DescribeActionLibraryListResponse, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, ModifyTaskRunStatusResponse, DescribeTaskResponse, CreateTaskFromActionResponse } from "./cfg_models";
+import { DescribeTaskRequest, DescribeActionFieldConfigListRequest, CreateTaskFromActionRequest, DeleteTaskRequest, DescribeActionLibraryListRequest, ExecuteTaskResponse, DescribeActionFieldConfigListResponse, DescribeObjectTypeListResponse, DescribeTaskExecuteLogsRequest, ModifyTaskRunStatusRequest, DescribeTemplateResponse, ModifyTaskRunStatusResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, DescribeTemplateListRequest, DescribeObjectTypeListRequest, DescribeTaskPolicyTriggerLogResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskPolicyTriggerLogRequest, CreateTaskFromTemplateRequest, CreateTaskFromMultiActionRequest, TriggerPolicyRequest, TriggerPolicyResponse, DescribeTaskListRequest, DescribeActionLibraryListResponse, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, CreateTaskFromMultiActionResponse, DescribeTaskResponse, CreateTaskFromActionResponse } from "./cfg_models";
 /**
  * cfg client
  * @class
@@ -16,9 +16,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTaskFromTemplate(req: CreateTaskFromTemplateRequest, cb?: (error: string, rep: CreateTaskFromTemplateResponse) => void): Promise<CreateTaskFromTemplateResponse>;
     /**
-     * 查询经验库
+     * 以多个动作创建演练
      */
-    DescribeTemplate(req: DescribeTemplateRequest, cb?: (error: string, rep: DescribeTemplateResponse) => void): Promise<DescribeTemplateResponse>;
+    CreateTaskFromMultiAction(req: CreateTaskFromMultiActionRequest, cb?: (error: string, rep: CreateTaskFromMultiActionResponse) => void): Promise<CreateTaskFromMultiActionResponse>;
     /**
      * 触发混沌演练任务的动作，对于实例进行演练操作
      */
@@ -71,4 +71,8 @@ export declare class Client extends AbstractClient {
      * 查询任务
      */
     DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
+    /**
+     * 查询经验库
+     */
+    DescribeTemplate(req: DescribeTemplateRequest, cb?: (error: string, rep: DescribeTemplateResponse) => void): Promise<DescribeTemplateResponse>;
 }
