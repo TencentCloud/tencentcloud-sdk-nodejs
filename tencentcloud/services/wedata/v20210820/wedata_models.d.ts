@@ -4343,15 +4343,15 @@ export interface DescribeInstanceLogDetailRequest {
      */
     ExecutionFileType?: string;
     /**
-     * 统一执行平台执行id
+     * 统一执行平台执行id, 注意: ExecutionJobId 跟 "BrokerIp+OriginFileName" 必须有一个不为空
      */
     ExecutionJobId?: string;
     /**
-     * 服务器Ip
+     * 服务器Ip, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空
      */
     BrokerIp?: string;
     /**
-     * 文件Name
+     * 文件Name, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空
      */
     OriginFileName?: string;
     /**

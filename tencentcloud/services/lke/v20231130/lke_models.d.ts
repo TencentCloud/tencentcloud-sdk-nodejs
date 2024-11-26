@@ -169,12 +169,11 @@ export interface DescribeQAResponse {
      */
     OrgData?: string;
     /**
-     * 属性标签适用范围
-  
+     * 标签适用范围
      */
     AttrRange?: number;
     /**
-     * 属性标签
+     * 标签
      */
     AttrLabels?: Array<AttrLabel>;
     /**
@@ -189,6 +188,22 @@ export interface DescribeQAResponse {
      * 相似问列表信息
      */
     SimilarQuestions?: Array<SimilarQuestion>;
+    /**
+     * 问题和答案文本审核状态 1审核失败
+     */
+    QaAuditStatus?: number;
+    /**
+     * 答案中的图片审核状态 1审核失败
+     */
+    PicAuditStatus?: number;
+    /**
+     * 答案中的视频审核状态 1审核失败
+     */
+    VideoAuditStatus?: number;
+    /**
+     * 问题描述
+     */
+    QuestionDesc?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -569,17 +584,17 @@ export interface ExportAttributeLabelResponse {
  */
 export interface KnowledgeCapacityPieGraphDetail {
     /**
-     * 应用名称
+     * 当前应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AppName?: string;
     /**
-     * 应用使用的字符数
+     * 当前应用使用的字符数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedCharSize?: string;
     /**
-     * 应用占比
+     * 当前应用对于总用量的占比
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Proportion?: number;
@@ -1140,17 +1155,21 @@ export interface ListQARequest {
      * QA业务ID列表
      */
     QaBizIds?: Array<string>;
+    /**
+     * 查询类型 filename 名称、 attribute 标签
+     */
+    QueryType?: string;
 }
 /**
  * DescribeKnowledgeUsage返回参数结构体
  */
 export interface DescribeKnowledgeUsageResponse {
     /**
-     * 可用字符数
+     * 可用字符数上限
      */
     AvailableCharSize?: string;
     /**
-     * 超量字符数
+     * 超过可用字符数上限的字符数
      */
     ExceedCharSize?: string;
     /**
@@ -1500,11 +1519,11 @@ export interface ModifyQARequest {
      */
     CustomParam?: string;
     /**
-     * 属性标签适用范围 1：全部，2：按条件
+     * 标签适用范围 1：全部，2：按条件
      */
     AttrRange?: number;
     /**
-     * 属性标签引用
+     * 标签引用
      */
     AttrLabels?: Array<AttrLabelRefer>;
     /**
@@ -1527,6 +1546,10 @@ export interface ModifyQARequest {
      * 相似问修改信息(相似问没有修改则不传)
      */
     SimilarQuestionModify?: SimilarQuestionModify;
+    /**
+     * 问题描述
+     */
+    QuestionDesc?: string;
 }
 /**
  * 任务流程信息
@@ -1616,6 +1639,11 @@ export interface CreateAppResponse {
      */
     AppBizId?: string;
     /**
+     * 判断账户应用列表权限是否是自定义的，用户交互提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsCustomList?: boolean;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -1670,7 +1698,7 @@ export interface CreateQARequest {
      */
     Answer: string;
     /**
-     * 属性标签适用范围 1：全部，2：按条件
+     * 标签适用范围 1：全部，2：按条件
      */
     AttrRange: number;
     /**
@@ -1678,7 +1706,7 @@ export interface CreateQARequest {
      */
     CustomParam?: string;
     /**
-     * 属性标签引用
+     * 标签引用
      */
     AttrLabels?: Array<AttrLabelRefer>;
     /**
@@ -1701,6 +1729,10 @@ export interface CreateQARequest {
      * 相似问内容
      */
     SimilarQuestions?: Array<string>;
+    /**
+     * 问题描述
+     */
+    QuestionDesc?: string;
 }
 /**
  * 检索知识
@@ -1891,7 +1923,7 @@ export interface DeleteAttributeLabelRequest {
      */
     BotBizId: string;
     /**
-     * 属性ID
+     * 标签ID
      */
     AttributeBizIds: Array<string>;
     /**
@@ -2029,13 +2061,17 @@ export interface DescribeDocResponse {
      */
     IsAllowEdit?: boolean;
     /**
-     * 属性标签适用范围 1：全部，2：按条件范围
+     * 标签适用范围 1：全部，2：按条件范围
      */
     AttrRange?: number;
     /**
-     * 属性标签
+     * 标签
      */
     AttrLabels?: Array<AttrLabel>;
+    /**
+     * 分类ID
+     */
+    CateBizId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2110,19 +2146,19 @@ export interface KnowledgeQaOutput {
     UseRecommended?: boolean;
 }
 /**
- * 字符串KV信息
+ * 自定义变量和标签关系数据
  */
-export interface StrValue {
+export interface ApiVarAttrInfo {
     /**
-     * 名称
+     * 自定义变量id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
+    ApiVarId?: string;
     /**
-     * 值
+     * 标签id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value?: string;
+    AttrBizId?: string;
 }
 /**
  * 调试信息
@@ -2153,6 +2189,11 @@ export interface ProcedureDebugging {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskFlow?: TaskFlowSummary;
+    /**
+     * 工作流调试信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkFlow?: WorkFlowSummary;
 }
 /**
  * CheckAttributeLabelRefer请求参数结构体
@@ -2206,17 +2247,17 @@ export interface ModifyAttributeLabelRequest {
      */
     BotBizId: string;
     /**
-     * 属性ID
+     * 标签ID
      */
     AttributeBizId: string;
     /**
-     * 属性标识
-     */
-    AttrKey: string;
-    /**
-     * 属性名称
+     * 标签名称
      */
     AttrName: string;
+    /**
+     * 标签标识 （已作废）
+     */
+    AttrKey?: string;
     /**
      * 登录用户主账号(集成商模式必填)
      */
@@ -2226,11 +2267,11 @@ export interface ModifyAttributeLabelRequest {
      */
     LoginSubAccountUin?: string;
     /**
-     * 删除的属性标签
+     * 删除的标签值
      */
     DeleteLabelBizIds?: Array<string>;
     /**
-     * 新增或编辑的属性标签
+     * 新增或编辑的标签
      */
     Labels?: Array<AttributeLabel>;
 }
@@ -2343,6 +2384,26 @@ export interface GetAppSecretRequest {
      * 应用ID
      */
     AppBizId: string;
+}
+/**
+ * 模型参数范围
+ */
+export interface ModelParameter {
+    /**
+     * 默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Default?: number;
+    /**
+     * 最小值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Min?: number;
+    /**
+     * 最大值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Max?: number;
 }
 /**
  * DeleteQACate返回参数结构体
@@ -2484,11 +2545,11 @@ export interface DescribeConcurrencyUsageGraphRequest {
      */
     ModelName: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime: string;
     /**
@@ -2542,11 +2603,11 @@ export interface DescribeTokenUsageGraphRequest {
      */
     ModelName?: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime?: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime?: string;
     /**
@@ -2614,7 +2675,7 @@ export interface SaveDocRequest {
      */
     Size: string;
     /**
-     * 属性标签适用范围 1：全部，2：按条件范围
+     * 标签适用范围 1：全部，2：按条件范围
      */
     AttrRange: number;
     /**
@@ -2626,7 +2687,7 @@ export interface SaveDocRequest {
      */
     WebUrl?: string;
     /**
-     * 属性标签引用
+     * 标签引用
      */
     AttrLabels?: Array<AttrLabelRefer>;
     /**
@@ -2650,6 +2711,10 @@ export interface SaveDocRequest {
      * 文档操作类型：1：批量导入（批量导入问答对）；2:文档导入（正常导入单个文档）
      */
     Opt?: number;
+    /**
+     * 分类ID
+     */
+    CateBizId?: string;
 }
 /**
  * 文档解析失败记录
@@ -2742,6 +2807,15 @@ export interface CreateRejectedQuestionResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ReconstructDocument配置选项
+ */
+export interface ReconstructDocumentConfig {
+    /**
+     * 生成的Markdown中是否嵌入图片
+     */
+    EnableInsetImage?: boolean;
 }
 /**
  * GetEmbedding返回参数结构体
@@ -3341,6 +3415,14 @@ export interface ListDocRequest {
      * 文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功  7-审核中  8-审核失败 9-审核成功  10-待发布  11-发布中  12-已发布  13-学习中  14-学习失败  15-更新中  16-更新失败  17-解析中  18-解析失败  19-导入失败   20-已过期 21-超量失效 22-超量失效恢复
      */
     Status?: Array<number | bigint>;
+    /**
+     * 查询类型 filename 文档、 attribute 标签
+     */
+    QueryType?: string;
+    /**
+     * 分类ID
+     */
+    CateBizId?: string;
 }
 /**
  * GetEmbedding请求参数结构体
@@ -3422,17 +3504,21 @@ export interface DescribeCallStatsGraphRequest {
      */
     ModelName?: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime?: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime?: string;
     /**
      * 应用id列表
      */
     AppBizIds?: Array<string>;
+    /**
+     * 筛选子场景(文档解析场景使用)
+     */
+    SubScenes?: Array<string>;
 }
 /**
  * GetMsgRecord返回参数结构体
@@ -3566,7 +3652,7 @@ export interface DescribeReleaseResponse {
  */
 export interface DescribeConcurrencyUsageGraphResponse {
     /**
-     * 统计信息
+     * X轴: 时间区域；根据查询条件的粒度返回“分/小时/日”两种区间范围
      */
     X?: Array<string>;
     /**
@@ -3826,12 +3912,12 @@ export interface AppModel {
  */
 export interface Stat {
     /**
-     * x轴时间戳
+     * X轴: 时间区域；根据查询条件的粒度返回“分/小时/日”三种区间范围
   注意：此字段可能返回 null，表示取不到有效值。
      */
     X?: string;
     /**
-     * y轴统计值
+     * Y轴: 该时间区域内的统计值，如token消耗量，调用次数或使用量等信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Y?: number;
@@ -3903,15 +3989,15 @@ export interface ReconstructDocumentRequest {
  */
 export interface DescribeTokenUsageGraphResponse {
     /**
-     * 总消耗
+     * Token消耗总量
      */
     Total?: Array<Stat>;
     /**
-     * 输入消耗
+     * 输入Token消耗量
      */
     Input?: Array<Stat>;
     /**
-     * 输出消耗
+     * 输出Token消耗量
      */
     Output?: Array<Stat>;
     /**
@@ -3935,6 +4021,96 @@ export interface SimilarQuestionModify {
      * 需要删除的相似问列表
      */
     DeleteQuestions?: Array<SimilarQuestion>;
+}
+/**
+ * 工作流运行节点信息
+ */
+export interface WorkflowRunNodeInfo {
+    /**
+     * 节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId?: string;
+    /**
+     * 节点类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeType?: number;
+    /**
+     * 节点名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 输入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Input?: string;
+    /**
+     * 输出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: string;
+    /**
+     * 任务输出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskOutput?: string;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailMessage?: string;
+    /**
+     * 花费时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CostMilliSeconds?: number;
+    /**
+     * 大模型输出信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatisticInfos?: Array<StatisticInfo>;
+}
+/**
+ * 大模型token统计信息
+ */
+export interface StatisticInfo {
+    /**
+     * 模型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelName?: string;
+    /**
+     * 首Token耗时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstTokenCost?: number;
+    /**
+     * 总耗时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCost?: number;
+    /**
+     * 输入Token数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InputTokens?: number;
+    /**
+     * 输出Token数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputTokens?: number;
+    /**
+     * 总Token数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalTokens?: number;
 }
 /**
  * RetryDocAudit返回参数结构体
@@ -4109,17 +4285,17 @@ export interface CreateAttributeLabelRequest {
      */
     BotBizId: string;
     /**
-     * 属性标识
-     */
-    AttrKey: string;
-    /**
-     * 属性名称
+     * 标签名
      */
     AttrName: string;
     /**
-     * 属性标签
+     * 标签值
      */
     Labels: Array<AttributeLabel>;
+    /**
+     * 标签标识（不生效，无需填写） 已作废
+     */
+    AttrKey?: string;
     /**
      * 登录用户主账号(集成商模式必填)
      */
@@ -4295,6 +4471,16 @@ export interface KnowledgeQaConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Output?: KnowledgeQaOutput;
+    /**
+     * 工作流程配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Workflow?: KnowledgeWorkflow;
+    /**
+     * 检索范围
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SearchRange?: SearchRange;
 }
 /**
  * 坐标
@@ -4417,6 +4603,21 @@ export interface ModelInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PromptWordsLimit?: string;
+    /**
+     * 通过核心采样控制内容生成的多样性，较高的Top P值会导致生成更多样的内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopP?: ModelParameter;
+    /**
+     * 温度控制随机性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Temperature?: ModelParameter;
+    /**
+     * 最多能生成的token数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxTokens?: ModelParameter;
 }
 /**
  * DeleteRejectedQuestion请求参数结构体
@@ -4542,7 +4743,7 @@ export interface GetDocPreviewResponse {
  */
 export interface DescribeConcurrencyUsageResponse {
     /**
-     * 可用并发数
+     * 可用并发数上限
      */
     AvailableConcurrency?: number;
     /**
@@ -4550,7 +4751,7 @@ export interface DescribeConcurrencyUsageResponse {
      */
     ConcurrencyPeak?: number;
     /**
-     * 调用超可用次数
+     * 超出可用并发数上限的次数
      */
     ExceedUsageTime?: number;
     /**
@@ -4605,13 +4806,13 @@ export interface ModifyAppRequest {
      */
     BaseConfig: BaseConfig;
     /**
+     * 应用配置
+     */
+    AppConfig: AppConfig;
+    /**
      * 登录用户子账号(集成商模式必填)
      */
     LoginSubAccountUin?: string;
-    /**
-     * 应用配置
-     */
-    AppConfig?: AppConfig;
 }
 /**
  * RunReRank请求参数结构体
@@ -4801,7 +5002,7 @@ export interface ModifyDocRequest {
      */
     IsRefer: boolean;
     /**
-     * 属性标签适用范围 1：全部，2：按条件
+     * 标签适用范围 1：全部，2：按条件
      */
     AttrRange: number;
     /**
@@ -4813,7 +5014,7 @@ export interface ModifyDocRequest {
      */
     LoginSubAccountUin?: string;
     /**
-     * 适用范围，关联的属性标签
+     * 关联的标签
      */
     AttrLabels?: Array<AttrLabelRefer>;
     /**
@@ -4833,6 +5034,10 @@ export interface ModifyDocRequest {
      * 有效结束时间，unix时间戳，0代表永久有效
      */
     ExpireEnd?: string;
+    /**
+     * 分类ID
+     */
+    CateBizId?: string;
 }
 /**
  * DescribeTokenUsage返回参数结构体
@@ -4859,6 +5064,10 @@ export interface DescribeTokenUsageResponse {
      */
     SearchUsage?: number;
     /**
+     * 文档解析消耗页数
+     */
+    PageUsage?: number;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4871,6 +5080,21 @@ export interface DeleteAppResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 检索范围配置
+ */
+export interface SearchRange {
+    /**
+     * 检索条件and/or
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Condition?: string;
+    /**
+     * 自定义变量和标签关系数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiVarAttrInfos?: Array<ApiVarAttrInfo>;
 }
 /**
  * ListAttributeLabel请求参数结构体
@@ -5001,6 +5225,11 @@ export interface SimilarQuestion {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Question?: string;
+    /**
+     * 相似问审核状态，1审核失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuditStatus?: number;
 }
 /**
  * 标签提取配置
@@ -5031,11 +5260,11 @@ export interface DescribeConcurrencyUsageRequest {
      */
     ModelName: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime: string;
     /**
@@ -5126,17 +5355,21 @@ export interface DescribeTokenUsageRequest {
      */
     ModelName?: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime?: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime?: string;
     /**
      * 应用id列表
      */
     AppBizIds?: Array<string>;
+    /**
+     * 筛选子场景(文档解析场景使用)
+     */
+    SubScenes?: Array<string>;
 }
 /**
  * GetAppKnowledgeCount返回参数结构体
@@ -5165,6 +5398,10 @@ export interface RetryReleaseResponse {
  * CreateAttributeLabel返回参数结构体
  */
 export interface CreateAttributeLabelResponse {
+    /**
+     * 标签ID
+     */
+    AttrBizId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5341,6 +5578,31 @@ export interface DeleteAppRequest {
      * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
      */
     AppType: string;
+}
+/**
+ * 工作流程调试信息
+ */
+export interface WorkFlowSummary {
+    /**
+     * 工作流ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowId?: string;
+    /**
+     * 工作流名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowName?: string;
+    /**
+     * 工作流运行ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkflowRunId?: string;
+    /**
+     * 节点信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunNodes?: Array<WorkflowRunNodeInfo>;
 }
 /**
  * 任务参数
@@ -5623,7 +5885,7 @@ export interface DeleteQAResponse {
  */
 export interface DescribeCallStatsGraphResponse {
     /**
-     * 统计信息
+     * 接口调用次数统计信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<Stat>;
@@ -5722,6 +5984,21 @@ export interface CheckAttributeLabelExistResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 字符串KV信息
+ */
+export interface StrValue {
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * GetTaskStatus请求参数结构体
@@ -5973,7 +6250,7 @@ export interface DescribeSegmentsRequest {
      */
     BotBizId: string;
     /**
-     * 文档ID
+     * 文档片段ID
      */
     SegBizId?: Array<string>;
 }
@@ -6002,11 +6279,11 @@ export interface DescribeSearchStatsGraphRequest {
      */
     ModelName?: string;
     /**
-     * 开始时间
+     * 开始时间戳, 单位为秒
      */
     StartTime?: string;
     /**
-     * 结束时间
+     * 结束时间戳, 单位为秒
      */
     EndTime?: string;
     /**
@@ -6087,13 +6364,14 @@ export interface StopDocParseRequest {
     DocBizId: string;
 }
 /**
- * ReconstructDocument配置选项
+ * 问答知识库工作流配置
  */
-export interface ReconstructDocumentConfig {
+export interface KnowledgeWorkflow {
     /**
-     * 生成的Markdown中是否嵌入图片
+     * 是否启用工作流
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableInsetImage?: boolean;
+    IsEnabled?: boolean;
 }
 /**
  * ListSelectDoc请求参数结构体

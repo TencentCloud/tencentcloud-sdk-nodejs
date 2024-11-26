@@ -302,7 +302,6 @@ export interface DescribeSavingPlanUsageResponse {
     Total?: number;
     /**
      * 节省计划使用率数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Usages?: Array<SavingPlanUsageDetail>;
     /**

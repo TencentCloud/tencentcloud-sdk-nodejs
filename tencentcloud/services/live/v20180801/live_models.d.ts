@@ -222,29 +222,14 @@ export interface CommonMixOutputParams {
     MixSei?: string;
 }
 /**
- * DescribeLiveTranscodeDetailInfo返回参数结构体
+ * DescribeCasterOutputInfos返回参数结构体
  */
-export interface DescribeLiveTranscodeDetailInfoResponse {
+export interface DescribeCasterOutputInfosResponse {
     /**
-     * 统计数据列表。
+     * 导播台的推流信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataInfoList?: Array<TranscodeDetailInfo>;
-    /**
-     * 页码。
-     */
-    PageNum?: number;
-    /**
-     * 每页个数。
-     */
-    PageSize?: number;
-    /**
-     * 总个数。
-     */
-    TotalNum?: number;
-    /**
-     * 总页数。
-     */
-    TotalPage?: number;
+    OutputInfos?: Array<CasterOutputInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -927,6 +912,19 @@ export interface EnableOptimalSwitchingRequest {
     HostGroupName?: string;
 }
 /**
+ * DescribeCasterInputInfos返回参数结构体
+ */
+export interface DescribeCasterInputInfosResponse {
+    /**
+     * 导播台输入源信息列表。
+     */
+    InputInfos?: Array<CasterInputInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取省份/运营商的播放信息。
  */
 export interface ProIspPlaySumInfo {
@@ -988,6 +986,15 @@ export interface DescribeStreamDayPlayInfoListRequest {
      * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
      */
     ServiceName?: string;
+}
+/**
+ * DeleteLiveTimeShiftRule返回参数结构体
+ */
+export interface DeleteLiveTimeShiftRuleResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 时移流。
@@ -1346,6 +1353,76 @@ export interface DescribeLiveDomainPlayInfoListRequest {
     PlayDomains?: Array<string>;
 }
 /**
+ * 导播台输入信息参数
+ */
+export interface CasterInputInfo {
+    /**
+     * 输入源Index。
+  范围[1, 20]
+     */
+    InputIndex: number;
+    /**
+     * 输入源类型。
+  范围[0,1,2,3,4]。
+  0：推流地址。
+  1：点播文件地址。
+  2：直播拉流地址。
+  3：图片地址。
+  4：webrtc协议推流地址。
+     */
+    InputType?: number;
+    /**
+     * 输入源的源地址。
+  最大允许长度512。
+  当InputType为0（推流地址），2（直播拉流地址），3（图片地址）,4（webrtc推流地址）这几种类型时，URL需填入该字段。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InputUrl?: string;
+    /**
+     * 输入源描述。
+  最大允许长度256字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 点播地址列表。仅当input type为1（点播地址）时，将一个或多个点播地址，填入该字段。
+  单个地址最大允许长度512字符。
+  最多允许同时填入5个地址。
+  注：此时需保持InputUrl字段为空。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InputUrls?: Array<string>;
+    /**
+     * 是否启用点播无限循环播放。
+  注：当前该字段未生效，默认为True。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LoopEnable?: boolean;
+    /**
+     * 点播循环次数。
+  允许值-1或正整数。
+  当值为-1时，表示无限循环。
+  当值为其他正整数时，表示循环对应次数。
+  注：该字段暂未生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LoopNumber?: number;
+    /**
+     * 是否启用拉取到导播台。
+  注：该字段默认强制为true。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PullPushEnable?: boolean;
+    /**
+     * 输入源音量百分比。
+  默认为100。表示音量为原始大小。
+  允许值[0,200]。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Volume?: number;
+}
+/**
  * DeleteLiveWatermarkRule返回参数结构体
  */
 export interface DeleteLiveWatermarkRuleResponse {
@@ -1483,36 +1560,13 @@ export interface BandwidthInfo {
     Bandwidth?: number;
 }
 /**
- * 直播流监播输出流信息
+ * CreateLiveRecordRule返回参数结构体
  */
-export interface LiveStreamMonitorOutputInfo {
+export interface CreateLiveRecordRuleResponse {
     /**
-     * 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    OutputStreamWidth: number;
-    /**
-     * 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStreamHeight: number;
-    /**
-     * 监播任务输出流名称。
-  不填时，系统会自动生成。
-  256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStreamName?: string;
-    /**
-     * 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputDomain?: string;
-    /**
-     * 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputApp?: string;
+    RequestId?: string;
 }
 /**
  * DeleteLiveTranscodeTemplate请求参数结构体
@@ -1803,6 +1857,19 @@ export interface DescribeLiveTimeShiftTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCasterOutputInfo请求参数结构体
+ */
+export interface ModifyCasterOutputInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 导播台推流参数信息。
+     */
+    OutputInfo: CasterOutputInfo;
+}
+/**
  * 播放鉴权key信息。
  */
 export interface PlayAuthKeyInfo {
@@ -2069,6 +2136,28 @@ export interface DeleteLiveCallbackTemplateRequest {
   2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
      */
     TemplateId: number;
+}
+/**
+ * ModifyCasterInputInfo请求参数结构体
+ */
+export interface ModifyCasterInputInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 修改的导播台输入源信息
+     */
+    InputInfo: CasterInputInfo;
+}
+/**
+ * DescribeCasterOutputInfos请求参数结构体
+ */
+export interface DescribeCasterOutputInfosRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
 }
 /**
  * CreateLiveCallbackTemplate返回参数结构体
@@ -2516,6 +2605,19 @@ export interface CreateCasterRequest {
     PgmAudioBitRate?: number;
 }
 /**
+ * AddCasterOutputInfo请求参数结构体
+ */
+export interface AddCasterOutputInfoRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+    /**
+     * 导播台推流参数信息。
+     */
+    OutputInfo: CasterOutputInfo;
+}
+/**
  * DescribeUploadStreamNums返回参数结构体
  */
 export interface DescribeUploadStreamNumsResponse {
@@ -2523,6 +2625,35 @@ export interface DescribeUploadStreamNumsResponse {
      * 明细数据信息
      */
     DataInfoList?: Array<ConcurrentRecordStreamNum>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeLiveTranscodeDetailInfo返回参数结构体
+ */
+export interface DescribeLiveTranscodeDetailInfoResponse {
+    /**
+     * 统计数据列表。
+     */
+    DataInfoList?: Array<TranscodeDetailInfo>;
+    /**
+     * 页码。
+     */
+    PageNum?: number;
+    /**
+     * 每页个数。
+     */
+    PageSize?: number;
+    /**
+     * 总个数。
+     */
+    TotalNum?: number;
+    /**
+     * 总页数。
+     */
+    TotalPage?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2632,6 +2763,19 @@ export interface PushAuthKeyInfo {
     AuthDelta: number;
 }
 /**
+ * CreateCasterInputPushUrl返回参数结构体
+ */
+export interface CreateCasterInputPushUrlResponse {
+    /**
+     * 生成可使用的推流地址。
+     */
+    PushUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLivePlayAuthKey请求参数结构体
  */
 export interface DescribeLivePlayAuthKeyRequest {
@@ -2657,6 +2801,26 @@ export interface DeleteLiveTranscodeRuleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateCasterInputPushUrl请求参数结构体
+ */
+export interface CreateCasterInputPushUrlRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+    /**
+     * 请求生成推流地址的输入Index。
+  允许范围[1,20]。
+     */
+    InputIndex: number;
+    /**
+     * 生成推流地址协议。
+  范围[rtmp,webrtc]。
+  注：获取webrtc推流地址时，需配合腾讯云快直播推流sdk才可成功推流。
+     */
+    Protocol?: string;
 }
 /**
  * DescribeLivePadTemplates返回参数结构体
@@ -2856,6 +3020,15 @@ export interface DeleteScreenshotTaskRequest {
      * 任务ID，CreateScreenshotTask返回。删除TaskId指定的截图任务。
      */
     TaskId: string;
+}
+/**
+ * ModifyCasterLayoutInfo返回参数结构体
+ */
+export interface ModifyCasterLayoutInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribePlayErrorCodeSumInfoList请求参数结构体
@@ -3464,9 +3637,22 @@ export interface DeletePullStreamConfigResponse {
     RequestId?: string;
 }
 /**
- * DeleteLiveTimeShiftRule返回参数结构体
+ * ModifyLivePlayDomain请求参数结构体
  */
-export interface DeleteLiveTimeShiftRuleResponse {
+export interface ModifyLivePlayDomainRequest {
+    /**
+     * 播放域名。
+     */
+    DomainName: string;
+    /**
+     * 拉流域名类型。1-国内；2-全球；3-境外
+     */
+    PlayType: number;
+}
+/**
+ * DeleteCasterLayoutInfo返回参数结构体
+ */
+export interface DeleteCasterLayoutInfoResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3551,6 +3737,15 @@ export interface DescribeLiveTranscodeRulesResponse {
      * 转码规则列表。
      */
     Rules: Array<RuleInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * AddCasterLayoutInfo返回参数结构体
+ */
+export interface AddCasterLayoutInfoResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4311,17 +4506,52 @@ export interface StopLiveRecordRequest {
     TaskId: number;
 }
 /**
- * DeleteLiveDomain请求参数结构体
+ * 导播台布局详细参数。
  */
-export interface DeleteLiveDomainRequest {
+export interface CasterLayoutParam {
     /**
-     * 要删除的域名
+     * 布局层ID。
+  在画面最终渲染时，将按ID从小到大的顺序，由下至上渲染。
      */
-    DomainName: string;
+    LayerId: number;
     /**
-     * 类型。0-推流，1-播放
+     * 布局层宽度。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上所占的比例值。
      */
-    DomainType: number;
+    LayerWidth: number;
+    /**
+     * 布局层高度.
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上所占的比例值。
+     */
+    LayerHeight: number;
+    /**
+     * 布局层位置x坐标。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面上x坐标所占的比例值。
+     */
+    LayerLocationX: number;
+    /**
+     * 布局层位置Y坐标。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示该层在最终画面Y坐标上所占的比例值。
+     */
+    LayerLocationY: number;
+    /**
+     * 是否启用抠图。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsePortraitSegment?: boolean;
+}
+/**
+ * DeleteLiveCallbackTemplate返回参数结构体
+ */
+export interface DeleteLiveCallbackTemplateResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateRecordTask返回参数结构体
@@ -4453,32 +4683,22 @@ export interface DescribeAreaBillBandwidthAndFluxListRequest {
     PlayDomains?: Array<string>;
 }
 /**
- * DescribeLiveDomainCertBindings请求参数结构体
+ * ModifyCasterOutputInfo返回参数结构体
  */
-export interface DescribeLiveDomainCertBindingsRequest {
+export interface ModifyCasterOutputInfoResponse {
     /**
-     * 要搜索的域名字符串。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    DomainSearch?: string;
+    RequestId?: string;
+}
+/**
+ * ModifyLiveDomainReferer返回参数结构体
+ */
+export interface ModifyLiveDomainRefererResponse {
     /**
-     * 记录行的位置，从0开始。默认0。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset?: number;
-    /**
-     * 记录行的最大数目。默认50。
-  若不传，则最多返回50条数据。
-     */
-    Length?: number;
-    /**
-     * 要查询的单个域名。
-     */
-    DomainName?: string;
-    /**
-     * 可取值：
-  ExpireTimeAsc：证书过期时间升序。
-  ExpireTimeDesc：证书过期时间降序。
-     */
-    OrderBy?: string;
+    RequestId?: string;
 }
 /**
  * DescribeLiveStreamOnlineList请求参数结构体
@@ -4610,66 +4830,17 @@ export interface XP2PDetailInfo {
     AppId?: string;
 }
 /**
- * ModifyLiveSnapshotTemplate请求参数结构体
+ * DescribeCasterLayoutInfos返回参数结构体
  */
-export interface ModifyLiveSnapshotTemplateRequest {
+export interface DescribeCasterLayoutInfosResponse {
     /**
-     * 模板 ID。
+     * 导播台的布局列表。
      */
-    TemplateId: number;
+    LayoutInfos?: Array<CasterLayoutInfo>;
     /**
-     * Cos 应用 ID。
-  **注：此参数现在须必选。**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CosAppId: number;
-    /**
-     * Cos Bucket名称。
-  注：CosBucket参数值不能包含-[appid] 部分。
-  **注：此参数现在须必选。**
-     */
-    CosBucket: string;
-    /**
-     * Cos 地域。
-  **注：此参数现在须必选。**
-     */
-    CosRegion: string;
-    /**
-     * 模板名称。
-  长度上限：255字节。
-     */
-    TemplateName?: string;
-    /**
-     * 描述信息。
-  长度上限：1024字节。
-     */
-    Description?: string;
-    /**
-     * 截图间隔，单位s，默认10s。
-  范围： 5s ~ 300s。
-     */
-    SnapshotInterval?: number;
-    /**
-     * 截图宽度。默认：0（原始宽）。
-     */
-    Width?: number;
-    /**
-     * 截图高度。默认：0（原始高）。
-     */
-    Height?: number;
-    /**
-     * 是否开启鉴黄，默认 0 。
-  0：不开启。
-  1：开启。
-     */
-    PornFlag?: number;
-    /**
-     * Cos Bucket文件夹前缀。
-     */
-    CosPrefix?: string;
-    /**
-     * Cos 文件名称。
-     */
-    CosFileName?: string;
+    RequestId?: string;
 }
 /**
  * ModifyLiveCallbackTemplate返回参数结构体
@@ -4982,6 +5153,19 @@ export interface DescribeBillBandwidthAndFluxListRequest {
     RegionNames?: Array<string>;
 }
 /**
+ * AddCasterLayoutInfo请求参数结构体
+ */
+export interface AddCasterLayoutInfoRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+    /**
+     * 导播台布局参数信息。
+     */
+    LayoutInfo: CasterLayoutInfo;
+}
+/**
  * flv格式特殊配置
  */
 export interface FlvSpecialParam {
@@ -5101,6 +5285,19 @@ export interface ModifyLiveTranscodeTemplateRequest {
   不传递或者为空字符串，清空之前的DRM配置。
      */
     DRMTracks?: string;
+}
+/**
+ * ModifyCasterLayoutInfo请求参数结构体
+ */
+export interface ModifyCasterLayoutInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 导播台布局参数信息。
+     */
+    LayoutInfo: CasterLayoutInfo;
 }
 /**
  * DescribeLiveCallbackTemplate返回参数结构体
@@ -5858,17 +6055,42 @@ export interface DescribeTimeShiftStreamListRequest {
     PageNum?: number;
 }
 /**
- * ModifyLivePlayDomain请求参数结构体
+ * 导播台布局参数。
  */
-export interface ModifyLivePlayDomainRequest {
+export interface CasterLayoutInfo {
     /**
-     * 播放域名。
+     * 布局Index。
      */
-    DomainName: string;
+    LayoutIndex: number;
     /**
-     * 拉流域名类型。1-国内；2-全球；3-境外
+     * 布局模板Id。
+  有效值[1，20，21，31，32，41]
+  当使用布局模版时，无需LayoutParams参数，导播台将使用模版布局参数。
+  
      */
-    PlayType: number;
+    LayoutTemplateId?: number;
+    /**
+     * 布局绑定的输入列表。按布局LayerId从小到大，按顺序排列。
+  已有两个画面的布局为例，输入1对应LayerId为1，输入2对应的LayerId为2，该字段应该填入"1|2"。
+     */
+    InputIndexList?: string;
+    /**
+     * 详细的布局参数列表。
+     */
+    LayoutParams?: Array<CasterLayoutParam>;
+    /**
+     * 布局输出的宽度，单位为像素。
+  默认为1280像素。
+  注：该值仅在画中画布局，且未设置PgmWidth时生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LayoutWidth?: number;
+    /**
+     * 布局输出的高度，单位为像素。
+  注：该参数仅在画中画布局，且未设置PgmHeight时生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LayoutHeight?: number;
 }
 /**
  * DescribeLiveWatermark请求参数结构体
@@ -5880,18 +6102,21 @@ export interface DescribeLiveWatermarkRequest {
     WatermarkId: number;
 }
 /**
- * DescribeCasterList返回参数结构体
+ * 混流抠图参数
  */
-export interface DescribeCasterListResponse {
+export interface MixPortraitSegmentParams {
     /**
-     * 用户对应的导播台简要信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 抠图背景颜色，
+  常用的颜色有：
+  红色：0xcc0033。
+  黄色：0xcc9900。
+  绿色：0xcccc33。
+  蓝色：0x99CCFF。
+  黑色：0x000000。
+  白色：0xFFFFFF。
+  灰色：0x999999。
      */
-    CasterList?: Array<CasterBriefInfo>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Color?: string;
 }
 /**
  * DescribeLiveDomains返回参数结构体
@@ -6544,6 +6769,19 @@ export interface AuthenticateDomainOwnerRequest {
     VerifyType: string;
 }
 /**
+ * DeleteLiveDomain请求参数结构体
+ */
+export interface DeleteLiveDomainRequest {
+    /**
+     * 要删除的域名
+     */
+    DomainName: string;
+    /**
+     * 类型。0-推流，1-播放
+     */
+    DomainType: number;
+}
+/**
  * DeleteLiveTimeShiftTemplate返回参数结构体
  */
 export interface DeleteLiveTimeShiftTemplateResponse {
@@ -6950,6 +7188,21 @@ export interface DescribeConcurrentRecordStreamNumRequest {
     PushDomains?: Array<string>;
 }
 /**
+ * DeleteCasterInputInfo请求参数结构体
+ */
+export interface DeleteCasterInputInfoRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+    /**
+     * 导播台输入Index。
+  范围[0,20]
+  注：该Index对应的输入源需存在。
+     */
+    InputIndex: number;
+}
+/**
  * DeleteScreenshotTask返回参数结构体
  */
 export interface DeleteScreenshotTaskResponse {
@@ -7020,13 +7273,13 @@ export interface StopLivePadProcessorResponse {
     RequestId?: string;
 }
 /**
- * EnableLiveDomain请求参数结构体
+ * ModifyLivePlayAuthKey返回参数结构体
  */
-export interface EnableLiveDomainRequest {
+export interface ModifyLivePlayAuthKeyResponse {
     /**
-     * 待启用的直播域名。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    DomainName: string;
+    RequestId?: string;
 }
 /**
  * DescribeLiveTimeShiftRules返回参数结构体
@@ -7120,6 +7373,15 @@ export interface TaskStatusInfo {
      * 下一进度点播文件 URL。
      */
     NextFileUrl: string;
+}
+/**
+ * DescribeCasterInputInfos请求参数结构体
+ */
+export interface DescribeCasterInputInfosRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
 }
 /**
  * DescribeVisitTopSumInfoList返回参数结构体
@@ -7768,6 +8030,15 @@ export interface CreateLiveTimeShiftTemplateResponse {
     RequestId?: string;
 }
 /**
+ * DeleteCasterOutputInfo返回参数结构体
+ */
+export interface DeleteCasterOutputInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLivePadRules请求参数结构体
  */
 export declare type DescribeLivePadRulesRequest = null;
@@ -7841,13 +8112,32 @@ export interface ResumeDelayLiveStreamResponse {
     RequestId?: string;
 }
 /**
- * ModifyLiveDomainReferer返回参数结构体
+ * DescribeLiveDomainCertBindings请求参数结构体
  */
-export interface ModifyLiveDomainRefererResponse {
+export interface DescribeLiveDomainCertBindingsRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 要搜索的域名字符串。
      */
-    RequestId?: string;
+    DomainSearch?: string;
+    /**
+     * 记录行的位置，从0开始。默认0。
+     */
+    Offset?: number;
+    /**
+     * 记录行的最大数目。默认50。
+  若不传，则最多返回50条数据。
+     */
+    Length?: number;
+    /**
+     * 要查询的单个域名。
+     */
+    DomainName?: string;
+    /**
+     * 可取值：
+  ExpireTimeAsc：证书过期时间升序。
+  ExpireTimeDesc：证书过期时间降序。
+     */
+    OrderBy?: string;
 }
 /**
  * CreateLiveRecordTemplate请求参数结构体
@@ -7929,6 +8219,15 @@ export interface DescribeLivePullStreamTasksRequest {
   注意：仅供使用指定 ID 创建的任务查询。
      */
     SpecifyTaskId?: string;
+}
+/**
+ * AddCasterOutputInfo返回参数结构体
+ */
+export interface AddCasterOutputInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeHttpStatusInfoList返回参数结构体
@@ -8034,6 +8333,15 @@ export interface CreateLiveStreamMonitorResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCasterLayoutInfos请求参数结构体
+ */
+export interface DescribeCasterLayoutInfosRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+}
+/**
  * DescribeLivePadTemplate请求参数结构体
  */
 export interface DescribeLivePadTemplateRequest {
@@ -8043,13 +8351,17 @@ export interface DescribeLivePadTemplateRequest {
     TemplateId: number;
 }
 /**
- * DeleteLiveCallbackTemplate返回参数结构体
+ * AddCasterInputInfo请求参数结构体
  */
-export interface DeleteLiveCallbackTemplateResponse {
+export interface AddCasterInputInfoRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 导播台ID。
      */
-    RequestId?: string;
+    CasterId: number;
+    /**
+     * 导播台输入源详细信息。
+     */
+    InputInfo: CasterInputInfo;
 }
 /**
  * ModifyLivePlayAuthKey请求参数结构体
@@ -8134,15 +8446,6 @@ export interface DescribeScreenShotSheetNumListResponse {
     RequestId?: string;
 }
 /**
- * CreateLiveRecordRule返回参数结构体
- */
-export interface CreateLiveRecordRuleResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ModifyLivePullStreamTask返回参数结构体
  */
 export interface ModifyLivePullStreamTaskResponse {
@@ -8197,6 +8500,19 @@ export interface DeleteCasterRequest {
      * 待删除的导播台ID
      */
     CasterId: number;
+}
+/**
+ * DescribeLiveDomainCert返回参数结构体
+ */
+export interface DescribeLiveDomainCertResponse {
+    /**
+     * 证书信息。
+     */
+    DomainCertInfo?: DomainCertInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AuthenticateDomainOwner返回参数结构体
@@ -8259,13 +8575,21 @@ export interface AddLiveWatermarkResponse {
     RequestId?: string;
 }
 /**
- * DescribeLiveDomainCert返回参数结构体
+ * AddCasterInputInfo返回参数结构体
  */
-export interface DescribeLiveDomainCertResponse {
+export interface AddCasterInputInfoResponse {
     /**
-     * 证书信息。
+     * rtmp协议输入源播放地址。
+  注：仅可作为预览使用，不可分发。
      */
-    DomainCertInfo?: DomainCertInfo;
+    InputPlayUrl?: string;
+    /**
+     * webrtc协议播放地址。
+  注：
+  1. 需配合使用腾讯云快直播播放SDK使用才可正常播放。
+  2. 仅作为预览使用，不可分发。
+     */
+    InputWebRTCPlayUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8322,6 +8646,63 @@ export interface DeleteLiveRecordTemplateResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 导播台推流信息。
+当导播台主监启动后，系统将自动将主监推流到腾讯云和其他第三方平台。
+ */
+export interface CasterOutputInfo {
+    /**
+     * 推流信息Index。
+  当OutputType为1（表示推流到腾讯云直播）时，该值固定为0。
+  范围[0,10]。
+     */
+    OutputIndex: number;
+    /**
+     * rtmp协议推流地址。
+  最大允许长度512字符。
+     */
+    OutputUrl?: string;
+    /**
+     * 描述信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 推流到腾讯云直播源站时，使用的流ID。
+  仅当OutputType为1时生效。
+  最大允许128字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamId?: string;
+    /**
+     * 推流类型。
+  范围[1,2]
+  1. 推送到腾讯云直播源站。
+  2. 推送到第三方源站。
+     */
+    OutputType?: number;
+    /**
+     * 推到腾讯云直播源站时，使用的域名。
+  最大允许128字符，且域名需属于当前账号绑定的云直播推流域名。
+  仅在OutputType为1时生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputDomainName?: string;
+    /**
+     * 推到腾讯云直播源站时，使用的AppName。
+  最大允许64字符。
+  仅在OutputType为1时生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputAppName?: string;
+    /**
+     * 推到腾讯云直播源站时需要添加的推流参数。
+  最大允许长度256字符。
+  仅在OutputType为1时生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputParam?: string;
 }
 /**
  * DescribePullStreamConfigs请求参数结构体
@@ -8441,6 +8822,68 @@ export interface UpdateLiveWatermarkResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyLiveSnapshotTemplate请求参数结构体
+ */
+export interface ModifyLiveSnapshotTemplateRequest {
+    /**
+     * 模板 ID。
+     */
+    TemplateId: number;
+    /**
+     * Cos 应用 ID。
+  **注：此参数现在须必选。**
+     */
+    CosAppId: number;
+    /**
+     * Cos Bucket名称。
+  注：CosBucket参数值不能包含-[appid] 部分。
+  **注：此参数现在须必选。**
+     */
+    CosBucket: string;
+    /**
+     * Cos 地域。
+  **注：此参数现在须必选。**
+     */
+    CosRegion: string;
+    /**
+     * 模板名称。
+  长度上限：255字节。
+     */
+    TemplateName?: string;
+    /**
+     * 描述信息。
+  长度上限：1024字节。
+     */
+    Description?: string;
+    /**
+     * 截图间隔，单位s，默认10s。
+  范围： 5s ~ 300s。
+     */
+    SnapshotInterval?: number;
+    /**
+     * 截图宽度。默认：0（原始宽）。
+     */
+    Width?: number;
+    /**
+     * 截图高度。默认：0（原始高）。
+     */
+    Height?: number;
+    /**
+     * 是否开启鉴黄，默认 0 。
+  0：不开启。
+  1：开启。
+     */
+    PornFlag?: number;
+    /**
+     * Cos Bucket文件夹前缀。
+     */
+    CosPrefix?: string;
+    /**
+     * Cos 文件名称。
+     */
+    CosFileName?: string;
 }
 /**
  * DescribeLiveRecordTemplate返回参数结构体
@@ -8750,6 +9193,20 @@ export interface DescribeLiveCertRequest {
      * DescribeLiveCerts接口获取到的证书Id。
      */
     CertId: number;
+}
+/**
+ * DeleteCasterLayoutInfo请求参数结构体
+ */
+export interface DeleteCasterLayoutInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 要删除的布局Index。
+  注：待删除的Index对应的布局需存在。
+     */
+    LayoutIndex: number;
 }
 /**
  * 播放汇总统计信息。
@@ -9271,6 +9728,26 @@ export interface LivePackageInfo {
     RenewalResult?: number;
 }
 /**
+ * ModifyCasterInputInfo返回参数结构体
+ */
+export interface ModifyCasterInputInfoResponse {
+    /**
+     * 修改输入源后的预览地址。
+  注：该地址仅作为预览使用，不可分发。
+     */
+    InputPlayUrl?: string;
+    /**
+     * 修改后的输入源webrtc预览地址。
+  该地址需配合腾讯云快直播播放SDK使用。
+  注：该地址仅做预览使用，不可分发。
+     */
+    InputWebRTCPlayUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLiveForbidStreamList请求参数结构体
  */
 export interface DescribeLiveForbidStreamListRequest {
@@ -9440,6 +9917,15 @@ export interface RecentPullInfo {
     LoopedTimes: number;
 }
 /**
+ * DeleteCasterInputInfo返回参数结构体
+ */
+export interface DeleteCasterInputInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ForbidLiveStream返回参数结构体
  */
 export interface ForbidLiveStreamResponse {
@@ -9536,21 +10022,18 @@ export interface DescribeLiveTimeShiftWriteSizeInfoListResponse {
     RequestId?: string;
 }
 /**
- * 混流抠图参数
+ * DescribeCasterList返回参数结构体
  */
-export interface MixPortraitSegmentParams {
+export interface DescribeCasterListResponse {
     /**
-     * 抠图背景颜色，
-  常用的颜色有：
-  红色：0xcc0033。
-  黄色：0xcc9900。
-  绿色：0xcccc33。
-  蓝色：0x99CCFF。
-  黑色：0x000000。
-  白色：0xFFFFFF。
-  灰色：0x999999。
+     * 用户对应的导播台简要信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Color?: string;
+    CasterList?: Array<CasterBriefInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 录制模板参数。
@@ -9759,17 +10242,26 @@ export interface AddDelayLiveStreamResponse {
     RequestId?: string;
 }
 /**
- * DescribeLivePadTemplates请求参数结构体
+ * StopScreenshotTask返回参数结构体
  */
-export declare type DescribeLivePadTemplatesRequest = null;
-/**
- * ModifyLivePlayAuthKey返回参数结构体
- */
-export interface ModifyLivePlayAuthKeyResponse {
+export interface StopScreenshotTaskResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeLivePadTemplates请求参数结构体
+ */
+export declare type DescribeLivePadTemplatesRequest = null;
+/**
+ * EnableLiveDomain请求参数结构体
+ */
+export interface EnableLiveDomainRequest {
+    /**
+     * 待启用的直播域名。
+     */
+    DomainName: string;
 }
 /**
  * DescribeLiveTranscodeTotalInfo返回参数结构体
@@ -9954,6 +10446,38 @@ export interface CreateLiveSnapshotTemplateRequest {
     CosFileName?: string;
 }
 /**
+ * 直播流监播输出流信息
+ */
+export interface LiveStreamMonitorOutputInfo {
+    /**
+     * 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamWidth: number;
+    /**
+     * 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamHeight: number;
+    /**
+     * 监播任务输出流名称。
+  不填时，系统会自动生成。
+  256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamName?: string;
+    /**
+     * 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputDomain?: string;
+    /**
+     * 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputApp?: string;
+}
+/**
  * ModifyLiveCallbackTemplate请求参数结构体
  */
 export interface ModifyLiveCallbackTemplateRequest {
@@ -10080,13 +10604,18 @@ export interface ModifyLivePushAuthKeyResponse {
     RequestId?: string;
 }
 /**
- * StopScreenshotTask返回参数结构体
+ * DeleteCasterOutputInfo请求参数结构体
  */
-export interface StopScreenshotTaskResponse {
+export interface DeleteCasterOutputInfoRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 导播台ID。
      */
-    RequestId?: string;
+    CasterId: number;
+    /**
+     * 待删除的推流信息Index。
+  注：删除时，该Index对应的配置需要存在。
+     */
+    OutputIndex: number;
 }
 /**
  * 禁推流列表

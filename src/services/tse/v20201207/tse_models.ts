@@ -3014,7 +3014,7 @@ export interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
   /**
    * 是否成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3146,7 +3146,7 @@ export interface BindAutoScalerResourceStrategyToGroupsResponse {
   /**
    * 是否成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3976,15 +3976,15 @@ export interface DescribeNativeGatewayServerGroupsRequest {
    */
   GatewayId: string
   /**
-   * 翻页从第几个开始获取
+   * 偏移量，默认为 0。
    */
   Offset?: number
   /**
-   * 翻页获取多少个
+   * 返回数量，默认为 20。
    */
   Limit?: number
   /**
-   * 过滤参数
+   * 过滤参数，支持按照分组名称、分组ID（Name、GroupId）筛选
    */
   Filters?: Array<Filter>
 }
@@ -4697,7 +4697,7 @@ export interface DescribeCloudNativeAPIGatewayResponse {
   /**
    * 获取云原生API网关基础信息响应结果。
    */
-  Result: DescribeCloudNativeAPIGatewayResult
+  Result?: DescribeCloudNativeAPIGatewayResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4785,27 +4785,27 @@ export interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
    * 网关分组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 节点配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeConfig: CloudNativeAPIGatewayNodeConfig
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig
   /**
    * 绑定时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindTime: string
+  BindTime?: string
   /**
    * 网关分组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 绑定状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -6302,7 +6302,7 @@ export interface DescribeNativeGatewayServerGroupsResponse {
   /**
    * 分组列表信息
    */
-  Result: NativeGatewayServerGroups
+  Result?: NativeGatewayServerGroups
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

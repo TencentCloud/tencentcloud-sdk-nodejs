@@ -30,7 +30,7 @@ import {
   DescribePlayErrorCodeDetailInfoListRequest,
   PublishTime,
   CommonMixOutputParams,
-  DescribeLiveTranscodeDetailInfoResponse,
+  DescribeCasterOutputInfosResponse,
   DescribeLiveStreamPublishedListRequest,
   DescribeGroupProIspPlayInfoListResponse,
   DescribeLiveTranscodeDetailInfoRequest,
@@ -59,9 +59,11 @@ import {
   DescribeLiveWatermarksRequest,
   DescribeLiveWatermarkRulesRequest,
   EnableOptimalSwitchingRequest,
+  DescribeCasterInputInfosResponse,
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
   DescribeStreamDayPlayInfoListRequest,
+  DeleteLiveTimeShiftRuleResponse,
   TimeShiftStreamInfo,
   DescribeLivePadRulesResponse,
   CreatePullStreamConfigRequest,
@@ -74,6 +76,7 @@ import {
   TimeShiftTemplate,
   WatermarkInfo,
   DescribeLiveDomainPlayInfoListRequest,
+  CasterInputInfo,
   DeleteLiveWatermarkRuleResponse,
   DescribeLogDownloadListResponse,
   TransitionTypeInfo,
@@ -81,7 +84,7 @@ import {
   DomainCertInfo,
   DeleteLiveSnapshotRuleResponse,
   BandwidthInfo,
-  LiveStreamMonitorOutputInfo,
+  CreateLiveRecordRuleResponse,
   DeleteLiveTranscodeTemplateRequest,
   StopLivePadProcessorRequest,
   StopRecordTaskResponse,
@@ -95,6 +98,7 @@ import {
   CreateLiveTranscodeTemplateRequest,
   MPSResult,
   DescribeLiveTimeShiftTemplatesResponse,
+  ModifyCasterOutputInfoRequest,
   PlayAuthKeyInfo,
   ModifyLiveStreamMonitorResponse,
   CreateRecordTaskRequest,
@@ -108,6 +112,8 @@ import {
   HttpCodeValue,
   DeleteLiveStreamMonitorResponse,
   DeleteLiveCallbackTemplateRequest,
+  ModifyCasterInputInfoRequest,
+  DescribeCasterOutputInfosRequest,
   CreateLiveCallbackTemplateResponse,
   DescribeLiveCallbackTemplateRequest,
   CreateLiveStreamMonitorRequest,
@@ -125,16 +131,20 @@ import {
   DescribeLivePushAuthKeyRequest,
   DescribeCasterTransitionTypesResponse,
   CreateCasterRequest,
+  AddCasterOutputInfoRequest,
   DescribeUploadStreamNumsResponse,
+  DescribeLiveTranscodeDetailInfoResponse,
   DeleteLiveTranscodeTemplateResponse,
   CreateScreenshotTaskResponse,
   DeleteLiveCallbackRuleResponse,
   DescribeStreamPlayInfoListRequest,
   DescribeCasterDisplayInfoRequest,
   PushAuthKeyInfo,
+  CreateCasterInputPushUrlResponse,
   DescribeLivePlayAuthKeyRequest,
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
+  CreateCasterInputPushUrlRequest,
   DescribeLivePadTemplatesResponse,
   DomainInfo,
   DescribeLiveTranscodeRulesRequest,
@@ -146,6 +156,7 @@ import {
   StopLiveRecordResponse,
   DeleteCasterResponse,
   DeleteScreenshotTaskRequest,
+  ModifyCasterLayoutInfoResponse,
   DescribePlayErrorCodeSumInfoListRequest,
   TranscodeTaskNum,
   BillCountryInfo,
@@ -172,10 +183,12 @@ import {
   BackupStreamGroupInfo,
   ScreenshotTask,
   DeletePullStreamConfigResponse,
-  DeleteLiveTimeShiftRuleResponse,
+  ModifyLivePlayDomainRequest,
+  DeleteCasterLayoutInfoResponse,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
   DescribeLiveTranscodeRulesResponse,
+  AddCasterLayoutInfoResponse,
   DeleteLivePullStreamTaskResponse,
   DescribeStreamPushInfoListRequest,
   ResumeLiveStreamResponse,
@@ -206,19 +219,21 @@ import {
   DomainDetailInfo,
   DeleteLiveRecordRequest,
   StopLiveRecordRequest,
-  DeleteLiveDomainRequest,
+  CasterLayoutParam,
+  DeleteLiveCallbackTemplateResponse,
   CreateRecordTaskResponse,
   CreateLivePadTemplateRequest,
   CopyCasterRequest,
   DescribeLivePullStreamTasksResponse,
   CreateLiveCallbackRuleResponse,
   DescribeAreaBillBandwidthAndFluxListRequest,
-  DescribeLiveDomainCertBindingsRequest,
+  ModifyCasterOutputInfoResponse,
+  ModifyLiveDomainRefererResponse,
   DescribeLiveStreamOnlineListRequest,
   DescribeRecordTaskRequest,
   CommonMixCropParams,
   XP2PDetailInfo,
-  ModifyLiveSnapshotTemplateRequest,
+  DescribeCasterLayoutInfosResponse,
   ModifyLiveCallbackTemplateResponse,
   DescribeLiveCallbackTemplatesResponse,
   DescribeLivePushAuthKeyResponse,
@@ -236,8 +251,10 @@ import {
   StopScreenshotTaskRequest,
   DescribePullTransformPushInfoRequest,
   DescribeBillBandwidthAndFluxListRequest,
+  AddCasterLayoutInfoRequest,
   FlvSpecialParam,
   ModifyLiveTranscodeTemplateRequest,
+  ModifyCasterLayoutInfoRequest,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
@@ -263,9 +280,9 @@ import {
   ModifyLiveSnapshotTemplateResponse,
   DeleteLivePadTemplateRequest,
   DescribeTimeShiftStreamListRequest,
-  ModifyLivePlayDomainRequest,
+  CasterLayoutInfo,
   DescribeLiveWatermarkRequest,
-  DescribeCasterListResponse,
+  MixPortraitSegmentParams,
   DescribeLiveDomainsResponse,
   ModifyLiveTimeShiftTemplateRequest,
   ModifyLiveDomainCertBindingsResponse,
@@ -290,6 +307,7 @@ import {
   StartLiveStreamMonitorRequest,
   DescribeCasterRequest,
   AuthenticateDomainOwnerRequest,
+  DeleteLiveDomainRequest,
   DeleteLiveTimeShiftTemplateResponse,
   DescribeScreenshotTaskResponse,
   ModifyPullStreamConfigRequest,
@@ -305,17 +323,19 @@ import {
   DescribeLiveSnapshotTemplateResponse,
   DescribeLivePadProcessorListRequest,
   DescribeConcurrentRecordStreamNumRequest,
+  DeleteCasterInputInfoRequest,
   DeleteScreenshotTaskResponse,
   DescribePullTransformPushInfoResponse,
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
   StopLivePadProcessorResponse,
-  EnableLiveDomainRequest,
+  ModifyLivePlayAuthKeyResponse,
   DescribeLiveTimeShiftRulesResponse,
   DescribeLiveTranscodeTemplatesResponse,
   DeleteLiveCallbackRuleRequest,
   DescribeAllStreamPlayInfoListResponse,
   TaskStatusInfo,
+  DescribeCasterInputInfosRequest,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
   HlsSpecialParam,
@@ -335,40 +355,44 @@ import {
   DescribeTimeShiftRecordDetailRequest,
   PullStreamTaskInfo,
   CreateLiveTimeShiftTemplateResponse,
+  DeleteCasterOutputInfoResponse,
   DescribeLivePadRulesRequest,
   DescribePullStreamConfigsResponse,
   DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
   BatchDomainOperateErrors,
   ResumeDelayLiveStreamResponse,
-  ModifyLiveDomainRefererResponse,
+  DescribeLiveDomainCertBindingsRequest,
   CreateLiveRecordTemplateRequest,
   DescribeLivePullStreamTasksRequest,
+  AddCasterOutputInfoResponse,
   DescribeHttpStatusInfoListResponse,
   CreateLiveSnapshotRuleRequest,
   BillDataInfo,
   DescribeLiveSnapshotRulesResponse,
   DescribeDeliverBandwidthListResponse,
   CreateLiveStreamMonitorResponse,
+  DescribeCasterLayoutInfosRequest,
   DescribeLivePadTemplateRequest,
-  DeleteLiveCallbackTemplateResponse,
+  AddCasterInputInfoRequest,
   ModifyLivePlayAuthKeyRequest,
   DescribeLiveDelayInfoListRequest,
   DescribeLiveTranscodeTemplateResponse,
   PushLogInfo,
   DescribeScreenShotSheetNumListResponse,
-  CreateLiveRecordRuleResponse,
   ModifyLivePullStreamTaskResponse,
   DescribeUploadStreamNumsRequest,
   EnableLiveDomainResponse,
   DeleteCasterRequest,
+  DescribeLiveDomainCertResponse,
   AuthenticateDomainOwnerResponse,
   DeleteLiveTranscodeRuleRequest,
   AddLiveWatermarkResponse,
-  DescribeLiveDomainCertResponse,
+  AddCasterInputInfoResponse,
   ForbidLiveStreamRequest,
   DescribeConcurrentRecordStreamNumResponse,
   DeleteLiveRecordTemplateResponse,
+  CasterOutputInfo,
   DescribePullStreamConfigsRequest,
   DescribePlayErrorCodeSumInfoListResponse,
   DescribeCasterListRequest,
@@ -376,6 +400,7 @@ import {
   TimeValue,
   CreateLiveRecordResponse,
   UpdateLiveWatermarkResponse,
+  ModifyLiveSnapshotTemplateRequest,
   DescribeLiveRecordTemplateResponse,
   BillAreaInfo,
   LiveCertDomainInfo,
@@ -386,6 +411,7 @@ import {
   ModifyCasterRequest,
   PushQualityData,
   DescribeLiveCertRequest,
+  DeleteCasterLayoutInfoRequest,
   PlaySumStatInfo,
   RefererAuthConfig,
   TranscodeDetailInfo,
@@ -406,10 +432,12 @@ import {
   DescribeLiveWatermarkResponse,
   DescribeTimeShiftStreamListResponse,
   LivePackageInfo,
+  ModifyCasterInputInfoResponse,
   DescribeLiveForbidStreamListRequest,
   LiveStreamMonitorNotifyPolicy,
   LiveStreamMonitorInfo,
   RecentPullInfo,
+  DeleteCasterInputInfoResponse,
   ForbidLiveStreamResponse,
   DescribeLiveSnapshotTemplatesResponse,
   DescribeRecordTaskResponse,
@@ -417,7 +445,7 @@ import {
   DescribeAreaBillBandwidthAndFluxListResponse,
   ForbidLiveDomainRequest,
   DescribeLiveTimeShiftWriteSizeInfoListResponse,
-  MixPortraitSegmentParams,
+  DescribeCasterListResponse,
   RecordParam,
   ModifyLiveRecordTemplateRequest,
   DescribeLiveDomainRefererRequest,
@@ -425,21 +453,23 @@ import {
   HttpCodeInfo,
   DescribeLiveStreamPublishedListResponse,
   AddDelayLiveStreamResponse,
+  StopScreenshotTaskResponse,
   DescribeLivePadTemplatesRequest,
-  ModifyLivePlayAuthKeyResponse,
+  EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
   CreateLiveTranscodeRuleResponse,
   CreateLiveTranscodeTemplateResponse,
   ModifyLivePadTemplateRequest,
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
+  LiveStreamMonitorOutputInfo,
   ModifyLiveCallbackTemplateRequest,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
   DescribeLiveXP2PDetailInfoListRequest,
   ModifyLivePushAuthKeyResponse,
-  StopScreenshotTaskResponse,
+  DeleteCasterOutputInfoRequest,
   ForbidStreamInfo,
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
@@ -665,13 +695,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除转码模板。
+   * 该接口用来向导播台中添加一个输入源，该输入源可以是拉流地址、或是一个文件链接
    */
-  async DeleteLiveTranscodeTemplate(
-    req: DeleteLiveTranscodeTemplateRequest,
-    cb?: (error: string, rep: DeleteLiveTranscodeTemplateResponse) => void
-  ): Promise<DeleteLiveTranscodeTemplateResponse> {
-    return this.request("DeleteLiveTranscodeTemplate", req, cb)
+  async AddCasterInputInfo(
+    req: AddCasterInputInfoRequest,
+    cb?: (error: string, rep: AddCasterInputInfoResponse) => void
+  ): Promise<AddCasterInputInfoResponse> {
+    return this.request("AddCasterInputInfo", req, cb)
   }
 
   /**
@@ -706,6 +736,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取单个转码模板。
+   */
+  async DescribeLiveTranscodeTemplate(
+    req: DescribeLiveTranscodeTemplateRequest,
+    cb?: (error: string, rep: DescribeLiveTranscodeTemplateResponse) => void
+  ): Promise<DescribeLiveTranscodeTemplateResponse> {
+    return this.request("DescribeLiveTranscodeTemplate", req, cb)
+  }
+
+  /**
    * 支持直播时移写入量数据查询。
    */
   async DescribeLiveTimeShiftWriteSizeInfoList(
@@ -713,6 +753,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveTimeShiftWriteSizeInfoListResponse) => void
   ): Promise<DescribeLiveTimeShiftWriteSizeInfoListResponse> {
     return this.request("DescribeLiveTimeShiftWriteSizeInfoList", req, cb)
+  }
+
+  /**
+     * 设置直播域名 Referer 黑白名单。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+     */
+  async ModifyLiveDomainReferer(
+    req: ModifyLiveDomainRefererRequest,
+    cb?: (error: string, rep: ModifyLiveDomainRefererResponse) => void
+  ): Promise<ModifyLiveDomainRefererResponse> {
+    return this.request("ModifyLiveDomainReferer", req, cb)
   }
 
   /**
@@ -727,13 +778,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
+   * 该接口用来生成导播台推流地址
    */
-  async ModifyPullStreamStatus(
-    req: ModifyPullStreamStatusRequest,
-    cb?: (error: string, rep: ModifyPullStreamStatusResponse) => void
-  ): Promise<ModifyPullStreamStatusResponse> {
-    return this.request("ModifyPullStreamStatus", req, cb)
+  async CreateCasterInputPushUrl(
+    req: CreateCasterInputPushUrlRequest,
+    cb?: (error: string, rep: CreateCasterInputPushUrlResponse) => void
+  ): Promise<CreateCasterInputPushUrlResponse> {
+    return this.request("CreateCasterInputPushUrl", req, cb)
+  }
+
+  /**
+   * 该接口用来查询某个导播台的推流信息列表。
+   */
+  async DescribeCasterOutputInfos(
+    req: DescribeCasterOutputInfosRequest,
+    cb?: (error: string, rep: DescribeCasterOutputInfosResponse) => void
+  ): Promise<DescribeCasterOutputInfosResponse> {
+    return this.request("DescribeCasterOutputInfos", req, cb)
   }
 
   /**
@@ -803,6 +864,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用来增加导播台的布局参数。
+   */
+  async AddCasterLayoutInfo(
+    req: AddCasterLayoutInfoRequest,
+    cb?: (error: string, rep: AddCasterLayoutInfoResponse) => void
+  ): Promise<AddCasterLayoutInfoResponse> {
+    return this.request("AddCasterLayoutInfo", req, cb)
+  }
+
+  /**
    * 获取域名证书信息。
    */
   async DescribeLiveDomainCert(
@@ -830,6 +901,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAreaBillBandwidthAndFluxListResponse) => void
   ): Promise<DescribeAreaBillBandwidthAndFluxListResponse> {
     return this.request("DescribeAreaBillBandwidthAndFluxList", req, cb)
+  }
+
+  /**
+   * 该接口用来将布局信息从导播台中删除
+   */
+  async DeleteCasterLayoutInfo(
+    req: DeleteCasterLayoutInfoRequest,
+    cb?: (error: string, rep: DeleteCasterLayoutInfoResponse) => void
+  ): Promise<DeleteCasterLayoutInfoResponse> {
+    return this.request("DeleteCasterLayoutInfo", req, cb)
   }
 
   /**
@@ -970,13 +1051,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取单个转码模板。
+   * 获取单个直播垫片模板
    */
-  async DescribeLiveTranscodeTemplate(
-    req: DescribeLiveTranscodeTemplateRequest,
-    cb?: (error: string, rep: DescribeLiveTranscodeTemplateResponse) => void
-  ): Promise<DescribeLiveTranscodeTemplateResponse> {
-    return this.request("DescribeLiveTranscodeTemplate", req, cb)
+  async DescribeLivePadTemplate(
+    req: DescribeLivePadTemplateRequest,
+    cb?: (error: string, rep: DescribeLivePadTemplateResponse) => void
+  ): Promise<DescribeLivePadTemplateResponse> {
+    return this.request("DescribeLivePadTemplate", req, cb)
   }
 
   /**
@@ -1267,6 +1348,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 该接口用来修改导播台的推流信息。
+注：只有在主监启动前设置才生效，主监启动后设置，下次推流生效。
+     */
+  async ModifyCasterOutputInfo(
+    req: ModifyCasterOutputInfoRequest,
+    cb?: (error: string, rep: ModifyCasterOutputInfoResponse) => void
+  ): Promise<ModifyCasterOutputInfoResponse> {
+    return this.request("ModifyCasterOutputInfo", req, cb)
+  }
+
+  /**
    * 恢复某条流的推流。
    */
   async ResumeLiveStream(
@@ -1307,14 +1399,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 查询使用 CreateLivePullStreamTask 接口创建的直播拉流任务。
-排序方式：默认按更新时间 倒序排列。
-     */
-  async DescribeLivePullStreamTasks(
-    req: DescribeLivePullStreamTasksRequest,
-    cb?: (error: string, rep: DescribeLivePullStreamTasksResponse) => void
-  ): Promise<DescribeLivePullStreamTasksResponse> {
-    return this.request("DescribeLivePullStreamTasks", req, cb)
+   * 删除直播时移模板。
+   */
+  async DeleteLiveTimeShiftTemplate(
+    req: DeleteLiveTimeShiftTemplateRequest,
+    cb?: (error: string, rep: DeleteLiveTimeShiftTemplateResponse) => void
+  ): Promise<DeleteLiveTimeShiftTemplateResponse> {
+    return this.request("DeleteLiveTimeShiftTemplate", req, cb)
   }
 
   /**
@@ -1347,6 +1438,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
   ): Promise<DescribeCasterUserStatusResponse> {
     return this.request("DescribeCasterUserStatus", req, cb)
+  }
+
+  /**
+   * 该接口用来查询某个导播台的布局列表
+   */
+  async DescribeCasterLayoutInfos(
+    req: DescribeCasterLayoutInfosRequest,
+    cb?: (error: string, rep: DescribeCasterLayoutInfosResponse) => void
+  ): Promise<DescribeCasterLayoutInfosResponse> {
+    return this.request("DescribeCasterLayoutInfos", req, cb)
   }
 
   /**
@@ -1451,13 +1552,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取单个直播垫片模板
+   * 删除转码模板。
    */
-  async DescribeLivePadTemplate(
-    req: DescribeLivePadTemplateRequest,
-    cb?: (error: string, rep: DescribeLivePadTemplateResponse) => void
-  ): Promise<DescribeLivePadTemplateResponse> {
-    return this.request("DescribeLivePadTemplate", req, cb)
+  async DeleteLiveTranscodeTemplate(
+    req: DeleteLiveTranscodeTemplateRequest,
+    cb?: (error: string, rep: DeleteLiveTranscodeTemplateResponse) => void
+  ): Promise<DeleteLiveTranscodeTemplateResponse> {
+    return this.request("DeleteLiveTranscodeTemplate", req, cb)
   }
 
   /**
@@ -1512,6 +1613,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 获取直播时移模板。
+   */
+  async DescribeLiveTimeShiftTemplates(
+    req?: DescribeLiveTimeShiftTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveTimeShiftTemplatesResponse) => void
+  ): Promise<DescribeLiveTimeShiftTemplatesResponse> {
+    return this.request("DescribeLiveTimeShiftTemplates", req, cb)
+  }
+
+  /**
    * 获取录制规则列表
    */
   async DescribeLiveRecordRules(
@@ -1522,13 +1633,34 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取直播时移模板。
+     * 该接口用来删除导播台的推流信息。
+注：若删除推流到腾讯云直播源站配置，即OutputIndex为0，OutputType为1的推流配置，在重新启动主监后，系统会自动重新生成一个推流到腾讯云直播源站配置。
+     */
+  async DeleteCasterOutputInfo(
+    req: DeleteCasterOutputInfoRequest,
+    cb?: (error: string, rep: DeleteCasterOutputInfoResponse) => void
+  ): Promise<DeleteCasterOutputInfoResponse> {
+    return this.request("DeleteCasterOutputInfo", req, cb)
+  }
+
+  /**
+   * 该接口用来修改布局参数
    */
-  async DescribeLiveTimeShiftTemplates(
-    req?: DescribeLiveTimeShiftTemplatesRequest,
-    cb?: (error: string, rep: DescribeLiveTimeShiftTemplatesResponse) => void
-  ): Promise<DescribeLiveTimeShiftTemplatesResponse> {
-    return this.request("DescribeLiveTimeShiftTemplates", req, cb)
+  async ModifyCasterLayoutInfo(
+    req: ModifyCasterLayoutInfoRequest,
+    cb?: (error: string, rep: ModifyCasterLayoutInfoResponse) => void
+  ): Promise<ModifyCasterLayoutInfoResponse> {
+    return this.request("ModifyCasterLayoutInfo", req, cb)
+  }
+
+  /**
+   * 该接口用来新增导播台推流信息。导播台主监启动后，将会将主监画面推向该接口设置的地址。
+   */
+  async AddCasterOutputInfo(
+    req: AddCasterOutputInfoRequest,
+    cb?: (error: string, rep: AddCasterOutputInfoResponse) => void
+  ): Promise<AddCasterOutputInfoResponse> {
+    return this.request("AddCasterOutputInfo", req, cb)
   }
 
   /**
@@ -1713,6 +1845,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
+   */
+  async ModifyPullStreamStatus(
+    req: ModifyPullStreamStatusRequest,
+    cb?: (error: string, rep: ModifyPullStreamStatusResponse) => void
+  ): Promise<ModifyPullStreamStatusResponse> {
+    return this.request("ModifyPullStreamStatus", req, cb)
+  }
+
+  /**
    * 查询直播转推计费带宽，查询时间范围最大支持3个月内的数据，时间跨度最长31天。
    */
   async DescribeDeliverBandwidthList(
@@ -1869,18 +2011,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 创建临时拉流转推任务，目前限制添加10条任务。
-该接口已下线,请使用新接口 CreateLivePullStreamTask。
-
-注意：该接口用于创建临时拉流转推任务，
-拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
-但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
-     */
-  async CreatePullStreamConfig(
-    req: CreatePullStreamConfigRequest,
-    cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
-  ): Promise<CreatePullStreamConfigResponse> {
-    return this.request("CreatePullStreamConfig", req, cb)
+   * 获取直播垫片模板。
+   */
+  async DescribeLivePadTemplates(
+    req?: DescribeLivePadTemplatesRequest,
+    cb?: (error: string, rep: DescribeLivePadTemplatesResponse) => void
+  ): Promise<DescribeLivePadTemplatesResponse> {
+    return this.request("DescribeLivePadTemplates", req, cb)
   }
 
   /**
@@ -1901,6 +2038,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLivePadRulesResponse) => void
   ): Promise<DescribeLivePadRulesResponse> {
     return this.request("DescribeLivePadRules", req, cb)
+  }
+
+  /**
+   * 该接口用来删除导播台中的输入源信息。
+   */
+  async DeleteCasterInputInfo(
+    req: DeleteCasterInputInfoRequest,
+    cb?: (error: string, rep: DeleteCasterInputInfoResponse) => void
+  ): Promise<DeleteCasterInputInfoResponse> {
+    return this.request("DeleteCasterInputInfo", req, cb)
   }
 
   /**
@@ -1966,13 +2113,14 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 删除直播时移模板。
-   */
-  async DeleteLiveTimeShiftTemplate(
-    req: DeleteLiveTimeShiftTemplateRequest,
-    cb?: (error: string, rep: DeleteLiveTimeShiftTemplateResponse) => void
-  ): Promise<DeleteLiveTimeShiftTemplateResponse> {
-    return this.request("DeleteLiveTimeShiftTemplate", req, cb)
+     * 查询使用 CreateLivePullStreamTask 接口创建的直播拉流任务。
+排序方式：默认按更新时间 倒序排列。
+     */
+  async DescribeLivePullStreamTasks(
+    req: DescribeLivePullStreamTasksRequest,
+    cb?: (error: string, rep: DescribeLivePullStreamTasksResponse) => void
+  ): Promise<DescribeLivePullStreamTasksResponse> {
+    return this.request("DescribeLivePullStreamTasks", req, cb)
   }
 
   /**
@@ -2067,14 +2215,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 设置直播域名 Referer 黑白名单。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
-     */
-  async ModifyLiveDomainReferer(
-    req: ModifyLiveDomainRefererRequest,
-    cb?: (error: string, rep: ModifyLiveDomainRefererResponse) => void
-  ): Promise<ModifyLiveDomainRefererResponse> {
-    return this.request("ModifyLiveDomainReferer", req, cb)
+   * 该接口用来查询导播台的输入源信息列表。
+   */
+  async DescribeCasterInputInfos(
+    req: DescribeCasterInputInfosRequest,
+    cb?: (error: string, rep: DescribeCasterInputInfosResponse) => void
+  ): Promise<DescribeCasterInputInfosResponse> {
+    return this.request("DescribeCasterInputInfos", req, cb)
   }
 
   /**
@@ -2095,6 +2242,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CopyCasterResponse) => void
   ): Promise<CopyCasterResponse> {
     return this.request("CopyCaster", req, cb)
+  }
+
+  /**
+     * 该接口用来修改已经设置过的输入源信息，如源地址，源类型等。
+设置前，需保证待修改的输入源已经存在。若不存在，需使用AddCasterInputInfo接口。
+     */
+  async ModifyCasterInputInfo(
+    req: ModifyCasterInputInfoRequest,
+    cb?: (error: string, rep: ModifyCasterInputInfoResponse) => void
+  ): Promise<ModifyCasterInputInfoResponse> {
+    return this.request("ModifyCasterInputInfo", req, cb)
   }
 
   /**
@@ -2212,13 +2370,18 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取直播垫片模板。
-   */
-  async DescribeLivePadTemplates(
-    req?: DescribeLivePadTemplatesRequest,
-    cb?: (error: string, rep: DescribeLivePadTemplatesResponse) => void
-  ): Promise<DescribeLivePadTemplatesResponse> {
-    return this.request("DescribeLivePadTemplates", req, cb)
+     * 创建临时拉流转推任务，目前限制添加10条任务。
+该接口已下线,请使用新接口 CreateLivePullStreamTask。
+
+注意：该接口用于创建临时拉流转推任务，
+拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
+但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
+     */
+  async CreatePullStreamConfig(
+    req: CreatePullStreamConfigRequest,
+    cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
+  ): Promise<CreatePullStreamConfigResponse> {
+    return this.request("CreatePullStreamConfig", req, cb)
   }
 
   /**

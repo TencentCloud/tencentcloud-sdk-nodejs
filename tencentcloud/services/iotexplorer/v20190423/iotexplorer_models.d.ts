@@ -4378,15 +4378,15 @@ export interface DeviceSignatureInfo {
  */
 export interface TWeCallInfo {
     /**
-     * 小程序ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModelId: string;
-    /**
      * Sn信息，SN格式：产品ID_设备名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Sn: string;
+    /**
+     * 小程序ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelId?: string;
     /**
      * 激活数
   注意：此字段可能返回 null，表示取不到有效值。

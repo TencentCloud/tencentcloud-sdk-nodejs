@@ -198,9 +198,9 @@ it("live.v20180801.DescribeTimeShiftStreamList", async function () {
     }
 })
 
-it("live.v20180801.DeleteLiveTranscodeTemplate", async function () {
+it("live.v20180801.AddCasterInputInfo", async function () {
     try {
-       const data = await client.DeleteLiveTranscodeTemplate({})
+       const data = await client.AddCasterInputInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,29 @@ it("live.v20180801.DescribeLiveDomainReferer", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTranscodeTemplate", async function () {
+    try {
+       const data = await client.DescribeLiveTranscodeTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveTimeShiftWriteSizeInfoList", async function () {
     try {
        const data = await client.DescribeLiveTimeShiftWriteSizeInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveDomainReferer", async function () {
+    try {
+       const data = await client.ModifyLiveDomainReferer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +278,19 @@ it("live.v20180801.DescribeTopClientIpSumInfoList", async function () {
     }
 })
 
-it("live.v20180801.ModifyPullStreamStatus", async function () {
+it("live.v20180801.CreateCasterInputPushUrl", async function () {
     try {
-       const data = await client.ModifyPullStreamStatus({})
+       const data = await client.CreateCasterInputPushUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeCasterOutputInfos", async function () {
+    try {
+       const data = await client.DescribeCasterOutputInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +358,16 @@ it("live.v20180801.ModifyLiveRecordTemplate", async function () {
     }
 })
 
+it("live.v20180801.AddCasterLayoutInfo", async function () {
+    try {
+       const data = await client.AddCasterLayoutInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveDomainCert", async function () {
     try {
        const data = await client.DescribeLiveDomainCert({})
@@ -351,6 +391,16 @@ it("live.v20180801.AddLiveWatermark", async function () {
 it("live.v20180801.DescribeAreaBillBandwidthAndFluxList", async function () {
     try {
        const data = await client.DescribeAreaBillBandwidthAndFluxList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteCasterLayoutInfo", async function () {
+    try {
+       const data = await client.DeleteCasterLayoutInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +538,9 @@ it("live.v20180801.DescribeLiveRecordTemplate", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveTranscodeTemplate", async function () {
+it("live.v20180801.DescribeLivePadTemplate", async function () {
     try {
-       const data = await client.DescribeLiveTranscodeTemplate({})
+       const data = await client.DescribeLivePadTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +818,16 @@ it("live.v20180801.CreateLiveCallbackTemplate", async function () {
     }
 })
 
+it("live.v20180801.ModifyCasterOutputInfo", async function () {
+    try {
+       const data = await client.ModifyCasterOutputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ResumeLiveStream", async function () {
     try {
        const data = await client.ResumeLiveStream({})
@@ -808,9 +868,9 @@ it("live.v20180801.ModifyLiveCallbackTemplate", async function () {
     }
 })
 
-it("live.v20180801.DescribeLivePullStreamTasks", async function () {
+it("live.v20180801.DeleteLiveTimeShiftTemplate", async function () {
     try {
-       const data = await client.DescribeLivePullStreamTasks({})
+       const data = await client.DeleteLiveTimeShiftTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +901,16 @@ it("live.v20180801.DescribeStreamPlayInfoList", async function () {
 it("live.v20180801.DescribeCasterUserStatus", async function () {
     try {
        const data = await client.DescribeCasterUserStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeCasterLayoutInfos", async function () {
+    try {
+       const data = await client.DescribeCasterLayoutInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,9 +1018,9 @@ it("live.v20180801.DeleteCaster", async function () {
     }
 })
 
-it("live.v20180801.DescribeLivePadTemplate", async function () {
+it("live.v20180801.DeleteLiveTranscodeTemplate", async function () {
     try {
-       const data = await client.DescribeLivePadTemplate({})
+       const data = await client.DeleteLiveTranscodeTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,6 +1078,16 @@ it("live.v20180801.DescribeLogDownloadList", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTimeShiftTemplates", async function () {
+    try {
+       const data = await client.DescribeLiveTimeShiftTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveRecordRules", async function () {
     try {
        const data = await client.DescribeLiveRecordRules({})
@@ -1018,9 +1098,29 @@ it("live.v20180801.DescribeLiveRecordRules", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveTimeShiftTemplates", async function () {
+it("live.v20180801.DeleteCasterOutputInfo", async function () {
     try {
-       const data = await client.DescribeLiveTimeShiftTemplates({})
+       const data = await client.DeleteCasterOutputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyCasterLayoutInfo", async function () {
+    try {
+       const data = await client.ModifyCasterLayoutInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.AddCasterOutputInfo", async function () {
+    try {
+       const data = await client.AddCasterOutputInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1198,6 +1298,16 @@ it("live.v20180801.AddLiveDomain", async function () {
     }
 })
 
+it("live.v20180801.ModifyPullStreamStatus", async function () {
+    try {
+       const data = await client.ModifyPullStreamStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeDeliverBandwidthList", async function () {
     try {
        const data = await client.DescribeDeliverBandwidthList({})
@@ -1338,9 +1448,9 @@ it("live.v20180801.RestartLivePullStreamTask", async function () {
     }
 })
 
-it("live.v20180801.CreatePullStreamConfig", async function () {
+it("live.v20180801.DescribeLivePadTemplates", async function () {
     try {
-       const data = await client.CreatePullStreamConfig({})
+       const data = await client.DescribeLivePadTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1361,6 +1471,16 @@ it("live.v20180801.DescribeLiveWatermarkRules", async function () {
 it("live.v20180801.DescribeLivePadRules", async function () {
     try {
        const data = await client.DescribeLivePadRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteCasterInputInfo", async function () {
+    try {
+       const data = await client.DeleteCasterInputInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,9 +1548,9 @@ it("live.v20180801.DescribeCaster", async function () {
     }
 })
 
-it("live.v20180801.DeleteLiveTimeShiftTemplate", async function () {
+it("live.v20180801.DescribeLivePullStreamTasks", async function () {
     try {
-       const data = await client.DeleteLiveTimeShiftTemplate({})
+       const data = await client.DescribeLivePullStreamTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1518,9 +1638,9 @@ it("live.v20180801.DescribeLiveStreamState", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveDomainReferer", async function () {
+it("live.v20180801.DescribeCasterInputInfos", async function () {
     try {
-       const data = await client.ModifyLiveDomainReferer({})
+       const data = await client.DescribeCasterInputInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1541,6 +1661,16 @@ it("live.v20180801.DeleteLiveRecordTemplate", async function () {
 it("live.v20180801.CopyCaster", async function () {
     try {
        const data = await client.CopyCaster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyCasterInputInfo", async function () {
+    try {
+       const data = await client.ModifyCasterInputInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1648,9 +1778,9 @@ it("live.v20180801.DescribeLivePackageInfo", async function () {
     }
 })
 
-it("live.v20180801.DescribeLivePadTemplates", async function () {
+it("live.v20180801.CreatePullStreamConfig", async function () {
     try {
-       const data = await client.DescribeLivePadTemplates({})
+       const data = await client.CreatePullStreamConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

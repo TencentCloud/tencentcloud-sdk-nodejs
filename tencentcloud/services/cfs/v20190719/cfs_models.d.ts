@@ -1315,8 +1315,8 @@ export interface DescribeUserQuotaRequest {
     FileSystemId: string;
     /**
      * 过滤条件。
-  <br><li>UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid| Gid )
-  <br><li>UserId - Array of String - 是否必填：否 -（过滤条件）按UID/GID过滤。
+  UserType - Array of String - 是否必填：否 -（过滤条件）按配额类型过滤。(Uid|Gid|Dir )
+  UserId- Array of String - 是否必填：否 -（过滤条件）按id过滤。
      */
     Filters?: Array<Filter>;
     /**

@@ -3522,7 +3522,7 @@ UPDATED_ON：解析记录更新时间
    */
   SortType?: string
   /**
-   * 偏移量，默认值为0。
+   * 偏移量，默认值为0。如果入参携带"Domain","ffset","Limit" 这3个以外的参数，记录结果限制最大3000条
    */
   Offset?: number
   /**

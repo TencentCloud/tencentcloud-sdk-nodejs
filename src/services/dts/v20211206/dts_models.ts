@@ -2874,7 +2874,7 @@ export interface MigrateDBItem {
  */
 export interface DescribeMigrateDBInstancesRequest {
   /**
-   * 数据库类型，如mysql
+   * 数据库类型，如mysql,redis等
    */
   DatabaseType: string
   /**

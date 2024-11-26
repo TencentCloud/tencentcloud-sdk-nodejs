@@ -166,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTimeShiftStreamList", req, cb);
     }
     /**
-     * 删除转码模板。
+     * 该接口用来向导播台中添加一个输入源，该输入源可以是拉流地址、或是一个文件链接
      */
-    async DeleteLiveTranscodeTemplate(req, cb) {
-        return this.request("DeleteLiveTranscodeTemplate", req, cb);
+    async AddCasterInputInfo(req, cb) {
+        return this.request("AddCasterInputInfo", req, cb);
     }
     /**
      * 创建直播垫片模板。
@@ -191,10 +191,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveDomainReferer", req, cb);
     }
     /**
+     * 获取单个转码模板。
+     */
+    async DescribeLiveTranscodeTemplate(req, cb) {
+        return this.request("DescribeLiveTranscodeTemplate", req, cb);
+    }
+    /**
      * 支持直播时移写入量数据查询。
      */
     async DescribeLiveTimeShiftWriteSizeInfoList(req, cb) {
         return this.request("DescribeLiveTimeShiftWriteSizeInfoList", req, cb);
+    }
+    /**
+     * 设置直播域名 Referer 黑白名单。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+     */
+    async ModifyLiveDomainReferer(req, cb) {
+        return this.request("ModifyLiveDomainReferer", req, cb);
     }
     /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
@@ -204,10 +217,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopClientIpSumInfoList", req, cb);
     }
     /**
-     * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
+     * 该接口用来生成导播台推流地址
      */
-    async ModifyPullStreamStatus(req, cb) {
-        return this.request("ModifyPullStreamStatus", req, cb);
+    async CreateCasterInputPushUrl(req, cb) {
+        return this.request("CreateCasterInputPushUrl", req, cb);
+    }
+    /**
+     * 该接口用来查询某个导播台的推流信息列表。
+     */
+    async DescribeCasterOutputInfos(req, cb) {
+        return this.request("DescribeCasterOutputInfos", req, cb);
     }
     /**
      * 创建一个在指定时间启动、结束的截图任务，并使用指定截图模板ID对应的配置进行截图。
@@ -252,6 +271,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLiveRecordTemplate", req, cb);
     }
     /**
+     * 该接口用来增加导播台的布局参数。
+     */
+    async AddCasterLayoutInfo(req, cb) {
+        return this.request("AddCasterLayoutInfo", req, cb);
+    }
+    /**
      * 获取域名证书信息。
      */
     async DescribeLiveDomainCert(req, cb) {
@@ -268,6 +293,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAreaBillBandwidthAndFluxList(req, cb) {
         return this.request("DescribeAreaBillBandwidthAndFluxList", req, cb);
+    }
+    /**
+     * 该接口用来将布局信息从导播台中删除
+     */
+    async DeleteCasterLayoutInfo(req, cb) {
+        return this.request("DeleteCasterLayoutInfo", req, cb);
     }
     /**
      * 删除水印规则
@@ -355,10 +386,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveRecordTemplate", req, cb);
     }
     /**
-     * 获取单个转码模板。
+     * 获取单个直播垫片模板
      */
-    async DescribeLiveTranscodeTemplate(req, cb) {
-        return this.request("DescribeLiveTranscodeTemplate", req, cb);
+    async DescribeLivePadTemplate(req, cb) {
+        return this.request("DescribeLivePadTemplate", req, cb);
     }
     /**
      * 提前结束截图，中止运行中的截图任务。任务被成功终止后，本次任务将不再启动。
@@ -540,6 +571,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveCallbackTemplate", req, cb);
     }
     /**
+     * 该接口用来修改导播台的推流信息。
+注：只有在主监启动前设置才生效，主监启动后设置，下次推流生效。
+     */
+    async ModifyCasterOutputInfo(req, cb) {
+        return this.request("ModifyCasterOutputInfo", req, cb);
+    }
+    /**
      * 恢复某条流的推流。
      */
     async ResumeLiveStream(req, cb) {
@@ -564,11 +602,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ModifyLiveCallbackTemplate", req, cb);
     }
     /**
-     * 查询使用 CreateLivePullStreamTask 接口创建的直播拉流任务。
-排序方式：默认按更新时间 倒序排列。
+     * 删除直播时移模板。
      */
-    async DescribeLivePullStreamTasks(req, cb) {
-        return this.request("DescribeLivePullStreamTasks", req, cb);
+    async DeleteLiveTimeShiftTemplate(req, cb) {
+        return this.request("DeleteLiveTimeShiftTemplate", req, cb);
     }
     /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
@@ -589,6 +626,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeCasterUserStatus(req, cb) {
         return this.request("DescribeCasterUserStatus", req, cb);
+    }
+    /**
+     * 该接口用来查询某个导播台的布局列表
+     */
+    async DescribeCasterLayoutInfos(req, cb) {
+        return this.request("DescribeCasterLayoutInfos", req, cb);
     }
     /**
      * 查询直播拉流任务状态信息。
@@ -652,10 +695,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DeleteCaster", req, cb);
     }
     /**
-     * 获取单个直播垫片模板
+     * 删除转码模板。
      */
-    async DescribeLivePadTemplate(req, cb) {
-        return this.request("DescribeLivePadTemplate", req, cb);
+    async DeleteLiveTranscodeTemplate(req, cb) {
+        return this.request("DeleteLiveTranscodeTemplate", req, cb);
     }
     /**
      * 接口用来查询直播增值业务--截图的张数
@@ -689,16 +732,35 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLogDownloadList", req, cb);
     }
     /**
+     * 获取直播时移模板。
+     */
+    async DescribeLiveTimeShiftTemplates(req, cb) {
+        return this.request("DescribeLiveTimeShiftTemplates", req, cb);
+    }
+    /**
      * 获取录制规则列表
      */
     async DescribeLiveRecordRules(req, cb) {
         return this.request("DescribeLiveRecordRules", req, cb);
     }
     /**
-     * 获取直播时移模板。
+     * 该接口用来删除导播台的推流信息。
+注：若删除推流到腾讯云直播源站配置，即OutputIndex为0，OutputType为1的推流配置，在重新启动主监后，系统会自动重新生成一个推流到腾讯云直播源站配置。
      */
-    async DescribeLiveTimeShiftTemplates(req, cb) {
-        return this.request("DescribeLiveTimeShiftTemplates", req, cb);
+    async DeleteCasterOutputInfo(req, cb) {
+        return this.request("DeleteCasterOutputInfo", req, cb);
+    }
+    /**
+     * 该接口用来修改布局参数
+     */
+    async ModifyCasterLayoutInfo(req, cb) {
+        return this.request("ModifyCasterLayoutInfo", req, cb);
+    }
+    /**
+     * 该接口用来新增导播台推流信息。导播台主监启动后，将会将主监画面推向该接口设置的地址。
+     */
+    async AddCasterOutputInfo(req, cb) {
+        return this.request("AddCasterOutputInfo", req, cb);
     }
     /**
      * P2P流数据查询接口，用来获取流量、卡播和起播信息。
@@ -814,6 +876,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("AddLiveDomain", req, cb);
     }
     /**
+     * 修改直播拉流配置的状态。该接口已下线,请使用新接口 ModifyLivePullStreamTask。
+     */
+    async ModifyPullStreamStatus(req, cb) {
+        return this.request("ModifyPullStreamStatus", req, cb);
+    }
+    /**
      * 查询直播转推计费带宽，查询时间范围最大支持3个月内的数据，时间跨度最长31天。
      */
     async DescribeDeliverBandwidthList(req, cb) {
@@ -914,15 +982,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("RestartLivePullStreamTask", req, cb);
     }
     /**
-     * 创建临时拉流转推任务，目前限制添加10条任务。
-该接口已下线,请使用新接口 CreateLivePullStreamTask。
-
-注意：该接口用于创建临时拉流转推任务，
-拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
-但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
+     * 获取直播垫片模板。
      */
-    async CreatePullStreamConfig(req, cb) {
-        return this.request("CreatePullStreamConfig", req, cb);
+    async DescribeLivePadTemplates(req, cb) {
+        return this.request("DescribeLivePadTemplates", req, cb);
     }
     /**
      * 获取水印规则列表。
@@ -935,6 +998,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLivePadRules(req, cb) {
         return this.request("DescribeLivePadRules", req, cb);
+    }
+    /**
+     * 该接口用来删除导播台中的输入源信息。
+     */
+    async DeleteCasterInputInfo(req, cb) {
+        return this.request("DeleteCasterInputInfo", req, cb);
     }
     /**
      * 注：DeleteLiveRecord 接口仅用于删除录制任务记录，不具备停止录制的功能，也不能删除正在进行中的录制。如果需要停止录制任务，请使用终止录制[StopLiveRecord](/document/product/267/30146) 接口。
@@ -975,10 +1044,11 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeCaster", req, cb);
     }
     /**
-     * 删除直播时移模板。
+     * 查询使用 CreateLivePullStreamTask 接口创建的直播拉流任务。
+排序方式：默认按更新时间 倒序排列。
      */
-    async DeleteLiveTimeShiftTemplate(req, cb) {
-        return this.request("DeleteLiveTimeShiftTemplate", req, cb);
+    async DescribeLivePullStreamTasks(req, cb) {
+        return this.request("DescribeLivePullStreamTasks", req, cb);
     }
     /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
@@ -1040,11 +1110,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveStreamState", req, cb);
     }
     /**
-     * 设置直播域名 Referer 黑白名单。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+     * 该接口用来查询导播台的输入源信息列表。
      */
-    async ModifyLiveDomainReferer(req, cb) {
-        return this.request("ModifyLiveDomainReferer", req, cb);
+    async DescribeCasterInputInfos(req, cb) {
+        return this.request("DescribeCasterInputInfos", req, cb);
     }
     /**
      * 删除录制模板。
@@ -1057,6 +1126,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async CopyCaster(req, cb) {
         return this.request("CopyCaster", req, cb);
+    }
+    /**
+     * 该接口用来修改已经设置过的输入源信息，如源地址，源类型等。
+设置前，需保证待修改的输入源已经存在。若不存在，需使用AddCasterInputInfo接口。
+     */
+    async ModifyCasterInputInfo(req, cb) {
+        return this.request("ModifyCasterInputInfo", req, cb);
     }
     /**
      * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。
@@ -1133,10 +1209,15 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLivePackageInfo", req, cb);
     }
     /**
-     * 获取直播垫片模板。
+     * 创建临时拉流转推任务，目前限制添加10条任务。
+该接口已下线,请使用新接口 CreateLivePullStreamTask。
+
+注意：该接口用于创建临时拉流转推任务，
+拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
+但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
      */
-    async DescribeLivePadTemplates(req, cb) {
-        return this.request("DescribeLivePadTemplates", req, cb);
+    async CreatePullStreamConfig(req, cb) {
+        return this.request("CreatePullStreamConfig", req, cb);
     }
     /**
      * 查询转码任务数。
