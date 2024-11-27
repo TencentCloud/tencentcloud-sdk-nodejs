@@ -6373,7 +6373,12 @@ export interface AiAnalysisTaskSegmentOutput {
     /**
      * 智能拆条子片段列表。
      */
-    SegmentSet: Array<SegmentRecognitionItem>;
+    SegmentSet?: Array<SegmentRecognitionItem>;
+    /**
+     * 视频摘要，离线场景用。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Abstract?: string;
 }
 /**
  * 视频编辑/合成任务 视频元素信息。

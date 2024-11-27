@@ -36,6 +36,7 @@ import {
   DescribeLiveTranscodeDetailInfoRequest,
   DescribeLiveSnapshotTemplatesRequest,
   CreateLiveWatermarkRuleResponse,
+  CreateCasterPvwResponse,
   DescribeDeliverBandwidthListRequest,
   PlayCodeTotalInfo,
   AddLiveWatermarkRequest,
@@ -45,7 +46,8 @@ import {
   StopRecordTaskRequest,
   RuleInfo,
   ModifyLiveDomainCertBindingsRequest,
-  DescribeMonitorReportResponse,
+  StopCasterPgmResponse,
+  CreateCasterPgmRequest,
   DescribeCasterPlayUrlResponse,
   CancelCommonMixStreamResponse,
   DescribeLiveCertsResponse,
@@ -79,6 +81,7 @@ import {
   CasterInputInfo,
   DeleteLiveWatermarkRuleResponse,
   DescribeLogDownloadListResponse,
+  ReleaseCasterRequest,
   TransitionTypeInfo,
   DeleteLivePadTemplateResponse,
   DomainCertInfo,
@@ -109,7 +112,7 @@ import {
   DescribeBillBandwidthAndFluxListResponse,
   DescribeLiveDomainPlayInfoListResponse,
   DescribeLiveStreamMonitorListRequest,
-  HttpCodeValue,
+  DescribeLivePullStreamTasksRequest,
   DeleteLiveStreamMonitorResponse,
   DeleteLiveCallbackTemplateRequest,
   ModifyCasterInputInfoRequest,
@@ -127,7 +130,7 @@ import {
   CreateLiveSnapshotRuleResponse,
   DescribeLiveStreamEventListResponse,
   DescribeLiveTranscodeTotalInfoRequest,
-  LiveDomainCertBindings,
+  CommonMixCropParams,
   DescribeLivePushAuthKeyRequest,
   DescribeCasterTransitionTypesResponse,
   CreateCasterRequest,
@@ -142,6 +145,7 @@ import {
   PushAuthKeyInfo,
   CreateCasterInputPushUrlResponse,
   DescribeLivePlayAuthKeyRequest,
+  HttpCodeValue,
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
   CreateCasterInputPushUrlRequest,
@@ -164,13 +168,14 @@ import {
   AddDelayLiveStreamRequest,
   DescribeLiveStreamEventListRequest,
   CallBackTemplateInfo,
+  StopCasterPvwRequest,
   DeleteLiveRecordResponse,
   DescribeDeliverLogDownListResponse,
   PadTemplate,
   PullStreamConfig,
   DescribeBackupStreamListRequest,
   DescribeDeliverLogDownListRequest,
-  DescribeLiveStreamPushInfoListRequest,
+  LivePackageInfo,
   DescribeLiveTimeShiftTemplatesRequest,
   StopLiveStreamMonitorResponse,
   DayStreamPlayInfo,
@@ -187,7 +192,10 @@ import {
   DeleteCasterLayoutInfoResponse,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
+  CreateCasterPgmResponse,
+  ReleaseCasterResponse,
   DescribeLiveTranscodeRulesResponse,
+  CreateCasterPvwRequest,
   AddCasterLayoutInfoResponse,
   DeleteLivePullStreamTaskResponse,
   DescribeStreamPushInfoListRequest,
@@ -221,7 +229,7 @@ import {
   StopLiveRecordRequest,
   CasterLayoutParam,
   DeleteLiveCallbackTemplateResponse,
-  CreateRecordTaskResponse,
+  BatchDomainOperateErrors,
   CreateLivePadTemplateRequest,
   CopyCasterRequest,
   DescribeLivePullStreamTasksResponse,
@@ -229,9 +237,10 @@ import {
   DescribeAreaBillBandwidthAndFluxListRequest,
   ModifyCasterOutputInfoResponse,
   ModifyLiveDomainRefererResponse,
+  DescribeMonitorReportResponse,
   DescribeLiveStreamOnlineListRequest,
   DescribeRecordTaskRequest,
-  CommonMixCropParams,
+  LiveDomainCertBindings,
   XP2PDetailInfo,
   DescribeCasterLayoutInfosResponse,
   ModifyLiveCallbackTemplateResponse,
@@ -273,6 +282,7 @@ import {
   CreateLivePadRuleRequest,
   DeleteLiveSnapshotRuleRequest,
   CreateLiveTimeShiftRuleRequest,
+  StopCasterPvwResponse,
   DescribeLiveDomainRequest,
   DescribePushBandwidthAndFluxListRequest,
   CreateLiveRecordRuleRequest,
@@ -300,7 +310,7 @@ import {
   CreateCommonMixStreamRequest,
   CreateCasterResponse,
   PushDataInfo,
-  CasterInfo,
+  DescribeLiveSnapshotTemplateResponse,
   CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
   DescribeHttpStatusInfoListRequest,
@@ -320,7 +330,7 @@ import {
   DescribeLiveTimeShiftBillInfoListResponse,
   CertInfo,
   DescribeLiveCallbackRulesRequest,
-  DescribeLiveSnapshotTemplateResponse,
+  CasterInfo,
   DescribeLivePadProcessorListRequest,
   DescribeConcurrentRecordStreamNumRequest,
   DeleteCasterInputInfoRequest,
@@ -344,6 +354,7 @@ import {
   DeleteLiveSnapshotTemplateResponse,
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
+  CreateCasterPgmFromPvwResponse,
   DescribeLiveTimeShiftWriteSizeInfoListRequest,
   PlayStatInfo,
   DescribeCasterUserStatusResponse,
@@ -360,17 +371,17 @@ import {
   DescribePullStreamConfigsResponse,
   DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
-  BatchDomainOperateErrors,
+  CreateRecordTaskResponse,
   ResumeDelayLiveStreamResponse,
   DescribeLiveDomainCertBindingsRequest,
   CreateLiveRecordTemplateRequest,
-  DescribeLivePullStreamTasksRequest,
   AddCasterOutputInfoResponse,
   DescribeHttpStatusInfoListResponse,
   CreateLiveSnapshotRuleRequest,
   BillDataInfo,
   DescribeLiveSnapshotRulesResponse,
   DescribeDeliverBandwidthListResponse,
+  StopCasterPgmRequest,
   CreateLiveStreamMonitorResponse,
   DescribeCasterLayoutInfosRequest,
   DescribeLivePadTemplateRequest,
@@ -431,7 +442,7 @@ import {
   CreateLivePadRuleResponse,
   DescribeLiveWatermarkResponse,
   DescribeTimeShiftStreamListResponse,
-  LivePackageInfo,
+  DescribeLiveStreamPushInfoListRequest,
   ModifyCasterInputInfoResponse,
   DescribeLiveForbidStreamListRequest,
   LiveStreamMonitorNotifyPolicy,
@@ -468,6 +479,7 @@ import {
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
   DescribeLiveXP2PDetailInfoListRequest,
+  CreateCasterPgmFromPvwRequest,
   ModifyLivePushAuthKeyResponse,
   DeleteCasterOutputInfoRequest,
   ForbidStreamInfo,
@@ -682,6 +694,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveSnapshotRulesResponse) => void
   ): Promise<DescribeLiveSnapshotRulesResponse> {
     return this.request("DescribeLiveSnapshotRules", req, cb)
+  }
+
+  /**
+     * 调用该接口，释放导播台实例，但保留所有的配置。
+执行该接口，预监与主监画面停止，第三方推流停止。
+点播文件与直播地址将停止展示，客户自行推到导播台的流需要手动停止。
+     */
+  async ReleaseCaster(
+    req: ReleaseCasterRequest,
+    cb?: (error: string, rep: ReleaseCasterResponse) => void
+  ): Promise<ReleaseCasterResponse> {
+    return this.request("ReleaseCaster", req, cb)
   }
 
   /**
@@ -901,6 +925,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAreaBillBandwidthAndFluxListResponse) => void
   ): Promise<DescribeAreaBillBandwidthAndFluxListResponse> {
     return this.request("DescribeAreaBillBandwidthAndFluxList", req, cb)
+  }
+
+  /**
+   * 该接口用来停止导播台的预监任务。
+   */
+  async StopCasterPvw(
+    req: StopCasterPvwRequest,
+    cb?: (error: string, rep: StopCasterPvwResponse) => void
+  ): Promise<StopCasterPvwResponse> {
+    return this.request("StopCasterPvw", req, cb)
   }
 
   /**
@@ -1305,13 +1339,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 根据域名状态、类型等信息查询用户的域名信息。
+   * 该接口用来启动主监任务，并将获取主监画面的播放地址。
    */
-  async DescribeLiveDomains(
-    req: DescribeLiveDomainsRequest,
-    cb?: (error: string, rep: DescribeLiveDomainsResponse) => void
-  ): Promise<DescribeLiveDomainsResponse> {
-    return this.request("DescribeLiveDomains", req, cb)
+  async CreateCasterPgm(
+    req: CreateCasterPgmRequest,
+    cb?: (error: string, rep: CreateCasterPgmResponse) => void
+  ): Promise<CreateCasterPgmResponse> {
+    return this.request("CreateCasterPgm", req, cb)
   }
 
   /**
@@ -1348,6 +1382,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 根据域名状态、类型等信息查询用户的域名信息。
+   */
+  async DescribeLiveDomains(
+    req: DescribeLiveDomainsRequest,
+    cb?: (error: string, rep: DescribeLiveDomainsResponse) => void
+  ): Promise<DescribeLiveDomainsResponse> {
+    return this.request("DescribeLiveDomains", req, cb)
+  }
+
+  /**
      * 该接口用来修改导播台的推流信息。
 注：只有在主监启动前设置才生效，主监启动后设置，下次推流生效。
      */
@@ -1356,6 +1400,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyCasterOutputInfoResponse) => void
   ): Promise<ModifyCasterOutputInfoResponse> {
     return this.request("ModifyCasterOutputInfo", req, cb)
+  }
+
+  /**
+   * 该接口用来启动预监任务，并将获取预监画面的播放地址。
+   */
+  async CreateCasterPvw(
+    req: CreateCasterPvwRequest,
+    cb?: (error: string, rep: CreateCasterPvwResponse) => void
+  ): Promise<CreateCasterPvwResponse> {
+    return this.request("CreateCasterPvw", req, cb)
   }
 
   /**
@@ -2124,6 +2178,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 该接口用来停止导播台的主监输出。
+停止主监后，对应的推流到腾讯云直播源站和推流到其他第三方平台均将会停止。
+     */
+  async StopCasterPgm(
+    req: StopCasterPgmRequest,
+    cb?: (error: string, rep: StopCasterPgmResponse) => void
+  ): Promise<StopCasterPgmResponse> {
+    return this.request("StopCasterPgm", req, cb)
+  }
+
+  /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
      */
@@ -2153,6 +2218,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLivePlayAuthKeyResponse) => void
   ): Promise<DescribeLivePlayAuthKeyResponse> {
     return this.request("DescribeLivePlayAuthKey", req, cb)
+  }
+
+  /**
+     * 该接口用来将预监画面的布局、水印、字幕等配置，复制到主监画面中。
+该接口使用时，预监任务需处于运行状态。
+     */
+  async CreateCasterPgmFromPvw(
+    req: CreateCasterPgmFromPvwRequest,
+    cb?: (error: string, rep: CreateCasterPgmFromPvwResponse) => void
+  ): Promise<CreateCasterPgmFromPvwResponse> {
+    return this.request("CreateCasterPgmFromPvw", req, cb)
   }
 
   /**

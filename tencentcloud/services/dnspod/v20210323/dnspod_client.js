@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("dnspod.tencentcloudapi.com", "2021-03-23", clientConfig);
     }
     /**
-     * 修改域名所属分组
+     * 创建添加子域名 Zone 域解析时所需要的 TXT 记录值
      */
-    async ModifyDomainToGroup(req, cb) {
-        return this.request("ModifyDomainToGroup", req, cb);
+    async CreateSubdomainValidateTXTValue(req, cb) {
+        return this.request("CreateSubdomainValidateTXTValue", req, cb);
     }
     /**
      * 获取某个域名下的解析记录列表
@@ -293,6 +293,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollbackSnapshot", req, cb);
     }
     /**
+     * 查看添加子域名 Zone 域解析 TXT 记录值验证状态
+     */
+    async DescribeSubdomainValidateStatus(req, cb) {
+        return this.request("DescribeSubdomainValidateStatus", req, cb);
+    }
+    /**
      * 删除记录
      */
     async DeleteRecord(req, cb) {
@@ -488,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSubdomainAnalytics(req, cb) {
         return this.request("DescribeSubdomainAnalytics", req, cb);
+    }
+    /**
+     * 修改域名所属分组
+     */
+    async ModifyDomainToGroup(req, cb) {
+        return this.request("ModifyDomainToGroup", req, cb);
     }
     /**
      * 批量修改记录

@@ -9481,6 +9481,10 @@ export interface DescribePrivateNatGatewayTranslationAclRulesRequest {
    * 返回数目，默认值为20。
    */
   Limit?: number
+  /**
+   * ACL规则描述
+   */
+  Description?: string
 }
 
 /**
@@ -17211,6 +17215,10 @@ export interface TranslationAclRule {
    * 是否匹配。
    */
   Action?: number
+  /**
+   * ACL规则描述
+   */
+  Description?: string
 }
 
 /**

@@ -1957,7 +1957,11 @@ export interface DescribeUserRequest {
     /**
      * 用户Id。
      */
-    UserId: string;
+    UserId?: string;
+    /**
+     * 客户端用户 id,如果未指定则为用户 id。
+     */
+    OriginId?: string;
 }
 /**
  * RegisterUser返回参数结构体

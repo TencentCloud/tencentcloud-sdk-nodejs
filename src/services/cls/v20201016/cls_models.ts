@@ -5663,6 +5663,9 @@ export interface TopicInfo {
   MaxSplitPartitions?: number
   /**
    * 主题的存储类型
+
+- hot: 标准存储
+- cold: 低频存储
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string

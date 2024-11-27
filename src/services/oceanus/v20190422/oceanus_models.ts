@@ -2895,6 +2895,10 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemRatio?: number
+  /**
+   * 是否开启跨租户弹性网卡
+   */
+  CrossTenantEniMode?: number
 }
 
 /**

@@ -77,21 +77,13 @@ export interface DescribeRecordFilterListResponse {
     RequestId?: string;
 }
 /**
- * DownloadSnapshot请求参数结构体
+ * CreateSubdomainValidateTXTValue请求参数结构体
  */
-export interface DownloadSnapshotRequest {
+export interface CreateSubdomainValidateTXTValueRequest {
     /**
-     * 域名
+     * 要添加的子域名 Zone 域。
      */
-    Domain: string;
-    /**
-     * 快照记录 ID
-     */
-    SnapshotId: string;
-    /**
-     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
-     */
-    DomainId?: number;
+    DomainZone: string;
 }
 /**
  * CreateTXTRecord返回参数结构体
@@ -290,6 +282,23 @@ export interface ModifySubdomainStatusRequest {
      * 主机记录，如 www，如果不传，默认为 @。
      */
     SubDomain?: string;
+}
+/**
+ * DownloadSnapshot请求参数结构体
+ */
+export interface DownloadSnapshotRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 快照记录 ID
+     */
+    SnapshotId: string;
+    /**
+     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+     */
+    DomainId?: number;
 }
 /**
  * CreateRecordBatch返回参数结构体
@@ -1697,17 +1706,49 @@ export interface DescribeDomainWhoisRequest {
     Domain: string;
 }
 /**
- * 子域名别名解析量统计信息
+ * ModifyTXTRecord请求参数结构体
  */
-export interface SubdomainAliasAnalyticsItem {
+export interface ModifyTXTRecordRequest {
     /**
-     * 子域名解析量统计查询信息
+     * 域名
      */
-    Info: SubdomainAnalyticsInfo;
+    Domain: string;
     /**
-     * 当前统计维度解析量小计
+     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
      */
-    Data: Array<DomainAnalyticsDetail>;
+    RecordLine: string;
+    /**
+     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+     */
+    Value: string;
+    /**
+     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+     */
+    RecordId: number;
+    /**
+     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+     */
+    DomainId?: number;
+    /**
+     * 主机记录，如 www，如果不传，默认为 @。
+     */
+    SubDomain?: string;
+    /**
+     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+     */
+    RecordLineId?: string;
+    /**
+     * TTL，范围1-604800，不同等级域名最小值不同。
+     */
+    TTL?: number;
+    /**
+     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
+     */
+    Status?: string;
+    /**
+     * 记录的备注信息。传空删除备注。
+     */
+    Remark?: string;
 }
 /**
  * ModifyDomainStatus返回参数结构体
@@ -2589,9 +2630,25 @@ export interface DomainCountInfo {
     GroupTotal: number;
 }
 /**
- * ModifyDomainCustomLine返回参数结构体
+ * CreateSubdomainValidateTXTValue返回参数结构体
  */
-export interface ModifyDomainCustomLineResponse {
+export interface CreateSubdomainValidateTXTValueResponse {
+    /**
+     * 需要添加 TXT 记录的域名。
+     */
+    Domain?: string;
+    /**
+     * 需要添加 TXT 记录的主机记录。
+     */
+    Subdomain?: string;
+    /**
+     * 需要添加记录类型。
+     */
+    RecordType?: string;
+    /**
+     * 需要添加 TXT 记录的记录值。
+     */
+    Value?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3113,49 +3170,13 @@ export interface ModifyDomainRemarkRequest {
     Remark?: string;
 }
 /**
- * ModifyTXTRecord请求参数结构体
+ * ModifyDomainCustomLine返回参数结构体
  */
-export interface ModifyTXTRecordRequest {
+export interface ModifyDomainCustomLineResponse {
     /**
-     * 域名
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Domain: string;
-    /**
-     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
-     */
-    RecordLine: string;
-    /**
-     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
-     */
-    Value: string;
-    /**
-     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
-     */
-    RecordId: number;
-    /**
-     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-     */
-    DomainId?: number;
-    /**
-     * 主机记录，如 www，如果不传，默认为 @。
-     */
-    SubDomain?: string;
-    /**
-     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
-     */
-    RecordLineId?: string;
-    /**
-     * TTL，范围1-604800，不同等级域名最小值不同。
-     */
-    TTL?: number;
-    /**
-     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
-     */
-    Status?: string;
-    /**
-     * 记录的备注信息。传空删除备注。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 键值对
@@ -3495,6 +3516,15 @@ export interface ModifySubdomainStatusResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSubdomainValidateStatus返回参数结构体
+ */
+export interface DescribeSubdomainValidateStatusResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomainAnalytics返回参数结构体
  */
 export interface DescribeDomainAnalyticsResponse {
@@ -3599,6 +3629,15 @@ export interface LineGroupItem {
      * 更新时间
      */
     UpdatedOn: string;
+}
+/**
+ * DescribeSubdomainValidateStatus请求参数结构体
+ */
+export interface DescribeSubdomainValidateStatusRequest {
+    /**
+     * 要查看 TXT 记录校验状态的子域名 Zone 域。
+     */
+    DomainZone: string;
 }
 /**
  * CreateDomainGroup请求参数结构体
@@ -3868,6 +3907,19 @@ export interface DescribeRecordGroupListRequest {
      * 分页每页数
      */
     Limit?: number;
+}
+/**
+ * 子域名别名解析量统计信息
+ */
+export interface SubdomainAliasAnalyticsItem {
+    /**
+     * 子域名解析量统计查询信息
+     */
+    Info: SubdomainAnalyticsInfo;
+    /**
+     * 当前统计维度解析量小计
+     */
+    Data: Array<DomainAnalyticsDetail>;
 }
 /**
  * 自定义线路数量信息

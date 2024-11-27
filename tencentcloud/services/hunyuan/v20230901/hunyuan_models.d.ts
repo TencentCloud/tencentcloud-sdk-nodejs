@@ -1511,6 +1511,11 @@ export interface Message {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ToolCalls?: Array<ToolCall>;
+    /**
+     * 文件标识符。单次最大 50 个文件。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileIDs?: Array<string>;
 }
 /**
  * ChatCompletions返回参数结构体

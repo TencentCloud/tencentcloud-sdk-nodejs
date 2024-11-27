@@ -160,6 +160,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveSnapshotRules", req, cb);
     }
     /**
+     * 调用该接口，释放导播台实例，但保留所有的配置。
+执行该接口，预监与主监画面停止，第三方推流停止。
+点播文件与直播地址将停止展示，客户自行推到导播台的流需要手动停止。
+     */
+    async ReleaseCaster(req, cb) {
+        return this.request("ReleaseCaster", req, cb);
+    }
+    /**
      * 查询某个时间范围内所有时移流列表。最大支持查询24小时内的数据。
      */
     async DescribeTimeShiftStreamList(req, cb) {
@@ -293,6 +301,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAreaBillBandwidthAndFluxList(req, cb) {
         return this.request("DescribeAreaBillBandwidthAndFluxList", req, cb);
+    }
+    /**
+     * 该接口用来停止导播台的预监任务。
+     */
+    async StopCasterPvw(req, cb) {
+        return this.request("StopCasterPvw", req, cb);
     }
     /**
      * 该接口用来将布局信息从导播台中删除
@@ -544,10 +558,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeDeliverLogDownList", req, cb);
     }
     /**
-     * 根据域名状态、类型等信息查询用户的域名信息。
+     * 该接口用来启动主监任务，并将获取主监画面的播放地址。
      */
-    async DescribeLiveDomains(req, cb) {
-        return this.request("DescribeLiveDomains", req, cb);
+    async CreateCasterPgm(req, cb) {
+        return this.request("CreateCasterPgm", req, cb);
     }
     /**
      * 更新直播拉流任务。
@@ -571,11 +585,23 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveCallbackTemplate", req, cb);
     }
     /**
+     * 根据域名状态、类型等信息查询用户的域名信息。
+     */
+    async DescribeLiveDomains(req, cb) {
+        return this.request("DescribeLiveDomains", req, cb);
+    }
+    /**
      * 该接口用来修改导播台的推流信息。
 注：只有在主监启动前设置才生效，主监启动后设置，下次推流生效。
      */
     async ModifyCasterOutputInfo(req, cb) {
         return this.request("ModifyCasterOutputInfo", req, cb);
+    }
+    /**
+     * 该接口用来启动预监任务，并将获取预监画面的播放地址。
+     */
+    async CreateCasterPvw(req, cb) {
+        return this.request("CreateCasterPvw", req, cb);
     }
     /**
      * 恢复某条流的推流。
@@ -1051,6 +1077,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLivePullStreamTasks", req, cb);
     }
     /**
+     * 该接口用来停止导播台的主监输出。
+停止主监后，对应的推流到腾讯云直播源站和推流到其他第三方平台均将会停止。
+     */
+    async StopCasterPgm(req, cb) {
+        return this.request("StopCasterPgm", req, cb);
+    }
+    /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
      */
@@ -1069,6 +1102,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLivePlayAuthKey(req, cb) {
         return this.request("DescribeLivePlayAuthKey", req, cb);
+    }
+    /**
+     * 该接口用来将预监画面的布局、水印、字幕等配置，复制到主监画面中。
+该接口使用时，预监任务需处于运行状态。
+     */
+    async CreateCasterPgmFromPvw(req, cb) {
+        return this.request("CreateCasterPgmFromPvw", req, cb);
     }
     /**
      * 该接口用来获取所有的转场名称及其对应的素材url。

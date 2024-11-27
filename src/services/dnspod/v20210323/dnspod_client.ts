@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateRecordRequest,
   DescribeRecordFilterListResponse,
-  DownloadSnapshotRequest,
+  CreateSubdomainValidateTXTValueRequest,
   CreateTXTRecordResponse,
   DescribeBatchTaskDetail,
   ModifyDomainToGroupRequest,
@@ -32,6 +32,7 @@ import {
   DeleteDomainBatchResponse,
   RecordGroupInfo,
   ModifySubdomainStatusRequest,
+  DownloadSnapshotRequest,
   CreateRecordBatchResponse,
   DescribeSnapshotListResponse,
   CreateDomainBatchRecord,
@@ -95,7 +96,7 @@ import {
   CreateDealRequest,
   ModifyDomainLockRequest,
   DescribeDomainWhoisRequest,
-  SubdomainAliasAnalyticsItem,
+  ModifyTXTRecordRequest,
   ModifyDomainStatusResponse,
   AddRecordBatch,
   DescribeRecordRequest,
@@ -132,7 +133,7 @@ import {
   CreateRecordBatchRecord,
   CreateDomainResponse,
   DomainCountInfo,
-  ModifyDomainCustomLineResponse,
+  CreateSubdomainValidateTXTValueResponse,
   ModifyPackageAutoRenewResponse,
   ModifyRecordBatchResponse,
   CheckSnapshotRollbackRequest,
@@ -157,7 +158,7 @@ import {
   DescribeDomainGroupListResponse,
   ModifyPackageAutoRenewRequest,
   ModifyDomainRemarkRequest,
-  ModifyTXTRecordRequest,
+  ModifyDomainCustomLineResponse,
   KeyValue,
   CreateLineGroupCopyResponse,
   CreateDomainAliasResponse,
@@ -172,12 +173,14 @@ import {
   DescribeDomainPurviewResponse,
   Deals,
   ModifySubdomainStatusResponse,
+  DescribeSubdomainValidateStatusResponse,
   DescribeDomainAnalyticsResponse,
   ModifyRecordStatusResponse,
   CreateRecordGroupRequest,
   RollbackSnapshotResponse,
   DescribeRecordGroupListResponse,
   LineGroupItem,
+  DescribeSubdomainValidateStatusRequest,
   CreateDomainGroupRequest,
   CreateSnapshotRequest,
   DeleteDomainResponse,
@@ -191,6 +194,7 @@ import {
   SnapshotInfo,
   ModifyDynamicDNSRequest,
   DescribeRecordGroupListRequest,
+  SubdomainAliasAnalyticsItem,
   LineGroupSum,
   DescribeDomainFilterListRequest,
   PurviewInfo,
@@ -245,13 +249,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改域名所属分组
+   * 创建添加子域名 Zone 域解析时所需要的 TXT 记录值
    */
-  async ModifyDomainToGroup(
-    req: ModifyDomainToGroupRequest,
-    cb?: (error: string, rep: ModifyDomainToGroupResponse) => void
-  ): Promise<ModifyDomainToGroupResponse> {
-    return this.request("ModifyDomainToGroup", req, cb)
+  async CreateSubdomainValidateTXTValue(
+    req: CreateSubdomainValidateTXTValueRequest,
+    cb?: (error: string, rep: CreateSubdomainValidateTXTValueResponse) => void
+  ): Promise<CreateSubdomainValidateTXTValueResponse> {
+    return this.request("CreateSubdomainValidateTXTValue", req, cb)
   }
 
   /**
@@ -682,6 +686,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看添加子域名 Zone 域解析 TXT 记录值验证状态
+   */
+  async DescribeSubdomainValidateStatus(
+    req: DescribeSubdomainValidateStatusRequest,
+    cb?: (error: string, rep: DescribeSubdomainValidateStatusResponse) => void
+  ): Promise<DescribeSubdomainValidateStatusResponse> {
+    return this.request("DescribeSubdomainValidateStatus", req, cb)
+  }
+
+  /**
    * 删除记录
    */
   async DeleteRecord(
@@ -1004,6 +1018,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubdomainAnalyticsResponse) => void
   ): Promise<DescribeSubdomainAnalyticsResponse> {
     return this.request("DescribeSubdomainAnalytics", req, cb)
+  }
+
+  /**
+   * 修改域名所属分组
+   */
+  async ModifyDomainToGroup(
+    req: ModifyDomainToGroupRequest,
+    cb?: (error: string, rep: ModifyDomainToGroupResponse) => void
+  ): Promise<ModifyDomainToGroupResponse> {
+    return this.request("ModifyDomainToGroup", req, cb)
   }
 
   /**

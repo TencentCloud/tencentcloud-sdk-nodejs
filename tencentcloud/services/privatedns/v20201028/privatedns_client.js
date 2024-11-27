@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZone", req, cb);
     }
     /**
-     * 删除终端节点
+     * 获取私有域记录列表
      */
-    async DeleteEndPoint(req, cb) {
-        return this.request("DeleteEndPoint", req, cb);
+    async DescribePrivateZoneRecordList(req, cb) {
+        return this.request("DescribePrivateZoneRecordList", req, cb);
     }
     /**
      * 查询额度使用情况
@@ -64,12 +64,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrivateZoneRecord", req, cb);
     }
     /**
-     * 获取终端节点列表
-     */
-    async DescribeEndPointList(req, cb) {
-        return this.request("DescribeEndPointList", req, cb);
-    }
-    /**
      * 创建私有域
      */
     async CreatePrivateZone(req, cb) {
@@ -82,22 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZoneList", req, cb);
     }
     /**
-     * 创建终端节点
-     */
-    async CreateEndPoint(req, cb) {
-        return this.request("CreateEndPoint", req, cb);
-    }
-    /**
      * 追加与私有域关联的VPC
      */
     async AddSpecifyPrivateZoneVpc(req, cb) {
         return this.request("AddSpecifyPrivateZoneVpc", req, cb);
-    }
-    /**
-     * 获取私有域记录列表
-     */
-    async DescribePrivateZoneRecordList(req, cb) {
-        return this.request("DescribePrivateZoneRecordList", req, cb);
     }
     /**
      * 查询异步绑定vpc操作状态
@@ -124,12 +106,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivateDNSAccount", req, cb);
     }
     /**
-     * 删除转发规则并停止转发
-     */
-    async DeleteForwardRule(req, cb) {
-        return this.request("DeleteForwardRule", req, cb);
-    }
-    /**
      * 开通私有域解析
      */
     async SubscribePrivateZoneService(req, cb) {
@@ -140,12 +116,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDashboard(req, cb) {
         return this.request("DescribeDashboard", req, cb);
-    }
-    /**
-     * 修改转发规则
-     */
-    async ModifyForwardRule(req, cb) {
-        return this.request("ModifyForwardRule", req, cb);
     }
     /**
      * 修改私有域关联的VPC
@@ -166,12 +136,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountVpcList", req, cb);
     }
     /**
-     * 同时创建终端节点和终端节点服务
-     */
-    async CreateEndPointAndEndPointService(req, cb) {
-        return this.request("CreateEndPointAndEndPointService", req, cb);
-    }
-    /**
      * 修改解析记录状态
      */
     async ModifyRecordsStatus(req, cb) {
@@ -184,34 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSpecifyPrivateZoneVpc", req, cb);
     }
     /**
-     * 查询转发规则
-     */
-    async DescribeForwardRule(req, cb) {
-        return this.request("DescribeForwardRule", req, cb);
-    }
-    /**
-     * 创建自定义转发规则
-     */
-    async CreateForwardRule(req, cb) {
-        return this.request("CreateForwardRule", req, cb);
-    }
-    /**
      * 查询私有域解析开通状态
      */
     async DescribePrivateZoneService(req, cb) {
         return this.request("DescribePrivateZoneService", req, cb);
-    }
-    /**
-     * 查询终端节点已经启用了的地域
-     */
-    async DescribeEndPointRegion(req, cb) {
-        return this.request("DescribeEndPointRegion", req, cb);
-    }
-    /**
-     * 查询转发规则列表
-     */
-    async DescribeForwardRuleList(req, cb) {
-        return this.request("DescribeForwardRuleList", req, cb);
     }
     /**
      * 删除私有域解析记录

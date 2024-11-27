@@ -380,6 +380,29 @@ export interface CreateLiveWatermarkRuleResponse {
 }
 
 /**
+ * CreateCasterPvw返回参数结构体
+ */
+export interface CreateCasterPvwResponse {
+  /**
+   * 预监任务的画面rtmp协议预览地址。
+注：该预览地址仅供画面预览，不可分发。
+   */
+  PvwPlayUrl?: string
+  /**
+   * 预监任务的webrtc协议预览画面。
+注：
+1. 该预览地址仅供预览，不可分发。
+2. webrtc播放地址，需配合腾讯云快直播播放sdk使用
+
+   */
+  PvwWebRTCPlayUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeliverBandwidthList请求参数结构体
  */
 export interface DescribeDeliverBandwidthListRequest {
@@ -631,23 +654,27 @@ CloudCertId和公钥私钥对二选一，若传CloudCertId将会舍弃公钥和�
 }
 
 /**
- * DescribeMonitorReport返回参数结构体
+ * StopCasterPgm返回参数结构体
  */
-export interface DescribeMonitorReportResponse {
-  /**
-   * 媒体处理结果信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MPSResult?: MPSResult
-  /**
-   * 媒体诊断结果信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiagnoseResult?: DiagnoseResult
+export interface StopCasterPgmResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCasterPgm请求参数结构体
+ */
+export interface CreateCasterPgmRequest {
+  /**
+   * 导播台展示信息参数。
+   */
+  PgmDisplayInfo: CasterDisplayInfo
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
 }
 
 /**
@@ -1527,6 +1554,16 @@ export interface DescribeLogDownloadListResponse {
 }
 
 /**
+ * ReleaseCaster请求参数结构体
+ */
+export interface ReleaseCasterRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
+}
+
+/**
  * 转场信息
  */
 export interface TransitionTypeInfo {
@@ -2206,24 +2243,29 @@ export interface DescribeLiveStreamMonitorListRequest {
 }
 
 /**
- * HTTP返回码数据信息
+ * DescribeLivePullStreamTasks请求参数结构体
  */
-export interface HttpCodeValue {
+export interface DescribeLivePullStreamTasksRequest {
   /**
-   * 时间，
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 任务 ID。 
+来源：调用 CreateLivePullStreamTask 接口时返回。
+不填默认查询所有任务，按更新时间倒序排序。
    */
-  Time: string
+  TaskId?: string
   /**
-   * 次数。
+   * 取得第几页，默认值：1。
    */
-  Numbers: number
+  PageNum?: number
   /**
-   * 占比。
+   * 分页大小，默认值：10。
+取值范围：1~20 之前的任意整数。
    */
-  Percentage: number
+  PageSize?: number
+  /**
+   * 使用指定任务 ID 查询任务信息。
+注意：仅供使用指定 ID 创建的任务查询。
+   */
+  SpecifyTaskId?: string
 }
 
 /**
@@ -2595,48 +2637,25 @@ Oversea：则查询国际/港澳台（境外）数据，
 }
 
 /**
- * DescribeLiveDomainCertBindings, DescribeLiveDomainCertBindingsGray接口返回的域名证书信息
+ * 通用混流输入裁剪参数。
  */
-export interface LiveDomainCertBindings {
+export interface CommonMixCropParams {
   /**
-   * 域名。
+   * 裁剪的宽度。取值范围[0，2000]。
    */
-  DomainName?: string
+  CropWidth?: number
   /**
-   * 证书备注。与CertName同义。
+   * 裁剪的高度。取值范围[0，2000]。
    */
-  CertificateAlias?: string
+  CropHeight?: number
   /**
-   * 证书类型。
-0：自有证书
-1：腾讯云ssl托管证书
+   * 裁剪的起始X坐标。取值范围[0，2000]。
    */
-  CertType?: number
+  CropStartLocationX?: number
   /**
-   * https状态。
-1：已开启。
-0：已关闭。
+   * 裁剪的起始Y坐标。取值范围[0，2000]。
    */
-  Status?: number
-  /**
-   * 证书过期时间。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  CertExpireTime?: string
-  /**
-   * 证书Id。
-   */
-  CertId?: number
-  /**
-   * 腾讯云ssl的证书Id。
-   */
-  CloudCertId?: string
-  /**
-   * 规则最后更新时间。
-注：此字段为北京时间（UTC+8时区）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
+  CropStartLocationY?: number
 }
 
 /**
@@ -2926,6 +2945,27 @@ export interface DescribeLivePlayAuthKeyRequest {
 }
 
 /**
+ * HTTP返回码数据信息
+ */
+export interface HttpCodeValue {
+  /**
+   * 时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  Time: string
+  /**
+   * 次数。
+   */
+  Numbers: number
+  /**
+   * 占比。
+   */
+  Percentage: number
+}
+
+/**
  * CreateLiveTimeShiftRule返回参数结构体
  */
 export interface CreateLiveTimeShiftRuleResponse {
@@ -3120,6 +3160,10 @@ export interface DeleteLivePullStreamTaskRequest {
    * 操作人姓名。
    */
   Operator: string
+  /**
+   * 指定任务 ID。注意：用于删除使用自定义任务 ID 创建的任务。
+   */
+  SpecifyTaskId?: string
 }
 
 /**
@@ -3432,6 +3476,16 @@ export interface CallBackTemplateInfo {
 }
 
 /**
+ * StopCasterPvw请求参数结构体
+ */
+export interface StopCasterPvwRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
+}
+
+/**
  * DeleteLiveRecord返回参数结构体
  */
 export interface DeleteLiveRecordResponse {
@@ -3569,29 +3623,74 @@ export interface DescribeBackupStreamListRequest {
 export type DescribeDeliverLogDownListRequest = null
 
 /**
- * DescribeLiveStreamPushInfoList请求参数结构体
+ * 直播包信息。
  */
-export interface DescribeLiveStreamPushInfoListRequest {
+export interface LivePackageInfo {
   /**
-   * 推流域名。
+   * 包 ID。
    */
-  PushDomain?: string
+  Id?: string
   /**
-   * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+   * 总量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
    */
-  AppName?: string
+  Total?: number
   /**
-   * 页数，
-范围[1,10000]，
-默认值：1。
+   * 使用量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
+当为连麦包时单位为小时。
    */
-  PageNum?: number
+  Used?: number
   /**
-   * 每页个数，
-范围：[1,1000]，
-默认值： 200。
+   * 剩余量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
+当为连麦包时单位为小时。
    */
-  PageSize?: number
+  Left?: number
+  /**
+   * 购买时间。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  BuyTime?: string
+  /**
+   * 过期时间。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  ExpireTime?: string
+  /**
+   * 包类型，可选值:
+0: 流量包。
+1: 普通转码包。
+2: 极速高清包。
+3: 连麦包。
+   */
+  Type?: number
+  /**
+   * 包状态，可选值:
+0: 未使用。
+1: 使用中。
+2: 已过期。
+3: 已冻结。
+4: 已耗尽。
+5: 已退款
+   */
+  Status?: number
+  /**
+   * 是否自动续购。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WillRenew?: number
+  /**
+   * 续购状态。
+1 ：续购成功。
+0 ：尚未续购。
+<0  : 续购失败。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewalResult?: number
 }
 
 /**
@@ -3916,6 +4015,50 @@ export interface DescribeGroupProIspPlayInfoListRequest {
 }
 
 /**
+ * CreateCasterPgm返回参数结构体
+ */
+export interface CreateCasterPgmResponse {
+  /**
+   * 主监任务的rtmp协议预览地址。
+注：该地址仅供预览，不可分发。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PgmPlayUrl?: string
+  /**
+   * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdnPlayUrl?: string
+  /**
+   * 主监任务在腾讯云直播侧的流ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdnStreamId?: string
+  /**
+   * 主监任务的webrtc协议播放地址。
+注：
+1. 该预览地址仅作为预览，不可分发。
+2. webrtc播放地址需配合腾讯云快直播播放sdk使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PgmWebRTCPlayUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReleaseCaster返回参数结构体
+ */
+export interface ReleaseCasterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveTranscodeRules返回参数结构体
  */
 export interface DescribeLiveTranscodeRulesResponse {
@@ -3927,6 +4070,20 @@ export interface DescribeLiveTranscodeRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCasterPvw请求参数结构体
+ */
+export interface CreateCasterPvwRequest {
+  /**
+   * 导播台预监展示信息参数
+   */
+  PvwDisplayInfo: CasterDisplayInfo
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
 }
 
 /**
@@ -4774,17 +4931,21 @@ export interface DeleteLiveCallbackTemplateResponse {
 }
 
 /**
- * CreateRecordTask返回参数结构体
+ * 批量操作域名相关接口，若其中个别域名操作失败将会跳过，相应的域名错误信息将统一汇总在此类型中
  */
-export interface CreateRecordTaskResponse {
+export interface BatchDomainOperateErrors {
   /**
-   * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
+   * 操作失败的域名。
    */
-  TaskId?: string
+  DomainName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * API3.0错误码。
    */
-  RequestId?: string
+  Code: string
+  /**
+   * API3.0错误信息。
+   */
+  Message: string
 }
 
 /**
@@ -4929,6 +5090,26 @@ export interface ModifyLiveDomainRefererResponse {
 }
 
 /**
+ * DescribeMonitorReport返回参数结构体
+ */
+export interface DescribeMonitorReportResponse {
+  /**
+   * 媒体处理结果信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MPSResult?: MPSResult
+  /**
+   * 媒体诊断结果信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiagnoseResult?: DiagnoseResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveStreamOnlineList请求参数结构体
  */
 export interface DescribeLiveStreamOnlineListRequest {
@@ -4987,25 +5168,48 @@ export interface DescribeRecordTaskRequest {
 }
 
 /**
- * 通用混流输入裁剪参数。
+ * DescribeLiveDomainCertBindings, DescribeLiveDomainCertBindingsGray接口返回的域名证书信息
  */
-export interface CommonMixCropParams {
+export interface LiveDomainCertBindings {
   /**
-   * 裁剪的宽度。取值范围[0，2000]。
+   * 域名。
    */
-  CropWidth?: number
+  DomainName?: string
   /**
-   * 裁剪的高度。取值范围[0，2000]。
+   * 证书备注。与CertName同义。
    */
-  CropHeight?: number
+  CertificateAlias?: string
   /**
-   * 裁剪的起始X坐标。取值范围[0，2000]。
+   * 证书类型。
+0：自有证书
+1：腾讯云ssl托管证书
    */
-  CropStartLocationX?: number
+  CertType?: number
   /**
-   * 裁剪的起始Y坐标。取值范围[0，2000]。
+   * https状态。
+1：已开启。
+0：已关闭。
    */
-  CropStartLocationY?: number
+  Status?: number
+  /**
+   * 证书过期时间。
+注：此字段为北京时间（UTC+8时区）。
+   */
+  CertExpireTime?: string
+  /**
+   * 证书Id。
+   */
+  CertId?: number
+  /**
+   * 腾讯云ssl的证书Id。
+   */
+  CloudCertId?: string
+  /**
+   * 规则最后更新时间。
+注：此字段为北京时间（UTC+8时区）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -6125,6 +6329,16 @@ export interface CreateLiveTimeShiftRuleRequest {
 }
 
 /**
+ * StopCasterPvw返回参数结构体
+ */
+export interface StopCasterPvwResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveDomain请求参数结构体
  */
 export interface DescribeLiveDomainRequest {
@@ -6861,89 +7075,17 @@ export interface PushDataInfo {
 }
 
 /**
- * 导播台信息
+ * DescribeLiveSnapshotTemplate返回参数结构体
  */
-export interface CasterInfo {
+export interface DescribeLiveSnapshotTemplateResponse {
   /**
-   * 导播台ID
+   * 截图模板信息。
    */
-  CasterId?: number
+  Template?: SnapshotTemplateInfo
   /**
-   * 导播台名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CasterName?: string
-  /**
-   * 导播台上一次启动pgm的时间，值为unix时间戳。
-   */
-  StartLiveTime?: number
-  /**
-   * 导播台的描述
-   */
-  Description?: string
-  /**
-   * 导播台创建时间，值为unix时间戳。
-   */
-  CreateTime?: number
-  /**
-   * 导播台状态 
-0：停止状态，无预监，无主监
-1：无预监，有主监
-2：有预监，无主监
-3：有预监，有主监
-   */
-  Status?: number
-  /**
-   * 导播台的过期时间戳。值为-1或unix时间戳。 
-默认值为-1。 当值为-1时，表示该导播台永不过期。 
-当值为正常unix时间戳时，导播台将在该时间过期。 
-导播台过期后，预监与主监画面将自动停止，转推自动停止。 
-点播、直播url将停止转拉，推流url需自行停止推流。
-   */
-  ExpireTime?: number
-  /**
-   * 导播台延时播放时间，单位为秒。
-   */
-  DelayTime?: number
-  /**
-   * 导播台主监输出的宽度，单位为像素。
-   */
-  PgmWidth?: number
-  /**
-   * 导播台主监输出的高度，单位为像素。
-   */
-  PgmHeight?: number
-  /**
-   * 导播台主监输出的帧率。
-   */
-  PgmFps?: number
-  /**
-   * 导播台主监输出的码率，单位为kbps
-   */
-  PgmBitRate?: number
-  /**
-   * 导播台主监输出的音频码率，单位为kbps。
-   */
-  PgmAudioBitRate?: number
-  /**
-   * 导播台的计费类型。 
-0 通用型 1 播单型。
-注： 本参数暂无作用。
-   */
-  FeeType?: number
-  /**
-   * 录制模板id。
-   */
-  RecordTemplateId?: number
-  /**
-   * 录制状态。 
-0：未录制 
-1：录制中
-   */
-  RecordStatus?: number
-  /**
-   * 录制接口返回的taskid
-   */
-  RecordTaskId?: string
+  RequestId?: string
 }
 
 /**
@@ -7449,17 +7591,89 @@ export interface CertInfo {
 export type DescribeLiveCallbackRulesRequest = null
 
 /**
- * DescribeLiveSnapshotTemplate返回参数结构体
+ * 导播台信息
  */
-export interface DescribeLiveSnapshotTemplateResponse {
+export interface CasterInfo {
   /**
-   * 截图模板信息。
+   * 导播台ID
    */
-  Template?: SnapshotTemplateInfo
+  CasterId?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 导播台名称
    */
-  RequestId?: string
+  CasterName?: string
+  /**
+   * 导播台上一次启动pgm的时间，值为unix时间戳。
+   */
+  StartLiveTime?: number
+  /**
+   * 导播台的描述
+   */
+  Description?: string
+  /**
+   * 导播台创建时间，值为unix时间戳。
+   */
+  CreateTime?: number
+  /**
+   * 导播台状态 
+0：停止状态，无预监，无主监
+1：无预监，有主监
+2：有预监，无主监
+3：有预监，有主监
+   */
+  Status?: number
+  /**
+   * 导播台的过期时间戳。值为-1或unix时间戳。 
+默认值为-1。 当值为-1时，表示该导播台永不过期。 
+当值为正常unix时间戳时，导播台将在该时间过期。 
+导播台过期后，预监与主监画面将自动停止，转推自动停止。 
+点播、直播url将停止转拉，推流url需自行停止推流。
+   */
+  ExpireTime?: number
+  /**
+   * 导播台延时播放时间，单位为秒。
+   */
+  DelayTime?: number
+  /**
+   * 导播台主监输出的宽度，单位为像素。
+   */
+  PgmWidth?: number
+  /**
+   * 导播台主监输出的高度，单位为像素。
+   */
+  PgmHeight?: number
+  /**
+   * 导播台主监输出的帧率。
+   */
+  PgmFps?: number
+  /**
+   * 导播台主监输出的码率，单位为kbps
+   */
+  PgmBitRate?: number
+  /**
+   * 导播台主监输出的音频码率，单位为kbps。
+   */
+  PgmAudioBitRate?: number
+  /**
+   * 导播台的计费类型。 
+0 通用型 1 播单型。
+注： 本参数暂无作用。
+   */
+  FeeType?: number
+  /**
+   * 录制模板id。
+   */
+  RecordTemplateId?: number
+  /**
+   * 录制状态。 
+0：未录制 
+1：录制中
+   */
+  RecordStatus?: number
+  /**
+   * 录制接口返回的taskid
+   */
+  RecordTaskId?: string
 }
 
 /**
@@ -7865,6 +8079,37 @@ export interface ModifyLiveDomainRefererRequest {
    * Referer 名单列表，以;分隔。
    */
   Rules: string
+}
+
+/**
+ * CreateCasterPgmFromPvw返回参数结构体
+ */
+export interface CreateCasterPgmFromPvwResponse {
+  /**
+   * 主监任务的rtmp协议预览地址。 
+注：该地址仅供预览，不可分发。
+   */
+  PgmPlayUrl?: string
+  /**
+   * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdnPlayUrl?: string
+  /**
+   * 主监任务在腾讯云直播侧的流ID。
+   */
+  CdnStreamId?: string
+  /**
+   * 主监任务的webrtc协议播放地址。 
+注：
+1.该预览地址仅作为预览，不可分发。
+2.webrtc播放地址需配合腾讯云快直播播放sdk使用。
+   */
+  PgmWebRTCPlayUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8445,21 +8690,17 @@ export interface DescribeLiveCallbackRulesResponse {
 }
 
 /**
- * 批量操作域名相关接口，若其中个别域名操作失败将会跳过，相应的域名错误信息将统一汇总在此类型中
+ * CreateRecordTask返回参数结构体
  */
-export interface BatchDomainOperateErrors {
+export interface CreateRecordTaskResponse {
   /**
-   * 操作失败的域名。
+   * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
    */
-  DomainName: string
+  TaskId?: string
   /**
-   * API3.0错误码。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Code: string
-  /**
-   * API3.0错误信息。
-   */
-  Message: string
+  RequestId?: string
 }
 
 /**
@@ -8556,32 +8797,6 @@ export interface CreateLiveRecordTemplateRequest {
    * FLV 录制特殊参数。
    */
   FlvSpecialParam?: FlvSpecialParam
-}
-
-/**
- * DescribeLivePullStreamTasks请求参数结构体
- */
-export interface DescribeLivePullStreamTasksRequest {
-  /**
-   * 任务 ID。 
-来源：调用 CreateLivePullStreamTask 接口时返回。
-不填默认查询所有任务，按更新时间倒序排序。
-   */
-  TaskId?: string
-  /**
-   * 取得第几页，默认值：1。
-   */
-  PageNum?: number
-  /**
-   * 分页大小，默认值：10。
-取值范围：1~20 之前的任意整数。
-   */
-  PageSize?: number
-  /**
-   * 使用指定任务 ID 查询任务信息。
-注意：仅供使用指定 ID 创建的任务查询。
-   */
-  SpecifyTaskId?: string
 }
 
 /**
@@ -8686,6 +8901,16 @@ export interface DescribeDeliverBandwidthListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopCasterPgm请求参数结构体
+ */
+export interface StopCasterPgmRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
 }
 
 /**
@@ -10088,74 +10313,29 @@ export interface DescribeTimeShiftStreamListResponse {
 }
 
 /**
- * 直播包信息。
+ * DescribeLiveStreamPushInfoList请求参数结构体
  */
-export interface LivePackageInfo {
+export interface DescribeLiveStreamPushInfoListRequest {
   /**
-   * 包 ID。
+   * 推流域名。
    */
-  Id?: string
+  PushDomain?: string
   /**
-   * 总量。
-注意：当为流量包时单位为字节。
-当为转码包时单位为分钟。
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
    */
-  Total?: number
+  AppName?: string
   /**
-   * 使用量。
-注意：当为流量包时单位为字节。
-当为转码包时单位为分钟。
-当为连麦包时单位为小时。
+   * 页数，
+范围[1,10000]，
+默认值：1。
    */
-  Used?: number
+  PageNum?: number
   /**
-   * 剩余量。
-注意：当为流量包时单位为字节。
-当为转码包时单位为分钟。
-当为连麦包时单位为小时。
+   * 每页个数，
+范围：[1,1000]，
+默认值： 200。
    */
-  Left?: number
-  /**
-   * 购买时间。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  BuyTime?: string
-  /**
-   * 过期时间。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  ExpireTime?: string
-  /**
-   * 包类型，可选值:
-0: 流量包。
-1: 普通转码包。
-2: 极速高清包。
-3: 连麦包。
-   */
-  Type?: number
-  /**
-   * 包状态，可选值:
-0: 未使用。
-1: 使用中。
-2: 已过期。
-3: 已冻结。
-4: 已耗尽。
-5: 已退款
-   */
-  Status?: number
-  /**
-   * 是否自动续购。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WillRenew?: number
-  /**
-   * 续购状态。
-1 ：续购成功。
-0 ：尚未续购。
-<0  : 续购失败。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewalResult?: number
+  PageSize?: number
 }
 
 /**
@@ -11059,6 +11239,16 @@ export interface DescribeLiveXP2PDetailInfoListRequest {
    * 查询维度，不传该参数则默认查询流维度的数据，传递该参数则只查对应维度的数据，和返回值的字段相关，目前支持AppId维度查询。
    */
   Dimension?: Array<string>
+}
+
+/**
+ * CreateCasterPgmFromPvw请求参数结构体
+ */
+export interface CreateCasterPgmFromPvwRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
 }
 
 /**

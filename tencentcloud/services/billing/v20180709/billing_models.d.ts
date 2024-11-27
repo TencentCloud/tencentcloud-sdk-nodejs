@@ -248,12 +248,10 @@ export interface ConditionBusiness {
 export interface AnalyseActionTypeDetail {
     /**
      * 交易类型code
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionType?: string;
     /**
      * 交易类型Name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionTypeName?: string;
 }
@@ -2073,12 +2071,10 @@ export interface DescribeCostSummaryByProjectResponse {
 export interface AnalyseProjectDetail {
     /**
      * 项目id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
      * 默认项目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectName?: string;
 }
@@ -2400,12 +2396,10 @@ export interface DescribeSavingPlanCoverageResponse {
 export interface AnalyseAmountDetail {
     /**
      * 费用类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 是否展示
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Display?: number;
 }
@@ -3816,17 +3810,14 @@ export interface CostComponentSet {
 export interface AnalyseHeaderDetail {
     /**
      * 表头日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeadDetail?: Array<AnalyseHeaderTimeDetail>;
     /**
      * 时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 总计
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: string;
 }
@@ -3955,12 +3946,10 @@ export interface AllocationOverviewDetail {
 export interface AnalysePayModeDetail {
     /**
      * 计费模式code
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: string;
     /**
      * 计费模式Name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayModeName?: string;
 }
@@ -3970,17 +3959,14 @@ export interface AnalysePayModeDetail {
 export interface AllocationBillTrendDetail {
     /**
      * 账单月份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Month?: string;
     /**
      * 账单月份展示名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 合计费用(折后总额)：分账单元总费用，归集费用(折后总额) + 分摊费用(折后总额)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealTotalCost?: string;
 }
@@ -4007,7 +3993,6 @@ export interface DescribeBillSummaryResponse {
 export interface AnalyseOwnerUinDetail {
     /**
      * 使用者uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OwnerUin?: string;
 }
@@ -4098,12 +4083,10 @@ export interface Conditions {
 export interface AnalyseTimeDetail {
     /**
      * 日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Time?: string;
     /**
      * 金额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Money?: string;
 }
@@ -4228,12 +4211,10 @@ export interface ConsumptionProjectSummaryDataItem {
 export interface AnalyseRegionDetail {
     /**
      * 地域id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: string;
     /**
      * 地域名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionName?: string;
 }
@@ -5188,16 +5169,16 @@ export interface DetailSet {
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 使用数据明细
      */
-    DetailPoints: Array<DetailPoint>;
+    DetailPoints?: Array<DetailPoint>;
     /**
      * 实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceID: string;
+    InstanceID?: string;
 }
 /**
  * 账单明细组件对象
@@ -5359,17 +5340,14 @@ export interface ConditionRegion {
 export interface AllocationAverageData {
     /**
      * 起始月份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginMonth?: string;
     /**
      * 结束月份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndMonth?: string;
     /**
      * 合计费用(折后总额)平均值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealTotalCost?: string;
 }
@@ -5832,12 +5810,10 @@ export interface BillInstanceType {
 export interface AnalyseBusinessDetail {
     /**
      * 产品码code
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessCode?: string;
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessCodeName?: string;
 }
@@ -5847,47 +5823,38 @@ export interface AnalyseBusinessDetail {
 export interface AnalyseConditions {
     /**
      * 产品名称代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessCodes?: string;
     /**
      * 子产品名称代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductCodes?: string;
     /**
      * 组件类型代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComponentCode?: string;
     /**
      * 可用区ID：资源所属可用区ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneIds?: string;
     /**
      * 地域ID:资源所属地域ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionIds?: string;
     /**
      * 项目ID:资源所属项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectIds?: string;
     /**
      * 计费模式 prePay(表示包年包月)/postPay(表示按量计费)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayModes?: string;
     /**
      * 交易类型，查询交易类型（请使用交易类型code入参）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionTypes?: string;
     /**
      * 分账标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: string;
     /**
@@ -5897,22 +5864,18 @@ export interface AnalyseConditions {
   voucherPayAmount:优惠券
   tax:税金
   costBeforeTax:税前价
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FeeType?: string;
     /**
      * 查询成本分析数据的用户UIN
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayerUins?: string;
     /**
      * 使用资源的用户UIN
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OwnerUins?: string;
     /**
      * 消耗类型，查询消耗类型（请使用消耗类型code入参）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConsumptionTypes?: string;
 }
@@ -6419,12 +6382,10 @@ export interface DescribeSavingPlanResourceInfoRequest {
 export interface AnalyseZoneDetail {
     /**
      * 可用区id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneId?: string;
     /**
      * 可用区Name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneName?: string;
 }
@@ -7731,7 +7692,6 @@ export interface BillResourceSummary {
 export interface AnalyseHeaderTimeDetail {
     /**
      * 日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
 }

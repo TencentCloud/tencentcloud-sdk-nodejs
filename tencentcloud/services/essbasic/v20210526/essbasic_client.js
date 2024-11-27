@@ -961,7 +961,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 注:
 <ul>
 <li>只能获取个人用户证明图片, 企业员工的暂不支持</li>
-<li>处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。  </li>
+<li>专为电子处方单（医疗自动签）特定场景使用。在使用前，请务必与您的客户经理联系以确认已经开通电子处方单功能 </li>
 </ul>
      */
     async CreatePersonAuthCertificateImage(req, cb) {

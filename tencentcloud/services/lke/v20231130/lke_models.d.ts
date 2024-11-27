@@ -3309,7 +3309,7 @@ export interface DescribeKnowledgeUsagePieGraphRequest {
     AppBizIds?: Array<string>;
 }
 /**
- * 属性标签详情
+ * 标签详情
  */
 export interface AttrLabelDetail {
     /**
@@ -3337,6 +3337,16 @@ export interface AttrLabelDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUpdating?: boolean;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 状态描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusDesc?: string;
 }
 /**
  * DescribeRefer返回参数结构体

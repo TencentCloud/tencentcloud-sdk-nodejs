@@ -4772,6 +4772,10 @@ export interface CreateVodDomainRequest {
   如果没有设置 AccelerateArea， 点播会根据用户在腾讯云设置的地域信息自动开通中国境内或者中国境外的 CDN 加速。开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
      */
     AccelerateArea?: string;
+    /**
+     * 域名类型，取值有： <li>VOD：使用 VOD 产品分发的域名；</li> <li>EdgeOne：使用 EdgeOne 产品分发的域名。</li>不填默认取值为 VOD 。
+     */
+    Type?: string;
 }
 /**
  * 文本全文本识别任务控制参数
@@ -11281,6 +11285,10 @@ export interface DomainDetailInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IPFilterPolicy?: IPFilterPolicy;
+    /**
+     * 域名类型，取值有： <li>VOD：使用 VOD 产品分发的域名；</li> <li>EdgeOne：使用 EdgeOne 产品分发的域名。</li>
+     */
+    Type?: string;
 }
 /**
  * 音视频审核涉及令人不安全的信息的任务结果类型

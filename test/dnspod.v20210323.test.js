@@ -18,9 +18,9 @@ const client = new tencentcloud.dnspod.v20210323.Client({
 })
 describe("dnspod.v20210323.test.js", function () {
 
-it("dnspod.v20210323.ModifyDomainToGroup", async function () {
+it("dnspod.v20210323.CreateSubdomainValidateTXTValue", async function () {
     try {
-       const data = await client.ModifyDomainToGroup({})
+       const data = await client.CreateSubdomainValidateTXTValue({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +448,16 @@ it("dnspod.v20210323.RollbackSnapshot", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeSubdomainValidateStatus", async function () {
+    try {
+       const data = await client.DescribeSubdomainValidateStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DeleteRecord", async function () {
     try {
        const data = await client.DeleteRecord({})
@@ -761,6 +771,16 @@ it("dnspod.v20210323.ModifyTXTRecord", async function () {
 it("dnspod.v20210323.DescribeSubdomainAnalytics", async function () {
     try {
        const data = await client.DescribeSubdomainAnalytics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.ModifyDomainToGroup", async function () {
+    try {
+       const data = await client.ModifyDomainToGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
