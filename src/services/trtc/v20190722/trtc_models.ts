@@ -1234,6 +1234,28 @@ export interface StorageParams {
 }
 
 /**
+ * CreateBasicModeration请求参数结构体
+ */
+export interface CreateBasicModerationRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和TRTC的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，为TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+  /**
+   * 目标审核用户id
+   */
+  UserId: string
+  /**
+   * TRTC房间号的类型。【*注意】必须和TRTC的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认）
+   */
+  RoomIdType?: number
+}
+
+/**
  * 点播相关参数。
  */
 export interface CloudVod {
@@ -1696,6 +1718,20 @@ export interface DescribeAITranscriptionRequest {
    * 开启转录任务时传入的SessionId，和SdkAppId配合使用。
    */
   SessionId?: string
+}
+
+/**
+ * CreateBasicModeration返回参数结构体
+ */
+export interface CreateBasicModerationResponse {
+  /**
+   * 审核服务分配的任务ID。任务ID是对一次审核任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2568,6 +2604,56 @@ export interface TencentVod {
 }
 
 /**
+ * 云端录制控制参数。
+ */
+export interface RecordParams {
+  /**
+   * 录制模式：
+1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；
+2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
+   */
+  RecordMode: number
+  /**
+   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+   */
+  MaxIdleTime?: number
+  /**
+   * 录制的媒体流类型：
+0：录制音频+视频流（默认）;
+1：仅录制音频流；
+2：仅录制视频流，
+   */
+  StreamType?: number
+  /**
+   * 指定订阅流白名单或者黑名单。
+   */
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
+  /**
+   * 输出文件的格式（存储至COS等第三方存储时有效）。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：输出文件格式为mp4。4：输出文件格式为aac。
+
+存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
+   */
+  OutputFormat?: number
+  /**
+   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。合流录制此参数无需设置，默认音视频合并。
+   */
+  AvMerge?: number
+  /**
+   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
+Hls 格式录制此参数不生效。
+   */
+  MaxMediaFileDuration?: number
+  /**
+   * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
+   */
+  MediaId?: number
+  /**
+   * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
+   */
+  FillType?: number
+}
+
+/**
  * 自定义透传SEI
  */
 export interface McuPassThrough {
@@ -2775,6 +2861,20 @@ export interface OutputParams {
    * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
    */
   RecordAudioOnly?: number
+}
+
+/**
+ * DeleteBasicModeration请求参数结构体
+ */
+export interface DeleteBasicModerationRequest {
+  /**
+   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 审核任务的唯一Id，在启动审核任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**
@@ -3939,53 +4039,17 @@ export interface RemoveUserByStrRoomIdRequest {
 }
 
 /**
- * 云端录制控制参数。
+ * DeleteBasicModeration返回参数结构体
  */
-export interface RecordParams {
+export interface DeleteBasicModerationResponse {
   /**
-   * 录制模式：
-1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；
-2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
+   * 审核任务的唯一Id，在启动审核任务成功后会返回。
    */
-  RecordMode: number
+  TaskId?: string
   /**
-   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MaxIdleTime?: number
-  /**
-   * 录制的媒体流类型：
-0：录制音频+视频流（默认）;
-1：仅录制音频流；
-2：仅录制视频流，
-   */
-  StreamType?: number
-  /**
-   * 指定订阅流白名单或者黑名单。
-   */
-  SubscribeStreamUserIds?: SubscribeStreamUserIds
-  /**
-   * 输出文件的格式（存储至COS等第三方存储时有效）。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：输出文件格式为mp4。4：输出文件格式为aac。
-
-存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
-   */
-  OutputFormat?: number
-  /**
-   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。合流录制此参数无需设置，默认音视频合并。
-   */
-  AvMerge?: number
-  /**
-   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
-Hls 格式录制此参数不生效。
-   */
-  MaxMediaFileDuration?: number
-  /**
-   * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
-   */
-  MediaId?: number
-  /**
-   * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
-   */
-  FillType?: number
+  RequestId?: string
 }
 
 /**

@@ -7206,8 +7206,11 @@ export interface SearchLogRequest {
      */
     Query: string;
     /**
-     * 检索语法规则，默认值为0，推荐使用1 (CQL语法)。
-  0：Lucene语法，1：CQL语法。
+     * 检索语法规则，默认值为0，推荐使用1 。
+  
+  - 0：Lucene语法
+  - 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
+  
   详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
      */
     SyntaxRule?: number;

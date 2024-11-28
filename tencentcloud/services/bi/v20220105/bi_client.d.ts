@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserRoleListResponse, ModifyProjectResponse, DeleteProjectRequest, DescribeUserProjectListResponse, CreateDatasourceRequest, DeleteDatasourceRequest, ModifyDatasourceResponse, ApplyEmbedIntervalRequest, DeleteUserRoleResponse, DescribeUserProjectListRequest, CreateDatasourceCloudResponse, DeleteUserRoleRequest, CreateUserRoleRequest, ModifyUserRoleRequest, DescribeProjectListResponse, ModifyUserRoleResponse, CreateEmbedTokenRequest, CreateUserRoleProjectResponse, DescribeProjectInfoRequest, ModifyUserRoleProjectResponse, DescribeUserRoleProjectListResponse, ModifyDatasourceCloudResponse, ModifyDatasourceCloudRequest, ModifyDatasourceRequest, ModifyProjectRequest, ModifyUserRoleProjectRequest, CreateUserRoleResponse, DescribeProjectListRequest, DeleteUserRoleProjectRequest, CreateProjectResponse, DescribeProjectInfoResponse, DescribeUserRoleListRequest, DeleteProjectResponse, DescribeUserRoleProjectListRequest, CreateEmbedTokenResponse, CreateUserRoleProjectRequest, DescribeDatasourceListRequest, ApplyEmbedIntervalResponse, CreateDatasourceResponse, DeleteUserRoleProjectResponse, CreateDatasourceCloudRequest, DescribeDatasourceListResponse, DeleteDatasourceResponse, CreateProjectRequest } from "./bi_models";
+import { DescribeUserRoleListResponse, ExportScreenPageResponse, ModifyProjectResponse, DeleteProjectRequest, DescribeUserProjectListResponse, CreateDatasourceRequest, DeleteDatasourceRequest, ModifyDatasourceResponse, ApplyEmbedIntervalRequest, DescribePageWidgetListResponse, DeleteUserRoleResponse, DescribeUserProjectListRequest, DescribePageWidgetListRequest, CreateDatasourceCloudResponse, DeleteUserRoleRequest, CreateUserRoleRequest, ModifyUserRoleRequest, DescribeProjectListResponse, ModifyUserRoleResponse, CreateEmbedTokenRequest, CreateUserRoleProjectResponse, DescribeProjectInfoRequest, ModifyUserRoleProjectResponse, DescribeUserRoleProjectListResponse, ModifyDatasourceCloudResponse, ModifyDatasourceCloudRequest, ModifyDatasourceRequest, ModifyProjectRequest, ModifyUserRoleProjectRequest, CreateUserRoleResponse, DescribeProjectListRequest, DeleteUserRoleProjectRequest, CreateProjectResponse, DescribeProjectInfoResponse, ExportScreenPageRequest, DescribeUserRoleListRequest, DeleteProjectResponse, DescribeUserRoleProjectListRequest, CreateEmbedTokenResponse, CreateUserRoleProjectRequest, DescribeDatasourceListRequest, ApplyEmbedIntervalResponse, CreateDatasourceResponse, DeleteUserRoleProjectResponse, CreateDatasourceCloudRequest, DescribeDatasourceListResponse, DeleteDatasourceResponse, CreateProjectRequest } from "./bi_models";
 /**
  * bi client
  * @class
@@ -28,13 +28,17 @@ export declare class Client extends AbstractClient {
      */
     ApplyEmbedInterval(req: ApplyEmbedIntervalRequest, cb?: (error: string, rep: ApplyEmbedIntervalResponse) => void): Promise<ApplyEmbedIntervalResponse>;
     /**
-     * 创建云数据库
+     * 页面截图导出
      */
-    CreateDatasourceCloud(req: CreateDatasourceCloudRequest, cb?: (error: string, rep: CreateDatasourceCloudResponse) => void): Promise<CreateDatasourceCloudResponse>;
+    ExportScreenPage(req: ExportScreenPageRequest, cb?: (error: string, rep: ExportScreenPageResponse) => void): Promise<ExportScreenPageResponse>;
     /**
      * 修改用户角色信息
      */
     ModifyUserRole(req: ModifyUserRoleRequest, cb?: (error: string, rep: ModifyUserRoleResponse) => void): Promise<ModifyUserRoleResponse>;
+    /**
+     * 创建云数据库
+     */
+    CreateDatasourceCloud(req: CreateDatasourceCloudRequest, cb?: (error: string, rep: CreateDatasourceCloudResponse) => void): Promise<CreateDatasourceCloudResponse>;
     /**
      * 创建嵌出报表-强鉴权
      */
@@ -59,6 +63,10 @@ export declare class Client extends AbstractClient {
      * 用户角色列表
      */
     DescribeUserRoleList(req: DescribeUserRoleListRequest, cb?: (error: string, rep: DescribeUserRoleListResponse) => void): Promise<DescribeUserRoleListResponse>;
+    /**
+     * 查询页面组件信息
+     */
+    DescribePageWidgetList(req: DescribePageWidgetListRequest, cb?: (error: string, rep: DescribePageWidgetListResponse) => void): Promise<DescribePageWidgetListResponse>;
     /**
      * 项目内-用户角色列表
      */

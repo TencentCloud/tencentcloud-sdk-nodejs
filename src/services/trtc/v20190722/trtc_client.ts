@@ -68,6 +68,7 @@ import {
   DescribeRecordStatisticRequest,
   DescribeRoomInfoRequest,
   StorageParams,
+  CreateBasicModerationRequest,
   CloudVod,
   EncodeParams,
   EmulateMobileParams,
@@ -90,6 +91,7 @@ import {
   McuLayoutParams,
   DescribeTRTCRealTimeQualityMetricDataRequest,
   DescribeAITranscriptionRequest,
+  CreateBasicModerationResponse,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   DescribeAIConversationResponse,
   McuLayout,
@@ -125,6 +127,7 @@ import {
   DescribeUnusualEventRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
+  RecordParams,
   McuPassThrough,
   DescribeTRTCRealTimeQualityMetricDataResponse,
   LayoutParams,
@@ -132,6 +135,7 @@ import {
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
+  DeleteBasicModerationRequest,
   DeleteCloudRecordingResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
   RecognizeConfig,
@@ -185,7 +189,7 @@ import {
   TranscriptionParams,
   SeriesInfos,
   RemoveUserByStrRoomIdRequest,
-  RecordParams,
+  DeleteBasicModerationResponse,
   DescribeStreamIngestRequest,
   DescribeTRTCMarketScaleMetricDataResponse,
   McuAudioParams,
@@ -255,6 +259,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrtcUsageResponse) => void
   ): Promise<DescribeTrtcUsageResponse> {
     return this.request("DescribeTrtcUsage", req, cb)
+  }
+
+  /**
+     * 接口说明：
+启动终端审核功能，完成房间内的音频审核。
+     */
+  async CreateBasicModeration(
+    req: CreateBasicModerationRequest,
+    cb?: (error: string, rep: CreateBasicModerationResponse) => void
+  ): Promise<CreateBasicModerationResponse> {
+    return this.request("CreateBasicModeration", req, cb)
   }
 
   /**
@@ -489,13 +504,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 接口说明：结束云端混流
+   * 成功开启审核任务后，可以使用此接口来停止任务。
    */
-  async StopMCUMixTranscode(
-    req: StopMCUMixTranscodeRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
-  ): Promise<StopMCUMixTranscodeResponse> {
-    return this.request("StopMCUMixTranscode", req, cb)
+  async DeleteBasicModeration(
+    req: DeleteBasicModerationRequest,
+    cb?: (error: string, rep: DeleteBasicModerationResponse) => void
+  ): Promise<DeleteBasicModerationResponse> {
+    return this.request("DeleteBasicModeration", req, cb)
   }
 
   /**
@@ -938,5 +953,15 @@ xa0
     cb?: (error: string, rep: DescribeTRTCRealTimeScaleMetricDataResponse) => void
   ): Promise<DescribeTRTCRealTimeScaleMetricDataResponse> {
     return this.request("DescribeTRTCRealTimeScaleMetricData", req, cb)
+  }
+
+  /**
+   * 接口说明：结束云端混流
+   */
+  async StopMCUMixTranscode(
+    req: StopMCUMixTranscodeRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
+  ): Promise<StopMCUMixTranscodeResponse> {
+    return this.request("StopMCUMixTranscode", req, cb)
   }
 }

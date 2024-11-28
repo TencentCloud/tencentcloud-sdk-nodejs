@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   IPStrategyApiStatus,
   UnBindSubDomainResponse,
+  UpstreamInfo,
   UpdateApiKeyRequest,
   Service,
   DeleteAPIDocRequest,
@@ -52,6 +53,7 @@ import {
   CreateIPStrategyRequest,
   IPStrategy,
   DescribeUsagePlansStatusResponse,
+  InstanceNetworkConfig,
   HealthCheckConf,
   DeleteUpstreamRequest,
   Plugin,
@@ -109,7 +111,7 @@ import {
   ModifyApiEnvironmentStrategyRequest,
   NetworkConfig,
   ServiceReleaseHistory,
-  ModifyUsagePlanResponse,
+  DescribeUpstreamBindApisResponse,
   IPStrategiesStatus,
   CreateUsagePlanResponse,
   DomainSets,
@@ -117,7 +119,7 @@ import {
   Base64EncodedTriggerRule,
   RequestConfig,
   DeleteApiKeyResponse,
-  UpstreamInfo,
+  EnvironmentStrategy,
   ModifyExclusiveInstanceRequest,
   UsagePlan,
   DescribeServiceReleaseVersionRequest,
@@ -168,7 +170,7 @@ import {
   CreateApiRequest,
   UnBindEnvironmentRequest,
   DescribeServiceEnvironmentStrategyRequest,
-  DescribeUpstreamBindApisResponse,
+  DescribeInstancesNetworkConfigResponse,
   ReleaseServiceRequest,
   DeleteServiceResponse,
   DescribeServiceEnvironmentReleaseHistoryResponse,
@@ -196,7 +198,7 @@ import {
   CreateApiRsp,
   UsagePlanBindEnvironment,
   InstanceInfo,
-  DeleteApiRequest,
+  CreateExclusiveInstancesRequest,
   DescribeExclusiveInstanceRegionsRequest,
   DescribeApiAppResponse,
   DescribeServiceSubDomainMappingsResponse,
@@ -210,6 +212,7 @@ import {
   UsagePlanBindSecretStatus,
   DeleteServiceSubDomainMappingResponse,
   CreateApiKeyResponse,
+  DeleteApiRequest,
   DescribeUpstreamsRequest,
   UsagePlanEnvironment,
   ModifyIPStrategyRequest,
@@ -253,6 +256,7 @@ import {
   DescribeApiEnvironmentStrategyResponse,
   DescribeApiRequest,
   PluginSummary,
+  ModifyUsagePlanResponse,
   ApiAppInfo,
   DeleteIPStrategyResponse,
   ApiInfoSummary,
@@ -267,7 +271,7 @@ import {
   ModifyUpstreamResponse,
   DescribeIPStrategyRequest,
   DescribeApiForApiAppResponse,
-  EnvironmentStrategy,
+  DescribeInstancesNetworkConfigRequest,
   InstanceParameterInput,
   DescribeUsagePlanEnvironmentsRequest,
   ImportOpenApiRequest,
@@ -290,6 +294,7 @@ import {
   BuildAPIDocRequest,
   DetachPluginResponse,
   ApiKeysStatus,
+  CreateExclusiveInstancesResponse,
   APIDoc,
   DescribeServiceUsagePlanResponse,
   CreateApiAppResponse,
@@ -547,6 +552,16 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
+   * 本接口（ModifyUsagePlan）用于修改使用计划的名称，描述及 QPS。
+   */
+  async ModifyUsagePlan(
+    req: ModifyUsagePlanRequest,
+    cb?: (error: string, rep: ModifyUsagePlanResponse) => void
+  ): Promise<ModifyUsagePlanResponse> {
+    return this.request("ModifyUsagePlan", req, cb)
+  }
+
+  /**
    * 查询后端通道列表详情
    */
   async DescribeUpstreams(
@@ -670,13 +685,24 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-   * 本接口（ModifyUsagePlan）用于修改使用计划的名称，描述及 QPS。
+   * 创建专享实例
    */
-  async ModifyUsagePlan(
-    req: ModifyUsagePlanRequest,
-    cb?: (error: string, rep: ModifyUsagePlanResponse) => void
-  ): Promise<ModifyUsagePlanResponse> {
-    return this.request("ModifyUsagePlan", req, cb)
+  async CreateExclusiveInstances(
+    req: CreateExclusiveInstancesRequest,
+    cb?: (error: string, rep: CreateExclusiveInstancesResponse) => void
+  ): Promise<CreateExclusiveInstancesResponse> {
+    return this.request("CreateExclusiveInstances", req, cb)
+  }
+
+  /**
+     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
+API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     */
+  async DescribeServiceSubDomainMappings(
+    req: DescribeServiceSubDomainMappingsRequest,
+    cb?: (error: string, rep: DescribeServiceSubDomainMappingsResponse) => void
+  ): Promise<DescribeServiceSubDomainMappingsResponse> {
+    return this.request("DescribeServiceSubDomainMappings", req, cb)
   }
 
   /**
@@ -854,17 +880,6 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
-     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
-API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
-     */
-  async DescribeServiceSubDomainMappings(
-    req: DescribeServiceSubDomainMappingsRequest,
-    cb?: (error: string, rep: DescribeServiceSubDomainMappingsResponse) => void
-  ): Promise<DescribeServiceSubDomainMappingsResponse> {
-    return this.request("DescribeServiceSubDomainMappings", req, cb)
-  }
-
-  /**
    * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
    */
   async DescribeExclusiveInstanceDetail(
@@ -943,6 +958,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: DescribeApiUsagePlanResponse) => void
   ): Promise<DescribeApiUsagePlanResponse> {
     return this.request("DescribeApiUsagePlan", req, cb)
+  }
+
+  /**
+   * 获取专享实例网络配置列表
+   */
+  async DescribeInstancesNetworkConfig(
+    req: DescribeInstancesNetworkConfigRequest,
+    cb?: (error: string, rep: DescribeInstancesNetworkConfigResponse) => void
+  ): Promise<DescribeInstancesNetworkConfigResponse> {
+    return this.request("DescribeInstancesNetworkConfig", req, cb)
   }
 
   /**

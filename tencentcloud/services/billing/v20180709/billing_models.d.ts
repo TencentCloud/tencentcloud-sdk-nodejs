@@ -131,11 +131,11 @@ export interface BillTagInfo {
     /**
      * 分账标签键
      */
-    TagKey: string;
+    TagKey?: string;
     /**
      * 标签值
      */
-    TagValue: string;
+    TagValue?: string;
 }
 /**
  * 分账账单概览金额汇总
@@ -322,9 +322,17 @@ export interface DescribeCostExplorerSummaryRequest {
  */
 export interface BillBusinessLink {
     /**
+     * 产品编码
+     */
+    BusinessCode?: string;
+    /**
+     * 产品名称
+     */
+    BusinessCodeName?: string;
+    /**
      * 子产品
      */
-    Children: Array<BillProductLink>;
+    Children?: Array<BillProductLink>;
 }
 /**
  * DescribeCostSummaryByProduct返回参数结构体
@@ -1607,7 +1615,6 @@ export interface DescribeVoucherUsageDetailsResponse {
     TotalUsedAmount?: number;
     /**
      * 代金券使用记录细节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsageRecords?: Array<UsageRecords>;
     /**
@@ -1927,7 +1934,6 @@ export interface UsageRecords {
     UsedTime?: string;
     /**
      * 使用记录细节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsageDetails?: Array<UsageDetails>;
     /**
@@ -1936,17 +1942,14 @@ export interface UsageRecords {
     PayMode?: string;
     /**
      * 查询的券id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VoucherId?: string;
     /**
      * 交易场景：（adjust：调账、common：正常交易场景）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayScene?: string;
     /**
      * 唯一id,对应交易:预付费的dealName,调账/后付费的outTradeNo
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SeqId?: string;
 }
@@ -2057,7 +2060,7 @@ export interface DescribeCostSummaryByProjectResponse {
      */
     Data?: Array<ConsumptionProjectSummaryDataItem>;
     /**
-     * 记录数量，NeedRecordNum为0是返回null
+     * 记录数量，NeedRecordNum为0时返回null
      */
     RecordNum?: number;
     /**
@@ -3085,7 +3088,23 @@ export interface ConditionPayMode {
 /**
  * 分账条件子产品筛选
  */
-export declare type BillProductLink = null;
+export interface BillProductLink {
+    /**
+     * 子产品编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCode?: string;
+    /**
+     * 子产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCodeName?: string;
+    /**
+     * 组件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Children?: Array<BillItem>;
+}
 /**
  * 当前归属单元信息
  */
@@ -4929,31 +4948,31 @@ export interface ActionSummaryOverviewItem {
     /**
      * 交易类型编码
      */
-    ActionType: string;
+    ActionType?: string;
     /**
      * 交易类型：如包年包月新购、包年包月续费、按量计费扣费等类型
      */
-    ActionTypeName: string;
+    ActionTypeName?: string;
     /**
      * 费用所占百分比，两位小数
      */
-    RealTotalCostRatio: string;
+    RealTotalCostRatio?: string;
     /**
      * 优惠后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 现金账户支出：通过现金账户支付的金额
      */
-    CashPayAmount: string;
+    CashPayAmount?: string;
     /**
      * 赠送账户支出：使用赠送金支付的金额
      */
-    IncentivePayAmount: string;
+    IncentivePayAmount?: string;
     /**
      * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
      */
-    VoucherPayAmount: string;
+    VoucherPayAmount?: string;
     /**
      * 分成金账户支出：通过分成金账户支付的金额
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4962,11 +4981,11 @@ export interface ActionSummaryOverviewItem {
     /**
      * 账单月份，格式2019-08
      */
-    BillMonth: string;
+    BillMonth?: string;
     /**
      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
      */
-    TotalCost: string;
+    TotalCost?: string;
 }
 /**
  * DescribeBillDetailForOrganization请求参数结构体
@@ -5742,52 +5761,42 @@ export interface BillBusiness {
 export interface UsageDetails {
     /**
      * 商品名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 商品细节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubProductName?: string;
     /**
      * 产品码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductCode?: string;
     /**
      * 子产品码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubProductCode?: string;
     /**
      * 计费项码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingItemCode?: string;
     /**
      * 计费细项码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubBillingItemCode?: string;
     /**
      * 产品英文名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductEnName?: string;
     /**
      * 子产品英文名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubProductEnName?: string;
     /**
      * 结算周期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CalcUnit?: string;
     /**
      * payMode为prepay 且 payScene为common的情况下存在
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Action?: string;
 }
@@ -7712,7 +7721,7 @@ export interface DescribeCostSummaryByRegionResponse {
      */
     Data?: Array<ConsumptionRegionSummaryDataItem>;
     /**
-     * 记录数量，NeedRecordNum为0是返回null
+     * 记录数量，NeedRecordNum为0时返回null
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordNum?: number;

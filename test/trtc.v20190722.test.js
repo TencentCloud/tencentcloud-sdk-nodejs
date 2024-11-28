@@ -48,6 +48,16 @@ it("trtc.v20190722.DescribeTrtcUsage", async function () {
     }
 })
 
+it("trtc.v20190722.CreateBasicModeration", async function () {
+    try {
+       const data = await client.CreateBasicModeration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StopAIConversation", async function () {
     try {
        const data = await client.StopAIConversation({})
@@ -218,9 +228,9 @@ it("trtc.v20190722.RemoveUser", async function () {
     }
 })
 
-it("trtc.v20190722.StopMCUMixTranscode", async function () {
+it("trtc.v20190722.DeleteBasicModeration", async function () {
     try {
-       const data = await client.StopMCUMixTranscode({})
+       const data = await client.DeleteBasicModeration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +571,16 @@ it("trtc.v20190722.DescribeUnusualEvent", async function () {
 it("trtc.v20190722.DescribeTRTCRealTimeScaleMetricData", async function () {
     try {
        const data = await client.DescribeTRTCRealTimeScaleMetricData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopMCUMixTranscode", async function () {
+    try {
+       const data = await client.StopMCUMixTranscode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -432,20 +432,6 @@ export interface CarInvoiceOCRRequest {
 }
 
 /**
- * 识别结果
- */
-export interface TextDetectionResult {
-  /**
-   * 识别出的文本行内容
-   */
-  Value?: string
-  /**
-   * 坐标，以四个顶点坐标表示
-   */
-  Polygon?: Array<Coord>
-}
-
-/**
  * 混贴票据单张发票识别信息
  */
 export interface MixedInvoiceItem {
@@ -627,31 +613,6 @@ export interface FlightInvoiceOCRRequest {
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
-}
-
-/**
- * RecognizePhilippinesDrivingLicenseOCR请求参数结构体
- */
-export interface RecognizePhilippinesDrivingLicenseOCRRequest {
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage?: boolean
 }
 
 /**
@@ -1327,19 +1288,21 @@ export interface LicensePlateInfo {
 }
 
 /**
- * RideHailingTransportLicenseOCR请求参数结构体
+ * 混贴票据中单张发票的内容
  */
-export interface RideHailingTransportLicenseOCRRequest {
+export interface SingleInvoiceInfo {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 识别出的字段名称
    */
-  ImageBase64?: string
+  Name?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
    */
-  ImageUrl?: string
+  Value?: string
+  /**
+   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
+   */
+  Row?: number
 }
 
 /**
@@ -1619,38 +1582,6 @@ export interface RecognizeKoreanDrivingLicenseOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RecognizeIndonesiaIDCardOCR请求参数结构体
- */
-export interface RecognizeIndonesiaIDCardOCRRequest {
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage?: boolean
-  /**
-   * 场景参数，默认值为V1
-可选值：
-V1
-V2
-   */
-  Scene?: string
 }
 
 /**
@@ -2550,40 +2481,6 @@ export interface TrainTicketOCRResponse {
 }
 
 /**
- * RecognizePhilippinesTinIDOCR返回参数结构体
- */
-export interface RecognizePhilippinesTinIDOCRResponse {
-  /**
-   * 人像照片Base64后的结果
-   */
-  HeadPortrait?: TextDetectionResult
-  /**
-   * 编码
-   */
-  LicenseNumber?: TextDetectionResult
-  /**
-   * 姓名
-   */
-  FullName?: TextDetectionResult
-  /**
-   * 地址
-   */
-  Address?: TextDetectionResult
-  /**
-   * 生日
-   */
-  Birthday?: TextDetectionResult
-  /**
-   * 发证日期
-   */
-  IssueDate?: TextDetectionResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 过路过桥费字段信息
  */
 export interface TollInvoiceInfo {
@@ -2812,49 +2709,19 @@ export interface MixedInvoiceDetectResponse {
 }
 
 /**
- * RecognizePhilippinesVoteIDOCR返回参数结构体
+ * RideHailingDriverLicenseOCR请求参数结构体
  */
-export interface RecognizePhilippinesVoteIDOCRResponse {
+export interface RideHailingDriverLicenseOCRRequest {
   /**
-   * 人像照片Base64后的结果
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  HeadPortrait?: TextDetectionResult
+  ImageBase64?: string
   /**
-   * 菲律宾VoteID的VIN
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
-  VIN?: TextDetectionResult
-  /**
-   * 姓名
-   */
-  FirstName?: TextDetectionResult
-  /**
-   * 姓氏
-   */
-  LastName?: TextDetectionResult
-  /**
-   * 出生日期
-   */
-  Birthday?: TextDetectionResult
-  /**
-   * 婚姻状况
-   */
-  CivilStatus?: TextDetectionResult
-  /**
-   * 国籍
-   */
-  Citizenship?: TextDetectionResult
-  /**
-   * 地址
-   */
-  Address?: TextDetectionResult
-  /**
-   * 地区
-   */
-  PrecinctNo?: TextDetectionResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ImageUrl?: string
 }
 
 /**
@@ -3560,28 +3427,34 @@ WARN_DRIVER_LICENSE_BORDER_INCOMPLETE 边框不完整告警
 }
 
 /**
- * RecognizePhilippinesSssIDOCR请求参数结构体
+ * VatInvoiceOCR请求参数结构体
  */
-export interface RecognizePhilippinesSssIDOCRRequest {
+export interface VatInvoiceOCRRequest {
   /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage: boolean
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片/PDF的 Base64 值。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+   * 图片/PDF的 Url 地址。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+  /**
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**
@@ -4499,32 +4372,6 @@ export interface VatInvoiceInfo {
 }
 
 /**
- * RecognizePhilippinesSssIDOCR返回参数结构体
- */
-export interface RecognizePhilippinesSssIDOCRResponse {
-  /**
-   * 人像照片Base64后的结果
-   */
-  HeadPortrait?: TextDetectionResult
-  /**
-   * 编号
-   */
-  LicenseNumber?: TextDetectionResult
-  /**
-   * 姓名
-   */
-  FullName?: TextDetectionResult
-  /**
-   * 生日
-   */
-  Birthday?: TextDetectionResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * TaxiInvoiceOCR请求参数结构体
  */
 export interface TaxiInvoiceOCRRequest {
@@ -4747,24 +4594,6 @@ export interface FinancialBillItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
-}
-
-/**
- * 混贴票据中单张发票的内容
- */
-export interface SingleInvoiceInfo {
-  /**
-   * 识别出的字段名称
-   */
-  Name?: string
-  /**
-   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
-   */
-  Value?: string
-  /**
-   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
-   */
-  Row?: number
 }
 
 /**
@@ -5739,41 +5568,24 @@ export interface CardWarnInfo {
 }
 
 /**
- * RecognizeKoreanIDCardOCR返回参数结构体
+ * VehicleRegCertOCR请求参数结构体
  */
-export interface RecognizeKoreanIDCardOCRResponse {
+export interface VehicleRegCertOCRRequest {
   /**
-   * 身份证号码
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  ID?: string
+  ImageBase64?: string
   /**
-   * 地址
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Address?: string
-  /**
-   * 姓名
-   */
-  Name?: string
-  /**
-   * 发证日期
-   */
-  DateOfIssue?: string
-  /**
-   * 人像截图Base64后的结果
-   */
-  Photo?: string
-  /**
-   * 性别
-   */
-  Sex?: string
-  /**
-   * 生日，格式为dd/mm/yyyy
-   */
-  Birthday?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ImageUrl?: string
 }
 
 /**
@@ -6158,98 +5970,6 @@ export interface TextVehicleBack {
 }
 
 /**
- * RecognizeIndonesiaIDCardOCR返回参数结构体
- */
-export interface RecognizeIndonesiaIDCardOCRResponse {
-  /**
-   * 证件号码
-   */
-  NIK?: string
-  /**
-   * 姓名
-   */
-  Nama?: string
-  /**
-   * 出生地/出生时间
-   */
-  TempatTglLahir?: string
-  /**
-   * 性别
-   */
-  JenisKelamin?: string
-  /**
-   * 血型
-   */
-  GolDarah?: string
-  /**
-   * 地址
-   */
-  Alamat?: string
-  /**
-   * 街道
-   */
-  RTRW?: string
-  /**
-   * 村
-   */
-  KelDesa?: string
-  /**
-   * 地区
-   */
-  Kecamatan?: string
-  /**
-   * 宗教信仰
-   */
-  Agama?: string
-  /**
-   * 婚姻状况
-   */
-  StatusPerkawinan?: string
-  /**
-   * 职业
-   */
-  Perkerjaan?: string
-  /**
-   * 国籍
-   */
-  KewargaNegaraan?: string
-  /**
-   * 身份证有效期限
-   */
-  BerlakuHingga?: string
-  /**
-   * 发证日期
-   */
-  IssuedDate?: string
-  /**
-   * 人像截图
-   */
-  Photo?: string
-  /**
-   * 省份，Scene为V2时支持识别
-   */
-  Provinsi?: string
-  /**
-   * 城市，Scene为V2时支持识别
-   */
-  Kota?: string
-  /**
-   * 告警码
--9101 证件边框不完整告警
--9102 证件复印件告警
--9103 证件翻拍告警
--9107 证件反光告警
--9108 证件模糊告警
--9109 告警能力未开通
-   */
-  WarnCardInfos?: Array<number | bigint>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ReconstructDocument返回参数结构体
  */
 export interface ReconstructDocumentResponse {
@@ -6290,48 +6010,6 @@ export interface GeneralEfficientOCRRequest {
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
-}
-
-/**
- * RecognizePhilippinesUMIDOCR返回参数结构体
- */
-export interface RecognizePhilippinesUMIDOCRResponse {
-  /**
-   * 姓
-   */
-  Surname?: TextDetectionResult
-  /**
-   * 中间名
-   */
-  MiddleName?: TextDetectionResult
-  /**
-   * 名
-   */
-  GivenName?: TextDetectionResult
-  /**
-   * 地址
-   */
-  Address?: TextDetectionResult
-  /**
-   * 生日
-   */
-  Birthday?: TextDetectionResult
-  /**
-   * crn码
-   */
-  CRN?: TextDetectionResult
-  /**
-   * 性别
-   */
-  Sex?: TextDetectionResult
-  /**
-   * 人像照片Base64后的结果
-   */
-  HeadPortrait?: TextDetectionResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7268,22 +6946,6 @@ export interface FinanBillSliceInfo {
 }
 
 /**
- * RideHailingDriverLicenseOCR请求参数结构体
- */
-export interface RideHailingDriverLicenseOCRRequest {
-  /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
-   */
-  ImageUrl?: string
-}
-
-/**
  * 敏感数据加密
  */
 export interface Encryption {
@@ -8063,31 +7725,6 @@ export interface TextGeneralHandwriting {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WordPolygon: Array<Polygon>
-}
-
-/**
- * RecognizePhilippinesVoteIDOCR请求参数结构体
- */
-export interface RecognizePhilippinesVoteIDOCRRequest {
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage: boolean
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
 }
 
 /**
@@ -10411,27 +10048,6 @@ export interface TableOCRResponse {
 }
 
 /**
- * VehicleRegCertOCR请求参数结构体
- */
-export interface VehicleRegCertOCRRequest {
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-}
-
-/**
  * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。
  */
 export interface DetectedWordCoordPoint {
@@ -10453,31 +10069,6 @@ export interface QuestionBlockObj {
    * 题目主体区域检测框在图片中的像素坐标
    */
   QuestionBboxCoord: Rect
-}
-
-/**
- * RecognizeKoreanIDCardOCR请求参数结构体
- */
-export interface RecognizeKoreanIDCardOCRRequest {
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage?: boolean
 }
 
 /**
@@ -10719,52 +10310,19 @@ export interface VinOCRRequest {
 }
 
 /**
- * VatInvoiceOCR请求参数结构体
+ * RideHailingTransportLicenseOCR请求参数结构体
  */
-export interface VatInvoiceOCRRequest {
+export interface RideHailingTransportLicenseOCRRequest {
   /**
-   * 图片/PDF的 Base64 值。
-支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。
-支持的图片像素：需介于20-10000px之间。
-输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
   ImageBase64?: string
   /**
-   * 图片/PDF的 Url 地址。
-支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。
-支持的图片像素：需介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
-  /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
-}
-
-/**
- * RecognizePhilippinesUMIDOCR请求参数结构体
- */
-export interface RecognizePhilippinesUMIDOCRRequest {
-  /**
-   * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage?: boolean
 }
 
 /**
@@ -10840,31 +10398,6 @@ MyKid 儿童卡
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RecognizePhilippinesTinIDOCR请求参数结构体
- */
-export interface RecognizePhilippinesTinIDOCRRequest {
-  /**
-   * 是否返回人像照片。
-   */
-  ReturnHeadImage: boolean
-  /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
 }
 
 /**
@@ -11270,64 +10803,6 @@ API 3.0 Explorer 设置方式参考：
 Config = {"RetImageType":"PROPROCESS"}
    */
   Config?: string
-}
-
-/**
- * RecognizePhilippinesDrivingLicenseOCR返回参数结构体
- */
-export interface RecognizePhilippinesDrivingLicenseOCRResponse {
-  /**
-   * 人像照片Base64后的结果
-   */
-  HeadPortrait?: TextDetectionResult
-  /**
-   * 姓名
-   */
-  Name?: TextDetectionResult
-  /**
-   * 姓氏
-   */
-  LastName?: TextDetectionResult
-  /**
-   * 首姓名
-   */
-  FirstName?: TextDetectionResult
-  /**
-   * 中间姓名
-   */
-  MiddleName?: TextDetectionResult
-  /**
-   * 国籍
-   */
-  Nationality?: TextDetectionResult
-  /**
-   * 性别
-   */
-  Sex?: TextDetectionResult
-  /**
-   * 地址
-   */
-  Address?: TextDetectionResult
-  /**
-   * 证号
-   */
-  LicenseNo?: TextDetectionResult
-  /**
-   * 有效期
-   */
-  ExpiresDate?: TextDetectionResult
-  /**
-   * 机构代码
-   */
-  AgencyCode?: TextDetectionResult
-  /**
-   * 出生日期
-   */
-  Birthday?: TextDetectionResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

@@ -58,16 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyEmbedInterval", req, cb);
     }
     /**
-     * 创建云数据库
+     * 页面截图导出
      */
-    async CreateDatasourceCloud(req, cb) {
-        return this.request("CreateDatasourceCloud", req, cb);
+    async ExportScreenPage(req, cb) {
+        return this.request("ExportScreenPage", req, cb);
     }
     /**
      * 修改用户角色信息
      */
     async ModifyUserRole(req, cb) {
         return this.request("ModifyUserRole", req, cb);
+    }
+    /**
+     * 创建云数据库
+     */
+    async CreateDatasourceCloud(req, cb) {
+        return this.request("CreateDatasourceCloud", req, cb);
     }
     /**
      * 创建嵌出报表-强鉴权
@@ -104,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUserRoleList(req, cb) {
         return this.request("DescribeUserRoleList", req, cb);
+    }
+    /**
+     * 查询页面组件信息
+     */
+    async DescribePageWidgetList(req, cb) {
+        return this.request("DescribePageWidgetList", req, cb);
     }
     /**
      * 项目内-用户角色列表

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListConfigRules", req, cb);
     }
     /**
+     * 获取资源列表
+     */
+    async ListDiscoveredResources(req, cb) {
+        return this.request("ListDiscoveredResources", req, cb);
+    }
+    /**
      * 账号组获取规则列表
      */
     async ListAggregateConfigRules(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PutEvaluations(req, cb) {
         return this.request("PutEvaluations", req, cb);
+    }
+    /**
+     * 资源详情
+     */
+    async DescribeDiscoveredResource(req, cb) {
+        return this.request("DescribeDiscoveredResource", req, cb);
     }
 }
 exports.Client = Client;

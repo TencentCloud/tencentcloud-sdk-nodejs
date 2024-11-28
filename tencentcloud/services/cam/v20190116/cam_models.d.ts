@@ -95,46 +95,46 @@ export interface Receiver {
     /**
      * id
      */
-    Uid: number;
+    Uid?: number;
     /**
      * 名字
      */
-    Name: string;
+    Name?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 手机号码
      */
-    PhoneNumber: string;
+    PhoneNumber?: string;
     /**
      * 手机号码是否验证
      */
-    PhoneFlag: number;
+    PhoneFlag?: number;
     /**
      * 邮箱
      */
-    Email: string;
+    Email?: string;
     /**
      * 邮箱是否验证
      */
-    EmailFlag: number;
+    EmailFlag?: number;
     /**
      * 是否主联系人
      */
-    IsReceiverOwner: number;
+    IsReceiverOwner?: number;
     /**
      * 是否允许微信接收通知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WechatFlag: number;
+    WechatFlag?: number;
     /**
      * 账号uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: number;
+    Uin?: number;
 }
 /**
  * ListAccessKeys请求参数结构体
@@ -205,11 +205,11 @@ export interface DescribeRoleListResponse {
      * 角色详情列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<RoleInfo>;
+    List?: Array<RoleInfo>;
     /**
      * 角色总数
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -467,7 +467,7 @@ export interface ListUsersResponse {
     /**
      * 子用户信息
      */
-    Data: Array<SubAccountInfo>;
+    Data?: Array<SubAccountInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -943,7 +943,7 @@ export interface ListPoliciesResponse {
     /**
      * 策略总数
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中：
   policyId：策略 id
@@ -956,12 +956,12 @@ export interface ListPoliciesResponse {
   ServiceType: 策略关联的产品
   IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
      */
-    List: Array<StrategyInfo>;
+    List?: Array<StrategyInfo>;
     /**
      * 保留字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceTypeList: Array<string>;
+    ServiceTypeList?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1203,19 +1203,19 @@ export interface DescribeSafeAuthFlagResponse {
     /**
      * 登录保护设置
      */
-    LoginFlag: LoginActionFlag;
+    LoginFlag?: LoginActionFlag;
     /**
      * 敏感操作保护设置
      */
-    ActionFlag: LoginActionFlag;
+    ActionFlag?: LoginActionFlag;
     /**
      * 异地登录保护设置
      */
-    OffsiteFlag: OffsiteFlag;
+    OffsiteFlag?: OffsiteFlag;
     /**
-     * 1: 提示7天信任设备 0: 不提示
+     * 是否提示信任设备：1: 提示  0: 不提示
      */
-    PromptTrust: number;
+    PromptTrust?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2874,15 +2874,15 @@ export interface DescribeSafeAuthFlagIntlResponse {
     /**
      * 登录保护设置
      */
-    LoginFlag: LoginActionFlagIntl;
+    LoginFlag?: LoginActionFlagIntl;
     /**
      * 敏感操作保护设置
      */
-    ActionFlag: LoginActionFlagIntl;
+    ActionFlag?: LoginActionFlagIntl;
     /**
      * 异地登录保护设置
      */
-    OffsiteFlag: OffsiteFlag;
+    OffsiteFlag?: OffsiteFlag;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3161,7 +3161,7 @@ export interface GetRoleResponse {
     /**
      * 角色详情
      */
-    RoleInfo: RoleInfo;
+    RoleInfo?: RoleInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3458,12 +3458,12 @@ export interface ListEntitiesForPolicyResponse {
      * 实体总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 实体列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<AttachEntityOfPolicy>;
+    List?: Array<AttachEntityOfPolicy>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

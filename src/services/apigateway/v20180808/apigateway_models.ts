@@ -46,6 +46,72 @@ export interface UnBindSubDomainResponse {
 }
 
 /**
+ * 后端通道详细信息
+ */
+export interface UpstreamInfo {
+  /**
+   * 后端通道唯一ID
+   */
+  UpstreamId: string
+  /**
+   * 后端通道名字
+   */
+  UpstreamName: string
+  /**
+   * 后端通道描述
+   */
+  UpstreamDescription: string
+  /**
+   * 后端协议，取值范围：HTTP, HTTPS
+   */
+  Scheme: string
+  /**
+   * 负载均衡算法，取值范围：ROUND_ROBIN
+   */
+  Algorithm: string
+  /**
+   * VPC唯一ID
+   */
+  UniqVpcId: string
+  /**
+   * 请求重试次数
+   */
+  Retries: number
+  /**
+   * 后端节点
+   */
+  Nodes: Array<UpstreamNode>
+  /**
+   * 创建时间
+   */
+  CreatedTime: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<Tag>
+  /**
+   * 健康检查配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthChecker: UpstreamHealthChecker
+  /**
+   * 后端的类型，取值范围：IP_PORT, K8S
+   */
+  UpstreamType: string
+  /**
+   * K8S容器服务配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  K8sServices: Array<K8sService>
+  /**
+   * 网关转发给后端的Host请求头
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamHost: string
+}
+
+/**
  * UpdateApiKey请求参数结构体
  */
 export interface UpdateApiKeyRequest {
@@ -991,6 +1057,16 @@ export interface DescribeUsagePlansStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 专享网络配置
+ */
+export interface InstanceNetworkConfig {
+  /**
+   * 公网带宽
+   */
+  InternetMaxBandwidthOut: number
 }
 
 /**
@@ -2316,14 +2392,13 @@ export interface ServiceReleaseHistory {
 }
 
 /**
- * ModifyUsagePlan返回参数结构体
+ * DescribeUpstreamBindApis返回参数结构体
  */
-export interface ModifyUsagePlanResponse {
+export interface DescribeUpstreamBindApisResponse {
   /**
-   * 使用计划详情。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询结果
    */
-  Result: UsagePlanInfo
+  Result: DescribeUpstreamBindApis
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2436,69 +2511,17 @@ export interface DeleteApiKeyResponse {
 }
 
 /**
- * 后端通道详细信息
+ * 环境限流
  */
-export interface UpstreamInfo {
+export interface EnvironmentStrategy {
   /**
-   * 后端通道唯一ID
+   * 环境名
    */
-  UpstreamId: string
+  EnvironmentName: string
   /**
-   * 后端通道名字
+   * 限流值
    */
-  UpstreamName: string
-  /**
-   * 后端通道描述
-   */
-  UpstreamDescription: string
-  /**
-   * 后端协议，取值范围：HTTP, HTTPS
-   */
-  Scheme: string
-  /**
-   * 负载均衡算法，取值范围：ROUND_ROBIN
-   */
-  Algorithm: string
-  /**
-   * VPC唯一ID
-   */
-  UniqVpcId: string
-  /**
-   * 请求重试次数
-   */
-  Retries: number
-  /**
-   * 后端节点
-   */
-  Nodes: Array<UpstreamNode>
-  /**
-   * 创建时间
-   */
-  CreatedTime: string
-  /**
-   * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags: Array<Tag>
-  /**
-   * 健康检查配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HealthChecker: UpstreamHealthChecker
-  /**
-   * 后端的类型，取值范围：IP_PORT, K8S
-   */
-  UpstreamType: string
-  /**
-   * K8S容器服务配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  K8sServices: Array<K8sService>
-  /**
-   * 网关转发给后端的Host请求头
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpstreamHost: string
+  Quota: number
 }
 
 /**
@@ -4022,13 +4045,9 @@ export interface DescribeServiceEnvironmentStrategyRequest {
 }
 
 /**
- * DescribeUpstreamBindApis返回参数结构体
+ * DescribeInstancesNetworkConfig返回参数结构体
  */
-export interface DescribeUpstreamBindApisResponse {
-  /**
-   * 查询结果
-   */
-  Result: DescribeUpstreamBindApis
+export interface DescribeInstancesNetworkConfigResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4685,17 +4704,59 @@ export interface InstanceInfo {
 }
 
 /**
- * DeleteApi请求参数结构体
+ * CreateExclusiveInstances请求参数结构体
  */
-export interface DeleteApiRequest {
+export interface CreateExclusiveInstancesRequest {
   /**
-   * API 所在的服务唯一 ID。
+   * 可用区
    */
-  ServiceId: string
+  Zones: Array<string>
   /**
-   * API 接口唯一 ID。
+   * 实例类型：     
+basic：            基础版
+professional： 专业版
+enterprise：     企业版
+platium：         铂金版
+diamond：       钻石版
    */
-  ApiId: string
+  InstanceType: string
+  /**
+   * 网络配置
+   */
+  NetworkConfig: InstanceNetworkConfig
+  /**
+   * VPC配置
+   */
+  VpcConfig: VpcConfig
+  /**
+   * 付费类型：
+POSTPAID：后付费
+PREPAID： 预付费
+   */
+  PayMode: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 实例描述
+   */
+  InstanceDescription?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 预付费付费时长：单位是月
+   */
+  Period?: number
+  /**
+   * 预付费续费标志：
+NOTIFY_AND_MANUAL_RENEW 手动续费
+NOTIFY_AND_AUTO_RENEW 自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW 不续费
+   */
+  AutoRenewFlag?: string
 }
 
 /**
@@ -4879,6 +4940,20 @@ export interface CreateApiKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteApi请求参数结构体
+ */
+export interface DeleteApiRequest {
+  /**
+   * API 所在的服务唯一 ID。
+   */
+  ServiceId: string
+  /**
+   * API 接口唯一 ID。
+   */
+  ApiId: string
 }
 
 /**
@@ -5862,6 +5937,21 @@ export interface PluginSummary {
 }
 
 /**
+ * ModifyUsagePlan返回参数结构体
+ */
+export interface ModifyUsagePlanResponse {
+  /**
+   * 使用计划详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result: UsagePlanInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 应用信息
  */
 export interface ApiAppInfo {
@@ -6205,17 +6295,19 @@ export interface DescribeApiForApiAppResponse {
 }
 
 /**
- * 环境限流
+ * DescribeInstancesNetworkConfig请求参数结构体
  */
-export interface EnvironmentStrategy {
+export interface DescribeInstancesNetworkConfigRequest {
   /**
-   * 环境名
+   * 返回数量，默认为 20，最大值为 100。
+
    */
-  EnvironmentName: string
+  Limit?: number
   /**
-   * 限流值
+   * 偏移量，默认为 0。
+
    */
-  Quota: number
+  Offset?: number
 }
 
 /**
@@ -6844,6 +6936,20 @@ export interface ApiKeysStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiKeySet: Array<ApiKey>
+}
+
+/**
+ * CreateExclusiveInstances返回参数结构体
+ */
+export interface CreateExclusiveInstancesResponse {
+  /**
+   * 实例ID
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

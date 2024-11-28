@@ -68,9 +68,9 @@ it("bi.v20220105.ApplyEmbedInterval", async function () {
     }
 })
 
-it("bi.v20220105.CreateDatasourceCloud", async function () {
+it("bi.v20220105.ExportScreenPage", async function () {
     try {
-       const data = await client.CreateDatasourceCloud({})
+       const data = await client.ExportScreenPage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +81,16 @@ it("bi.v20220105.CreateDatasourceCloud", async function () {
 it("bi.v20220105.ModifyUserRole", async function () {
     try {
        const data = await client.ModifyUserRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.CreateDatasourceCloud", async function () {
+    try {
+       const data = await client.CreateDatasourceCloud({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +151,16 @@ it("bi.v20220105.ModifyProject", async function () {
 it("bi.v20220105.DescribeUserRoleList", async function () {
     try {
        const data = await client.DescribeUserRoleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribePageWidgetList", async function () {
+    try {
+       const data = await client.DescribePageWidgetList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

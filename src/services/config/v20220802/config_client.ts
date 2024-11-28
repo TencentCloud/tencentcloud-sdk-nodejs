@@ -18,18 +18,24 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ResourceListInfo,
+  ListAggregateConfigRulesRequest,
   ConfigRule,
   Tag,
   ListConfigRulesResponse,
+  DescribeDiscoveredResourceResponse,
+  ListAggregateConfigRulesResponse,
   InputParameterForManage,
   ListConfigRulesRequest,
   SourceConditionForManage,
   TriggerType,
   PutEvaluationsRequest,
-  ListAggregateConfigRulesRequest,
-  ListAggregateConfigRulesResponse,
-  PutEvaluationsResponse,
+  Filter,
+  DescribeDiscoveredResourceRequest,
+  ListDiscoveredResourcesResponse,
+  ListDiscoveredResourcesRequest,
   InputParameter,
+  PutEvaluationsResponse,
   Evaluation,
   Annotation,
 } from "./config_models"
@@ -54,6 +60,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资源列表
+   */
+  async ListDiscoveredResources(
+    req: ListDiscoveredResourcesRequest,
+    cb?: (error: string, rep: ListDiscoveredResourcesResponse) => void
+  ): Promise<ListDiscoveredResourcesResponse> {
+    return this.request("ListDiscoveredResources", req, cb)
+  }
+
+  /**
    * 账号组获取规则列表
    */
   async ListAggregateConfigRules(
@@ -71,5 +87,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PutEvaluationsResponse) => void
   ): Promise<PutEvaluationsResponse> {
     return this.request("PutEvaluations", req, cb)
+  }
+
+  /**
+   * 资源详情
+   */
+  async DescribeDiscoveredResource(
+    req: DescribeDiscoveredResourceRequest,
+    cb?: (error: string, rep: DescribeDiscoveredResourceResponse) => void
+  ): Promise<DescribeDiscoveredResourceResponse> {
+    return this.request("DescribeDiscoveredResource", req, cb)
   }
 }

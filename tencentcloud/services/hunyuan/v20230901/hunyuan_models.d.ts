@@ -3,7 +3,7 @@
  */
 export interface ChatCompletionsRequest {
     /**
-     * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest、 hunyuan-large。
+     * 模型名称，可选值包括 hunyuan-lite、hunyuan-standard、hunyuan-standard-256K、hunyuan-pro、 hunyuan-code、 hunyuan-role、 hunyuan-functioncall、 hunyuan-vision、 hunyuan-turbo、 hunyuan-turbo-latest、 hunyuan-large、 hunyuan-large-longcontext、 hunyuan-turbo-vision。
   各模型介绍请阅读 [产品概述](https://cloud.tencent.com/document/product/1729/104753) 中的说明。
   
   注意：
@@ -1497,7 +1497,7 @@ export interface Message {
      */
     Content?: string;
     /**
-     * 多种类型内容（目前支持图片和文本），仅 hunyuan-vision 模型支持
+     * 多种类型内容（目前支持图片和文本），仅 hunyuan-vision 和 hunyuan-turbo-vision 模型支持
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Contents?: Array<Content>;

@@ -56,6 +56,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrtcUsage", req, cb);
     }
     /**
+     * 接口说明：
+启动终端审核功能，完成房间内的音频审核。
+     */
+    async CreateBasicModeration(req, cb) {
+        return this.request("CreateBasicModeration", req, cb);
+    }
+    /**
      * 停止AI对话任务
      */
     async StopAIConversation(req, cb) {
@@ -219,10 +226,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("RemoveUser", req, cb);
     }
     /**
-     * 接口说明：结束云端混流
+     * 成功开启审核任务后，可以使用此接口来停止任务。
      */
-    async StopMCUMixTranscode(req, cb) {
-        return this.request("StopMCUMixTranscode", req, cb);
+    async DeleteBasicModeration(req, cb) {
+        return this.request("DeleteBasicModeration", req, cb);
     }
     /**
      * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
@@ -529,6 +536,12 @@ xa0
      */
     async DescribeTRTCRealTimeScaleMetricData(req, cb) {
         return this.request("DescribeTRTCRealTimeScaleMetricData", req, cb);
+    }
+    /**
+     * 接口说明：结束云端混流
+     */
+    async StopMCUMixTranscode(req, cb) {
+        return this.request("StopMCUMixTranscode", req, cb);
     }
 }
 exports.Client = Client;

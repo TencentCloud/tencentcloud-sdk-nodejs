@@ -1,4 +1,100 @@
 /**
+ * 资源列列表信息
+ */
+export interface ResourceListInfo {
+    /**
+     * 资源类型
+     */
+    ResourceType: string;
+    /**
+     * 资源名称
+     */
+    ResourceName: string;
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceRegion: string;
+    /**
+     * 资源状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceStatus: string;
+    /**
+     * 1 :已删除 2：未删除
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceDelete: number;
+    /**
+     * 资源创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceCreateTime: string;
+    /**
+     * 标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tag>;
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceZone: string;
+    /**
+     * 合规状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComplianceResult: string;
+}
+/**
+ * ListAggregateConfigRules请求参数结构体
+ */
+export interface ListAggregateConfigRulesRequest {
+    /**
+     * 每页限制
+     */
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 账号组ID
+     */
+    AccountGroupId: string;
+    /**
+     * 排序类型, 倒序：desc，顺序：asc
+     */
+    OrderType?: string;
+    /**
+     * 风险等级
+  1：高风险。
+  2：中风险。
+  3：低风险。
+     */
+    RiskLevel?: Array<number | bigint>;
+    /**
+     * 规则状态
+     */
+    State?: string;
+    /**
+     * 评估结果
+     */
+    ComplianceResult?: Array<string>;
+    /**
+     * 规则名
+     */
+    RuleName?: string;
+    /**
+     * 规则所属账号ID
+     */
+    RuleOwnerId?: number;
+}
+/**
  * 规则详情
  */
 export interface ConfigRule {
@@ -184,6 +280,77 @@ export interface ListConfigRulesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDiscoveredResource返回参数结构体
+ */
+export interface DescribeDiscoveredResourceResponse {
+    /**
+     * 资源Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId?: string;
+    /**
+     * 资源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType?: string;
+    /**
+     * 资源名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceName?: string;
+    /**
+     * 资源地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceRegion?: string;
+    /**
+     * 资源可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceZone?: string;
+    /**
+     * 资源配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Configuration?: string;
+    /**
+     * 资源创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceCreateTime?: string;
+    /**
+     * 资源标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 资源更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ListAggregateConfigRules返回参数结构体
+ */
+export interface ListAggregateConfigRulesResponse {
+    /**
+     * 总数
+     */
+    Total?: number;
+    /**
+     * 详情
+     */
+    Items?: Array<ConfigRule>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 规则入参
  */
 export interface InputParameterForManage {
@@ -307,74 +474,77 @@ export interface PutEvaluationsRequest {
     Evaluations: Array<Evaluation>;
 }
 /**
- * ListAggregateConfigRules请求参数结构体
+ * 资源列表筛选
  */
-export interface ListAggregateConfigRulesRequest {
+export interface Filter {
     /**
-     * 每页限制
+     * 查询字段名称 资源名称：resourceName  资源ID：resourceId 资源类型：resourceType 资源地域：resourceRegion    删除状态：resourceDelete 0未删除，1已删除  resourceRegionAndZone地域/可用区
      */
-    Limit: number;
+    Name?: string;
     /**
-     * 偏移量
+     * 查询字段值
      */
-    Offset: number;
-    /**
-     * 账号组ID
-     */
-    AccountGroupId: string;
-    /**
-     * 排序类型, 倒序：desc，顺序：asc
-     */
-    OrderType?: string;
-    /**
-     * 风险等级
-  1：高风险。
-  2：中风险。
-  3：低风险。
-     */
-    RiskLevel?: Array<number | bigint>;
-    /**
-     * 规则状态
-     */
-    State?: string;
-    /**
-     * 评估结果
-     */
-    ComplianceResult?: Array<string>;
-    /**
-     * 规则名
-     */
-    RuleName?: string;
-    /**
-     * 规则所属账号ID
-     */
-    RuleOwnerId?: number;
+    Values?: Array<string>;
 }
 /**
- * ListAggregateConfigRules返回参数结构体
+ * DescribeDiscoveredResource请求参数结构体
  */
-export interface ListAggregateConfigRulesResponse {
+export interface DescribeDiscoveredResourceRequest {
     /**
-     * 总数
+     * 资源ID
      */
-    Total?: number;
+    ResourceId: string;
+    /**
+     * 资源类型
+     */
+    ResourceType: string;
+    /**
+     * 资源地域
+     */
+    ResourceRegion: string;
+}
+/**
+ * ListDiscoveredResources返回参数结构体
+ */
+export interface ListDiscoveredResourcesResponse {
     /**
      * 详情
      */
-    Items?: Array<ConfigRule>;
+    Items: Array<ResourceListInfo>;
+    /**
+     * 下一页
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NextToken: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * PutEvaluations返回参数结构体
+ * ListDiscoveredResources请求参数结构体
  */
-export interface PutEvaluationsResponse {
+export interface ListDiscoveredResourcesRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 每页显示数量
      */
-    RequestId?: string;
+    MaxResults: number;
+    /**
+     * resourceName：资源名  resourceId ：资源ID
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 标签
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 下一页token
+     */
+    NextToken?: string;
+    /**
+     * 排序方式 asc、desc
+     */
+    OrderType?: string;
 }
 /**
  * 参数值
@@ -393,6 +563,15 @@ export interface InputParameter {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
+}
+/**
+ * PutEvaluations返回参数结构体
+ */
+export interface PutEvaluationsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 自定义规则评估结果

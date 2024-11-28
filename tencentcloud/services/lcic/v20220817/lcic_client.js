@@ -368,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EndRoom", req, cb);
     }
     /**
+     * 设置跑马灯参数设置
+     */
+    async SetMarquee(req, cb) {
+        return this.request("SetMarquee", req, cb);
+    }
+    /**
      * 获取房间列表
      */
     async GetRooms(req, cb) {
@@ -402,6 +408,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateGroupWithSubGroup(req, cb) {
         return this.request("CreateGroupWithSubGroup", req, cb);
+    }
+    /**
+     * 查询跑马灯配置
+     */
+    async DescribeMarquee(req, cb) {
+        return this.request("DescribeMarquee", req, cb);
     }
     /**
      * 此接口用于批量创建群组

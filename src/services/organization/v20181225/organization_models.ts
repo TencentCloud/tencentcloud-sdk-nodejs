@@ -69,19 +69,19 @@ export interface OrgMember {
   /**
    * UIN
    */
-  Uin: number
+  Uin?: number
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 加入时间
    */
-  JoinTime: string
+  JoinTime?: string
 }
 
 /**
@@ -310,47 +310,47 @@ export interface OrgInvitation {
   /**
    * 邀请ID
    */
-  Id: number
+  Id?: number
   /**
    * 被邀请UIN
    */
-  Uin: number
+  Uin?: number
   /**
    * 创建者UIN
    */
-  HostUin: number
+  HostUin?: number
   /**
    * 创建者名称
    */
-  HostName: string
+  HostName?: string
   /**
    * 创建者邮箱
    */
-  HostMail: string
+  HostMail?: string
   /**
    * 邀请状态。-1：已过期，0：正常，1：已接受，2：已失效，3：已取消
    */
-  Status: number
+  Status?: number
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 企业组织类型
    */
-  OrgType: number
+  OrgType?: number
   /**
    * 邀请时间
    */
-  InviteTime: string
+  InviteTime?: string
   /**
    * 过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -611,7 +611,7 @@ export interface ListOrganizationNodesResponse {
   /**
    * 企业组织单元列表
    */
-  Nodes: Array<OrgNode>
+  Nodes?: Array<OrgNode>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -635,17 +635,17 @@ export interface OrgNode {
   /**
    * 组织单元ID
    */
-  NodeId: number
+  NodeId?: number
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 父单元ID
    */
-  ParentNodeId: number
+  ParentNodeId?: number
   /**
    * 成员数量
    */
-  MemberCount: number
+  MemberCount?: number
 }

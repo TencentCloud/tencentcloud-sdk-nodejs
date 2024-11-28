@@ -5,99 +5,99 @@ export interface StatusNode {
     /**
      * 节点id
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * 节点名称
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 节点类型 1:审批节点 2:执行节点 3:条件节点
      */
-    NodeType: number;
+    NodeType?: number;
     /**
      * 下一个节点
      */
-    NextNode: string;
+    NextNode?: string;
     /**
      * 审批意见模型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Opinion: ApproveOpinion;
+    Opinion?: ApproveOpinion;
     /**
      * scf函数名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScfName: string;
+    ScfName?: string;
     /**
      * 状态（0：待审批，1：审批通过，2：拒绝，3：scf执行失败，4：scf执行成功）18: 外部审批中
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubStatus: number;
+    SubStatus?: number;
     /**
      * 审批节点审批人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApprovedUin: Array<number | bigint>;
+    ApprovedUin?: Array<number | bigint>;
     /**
      * 审批时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 审批意见信息 审批节点:审批人意见  执行节点:scf函数执行日志
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Msg: string;
+    Msg?: string;
     /**
      * 有权限审批该节点的uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Users: ApproveUser;
+    Users?: ApproveUser;
     /**
      * 是否有权限审批该节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsApprove: boolean;
+    IsApprove?: boolean;
     /**
      * 审批id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproveId: string;
+    ApproveId?: string;
     /**
      * 审批方式 0或签 1会签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproveMethod: number;
+    ApproveMethod?: number;
     /**
      * 审批节点审批类型，1人工审批 2自动通过 3自动决绝 4外部审批scf
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproveType: number;
+    ApproveType?: number;
     /**
      * 外部审批类型 scf:0或null ; CKafka:1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CallMethod: number;
+    CallMethod?: number;
     /**
      * CKafka - 接入资源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataHubId: string;
+    DataHubId?: string;
     /**
      * CKafka - 任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * CKafka - 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CKafkaRegion: string;
+    CKafkaRegion?: string;
     /**
      * 外部审批Url
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalUrl: string;
+    ExternalUrl?: string;
     /**
      * 并行节点 3-4
   注意：此字段可能返回 null，表示取不到有效值。

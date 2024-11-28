@@ -578,6 +578,16 @@ it("lcic.v20220817.EndRoom", async function () {
     }
 })
 
+it("lcic.v20220817.SetMarquee", async function () {
+    try {
+       const data = await client.SetMarquee({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.GetRooms", async function () {
     try {
        const data = await client.GetRooms({})
@@ -631,6 +641,16 @@ it("lcic.v20220817.StartRecord", async function () {
 it("lcic.v20220817.CreateGroupWithSubGroup", async function () {
     try {
        const data = await client.CreateGroupWithSubGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribeMarquee", async function () {
+    try {
+       const data = await client.DescribeMarquee({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

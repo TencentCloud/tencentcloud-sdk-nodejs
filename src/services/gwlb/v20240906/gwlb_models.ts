@@ -249,7 +249,7 @@ export interface TargetGroupHealthCheck {
    */
   Protocol?: string
   /**
-   * 健康检查端口，探测协议未tcp时，该参数必填。
+   * 健康检查端口，探测协议为tcp时，该参数必填。
 
    */
   Port?: number

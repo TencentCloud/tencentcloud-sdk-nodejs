@@ -236,12 +236,10 @@ export interface UpdatePolicyRequest {
 export interface DescribeShareUnitResourcesResponse {
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 共享单元资源列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ShareUnitResource>;
     /**
@@ -293,47 +291,38 @@ export interface RoleConfiguration {
 export interface DescribeOrganizationMemberEmailBindResponse {
     /**
      * 绑定ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindId?: number;
     /**
      * 申请时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplyTime?: string;
     /**
      * 邮箱地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Email?: string;
     /**
      * 安全手机号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Phone?: string;
     /**
      * 绑定状态。    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindStatus?: string;
     /**
      * 绑定时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindTime?: string;
     /**
      * 失败说明。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 安全手机绑定状态 。 未绑定：0，已绑定：1
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PhoneBind?: number;
     /**
      * 国际区号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CountryCode?: string;
     /**
@@ -485,19 +474,16 @@ export declare type DeleteOrganizationRequest = null;
 export interface TagComplianceDetails {
     /**
      * 合规状态。true-合规，false-不合规
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceStatus: boolean;
+    ComplianceStatus?: boolean;
     /**
      * 值不合规的标签键列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeysWithNonCompliantValues: Array<string>;
+    KeysWithNonCompliantValues?: Array<string>;
     /**
      * 键不合规的标签键列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NonCompliantKeys: Array<string>;
+    NonCompliantKeys?: Array<string>;
 }
 /**
  * RejectJoinShareUnitInvitation请求参数结构体
@@ -612,11 +598,11 @@ export interface CreateOrganizationResponse {
     /**
      * 企业组织ID
      */
-    OrgId: number;
+    OrgId?: number;
     /**
      * 创建者昵称
      */
-    NickName: string;
+    NickName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -673,7 +659,6 @@ export interface AddOrganizationNodeResponse {
 export interface DescribeOrganizationFinancialByMonthResponse {
     /**
      * 产品消耗详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgFinancialByMonth>;
     /**
@@ -961,82 +946,66 @@ export interface DeletePolicyResponse {
 export interface DescribeOrganizationResponse {
     /**
      * 企业组织ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgId?: number;
     /**
      * 创建者UIN。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostUin?: number;
     /**
      * 创建者昵称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NickName?: string;
     /**
      * 企业组织类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgType?: number;
     /**
      * 是否组织管理员。是：true ，否：false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsManager?: boolean;
     /**
      * 策略类型。财务管理：Financial
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPolicyType?: string;
     /**
      * 策略名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPolicyName?: string;
     /**
      * 成员财务权限列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPermission?: Array<OrgPermission>;
     /**
      * 组织根节点ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RootNodeId?: number;
     /**
      * 组织创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 成员加入时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JoinTime?: string;
     /**
      * 成员是否允许退出。允许：Allow，不允许：Denied
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAllowQuit?: string;
     /**
      * 代付者Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayUin?: string;
     /**
      * 代付者名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayName?: string;
     /**
      * 是否可信服务管理员。是：true，否：false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAssignManager?: boolean;
     /**
      * 是否实名主体管理员。是：true，否：false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAuthManager?: boolean;
     /**
@@ -1354,68 +1323,55 @@ export interface GetGroupRequest {
 export interface OrganizationServiceAssign {
     /**
      * 集团服务ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceId?: number;
     /**
      * 集团服务产品名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 是否支持委派。取值: 1-是  2-否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAssign?: number;
     /**
      * 集团服务描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 当前委派管理员数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberNum?: string;
     /**
      * 帮助文档。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Document?: string;
     /**
      * 集团服务产品控制台路径。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConsoleUrl?: string;
     /**
      * 是否接入使用状态。取值: 1-是
    2-否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUsageStatus?: number;
     /**
      * 委派管理员数量限制。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CanAssignCount?: number;
     /**
      * 集团服务产品标识。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Product?: string;
     /**
      * 是否支持集团服务授权。取值 1-是、2-否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceGrant?: number;
     /**
      * 集团服务授权启用状态。ServiceGrant值为1时该字段有效 ，取值：Enabled-开启  Disabled-关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GrantStatus?: string;
     /**
      * 是否支持设置委派管理范围。取值: 1-是  2-否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSetManagementScope?: number;
 }
@@ -1464,12 +1420,10 @@ export interface UpdateCustomPolicyForRoleConfigurationResponse {
 export interface DescribeShareUnitMembersResponse {
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 共享单元成员列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ShareUnitMember>;
     /**
@@ -1483,14 +1437,12 @@ export interface DescribeShareUnitMembersResponse {
 export interface MemberMainInfo {
     /**
      * 成员uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberUin: number;
+    MemberUin?: number;
     /**
-     * 成员名称j
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 成员名称
      */
-    MemberName: string;
+    MemberName?: string;
 }
 /**
  * CreateRoleAssignment请求参数结构体
@@ -1532,14 +1484,12 @@ export interface DeleteShareUnitResourcesRequest {
 export interface MemberIdentity {
     /**
      * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    IdentityId?: number;
     /**
      * 身份名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityAliasName: string;
+    IdentityAliasName?: string;
 }
 /**
  * RejectJoinShareUnitInvitation返回参数结构体
@@ -1657,12 +1607,10 @@ export interface AddPermissionPolicyToRoleConfigurationRequest {
 export interface DescribeOrganizationAuthNodeResponse {
     /**
      * 总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 条目详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<AuthNode>;
     /**
@@ -1724,12 +1672,10 @@ export interface BindOrganizationMemberAuthAccountRequest {
 export interface DescribeShareUnitsResponse {
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 共享单元列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ManagerShareUnit>;
     /**
@@ -1969,7 +1915,6 @@ export interface AddExternalSAMLIdPCertificateResponse {
 export interface CreateOrganizationMemberResponse {
     /**
      * 成员Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: number;
     /**
@@ -2101,19 +2046,16 @@ export interface UpdateOrganizationMemberResponse {
 export interface AuthNode {
     /**
      * 互信主体关系ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelationId: number;
+    RelationId?: number;
     /**
      * 互信主体名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthName: string;
+    AuthName?: string;
     /**
      * 主体管理员
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Manager: MemberMainInfo;
+    Manager?: MemberMainInfo;
 }
 /**
  * DeleteGroup请求参数结构体
@@ -2183,15 +2125,15 @@ export interface EffectivePolicy {
     /**
      * 目标ID。
      */
-    TargetId: number;
+    TargetId?: number;
     /**
      * 有效策略内容。
      */
-    PolicyContent: string;
+    PolicyContent?: string;
     /**
      * 有效策略更新时间。
      */
-    LastUpdatedTimestamp: number;
+    LastUpdatedTimestamp?: number;
 }
 /**
  * 标签键值对
@@ -2567,22 +2509,18 @@ export interface SendOrgMemberAccountBindEmailResponse {
 export interface OrgMemberFinancial {
     /**
      * 成员Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberUin: number;
+    MemberUin?: number;
     /**
      * 成员名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberName: string;
+    MemberName?: string;
     /**
      * 消耗金额，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCost: number;
+    TotalCost?: number;
     /**
      * 占比%。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ratio?: string;
 }
@@ -2750,12 +2688,10 @@ export interface DescribeShareAreasRequest {
 export interface DescribeOrganizationMemberAuthAccountsResponse {
     /**
      * 列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgMemberAuthAccount>;
     /**
      * 总数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -2799,37 +2735,30 @@ export interface RoleAssignmentInfo {
 export interface OrgNode {
     /**
      * 组织节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId?: number;
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 父节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParentNodeId?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 成员标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
 }
@@ -2839,14 +2768,12 @@ export interface OrgNode {
 export interface Tags {
     /**
      * 标签键。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagKey: string;
+    TagKey?: string;
     /**
      * 标签值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagValue: string;
+    TagValue?: string;
 }
 /**
  * ListRoleConfigurationProvisionings请求参数结构体
@@ -2900,32 +2827,26 @@ export interface GetSCIMSynchronizationStatusRequest {
 export interface OrgIdentity {
     /**
      * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityId?: number;
     /**
      * 身份名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityAliasName?: string;
     /**
      * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 身份策略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityPolicy?: Array<IdentityPolicy>;
     /**
      * 身份类型。 1-预设、 2-自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityType?: number;
     /**
      * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
 }
@@ -3344,7 +3265,6 @@ export interface DisablePolicyTypeRequest {
 export interface DescribeEffectivePolicyResponse {
     /**
      * 有效策略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EffectivePolicy?: EffectivePolicy;
     /**
@@ -3614,47 +3534,38 @@ export interface DeleteRoleConfigurationResponse {
 export interface OrganizationServiceAssignMember {
     /**
      * 集团服务ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceId?: number;
     /**
      * 集团服务产品名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 委派管理员Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberUin?: number;
     /**
      * 委派管理员名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberName?: string;
     /**
      * 启用状态 。取值：0-服务无启用状态  1-已启用  2-未启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsageStatus?: number;
     /**
      * 委派时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 委派管理员管理范围。取值: 1-全部成员  2-部分成员
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagementScope?: number;
     /**
      * 管理的成员Uin列表。ManagementScope值为2时该参数有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagementScopeMembers?: Array<MemberMainInfo>;
     /**
      * 管理的部门ID列表。ManagementScope值为2时该参数有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ManagementScopeNodes?: Array<NodeMainInfo>;
 }
@@ -3706,17 +3617,14 @@ export interface DescribeShareUnitResourcesRequest {
 export interface DescribeOrganizationFinancialByProductResponse {
     /**
      * 当月总消耗。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCost?: number;
     /**
      * 产品消耗详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgProductFinancial>;
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -3819,19 +3727,16 @@ export interface ResourceTagMapping {
     /**
      * 资源六段式。腾讯云使用资源六段式描述一个资源。
   例如：qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Resource: string;
+    Resource?: string;
     /**
      * 合规详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceDetails: TagComplianceDetails;
+    ComplianceDetails?: TagComplianceDetails;
     /**
      * 资源标签。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tags>;
+    Tags?: Array<Tags>;
 }
 /**
  * CreateOrganizationMemberPolicy返回参数结构体
@@ -3839,7 +3744,6 @@ export interface ResourceTagMapping {
 export interface CreateOrganizationMemberPolicyResponse {
     /**
      * 策略ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyId?: number;
     /**
@@ -3997,47 +3901,38 @@ export interface OpenIdentityCenterResponse {
 export interface NotAllowReason {
     /**
      * 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsCreateMember?: boolean;
     /**
      * 成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeletionPermission?: boolean;
     /**
      * 是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAssignManager?: boolean;
     /**
      * 是否主体管理员。true-是、false-否；成员是主体管理员不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAuthManager?: boolean;
     /**
      * 是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsShareManager?: boolean;
     /**
      * 成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateProcess?: boolean;
     /**
      * 是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingPermission?: boolean;
     /**
      * 存在的资源列表。账号存在资源时不允许删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExistResources?: Array<string>;
     /**
      * 检测失败的资源列表。账号有资源检测失败时不允许删除。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DetectFailedResources?: Array<string>;
 }
@@ -4092,12 +3987,10 @@ export interface ListUsersRequest {
 export interface DescribeOrganizationMemberAuthIdentitiesResponse {
     /**
      * 授权身份列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgMemberAuthIdentity>;
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -4124,44 +4017,36 @@ export interface CreateRoleAssignmentResponse {
 export interface OrgMemberPolicy {
     /**
      * 策略ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    PolicyId?: number;
     /**
      * 策略名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    IdentityId?: number;
     /**
      * 身份角色名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleName: string;
+    IdentityRoleName?: string;
     /**
      * 身份角色别名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleAliasName: string;
+    IdentityRoleAliasName?: string;
     /**
      * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * CreateUser请求参数结构体
@@ -4324,92 +4209,74 @@ export interface ListPoliciesRequest {
 export interface OrgMember {
     /**
      * 成员Uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberUin?: number;
     /**
      * 成员名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 成员类型，邀请：Invite， 创建：Create
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberType?: string;
     /**
      * 关系策略类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPolicyType?: string;
     /**
      * 关系策略名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPolicyName?: string;
     /**
      * 关系策略权限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgPermission?: Array<OrgPermission>;
     /**
      * 所属节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId?: number;
     /**
      * 所属节点名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeName?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 是否允许成员退出。允许：Allow，不允许：Denied。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAllowQuit?: string;
     /**
      * 代付者Uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayUin?: string;
     /**
      * 代付者名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayName?: string;
     /**
      * 管理身份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrgIdentity?: Array<MemberIdentity>;
     /**
      * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindStatus?: string;
     /**
      * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PermissionStatus?: string;
     /**
      * 成员标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tag>;
 }
@@ -4419,49 +4286,40 @@ export interface OrgMember {
 export interface OrgMemberAuthAccount {
     /**
      * 组织子账号Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgSubAccountUin: number;
+    OrgSubAccountUin?: number;
     /**
      * 策略ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    PolicyId?: number;
     /**
      * 策略名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    IdentityId?: number;
     /**
      * 身份角色名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleName: string;
+    IdentityRoleName?: string;
     /**
      * 身份角色别名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleAliasName: string;
+    IdentityRoleAliasName?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 子账号名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgSubAccountName: string;
+    OrgSubAccountName?: string;
 }
 /**
  * CreateOrganizationMember请求参数结构体
@@ -4518,12 +4376,10 @@ export interface CreateOrganizationMemberRequest {
 export interface AuthRelationFile {
     /**
      * 文件名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 文件路径。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url: string;
 }
@@ -4564,52 +4420,42 @@ export interface CreatePolicyRequest {
 export interface OrgMemberAuthIdentity {
     /**
      * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityId?: number;
     /**
      * 身份的角色名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityRoleName?: string;
     /**
      * 身份的角色别名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityRoleAliasName?: string;
     /**
      * 身份描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 首次配置成功的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 最后一次配置成功的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 身份类型。取值： 1-预设身份  2-自定义身份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityType?: number;
     /**
      * 配置状态。取值：1-配置完成 2-需重新配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 成员Uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberUin?: number;
     /**
      * 成员名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemberName?: string;
 }
@@ -5082,7 +4928,6 @@ export interface UpdateOrganizationMemberRequest {
 export interface CreateOrganizationMembersPolicyResponse {
     /**
      * 策略ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyId?: number;
     /**
@@ -5126,7 +4971,6 @@ export interface AddUserToGroupRequest {
 export interface CreateOrganizationIdentityResponse {
     /**
      * 身份ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityId?: number;
     /**
@@ -5310,7 +5154,6 @@ export interface UpdateOrganizationIdentityResponse {
 export interface DescribeShareAreasResponse {
     /**
      * 详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ShareArea>;
     /**
@@ -5359,12 +5202,10 @@ export interface DeleteUserSyncProvisioningRequest {
 export interface DescribeOrganizationNodesResponse {
     /**
      * 总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 列表详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgNode>;
     /**
@@ -5664,17 +5505,14 @@ export interface DeleteOrganizationNodesResponse {
 export interface DescribeOrganizationFinancialByMemberResponse {
     /**
      * 当月总消耗。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCost?: number;
     /**
      * 成员消耗详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgMemberFinancial>;
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -5766,12 +5604,10 @@ export interface DeleteOrgServiceAssignResponse {
 export interface DescribeOrganizationMemberPoliciesResponse {
     /**
      * 列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgMemberPolicy>;
     /**
      * 总数目。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**

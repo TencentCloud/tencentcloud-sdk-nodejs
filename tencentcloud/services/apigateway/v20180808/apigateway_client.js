@@ -163,6 +163,12 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
         return this.request("DescribeApiApp", req, cb);
     }
     /**
+     * 本接口（ModifyUsagePlan）用于修改使用计划的名称，描述及 QPS。
+     */
+    async ModifyUsagePlan(req, cb) {
+        return this.request("ModifyUsagePlan", req, cb);
+    }
+    /**
      * 查询后端通道列表详情
      */
     async DescribeUpstreams(req, cb) {
@@ -238,10 +244,17 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
         return this.request("UpdateApiAppKey", req, cb);
     }
     /**
-     * 本接口（ModifyUsagePlan）用于修改使用计划的名称，描述及 QPS。
+     * 创建专享实例
      */
-    async ModifyUsagePlan(req, cb) {
-        return this.request("ModifyUsagePlan", req, cb);
+    async CreateExclusiveInstances(req, cb) {
+        return this.request("CreateExclusiveInstances", req, cb);
+    }
+    /**
+     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
+API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
+     */
+    async DescribeServiceSubDomainMappings(req, cb) {
+        return this.request("DescribeServiceSubDomainMappings", req, cb);
     }
     /**
      * 本接口（BindEnvironment）用于绑定使用计划到服务或API。
@@ -350,13 +363,6 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("CreateApi", req, cb);
     }
     /**
-     * 本接口（DescribeServiceSubDomainMappings）用于查询自定义域名的路径映射。
-API 网关可绑定自定义域名到服务，并且可以对自定义域名的路径进行映射，可自定义不同的路径映射到服务中的三个环境，本接口用于查询绑定服务的自定义域名的路径映射列表。
-     */
-    async DescribeServiceSubDomainMappings(req, cb) {
-        return this.request("DescribeServiceSubDomainMappings", req, cb);
-    }
-    /**
      * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
      */
     async DescribeExclusiveInstanceDetail(req, cb) {
@@ -404,6 +410,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async DescribeApiUsagePlan(req, cb) {
         return this.request("DescribeApiUsagePlan", req, cb);
+    }
+    /**
+     * 获取专享实例网络配置列表
+     */
+    async DescribeInstancesNetworkConfig(req, cb) {
+        return this.request("DescribeInstancesNetworkConfig", req, cb);
     }
     /**
      * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表，因为接口名拼写错误，已不推荐使用，请优先使用DescribeIPStrategiesStatus接口。

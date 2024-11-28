@@ -28,6 +28,16 @@ it("config.v20220802.ListConfigRules", async function () {
     }
 })
 
+it("config.v20220802.ListDiscoveredResources", async function () {
+    try {
+       const data = await client.ListDiscoveredResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.ListAggregateConfigRules", async function () {
     try {
        const data = await client.ListAggregateConfigRules({})
@@ -41,6 +51,16 @@ it("config.v20220802.ListAggregateConfigRules", async function () {
 it("config.v20220802.PutEvaluations", async function () {
     try {
        const data = await client.PutEvaluations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.DescribeDiscoveredResource", async function () {
+    try {
+       const data = await client.DescribeDiscoveredResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

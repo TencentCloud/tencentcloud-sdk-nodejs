@@ -58,6 +58,7 @@ import {
   StartRecordResponse,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
+  DescribeMarqueeRequest,
   DescribeGroupResponse,
   SetAppCustomContentResponse,
   UnblockKickedUserRequest,
@@ -86,6 +87,7 @@ import {
   DescribeDocumentResponse,
   DeleteGroupMemberResponse,
   DescribeGroupMemberListResponse,
+  SetMarqueeRequest,
   ForbidSendMsgRequest,
   DescribeRoomForbiddenUserRequest,
   EventInfo,
@@ -144,7 +146,7 @@ import {
   DeleteSupervisorResponse,
   SetWatermarkResponse,
   RoomInfo,
-  ModifyRoomRequest,
+  DescribeMarqueeResponse,
   AnswerInfo,
   DescribeRoomStatisticsRequest,
   CustomMsgContent,
@@ -152,6 +154,7 @@ import {
   LoginOriginIdResponse,
   DescribeQuestionListResponse,
   GetRoomsResponse,
+  SetMarqueeResponse,
   QuestionInfo,
   KickUserFromRoomRequest,
   SetWatermarkRequest,
@@ -177,6 +180,7 @@ import {
   DescribeCurrentMemberListResponse,
   ModifyGroupResponse,
   DescribeGroupListResponse,
+  ModifyRoomRequest,
   CustomRecordInfo,
   DescribeDeveloperResponse,
   TextMsgContent,
@@ -757,6 +761,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置跑马灯参数设置
+   */
+  async SetMarquee(
+    req: SetMarqueeRequest,
+    cb?: (error: string, rep: SetMarqueeResponse) => void
+  ): Promise<SetMarqueeResponse> {
+    return this.request("SetMarquee", req, cb)
+  }
+
+  /**
    * 获取房间列表
    */
   async GetRooms(
@@ -814,6 +828,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateGroupWithSubGroupResponse) => void
   ): Promise<CreateGroupWithSubGroupResponse> {
     return this.request("CreateGroupWithSubGroup", req, cb)
+  }
+
+  /**
+   * 查询跑马灯配置
+   */
+  async DescribeMarquee(
+    req: DescribeMarqueeRequest,
+    cb?: (error: string, rep: DescribeMarqueeResponse) => void
+  ): Promise<DescribeMarqueeResponse> {
+    return this.request("DescribeMarquee", req, cb)
   }
 
   /**

@@ -1004,6 +1004,20 @@ export interface CreateDocumentResponse {
 }
 
 /**
+ * DescribeMarquee请求参数结构体
+ */
+export interface DescribeMarqueeRequest {
+  /**
+   * 学校ID
+   */
+  SdkAppId: number
+  /**
+   * 房间号
+   */
+  RoomId: number
+}
+
+/**
  * DescribeGroup返回参数结构体
  */
 export interface DescribeGroupResponse {
@@ -1705,6 +1719,64 @@ export interface DescribeGroupMemberListResponse {
 }
 
 /**
+ * SetMarquee请求参数结构体
+ */
+export interface SetMarqueeRequest {
+  /**
+   * 学校ID
+   */
+  SdkAppId: number
+  /**
+   * 房间号
+   */
+  RoomId: number
+  /**
+   *  跑马灯类型：1为固定值，2为用户昵称，3为固定值+用户昵称，4为用户ID，5为originId+固定值，6为用户昵称（originId）
+   */
+  MarqueeType: number
+  /**
+   * 显示方式：1为滚动，2为闪烁
+   */
+  DisplayMode: number
+  /**
+   * 固定值内容（当MarqueeType=1或5，则展示固定值内容）
+   */
+  Content?: string
+  /**
+   * 字体大小（数字，像素单位，范围：10到24）。
+   */
+  FontSize?: number
+  /**
+   * 字体粗细：1为粗体，0为细体
+   */
+  FontWeight?: number
+  /**
+   * 字体颜色（十六进制颜色值，例如：#00FF00（绿色））
+   */
+  FontColor?: string
+  /**
+   * 字体透明度（数字，范围 0.0 到 1.0）
+   */
+  FontOpacity?: number
+  /**
+   * 背景颜色（十六进制颜色值，例如：#FFFF00（黄色））
+   */
+  BackgroundColor?: string
+  /**
+   * 背景透明度（数字，范围 0.0 到 1.0）
+   */
+  BackgroundOpacity?: number
+  /**
+   * 跑马灯文字移动/闪烁指定像素所需时间，范围：1-10；数值越小，跑马灯滚动/闪烁速度越快
+   */
+  Duration?: number
+  /**
+   * 跑马灯个数：目前仅支持1或2, 对应显示单排或双排
+   */
+  MarqueeCount?: number
+}
+
+/**
  * ForbidSendMsg请求参数结构体
  */
 export interface ForbidSendMsgRequest {
@@ -2058,11 +2130,11 @@ export interface SetAppCustomContentRequest {
  */
 export interface DescribeUserRequest {
   /**
-   * 用户Id。
+   * 用户id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询。
    */
   UserId?: string
   /**
-   * 客户端用户 id,如果未指定则为用户 id。
+   * 用户在客户系统的Id。支持通过 user_id 或 OriginId 查询用户信息，优先使用 user_id 进行查询（UserId不为空时，OriginId不生效）。
    */
   OriginId?: string
 }
@@ -3079,133 +3151,57 @@ export interface RoomInfo {
 }
 
 /**
- * ModifyRoom请求参数结构体
+ * DescribeMarquee返回参数结构体
  */
-export interface ModifyRoomRequest {
+export interface DescribeMarqueeResponse {
   /**
-   * 房间ID。
+   *  跑马灯类型：1为固定值，2为用户昵称，3为固定值+用户昵称，4为用户ID，5为originId+固定值，6为用户昵称（originId）
    */
-  RoomId: number
+  MarqueeType?: number
   /**
-   * 低代码互动课堂的SdkAppId
+   * 固定值内容（当MarqueeType=1或5，则展示固定值内容）
    */
-  SdkAppId: number
+  Content?: string
   /**
-   * 预定的房间开始时间，unix时间戳（秒）。直播开始后不允许修改。
+   * 字体大小（数字，像素单位，范围：10到24）
    */
-  StartTime?: number
+  FontSize?: number
   /**
-   * 预定的房间结束时间，unix时间戳（秒）。直播开始后不允许修改。
+   * 字体粗细：1为粗体，0为细体
    */
-  EndTime?: number
+  FontWeight?: number
   /**
-   * 老师ID。直播开始后不允许修改。
+   * 字体颜色（十六进制颜色值）
    */
-  TeacherId?: string
+  FontColor?: string
   /**
-   * 房间名称。
+   * 字体透明度（数字，范围 0.0 到 1.0）
    */
-  Name?: string
+  FontOpacity?: number
   /**
-   * 分辨率。可以有如下取值：
-1 标清
-2 高清
-3 全高清
-直播开始后不允许修改。
+   * 背景颜色（十六进制颜色值）
    */
-  Resolution?: number
+  BackgroundColor?: string
   /**
-   * 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
+   * 背景透明度（数字，范围 0.0 到 1.0）
    */
-  MaxMicNumber?: number
+  BackgroundOpacity?: number
   /**
-   * 进入房间时是否自动连麦。可以有以下取值：
-0 不自动连麦（默认值）
-1 自动连麦
-直播开始后不允许修改。
+   * 显示方式：1为滚动，2为闪烁
    */
-  AutoMic?: number
+  DisplayMode?: number
   /**
-   * 高音质模式。可以有以下取值：
-0 不开启高音质（默认值）
-1 开启高音质
-直播开始后不允许修改。
+   * 停留时长（秒，整数，范围 1～10）
    */
-  AudioQuality?: number
+  Duration?: number
   /**
-   * 房间子类型，可以有以下取值：
-videodoc 文档+视频
-video 纯视频
-直播开始后不允许修改。
+   * 跑马灯个数：目前仅支持1或2, 对应显示单排或双排
    */
-  SubType?: string
+  MarqueeCount?: number
   /**
-   * 禁止录制。可以有以下取值：
-0 不禁止录制（默认值）
-1 禁止录制
-直播开始后不允许修改。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DisableRecord?: number
-  /**
-   * 助教Id列表。直播开始后不允许修改。
-   */
-  Assistants?: Array<string>
-  /**
-   * 房间绑定的群组ID。直播开始后不允许修改。
-   */
-  GroupId?: string
-  /**
-   * 打开学生麦克风/摄像头的授权开关。直播开始后不允许修改。
-   */
-  EnableDirectControl?: number
-  /**
-   * 开启专注模式。
-0 收看全部角色音视频(默认)
-1 只看老师和助教
-   */
-  InteractionMode?: number
-  /**
-   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
-   */
-  VideoOrientation?: number
-  /**
-   * 开启课后评分。 0：不开启(默认)  1：开启
-   */
-  IsGradingRequiredPostClass?: number
-  /**
-   * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 （预留参数、暂未开放)
-注：大班课的布局(layout)只有三分屏
-   */
-  RoomType?: number
-  /**
-   * 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
-   */
-  RecordLayout?: number
-  /**
-   * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
-   */
-  EndDelayTime?: number
-  /**
-   * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）。 目前支持从回放直播模式（伪直播）改为常规模式，不支持从常规模式改为回放直播模式（伪直播）
-   */
-  LiveType?: number
-  /**
-   * 伪直播链接
-   */
-  RecordLiveUrl?: string
-  /**
-   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
-   */
-  EnableAutoStart?: number
-  /**
-   * 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。
-   */
-  RecordScene?: string
-  /**
-   * 录制自定义语言，仅recordlayout=9的时候此参数有效
-   * @deprecated
-   */
-  RecordLang?: string
+  RequestId?: string
 }
 
 /**
@@ -3341,6 +3337,16 @@ export interface GetRoomsResponse {
    * 房间列表
    */
   Rooms?: Array<RoomItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetMarquee返回参数结构体
+ */
+export interface SetMarqueeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3834,6 +3840,136 @@ export interface DescribeGroupListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyRoom请求参数结构体
+ */
+export interface ModifyRoomRequest {
+  /**
+   * 房间ID。
+   */
+  RoomId: number
+  /**
+   * 低代码互动课堂的SdkAppId
+   */
+  SdkAppId: number
+  /**
+   * 预定的房间开始时间，unix时间戳（秒）。直播开始后不允许修改。
+   */
+  StartTime?: number
+  /**
+   * 预定的房间结束时间，unix时间戳（秒）。直播开始后不允许修改。
+   */
+  EndTime?: number
+  /**
+   * 老师ID。直播开始后不允许修改。
+   */
+  TeacherId?: string
+  /**
+   * 房间名称。
+   */
+  Name?: string
+  /**
+   * 分辨率。可以有如下取值：
+1 标清
+2 高清
+3 全高清
+直播开始后不允许修改。
+   */
+  Resolution?: number
+  /**
+   * 设置房间/课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
+   */
+  MaxMicNumber?: number
+  /**
+   * 进入房间时是否自动连麦。可以有以下取值：
+0 不自动连麦（默认值）
+1 自动连麦
+直播开始后不允许修改。
+   */
+  AutoMic?: number
+  /**
+   * 高音质模式。可以有以下取值：
+0 不开启高音质（默认值）
+1 开启高音质
+直播开始后不允许修改。
+   */
+  AudioQuality?: number
+  /**
+   * 房间子类型，可以有以下取值：
+videodoc 文档+视频
+video 纯视频
+直播开始后不允许修改。
+   */
+  SubType?: string
+  /**
+   * 禁止录制。可以有以下取值：
+0 不禁止录制（默认值）
+1 禁止录制
+直播开始后不允许修改。
+   */
+  DisableRecord?: number
+  /**
+   * 助教Id列表。直播开始后不允许修改。
+   */
+  Assistants?: Array<string>
+  /**
+   * 房间绑定的群组ID。直播开始后不允许修改。
+   */
+  GroupId?: string
+  /**
+   * 打开学生麦克风/摄像头的授权开关。直播开始后不允许修改。
+   */
+  EnableDirectControl?: number
+  /**
+   * 开启专注模式。
+0 收看全部角色音视频(默认)
+1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
+  /**
+   * 开启课后评分。 0：不开启(默认)  1：开启
+   */
+  IsGradingRequiredPostClass?: number
+  /**
+   * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 （预留参数、暂未开放)
+注：大班课的布局(layout)只有三分屏
+   */
+  RoomType?: number
+  /**
+   * 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
+   */
+  RecordLayout?: number
+  /**
+   * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+   */
+  EndDelayTime?: number
+  /**
+   * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）。 目前支持从回放直播模式（伪直播）改为常规模式，不支持从常规模式改为回放直播模式（伪直播）
+   */
+  LiveType?: number
+  /**
+   * 伪直播链接
+   */
+  RecordLiveUrl?: string
+  /**
+   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+   */
+  EnableAutoStart?: number
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   * @deprecated
+   */
+  RecordLang?: string
 }
 
 /**

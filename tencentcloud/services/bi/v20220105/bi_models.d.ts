@@ -1,4 +1,19 @@
 /**
+ * 页面截图信息
+ */
+export interface PageScreenVO {
+    /**
+     * 截图base64或 url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content?: string;
+    /**
+     * 组件Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WidgetId?: string;
+}
+/**
  * 数据ID
  */
 export interface DataId {
@@ -29,6 +44,35 @@ export interface DescribeUserRoleListResponse {
     Data?: UserRoleListData;
     /**
      * 消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Msg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ExportScreenPage返回参数结构体
+ */
+export interface ExportScreenPageResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
+     * 扩展参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extra?: string;
+    /**
+     * 返回数据结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: PageScreenListVO;
+    /**
+     * 返回消息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Msg?: string;
@@ -307,6 +351,26 @@ export interface ApplyEmbedIntervalRequest {
     Scope?: string;
 }
 /**
+ * 定制化查询
+ */
+export interface ProjectConfigResult {
+    /**
+     * 配置名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModuleId?: string;
+    /**
+     * 配置方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IncludeType?: string;
+    /**
+     * 额外参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: string;
+}
+/**
  * 报表嵌出数据结构-强鉴权
  */
 export interface EmbedTokenInfo {
@@ -409,24 +473,33 @@ export interface EmbedTokenInfo {
     SingleUserMultiToken?: boolean;
 }
 /**
- * 定制化查询
+ * DescribePageWidgetList返回参数结构体
  */
-export interface ProjectConfigResult {
+export interface DescribePageWidgetListResponse {
     /**
-     * 配置名称
+     * 自定义错误信息对象
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModuleId?: string;
+    ErrorInfo?: ErrorInfo;
     /**
-     * 配置方式
+     * 扩展参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IncludeType?: string;
+    Extra?: string;
     /**
-     * 额外参数
+     * 返回数据结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Params?: string;
+    Data?: WidgetListVO;
+    /**
+     * 返回消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Msg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteUserRole返回参数结构体
@@ -456,27 +529,6 @@ export interface DeleteUserRoleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeUserProjectList请求参数结构体
- */
-export interface DescribeUserProjectListRequest {
-    /**
-     * 项目ID
-     */
-    ProjectId?: number;
-    /**
-     * 无
-     */
-    AllPage?: boolean;
-    /**
-     * 无
-     */
-    PageNo?: number;
-    /**
-     * 无
-     */
-    PageSize?: number;
 }
 /**
  * 自定义错误信息对象
@@ -515,6 +567,40 @@ export interface ErrorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReservedField?: string;
+}
+/**
+ * DescribeUserProjectList请求参数结构体
+ */
+export interface DescribeUserProjectListRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId?: number;
+    /**
+     * 无
+     */
+    AllPage?: boolean;
+    /**
+     * 无
+     */
+    PageNo?: number;
+    /**
+     * 无
+     */
+    PageSize?: number;
+}
+/**
+ * DescribePageWidgetList请求参数结构体
+ */
+export interface DescribePageWidgetListRequest {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 页面id
+     */
+    PageId: string;
 }
 /**
  * CreateDatasourceCloud返回参数结构体
@@ -869,6 +955,32 @@ export interface CreateUserRoleProjectResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 页面截图列表
+ */
+export interface PageScreenListVO {
+    /**
+     * 图片导出类型。base64；url
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PicType?: string;
+    /**
+     * 图片列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<PageScreenVO>;
+    /**
+     * 异步事务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TranId?: string;
+    /**
+     * 事务状态
+  1: 处理中; 2: 处理成功; 3 处理失败(错误内容见外层Msg)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TranStatus?: number;
 }
 /**
  * DescribeProjectInfo请求参数结构体
@@ -1835,34 +1947,37 @@ export interface DescribeProjectInfoResponse {
     RequestId?: string;
 }
 /**
- * 商业版本权限单元
+ * ExportScreenPage请求参数结构体
  */
-export interface PermissionComponent {
+export interface ExportScreenPageRequest {
     /**
-     * 权限值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目id
      */
-    ModuleId?: string;
+    ProjectId: string;
     /**
-     * 可见/可用
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 页面id
      */
-    IncludeType?: string;
+    PageId: string;
     /**
-     * 目标升级版本
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 画布类型。栅格画布：GRID；自由画布：FREE
      */
-    UpgradeVersionType?: string;
+    CanvasType?: string;
     /**
-     * 补充信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 图片导出类型。base64；url（有效期：1天）
      */
-    Tips?: string;
+    PicType?: string;
     /**
-     * 补充信息的key值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 组件Ids。为空时，导出整个页面
      */
-    TipsKey?: string;
+    WidgetIds?: Array<string>;
+    /**
+     * 是否是异步请求
+     */
+    AsyncRequest?: boolean;
+    /**
+     * 事务id
+     */
+    TranId?: string;
 }
 /**
  * DescribeUserRoleList请求参数结构体
@@ -2030,6 +2145,46 @@ export interface CreateUserRoleProjectRequest {
      * 用户列表（新）
      */
     UserInfoList?: Array<UserInfo>;
+}
+/**
+ * 页面组件信息
+ */
+export interface WidgetListVO {
+    /**
+     * uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CorpId?: string;
+    /**
+     * 项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 页面id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageId?: string;
+    /**
+     * 组件数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WidgetList?: Array<WidgetVO>;
+}
+/**
+ * 组件信息
+ */
+export interface WidgetVO {
+    /**
+     * 组件Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WidgetId?: string;
+    /**
+     * 组件name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WidgetName?: string;
 }
 /**
  * DescribeDatasourceList请求参数结构体
@@ -2463,4 +2618,34 @@ export interface CreateProjectRequest {
      * 管理平台
      */
     ManagePlatform?: string;
+}
+/**
+ * 商业版本权限单元
+ */
+export interface PermissionComponent {
+    /**
+     * 权限值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModuleId?: string;
+    /**
+     * 可见/可用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IncludeType?: string;
+    /**
+     * 目标升级版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpgradeVersionType?: string;
+    /**
+     * 补充信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tips?: string;
+    /**
+     * 补充信息的key值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TipsKey?: string;
 }

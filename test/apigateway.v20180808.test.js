@@ -238,6 +238,16 @@ it("apigateway.v20180808.DescribeApiApp", async function () {
     }
 })
 
+it("apigateway.v20180808.ModifyUsagePlan", async function () {
+    try {
+       const data = await client.ModifyUsagePlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeUpstreams", async function () {
     try {
        const data = await client.DescribeUpstreams({})
@@ -358,9 +368,19 @@ it("apigateway.v20180808.UpdateApiAppKey", async function () {
     }
 })
 
-it("apigateway.v20180808.ModifyUsagePlan", async function () {
+it("apigateway.v20180808.CreateExclusiveInstances", async function () {
     try {
-       const data = await client.ModifyUsagePlan({})
+       const data = await client.CreateExclusiveInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeServiceSubDomainMappings", async function () {
+    try {
+       const data = await client.DescribeServiceSubDomainMappings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,16 +558,6 @@ it("apigateway.v20180808.CreateApi", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeServiceSubDomainMappings", async function () {
-    try {
-       const data = await client.DescribeServiceSubDomainMappings({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("apigateway.v20180808.DescribeExclusiveInstanceDetail", async function () {
     try {
        const data = await client.DescribeExclusiveInstanceDetail({})
@@ -621,6 +631,16 @@ it("apigateway.v20180808.ModifyApiIncrement", async function () {
 it("apigateway.v20180808.DescribeApiUsagePlan", async function () {
     try {
        const data = await client.DescribeApiUsagePlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeInstancesNetworkConfig", async function () {
+    try {
+       const data = await client.DescribeInstancesNetworkConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

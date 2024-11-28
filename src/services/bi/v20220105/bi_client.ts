@@ -18,8 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  PageScreenVO,
   DataId,
   DescribeUserRoleListResponse,
+  ExportScreenPageResponse,
   ModifyProjectResponse,
   DeleteProjectRequest,
   DescribeUserProjectListResponse,
@@ -28,11 +30,13 @@ import {
   ModifyDatasourceResponse,
   UserRoleListDataRoleInfo,
   ApplyEmbedIntervalRequest,
-  EmbedTokenInfo,
   ProjectConfigResult,
+  EmbedTokenInfo,
+  DescribePageWidgetListResponse,
   DeleteUserRoleResponse,
-  DescribeUserProjectListRequest,
   ErrorInfo,
+  DescribeUserProjectListRequest,
+  DescribePageWidgetListRequest,
   CreateDatasourceCloudResponse,
   ProjectConfigList,
   DeleteUserRoleRequest,
@@ -45,6 +49,7 @@ import {
   ModifyUserRoleResponse,
   CreateEmbedTokenRequest,
   CreateUserRoleProjectResponse,
+  PageScreenListVO,
   DescribeProjectInfoRequest,
   BaseStateAction,
   Data,
@@ -65,7 +70,7 @@ import {
   DeleteUserRoleProjectRequest,
   CreateProjectResponse,
   DescribeProjectInfoResponse,
-  PermissionComponent,
+  ExportScreenPageRequest,
   DescribeUserRoleListRequest,
   DeleteProjectResponse,
   ProjectListData,
@@ -73,6 +78,8 @@ import {
   PermissionGroup,
   CreateEmbedTokenResponse,
   CreateUserRoleProjectRequest,
+  WidgetListVO,
+  WidgetVO,
   DescribeDatasourceListRequest,
   ApplyEmbedIntervalResponse,
   CreateDatasourceResponse,
@@ -83,6 +90,7 @@ import {
   UserIdAndUserName,
   DeleteDatasourceResponse,
   CreateProjectRequest,
+  PermissionComponent,
 } from "./bi_models"
 
 /**
@@ -145,13 +153,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云数据库
+   * 页面截图导出
    */
-  async CreateDatasourceCloud(
-    req: CreateDatasourceCloudRequest,
-    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
-  ): Promise<CreateDatasourceCloudResponse> {
-    return this.request("CreateDatasourceCloud", req, cb)
+  async ExportScreenPage(
+    req: ExportScreenPageRequest,
+    cb?: (error: string, rep: ExportScreenPageResponse) => void
+  ): Promise<ExportScreenPageResponse> {
+    return this.request("ExportScreenPage", req, cb)
   }
 
   /**
@@ -162,6 +170,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserRoleResponse) => void
   ): Promise<ModifyUserRoleResponse> {
     return this.request("ModifyUserRole", req, cb)
+  }
+
+  /**
+   * 创建云数据库
+   */
+  async CreateDatasourceCloud(
+    req: CreateDatasourceCloudRequest,
+    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
+  ): Promise<CreateDatasourceCloudResponse> {
+    return this.request("CreateDatasourceCloud", req, cb)
   }
 
   /**
@@ -222,6 +240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserRoleListResponse) => void
   ): Promise<DescribeUserRoleListResponse> {
     return this.request("DescribeUserRoleList", req, cb)
+  }
+
+  /**
+   * 查询页面组件信息
+   */
+  async DescribePageWidgetList(
+    req: DescribePageWidgetListRequest,
+    cb?: (error: string, rep: DescribePageWidgetListResponse) => void
+  ): Promise<DescribePageWidgetListResponse> {
+    return this.request("DescribePageWidgetList", req, cb)
   }
 
   /**
