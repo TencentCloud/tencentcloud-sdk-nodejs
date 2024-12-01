@@ -21,6 +21,7 @@ import {
   DescribeCasterDisplayInfoResponse,
   DescribeLiveXP2PDetailInfoListResponse,
   DescribeLiveWatermarkRulesResponse,
+  CasterMarkPicInfo,
   ModifyPullStreamStatusRequest,
   DeleteLiveRecordTemplateRequest,
   ModifyLiveTimeShiftTemplateResponse,
@@ -33,11 +34,12 @@ import {
   DescribeCasterOutputInfosResponse,
   DescribeLiveStreamPublishedListRequest,
   DescribeGroupProIspPlayInfoListResponse,
+  DescribeDeliverBandwidthListResponse,
   DescribeLiveTranscodeDetailInfoRequest,
   DescribeLiveSnapshotTemplatesRequest,
   CreateLiveWatermarkRuleResponse,
   CreateCasterPvwResponse,
-  DescribeDeliverBandwidthListRequest,
+  DescribeCasterMarkPicInfosRequest,
   PlayCodeTotalInfo,
   AddLiveWatermarkRequest,
   CommonMixLayoutParams,
@@ -62,6 +64,7 @@ import {
   DescribeLiveWatermarkRulesRequest,
   EnableOptimalSwitchingRequest,
   DescribeCasterInputInfosResponse,
+  AddCasterMarkWordInfoResponse,
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
   DescribeStreamDayPlayInfoListRequest,
@@ -74,12 +77,14 @@ import {
   DescribeVisitTopSumInfoListRequest,
   DescribePushBandwidthAndFluxListResponse,
   DescribeLiveStreamOnlineListResponse,
+  DescribeCasterMarkWordInfosResponse,
   DescribeStreamPushInfoListResponse,
   TimeShiftTemplate,
   WatermarkInfo,
   DescribeLiveDomainPlayInfoListRequest,
   CasterInputInfo,
   DeleteLiveWatermarkRuleResponse,
+  DeleteCasterMarkWordInfoResponse,
   DescribeLogDownloadListResponse,
   ReleaseCasterRequest,
   TransitionTypeInfo,
@@ -87,7 +92,7 @@ import {
   DomainCertInfo,
   DeleteLiveSnapshotRuleResponse,
   BandwidthInfo,
-  CreateLiveRecordRuleResponse,
+  LiveStreamMonitorOutputInfo,
   DeleteLiveTranscodeTemplateRequest,
   StopLivePadProcessorRequest,
   StopRecordTaskResponse,
@@ -149,12 +154,13 @@ import {
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
   CreateCasterInputPushUrlRequest,
-  DescribeLivePadTemplatesResponse,
+  DescribeCasterMarkWordInfosRequest,
   DomainInfo,
   DescribeLiveTranscodeRulesRequest,
   PlayDataInfoByStream,
   LiveStreamMonitorInputInfo,
   DeleteLivePullStreamTaskRequest,
+  DescribeCasterMarkPicInfosResponse,
   CopyCasterResponse,
   RestartLivePullStreamTaskResponse,
   StopLiveRecordResponse,
@@ -180,7 +186,7 @@ import {
   StopLiveStreamMonitorResponse,
   DayStreamPlayInfo,
   ModifyLivePlayDomainResponse,
-  GroupProIspDataInfo,
+  CreateLiveRecordRuleResponse,
   DescribeLiveDomainCertBindingsResponse,
   CreateLivePadTemplateResponse,
   DescribeLiveRecordTemplatesResponse,
@@ -219,6 +225,7 @@ import {
   DescribeLiveDelayInfoListResponse,
   ClientIpPlaySumInfo,
   CreateLiveSnapshotTemplateResponse,
+  ModifyCasterMarkPicInfoRequest,
   DescribeProIspPlaySumInfoListRequest,
   TranscodeTotalInfo,
   UnBindLiveDomainCertResponse,
@@ -251,6 +258,7 @@ import {
   CasterBriefInfo,
   DescribeCasterTransitionTypesRequest,
   DelayInfo,
+  ModifyCasterMarkWordInfoResponse,
   EnableOptimalSwitchingResponse,
   TimeShiftSubStream,
   DescribeLiveStreamMonitorRequest,
@@ -308,17 +316,20 @@ import {
   CreateLiveTranscodeRuleRequest,
   DropLiveStreamRequest,
   CreateCommonMixStreamRequest,
+  DeleteCasterMarkPicInfoRequest,
   CreateCasterResponse,
   PushDataInfo,
   DescribeLiveSnapshotTemplateResponse,
   CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
+  DescribeLivePadTemplateRequest,
   DescribeHttpStatusInfoListRequest,
   StartLiveStreamMonitorRequest,
   DescribeCasterRequest,
   AuthenticateDomainOwnerRequest,
   DeleteLiveDomainRequest,
   DeleteLiveTimeShiftTemplateResponse,
+  ModifyLivePushAuthKeyResponse,
   DescribeScreenshotTaskResponse,
   ModifyPullStreamConfigRequest,
   DescribeProvinceIspPlayInfoListResponse,
@@ -339,6 +350,7 @@ import {
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
   StopLivePadProcessorResponse,
+  AddCasterMarkWordInfoRequest,
   ModifyLivePlayAuthKeyResponse,
   DescribeLiveTimeShiftRulesResponse,
   DescribeLiveTranscodeTemplatesResponse,
@@ -346,6 +358,7 @@ import {
   DescribeAllStreamPlayInfoListResponse,
   TaskStatusInfo,
   DescribeCasterInputInfosRequest,
+  DescribeLivePadTemplatesResponse,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
   HlsSpecialParam,
@@ -377,14 +390,15 @@ import {
   CreateLiveRecordTemplateRequest,
   AddCasterOutputInfoResponse,
   DescribeHttpStatusInfoListResponse,
+  DescribeUploadStreamNumsRequest,
   CreateLiveSnapshotRuleRequest,
   BillDataInfo,
-  DescribeLiveSnapshotRulesResponse,
-  DescribeDeliverBandwidthListResponse,
+  EnableLiveDomainResponse,
+  DeleteCasterMarkPicInfoResponse,
   StopCasterPgmRequest,
   CreateLiveStreamMonitorResponse,
   DescribeCasterLayoutInfosRequest,
-  DescribeLivePadTemplateRequest,
+  AddCasterMarkPicInfoResponse,
   AddCasterInputInfoRequest,
   ModifyLivePlayAuthKeyRequest,
   DescribeLiveDelayInfoListRequest,
@@ -392,8 +406,8 @@ import {
   PushLogInfo,
   DescribeScreenShotSheetNumListResponse,
   ModifyLivePullStreamTaskResponse,
-  DescribeUploadStreamNumsRequest,
-  EnableLiveDomainResponse,
+  CasterMarkWordInfo,
+  DescribeLiveSnapshotRulesResponse,
   DeleteCasterRequest,
   DescribeLiveDomainCertResponse,
   AuthenticateDomainOwnerResponse,
@@ -401,6 +415,7 @@ import {
   AddLiveWatermarkResponse,
   AddCasterInputInfoResponse,
   ForbidLiveStreamRequest,
+  ModifyCasterMarkWordInfoRequest,
   DescribeConcurrentRecordStreamNumResponse,
   DeleteLiveRecordTemplateResponse,
   CasterOutputInfo,
@@ -423,9 +438,12 @@ import {
   PushQualityData,
   DescribeLiveCertRequest,
   DeleteCasterLayoutInfoRequest,
+  ModifyCasterMarkPicInfoResponse,
   PlaySumStatInfo,
+  DescribeDeliverBandwidthListRequest,
   RefererAuthConfig,
   TranscodeDetailInfo,
+  DeleteCasterMarkWordInfoRequest,
   ModifyLiveRecordTemplateResponse,
   AddLiveDomainRequest,
   StreamName,
@@ -473,18 +491,18 @@ import {
   ModifyLivePadTemplateRequest,
   BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
-  LiveStreamMonitorOutputInfo,
   ModifyLiveCallbackTemplateRequest,
   DescribeMonitorReportRequest,
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
   DescribeLiveXP2PDetailInfoListRequest,
   CreateCasterPgmFromPvwRequest,
-  ModifyLivePushAuthKeyResponse,
+  GroupProIspDataInfo,
   DeleteCasterOutputInfoRequest,
   ForbidStreamInfo,
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
+  AddCasterMarkPicInfoRequest,
 } from "./live_models"
 
 /**
@@ -573,13 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改截图模板配置。
+   * 修改录制模板配置。
    */
-  async ModifyLiveSnapshotTemplate(
-    req: ModifyLiveSnapshotTemplateRequest,
-    cb?: (error: string, rep: ModifyLiveSnapshotTemplateResponse) => void
-  ): Promise<ModifyLiveSnapshotTemplateResponse> {
-    return this.request("ModifyLiveSnapshotTemplate", req, cb)
+  async ModifyLiveRecordTemplate(
+    req: ModifyLiveRecordTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
+  ): Promise<ModifyLiveRecordTemplateResponse> {
+    return this.request("ModifyLiveRecordTemplate", req, cb)
   }
 
   /**
@@ -594,6 +612,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordTaskResponse) => void
   ): Promise<DescribeRecordTaskResponse> {
     return this.request("DescribeRecordTask", req, cb)
+  }
+
+  /**
+   * 该接口用来停止导播台的预监任务。
+   */
+  async StopCasterPvw(
+    req: StopCasterPvwRequest,
+    cb?: (error: string, rep: StopCasterPvwResponse) => void
+  ): Promise<StopCasterPvwResponse> {
+    return this.request("StopCasterPvw", req, cb)
   }
 
   /**
@@ -848,6 +876,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用来停止直播流监播任务。
+   */
+  async StopLiveStreamMonitor(
+    req: StopLiveStreamMonitorRequest,
+    cb?: (error: string, rep: StopLiveStreamMonitorResponse) => void
+  ): Promise<StopLiveStreamMonitorResponse> {
+    return this.request("StopLiveStreamMonitor", req, cb)
+  }
+
+  /**
    * 验证用户是否拥有特定直播域名。
    */
   async AuthenticateDomainOwner(
@@ -858,13 +896,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用来修改直播流监播任务的配置。
+   * 修改截图模板配置。
    */
-  async ModifyLiveStreamMonitor(
-    req: ModifyLiveStreamMonitorRequest,
-    cb?: (error: string, rep: ModifyLiveStreamMonitorResponse) => void
-  ): Promise<ModifyLiveStreamMonitorResponse> {
-    return this.request("ModifyLiveStreamMonitor", req, cb)
+  async ModifyLiveSnapshotTemplate(
+    req: ModifyLiveSnapshotTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveSnapshotTemplateResponse) => void
+  ): Promise<ModifyLiveSnapshotTemplateResponse> {
+    return this.request("ModifyLiveSnapshotTemplate", req, cb)
   }
 
   /**
@@ -878,13 +916,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改录制模板配置。
+   * 该接口用来修改导播台文本配置。
    */
-  async ModifyLiveRecordTemplate(
-    req: ModifyLiveRecordTemplateRequest,
-    cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
-  ): Promise<ModifyLiveRecordTemplateResponse> {
-    return this.request("ModifyLiveRecordTemplate", req, cb)
+  async ModifyCasterMarkWordInfo(
+    req: ModifyCasterMarkWordInfoRequest,
+    cb?: (error: string, rep: ModifyCasterMarkWordInfoResponse) => void
+  ): Promise<ModifyCasterMarkWordInfoResponse> {
+    return this.request("ModifyCasterMarkWordInfo", req, cb)
   }
 
   /**
@@ -928,13 +966,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用来停止导播台的预监任务。
+   * 该接口用来查询某个导播台的文本列表。
    */
-  async StopCasterPvw(
-    req: StopCasterPvwRequest,
-    cb?: (error: string, rep: StopCasterPvwResponse) => void
-  ): Promise<StopCasterPvwResponse> {
-    return this.request("StopCasterPvw", req, cb)
+  async DescribeCasterMarkWordInfos(
+    req: DescribeCasterMarkWordInfosRequest,
+    cb?: (error: string, rep: DescribeCasterMarkWordInfosResponse) => void
+  ): Promise<DescribeCasterMarkWordInfosResponse> {
+    return this.request("DescribeCasterMarkWordInfos", req, cb)
   }
 
   /**
@@ -1035,6 +1073,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口用来修改导播台水印信息。
+注意，修改的Index对应的水印需已存在
+     */
+  async ModifyCasterMarkPicInfo(
+    req: ModifyCasterMarkPicInfoRequest,
+    cb?: (error: string, rep: ModifyCasterMarkPicInfoResponse) => void
+  ): Promise<ModifyCasterMarkPicInfoResponse> {
+    return this.request("ModifyCasterMarkPicInfo", req, cb)
+  }
+
+  /**
    * 该接口用来获取导播台视频流的播放url，用来在页面上拉流展示。
    */
   async DescribeCasterPlayUrl(
@@ -1102,6 +1151,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopScreenshotTaskResponse) => void
   ): Promise<StopScreenshotTaskResponse> {
     return this.request("StopScreenshotTask", req, cb)
+  }
+
+  /**
+   * 为导播台添加文本配置。
+   */
+  async AddCasterMarkWordInfo(
+    req: AddCasterMarkWordInfoRequest,
+    cb?: (error: string, rep: AddCasterMarkWordInfoResponse) => void
+  ): Promise<AddCasterMarkWordInfoResponse> {
+    return this.request("AddCasterMarkWordInfo", req, cb)
   }
 
   /**
@@ -1423,6 +1482,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 该接口用来查询某个导播台的水印列表。
+   */
+  async DescribeCasterMarkPicInfos(
+    req: DescribeCasterMarkPicInfosRequest,
+    cb?: (error: string, rep: DescribeCasterMarkPicInfosResponse) => void
+  ): Promise<DescribeCasterMarkPicInfosResponse> {
+    return this.request("DescribeCasterMarkPicInfos", req, cb)
+  }
+
+  /**
    * 获取单个回调模板。
    */
   async DescribeLiveCallbackTemplate(
@@ -1450,6 +1519,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLiveCallbackTemplateResponse) => void
   ): Promise<ModifyLiveCallbackTemplateResponse> {
     return this.request("ModifyLiveCallbackTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用来新增图片水印。
+   */
+  async AddCasterMarkPicInfo(
+    req: AddCasterMarkPicInfoRequest,
+    cb?: (error: string, rep: AddCasterMarkPicInfoResponse) => void
+  ): Promise<AddCasterMarkPicInfoResponse> {
+    return this.request("AddCasterMarkPicInfo", req, cb)
   }
 
   /**
@@ -1485,13 +1564,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 本接口用来查询当前APPID导播台业务状态
+   * 该接口用来创建新的导播台
    */
-  async DescribeCasterUserStatus(
-    req?: DescribeCasterUserStatusRequest,
-    cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
-  ): Promise<DescribeCasterUserStatusResponse> {
-    return this.request("DescribeCasterUserStatus", req, cb)
+  async CreateCaster(
+    req: CreateCasterRequest,
+    cb?: (error: string, rep: CreateCasterResponse) => void
+  ): Promise<CreateCasterResponse> {
+    return this.request("CreateCaster", req, cb)
   }
 
   /**
@@ -2252,23 +2331,23 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 该接口用来停止直播流监播任务。
+   * 该接口用来修改直播流监播任务的配置。
    */
-  async StopLiveStreamMonitor(
-    req: StopLiveStreamMonitorRequest,
-    cb?: (error: string, rep: StopLiveStreamMonitorResponse) => void
-  ): Promise<StopLiveStreamMonitorResponse> {
-    return this.request("StopLiveStreamMonitor", req, cb)
+  async ModifyLiveStreamMonitor(
+    req: ModifyLiveStreamMonitorRequest,
+    cb?: (error: string, rep: ModifyLiveStreamMonitorResponse) => void
+  ): Promise<ModifyLiveStreamMonitorResponse> {
+    return this.request("ModifyLiveStreamMonitor", req, cb)
   }
 
   /**
-   * 该接口用来创建新的导播台
+   * 本接口用来查询当前APPID导播台业务状态
    */
-  async CreateCaster(
-    req: CreateCasterRequest,
-    cb?: (error: string, rep: CreateCasterResponse) => void
-  ): Promise<CreateCasterResponse> {
-    return this.request("CreateCaster", req, cb)
+  async DescribeCasterUserStatus(
+    req?: DescribeCasterUserStatusRequest,
+    cb?: (error: string, rep: DescribeCasterUserStatusResponse) => void
+  ): Promise<DescribeCasterUserStatusResponse> {
+    return this.request("DescribeCasterUserStatus", req, cb)
   }
 
   /**
@@ -2329,6 +2408,26 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyCasterInputInfoResponse) => void
   ): Promise<ModifyCasterInputInfoResponse> {
     return this.request("ModifyCasterInputInfo", req, cb)
+  }
+
+  /**
+   * 该接口用来删除导播台某个Index对应的水印。
+   */
+  async DeleteCasterMarkPicInfo(
+    req: DeleteCasterMarkPicInfoRequest,
+    cb?: (error: string, rep: DeleteCasterMarkPicInfoResponse) => void
+  ): Promise<DeleteCasterMarkPicInfoResponse> {
+    return this.request("DeleteCasterMarkPicInfo", req, cb)
+  }
+
+  /**
+   * 该接口用来删除导播台的文本配置。
+   */
+  async DeleteCasterMarkWordInfo(
+    req: DeleteCasterMarkWordInfoRequest,
+    cb?: (error: string, rep: DeleteCasterMarkWordInfoResponse) => void
+  ): Promise<DeleteCasterMarkWordInfoResponse> {
+    return this.request("DeleteCasterMarkWordInfo", req, cb)
   }
 
   /**

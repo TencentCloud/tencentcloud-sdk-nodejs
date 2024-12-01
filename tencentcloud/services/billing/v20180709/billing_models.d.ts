@@ -3321,6 +3321,18 @@ export interface BillDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReserveDetail?: string;
+    /**
+     * 优惠对象
+     */
+    DiscountObject?: string;
+    /**
+     * 优惠类型
+     */
+    DiscountType?: string;
+    /**
+     * 优惠内容
+     */
+    DiscountContent?: string;
 }
 /**
  * CreateSavingPlanOrder请求参数结构体

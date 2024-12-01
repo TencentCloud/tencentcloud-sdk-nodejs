@@ -1468,81 +1468,30 @@ export interface EnterpriseLicenseOCRResponse {
     RequestId?: string;
 }
 /**
- * RecognizeKoreanDrivingLicenseOCR返回参数结构体
+ * 印章信息
  */
-export interface RecognizeKoreanDrivingLicenseOCRResponse {
+export interface SealInfo {
     /**
-     * 身份证号码
+     * 印章主体内容
      */
-    ID?: string;
+    SealBody: string;
     /**
-     * 驾照号码
+     * 印章坐标
      */
-    LicenseNumber?: string;
+    Location: Rect;
     /**
-     * 居民登记号码
+     * 印章其它文本内容
      */
-    Number?: string;
+    OtherTexts: Array<string>;
     /**
-     * 驾照类型
+     * 印章类型，表示为:
+  圆形印章：0
+  椭圆形印章：1
+  方形印章：2
+  菱形印章：3
+  三角形印章：4
      */
-    Type?: string;
-    /**
-     * 地址
-     */
-    Address?: string;
-    /**
-     * 姓名
-     */
-    Name?: string;
-    /**
-     * 换证时间
-     */
-    AptitudeTesDate?: string;
-    /**
-     * 发证日期
-     */
-    DateOfIssue?: string;
-    /**
-     * 人像截图Base64后的结果
-     */
-    Photo?: string;
-    /**
-     * 性别
-     */
-    Sex?: string;
-    /**
-     * 生日，格式为dd/mm/yyyy
-     */
-    Birthday?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * RecognizeKoreanDrivingLicenseOCR请求参数结构体
- */
-export interface RecognizeKoreanDrivingLicenseOCRRequest {
-    /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-     */
-    ImageBase64?: string;
-    /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-     */
-    ImageUrl?: string;
-    /**
-     * 是否返回人像照片。
-     */
-    ReturnHeadImage?: boolean;
+    SealShape: string;
 }
 /**
  * 通用机打发票信息
@@ -10439,32 +10388,6 @@ export interface BankCardOCRResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 印章信息
- */
-export interface SealInfo {
-    /**
-     * 印章主体内容
-     */
-    SealBody: string;
-    /**
-     * 印章坐标
-     */
-    Location: Rect;
-    /**
-     * 印章其它文本内容
-     */
-    OtherTexts: Array<string>;
-    /**
-     * 印章类型，表示为:
-  圆形印章：0
-  椭圆形印章：1
-  方形印章：2
-  菱形印章：3
-  三角形印章：4
-     */
-    SealShape: string;
 }
 /**
  * BusinessCardOCR请求参数结构体

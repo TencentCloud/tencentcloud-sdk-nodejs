@@ -38,6 +38,16 @@ it("teo.v20220901.DescribeOriginGroupHealthStatus", async function () {
     }
 })
 
+it("teo.v20220901.ExportZoneConfig", async function () {
+    try {
+       const data = await client.ExportZoneConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})
@@ -1108,6 +1118,16 @@ it("teo.v20220901.DescribeZoneSetting", async function () {
     }
 })
 
+it("teo.v20220901.DescribeZoneConfigImportResult", async function () {
+    try {
+       const data = await client.DescribeZoneConfigImportResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteSecurityIPGroup", async function () {
     try {
        const data = await client.DeleteSecurityIPGroup({})
@@ -1171,6 +1191,16 @@ it("teo.v20220901.DescribeSecurityIPGroupInfo", async function () {
 it("teo.v20220901.DescribeSecurityIPGroup", async function () {
     try {
        const data = await client.DescribeSecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ImportZoneConfig", async function () {
+    try {
+       const data = await client.ImportZoneConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

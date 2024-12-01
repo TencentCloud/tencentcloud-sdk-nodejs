@@ -891,7 +891,7 @@ export interface DetachDisksRequest {
      */
     DiskIds: Array<string>;
     /**
-     * 对于非共享型云盘，会忽略该参数；对于共享型云盘，该参数表示要从哪个CVM实例上卸载云盘。
+     * 对于非共享型云盘，会根据该参数校验是否与实际挂载的实例一致；对于共享型云盘，该参数表示要从哪个CVM实例上卸载云盘。
      */
     InstanceId?: string;
 }

@@ -64,8 +64,7 @@ import {
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
-  RecognizeKoreanDrivingLicenseOCRResponse,
-  RecognizeKoreanDrivingLicenseOCRRequest,
+  SealInfo,
   InvoiceGeneralInfo,
   TextVatInvoice,
   InstitutionOCRResponse,
@@ -306,7 +305,6 @@ import {
   VatInvoiceOCRResponse,
   QuotaInvoiceOCRRequest,
   BankCardOCRResponse,
-  SealInfo,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
   QuotaInvoiceOCRResponse,
@@ -1575,16 +1573,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeThaiIDCardOCRResponse) => void
   ): Promise<RecognizeThaiIDCardOCRResponse> {
     return this.request("RecognizeThaiIDCardOCR", req, cb)
-  }
-
-  /**
-   * 韩国驾驶证识别
-   */
-  async RecognizeKoreanDrivingLicenseOCR(
-    req: RecognizeKoreanDrivingLicenseOCRRequest,
-    cb?: (error: string, rep: RecognizeKoreanDrivingLicenseOCRResponse) => void
-  ): Promise<RecognizeKoreanDrivingLicenseOCRResponse> {
-    return this.request("RecognizeKoreanDrivingLicenseOCR", req, cb)
   }
 
   /**

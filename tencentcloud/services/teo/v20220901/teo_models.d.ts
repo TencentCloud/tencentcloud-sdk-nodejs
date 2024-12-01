@@ -150,6 +150,42 @@ export interface SlowPostConfig {
     RuleId?: number;
 }
 /**
+ * 源站组记录
+ */
+export interface OriginRecord {
+    /**
+     * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+     */
+    Record: string;
+    /**
+     * 源站类型，取值有：
+  <li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
+  <li>COS：COS源。</li>
+  <li>AWS_S3：AWS S3对象存储源站。</li>
+     */
+    Type?: string;
+    /**
+     * 源站记录ID。
+     */
+    RecordId?: string;
+    /**
+     * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Weight?: number;
+    /**
+     * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
+  <li>true：使用私有鉴权；</li>
+  <li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+  
+     */
+    Private?: boolean;
+    /**
+     * 私有鉴权参数，当源站类型Private=true时有效。
+     */
+    PrivateParameters?: Array<PrivateParameter>;
+}
+/**
  * DescribeConfigGroupVersionDetail返回参数结构体
  */
 export interface DescribeConfigGroupVersionDetailResponse {
@@ -2752,15 +2788,22 @@ export interface DefaultServerCertInfo {
     SignAlgo?: string;
 }
 /**
- * 离线缓存是否开启
+ * CreateL4ProxyRules请求参数结构体
  */
-export interface OfflineCache {
+export interface CreateL4ProxyRulesRequest {
     /**
-     * 离线缓存是否开启，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 站点 ID。
      */
-    Switch: string;
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则列表。单次最多支持 200 条转发规则。
+  注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
+     */
+    L4ProxyRules: Array<L4ProxyRule>;
 }
 /**
  * DescribeDDoSAttackTopData返回参数结构体
@@ -3986,40 +4029,33 @@ export interface DescribeZonesRequest {
     Direction?: string;
 }
 /**
- * 源站组记录
+ * DescribeZoneConfigImportResult返回参数结构体
  */
-export interface OriginRecord {
+export interface DescribeZoneConfigImportResultResponse {
     /**
-     * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+     * 本次导入任务的导入状态。取值有：  <li>success：表示配置项导入成功；</li> <li>failure：表示配置项导入失败；</li> <li>doing：表示配置项正在导入中。</li>
      */
-    Record: string;
+    Status?: string;
     /**
-     * 源站类型，取值有：
-  <li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
-  <li>COS：COS源。</li>
-  <li>AWS_S3：AWS S3对象存储源站。</li>
+     * 本次导入任务的状态的提示信息。当配置项导入失败时，可通过本字段查看失败原因。
      */
-    Type?: string;
+    Message?: string;
     /**
-     * 源站记录ID。
+     * 本次导入任务的配置内容。
      */
-    RecordId?: string;
+    Content?: string;
     /**
-     * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 本次导入任务的开始时间。
      */
-    Weight?: number;
+    ImportTime?: string;
     /**
-     * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
-  <li>true：使用私有鉴权；</li>
-  <li>false：不使用私有鉴权。</li>不填写，默认值为：false。
-  
+     * 本次导入任务的结束时间。
      */
-    Private?: boolean;
+    FinishTime?: string;
     /**
-     * 私有鉴权参数，当源站类型Private=true时有效。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PrivateParameters?: Array<PrivateParameter>;
+    RequestId?: string;
 }
 /**
  * 标签配置
@@ -5158,22 +5194,32 @@ export interface JITVideoProcess {
     Switch: string;
 }
 /**
- * CreateL4ProxyRules请求参数结构体
+ * 离线缓存是否开启
  */
-export interface CreateL4ProxyRulesRequest {
+export interface OfflineCache {
     /**
-     * 站点 ID。
+     * 离线缓存是否开启，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
      */
-    ZoneId: string;
+    Switch: string;
+}
+/**
+ * 智能分析规则
+ */
+export interface IntelligenceRule {
     /**
-     * 四层代理实例 ID。
+     * 开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    Switch?: string;
     /**
-     * 转发规则列表。单次最多支持 200 条转发规则。
-  注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
+     * 规则详情。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    L4ProxyRules: Array<L4ProxyRule>;
+    IntelligenceRuleItems?: Array<IntelligenceRuleItem>;
 }
 /**
  * CreateLoadBalancer返回参数结构体
@@ -5467,6 +5513,19 @@ export interface CheckCnameStatusResponse {
      * 加速域名 CNAME 状态信息列表。
      */
     CnameStatus?: Array<CnameStatus>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ImportZoneConfig返回参数结构体
+ */
+export interface ImportZoneConfigResponse {
+    /**
+     * 表示该次导入配置的任务 Id，通过查询站点配置导入结果接口（DescribeZoneConfigImportResult）获取本次导入任务执行的结果。注意：导入任务 Id 仅支持查询最近 7 天的导入任务。
+     */
+    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7509,6 +7568,19 @@ export interface PartialModule {
     Include?: Array<number | bigint>;
 }
 /**
+ * DescribeZoneConfigImportResult请求参数结构体
+ */
+export interface DescribeZoneConfigImportResultRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 表示需要查询结果的导入配置任务 Id，导入任务 Id 仅支持查询最近 7 天的导入任务。
+     */
+    TaskId: string;
+}
+/**
  * ModifyApplicationProxyRuleStatus请求参数结构体
  */
 export interface ModifyApplicationProxyRuleStatusRequest {
@@ -8295,6 +8367,20 @@ export interface DescribeOriginGroupHealthStatusRequest {
     OriginGroupIds?: Array<string>;
 }
 /**
+ * ExportZoneConfig请求参数结构体
+ */
+export interface ExportZoneConfigRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 导出配置项的类型列表，不填表示导出所有类型的配置，当前支持的取值有：<li>L7AccelerationConfig：表示导出七层加速配置，对应控制台「站点加速-全局加速配置」和「站点加速-规则引擎」。</li>
+  需注意：后续支持导出的类型会随着迭代增加，导出所有类型时需要注意导出文件大小，建议使用时指定需要导出的配置类型，以便控制请求响应包负载大小。
+     */
+    Types?: Array<string>;
+}
+/**
  * 四层代理转发规则详情。
  */
 export interface L4ProxyRule {
@@ -8715,6 +8801,19 @@ export interface AliasDomain {
      * 别称域名修改时间。
      */
     ModifiedOn: string;
+}
+/**
+ * ImportZoneConfig请求参数结构体
+ */
+export interface ImportZoneConfigRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置内容可通过站点配置导出接口（ExportZoneConfig）获取。您可以单独导入「站点加速-全局加速配置」或「站点加速-规则引擎」，传入对应的字段即可，详情可以参考下方示例。
+     */
+    Content: string;
 }
 /**
  * 自定义规则-基础访问管控配置。
@@ -9497,21 +9596,17 @@ export interface IntelligenceRuleItem {
     Action: string;
 }
 /**
- * 智能分析规则
+ * ExportZoneConfig返回参数结构体
  */
-export interface IntelligenceRule {
+export interface ExportZoneConfigResponse {
     /**
-     * 开关，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 导出的配置的具体内容。以 JSON 格式返回，按照 UTF-8 方式进行编码。配置内容可参考下方示例。
      */
-    Switch?: string;
+    Content?: string;
     /**
-     * 规则详情。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    IntelligenceRuleItems?: Array<IntelligenceRuleItem>;
+    RequestId?: string;
 }
 /**
  * POST请求上传文件流式传输最大限制

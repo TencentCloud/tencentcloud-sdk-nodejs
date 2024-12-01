@@ -21,8 +21,9 @@
 export interface GetTWeCallPkgListRequest {
   /**
    * appId
+   * @deprecated
    */
-  MiniProgramAppId: string
+  MiniProgramAppId?: string
   /**
    * 类型
    */
@@ -84,6 +85,7 @@ export interface TWeCallActiveInfo {
   /**
    * 小程序ID
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ModelId?: string
   /**
@@ -249,6 +251,7 @@ export interface DeviceActiveResult {
   /**
    * 模板ID
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ModelId?: string
   /**
@@ -678,7 +681,8 @@ export interface GetStudioProductListResponse {
  */
 export interface GetTWeCallActiveStatusRequest {
   /**
-   * appId
+   * 参数已弃用，不用传参
+   * @deprecated
    */
   MiniProgramAppId?: string
   /**
@@ -3166,7 +3170,8 @@ export interface ActivateTWeCallLicenseRequest {
    */
   PkgType: number
   /**
-   * appId
+   * 参数已弃用，不用传参
+   * @deprecated
    */
   MiniProgramAppId?: string
   /**
@@ -4624,13 +4629,15 @@ export interface TWeCallInfo {
    */
   Sn: string
   /**
-   * 小程序ID
+   * 小程序ID，参数已弃用，不用传参
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ModelId?: string
   /**
    * 激活数
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ActiveNum?: number
 }

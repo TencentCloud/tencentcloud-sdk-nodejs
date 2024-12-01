@@ -58,6 +58,62 @@ export interface DescribeLiveWatermarkRulesResponse {
     RequestId?: string;
 }
 /**
+ * 导播台水印信息。
+ */
+export interface CasterMarkPicInfo {
+    /**
+     * 水印图片Index。
+     */
+    MarkPicIndex: number;
+    /**
+     * 注：该字段已废弃。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkPicId?: number;
+    /**
+     * 水印图片在输出时的宽度。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面上所占的比例值。
+     */
+    MarkPicWidth?: number;
+    /**
+     * 水印图片在输出时的高度。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1080]。
+  当该值为小于1大于0的小数时，单位为百分比，表示水印在输出上所占的比例值。
+     */
+    MarkPicHeight?: number;
+    /**
+     * 水印图片在输出时的X轴坐标。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1920]。
+  当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面上x坐标所占的比例值。
+     */
+    MarkPicLocationX?: number;
+    /**
+     * 水印图片在输出时的Y坐标。
+  当该值为大于1的整数值时，单位为像素，允许范围[1,1080]。
+  当该值为小于1大于0的小数时，单位为百分比，表示水印在最终画面Y坐标上所占的比例值。
+     */
+    MarkPicLocationY?: number;
+    /**
+     * 水印地址。
+  最大长度256字符，且url需以jpg、jpeg、png、bmp、gif后缀结尾。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkPicUrl?: string;
+    /**
+     * 水印描述。
+  最大允许长度为256。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 是否启用了等比例缩放。
+  注：该字段仅做状态保存，无实际效果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsEqualProportion?: boolean;
+}
+/**
  * ModifyPullStreamStatus请求参数结构体
  */
 export interface ModifyPullStreamStatusRequest {
@@ -291,6 +347,19 @@ export interface DescribeGroupProIspPlayInfoListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDeliverBandwidthList返回参数结构体
+ */
+export interface DescribeDeliverBandwidthListResponse {
+    /**
+     * 转推计费带宽数据
+     */
+    DataInfoList?: Array<BandwidthInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLiveTranscodeDetailInfo请求参数结构体
  */
 export interface DescribeLiveTranscodeDetailInfoRequest {
@@ -367,22 +436,13 @@ export interface CreateCasterPvwResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeliverBandwidthList请求参数结构体
+ * DescribeCasterMarkPicInfos请求参数结构体
  */
-export interface DescribeDeliverBandwidthListRequest {
+export interface DescribeCasterMarkPicInfosRequest {
     /**
-     * 起始时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+     * 导播台ID。
      */
-    StartTime: string;
-    /**
-     * 结束时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-  支持最近三个月的数据查询，时间跨度最大是1个月。
-     */
-    EndTime: string;
+    CasterId: number;
 }
 /**
  * 各状态码的总次数，支持大多数的 HTTP 协议返回码。
@@ -950,6 +1010,15 @@ export interface DescribeCasterInputInfosResponse {
     RequestId?: string;
 }
 /**
+ * AddCasterMarkWordInfo返回参数结构体
+ */
+export interface AddCasterMarkWordInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取省份/运营商的播放信息。
  */
 export interface ProIspPlaySumInfo {
@@ -1259,6 +1328,20 @@ export interface DescribeLiveStreamOnlineListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCasterMarkWordInfos返回参数结构体
+ */
+export interface DescribeCasterMarkWordInfosResponse {
+    /**
+     * 导播台的文本信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordInfos?: Array<CasterMarkWordInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeStreamPushInfoList返回参数结构体
  */
 export interface DescribeStreamPushInfoListResponse {
@@ -1457,6 +1540,15 @@ export interface DeleteLiveWatermarkRuleResponse {
     RequestId?: string;
 }
 /**
+ * DeleteCasterMarkWordInfo返回参数结构体
+ */
+export interface DeleteCasterMarkWordInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeLogDownloadList返回参数结构体
  */
 export interface DescribeLogDownloadListResponse {
@@ -1594,13 +1686,36 @@ export interface BandwidthInfo {
     Bandwidth?: number;
 }
 /**
- * CreateLiveRecordRule返回参数结构体
+ * 直播流监播输出流信息
  */
-export interface CreateLiveRecordRuleResponse {
+export interface LiveStreamMonitorOutputInfo {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    OutputStreamWidth: number;
+    /**
+     * 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamHeight: number;
+    /**
+     * 监播任务输出流名称。
+  不填时，系统会自动生成。
+  256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStreamName?: string;
+    /**
+     * 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputDomain?: string;
+    /**
+     * 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputApp?: string;
 }
 /**
  * DeleteLiveTranscodeTemplate请求参数结构体
@@ -2859,17 +2974,13 @@ export interface CreateCasterInputPushUrlRequest {
     Protocol?: string;
 }
 /**
- * DescribeLivePadTemplates返回参数结构体
+ * DescribeCasterMarkWordInfos请求参数结构体
  */
-export interface DescribeLivePadTemplatesResponse {
+export interface DescribeCasterMarkWordInfosRequest {
     /**
-     * 直播垫片模板信息。
+     * 导播台ID。
      */
-    Templates: Array<PadTemplate>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    CasterId: number;
 }
 /**
  * 直播域名信息
@@ -3011,6 +3122,20 @@ export interface DeleteLivePullStreamTaskRequest {
      * 指定任务 ID。注意：用于删除使用自定义任务 ID 创建的任务。
      */
     SpecifyTaskId?: string;
+}
+/**
+ * DescribeCasterMarkPicInfos返回参数结构体
+ */
+export interface DescribeCasterMarkPicInfosResponse {
+    /**
+     * 导播台的水印信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkPicInfos?: Array<CasterMarkPicInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CopyCaster返回参数结构体
@@ -3569,21 +3694,13 @@ export interface ModifyLivePlayDomainResponse {
     RequestId?: string;
 }
 /**
- * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
+ * CreateLiveRecordRule返回参数结构体
  */
-export interface GroupProIspDataInfo {
+export interface CreateLiveRecordRuleResponse {
     /**
-     * 省份。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProvinceName: string;
-    /**
-     * 运营商。
-     */
-    IspName: string;
-    /**
-     * 分钟维度的明细数据。
-     */
-    DetailInfoList: Array<CdnPlayStatData>;
+    RequestId?: string;
 }
 /**
  * DescribeLiveDomainCertBindings返回参数结构体
@@ -4429,6 +4546,19 @@ export interface CreateLiveSnapshotTemplateResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCasterMarkPicInfo请求参数结构体
+ */
+export interface ModifyCasterMarkPicInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 新的水印信息。
+     */
+    MarkPicInfo: CasterMarkPicInfo;
+}
+/**
  * DescribeProIspPlaySumInfoList请求参数结构体
  */
 export interface DescribeProIspPlaySumInfoListRequest {
@@ -5197,6 +5327,15 @@ export interface DelayInfo {
   1： 生效中。
      */
     Status: number;
+}
+/**
+ * ModifyCasterMarkWordInfo返回参数结构体
+ */
+export interface ModifyCasterMarkWordInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * EnableOptimalSwitching返回参数结构体
@@ -6678,6 +6817,19 @@ export interface CreateCommonMixStreamRequest {
     ControlParams?: CommonMixControlParams;
 }
 /**
+ * DeleteCasterMarkPicInfo请求参数结构体
+ */
+export interface DeleteCasterMarkPicInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 需要删除的水印Index。
+     */
+    MarkPicIndex: number;
+}
+/**
  * CreateCaster返回参数结构体
  */
 export interface CreateCasterResponse {
@@ -6838,6 +6990,15 @@ export interface DescribeLiveDomainRefererResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLivePadTemplate请求参数结构体
+ */
+export interface DescribeLivePadTemplateRequest {
+    /**
+     * 模板id。
+     */
+    TemplateId: number;
+}
+/**
  * DescribeHttpStatusInfoList请求参数结构体
  */
 export interface DescribeHttpStatusInfoListRequest {
@@ -6917,6 +7078,15 @@ export interface DeleteLiveDomainRequest {
  * DeleteLiveTimeShiftTemplate返回参数结构体
  */
 export interface DeleteLiveTimeShiftTemplateResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyLivePushAuthKey返回参数结构体
+ */
+export interface ModifyLivePushAuthKeyResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7477,6 +7647,19 @@ export interface StopLivePadProcessorResponse {
     RequestId?: string;
 }
 /**
+ * AddCasterMarkWordInfo请求参数结构体
+ */
+export interface AddCasterMarkWordInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 文本的详细配置。
+     */
+    MarkWordInfo: CasterMarkWordInfo;
+}
+/**
  * ModifyLivePlayAuthKey返回参数结构体
  */
 export interface ModifyLivePlayAuthKeyResponse {
@@ -7586,6 +7769,19 @@ export interface DescribeCasterInputInfosRequest {
      * 导播台ID
      */
     CasterId: number;
+}
+/**
+ * DescribeLivePadTemplates返回参数结构体
+ */
+export interface DescribeLivePadTemplatesResponse {
+    /**
+     * 直播垫片模板信息。
+     */
+    Templates: Array<PadTemplate>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeVisitTopSumInfoList返回参数结构体
@@ -8448,6 +8644,35 @@ export interface DescribeHttpStatusInfoListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUploadStreamNums请求参数结构体
+ */
+export interface DescribeUploadStreamNumsRequest {
+    /**
+     * 起始时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+     */
+    StartTime: string;
+    /**
+     * 结束时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+  起始和结束时间跨度不支持超过31天。支持最近31天的数据查询
+     */
+    EndTime: string;
+    /**
+     * 直播域名，若不填，表示总体数据。
+     */
+    Domains?: Array<string>;
+    /**
+     * 数据粒度，支持如下粒度：
+  5：5分钟粒度，（跨度不支持超过1天），
+  1440：天粒度（跨度不支持超过一个月）。
+  默认值：5。
+     */
+    Granularity?: number;
+}
+/**
  * CreateLiveSnapshotRule请求参数结构体
  */
 export interface CreateLiveSnapshotRuleRequest {
@@ -8498,26 +8723,18 @@ export interface BillDataInfo {
     PeakTime: string;
 }
 /**
- * DescribeLiveSnapshotRules返回参数结构体
+ * EnableLiveDomain返回参数结构体
  */
-export interface DescribeLiveSnapshotRulesResponse {
-    /**
-     * 规则列表。
-     */
-    Rules: Array<RuleInfo>;
+export interface EnableLiveDomainResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * DescribeDeliverBandwidthList返回参数结构体
+ * DeleteCasterMarkPicInfo返回参数结构体
  */
-export interface DescribeDeliverBandwidthListResponse {
-    /**
-     * 转推计费带宽数据
-     */
-    DataInfoList?: Array<BandwidthInfo>;
+export interface DeleteCasterMarkPicInfoResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8556,13 +8773,13 @@ export interface DescribeCasterLayoutInfosRequest {
     CasterId: number;
 }
 /**
- * DescribeLivePadTemplate请求参数结构体
+ * AddCasterMarkPicInfo返回参数结构体
  */
-export interface DescribeLivePadTemplateRequest {
+export interface AddCasterMarkPicInfoResponse {
     /**
-     * 模板id。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateId: number;
+    RequestId?: string;
 }
 /**
  * AddCasterInputInfo请求参数结构体
@@ -8669,38 +8886,94 @@ export interface ModifyLivePullStreamTaskResponse {
     RequestId?: string;
 }
 /**
- * DescribeUploadStreamNums请求参数结构体
+ * 导播台文字水印配置。
  */
-export interface DescribeUploadStreamNumsRequest {
+export interface CasterMarkWordInfo {
     /**
-     * 起始时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+     * 文字水印Index。
      */
-    StartTime: string;
+    MarkWordIndex: number;
     /**
-     * 结束时间点，接口查询支持两种时间格式：
-  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-  起始和结束时间跨度不支持超过31天。支持最近31天的数据查询
+     * 文字水印内容。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    MarkWordText?: string;
     /**
-     * 直播域名，若不填，表示总体数据。
+     * 文字水印的字号。
+  范围[16, 60]
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domains?: Array<string>;
+    MarkWordFontSize?: number;
     /**
-     * 数据粒度，支持如下粒度：
-  5：5分钟粒度，（跨度不支持超过1天），
-  1440：天粒度（跨度不支持超过一个月）。
-  默认值：5。
+     * 文字水印的颜色，值为HEX颜色代码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Granularity?: number;
+    MarkWordFontColor?: string;
+    /**
+     * 文字水印的字体类型。
+  范围[1,2]。
+  1. 宋体
+  2. 黑体
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordFontType?: number;
+    /**
+     * 文字水印的x坐标位置，单位百分比。
+  范围[0.0, 1.0]
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordLocationX?: number;
+    /**
+     * 文字水印的Y坐标位置，单位百分比。
+  范围[0.0, 1.0]
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordLocationY?: number;
+    /**
+     * 是否开启文字跑马灯功能。
+  默认为false。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordRollEnable?: boolean;
+    /**
+     * 跑马灯文字显示一遍的时间，单位为秒。
+  默认为5s。
+  范围[5, 600]。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordRollOnceTime?: number;
+    /**
+     * 跑马灯文字的方向。
+  默认值为0。
+  范围[0,1]。
+  0 从左到右
+  1 从右到左
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordRollDirection?: number;
+    /**
+     * 跑马灯文字显示的起始x坐标，单位百分比。
+  范围[0.0, 1.0]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordRollStartLocationX?: number;
+    /**
+     * 跑马灯文字显示的截止x坐标，单位百分比。
+  范围[0.0, 1.0]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkWordRollEndLocationX?: number;
 }
 /**
- * EnableLiveDomain返回参数结构体
+ * DescribeLiveSnapshotRules返回参数结构体
  */
-export interface EnableLiveDomainResponse {
+export interface DescribeLiveSnapshotRulesResponse {
+    /**
+     * 规则列表。
+     */
+    Rules: Array<RuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8838,6 +9111,19 @@ export interface ForbidLiveStreamRequest {
   长度限制：2048字节。
      */
     Reason?: string;
+}
+/**
+ * ModifyCasterMarkWordInfo请求参数结构体
+ */
+export interface ModifyCasterMarkWordInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 修改的文本配置。
+     */
+    MarkWordInfo: CasterMarkWordInfo;
 }
 /**
  * DescribeConcurrentRecordStreamNum返回参数结构体
@@ -9423,6 +9709,15 @@ export interface DeleteCasterLayoutInfoRequest {
     LayoutIndex: number;
 }
 /**
+ * ModifyCasterMarkPicInfo返回参数结构体
+ */
+export interface ModifyCasterMarkPicInfoResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 播放汇总统计信息。
  */
 export interface PlaySumStatInfo {
@@ -9444,6 +9739,24 @@ export interface PlaySumStatInfo {
      * 总请求数。
      */
     TotalRequest: number;
+}
+/**
+ * DescribeDeliverBandwidthList请求参数结构体
+ */
+export interface DescribeDeliverBandwidthListRequest {
+    /**
+     * 起始时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+     */
+    StartTime: string;
+    /**
+     * 结束时间点，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+  支持最近三个月的数据查询，时间跨度最大是1个月。
+     */
+    EndTime: string;
 }
 /**
  * 直播域名Referer黑白名单配置
@@ -9523,6 +9836,19 @@ export interface TranscodeDetailInfo {
   Overseas：海外。
      */
     MainlandOrOversea?: string;
+}
+/**
+ * DeleteCasterMarkWordInfo请求参数结构体
+ */
+export interface DeleteCasterMarkWordInfoRequest {
+    /**
+     * 导播台ID。
+     */
+    CasterId: number;
+    /**
+     * 需要删除的文字水印Index。
+     */
+    MarkWordIndex: number;
 }
 /**
  * ModifyLiveRecordTemplate返回参数结构体
@@ -10615,38 +10941,6 @@ export interface CreateLiveSnapshotTemplateRequest {
     CosFileName?: string;
 }
 /**
- * 直播流监播输出流信息
- */
-export interface LiveStreamMonitorOutputInfo {
-    /**
-     * 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStreamWidth: number;
-    /**
-     * 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStreamHeight: number;
-    /**
-     * 监播任务输出流名称。
-  不填时，系统会自动生成。
-  256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStreamName?: string;
-    /**
-     * 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputDomain?: string;
-    /**
-     * 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputApp?: string;
-}
-/**
  * ModifyLiveCallbackTemplate请求参数结构体
  */
 export interface ModifyLiveCallbackTemplateRequest {
@@ -10773,13 +11067,21 @@ export interface CreateCasterPgmFromPvwRequest {
     CasterId: number;
 }
 /**
- * ModifyLivePushAuthKey返回参数结构体
+ * 某省份某运营商在某段时间内的带宽，流量，请求数和并发数
  */
-export interface ModifyLivePushAuthKeyResponse {
+export interface GroupProIspDataInfo {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 省份。
      */
-    RequestId?: string;
+    ProvinceName: string;
+    /**
+     * 运营商。
+     */
+    IspName: string;
+    /**
+     * 分钟维度的明细数据。
+     */
+    DetailInfoList: Array<CdnPlayStatData>;
 }
 /**
  * DeleteCasterOutputInfo请求参数结构体
@@ -10846,4 +11148,17 @@ export interface DeleteLiveDomainResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * AddCasterMarkPicInfo请求参数结构体
+ */
+export interface AddCasterMarkPicInfoRequest {
+    /**
+     * 导播台ID
+     */
+    CasterId: number;
+    /**
+     * 图片水印详细参数。
+     */
+    MarkPicInfo: CasterMarkPicInfo;
 }

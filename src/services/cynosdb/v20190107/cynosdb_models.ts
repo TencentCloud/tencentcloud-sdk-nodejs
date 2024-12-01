@@ -9469,12 +9469,12 @@ export interface DescribeBinlogSaveDaysResponse {
  */
 export interface IsolateClusterResponse {
   /**
-   * 任务流ID
+   * 任务流ID(后付费或者serverless资源返回，如果需要同步任务状态，请使用DescribeFlow接口)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
   /**
-   * 退款订单号
+   * 退款订单号(预付费资源返回，如果需要同步订单状态，请使用计费产品的DescribeDealsByCond同步订单状态)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>

@@ -80,10 +80,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateLiveWatermark", req, cb);
     }
     /**
-     * 修改截图模板配置。
+     * 修改录制模板配置。
      */
-    async ModifyLiveSnapshotTemplate(req, cb) {
-        return this.request("ModifyLiveSnapshotTemplate", req, cb);
+    async ModifyLiveRecordTemplate(req, cb) {
+        return this.request("ModifyLiveRecordTemplate", req, cb);
     }
     /**
      * 查询指定时间段范围内启动和结束的录制任务列表。
@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRecordTask(req, cb) {
         return this.request("DescribeRecordTask", req, cb);
+    }
+    /**
+     * 该接口用来停止导播台的预监任务。
+     */
+    async StopCasterPvw(req, cb) {
+        return this.request("StopCasterPvw", req, cb);
     }
     /**
      * 创建水印规则，需要先调用[AddLiveWatermark](/document/product/267/30154)接口添加水印，将返回的水印id绑定到流使用。
@@ -255,16 +261,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveRecordTemplates", req, cb);
     }
     /**
+     * 该接口用来停止直播流监播任务。
+     */
+    async StopLiveStreamMonitor(req, cb) {
+        return this.request("StopLiveStreamMonitor", req, cb);
+    }
+    /**
      * 验证用户是否拥有特定直播域名。
      */
     async AuthenticateDomainOwner(req, cb) {
         return this.request("AuthenticateDomainOwner", req, cb);
     }
     /**
-     * 该接口用来修改直播流监播任务的配置。
+     * 修改截图模板配置。
      */
-    async ModifyLiveStreamMonitor(req, cb) {
-        return this.request("ModifyLiveStreamMonitor", req, cb);
+    async ModifyLiveSnapshotTemplate(req, cb) {
+        return this.request("ModifyLiveSnapshotTemplate", req, cb);
     }
     /**
      * 查询某时间段top n的域名或流id信息（暂支持top 1000）。
@@ -273,10 +285,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVisitTopSumInfoList", req, cb);
     }
     /**
-     * 修改录制模板配置。
+     * 该接口用来修改导播台文本配置。
      */
-    async ModifyLiveRecordTemplate(req, cb) {
-        return this.request("ModifyLiveRecordTemplate", req, cb);
+    async ModifyCasterMarkWordInfo(req, cb) {
+        return this.request("ModifyCasterMarkWordInfo", req, cb);
     }
     /**
      * 该接口用来增加导播台的布局参数。
@@ -303,10 +315,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAreaBillBandwidthAndFluxList", req, cb);
     }
     /**
-     * 该接口用来停止导播台的预监任务。
+     * 该接口用来查询某个导播台的文本列表。
      */
-    async StopCasterPvw(req, cb) {
-        return this.request("StopCasterPvw", req, cb);
+    async DescribeCasterMarkWordInfos(req, cb) {
+        return this.request("DescribeCasterMarkWordInfos", req, cb);
     }
     /**
      * 该接口用来将布局信息从导播台中删除
@@ -370,6 +382,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLiveCallbackTemplate", req, cb);
     }
     /**
+     * 该接口用来修改导播台水印信息。
+注意，修改的Index对应的水印需已存在
+     */
+    async ModifyCasterMarkPicInfo(req, cb) {
+        return this.request("ModifyCasterMarkPicInfo", req, cb);
+    }
+    /**
      * 该接口用来获取导播台视频流的播放url，用来在页面上拉流展示。
      */
     async DescribeCasterPlayUrl(req, cb) {
@@ -410,6 +429,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopScreenshotTask(req, cb) {
         return this.request("StopScreenshotTask", req, cb);
+    }
+    /**
+     * 为导播台添加文本配置。
+     */
+    async AddCasterMarkWordInfo(req, cb) {
+        return this.request("AddCasterMarkWordInfo", req, cb);
     }
     /**
      * 用来查询监播场次7天内的智能识别、断流、低帧率等信息的汇总报告。
@@ -610,6 +635,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ResumeLiveStream", req, cb);
     }
     /**
+     * 该接口用来查询某个导播台的水印列表。
+     */
+    async DescribeCasterMarkPicInfos(req, cb) {
+        return this.request("DescribeCasterMarkPicInfos", req, cb);
+    }
+    /**
      * 获取单个回调模板。
      */
     async DescribeLiveCallbackTemplate(req, cb) {
@@ -626,6 +657,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async ModifyLiveCallbackTemplate(req, cb) {
         return this.request("ModifyLiveCallbackTemplate", req, cb);
+    }
+    /**
+     * 该接口用来新增图片水印。
+     */
+    async AddCasterMarkPicInfo(req, cb) {
+        return this.request("AddCasterMarkPicInfo", req, cb);
     }
     /**
      * 删除直播时移模板。
@@ -648,10 +685,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeStreamPlayInfoList", req, cb);
     }
     /**
-     * 本接口用来查询当前APPID导播台业务状态
+     * 该接口用来创建新的导播台
      */
-    async DescribeCasterUserStatus(req, cb) {
-        return this.request("DescribeCasterUserStatus", req, cb);
+    async CreateCaster(req, cb) {
+        return this.request("CreateCaster", req, cb);
     }
     /**
      * 该接口用来查询某个导播台的布局列表
@@ -1123,16 +1160,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeCasterDisplayInfo", req, cb);
     }
     /**
-     * 该接口用来停止直播流监播任务。
+     * 该接口用来修改直播流监播任务的配置。
      */
-    async StopLiveStreamMonitor(req, cb) {
-        return this.request("StopLiveStreamMonitor", req, cb);
+    async ModifyLiveStreamMonitor(req, cb) {
+        return this.request("ModifyLiveStreamMonitor", req, cb);
     }
     /**
-     * 该接口用来创建新的导播台
+     * 本接口用来查询当前APPID导播台业务状态
      */
-    async CreateCaster(req, cb) {
-        return this.request("CreateCaster", req, cb);
+    async DescribeCasterUserStatus(req, cb) {
+        return this.request("DescribeCasterUserStatus", req, cb);
     }
     /**
      * 返回直播中、无推流或者禁播等状态。
@@ -1173,6 +1210,18 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async ModifyCasterInputInfo(req, cb) {
         return this.request("ModifyCasterInputInfo", req, cb);
+    }
+    /**
+     * 该接口用来删除导播台某个Index对应的水印。
+     */
+    async DeleteCasterMarkPicInfo(req, cb) {
+        return this.request("DeleteCasterMarkPicInfo", req, cb);
+    }
+    /**
+     * 该接口用来删除导播台的文本配置。
+     */
+    async DeleteCasterMarkWordInfo(req, cb) {
+        return this.request("DeleteCasterMarkWordInfo", req, cb);
     }
     /**
      * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。

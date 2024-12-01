@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOriginGroupHealthStatus", req, cb);
     }
     /**
+     * 导出站点配置接口，本接口支持用户根据需要的配置项进行配置导出，导出的配置用于导入站点配置接口（ImportZoneConfig）进行配置导入。该功能仅支持标准版和企业版套餐站点使用。
+     */
+    async ExportZoneConfig(req, cb) {
+        return this.request("ExportZoneConfig", req, cb);
+    }
+    /**
      * 删除边缘函数，删除后函数无法恢复，关联的触发规则会一并删除。
      */
     async DeleteFunction(req, cb) {
@@ -711,6 +717,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeZoneSetting", req, cb);
     }
     /**
+     * 查询站点配置项导入结果接口，本接口用于站点配置导入接口（ImportZoneConfig）的结果查询。该功能仅支持标准版或企业版套餐的站点使用。
+     */
+    async DescribeZoneConfigImportResult(req, cb) {
+        return this.request("DescribeZoneConfigImportResult", req, cb);
+    }
+    /**
      * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。
      */
     async DeleteSecurityIPGroup(req, cb) {
@@ -755,6 +767,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeSecurityIPGroup(req, cb) {
         return this.request("DescribeSecurityIPGroup", req, cb);
+    }
+    /**
+     * 导入站点配置接口，本接口支持站点配置文件的快速导入，发起导入后接口会返回对应的任务 ID（TaskId），用户需通过查询站点配置导入结果接口（DescribeZoneConfigImportResult）获取本次导入任务执行的结果。该功能仅支持标准版和企业版套餐站点使用。
+     */
+    async ImportZoneConfig(req, cb) {
+        return this.request("ImportZoneConfig", req, cb);
     }
     /**
      * 修改自定义错误页面。

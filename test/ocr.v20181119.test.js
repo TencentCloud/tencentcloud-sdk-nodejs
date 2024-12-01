@@ -828,16 +828,6 @@ it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeKoreanDrivingLicenseOCR", async function () {
-    try {
-       const data = await client.RecognizeKoreanDrivingLicenseOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.RecognizeGeneralInvoice", async function () {
     try {
        const data = await client.RecognizeGeneralInvoice({})

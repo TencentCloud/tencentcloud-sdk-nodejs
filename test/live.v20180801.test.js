@@ -78,9 +78,9 @@ it("live.v20180801.UpdateLiveWatermark", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
+it("live.v20180801.ModifyLiveRecordTemplate", async function () {
     try {
-       const data = await client.ModifyLiveSnapshotTemplate({})
+       const data = await client.ModifyLiveRecordTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
 it("live.v20180801.DescribeRecordTask", async function () {
     try {
        const data = await client.DescribeRecordTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.StopCasterPvw", async function () {
+    try {
+       const data = await client.StopCasterPvw({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +338,16 @@ it("live.v20180801.DescribeLiveRecordTemplates", async function () {
     }
 })
 
+it("live.v20180801.StopLiveStreamMonitor", async function () {
+    try {
+       const data = await client.StopLiveStreamMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.AuthenticateDomainOwner", async function () {
     try {
        const data = await client.AuthenticateDomainOwner({})
@@ -338,9 +358,9 @@ it("live.v20180801.AuthenticateDomainOwner", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveStreamMonitor", async function () {
+it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
     try {
-       const data = await client.ModifyLiveStreamMonitor({})
+       const data = await client.ModifyLiveSnapshotTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +378,9 @@ it("live.v20180801.DescribeVisitTopSumInfoList", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveRecordTemplate", async function () {
+it("live.v20180801.ModifyCasterMarkWordInfo", async function () {
     try {
-       const data = await client.ModifyLiveRecordTemplate({})
+       const data = await client.ModifyCasterMarkWordInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +428,9 @@ it("live.v20180801.DescribeAreaBillBandwidthAndFluxList", async function () {
     }
 })
 
-it("live.v20180801.StopCasterPvw", async function () {
+it("live.v20180801.DescribeCasterMarkWordInfos", async function () {
     try {
-       const data = await client.StopCasterPvw({})
+       const data = await client.DescribeCasterMarkWordInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +528,16 @@ it("live.v20180801.DeleteLiveCallbackTemplate", async function () {
     }
 })
 
+it("live.v20180801.ModifyCasterMarkPicInfo", async function () {
+    try {
+       const data = await client.ModifyCasterMarkPicInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeCasterPlayUrl", async function () {
     try {
        const data = await client.DescribeCasterPlayUrl({})
@@ -571,6 +601,16 @@ it("live.v20180801.DescribeLivePadTemplate", async function () {
 it("live.v20180801.StopScreenshotTask", async function () {
     try {
        const data = await client.StopScreenshotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.AddCasterMarkWordInfo", async function () {
+    try {
+       const data = await client.AddCasterMarkWordInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,6 +918,16 @@ it("live.v20180801.ResumeLiveStream", async function () {
     }
 })
 
+it("live.v20180801.DescribeCasterMarkPicInfos", async function () {
+    try {
+       const data = await client.DescribeCasterMarkPicInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveCallbackTemplate", async function () {
     try {
        const data = await client.DescribeLiveCallbackTemplate({})
@@ -901,6 +951,16 @@ it("live.v20180801.DeleteLiveDomain", async function () {
 it("live.v20180801.ModifyLiveCallbackTemplate", async function () {
     try {
        const data = await client.ModifyLiveCallbackTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.AddCasterMarkPicInfo", async function () {
+    try {
+       const data = await client.AddCasterMarkPicInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,9 +998,9 @@ it("live.v20180801.DescribeStreamPlayInfoList", async function () {
     }
 })
 
-it("live.v20180801.DescribeCasterUserStatus", async function () {
+it("live.v20180801.CreateCaster", async function () {
     try {
-       const data = await client.DescribeCasterUserStatus({})
+       const data = await client.CreateCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1668,9 +1728,9 @@ it("live.v20180801.DescribeCasterDisplayInfo", async function () {
     }
 })
 
-it("live.v20180801.StopLiveStreamMonitor", async function () {
+it("live.v20180801.ModifyLiveStreamMonitor", async function () {
     try {
-       const data = await client.StopLiveStreamMonitor({})
+       const data = await client.ModifyLiveStreamMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1678,9 +1738,9 @@ it("live.v20180801.StopLiveStreamMonitor", async function () {
     }
 })
 
-it("live.v20180801.CreateCaster", async function () {
+it("live.v20180801.DescribeCasterUserStatus", async function () {
     try {
-       const data = await client.CreateCaster({})
+       const data = await client.DescribeCasterUserStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1731,6 +1791,26 @@ it("live.v20180801.CopyCaster", async function () {
 it("live.v20180801.ModifyCasterInputInfo", async function () {
     try {
        const data = await client.ModifyCasterInputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteCasterMarkPicInfo", async function () {
+    try {
+       const data = await client.DeleteCasterMarkPicInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteCasterMarkWordInfo", async function () {
+    try {
+       const data = await client.DeleteCasterMarkWordInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
