@@ -31,7 +31,7 @@ import {
   InstanceDbAuditStatus,
   ModifyTimeWindowResponse,
   ParamRecord,
-  ModifyTimeWindowRequest,
+  DescribeParamTemplatesRequest,
   DescribeRollbackRangeTimeRequest,
   DescribeBackupOverviewRequest,
   DescribeAuditInstanceListResponse,
@@ -235,7 +235,6 @@ import {
   LocalBinlogConfig,
   InquiryPriceUpgradeInstancesResponse,
   CreateDBInstanceRequest,
-  DescribeParamTemplatesRequest,
   DescribeAccountPrivilegesResponse,
   DescribeAuditLogsRequest,
   DescribeBackupConfigRequest,
@@ -281,6 +280,7 @@ import {
   DescribeInstanceUpgradeCheckJobResponse,
   DescribeCloneListRequest,
   ModifyInstanceTagRequest,
+  MigrateClusterRoInfo,
   DescribeProxySupportParamRequest,
   ModifyAutoRenewFlagResponse,
   RollbackTask,
@@ -347,6 +347,7 @@ import {
   DescribeAccountPrivilegesRequest,
   CdbSellConfig,
   DescribeSupportedPrivilegesResponse,
+  CheckMigrateResult,
   SlowLogItem,
   DescribeLocalBinlogConfigResponse,
   OpenSSLResponse,
@@ -442,6 +443,7 @@ import {
   DescribeAuditInstanceListRequest,
   DescribeBackupEncryptionStatusRequest,
   ModifyDBInstanceLogToCLSResponse,
+  ModifyTimeWindowRequest,
   AuditLogFile,
   DescribeAuditRuleTemplatesRequest,
   RollbackTables,
@@ -749,7 +751,7 @@ export class Client extends AbstractClient {
    * 本接口（CheckMigrateCluster）用于高可用实例一键迁移到集群版校验。
    */
   async CheckMigrateCluster(
-    req?: CheckMigrateClusterRequest,
+    req: CheckMigrateClusterRequest,
     cb?: (error: string, rep: CheckMigrateClusterResponse) => void
   ): Promise<CheckMigrateClusterResponse> {
     return this.request("CheckMigrateCluster", req, cb)

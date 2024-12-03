@@ -39,10 +39,11 @@ import {
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
   DescribeConfigTemplateResponse,
-  TsfPageContainerEvent,
-  DescribeDeliveryConfigResponse,
-  SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
+  DescribeDeliveryConfigResponse,
+  ForceSchedule,
+  SimpleApplication,
+  DescribeSimpleNamespacesResponse,
   DescribeSimpleClustersResponse,
   DeleteRepositoryResponse,
   DeleteApplicationResponse,
@@ -52,6 +53,7 @@ import {
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
   ReleaseFileConfigRequest,
+  Tag,
   DescribeInvocationMetricDataDimensionResponse,
   SearchStdoutLogResponse,
   CreateGatewayApiResponse,
@@ -141,7 +143,7 @@ import {
   TsfPageDimension,
   UnitRule,
   DescribePkgsResponse,
-  DescribeSimpleNamespacesResponse,
+  ConfigMapOption,
   DeleteImageTag,
   DescribeContainerGroupDeployInfoResponse,
   DescribeOverviewInvocationRequest,
@@ -150,6 +152,7 @@ import {
   DescribePublicConfigRequest,
   ImageRepository,
   DescribeOverviewInvocationResponse,
+  CommonOption,
   CreatePublicConfigResponse,
   LaneRules,
   TsfPageVmGroup,
@@ -299,6 +302,7 @@ import {
   DescribeGroupRequest,
   UnitRuleItem,
   UpdateConfigTemplateResponse,
+  TrySchedule,
   BindPluginRequest,
   HealthCheckSetting,
   DeleteLaneRuleRequest,
@@ -373,6 +377,7 @@ import {
   DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
   DescribeInstancesResponse,
+  AvailableZoneScatterScheduleRule,
   CreatePathRewritesWithDetailRespRequest,
   DeleteFileConfigResponse,
   ResourceTaskStatusResult,
@@ -402,6 +407,7 @@ import {
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
+  TsfPageContainerEvent,
   CreateMicroserviceWithDetailRespRequest,
   BusinessLogConfigSchema,
   MetricDataSingleValue,
@@ -422,7 +428,9 @@ import {
   SimpleGroup,
   CreateApiRateLimitRuleWithDetailRespResponse,
   DescribeTaskRecordsRequest,
+  CustomTolerateSchedule,
   ModifyContainerGroupResponse,
+  ExclusiveInstance,
   DeleteApplicationRequest,
   DescribeUnitNamespacesRequest,
   DeleteTaskRequest,
@@ -498,6 +506,7 @@ import {
   DescribeFileConfigReleasesRequest,
   DescribeClusterInstancesResponse,
   DescribeTaskDetailResponse,
+  EmptyDirOption,
   ExpandGroupRequest,
   RevocationPublicConfigRequest,
   ModifyLaneRuleResponse,
@@ -513,6 +522,7 @@ import {
   CreatePathRewritesRequest,
   ModifyMicroserviceRequest,
   DescribeConfigReleasesRequest,
+  CommonRef,
   StdoutLogV2,
   GroupDailyUseStatistics,
   DescribeEnabledUnitRuleRequest,
@@ -548,6 +558,7 @@ import {
   DescribePodInstancesRequest,
   RedoTaskResponse,
   DeliveryConfigBindGroup,
+  CustomPodSchedule,
   DescribeConfigsRequest,
   WarmupSetting,
   EnableUnitRouteRequest,
@@ -583,6 +594,7 @@ import {
   ApiRateLimitRule,
   Filter,
   DescribeInvocationMetricDataPointResponse,
+  ServiceGovernanceConfig,
   DisableUnitRuleResponse,
   ModifyApplicationRequest,
   DescribePathRewritesResponse,
@@ -612,6 +624,7 @@ import {
   DescribeReleasedConfigResponse,
   HealthCheckConfig,
   TsfPageSimpleApplication,
+  Affinity,
   PropertyField,
   DescribeApiDetailResponse,
   DescribeGroupsRequest,
@@ -2098,8 +2111,11 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 获取容器事件列表
-   */
+     * 获取容器事件列表
+参数限制
+
+- 当类型是 instance 时，GroupId是必填项
+     */
   async DescribeContainerEvents(
     req: DescribeContainerEventsRequest,
     cb?: (error: string, rep: DescribeContainerEventsResponse) => void

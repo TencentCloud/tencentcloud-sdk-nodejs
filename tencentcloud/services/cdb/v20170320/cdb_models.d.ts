@@ -452,35 +452,25 @@ export interface ParamRecord {
     IsSuccess?: boolean;
 }
 /**
- * ModifyTimeWindow请求参数结构体
+ * DescribeParamTemplates请求参数结构体
  */
-export interface ModifyTimeWindowRequest {
+export interface DescribeParamTemplatesRequest {
     /**
-     * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+     * 引擎版本，缺省则查询所有
      */
-    InstanceId: string;
+    EngineVersions?: Array<string>;
     /**
-     * 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。
-  说明：设置两个时间段的 json 示例如下。
-  [
-      "01:00-01:30",
-      "02:00-02:30"
-    ]
+     * 引擎类型，缺省则查询所有
      */
-    TimeRanges: Array<string>;
+    EngineTypes?: Array<string>;
     /**
-     * 指定修改哪一天的可维护时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
-  说明：指定修改多天的 json 示例如下。
-  [
-      "monday",
-      "tuesday"
-    ]
+     * 模板名称，缺省则查询所有
      */
-    Weekdays?: Array<string>;
+    TemplateNames?: Array<string>;
     /**
-     * 数据延迟阈值，仅对主实例和灾备实例有效，不传默认修改为10
+     * 模板id，缺省则查询所有
      */
-    MaxDelayTime?: number;
+    TemplateIds?: Array<number | bigint>;
 }
 /**
  * DescribeRollbackRangeTime请求参数结构体
@@ -2958,6 +2948,14 @@ export interface CreateDatabaseResponse {
  */
 export interface CheckMigrateClusterResponse {
     /**
+     * 校验是否通过，通过为pass，失败为fail
+     */
+    CheckResult?: string;
+    /**
+     * 校验项
+     */
+    Items?: Array<CheckMigrateResult>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4865,27 +4863,6 @@ export interface CreateDBInstanceRequest {
     DiskType?: string;
 }
 /**
- * DescribeParamTemplates请求参数结构体
- */
-export interface DescribeParamTemplatesRequest {
-    /**
-     * 引擎版本，缺省则查询所有
-     */
-    EngineVersions?: Array<string>;
-    /**
-     * 引擎类型，缺省则查询所有
-     */
-    EngineTypes?: Array<string>;
-    /**
-     * 模板名称，缺省则查询所有
-     */
-    TemplateNames?: Array<string>;
-    /**
-     * 模板id，缺省则查询所有
-     */
-    TemplateIds?: Array<number | bigint>;
-}
-/**
  * DescribeAccountPrivileges返回参数结构体
  */
 export interface DescribeAccountPrivilegesResponse {
@@ -5986,6 +5963,47 @@ export interface ModifyInstanceTagRequest {
      * 要删除的标签。
      */
     DeleteTags?: Array<TagInfo>;
+}
+/**
+ * 一键迁移集群版只读实例信息
+ */
+export interface MigrateClusterRoInfo {
+    /**
+     * 只读实例名称
+     */
+    RoInstanceId?: string;
+    /**
+     * 只读实例CPU核数
+     */
+    Cpu?: number;
+    /**
+     * 只读实例内存大小，单位：MB
+     */
+    Memory?: number;
+    /**
+     * 只读实例硬盘大小，单位：GB
+     */
+    Volume?: number;
+    /**
+     * 磁盘类型。 CLOUD_SSD: SSD云硬盘; CLOUD_HSSD: 增强型SSD云硬盘
+     */
+    DiskType?: string;
+    /**
+     * 可用区
+     */
+    Zone?: string;
+    /**
+     * 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。
+     */
+    DeviceType?: string;
+    /**
+     * 只读实例所在ro组，例：cdbrg-xxx
+     */
+    RoGroupId?: string;
+    /**
+     * 实例当前告警策略id数组
+     */
+    SrcAlarmPolicyList?: Array<number | bigint>;
 }
 /**
  * DescribeProxySupportParam请求参数结构体
@@ -7563,6 +7581,23 @@ export interface DescribeSupportedPrivilegesResponse {
     RequestId?: string;
 }
 /**
+ * 迁移集群版校验结果
+ */
+export interface CheckMigrateResult {
+    /**
+     * 校验名称
+     */
+    Name?: string;
+    /**
+     * 校验结果，通过为pass，失败为fail
+     */
+    Status?: string;
+    /**
+     * 校验结果描述
+     */
+    Desc?: string;
+}
+/**
  * 结构化的慢日志详情
  */
 export interface SlowLogItem {
@@ -7690,7 +7725,40 @@ export interface OpenWanServiceResponse {
 /**
  * CheckMigrateCluster请求参数结构体
  */
-export declare type CheckMigrateClusterRequest = null;
+export interface CheckMigrateClusterRequest {
+    /**
+     * 实例Id。
+     */
+    InstanceId: string;
+    /**
+     * 实例CPU核数
+     */
+    Cpu?: number;
+    /**
+     * 实例内存大小，单位：MB
+     */
+    Memory?: number;
+    /**
+     * 实例硬盘大小，单位：GB
+     */
+    Volume?: number;
+    /**
+     * 磁盘类型。 CLOUD_SSD: SSD云硬盘; CLOUD_HSSD: 增强型SSD云硬盘
+     */
+    DiskType?: string;
+    /**
+     * 集群版节点拓扑配置。
+     */
+    ClusterTopology?: ClusterTopology;
+    /**
+     * 迁移实例类型。支持值包括： "CLOUD_NATIVE_CLUSTER" - 标准型集群版实例， "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 加强型集群版实例。
+     */
+    DeviceType?: string;
+    /**
+     * 只读实例信息
+     */
+    RoInfo?: Array<MigrateClusterRoInfo>;
+}
 /**
  * DescribeDBInstanceGTID请求参数结构体
  */
@@ -9633,6 +9701,37 @@ export interface ModifyDBInstanceLogToCLSResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyTimeWindow请求参数结构体
+ */
+export interface ModifyTimeWindowRequest {
+    /**
+     * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+     */
+    InstanceId: string;
+    /**
+     * 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。
+  说明：设置两个时间段的 json 示例如下。
+  [
+      "01:00-01:30",
+      "02:00-02:30"
+    ]
+     */
+    TimeRanges: Array<string>;
+    /**
+     * 指定修改哪一天的可维护时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
+  说明：指定修改多天的 json 示例如下。
+  [
+      "monday",
+      "tuesday"
+    ]
+     */
+    Weekdays?: Array<string>;
+    /**
+     * 数据延迟阈值，仅对主实例和灾备实例有效，不传默认修改为10
+     */
+    MaxDelayTime?: number;
 }
 /**
  * 审计日志文件

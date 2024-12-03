@@ -1246,7 +1246,7 @@ export interface BackupTableContent {
    */
   BackupErrorMsg?: string
   /**
-   * 改库表是否绑定降冷策略
+   * 该库表是否绑定降冷策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOpenCoolDown?: boolean

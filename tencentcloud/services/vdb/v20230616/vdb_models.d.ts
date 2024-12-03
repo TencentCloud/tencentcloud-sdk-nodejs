@@ -22,6 +22,14 @@ export interface Network {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: number;
+    /**
+     * 旧 ip 保留时长，单位天
+     */
+    PreserveDuration?: number;
+    /**
+     * 旧 ip 到期时间
+     */
+    ExpireTime?: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体

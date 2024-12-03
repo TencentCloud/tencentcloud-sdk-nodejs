@@ -90,14 +90,18 @@ export interface LogoParam {
  */
 export interface SubmitImageAnimateJobRequest {
   /**
-   * 图片格式：支持PNG、JPG、JPEG格式；
-图片分辨率：长边分辨率不超过2056；
+   * 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；
+图片分辨率：长边分辨率范围【192，4096】；
 图片大小：不超过10M；
 图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
    */
   ImageUrl?: string
   /**
-   * 图片base64数据。图片格式：支持PNG、JPG、JPEG格式；图片分辨率：长边分辨率不超过2056；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   * 图片base64数据。
+图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；
+图片分辨率：长边分辨率范围【192，4096】；
+图片大小：不超过10M；
+图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
    */
   ImageBase64?: string
   /**
@@ -114,7 +118,7 @@ export interface SubmitImageAnimateJobRequest {
    */
   EnableBodyJoins?: boolean
   /**
-   * 最终视频是否保留原图的背景（该模式对于tuziwu、huajiangwu不生效）
+   * 最终视频是否保留原图的背景，默认不保留。
 
    */
   EnableSegment?: boolean
@@ -134,9 +138,9 @@ export interface SubmitImageAnimateJobRequest {
 }
 
 /**
- * SubmitVideoStylizationJob返回参数结构体
+ * SubmitPortraitSingJob返回参数结构体
  */
-export interface SubmitVideoStylizationJobResponse {
+export interface SubmitPortraitSingJobResponse {
   /**
    * 任务ID。任务有效期为48小时。
    */
@@ -176,21 +180,7 @@ export interface DescribePortraitSingJobRequest {
  */
 export interface SubmitImageAnimateJobResponse {
   /**
-   * 任务ID。
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitPortraitSingJob返回参数结构体
- */
-export interface SubmitPortraitSingJobResponse {
-  /**
-   * 任务ID。任务有效期为48小时。
+   * 图片跳舞任务ID。
    */
   JobId?: string
   /**
@@ -274,6 +264,49 @@ export interface DescribeVideoTranslateJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckAnimateImageJob返回参数结构体
+ */
+export interface CheckAnimateImageJobResponse {
+  /**
+   * 输入图是否通过校验。
+   */
+  CheckPass?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckAnimateImageJob请求参数结构体
+ */
+export interface CheckAnimateImageJobRequest {
+  /**
+   * 动作模板ID。
+   */
+  TemplateId: string
+  /**
+   * 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；
+图片分辨率：长边分辨率范围【192，4096】；
+图片大小：不超过10M；
+图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   */
+  ImageUrl?: string
+  /**
+   * 图片base64数据。
+图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；
+图片分辨率：长边分辨率范围【192，4096】；
+图片大小：不超过10M；
+图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内
+   */
+  ImageBase64?: string
+  /**
+   * 是否检测输入图人体12个身体部位（头部、颈部、右肩、右肘、右腕、左肩、左肘、左腕、右髋、左髋,、左膝、右膝）。默认不检测。
+   */
+  EnableBodyJoins?: boolean
 }
 
 /**
@@ -427,19 +460,17 @@ JobSuccess: "处理完成"。
 }
 
 /**
- * 音频翻译结果
+ * SubmitVideoStylizationJob返回参数结构体
  */
-export interface TranslateResult {
+export interface SubmitVideoStylizationJobResponse {
   /**
-   * 翻译源文字
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID。任务有效期为48小时。
    */
-  SourceText?: string
+  JobId?: string
   /**
-   * 翻译后文字。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TargetText?: string
+  RequestId?: string
 }
 
 /**
@@ -499,6 +530,22 @@ fps 要求：【15-60】fps
    * 当 AudioUrl 字段有输入音频时，如果输入音频时长大于输入视频时长，会拼接视频（ 0-正向拼接、1-反向拼接 ）对齐音频时长。默认 0。
    */
   VideoLoop?: number
+}
+
+/**
+ * 音频翻译结果
+ */
+export interface TranslateResult {
+  /**
+   * 翻译源文字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceText?: string
+  /**
+   * 翻译后文字。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetText?: string
 }
 
 /**

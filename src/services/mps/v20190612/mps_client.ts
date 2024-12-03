@@ -556,6 +556,7 @@ import {
   DescribeWordSamplesRequest,
   AddOnSubtitle,
   AwsSQS,
+  WordResult,
   LiveStreamProcessTask,
   QualityControlData,
   DescribeOutputRISTSettings,

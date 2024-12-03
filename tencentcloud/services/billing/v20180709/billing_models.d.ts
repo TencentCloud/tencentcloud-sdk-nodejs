@@ -1629,7 +1629,7 @@ export interface ConsumptionSummaryTotal {
     /**
      * 折后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
 }
 /**
  * 节省计划覆盖率数据
@@ -1790,11 +1790,11 @@ export interface DetailPoint {
     /**
      * 时间
      */
-    Time: string;
+    Time?: string;
     /**
      * 值
      */
-    Value: string;
+    Value?: string;
 }
 /**
  * DescribeAllocationMonthOverview返回参数结构体
@@ -3079,11 +3079,11 @@ export interface ConditionPayMode {
     /**
      * 付费模式
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 付费模式名称
      */
-    PayModeName: string;
+    PayModeName?: string;
 }
 /**
  * 分账条件子产品筛选
@@ -5359,11 +5359,11 @@ export interface ConditionRegion {
     /**
      * 地域ID
      */
-    RegionId: string;
+    RegionId?: string;
     /**
      * 地域名称
      */
-    RegionName: string;
+    RegionName?: string;
 }
 /**
  * 分账账单趋势图平均值
@@ -7298,11 +7298,11 @@ export interface ConditionProject {
     /**
      * 项目ID
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 项目名称
      */
-    ProjectName: string;
+    ProjectName?: string;
 }
 /**
  * DescribeTagList返回参数结构体

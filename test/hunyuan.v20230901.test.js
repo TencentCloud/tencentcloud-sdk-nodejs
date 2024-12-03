@@ -158,6 +158,16 @@ it("hunyuan.v20230901.QueryHunyuanImageChatJob", async function () {
     }
 })
 
+it("hunyuan.v20230901.ChatTranslations", async function () {
+    try {
+       const data = await client.ChatTranslations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.GetEmbedding", async function () {
     try {
        const data = await client.GetEmbedding({})

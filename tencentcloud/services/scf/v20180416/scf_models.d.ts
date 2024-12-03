@@ -1198,7 +1198,7 @@ export interface UpdateCustomDomainRequest {
      */
     WafConfig?: WafConf;
     /**
-     * 	路由配置
+     * 路由配置
      */
     EndpointsConfig?: Array<EndpointsConf>;
 }

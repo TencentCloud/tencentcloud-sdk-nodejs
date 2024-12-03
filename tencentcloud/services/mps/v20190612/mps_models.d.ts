@@ -185,19 +185,23 @@ export interface AiRecognitionTaskAsrFullTextSegmentItem {
     /**
      * 识别片段置信度。取值：0~100。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 识别片段起始的偏移时间，单位：秒。
      */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /**
      * 识别片段终止的偏移时间，单位：秒。
      */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /**
      * 识别文本。
      */
-    Text: string;
+    Text?: string;
+    /**
+     * 字词时间戳信息。
+     */
+    Wordlist?: Array<WordResult>;
 }
 /**
  * DeleteStreamLinkFlow请求参数结构体
@@ -2198,6 +2202,10 @@ export interface AiRecognitionTaskInput {
      * 视频智能识别模板 ID 。
      */
     Definition: number;
+    /**
+     * 用户扩展字段，一般场景不用填。
+     */
+    UserExtPara?: string;
 }
 /**
  * 音频流配置参数
@@ -5326,6 +5334,37 @@ export interface VideoTemplateInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SegmentSpecificInfo?: SegmentSpecificInfo;
+    /**
+     * 模版是否开启场景化
+  0：不开启
+  1：开启
+  默认值：0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScenarioBased?: number;
+    /**
+     * 视频场景化，可选值：
+  normal：通用转码场景：通用转码压缩场景。
+  pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。
+  materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。
+  ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。
+  e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。
+  educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。
+  默认值：normal
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneType?: string;
+    /**
+     * 转码策略，可选值：
+  ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。
+  standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。
+  high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。
+  low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。
+  默认值：standard_compress
+  注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompressType?: string;
 }
 /**
  * 视频编辑/合成任务 字幕样式。
@@ -9441,6 +9480,11 @@ export interface TranscodeTemplate {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnhanceConfig?: EnhanceConfig;
+    /**
+     * 转码模板别名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasName?: string;
 }
 /**
  * DescribeStreamLinkFlowMediaStatistics返回参数结构体
@@ -11456,6 +11500,36 @@ export interface VideoTemplateInfoForUpdate {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SegmentSpecificInfo?: SegmentSpecificInfo;
+    /**
+     * 模版是否开启场景化
+  0：不开启
+  1：开启
+  默认值：0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScenarioBased?: number;
+    /**
+     * 视频场景化，可选值：
+  normal：通用转码场景：通用转码压缩场景 pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。
+  materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。
+  ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。
+  e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。
+  educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。
+  默认值：normal
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneType?: string;
+    /**
+     * 转码策略，可选值：
+  ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。
+  standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。
+  high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。
+  low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。
+  默认值：standard_compress
+  注：若需要在电视上观看视频，不建议使用ultra_compress策略。ultra_compress策略计费标准为极速高清转码 + 音视频增强-去毛刺。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompressType?: string;
 }
 /**
  * CreateContentReviewTemplate请求参数结构体
@@ -13179,6 +13253,23 @@ export interface AwsSQS {
     S3SecretKey?: string;
 }
 /**
+ * 字词信息。
+ */
+export interface WordResult {
+    /**
+     * 字词文本。
+     */
+    Word?: string;
+    /**
+     * 字词起始时间戳，单位秒。
+     */
+    Start?: number;
+    /**
+     * 字词结束时间戳，单位秒。
+     */
+    End?: number;
+}
+/**
  * 直播处理任务信息
  */
 export interface LiveStreamProcessTask {
@@ -13547,6 +13638,26 @@ export interface DescribeTranscodeTemplatesRequest {
      * 转码模板标识过滤条件，长度限制：64 个字符。
      */
     Name?: string;
+    /**
+     * 视频场景化，可选值：
+  normal：通用转码场景：通用转码压缩场景。
+  pgc：PGC高清影视：压缩时会注重影视剧的观看体验，根据影视剧特性进行ROI编码，同时保留高质量的视频内容和音频。
+  materials_video：高清素材：素材资源类场景，对画质要求极高，较多透明画面内容，在压缩的同时接近视觉无损。
+  ugc：UGC内容：适用于广泛的UGC/短视频场景，针对短视频的特性优化编码码率， 画质提升，提升业务QOS/QOE指标。
+  e-commerce_video：秀场/电商类：压缩时会强调细节清晰度和ROI区域提升，尤其注重保持人脸区域的画质。
+  educational_video：教育类：压缩时会强调文字和图像的清晰度和可读性，以便学生更好地理解内容，确保讲解内容清晰传达。
+  no_config：未配置。
+     */
+    SceneType?: string;
+    /**
+     * 转码策略，可选值：
+  ultra_compress：极致压缩：相比标准压缩，该策略能在保证一定画质的基础上最大限度压缩码率，极大节约带宽和存储成本。
+  standard_compress：综合最优：平衡压缩率与画质，在保证主观画质没有明显降低的情况下尽可能压缩文件。该策略仅收取音视频极速高清转码费用。
+  high_compress：码率优先：优先保证降低文件体积大小，可能有一定画质损失。该策略仅收取音视频极速高清转码费用。
+  low_compress：画质优先：优先保证画质，压缩出来的文件体积可能相对较大。该策略仅收取音视频极速高清转码费用。
+  no_config：未配置。
+     */
+    CompressType?: string;
 }
 /**
  * BatchDeleteStreamLinkFlow返回参数结构体
@@ -15517,23 +15628,27 @@ export interface AiRecognitionTaskTransTextSegmentItem {
     /**
      * 识别片段置信度。取值：0~100。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 识别片段起始的偏移时间，单位：秒。
      */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /**
      * 识别片段终止的偏移时间，单位：秒。
      */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
     /**
      * 识别文本。
      */
-    Text: string;
+    Text?: string;
     /**
      * 翻译文本。
      */
-    Trans: string;
+    Trans?: string;
+    /**
+     * 字词时间戳信息。
+     */
+    Wordlist?: Array<WordResult>;
 }
 /**
  * ModifyWatermarkTemplate返回参数结构体

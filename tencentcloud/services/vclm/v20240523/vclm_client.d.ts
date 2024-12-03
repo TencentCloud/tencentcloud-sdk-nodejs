@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitVideoStylizationJobRequest, SubmitImageAnimateJobRequest, SubmitVideoStylizationJobResponse, ConfirmVideoTranslateJobRequest, DescribePortraitSingJobRequest, SubmitImageAnimateJobResponse, SubmitPortraitSingJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobResponse, DescribeVideoStylizationJobRequest, DescribeImageAnimateJobResponse, SubmitPortraitSingJobRequest, DescribeVideoStylizationJobResponse, SubmitVideoTranslateJobRequest, ConfirmVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, DescribeImageAnimateJobRequest, DescribePortraitSingJobResponse } from "./vclm_models";
+import { SubmitVideoStylizationJobRequest, SubmitImageAnimateJobRequest, SubmitPortraitSingJobResponse, ConfirmVideoTranslateJobRequest, DescribePortraitSingJobRequest, SubmitImageAnimateJobResponse, SubmitVideoTranslateJobResponse, DescribeVideoTranslateJobResponse, CheckAnimateImageJobResponse, CheckAnimateImageJobRequest, DescribeVideoStylizationJobRequest, DescribeImageAnimateJobResponse, SubmitPortraitSingJobRequest, DescribeVideoStylizationJobResponse, SubmitVideoStylizationJobResponse, SubmitVideoTranslateJobRequest, ConfirmVideoTranslateJobResponse, DescribeVideoTranslateJobRequest, DescribeImageAnimateJobRequest, DescribePortraitSingJobResponse } from "./vclm_models";
 /**
  * vclm client
  * @class
@@ -93,6 +93,10 @@ export declare class Client extends AbstractClient {
      * 用于提交图片跳舞任务。图片跳舞能力支持舞蹈动作结合图片生成跳舞视频，满足社交娱乐、互动营销等场景的需求。
      */
     SubmitImageAnimateJob(req: SubmitImageAnimateJobRequest, cb?: (error: string, rep: SubmitImageAnimateJobResponse) => void): Promise<SubmitImageAnimateJobResponse>;
+    /**
+     * 检查图片跳舞输入图
+     */
+    CheckAnimateImageJob(req: CheckAnimateImageJobRequest, cb?: (error: string, rep: CheckAnimateImageJobResponse) => void): Promise<CheckAnimateImageJobResponse>;
     /**
      * 用于查询视频风格化任务。视频风格化支持将输入视频生成特定风格的视频。生成后的视频画面风格多样、流畅自然，能够满足社交娱乐、互动营销、视频素材制作等场景的需求。
      */

@@ -275,7 +275,7 @@ export interface TextToVoiceRequest {
    */
   EmotionIntensity?: number
   /**
-   * 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。
+   * 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。【已废弃】
    */
   FastVoiceType?: string
 }

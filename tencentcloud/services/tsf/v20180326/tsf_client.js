@@ -896,6 +896,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
     /**
      * 获取容器事件列表
+参数限制
+
+- 当类型是 instance 时，GroupId是必填项
      */
     async DescribeContainerEvents(req, cb) {
         return this.request("DescribeContainerEvents", req, cb);

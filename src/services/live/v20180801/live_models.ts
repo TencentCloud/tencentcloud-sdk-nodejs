@@ -623,6 +623,46 @@ export interface DescribeLiveDomainCertRequest {
 }
 
 /**
+ * DescribeLiveEnhanceInfoList请求参数结构体
+ */
+export interface DescribeLiveEnhanceInfoListRequest {
+  /**
+   * 起始时间点，使用ISO格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见[ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+接口支持最近三个月的查询，开始时间和结束时间查询跨度不能超过三十天。
+   */
+  StartTime: string
+  /**
+   * 结束时间点，使用ISO格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见[ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+接口支持最近三个月的查询，开始时间和结束时间查询跨度不能超过三十天。
+   */
+  EndTime: string
+  /**
+   * 查询粒度，支持5，60分钟。
+   */
+  Granularity?: number
+  /**
+   * 查询域名，如果不填则默认查全部的数据。
+   */
+  DomainNames?: Array<string>
+  /**
+   * 增强服务类型，如果不填则默认查全部的数据。
+   */
+  Type?: Array<string>
+  /**
+   * 分辨率，如果不填则默认查全部的数据。
+   */
+  Resolution?: Array<string>
+  /**
+   * 帧率，如果不填则默认查全部的数据。
+   */
+  Fps?: Array<string>
+}
+
+/**
  * 媒体诊断结果，包含断流信息、低帧率信息等
  */
 export interface DiagnoseResult {
@@ -1380,23 +1420,23 @@ export interface DescribeLiveStreamOnlineListResponse {
   /**
    * 符合条件的总个数。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 分页的页码。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页显示的条数。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 正在推送流的信息列表。
    */
-  OnlineInfo: Array<StreamOnlineInfo>
+  OnlineInfo?: Array<StreamOnlineInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4052,6 +4092,36 @@ export interface ModifyLivePlayDomainRequest {
    * 拉流域名类型。1-国内；2-全球；3-境外
    */
   PlayType: number
+}
+
+/**
+ * 直播增强计费信息。
+ */
+export interface LiveEnhanceInfo {
+  /**
+   * 域名。
+   */
+  Domain?: string
+  /**
+   * 时间。
+   */
+  Time?: string
+  /**
+   * 计费时长，单位分钟。
+   */
+  Duration?: number
+  /**
+   * 帧率。
+   */
+  Fps?: string
+  /**
+   * 分辨率。
+   */
+  Resolution?: string
+  /**
+   * 增强服务类型。
+   */
+  Type?: string
 }
 
 /**
@@ -11251,6 +11321,20 @@ export interface DescribeLiveTranscodeTotalInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataInfoList?: Array<TranscodeTotalInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLiveEnhanceInfoList返回参数结构体
+ */
+export interface DescribeLiveEnhanceInfoListResponse {
+  /**
+   * 直播增强统计信息列表。
+   */
+  DataInfoList?: Array<LiveEnhanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

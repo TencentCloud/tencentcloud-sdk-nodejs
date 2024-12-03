@@ -1685,7 +1685,7 @@ export interface ConsumptionSummaryTotal {
   /**
    * 折后总价
    */
-  RealTotalCost: string
+  RealTotalCost?: string
 }
 
 /**
@@ -1851,11 +1851,11 @@ export interface DetailPoint {
   /**
    * 时间
    */
-  Time: string
+  Time?: string
   /**
    * 值
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -3172,11 +3172,11 @@ export interface ConditionPayMode {
   /**
    * 付费模式
    */
-  PayMode: string
+  PayMode?: string
   /**
    * 付费模式名称
    */
-  PayModeName: string
+  PayModeName?: string
 }
 
 /**
@@ -5501,11 +5501,11 @@ export interface ConditionRegion {
   /**
    * 地域ID
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 地域名称
    */
-  RegionName: string
+  RegionName?: string
 }
 
 /**
@@ -7492,11 +7492,11 @@ export interface ConditionProject {
   /**
    * 项目ID
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 项目名称
    */
-  ProjectName: string
+  ProjectName?: string
 }
 
 /**

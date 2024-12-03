@@ -22,19 +22,19 @@ export interface GroupInfoMember {
   /**
    * coordinator 为消费分组中的消费者生成的唯一 ID
    */
-  MemberId: string
+  MemberId?: string
   /**
    * 客户消费者 SDK 自己设置的 client.id 信息
    */
-  ClientId: string
+  ClientId?: string
   /**
    * 一般存储客户的 IP 地址
    */
-  ClientHost: string
+  ClientHost?: string
   /**
    * 存储着分配给该消费者的 partition 信息
    */
-  Assignment: Assignment
+  Assignment?: Assignment
 }
 
 /**
@@ -42,15 +42,15 @@ export interface GroupInfoMember {
  */
 export interface PartitionOffset {
   /**
-   * Partition,例如"0"或"1"
+   * 分区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partition: string
+  Partition?: string
   /**
-   * Offset,例如100
+   * 位点偏移量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  Offset?: number
 }
 
 /**
@@ -242,7 +242,7 @@ export interface AuthorizeTokenResponse {
  */
 export interface EsParam {
   /**
-   * 实例资源
+   * Es实例资源Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource: string
@@ -534,40 +534,40 @@ export interface Region {
   /**
    * 地域ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 地域名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 区域名称
    */
-  AreaName: string
+  AreaName?: string
   /**
    * 地域代码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionCode: string
+  RegionCode?: string
   /**
    * 地域代码（V3版本）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionCodeV3: string
+  RegionCodeV3?: string
   /**
-   * NONE:默认值不支持任何特殊机型\nCVM:支持CVM类型
+   * NONE:默认值不支持任何特殊类型 实例类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Support: string
+  Support?: string
   /**
    * 是否支持ipv6, 0：表示不支持，1：表示支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6: number
+  Ipv6?: number
   /**
    * 是否支持跨可用区, 0：表示不支持，1：表示支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MultiZone: number
+  MultiZone?: number
 }
 
 /**
@@ -744,12 +744,12 @@ export interface MqttParam {
  */
 export interface BrokerTopicFlowData {
   /**
-   * Topic 名称
+   * 主题名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
   /**
-   * Topic Id
+   * 主题Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
@@ -1083,7 +1083,7 @@ export interface MySQLParam {
    */
   Resource: string
   /**
-   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+   * 复制存量信息(schema_only不复制, initial全量)，默认值initial
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotMode?: string
@@ -1245,42 +1245,42 @@ export interface ConsumerGroupResponse {
   /**
    * 符合条件的消费组数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 主题列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicList: Array<ConsumerGroupTopic>
+  TopicList?: Array<ConsumerGroupTopic>
   /**
    * 消费分组List
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupList: Array<ConsumerGroup>
+  GroupList?: Array<ConsumerGroup>
   /**
    * 所有分区数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalPartition: number
+  TotalPartition?: number
   /**
    * 监控的分区列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PartitionListForMonitor: Array<Partition>
+  PartitionListForMonitor?: Array<Partition>
   /**
    * 主题总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalTopic: number
+  TotalTopic?: number
   /**
    * 监控的主题列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicListForMonitor: Array<ConsumerGroupTopic>
+  TopicListForMonitor?: Array<ConsumerGroupTopic>
   /**
    * 监控的组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupListForMonitor: Array<Group>
+  GroupListForMonitor?: Array<Group>
 }
 
 /**
@@ -1450,11 +1450,11 @@ export interface InstanceDetailResponse {
   /**
    * 符合条件的实例总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 符合条件的实例详情列表
    */
-  InstanceList: Array<InstanceDetail>
+  InstanceList?: Array<InstanceDetail>
 }
 
 /**
@@ -1652,9 +1652,9 @@ export interface ModifyAclRuleRequest {
  */
 export interface Group {
   /**
-   * 组名称
+   * 消费分组名称
    */
-  GroupName: string
+  GroupName?: string
 }
 
 /**
@@ -1730,22 +1730,22 @@ export interface ModifyRoutineMaintenanceTaskRequest {
  */
 export interface Instance {
   /**
-   * 实例id
+   * ckafka集群实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 实例名称
+   * ckafka集群实例Name
    */
-  InstanceName: string
+  InstanceName?: string
   /**
-   * 实例的状态。0：创建中，1：运行中，2：删除中 ， 5 隔离中，-1 创建失败
+   * 实例的状态。0: 创建中，1: 运行中，2: 删除中,  3: 已删除,  5: 隔离中,  7: 升级中,  -1: 创建失败
    */
-  Status: number
+  Status?: number
   /**
    * 是否开源实例。开源：true，不开源：false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IfCommunity: boolean
+  IfCommunity?: boolean
 }
 
 /**
@@ -1883,7 +1883,7 @@ export interface KafkaConnectParam {
  */
 export interface DatahubTaskInfo {
   /**
-   * 任务ID
+   * 任务Id
    */
   TaskId?: string
   /**
@@ -2000,11 +2000,11 @@ export interface DeleteDatahubTaskResponse {
  */
 export interface InstanceAttributesResponse {
   /**
-   * 实例ID
+   * ckafka集群实例Id
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * ckafka集群实例Name
    */
   InstanceName?: string
   /**
@@ -2020,7 +2020,7 @@ export interface InstanceAttributesResponse {
    */
   Vport?: string
   /**
-   * 实例的状态。0：创建中，1：运行中，2：删除中
+   * 实例的状态。0: 创建中，1: 运行中，2: 删除中,  3: 已删除,  5: 隔离中,  7: 升级中,  -1: 创建失败
    */
   Status?: number
   /**
@@ -2090,12 +2090,12 @@ export interface InstanceAttributesResponse {
    */
   ExpireTime?: number
   /**
-   * 跨可用区
+   * 可用区列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
   /**
-   * kafka版本信息
+   * ckafka集群实例版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
@@ -2159,6 +2159,20 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceChargeType?: string
+  /**
+   * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType?: string
+  /**
+   * 免费分区数量
+   */
+  FreePartitionNumber?: number
+  /**
+   * 弹性带宽上浮值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticFloatBandwidth?: number
 }
 
 /**
@@ -2225,11 +2239,11 @@ export interface KafkaParam {
    */
   SelfBuilt: boolean
   /**
-   * 实例资源
+   * ckafka集群实例Id
    */
   Resource: string
   /**
-   * Topic名称，多个以“,”分隔
+   * 主题名，多个以“,”分隔
    */
   Topic?: string
   /**
@@ -2248,12 +2262,12 @@ export interface KafkaParam {
    */
   ResourceName?: string
   /**
-   * Zone ID
+   * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
-   * Topic的Id
+   * 主题Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
@@ -2314,17 +2328,17 @@ export interface KafkaParam {
  */
 export interface Connection {
   /**
-   * Topic名称
+   * 主题名
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 消费组ID
    */
-  GroupId: string
+  GroupId?: string
   /**
-   * Topic的Id
+   * 主题Id
    */
-  TopicId: string
+  TopicId?: string
 }
 
 /**
@@ -2475,7 +2489,7 @@ export interface CreateTopicResp {
   /**
    * 主题Id
    */
-  TopicId: string
+  TopicId?: string
 }
 
 /**
@@ -2488,12 +2502,12 @@ export interface TaskStatusResponse {
 1 失败
 2 进行中
    */
-  Status: number
+  Status?: number
   /**
    * 输出信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: string
+  Output?: string
 }
 
 /**
@@ -2553,35 +2567,35 @@ export interface ConsumerRecord {
   /**
    * 主题名
    */
-  Topic: string
+  Topic?: string
   /**
    * 分区id
    */
-  Partition: number
+  Partition?: number
   /**
    * 位点
    */
-  Offset: number
+  Offset?: number
   /**
    * 消息key
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  Key?: string
   /**
    * 消息value
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 消息时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 消息headers
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Headers: string
+  Headers?: string
 }
 
 /**
@@ -2696,11 +2710,11 @@ export interface DescribeDatahubTopicResp {
  */
 export interface InstanceDetail {
   /**
-   * 实例id
+   * ckafka集群实例Id
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * ckafka集群实例名称
    */
   InstanceName?: string
   /**
@@ -2716,7 +2730,7 @@ export interface InstanceDetail {
    */
   VipList?: Array<VipEntity>
   /**
-   * 实例的状态。0：创建中，1：运行中，2：删除中：5隔离中， -1 创建失败
+   * 实例的状态。0: 创建中，1: 运行中，2: 删除中,  3: 已删除,  5: 隔离中,  7: 升级中,  -1: 创建失败
    */
   Status?: number
   /**
@@ -2724,7 +2738,7 @@ export interface InstanceDetail {
    */
   Bandwidth?: number
   /**
-   * 实例的存储大小，单位GB
+   * ckafka集群实例磁盘大小，单位G
    */
   DiskSize?: number
   /**
@@ -2787,12 +2801,12 @@ export interface InstanceDetail {
    */
   Cvm?: number
   /**
-   * ckafka实例类型
+   * ckafka集群实例类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
-   * 磁盘类型
+   * ckafka集群实例磁盘类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
@@ -2817,17 +2831,17 @@ export interface InstanceDetail {
    */
   PartitionNumber?: number
   /**
-   * 公网带宽类型
+   * ckafka集群实例公网带宽类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicNetworkChargeType?: string
   /**
-   * 公网带宽值
+   * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicNetwork?: number
   /**
-   * 实例类型
+   * ckafka集群实例底层集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
@@ -3025,12 +3039,12 @@ export interface GroupOffsetResponse {
   /**
    * 符合调节的总结果数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 该主题分区数组，其中每个元素为一个 json object
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicList: Array<GroupOffsetTopic>
+  TopicList?: Array<GroupOffsetTopic>
 }
 
 /**
@@ -3041,27 +3055,27 @@ export interface InquiryDetailPrice {
    * 额外内网带宽价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BandwidthPrice: InquiryBasePrice
+  BandwidthPrice?: InquiryBasePrice
   /**
    * 硬盘价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskPrice: InquiryBasePrice
+  DiskPrice?: InquiryBasePrice
   /**
    * 额外分区价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PartitionPrice: InquiryBasePrice
+  PartitionPrice?: InquiryBasePrice
   /**
    * 额外Topic价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicPrice: InquiryBasePrice
+  TopicPrice?: InquiryBasePrice
   /**
    * 实例套餐价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceTypePrice: InquiryBasePrice
+  InstanceTypePrice?: InquiryBasePrice
 }
 
 /**
@@ -3072,12 +3086,12 @@ export interface InquireCkafkaPriceResp {
    * 实例价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstancePrice: InquiryPrice
+  InstancePrice?: InquiryPrice
   /**
    * 公网带宽价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicNetworkBandwidthPrice: InquiryPrice
+  PublicNetworkBandwidthPrice?: InquiryPrice
 }
 
 /**
@@ -3127,17 +3141,17 @@ export interface RegexReplaceParam {
  */
 export interface AclRule {
   /**
-   * Acl规则名称
+   * ACL规则名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
-   * 实例ID
+   * ckafka集群实例Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED
+   * ACL规则匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PatternType?: string
@@ -3215,32 +3229,32 @@ export interface TopicMessageHeapRanking {
    * 主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 分区数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PartitionNum: number
+  PartitionNum?: number
   /**
    * 副本数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReplicaNum: number
+  ReplicaNum?: number
   /**
    * Topic 流量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicTraffic: string
+  TopicTraffic?: string
   /**
    * topic消息堆积/占用磁盘
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MessageHeap: number
+  MessageHeap?: number
 }
 
 /**
@@ -3430,7 +3444,7 @@ export interface RouteResponse {
    * 路由信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Routers: Array<Route>
+  Routers?: Array<Route>
 }
 
 /**
@@ -3762,12 +3776,12 @@ export interface AclResponse {
   /**
    * 符合条件的总数据条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * ACL列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AclList: Array<Acl>
+  AclList?: Array<Acl>
 }
 
 /**
@@ -3874,11 +3888,11 @@ export interface ConsumerGroupSpeed {
   /**
    * 消费者组名称
    */
-  ConsumerGroupName: string
+  ConsumerGroupName?: string
   /**
    * 消费速度 Count/Minute
    */
-  Speed: number
+  Speed?: number
 }
 
 /**
@@ -4274,11 +4288,11 @@ export interface TopicInSyncReplicaResult {
   /**
    * Topic详情及副本合集
    */
-  TopicInSyncReplicaList: Array<TopicInSyncReplicaInfo>
+  TopicInSyncReplicaList?: Array<TopicInSyncReplicaInfo>
   /**
    * 总计个数
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -4433,12 +4447,12 @@ export interface InstanceResponse {
    * 符合条件的实例列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceList: Array<Instance>
+  InstanceList?: Array<Instance>
   /**
    * 符合条件的结果总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -4512,21 +4526,21 @@ export interface ClsParam {
  */
 export interface TopicPartitionDO {
   /**
-   * Partition ID
+   * Partition 分区ID
    */
-  Partition: number
+  Partition?: number
   /**
    * Leader 运行状态
    */
-  LeaderStatus: number
+  LeaderStatus?: number
   /**
    * ISR 个数
    */
-  IsrNum: number
+  IsrNum?: number
   /**
    * 副本个数
    */
-  ReplicaNum: number
+  ReplicaNum?: number
 }
 
 /**
@@ -4734,74 +4748,74 @@ export interface DescribeDatahubTaskRes {
   /**
    * 任务ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务名称
    */
-  TaskName: string
+  TaskName?: string
   /**
    * 任务类型，SOURCE数据接入，SINK数据流出
    */
-  TaskType: string
+  TaskType?: string
   /**
    * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
    */
-  Status: number
+  Status?: number
   /**
    * 数据源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceResource: DatahubResource
+  SourceResource?: DatahubResource
   /**
    * 数据目标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetResource: DatahubResource
+  TargetResource?: DatahubResource
   /**
    * Connection列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Connections: Array<Connection>
+  Connections?: Array<Connection>
   /**
    * 任务创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 消息处理规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransformParam: TransformParam
+  TransformParam?: TransformParam
   /**
    * 数据接入ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatahubId: string
+  DatahubId?: string
   /**
    * 绑定的SchemaId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchemaId: string
+  SchemaId?: string
   /**
    * 绑定的Schema名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchemaName: string
+  SchemaName?: string
   /**
    * 数据处理规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransformsParam: TransformsParam
+  TransformsParam?: TransformsParam
   /**
    * 异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 任务标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**
@@ -5071,11 +5085,11 @@ export interface ConsumerGroup {
   /**
    * 用户组名称
    */
-  ConsumerGroupName: string
+  ConsumerGroupName?: string
   /**
    * 订阅信息实体
    */
-  SubscribedInfo: Array<SubscribedInfo>
+  SubscribedInfo?: Array<SubscribedInfo>
 }
 
 /**
@@ -5109,28 +5123,28 @@ export interface GroupOffsetPartition {
   /**
    * topic 的 partitionId
    */
-  Partition: number
+  Partition?: number
   /**
    * consumer 提交的 offset 位置
    */
-  Offset: number
+  Offset?: number
   /**
    * 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metadata: string
+  Metadata?: string
   /**
    * 错误码
    */
-  ErrorCode: number
+  ErrorCode?: number
   /**
    * 当前 partition 最新的 offset
    */
-  LogEndOffset: number
+  LogEndOffset?: number
   /**
    * 未消费的消息个数
    */
-  Lag: number
+  Lag?: number
 }
 
 /**
@@ -5227,27 +5241,27 @@ export interface TopicFlowRanking {
   /**
    * 主题Id
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名称
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 分区数
    */
-  PartitionNum: number
+  PartitionNum?: number
   /**
    * 副本数
    */
-  ReplicaNum: number
+  ReplicaNum?: number
   /**
-   * Topic 流量
+   * Topic 流量,单位MB(设置date时以sum方式聚合)
    */
-  TopicTraffic: string
+  TopicTraffic?: string
   /**
    * Topic 消息堆积
    */
-  MessageHeap: number
+  MessageHeap?: number
 }
 
 /**
@@ -5257,12 +5271,12 @@ export interface GroupInfoTopics {
   /**
    * 分配的 topic 名称
    */
-  Topic: string
+  Topic?: string
   /**
    * 分配的 partition 信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions: Array<number | bigint>
+  Partitions?: Array<number | bigint>
 }
 
 /**
@@ -5471,7 +5485,7 @@ export interface DorisModifyConnectParam {
  */
 export interface ZoneInfo {
   /**
-   * zone的id
+   * 可用区
    */
   ZoneId?: string
   /**
@@ -5479,7 +5493,7 @@ export interface ZoneInfo {
    */
   IsInternalApp?: number
   /**
-   * app id
+   * 应用标识
    */
   AppId?: number
   /**
@@ -5487,11 +5501,11 @@ export interface ZoneInfo {
    */
   Flag?: boolean
   /**
-   * zone名称
+   * 可用区名称
    */
   ZoneName?: string
   /**
-   * zone状态
+   * 可用区状态
    */
   ZoneStatus?: number
   /**
@@ -5500,7 +5514,7 @@ export interface ZoneInfo {
    */
   Exflag?: string
   /**
-   * json对象，key为机型，value true为售罄，false为未售罄
+   * true为售罄，false为未售罄
    */
   SoldOut?: string
   /**
@@ -5665,7 +5679,7 @@ export interface CdcClusterResponse {
    * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
 }
 
 /**
@@ -5706,7 +5720,7 @@ export interface BrokerTopicData {
    */
   TopicName?: string
   /**
-   * 主题ID
+   * 主题Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
@@ -5786,7 +5800,7 @@ export interface MariaDBParam {
    */
   Resource: string
   /**
-   * 复制存量信息(schema_only不复制, initial全量)，默认位initial
+   * 复制存量信息(schema_only不复制, initial全量)，默认值initial
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotMode?: string
@@ -5921,15 +5935,15 @@ export interface InstanceConfigDO {
   /**
    * 是否自动创建主题
    */
-  AutoCreateTopicsEnable: boolean
+  AutoCreateTopicsEnable?: boolean
   /**
    * 分区数
    */
-  DefaultNumPartitions: number
+  DefaultNumPartitions?: number
   /**
    * 默认的复制Factor
    */
-  DefaultReplicationFactor: number
+  DefaultReplicationFactor?: number
 }
 
 /**
@@ -5954,11 +5968,11 @@ export interface UserResponse {
    * 符合条件的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Users: Array<User>
+  Users?: Array<User>
   /**
    * 符合条件的总用户数
    */
-  TotalCount: number
+  TotalCount?: number
 }
 
 /**
@@ -6118,7 +6132,7 @@ export interface ZoneResponse {
    */
   Physical?: string
   /**
-   * 公网带宽
+   * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicNetwork?: string
@@ -6128,7 +6142,7 @@ export interface ZoneResponse {
    */
   PublicNetworkLimit?: string
   /**
-   * 请求ID
+   * 请求Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
@@ -6197,11 +6211,11 @@ export interface ConsumerGroupTopic {
   /**
    * 主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名称
    */
-  TopicName: string
+  TopicName?: string
 }
 
 /**
@@ -6659,13 +6673,13 @@ export interface MySQLModifyConnectParam {
  */
 export interface DescribeGroup {
   /**
-   * groupId
+   * 消费分组名称
    */
-  Group: string
+  Group?: string
   /**
    * 该 group 使用的协议。
    */
-  Protocol: string
+  Protocol?: string
 }
 
 /**
@@ -7031,7 +7045,7 @@ export interface ConnectResourceResourceIdResp {
    * 连接源的Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
 }
 
 /**
@@ -7106,22 +7120,22 @@ export interface SubscribedInfo {
   /**
    * 订阅的主题名
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 订阅的分区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partition: Array<number | bigint>
+  Partition?: Array<number | bigint>
   /**
    * 分区offset信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PartitionOffset: Array<PartitionOffset>
+  PartitionOffset?: Array<PartitionOffset>
   /**
    * 订阅的主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  TopicId?: string
 }
 
 /**
@@ -7238,7 +7252,7 @@ export interface InstanceDeleteResponse {
    * 删除实例返回的任务Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
 }
 
 /**
@@ -7258,12 +7272,12 @@ export interface Assignment {
   /**
    * assingment版本信息
    */
-  Version: number
+  Version?: number
   /**
    * topic信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Topics: Array<GroupInfoTopics>
+  Topics?: Array<GroupInfoTopics>
 }
 
 /**
@@ -7797,11 +7811,11 @@ export interface DescribeDatahubTasksRequest {
  */
 export interface DescribeTopicFlowRankingRequest {
   /**
-   * 实例ID
+   * ckafka集群实例Id
    */
   InstanceId: string
   /**
-   * 排行类别(PRO-Topic生产流量/CON-Topic消费流量)
+   * 排行类别，PRO：Topic生产流量；CON：Topic消费流量
    */
   RankingType: string
   /**
@@ -7876,16 +7890,16 @@ export interface Topic {
   /**
    * 主题的ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题的名称
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Note: string
+  Note?: string
 }
 
 /**
@@ -7998,41 +8012,41 @@ export interface ClusterInfo {
   /**
    * 集群Id
    */
-  ClusterId: number
+  ClusterId?: number
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 集群最大磁盘 单位GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxDiskSize: number
+  MaxDiskSize?: number
   /**
    * 集群最大带宽 单位MB/s
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxBandWidth: number
+  MaxBandWidth?: number
   /**
    * 集群当前可用磁盘  单位GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvailableDiskSize: number
+  AvailableDiskSize?: number
   /**
    * 集群当前可用带宽 单位MB/s
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvailableBandWidth: number
+  AvailableBandWidth?: number
   /**
    * 集群所属可用区，表明集群归属的可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneIds: Array<number | bigint>
+  ZoneIds?: Array<number | bigint>
 }
 
 /**
@@ -8094,12 +8108,12 @@ export interface GroupOffsetTopic {
   /**
    * 主题名称
    */
-  Topic: string
+  Topic?: string
   /**
    * 该主题分区数组，其中每个元素为一个 json object
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions: Array<GroupOffsetPartition>
+  Partitions?: Array<GroupOffsetPartition>
 }
 
 /**
@@ -8123,7 +8137,7 @@ export interface Partition {
   /**
    * 分区ID
    */
-  PartitionId: number
+  PartitionId?: number
 }
 
 /**
@@ -8239,12 +8253,12 @@ export interface AppIdResponse {
   /**
    * 符合要求的所有AppId数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 符合要求的App Id列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppIdList: Array<number | bigint>
+  AppIdList?: Array<number | bigint>
 }
 
 /**
@@ -8578,11 +8592,11 @@ export interface VipEntity {
   /**
    * 虚拟IP
    */
-  Vip: string
+  Vip?: string
   /**
    * 虚拟端口
    */
-  Vport: string
+  Vport?: string
 }
 
 /**
@@ -8606,19 +8620,19 @@ export interface User {
   /**
    * 用户id
    */
-  UserId: number
+  UserId?: number
   /**
    * 用户名称
    */
-  Name: string
+  Name?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -8684,7 +8698,6 @@ export interface DescribeConnectResourceResponse {
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
 >
-
  */
 export interface Filter {
   /**
@@ -8819,7 +8832,7 @@ export interface CtsdbParam {
  */
 export interface EventBusParam {
   /**
-   * 资源类型。EB_COS/EB_ES/EB_CLS
+   * 资源类型。COS/ES/CLS
    */
   Type: string
   /**
@@ -8849,7 +8862,7 @@ export interface EventBusParam {
  */
 export interface DescribeTopicFlowRankingResponse {
   /**
-   * 流量排行
+   * 流量排行返回结果
    */
   Result?: TopicFlowRankingResult
   /**
@@ -8912,62 +8925,62 @@ export interface InquiryPrice {
    * 单位原价
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPrice: number
+  UnitPrice?: number
   /**
    * 折扣单位价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPriceDiscount: number
+  UnitPriceDiscount?: number
   /**
    * 合计原价
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 折扣合计价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiscountPrice: number
+  DiscountPrice?: number
   /**
    * 折扣(单位是%)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Discount: number
+  Discount?: number
   /**
    * 商品数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GoodsNum: number
+  GoodsNum?: number
   /**
    * 付费货币
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Currency: string
+  Currency?: string
   /**
    * 硬盘专用返回参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 购买时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeSpan: number
+  TimeSpan?: number
   /**
    * 购买时长单位("m"按月, "h"按小时)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeUnit: string
+  TimeUnit?: string
   /**
    * 购买数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
   /**
    * 详细类别的价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DetailPrices: InquiryDetailPrice
+  DetailPrices?: InquiryDetailPrice
 }
 
 /**
@@ -9021,7 +9034,7 @@ export interface Route {
    */
   AccessType?: number
   /**
-   * 路由ID
+   * 路由Id
    */
   RouteId?: number
   /**
@@ -9048,7 +9061,7 @@ export interface Route {
    */
   DeleteTimestamp?: string
   /**
-   * 子网信息
+   * 子网Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Subnet?: string
@@ -9058,7 +9071,7 @@ export interface Route {
    */
   BrokerVipList?: Array<VipEntity>
   /**
-   * vpc信息
+   * 私有网络Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
@@ -9140,17 +9153,17 @@ export interface TopicRetentionTimeConfigRsp {
    * 期望值，即用户配置的Topic消息保留时间(单位分钟)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Expect: number
+  Expect?: number
   /**
    * 当前值，即当前生效值(可能存在动态调整，单位分钟)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Current: number
+  Current?: number
   /**
    * 最近变更时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModTimeStamp: number
+  ModTimeStamp?: number
 }
 
 /**
@@ -9306,10 +9319,10 @@ export interface AclRuleResp {
   /**
    * 总数据条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * AclRule列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AclRuleList: Array<AclRule>
+  AclRuleList?: Array<AclRule>
 }

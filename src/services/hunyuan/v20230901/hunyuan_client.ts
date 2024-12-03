@@ -28,7 +28,8 @@ import {
   ActivateServiceRequest,
   GetThreadRequest,
   Content,
-  GetThreadMessageRequest,
+  TranslationChoice,
+  ChatTranslationsResponse,
   SubmitHunyuanImageJobRequest,
   Usage,
   Replace,
@@ -36,7 +37,7 @@ import {
   QueryHunyuanImageChatJobRequest,
   RunThreadRequest,
   SubmitHunyuanImageChatJobRequest,
-  QueryHunyuanImageJobRequest,
+  ChatTranslationsRequest,
   GetThreadMessageResponse,
   ThreadMessageInCompleteDetailsObject,
   Tool,
@@ -49,6 +50,7 @@ import {
   Delta,
   SetPayModeResponse,
   SongExt,
+  TranslationDelta,
   ToolCall,
   ThreadAdditionalMessage,
   ToolCallFunction,
@@ -70,6 +72,8 @@ import {
   History,
   GetEmbeddingResponse,
   GetThreadMessageListResponse,
+  QueryHunyuanImageJobRequest,
+  Reference,
   FilesListRequest,
   ErrorMsg,
   SearchInfo,
@@ -78,11 +82,13 @@ import {
   FilesListResponse,
   GetTokenCountRequest,
   TextToImageLiteResponse,
+  GetThreadMessageRequest,
   CreateThreadRequest,
   ThreadMessageAttachmentObject,
   Timeline,
   RelevantEvent,
   Message,
+  TranslationMessage,
   ChatCompletionsResponse,
   EmbeddingUsage,
 } from "./hunyuan_models"
@@ -276,6 +282,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryHunyuanImageChatJobResponse) => void
   ): Promise<QueryHunyuanImageChatJobResponse> {
     return this.request("QueryHunyuanImageChatJob", req, cb)
+  }
+
+  /**
+     * 腾讯混元大模型是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口支持流式或非流式调用，当使用流式调用时为 SSE 协议。
+
+ 1. 本接口暂不支持返回图片内容。
+ 2. 默认该接口下单账号限制并发数为  5 路，如您有提高并发限制的需求请 [购买](https://buy.cloud.tencent.com/hunyuan) 。
+ 3. 请使用 SDK 调用本接口，每种开发语言的 SDK Git 仓库 examples/hunyuan/v20230901/ 目录下有提供示例供参考。SDK 链接在文档下方 “**开发者资源 - SDK**” 部分提供。
+ 4. 我们推荐您使用 API Explorer，方便快速地在线调试接口和下载各语言的示例代码，[点击打开](https://console.cloud.tencent.com/api/explorer?Product=hunyuan&Version=2023-09-01&Action=ChatCompletions)。
+     */
+  async ChatTranslations(
+    req: ChatTranslationsRequest,
+    cb?: (error: string, rep: ChatTranslationsResponse) => void
+  ): Promise<ChatTranslationsResponse> {
+    return this.request("ChatTranslations", req, cb)
   }
 
   /**

@@ -22,20 +22,22 @@ import {
   SubmitVideoStylizationJobRequest,
   LogoParam,
   SubmitImageAnimateJobRequest,
-  SubmitVideoStylizationJobResponse,
+  SubmitPortraitSingJobResponse,
   ConfirmVideoTranslateJobRequest,
   DescribePortraitSingJobRequest,
   SubmitImageAnimateJobResponse,
-  SubmitPortraitSingJobResponse,
   SubmitVideoTranslateJobResponse,
   DescribeVideoTranslateJobResponse,
+  CheckAnimateImageJobResponse,
+  CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
   DescribeImageAnimateJobResponse,
   SubmitPortraitSingJobRequest,
   LogoRect,
   DescribeVideoStylizationJobResponse,
-  TranslateResult,
+  SubmitVideoStylizationJobResponse,
   SubmitVideoTranslateJobRequest,
+  TranslateResult,
   ConfirmVideoTranslateJobResponse,
   DescribeVideoTranslateJobRequest,
   DescribeImageAnimateJobRequest,
@@ -183,6 +185,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitImageAnimateJobResponse) => void
   ): Promise<SubmitImageAnimateJobResponse> {
     return this.request("SubmitImageAnimateJob", req, cb)
+  }
+
+  /**
+   * 检查图片跳舞输入图
+   */
+  async CheckAnimateImageJob(
+    req: CheckAnimateImageJobRequest,
+    cb?: (error: string, rep: CheckAnimateImageJobResponse) => void
+  ): Promise<CheckAnimateImageJobResponse> {
+    return this.request("CheckAnimateImageJob", req, cb)
   }
 
   /**

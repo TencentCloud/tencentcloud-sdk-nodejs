@@ -5944,7 +5944,7 @@ export interface DescribeStorageCredentialRequest {
    */
   FileType?: string
   /**
-   * IsPublic用于上传文件时选择场景，当上传为对话端文件时IsPublic为true，上传文档库文件时场景IsPublic为false
+   * IsPublic用于上传文件或图片时选择场景，当上传为对话端图片时IsPublic为true，上传文件（包括文档库文件和对话端文件）时IsPublic为false
    */
   IsPublic?: boolean
   /**

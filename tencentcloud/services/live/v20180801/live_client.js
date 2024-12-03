@@ -363,7 +363,6 @@ class Client extends abstract_client_1.AbstractClient {
 注意：
 1. 该接口仅提供辅助查询在线流列表功能，业务重要场景不可强依赖该接口。
 2. 该接口仅适用于流数少于2万路的情况，对于流数较大用户请联系售后。
-
      */
     async DescribeLiveStreamOnlineList(req, cb) {
         return this.request("DescribeLiveStreamOnlineList", req, cb);
@@ -594,6 +593,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async ModifyLivePullStreamTask(req, cb) {
         return this.request("ModifyLivePullStreamTask", req, cb);
+    }
+    /**
+     * 查询直播增强用量明细信息。
+     */
+    async DescribeLiveEnhanceInfoList(req, cb) {
+        return this.request("DescribeLiveEnhanceInfoList", req, cb);
     }
     /**
      * 查询拉流转推任务的时长信息。

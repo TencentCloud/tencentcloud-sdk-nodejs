@@ -44,6 +44,7 @@ import {
   AddLiveWatermarkRequest,
   CommonMixLayoutParams,
   DescribeLiveDomainCertRequest,
+  DescribeLiveEnhanceInfoListRequest,
   DiagnoseResult,
   StopRecordTaskRequest,
   RuleInfo,
@@ -195,6 +196,7 @@ import {
   ScreenshotTask,
   DeletePullStreamConfigResponse,
   ModifyLivePlayDomainRequest,
+  LiveEnhanceInfo,
   DeleteCasterLayoutInfoResponse,
   PullPushWatermarkInfo,
   DescribeGroupProIspPlayInfoListRequest,
@@ -486,6 +488,7 @@ import {
   DescribeLivePadTemplatesRequest,
   EnableLiveDomainRequest,
   DescribeLiveTranscodeTotalInfoResponse,
+  DescribeLiveEnhanceInfoListResponse,
   CreateLiveTranscodeRuleResponse,
   CreateLiveTranscodeTemplateResponse,
   ModifyLivePadTemplateRequest,
@@ -1042,7 +1045,6 @@ export class Client extends AbstractClient {
 注意：
 1. 该接口仅提供辅助查询在线流列表功能，业务重要场景不可强依赖该接口。
 2. 该接口仅适用于流数少于2万路的情况，对于流数较大用户请联系售后。
-
      */
   async DescribeLiveStreamOnlineList(
     req: DescribeLiveStreamOnlineListRequest,
@@ -1416,6 +1418,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLivePullStreamTaskResponse) => void
   ): Promise<ModifyLivePullStreamTaskResponse> {
     return this.request("ModifyLivePullStreamTask", req, cb)
+  }
+
+  /**
+   * 查询直播增强用量明细信息。
+   */
+  async DescribeLiveEnhanceInfoList(
+    req: DescribeLiveEnhanceInfoListRequest,
+    cb?: (error: string, rep: DescribeLiveEnhanceInfoListResponse) => void
+  ): Promise<DescribeLiveEnhanceInfoListResponse> {
+    return this.request("DescribeLiveEnhanceInfoList", req, cb)
   }
 
   /**
