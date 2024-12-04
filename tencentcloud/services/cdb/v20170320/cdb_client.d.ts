@@ -710,7 +710,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（DescribeInstanceAlarmEvents）用于查询实例发生的事件信息。
      */
-    DescribeInstanceAlarmEvents(req?: DescribeInstanceAlarmEventsRequest, cb?: (error: string, rep: DescribeInstanceAlarmEventsResponse) => void): Promise<DescribeInstanceAlarmEventsResponse>;
+    DescribeInstanceAlarmEvents(req: DescribeInstanceAlarmEventsRequest, cb?: (error: string, rep: DescribeInstanceAlarmEventsResponse) => void): Promise<DescribeInstanceAlarmEventsResponse>;
     /**
      * 本接口(UpgradeDBInstance)用于升级或降级云数据库实例的配置，实例类型支持主实例、灾备实例和只读实例。如果进行迁移业务，请一定填写实例规格（CPU、内存），不然系统会默认以最小允许规格传参。
      */

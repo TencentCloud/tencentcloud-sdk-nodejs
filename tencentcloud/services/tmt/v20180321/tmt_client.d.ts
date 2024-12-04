@@ -13,7 +13,7 @@ export declare class Client extends AbstractClient {
      */
     LanguageDetect(req: LanguageDetectRequest, cb?: (error: string, rep: LanguageDetectResponse) => void): Promise<LanguageDetectResponse>;
     /**
-     * 文本翻译的批量接口
+     * 批量翻译文本的接口
      */
     TextTranslateBatch(req: TextTranslateBatchRequest, cb?: (error: string, rep: TextTranslateBatchResponse) => void): Promise<TextTranslateBatchResponse>;
     /**

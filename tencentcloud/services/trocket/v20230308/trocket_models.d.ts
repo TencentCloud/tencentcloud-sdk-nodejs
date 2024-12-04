@@ -95,11 +95,11 @@ export interface DescribeRoleListResponse {
  */
 export interface DeleteMQTTTopicRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
-     * 主题
+     * 主题名称
      */
     Topic: string;
 }
@@ -451,17 +451,17 @@ export interface InstanceItemExtraInfo {
      */
     MaxStorage?: number;
     /**
-     * 专享集群最大保留时间
+     * 专享集群最大保留时间，单位：小时
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRetention?: number;
     /**
-     * 专项集群最大保留时间
+     * 专项集群最大保留时间，单位：小时
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MinRetention?: number;
     /**
-     * 4.0共享集群
+     * 4.0共享集群状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatus?: number;
@@ -1052,7 +1052,7 @@ export interface DeleteMQTTUserRequest {
  */
 export interface ModifyMQTTInstanceCertBindingRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
@@ -2210,7 +2210,7 @@ export interface DeleteRoleResponse {
  */
 export interface Filter {
     /**
-     * 过滤条件名
+     * 过滤条件参数名
      */
     Name: string;
     /**
@@ -2232,7 +2232,7 @@ export interface ModifyMQTTTopicResponse {
  */
 export interface DescribeMQTTTopicListRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
@@ -2739,11 +2739,11 @@ export interface DescribeTopicListResponse {
  */
 export interface DescribeMQTTTopicRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
-     * 主题
+     * 主题名称
      */
     Topic: string;
 }
@@ -3105,11 +3105,11 @@ export interface DescribeProductSKUsResponse {
  */
 export interface DescribeMQTTMessageListRequest {
     /**
-     * 实例ID
+     * 集群ID
      */
     InstanceId: string;
     /**
-     * 主题
+     * 主题名称
      */
     Topic: string;
     /**

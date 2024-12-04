@@ -1897,6 +1897,10 @@ export interface RoundPlayInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
+  /**
+   * 过期时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)，过期后将停止播单的播放。“9999-12-31T23:59:59+08:00”表示永不过期。
+   */
+  ExpiredTime?: string
 }
 
 /**
@@ -6550,6 +6554,10 @@ export interface ModifyRoundPlayRequest {
 <li>Linear：单次播放，播单播放完停止播放。</li>
    */
   PlayBackMode?: string
+  /**
+   * 过期时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)，过期后将停止播放。“9999-12-31T23:59:59+08:00”表示不过期。
+   */
+  ExpiredTime?: string
 }
 
 /**
@@ -8711,7 +8719,7 @@ Type 对应的格式必须为 HLS 格式。
    */
   ItemId?: string
   /**
-   * 指定播放的转码模版，当 AudioVideoType 为 Transcode 时必须指定。
+   * 指定播放的转码模板，当 AudioVideoType 为 Transcode 时必须指定。
    */
   Definition?: number
 }
@@ -13349,6 +13357,14 @@ export interface CreateRoundPlayRequest {
 默认值：Loop。
    */
   PlayBackMode?: string
+  /**
+   * 播单唯一标识 ID，长度限制为64个字符，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）和连字符（-）。如果存在相同 RoundPlayId 的播单，返回 InvalidParameterValue.RoundPlayAlreadyExists 错误。默认取值为空，表示由系统分配。
+   */
+  RoundPlayId?: string
+  /**
+   * 过期时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。过期后的播单将停止播放，“9999-12-31T23:59:59+08:00“表示不过期。默认值：9999-12-31T23:59:59+08:00。
+   */
+  ExpiredTime?: string
 }
 
 /**

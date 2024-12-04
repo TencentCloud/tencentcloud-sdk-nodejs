@@ -296,59 +296,64 @@ export interface PrivateZoneRecord {
   /**
    * 记录id
    */
-  RecordId: string
+  RecordId?: string
   /**
    * 私有域id: zone-xxxxxxxx
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 子域名
    */
-  SubDomain: string
+  SubDomain?: string
   /**
    * 记录类型，可选的记录类型为："A", "AAAA", "CNAME", "MX", "TXT", "PTR"
    */
-  RecordType: string
+  RecordType?: string
   /**
    * 记录值
    */
-  RecordValue: string
+  RecordValue?: string
   /**
    * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
    */
-  TTL: number
+  TTL?: number
   /**
    * MX优先级：记录类型为MX时必填。取值范围：5,10,15,20,30,40,50
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MX: number
+  MX?: number
   /**
    * 记录状态：ENABLED
    */
-  Status: string
+  Status?: string
   /**
    * 记录权重，值为1-100
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
   /**
    * 记录创建时间
    */
-  CreatedOn: string
+  CreatedOn?: string
   /**
    * 记录更新时间
    */
-  UpdatedOn: string
+  UpdatedOn?: string
   /**
    * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
   /**
    * 0暂停，1启用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enabled: number
+  Enabled?: number
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
 }
 
 /**
@@ -1111,6 +1116,10 @@ export interface CreatePrivateZoneRecordRequest {
    * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
    */
   TTL?: number
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -1154,6 +1163,10 @@ export interface ModifyPrivateZoneRecordRequest {
    * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
    */
   TTL?: number
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyQAAttrRangeResponse,
   GetWsTokenResponse,
+  ListUsageCallDetailRequest,
   CheckAttributeLabelExistRequest,
   AttributeFilters,
   DescribeQAResponse,
@@ -34,7 +35,8 @@ import {
   DescribeAppResponse,
   UploadAttributeLabelResponse,
   MsgRecord,
-  ListUnsatisfiedReplyResponse,
+  CreateDocCateResponse,
+  DeleteDocCateResponse,
   ExportAttributeLabelResponse,
   KnowledgeCapacityPieGraphDetail,
   ExportQAListResponse,
@@ -65,7 +67,7 @@ import {
   GetLikeDataCountResponse,
   ListReleaseRequest,
   IsTransferIntentResponse,
-  ListModelRequest,
+  CreateDocCateRequest,
   InvokeAPI,
   SummaryOutput,
   ModifyAppResponse,
@@ -74,6 +76,7 @@ import {
   ModifyQARequest,
   TaskFlowInfo,
   ExportUnsatisfiedReplyResponse,
+  ListDocCateResponse,
   ListRejectedQuestionPreviewResponse,
   DescribeCorpRequest,
   ListAppCategoryResponse,
@@ -83,18 +86,19 @@ import {
   KnowledgeSummary,
   TaskFlowSummary,
   CreateCorpRequest,
-  RetryDocParseRequest,
+  ProcedureDebugging,
   QueryRewriteResponse,
   ListQaItem,
   DeleteAttributeLabelRequest,
   DescribeRobotBizIDByAppKeyResponse,
   ReconstructDocumentResponse,
+  ListDocCateRequest,
   DescribeDocResponse,
   CreateReleaseRequest,
   Label,
   KnowledgeQaOutput,
   ApiVarAttrInfo,
-  ProcedureDebugging,
+  GroupDocRequest,
   CheckAttributeLabelReferRequest,
   ModifyQACateRequest,
   ModifyAttributeLabelRequest,
@@ -102,7 +106,7 @@ import {
   AttributeLabel,
   Option,
   Usage,
-  ResetSessionRequest,
+  ListUnsatisfiedReplyResponse,
   GetAppSecretRequest,
   ModelParameter,
   DeleteQACateResponse,
@@ -118,7 +122,9 @@ import {
   ConvertDocumentResponse,
   RetryDocAuditRequest,
   SaveDocRequest,
+  RetryDocParseRequest,
   ReconstructDocumentFailedPage,
+  ListAppKnowledgeDetailResponse,
   ModifyQACateResponse,
   DescribeAttributeLabelResponse,
   ModifyAttributeLabelResponse,
@@ -131,12 +137,13 @@ import {
   GroupQAResponse,
   QuoteInfo,
   CreateAppRequest,
+  ResetSessionRequest,
   AppConfig,
   DescribeReleaseRequest,
   ReleaseQA,
   ListAppCategoryRequest,
   ListReleaseConfigPreviewRequest,
-  ListReleaseQAPreviewResponse,
+  CallDetail,
   ModifyRejectedQuestionResponse,
   ListReleaseDocPreviewRequest,
   TokenStat,
@@ -150,6 +157,7 @@ import {
   DescribeReferResponse,
   Context,
   ListDocRequest,
+  ReconstructDocumentRequest,
   GetEmbeddingRequest,
   GroupQARequest,
   RateMsgRecordRequest,
@@ -169,13 +177,14 @@ import {
   Stat,
   DescribeKnowledgeUsagePieGraphResponse,
   ClassifyLabel,
-  ReconstructDocumentRequest,
+  ListReleaseQAPreviewResponse,
   DescribeTokenUsageGraphResponse,
   SimilarQuestionModify,
   WorkflowRunNodeInfo,
   StatisticInfo,
   RetryDocAuditResponse,
   GetReconstructDocumentResultResponse,
+  ModifyDocCateRequest,
   RejectedQuestion,
   GetLikeDataCountRequest,
   DeleteRejectedQuestionResponse,
@@ -184,6 +193,7 @@ import {
   CreateAttributeLabelRequest,
   ListAppResponse,
   AppInfo,
+  CateInfo,
   CreateReconstructDocumentFlowRequest,
   RunReRankResponse,
   QueryParseDocResultRequest,
@@ -203,6 +213,7 @@ import {
   QueryRewriteRequest,
   ModifyAppRequest,
   RunReRankRequest,
+  KnowledgeDetail,
   DeleteAttributeLabelResponse,
   RetryReleaseRequest,
   VerifyQARequest,
@@ -216,6 +227,7 @@ import {
   DeleteAppResponse,
   SearchRange,
   ListAttributeLabelRequest,
+  DeleteDocCateRequest,
   DeleteDocResponse,
   DocumentElement,
   BaseConfig,
@@ -223,12 +235,15 @@ import {
   SimilarQuestion,
   ClassifyConfig,
   DescribeConcurrencyUsageRequest,
+  GroupDocResponse,
   UploadAttributeLabelRequest,
+  ListUsageCallDetailResponse,
   ExportAttributeLabelRequest,
   DescribeTokenUsageRequest,
   GetAppKnowledgeCountResponse,
   RetryReleaseResponse,
   CreateAttributeLabelResponse,
+  ListAppKnowledgeDetailRequest,
   CreateQAResponse,
   ReRankDataObject,
   StopDocParseResponse,
@@ -246,6 +261,7 @@ import {
   DescribeStorageCredentialRequest,
   QAList,
   DescribeCorpResponse,
+  ModifyDocCateResponse,
   SaveDocResponse,
   ListReleaseResponse,
   ListModelResponse,
@@ -278,6 +294,7 @@ import {
   IgnoreUnsatisfiedReplyResponse,
   StopDocParseRequest,
   KnowledgeWorkflow,
+  ListModelRequest,
   ListSelectDocRequest,
 } from "./lke_models"
 
@@ -381,6 +398,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 终止文档解析
+   */
+  async StopDocParse(
+    req: StopDocParseRequest,
+    cb?: (error: string, rep: StopDocParseResponse) => void
+  ): Promise<StopDocParseResponse> {
+    return this.request("StopDocParse", req, cb)
+  }
+
+  /**
    * 创建属性
    */
   async CreateAttributeLabel(
@@ -391,13 +418,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档解析重试
+   * 获取Doc分类
    */
-  async RetryDocAudit(
-    req: RetryDocAuditRequest,
-    cb?: (error: string, rep: RetryDocAuditResponse) => void
-  ): Promise<RetryDocAuditResponse> {
-    return this.request("RetryDocAudit", req, cb)
+  async ListDocCate(
+    req: ListDocCateRequest,
+    cb?: (error: string, rep: ListDocCateResponse) => void
+  ): Promise<ListDocCateResponse> {
+    return this.request("ListDocCate", req, cb)
   }
 
   /**
@@ -553,6 +580,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建Doc分类
+   */
+  async CreateDocCate(
+    req: CreateDocCateRequest,
+    cb?: (error: string, rep: CreateDocCateResponse) => void
+  ): Promise<CreateDocCateResponse> {
+    return this.request("CreateDocCate", req, cb)
+  }
+
+  /**
    * 检查属性下的标签名是否存在
    */
   async CheckAttributeLabelExist(
@@ -570,6 +607,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDocResponse) => void
   ): Promise<DescribeDocResponse> {
     return this.request("DescribeDoc", req, cb)
+  }
+
+  /**
+   * 列表查询单次调用明细
+   */
+  async ListUsageCallDetail(
+    req: ListUsageCallDetailRequest,
+    cb?: (error: string, rep: ListUsageCallDetailResponse) => void
+  ): Promise<ListUsageCallDetailResponse> {
+    return this.request("ListUsageCallDetail", req, cb)
   }
 
   /**
@@ -653,6 +700,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Doc分组
+   */
+  async GroupDoc(
+    req: GroupDocRequest,
+    cb?: (error: string, rep: GroupDocResponse) => void
+  ): Promise<GroupDocResponse> {
+    return this.request("GroupDoc", req, cb)
+  }
+
+  /**
    * 获取企业下应用列表
    */
   async ListApp(
@@ -670,6 +727,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTokenUsageResponse) => void
   ): Promise<DescribeTokenUsageResponse> {
     return this.request("DescribeTokenUsage", req, cb)
+  }
+
+  /**
+   * Doc分类删除
+   */
+  async DeleteDocCate(
+    req: DeleteDocCateRequest,
+    cb?: (error: string, rep: DeleteDocCateResponse) => void
+  ): Promise<DeleteDocCateResponse> {
+    return this.request("DeleteDocCate", req, cb)
   }
 
   /**
@@ -763,6 +830,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过appKey获取应用业务ID
+   */
+  async DescribeRobotBizIDByAppKey(
+    req: DescribeRobotBizIDByAppKeyRequest,
+    cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void
+  ): Promise<DescribeRobotBizIDByAppKeyResponse> {
+    return this.request("DescribeRobotBizIDByAppKey", req, cb)
+  }
+
+  /**
    * 文档列表
    */
   async ListDoc(
@@ -793,13 +870,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过appKey获取应用业务ID
+   * 修改Doc分类
    */
-  async DescribeRobotBizIDByAppKey(
-    req: DescribeRobotBizIDByAppKeyRequest,
-    cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void
-  ): Promise<DescribeRobotBizIDByAppKeyResponse> {
-    return this.request("DescribeRobotBizIDByAppKey", req, cb)
+  async ModifyDocCate(
+    req: ModifyDocCateRequest,
+    cb?: (error: string, rep: ModifyDocCateResponse) => void
+  ): Promise<ModifyDocCateResponse> {
+    return this.request("ModifyDocCate", req, cb)
   }
 
   /**
@@ -810,16 +887,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportQAListResponse) => void
   ): Promise<ExportQAListResponse> {
     return this.request("ExportQAList", req, cb)
-  }
-
-  /**
-   * 忽略不满意回复
-   */
-  async IgnoreUnsatisfiedReply(
-    req: IgnoreUnsatisfiedReplyRequest,
-    cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void
-  ): Promise<IgnoreUnsatisfiedReplyResponse> {
-    return this.request("IgnoreUnsatisfiedReply", req, cb)
   }
 
   /**
@@ -1017,6 +1084,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文档解析重试
+   */
+  async RetryDocAudit(
+    req: RetryDocAuditRequest,
+    cb?: (error: string, rep: RetryDocAuditResponse) => void
+  ): Promise<RetryDocAuditResponse> {
+    return this.request("RetryDocAudit", req, cb)
+  }
+
+  /**
    * 修改应用请求结构体
    */
   async ModifyApp(
@@ -1190,16 +1267,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 终止文档解析
-   */
-  async StopDocParse(
-    req: StopDocParseRequest,
-    cb?: (error: string, rep: StopDocParseResponse) => void
-  ): Promise<StopDocParseResponse> {
-    return this.request("StopDocParse", req, cb)
-  }
-
-  /**
    * 重置会话
    */
   async ResetSession(
@@ -1207,5 +1274,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetSessionResponse) => void
   ): Promise<ResetSessionResponse> {
     return this.request("ResetSession", req, cb)
+  }
+
+  /**
+   * 列表查询知识库容量详情
+   */
+  async ListAppKnowledgeDetail(
+    req: ListAppKnowledgeDetailRequest,
+    cb?: (error: string, rep: ListAppKnowledgeDetailResponse) => void
+  ): Promise<ListAppKnowledgeDetailResponse> {
+    return this.request("ListAppKnowledgeDetail", req, cb)
+  }
+
+  /**
+   * 忽略不满意回复
+   */
+  async IgnoreUnsatisfiedReply(
+    req: IgnoreUnsatisfiedReplyRequest,
+    cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void
+  ): Promise<IgnoreUnsatisfiedReplyResponse> {
+    return this.request("IgnoreUnsatisfiedReply", req, cb)
   }
 }

@@ -652,20 +652,6 @@ export interface CreateParamTemplateRequest {
     ParamList?: Array<ParamItem>;
 }
 /**
- * SearchClusterTables返回参数结构体
- */
-export interface SearchClusterTablesResponse {
-    /**
-     * 数据表列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tables?: Array<DatabaseTables>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1789,25 +1775,18 @@ export interface DescribeZonesResponse {
     RequestId?: string;
 }
 /**
- * GrantAccountPrivileges请求参数结构体
+ * SearchClusterTables返回参数结构体
  */
-export interface GrantAccountPrivilegesRequest {
+export interface SearchClusterTablesResponse {
     /**
-     * 集群id
+     * 数据表列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    Tables?: Array<DatabaseTables>;
     /**
-     * 账号信息
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Account: InputAccount;
-    /**
-     * 数据库表权限码数组
-     */
-    DbTablePrivileges: Array<string>;
-    /**
-     * 数据库表信息
-     */
-    DbTables: Array<DbTable>;
+    RequestId?: string;
 }
 /**
  * ModifyParamTemplate请求参数结构体
@@ -3011,6 +2990,15 @@ export interface CopyClusterPasswordComplexityResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeClusterTransparentEncryptInfo请求参数结构体
+ */
+export interface DescribeClusterTransparentEncryptInfoRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
 }
 /**
  * DeleteParamTemplate请求参数结构体
@@ -4362,6 +4350,24 @@ export interface DescribeBinlogSaveDaysRequest {
     ClusterId: string;
 }
 /**
+ * DescribeClusterTransparentEncryptInfo返回参数结构体
+ */
+export interface DescribeClusterTransparentEncryptInfoResponse {
+    /**
+     * 加密秘钥id
+     */
+    KeyId?: string;
+    /**
+     * 加密秘钥地域
+  
+     */
+    KeyRegion?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ActivateInstance返回参数结构体
  */
 export interface ActivateInstanceResponse {
@@ -4777,6 +4783,27 @@ export interface DeleteAccountsRequest {
     Accounts?: Array<InputAccount>;
 }
 /**
+ * OpenClusterTransparentEncrypt请求参数结构体
+ */
+export interface OpenClusterTransparentEncryptRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+    /**
+     * 秘钥类型(cloud,custom)
+     */
+    KeyType: string;
+    /**
+     * 秘钥Id
+     */
+    KeyId?: string;
+    /**
+     * 秘钥地域
+     */
+    KeyRegion?: string;
+}
+/**
  * ReloadBalanceProxyNode请求参数结构体
  */
 export interface ReloadBalanceProxyNodeRequest {
@@ -5056,6 +5083,20 @@ export interface Module {
     ModuleName: string;
 }
 /**
+ * OpenClusterTransparentEncrypt返回参数结构体
+ */
+export interface OpenClusterTransparentEncryptResponse {
+    /**
+     * 异步任务id
+  
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TDSQL-C MySQL支持的proxy版本信息
  */
 export interface ProxyVersionInfo {
@@ -5095,6 +5136,19 @@ export interface DescribeClusterDatabasesRequest {
      * 分页限制数量
      */
     Limit?: number;
+}
+/**
+ * RemoveClusterSlaveZone请求参数结构体
+ */
+export interface RemoveClusterSlaveZoneRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 从可用区
+     */
+    SlaveZone: string;
 }
 /**
  * 任务信息
@@ -9085,17 +9139,25 @@ export interface ParamItemDetail {
     FuncPattern?: string;
 }
 /**
- * DescribeBinlogSaveDays返回参数结构体
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface DescribeBinlogSaveDaysResponse {
+export interface GrantAccountPrivilegesRequest {
     /**
-     * Binlog保留天数
+     * 集群id
      */
-    BinlogSaveDays: number;
+    ClusterId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 账号信息
      */
-    RequestId?: string;
+    Account: InputAccount;
+    /**
+     * 数据库表权限码数组
+     */
+    DbTablePrivileges: Array<string>;
+    /**
+     * 数据库表信息
+     */
+    DbTables: Array<DbTable>;
 }
 /**
  * IsolateCluster返回参数结构体
@@ -10221,17 +10283,17 @@ export interface TablePrivileges {
     Privileges: Array<string>;
 }
 /**
- * RemoveClusterSlaveZone请求参数结构体
+ * DescribeBinlogSaveDays返回参数结构体
  */
-export interface RemoveClusterSlaveZoneRequest {
+export interface DescribeBinlogSaveDaysResponse {
     /**
-     * 集群ID
+     * Binlog保留天数
      */
-    ClusterId: string;
+    BinlogSaveDays: number;
     /**
-     * 从可用区
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    SlaveZone: string;
+    RequestId?: string;
 }
 /**
  * DeleteBackup请求参数结构体

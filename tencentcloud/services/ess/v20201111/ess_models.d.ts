@@ -5131,6 +5131,11 @@ export interface FlowCreateApprover {
   3. 签署完成后，可以通过<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeSignFaceVideo" target="_blank">查询签署认证人脸视频</a>获取到当时的视频。
      */
     Intention?: Intention;
+    /**
+     * 进入签署流程的限制，目前支持以下选项：
+  <ul><li> <b>空值（默认）</b> :无限制，可在任何场景进入签署流程。</li><li> <b>link</b> :选择此选项后，将无法通过控制台或电子签小程序列表进入填写或签署操作，仅可预览合同。填写或签署流程只能通过短信或发起方提供的专用链接进行。</li></ul>
+     */
+    SignEndpoints?: Array<string>;
 }
 /**
  * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
@@ -6654,6 +6659,11 @@ export interface ApproverInfo {
   注：`此参数仅在通过文件发起合同或者合同组时生效`
      */
     Components?: Array<Component>;
+    /**
+     * 进入签署流程的限制，目前支持以下选项：
+  <ul><li> <b>空值（默认）</b> :无限制，可在任何场景进入签署流程。</li><li> <b>link</b> :选择此选项后，将无法通过控制台或电子签小程序列表进入填写或签署操作，仅可预览合同。填写或签署流程只能通过短信或发起方提供的专用链接进行。</li></ul>
+     */
+    SignEndpoints?: Array<string>;
 }
 /**
  * CreateFlowSignReview返回参数结构体

@@ -408,6 +408,7 @@ import {
   DescribeDBFeaturesRequest,
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
+  InstEventInfo,
   ReloadBalanceProxyNodeRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   CloseAuditServiceRequest,
@@ -2167,7 +2168,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeInstanceAlarmEvents）用于查询实例发生的事件信息。
    */
   async DescribeInstanceAlarmEvents(
-    req?: DescribeInstanceAlarmEventsRequest,
+    req: DescribeInstanceAlarmEventsRequest,
     cb?: (error: string, rep: DescribeInstanceAlarmEventsResponse) => void
   ): Promise<DescribeInstanceAlarmEventsResponse> {
     return this.request("DescribeInstanceAlarmEvents", req, cb)

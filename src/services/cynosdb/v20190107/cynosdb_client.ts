@@ -47,7 +47,6 @@ import {
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
   CreateParamTemplateRequest,
-  SearchClusterTablesResponse,
   DescribeClusterDetailRequest,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
@@ -80,7 +79,7 @@ import {
   DescribeProxyNodesResponse,
   ProxyNodeInfo,
   DescribeZonesResponse,
-  GrantAccountPrivilegesRequest,
+  SearchClusterTablesResponse,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
   DescribeChangedParamsAfterUpgradeResponse,
@@ -129,6 +128,7 @@ import {
   BindClusterResourcePackagesRequest,
   IsolateInstanceResponse,
   CopyClusterPasswordComplexityResponse,
+  DescribeClusterTransparentEncryptInfoRequest,
   DeleteParamTemplateRequest,
   RevokeAccountPrivilegesResponse,
   DescribeClusterDetailDatabasesResponse,
@@ -191,6 +191,7 @@ import {
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
+  DescribeClusterTransparentEncryptInfoResponse,
   ActivateInstanceResponse,
   IsolateClusterRequest,
   AddInstancesRequest,
@@ -200,6 +201,7 @@ import {
   DescribeInstanceDetailRequest,
   Package,
   DeleteAccountsRequest,
+  OpenClusterTransparentEncryptRequest,
   ReloadBalanceProxyNodeRequest,
   DescribeAccountsResponse,
   RollbackTimeRange,
@@ -210,9 +212,11 @@ import {
   BizTaskModifyParamsData,
   RollBackClusterRequest,
   Module,
+  OpenClusterTransparentEncryptResponse,
   ProxyVersionInfo,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
+  RemoveClusterSlaveZoneRequest,
   BizTaskInfo,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
@@ -367,7 +371,7 @@ import {
   SwitchClusterLogBin,
   ExportInstanceErrorLogsResponse,
   ParamItemDetail,
-  DescribeBinlogSaveDaysResponse,
+  GrantAccountPrivilegesRequest,
   IsolateClusterResponse,
   RenewClustersResponse,
   RollbackTableInfo,
@@ -416,7 +420,7 @@ import {
   TaskMaintainInfo,
   DescribeServerlessStrategyRequest,
   TablePrivileges,
-  RemoveClusterSlaveZoneRequest,
+  DescribeBinlogSaveDaysResponse,
   DeleteBackupRequest,
   ErrorLogItemExport,
   DescribeParamTemplateDetailResponse,
@@ -719,6 +723,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询集群透明加密信息
+   */
+  async DescribeClusterTransparentEncryptInfo(
+    req: DescribeClusterTransparentEncryptInfoRequest,
+    cb?: (error: string, rep: DescribeClusterTransparentEncryptInfoResponse) => void
+  ): Promise<DescribeClusterTransparentEncryptInfoResponse> {
+    return this.request("DescribeClusterTransparentEncryptInfo", req, cb)
+  }
+
+  /**
    * 本接口（ExportInstanceSlowQueries）用于导出实例慢日志。
    */
   async ExportInstanceSlowQueries(
@@ -786,6 +800,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBinlogSaveDaysResponse) => void
   ): Promise<DescribeBinlogSaveDaysResponse> {
     return this.request("DescribeBinlogSaveDays", req, cb)
+  }
+
+  /**
+   * 本接口（SearchClusterTables）用于搜索集群数据表列表。
+   */
+  async SearchClusterTables(
+    req: SearchClusterTablesRequest,
+    cb?: (error: string, rep: SearchClusterTablesResponse) => void
+  ): Promise<SearchClusterTablesResponse> {
+    return this.request("SearchClusterTables", req, cb)
   }
 
   /**
@@ -1189,13 +1213,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SearchClusterTables）用于搜索集群数据表列表。
+   * 开通集群透明加密
    */
-  async SearchClusterTables(
-    req: SearchClusterTablesRequest,
-    cb?: (error: string, rep: SearchClusterTablesResponse) => void
-  ): Promise<SearchClusterTablesResponse> {
-    return this.request("SearchClusterTables", req, cb)
+  async OpenClusterTransparentEncrypt(
+    req: OpenClusterTransparentEncryptRequest,
+    cb?: (error: string, rep: OpenClusterTransparentEncryptResponse) => void
+  ): Promise<OpenClusterTransparentEncryptResponse> {
+    return this.request("OpenClusterTransparentEncrypt", req, cb)
   }
 
   /**

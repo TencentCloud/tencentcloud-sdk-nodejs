@@ -79,6 +79,10 @@ export interface CreateMigrationTaskRequest {
    * 源桶路径，默认为/
    */
   BucketPath?: string
+  /**
+   * 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0
+   */
+  Direction?: number
 }
 
 /**
@@ -287,6 +291,10 @@ export interface MigrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketPath?: string
+  /**
+   * 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0
+   */
+  Direction?: number
 }
 
 /**

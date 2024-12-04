@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyQAAttrRangeResponse, GetWsTokenResponse, CheckAttributeLabelExistRequest, DescribeQAResponse, GetAppKnowledgeCountRequest, ResetSessionResponse, ListSelectDocResponse, DescribeReleaseInfoRequest, DeleteDocRequest, GetAnswerTypeDataCountRequest, DescribeAppResponse, UploadAttributeLabelResponse, ListUnsatisfiedReplyResponse, ExportAttributeLabelResponse, ExportQAListResponse, GetAppSecretResponse, ListRejectedQuestionRequest, CreateQACateResponse, ModifyDocAttrRangeResponse, GetAnswerTypeDataCountResponse, DescribeQARequest, DescribeUnsatisfiedReplyContextRequest, ListAppRequest, ModifyQAAttrRangeRequest, ListRejectedQuestionResponse, ModifyDocResponse, CreateCorpResponse, ListQARequest, DescribeKnowledgeUsageResponse, ListUnsatisfiedReplyRequest, DeleteQARequest, GetLikeDataCountResponse, ListReleaseRequest, IsTransferIntentResponse, ListModelRequest, ModifyAppResponse, ListDocResponse, GetDocPreviewRequest, ModifyQARequest, ExportUnsatisfiedReplyResponse, ListRejectedQuestionPreviewResponse, DescribeCorpRequest, ListAppCategoryResponse, CreateAppResponse, DescribeAttributeLabelRequest, CreateQARequest, CreateCorpRequest, RetryDocParseRequest, QueryRewriteResponse, DeleteAttributeLabelRequest, DescribeRobotBizIDByAppKeyResponse, ReconstructDocumentResponse, DescribeDocResponse, CreateReleaseRequest, CheckAttributeLabelReferRequest, ModifyQACateRequest, ModifyAttributeLabelRequest, ConvertDocumentRequest, ResetSessionRequest, GetAppSecretRequest, DeleteQACateResponse, QueryParseDocResultResponse, ListReleaseDocPreviewResponse, GenerateQAResponse, GetTaskStatusResponse, DescribeConcurrencyUsageGraphRequest, DescribeDocRequest, DescribeTokenUsageGraphRequest, ConvertDocumentResponse, RetryDocAuditRequest, SaveDocRequest, ModifyQACateResponse, DescribeAttributeLabelResponse, ModifyAttributeLabelResponse, ListQACateResponse, RetryDocParseResponse, CreateRejectedQuestionResponse, GetEmbeddingResponse, ExportUnsatisfiedReplyRequest, GroupQAResponse, CreateAppRequest, DescribeReleaseRequest, ListAppCategoryRequest, ListReleaseConfigPreviewRequest, ListReleaseQAPreviewResponse, ModifyRejectedQuestionResponse, ListReleaseDocPreviewRequest, DescribeUnsatisfiedReplyContextResponse, CreateRejectedQuestionRequest, DescribeKnowledgeUsagePieGraphRequest, DescribeReferResponse, ListDocRequest, GetEmbeddingRequest, GroupQARequest, RateMsgRecordRequest, DescribeCallStatsGraphRequest, GetMsgRecordResponse, DescribeAppRequest, GetReconstructDocumentResultRequest, DescribeKnowledgeUsageRequest, ListQAResponse, IgnoreUnsatisfiedReplyRequest, DescribeReleaseResponse, DescribeConcurrencyUsageGraphResponse, ParseDocRequest, DescribeKnowledgeUsagePieGraphResponse, ReconstructDocumentRequest, DescribeTokenUsageGraphResponse, RetryDocAuditResponse, GetReconstructDocumentResultResponse, GetLikeDataCountRequest, DeleteRejectedQuestionResponse, CreateAttributeLabelRequest, ListAppResponse, CreateReconstructDocumentFlowRequest, RunReRankResponse, QueryParseDocResultRequest, ListRejectedQuestionPreviewRequest, ListReleaseConfigPreviewResponse, DeleteRejectedQuestionRequest, ExportQAListRequest, GetDocPreviewResponse, DescribeConcurrencyUsageResponse, CreateReleaseResponse, QueryRewriteRequest, ModifyAppRequest, RunReRankRequest, DeleteAttributeLabelResponse, RetryReleaseRequest, VerifyQARequest, DeleteQACateRequest, GenerateQARequest, GetWsTokenRequest, ModifyDocRequest, DescribeTokenUsageResponse, DeleteAppResponse, ListAttributeLabelRequest, DeleteDocResponse, DescribeSegmentsResponse, DescribeConcurrencyUsageRequest, UploadAttributeLabelRequest, ExportAttributeLabelRequest, DescribeTokenUsageRequest, GetAppKnowledgeCountResponse, RetryReleaseResponse, CreateAttributeLabelResponse, CreateQAResponse, StopDocParseResponse, ParseDocResponse, ListQACateRequest, ListReleaseQAPreviewRequest, DescribeReleaseInfoResponse, IsTransferIntentRequest, DescribeReferRequest, DeleteAppRequest, DescribeStorageCredentialRequest, DescribeCorpResponse, SaveDocResponse, ListReleaseResponse, ListModelResponse, ListAttributeLabelResponse, ModifyQAResponse, DeleteQAResponse, DescribeCallStatsGraphResponse, GetMsgRecordRequest, DescribeStorageCredentialResponse, CheckAttributeLabelExistResponse, GetTaskStatusRequest, CheckAttributeLabelReferResponse, RateMsgRecordResponse, ModifyDocAttrRangeRequest, CreateQACateRequest, DescribeRobotBizIDByAppKeyRequest, CreateReconstructDocumentFlowResponse, VerifyQAResponse, DescribeSegmentsRequest, DescribeSearchStatsGraphRequest, DescribeSearchStatsGraphResponse, ModifyRejectedQuestionRequest, IgnoreUnsatisfiedReplyResponse, StopDocParseRequest, ListSelectDocRequest } from "./lke_models";
+import { ModifyQAAttrRangeResponse, GetWsTokenResponse, ListUsageCallDetailRequest, CheckAttributeLabelExistRequest, DescribeQAResponse, GetAppKnowledgeCountRequest, ResetSessionResponse, ListSelectDocResponse, DescribeReleaseInfoRequest, DeleteDocRequest, GetAnswerTypeDataCountRequest, DescribeAppResponse, UploadAttributeLabelResponse, CreateDocCateResponse, DeleteDocCateResponse, ExportAttributeLabelResponse, ExportQAListResponse, GetAppSecretResponse, ListRejectedQuestionRequest, CreateQACateResponse, ModifyDocAttrRangeResponse, GetAnswerTypeDataCountResponse, DescribeQARequest, DescribeUnsatisfiedReplyContextRequest, ListAppRequest, ModifyQAAttrRangeRequest, ListRejectedQuestionResponse, ModifyDocResponse, CreateCorpResponse, ListQARequest, DescribeKnowledgeUsageResponse, ListUnsatisfiedReplyRequest, DeleteQARequest, GetLikeDataCountResponse, ListReleaseRequest, IsTransferIntentResponse, CreateDocCateRequest, ModifyAppResponse, ListDocResponse, GetDocPreviewRequest, ModifyQARequest, ExportUnsatisfiedReplyResponse, ListDocCateResponse, ListRejectedQuestionPreviewResponse, DescribeCorpRequest, ListAppCategoryResponse, CreateAppResponse, DescribeAttributeLabelRequest, CreateQARequest, CreateCorpRequest, QueryRewriteResponse, DeleteAttributeLabelRequest, DescribeRobotBizIDByAppKeyResponse, ReconstructDocumentResponse, ListDocCateRequest, DescribeDocResponse, CreateReleaseRequest, GroupDocRequest, CheckAttributeLabelReferRequest, ModifyQACateRequest, ModifyAttributeLabelRequest, ConvertDocumentRequest, ListUnsatisfiedReplyResponse, GetAppSecretRequest, DeleteQACateResponse, QueryParseDocResultResponse, ListReleaseDocPreviewResponse, GenerateQAResponse, GetTaskStatusResponse, DescribeConcurrencyUsageGraphRequest, DescribeDocRequest, DescribeTokenUsageGraphRequest, ConvertDocumentResponse, RetryDocAuditRequest, SaveDocRequest, RetryDocParseRequest, ListAppKnowledgeDetailResponse, ModifyQACateResponse, DescribeAttributeLabelResponse, ModifyAttributeLabelResponse, ListQACateResponse, RetryDocParseResponse, CreateRejectedQuestionResponse, GetEmbeddingResponse, ExportUnsatisfiedReplyRequest, GroupQAResponse, CreateAppRequest, ResetSessionRequest, DescribeReleaseRequest, ListAppCategoryRequest, ListReleaseConfigPreviewRequest, ModifyRejectedQuestionResponse, ListReleaseDocPreviewRequest, DescribeUnsatisfiedReplyContextResponse, CreateRejectedQuestionRequest, DescribeKnowledgeUsagePieGraphRequest, DescribeReferResponse, ListDocRequest, ReconstructDocumentRequest, GetEmbeddingRequest, GroupQARequest, RateMsgRecordRequest, DescribeCallStatsGraphRequest, GetMsgRecordResponse, DescribeAppRequest, GetReconstructDocumentResultRequest, DescribeKnowledgeUsageRequest, ListQAResponse, IgnoreUnsatisfiedReplyRequest, DescribeReleaseResponse, DescribeConcurrencyUsageGraphResponse, ParseDocRequest, DescribeKnowledgeUsagePieGraphResponse, ListReleaseQAPreviewResponse, DescribeTokenUsageGraphResponse, RetryDocAuditResponse, GetReconstructDocumentResultResponse, ModifyDocCateRequest, GetLikeDataCountRequest, DeleteRejectedQuestionResponse, CreateAttributeLabelRequest, ListAppResponse, CreateReconstructDocumentFlowRequest, RunReRankResponse, QueryParseDocResultRequest, ListRejectedQuestionPreviewRequest, ListReleaseConfigPreviewResponse, DeleteRejectedQuestionRequest, ExportQAListRequest, GetDocPreviewResponse, DescribeConcurrencyUsageResponse, CreateReleaseResponse, QueryRewriteRequest, ModifyAppRequest, RunReRankRequest, DeleteAttributeLabelResponse, RetryReleaseRequest, VerifyQARequest, DeleteQACateRequest, GenerateQARequest, GetWsTokenRequest, ModifyDocRequest, DescribeTokenUsageResponse, DeleteAppResponse, ListAttributeLabelRequest, DeleteDocCateRequest, DeleteDocResponse, DescribeSegmentsResponse, DescribeConcurrencyUsageRequest, GroupDocResponse, UploadAttributeLabelRequest, ListUsageCallDetailResponse, ExportAttributeLabelRequest, DescribeTokenUsageRequest, GetAppKnowledgeCountResponse, RetryReleaseResponse, CreateAttributeLabelResponse, ListAppKnowledgeDetailRequest, CreateQAResponse, StopDocParseResponse, ParseDocResponse, ListQACateRequest, ListReleaseQAPreviewRequest, DescribeReleaseInfoResponse, IsTransferIntentRequest, DescribeReferRequest, DeleteAppRequest, DescribeStorageCredentialRequest, DescribeCorpResponse, ModifyDocCateResponse, SaveDocResponse, ListReleaseResponse, ListModelResponse, ListAttributeLabelResponse, ModifyQAResponse, DeleteQAResponse, DescribeCallStatsGraphResponse, GetMsgRecordRequest, DescribeStorageCredentialResponse, CheckAttributeLabelExistResponse, GetTaskStatusRequest, CheckAttributeLabelReferResponse, RateMsgRecordResponse, ModifyDocAttrRangeRequest, CreateQACateRequest, DescribeRobotBizIDByAppKeyRequest, CreateReconstructDocumentFlowResponse, VerifyQAResponse, DescribeSegmentsRequest, DescribeSearchStatsGraphRequest, DescribeSearchStatsGraphResponse, ModifyRejectedQuestionRequest, IgnoreUnsatisfiedReplyResponse, StopDocParseRequest, ListModelRequest, ListSelectDocRequest } from "./lke_models";
 /**
  * lke client
  * @class
@@ -44,13 +44,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteQA(req: DeleteQARequest, cb?: (error: string, rep: DeleteQAResponse) => void): Promise<DeleteQAResponse>;
     /**
+     * 终止文档解析
+     */
+    StopDocParse(req: StopDocParseRequest, cb?: (error: string, rep: StopDocParseResponse) => void): Promise<StopDocParseResponse>;
+    /**
      * 创建属性
      */
     CreateAttributeLabel(req: CreateAttributeLabelRequest, cb?: (error: string, rep: CreateAttributeLabelResponse) => void): Promise<CreateAttributeLabelResponse>;
     /**
-     * 文档解析重试
+     * 获取Doc分类
      */
-    RetryDocAudit(req: RetryDocAuditRequest, cb?: (error: string, rep: RetryDocAuditResponse) => void): Promise<RetryDocAuditResponse>;
+    ListDocCate(req: ListDocCateRequest, cb?: (error: string, rep: ListDocCateResponse) => void): Promise<ListDocCateResponse>;
     /**
      * 产品规划
 
@@ -114,6 +118,10 @@ export declare class Client extends AbstractClient {
      */
     VerifyQA(req: VerifyQARequest, cb?: (error: string, rep: VerifyQAResponse) => void): Promise<VerifyQAResponse>;
     /**
+     * 创建Doc分类
+     */
+    CreateDocCate(req: CreateDocCateRequest, cb?: (error: string, rep: CreateDocCateResponse) => void): Promise<CreateDocCateResponse>;
+    /**
      * 检查属性下的标签名是否存在
      */
     CheckAttributeLabelExist(req: CheckAttributeLabelExistRequest, cb?: (error: string, rep: CheckAttributeLabelExistResponse) => void): Promise<CheckAttributeLabelExistResponse>;
@@ -121,6 +129,10 @@ export declare class Client extends AbstractClient {
      * 文档详情
      */
     DescribeDoc(req: DescribeDocRequest, cb?: (error: string, rep: DescribeDocResponse) => void): Promise<DescribeDocResponse>;
+    /**
+     * 列表查询单次调用明细
+     */
+    ListUsageCallDetail(req: ListUsageCallDetailRequest, cb?: (error: string, rep: ListUsageCallDetailResponse) => void): Promise<ListUsageCallDetailResponse>;
     /**
      * 获取文件上传临时密钥
      */
@@ -154,6 +166,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeUnsatisfiedReplyContext(req: DescribeUnsatisfiedReplyContextRequest, cb?: (error: string, rep: DescribeUnsatisfiedReplyContextResponse) => void): Promise<DescribeUnsatisfiedReplyContextResponse>;
     /**
+     * Doc分组
+     */
+    GroupDoc(req: GroupDocRequest, cb?: (error: string, rep: GroupDocResponse) => void): Promise<GroupDocResponse>;
+    /**
      * 获取企业下应用列表
      */
     ListApp(req: ListAppRequest, cb?: (error: string, rep: ListAppResponse) => void): Promise<ListAppResponse>;
@@ -161,6 +177,10 @@ export declare class Client extends AbstractClient {
      * 接口调用token详情
      */
     DescribeTokenUsage(req: DescribeTokenUsageRequest, cb?: (error: string, rep: DescribeTokenUsageResponse) => void): Promise<DescribeTokenUsageResponse>;
+    /**
+     * Doc分类删除
+     */
+    DeleteDocCate(req: DeleteDocCateRequest, cb?: (error: string, rep: DeleteDocCateResponse) => void): Promise<DeleteDocCateResponse>;
     /**
      * 获取QA分类
      */
@@ -198,6 +218,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeKnowledgeUsage(req?: DescribeKnowledgeUsageRequest, cb?: (error: string, rep: DescribeKnowledgeUsageResponse) => void): Promise<DescribeKnowledgeUsageResponse>;
     /**
+     * 通过appKey获取应用业务ID
+     */
+    DescribeRobotBizIDByAppKey(req: DescribeRobotBizIDByAppKeyRequest, cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void): Promise<DescribeRobotBizIDByAppKeyResponse>;
+    /**
      * 文档列表
      */
     ListDoc(req: ListDocRequest, cb?: (error: string, rep: ListDocResponse) => void): Promise<ListDocResponse>;
@@ -210,17 +234,13 @@ export declare class Client extends AbstractClient {
      */
     GetLikeDataCount(req: GetLikeDataCountRequest, cb?: (error: string, rep: GetLikeDataCountResponse) => void): Promise<GetLikeDataCountResponse>;
     /**
-     * 通过appKey获取应用业务ID
+     * 修改Doc分类
      */
-    DescribeRobotBizIDByAppKey(req: DescribeRobotBizIDByAppKeyRequest, cb?: (error: string, rep: DescribeRobotBizIDByAppKeyResponse) => void): Promise<DescribeRobotBizIDByAppKeyResponse>;
+    ModifyDocCate(req: ModifyDocCateRequest, cb?: (error: string, rep: ModifyDocCateResponse) => void): Promise<ModifyDocCateResponse>;
     /**
      * 导出QA列表
      */
     ExportQAList(req: ExportQAListRequest, cb?: (error: string, rep: ExportQAListResponse) => void): Promise<ExportQAListResponse>;
-    /**
-     * 忽略不满意回复
-     */
-    IgnoreUnsatisfiedReply(req: IgnoreUnsatisfiedReplyRequest, cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void): Promise<IgnoreUnsatisfiedReplyResponse>;
     /**
      * 本接口为异步接口的发起请求接口，用于发起文档解析任务。
 文档解析支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
@@ -302,6 +322,10 @@ export declare class Client extends AbstractClient {
      */
     QueryRewrite(req: QueryRewriteRequest, cb?: (error: string, rep: QueryRewriteResponse) => void): Promise<QueryRewriteResponse>;
     /**
+     * 文档解析重试
+     */
+    RetryDocAudit(req: RetryDocAuditRequest, cb?: (error: string, rep: RetryDocAuditResponse) => void): Promise<RetryDocAuditResponse>;
+    /**
      * 修改应用请求结构体
      */
     ModifyApp(req: ModifyAppRequest, cb?: (error: string, rep: ModifyAppResponse) => void): Promise<ModifyAppResponse>;
@@ -373,11 +397,15 @@ export declare class Client extends AbstractClient {
      */
     ReconstructDocument(req: ReconstructDocumentRequest, cb?: (error: string, rep: ReconstructDocumentResponse) => void): Promise<ReconstructDocumentResponse>;
     /**
-     * 终止文档解析
-     */
-    StopDocParse(req: StopDocParseRequest, cb?: (error: string, rep: StopDocParseResponse) => void): Promise<StopDocParseResponse>;
-    /**
      * 重置会话
      */
     ResetSession(req: ResetSessionRequest, cb?: (error: string, rep: ResetSessionResponse) => void): Promise<ResetSessionResponse>;
+    /**
+     * 列表查询知识库容量详情
+     */
+    ListAppKnowledgeDetail(req: ListAppKnowledgeDetailRequest, cb?: (error: string, rep: ListAppKnowledgeDetailResponse) => void): Promise<ListAppKnowledgeDetailResponse>;
+    /**
+     * 忽略不满意回复
+     */
+    IgnoreUnsatisfiedReply(req: IgnoreUnsatisfiedReplyRequest, cb?: (error: string, rep: IgnoreUnsatisfiedReplyResponse) => void): Promise<IgnoreUnsatisfiedReplyResponse>;
 }

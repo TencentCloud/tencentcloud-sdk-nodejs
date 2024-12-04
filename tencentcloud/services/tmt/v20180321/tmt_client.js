@@ -35,7 +35,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LanguageDetect", req, cb);
     }
     /**
-     * 文本翻译的批量接口
+     * 批量翻译文本的接口
      */
     async TextTranslateBatch(req, cb) {
         return this.request("TextTranslateBatch", req, cb);

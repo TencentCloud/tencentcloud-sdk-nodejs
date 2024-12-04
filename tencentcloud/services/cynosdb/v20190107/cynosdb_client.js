@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
+     * 查询集群透明加密信息
+     */
+    async DescribeClusterTransparentEncryptInfo(req, cb) {
+        return this.request("DescribeClusterTransparentEncryptInfo", req, cb);
+    }
+    /**
      * 本接口（ExportInstanceSlowQueries）用于导出实例慢日志。
      */
     async ExportInstanceSlowQueries(req, cb) {
@@ -236,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBinlogSaveDays(req, cb) {
         return this.request("DescribeBinlogSaveDays", req, cb);
+    }
+    /**
+     * 本接口（SearchClusterTables）用于搜索集群数据表列表。
+     */
+    async SearchClusterTables(req, cb) {
+        return this.request("SearchClusterTables", req, cb);
     }
     /**
      * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。 该接口已废弃，推荐使用DescribeClusterInstanceGroups
@@ -478,10 +490,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb);
     }
     /**
-     * 本接口（SearchClusterTables）用于搜索集群数据表列表。
+     * 开通集群透明加密
      */
-    async SearchClusterTables(req, cb) {
-        return this.request("SearchClusterTables", req, cb);
+    async OpenClusterTransparentEncrypt(req, cb) {
+        return this.request("OpenClusterTransparentEncrypt", req, cb);
     }
     /**
      * 本接口（DescribeParamTemplates）用于查询用户指定产品下的所有参数模板信息。

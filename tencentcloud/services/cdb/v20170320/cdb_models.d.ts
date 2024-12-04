@@ -2318,7 +2318,44 @@ export interface AuditRule {
 /**
  * DescribeInstanceAlarmEvents请求参数结构体
  */
-export declare type DescribeInstanceAlarmEventsRequest = null;
+export interface DescribeInstanceAlarmEventsRequest {
+    /**
+     * 实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 事件查询范围开始时间，闭区间。
+     */
+    StartTime: string;
+    /**
+     * 事件查询范围截止时间，闭区间。
+     */
+    EndTime: string;
+    /**
+     * 事件名称。 Outofmemory - 内存OOM（有状态事件）; Switch - 主从切换（有状态事件）; Roremove - 只读实例剔除（有状态事件）; MemoryUsedHigh - 内存使用率过高（有状态事件）; CPUExpansion - CPU性能扩容（无状态事件）; CPUExpansionFailed - CPU性能扩容失败（无状态事件）; CPUContraction - CPU性能回缩（无状态事件）; Restart - 实例重启（有状态事件）; ServerFailureNodeMigration - ServerFailureNodeMigration（有状态事件）; PlannedSwitch - 计划内主备切换（无状态事件）; OverusedReadonlySet - 实例将被锁定（无状态事件）; OverusedReadWriteSet - 实例解除锁定（无状态事件）。
+     */
+    EventName?: Array<string>;
+    /**
+     * 事件状态。"1" - 发生事件；"0" - 恢复事件；"-" - 无状态事件。
+     */
+    EventStatus?: string;
+    /**
+     * 排序方式。按事件发生事件进行排序，"DESC"-倒排；”ASC“-正序，默认倒排。
+     */
+    Order?: string;
+    /**
+     * 事件展示数量。
+     */
+    Limit?: string;
+    /**
+     * 偏移量。
+     */
+    Offset?: string;
+    /**
+     * 节点 ID。
+     */
+    NodeId?: string;
+}
 /**
  * DescribeBinlogs请求参数结构体
  */
@@ -7865,6 +7902,15 @@ export interface DeviceDiskInfo {
  */
 export interface DescribeInstanceAlarmEventsResponse {
     /**
+     * 事件数。
+     */
+    TotalCount?: number;
+    /**
+     * 事件信息。查询不到信息时，Items为null。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<InstEventInfo>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -9040,6 +9086,32 @@ export interface DescribeBinlogBackupOverviewRequest {
      * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
      */
     Product: string;
+}
+/**
+ * 实例事件信息
+ */
+export interface InstEventInfo {
+    /**
+     * 事件名称。
+     */
+    EventName?: string;
+    /**
+     * 事件状态。
+     */
+    EventStatus?: string;
+    /**
+     * 事件发生时间。
+     */
+    OccurTime?: string;
+    /**
+     * 实例ID。
+     */
+    InstanceId?: string;
+    /**
+     * 节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId?: string;
 }
 /**
  * ReloadBalanceProxyNode请求参数结构体

@@ -1744,6 +1744,11 @@ export interface ClusterInstancesInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigDetail?: EmrProductConfigDetail;
+    /**
+     * 集群绑定的文件系统数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindFileSystemNum?: number;
 }
 /**
  * CreateSLInstance请求参数结构体
@@ -7630,10 +7635,6 @@ export interface ExternalService {
      */
     ShareType: string;
     /**
-     * 自定义参数集合
-     */
-    CustomServiceDefineList: Array<CustomServiceDefine>;
-    /**
      * 共用组件名
      */
     Service: string;
@@ -7641,6 +7642,10 @@ export interface ExternalService {
      * 共用组件集群
      */
     InstanceId: string;
+    /**
+     * 自定义参数集合
+     */
+    CustomServiceDefineList: Array<CustomServiceDefine>;
 }
 /**
  * 组件重启策略

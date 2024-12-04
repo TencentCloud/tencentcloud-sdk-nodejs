@@ -298,6 +298,16 @@ it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeClusterTransparentEncryptInfo", async function () {
+    try {
+       const data = await client.DescribeClusterTransparentEncryptInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ExportInstanceSlowQueries", async function () {
     try {
        const data = await client.ExportInstanceSlowQueries({})
@@ -361,6 +371,16 @@ it("cynosdb.v20190107.RollBackCluster", async function () {
 it("cynosdb.v20190107.DescribeBinlogSaveDays", async function () {
     try {
        const data = await client.DescribeBinlogSaveDays({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SearchClusterTables", async function () {
+    try {
+       const data = await client.SearchClusterTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +788,9 @@ it("cynosdb.v20190107.OpenClusterReadOnlyInstanceGroupAccess", async function ()
     }
 })
 
-it("cynosdb.v20190107.SearchClusterTables", async function () {
+it("cynosdb.v20190107.OpenClusterTransparentEncrypt", async function () {
     try {
-       const data = await client.SearchClusterTables({})
+       const data = await client.OpenClusterTransparentEncrypt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

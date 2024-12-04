@@ -82,16 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteQA", req, cb);
     }
     /**
+     * 终止文档解析
+     */
+    async StopDocParse(req, cb) {
+        return this.request("StopDocParse", req, cb);
+    }
+    /**
      * 创建属性
      */
     async CreateAttributeLabel(req, cb) {
         return this.request("CreateAttributeLabel", req, cb);
     }
     /**
-     * 文档解析重试
+     * 获取Doc分类
      */
-    async RetryDocAudit(req, cb) {
-        return this.request("RetryDocAudit", req, cb);
+    async ListDocCate(req, cb) {
+        return this.request("ListDocCate", req, cb);
     }
     /**
      * 产品规划
@@ -186,6 +192,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyQA", req, cb);
     }
     /**
+     * 创建Doc分类
+     */
+    async CreateDocCate(req, cb) {
+        return this.request("CreateDocCate", req, cb);
+    }
+    /**
      * 检查属性下的标签名是否存在
      */
     async CheckAttributeLabelExist(req, cb) {
@@ -196,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDoc(req, cb) {
         return this.request("DescribeDoc", req, cb);
+    }
+    /**
+     * 列表查询单次调用明细
+     */
+    async ListUsageCallDetail(req, cb) {
+        return this.request("ListUsageCallDetail", req, cb);
     }
     /**
      * 获取文件上传临时密钥
@@ -246,6 +264,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUnsatisfiedReplyContext", req, cb);
     }
     /**
+     * Doc分组
+     */
+    async GroupDoc(req, cb) {
+        return this.request("GroupDoc", req, cb);
+    }
+    /**
      * 获取企业下应用列表
      */
     async ListApp(req, cb) {
@@ -256,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTokenUsage(req, cb) {
         return this.request("DescribeTokenUsage", req, cb);
+    }
+    /**
+     * Doc分类删除
+     */
+    async DeleteDocCate(req, cb) {
+        return this.request("DeleteDocCate", req, cb);
     }
     /**
      * 获取QA分类
@@ -312,6 +342,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKnowledgeUsage", req, cb);
     }
     /**
+     * 通过appKey获取应用业务ID
+     */
+    async DescribeRobotBizIDByAppKey(req, cb) {
+        return this.request("DescribeRobotBizIDByAppKey", req, cb);
+    }
+    /**
      * 文档列表
      */
     async ListDoc(req, cb) {
@@ -330,22 +366,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetLikeDataCount", req, cb);
     }
     /**
-     * 通过appKey获取应用业务ID
+     * 修改Doc分类
      */
-    async DescribeRobotBizIDByAppKey(req, cb) {
-        return this.request("DescribeRobotBizIDByAppKey", req, cb);
+    async ModifyDocCate(req, cb) {
+        return this.request("ModifyDocCate", req, cb);
     }
     /**
      * 导出QA列表
      */
     async ExportQAList(req, cb) {
         return this.request("ExportQAList", req, cb);
-    }
-    /**
-     * 忽略不满意回复
-     */
-    async IgnoreUnsatisfiedReply(req, cb) {
-        return this.request("IgnoreUnsatisfiedReply", req, cb);
     }
     /**
      * 本接口为异步接口的发起请求接口，用于发起文档解析任务。
@@ -466,6 +496,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryRewrite", req, cb);
     }
     /**
+     * 文档解析重试
+     */
+    async RetryDocAudit(req, cb) {
+        return this.request("RetryDocAudit", req, cb);
+    }
+    /**
      * 修改应用请求结构体
      */
     async ModifyApp(req, cb) {
@@ -571,16 +607,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReconstructDocument", req, cb);
     }
     /**
-     * 终止文档解析
-     */
-    async StopDocParse(req, cb) {
-        return this.request("StopDocParse", req, cb);
-    }
-    /**
      * 重置会话
      */
     async ResetSession(req, cb) {
         return this.request("ResetSession", req, cb);
+    }
+    /**
+     * 列表查询知识库容量详情
+     */
+    async ListAppKnowledgeDetail(req, cb) {
+        return this.request("ListAppKnowledgeDetail", req, cb);
+    }
+    /**
+     * 忽略不满意回复
+     */
+    async IgnoreUnsatisfiedReply(req, cb) {
+        return this.request("IgnoreUnsatisfiedReply", req, cb);
     }
 }
 exports.Client = Client;

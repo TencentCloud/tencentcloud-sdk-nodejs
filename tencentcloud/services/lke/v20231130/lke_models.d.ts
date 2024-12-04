@@ -30,6 +30,47 @@ export interface GetWsTokenResponse {
     RequestId?: string;
 }
 /**
+ * ListUsageCallDetail请求参数结构体
+ */
+export interface ListUsageCallDetailRequest {
+    /**
+     * 模型标识
+     */
+    ModelName: string;
+    /**
+     * 开始时间
+     */
+    StartTime: string;
+    /**
+     * 结束时间
+     */
+    EndTime: string;
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 分页数量
+     */
+    PageSize: number;
+    /**
+     * uin列表
+     */
+    UinAccount?: Array<string>;
+    /**
+     * 应用ID列表
+     */
+    AppBizIds?: Array<string>;
+    /**
+     * 调用类型列表
+     */
+    CallType?: string;
+    /**
+     * 筛选子场景
+     */
+    SubScenes?: Array<string>;
+}
+/**
  * CheckAttributeLabelExist请求参数结构体
  */
 export interface CheckAttributeLabelExistRequest {
@@ -549,18 +590,36 @@ export interface MsgRecord {
     QuoteInfos?: Array<QuoteInfo>;
 }
 /**
- * ListUnsatisfiedReply返回参数结构体
+ * CreateDocCate返回参数结构体
  */
-export interface ListUnsatisfiedReplyResponse {
+export interface CreateDocCateResponse {
     /**
-     * 总数
+     * 是否可新增
+  
      */
-    Total?: string;
+    CanAdd?: boolean;
     /**
-     * 不满意回复列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 是否可编辑
      */
-    List?: Array<UnsatisfiedReply>;
+    CanEdit?: boolean;
+    /**
+     * 是否可删除
+  
+     */
+    CanDelete?: boolean;
+    /**
+     * 分类业务ID
+     */
+    CateBizId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteDocCate返回参数结构体
+ */
+export interface DeleteDocCateResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1361,21 +1420,22 @@ export interface IsTransferIntentResponse {
     RequestId?: string;
 }
 /**
- * ListModel请求参数结构体
+ * CreateDocCate请求参数结构体
  */
-export interface ListModelRequest {
+export interface CreateDocCateRequest {
     /**
-     * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
+     * 应用ID
      */
-    AppType: string;
+    BotBizId: string;
     /**
-     * 登录用户主账号(集成商模式必填)
+     * 父级业务ID
      */
-    LoginUin?: string;
+    ParentBizId: string;
     /**
-     * 登录用户子账号(集成商模式必填)
+     * 分类名称
+  
      */
-    LoginSubAccountUin?: string;
+    Name: string;
 }
 /**
  * 请求的API信息
@@ -1595,6 +1655,19 @@ export interface ExportUnsatisfiedReplyResponse {
     RequestId?: string;
 }
 /**
+ * ListDocCate返回参数结构体
+ */
+export interface ListDocCateResponse {
+    /**
+     * 列表
+     */
+    List?: Array<CateInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ListRejectedQuestionPreview返回参数结构体
  */
 export interface ListRejectedQuestionPreviewResponse {
@@ -1796,17 +1869,39 @@ export interface CreateCorpRequest {
     Telephone?: string;
 }
 /**
- * RetryDocParse请求参数结构体
+ * 调试信息
  */
-export interface RetryDocParseRequest {
+export interface ProcedureDebugging {
     /**
-     * 应用ID
+     * 检索query
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BotBizId: string;
+    Content?: string;
     /**
-     * 文档ID
+     * 系统prompt
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DocBizId: string;
+    System?: string;
+    /**
+     * 多轮历史信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Histories?: Array<HistorySummary>;
+    /**
+     * 检索知识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Knowledge?: Array<KnowledgeSummary>;
+    /**
+     * 任务流程
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskFlow?: TaskFlowSummary;
+    /**
+     * 工作流调试信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkFlow?: WorkFlowSummary;
 }
 /**
  * QueryRewrite返回参数结构体
@@ -1971,6 +2066,15 @@ export interface ReconstructDocumentResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ListDocCate请求参数结构体
+ */
+export interface ListDocCateRequest {
+    /**
+     * 应用ID
+     */
+    BotBizId: string;
 }
 /**
  * DescribeDoc返回参数结构体
@@ -2161,39 +2265,21 @@ export interface ApiVarAttrInfo {
     AttrBizId?: string;
 }
 /**
- * 调试信息
+ * GroupDoc请求参数结构体
  */
-export interface ProcedureDebugging {
+export interface GroupDocRequest {
     /**
-     * 检索query
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 应用ID
      */
-    Content?: string;
+    BotBizId: string;
     /**
-     * 系统prompt
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 操作对象的业务ID列表
      */
-    System?: string;
+    BizIds: Array<string>;
     /**
-     * 多轮历史信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 分组 ID
      */
-    Histories?: Array<HistorySummary>;
-    /**
-     * 检索知识
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Knowledge?: Array<KnowledgeSummary>;
-    /**
-     * 任务流程
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskFlow?: TaskFlowSummary;
-    /**
-     * 工作流调试信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WorkFlow?: WorkFlowSummary;
+    CateBizId: string;
 }
 /**
  * CheckAttributeLabelRefer请求参数结构体
@@ -2364,17 +2450,22 @@ export interface Usage {
     TotalTokens?: number;
 }
 /**
- * ResetSession请求参数结构体
+ * ListUnsatisfiedReply返回参数结构体
  */
-export interface ResetSessionRequest {
+export interface ListUnsatisfiedReplyResponse {
     /**
-     * 会话ID
+     * 总数
      */
-    SessionId: string;
+    Total?: string;
     /**
-     * 是否仅清空会话关联
+     * 不满意回复列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsOnlyEmptyTheDialog?: boolean;
+    List?: Array<UnsatisfiedReply>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * GetAppSecret请求参数结构体
@@ -2717,6 +2808,19 @@ export interface SaveDocRequest {
     CateBizId?: string;
 }
 /**
+ * RetryDocParse请求参数结构体
+ */
+export interface RetryDocParseRequest {
+    /**
+     * 应用ID
+     */
+    BotBizId: string;
+    /**
+     * 文档ID
+     */
+    DocBizId: string;
+}
+/**
  * 文档解析失败记录
  */
 export interface ReconstructDocumentFailedPage {
@@ -2725,6 +2829,23 @@ export interface ReconstructDocumentFailedPage {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PageNumber?: number;
+}
+/**
+ * ListAppKnowledgeDetail返回参数结构体
+ */
+export interface ListAppKnowledgeDetailResponse {
+    /**
+     * 列表总数
+     */
+    Total?: number;
+    /**
+     * 应用使用知识库容量详情
+     */
+    List?: Array<KnowledgeDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyQACate返回参数结构体
@@ -2897,6 +3018,19 @@ export interface CreateAppRequest {
     BaseConfig: BaseConfig;
 }
 /**
+ * ResetSession请求参数结构体
+ */
+export interface ResetSessionRequest {
+    /**
+     * 会话ID
+     */
+    SessionId: string;
+    /**
+     * 是否仅清空会话关联
+     */
+    IsOnlyEmptyTheDialog?: boolean;
+}
+/**
  * 应用配置
  */
 export interface AppConfig {
@@ -3028,21 +3162,69 @@ export interface ListReleaseConfigPreviewRequest {
     ReleaseStatus?: Array<number | bigint>;
 }
 /**
- * ListReleaseQAPreview返回参数结构体
+ * 调用类型
  */
-export interface ListReleaseQAPreviewResponse {
+export interface CallDetail {
     /**
-     * 文档数量
+     * 关联ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total?: string;
+    Id?: string;
     /**
-     * 文档列表
+     * 调用时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    List?: Array<ReleaseQA>;
+    CallTime?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 总token消耗
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    TotalTokenUsage?: number;
+    /**
+     * 输入token消耗
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InputTokenUsage?: number;
+    /**
+     * 输出token消耗
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputTokenUsage?: number;
+    /**
+     * 搜索服务调用次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SearchUsage?: number;
+    /**
+     * 模型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelName?: string;
+    /**
+     * 调用类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallType?: string;
+    /**
+     * 账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UinAccount?: string;
+    /**
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppName?: string;
+    /**
+     * 总消耗页数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageUsage?: number;
+    /**
+     * 筛选子场景
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubScene?: string;
 }
 /**
  * ModifyRejectedQuestion返回参数结构体
@@ -3433,6 +3615,31 @@ export interface ListDocRequest {
      * 分类ID
      */
     CateBizId?: string;
+}
+/**
+ * ReconstructDocument请求参数结构体
+ */
+export interface ReconstructDocumentRequest {
+    /**
+     * 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
+     */
+    FileBase64?: string;
+    /**
+     * 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    FileUrl?: string;
+    /**
+     * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。
+     */
+    FileStartPageNumber?: number;
+    /**
+     * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为10，表示识别到pdf文件的第10页。单次调用最多支持识别10页内容，即FileEndPageNumber-FileStartPageNumber需要不大于10。
+     */
+    FileEndPageNumber?: number;
+    /**
+     * 配置选项，支持配置是否在生成的Markdown中是否嵌入图片
+     */
+    Config?: ReconstructDocumentConfig;
 }
 /**
  * GetEmbedding请求参数结构体
@@ -3970,29 +4177,21 @@ export interface ClassifyLabel {
     Values?: Array<string>;
 }
 /**
- * ReconstructDocument请求参数结构体
+ * ListReleaseQAPreview返回参数结构体
  */
-export interface ReconstructDocumentRequest {
+export interface ListReleaseQAPreviewResponse {
     /**
-     * 文件的 Base64 值。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
+     * 文档数量
      */
-    FileBase64?: string;
+    Total?: string;
     /**
-     * 文件的 Url 地址。 支持的文件格式：PNG、JPG、JPEG、PDF。 支持的文件大小：所下载文件经 Base64 编码后不超过 8M。文件下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 文档列表
      */
-    FileUrl?: string;
+    List?: Array<ReleaseQA>;
     /**
-     * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值。默认为1，表示从pdf文件的第1页开始识别。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    FileStartPageNumber?: number;
-    /**
-     * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。默认为10，表示识别到pdf文件的第10页。单次调用最多支持识别10页内容，即FileEndPageNumber-FileStartPageNumber需要不大于10。
-     */
-    FileEndPageNumber?: number;
-    /**
-     * 配置选项，支持配置是否在生成的Markdown中是否嵌入图片
-     */
-    Config?: ReconstructDocumentConfig;
+    RequestId?: string;
 }
 /**
  * DescribeTokenUsageGraph返回参数结构体
@@ -4151,6 +4350,24 @@ export interface GetReconstructDocumentResultResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyDocCate请求参数结构体
+ */
+export interface ModifyDocCateRequest {
+    /**
+     * 应用ID
+     */
+    BotBizId: string;
+    /**
+     * 分类名称
+  
+     */
+    Name: string;
+    /**
+     * 分类业务ID
+     */
+    CateBizId: string;
 }
 /**
  * 发布拒答
@@ -4396,6 +4613,50 @@ export interface AppInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ModelAliasName?: string;
+}
+/**
+ * 分类信息
+ */
+export interface CateInfo {
+    /**
+     * 分类ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CateBizId?: string;
+    /**
+     * 分类名称
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 分类下的Record（如文档、同义词等）数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 是否可新增
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CanAdd?: boolean;
+    /**
+     * 是否可编辑
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CanEdit?: boolean;
+    /**
+     * 是否可删除
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CanDelete?: boolean;
+    /**
+     * 子分类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Children?: Array<CateInfo>;
 }
 /**
  * CreateReconstructDocumentFlow请求参数结构体
@@ -4852,6 +5113,31 @@ export interface RunReRankRequest {
     Online?: boolean;
 }
 /**
+ * 应用使用知识库容量详情
+ */
+export interface KnowledgeDetail {
+    /**
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppName?: string;
+    /**
+     * 已用字符数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedCharSize?: string;
+    /**
+     * 使用占比
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Proportion?: number;
+    /**
+     * 超量字符数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExceedCharSize?: string;
+}
+/**
  * DeleteAttributeLabel返回参数结构体
  */
 export interface DeleteAttributeLabelResponse {
@@ -5136,6 +5422,19 @@ export interface ListAttributeLabelRequest {
     Query?: string;
 }
 /**
+ * DeleteDocCate请求参数结构体
+ */
+export interface DeleteDocCateRequest {
+    /**
+     * 应用ID
+     */
+    BotBizId: string;
+    /**
+     * 分类业务ID
+     */
+    CateBizId: string;
+}
+/**
  * DeleteDoc返回参数结构体
  */
 export interface DeleteDocResponse {
@@ -5283,6 +5582,15 @@ export interface DescribeConcurrencyUsageRequest {
     AppBizIds?: Array<string>;
 }
 /**
+ * GroupDoc返回参数结构体
+ */
+export interface GroupDocResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UploadAttributeLabel请求参数结构体
  */
 export interface UploadAttributeLabelRequest {
@@ -5314,6 +5622,23 @@ export interface UploadAttributeLabelRequest {
      * 登录用户子账号(集成商模式必填)
      */
     LoginSubAccountUin?: string;
+}
+/**
+ * ListUsageCallDetail返回参数结构体
+ */
+export interface ListUsageCallDetailResponse {
+    /**
+     * 列表总数
+     */
+    Total?: number;
+    /**
+     * 列表
+     */
+    List?: Array<CallDetail>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ExportAttributeLabel请求参数结构体
@@ -5416,6 +5741,23 @@ export interface CreateAttributeLabelResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ListAppKnowledgeDetail请求参数结构体
+ */
+export interface ListAppKnowledgeDetailRequest {
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 页面大小
+     */
+    PageSize: number;
+    /**
+     * 应用ID列表
+     */
+    AppBizIds?: Array<string>;
 }
 /**
  * CreateQA返回参数结构体
@@ -5702,7 +6044,8 @@ export interface DescribeStorageCredentialRequest {
      */
     FileType?: string;
     /**
-     * IsPublic用于上传文件或图片时选择场景，当上传为对话端图片时IsPublic为true，上传文件（包括文档库文件和对话端文件）时IsPublic为false
+     * IsPublic用于上传文件或图片时选择场景，当上传对话端图片时IsPublic为true，上传文件（包括文档库文件/图片等和对话端文件）时IsPublic为false
+  
      */
     IsPublic?: boolean;
     /**
@@ -5754,6 +6097,15 @@ export interface DescribeCorpResponse {
   
      */
     FullName?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDocCate返回参数结构体
+ */
+export interface ModifyDocCateResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6382,6 +6734,23 @@ export interface KnowledgeWorkflow {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsEnabled?: boolean;
+}
+/**
+ * ListModel请求参数结构体
+ */
+export interface ListModelRequest {
+    /**
+     * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
+     */
+    AppType: string;
+    /**
+     * 登录用户主账号(集成商模式必填)
+     */
+    LoginUin?: string;
+    /**
+     * 登录用户子账号(集成商模式必填)
+     */
+    LoginSubAccountUin?: string;
 }
 /**
  * ListSelectDoc请求参数结构体

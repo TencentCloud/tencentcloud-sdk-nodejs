@@ -59,7 +59,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文本翻译的批量接口
+   * 批量翻译文本的接口
    */
   async TextTranslateBatch(
     req: TextTranslateBatchRequest,

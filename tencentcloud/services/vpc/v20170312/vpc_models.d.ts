@@ -13950,16 +13950,15 @@ export interface DescribeVpcTaskResultResponse {
     /**
      * 异步任务执行结果。结果：SUCCESS、FAILED、RUNNING。3者其中之一。其中SUCCESS表示任务执行成功，FAILED表示任务执行失败，RUNNING表示任务执行中。
      */
-    Status: string;
+    Status?: string;
     /**
      * 异步任务执行输出。
      */
-    Output: string;
+    Output?: string;
     /**
      * 异步任务详细结果。只用于特殊场景，如批量删除弹性网卡时查询成功的网卡列表和失败的列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: Array<VpcTaskResultDetailInfo>;
+    Result?: Array<VpcTaskResultDetailInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16051,7 +16050,7 @@ export interface ModifyHaVipAttributeRequest {
     /**
      * `HAVIP`名称，可任意命名，但不得超过60个字符。
      */
-    HaVipName: string;
+    HaVipName?: string;
 }
 /**
  * ModifyAddressTemplateGroupAttribute返回参数结构体
@@ -16168,6 +16167,14 @@ export interface CreateHaVipRequest {
      * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
      */
     Tags?: Array<Tag>;
+    /**
+     * HaVip绑定的子机或网卡。最多支持10个实例。
+     */
+    HaVipAssociationSet?: Array<HaVipAssociation>;
+    /**
+     * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+     */
+    ClientToken?: string;
 }
 /**
  * IPv6子网段对象。
