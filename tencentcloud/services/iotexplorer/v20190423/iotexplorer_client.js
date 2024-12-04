@@ -520,6 +520,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFirmware", req, cb);
     }
     /**
+     * 同步执行设备云存 AI 分析任务
+     */
+    async InvokeCloudStorageAIServiceTask(req, cb) {
+        return this.request("InvokeCloudStorageAIServiceTask", req, cb);
+    }
+    /**
      * 查询TWeCall包列表
      */
     async GetTWeCallPkgList(req, cb) {

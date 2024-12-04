@@ -732,7 +732,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Datahub主题
+   * 删除DIP主题
    */
   async DeleteDatahubTopic(
     req: DeleteDatahubTopicRequest,

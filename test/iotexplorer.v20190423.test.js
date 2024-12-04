@@ -838,6 +838,16 @@ it("iotexplorer.v20190423.UploadFirmware", async function () {
     }
 })
 
+it("iotexplorer.v20190423.InvokeCloudStorageAIServiceTask", async function () {
+    try {
+       const data = await client.InvokeCloudStorageAIServiceTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetTWeCallPkgList", async function () {
     try {
        const data = await client.GetTWeCallPkgList({})

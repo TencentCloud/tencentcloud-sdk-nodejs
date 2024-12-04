@@ -151,6 +151,21 @@ export interface HealthCheckTemplateRule {
     Severity: string;
 }
 /**
+ * 机型名称与GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric等相关配置信息
+ */
+export interface GPUConfig {
+    /**
+     * 机型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType: string;
+    /**
+     * GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GPUParams: GPUParams;
+}
+/**
  * 健康检测规则
  */
 export interface HealthCheckPolicyRule {
@@ -192,6 +207,23 @@ export interface CreateNodePoolResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ */
+export interface TagSpecification {
+    /**
+     * 标签绑定的资源类型，当前支持类型：
+  1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
+  2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType?: string;
+    /**
+     * 标签对列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * 原生节点池创建参数
@@ -818,6 +850,10 @@ export interface UpdateNativeNodePoolParam {
      * ssh公钥id数组
      */
     KeyIds?: Array<string>;
+    /**
+     * 节点池 GPU 配置
+     */
+    GPUConfigs?: Array<GPUConfig>;
 }
 /**
  * k8s中标注，一般以数组的方式存在
@@ -868,21 +904,39 @@ export interface DeleteHealthCheckPolicyResponse {
     RequestId?: string;
 }
 /**
- * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ * GPU相关的参数，包括驱动版本，CUDA版本，cuDNN版本，是否开启MIG以及是否开启Fabric
  */
-export interface TagSpecification {
+export interface GPUParams {
     /**
-     * 标签绑定的资源类型，当前支持类型：
-  1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
-  2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
+     * GPU驱动版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceType?: string;
+    Driver?: string;
     /**
-     * 标签对列表
+     * CUDA版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags?: Array<Tag>;
+    CUDA?: string;
+    /**
+     * CUDNN版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CUDNN?: string;
+    /**
+     * 是否启用MIG特性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MIGEnable?: boolean;
+    /**
+     * 是否启用Fabric特性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Fabric?: boolean;
+    /**
+     * 自定义驱动下载地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomGPUDriver?: string;
 }
 /**
  * 节点池自定义脚本

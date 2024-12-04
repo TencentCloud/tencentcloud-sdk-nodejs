@@ -244,7 +244,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FetchMessageByOffset", req, cb);
     }
     /**
-     * 删除Datahub主题
+     * 删除DIP主题
      */
     async DeleteDatahubTopic(req, cb) {
         return this.request("DeleteDatahubTopic", req, cb);

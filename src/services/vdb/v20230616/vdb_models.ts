@@ -136,6 +136,10 @@ export interface DescribeInstancesRequest {
    */
   EngineVersions?: Array<string>
   /**
+   * 按照api版本筛选实例
+   */
+  ApiVersions?: Array<string>
+  /**
    * 按照创建时间筛选实例。
    */
   CreateAt?: string

@@ -1308,7 +1308,7 @@ export interface DataAuthorizationInfo {
      */
     PrivacyPolicyLink?: string;
     /**
-     * 是否是用户个人敏感数据。
+     * 是否是用户个人敏感数据（不推荐使用）。
   
   固定填：1。
   

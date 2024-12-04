@@ -1271,6 +1271,37 @@ export interface DeviceUser {
     FamilyName?: string;
 }
 /**
+ * 产品模型定义
+ */
+export interface ProductModelDefinition {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 模型定义
+     */
+    ModelDefine: string;
+    /**
+     * 更新时间，秒级时间戳
+     */
+    UpdateTime: number;
+    /**
+     * 创建时间，秒级时间戳
+     */
+    CreateTime: number;
+    /**
+     * 产品所属分类的模型快照（产品创建时刻的）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryModel: string;
+    /**
+     * 产品的连接类型的模型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetTypeModel: string;
+}
+/**
  * 围栏详细信息(包含创建时间及更新时间)
  */
 export interface PositionFenceInfo {
@@ -3048,6 +3079,54 @@ export interface DescribePositionFenceListRequest {
     Limit?: number;
 }
 /**
+ * InvokeCloudStorageAIServiceTask请求参数结构体
+ */
+export interface InvokeCloudStorageAIServiceTaskRequest {
+    /**
+     * 产品 ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存 AI 服务类型。可选值：
+  - `RealtimeObjectDetect`：目标检测
+  - `Highlight`：视频浓缩
+  - `VideoToText`：视频语义理解
+     */
+    ServiceType: string;
+    /**
+     * 待分析云存的起始时间
+     */
+    StartTime: number;
+    /**
+     * 待分析云存的结束时间
+     */
+    EndTime: number;
+    /**
+     * 通道 ID
+     */
+    ChannelId?: number;
+    /**
+     * 视频分析配置参数
+     */
+    Config?: string;
+    /**
+     * 视频分析识别区域
+     */
+    ROI?: string;
+    /**
+     * 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等）
+     */
+    VideoURLs?: Array<string>;
+    /**
+     * 自定义任务 ID
+     */
+    CustomId?: string;
+}
+/**
  * CreatePositionSpace请求参数结构体
  */
 export interface CreatePositionSpaceRequest {
@@ -3414,35 +3493,25 @@ export interface ResetCloudStorageAIServiceResponse {
     RequestId?: string;
 }
 /**
- * 产品模型定义
+ * InvokeCloudStorageAIServiceTask返回参数结构体
  */
-export interface ProductModelDefinition {
+export interface InvokeCloudStorageAIServiceTaskResponse {
     /**
-     * 产品ID
+     * 任务是否执行完成
      */
-    ProductId: string;
+    Completed?: boolean;
     /**
-     * 模型定义
+     * 任务 ID
      */
-    ModelDefine: string;
+    TaskId?: string;
     /**
-     * 更新时间，秒级时间戳
+     * 任务信息
      */
-    UpdateTime: number;
+    TaskInfo?: CloudStorageAIServiceTask;
     /**
-     * 创建时间，秒级时间戳
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CreateTime: number;
-    /**
-     * 产品所属分类的模型快照（产品创建时刻的）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CategoryModel: string;
-    /**
-     * 产品的连接类型的模型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NetTypeModel: string;
+    RequestId?: string;
 }
 /**
  * ModifyFenceBind返回参数结构体

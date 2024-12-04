@@ -1939,6 +1939,12 @@ LimitTypes取值范围：
         return this.request("ModifyAddressAttribute", req, cb);
     }
     /**
+     * 查询流量调度规则
+     */
+    async DescribeTrafficQosPolicy(req, cb) {
+        return this.request("DescribeTrafficQosPolicy", req, cb);
+    }
+    /**
      * 本接口（CreateFlowLog）用于创建网络流日志。
      */
     async CreateFlowLog(req, cb) {

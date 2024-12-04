@@ -628,6 +628,55 @@ export interface VideoEncode {
     Gop: number;
 }
 /**
+ * MCU混流布局参数
+ */
+export interface LayoutParams {
+    /**
+     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+     */
+    Template?: number;
+    /**
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+     */
+    MainVideoUserId?: string;
+    /**
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+     */
+    MainVideoStreamType?: number;
+    /**
+     * 画中画模板中有效，代表小画面的布局参数。
+     */
+    SmallVideoLayoutParams?: SmallVideoLayoutParams;
+    /**
+     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+     */
+    MainVideoRightAlign?: number;
+    /**
+     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
+     */
+    MixVideoUids?: Array<string>;
+    /**
+     * 自定义模板中有效，指定用户视频在混合画面中的位置。
+     */
+    PresetLayoutConfig?: Array<PresetLayoutConfig>;
+    /**
+     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+     */
+    PlaceHolderMode?: number;
+    /**
+     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+     */
+    PureAudioHoldPlaceMode?: number;
+    /**
+     * 水印参数。
+     */
+    WaterMarkParams?: WaterMarkParams;
+    /**
+     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
+     */
+    RenderMode?: number;
+}
+/**
  * StopMCUMixTranscodeByStrRoomId返回参数结构体
  */
 export interface StopMCUMixTranscodeByStrRoomIdResponse {
@@ -860,20 +909,6 @@ export interface DescribeUserInfoRequest {
   范围：[1，100]。
      */
     PageSize?: number;
-}
-/**
- * DescribeTRTCMarketQualityData返回参数结构体
- */
-export interface DescribeTRTCMarketQualityDataResponse {
-    /**
-     * TRTC监控数据出参
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: TRTCDataResult;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeRelayUsage请求参数结构体
@@ -1198,6 +1233,10 @@ export interface CreateBasicModerationRequest {
      * TRTC房间号的类型。【*注意】必须和TRTC的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认）
      */
     RoomIdType?: number;
+    /**
+     * 音频文件上传到云存储的参数
+     */
+    AuditStorageParams?: AuditStorageParams;
 }
 /**
  * 点播相关参数。
@@ -1406,25 +1445,18 @@ export interface StopStreamIngestRequest {
     TaskId: string;
 }
 /**
- * DescribeTRTCRealTimeQualityData请求参数结构体
+ * DescribeTRTCMarketQualityData返回参数结构体
  */
-export interface DescribeTRTCRealTimeQualityDataRequest {
+export interface DescribeTRTCMarketQualityDataResponse {
     /**
-     * 用户SdkAppId（如：1400xxxxxx）
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SdkAppId: string;
+    Data?: TRTCDataResult;
     /**
-     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    StartTime: number;
-    /**
-     * 结束时间，unix时间戳，单位：秒
-     */
-    EndTime: number;
-    /**
-     * 房间ID
-     */
-    RoomId?: string;
+    RequestId?: string;
 }
 /**
  * 画中画模板中有效，代表小画面的布局参数
@@ -2578,53 +2610,25 @@ export interface DescribeTRTCRealTimeQualityMetricDataResponse {
     RequestId?: string;
 }
 /**
- * MCU混流布局参数
+ * DescribeTRTCRealTimeQualityData请求参数结构体
  */
-export interface LayoutParams {
+export interface DescribeTRTCRealTimeQualityDataRequest {
     /**
-     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+     * 用户SdkAppId（如：1400xxxxxx）
      */
-    Template?: number;
+    SdkAppId: string;
     /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
      */
-    MainVideoUserId?: string;
+    StartTime: number;
     /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+     * 结束时间，unix时间戳，单位：秒
      */
-    MainVideoStreamType?: number;
+    EndTime: number;
     /**
-     * 画中画模板中有效，代表小画面的布局参数。
+     * 房间ID
      */
-    SmallVideoLayoutParams?: SmallVideoLayoutParams;
-    /**
-     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
-     */
-    MainVideoRightAlign?: number;
-    /**
-     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
-     */
-    MixVideoUids?: Array<string>;
-    /**
-     * 自定义模板中有效，指定用户视频在混合画面中的位置。
-     */
-    PresetLayoutConfig?: Array<PresetLayoutConfig>;
-    /**
-     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
-     */
-    PlaceHolderMode?: number;
-    /**
-     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
-     */
-    PureAudioHoldPlaceMode?: number;
-    /**
-     * 水印参数。
-     */
-    WaterMarkParams?: WaterMarkParams;
-    /**
-     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
-     */
-    RenderMode?: number;
+    RoomId?: string;
 }
 /**
  * StartWebRecord返回参数结构体
@@ -3055,21 +3059,46 @@ export interface RowValues {
     RowValue?: Array<number | bigint>;
 }
 /**
- * 旁路转码时长的查询结果
+ * 腾讯云对象存储COS以及第三方云存储的账号信息
  */
-export interface OneSdkAppIdTranscodeTimeUsagesInfo {
+export interface CloudAuditStorage {
     /**
-     * 旁路转码时长查询结果数组
+     * 腾讯云对象存储COS以及第三方云存储账号信息
+  0：腾讯云对象存储 COS
+  1：AWS
+  【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中
+  示例值：0
      */
-    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>;
+    Vendor: number;
     /**
-     * 查询记录数量
+     * 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224#.E5.9C.B0.E5.9F.9F）。
+  示例值：cn-shanghai-1
+  
+  AWS S3[地域信息]（https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions）
+  示例值：ap-southeast-3
      */
-    TotalNum: number;
+    Region: string;
     /**
-     * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
+     * 云存储桶名称。
      */
-    SdkAppId: string;
+    Bucket: string;
+    /**
+     * 云存储的access_key账号信息。
+  若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。
+  示例值：test-accesskey
+     */
+    AccessKey: string;
+    /**
+     * 云存储的secret_key账号信息。
+  若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。
+  示例值：test-secretkey
+     */
+    SecretKey: string;
+    /**
+     * 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。
+  示例值：["prefix1", "prefix2"]
+     */
+    FileNamePrefix?: Array<string>;
 }
 /**
  * CreateCloudRecording返回参数结构体
@@ -3453,15 +3482,6 @@ export interface StartAITranscriptionRequest {
     RecognizeConfig?: RecognizeConfig;
 }
 /**
- * DismissRoom返回参数结构体
- */
-export interface DismissRoomResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * StopStreamIngest返回参数结构体
  */
 export interface StopStreamIngestResponse {
@@ -3488,33 +3508,13 @@ export interface MixUserInfo {
     RoomIdType?: number;
 }
 /**
- * 事件信息，包括，事件时间戳，事件ID,
+ * DismissRoom返回参数结构体
  */
-export interface EventMessage {
+export interface DismissRoomResponse {
     /**
-     * 视频流类型：
-  0：与视频无关的事件；
-  2：视频为大画面；
-  3：视频为小画面；
-  7：视频为旁路画面；
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Type: number;
-    /**
-     * 事件上报的时间戳，unix时间（1589891188801ms)
-     */
-    Time: number;
-    /**
-     * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
-     */
-    EventId: number;
-    /**
-     * 事件的第一个参数，如视频分辨率宽
-     */
-    ParamOne: number;
-    /**
-     * 事件的第二个参数，如视频分辨率高
-     */
-    ParamTwo: number;
+    RequestId?: string;
 }
 /**
  * DescribeTRTCMarketQualityData请求参数结构体
@@ -3638,6 +3638,15 @@ export interface MaxVideoUser {
     UserMediaStream: UserMediaStream;
 }
 /**
+ * 审核存储参数
+ */
+export interface AuditStorageParams {
+    /**
+     * 腾讯云对象存储COS以及第三方云存储的账号信息
+     */
+    CloudAuditStorage?: CloudAuditStorage;
+}
+/**
  * 转推服务加入TRTC房间的机器人参数。
  */
 export interface AgentParams {
@@ -3727,6 +3736,35 @@ export interface StopAIConversationRequest {
      * 唯一标识任务。
      */
     TaskId: string;
+}
+/**
+ * 事件信息，包括，事件时间戳，事件ID,
+ */
+export interface EventMessage {
+    /**
+     * 视频流类型：
+  0：与视频无关的事件；
+  2：视频为大画面；
+  3：视频为小画面；
+  7：视频为旁路画面；
+     */
+    Type: number;
+    /**
+     * 事件上报的时间戳，unix时间（1589891188801ms)
+     */
+    Time: number;
+    /**
+     * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
+     */
+    EventId: number;
+    /**
+     * 事件的第一个参数，如视频分辨率宽
+     */
+    ParamOne: number;
+    /**
+     * 事件的第二个参数，如视频分辨率高
+     */
+    ParamTwo: number;
 }
 /**
  * UpdatePublishCdnStream返回参数结构体
@@ -3887,6 +3925,23 @@ export interface DescribeStreamIngestRequest {
      * 任务的唯一Id，在启动任务成功后会返回。
      */
     TaskId: string;
+}
+/**
+ * 旁路转码时长的查询结果
+ */
+export interface OneSdkAppIdTranscodeTimeUsagesInfo {
+    /**
+     * 旁路转码时长查询结果数组
+     */
+    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>;
+    /**
+     * 查询记录数量
+     */
+    TotalNum: number;
+    /**
+     * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
+     */
+    SdkAppId: string;
 }
 /**
  * DescribeTRTCMarketScaleMetricData返回参数结构体

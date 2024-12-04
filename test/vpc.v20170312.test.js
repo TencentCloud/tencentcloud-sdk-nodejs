@@ -2788,6 +2788,16 @@ it("vpc.v20170312.ModifyAddressAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeTrafficQosPolicy", async function () {
+    try {
+       const data = await client.DescribeTrafficQosPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateFlowLog", async function () {
     try {
        const data = await client.CreateFlowLog({})

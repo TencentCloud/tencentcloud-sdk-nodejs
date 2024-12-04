@@ -86,6 +86,7 @@ import {
   ModifySpacePropertyResponse,
   DescribeDeviceDataHistoryResponse,
   DeviceUser,
+  ProductModelDefinition,
   PositionFenceInfo,
   DeleteDeviceResponse,
   ModifyLoRaFrequencyResponse,
@@ -176,6 +177,7 @@ import {
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   DescribePositionFenceListRequest,
+  InvokeCloudStorageAIServiceTaskRequest,
   CreatePositionSpaceRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
@@ -194,7 +196,7 @@ import {
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
   ResetCloudStorageAIServiceResponse,
-  ProductModelDefinition,
+  InvokeCloudStorageAIServiceTaskResponse,
   ModifyFenceBindResponse,
   DescribeGatewayBindDevicesResponse,
   DeletePositionFenceResponse,
@@ -1195,6 +1197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadFirmwareResponse) => void
   ): Promise<UploadFirmwareResponse> {
     return this.request("UploadFirmware", req, cb)
+  }
+
+  /**
+   * 同步执行设备云存 AI 分析任务
+   */
+  async InvokeCloudStorageAIServiceTask(
+    req: InvokeCloudStorageAIServiceTaskRequest,
+    cb?: (error: string, rep: InvokeCloudStorageAIServiceTaskResponse) => void
+  ): Promise<InvokeCloudStorageAIServiceTaskResponse> {
+    return this.request("InvokeCloudStorageAIServiceTask", req, cb)
   }
 
   /**

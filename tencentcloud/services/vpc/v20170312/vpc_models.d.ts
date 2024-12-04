@@ -3701,6 +3701,41 @@ export interface ModifyCcnAttachedInstancesAttributeRequest {
  */
 export declare type DescribeNetworkAccountTypeRequest = null;
 /**
+ * 流量调度规则
+ */
+export interface TrafficQosPolicySet {
+    /**
+     * CCN实例ID。形如：ccn-f49l6u0z。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
+    /**
+     * qos id。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QosId?: number;
+    /**
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QosPolicyDescription?: string;
+    /**
+     * 名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QosPolicyName?: string;
+    /**
+     * 带宽。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bandwidth?: number;
+    /**
+     * 流量调度策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QosPolicyId?: string;
+}
+/**
  * DeleteAddressTemplate请求参数结构体
  */
 export interface DeleteAddressTemplateRequest {
@@ -5102,6 +5137,23 @@ export interface RejectAttachCcnInstancesRequest {
      * 拒绝关联实例列表。
      */
     Instances: Array<CcnInstance>;
+}
+/**
+ * DescribeTrafficQosPolicy请求参数结构体
+ */
+export interface DescribeTrafficQosPolicyRequest {
+    /**
+     * CCN实例ID。形如：ccn-f49l6u0z。
+     */
+    CcnId: string;
+    /**
+     * 本端地域。
+     */
+    LocalRegion: string;
+    /**
+     * 远端地域。
+     */
+    RemoteRegion: string;
 }
 /**
  * ModifyCcnRegionBandwidthLimitsType请求参数结构体
@@ -15965,6 +16017,19 @@ export interface ModifyNetworkInterfaceAttributeRequest {
      * 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。
      */
     TrunkingFlag?: string;
+}
+/**
+ * DescribeTrafficQosPolicy返回参数结构体
+ */
+export interface DescribeTrafficQosPolicyResponse {
+    /**
+     * 流量调度规则。
+     */
+    TrafficQosPolicySet?: Array<TrafficQosPolicySet>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyTemplateMember返回参数结构体

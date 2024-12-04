@@ -152,7 +152,7 @@ export declare class Client extends AbstractClient {
      */
     FetchMessageByOffset(req: FetchMessageByOffsetRequest, cb?: (error: string, rep: FetchMessageByOffsetResponse) => void): Promise<FetchMessageByOffsetResponse>;
     /**
-     * 删除Datahub主题
+     * 删除DIP主题
      */
     DeleteDatahubTopic(req: DeleteDatahubTopicRequest, cb?: (error: string, rep: DeleteDatahubTopicResponse) => void): Promise<DeleteDatahubTopicResponse>;
     /**

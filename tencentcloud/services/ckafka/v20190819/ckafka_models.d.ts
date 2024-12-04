@@ -39,7 +39,7 @@ export interface PartitionOffset {
  */
 export interface DescribeACLRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -381,7 +381,7 @@ export interface DtsParam {
  */
 export interface CancelAuthorizationTokenRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -476,7 +476,7 @@ export interface DeleteTopicRequest {
  */
 export interface FetchMessageListByOffsetRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -543,7 +543,7 @@ export interface Region {
  */
 export interface CreateAclRuleRequest {
     /**
-     * 实例id信息
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -551,7 +551,7 @@ export interface CreateAclRuleRequest {
      */
     ResourceType: string;
     /**
-     * 匹配类型，目前支持前缀匹配与预设策略，枚举值列表：PREFIXED/PRESET
+     * ACL规则匹配类型，目前支持前缀匹配与预设策略，枚举值列表：PREFIXED/PRESET
      */
     PatternType: string;
     /**
@@ -593,7 +593,7 @@ export interface DescribeInstancesDetailResponse {
  */
 export interface DescribeTaskStatusRequest {
     /**
-     * 任务唯一标记
+     * 流程Id
      */
     FlowId: number;
 }
@@ -602,7 +602,7 @@ export interface DescribeTaskStatusRequest {
  */
 export interface DescribeAclRuleRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -860,11 +860,11 @@ export interface FetchMessageListByOffsetResponse {
  */
 export interface DeleteRouteTriggerTimeRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 修改时间
+     * 修改删除路由的定时时间
      */
     DelayTime: string;
 }
@@ -949,7 +949,7 @@ export interface CreatePostPaidInstanceRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 弹性带宽开关 0不开启  1开启（0默认
+     * 弹性带宽开关 0不开启  1开启（0默认)
      */
     ElasticBandwidthSwitch?: number;
 }
@@ -975,7 +975,7 @@ export interface ModifyInstanceAttributesConfig {
  */
 export interface AuthorizeTokenRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -1492,7 +1492,7 @@ export interface ScfParam {
  */
 export interface DescribeTopicRequest {
     /**
-     * 实例 ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -1567,11 +1567,11 @@ export interface PostgreSQLModifyConnectParam {
  */
 export interface ModifyAclRuleRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * ACL策略名
+     * ACL规则名
      */
     RuleName: string;
     /**
@@ -1595,15 +1595,15 @@ export interface PrometheusResult {
     /**
      * 返回的code，0为正常，非0为错误
      */
-    ReturnCode: string;
+    ReturnCode?: string;
     /**
      * 成功消息
      */
-    ReturnMessage: string;
+    ReturnMessage?: string;
     /**
      * 操作型返回的Data数据,可能有flowId等
      */
-    Data: OperateResponseData;
+    Data?: OperateResponseData;
 }
 /**
  * ModifyRoutineMaintenanceTask请求参数结构体
@@ -1622,7 +1622,7 @@ export interface ModifyRoutineMaintenanceTaskRequest {
      */
     MaintenanceSubtype: string;
     /**
-     * 主题名称
+     * 主题名
      */
     TopicName?: string;
     /**
@@ -1697,11 +1697,11 @@ export interface TopicDetailResponse {
      * 返回的主题详情列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicList: Array<TopicDetail>;
+    TopicList?: Array<TopicDetail>;
     /**
      * 符合条件的所有主题详情数量
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * MariaDB连接源参数
@@ -1904,7 +1904,7 @@ export interface CreateInstancePostData {
  */
 export interface DeleteDatahubTaskResponse {
     /**
-     * 任务id
+     * 操作结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: DatahubTaskIdRes;
@@ -2091,6 +2091,10 @@ export interface InstanceAttributesResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ElasticFloatBandwidth?: number;
+    /**
+     * ssl自定义证书id
+     */
+    CustomCertId?: string;
 }
 /**
  * DescribeDatahubTopics返回参数结构体
@@ -2272,7 +2276,7 @@ export interface BatchCreateAclResponse {
  */
 export interface DeleteRouteRequest {
     /**
-     * 实例唯一id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -2284,7 +2288,7 @@ export interface DeleteRouteRequest {
      */
     CallerAppid?: number;
     /**
-     * 删除路由时间
+     * 设置定时删除路由时间,若DeleteRouteTime < now ,设置时间小于当前接口提交时间则立即执行;DeleteRouteTime > now,设置时间大于当前接口提交时间,则按照设置的时间,定时执行删除;  该参数设置提交后,无法撤销!!!
      */
     DeleteRouteTime?: string;
 }
@@ -2370,7 +2374,7 @@ export interface DateParam {
  */
 export interface ScalingDownResp {
     /**
-     * 订单号
+     * 订单号列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DealNames?: Array<string>;
@@ -2428,7 +2432,7 @@ export interface SplitParam {
  */
 export interface DescribeTopicDetailRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -2447,13 +2451,25 @@ export interface DescribeTopicDetailRequest {
      * Acl预设策略名称
      */
     AclRuleName?: string;
+    /**
+     * 根据特定的属性排序(目前支持PartitionNum/CreateTime)
+     */
+    OrderBy?: string;
+    /**
+     * 0-顺序、1-倒序
+     */
+    OrderType?: number;
+    /**
+     * 目前支持 ReplicaNum （副本数）筛选
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeGroupOffsets返回参数结构体
  */
 export interface DescribeGroupOffsetsResponse {
     /**
-     * 返回的结果对象
+     * 返回结果
      */
     Result?: GroupOffsetResponse;
     /**
@@ -2530,7 +2546,7 @@ export interface CreateTokenResponse {
  */
 export interface DescribeGroupOffsetsRequest {
     /**
-     * （过滤条件）按照实例 ID 过滤
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -2561,45 +2577,45 @@ export interface DescribeDatahubTopicResp {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * Topic名称
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * Topic Id
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 分区数
      */
-    PartitionNum: number;
+    PartitionNum?: number;
     /**
      * 过期时间
      */
-    RetentionMs: number;
+    RetentionMs?: number;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Note: string;
+    Note?: string;
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 密码
      */
-    Password: string;
+    Password?: string;
     /**
      * 状态，1使用中，2删除中
      */
-    Status: number;
+    Status?: number;
     /**
      * 服务路由地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
 }
 /**
  * 实例详情
@@ -2780,7 +2796,7 @@ export interface DescribeTopicDetailResponse {
  */
 export interface DeleteAclRequest {
     /**
-     * 实例id信息
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -2849,7 +2865,7 @@ export interface DescribeDatahubTaskResponse {
  */
 export interface FetchLatestDatahubMessageListRequest {
     /**
-     * 主题名
+     * 弹性topic名称
      */
     Name: string;
     /**
@@ -2984,7 +3000,7 @@ export interface DescribeDatahubTasksResponse {
     /**
      * 返回任务查询结果
      */
-    Result: DescribeDatahubTasksRes;
+    Result?: DescribeDatahubTasksRes;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3196,7 +3212,7 @@ export interface InquireCkafkaPriceRequest {
  */
 export interface DescribeCkafkaZoneRequest {
     /**
-     * cdc专业集群业务参数
+     * cdc集群Id
      */
     CdcId?: string;
 }
@@ -3233,12 +3249,12 @@ export interface GroupResponse {
      * 计数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * GroupList
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupList: Array<DescribeGroup>;
+    GroupList?: Array<DescribeGroup>;
     /**
      * 消费分组配额
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3250,7 +3266,7 @@ export interface GroupResponse {
  */
 export interface FetchMessageListByTimestampRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -3266,7 +3282,7 @@ export interface FetchMessageListByTimestampRequest {
      */
     StartTime?: number;
     /**
-     * 最大查询条数，默认20，最大20
+     * 最大查询条数，默认20，最大20, 最小1
      */
     SinglePartitionRecordNumber?: number;
 }
@@ -3297,7 +3313,7 @@ export interface DescribeTopicAttributesResponse {
  */
 export interface CreateConsumerResponse {
     /**
-     * 创建group描述
+     * 创建消费者组返回结果
      */
     Result?: JgwOperateResponse;
     /**
@@ -3320,7 +3336,7 @@ export interface RouteResponse {
  */
 export interface DescribeGroupResponse {
     /**
-     * 返回结果集列表
+     * 返回结果
      */
     Result?: GroupResponse;
     /**
@@ -3333,7 +3349,7 @@ export interface DescribeGroupResponse {
  */
 export interface DescribeDatahubTopicRequest {
     /**
-     * 名称
+     * 弹性topic名称
      */
     Name: string;
 }
@@ -3355,7 +3371,7 @@ export interface DeleteUserResponse {
  */
 export interface CreateAclRequest {
     /**
-     * 实例id信息
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -3455,12 +3471,12 @@ export interface CreateDatahubTaskRes {
     /**
      * 转储任务id
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 数据转储Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatahubId: string;
+    DatahubId?: string;
 }
 /**
  * ModifyInstanceAttributes返回参数结构体
@@ -3695,15 +3711,15 @@ export interface CtsdbConnectParam {
  */
 export interface ModifyInstanceAttributesRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 实例日志的最长保留时间，单位分钟，最大30天，0代表不开启日志保留时间回收策略
+     * 实例日志的最长保留时间，单位分钟，最大90天，0代表不开启日志保留时间回收策略
      */
     MsgRetentionTime?: number;
     /**
-     * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+     * ckafka集群实例Name
      */
     InstanceName?: string;
     /**
@@ -3715,11 +3731,11 @@ export interface ModifyInstanceAttributesRequest {
      */
     DynamicRetentionConfig?: DynamicRetentionTime;
     /**
-     * 升配Rebalance时间
+     * 升配Rebalance时间 参数已废弃,忽略不填!!!
      */
     RebalanceTime?: number;
     /**
-     * 公网带宽
+     * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写
      */
     PublicNetwork?: number;
     /**
@@ -3728,7 +3744,7 @@ export interface ModifyInstanceAttributesRequest {
      */
     DynamicDiskConfig?: DynamicDiskConfig;
     /**
-     * 实例级别单条消息大小（单位byte)
+     * 实例级别单条消息大小（单位byte)  最大 12582912(不包含)  最小1024(不包含)
      */
     MaxMessageByte?: number;
 }
@@ -3765,7 +3781,7 @@ export interface FetchDatahubMessageByOffsetResponse {
     /**
      * 返回结果
      */
-    Result: ConsumerRecord;
+    Result?: ConsumerRecord;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3842,7 +3858,7 @@ export interface ModifyConnectResourceResponse {
  */
 export interface DescribeGroupRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -3857,13 +3873,17 @@ export interface DescribeGroupRequest {
      * 最大返回数量
      */
     Limit?: number;
+    /**
+     * 仅支持 GroupState 筛选,   支持的筛选状态有 Empty/Stable  注意：该参数只能在2.8/3.2 版本生效
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * InstanceScalingDown请求参数结构体
  */
 export interface InstanceScalingDownRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -3905,7 +3925,7 @@ export interface CreateCdcClusterRequest {
      */
     ZoneId: number;
     /**
-     * cdc集群的总带宽
+     * 实例带宽,单位MB/s; 最小值:20MB/s, 高级版最大值:360MB/s,专业版最大值:100000MB/s  标准版固定带宽规格: 40MB/s, 100MB/s, 150MB/s
      */
     Bandwidth: number;
     /**
@@ -3913,7 +3933,7 @@ export interface CreateCdcClusterRequest {
      */
     DiskSize: number;
     /**
-     * 数据盘类型
+     * ckafka集群实例磁盘类型
      */
     DiskType: string;
     /**
@@ -4029,19 +4049,19 @@ export interface PrometheusDTO {
  */
 export interface CreateConsumerRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * group名称
+     * 消费分组名称
      */
     GroupName: string;
     /**
-     * topic名称，TopicName、TopicNameList 需要显示指定一个存在的topic名称
+     * 主题名，TopicName、TopicNameList 需要显示指定一个存在的主题名
      */
     TopicName?: string;
     /**
-     * topic名称数组
+     * 主题名列表
      */
     TopicNameList?: Array<string>;
 }
@@ -4103,7 +4123,7 @@ export interface MqttConnectParam {
  */
 export interface FetchDatahubMessageByOffsetRequest {
     /**
-     * 主题名
+     * 弹性topic名称
      */
     Name: string;
     /**
@@ -4243,7 +4263,7 @@ export interface GroupInfoResponse {
      */
     Members?: Array<GroupInfoMember>;
     /**
-     * Kafka 消费分组
+     * 消费分组名称
      */
     Group?: string;
 }
@@ -4256,7 +4276,7 @@ export interface BatchModifyGroupOffsetsRequest {
      */
     GroupName: string;
     /**
-     * 实例名称
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -4290,31 +4310,31 @@ export interface DatahubTopicDTO {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * Topic名称
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * Topic Id
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 分区数
      */
-    PartitionNum: number;
+    PartitionNum?: number;
     /**
      * 过期时间
      */
-    RetentionMs: number;
+    RetentionMs?: number;
     /**
      * 备注
      */
-    Note: string;
+    Note?: string;
     /**
      * 状态，1使用中，2删除中
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * Cls类型入参
@@ -4397,7 +4417,7 @@ export interface AnalyseParam {
  */
 export interface BatchModifyTopicInfo {
     /**
-     * topic名称
+     * 主题名
      */
     TopicName: string;
     /**
@@ -4440,6 +4460,10 @@ export interface BatchModifyTopicInfo {
      * 批次的消息大小，范围1 KB到12 MB
      */
     MaxMessageBytes?: number;
+    /**
+     * 消息保存的时间类型：CreateTime/LogAppendTime
+     */
+    LogMsgTimestampType?: string;
 }
 /**
  * 消息价格实体
@@ -4535,7 +4559,7 @@ export interface KVParam {
  */
 export interface BatchModifyTopicAttributesRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -4639,7 +4663,7 @@ export interface DescribeDatahubTaskRes {
  */
 export interface DescribePrometheusRequest {
     /**
-     * ckafka实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
 }
@@ -4661,7 +4685,7 @@ export interface FetchMessageListByTimestampResponse {
  */
 export interface DeleteInstancePostResponse {
     /**
-     * 返回的结果集
+     * 返回结果
      */
     Result?: InstanceDeleteResponse;
     /**
@@ -4674,7 +4698,7 @@ export interface DeleteInstancePostResponse {
  */
 export interface ModifyDatahubTopicRequest {
     /**
-     * 名称
+     * 弹性topic名称
      */
     Name: string;
     /**
@@ -4697,12 +4721,12 @@ export interface DescribeDatahubTopicsResp {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * Topic列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicList: Array<DatahubTopicDTO>;
+    TopicList?: Array<DatahubTopicDTO>;
 }
 /**
  * ModifyDatahubTask返回参数结构体
@@ -4736,11 +4760,11 @@ export interface DescribeConnectResourcesResponse {
  */
 export interface TopicDetail {
     /**
-     * 主题名称
+     * 主题名
      */
     TopicName?: string;
     /**
-     * 主题ID
+     * 主题Id
      */
     TopicId?: string;
     /**
@@ -4748,7 +4772,7 @@ export interface TopicDetail {
      */
     PartitionNum?: number;
     /**
-     * 副本数
+     * topic副本数  最小值 1,最大值 3
      */
     ReplicaNum?: number;
     /**
@@ -4837,7 +4861,7 @@ export interface DropCls {
  */
 export interface DeleteUserRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -4850,31 +4874,31 @@ export interface DeleteUserRequest {
  */
 export interface BatchModifyTopicResultDTO {
     /**
-     * 实例id
+     * ckafka集群实例Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * topic名称
+     * 主题名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
-     * 状态码
+     * 操作返回码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReturnCode: string;
+    ReturnCode?: string;
     /**
-     * 状态消息
+     * 操作返回信息
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * DescribeTopicAttributes请求参数结构体
  */
 export interface DescribeTopicAttributesRequest {
     /**
-     * 实例 ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -4954,12 +4978,12 @@ export interface DescribeDatahubTasksRes {
     /**
      * 任务总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * Datahub任务信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskList: Array<DatahubTaskInfo>;
+    TaskList?: Array<DatahubTaskInfo>;
 }
 /**
  * DescribeInstances返回参数结构体
@@ -5080,12 +5104,12 @@ export interface TopicResult {
      * 返回的主题信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicList: Array<Topic>;
+    TopicList?: Array<Topic>;
     /**
      * 符合条件的 topic 数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * 创建预付费接口返回的Data
@@ -5414,7 +5438,7 @@ export interface ModifyConnectResourceRequest {
  */
 export interface CreateTokenRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -5480,7 +5504,7 @@ export interface DescribeTaskStatusResponse {
  */
 export interface CreateUserResponse {
     /**
-     * 返回的结果
+     * 返回结果
      */
     Result?: JgwOperateResponse;
     /**
@@ -5523,7 +5547,7 @@ export interface BatchAnalyseParam {
  */
 export interface DeleteInstancePostRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
 }
@@ -5532,11 +5556,11 @@ export interface DeleteInstancePostRequest {
  */
 export interface DescribeTopicProduceConnectionRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * topic名称
+     * 主题名
      */
     TopicName: string;
 }
@@ -5626,11 +5650,11 @@ export interface SubstrParam {
  */
 export interface DescribeTopicSubscribeGroupRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 主题名称
+     * 主题名
      */
     TopicName: string;
     /**
@@ -5745,11 +5769,11 @@ export interface UserResponse {
  */
 export interface DescribeGroupInfoRequest {
     /**
-     * （过滤条件）按照实例 ID 过滤。
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * Kafka 消费分组，Consumer-group，这里是数组形式，示例：["xxx","yyy"]
+     * Kafka 消费分组列表
      */
     GroupList: Array<string>;
 }
@@ -5760,19 +5784,19 @@ export interface DescribeConnectResourcesResp {
     /**
      * 连接源个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 连接源数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectResourceList: Array<DescribeConnectResource>;
+    ConnectResourceList?: Array<DescribeConnectResource>;
 }
 /**
  * DescribeDatahubTopics请求参数结构体
  */
 export interface DescribeDatahubTopicsRequest {
     /**
-     * 查询值
+     * 搜索词
      */
     SearchWord?: string;
     /**
@@ -5789,7 +5813,7 @@ export interface DescribeDatahubTopicsRequest {
  */
 export interface DescribeUserResponse {
     /**
-     * 返回结果列表
+     * 返回结果
      */
     Result?: UserResponse;
     /**
@@ -5932,7 +5956,7 @@ export interface ZoneResponse {
  */
 export interface DeleteInstancePreRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
 }
@@ -6176,7 +6200,7 @@ export interface ModifyInstancePreResponse {
  */
 export interface CreateUserRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -6260,7 +6284,7 @@ export interface TopicFlowRankingResult {
  */
 export interface InstanceScalingDownResponse {
     /**
-     * 缩容应答
+     * 返回结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: ScalingDownResp;
@@ -6274,11 +6298,11 @@ export interface InstanceScalingDownResponse {
  */
 export interface DescribeRouteRequest {
     /**
-     * 实例唯一id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 路由id
+     * 路由Id
      */
     RouteId?: number;
 }
@@ -6429,7 +6453,7 @@ export interface DatahubTaskIdRes {
      * 任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
 }
 /**
  * DescribeRoute返回参数结构体
@@ -6532,7 +6556,7 @@ export interface PostgreSQLParam {
  */
 export interface CreateTopicIpWhiteListRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -6589,11 +6613,11 @@ export interface MariaDBConnectParam {
  */
 export interface ModifyTopicAttributesRequest {
     /**
-     * 实例 ID。
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 主题名称。
+     * 主题名
      */
     TopicName: string;
     /**
@@ -6637,7 +6661,7 @@ export interface ModifyTopicAttributesRequest {
      */
     EnableAclRule?: number;
     /**
-     * 预设ACL规则的名称
+     * ACL规则名
      */
     AclRuleName?: string;
     /**
@@ -6657,7 +6681,7 @@ export interface ModifyTopicAttributesRequest {
      */
     QuotaConsumerByteRate?: number;
     /**
-     * 调整topic副本数
+     * topic副本数  最小值 1,最大值 3
      */
     ReplicaNum?: number;
 }
@@ -6907,7 +6931,7 @@ export interface ReplaceParam {
  */
 export interface BatchCreateAclRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -6953,7 +6977,7 @@ export interface DescribeConnectResourcesRequest {
  */
 export interface CreatePartitionRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -6980,7 +7004,7 @@ export interface InstanceDeleteResponse {
  */
 export interface DescribeInstanceAttributesRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
 }
@@ -7013,7 +7037,7 @@ export interface UrlDecodeParam {
  */
 export interface CancelAuthorizationTokenResponse {
     /**
-     * 0 成功
+     * 0 成功 非0 失败
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: number;
@@ -7472,7 +7496,7 @@ export interface CheckCdcClusterResponse {
      * 返回结果状态Success
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7680,7 +7704,7 @@ export interface CreateCdcClusterResponse {
     /**
      * 无
      */
-    Result: CdcClusterResponse;
+    Result?: CdcClusterResponse;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7749,7 +7773,7 @@ export interface ClusterInfo {
  */
 export interface DeleteGroupRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -7911,11 +7935,11 @@ export interface DeleteInstancePreResponse {
  */
 export interface DatahubTopicResp {
     /**
-     * Topic名称
+     * 主题名称
      */
-    TopicName: string;
+    TopicName?: string;
     /**
-     * TopicId
+     * 主题Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicId?: string;
@@ -8083,7 +8107,7 @@ export interface DescribeConnectResource {
  */
 export interface DescribeUserRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -8091,11 +8115,11 @@ export interface DescribeUserRequest {
      */
     SearchWord?: string;
     /**
-     * 偏移
+     * 偏移量
      */
     Offset?: number;
     /**
-     * 本次返回个数
+     * 返回数量
      */
     Limit?: number;
 }
@@ -8106,21 +8130,21 @@ export interface TopicSubscribeGroup {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 消费分组状态数量信息
      */
-    StatusCountInfo: string;
+    StatusCountInfo?: string;
     /**
      * 消费分组信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupsInfo: Array<GroupInfoResponse>;
+    GroupsInfo?: Array<GroupInfoResponse>;
     /**
      * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * 高级配置对象
@@ -8130,50 +8154,55 @@ export interface Config {
      * 消息保留时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Retention: number;
+    Retention?: number;
     /**
      * 最小同步复制数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinInsyncReplicas: number;
+    MinInsyncReplicas?: number;
     /**
      * 日志清理模式，默认 delete。
   delete：日志按保存时间删除；compact：日志按 key 压缩；compact, delete：日志按 key 压缩且会保存时间删除。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CleanUpPolicy: string;
+    CleanUpPolicy?: string;
     /**
      * Segment 分片滚动的时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SegmentMs: number;
+    SegmentMs?: number;
     /**
      * 0表示 false。 1表示 true。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UncleanLeaderElectionEnable: number;
+    UncleanLeaderElectionEnable?: number;
     /**
      * Segment 分片滚动的字节数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SegmentBytes: number;
+    SegmentBytes?: number;
     /**
      * 最大消息字节数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxMessageBytes: number;
+    MaxMessageBytes?: number;
     /**
      * 消息保留文件大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetentionBytes: number;
+    RetentionBytes?: number;
+    /**
+     * 消息保存的时间类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogMsgTimestampType?: string;
 }
 /**
  * FetchMessageByOffset请求参数结构体
  */
 export interface FetchMessageByOffsetRequest {
     /**
-     * 实例Id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -8224,7 +8253,7 @@ export interface DeleteDatahubTopicRequest {
  */
 export interface ModifyTopicAttributesResponse {
     /**
-     * 返回结果集
+     * 返回结果
      */
     Result?: JgwOperateResponse;
     /**
@@ -8237,7 +8266,7 @@ export interface ModifyTopicAttributesResponse {
  */
 export interface DescribeConsumerGroupRequest {
     /**
-     * ckafka实例id。
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -8311,7 +8340,7 @@ export interface DeleteDatahubTopicResponse {
     /**
      * 返回的结果集
      */
-    Result: JgwOperateResponse;
+    Result?: JgwOperateResponse;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8392,7 +8421,7 @@ export interface ModifyPasswordResponse {
  */
 export interface InquireCkafkaPriceResponse {
     /**
-     * 出参
+     * 返回结果
      */
     Result?: InquireCkafkaPriceResp;
     /**
@@ -8407,56 +8436,56 @@ export interface TopicAttributesResponse {
     /**
      * 主题 ID
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 主题备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Note: string;
+    Note?: string;
     /**
      * 分区个数
      */
-    PartitionNum: number;
+    PartitionNum?: number;
     /**
      * IP 白名单开关，1：打开； 0：关闭
      */
-    EnableWhiteList: number;
+    EnableWhiteList?: number;
     /**
      * IP 白名单列表
      */
-    IpWhiteList: Array<string>;
+    IpWhiteList?: Array<string>;
     /**
      * topic 配置数组
      */
-    Config: Config;
+    Config?: Config;
     /**
      * 分区详情
      */
-    Partitions: Array<TopicPartitionDO>;
+    Partitions?: Array<TopicPartitionDO>;
     /**
      * ACL预设策略开关，1：打开； 0：关闭
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableAclRule: number;
+    EnableAclRule?: number;
     /**
      * 预设策略列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AclRuleList: Array<AclRule>;
+    AclRuleList?: Array<AclRule>;
     /**
      * topic 限流策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QuotaConfig: InstanceQuotaConfigResp;
+    QuotaConfig?: InstanceQuotaConfigResp;
     /**
      * 副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReplicaNum: number;
+    ReplicaNum?: number;
 }
 /**
  * CreateRoute返回参数结构体
@@ -8565,7 +8594,7 @@ export interface CreateDatahubTaskRequest {
      */
     TransformsParam?: TransformsParam;
     /**
-     * 任务ID
+     * 任务Id
      */
     TaskId?: string;
     /**
@@ -8643,11 +8672,11 @@ export interface InquiryPrice {
  */
 export interface ModifyGroupOffsetsRequest {
     /**
-     * kafka实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * kafka 消费分组
+     * 消费分组名称
      */
     Group: string;
     /**
@@ -8655,7 +8684,7 @@ export interface ModifyGroupOffsetsRequest {
      */
     Strategy: number;
     /**
-     * 表示需要重置的topics， 不填表示全部
+     * 需要重置的主题名列表， 不填表示全部
      */
     Topics?: Array<string>;
     /**
@@ -8756,7 +8785,7 @@ export interface AclRuleInfo {
  */
 export interface RenewCkafkaInstanceRequest {
     /**
-     * 实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
@@ -8829,11 +8858,11 @@ export interface SecondaryAnalyseParam {
  */
 export interface DeleteTopicIpWhiteListRequest {
     /**
-     * 实例ID
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * 主题名称
+     * 主题名
      */
     TopicName: string;
     /**
@@ -8846,9 +8875,9 @@ export interface DeleteTopicIpWhiteListRequest {
  */
 export interface CreateDatahubTaskResponse {
     /**
-     * 任务id
+     * 返回结果
      */
-    Result: CreateDatahubTaskRes;
+    Result?: CreateDatahubTaskRes;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8942,15 +8971,15 @@ export interface ModifyDatahubTaskRequest {
  */
 export interface CreatePrometheusRequest {
     /**
-     * ckafka实例id
+     * ckafka集群实例Id
      */
     InstanceId: string;
     /**
-     * vpc地址
+     * 私有网络Id
      */
     VpcId: string;
     /**
-     * 子网地址
+     * 子网Id
      */
     SubnetId: string;
 }

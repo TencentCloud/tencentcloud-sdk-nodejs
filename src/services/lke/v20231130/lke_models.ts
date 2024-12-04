@@ -800,19 +800,19 @@ export interface DescribeQARequest {
 }
 
 /**
- * 属性标签引用信息
+ * 标签引用信息
  */
 export interface AttrLabelRefer {
   /**
-   * 属性标签来源，1：属性标签
+   * 标签来源，1：标签
    */
   Source?: number
   /**
-   * 属性ID
+   * 标签ID
    */
   AttributeBizId?: string
   /**
-   * 标签ID
+   * 标签值ID
    */
   LabelBizIds?: Array<string>
 }
@@ -988,31 +988,31 @@ export interface ListAppRequest {
 }
 
 /**
- * 属性标签详情信息
+ * 标签详情信息
  */
 export interface AttrLabel {
   /**
-   * 属性标签来源
+   * 标签来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: number
   /**
-   * 属性ID
+   * 标签ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrBizId?: string
   /**
-   * 属性标识
+   * 标签标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrKey?: string
   /**
-   * 属性名称
+   * 标签名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrName?: string
   /**
-   * 标签ID
+   * 标签值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<Label>
@@ -2396,21 +2396,21 @@ export interface ConvertDocumentRequest {
 }
 
 /**
- * 属性标签
+ * 标签值
  */
 export interface AttributeLabel {
   /**
-   * 标签ID
+   * 标准词ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelBizId?: string
   /**
-   * 标签名称
+   * 标准词名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelName?: string
   /**
-   * 相似标签名称
+   * 同义词名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SimilarLabels?: Array<string>
@@ -3458,27 +3458,27 @@ export interface DescribeKnowledgeUsagePieGraphRequest {
  */
 export interface AttrLabelDetail {
   /**
-   * 属性ID
+   * 标签ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrBizId?: string
   /**
-   * 属性标识
+   * 标签标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrKey?: string
   /**
-   * 属性名称
+   * 标签名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrName?: string
   /**
-   * 标签名称
+   * 标签值名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelNames?: Array<string>
   /**
-   * 属性标签是否在更新中
+   * 标签是否在更新中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdating?: boolean

@@ -219,6 +219,7 @@ import {
   ResetHighPriorityRoutesResponse,
   ModifyCcnAttachedInstancesAttributeRequest,
   DescribeNetworkAccountTypeRequest,
+  TrafficQosPolicySet,
   DeleteAddressTemplateRequest,
   CreateNatGatewaySourceIpTranslationNatRuleRequest,
   NetworkInterface,
@@ -282,6 +283,7 @@ import {
   ResetAttachCcnInstancesResponse,
   Ip6RuleInfo,
   RejectAttachCcnInstancesRequest,
+  DescribeTrafficQosPolicyRequest,
   ModifyCcnRegionBandwidthLimitsTypeRequest,
   VpnGatewayRoute,
   DescribeVpcResourceDashboardRequest,
@@ -846,6 +848,7 @@ import {
   SnapshotFileInfo,
   ModifyRouteTableInfo,
   ModifyNetworkInterfaceAttributeRequest,
+  DescribeTrafficQosPolicyResponse,
   ModifyTemplateMemberResponse,
   ModifyHaVipAttributeRequest,
   ModifyAddressTemplateGroupAttributeResponse,
@@ -3976,6 +3979,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyAddressAttributeResponse) => void
   ): Promise<ModifyAddressAttributeResponse> {
     return this.request("ModifyAddressAttribute", req, cb)
+  }
+
+  /**
+   * 查询流量调度规则
+   */
+  async DescribeTrafficQosPolicy(
+    req: DescribeTrafficQosPolicyRequest,
+    cb?: (error: string, rep: DescribeTrafficQosPolicyResponse) => void
+  ): Promise<DescribeTrafficQosPolicyResponse> {
+    return this.request("DescribeTrafficQosPolicy", req, cb)
   }
 
   /**

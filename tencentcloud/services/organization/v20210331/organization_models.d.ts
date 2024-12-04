@@ -349,7 +349,6 @@ export interface ListTargetsForPolicyResponse {
     TotalNum?: number;
     /**
      * 指定SCP策略关联目标列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<ListTargetsForPolicyNode>;
     /**
@@ -433,12 +432,10 @@ export interface ProvisionRoleConfigurationRequest {
 export interface ListNonCompliantResourceResponse {
     /**
      * 资源及标签合规信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ResourceTagMapping>;
     /**
      * 获取的下一页的Token值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PaginationToken?: string;
     /**
@@ -863,12 +860,10 @@ export interface CreateOrganizationIdentityRequest {
 export interface ListOrganizationServiceResponse {
     /**
      * 总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 集团服务列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrganizationServiceAssign>;
     /**
@@ -1641,7 +1636,6 @@ export interface ListPoliciesResponse {
     TotalNum?: number;
     /**
      * 策略列表数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<ListPolicyNode>;
     /**
@@ -2177,12 +2171,10 @@ export interface AddOrganizationMemberEmailRequest {
 export interface ListOrganizationIdentityResponse {
     /**
      * 总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 条目详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrgIdentity>;
     /**
@@ -3207,12 +3199,10 @@ export interface UpdateOrganizationIdentityRequest {
 export interface ListOrgServiceAssignMemberResponse {
     /**
      * 总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
      * 委派管理员列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<OrganizationServiceAssignMember>;
     /**
@@ -3857,7 +3847,6 @@ export interface ListPoliciesForTargetResponse {
     TotalNum?: number;
     /**
      * 目标关联的策略列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<ListPoliciesForTarget>;
     /**
@@ -5249,7 +5238,7 @@ export interface CreateSCIMCredentialRequest {
  */
 export interface DescribePolicyRequest {
     /**
-     * 策略Id。
+     * 策略Id。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取
      */
     PolicyId: number;
     /**
