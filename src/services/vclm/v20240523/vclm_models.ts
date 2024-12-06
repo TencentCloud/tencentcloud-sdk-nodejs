@@ -230,26 +230,32 @@ export interface DescribeVideoTranslateJobResponse {
   TranslateResults?: Array<TranslateResult>
   /**
    * 是否需要确认翻译结果。0：不需要，1：需要。
+   * @deprecated
    */
   JobConfirm?: number
   /**
    * 音频任务 ID。
+   * @deprecated
    */
   JobAudioTaskId?: string
   /**
    * 视频审核任务ID。
+   * @deprecated
    */
   JobVideoModerationId?: string
   /**
    * 音频审核任务 ID。
+   * @deprecated
    */
   JobAudioModerationId?: string
   /**
    * 口型驱动任务 ID。
+   * @deprecated
    */
   JobVideoId?: string
   /**
    * 视频素材原始 URL。
+   * @deprecated
    */
   OriginalVideoUrl?: string
   /**
@@ -258,6 +264,7 @@ export interface DescribeVideoTranslateJobResponse {
   AsrTimestamps?: Array<AsrTimestamps>
   /**
    * 提交视频转译任务时的 requestId。
+   * @deprecated
    */
   JobSubmitReqId?: string
   /**
@@ -558,20 +565,28 @@ export interface ConfirmVideoTranslateJobResponse {
   JobId?: string
   /**
    * 音频转译任务 ID。
+   * @deprecated
    */
   TaskId?: string
   /**
    * 音频转译结果确认 session。
+   * @deprecated
    */
   SessionId?: string
   /**
-   * 该字段与 DescribeVideoTranslateJob 接口的 Status 功能相同，均表示任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+   * 任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+   * @deprecated
    */
   Status?: number
   /**
    * 视频转译任务信息。
+   * @deprecated
    */
   Message?: string
+  /**
+   * 任务状态。0：任务初始化。1：音频翻译中。 2：音频翻译失败。 3：音频翻译成功。 4：音频结果待确认。 5：音频结果已确认完毕。6：视频翻译中。 7：视频翻译失败。 8：视频翻译成功。
+   */
+  JobStatus?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

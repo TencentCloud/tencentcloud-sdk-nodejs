@@ -2032,12 +2032,12 @@ export interface AttachPolicyInfo {
      */
     AddTime?: string;
     /**
-     * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
+     * 创建来源，1 通过控制台创建, 2 通过策略语法创建
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateMode?: number;
     /**
-     * 取值为user和QCS
+     * 取值为User和QCS。User代表自定义策略，QCS代表系统策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyType?: string;
@@ -2057,12 +2057,12 @@ export interface AttachPolicyInfo {
      */
     OperateUin?: string;
     /**
-     * UinType为0表示OperateUin字段是子账号Uin，如果UinType为1表示OperateUin字段是角色ID
+     * 取值为0和1。OperateUinType为0表示OperateUin字段是子账号Uin。如果OperateUinType为1表示OperateUin字段是角色ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateUinType?: number;
     /**
-     * 是否已下线
+     * 是否已下线，1代表已下线，0代表未下线
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Deactived?: number;
@@ -3591,7 +3591,7 @@ export interface ListAccessKeysResponse {
      * 访问密钥列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccessKeys: Array<AccessKey>;
+    AccessKeys?: Array<AccessKey>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3604,7 +3604,7 @@ export interface GetSecurityLastUsedResponse {
     /**
      * 密钥ID最近访问列表
      */
-    SecretIdLastUsedRows: Array<SecretIdLastUsed>;
+    SecretIdLastUsedRows?: Array<SecretIdLastUsed>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

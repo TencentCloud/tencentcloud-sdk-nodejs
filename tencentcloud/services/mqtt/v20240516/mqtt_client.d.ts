@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAuthorizationPolicyPriorityResponse, UpdateAuthorizationPolicyPriorityRequest, CreateJWTAuthenticatorResponse, DeleteAuthorizationPolicyRequest, ModifyJWKSAuthenticatorResponse, RegisterDeviceCertificateResponse, ModifyJWTAuthenticatorResponse, DescribeAuthorizationPoliciesRequest, DescribeTopicListRequest, DescribeInstanceListRequest, ModifyAuthorizationPolicyResponse, CreateAuthorizationPolicyRequest, DescribeInstanceResponse, DescribeAuthenticatorResponse, CreateTopicResponse, ModifyJWTAuthenticatorRequest, CreateAuthorizationPolicyResponse, CreateJWTAuthenticatorRequest, DeleteTopicRequest, CreateJWKSAuthenticatorRequest, ModifyTopicResponse, DescribeTopicResponse, CreateJWKSAuthenticatorResponse, DeleteAuthenticatorRequest, DescribeAuthorizationPoliciesResponse, RegisterDeviceCertificateRequest, CreateTopicRequest, DeleteAuthorizationPolicyResponse, ModifyJWKSAuthenticatorRequest, ModifyTopicRequest, DescribeTopicListResponse, DescribeAuthenticatorRequest, DeleteTopicResponse, ModifyAuthorizationPolicyRequest, DescribeInstanceRequest, DeleteAuthenticatorResponse, DescribeInstanceListResponse, DescribeTopicRequest } from "./mqtt_models";
+import { UpdateAuthorizationPolicyPriorityResponse, UpdateAuthorizationPolicyPriorityRequest, CreateJWTAuthenticatorResponse, DeleteAuthorizationPolicyRequest, ModifyJWKSAuthenticatorResponse, RegisterDeviceCertificateResponse, ModifyJWTAuthenticatorResponse, DescribeAuthorizationPoliciesRequest, DescribeTopicListRequest, DescribeInstanceListRequest, ModifyAuthorizationPolicyResponse, CreateAuthorizationPolicyRequest, ActivateDeviceCertificateRequest, DescribeInstanceResponse, DescribeAuthenticatorResponse, CreateTopicResponse, ModifyJWTAuthenticatorRequest, CreateAuthorizationPolicyResponse, CreateJWTAuthenticatorRequest, DeleteTopicRequest, CreateJWKSAuthenticatorRequest, ModifyTopicResponse, DescribeTopicResponse, DescribeDeviceCertificatesRequest, CreateJWKSAuthenticatorResponse, DeleteAuthenticatorRequest, DescribeAuthorizationPoliciesResponse, RegisterDeviceCertificateRequest, CreateTopicRequest, DeleteAuthorizationPolicyResponse, DescribeDeviceCertificatesResponse, ModifyJWKSAuthenticatorRequest, ModifyTopicRequest, DescribeTopicListResponse, DescribeAuthenticatorRequest, DeleteTopicResponse, ModifyAuthorizationPolicyRequest, DescribeInstanceRequest, DeleteAuthenticatorResponse, ActivateDeviceCertificateResponse, DescribeInstanceListResponse, DescribeTopicRequest } from "./mqtt_models";
 /**
  * mqtt client
  * @class
@@ -16,13 +16,17 @@ export declare class Client extends AbstractClient {
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
     /**
-     * 注册设备证书
+     * 生效设备证书
      */
-    RegisterDeviceCertificate(req: RegisterDeviceCertificateRequest, cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void): Promise<RegisterDeviceCertificateResponse>;
+    ActivateDeviceCertificate(req: ActivateDeviceCertificateRequest, cb?: (error: string, rep: ActivateDeviceCertificateResponse) => void): Promise<ActivateDeviceCertificateResponse>;
     /**
      * 查询授权规则
      */
     DescribeAuthorizationPolicies(req: DescribeAuthorizationPoliciesRequest, cb?: (error: string, rep: DescribeAuthorizationPoliciesResponse) => void): Promise<DescribeAuthorizationPoliciesResponse>;
+    /**
+     * 注册设备证书
+     */
+    RegisterDeviceCertificate(req: RegisterDeviceCertificateRequest, cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void): Promise<RegisterDeviceCertificateResponse>;
     /**
      * 修改主题属性
      */
@@ -35,7 +39,6 @@ export declare class Client extends AbstractClient {
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
-3. InstanceType, 实例类型查询，支持多选
 3. InstanceStatus，实例状态查询，支持多选
 
 当使用TagFilters查询时，Filters参数失效。
@@ -80,6 +83,10 @@ export declare class Client extends AbstractClient {
      * 删除MQTT主题
      */
     DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
+    /**
+     * 分页查询设备证书
+     */
+    DescribeDeviceCertificates(req: DescribeDeviceCertificatesRequest, cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void): Promise<DescribeDeviceCertificatesResponse>;
     /**
      * 创建MQTT实例的性能测试任务
      */

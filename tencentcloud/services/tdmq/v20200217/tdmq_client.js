@@ -58,7 +58,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQExchanges", req, cb);
     }
     /**
-     * 更新Amqp集群信息
+     * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是ModifyRabbitMQVipInstance。不过从调用链上看，线网还有请求流程，所以走预下线流程。
+
+更新Amqp集群信息
      */
     async ModifyAMQPCluster(req, cb) {
         return this.request("ModifyAMQPCluster", req, cb);
@@ -256,12 +258,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRabbitMQVirtualHost", req, cb);
     }
     /**
-     * 删除集群
-     */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
-    }
-    /**
      * 删除cmq主题
      */
     async DeleteCmqTopic(req, cb) {
@@ -310,12 +306,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
-     * 接口很久之前已删除，需下线
-
-枚举cmq死信队列源队列
+     * 删除集群
      */
-    async DescribeCmqDeadLetterSourceQueues(req, cb) {
-        return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
     /**
      * 重置指定Group的消费位点到指定时间戳
@@ -546,7 +540,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyRocketMQConsume", req, cb);
     }
     /**
-     * 获取amqp集群列表
+     * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是DescribeRabbitMQVipInstances。不过从调用链上看，线网还有请求流程，所以走预下线流程。
+
+获取amqp集群列表
      */
     async DescribeAMQPClusters(req, cb) {
         return this.request("DescribeAMQPClusters", req, cb);

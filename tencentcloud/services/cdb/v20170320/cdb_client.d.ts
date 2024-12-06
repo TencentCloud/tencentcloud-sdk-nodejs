@@ -486,7 +486,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyRoGroupInfo(req: ModifyRoGroupInfoRequest, cb?: (error: string, rep: ModifyRoGroupInfoResponse) => void): Promise<ModifyRoGroupInfoResponse>;
     /**
-     * 本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
+     * 不再支持审计规则创建
+
+本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
      */
     CreateAuditRule(req: CreateAuditRuleRequest, cb?: (error: string, rep: CreateAuditRuleResponse) => void): Promise<CreateAuditRuleResponse>;
     /**
@@ -602,7 +604,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupConfig(req: ModifyBackupConfigRequest, cb?: (error: string, rep: ModifyBackupConfigResponse) => void): Promise<ModifyBackupConfigResponse>;
     /**
-     * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
+     * 不再支持审计规则创建
+
+本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
      */
     DescribeAuditRules(req: DescribeAuditRulesRequest, cb?: (error: string, rep: DescribeAuditRulesResponse) => void): Promise<DescribeAuditRulesResponse>;
     /**
@@ -664,7 +668,9 @@ export declare class Client extends AbstractClient {
      */
     OpenWanService(req: OpenWanServiceRequest, cb?: (error: string, rep: OpenWanServiceResponse) => void): Promise<OpenWanServiceResponse>;
     /**
-     * 本接口(ModifyAuditRule)用于修改用户的审计规则。
+     * 不再支持审计规则创建
+
+本接口(ModifyAuditRule)用于修改用户的审计规则。
      */
     ModifyAuditRule(req: ModifyAuditRuleRequest, cb?: (error: string, rep: ModifyAuditRuleResponse) => void): Promise<ModifyAuditRuleResponse>;
     /**
@@ -672,7 +678,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
-     * 本接口(DeleteAuditRule)用于删除用户的审计规则。
+     * 不再支持审计规则创建
+
+本接口(DeleteAuditRule)用于删除用户的审计规则。
      */
     DeleteAuditRule(req: DeleteAuditRuleRequest, cb?: (error: string, rep: DeleteAuditRuleResponse) => void): Promise<DeleteAuditRuleResponse>;
     /**

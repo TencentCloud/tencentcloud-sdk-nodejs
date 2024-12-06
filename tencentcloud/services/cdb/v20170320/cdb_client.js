@@ -728,7 +728,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRoGroupInfo", req, cb);
     }
     /**
-     * 本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
+     * 不再支持审计规则创建
+
+本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
      */
     async CreateAuditRule(req, cb) {
         return this.request("CreateAuditRule", req, cb);
@@ -898,7 +900,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupConfig", req, cb);
     }
     /**
-     * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
+     * 不再支持审计规则创建
+
+本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
      */
     async DescribeAuditRules(req, cb) {
         return this.request("DescribeAuditRules", req, cb);
@@ -990,7 +994,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenWanService", req, cb);
     }
     /**
-     * 本接口(ModifyAuditRule)用于修改用户的审计规则。
+     * 不再支持审计规则创建
+
+本接口(ModifyAuditRule)用于修改用户的审计规则。
      */
     async ModifyAuditRule(req, cb) {
         return this.request("ModifyAuditRule", req, cb);
@@ -1002,7 +1008,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 本接口(DeleteAuditRule)用于删除用户的审计规则。
+     * 不再支持审计规则创建
+
+本接口(DeleteAuditRule)用于删除用户的审计规则。
      */
     async DeleteAuditRule(req, cb) {
         return this.request("DeleteAuditRule", req, cb);

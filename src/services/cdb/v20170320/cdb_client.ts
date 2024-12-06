@@ -1625,8 +1625,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
-   */
+     * 不再支持审计规则创建
+
+本接口(CreateAuditRule)用于创建用户在当前地域的审计规则。
+     */
   async CreateAuditRule(
     req: CreateAuditRuleRequest,
     cb?: (error: string, rep: CreateAuditRuleResponse) => void
@@ -1903,8 +1905,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
-   */
+     * 不再支持审计规则创建
+
+本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
+     */
   async DescribeAuditRules(
     req: DescribeAuditRulesRequest,
     cb?: (error: string, rep: DescribeAuditRulesResponse) => void
@@ -2055,8 +2059,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyAuditRule)用于修改用户的审计规则。
-   */
+     * 不再支持审计规则创建
+
+本接口(ModifyAuditRule)用于修改用户的审计规则。
+     */
   async ModifyAuditRule(
     req: ModifyAuditRuleRequest,
     cb?: (error: string, rep: ModifyAuditRuleResponse) => void
@@ -2075,8 +2081,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteAuditRule)用于删除用户的审计规则。
-   */
+     * 不再支持审计规则创建
+
+本接口(DeleteAuditRule)用于删除用户的审计规则。
+     */
   async DeleteAuditRule(
     req: DeleteAuditRuleRequest,
     cb?: (error: string, rep: DeleteAuditRuleResponse) => void

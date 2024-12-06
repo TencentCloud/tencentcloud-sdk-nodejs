@@ -398,16 +398,6 @@ it("tdmq.v20200217.CreateRabbitMQVirtualHost", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteCluster", async function () {
-    try {
-       const data = await client.DeleteCluster({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.DeleteCmqTopic", async function () {
     try {
        const data = await client.DeleteCmqTopic({})
@@ -488,9 +478,9 @@ it("tdmq.v20200217.DescribeCmqSubscriptionDetail", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeCmqDeadLetterSourceQueues", async function () {
+it("tdmq.v20200217.DeleteCluster", async function () {
     try {
-       const data = await client.DescribeCmqDeadLetterSourceQueues({})
+       const data = await client.DeleteCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

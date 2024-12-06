@@ -86,6 +86,7 @@ import {
   ModifyServerlessStrategyResponse,
   ProxyGroupRwInfo,
   DescribeProxyNodesRequest,
+  DescribeAuditLogsRequest,
   InquirePriceCreateResponse,
   CreateClustersRequest,
   DescribeClusterParamLogsRequest,
@@ -121,6 +122,7 @@ import {
   ModifyParamItem,
   AssociateSecurityGroupsRequest,
   ParamTemplateListInfo,
+  CloseProxyEndPointRequest,
   DescribeBinlogsResponse,
   AuditInstanceInfo,
   AddClusterSlaveZoneResponse,
@@ -223,7 +225,7 @@ import {
   DescribeAccountPrivilegesResponse,
   ProxyInstanceWeight,
   CreateResourcePackageRequest,
-  DescribeAuditLogsRequest,
+  CloseProxyEndPointResponse,
   DescribeBackupConfigRequest,
   ExchangeInstanceInfo,
   DescribeAccountsRequest,
@@ -344,6 +346,7 @@ import {
   OpenClusterPasswordComplexityRequest,
   DescribeAuditLogsResponse,
   PackagePriority,
+  DescribeInstancesWithinSameClusterRequest,
   CynosdbInstanceGroup,
   ModifyAccountDescriptionResponse,
   SetRenewFlagRequest,
@@ -390,6 +393,7 @@ import {
   ModifyInstanceParamResponse,
   TemplateParamInfo,
   CreateBackupResponse,
+  DescribeInstancesWithinSameClusterResponse,
   RollbackToNewClusterResponse,
   ResourcePackage,
   BillingResourceInfo,
@@ -590,6 +594,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewClustersResponse) => void
   ): Promise<RenewClustersResponse> {
     return this.request("RenewClusters", req, cb)
+  }
+
+  /**
+   * 关闭数据库代理连接地址
+   */
+  async CloseProxyEndPoint(
+    req: CloseProxyEndPointRequest,
+    cb?: (error: string, rep: CloseProxyEndPointResponse) => void
+  ): Promise<CloseProxyEndPointResponse> {
+    return this.request("CloseProxyEndPoint", req, cb)
   }
 
   /**
@@ -960,6 +974,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateClusterResponse) => void
   ): Promise<IsolateClusterResponse> {
     return this.request("IsolateCluster", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeInstancesWithinSameCluster)用于查询同一集群下实例列表
+   */
+  async DescribeInstancesWithinSameCluster(
+    req: DescribeInstancesWithinSameClusterRequest,
+    cb?: (error: string, rep: DescribeInstancesWithinSameClusterResponse) => void
+  ): Promise<DescribeInstancesWithinSameClusterResponse> {
+    return this.request("DescribeInstancesWithinSameCluster", req, cb)
   }
 
   /**

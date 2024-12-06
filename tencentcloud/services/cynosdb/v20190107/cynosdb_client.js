@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewClusters", req, cb);
     }
     /**
+     * 关闭数据库代理连接地址
+     */
+    async CloseProxyEndPoint(req, cb) {
+        return this.request("CloseProxyEndPoint", req, cb);
+    }
+    /**
      * 本接口（CloseProxy）用于关闭集群的数据库代理服务。
      */
     async CloseProxy(req, cb) {
@@ -338,6 +344,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async IsolateCluster(req, cb) {
         return this.request("IsolateCluster", req, cb);
+    }
+    /**
+     * 本接口(DescribeInstancesWithinSameCluster)用于查询同一集群下实例列表
+     */
+    async DescribeInstancesWithinSameCluster(req, cb) {
+        return this.request("DescribeInstancesWithinSameCluster", req, cb);
     }
     /**
      * 本接口（RestartInstance）用于重启实例。

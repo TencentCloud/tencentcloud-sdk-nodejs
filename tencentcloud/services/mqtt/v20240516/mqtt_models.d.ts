@@ -104,6 +104,80 @@ export interface AuthorizationPolicyItem {
     UpdateTime?: number;
 }
 /**
+ * 设备证书信息
+ */
+export interface DeviceCertificateItem {
+    /**
+     * 客户端id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientId?: string;
+    /**
+     * 设备证书
+     */
+    DeviceCertificate?: string;
+    /**
+     * 设备证书Sn
+     */
+    DeviceCertificateSn?: string;
+    /**
+     * 设备证书Cn
+     */
+    DeviceCertificateCn?: string;
+    /**
+     * 签发ca的序列号
+     */
+    CaSn?: string;
+    /**
+     * 证书格式
+     */
+    Format?: string;
+    /**
+     * 证书状态
+      ACTIVE,//激活
+      INACTIVE,//未激活
+      REVOKED,//吊销
+      PENDING_ACTIVATION,//注册待激活
+     */
+    Status?: string;
+    /**
+     * 上次激活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastActivationTime?: number;
+    /**
+     * 上次取消激活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastInactivationTime?: number;
+    /**
+     * 创建时间
+     */
+    CreatedTime?: number;
+    /**
+     * 预销毁时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: number;
+    /**
+     * 证书来源：
+  API, 手动注册
+  JITP 自动注册
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertificateSource?: string;
+    /**
+     * 证书失效日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NotAfterTime?: number;
+    /**
+     * 证书生效开始日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NotBeforeTime?: number;
+}
+/**
  * CreateJWTAuthenticator返回参数结构体
  */
 export interface CreateJWTAuthenticatorResponse {
@@ -170,7 +244,8 @@ export interface DescribeTopicListRequest {
      */
     InstanceId: string;
     /**
-     * 查询条件列表
+     * 查询条件列表:
+  支持TopicName模糊查询
      */
     Filters?: Array<Filter>;
     /**
@@ -187,7 +262,10 @@ export interface DescribeTopicListRequest {
  */
 export interface DescribeInstanceListRequest {
     /**
-     * 查询条件列表
+     * 查询条件列表,支持以下子弹
+  InstanceName：集群名模糊搜索
+  InstanceId：集群id精确搜索
+  InstanceStatus：集群状态搜索
      */
     Filters?: Array<Filter>;
     /**
@@ -268,6 +346,19 @@ export interface CreateAuthorizationPolicyRequest {
      * 备注信息
      */
     Remark?: string;
+}
+/**
+ * ActivateDeviceCertificate请求参数结构体
+ */
+export interface ActivateDeviceCertificateRequest {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 设备证书序列号
+     */
+    DeviceCertificateSn: string;
 }
 /**
  * DescribeInstance返回参数结构体
@@ -419,7 +510,9 @@ export interface ModifyJWTAuthenticatorRequest {
      */
     Algorithm?: string;
     /**
-     * 设备连接时传递jwt的key；username-使用用户名字段传递；password-使用密码字段传递
+     * 设备连接时传递jwt的key；
+  username-使用用户名字段传递；
+  password-使用密码字段传递
      */
     From?: string;
     /**
@@ -577,6 +670,34 @@ export interface DescribeTopicResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDeviceCertificates请求参数结构体
+ */
+export interface DescribeDeviceCertificatesRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 过滤器支持ClientId、CaSn、DeviceCertificateSn、Status搜索
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页limit
+     */
+    Limit?: number;
+    /**
+     * 分页偏移量
+     */
+    Offset?: number;
+    /**
+     * CREATE_TIME_DESC, 创建时间降序
+      CREATE_TIME_ASC,创建时间升序
+      UPDATE_TIME_DESC,更新时间降序
+      UPDATE_TIME_ASC,更新时间升序
+     */
+    OrderBy?: string;
+}
+/**
  * CreateJWKSAuthenticator返回参数结构体
  */
 export interface CreateJWKSAuthenticatorResponse {
@@ -698,6 +819,23 @@ export interface DeleteAuthorizationPolicyResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDeviceCertificates返回参数结构体
+ */
+export interface DescribeDeviceCertificatesResponse {
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 设备证书
+     */
+    Data?: Array<DeviceCertificateItem>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyJWKSAuthenticator请求参数结构体
  */
 export interface ModifyJWKSAuthenticatorRequest {
@@ -777,6 +915,117 @@ export interface DescribeAuthenticatorRequest {
      * 认证器类型
      */
     Type?: string;
+}
+/**
+ * MQTT 实例信息
+ */
+export interface MQTTInstanceItem {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 实例名称
+     */
+    InstanceName?: string;
+    /**
+     * 实例版本
+     */
+    Version?: string;
+    /**
+     * 实例类型，
+  EXPERIMENT，体验版
+  BASIC，基础版
+  PRO，专业版
+  PLATINUM，铂金版
+     */
+    InstanceType?: string;
+    /**
+     * 实例状态，
+  RUNNING, 运行中
+  MAINTAINING，维护中
+  ABNORMAL，异常
+  OVERDUE，欠费
+  DESTROYED，已删除
+  CREATING，创建中
+  MODIFYING，变配中
+  CREATE_FAILURE，创建失败
+  MODIFY_FAILURE，变配失败
+  DELETING，删除中
+     */
+    InstanceStatus?: string;
+    /**
+     * 实例主题数上限
+     */
+    TopicNumLimit?: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 主题数量
+     */
+    TopicNum?: number;
+    /**
+     * 商品规格
+     */
+    SkuCode?: string;
+    /**
+     * 弹性TPS限流值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TpsLimit?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 单客户端最大订阅数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxSubscriptionPerClient?: number;
+    /**
+     * 客户端连接数上线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientNumLimit?: number;
+    /**
+     * 是否自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: number;
+    /**
+     * 计费模式， POSTPAID，按量计费 PREPAID，包年包月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: string;
+    /**
+     * 到期时间，秒为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiryTime?: number;
+    /**
+     * 预销毁时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DestroyTime?: number;
+    /**
+     * 授权规则条数限制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthorizationPolicyLimit?: number;
+    /**
+     * 最大ca配额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxCaNum?: number;
+    /**
+     * 最大订阅数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxSubscription?: number;
 }
 /**
  * DeleteTopic返回参数结构体
@@ -910,115 +1159,13 @@ export interface TagFilter {
     TagValues?: Array<string>;
 }
 /**
- * MQTT 实例信息
+ * ActivateDeviceCertificate返回参数结构体
  */
-export interface MQTTInstanceItem {
+export interface ActivateDeviceCertificateResponse {
     /**
-     * 实例ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    InstanceId?: string;
-    /**
-     * 实例名称
-     */
-    InstanceName?: string;
-    /**
-     * 实例版本
-     */
-    Version?: string;
-    /**
-     * 实例类型，
-  EXPERIMENT，体验版
-  BASIC，基础版
-  PRO，专业版
-  PLATINUM，铂金版
-     */
-    InstanceType?: string;
-    /**
-     * 实例状态，
-  RUNNING, 运行中
-  MAINTAINING，维护中
-  ABNORMAL，异常
-  OVERDUE，欠费
-  DESTROYED，已删除
-  CREATING，创建中
-  MODIFYING，变配中
-  CREATE_FAILURE，创建失败
-  MODIFY_FAILURE，变配失败
-  DELETING，删除中
-     */
-    InstanceStatus?: string;
-    /**
-     * 实例主题数上限
-     */
-    TopicNumLimit?: number;
-    /**
-     * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark?: string;
-    /**
-     * 主题数量
-     */
-    TopicNum?: number;
-    /**
-     * 商品规格
-     */
-    SkuCode?: string;
-    /**
-     * 弹性TPS限流值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TpsLimit?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime?: number;
-    /**
-     * 单客户端最大订阅数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxSubscriptionPerClient?: number;
-    /**
-     * 客户端连接数上线
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientNumLimit?: number;
-    /**
-     * 是否自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RenewFlag?: number;
-    /**
-     * 计费模式， POSTPAID，按量计费 PREPAID，包年包月
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayMode?: string;
-    /**
-     * 到期时间，秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpiryTime?: number;
-    /**
-     * 预销毁时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DestroyTime?: number;
-    /**
-     * 授权规则条数限制
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AuthorizationPolicyLimit?: number;
-    /**
-     * 最大ca配额
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxCaNum?: number;
-    /**
-     * 最大订阅数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxSubscription?: number;
+    RequestId?: string;
 }
 /**
  * DescribeInstanceList返回参数结构体

@@ -121,32 +121,32 @@ export interface ConfigRule {
    * 规则标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Identifier: string
+  Identifier?: string
   /**
    * 规则名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 规则参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputParameter: Array<InputParameter>
+  InputParameter?: Array<InputParameter>
   /**
    * 规则触发条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceCondition: Array<SourceConditionForManage>
+  SourceCondition?: Array<SourceConditionForManage>
   /**
    * 规则支持的资源类型，规则仅对指定资源类型的资源生效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType: Array<string>
+  ResourceType?: Array<string>
   /**
    * 规则所属标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Labels: Array<string>
+  Labels?: Array<string>
   /**
    * 规则风险等级
 1:低风险
@@ -154,96 +154,96 @@ export interface ConfigRule {
 3:高风险
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskLevel: number
+  RiskLevel?: number
   /**
    * 规则对应的函数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceFunction: string
+  ServiceFunction?: string
   /**
    * 创建时间
 格式：YYYY-MM-DD h:i:s
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 规则描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * ACTIVE：启用
 NO_ACTIVE：停止
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 合规： 'COMPLIANT'
 不合规： 'NON_COMPLIANT'
 无法应用规则： 'NOT_APPLICABLE'
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComplianceResult: string
+  ComplianceResult?: string
   /**
    * ["",""]
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Annotation: Annotation
+  Annotation?: Annotation
   /**
    * 规则评估时间
 格式：YYYY-MM-DD h:i:s
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigRuleInvokedTime: string
+  ConfigRuleInvokedTime?: string
   /**
    * 规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigRuleId: string
+  ConfigRuleId?: string
   /**
    * CUSTOMIZE：自定义规则、
 SYSTEM：托管规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentifierType: string
+  IdentifierType?: string
   /**
    * 合规包ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompliancePackId: string
+  CompliancePackId?: string
   /**
    * 触发类型
 ScheduledNotification：周期触发、
 ConfigurationItemChangeNotification：变更触发
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerType: Array<TriggerType>
+  TriggerType?: Array<TriggerType>
   /**
    * 参数详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ManageInputParameter: Array<InputParameterForManage>
+  ManageInputParameter?: Array<InputParameterForManage>
   /**
-   * 规则名称
+   * 合规包名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompliancePackName: string
+  CompliancePackName?: string
   /**
    * 关联地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionsScope: Array<string>
+  RegionsScope?: Array<string>
   /**
    * 关联标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagsScope: Array<Tag>
+  TagsScope?: Array<Tag>
   /**
    *  规则对指定资源ID无效，即不对该资源执行评估。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExcludeResourceIdsScope: Array<string>
+  ExcludeResourceIdsScope?: Array<string>
   /**
    * 账号组ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -290,11 +290,11 @@ export interface ListConfigRulesResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 详情
    */
-  Items: Array<ConfigRule>
+  Items?: Array<ConfigRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -410,30 +410,39 @@ export interface InputParameterForManage {
  */
 export interface ListConfigRulesRequest {
   /**
-   * 每页限制
+   * 每页数量。
+取值范围：1~200
    */
   Limit: number
   /**
-   * 偏移量
+   * 偏移量。
+取值范围：最小值为0
    */
   Offset: number
   /**
-   * 排序类型, 倒序：desc，顺序：asc
+   * 排序类型(规则名称)。
+倒序：desc，
+顺序：asc
    */
   OrderType?: string
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
+   * 风险等级。
+1：高风险，
+2：中风险，
 3：低风险。
    */
   RiskLevel?: Array<number | bigint>
   /**
-   * 规则状态
+   * 规则状态。
+ACTIVE：启用
+UN_ACTIVE：停用
+
    */
   State?: string
   /**
-   * 评估结果
+   * 评估结果。
+COMPLIANT：合规
+NON_COMPLIANT：不合规
    */
   ComplianceResult?: Array<string>
   /**
@@ -493,7 +502,8 @@ export interface TriggerType {
  */
 export interface PutEvaluationsRequest {
   /**
-   * 回调令牌。从自定义规则所选的scf云函数Context中取参数ResultToken值
+   * 回调令牌。从自定义规则所选的scf云函数入参中取参数ResultToken值
+<a href="https://cloud.tencent.com/document/product/583/9210#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E" target="_blank">云函数入参说明</a>
    */
   ResultToken: string
   /**
@@ -541,12 +551,12 @@ export interface ListDiscoveredResourcesResponse {
   /**
    * 详情
    */
-  Items: Array<ResourceListInfo>
+  Items?: Array<ResourceListInfo>
   /**
    * 下一页
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextToken: string
+  NextToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

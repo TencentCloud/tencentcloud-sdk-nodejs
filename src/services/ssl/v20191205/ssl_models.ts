@@ -79,11 +79,7 @@ export interface DescribeHostDdosInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -93,9 +89,21 @@ export interface DescribeHostDdosInstanceListRequest {
    */
   Filters?: Array<Filter>
   /**
+   * 部署资源类型ddos
+   */
+  ResourceType?: string
+  /**
    * 已部署的证书ID
    */
   OldCertificateId?: string
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
 }
 
 /**
@@ -1167,7 +1175,7 @@ export interface ModifyCertificateAliasRequest {
  */
 export interface DescribeManagerDetailRequest {
   /**
-   * 管理人ID
+   * 管理人ID,可以从describeManagers接口获得
    */
   ManagerId: number
   /**
@@ -1456,11 +1464,7 @@ export interface DescribeHostLiveInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -1469,6 +1473,11 @@ export interface DescribeHostLiveInstanceListRequest {
    * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型
+   * @deprecated
+   */
+  ResourceType?: string
   /**
    * 已部署的证书ID
    */
@@ -1480,10 +1489,15 @@ export interface DescribeHostLiveInstanceListRequest {
  */
 export interface DescribeHostDdosInstanceListResponse {
   /**
-   * DDOS实例列表
+   * DDOS实例列表,取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<DdosInstanceDetail>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1513,11 +1527,11 @@ export interface UpdateRecordDetails {
  */
 export interface DeployCertificateRecordRetryRequest {
   /**
-   * 待重试部署记录ID
+   * 待重试部署记录ID，通过DeployCertificateInstance获得
    */
   DeployRecordId?: number
   /**
-   * 待重试部署记录详情ID
+   * 待重试部署记录详情ID，通过DescribeHostDeployRecordDetail获得
    */
   DeployRecordDetailId?: number
 }
@@ -1771,22 +1785,22 @@ export interface DownloadCertificateRequest {
  */
 export interface DescribeHostTkeInstanceListResponse {
   /**
-   * 总数
+   * 总数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * CLB实例监听器列表
+   * tke实例列表，取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<TkeInstanceDetail>
   /**
-   * 异步刷新总数
+   * 异步刷新总数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncTotalNum?: number
   /**
-   * 异步刷新当前执行数
+   * 异步刷新当前执行数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncOffset?: number
@@ -1806,7 +1820,7 @@ export interface DescribeHostTkeInstanceListResponse {
  */
 export interface DescribeCertificateBindResourceTaskResultRequest {
   /**
-   * 任务ID，根据任务ID查询绑定云资源结果， 最大支持100个
+   * 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果， 最大支持100个
    */
   TaskIds: Array<string>
 }
@@ -1970,7 +1984,7 @@ export interface DescribeHostDeployRecordRequest {
    */
   Limit?: number
   /**
-   * 资源类型
+   * 支持的资源类型如下,clb,cdn,ddos,waf,apigateway,teo,tke,cos,lighthouse,vod,tcb,tse
    */
   ResourceType?: string
 }
@@ -2068,7 +2082,7 @@ export interface UploadConfirmLetterResponse {
  */
 export interface DescribeHostUpdateRecordDetailRequest {
   /**
-   * 一键更新记录ID
+   * 一键更新记录ID,从接口UpdateCertificateInstance获得
    */
   DeployRecordId: string
   /**
@@ -2395,11 +2409,7 @@ export interface DescribeHostVodInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型 vod
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -2408,6 +2418,11 @@ export interface DescribeHostVodInstanceListRequest {
    * 过滤参数列表
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型 vod
+   * @deprecated
+   */
+  ResourceType?: string
   /**
    * 已部署的证书ID
    */
@@ -2573,11 +2588,11 @@ export interface CdnInstanceList {
  */
 export interface UpdateCertificateRecordRetryRequest {
   /**
-   * 待重试部署记录ID
+   * 待重试部署记录ID,通过UpdateCertificateInstance得到部署记录ID
    */
   DeployRecordId?: number
   /**
-   * 待重试部署记录详情ID
+   * 待重试部署记录详情ID,通过DescribeHostUpdateRecordDetail接口获得
    */
   DeployRecordDetailId?: number
 }
@@ -2614,7 +2629,7 @@ export interface DdosInstanceDetail {
  */
 export interface DescribeHostWafInstanceListResponse {
   /**
-   * WAF实例列表
+   * WAF实例列表，如果没有取到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<LiveInstanceDetail>
@@ -2884,7 +2899,7 @@ export interface DescribeCertificatesRequest {
    */
   Offset?: number
   /**
-   * 每页数量，默认10。最大1000
+   * 每页数量，默认10。最大值1000，如超过1000按1000处理
    */
   Limit?: number
   /**
@@ -2940,7 +2955,7 @@ export interface DescribeCertificatesRequest {
    */
   Tags?: Array<Tags>
   /**
-   * //是否筛选等待签发的证书，传1是筛选，0和null不筛选
+   * 是否筛选等待签发的证书，传1是筛选，0和null不筛选
    */
   IsPendingIssue?: number
 }
@@ -2950,7 +2965,7 @@ export interface DescribeCertificatesRequest {
  */
 export interface UpdateCertificateRecordRollbackRequest {
   /**
-   * 待重试部署记录ID
+   * 待重试部署记录ID,通过UpdateCertificateInstance获得
    */
   DeployRecordId?: number
 }
@@ -3007,27 +3022,27 @@ export interface TeoInstanceDetail {
  */
 export interface DescribeHostClbInstanceListResponse {
   /**
-   * 总数
+   * 总数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * CLB实例监听器列表
+   * CLB实例监听器列表，取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<ClbInstanceDetail>
   /**
-   * 异步刷新总数
+   * 异步刷新总数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncTotalNum?: number
   /**
-   * 异步刷新当前执行数
+   * 异步刷新当前执行数，取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncOffset?: number
   /**
-   * 当前缓存读取时间	
+   * 当前缓存读取时间，去不到值返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncCacheTime?: string
@@ -3309,7 +3324,7 @@ export interface CommitCertificateInformationRequest {
    */
   CertificateId: string
   /**
-   * 域名验证方式
+   * 域名验证方式，如 DNS,DNS_AUTO,FILE
    */
   VerifyType?: string
 }
@@ -3526,7 +3541,7 @@ export interface CheckCertificateDomainVerificationResponse {
    * 域名验证结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VerificationResults: Array<DomainValidationResult>
+  VerificationResults?: Array<DomainValidationResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3570,10 +3585,6 @@ export interface DescribeDownloadCertificateUrlResponse {
  */
 export interface DescribeHostTkeInstanceListRequest {
   /**
-   * 待部署的证书ID
-   */
-  CertificateId: string
-  /**
    * 分页偏移量，从0开始。
    */
   Offset?: number
@@ -3581,6 +3592,10 @@ export interface DescribeHostTkeInstanceListRequest {
    * 每页数量，默认10。
    */
   Limit?: number
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -3590,7 +3605,7 @@ export interface DescribeHostTkeInstanceListRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 是否异步缓存
+   * 是否异步缓存，0表示否，1表示是，默认为0
    */
   AsyncCache?: number
   /**
@@ -3604,7 +3619,7 @@ export interface DescribeHostTkeInstanceListRequest {
  */
 export interface DeployCertificateRecordRollbackRequest {
   /**
-   * 待重试部署记录ID
+   * 待重试部署记录ID,就是通过DeployCertificateInstance返回的DeployRecordId
    */
   DeployRecordId?: number
 }
@@ -3704,12 +3719,12 @@ export interface DeleteCertificatesRequest {
  */
 export interface DescribeHostVodInstanceListResponse {
   /**
-   * Vod实例列表
+   * Vod实例列表，如果取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<VodInstanceDetail>
   /**
-   * 总数
+   * 总数,如果取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -3802,27 +3817,27 @@ export interface RevokeDomainValidateAuths {
  */
 export interface DescribeHostUpdateRecordDetailResponse {
   /**
-   * 总数
+   * 总数,如果取不到返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 证书部署记录列表
+   * 证书部署记录列表，如果取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordDetailList?: Array<UpdateRecordDetails>
   /**
-   * 成功总数
+   * 成功总数,如果取不到返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessTotalCount?: number
   /**
-   * 失败总数
+   * 失败总数,如果取不到返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedTotalCount?: number
   /**
-   * 部署中总数
+   * 部署中总数,如果取不到返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningTotalCount?: number
@@ -3869,10 +3884,6 @@ export interface DescribeHostUpdateRecordRequest {
  */
 export interface DescribeHostClbInstanceListRequest {
   /**
-   * 待部署的证书ID
-   */
-  CertificateId: string
-  /**
    * 分页偏移量，从0开始。
    */
   Offset?: number
@@ -3880,6 +3891,10 @@ export interface DescribeHostClbInstanceListRequest {
    * 每页数量，默认10。
    */
   Limit?: number
+  /**
+   * 待部署的证书ID
+   */
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -3889,7 +3904,7 @@ export interface DescribeHostClbInstanceListRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 是否异步缓存
+   * 是否异步缓存,0表示否,1表示是
    */
   AsyncCache?: number
   /**
@@ -3927,7 +3942,7 @@ export interface CertTaskId {
  */
 export interface DescribeHostLiveInstanceListResponse {
   /**
-   * live实例列表
+   * live实例列表,如取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<LiveInstanceDetail>
@@ -3944,11 +3959,7 @@ export interface DescribeHostApiGatewayInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -3958,9 +3969,21 @@ export interface DescribeHostApiGatewayInstanceListRequest {
    */
   Filters?: Array<Filter>
   /**
+   * 部署资源类型apigateway
+   */
+  ResourceType?: string
+  /**
    * 已部署的证书ID
    */
   OldCertificateId?: string
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: string
 }
 
 /**
@@ -4232,7 +4255,7 @@ export interface DescribeHostCosInstanceListRequest {
    */
   Limit?: number
   /**
-   * 是否异步
+   * 是否异步，0表示否，1表示是
    */
   AsyncCache?: number
 }
@@ -4242,22 +4265,22 @@ export interface DescribeHostCosInstanceListRequest {
  */
 export interface DescribeHostCdnInstanceListResponse {
   /**
-   * CDN实例列表
+   * CDN实例列表，如取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<CdnInstanceDetail>
   /**
-   * CDN域名总数
+   * CDN域名总数，如取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 异步刷新总数	
+   * 异步刷新总数，如取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncTotalNum?: number
   /**
-   * 异步刷新当前执行数	
+   * 异步刷新当前执行数，如取不到值返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsyncOffset?: number
@@ -4303,7 +4326,7 @@ export interface DeployCertificateInstanceRequest {
    */
   InstanceIdList: Array<string>
   /**
-   * 部署的云资源类型
+   * 部署的云资源类型,如clb，cos
    */
   ResourceType?: string
   /**
@@ -4411,11 +4434,7 @@ export interface DescribeHostLighthouseInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型 lighthouse
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -4424,6 +4443,10 @@ export interface DescribeHostLighthouseInstanceListRequest {
    * 过滤参数列表
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型 lighthouse
+   */
+  ResourceType?: string
 }
 
 /**
@@ -4433,11 +4456,7 @@ export interface DescribeHostCdnInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -4446,6 +4465,10 @@ export interface DescribeHostCdnInstanceListRequest {
    * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型cdn
+   */
+  ResourceType?: string
   /**
    * 原证书ID
    */
@@ -4459,7 +4482,7 @@ export interface DescribeHostCdnInstanceListRequest {
    */
   Limit?: number
   /**
-   * 是否异步
+   * 是否异步,0表示否，1表示是，默认为0
    */
   AsyncCache?: number
 }
@@ -4490,11 +4513,7 @@ export interface DescribeHostWafInstanceListRequest {
   /**
    * 待部署的证书ID
    */
-  CertificateId: string
-  /**
-   * 部署资源类型
-   */
-  ResourceType: string
+  CertificateId?: string
   /**
    * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
    */
@@ -4503,6 +4522,11 @@ export interface DescribeHostWafInstanceListRequest {
    * 过滤参数列表； FilterKey：domainMatch（查询域名是否匹配的实例列表） FilterValue：1，表示查询匹配； 0，表示查询不匹配； 默认查询匹配
    */
   Filters?: Array<Filter>
+  /**
+   * 部署资源类型，如waf
+   * @deprecated
+   */
+  ResourceType?: string
   /**
    * 已部署的证书ID
    */
@@ -4817,12 +4841,12 @@ export interface HostingConfig {
  */
 export interface DescribeHostApiGatewayInstanceListResponse {
   /**
-   * apiGateway实例列表
+   * apiGateway实例列表,如取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<ApiGatewayInstanceDetail>
   /**
-   * 总数
+   * 总数，如取不到值返回0
    */
   TotalCount?: number
   /**
@@ -5380,7 +5404,7 @@ export interface CancelAuditCertificateResponse {
   /**
    * 操作是否成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5428,15 +5452,15 @@ export interface DescribePackagesResponse {
   /**
    * 权益包列表。
    */
-  Packages: Array<PackageInfo>
+  Packages?: Array<PackageInfo>
   /**
    * 总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 权益点总余额。
    */
-  TotalBalance: number
+  TotalBalance?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5448,7 +5472,7 @@ export interface DescribePackagesResponse {
  */
 export interface DescribeManagersRequest {
   /**
-   * 公司ID
+   * 公司ID,可以从DescribeCompanies接口获取
    */
   CompanyId: number
   /**
@@ -5513,15 +5537,15 @@ export interface TSEInstanceList {
  */
 export interface DescribeHostLighthouseInstanceListResponse {
   /**
-   * Lighthouse实例列表
+   * Lighthouse实例列表,如取不到返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceList: Array<LighthouseInstanceDetail>
+  InstanceList?: Array<LighthouseInstanceDetail>
   /**
-   * 总数
+   * 总数，如取不到返回0
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

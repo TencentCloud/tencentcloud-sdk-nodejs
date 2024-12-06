@@ -2706,7 +2706,8 @@ export interface McuPassThrough {
    */
   PayloadContent: string
   /**
-   * SEI消息的payload_type，取值范围5、100-254（244除外，244为我们内部自定义的时间戳SEI）。
+   * SEI消息的PayloadType，取值范围5、100-254（244除外，244为我们内部自定义的时间戳SEI）。
+注：部分播放器可能不支持PayloadType为5带PayloadUuid的标准类型，建议优先使用其他PayloadType。
    */
   PayloadType: number
   /**

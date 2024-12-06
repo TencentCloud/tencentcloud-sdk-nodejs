@@ -3084,67 +3084,78 @@ export interface Registry {
     /**
      * 实例ID
      */
-    RegistryId: string;
+    RegistryId?: string;
     /**
      * 实例名称
      */
-    RegistryName: string;
+    RegistryName?: string;
     /**
      * 实例规格
      */
-    RegistryType: string;
+    RegistryType?: string;
     /**
-     * 实例状态
+     * 实例状态。有以下状态：
+  Pending, 初始化中
+  Deploying, 创建中
+  Running, 运行中
+  Unhealthy, 状态异常
+  FailedCreated, 创建失败
+  FailedUpdated, 更新失败
+  Bucket-Error, 存储桶异常
+  Isolate, 待回收
+  Deleting, 删除中
+  DeleteBucketFailed, 实例删除存储桶失败
+  DeleteFailed, 实例删除失败
      */
-    Status: string;
+    Status?: string;
     /**
      * 实例的公共访问地址
      */
-    PublicDomain: string;
+    PublicDomain?: string;
     /**
      * 实例创建时间
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 地域名称
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 地域Id
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 是否支持匿名
      */
-    EnableAnonymous: boolean;
+    EnableAnonymous?: boolean;
     /**
      * Token有效时间
      */
-    TokenValidTime: number;
+    TokenValidTime?: number;
     /**
      * 实例内部访问地址
      */
-    InternalEndpoint: string;
+    InternalEndpoint?: string;
     /**
      * 实例云标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSpecification: TagSpecification;
+    TagSpecification?: TagSpecification;
     /**
      * 实例过期时间（预付费）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredAt: string;
+    ExpiredAt?: string;
     /**
      * 实例付费类型，0表示后付费，1表示预付费
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMod: number;
+    PayMod?: number;
     /**
      * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RenewFlag: number;
+    RenewFlag?: number;
     /**
      * 是否开启实例删除保护，false表示不开启
      */

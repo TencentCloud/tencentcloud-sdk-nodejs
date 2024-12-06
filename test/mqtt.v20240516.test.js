@@ -38,9 +38,9 @@ it("mqtt.v20240516.CreateTopic", async function () {
     }
 })
 
-it("mqtt.v20240516.RegisterDeviceCertificate", async function () {
+it("mqtt.v20240516.ActivateDeviceCertificate", async function () {
     try {
-       const data = await client.RegisterDeviceCertificate({})
+       const data = await client.ActivateDeviceCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +51,16 @@ it("mqtt.v20240516.RegisterDeviceCertificate", async function () {
 it("mqtt.v20240516.DescribeAuthorizationPolicies", async function () {
     try {
        const data = await client.DescribeAuthorizationPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.RegisterDeviceCertificate", async function () {
+    try {
+       const data = await client.RegisterDeviceCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +181,16 @@ it("mqtt.v20240516.DescribeTopicList", async function () {
 it("mqtt.v20240516.DeleteTopic", async function () {
     try {
        const data = await client.DeleteTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeDeviceCertificates", async function () {
+    try {
+       const data = await client.DescribeDeviceCertificates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

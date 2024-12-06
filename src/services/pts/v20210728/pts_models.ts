@@ -2670,51 +2670,55 @@ export interface RequestSummary {
   /**
    * 请求URL
    */
-  Service: string
+  Service?: string
   /**
    * 请求方法
    */
-  Method: string
+  Method?: string
   /**
    * 请求次数
    */
-  Count: number
+  Count?: number
   /**
    * 请求响应平均耗时，单位秒
    */
-  Average: number
+  Average?: number
   /**
    * 请求p90耗时，单位秒
    */
-  P90: number
+  P90?: number
   /**
    * 请求p95耗时，单位秒
    */
-  P95: number
+  P95?: number
   /**
    * 请求最小耗时，单位秒
    */
-  Min: number
+  Min?: number
   /**
    * 请求最大耗时，单位秒
    */
-  Max: number
+  Max?: number
   /**
    * 请求错误率
    */
-  ErrorPercentage: number
+  ErrorPercentage?: number
   /**
    * 请求p99耗时，单位秒
    */
-  P99: number
+  P99?: number
   /**
    * 响应状态码
    */
-  Status: string
+  Status?: string
   /**
    * 响应详情
    */
-  Result: string
+  Result?: string
+  /**
+   * 平均rps, 单位req/s
+   */
+  RPS?: number
 }
 
 /**

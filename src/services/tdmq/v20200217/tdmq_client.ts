@@ -89,7 +89,6 @@ import {
   DeleteRocketMQEnvironmentRolesResponse,
   DeleteCmqSubscribeRequest,
   RocketMQClusterConfig,
-  DescribeCmqDeadLetterSourceQueuesResponse,
   SendMsgResponse,
   DescribeMsgRequest,
   RocketMQGroupConfigOutput,
@@ -266,7 +265,6 @@ import {
   PartitionsTopic,
   ResetMsgSubOffsetByTimestampResponse,
   SendMessagesRequest,
-  DescribeCmqDeadLetterSourceQueuesRequest,
   CreateRocketMQRoleRequest,
   DescribeNodeHealthOptResponse,
   DescribeRabbitMQVipInstanceResponse,
@@ -460,8 +458,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新Amqp集群信息
-   */
+     * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是ModifyRabbitMQVipInstance。不过从调用链上看，线网还有请求流程，所以走预下线流程。
+
+更新Amqp集群信息
+     */
   async ModifyAMQPCluster(
     req: ModifyAMQPClusterRequest,
     cb?: (error: string, rep: ModifyAMQPClusterResponse) => void
@@ -790,16 +790,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除集群
-   */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
-  }
-
-  /**
    * 删除cmq主题
    */
   async DeleteCmqTopic(
@@ -880,15 +870,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口很久之前已删除，需下线
-
-枚举cmq死信队列源队列
-     */
-  async DescribeCmqDeadLetterSourceQueues(
-    req: DescribeCmqDeadLetterSourceQueuesRequest,
-    cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void
-  ): Promise<DescribeCmqDeadLetterSourceQueuesResponse> {
-    return this.request("DescribeCmqDeadLetterSourceQueues", req, cb)
+   * 删除集群
+   */
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
@@ -1272,8 +1260,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取amqp集群列表
-   */
+     * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是DescribeRabbitMQVipInstances。不过从调用链上看，线网还有请求流程，所以走预下线流程。
+
+获取amqp集群列表
+     */
   async DescribeAMQPClusters(
     req: DescribeAMQPClustersRequest,
     cb?: (error: string, rep: DescribeAMQPClustersResponse) => void

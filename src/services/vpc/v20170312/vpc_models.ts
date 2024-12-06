@@ -3012,62 +3012,50 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
 export interface IKEOptionsSpecification {
   /**
    * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PropoEncryAlgorithm?: string
   /**
    * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PropoAuthenAlgorithm?: string
   /**
    * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExchangeMode?: string
   /**
    * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalIdentity?: string
   /**
    * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteIdentity?: string
   /**
    * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalAddress?: string
   /**
    * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteAddress?: string
   /**
    * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalFqdnName?: string
   /**
    * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteFqdnName?: string
   /**
    * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DhGroupName?: string
   /**
    * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IKESaLifetimeSeconds?: number
   /**
    * IKE版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IKEVersion?: string
 }
@@ -5336,6 +5324,10 @@ export interface AllocateIp6AddressesBandwidthRequest {
    * 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入.
    */
   BandwidthPackageId?: string
+  /**
+   * 需要关联的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -8904,6 +8896,10 @@ export interface CreateServiceTemplateGroupRequest {
    * 协议端口模板实例ID，例如：ppm-4dw6agho。
    */
   ServiceTemplateIds: Array<string>
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -9146,34 +9142,34 @@ export interface CcnAttachedInstance {
   /**
    * 云联网实例ID。
    */
-  CcnId: string
+  CcnId?: string
   /**
    * 关联实例类型：
 <li>`VPC`：私有网络</li>
 <li>`DIRECTCONNECT`：专线网关</li>
 <li>`BMVPC`：黑石私有网络</li>
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 关联实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 关联实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 关联实例所属大区，例如：ap-guangzhou。
    */
-  InstanceRegion: string
+  InstanceRegion?: string
   /**
    * 关联实例所属UIN（根账号）。
    */
-  InstanceUin: string
+  InstanceUin?: string
   /**
    * 关联实例CIDR。
    */
-  CidrBlock: Array<string>
+  CidrBlock?: Array<string>
   /**
    * 关联实例状态：
 <li>`PENDING`：申请中</li>
@@ -9186,33 +9182,31 @@ export interface CcnAttachedInstance {
 <li>`DETACHING`：解关联中</li>
 <li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
    */
-  State: string
+  State?: string
   /**
    * 关联时间。
    */
-  AttachedTime: string
+  AttachedTime?: string
   /**
    * 云联网所属UIN（根账号）。
    */
-  CcnUin: string
+  CcnUin?: string
   /**
    * 关联实例所属的大地域，如: CHINA_MAINLAND
    */
-  InstanceArea: string
+  InstanceArea?: string
   /**
    * 备注
    */
-  Description: string
+  Description?: string
   /**
    * 路由表ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RouteTableId: string
+  RouteTableId?: string
   /**
    * 路由表名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RouteTableName: string
+  RouteTableName?: string
 }
 
 /**
@@ -12923,7 +12917,6 @@ export interface DeleteNetDetectRequest {
 export interface IPSECOptionsSpecification {
   /**
    * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptAlgorithm?: string
   /**
@@ -12934,22 +12927,18 @@ export interface IPSECOptionsSpecification {
   IntegrityAlgorith?: string
   /**
    * IPsec SA lifetime(s)：单位秒，取值范围：180-604800
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPSECSaLifetimeSeconds?: number
   /**
    * PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PfsDhGroup?: string
   /**
    * IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IPSECSaLifetimeTraffic?: number
   /**
    * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IntegrityAlgorithm?: string
 }
@@ -13898,19 +13887,19 @@ export interface CrossBorderFlowMonitorData {
   /**
    * 入带宽，单位：`bps`。
    */
-  InBandwidth: Array<number | bigint>
+  InBandwidth?: Array<number | bigint>
   /**
    * 出带宽，单位：`bps`。
    */
-  OutBandwidth: Array<number | bigint>
+  OutBandwidth?: Array<number | bigint>
   /**
    * 入包，单位：`pps`。
    */
-  InPkg: Array<number | bigint>
+  InPkg?: Array<number | bigint>
   /**
    * 出包，单位：`pps`。
    */
-  OutPkg: Array<number | bigint>
+  OutPkg?: Array<number | bigint>
 }
 
 /**
@@ -13990,19 +13979,19 @@ export interface SslClientConfig {
   /**
    * 客户端配置
    */
-  SslVpnClientConfiguration: string
+  SslVpnClientConfiguration?: string
   /**
    * 更证书
    */
-  SslVpnRootCert: string
+  SslVpnRootCert?: string
   /**
    * 客户端密钥
    */
-  SslVpnKey: string
+  SslVpnKey?: string
   /**
    * 客户端证书
    */
-  SslVpnCert: string
+  SslVpnCert?: string
   /**
    * SSL-VPN-CLIENT 实例ID。
    */
@@ -14575,27 +14564,27 @@ export interface CcnRouteTable {
   /**
    * 云联网ID。
    */
-  CcnId: string
+  CcnId?: string
   /**
    * 云联网路由表ID。
    */
-  CcnRouteTableId: string
+  CcnRouteTableId?: string
   /**
    * 云联网路由表名称。
    */
-  RouteTableName: string
+  RouteTableName?: string
   /**
    * 云联网路由表描述。
    */
-  RouteTableDescription: string
+  RouteTableDescription?: string
   /**
    * True：是默认路由表 False：非默认路由表。
    */
-  IsDefaultTable: boolean
+  IsDefaultTable?: boolean
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**

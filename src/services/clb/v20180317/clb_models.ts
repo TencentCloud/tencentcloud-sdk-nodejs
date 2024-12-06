@@ -3141,7 +3141,7 @@ export interface SetLoadBalancerSecurityGroupsRequest {
    */
   LoadBalancerId: string
   /**
-   * 安全组ID构成的数组，一个负载均衡实例最多可绑定50个安全组，如果要解绑所有安全组，可不传此参数，或传入空数组。
+   * 安全组ID构成的数组，一个负载均衡实例最多可绑定50个安全组，如果要解绑所有安全组，可不传此参数。
    */
   SecurityGroups?: Array<string>
 }

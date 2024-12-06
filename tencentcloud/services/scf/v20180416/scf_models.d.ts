@@ -3741,6 +3741,10 @@ export interface NamespaceResourceEnv {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TKE?: NamespaceResourceEnvTKE;
+    /**
+     * 近离线计算类型的命名空间
+     */
+    OFFLINE?: boolean;
 }
 /**
  * UpdateFunctionCode返回参数结构体

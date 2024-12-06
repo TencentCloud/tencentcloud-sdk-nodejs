@@ -141,7 +141,10 @@ export declare class Client extends AbstractClient {
      */
     CreateVpnGatewaySslClient(req: CreateVpnGatewaySslClientRequest, cb?: (error: string, rep: CreateVpnGatewaySslClientResponse) => void): Promise<CreateVpnGatewaySslClientResponse>;
     /**
-     * 该接口用于给IPv6地址初次分配公网带宽
+     * 本接口（AllocateIp6AddressesBandwidth）用于为传统弹性公网 IPv6 实例开通 IPv6 公网带宽。
+
+- 传统弹性公网 IPv6 实例默认仅具备 IPv6 内网通信能力，需为 IPv6 地址分配公网带宽后，才具备 IPv6 公网通信能力。
+- 支持为一个或多个传统弹性公网 IPv6 实例开通公网带宽。
      */
     AllocateIp6AddressesBandwidth(req: AllocateIp6AddressesBandwidthRequest, cb?: (error: string, rep: AllocateIp6AddressesBandwidthResponse) => void): Promise<AllocateIp6AddressesBandwidthResponse>;
     /**
@@ -172,7 +175,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCdcLDCXList(req?: DeleteCdcLDCXListRequest, cb?: (error: string, rep: DeleteCdcLDCXListResponse) => void): Promise<DeleteCdcLDCXListResponse>;
     /**
-     * 该接口用于查询IPV6地址信息
+     * 本接口（DescribeIp6Addresses）用于查询一个或多个传统弹性公网 IPv6 实例的详细信息。
      */
     DescribeIp6Addresses(req: DescribeIp6AddressesRequest, cb?: (error: string, rep: DescribeIp6AddressesResponse) => void): Promise<DescribeIp6AddressesResponse>;
     /**
@@ -936,7 +939,10 @@ LimitTypes取值范围：
      */
     CreateServiceTemplateGroup(req: CreateServiceTemplateGroupRequest, cb?: (error: string, rep: CreateServiceTemplateGroupResponse) => void): Promise<CreateServiceTemplateGroupResponse>;
     /**
-     * 该接口用于给弹性公网IPv6地址释放带宽。
+     * 本接口（ReleaseIp6AddressesBandwidth）用于为传统弹性公网 IPv6 实例关闭 IPv6 公网带宽。
+
+- 传统弹性公网 IPv6 实例关闭公网带宽后，仍具备 IPv6 内网通信能力。
+- 如需再次开通 IPv6 公网带宽，请使用 AllocateIp6AddressesBandwidth 接口进行开通。
      */
     ReleaseIp6AddressesBandwidth(req: ReleaseIp6AddressesBandwidthRequest, cb?: (error: string, rep: ReleaseIp6AddressesBandwidthResponse) => void): Promise<ReleaseIp6AddressesBandwidthResponse>;
     /**
@@ -1338,8 +1344,6 @@ LimitTypes取值范围：
 该接口一般用来封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间封禁, 只能按更粗的云联网实例粒度封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度封禁（LockCcnBandwidths）
 
 如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-
-
      */
     LockCcns(req?: LockCcnsRequest, cb?: (error: string, rep: LockCcnsResponse) => void): Promise<LockCcnsResponse>;
     /**
@@ -1793,7 +1797,10 @@ LimitTypes取值范围：
      */
     DescribeSnapshotPolicies(req: DescribeSnapshotPoliciesRequest, cb?: (error: string, rep: DescribeSnapshotPoliciesResponse) => void): Promise<DescribeSnapshotPoliciesResponse>;
     /**
-     * 该接口用于修改IPV6地址访问internet的带宽
+     * 本接口（ModifyIp6AddressesBandwidt）用于调整传统弹性公网 IPv6 实例的带宽上限。
+
+- 仅支持对传统弹性公网 IPv6 实例的带宽上限进行调整。
+- 如需调整弹性公网 IPv6 实例的带宽上限，请使用 ModifyIPv6AddressesBandwidth 接口。
      */
     ModifyIp6AddressesBandwidth(req: ModifyIp6AddressesBandwidthRequest, cb?: (error: string, rep: ModifyIp6AddressesBandwidthResponse) => void): Promise<ModifyIp6AddressesBandwidthResponse>;
     /**

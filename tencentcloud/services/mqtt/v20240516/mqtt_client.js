@@ -40,16 +40,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
-     * 注册设备证书
+     * 生效设备证书
      */
-    async RegisterDeviceCertificate(req, cb) {
-        return this.request("RegisterDeviceCertificate", req, cb);
+    async ActivateDeviceCertificate(req, cb) {
+        return this.request("ActivateDeviceCertificate", req, cb);
     }
     /**
      * 查询授权规则
      */
     async DescribeAuthorizationPolicies(req, cb) {
         return this.request("DescribeAuthorizationPolicies", req, cb);
+    }
+    /**
+     * 注册设备证书
+     */
+    async RegisterDeviceCertificate(req, cb) {
+        return this.request("RegisterDeviceCertificate", req, cb);
     }
     /**
      * 修改主题属性
@@ -67,7 +73,6 @@ class Client extends abstract_client_1.AbstractClient {
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
-3. InstanceType, 实例类型查询，支持多选
 3. InstanceStatus，实例状态查询，支持多选
 
 当使用TagFilters查询时，Filters参数失效。
@@ -131,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteTopic(req, cb) {
         return this.request("DeleteTopic", req, cb);
+    }
+    /**
+     * 分页查询设备证书
+     */
+    async DescribeDeviceCertificates(req, cb) {
+        return this.request("DescribeDeviceCertificates", req, cb);
     }
     /**
      * 创建MQTT实例的性能测试任务

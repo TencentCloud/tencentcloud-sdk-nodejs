@@ -2010,6 +2010,51 @@ export interface DescribeProxyNodesRequest {
 }
 
 /**
+ * DescribeAuditLogs请求参数结构体
+ */
+export interface DescribeAuditLogsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间，格式为："2017-07-12 10:29:20"。
+   */
+  StartTime: string
+  /**
+   * 结束时间，格式为："2017-07-12 10:29:20"。
+   */
+  EndTime: string
+  /**
+   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
+   */
+  Order?: string
+  /**
+   * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
+   */
+  OrderBy?: string
+  /**
+   * 已废弃。
+   */
+  Filter?: AuditLogFilter
+  /**
+   * 分页参数，单次返回的数据条数。默认值为100，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 过滤条件。多个值之前是且的关系。
+   */
+  LogFilter?: Array<InstanceAuditLogFilter>
+}
+
+/**
  * InquirePriceCreate返回参数结构体
  */
 export interface InquirePriceCreateResponse {
@@ -3006,6 +3051,20 @@ export interface ParamTemplateListInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamInfoSet: Array<TemplateParamInfo>
+}
+
+/**
+ * CloseProxyEndPoint请求参数结构体
+ */
+export interface CloseProxyEndPointRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 数据库代理组ID
+   */
+  ProxyGroupId: string
 }
 
 /**
@@ -5629,48 +5688,21 @@ base-基础版本，common-通用版本，enterprise-企业版本
 }
 
 /**
- * DescribeAuditLogs请求参数结构体
+ * CloseProxyEndPoint返回参数结构体
  */
-export interface DescribeAuditLogsRequest {
+export interface CloseProxyEndPointResponse {
   /**
-   * 实例ID
+   * 异步流程ID
    */
-  InstanceId: string
+  FlowId?: number
   /**
-   * 开始时间，格式为："2017-07-12 10:29:20"。
+   * 异步任务ID
    */
-  StartTime: string
+  TaskId?: number
   /**
-   * 结束时间，格式为："2017-07-12 10:29:20"。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
-   */
-  Order?: string
-  /**
-   * 排序字段。支持值包括：
-"timestamp" - 时间戳；
-"affectRows" - 影响行数；
-"execTime" - 执行时间。
-   */
-  OrderBy?: string
-  /**
-   * 已废弃。
-   */
-  Filter?: AuditLogFilter
-  /**
-   * 分页参数，单次返回的数据条数。默认值为100，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 分页偏移量。
-   */
-  Offset?: number
-  /**
-   * 过滤条件。多个值之前是且的关系。
-   */
-  LogFilter?: Array<InstanceAuditLogFilter>
+  RequestId?: string
 }
 
 /**
@@ -8762,6 +8794,20 @@ export interface PackagePriority {
 }
 
 /**
+ * DescribeInstancesWithinSameCluster请求参数结构体
+ */
+export interface DescribeInstancesWithinSameClusterRequest {
+  /**
+   * vpcId
+   */
+  UniqVpcId: string
+  /**
+   * vip
+   */
+  Vip: string
+}
+
+/**
  * 实例组信息
  */
 export interface CynosdbInstanceGroup {
@@ -9973,6 +10019,24 @@ export interface CreateBackupResponse {
    * 异步任务流ID
    */
   FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstancesWithinSameCluster返回参数结构体
+ */
+export interface DescribeInstancesWithinSameClusterResponse {
+  /**
+   * 实例个数
+   */
+  TotalCount?: number
+  /**
+   * 实例ID列表
+   */
+  InstanceIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

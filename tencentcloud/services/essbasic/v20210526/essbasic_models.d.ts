@@ -2189,6 +2189,11 @@ export interface FlowApproverDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApproverRoleName?: string;
+    /**
+     * 签署参与人在本流程中的编号ID（每个流程不同），可用此ID来定位签署参与人在本流程的签署节点。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SignId?: string;
 }
 /**
  * DescribeResourceUrlsByFlows返回参数结构体

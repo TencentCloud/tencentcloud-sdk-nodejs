@@ -21,6 +21,7 @@ import {
   UpdateAuthorizationPolicyPriorityResponse,
   UpdateAuthorizationPolicyPriorityRequest,
   AuthorizationPolicyItem,
+  DeviceCertificateItem,
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   ModifyJWKSAuthenticatorResponse,
@@ -31,6 +32,7 @@ import {
   DescribeInstanceListRequest,
   ModifyAuthorizationPolicyResponse,
   CreateAuthorizationPolicyRequest,
+  ActivateDeviceCertificateRequest,
   DescribeInstanceResponse,
   DescribeAuthenticatorResponse,
   CreateTopicResponse,
@@ -42,6 +44,7 @@ import {
   CreateJWKSAuthenticatorRequest,
   ModifyTopicResponse,
   DescribeTopicResponse,
+  DescribeDeviceCertificatesRequest,
   CreateJWKSAuthenticatorResponse,
   DeleteAuthenticatorRequest,
   DescribeAuthorizationPoliciesResponse,
@@ -50,17 +53,19 @@ import {
   MQTTTopicItem,
   Filter,
   DeleteAuthorizationPolicyResponse,
+  DescribeDeviceCertificatesResponse,
   ModifyJWKSAuthenticatorRequest,
   ModifyTopicRequest,
   DescribeTopicListResponse,
   DescribeAuthenticatorRequest,
+  MQTTInstanceItem,
   DeleteTopicResponse,
   ModifyAuthorizationPolicyRequest,
   DescribeInstanceRequest,
   MQTTAuthenticatorItem,
   DeleteAuthenticatorResponse,
   TagFilter,
-  MQTTInstanceItem,
+  ActivateDeviceCertificateResponse,
   DescribeInstanceListResponse,
   DescribeTopicRequest,
 } from "./mqtt_models"
@@ -95,13 +100,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册设备证书
+   * 生效设备证书
    */
-  async RegisterDeviceCertificate(
-    req: RegisterDeviceCertificateRequest,
-    cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void
-  ): Promise<RegisterDeviceCertificateResponse> {
-    return this.request("RegisterDeviceCertificate", req, cb)
+  async ActivateDeviceCertificate(
+    req: ActivateDeviceCertificateRequest,
+    cb?: (error: string, rep: ActivateDeviceCertificateResponse) => void
+  ): Promise<ActivateDeviceCertificateResponse> {
+    return this.request("ActivateDeviceCertificate", req, cb)
   }
 
   /**
@@ -112,6 +117,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuthorizationPoliciesResponse) => void
   ): Promise<DescribeAuthorizationPoliciesResponse> {
     return this.request("DescribeAuthorizationPolicies", req, cb)
+  }
+
+  /**
+   * 注册设备证书
+   */
+  async RegisterDeviceCertificate(
+    req: RegisterDeviceCertificateRequest,
+    cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void
+  ): Promise<RegisterDeviceCertificateResponse> {
+    return this.request("RegisterDeviceCertificate", req, cb)
   }
 
   /**
@@ -138,7 +153,6 @@ export class Client extends AbstractClient {
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
-3. InstanceType, 实例类型查询，支持多选
 3. InstanceStatus，实例状态查询，支持多选
 
 当使用TagFilters查询时，Filters参数失效。
@@ -241,6 +255,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTopicResponse) => void
   ): Promise<DeleteTopicResponse> {
     return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 分页查询设备证书
+   */
+  async DescribeDeviceCertificates(
+    req: DescribeDeviceCertificatesRequest,
+    cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
+  ): Promise<DescribeDeviceCertificatesResponse> {
+    return this.request("DescribeDeviceCertificates", req, cb)
   }
 
   /**

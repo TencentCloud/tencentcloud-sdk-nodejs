@@ -168,6 +168,16 @@ it("cynosdb.v20190107.RenewClusters", async function () {
     }
 })
 
+it("cynosdb.v20190107.CloseProxyEndPoint", async function () {
+    try {
+       const data = await client.CloseProxyEndPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CloseProxy", async function () {
     try {
        const data = await client.CloseProxy({})
@@ -531,6 +541,16 @@ it("cynosdb.v20190107.OfflineInstance", async function () {
 it("cynosdb.v20190107.IsolateCluster", async function () {
     try {
        const data = await client.IsolateCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeInstancesWithinSameCluster", async function () {
+    try {
+       const data = await client.DescribeInstancesWithinSameCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
