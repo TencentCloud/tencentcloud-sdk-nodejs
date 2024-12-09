@@ -240,6 +240,10 @@ export interface CreateServiceTemplateRequest {
    * 支持添加备注，单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。Services与ServicesExtra必填其一。
    */
   ServicesExtra?: Array<ServicesInfo>
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -700,6 +704,68 @@ export interface CreateDhcpIpResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安全组规则对象
+ */
+export interface SecurityGroupPolicy {
+  /**
+   * 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyIndex?: number
+  /**
+   * 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 端口(all, 离散port,  range)。
+说明：如果Protocol设置为ALL，则Port也需要设置为all。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: string
+  /**
+   * 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceTemplate?: ServiceTemplateSpecification
+  /**
+   * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CidrBlock?: string
+  /**
+   * 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6CidrBlock?: string
+  /**
+   * 安全组实例ID，例如：sg-ohuuioma。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupId?: string
+  /**
+   * IP地址ID或者IP地址组ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressTemplate?: AddressTemplateSpecification
+  /**
+   * ACCEPT 或 DROP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action?: string
+  /**
+   * 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDescription?: string
+  /**
+   * 安全组最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
 }
 
 /**
@@ -2641,6 +2707,24 @@ export interface DescribeSpecificTrafficPackageUsedDetailsResponse {
 }
 
 /**
+ * DescribeIPv6Addresses返回参数结构体
+ */
+export interface DescribeIPv6AddressesResponse {
+  /**
+   * 符合条件的 IPv6 数量。
+   */
+  TotalCount?: number
+  /**
+   * IPv6 详细信息列表。
+   */
+  AddressSet?: Array<Address>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AttachSnapshotInstances请求参数结构体
  */
 export interface AttachSnapshotInstancesRequest {
@@ -3106,6 +3190,20 @@ export interface UnassignIpv6SubnetCidrBlockRequest {
    * `IPv6` 子网段列表。
    */
   Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>
+}
+
+/**
+ * ModifyIPv6AddressesBandwidth请求参数结构体
+ */
+export interface ModifyIPv6AddressesBandwidthRequest {
+  /**
+   * 弹性公网IPv6地址唯一ID
+   */
+  IPv6AddressIds: Array<string>
+  /**
+   * 弹性公网IPv6地址网络带宽
+   */
+  InternetMaxBandwidthOut: number
 }
 
 /**
@@ -3674,6 +3772,20 @@ export interface ModifyNetworkAclAttributeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyIPv6AddressesAttributes请求参数结构体
+ */
+export interface ModifyIPv6AddressesAttributesRequest {
+  /**
+   * 弹性公网IPv6唯一ID列表。
+   */
+  IPv6AddressIds: Array<string>
+  /**
+   * 弹性公网IPv6地址名称
+   */
+  IPv6AddressName?: string
 }
 
 /**
@@ -5117,28 +5229,28 @@ export interface CreateAddressTemplateGroupRequest {
    * IP地址模板实例ID，例如：ipm-mdunqeb6。
    */
   AddressTemplateIds: Array<string>
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
- * DescribeNatGatewayDirectConnectGatewayRoute请求参数结构体
+ * AssociateIPv6Address请求参数结构体
  */
-export interface DescribeNatGatewayDirectConnectGatewayRouteRequest {
+export interface AssociateIPv6AddressRequest {
   /**
-   * nat的唯一标识
+   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。
    */
-  NatGatewayId: string
+  IPv6AddressId: string
   /**
-   * vpc的唯一标识
+   * 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的networkInterfaceId获取。
    */
-  VpcId: string
+  NetworkInterfaceId?: string
   /**
-   * 0到200之间
+   * 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录控制台查询，也可通过DescribeNetworkInterfaces接口返回值中的Ipv6AddressSet.Address获取。
    */
-  Limit?: number
-  /**
-   * 大于0
-   */
-  Offset?: number
+  PrivateIPv6Address?: string
 }
 
 /**
@@ -5662,65 +5774,13 @@ export interface RenewVpnGatewayRequest {
 }
 
 /**
- * 安全组规则对象
+ * AssociateIPv6Address返回参数结构体
  */
-export interface SecurityGroupPolicy {
+export interface AssociateIPv6AddressResponse {
   /**
-   * 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PolicyIndex?: number
-  /**
-   * 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Protocol?: string
-  /**
-   * 端口(all, 离散port,  range)。
-说明：如果Protocol设置为ALL，则Port也需要设置为all。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: string
-  /**
-   * 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceTemplate?: ServiceTemplateSpecification
-  /**
-   * 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CidrBlock?: string
-  /**
-   * 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ipv6CidrBlock?: string
-  /**
-   * 安全组实例ID，例如：sg-ohuuioma。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SecurityGroupId?: string
-  /**
-   * IP地址ID或者IP地址组ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AddressTemplate?: AddressTemplateSpecification
-  /**
-   * ACCEPT 或 DROP。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Action?: string
-  /**
-   * 安全组规则描述。作为入参时，当未传递该参数或值为空，且参数CidrBlock或Ipv6CidrBlock值为MY_PUBLIC_IP时，该参数的值将会被自动填充为Replaced-From-MY_PUBLIC_IP。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PolicyDescription?: string
-  /**
-   * 安全组最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyTime?: string
+  RequestId?: string
 }
 
 /**
@@ -6461,6 +6521,16 @@ export interface DescribeVpnGatewaySslClientsResponse {
 }
 
 /**
+ * ReleaseIPv6Addresses返回参数结构体
+ */
+export interface ReleaseIPv6AddressesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCcn返回参数结构体
  */
 export interface CreateCcnResponse {
@@ -6505,13 +6575,17 @@ export interface Tag {
 }
 
 /**
- * CreateFlowLog返回参数结构体
+ * DescribeCcnAttachedInstances返回参数结构体
  */
-export interface CreateFlowLogResponse {
+export interface DescribeCcnAttachedInstancesResponse {
   /**
-   * 创建的流日志信息。
+   * 符合条件的对象数。
    */
-  FlowLog?: Array<FlowLog>
+  TotalCount?: number
+  /**
+   * 关联实例列表。
+   */
+  InstanceSet?: Array<CcnAttachedInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6728,6 +6802,20 @@ export interface CreateVpnGatewaySslServerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisassociateIPv6Address请求参数结构体
+ */
+export interface DisassociateIPv6AddressRequest {
+  /**
+   * 弹性公网IPv6唯一ID，EIPv6 唯一 ID 形如：eipv6-11112222。
+   */
+  IPv6AddressId: string
+  /**
+   * 解绑时是否保持绑定弹性网卡。
+   */
+  KeepBindWithEni?: boolean
 }
 
 /**
@@ -7279,17 +7367,13 @@ export interface DescribeSnapshotFilesResponse {
 }
 
 /**
- * DescribeCcnAttachedInstances返回参数结构体
+ * CreateFlowLog返回参数结构体
  */
-export interface DescribeCcnAttachedInstancesResponse {
+export interface CreateFlowLogResponse {
   /**
-   * 符合条件的对象数。
+   * 创建的流日志信息。
    */
-  TotalCount?: number
-  /**
-   * 关联实例列表。
-   */
-  InstanceSet?: Array<CcnAttachedInstance>
+  FlowLog?: Array<FlowLog>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8390,25 +8474,49 @@ export interface DeleteDirectConnectGatewayResponse {
 }
 
 /**
- * ModifyAddressesBandwidth请求参数结构体
+ * DescribeIPv6Addresses请求参数结构体
  */
-export interface ModifyAddressesBandwidthRequest {
+export interface DescribeIPv6AddressesRequest {
   /**
-   * EIP唯一标识ID列表，形如'eip-xxxx'
+   * 标识 IPv6 的唯一 ID 列。
+
+- 传统弹性公网 IPv6 唯一 ID 形如：`eip-11112222`
+- 弹性公网 IPv6 唯一 ID 形如：`eipv6-11112222`
+
+注意：参数不支持同时指定`IPv6AddressIds`和`Filters`。
    */
-  AddressIds: Array<string>
+  IPv6AddressIds?: Array<string>
   /**
-   * 调整带宽目标值
+   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`IPv6AddressIds`和`Filters`。详细的过滤条件如下：
+
+- address-id - String - 是否必填：否 - （过滤条件）按照弹性公网IPv6的唯一ID过滤。
+- public-ipv6-address - String - 是否必填：否 - （过滤条件）按照公网 IPv6 的 IP 地址过滤。
+- network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。
+- instance-id - String - 是否必填：否 - （过滤条件）按照绑定实例的唯一ID过滤。
+- charge-type - String - 是否必填：否 - （过滤条件）按照计费类型过滤。
+- private-ipv6-address - String - 是否必填：否 - （过滤条件）按照绑定的内网 IPv6 地址过滤。
+- egress - String - 是否必填：否 - （过滤条件）按照出口过滤。
+- address-type - String - 是否必填：否 - （过滤条件）按照IPv6类型 进行过滤。可选值：'EIP6'，'EIPv6'，'WanIPv6'，'HighQualityEIPv6'。默认值是'EIPv6'。
+- address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'。
+- address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。状态包含：'CREATING'，'BINDING'，'BIND'，'UNBINDING'，'UNBIND'，'OFFLINING'，'BIND_ENI'，'PRIVATE'。
+- address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。
+- tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。
+- tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。
+- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。
    */
-  InternetMaxBandwidthOut: number
+  Filters?: Array<Filter>
   /**
-   * 包月带宽起始时间(已废弃，输入无效)
+   * 是否查询传统型IPv6地址信息。
    */
-  StartTime?: string
+  Traditional?: boolean
   /**
-   * 包月带宽结束时间(已废弃，输入无效)
+   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
    */
-  EndTime?: string
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -8758,6 +8866,80 @@ export interface ModifyVpnGatewayAttributeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AllocateIPv6Addresses请求参数结构体
+ */
+export interface AllocateIPv6AddressesRequest {
+  /**
+   * EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名。
+   */
+  AddressName?: string
+  /**
+   * 弹性公网IPv6类型，可选值：
+
+- EIPv6：普通IPv6
+- HighQualityEIPv6：精品IPv6
+注意：需联系产品开通精品IPv6白名单，且仅部分地域支持精品IPv6
+
+默认值：EIPv6。
+   */
+  AddressType?: string
+  /**
+   * 申请的弹性公网IPv6数量，默认值：1。
+   */
+  AddressCount?: number
+  /**
+   * 弹性公网IPv6计费方式，可选值：
+
+- BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费
+- TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+
+默认值：TRAFFIC_POSTPAID_BY_HOUR。
+   */
+  InternetChargeType?: string
+  /**
+   * 弹性公网IPv6线路类型，默认值：BGP。
+
+已开通静态单线IP白名单的用户，可选值：
+- CMCC：中国移动
+- CTCC：中国电信
+- CUCC：中国联通
+注意：仅部分地域支持静态单线IP。
+   */
+  InternetServiceProvider?: string
+  /**
+   * 弹性公网IPv6带宽上限，单位：Mbps。
+
+可选值范围取决于EIP计费方式：
+
+- BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps
+- TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps
+
+默认值：1 Mbps。
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 带宽包唯一ID参数。
+设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费。
+   */
+  BandwidthPackageId?: string
+  /**
+   * 需要关联的标签列表。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 弹性公网IPv6网络出口，可选值：
+
+- CENTER_EGRESS_1：中心出口一
+- CENTER_EGRESS_2：中心出口二
+- CENTER_EGRESS_3：中心出口三
+注意：不同运营商或资源类型对应的网络出口需要联系产品开白
+
+默认值：CENTER_EGRESS_1。
+   */
+  Egress?: string
 }
 
 /**
@@ -11665,6 +11847,28 @@ export interface DescribeNetworkAclsResponse {
 }
 
 /**
+ * DescribeNatGatewayDirectConnectGatewayRoute请求参数结构体
+ */
+export interface DescribeNatGatewayDirectConnectGatewayRouteRequest {
+  /**
+   * nat的唯一标识
+   */
+  NatGatewayId: string
+  /**
+   * vpc的唯一标识
+   */
+  VpcId: string
+  /**
+   * 0到200之间
+   */
+  Limit?: number
+  /**
+   * 大于0
+   */
+  Offset?: number
+}
+
+/**
  * DeleteFlowLog返回参数结构体
  */
 export interface DeleteFlowLogResponse {
@@ -11936,6 +12140,24 @@ export interface AccountAttribute {
    * 属性值
    */
   AttributeValues?: Array<string>
+}
+
+/**
+ * AllocateIPv6Addresses返回参数结构体
+ */
+export interface AllocateIPv6AddressesResponse {
+  /**
+   * 申请到的弹性公网 IPv6 地址的唯一 ID 列表。
+   */
+  AddressSet?: Array<string>
+  /**
+   * 异步任务TaskId，可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12378,21 +12600,23 @@ VPN网关：`VPNGW`</li>
 }
 
 /**
- * EnableRoutes请求参数结构体
+ * ReleaseIPv6Addresses请求参数结构体
  */
-export interface EnableRoutesRequest {
+export interface ReleaseIPv6AddressesRequest {
   /**
-   * 路由表唯一ID。
+   * IPv6地址唯一ID。
    */
-  RouteTableId: string
+  IPv6AddressIds: Array<string>
+}
+
+/**
+ * DisassociateIPv6Address返回参数结构体
+ */
+export interface DisassociateIPv6AddressResponse {
   /**
-   * 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RouteIds?: Array<number | bigint>
-  /**
-   * 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
-   */
-  RouteItemIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -13544,6 +13768,28 @@ export interface VpnGateway {
 }
 
 /**
+ * ModifyAddressesBandwidth请求参数结构体
+ */
+export interface ModifyAddressesBandwidthRequest {
+  /**
+   * EIP唯一标识ID列表，形如'eip-xxxx'
+   */
+  AddressIds: Array<string>
+  /**
+   * 调整带宽目标值
+   */
+  InternetMaxBandwidthOut: number
+  /**
+   * 包月带宽起始时间(已废弃，输入无效)
+   */
+  StartTime?: string
+  /**
+   * 包月带宽结束时间(已废弃，输入无效)
+   */
+  EndTime?: string
+}
+
+/**
  * EnableVpcEndPointConnect请求参数结构体
  */
 export interface EnableVpcEndPointConnectRequest {
@@ -13924,6 +14170,16 @@ export interface DescribeRouteTableAssociatedInstancesResponse {
  * ModifyRouteTableAttribute返回参数结构体
  */
 export interface ModifyRouteTableAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyIPv6AddressesBandwidth返回参数结构体
+ */
+export interface ModifyIPv6AddressesBandwidthResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16271,6 +16527,10 @@ export interface CreateAddressTemplateRequest {
    * 地址信息，支持携带备注，支持 IP、CIDR、IP 范围。Addresses与AddressesExtra必填其一。
    */
   AddressesExtra?: Array<AddressInfo>
+  /**
+   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -17711,6 +17971,24 @@ export interface CreateDhcpIpRequest {
 }
 
 /**
+ * EnableRoutes请求参数结构体
+ */
+export interface EnableRoutesRequest {
+  /**
+   * 路由表唯一ID。
+   */
+  RouteTableId: string
+  /**
+   * 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
+   */
+  RouteIds?: Array<number | bigint>
+  /**
+   * 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。单次处理上限100个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
+   */
+  RouteItemIds?: Array<string>
+}
+
+/**
  * DeleteTrafficPackages返回参数结构体
  */
 export interface DeleteTrafficPackagesResponse {
@@ -17816,6 +18094,16 @@ export type CreateCdcNetPlanesRequest = null
  * CreatePrivateNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
  */
 export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyIPv6AddressesAttributes返回参数结构体
+ */
+export interface ModifyIPv6AddressesAttributesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

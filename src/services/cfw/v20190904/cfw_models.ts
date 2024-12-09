@@ -7326,7 +7326,7 @@ export interface ModifyTableStatusResponse {
  */
 export interface DescribeBlockStaticListResponse {
   /**
-   * 无
+   * 查询结果
    */
   Data?: Array<StaticInfo>
   /**

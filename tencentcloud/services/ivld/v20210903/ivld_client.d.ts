@@ -121,8 +121,6 @@ URL字段推荐您使用COS地址，其形式为`https://${Bucket}-${AppId}.cos.
     CreateCustomCategory(req: CreateCustomCategoryRequest, cb?: (error: string, rep: CreateCustomCategoryResponse) => void): Promise<CreateCustomCategoryResponse>;
     /**
      * 批量描述自定义人物
-
-
      */
     DescribeCustomPersons(req: DescribeCustomPersonsRequest, cb?: (error: string, rep: DescribeCustomPersonsResponse) => void): Promise<DescribeCustomPersonsResponse>;
     /**

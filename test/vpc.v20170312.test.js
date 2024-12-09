@@ -88,6 +88,16 @@ it("vpc.v20170312.ModifyAddressInternetChargeType", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyIPv6AddressesAttributes", async function () {
+    try {
+       const data = await client.ModifyIPv6AddressesAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreatePrivateNatGateway", async function () {
     try {
        const data = await client.CreatePrivateNatGateway({})
@@ -1118,6 +1128,16 @@ it("vpc.v20170312.UnassignIpv6Addresses", async function () {
     }
 })
 
+it("vpc.v20170312.AssociateIPv6Address", async function () {
+    try {
+       const data = await client.AssociateIPv6Address({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteAddressTemplateGroup", async function () {
     try {
        const data = await client.DeleteAddressTemplateGroup({})
@@ -1188,9 +1208,9 @@ it("vpc.v20170312.ModifyVpnGatewayRoutes", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeVpcEndPointService", async function () {
+it("vpc.v20170312.ModifyIPv6AddressesBandwidth", async function () {
     try {
-       const data = await client.DescribeVpcEndPointService({})
+       const data = await client.ModifyIPv6AddressesBandwidth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1198,9 +1218,9 @@ it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     }
 })
 
-it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+it("vpc.v20170312.DescribeCrossBorderCcnRegionBandwidthLimits", async function () {
     try {
-       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
+       const data = await client.DescribeCrossBorderCcnRegionBandwidthLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1221,16 +1241,6 @@ it("vpc.v20170312.ModifySnapshotPolicies", async function () {
 it("vpc.v20170312.DeleteVpnGatewaySslClient", async function () {
     try {
        const data = await client.DeleteVpnGatewaySslClient({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("vpc.v20170312.DescribeCrossBorderCcnRegionBandwidthLimits", async function () {
-    try {
-       const data = await client.DescribeCrossBorderCcnRegionBandwidthLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2368,6 +2378,16 @@ it("vpc.v20170312.DeleteNatGatewaySourceIpTranslationNatRule", async function ()
     }
 })
 
+it("vpc.v20170312.DisassociateIPv6Address", async function () {
+    try {
+       const data = await client.DisassociateIPv6Address({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyNatGatewaySourceIpTranslationNatRule", async function () {
     try {
        const data = await client.ModifyNatGatewaySourceIpTranslationNatRule({})
@@ -2798,6 +2818,16 @@ it("vpc.v20170312.DescribeTrafficQosPolicy", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeIPv6Addresses", async function () {
+    try {
+       const data = await client.DescribeIPv6Addresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateFlowLog", async function () {
     try {
        const data = await client.CreateFlowLog({})
@@ -2921,6 +2951,26 @@ it("vpc.v20170312.InquiryPriceRenewVpnGateway", async function () {
 it("vpc.v20170312.DeleteSnapshotPolicies", async function () {
     try {
        const data = await client.DeleteSnapshotPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeVpcEndPointService", async function () {
+    try {
+       const data = await client.DescribeVpcEndPointService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+    try {
+       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3288,6 +3338,16 @@ it("vpc.v20170312.ModifyHighPriorityRouteTableAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.ReleaseIPv6Addresses", async function () {
+    try {
+       const data = await client.ReleaseIPv6Addresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteReserveIpAddresses", async function () {
     try {
        const data = await client.DeleteReserveIpAddresses({})
@@ -3621,6 +3681,16 @@ it("vpc.v20170312.ClearRouteTableSelectionPolicies", async function () {
 it("vpc.v20170312.MigrateNetworkInterface", async function () {
     try {
        const data = await client.MigrateNetworkInterface({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.AllocateIPv6Addresses", async function () {
+    try {
+       const data = await client.AllocateIPv6Addresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

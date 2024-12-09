@@ -188,9 +188,9 @@ it("cynosdb.v20190107.CloseProxy", async function () {
     }
 })
 
-it("cynosdb.v20190107.ExportResourcePackageDeductDetails", async function () {
+it("cynosdb.v20190107.DescribeProxySpecs", async function () {
     try {
-       const data = await client.ExportResourcePackageDeductDetails({})
+       const data = await client.DescribeProxySpecs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,6 +948,16 @@ it("cynosdb.v20190107.BindClusterResourcePackages", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeServerlessInstanceSpecs", async function () {
+    try {
+       const data = await client.DescribeServerlessInstanceSpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeAuditLogs", async function () {
     try {
        const data = await client.DescribeAuditLogs({})
@@ -1318,9 +1328,9 @@ it("cynosdb.v20190107.DescribeMaintainPeriod", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeProxySpecs", async function () {
+it("cynosdb.v20190107.ExportResourcePackageDeductDetails", async function () {
     try {
-       const data = await client.DescribeProxySpecs({})
+       const data = await client.ExportResourcePackageDeductDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

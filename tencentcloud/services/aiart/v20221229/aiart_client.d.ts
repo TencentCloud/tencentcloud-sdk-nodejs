@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ReplaceBackgroundRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ChangeClothesRequest, ReplaceBackgroundResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ReplaceBackgroundRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ChangeClothesRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
@@ -38,13 +38,10 @@ export declare class Client extends AbstractClient {
      */
     SubmitTrainPortraitModelJob(req: SubmitTrainPortraitModelJobRequest, cb?: (error: string, rep: SubmitTrainPortraitModelJobResponse) => void): Promise<SubmitTrainPortraitModelJobResponse>;
     /**
-     * 本接口已迁移至腾讯混元大模型-混元生图，即将停止此处维护，可切换至 [混元生图 API](https://cloud.tencent.com/document/product/1729/105970) 继续使用。
-文生图（高级版）接口基于高级版文生图大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
-提交任务：输入文本等，提交一个文生图（高级版）异步任务，获得任务 ID。
-查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
-并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     * 扩图接口支持对输入图像按指定宽高比实现智能扩图。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
      */
-    QueryTextToImageProJob(req: QueryTextToImageProJobRequest, cb?: (error: string, rep: QueryTextToImageProJobResponse) => void): Promise<QueryTextToImageProJobResponse>;
+    ImageOutpainting(req: ImageOutpaintingRequest, cb?: (error: string, rep: ImageOutpaintingResponse) => void): Promise<ImageOutpaintingResponse>;
     /**
      * 百变头像接口将根据输入的人像照片，生成风格百变的头像。
 百变头像默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
@@ -101,6 +98,14 @@ export declare class Client extends AbstractClient {
 智能文生图默认提供3个并发任务数，代表最多能同时处理3个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
     TextToImage(req: TextToImageRequest, cb?: (error: string, rep: TextToImageResponse) => void): Promise<TextToImageResponse>;
+    /**
+     * 本接口已迁移至腾讯混元大模型-混元生图，即将停止此处维护，可切换至 [混元生图 API](https://cloud.tencent.com/document/product/1729/105970) 继续使用。
+文生图（高级版）接口基于高级版文生图大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
+提交任务：输入文本等，提交一个文生图（高级版）异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    QueryTextToImageProJob(req: QueryTextToImageProJobRequest, cb?: (error: string, rep: QueryTextToImageProJobResponse) => void): Promise<QueryTextToImageProJobResponse>;
     /**
      * 上传正面全身模特照和服装平铺图，生成模特换装后的图片。
 生成的换装图片分辨率和模特照分辨率一致。

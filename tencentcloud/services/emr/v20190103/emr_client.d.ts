@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeHBaseTableOverviewRequest, ScaleOutInstanceResponse, DescribeClusterFlowStatusDetailResponse, DescribeHDFSStorageInfoResponse, ModifyUserManagerPwdResponse, DescribeHiveQueriesRequest, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeServiceNodeInfosRequest, DescribeServiceNodeInfosResponse, DescribeInstancesResponse, DescribeTrinoQueryInfoResponse, TerminateTasksResponse, DeleteAutoScaleStrategyResponse, CreateSLInstanceRequest, ScaleOutInstanceRequest, ResetYarnConfigRequest, DescribeHBaseTableOverviewResponse, DescribeAutoScaleGroupGlobalConfRequest, ModifyAutoScaleStrategyRequest, DescribeSparkQueriesRequest, ModifyYarnDeployResponse, ModifyResourceScheduleConfigResponse, DescribeKyuubiQueryInfoResponse, TerminateSLInstanceRequest, AddUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailResponse, DescribeYarnQueueResponse, AddMetricScaleStrategyRequest, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, DescribeSparkQueriesResponse, DescribeAutoScaleStrategiesResponse, ModifyGlobalConfigRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, DescribeHDFSStorageInfoRequest, DescribeResourceScheduleRequest, DescribeGlobalConfigResponse, ModifyYarnDeployRequest, DescribeClusterFlowStatusDetailRequest, DescribeUsersForUserManagerRequest, DescribeInsightListRequest, DescribeYarnScheduleHistoryRequest, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, RunJobFlowResponse, DescribeYarnQueueRequest, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, CreateSLInstanceResponse, DescribeYarnScheduleHistoryResponse, DescribeAutoScaleGroupGlobalConfResponse, DescribeEmrApplicationStaticsRequest, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateInstanceRequest, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeKyuubiQueryInfoRequest, ModifyGlobalConfigResponse, ModifySLInstanceRequest, DescribeInsightListResponse, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, DescribeSLInstanceListRequest, CreateClusterRequest, AddMetricScaleStrategyResponse, ScaleOutClusterRequest, DescribeClusterNodesRequest, ModifyYarnQueueV2Request, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeSLInstanceListResponse, DescribeSLInstanceResponse, DescribeInstancesRequest, TerminateSLInstanceResponse, ModifyAutoRenewFlagResponse, InquiryPriceUpdateInstanceRequest, DescribeAutoScaleStrategiesRequest, DeployYarnConfRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteAutoScaleStrategyRequest, DeployYarnConfResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailRequest, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, DescribeSLInstanceRequest, InquiryPriceCreateInstanceRequest, DescribeEmrOverviewMetricsResponse, SyncPodStateRequest, ModifyAutoRenewFlagRequest, ModifyResourceScheduleConfigRequest, DescribeEmrOverviewMetricsRequest, ScaleOutClusterResponse, ModifyYarnQueueV2Response, ModifyAutoScaleStrategyResponse, InquiryPriceScaleOutInstanceRequest, DescribeStarRocksQueryInfoRequest, ModifySLInstanceResponse, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, ResetYarnConfigResponse, DescribeStarRocksQueryInfoResponse, ModifyUserManagerPwdRequest, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeTrinoQueryInfoRequest, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, DescribeJobFlowResponse, DescribeGlobalConfigRequest, TerminateInstanceResponse } from "./emr_models";
+import { DescribeHBaseTableOverviewRequest, DescribeClusterFlowStatusDetailResponse, DescribeHDFSStorageInfoResponse, ModifyUserManagerPwdResponse, DescribeHiveQueriesRequest, ModifyPodNumResponse, CreateInstanceResponse, TerminateTasksRequest, DescribeServiceNodeInfosRequest, DescribeServiceNodeInfosResponse, DescribeInstancesResponse, DescribeTrinoQueryInfoResponse, TerminateTasksResponse, DeleteAutoScaleStrategyResponse, ModifyPodNumRequest, CreateCloudInstanceResponse, ScaleOutInstanceRequest, ResetYarnConfigRequest, DescribeHBaseTableOverviewResponse, DescribeAutoScaleGroupGlobalConfRequest, ModifyAutoScaleStrategyRequest, DescribeSparkQueriesRequest, ModifyYarnDeployResponse, ModifyResourceScheduleConfigResponse, DescribeKyuubiQueryInfoResponse, TerminateSLInstanceRequest, AddUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailResponse, DescribeYarnQueueResponse, ScaleOutInstanceResponse, AddMetricScaleStrategyRequest, DescribeInstancesListResponse, DescribeInstanceRenewNodesRequest, DescribeSparkQueriesResponse, DescribeAutoScaleStrategiesResponse, ModifyGlobalConfigRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, DescribeHDFSStorageInfoRequest, DescribeResourceScheduleRequest, SyncPodStateResponse, DescribeGlobalConfigResponse, ModifyYarnDeployRequest, DescribeClusterFlowStatusDetailRequest, DescribeUsersForUserManagerRequest, TerminateClusterNodesResponse, DescribeInsightListRequest, DescribeYarnScheduleHistoryRequest, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, RunJobFlowResponse, DescribeYarnQueueRequest, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, CreateSLInstanceResponse, DescribeYarnScheduleHistoryResponse, DescribeAutoScaleGroupGlobalConfResponse, DescribeEmrApplicationStaticsRequest, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateInstanceRequest, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeKyuubiQueryInfoRequest, ModifyGlobalConfigResponse, ModifySLInstanceRequest, DescribeInsightListResponse, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, DescribeSLInstanceListRequest, CreateClusterRequest, CreateCloudInstanceRequest, AddMetricScaleStrategyResponse, ScaleOutClusterRequest, DescribeClusterNodesRequest, ModifyYarnQueueV2Request, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeSLInstanceListResponse, DescribeEmrOverviewMetricsResponse, DescribeInstancesRequest, TerminateSLInstanceResponse, ModifyAutoRenewFlagResponse, InquiryPriceUpdateInstanceRequest, DescribeAutoScaleStrategiesRequest, DeployYarnConfRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteAutoScaleStrategyRequest, DeployYarnConfResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, DescribeResourceScheduleDiffDetailRequest, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, DescribeSLInstanceRequest, InquiryPriceCreateInstanceRequest, DescribeSLInstanceResponse, SyncPodStateRequest, ModifyAutoRenewFlagRequest, ModifyResourceScheduleConfigRequest, DescribeEmrOverviewMetricsRequest, ScaleOutClusterResponse, ModifyYarnQueueV2Response, ModifyAutoScaleStrategyResponse, InquiryPriceScaleOutInstanceRequest, DescribeStarRocksQueryInfoRequest, ModifySLInstanceResponse, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, ResetYarnConfigResponse, DescribeStarRocksQueryInfoResponse, ModifyUserManagerPwdRequest, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeTrinoQueryInfoRequest, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, CreateSLInstanceRequest, DescribeJobFlowResponse, DescribeGlobalConfigRequest, TerminateInstanceResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -8,9 +8,9 @@ import { DescribeHBaseTableOverviewRequest, ScaleOutInstanceResponse, DescribeCl
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * DescribeYarnApplications
+     * 查询待续费节点信息
      */
-    DescribeYarnApplications(req: DescribeYarnApplicationsRequest, cb?: (error: string, rep: DescribeYarnApplicationsResponse) => void): Promise<DescribeYarnApplicationsResponse>;
+    DescribeInstanceRenewNodes(req: DescribeInstanceRenewNodesRequest, cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void): Promise<DescribeInstanceRenewNodesResponse>;
     /**
      * 强制修改标签
      */
@@ -40,9 +40,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyYarnQueueV2(req: ModifyYarnQueueV2Request, cb?: (error: string, rep: ModifyYarnQueueV2Response) => void): Promise<ModifyYarnQueueV2Response>;
     /**
-     * 查询待续费节点信息
+     * 创建EMR容器集群实例
      */
-    DescribeInstanceRenewNodes(req: DescribeInstanceRenewNodesRequest, cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void): Promise<DescribeInstanceRenewNodesResponse>;
+    CreateCloudInstance(req: CreateCloudInstanceRequest, cb?: (error: string, rep: CreateCloudInstanceResponse) => void): Promise<CreateCloudInstanceResponse>;
     /**
      * yarn资源调度-部署生效
      */
@@ -63,6 +63,10 @@ export declare class Client extends AbstractClient {
      * 获取账户的CVM配额
      */
     DescribeCvmQuota(req: DescribeCvmQuotaRequest, cb?: (error: string, rep: DescribeCvmQuotaResponse) => void): Promise<DescribeCvmQuotaResponse>;
+    /**
+     * DescribeYarnApplications
+     */
+    DescribeYarnApplications(req: DescribeYarnApplicationsRequest, cb?: (error: string, rep: DescribeYarnApplicationsResponse) => void): Promise<DescribeYarnApplicationsResponse>;
     /**
      * 修改YARN资源调度的全局配置
      */
@@ -266,6 +270,10 @@ export declare class Client extends AbstractClient {
      * 获取洞察结果信息
      */
     DescribeInsightList(req: DescribeInsightListRequest, cb?: (error: string, rep: DescribeInsightListResponse) => void): Promise<DescribeInsightListResponse>;
+    /**
+     * 调整Pod数量
+     */
+    ModifyPodNum(req: ModifyPodNumRequest, cb?: (error: string, rep: ModifyPodNumResponse) => void): Promise<ModifyPodNumResponse>;
     /**
      * 扩容集群节点
      */

@@ -26,6 +26,8 @@ import {
   ResultConfig,
   QueryTrainPortraitModelJobRequest,
   ReplaceBackgroundRequest,
+  ReplaceBackgroundResponse,
+  ImageOutpaintingRequest,
   SubmitTextToImageProJobRequest,
   QueryDrawPortraitJobResponse,
   QueryTrainPortraitModelJobResponse,
@@ -42,7 +44,7 @@ import {
   ImageToImageResponse,
   SketchToImageResponse,
   ChangeClothesRequest,
-  ReplaceBackgroundResponse,
+  ImageOutpaintingResponse,
   UploadTrainPortraitImagesResponse,
   QueryTextToImageProJobRequest,
   GenerateAvatarResponse,
@@ -114,17 +116,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口已迁移至腾讯混元大模型-混元生图，即将停止此处维护，可切换至 [混元生图 API](https://cloud.tencent.com/document/product/1729/105970) 继续使用。
-文生图（高级版）接口基于高级版文生图大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
-提交任务：输入文本等，提交一个文生图（高级版）异步任务，获得任务 ID。
-查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
-并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     * 扩图接口支持对输入图像按指定宽高比实现智能扩图。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
      */
-  async QueryTextToImageProJob(
-    req: QueryTextToImageProJobRequest,
-    cb?: (error: string, rep: QueryTextToImageProJobResponse) => void
-  ): Promise<QueryTextToImageProJobResponse> {
-    return this.request("QueryTextToImageProJob", req, cb)
+  async ImageOutpainting(
+    req: ImageOutpaintingRequest,
+    cb?: (error: string, rep: ImageOutpaintingResponse) => void
+  ): Promise<ImageOutpaintingResponse> {
+    return this.request("ImageOutpainting", req, cb)
   }
 
   /**
@@ -217,6 +216,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextToImageResponse) => void
   ): Promise<TextToImageResponse> {
     return this.request("TextToImage", req, cb)
+  }
+
+  /**
+     * 本接口已迁移至腾讯混元大模型-混元生图，即将停止此处维护，可切换至 [混元生图 API](https://cloud.tencent.com/document/product/1729/105970) 继续使用。
+文生图（高级版）接口基于高级版文生图大模型，将根据输入的文本描述，智能生成与之相关的结果图。分为提交任务和查询任务2个接口。
+提交任务：输入文本等，提交一个文生图（高级版）异步任务，获得任务 ID。
+查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async QueryTextToImageProJob(
+    req: QueryTextToImageProJobRequest,
+    cb?: (error: string, rep: QueryTextToImageProJobResponse) => void
+  ): Promise<QueryTextToImageProJobResponse> {
+    return this.request("QueryTextToImageProJob", req, cb)
   }
 
   /**

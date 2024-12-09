@@ -133,7 +133,7 @@ video 纯视频
    */
   LiveType?: number
   /**
-   * 伪直播链接
+   * 伪直播链接。 支持的协议以及格式： 协议：HTTP、HTTPS、RTMP、HLS 。格式：FLV、MP3、MP4、MPEG-TS、MOV、MKV、M4A。视频编码：H.264、VP8。音频编码：AAC、OPUS。
    */
   RecordLiveUrl?: string
   /**

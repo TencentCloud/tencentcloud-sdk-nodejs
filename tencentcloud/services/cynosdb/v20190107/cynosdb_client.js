@@ -130,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseProxy", req, cb);
     }
     /**
-     * 资源包使用明细导出
+     * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
      */
-    async ExportResourcePackageDeductDetails(req, cb) {
-        return this.request("ExportResourcePackageDeductDetails", req, cb);
+    async DescribeProxySpecs(req, cb) {
+        return this.request("DescribeProxySpecs", req, cb);
     }
     /**
      * 变配预付费集群询价
@@ -586,6 +586,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindClusterResourcePackages", req, cb);
     }
     /**
+     * 查询Serverless实例可选规格
+     */
+    async DescribeServerlessInstanceSpecs(req, cb) {
+        return this.request("DescribeServerlessInstanceSpecs", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
      */
     async DescribeAuditLogs(req, cb) {
@@ -808,10 +814,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMaintainPeriod", req, cb);
     }
     /**
-     * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
+     * 资源包使用明细导出
      */
-    async DescribeProxySpecs(req, cb) {
-        return this.request("DescribeProxySpecs", req, cb);
+    async ExportResourcePackageDeductDetails(req, cb) {
+        return this.request("ExportResourcePackageDeductDetails", req, cb);
     }
     /**
      * 本接口（DescribeClusterDetailDatabases）用于查询数据库列表。

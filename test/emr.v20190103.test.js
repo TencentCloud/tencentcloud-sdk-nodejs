@@ -18,9 +18,9 @@ const client = new tencentcloud.emr.v20190103.Client({
 })
 describe("emr.v20190103.test.js", function () {
 
-it("emr.v20190103.DescribeYarnApplications", async function () {
+it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
     try {
-       const data = await client.DescribeYarnApplications({})
+       const data = await client.DescribeInstanceRenewNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("emr.v20190103.ModifyYarnQueueV2", async function () {
     }
 })
 
-it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
+it("emr.v20190103.CreateCloudInstance", async function () {
     try {
-       const data = await client.DescribeInstanceRenewNodes({})
+       const data = await client.CreateCloudInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +151,16 @@ it("emr.v20190103.DescribeAutoScaleRecords", async function () {
 it("emr.v20190103.DescribeCvmQuota", async function () {
     try {
        const data = await client.DescribeCvmQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeYarnApplications", async function () {
+    try {
+       const data = await client.DescribeYarnApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +651,16 @@ it("emr.v20190103.ModifyResourcePools", async function () {
 it("emr.v20190103.DescribeInsightList", async function () {
     try {
        const data = await client.DescribeInsightList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyPodNum", async function () {
+    try {
+       const data = await client.ModifyPodNum({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

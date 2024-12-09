@@ -24,7 +24,7 @@ import {
   PodSpecInfo,
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
-  ScaleOutInstanceResponse,
+  NodeSelector,
   DescribeClusterFlowStatusDetailResponse,
   SchedulerTaskInfo,
   DynamicPodSpec,
@@ -32,7 +32,7 @@ import {
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
   DescribeHiveQueriesRequest,
-  SyncPodStateResponse,
+  ModifyPodNumResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
   TerminateTasksRequest,
@@ -50,7 +50,7 @@ import {
   DescribeTrinoQueryInfoResponse,
   PriceResult,
   TrinoQueryInfo,
-  WeekRepeatStrategy,
+  PreferredSchedulingTerm,
   SparkQuery,
   Dps,
   TerminateTasksResponse,
@@ -58,11 +58,12 @@ import {
   OverviewRow,
   DiskSpec,
   LoadAutoScaleStrategy,
+  ModifyPodNumRequest,
   SLInstanceInfo,
   DefaultSetting,
   COSSettings,
   ClusterInstancesInfo,
-  CreateSLInstanceRequest,
+  CreateCloudInstanceResponse,
   ScaleOutInstanceRequest,
   ResetYarnConfigRequest,
   KyuubiQueryInfo,
@@ -75,22 +76,26 @@ import {
   ModifyResourceScheduleConfigResponse,
   InsightResult,
   NodeDetailPriceResult,
+  UserAndGroup,
+  VolumeSetting,
   Tag,
   DescribeKyuubiQueryInfoResponse,
   TerminateSLInstanceRequest,
   Arg,
   ClusterIDToFlowID,
   EmrListInstance,
-  ServiceNodeDetailInfo,
+  Disk,
   AddUsersForUserManagerResponse,
   SearchItem,
   DescribeResourceScheduleDiffDetailResponse,
   DescribeYarnQueueResponse,
   TopologyInfo,
   SchedulerTaskDetail,
+  ScaleOutInstanceResponse,
   NodeResourceSpec,
   AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
+  HostPathVolumeSource,
   VPCSettings,
   DiffHeader,
   DescribeInstancesListResponse,
@@ -99,6 +104,7 @@ import {
   JobResult,
   PrePaySetting,
   FlowParam,
+  NodeAffinity,
   DescribeAutoScaleStrategiesResponse,
   ModifyGlobalConfigRequest,
   StopParams,
@@ -106,17 +112,20 @@ import {
   PodSpec,
   InquiryPriceRenewInstanceResponse,
   DescribeJobFlowRequest,
+  CloudResource,
   InquiryPriceCreateInstanceResponse,
   StartStopServiceOrMonitorRequest,
   StarRocksQueryInfo,
   DescribeHDFSStorageInfoRequest,
   OverviewMetricData,
+  WeekRepeatStrategy,
   AutoScaleRecord,
   JobFlowResourceSpec,
   HealthStatus,
   Configuration,
   DescribeResourceScheduleRequest,
   ZoneSetting,
+  SyncPodStateResponse,
   AllNodeResourceSpec,
   Placement,
   DescribeGlobalConfigResponse,
@@ -124,6 +133,7 @@ import {
   PodParameter,
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
+  TerminateClusterNodesResponse,
   ConfigSetInfo,
   DiffDetail,
   DescribeInsightListRequest,
@@ -135,6 +145,7 @@ import {
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
   GroupGlobalConfs,
+  ServiceNodeDetailInfo,
   ScaleOutServiceConfGroupsInfo,
   CreateSLInstanceResponse,
   UserManagerUserBriefInfo,
@@ -156,7 +167,7 @@ import {
   TerminateInstanceRequest,
   TriggerCondition,
   MetricTags,
-  TerminateClusterNodesResponse,
+  ExternalAccess,
   ModifyResourceSchedulerRequest,
   LoginSettings,
   RunJobFlowRequest,
@@ -173,7 +184,7 @@ import {
   DescribeCvmQuotaResponse,
   DescribeSLInstanceListRequest,
   CreateClusterRequest,
-  UserAndGroup,
+  CreateCloudInstanceRequest,
   AddMetricScaleStrategyResponse,
   SubnetInfo,
   BootstrapAction,
@@ -189,7 +200,7 @@ import {
   Execution,
   DescribeSLInstanceListResponse,
   UpdateInstanceSettings,
-  DescribeSLInstanceResponse,
+  DescribeEmrOverviewMetricsResponse,
   ScriptBootstrapActionConfig,
   CapacityGlobalConfig,
   DescribeInstancesRequest,
@@ -198,6 +209,7 @@ import {
   PodNewSpec,
   ModifyAutoRenewFlagResponse,
   InquiryPriceUpdateInstanceRequest,
+  UserInfoForUserManager,
   DescribeAutoScaleStrategiesRequest,
   DeployYarnConfRequest,
   TerminateClusterNodesRequest,
@@ -209,9 +221,11 @@ import {
   OutterResource,
   OpScope,
   DeleteAutoScaleStrategyRequest,
+  CLBSetting,
   DeployYarnConfResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
+  ShortNodeInfo,
   Period,
   DayRepeatStrategy,
   DescribeYarnApplicationsResponse,
@@ -231,13 +245,13 @@ import {
   CustomMetaInfo,
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
-  DescribeEmrOverviewMetricsResponse,
+  DescribeSLInstanceResponse,
   SyncPodStateRequest,
   MultiZoneSetting,
   ModifyAutoRenewFlagRequest,
   UserManagerFilter,
   ModifyResourceScheduleConfigRequest,
-  UserInfoForUserManager,
+  StrategyConfig,
   PodNewParameter,
   DescribeEmrOverviewMetricsRequest,
   PodState,
@@ -271,10 +285,10 @@ import {
   AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
   VirtualPrivateCloud,
-  StrategyConfig,
+  NodeSelectorRequirement,
   ResourceDetail,
   SceneSoftwareConfig,
-  ShortNodeInfo,
+  NodeSelectorTerm,
   DescribeTrinoQueryInfoRequest,
   EmrPrice,
   NodeHardwareInfo,
@@ -282,6 +296,7 @@ import {
   DescribeAutoScaleRecordsRequest,
   Filters,
   ModifyResourcePoolsRequest,
+  CreateSLInstanceRequest,
   DescribeJobFlowResponse,
   InstanceChargePrepaid,
   DescribeGlobalConfigRequest,
@@ -298,13 +313,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeYarnApplications
+   * 查询待续费节点信息
    */
-  async DescribeYarnApplications(
-    req: DescribeYarnApplicationsRequest,
-    cb?: (error: string, rep: DescribeYarnApplicationsResponse) => void
-  ): Promise<DescribeYarnApplicationsResponse> {
-    return this.request("DescribeYarnApplications", req, cb)
+  async DescribeInstanceRenewNodes(
+    req: DescribeInstanceRenewNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void
+  ): Promise<DescribeInstanceRenewNodesResponse> {
+    return this.request("DescribeInstanceRenewNodes", req, cb)
   }
 
   /**
@@ -378,13 +393,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询待续费节点信息
+   * 创建EMR容器集群实例
    */
-  async DescribeInstanceRenewNodes(
-    req: DescribeInstanceRenewNodesRequest,
-    cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void
-  ): Promise<DescribeInstanceRenewNodesResponse> {
-    return this.request("DescribeInstanceRenewNodes", req, cb)
+  async CreateCloudInstance(
+    req: CreateCloudInstanceRequest,
+    cb?: (error: string, rep: CreateCloudInstanceResponse) => void
+  ): Promise<CreateCloudInstanceResponse> {
+    return this.request("CreateCloudInstance", req, cb)
   }
 
   /**
@@ -435,6 +450,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCvmQuotaResponse) => void
   ): Promise<DescribeCvmQuotaResponse> {
     return this.request("DescribeCvmQuota", req, cb)
+  }
+
+  /**
+   * DescribeYarnApplications
+   */
+  async DescribeYarnApplications(
+    req: DescribeYarnApplicationsRequest,
+    cb?: (error: string, rep: DescribeYarnApplicationsResponse) => void
+  ): Promise<DescribeYarnApplicationsResponse> {
+    return this.request("DescribeYarnApplications", req, cb)
   }
 
   /**
@@ -932,6 +957,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInsightListResponse) => void
   ): Promise<DescribeInsightListResponse> {
     return this.request("DescribeInsightList", req, cb)
+  }
+
+  /**
+   * 调整Pod数量
+   */
+  async ModifyPodNum(
+    req: ModifyPodNumRequest,
+    cb?: (error: string, rep: ModifyPodNumResponse) => void
+  ): Promise<ModifyPodNumResponse> {
+    return this.request("ModifyPodNum", req, cb)
   }
 
   /**

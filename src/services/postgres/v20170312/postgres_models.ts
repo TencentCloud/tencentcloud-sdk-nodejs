@@ -240,7 +240,7 @@ export interface DeleteReadOnlyGroupResponse {
    * 流程ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -507,23 +507,23 @@ export interface ParameterTemplate {
   /**
    * 参数模板ID
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 参数模板名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 参数模板适用的数据库版本
    */
-  DBMajorVersion: string
+  DBMajorVersion?: string
   /**
    * 参数模板适用的数据库引擎
    */
-  DBEngine: string
+  DBEngine?: string
   /**
    * 参数模板描述
    */
-  TemplateDescription: string
+  TemplateDescription?: string
 }
 
 /**
@@ -576,7 +576,7 @@ export interface ModifyDBInstanceReadOnlyGroupResponse {
   /**
    * 流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1255,63 +1255,63 @@ export interface NormalQueryItem {
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 调用次数
    */
-  Calls: number
+  Calls?: number
   /**
    * 粒度点
    */
-  CallsGrids: Array<number | bigint>
+  CallsGrids?: Array<number | bigint>
   /**
    * 花费总时间
    */
-  CostTime: number
+  CostTime?: number
   /**
    * 影响的行数
    */
-  Rows: number
+  Rows?: number
   /**
    * 花费最小时间
    */
-  MinCostTime: number
+  MinCostTime?: number
   /**
    * 花费最大时间
    */
-  MaxCostTime: number
+  MaxCostTime?: number
   /**
    * 最早一条慢SQL时间
    */
-  FirstTime: string
+  FirstTime?: string
   /**
    * 最晚一条慢SQL时间
    */
-  LastTime: string
+  LastTime?: string
   /**
    * 读共享内存块数
    */
-  SharedReadBlks: number
+  SharedReadBlks?: number
   /**
    * 写共享内存块数
    */
-  SharedWriteBlks: number
+  SharedWriteBlks?: number
   /**
    * 读io总耗时
    */
-  ReadCostTime: number
+  ReadCostTime?: number
   /**
    * 写io总耗时
    */
-  WriteCostTime: number
+  WriteCostTime?: number
   /**
    * 数据库名字
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
    * 脱敏后的慢SQL
    */
-  NormalQuery: string
+  NormalQuery?: string
 }
 
 /**
@@ -1455,7 +1455,7 @@ export interface AddDBInstanceToReadOnlyGroupResponse {
   /**
    * 流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1806,27 +1806,27 @@ export interface ServerlessDBInstanceNetInfo {
    * 地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
    * ip地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ip: string
+  Ip?: string
   /**
    * 端口号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port: number
+  Port?: number
   /**
    * 状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 网络类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetType: string
+  NetType?: string
 }
 
 /**
@@ -1885,81 +1885,81 @@ export interface ReadOnlyGroup {
    * 只读组标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadOnlyGroupId: string
+  ReadOnlyGroupId?: string
   /**
    * 只读组名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadOnlyGroupName: string
+  ReadOnlyGroupName?: string
   /**
    * 项目id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 主实例id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterDBInstanceId: string
+  MasterDBInstanceId?: string
   /**
    * 最小保留实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MinDelayEliminateReserve: number
+  MinDelayEliminateReserve?: number
   /**
    * 延迟空间大小阈值
    */
-  MaxReplayLatency: number
+  MaxReplayLatency?: number
   /**
    * 延迟大小开关
    */
-  ReplayLatencyEliminate: number
+  ReplayLatencyEliminate?: number
   /**
    * 延迟时间大小阈值
    */
-  MaxReplayLag: number
+  MaxReplayLag?: number
   /**
    * 延迟时间开关
    */
-  ReplayLagEliminate: number
+  ReplayLagEliminate?: number
   /**
    * 虚拟网络id
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 地域id
    */
-  Region: string
+  Region?: string
   /**
    * 地区id
    */
-  Zone: string
+  Zone?: string
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 实例详细信息
    */
-  ReadOnlyDBInstanceList: Array<DBInstance>
+  ReadOnlyDBInstanceList?: Array<DBInstance>
   /**
    * 自动负载均衡开关
    */
-  Rebalance: number
+  Rebalance?: number
   /**
    * 网络信息
    */
-  DBInstanceNetInfo: Array<DBInstanceNetInfo>
+  DBInstanceNetInfo?: Array<DBInstanceNetInfo>
   /**
    * 只读组网络信息列表（此字段已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetworkAccessList: Array<NetworkAccess>
+  NetworkAccessList?: Array<NetworkAccess>
 }
 
 /**
@@ -2281,7 +2281,7 @@ export interface RemoveDBInstanceFromReadOnlyGroupResponse {
   /**
    * 流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2554,27 +2554,27 @@ export interface PgDeal {
   /**
    * 订单名
    */
-  DealName: string
+  DealName?: string
   /**
    * 所属用户
    */
-  OwnerUin: string
+  OwnerUin?: string
   /**
    * 订单涉及多少个实例
    */
-  Count: number
+  Count?: number
   /**
    * 付费模式。1-预付费；0-后付费
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 异步任务流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 实例ID数组
    */
-  DBInstanceIdSet: Array<string>
+  DBInstanceIdSet?: Array<string>
 }
 
 /**
@@ -2868,42 +2868,42 @@ export interface EventInfo {
    * 参数名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 原参数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldValue: string
+  OldValue?: string
   /**
    * 本次修改期望参数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NewValue: string
+  NewValue?: string
   /**
    * 后台参数修改开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 后台参数生效开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EffectiveTime: string
+  EffectiveTime?: string
   /**
    * 修改状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  State: string
+  State?: string
   /**
    * 操作者（一般为用户sub UIN）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Operator: string
+  Operator?: string
   /**
    * 时间日志。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventLog: string
+  EventLog?: string
 }
 
 /**
@@ -2993,27 +2993,27 @@ export interface Xlog {
   /**
    * 备份文件唯一标识
    */
-  Id: number
+  Id?: number
   /**
    * 文件生成的开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 文件生成的结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 内网下载地址
    */
-  InternalAddr: string
+  InternalAddr?: string
   /**
    * 外网下载地址
    */
-  ExternalAddr: string
+  ExternalAddr?: string
   /**
    * 备份文件大小
    */
-  Size: number
+  Size?: number
 }
 
 /**
@@ -3343,7 +3343,7 @@ export interface CreateParameterTemplateResponse {
   /**
    * 参数模板ID，用于唯一确认参数模板
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3677,32 +3677,32 @@ export interface EncryptionKey {
    * KMS实例加密的KeyId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyId: string
+  KeyId?: string
   /**
    * KMS实例加密Key的别名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyAlias: string
+  KeyAlias?: string
   /**
    * 实例加密密钥DEK的密文。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DEKCipherTextBlob: string
+  DEKCipherTextBlob?: string
   /**
    * 密钥是否启用，1-启用， 0-未启用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsEnabled: number
+  IsEnabled?: number
   /**
    * KMS密钥所在地域。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KeyRegion: string
+  KeyRegion?: string
   /**
    * DEK密钥创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -3796,19 +3796,19 @@ export interface ErrLogDetail {
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 数据库名字
    */
-  Database: string
+  Database?: string
   /**
    * 错误发生时间
    */
-  ErrTime: string
+  ErrTime?: string
   /**
    * 错误消息
    */
-  ErrMsg: string
+  ErrMsg?: string
 }
 
 /**
@@ -5336,7 +5336,7 @@ export interface RestartDBInstanceResponse {
   /**
    * 异步流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5566,17 +5566,17 @@ export interface ServerlessDBAccount {
    * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DBUser: string
+  DBUser?: string
   /**
    * 密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DBPassword: string
+  DBPassword?: string
   /**
    * 连接数限制
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DBConnLimit: number
+  DBConnLimit?: number
 }
 
 /**
@@ -5638,7 +5638,7 @@ export interface RestoreDBInstanceObjectsRequest {
    */
   DBInstanceId: string
   /**
-   * 需要恢复的对象列表。假设需要恢复的对象名为test，则恢复后的名称为test_bak_${LinuxTime}。${LinuxTime}无法指定，由系统根据任务发起的linux时间设定。
+   * 需要恢复的对象列表。假设需要恢复的对象名为user，则恢复后的名称为user_bak_${LinuxTime}。${LinuxTime}无法指定，由系统根据任务发起的linux时间设定。
    */
   RestoreObjects: Array<string>
   /**

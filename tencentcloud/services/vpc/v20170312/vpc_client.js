@@ -74,6 +74,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAddressInternetChargeType", req, cb);
     }
     /**
+     * 本接口（ModifyIPv6AddressesAttributes）用于修改弹性公网 IPv6（简称EIPv6）实例名称。
+
+- 支持对弹性公网 IPv6 和传统弹性公网 IPv6 实例名称进行修改。
+     */
+    async ModifyIPv6AddressesAttributes(req, cb) {
+        return this.request("ModifyIPv6AddressesAttributes", req, cb);
+    }
+    /**
      * 本接口（CreatePrivateNatGateway）用于创建私网NAT网关。
      */
     async CreatePrivateNatGateway(req, cb) {
@@ -824,6 +832,15 @@ LimitTypes取值范围：
         return this.request("UnassignIpv6Addresses", req, cb);
     }
     /**
+     * 本接口（AssociateIPv6Address）用于将弹性公网IPv6（简称EIPv6）实例绑定到 CVM 或弹性网卡配置的内网 IPv6 地址上。
+
+- 将 EIPv6 绑定到 CVM 上，其本质是将 EIPv6 绑定到 CVM 弹性网卡所配置的内网 IPv6 地址上。
+- 将 EIPv6 绑定到指定网卡的内网 IPv6 时，需确保该内网 IPv6 地址为未绑定状态，才能执行绑定操作。
+     */
+    async AssociateIPv6Address(req, cb) {
+        return this.request("AssociateIPv6Address", req, cb);
+    }
+    /**
      * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合。
 >?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
 >
@@ -868,16 +885,18 @@ LimitTypes取值范围：
         return this.request("ModifyVpnGatewayRoutes", req, cb);
     }
     /**
-     * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
+     * 本接口（ModifyIPv6AddressesBandwidth）用于调整弹性公网 IPv6（简称EIPv6）实例的带宽上限。
      */
-    async DescribeVpcEndPointService(req, cb) {
-        return this.request("DescribeVpcEndPointService", req, cb);
+    async ModifyIPv6AddressesBandwidth(req, cb) {
+        return this.request("ModifyIPv6AddressesBandwidth", req, cb);
     }
     /**
-     * 刷新专线直连nat路由，更新nat到专线的路由表
+     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
      */
-    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
-        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
+    async DescribeCrossBorderCcnRegionBandwidthLimits(req, cb) {
+        return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb);
     }
     /**
      * 本接口（ModifySnapshotPolicies）用于修改快照策略。
@@ -890,14 +909,6 @@ LimitTypes取值范围：
      */
     async DeleteVpnGatewaySslClient(req, cb) {
         return this.request("DeleteVpnGatewaySslClient", req, cb);
-    }
-    /**
-     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
-该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
-如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-     */
-    async DescribeCrossBorderCcnRegionBandwidthLimits(req, cb) {
-        return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb);
     }
     /**
      * 本接口(CreateNatGatewayDestinationIpPortTranslationNatRule)用于创建NAT网关端口转发规则。
@@ -1679,6 +1690,15 @@ LimitTypes取值范围：
         return this.request("DeleteNatGatewaySourceIpTranslationNatRule", req, cb);
     }
     /**
+     * 本接口（DisassociateIPv6Address）用于解绑弹性公网 IPv6（简称EIPv6）实例。
+
+- 支持对 CVM、弹性网卡绑定的 EIPv6 实例进行解绑操作。
+- 只有状态为 BIND 和 BIND_ENI 的 EIPv6 实例才能进行解绑操作。
+     */
+    async DisassociateIPv6Address(req, cb) {
+        return this.request("DisassociateIPv6Address", req, cb);
+    }
+    /**
      * 本接口（ModifyNatGatewaySourceIpTranslationNatRule）用于修改NAT网关SNAT转发规则。
      */
     async ModifyNatGatewaySourceIpTranslationNatRule(req, cb) {
@@ -1949,6 +1969,15 @@ LimitTypes取值范围：
         return this.request("DescribeTrafficQosPolicy", req, cb);
     }
     /**
+     * 本接口（DescribeIPv6Addresses）用于查询一个或多个弹性公网 IPv6（简称 EIPv6）实例的详细信息。
+
+- 支持查询您在指定地域的弹性公网 IPv6 和传统弹性公网 IPv6 实例信息
+- 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的 EIPv6。
+     */
+    async DescribeIPv6Addresses(req, cb) {
+        return this.request("DescribeIPv6Addresses", req, cb);
+    }
+    /**
      * 本接口（CreateFlowLog）用于创建网络流日志。
      */
     async CreateFlowLog(req, cb) {
@@ -1993,8 +2022,7 @@ LimitTypes取值范围：
         return this.request("DisassociateNetworkInterfaceSecurityGroups", req, cb);
     }
     /**
-     * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br />
-注意: 调用本接口是先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
+     * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br /> 注意: 调用本接口时先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
      */
     async ResetRoutes(req, cb) {
         return this.request("ResetRoutes", req, cb);
@@ -2030,6 +2058,18 @@ LimitTypes取值范围：
      */
     async DeleteSnapshotPolicies(req, cb) {
         return this.request("DeleteSnapshotPolicies", req, cb);
+    }
+    /**
+     * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
+     */
+    async DescribeVpcEndPointService(req, cb) {
+        return this.request("DescribeVpcEndPointService", req, cb);
+    }
+    /**
+     * 刷新专线直连nat路由，更新nat到专线的路由表
+     */
+    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
     }
     /**
      * 本接口（CreatePrivateNatGatewayTranslationNatRule）用于创建私网NAT网关源端转换规则。
@@ -2271,6 +2311,15 @@ LimitTypes取值范围：
         return this.request("ModifyHighPriorityRouteTableAttribute", req, cb);
     }
     /**
+     * 本接口（ReleaseIPv6Addresses）用于释放一个或多个弹性公网IPv6（简称EIPv6）实例。
+
+- 支持对已申请到的弹性公网 IPv6 实例进行释放操作，如需再次使用，请重新申请。
+- 只有状态为 UNBIND 的 EIPv6 实例才能进行释放操作。
+     */
+    async ReleaseIPv6Addresses(req, cb) {
+        return this.request("ReleaseIPv6Addresses", req, cb);
+    }
+    /**
      * 删除内网保留IP
      */
     async DeleteReserveIpAddresses(req, cb) {
@@ -2503,6 +2552,16 @@ LimitTypes取值范围：
         return this.request("MigrateNetworkInterface", req, cb);
     }
     /**
+     * 本接口（AllocateIPv6Addresses）用于申请一个或多个弹性公网IPv6（简称EIPv6）实例。
+
+- EIPv6 是您在腾讯云某个地域可以独立申请和持有的，固定不变的公网 IPv6 地址，提供与弹性公网 IPv4 一致的产品体验。
+- 通过弹性公网 IPv6，您可以快速将 EIPv6 实例绑定到云资源的内网 IPv6 地址上，实现为云资源快速开通 IPv6 公网带宽。
+- 您还可以按需将 EIPv6 实例绑定到其他云资源上，从而屏蔽实例故障。
+     */
+    async AllocateIPv6Addresses(req, cb) {
+        return this.request("AllocateIPv6Addresses", req, cb);
+    }
+    /**
      * 本接口（ModifyAssistantCidr）用于批量修改辅助CIDR，支持新增和删除。
      */
     async ModifyAssistantCidr(req, cb) {
@@ -2557,7 +2616,7 @@ LimitTypes取值范围：
         return this.request("DescribeSnapshotPolicies", req, cb);
     }
     /**
-     * 本接口（ModifyIp6AddressesBandwidt）用于调整传统弹性公网 IPv6 实例的带宽上限。
+     * 本接口（ModifyIp6AddressesBandwidth）用于调整传统弹性公网 IPv6 实例的带宽上限。
 
 - 仅支持对传统弹性公网 IPv6 实例的带宽上限进行调整。
 - 如需调整弹性公网 IPv6 实例的带宽上限，请使用 ModifyIPv6AddressesBandwidth 接口。

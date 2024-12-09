@@ -154,42 +154,14 @@ export interface DescribeHBaseTableOverviewRequest {
     OrderType?: string;
 }
 /**
- * ScaleOutInstance返回参数结构体
+ * Pod强制调度节点选择条件
  */
-export interface ScaleOutInstanceResponse {
+export interface NodeSelector {
     /**
-     * 实例ID。
-     */
-    InstanceId?: string;
-    /**
-     * 订单号。
+     * Pod强制调度节点选择条件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealNames?: Array<string>;
-    /**
-     * 客户端Token。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientToken?: string;
-    /**
-     * 扩容流程ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowId?: number;
-    /**
-     * 大订单号。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillId?: string;
-    /**
-     * 扩容TraceId
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TraceId?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    NodeSelectorTerms?: Array<NodeSelectorTerm>;
 }
 /**
  * DescribeClusterFlowStatusDetail返回参数结构体
@@ -498,9 +470,19 @@ export interface DescribeHiveQueriesRequest {
     EndTimeLte?: number;
 }
 /**
- * SyncPodState返回参数结构体
+ * ModifyPodNum返回参数结构体
  */
-export interface SyncPodStateResponse {
+export interface ModifyPodNumResponse {
+    /**
+     * 集群Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 流程Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1112,19 +1094,19 @@ export interface TrinoQueryInfo {
     WrittenBytes?: number;
 }
 /**
- * 定时扩容每周重复任务策略
+ * Pod容忍调度节点选择项
  */
-export interface WeekRepeatStrategy {
+export interface PreferredSchedulingTerm {
     /**
-     * 重复任务执行的具体时刻，例如"01:02:00"
+     * 权重，范围1-100
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecuteAtTimeOfDay: string;
+    Weight?: number;
     /**
-     * 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。
+     * 节点选择表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DaysOfWeek: Array<number | bigint>;
+    Preference?: NodeSelectorTerm;
 }
 /**
  * spark查询详情
@@ -1368,6 +1350,27 @@ export interface LoadAutoScaleStrategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadMetricsConditions?: LoadMetricsConditions;
+}
+/**
+ * ModifyPodNum请求参数结构体
+ */
+export interface ModifyPodNumRequest {
+    /**
+     * 集群Id
+     */
+    InstanceId: string;
+    /**
+     * 服务编号
+     */
+    ServiceGroup: number;
+    /**
+     * 角色编号
+     */
+    ServiceType: number;
+    /**
+     * 期望Pod数量
+     */
+    PodNum: number;
 }
 /**
  * Serverless HBase 实例信息
@@ -1751,41 +1754,18 @@ export interface ClusterInstancesInfo {
     BindFileSystemNum?: number;
 }
 /**
- * CreateSLInstance请求参数结构体
+ * CreateCloudInstance返回参数结构体
  */
-export interface CreateSLInstanceRequest {
+export interface CreateCloudInstanceResponse {
     /**
-     * 实例名称。
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceId?: string;
     /**
-     * 实例计费模式，0表示后付费，即按量计费。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    PayMode: number;
-    /**
-     * 实例存储类型，填写CLOUD_HSSD，表示性能云存储。
-     */
-    DiskType: string;
-    /**
-     * 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。
-     */
-    DiskSize: number;
-    /**
-     * 实例节点规格，可填写4C16G、8C32G、16C64G、32C128G，不区分大小写。
-     */
-    NodeType: string;
-    /**
-     * 实例可用区详细配置，当前支持多可用区，可用区数量只能为1或3，包含区域名称，VPC信息、节点数量，其中所有区域节点总数需大于等于3，小于等于50。
-     */
-    ZoneSettings: Array<ZoneSetting>;
-    /**
-     * 实例要绑定的标签列表。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 预付费参数
-     */
-    PrePaySetting?: PrePaySetting;
+    RequestId?: string;
 }
 /**
  * ScaleOutInstance请求参数结构体
@@ -2245,6 +2225,39 @@ export interface NodeDetailPriceResult {
     PartDetailPrice: Array<PartDetailPriceItem>;
 }
 /**
+ * 容器集群用户组信息
+ */
+export interface UserAndGroup {
+    /**
+     * 用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserName: string;
+    /**
+     * 用户组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserGroup: string;
+}
+/**
+ * 数据卷目录设置
+ */
+export interface VolumeSetting {
+    /**
+     * 数据卷类型
+  <li>HOST_PATH表示支持本机路径</li>
+  <li>NEW_PVC表示新建PVC</li>
+  组件角色支持的数据卷类型可参考 EMR on TKE 集群部署说明：[部署说明](https://cloud.tencent.com/document/product/589/94254)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeType?: string;
+    /**
+     * 主机路径信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostPath?: HostPathVolumeSource;
+}
+/**
  * 标签
  */
 export interface Tag {
@@ -2465,102 +2478,26 @@ export interface EmrListInstance {
     IsDedicatedCluster?: boolean;
 }
 /**
- * 服务进程信息
+ * 磁盘信息
  */
-export interface ServiceNodeDetailInfo {
+export interface Disk {
     /**
-     * 进程所在节点IP
-     */
-    Ip?: string;
-    /**
-     * 进程类型
-     */
-    NodeType?: number;
-    /**
-     * 进程名称
-     */
-    NodeName?: string;
-    /**
-     * 服务组件状态
-     */
-    ServiceStatus?: number;
-    /**
-     * 进程监控状态
-     */
-    MonitorStatus?: number;
-    /**
-     * 服务组件状态
-     */
-    Status?: number;
-    /**
-     * 进程端口信息
-     */
-    PortsInfo?: string;
-    /**
-     * 最近重启时间
-     */
-    LastRestartTime?: string;
-    /**
-     * 节点类型
-     */
-    Flag?: number;
-    /**
-     * 配置组ID
-     */
-    ConfGroupId?: number;
-    /**
-     * 配置组名称
-     */
-    ConfGroupName?: string;
-    /**
-     * 节点是否需要重启
-     */
-    ConfStatus?: number;
-    /**
-     * 进程探测信息
+     * 数据盘类型，创建EMR容器集群实例可选
+  <li> SSD云盘: CLOUD_SSD</li>
+  <li>高效云盘: CLOUD_PREMIUM</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceDetectionInfo?: Array<ServiceProcessFunctionInfo>;
+    DiskType?: string;
     /**
-     * 节点类型
+     * 单块大小GB
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeFlagFilter?: string;
+    DiskCapacity?: number;
     /**
-     * 进程健康状态
+     * 数据盘数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthStatus?: HealthStatus;
-    /**
-     * 角色是否支持监控
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsSupportRoleMonitor?: boolean;
-    /**
-     * 暂停策略
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StopPolicies?: Array<RestartPolicy>;
-    /**
-     * 测试环境api强校验，现网没有，emrcc接口返回有。不加会报错
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HAState?: string;
-    /**
-     * NameService名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NameService?: string;
-    /**
-     * 是否支持联邦
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsFederation?: boolean;
-    /**
-     * datanode是否是维护状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DataNodeMaintenanceState?: number;
+    DiskNumber?: number;
 }
 /**
  * AddUsersForUserManager返回参数结构体
@@ -2676,6 +2613,44 @@ export interface SchedulerTaskDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     JobId?: number;
+}
+/**
+ * ScaleOutInstance返回参数结构体
+ */
+export interface ScaleOutInstanceResponse {
+    /**
+     * 实例ID。
+     */
+    InstanceId?: string;
+    /**
+     * 订单号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealNames?: Array<string>;
+    /**
+     * 客户端Token。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientToken?: string;
+    /**
+     * 扩容流程ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: number;
+    /**
+     * 大订单号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillId?: string;
+    /**
+     * 扩容TraceId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TraceId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 资源详情
@@ -2829,6 +2804,21 @@ export interface EmrProductConfigOutter {
     PublicKeyId: string;
 }
 /**
+ * 主机路径
+ */
+export interface HostPathVolumeSource {
+    /**
+     * 主机路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path?: string;
+    /**
+     * 主机路径类型，当前默认DirectoryOrCreate
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+}
+/**
  * VPC 参数
  */
 export interface VPCSettings {
@@ -2959,6 +2949,21 @@ export interface FlowParam {
      * 参数value
      */
     FValue: string;
+}
+/**
+ * 节点亲和性设置
+ */
+export interface NodeAffinity {
+    /**
+     * 节点亲和性-强制调度设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequiredDuringSchedulingIgnoredDuringExecution?: NodeSelector;
+    /**
+     * 节点亲和性-容忍调度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PreferredDuringSchedulingIgnoredDuringExecution?: Array<PreferredSchedulingTerm>;
 }
 /**
  * DescribeAutoScaleStrategies返回参数结构体
@@ -3126,6 +3131,52 @@ export interface DescribeJobFlowRequest {
      * 流程任务Id，RunJobFlow接口返回的值。
      */
     JobFlowId: number;
+}
+/**
+ * 容器集群Pod请求资源信息
+ */
+export interface CloudResource {
+    /**
+     * 组件角色名
+     */
+    ComponentName: string;
+    /**
+     * pod请求数量
+     */
+    PodNumber: number;
+    /**
+     * Cpu请求数量最大值
+     */
+    LimitCpu: number;
+    /**
+     * 内存请求数量最大值
+     */
+    LimitMemory: number;
+    /**
+     * 服务名称，如HIVE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Service?: string;
+    /**
+     * 数据卷目录设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeDir?: VolumeSetting;
+    /**
+     * 组件外部访问设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExternalAccess?: ExternalAccess;
+    /**
+     * 节点亲和性设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Affinity?: NodeAffinity;
+    /**
+     * 所选数据盘信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Disks?: Array<Disk>;
 }
 /**
  * InquiryPriceCreateInstance返回参数结构体
@@ -3350,6 +3401,21 @@ export interface OverviewMetricData {
     Tags?: MetricTags;
 }
 /**
+ * 定时扩容每周重复任务策略
+ */
+export interface WeekRepeatStrategy {
+    /**
+     * 重复任务执行的具体时刻，例如"01:02:00"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecuteAtTimeOfDay: string;
+    /**
+     * 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DaysOfWeek: Array<number | bigint>;
+}
+/**
  * 弹性扩缩容记录
  */
 export interface AutoScaleRecord {
@@ -3512,6 +3578,15 @@ export interface ZoneSetting {
      * 可用区节点数量
      */
     NodeNum: number;
+}
+/**
+ * SyncPodState返回参数结构体
+ */
+export interface SyncPodStateResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 资源描述
@@ -3789,6 +3864,19 @@ export interface DescribeUsersForUserManagerRequest {
     NeedKeytabInfo?: boolean;
 }
 /**
+ * TerminateClusterNodes返回参数结构体
+ */
+export interface TerminateClusterNodesResponse {
+    /**
+     * 缩容流程ID。
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 资源调度-配置集信息
  */
 export interface ConfigSetInfo {
@@ -4052,6 +4140,104 @@ export interface GroupGlobalConfs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentSpotPaidNodes?: number;
+}
+/**
+ * 服务进程信息
+ */
+export interface ServiceNodeDetailInfo {
+    /**
+     * 进程所在节点IP
+     */
+    Ip?: string;
+    /**
+     * 进程类型
+     */
+    NodeType?: number;
+    /**
+     * 进程名称
+     */
+    NodeName?: string;
+    /**
+     * 服务组件状态
+     */
+    ServiceStatus?: number;
+    /**
+     * 进程监控状态
+     */
+    MonitorStatus?: number;
+    /**
+     * 服务组件状态
+     */
+    Status?: number;
+    /**
+     * 进程端口信息
+     */
+    PortsInfo?: string;
+    /**
+     * 最近重启时间
+     */
+    LastRestartTime?: string;
+    /**
+     * 节点类型
+     */
+    Flag?: number;
+    /**
+     * 配置组ID
+     */
+    ConfGroupId?: number;
+    /**
+     * 配置组名称
+     */
+    ConfGroupName?: string;
+    /**
+     * 节点是否需要重启
+     */
+    ConfStatus?: number;
+    /**
+     * 进程探测信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceDetectionInfo?: Array<ServiceProcessFunctionInfo>;
+    /**
+     * 节点类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeFlagFilter?: string;
+    /**
+     * 进程健康状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthStatus?: HealthStatus;
+    /**
+     * 角色是否支持监控
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportRoleMonitor?: boolean;
+    /**
+     * 暂停策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StopPolicies?: Array<RestartPolicy>;
+    /**
+     * 测试环境api强校验，现网没有，emrcc接口返回有。不加会报错
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HAState?: string;
+    /**
+     * NameService名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameService?: string;
+    /**
+     * 是否支持联邦
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsFederation?: boolean;
+    /**
+     * datanode是否是维护状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataNodeMaintenanceState?: number;
 }
 /**
  * 扩容指定配置组
@@ -4613,17 +4799,19 @@ export interface MetricTags {
     Type?: string;
 }
 /**
- * TerminateClusterNodes返回参数结构体
+ * 容器集群外部访问设置
  */
-export interface TerminateClusterNodesResponse {
+export interface ExternalAccess {
     /**
-     * 缩容流程ID。
+     * 外部访问类型，当前仅支持CLB字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId?: number;
+    Type?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * CLB设置信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    CLBServer?: CLBSetting;
 }
 /**
  * ModifyResourceScheduler请求参数结构体
@@ -5252,19 +5440,85 @@ export interface CreateClusterRequest {
     CosBucket?: string;
 }
 /**
- * 容器集群用户组信息
+ * CreateCloudInstance请求参数结构体
  */
-export interface UserAndGroup {
+export interface CreateCloudInstanceRequest {
     /**
-     * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例名称。
+  <li>长度限制为6-36个字符。</li>
+  <li>只允许包含中文、字母、数字、-、_。</li>
      */
-    UserName: string;
+    InstanceName: string;
     /**
-     * 用户组
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 容器集群类型，取值范围
+  <li>EMR容器集群实例: EMR-TKE</li>
      */
-    UserGroup: string;
+    ClusterClass: string;
+    /**
+     * 部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
+  
+     */
+    Software: Array<string>;
+    /**
+     * 容器平台类型，取值范围
+  <li>EMR容器集群实例: tke</li>
+     */
+    PlatFormType: string;
+    /**
+     * cos存储桶
+     */
+    CosBucket: string;
+    /**
+     * 容器集群id
+     */
+    EksClusterId?: string;
+    /**
+     * 产品Id，不同产品ID表示不同的EMR产品版本。取值范围：
+  <li>60:表示EMR-TKE-V1.1.0</li>
+  <li>55:表示EMR-TKE-V1.0.1</li>
+  <li>52:表示EMR-TKE-V1.0.0</li>
+     */
+    ProductId?: number;
+    /**
+     * 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6----fae36063280
+  示例值：a9a90aa6----fae36063280
+     */
+    ClientToken?: string;
+    /**
+     * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+     */
+    VPCSettings?: VPCSettings;
+    /**
+     * 所有组件角色及其对应的Pod资源请求信息
+     */
+    CloudResources?: Array<CloudResource>;
+    /**
+     * 安全组Id，为空默认创建新的安全组
+     */
+    SgId?: string;
+    /**
+     * 元数据库信息
+  MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填
+  当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId
+  当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass
+     */
+    MetaDBInfo?: CustomMetaDBInfo;
+    /**
+     * 标签信息
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 登陆密码，LoginSettings中的Password字段
+     */
+    LoginSettings?: LoginSettings;
+    /**
+     * 共享服务信息
+     */
+    ExternalService?: Array<ExternalService>;
+    /**
+     * 可用区id
+     */
+    ZoneId?: number;
 }
 /**
  * AddMetricScaleStrategy返回参数结构体
@@ -5856,78 +6110,13 @@ export interface UpdateInstanceSettings {
     InstanceType?: string;
 }
 /**
- * DescribeSLInstance返回参数结构体
+ * DescribeEmrOverviewMetrics返回参数结构体
  */
-export interface DescribeSLInstanceResponse {
+export interface DescribeEmrOverviewMetricsResponse {
     /**
-     * 实例字符串标识。
+     * 指标数据明细
      */
-    InstanceId?: string;
-    /**
-     * 实例名称。
-     */
-    InstanceName?: string;
-    /**
-     * 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。
-     */
-    PayMode?: number;
-    /**
-     * 实例存储类型。
-     */
-    DiskType?: string;
-    /**
-     * 实例单节点磁盘容量，单位GB。
-     */
-    DiskSize?: number;
-    /**
-     * 实例节点规格。
-     */
-    NodeType?: string;
-    /**
-     * 实例可用区详细配置，包含可用区名称，VPC信息、节点数量。
-     */
-    ZoneSettings?: Array<ZoneSetting>;
-    /**
-     * 实例绑定的标签列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 实例数字标识。
-     */
-    ClusterId?: number;
-    /**
-     * 实例区域ID。
-     */
-    RegionId?: number;
-    /**
-     * 实例主可用区。
-     */
-    Zone?: string;
-    /**
-     * 实例过期时间，后付费返回0000-00-00 00:00:00
-     */
-    ExpireTime?: string;
-    /**
-     * 实例隔离时间，未隔离返回0000-00-00 00:00:00。
-     */
-    IsolateTime?: string;
-    /**
-     * 实例创建时间。
-     */
-    CreateTime?: string;
-    /**
-     * 实例状态码，-2:  "TERMINATED", 2:   "RUNNING", 14:  "TERMINATING", 19:  "ISOLATING", 22:  "ADJUSTING", 201: "ISOLATED"。
-     */
-    Status?: number;
-    /**
-     * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0
-     */
-    AutoRenewFlag?: number;
-    /**
-     * 实例节点总数。
-     */
-    NodeNum?: number;
+    Result?: Array<OverviewMetricData>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6154,6 +6343,27 @@ export interface InquiryPriceUpdateInstanceRequest {
      * 批量变配资源ID列表
      */
     ResourceIdList?: Array<string>;
+}
+/**
+ * 添加的用户信息列表
+ */
+export interface UserInfoForUserManager {
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 用户所属的组
+     */
+    UserGroup: string;
+    /**
+     * 密码
+     */
+    PassWord: string;
+    /**
+     * 备注
+     */
+    ReMark?: string;
 }
 /**
  * DescribeAutoScaleStrategies请求参数结构体
@@ -6446,6 +6656,21 @@ export interface DeleteAutoScaleStrategyRequest {
     GroupId?: number;
 }
 /**
+ * 容器集群Pod服务CLB设置
+ */
+export interface CLBSetting {
+    /**
+     * CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBType?: string;
+    /**
+     * Vpc和子网信息设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VPCSettings?: VPCSettings;
+}
+/**
  * DeployYarnConf返回参数结构体
  */
 export interface DeployYarnConfResponse {
@@ -6484,6 +6709,21 @@ export interface ModifyResourcePoolsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 节点信息
+ */
+export interface ShortNodeInfo {
+    /**
+     * 节点类型，Master/Core/Task/Router/Common
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeType?: string;
+    /**
+     * 节点数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeSize?: number;
 }
 /**
  * Serverless HBase包年包月时间
@@ -7221,13 +7461,78 @@ export interface InquiryPriceCreateInstanceRequest {
     MultiZoneSettings?: Array<MultiZoneSetting>;
 }
 /**
- * DescribeEmrOverviewMetrics返回参数结构体
+ * DescribeSLInstance返回参数结构体
  */
-export interface DescribeEmrOverviewMetricsResponse {
+export interface DescribeSLInstanceResponse {
     /**
-     * 指标数据明细
+     * 实例字符串标识。
      */
-    Result?: Array<OverviewMetricData>;
+    InstanceId?: string;
+    /**
+     * 实例名称。
+     */
+    InstanceName?: string;
+    /**
+     * 实例计费模式。0表示后付费，即按量计费，1表示预付费，即包年包月。
+     */
+    PayMode?: number;
+    /**
+     * 实例存储类型。
+     */
+    DiskType?: string;
+    /**
+     * 实例单节点磁盘容量，单位GB。
+     */
+    DiskSize?: number;
+    /**
+     * 实例节点规格。
+     */
+    NodeType?: string;
+    /**
+     * 实例可用区详细配置，包含可用区名称，VPC信息、节点数量。
+     */
+    ZoneSettings?: Array<ZoneSetting>;
+    /**
+     * 实例绑定的标签列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 实例数字标识。
+     */
+    ClusterId?: number;
+    /**
+     * 实例区域ID。
+     */
+    RegionId?: number;
+    /**
+     * 实例主可用区。
+     */
+    Zone?: string;
+    /**
+     * 实例过期时间，后付费返回0000-00-00 00:00:00
+     */
+    ExpireTime?: string;
+    /**
+     * 实例隔离时间，未隔离返回0000-00-00 00:00:00。
+     */
+    IsolateTime?: string;
+    /**
+     * 实例创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * 实例状态码，-2:  "TERMINATED", 2:   "RUNNING", 14:  "TERMINATING", 19:  "ISOLATING", 22:  "ADJUSTING", 201: "ISOLATED"。
+     */
+    Status?: number;
+    /**
+     * 自动续费标记， 0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费，若业务无续费概念为0
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 实例节点总数。
+     */
+    NodeNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7313,25 +7618,35 @@ export interface ModifyResourceScheduleConfigRequest {
     Value: string;
 }
 /**
- * 添加的用户信息列表
+ * 重启/停止/启动服务/监控的配置
  */
-export interface UserInfoForUserManager {
+export interface StrategyConfig {
     /**
-     * 用户名
+     * 0:关闭滚动重启
+  1:开启滚动启动
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserName: string;
+    RollingRestartSwitch?: number;
     /**
-     * 用户所属的组
+     * 滚动重启每批次的重启数量，最大重启台数为 99999 台
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserGroup: string;
+    BatchSize?: number;
     /**
-     * 密码
+     * 滚动重启每批停止等待时间 ,最大间隔为 5 分钟 单位是秒
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PassWord: string;
+    TimeWait?: number;
     /**
-     * 备注
+     * 操作失败处理策略，0:失败阻塞, 1:失败自动跳过
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReMark?: string;
+    DealOnFail?: number;
+    /**
+     * 指令需要指定的参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Args?: Array<Arg>;
 }
 /**
  * POD自定义权限和自定义参数
@@ -8339,35 +8654,24 @@ export interface VirtualPrivateCloud {
     SubnetId: string;
 }
 /**
- * 重启/停止/启动服务/监控的配置
+ * Pod节点选择项
  */
-export interface StrategyConfig {
+export interface NodeSelectorRequirement {
     /**
-     * 0:关闭滚动重启
-  1:开启滚动启动
+     * 节点选择项Key值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RollingRestartSwitch?: number;
+    Key?: string;
     /**
-     * 滚动重启每批次的重启数量，最大重启台数为 99999 台
+     * 节点选择项Operator值，支持In, NotIn, Exists, DoesNotExist. Gt, and Lt.
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BatchSize?: number;
+    Operator?: string;
     /**
-     * 滚动重启每批停止等待时间 ,最大间隔为 5 分钟 单位是秒
+     * 节点选择项Values值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeWait?: number;
-    /**
-     * 操作失败处理策略，0:失败阻塞, 1:失败自动跳过
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DealOnFail?: number;
-    /**
-     * 指令需要指定的参数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Args?: Array<Arg>;
+    Values?: Array<string>;
 }
 /**
  * 资源详情
@@ -8439,19 +8743,14 @@ export interface SceneSoftwareConfig {
     SceneName?: string;
 }
 /**
- * 节点信息
+ * Pod节点选择项集合
  */
-export interface ShortNodeInfo {
+export interface NodeSelectorTerm {
     /**
-     * 节点类型，Master/Core/Task/Router/Common
+     * 节点选择项表达式集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeType?: string;
-    /**
-     * 节点数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeSize?: number;
+    MatchExpressions?: Array<NodeSelectorRequirement>;
 }
 /**
  * DescribeTrinoQueryInfo请求参数结构体
@@ -8849,6 +9148,43 @@ export interface ModifyResourcePoolsRequest {
   <li>capacity:代表容量调度标识</li>
      */
     Key: string;
+}
+/**
+ * CreateSLInstance请求参数结构体
+ */
+export interface CreateSLInstanceRequest {
+    /**
+     * 实例名称。
+     */
+    InstanceName: string;
+    /**
+     * 实例计费模式，0表示后付费，即按量计费。
+     */
+    PayMode: number;
+    /**
+     * 实例存储类型，填写CLOUD_HSSD，表示性能云存储。
+     */
+    DiskType: string;
+    /**
+     * 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。
+     */
+    DiskSize: number;
+    /**
+     * 实例节点规格，可填写4C16G、8C32G、16C64G、32C128G，不区分大小写。
+     */
+    NodeType: string;
+    /**
+     * 实例可用区详细配置，当前支持多可用区，可用区数量只能为1或3，包含区域名称，VPC信息、节点数量，其中所有区域节点总数需大于等于3，小于等于50。
+     */
+    ZoneSettings: Array<ZoneSetting>;
+    /**
+     * 实例要绑定的标签列表。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 预付费参数
+     */
+    PrePaySetting?: PrePaySetting;
 }
 /**
  * DescribeJobFlow返回参数结构体

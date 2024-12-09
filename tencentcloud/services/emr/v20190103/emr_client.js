@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("emr.tencentcloudapi.com", "2019-01-03", clientConfig);
     }
     /**
-     * DescribeYarnApplications
+     * 查询待续费节点信息
      */
-    async DescribeYarnApplications(req, cb) {
-        return this.request("DescribeYarnApplications", req, cb);
+    async DescribeInstanceRenewNodes(req, cb) {
+        return this.request("DescribeInstanceRenewNodes", req, cb);
     }
     /**
      * 强制修改标签
@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyYarnQueueV2", req, cb);
     }
     /**
-     * 查询待续费节点信息
+     * 创建EMR容器集群实例
      */
-    async DescribeInstanceRenewNodes(req, cb) {
-        return this.request("DescribeInstanceRenewNodes", req, cb);
+    async CreateCloudInstance(req, cb) {
+        return this.request("CreateCloudInstance", req, cb);
     }
     /**
      * yarn资源调度-部署生效
@@ -110,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCvmQuota(req, cb) {
         return this.request("DescribeCvmQuota", req, cb);
+    }
+    /**
+     * DescribeYarnApplications
+     */
+    async DescribeYarnApplications(req, cb) {
+        return this.request("DescribeYarnApplications", req, cb);
     }
     /**
      * 修改YARN资源调度的全局配置
@@ -411,6 +417,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInsightList(req, cb) {
         return this.request("DescribeInsightList", req, cb);
+    }
+    /**
+     * 调整Pod数量
+     */
+    async ModifyPodNum(req, cb) {
+        return this.request("ModifyPodNum", req, cb);
     }
     /**
      * 扩容集群节点

@@ -2548,6 +2548,19 @@ export interface CreateCLSDeliveryResponse {
     RequestId?: string;
 }
 /**
+ * DescribeServerlessInstanceSpecs返回参数结构体
+ */
+export interface DescribeServerlessInstanceSpecsResponse {
+    /**
+     * Serverless实例可选规格
+     */
+    Specs?: Array<ServerlessSpec>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 手动备份任务信息
  */
 export interface ManualBackupData {
@@ -3074,6 +3087,40 @@ export interface RevokeAccountPrivilegesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * serverless规格
+ */
+export interface ServerlessSpec {
+    /**
+     * cpu最小值
+     */
+    MinCpu?: number;
+    /**
+     * cpu最大值
+     */
+    MaxCpu?: number;
+    /**
+     * 最大存储空间
+     */
+    MaxStorageSize?: number;
+    /**
+     * 是否为默认规格
+     */
+    IsDefault?: number;
+    /**
+     * 是否有库存
+     */
+    HasStock?: boolean;
+    /**
+     * 库存数量
+     */
+    StockCount?: number;
+    /**
+     * 可用区库存信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneStockInfos?: Array<ServerlessZoneStockInfo>;
 }
 /**
  * DescribeClusterDetailDatabases返回参数结构体
@@ -3724,6 +3771,31 @@ export interface DescribeProjectSecurityGroupsRequest {
      * 搜索关键字
      */
     SearchKey?: string;
+}
+/**
+ * serverless类型的可用区库存信息
+ */
+export interface ServerlessZoneStockInfo {
+    /**
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 存储量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StockCount?: number;
+    /**
+     * 是否包含库存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasStock?: boolean;
+    /**
+     * 从可用区库存信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlaveZoneStockInfos?: Array<SlaveZoneStockInfo>;
 }
 /**
  * 数据库详细信息
@@ -5154,19 +5226,41 @@ export interface OpenClusterTransparentEncryptResponse {
     RequestId?: string;
 }
 /**
- * TDSQL-C MySQL支持的proxy版本信息
+ * ModifyBackupConfig请求参数结构体
  */
-export interface ProxyVersionInfo {
+export interface ModifyBackupConfigRequest {
     /**
-     * proxy版本号
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群ID
      */
-    ProxyVersion?: string;
+    ClusterId: string;
     /**
-     * 版本描述：GA:稳定版  BETA:尝鲜版，DEPRECATED:过旧，
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
      */
-    ProxyVersionType?: string;
+    BackupTimeBeg?: number;
+    /**
+     * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+     */
+    BackupTimeEnd?: number;
+    /**
+     * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
+     */
+    ReserveDuration?: number;
+    /**
+     * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+     */
+    BackupFreq?: Array<string>;
+    /**
+     * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
+     */
+    BackupType?: string;
+    /**
+     * 逻辑备份配置
+     */
+    LogicBackupConfig?: LogicBackupConfigInfo;
+    /**
+     * 是否删除自动逻辑备份
+     */
+    DeleteAutoLogicBackup?: boolean;
 }
 /**
  * DisassociateSecurityGroups返回参数结构体
@@ -8576,6 +8670,15 @@ export interface SetRenewFlagRequest {
     AutoRenewFlag: number;
 }
 /**
+ * DescribeServerlessInstanceSpecs请求参数结构体
+ */
+export interface DescribeServerlessInstanceSpecsRequest {
+    /**
+     * 可用区
+     */
+    Zone?: string;
+}
+/**
  * proxy组
  */
 export interface ProxyGroup {
@@ -10063,14 +10166,6 @@ export interface ModifyServerlessStrategyRequest {
      * 只读节点最大个数
      */
     MaxRoCount?: number;
-    /**
-     * 集群是否允许扩容，可选范围<li>yes</li><li>no</li>
-     */
-    AutoScaleUp?: string;
-    /**
-     * 集群是否允许缩容，可选范围<li>yes</li><li>no</li>
-     */
-    AutoScaleDown?: string;
 }
 /**
  * DescribeBinlogConfig返回参数结构体
@@ -10142,41 +10237,19 @@ export interface SaleRegion {
     Modules: Array<Module>;
 }
 /**
- * ModifyBackupConfig请求参数结构体
+ * TDSQL-C MySQL支持的proxy版本信息
  */
-export interface ModifyBackupConfigRequest {
+export interface ProxyVersionInfo {
     /**
-     * 集群ID
+     * proxy版本号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ProxyVersion?: string;
     /**
-     * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+     * 版本描述：GA:稳定版  BETA:尝鲜版，DEPRECATED:过旧，
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupTimeBeg?: number;
-    /**
-     * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
-     */
-    BackupTimeEnd?: number;
-    /**
-     * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
-     */
-    ReserveDuration?: number;
-    /**
-     * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
-     */
-    BackupFreq?: Array<string>;
-    /**
-     * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
-     */
-    BackupType?: string;
-    /**
-     * 逻辑备份配置
-     */
-    LogicBackupConfig?: LogicBackupConfigInfo;
-    /**
-     * 是否删除自动逻辑备份
-     */
-    DeleteAutoLogicBackup?: boolean;
+    ProxyVersionType?: string;
 }
 /**
  * DeleteAuditLogFile请求参数结构体

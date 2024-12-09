@@ -2839,6 +2839,10 @@ export interface ElectronicTrainTicketFull {
    * 原发票号码
    */
   OriginalNumber?: string
+  /**
+   * 标识信息
+   */
+  IDInfo?: string
 }
 
 /**
@@ -7258,6 +7262,34 @@ export interface AirTransport {
    * 条目
    */
   FlightItems?: Array<FlightItem>
+  /**
+   * 提示信息
+   */
+  PromptInformation?: string
+  /**
+   * 统一社会信用代码/纳税人识别号
+   */
+  BuyerTaxID?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 发票号码
+   */
+  ReceiptNumber?: string
+  /**
+   * 开票状态
+   */
+  InvoiceStatus?: string
+  /**
+   * 增值税税率
+   */
+  TaxRate?: string
+  /**
+   * 增值税税额
+   */
+  TaxAmount?: string
 }
 
 /**
@@ -7565,19 +7597,20 @@ export interface TableInfo {
    * 单元格内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cells: Array<TableCellInfo>
+  Cells?: Array<TableCellInfo>
   /**
-   * 图像中的文本块类型，0 为非表格文本，
-1 为有线表格，2 为无线表格
+   * 图像中的文本块类型：0为非表格文本、1为有线表格、2为无线表格，
+有线表格：在表格内部，有横线/竖线纵跨整个表格的宽/高；
+无线表格：在表格内部，无横线/竖线纵跨整个表格的宽/高。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: number
+  Type?: number
   /**
    * 表格主体四个顶点坐标（依次为左上角，
 右上角，右下角，左下角）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableCoordPoint: Array<Coord>
+  TableCoordPoint?: Array<Coord>
 }
 
 /**

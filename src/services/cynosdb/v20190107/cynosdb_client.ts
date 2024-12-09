@@ -108,6 +108,7 @@ import {
   DescribeAccountAllGrantPrivilegesRequest,
   DeleteCLSDeliveryRequest,
   CreateCLSDeliveryResponse,
+  DescribeServerlessInstanceSpecsResponse,
   ManualBackupData,
   DescribeBinlogsRequest,
   InquirePriceModifyResponse,
@@ -133,6 +134,7 @@ import {
   DescribeClusterTransparentEncryptInfoRequest,
   DeleteParamTemplateRequest,
   RevokeAccountPrivilegesResponse,
+  ServerlessSpec,
   DescribeClusterDetailDatabasesResponse,
   CreateParamTemplateResponse,
   DescribeAccountAllGrantPrivilegesResponse,
@@ -167,6 +169,7 @@ import {
   DescribeParamTemplatesResponse,
   Addr,
   DescribeProjectSecurityGroupsRequest,
+  ServerlessZoneStockInfo,
   DbInfo,
   DescribeBackupDownloadUrlRequest,
   InstanceAuditStatus,
@@ -215,7 +218,7 @@ import {
   RollBackClusterRequest,
   Module,
   OpenClusterTransparentEncryptResponse,
-  ProxyVersionInfo,
+  ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
   RemoveClusterSlaveZoneRequest,
@@ -350,6 +353,7 @@ import {
   CynosdbInstanceGroup,
   ModifyAccountDescriptionResponse,
   SetRenewFlagRequest,
+  DescribeServerlessInstanceSpecsRequest,
   ProxyGroup,
   AddClusterSlaveZoneRequest,
   RollbackDatabase,
@@ -413,7 +417,7 @@ import {
   DescribeBinlogConfigResponse,
   DescribeAuditLogFilesRequest,
   SaleRegion,
-  ModifyBackupConfigRequest,
+  ProxyVersionInfo,
   DeleteAuditLogFileRequest,
   DescribeIsolatedInstancesResponse,
   GrantAccountPrivilegesResponse,
@@ -617,13 +621,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资源包使用明细导出
+   * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
    */
-  async ExportResourcePackageDeductDetails(
-    req: ExportResourcePackageDeductDetailsRequest,
-    cb?: (error: string, rep: ExportResourcePackageDeductDetailsResponse) => void
-  ): Promise<ExportResourcePackageDeductDetailsResponse> {
-    return this.request("ExportResourcePackageDeductDetails", req, cb)
+  async DescribeProxySpecs(
+    req: DescribeProxySpecsRequest,
+    cb?: (error: string, rep: DescribeProxySpecsResponse) => void
+  ): Promise<DescribeProxySpecsResponse> {
+    return this.request("DescribeProxySpecs", req, cb)
   }
 
   /**
@@ -1377,6 +1381,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Serverless实例可选规格
+   */
+  async DescribeServerlessInstanceSpecs(
+    req: DescribeServerlessInstanceSpecsRequest,
+    cb?: (error: string, rep: DescribeServerlessInstanceSpecsResponse) => void
+  ): Promise<DescribeServerlessInstanceSpecsResponse> {
+    return this.request("DescribeServerlessInstanceSpecs", req, cb)
+  }
+
+  /**
    * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
    */
   async DescribeAuditLogs(
@@ -1747,13 +1761,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeProxySpecs）用于查询数据库代理规格。
+   * 资源包使用明细导出
    */
-  async DescribeProxySpecs(
-    req: DescribeProxySpecsRequest,
-    cb?: (error: string, rep: DescribeProxySpecsResponse) => void
-  ): Promise<DescribeProxySpecsResponse> {
-    return this.request("DescribeProxySpecs", req, cb)
+  async ExportResourcePackageDeductDetails(
+    req: ExportResourcePackageDeductDetailsRequest,
+    cb?: (error: string, rep: ExportResourcePackageDeductDetailsResponse) => void
+  ): Promise<ExportResourcePackageDeductDetailsResponse> {
+    return this.request("ExportResourcePackageDeductDetails", req, cb)
   }
 
   /**

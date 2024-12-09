@@ -523,11 +523,11 @@ export interface DescribeCustomPersonsResponse {
     /**
      * 满足过滤条件的自定义人物数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 自定义人物信息
      */
-    PersonInfoSet: Array<CustomPersonInfo>;
+    PersonInfoSet?: Array<CustomPersonInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -897,19 +897,19 @@ export interface PersonImageInfo {
     /**
      * 人脸图片ID
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 自定义人脸图片的URL，存储在IVLDCustomPreson存储桶内
      */
-    ImageURL: string;
+    ImageURL?: string;
     /**
      * 自定义人脸图片处理错误码
      */
-    ErrorCode: string;
+    ErrorCode?: string;
     /**
      * 自定义人脸图片处理错误信息
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
 }
 /**
  * 排序条件
@@ -1511,41 +1511,41 @@ export interface MediaMetadata {
     /**
      * 媒资视频文件大小，单位为字节
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 媒资视频文件MD5
      */
-    MD5: string;
+    MD5?: string;
     /**
      * 媒资视频时长，单位为秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 媒资视频总帧数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NumFrames: number;
+    NumFrames?: number;
     /**
      * 媒资视频宽度，单位为像素
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Width: number;
+    Width?: number;
     /**
      * 媒资视频高度，单位为像素
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Height: number;
+    Height?: number;
     /**
      * 媒资视频帧率，单位为Hz
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FPS: number;
+    FPS?: number;
     /**
      * 媒资视频比特率，单位为kbps
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BitRate: number;
+    BitRate?: number;
 }
 /**
  * DeleteCustomPerson请求参数结构体
@@ -1727,27 +1727,27 @@ export interface ImageData {
      * 图片中出现的可视文本识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrSet: Array<ImageOcr>;
+    OcrSet?: Array<ImageOcr>;
     /**
      * 图片中出现的帧标签识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameTagSet: MultiLevelTag;
+    FrameTagSet?: MultiLevelTag;
     /**
      * 图片中出现的层级人物识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MultiLevelPersonInfoSet: Array<MultiLevelPersonInfo>;
+    MultiLevelPersonInfoSet?: Array<MultiLevelPersonInfo>;
     /**
      * 图片中出现的台标识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TvLogo: ImageLogo;
+    TvLogo?: ImageLogo;
     /**
      * 图片中出现的来源信息识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceLogo: ImageLogo;
+    SourceLogo?: ImageLogo;
 }
 /**
  * DescribeTaskDetail请求参数结构体

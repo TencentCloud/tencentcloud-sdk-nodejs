@@ -58,9 +58,9 @@ it("aiart.v20221229.SubmitTrainPortraitModelJob", async function () {
     }
 })
 
-it("aiart.v20221229.QueryTextToImageProJob", async function () {
+it("aiart.v20221229.ImageOutpainting", async function () {
     try {
-       const data = await client.QueryTextToImageProJob({})
+       const data = await client.ImageOutpainting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("aiart.v20221229.UploadTrainPortraitImages", async function () {
 it("aiart.v20221229.TextToImage", async function () {
     try {
        const data = await client.TextToImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.QueryTextToImageProJob", async function () {
+    try {
+       const data = await client.QueryTextToImageProJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

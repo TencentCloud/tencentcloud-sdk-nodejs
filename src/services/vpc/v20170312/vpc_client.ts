@@ -51,6 +51,7 @@ import {
   ModifyNetworkAclQuintupleEntriesRequest,
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
+  SecurityGroupPolicy,
   DeleteVpnGatewaySslServerResponse,
   CreateHighPriorityRouteTableResponse,
   DescribeIpGeolocationInfosRequest,
@@ -141,6 +142,7 @@ import {
   ReplaceSecurityGroupPoliciesResponse,
   DescribeDirectConnectGatewaysRequest,
   DescribeSpecificTrafficPackageUsedDetailsResponse,
+  DescribeIPv6AddressesResponse,
   AttachSnapshotInstancesRequest,
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
@@ -166,6 +168,7 @@ import {
   ModifyAddressInternetChargeTypeResponse,
   SetCcnRegionBandwidthLimitsResponse,
   UnassignIpv6SubnetCidrBlockRequest,
+  ModifyIPv6AddressesBandwidthRequest,
   DeleteVpcEndPointServiceResponse,
   ModifyNetworkAclQuintupleEntriesResponse,
   AssignIpv6CidrBlockRequest,
@@ -201,6 +204,7 @@ import {
   DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
   NetworkAclEntry,
   ModifyNetworkAclAttributeResponse,
+  ModifyIPv6AddressesAttributesRequest,
   CreateVpnGatewayRoutesRequest,
   DisassociateNetworkAclSubnetsResponse,
   CreateCdcLDCXListRequest,
@@ -267,7 +271,7 @@ import {
   ModifyNatGatewayAttributeResponse,
   DescribeNetDetectsRequest,
   CreateAddressTemplateGroupRequest,
-  DescribeNatGatewayDirectConnectGatewayRouteRequest,
+  AssociateIPv6AddressRequest,
   DescribeCustomerGatewayVendorsResponse,
   DeleteCdcLDCXListRequest,
   RouteConflict,
@@ -296,7 +300,7 @@ import {
   AdjustPublicAddressResponse,
   DescribeVpnConnectionsResponse,
   RenewVpnGatewayRequest,
-  SecurityGroupPolicy,
+  AssociateIPv6AddressResponse,
   DescribeCdcNetPlanesRequest,
   DescribePrivateNatGatewayRegionsRequest,
   DescribeSnapshotPoliciesRequest,
@@ -330,10 +334,11 @@ import {
   NetworkAclEntrySet,
   DeleteVpnConnectionResponse,
   DescribeVpnGatewaySslClientsResponse,
+  ReleaseIPv6AddressesResponse,
   CreateCcnResponse,
   EnableCcnRoutesRequest,
   Tag,
-  CreateFlowLogResponse,
+  DescribeCcnAttachedInstancesResponse,
   DefaultVpcSubnet,
   DescribeIp6TranslatorsRequest,
   CreateSubnetsResponse,
@@ -344,6 +349,7 @@ import {
   DescribeCcnRouteTableInputPolicysResponse,
   ModifyBandwidthPackageAttributeResponse,
   CreateVpnGatewaySslServerResponse,
+  DisassociateIPv6AddressRequest,
   PrivateNatDestinationIpPortTranslationNatRule,
   CreateHighPriorityRouteTableRequest,
   DeleteNetworkAclRequest,
@@ -370,7 +376,7 @@ import {
   DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DescribeReserveIpAddressesResponse,
   DescribeSnapshotFilesResponse,
-  DescribeCcnAttachedInstancesResponse,
+  CreateFlowLogResponse,
   CreateNetworkAclEntriesRequest,
   DeleteCustomerGatewayResponse,
   CreateVpnGatewayRoutesResponse,
@@ -431,7 +437,7 @@ import {
   RenewVpnGatewayResponse,
   DescribeCcnRouteTablesResponse,
   DeleteDirectConnectGatewayResponse,
-  ModifyAddressesBandwidthRequest,
+  DescribeIPv6AddressesRequest,
   ResetVpnGatewayInternetMaxBandwidthRequest,
   EndPoint,
   RemoveIp6RulesResponse,
@@ -444,6 +450,7 @@ import {
   DescribeBandwidthPackageResourcesResponse,
   DescribeCrossBorderComplianceResponse,
   ModifyVpnGatewayAttributeResponse,
+  AllocateIPv6AddressesRequest,
   AssociateDirectConnectGatewayNatGatewayResponse,
   EndPointService,
   DescribeVpcResourceDashboardResponse,
@@ -579,6 +586,7 @@ import {
   DescribeVpnGatewayRoutesResponse,
   ModifyCcnRouteTablesResponse,
   DescribeNetworkAclsResponse,
+  DescribeNatGatewayDirectConnectGatewayRouteRequest,
   DeleteFlowLogResponse,
   CreateVpnConnRoute,
   CreatePrivateNatGatewayRequest,
@@ -594,6 +602,7 @@ import {
   DeleteRouteTableResponse,
   DescribeVpcInstancesResponse,
   AccountAttribute,
+  AllocateIPv6AddressesResponse,
   DeleteDirectConnectGatewayCcnRoutesRequest,
   ModifyNatGatewaySourceIpTranslationNatRuleResponse,
   CreateDefaultVpcRequest,
@@ -617,7 +626,8 @@ import {
   DisableRoutesRequest,
   DisassociateDirectConnectGatewayNatGatewayRequest,
   DescribeRouteTableAssociatedInstancesRequest,
-  EnableRoutesRequest,
+  ReleaseIPv6AddressesRequest,
+  DisassociateIPv6AddressResponse,
   DescribeAddressTemplateGroupsResponse,
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
@@ -668,6 +678,7 @@ import {
   DescribeVpcPeeringConnectionsRequest,
   Address,
   VpnGateway,
+  ModifyAddressesBandwidthRequest,
   EnableVpcEndPointConnectRequest,
   EnableGatewayFlowMonitorResponse,
   ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleResponse,
@@ -687,6 +698,7 @@ import {
   CrossBorderFlowMonitorData,
   DescribeRouteTableAssociatedInstancesResponse,
   ModifyRouteTableAttributeResponse,
+  ModifyIPv6AddressesBandwidthResponse,
   DescribeSecurityGroupReferencesResponse,
   AddIp6RulesResponse,
   CreateAddressTemplateGroupResponse,
@@ -896,6 +908,7 @@ import {
   DescribeAddressTemplatesRequest,
   ConflictSource,
   CreateDhcpIpRequest,
+  EnableRoutesRequest,
   DeleteTrafficPackagesResponse,
   DeleteCustomerGatewayRequest,
   LockCcnBandwidthsResponse,
@@ -905,6 +918,7 @@ import {
   AcceptVpcPeeringConnectionRequest,
   CreateCdcNetPlanesRequest,
   CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse,
+  ModifyIPv6AddressesAttributesResponse,
   ModifyCdcLDCXAttributeResponse,
   DescribeNetworkInterfacesResponse,
   DeleteNetworkAclResponse,
@@ -1019,6 +1033,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAddressInternetChargeTypeResponse) => void
   ): Promise<ModifyAddressInternetChargeTypeResponse> {
     return this.request("ModifyAddressInternetChargeType", req, cb)
+  }
+
+  /**
+     * 本接口（ModifyIPv6AddressesAttributes）用于修改弹性公网 IPv6（简称EIPv6）实例名称。
+
+- 支持对弹性公网 IPv6 和传统弹性公网 IPv6 实例名称进行修改。
+     */
+  async ModifyIPv6AddressesAttributes(
+    req: ModifyIPv6AddressesAttributesRequest,
+    cb?: (error: string, rep: ModifyIPv6AddressesAttributesResponse) => void
+  ): Promise<ModifyIPv6AddressesAttributesResponse> {
+    return this.request("ModifyIPv6AddressesAttributes", req, cb)
   }
 
   /**
@@ -2187,6 +2213,19 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（AssociateIPv6Address）用于将弹性公网IPv6（简称EIPv6）实例绑定到 CVM 或弹性网卡配置的内网 IPv6 地址上。
+
+- 将 EIPv6 绑定到 CVM 上，其本质是将 EIPv6 绑定到 CVM 弹性网卡所配置的内网 IPv6 地址上。
+- 将 EIPv6 绑定到指定网卡的内网 IPv6 时，需确保该内网 IPv6 地址为未绑定状态，才能执行绑定操作。
+     */
+  async AssociateIPv6Address(
+    req: AssociateIPv6AddressRequest,
+    cb?: (error: string, rep: AssociateIPv6AddressResponse) => void
+  ): Promise<AssociateIPv6AddressResponse> {
+    return this.request("AssociateIPv6Address", req, cb)
+  }
+
+  /**
      * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合。
 >?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
 >
@@ -2259,23 +2298,25 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
+   * 本接口（ModifyIPv6AddressesBandwidth）用于调整弹性公网 IPv6（简称EIPv6）实例的带宽上限。
    */
-  async DescribeVpcEndPointService(
-    req: DescribeVpcEndPointServiceRequest,
-    cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void
-  ): Promise<DescribeVpcEndPointServiceResponse> {
-    return this.request("DescribeVpcEndPointService", req, cb)
+  async ModifyIPv6AddressesBandwidth(
+    req: ModifyIPv6AddressesBandwidthRequest,
+    cb?: (error: string, rep: ModifyIPv6AddressesBandwidthResponse) => void
+  ): Promise<ModifyIPv6AddressesBandwidthResponse> {
+    return this.request("ModifyIPv6AddressesBandwidth", req, cb)
   }
 
   /**
-   * 刷新专线直连nat路由，更新nat到专线的路由表
-   */
-  async RefreshDirectConnectGatewayRouteToNatGateway(
-    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
-    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
-  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
-    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
+     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+     */
+  async DescribeCrossBorderCcnRegionBandwidthLimits(
+    req: DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
+    cb?: (error: string, rep: DescribeCrossBorderCcnRegionBandwidthLimitsResponse) => void
+  ): Promise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse> {
+    return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb)
   }
 
   /**
@@ -2296,18 +2337,6 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DeleteVpnGatewaySslClientResponse) => void
   ): Promise<DeleteVpnGatewaySslClientResponse> {
     return this.request("DeleteVpnGatewaySslClient", req, cb)
-  }
-
-  /**
-     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
-该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
-如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-     */
-  async DescribeCrossBorderCcnRegionBandwidthLimits(
-    req: DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
-    cb?: (error: string, rep: DescribeCrossBorderCcnRegionBandwidthLimitsResponse) => void
-  ): Promise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse> {
-    return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb)
   }
 
   /**
@@ -3554,6 +3583,19 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（DisassociateIPv6Address）用于解绑弹性公网 IPv6（简称EIPv6）实例。
+
+- 支持对 CVM、弹性网卡绑定的 EIPv6 实例进行解绑操作。
+- 只有状态为 BIND 和 BIND_ENI 的 EIPv6 实例才能进行解绑操作。
+     */
+  async DisassociateIPv6Address(
+    req: DisassociateIPv6AddressRequest,
+    cb?: (error: string, rep: DisassociateIPv6AddressResponse) => void
+  ): Promise<DisassociateIPv6AddressResponse> {
+    return this.request("DisassociateIPv6Address", req, cb)
+  }
+
+  /**
    * 本接口（ModifyNatGatewaySourceIpTranslationNatRule）用于修改NAT网关SNAT转发规则。
    */
   async ModifyNatGatewaySourceIpTranslationNatRule(
@@ -3996,6 +4038,19 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（DescribeIPv6Addresses）用于查询一个或多个弹性公网 IPv6（简称 EIPv6）实例的详细信息。
+
+- 支持查询您在指定地域的弹性公网 IPv6 和传统弹性公网 IPv6 实例信息
+- 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的 EIPv6。
+     */
+  async DescribeIPv6Addresses(
+    req: DescribeIPv6AddressesRequest,
+    cb?: (error: string, rep: DescribeIPv6AddressesResponse) => void
+  ): Promise<DescribeIPv6AddressesResponse> {
+    return this.request("DescribeIPv6Addresses", req, cb)
+  }
+
+  /**
    * 本接口（CreateFlowLog）用于创建网络流日志。
    */
   async CreateFlowLog(
@@ -4068,9 +4123,8 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br />
-注意: 调用本接口是先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
-     */
+   * 本接口（ResetRoutes）用于对某个路由表名称和所有路由策略（Route）进行重新设置。<br /> 注意: 调用本接口时先删除当前路由表中所有路由策略, 再保存新提交的路由策略内容, 会引起网络中断。
+   */
   async ResetRoutes(
     req: ResetRoutesRequest,
     cb?: (error: string, rep: ResetRoutesResponse) => void
@@ -4128,6 +4182,26 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DeleteSnapshotPoliciesResponse) => void
   ): Promise<DeleteSnapshotPoliciesResponse> {
     return this.request("DeleteSnapshotPolicies", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeVpcEndPointService）用于查询终端节点服务列表。
+   */
+  async DescribeVpcEndPointService(
+    req: DescribeVpcEndPointServiceRequest,
+    cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void
+  ): Promise<DescribeVpcEndPointServiceResponse> {
+    return this.request("DescribeVpcEndPointService", req, cb)
+  }
+
+  /**
+   * 刷新专线直连nat路由，更新nat到专线的路由表
+   */
+  async RefreshDirectConnectGatewayRouteToNatGateway(
+    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
+    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
+  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
+    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
   }
 
   /**
@@ -4514,6 +4588,19 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（ReleaseIPv6Addresses）用于释放一个或多个弹性公网IPv6（简称EIPv6）实例。
+
+- 支持对已申请到的弹性公网 IPv6 实例进行释放操作，如需再次使用，请重新申请。
+- 只有状态为 UNBIND 的 EIPv6 实例才能进行释放操作。
+     */
+  async ReleaseIPv6Addresses(
+    req: ReleaseIPv6AddressesRequest,
+    cb?: (error: string, rep: ReleaseIPv6AddressesResponse) => void
+  ): Promise<ReleaseIPv6AddressesResponse> {
+    return this.request("ReleaseIPv6Addresses", req, cb)
+  }
+
+  /**
    * 删除内网保留IP
    */
   async DeleteReserveIpAddresses(
@@ -4882,6 +4969,20 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（AllocateIPv6Addresses）用于申请一个或多个弹性公网IPv6（简称EIPv6）实例。
+
+- EIPv6 是您在腾讯云某个地域可以独立申请和持有的，固定不变的公网 IPv6 地址，提供与弹性公网 IPv4 一致的产品体验。
+- 通过弹性公网 IPv6，您可以快速将 EIPv6 实例绑定到云资源的内网 IPv6 地址上，实现为云资源快速开通 IPv6 公网带宽。
+- 您还可以按需将 EIPv6 实例绑定到其他云资源上，从而屏蔽实例故障。
+     */
+  async AllocateIPv6Addresses(
+    req: AllocateIPv6AddressesRequest,
+    cb?: (error: string, rep: AllocateIPv6AddressesResponse) => void
+  ): Promise<AllocateIPv6AddressesResponse> {
+    return this.request("AllocateIPv6Addresses", req, cb)
+  }
+
+  /**
    * 本接口（ModifyAssistantCidr）用于批量修改辅助CIDR，支持新增和删除。
    */
   async ModifyAssistantCidr(
@@ -4972,7 +5073,7 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（ModifyIp6AddressesBandwidt）用于调整传统弹性公网 IPv6 实例的带宽上限。
+     * 本接口（ModifyIp6AddressesBandwidth）用于调整传统弹性公网 IPv6 实例的带宽上限。
 
 - 仅支持对传统弹性公网 IPv6 实例的带宽上限进行调整。
 - 如需调整弹性公网 IPv6 实例的带宽上限，请使用 ModifyIPv6AddressesBandwidth 接口。
