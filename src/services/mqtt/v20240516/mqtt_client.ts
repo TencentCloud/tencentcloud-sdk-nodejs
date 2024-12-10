@@ -35,10 +35,14 @@ import {
   ActivateDeviceCertificateRequest,
   DescribeInstanceResponse,
   DescribeAuthenticatorResponse,
+  DeleteDeviceCertificateRequest,
   CreateTopicResponse,
   ModifyJWTAuthenticatorRequest,
+  DescribeDeviceCertificateResponse,
+  RevokedDeviceCertificateRequest,
   AuthorizationPolicyPriority,
   CreateAuthorizationPolicyResponse,
+  DeleteDeviceCertificateResponse,
   CreateJWTAuthenticatorRequest,
   DeleteTopicRequest,
   CreateJWKSAuthenticatorRequest,
@@ -59,12 +63,16 @@ import {
   DescribeTopicListResponse,
   DescribeAuthenticatorRequest,
   MQTTInstanceItem,
+  RevokedDeviceCertificateResponse,
   DeleteTopicResponse,
-  ModifyAuthorizationPolicyRequest,
+  DeactivateDeviceCertificateResponse,
+  DescribeDeviceCertificateRequest,
+  DeactivateDeviceCertificateRequest,
   DescribeInstanceRequest,
   MQTTAuthenticatorItem,
   DeleteAuthenticatorResponse,
   TagFilter,
+  ModifyAuthorizationPolicyRequest,
   ActivateDeviceCertificateResponse,
   DescribeInstanceListResponse,
   DescribeTopicRequest,
@@ -80,13 +88,93 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例信息
+   * 修改主题属性
    */
-  async DescribeInstance(
-    req: DescribeInstanceRequest,
-    cb?: (error: string, rep: DescribeInstanceResponse) => void
-  ): Promise<DescribeInstanceResponse> {
-    return this.request("DescribeInstance", req, cb)
+  async ModifyTopic(
+    req: ModifyTopicRequest,
+    cb?: (error: string, rep: ModifyTopicResponse) => void
+  ): Promise<ModifyTopicResponse> {
+    return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
+   * 失效Ca证书
+   */
+  async DeactivateDeviceCertificate(
+    req: DeactivateDeviceCertificateRequest,
+    cb?: (error: string, rep: DeactivateDeviceCertificateResponse) => void
+  ): Promise<DeactivateDeviceCertificateResponse> {
+    return this.request("DeactivateDeviceCertificate", req, cb)
+  }
+
+  /**
+   * 查询mqtt主题详情
+   */
+  async DescribeTopic(
+    req: DescribeTopicRequest,
+    cb?: (error: string, rep: DescribeTopicResponse) => void
+  ): Promise<DescribeTopicResponse> {
+    return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 创建一个jwks的认证
+   */
+  async CreateJWTAuthenticator(
+    req: CreateJWTAuthenticatorRequest,
+    cb?: (error: string, rep: CreateJWTAuthenticatorResponse) => void
+  ): Promise<CreateJWTAuthenticatorResponse> {
+    return this.request("CreateJWTAuthenticator", req, cb)
+  }
+
+  /**
+   * 删除设备证书
+   */
+  async DeleteDeviceCertificate(
+    req: DeleteDeviceCertificateRequest,
+    cb?: (error: string, rep: DeleteDeviceCertificateResponse) => void
+  ): Promise<DeleteDeviceCertificateResponse> {
+    return this.request("DeleteDeviceCertificate", req, cb)
+  }
+
+  /**
+   * 修改MQTT JWKS 认证器
+   */
+  async ModifyJWTAuthenticator(
+    req: ModifyJWTAuthenticatorRequest,
+    cb?: (error: string, rep: ModifyJWTAuthenticatorResponse) => void
+  ): Promise<ModifyJWTAuthenticatorResponse> {
+    return this.request("ModifyJWTAuthenticator", req, cb)
+  }
+
+  /**
+   * 修改MQTT JWKS 认证器
+   */
+  async ModifyJWKSAuthenticator(
+    req: ModifyJWKSAuthenticatorRequest,
+    cb?: (error: string, rep: ModifyJWKSAuthenticatorResponse) => void
+  ): Promise<ModifyJWKSAuthenticatorResponse> {
+    return this.request("ModifyJWKSAuthenticator", req, cb)
+  }
+
+  /**
+   * 分页查询设备证书
+   */
+  async DescribeDeviceCertificates(
+    req: DescribeDeviceCertificatesRequest,
+    cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
+  ): Promise<DescribeDeviceCertificatesResponse> {
+    return this.request("DescribeDeviceCertificates", req, cb)
+  }
+
+  /**
+   * 注册设备证书
+   */
+  async RegisterDeviceCertificate(
+    req: RegisterDeviceCertificateRequest,
+    cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void
+  ): Promise<RegisterDeviceCertificateResponse> {
+    return this.request("RegisterDeviceCertificate", req, cb)
   }
 
   /**
@@ -120,33 +208,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册设备证书
+   * 查询设备证书详情接口
    */
-  async RegisterDeviceCertificate(
-    req: RegisterDeviceCertificateRequest,
-    cb?: (error: string, rep: RegisterDeviceCertificateResponse) => void
-  ): Promise<RegisterDeviceCertificateResponse> {
-    return this.request("RegisterDeviceCertificate", req, cb)
-  }
-
-  /**
-   * 修改主题属性
-   */
-  async ModifyTopic(
-    req: ModifyTopicRequest,
-    cb?: (error: string, rep: ModifyTopicResponse) => void
-  ): Promise<ModifyTopicResponse> {
-    return this.request("ModifyTopic", req, cb)
-  }
-
-  /**
-   * 修改策略规则
-   */
-  async ModifyAuthorizationPolicy(
-    req: ModifyAuthorizationPolicyRequest,
-    cb?: (error: string, rep: ModifyAuthorizationPolicyResponse) => void
-  ): Promise<ModifyAuthorizationPolicyResponse> {
-    return this.request("ModifyAuthorizationPolicy", req, cb)
+  async DescribeDeviceCertificate(
+    req: DescribeDeviceCertificateRequest,
+    cb?: (error: string, rep: DescribeDeviceCertificateResponse) => void
+  ): Promise<DescribeDeviceCertificateResponse> {
+    return this.request("DescribeDeviceCertificate", req, cb)
   }
 
   /**
@@ -162,6 +230,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceListResponse) => void
   ): Promise<DescribeInstanceListResponse> {
     return this.request("DescribeInstanceList", req, cb)
+  }
+
+  /**
+   * 吊销设备证书
+   */
+  async RevokedDeviceCertificate(
+    req: RevokedDeviceCertificateRequest,
+    cb?: (error: string, rep: RevokedDeviceCertificateResponse) => void
+  ): Promise<RevokedDeviceCertificateResponse> {
+    return this.request("RevokedDeviceCertificate", req, cb)
+  }
+
+  /**
+   * 查询实例信息
+   */
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 删除MQTT主题
+   */
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 创建一个jwks的认证
+   */
+  async CreateJWKSAuthenticator(
+    req: CreateJWKSAuthenticatorRequest,
+    cb?: (error: string, rep: CreateJWKSAuthenticatorResponse) => void
+  ): Promise<CreateJWKSAuthenticatorResponse> {
+    return this.request("CreateJWKSAuthenticator", req, cb)
+  }
+
+  /**
+   * 修改策略规则
+   */
+  async ModifyAuthorizationPolicy(
+    req: ModifyAuthorizationPolicyRequest,
+    cb?: (error: string, rep: ModifyAuthorizationPolicyResponse) => void
+  ): Promise<ModifyAuthorizationPolicyResponse> {
+    return this.request("ModifyAuthorizationPolicy", req, cb)
   }
 
   /**
@@ -185,16 +303,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询mqtt主题详情
-   */
-  async DescribeTopic(
-    req: DescribeTopicRequest,
-    cb?: (error: string, rep: DescribeTopicResponse) => void
-  ): Promise<DescribeTopicResponse> {
-    return this.request("DescribeTopic", req, cb)
-  }
-
-  /**
    * 查询MQTT认证器
    */
   async DescribeAuthenticator(
@@ -205,16 +313,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建一个jwks的认证
-   */
-  async CreateJWTAuthenticator(
-    req: CreateJWTAuthenticatorRequest,
-    cb?: (error: string, rep: CreateJWTAuthenticatorResponse) => void
-  ): Promise<CreateJWTAuthenticatorResponse> {
-    return this.request("CreateJWTAuthenticator", req, cb)
-  }
-
-  /**
    * 修改策略规则优先级
    */
   async UpdateAuthorizationPolicyPriority(
@@ -222,16 +320,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAuthorizationPolicyPriorityResponse) => void
   ): Promise<UpdateAuthorizationPolicyPriorityResponse> {
     return this.request("UpdateAuthorizationPolicyPriority", req, cb)
-  }
-
-  /**
-   * 修改MQTT JWKS 认证器
-   */
-  async ModifyJWTAuthenticator(
-    req: ModifyJWTAuthenticatorRequest,
-    cb?: (error: string, rep: ModifyJWTAuthenticatorResponse) => void
-  ): Promise<ModifyJWTAuthenticatorResponse> {
-    return this.request("ModifyJWTAuthenticator", req, cb)
   }
 
   /**
@@ -248,26 +336,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除MQTT主题
-   */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
-  }
-
-  /**
-   * 分页查询设备证书
-   */
-  async DescribeDeviceCertificates(
-    req: DescribeDeviceCertificatesRequest,
-    cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
-  ): Promise<DescribeDeviceCertificatesResponse> {
-    return this.request("DescribeDeviceCertificates", req, cb)
-  }
-
-  /**
    * 创建MQTT实例的性能测试任务
    */
   async CreateAuthorizationPolicy(
@@ -275,25 +343,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuthorizationPolicyResponse) => void
   ): Promise<CreateAuthorizationPolicyResponse> {
     return this.request("CreateAuthorizationPolicy", req, cb)
-  }
-
-  /**
-   * 修改MQTT JWKS 认证器
-   */
-  async ModifyJWKSAuthenticator(
-    req: ModifyJWKSAuthenticatorRequest,
-    cb?: (error: string, rep: ModifyJWKSAuthenticatorResponse) => void
-  ): Promise<ModifyJWKSAuthenticatorResponse> {
-    return this.request("ModifyJWKSAuthenticator", req, cb)
-  }
-
-  /**
-   * 创建一个jwks的认证
-   */
-  async CreateJWKSAuthenticator(
-    req: CreateJWKSAuthenticatorRequest,
-    cb?: (error: string, rep: CreateJWKSAuthenticatorResponse) => void
-  ): Promise<CreateJWKSAuthenticatorResponse> {
-    return this.request("CreateJWKSAuthenticator", req, cb)
   }
 }

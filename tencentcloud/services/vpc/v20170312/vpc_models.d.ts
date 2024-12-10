@@ -9028,6 +9028,10 @@ export interface CreateVpcEndPointServiceRequest {
      * 挂载的PAAS服务类型，CLB,CDB,CRS，不填默认挂载为CLB。
      */
     ServiceType?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribePrivateNatGateways请求参数结构体

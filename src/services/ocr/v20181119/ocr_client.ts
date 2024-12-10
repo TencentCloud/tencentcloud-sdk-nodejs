@@ -247,6 +247,7 @@ import {
   InsuranceBillInfo,
   ContentInfo,
   GetTaskStateRequest,
+  TextTractorVehicleBack,
   RecognizeMedicalInvoiceOCRRequest,
   InsuranceBillOCRResponse,
   ClassifyDetectInfo,

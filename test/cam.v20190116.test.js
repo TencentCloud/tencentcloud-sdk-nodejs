@@ -668,6 +668,16 @@ it("cam.v20190116.DescribeSafeAuthFlagIntl", async function () {
     }
 })
 
+it("cam.v20190116.UpdateRoleSessionDuration", async function () {
+    try {
+       const data = await client.UpdateRoleSessionDuration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ListGroups", async function () {
     try {
        const data = await client.ListGroups({})

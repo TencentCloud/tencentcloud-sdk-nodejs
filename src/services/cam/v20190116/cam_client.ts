@@ -22,6 +22,7 @@ import {
   ListAttachedRolePoliciesResponse,
   CreateMessageReceiverRequest,
   UpdateUserOIDCConfigResponse,
+  UpdateRoleSessionDurationResponse,
   Receiver,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
@@ -67,6 +68,7 @@ import {
   DescribeSubAccountsRequest,
   DeleteUserPermissionsBoundaryRequest,
   ListSAMLProvidersRequest,
+  UpdateRoleSessionDurationRequest,
   CreateAccessKeyResponse,
   DeletePolicyVersionResponse,
   CreateAccessKeyRequest,
@@ -889,6 +891,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafeAuthFlagIntlResponse) => void
   ): Promise<DescribeSafeAuthFlagIntlResponse> {
     return this.request("DescribeSafeAuthFlagIntl", req, cb)
+  }
+
+  /**
+   * 修改角色会话时长
+   */
+  async UpdateRoleSessionDuration(
+    req: UpdateRoleSessionDurationRequest,
+    cb?: (error: string, rep: UpdateRoleSessionDurationResponse) => void
+  ): Promise<UpdateRoleSessionDurationResponse> {
+    return this.request("UpdateRoleSessionDuration", req, cb)
   }
 
   /**

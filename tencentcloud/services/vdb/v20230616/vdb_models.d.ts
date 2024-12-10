@@ -400,16 +400,19 @@ export interface InstanceInfo {
     /**
      * 健康得分。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     HealthScore?: number;
     /**
      * 异常告警。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     Warning?: number;
     /**
      * 所属项目。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     Project?: string;
     /**

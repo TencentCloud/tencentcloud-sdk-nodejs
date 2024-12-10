@@ -28,10 +28,58 @@ class Client extends abstract_client_1.AbstractClient {
         super("mqtt.tencentcloudapi.com", "2024-05-16", clientConfig);
     }
     /**
-     * 查询实例信息
+     * 修改主题属性
      */
-    async DescribeInstance(req, cb) {
-        return this.request("DescribeInstance", req, cb);
+    async ModifyTopic(req, cb) {
+        return this.request("ModifyTopic", req, cb);
+    }
+    /**
+     * 失效Ca证书
+     */
+    async DeactivateDeviceCertificate(req, cb) {
+        return this.request("DeactivateDeviceCertificate", req, cb);
+    }
+    /**
+     * 查询mqtt主题详情
+     */
+    async DescribeTopic(req, cb) {
+        return this.request("DescribeTopic", req, cb);
+    }
+    /**
+     * 创建一个jwks的认证
+     */
+    async CreateJWTAuthenticator(req, cb) {
+        return this.request("CreateJWTAuthenticator", req, cb);
+    }
+    /**
+     * 删除设备证书
+     */
+    async DeleteDeviceCertificate(req, cb) {
+        return this.request("DeleteDeviceCertificate", req, cb);
+    }
+    /**
+     * 修改MQTT JWKS 认证器
+     */
+    async ModifyJWTAuthenticator(req, cb) {
+        return this.request("ModifyJWTAuthenticator", req, cb);
+    }
+    /**
+     * 修改MQTT JWKS 认证器
+     */
+    async ModifyJWKSAuthenticator(req, cb) {
+        return this.request("ModifyJWKSAuthenticator", req, cb);
+    }
+    /**
+     * 分页查询设备证书
+     */
+    async DescribeDeviceCertificates(req, cb) {
+        return this.request("DescribeDeviceCertificates", req, cb);
+    }
+    /**
+     * 注册设备证书
+     */
+    async RegisterDeviceCertificate(req, cb) {
+        return this.request("RegisterDeviceCertificate", req, cb);
     }
     /**
      * 创建主题
@@ -52,22 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuthorizationPolicies", req, cb);
     }
     /**
-     * 注册设备证书
+     * 查询设备证书详情接口
      */
-    async RegisterDeviceCertificate(req, cb) {
-        return this.request("RegisterDeviceCertificate", req, cb);
-    }
-    /**
-     * 修改主题属性
-     */
-    async ModifyTopic(req, cb) {
-        return this.request("ModifyTopic", req, cb);
-    }
-    /**
-     * 修改策略规则
-     */
-    async ModifyAuthorizationPolicy(req, cb) {
-        return this.request("ModifyAuthorizationPolicy", req, cb);
+    async DescribeDeviceCertificate(req, cb) {
+        return this.request("DescribeDeviceCertificate", req, cb);
     }
     /**
      * 获取实例列表，Filters参数使用说明如下：
@@ -79,6 +115,36 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceList(req, cb) {
         return this.request("DescribeInstanceList", req, cb);
+    }
+    /**
+     * 吊销设备证书
+     */
+    async RevokedDeviceCertificate(req, cb) {
+        return this.request("RevokedDeviceCertificate", req, cb);
+    }
+    /**
+     * 查询实例信息
+     */
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 删除MQTT主题
+     */
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
+    }
+    /**
+     * 创建一个jwks的认证
+     */
+    async CreateJWKSAuthenticator(req, cb) {
+        return this.request("CreateJWKSAuthenticator", req, cb);
+    }
+    /**
+     * 修改策略规则
+     */
+    async ModifyAuthorizationPolicy(req, cb) {
+        return this.request("ModifyAuthorizationPolicy", req, cb);
     }
     /**
      * 删除策略规则
@@ -93,34 +159,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuthenticator", req, cb);
     }
     /**
-     * 查询mqtt主题详情
-     */
-    async DescribeTopic(req, cb) {
-        return this.request("DescribeTopic", req, cb);
-    }
-    /**
      * 查询MQTT认证器
      */
     async DescribeAuthenticator(req, cb) {
         return this.request("DescribeAuthenticator", req, cb);
     }
     /**
-     * 创建一个jwks的认证
-     */
-    async CreateJWTAuthenticator(req, cb) {
-        return this.request("CreateJWTAuthenticator", req, cb);
-    }
-    /**
      * 修改策略规则优先级
      */
     async UpdateAuthorizationPolicyPriority(req, cb) {
         return this.request("UpdateAuthorizationPolicyPriority", req, cb);
-    }
-    /**
-     * 修改MQTT JWKS 认证器
-     */
-    async ModifyJWTAuthenticator(req, cb) {
-        return this.request("ModifyJWTAuthenticator", req, cb);
     }
     /**
      * 获取主题列表，Filter参数使用说明如下：
@@ -132,34 +180,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicList", req, cb);
     }
     /**
-     * 删除MQTT主题
-     */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
-    }
-    /**
-     * 分页查询设备证书
-     */
-    async DescribeDeviceCertificates(req, cb) {
-        return this.request("DescribeDeviceCertificates", req, cb);
-    }
-    /**
      * 创建MQTT实例的性能测试任务
      */
     async CreateAuthorizationPolicy(req, cb) {
         return this.request("CreateAuthorizationPolicy", req, cb);
-    }
-    /**
-     * 修改MQTT JWKS 认证器
-     */
-    async ModifyJWKSAuthenticator(req, cb) {
-        return this.request("ModifyJWKSAuthenticator", req, cb);
-    }
-    /**
-     * 创建一个jwks的认证
-     */
-    async CreateJWKSAuthenticator(req, cb) {
-        return this.request("CreateJWKSAuthenticator", req, cb);
     }
 }
 exports.Client = Client;

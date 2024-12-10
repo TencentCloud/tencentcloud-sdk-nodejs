@@ -138,6 +138,16 @@ it("aiart.v20221229.QueryTextToImageProJob", async function () {
     }
 })
 
+it("aiart.v20221229.ImageInpaintingRemoval", async function () {
+    try {
+       const data = await client.ImageInpaintingRemoval({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.ChangeClothes", async function () {
     try {
        const data = await client.ChangeClothes({})

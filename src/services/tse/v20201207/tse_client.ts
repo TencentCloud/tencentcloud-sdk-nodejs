@@ -35,6 +35,8 @@ import {
   DescribeUpstreamHealthCheckConfigResponse,
   NetworkAccessControl,
   DescribePublicNetworkResult,
+  NativeGatewayServiceSourceItem,
+  CreateNativeGatewayServiceSourceResponse,
   CreateCloudNativeAPIGatewayServiceRequest,
   ModifyConsoleNetworkRequest,
   PublicAddressConfig,
@@ -55,7 +57,7 @@ import {
   DescribeConfigFileReleaseRequest,
   DescribeCloudNativeAPIGatewayConfigRequest,
   KongTarget,
-  ZookeeperReplica,
+  SourceInstanceAuth,
   AutoScalerPolicy,
   DescribeNacosServerInterfacesResponse,
   KVMapping,
@@ -76,7 +78,7 @@ import {
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   NativeGatewayServerGroup,
   ModifyNetworkAccessStrategyResponse,
-  RestartSREInstanceRequest,
+  ModifyAutoScalerResourceStrategyRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
@@ -113,6 +115,7 @@ import {
   DeleteCloudNativeAPIGatewayPublicNetworkResponse,
   CreateOrUpdateConfigFileAndReleaseRequest,
   ApolloEnvParam,
+  DeleteNativeGatewayServiceSourceResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
   CloudNativeAPIGatewayBalancedService,
   DescribeConfigFileGroupsResponse,
@@ -124,10 +127,12 @@ import {
   CreateConfigFileRequest,
   DescribeConfigFilesResponse,
   DescribeCloudNativeAPIGatewayServicesResponse,
+  CreateNativeGatewayServiceSourceRequest,
   QpsThreshold,
   GovernanceServiceInput,
   VpcInfo,
   ConfigFile,
+  ModifyNativeGatewayServiceSourceRequest,
   KongActiveHealthCheck,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   KongServicePreview,
@@ -140,6 +145,7 @@ import {
   DescribeCloudNativeAPIGatewayCertificatesResponse,
   KongUpstreamPreview,
   KongCertificate,
+  SourceInfo,
   DeleteGovernanceInstancesResponse,
   DescribeWafDomainsResult,
   BindAutoScalerResourceStrategyToGroupsResponse,
@@ -183,6 +189,7 @@ import {
   CreateCloudNativeAPIGatewayPublicNetworkRequest,
   UpdateCloudNativeAPIGatewayResult,
   ModifyGovernanceNamespacesRequest,
+  SourceInstanceVpcInfo,
   ModifyConfigFileGroupResponse,
   DescribeAllConfigFileTemplatesRequest,
   RateLimitResponse,
@@ -238,6 +245,7 @@ import {
   CreateGovernanceNamespacesResponse,
   UpstreamHealthCheckConfig,
   CreateConfigFileGroupRequest,
+  ZookeeperReplica,
   DeleteAutoScalerResourceStrategyResponse,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
   DeleteGovernanceAliasesRequest,
@@ -269,6 +277,7 @@ import {
   DescribeNativeGatewayServerGroupsResponse,
   ModifyNativeGatewayServerGroupResponse,
   ConfigFileTag,
+  DescribeNativeGatewayServiceSourcesResponse,
   ListCloudNativeAPIGatewayResult,
   CreateCloudNativeAPIGatewayServiceResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
@@ -289,6 +298,7 @@ import {
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
   CreatePublicNetworkResult,
+  DescribeNativeGatewayServiceSourcesRequest,
   CLBMultiRegion,
   CreateWafDomainsResponse,
   DescribePublicAddressConfigRequest,
@@ -332,9 +342,10 @@ import {
   DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   CreateGovernanceServicesResponse,
   Filter,
-  ModifyAutoScalerResourceStrategyRequest,
+  RestartSREInstanceRequest,
   CreateOrUpdateConfigFileAndReleaseResponse,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
+  DeleteNativeGatewayServiceSourceRequest,
   RestartSREInstanceResponse,
   DescribeZookeeperServerInterfacesRequest,
   DeleteGovernanceServicesRequest,
@@ -342,6 +353,7 @@ import {
   DeleteConfigFileReleasesRequest,
   CreateAutoScalerResourceStrategyRequest,
   KongServices,
+  ModifyNativeGatewayServiceSourceResponse,
   CreateCloudNativeAPIGatewayServerGroupResult,
   DescribeGovernanceServiceContractsResponse,
   UpdateUpstreamHealthCheckConfigResponse,
@@ -584,6 +596,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改网关服务来源
+   */
+  async ModifyNativeGatewayServiceSource(
+    req: ModifyNativeGatewayServiceSourceRequest,
+    cb?: (error: string, rep: ModifyNativeGatewayServiceSourceResponse) => void
+  ): Promise<ModifyNativeGatewayServiceSourceResponse> {
+    return this.request("ModifyNativeGatewayServiceSource", req, cb)
+  }
+
+  /**
    * 修改云原生API网关实例网络基本信息，例如带宽以及描述，只支持修改客户端公网/内网的信息。
    */
   async ModifyNetworkBasicInfo(
@@ -704,6 +726,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除治理中心服务
+   */
+  async DeleteGovernanceServices(
+    req: DeleteGovernanceServicesRequest,
+    cb?: (error: string, rep: DeleteGovernanceServicesResponse) => void
+  ): Promise<DeleteGovernanceServicesResponse> {
+    return this.request("DeleteGovernanceServices", req, cb)
+  }
+
+  /**
    * 根据命名空间、组、名字查找配置文件
    */
   async DescribeConfigFile(
@@ -794,13 +826,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新网关上游实例列表，仅支持IPList服务类型
+   * 删除治理中心服务实例
    */
-  async UpdateUpstreamTargets(
-    req: UpdateUpstreamTargetsRequest,
-    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
-  ): Promise<UpdateUpstreamTargetsResponse> {
-    return this.request("UpdateUpstreamTargets", req, cb)
+  async DeleteGovernanceInstancesByHost(
+    req: DeleteGovernanceInstancesByHostRequest,
+    cb?: (error: string, rep: DeleteGovernanceInstancesByHostResponse) => void
+  ): Promise<DeleteGovernanceInstancesByHostResponse> {
+    return this.request("DeleteGovernanceInstancesByHost", req, cb)
   }
 
   /**
@@ -934,6 +966,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询网关服务来源实例列表
+   */
+  async DescribeNativeGatewayServiceSources(
+    req: DescribeNativeGatewayServiceSourcesRequest,
+    cb?: (error: string, rep: DescribeNativeGatewayServiceSourcesResponse) => void
+  ): Promise<DescribeNativeGatewayServiceSourcesResponse> {
+    return this.request("DescribeNativeGatewayServiceSources", req, cb)
+  }
+
+  /**
    * 修改云原生API网关实例分组基础信息
    */
   async ModifyNativeGatewayServerGroup(
@@ -964,13 +1006,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除治理中心服务
+   * 创建网关服务来源
    */
-  async DeleteGovernanceServices(
-    req: DeleteGovernanceServicesRequest,
-    cb?: (error: string, rep: DeleteGovernanceServicesResponse) => void
-  ): Promise<DeleteGovernanceServicesResponse> {
-    return this.request("DeleteGovernanceServices", req, cb)
+  async CreateNativeGatewayServiceSource(
+    req: CreateNativeGatewayServiceSourceRequest,
+    cb?: (error: string, rep: CreateNativeGatewayServiceSourceResponse) => void
+  ): Promise<CreateNativeGatewayServiceSourceResponse> {
+    return this.request("CreateNativeGatewayServiceSource", req, cb)
   }
 
   /**
@@ -1111,6 +1153,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGovernanceServiceContractVersionsResponse) => void
   ): Promise<DescribeGovernanceServiceContractVersionsResponse> {
     return this.request("DescribeGovernanceServiceContractVersions", req, cb)
+  }
+
+  /**
+   * 更新网关上游实例列表，仅支持IPList服务类型
+   */
+  async UpdateUpstreamTargets(
+    req: UpdateUpstreamTargetsRequest,
+    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
+  ): Promise<UpdateUpstreamTargetsResponse> {
+    return this.request("UpdateUpstreamTargets", req, cb)
   }
 
   /**
@@ -1474,13 +1526,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除治理中心服务实例
+   * 删除网关服务来源实例
    */
-  async DeleteGovernanceInstancesByHost(
-    req: DeleteGovernanceInstancesByHostRequest,
-    cb?: (error: string, rep: DeleteGovernanceInstancesByHostResponse) => void
-  ): Promise<DeleteGovernanceInstancesByHostResponse> {
-    return this.request("DeleteGovernanceInstancesByHost", req, cb)
+  async DeleteNativeGatewayServiceSource(
+    req: DeleteNativeGatewayServiceSourceRequest,
+    cb?: (error: string, rep: DeleteNativeGatewayServiceSourceResponse) => void
+  ): Promise<DeleteNativeGatewayServiceSourceResponse> {
+    return this.request("DeleteNativeGatewayServiceSource", req, cb)
   }
 
   /**

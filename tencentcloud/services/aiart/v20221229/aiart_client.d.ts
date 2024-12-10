@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ReplaceBackgroundRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ChangeClothesRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ChangeClothesRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, ImageInpaintingRemovalResponse, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ImageInpaintingRemovalRequest, ReplaceBackgroundRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
@@ -106,6 +106,11 @@ export declare class Client extends AbstractClient {
 并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
     QueryTextToImageProJob(req: QueryTextToImageProJobRequest, cb?: (error: string, rep: QueryTextToImageProJobResponse) => void): Promise<QueryTextToImageProJobResponse>;
+    /**
+     * 消除补全接口通过图像 mask 指定需要消除的人、物、文字等区域，在选定区域对图像内容进行消除与重绘补全。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
+     */
+    ImageInpaintingRemoval(req: ImageInpaintingRemovalRequest, cb?: (error: string, rep: ImageInpaintingRemovalResponse) => void): Promise<ImageInpaintingRemovalResponse>;
     /**
      * 上传正面全身模特照和服装平铺图，生成模特换装后的图片。
 生成的换装图片分辨率和模特照分辨率一致。

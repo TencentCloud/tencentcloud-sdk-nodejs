@@ -318,6 +318,52 @@ export interface DescribePublicNetworkResult {
     PublicNetwork?: CloudNativeAPIGatewayConfig;
 }
 /**
+ * 网关数据来源单个描述
+ */
+export interface NativeGatewayServiceSourceItem {
+    /**
+     * 网关实例ID
+     */
+    GatewayID: string;
+    /**
+     * 服务来源ID
+     */
+    SourceID: string;
+    /**
+     * 服务来源名称
+     */
+    SourceName: string;
+    /**
+     * 服务来源类型
+     */
+    SourceType: string;
+    /**
+     * 服务来源额外信息
+     */
+    SourceInfo: SourceInfo;
+    /**
+     * 创建时间
+     */
+    CreateTime: string;
+    /**
+     * 修改时间
+     */
+    ModifyTime: string;
+}
+/**
+ * CreateNativeGatewayServiceSource返回参数结构体
+ */
+export interface CreateNativeGatewayServiceSourceResponse {
+    /**
+     * 创建是否成功
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCloudNativeAPIGatewayService请求参数结构体
  */
 export interface CreateCloudNativeAPIGatewayServiceRequest {
@@ -910,46 +956,24 @@ export interface KongTarget {
     Tags?: Array<string>;
 }
 /**
- * Zookeeper副本信息
+ * 实例鉴权信息
  */
-export interface ZookeeperReplica {
+export interface SourceInstanceAuth {
     /**
-     * 名称
-     */
-    Name: string;
-    /**
-     * 角色
-     */
-    Role: string;
-    /**
-     * 状态
-     */
-    Status: string;
-    /**
-     * 子网ID
+     * 用户名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    Username?: string;
     /**
-     * 可用区ID
+     * 账户密码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Password?: string;
     /**
-     * 可用区ID
+     * 访问凭据 token
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId: string;
-    /**
-     * 别名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AliasName: string;
-    /**
-     * VPC ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
+    AccessToken?: string;
 }
 /**
  * 扩容策略
@@ -1426,21 +1450,43 @@ export interface ModifyNetworkAccessStrategyResponse {
     RequestId?: string;
 }
 /**
- * RestartSREInstance请求参数结构体
+ * ModifyAutoScalerResourceStrategy请求参数结构体
  */
-export interface RestartSREInstanceRequest {
+export interface ModifyAutoScalerResourceStrategyRequest {
     /**
-     * 微服务引擎实例Id
+     * 网关实例ID
      */
-    InstanceId: string;
+    GatewayId: string;
     /**
-     * 重启的环境类型（PROD，DEV，UAT等）
+     * 策略ID
      */
-    EnvTypes?: Array<string>;
+    StrategyId: string;
     /**
-     * 指定需要重启的实例节点（当前仅支持zk单节点重启）
+     * 策略名称
      */
-    NodeName?: string;
+    StrategyName?: string;
+    /**
+     * 策略描述
+     */
+    Description?: string;
+    /**
+     * 指标伸缩配置
+     */
+    Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig;
+    /**
+     * 定时伸缩配置
+     * @deprecated
+     */
+    CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+    /**
+     * 最大节点数
+     * @deprecated
+     */
+    MaxReplicas?: number;
+    /**
+     * 指标伸缩配置
+     */
+    CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
 }
 /**
  * UnbindAutoScalerResourceStrategyFromGroups请求参数结构体
@@ -2386,6 +2432,19 @@ export interface ApolloEnvParam {
     EnvDesc?: string;
 }
 /**
+ * DeleteNativeGatewayServiceSource返回参数结构体
+ */
+export interface DeleteNativeGatewayServiceSourceResponse {
+    /**
+     * 结果
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServiceRateLimitRequest {
@@ -2609,6 +2668,42 @@ export interface DescribeCloudNativeAPIGatewayServicesResponse {
     RequestId?: string;
 }
 /**
+ * CreateNativeGatewayServiceSource请求参数结构体
+ */
+export interface CreateNativeGatewayServiceSourceRequest {
+    /**
+     * 网关实例ID
+     */
+    GatewayID: string;
+    /**
+     * 服务来源类型，参考值：
+  - TSE-Nacos
+  - TSE-Consul
+  - TSE-PolarisMesh
+  - Customer-Nacos
+  - Customer-Consul
+  - Customer-PolarisMesh
+  - TSF
+  - TKE
+  - EKS
+  - PrivateDNS
+  - Customer-DNS
+     */
+    SourceType: string;
+    /**
+     * 服务来源实例ID，当SourceType的值不为PrivateDNS或Customer-DNS时，必填
+     */
+    SourceID?: string;
+    /**
+     * 服务来源实例名称，当SourceType的值不为PrivateDNS时，必填
+     */
+    SourceName?: string;
+    /**
+     * 服务来源实例额外信息
+     */
+    SourceInfo?: SourceInfo;
+}
+/**
  * 云原生网关限流插件Qps阈值
  */
 export interface QpsThreshold {
@@ -2772,6 +2867,27 @@ export interface ConfigFile {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReleaseBy?: string;
+}
+/**
+ * ModifyNativeGatewayServiceSource请求参数结构体
+ */
+export interface ModifyNativeGatewayServiceSourceRequest {
+    /**
+     * 网关实例ID
+     */
+    GatewayID: string;
+    /**
+     * 服务来源实例ID
+     */
+    SourceID: string;
+    /**
+     * 服务来源名称
+     */
+    SourceName: string;
+    /**
+     * 服务来源实例额外信息
+     */
+    SourceInfo?: SourceInfo;
 }
 /**
  * Kong网关主动健康检查配置
@@ -2974,6 +3090,25 @@ export interface KongCertificate {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Cert?: KongCertificatesPreview;
+}
+/**
+ * 服务来源
+ */
+export interface SourceInfo {
+    /**
+     * 微服务引擎接入IP地址信息
+     */
+    Addresses?: Array<string>;
+    /**
+     * 微服务引擎VPC信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcInfo?: SourceInstanceVpcInfo;
+    /**
+     * 微服务引擎鉴权信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Auth?: SourceInstanceAuth;
 }
 /**
  * DeleteGovernanceInstances返回参数结构体
@@ -4097,6 +4232,21 @@ export interface ModifyGovernanceNamespacesRequest {
      * 命名空间信息。
      */
     GovernanceNamespaces: Array<GovernanceNamespaceInput>;
+}
+/**
+ * 微服务引擎实例的VPC信息
+ */
+export interface SourceInstanceVpcInfo {
+    /**
+     * 微服务引擎VPC信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcID?: string;
+    /**
+     * 微服务引擎子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetID?: string;
 }
 /**
  * ModifyConfigFileGroup返回参数结构体
@@ -5312,6 +5462,48 @@ export interface CreateConfigFileGroupRequest {
     ConfigFileGroup: ConfigFileGroup;
 }
 /**
+ * Zookeeper副本信息
+ */
+export interface ZookeeperReplica {
+    /**
+     * 名称
+     */
+    Name: string;
+    /**
+     * 角色
+     */
+    Role: string;
+    /**
+     * 状态
+     */
+    Status: string;
+    /**
+     * 子网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId: string;
+    /**
+     * 可用区ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone: string;
+    /**
+     * 可用区ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId: string;
+    /**
+     * 别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AliasName: string;
+    /**
+     * VPC ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+}
+/**
  * DeleteAutoScalerResourceStrategy返回参数结构体
  */
 export interface DeleteAutoScalerResourceStrategyResponse {
@@ -6068,6 +6260,23 @@ export interface ConfigFileTag {
     Value?: string;
 }
 /**
+ * DescribeNativeGatewayServiceSources返回参数结构体
+ */
+export interface DescribeNativeGatewayServiceSourcesResponse {
+    /**
+     * 总实例数
+     */
+    Total?: number;
+    /**
+     * 服务来源实例列表
+     */
+    List?: Array<NativeGatewayServiceSourceItem>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取云原生API网关实例列表响应结果。
  */
 export interface ListCloudNativeAPIGatewayResult {
@@ -6481,6 +6690,39 @@ export interface CreatePublicNetworkResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkId?: string;
+}
+/**
+ * DescribeNativeGatewayServiceSources请求参数结构体
+ */
+export interface DescribeNativeGatewayServiceSourcesRequest {
+    /**
+     * 网关实例ID
+     */
+    GatewayID: string;
+    /**
+     * 单页条数，最大100
+     */
+    Limit: number;
+    /**
+     * 分页偏移量
+     */
+    Offset: number;
+    /**
+     * 服务来源实例名称，模糊搜索
+     */
+    SourceName?: string;
+    /**
+     * 微服务引擎类型：TSE-Nacos｜TSE-Consul｜TSE-PolarisMesh｜Customer-Nacos｜Customer-Consul｜Customer-PolarisMesh
+     */
+    SourceTypes?: Array<string>;
+    /**
+     * 排序字段类型，当前仅支持SourceName
+     */
+    OrderField?: string;
+    /**
+     * 排序类型，AES/DESC
+     */
+    OrderType?: string;
 }
 /**
  * CLB多可用区信息
@@ -7488,43 +7730,21 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * ModifyAutoScalerResourceStrategy请求参数结构体
+ * RestartSREInstance请求参数结构体
  */
-export interface ModifyAutoScalerResourceStrategyRequest {
+export interface RestartSREInstanceRequest {
     /**
-     * 网关实例ID
+     * 微服务引擎实例Id
      */
-    GatewayId: string;
+    InstanceId: string;
     /**
-     * 策略ID
+     * 重启的环境类型（PROD，DEV，UAT等）
      */
-    StrategyId: string;
+    EnvTypes?: Array<string>;
     /**
-     * 策略名称
+     * 指定需要重启的实例节点（当前仅支持zk单节点重启）
      */
-    StrategyName?: string;
-    /**
-     * 策略描述
-     */
-    Description?: string;
-    /**
-     * 指标伸缩配置
-     */
-    Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig;
-    /**
-     * 定时伸缩配置
-     * @deprecated
-     */
-    CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
-    /**
-     * 最大节点数
-     * @deprecated
-     */
-    MaxReplicas?: number;
-    /**
-     * 指标伸缩配置
-     */
-    CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig;
+    NodeName?: string;
 }
 /**
  * CreateOrUpdateConfigFileAndRelease返回参数结构体
@@ -7561,6 +7781,19 @@ export interface DescribeOneCloudNativeAPIGatewayServiceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteNativeGatewayServiceSource请求参数结构体
+ */
+export interface DeleteNativeGatewayServiceSourceRequest {
+    /**
+     * 网关实例 ID
+     */
+    GatewayID: string;
+    /**
+     * 服务来源实例 ID
+     */
+    SourceID: string;
 }
 /**
  * RestartSREInstance返回参数结构体
@@ -7680,6 +7913,15 @@ export interface KongServices {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
+}
+/**
+ * ModifyNativeGatewayServiceSource返回参数结构体
+ */
+export interface ModifyNativeGatewayServiceSourceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 创建网关分组信息

@@ -228,6 +228,16 @@ it("tse.v20201207.DescribeAutoScalerResourceStrategies", async function () {
     }
 })
 
+it("tse.v20201207.ModifyNativeGatewayServiceSource", async function () {
+    try {
+       const data = await client.ModifyNativeGatewayServiceSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyNetworkBasicInfo", async function () {
     try {
        const data = await client.ModifyNetworkBasicInfo({})
@@ -348,6 +358,16 @@ it("tse.v20201207.PublishConfigFiles", async function () {
     }
 })
 
+it("tse.v20201207.DeleteGovernanceServices", async function () {
+    try {
+       const data = await client.DeleteGovernanceServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeConfigFile", async function () {
     try {
        const data = await client.DescribeConfigFile({})
@@ -438,9 +458,9 @@ it("tse.v20201207.DescribeGovernanceNamespaces", async function () {
     }
 })
 
-it("tse.v20201207.UpdateUpstreamTargets", async function () {
+it("tse.v20201207.DeleteGovernanceInstancesByHost", async function () {
     try {
-       const data = await client.UpdateUpstreamTargets({})
+       const data = await client.DeleteGovernanceInstancesByHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,6 +598,16 @@ it("tse.v20201207.DescribeUpstreamHealthCheckConfig", async function () {
     }
 })
 
+it("tse.v20201207.DescribeNativeGatewayServiceSources", async function () {
+    try {
+       const data = await client.DescribeNativeGatewayServiceSources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyNativeGatewayServerGroup", async function () {
     try {
        const data = await client.ModifyNativeGatewayServerGroup({})
@@ -608,9 +638,9 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayServiceRateLimit", async function (
     }
 })
 
-it("tse.v20201207.DeleteGovernanceServices", async function () {
+it("tse.v20201207.CreateNativeGatewayServiceSource", async function () {
     try {
-       const data = await client.DeleteGovernanceServices({})
+       const data = await client.CreateNativeGatewayServiceSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -751,6 +781,16 @@ it("tse.v20201207.CreateGovernanceNamespaces", async function () {
 it("tse.v20201207.DescribeGovernanceServiceContractVersions", async function () {
     try {
        const data = await client.DescribeGovernanceServiceContractVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.UpdateUpstreamTargets", async function () {
+    try {
+       const data = await client.UpdateUpstreamTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,9 +1158,9 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayServiceRateLimit", async function (
     }
 })
 
-it("tse.v20201207.DeleteGovernanceInstancesByHost", async function () {
+it("tse.v20201207.DeleteNativeGatewayServiceSource", async function () {
     try {
-       const data = await client.DeleteGovernanceInstancesByHost({})
+       const data = await client.DeleteNativeGatewayServiceSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

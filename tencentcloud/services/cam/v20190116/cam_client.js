@@ -420,6 +420,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSafeAuthFlagIntl", req, cb);
     }
     /**
+     * 修改角色会话时长
+     */
+    async UpdateRoleSessionDuration(req, cb) {
+        return this.request("UpdateRoleSessionDuration", req, cb);
+    }
+    /**
      * 查询用户组列表
      */
     async ListGroups(req, cb) {

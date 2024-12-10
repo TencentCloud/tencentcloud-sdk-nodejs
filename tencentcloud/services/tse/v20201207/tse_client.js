@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoScalerResourceStrategies", req, cb);
     }
     /**
+     * 修改网关服务来源
+     */
+    async ModifyNativeGatewayServiceSource(req, cb) {
+        return this.request("ModifyNativeGatewayServiceSource", req, cb);
+    }
+    /**
      * 修改云原生API网关实例网络基本信息，例如带宽以及描述，只支持修改客户端公网/内网的信息。
      */
     async ModifyNetworkBasicInfo(req, cb) {
@@ -226,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PublishConfigFiles", req, cb);
     }
     /**
+     * 删除治理中心服务
+     */
+    async DeleteGovernanceServices(req, cb) {
+        return this.request("DeleteGovernanceServices", req, cb);
+    }
+    /**
      * 根据命名空间、组、名字查找配置文件
      */
     async DescribeConfigFile(req, cb) {
@@ -280,10 +292,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGovernanceNamespaces", req, cb);
     }
     /**
-     * 更新网关上游实例列表，仅支持IPList服务类型
+     * 删除治理中心服务实例
      */
-    async UpdateUpstreamTargets(req, cb) {
-        return this.request("UpdateUpstreamTargets", req, cb);
+    async DeleteGovernanceInstancesByHost(req, cb) {
+        return this.request("DeleteGovernanceInstancesByHost", req, cb);
     }
     /**
      * 创建云原生网关路由
@@ -364,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUpstreamHealthCheckConfig", req, cb);
     }
     /**
+     * 查询网关服务来源实例列表
+     */
+    async DescribeNativeGatewayServiceSources(req, cb) {
+        return this.request("DescribeNativeGatewayServiceSources", req, cb);
+    }
+    /**
      * 修改云原生API网关实例分组基础信息
      */
     async ModifyNativeGatewayServerGroup(req, cb) {
@@ -382,10 +400,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCloudNativeAPIGatewayServiceRateLimit", req, cb);
     }
     /**
-     * 删除治理中心服务
+     * 创建网关服务来源
      */
-    async DeleteGovernanceServices(req, cb) {
-        return this.request("DeleteGovernanceServices", req, cb);
+    async CreateNativeGatewayServiceSource(req, cb) {
+        return this.request("CreateNativeGatewayServiceSource", req, cb);
     }
     /**
      * 重启微服务引擎实例
@@ -470,6 +488,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGovernanceServiceContractVersions(req, cb) {
         return this.request("DescribeGovernanceServiceContractVersions", req, cb);
+    }
+    /**
+     * 更新网关上游实例列表，仅支持IPList服务类型
+     */
+    async UpdateUpstreamTargets(req, cb) {
+        return this.request("UpdateUpstreamTargets", req, cb);
     }
     /**
      * 开启 WAF 防护
@@ -688,10 +712,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudNativeAPIGatewayServiceRateLimit", req, cb);
     }
     /**
-     * 删除治理中心服务实例
+     * 删除网关服务来源实例
      */
-    async DeleteGovernanceInstancesByHost(req, cb) {
-        return this.request("DeleteGovernanceInstancesByHost", req, cb);
+    async DeleteNativeGatewayServiceSource(req, cb) {
+        return this.request("DeleteNativeGatewayServiceSource", req, cb);
     }
     /**
      * 获取配置文件发布历史列表

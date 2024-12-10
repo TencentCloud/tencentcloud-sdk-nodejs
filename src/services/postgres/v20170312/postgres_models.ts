@@ -684,15 +684,15 @@ export interface SlowlogDetail {
   /**
    * 花费总时间
    */
-  TotalTime: number
+  TotalTime?: number
   /**
    * 调用总次数
    */
-  TotalCalls: number
+  TotalCalls?: number
   /**
    * 脱敏后的慢SQL列表
    */
-  NormalQueries: Array<NormalQueryItem>
+  NormalQueries?: Array<NormalQueryItem>
 }
 
 /**

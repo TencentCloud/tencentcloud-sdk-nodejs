@@ -151,6 +151,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryTextToImageProJob", req, cb);
     }
     /**
+     * 消除补全接口通过图像 mask 指定需要消除的人、物、文字等区域，在选定区域对图像内容进行消除与重绘补全。
+默认提供1个并发，代表最多能同时处理1个已提交的任务。
+     */
+    async ImageInpaintingRemoval(req, cb) {
+        return this.request("ImageInpaintingRemoval", req, cb);
+    }
+    /**
      * 上传正面全身模特照和服装平铺图，生成模特换装后的图片。
 生成的换装图片分辨率和模特照分辨率一致。
 模特换装默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。

@@ -3254,6 +3254,11 @@ export interface VehicleLicenseOCRResponse {
      */
     VehicleLicenseType?: string;
     /**
+     * 拖拉机行驶证副页正面的识别结果，CardSide 为 BACK。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TractorBackInfo?: TextTractorVehicleBack;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -8329,6 +8334,56 @@ export interface GetTaskStateRequest {
     TaskId: string;
 }
 /**
+ * 拖拉机行驶证副页正面的识别结果
+ */
+export interface TextTractorVehicleBack {
+    /**
+     * 号牌号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PlateNo?: string;
+    /**
+     * 准乘人数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AllowNum?: string;
+    /**
+     * 联合收割机质量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CombineHarvesterQuality?: string;
+    /**
+     * 拖拉机最小使用质量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TractorMinUsageWeight?: string;
+    /**
+     * 拖拉机最大允许载质量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TractorMaxAllowLoadCapacity?: string;
+    /**
+     * 外廓尺寸
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExternalSize?: string;
+    /**
+     * 检验记录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Record?: string;
+    /**
+     * 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VehicleType?: string;
+    /**
+     * 住址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Address?: string;
+}
+/**
  * RecognizeMedicalInvoiceOCR请求参数结构体
  */
 export interface RecognizeMedicalInvoiceOCRRequest {
@@ -9034,6 +9089,10 @@ export interface MLIDCardOCRRequest {
      */
     ImageBase64?: string;
     /**
+     * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    BackImageBase64?: string;
+    /**
      * 图片的 Url 地址。( 中国地区之外不支持这个字段 )
   支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
   支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
@@ -9041,6 +9100,10 @@ export interface MLIDCardOCRRequest {
   非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
+    /**
+     * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    BackImageUrl?: string;
     /**
      * 是否返回图片，默认false
      */
@@ -9805,6 +9868,10 @@ export interface VehicleLicenseOCRRequest {
   默认值为：FRONT。
      */
     CardSide?: string;
+    /**
+     * FRONT为行驶证主页正面（有红色印章的一面），BACK 为拖拉机行驶证副页正面识别
+     */
+    TractorCardSide?: string;
 }
 /**
  * 增值税发票卷票信息
@@ -10073,6 +10140,10 @@ export interface MLIDCardOCRResponse {
      * 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证）
      */
     Birthday?: string;
+    /**
+     * 马来身份证背面号码
+     */
+    MyKadNumber?: string;
     /**
      * 告警码
   -9101 证件边框不完整告警

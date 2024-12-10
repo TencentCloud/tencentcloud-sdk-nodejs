@@ -249,15 +249,15 @@ export interface Credentials {
   /**
    * token。token长度和绑定的策略有关，最长不超过4096字节。
    */
-  Token: string
+  Token?: string
   /**
    * 临时证书密钥ID。最长不超过1024字节。
    */
-  TmpSecretId: string
+  TmpSecretId?: string
   /**
    * 临时证书密钥Key。最长不超过1024字节。
    */
-  TmpSecretKey: string
+  TmpSecretKey?: string
 }
 
 /**

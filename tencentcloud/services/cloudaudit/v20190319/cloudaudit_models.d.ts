@@ -201,7 +201,7 @@ export interface UpdateAuditRequest {
      */
     AuditName: string;
     /**
-     * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
+     * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，操作审计会将您的日志内容实时投递到您指定地域的指定队列中。
      */
     IsEnableCmqNotify?: number;
     /**
@@ -209,7 +209,7 @@ export interface UpdateAuditRequest {
      */
     ReadWriteAttribute?: number;
     /**
-     * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
+     * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。操作审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
      */
     KeyId?: string;
     /**
@@ -217,7 +217,7 @@ export interface UpdateAuditRequest {
      */
     CosRegion?: string;
     /**
-     * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+     * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，操作审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
      */
     CmqQueueName?: string;
     /**
@@ -233,7 +233,7 @@ export interface UpdateAuditRequest {
      */
     IsEnableKmsEncry?: number;
     /**
-     * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
+     * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，操作审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
      */
     CosBucketName?: string;
     /**
@@ -606,7 +606,7 @@ export interface UpdateAuditResponse {
     /**
      * 是否更新成功
      */
-    IsSuccess: number;
+    IsSuccess?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -843,55 +843,55 @@ export interface DescribeAuditResponse {
     /**
      * 是否开启cmq消息通知。1：是，0：否。
      */
-    IsEnableCmqNotify: number;
+    IsEnableCmqNotify?: number;
     /**
      * 管理事件读写属性，1：只读，2：只写，3：全部
      */
-    ReadWriteAttribute: number;
+    ReadWriteAttribute?: number;
     /**
      * CMK的全局唯一标识符。
      */
-    KeyId: string;
+    KeyId?: string;
     /**
      * 跟踪集状态，1：开启，0：停止。
      */
-    AuditStatus: number;
+    AuditStatus?: number;
     /**
      * 跟踪集名称。
      */
-    AuditName: string;
+    AuditName?: string;
     /**
      * cos存储桶所在地域。
      */
-    CosRegion: string;
+    CosRegion?: string;
     /**
      * 队列名称。
      */
-    CmqQueueName: string;
+    CmqQueueName?: string;
     /**
      * CMK别名。
      */
-    KmsAlias: string;
+    KmsAlias?: string;
     /**
      * kms地域。
      */
-    KmsRegion: string;
+    KmsRegion?: string;
     /**
      * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
      */
-    IsEnableKmsEncry: number;
+    IsEnableKmsEncry?: number;
     /**
      * cos存储桶名称。
      */
-    CosBucketName: string;
+    CosBucketName?: string;
     /**
      * 队列所在地域。
      */
-    CmqRegion: string;
+    CmqRegion?: string;
     /**
      * 日志前缀。
      */
-    LogFilePrefix: string;
+    LogFilePrefix?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

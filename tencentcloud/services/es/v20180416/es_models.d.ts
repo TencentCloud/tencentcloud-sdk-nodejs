@@ -1203,31 +1203,35 @@ export interface Operation {
     /**
      * 操作唯一id
      */
-    Id: number;
+    Id?: number;
     /**
      * 操作开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 操作类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 操作详情
      */
-    Detail: OperationDetail;
+    Detail?: OperationDetail;
     /**
      * 操作结果
      */
-    Result: string;
+    Result?: string;
     /**
      * 流程任务信息
      */
-    Tasks: Array<TaskDetail>;
+    Tasks?: Array<TaskDetail>;
     /**
      * 操作进度
      */
-    Progress: number;
+    Progress?: number;
+    /**
+     * 回滚标记， 0未回滚 ，1回滚中，2已回滚
+     */
+    RollbackTag?: number;
     /**
      * 操作者Uin
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3499,6 +3503,21 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadWriteMode?: number;
+    /**
+     * 是否有置放群组异步调度任务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableScheduleRecoverGroup?: boolean;
+    /**
+     * 异步调度任务的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
+    /**
+     * 开启集群保护：OPEN-开启，CLOSE-关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableDestroyProtection?: string;
 }
 /**
  * 数据接入cvm实例信息
@@ -3670,6 +3689,26 @@ export interface EsDictionaryInfo {
      * 更新词典类型
      */
     UpdateType: string;
+    /**
+     * ansj启用词词典列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnsjMain?: Array<DictInfo>;
+    /**
+     * ansj停用词词典列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnsjStop?: Array<DictInfo>;
+    /**
+     * ansj歧义词库列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnsjAmbiguity?: Array<DictInfo>;
+    /**
+     * ansj同义词词典列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnsjSynonyms?: Array<DictInfo>;
 }
 /**
  * DescribeLogstashPipelines请求参数结构体
@@ -4840,6 +4879,10 @@ export interface UpdateInstanceRequest {
      * 置放群组异步任务可维护时间段
      */
     EnableScheduleOperationDuration?: EnableScheduleOperationDuration;
+    /**
+     * 开启集群保护：OPEN-开启，CLOSE-关闭
+     */
+    EnableDestroyProtection?: string;
 }
 /**
  * CreateServerlessInstance返回参数结构体

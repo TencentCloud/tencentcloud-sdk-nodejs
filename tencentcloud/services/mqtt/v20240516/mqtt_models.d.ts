@@ -481,6 +481,19 @@ export interface DescribeAuthenticatorResponse {
     RequestId?: string;
 }
 /**
+ * DeleteDeviceCertificate请求参数结构体
+ */
+export interface DeleteDeviceCertificateRequest {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 设备证书序列号
+     */
+    DeviceCertificateSn: string;
+}
+/**
  * CreateTopic返回参数结构体
  */
 export interface CreateTopicResponse {
@@ -533,6 +546,86 @@ export interface ModifyJWTAuthenticatorRequest {
     Remark?: string;
 }
 /**
+ * DescribeDeviceCertificate返回参数结构体
+ */
+export interface DescribeDeviceCertificateResponse {
+    /**
+     * 创建时间
+     */
+    CreatedTime?: number;
+    /**
+     * 上次更新时间
+     */
+    UpdateTime?: number;
+    /**
+     * 证书失效日期
+     */
+    NotAfterTime?: number;
+    /**
+     * 上次激活时间
+     */
+    LastActivationTime?: number;
+    /**
+     * 上次取消激活时间
+     */
+    LastInactivationTime?: number;
+    /**
+     * 证书状态
+     */
+    Status?: string;
+    /**
+     * 证书序列号
+     */
+    CaSn?: string;
+    /**
+     * 设备证书sn
+     */
+    DeviceCertificateSn?: string;
+    /**
+     * 证书内容
+     */
+    DeviceCertificate?: string;
+    /**
+     * 设备证书cn
+     */
+    DeviceCertificateCn?: string;
+    /**
+     * 证书格式
+     */
+    Format?: string;
+    /**
+     * 客户端id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientId?: string;
+    /**
+     *     API, 手动注册
+      JITP 自动注册
+     */
+    CertificateSource?: string;
+    /**
+     * 证书生效开始时间
+     */
+    NotBeforeTime?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RevokedDeviceCertificate请求参数结构体
+ */
+export interface RevokedDeviceCertificateRequest {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 设备证书序列号
+     */
+    DeviceCertificateSn: string;
+}
+/**
  * 策略规则优先级
  */
 export interface AuthorizationPolicyPriority {
@@ -551,6 +644,15 @@ export interface AuthorizationPolicyPriority {
  * CreateAuthorizationPolicy返回参数结构体
  */
 export interface CreateAuthorizationPolicyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteDeviceCertificate返回参数结构体
+ */
+export interface DeleteDeviceCertificateResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1028,6 +1130,15 @@ export interface MQTTInstanceItem {
     MaxSubscription?: number;
 }
 /**
+ * RevokedDeviceCertificate返回参数结构体
+ */
+export interface RevokedDeviceCertificateResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteTopic返回参数结构体
  */
 export interface DeleteTopicResponse {
@@ -1037,65 +1148,39 @@ export interface DeleteTopicResponse {
     RequestId?: string;
 }
 /**
- * ModifyAuthorizationPolicy请求参数结构体
+ * DeactivateDeviceCertificate返回参数结构体
  */
-export interface ModifyAuthorizationPolicyRequest {
+export interface DeactivateDeviceCertificateResponse {
     /**
-     * 策略
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Id: number;
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceCertificate请求参数结构体
+ */
+export interface DescribeDeviceCertificateRequest {
     /**
-     * 实例ID
+     * 设备证书sn
+     */
+    DeviceCertificateSn: string;
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+}
+/**
+ * DeactivateDeviceCertificate请求参数结构体
+ */
+export interface DeactivateDeviceCertificateRequest {
+    /**
+     * 集群id
      */
     InstanceId: string;
     /**
-     * 策略名称
+     * 设备证书序列号
      */
-    PolicyName?: string;
-    /**
-     * 策略版本
-     */
-    PolicyVersion?: number;
-    /**
-     * 策略优先级，越小越优先
-     */
-    Priority?: number;
-    /**
-     * allow、deny
-     */
-    Effect?: string;
-    /**
-     * connect、pub、sub
-     */
-    Actions?: string;
-    /**
-     * 资源
-     */
-    Resources?: string;
-    /**
-     * 用户名
-     */
-    Username?: string;
-    /**
-     * 1.匹配保留消息；2.匹配非保留消息；3.匹配所有消息
-     */
-    Retain?: number;
-    /**
-     * 客户端
-     */
-    ClientId?: string;
-    /**
-     * IP
-     */
-    Ip?: string;
-    /**
-     * 0、1、2
-     */
-    Qos?: string;
-    /**
-     * 备注信息
-     */
-    Remark?: string;
+    DeviceCertificateSn: string;
 }
 /**
  * DescribeInstance请求参数结构体
@@ -1157,6 +1242,67 @@ export interface TagFilter {
      * 标签键名称
      */
     TagValues?: Array<string>;
+}
+/**
+ * ModifyAuthorizationPolicy请求参数结构体
+ */
+export interface ModifyAuthorizationPolicyRequest {
+    /**
+     * 策略
+     */
+    Id: number;
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 策略名称
+     */
+    PolicyName?: string;
+    /**
+     * 策略版本
+     */
+    PolicyVersion?: number;
+    /**
+     * 策略优先级，越小越优先
+     */
+    Priority?: number;
+    /**
+     * allow、deny
+     */
+    Effect?: string;
+    /**
+     * connect、pub、sub
+     */
+    Actions?: string;
+    /**
+     * 资源
+     */
+    Resources?: string;
+    /**
+     * 用户名
+     */
+    Username?: string;
+    /**
+     * 1.匹配保留消息；2.匹配非保留消息；3.匹配所有消息
+     */
+    Retain?: number;
+    /**
+     * 客户端
+     */
+    ClientId?: string;
+    /**
+     * IP
+     */
+    Ip?: string;
+    /**
+     * 0、1、2
+     */
+    Qos?: string;
+    /**
+     * 备注信息
+     */
+    Remark?: string;
 }
 /**
  * ActivateDeviceCertificate返回参数结构体

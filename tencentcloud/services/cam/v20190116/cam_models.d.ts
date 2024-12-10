@@ -89,6 +89,15 @@ export interface UpdateUserOIDCConfigResponse {
     RequestId?: string;
 }
 /**
+ * UpdateRoleSessionDuration返回参数结构体
+ */
+export interface UpdateRoleSessionDurationResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 消息接收人信息
  */
 export interface Receiver {
@@ -647,73 +656,73 @@ export interface StrategyInfo {
     /**
      * 策略ID。
      */
-    PolicyId: number;
+    PolicyId?: number;
     /**
      * 策略名称。
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 策略创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 策略类型。1 表示自定义策略，2 表示预设策略。
      */
-    Type: number;
+    Type?: number;
     /**
      * 策略描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
      */
-    CreateMode: number;
+    CreateMode?: number;
     /**
      * 关联的用户数
      */
-    Attachments: number;
+    Attachments?: number;
     /**
      * 策略关联的产品
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceType: string;
+    ServiceType?: string;
     /**
      * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsAttached: number;
+    IsAttached?: number;
     /**
      * 是否已下线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Deactived: number;
+    Deactived?: number;
     /**
      * 已下线产品列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeactivedDetail: Array<string>;
+    DeactivedDetail?: Array<string>;
     /**
      * 是否是服务相关角色策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsServiceLinkedPolicy: number;
+    IsServiceLinkedPolicy?: number;
     /**
      * 关联策略实体数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AttachEntityCount: number;
+    AttachEntityCount?: number;
     /**
      * 关联权限边界实体数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AttachEntityBoundaryCount: number;
+    AttachEntityBoundaryCount?: number;
     /**
      * 最后编辑时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DeleteRole返回参数结构体
@@ -779,6 +788,23 @@ export interface DeleteUserPermissionsBoundaryRequest {
  * ListSAMLProviders请求参数结构体
  */
 export declare type ListSAMLProvidersRequest = null;
+/**
+ * UpdateRoleSessionDuration请求参数结构体
+ */
+export interface UpdateRoleSessionDurationRequest {
+    /**
+     * 时长(秒)
+     */
+    SessionDuration: number;
+    /**
+     * 角色名(与角色ID必填一个)
+     */
+    RoleName?: string;
+    /**
+     * 角色ID(与角色名必填一个)
+     */
+    RoleId?: number;
+}
 /**
  * CreateAccessKey返回参数结构体
  */
@@ -2642,47 +2668,52 @@ export interface GroupMemberInfo {
     /**
      * 子用户 Uid。
      */
-    Uid: number;
+    Uid?: number;
     /**
      * 子用户 Uin。
      */
-    Uin: number;
+    Uin?: number;
     /**
      * 子用户名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 手机号。
      */
-    PhoneNum: string;
+    PhoneNum?: string;
     /**
      * 手机区域代码。
      */
-    CountryCode: string;
+    CountryCode?: string;
     /**
      * 是否已验证手机。0-未验证  1-验证
      */
-    PhoneFlag: number;
+    PhoneFlag?: number;
     /**
      * 邮箱地址。
      */
-    Email: string;
+    Email?: string;
     /**
      * 是否已验证邮箱。0-未验证  1-验证
      */
-    EmailFlag: number;
+    EmailFlag?: number;
     /**
      * 用户类型。1-全局协作者 2-项目协作者 3-消息接收者
      */
-    UserType: number;
+    UserType?: number;
     /**
      * 创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 是否为主消息接收人。0-否 1-是
      */
-    IsReceiverOwner: number;
+    IsReceiverOwner?: number;
+    /**
+     * 昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
 }
 /**
  * CreatePolicy请求参数结构体
