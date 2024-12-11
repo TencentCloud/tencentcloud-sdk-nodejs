@@ -5426,6 +5426,11 @@ export interface InstanceNodeDistribution {
      * 有调度任务且没有切回的可用区，此标识为true
      */
     NodePermWipeFlag?: boolean;
+    /**
+     * 可用区状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneStatus?: string;
 }
 /**
  * CreateRocketMQGroup请求参数结构体

@@ -157,6 +157,14 @@ export interface CreateModelServiceRequest {
      * 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092
      */
     ServicePort?: number;
+    /**
+     * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
+     */
+    DeployType?: string;
+    /**
+     * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+     */
+    InstancePerReplicas?: number;
 }
 /**
  * 描述在线服务
@@ -321,6 +329,21 @@ export interface Service {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceGroupSWType?: string;
+    /**
+     * 服务的归档状态  Waiting 等待归档中，Archived 已归档
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ArchiveStatus?: string;
+    /**
+     * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeployType?: string;
+    /**
+     * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstancePerReplicas?: string;
 }
 /**
  * DescribeModelAccelerateVersions请求参数结构体
@@ -527,6 +550,10 @@ export interface NotebookSetItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VolumeSourceGooseFS?: GooseFS;
+    /**
+     * 子用户名称
+     */
+    SubUinName?: string;
 }
 /**
  * notebook ssh端口配置
@@ -552,6 +579,11 @@ export interface SSHConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoginCommand?: string;
+    /**
+     * 登录地址是否改变
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAddressChanged?: boolean;
 }
 /**
  * 大模型生成Token统计
@@ -559,17 +591,14 @@ export interface SSHConfig {
 export interface Usage {
     /**
      * 生成的token数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompletionTokens?: number;
     /**
      * 输入的token数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PromptTokens?: number;
     /**
      * 总共token数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalTokens?: number;
 }
@@ -584,10 +613,7 @@ export interface DescribeBillingResourceGroupsRequest {
      */
     Type?: string;
     /**
-     * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)
-                      ResourceGroupName (资源组名称列表)
-  Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询
-  每次请求的Filters的上限为5，Filter.Values的上限为100
+     * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量）Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
      */
     Filters?: Array<Filter>;
     /**
@@ -652,6 +678,19 @@ export interface DescribeTrainingModelVersionsRequest {
   每次请求的Filters的上限为10，Filter.Values的上限为100
      */
     Filters?: Array<Filter>;
+}
+/**
+ * 计费项询价单元
+ */
+export interface SpecUnit {
+    /**
+     * 计费项名称
+     */
+    SpecName: string;
+    /**
+     * 计费项数量,建议不超过100万
+     */
+    SpecCount: number;
 }
 /**
  * CreateDataset返回参数结构体
@@ -784,23 +823,6 @@ export interface VolumeMount {
     VolumeSourceType?: string;
 }
 /**
- * SendChatMessage返回参数结构体
- */
-export interface SendChatMessageResponse {
-    /**
-     * 答案
-     */
-    Answer?: string;
-    /**
-     * 会话id,返回请求的会话id
-     */
-    SessionId?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeBillingResourceGroup返回参数结构体
  */
 export interface DescribeBillingResourceGroupResponse {
@@ -905,6 +927,27 @@ export interface DescribeBillingResourceGroupsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 计费项询价结果
+ */
+export interface SpecPrice {
+    /**
+     * 计费项名称
+     */
+    SpecName: string;
+    /**
+     * 原价，单位：分。最大值42亿，超过则返回0
+     */
+    TotalCost: number;
+    /**
+     * 优惠后的价格，单位：分
+     */
+    RealTotalCost: number;
+    /**
+     * 计费项数量
+     */
+    SpecCount?: number;
 }
 /**
  * StartNotebook返回参数结构体
@@ -1231,6 +1274,10 @@ export interface ModifyModelServiceRequest {
      * 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092
      */
     ServicePort?: number;
+    /**
+     * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+     */
+    InstancePerReplicas?: number;
 }
 /**
  * ChatCompletion请求参数结构体
@@ -1238,7 +1285,7 @@ export interface ModifyModelServiceRequest {
 export interface ChatCompletionRequest {
     /**
      * 对话的目标模型ID。
-  自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。
+  自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-q7pfr29p。
      */
     Model: string;
     /**
@@ -1246,7 +1293,7 @@ export interface ChatCompletionRequest {
      */
     Messages: Array<Message>;
     /**
-     * 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。
+     * 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为0.7，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。
      */
     Temperature?: number;
     /**
@@ -1254,7 +1301,7 @@ export interface ChatCompletionRequest {
      */
     TopP?: number;
     /**
-     * 仅当模型为自行部署的开源大模型时生效。最大生成的token数目。默认为无限大。
+     * 仅当模型为自行部署的开源大模型时生效。默认 512，模型可生成内容的最长 token 数量，最大不能超过模型支持的上下文长度。
      */
     MaxTokens?: number;
 }
@@ -1574,6 +1621,25 @@ export interface StartCmdInfo {
     WorkerStartCmd?: string;
 }
 /**
+ * DescribeModelServiceGroups返回参数结构体
+ */
+export interface DescribeModelServiceGroupsResponse {
+    /**
+     * 推理服务组数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 服务组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceGroups?: Array<ServiceGroup>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBillingResourceInstanceRunningJobs返回参数结构体
  */
 export interface DescribeBillingResourceInstanceRunningJobsResponse {
@@ -1838,6 +1904,51 @@ export interface ResourceConfigInfo {
     RDMAConfig?: RDMAConfig;
 }
 /**
+ * 计费项内容
+ */
+export interface Spec {
+    /**
+     * 计费项标签
+     */
+    SpecId?: string;
+    /**
+     * 计费项名称
+     */
+    SpecName?: string;
+    /**
+     * 计费项显示名称
+     */
+    SpecAlias?: string;
+    /**
+     * 是否售罄
+     */
+    Available?: boolean;
+    /**
+     * 当前资源售罄时，可用的区域有哪些
+     */
+    AvailableRegion?: Array<string>;
+    /**
+     * 当前计费项支持的特性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecFeatures?: Array<string>;
+    /**
+     * 计费项类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecType?: string;
+    /**
+     * GPU类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GpuType?: string;
+    /**
+     * 计费项CategoryId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryId?: string;
+}
+/**
  * 配置GooseFS参数
  */
 export interface GooseFS {
@@ -1876,26 +1987,6 @@ export interface Option {
     Value: number;
 }
 /**
- * 自定义镜像仓库凭据
- */
-export interface ImageSecret {
-    /**
-     * 用于加密密码的KMS公钥ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    KeyId?: string;
-    /**
-     * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Username?: string;
-    /**
-     * 密码,base64编码； 当keyId不为空时，密码是加密后的
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password?: string;
-}
-/**
  * 默认内网调用信息
  */
 export interface DefaultInnerCallInfo {
@@ -1916,7 +2007,6 @@ export interface DefaultInnerCallInfo {
 export interface Choice {
     /**
      * 对话结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: Message;
     /**
@@ -2018,6 +2108,14 @@ export interface DescribeDatasetsRequest {
      * 返回数据个数，默认20，最大支持200
      */
     Limit?: number;
+    /**
+     * 是否检查CFS。若开启，则在CFS挂载好之前，不会返回数据集列表。
+     */
+    CFSChecking?: boolean;
+    /**
+     * 是否返回CFS详情。
+     */
+    CFSDetail?: boolean;
 }
 /**
  * 优化模型版本列表
@@ -2123,23 +2221,21 @@ export interface DescribeInferTemplatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeModelServiceGroups返回参数结构体
+ * DescribeBillingSpecs请求参数结构体
  */
-export interface DescribeModelServiceGroupsResponse {
+export interface DescribeBillingSpecsRequest {
     /**
-     * 推理服务组数量。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月
      */
-    TotalCount?: number;
+    ChargeType: string;
     /**
-     * 服务组信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS
      */
-    ServiceGroups?: Array<ServiceGroup>;
+    TaskType?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 资源类型：["", "CALC", "CPU", "GPU", "GPU-SW"]
      */
-    RequestId?: string;
+    ResourceType?: string;
 }
 /**
  * 推理代码的信息
@@ -2289,122 +2385,157 @@ export interface DatasetInfo {
      * 数据集id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetId: string;
+    DatasetId?: string;
     /**
      * 数据集名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetName: string;
+    DatasetName?: string;
     /**
      * 数据集创建者
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creator: string;
+    Creator?: string;
     /**
      * 数据集版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetVersion: string;
+    DatasetVersion?: string;
     /**
      * 数据集类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetType: string;
+    DatasetType?: string;
     /**
      * 数据集标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetTags: Array<Tag>;
+    DatasetTags?: Array<Tag>;
     /**
      * 数据集对应标注任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetAnnotationTaskName: string;
+    DatasetAnnotationTaskName?: string;
     /**
      * 数据集对应标注任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetAnnotationTaskId: string;
+    DatasetAnnotationTaskId?: string;
     /**
      * 处理进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: number;
+    Process?: number;
     /**
      * 数据集状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetStatus: string;
+    DatasetStatus?: string;
     /**
      * 错误详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 数据集创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 数据集更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 外部任务类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalTaskType: string;
+    ExternalTaskType?: string;
     /**
      * 数据集存储大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetSize: string;
+    DatasetSize?: string;
     /**
      * 数据集数据数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileNum: number;
+    FileNum?: number;
     /**
      * 数据集源cos 路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageDataPath: CosPathInfo;
+    StorageDataPath?: CosPathInfo;
     /**
      * 数据集输出cos路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageLabelPath: CosPathInfo;
+    StorageLabelPath?: CosPathInfo;
     /**
      * 数据集标注状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationStatus: string;
+    AnnotationStatus?: string;
     /**
      * 数据集类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationType: string;
+    AnnotationType?: string;
     /**
      * 数据集标注格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationFormat: string;
+    AnnotationFormat?: string;
     /**
      * 数据集范围
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetScope: string;
+    DatasetScope?: string;
     /**
      * 数据集OCR子场景
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrScene: string;
+    OcrScene?: string;
     /**
      * 数据集字典修改状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationKeyStatus: string;
+    AnnotationKeyStatus?: string;
+    /**
+     * 内容类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContentType?: string;
+    /**
+     * 数据集建模类别。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasetScene?: string;
+    /**
+     * CFS配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CFSConfig?: CFSConfig;
+    /**
+     * 数据集标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneTags?: Array<string>;
+    /**
+     * 已标注数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NumAnnotated?: number;
+    /**
+     * 标注规范
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnnotationSpecification?: string;
+    /**
+     * 标注Schema是否配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnnotationSchemaConfigured?: boolean;
 }
 /**
  * DescribeModelAccelerateTask返回参数结构体
@@ -2519,11 +2650,6 @@ export interface ImageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportDataPipeline?: boolean;
-    /**
-     * 镜像仓库用户名密码信息(仅当ImageType为CUSTOM第三方镜像的时候需要)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImageSecret?: ImageSecret;
 }
 /**
  * 推理服务在集群中的信息
@@ -2621,6 +2747,10 @@ export interface ServiceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ModelHotUpdateEnable: boolean;
+    /**
+     * 服务的规格别名
+     */
+    InstanceAlias?: string;
     /**
      * 实例数量调节方式,默认为手动
   支持：自动 - "AUTO", 手动 - "MANUAL"
@@ -2740,14 +2870,16 @@ export interface DescribeModelServiceGroupRequest {
 export interface Message {
     /**
      * 角色名。支持三个角色：system、user、assistant，其中system仅开头可出现一次，也可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Role: string;
     /**
      * 对话输入内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: string;
+    Content?: string;
+    /**
+     * 多模态对话输入内容，Content与MultiModalContents两者只需要填写其中一个即可，当对话中包含多模态对话信息时，则填写本参数
+     */
+    MultiModalContents?: Array<MultiModalContent>;
 }
 /**
  * CreatePresignedNotebookUrl请求参数结构体
@@ -2801,21 +2933,34 @@ export interface DescribeDatasetsResponse {
      * 数据集总量（名称维度）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 数据集按照数据集名称聚合的分组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetGroups: Array<DatasetGroup>;
+    DatasetGroups?: Array<DatasetGroup>;
     /**
      * 数据集ID总量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetIdNums: number;
+    DatasetIdNums?: number;
+    /**
+     * 若开启了CFSChecking，则检查CFS是否准备完毕。若CFS未准备完毕，则返回true，并且TotalCount为0，DatasetGroups为空。
+     */
+    CFSNotReady?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 多模态对话图片信息
+ */
+export interface ImageUrl {
+    /**
+     * 图片url
+     */
+    Url?: string;
 }
 /**
  * 模型来源
@@ -2921,6 +3066,15 @@ export interface IntranetCallInfo {
     PrivateLinkInfosV2?: Array<PrivateLinkInfo>;
 }
 /**
+ * DescribeBillingSpecsPrice请求参数结构体
+ */
+export interface DescribeBillingSpecsPriceRequest {
+    /**
+     * 询价参数，支持批量询价
+     */
+    SpecsParam: Array<SpecUnit>;
+}
+/**
  * 资源组节点信息
  */
 export interface Instance {
@@ -3006,24 +3160,17 @@ export interface Instance {
     ErrMsg?: string;
 }
 /**
- * 共享弹性网卡信息
+ * DescribeBillingSpecs返回参数结构体
  */
-export interface ServiceEIPInfo {
+export interface DescribeBillingSpecsResponse {
     /**
-     * 服务ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 计费项列表
      */
-    ServiceId?: string;
+    Specs?: Array<Spec>;
     /**
-     * 用户VpcId
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    VpcId?: string;
-    /**
-     * 用户子网Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
+    RequestId?: string;
 }
 /**
  * DescribeNotebooks返回参数结构体
@@ -3031,12 +3178,10 @@ export interface ServiceEIPInfo {
 export interface DescribeNotebooksResponse {
     /**
      * 详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotebookSet?: Array<NotebookSetItem>;
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -3052,132 +3197,162 @@ export interface DatasetGroup {
      * 数据集ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetId: string;
+    DatasetId?: string;
     /**
      * 数据集名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetName: string;
+    DatasetName?: string;
     /**
      * 创建者
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creator: string;
+    Creator?: string;
     /**
      * 数据集版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetVersion: string;
+    DatasetVersion?: string;
     /**
      * 数据集类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetType: string;
+    DatasetType?: string;
     /**
      * 数据集标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetTags: Array<Tag>;
+    DatasetTags?: Array<Tag>;
     /**
      * 数据集标注任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetAnnotationTaskName: string;
+    DatasetAnnotationTaskName?: string;
     /**
      * 数据集标注任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetAnnotationTaskId: string;
+    DatasetAnnotationTaskId?: string;
     /**
      * 处理进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: number;
+    Process?: number;
     /**
      * 数据集状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetStatus: string;
+    DatasetStatus?: string;
     /**
      * 错误详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 外部关联TASKType
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalTaskType: string;
+    ExternalTaskType?: string;
     /**
      * 数据集大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetSize: string;
+    DatasetSize?: string;
     /**
      * 数据集数据量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileNum: number;
+    FileNum?: number;
     /**
      * 数据集源COS路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageDataPath: CosPathInfo;
+    StorageDataPath?: CosPathInfo;
     /**
      * 数据集标签存储路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageLabelPath: CosPathInfo;
+    StorageLabelPath?: CosPathInfo;
     /**
      * 数据集版本聚合详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetVersions: Array<DatasetInfo>;
+    DatasetVersions?: Array<DatasetInfo>;
     /**
      * 数据集标注状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationStatus: string;
+    AnnotationStatus?: string;
     /**
      * 数据集类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationType: string;
+    AnnotationType?: string;
     /**
      * 数据集标注格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationFormat: string;
+    AnnotationFormat?: string;
     /**
      * 数据集范围
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasetScope: string;
+    DatasetScope?: string;
     /**
      * 数据集OCR子场景
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrScene: string;
+    OcrScene?: string;
     /**
      * 数据集字典修改状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnnotationKeyStatus: string;
+    AnnotationKeyStatus?: string;
     /**
      * 文本数据集导入方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ContentType?: string;
+    /**
+     * 数据集建模类别。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasetScene?: string;
+    /**
+     * CFS配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CFSConfig?: CFSConfig;
+    /**
+     * 数据集标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneTags?: Array<string>;
+    /**
+     * 已标注数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NumAnnotated?: number;
+    /**
+     * 标注规范
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnnotationSpecification?: string;
+    /**
+     * 标注Schema是否配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AnnotationSchemaConfigured?: boolean;
 }
 /**
  * 实例状况
@@ -3259,21 +3434,21 @@ export interface GroupResource {
     /**
      * CPU核数; 单位为1/1000核，比如100表示0.1核
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 内存；单位为MB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 总卡数；GPUDetail 显卡数之和；单位为1/100卡，比如100代表1卡
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Gpu: number;
+    Gpu?: number;
     /**
      * Gpu详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GpuDetailSet: Array<GpuDetail>;
+    GpuDetailSet?: Array<GpuDetail>;
 }
 /**
  * DescribeModelServiceCallInfo返回参数结构体
@@ -3576,6 +3751,22 @@ export interface NotebookDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VolumeSourceGooseFS?: GooseFS;
+    /**
+     * 子用户ID
+     */
+    SubUin?: string;
+    /**
+     * 调度节点ID
+     */
+    ResourceGroupInstanceId?: string;
+    /**
+     * 子用户名称
+     */
+    SubUinName?: string;
+    /**
+     * 任务实例创建时间
+     */
+    JobCreateTime?: string;
 }
 /**
  * 过滤器
@@ -3696,6 +3887,10 @@ export interface ModelInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPrivateModel?: boolean;
+    /**
+     * 模型的类别 多模态MultiModal, 文本大模型 LLM
+     */
+    ModelCategory?: string;
 }
 /**
  * CreateDataset请求参数结构体
@@ -3712,15 +3907,15 @@ export interface CreateDatasetRequest {
   TYPE_DATASET_TABLE，表格
   TYPE_DATASET_OTHER，其他
      */
-    DatasetType: string;
+    DatasetType?: string;
     /**
      * 数据源cos路径
      */
-    StorageDataPath: CosPathInfo;
+    StorageDataPath?: CosPathInfo;
     /**
      * 数据集标签cos存储路径
      */
-    StorageLabelPath: CosPathInfo;
+    StorageLabelPath?: CosPathInfo;
     /**
      * 数据集标签
      */
@@ -3737,6 +3932,8 @@ export interface CreateDatasetRequest {
   ANNOTATION_TYPE_DETECTION，目标检测
   ANNOTATION_TYPE_SEGMENTATION，图片分割
   ANNOTATION_TYPE_TRACKING，目标跟踪
+  ANNOTATION_TYPE_OCR，OCR
+  ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
      */
     AnnotationType?: string;
     /**
@@ -3745,6 +3942,10 @@ export interface CreateDatasetRequest {
   ANNOTATION_FORMAT_PASCAL，Pascal Voc
   ANNOTATION_FORMAT_COCO，COCO
   ANNOTATION_FORMAT_FILE，文件目录结构
+  ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
+  ANNOTATION_FORMAT_TXT，文本类型TXT格式
+  ANNOTATION_FORMAT_CSV，文本类型CSV格式
+  ANNOTATION_FORMAT_JSON，文本类型JSON格式
      */
     AnnotationFormat?: string;
     /**
@@ -3756,9 +3957,23 @@ export interface CreateDatasetRequest {
      */
     IsSchemaExisted?: boolean;
     /**
-     * 导入文件粒度，按行或者按文件
+     * 导入文件粒度
+  TYPE_TEXT_LINE，按行
+  TYPE_TEXT_FILE，按文件
      */
     ContentType?: string;
+    /**
+     * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
+     */
+    DatasetScene?: string;
+    /**
+     * 数据集标签。
+     */
+    SceneTags?: Array<string>;
+    /**
+     * 数据集CFS配置。仅支持LLM场景
+     */
+    CFSConfig?: CFSConfig;
 }
 /**
  * CreateModelService返回参数结构体
@@ -3766,7 +3981,6 @@ export interface CreateDatasetRequest {
 export interface CreateModelServiceResponse {
     /**
      * 生成的模型服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Service?: Service;
     /**
@@ -3922,7 +4136,7 @@ export interface DescribeNotebookResponse {
     /**
      * 详情
      */
-    NotebookDetail: NotebookDetail;
+    NotebookDetail?: NotebookDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3995,36 +4209,24 @@ export interface IngressPrivateLinkInfo {
     State?: string;
 }
 /**
- * SendChatMessage请求参数结构体
+ * 共享弹性网卡信息
  */
-export interface SendChatMessageRequest {
+export interface ServiceEIPInfo {
     /**
-     * 会话id，标识一组对话的唯一id，id变更则重置会话
+     * 服务ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionId: string;
+    ServiceId?: string;
     /**
-     * 问题描述
+     * 用户VpcId
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Question: string;
+    VpcId?: string;
     /**
-     * 会话模型版本。
-  金融大模型：填写sn-finllm-13b-chat-v1。
-  默认为sn-finllm-13b-chat-v1，即金融大模型。
+     * 用户子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelVersion?: string;
-    /**
-     * 使用模式。
-  通用问答：填写General。
-  搜索增强问答：填写WithSearchPlugin。
-  默认为General，即通用问答。
-  当前可体验模型仅支持General。
-     */
-    Mode?: string;
-    /**
-     * 搜索来源。仅当Mode为WithSearchPlugin时生效。
-  预置文稿库：填写Preset。自定义：填写Custom。
-     */
-    SearchSource?: string;
+    SubnetId?: string;
 }
 /**
  * DescribeModelAccelerateTask请求参数结构体
@@ -4093,6 +4295,11 @@ export interface TrainingTaskDetail {
      * 子账号uin
      */
     SubUin?: string;
+    /**
+     * 创建者名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubUinName?: string;
     /**
      * 地域
      */
@@ -4549,7 +4756,7 @@ export interface DescribeTrainingTaskRequest {
  */
 export interface ChatCompletionResponse {
     /**
-     * 部署好的服务Id
+     * 对话的模型服务组ID
      */
     Model?: string;
     /**
@@ -4558,12 +4765,10 @@ export interface ChatCompletionResponse {
     Choices?: Array<Choice>;
     /**
      * 会话Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
     /**
      * token统计
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Usage?: Usage;
     /**
@@ -4631,6 +4836,12 @@ export interface DataConfig {
      * 映射路径
      */
     MappingPath?: string;
+    /**
+     * 存储用途
+  可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataSourceUsage?: string;
     /**
      * DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4774,147 +4985,162 @@ export interface ModelAccelerateTask {
      * 模型加速任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelAccTaskId: string;
+    ModelAccTaskId?: string;
     /**
      * 模型加速任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelAccTaskName: string;
+    ModelAccTaskName?: string;
     /**
      * 模型ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelId: string;
+    ModelId?: string;
     /**
      * 模型名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelName: string;
+    ModelName?: string;
     /**
      * 模型版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelVersion: string;
+    ModelVersion?: string;
     /**
      * 模型来源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelSource: string;
+    ModelSource?: string;
     /**
      * 优化级别
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OptimizationLevel: string;
+    OptimizationLevel?: string;
     /**
      * 任务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * input节点个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelInputNum: number;
+    ModelInputNum?: number;
     /**
      * input节点信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelInputInfos: Array<ModelInputInfo>;
+    ModelInputInfos?: Array<ModelInputInfo>;
     /**
      * GPU型号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GPUType: string;
+    GPUType?: string;
     /**
      * 计费模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 加速比
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Speedup: string;
+    Speedup?: string;
     /**
      * 模型输入cos路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelInputPath: CosPathInfo;
+    ModelInputPath?: CosPathInfo;
     /**
      * 模型输出cos路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelOutputPath: CosPathInfo;
+    ModelOutputPath?: CosPathInfo;
     /**
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 算法框架
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlgorithmFramework: string;
+    AlgorithmFramework?: string;
     /**
      * 排队个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WaitNumber: number;
+    WaitNumber?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskProgress: number;
+    TaskProgress?: number;
     /**
      * 模型格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelFormat: string;
+    ModelFormat?: string;
     /**
      * 模型Tensor信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TensorInfos: Array<string>;
+    TensorInfos?: Array<string>;
     /**
      * 模型专业参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HyperParameter: HyperParameter;
+    HyperParameter?: HyperParameter;
     /**
      * 加速引擎版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccEngineVersion: string;
+    AccEngineVersion?: string;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 优化模型是否已保存到模型仓库
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsSaved: boolean;
+    IsSaved?: boolean;
     /**
      * SAVED_MODEL保存时配置的签名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelSignature: string;
+    ModelSignature?: string;
     /**
      * 是否是QAT模型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QATModel: boolean;
+    QATModel?: boolean;
     /**
      * 加速引擎对应的框架版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FrameworkVersion?: string;
+    /**
+     * 模型版本ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelVersionId?: string;
+    /**
+     * 资源组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceGroupId?: string;
+    /**
+     * 资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceGroupName?: string;
 }
 /**
  * Pod信息展示
@@ -5073,6 +5299,36 @@ export interface DeleteTrainingModelVersionRequest {
      * 是否同步清理cos
      */
     EnableDeleteCos?: boolean;
+}
+/**
+ * DescribeBillingSpecsPrice返回参数结构体
+ */
+export interface DescribeBillingSpecsPriceResponse {
+    /**
+     * 计费项价格，支持批量返回
+     */
+    SpecsPrice?: Array<SpecPrice>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 多模态对话内容,支持图片与文字信息
+ */
+export interface MultiModalContent {
+    /**
+     * 对话类型，text表示文本对话内容，image_url表示图片对话内容
+     */
+    Type: string;
+    /**
+     * 文本对话内容，当Type为text时需要填写该值
+     */
+    Text?: string;
+    /**
+     * 图片对话内容，当Type为image_url时需要填写该值
+     */
+    ImageUrl?: ImageUrl;
 }
 /**
  * DescribeTrainingModelVersion返回参数结构体

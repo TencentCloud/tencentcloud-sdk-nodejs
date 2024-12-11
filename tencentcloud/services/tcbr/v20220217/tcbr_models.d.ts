@@ -5,11 +5,11 @@ export interface DescribeCloudRunServersResponse {
     /**
      * 服务列表
      */
-    ServerList: Array<ServerBaseInfo>;
+    ServerList?: Array<ServerBaseInfo>;
     /**
      * 服务总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -142,11 +142,11 @@ export interface DescribeServerManageTaskResponse {
     /**
      * 是否存在
      */
-    IsExist: boolean;
+    IsExist?: boolean;
     /**
      * 任务信息
      */
-    Task: ServerManageTaskInfo;
+    Task?: ServerManageTaskInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -159,30 +159,30 @@ export interface TaskStepInfo {
     /**
      * 步骤名
      */
-    Name: string;
+    Name?: string;
     /**
      * 未启动："todo"
   运行中："running"
   失败："failed"
   成功结束："finished"
      */
-    Status: string;
+    Status?: string;
     /**
      * 开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 消耗时间：秒
      */
-    CostTime: number;
+    CostTime?: number;
     /**
      * 失败原因
      */
-    FailReason: string;
+    FailReason?: string;
 }
 /**
  * DescribeCloudRunEnvs返回参数结构体
@@ -485,17 +485,17 @@ export interface OnlineVersionInfo {
      * 版本名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionName: string;
+    VersionName?: string;
     /**
      * 镜像url
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageUrl: string;
+    ImageUrl?: string;
     /**
      * 流量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowRatio: string;
+    FlowRatio?: string;
 }
 /**
  * 服务基础配置信息
@@ -595,17 +595,17 @@ export interface DescribeCloudRunServerDetailResponse {
      * 服务基本信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BaseInfo: ServerBaseInfo;
+    BaseInfo?: ServerBaseInfo;
     /**
      * 服务配置信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerConfig: ServerBaseConfig;
+    ServerConfig?: ServerBaseConfig;
     /**
      * 在线版本信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OnlineVersionInfos: Array<OnlineVersionInfo>;
+    OnlineVersionInfos?: Array<OnlineVersionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -635,39 +635,39 @@ export interface EnvBaseInfo {
     /**
      * 环境Id
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 套餐类型：Trial ｜ Standard ｜ Professional ｜ Enterprise
      */
-    PackageType: string;
+    PackageType?: string;
     /**
      * VPC Id
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 环境创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 环境别名
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 环境状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 环境地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 环境类型 tcbr ｜ run
      */
-    EnvType: string;
+    EnvType?: string;
     /**
      * 子网id
      */
-    SubnetIds: string;
+    SubnetIds?: string;
 }
 /**
  * 服务基本信息
@@ -838,7 +838,7 @@ export interface CreateCloudRunServerResponse {
     /**
      * 一键部署任务Id，微信云托管，暂时用不到
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -876,11 +876,11 @@ export interface UpdateCloudRunServerResponse {
     /**
      * 环境Id
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 一键部署任务Id，暂时用不到
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -974,65 +974,65 @@ export interface ServerManageTaskInfo {
     /**
      * 任务Id
      */
-    Id: number;
+    Id?: number;
     /**
      * 环境Id
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 服务名
      */
-    ServerName: string;
+    ServerName?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 变更类型
      */
-    ChangeType: string;
+    ChangeType?: string;
     /**
      * 发布类型
      */
-    ReleaseType: string;
+    ReleaseType?: string;
     /**
      * 部署类型
      */
-    DeployType: string;
+    DeployType?: string;
     /**
      * 上一个版本名
      */
-    PreVersionName: string;
+    PreVersionName?: string;
     /**
      * 版本名
      */
-    VersionName: string;
+    VersionName?: string;
     /**
      * 流水线Id
      */
-    PipelineId: number;
+    PipelineId?: number;
     /**
      * 流水线任务Id
      */
-    PipelineTaskId: number;
+    PipelineTaskId?: number;
     /**
      * 发布单Id
      */
-    ReleaseId: number;
+    ReleaseId?: number;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 步骤信息
      */
-    Steps: Array<TaskStepInfo>;
+    Steps?: Array<TaskStepInfo>;
     /**
      * 失败原因
      */
-    FailReason: string;
+    FailReason?: string;
     /**
      * 操作标识
      */
-    OperatorRemark: string;
+    OperatorRemark?: string;
 }

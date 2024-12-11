@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateModelServiceRequest, DescribeModelAccelerateVersionsRequest, StopModelAccelerateTaskRequest, DeleteTrainingModelVersionResponse, DescribeBillingResourceGroupsRequest, DeleteNotebookRequest, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, DescribeTrainingTasksRequest, SendChatMessageResponse, DescribeBillingResourceGroupResponse, DescribeBillingResourceGroupsResponse, StartNotebookResponse, DescribeTrainingModelVersionRequest, StartNotebookRequest, PushTrainingMetricsRequest, DescribeModelAccelerateVersionsResponse, DescribeBuildInImagesRequest, ModifyModelServiceRequest, ChatCompletionRequest, DescribeModelServiceCallInfoRequest, CreateTrainingModelRequest, DescribeBillingResourceInstanceRunningJobsResponse, CreateNotebookRequest, CreatePresignedNotebookUrlResponse, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeModelServiceGroupsResponse, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, DescribeModelServiceResponse, DescribeModelAccelerateTaskResponse, DescribeModelServiceGroupsRequest, DescribeModelServiceRequest, DeleteModelServiceRequest, DescribeModelServiceGroupRequest, CreatePresignedNotebookUrlRequest, StopNotebookResponse, DescribeModelServiceHotUpdatedResponse, DescribeBuildInImagesResponse, DescribeDatasetsResponse, CreateNotebookResponse, DescribeNotebooksResponse, DescribeModelServiceCallInfoResponse, DescribeNotebooksRequest, DeleteNotebookResponse, ModifyModelServiceResponse, CreateDatasetRequest, CreateModelServiceResponse, DescribeModelServiceGroupResponse, DescribeNotebookResponse, CreateTrainingModelResponse, StopModelAccelerateTaskResponse, SendChatMessageRequest, DescribeModelAccelerateTaskRequest, DeleteDatasetResponse, DescribeTrainingTasksResponse, DescribeNotebookRequest, DescribeBillingResourceInstanceRunningJobsRequest, StopNotebookRequest, DeleteModelServiceGroupRequest, DescribeBillingResourceGroupRequest, DescribeTrainingTaskRequest, ChatCompletionResponse, DescribeTrainingTaskPodsRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, PushTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DeleteModelServiceResponse, DeleteTrainingModelVersionRequest, DescribeTrainingModelVersionResponse } from "./tione_models";
+import { CreateModelServiceRequest, DescribeModelAccelerateVersionsRequest, StopModelAccelerateTaskRequest, DeleteTrainingModelVersionResponse, DescribeBillingResourceGroupsRequest, DeleteNotebookRequest, DescribeTrainingModelVersionsRequest, CreateDatasetResponse, DescribeTrainingTasksRequest, DescribeBillingResourceGroupResponse, DescribeBillingResourceGroupsResponse, StartNotebookResponse, DescribeTrainingModelVersionRequest, StartNotebookRequest, PushTrainingMetricsRequest, DescribeModelAccelerateVersionsResponse, DescribeBuildInImagesRequest, ModifyModelServiceRequest, ChatCompletionRequest, DescribeModelServiceCallInfoRequest, CreateTrainingModelRequest, DescribeModelServiceGroupsResponse, DescribeBillingResourceInstanceRunningJobsResponse, CreateNotebookRequest, CreatePresignedNotebookUrlResponse, DescribeDatasetsRequest, DeleteTrainingModelResponse, DescribeInferTemplatesResponse, DescribeBillingSpecsRequest, DescribeInferTemplatesRequest, DeleteModelServiceGroupResponse, DescribeModelServiceResponse, DescribeModelAccelerateTaskResponse, DescribeModelServiceGroupsRequest, DescribeModelServiceRequest, DeleteModelServiceRequest, DescribeModelServiceGroupRequest, CreatePresignedNotebookUrlRequest, StopNotebookResponse, DescribeModelServiceHotUpdatedResponse, DescribeBuildInImagesResponse, DescribeDatasetsResponse, CreateNotebookResponse, DescribeBillingSpecsPriceRequest, DescribeBillingSpecsResponse, DescribeNotebooksResponse, DescribeModelServiceCallInfoResponse, DescribeNotebooksRequest, DeleteNotebookResponse, ModifyModelServiceResponse, CreateDatasetRequest, CreateModelServiceResponse, DescribeModelServiceGroupResponse, DescribeNotebookResponse, CreateTrainingModelResponse, StopModelAccelerateTaskResponse, DescribeModelAccelerateTaskRequest, DeleteDatasetResponse, DescribeTrainingTasksResponse, DescribeNotebookRequest, DescribeBillingResourceInstanceRunningJobsRequest, StopNotebookRequest, DeleteModelServiceGroupRequest, DescribeBillingResourceGroupRequest, DescribeTrainingTaskRequest, ChatCompletionResponse, DescribeTrainingTaskPodsRequest, DescribeTrainingModelVersionsResponse, DeleteDatasetRequest, PushTrainingMetricsResponse, DescribeTrainingTaskPodsResponse, DeleteTrainingModelRequest, DescribeModelServiceHotUpdatedRequest, DescribeTrainingTaskResponse, DeleteModelServiceResponse, DeleteTrainingModelVersionRequest, DescribeBillingSpecsPriceResponse, DescribeTrainingModelVersionResponse } from "./tione_models";
 /**
  * tione client
  * @class
@@ -16,9 +16,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeModelService(req: DescribeModelServiceRequest, cb?: (error: string, rep: DescribeModelServiceResponse) => void): Promise<DescribeModelServiceResponse>;
     /**
+     * 本接口(DescribeBillingSpecs) 提供查询计费项列表
+     */
+    DescribeBillingSpecs(req: DescribeBillingSpecsRequest, cb?: (error: string, rep: DescribeBillingSpecsResponse) => void): Promise<DescribeBillingSpecsResponse>;
+    /**
      * 导入模型
      */
     CreateTrainingModel(req: CreateTrainingModelRequest, cb?: (error: string, rep: CreateTrainingModelResponse) => void): Promise<CreateTrainingModelResponse>;
+    /**
+     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
+     */
+    DescribeBillingSpecsPrice(req: DescribeBillingSpecsPriceRequest, cb?: (error: string, rep: DescribeBillingSpecsPriceResponse) => void): Promise<DescribeBillingSpecsPriceResponse>;
     /**
      * 展示服务的调用信息
      */
@@ -111,10 +119,6 @@ export declare class Client extends AbstractClient {
      * 查询资源组节点运行中的任务
      */
     DescribeBillingResourceInstanceRunningJobs(req: DescribeBillingResourceInstanceRunningJobsRequest, cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void): Promise<DescribeBillingResourceInstanceRunningJobsResponse>;
-    /**
-     * 这是一个供您体验大模型聊天的接口。
-     */
-    SendChatMessage(req: SendChatMessageRequest, cb?: (error: string, rep: SendChatMessageResponse) => void): Promise<SendChatMessageResponse>;
     /**
      * 用于更新模型服务
      */

@@ -138,7 +138,8 @@ export interface ConfirmVideoTranslateJobRequest {
      */
     JobId: string;
     /**
-     * 待确认文本
+     * 待确认文本。
+  如果文本中含有数字，支持将数字配置为SSML语言
      */
     TranslateResults: Array<TranslateResult>;
 }

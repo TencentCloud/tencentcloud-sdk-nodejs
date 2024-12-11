@@ -7265,7 +7265,7 @@ export interface DescribeLivePackageInfoResponse {
      * 套餐包信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LivePackageInfoList: Array<LivePackageInfo>;
+    LivePackageInfoList?: Array<LivePackageInfo>;
     /**
      * 套餐包当前计费方式:
   -1: 无计费方式或获取失败
@@ -7279,27 +7279,27 @@ export interface DescribeLivePackageInfoResponse {
   304: 日结流量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageBillMode: number;
+    PackageBillMode?: number;
     /**
      * 总页数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalPage: number;
+    TotalPage?: number;
     /**
      * 数据总条数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 当前页数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageNum: number;
+    PageNum?: number;
     /**
      * 当前每页数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageSize: number;
+    PageSize?: number;
     /**
      * 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：
   标准直播，中国大陆（境内全地区）计费方式。
@@ -7308,7 +7308,7 @@ export interface DescribeLivePackageInfoResponse {
   快直播，国际/港澳台（境外多地区）计费方式。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FluxPackageBillMode: string;
+    FluxPackageBillMode?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

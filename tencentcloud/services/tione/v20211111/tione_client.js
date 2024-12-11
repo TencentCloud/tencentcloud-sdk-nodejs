@@ -40,10 +40,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModelService", req, cb);
     }
     /**
+     * 本接口(DescribeBillingSpecs) 提供查询计费项列表
+     */
+    async DescribeBillingSpecs(req, cb) {
+        return this.request("DescribeBillingSpecs", req, cb);
+    }
+    /**
      * 导入模型
      */
     async CreateTrainingModel(req, cb) {
         return this.request("CreateTrainingModel", req, cb);
+    }
+    /**
+     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
+     */
+    async DescribeBillingSpecsPrice(req, cb) {
+        return this.request("DescribeBillingSpecsPrice", req, cb);
     }
     /**
      * 展示服务的调用信息
@@ -182,12 +194,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBillingResourceInstanceRunningJobs(req, cb) {
         return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb);
-    }
-    /**
-     * 这是一个供您体验大模型聊天的接口。
-     */
-    async SendChatMessage(req, cb) {
-        return this.request("SendChatMessage", req, cb);
     }
     /**
      * 用于更新模型服务

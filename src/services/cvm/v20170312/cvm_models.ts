@@ -3178,7 +3178,7 @@ export interface Externals {
    */
   ReleaseAddress?: boolean
   /**
-   * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络<br><li>VPC1.0：私有网络VPC1.0
+   * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络</li><li>VPC1.0：私有网络VPC1.0</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnsupportNetworks?: Array<string>
@@ -3520,7 +3520,7 @@ export interface CreateLaunchTemplateVersionRequest {
    */
   InstanceName?: string
   /**
-   * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+   * 实例登录设置。通过该参数可以设置实例的登录方式为密钥或保持镜像的原始登录设置。
    */
   LoginSettings?: LoginSettings
   /**
@@ -3864,7 +3864,7 @@ export interface CreateLaunchTemplateRequest {
    */
   InstanceName?: string
   /**
-   * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+   * 实例登录设置。通过该参数可以设置实例的登录方式为密钥或保持镜像的原始登录设置。
    */
   LoginSettings?: LoginSettings
   /**

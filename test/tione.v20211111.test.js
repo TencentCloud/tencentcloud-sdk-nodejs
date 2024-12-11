@@ -38,9 +38,29 @@ it("tione.v20211111.DescribeModelService", async function () {
     }
 })
 
+it("tione.v20211111.DescribeBillingSpecs", async function () {
+    try {
+       const data = await client.DescribeBillingSpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.CreateTrainingModel", async function () {
     try {
        const data = await client.CreateTrainingModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeBillingSpecsPrice", async function () {
+    try {
+       const data = await client.DescribeBillingSpecsPrice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,16 +291,6 @@ it("tione.v20211111.DescribeDatasets", async function () {
 it("tione.v20211111.DescribeBillingResourceInstanceRunningJobs", async function () {
     try {
        const data = await client.DescribeBillingResourceInstanceRunningJobs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tione.v20211111.SendChatMessage", async function () {
-    try {
-       const data = await client.SendChatMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

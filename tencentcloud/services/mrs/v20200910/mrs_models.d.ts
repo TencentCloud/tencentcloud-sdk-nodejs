@@ -320,7 +320,7 @@ export interface ImageToObjectRequest {
      */
     HandleParam?: HandleParam;
     /**
-     * 图片列表，允许传入多张图片，目前只支持传入图片base64编码，图片url暂不支持
+     * 图片列表，目前只支持传入一张图片，需要是图片base64编码，图片url暂不支持
      */
     ImageInfoList?: Array<ImageInfo>;
     /**

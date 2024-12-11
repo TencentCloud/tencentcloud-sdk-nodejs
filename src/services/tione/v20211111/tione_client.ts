@@ -31,16 +31,17 @@ import {
   DeleteNotebookRequest,
   RDMAConfig,
   DescribeTrainingModelVersionsRequest,
+  SpecUnit,
   CreateDatasetResponse,
   CrossTenantENIInfo,
   HyperParameter,
   DescribeTrainingTasksRequest,
   VolumeMount,
-  SendChatMessageResponse,
   DescribeBillingResourceGroupResponse,
   ServiceCallInfo,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
+  SpecPrice,
   StartNotebookResponse,
   CFSTurbo,
   DescribeTrainingModelVersionRequest,
@@ -64,15 +65,16 @@ import {
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,
+  DescribeModelServiceGroupsResponse,
   DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
   CreateNotebookRequest,
   CreatePresignedNotebookUrlResponse,
   HorizontalPodAutoscaler,
   ResourceConfigInfo,
+  Spec,
   GooseFS,
   Option,
-  ImageSecret,
   DefaultInnerCallInfo,
   Choice,
   ResourceGroup,
@@ -81,7 +83,7 @@ import {
   ModelAccelerateVersion,
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
-  DescribeModelServiceGroupsResponse,
+  DescribeBillingSpecsRequest,
   InferCodeInfo,
   DescribeInferTemplatesRequest,
   PrivateLinkInfo,
@@ -105,11 +107,13 @@ import {
   DescribeModelServiceHotUpdatedResponse,
   DescribeBuildInImagesResponse,
   DescribeDatasetsResponse,
+  ImageUrl,
   ModelSource,
   CreateNotebookResponse,
   IntranetCallInfo,
+  DescribeBillingSpecsPriceRequest,
   Instance,
-  ServiceEIPInfo,
+  DescribeBillingSpecsResponse,
   DescribeNotebooksResponse,
   DatasetGroup,
   StatefulSetCondition,
@@ -134,7 +138,7 @@ import {
   CreateTrainingModelResponse,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
-  SendChatMessageRequest,
+  ServiceEIPInfo,
   DescribeModelAccelerateTaskRequest,
   Container,
   DeleteDatasetResponse,
@@ -167,6 +171,8 @@ import {
   DeleteModelServiceResponse,
   MetricData,
   DeleteTrainingModelVersionRequest,
+  DescribeBillingSpecsPriceResponse,
+  MultiModalContent,
   DescribeTrainingModelVersionResponse,
   EnvVar,
   LogConfig,
@@ -203,6 +209,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeBillingSpecs) 提供查询计费项列表
+   */
+  async DescribeBillingSpecs(
+    req: DescribeBillingSpecsRequest,
+    cb?: (error: string, rep: DescribeBillingSpecsResponse) => void
+  ): Promise<DescribeBillingSpecsResponse> {
+    return this.request("DescribeBillingSpecs", req, cb)
+  }
+
+  /**
    * 导入模型
    */
   async CreateTrainingModel(
@@ -210,6 +226,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTrainingModelResponse) => void
   ): Promise<CreateTrainingModelResponse> {
     return this.request("CreateTrainingModel", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
+   */
+  async DescribeBillingSpecsPrice(
+    req: DescribeBillingSpecsPriceRequest,
+    cb?: (error: string, rep: DescribeBillingSpecsPriceResponse) => void
+  ): Promise<DescribeBillingSpecsPriceResponse> {
+    return this.request("DescribeBillingSpecsPrice", req, cb)
   }
 
   /**
@@ -440,16 +466,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void
   ): Promise<DescribeBillingResourceInstanceRunningJobsResponse> {
     return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb)
-  }
-
-  /**
-   * 这是一个供您体验大模型聊天的接口。
-   */
-  async SendChatMessage(
-    req: SendChatMessageRequest,
-    cb?: (error: string, rep: SendChatMessageResponse) => void
-  ): Promise<SendChatMessageResponse> {
-    return this.request("SendChatMessage", req, cb)
   }
 
   /**
