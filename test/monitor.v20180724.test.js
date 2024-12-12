@@ -448,6 +448,16 @@ it("monitor.v20180724.BindingPolicyTag", async function () {
     }
 })
 
+it("monitor.v20180724.CreateAlarmShield", async function () {
+    try {
+       const data = await client.CreateAlarmShield({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreatePrometheusMultiTenantInstancePostPayMode", async function () {
     try {
        const data = await client.CreatePrometheusMultiTenantInstancePostPayMode({})
@@ -1198,9 +1208,9 @@ it("monitor.v20180724.DescribePrometheusGlobalConfig", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusAgents", async function () {
+it("monitor.v20180724.DescribePolicyGroupList", async function () {
     try {
-       const data = await client.DescribePrometheusAgents({})
+       const data = await client.DescribePolicyGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1288,9 +1298,9 @@ it("monitor.v20180724.DescribePrometheusAlertPolicy", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePolicyGroupList", async function () {
+it("monitor.v20180724.DescribePrometheusAgents", async function () {
     try {
-       const data = await client.DescribePolicyGroupList({})
+       const data = await client.DescribePrometheusAgents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

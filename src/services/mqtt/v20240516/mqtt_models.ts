@@ -397,11 +397,9 @@ export interface ActivateDeviceCertificateRequest {
  */
 export interface DescribeInstanceResponse {
   /**
-   * 实例类型，
-EXPERIMENT 体验版
+   * 实例类型
 BASIC 基础版
 PRO  专业版
-PLATINUM 铂金版
    */
   InstanceType?: string
   /**
@@ -453,7 +451,9 @@ PLATINUM 铂金版
    */
   ClientNumLimit?: number
   /**
-   * 客户端证书注册方式：JITP，API
+   * 客户端证书注册方式：
+JITP：自动注册
+API：通过API手动注册
    */
   DeviceCertificateProvisionType?: string
   /**
@@ -477,9 +477,7 @@ PLATINUM 铂金版
    */
   DestroyTime?: number
   /**
-   *     TLS,单向认证
-    mTLS,双向认证
-    BYOC;一机一证
+   * TLS,单向认证    mTLS,双向认证    BYOC;一机一证
    */
   X509Mode?: string
   /**
@@ -611,19 +609,19 @@ export interface DescribeDeviceCertificateResponse {
    */
   Status?: string
   /**
-   * 证书序列号
+   * Ca证书序列号
    */
   CaSn?: string
   /**
-   * 设备证书sn
+   * 设备证书序列号
    */
   DeviceCertificateSn?: string
   /**
-   * 证书内容
+   * 设备证书内容
    */
   DeviceCertificate?: string
   /**
-   * 设备证书cn
+   * 设备证书common name
    */
   DeviceCertificateCn?: string
   /**
@@ -777,7 +775,9 @@ export interface CreateJWKSAuthenticatorRequest {
    */
   Remark?: string
   /**
-   * 设备连接时传递jwt的key；username-使用用户名字段传递；password-使用密码字段传递
+   * 设备连接时传递jwt的key；
+username-使用用户名字段传递；
+password-使用密码字段传递
    */
   From?: string
 }
@@ -866,7 +866,10 @@ export interface DeleteAuthenticatorRequest {
    */
   InstanceId: string
   /**
-   * 认证器类型
+   * 认证器类型:
+JWT：JWT认证器
+JWKS：JWKS认证器
+BYOC：一端一证认证器
    */
   Type: string
 }
@@ -1074,7 +1077,7 @@ export interface DescribeAuthenticatorRequest {
    */
   InstanceId: string
   /**
-   * 认证器类型
+   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 HTTP:HTTP认证器
    */
   Type?: string
 }

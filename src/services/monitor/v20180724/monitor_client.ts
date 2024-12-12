@@ -57,6 +57,7 @@ import {
   DescribePolicyConditionListResponse,
   PrometheusRuleSet,
   DescribeAllNamespacesResponse,
+  CreateAlarmShieldRequest,
   TerminatePrometheusInstancesRequest,
   InstallPluginsResponse,
   ProductSimple,
@@ -263,6 +264,7 @@ import {
   ModifyPrometheusConfigRequest,
   DescribeMonitorResourceInfoRequest,
   DescribeGrafanaEnvironmentsResponse,
+  CreateAlarmShieldResponse,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
   DeleteGrafanaInstanceRequest,
@@ -905,6 +907,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindingPolicyTagResponse) => void
   ): Promise<BindingPolicyTagResponse> {
     return this.request("BindingPolicyTag", req, cb)
+  }
+
+  /**
+   * 创建告警屏蔽规则
+   */
+  async CreateAlarmShield(
+    req: CreateAlarmShieldRequest,
+    cb?: (error: string, rep: CreateAlarmShieldResponse) => void
+  ): Promise<CreateAlarmShieldResponse> {
+    return this.request("CreateAlarmShield", req, cb)
   }
 
   /**
@@ -1670,13 +1682,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Prometheus CVM Agent
+   * 获取基础策略告警组列表
    */
-  async DescribePrometheusAgents(
-    req: DescribePrometheusAgentsRequest,
-    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
-  ): Promise<DescribePrometheusAgentsResponse> {
-    return this.request("DescribePrometheusAgents", req, cb)
+  async DescribePolicyGroupList(
+    req: DescribePolicyGroupListRequest,
+    cb?: (error: string, rep: DescribePolicyGroupListResponse) => void
+  ): Promise<DescribePolicyGroupListResponse> {
+    return this.request("DescribePolicyGroupList", req, cb)
   }
 
   /**
@@ -1760,13 +1772,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础策略告警组列表
+   * 列出 Prometheus CVM Agent
    */
-  async DescribePolicyGroupList(
-    req: DescribePolicyGroupListRequest,
-    cb?: (error: string, rep: DescribePolicyGroupListResponse) => void
-  ): Promise<DescribePolicyGroupListResponse> {
-    return this.request("DescribePolicyGroupList", req, cb)
+  async DescribePrometheusAgents(
+    req: DescribePrometheusAgentsRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
+  ): Promise<DescribePrometheusAgentsResponse> {
+    return this.request("DescribePrometheusAgents", req, cb)
   }
 
   /**

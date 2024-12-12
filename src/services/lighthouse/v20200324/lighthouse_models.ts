@@ -1727,19 +1727,19 @@ export interface InstanceReturnable {
   /**
    * 实例 ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例是否可退还。
    */
-  IsReturnable: boolean
+  IsReturnable?: boolean
   /**
    * 实例退还失败错误码。
    */
-  ReturnFailCode: number
+  ReturnFailCode?: number
   /**
    * 实例退还失败错误信息。
    */
-  ReturnFailMessage: string
+  ReturnFailMessage?: string
 }
 
 /**
@@ -2805,7 +2805,7 @@ export interface CreateKeyPairResponse {
   /**
    * 密钥对信息。
    */
-  KeyPair: KeyPair
+  KeyPair?: KeyPair
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

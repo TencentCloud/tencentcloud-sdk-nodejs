@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindingPolicyTag", req, cb);
     }
     /**
+     * 创建告警屏蔽规则
+     */
+    async CreateAlarmShield(req, cb) {
+        return this.request("CreateAlarmShield", req, cb);
+    }
+    /**
      * 创建按量 Prometheus 实例，根据用量收费实例
      */
     async CreatePrometheusMultiTenantInstancePostPayMode(req, cb) {
@@ -754,10 +760,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusGlobalConfig", req, cb);
     }
     /**
-     * 列出 Prometheus CVM Agent
+     * 获取基础策略告警组列表
      */
-    async DescribePrometheusAgents(req, cb) {
-        return this.request("DescribePrometheusAgents", req, cb);
+    async DescribePolicyGroupList(req, cb) {
+        return this.request("DescribePolicyGroupList", req, cb);
     }
     /**
      * 查询告警策略列表
@@ -808,10 +814,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusAlertPolicy", req, cb);
     }
     /**
-     * 获取基础策略告警组列表
+     * 列出 Prometheus CVM Agent
      */
-    async DescribePolicyGroupList(req, cb) {
-        return this.request("DescribePolicyGroupList", req, cb);
+    async DescribePrometheusAgents(req, cb) {
+        return this.request("DescribePrometheusAgents", req, cb);
     }
     /**
      * 修改 Prometheus 实例相关属性
