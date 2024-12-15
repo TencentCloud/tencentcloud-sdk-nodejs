@@ -526,7 +526,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeCloudStorageAIServiceTask", req, cb);
     }
     /**
-     * 查询TWeCall包列表
+     * 微信VOIP功能调整下线
+
+查询TWeCall包列表
      */
     async GetTWeCallPkgList(req, cb) {
         return this.request("GetTWeCallPkgList", req, cb);
@@ -562,7 +564,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchPositionSpace", req, cb);
     }
     /**
-     * 分配License
+     * 微信VOIP功能调整下线
+
+分配License
      */
     async AssignTWeCallLicense(req, cb) {
         return this.request("AssignTWeCallLicense", req, cb);

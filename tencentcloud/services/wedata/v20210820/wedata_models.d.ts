@@ -20816,6 +20816,11 @@ export interface Pair {
      * 值
      */
     Value: string;
+    /**
+     *  唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
 }
 /**
  * DeleteIntegrationTask返回参数结构体

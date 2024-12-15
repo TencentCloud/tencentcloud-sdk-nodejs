@@ -340,7 +340,9 @@ export declare class Client extends AbstractClient {
      */
     InvokeCloudStorageAIServiceTask(req: InvokeCloudStorageAIServiceTaskRequest, cb?: (error: string, rep: InvokeCloudStorageAIServiceTaskResponse) => void): Promise<InvokeCloudStorageAIServiceTaskResponse>;
     /**
-     * 查询TWeCall包列表
+     * 微信VOIP功能调整下线
+
+查询TWeCall包列表
      */
     GetTWeCallPkgList(req: GetTWeCallPkgListRequest, cb?: (error: string, rep: GetTWeCallPkgListResponse) => void): Promise<GetTWeCallPkgListResponse>;
     /**
@@ -364,7 +366,9 @@ export declare class Client extends AbstractClient {
      */
     SearchPositionSpace(req: SearchPositionSpaceRequest, cb?: (error: string, rep: SearchPositionSpaceResponse) => void): Promise<SearchPositionSpaceResponse>;
     /**
-     * 分配License
+     * 微信VOIP功能调整下线
+
+分配License
      */
     AssignTWeCallLicense(req: AssignTWeCallLicenseRequest, cb?: (error: string, rep: AssignTWeCallLicenseResponse) => void): Promise<AssignTWeCallLicenseResponse>;
     /**

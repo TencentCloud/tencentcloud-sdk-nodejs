@@ -5928,11 +5928,11 @@ export interface DescribeTokenUsageRequest {
    */
   ModelName?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间戳, 单位为秒(默认值0)
    */
   StartTime?: string
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间戳, 单位为秒(默认值0， 必须大于开始时间戳)
    */
   EndTime?: string
   /**

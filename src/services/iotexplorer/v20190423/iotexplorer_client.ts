@@ -1210,8 +1210,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询TWeCall包列表
-   */
+     * 微信VOIP功能调整下线
+
+查询TWeCall包列表
+     */
   async GetTWeCallPkgList(
     req: GetTWeCallPkgListRequest,
     cb?: (error: string, rep: GetTWeCallPkgListResponse) => void
@@ -1270,8 +1272,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分配License
-   */
+     * 微信VOIP功能调整下线
+
+分配License
+     */
   async AssignTWeCallLicense(
     req: AssignTWeCallLicenseRequest,
     cb?: (error: string, rep: AssignTWeCallLicenseResponse) => void

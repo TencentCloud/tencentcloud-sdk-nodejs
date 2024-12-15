@@ -631,15 +631,15 @@ export interface ResetInstanceBlueprint {
   /**
    * 镜像详细信息
    */
-  BlueprintInfo: Blueprint
+  BlueprintInfo?: Blueprint
   /**
    * 实例镜像是否可重置为目标镜像
    */
-  IsResettable: boolean
+  IsResettable?: boolean
   /**
    * 不可重置信息.当镜像可重置时为""
    */
-  NonResettableMessage: string
+  NonResettableMessage?: string
 }
 
 /**
@@ -1605,6 +1605,9 @@ export interface FirewallTemplateApplyRecordDetail {
   Instance?: InstanceIdentifier
   /**
    * 防火墙模板应用状态。
+
+- SUCCESS：成功
+- FAILED：失败
    */
   ApplyState?: string
   /**
@@ -2180,15 +2183,15 @@ export interface SceneInfo {
   /**
    * 使用场景Id。
    */
-  SceneId: string
+  SceneId?: string
   /**
    * 使用场景展示名称。
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 使用场景描述信息。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -3834,23 +3837,23 @@ export interface Software {
   /**
    * 软件名称。
    */
-  Name: string
+  Name?: string
   /**
    * 软件版本。
    */
-  Version: string
+  Version?: string
   /**
    * 软件图片 URL。
    */
-  ImageUrl: string
+  ImageUrl?: string
   /**
    * 软件安装目录。
    */
-  InstallDir: string
+  InstallDir?: string
   /**
    * 软件详情列表。
    */
-  DetailSet: Array<SoftwareDetail>
+  DetailSet?: Array<SoftwareDetail>
 }
 
 /**
@@ -4650,6 +4653,9 @@ export interface FirewallTemplateApplyRecord {
   TemplateRuleSet?: Array<FirewallTemplateRule>
   /**
    * 应用模板的执行状态。
+
+- SUCCESS：成功
+- FAILED：失败
    */
   ApplyState?: string
   /**
@@ -4786,22 +4792,20 @@ export interface ModifyInstancesBundleResponse {
 
 /**
  * 描述通用资源配额信息。
-
-
  */
 export interface GeneralResourceQuota {
   /**
    * 资源名称。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 资源当前可用数量。
    */
-  ResourceQuotaAvailable: number
+  ResourceQuotaAvailable?: number
   /**
    * 资源总数量。
    */
-  ResourceQuotaTotal: number
+  ResourceQuotaTotal?: number
 }
 
 /**
@@ -5164,15 +5168,15 @@ export interface Scene {
   /**
    * 使用场景Id
    */
-  SceneId: string
+  SceneId?: string
   /**
    * 使用场景展示名称
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 使用场景描述
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -5293,15 +5297,15 @@ export interface BlueprintInstance {
   /**
    * 镜像信息。
    */
-  Blueprint: Blueprint
+  Blueprint?: Blueprint
   /**
    * 软件列表。
    */
-  SoftwareSet: Array<Software>
+  SoftwareSet?: Array<Software>
   /**
    * 实例 ID。
    */
-  InstanceId: string
+  InstanceId?: string
 }
 
 /**
