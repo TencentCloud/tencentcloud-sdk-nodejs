@@ -668,6 +668,16 @@ it("iotvideo.v20211125.CreateCOSCredentials", async function () {
     }
 })
 
+it("iotvideo.v20211125.CreateFreeCloudStorage", async function () {
+    try {
+       const data = await client.CreateFreeCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CreateBatch", async function () {
     try {
        const data = await client.CreateBatch({})
@@ -811,6 +821,16 @@ it("iotvideo.v20211125.DescribeMessageDataStats", async function () {
 it("iotvideo.v20211125.DeleteCloudStorageEvent", async function () {
     try {
        const data = await client.DeleteCloudStorageEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.CreateDeviceChannel", async function () {
+    try {
+       const data = await client.CreateDeviceChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -31,6 +31,7 @@ import {
   CreateBatchRequest,
   DeleteCloudStorageEventResponse,
   ModifyProductDynamicRegisterResponse,
+  ModifyProductResponse,
   CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
   DescribeCloudStorageThumbnailListRequest,
@@ -44,7 +45,7 @@ import {
   ModifyDataForwardRequest,
   DescribeCloudStorageThumbnailRequest,
   DescribeDevicesResponse,
-  ModifyProductResponse,
+  CreateFreeCloudStorageResponse,
   ModifyProductRequest,
   ModifyModelDefinitionRequest,
   DescribeBatchsResponse,
@@ -110,6 +111,7 @@ import {
   DescribeFirmwareResponse,
   DescribeDeviceStatusLogResponse,
   DescribeDeviceCommLogRequest,
+  UpdateAIModelChannelRequest,
   WakeUpDeviceResponse,
   DeleteForwardRuleRequest,
   DescribeCloudStorageStreamDataResponse,
@@ -170,12 +172,13 @@ import {
   GenerateSignedVideoURLRequest,
   ModifyPushChannelRequest,
   DataForward,
-  DescribeDeviceRequest,
+  CreateDeviceChannelResponse,
   ModifyForwardRuleRequest,
   CreateAIDetectionResponse,
   DescribeCloudStorageEventsResponse,
+  CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
-  VideoProduct,
+  CreateFreeCloudStorageRequest,
   CloudStorageEvent,
   DeviceDataHistoryItem,
   DescribeCloudStorageDateResponse,
@@ -186,7 +189,7 @@ import {
   DescribeCloudStoragePackageConsumeDetailsRequest,
   UploadFirmwareResponse,
   DescribeCloudStorageOrderRequest,
-  UpdateAIModelChannelRequest,
+  DescribeDeviceRequest,
   CreateCloudStorageResponse,
   BindCloudStorageUserResponse,
   CancelDeviceFirmwareTaskRequest,
@@ -249,6 +252,7 @@ import {
   DescribeFirmwareTaskStatisticsRequest,
   DeleteDeviceResponse,
   CreateTaskFileUrlResponse,
+  VideoProduct,
   DeviceCntStats,
   ModifyDataForwardResponse,
   DescribeCloudStorageUsersRequest,
@@ -918,6 +922,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开通免费云存服务
+   */
+  async CreateFreeCloudStorage(
+    req: CreateFreeCloudStorageRequest,
+    cb?: (error: string, rep: CreateFreeCloudStorageResponse) => void
+  ): Promise<CreateFreeCloudStorageResponse> {
+    return this.request("CreateFreeCloudStorage", req, cb)
+  }
+
+  /**
    * 创建批次
    */
   async CreateBatch(
@@ -1065,6 +1079,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudStorageEventResponse) => void
   ): Promise<DeleteCloudStorageEventResponse> {
     return this.request("DeleteCloudStorageEvent", req, cb)
+  }
+
+  /**
+   * 创建设备通道
+   */
+  async CreateDeviceChannel(
+    req: CreateDeviceChannelRequest,
+    cb?: (error: string, rep: CreateDeviceChannelResponse) => void
+  ): Promise<CreateDeviceChannelResponse> {
+    return this.request("CreateDeviceChannel", req, cb)
   }
 
   /**

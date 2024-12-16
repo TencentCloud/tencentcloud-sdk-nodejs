@@ -588,6 +588,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+
+默认接口请求频率限制：5次/秒。
      */
     async TextDetect(req, cb) {
         return this.request("TextDetect", req, cb);

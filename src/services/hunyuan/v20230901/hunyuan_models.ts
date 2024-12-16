@@ -141,6 +141,10 @@ export interface ChatCompletionsRequest {
 2. 开启后，将强制走AI搜索，当AI搜索结果为空时，由大模型回复兜底话术。
    */
   ForceSearchEnhancement?: boolean
+  /**
+   * 自定义结束生成字符串
+   */
+  Stop?: Array<string>
 }
 
 /**

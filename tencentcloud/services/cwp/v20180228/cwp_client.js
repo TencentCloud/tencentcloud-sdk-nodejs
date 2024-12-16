@@ -306,6 +306,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineRuleDetectList", req, cb);
     }
     /**
+     * 编辑漏洞防御最大cpu配置
+     */
+    async ModifyRaspMaxCpu(req, cb) {
+        return this.request("ModifyRaspMaxCpu", req, cb);
+    }
+    /**
      * 删除授权全部记录
      */
     async DeleteLicenseRecordAll(req, cb) {
@@ -682,6 +688,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetTypeTop(req, cb) {
         return this.request("DescribeAssetTypeTop", req, cb);
+    }
+    /**
+     * 获取漏洞防御白名单漏洞列表
+     */
+    async DescribeRaspRuleVuls(req, cb) {
+        return this.request("DescribeRaspRuleVuls", req, cb);
     }
     /**
      * 导出勒索防御策略绑定机器列表
@@ -1369,6 +1381,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EditTags", req, cb);
     }
     /**
+     * 查询漏洞防御白名单
+     */
+    async DescribeRaspRules(req, cb) {
+        return this.request("DescribeRaspRules", req, cb);
+    }
+    /**
      * 创建日志下载任务
      */
     async CreateLogExport(req, cb) {
@@ -1943,6 +1961,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetDatabaseCount", req, cb);
     }
     /**
+     * 获取异地登录白名单列表
+     */
+    async DescribeLoginWhiteList(req, cb) {
+        return this.request("DescribeLoginWhiteList", req, cb);
+    }
+    /**
      * 获取日志直方图信息
      */
     async DescribeLogHistogram(req, cb) {
@@ -2123,6 +2147,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteBashRules(req, cb) {
         return this.request("DeleteBashRules", req, cb);
+    }
+    /**
+     * 添加漏洞防御白名单
+     */
+    async ModifyRaspRules(req, cb) {
+        return this.request("ModifyRaspRules", req, cb);
     }
     /**
      * 快照创建失败时可以重试创建快照并且自动进行漏洞修复
@@ -2662,6 +2692,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetUserInfo", req, cb);
     }
     /**
+     * 删除漏洞防御白名单
+     */
+    async DeleteRaspRules(req, cb) {
+        return this.request("DeleteRaspRules", req, cb);
+    }
+    /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      */
     async DeleteMalwares(req, cb) {
@@ -2926,10 +2962,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAttackVulTypeList", req, cb);
     }
     /**
-     * 获取异地登录白名单列表
+     * 查看漏洞防御最大cpu限制
      */
-    async DescribeLoginWhiteList(req, cb) {
-        return this.request("DescribeLoginWhiteList", req, cb);
+    async DescribeRaspMaxCpu(req, cb) {
+        return this.request("DescribeRaspMaxCpu", req, cb);
     }
     /**
      * 根据基线id查询基线详情接口

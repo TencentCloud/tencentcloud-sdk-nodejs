@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCOSCredentials", req, cb);
     }
     /**
+     * 开通免费云存服务
+     */
+    async CreateFreeCloudStorage(req, cb) {
+        return this.request("CreateFreeCloudStorage", req, cb);
+    }
+    /**
      * 创建批次
      */
     async CreateBatch(req, cb) {
@@ -506,6 +512,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCloudStorageEvent(req, cb) {
         return this.request("DeleteCloudStorageEvent", req, cb);
+    }
+    /**
+     * 创建设备通道
+     */
+    async CreateDeviceChannel(req, cb) {
+        return this.request("CreateDeviceChannel", req, cb);
     }
     /**
      * 拉取设备p2p信息

@@ -252,6 +252,25 @@ export interface DeleteLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
+ * CreateFreeCloudStorage返回参数结构体
+ */
+export interface CreateFreeCloudStorageResponse {
+    /**
+     * 订单金额，单位为分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 支付金额，单位为分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Amount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyPositionFence返回参数结构体
  */
 export interface ModifyPositionFenceResponse {
@@ -4522,6 +4541,23 @@ export interface WXDeviceInfo {
     WXIoTDeviceInfo?: WXIoTDeviceInfo;
 }
 /**
+ * CreateDeviceChannel请求参数结构体
+ */
+export interface CreateDeviceChannelRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 通道ID
+     */
+    ChannelId: number;
+}
+/**
  * DescribeDevicePackages返回参数结构体
  */
 export interface DescribeDevicePackagesResponse {
@@ -6407,6 +6443,15 @@ export interface PositionSpaceInfo {
     Zoom: number;
 }
 /**
+ * CreateDeviceChannel返回参数结构体
+ */
+export interface CreateDeviceChannelResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateTopicRule请求参数结构体
  */
 export interface CreateTopicRuleRequest {
@@ -6531,6 +6576,45 @@ export interface DescribeBindedProductsRequest {
      * 是否跨账号绑定产品
      */
     ProductSource?: number;
+}
+/**
+ * CreateFreeCloudStorage请求参数结构体
+ */
+export interface CreateFreeCloudStorageRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存套餐ID：
+  lye1w3d：低功耗事件3天周套餐。
+  ye1w3d：事件3天周套餐
+     */
+    PackageId: string;
+    /**
+     * 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。
+     */
+    Override?: number;
+    /**
+     * 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。
+     */
+    PackageQueue?: string;
+    /**
+     * 订单id
+     */
+    OrderId?: string;
+    /**
+     * 通道ID
+     */
+    ChannelId?: number;
+    /**
+     * 云存视频存储区域，国内默认为ap-guangzhou。海外默认为东南亚ap-singapore，可选美东na-ashburn、欧洲eu-frankfurt。
+     */
+    StorageRegion?: string;
 }
 /**
  * DescribeLoRaFrequency返回参数结构体

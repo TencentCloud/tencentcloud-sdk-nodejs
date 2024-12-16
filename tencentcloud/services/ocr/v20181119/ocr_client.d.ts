@@ -482,6 +482,8 @@ export declare class Client extends AbstractClient {
     OrgCodeCertOCR(req: OrgCodeCertOCRRequest, cb?: (error: string, rep: OrgCodeCertOCRResponse) => void): Promise<OrgCodeCertOCRResponse>;
     /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+
+默认接口请求频率限制：5次/秒。
      */
     TextDetect(req: TextDetectRequest, cb?: (error: string, rep: TextDetectResponse) => void): Promise<TextDetectResponse>;
     /**

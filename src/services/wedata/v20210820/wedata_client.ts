@@ -427,6 +427,7 @@ import {
   ModifyMonitorStatusResponse,
   DescribeRuleTemplatesByPageResponse,
   DescribeTemplateDimCountResponse,
+  DataSourceConnectStatus,
   DescribeFunctionTypesRequest,
   DimensionCount,
   AttributeItemDTO,

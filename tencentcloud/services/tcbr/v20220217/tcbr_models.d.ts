@@ -468,12 +468,10 @@ export interface DescribeServerManageTaskRequest {
 export interface HpaPolicy {
     /**
      * 扩缩容类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyType: string;
     /**
      * 扩缩容阈值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyThreshold: number;
 }
@@ -483,17 +481,14 @@ export interface HpaPolicy {
 export interface OnlineVersionInfo {
     /**
      * 版本名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionName?: string;
     /**
      * 镜像url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
     /**
      * 流量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowRatio?: string;
 }
@@ -583,7 +578,6 @@ export interface ServerBaseConfig {
     LogParseType?: string;
     /**
      * 服务标签, function: 函数托管
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: string;
 }
@@ -593,17 +587,14 @@ export interface ServerBaseConfig {
 export interface DescribeCloudRunServerDetailResponse {
     /**
      * 服务基本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BaseInfo?: ServerBaseInfo;
     /**
      * 服务配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServerConfig?: ServerBaseConfig;
     /**
      * 在线版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OnlineVersionInfos?: Array<OnlineVersionInfo>;
     /**
@@ -709,105 +700,93 @@ export interface EnvInfo {
     /**
      * 账户下该环境唯一标识
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 环境来源。包含以下取值：
   <li>miniapp：微信小程序</li>
   <li>qcloud ：腾讯云</li>
      */
-    Source: string;
+    Source?: string;
     /**
      * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最后修改时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 环境状态。包含以下取值：
   <li>NORMAL：正常可用</li>
   <li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
      */
-    Status: string;
+    Status?: string;
     /**
      * 是否到期自动降为免费版
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsAutoDegrade: boolean;
+    IsAutoDegrade?: boolean;
     /**
      * 环境渠道
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvChannel: string;
+    EnvChannel?: string;
     /**
      * 支付方式。包含以下取值：
   <li> prepayment：预付费</li>
   <li> postpaid：后付费</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 是否为默认环境
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDefault: boolean;
+    IsDefault?: boolean;
     /**
      * 环境所属地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 环境类型：baas, run, hosting, weda,tcbr
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvType: string;
+    EnvType?: string;
     /**
      * 数据库列表
      */
-    Databases: Array<DatabasesInfo>;
+    Databases?: Array<DatabasesInfo>;
     /**
      * 存储列表
      */
-    Storages: Array<StorageInfo>;
+    Storages?: Array<StorageInfo>;
     /**
      * 函数列表
      */
-    Functions: Array<FunctionInfo>;
+    Functions?: Array<FunctionInfo>;
     /**
      * 云日志服务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogServices: Array<LogServiceInfo>;
+    LogServices?: Array<LogServiceInfo>;
     /**
      * 静态资源信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StaticStorages: Array<StaticStorageInfo>;
+    StaticStorages?: Array<StaticStorageInfo>;
     /**
      * 环境标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 自定义日志服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomLogServices: Array<ClsInfo>;
+    CustomLogServices?: Array<ClsInfo>;
     /**
      * tcb产品套餐ID，参考DescribePackages接口的返回值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageId: string;
+    PackageId?: string;
     /**
      * 套餐中文名称，参考DescribePackages接口的返回值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageName: string;
+    PackageName?: string;
 }
 /**
  * 标签键值对

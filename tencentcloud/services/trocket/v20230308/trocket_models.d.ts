@@ -2112,6 +2112,10 @@ export interface CreateInstanceRequest {
      * 最大可创建主题数
      */
     MaxTopicNum?: number;
+    /**
+     * 部署可用区列表
+     */
+    ZoneIds?: Array<number | bigint>;
 }
 /**
  * DescribeConsumerGroup返回参数结构体
@@ -2419,6 +2423,10 @@ export interface DescribeInstanceResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicNumUpperLimit?: number;
+    /**
+     * 可用区列表
+     */
+    ZoneIds?: Array<number | bigint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

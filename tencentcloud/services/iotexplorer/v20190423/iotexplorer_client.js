@@ -526,6 +526,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeCloudStorageAIServiceTask", req, cb);
     }
     /**
+     * 开通免费云存服务
+     */
+    async CreateFreeCloudStorage(req, cb) {
+        return this.request("CreateFreeCloudStorage", req, cb);
+    }
+    /**
      * 微信VOIP功能调整下线
 
 查询TWeCall包列表
@@ -702,6 +708,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDevices(req, cb) {
         return this.request("DeleteDevices", req, cb);
+    }
+    /**
+     * 创建设备通道
+     */
+    async CreateDeviceChannel(req, cb) {
+        return this.request("CreateDeviceChannel", req, cb);
     }
     /**
      * 本接口（CheckFirmwareUpdate）用于查询设备可升级固件版本

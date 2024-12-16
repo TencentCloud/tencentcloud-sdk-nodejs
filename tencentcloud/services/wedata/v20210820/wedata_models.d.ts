@@ -7033,6 +7033,11 @@ export interface DataSourceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DevelopmentParams?: string;
+    /**
+     * 数据源连接状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectStatus?: DataSourceConnectStatus;
 }
 /**
  * FindAllFolder返回参数结构体
@@ -12772,6 +12777,35 @@ export interface DescribeTemplateDimCountResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 数据源云梯连接状态
+ */
+export interface DataSourceConnectStatus {
+    /**
+     * id
+     */
+    Id?: number;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 数据源id
+     */
+    DatasourceId?: string;
+    /**
+     * 连接结果
+     */
+    ConnectResult?: number;
+    /**
+     * 错误信息
+     */
+    ConnectError?: string;
+    /**
+     * 时间戳
+     */
+    Timestamp?: number;
 }
 /**
  * DescribeFunctionTypes请求参数结构体

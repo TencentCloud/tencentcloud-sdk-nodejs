@@ -1301,6 +1301,10 @@ export interface SubmitCertificateInformationRequest {
      * 联系人职位。
      */
     ContactPosition?: string;
+    /**
+     * 是否DV证书。默认false
+     */
+    IsDV?: boolean;
 }
 /**
  * DescribeCertificateOperateLogs请求参数结构体
@@ -4367,11 +4371,11 @@ export interface UploadRevokeLetterResponse {
     /**
      * 证书 ID。
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 是否成功。
      */
-    IsSuccess: boolean;
+    IsSuccess?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4484,7 +4488,7 @@ export interface ModifyCertificateAliasResponse {
     /**
      * 修改成功的证书 ID。
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

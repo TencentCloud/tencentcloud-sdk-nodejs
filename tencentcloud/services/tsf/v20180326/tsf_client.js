@@ -184,7 +184,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCluster", req, cb);
     }
     /**
-     *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
+     * 容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
      */
     async DescribeContainerGroupDetail(req, cb) {
         return this.request("DescribeContainerGroupDetail", req, cb);
@@ -305,7 +305,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreatePathRewritesWithDetailResp", req, cb);
     }
     /**
-     *  获取部署组详情
+     * 获取部署组详情
      */
     async DescribeContainerGroupDeployInfo(req, cb) {
         return this.request("DescribeContainerGroupDeployInfo", req, cb);

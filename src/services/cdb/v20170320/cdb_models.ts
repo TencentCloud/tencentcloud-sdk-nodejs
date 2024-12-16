@@ -5128,7 +5128,8 @@ export interface CreateDBInstanceRequest {
    */
   ClusterTopology?: ClusterTopology
   /**
-   * 磁盘类型，基础版或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。
+   * 磁盘类型，单节点（云盘版）或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。
+说明：单节点（云盘版）、集群版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 [地域和可用区](https://cloud.tencent.com/document/product/236/8458)。
    */
   DiskType?: string
 }
@@ -9126,7 +9127,8 @@ export interface CreateDBInstanceHourRequest {
    */
   ClusterTopology?: ClusterTopology
   /**
-   * 磁盘类型，基础版或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。
+   * 硬盘类型，单节点（云盘版）或者集群版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘。
+说明：单节点（云盘版）、集群版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 [地域和可用区](https://cloud.tencent.com/document/product/236/8458)。
    */
   DiskType?: string
   /**

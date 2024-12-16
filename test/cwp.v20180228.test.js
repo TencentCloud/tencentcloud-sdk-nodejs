@@ -478,6 +478,16 @@ it("cwp.v20180228.DescribeBaselineRuleDetectList", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyRaspMaxCpu", async function () {
+    try {
+       const data = await client.ModifyRaspMaxCpu({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteLicenseRecordAll", async function () {
     try {
        const data = await client.DeleteLicenseRecordAll({})
@@ -1101,6 +1111,16 @@ it("cwp.v20180228.DescribeMachineInfo", async function () {
 it("cwp.v20180228.DescribeAssetTypeTop", async function () {
     try {
        const data = await client.DescribeAssetTypeTop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeRaspRuleVuls", async function () {
+    try {
+       const data = await client.DescribeRaspRuleVuls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2238,6 +2258,16 @@ it("cwp.v20180228.EditTags", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeRaspRules", async function () {
+    try {
+       const data = await client.DescribeRaspRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.CreateLogExport", async function () {
     try {
        const data = await client.CreateLogExport({})
@@ -3188,6 +3218,16 @@ it("cwp.v20180228.DescribeAssetDatabaseCount", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeLoginWhiteList", async function () {
+    try {
+       const data = await client.DescribeLoginWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeLogHistogram", async function () {
     try {
        const data = await client.DescribeLogHistogram({})
@@ -3481,6 +3521,16 @@ it("cwp.v20180228.RetryVulFix", async function () {
 it("cwp.v20180228.DeleteBashRules", async function () {
     try {
        const data = await client.DeleteBashRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyRaspRules", async function () {
+    try {
+       const data = await client.ModifyRaspRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4378,6 +4428,16 @@ it("cwp.v20180228.DescribeAssetUserInfo", async function () {
     }
 })
 
+it("cwp.v20180228.DeleteRaspRules", async function () {
+    try {
+       const data = await client.DeleteRaspRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteMalwares", async function () {
     try {
        const data = await client.DeleteMalwares({})
@@ -4818,9 +4878,9 @@ it("cwp.v20180228.DescribeAttackVulTypeList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeLoginWhiteList", async function () {
+it("cwp.v20180228.DescribeRaspMaxCpu", async function () {
     try {
-       const data = await client.DescribeLoginWhiteList({})
+       const data = await client.DescribeRaspMaxCpu({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

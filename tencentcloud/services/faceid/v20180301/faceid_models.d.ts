@@ -107,6 +107,10 @@ export interface ImageRecognitionV2Response {
      */
     Description?: string;
     /**
+     * 调用接口中自定义的描述字段。
+     */
+    Extra?: string;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2954,6 +2958,12 @@ export interface ImageRecognitionV2Request {
   - 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
     Encryption?: Encryption;
+    /**
+     * 自定义描述字段。
+  - 用于描述调用业务信息，出参中将返回此描述字段。
+  - 每个自定义描述字段支持[1,10]个字符。
+     */
+    Extra?: string;
 }
 /**
  * PhoneVerificationCTCC返回参数结构体

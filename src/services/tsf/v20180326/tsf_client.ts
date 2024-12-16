@@ -928,7 +928,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
+   * 容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
    */
   async DescribeContainerGroupDetail(
     req: DescribeContainerGroupDetailRequest,
@@ -1129,7 +1129,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   *  获取部署组详情
+   * 获取部署组详情
    */
   async DescribeContainerGroupDeployInfo(
     req: DescribeContainerGroupDeployInfoRequest,

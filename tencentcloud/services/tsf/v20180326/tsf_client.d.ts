@@ -112,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyCluster(req: ModifyClusterRequest, cb?: (error: string, rep: ModifyClusterResponse) => void): Promise<ModifyClusterResponse>;
     /**
-     *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
+     * 容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
      */
     DescribeContainerGroupDetail(req: DescribeContainerGroupDetailRequest, cb?: (error: string, rep: DescribeContainerGroupDetailResponse) => void): Promise<DescribeContainerGroupDetailResponse>;
     /**
@@ -193,7 +193,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     CreatePathRewritesWithDetailResp(req: CreatePathRewritesWithDetailRespRequest, cb?: (error: string, rep: CreatePathRewritesWithDetailRespResponse) => void): Promise<CreatePathRewritesWithDetailRespResponse>;
     /**
-     *  获取部署组详情
+     * 获取部署组详情
      */
     DescribeContainerGroupDeployInfo(req: DescribeContainerGroupDeployInfoRequest, cb?: (error: string, rep: DescribeContainerGroupDeployInfoResponse) => void): Promise<DescribeContainerGroupDeployInfoResponse>;
     /**

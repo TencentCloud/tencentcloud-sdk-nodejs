@@ -80,7 +80,7 @@ import {
   ModifyAutoOpenProVersionConfigResponse,
   DescribeVulInfoCvssResponse,
   DescribeBaselineStrategyDetailRequest,
-  ModifyLicenseBindsRequest,
+  DescribeRaspMaxCpuRequest,
   MalWareList,
   WebHookPolicy,
   ModifyFileTamperRuleStatusResponse,
@@ -89,7 +89,7 @@ import {
   DescribeMachineClearHistoryRequest,
   DescribeServersAndRiskAndFirstInfoResponse,
   ModifyMalwareWhiteListRequest,
-  DescribeSecurityProtectionStatResponse,
+  DescribeRaspRuleVulsRequest,
   DescribeAssetJarListRequest,
   DescribeJavaMemShellPluginInfoRequest,
   DescribeMachineFileTamperRulesRequest,
@@ -119,6 +119,7 @@ import {
   RansomDefenseRollbackResponse,
   ExportAssetSystemPackageListRequest,
   DescribePrivilegeEventsResponse,
+  DescribeRaspRuleVulsResponse,
   DescribeNetAttackWhiteListRequest,
   DescribeOverviewStatisticsResponse,
   ModifyMalwareTimingScanSettingsRequest,
@@ -126,7 +127,7 @@ import {
   DescribeWebHookRulesResponse,
   VulDetailInfo,
   VulLevelCountInfo,
-  ExportBashEventsResponse,
+  DescribeRaspRulesRequest,
   DescribeMonthInspectionReportRequest,
   DescribeDirectConnectInstallCommandRequest,
   DescribeBaselineDetectListResponse,
@@ -143,6 +144,7 @@ import {
   OpenPortStatistics,
   DescribeRansomDefenseMachineListRequest,
   ExportAssetCoreModuleListRequest,
+  ModifyReverseShellRulesAggregationRequest,
   DescribeComponentStatisticsResponse,
   ProtectDirRelatedServer,
   ModifyNetAttackWhiteListResponse,
@@ -151,6 +153,7 @@ import {
   DescribeAttackLogsRequest,
   ModifyMachineAutoClearConfigRequest,
   ModifyEventAttackStatusRequest,
+  DeleteRaspRulesResponse,
   DescribeVulLevelCountResponse,
   FileTamperRuleInfo,
   DescribeVersionStatisticsResponse,
@@ -212,6 +215,7 @@ import {
   ExportVulDefencePluginEventResponse,
   ExportAssetMachineDetailRequest,
   DescribeBanModeRequest,
+  ModifyRaspMaxCpuRequest,
   StopAssetScanRequest,
   DescribeSecurityEventStatRequest,
   DescribeESAggregationsResponse,
@@ -294,6 +298,7 @@ import {
   DescribeRansomDefenseStrategyMachinesResponse,
   DescribeBaselineRuleIgnoreListRequest,
   DescribeAssetMachineDetailResponse,
+  RegionSet,
   DescribeRansomDefenseStrategyListResponse,
   DescribeAttackTrendsRequest,
   DescribeBaselineDownloadListRequest,
@@ -329,6 +334,7 @@ import {
   ModifyNetAttackSettingResponse,
   AssetWebAppPluginInfo,
   DeletePrivilegeRulesRequest,
+  RansomDefenseStrategyDetail,
   ExportWebPageEventListResponse,
   DescribeLicenseBindScheduleResponse,
   DescribeMalwareInfoRequest,
@@ -379,6 +385,7 @@ import {
   JavaMemShellInfo,
   DescribeAssetSystemPackageListResponse,
   ExportAssetWebFrameListResponse,
+  SecurityDynamic,
   CheckBashPolicyParamsResponse,
   DescribeClientExceptionResponse,
   DescribeAssetMachineListResponse,
@@ -423,7 +430,7 @@ import {
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
   RansomDefenseEvent,
-  DeleteMalwareWhiteListRequest,
+  DeleteRaspRulesRequest,
   LoginWhiteCombinedInfo,
   ExportBaselineRuleDetectListRequest,
   SetLocalStorageExpireResponse,
@@ -496,7 +503,7 @@ import {
   CreateVulFixResponse,
   DescribeOpenPortStatisticsResponse,
   ExportRiskDnsEventListRequest,
-  SecurityDynamic,
+  DescribeRaspMaxCpuResponse,
   DescribeMachineGeneralRequest,
   ExportRiskProcessEventsResponse,
   DescribeAssetDatabaseCountResponse,
@@ -529,14 +536,17 @@ import {
   DescribeMalwareWhiteListAffectListResponse,
   ModifyMaliciousRequestWhiteListRequest,
   DescribeRansomDefenseEventsListRequest,
+  ModifyRaspMaxCpuResponse,
   RansomDefenseStrategyMachineBackupInfo,
   DescribeBaselineItemInfoRequest,
   ExportAssetPlanTaskListResponse,
   ExportRansomDefenseBackupListRequest,
+  ModifyRaspRulesRequest,
   DescribeBaselineHostRiskTopRequest,
   DescribeABTestConfigRequest,
   ExportAssetSystemPackageListResponse,
   ModifyRansomDefenseEventsStatusRequest,
+  RaspRule,
   DescribeUsersConfigResponse,
   DescribeAttackStatisticsResponse,
   DescribeRansomDefenseStateRequest,
@@ -645,7 +655,7 @@ import {
   RecoverMalwaresResponse,
   ModifyBaselinePolicyStateRequest,
   DeleteBaselineRuleRequest,
-  RegionSet,
+  PrivilegeRule,
   WebHookHostLabel,
   RansomDefenseStrategy,
   DescribeIgnoreHostAndItemConfigRequest,
@@ -734,7 +744,7 @@ import {
   CanNotSeparateInfo,
   DescribeAssetWebLocationCountResponse,
   DescribeBashEventsNewResponse,
-  VulFixStatusInfo,
+  RaspRuleVul,
   DeleteWebHookReceiverResponse,
   ModifyBashPolicyStatusResponse,
   VertexDetail,
@@ -952,7 +962,7 @@ import {
   DescribeAssetWebServiceProcessListRequest,
   DescribeScreenMachinesResponse,
   LicenseDetail,
-  PrivilegeRule,
+  ExportBashEventsResponse,
   ScanVulSettingRequest,
   Item,
   ExportVulDetectionExcelRequest,
@@ -1129,6 +1139,7 @@ import {
   DescribeMachineLicenseDetailRequest,
   DescribeVersionCompareChartRequest,
   DescribeProtectDirRelatedServerRequest,
+  VulFixStatusInfo,
   TestWebHookRuleResponse,
   Tags,
   DescribeBaselineItemListResponse,
@@ -1209,6 +1220,7 @@ import {
   AssetWebLocationPath,
   DescribeAssetProcessInfoListResponse,
   ChangeStrategyEnableStatusRequest,
+  ModifyLicenseBindsRequest,
   ProcessStatistics,
   HostTagInfo,
   DescribeScanScheduleResponse,
@@ -1252,13 +1264,14 @@ import {
   DescribeExpertServiceOrderListRequest,
   DescribeFileTamperRulesRequest,
   DescribeJavaMemShellInfoResponse,
-  RansomDefenseStrategyDetail,
+  ModifyRaspRulesResponse,
   DescribeRecommendedProtectCpuRequest,
   DescribeABTestConfigResponse,
   RansomDefenseBackup,
   DescribeMachineInfoRequest,
   SearchTemplate,
   DescribeVulFixStatusResponse,
+  DeleteMalwareWhiteListRequest,
   DescribeGeneralStatResponse,
   DescribeLogExportsRequest,
   DeleteMachineTagResponse,
@@ -1269,12 +1282,13 @@ import {
   UpdateMachineTagsRequest,
   DescribeBaselineItemDetectListResponse,
   DescribeScanTaskDetailsResponse,
-  ModifyReverseShellRulesAggregationRequest,
+  DescribeSecurityProtectionStatResponse,
   DescribeHostLoginListResponse,
   DescribePublicProxyInstallCommandResponse,
   DescribeAttackTopRequest,
   DescribeBaselineAnalysisDataRequest,
   ModifyRiskEventsStatusResponse,
+  DescribeRaspRulesResponse,
   DescribeBaselineDetectListRequest,
   DescribeVulCveIdInfoRequest,
   ModifyJavaMemShellsStatusResponse,
@@ -1778,6 +1792,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBaselineRuleDetectListResponse) => void
   ): Promise<DescribeBaselineRuleDetectListResponse> {
     return this.request("DescribeBaselineRuleDetectList", req, cb)
+  }
+
+  /**
+   * 编辑漏洞防御最大cpu配置
+   */
+  async ModifyRaspMaxCpu(
+    req: ModifyRaspMaxCpuRequest,
+    cb?: (error: string, rep: ModifyRaspMaxCpuResponse) => void
+  ): Promise<ModifyRaspMaxCpuResponse> {
+    return this.request("ModifyRaspMaxCpu", req, cb)
   }
 
   /**
@@ -2408,6 +2432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetTypeTopResponse) => void
   ): Promise<DescribeAssetTypeTopResponse> {
     return this.request("DescribeAssetTypeTop", req, cb)
+  }
+
+  /**
+   * 获取漏洞防御白名单漏洞列表
+   */
+  async DescribeRaspRuleVuls(
+    req: DescribeRaspRuleVulsRequest,
+    cb?: (error: string, rep: DescribeRaspRuleVulsResponse) => void
+  ): Promise<DescribeRaspRuleVulsResponse> {
+    return this.request("DescribeRaspRuleVuls", req, cb)
   }
 
   /**
@@ -3548,6 +3582,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询漏洞防御白名单
+   */
+  async DescribeRaspRules(
+    req: DescribeRaspRulesRequest,
+    cb?: (error: string, rep: DescribeRaspRulesResponse) => void
+  ): Promise<DescribeRaspRulesResponse> {
+    return this.request("DescribeRaspRules", req, cb)
+  }
+
+  /**
    * 创建日志下载任务
    */
   async CreateLogExport(
@@ -4502,6 +4546,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取异地登录白名单列表
+   */
+  async DescribeLoginWhiteList(
+    req: DescribeLoginWhiteListRequest,
+    cb?: (error: string, rep: DescribeLoginWhiteListResponse) => void
+  ): Promise<DescribeLoginWhiteListResponse> {
+    return this.request("DescribeLoginWhiteList", req, cb)
+  }
+
+  /**
    * 获取日志直方图信息
    */
   async DescribeLogHistogram(
@@ -4801,6 +4855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBashRulesResponse) => void
   ): Promise<DeleteBashRulesResponse> {
     return this.request("DeleteBashRules", req, cb)
+  }
+
+  /**
+   * 添加漏洞防御白名单
+   */
+  async ModifyRaspRules(
+    req: ModifyRaspRulesRequest,
+    cb?: (error: string, rep: ModifyRaspRulesResponse) => void
+  ): Promise<ModifyRaspRulesResponse> {
+    return this.request("ModifyRaspRules", req, cb)
   }
 
   /**
@@ -5697,6 +5761,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除漏洞防御白名单
+   */
+  async DeleteRaspRules(
+    req: DeleteRaspRulesRequest,
+    cb?: (error: string, rep: DeleteRaspRulesResponse) => void
+  ): Promise<DeleteRaspRulesResponse> {
+    return this.request("DeleteRaspRules", req, cb)
+  }
+
+  /**
    * 本接口 (DeleteMalwares) 用于删除木马记录。
    */
   async DeleteMalwares(
@@ -6137,13 +6211,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取异地登录白名单列表
+   * 查看漏洞防御最大cpu限制
    */
-  async DescribeLoginWhiteList(
-    req: DescribeLoginWhiteListRequest,
-    cb?: (error: string, rep: DescribeLoginWhiteListResponse) => void
-  ): Promise<DescribeLoginWhiteListResponse> {
-    return this.request("DescribeLoginWhiteList", req, cb)
+  async DescribeRaspMaxCpu(
+    req?: DescribeRaspMaxCpuRequest,
+    cb?: (error: string, rep: DescribeRaspMaxCpuResponse) => void
+  ): Promise<DescribeRaspMaxCpuResponse> {
+    return this.request("DescribeRaspMaxCpu", req, cb)
   }
 
   /**

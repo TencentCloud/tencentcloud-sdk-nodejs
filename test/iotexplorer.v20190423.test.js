@@ -848,6 +848,16 @@ it("iotexplorer.v20190423.InvokeCloudStorageAIServiceTask", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateFreeCloudStorage", async function () {
+    try {
+       const data = await client.CreateFreeCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetTWeCallPkgList", async function () {
     try {
        const data = await client.GetTWeCallPkgList({})
@@ -1131,6 +1141,16 @@ it("iotexplorer.v20190423.DeleteCloudStorageEvent", async function () {
 it("iotexplorer.v20190423.DeleteDevices", async function () {
     try {
        const data = await client.DeleteDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateDeviceChannel", async function () {
+    try {
+       const data = await client.CreateDeviceChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

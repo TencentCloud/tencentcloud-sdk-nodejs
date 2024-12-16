@@ -31,6 +31,7 @@ import {
   ControlDeviceDataRequest,
   DeviceActiveResult,
   DeleteLoRaFrequencyResponse,
+  CreateFreeCloudStorageResponse,
   ModifyPositionFenceResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageThumbnailListRequest,
@@ -248,6 +249,7 @@ import {
   DescribeDeviceRequest,
   CamTag,
   WXDeviceInfo,
+  CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
   DescribeGatewaySubDeviceListResponse,
   SearchStudioProductResponse,
@@ -334,12 +336,14 @@ import {
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   PositionSpaceInfo,
+  CreateDeviceChannelResponse,
   CreateTopicRuleRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
   DescribeCloudStorageEventsResponse,
   Filter,
   DescribeBindedProductsRequest,
+  CreateFreeCloudStorageRequest,
   DescribeLoRaFrequencyResponse,
   DescribeCloudStorageDateResponse,
   CloudStorageTimeInfo,
@@ -1210,6 +1214,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开通免费云存服务
+   */
+  async CreateFreeCloudStorage(
+    req: CreateFreeCloudStorageRequest,
+    cb?: (error: string, rep: CreateFreeCloudStorageResponse) => void
+  ): Promise<CreateFreeCloudStorageResponse> {
+    return this.request("CreateFreeCloudStorage", req, cb)
+  }
+
+  /**
      * 微信VOIP功能调整下线
 
 查询TWeCall包列表
@@ -1501,6 +1515,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDevicesResponse) => void
   ): Promise<DeleteDevicesResponse> {
     return this.request("DeleteDevices", req, cb)
+  }
+
+  /**
+   * 创建设备通道
+   */
+  async CreateDeviceChannel(
+    req: CreateDeviceChannelRequest,
+    cb?: (error: string, rep: CreateDeviceChannelResponse) => void
+  ): Promise<CreateDeviceChannelResponse> {
+    return this.request("CreateDeviceChannel", req, cb)
   }
 
   /**

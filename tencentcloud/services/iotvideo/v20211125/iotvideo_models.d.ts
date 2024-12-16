@@ -249,6 +249,15 @@ export interface ModifyProductDynamicRegisterResponse {
     RequestId?: string;
 }
 /**
+ * ModifyProduct返回参数结构体
+ */
+export interface ModifyProductResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CancelAIModelApplication返回参数结构体
  */
 export interface CancelAIModelApplicationResponse {
@@ -497,9 +506,19 @@ export interface DescribeDevicesResponse {
     RequestId?: string;
 }
 /**
- * ModifyProduct返回参数结构体
+ * CreateFreeCloudStorage返回参数结构体
  */
-export interface ModifyProductResponse {
+export interface CreateFreeCloudStorageResponse {
+    /**
+     * 订单金额，单位为分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 支付金额，单位为分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Amount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1873,6 +1892,43 @@ export interface DescribeDeviceCommLogRequest {
     Type?: string;
 }
 /**
+ * UpdateAIModelChannel请求参数结构体
+ */
+export interface UpdateAIModelChannelRequest {
+    /**
+     * 模型ID
+     */
+    ModelId: string;
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 推送类型。ckafka：消息队列；forward：http/https推送
+     */
+    Type: string;
+    /**
+     * 第三方推送地址
+     */
+    ForwardAddress?: string;
+    /**
+     * 第三方推送密钥，不填写则腾讯云自动生成。
+     */
+    ForwardKey?: string;
+    /**
+     * ckafka地域
+     */
+    CKafkaRegion?: string;
+    /**
+     * ckafka实例
+     */
+    CKafkaInstance?: string;
+    /**
+     * ckafka订阅主题
+     */
+    CKafkaTopic?: string;
+}
+/**
  * WakeUpDevice返回参数结构体
  */
 export interface WakeUpDeviceResponse {
@@ -3081,17 +3137,13 @@ export interface DataForward {
     DataChose: number;
 }
 /**
- * DescribeDevice请求参数结构体
+ * CreateDeviceChannel返回参数结构体
  */
-export interface DescribeDeviceRequest {
+export interface CreateDeviceChannelResponse {
     /**
-     * 产品ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProductId: string;
-    /**
-     * 设备名
-     */
-    DeviceName: string;
+    RequestId?: string;
 }
 /**
  * ModifyForwardRule请求参数结构体
@@ -3177,6 +3229,23 @@ export interface DescribeCloudStorageEventsResponse {
     RequestId?: string;
 }
 /**
+ * CreateDeviceChannel请求参数结构体
+ */
+export interface CreateDeviceChannelRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 通道ID
+     */
+    ChannelId: number;
+}
+/**
  * DescribeDevicePackages返回参数结构体
  */
 export interface DescribeDevicePackagesResponse {
@@ -3195,68 +3264,43 @@ export interface DescribeDevicePackagesResponse {
     RequestId?: string;
 }
 /**
- * video产品元数据
+ * CreateFreeCloudStorage请求参数结构体
  */
-export interface VideoProduct {
+export interface CreateFreeCloudStorageRequest {
     /**
      * 产品ID
      */
     ProductId: string;
     /**
-     * 产品名称
+     * 设备名称
      */
-    ProductName: string;
+    DeviceName: string;
     /**
-     * 产品设备类型（普通设备)	1.普通设备
+     * 云存套餐ID：
+  lye1w3d：低功耗事件3天周套餐。
+  ye1w3d：事件3天周套餐
      */
-    DeviceType: number;
+    PackageId: string;
     /**
-     * 认证方式：2：PSK
+     * 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。
      */
-    EncryptionType: number;
+    Override?: number;
     /**
-     * 设备功能码
+     * 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。
      */
-    Features: Array<string>;
+    PackageQueue?: string;
     /**
-     * 操作系统
+     * 订单id
      */
-    ChipOs: string;
+    OrderId?: string;
     /**
-     * 芯片厂商id
+     * 通道ID
      */
-    ChipManufactureId: string;
+    ChannelId?: number;
     /**
-     * 芯片id
+     * 云存视频存储区域，国内默认为ap-guangzhou。海外默认为东南亚ap-singapore，可选美东na-ashburn、欧洲eu-frankfurt。
      */
-    ChipId: string;
-    /**
-     * 产品描述信息
-     */
-    ProductDescription: string;
-    /**
-     * 创建时间unix时间戳
-     */
-    CreateTime: number;
-    /**
-     * 修改时间unix时间戳
-     */
-    UpdateTime: number;
-    /**
-     * 连接类型，wifi表示WIFI连接，cellular表示4G连接
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NetType: string;
-    /**
-     * 产品品类,113:摄像头,567:儿童手表,595:可视对讲门锁
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CategoryId: number;
-    /**
-     * 产品有效年限
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProductVaildYears: number;
+    StorageRegion?: string;
 }
 /**
  * 云存事件
@@ -3387,41 +3431,17 @@ export interface DescribeCloudStorageOrderRequest {
     OrderId: string;
 }
 /**
- * UpdateAIModelChannel请求参数结构体
+ * DescribeDevice请求参数结构体
  */
-export interface UpdateAIModelChannelRequest {
-    /**
-     * 模型ID
-     */
-    ModelId: string;
+export interface DescribeDeviceRequest {
     /**
      * 产品ID
      */
     ProductId: string;
     /**
-     * 推送类型。ckafka：消息队列；forward：http/https推送
+     * 设备名
      */
-    Type: string;
-    /**
-     * 第三方推送地址
-     */
-    ForwardAddress?: string;
-    /**
-     * 第三方推送密钥，不填写则腾讯云自动生成。
-     */
-    ForwardKey?: string;
-    /**
-     * ckafka地域
-     */
-    CKafkaRegion?: string;
-    /**
-     * ckafka实例
-     */
-    CKafkaInstance?: string;
-    /**
-     * ckafka订阅主题
-     */
-    CKafkaTopic?: string;
+    DeviceName: string;
 }
 /**
  * CreateCloudStorage返回参数结构体
@@ -4607,6 +4627,70 @@ export interface CreateTaskFileUrlResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * video产品元数据
+ */
+export interface VideoProduct {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 产品名称
+     */
+    ProductName: string;
+    /**
+     * 产品设备类型（普通设备)	1.普通设备
+     */
+    DeviceType: number;
+    /**
+     * 认证方式：2：PSK
+     */
+    EncryptionType: number;
+    /**
+     * 设备功能码
+     */
+    Features: Array<string>;
+    /**
+     * 操作系统
+     */
+    ChipOs: string;
+    /**
+     * 芯片厂商id
+     */
+    ChipManufactureId: string;
+    /**
+     * 芯片id
+     */
+    ChipId: string;
+    /**
+     * 产品描述信息
+     */
+    ProductDescription: string;
+    /**
+     * 创建时间unix时间戳
+     */
+    CreateTime: number;
+    /**
+     * 修改时间unix时间戳
+     */
+    UpdateTime: number;
+    /**
+     * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetType: string;
+    /**
+     * 产品品类,113:摄像头,567:儿童手表,595:可视对讲门锁
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryId: number;
+    /**
+     * 产品有效年限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductVaildYears: number;
 }
 /**
  * 设备数量统计
