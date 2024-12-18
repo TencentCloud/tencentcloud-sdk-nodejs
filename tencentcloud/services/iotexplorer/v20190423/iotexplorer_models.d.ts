@@ -368,6 +368,54 @@ export interface WifiInfo {
     RSSI: number;
 }
 /**
+ * CreateCloudStorageAIServiceTask请求参数结构体
+ */
+export interface CreateCloudStorageAIServiceTaskRequest {
+    /**
+     * 产品 ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存 AI 服务类型。可选值：
+  - `RealtimeObjectDetect`：目标检测
+  - `Highlight`：视频浓缩
+  - `VideoToText`：视频语义理解
+     */
+    ServiceType: string;
+    /**
+     * 待分析云存的起始时间
+     */
+    StartTime: number;
+    /**
+     * 待分析云存的结束时间
+     */
+    EndTime: number;
+    /**
+     * 通道 ID
+     */
+    ChannelId?: number;
+    /**
+     * 视频分析配置参数
+     */
+    Config?: string;
+    /**
+     * 视频分析识别区域
+     */
+    ROI?: string;
+    /**
+     * 分析外部传入的视频 URL 列表，支持 HLS 点播（m3u8）及常见视频格式（mp4 等）
+     */
+    VideoURLs?: Array<string>;
+    /**
+     * 自定义任务 ID
+     */
+    CustomId?: string;
+}
+/**
  * DescribeCloudStorageOrder请求参数结构体
  */
 export interface DescribeCloudStorageOrderRequest {
@@ -6625,6 +6673,19 @@ export interface DescribeLoRaFrequencyResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data: LoRaFrequencyEntry;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateCloudStorageAIServiceTask返回参数结构体
+ */
+export interface CreateCloudStorageAIServiceTaskResponse {
+    /**
+     * 任务 ID
+     */
+    TaskId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

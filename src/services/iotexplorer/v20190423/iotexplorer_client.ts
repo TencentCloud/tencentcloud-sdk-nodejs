@@ -39,6 +39,7 @@ import {
   DescribeCloudStorageUsersResponse,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   WifiInfo,
+  CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   DescribeSpaceFenceEventListResponse,
   DeleteLoRaGatewayResponse,
@@ -345,6 +346,7 @@ import {
   DescribeBindedProductsRequest,
   CreateFreeCloudStorageRequest,
   DescribeLoRaFrequencyResponse,
+  CreateCloudStorageAIServiceTaskResponse,
   DescribeCloudStorageDateResponse,
   CloudStorageTimeInfo,
   CreateIotVideoCloudStorageRequest,
@@ -1044,8 +1046,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发布广播消息
-   */
+     * 发布广播消息、发布RRPC消息属于早期服务，目前已停止维护，需要从官网下线。
+
+发布广播消息
+     */
   async PublishBroadcastMessage(
     req: PublishBroadcastMessageRequest,
     cb?: (error: string, rep: PublishBroadcastMessageResponse) => void
@@ -1174,8 +1178,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发RRPC消息
-   */
+     * 发布广播消息、发布RRPC消息属于早期服务，目前已停止维护，需要从官网下线。
+
+下发RRPC消息
+     */
   async PublishRRPCMessage(
     req: PublishRRPCMessageRequest,
     cb?: (error: string, rep: PublishRRPCMessageResponse) => void
@@ -1395,6 +1401,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBatchProductionResponse) => void
   ): Promise<CreateBatchProductionResponse> {
     return this.request("CreateBatchProduction", req, cb)
+  }
+
+  /**
+   * 创建设备云存 AI 分析任务
+   */
+  async CreateCloudStorageAIServiceTask(
+    req: CreateCloudStorageAIServiceTaskRequest,
+    cb?: (error: string, rep: CreateCloudStorageAIServiceTaskResponse) => void
+  ): Promise<CreateCloudStorageAIServiceTaskResponse> {
+    return this.request("CreateCloudStorageAIServiceTask", req, cb)
   }
 
   /**

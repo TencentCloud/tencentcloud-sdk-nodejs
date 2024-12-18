@@ -424,7 +424,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicRule", req, cb);
     }
     /**
-     * 发布广播消息
+     * 发布广播消息、发布RRPC消息属于早期服务，目前已停止维护，需要从官网下线。
+
+发布广播消息
      */
     async PublishBroadcastMessage(req, cb) {
         return this.request("PublishBroadcastMessage", req, cb);
@@ -502,7 +504,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicPolicy", req, cb);
     }
     /**
-     * 下发RRPC消息
+     * 发布广播消息、发布RRPC消息属于早期服务，目前已停止维护，需要从官网下线。
+
+下发RRPC消息
      */
     async PublishRRPCMessage(req, cb) {
         return this.request("PublishRRPCMessage", req, cb);
@@ -636,6 +640,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBatchProduction(req, cb) {
         return this.request("CreateBatchProduction", req, cb);
+    }
+    /**
+     * 创建设备云存 AI 分析任务
+     */
+    async CreateCloudStorageAIServiceTask(req, cb) {
+        return this.request("CreateCloudStorageAIServiceTask", req, cb);
     }
     /**
      * 禁用规则

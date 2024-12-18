@@ -2429,6 +2429,11 @@ export interface ChannelCreateFlowByFilesResponse {
    */
   Approvers?: Array<ApproverItem>
   /**
+   * 预览链接，有效期5分钟
+注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL
+   */
+  PreviewUrl?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

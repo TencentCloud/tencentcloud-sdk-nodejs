@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelVRSTaskRequest, DescribeVRSTaskStatusResponse, GetTrainingTextRequest, DownloadVRSModelRequest, DownloadVRSModelResponse, GetVRSVoiceTypesResponse, CancelVRSTaskResponse, CreateVRSTaskResponse, GetVRSVoiceTypesRequest, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, CreateVRSTaskRequest, DetectEnvAndSoundQualityResponse, DetectEnvAndSoundQualityRequest } from "./vrs_models";
+import { CancelVRSTaskRequest, DescribeVRSTaskStatusResponse, GetTrainingTextRequest, DownloadVRSModelRequest, GetVRSVoiceTypeInfoResponse, DownloadVRSModelResponse, GetVRSVoiceTypesResponse, GetVRSVoiceTypeInfoRequest, CancelVRSTaskResponse, CreateVRSTaskResponse, GetVRSVoiceTypesRequest, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, CreateVRSTaskRequest, DetectEnvAndSoundQualityResponse, DetectEnvAndSoundQualityRequest } from "./vrs_models";
 /**
  * vrs client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 该接口用于查询复刻音色详细信息。
+     */
+    GetVRSVoiceTypeInfo(req: GetVRSVoiceTypeInfoRequest, cb?: (error: string, rep: GetVRSVoiceTypeInfoResponse) => void): Promise<GetVRSVoiceTypeInfoResponse>;
     /**
      * 下载声音复刻离线模型
      */

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("vrs.tencentcloudapi.com", "2020-08-24", clientConfig);
     }
     /**
+     * 该接口用于查询复刻音色详细信息。
+     */
+    async GetVRSVoiceTypeInfo(req, cb) {
+        return this.request("GetVRSVoiceTypeInfo", req, cb);
+    }
+    /**
      * 下载声音复刻离线模型
      */
     async DownloadVRSModel(req, cb) {

@@ -1028,6 +1028,16 @@ it("iotexplorer.v20190423.CreateBatchProduction", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateCloudStorageAIServiceTask", async function () {
+    try {
+       const data = await client.CreateCloudStorageAIServiceTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DisableTopicRule", async function () {
     try {
        const data = await client.DisableTopicRule({})

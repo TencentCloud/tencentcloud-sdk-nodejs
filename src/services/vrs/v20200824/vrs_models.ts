@@ -75,6 +75,20 @@ export interface DownloadVRSModelRequest {
 }
 
 /**
+ * GetVRSVoiceTypeInfo返回参数结构体
+ */
+export interface GetVRSVoiceTypeInfoResponse {
+  /**
+   * 音色信息
+   */
+  Data?: VoiceTypeInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DownloadVRSModel返回参数结构体
  */
 export interface DownloadVRSModelResponse {
@@ -100,6 +114,24 @@ export interface GetVRSVoiceTypesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetVRSVoiceTypeInfo请求参数结构体
+ */
+export interface GetVRSVoiceTypeInfoRequest {
+  /**
+   * 音色id。
+   */
+  VoiceType: number
+  /**
+   * 0 - 除快速声音复刻外其他复刻类型（默认）； 5 - 快速声音复刻。 默认为0。
+   */
+  TaskType?: number
+  /**
+   * 快速复刻音色id。
+   */
+  FastVoiceType?: string
 }
 
 /**
@@ -201,12 +233,12 @@ export interface VoiceTypeListData {
  */
 export interface Words {
   /**
-   * 准确度 (<75则认为不合格)
+   * 准确度 (小于75则认为不合格)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PronAccuracy?: number
   /**
-   * 流畅度 (<0.95则认为不合格)
+   * 流畅度 (小于0.95则认为不合格)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PronFluency?: number

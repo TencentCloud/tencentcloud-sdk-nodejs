@@ -18,6 +18,16 @@ const client = new tencentcloud.vrs.v20200824.Client({
 })
 describe("vrs.v20200824.test.js", function () {
 
+it("vrs.v20200824.GetVRSVoiceTypeInfo", async function () {
+    try {
+       const data = await client.GetVRSVoiceTypeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vrs.v20200824.DownloadVRSModel", async function () {
     try {
        const data = await client.DownloadVRSModel({})

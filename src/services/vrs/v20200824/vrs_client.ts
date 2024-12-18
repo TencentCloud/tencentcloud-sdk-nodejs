@@ -22,8 +22,10 @@ import {
   DescribeVRSTaskStatusResponse,
   GetTrainingTextRequest,
   DownloadVRSModelRequest,
+  GetVRSVoiceTypeInfoResponse,
   DownloadVRSModelResponse,
   GetVRSVoiceTypesResponse,
+  GetVRSVoiceTypeInfoRequest,
   CancelVRSTaskResponse,
   CreateVRSTaskResponse,
   GetVRSVoiceTypesRequest,
@@ -51,6 +53,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("vrs.tencentcloudapi.com", "2020-08-24", clientConfig)
+  }
+
+  /**
+   * 该接口用于查询复刻音色详细信息。
+   */
+  async GetVRSVoiceTypeInfo(
+    req: GetVRSVoiceTypeInfoRequest,
+    cb?: (error: string, rep: GetVRSVoiceTypeInfoResponse) => void
+  ): Promise<GetVRSVoiceTypeInfoResponse> {
+    return this.request("GetVRSVoiceTypeInfo", req, cb)
   }
 
   /**
