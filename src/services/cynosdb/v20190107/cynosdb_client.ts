@@ -27,6 +27,7 @@ import {
   SearchClusterTablesRequest,
   DescribeMaintainPeriodRequest,
   AccountParam,
+  DescribeClusterDatabaseTablesRequest,
   DescribeClusterParamsResponse,
   RefundResourcePackageResponse,
   ModifyInstanceNameResponse,
@@ -307,6 +308,7 @@ import {
   OfflineClusterResponse,
   ModifyAccountHostRequest,
   DescribeFlowRequest,
+  DescribeClusterDatabaseTablesResponse,
   OpenReadOnlyInstanceExclusiveAccessRequest,
   CreateBackupRequest,
   CreateCLSDeliveryRequest,
@@ -1051,6 +1053,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
+   */
+  async ModifyAuditRuleTemplates(
+    req: ModifyAuditRuleTemplatesRequest,
+    cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
+  ): Promise<ModifyAuditRuleTemplatesResponse> {
+    return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
    * 本接口（ModifyParamTemplate）用于修改用户参数模板。
    */
   async ModifyParamTemplate(
@@ -1581,13 +1593,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
+   * 获取table列表
    */
-  async ModifyAuditRuleTemplates(
-    req: ModifyAuditRuleTemplatesRequest,
-    cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
-  ): Promise<ModifyAuditRuleTemplatesResponse> {
-    return this.request("ModifyAuditRuleTemplates", req, cb)
+  async DescribeClusterDatabaseTables(
+    req: DescribeClusterDatabaseTablesRequest,
+    cb?: (error: string, rep: DescribeClusterDatabaseTablesResponse) => void
+  ): Promise<DescribeClusterDatabaseTablesResponse> {
+    return this.request("DescribeClusterDatabaseTables", req, cb)
   }
 
   /**

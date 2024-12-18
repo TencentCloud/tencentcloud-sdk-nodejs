@@ -618,6 +618,16 @@ it("cynosdb.v20190107.ModifyClusterDatabase", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
+    try {
+       const data = await client.ModifyAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyParamTemplate", async function () {
     try {
        const data = await client.ModifyParamTemplate({})
@@ -1148,9 +1158,9 @@ it("cynosdb.v20190107.OfflineCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyAuditRuleTemplates", async function () {
+it("cynosdb.v20190107.DescribeClusterDatabaseTables", async function () {
     try {
-       const data = await client.ModifyAuditRuleTemplates({})
+       const data = await client.DescribeClusterDatabaseTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

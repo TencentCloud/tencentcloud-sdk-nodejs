@@ -816,6 +816,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyExtendedService", req, cb);
     }
     /**
+     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
+1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
+2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
+
+此接口存在以下限制：
+1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
+2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
+4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
+6. <font  color="red">不支持操作合同组合同</font>。
+
+合同（流程）层面 截止时间控制台展示的位置：
+![image](https://qcloudimg.tencent-cloud.cn/raw/265b130136bf6e8f01f5880438467dfb.png)
+     */
+    async ModifyFlowDeadline(req, cb) {
+        return this.request("ModifyFlowDeadline", req, cb);
+    }
+    /**
      * 获取区块链存证证书查看链接/二维码接口
 
 适用场景：企业员工可以通过此接口生成合同区块链存证证书的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。
@@ -1191,23 +1210,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreateBatchCancelFlowUrl", req, cb);
     }
     /**
-     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
-1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
-2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
-
-此接口存在以下限制：
-1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
-2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
-4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
-6. <font  color="red">不支持操作合同组合同</font>。
-
-合同（流程）层面 截止时间控制台展示的位置：
-![image](https://qcloudimg.tencent-cloud.cn/raw/265b130136bf6e8f01f5880438467dfb.png)
+     * 此接口（DeleteIntegrationDepartment）用于删除企业的部门信息。
      */
-    async ModifyFlowDeadline(req, cb) {
-        return this.request("ModifyFlowDeadline", req, cb);
+    async DeleteIntegrationDepartment(req, cb) {
+        return this.request("DeleteIntegrationDepartment", req, cb);
     }
     /**
      * **适用场景 ：**
@@ -1271,10 +1277,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreatePrepareFlow", req, cb);
     }
     /**
-     * 此接口（DeleteIntegrationDepartment）用于删除企业的部门信息。
+     * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
      */
-    async DeleteIntegrationDepartment(req, cb) {
-        return this.request("DeleteIntegrationDepartment", req, cb);
+    async DescribeBillUsage(req, cb) {
+        return this.request("DescribeBillUsage", req, cb);
     }
     /**
      * 此接口用于查询合同流程的详情信息，支持查询多个（数量不能超过100）。
@@ -1295,6 +1301,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async DescribeCancelFlowsTask(req, cb) {
         return this.request("DescribeCancelFlowsTask", req, cb);
+    }
+    /**
+     * 仅且仅能查询企业本身在电子签的认证状态
+     */
+    async DescribeOrganizationVerifyStatus(req, cb) {
+        return this.request("DescribeOrganizationVerifyStatus", req, cb);
     }
     /**
      * 生成集团加入链接，分享至子企业超管或者法人，子企业管理员可通过链接加入集团。
@@ -1328,12 +1340,6 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async GetTaskResultApi(req, cb) {
         return this.request("GetTaskResultApi", req, cb);
-    }
-    /**
-     * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
-     */
-    async DescribeBillUsage(req, cb) {
-        return this.request("DescribeBillUsage", req, cb);
     }
     /**
      * 该接口用于结束动态签署方2.0的合同流程。

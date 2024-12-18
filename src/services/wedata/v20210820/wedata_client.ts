@@ -230,6 +230,7 @@ import {
   TaskLogRequest,
   OpsTaskLinkInfoDto,
   ScriptInfoResponse,
+  TaskImportInfo,
   DescribeIntegrationStatisticsTaskStatusRequest,
   GetFileInfoResponse,
   BaseUser,

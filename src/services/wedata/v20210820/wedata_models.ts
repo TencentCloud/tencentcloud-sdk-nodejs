@@ -1696,6 +1696,14 @@ export interface KillOpsMakePlanInstancesRequest {
    * 补录计划ID
    */
   PlanId: string
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
+  /**
+   * 补录计划名
+   */
+  PlanName?: string
 }
 
 /**
@@ -6057,6 +6065,10 @@ export interface BatchStopWorkflowsByIdsRequest {
    * 是否终止已生成的实例
    */
   KillInstance?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -6515,6 +6527,21 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineTaskStatus?: number
+  /**
+   * 导入到编排空间配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskImportInfo?: TaskImportInfo
+  /**
+   * 业务延迟
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessLatency?: number
+  /**
+   * 当前同步位点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentSyncPosition?: number
 }
 
 /**
@@ -6899,6 +6926,10 @@ export interface DescribeOpsWorkflowsRequest {
    * 排序方式，DESC或ASC
    */
   SortType?: string
+  /**
+   * 项目ID列表，用于多项目工作流筛选
+   */
+  ProjectIds?: Array<string>
 }
 
 /**
@@ -6910,6 +6941,11 @@ export interface CreateOfflineTaskResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
+  /**
+   * 导入到编排空间的任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArrangeSpaceTaskId?: string
   /**
    * 结果
    */
@@ -7463,6 +7499,14 @@ false 否
 false 否
    */
   IncludeTaskFolder?: boolean
+  /**
+   * 是否使用最新模式展示目录树
+   */
+  NewFolderTreeMode?: boolean
+  /**
+   * 节点分类ID
+   */
+  TaskNodeId?: string
 }
 
 /**
@@ -7719,6 +7763,47 @@ export interface ScriptInfoResponse {
 }
 
 /**
+ * 集成任务导入到编排空间配置
+ */
+export interface TaskImportInfo {
+  /**
+   * 是否导入编排空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsImport?: boolean
+  /**
+   * 是否新建工作流
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewWorkFlow?: boolean
+  /**
+   * 工作流所属目录id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowFolderId?: string
+  /**
+   * 工作流所属目录名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowFolderName?: string
+  /**
+   * 工作流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowId?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowName?: string
+  /**
+   * 重名任务处理策略, 0:跳过,不导入; 1: 重命名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskNameExistMode?: number
+}
+
+/**
  * DescribeIntegrationStatisticsTaskStatus请求参数结构体
  */
 export interface DescribeIntegrationStatisticsTaskStatusRequest {
@@ -7913,9 +7998,13 @@ export interface CreateWorkflowDsResponse {
  */
 export interface CreateHiveTableByDDLResponse {
   /**
-   * 表名称
+   * 返回表名称，无论是否异步都有值
    */
   Data?: string
+  /**
+   * 异步任务轮询 id，只有异步才有值
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8158,6 +8247,10 @@ export interface DescribeDsParentFolderTreeRequest {
 -    catalog:目录展示
    */
   DisplayType?: string
+  /**
+   * 是否新模式展示目录树
+   */
+  NewFolderTreeMode?: boolean
 }
 
 /**
@@ -8867,6 +8960,10 @@ export interface CreateOfflineTaskRequest {
    * 区分画布和表单
    */
   TaskMode: string
+  /**
+   * 导入编排空间配置
+   */
+  TaskImportInfo?: TaskImportInfo
 }
 
 /**
@@ -9010,6 +9107,11 @@ export interface ScreenTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenNum?: number
+  /**
+   * 无效任务数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InvalidNum?: number
   /**
    * 年任务
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9957,6 +10059,10 @@ export interface KillScheduleInstancesRequest {
    * 是否计算总数
    */
   IsCount?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -9997,6 +10103,10 @@ export interface BatchStopOpsTasksRequest {
    * 是否终止已生成的实例
    */
   KillInstance?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -10334,6 +10444,10 @@ export interface DescribeOpsMakePlanTasksRequest {
    * 补录计划ID
    */
   PlanId: string
+  /**
+   * 实例状态过滤条件
+   */
+  StateList?: Array<number | bigint>
   /**
    * 分页页码，默认值1
    */
@@ -10779,6 +10893,16 @@ export interface MakePlanOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckParentType?: string
+  /**
+   * 是否和原任务保持相同工作流自依赖属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SameSelfWorkflowDependType?: boolean
+  /**
+   * 工作流自依赖类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelfWorkflowDependency?: string
 }
 
 /**
@@ -10877,6 +11001,10 @@ export interface OperationOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorDesc?: string
+  /**
+   * 异步操作记录id
+   */
+  AsyncActionId?: string
 }
 
 /**
@@ -11391,6 +11519,11 @@ export interface BatchOperationOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
+  /**
+   * 异步操作记录的唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncActionId?: string
 }
 
 /**
@@ -11554,6 +11687,10 @@ export interface RunForceSucScheduleInstancesRequest {
    * 是否计算总数
    */
   IsCount?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -11809,6 +11946,14 @@ export interface DescribeOpsMakePlansRequest {
    * 补录计划最大创建时间
    */
   MaxCreateTime?: string
+  /**
+   * 实例状态过滤条件
+   */
+  StateList?: Array<number | bigint>
+  /**
+   * 模糊查询关键字
+   */
+  Keyword?: string
 }
 
 /**
@@ -12053,6 +12198,10 @@ export interface FreezeTasksByWorkflowIdsRequest {
    * 是否终止已生成的实例
    */
   KillInstance?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -12121,6 +12270,11 @@ export interface BatchOperateResultOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorDesc?: string
+  /**
+   * 异步操作id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncActionId?: string
 }
 
 /**
@@ -15321,6 +15475,14 @@ export interface DescribeSchedulerTaskCntByStatusRequest {
    * 工作流ID
    */
   WorkflowId?: string
+  /**
+   * 项目ID列表，如果传了 ProjectIds ，ProjectId 不会生效
+   */
+  ProjectIds?: Array<string>
+  /**
+   * 资源组ID筛选
+   */
+  ResourceGroupIds?: Array<string>
 }
 
 /**
@@ -16633,6 +16795,10 @@ export interface ScreenInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedNum?: number
+  /**
+   * 跳过运行总数
+   */
+  SkipRunningNum?: number
 }
 
 /**
@@ -16874,6 +17040,10 @@ export interface DescribeOperateOpsTasksRequest {
    * 额外请求的资源类型
    */
   RequestResourceTypes?: Array<string>
+  /**
+   * 项目ID列表
+   */
+  ProjectIds?: Array<string>
 }
 
 /**
@@ -17956,6 +18126,16 @@ export interface RuntimeInstanceCntTop {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WaitScheduleTime?: number
+  /**
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
 }
 
 /**
@@ -18544,6 +18724,10 @@ export interface RunRerunScheduleInstancesRequest {
    * 是否计算总数
    */
   IsCount?: boolean
+  /**
+   * 是否异步模式
+   */
+  AsyncMode?: boolean
 }
 
 /**
@@ -18850,6 +19034,10 @@ export interface DescribeTaskByStatusReportRequest {
    * 工作流ID
    */
   WorkflowId?: string
+  /**
+   * 项目ID列表，用于多项目实例趋势筛选，当指定了 ProjectIds 的时候，ProjectId 将只用来鉴权，不做筛选
+   */
+  ProjectIds?: Array<string>
 }
 
 /**
@@ -19335,6 +19523,10 @@ export interface CreateCustomFunctionRequest {
    * 项目ID
    */
   ProjectId?: string
+  /**
+   * 函数资源文件类型
+   */
+  FunctionResourceFileType?: string
 }
 
 /**
@@ -19511,6 +19703,14 @@ export interface DescribeStatisticInstanceStatusTrendOpsRequest {
    * 工作流ID
    */
   WorkflowId?: string
+  /**
+   * 项目ID列表，用于多项目实例趋势筛选，当指定了 ProjectIds 的时候，ProjectId 将只用来鉴权，不做筛选
+   */
+  ProjectIds?: Array<string>
+  /**
+   * 指定时间点，当统计时常为整天的时候使用，必须小于 24
+   */
+  TimePoint?: number
 }
 
 /**
@@ -20371,6 +20571,10 @@ export interface DescribeSchedulerInstanceStatusRequest {
    * 工作流ID
    */
   WorkflowId?: string
+  /**
+   * 任务ID列表
+   */
+  ProjectIds?: Array<string>
 }
 
 /**
@@ -20595,6 +20799,10 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
    * 升序降序
    */
   SortType?: string
+  /**
+   * 项目ID列表，如果传了 ProjectIds，则 ProjectId 不会生效，用于多项目筛选
+   */
+  ProjectIds?: Array<string>
 }
 
 /**
@@ -21364,6 +21572,18 @@ export interface DescribeTaskByCycleRequest {
    * 工作流ID
    */
   WorkflowId?: string
+  /**
+   * 项目ID列表筛选
+   */
+  ProjectIds?: Array<string>
+  /**
+   * 资源组ID列表筛选
+   */
+  ResourceGroupIds?: Array<string>
+  /**
+   * 任务类型ID筛选
+   */
+  TaskTypeIdList?: Array<string>
 }
 
 /**
@@ -21881,6 +22101,10 @@ export interface CreateHiveTableByDDLRequest {
    * schema名称
    */
   SchemaName?: string
+  /**
+   * 是否异步建表
+   */
+  Async?: boolean
 }
 
 /**

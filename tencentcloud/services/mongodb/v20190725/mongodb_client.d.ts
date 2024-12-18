@@ -25,7 +25,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceDeal(req: DescribeDBInstanceDealRequest, cb?: (error: string, rep: DescribeDBInstanceDealResponse) => void): Promise<DescribeDBInstanceDealResponse>;
     /**
-     * 本接口(DescribeCurrentOp)用于查询MongoDB云数据库实例的当前正在执行的操作。
+     * 本接口（DescribeCurrentOp）用于查询云数据库实例的当前正在执行的操作。
      */
     DescribeCurrentOp(req: DescribeCurrentOpRequest, cb?: (error: string, rep: DescribeCurrentOpResponse) => void): Promise<DescribeCurrentOpResponse>;
     /**
@@ -77,7 +77,7 @@ export declare class Client extends AbstractClient {
      */
     RenameInstance(req: RenameInstanceRequest, cb?: (error: string, rep: RenameInstanceResponse) => void): Promise<RenameInstanceResponse>;
     /**
-     * 查询异步任务状态接口
+     * 本接口（DescribeAsyncRequestInfo）用于查询异步任务状态接口。
      */
     DescribeAsyncRequestInfo(req: DescribeAsyncRequestInfoRequest, cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void): Promise<DescribeAsyncRequestInfoResponse>;
     /**
@@ -162,7 +162,6 @@ export declare class Client extends AbstractClient {
     InquirePriceCreateDBInstances(req: InquirePriceCreateDBInstancesRequest, cb?: (error: string, rep: InquirePriceCreateDBInstancesResponse) => void): Promise<InquirePriceCreateDBInstancesResponse>;
     /**
      * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-
      */
     AssignProject(req: AssignProjectRequest, cb?: (error: string, rep: AssignProjectResponse) => void): Promise<AssignProjectResponse>;
     /**

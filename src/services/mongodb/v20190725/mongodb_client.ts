@@ -206,7 +206,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeCurrentOp)用于查询MongoDB云数据库实例的当前正在执行的操作。
+   * 本接口（DescribeCurrentOp）用于查询云数据库实例的当前正在执行的操作。
    */
   async DescribeCurrentOp(
     req: DescribeCurrentOpRequest,
@@ -336,7 +336,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询异步任务状态接口
+   * 本接口（DescribeAsyncRequestInfo）用于查询异步任务状态接口。
    */
   async DescribeAsyncRequestInfo(
     req: DescribeAsyncRequestInfoRequest,
@@ -540,9 +540,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-
-     */
+   * 本接口(AssignProject)用于指定云数据库实例的所属项目。
+   */
   async AssignProject(
     req: AssignProjectRequest,
     cb?: (error: string, rep: AssignProjectResponse) => void

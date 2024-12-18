@@ -62,11 +62,11 @@ export interface ListAttachedRolePoliciesResponse {
   /**
    * 角色关联的策略列表
    */
-  List: Array<AttachedPolicyOfRole>
+  List?: Array<AttachedPolicyOfRole>
   /**
    * 角色关联的策略总数
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -803,17 +803,17 @@ export interface PolicyVersionItem {
    * 策略版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId: number
+  VersionId?: number
   /**
    * 策略版本创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateDate: string
+  CreateDate?: string
   /**
    * 是否是正在生效的版本。0表示不是，1表示是
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDefaultVersion: number
+  IsDefaultVersion?: number
 }
 
 /**
@@ -1581,7 +1581,7 @@ export interface ListPoliciesGrantingServiceAccessResponse {
   /**
    * 列表
    */
-  List: Array<ListGrantServiceAccessNode>
+  List?: Array<ListGrantServiceAccessNode>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2322,11 +2322,11 @@ export interface ListAttachedUserPoliciesResponse {
   /**
    * 策略总数
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 策略列表
    */
-  List: Array<AttachPolicyInfo>
+  List?: Array<AttachPolicyInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2388,7 +2388,7 @@ export interface GetPolicyVersionResponse {
    * 策略版本详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyVersion: PolicyVersionDetail
+  PolicyVersion?: PolicyVersionDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2983,15 +2983,15 @@ export interface ListGrantServiceAccessNode {
   /**
    * 服务
    */
-  Service: ListGrantServiceAccessService
+  Service?: ListGrantServiceAccessService
   /**
    * 接口信息
    */
-  Action: Array<ListGrantServiceAccessActionNode>
+  Action?: Array<ListGrantServiceAccessActionNode>
   /**
    * 授权的策略
    */
-  Policy: Array<ListGrantServiceAccessPolicy>
+  Policy?: Array<ListGrantServiceAccessPolicy>
 }
 
 /**
@@ -3254,39 +3254,39 @@ export interface AttachedPolicyOfRole {
   /**
    * 策略ID
    */
-  PolicyId: number
+  PolicyId?: number
   /**
    * 策略名称
    */
-  PolicyName: string
+  PolicyName?: string
   /**
    * 绑定时间
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 策略类型，User表示自定义策略，QCS表示预设策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyType: string
+  PolicyType?: string
   /**
    * 策略创建方式，1表示按产品功能或项目权限创建，其他表示按策略语法创建
    */
-  CreateMode: number
+  CreateMode?: number
   /**
    * 是否已下线(0:否 1:是)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deactived: number
+  Deactived?: number
   /**
    * 已下线的产品列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeactivedDetail: Array<string>
+  DeactivedDetail?: Array<string>
   /**
    * 策略描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -3614,22 +3614,22 @@ export interface PolicyVersionDetail {
    * 策略版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId: number
+  VersionId?: number
   /**
    * 策略版本创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateDate: string
+  CreateDate?: string
   /**
    * 是否是正在生效的版本。0表示不是，1表示是
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDefaultVersion: number
+  IsDefaultVersion?: number
   /**
    * 策略语法文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Document: string
+  Document?: string
 }
 
 /**

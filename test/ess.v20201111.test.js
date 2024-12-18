@@ -558,6 +558,16 @@ it("ess.v20201111.ModifyExtendedService", async function () {
     }
 })
 
+it("ess.v20201111.ModifyFlowDeadline", async function () {
+    try {
+       const data = await client.ModifyFlowDeadline({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowBlockchainEvidenceUrl", async function () {
     try {
        const data = await client.CreateFlowBlockchainEvidenceUrl({})
@@ -778,9 +788,9 @@ it("ess.v20201111.CreateBatchCancelFlowUrl", async function () {
     }
 })
 
-it("ess.v20201111.ModifyFlowDeadline", async function () {
+it("ess.v20201111.DeleteIntegrationDepartment", async function () {
     try {
-       const data = await client.ModifyFlowDeadline({})
+       const data = await client.DeleteIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +818,9 @@ it("ess.v20201111.CreatePrepareFlow", async function () {
     }
 })
 
-it("ess.v20201111.DeleteIntegrationDepartment", async function () {
+it("ess.v20201111.DescribeBillUsage", async function () {
     try {
-       const data = await client.DeleteIntegrationDepartment({})
+       const data = await client.DescribeBillUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,6 +858,16 @@ it("ess.v20201111.DescribeCancelFlowsTask", async function () {
     }
 })
 
+it("ess.v20201111.DescribeOrganizationVerifyStatus", async function () {
+    try {
+       const data = await client.DescribeOrganizationVerifyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateOrganizationGroupInvitationLink", async function () {
     try {
        const data = await client.CreateOrganizationGroupInvitationLink({})
@@ -871,16 +891,6 @@ it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
 it("ess.v20201111.GetTaskResultApi", async function () {
     try {
        const data = await client.GetTaskResultApi({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ess.v20201111.DescribeBillUsage", async function () {
-    try {
-       const data = await client.DescribeBillUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

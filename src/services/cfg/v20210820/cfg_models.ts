@@ -502,6 +502,10 @@ export interface TemplateGroupAction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionRisk?: string
+  /**
+   * 故障表现
+   */
+  FailurePerformance?: string
 }
 
 /**
@@ -1057,6 +1061,10 @@ export interface ObjectType {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectSupportType?: number
+  /**
+   * 1.接入层 2.逻辑层 3. 数据层
+   */
+  ArchLayer?: number
 }
 
 /**

@@ -13781,6 +13781,10 @@ export interface VpnGateway {
    * SSL-VPN 客户端连接数。
    */
   MaxConnection?: number
+  /**
+   * Bgp ASN
+   */
+  BgpAsn?: number
 }
 
 /**
@@ -15709,6 +15713,10 @@ export interface CreateVpnGatewayRequest {
    * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。仅 SSL / SSL_CCN 类型需要选这个参数。
    */
   MaxConnection?: number
+  /**
+   * BGP ASN。
+   */
+  BgpAsn?: number
 }
 
 /**

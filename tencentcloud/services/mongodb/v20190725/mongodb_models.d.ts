@@ -252,7 +252,7 @@ export interface KillOpsRequest {
  */
 export interface InquirePriceRenewDBInstancesRequest {
     /**
-     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。
+     * 实例ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。
      */
     InstanceIds: Array<string>;
     /**
@@ -307,13 +307,13 @@ export interface FlushInstanceRouterConfigResponse {
  */
 export interface DescribeCurrentOpResponse {
     /**
-     * 符合查询条件的操作总数
+     * 符合查询条件的操作总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
-     * 当前操作列表
+     * 当前操作列表。
      */
-    CurrentOps: Array<CurrentOp>;
+    CurrentOps?: Array<CurrentOp>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -440,7 +440,7 @@ export interface AssignProjectResponse {
     /**
      * 返回的异步任务ID列表
      */
-    FlowIds: Array<number | bigint>;
+    FlowIds?: Array<number | bigint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1111,48 +1111,53 @@ export interface DescribeDBInstancesRequest {
  */
 export interface CurrentOp {
     /**
-     * 操作序号
+     * 操作序号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OpId: number;
+    OpId?: number;
     /**
-     * 操作所在的命名空间，形式如db.collection
+     * 操作所在的命名空间，形式如db.collection。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ns: string;
+    Ns?: string;
     /**
-     * 操作执行语句
+     * 操作执行语句。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Query: string;
+    Query?: string;
     /**
-     * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
+     * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Op: string;
+    Op?: string;
     /**
-     * 操作所在的分片名称
+     * 操作所在的分片名称。
      */
-    ReplicaSetName: string;
+    ReplicaSetName?: string;
     /**
-     * 筛选条件，节点状态，可能的取值为：Primary、Secondary
+     * 操作所在的节点名称。
+     */
+    NodeName?: string;
+    /**
+     * 操作详细信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    State: string;
+    Operation?: string;
     /**
-     * 操作详细信息
+     * 筛选条件，节点状态，可能的取值为：Primary、Secondary。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Operation: string;
+    State?: string;
     /**
-     * 操作所在的节点名称
-     */
-    NodeName: string;
-    /**
-     * 操作已执行时间（ms）
+     * 操作已执行时间（ms）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicrosecsRunning: number;
+    MicrosecsRunning?: number;
+    /**
+     * 当前操作所在节点信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecNode?: string;
 }
 /**
  * ModifyDBInstanceSpec请求参数结构体
@@ -1345,7 +1350,7 @@ export interface DescribeAsyncRequestInfoResponse {
     /**
      * 状态。返回参数有：initial-初始化、running-运行中、paused-任务执行失败，已暂停、undoed-任务执行失败，已回滚、failed-任务执行失败, 已终止、success-成功
      */
-    Status: string;
+    Status?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1960,28 +1965,31 @@ export interface ModifyDBInstanceParamTplRequest {
  */
 export interface DescribeCurrentOpRequest {
     /**
-     * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     * 指定要查询的实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
      */
     InstanceId: string;
     /**
-     * 筛选条件，操作所属的命名空间namespace，格式为db.collection
+     * 操作所属的命名空间 namespace，格式为 db.collection。
      */
     Ns?: string;
     /**
-     * 筛选条件，操作已经执行的时间（单位：毫秒），结果将返回超过设置时间的操作，默认值为0，取值范围为[0, 3600000]
+     * 设置查询筛选条件为操作任务已经执行的时间。
+  - 默认值为0，取值范围为[0, 3600000]，单位：毫秒。
+  - 结果将返回超过设置时间的操作。
      */
     MillisecondRunning?: number;
     /**
-     * 筛选条件，操作类型，可能的取值：none，update，insert，query，command，getmore，remove和killcursors
+     * 设置查询筛选条件为操作任务类型。取值包括：none、update、insert，query、command、getmore、remove 和 killcursors。
      */
     Op?: string;
     /**
-     * 筛选条件，分片名称
+     * 筛选条件，分片名称。
      */
     ReplicaSetName?: string;
     /**
-     * 筛选条件，节点状态，可能的取值为：primary
-  secondary
+     * 设置查询筛选条件为节点角色。
+  - primary：主节点。
+  - secondary：从节点。
      */
     State?: string;
     /**
@@ -2561,7 +2569,7 @@ export interface SetBackupRulesRequest {
  */
 export interface AssignProjectRequest {
     /**
-     * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     * 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同
      */
     InstanceIds: Array<string>;
     /**
@@ -2697,7 +2705,7 @@ export interface InquirePriceRenewDBInstancesResponse {
     /**
      * 价格
      */
-    Price: DBInstancePrice;
+    Price?: DBInstancePrice;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

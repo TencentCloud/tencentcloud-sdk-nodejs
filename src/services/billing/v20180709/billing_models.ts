@@ -6736,10 +6736,12 @@ export interface DescribeAccountBalanceResponse {
   OweAmount?: number
   /**
    * 是否允许欠费消费
+   * @deprecated
    */
   IsAllowArrears?: boolean
   /**
    * 是否限制信用额度
+   * @deprecated
    */
   IsCreditLimited?: boolean
   /**

@@ -49,8 +49,6 @@ export declare class Client extends AbstractClient {
     DescribeSpecInfo(req: DescribeSpecInfoRequest, cb?: (error: string, rep: DescribeSpecInfoResponse) => void): Promise<DescribeSpecInfoResponse>;
     /**
      * 本接口(SetPassword)用于设置（初始化）MongoDB云数据库实例账户密码。
-
-
      */
     SetPassword(req: SetPasswordRequest, cb?: (error: string, rep: SetPasswordResponse) => void): Promise<SetPasswordResponse>;
     /**

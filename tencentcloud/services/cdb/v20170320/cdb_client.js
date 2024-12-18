@@ -542,6 +542,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AdjustCdbProxy", req, cb);
     }
     /**
+     * 该接口（ModifyProtectMode）用于修改实例的同步方式。
+     */
+    async ModifyProtectMode(req, cb) {
+        return this.request("ModifyProtectMode", req, cb);
+    }
+    /**
      * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例等。
      */
     async UpgradeDBInstanceEngineVersion(req, cb) {

@@ -89,8 +89,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口(SetPassword)用于设置（初始化）MongoDB云数据库实例账户密码。
-
-
      */
     async SetPassword(req, cb) {
         return this.request("SetPassword", req, cb);

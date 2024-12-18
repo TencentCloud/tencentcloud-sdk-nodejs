@@ -2252,6 +2252,10 @@ HoaiMy
    */
   NotifyMessage?: string
   /**
+   * 最大触发AI提示音次数，默认为不限制
+   */
+  NotifyMaxCount?: number
+  /**
    * <p>和VoiceType字段需要选填一个，这里是使用自己自定义的TTS，VoiceType是系统内置的一些音色</p>
 <ul>
 <li>Tencent TTS<br>

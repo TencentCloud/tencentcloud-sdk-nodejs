@@ -388,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterDatabase", req, cb);
     }
     /**
+     * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
+     */
+    async ModifyAuditRuleTemplates(req, cb) {
+        return this.request("ModifyAuditRuleTemplates", req, cb);
+    }
+    /**
      * 本接口（ModifyParamTemplate）用于修改用户参数模板。
      */
     async ModifyParamTemplate(req, cb) {
@@ -706,10 +712,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OfflineCluster", req, cb);
     }
     /**
-     * 本接口（ModifyAuditRuleTemplates）用于修改审计规则模板。
+     * 获取table列表
      */
-    async ModifyAuditRuleTemplates(req, cb) {
-        return this.request("ModifyAuditRuleTemplates", req, cb);
+    async DescribeClusterDatabaseTables(req, cb) {
+        return this.request("DescribeClusterDatabaseTables", req, cb);
     }
     /**
      * 本接口（StopCLSDelivery）用于停止日志投递功能。

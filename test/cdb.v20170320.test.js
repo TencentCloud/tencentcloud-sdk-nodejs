@@ -818,6 +818,16 @@ it("cdb.v20170320.AdjustCdbProxy", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyProtectMode", async function () {
+    try {
+       const data = await client.ModifyProtectMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.UpgradeDBInstanceEngineVersion", async function () {
     try {
        const data = await client.UpgradeDBInstanceEngineVersion({})

@@ -108,4 +108,8 @@ export interface License {
      * 授权时长单位，枚举值有Y年/M月/D日三种
      */
     LifeSpanUnit?: string;
+    /**
+     * 授权的类型：Standard正式版/Development开发版/Trial体验版
+     */
+    LicenseType?: string;
 }

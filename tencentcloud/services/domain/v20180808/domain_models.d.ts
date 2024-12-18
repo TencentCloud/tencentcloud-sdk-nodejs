@@ -1062,7 +1062,7 @@ export interface TransferInDomainBatchResponse {
     /**
      * 日志ID
      */
-    LogId: number;
+    LogId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2135,7 +2135,7 @@ export interface ModifyDomainOwnerBatchResponse {
     /**
      * 日志id
      */
-    LogId: number;
+    LogId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2251,7 +2251,7 @@ export interface DescribeBiddingDetailRequest {
  */
 export interface DescribeTemplateRequest {
     /**
-     * 模板ID
+     * 模板ID(模板列表接口可获取)
      */
     TemplateId: string;
 }

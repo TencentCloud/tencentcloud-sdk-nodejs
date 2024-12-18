@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribePersonCertificateResponse, CreateOrganizationGroupInvitationLinkRequest, DescribeCancelFlowsTaskResponse, CreateSealRequest, CancelFlowResponse, DescribeExtendedServiceAuthDetailResponse, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, CreateLegalSealQrCodeResponse, DescribeIntegrationDepartmentsResponse, DeleteExtendedServiceAuthInfosResponse, CreateDynamicFlowApproverRequest, CreateFlowApproversResponse, DescribeFileUrlsResponse, CreateExtendedServiceAuthInfosRequest, CancelUserAutoSignEnableUrlRequest, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeIntegrationDepartmentsRequest, DescribeThirdPartyAuthCodeResponse, DescribeUserVerifyStatusResponse, DisableUserAutoSignResponse, ModifyExtendedServiceRequest, CreateBatchInitOrganizationUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateOrganizationAuthUrlRequest, CreateBatchQuickSignUrlResponse, CreateIntegrationRoleRequest, DeleteIntegrationRoleUsersResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateFlowGroupSignReviewResponse, CreateBatchSignUrlResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, DescribeUserAutoSignStatusResponse, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, DescribeSignFaceVideoRequest, CreateEmployeeQualificationSealQrCodeResponse, CreateFlowGroupByTemplatesResponse, CreateUserVerifyUrlResponse, DescribeBatchOrganizationRegistrationUrlsRequest, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, CreateDynamicFlowApproverResponse, CreateBatchOrganizationRegistrationTasksResponse, CreateReleaseFlowResponse, CreateBatchInitOrganizationUrlRequest, CreateWebThemeConfigResponse, BindEmployeeUserIdWithClientOpenIdRequest, CreateOrganizationInfoChangeUrlResponse, DeleteOrganizationAuthorizationsResponse, DescribeExtendedServiceAuthDetailRequest, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, CreateIntegrationSubOrganizationActiveRecordResponse, ArchiveDynamicFlowResponse, DeleteSealPoliciesResponse, CreateLegalSealQrCodeRequest, DescribeOrganizationAuthStatusResponse, CreateUserAutoSignSealUrlResponse, CreateEmployeeQualificationSealQrCodeRequest, CreatePersonAuthCertificateImageResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, DeleteSealPoliciesRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateOrganizationAuthUrlResponse, DescribeOrganizationAuthStatusRequest, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreatePartnerAutoSignAuthUrlResponse, ArchiveDynamicFlowRequest, CreateUserAutoSignSealUrlRequest, ModifyFlowDeadlineRequest, CreateFlowApproversRequest, ModifyFlowDeadlineResponse, CreateFlowEvidenceReportResponse, CreateIntegrationRoleResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, DescribeUserVerifyStatusRequest, CreateFlowBlockchainEvidenceUrlResponse, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, CreateUserMobileChangeUrlRequest, CreateEmbedWebUrlRequest, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, DescribeFlowBriefsResponse, ModifyIntegrationRoleRequest, CreateFlowGroupByFilesResponse, CreateReleaseFlowRequest, DeleteIntegrationRoleUsersRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateIntegrationUserRolesRequest, CreatePersonAuthCertificateImageRequest, CreateFlowByFilesResponse, UploadFilesResponse, DescribeFlowEvidenceReportRequest, DescribeBillUsageRequest, DescribeBillUsageResponse, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, RenewAutoSignLicenseRequest, CreateUserAutoSignEnableUrlRequest, CreateOrganizationBatchSignUrlResponse, UnbindEmployeeUserIdWithClientOpenIdRequest, DeleteOrganizationAuthorizationsRequest, CreateBatchOrganizationRegistrationTasksRequest, CreateUserVerifyUrlRequest, CreatePartnerAutoSignAuthUrlRequest, CreateExtendedServiceAuthInfosResponse, CreateWebThemeConfigRequest, CreateOrganizationBatchSignUrlRequest, CreatePrepareFlowResponse, ModifyIntegrationDepartmentResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, CancelUserAutoSignEnableUrlResponse, ModifyApplicationCallbackInfoRequest, DescribeUserAutoSignStatusRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, DescribeCancelFlowsTaskRequest, CreateEmbedWebUrlResponse, ModifyExtendedServiceResponse, CreateFlowGroupByTemplatesRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateBatchSignUrlRequest, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateSealPolicyRequest, DescribeBillUsageDetailResponse, CreateUserMobileChangeUrlResponse, CreateUserAutoSignEnableUrlResponse, DescribeSignFaceVideoResponse, ModifyIntegrationRoleResponse, VerifyPdfResponse, CreateFlowGroupSignReviewRequest, DescribeBillUsageDetailRequest, DescribeFlowTemplatesResponse, DescribeBatchOrganizationRegistrationUrlsResponse, UploadFilesRequest, DescribePersonCertificateRequest, CreateBatchOrganizationAuthorizationUrlRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, VerifyPdfRequest, DescribeFlowInfoRequest, DeleteExtendedServiceAuthInfosRequest, DescribeExtendedServiceAuthInfosResponse, CreateBatchOrganizationAuthorizationUrlResponse, DescribeFlowInfoResponse, RenewAutoSignLicenseResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, CreateIntegrationSubOrganizationActiveRecordRequest, CreateFlowBlockchainEvidenceUrlRequest, CreateBatchQuickSignUrlRequest, CreateOrganizationInfoChangeUrlRequest, DescribeOrganizationGroupOrganizationsResponse, CreateOrganizationGroupInvitationLinkResponse } from "./ess_models";
+import { DescribePersonCertificateResponse, CreateOrganizationGroupInvitationLinkRequest, DescribeCancelFlowsTaskResponse, CreateSealRequest, CancelFlowResponse, DescribeExtendedServiceAuthDetailResponse, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, CreateLegalSealQrCodeResponse, DescribeIntegrationDepartmentsResponse, DescribeOrganizationVerifyStatusResponse, DeleteExtendedServiceAuthInfosResponse, CreateDynamicFlowApproverRequest, CreateFlowApproversResponse, DescribeFileUrlsResponse, CreateExtendedServiceAuthInfosRequest, CancelUserAutoSignEnableUrlRequest, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeIntegrationDepartmentsRequest, DescribeThirdPartyAuthCodeResponse, DescribeUserVerifyStatusResponse, DisableUserAutoSignResponse, ModifyExtendedServiceRequest, CreateBatchInitOrganizationUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateOrganizationAuthUrlRequest, CreateBatchQuickSignUrlResponse, CreateIntegrationRoleRequest, DeleteIntegrationRoleUsersResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateFlowGroupSignReviewResponse, CreateBatchSignUrlResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, DescribeUserAutoSignStatusResponse, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, DescribeSignFaceVideoRequest, CreateEmployeeQualificationSealQrCodeResponse, CreateFlowGroupByTemplatesResponse, CreateUserVerifyUrlResponse, DescribeBatchOrganizationRegistrationUrlsRequest, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, CreateDynamicFlowApproverResponse, CreateBatchOrganizationRegistrationTasksResponse, CreateReleaseFlowResponse, CreateBatchInitOrganizationUrlRequest, CreateWebThemeConfigResponse, BindEmployeeUserIdWithClientOpenIdRequest, CreateOrganizationInfoChangeUrlResponse, DeleteOrganizationAuthorizationsResponse, DescribeExtendedServiceAuthDetailRequest, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, CreateIntegrationSubOrganizationActiveRecordResponse, ArchiveDynamicFlowResponse, DeleteSealPoliciesResponse, CreateLegalSealQrCodeRequest, DescribeOrganizationAuthStatusResponse, CreateUserAutoSignSealUrlResponse, CreateEmployeeQualificationSealQrCodeRequest, CreatePersonAuthCertificateImageResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, DeleteSealPoliciesRequest, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, CreateOrganizationAuthUrlResponse, DescribeOrganizationAuthStatusRequest, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreatePartnerAutoSignAuthUrlResponse, ArchiveDynamicFlowRequest, CreateUserAutoSignSealUrlRequest, ModifyFlowDeadlineRequest, CreateFlowApproversRequest, ModifyFlowDeadlineResponse, CreateFlowEvidenceReportResponse, CreateIntegrationRoleResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, DescribeUserVerifyStatusRequest, CreateFlowBlockchainEvidenceUrlResponse, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, CreateUserMobileChangeUrlRequest, CreateEmbedWebUrlRequest, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, DescribeFlowBriefsResponse, ModifyIntegrationRoleRequest, CreateFlowGroupByFilesResponse, CreateReleaseFlowRequest, DeleteIntegrationRoleUsersRequest, CreateFlowSignUrlRequest, CreateIntegrationEmployeesResponse, CreateIntegrationUserRolesRequest, CreatePersonAuthCertificateImageRequest, CreateFlowByFilesResponse, UploadFilesResponse, DescribeFlowEvidenceReportRequest, DescribeBillUsageRequest, DescribeBillUsageResponse, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, RenewAutoSignLicenseRequest, CreateUserAutoSignEnableUrlRequest, CreateOrganizationBatchSignUrlResponse, UnbindEmployeeUserIdWithClientOpenIdRequest, DeleteOrganizationAuthorizationsRequest, CreateBatchOrganizationRegistrationTasksRequest, CreateUserVerifyUrlRequest, CreatePartnerAutoSignAuthUrlRequest, CreateExtendedServiceAuthInfosResponse, CreateWebThemeConfigRequest, CreateOrganizationBatchSignUrlRequest, CreatePrepareFlowResponse, ModifyIntegrationDepartmentResponse, GetTaskResultApiResponse, DescribeOrganizationVerifyStatusRequest, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, CancelUserAutoSignEnableUrlResponse, ModifyApplicationCallbackInfoRequest, DescribeUserAutoSignStatusRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, DescribeCancelFlowsTaskRequest, CreateEmbedWebUrlResponse, ModifyExtendedServiceResponse, CreateFlowGroupByTemplatesRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateBatchSignUrlRequest, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateSealPolicyRequest, DescribeBillUsageDetailResponse, CreateUserMobileChangeUrlResponse, CreateUserAutoSignEnableUrlResponse, DescribeSignFaceVideoResponse, ModifyIntegrationRoleResponse, VerifyPdfResponse, CreateFlowGroupSignReviewRequest, DescribeBillUsageDetailRequest, DescribeFlowTemplatesResponse, DescribeBatchOrganizationRegistrationUrlsResponse, UploadFilesRequest, DescribePersonCertificateRequest, CreateBatchOrganizationAuthorizationUrlRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, VerifyPdfRequest, DescribeFlowInfoRequest, DeleteExtendedServiceAuthInfosRequest, DescribeExtendedServiceAuthInfosResponse, CreateBatchOrganizationAuthorizationUrlResponse, DescribeFlowInfoResponse, RenewAutoSignLicenseResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, CreateIntegrationSubOrganizationActiveRecordRequest, CreateFlowBlockchainEvidenceUrlRequest, CreateBatchQuickSignUrlRequest, CreateOrganizationInfoChangeUrlRequest, DescribeOrganizationGroupOrganizationsResponse, CreateOrganizationGroupInvitationLinkResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -688,6 +688,23 @@ export declare class Client extends AbstractClient {
      */
     ModifyExtendedService(req: ModifyExtendedServiceRequest, cb?: (error: string, rep: ModifyExtendedServiceResponse) => void): Promise<ModifyExtendedServiceResponse>;
     /**
+     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
+1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
+2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
+
+此接口存在以下限制：
+1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
+2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
+4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
+6. <font  color="red">不支持操作合同组合同</font>。
+
+合同（流程）层面 截止时间控制台展示的位置：
+![image](https://qcloudimg.tencent-cloud.cn/raw/265b130136bf6e8f01f5880438467dfb.png)
+     */
+    ModifyFlowDeadline(req: ModifyFlowDeadlineRequest, cb?: (error: string, rep: ModifyFlowDeadlineResponse) => void): Promise<ModifyFlowDeadlineResponse>;
+    /**
      * 获取区块链存证证书查看链接/二维码接口
 
 适用场景：企业员工可以通过此接口生成合同区块链存证证书的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。
@@ -1019,22 +1036,9 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     CreateBatchCancelFlowUrl(req: CreateBatchCancelFlowUrlRequest, cb?: (error: string, rep: CreateBatchCancelFlowUrlResponse) => void): Promise<CreateBatchCancelFlowUrlResponse>;
     /**
-     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
-1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
-2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
-
-此接口存在以下限制：
-1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
-2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
-4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
-6. <font  color="red">不支持操作合同组合同</font>。
-
-合同（流程）层面 截止时间控制台展示的位置：
-![image](https://qcloudimg.tencent-cloud.cn/raw/265b130136bf6e8f01f5880438467dfb.png)
+     * 此接口（DeleteIntegrationDepartment）用于删除企业的部门信息。
      */
-    ModifyFlowDeadline(req: ModifyFlowDeadlineRequest, cb?: (error: string, rep: ModifyFlowDeadlineResponse) => void): Promise<ModifyFlowDeadlineResponse>;
+    DeleteIntegrationDepartment(req: DeleteIntegrationDepartmentRequest, cb?: (error: string, rep: DeleteIntegrationDepartmentResponse) => void): Promise<DeleteIntegrationDepartmentResponse>;
     /**
      * **适用场景 ：**
 
@@ -1093,9 +1097,9 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     CreatePrepareFlow(req: CreatePrepareFlowRequest, cb?: (error: string, rep: CreatePrepareFlowResponse) => void): Promise<CreatePrepareFlowResponse>;
     /**
-     * 此接口（DeleteIntegrationDepartment）用于删除企业的部门信息。
+     * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
      */
-    DeleteIntegrationDepartment(req: DeleteIntegrationDepartmentRequest, cb?: (error: string, rep: DeleteIntegrationDepartmentResponse) => void): Promise<DeleteIntegrationDepartmentResponse>;
+    DescribeBillUsage(req: DescribeBillUsageRequest, cb?: (error: string, rep: DescribeBillUsageResponse) => void): Promise<DescribeBillUsageResponse>;
     /**
      * 此接口用于查询合同流程的详情信息，支持查询多个（数量不能超过100）。
 
@@ -1110,6 +1114,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      * 通过[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
      */
     DescribeCancelFlowsTask(req: DescribeCancelFlowsTaskRequest, cb?: (error: string, rep: DescribeCancelFlowsTaskResponse) => void): Promise<DescribeCancelFlowsTaskResponse>;
+    /**
+     * 仅且仅能查询企业本身在电子签的认证状态
+     */
+    DescribeOrganizationVerifyStatus(req: DescribeOrganizationVerifyStatusRequest, cb?: (error: string, rep: DescribeOrganizationVerifyStatusResponse) => void): Promise<DescribeOrganizationVerifyStatusResponse>;
     /**
      * 生成集团加入链接，分享至子企业超管或者法人，子企业管理员可通过链接加入集团。
 注意:调用当前接口的企业 必须为集团企业。如何成为集团企业可以参考下面的文档[集团操作文档](https://qian.tencent.com/document/86707)
@@ -1137,10 +1145,6 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
 2.  `本接口返回的文件资源ID就是PDF资源ID，可以直接用于【用PDF文件创建签署流程】接口发起合同。`
      */
     GetTaskResultApi(req: GetTaskResultApiRequest, cb?: (error: string, rep: GetTaskResultApiResponse) => void): Promise<GetTaskResultApiResponse>;
-    /**
-     * 通过此接口（DescribeBillUsage）查询该企业的套餐套餐使用情况。
-     */
-    DescribeBillUsage(req: DescribeBillUsageRequest, cb?: (error: string, rep: DescribeBillUsageResponse) => void): Promise<DescribeBillUsageResponse>;
     /**
      * 该接口用于结束动态签署方2.0的合同流程。
 

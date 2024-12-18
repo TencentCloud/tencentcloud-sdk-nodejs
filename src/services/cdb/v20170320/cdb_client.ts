@@ -41,6 +41,7 @@ import {
   BackupSummaryItem,
   CreateDatabaseRequest,
   ModifyInstanceParamRequest,
+  ModifyProtectModeResponse,
   CreateParamTemplateRequest,
   RemoteBackupInfo,
   DescribeParamTemplateInfoRequest,
@@ -226,7 +227,7 @@ import {
   DeleteRotationPasswordResponse,
   DescribeAccountsResponse,
   RollbackTimeRange,
-  AuditLog,
+  ModifyProtectModeRequest,
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
@@ -423,6 +424,7 @@ import {
   OfflineIsolatedInstancesRequest,
   InquiryPriceUpgradeInstancesRequest,
   ModifyInstanceParamResponse,
+  AuditLog,
   ColumnPrivilege,
   DescribeUploadedFilesResponse,
   DescribeDBPriceRequest,
@@ -1312,6 +1314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AdjustCdbProxyResponse) => void
   ): Promise<AdjustCdbProxyResponse> {
     return this.request("AdjustCdbProxy", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyProtectMode）用于修改实例的同步方式。
+   */
+  async ModifyProtectMode(
+    req: ModifyProtectModeRequest,
+    cb?: (error: string, rep: ModifyProtectModeResponse) => void
+  ): Promise<ModifyProtectModeResponse> {
+    return this.request("ModifyProtectMode", req, cb)
   }
 
   /**

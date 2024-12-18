@@ -180,6 +180,33 @@ export interface AccountParam {
 }
 
 /**
+ * DescribeClusterDatabaseTables请求参数结构体
+ */
+export interface DescribeClusterDatabaseTablesRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 数据库名
+   */
+  Db: string
+  /**
+   * 偏移
+   */
+  Offset?: number
+  /**
+   * 个数
+   */
+  Limit?: number
+  /**
+   * 数据表类型。
+"view"表示只返回 view，"base_table" 表示只返回基本表，"all" 表示返回 view 和表。默认为 all。
+   */
+  TableType?: string
+}
+
+/**
  * DescribeClusterParams返回参数结构体
  */
 export interface DescribeClusterParamsResponse {
@@ -7697,6 +7724,32 @@ export interface DescribeFlowRequest {
    * 任务流ID
    */
   FlowId: number
+}
+
+/**
+ * DescribeClusterDatabaseTables返回参数结构体
+ */
+export interface DescribeClusterDatabaseTablesResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 分页限制数量
+   */
+  Limit?: number
+  /**
+   * 数据库表列表
+   */
+  Tables?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

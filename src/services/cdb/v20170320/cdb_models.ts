@@ -727,6 +727,16 @@ export interface ModifyInstanceParamRequest {
 }
 
 /**
+ * ModifyProtectMode返回参数结构体
+ */
+export interface ModifyProtectModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateParamTemplate请求参数结构体
  */
 export interface CreateParamTemplateRequest {
@@ -4654,92 +4664,17 @@ export interface RollbackTimeRange {
 }
 
 /**
- * 审计日志详细信息
+ * ModifyProtectMode请求参数结构体
  */
-export interface AuditLog {
+export interface ModifyProtectModeRequest {
   /**
-   * 影响行数。
+   * 无
    */
-  AffectRows?: number
+  ProtectMode: number
   /**
-   * 错误码。
+   * 实例ID。
    */
-  ErrCode?: number
-  /**
-   * SQL 类型。
-   */
-  SqlType?: string
-  /**
-   * 审计策略名称，逐步下线。
-   */
-  PolicyName?: string
-  /**
-   * 数据库名称。
-   */
-  DBName?: string
-  /**
-   * SQL 语句。
-   */
-  Sql?: string
-  /**
-   * 客户端地址。
-   */
-  Host?: string
-  /**
-   * 用户名。
-   */
-  User?: string
-  /**
-   * 执行时间，微秒。
-   */
-  ExecTime?: number
-  /**
-   * 时间。
-   */
-  Timestamp?: string
-  /**
-   * 返回行数。
-   */
-  SentRows?: number
-  /**
-   * 线程ID。
-   */
-  ThreadId?: number
-  /**
-   * 扫描行数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckRows?: number
-  /**
-   * cpu执行时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CpuTime?: number
-  /**
-   * IO等待时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IoWaitTime?: number
-  /**
-   * 锁等待时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LockWaitTime?: number
-  /**
-   * 开始时间，与timestamp构成一个精确到纳秒的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NsTime?: number
-  /**
-   * 事物持续时间，微秒。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrxLivingTime?: number
-  /**
-   * 日志命中规则模板的基本信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TemplateInfo?: Array<LogRuleTemplateInfo>
+  InstanceId: string
 }
 
 /**
@@ -9809,6 +9744,95 @@ export interface ModifyInstanceParamResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 审计日志详细信息
+ */
+export interface AuditLog {
+  /**
+   * 影响行数。
+   */
+  AffectRows?: number
+  /**
+   * 错误码。
+   */
+  ErrCode?: number
+  /**
+   * SQL 类型。
+   */
+  SqlType?: string
+  /**
+   * 审计策略名称，逐步下线。
+   */
+  PolicyName?: string
+  /**
+   * 数据库名称。
+   */
+  DBName?: string
+  /**
+   * SQL 语句。
+   */
+  Sql?: string
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 用户名。
+   */
+  User?: string
+  /**
+   * 执行时间，微秒。
+   */
+  ExecTime?: number
+  /**
+   * 时间。
+   */
+  Timestamp?: string
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+  /**
+   * 线程ID。
+   */
+  ThreadId?: number
+  /**
+   * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NsTime?: number
+  /**
+   * 事物持续时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxLivingTime?: number
+  /**
+   * 日志命中规则模板的基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateInfo?: Array<LogRuleTemplateInfo>
 }
 
 /**

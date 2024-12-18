@@ -52,11 +52,11 @@ export interface CreateDBInstanceRequest {
    */
   Volume: number
   /**
-   * 版本号，当前支持 MONGO_3_WT、MONGO_3_ROCKS、MONGO_36_WT
+   * 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 - MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。 - MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。 - MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。 - MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。 - MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。 - MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
    */
   MongoVersion: string
   /**
-   * 机器类型，GIO：高IO版；TGIO：高IO万兆
+   * 机器类型，HIO10G：高IO万兆。
    */
   MachineCode: string
   /**
@@ -91,6 +91,10 @@ export interface CreateDBInstanceRequest {
    * 私有网络下的子网ID，如果设置了 VpcId，则 SubnetId必填
    */
   UniqSubnetId?: string
+  /**
+   * 实例类型，REPLSET-副本集，SHARD-分片集群，默认为REPLSET
+   */
+  InstanceType?: string
 }
 
 /**
@@ -214,7 +218,7 @@ export interface ClientConnection {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   * 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同。
    */
   InstanceIds?: Array<string>
   /**
@@ -272,7 +276,7 @@ export interface SetPasswordResponse {
   /**
    * 返回的异步任务ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -513,11 +517,11 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合查询条件的实例总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息
    */
-  InstanceDetails: Array<MongoDBInstanceDetail>
+  InstanceDetails?: Array<MongoDBInstanceDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -547,7 +551,7 @@ export interface CreateDBInstanceResponse {
  */
 export interface SetPasswordRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * 实例ID，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同
    */
   InstanceId: string
   /**
@@ -555,7 +559,7 @@ export interface SetPasswordRequest {
    */
   UserName: string
   /**
-   * 实例新密码，至少包含字母、数字和字符（!@#%^*()）中的两种，长度为8-16个字符
+   * 指定账户的新密码， 密码格式为8-32个字符长度，至少包含字母、数字和字符（!@#%^*()_）中的两种
    */
   Password: string
 }
@@ -701,12 +705,12 @@ export interface DescribeClientConnectionsResponse {
    * 客户端连接信息，包括客户端IP和对应IP的连接数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Clients: Array<ClientConnection>
+  Clients?: Array<ClientConnection>
   /**
    * 连接数总结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -732,7 +736,7 @@ export interface UpgradeDBInstanceHourResponse {
  */
 export interface UpgradeDBInstanceRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * 实例ID，格式如：cmgo-iga0****。与云数据库控制台页面中显示的实例ID相同
    */
   InstanceId: string
   /**

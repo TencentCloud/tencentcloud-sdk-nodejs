@@ -477,7 +477,7 @@ export interface RunThreadRequest {
      */
     ThreadID: string;
     /**
-     * 助手 ID
+     * 助手 ID（目前未使用，留空）
      */
     AssistantID?: string;
     /**

@@ -291,7 +291,7 @@ export interface StartLoggingResponse {
     /**
      * 是否开启成功
      */
-    IsSuccess: number;
+    IsSuccess?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -303,22 +303,27 @@ export interface StartLoggingResponse {
 export interface AttributeKeyDetail {
     /**
      * 输入框类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelType: string;
     /**
      * 初始化展示
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Starter: string;
     /**
      * 展示排序
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Order: number;
     /**
      * AttributeKey值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
     /**
      * 中文标签
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label: string;
 }
@@ -338,11 +343,11 @@ export interface ListKeyAliasByRegionResponse {
     /**
      * CMK的总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 密钥别名
      */
-    KeyMetadatas: Array<KeyMetadata>;
+    KeyMetadatas?: Array<KeyMetadata>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -563,10 +568,12 @@ export interface ListAuditsResponse {
 export interface KeyMetadata {
     /**
      * 作为密钥更容易辨识，更容易被人看懂的别名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
     /**
      * CMK的全局唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyId?: string;
 }
@@ -654,7 +661,7 @@ export interface GetAttributeKeyResponse {
     /**
      * AttributeKey的有效取值范围
      */
-    AttributeKeyDetails: Array<AttributeKeyDetail>;
+    AttributeKeyDetails?: Array<AttributeKeyDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
