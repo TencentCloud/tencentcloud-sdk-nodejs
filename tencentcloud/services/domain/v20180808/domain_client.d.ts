@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePreAuctionList(req: DescribePreAuctionListRequest, cb?: (error: string, rep: DescribePreAuctionListResponse) => void): Promise<DescribePreAuctionListResponse>;
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      */
     ModifyDomainDNSBatch(req: ModifyDomainDNSBatchRequest, cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void): Promise<ModifyDomainDNSBatchResponse>;
     /**

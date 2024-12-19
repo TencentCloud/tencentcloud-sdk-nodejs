@@ -1523,6 +1523,10 @@ export interface DescribeProjectListRequest {
    * 角色信息
    */
   ModuleCollection?: string
+  /**
+   * moduleId集合
+   */
+  ModuleIdList?: Array<string>
 }
 
 /**

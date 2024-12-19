@@ -59,6 +59,7 @@ import {
   BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
   CreateFlowOption,
+  CreateOrganizationAuthFileResponse,
   FilledComponent,
   DescribeIntegrationRolesRequest,
   FlowBatchApproverInfo,
@@ -114,11 +115,12 @@ import {
   CreateOrganizationInfoChangeUrlResponse,
   DeleteOrganizationAuthorizationsResponse,
   DescribeExtendedServiceAuthDetailRequest,
-  OrganizationAuthUrl,
+  CreateOrganizationAuthFileRequest,
   Staff,
   ComponentLimit,
   CreateIntegrationDepartmentResponse,
   DescribeFlowTemplatesRequest,
+  OrganizationCommonInfo,
   CreateIntegrationSubOrganizationActiveRecordResponse,
   ArchiveDynamicFlowResponse,
   DeleteSealPoliciesResponse,
@@ -135,6 +137,7 @@ import {
   PdfVerifyResult,
   CreateBatchCancelFlowUrlResponse,
   UserThreeFactor,
+  OrganizationAuthUrl,
   AuthRecord,
   CreateSealPolicyResponse,
   FlowApproverUrlInfo,
@@ -890,6 +893,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindEmployeeUserIdWithClientOpenIdResponse) => void
   ): Promise<BindEmployeeUserIdWithClientOpenIdResponse> {
     return this.request("BindEmployeeUserIdWithClientOpenId", req, cb)
+  }
+
+  /**
+     * 生成合成后的各类企业授权书，包括：
+- 企业认证超管授权书
+- 超管变更授权书
+- 企业注销授权书
+
+注: 需自行保证传入真实的企业/法人/超管信息，否则后续的审核将会拒绝。
+     */
+  async CreateOrganizationAuthFile(
+    req: CreateOrganizationAuthFileRequest,
+    cb?: (error: string, rep: CreateOrganizationAuthFileResponse) => void
+  ): Promise<CreateOrganizationAuthFileResponse> {
+    return this.request("CreateOrganizationAuthFile", req, cb)
   }
 
   /**

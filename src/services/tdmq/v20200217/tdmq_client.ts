@@ -29,7 +29,7 @@ import {
   DescribeRabbitMQVirtualHostListRequest,
   DescribeAllTenantsResponse,
   DescribeRabbitMQNodeListRequest,
-  PublishCmqMsgRequest,
+  DeleteCmqQueueResponse,
   ConsumerStats,
   DescribeRocketMQEnvironmentRolesRequest,
   DeleteRocketMQGroupRequest,
@@ -237,9 +237,11 @@ import {
   VpcBindRecord,
   DescribeRocketMQMsgResponse,
   DescribeEnvironmentAttributesRequest,
+  ModifyPublicNetworkSecurityPolicyResponse,
   RocketMQConsumerTopic,
   DescribePublishersRequest,
   RabbitMQBindingListInfo,
+  ModifyPublicNetworkSecurityPolicyRequest,
   ModifyRoleResponse,
   DescribeRocketMQTopicStatsRequest,
   SendRocketMQMessageResponse,
@@ -339,7 +341,7 @@ import {
   PublishCmqMsgResponse,
   AcknowledgeMessageResponse,
   DeleteEnvironmentRolesResponse,
-  DeleteCmqQueueResponse,
+  PublishCmqMsgRequest,
   ModifyCmqTopicAttributeRequest,
   DeleteTopicsResponse,
   RewindCmqQueueRequest,
@@ -707,6 +709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicsResponse) => void
   ): Promise<DescribeTopicsResponse> {
     return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * 修改pulsar专业版公网安全策略
+   */
+  async ModifyPublicNetworkSecurityPolicy(
+    req?: ModifyPublicNetworkSecurityPolicyRequest,
+    cb?: (error: string, rep: ModifyPublicNetworkSecurityPolicyResponse) => void
+  ): Promise<ModifyPublicNetworkSecurityPolicyResponse> {
+    return this.request("ModifyPublicNetworkSecurityPolicy", req, cb)
   }
 
   /**

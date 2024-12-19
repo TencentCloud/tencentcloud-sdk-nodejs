@@ -476,6 +476,24 @@ export interface ChannelBatchCancelFlowsResponse {
     RequestId?: string;
 }
 /**
+ * 企业批量注册链接信息
+ */
+export interface OrganizationAuthUrl {
+    /**
+     * 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
+  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr> </tbody> </table>
+  注：
+  `1.链接仅单次有效，每次登录需要需要重新创建新的链接`
+  `2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
+  
+     */
+    AuthUrl?: string;
+    /**
+     * 企业批量注册的错误信息，例如：企业三要素不通过
+     */
+    ErrorMessage?: string;
+}
+/**
  * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
  */
 export interface FlowGroupUrlInfo {
@@ -1210,6 +1228,20 @@ export interface ChannelCreateRoleRequest {
      * 权限树，权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出
      */
     PermissionGroups?: Array<PermissionGroup>;
+}
+/**
+ * CreateOrganizationAuthFile返回参数结构体
+ */
+export interface CreateOrganizationAuthFileResponse {
+    /**
+     * 授权书链接，有效期5分钟。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 基础流程信息
@@ -3147,22 +3179,32 @@ export interface DescribeExtendedServiceAuthDetailRequest {
     Offset?: number;
 }
 /**
- * 企业批量注册链接信息
+ * CreateOrganizationAuthFile请求参数结构体
  */
-export interface OrganizationAuthUrl {
+export interface CreateOrganizationAuthFileRequest {
     /**
-     * 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
-  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/SHORT_URL/APP</td> <td>一年</td>  </tr> </tbody> </table>
-  注：
-  `1.链接仅单次有效，每次登录需要需要重新创建新的链接`
-  `2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
   
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
      */
-    AuthUrl?: string;
+    Agent: Agent;
     /**
-     * 企业批量注册的错误信息，例如：企业三要素不通过
+     * 企业授权书信息参数， 需要自行保证这些参数跟营业执照中的信息一致。
      */
-    ErrorMessage?: string;
+    OrganizationCommonInfo?: OrganizationCommonInfo;
+    /**
+     * 授权书类型：
+  - 0: 企业认证超管授权书
+  - 1: 超管变更授权书
+  - 2: 企业注销授权书
+     */
+    Type?: number;
 }
 /**
  * 批量签署合同相关信息，指定批量签署合同和签署方的信息，用于补充动态签署人。
@@ -3298,6 +3340,84 @@ export interface ChannelVerifyPdfResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。
+ */
+export interface OrganizationCommonInfo {
+    /**
+     * 组织机构名称。
+  请确认该名称与企业营业执照中注册的名称一致。
+  如果名称中包含英文括号()，请使用中文括号（）代替。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationName: string;
+    /**
+     * 组织机构企业统一社会信用代码。
+  请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniformSocialCreditCode: string;
+    /**
+     * 组织机构法人的姓名。
+  请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalName: string;
+    /**
+     * 组织机构法人的证件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalIdCardType?: string;
+    /**
+     * 组织机构法人的证件号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalIdCardNumber?: string;
+    /**
+     * 组织机构超管姓名。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminName?: string;
+    /**
+     * 组织机构超管手机号。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminMobile?: string;
+    /**
+     * 组织机构超管证件类型
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminIdCardType?: string;
+    /**
+     * 组织机构超管证件号码
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminIdCardNumber?: string;
+    /**
+     * 原超管姓名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminName?: string;
+    /**
+     * 原超管手机号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminMobile?: string;
+    /**
+     * 原超管证件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminIdCardType?: string;
+    /**
+     * 原超管证件号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminIdCardNumber?: string;
 }
 /**
  * CreateConsoleLoginUrl请求参数结构体
@@ -5118,6 +5238,10 @@ export interface SignQrCode {
   一旦超过二维码的有效期限，该二维码将自动失效。
      */
     ExpiredTime?: number;
+    /**
+     * 微信小程序二维码
+     */
+    WeixinQrCodeUrl?: string;
 }
 /**
  * 创建签署流程签署人入参。
@@ -5289,7 +5413,8 @@ export interface FlowApproverInfo {
   <li>**5**：设备指纹识别，需要对比手机机主预留的指纹信息，校验一致才能成功进行合同签署。（iOS系统暂不支持该校验方式）</li>
   <li>**6**：设备面容识别，需要对比手机机主预留的人脸信息，校验一致才能成功进行合同签署。（Android系统暂不支持该校验方式）</li></ul>
   
-  默认为1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)
+  默认为：
+  1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)
   
   注:
   1. 用<font color='red'>模板创建合同场景</font>, 签署人的认证方式需要在配置模板的时候指定, <font color='red'>在创建合同重新指定无效</font>
@@ -7792,27 +7917,30 @@ export interface DescribeTemplatesRequest {
     Operator?: UserInfo;
 }
 /**
- * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
+ * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png)
  */
 export interface RelieveInfo {
     /**
-     * 解除理由，最大支持200个字
+     * 解除理由，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     Reason: string;
     /**
-     * 解除后仍然有效的条款，保留条款，最大支持200个字
+     * 解除后仍然有效的条款，保留条款，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
+  
      */
     RemainInForceItem?: string;
     /**
-     * 原合同事项处理-费用结算，最大支持200个字
+     * 原合同事项处理-费用结算，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OriginalExpenseSettlement?: string;
     /**
-     * 原合同事项处理-其他事项，最大支持200个字
+     * 原合同事项处理-其他事项，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OriginalOtherSettlement?: string;
     /**
-     * 其他约定，最大支持200个字
+     * 其他约定（如约定的与解除协议存在冲突的，以【其他约定】为准），最大支持200个字，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OtherDeals?: string;
 }

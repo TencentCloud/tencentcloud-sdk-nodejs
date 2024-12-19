@@ -25,6 +25,7 @@ import {
   Component,
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
+  OrganizationAuthUrl,
   FlowGroupUrlInfo,
   ChannelDescribeSignFaceVideoRequest,
   ChannelDisableUserAutoSignResponse,
@@ -55,6 +56,7 @@ import {
   FlowFileInfo,
   CreateFlowOption,
   ChannelCreateRoleRequest,
+  CreateOrganizationAuthFileResponse,
   BaseFlowInfo,
   ReleasedApprover,
   CreateConsoleLoginUrlResponse,
@@ -109,11 +111,12 @@ import {
   ChannelCancelUserAutoSignEnableUrlRequest,
   DeleteOrganizationAuthorizationsResponse,
   DescribeExtendedServiceAuthDetailRequest,
-  OrganizationAuthUrl,
+  CreateOrganizationAuthFileRequest,
   FlowBatchApproverInfo,
   Staff,
   ComponentLimit,
   ChannelVerifyPdfResponse,
+  OrganizationCommonInfo,
   CreateConsoleLoginUrlRequest,
   CreateLegalSealQrCodeRequest,
   CreateCloseOrganizationUrlRequest,
@@ -1856,6 +1859,21 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: ChannelCreatePreparedPersonalEsignResponse) => void
   ): Promise<ChannelCreatePreparedPersonalEsignResponse> {
     return this.request("ChannelCreatePreparedPersonalEsign", req, cb)
+  }
+
+  /**
+     * 生成合成后的各类企业授权书，包括：
+- 企业认证超管授权书
+- 超管变更授权书
+- 企业注销授权书
+
+注: 需自行保证传入真实的企业/法人/超管信息，否则后续的审核将会拒绝。
+     */
+  async CreateOrganizationAuthFile(
+    req: CreateOrganizationAuthFileRequest,
+    cb?: (error: string, rep: CreateOrganizationAuthFileResponse) => void
+  ): Promise<CreateOrganizationAuthFileResponse> {
+    return this.request("CreateOrganizationAuthFile", req, cb)
   }
 
   /**

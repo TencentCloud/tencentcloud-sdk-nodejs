@@ -1039,45 +1039,45 @@ export interface WeChatWorkSubAccount {
     /**
      * 子用户用户 ID
      */
-    Uin: number;
+    Uin?: number;
     /**
      * 子用户用户名
      */
-    Name: string;
+    Name?: string;
     /**
      * 子用户 UID
      */
-    Uid: number;
+    Uid?: number;
     /**
      * 备注
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 子用户能否登录控制台
      */
-    ConsoleLogin: number;
+    ConsoleLogin?: number;
     /**
      * 手机号
      */
-    PhoneNum: string;
+    PhoneNum?: string;
     /**
      * 区号
      */
-    CountryCode: string;
+    CountryCode?: string;
     /**
      * 邮箱
      */
-    Email: string;
+    Email?: string;
     /**
      * 企业微信UserId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WeChatWorkUserId: string;
+    WeChatWorkUserId?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * 异地登录设置

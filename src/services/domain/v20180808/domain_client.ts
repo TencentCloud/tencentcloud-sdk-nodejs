@@ -414,7 +414,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
    */
   async ModifyDomainDNSBatch(
     req: ModifyDomainDNSBatchRequest,

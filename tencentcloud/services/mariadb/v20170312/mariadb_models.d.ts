@@ -123,19 +123,19 @@ export interface DescribeAccountPrivilegesResponse {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 权限列表。
      */
-    Privileges: Array<string>;
+    Privileges?: Array<string>;
     /**
      * 数据库账号用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 数据库账号Host
      */
-    Host: string;
+    Host?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -146,7 +146,7 @@ export interface DescribeAccountPrivilegesResponse {
  */
 export interface DescribeDatabasesRequest {
     /**
-     * 实例 ID，形如：dcdbt-ow7t8lmc。
+     * 实例 ID，形如：tdsql-e9tklsgz。
      */
     InstanceId: string;
 }
@@ -312,7 +312,7 @@ export interface ModifyInstanceVipResponse {
     /**
      * 异步任务流程ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -431,17 +431,17 @@ export interface DescribeDBSecurityGroupsResponse {
     /**
      * 安全组详情。
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 实例VIP。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VIP: string;
+    VIP?: string;
     /**
      * 实例端口。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VPort: string;
+    VPort?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -768,11 +768,11 @@ export interface ZoneChooseInfo {
     /**
      * 主可用区
      */
-    MasterZone: ZonesInfo;
+    MasterZone?: ZonesInfo;
     /**
      * 可选的从可用区
      */
-    SlaveZones: Array<ZonesInfo>;
+    SlaveZones?: Array<ZonesInfo>;
 }
 /**
  * IsolateDedicatedDBInstance请求参数结构体
@@ -812,7 +812,7 @@ export interface ParamConstraint {
     /**
      * 约束类型,如枚举enum，区间section
      */
-    Type: string;
+    Type?: string;
     /**
      * 约束类型为enum时的可选值列表
      */
@@ -825,7 +825,7 @@ export interface ParamConstraint {
     /**
      * 约束类型为string时的可选值列表
      */
-    String: string;
+    String?: string;
 }
 /**
  * ModifyDBInstancesProject返回参数结构体
@@ -843,15 +843,15 @@ export interface DBBackupTimeConfig {
     /**
      * 实例 ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00
      */
-    StartBackupTime: string;
+    StartBackupTime?: string;
     /**
      * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:00
      */
-    EndBackupTime: string;
+    EndBackupTime?: string;
 }
 /**
  * ModifyBackupTime请求参数结构体
@@ -877,7 +877,7 @@ export interface DatabaseView {
     /**
      * 视图名称
      */
-    View: string;
+    View?: string;
 }
 /**
  * DescribeDBLogFiles请求参数结构体
@@ -912,11 +912,11 @@ export interface NodeInfo {
     /**
      * DB节点ID
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * DB节点角色，取值为master或者slave
      */
-    Role: string;
+    Role?: string;
 }
 /**
  * DescribeOrders返回参数结构体
@@ -1279,11 +1279,11 @@ export interface ParamModifyResult {
     /**
      * 修改参数名字
      */
-    Param: string;
+    Param?: string;
     /**
      * 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法
      */
-    Code: number;
+    Code?: number;
 }
 /**
  * DescribeDBInstances请求参数结构体
@@ -1362,11 +1362,11 @@ export interface DescribeDBInstancesRequest {
      */
     FilterInstanceType?: string;
     /**
-     * 按照实例状态进行筛选
+     * 按照实例状态进行筛选。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中
      */
     Status?: Array<number | bigint>;
     /**
-     * 排除实例状态
+     * 排除实例状态。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中
      */
     ExcludeStatus?: Array<number | bigint>;
 }
@@ -1407,11 +1407,11 @@ export interface DescribeBackupFilesResponse {
     /**
      * 备份文件列表
      */
-    Files: Array<InstanceBackupFileItem>;
+    Files?: Array<InstanceBackupFileItem>;
     /**
      * 总条目数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1471,11 +1471,11 @@ export interface DescribeProjectSecurityGroupsResponse {
     /**
      * 安全组详情。
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 安全组总数。
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1488,7 +1488,7 @@ export interface DatabaseFunction {
     /**
      * 函数名称
      */
-    Func: string;
+    Func?: string;
 }
 /**
  * 视图权限信息
@@ -1901,15 +1901,15 @@ export interface DescribeDBEncryptAttributesResponse {
     /**
      * 是否启用加密，1-已开启；0-未开启。
      */
-    EncryptStatus: number;
+    EncryptStatus?: number;
     /**
      * DEK密钥
      */
-    CipherText: string;
+    CipherText?: string;
     /**
      * DEK密钥过期日期。
      */
-    ExpireDate: string;
+    ExpireDate?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1962,7 +1962,7 @@ export interface DatabaseTable {
     /**
      * 表名
      */
-    Table: string;
+    Table?: string;
 }
 /**
  * DescribeDBInstanceDetail请求参数结构体
@@ -2107,7 +2107,7 @@ export interface CreateDedicatedClusterDBInstanceRequest {
      */
     SubnetId?: string;
     /**
-     * db类型，不传默认0
+     * db类型，不传默认8.0
      */
     DbVersionId?: string;
     /**
@@ -2204,39 +2204,39 @@ export interface SpecConfigInfo {
     /**
      * 设备型号
      */
-    Machine: string;
+    Machine?: string;
     /**
      * 内存大小，单位 GB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 数据盘规格最小值，单位 GB
      */
-    MinStorage: number;
+    MinStorage?: number;
     /**
      * 数据盘规格最大值，单位 GB
      */
-    MaxStorage: number;
+    MaxStorage?: number;
     /**
      * 推荐的使用场景
      */
-    SuitInfo: string;
+    SuitInfo?: string;
     /**
      * 最大 Qps 值
      */
-    Qps: number;
+    Qps?: number;
     /**
      * 产品类型 Id
      */
-    Pid: number;
+    Pid?: number;
     /**
      * 节点个数，2 表示一主一从，3 表示一主二从
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * Cpu核数
      */
-    Cpu: number;
+    Cpu?: number;
 }
 /**
  * 临时实例
@@ -2246,77 +2246,77 @@ export interface TmpInstance {
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 实例备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceRemark: string;
+    InstanceRemark?: string;
     /**
      * 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TempType: number;
+    TempType?: number;
     /**
      * 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例 ID，形如：tdsql-ow728lmc。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例虚IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 实例虚端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 有效期结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PeriodEndTime: string;
+    PeriodEndTime?: string;
     /**
      * 源实例 ID，形如：tdsql-ow728lmc。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcInstanceId: string;
+    SrcInstanceId?: string;
     /**
      * 实例状态描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 实例所在地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 实例所在可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例虚IPv6
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vipv6: string;
+    Vipv6?: string;
     /**
      * 实例IPv6标志
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ipv6Flag: number;
+    Ipv6Flag?: number;
 }
 /**
  * ModifyDBParameters请求参数结构体
@@ -2436,31 +2436,31 @@ export interface SecurityGroup {
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 安全组ID
      */
-    SecurityGroupId: string;
+    SecurityGroupId?: string;
     /**
      * 安全组名称
      */
-    SecurityGroupName: string;
+    SecurityGroupName?: string;
     /**
      * 安全组备注
      */
-    SecurityGroupRemark: string;
+    SecurityGroupRemark?: string;
     /**
      * 入站规则
      */
-    Inbound: Array<SecurityGroupBound>;
+    Inbound?: Array<SecurityGroupBound>;
     /**
      * 出站规则
      */
-    Outbound: Array<SecurityGroupBound>;
+    Outbound?: Array<SecurityGroupBound>;
 }
 /**
  * DescribeBackupFiles请求参数结构体
@@ -2541,27 +2541,27 @@ export interface DescribeDatabaseObjectsResponse {
     /**
      * 透传入参。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 数据库名称。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 表列表。
      */
-    Tables: Array<DatabaseTable>;
+    Tables?: Array<DatabaseTable>;
     /**
      * 视图列表。
      */
-    Views: Array<DatabaseView>;
+    Views?: Array<DatabaseView>;
     /**
      * 存储过程列表。
      */
-    Procs: Array<DatabaseProcedure>;
+    Procs?: Array<DatabaseProcedure>;
     /**
      * 函数列表。
      */
-    Funcs: Array<DatabaseFunction>;
+    Funcs?: Array<DatabaseFunction>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2691,11 +2691,11 @@ export interface TableColumn {
     /**
      * 列名称
      */
-    Col: string;
+    Col?: string;
     /**
      * 列类型
      */
-    Type: string;
+    Type?: string;
 }
 /**
  * CreateTmpInstances返回参数结构体
@@ -3168,7 +3168,7 @@ export interface Database {
     /**
      * 数据库名称
      */
-    DbName: string;
+    DbName?: string;
 }
 /**
  * GrantAccountPrivileges返回参数结构体
@@ -3285,7 +3285,7 @@ export interface CloseDBExtranetAccessResponse {
     /**
      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3336,7 +3336,7 @@ export interface KillSessionResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3377,7 +3377,7 @@ export interface RenewDBInstanceResponse {
      * 长订单号。可以据此调用 DescribeOrders
    查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3390,11 +3390,11 @@ export interface DescribeDatabasesResponse {
     /**
      * 该实例上的数据库列表。
      */
-    Databases: Array<Database>;
+    Databases?: Array<Database>;
     /**
      * 透传入参。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3668,7 +3668,7 @@ export interface DatabaseProcedure {
     /**
      * 存储过程名称
      */
-    Proc: string;
+    Proc?: string;
 }
 /**
  * DescribeDBTmpInstances返回参数结构体
@@ -3677,7 +3677,7 @@ export interface DescribeDBTmpInstancesResponse {
     /**
      * 临时实例
      */
-    TmpInstances: Array<TmpInstance>;
+    TmpInstances?: Array<TmpInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3825,23 +3825,23 @@ export interface RegionInfo {
     /**
      * 地域英文ID
      */
-    Region: string;
+    Region?: string;
     /**
      * 地域数字ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 地域中文名
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 可用区列表
      */
-    ZoneList: Array<ZonesInfo>;
+    ZoneList?: Array<ZonesInfo>;
     /**
      * 可选择的主可用区和从可用区
      */
-    AvailableChoice: Array<ZoneChooseInfo>;
+    AvailableChoice?: Array<ZoneChooseInfo>;
 }
 /**
  * ModifyInstanceNetwork请求参数结构体
@@ -3895,12 +3895,14 @@ export interface DescribeDBInstancesResponse {
 export interface ConstraintRange {
     /**
      * 约束类型为section时的最小值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Min: string;
+    Min?: string;
     /**
      * 约束类型为section时的最大值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Max: string;
+    Max?: string;
 }
 /**
  * DescribeRenewalPrice请求参数结构体
@@ -3928,19 +3930,19 @@ export interface LogFileInfo {
     /**
      * Log最后修改时间
      */
-    Mtime: number;
+    Mtime?: number;
     /**
      * 文件长度
      */
-    Length: number;
+    Length?: number;
     /**
      * 下载Log时用到的统一资源标识符
      */
-    Uri: string;
+    Uri?: string;
     /**
      * 文件名
      */
-    FileName: string;
+    FileName?: string;
 }
 /**
  * ModifyRealServerAccessStrategy返回参数结构体
@@ -4130,19 +4132,19 @@ export interface DescribeDatabaseTableResponse {
     /**
      * 实例名称。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 数据库名称。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 表名称。
      */
-    Table: string;
+    Table?: string;
     /**
      * 列信息。
      */
-    Cols: Array<TableColumn>;
+    Cols?: Array<TableColumn>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4252,7 +4254,7 @@ export interface UpgradeDBInstanceResponse {
      * 长订单号。可以据此调用 DescribeOrders
    查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

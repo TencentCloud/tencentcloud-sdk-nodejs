@@ -1684,59 +1684,59 @@ export interface CDCResource {
   /**
    * 用户的Appid
    */
-  AppId: number
+  AppId?: number
   /**
    * 地域id
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用区id
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * redis独享集群id
    */
-  RedisClusterId: string
+  RedisClusterId?: string
   /**
    * 计费模式，1-包年包月，0-按量计费
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 项目id
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 自动续费标识，0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 独享集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 实例创建时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 实例到期时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 集群状态：1-流程中，2-运行中，3-已隔离
    */
-  Status: number
+  Status?: number
   /**
    * 基础管控资源包
    */
-  BaseBundles: Array<ResourceBundle>
+  BaseBundles?: Array<ResourceBundle>
   /**
    * 资源包列表
    */
-  ResourceBundles: Array<ResourceBundle>
+  ResourceBundles?: Array<ResourceBundle>
   /**
    * 所属本地专有集群id
    */
-  DedicatedClusterId: string
+  DedicatedClusterId?: string
 }
 
 /**

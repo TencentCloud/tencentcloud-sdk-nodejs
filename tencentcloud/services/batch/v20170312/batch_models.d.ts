@@ -4,10 +4,12 @@
 export interface EventVar {
     /**
      * 自定义键
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 自定义值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -73,14 +75,17 @@ export interface ComputeEnvData {
 export interface Authentication {
     /**
      * 授权场景，例如COS
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scene: string;
     /**
      * SecretId
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretId: string;
     /**
      * SecretKey
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretKey: string;
 }
@@ -249,10 +254,12 @@ export interface DescribeTaskTemplatesRequest {
 export interface Notification {
     /**
      * CMQ主题名字，要求主题名有效且关联订阅
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicName: string;
     /**
      * 事件配置
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventConfigs: Array<EventConfig>;
 }
@@ -386,23 +393,23 @@ export interface InstanceTypeConfig {
     /**
      * 内存容量，单位：`GB`。
      */
-    Mem: number;
+    Mem?: number;
     /**
      * CPU核数，单位：核。
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 实例机型。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 可用区。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例机型系列。
      */
-    InstanceFamily: string;
+    InstanceFamily?: string;
 }
 /**
  * 任务执行信息描述。
@@ -419,7 +426,8 @@ export interface CommandLine {
  */
 export interface LoginSettings {
     /**
-     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。</li>
+  <li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。</li><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
      */
     Password?: string;
     /**
@@ -427,7 +435,7 @@ export interface LoginSettings {
      */
     KeyIds?: Array<string>;
     /**
-     * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+     * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<li>TRUE：表示保持镜像的登录设置</li><li>FALSE：表示不保持镜像的登录设置</li>默认取值：FALSE。
      */
     KeepImageLogin?: string;
 }
@@ -463,36 +471,44 @@ export interface DescribeComputeEnvActivitiesResponse {
 export interface TaskInstanceMetrics {
     /**
      * Submitted个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubmittedCount: number;
+    SubmittedCount?: number;
     /**
      * Pending个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PendingCount: number;
+    PendingCount?: number;
     /**
      * Runnable个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunnableCount: number;
+    RunnableCount?: number;
     /**
      * Starting个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartingCount: number;
+    StartingCount?: number;
     /**
      * Running个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunningCount: number;
+    RunningCount?: number;
     /**
      * Succeed个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SucceedCount: number;
+    SucceedCount?: number;
     /**
      * FailedInterrupted个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedInterruptedCount: number;
+    FailedInterruptedCount?: number;
     /**
      * Failed个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedCount: number;
+    FailedCount?: number;
 }
 /**
  * 任务实例日志详情。
@@ -501,37 +517,37 @@ export interface TaskInstanceLog {
     /**
      * 任务实例
      */
-    TaskInstanceIndex: number;
+    TaskInstanceIndex?: number;
     /**
      * 标准输出日志（Base64编码，解码后最大日志长度2048字节）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StdoutLog: string;
+    StdoutLog?: string;
     /**
      * 标准错误日志（Base64编码，解码后最大日志长度2048字节）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StderrLog: string;
+    StderrLog?: string;
     /**
      * 标准输出重定向路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StdoutRedirectPath: string;
+    StdoutRedirectPath?: string;
     /**
      * 标准错误重定向路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StderrRedirectPath: string;
+    StderrRedirectPath?: string;
     /**
      * 标准输出重定向文件名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StdoutRedirectFileName: string;
+    StdoutRedirectFileName?: string;
     /**
      * 标准错误重定向文件名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StderrRedirectFileName: string;
+    StderrRedirectFileName?: string;
 }
 /**
  * 数据盘挂载选项
@@ -539,10 +555,12 @@ export interface TaskInstanceLog {
 export interface MountDataDisk {
     /**
      * 挂载点，Linux系统合法路径，或Windows系统盘符,比如"H:\\"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalPath: string;
     /**
      * 文件系统类型，Linux系统下支持"EXT3"和"EXT4"两种，默认"EXT3"；Windows系统下仅支持"NTFS"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSystemType?: string;
 }
@@ -553,15 +571,15 @@ export interface TaskView {
     /**
      * 任务名称
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * 任务状态
      */
-    TaskState: string;
+    TaskState?: string;
     /**
      * 开始时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -610,31 +628,31 @@ export interface OsInfo {
     /**
      * 操作系统ID。
      */
-    OsTypeId: number;
+    OsTypeId?: number;
     /**
      * 操作系统名称。
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 操作系统名称描述。
      */
-    OsDescription: string;
+    OsDescription?: string;
     /**
      * 操作系统英文名称。
      */
-    OsEnglishDescription: string;
+    OsEnglishDescription?: string;
     /**
      * 操作系统的分类，如CentOs Debian。
      */
-    OsClass: string;
+    OsClass?: string;
     /**
      * 标识镜像分类。public:公共镜像; private: 专属镜像。
      */
-    ImageTag: string;
+    ImageTag?: string;
     /**
      * 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。
      */
-    MaxPartitionSize: number;
+    MaxPartitionSize?: number;
 }
 /**
  * DescribeComputeEnv返回参数结构体
@@ -909,36 +927,44 @@ export interface ComputeNodeMetrics {
 export interface TaskMetrics {
     /**
      * Submitted个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubmittedCount: number;
+    SubmittedCount?: number;
     /**
      * Pending个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PendingCount: number;
+    PendingCount?: number;
     /**
      * Runnable个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunnableCount: number;
+    RunnableCount?: number;
     /**
      * Starting个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartingCount: number;
+    StartingCount?: number;
     /**
      * Running个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunningCount: number;
+    RunningCount?: number;
     /**
      * Succeed个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SucceedCount: number;
+    SucceedCount?: number;
     /**
      * FailedInterrupted个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedInterruptedCount: number;
+    FailedInterruptedCount?: number;
     /**
      * Failed个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedCount: number;
+    FailedCount?: number;
 }
 /**
  * TerminateComputeNodes请求参数结构体
@@ -1409,61 +1435,61 @@ export interface DescribeJobResponse {
     /**
      * 作业ID
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 作业名称
      */
-    JobName: string;
+    JobName?: string;
     /**
      * 可用区信息
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 作业优先级
      */
-    Priority: number;
+    Priority?: number;
     /**
      * 作业状态
      */
-    JobState: string;
+    JobState?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务视图信息
      */
-    TaskSet: Array<TaskView>;
+    TaskSet?: Array<TaskView>;
     /**
      * 任务间依赖信息
      */
-    DependenceSet: Array<Dependence>;
+    DependenceSet?: Array<Dependence>;
     /**
      * 任务统计指标
      */
-    TaskMetrics: TaskMetrics;
+    TaskMetrics?: TaskMetrics;
     /**
      * 任务实例统计指标
      */
-    TaskInstanceMetrics: TaskInstanceMetrics;
+    TaskInstanceMetrics?: TaskInstanceMetrics;
     /**
      * 作业失败原因
      */
-    StateReason: string;
+    StateReason?: string;
     /**
      * 作业绑定的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 下一步动作
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NextAction: string;
+    NextAction?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1846,23 +1872,26 @@ export interface DescribeJobRequest {
 }
 /**
  * 重定向信息
-
  */
 export interface RedirectInfo {
     /**
-     * 标准输出重定向路径
+     * 标准输出重定向路径;
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StdoutRedirectPath?: string;
     /**
      * 标准错误重定向路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StderrRedirectPath?: string;
     /**
      * 标准输出重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StdoutRedirectFileName?: string;
     /**
      * 标准错误重定向文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StderrRedirectFileName?: string;
 }
@@ -1907,14 +1936,17 @@ export interface SubmitJobResponse {
 export interface InputMapping {
     /**
      * 源端路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourcePath: string;
     /**
      * 目的端路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DestinationPath: string;
     /**
      * 挂载配置项参数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MountOptionParameter?: string;
 }
@@ -1924,18 +1956,22 @@ export interface InputMapping {
 export interface RedirectLocalInfo {
     /**
      * 标准输出重定向本地路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StdoutLocalPath?: string;
     /**
      * 标准错误重定向本地路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StderrLocalPath?: string;
     /**
      * 标准输出重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StdoutLocalFileName?: string;
     /**
      * 标准错误重定向本地文件名，支持三个占位符${BATCH_JOB_ID}、${BATCH_TASK_NAME}、${BATCH_TASK_INSTANCE_INDEX}
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StderrLocalFileName?: string;
 }
@@ -2502,11 +2538,11 @@ export interface TaskInstanceView {
     /**
      * 任务实例索引
      */
-    TaskInstanceIndex: number;
+    TaskInstanceIndex?: number;
     /**
      * 任务实例状态
      */
-    TaskInstanceState: string;
+    TaskInstanceState?: string;
     /**
      * 应用程序执行结束的exit code
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2515,7 +2551,7 @@ export interface TaskInstanceView {
     /**
      * 任务实例状态原因，任务实例失败时，会记录失败原因
      */
-    StateReason: string;
+    StateReason?: string;
     /**
      * 任务实例运行时所在计算节点（例如CVM）的InstanceId。任务实例未运行或者完结时，本字段为空。任务实例重试时，本字段会随之变化
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2524,7 +2560,7 @@ export interface TaskInstanceView {
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 启动时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2543,11 +2579,11 @@ export interface TaskInstanceView {
     /**
      * 重定向信息
      */
-    RedirectInfo: RedirectInfo;
+    RedirectInfo?: RedirectInfo;
     /**
      * 任务实例状态原因详情，任务实例失败时，会记录失败原因
      */
-    StateDetailedReason: string;
+    StateDetailedReason?: string;
 }
 /**
  * DescribeAvailableCvmInstanceTypes返回参数结构体
@@ -2610,11 +2646,11 @@ export interface InstanceCategoryItem {
     /**
      * 实例类型名
      */
-    InstanceCategory: string;
+    InstanceCategory?: string;
     /**
      * 实例族列表
      */
-    InstanceFamilySet: Array<string>;
+    InstanceFamilySet?: Array<string>;
 }
 /**
  * 计算环境信息
@@ -2800,35 +2836,35 @@ export interface Activity {
     /**
      * 活动ID
      */
-    ActivityId: string;
+    ActivityId?: string;
     /**
      * 计算节点ID
      */
-    ComputeNodeId: string;
+    ComputeNodeId?: string;
     /**
      * 计算节点活动类型，创建或者销毁
      */
-    ComputeNodeActivityType: string;
+    ComputeNodeActivityType?: string;
     /**
      * 计算环境ID
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 起因
      */
-    Cause: string;
+    Cause?: string;
     /**
      * 活动状态
      */
-    ActivityState: string;
+    ActivityState?: string;
     /**
      * 状态原因
      */
-    StateReason: string;
+    StateReason?: string;
     /**
      * 活动开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 活动结束时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2838,7 +2874,7 @@ export interface Activity {
      * 云服务器实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
 }
 /**
  * 描述了 “云监控” 服务相关的信息
@@ -2952,19 +2988,19 @@ export interface JobView {
     /**
      * 作业ID
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 作业名称
      */
-    JobName: string;
+    JobName?: string;
     /**
      * 作业状态
      */
-    JobState: string;
+    JobState?: string;
     /**
      * 作业优先级
      */
-    Priority: number;
+    Priority?: number;
     /**
      * 位置信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2973,7 +3009,7 @@ export interface JobView {
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2982,12 +3018,12 @@ export interface JobView {
     /**
      * 任务统计指标
      */
-    TaskMetrics: TaskMetrics;
+    TaskMetrics?: TaskMetrics;
     /**
      * 作业绑定的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
 }
 /**
  * 环境变量
@@ -2995,10 +3031,12 @@ export interface JobView {
 export interface EnvVar {
     /**
      * 环境变量名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 环境变量取值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }

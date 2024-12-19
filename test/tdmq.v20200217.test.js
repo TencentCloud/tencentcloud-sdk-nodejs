@@ -318,6 +318,16 @@ it("tdmq.v20200217.DescribeTopics", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyPublicNetworkSecurityPolicy", async function () {
+    try {
+       const data = await client.ModifyPublicNetworkSecurityPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyRocketMQEnvironmentRole", async function () {
     try {
        const data = await client.ModifyRocketMQEnvironmentRole({})

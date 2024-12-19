@@ -152,11 +152,11 @@ export interface SpecConfig {
     /**
      * 规格机型
      */
-    Machine: string;
+    Machine?: string;
     /**
      * 规格列表
      */
-    SpecConfigInfos: Array<SpecConfigInfo>;
+    SpecConfigInfos?: Array<SpecConfigInfo>;
 }
 /**
  * UpgradeHourDCDBInstance返回参数结构体
@@ -302,64 +302,64 @@ export interface ShardBriefInfo {
     /**
      * 分片SerialId
      */
-    ShardSerialId: string;
+    ShardSerialId?: string;
     /**
      * 分片ID，形如shard-7vg1o339
      */
-    ShardInstanceId: string;
+    ShardInstanceId?: string;
     /**
      * 分片运行状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 分片运行状态描述
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 分片创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 分片内存大小，单位GB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 分片磁盘大小，单位GB
      */
-    Storage: number;
+    Storage?: number;
     /**
      * 分片日志磁盘空间大小，单位GB
      */
-    LogDisk: number;
+    LogDisk?: number;
     /**
      * 分片节点个数
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * 分片磁盘空间使用率
      */
-    StorageUsage: number;
+    StorageUsage?: number;
     /**
      * 分片Proxy版本信息
      */
-    ProxyVersion: string;
+    ProxyVersion?: string;
     /**
      * 分片主DB可用区
      */
-    ShardMasterZone: string;
+    ShardMasterZone?: string;
     /**
      * 分片从DB可用区
      */
-    ShardSlaveZones: Array<string>;
+    ShardSlaveZones?: Array<string>;
     /**
      * 分片Cpu核数
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * DB节点信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodesInfo: Array<NodeInfo>;
+    NodesInfo?: Array<NodeInfo>;
 }
 /**
  * 数据库超期备份配置
@@ -869,15 +869,15 @@ export interface BriefNodeInfo {
     /**
      * DB节点ID
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * DB节点角色，取值为master或者slave
      */
-    Role: string;
+    Role?: string;
     /**
      * 节点所属分片的分片ID
      */
-    ShardId: string;
+    ShardId?: string;
 }
 /**
  * ModifyDBInstancesProject返回参数结构体
@@ -921,7 +921,7 @@ export interface DatabaseView {
     /**
      * 视图名称
      */
-    View: string;
+    View?: string;
 }
 /**
  * 配置信息。包含配置项Config，配置值Value
@@ -960,11 +960,11 @@ export interface NodeInfo {
     /**
      * DB节点ID
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * DB节点角色，取值为master或者slave
      */
-    Role: string;
+    Role?: string;
 }
 /**
  * DescribeOrders返回参数结构体
@@ -1639,11 +1639,11 @@ export interface ParamModifyResult {
     /**
      * 修改参数名字
      */
-    Param: string;
+    Param?: string;
     /**
      * 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法
      */
-    Code: number;
+    Code?: number;
 }
 /**
  * 数据库表权限
@@ -1686,7 +1686,7 @@ export interface DatabaseFunction {
     /**
      * 函数名称
      */
-    Func: string;
+    Func?: string;
 }
 /**
  * 参数约束
@@ -1695,20 +1695,20 @@ export interface ParamConstraint {
     /**
      * 约束类型,如枚举enum，区间section
      */
-    Type: string;
+    Type?: string;
     /**
      * 约束类型为enum时的可选值列表
      */
-    Enum: string;
+    Enum?: string;
     /**
      * 约束类型为section时的范围
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Range: ConstraintRange;
+    Range?: ConstraintRange;
     /**
      * 约束类型为string时的可选值列表
      */
-    String: string;
+    String?: string;
 }
 /**
  * ResetAccountPassword返回参数结构体
@@ -1798,11 +1798,11 @@ export interface ShardZoneChooseInfo {
     /**
      * 主可用区
      */
-    MasterZone: ZonesInfo;
+    MasterZone?: ZonesInfo;
     /**
      * 可选的从可用区
      */
-    SlaveZones: Array<ZonesInfo>;
+    SlaveZones?: Array<ZonesInfo>;
 }
 /**
  * RenewDCDBInstance请求参数结构体
@@ -1853,47 +1853,47 @@ export interface Project {
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 资源拥有者（主账号）uin
      */
-    OwnerUin: number;
+    OwnerUin?: number;
     /**
      * 应用Id
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 项目名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 创建者uin
      */
-    CreatorUin: number;
+    CreatorUin?: number;
     /**
      * 来源平台
      */
-    SrcPlat: string;
+    SrcPlat?: string;
     /**
      * 来源AppId
      */
-    SrcAppId: number;
+    SrcAppId?: number;
     /**
      * 项目状态,0正常，-1关闭。默认项目为3
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 是否默认项目，1 是，0 不是
      */
-    IsDefault: number;
+    IsDefault?: number;
     /**
      * 描述信息
      */
-    Info: string;
+    Info?: string;
 }
 /**
  * CreateTmpDCDBInstance请求参数结构体
@@ -1915,7 +1915,7 @@ export interface DatabaseTable {
     /**
      * 表名
      */
-    Table: string;
+    Table?: string;
 }
 /**
  * DescribeDBEncryptAttributes请求参数结构体
@@ -2066,35 +2066,35 @@ export interface SpecConfigInfo {
     /**
      * 节点个数，2 表示一主一从，3 表示一主二从
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * 内存大小，单位 GB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 数据盘规格最小值，单位 GB
      */
-    MinStorage: number;
+    MinStorage?: number;
     /**
      * 数据盘规格最大值，单位 GB
      */
-    MaxStorage: number;
+    MaxStorage?: number;
     /**
      * 推荐的使用场景
      */
-    SuitInfo: string;
+    SuitInfo?: string;
     /**
      * 产品类型 Id
      */
-    Pid: number;
+    Pid?: number;
     /**
      * 最大 Qps 值
      */
-    Qps: number;
+    Qps?: number;
     /**
      * CPU核数
      */
-    Cpu: number;
+    Cpu?: number;
 }
 /**
  * 临时实例
@@ -2104,77 +2104,77 @@ export interface TmpInstance {
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 实例备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceRemark: string;
+    InstanceRemark?: string;
     /**
      * 0:非临时实例 ,1:无效临时实例, 2:回档成功的有效临时实例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TempType: number;
+    TempType?: number;
     /**
      * 实例状态,0:待初始化,1:流程处理中,2:有效状态,-1:已隔离，-2：已下线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例 ID，形如：tdsql-ow728lmc。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例虚IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 实例虚端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 有效期结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PeriodEndTime: string;
+    PeriodEndTime?: string;
     /**
      * 源实例 ID，形如：tdsql-ow728lmc。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcInstanceId: string;
+    SrcInstanceId?: string;
     /**
      * 实例状态描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 实例所在地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 实例所在可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例虚IPv6
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vipv6: string;
+    Vipv6?: string;
     /**
      * 实例IPv6标志
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ipv6Flag: number;
+    Ipv6Flag?: number;
 }
 /**
  * ModifyDBParameters请求参数结构体
@@ -2478,106 +2478,106 @@ export interface DCDBShardInfo {
     /**
      * 所属实例Id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 分片SQL透传Id，用于将sql透传到指定分片执行
      */
-    ShardSerialId: string;
+    ShardSerialId?: string;
     /**
      * 全局唯一的分片Id
      */
-    ShardInstanceId: string;
+    ShardInstanceId?: string;
     /**
      * 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化
      */
-    Status: number;
+    Status?: number;
     /**
      * 状态中文描述
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 字符串格式的私有网络Id
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 字符串格式的私有网络子网Id
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 内存大小，单位 GB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 存储大小，单位 GB
      */
-    Storage: number;
+    Storage?: number;
     /**
      * 到期时间
      */
-    PeriodEndTime: string;
+    PeriodEndTime?: string;
     /**
      * 节点数，2 为一主一从， 3 为一主二从
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * 存储使用率，单位为 %
      */
-    StorageUsage: number;
+    StorageUsage?: number;
     /**
      * 内存使用率，单位为 %
      */
-    MemoryUsage: number;
+    MemoryUsage?: number;
     /**
      * 数字分片Id（过时字段，请勿依赖该值）
      */
-    ShardId: number;
+    ShardId?: number;
     /**
      * 产品ProductID
      */
-    Pid: number;
+    Pid?: number;
     /**
      * Proxy版本
      */
-    ProxyVersion: string;
+    ProxyVersion?: string;
     /**
      * 付费模型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Paymode: string;
+    Paymode?: string;
     /**
      * 分片的主可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShardMasterZone: string;
+    ShardMasterZone?: string;
     /**
      * 分片的从可用区列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShardSlaveZones: Array<string>;
+    ShardSlaveZones?: Array<string>;
     /**
      * CPU核数
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 分片ShardKey的范围（总共64个哈希值），例如： 0-31，32-63
      */
-    Range: string;
+    Range?: string;
 }
 /**
  * CopyAccountPrivileges请求参数结构体
@@ -2619,31 +2619,31 @@ export interface SecurityGroup {
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 安全组ID
      */
-    SecurityGroupId: string;
+    SecurityGroupId?: string;
     /**
      * 安全组名称
      */
-    SecurityGroupName: string;
+    SecurityGroupName?: string;
     /**
      * 安全组备注
      */
-    SecurityGroupRemark: string;
+    SecurityGroupRemark?: string;
     /**
      * 入站规则
      */
-    Inbound: Array<SecurityGroupBound>;
+    Inbound?: Array<SecurityGroupBound>;
     /**
      * 出站规则
      */
-    Outbound: Array<SecurityGroupBound>;
+    Outbound?: Array<SecurityGroupBound>;
 }
 /**
  * DescribeBackupFiles请求参数结构体
@@ -2849,11 +2849,11 @@ export interface TableColumn {
     /**
      * 列名称
      */
-    Col: string;
+    Col?: string;
     /**
      * 列类型
      */
-    Type: string;
+    Type?: string;
 }
 /**
  * 安全出入口规则
@@ -3188,7 +3188,7 @@ export interface Database {
     /**
      * 数据库名称
      */
-    DbName: string;
+    DbName?: string;
 }
 /**
  * GrantAccountPrivileges返回参数结构体
@@ -3232,43 +3232,43 @@ export interface ShardInfo {
     /**
      * 分片ID
      */
-    ShardInstanceId: string;
+    ShardInstanceId?: string;
     /**
      * 分片Set ID
      */
-    ShardSerialId: string;
+    ShardSerialId?: string;
     /**
      * 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化，-2 分片已删除
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
      */
-    Createtime: string;
+    Createtime?: string;
     /**
      * 内存大小，单位 GB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 存储大小，单位 GB
      */
-    Storage: number;
+    Storage?: number;
     /**
      * 分片数字ID
      */
-    ShardId: number;
+    ShardId?: number;
     /**
      * 节点数，2 为一主一从， 3 为一主二从
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * 产品类型 Id（过时字段，请勿依赖该值）
      */
-    Pid: number;
+    Pid?: number;
     /**
      * Cpu核数
      */
-    Cpu: number;
+    Cpu?: number;
 }
 /**
  * ModifyInstanceVip请求参数结构体
@@ -4051,47 +4051,47 @@ export interface UserTaskInfo {
     /**
      * 任务ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 用户账户ID
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 任务状态，0-任务初始化中；1-任务运行中；2-任务成功；3-任务失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 任务类型，0-实例回档；1-实例创建；2-实例扩容；3-实例迁移；4-实例删除；5-实例重启
      */
-    UserTaskType: number;
+    UserTaskType?: number;
     /**
      * 任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务错误信息
      */
-    ErrMsg: string;
+    ErrMsg?: string;
     /**
      * 客户端参数
      */
-    InputData: string;
+    InputData?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 地域ID
      */
-    RegionId: number;
+    RegionId?: number;
 }
 /**
  * 数据库存储过程信息
@@ -4100,7 +4100,7 @@ export interface DatabaseProcedure {
     /**
      * 存储过程名称
      */
-    Proc: string;
+    Proc?: string;
 }
 /**
  * DescribeDBTmpInstances返回参数结构体
@@ -4272,23 +4272,23 @@ export interface RegionInfo {
     /**
      * 地域英文ID
      */
-    Region: string;
+    Region?: string;
     /**
      * 地域数字ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 地域中文名
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 可用区列表
      */
-    ZoneList: Array<ZonesInfo>;
+    ZoneList?: Array<ZonesInfo>;
     /**
      * 可选择的主可用区和从可用区
      */
-    AvailableChoice: Array<ShardZoneChooseInfo>;
+    AvailableChoice?: Array<ShardZoneChooseInfo>;
 }
 /**
  * DescribeDatabaseObjects请求参数结构体
@@ -4408,11 +4408,11 @@ export interface ConstraintRange {
     /**
      * 约束类型为section时的最小值
      */
-    Min: string;
+    Min?: string;
     /**
      * 约束类型为section时的最大值
      */
-    Max: string;
+    Max?: string;
 }
 /**
  * 拉取的日志信息
@@ -4421,19 +4421,19 @@ export interface LogFileInfo {
     /**
      * Log最后修改时间
      */
-    Mtime: number;
+    Mtime?: number;
     /**
      * 文件长度
      */
-    Length: number;
+    Length?: number;
     /**
      * 下载Log时用到的统一资源标识符
      */
-    Uri: string;
+    Uri?: string;
     /**
      * 文件名
      */
-    FileName: string;
+    FileName?: string;
 }
 /**
  * ActiveHourDCDBInstance请求参数结构体

@@ -323,21 +323,13 @@ export interface DescribeRabbitMQNodeListRequest {
     SortOrder?: string;
 }
 /**
- * PublishCmqMsg请求参数结构体
+ * DeleteCmqQueue返回参数结构体
  */
-export interface PublishCmqMsgRequest {
+export interface DeleteCmqQueueResponse {
     /**
-     * 主题名
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TopicName: string;
-    /**
-     * 消息内容，消息总大小需不大于1024K
-     */
-    MsgContent: string;
-    /**
-     * 消息标签，支持传递多标签或单路由，单个标签、路由长度不能超过64个字符。
-     */
-    MsgTag?: Array<string>;
+    RequestId?: string;
 }
 /**
  * 消费详情
@@ -5842,6 +5834,23 @@ export interface DescribeEnvironmentAttributesRequest {
     ClusterId: string;
 }
 /**
+ * ModifyPublicNetworkSecurityPolicy返回参数结构体
+ */
+export interface ModifyPublicNetworkSecurityPolicyResponse {
+    /**
+     * SUCCESS或者FAILURE
+     */
+    ModifyResult?: string;
+    /**
+     * 集群id
+     */
+    InstanceId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 消费者详情中的主题信息
  */
 export interface RocketMQConsumerTopic {
@@ -5954,6 +5963,10 @@ export interface RabbitMQBindingListInfo {
      */
     ModifyTime?: string;
 }
+/**
+ * ModifyPublicNetworkSecurityPolicy请求参数结构体
+ */
+export declare type ModifyPublicNetworkSecurityPolicyRequest = null;
 /**
  * ModifyRole返回参数结构体
  */
@@ -8660,13 +8673,21 @@ export interface DeleteEnvironmentRolesResponse {
     RequestId?: string;
 }
 /**
- * DeleteCmqQueue返回参数结构体
+ * PublishCmqMsg请求参数结构体
  */
-export interface DeleteCmqQueueResponse {
+export interface PublishCmqMsgRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 主题名
      */
-    RequestId?: string;
+    TopicName: string;
+    /**
+     * 消息内容，消息总大小需不大于1024K
+     */
+    MsgContent: string;
+    /**
+     * 消息标签，支持传递多标签或单路由，单个标签、路由长度不能超过64个字符。
+     */
+    MsgTag?: Array<string>;
 }
 /**
  * ModifyCmqTopicAttribute请求参数结构体

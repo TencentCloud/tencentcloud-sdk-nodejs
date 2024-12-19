@@ -211,6 +211,10 @@ export interface ModifyStaffRequest {
      * 手机接听模式 0 - 关闭 | 1 - 仅离线 | 2 - 始终
      */
     UseMobileAccept?: number;
+    /**
+     * 座席分机号（1 到 8 打头，4 - 6 位）
+     */
+    ExtensionNumber?: string;
 }
 /**
  * DescribeIvrAudioList返回参数结构体
@@ -1392,6 +1396,10 @@ export interface SeatUserInfo {
   else:自定义角色ID
      */
     Role?: number;
+    /**
+     * 座席分机号（1 到 8 打头，4 - 6 位）
+     */
+    ExtensionNumber?: string;
 }
 /**
  * UpdateCCCSkillGroup返回参数结构体
@@ -2407,6 +2415,10 @@ export interface StaffInfo {
      * 最后修改时间
      */
     LastModifyTimestamp?: number;
+    /**
+     * 座席分机号（1 到 8 打头，4 - 6 位）
+     */
+    ExtensionNumber?: string;
 }
 /**
  * CreateAutoCalloutTask返回参数结构体

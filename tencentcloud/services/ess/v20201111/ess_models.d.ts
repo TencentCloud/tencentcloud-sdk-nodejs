@@ -1174,6 +1174,19 @@ export interface CreateFlowOption {
     ResultPageConfig?: Array<CreateResultPageConfig>;
 }
 /**
+ * CreateOrganizationAuthFile返回参数结构体
+ */
+export interface CreateOrganizationAuthFileResponse {
+    /**
+     * 授权书链接，有效期5分钟。
+     */
+    FileUrl?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
  */
 export interface FilledComponent {
@@ -2399,6 +2412,10 @@ export interface SignQrCode {
   一旦超过二维码的有效期限，该二维码将自动失效。
      */
     ExpiredTime?: number;
+    /**
+     * 微信小程序二维码
+     */
+    WeixinQrCodeUrl?: string;
 }
 /**
  * CreateDocument返回参数结构体
@@ -3005,29 +3022,28 @@ export interface DescribeExtendedServiceAuthDetailRequest {
     Offset?: number;
 }
 /**
- * 企业批量注册链接信息
+ * CreateOrganizationAuthFile请求参数结构体
  */
-export interface OrganizationAuthUrl {
+export interface CreateOrganizationAuthFileRequest {
     /**
-     * 企业批量注册链接，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天
-  跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
-  <table> <thead> <tr> <th>Endpoint</th> <th>示例</th> <th>链接有效期限</th> </tr> </thead>  <tbody>
-   <tr> <td>PC</td> <td>https://qian.tencent.com/console/batch-register?token=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr>
-  <tr> <td>PC_SHORT_URL</td> <td>https://test.essurl.cn/8gDKUBAWK8</td> <td>7天</td> </tr>
-  <tr> <td>APP</td> <td>/pages/guide/index?to=REGISTER_ENTERPRISE_FOR_BATCH&urlAuthToken=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr> </tbody> </table>
-  注：
-  `1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
-  
+     * 企业授权书信息参数， 需要自行保证这些参数跟营业执照中的信息一致。
      */
-    AuthUrl?: string;
+    OrganizationCommonInfo: OrganizationCommonInfo;
     /**
-     * 企业批量注册的错误信息，例如：企业三要素不通过
+     * 代理企业和员工的信息。<br/>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
-    ErrorMessage?: string;
+    Agent?: Agent;
     /**
-     * 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationAuthorizationUrl)。
+     * 执行本接口操作的员工信息。<br/>注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    SubTaskId?: string;
+    Operator?: UserInfo;
+    /**
+     * 授权书类型：
+  - 0: 企业认证超管授权书
+  - 1: 超管变更授权书
+  - 2: 企业注销授权书
+     */
+    Type?: number;
 }
 /**
  * 企业员工信息。
@@ -3223,6 +3239,82 @@ export interface DescribeFlowTemplatesRequest {
      * 是否获取模板预览链接
      */
     WithPreviewUrl?: boolean;
+}
+/**
+ * 企业授权书信息参数， 需要保证这些参数跟营业执照中的信息一致。
+ */
+export interface OrganizationCommonInfo {
+    /**
+     * 组织机构名称。
+  请确认该名称与企业营业执照中注册的名称一致。
+  如果名称中包含英文括号()，请使用中文括号（）代替。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationName: string;
+    /**
+     * 组织机构企业统一社会信用代码。
+  请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniformSocialCreditCode: string;
+    /**
+     * 组织机构法人的姓名。
+  请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalName: string;
+    /**
+     * 组织机构法人的证件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalIdCardType?: string;
+    /**
+     * 组织机构法人的证件号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LegalIdCardNumber?: string;
+    /**
+     * 组织机构超管姓名。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminName?: string;
+    /**
+     * 组织机构超管手机号。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminMobile?: string;
+    /**
+     * 组织机构超管证件类型
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminIdCardType?: string;
+    /**
+     * 组织机构超管证件号码
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdminIdCardNumber?: string;
+    /**
+     * 原超管姓名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminName?: string;
+    /**
+     * 原超管手机号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldAdminMobile?: string;
+    /**
+     * 原超管证件类型
+     */
+    OldAdminIdCardType?: string;
+    /**
+     * 原超管证件号码
+     */
+    OldAdminIdCardNumber?: string;
 }
 /**
  * CreateIntegrationSubOrganizationActiveRecord返回参数结构体
@@ -3722,6 +3814,31 @@ export interface UserThreeFactor {
   <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
      */
     IdCardNumber: string;
+}
+/**
+ * 企业批量注册链接信息
+ */
+export interface OrganizationAuthUrl {
+    /**
+     * 企业批量注册链接，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天
+  跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
+  <table> <thead> <tr> <th>Endpoint</th> <th>示例</th> <th>链接有效期限</th> </tr> </thead>  <tbody>
+   <tr> <td>PC</td> <td>https://qian.tencent.com/console/batch-register?token=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr>
+  <tr> <td>PC_SHORT_URL</td> <td>https://test.essurl.cn/8gDKUBAWK8</td> <td>7天</td> </tr>
+  <tr> <td>APP</td> <td>/pages/guide/index?to=REGISTER_ENTERPRISE_FOR_BATCH&urlAuthToken=yDSx0UUgtjuaf4UEfd2MjCnfI1iuXFE6&orgName=批量认证线上测试企业9</td> <td>7天</td> </tr> </tbody> </table>
+  注：
+  `1.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
+  
+     */
+    AuthUrl?: string;
+    /**
+     * 企业批量注册的错误信息，例如：企业三要素不通过
+     */
+    ErrorMessage?: string;
+    /**
+     * 企业批量注册的唯一 Id， 此 Id 可以用在[创建企业批量认证链接-单链接](https://qian.tencent.com/developers/companyApis/organizations/CreateBatchOrganizationAuthorizationUrl)。
+     */
+    SubTaskId?: string;
 }
 /**
  * 企业认证信息
@@ -6627,7 +6744,8 @@ export interface ApproverInfo {
   <li>**6**：设备面容识别，需要对比手机机主预留的人脸信息，校验一致才能成功进行合同签署。（Android系统暂不支持该校验方式）</li></ul>
   
   
-  默认为1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)
+  默认为：
+  1(人脸认证 ),2(签署密码),3(运营商三要素),5(设备指纹识别),6(设备面容识别)
   
   注：
   1. 用<font color='red'>模板创建合同场景</font>, 签署人的认证方式需要在配置模板的时候指定, <font color='red'>在创建合同重新指定无效</font>
@@ -9107,7 +9225,9 @@ export interface DescribePersonCertificateRequest {
     SceneKey?: string;
 }
 /**
- * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
+ * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png)
  */
 export interface RelieveInfo {
     /**
@@ -9128,7 +9248,7 @@ export interface RelieveInfo {
      */
     OriginalOtherSettlement?: string;
     /**
-     * 其他约定，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
+     * 其他约定（如约定的与解除协议存在冲突的，以【其他约定】为准），最大支持200个字，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OtherDeals?: string;
 }

@@ -315,11 +315,11 @@ export interface DescribeTaskListResponse {
     /**
      * 任务总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 任务详细信息列表。
      */
-    Tasks: Array<TaskInfoDetail>;
+    Tasks?: Array<TaskInfoDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -838,11 +838,11 @@ export interface DescribeProjectSecurityGroupsResponse {
     /**
      * 安全组规则。
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 符合条件的安全组总数量。
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

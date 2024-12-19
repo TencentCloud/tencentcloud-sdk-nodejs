@@ -1311,6 +1311,17 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
         return this.request("ChannelCreatePreparedPersonalEsign", req, cb);
     }
     /**
+     * 生成合成后的各类企业授权书，包括：
+- 企业认证超管授权书
+- 超管变更授权书
+- 企业注销授权书
+
+注: 需自行保证传入真实的企业/法人/超管信息，否则后续的审核将会拒绝。
+     */
+    async CreateOrganizationAuthFile(req, cb) {
+        return this.request("CreateOrganizationAuthFile", req, cb);
+    }
+    /**
      * 接口（ChannelCreateFlowGroupByFiles）用于使用 PDF 文件创建合同组签署流程。
 
 - 该接口允许通过选择多个模板一次性创建多个合同，这些合同被组织在一个合同组中。

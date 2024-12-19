@@ -47,35 +47,35 @@ export interface Outbound {
     /**
      * 策略，ACCEPT或者DROP。
      */
-    Action: string;
+    Action?: string;
     /**
      * 地址组id代表的地址集合。
      */
-    AddressModule: string;
+    AddressModule?: string;
     /**
      * 来源Ip或Ip段，例如192.168.0.0/16。
      */
-    CidrIp: string;
+    CidrIp?: string;
     /**
      * 描述。
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 网络协议，支持udp、tcp等。
      */
-    IpProtocol: string;
+    IpProtocol?: string;
     /**
      * 端口。
      */
-    PortRange: string;
+    PortRange?: string;
     /**
      * 服务组id代表的协议和端口集合。
      */
-    ServiceModule: string;
+    ServiceModule?: string;
     /**
      * 安全组id代表的地址集合。
      */
-    Id: string;
+    Id?: string;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -244,35 +244,35 @@ export interface Inbound {
     /**
      * 策略，ACCEPT或者DROP。
      */
-    Action: string;
+    Action?: string;
     /**
      * 地址组id代表的地址集合。
      */
-    AddressModule: string;
+    AddressModule?: string;
     /**
      * 来源Ip或Ip段，例如192.168.0.0/16。
      */
-    CidrIp: string;
+    CidrIp?: string;
     /**
      * 描述。
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 网络协议，支持udp、tcp等。
      */
-    IpProtocol: string;
+    IpProtocol?: string;
     /**
      * 端口。
      */
-    PortRange: string;
+    PortRange?: string;
     /**
      * 服务组id代表的协议和端口集合。
      */
-    ServiceModule: string;
+    ServiceModule?: string;
     /**
      * 安全组id代表的地址集合。
      */
-    Id: string;
+    Id?: string;
 }
 /**
  * 标签键值对

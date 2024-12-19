@@ -1144,13 +1144,17 @@ export interface DescribeEffectivePolicyRequest {
  */
 export interface CreateOrgServiceAssignRequest {
   /**
-   * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
-   */
-  ServiceId: number
-  /**
    * 委派管理员Uin列表。 最大长度20个
    */
   MemberUins: Array<number | bigint>
+  /**
+   * 集团服务ID。和集团服务产品标识二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   */
+  ServiceId?: number
+  /**
+   * 集团服务产品标识。和集团服务ID二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   */
+  Product?: string
   /**
    * 委派管理员管理范围。 取值：1-全部成员 2-部分成员，默认值1
    */
@@ -1949,13 +1953,17 @@ export interface CreateOrganizationMemberAuthIdentityResponse {
  */
 export interface DeleteOrgServiceAssignRequest {
   /**
-   * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
-   */
-  ServiceId: number
-  /**
    * 委派管理员Uin。
    */
   MemberUin: number
+  /**
+   * 集团服务ID。和集团服务产品标识二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   */
+  ServiceId?: number
+  /**
+   * 集团服务产品标识。和集团服务ID二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   */
+  Product?: string
 }
 
 /**
@@ -5403,9 +5411,13 @@ export interface ListOrgServiceAssignMemberRequest {
    */
   Limit: number
   /**
-   * 集团服务ID。可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   * 集团服务ID。和集团服务产品标识二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
    */
-  ServiceId: number
+  ServiceId?: number
+  /**
+   * 集团服务产品标识。和集团服务ID二选一必填，可以通过[ListOrganizationService](https://cloud.tencent.com/document/product/850/109561)获取
+   */
+  Product?: string
 }
 
 /**

@@ -2997,7 +2997,7 @@ export interface AddUserDeviceRequest {
    */
   Name: string
   /**
-   * 设备接入协议（1:RTMP,2:GB,3:GW,4:IVCP）
+   * 设备接入协议（1:RTMP,2:GB,3:GW,6:ISUP）
    */
   AccessProtocol: number
   /**

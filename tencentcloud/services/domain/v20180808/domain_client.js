@@ -178,7 +178,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePreAuctionList", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      */
     async ModifyDomainDNSBatch(req, cb) {
         return this.request("ModifyDomainDNSBatch", req, cb);

@@ -210,6 +210,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopics", req, cb);
     }
     /**
+     * 修改pulsar专业版公网安全策略
+     */
+    async ModifyPublicNetworkSecurityPolicy(req, cb) {
+        return this.request("ModifyPublicNetworkSecurityPolicy", req, cb);
+    }
+    /**
      * 修改环境角色授权。
      */
     async ModifyRocketMQEnvironmentRole(req, cb) {
