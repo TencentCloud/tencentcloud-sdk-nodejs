@@ -2812,17 +2812,17 @@ export interface ModifyPolicyGroupCondition {
 }
 
 /**
- * 通知模板与策略绑定关系
+ * DescribeRemoteURLs请求参数结构体
  */
-export interface NoticeBindPolicys {
+export interface DescribeRemoteURLsRequest {
   /**
-   * 告警通知模板 ID
+   * 实例ID
    */
-  NoticeId?: string
+  InstanceId: string
   /**
-   * 告警通知模板绑定的告警策略ID列表
+   * url数组
    */
-  PolicyIds?: Array<string>
+  RemoteURLs?: Array<string>
 }
 
 /**
@@ -3577,6 +3577,22 @@ export interface CommonNamespace {
 }
 
 /**
+ * url鉴权
+ */
+export interface BasicAuth {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+}
+
+/**
  * DeleteGrafanaNotificationChannel返回参数结构体
  */
 export interface DeleteGrafanaNotificationChannelResponse {
@@ -3584,6 +3600,20 @@ export interface DeleteGrafanaNotificationChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyRemoteURLs请求参数结构体
+ */
+export interface ModifyRemoteURLsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 多写配置
+   */
+  RemoteWrites?: Array<RemoteWrite>
 }
 
 /**
@@ -3784,40 +3814,38 @@ export interface DeletePrometheusAlertPolicyRequest {
 }
 
 /**
- * Prometheus 服务发现信息
+ * 多写配置
  */
-export interface ServiceDiscoveryItem {
+export interface RemoteWrite {
   /**
-   * 服务发现名称
+   * 多写url
    */
-  Name: string
+  URL: string
   /**
-   * 服务发现属于的 Namespace
-   */
-  Namespace: string
-  /**
-   * 服务发现类型: ServiceMonitor/PodMonitor
-   */
-  Kind: string
-  /**
-   * Namespace 选取方式
+   * RelabelConfig
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceSelector: string
+  URLRelabelConfig?: string
   /**
-   * Label 选取方式
+   * 鉴权
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Selector: string
+  BasicAuth?: BasicAuth
   /**
-   * Endpoints 信息（PodMonitor 不含该参数）
-   */
-  Endpoints: string
-  /**
-   * 服务发现对应的配置信息
+   * 最大block
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Yaml: string
+  MaxBlockSize?: string
+  /**
+   * Label
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Label?: string
+  /**
+   * HTTP 额外添加的头
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Headers?: Array<RemoteWriteHeader>
 }
 
 /**
@@ -4287,6 +4315,43 @@ export interface PrometheusAgentInfo {
    * 该参数未使用，不需要填写
    */
   Describe?: string
+}
+
+/**
+ * Prometheus 服务发现信息
+ */
+export interface ServiceDiscoveryItem {
+  /**
+   * 服务发现名称
+   */
+  Name: string
+  /**
+   * 服务发现属于的 Namespace
+   */
+  Namespace: string
+  /**
+   * 服务发现类型: ServiceMonitor/PodMonitor
+   */
+  Kind: string
+  /**
+   * Namespace 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceSelector: string
+  /**
+   * Label 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Selector: string
+  /**
+   * Endpoints 信息（PodMonitor 不含该参数）
+   */
+  Endpoints: string
+  /**
+   * 服务发现对应的配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Yaml: string
 }
 
 /**
@@ -4813,6 +4878,22 @@ export interface DeleteAlarmPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Remote Write 协议额外添加的 HTTP 头
+ */
+export interface RemoteWriteHeader {
+  /**
+   * HTTP 头的键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * HTTP 头的值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -6673,6 +6754,20 @@ export interface ModifyAlarmPolicyNoticeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 通知模板与策略绑定关系
+ */
+export interface NoticeBindPolicys {
+  /**
+   * 告警通知模板 ID
+   */
+  NoticeId?: string
+  /**
+   * 告警通知模板绑定的告警策略ID列表
+   */
+  PolicyIds?: Array<string>
 }
 
 /**
@@ -8854,6 +8949,20 @@ export interface DescribeGrafanaInstancesResponse {
 }
 
 /**
+ * DescribeRemoteURLs返回参数结构体
+ */
+export interface DescribeRemoteURLsResponse {
+  /**
+   * 多写配置
+   */
+  RemoteWrites?: Array<RemoteWrite>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePolicyGroupInfo请求参数结构体
  */
 export interface DescribePolicyGroupInfoRequest {
@@ -10917,6 +11026,16 @@ export interface LogAlarmReq {
  * TerminatePrometheusInstances返回参数结构体
  */
 export interface TerminatePrometheusInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyRemoteURLs返回参数结构体
+ */
+export interface ModifyRemoteURLsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

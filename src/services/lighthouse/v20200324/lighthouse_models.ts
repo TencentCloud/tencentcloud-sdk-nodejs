@@ -413,23 +413,23 @@ export interface ModifyBundle {
   /**
    * 更改实例套餐后需要补的差价。
    */
-  ModifyPrice: Price
+  ModifyPrice?: Price
   /**
    * 变更套餐状态。取值：
 <li>SOLD_OUT：套餐售罄</li>
 <li>AVAILABLE：支持套餐变更</li>
 <li>UNAVAILABLE：暂不支持套餐变更</li>
    */
-  ModifyBundleState: string
+  ModifyBundleState?: string
   /**
    * 套餐信息。
    */
-  Bundle: Bundle
+  Bundle?: Bundle
   /**
    * 不支持套餐变更原因信息。变更套餐状态为"AVAILABLE"时, 该信息为空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotSupportModifyMessage: string
+  NotSupportModifyMessage?: string
 }
 
 /**
@@ -1928,17 +1928,17 @@ export interface DescribeScenesRequest {
  */
 export interface SoftwareDetail {
   /**
-   * 详情唯一键。
+   * 软件的属性标识
    */
-  Key: string
+  Key?: string
   /**
-   * 详情标题。
+   * 软件的属性标识描述
    */
-  Title: string
+  Title?: string
   /**
-   * 详情值。
+   * 软件的属性值
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -5353,7 +5353,7 @@ export interface Price {
   /**
    * 实例价格。
    */
-  InstancePrice: InstancePrice
+  InstancePrice?: InstancePrice
 }
 
 /**

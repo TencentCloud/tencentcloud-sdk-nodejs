@@ -663,7 +663,6 @@ export class Client extends AbstractClient {
 2 扫描终止， 
 3 扫描成功，
 4 扫描失败
-
      */
   async ModifyDSPACOSDiscoveryTask(
     req: ModifyDSPACOSDiscoveryTaskRequest,
@@ -922,7 +921,6 @@ export class Client extends AbstractClient {
 2 扫描终止， 
 3 扫描成功，
 4 扫描失败
-
      */
   async ModifyDSPADiscoveryTask(
     req: ModifyDSPADiscoveryTaskRequest,
@@ -1108,8 +1106,6 @@ export class Client extends AbstractClient {
   /**
      * 打开或者关闭分类分级规则
 注：此API同时对该规则下的RDB跟COS规则操作。
-
-
      */
   async EnableDSPADiscoveryRule(
     req: EnableDSPADiscoveryRuleRequest,
@@ -1722,7 +1718,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改最新评估风险项状态
+   * 查询风险的处理历史
    */
   async DescribeDSPAAssessmentRiskProcessHistory(
     req: DescribeDSPAAssessmentRiskProcessHistoryRequest,

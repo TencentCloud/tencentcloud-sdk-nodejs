@@ -102,7 +102,6 @@ export declare class Client extends AbstractClient {
 2 扫描终止，
 3 扫描成功，
 4 扫描失败
-
      */
     ModifyDSPACOSDiscoveryTask(req: ModifyDSPACOSDiscoveryTaskRequest, cb?: (error: string, rep: ModifyDSPACOSDiscoveryTaskResponse) => void): Promise<ModifyDSPACOSDiscoveryTaskResponse>;
     /**
@@ -211,7 +210,6 @@ export declare class Client extends AbstractClient {
 2 扫描终止，
 3 扫描成功，
 4 扫描失败
-
      */
     ModifyDSPADiscoveryTask(req: ModifyDSPADiscoveryTaskRequest, cb?: (error: string, rep: ModifyDSPADiscoveryTaskResponse) => void): Promise<ModifyDSPADiscoveryTaskResponse>;
     /**
@@ -289,8 +287,6 @@ export declare class Client extends AbstractClient {
     /**
      * 打开或者关闭分类分级规则
 注：此API同时对该规则下的RDB跟COS规则操作。
-
-
      */
     EnableDSPADiscoveryRule(req: EnableDSPADiscoveryRuleRequest, cb?: (error: string, rep: EnableDSPADiscoveryRuleResponse) => void): Promise<EnableDSPADiscoveryRuleResponse>;
     /**
@@ -543,7 +539,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDSPAAssessmentNewDiscoveredRiskOverview(req: DescribeDSPAAssessmentNewDiscoveredRiskOverviewRequest, cb?: (error: string, rep: DescribeDSPAAssessmentNewDiscoveredRiskOverviewResponse) => void): Promise<DescribeDSPAAssessmentNewDiscoveredRiskOverviewResponse>;
     /**
-     * 修改最新评估风险项状态
+     * 查询风险的处理历史
      */
     DescribeDSPAAssessmentRiskProcessHistory(req: DescribeDSPAAssessmentRiskProcessHistoryRequest, cb?: (error: string, rep: DescribeDSPAAssessmentRiskProcessHistoryResponse) => void): Promise<DescribeDSPAAssessmentRiskProcessHistoryResponse>;
     /**

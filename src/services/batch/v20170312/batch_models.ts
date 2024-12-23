@@ -168,14 +168,17 @@ export interface DescribeTaskLogsRequest {
 export interface AgentRunningMode {
   /**
    * 场景类型，支持WINDOWS
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Scene: string
   /**
    * 运行Agent的User
+注意：此字段可能返回 null，表示取不到有效值。
    */
   User: string
   /**
    * 运行Agent的Session
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Session: string
 }
@@ -947,31 +950,31 @@ export interface ComputeNodeMetrics {
   /**
    * 已经完成提交的计算节点数量
    */
-  SubmittedCount: number
+  SubmittedCount?: number
   /**
    * 创建中的计算节点数量
    */
-  CreatingCount: number
+  CreatingCount?: number
   /**
    * 创建失败的计算节点数量
    */
-  CreationFailedCount: number
+  CreationFailedCount?: number
   /**
    * 完成创建的计算节点数量
    */
-  CreatedCount: number
+  CreatedCount?: number
   /**
    * 运行中的计算节点数量
    */
-  RunningCount: number
+  RunningCount?: number
   /**
    * 销毁中的计算节点数量
    */
-  DeletingCount: number
+  DeletingCount?: number
   /**
    * 异常的计算节点数量
    */
-  AbnormalCount: number
+  AbnormalCount?: number
 }
 
 /**
@@ -2090,10 +2093,12 @@ export interface DescribeJobSubmitInfoRequest {
 export interface Dependence {
   /**
    * 依赖关系的起点任务名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTask: string
   /**
    * 依赖关系的终点任务名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTask: string
 }
@@ -2211,7 +2216,7 @@ export interface ComputeNode {
   /**
    * 计算节点ID
    */
-  ComputeNodeId: string
+  ComputeNodeId?: string
   /**
    * 计算节点实例ID，对于CVM场景，即为CVM的InstanceId
    */
@@ -2219,15 +2224,15 @@ export interface ComputeNode {
   /**
    * 计算节点状态
    */
-  ComputeNodeState: string
+  ComputeNodeState?: string
   /**
    * CPU核数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存容量，单位GiB
    */
-  Mem: number
+  Mem?: number
   /**
    * 资源创建完成时间
    */
@@ -2235,7 +2240,7 @@ export interface ComputeNode {
   /**
    * 计算节点运行  TaskInstance 可用容量。0表示计算节点忙碌。
    */
-  TaskInstanceNumAvailable: number
+  TaskInstanceNumAvailable?: number
   /**
    * Batch Agent 版本
    */
@@ -2243,20 +2248,20 @@ export interface ComputeNode {
   /**
    * 实例内网IP
    */
-  PrivateIpAddresses: Array<string>
+  PrivateIpAddresses?: Array<string>
   /**
    * 实例公网IP
    */
-  PublicIpAddresses: Array<string>
+  PublicIpAddresses?: Array<string>
   /**
    * 计算环境资源类型，当前为CVM和CPM（黑石）
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 计算环境资源来源。<br>BATCH_CREATED：由批量计算创建的实例资源。<br>
 USER_ATTACHED：用户添加到计算环境中的实例资源。
    */
-  ResourceOrigin: string
+  ResourceOrigin?: string
 }
 
 /**
@@ -2726,35 +2731,35 @@ export interface DescribeTaskResponse {
   /**
    * 作业ID
    */
-  JobId: string
+  JobId?: string
   /**
    * 任务名称
    */
-  TaskName: string
+  TaskName?: string
   /**
    * 任务状态
    */
-  TaskState: string
+  TaskState?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务实例总数
    */
-  TaskInstanceTotalCount: number
+  TaskInstanceTotalCount?: number
   /**
    * 任务实例信息
    */
-  TaskInstanceSet: Array<TaskInstanceView>
+  TaskInstanceSet?: Array<TaskInstanceView>
   /**
    * 任务实例统计指标
    */
-  TaskInstanceMetrics: TaskInstanceMetrics
+  TaskInstanceMetrics?: TaskInstanceMetrics
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2782,48 +2787,48 @@ export interface ComputeEnvView {
   /**
    * 计算环境ID
    */
-  EnvId: string
+  EnvId?: string
   /**
    * 计算环境名称
    */
-  EnvName: string
+  EnvName?: string
   /**
    * 位置信息
    */
-  Placement: Placement
+  Placement?: Placement
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 计算节点统计指标
    */
-  ComputeNodeMetrics: ComputeNodeMetrics
+  ComputeNodeMetrics?: ComputeNodeMetrics
   /**
    * 计算环境类型
    */
-  EnvType: string
+  EnvType?: string
   /**
    * 计算节点期望个数
    */
-  DesiredComputeNodeCount: number
+  DesiredComputeNodeCount?: number
   /**
    * 计算环境资源类型，当前为CVM和CPM（黑石）
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 下一步动作
    */
-  NextAction: string
+  NextAction?: string
   /**
    * 用户添加到计算环境中的计算节点个数
    */
-  AttachedComputeNodeCount: number
+  AttachedComputeNodeCount?: number
   /**
    * 计算环境绑定的标签列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
 }
 
 /**

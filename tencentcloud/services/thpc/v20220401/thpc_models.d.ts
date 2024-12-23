@@ -470,7 +470,7 @@ export interface CreateClusterRequest {
      */
     ComputeNodeCount?: number;
     /**
-     * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
+     * 调度器类型。默认取值：SLURM。<br><li>SGE：SGE调度器。</li><br><li>SLURM：SLURM调度器。</li>
      */
     SchedulerType?: string;
     /**
@@ -502,8 +502,7 @@ export interface CreateClusterRequest {
      */
     DryRun?: boolean;
     /**
-     * 域名字服务类型。默认取值：NIS。
-  <li>NIS：NIS域名字服务。
+     * 域名字服务类型。默认取值：NIS。<li>NIS：NIS域名字服务。</li>
      */
     AccountType?: string;
     /**
@@ -527,7 +526,7 @@ export interface CreateClusterRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 弹性伸缩类型。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。<br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。
+     * 弹性伸缩类型。<br><li>AS：集群自动扩缩容由[弹性伸缩](https://cloud.tencent.com/document/product/377/3154)产品实现。</li><br><li>THPC_AS：集群自动扩缩容由THPC产品内部实现。</li>
      */
     AutoScalingType?: string;
 }
@@ -800,7 +799,7 @@ export interface SystemDisk {
  */
 export interface LoginSettings {
     /**
-     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。</li><br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。</li><br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
      */
     Password?: string;
 }

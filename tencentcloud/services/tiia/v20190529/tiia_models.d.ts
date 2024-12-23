@@ -26,9 +26,8 @@ export interface RecognizeCarProRequest {
 export interface DetectChefDressResponse {
     /**
      * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Bodies: Array<AttributesForBody>;
+    Bodies?: Array<AttributesForBody>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -41,19 +40,19 @@ export interface SearchImageResponse {
     /**
      * 返回结果数量。
      */
-    Count: number;
+    Count?: number;
     /**
      * 图片信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageInfos: Array<ImageInfo>;
+    ImageInfos?: Array<ImageInfo>;
     /**
      * 输入图的主体信息。
   若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
   **<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Object: ObjectInfo;
+    Object?: ObjectInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -191,19 +190,16 @@ export interface CreateImageRequest {
 export interface BodyAttributes {
     /**
      * 属性值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
     /**
      * 置信度，取值0-1之间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 属性名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
 }
 /**
  * DeleteImages返回参数结构体
@@ -310,23 +306,23 @@ export interface DetectLabelResponse {
      * Web网络版标签结果数组。如未选择WEB场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<DetectLabelItem>;
+    Labels?: Array<DetectLabelItem>;
     /**
      * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CameraLabels: Array<DetectLabelItem>;
+    CameraLabels?: Array<DetectLabelItem>;
     /**
      * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlbumLabels: Array<DetectLabelItem>;
+    AlbumLabels?: Array<DetectLabelItem>;
     /**
      * News新闻版标签结果数组。如未选择NEWS场景，则为空。
   新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NewsLabels: Array<DetectLabelItem>;
+    NewsLabels?: Array<DetectLabelItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -373,31 +369,31 @@ export interface AssessQualityResponse {
     /**
      * 取值为TRUE或FALSE，TRUE为长图，FALSE为正常图，长图定义为长宽比大于等于3或小于等于1/3的图片。
      */
-    LongImage: boolean;
+    LongImage?: boolean;
     /**
      * 取值为TRUE或FALSE，TRUE为黑白图，FALSE为否。黑白图即灰度图，指红绿蓝三个通道都是以灰度色阶显示的图片，并非视觉上的“黑白图片”。
      */
-    BlackAndWhite: boolean;
+    BlackAndWhite?: boolean;
     /**
      * 取值为TRUE或FALSE，TRUE为小图，FALSE为否, 小图定义为最长边小于179像素的图片。当一张图片被判断为小图时，不建议做推荐和展示，其他字段统一输出为0或FALSE。
      */
-    SmallImage: boolean;
+    SmallImage?: boolean;
     /**
      * 取值为TRUE或FALSE，TRUE为大图，FALSE为否，定义为最短边大于1000像素的图片
      */
-    BigImage: boolean;
+    BigImage?: boolean;
     /**
      * 取值为TRUE或FALSE，TRUE为纯色图或纯文字图，即没有内容或只有简单内容的图片，FALSE为正常图片。
      */
-    PureImage: boolean;
+    PureImage?: boolean;
     /**
      * 综合评分。图像清晰度的得分，对图片的噪声、曝光、模糊、压缩等因素进行综合评估，取值为[0, 100]，值越大，越清晰。一般大于50为较清晰图片，标准可以自行把握。
      */
-    ClarityScore: number;
+    ClarityScore?: number;
     /**
      * 综合评分。图像美观度得分， 从构图、色彩等多个艺术性维度评价图片，取值为[0, 100]，值越大，越美观。一般大于50为较美观图片，标准可以自行把握。
      */
-    AestheticScore: number;
+    AestheticScore?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -410,11 +406,11 @@ export interface DetectDisgustResponse {
     /**
      * 对于图片中包含恶心内容的置信度，取值[0,1]，一般超过0.5则表明可能是恶心图片。
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。
      */
-    Type: string;
+    Type?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -507,6 +503,7 @@ export interface SearchImageRequest {
     /**
      * 标签过滤条件。
   针对创建图片时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
+  最大支持64字符。
      */
     Filter?: string;
     /**
@@ -543,17 +540,16 @@ export interface AttributesForBody {
      * 人体框。当不开启人体检测时，内部参数默认为0。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rect: ImageRect;
+    Rect?: ImageRect;
     /**
      * 人体检测置信度。取值0-1之间，当不开启人体检测开关时默认为0。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetectConfidence: number;
+    DetectConfidence?: number;
     /**
      * 属性信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Attributes: Array<BodyAttributes>;
+    Attributes?: Array<BodyAttributes>;
 }
 /**
  * DetectLabel请求参数结构体
@@ -597,9 +593,8 @@ export interface DetectLabelRequest {
 export interface DetectLabelProResponse {
     /**
      * 返回标签数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<DetectLabelItem>;
+    Labels?: Array<DetectLabelItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -612,7 +607,7 @@ export interface EnhanceImageResponse {
     /**
      * 增强后图片的base64编码。
      */
-    EnhancedImage: string;
+    EnhancedImage?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -761,11 +756,11 @@ export interface RecognizeCarResponse {
     /**
      * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
      */
-    CarCoords: Array<Coord>;
+    CarCoords?: Array<Coord>;
     /**
      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
      */
-    CarTags: Array<CarTagItem>;
+    CarTags?: Array<CarTagItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -794,7 +789,6 @@ export interface Box {
 export interface DetectSecurityResponse {
     /**
      * 识别到的人体属性信息。单个人体属性信息包括人体检测置信度，属性信息，人体检测框。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bodies?: Array<AttributesForBody>;
     /**
@@ -852,23 +846,23 @@ export interface GroupInfo {
     /**
      * 图库Id。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 图库名称。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 图库简介。
      */
-    Brief: string;
+    Brief?: string;
     /**
      * 图库容量。
      */
-    MaxCapacity: number;
+    MaxCapacity?: number;
     /**
      * 该库的访问限频 。
      */
-    MaxQps: number;
+    MaxQps?: number;
     /**
      * 图库类型，对应不同服务类型，默认为1。建议手动调整为4～6，1～3为历史版本，不推荐。
   参数值：
@@ -876,19 +870,19 @@ export interface GroupInfo {
   5：在自建图库中搜索相同或相似的商品图片，适用于商品分类、检索、推荐等电商场景。
   6：在自建图片库中搜索与输入图片高度相似的图片，适用于相似图案、logo、纹理等图像元素的搜索。
      */
-    GroupType: number;
+    GroupType?: number;
     /**
      * 图库图片数量。
      */
-    PicCount: number;
+    PicCount?: number;
     /**
      * 图库创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 图库更新时间。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * CropImage返回参数结构体
@@ -897,27 +891,27 @@ export interface CropImageResponse {
     /**
      * 裁剪区域左上角X坐标值
      */
-    X: number;
+    X?: number;
     /**
      * 裁剪区域左上角Y坐标值
      */
-    Y: number;
+    Y?: number;
     /**
      * 裁剪区域的宽度，单位为像素
      */
-    Width: number;
+    Width?: number;
     /**
      * 裁剪区域的高度，单位为像素
      */
-    Height: number;
+    Height?: number;
     /**
      * 原图宽度，单位为像素
      */
-    OriginalWidth: number;
+    OriginalWidth?: number;
     /**
      * 原图高度，单位为像素
      */
-    OriginalHeight: number;
+    OriginalHeight?: number;
     /**
      * 0：抠图正常；
   1：原图过长，指原图的高度是宽度的1.8倍以上；
@@ -929,7 +923,7 @@ export interface CropImageResponse {
   
   以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。
      */
-    CropResult: number;
+    CropResult?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -968,31 +962,31 @@ export interface Product {
     /**
      * 图片中商品的三级分类识别结果，选取所有三级分类中的置信度最大者
      */
-    Name: string;
+    Name?: string;
     /**
      * 三级商品分类对应的一级分类和二级分类，两级之间用“-”（中划线）隔开，例如商品名称是“硬盘”，那么Parents输出为“电脑、办公-电脑配件”
      */
-    Parents: string;
+    Parents?: string;
     /**
      * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 商品坐标X轴的最小值
      */
-    XMin: number;
+    XMin?: number;
     /**
      * 商品坐标Y轴的最小值
      */
-    YMin: number;
+    YMin?: number;
     /**
      * 商品坐标X轴的最大值
      */
-    XMax: number;
+    XMax?: number;
     /**
      * 商品坐标Y轴的最大值
      */
-    YMax: number;
+    YMax?: number;
 }
 /**
  * 汽车坐标信息
@@ -1001,11 +995,11 @@ export interface Coord {
     /**
      * 横坐标x
      */
-    X: number;
+    X?: number;
     /**
      * 纵坐标y
      */
-    Y: number;
+    Y?: number;
 }
 /**
  * DetectSecurity请求参数结构体
@@ -1066,7 +1060,7 @@ export interface DetectPetResponse {
     /**
      * 识别出图片中的宠物信息列表。
      */
-    Pets: Array<Pet>;
+    Pets?: Array<Pet>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1079,7 +1073,7 @@ export interface DetectProductResponse {
     /**
      * 商品识别结果数组
      */
-    Products: Array<Product>;
+    Products?: Array<Product>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1092,15 +1086,15 @@ export interface ColorInfo {
     /**
      * RGB颜色值（16进制），例如：291A18。
      */
-    Color: string;
+    Color?: string;
     /**
      * 当前颜色标签所占比例。
      */
-    Percentage: number;
+    Percentage?: number;
     /**
      * 颜色标签。蜜柚色，米驼色等。
      */
-    Label: string;
+    Label?: string;
 }
 /**
  * 图像主体区域坐标
@@ -1133,7 +1127,7 @@ export interface CreateImageResponse {
   **<font color=#1E90FF>注意：仅服务类型为商品图像搜索时才生效。</font>**
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Object: ObjectInfo;
+    Object?: ObjectInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1175,42 +1169,36 @@ export interface UpdateImageResponse {
 export interface CarPlateContent {
     /**
      * 车牌信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Plate: string;
+    Plate?: string;
     /**
      * 车牌颜色。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Color: string;
+    Color?: string;
     /**
      * 车牌类型，包含：0普通蓝牌，1双层黄牌，2单层黄牌，3新能源车牌，4使馆车牌，5领馆车牌，6澳门车牌，7香港车牌，8警用车牌，9教练车牌，10武警车牌，11军用车牌   -2遮挡污损模糊车牌/异常   其他无牌
   注意：
   此字段可能返回 null，表示取不到有效值。
   此字段结果遮挡污损模糊车牌/异常：包含PlateStatus参数的“遮挡污损模糊车牌”，针对车牌异常，建议参考此字段，更全面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 车牌在图片中的坐标信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateLocation: Array<Coord>;
+    PlateLocation?: Array<Coord>;
     /**
      * 判断车牌是否遮挡：“遮挡污损模糊车牌”和"正常车牌"。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateStatus: string;
+    PlateStatus?: string;
     /**
      * 车牌遮挡的置信度，0-100。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateStatusConfidence: number;
+    PlateStatusConfidence?: number;
     /**
      * 车牌角度。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateAngle: number;
+    PlateAngle?: number;
 }
 /**
  * DetectLabelPro请求参数结构体
@@ -1245,33 +1233,33 @@ export interface DetectLabelBetaResponse {
      * Web网络版标签结果数组。如未选择WEB场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<DetectLabelItem>;
+    Labels?: Array<DetectLabelItem>;
     /**
      * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CameraLabels: Array<DetectLabelItem>;
+    CameraLabels?: Array<DetectLabelItem>;
     /**
      * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlbumLabels: Array<DetectLabelItem>;
+    AlbumLabels?: Array<DetectLabelItem>;
     /**
      * News新闻版标签结果数组。如未选择NEWS场景，则为空。
   新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NewsLabels: Array<DetectLabelItem>;
+    NewsLabels?: Array<DetectLabelItem>;
     /**
      * 非实拍标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoneCamLabels: Array<DetectLabelItem>;
+    NoneCamLabels?: Array<DetectLabelItem>;
     /**
      * 识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocationLabels: Array<Product>;
+    LocationLabels?: Array<Product>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1283,14 +1271,12 @@ export interface DetectLabelBetaResponse {
 export interface DetectEnvelopeResponse {
     /**
      * 一级标签结果数组。识别是否文件封。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstTags: Array<ImageTag>;
+    FirstTags?: Array<ImageTag>;
     /**
      * 二级标签结果数组。识别文件封正反面。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecondTags: Array<ImageTag>;
+    SecondTags?: Array<ImageTag>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1303,11 +1289,11 @@ export interface ImageTag {
     /**
      * 标签内容。
      */
-    Name: string;
+    Name?: string;
     /**
      * 置信度范围在0-100之间。值越高，表示目标为相应结果的可能性越高。
      */
-    Confidence: number;
+    Confidence?: number;
 }
 /**
  * 属性
@@ -1316,11 +1302,11 @@ export interface Attribute {
     /**
      * 属性
      */
-    Type: string;
+    Type?: string;
     /**
      * 属性详情
      */
-    Details: string;
+    Details?: string;
 }
 /**
  * 图片信息
@@ -1329,23 +1315,23 @@ export interface ImageInfo {
     /**
      * 图片名称。
      */
-    EntityId: string;
+    EntityId?: string;
     /**
      * 用户自定义的内容。
      */
-    CustomContent: string;
+    CustomContent?: string;
     /**
      * 图片自定义标签，JSON格式。
      */
-    Tags: string;
+    Tags?: string;
     /**
      * 图片名称。
      */
-    PicName: string;
+    PicName?: string;
     /**
      * 相似度。
      */
-    Score: number;
+    Score?: number;
 }
 /**
  * RecognizeCarPro返回参数结构体
@@ -1371,7 +1357,6 @@ export interface RecognizeCarProResponse {
 export interface DescribeGroupsResponse {
     /**
      * 图库信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Groups?: Array<GroupInfo>;
     /**
@@ -1386,61 +1371,56 @@ export interface CarTagItem {
     /**
      * 车系
      */
-    Serial: string;
+    Serial?: string;
     /**
      * 车辆品牌
      */
-    Brand: string;
+    Brand?: string;
     /**
      * 车辆类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 车辆颜色
      */
-    Color: string;
+    Color?: string;
     /**
      * 车系置信度，0-100
      */
-    Confidence: number;
+    Confidence?: number;
     /**
      * 年份，没识别出年份的时候返回0
      */
-    Year: number;
+    Year?: number;
     /**
      * 车辆在图片中的坐标信息
      */
-    CarLocation: Array<Coord>;
+    CarLocation?: Array<Coord>;
     /**
      * 车牌信息，仅车辆识别（增强版）支持
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateContent: CarPlateContent;
+    PlateContent?: CarPlateContent;
     /**
      * 车牌信息置信度，0-100，仅车辆识别（增强版）支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateConfidence: number;
+    PlateConfidence?: number;
     /**
      * 车辆类型置信度，0-100，仅车辆识别（增强版）支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TypeConfidence: number;
+    TypeConfidence?: number;
     /**
      * 车辆颜色置信度，0-100，仅车辆识别（增强版）支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ColorConfidence: number;
+    ColorConfidence?: number;
     /**
      * 车辆朝向，仅车辆识别（增强版）支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Orientation: string;
+    Orientation?: string;
     /**
      * 车辆朝向置信度，0-100，仅车辆识别（增强版）支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrientationConfidence: number;
+    OrientationConfidence?: number;
 }
 /**
  * DescribeImages返回参数结构体
@@ -1449,15 +1429,15 @@ export interface DescribeImagesResponse {
     /**
      * 图库名称。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 物品ID。
      */
-    EntityId: string;
+    EntityId?: string;
     /**
      * 图片信息。
      */
-    ImageInfos: Array<ImageInfo>;
+    ImageInfos?: Array<ImageInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

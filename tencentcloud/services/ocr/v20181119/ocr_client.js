@@ -1019,12 +1019,12 @@ class Client extends abstract_client_1.AbstractClient {
         </tr>
          <tr>
           <td> ElectronicFlightTicketFull</td>
-          <td> 电子发票(机票行程单)，该子类目前仅支持ofd发票</td>
+          <td> 电子发票(机票行程单)</td>
           <td> 16 </td>
         </tr>
          <tr>
           <td> ElectronicTrainTicketFull</td>
-          <td> 电子发票(铁路电子客票)，该子类目前仅支持ofd发票</td>
+          <td> 电子发票(铁路电子客票)</td>
           <td> 16 </td>
         </tr>
         <tr>

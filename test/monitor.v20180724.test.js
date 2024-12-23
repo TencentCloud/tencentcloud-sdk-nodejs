@@ -688,6 +688,16 @@ it("monitor.v20180724.DeleteSSOAccount", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeRemoteURLs", async function () {
+    try {
+       const data = await client.DescribeRemoteURLs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.UpdatePrometheusAlertGroupState", async function () {
     try {
        const data = await client.UpdatePrometheusAlertGroupState({})
@@ -871,6 +881,16 @@ it("monitor.v20180724.CreatePrometheusAgent", async function () {
 it("monitor.v20180724.SyncPrometheusTemp", async function () {
     try {
        const data = await client.SyncPrometheusTemp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyRemoteURLs", async function () {
+    try {
+       const data = await client.ModifyRemoteURLs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

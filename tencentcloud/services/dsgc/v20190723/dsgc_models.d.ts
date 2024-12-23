@@ -13,12 +13,10 @@ export interface DescribeRuleListResponse {
 export interface TopAsset {
     /**
      * 分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelName?: string;
     /**
      * top数据信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopStat?: Array<TopAssetStat>;
 }
@@ -28,7 +26,6 @@ export interface TopAsset {
 export interface DescribeDSPADiscoveryTaskTablesResponse {
     /**
      * 分类分级扫描表集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DSPATableInfo>;
     /**
@@ -42,17 +39,14 @@ export interface DescribeDSPADiscoveryTaskTablesResponse {
 export interface DescribeCOSAssetSensitiveDistributionResponse {
     /**
      * cos的涉敏资产
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CosAsset?: CosAsset;
     /**
      * 涉敏top
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopAsset?: Array<TopAsset>;
     /**
      * cos资产详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CosDetail?: Array<AssetCosDetail>;
     /**
@@ -73,10 +67,6 @@ export interface ModifyDSPAAssessmentRiskTemplateRequest {
      */
     TemplateName: string;
     /**
-     * 模板的描述
-     */
-    TemplateDescription: string;
-    /**
      * 模板id
      */
     TemplateId: number;
@@ -84,6 +74,10 @@ export interface ModifyDSPAAssessmentRiskTemplateRequest {
      * 修改的风险等级id
      */
     RiskLevelId: number;
+    /**
+     * 模板的描述
+     */
+    TemplateDescription?: string;
     /**
      * 脆弱项列表
      */
@@ -103,7 +97,6 @@ export interface AssessmentControlItem {
     ItemName?: string;
     /**
      * 评估项描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -128,7 +121,6 @@ export interface AssessmentControlItem {
     Status?: string;
     /**
      * 评估项关联的模板数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateCount?: number;
 }
@@ -138,17 +130,14 @@ export interface AssessmentControlItem {
 export interface DescribeESAssetSensitiveDistributionResponse {
     /**
      * ES的资产统计数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ESAsset?: ESAsset;
     /**
      * 涉敏top数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopAsset?: Array<TopAsset>;
     /**
      * ES的详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ESDetail?: Array<ESAssetDBDetail>;
     /**
@@ -162,7 +151,6 @@ export interface DescribeESAssetSensitiveDistributionResponse {
 export interface DescribeDSPARDBDataAssetDetailResponse {
     /**
      * RDB关系数据库敏感数据资产详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: Array<DspaRDBDataAssetDetail>;
     /**
@@ -231,12 +219,10 @@ export interface DescribeDSPAAssessmentRiskLevelDetailResponse {
     RiskLevelName?: string;
     /**
      * 风险级别描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelDescription?: string;
     /**
      * 分类分级id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyComplianceId?: number;
     /**
@@ -245,7 +231,6 @@ export interface DescribeDSPAAssessmentRiskLevelDetailResponse {
     IdentifyComplianceName?: string;
     /**
      * 风险数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelMatrix?: Array<RiskLevelMatrix>;
     /**
@@ -310,7 +295,6 @@ export interface CreateDSPADiscoveryTaskResponse {
     TaskId?: number;
     /**
      * 扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultId?: number;
     /**
@@ -404,9 +388,8 @@ export interface DescribeReportTaskDownloadUrlRequest {
 export interface DspaFieldResultDataSample {
     /**
      * 数据样本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSample: string;
+    DataSample?: string;
 }
 /**
  * ModifyClassificationRule请求参数结构体
@@ -490,7 +473,6 @@ export interface DSPACosMetaDataInfo {
 export interface AssessmentTemplate {
     /**
      * id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
@@ -503,7 +485,6 @@ export interface AssessmentTemplate {
     TemplateName?: string;
     /**
      * 描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -532,17 +513,14 @@ export interface AssessmentTemplate {
     Status?: string;
     /**
      * 支持的数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportDataSource?: Array<string>;
     /**
      * 是否包含攻击面风险
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsASMTemplate?: boolean;
     /**
      * 合规组id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyComplianceId?: number;
 }
@@ -603,32 +581,26 @@ export interface ModifyDSPATaskResultRequest {
 export interface RDBAsset {
     /**
      * DB总数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbNums?: number;
     /**
      * 敏感DB数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveDbNums?: number;
     /**
      * 表数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableNums?: number;
     /**
      * 敏感表的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveTableNums?: number;
     /**
      * 字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感的字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
 }
@@ -638,82 +610,66 @@ export interface RDBAsset {
 export interface DescribeAssetOverviewResponse {
     /**
      * 数据库实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBInstanceNums?: number;
     /**
      * 数据库个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBNums?: number;
     /**
      * 表的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableNums?: number;
     /**
      * 字段个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 数据库实例的分布情况
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBInstanceDistribution?: Array<Note>;
     /**
      * db分布情况
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBDistribution?: Array<Note>;
     /**
      * cos桶的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketNums?: number;
     /**
      * 文件个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileNums?: number;
     /**
      * 用于对用户进行提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * es实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EsInstanceNums?: number;
     /**
      * es索引数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EsIndexNums?: number;
     /**
      * es字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EsFieldNums?: number;
     /**
      * mongo实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoInstanceNums?: number;
     /**
      * mongo数据库数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoDbNums?: number;
     /**
      * mongo集合数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoColNums?: number;
     /**
      * mongo字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoFieldNums?: number;
     /**
@@ -735,67 +691,54 @@ export interface ReportInfo {
     ReportName?: string;
     /**
      * 报告类型（AssetSorting:资产梳理）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportType?: string;
     /**
      * 报告周期（0单次 1每天 2每周 3每月）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportPeriod?: number;
     /**
      * 执行计划 （0:单次报告 1:定时报告）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportPlan?: number;
     /**
      * 报告导出状态（Success 成功, Failed 失败, InProgress 进行中）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportStatus?: string;
     /**
      * 任务下次启动时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimingStartTime?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FinishedTime?: string;
     /**
      * 子账号uin
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubUin?: string;
     /**
      * 失败信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedMessage?: string;
     /**
      * 是否启用（0：否 1：是）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enable?: number;
     /**
      * 识别模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceName?: string;
     /**
      * 进度百分比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgressPercent?: number;
     /**
      * 报告模版名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportTemplateName?: string;
 }
@@ -868,17 +811,14 @@ export interface DspaCOSDiscoveryTask {
     GeneralRuleSetEnable?: number;
     /**
      * 任务最新的一次执行结果信息，该字段用于查询任务列表接口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: ScanTaskResult;
     /**
      * 定时开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimingStartTime?: string;
     /**
      * 关联分类模板是否更新
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceUpdate?: boolean;
 }
@@ -902,9 +842,8 @@ export interface COSDataRule {
 export interface DSPADataSourceDbInfo {
     /**
      * 数据库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbName: string;
+    DbName?: string;
 }
 /**
  * DescribeMongoAssetSensitiveDistribution返回参数结构体
@@ -912,17 +851,14 @@ export interface DSPADataSourceDbInfo {
 export interface DescribeMongoAssetSensitiveDistributionResponse {
     /**
      * mongo的资产统计数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoAsset?: MongoAsset;
     /**
      * 涉敏top数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopAsset?: Array<TopAsset>;
     /**
      * mongo的详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoDetail?: Array<MongoAssetDBDetail>;
     /**
@@ -944,12 +880,10 @@ export interface ComplianceGroupDetail {
     Name?: string;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 模板类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceGroupType?: number;
     /**
@@ -962,17 +896,14 @@ export interface ComplianceGroupDetail {
     LevelGroupName?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
      * 是否开启别名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAlias?: boolean;
 }
@@ -1012,7 +943,6 @@ export interface DbTaskResult {
     ResultDescription?: string;
     /**
      * 错误信息描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrDescription?: ErrDescription;
     /**
@@ -1030,27 +960,22 @@ export interface DbTaskResult {
 export interface RuleDistribution {
     /**
      * 规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
     /**
      * 分级id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelName?: string;
     /**
      * 规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleCnt?: number;
 }
@@ -1082,7 +1007,6 @@ export interface UpdateDSPASelfBuildResourceResponse {
 export interface DescribeDSPAAssessmentRiskDealedTrendResponse {
     /**
      * 趋势统计结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<RiskDealedTrendItem>;
     /**
@@ -1155,17 +1079,14 @@ export interface DisableDSPAMetaResourceAuthRequest {
 export interface RiskMatrixLevel {
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 就是id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Score?: number;
 }
@@ -1206,7 +1127,7 @@ export interface CreateDSPAComplianceGroupResponse {
     /**
      * 合规组ID
      */
-    ComplianceGroupId: number;
+    ComplianceGroupId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1234,10 +1155,9 @@ export interface DeleteDSPADiscoveryTaskRequest {
  */
 export interface DescribeDSPAAssessmentRiskDatasourceTop5Response {
     /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 风险值
      */
-    Items: Array<RiskItem>;
+    Items?: Array<RiskItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1355,19 +1275,27 @@ export interface ScanTaskResult {
     /**
      * 任务最新一次运行结果ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 任务扫描结束的时间，格式如：2021-12-12 12:12:12
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务状态，-1待触发 0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 扫描任务结果展示，如果扫描失败，则显示失败原因
      */
-    Result: string;
+    Result?: string;
+    /**
+     * 结果描述
+     */
+    ResultDescription?: string;
+    /**
+     * 结果建议
+     */
+    Suggestion?: string;
 }
 /**
  * DescribeDSPADiscoveryRules请求参数结构体
@@ -1404,54 +1332,44 @@ export interface DescribeDSPADiscoveryRulesRequest {
 export interface DspaRDBDataAssetCount {
     /**
      * 数组资产类型，0代表关系型数据库资产，1代表对象存储COS资产
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataAssetType: number;
+    DataAssetType?: number;
     /**
      * 已扫描的数据库的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalDbCnt: number;
+    TotalDbCnt?: number;
     /**
      * 数据库表的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalTableCnt: number;
+    TotalTableCnt?: number;
     /**
      * 敏感数据类型个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveCategoryCnt: number;
+    SensitiveCategoryCnt?: number;
     /**
      * 敏感字段的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveFieldCnt: number;
+    SensitiveFieldCnt?: number;
     /**
      * 敏感等级分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveLevel: Array<SensitiveLevel>;
+    SensitiveLevel?: Array<SensitiveLevel>;
     /**
      * 敏感数据库的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveDbCnt: number;
+    SensitiveDbCnt?: number;
     /**
      * 敏感数据库表的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveTableCnt: number;
+    SensitiveTableCnt?: number;
     /**
      * 扫描字段的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalFieldCnt: number;
+    TotalFieldCnt?: number;
     /**
      * 数据分类分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryDistributed: Array<DspaDataCategoryDistributed>;
+    CategoryDistributed?: Array<DspaDataCategoryDistributed>;
 }
 /**
  * DeleteDSPACOSDiscoveryTask请求参数结构体
@@ -1472,34 +1390,28 @@ export interface DeleteDSPACOSDiscoveryTaskRequest {
 export interface DspaDiscoveryComplianceGroupRule {
     /**
      * 敏感数据识别规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 敏感数据识别规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 敏感数据分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 敏感数据分级ID, 目前只支持高、中、低三级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelId: number;
+    LevelId?: number;
     /**
      * 合规组对应的分类信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryName: string;
+    CategoryName?: string;
     /**
      * 分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelRiskName: string;
+    LevelRiskName?: string;
 }
 /**
  * CreateDSPAAssessmentTask返回参数结构体
@@ -1529,7 +1441,6 @@ export interface DescribeClassificationRuleCountResponse {
 export interface DescribeDSPAESDataAssetByComplianceIdResponse {
     /**
      * 概览统计结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Stats?: ESDataAssetCountDto;
     /**
@@ -1585,7 +1496,6 @@ export interface DspaDiscoveryTaskDetail {
     Name?: string;
     /**
      * 任务描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -1602,27 +1512,22 @@ export interface DspaDiscoveryTaskDetail {
     Enable?: number;
     /**
      * 元数据对象信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceInfo?: DspaDiscoveryTaskDataSource;
     /**
      * 通用规则集开关，0 关闭，1 启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GeneralRuleSetEnable?: number;
     /**
      * 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 该任务中用户选择的合规组信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 定时开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimingStartTime?: string;
 }
@@ -1683,22 +1588,18 @@ export interface DspaDiscoveryTaskDataSource {
     Condition?: string;
     /**
      * 代理地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyAddress?: Array<string>;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
 }
@@ -1790,24 +1691,20 @@ export interface DeleteDSPAAssessmentTaskResponse {
 export interface DspaDiscoveryComplianceGroupRuleInfo {
     /**
      * 敏感数据识别规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 敏感数据识别规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 敏感数据分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 敏感数据分级ID, 目前只支持高、中、低三级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelId: number;
+    LevelId?: number;
 }
 /**
  * CreateDSPASelfBuildMetaResource请求参数结构体
@@ -1980,14 +1877,16 @@ export interface DspaDiscoveryTaskResultDetail {
     LevelRiskScore?: number;
     /**
      * 保护措施
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SafeGuard?: DspaSafeGuard;
     /**
      * 分类路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryFullPath?: string;
+    /**
+     * 模式名
+     */
+    SchemaName?: string;
 }
 /**
  * DescribeLeafClassification请求参数结构体
@@ -2024,47 +1923,38 @@ export interface DescribeDSPAAssessmentTemplatesRequest {
 export interface HighRiskAssetsDetail {
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 资产对象名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetsName?: string;
     /**
      * 高风险个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HighRiskCount?: number;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskType?: string;
     /**
      * 总的风险个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalRiskCount?: number;
     /**
      * 风险面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSide?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
 }
@@ -2077,17 +1967,15 @@ export interface DspaSafeGuard {
   UNSET 未设置
   DISABLE 规则设置未启用
   ENABLE 规则设置并启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Encrypt: string;
+    Encrypt?: string;
     /**
      * 脱敏状态，可取值如下：
   UNSET 未设置
   DISABLE 规则设置未启用
   ENABLE 规则设置并启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desensitization: string;
+    Desensitization?: string;
 }
 /**
  * 某个分级单个信息
@@ -2110,12 +1998,10 @@ export interface DatagovRuleExtendParameter {
      * 扩展参数名称，目前支持如下两个扩展属性名称：
   IsFullWordMatch，表示是否全文匹配，该Name对应的Value可取值为"true"或"false":，默认值为"false"，
   IsIgnoreCase，表示是否忽略大小写，该Name对应的Value可取值为"true"或"false"，默认值为"true"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 扩展参数值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
 }
@@ -2134,22 +2020,18 @@ export interface ModifyDSPAClusterInfoResponse {
 export interface DiscoveryCondition {
     /**
      * RDB实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RDBInstances?: Array<RDBInstance>;
     /**
      * COS实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     COSInstances?: Array<COSInstance>;
     /**
      * Mongo实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NOSQLInstances?: Array<NOSQLInstance>;
     /**
      * ES实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ESInstances?: Array<ESInstance>;
 }
@@ -2189,12 +2071,10 @@ export interface DescribeDSPAAssessmentRiskTemplateDetailRequest {
 export interface DescribeDSPADiscoveryTaskResultDetailResponse {
     /**
      * 扫描结果详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DspaDiscoveryTaskResultDetail>;
     /**
      * 符合条件的扫描结果详情记录数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2217,27 +2097,22 @@ export interface ModifyDSPACategoryRelationResponse {
 export interface RiskLevelMatrix {
     /**
      * 存储id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 分类分级levelID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveLevelId?: number;
     /**
      * 分类分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveLevelName?: string;
     /**
      * 漏洞级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulnerabilityLevel?: string;
     /**
      * 风险级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevel?: string;
 }
@@ -2260,17 +2135,14 @@ export interface ScanTaskComplianceInfo {
 export interface DescribeDSPAAssessmentRiskDistributionOverviewResponse {
     /**
      * 风险类型分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskTypeDistribution?: Array<Note>;
     /**
      * 风险详情分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskDetailDistribution?: Array<Note>;
     /**
      * 风险资产详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskAssetsDistribution?: Array<Note>;
     /**
@@ -2320,10 +2192,6 @@ export interface CreateDSPACOSDiscoveryTaskRequest {
      */
     Bucket: string;
     /**
-     * 通用规则集开关，0 关闭，1 启用
-     */
-    GeneralRuleSetEnable: number;
-    /**
      * 执行计划， 0立即 1定时，选择“立即”时，扫描周期只能选择单次。
      */
     Plan: number;
@@ -2348,6 +2216,10 @@ export interface CreateDSPACOSDiscoveryTaskRequest {
      */
     Description?: string;
     /**
+     * 通用规则集开关，0 关闭，1 启用
+     */
+    GeneralRuleSetEnable?: number;
+    /**
      * 合规组ID列表，最多支持添加5个
      */
     ComplianceGroupIds?: Array<number | bigint>;
@@ -2364,12 +2236,10 @@ export interface DspaDiscoveryCOSDataRule {
     /**
      * 只能取and 、or两个值其中之一，and：字段和内容同时满足，or：字段和内容满足其一.
   默认值为or
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator?: string;
     /**
      * 规则内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Contents?: Array<DspaDiscoveryDataContent>;
 }
@@ -2393,14 +2263,12 @@ export interface DspaDiscoveryDataContent {
     /**
      * 规则内容，可以是正则规则，关键词，
   忽略词扥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleContent?: string;
     /**
      * 是否区分大小写
   false: 不区分大小写
   true:区分大小写
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsIgnoreCase?: boolean;
 }
@@ -2507,7 +2375,6 @@ export interface AuthorizeDSPAMetaResourcesResponse {
     DspaId?: string;
     /**
      * 授权结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Results?: Array<DspaTaskResult>;
     /**
@@ -2521,37 +2388,30 @@ export interface AuthorizeDSPAMetaResourcesResponse {
 export interface DspaDiscoveryRuleDetail {
     /**
      * 规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 规则来源，取值：0 内置, 1 自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: number;
     /**
      * RDB规则详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RDBRules?: DspaDiscoveryRDBRules;
     /**
      * COS规则详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     COSRules?: DspaDiscoveryCOSRules;
     /**
      * 0关闭，1开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }
@@ -2626,44 +2486,36 @@ export interface DspaCOSDataAssetDetail {
     RuleId?: number;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryId?: number;
     /**
      * 分级ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 文件扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileResultId?: number;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 分类路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryFullPath?: string;
     /**
      * 0-系统识别
   1-人工识别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyType?: number;
     /**
      * 0-系统识别
   1-人工识别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckStatus?: number;
 }
@@ -2690,7 +2542,6 @@ export interface DescribeDSPAAssessmentRiskLevelListResponse {
     TotalCount?: number;
     /**
      * 风险等级列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelList?: Array<RiskLevelRisk>;
     /**
@@ -2719,10 +2570,6 @@ export interface CreateDSPADiscoveryTaskRequest {
      */
     Enable: number;
     /**
-     * 通用规则集开关，0 关闭，1 启用
-     */
-    GeneralRuleSetEnable: number;
-    /**
      * 执行计划， 0立即 1定时，选择“立即”时，扫描周期只能选择单次
      */
     Plan: number;
@@ -2745,6 +2592,11 @@ export interface CreateDSPADiscoveryTaskRequest {
   selfbuilt-db 表示自建数据库
      */
     DataSourceType: string;
+    /**
+     * 通用规则集开关，0 关闭，1 启用
+     * @deprecated
+     */
+    GeneralRuleSetEnable?: number;
     /**
      * 任务描述，最大长度为1024个字符
      */
@@ -2781,17 +2633,14 @@ export interface CreateDSPADiscoveryTaskRequest {
 export interface PrivilegeRisk {
     /**
      * 账户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountName?: Array<string>;
     /**
      * 表名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableName?: string;
     /**
      * 说明
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -2801,49 +2650,40 @@ export interface PrivilegeRisk {
 export interface DspaCOSDataAssetCount {
     /**
      * 数组资产类型，0代表关系型数据库资产，1代表对象存储COS资产
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataAssetType: number;
+    DataAssetType?: number;
     /**
      * 已扫描的存储桶的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalBucketCnt: number;
+    TotalBucketCnt?: number;
     /**
      * 对象总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalObjectCnt: number;
+    TotalObjectCnt?: number;
     /**
      * 敏感数据类型个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveCategoryCnt: number;
+    SensitiveCategoryCnt?: number;
     /**
      * 敏感数据条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveDataCnt: number;
+    SensitiveDataCnt?: number;
     /**
      * 敏感等级分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveLevel: Array<SensitiveLevel>;
+    SensitiveLevel?: Array<SensitiveLevel>;
     /**
      * 敏感存储桶个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveBucketCnt: number;
+    SensitiveBucketCnt?: number;
     /**
      * 敏感对象个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SensitiveObjectCnt: number;
+    SensitiveObjectCnt?: number;
     /**
      * 数据分类分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryDistributed: Array<DspaDataCategoryDistributed>;
+    CategoryDistributed?: Array<DspaDataCategoryDistributed>;
 }
 /**
  * ES扫描任务结果详情
@@ -2851,57 +2691,46 @@ export interface DspaCOSDataAssetCount {
 export interface ESTaskResultDetail {
     /**
      * id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 任务id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 字段名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldName?: string;
     /**
      * 规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
     /**
      * 分类id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryId?: number;
     /**
      * 分类名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryName?: string;
     /**
      * 多级分类的路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryArr?: Array<string>;
     /**
      * 分级id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelName?: string;
     /**
      * 分级分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelRiskScore?: number;
 }
@@ -2961,7 +2790,6 @@ export interface DescribeESAssetSensitiveDistributionRequest {
 export interface DeleteCosMetaResourceResponse {
     /**
      * 结果集合。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Results?: Array<DspaTaskResult>;
     /**
@@ -3077,7 +2905,7 @@ export interface DescribeDSPAESDiscoveryTaskResultDetailRequest {
      */
     LevelId?: number;
     /**
-     * 索引名称
+     * 数据库名称
      */
     DbName?: string;
 }
@@ -3134,22 +2962,18 @@ export interface ModifyLevelInfoResponse {
 export interface DspaDiscoveryRDBRules {
     /**
      * 规则状态；0 不启用, 1 启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: number;
     /**
      * 只能取and 、or两个值其中之一，and：字段和内容同时满足，or：字段和内容满足其一
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchOperator: string;
     /**
      * 字段名包含规则，最大支持选择9项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetaRule: DspaDiscoveryDataRules;
     /**
      * 内容包含规则，最大支持选择9项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ContentRule: DspaDiscoveryDataRules;
 }
@@ -3159,7 +2983,6 @@ export interface DspaDiscoveryRDBRules {
 export interface DescribeDSPACOSDataAssetByComplianceIdResponse {
     /**
      * 符合条件的COS存储对象的敏感数据资产统计记录
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Stats?: DspaCOSDataAssetCount;
@@ -3183,9 +3006,8 @@ export interface CreateDSPAAssessmentRiskTemplateResponse {
 export interface DescribeDSPACOSDataAssetBucketsResponse {
     /**
      * COS对象存储敏感数据资产已扫描的桶集合。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Buckets: Array<string>;
+    Buckets?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3296,27 +3118,22 @@ export interface VerifyDSPADiscoveryRuleRequest {
 export interface RiskLevelRisk {
     /**
      * 风险id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 风险等级列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelName?: string;
     /**
      * 风险级别描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelDescription?: string;
     /**
      * 引用的分类分级模板
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyComplianceName?: string;
     /**
      * 类型，区分自定义还是系统内置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
 }
@@ -3361,12 +3178,10 @@ export interface DescribeDSPAAssessmentRiskAmountOverviewResponse {
 export interface CreateAssetSortingReportRetryTaskResponse {
     /**
      * 任务id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportTaskId?: number;
     /**
      * 提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -3380,14 +3195,12 @@ export interface CreateAssetSortingReportRetryTaskResponse {
 export interface DescribeDSPACategoriesResponse {
     /**
      * 敏感数据分类列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DataCategory>;
+    Items?: Array<DataCategory>;
     /**
      * 符合条件的敏感数据分类数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3403,7 +3216,6 @@ export interface DescribeDSPADiscoveryRulesResponse {
     TotalCount?: number;
     /**
      * 规则集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DspaDiscoveryRuleDetail>;
     /**
@@ -3439,12 +3251,10 @@ export interface StopDSPADiscoveryTaskRequest {
 export interface RiskSideDistributed {
     /**
      * 风险面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssessmentRiskSide?: Note;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssessmentRisk?: Array<Note>;
 }
@@ -3493,32 +3303,26 @@ export interface DecribeSuggestRiskLevelMatrixRequest {
 export interface AssetCosDetail {
     /**
      * 桶的名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataType?: string;
     /**
      * 文件的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileNums?: number;
     /**
      * 敏感的文件个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFileNums?: number;
     /**
      * 敏感分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DistributionData?: Array<Note>;
     /**
      * cos文件的敏感数据个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MatchedNum?: number;
 }
@@ -3528,32 +3332,26 @@ export interface AssetCosDetail {
 export interface MongoAsset {
     /**
      * DB总数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbNums?: number;
     /**
      * 敏感DB数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveDbNums?: number;
     /**
      * 集合数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ColNums?: number;
     /**
      * 敏感集合的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveColNums?: number;
     /**
      * 字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感的字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
 }
@@ -3567,97 +3365,78 @@ export interface RiskItemInfo {
     Id?: number;
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
     /**
      * 资源地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 资产名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetName?: string;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskType?: string;
     /**
      * 风险项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskName?: string;
     /**
      * 风险级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevel?: string;
     /**
      * 风险描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskDescription?: string;
     /**
      * 建议措施
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SuggestAction?: string;
     /**
      * 安全产品（可能有多个）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityProduct?: Array<SecurityProduct>;
     /**
      * 状态(waiting:待处理，processing:处理中，finished:已处理，ignored:已忽略)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanTime?: string;
     /**
      * 最后处置时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastProcessTime?: string;
     /**
      * 分类分级合规组Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyComplianceId?: number;
     /**
      * 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ItemSubType?: string;
     /**
      * 风险面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSide?: string;
     /**
      * API安全风险链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     APIRiskLinkURL?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -3667,7 +3446,6 @@ export interface RiskItemInfo {
 export interface DescribeDSPAAssessmentRiskProcessHistoryResponse {
     /**
      * 处理的历史
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProcessHistory?: Array<ProcessHistory>;
     /**
@@ -3681,12 +3459,10 @@ export interface DescribeDSPAAssessmentRiskProcessHistoryResponse {
 export interface DescribeDSPAESDataAssetDetailResponse {
     /**
      * 总的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 概览详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: Array<ESDataAssetDetail>;
     /**
@@ -3701,11 +3477,11 @@ export interface DescribeDSPAAssessmentTasksResponse {
     /**
      * 符合条件的评估任务数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 评估任务列表
      */
-    Items: Array<AssessmentTask>;
+    Items?: Array<AssessmentTask>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3735,7 +3511,7 @@ export interface CreateDSPALevelGroupResponse {
     /**
      * 分级组ID
      */
-    LevelGroupId: number;
+    LevelGroupId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3811,17 +3587,14 @@ export interface ModifyDSPADiscoveryRuleRequest {
 export interface DescribeRDBAssetSensitiveDistributionResponse {
     /**
      * rdb的资产统计数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RDBAsset?: RDBAsset;
     /**
      * 涉敏top数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopAsset?: Array<TopAsset>;
     /**
      * rdb的详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RDBDetail?: Array<AssetDBDetail>;
     /**
@@ -3865,7 +3638,6 @@ export interface CreateDSPAComplianceRulesRequest {
 export interface DescribeReportTaskDownloadUrlResponse {
     /**
      * 下载链接集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownloadUrlSet?: Array<string>;
     /**
@@ -3880,11 +3652,11 @@ export interface DescribeDSPAAssessmentRisksResponse {
     /**
      * 符合条件的评估风险项数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 评估风险项列表
      */
-    Items: Array<AssessmentRisk>;
+    Items?: Array<AssessmentRisk>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3905,17 +3677,14 @@ export interface CreateClassificationRuleResponse {
 export interface DbInfo {
     /**
      * 数据库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbName?: string;
     /**
      * 绑定的状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidStatus?: string;
     /**
      * 绑定的类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindType?: string;
 }
@@ -3934,12 +3703,10 @@ export interface ModifyClassificationRuleResponse {
 export interface CreateIdentifyRuleAnotherNameResponse {
     /**
      * 创建的别名规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasRuleId?: number;
     /**
      * 别名规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasRuleName?: string;
     /**
@@ -3953,7 +3720,6 @@ export interface CreateIdentifyRuleAnotherNameResponse {
 export interface DescribeDSPACategoryTreeResponse {
     /**
      * 分类树json
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultJson?: string;
     /**
@@ -3988,87 +3754,74 @@ export interface DspaDiscoveryCOSTaskResultDetail {
     TaskId?: number;
     /**
      * 扫描File结果详情ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileResultId?: number;
     /**
      * 所属桶名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketName?: string;
     /**
      * 所属文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileName?: string;
     /**
      * 敏感数据分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryId?: number;
     /**
      * 敏感数据分类名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryName?: string;
     /**
      * 敏感数据分级ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 敏感数据分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelName?: string;
     /**
      * KMS加密，true or false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KMSEncrypted?: boolean;
     /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
     /**
      * 规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 敏感数据分级分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelRiskScore?: number;
     /**
      * 文件大小，单位为KB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSize?: number;
     /**
      * 文件类型，如csv，txt
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileType?: string;
     /**
      * 敏感数据出现次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveDataCount?: number;
     /**
      * 分类树路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryFullPath?: Array<string>;
     /**
+     * 分类树路径
+     */
+    CategoryArr?: Array<string>;
+    /**
      * 合规组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceId?: number;
     /**
      * 结果id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultId?: number;
 }
@@ -4277,7 +4030,6 @@ export interface ListDSPACosMetaResourcesRequest {
 export interface DescribeDSPATaskResultDataSampleResponse {
     /**
      * 数据样本列表，最多10条数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DspaFieldResultDataSample>;
     /**
@@ -4312,14 +4064,12 @@ export interface CreateDSPALevelGroupRequest {
 export interface DescribeDSPAComplianceGroupsResponse {
     /**
      * 合规组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaDiscoveryComplianceGroupInfo>;
+    Items?: Array<DspaDiscoveryComplianceGroupInfo>;
     /**
      * 符合条件的合规组列表数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4353,22 +4103,18 @@ export interface DeleteDSPACOSDiscoveryTaskResponse {
 export interface ProcessHistory {
     /**
      * 处理时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Time?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 处理人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Handler?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
 }
@@ -4387,12 +4133,10 @@ export interface DescribeDSPAAssessmentRiskDealedOverviewRequest {
 export interface AccountRisk {
     /**
      * id（可不参考）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
     /**
      * 风险账户
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskAccount?: string;
 }
@@ -4402,7 +4146,6 @@ export interface AccountRisk {
 export interface DescribeDSPACategoryTreeWithRulesResponse {
     /**
      * 分类树json
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResultJson?: string;
     /**
@@ -4463,7 +4206,6 @@ export interface DataRules {
     Operator: string;
     /**
      * 规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Contents: Array<DataRule>;
 }
@@ -4486,22 +4228,18 @@ export interface DescribeDSPAAssessmentProcessingRiskOverviewRequest {
 export interface CosAsset {
     /**
      * 桶的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketNums?: number;
     /**
      * 敏感桶的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveBucketNums?: number;
     /**
      * 文件个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileNums?: number;
     /**
      * 敏感文件的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFileNums?: number;
 }
@@ -4511,7 +4249,6 @@ export interface CosAsset {
 export interface DescribeDSPAAssessmentRiskSideListResponse {
     /**
      * 风险面列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSideItmeList?: Array<Note>;
     /**
@@ -4598,7 +4335,6 @@ export interface RestartDSPAAssessmentTaskResponse {
 export interface DescribeDSPAAssessmentHighRiskTop10OverviewResponse {
     /**
      * 含高风险资产TOP10的列表数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetsList?: Array<HighRiskAssetsDetail>;
     /**
@@ -4612,9 +4348,8 @@ export interface DescribeDSPAAssessmentHighRiskTop10OverviewResponse {
 export interface DSPATableInfo {
     /**
      * 表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TableName: string;
+    TableName?: string;
 }
 /**
  * DSPA评估风险项
@@ -4626,7 +4361,6 @@ export interface AssessmentRisk {
     RiskId?: string;
     /**
      * 风险项描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskDescription?: string;
     /**
@@ -4675,37 +4409,30 @@ export interface AssessmentRisk {
     RelatedAsset?: string;
     /**
      * 风险涉及资产id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 风险涉及资产名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 资产名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetName?: string;
     /**
      * 建议使用安全产品
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityProduct?: Array<SecurityProduct>;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskType?: string;
     /**
      * 风险面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSide?: string;
     /**
      * 数据源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
 }
@@ -4747,69 +4474,60 @@ export interface DspaRDBDataAssetDetail {
     LevelRiskName?: string;
     /**
      * 分级风险分数，1-10，最小值为1，最大值为10
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelRiskScore?: number;
     /**
      * 可信分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrustedScore?: string;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 字段扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldResultId?: string;
     /**
      * 规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 分级ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryId?: number;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 保护措施
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SafeGuard?: DspaSafeGuard;
     /**
      * 分类路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryFullPath?: string;
     /**
      * 0.系统识别，1人工打标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyType?: number;
     /**
      * 0未核查 1已核查
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckStatus?: number;
     /**
      * 0非敏感，1敏感
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSensitiveData?: number;
+    /**
+     * 模式名
+     */
+    SchemaName?: string;
 }
 /**
  * 敏感数据识别规则
@@ -4854,12 +4572,10 @@ export interface EnableTrialVersionResponse {
 export interface DSPAMetaType {
     /**
      * 元数据类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MetaType?: string;
     /**
      * 支持的此元数据类型的地域列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Regions?: Array<string>;
     /**
@@ -4867,7 +4583,6 @@ export interface DSPAMetaType {
   account    -- 账户名密码授权，账户的最高只读权限需要由用户自行赋予；
   automatic -- 一键授权，由DSPA自动生成账户名密码并自动在实例中给账户名赋予最高只读权限；
   如果此列表为空，表明此类资源不支持以上的授权机制，无法通过后台进行授权。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportedAuthTypes?: Array<string>;
 }
@@ -4881,9 +4596,8 @@ export declare type ModifyStandardInfoRequest = null;
 export interface DescribeDSPAComplianceGroupDetailResponse {
     /**
      * 模板详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: ComplianceGroupDetail;
+    Detail?: ComplianceGroupDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4950,13 +4664,12 @@ export interface DescribeDSPAAssessmentTemplatesResponse {
 export interface DescribeDSPACOSTaskResultDetailResponse {
     /**
      * 扫描结果详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaDiscoveryCOSTaskResultDetail>;
+    Items?: Array<DspaDiscoveryCOSTaskResultDetail>;
     /**
      * 符合条件的详情数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5050,7 +4763,6 @@ export interface DspaDiscoveryTaskDbResult {
     EndTime?: string;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
@@ -5059,22 +4771,18 @@ export interface DspaDiscoveryTaskDbResult {
     Status?: number;
     /**
      * DB扫描结果错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorInfo?: string;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 敏感字段数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveField?: number;
     /**
      * 总的字段数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalField?: number;
 }
@@ -5154,12 +4862,10 @@ export interface DescribeDSPAAssessmentRiskDatasourceTop5Request {
 export interface DspaDiscoveryDataRules {
     /**
      * 操作符；只能取and, or的其中一种
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator: string;
     /**
      * 规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Contents: Array<DspaDiscoveryDataRule>;
 }
@@ -5182,12 +4888,10 @@ export interface DeleteDSPACOSDiscoveryTaskResultRequest {
 export interface DescribeDSPAESDiscoveryTaskResultDetailResponse {
     /**
      * ES扫描结果详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ESTaskResultDetail>;
     /**
      * 符合条件的扫描结果详情记录数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -5201,22 +4905,18 @@ export interface DescribeDSPAESDiscoveryTaskResultDetailResponse {
 export interface ESAsset {
     /**
      * 索引总数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IndexNums?: number;
     /**
      * 敏感索引的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveIndexNums?: number;
     /**
      * 字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感的字段数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
 }
@@ -5272,12 +4972,10 @@ export interface AuthorizeDSPAMetaResourcesRequest {
 export interface DBInstanceInfo {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
      * 数据源绑定的db信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbInfos?: Array<DbInfo>;
 }
@@ -5301,7 +4999,6 @@ export interface AssessmentTask {
     /**
      * 评估任务的自增ID
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskUid: number;
     /**
@@ -5346,7 +5043,6 @@ export interface AssessmentTask {
     RiskCount: number;
     /**
      * 评估任务完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FinishedTime: string;
     /**
@@ -5363,7 +5059,6 @@ export interface AssessmentTask {
     RiskCountInfoList: Array<RiskCountInfo>;
     /**
      * 数据源信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscoveryCondition: DiscoveryCondition;
     /**
@@ -5372,12 +5067,10 @@ export interface AssessmentTask {
     ErrorInfo: string;
     /**
      * 模板主键id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateUid: number;
     /**
      * 进度百分比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProgressPercent: number;
 }
@@ -5493,17 +5186,14 @@ export interface DspaCOSDiscoveryTaskDetail {
     GeneralRuleSetEnable?: number;
     /**
      * 当创建任务时，用户打开了通用规则集开关，则该字段就会保存默认合规组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 该任务中用户选择的合规组信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomComplianceInfo?: Array<ScanTaskComplianceInfo>;
     /**
      * 定时开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimingStartTime?: string;
 }
@@ -5513,22 +5203,18 @@ export interface DspaCOSDiscoveryTaskDetail {
 export interface DescribeSensitiveCOSDataDistributionResponse {
     /**
      * 分级分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelDistribution?: Array<Note>;
     /**
      * 分类分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryDistribution?: Array<Note>;
     /**
      * 规则分布详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleDistribution?: Array<RuleDistribution>;
     /**
      * 计算占比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveDataNum?: number;
     /**
@@ -5579,17 +5265,15 @@ export interface CreateDSPAAssessmentRiskTemplateRequest {
     TemplateDescription?: string;
 }
 /**
- * 评估模版的详情数据
+ * 评估模板的详情数据
  */
 export interface TemplateInfo {
     /**
      * 模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId: number;
     /**
      * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateName: string;
 }
@@ -5599,9 +5283,8 @@ export interface TemplateInfo {
 export interface DescribeDSPACOSDiscoveryTaskFilesResponse {
     /**
      * 文件列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Files: Array<string>;
+    Files?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5755,12 +5438,10 @@ export interface DspaUserResourceMeta {
     ResourceAuthAccount?: string;
     /**
      * 实例类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
      * 实例值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceValue?: string;
     /**
@@ -5769,7 +5450,6 @@ export interface DspaUserResourceMeta {
     GovernAuthStatus?: number;
     /**
      * 授权范围：all - 授权整个数据源 manual:手动指定数据源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthRange?: string;
 }
@@ -5837,9 +5517,8 @@ export interface CreateIdentifyRuleAnotherNameRequest {
 export interface DescribeDSPACategoryRuleStatisticResponse {
     /**
      * 分类规则统计信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatisticSet: Array<CategoryRuleStatistic>;
+    StatisticSet?: Array<CategoryRuleStatistic>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5851,34 +5530,28 @@ export interface DescribeDSPACategoryRuleStatisticResponse {
 export interface DspaDiscoveryComplianceGroup {
     /**
      * 合规组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceGroupId: number;
+    ComplianceGroupId?: number;
     /**
      * 合规组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 合规组描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 合规组类型；0 默认合规组，1 系统合规组（除默认合规组外）, 2 自定义合规组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceGroupType: number;
+    ComplianceGroupType?: number;
     /**
      * 合规组对应的规则项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComplianceGroupRules: Array<DspaDiscoveryComplianceGroupRuleInfo>;
+    ComplianceGroupRules?: Array<DspaDiscoveryComplianceGroupRuleInfo>;
     /**
      * 合规组对应的分级组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelGroupId: number;
+    LevelGroupId?: number;
 }
 /**
  * ModifyDSPADiscoveryRule返回参数结构体
@@ -5929,7 +5602,6 @@ export interface QueryResourceDbBindStatusRequest {
 export interface ScanTaskCOSRules {
     /**
      * regex规则内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegexRule: COSDataRule;
     /**
@@ -5938,12 +5610,10 @@ export interface ScanTaskCOSRules {
     Status?: number;
     /**
      * 关键词规则内容组，最大支持5个关键词。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeywordRule?: COSDataRule;
     /**
      * 忽略词规则内容组，最大支持5个忽略词。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IgnoreStringRule?: COSDataRule;
     /**
@@ -5957,42 +5627,34 @@ export interface ScanTaskCOSRules {
 export interface MongoAssetDBDetail {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 数据库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DdName?: string;
     /**
      * 数据库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataType?: string;
     /**
      * 集合的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ColNums?: number;
     /**
      * 敏感集合数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveColNums?: number;
     /**
      * 字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
     /**
      * 敏感数据分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DistributionData?: Array<Note>;
 }
@@ -6059,14 +5721,12 @@ export interface DescribeDSPAAssessmentLatestRiskListRequest {
 export interface DescribeDSPADiscoveryTaskResultResponse {
     /**
      * 扫描任务结果项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaDiscoveryTaskDbResult>;
+    Items?: Array<DspaDiscoveryTaskDbResult>;
     /**
      * 符合条件的扫描任务结果记录数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6078,47 +5738,38 @@ export interface DescribeDSPADiscoveryTaskResultResponse {
 export interface AssessmentRiskItem {
     /**
      * 脆弱项id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
     /**
      * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskName?: string;
     /**
      * 脆弱性级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Level?: string;
     /**
      * 说明
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskType?: string;
     /**
      * 关联模板个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReferTemplateCount?: number;
     /**
      * 支持的数据源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportDataSource?: Array<string>;
     /**
      * 风险面
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSide?: string;
     /**
      * 关联模板列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReferTemplateList?: Array<TemplateInfo>;
 }
@@ -6201,12 +5852,10 @@ export interface ModifyDSPACOSTaskResultResponse {
 export interface Note {
     /**
      * 通用key，例如分类名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 通用value，例如分类个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: number;
 }
@@ -6243,97 +5892,78 @@ export interface DescribeDSPACOSDiscoveryTaskResultRequest {
 export interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 数据源name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 资产对象名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssetName?: string;
     /**
      * 风险评估模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AssessmentTemplateId?: number;
     /**
      * 分类分级的模板id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyTemplateId?: number;
     /**
      * 风险类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskType?: string;
     /**
      * 风险项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskName?: string;
     /**
      * 风险的描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskDescription?: string;
     /**
      * 风险的级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevel?: string;
     /**
      * 处置的建议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SuggestAction?: string;
     /**
      * 处置状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 安全产品
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityProduct?: Array<SecurityProduct>;
     /**
      * 风险归属
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskDimension?: string;
     /**
      * 关联数据库（如果风险归属是instance）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RelationAsset?: Array<string>;
     /**
      * 风险账号详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountRiskDetail?: Array<AccountRisk>;
     /**
      * 权限风险详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivilegeRiskDetail?: Array<PrivilegeRisk>;
     /**
      * 策略风险的cos风险文件列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyRiskCosFileList?: Array<string>;
     /**
      * AKSK泄漏列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AKSKLeak?: Array<AKSKLeak>;
     /**
@@ -6347,17 +5977,14 @@ export interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
 export interface TopAssetStat {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * db_name
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubData?: string;
     /**
      * 敏感个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveCnt?: number;
 }
@@ -6367,9 +5994,8 @@ export interface TopAssetStat {
 export interface DescribeDSPACOSDiscoveryTaskDetailResponse {
     /**
      * 任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Task: DspaCOSDiscoveryTaskDetail;
+    Task?: DspaCOSDiscoveryTaskDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6381,9 +6007,8 @@ export interface DescribeDSPACOSDiscoveryTaskDetailResponse {
 export interface StartDSPADiscoveryTaskResponse {
     /**
      * 任务扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultId: number;
+    ResultId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6405,12 +6030,10 @@ export interface DescribeDSPALevelGroupsResponse {
     /**
      * 符合条件的敏感数据分级标识记录
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DspaDiscoveryLevelDetail>;
     /**
      * 符合条件的敏感数据分级标识记录数
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
@@ -6449,7 +6072,7 @@ export interface DescribeDSPAAssessmentRiskProcessHistoryRequest {
      */
     DspaId: string;
     /**
-     * xxx
+     * 风险id
      */
     RiskId: number;
 }
@@ -6459,7 +6082,6 @@ export interface DescribeDSPAAssessmentRiskProcessHistoryRequest {
 export interface DescribeDSPASupportedMetasResponse {
     /**
      * 支持的元数据类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Metas?: Array<DSPAMetaType>;
     /**
@@ -6478,15 +6100,15 @@ export interface CategoryRuleStatistic {
     /**
      * 分类id
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 规则数量
      */
-    RuleCount: number;
+    RuleCount?: number;
     /**
      * 分类名称
      */
-    CategoryName: string;
+    CategoryName?: string;
 }
 /**
  * ExportAssetDetailData请求参数结构体
@@ -6615,17 +6237,14 @@ export interface DspaInstance {
     RenewFlag?: number;
     /**
      * 实例渠道
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Channel?: string;
     /**
      * 已授权的实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InsAuthCount?: number;
     /**
      * 已购买的实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InsTotalQuota?: number;
 }
@@ -6652,27 +6271,22 @@ export interface CreateDSPASelfBuildMetaResourceResponse {
 export interface DspaDiscoveryCOSRules {
     /**
      * 规则状态；0 不启用, 1 启用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * regex规则内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegexRule?: DspaDiscoveryCOSDataRule;
     /**
      * 关键词规则内容组，最大支持5个关键词。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeywordRule?: DspaDiscoveryCOSDataRule;
     /**
      * 忽略词规则内容组，最大支持5个忽略词。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IgnoreStringRule?: DspaDiscoveryCOSDataRule;
     /**
      * 最大匹配距离，默认值为100。上限为500.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxMatch?: number;
 }
@@ -6798,7 +6412,6 @@ export interface RiskItem {
 export interface DescribeDSPAAssessmentRiskLevelTrendResponse {
     /**
      * 结果集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<RiskLevelTrendItem>;
     /**
@@ -6850,24 +6463,20 @@ export interface DataSourceInfo {
 export interface DspaDataCategoryDistributed {
     /**
      * 数据分类ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 数据分类名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryName: string;
+    CategoryName?: string;
     /**
      * 数据分类统计个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Count: number;
+    Count?: number;
     /**
      * 分类路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryFullPath: string;
+    CategoryFullPath?: string;
 }
 /**
  * COS数据源实例信息
@@ -6931,13 +6540,12 @@ export interface DescribeDSPARDBDataAssetDetailRequest {
 export interface DescribeDSPACOSDataAssetDetailResponse {
     /**
      * COS对象存储敏感数据资产详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Details: Array<DspaCOSDataAssetDetail>;
+    Details?: Array<DspaCOSDataAssetDetail>;
     /**
      * 符合条件的COS对象存储敏感数据资产数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6975,61 +6583,57 @@ export interface DspaCOSDiscoveryTaskResult {
     /**
      * 扫描bucket结果ID
      */
-    BucketResultId: number;
+    BucketResultId?: number;
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 任务名称
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * 扫描任务最新一次扫描结果ID
      */
-    ResultId: number;
+    ResultId?: number;
     /**
      * 数据源ID
      */
-    DataSourceId: string;
+    DataSourceId?: string;
     /**
      * 桶名称
      */
-    BucketName: string;
+    BucketName?: string;
     /**
      * 总文件数
      */
-    TotalFiles: number;
+    TotalFiles?: number;
     /**
      * 被识别出的敏感数据数
      */
-    SensitiveDataNums: number;
+    SensitiveDataNums?: number;
     /**
      * Bucket扫描的结束时间，格式如：2006-01-02 15:04:05
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSourceName: string;
+    DataSourceName?: string;
     /**
      * Bucket扫描状态，0待扫描 1扫描中 2扫描终止 3扫描成功 4扫描失败
      */
-    Status: number;
+    Status?: number;
     /**
      * Bucket扫描结果错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorInfo: string;
+    ErrorInfo?: string;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceRegion: string;
+    ResourceRegion?: string;
     /**
      * 是否超额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OverSize?: string;
 }
@@ -7040,27 +6644,23 @@ export interface DspaCOSDiscoveryTaskDataSourceInfo {
     /**
      * 数据源ID
      */
-    DataSourceId: string;
+    DataSourceId?: string;
     /**
      * 代理地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyAddress: Array<string>;
+    ProxyAddress?: Array<string>;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSourceName: string;
+    DataSourceName?: string;
     /**
      * 扫描任务条件
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Condition: DspaDiscoveryTaskCOSCondition;
+    Condition?: DspaDiscoveryTaskCOSCondition;
     /**
      * 资源所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceRegion: string;
+    ResourceRegion?: string;
 }
 /**
  * UpdateDSPASelfBuildResource请求参数结构体
@@ -7110,13 +6710,7 @@ export interface DescribeDSPAAssessmentTasksRequest {
      */
     Limit?: number;
     /**
-     * 过滤项。
-  支持模糊搜索：TaskId，TaskName
-  支持过滤：
-  BusinessName：业务名称
-  BusinessDept：业务部门名称
-  TemplateName：评估模版名称
-  Status：评估状态 (waiting待评估，processing评估中, , finished已评估, failed评估失败)
+     * 过滤项。支持模糊搜索：TaskId，TaskName支持过滤：BusinessName：业务名称BusinessDept：业务部门名称TemplateName：评估模板名称Status：评估状态 (waiting待评估，processing评估中, , finished已评估, failed评估失败)
      */
     Filters?: Array<DspaAssessmentFilter>;
 }
@@ -7141,42 +6735,34 @@ export interface DescribeDSPALevelDetailRequest {
 export interface ESDataAssetCountDto {
     /**
      * es
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataAssetType?: number;
     /**
      * 敏感索引个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveIndexCnt?: number;
     /**
      * 总的索引个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalIndexCnt?: number;
     /**
      * 敏感字段个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldCnt?: number;
     /**
      * 总的字段个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalFieldCnt?: number;
     /**
      * 敏感分类的个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveCategoryCnt?: number;
     /**
      * 敏感分级的分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveLevel?: Array<SensitiveLevel>;
     /**
      * 敏感分类的分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryDistributed?: Array<DspaDataCategoryDistributed>;
 }
@@ -7194,14 +6780,21 @@ export interface ListDSPAClustersRequest {
     Offset?: number;
     /**
      * 过滤项。
-  支持的过滤项包括：DspaId、Status、Version、DspaName。
+  支持的过滤项包括：DspaId、Status、Version、DspaName、Channel。
   DspaId和DspaName支持模糊搜索。
   Status支持的可选值：enabled、disabled。
   Version支持的可选值：trial、official。
+  Channel支持的可选值：sp_cds_dsgc_pre（代表dsgc实例）、sp_cds_dsgc_wedata_dc（代表wedata实例）
      */
     Filters?: Array<DspaDataSourceMngFilter>;
     /**
      * 展示模式。
+  
+  目前只有两个值的处理逻辑：
+  
+  空值：需要查询每个实例的配额信息，因为是串行查询，所以速度很慢，limit最大为100
+  
+  "simple"：不需要查询每个实例的配额信息，速度快，limit最大为1000
      */
     ListMode?: string;
 }
@@ -7241,9 +6834,8 @@ export interface ModifyDSPAAssessmentRiskLatestRequest {
 export interface StopDSPADiscoveryTaskResponse {
     /**
      * 任务扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultId: number;
+    ResultId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7258,11 +6850,11 @@ export interface VerifyDSPADiscoveryRuleResponse {
   Success 验证成功
   Failed 验证失败
      */
-    VerifyResult: string;
+    VerifyResult?: string;
     /**
      * 验证结果详情
      */
-    DetailInfo: string;
+    DetailInfo?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7304,10 +6896,9 @@ export interface DescribeDSPAAssessmentTemplateControlItemsRequest {
  */
 export interface DescribeDSPAAssessmentRiskItemTop5Response {
     /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 风险结果
      */
-    Items: Array<RiskItem>;
+    Items?: Array<RiskItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7321,17 +6912,14 @@ export interface DspaDiscoveryDataRule {
      * 规则类型；取值：
   keyword 关键字,
   regex 正则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleType: string;
     /**
      * 内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleContent: string;
     /**
      * 该字段是针对规则类型RuleType为keyword类型时的一个扩展属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendParameters?: Array<DatagovRuleExtendParameter>;
 }
@@ -7354,7 +6942,6 @@ export interface BindDSPAResourceCosBucketsResponse {
 export interface DescribeDSPAESDataSampleResponse {
     /**
      * 数据样本列表，最多10条数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<string>;
     /**
@@ -7386,6 +6973,14 @@ export interface CreateDSPAComplianceGroupRequest {
      * 分级组ID，默认值为1，新增参数，可选
      */
     LevelGroupId?: number;
+    /**
+     * 1代表模版开启，0代表模版关闭
+     */
+    Status?: number;
+    /**
+     * 该complianceId的开启状态将被关闭
+     */
+    CloseComplianceId?: number;
 }
 /**
  * VerifyDSPACOSRule返回参数结构体
@@ -7396,11 +6991,11 @@ export interface VerifyDSPACOSRuleResponse {
   Success 验证成功
   Failed 验证失败
      */
-    VerifyResult: string;
+    VerifyResult?: string;
     /**
      * 验证结果详情
      */
-    DetailInfo: string;
+    DetailInfo?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7439,12 +7034,11 @@ export interface CreateDSPACOSDiscoveryTaskResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 扫描结果ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultId: number;
+    ResultId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7535,7 +7129,6 @@ export interface DescribeDSPATaskResultDataSampleRequest {
 export interface SuggestRiskLevelMatrix {
     /**
      * 矩阵
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelMatrix?: Array<SuggestRiskLevelMatrixItem>;
 }
@@ -7686,9 +7279,8 @@ export interface DescribeDSPAAssessmentRiskAmountOverviewRequest {
 export interface DescribeDSPADiscoveryTaskDetailResponse {
     /**
      * 任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Task: DspaDiscoveryTaskDetail;
+    Task?: DspaDiscoveryTaskDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7700,13 +7292,12 @@ export interface DescribeDSPADiscoveryTaskDetailResponse {
 export interface DescribeDSPACOSDiscoveryTasksResponse {
     /**
      * 任务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DspaCOSDiscoveryTask>;
+    Items?: Array<DspaCOSDiscoveryTask>;
     /**
      * 符合条件的任务列表数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7735,19 +7326,16 @@ export interface EnableDSPADiscoveryRuleRequest {
 export interface DspaDiscoveryTaskCOSCondition {
     /**
      * 数据桶名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Bucket: string;
+    Bucket?: string;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileTypes: Array<string>;
+    FileTypes?: Array<string>;
     /**
      * 文件大小上限，单位为KB，如1000, 目前单个文件最大只支持1GB（1048576KB）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileSizeLimit: number;
+    FileSizeLimit?: number;
 }
 /**
  * DescribeDSPACOSDataAssetDetail请求参数结构体
@@ -7776,7 +7364,6 @@ export interface DescribeDSPAAssessmentRiskTemplateDetailResponse {
     TemplateName?: string;
     /**
      * 模板的描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateDescription?: string;
     /**
@@ -7789,17 +7376,14 @@ export interface DescribeDSPAAssessmentRiskTemplateDetailResponse {
     RiskLevelName?: string;
     /**
      * 脆弱项配置列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskItemList?: Array<AssessmentRiskItem>;
     /**
      * 脆弱项配置条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 被任务引用次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskCitations?: number;
     /**
@@ -7868,12 +7452,10 @@ export interface ExportAssetDetailDataResponse {
 export interface RuleEffectItem {
     /**
      * 规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 规则值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: number;
 }
@@ -7907,22 +7489,18 @@ export interface CategoryRule {
     Id?: number;
     /**
      * 别名ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasRuleId?: number;
     /**
      * 别名规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasRuleName?: string;
     /**
      * 各类分类分级规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleEffectItems?: Array<RuleEffectItem>;
     /**
      * 规则状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleStatus?: number;
 }
@@ -7969,7 +7547,6 @@ export interface RiskCountInfo {
     Count: number;
     /**
      * 风险等级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskLevelName: string;
 }
@@ -8122,12 +7699,10 @@ export declare type CreateNewClassificationRequest = null;
 export interface SecurityProduct {
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 产品链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReferUrl?: string;
 }
@@ -8171,14 +7746,12 @@ export interface GetTrialVersionResponse {
 export interface DescribeDSPAComplianceUpdateNotificationResponse {
     /**
      * 模板是否更新
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsUpdated: boolean;
+    IsUpdated?: boolean;
     /**
      * 任务名称集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskNameSet: Array<string>;
+    TaskNameSet?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8212,6 +7785,10 @@ export interface DescribeDSPAComplianceGroupsRequest {
      * 合规组类型可选值：0 默认合规组, 1 系统合规组, 2 自定义合规组
      */
     ComplianceGroupTypeList?: Array<number | bigint>;
+    /**
+     * 是否仅显示已开启模版
+     */
+    IsFilterCloseComplianceGroup?: boolean;
 }
 /**
  * ListDSPACosMetaResources返回参数结构体
@@ -8223,12 +7800,10 @@ export interface ListDSPACosMetaResourcesResponse {
     TotalCount?: number;
     /**
      * COS元数据信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DSPACosMetaDataInfo>;
     /**
      * DSPA实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DspaId?: string;
     /**
@@ -8263,7 +7838,6 @@ export interface CosTaskResult {
     ResultDescription?: string;
     /**
      * 错误信息描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrDescription?: ErrDescription;
     /**
@@ -8277,17 +7851,14 @@ export interface CosTaskResult {
 export interface AKSKLeak {
     /**
      * AK编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AK?: string;
     /**
      * SK编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SK?: string;
     /**
      * URL编码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     URL?: string;
 }
@@ -8297,9 +7868,12 @@ export interface AKSKLeak {
 export interface DescribeDSPADataSourceDbInfoResponse {
     /**
      * 数据库信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DSPADataSourceDbInfo>;
+    /**
+     * 数据源id
+     */
+    DataSourceId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8350,12 +7924,10 @@ export interface ModifyMergeClassificationResponse {
 export interface CreateAssetSortingReportTaskResponse {
     /**
      * 报表任务id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportTaskId?: number;
     /**
      * 提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -8373,7 +7945,6 @@ export interface GetResourceConnectionStatusResponse {
     ConnectionStatus?: string;
     /**
      * 连接状态的描述信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionDesc?: string;
     /**
@@ -8446,32 +8017,26 @@ export interface CreateDSPAAssessmentRiskLevelRequest {
 export interface ESAssetDBDetail {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 索引名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IndexName?: string;
     /**
      * 数据库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataType?: string;
     /**
      * 字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
     /**
      * 敏感数据分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DistributionData?: Array<Note>;
 }
@@ -8524,7 +8089,6 @@ export interface DescribeSensitiveCOSDataDistributionRequest {
 export interface DescribeDSPAAssessmentRiskTemplateVulnerableListResponse {
     /**
      * 脆弱项列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskItemList?: Array<AssessmentRiskItem>;
     /**
@@ -8542,12 +8106,10 @@ export interface DescribeDSPAAssessmentRiskTemplateVulnerableListResponse {
 export interface DescribeDSPACOSDiscoveryTaskResultResponse {
     /**
      * 扫描任务结果项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DspaCOSDiscoveryTaskResult>;
     /**
      * 符合条件的数据结果数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -8651,7 +8213,6 @@ export interface RDBInstance {
     ResourceRegion: string;
     /**
      * 若未来扩展到DBName粒度，可采用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBs?: Array<DBStatements>;
 }
@@ -8661,7 +8222,6 @@ export interface RDBInstance {
 export interface DescribeDSPAAssessmentLatestRiskListResponse {
     /**
      * 最新风险详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestRiskList?: Array<RiskItemInfo>;
     /**
@@ -8688,22 +8248,18 @@ export interface EnableDSPADiscoveryRuleResponse {
 export interface DescribeSensitiveRDBDataDistributionResponse {
     /**
      * 分级分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelDistribution?: Array<Note>;
     /**
      * 分类分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryDistribution?: Array<Note>;
     /**
      * 敏感规则分布详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleDistribution?: Array<RuleDistribution>;
     /**
      * 计算占比字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveDataNum?: number;
     /**
@@ -8717,22 +8273,18 @@ export interface DescribeSensitiveRDBDataDistributionResponse {
 export interface SuggestRiskLevelMatrixItem {
     /**
      * 分类分级等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveLevel?: RiskMatrixLevel;
     /**
      * 脆弱项等级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulnerabilityLevel?: RiskMatrixLevel;
     /**
      * 风险名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskName?: string;
     /**
      * 分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskScore?: number;
 }
@@ -8742,39 +8294,32 @@ export interface SuggestRiskLevelMatrixItem {
 export interface DspaDiscoveryLevelDetail {
     /**
      * 分级组名称，唯一性约束，最多60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字，Name不可重复
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelGroupName: string;
+    LevelGroupName?: string;
     /**
      * 分级组来源，0为内置，1为自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Source: number;
+    Source?: number;
     /**
      * 分级组描述，最多1024字符
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelGroupDesc: string;
+    LevelGroupDesc?: string;
     /**
      * 具体分级标识详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelDetail: Array<LevelItem>;
+    LevelDetail?: Array<LevelItem>;
     /**
      * 引用合规组次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RefComplianceCnt: number;
+    RefComplianceCnt?: number;
     /**
      * 引用合规组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RefCompliance: Array<DspaDiscoveryComplianceGroup>;
+    RefCompliance?: Array<DspaDiscoveryComplianceGroup>;
     /**
      * 分级组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelGroupId: number;
+    LevelGroupId?: number;
 }
 /**
  * ModifyClassificationRuleState返回参数结构体
@@ -8843,7 +8388,7 @@ export interface CreateDSPACategoryResponse {
     /**
      * 敏感数据分类ID
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8855,7 +8400,6 @@ export interface CreateDSPACategoryResponse {
 export interface DescribeDSPACategoryRulesResponse {
     /**
      * 分类规则信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryRules?: Array<CategoryRule>;
     /**
@@ -8903,12 +8447,10 @@ export interface QueryDSPAMetaResourceDbListRequest {
 export interface DescribeBindDBListResponse {
     /**
      * 绑定的DB列表（已废弃）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindDBList?: Array<string>;
     /**
      * 绑定信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BindList?: Array<DBInstanceInfo>;
     /**
@@ -8926,7 +8468,6 @@ export interface DisableDSPAMetaResourceAuthResponse {
     DspaId?: string;
     /**
      * 授权结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Results?: Array<DspaTaskResult>;
     /**
@@ -8940,12 +8481,10 @@ export interface DisableDSPAMetaResourceAuthResponse {
 export interface DescribeReportTasksResponse {
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 报表信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ItemSet?: Array<ReportInfo>;
     /**
@@ -8968,44 +8507,44 @@ export interface GetTrialVersionRequest {
 export interface DspaDiscoveryComplianceGroupInfo {
     /**
      * 合规组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceGroupId?: number;
     /**
      * 合规组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 合规组描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 合规组类型；0 默认合规组，1 系统合规组（除默认合规组外）, 2 自定义合规组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceGroupType?: number;
     /**
      * 合规组对应的规则项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComplianceGroupRules?: Array<DspaDiscoveryComplianceGroupRule>;
     /**
      * 合规组对应的分级组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelGroupId?: number;
     /**
      * 是否禁止使用（true，禁止使用，false，可以使用）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Disabled?: boolean;
     /**
      * 是否别名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAlias?: boolean;
+    /**
+     * 1代表模版开启，0代表模版关闭
+     */
+    Status?: number;
+    /**
+     * 模版最后修改时间
+     */
+    ModifyTime?: string;
 }
 /**
  * ES的概览页资产详情
@@ -9013,82 +8552,66 @@ export interface DspaDiscoveryComplianceGroupInfo {
 export interface ESDataAssetDetail {
     /**
      * id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldResultId?: number;
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceName?: string;
     /**
      * 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
     /**
      * 地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceRegion?: string;
     /**
      * 索引名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IndexName?: string;
     /**
      * 字段名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldName?: string;
     /**
      * 分类id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryId?: number;
     /**
      * 分类名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryName?: string;
     /**
      * 分类路径数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CategoryArr?: Array<string>;
     /**
      * 等级id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelId?: number;
     /**
      * 分级名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelRiskName?: string;
     /**
      * 分级分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LevelRiskScore?: number;
     /**
      * 可信分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrustedScore?: number;
     /**
      * 规则id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleId?: number;
     /**
      * 规则名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
     /**
@@ -9174,7 +8697,6 @@ export interface DescribeDSPALevelDetailResponse {
 export interface DescribeDSPAAssessmentRiskSideDistributedResponse {
     /**
      * 风险面的分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskSideDistributed?: Array<RiskSideDistributed>;
     /**
@@ -9251,42 +8773,34 @@ export interface ModifyDSPAAssessmentRiskResponse {
 export interface AssetDBDetail {
     /**
      * 数据源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceId?: string;
     /**
      * 数据库名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DdName?: string;
     /**
      * 数据库类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataType?: string;
     /**
      * 表的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableNums?: number;
     /**
      * 敏感表数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveTableNums?: number;
     /**
      * 字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FieldNums?: number;
     /**
      * 敏感字段的数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SensitiveFieldNums?: number;
     /**
      * 敏感数据分布
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DistributionData?: Array<Note>;
 }
@@ -9301,18 +8815,17 @@ export interface RiskDealedTrendItem {
     /**
      * 日期
      */
-    Date: string;
+    Date?: string;
     /**
      * 未解决数量
      */
-    Unhandled: number;
+    Unhandled?: number;
     /**
      * 已解决数量
      */
-    Handled: number;
+    Handled?: number;
     /**
      * 新发现
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewDiscoveryHandled?: number;
 }

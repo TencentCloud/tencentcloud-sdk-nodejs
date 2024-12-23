@@ -3150,7 +3150,7 @@ export interface DeleteClusterRequest {
  */
 export interface CmqSubscription {
   /**
-   * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscriptionName?: string
@@ -6206,7 +6206,16 @@ export interface RabbitMQBindingListInfo {
 /**
  * ModifyPublicNetworkSecurityPolicy请求参数结构体
  */
-export type ModifyPublicNetworkSecurityPolicyRequest = null
+export interface ModifyPublicNetworkSecurityPolicyRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 策略列表
+   */
+  PolicyList: Array<SecurityPolicy>
+}
 
 /**
  * ModifyRole返回参数结构体

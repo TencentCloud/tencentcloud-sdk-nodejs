@@ -93,7 +93,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建私有域解析账号
+   * 跨账号关联VPC时绑定其他账号
    */
   async CreatePrivateDNSAccount(
     req: CreatePrivateDNSAccountRequest,

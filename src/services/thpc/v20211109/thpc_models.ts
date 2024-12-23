@@ -22,51 +22,51 @@ export interface ClusterOverview {
   /**
    * 集群ID。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
-   * 集群状态。取值范围：<br><li>PENDING：创建中<br><li>INITING：初始化中<br><li>INIT_FAILED：初始化失败<br><li>RUNNING：运行中<br><li>TERMINATING：销毁中
+   * 集群状态。取值范围：<br><li>PENDING：创建中</li><br><li>INITING：初始化中</li><br><li>INIT_FAILED：初始化失败</li><br><li>RUNNING：运行中</li><br><li>TERMINATING：销毁中</li>
    */
-  ClusterStatus: string
+  ClusterStatus?: string
   /**
    * 集群名称。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 集群位置信息。
    */
-  Placement: Placement
+  Placement?: Placement
   /**
    * 集群创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 集群调度器。
    */
-  SchedulerType: string
+  SchedulerType?: string
   /**
    * 计算节点数量。
    */
-  ComputeNodeCount: number
+  ComputeNodeCount?: number
   /**
    * 计算节点概览。
    */
-  ComputeNodeSet: Array<ComputeNodeOverview>
+  ComputeNodeSet?: Array<ComputeNodeOverview>
   /**
    * 管控节点数量。
    */
-  ManagerNodeCount: number
+  ManagerNodeCount?: number
   /**
    * 管控节点概览。
    */
-  ManagerNodeSet: Array<ManagerNodeOverview>
+  ManagerNodeSet?: Array<ManagerNodeOverview>
   /**
    * 登录节点概览。
    */
-  LoginNodeSet: Array<LoginNodeOverview>
+  LoginNodeSet?: Array<LoginNodeOverview>
   /**
    * 登录节点数量。
    */
-  LoginNodeCount: number
+  LoginNodeCount?: number
 }
 
 /**
@@ -92,7 +92,7 @@ export interface DescribeClustersRequest {
  */
 export interface LoginSettings {
   /**
-   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+   * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。</li><br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。</li><br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
    */
   Password?: string
 }

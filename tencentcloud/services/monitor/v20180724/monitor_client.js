@@ -440,6 +440,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSSOAccount", req, cb);
     }
     /**
+     * 获取多写配置详情
+     */
+    async DescribeRemoteURLs(req, cb) {
+        return this.request("DescribeRemoteURLs", req, cb);
+    }
+    /**
      * 批量更新告警分组状态，将分组中全部告警规则更新为目标状态
      */
     async UpdatePrometheusAlertGroupState(req, cb) {
@@ -553,6 +559,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SyncPrometheusTemp(req, cb) {
         return this.request("SyncPrometheusTemp", req, cb);
+    }
+    /**
+     * 修改多写配置
+     */
+    async ModifyRemoteURLs(req, cb) {
+        return this.request("ModifyRemoteURLs", req, cb);
     }
     /**
      * 创建通知模板

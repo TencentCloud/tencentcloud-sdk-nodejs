@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("privatedns.tencentcloudapi.com", "2020-10-28", clientConfig);
     }
     /**
-     * 创建私有域解析账号
+     * 跨账号关联VPC时绑定其他账号
      */
     async CreatePrivateDNSAccount(req, cb) {
         return this.request("CreatePrivateDNSAccount", req, cb);

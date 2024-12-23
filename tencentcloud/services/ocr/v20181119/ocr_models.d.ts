@@ -1146,6 +1146,10 @@ export interface ElectronicFlightTicketFull {
      * 机票详细信息元组
      */
     FlightItems?: Array<FlightItemInfo>;
+    /**
+     * 机票开具状态
+     */
+    InvoiceStatus?: string;
 }
 /**
  * ClassifyStoreName请求参数结构体

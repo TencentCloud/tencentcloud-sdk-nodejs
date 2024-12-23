@@ -8,7 +8,7 @@ import { DescribeQuotaUsageResponse, ModifyPrivateZoneVpcRequest, DescribeAuditL
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 创建私有域解析账号
+     * 跨账号关联VPC时绑定其他账号
      */
     CreatePrivateDNSAccount(req: CreatePrivateDNSAccountRequest, cb?: (error: string, rep: CreatePrivateDNSAccountResponse) => void): Promise<CreatePrivateDNSAccountResponse>;
     /**

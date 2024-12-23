@@ -232,11 +232,11 @@ export interface DatePoint {
   /**
    * 时间
    */
-  Date: string
+  Date?: string
   /**
    * 值
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -273,11 +273,11 @@ export interface DescribeAccountVpcListResponse {
   /**
    * VPC数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * VPC 列表
    */
-  VpcSet: Array<AccountVpcInfoOut>
+  VpcSet?: Array<AccountVpcInfoOut>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -390,15 +390,15 @@ export interface AuditLogInfo {
   /**
    * 时间
    */
-  Date: string
+  Date?: string
   /**
    * 操作人uin
    */
-  OperatorUin: string
+  OperatorUin?: string
   /**
    * 日志内容
    */
-  Content: string
+  Content?: string
 }
 
 /**
@@ -575,6 +575,7 @@ export interface CreatePrivateZoneRequest {
   DnsForwardStatus?: string
   /**
    * 创建私有域的同时，将其关联至VPC
+   * @deprecated
    */
   Vpcs?: Array<VpcInfo>
   /**
@@ -608,19 +609,19 @@ export interface AccountVpcInfoOut {
   /**
    * VpcId： vpc-xadsafsdasd
    */
-  VpcId: string
+  VpcId?: string
   /**
    * Vpc所属地区: ap-guangzhou, ap-shanghai
    */
-  Region: string
+  Region?: string
   /**
    * Vpc所属账号: 123456789
    */
-  Uin: string
+  Uin?: string
   /**
    * vpc资源名称：testname
    */
-  VpcName: string
+  VpcName?: string
 }
 
 /**
@@ -833,19 +834,19 @@ export interface AuditLog {
   /**
    * 日志类型
    */
-  Resource: string
+  Resource?: string
   /**
    * 日志表名
    */
-  Metric: string
+  Metric?: string
   /**
    * 日志总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 日志列表
    */
-  DataSet: Array<AuditLogInfo>
+  DataSet?: Array<AuditLogInfo>
 }
 
 /**
@@ -959,20 +960,20 @@ export interface MetricData {
   /**
    * 资源描述
    */
-  Resource: string
+  Resource?: string
   /**
    * 表名
    */
-  Metric: string
+  Metric?: string
   /**
    * 表数据
    */
-  DataSet: Array<DatePoint>
+  DataSet?: Array<DatePoint>
   /**
    * 查询范围内的请求总量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricCount: number
+  MetricCount?: number
 }
 
 /**
@@ -1204,15 +1205,15 @@ export interface FlowUsage {
   /**
    * 流量包类型：ZONE 私有域；TRAFFIC 解析流量包
    */
-  FlowType: string
+  FlowType?: string
   /**
    * 流量包总额度
    */
-  TotalQuantity: number
+  TotalQuantity?: number
   /**
    * 流量包可用额度
    */
-  AvailableQuantity: number
+  AvailableQuantity?: number
 }
 
 /**

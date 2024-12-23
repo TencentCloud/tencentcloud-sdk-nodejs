@@ -41,16 +41,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyPlan", req, cb);
     }
     /**
-     * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+     * 在创建完站点后，并且站点为 NS 模式接入时，您可以通过本接口创建 DNS 记录。
      */
-    async DescribeOriginGroupHealthStatus(req, cb) {
-        return this.request("DescribeOriginGroupHealthStatus", req, cb);
+    async CreateDnsRecord(req, cb) {
+        return this.request("CreateDnsRecord", req, cb);
     }
     /**
      * 导出站点配置接口，本接口支持用户根据需要的配置项进行配置导出，导出的配置用于导入站点配置接口（ImportZoneConfig）进行配置导入。该功能仅支持标准版和企业版套餐站点使用。
      */
     async ExportZoneConfig(req, cb) {
         return this.request("ExportZoneConfig", req, cb);
+    }
+    /**
+     * 批量查询内容标识符，可以根据 ID、描述、状态或者标签过滤。按照状态查询被删除的内容标识符仅保留三个月。该功能仅白名单开放。
+     */
+    async DescribeContentIdentifiers(req, cb) {
+        return this.request("DescribeContentIdentifiers", req, cb);
     }
     /**
      * 删除边缘函数，删除后函数无法恢复，关联的触发规则会一并删除。
@@ -303,6 +309,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyL4ProxyRules", req, cb);
     }
     /**
+     * 您可以通过本接口批量修改 DNS 记录。
+     */
+    async ModifyDnsRecords(req, cb) {
+        return this.request("ModifyDnsRecords", req, cb);
+    }
+    /**
      * 本接口用于查询七层缓存分析时序类流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
      */
     async DescribeTimingL7CacheData(req, cb) {
@@ -331,6 +343,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async ModifyAliasDomainStatus(req, cb) {
         return this.request("ModifyAliasDomainStatus", req, cb);
+    }
+    /**
+     * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息。您可以查看站点下全部 DNS 记录的信息，也可以指定过滤条件查询对应的 DNS 记录信息。
+     */
+    async DescribeDnsRecords(req, cb) {
+        return this.request("DescribeDnsRecords", req, cb);
     }
     /**
      * 用于创建四层代理实例规则，支持单条或者批量创建。
@@ -363,6 +381,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeTopL7AnalysisData", req, cb);
     }
     /**
+     * 您可以用本接口批量删除 DNS 记录。
+     */
+    async DeleteDnsRecords(req, cb) {
+        return this.request("DeleteDnsRecords", req, cb);
+    }
+    /**
      * 修改Web&Bot安全配置。
      */
     async ModifySecurityPolicy(req, cb) {
@@ -381,10 +405,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("BindZoneToPlan", req, cb);
     }
     /**
-     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+     * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
      */
-    async DescribeDDoSAttackEvent(req, cb) {
-        return this.request("DescribeDDoSAttackEvent", req, cb);
+    async DescribeOriginGroupHealthStatus(req, cb) {
+        return this.request("DescribeOriginGroupHealthStatus", req, cb);
     }
     /**
      * 用于删除四层代理转发规则，支持单条或者批量操作。
@@ -460,6 +484,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateConfigGroupVersion", req, cb);
     }
     /**
+     * 您可以通过本接口批量修改 DNS 记录的状态，批量对记录进行开启和停用。
+     */
+    async ModifyDnsRecordsStatus(req, cb) {
+        return this.request("ModifyDnsRecordsStatus", req, cb);
+    }
+    /**
      * 修改边缘函数，支持修改函数的内容及描述信息，修改且重新部署后，函数立刻生效。
      */
     async ModifyFunction(req, cb) {
@@ -503,6 +533,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DeleteLoadBalancer(req, cb) {
         return this.request("DeleteLoadBalancer", req, cb);
+    }
+    /**
+     * 删除指定的内容标识符。该功能仅白名单开放。
+     */
+    async DeleteContentIdentifier(req, cb) {
+        return this.request("DeleteContentIdentifier", req, cb);
     }
     /**
      * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
@@ -570,6 +606,18 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async HandleFunctionRuntimeEnvironment(req, cb) {
         return this.request("HandleFunctionRuntimeEnvironment", req, cb);
+    }
+    /**
+     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+     */
+    async DescribeDDoSAttackEvent(req, cb) {
+        return this.request("DescribeDDoSAttackEvent", req, cb);
+    }
+    /**
+     * 修改内容标识符，仅支持修改描述。该功能仅白名单开放。
+     */
+    async ModifyContentIdentifier(req, cb) {
+        return this.request("ModifyContentIdentifier", req, cb);
     }
     /**
      * 当您需要使用高等级套餐才拥有的功能，可以通过本接口升级套餐，仅支持个人版，基础版套餐进行升级。
@@ -721,6 +769,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeZoneConfigImportResult(req, cb) {
         return this.request("DescribeZoneConfigImportResult", req, cb);
+    }
+    /**
+     * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
+     */
+    async CreateContentIdentifier(req, cb) {
+        return this.request("CreateContentIdentifier", req, cb);
     }
     /**
      * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。

@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
     /**
      * 修改pulsar专业版公网安全策略
      */
-    ModifyPublicNetworkSecurityPolicy(req?: ModifyPublicNetworkSecurityPolicyRequest, cb?: (error: string, rep: ModifyPublicNetworkSecurityPolicyResponse) => void): Promise<ModifyPublicNetworkSecurityPolicyResponse>;
+    ModifyPublicNetworkSecurityPolicy(req: ModifyPublicNetworkSecurityPolicyRequest, cb?: (error: string, rep: ModifyPublicNetworkSecurityPolicyResponse) => void): Promise<ModifyPublicNetworkSecurityPolicyResponse>;
     /**
      * 修改环境角色授权。
      */

@@ -1630,207 +1630,207 @@ export interface InstanceInfo {
   /**
    * 实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 实例 ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 用户的Appid。
    */
-  Appid: number
+  Appid?: number
   /**
    * 项目 ID。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 地域ID。<ul><li>1：广州。</li><li>4：上海。</li><li>8：北京。</li></ul>
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用区 ID。
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * VPC 网络 ID， 如：75101。该参数当前暂保留，可忽略。
    */
-  VpcId: number
+  VpcId?: number
   /**
    * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
    */
-  Status: number
+  Status?: number
   /**
    * VPC 网络下子网 ID， 如：46315。该参数当前暂保留，可忽略。
    */
-  SubnetId: number
+  SubnetId?: number
   /**
    * 实例 VIP。
    */
-  WanIp: string
+  WanIp?: string
   /**
    * 实例端口号。
    */
-  Port: number
+  Port?: number
   /**
    * 实例创建时间。
    */
-  Createtime: string
+  Createtime?: string
   /**
    * 实例持久内存总容量大小，单位：MB。
    */
-  Size: number
+  Size?: number
   /**
    * 实例类型。<ul><li>13：标准版。</li><li>14：集群版。</li></ul>
    */
-  Type: number
+  Type?: number
   /**
    * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 实例到期时间。
    */
-  DeadlineTime: string
+  DeadlineTime?: string
   /**
    * 存储引擎。
    */
-  Engine: string
+  Engine?: string
   /**
    * 产品类型。<ul><li>standalone ：标准版。</li><li>cluster ：集群版。</li></ul>
    */
-  ProductType: string
+  ProductType?: string
   /**
    * VPC 网络 ID， 如：vpc-fk33jsf4****。
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * VPC 网络下子网 ID，如：subnet-fd3j6l3****。
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
    */
-  BillingMode: number
+  BillingMode?: number
   /**
    * 实例运行状态描述：如”实例运行中“。
    */
-  InstanceTitle: string
+  InstanceTitle?: string
   /**
    * 计划下线时间。
    */
-  OfflineTime: string
+  OfflineTime?: string
   /**
    * 流程中的实例，返回子状态。
    */
-  SubStatus: number
+  SubStatus?: number
   /**
    * 反亲和性标签
    */
-  Tags: Array<string>
+  Tags?: Array<string>
   /**
    * 分片大小。
    */
-  RedisShardSize: number
+  RedisShardSize?: number
   /**
    * 分片数量。
    */
-  RedisShardNum: number
+  RedisShardNum?: number
   /**
    * 副本数量。
    */
-  RedisReplicasNum: number
+  RedisReplicasNum?: number
   /**
    * 计费 ID。
    */
-  PriceId: number
+  PriceId?: number
   /**
    * 隔离时间。
    */
-  CloseTime: string
+  CloseTime?: string
   /**
    * 从节点读取权重。
    */
-  SlaveReadWeight: number
+  SlaveReadWeight?: number
   /**
    * 实例关联的标签信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceTags: Array<InstanceTagInfo>
+  InstanceTags?: Array<InstanceTagInfo>
   /**
    * 项目名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectName: string
+  ProjectName?: string
   /**
    * 是否为免密实例；<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NoAuth: boolean
+  NoAuth?: boolean
   /**
    * 客户端连接数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientLimit: number
+  ClientLimit?: number
   /**
    * DTS状态（内部参数，用户可忽略）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DtsStatus: number
+  DtsStatus?: number
   /**
    * 分片带宽上限，单位 MB。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetLimit: number
+  NetLimit?: number
   /**
    * 免密实例标识（内部参数，用户可忽略）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PasswordFree: number
+  PasswordFree?: number
   /**
    * 实例只读标识（内部参数，用户可忽略）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadOnly: number
+  ReadOnly?: number
   /**
    * 内部参数，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip6: string
+  Vip6?: string
   /**
    * 内部参数，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemainBandwidthDuration: string
+  RemainBandwidthDuration?: string
   /**
    * 实例的磁盘容量大小。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskSize: number
+  DiskSize?: number
   /**
    * 监控版本。<ul><li>1m：分钟粒度监控。</li><li>5s：5秒粒度监控。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MonitorVersion: string
+  MonitorVersion?: string
   /**
    * 客户端最大连接数可设置的最小值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientLimitMin: number
+  ClientLimitMin?: number
   /**
    * 客户端最大连接数可设置的最大值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientLimitMax: number
+  ClientLimitMax?: number
   /**
    * 实例的节点详细信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeSet: Array<NodeInfo>
+  NodeSet?: Array<NodeInfo>
   /**
    * 实例所在的地域信息，比如ap-guangzhou。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 实例内存容量，单位：GB。KeeWiDB 内存容量
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1848,6 +1848,11 @@ export interface InstanceInfo {
    * 1
    */
   DiskReplicasNum?: number
+  /**
+   * 数据压缩开关。<ul><li>ON：开启。</li><li>OFF：关闭。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compression?: string
 }
 
 /**
@@ -1932,7 +1937,7 @@ export interface DescribeInstancesRequest {
    */
   Status?: Array<number | bigint>
   /**
-   * 包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
+   * 续费模式。- 0：手动续费。- 1：自动续费。- 2：到期不再续费。
    */
   AutoRenew?: Array<number | bigint>
   /**
@@ -2064,11 +2069,11 @@ export interface DescribeInstancesResponse {
   /**
    * 实例数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息列表
    */
-  InstanceSet: Array<InstanceInfo>
+  InstanceSet?: Array<InstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2319,23 +2324,23 @@ export interface DescribeInstanceParamsResponse {
   /**
    * 实例参数总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例枚举类型参数数组。
    */
-  InstanceEnumParam: Array<InstanceEnumParam>
+  InstanceEnumParam?: Array<InstanceEnumParam>
   /**
    * 实例整型参数数组。
    */
-  InstanceIntegerParam: Array<InstanceIntegerParam>
+  InstanceIntegerParam?: Array<InstanceIntegerParam>
   /**
    * 实例字符型参数数组。
    */
-  InstanceTextParam: Array<InstanceTextParam>
+  InstanceTextParam?: Array<InstanceTextParam>
   /**
    * 实例多选项型参数数组。
    */
-  InstanceMultiParam: Array<InstanceMultiParam>
+  InstanceMultiParam?: Array<InstanceMultiParam>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

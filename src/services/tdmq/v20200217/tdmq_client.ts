@@ -715,7 +715,7 @@ export class Client extends AbstractClient {
    * 修改pulsar专业版公网安全策略
    */
   async ModifyPublicNetworkSecurityPolicy(
-    req?: ModifyPublicNetworkSecurityPolicyRequest,
+    req: ModifyPublicNetworkSecurityPolicyRequest,
     cb?: (error: string, rep: ModifyPublicNetworkSecurityPolicyResponse) => void
   ): Promise<ModifyPublicNetworkSecurityPolicyResponse> {
     return this.request("ModifyPublicNetworkSecurityPolicy", req, cb)

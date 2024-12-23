@@ -52,6 +52,7 @@ import {
   RuleExtraParameter,
   WebSocket,
   ModifyAccelerationDomainRequest,
+  ModifyContentIdentifierResponse,
   WafConfig,
   CreateAliasDomainRequest,
   CLSTopic,
@@ -157,8 +158,9 @@ import {
   OriginHealthStatus,
   CustomizedHeader,
   DescribeFunctionsRequest,
+  ModifyDnsRecordsStatusRequest,
   DeleteAliasDomainRequest,
-  DescribeIdentificationsResponse,
+  BotExtendAction,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
   DeleteAccelerationDomainsResponse,
@@ -178,6 +180,7 @@ import {
   ModifyPlanResponse,
   DropPageDetail,
   CnameStatus,
+  CreateDnsRecordResponse,
   ServerCertInfo,
   DescribeZonesRequest,
   DescribeZoneConfigImportResultResponse,
@@ -190,6 +193,7 @@ import {
   CreatePlanRequest,
   DescribeFunctionRuntimeEnvironmentRequest,
   IPGroup,
+  DescribeDnsRecordsRequest,
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
   ModifyApplicationProxyRuleResponse,
@@ -227,6 +231,7 @@ import {
   TopDetailData,
   DescribeZoneSettingResponse,
   DescribePurgeTasksRequest,
+  ModifyDnsRecordsRequest,
   IdentifyZoneRequest,
   CacheConfig,
   UpgradePlanResponse,
@@ -266,6 +271,7 @@ import {
   CreateRuleResponse,
   BindZoneToPlanResponse,
   OriginInfo,
+  CreateDnsRecordRequest,
   WafRule,
   ModifyApplicationProxyRequest,
   ModifyAliasDomainStatusRequest,
@@ -302,8 +308,8 @@ import {
   OriginGroupHealthStatusDetail,
   FirstPartConfig,
   Waf,
-  ModifyZoneRequest,
-  DDosProtectionConfig,
+  CreateApplicationProxyRuleRequest,
+  DescribeDnsRecordsResponse,
   DescribeDDoSAttackDataRequest,
   CreateL4ProxyRequest,
   CreatePlanResponse,
@@ -342,12 +348,15 @@ import {
   QueryCondition,
   RuleRewriteActionParams,
   ModifyAliasDomainResponse,
+  DeleteDnsRecordsRequest,
   ModifyHostsCertificateRequest,
   DeleteFunctionRulesResponse,
   DescribeTopL7AnalysisDataResponse,
+  ModifyContentIdentifierRequest,
   ClientIpHeader,
   Resource,
   DescribeOriginProtectionRequest,
+  DeleteContentIdentifierResponse,
   HandleFunctionRuntimeEnvironmentResponse,
   DeleteRulesResponse,
   OriginGroup,
@@ -358,30 +367,35 @@ import {
   UpstreamHttp2,
   DeleteAliasDomainResponse,
   BotConfig,
-  DnsVerification,
+  ModifyZoneResponse,
   DescribeTopL7CacheDataRequest,
   CreateLoadBalancerRequest,
   Https,
   DescribeOriginGroupHealthStatusRequest,
+  DescribeContentIdentifiersRequest,
   ExportZoneConfigRequest,
   L4ProxyRule,
   AdvancedFilter,
   DescribeDDoSAttackDataResponse,
   TemplateConfig,
   ErrorPageReference,
-  BotExtendAction,
+  DescribeIdentificationsResponse,
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
-  CreateApplicationProxyRuleRequest,
+  ModifyZoneRequest,
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
   DescribeAvailablePlansRequest,
-  ModifyZoneResponse,
+  DnsVerification,
   AlgDetectSession,
+  DeleteContentIdentifierRequest,
+  CreateContentIdentifierRequest,
   OriginProtectionInfo,
+  ModifyDnsRecordsStatusResponse,
   AliasDomain,
   ImportZoneConfigRequest,
   IpTableRule,
+  DDosProtectionConfig,
   ModifyFunctionRuleRequest,
   IncreasePlanQuotaRequest,
   FunctionRule,
@@ -393,6 +407,7 @@ import {
   ModifyZoneSettingResponse,
   DownloadL7LogsResponse,
   AccelerationDomain,
+  ContentIdentifier,
   CreateCustomizeErrorPageResponse,
   RewriteAction,
   TemplateScope,
@@ -400,6 +415,8 @@ import {
   DeleteSharedCNAMEResponse,
   DDoSBlockData,
   DescribePrefetchTasksRequest,
+  DnsRecord,
+  ModifyDnsRecordsResponse,
   BindZoneToPlanRequest,
   DeleteFunctionResponse,
   IPWhitelist,
@@ -426,10 +443,12 @@ import {
   ModifySecurityPolicyResponse,
   DeleteLoadBalancerResponse,
   DescribeOriginGroupHealthStatusResponse,
+  DescribeContentIdentifiersResponse,
   SecurityTemplateBinding,
   CacheTag,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
+  CreateContentIdentifierResponse,
   DescribeConfigGroupVersionsRequest,
   DescribeL4ProxyRulesRequest,
   AiRule,
@@ -440,6 +459,7 @@ import {
   DescribeSecurityIPGroupResponse,
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
+  DeleteDnsRecordsResponse,
   DescribePurgeTasksResponse,
   CheckRegionHealthStatus,
   DescribeFunctionRulesRequest,
@@ -479,13 +499,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
+   * 在创建完站点后，并且站点为 NS 模式接入时，您可以通过本接口创建 DNS 记录。
    */
-  async DescribeOriginGroupHealthStatus(
-    req: DescribeOriginGroupHealthStatusRequest,
-    cb?: (error: string, rep: DescribeOriginGroupHealthStatusResponse) => void
-  ): Promise<DescribeOriginGroupHealthStatusResponse> {
-    return this.request("DescribeOriginGroupHealthStatus", req, cb)
+  async CreateDnsRecord(
+    req: CreateDnsRecordRequest,
+    cb?: (error: string, rep: CreateDnsRecordResponse) => void
+  ): Promise<CreateDnsRecordResponse> {
+    return this.request("CreateDnsRecord", req, cb)
   }
 
   /**
@@ -496,6 +516,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportZoneConfigResponse) => void
   ): Promise<ExportZoneConfigResponse> {
     return this.request("ExportZoneConfig", req, cb)
+  }
+
+  /**
+   * 批量查询内容标识符，可以根据 ID、描述、状态或者标签过滤。按照状态查询被删除的内容标识符仅保留三个月。该功能仅白名单开放。
+   */
+  async DescribeContentIdentifiers(
+    req: DescribeContentIdentifiersRequest,
+    cb?: (error: string, rep: DescribeContentIdentifiersResponse) => void
+  ): Promise<DescribeContentIdentifiersResponse> {
+    return this.request("DescribeContentIdentifiers", req, cb)
   }
 
   /**
@@ -909,6 +939,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 您可以通过本接口批量修改 DNS 记录。
+   */
+  async ModifyDnsRecords(
+    req: ModifyDnsRecordsRequest,
+    cb?: (error: string, rep: ModifyDnsRecordsResponse) => void
+  ): Promise<ModifyDnsRecordsResponse> {
+    return this.request("ModifyDnsRecords", req, cb)
+  }
+
+  /**
    * 本接口用于查询七层缓存分析时序类流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
    */
   async DescribeTimingL7CacheData(
@@ -956,6 +996,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void
   ): Promise<ModifyAliasDomainStatusResponse> {
     return this.request("ModifyAliasDomainStatus", req, cb)
+  }
+
+  /**
+   * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息。您可以查看站点下全部 DNS 记录的信息，也可以指定过滤条件查询对应的 DNS 记录信息。
+   */
+  async DescribeDnsRecords(
+    req: DescribeDnsRecordsRequest,
+    cb?: (error: string, rep: DescribeDnsRecordsResponse) => void
+  ): Promise<DescribeDnsRecordsResponse> {
+    return this.request("DescribeDnsRecords", req, cb)
   }
 
   /**
@@ -1009,6 +1059,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 您可以用本接口批量删除 DNS 记录。
+   */
+  async DeleteDnsRecords(
+    req: DeleteDnsRecordsRequest,
+    cb?: (error: string, rep: DeleteDnsRecordsResponse) => void
+  ): Promise<DeleteDnsRecordsResponse> {
+    return this.request("DeleteDnsRecords", req, cb)
+  }
+
+  /**
    * 修改Web&Bot安全配置。
    */
   async ModifySecurityPolicy(
@@ -1039,13 +1099,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+   * 查询负载均衡实例下源站组健康状态。负载均衡功能内测中，如您需要使用请 [联系我们](https://cloud.tencent.com/online-service)。
    */
-  async DescribeDDoSAttackEvent(
-    req: DescribeDDoSAttackEventRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
-  ): Promise<DescribeDDoSAttackEventResponse> {
-    return this.request("DescribeDDoSAttackEvent", req, cb)
+  async DescribeOriginGroupHealthStatus(
+    req: DescribeOriginGroupHealthStatusRequest,
+    cb?: (error: string, rep: DescribeOriginGroupHealthStatusResponse) => void
+  ): Promise<DescribeOriginGroupHealthStatusResponse> {
+    return this.request("DescribeOriginGroupHealthStatus", req, cb)
   }
 
   /**
@@ -1170,6 +1230,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 您可以通过本接口批量修改 DNS 记录的状态，批量对记录进行开启和停用。
+   */
+  async ModifyDnsRecordsStatus(
+    req: ModifyDnsRecordsStatusRequest,
+    cb?: (error: string, rep: ModifyDnsRecordsStatusResponse) => void
+  ): Promise<ModifyDnsRecordsStatusResponse> {
+    return this.request("ModifyDnsRecordsStatus", req, cb)
+  }
+
+  /**
    * 修改边缘函数，支持修改函数的内容及描述信息，修改且重新部署后，函数立刻生效。
    */
   async ModifyFunction(
@@ -1240,6 +1310,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeleteLoadBalancerResponse) => void
   ): Promise<DeleteLoadBalancerResponse> {
     return this.request("DeleteLoadBalancer", req, cb)
+  }
+
+  /**
+   * 删除指定的内容标识符。该功能仅白名单开放。
+   */
+  async DeleteContentIdentifier(
+    req: DeleteContentIdentifierRequest,
+    cb?: (error: string, rep: DeleteContentIdentifierResponse) => void
+  ): Promise<DeleteContentIdentifierResponse> {
+    return this.request("DeleteContentIdentifier", req, cb)
   }
 
   /**
@@ -1351,6 +1431,26 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: HandleFunctionRuntimeEnvironmentResponse) => void
   ): Promise<HandleFunctionRuntimeEnvironmentResponse> {
     return this.request("HandleFunctionRuntimeEnvironment", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+   */
+  async DescribeDDoSAttackEvent(
+    req: DescribeDDoSAttackEventRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
+  ): Promise<DescribeDDoSAttackEventResponse> {
+    return this.request("DescribeDDoSAttackEvent", req, cb)
+  }
+
+  /**
+   * 修改内容标识符，仅支持修改描述。该功能仅白名单开放。
+   */
+  async ModifyContentIdentifier(
+    req: ModifyContentIdentifierRequest,
+    cb?: (error: string, rep: ModifyContentIdentifierResponse) => void
+  ): Promise<ModifyContentIdentifierResponse> {
+    return this.request("ModifyContentIdentifier", req, cb)
   }
 
   /**
@@ -1598,6 +1698,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeZoneConfigImportResultResponse) => void
   ): Promise<DescribeZoneConfigImportResultResponse> {
     return this.request("DescribeZoneConfigImportResult", req, cb)
+  }
+
+  /**
+   * 创建内容标识符，可以设置描述、标签等信息，同时需要绑定企业版套餐用于统计计费数据；一个内容标识符只能绑定一个计费套餐，一个计费套餐可以绑定多个内容标识符。该功能仅限白名单开放。
+   */
+  async CreateContentIdentifier(
+    req: CreateContentIdentifierRequest,
+    cb?: (error: string, rep: CreateContentIdentifierResponse) => void
+  ): Promise<CreateContentIdentifierResponse> {
+    return this.request("CreateContentIdentifier", req, cb)
   }
 
   /**

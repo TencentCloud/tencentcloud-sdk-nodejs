@@ -131,7 +131,7 @@ import {
   UnBindingAllPolicyObjectRequest,
   AlarmPolicyCondition,
   ModifyPolicyGroupCondition,
-  NoticeBindPolicys,
+  DescribeRemoteURLsRequest,
   DescribeGrafanaConfigRequest,
   UpdateRecordingRuleRequest,
   DescribePolicyConditionListConfigManualCalcValue,
@@ -160,7 +160,9 @@ import {
   DescribePrometheusAlertPolicyResponse,
   UpdateGrafanaEnvironmentsRequest,
   CommonNamespace,
+  BasicAuth,
   DeleteGrafanaNotificationChannelResponse,
+  ModifyRemoteURLsRequest,
   DataPoint,
   DescribeAlarmPoliciesResponse,
   ModifyPrometheusGlobalNotificationRequest,
@@ -171,7 +173,7 @@ import {
   DescribeMonitorTypesRequest,
   DimensionsDesc,
   DeletePrometheusAlertPolicyRequest,
-  ServiceDiscoveryItem,
+  RemoteWrite,
   ModifyPrometheusAgentExternalLabelsResponse,
   ModifyAlarmNoticeRequest,
   DescribeGrafanaWhiteListResponse,
@@ -189,6 +191,7 @@ import {
   DescribePrometheusClusterAgentsResponse,
   UpdatePrometheusScrapeJobRequest,
   PrometheusAgentInfo,
+  ServiceDiscoveryItem,
   CreatePrometheusClusterAgentResponse,
   PrometheusAlertAllowTimeRange,
   CreateGrafanaIntegrationResponse,
@@ -222,6 +225,7 @@ import {
   DeleteRecordingRulesRequest,
   MonitorTypeNamespace,
   DeleteAlarmPolicyResponse,
+  RemoteWriteHeader,
   UninstallGrafanaPluginsRequest,
   DeleteSSOAccountResponse,
   DescribePolicyGroupListGroup,
@@ -296,6 +300,7 @@ import {
   CreateSSOAccountRequest,
   AlarmPolicyFilter,
   ModifyAlarmPolicyNoticeResponse,
+  NoticeBindPolicys,
   PrometheusAlertRule,
   UnbindPrometheusManagedGrafanaResponse,
   DescribeGrafanaChannelsResponse,
@@ -370,6 +375,7 @@ import {
   UpdateGrafanaWhiteListRequest,
   UpdatePrometheusAgentStatusRequest,
   DescribeGrafanaInstancesResponse,
+  DescribeRemoteURLsResponse,
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
   ModifyPrometheusRecordRuleYamlRequest,
@@ -456,6 +462,7 @@ import {
   CLSNotice,
   LogAlarmReq,
   TerminatePrometheusInstancesResponse,
+  ModifyRemoteURLsResponse,
   DescribeMonitorResourceInfoResponse,
   UpdateSSOAccountResponse,
   RunPrometheusInstanceRequest,
@@ -1154,6 +1161,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取多写配置详情
+   */
+  async DescribeRemoteURLs(
+    req: DescribeRemoteURLsRequest,
+    cb?: (error: string, rep: DescribeRemoteURLsResponse) => void
+  ): Promise<DescribeRemoteURLsResponse> {
+    return this.request("DescribeRemoteURLs", req, cb)
+  }
+
+  /**
    * 批量更新告警分组状态，将分组中全部告警规则更新为目标状态
    */
   async UpdatePrometheusAlertGroupState(
@@ -1342,6 +1359,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncPrometheusTempResponse) => void
   ): Promise<SyncPrometheusTempResponse> {
     return this.request("SyncPrometheusTemp", req, cb)
+  }
+
+  /**
+   * 修改多写配置
+   */
+  async ModifyRemoteURLs(
+    req: ModifyRemoteURLsRequest,
+    cb?: (error: string, rep: ModifyRemoteURLsResponse) => void
+  ): Promise<ModifyRemoteURLsResponse> {
+    return this.request("ModifyRemoteURLs", req, cb)
   }
 
   /**
