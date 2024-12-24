@@ -138,6 +138,16 @@ it("redis.v20180412.DescribeTaskInfo", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstanceBackupMode", async function () {
+    try {
+       const data = await client.ModifyInstanceBackupMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyBackupDownloadRestriction", async function () {
     try {
        const data = await client.ModifyBackupDownloadRestriction({})
@@ -228,9 +238,9 @@ it("redis.v20180412.DescribeBackupUrl", async function () {
     }
 })
 
-it("redis.v20180412.DeleteInstanceAccount", async function () {
+it("redis.v20180412.DescribeSecondLevelBackupInfo", async function () {
     try {
-       const data = await client.DeleteInstanceAccount({})
+       const data = await client.DescribeSecondLevelBackupInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +561,16 @@ it("redis.v20180412.ManualBackupInstance", async function () {
 it("redis.v20180412.DescribeInstanceSpecBandwidth", async function () {
     try {
        const data = await client.DescribeInstanceSpecBandwidth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DeleteInstanceAccount", async function () {
+    try {
+       const data = await client.DeleteInstanceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

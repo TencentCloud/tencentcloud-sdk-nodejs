@@ -257,7 +257,6 @@ export interface DeleteSpecifyPrivateZoneVpcResponse {
   AccountVpcSet?: Array<AccountVpcInfo>
   /**
    * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqId?: string
   /**
@@ -374,7 +373,6 @@ export interface AddSpecifyPrivateZoneVpcResponse {
   AccountVpcSet?: Array<AccountVpcInfo>
   /**
    * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UniqId?: string
   /**
@@ -634,17 +632,14 @@ export interface AccountVpcInfo {
   UniqVpcId: string
   /**
    * Vpc所属地区: ap-guangzhou, ap-shanghai
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
    * Vpc所属账号: 123456789
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin: string
   /**
    * vpc资源名称：testname
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcName?: string
 }

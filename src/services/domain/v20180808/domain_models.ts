@@ -2723,38 +2723,38 @@ export interface DomainList {
 ture 是    
 false 不是
    */
-  IsPremium: boolean
+  IsPremium?: boolean
   /**
    * 域名资源ID。
    */
-  DomainId: string
+  DomainId?: string
   /**
    * 域名名称。
    */
-  DomainName: string
+  DomainName?: string
   /**
    * 是否已设置自动续费 。
 0：未设置 
 1：已设置
 2：设置后，关闭
    */
-  AutoRenew: number
+  AutoRenew?: number
   /**
    * 注册时间。
    */
-  CreationDate: string
+  CreationDate?: string
   /**
    * 到期时间。
    */
-  ExpirationDate: string
+  ExpirationDate?: string
   /**
    * 域名后缀
    */
-  Tld: string
+  Tld?: string
   /**
    * 编码后的后缀（中文会进行编码）
    */
-  CodeTld: string
+  CodeTld?: string
   /**
    * 域名购买状态。
 ok：正常
@@ -2770,7 +2770,7 @@ TransferPending：转入中
 TransferTransing：转入中
 TransferFailed：转入失败
    */
-  BuyStatus: string
+  BuyStatus?: string
 }
 
 /**

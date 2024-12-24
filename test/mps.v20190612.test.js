@@ -38,6 +38,16 @@ it("mps.v20190612.DescribeStreamLinkFlowRealtimeStatus", async function () {
     }
 })
 
+it("mps.v20190612.ModifyLiveRecordTemplate", async function () {
+    try {
+       const data = await client.ModifyLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.EditMedia", async function () {
     try {
        const data = await client.EditMedia({})
@@ -191,6 +201,16 @@ it("mps.v20190612.DescribeStreamLinkFlowStatistics", async function () {
 it("mps.v20190612.BatchDeleteStreamLinkFlow", async function () {
     try {
        const data = await client.BatchDeleteStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeLiveRecordTemplates", async function () {
+    try {
+       const data = await client.DescribeLiveRecordTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,6 +538,16 @@ it("mps.v20190612.ModifyPersonSample", async function () {
     }
 })
 
+it("mps.v20190612.CreateLiveRecordTemplate", async function () {
+    try {
+       const data = await client.CreateLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteContentReviewTemplate", async function () {
     try {
        const data = await client.DeleteContentReviewTemplate({})
@@ -678,9 +708,9 @@ it("mps.v20190612.DescribeStreamLinkActivateState", async function () {
     }
 })
 
-it("mps.v20190612.CreateWatermarkTemplate", async function () {
+it("mps.v20190612.CreateImageSpriteTemplate", async function () {
     try {
-       const data = await client.CreateWatermarkTemplate({})
+       const data = await client.CreateImageSpriteTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +868,9 @@ it("mps.v20190612.DescribeWatermarkTemplates", async function () {
     }
 })
 
-it("mps.v20190612.CreateImageSpriteTemplate", async function () {
+it("mps.v20190612.CreateWatermarkTemplate", async function () {
     try {
-       const data = await client.CreateImageSpriteTemplate({})
+       const data = await client.CreateWatermarkTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -961,6 +991,16 @@ it("mps.v20190612.CreateVideoDatabaseEntryTask", async function () {
 it("mps.v20190612.ProcessLiveStream", async function () {
     try {
        const data = await client.ProcessLiveStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteLiveRecordTemplate", async function () {
+    try {
+       const data = await client.DeleteLiveRecordTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

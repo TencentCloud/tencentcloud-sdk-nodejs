@@ -33,9 +33,10 @@ import {
   FlowStatisticsArray,
   CreateTranscodeTemplateRequest,
   ProcessLiveStreamResponse,
+  LiveStreamAiQualityControlResultInfo,
   CreateOutputSRTSettings,
   MediaAiAnalysisHighlightItem,
-  ModifyStreamLinkOutputInfoResponse,
+  DeleteLiveRecordTemplateRequest,
   DescribeAnimatedGraphicsTemplatesRequest,
   AiReviewTaskProhibitedAsrResult,
   AdaptiveDynamicStreamingTemplate,
@@ -169,6 +170,7 @@ import {
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
   PornAsrReviewTemplateInfoForUpdate,
+  LiveRecordTemplate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ScheduleRecognitionTaskResult,
   ModifyStreamLinkEventResponse,
@@ -236,7 +238,7 @@ import {
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
   SRTSourceAddressReq,
-  LiveStreamAiQualityControlResultInfo,
+  DescribeLiveRecordTemplatesResponse,
   EnableScheduleRequest,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
@@ -314,6 +316,7 @@ import {
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
   DescribeStreamLinkActivateStateResponse,
+  VideoTemplateInfoForUpdate,
   AnimatedGraphicsTemplate,
   CreateInput,
   CreateOutputRTMPSettings,
@@ -381,6 +384,7 @@ import {
   DeletePersonSampleResponse,
   StartStreamLinkFlowRequest,
   CreateSnapshotByTimeOffsetTemplateResponse,
+  ModifyStreamLinkOutputInfoResponse,
   ModifyContentReviewTemplateRequest,
   StopStreamLinkFlowResponse,
   AiAnalysisTaskCoverOutput,
@@ -439,10 +443,12 @@ import {
   ModifyAIRecognitionTemplateRequest,
   ParseNotificationResponse,
   ComposeImageOperation,
+  CreateLiveRecordTemplateResponse,
   ActivityResult,
   DescribeInputHLSPullSettings,
   ResetWorkflowResponse,
   DescribeStreamLinkFlowsRequest,
+  HLSConfigureInfo,
   CreateAIAnalysisTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
@@ -470,6 +476,7 @@ import {
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeOutputRTMPPullServerUrl,
   AiRecognitionTaskOcrWordsSegmentItem,
+  DescribeLiveRecordTemplatesRequest,
   FlowLogInfo,
   DeleteWordSamplesResponse,
   DeleteStreamLinkOutputResponse,
@@ -490,7 +497,7 @@ import {
   LiveStreamRecordResultInfo,
   ComposeStyles,
   ExpressionConfigInfo,
-  VideoTemplateInfoForUpdate,
+  CreateLiveRecordTemplateRequest,
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
   AdaptiveDynamicStreamingTaskInput,
@@ -530,7 +537,7 @@ import {
   LiveStreamAiReviewResultItem,
   DescribeVideoSearchTaskDetailRequest,
   CreateInputRTPSettings,
-  TaskSimpleInfo,
+  DeleteLiveRecordTemplateResponse,
   SearchTaskResult,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
@@ -563,6 +570,7 @@ import {
   DrmInfo,
   DescribeSampleSnapshotTemplatesResponse,
   ComposeImageItem,
+  TaskSimpleInfo,
   MediaContentReviewSegmentItem,
   DescribeStreamLinkFlowRealtimeStatusResponse,
   LiveActivityResult,
@@ -571,6 +579,7 @@ import {
   AiAnalysisTaskHeadTailInput,
   FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
+  ModifyLiveRecordTemplateResponse,
   BatchDeleteStreamLinkFlowResponse,
   SchedulesInfo,
   DisableWorkflowRequest,
@@ -616,6 +625,7 @@ import {
   PornImgReviewTemplateInfo,
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
+  ModifyLiveRecordTemplateRequest,
   AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,
   DeleteSnapshotByTimeOffsetTemplateRequest,
@@ -688,6 +698,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkFlowRealtimeStatusResponse) => void
   ): Promise<DescribeStreamLinkFlowRealtimeStatusResponse> {
     return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb)
+  }
+
+  /**
+   * 修改直播录制模板
+   */
+  async ModifyLiveRecordTemplate(
+    req: ModifyLiveRecordTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
+  ): Promise<ModifyLiveRecordTemplateResponse> {
+    return this.request("ModifyLiveRecordTemplate", req, cb)
   }
 
   /**
@@ -874,6 +894,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDeleteStreamLinkFlowResponse) => void
   ): Promise<BatchDeleteStreamLinkFlowResponse> {
     return this.request("BatchDeleteStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 获取直播录制模板
+   */
+  async DescribeLiveRecordTemplates(
+    req: DescribeLiveRecordTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveRecordTemplatesResponse) => void
+  ): Promise<DescribeLiveRecordTemplatesResponse> {
+    return this.request("DescribeLiveRecordTemplates", req, cb)
   }
 
   /**
@@ -1203,6 +1233,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建直播录制模板
+   */
+  async CreateLiveRecordTemplate(
+    req: CreateLiveRecordTemplateRequest,
+    cb?: (error: string, rep: CreateLiveRecordTemplateResponse) => void
+  ): Promise<CreateLiveRecordTemplateResponse> {
+    return this.request("CreateLiveRecordTemplate", req, cb)
+  }
+
+  /**
    * 删除用户自定义内容审核模板。
    */
   async DeleteContentReviewTemplate(
@@ -1363,13 +1403,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义水印模板，数量上限：1000。
+   * 创建用户自定义雪碧图模板，数量上限：16。
    */
-  async CreateWatermarkTemplate(
-    req: CreateWatermarkTemplateRequest,
-    cb?: (error: string, rep: CreateWatermarkTemplateResponse) => void
-  ): Promise<CreateWatermarkTemplateResponse> {
-    return this.request("CreateWatermarkTemplate", req, cb)
+  async CreateImageSpriteTemplate(
+    req: CreateImageSpriteTemplateRequest,
+    cb?: (error: string, rep: CreateImageSpriteTemplateResponse) => void
+  ): Promise<CreateImageSpriteTemplateResponse> {
+    return this.request("CreateImageSpriteTemplate", req, cb)
   }
 
   /**
@@ -1546,13 +1586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义雪碧图模板，数量上限：16。
+   * 创建用户自定义水印模板，数量上限：1000。
    */
-  async CreateImageSpriteTemplate(
-    req: CreateImageSpriteTemplateRequest,
-    cb?: (error: string, rep: CreateImageSpriteTemplateResponse) => void
-  ): Promise<CreateImageSpriteTemplateResponse> {
-    return this.request("CreateImageSpriteTemplate", req, cb)
+  async CreateWatermarkTemplate(
+    req: CreateWatermarkTemplateRequest,
+    cb?: (error: string, rep: CreateWatermarkTemplateResponse) => void
+  ): Promise<CreateWatermarkTemplateResponse> {
+    return this.request("CreateWatermarkTemplate", req, cb)
   }
 
   /**
@@ -1682,6 +1722,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ProcessLiveStreamResponse) => void
   ): Promise<ProcessLiveStreamResponse> {
     return this.request("ProcessLiveStream", req, cb)
+  }
+
+  /**
+   * 删除直播录制模板
+   */
+  async DeleteLiveRecordTemplate(
+    req: DeleteLiveRecordTemplateRequest,
+    cb?: (error: string, rep: DeleteLiveRecordTemplateResponse) => void
+  ): Promise<DeleteLiveRecordTemplateResponse> {
+    return this.request("DeleteLiveRecordTemplate", req, cb)
   }
 
   /**

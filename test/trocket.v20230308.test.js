@@ -38,6 +38,16 @@ it("trocket.v20230308.ModifyMQTTInstanceCertBinding", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeMessageTrace", async function () {
+    try {
+       const data = await client.DescribeMessageTrace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})

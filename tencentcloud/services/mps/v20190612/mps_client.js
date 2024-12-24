@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb);
     }
     /**
+     * 修改直播录制模板
+     */
+    async ModifyLiveRecordTemplate(req, cb) {
+        return this.request("ModifyLiveRecordTemplate", req, cb);
+    }
+    /**
      * 对视频进行编辑，生成一个新的视频。编辑的功能包括：
  
 
@@ -160,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchDeleteStreamLinkFlow(req, cb) {
         return this.request("BatchDeleteStreamLinkFlow", req, cb);
+    }
+    /**
+     * 获取直播录制模板
+     */
+    async DescribeLiveRecordTemplates(req, cb) {
+        return this.request("DescribeLiveRecordTemplates", req, cb);
     }
     /**
      * 删除用户自定义指定时间点截图模板。
@@ -360,6 +372,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPersonSample", req, cb);
     }
     /**
+     * 创建直播录制模板
+     */
+    async CreateLiveRecordTemplate(req, cb) {
+        return this.request("CreateLiveRecordTemplate", req, cb);
+    }
+    /**
      * 删除用户自定义内容审核模板。
      */
     async DeleteContentReviewTemplate(req, cb) {
@@ -456,10 +474,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStreamLinkActivateState", req, cb);
     }
     /**
-     * 创建用户自定义水印模板，数量上限：1000。
+     * 创建用户自定义雪碧图模板，数量上限：16。
      */
-    async CreateWatermarkTemplate(req, cb) {
-        return this.request("CreateWatermarkTemplate", req, cb);
+    async CreateImageSpriteTemplate(req, cb) {
+        return this.request("CreateImageSpriteTemplate", req, cb);
     }
     /**
      * 该接口用于查询素材样本信息，支持根据素材 ID、名称、标签，分页查询。
@@ -575,10 +593,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWatermarkTemplates", req, cb);
     }
     /**
-     * 创建用户自定义雪碧图模板，数量上限：16。
+     * 创建用户自定义水印模板，数量上限：1000。
      */
-    async CreateImageSpriteTemplate(req, cb) {
-        return this.request("CreateImageSpriteTemplate", req, cb);
+    async CreateWatermarkTemplate(req, cb) {
+        return this.request("CreateWatermarkTemplate", req, cb);
     }
     /**
      * 修改媒体传输的事件配置信息。
@@ -660,6 +678,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ProcessLiveStream(req, cb) {
         return this.request("ProcessLiveStream", req, cb);
+    }
+    /**
+     * 删除直播录制模板
+     */
+    async DeleteLiveRecordTemplate(req, cb) {
+        return this.request("DeleteLiveRecordTemplate", req, cb);
     }
     /**
      * 删除用户自定义采样截图模板。

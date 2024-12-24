@@ -128,7 +128,7 @@ export interface DescribeCfsPGroupsResponse {
   /**
    * 权限组信息列表
    */
-  PGroupList: Array<PGroupInfo>
+  PGroupList?: Array<PGroupInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -193,27 +193,22 @@ export interface MigrationTaskInfo {
   MigrationMode?: number
   /**
    * 数据源桶名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketName?: string
   /**
    * 数据源桶地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketRegion?: string
   /**
    * 数据源桶地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketAddress?: string
   /**
    * 清单地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListAddress?: string
   /**
    * 文件系统实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FsName?: string
   /**
@@ -234,7 +229,6 @@ export interface MigrationTaskInfo {
   CreateTime?: number
   /**
    * 完成/终止时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
@@ -243,52 +237,42 @@ export interface MigrationTaskInfo {
   Status?: number
   /**
    * 文件数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTotalCount?: number
   /**
    * 已迁移文件数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMigratedCount?: number
   /**
    * 迁移失败文件数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileFailedCount?: number
   /**
    * 文件容量，单位Byte
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTotalSize?: number
   /**
    * 已迁移文件容量，单位Byte
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileMigratedSize?: number
   /**
    * 迁移失败文件容量，单位Byte
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileFailedSize?: number
   /**
    * 全部清单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileTotalList?: string
   /**
    * 已完成文件清单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileCompletedList?: string
   /**
    * 失败文件清单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileFailedList?: string
   /**
    * 源桶路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketPath?: string
   /**
@@ -304,27 +288,27 @@ export interface FileSystemClient {
   /**
    * 文件系统IP地址
    */
-  CfsVip: string
+  CfsVip?: string
   /**
    * 客户端IP地址
    */
-  ClientIp: string
+  ClientIp?: string
   /**
    * 文件系统所属VPCID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 可用区名称，例如ap-beijing-1，请参考 概览文档中的地域与可用区列表
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区中文名称
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 该文件系统被挂载到客户端上的路径信息
    */
-  MountDirectory: string
+  MountDirectory?: string
 }
 
 /**
@@ -494,17 +478,14 @@ Available:可用
   TieringState?: string
   /**
    * 分层存储详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TieringDetail?: TieringDetailInfo
   /**
    * 文件系统自动扩容策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScaleUpRule?: AutoScaleUpRule
   /**
    * 文件系统版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
 }
@@ -1043,11 +1024,11 @@ export interface DescribeSnapshotOperationLogsResponse {
   /**
    * 快照ID
    */
-  SnapshotId: string
+  SnapshotId?: string
   /**
    * 操作日志
    */
-  SnapshotOperates: Array<SnapshotOperateLog>
+  SnapshotOperates?: Array<SnapshotOperateLog>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1275,12 +1256,10 @@ export interface UserQuota {
   FileSystemId: string
   /**
    * 容量使用，单位GiB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CapacityUsed?: number
   /**
    * 文件使用个数，单位个
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileUsed?: number
   /**
@@ -1290,7 +1269,6 @@ export interface UserQuota {
   DirectoryPath?: string
   /**
    * 配置规则状态，inavailable---配置中，available --已生效，deleting--删除中，deleted 已删除，failed--配置失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -1438,15 +1416,15 @@ export interface UpdateCfsFileSystemNameResponse {
   /**
    * 用户自定义文件系统名称
    */
-  CreationToken: string
+  CreationToken?: string
   /**
    * 文件系统ID
    */
-  FileSystemId: string
+  FileSystemId?: string
   /**
    * 用户自定义文件系统名称
    */
-  FsName: string
+  FsName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2292,7 +2270,6 @@ export interface DescribeUserQuotaResponse {
 export interface TieringDetailInfo {
   /**
    * 低频存储容量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TieringSizeInBytes?: number
   /**

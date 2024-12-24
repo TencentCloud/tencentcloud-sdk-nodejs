@@ -1412,17 +1412,17 @@ export interface ReleasedApprover {
   Name?: string
   /**
    * 签署方经办人的证件类型，支持以下类型
-<ul><li>ID_CARD : 居民身份证(默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<ul><li>ID_CARD : 中国大陆居民身份证(默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
    * 证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。
 </li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber?: string
   /**
@@ -1582,12 +1582,12 @@ export interface SyncProxyOrganizationRequest {
   /**
    * 第三方平台子客企业法定代表人的证件类型，支持以下类型
 <ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li></ul>
-注: `现在仅支持ID_CARD居民身份证类型`
+注: `现在仅支持ID_CARD中国大陆居民身份证类型`
    */
   ProxyLegalIdCardType?: string
   /**
    * 第三方平台子客企业法定代表人的证件号码, 应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li></ul>
    */
   ProxyLegalIdCardNumber?: string
   /**
@@ -1859,8 +1859,8 @@ export interface NeedReviewApproverInfo {
   /**
    * 签署方经办人的证件类型，支持以下类型
 <ul><li>ID_CARD 中国大陆居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)</li>
+<li>HONGKONG_AND_MACAO 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
 <li>OTHER_CARD_TYPE 其他证件</li></ul>
 
 注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -1868,9 +1868,9 @@ export interface NeedReviewApproverInfo {
   ApproverIdCardType?: string
   /**
    * 签署方经办人的证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   ApproverIdCardNumber?: string
   /**
@@ -3643,7 +3643,7 @@ export interface CreateConsoleLoginUrlRequest {
   Operator?: UserInfo
   /**
    * 子客经办人身份证
-注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持居民身份证类型`。
+注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。
    */
   ProxyOperatorIdCardNumber?: string
   /**
@@ -3847,9 +3847,9 @@ export interface CommonFlowApprover {
   ApproverMobile?: string
   /**
    * 签署方经办人的证件类型，支持以下类型
-<ul><li>ID_CARD : 居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li>
+<ul><li>ID_CARD : 中国大陆居民身份证  (默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
 <li>OTHER_CARD_TYPE : 其他证件</li></ul>
 
 注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -3857,10 +3857,10 @@ export interface CommonFlowApprover {
   ApproverIdCardType?: string
   /**
    * 签署方经办人的证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。
 </li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   ApproverIdCardNumber?: string
   /**
@@ -3959,8 +3959,8 @@ export interface FillApproverInfo {
   /**
    * 签署方经办人的证件类型，支持以下类型
 <ul><li>ID_CARD 中国大陆居民身份证</li>
-<li>HONGKONG_AND_MACAO 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)</li>
+<li>HONGKONG_AND_MACAO 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
 <li>OTHER_CARD_TYPE 其他证件</li></ul>
 
 注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -3969,9 +3969,9 @@ export interface FillApproverInfo {
   ApproverIdCardType?: string
   /**
    * 签署方经办人的证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
 
 注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。`
    */
@@ -4162,8 +4162,8 @@ export interface UserThreeFactor {
   /**
    * 证件类型，支持以下类型
 <ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
   IdCardType: string
   /**
@@ -5153,9 +5153,9 @@ export interface CreateSignUrlsRequest {
   Mobile?: string
   /**
    * 证件类型，支持以下类型
-<ul><li>ID_CARD : 居民身份证</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<ul><li>ID_CARD : 中国大陆居民身份证</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
@@ -5252,7 +5252,7 @@ export interface RegistrationOrganizationInfo {
    * 组织机构企业注册地址。
 请确认该企业注册地址与企业营业执照中注册的地址一致。
    */
-  Address: string
+  Address?: string
   /**
    * 组织机构超管姓名。
 在注册流程中，必须是超管本人进行操作。
@@ -5279,9 +5279,9 @@ export interface RegistrationOrganizationInfo {
   AuthorizationTypes?: Array<number | bigint>
   /**
    * 经办人的证件类型，支持以下类型
-<ul><li>ID_CARD : 居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<ul><li>ID_CARD : 中国大陆居民身份证  (默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
 
    */
   AdminIdCardType?: string
@@ -5428,8 +5428,8 @@ export interface FlowApproverInfo {
   /**
    * 签署方经办人的证件类型，支持以下类型
 <ul><li>ID_CARD : 中国大陆居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
 <li>OTHER_CARD_TYPE : 其他证件</li></ul>
 
 注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -5437,9 +5437,9 @@ export interface FlowApproverInfo {
   IdCardType?: string
   /**
    * 签署方经办人的证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber?: string
   /**
@@ -5783,9 +5783,9 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
   UserName: string
   /**
    * 证件号码, 应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber: string
   /**
@@ -5807,8 +5807,8 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
   /**
    * 证件类型，支持以下类型
 <ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li>
 <li>OTHER_CARD_TYPE : 其他</li></ul>
 
 注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -5984,7 +5984,7 @@ export interface CreatePersonAuthCertificateImageRequest {
    */
   UserName: string
   /**
-   * 证件类型，支持以下类型<ul><li> ID_CARD  : 居民身份证 (默认值)</li><li> HONGKONG_AND_MACAO  : 港澳居民来往内地通行证</li><li> HONGKONG_MACAO_AND_TAIWAN  : 港澳台居民居住证(格式同居民身份证)</li></ul>
+   * 证件类型，支持以下类型<ul><li> ID_CARD  : 中国大陆居民身份证 (默认值)</li><li> HONGKONG_AND_MACAO  : 中国港澳居民来往内地通行证</li><li> HONGKONG_MACAO_AND_TAIWAN  : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
   IdCardType: string
   /**
@@ -7338,8 +7338,8 @@ export interface ProxyOrganizationOperator {
   /**
    * 签署方经办人的证件类型，支持以下类型
 <ul><li>ID_CARD : 中国大陆居民身份证  (默认值)</li>
-<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<li>HONGKONG_AND_MACAO :  中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN :  中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
 
    */
   IdCardType?: string
@@ -7522,17 +7522,17 @@ export interface ChannelCreateBatchSignUrlRequest {
   /**
    * 证件类型，支持以下类型
 <ul><li>**ID_CARD** : 中国大陆居民身份证 (默认值)</li>
-<li>**HONGKONG_AND_MACAO** : 港澳居民来往内地通行证</li>
-<li>**HONGKONG_MACAO_AND_TAIWAN** : 港澳台居民居住证(格式同居民身份证)</li></ul>
+<li>**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证</li>
+<li>**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
 
 注：`请确保和合同中填入的一致`
    */
   IdCardType?: string
   /**
    * 证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
 
 注：`请确保和合同中填入的一致`
    */

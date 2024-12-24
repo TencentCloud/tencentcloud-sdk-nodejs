@@ -78,6 +78,7 @@ import {
   DescribeMQTTUserListResponse,
   ModifyMQTTUserResponse,
   PriceTag,
+  DescribeMessageTraceResponse,
   MQTTUserItem,
   ModifyMQTTInsPublicEndpointRequest,
   ModifyMQTTInstanceCertBindingResponse,
@@ -85,6 +86,7 @@ import {
   DeleteMQTTInstanceResponse,
   DescribeTopicRequest,
   DeleteMQTTInstanceRequest,
+  DescribeMessageTraceRequest,
   CreateTopicResponse,
   DescribeMQTTInstanceListRequest,
   CreateMQTTInstanceResponse,
@@ -108,6 +110,7 @@ import {
   ModifyMQTTTopicResponse,
   DescribeMQTTTopicListRequest,
   MQTTClientSubscription,
+  MessageTraceItem,
   ModifyTopicRequest,
   DescribeInstanceResponse,
   PacketStatistics,
@@ -174,6 +177,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMQTTInstanceCertBindingResponse) => void
   ): Promise<ModifyMQTTInstanceCertBindingResponse> {
     return this.request("ModifyMQTTInstanceCertBinding", req, cb)
+  }
+
+  /**
+   * 根据消息 ID 查询消息轨迹。
+   */
+  async DescribeMessageTrace(
+    req: DescribeMessageTraceRequest,
+    cb?: (error: string, rep: DescribeMessageTraceResponse) => void
+  ): Promise<DescribeMessageTraceResponse> {
+    return this.request("DescribeMessageTrace", req, cb)
   }
 
   /**

@@ -1048,7 +1048,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeMicroservice", req, cb);
     }
     /**
-     * 删除Serverless部署组
+     * serverless 能力已下线。下线对应接口。
+
+删除Serverless部署组
      */
     async DeleteServerlessGroup(req, cb) {
         return this.request("DeleteServerlessGroup", req, cb);

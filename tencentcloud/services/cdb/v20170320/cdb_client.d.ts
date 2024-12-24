@@ -458,7 +458,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstanceParam(req: ModifyInstanceParamRequest, cb?: (error: string, rep: ModifyInstanceParamResponse) => void): Promise<ModifyInstanceParamResponse>;
     /**
-     * 关闭数据库代理
+     * 本接口（CloseCDBProxy）用于关闭数据库代理。
      */
     CloseCDBProxy(req: CloseCDBProxyRequest, cb?: (error: string, rep: CloseCDBProxyResponse) => void): Promise<CloseCDBProxyResponse>;
     /**
@@ -474,7 +474,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAsyncRequestInfo(req: DescribeAsyncRequestInfoRequest, cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void): Promise<DescribeAsyncRequestInfoResponse>;
     /**
-     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     * 本接口（DescribeAuditLogs）用于查询数据库审计日志。
      */
     DescribeAuditLogs(req: DescribeAuditLogsRequest, cb?: (error: string, rep: DescribeAuditLogsResponse) => void): Promise<DescribeAuditLogsResponse>;
     /**
@@ -732,7 +732,7 @@ export declare class Client extends AbstractClient {
      */
     CloseSSL(req: CloseSSLRequest, cb?: (error: string, rep: CloseSSLResponse) => void): Promise<CloseSSLResponse>;
     /**
-     * 本接口(CreateDeployGroup)用于创建放置实例的置放群组
+     * 本接口（CreateDeployGroup）用于创建放置实例的置放群组。
      */
     CreateDeployGroup(req: CreateDeployGroupRequest, cb?: (error: string, rep: CreateDeployGroupResponse) => void): Promise<CreateDeployGroupResponse>;
     /**

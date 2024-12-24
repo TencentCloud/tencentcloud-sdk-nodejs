@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMQTTInstanceCertBinding", req, cb);
     }
     /**
+     * 根据消息 ID 查询消息轨迹。
+     */
+    async DescribeMessageTrace(req, cb) {
+        return this.request("DescribeMessageTrace", req, cb);
+    }
+    /**
      * 修改主题属性
      */
     async ModifyTopic(req, cb) {

@@ -618,13 +618,26 @@ export interface ModifyInstancePasswordResponse {
     RequestId?: string;
 }
 /**
- * KillMasterGroup返回参数结构体
+ * DescribeSecondLevelBackupInfo返回参数结构体
  */
-export interface KillMasterGroupResponse {
+export interface DescribeSecondLevelBackupInfoResponse {
     /**
-     * 异步任务ID。
+     * 备份记录ID
      */
-    TaskId?: number;
+    BackupId?: string;
+    /**
+     * 备份时间戳
+     */
+    BackupTimestamp?: number;
+    /**
+     * 备份不存在的时间戳范围
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MissingTimestamps?: Array<SecondLevelBackupMissingTimestamps>;
+    /**
+     * 实例开启秒级备份的时间戳
+     */
+    StartTimestamp?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1465,6 +1478,19 @@ export interface DescribeInstanceDealDetailRequest {
      * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。数组最大长度限制为10
      */
     DealIds: Array<string>;
+}
+/**
+ * KillMasterGroup返回参数结构体
+ */
+export interface KillMasterGroupResponse {
+    /**
+     * 异步任务ID。
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Redis节点的运行信息
@@ -3026,6 +3052,21 @@ export interface ModifyInstanceEventRequest {
     Status?: string;
 }
 /**
+ * 秒级备份不存在的时间戳范围
+ */
+export interface SecondLevelBackupMissingTimestamps {
+    /**
+     * 开始时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTimeStamp?: number;
+    /**
+     * 结束时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTimeStamp?: number;
+}
+/**
  * DescribeBackupDetail返回参数结构体
  */
 export interface DescribeBackupDetailResponse {
@@ -3899,21 +3940,17 @@ export interface InstanceNode {
     InstanceClusterNode?: Array<InstanceClusterNode>;
 }
 /**
- * tendis节点信息
+ * ModifyInstanceBackupMode返回参数结构体
  */
-export interface TendisNodes {
+export interface ModifyInstanceBackupModeResponse {
     /**
-     * 节点ID
+     * 任务ID
      */
-    NodeId?: string;
+    TaskId?: number;
     /**
-     * 节点角色
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    NodeRole?: string;
-    /**
-     * 可用区 ID。
-     */
-    ZoneId?: number;
+    RequestId?: string;
 }
 /**
  * SwitchProxy返回参数结构体
@@ -5621,6 +5658,21 @@ export interface DescribeRedisClustersResponse {
     RequestId?: string;
 }
 /**
+ * ModifyInstanceBackupMode请求参数结构体
+ */
+export interface ModifyInstanceBackupModeRequest {
+    /**
+     * 实例的ID，长度在12-36之间。
+     */
+    InstanceId: string;
+    /**
+     * 备份模式：
+  - SecondLevelBackup   秒级备份
+  - NormalLevelBackup    普通备份
+     */
+    BackupMode?: string;
+}
+/**
  * DescribeProxySlowLog返回参数结构体
  */
 export interface DescribeProxySlowLogResponse {
@@ -5692,6 +5744,23 @@ export interface DescribeInstanceMonitorBigKeyRequest {
  * DescribeBackupDownloadRestriction请求参数结构体
  */
 export declare type DescribeBackupDownloadRestrictionRequest = null;
+/**
+ * tendis节点信息
+ */
+export interface TendisNodes {
+    /**
+     * 节点ID
+     */
+    NodeId?: string;
+    /**
+     * 节点角色
+     */
+    NodeRole?: string;
+    /**
+     * 可用区 ID。
+     */
+    ZoneId?: number;
+}
 /**
  * DescribeParamTemplateInfo返回参数结构体
  */
@@ -5928,6 +5997,19 @@ export interface RemoveReplicationInstanceResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeSecondLevelBackupInfo请求参数结构体
+ */
+export interface DescribeSecondLevelBackupInfoRequest {
+    /**
+     * 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。
+     */
+    InstanceId?: string;
+    /**
+     * 秒级备份时间戳，7天内
+     */
+    BackupTimestamp?: number;
 }
 /**
  * 安全组详情

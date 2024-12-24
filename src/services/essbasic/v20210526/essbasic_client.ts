@@ -1144,6 +1144,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 - 子客企业员工用户批量签署，需要传递员工OpenId和子客企业的OrganizationOpenId。<font color="red">请确保此OrganizationOpenId对应子客已经认证，且OpenId对应员工此子客下已经实名</font>。Name，Mobile, IdCard等信息此时可以不传，系统会查询此OpenId实名信息自动补充。
 - 生成批量签署链接时，合同目标参与方状态需为<font color="red">待签署</font>状态。
 - 个人批量签署进行的合同的签名区， 全部变成<font color="red">手写签名</font>（不管合同里边设置的签名限制）来进行。
+- 不支持签署方含有签批控件，或设置了签署方在签署时自行添加签署控件功能的合同进行批量签署。
      */
   async ChannelCreateBatchSignUrl(
     req: ChannelCreateBatchSignUrlRequest,

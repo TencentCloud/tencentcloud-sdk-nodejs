@@ -5403,75 +5403,83 @@ export interface EnvBillingInfoItem {
   /**
    * 环境ID
    */
-  EnvId: string
+  EnvId?: string
   /**
    * tcb产品套餐ID，参考DescribePackages接口的返回值。
    */
-  PackageId: string
+  PackageId?: string
   /**
    * 自动续费标记
    */
-  IsAutoRenew: boolean
+  IsAutoRenew?: boolean
   /**
    * 状态。包含以下取值：
 <li> 空字符串：初始化中</li>
 <li> NORMAL：正常</li>
 <li> ISOLATE：隔离</li>
    */
-  Status: string
+  Status?: string
   /**
    * 支付方式。包含以下取值：
 <li> PREPAYMENT：预付费</li>
 <li> POSTPAID：后付费</li>
    */
-  PayMode: string
+  PayMode?: string
   /**
    * 隔离时间，最近一次隔离的时间
    */
-  IsolatedTime: string
+  IsolatedTime?: string
   /**
    * 过期时间，套餐即将到期的时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 创建时间，第一次接入计费方案的时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间，计费信息最近一次更新的时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * true表示从未升级过付费版。
    */
-  IsAlwaysFree: boolean
+  IsAlwaysFree?: boolean
   /**
    * 付费渠道。
 <li> miniapp：小程序</li>
 <li> qcloud：腾讯云</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PaymentChannel: string
+  PaymentChannel?: string
   /**
    * 最新的订单信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrderInfo: OrderInfo
+  OrderInfo?: OrderInfo
   /**
    * 免费配额信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FreeQuota: string
+  FreeQuota?: string
   /**
    * 是否开启 `超过套餐额度部分转按量付费`
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableOverrun: boolean
+  EnableOverrun?: boolean
   /**
    * 环境套餐类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtPackageType: string
+  ExtPackageType?: string
+  /**
+   * 是否付费期环境，可取值：yes/no。
+   */
+  EnvCharged?: string
+  /**
+   * 是否已激活，可取值：yes/no。
+   */
+  EnvActivated?: string
 }
 
 /**

@@ -96,36 +96,36 @@ export interface ApiDetailResponse {
     /**
      * API 请求参数
      */
-    Request: Array<ApiRequestDescr>;
+    Request?: Array<ApiRequestDescr>;
     /**
      * API 响应参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Response: Array<ApiResponseDescr>;
+    Response?: Array<ApiResponseDescr>;
     /**
      * API 复杂结构定义
      */
-    Definitions: Array<ApiDefinitionDescr>;
+    Definitions?: Array<ApiDefinitionDescr>;
     /**
      * API 的 content type
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestContentType: string;
+    RequestContentType?: string;
     /**
      * API  能否调试
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CanRun: boolean;
+    CanRun?: boolean;
     /**
      * API 状态 0:离线 1:在线，默认0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * API 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
 }
 /**
  * UpdateApiRateLimitRule请求参数结构体
@@ -1384,7 +1384,7 @@ export interface DescribeApiGroupsResponse {
      * 翻页结构体
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: TsfPageApiGroupInfo;
+    Result?: TsfPageApiGroupInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6318,11 +6318,11 @@ export interface ApiDefinitionDescr {
     /**
      * 对象名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 对象属性列表
      */
-    Properties: Array<PropertyField>;
+    Properties?: Array<PropertyField>;
 }
 /**
  * DescribeLaneRules返回参数结构体
@@ -6971,37 +6971,37 @@ export interface GatewayDeployGroup {
      * 网关部署组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeployGroupId: string;
+    DeployGroupId?: string;
     /**
      * 网关部署组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeployGroupName: string;
+    DeployGroupName?: string;
     /**
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * 应用分类：V：虚拟机应用，C：容器应用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationType: string;
+    ApplicationType?: string;
     /**
      * 部署组应用状态,取值: Running、Waiting、Paused、Updating、RollingBack、Abnormal、Unknown
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupStatus: string;
+    GroupStatus?: string;
     /**
      * 集群类型，C ：容器，V：虚拟机
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterType: string;
+    ClusterType?: string;
 }
 /**
  * 包列表
@@ -7554,37 +7554,37 @@ export interface GatewayPlugin {
      * 网关插件id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 插件名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 插件类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 插件描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
      * 发布状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * 网关分组简单信息
@@ -7804,12 +7804,12 @@ export interface LaneInfos {
      * 总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 泳道信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: Array<LaneInfo>;
+    Content?: Array<LaneInfo>;
 }
 /**
  * CreateTaskFlow请求参数结构体
@@ -7897,15 +7897,15 @@ export interface ApiUseStatisticsEntity {
     /**
      * 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 次数
      */
-    Count: string;
+    Count?: string;
     /**
      * 比率
      */
-    Ratio: string;
+    Ratio?: string;
 }
 /**
  * UnbindApiGroup返回参数结构体
@@ -9227,112 +9227,112 @@ export interface ApiDetailInfo {
      * API ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiId: string;
+    ApiId?: string;
     /**
      * 命名空间ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceId: string;
+    NamespaceId?: string;
     /**
      * 命名空间名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceName: string;
+    NamespaceName?: string;
     /**
      * 服务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicroserviceId: string;
+    MicroserviceId?: string;
     /**
      * 服务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicroserviceName: string;
+    MicroserviceName?: string;
     /**
      * API 请求路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Path: string;
+    Path?: string;
     /**
      * Api 映射路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PathMapping: string;
+    PathMapping?: string;
     /**
      * 请求方法
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Method: string;
+    Method?: string;
     /**
      * 所属分组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 是否禁用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsableStatus: string;
+    UsableStatus?: string;
     /**
      * 发布状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReleaseStatus: string;
+    ReleaseStatus?: string;
     /**
      * 开启限流
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RateLimitStatus: string;
+    RateLimitStatus?: string;
     /**
      * 是否开启mock
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MockStatus: string;
+    MockStatus?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
      * 发布时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReleasedTime: string;
+    ReleasedTime?: string;
     /**
      * 所属分组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * API 超时，单位毫秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timeout: number;
+    Timeout?: number;
     /**
      * Api所在服务host
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Host: string;
+    Host?: string;
     /**
      * API类型。 ms ： 微服务API； external :外部服务Api
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiType: string;
+    ApiType?: string;
     /**
      * Api描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * API路径匹配类型。normal：普通API；wildcard：通配API。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiMatchType: string;
+    ApiMatchType?: string;
     /**
      * RPC 额外信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -9442,17 +9442,16 @@ export interface RedoTaskFlowBatchRequest {
 }
 /**
  * 单元化命名空间翻页对象
-
  */
 export interface TsfPageUnitNamespace {
     /**
      * 记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 记录实体列表
      */
-    Content: Array<UnitNamespace>;
+    Content?: Array<UnitNamespace>;
 }
 /**
  * 分页的 ContainerEvent
@@ -10250,15 +10249,15 @@ export interface ApiResponseDescr {
     /**
      * 参数描述
      */
-    Name: string;
+    Name?: string;
     /**
      * 参数类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 参数描述
      */
-    Description: string;
+    Description?: string;
 }
 /**
  * DescribeBusinessLogConfigs请求参数结构体
@@ -10330,28 +10329,28 @@ export interface ApiRequestDescr {
     /**
      * 参数名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 参数类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 参数位置
      */
-    In: string;
+    In?: string;
     /**
      * 参数描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 参数是否必须
      */
-    Required: boolean;
+    Required?: boolean;
     /**
      * 参数的默认值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefaultValue: string;
+    DefaultValue?: string;
 }
 /**
  * API版本数组
@@ -10361,17 +10360,17 @@ export interface ApiVersionArray {
      * App ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * App 名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * App 包版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PkgVersion: string;
+    PkgVersion?: string;
 }
 /**
  * TSF Envoy网关服务配置
@@ -12398,7 +12397,7 @@ export interface CreateApiGroupResponse {
      * API分组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12588,7 +12587,7 @@ export interface DescribeGatewayAllGroupApisRequest {
      */
     GatewayDeployGroupId: string;
     /**
-     * 搜索关键字，支持分组名称或API Path
+     * 搜索关键字，支持命名空间名称或服务名称
      */
     SearchWord?: string;
 }
@@ -13503,62 +13502,62 @@ export interface Config {
      * 配置项ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigId: string;
+    ConfigId?: string;
     /**
      * 配置项名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigName: string;
+    ConfigName?: string;
     /**
      * 配置项版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigVersion: string;
+    ConfigVersion?: string;
     /**
      * 配置项版本描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigVersionDesc: string;
+    ConfigVersionDesc?: string;
     /**
      * 配置项值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigValue: string;
+    ConfigValue?: string;
     /**
      * 配置项类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigType: string;
+    ConfigType?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreationTime: string;
+    CreationTime?: string;
     /**
      * 应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationName: string;
+    ApplicationName?: string;
     /**
      * 删除标识，true：可以删除；false：不可删除
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeleteFlag: boolean;
+    DeleteFlag?: boolean;
     /**
      * 最后更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastUpdateTime: string;
+    LastUpdateTime?: string;
     /**
      * 配置项版本数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigVersionCount: number;
+    ConfigVersionCount?: number;
 }
 /**
  * 端口对象
@@ -13613,9 +13612,9 @@ export interface DescribeApiUseDetailRequest {
  */
 export interface CreateMicroserviceWithDetailRespResponse {
     /**
-     * id
+     * 微服务ID
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13891,21 +13890,21 @@ export interface MsApiArray {
     /**
      * API 请求路径
      */
-    Path: string;
+    Path?: string;
     /**
      * 请求方法
      */
-    Method: string;
+    Method?: string;
     /**
      * 方法描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * API状态 0:离线 1:在线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * 业务日志配置
@@ -14282,12 +14281,12 @@ export interface TsfPageUnitRuleV2 {
      * 记录总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 记录实体列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: Array<UnitRule>;
+    Content?: Array<UnitRule>;
 }
 /**
  * UpdateApiRateLimitRules返回参数结构体
@@ -14374,92 +14373,97 @@ export interface ApiGroupInfo {
      * Api Group Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * Api Group 名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 分组上下文
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupContext: string;
+    GroupContext?: string;
     /**
      * 鉴权类型。 secret： 密钥鉴权； none:无鉴权
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthType: string;
+    AuthType?: string;
     /**
      * 发布状态, drafted: 未发布。 released: 发布
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 分组创建时间 如:2019-06-20 15:51:28
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 分组更新时间 如:2019-06-20 15:51:28
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
      * api分组已绑定的网关部署组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BindedGatewayDeployGroups: Array<GatewayDeployGroup>;
+    BindedGatewayDeployGroups?: Array<GatewayDeployGroup>;
     /**
      * api 个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiCount: number;
+    ApiCount?: number;
     /**
      * 访问group的ACL类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AclMode: string;
+    AclMode?: string;
     /**
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 分组类型。 ms： 微服务分组； external:外部Api分组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupType: string;
+    GroupType?: string;
     /**
      * 网关实例的类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayInstanceType: string;
+    GatewayInstanceType?: string;
     /**
      * 网关实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayInstanceId: string;
+    GatewayInstanceId?: string;
     /**
      * 命名空间参数key值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceNameKey: string;
+    NamespaceNameKey?: string;
     /**
      * 微服务名参数key值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceNameKey: string;
+    ServiceNameKey?: string;
     /**
      * 命名空间参数位置，path，header或query，默认是path
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceNameKeyPosition: string;
+    NamespaceNameKeyPosition?: string;
     /**
      * 微服务名参数位置，path，header或query，默认是path
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceNameKeyPosition: string;
+    ServiceNameKeyPosition?: string;
+    /**
+     * 网关实例ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayInstanceIdList?: Array<string>;
 }
 /**
  * 微服务网关单元化命名空间
@@ -14699,11 +14703,11 @@ export interface TsfPageApiDetailInfo {
     /**
      * 总记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * API 信息列表
      */
-    Content: Array<ApiDetailInfo>;
+    Content?: Array<ApiDetailInfo>;
 }
 /**
  * DescribeBasicResourceUsage请求参数结构体

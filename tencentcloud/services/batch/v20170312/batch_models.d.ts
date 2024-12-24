@@ -201,7 +201,7 @@ export interface EnvData {
      */
     EnhancedService?: EnhancedService;
     /**
-     * CVM实例计费类型<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * CVM实例计费类型<br><li>POSTPAID_BY_HOUR：按小时后付费</li><li>SPOTPAID：竞价付费</li><br>默认值：POSTPAID_BY_HOUR。
      */
     InstanceChargeType?: string;
     /**
@@ -664,52 +664,52 @@ export interface DescribeComputeEnvResponse {
     /**
      * 计算环境ID
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 计算环境名称
      */
-    EnvName: string;
+    EnvName?: string;
     /**
      * 位置信息
      */
-    Placement: Placement;
+    Placement?: Placement;
     /**
      * 计算环境创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 计算节点列表信息
      */
-    ComputeNodeSet: Array<ComputeNode>;
+    ComputeNodeSet?: Array<ComputeNode>;
     /**
      * 计算节点统计指标
      */
-    ComputeNodeMetrics: ComputeNodeMetrics;
+    ComputeNodeMetrics?: ComputeNodeMetrics;
     /**
      * 计算节点期望个数
      */
-    DesiredComputeNodeCount: number;
+    DesiredComputeNodeCount?: number;
     /**
      * 计算环境类型
      */
-    EnvType: string;
+    EnvType?: string;
     /**
      * 计算环境资源类型，当前为CVM和CPM（黑石）
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 下一步动作
      */
-    NextAction: string;
+    NextAction?: string;
     /**
      * 用户添加到计算环境中的计算节点个数
      */
-    AttachedComputeNodeCount: number;
+    AttachedComputeNodeCount?: number;
     /**
      * 计算环境绑定的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1195,54 +1195,54 @@ export interface ComputeEnvCreateInfo {
     /**
      * 计算环境 ID
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 计算环境名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvName: string;
+    EnvName?: string;
     /**
      * 计算环境描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvDescription: string;
+    EnvDescription?: string;
     /**
      * 计算环境类型，仅支持“MANAGED”类型
      */
-    EnvType: string;
+    EnvType?: string;
     /**
      * 计算环境参数
      */
-    EnvData: EnvData;
+    EnvData?: EnvData;
     /**
      * 数据盘挂载选项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MountDataDisks: Array<MountDataDisk>;
+    MountDataDisks?: Array<MountDataDisk>;
     /**
      * 输入映射
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InputMappings: Array<InputMapping>;
+    InputMappings?: Array<InputMapping>;
     /**
      * 授权信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Authentications: Array<Authentication>;
+    Authentications?: Array<Authentication>;
     /**
      * 通知信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Notifications: Array<Notification>;
+    Notifications?: Array<Notification>;
     /**
      * 计算节点期望个数
      */
-    DesiredComputeNodeCount: number;
+    DesiredComputeNodeCount?: number;
     /**
      * 计算环境标签列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeComputeEnvCreateInfos请求参数结构体
@@ -1845,11 +1845,11 @@ export interface DescribeComputeEnvCreateInfosResponse {
     /**
      * 计算环境数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 计算环境创建信息列表
      */
-    ComputeEnvCreateInfoSet: Array<ComputeEnvCreateInfo>;
+    ComputeEnvCreateInfoSet?: Array<ComputeEnvCreateInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1927,7 +1927,7 @@ export interface SubmitJobResponse {
     /**
      * 当通过本接口来提交作业时会返回该参数，表示一个作业ID。返回作业ID列表并不代表作业解析/运行成功，可根据 DescribeJob 接口查询其状态。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2033,7 +2033,7 @@ export interface CreateComputeEnvResponse {
     /**
      * 计算环境ID
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2377,7 +2377,7 @@ export interface CreateTaskTemplateResponse {
     /**
      * 任务模板ID
      */
-    TaskTemplateId: string;
+    TaskTemplateId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

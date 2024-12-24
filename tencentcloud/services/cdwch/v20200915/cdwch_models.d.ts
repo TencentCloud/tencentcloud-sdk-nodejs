@@ -643,7 +643,7 @@ export interface CreateInstanceNewRequest {
      */
     UserSubnetId: string;
     /**
-     * 版本
+     * 系统版本
      */
     ProductVersion: string;
     /**
@@ -673,7 +673,7 @@ export interface CreateInstanceNewRequest {
      */
     CosBucketName?: string;
     /**
-     * 是否是裸盘挂载
+     * 是否是裸盘挂载，默认值 0 为 未挂载，1 为挂载。
      */
     MountDiskType?: number;
     /**
@@ -1770,7 +1770,7 @@ export interface AttachCBSSpec {
  */
 export interface ScheduleStrategy {
     /**
-     * 备份桶列表
+     * 备份桶名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CosBucketName?: string;

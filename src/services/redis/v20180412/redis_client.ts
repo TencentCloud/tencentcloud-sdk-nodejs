@@ -44,7 +44,7 @@ import {
   AssociateSecurityGroupsRequest,
   DescribeTaskListResponse,
   ModifyInstancePasswordResponse,
-  KillMasterGroupResponse,
+  DescribeSecondLevelBackupInfoResponse,
   RenewInstanceResponse,
   DescribeSlowLogResponse,
   DescribeCommonDBInstancesRequest,
@@ -76,6 +76,7 @@ import {
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
   DescribeInstanceDealDetailRequest,
+  KillMasterGroupResponse,
   RedisNode,
   DescribeProjectSecurityGroupRequest,
   ParameterDetail,
@@ -148,6 +149,7 @@ import {
   DescribeTaskListRequest,
   ChangeMasterInstanceResponse,
   ModifyInstanceEventRequest,
+  SecondLevelBackupMissingTimestamps,
   DescribeBackupDetailResponse,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
@@ -183,7 +185,7 @@ import {
   ModifyConnectionConfigRequest,
   ManualBackupInstanceResponse,
   InstanceNode,
-  TendisNodes,
+  ModifyInstanceBackupModeResponse,
   SwitchProxyResponse,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
@@ -249,11 +251,13 @@ import {
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
   DescribeRedisClustersResponse,
+  ModifyInstanceBackupModeRequest,
   DescribeProxySlowLogResponse,
   ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
   DescribeInstanceMonitorBigKeyRequest,
   DescribeBackupDownloadRestrictionRequest,
+  TendisNodes,
   DescribeParamTemplateInfoResponse,
   SwitchProxyRequest,
   DescribeInstanceSpecBandwidthRequest,
@@ -266,6 +270,7 @@ import {
   CreateInstanceAccountResponse,
   DescribeInstanceBackupsRequest,
   RemoveReplicationInstanceResponse,
+  DescribeSecondLevelBackupInfoRequest,
   SecurityGroupDetail,
   InquiryPriceUpgradeInstanceResponse,
   DeleteInstanceAccountResponse,
@@ -420,6 +425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改实例的备份模式
+   */
+  async ModifyInstanceBackupMode(
+    req: ModifyInstanceBackupModeRequest,
+    cb?: (error: string, rep: ModifyInstanceBackupModeResponse) => void
+  ): Promise<ModifyInstanceBackupModeResponse> {
+    return this.request("ModifyInstanceBackupMode", req, cb)
+  }
+
+  /**
    * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载的网络信息与地址。
    */
   async ModifyBackupDownloadRestriction(
@@ -510,13 +525,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteInstanceAccount）用于删除实例子账号。
+   * 查询实例秒级备份信息
    */
-  async DeleteInstanceAccount(
-    req: DeleteInstanceAccountRequest,
-    cb?: (error: string, rep: DeleteInstanceAccountResponse) => void
-  ): Promise<DeleteInstanceAccountResponse> {
-    return this.request("DeleteInstanceAccount", req, cb)
+  async DescribeSecondLevelBackupInfo(
+    req: DescribeSecondLevelBackupInfoRequest,
+    cb?: (error: string, rep: DescribeSecondLevelBackupInfoResponse) => void
+  ): Promise<DescribeSecondLevelBackupInfoResponse> {
+    return this.request("DescribeSecondLevelBackupInfo", req, cb)
   }
 
   /**
@@ -837,6 +852,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSpecBandwidthResponse) => void
   ): Promise<DescribeInstanceSpecBandwidthResponse> {
     return this.request("DescribeInstanceSpecBandwidth", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteInstanceAccount）用于删除实例子账号。
+   */
+  async DeleteInstanceAccount(
+    req: DeleteInstanceAccountRequest,
+    cb?: (error: string, rep: DeleteInstanceAccountResponse) => void
+  ): Promise<DeleteInstanceAccountResponse> {
+    return this.request("DeleteInstanceAccount", req, cb)
   }
 
   /**

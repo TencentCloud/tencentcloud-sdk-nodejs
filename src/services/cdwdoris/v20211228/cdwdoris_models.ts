@@ -4231,6 +4231,10 @@ export interface NodeInfos {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
 }
 
 /**

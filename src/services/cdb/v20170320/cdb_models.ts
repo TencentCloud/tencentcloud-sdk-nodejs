@@ -83,7 +83,6 @@ export interface TaskDetail {
   AsyncRequestId?: string
   /**
    * 任务的附加信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAttachInfo?: Array<TaskAttachInfo>
 }
@@ -977,7 +976,7 @@ export interface CreateDeployGroupResponse {
   /**
    * 置放群组ID。
    */
-  DeployGroupId: string
+  DeployGroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1523,12 +1522,12 @@ export interface ErrlogItem {
    * 错误发生时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 错误详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: string
+  Content?: string
 }
 
 /**
@@ -2296,7 +2295,7 @@ export interface ModifyAccountHostResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2863,27 +2862,27 @@ export interface CustomConfig {
    * 设备
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Device: string
+  Device?: string
   /**
    * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 设备类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * 内存
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Memory: number
+  Memory?: number
   /**
    * 核数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cpu: number
+  Cpu?: number
 }
 
 /**
@@ -4287,17 +4286,17 @@ export interface DescribeProxyCustomConfResponse {
    * 代理配置数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Count: number
+  Count?: number
   /**
    * 代理配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomConf: CustomConfig
+  CustomConf?: CustomConfig
   /**
    * 权重限制
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WeightRule: Rule
+  WeightRule?: Rule
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4822,38 +4821,38 @@ export interface DeployGroupInfo {
   /**
    * 置放群组 ID。
    */
-  DeployGroupId: string
+  DeployGroupId?: string
   /**
    * 置放群组名称。
    */
-  DeployGroupName: string
+  DeployGroupName?: string
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
    */
-  Quota: number
+  Quota?: number
   /**
    * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Affinity: string
+  Affinity?: string
   /**
    * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LimitNum: number
+  LimitNum?: number
   /**
    * 置放群组详细信息。
    */
-  Description: string
+  Description?: string
   /**
    * 置放群组物理机型属性。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevClass: string
+  DevClass?: string
 }
 
 /**
@@ -5116,7 +5115,7 @@ export interface DescribeAuditLogsRequest {
    */
   Limit?: number
   /**
-   * 分页偏移量。
+   * 日志偏移量，最多支持偏移查询65535条日志。可填写范围：0 - 65535。
    */
   Offset?: number
   /**
@@ -5422,12 +5421,10 @@ export interface ResetRootAccountResponse {
 export interface Account {
   /**
    * 新账户的名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User: string
   /**
    * 新账户的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host: string
 }
@@ -6988,12 +6985,12 @@ export interface DescribeDeployGroupListResponse {
   /**
    * 符合条件的记录总数。
    */
-  Total: number
+  Total?: number
   /**
    * 返回列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<DeployGroupInfo>
+  Items?: Array<DeployGroupInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7042,10 +7039,12 @@ export interface CreateAuditRuleTemplateRequest {
 export interface DatabasePrivilege {
   /**
    * 权限信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Privileges: Array<string>
   /**
    * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
 }
@@ -7178,13 +7177,11 @@ export interface TaskAttachInfo {
   /**
    * 升级任务：
 ”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachKey?: string
   /**
    * 升级任务：
 ”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachValue?: string
 }
@@ -9533,7 +9530,7 @@ export interface ModifyAccountMaxUserConnectionsResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9830,9 +9827,12 @@ export interface AuditLog {
   TrxLivingTime?: number
   /**
    * 日志命中规则模板的基本信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateInfo?: Array<LogRuleTemplateInfo>
+  /**
+   *  事务ID
+   */
+  TrxId?: number
 }
 
 /**
@@ -9841,18 +9841,22 @@ export interface AuditLog {
 export interface ColumnPrivilege {
   /**
    * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * 数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 数据库列名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Column: string
   /**
    * 权限信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Privileges: Array<string>
 }
@@ -10161,14 +10165,17 @@ export interface RenewDBInstanceResponse {
 export interface TablePrivilege {
   /**
    * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * 数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 权限信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Privileges: Array<string>
 }

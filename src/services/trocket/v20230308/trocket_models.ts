@@ -1520,6 +1520,25 @@ export interface PriceTag {
 }
 
 /**
+ * DescribeMessageTrace返回参数结构体
+ */
+export interface DescribeMessageTraceResponse {
+  /**
+   * 展示Topic名
+   */
+  ShowTopicName?: string
+  /**
+   * 轨迹详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<MessageTraceItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MQTT集群用户信息
  */
 export interface MQTTUserItem {
@@ -1731,6 +1750,32 @@ export interface DeleteMQTTInstanceRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeMessageTrace请求参数结构体
+ */
+export interface DescribeMessageTraceRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 主题名称
+   */
+  Topic: string
+  /**
+   * 消息ID
+   */
+  MsgId: string
+  /**
+   * 是否是死信消息
+   */
+  QueryDeadLetterMessage?: boolean
+  /**
+   * 是否是延时消息
+   */
+  QueryDelayMessage?: boolean
 }
 
 /**
@@ -2370,6 +2415,22 @@ export interface MQTTClientSubscription {
    * 服务质量等级
    */
   Qos?: number
+}
+
+/**
+ * 消息轨迹
+ */
+export interface MessageTraceItem {
+  /**
+   * 步骤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Stage?: string
+  /**
+   * 轨迹详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
 }
 
 /**

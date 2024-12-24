@@ -102,6 +102,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskInfo", req, cb);
     }
     /**
+     * 修改实例的备份模式
+     */
+    async ModifyInstanceBackupMode(req, cb) {
+        return this.request("ModifyInstanceBackupMode", req, cb);
+    }
+    /**
      * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载的网络信息与地址。
      */
     async ModifyBackupDownloadRestriction(req, cb) {
@@ -156,10 +162,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupUrl", req, cb);
     }
     /**
-     * 本接口（DeleteInstanceAccount）用于删除实例子账号。
+     * 查询实例秒级备份信息
      */
-    async DeleteInstanceAccount(req, cb) {
-        return this.request("DeleteInstanceAccount", req, cb);
+    async DescribeSecondLevelBackupInfo(req, cb) {
+        return this.request("DescribeSecondLevelBackupInfo", req, cb);
     }
     /**
      * 本接口（ModifyConnectionConfig）用于修改实例的连接配置，包括带宽和最大连接数。
@@ -352,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceSpecBandwidth(req, cb) {
         return this.request("DescribeInstanceSpecBandwidth", req, cb);
+    }
+    /**
+     * 本接口（DeleteInstanceAccount）用于删除实例子账号。
+     */
+    async DeleteInstanceAccount(req, cb) {
+        return this.request("DeleteInstanceAccount", req, cb);
     }
     /**
      * 本接口（SwitchProxy）为 Proxy 模拟故障接口。

@@ -3550,10 +3550,12 @@ export interface IsolateDBInstanceRequest {
 export interface InstanceSpec {
     /**
      * 设备型号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Machine: string;
     /**
      * 该机型对应的可售卖规格列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecInfos: Array<SpecConfigInfo>;
 }
