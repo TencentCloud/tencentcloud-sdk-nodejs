@@ -798,9 +798,9 @@ export interface DescribeFlowDetailInfoRequest {
 }
 
 /**
- * ChannelCancelUserAutoSignEnableUrl返回参数结构体
+ * ChannelCancelFlow返回参数结构体
  */
-export interface ChannelCancelUserAutoSignEnableUrlResponse {
+export interface ChannelCancelFlowResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1135,6 +1135,20 @@ export interface OperateChannelTemplateResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailMessageList?: Array<AuthFailMessage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ChannelCreateDynamicFlowApprover返回参数结构体
+ */
+export interface ChannelCreateDynamicFlowApproverResponse {
+  /**
+   * 动态合同补充结果列表
+   */
+  DynamicFlowResultList?: Array<DynamicFlowResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1664,9 +1678,9 @@ export interface ChannelCreatePrepareFlowRequest {
 }
 
 /**
- * ChannelCreateFlowReminds请求参数结构体
+ * ChannelCreateFlowSignUrl请求参数结构体
  */
-export interface ChannelCreateFlowRemindsRequest {
+export interface ChannelCreateFlowSignUrlRequest {
   /**
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
 
@@ -1680,9 +1694,45 @@ export interface ChannelCreateFlowRemindsRequest {
    */
   Agent: Agent
   /**
-   * 需执行催办的合同流程ID数组，最多支持100个。
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
-  FlowIds: Array<string>
+  FlowId: string
+  /**
+   * 流程签署人列表，其中结构体的ApproverType必传。
+若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。
+若为子客企业签署方则需传OpenId、OrganizationOpenId，其他可不传。
+
+注:
+`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。`
+`2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传`
+   */
+  FlowApproverInfos?: Array<FlowApproverInfo>
+  /**
+   * 用户信息，暂未开放
+   * @deprecated
+   */
+  Operator?: UserInfo
+  /**
+   * 机构信息，暂未开放
+   * @deprecated
+   */
+  Organization?: OrganizationInfo
+  /**
+   * 签署完之后的H5页面的跳转链接，最大长度1000个字符。链接类型请参考 <a href="https://qian.tencent.com/developers/company/openqianh5" target="_blank">跳转电子签H5</a>
+
+   */
+  JumpUrl?: string
+  /**
+   * 链接类型，支持指定以下类型
+<ul><li>0 : 签署链接 (默认值)</li>
+<li>1 : 预览链接</li></ul>
+注:
+`1. 当指定链接类型为1时，链接为预览链接，打开链接无法签署仅支持预览以及查看当前合同状态。`
+`2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。`
+   */
+  UrlType?: number
 }
 
 /**
@@ -1754,9 +1804,9 @@ export interface ChannelDescribeSignFaceVideoResponse {
 }
 
 /**
- * ChannelCancelFlow返回参数结构体
+ * ChannelCancelUserAutoSignEnableUrl返回参数结构体
  */
-export interface ChannelCancelFlowResponse {
+export interface ChannelCancelUserAutoSignEnableUrlResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2103,6 +2153,13 @@ MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverM
 
    */
   PreviewType?: number
+  /**
+   * 是否开启动态合同（动态签署人2.0）
+<ul><li> **false** :(默认) 不开启动态合同（动态签署人2.0）</li>
+<li> **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人</li></ul>
+
+   */
+  OpenDynamicFlow?: boolean
 }
 
 /**
@@ -2446,31 +2503,28 @@ export interface ChannelRenewAutoSignLicenseResponse {
 }
 
 /**
- * ChannelCreateFlowByFiles返回参数结构体
+ * 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称
  */
-export interface ChannelCreateFlowByFilesResponse {
+export interface ApproverItem {
   /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+   * 签署方唯一编号
 
-[点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
+在<a href="https://qian.tencent.com/developers/company/dynamic_signer" target="_blank">动态补充签署人</a>场景下，可以用此编号确定参与方
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId?: string
+  SignId?: string
   /**
-   * 签署方信息，如角色ID、角色名称等
+   * 签署方角色编号
+
+在<a href="https://qian.tencent.com/developers/company/dynamic_signer" target="_blank">动态补充签署人</a>场景下，可以用此编号确定参与方
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Approvers?: Array<ApproverItem>
+  RecipientId?: string
   /**
-   * 预览链接，有效期5分钟
-注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL
+   * 签署方角色名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PreviewUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ApproverRoleName?: string
 }
 
 /**
@@ -2838,6 +2892,24 @@ export interface ChannelCreateOrganizationBatchSignUrlRequest {
    * 员工手机号，必须与姓名一起使用。 如果OpenId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
    */
   Mobile?: string
+}
+
+/**
+ * 动态合同签署人结果
+ */
+export interface DynamicFlowApproverResult {
+  /**
+   * 签署流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在签署流程中的位置；
+   */
+  RecipientId?: string
+  /**
+   * 签署ID - 发起流程时系统自动补充 - 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
+   */
+  SignId?: string
+  /**
+   * 签署人状态信息
+   */
+  ApproverStatus?: number
 }
 
 /**
@@ -3536,6 +3608,24 @@ export interface OrganizationCommonInfo {
 }
 
 /**
+ * ArchiveDynamicFlow返回参数结构体
+ */
+export interface ArchiveDynamicFlowResponse {
+  /**
+   * 合同流程ID
+   */
+  FlowId?: string
+  /**
+   * 动态签署人的参与人信息
+   */
+  Approvers?: Array<ChannelArchiveDynamicApproverData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateConsoleLoginUrl请求参数结构体
  */
 export interface CreateConsoleLoginUrlRequest {
@@ -4046,6 +4136,20 @@ export interface CreateEmployeeQualificationSealQrCodeRequest {
 }
 
 /**
+ * 动态签署2.0合同参与人信息
+ */
+export interface ChannelArchiveDynamicApproverData {
+  /**
+   * 签署方唯一编号，一个全局唯一的标识符，不同的流程不会出现冲突。 可以使用签署方的唯一编号来生成签署链接（也可以通过RecipientId来生成签署链接）。
+   */
+  SignId?: string
+  /**
+   * 签署方角色编号，签署方角色编号是用于区分同一个流程中不同签署方的唯一标识。不同的流程会出现同样的签署方角色编号。 填写控件和签署控件都与特定的角色编号关联。
+   */
+  RecipientId?: string
+}
+
+/**
  * ChannelCreateUserAutoSignSealUrl请求参数结构体
  */
 export interface ChannelCreateUserAutoSignSealUrlRequest {
@@ -4474,6 +4578,28 @@ export interface CreatePartnerAutoSignAuthUrlResponse {
 }
 
 /**
+ * ArchiveDynamicFlow请求参数结构体
+ */
+export interface ArchiveDynamicFlowRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经过实名认证
+   */
+  Agent: Agent
+  /**
+   * 合同流程ID
+   */
+  FlowId: string
+}
+
+/**
  * 此结构体 (FlowInfo) 用于描述签署流程信息。
  */
 export interface FlowInfo {
@@ -4590,40 +4716,18 @@ export interface FlowInfo {
 }
 
 /**
- * 接口调用的员工信息
+ * ChannelCreateDynamicFlowApprover请求参数结构体
  */
-export interface UserInfo {
+export interface ChannelCreateDynamicFlowApproverRequest {
   /**
-   * 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。
+   * 动态合同信息
 
-
-注意:
-1. OpenId在子客企业对应一个真实员工，**本应用唯一, 不可重复使用**，最大64位字符串
-2. 可使用用户在贵方企业系统中的Userid或者hash值作为子客企业的员工OpenId
-3. **员工加入企业后**, 可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录子客控制台后, 在**组织架构**模块查看员工们的OpenId, 样式如下图
-![image](https://qcloudimg.tencent-cloud.cn/raw/bb67fb66c926759df3a0af5838fdafd5.png)
    */
-  OpenId?: string
+  FillDynamicFlowList: Array<DynamicFlowInfo>
   /**
-   * 内部参数，暂未开放使用
-   * @deprecated
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 此接口下面信息必填。 <ul> <li>渠道应用标识: Agent.AppId</li> <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li> <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li> </ul> 第三方平台子客企业和员工必须已经经过实名认证
    */
-  Channel?: string
-  /**
-   * 内部参数，暂未开放使用
-   * @deprecated
-   */
-  CustomUserId?: string
-  /**
-   * 内部参数，暂未开放使用
-   * @deprecated
-   */
-  ClientIp?: string
-  /**
-   * 内部参数，暂未开放使用
-   * @deprecated
-   */
-  ProxyIp?: string
+  Agent?: Agent
 }
 
 /**
@@ -6511,6 +6615,20 @@ export interface Filter {
 }
 
 /**
+ * 动态合同补充签署人结果
+ */
+export interface DynamicFlowResult {
+  /**
+   * 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 [点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
+   */
+  FlowId?: string
+  /**
+   * 动态合同签署人补充结果信息列表
+   */
+  DynamicFlowApproverList?: Array<DynamicFlowApproverResult>
+}
+
+/**
  * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
  */
 export interface FilledComponent {
@@ -6871,28 +6989,31 @@ export interface IntentionAction {
 }
 
 /**
- * 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称
+ * ChannelCreateFlowByFiles返回参数结构体
  */
-export interface ApproverItem {
+export interface ChannelCreateFlowByFilesResponse {
   /**
-   * 签署方唯一编号
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
 
-在<a href="https://qian.tencent.com/developers/company/dynamic_signer" target="_blank">动态补充签署人</a>场景下，可以用此编号确定参与方
+[点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SignId?: string
+  FlowId?: string
   /**
-   * 签署方角色编号
-
-在<a href="https://qian.tencent.com/developers/company/dynamic_signer" target="_blank">动态补充签署人</a>场景下，可以用此编号确定参与方
+   * 签署方信息，如角色ID、角色名称等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecipientId?: string
+  Approvers?: Array<ApproverItem>
   /**
-   * 签署方角色名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预览链接，有效期5分钟
+注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL
    */
-  ApproverRoleName?: string
+  PreviewUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6990,6 +7111,28 @@ export interface CreateSealByImageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 动态合同信息
+ */
+export interface DynamicFlowInfo {
+  /**
+   * 合同流程ID，为32位字符串。 - 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 - 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 - <font color="red">不建议继续使用</font>，请使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId指定合同
+   */
+  FlowId: string
+  /**
+   * 合同流程的参与方列表, 最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，不同类型的签署方传参方式可以参考文档 [签署方入参指引](https://qian.tencent.com/developers/partner/flow_approver)。 如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序, 请确保列表中参与人的顺序符合实际签署顺序。
+   */
+  FlowApprovers: Array<FlowApproverInfo>
+  /**
+   * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传： <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签） </li><li> **OTHER** : 通用场景</li></ul> 注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
+   */
+  AutoSignScene?: string
+  /**
+   * 签署人校验方式 VerifyCheck: 人脸识别（默认） MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证） 参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+   */
+  ApproverVerifyType?: string
 }
 
 /**
@@ -7887,6 +8030,43 @@ export interface ChannelCreateFlowGroupByTemplatesRequest {
    * 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
    */
   FlowGroupName: string
+}
+
+/**
+ * 接口调用的员工信息
+ */
+export interface UserInfo {
+  /**
+   * 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。
+
+
+注意:
+1. OpenId在子客企业对应一个真实员工，**本应用唯一, 不可重复使用**，最大64位字符串
+2. 可使用用户在贵方企业系统中的Userid或者hash值作为子客企业的员工OpenId
+3. **员工加入企业后**, 可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录子客控制台后, 在**组织架构**模块查看员工们的OpenId, 样式如下图
+![image](https://qcloudimg.tencent-cloud.cn/raw/bb67fb66c926759df3a0af5838fdafd5.png)
+   */
+  OpenId?: string
+  /**
+   * 内部参数，暂未开放使用
+   * @deprecated
+   */
+  Channel?: string
+  /**
+   * 内部参数，暂未开放使用
+   * @deprecated
+   */
+  CustomUserId?: string
+  /**
+   * 内部参数，暂未开放使用
+   * @deprecated
+   */
+  ClientIp?: string
+  /**
+   * 内部参数，暂未开放使用
+   * @deprecated
+   */
+  ProxyIp?: string
 }
 
 /**
@@ -8881,9 +9061,9 @@ export interface ChannelUpdateSealStatusResponse {
 }
 
 /**
- * ChannelCreateFlowSignUrl请求参数结构体
+ * ChannelCreateFlowReminds请求参数结构体
  */
-export interface ChannelCreateFlowSignUrlRequest {
+export interface ChannelCreateFlowRemindsRequest {
   /**
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
 
@@ -8897,45 +9077,9 @@ export interface ChannelCreateFlowSignUrlRequest {
    */
   Agent: Agent
   /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   * 需执行催办的合同流程ID数组，最多支持100个。
    */
-  FlowId: string
-  /**
-   * 流程签署人列表，其中结构体的ApproverType必传。
-若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。
-若为子客企业签署方则需传OpenId、OrganizationOpenId，其他可不传。
-
-注:
-`1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。`
-`2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传`
-   */
-  FlowApproverInfos?: Array<FlowApproverInfo>
-  /**
-   * 用户信息，暂未开放
-   * @deprecated
-   */
-  Operator?: UserInfo
-  /**
-   * 机构信息，暂未开放
-   * @deprecated
-   */
-  Organization?: OrganizationInfo
-  /**
-   * 签署完之后的H5页面的跳转链接，最大长度1000个字符。链接类型请参考 <a href="https://qian.tencent.com/developers/company/openqianh5" target="_blank">跳转电子签H5</a>
-
-   */
-  JumpUrl?: string
-  /**
-   * 链接类型，支持指定以下类型
-<ul><li>0 : 签署链接 (默认值)</li>
-<li>1 : 预览链接</li></ul>
-注:
-`1. 当指定链接类型为1时，链接为预览链接，打开链接无法签署仅支持预览以及查看当前合同状态。`
-`2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。`
-   */
-  UrlType?: number
+  FlowIds: Array<string>
 }
 
 /**

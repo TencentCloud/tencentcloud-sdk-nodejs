@@ -5,11 +5,11 @@ export interface DescribeUserTasksResponse {
     /**
      * 任务总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 任务列表
      */
-    FlowSet: Array<UserTaskInfo>;
+    FlowSet?: Array<UserTaskInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -48,19 +48,19 @@ export interface DescribeAccountPrivilegesResponse {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 权限列表。
      */
-    Privileges: Array<string>;
+    Privileges?: Array<string>;
     /**
      * 数据库账号用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 数据库账号Host
      */
-    Host: string;
+    Host?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -272,7 +272,7 @@ export interface ModifyInstanceVipResponse {
     /**
      * 异步任务流程ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -419,17 +419,17 @@ export interface DescribeDBSecurityGroupsResponse {
     /**
      * 安全组详情。
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 实例VIP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VIP: string;
+    VIP?: string;
     /**
      * 实例端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VPort: string;
+    VPort?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -731,7 +731,7 @@ export interface DescribeFlowResponse {
     /**
      * 流程状态，0：成功，1：失败，2：运行中
      */
-    Status: number;
+    Status?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1622,11 +1622,11 @@ export interface DescribeBackupFilesResponse {
     /**
      * 备份文件列表
      */
-    Files: Array<InstanceBackupFileItem>;
+    Files?: Array<InstanceBackupFileItem>;
     /**
      * 总条目数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1669,11 +1669,11 @@ export interface DescribeProjectSecurityGroupsResponse {
     /**
      * 安全组详情。
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 安全组个数。
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1832,15 +1832,15 @@ export interface DescribeDBEncryptAttributesResponse {
     /**
      * 是否启用加密，1-已开启；0-未开启。
      */
-    EncryptStatus: number;
+    EncryptStatus?: number;
     /**
      * DEK密钥
      */
-    CipherText: string;
+    CipherText?: string;
     /**
      * DEK密钥过期日期。
      */
-    ExpireDate: string;
+    ExpireDate?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2740,27 +2740,27 @@ export interface DescribeDatabaseObjectsResponse {
     /**
      * 透传入参。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 数据库名称。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 表列表。
      */
-    Tables: Array<DatabaseTable>;
+    Tables?: Array<DatabaseTable>;
     /**
      * 视图列表。
      */
-    Views: Array<DatabaseView>;
+    Views?: Array<DatabaseView>;
     /**
      * 存储过程列表。
      */
-    Procs: Array<DatabaseProcedure>;
+    Procs?: Array<DatabaseProcedure>;
     /**
      * 函数列表。
      */
-    Funcs: Array<DatabaseFunction>;
+    Funcs?: Array<DatabaseFunction>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2926,7 +2926,7 @@ export interface RenewDCDBInstanceResponse {
      * 长订单号。可以据此调用 DescribeOrders
    查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3028,16 +3028,16 @@ export interface DescribeDCDBShardsResponse {
     /**
      * 符合条件的分片数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 分片信息列表
      */
-    Shards: Array<DCDBShardInfo>;
+    Shards?: Array<DCDBShardInfo>;
     /**
      * 灾备标志，0-无，1-主实例，2-灾备实例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DcnFlag: number;
+    DcnFlag?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3490,7 +3490,7 @@ export interface CloseDBExtranetAccessResponse {
     /**
      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3524,7 +3524,7 @@ export interface KillSessionResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4510,19 +4510,19 @@ export interface DescribeDatabaseTableResponse {
     /**
      * 实例名称。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 数据库名称。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 表名称。
      */
-    Table: string;
+    Table?: string;
     /**
      * 列信息。
      */
-    Cols: Array<TableColumn>;
+    Cols?: Array<TableColumn>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4700,11 +4700,11 @@ export interface DescribeDCDBInstancesRequest {
      */
     FilterInstanceType?: string;
     /**
-     * 按实例状态筛选
+     * 按实例状态筛选。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中
      */
     Status?: Array<number | bigint>;
     /**
-     * 排除实例状态
+     * 排除实例状态。状态值 -2：已删除； -1：已隔离；0：创建中；1：流程处理中；2：运行中
      */
     ExcludeStatus?: Array<number | bigint>;
 }

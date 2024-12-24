@@ -89,7 +89,12 @@ export interface BatchDeregisterTargetsResponse {
   /**
    * 解绑失败的监听器ID。
    */
-  FailListenerIdSet: Array<string>
+  FailListenerIdSet?: Array<string>
+  /**
+   * 解绑失败错误原因信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -113,19 +118,19 @@ export interface RulesItems {
   /**
    * 规则id
    */
-  LocationId: string
+  LocationId?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * uri
    */
-  Url: string
+  Url?: string
   /**
    * 绑定的后端对象
    */
-  Targets: Array<LbRsTargets>
+  Targets?: Array<LbRsTargets>
 }
 
 /**
@@ -797,36 +802,36 @@ export interface ClassicalTarget {
   /**
    * 后端服务的类型，可取值：CVM、ENI（即将支持）
    */
-  Type: string
+  Type?: string
   /**
    * 后端服务的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
    */
-  Weight: number
+  Weight?: number
   /**
    * 后端服务的外网 IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicIpAddresses: Array<string>
+  PublicIpAddresses?: Array<string>
   /**
    * 后端服务的内网 IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateIpAddresses: Array<string>
+  PrivateIpAddresses?: Array<string>
   /**
    * 后端服务的实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 后端服务的状态
 1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunFlag: number
+  RunFlag?: number
 }
 
 /**
@@ -836,30 +841,30 @@ export interface ListenerItem {
   /**
    * 监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 监听器协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 监听器端口
    */
-  Port: number
+  Port?: number
   /**
    * 绑定规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rules: Array<RulesItems>
+  Rules?: Array<RulesItems>
   /**
    * 四层绑定对象
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Targets: Array<LbRsTargets>
+  Targets?: Array<LbRsTargets>
   /**
    * 端口段监听器的结束端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndPort: number
+  EndPort?: number
 }
 
 /**
@@ -1133,22 +1138,22 @@ export interface RuleHealth {
   /**
    * 转发规则ID
    */
-  LocationId: string
+  LocationId?: string
   /**
    * 转发规则的域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 转发规则的Url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 本规则上绑定的后端服务的健康检查状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Targets: Array<TargetHealth>
+  Targets?: Array<TargetHealth>
 }
 
 /**
@@ -1369,17 +1374,17 @@ export interface LoadBalancerHealth {
   /**
    * 负载均衡实例ID
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * 负载均衡实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoadBalancerName: string
+  LoadBalancerName?: string
   /**
    * 监听器列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Listeners: Array<ListenerHealth>
+  Listeners?: Array<ListenerHealth>
 }
 
 /**
@@ -1447,15 +1452,15 @@ export interface BlockedIP {
   /**
    * 黑名单IP
    */
-  IP: string
+  IP?: string
   /**
    * 加入黑名单的时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -2452,23 +2457,23 @@ export interface ClassicalHealth {
   /**
    * 后端服务的内网 IP
    */
-  IP: string
+  IP?: string
   /**
    * 后端服务的端口
    */
-  Port: number
+  Port?: number
   /**
    * 负载均衡的监听端口
    */
-  ListenerPort: number
+  ListenerPort?: number
   /**
    * 转发协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 健康检查结果，1 表示健康，0 表示不健康
    */
-  HealthStatus: number
+  HealthStatus?: number
 }
 
 /**
@@ -3250,12 +3255,12 @@ export interface ClassicalLoadBalancerInfo {
   /**
    * 后端实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 负载均衡实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoadBalancerIds: Array<string>
+  LoadBalancerIds?: Array<string>
 }
 
 /**
@@ -3644,47 +3649,47 @@ export interface BindDetailItem {
   /**
    * 配置绑定的CLB ID
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * 配置绑定的监听器ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 配置绑定的域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 配置绑定的规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocationId: string
+  LocationId?: string
   /**
    * 监听器名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 监听器协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 监听器端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vport: number
+  Vport?: number
   /**
    * location的url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
   /**
    * 配置ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UconfigId: string
+  UconfigId?: string
 }
 
 /**
@@ -3917,12 +3922,12 @@ export interface ClustersZone {
    * 集群所在的主可用区。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterZone: Array<string>
+  MasterZone?: Array<string>
   /**
    * 集群所在的备可用区。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SlaveZone: Array<string>
+  SlaveZone?: Array<string>
 }
 
 /**
@@ -3983,28 +3988,28 @@ export interface RewriteTarget {
 注意：此字段可能返回 null，表示无重定向。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetListenerId: string
+  TargetListenerId?: string
   /**
    * 重定向目标的转发规则ID
 注意：此字段可能返回 null，表示无重定向。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetLocationId: string
+  TargetLocationId?: string
   /**
    * 重定向状态码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RewriteCode: number
+  RewriteCode?: number
   /**
    * 重定向是否携带匹配的url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TakeUrl: boolean
+  TakeUrl?: boolean
   /**
    * 重定向类型，Manual: 手动重定向，Auto:  自动重定向
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RewriteType: string
+  RewriteType?: string
 }
 
 /**
@@ -4445,25 +4450,25 @@ export interface LbRsTargets {
   /**
    * 内网ip类型。“cvm”或“eni”
    */
-  Type: string
+  Type?: string
   /**
    * 后端实例的内网ip。
    */
-  PrivateIp: string
+  PrivateIp?: string
   /**
    * 绑定后端实例的端口。
    */
-  Port: number
+  Port?: number
   /**
    * rs的vpcId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: number
+  VpcId?: number
   /**
    * rs的权重
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
 }
 
 /**
@@ -5230,19 +5235,19 @@ export interface LBItem {
   /**
    * lb的字符串id
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * lb的vip
    */
-  Vip: string
+  Vip?: string
   /**
    * 监听器规则
    */
-  Listeners: Array<ListenerItem>
+  Listeners?: Array<ListenerItem>
   /**
    * LB所在地域
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -5638,25 +5643,25 @@ export interface ListenerHealth {
   /**
    * 监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 监听器名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 监听器的协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 监听器的端口
    */
-  Port: number
+  Port?: number
   /**
    * 监听器的转发规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rules: Array<RuleHealth>
+  Rules?: Array<RuleHealth>
 }
 
 /**

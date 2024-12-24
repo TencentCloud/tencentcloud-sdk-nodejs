@@ -278,6 +278,16 @@ it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     }
 })
 
+it("essbasic.v20210526.SyncProxyOrganization", async function () {
+    try {
+       const data = await client.SyncProxyOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDeleteRoleUsers", async function () {
     try {
        const data = await client.ChannelDeleteRoleUsers({})
@@ -398,9 +408,9 @@ it("essbasic.v20210526.ChannelGetTaskResultApi", async function () {
     }
 })
 
-it("essbasic.v20210526.CreateChannelFlowEvidenceReport", async function () {
+it("essbasic.v20210526.ChannelCreateDynamicFlowApprover", async function () {
     try {
-       const data = await client.CreateChannelFlowEvidenceReport({})
+       const data = await client.ChannelCreateDynamicFlowApprover({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +541,16 @@ it("essbasic.v20210526.CreateCloseOrganizationUrl", async function () {
 it("essbasic.v20210526.ChannelBatchCancelFlows", async function () {
     try {
        const data = await client.ChannelBatchCancelFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ArchiveDynamicFlow", async function () {
+    try {
+       const data = await client.ArchiveDynamicFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +698,9 @@ it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
     }
 })
 
-it("essbasic.v20210526.SyncProxyOrganization", async function () {
+it("essbasic.v20210526.CreateChannelFlowEvidenceReport", async function () {
     try {
-       const data = await client.SyncProxyOrganization({})
+       const data = await client.CreateChannelFlowEvidenceReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

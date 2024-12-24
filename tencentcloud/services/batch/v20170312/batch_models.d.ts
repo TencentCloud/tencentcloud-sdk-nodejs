@@ -2439,28 +2439,28 @@ export interface TaskTemplateView {
     /**
      * 任务模板ID
      */
-    TaskTemplateId: string;
+    TaskTemplateId?: string;
     /**
      * 任务模板名称
      */
-    TaskTemplateName: string;
+    TaskTemplateName?: string;
     /**
      * 任务模板描述
      */
-    TaskTemplateDescription: string;
+    TaskTemplateDescription?: string;
     /**
      * 任务模板信息
      */
-    TaskTemplateInfo: Task;
+    TaskTemplateInfo?: Task;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务模板绑定的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
 }
 /**
  * 实例机型配置。

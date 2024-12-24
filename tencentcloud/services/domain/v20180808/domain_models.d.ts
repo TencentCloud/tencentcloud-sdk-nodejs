@@ -112,23 +112,23 @@ export interface PriceInfo {
     /**
      * 域名后缀，例如.com
      */
-    Tld: string;
+    Tld?: string;
     /**
      * 购买年限，范围[1-10]
      */
-    Year: number;
+    Year?: number;
     /**
      * 域名原价
      */
-    Price: number;
+    Price?: number;
     /**
      * 域名现价
      */
-    RealPrice: number;
+    RealPrice?: number;
     /**
      * 商品的购买类型，新购，续费，赎回，转入，续费并转入
      */
-    Operation: string;
+    Operation?: string;
 }
 /**
  * DescribeCustomDnsHostSet返回参数结构体
@@ -984,15 +984,15 @@ export interface BatchStatus {
     /**
      * 批量任务id
      */
-    LogId: number;
+    LogId?: number;
     /**
      * 批量任务状态  doing：进行中  success：成功  failed：失败  partial_success：部分成功
      */
-    Status: string;
+    Status?: string;
     /**
      * 批量任务类型
      */
-    BatchAction: string;
+    BatchAction?: string;
 }
 /**
  * DescribePreAuctionList返回参数结构体

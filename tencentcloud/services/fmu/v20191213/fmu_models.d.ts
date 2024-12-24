@@ -148,6 +148,7 @@ export interface StyleImageRequest {
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Image?: string;
     /**
@@ -156,6 +157,7 @@ export interface StyleImageRequest {
   图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
   支持PNG、JPG、JPEG、BMP 等图片格式，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Url?: string;
     /**
@@ -332,6 +334,7 @@ export interface TryLipstickPicRequest {
     /**
      * 图片 base64 数据，base64 编码后大小不可超过6M。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Image?: string;
     /**
@@ -340,6 +343,7 @@ export interface TryLipstickPicRequest {
   图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Url?: string;
     /**
@@ -359,6 +363,7 @@ export interface StyleImageProRequest {
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Image?: string;
     /**
@@ -367,6 +372,7 @@ export interface StyleImageProRequest {
   图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
   支持PNG、JPG、JPEG、BMP 等图片格式，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Url?: string;
     /**
@@ -460,6 +466,7 @@ export interface BeautifyPicRequest {
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Image?: string;
     /**
@@ -468,6 +475,7 @@ export interface BeautifyPicRequest {
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+  暂不支持带有alpha透明通道的图片。
      */
     Url?: string;
     /**

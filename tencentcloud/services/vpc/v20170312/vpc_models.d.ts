@@ -13854,12 +13854,10 @@ export interface CCN {
     QosLevel?: string;
     /**
      * 付费类型，PREPAID为预付费，POSTPAID为后付费。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceChargeType?: string;
     /**
      * 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BandwidthLimitType?: string;
     /**
@@ -13872,62 +13870,50 @@ export interface CCN {
     RoutePriorityFlag?: boolean;
     /**
      * 实例关联的路由表个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableCount?: number;
     /**
      * 是否开启云联网多路由表特性。`False`：未开启，`True`：开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableFlag?: boolean;
     /**
      * `true`：实例已被封禁，流量不通，`false`:解封禁。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSecurityLock?: boolean;
     /**
      * 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteBroadcastPolicyFlag?: boolean;
     /**
      * 是否开启等价路由功能。`False` 未开启，`True` 开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteECMPFlag?: boolean;
     /**
      * 是否开启路由重叠功能。`False` 未开启，`True` 开启。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteOverlapFlag?: boolean;
     /**
      * 是否开启QOS。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrafficMarkingPolicyFlag?: boolean;
     /**
      * 是否开启路由表选择策略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteSelectPolicyFlag?: boolean;
     /**
      * 是否开启二层云联网通道。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectConnectAccelerateChannelFlag?: boolean;
     /**
      * 是否支持ipv6路由表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ipv6Flag?: boolean;
     /**
      * 是否支持路由表聚合策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MrtbAggregatePolicyFlag?: boolean;
     /**
      * 是否支持策略值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MrtbPolicyValueFlag?: boolean;
 }

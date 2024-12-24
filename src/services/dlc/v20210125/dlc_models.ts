@@ -2798,6 +2798,26 @@ export interface NotebookSessions {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkUiUrl?: string
+  /**
+   * session类型，group：资源组session independent：独立资源session，不依赖资源组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionType?: string
+  /**
+   * 引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineId?: string
+  /**
+   * 资源组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
 }
 
 /**
@@ -4485,6 +4505,31 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPoolMode?: string
+  /**
+   * 是否支持AI，false: 不支持；true：支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportAI?: boolean
+  /**
+   * 网关id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayState?: number
+  /**
+   * 是否能执行AI任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAIGateway?: boolean
+  /**
+   * 1:AI引擎，0:非AI引擎
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAIEngine?: number
 }
 
 /**
@@ -5098,6 +5143,36 @@ export interface NotebookSessionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
+  /**
+   * session类型，group：资源组下session independent：独立资源session， 不依赖资源组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionType?: string
+  /**
+   * 引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngineId?: string
+  /**
+   * 资源组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupId?: string
+  /**
+   * 资源组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName?: string
+  /**
+   * session，pod大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodSize?: number
+  /**
+   * pod数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodNumbers?: number
 }
 
 /**

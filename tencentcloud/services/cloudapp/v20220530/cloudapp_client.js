@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("cloudapp.tencentcloudapi.com", "2022-05-30", clientConfig);
     }
     /**
-     * 通过运行时roleId查询对应的软件 LICENSE
+     * 从软件进程读取 LICENSE。
      */
     async VerifyLicense(req, cb) {
         return this.request("VerifyLicense", req, cb);

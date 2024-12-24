@@ -7703,12 +7703,12 @@ export interface ServiceStatisticsResults {
      * 返回结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: Array<ServiceStatisticsResult>;
+    Content?: Array<ServiceStatisticsResult>;
     /**
      * 条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * DeployGroup请求参数结构体

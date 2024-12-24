@@ -80,8 +80,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消注册迁移任务
-   */
+     * 接口已经废弃不再使用
+
+取消注册迁移任务
+     */
   async DeregisterMigrationTask(
     req: DeregisterMigrationTaskRequest,
     cb?: (error: string, rep: DeregisterMigrationTaskResponse) => void

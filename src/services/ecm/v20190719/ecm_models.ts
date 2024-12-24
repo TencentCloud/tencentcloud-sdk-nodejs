@@ -6175,15 +6175,15 @@ TOTAL_EIP_QUOTA：用户当前地域下EIP的配额数；
 DAILY_EIP_APPLY：用户当前地域下今日申购次数；
 DAILY_PUBLIC_IP_ASSIGN：用户当前地域下，重新分配公网 IP次数。
    */
-  QuotaId: string
+  QuotaId?: string
   /**
    * 当前数量
    */
-  QuotaCurrent: number
+  QuotaCurrent?: number
   /**
    * 配额数量
    */
-  QuotaLimit: number
+  QuotaLimit?: number
 }
 
 /**

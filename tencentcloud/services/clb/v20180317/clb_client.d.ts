@@ -429,7 +429,6 @@ export declare class Client extends AbstractClient {
 通过接口调用：
 BGP带宽包必须传带宽包id
 独占集群克隆必须传对应的参数，否则按共享型创建
-功能内测中，请提交 [内测申请](https://cloud.tencent.com/apply/p/1akuvsmyn0g)。
      */
     CloneLoadBalancer(req: CloneLoadBalancerRequest, cb?: (error: string, rep: CloneLoadBalancerResponse) => void): Promise<CloneLoadBalancerResponse>;
     /**

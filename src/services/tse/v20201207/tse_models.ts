@@ -3667,6 +3667,14 @@ export interface KongRoutePreview {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Headers?: Array<KVMapping>
+  /**
+   * 是否缓存请求body，默认true
+   */
+  RequestBuffering?: boolean
+  /**
+   * 是否缓存响应body，默认true
+   */
+  ResponseBuffering?: boolean
 }
 
 /**
@@ -5291,30 +5299,30 @@ export interface NacosReplica {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 角色
    */
-  Role: string
+  Role?: string
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * VPC ID	
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5712,35 +5720,35 @@ export interface ZookeeperReplica {
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 角色
    */
-  Role: string
+  Role?: string
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 别名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AliasName: string
+  AliasName?: string
   /**
    * VPC ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6715,6 +6723,14 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
    * 路由的Headers
    */
   Headers?: Array<KVMapping>
+  /**
+   * 是否缓存请求body，默认true
+   */
+  RequestBuffering?: boolean
+  /**
+   * 是否缓存响应body，默认true
+   */
+  ResponseBuffering?: boolean
 }
 
 /**
@@ -8506,6 +8522,14 @@ export interface CreateCloudNativeAPIGatewayRouteRequest {
    * 路由的Headers
    */
   Headers?: Array<KVMapping>
+  /**
+   * 是否缓存请求body，默认true
+   */
+  RequestBuffering?: boolean
+  /**
+   * 是否缓存响应body，默认true
+   */
+  ResponseBuffering?: boolean
 }
 
 /**

@@ -29,7 +29,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过运行时roleId查询对应的软件 LICENSE
+   * 从软件进程读取 LICENSE。
    */
   async VerifyLicense(
     req?: VerifyLicenseRequest,

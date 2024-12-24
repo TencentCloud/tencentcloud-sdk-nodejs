@@ -1233,49 +1233,49 @@ export interface GroupInfo {
     /**
      * 消费者组账号
      */
-    Account: string;
+    Account?: string;
     /**
      * 消费者组名称
      */
-    ConsumerGroupName: string;
+    ConsumerGroupName?: string;
     /**
      * 消费者组备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段
      */
-    ConsumerGroupOffset: number;
+    ConsumerGroupOffset?: number;
     /**
      * 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段
      */
-    ConsumerGroupLag: number;
+    ConsumerGroupLag?: number;
     /**
      * 消费延迟(单位为秒)
      */
-    Latency: number;
+    Latency?: number;
     /**
      * 各分区的消费状态
      */
-    StateOfPartition: Array<MonitorInfo>;
+    StateOfPartition?: Array<MonitorInfo>;
     /**
      * 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
      * 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作
      */
-    ConsumerGroupState: string;
+    ConsumerGroupState?: string;
     /**
      * 每个消费者正在消费的分区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PartitionAssignment: Array<PartitionAssignment>;
+    PartitionAssignment?: Array<PartitionAssignment>;
 }
 /**
  * DeleteCompareTask返回参数结构体
@@ -3480,19 +3480,19 @@ export interface MonitorInfo {
     /**
      * 当前分区的编号，从0开始
      */
-    PartitionNo: number;
+    PartitionNo?: number;
     /**
      * 当前分区的偏移量
      */
-    ConsumerGroupOffset: number;
+    ConsumerGroupOffset?: number;
     /**
      * 当前分区未消费的数据量
      */
-    ConsumerGroupLag: number;
+    ConsumerGroupLag?: number;
     /**
      * 当前分区的消费延迟(单位为秒)
      */
-    Latency: number;
+    Latency?: number;
 }
 /**
  * DescribeOffsetByTime请求参数结构体

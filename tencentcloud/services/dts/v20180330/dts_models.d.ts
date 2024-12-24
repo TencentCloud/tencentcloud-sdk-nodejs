@@ -22,24 +22,24 @@ export interface MigrateStepDetailInfo {
     /**
      * 步骤序列
      */
-    StepNo: number;
+    StepNo?: number;
     /**
      * 步骤展现名称
      */
-    StepName: string;
+    StepName?: string;
     /**
      * 步骤英文标识
      */
-    StepId: string;
+    StepId?: string;
     /**
      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
      */
-    Status: number;
+    Status?: number;
     /**
      * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
 }
 /**
  * DeleteMigrateJob返回参数结构体
@@ -685,31 +685,31 @@ export interface MigrateDetailInfo {
     /**
      * 总步骤数
      */
-    StepAll: number;
+    StepAll?: number;
     /**
      * 当前步骤
      */
-    StepNow: number;
+    StepNow?: number;
     /**
      * 总进度,如："10"
      */
-    Progress: string;
+    Progress?: string;
     /**
      * 当前步骤进度,如:"1"
      */
-    CurrentStepProgress: string;
+    CurrentStepProgress?: string;
     /**
      * 主从差距，MB；在增量同步阶段有效，目前支持产品为：redis和mysql
      */
-    MasterSlaveDistance: number;
+    MasterSlaveDistance?: number;
     /**
      * 主从差距，秒；在增量同步阶段有效，目前支持产品为：mysql
      */
-    SecondsBehindMaster: number;
+    SecondsBehindMaster?: number;
     /**
      * 步骤信息
      */
-    StepInfo: Array<MigrateStepDetailInfo>;
+    StepInfo?: Array<MigrateStepDetailInfo>;
 }
 /**
  * StopMigrateJob请求参数结构体
@@ -750,11 +750,11 @@ export interface SubscribeInfo {
      */
     SubscribeName?: string;
     /**
-     * 数据订阅实例绑定的通道ID
+     * 数据订阅实例绑定的通道ID。kafka版订阅就是kafka topic
      */
     ChannelId?: string;
     /**
-     * 数据订阅绑定实例对应的产品名称
+     * 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
      */
     Product?: string;
     /**
@@ -762,15 +762,15 @@ export interface SubscribeInfo {
      */
     InstanceId?: string;
     /**
-     * 数据订阅实例绑定的数据库实例状态
+     * 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空
      */
     InstanceStatus?: string;
     /**
-     * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
+     * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
      */
     SubsStatus?: string;
     /**
-     * 上次修改时间
+     * 上次修改时间，时间格式如：Y-m-d h:m:s
      */
     ModifyTime?: string;
     /**
@@ -778,11 +778,11 @@ export interface SubscribeInfo {
      */
     CreateTime?: string;
     /**
-     * 隔离时间
+     * 隔离时间，时间格式如：Y-m-d h:m:s
      */
     IsolateTime?: string;
     /**
-     * 到期时间
+     * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
      */
     ExpireTime?: string;
     /**
@@ -794,7 +794,7 @@ export interface SubscribeInfo {
      */
     ConsumeStartTime?: string;
     /**
-     * 自动续费标识。0-不自动续费，1-自动续费
+     * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
@@ -807,7 +807,7 @@ export interface SubscribeInfo {
      */
     PayType?: number;
     /**
-     * 数据订阅实例的Vip
+     * 旧版订阅通道的vip
      */
     Vip?: string;
     /**
@@ -823,7 +823,7 @@ export interface SubscribeInfo {
      */
     UniqSubnetId?: string;
     /**
-     * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中，offline - 已下线
+     * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng
      */
     Status?: string;
     /**
@@ -1273,11 +1273,11 @@ export interface ErrorInfo {
     /**
      * 具体的报错日志, 包含错误码和错误信息
      */
-    ErrorLog: string;
+    ErrorLog?: string;
     /**
      * 报错对应的帮助文档Ur
      */
-    HelpDoc: string;
+    HelpDoc?: string;
 }
 /**
  * StartMigrateJob返回参数结构体

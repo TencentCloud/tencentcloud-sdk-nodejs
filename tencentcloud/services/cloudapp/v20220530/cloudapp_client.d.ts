@@ -8,7 +8,7 @@ import { VerifyLicenseRequest, VerifyLicenseResponse } from "./cloudapp_models";
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 通过运行时roleId查询对应的软件 LICENSE
+     * 从软件进程读取 LICENSE。
      */
     VerifyLicense(req?: VerifyLicenseRequest, cb?: (error: string, rep: VerifyLicenseResponse) => void): Promise<VerifyLicenseResponse>;
 }

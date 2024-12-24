@@ -20,7 +20,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyMigrationTaskStatus(req: ModifyMigrationTaskStatusRequest, cb?: (error: string, rep: ModifyMigrationTaskStatusResponse) => void): Promise<ModifyMigrationTaskStatusResponse>;
     /**
-     * 取消注册迁移任务
+     * 接口已经废弃不再使用
+
+取消注册迁移任务
      */
     DeregisterMigrationTask(req: DeregisterMigrationTaskRequest, cb?: (error: string, rep: DeregisterMigrationTaskResponse) => void): Promise<DeregisterMigrationTaskResponse>;
     /**

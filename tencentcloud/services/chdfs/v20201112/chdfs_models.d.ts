@@ -108,27 +108,27 @@ export interface AccessGroup {
     /**
      * 权限组ID
      */
-    AccessGroupId: string;
+    AccessGroupId?: string;
     /**
      * 权限组名称
      */
-    AccessGroupName: string;
+    AccessGroupName?: string;
     /**
      * 权限组描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
-     * VPC网络类型（1：CVM；2：黑石1.0）
+     * VPC网络类型（1：CVM）
      */
-    VpcType: number;
+    VpcType?: number;
     /**
      * VPC网络ID
      */
-    VpcId: string;
+    VpcId?: string;
 }
 /**
  * ModifyFileSystem返回参数结构体
@@ -985,7 +985,7 @@ export interface CreateAccessGroupRequest {
      */
     AccessGroupName: string;
     /**
-     * VPC网络类型（1：CVM；2：黑石1.0）
+     * VPC网络类型（1：CVM）
      */
     VpcType: number;
     /**

@@ -366,6 +366,10 @@ export interface RunWorkflowRequest {
      * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
      */
     VolumeIds?: Array<string>;
+    /**
+     * 工作流入口文件，不填使用默认入口文件。
+     */
+    Entrypoint?: string;
 }
 /**
  * DescribeRuns请求参数结构体
@@ -611,11 +615,11 @@ export interface CosFileInfo {
     /**
      * 存储桶。
      */
-    Bucket?: string;
+    Bucket: string;
     /**
      * COS文件地址。
      */
-    Uri?: string;
+    Uri: string;
     /**
      * 地域。
      */

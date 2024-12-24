@@ -334,44 +334,44 @@ export interface DomainErrorPageInfo {
     /**
      * 错误定制响应的配置ID
      */
-    ErrorPageId: string;
+    ErrorPageId?: string;
     /**
      * 监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 原始错误码
      */
-    ErrorNos: Array<number | bigint>;
+    ErrorNos?: Array<number | bigint>;
     /**
      * 新的错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NewErrorNo: number;
+    NewErrorNo?: number;
     /**
      * 需要清理的响应头
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClearHeaders: Array<string>;
+    ClearHeaders?: Array<string>;
     /**
      * 需要设置的响应头
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SetHeaders: Array<HttpHeaderParam>;
+    SetHeaders?: Array<HttpHeaderParam>;
     /**
      * 设置的响应体(不包括 HTTP头)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Body: string;
+    Body?: string;
     /**
      * 规则状态,0为成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * 通道组加速地域列表，包括加速地域，以及该加速地域对应的带宽和并发配置。
@@ -519,15 +519,15 @@ export interface BandwidthPriceGradient {
     /**
      * 带宽范围。
      */
-    BandwidthRange: Array<number | bigint>;
+    BandwidthRange?: Array<number | bigint>;
     /**
      * 在对应带宽范围内的单宽单价，单位：元/Mbps/天。
      */
-    BandwidthUnitPrice: number;
+    BandwidthUnitPrice?: number;
     /**
      * 带宽折扣价，单位：元/Mbps/天。
      */
-    DiscountBandwidthUnitPrice: number;
+    DiscountBandwidthUnitPrice?: number;
 }
 /**
  * DescribeHTTPListeners请求参数结构体
@@ -1050,50 +1050,50 @@ export interface CertificateDetail {
     /**
      * 证书ID。
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 证书类型。
      */
-    CertificateType: number;
+    CertificateType?: number;
     /**
      * 证书名字。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertificateAlias: string;
+    CertificateAlias?: string;
     /**
      * 证书内容。
      */
-    CertificateContent: string;
+    CertificateContent?: string;
     /**
      * 密钥内容。仅当证书类型为SSL证书时，返回该字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertificateKey: string;
+    CertificateKey?: string;
     /**
      * 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BeginTime: number;
+    BeginTime?: number;
     /**
      * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 证书签发者通用名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IssuerCN: string;
+    IssuerCN?: string;
     /**
      * 证书主题通用名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubjectCN: string;
+    SubjectCN?: string;
 }
 /**
  * DescribeListenerStatistics返回参数结构体
@@ -1608,24 +1608,24 @@ export interface BindRealServerInfo {
     /**
      * 源站的IP或域名
      */
-    RealServerIP: string;
+    RealServerIP?: string;
     /**
      * 源站ID
      */
-    RealServerId: string;
+    RealServerId?: string;
     /**
      * 源站名称
      */
-    RealServerName: string;
+    RealServerName?: string;
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 标签列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<TagPair>;
+    TagSet?: Array<TagPair>;
 }
 /**
  * ModifyGlobalDomainAttribute返回参数结构体
@@ -1837,19 +1837,19 @@ export interface ListenerInfo {
     /**
      * 监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器监听端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器协议类型
      */
-    Protocol: string;
+    Protocol?: string;
 }
 /**
  * DescribeUDPListeners返回参数结构体
@@ -1986,28 +1986,28 @@ export interface TCPListener {
     /**
      * 监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器转发源站端口，仅对版本为1.0的通道有效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealServerPort: number;
+    RealServerPort?: number;
     /**
      * 监听器绑定源站类型
      */
-    RealServerType: string;
+    RealServerType?: string;
     /**
      * 监听器协议， TCP
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器状态，其中：
   0表示运行中；
@@ -2016,75 +2016,75 @@ export interface TCPListener {
   3表示源站调整中；
   4表示配置变更中。
      */
-    ListenerStatus: number;
+    ListenerStatus?: number;
     /**
      * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
      */
-    Scheduler: string;
+    Scheduler?: string;
     /**
      * 源站健康检查响应超时时间，单位：秒
      */
-    ConnectTimeout: number;
+    ConnectTimeout?: number;
     /**
      * 源站健康检查时间间隔，单位：秒
      */
-    DelayLoop: number;
+    DelayLoop?: number;
     /**
      * 监听器是否开启健康检查，其中：
   0表示关闭；
   1表示开启
      */
-    HealthCheck: number;
+    HealthCheck?: number;
     /**
      * 监听器绑定的源站状态， 其中：
   0表示异常；
   1表示正常。
      */
-    BindStatus: number;
+    BindStatus?: number;
     /**
      * 监听器绑定的源站信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealServerSet: Array<BindRealServer>;
+    RealServerSet?: Array<BindRealServer>;
     /**
      * 监听器创建时间，Unix时间戳
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientIPMethod: number;
+    ClientIPMethod?: number;
     /**
      * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthyThreshold: number;
+    HealthyThreshold?: number;
     /**
      * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnhealthyThreshold: number;
+    UnhealthyThreshold?: number;
     /**
      * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailoverSwitch: number;
+    FailoverSwitch?: number;
     /**
      * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionPersist: number;
+    SessionPersist?: number;
     /**
      * 监听器的通道ID，如果监听器属于通道组，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 监听器的通道组ID，如果监听器属于通道，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
 }
 /**
  * EnableGlobalDomain返回参数结构体
@@ -2732,44 +2732,44 @@ export interface Certificate {
     /**
      * 证书ID
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 证书名称（旧参数，请使用CertificateAlias）。
      */
-    CertificateName: string;
+    CertificateName?: string;
     /**
      * 证书类型。
      */
-    CertificateType: number;
+    CertificateType?: number;
     /**
      * 证书名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertificateAlias: string;
+    CertificateAlias?: string;
     /**
      * 证书创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 证书生效起始时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BeginTime: number;
+    BeginTime?: number;
     /**
      * 证书过期时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 证书签发者通用名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IssuerCN: string;
+    IssuerCN?: string;
     /**
      * 证书主题通用名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubjectCN: string;
+    SubjectCN?: string;
 }
 /**
  * DescribeDomainErrorPageInfo返回参数结构体
@@ -3117,15 +3117,15 @@ export interface ProxySimpleInfo {
     /**
      * 通道ID
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 通道名称
      */
-    ProxyName: string;
+    ProxyName?: string;
     /**
      * 监听器列表
      */
-    ListenerList: Array<ListenerInfo>;
+    ListenerList?: Array<ListenerInfo>;
 }
 /**
  * DeleteSecurityPolicy请求参数结构体
@@ -3676,27 +3676,27 @@ export interface DomainAccessRegionDict {
     /**
      * 就近接入区域
      */
-    NationCountryInnerList: Array<NationCountryInnerInfo>;
+    NationCountryInnerList?: Array<NationCountryInnerInfo>;
     /**
      * 加速区域通道列表
      */
-    ProxyList: Array<ProxyIdDict>;
+    ProxyList?: Array<ProxyIdDict>;
     /**
      * 加速区域ID
      */
-    RegionId: string;
+    RegionId?: string;
     /**
      * 加速区域内部编码
      */
-    GeographicalZoneInnerCode: string;
+    GeographicalZoneInnerCode?: string;
     /**
      * 加速区域所属大洲内部编码
      */
-    ContinentInnerCode: string;
+    ContinentInnerCode?: string;
     /**
      * 加速区域别名
      */
-    RegionName: string;
+    RegionName?: string;
 }
 /**
  * 统一域名解析的DNS记录
@@ -3772,11 +3772,11 @@ export interface NewRealServer {
     /**
      * 源站ID
      */
-    RealServerId: string;
+    RealServerId?: string;
     /**
      * 源站ip或域名
      */
-    RealServerIP: string;
+    RealServerIP?: string;
 }
 /**
  * DescribeFirstLinkSession返回参数结构体
@@ -4168,15 +4168,15 @@ export interface GroupStatisticsInfo {
     /**
      * 通道组ID
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 通道组名称
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 通道组下通道列表
      */
-    ProxySet: Array<ProxySimpleInfo>;
+    ProxySet?: Array<ProxySimpleInfo>;
 }
 /**
  * 标签键值对
@@ -5005,11 +5005,11 @@ export interface CertificateAliasInfo {
     /**
      * 证书ID
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 证书别名
      */
-    CertificateAlias: string;
+    CertificateAlias?: string;
 }
 /**
  * CreateHTTPSListener请求参数结构体
@@ -5326,28 +5326,28 @@ export interface UDPListener {
     /**
      * 监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器转发源站端口，仅V1版本通道或通道组监听器有效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealServerPort: number;
+    RealServerPort?: number;
     /**
      * 监听器绑定源站类型
      */
-    RealServerType: string;
+    RealServerType?: string;
     /**
      * 监听器协议， UDP
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器状态，其中：
   0表示运行中；
@@ -5356,93 +5356,93 @@ export interface UDPListener {
   3表示源站调整中；
   4表示配置变更中。
      */
-    ListenerStatus: number;
+    ListenerStatus?: number;
     /**
      * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
      */
-    Scheduler: string;
+    Scheduler?: string;
     /**
      * 监听器绑定源站状态， 0表示正常，1表示IP异常，2表示域名解析异常
      */
-    BindStatus: number;
+    BindStatus?: number;
     /**
      * 监听器绑定的源站信息
      */
-    RealServerSet: Array<BindRealServer>;
+    RealServerSet?: Array<BindRealServer>;
     /**
      * 监听器创建时间，Unix时间戳
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionPersist: number;
+    SessionPersist?: number;
     /**
      * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DelayLoop: number;
+    DelayLoop?: number;
     /**
      * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectTimeout: number;
+    ConnectTimeout?: number;
     /**
      * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthyThreshold: number;
+    HealthyThreshold?: number;
     /**
      * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnhealthyThreshold: number;
+    UnhealthyThreshold?: number;
     /**
      * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailoverSwitch: number;
+    FailoverSwitch?: number;
     /**
      * 源站是否开启健康检查：1开启，0关闭。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheck: number;
+    HealthCheck?: number;
     /**
      * UDP源站健康类型。PORT表示检查端口，PING表示PING。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckType: string;
+    CheckType?: string;
     /**
      * UDP源站健康检查探测端口。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckPort: number;
+    CheckPort?: number;
     /**
      * UDP源站健康检查端口探测报文类型：TEXT表示文本。仅在健康检查类型为PORT时使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContextType: string;
+    ContextType?: string;
     /**
      * UDP源站健康检查端口探测发送报文。仅在健康检查类型为PORT时使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SendContext: string;
+    SendContext?: string;
     /**
      * UDP源站健康检查端口探测接收报文。仅在健康检查类型为PORT时使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecvContext: string;
+    RecvContext?: string;
     /**
      * 监听器的通道ID，如果监听器属于通道组，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 监听器的通道组ID，如果监听器属于通道，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
 }
 /**
  * DeleteGlobalDomain请求参数结构体

@@ -39,7 +39,7 @@ import {
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
-  ChannelCancelUserAutoSignEnableUrlResponse,
+  ChannelCancelFlowResponse,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
   IntentionQuestionResult,
@@ -53,6 +53,7 @@ import {
   CreateBatchInitOrganizationUrlResponse,
   DetectInfoVideoData,
   OperateChannelTemplateResponse,
+  ChannelCreateDynamicFlowApproverResponse,
   FlowFileInfo,
   CreateFlowOption,
   ChannelCreateRoleRequest,
@@ -64,11 +65,11 @@ import {
   ChannelCreateUserRolesResponse,
   SyncProxyOrganizationRequest,
   ChannelCreatePrepareFlowRequest,
-  ChannelCreateFlowRemindsRequest,
+  ChannelCreateFlowSignUrlRequest,
   ChannelCreateSealPolicyResponse,
   OrganizationInfo,
   ChannelDescribeSignFaceVideoResponse,
-  ChannelCancelFlowResponse,
+  ChannelCancelUserAutoSignEnableUrlResponse,
   DownloadFlowInfo,
   FlowApproverUrlInfo,
   ChannelCreateWebThemeConfigRequest,
@@ -86,7 +87,7 @@ import {
   ChannelCreateOrganizationModifyQrCodeRequest,
   CreateChannelSubOrganizationActiveRequest,
   ChannelRenewAutoSignLicenseResponse,
-  ChannelCreateFlowByFilesResponse,
+  ApproverItem,
   DescribeFlowDetailInfoResponse,
   RecipientComponentInfo,
   CancelFailureFlow,
@@ -97,6 +98,7 @@ import {
   ChannelCancelFlowRequest,
   TemplateInfo,
   ChannelCreateOrganizationBatchSignUrlRequest,
+  DynamicFlowApproverResult,
   GetDownloadFlowUrlResponse,
   ChannelRole,
   FlowGroupApproverInfo,
@@ -117,6 +119,7 @@ import {
   ComponentLimit,
   ChannelVerifyPdfResponse,
   OrganizationCommonInfo,
+  ArchiveDynamicFlowResponse,
   CreateConsoleLoginUrlRequest,
   CreateLegalSealQrCodeRequest,
   CreateCloseOrganizationUrlRequest,
@@ -126,6 +129,7 @@ import {
   CreatePersonAuthCertificateImageResponse,
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
+  ChannelArchiveDynamicApproverData,
   ChannelCreateUserAutoSignSealUrlRequest,
   PdfVerifyResult,
   UserThreeFactor,
@@ -138,8 +142,9 @@ import {
   CreateCloseOrganizationUrlResponse,
   DescribeChannelSealPolicyWorkflowUrlRequest,
   CreatePartnerAutoSignAuthUrlResponse,
+  ArchiveDynamicFlowRequest,
   FlowInfo,
-  UserInfo,
+  ChannelCreateDynamicFlowApproverRequest,
   ModifyFlowDeadlineResponse,
   TaskInfo,
   ChannelCreateBoundFlowsResponse,
@@ -185,6 +190,7 @@ import {
   ExtentServiceAuthInfo,
   ChannelModifyRoleResponse,
   Filter,
+  DynamicFlowResult,
   FilledComponent,
   FlowApproverItem,
   ChannelOrganizationInfo,
@@ -197,12 +203,13 @@ import {
   ChannelDescribeAccountBillDetailResponse,
   ApproverRestriction,
   IntentionAction,
-  ApproverItem,
+  ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDisableUserAutoSignRequest,
   ChannelDescribeOrganizationSealsResponse,
   SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
+  DynamicFlowInfo,
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelDescribeRolesResponse,
   CreateChannelSubOrganizationActiveResponse,
@@ -233,6 +240,7 @@ import {
   ModifyFlowDeadlineRequest,
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
+  UserInfo,
   CreateBatchInitOrganizationUrlRequest,
   CreateFlowGroupSignReviewRequest,
   ChannelBillUsageDetail,
@@ -261,7 +269,7 @@ import {
   CreateFlowBlockchainEvidenceUrlRequest,
   ChannelCreateFlowApproversRequest,
   ChannelUpdateSealStatusResponse,
-  ChannelCreateFlowSignUrlRequest,
+  ChannelCreateFlowRemindsRequest,
   DescribeExtendedServiceAuthInfoResponse,
   ChannelCreateEmbedWebUrlRequest,
   CcInfo,
@@ -793,6 +801,29 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称、企业营业执照、企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。
+
+注意：
+
+- **需要在<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>前同步的企业信息**, 否则会出现信息同步没有用的情形
+- **企业信息需要和营业执照信息对应**,  否则会出现激活过程验证不通过的问题
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/7ec91b79a0a4860e77c9ff9f4a5f13ad/channel_SyncProxyOrganization2.png)
+
+
+- **企业统一社会信用代码**: 对应上图中的**1**
+- **第三方平台子客企业名称**: 对应上图中的**2**
+- **企业法定代表人的名字**:对应上图中的**3**
+- **企业详细住所**:对应上图中的**4**
+     */
+  async SyncProxyOrganization(
+    req: SyncProxyOrganizationRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
+  ): Promise<SyncProxyOrganizationResponse> {
+    return this.request("SyncProxyOrganization", req, cb)
+  }
+
+  /**
      * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
 
 对应控制台的操作如下图
@@ -1104,22 +1135,20 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 提交申请出证报告任务并返回报告ID。
-
-注意：
-- 使用此功能**需搭配出证套餐**  ，使用前请联系对接的客户经理沟通。
-- 操作人必须是**发起方或者签署方企业的(非走授权书认证)法人或者超管**。
-- 合同流程必须**所有参与方已经签署完成**。
-- 出证过程需一定时间，建议在**提交出证任务后的24小时之后**，通过<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>接口进行查询执行结果和出证报告的下载URL。
-
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
+     * 接口（ChannelCreateDynamicFlowApprover）用来补充<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>发起的动态合同的签署人信息
+**注**: 
+<ul>
+<li>此接口需要保证：渠道企业已开启：模块化计费能力，</li>
+<li>此接口需要保证：渠道应用已开启：动态签署人2.0能力</li>
+<li>此接口需要保证：合同发起时指定开启了动态合同</li>
+<li>此接口补充的动态签署人传参规则，请参考接口：<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>的签署人传参规则</li>
+</ul>
      */
-  async CreateChannelFlowEvidenceReport(
-    req: CreateChannelFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
-  ): Promise<CreateChannelFlowEvidenceReportResponse> {
-    return this.request("CreateChannelFlowEvidenceReport", req, cb)
+  async ChannelCreateDynamicFlowApprover(
+    req: ChannelCreateDynamicFlowApproverRequest,
+    cb?: (error: string, rep: ChannelCreateDynamicFlowApproverResponse) => void
+  ): Promise<ChannelCreateDynamicFlowApproverResponse> {
+    return this.request("ChannelCreateDynamicFlowApprover", req, cb)
   }
 
   /**
@@ -1339,6 +1368,23 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelBatchCancelFlowsResponse) => void
   ): Promise<ChannelBatchCancelFlowsResponse> {
     return this.request("ChannelBatchCancelFlows", req, cb)
+  }
+
+  /**
+     * 该接口用于结束动态签署方2.0的合同流程。
+
+
+**功能开通**
+- 动态签署方2.0功能的使用需要先<font color="red">联系产品经理开通模块化计费功能</font>，然后到控制台中打开此功能。详细的使用说明请参考<a href="https://qian.tencent.com/developers/company/dynamic_signer_v2" target="_blank">动态签署方2.0</a>文档。
+
+**使用条件**
+- 此接口只能在<font color="red">合同处于非终态且<b>所有的签署方都已经完成签署</b></font>。一旦合同进入终态（例如：过期、拒签、撤销或者调用过此接口成功过），将无法通过此接口结束合同流程。
+     */
+  async ArchiveDynamicFlow(
+    req: ArchiveDynamicFlowRequest,
+    cb?: (error: string, rep: ArchiveDynamicFlowResponse) => void
+  ): Promise<ArchiveDynamicFlowResponse> {
+    return this.request("ArchiveDynamicFlow", req, cb)
   }
 
   /**
@@ -1603,26 +1649,22 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
   }
 
   /**
-     * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称、企业营业执照、企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。
+     * 提交申请出证报告任务并返回报告ID。
 
 注意：
+- 使用此功能**需搭配出证套餐**  ，使用前请联系对接的客户经理沟通。
+- 操作人必须是**发起方或者签署方企业的(非走授权书认证)法人或者超管**。
+- 合同流程必须**所有参与方已经签署完成**。
+- 出证过程需一定时间，建议在**提交出证任务后的24小时之后**，通过<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>接口进行查询执行结果和出证报告的下载URL。
 
-- **需要在<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>前同步的企业信息**, 否则会出现信息同步没有用的情形
-- **企业信息需要和营业执照信息对应**,  否则会出现激活过程验证不通过的问题
 
-![image](https://qcloudimg.tencent-cloud.cn/raw/7ec91b79a0a4860e77c9ff9f4a5f13ad/channel_SyncProxyOrganization2.png)
-
-
-- **企业统一社会信用代码**: 对应上图中的**1**
-- **第三方平台子客企业名称**: 对应上图中的**2**
-- **企业法定代表人的名字**:对应上图中的**3**
-- **企业详细住所**:对应上图中的**4**
+![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
      */
-  async SyncProxyOrganization(
-    req: SyncProxyOrganizationRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
-  ): Promise<SyncProxyOrganizationResponse> {
-    return this.request("SyncProxyOrganization", req, cb)
+  async CreateChannelFlowEvidenceReport(
+    req: CreateChannelFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
+  ): Promise<CreateChannelFlowEvidenceReportResponse> {
+    return this.request("CreateChannelFlowEvidenceReport", req, cb)
   }
 
   /**
