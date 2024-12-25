@@ -530,7 +530,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口用于设置实例默认登录密钥对属性。
+     * 后端代码已与23年2月4号下线
+近90天只有一次调用记录，且明确返回前端接口下线错误信息
+
+经评估无风险，操作接口下线
+
+本接口用于设置实例默认登录密钥对属性。
 
 
      */
@@ -727,8 +732,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于查询实例默认登录密钥属性。
-   */
+     * 后端代码已与23年2月4号下线
+近90天无调用记录
+经评估，下线无风险，操作下线
+
+本接口用于查询实例默认登录密钥属性。
+     */
   async DescribeInstanceLoginKeyPairAttribute(
     req: DescribeInstanceLoginKeyPairAttributeRequest,
     cb?: (error: string, rep: DescribeInstanceLoginKeyPairAttributeResponse) => void

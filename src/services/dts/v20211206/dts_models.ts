@@ -126,13 +126,13 @@ export interface ModifyConsumerGroupPasswordRequest {
    */
   ConsumerGroupName: string
   /**
-   * 旧密码
-   */
-  OldPassword: string
-  /**
    * 新密码。字符长度不小于3，不大于32
    */
   NewPassword: string
+  /**
+   * 旧密码，非必选
+   */
+  OldPassword?: string
 }
 
 /**
@@ -2670,7 +2670,7 @@ export interface Options {
    */
   AutoRetryTimeRangeMinutes?: number
   /**
-   * 同步到kafka链路指定位点。目前只支持时间格式：yyyy-mm-dd hh:mm:ss。如果没有指定位点，为空。
+   * 同步到kafka链路指定位点。目前只支持时间格式：2023-12-20T19:24:23+08:00。如果没有指定位点，为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartPosition?: string

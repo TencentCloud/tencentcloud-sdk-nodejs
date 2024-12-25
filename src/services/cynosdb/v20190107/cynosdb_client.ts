@@ -603,7 +603,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关闭数据库代理连接地址
+   * 本接口（CloseProxyEndPoint）用于关闭数据库代理连接地址。
    */
   async CloseProxyEndPoint(
     req: CloseProxyEndPointRequest,
@@ -713,7 +713,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
+   * 本接口（ActivateInstance）用于恢复已隔离的实例访问。
    */
   async ActivateInstance(
     req: ActivateInstanceRequest,
@@ -983,7 +983,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeInstancesWithinSameCluster)用于查询同一集群下实例列表
+   * 本接口（DescribeInstancesWithinSameCluster）用于查询同一集群下实例列表
    */
   async DescribeInstancesWithinSameCluster(
     req: DescribeInstancesWithinSameClusterRequest,
@@ -1493,7 +1493,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例的审计规则
+   * 本接口（DescribeAuditRuleWithInstanceIds）用于获取实例的审计规则。
    */
   async DescribeAuditRuleWithInstanceIds(
     req: DescribeAuditRuleWithInstanceIdsRequest,

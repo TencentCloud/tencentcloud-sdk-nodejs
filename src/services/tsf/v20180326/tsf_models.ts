@@ -936,7 +936,7 @@ export interface SearchStdoutLogResponse {
    * 标准输出日志列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageStdoutLogV2
+  Result?: TsfPageStdoutLogV2
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5179,7 +5179,7 @@ export interface DescribeGroupResponse {
    * 虚拟机部署组详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: VmGroup
+  Result?: VmGroup
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8757,7 +8757,7 @@ export interface DescribeTaskRecordsResponse {
    * 任务记录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TaskRecordPage
+  Result?: TaskRecordPage
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15642,7 +15642,7 @@ export interface DeleteNamespaceRequest {
  */
 export interface SearchStdoutLogRequest {
   /**
-   * 机器实例ID
+   * 机器实例ID， 和  实例 ID 二者必选其一，不能同时为空
    */
   InstanceId?: string
   /**
@@ -15658,7 +15658,7 @@ export interface SearchStdoutLogRequest {
    */
   StartTime?: string
   /**
-   * 部署组ID
+   * 部署组ID，和 InstanceId 二者必选其一，不能同时为空
    */
   GroupId?: string
   /**

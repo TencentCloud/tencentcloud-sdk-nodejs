@@ -443,26 +443,32 @@ export interface RecoverBackUpJobRequest {
     ReserveSourceConfig?: number;
     /**
      * 0默认 1cos恢复
+     * @deprecated
      */
     RecoverType?: number;
     /**
      * CosSourceInfo对象
+     * @deprecated
      */
     CosSourceInfo?: CosSourceInfo;
     /**
      * 0默认 1定期执行
+     * @deprecated
      */
     ScheduleType?: number;
     /**
      * 年-月-日 时:分:秒
+     * @deprecated
      */
     NextTime?: string;
     /**
      * 调度名称
+     * @deprecated
      */
     ScheduleName?: string;
     /**
      * create update
+     * @deprecated
      */
     OperationType?: string;
     /**
@@ -473,6 +479,12 @@ export interface RecoverBackUpJobRequest {
      * 恢复库：如果是按库备份，则需要该字段，库之间用","分割
      */
     RecoverDatabase?: string;
+    /**
+     * 1:恢复后，不保留降冷策略，数据变为热数据；
+  2:恢复后，沿用备份表的降冷策略；
+  0:默认值，该版本没有这个配置（2.1版本2.1.8之前；2.0版本2.0.16之前）
+     */
+    ReserveStoragePolicy?: number;
 }
 /**
  * 磁盘规格描述

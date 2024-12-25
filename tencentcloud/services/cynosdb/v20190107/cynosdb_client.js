@@ -118,7 +118,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewClusters", req, cb);
     }
     /**
-     * 关闭数据库代理连接地址
+     * 本接口（CloseProxyEndPoint）用于关闭数据库代理连接地址。
      */
     async CloseProxyEndPoint(req, cb) {
         return this.request("CloseProxyEndPoint", req, cb);
@@ -184,7 +184,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterStorage", req, cb);
     }
     /**
-     * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
+     * 本接口（ActivateInstance）用于恢复已隔离的实例访问。
      */
     async ActivateInstance(req, cb) {
         return this.request("ActivateInstance", req, cb);
@@ -346,7 +346,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateCluster", req, cb);
     }
     /**
-     * 本接口(DescribeInstancesWithinSameCluster)用于查询同一集群下实例列表
+     * 本接口（DescribeInstancesWithinSameCluster）用于查询同一集群下实例列表
      */
     async DescribeInstancesWithinSameCluster(req, cb) {
         return this.request("DescribeInstancesWithinSameCluster", req, cb);
@@ -652,7 +652,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountPrivileges", req, cb);
     }
     /**
-     * 获取实例的审计规则
+     * 本接口（DescribeAuditRuleWithInstanceIds）用于获取实例的审计规则。
      */
     async DescribeAuditRuleWithInstanceIds(req, cb) {
         return this.request("DescribeAuditRuleWithInstanceIds", req, cb);

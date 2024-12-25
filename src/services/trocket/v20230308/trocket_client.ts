@@ -26,6 +26,7 @@ import {
   SourceClusterTopicConfig,
   ConsumeGroupItem,
   ModifyRoleResponse,
+  DescribeMessageListRequest,
   DeleteMQTTInsPublicEndpointRequest,
   ModifyInstanceRequest,
   FusionInstanceItem,
@@ -40,10 +41,11 @@ import {
   DescribeRoleListRequest,
   DescribeMQTTClientResponse,
   DescribeMQTTMessageListResponse,
-  DescribeMQTTProductSKUListRequest,
   ImportSourceClusterConsumerGroupsRequest,
+  DescribeMQTTProductSKUListRequest,
   DescribeConsumerLagRequest,
   Tag,
+  DescribeMessageListResponse,
   DescribeMQTTMessageResponse,
   DescribeMQTTInstanceListResponse,
   MQTTInstanceItem,
@@ -55,6 +57,7 @@ import {
   DescribeMQTTInsVPCEndpointsResponse,
   DescribeMQTTInsPublicEndpointsResponse,
   DescribeInstanceListRequest,
+  ResendDeadLetterMessageResponse,
   DeleteMQTTUserRequest,
   ModifyMQTTInstanceCertBindingRequest,
   CreateMQTTTopicResponse,
@@ -69,6 +72,7 @@ import {
   DescribeMQTTInsVPCEndpointsRequest,
   DescribeFusionInstanceListResponse,
   CreateTopicRequest,
+  DescribeMessageRequest,
   DeleteRoleRequest,
   MQTTProductSkuItem,
   CustomMapEntry,
@@ -92,6 +96,7 @@ import {
   CreateMQTTInstanceResponse,
   DescribeMQTTInstanceResponse,
   MQTTEndpointItem,
+  DescribeMessageResponse,
   DeleteMQTTUserResponse,
   ImportSourceClusterTopicsResponse,
   DescribeTopicListRequest,
@@ -117,7 +122,9 @@ import {
   DeleteMQTTTopicResponse,
   ModifyConsumerGroupResponse,
   DescribeMQTTInstanceCertRequest,
+  MessageTrackItem,
   ModifyMQTTInsPublicEndpointResponse,
+  ResendDeadLetterMessageRequest,
   CreateMQTTUserRequest,
   DescribeFusionInstanceListRequest,
   DescribeMQTTMessageRequest,
@@ -135,6 +142,7 @@ import {
   ModifyMQTTTopicRequest,
   StatisticsReport,
   IpRule,
+  MessageItem,
   RoleItem,
   MQTTTopicItem,
   DescribeConsumerGroupListResponse,
@@ -210,6 +218,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 重新发送死信消息
+   */
+  async ResendDeadLetterMessage(
+    req: ResendDeadLetterMessageRequest,
+    cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
+  ): Promise<ResendDeadLetterMessageResponse> {
+    return this.request("ResendDeadLetterMessage", req, cb)
+  }
+
+  /**
    * 删除MQTT访问用户
    */
   async DeleteMQTTUser(
@@ -277,6 +295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
   ): Promise<ImportSourceClusterTopicsResponse> {
     return this.request("ImportSourceClusterTopics", req, cb)
+  }
+
+  /**
+   * 查询消息详情
+   */
+  async DescribeMessage(
+    req: DescribeMessageRequest,
+    cb?: (error: string, rep: DescribeMessageResponse) => void
+  ): Promise<DescribeMessageResponse> {
+    return this.request("DescribeMessage", req, cb)
   }
 
   /**
@@ -441,6 +469,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicResponse) => void
   ): Promise<CreateTopicResponse> {
     return this.request("CreateTopic", req, cb)
+  }
+
+  /**
+   * 查询消息列表。如果查询死信消息，请设置ConsumerGroup参数。
+   */
+  async DescribeMessageList(
+    req: DescribeMessageListRequest,
+    cb?: (error: string, rep: DescribeMessageListResponse) => void
+  ): Promise<DescribeMessageListResponse> {
+    return this.request("DescribeMessageList", req, cb)
   }
 
   /**

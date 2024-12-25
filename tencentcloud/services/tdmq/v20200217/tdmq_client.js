@@ -498,6 +498,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQTopic", req, cb);
     }
     /**
+     * 重发RocketMQ死信消息
+     */
+    async RetryRocketMQDlqMessage(req, cb) {
+        return this.request("RetryRocketMQDlqMessage", req, cb);
+    }
+    /**
      * 用于查询RocketMQ平滑迁移任务列表
      */
     async DescribeRocketMQSmoothMigrationTaskList(req, cb) {

@@ -550,35 +550,35 @@ export interface TransactionItem {
     /**
      * 交易ID
      */
-    TransactionId: string;
+    TransactionId?: string;
     /**
      * 交易hash
      */
-    TransactionHash: string;
+    TransactionHash?: string;
     /**
      * 创建交易的组织名
      */
-    CreateOrgName: string;
+    CreateOrgName?: string;
     /**
      * 交易所在区块号
      */
-    BlockId: number;
+    BlockId?: number;
     /**
      * 交易类型（普通交易和配置交易）
      */
-    TransactionType: string;
+    TransactionType?: string;
     /**
      * 交易创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 交易所在区块高度
      */
-    BlockHeight: number;
+    BlockHeight?: number;
     /**
      * 交易状态
      */
-    TransactionStatus: string;
+    TransactionStatus?: string;
 }
 /**
  * InvokeChainMakerDemoContract请求参数结构体
@@ -1074,23 +1074,23 @@ export interface Block {
     /**
      * 区块编号
      */
-    BlockNum: number;
+    BlockNum?: number;
     /**
      * 区块数据Hash数值
      */
-    DataHash: string;
+    DataHash?: string;
     /**
      * 区块ID，与区块编号一致
      */
-    BlockId: number;
+    BlockId?: number;
     /**
      * 前一个区块Hash
      */
-    PreHash: string;
+    PreHash?: string;
     /**
      * 区块内的交易数量
      */
-    TxCount: number;
+    TxCount?: number;
 }
 /**
  * DescribeFabricBlock请求参数结构体
@@ -1509,9 +1509,9 @@ export interface EndorserGroup {
     /**
      * 背书组织名称
      */
-    EndorserGroupName: string;
+    EndorserGroupName?: string;
     /**
      * 背书节点列表
      */
-    EndorserPeerList: Array<string>;
+    EndorserPeerList?: Array<string>;
 }

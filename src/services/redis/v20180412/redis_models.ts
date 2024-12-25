@@ -2251,7 +2251,7 @@ export interface DescribeTendisSlowLogResponse {
  */
 export interface DescribeProductInfoResponse {
   /**
-   * 地域售卖信息。
+   * 地域售卖信息。即使指定具体地域，也返回所有地域的售卖信息。
    */
   RegionSet?: Array<RegionConf>
   /**

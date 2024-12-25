@@ -3000,6 +3000,7 @@ export interface DescribeMediaProcessUsageDataRequest {
   <li> MediaCast: 媒体转推</li>
   <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
   <li>VoiceTranslation: 语音翻译</li>
+  <li>JITTranscoding: 即时转码</li>
      */
     Type?: string;
 }
@@ -4694,6 +4695,7 @@ export interface TaskStatData {
   <li> QualityInspect: 音画质检测</li>
   <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
   <li>VoiceTranslation: 语音翻译</li>
+  <li>JITTranscoding: 即时转码</li>
      */
     TaskType?: string;
     /**
@@ -4754,6 +4756,13 @@ export interface TaskStatData {
   <li>4K: 短边 ≤ 2160px</li>
   <li>8K: 短边 ≤ 4320px</li>
   <li>Audio: 音频</li>
+  即时转码规格：
+  <li>JITTranscoding.H264.SD: H.264编码方式标清即时转码</li>
+  <li>JITTranscoding.H264.HD: H.264编码方式高清即时转码</li>
+  <li>JITTranscoding.H264.FHD: H.264编码方式全高清即时转码</li>
+  <li>JITTranscoding.H264.2K: H.264编码方式2K即时转码</li>
+  <li>JITTranscoding.Audio: 音频即时转码</li>
+  <li>JITTranscoding.Copy: 转封装即时转码</li>
      */
     Details?: Array<SpecificationDataItem>;
 }
@@ -10916,6 +10925,10 @@ export interface VerifyDomainRecordRequest {
      */
     Domain: string;
     /**
+     * <b>点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+     */
+    SubAppId?: number;
+    /**
      * 验证方式：
   <li>dns：DNS 解析验证；</li>
   <li>fIle：文件验证。</li>
@@ -14999,6 +15012,10 @@ export interface CreateDomainVerifyRecordRequest {
      * 需要接入点播的加速域名。
      */
     Domain: string;
+    /**
+     * <b>点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+     */
+    SubAppId?: number;
 }
 /**
  * 点播文件信息

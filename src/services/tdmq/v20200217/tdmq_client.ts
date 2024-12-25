@@ -260,6 +260,7 @@ import {
   VerifyRocketMQConsumeResponse,
   DescribeRocketMQConsumerConnectionDetailRequest,
   DeleteRolesResponse,
+  RetryRocketMQDlqMessageResponse,
   DescribeRabbitMQBindingsRequest,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
@@ -321,6 +322,7 @@ import {
   RocketMQClusterRecentStats,
   DescribeRocketMQPublicAccessPointRequest,
   RabbitMQPrivateNode,
+  RetryRocketMQDlqMessageRequest,
   ModifyPublicNetworkAccessPointRequest,
   DescribeRocketMQSourceClusterGroupListResponse,
   DescribeRocketMQTopicsByGroupRequest,
@@ -1189,6 +1191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void
   ): Promise<DeleteRocketMQTopicResponse> {
     return this.request("DeleteRocketMQTopic", req, cb)
+  }
+
+  /**
+   * 重发RocketMQ死信消息
+   */
+  async RetryRocketMQDlqMessage(
+    req: RetryRocketMQDlqMessageRequest,
+    cb?: (error: string, rep: RetryRocketMQDlqMessageResponse) => void
+  ): Promise<RetryRocketMQDlqMessageResponse> {
+    return this.request("RetryRocketMQDlqMessage", req, cb)
   }
 
   /**

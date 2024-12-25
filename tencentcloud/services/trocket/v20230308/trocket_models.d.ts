@@ -248,6 +248,63 @@ export interface ModifyRoleResponse {
     RequestId?: string;
 }
 /**
+ * DescribeMessageList请求参数结构体
+ */
+export interface DescribeMessageListRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 主题名称
+     */
+    Topic: string;
+    /**
+     * 开始时间
+     */
+    StartTime: number;
+    /**
+     * 结束时间
+     */
+    EndTime: number;
+    /**
+     * 一次查询标识
+     */
+    TaskRequestId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit?: number;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
+    /**
+     * 消息 ID
+     */
+    MsgId?: string;
+    /**
+     * 消息 Key
+     */
+    MsgKey?: string;
+    /**
+     * 查询最近N条消息 最大不超过1024，默认-1为其他查询条件
+     */
+    RecentMessageNum?: number;
+    /**
+     * 是否查询死信消息
+     */
+    QueryDeadLetterMessage?: boolean;
+    /**
+     * 消息 Tag
+     */
+    Tag?: string;
+}
+/**
  * DeleteMQTTInsPublicEndpoint请求参数结构体
  */
 export interface DeleteMQTTInsPublicEndpointRequest {
@@ -668,10 +725,6 @@ export interface DescribeMQTTMessageListResponse {
     RequestId?: string;
 }
 /**
- * DescribeMQTTProductSKUList请求参数结构体
- */
-export declare type DescribeMQTTProductSKUListRequest = null;
-/**
  * ImportSourceClusterConsumerGroups请求参数结构体
  */
 export interface ImportSourceClusterConsumerGroupsRequest {
@@ -684,6 +737,10 @@ export interface ImportSourceClusterConsumerGroupsRequest {
      */
     GroupList: Array<SourceClusterGroupConfig>;
 }
+/**
+ * DescribeMQTTProductSKUList请求参数结构体
+ */
+export declare type DescribeMQTTProductSKUListRequest = null;
 /**
  * DescribeConsumerLag请求参数结构体
  */
@@ -719,6 +776,30 @@ export interface Tag {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue: string;
+}
+/**
+ * DescribeMessageList返回参数结构体
+ */
+export interface DescribeMessageListResponse {
+    /**
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 消息记录列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<MessageItem>;
+    /**
+     * 一次查询ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskRequestId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeMQTTMessage返回参数结构体
@@ -1035,6 +1116,20 @@ export interface DescribeInstanceListRequest {
     Limit?: number;
 }
 /**
+ * ResendDeadLetterMessage返回参数结构体
+ */
+export interface ResendDeadLetterMessageResponse {
+    /**
+     * 重发消息结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResendResult?: boolean;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteMQTTUser请求参数结构体
  */
 export interface DeleteMQTTUserRequest {
@@ -1274,6 +1369,39 @@ export interface CreateTopicRequest {
      * 消息保留时长
      */
     MsgTTL?: number;
+}
+/**
+ * DescribeMessage请求参数结构体
+ */
+export interface DescribeMessageRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 主题名称
+     */
+    Topic: string;
+    /**
+     * 消息ID
+     */
+    MsgId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit?: number;
+    /**
+     * 是否是死信消息
+     */
+    QueryDeadLetterMessage?: boolean;
+    /**
+     * 是否是延时消息
+     */
+    QueryDelayMessage?: boolean;
 }
 /**
  * DeleteRole请求参数结构体
@@ -1843,6 +1971,50 @@ export interface MQTTEndpointItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
+}
+/**
+ * DescribeMessage返回参数结构体
+ */
+export interface DescribeMessageResponse {
+    /**
+     * 消息体
+     */
+    Body?: string;
+    /**
+     * 详情参数
+     */
+    Properties?: string;
+    /**
+     * 生产时间
+     */
+    ProduceTime?: string;
+    /**
+     * 消息ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageId?: string;
+    /**
+     * 生产者地址
+     */
+    ProducerAddr?: string;
+    /**
+     * 消息消费情况列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageTracks?: Array<MessageTrackItem>;
+    /**
+     * Topic
+     */
+    ShowTopicName?: string;
+    /**
+     * 消息消费情况列表总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageTracksCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteMQTTUser返回参数结构体
@@ -2538,6 +2710,28 @@ export interface DescribeMQTTInstanceCertRequest {
     InstanceId: string;
 }
 /**
+ * MessageTrack
+ */
+export interface MessageTrackItem {
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
+    /**
+     * 消费状态, CONSUMED: 已消费 CONSUMED_BUT_FILTERED: 已过滤 NOT_CONSUME: 未消费 ENTER_RETRY: 进入重试队列 ENTER_DLQ: 进入死信队列 UNKNOWN: 查询不到消费状态
+     */
+    ConsumeStatus?: string;
+    /**
+     * track类型
+     */
+    TrackType?: string;
+    /**
+     * 异常信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExceptionDesc?: string;
+}
+/**
  * ModifyMQTTInsPublicEndpoint返回参数结构体
  */
 export interface ModifyMQTTInsPublicEndpointResponse {
@@ -2545,6 +2739,23 @@ export interface ModifyMQTTInsPublicEndpointResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ResendDeadLetterMessage请求参数结构体
+ */
+export interface ResendDeadLetterMessageRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 死信消息ID列表
+     */
+    MessageIds: Array<string>;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
 }
 /**
  * CreateMQTTUser请求参数结构体
@@ -2952,6 +3163,46 @@ export interface IpRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark: string;
+}
+/**
+ * 消息记录
+ */
+export interface MessageItem {
+    /**
+     * 消息ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgId?: string;
+    /**
+     * 消息tag
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: string;
+    /**
+     * 消息key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Keys?: string;
+    /**
+     * 客户端地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProducerAddr?: string;
+    /**
+     * 消息发送时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProduceTime?: string;
+    /**
+     * 死信重发次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeadLetterResendTimes?: number;
+    /**
+     * 死信重发成功次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeadLetterResendSuccessTimes?: number;
 }
 /**
  * 角色信息

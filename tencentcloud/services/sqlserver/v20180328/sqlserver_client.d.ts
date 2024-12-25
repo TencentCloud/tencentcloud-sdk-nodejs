@@ -92,7 +92,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePublishSubscribe(req: CreatePublishSubscribeRequest, cb?: (error: string, rep: CreatePublishSubscribeResponse) => void): Promise<CreatePublishSubscribeResponse>;
     /**
-     * 本接口(DescribeBackupFiles)用于查询单库备份明细
+     * 本接口（DescribeBackupFiles）用于查询单库备份明细。
      */
     DescribeBackupFiles(req: DescribeBackupFilesRequest, cb?: (error: string, rep: DescribeBackupFilesResponse) => void): Promise<DescribeBackupFilesResponse>;
     /**
@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
-     * 本接口(CutXEvents)用于手动切割阻塞日志和死锁日志。
+     * 本接口（CutXEvents）用于手动切割阻塞日志和死锁日志。
      */
     CutXEvents(req: CutXEventsRequest, cb?: (error: string, rep: CutXEventsResponse) => void): Promise<CutXEventsResponse>;
     /**

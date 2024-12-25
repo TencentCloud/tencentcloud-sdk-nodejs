@@ -206,11 +206,11 @@ export interface ClientConnection {
   /**
    * 连接的客户端IP
    */
-  IP: string
+  IP?: string
   /**
    * 对应客户端IP的连接数
    */
-  Count: number
+  Count?: number
 }
 
 /**
@@ -308,160 +308,160 @@ export interface MongoDBInstanceDetail {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 付费类型，可能的返回值：1-包年包月；0-按量计费
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 集群类型，可能的返回值：0-副本集实例，1-分片实例，
    */
-  ClusterType: number
+  ClusterType?: number
   /**
    * 地域信息
    */
-  Region: string
+  Region?: string
   /**
    * 可用区信息
    */
-  Zone: string
+  Zone?: string
   /**
    * 网络类型，可能的返回值：0-基础网络，1-私有网络
    */
-  NetType: number
+  NetType?: number
   /**
    * 私有网络的ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 私有网络的子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 实例状态，可能的返回值：0-待初始化，1-流程处理中，2-运行中，-2-实例已过期
    */
-  Status: number
+  Status?: number
   /**
    * 实例IP
    */
-  Vip: string
+  Vip?: string
   /**
    * 端口号
    */
-  Vport: number
+  Vport?: number
   /**
    * 实例创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例到期时间
    */
-  DeadLine: string
+  DeadLine?: string
   /**
    * 实例版本信息
    */
-  MongoVersion: string
+  MongoVersion?: string
   /**
    * 实例内存规格，单位为MB
    */
-  Memory: number
+  Memory?: number
   /**
    * 实例磁盘规格，单位为MB
    */
-  Volume: number
+  Volume?: number
   /**
    * 实例CPU核心数
    */
-  CpuNum: number
+  CpuNum?: number
   /**
    * 实例机器类型
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 实例从节点数
    */
-  SecondaryNum: number
+  SecondaryNum?: number
   /**
    * 实例分片数
    */
-  ReplicationSetNum: number
+  ReplicationSetNum?: number
   /**
    * 实例自动续费标志，可能的返回值：0-手动续费，1-自动续费，2-确认不续费
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 已用容量，单位MB
    */
-  UsedVolume: number
+  UsedVolume?: number
   /**
    * 维护窗口起始时间
    */
-  MaintenanceStart: string
+  MaintenanceStart?: string
   /**
    * 维护窗口结束时间
    */
-  MaintenanceEnd: string
+  MaintenanceEnd?: string
   /**
    * 分片信息
    */
-  ReplicaSets: Array<MongodbShardInfo>
+  ReplicaSets?: Array<MongodbShardInfo>
   /**
    * 只读实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadonlyInstances: Array<MongoDBInstance>
+  ReadonlyInstances?: Array<MongoDBInstance>
   /**
    * 灾备实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StandbyInstances: Array<MongoDBInstance>
+  StandbyInstances?: Array<MongoDBInstance>
   /**
    * 临时实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CloneInstances: Array<MongoDBInstance>
+  CloneInstances?: Array<MongoDBInstance>
   /**
    * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RelatedInstance: MongoDBInstance
+  RelatedInstance?: MongoDBInstance
   /**
    * 实例标签信息集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagInfo>
+  Tags?: Array<TagInfo>
   /**
    * 实例标记
    */
-  InstanceVer: number
+  InstanceVer?: number
   /**
    * 实例标记
    */
-  ClusterVer: number
+  ClusterVer?: number
   /**
    * 协议信息，可能的返回值：1-mongodb，2-dynamodb
    */
-  Protocol: number
+  Protocol?: number
   /**
    * 实例类型，可能的返回值，1-正式实例，2-临时实例，3-只读实例，4-灾备实例
    */
-  InstanceType: number
+  InstanceType?: number
   /**
    * 实例状态描述
    */
-  InstanceStatusDesc: string
+  InstanceStatusDesc?: string
   /**
    * 实例对应的物理实例ID，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
    */
-  RealInstanceId: string
+  RealInstanceId?: string
 }
 
 /**
@@ -485,11 +485,11 @@ export interface TagInfo {
   /**
    * 标签Key值
    */
-  TagKey: string
+  TagKey?: string
   /**
    * 标签值
    */
-  TagValue: string
+  TagValue?: string
 }
 
 /**
@@ -635,11 +635,11 @@ export interface MongoDBInstance {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 地域信息
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -792,35 +792,35 @@ export interface MongodbShardInfo {
   /**
    * 分片已使用容量
    */
-  UsedVolume: number
+  UsedVolume?: number
   /**
    * 分片ID
    */
-  ReplicaSetId: string
+  ReplicaSetId?: string
   /**
    * 分片名
    */
-  ReplicaSetName: string
+  ReplicaSetName?: string
   /**
    * 分片内存规格，单位为MB
    */
-  Memory: number
+  Memory?: number
   /**
    * 分片磁盘规格，单位为MB
    */
-  Volume: number
+  Volume?: number
   /**
    * 分片Oplog大小，单位为MB
    */
-  OplogSize: number
+  OplogSize?: number
   /**
    * 分片从节点数
    */
-  SecondaryNum: number
+  SecondaryNum?: number
   /**
    * 分片物理ID
    */
-  RealReplicaSetId: string
+  RealReplicaSetId?: string
 }
 
 /**

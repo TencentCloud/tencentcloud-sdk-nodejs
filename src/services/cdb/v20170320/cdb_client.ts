@@ -533,7 +533,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建审计规则模板
+   * 本接口（CreateAuditRuleTemplate）用于创建审计规则模板。
    */
   async CreateAuditRuleTemplate(
     req: CreateAuditRuleTemplateRequest,
@@ -841,7 +841,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAuditPolicies)用于查询云数据库实例的审计策略。
+   * 本接口（DescribeAuditPolicies）用于查询云数据库实例的审计策略。
    */
   async DescribeAuditPolicies(
     req: DescribeAuditPoliciesRequest,
@@ -972,7 +972,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateCloneInstance) 用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
+   * 本接口（CreateCloneInstance）用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
    */
   async CreateCloneInstance(
     req: CreateCloneInstanceRequest,
@@ -992,7 +992,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyInstancePasswordComplexity)用于修改云数据库实例的密码复杂度。
+   * 本接口（ModifyInstancePasswordComplexity）用于修改云数据库实例的密码复杂度。
    */
   async ModifyInstancePasswordComplexity(
     req: ModifyInstancePasswordComplexityRequest,
@@ -1052,7 +1052,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理详情信息
+   * 本接口（DescribeCdbProxyInfo）用于查询数据库代理详情信息。
    */
   async DescribeCdbProxyInfo(
     req: DescribeCdbProxyInfoRequest,
@@ -1062,7 +1062,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数Region均为ap-guangzhou。
+   * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数 Region 均为 ap-guangzhou。
    */
   async CreateParamTemplate(
     req: CreateParamTemplateRequest,
@@ -1119,7 +1119,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateBackup)用于创建数据库备份。
+   * 本接口（CreateBackup）用于创建数据库备份。
    */
   async CreateBackup(
     req: CreateBackupRequest,
@@ -1149,7 +1149,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 数据库代理增加代理地址
+   * 本接口（CreateCdbProxyAddress）用于数据库代理增加代理地址。
    */
   async CreateCdbProxyAddress(
     req: CreateCdbProxyAddressRequest,
@@ -1287,7 +1287,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在不同过滤条件下的审计日志结果集中，选定特定的数据列进行聚合统计。
+   * 本接口（AnalyzeAuditLogs）用于在不同过滤条件下的审计日志结果集中，选定特定的数据列进行聚合统计。
    */
   async AnalyzeAuditLogs(
     req: AnalyzeAuditLogsRequest,
@@ -1337,7 +1337,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
+   * 本接口（DescribeAuditLogFiles）用于查询云数据库实例的审计日志文件。
    */
   async DescribeAuditLogFiles(
     req: DescribeAuditLogFilesRequest,
@@ -1347,7 +1347,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeBackupDecryptionKey)用于查询备份文件解密密钥。
+   * 本接口（DescribeBackupDecryptionKey）用于查询备份文件解密密钥。
    */
   async DescribeBackupDecryptionKey(
     req: DescribeBackupDecryptionKeyRequest,
@@ -1407,7 +1407,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteAccounts)用于删除云数据库的账户。
+   * 本接口（DeleteAccounts）用于删除云数据库的账户。
    */
   async DeleteAccounts(
     req: DeleteAccountsRequest,
@@ -1517,7 +1517,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取审计实例列表
+   * 本接口（DescribeAuditInstanceList）用于获取审计实例列表。
    */
   async DescribeAuditInstanceList(
     req: DescribeAuditInstanceListRequest,
@@ -1724,7 +1724,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启密码轮转
+   * 本接口（CreateRotationPassword）用于开启密码轮转。
    */
   async CreateRotationPassword(
     req: CreateRotationPasswordRequest,
@@ -1734,8 +1734,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
-
+     * 本接口（CreateDBImportJob）用于创建云数据库数据导入任务。
 注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
      */
   async CreateDBImportJob(
@@ -1746,7 +1745,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAccounts)用于查询云数据库的所有账户信息。
+   * 本接口（DescribeAccounts）用于查询云数据库的所有账户信息。
    */
   async DescribeAccounts(
     req: DescribeAccountsRequest,
@@ -1826,7 +1825,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 关闭实例账户密码轮转
+   * 本接口（DeleteRotationPassword）用于关闭实例账户密码轮转。
    */
   async DeleteRotationPassword(
     req: DeleteRotationPasswordRequest,
@@ -1866,7 +1865,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志。
+     * 本接口（DescribeSlowLogData）用于使用条件检索实例的慢日志。只允许查看一个月之内的慢日志。
 使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      */
   async DescribeSlowLogData(
@@ -1897,7 +1896,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询审计规则模板信息
+   * 本接口（DescribeAuditRuleTemplates）用于查询审计规则模板信息。
    */
   async DescribeAuditRuleTemplates(
     req: DescribeAuditRuleTemplatesRequest,
@@ -1969,7 +1968,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则模板变更记录
+   * 本接口（DescribeAuditRuleTemplateModifyHistory）用于查询规则模板变更记录。
    */
   async DescribeAuditRuleTemplateModifyHistory(
     req: DescribeAuditRuleTemplateModifyHistoryRequest,
@@ -2125,7 +2124,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
+   * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数 Region 均为 ap-guangzhou。
    */
   async DeleteParamTemplate(
     req: DeleteParamTemplateRequest,
@@ -2175,7 +2174,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeCloneList) 用于查询用户实例的克隆任务列表。
+   * 本接口（DescribeCloneList）用于查询用户实例的克隆任务列表。
    */
   async DescribeCloneList(
     req: DescribeCloneListRequest,

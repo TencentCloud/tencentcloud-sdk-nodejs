@@ -59,6 +59,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMQTTTopic", req, cb);
     }
     /**
+     * 重新发送死信消息
+     */
+    async ResendDeadLetterMessage(req, cb) {
+        return this.request("ResendDeadLetterMessage", req, cb);
+    }
+    /**
      * 删除MQTT访问用户
      */
     async DeleteMQTTUser(req, cb) {
@@ -99,6 +105,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ImportSourceClusterTopics(req, cb) {
         return this.request("ImportSourceClusterTopics", req, cb);
+    }
+    /**
+     * 查询消息详情
+     */
+    async DescribeMessage(req, cb) {
+        return this.request("DescribeMessage", req, cb);
     }
     /**
      * 查询用户列表，Filter参数使用说明如下：
@@ -199,6 +211,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTopic(req, cb) {
         return this.request("CreateTopic", req, cb);
+    }
+    /**
+     * 查询消息列表。如果查询死信消息，请设置ConsumerGroup参数。
+     */
+    async DescribeMessageList(req, cb) {
+        return this.request("DescribeMessageList", req, cb);
     }
     /**
      * 获取主题列表，Filter参数使用说明如下：

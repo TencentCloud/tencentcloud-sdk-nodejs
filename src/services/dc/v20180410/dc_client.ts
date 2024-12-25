@@ -71,6 +71,7 @@ import {
   DescribeDirectConnectTunnelsResponse,
   CloudAttachInfo,
   RouteFilterPrefix,
+  PortSpecification,
   DescribeInternetAddressStatisticsResponse,
   NQAInfo,
   DescribeInternetAddressRequest,

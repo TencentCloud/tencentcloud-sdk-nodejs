@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeProductSKUsRequest, DescribeRoleListResponse, DeleteMQTTTopicRequest, CreateInstanceResponse, ModifyRoleResponse, DeleteMQTTInsPublicEndpointRequest, ModifyInstanceRequest, CreateMQTTInsPublicEndpointResponse, ImportSourceClusterConsumerGroupsResponse, DeleteTopicRequest, ModifyMQTTInstanceRequest, DescribeMQTTProductSKUListResponse, DescribeRoleListRequest, DescribeMQTTClientResponse, DescribeMQTTMessageListResponse, DescribeMQTTProductSKUListRequest, ImportSourceClusterConsumerGroupsRequest, DescribeConsumerLagRequest, DescribeMQTTMessageResponse, DescribeMQTTInstanceListResponse, DescribeInstanceListResponse, ModifyInstanceResponse, CreateConsumerGroupRequest, DescribeMQTTClientRequest, DescribeMQTTInsVPCEndpointsResponse, DescribeMQTTInsPublicEndpointsResponse, DescribeInstanceListRequest, DeleteMQTTUserRequest, ModifyMQTTInstanceCertBindingRequest, CreateMQTTTopicResponse, DescribeMQTTInstanceRequest, ImportSourceClusterTopicsRequest, CreateMQTTUserResponse, DeleteInstanceResponse, DescribeTopicResponse, DeleteMQTTInsPublicEndpointResponse, DeleteInstanceRequest, ModifyRoleRequest, DescribeMQTTInsVPCEndpointsRequest, DescribeFusionInstanceListResponse, CreateTopicRequest, DeleteRoleRequest, DeleteConsumerGroupRequest, CreateConsumerGroupResponse, DescribeMQTTUserListResponse, ModifyMQTTUserResponse, DescribeMessageTraceResponse, ModifyMQTTInsPublicEndpointRequest, ModifyMQTTInstanceCertBindingResponse, DeleteMQTTInstanceResponse, DescribeTopicRequest, DeleteMQTTInstanceRequest, DescribeMessageTraceRequest, CreateTopicResponse, DescribeMQTTInstanceListRequest, CreateMQTTInstanceResponse, DescribeMQTTInstanceResponse, DeleteMQTTUserResponse, ImportSourceClusterTopicsResponse, DescribeTopicListRequest, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, CreateInstanceRequest, DescribeConsumerGroupResponse, ModifyTopicResponse, DescribeConsumerLagResponse, DescribeMQTTInsPublicEndpointsRequest, DeleteRoleResponse, ModifyMQTTTopicResponse, DescribeMQTTTopicListRequest, ModifyTopicRequest, DescribeInstanceResponse, DeleteMQTTTopicResponse, ModifyConsumerGroupResponse, DescribeMQTTInstanceCertRequest, ModifyMQTTInsPublicEndpointResponse, CreateMQTTUserRequest, DescribeFusionInstanceListRequest, DescribeMQTTMessageRequest, CreateRoleResponse, DescribeMQTTTopicListResponse, DescribeMQTTUserListRequest, ModifyMQTTInstanceResponse, CreateMQTTInstanceRequest, DescribeTopicListResponse, DescribeMQTTTopicRequest, CreateRoleRequest, DeleteConsumerGroupResponse, ModifyMQTTTopicRequest, DescribeConsumerGroupListResponse, ModifyMQTTUserRequest, CreateMQTTInsPublicEndpointRequest, CreateMQTTTopicRequest, DeleteTopicResponse, DescribeMQTTInstanceCertResponse, DescribeMQTTTopicResponse, DescribeInstanceRequest, DescribeProductSKUsResponse, DescribeMQTTMessageListRequest } from "./trocket_models";
+import { DescribeProductSKUsRequest, DescribeRoleListResponse, DeleteMQTTTopicRequest, CreateInstanceResponse, ModifyRoleResponse, DescribeMessageListRequest, DeleteMQTTInsPublicEndpointRequest, ModifyInstanceRequest, CreateMQTTInsPublicEndpointResponse, ImportSourceClusterConsumerGroupsResponse, DeleteTopicRequest, ModifyMQTTInstanceRequest, DescribeMQTTProductSKUListResponse, DescribeRoleListRequest, DescribeMQTTClientResponse, DescribeMQTTMessageListResponse, ImportSourceClusterConsumerGroupsRequest, DescribeMQTTProductSKUListRequest, DescribeConsumerLagRequest, DescribeMessageListResponse, DescribeMQTTMessageResponse, DescribeMQTTInstanceListResponse, DescribeInstanceListResponse, ModifyInstanceResponse, CreateConsumerGroupRequest, DescribeMQTTClientRequest, DescribeMQTTInsVPCEndpointsResponse, DescribeMQTTInsPublicEndpointsResponse, DescribeInstanceListRequest, ResendDeadLetterMessageResponse, DeleteMQTTUserRequest, ModifyMQTTInstanceCertBindingRequest, CreateMQTTTopicResponse, DescribeMQTTInstanceRequest, ImportSourceClusterTopicsRequest, CreateMQTTUserResponse, DeleteInstanceResponse, DescribeTopicResponse, DeleteMQTTInsPublicEndpointResponse, DeleteInstanceRequest, ModifyRoleRequest, DescribeMQTTInsVPCEndpointsRequest, DescribeFusionInstanceListResponse, CreateTopicRequest, DescribeMessageRequest, DeleteRoleRequest, DeleteConsumerGroupRequest, CreateConsumerGroupResponse, DescribeMQTTUserListResponse, ModifyMQTTUserResponse, DescribeMessageTraceResponse, ModifyMQTTInsPublicEndpointRequest, ModifyMQTTInstanceCertBindingResponse, DeleteMQTTInstanceResponse, DescribeTopicRequest, DeleteMQTTInstanceRequest, DescribeMessageTraceRequest, CreateTopicResponse, DescribeMQTTInstanceListRequest, CreateMQTTInstanceResponse, DescribeMQTTInstanceResponse, DescribeMessageResponse, DeleteMQTTUserResponse, ImportSourceClusterTopicsResponse, DescribeTopicListRequest, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, CreateInstanceRequest, DescribeConsumerGroupResponse, ModifyTopicResponse, DescribeConsumerLagResponse, DescribeMQTTInsPublicEndpointsRequest, DeleteRoleResponse, ModifyMQTTTopicResponse, DescribeMQTTTopicListRequest, ModifyTopicRequest, DescribeInstanceResponse, DeleteMQTTTopicResponse, ModifyConsumerGroupResponse, DescribeMQTTInstanceCertRequest, ModifyMQTTInsPublicEndpointResponse, ResendDeadLetterMessageRequest, CreateMQTTUserRequest, DescribeFusionInstanceListRequest, DescribeMQTTMessageRequest, CreateRoleResponse, DescribeMQTTTopicListResponse, DescribeMQTTUserListRequest, ModifyMQTTInstanceResponse, CreateMQTTInstanceRequest, DescribeTopicListResponse, DescribeMQTTTopicRequest, CreateRoleRequest, DeleteConsumerGroupResponse, ModifyMQTTTopicRequest, DescribeConsumerGroupListResponse, ModifyMQTTUserRequest, CreateMQTTInsPublicEndpointRequest, CreateMQTTTopicRequest, DeleteTopicResponse, DescribeMQTTInstanceCertResponse, DescribeMQTTTopicResponse, DescribeInstanceRequest, DescribeProductSKUsResponse, DescribeMQTTMessageListRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
@@ -29,6 +29,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyMQTTTopic(req: ModifyMQTTTopicRequest, cb?: (error: string, rep: ModifyMQTTTopicResponse) => void): Promise<ModifyMQTTTopicResponse>;
     /**
+     * 重新发送死信消息
+     */
+    ResendDeadLetterMessage(req: ResendDeadLetterMessageRequest, cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void): Promise<ResendDeadLetterMessageResponse>;
+    /**
      * 删除MQTT访问用户
      */
     DeleteMQTTUser(req: DeleteMQTTUserRequest, cb?: (error: string, rep: DeleteMQTTUserResponse) => void): Promise<DeleteMQTTUserResponse>;
@@ -56,6 +60,10 @@ export declare class Client extends AbstractClient {
      * 导入topic列表
      */
     ImportSourceClusterTopics(req: ImportSourceClusterTopicsRequest, cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void): Promise<ImportSourceClusterTopicsResponse>;
+    /**
+     * 查询消息详情
+     */
+    DescribeMessage(req: DescribeMessageRequest, cb?: (error: string, rep: DescribeMessageResponse) => void): Promise<DescribeMessageResponse>;
     /**
      * 查询用户列表，Filter参数使用说明如下：
 
@@ -124,6 +132,10 @@ export declare class Client extends AbstractClient {
      * 创建主题
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
+    /**
+     * 查询消息列表。如果查询死信消息，请设置ConsumerGroup参数。
+     */
+    DescribeMessageList(req: DescribeMessageListRequest, cb?: (error: string, rep: DescribeMessageListResponse) => void): Promise<DescribeMessageListResponse>;
     /**
      * 获取主题列表，Filter参数使用说明如下：
 

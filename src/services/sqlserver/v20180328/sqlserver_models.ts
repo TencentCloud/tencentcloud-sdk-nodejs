@@ -54,27 +54,27 @@ export interface DealInfo {
   /**
    * 订单名
    */
-  DealName: string
+  DealName?: string
   /**
    * 商品数量
    */
-  Count: number
+  Count?: number
   /**
    * 关联的流程 ID，可用于查询流程执行状态
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
    */
-  InstanceIdSet: Array<string>
+  InstanceIdSet?: Array<string>
   /**
    * 所属账号
    */
-  OwnerUin: string
+  OwnerUin?: string
   /**
    * 实例付费类型
    */
-  InstanceChargeType: string
+  InstanceChargeType?: string
 }
 
 /**
@@ -216,19 +216,19 @@ export interface DatabaseTupleStatus {
   /**
    * 发布数据库名称
    */
-  PublishDatabase: string
+  PublishDatabase?: string
   /**
    * 订阅数据库名称
    */
-  SubscribeDatabase: string
+  SubscribeDatabase?: string
   /**
    * 最近一次同步时间
    */
-  LastSyncTime: string
+  LastSyncTime?: string
   /**
    * 数据库之间的发布订阅状态 running，success，fail，unknow
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -295,7 +295,7 @@ export interface CreateBusinessIntelligenceFileResponse {
   /**
    * 文件名称
    */
-  FileTaskId: string
+  FileTaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -461,35 +461,35 @@ export interface InstanceTask {
   /**
    * 唯一id
    */
-  Id: number
+  Id?: number
   /**
    * Job类型
    */
-  Type: number
+  Type?: number
   /**
    * Job状态
    */
-  Status: number
+  Status?: number
   /**
    * 进度百分比0~100
    */
-  Progress: number
+  Progress?: number
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 错误代码
    */
-  ErrorCode: number
+  ErrorCode?: number
   /**
    * 错误信息描述
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -499,15 +499,15 @@ export interface ProductSpec {
   /**
    * 地域ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用区ID
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 配置信息
    */
-  Info: Array<SpecInfo>
+  Info?: Array<SpecInfo>
 }
 
 /**
@@ -535,6 +535,18 @@ wait_doing-等待维护时间内执行
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SSLValidity?: number
+  /**
+   * 是否是KMS的CMK证书
+   */
+  IsKMS?: number
+  /**
+   * KMS中购买的用户主密钥ID（CMK）
+   */
+  CMKId?: string
+  /**
+   * CMK所属的地域，不同地域的CMK数据不互通
+   */
+  CMKRegion?: string
 }
 
 /**
@@ -704,68 +716,69 @@ export interface SpecInfo {
   /**
    * 实例规格ID，利用DescribeZones返回的SpecId，结合DescribeProductConfig返回的可售卖规格信息，可获悉某个可用区下可购买什么规格的实例
    */
-  SpecId: number
+  SpecId?: number
   /**
    * 机型ID
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 机型中文名称
    */
-  MachineTypeName: string
+  MachineTypeName?: string
   /**
    * 数据库版本信息。取值为2008R2（表示SQL Server 2008 R2），2012SP3（表示SQL Server 2012），2016SP1（表示SQL Server 2016 SP1）
    */
-  Version: string
+  Version?: string
   /**
    * Version字段对应的版本名称
    */
-  VersionName: string
+  VersionName?: string
   /**
    * 内存大小，单位GB
    */
-  Memory: number
+  Memory?: number
   /**
    * CPU核数
    */
-  CPU: number
+  CPU?: number
   /**
    * 此规格下最小的磁盘大小，单位GB
    */
-  MinStorage: number
+  MinStorage?: number
   /**
    * 此规格下最大的磁盘大小，单位GB
    */
-  MaxStorage: number
+  MaxStorage?: number
   /**
    * 此规格对应的QPS大小
    */
-  QPS: number
+  QPS?: number
   /**
    * 此规格的中文描述信息
    */
-  SuitInfo: string
+  SuitInfo?: string
   /**
    * 此规格对应的包年包月Pid
    */
-  Pid: number
+  Pid?: number
   /**
    * 此规格对应的按量计费Pid列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostPid: Array<number | bigint>
+  PostPid?: Array<number | bigint>
   /**
    * 此规格下支持的付费模式，POST-仅支持按量计费 PRE-仅支持包年包月 ALL-支持所有
    */
-  PayModeStatus: string
+  PayModeStatus?: string
   /**
-   * 产品类型，HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-基础版本型
+   * 购买实例的类型 HA-本地盘高可用(包括双机高可用，alwaysOn集群)，RO-本地盘只读副本，SI-云盘版单节点,BI-商业智能服务，cvmHA-云盘版高可用，cvmRO-云盘版只读副本，MultiHA-多节点，cvmMultiHA-云盘多节点
+示例值：HA
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 跨可用区类型，MultiZones-只支持跨可用区，SameZones-只支持同可用区，ALL-支持所有
    */
-  MultiZonesStatus: string
+  MultiZonesStatus?: string
 }
 
 /**
@@ -1229,7 +1242,7 @@ export interface ModifyDBNameResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1243,11 +1256,11 @@ export interface CosUploadBackupFile {
   /**
    * 备份名称
    */
-  FileName: string
+  FileName?: string
   /**
    * 备份大小
    */
-  Size: number
+  Size?: number
 }
 
 /**
@@ -1777,31 +1790,31 @@ export interface DBDetail {
   /**
    * 数据库名称
    */
-  Name: string
+  Name?: string
   /**
    * 字符集
    */
-  Charset: string
+  Charset?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 数据库创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 数据库状态。1--创建中， 2--运行中， 3--修改中，-1--删除中
    */
-  Status: number
+  Status?: number
   /**
    * 数据库账号权限信息
    */
-  Accounts: Array<AccountPrivilege>
+  Accounts?: Array<AccountPrivilege>
   /**
    * 内部状态。ONLINE表示运行中
    */
-  InternalStatus: string
+  InternalStatus?: string
   /**
    * 是否已开启TDE加密，enable-已加密，disable-未加密
    */
@@ -2024,6 +2037,14 @@ export interface TDEConfigAttribute {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuoteUin?: string
+  /**
+   * KMS中购买的用户主密钥ID（CMK）
+   */
+  CMKId?: string
+  /**
+   * CMK所属的地域，不同地域的CMK不互通
+   */
+  CMKRegion?: string
 }
 
 /**
@@ -2033,59 +2054,59 @@ export interface SummaryDetailRes {
   /**
    * 地域标识
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 实例状态。1：申请中2：运行中3：受限运行中 (主备切换中)4：已隔离5：回收中6：已回收7：任务执行中 (实例做备份、回档等操作)8：已下线9：实例扩容中10：实例迁移中
    */
-  Status: number
+  Status?: number
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  Name: string
+  Name?: string
   /**
    * 备份空间
    */
-  ActualUsedSpace: number
+  ActualUsedSpace?: number
   /**
    * 数据备份空间
    */
-  DataBackupSpace: number
+  DataBackupSpace?: number
   /**
    * 数据备份文件总个数
    */
-  DataBackupCount: number
+  DataBackupCount?: number
   /**
    * 日志备份空间
    */
-  LogBackupSpace: number
+  LogBackupSpace?: number
   /**
    * 日志备份文件总个数
    */
-  LogBackupCount: number
+  LogBackupCount?: number
   /**
    * 自动备份空间
    */
-  AutoBackupSpace: number
+  AutoBackupSpace?: number
   /**
    * 自动备份文件总个数
    */
-  AutoBackupCount: number
+  AutoBackupCount?: number
   /**
    * 手动备份空间
    */
-  ManualBackupSpace: number
+  ManualBackupSpace?: number
   /**
    * 手动备份文件总个数
    */
-  ManualBackupCount: number
+  ManualBackupCount?: number
   /**
    * 实例所属地域码
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -2109,9 +2130,13 @@ export interface ModifyDReadableRequest {
    */
   SubnetId?: string
   /**
-   * 指定的备机只读vip，不填自动分配
+   * 指定的备机只读vip，不填自动分配。多节点SingleReadOnly模式不支持指定vip。
    */
   Vip?: string
+  /**
+   * 备机只读模式，多节点架构默认取值BalancedReadOnly。SingleReadOnly-每个备机各对应一个只读地址（多节点架构），BalancedReadOnly-所有备机共用一个只读地址。当实例是双节点架构时，固定取值SingleReadOnly。
+   */
+  ReadMode?: string
 }
 
 /**
@@ -2405,23 +2430,23 @@ export interface SecurityGroupPolicy {
   /**
    * 策略，ACCEPT 或者 DROP
    */
-  Action: string
+  Action?: string
   /**
    * 目的 IP 或 IP 段，例如172.16.0.0/12
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 端口或者端口范围
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 网络协议，支持 UDP、TCP等
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 规则限定的方向，OUTPUT-出战规则  INPUT-进站规则
    */
-  Dir: string
+  Dir?: string
 }
 
 /**
@@ -2926,15 +2951,15 @@ export interface StepDetail {
   /**
    * 具体步骤返回信息
    */
-  Msg: string
+  Msg?: string
   /**
    * 当前步骤状态，0成功，-2未开始
    */
-  Status: number
+  Status?: number
   /**
    * 步骤名称
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -3175,47 +3200,48 @@ export interface SpecSellStatus {
   /**
    * 可售卖的规格唯一ID
    */
-  Id: string
+  Id?: string
   /**
    * 实例规格ID
    */
-  SpecId: number
+  SpecId?: number
   /**
    * 此规格下支持的付费模式，POST-仅支持按量计费 PRE-仅支持包年包月 ALL-支持所有
    */
-  PayModeStatus: string
+  PayModeStatus?: string
   /**
-   * 产品类型
+   * 产品类型，购买实例的类型 HA-本地盘高可用(包括双机高可用，alwaysOn集群)，RO-本地盘只读副本，SI-云盘版单节点,BI-商业智能服务，cvmHA-云盘版高可用，cvmRO-云盘版只读副本，MultiHA-多节点，cvmMultiHA-云盘多节点
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 该规格支持的是否跨可用去，MultiZones-只支持跨可用区，SameZones-只支持同可用区，ALL-支持所有
    */
-  MultiZonesStatus: string
+  MultiZonesStatus?: string
   /**
-   * 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点
+   * 架构标识，SINGLE-单节点 DOUBLE-双节点 TRIPLE-三节点 MULTI-多节点
+示例值：SINGLE
    */
-  Architecture: string
+  Architecture?: string
   /**
    * 类型标识，EXCLUSIVE-独享型，SHARED-共享型
    */
-  Style: string
+  Style?: string
   /**
    * 数据库版本信息
    */
-  Version: string
+  Version?: string
   /**
    * 每个可用区的售卖状态集合
    */
-  ZoneStatusSet: Array<ZoneStatus>
+  ZoneStatusSet?: Array<ZoneStatus>
   /**
    * 规格的参考价格，实际价格以询价接口为准
    */
-  Price: Price
+  Price?: Price
   /**
    * 规格售卖状态 1-正常 2-关闭售卖但是可以升级 3-完全关闭售卖
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -4041,7 +4067,7 @@ export interface CloseInterCommunicationResponse {
   /**
    * 实例和异步流程ID
    */
-  InterInstanceFlowSet: Array<InterInstanceFlow>
+  InterInstanceFlowSet?: Array<InterInstanceFlow>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4198,36 +4224,36 @@ export interface SlowLog {
   /**
    * 慢查询日志文件唯一标识
    */
-  Id: number
+  Id?: number
   /**
    * 文件生成的开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 文件生成的结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 文件大小（KB）
    */
-  Size: number
+  Size?: number
   /**
    * 文件中log条数
    */
-  Count: number
+  Count?: number
   /**
    * 内网下载地址
    */
-  InternalAddr: string
+  InternalAddr?: string
   /**
    * 外网下载地址
    */
-  ExternalAddr: string
+  ExternalAddr?: string
   /**
    * 状态（1成功 2失败）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -4247,7 +4273,7 @@ export interface DescribeInquiryPriceParameterRequest {
    */
   Storage: number
   /**
-   * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读
+   * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读，MultiHA-多节点，cvmMultiHA-云盘多节点
    */
   InstanceType: string
   /**
@@ -4275,6 +4301,10 @@ export interface DescribeInquiryPriceParameterRequest {
 CLOUD_HSSD-云服务器加强型SSD云盘，CLOUD_TSSD-云服务器极速型SSD云盘，CLOUD_BSSD-云服务器通用型SSD云盘
    */
   MachineType?: string
+  /**
+   * 备节点可用区，默认为空。如果是多节点架构时必传，并且备机可用区集合最小为2个，最大不超过5个。
+   */
+  DrZones?: Array<string>
 }
 
 /**
@@ -4298,15 +4328,15 @@ export interface DescribeAccountsResponse {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 账户信息列表
    */
-  Accounts: Array<AccountDetail>
+  Accounts?: Array<AccountDetail>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4429,6 +4459,14 @@ export interface CreateCloudDBInstancesRequest {
    * 系统时区，默认：China Standard Time
    */
   TimeZone?: string
+  /**
+   * 是否多节点架构实例，默认值为false。当MultiNodes = true时，参数MultiZones必须取值为true。
+   */
+  MultiNodes?: boolean
+  /**
+   * 备节点可用区，默认为空。当MultiNodes = true时，主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。
+   */
+  DrZones?: Array<string>
 }
 
 /**
@@ -4440,13 +4478,21 @@ export interface ModifyInstanceEncryptAttributesRequest {
    */
   InstanceId: string
   /**
-   * 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，默认取值self。
+   * 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，kms-表示使用kms的CMK证书，默认取值self。
    */
   CertificateAttribution: string
   /**
    * 引用的其他主账号ID，当CertificateAttribution 为others时必填。
    */
   QuoteUin?: string
+  /**
+   * CertificateAttribution为kms时必填
+   */
+  KeyId?: string
+  /**
+   * CertificateAttribution为kms时必填
+   */
+  KeyRegion?: string
 }
 
 /**
@@ -4802,11 +4848,11 @@ export interface DescribeBusinessIntelligenceFileResponse {
   /**
    * 文件部署任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 文件部署任务集合
    */
-  BackupMigrationSet: Array<BusinessIntelligenceFile>
+  BackupMigrationSet?: Array<BusinessIntelligenceFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4820,23 +4866,23 @@ export interface ZoneInfo {
   /**
    * 可用区英文ID，形如ap-guangzhou-1，表示广州一区
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区中文名称
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 可用区数字ID
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 该可用区目前可售卖的规格ID，利用SpecId，结合接口DescribeProductConfig返回的数据，可获悉该可用区目前可售卖的规格大小
    */
-  SpecId: number
+  SpecId?: number
   /**
    * 当前可用区与规格下，可售卖的数据库版本，形如2008R2（表示SQL Server 2008 R2）。其可选值有2008R2（表示SQL Server 2008 R2），2012SP3（表示SQL Server 2012），2016SP1（表示SQL Server 2016 SP1）
    */
-  Version: string
+  Version?: string
 }
 
 /**
@@ -4891,55 +4937,55 @@ export interface MigrateTask {
   /**
    * 迁移任务ID
    */
-  MigrateId: number
+  MigrateId?: number
   /**
    * 迁移任务名称
    */
-  MigrateName: string
+  MigrateName?: string
   /**
    * 迁移任务所属的用户ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 迁移任务所属的地域
    */
-  Region: string
+  Region?: string
   /**
    * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
    */
-  SourceType: number
+  SourceType?: number
   /**
    * 迁移任务的创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 迁移任务的开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 迁移任务的结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功,7已中止,8已删除,9中止中,10完成中,11中止失败,12完成失败）
    */
-  Status: number
+  Status?: number
   /**
    * 信息
    */
-  Message: string
+  Message?: string
   /**
    * 是否迁移任务经过检查（0:未校验,1:校验成功,2:校验失败,3:校验中）
    */
-  CheckFlag: number
+  CheckFlag?: number
   /**
    * 迁移任务当前进度（单位%）
    */
-  Progress: number
+  Progress?: number
   /**
    * 迁移任务进度细节
    */
-  MigrateDetail: MigrateDetail
+  MigrateDetail?: MigrateDetail
 }
 
 /**
@@ -5179,12 +5225,12 @@ export interface DescribeMigrationDatabasesResponse {
   /**
    * 数据库数量
    */
-  Amount: number
+  Amount?: number
   /**
    * 数据库名称数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MigrateDBSet: Array<string>
+  MigrateDBSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5674,11 +5720,11 @@ export interface AccountRemark {
   /**
    * 账户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 对应账户新的备注信息
    */
-  Remark: string
+  Remark?: string
 }
 
 /**
@@ -5897,6 +5943,18 @@ export interface ModifyDBInstanceSSLRequest {
    * 操作设置。0-立即执行，1- 维护时间内执行，默认取值0。
    */
   WaitSwitch: number
+  /**
+   * 是否被KMS加密保护，0-表示否，1表示被KMS保护，默认取值0
+   */
+  IsKMS?: number
+  /**
+   * IsKMS为1时必填
+   */
+  KeyId?: string
+  /**
+   * IsKMS为1时必填
+   */
+  KeyRegion?: string
 }
 
 /**
@@ -5920,11 +5978,11 @@ export interface MigrationAction {
   /**
    * 支持的所有操作，值包括：view(查看任务) ，modify(修改任务)， start(启动任务)，incremental(创建增量任务)，delete(删除任务)，upload(获取上传权限)。
    */
-  AllAction: Array<string>
+  AllAction?: Array<string>
   /**
    * 当前状态允许的操作，AllAction的子集,为空表示禁止所有操作
    */
-  AllowedAction: Array<string>
+  AllowedAction?: Array<string>
 }
 
 /**
@@ -6003,19 +6061,19 @@ export interface MigrationStep {
   /**
    * 步骤序列
    */
-  StepNo: number
+  StepNo?: number
   /**
    * 步骤展现名称
    */
-  StepName: string
+  StepName?: string
   /**
    * 英文ID标识
    */
-  StepId: string
+  StepId?: string
   /**
    * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -6154,6 +6212,14 @@ export interface CreateDBInstancesRequest {
    * 系统时区，默认：China Standard Time
    */
   TimeZone?: string
+  /**
+   * 是否多节点架构实例，默认值为false。当MultiNodes = true时，参数MultiZones必须取值为true。
+   */
+  MultiNodes?: boolean
+  /**
+   * 备节点可用区，默认为空。当MultiNodes = true时，主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。
+   */
+  DrZones?: Array<string>
 }
 
 /**
@@ -6476,11 +6542,11 @@ export interface FileAction {
   /**
    * 支持的所有操作，值包括：view(查看列表) remark(修改备注)，deploy(部署)，delete(删除文件)
    */
-  AllAction: Array<string>
+  AllAction?: Array<string>
   /**
    * 当前状态允许的操作，AllAction的子集,为空表示禁止所有操作
    */
-  AllowedAction: Array<string>
+  AllowedAction?: Array<string>
 }
 
 /**
@@ -6969,39 +7035,39 @@ export interface PublishSubscribe {
   /**
    * 发布订阅ID
    */
-  Id: number
+  Id?: number
   /**
    * 发布订阅名称
    */
-  Name: string
+  Name?: string
   /**
    * 发布实例ID
    */
-  PublishInstanceId: string
+  PublishInstanceId?: string
   /**
    * 发布实例名称
    */
-  PublishInstanceName: string
+  PublishInstanceName?: string
   /**
    * 发布实例IP
    */
-  PublishInstanceIp: string
+  PublishInstanceIp?: string
   /**
    * 订阅实例ID
    */
-  SubscribeInstanceId: string
+  SubscribeInstanceId?: string
   /**
    * 订阅实例名称
    */
-  SubscribeInstanceName: string
+  SubscribeInstanceName?: string
   /**
    * 订阅实例IP
    */
-  SubscribeInstanceIp: string
+  SubscribeInstanceIp?: string
   /**
    * 数据库的订阅发布关系集合
    */
-  DatabaseTupleSet: Array<DatabaseTupleStatus>
+  DatabaseTupleSet?: Array<DatabaseTupleStatus>
 }
 
 /**
@@ -7199,11 +7265,11 @@ export interface DescribeMigrationsResponse {
   /**
    * 查询结果的总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 查询结果的列表
    */
-  MigrateTaskSet: Array<MigrateTask>
+  MigrateTaskSet?: Array<MigrateTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7245,20 +7311,20 @@ export interface MigrationDetail {
   /**
    * 总步骤数
    */
-  StepAll: number
+  StepAll?: number
   /**
    * 当前步骤
    */
-  StepNow: number
+  StepNow?: number
   /**
    * 总进度,如："30"表示30%
    */
-  Progress: number
+  Progress?: number
   /**
    * 步骤信息，null表示还未开始迁移
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepInfo: Array<MigrationStep>
+  StepInfo?: Array<MigrationStep>
 }
 
 /**
@@ -7330,7 +7396,7 @@ export interface DescribeBackupUploadSizeResponse {
   /**
    * 已上传的备份的信息
    */
-  CosUploadBackupFileSet: Array<CosUploadBackupFile>
+  CosUploadBackupFileSet?: Array<CosUploadBackupFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7627,67 +7693,67 @@ export interface ReadOnlyInstance {
   /**
    * 只读副本ID，格式如：mssqlro-3l3fgqn7
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 只读副本名称
    */
-  Name: string
+  Name?: string
   /**
    * 只读副本唯一UID
    */
-  Uid: string
+  Uid?: string
   /**
    * 只读副本所在项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 只读副本状态。1：申请中 2：运行中 3：被延迟剔除 4：已隔离 5：回收中 6：已回收 7：任务执行中 8：已下线 9：实例扩容中 10：实例迁移中  12：重启中
    */
-  Status: number
+  Status?: number
   /**
    * 只读副本创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 只读副本更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 只读副本内存大小，单位G
    */
-  Memory: number
+  Memory?: number
   /**
    * 只读副本存储空间大小，单位G
    */
-  Storage: number
+  Storage?: number
   /**
    * 只读副本cpu核心数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 只读副本版本代号
    */
-  Version: string
+  Version?: string
   /**
    * 宿主机代号
    */
-  Type: string
+  Type?: string
   /**
    * 只读副本模式，2-单机
    */
-  Model: number
+  Model?: number
   /**
    * 只读副本计费模式，1-包年包月，0-按量计费
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 只读副本权重
    */
-  Weight: number
+  Weight?: number
   /**
    * 只读副本延迟时间，单位秒
    */
-  DelayTime: string
+  DelayTime?: string
   /**
    * 只读副本与主实例的同步状态。
 Init:初始化
@@ -7705,35 +7771,35 @@ SyncFail:同步故障
 SyncExcluded:已剔除只读组
 SyncNormal:正常
    */
-  SynStatus: string
+  SynStatus?: string
   /**
    * 只读副本与主实例没有同步的库
    */
-  DatabaseDifference: string
+  DatabaseDifference?: string
   /**
    * 只读副本与主实例没有同步的账户
    */
-  AccountDifference: string
+  AccountDifference?: string
   /**
    * 只读副本计费开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 只读副本计费结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 只读副本隔离时间
    */
-  IsolateTime: string
+  IsolateTime?: string
   /**
    * 只读副本所在地域
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 只读副本所在可用区
    */
-  ZoneId: string
+  ZoneId?: string
 }
 
 /**
@@ -7743,11 +7809,11 @@ export interface MigrateDetail {
   /**
    * 当前环节的名称
    */
-  StepName: string
+  StepName?: string
   /**
    * 当前环节的进度（单位是%）
    */
-  Progress: number
+  Progress?: number
 }
 
 /**
@@ -7807,31 +7873,31 @@ export interface SecurityGroup {
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 入站规则
    */
-  InboundSet: Array<SecurityGroupPolicy>
+  InboundSet?: Array<SecurityGroupPolicy>
   /**
    * 出站规则
    */
-  OutboundSet: Array<SecurityGroupPolicy>
+  OutboundSet?: Array<SecurityGroupPolicy>
   /**
    * 安全组ID
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 安全组名称
    */
-  SecurityGroupName: string
+  SecurityGroupName?: string
   /**
    * 安全组备注
    */
-  SecurityGroupRemark: string
+  SecurityGroupRemark?: string
 }
 
 /**
@@ -7893,15 +7959,15 @@ export interface DbRollbackTimeInfo {
   /**
    * 数据库名称
    */
-  DBName: string
+  DBName?: string
   /**
    * 可回档开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 可回档结束时间
    */
-  EndTime: string
+  EndTime?: string
 }
 
 /**
@@ -8209,59 +8275,59 @@ export interface CrossSummaryDetailRes {
   /**
    * 实例状态
    */
-  Status: number
+  Status?: number
   /**
    * 实例所属地域
    */
-  Region: string
+  Region?: string
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  Name: string
+  Name?: string
   /**
    * 跨地域备份状态 enable-开启，disable-关闭
    */
-  CrossBackupEnabled: string
+  CrossBackupEnabled?: string
   /**
    * 跨地域备份目标地域
    */
-  CrossRegions: Array<string>
+  CrossRegions?: Array<string>
   /**
    * 最新备份开始时间
    */
-  LastBackupStartTime: string
+  LastBackupStartTime?: string
   /**
    * 跨地域备份保留天数
    */
-  CrossBackupSaveDays: number
+  CrossBackupSaveDays?: number
   /**
    * 跨地域数据备份总空间
    */
-  DataBackupSpace: number
+  DataBackupSpace?: number
   /**
    * 跨地域数据备份文件总个数
    */
-  DataBackupCount: number
+  DataBackupCount?: number
   /**
    * 跨地域日志备份总空间
    */
-  LogBackupSpace: number
+  LogBackupSpace?: number
   /**
    * 跨地域日志备份文件总个数
    */
-  LogBackupCount: number
+  LogBackupCount?: number
   /**
    * 跨地域备份总空间
    */
-  ActualUsedSpace: number
+  ActualUsedSpace?: number
   /**
    * 跨地域备份总个数
    */
-  ActualUsedCount: number
+  ActualUsedCount?: number
 }
 
 /**
@@ -8496,19 +8562,19 @@ export interface RegionInfo {
   /**
    * 地域英文ID，类似ap-guanghou
    */
-  Region: string
+  Region?: string
   /**
    * 地域中文名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域数字ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 该地域目前是否可以售卖，UNAVAILABLE-不可售卖；AVAILABLE-可售卖
    */
-  RegionState: string
+  RegionState?: string
 }
 
 /**
@@ -8518,7 +8584,7 @@ export interface CreateDBResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

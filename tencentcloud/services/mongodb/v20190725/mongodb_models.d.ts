@@ -326,39 +326,39 @@ export interface InstanceMultiParam {
     /**
      * 参数当前值。
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 参数默认值。
      */
-    DefaultValue: string;
+    DefaultValue?: string;
     /**
      * 参考值范围。
      */
-    EnumValue: Array<string>;
+    EnumValue?: Array<string>;
     /**
      * 参数修改后是否需要重启才会生效。
   - 1：需要重启后生效。
   - 0：无需重启，设置成功即可生效。
      */
-    NeedRestart: string;
+    NeedRestart?: string;
     /**
      * 参数名称。
      */
-    ParamName: string;
+    ParamName?: string;
     /**
      * 是否为运行中参数值。
   - 1：运行中参数值。
   - 0：非运行中参数值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 参数说明。
      */
-    Tips: Array<string>;
+    Tips?: Array<string>;
     /**
      * 当前值的类型描述，默认为multi。
      */
-    ValueType: string;
+    ValueType?: string;
 }
 /**
  * ModifyInstanceParams返回参数结构体
@@ -626,11 +626,11 @@ export interface DBInstanceInfo {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 地域信息
      */
-    Region: string;
+    Region?: string;
 }
 /**
  * 数据库参数
@@ -986,7 +986,7 @@ export interface InquirePriceModifyDBInstanceSpecRequest {
  */
 export interface BackupInfo {
     /**
-     * 实例ID
+     * 实例ID。
      */
     InstanceId?: string;
     /**
@@ -1288,47 +1288,47 @@ export interface InstanceIntegerParam {
     /**
      * 参数当前值。
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 参数默认值。
      */
-    DefaultValue: string;
+    DefaultValue?: string;
     /**
      * 参数最大值。
      */
-    Max: string;
+    Max?: string;
     /**
      * 最小值。
      */
-    Min: string;
+    Min?: string;
     /**
      * 参数修改之后是否需要重启生效。
   - 1:需要重启后生效。
   - 0：无需重启，设置成功即可生效。
      */
-    NeedRestart: string;
+    NeedRestart?: string;
     /**
      * 参数名称。
      */
-    ParamName: string;
+    ParamName?: string;
     /**
      * 参数说明。
      */
-    Tips: Array<string>;
+    Tips?: Array<string>;
     /**
      * 参数类型。
      */
-    ValueType: string;
+    ValueType?: string;
     /**
      * 是否为运行中参数值。
   - 1：运行中参数值。
   - 0：非运行中参数值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 冗余字段，可忽略。
      */
-    Unit: string;
+    Unit?: string;
 }
 /**
  * 修改数据库地址
@@ -1409,37 +1409,37 @@ export interface InstanceTextParam {
     /**
      * 参数当前值。
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 参数默认值。
      */
-    DefaultValue: string;
+    DefaultValue?: string;
     /**
      * 修改参数值之后是否需要重启。
      */
-    NeedRestart: string;
+    NeedRestart?: string;
     /**
      * 参数名称。
      */
-    ParamName: string;
+    ParamName?: string;
     /**
      * Text 类型参数对应的值。
      */
-    TextValue: string;
+    TextValue?: string;
     /**
      * 参数说明。
      */
-    Tips: Array<string>;
+    Tips?: Array<string>;
     /**
      * 参数值类型说明。
      */
-    ValueType: string;
+    ValueType?: string;
     /**
      * 是否为运行中的参数值。
   - 1：运行中参数值。
   - 0：非运行中参数值。
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * ModifyDBInstanceSecurityGroup请求参数结构体
@@ -1842,35 +1842,35 @@ export interface SecurityGroupBound {
     /**
      * 执行规则。ACCEPT或DROP
      */
-    Action: string;
+    Action?: string;
     /**
      * ip段。
      */
-    CidrIp: string;
+    CidrIp?: string;
     /**
      * 端口范围
      */
-    PortRange: string;
+    PortRange?: string;
     /**
      * 传输层协议。tcp，udp或ALL
      */
-    IpProtocol: string;
+    IpProtocol?: string;
     /**
      * 安全组id代表的地址集合
      */
-    Id: string;
+    Id?: string;
     /**
      * 地址组id代表的地址集合
      */
-    AddressModule: string;
+    AddressModule?: string;
     /**
      * 服务组id代表的协议和端口集合
      */
-    ServiceModule: string;
+    ServiceModule?: string;
     /**
      * 描述
      */
-    Desc: string;
+    Desc?: string;
 }
 /**
  * DescribeDBInstanceNodeProperty返回参数结构体
@@ -2231,7 +2231,6 @@ export interface InstanceEnumParam {
 export interface FlashBackDBInstanceResponse {
     /**
      * 回档数据异步任务 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowId?: number;
     /**
@@ -2797,6 +2796,10 @@ export interface KMSInfoDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyOrigin?: string;
+    /**
+     * kms所在地域。
+     */
+    KmsRegion?: string;
 }
 /**
  * InquirePriceCreateDBInstances请求参数结构体

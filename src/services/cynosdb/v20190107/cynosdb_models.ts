@@ -2777,7 +2777,7 @@ export interface InstanceAuditLogFilter {
 
 等于、不等于： sqlType - SQL类型； errCode - 错误码； threadId - 线程ID；
 
-范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事物持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。
+范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事务持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。
    */
   Type: string
   /**
@@ -3070,28 +3070,28 @@ export interface ParamTemplateListInfo {
   /**
    * 参数模板ID
    */
-  Id: number
+  Id?: number
   /**
    * 参数模板名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 参数模板描述
    */
-  TemplateDescription: string
+  TemplateDescription?: string
   /**
    * 引擎版本
    */
-  EngineVersion: string
+  EngineVersion?: string
   /**
    * 数据库类型，可选值：NORMAL，SERVERLESS
    */
-  DbMode: string
+  DbMode?: string
   /**
    * 参数模板详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamInfoSet: Array<TemplateParamInfo>
+  ParamInfoSet?: Array<TemplateParamInfo>
 }
 
 /**
@@ -6329,7 +6329,7 @@ export interface ExportInstanceErrorLogsRequest {
    */
   OrderBy?: string
   /**
-   * ASC或DESC
+   * 排序类型，ASC 或 DESC。
    */
   OrderByType?: string
 }
@@ -9764,27 +9764,27 @@ export interface RenewClustersResponse {
    * 预付费总订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BigDealIds: Array<string>
+  BigDealIds?: Array<string>
   /**
    * 退款订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 冻结流水，一次开通一个冻结流水
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranId: string
+  TranId?: string
   /**
    * 每个订单号对应的发货资源id列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceIds: Array<string>
+  ResourceIds?: Array<string>
   /**
    * 集群id列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterIds: Array<string>
+  ClusterIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10514,45 +10514,45 @@ export interface InstanceSpec {
   /**
    * 实例CPU，单位：核
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 实例内存，单位：GB
    */
-  Memory: number
+  Memory?: number
   /**
    * 实例最大可用存储，单位：GB
    */
-  MaxStorageSize: number
+  MaxStorageSize?: number
   /**
    * 实例最小可用存储，单位：GB
    */
-  MinStorageSize: number
+  MinStorageSize?: number
   /**
    * 是否有库存
    */
-  HasStock: boolean
+  HasStock?: boolean
   /**
    * 机器类型
    */
-  MachineType: string
+  MachineType?: string
   /**
    * 最大IOPS
    */
-  MaxIops: number
+  MaxIops?: number
   /**
    * 最大IO带宽
    */
-  MaxIoBandWidth: number
+  MaxIoBandWidth?: number
   /**
    * 地域库存信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneStockInfos: Array<ZoneStockInfo>
+  ZoneStockInfos?: Array<ZoneStockInfo>
   /**
    * 库存数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StockCount: number
+  StockCount?: number
 }
 
 /**

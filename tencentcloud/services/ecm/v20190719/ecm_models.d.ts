@@ -5,31 +5,31 @@ export interface SecurityGroupLimitSet {
     /**
      * 可创建安全组总数
      */
-    SecurityGroupLimit: number;
+    SecurityGroupLimit?: number;
     /**
      * 安全组下的最大规则数
      */
-    SecurityGroupPolicyLimit: number;
+    SecurityGroupPolicyLimit?: number;
     /**
      * 安全组下嵌套安全组规则数
      */
-    ReferedSecurityGroupLimit: number;
+    ReferedSecurityGroupLimit?: number;
     /**
      * 单安全组关联实例数
      */
-    SecurityGroupInstanceLimit: number;
+    SecurityGroupInstanceLimit?: number;
     /**
      * 实例关联安全组数
      */
-    InstanceSecurityGroupLimit: number;
+    InstanceSecurityGroupLimit?: number;
     /**
      * 单安全组关联的模块数
      */
-    SecurityGroupModuleLimit: number;
+    SecurityGroupModuleLimit?: number;
     /**
      * 模块关联的安全组数
      */
-    ModuleSecurityGroupLimit: number;
+    ModuleSecurityGroupLimit?: number;
 }
 /**
  * CreateRoutes请求参数结构体
@@ -51,12 +51,11 @@ export interface DescribeHaVipsResponse {
     /**
      * 符合条件的对象数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * HAVIP对象数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    HaVipSet: Array<HaVip>;
+    HaVipSet?: Array<HaVip>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -544,21 +543,21 @@ export interface AssistantCidr {
     /**
      * VPC实例ID。形如：vpc-6v2ht8q5
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 辅助CIDR。形如：172.16.0.0/16
      */
-    CidrBlock: string;
+    CidrBlock?: string;
     /**
      * 辅助CIDR类型（0：普通辅助CIDR，1：容器辅助CIDR），默认都是0。
      */
-    AssistantType: number;
+    AssistantType?: number;
     /**
      * 辅助CIDR拆分的子网。
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetSet: Array<Subnet>;
+    SubnetSet?: Array<Subnet>;
 }
 /**
  * ModifyModuleIpDirect请求参数结构体
@@ -692,35 +691,35 @@ export interface SecurityGroupAssociationStatistics {
     /**
      * 安全组实例ID。
      */
-    SecurityGroupId: string;
+    SecurityGroupId?: string;
     /**
      * ECM实例数。
      */
-    ECM: number;
+    ECM?: number;
     /**
      * ECM模块数。
      */
-    Module: number;
+    Module?: number;
     /**
      * 弹性网卡实例数。
      */
-    ENI: number;
+    ENI?: number;
     /**
      * 被安全组引用数。
      */
-    SG: number;
+    SG?: number;
     /**
      * 负载均衡实例数。
      */
-    CLB: number;
+    CLB?: number;
     /**
      * 全量实例的绑定统计。
      */
-    InstanceStatistics: Array<InstanceStatistic>;
+    InstanceStatistics?: Array<InstanceStatistic>;
     /**
      * 所有资源的总计数（不包含被安全组引用数）。
      */
-    TotalCount: number;
+    TotalCount?: number;
 }
 /**
  * ModifyDefaultSubnet返回参数结构体
@@ -1152,9 +1151,8 @@ export interface DescribeVpcsRequest {
 export interface DescribeRouteConflictsResponse {
     /**
      * 路由策略冲突列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteConflictSet: Array<RouteConflict>;
+    RouteConflictSet?: Array<RouteConflict>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1460,7 +1458,6 @@ export interface DescribeSecurityGroupAssociationStatisticsResponse {
 export interface AssignPrivateIpAddressesResponse {
     /**
      * 内网IP详细信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>;
     /**
@@ -1587,36 +1584,36 @@ export interface NetworkInterface {
     /**
      * 弹性网卡实例ID，例如：eni-f1xjkw1b。
      */
-    NetworkInterfaceId: string;
+    NetworkInterfaceId?: string;
     /**
      * 弹性网卡名称。
      */
-    NetworkInterfaceName: string;
+    NetworkInterfaceName?: string;
     /**
      * 弹性网卡描述。
      */
-    NetworkInterfaceDescription: string;
+    NetworkInterfaceDescription?: string;
     /**
      * 子网实例ID。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * VPC实例ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 绑定的安全组。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupSet: Array<string>;
+    GroupSet?: Array<string>;
     /**
      * 是否是主网卡。
      */
-    Primary: boolean;
+    Primary?: boolean;
     /**
      * MAC地址。
      */
-    MacAddress: string;
+    MacAddress?: string;
     /**
      * 弹性网卡状态：
   PENDING：创建中
@@ -1625,49 +1622,49 @@ export interface NetworkInterface {
   DETACHING：解绑中
   DELETING：删除中
      */
-    State: string;
+    State?: string;
     /**
      * 内网IP信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivateIpAddressSet: Array<PrivateIpAddressSpecification>;
+    PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>;
     /**
      * 绑定的云服务器对象。
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Attachment: NetworkInterfaceAttachment;
+    Attachment?: NetworkInterfaceAttachment;
     /**
      * 可用区。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * IPv6地址列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ipv6AddressSet: Array<Ipv6Address>;
+    Ipv6AddressSet?: Array<Ipv6Address>;
     /**
      * 标签键值对。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
      */
-    EniType: number;
+    EniType?: number;
     /**
      * EcmRegion ecm区域
      */
-    EcmRegion: string;
+    EcmRegion?: string;
     /**
      * 网卡绑定的子机类型：cvm，eks。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Business: string;
+    Business?: string;
 }
 /**
  * 描述密钥对信息
@@ -1899,11 +1896,11 @@ export interface InstanceStatistic {
     /**
      * 实例的类型
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 实例的个数
      */
-    InstanceCount: number;
+    InstanceCount?: number;
 }
 /**
  * DeleteSecurityGroupPolicies请求参数结构体
@@ -1959,12 +1956,12 @@ export interface RouteConflict {
     /**
      * 要检查的与之冲突的目的端
      */
-    DestinationCidrBlock: string;
+    DestinationCidrBlock?: string;
     /**
      * 冲突的路由策略列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConflictSet: Array<Route>;
+    ConflictSet?: Array<Route>;
 }
 /**
  * DeleteSubnet返回参数结构体
@@ -4962,7 +4959,7 @@ export interface CreateHaVipResponse {
     /**
      * HAVIP对象。
      */
-    HaVip: HaVip;
+    HaVip?: HaVip;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6255,7 +6252,7 @@ export interface CreateNetworkInterfaceResponse {
     /**
      * 弹性网卡实例。
      */
-    NetworkInterface: NetworkInterface;
+    NetworkInterface?: NetworkInterface;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6469,12 +6466,11 @@ export interface CreateRoutesResponse {
     /**
      * 新增的实例个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 路由表对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableSet: Array<RouteTable>;
+    RouteTableSet?: Array<RouteTable>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBFeatures(req: DescribeDBFeaturesRequest, cb?: (error: string, rep: DescribeDBFeaturesResponse) => void): Promise<DescribeDBFeaturesResponse>;
     /**
-     * 创建审计规则模板
+     * 本接口（CreateAuditRuleTemplate）用于创建审计规则模板。
      */
     CreateAuditRuleTemplate(req: CreateAuditRuleTemplateRequest, cb?: (error: string, rep: CreateAuditRuleTemplateResponse) => void): Promise<CreateAuditRuleTemplateResponse>;
     /**
@@ -162,7 +162,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDefaultParams(req: DescribeDefaultParamsRequest, cb?: (error: string, rep: DescribeDefaultParamsResponse) => void): Promise<DescribeDefaultParamsResponse>;
     /**
-     * 本接口(DescribeAuditPolicies)用于查询云数据库实例的审计策略。
+     * 本接口（DescribeAuditPolicies）用于查询云数据库实例的审计策略。
      */
     DescribeAuditPolicies(req: DescribeAuditPoliciesRequest, cb?: (error: string, rep: DescribeAuditPoliciesResponse) => void): Promise<DescribeAuditPoliciesResponse>;
     /**
@@ -215,7 +215,7 @@ export declare class Client extends AbstractClient {
      */
     ReleaseIsolatedDBInstances(req: ReleaseIsolatedDBInstancesRequest, cb?: (error: string, rep: ReleaseIsolatedDBInstancesResponse) => void): Promise<ReleaseIsolatedDBInstancesResponse>;
     /**
-     * 本接口(CreateCloneInstance) 用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
+     * 本接口（CreateCloneInstance）用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
      */
     CreateCloneInstance(req: CreateCloneInstanceRequest, cb?: (error: string, rep: CreateCloneInstanceResponse) => void): Promise<CreateCloneInstanceResponse>;
     /**
@@ -223,7 +223,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAuditConfig(req: ModifyAuditConfigRequest, cb?: (error: string, rep: ModifyAuditConfigResponse) => void): Promise<ModifyAuditConfigResponse>;
     /**
-     * 本接口(ModifyInstancePasswordComplexity)用于修改云数据库实例的密码复杂度。
+     * 本接口（ModifyInstancePasswordComplexity）用于修改云数据库实例的密码复杂度。
      */
     ModifyInstancePasswordComplexity(req: ModifyInstancePasswordComplexityRequest, cb?: (error: string, rep: ModifyInstancePasswordComplexityResponse) => void): Promise<ModifyInstancePasswordComplexityResponse>;
     /**
@@ -247,11 +247,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackups(req: DescribeBackupsRequest, cb?: (error: string, rep: DescribeBackupsResponse) => void): Promise<DescribeBackupsResponse>;
     /**
-     * 查询数据库代理详情信息
+     * 本接口（DescribeCdbProxyInfo）用于查询数据库代理详情信息。
      */
     DescribeCdbProxyInfo(req: DescribeCdbProxyInfoRequest, cb?: (error: string, rep: DescribeCdbProxyInfoResponse) => void): Promise<DescribeCdbProxyInfoResponse>;
     /**
-     * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数Region均为ap-guangzhou。
+     * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数 Region 均为 ap-guangzhou。
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
@@ -278,7 +278,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeLocalBinlogConfig(req: DescribeLocalBinlogConfigRequest, cb?: (error: string, rep: DescribeLocalBinlogConfigResponse) => void): Promise<DescribeLocalBinlogConfigResponse>;
     /**
-     * 本接口(CreateBackup)用于创建数据库备份。
+     * 本接口（CreateBackup）用于创建数据库备份。
      */
     CreateBackup(req: CreateBackupRequest, cb?: (error: string, rep: CreateBackupResponse) => void): Promise<CreateBackupResponse>;
     /**
@@ -290,7 +290,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceConfig(req: DescribeDBInstanceConfigRequest, cb?: (error: string, rep: DescribeDBInstanceConfigResponse) => void): Promise<DescribeDBInstanceConfigResponse>;
     /**
-     * 数据库代理增加代理地址
+     * 本接口（CreateCdbProxyAddress）用于数据库代理增加代理地址。
      */
     CreateCdbProxyAddress(req: CreateCdbProxyAddressRequest, cb?: (error: string, rep: CreateCdbProxyAddressResponse) => void): Promise<CreateCdbProxyAddressResponse>;
     /**
@@ -350,7 +350,7 @@ export declare class Client extends AbstractClient {
      */
     StopDBImportJob(req: StopDBImportJobRequest, cb?: (error: string, rep: StopDBImportJobResponse) => void): Promise<StopDBImportJobResponse>;
     /**
-     * 在不同过滤条件下的审计日志结果集中，选定特定的数据列进行聚合统计。
+     * 本接口（AnalyzeAuditLogs）用于在不同过滤条件下的审计日志结果集中，选定特定的数据列进行聚合统计。
      */
     AnalyzeAuditLogs(req: AnalyzeAuditLogsRequest, cb?: (error: string, rep: AnalyzeAuditLogsResponse) => void): Promise<AnalyzeAuditLogsResponse>;
     /**
@@ -370,11 +370,11 @@ export declare class Client extends AbstractClient {
      */
     UpgradeDBInstanceEngineVersion(req: UpgradeDBInstanceEngineVersionRequest, cb?: (error: string, rep: UpgradeDBInstanceEngineVersionResponse) => void): Promise<UpgradeDBInstanceEngineVersionResponse>;
     /**
-     * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
+     * 本接口（DescribeAuditLogFiles）用于查询云数据库实例的审计日志文件。
      */
     DescribeAuditLogFiles(req: DescribeAuditLogFilesRequest, cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void): Promise<DescribeAuditLogFilesResponse>;
     /**
-     * 本接口(DescribeBackupDecryptionKey)用于查询备份文件解密密钥。
+     * 本接口（DescribeBackupDecryptionKey）用于查询备份文件解密密钥。
      */
     DescribeBackupDecryptionKey(req: DescribeBackupDecryptionKeyRequest, cb?: (error: string, rep: DescribeBackupDecryptionKeyResponse) => void): Promise<DescribeBackupDecryptionKeyResponse>;
     /**
@@ -398,7 +398,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchDrInstanceToMaster(req: SwitchDrInstanceToMasterRequest, cb?: (error: string, rep: SwitchDrInstanceToMasterResponse) => void): Promise<SwitchDrInstanceToMasterResponse>;
     /**
-     * 本接口(DeleteAccounts)用于删除云数据库的账户。
+     * 本接口（DeleteAccounts）用于删除云数据库的账户。
      */
     DeleteAccounts(req: DeleteAccountsRequest, cb?: (error: string, rep: DeleteAccountsResponse) => void): Promise<DeleteAccountsResponse>;
     /**
@@ -442,7 +442,7 @@ export declare class Client extends AbstractClient {
      */
     AdjustCdbProxyAddress(req: AdjustCdbProxyAddressRequest, cb?: (error: string, rep: AdjustCdbProxyAddressResponse) => void): Promise<AdjustCdbProxyAddressResponse>;
     /**
-     * 获取审计实例列表
+     * 本接口（DescribeAuditInstanceList）用于获取审计实例列表。
      */
     DescribeAuditInstanceList(req: DescribeAuditInstanceListRequest, cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void): Promise<DescribeAuditInstanceListResponse>;
     /**
@@ -529,17 +529,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSwitchRecords(req: DescribeDBSwitchRecordsRequest, cb?: (error: string, rep: DescribeDBSwitchRecordsResponse) => void): Promise<DescribeDBSwitchRecordsResponse>;
     /**
-     * 开启密码轮转
+     * 本接口（CreateRotationPassword）用于开启密码轮转。
      */
     CreateRotationPassword(req: CreateRotationPasswordRequest, cb?: (error: string, rep: CreateRotationPasswordResponse) => void): Promise<CreateRotationPasswordResponse>;
     /**
-     * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
-
+     * 本接口（CreateDBImportJob）用于创建云数据库数据导入任务。
 注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
      */
     CreateDBImportJob(req: CreateDBImportJobRequest, cb?: (error: string, rep: CreateDBImportJobResponse) => void): Promise<CreateDBImportJobResponse>;
     /**
-     * 本接口(DescribeAccounts)用于查询云数据库的所有账户信息。
+     * 本接口（DescribeAccounts）用于查询云数据库的所有账户信息。
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
@@ -571,7 +570,7 @@ export declare class Client extends AbstractClient {
      */
     SubmitInstanceUpgradeCheckJob(req: SubmitInstanceUpgradeCheckJobRequest, cb?: (error: string, rep: SubmitInstanceUpgradeCheckJobResponse) => void): Promise<SubmitInstanceUpgradeCheckJobResponse>;
     /**
-     * 关闭实例账户密码轮转
+     * 本接口（DeleteRotationPassword）用于关闭实例账户密码轮转。
      */
     DeleteRotationPassword(req: DeleteRotationPasswordRequest, cb?: (error: string, rep: DeleteRotationPasswordResponse) => void): Promise<DeleteRotationPasswordResponse>;
     /**
@@ -587,7 +586,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountDescription(req: ModifyAccountDescriptionRequest, cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void): Promise<ModifyAccountDescriptionResponse>;
     /**
-     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志。
+     * 本接口（DescribeSlowLogData）用于使用条件检索实例的慢日志。只允许查看一个月之内的慢日志。
 使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      */
     DescribeSlowLogData(req: DescribeSlowLogDataRequest, cb?: (error: string, rep: DescribeSlowLogDataResponse) => void): Promise<DescribeSlowLogDataResponse>;
@@ -600,7 +599,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
     /**
-     * 查询审计规则模板信息
+     * 本接口（DescribeAuditRuleTemplates）用于查询审计规则模板信息。
      */
     DescribeAuditRuleTemplates(req: DescribeAuditRuleTemplatesRequest, cb?: (error: string, rep: DescribeAuditRuleTemplatesResponse) => void): Promise<DescribeAuditRuleTemplatesResponse>;
     /**
@@ -630,7 +629,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceLogToCLS(req: DescribeDBInstanceLogToCLSRequest, cb?: (error: string, rep: DescribeDBInstanceLogToCLSResponse) => void): Promise<DescribeDBInstanceLogToCLSResponse>;
     /**
-     * 查询规则模板变更记录
+     * 本接口（DescribeAuditRuleTemplateModifyHistory）用于查询规则模板变更记录。
      */
     DescribeAuditRuleTemplateModifyHistory(req: DescribeAuditRuleTemplateModifyHistoryRequest, cb?: (error: string, rep: DescribeAuditRuleTemplateModifyHistoryResponse) => void): Promise<DescribeAuditRuleTemplateModifyHistoryResponse>;
     /**
@@ -696,7 +695,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSupportedPrivileges(req: DescribeSupportedPrivilegesRequest, cb?: (error: string, rep: DescribeSupportedPrivilegesResponse) => void): Promise<DescribeSupportedPrivilegesResponse>;
     /**
-     * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
+     * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数 Region 均为 ap-guangzhou。
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
@@ -716,7 +715,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRoGroups(req: DescribeRoGroupsRequest, cb?: (error: string, rep: DescribeRoGroupsResponse) => void): Promise<DescribeRoGroupsResponse>;
     /**
-     * 本接口(DescribeCloneList) 用于查询用户实例的克隆任务列表。
+     * 本接口（DescribeCloneList）用于查询用户实例的克隆任务列表。
      */
     DescribeCloneList(req: DescribeCloneListRequest, cb?: (error: string, rep: DescribeCloneListResponse) => void): Promise<DescribeCloneListResponse>;
     /**

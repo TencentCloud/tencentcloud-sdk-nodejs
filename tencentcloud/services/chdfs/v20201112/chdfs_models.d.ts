@@ -65,37 +65,37 @@ export interface DescribeFileSystemResponse {
     /**
      * 文件系统
      */
-    FileSystem: FileSystem;
+    FileSystem?: FileSystem;
     /**
      * 文件系统已使用容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CapacityUsed: number;
+    CapacityUsed?: number;
     /**
      * 已使用COS归档存储容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ArchiveCapacityUsed: number;
+    ArchiveCapacityUsed?: number;
     /**
      * 已使用COS标准存储容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StandardCapacityUsed: number;
+    StandardCapacityUsed?: number;
     /**
      * 已使用COS低频存储容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DegradeCapacityUsed: number;
+    DegradeCapacityUsed?: number;
     /**
      * 已使用COS深度归档存储容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeepArchiveCapacityUsed: number;
+    DeepArchiveCapacityUsed?: number;
     /**
      * 已使用COS智能分层存储容量（byte）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntelligentCapacityUsed: number;
+    IntelligentCapacityUsed?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -192,32 +192,26 @@ export interface DescribeLifeCycleRulesRequest {
 export interface Summary {
     /**
      * 已使用容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CapacityUsed: number;
+    CapacityUsed?: number;
     /**
      * 已使用COS标准存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StandardCapacityUsed: number;
+    StandardCapacityUsed?: number;
     /**
      * 已使用COS低频存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DegradeCapacityUsed?: number;
     /**
      * 已使用COS归档存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ArchiveCapacityUsed?: number;
     /**
      * 已使用COS深度归档存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeepArchiveCapacityUsed?: number;
     /**
      * 已使用COS智能分层存储容量（byte）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntelligentCapacityUsed?: number;
 }
@@ -401,7 +395,7 @@ export interface CreateMountPointResponse {
     /**
      * 挂载点
      */
-    MountPoint: MountPoint;
+    MountPoint?: MountPoint;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -416,10 +410,6 @@ export interface CreateFileSystemRequest {
      */
     FileSystemName: string;
     /**
-     * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
-     */
-    CapacityQuota: number;
-    /**
      * 是否校验POSIX ACL
      */
     PosixAcl: boolean;
@@ -427,6 +417,10 @@ export interface CreateFileSystemRequest {
      * 文件系统描述，默认为空字符串
      */
     Description?: string;
+    /**
+     * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
+     */
+    CapacityQuota?: number;
     /**
      * 超级用户名列表，默认为空数组
      */
@@ -485,7 +479,7 @@ export interface DescribeAccessGroupsResponse {
     /**
      * 权限组列表
      */
-    AccessGroups: Array<AccessGroup>;
+    AccessGroups?: Array<AccessGroup>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -552,57 +546,57 @@ export interface FileSystem {
     /**
      * 资源所属用户AppId
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 文件系统名称
      */
-    FileSystemName: string;
+    FileSystemName?: string;
     /**
      * 文件系统描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 文件系统ID
      */
-    FileSystemId: string;
+    FileSystemId?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 文件系统块大小（byte）
      */
-    BlockSize: number;
+    BlockSize?: number;
     /**
      * 文件系统容量（byte）
      */
-    CapacityQuota: number;
+    CapacityQuota?: number;
     /**
      * 文件系统状态（1：创建中；2：创建成功；3：创建失败）
      */
-    Status: number;
+    Status?: number;
     /**
      * 超级用户名列表
      */
-    SuperUsers: Array<string>;
+    SuperUsers?: Array<string>;
     /**
      * POSIX权限控制
      */
-    PosixAcl: boolean;
+    PosixAcl?: boolean;
     /**
      * 是否打开Ranger地址校验
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableRanger: boolean;
+    EnableRanger?: boolean;
     /**
      * Ranger地址列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RangerServiceAddresses: Array<string>;
+    RangerServiceAddresses?: Array<string>;
 }
 /**
  * 回热任务
@@ -843,7 +837,7 @@ export interface DescribeAccessGroupResponse {
     /**
      * 权限组
      */
-    AccessGroup: AccessGroup;
+    AccessGroup?: AccessGroup;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -885,7 +879,7 @@ export interface DescribeMountPointsResponse {
     /**
      * 挂载点列表
      */
-    MountPoints: Array<MountPoint>;
+    MountPoints?: Array<MountPoint>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1004,7 +998,7 @@ export interface DescribeMountPointResponse {
     /**
      * 挂载点
      */
-    MountPoint: MountPoint;
+    MountPoint?: MountPoint;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

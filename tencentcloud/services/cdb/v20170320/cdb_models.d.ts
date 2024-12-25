@@ -288,20 +288,24 @@ export interface CreateCdbProxyResponse {
 export interface InstanceRollbackRangeTime {
     /**
      * 查询数据库错误码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Code: number;
+    Code?: number;
     /**
      * 查询数据库错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 可回档时间范围
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Times: Array<RollbackTimeRange>;
+    Times?: Array<RollbackTimeRange>;
 }
 /**
  * DescribeTables返回参数结构体
@@ -310,11 +314,11 @@ export interface DescribeTablesResponse {
     /**
      * 符合查询条件的数据库表总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的数据库表信息。
      */
-    Items: Array<string>;
+    Items?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -403,7 +407,6 @@ export interface InstanceDbAuditStatus {
     OldRule?: boolean;
     /**
      * 实例所应用的规则模板。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateIds?: Array<string>;
 }
@@ -601,43 +604,43 @@ export interface BackupSummaryItem {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 该实例自动数据备份的个数。
      */
-    AutoBackupCount: number;
+    AutoBackupCount?: number;
     /**
      * 该实例自动数据备份的容量。
      */
-    AutoBackupVolume: number;
+    AutoBackupVolume?: number;
     /**
      * 该实例手动数据备份的个数。
      */
-    ManualBackupCount: number;
+    ManualBackupCount?: number;
     /**
      * 该实例手动数据备份的容量。
      */
-    ManualBackupVolume: number;
+    ManualBackupVolume?: number;
     /**
      * 该实例总的数据备份（包含自动备份和手动备份）个数。
      */
-    DataBackupCount: number;
+    DataBackupCount?: number;
     /**
      * 该实例总的数据备份容量。
      */
-    DataBackupVolume: number;
+    DataBackupVolume?: number;
     /**
      * 该实例日志备份的个数。
      */
-    BinlogBackupCount: number;
+    BinlogBackupCount?: number;
     /**
      * 该实例日志备份的容量。
      */
-    BinlogBackupVolume: number;
+    BinlogBackupVolume?: number;
     /**
      * 该实例的总备份（包含数据备份和日志备份）占用容量。
      */
-    BackupVolume: number;
+    BackupVolume?: number;
 }
 /**
  * CreateDatabase请求参数结构体
@@ -1389,11 +1392,11 @@ export interface TagInfoUnit {
     /**
      * 标签键
      */
-    TagKey: string;
+    TagKey?: string;
     /**
      * 标签值
      */
-    TagValue: string;
+    TagValue?: string;
 }
 /**
  * ModifyAuditRule返回参数结构体
@@ -1460,52 +1463,52 @@ export interface ProxyGroupInfo {
     /**
      * 代理组ID
      */
-    ProxyGroupId: string;
+    ProxyGroupId?: string;
     /**
      * 代理版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyVersion: string;
+    ProxyVersion?: string;
     /**
      * 代理支持升级版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportUpgradeProxyVersion: string;
+    SupportUpgradeProxyVersion?: string;
     /**
      * 代理状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 代理任务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 代理组节点信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyNode: Array<ProxyNode>;
+    ProxyNode?: Array<ProxyNode>;
     /**
      * 代理组地址信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyAddress: Array<ProxyAddress>;
+    ProxyAddress?: Array<ProxyAddress>;
     /**
      * 连接池阈值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConnectionPoolLimit: number;
+    ConnectionPoolLimit?: number;
     /**
      * 支持创建地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportCreateProxyAddress: boolean;
+    SupportCreateProxyAddress?: boolean;
     /**
      * 支持升级代理版本所需的cdb版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportUpgradeProxyMysqlVersion: string;
+    SupportUpgradeProxyMysqlVersion?: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -1523,19 +1526,19 @@ export interface BackupConfig {
     /**
      * 第二个从库复制方式，可能的返回值：async-异步，semisync-半同步
      */
-    ReplicationMode: string;
+    ReplicationMode?: string;
     /**
      * 第二个从库可用区的正式名称，如ap-shanghai-1
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 第二个从库内网IP地址
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 第二个从库访问端口
      */
-    Vport: number;
+    Vport?: number;
 }
 /**
  * 权重分配规则
@@ -1559,7 +1562,7 @@ export interface AuditPolicy {
     /**
      * 审计策略 ID。
      */
-    PolicyId: string;
+    PolicyId?: string;
     /**
      * 审计策略的状态。可能返回的值为：
   "creating" - 创建中;
@@ -1567,37 +1570,37 @@ export interface AuditPolicy {
   "paused" - 暂停中;
   "failed" - 创建失败。
      */
-    Status: string;
+    Status?: string;
     /**
      * 数据库实例 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 审计策略创建时间。格式为 : "2019-03-20 17:09:13"。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 审计策略最后修改时间。格式为 : "2019-03-20 17:09:13"。
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 审计策略名称。
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 审计规则 ID。
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 审计规则名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 数据库实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
 }
 /**
  * 代理节点
@@ -1855,12 +1858,10 @@ export interface DescribeBinlogBackupOverviewResponse {
 export interface DescribeDBInstanceLogToCLSResponse {
     /**
      * 错误日志投递CLS配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorLog?: LogToCLSConfig;
     /**
      * 慢日志投递CLS配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlowLog?: LogToCLSConfig;
     /**
@@ -2102,12 +2103,14 @@ export interface DeleteDatabaseRequest {
 export interface UploadInfo {
     /**
      * 文件所有分片数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AllSliceNum: number;
+    AllSliceNum?: number;
     /**
      * 已完成分片数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompleteNum: number;
+    CompleteNum?: number;
 }
 /**
  * DisassociateSecurityGroups请求参数结构体
@@ -2294,34 +2297,34 @@ export interface AuditRule {
     /**
      * 审计规则 Id。
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 审计规则创建时间。格式为 : "2019-03-20 17:09:13"。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 审计规则最后修改时间。格式为 : "2019-03-20 17:09:13"。
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 审计规则名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 审计规则描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 审计规则过滤条件。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleFilters: Array<AuditFilter>;
+    RuleFilters?: Array<AuditFilter>;
     /**
      * 是否开启全审计。
      */
-    AuditAll: boolean;
+    AuditAll?: boolean;
 }
 /**
  * DescribeInstanceAlarmEvents请求参数结构体
@@ -2889,7 +2892,7 @@ export interface CreateParamTemplateResponse {
     /**
      * 参数模板 ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3070,56 +3073,69 @@ export interface AddTimeWindowRequest {
 export interface ImportRecord {
     /**
      * 状态值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 状态值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Code: number;
+    Code?: number;
     /**
      * 执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CostTime: number;
+    CostTime?: number;
     /**
      * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 后端任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkId: string;
+    WorkId?: string;
     /**
      * 导入文件名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 执行进度
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: number;
+    Process?: number;
     /**
      * 任务创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 文件大小
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileSize: string;
+    FileSize?: string;
     /**
      * 任务执行信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: number;
+    JobId?: number;
     /**
      * 导入库表名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 异步任务的请求ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
 }
 /**
  * DeleteAuditLogFile返回参数结构体
@@ -3154,7 +3170,7 @@ export interface SlaveInfo {
     /**
      * 第一备机信息
      */
-    First: SlaveInstanceInfo;
+    First?: SlaveInstanceInfo;
     /**
      * 第二备机信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3214,32 +3230,26 @@ export interface Tag {
 export interface RuleTemplateInfo {
     /**
      * 规则模板ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateId?: string;
     /**
      * 规则模板名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateName?: string;
     /**
      * 规则内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleFilters?: Array<RuleFilters>;
     /**
      * 告警等级。1-低风险，2-中风险，3-高风险。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmLevel?: number;
     /**
      * 告警策略。0-不告警，1-告警。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmPolicy?: number;
     /**
      * 规则描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -3326,7 +3336,7 @@ export interface DeleteAccountsResponse {
     /**
      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3339,23 +3349,23 @@ export interface ParamTemplateInfo {
     /**
      * 参数模板ID
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 参数模板名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 参数模板描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 实例引擎版本
      */
-    EngineVersion: string;
+    EngineVersion?: string;
     /**
      * 参数模板类型
      */
-    TemplateType: string;
+    TemplateType?: string;
     /**
      * 参数模板引擎
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3649,18 +3659,22 @@ export interface DescribeParamTemplatesResponse {
 export interface ZoneConf {
     /**
      * 可用区部署方式，可能的值为：0-单可用区；1-多可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployMode: Array<number | bigint>;
     /**
      * 主实例所在的可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterZone: Array<string>;
     /**
      * 实例为多可用区部署时，备库1所在的可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZone: Array<string>;
     /**
      * 实例为多可用区部署时，备库2所在的可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupZone: Array<string>;
 }
@@ -3833,11 +3847,11 @@ export interface TagsInfoOfInstance {
     /**
      * 实例Id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 标签信息
      */
-    Tags: Array<TagInfoUnit>;
+    Tags?: Array<TagInfoUnit>;
 }
 /**
  * DescribeDeviceMonitorInfo请求参数结构体
@@ -3950,12 +3964,14 @@ export interface DescribeDBInstanceConfigResponse {
 export interface SlaveConfig {
     /**
      * 从库复制方式，可能的返回值：aysnc-异步，semisync-半同步
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReplicationMode: string;
+    ReplicationMode?: string;
     /**
      * 从库可用区的正式名称，如ap-shanghai-1
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
 }
 /**
  * ModifyAccountPrivileges返回参数结构体
@@ -3985,22 +4001,18 @@ export interface StopRollbackRequest {
 export interface LogToCLSConfig {
     /**
      * 投递状态打开或者关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * CLS日志集ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogSetId?: string;
     /**
      * 日志主题ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogTopicId?: string;
     /**
      * CLS服务所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClsRegion?: string;
 }
@@ -4151,32 +4163,26 @@ export interface VerifyRootAccountRequest {
 export interface RuleTemplateRecordInfo {
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 修改前规则模板的详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyBeforeInfo?: RuleTemplateInfo;
     /**
      * 修改后规则模板的详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyAfterInfo?: RuleTemplateInfo;
     /**
      * 影响的实例。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AffectedInstances?: Array<string>;
     /**
      * 操作人，账号uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator?: string;
     /**
      * 变更的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
 }
@@ -4252,7 +4258,7 @@ export interface ModifyInstancePasswordComplexityResponse {
     /**
      * 异步任务 ID，可用于查询任务进度。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4265,11 +4271,11 @@ export interface DeviceMemInfo {
     /**
      * 总内存大小。free命令中Mem:一行total的值,单位：KB
      */
-    Total: Array<number | bigint>;
+    Total?: Array<number | bigint>;
     /**
      * 已使用内存。free命令中Mem:一行used的值,单位：KB
      */
-    Used: Array<number | bigint>;
+    Used?: Array<number | bigint>;
 }
 /**
  * 审计日志分析结果
@@ -4279,12 +4285,12 @@ export interface AuditLogAggregationResult {
      * 聚合维度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AggregationField: string;
+    AggregationField?: string;
     /**
      * 聚合桶的结果集
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Buckets: Array<Bucket>;
+    Buckets?: Array<Bucket>;
 }
 /**
  * 数据库名以及字符集
@@ -4293,11 +4299,11 @@ export interface DatabasesWithCharacterLists {
     /**
      * 数据库名
      */
-    DatabaseName: string;
+    DatabaseName?: string;
     /**
      * 字符集类型
      */
-    CharacterSet: string;
+    CharacterSet?: string;
 }
 /**
  * DescribeRemoteBackupConfig请求参数结构体
@@ -4429,19 +4435,21 @@ export interface DescribeAccountsResponse {
 export interface RollbackTimeRange {
     /**
      * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Begin: string;
+    Begin?: string;
     /**
      * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    End: string;
+    End?: string;
 }
 /**
  * ModifyProtectMode请求参数结构体
  */
 export interface ModifyProtectModeRequest {
     /**
-     * 无
+     * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
      */
     ProtectMode: number;
     /**
@@ -4455,12 +4463,10 @@ export interface ModifyProtectModeRequest {
 export interface DescribeAuditRuleTemplateModifyHistoryResponse {
     /**
      * 总的条数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 变更详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<RuleTemplateRecordInfo>;
     /**
@@ -4913,24 +4919,29 @@ export interface DescribeBackupConfigRequest {
 export interface RoVipInfo {
     /**
      * 只读vip状态
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoVipStatus: number;
+    RoVipStatus?: number;
     /**
      * 只读vip的子网
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoSubnetId: number;
+    RoSubnetId?: number;
     /**
      * 只读vip的私有网络
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoVpcId: number;
+    RoVpcId?: number;
     /**
      * 只读vip的端口号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoVport: number;
+    RoVport?: number;
     /**
      * 只读vip
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoVip: string;
+    RoVip?: string;
 }
 /**
  * DescribeAccounts请求参数结构体
@@ -4993,12 +5004,12 @@ export interface DescribeAuditLogFilesResponse {
     /**
      * 符合条件的审计日志文件个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 审计日志文件详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<AuditLogFile>;
+    Items?: Array<AuditLogFile>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5088,75 +5099,75 @@ export interface MasterInfo {
     /**
      * 地域信息
      */
-    Region: string;
+    Region?: string;
     /**
      * 地域ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 可用区ID
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 可用区信息
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例长ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 实例状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例类型
      */
-    InstanceType: number;
+    InstanceType?: number;
     /**
      * 任务状态
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 内存容量
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 硬盘容量
      */
-    Volume: number;
+    Volume?: number;
     /**
      * 实例机型
      */
-    DeviceType: string;
+    DeviceType?: string;
     /**
      * 每秒查询数
      */
-    Qps: number;
+    Qps?: number;
     /**
      * 私有网络ID
      */
-    VpcId: number;
+    VpcId?: number;
     /**
      * 子网ID
      */
-    SubnetId: number;
+    SubnetId?: number;
     /**
      * 独享集群ID
      */
-    ExClusterId: string;
+    ExClusterId?: string;
     /**
      * 独享集群名称
      */
-    ExClusterName: string;
+    ExClusterName?: string;
 }
 /**
  * ResetRootAccount返回参数结构体
@@ -5455,47 +5466,47 @@ export interface ParameterDetail {
     /**
      * 参数名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 参数类型：integer，enum，float，string，func
      */
-    ParamType: string;
+    ParamType?: string;
     /**
      * 参数默认值
      */
-    Default: string;
+    Default?: string;
     /**
      * 参数描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 参数当前值
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 修改参数后，是否需要重启数据库以使参数生效。可能的值包括：0-不需要重启；1-需要重启
      */
-    NeedReboot: number;
+    NeedReboot?: number;
     /**
      * 参数允许的最大值
      */
-    Max: number;
+    Max?: number;
     /**
      * 参数允许的最小值
      */
-    Min: number;
+    Min?: number;
     /**
      * 参数的可选枚举值。如果为非枚举参数，则为空
      */
-    EnumValue: Array<string>;
+    EnumValue?: Array<string>;
     /**
      * 参数是公式类型时，该字段有效，表示公式类型最大值
      */
-    MaxFunc: string;
+    MaxFunc?: string;
     /**
      * 参数是公式类型时，该字段有效，表示公式类型最小值
      */
-    MinFunc: string;
+    MinFunc?: string;
     /**
      * 参数是否不支持修改
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5594,43 +5605,43 @@ export interface CloneItem {
     /**
      * 克隆任务的源实例Id。
      */
-    SrcInstanceId: string;
+    SrcInstanceId?: string;
     /**
      * 克隆任务的新产生实例Id。
      */
-    DstInstanceId: string;
+    DstInstanceId?: string;
     /**
      * 克隆任务对应的任务列表Id。
      */
-    CloneJobId: number;
+    CloneJobId?: number;
     /**
      * 克隆实例使用的策略， 包括以下类型：  timepoint:指定时间点回档，  backupset: 指定备份文件回档。
      */
-    RollbackStrategy: string;
+    RollbackStrategy?: string;
     /**
      * 克隆实例回档的时间点。
      */
-    RollbackTargetTime: string;
+    RollbackTargetTime?: string;
     /**
      * 任务开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务状态，包括以下状态：initial,running,wait_complete,success,failed
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 克隆实例所在地域Id
      */
-    NewRegionId: number;
+    NewRegionId?: number;
     /**
      * 源实例所在地域Id
      */
-    SrcRegionId: number;
+    SrcRegionId?: number;
 }
 /**
  * ModifyDBInstanceSecurityGroups返回参数结构体
@@ -5797,7 +5808,6 @@ export interface BackupInfo {
     EncryptionFlag?: string;
     /**
      * 备份GTID点位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecutedGTIDSet?: string;
 }
@@ -5842,27 +5852,27 @@ export interface SlowLogInfo {
     /**
      * 备份文件名
      */
-    Name: string;
+    Name?: string;
     /**
      * 备份文件大小，单位：Byte
      */
-    Size: number;
+    Size?: number;
     /**
      * 备份快照时间，时间格式：2016-03-17 02:10:37
      */
-    Date: string;
+    Date?: string;
     /**
      * 内网下载地址
      */
-    IntranetUrl: string;
+    IntranetUrl?: string;
     /**
      * 外网下载地址
      */
-    InternetUrl: string;
+    InternetUrl?: string;
     /**
      * 日志具体类型，可能的值：slowlog - 慢日志
      */
-    Type: string;
+    Type?: string;
 }
 /**
  * ModifyLocalBinlogConfig返回参数结构体
@@ -5999,28 +6009,28 @@ export interface RollbackTask {
     /**
      * 任务执行信息描述。
      */
-    Info: string;
+    Info?: string;
     /**
      * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
      */
-    Status: string;
+    Status?: string;
     /**
      * 任务执行进度。取值范围为[0, 100]。
      */
-    Progress: number;
+    Progress?: number;
     /**
      * 任务开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 回档任务详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: Array<RollbackInstancesInfo>;
+    Detail?: Array<RollbackInstancesInfo>;
 }
 /**
  * StartReplication请求参数结构体
@@ -6299,23 +6309,23 @@ export interface DeviceNetInfo {
     /**
      * tcp连接数
      */
-    Conn: Array<number | bigint>;
+    Conn?: Array<number | bigint>;
     /**
      * 网卡入包量，单位：个/秒
      */
-    PackageIn: Array<number | bigint>;
+    PackageIn?: Array<number | bigint>;
     /**
      * 网卡出包量，单位：个/秒
      */
-    PackageOut: Array<number | bigint>;
+    PackageOut?: Array<number | bigint>;
     /**
      * 入流量，单位：kbps
      */
-    FlowIn: Array<number | bigint>;
+    FlowIn?: Array<number | bigint>;
     /**
      * 出流量，单位：kbps
      */
-    FlowOut: Array<number | bigint>;
+    FlowOut?: Array<number | bigint>;
 }
 /**
  * ModifyDBInstanceVipVport返回参数结构体
@@ -6842,15 +6852,15 @@ export interface DescribeDatabasesResponse {
     /**
      * 符合查询条件的实例总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的实例信息。
      */
-    Items: Array<string>;
+    Items?: Array<string>;
     /**
      * 数据库名以及字符集
      */
-    DatabaseList: Array<DatabasesWithCharacterLists>;
+    DatabaseList?: Array<DatabasesWithCharacterLists>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7057,11 +7067,11 @@ export interface DeviceCpuRateInfo {
     /**
      * Cpu核编号
      */
-    CpuCore: number;
+    CpuCore?: number;
     /**
      * Cpu使用率
      */
-    Rate: Array<number | bigint>;
+    Rate?: Array<number | bigint>;
 }
 /**
  * ModifyAccountPrivileges请求参数结构体
@@ -7114,13 +7124,17 @@ export interface CreateBackupRequest {
     BackupMethod: string;
     /**
      * 需要备份的库表信息，如果不设置该参数，则默认整实例备份。在 BackupMethod=logical 逻辑备份中才可设置该参数。指定的库表必须存在，否则可能导致备份失败。
-  例：如果需要备份 db1 库的 tb1、tb2 表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ]。
+  例：如果需要备份 db1 库的 tb1、tb2 表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"}]。
      */
     BackupDBTableList?: Array<BackupItem>;
     /**
      * 手动备份别名
      */
     ManualBackupName?: string;
+    /**
+     * 是否需要加密物理备份， 当BackupMethod为physical 时，该值才有意义。 不指定则使用实例备份默认加密策略。
+     */
+    EncryptionFlag?: string;
 }
 /**
  * 账号详细信息
@@ -7129,31 +7143,35 @@ export interface AccountInfo {
     /**
      * 账号备注信息
      */
-    Notes: string;
+    Notes?: string;
     /**
      * 账号的域名
      */
-    Host: string;
+    Host?: string;
     /**
      * 账号的名称
      */
-    User: string;
+    User?: string;
     /**
      * 账号信息修改时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 修改密码的时间
      */
-    ModifyPasswordTime: string;
+    ModifyPasswordTime?: string;
     /**
      * 该值已废弃
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 用户最大可用实例连接数
      */
-    MaxUserConnections: number;
+    MaxUserConnections?: number;
+    /**
+     * 用户账号是否开启了密码轮转
+     */
+    OpenCam?: boolean;
 }
 /**
  * DescribeTimeWindow请求参数结构体
@@ -7448,12 +7466,10 @@ export interface SwitchForUpgradeResponse {
 export interface UpgradeEngineVersionParams {
     /**
      * 参数名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 参数值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
 }
@@ -7574,57 +7590,57 @@ export interface SlowLogItem {
      * Sql的执行时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timestamp: number;
+    Timestamp?: number;
     /**
      * Sql的执行时长（秒）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QueryTime: number;
+    QueryTime?: number;
     /**
      * Sql语句。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SqlText: string;
+    SqlText?: string;
     /**
      * 客户端地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserHost: string;
+    UserHost?: string;
     /**
      * 用户名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 数据库名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Database: string;
+    Database?: string;
     /**
      * 锁时长（秒）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LockTime: number;
+    LockTime?: number;
     /**
      * 扫描行数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RowsExamined: number;
+    RowsExamined?: number;
     /**
      * 结果集行数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RowsSent: number;
+    RowsSent?: number;
     /**
      * Sql模板。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SqlTemplate: string;
+    SqlTemplate?: string;
     /**
      * Sql语句的md5。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Md5: string;
+    Md5?: string;
 }
 /**
  * DescribeLocalBinlogConfig返回参数结构体
@@ -7811,23 +7827,23 @@ export interface DeviceDiskInfo {
     /**
      * 平均每秒有百分之几的时间用于IO操作
      */
-    IoRatioPerSec: Array<number | bigint>;
+    IoRatioPerSec?: Array<number | bigint>;
     /**
      * 平均每次设备I/O操作的等待时间*100，单位为毫秒。例如：该值为201，表示平均每次I/O操作等待时间为：201/100=2.1毫秒
      */
-    IoWaitTime: Array<number | bigint>;
+    IoWaitTime?: Array<number | bigint>;
     /**
      * 磁盘平均每秒完成的读操作次数总和*100。例如：该值为2002，表示磁盘平均每秒完成读操作为：2002/100=20.2次
      */
-    Read: Array<number | bigint>;
+    Read?: Array<number | bigint>;
     /**
      * 磁盘平均每秒完成的写操作次数总和*100。例如：该值为30001，表示磁盘平均每秒完成写操作为：30001/100=300.01次
      */
-    Write: Array<number | bigint>;
+    Write?: Array<number | bigint>;
     /**
      * 磁盘空间容量，每两个一组，第一个为已使用容量，第二个为磁盘总容量
      */
-    CapacityRatio: Array<number | bigint>;
+    CapacityRatio?: Array<number | bigint>;
 }
 /**
  * DescribeInstanceAlarmEvents返回参数结构体
@@ -8041,7 +8057,7 @@ export interface ModifyRoGroupInfoResponse {
      * 异步任务 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8224,7 +8240,7 @@ export interface ModifyAccountDescriptionResponse {
     /**
      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8312,12 +8328,10 @@ export interface ProxyAddress {
     ProxyAllocation?: Array<ProxyAllocation>;
     /**
      * 接入模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessMode?: string;
     /**
      * 是否开启自动负载均衡
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoLoadBalance?: boolean;
 }
@@ -8816,17 +8830,14 @@ export interface CreateCloneInstanceRequest {
 export interface ClusterInfo {
     /**
      * 节点id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId?: string;
     /**
      * 节点类型：主节点，从节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Role?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
 }
@@ -9238,32 +9249,39 @@ export interface DescribeBackupDecryptionKeyResponse {
 export interface SecurityGroup {
     /**
      * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 入站规则
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Inbound: Array<Inbound>;
+    Inbound?: Array<Inbound>;
     /**
      * 出站规则
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Outbound: Array<Outbound>;
+    Outbound?: Array<Outbound>;
     /**
      * 安全组ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroupId: string;
+    SecurityGroupId?: string;
     /**
      * 安全组名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroupName: string;
+    SecurityGroupName?: string;
     /**
      * 安全组备注
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroupRemark: string;
+    SecurityGroupRemark?: string;
 }
 /**
  * OfflineIsolatedInstances请求参数结构体
@@ -9314,7 +9332,7 @@ export interface ModifyInstanceParamResponse {
     /**
      * 异步任务 ID，可用于查询任务进度。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9521,24 +9539,24 @@ export interface CreateBackupResponse {
     /**
      * 备份任务 ID。
      */
-    BackupId: number;
+    BackupId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- *  CPU负载
+ * CPU负载
  */
 export interface DeviceCpuInfo {
     /**
      * 实例CPU平均使用率
      */
-    Rate: Array<DeviceCpuRateInfo>;
+    Rate?: Array<DeviceCpuRateInfo>;
     /**
      * 实例CPU监控数据
      */
-    Load: Array<number | bigint>;
+    Load?: Array<number | bigint>;
 }
 /**
  * OpenDBInstanceEncryption返回参数结构体
@@ -9569,27 +9587,27 @@ export interface SqlFileInfo {
     /**
      * 上传时间
      */
-    UploadTime: string;
+    UploadTime?: string;
     /**
      * 上传进度
      */
-    UploadInfo: UploadInfo;
+    UploadInfo?: UploadInfo;
     /**
      * 文件名
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件大小，单位为Bytes
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 上传是否完成标志，可选值：0 - 未完成，1 - 已完成
      */
-    IsUploadFinished: number;
+    IsUploadFinished?: number;
     /**
      * 文件ID
      */
-    FileId: string;
+    FileId?: string;
 }
 /**
  * RO 组的配置信息
@@ -9843,33 +9861,33 @@ export interface AuditLogFile {
     /**
      * 审计日志文件名称
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 文件状态值。可能返回的值为：
   "creating" - 生成中;
   "failed" - 创建失败;
   "success" - 已生成;
      */
-    Status: string;
+    Status?: string;
     /**
      * 文件大小，单位为 KB。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 审计日志下载地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 错误信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrMsg: string;
+    ErrMsg?: string;
 }
 /**
  * DescribeAuditRuleTemplates请求参数结构体
@@ -9942,27 +9960,22 @@ export interface AuditRuleTemplateInfo {
     CreateAt?: string;
     /**
      * 告警等级。1-低风险，2-中风险，3-高风险。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmLevel?: number;
     /**
      * 告警策略。0-不告警，1-告警。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmPolicy?: number;
     /**
      * 规则模板应用在哪些在实例。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AffectedInstances?: Array<string>;
     /**
      * 模板状态。0-无任务 ，1-修改中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 模板更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateAt?: string;
 }
@@ -10003,11 +10016,13 @@ export interface DescribeSlowLogDataRequest {
      */
     InstanceId: string;
     /**
-     * 开始时间戳。例如 1585142640 。
+     * 开始时间戳。例如 1585142640。
+  说明：此参数单位为秒的时间戳。
      */
     StartTime: number;
     /**
-     * 结束时间戳。例如 1585142640 。
+     * 结束时间戳。例如 1585142640。
+  说明：此参数单位为秒的时间戳。
      */
     EndTime: number;
     /**

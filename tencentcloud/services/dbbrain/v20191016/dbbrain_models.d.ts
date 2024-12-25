@@ -5,11 +5,11 @@ export interface SchemaSpaceTimeSeries {
     /**
      * 库名
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 单位时间间隔内的空间指标数据。
      */
-    SeriesData: MonitorMetricSeriesData;
+    SeriesData?: MonitorMetricSeriesData;
 }
 /**
  * 慢日志来源用户详情。
@@ -94,11 +94,11 @@ export interface TimeSlice {
     /**
      * 总数
      */
-    Count: number;
+    Count?: number;
     /**
      * 统计开始时间
      */
-    Timestamp: number;
+    Timestamp?: number;
 }
 /**
  * 获取健康得分返回的详情。
@@ -166,15 +166,15 @@ export interface ContactItem {
     /**
      * 联系人id。
      */
-    Id: number;
+    Id?: number;
     /**
      * 联系人姓名。
      */
-    Name: string;
+    Name?: string;
     /**
      * 联系人绑定的邮箱。
      */
-    Mail: string;
+    Mail?: string;
 }
 /**
  * DescribeHealthScore返回参数结构体
@@ -381,16 +381,16 @@ export interface MonitorMetric {
     /**
      * 指标名称。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 指标单位。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Values: Array<number | bigint>;
+    Values?: Array<number | bigint>;
 }
 /**
  * CreateDBDiagReportTask请求参数结构体
@@ -432,16 +432,16 @@ export interface MonitorFloatMetric {
     /**
      * 指标名称。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 指标单位。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Values: Array<number>;
+    Values?: Array<number>;
 }
 /**
  * DescribeSecurityAuditLogDownloadUrls请求参数结构体
@@ -527,27 +527,27 @@ export interface InstanceBasicInfo {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例内网IP。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 实例内网Port。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 实例产品。
      */
-    Product: string;
+    Product?: string;
     /**
      * 实例引擎版本。
      */
-    EngineVersion: string;
+    EngineVersion?: string;
 }
 /**
  * SchemaItem数组
@@ -688,46 +688,46 @@ export interface DiagHistoryEventItem {
     /**
      * 诊断类型。
      */
-    DiagType: string;
+    DiagType?: string;
     /**
      * 结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 事件 ID 。
      */
-    EventId: number;
+    EventId?: number;
     /**
      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
      */
-    Severity: number;
+    Severity?: number;
     /**
      * 概要。
      */
-    Outline: string;
+    Outline?: string;
     /**
      * 诊断项。
      */
-    DiagItem: string;
+    DiagItem?: string;
     /**
      * 实例 ID 。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 保留字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
 }
 /**
  * DescribeDBDiagEvent返回参数结构体
@@ -811,19 +811,19 @@ export interface TableSpaceTimeSeries {
     /**
      * 表名。
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 库表的存储引擎。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 单位时间间隔内的空间指标数据。
      */
-    SeriesData: MonitorFloatMetricSeriesData;
+    SeriesData?: MonitorFloatMetricSeriesData;
 }
 /**
  * 描述组信息。
@@ -832,15 +832,15 @@ export interface GroupItem {
     /**
      * 组id。
      */
-    Id: number;
+    Id?: number;
     /**
      * 组名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 组成员数量。
      */
-    MemberCount: number;
+    MemberCount?: number;
 }
 /**
  * 查询实例列表，返回实例的相关信息的对象。
@@ -849,115 +849,115 @@ export interface InstanceInfo {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例所属地域。
      */
-    Region: string;
+    Region?: string;
     /**
      * 健康得分。
      */
-    HealthScore: number;
+    HealthScore?: number;
     /**
      * 所属产品。
      */
-    Product: string;
+    Product?: string;
     /**
      * 异常事件数量。
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 实例类型：1:MASTER；2:DR，3：RO，4:SDR。
      */
-    InstanceType: number;
+    InstanceType?: number;
     /**
      * 核心数。
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 内存，单位MB。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 硬盘存储，单位GB。
      */
-    Volume: number;
+    Volume?: number;
     /**
      * 数据库版本。
      */
-    EngineVersion: string;
+    EngineVersion?: string;
     /**
      * 内网地址。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 内网端口。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 接入来源。
      */
-    Source: string;
+    Source?: string;
     /**
      * 分组ID。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 分组组名。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 实例状态：0：发货中；1：运行正常；4：销毁中；5：隔离中。
      */
-    Status: number;
+    Status?: number;
     /**
      * 子网统一ID。
      */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /**
      * cdb类型。
      */
-    DeployMode: string;
+    DeployMode?: string;
     /**
      * cdb实例初始化标志：0：未初始化；1：已初始化。
      */
-    InitFlag: number;
+    InitFlag?: number;
     /**
      * 任务状态。
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 私有网络统一ID。
      */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /**
      * 实例巡检/概览的状态。
      */
-    InstanceConf: InstanceConfs;
+    InstanceConf?: InstanceConfs;
     /**
      * 资源到期时间。
      */
-    DeadlineTime: string;
+    DeadlineTime?: string;
     /**
      * 是否是DBbrain支持的实例。
      */
-    IsSupported: boolean;
+    IsSupported?: boolean;
     /**
      * 实例安全审计日志开启状态：ON： 安全审计开启；OFF： 未开启安全审计。
      */
-    SecAuditStatus: string;
+    SecAuditStatus?: string;
     /**
      * 实例审计日志开启状态，ALL_AUDIT： 开启全审计；RULE_AUDIT： 开启规则审计；UNBOUND： 未开启审计。
      */
-    AuditPolicyStatus: string;
+    AuditPolicyStatus?: string;
     /**
      * 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。
      */
-    AuditRunningStatus: string;
+    AuditRunningStatus?: string;
     /**
      * 内网vip。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1137,11 +1137,11 @@ export interface MonitorMetricSeriesData {
     /**
      * 监控指标。
      */
-    Series: Array<MonitorMetric>;
+    Series?: Array<MonitorMetric>;
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number | bigint>;
+    Timestamp?: Array<number | bigint>;
 }
 /**
  * ModifyDiagDBInstanceConf返回参数结构体
@@ -1485,11 +1485,11 @@ export interface MonitorFloatMetricSeriesData {
     /**
      * 监控指标。
      */
-    Series: Array<MonitorFloatMetric>;
+    Series?: Array<MonitorFloatMetric>;
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number | bigint>;
+    Timestamp?: Array<number | bigint>;
 }
 /**
  * 邮件发送配置
@@ -1612,43 +1612,43 @@ export interface TableSpaceData {
     /**
      * 表名。
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 库表的存储引擎。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 数据空间（MB）。
      */
-    DataLength: number;
+    DataLength?: number;
     /**
      * 索引空间（MB）。
      */
-    IndexLength: number;
+    IndexLength?: number;
     /**
      * 碎片空间（MB）。
      */
-    DataFree: number;
+    DataFree?: number;
     /**
      * 总使用空间（MB）。
      */
-    TotalLength: number;
+    TotalLength?: number;
     /**
      * 碎片率（%）。
      */
-    FragRatio: number;
+    FragRatio?: number;
     /**
      * 行数。
      */
-    TableRows: number;
+    TableRows?: number;
     /**
      * 表对应的独立物理文件大小（MB）。
      */
-    PhysicalFileSize: number;
+    PhysicalFileSize?: number;
 }
 /**
  * DescribeSecurityAuditLogDownloadUrls返回参数结构体
@@ -1670,39 +1670,39 @@ export interface EventInfo {
     /**
      * 事件 ID 。
      */
-    EventId: number;
+    EventId?: number;
     /**
      * 诊断类型。
      */
-    DiagType: string;
+    DiagType?: string;
     /**
      * 开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 概要。
      */
-    Outline: string;
+    Outline?: string;
     /**
      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
      */
-    Severity: number;
+    Severity?: number;
     /**
      * 扣分。
      */
-    ScoreLost: number;
+    ScoreLost?: number;
     /**
      * 保留字段。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 告警数目。
      */
-    Count: number;
+    Count?: number;
 }
 /**
  * DescribeMailProfile请求参数结构体
@@ -1939,26 +1939,26 @@ export interface UserProfile {
      * 配置的id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileId: string;
+    ProfileId?: string;
     /**
      * 配置类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileType: string;
+    ProfileType?: string;
     /**
      * 配置级别，"User"或"Instance"。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileLevel: string;
+    ProfileLevel?: string;
     /**
      * 配置名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileName: string;
+    ProfileName?: string;
     /**
      * 配置详情。
      */
-    ProfileInfo: ProfileInfo;
+    ProfileInfo?: ProfileInfo;
 }
 /**
  * 库空间统计数据。
@@ -1967,36 +1967,36 @@ export interface SchemaSpaceData {
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 数据空间（MB）。
      */
-    DataLength: number;
+    DataLength?: number;
     /**
      * 索引空间（MB）。
      */
-    IndexLength: number;
+    IndexLength?: number;
     /**
      * 碎片空间（MB）。
      */
-    DataFree: number;
+    DataFree?: number;
     /**
      * 总使用空间（MB）。
      */
-    TotalLength: number;
+    TotalLength?: number;
     /**
      * 碎片率（%）。
      */
-    FragRatio: number;
+    FragRatio?: number;
     /**
      * 行数。
      */
-    TableRows: number;
+    TableRows?: number;
     /**
      * 库中所有表对应的独立物理文件大小加和（MB）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhysicalFileSize: number;
+    PhysicalFileSize?: number;
 }
 /**
  * DescribeTopSpaceTables返回参数结构体

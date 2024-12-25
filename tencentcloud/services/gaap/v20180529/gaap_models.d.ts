@@ -1452,20 +1452,20 @@ export interface RealServerStatus {
     /**
      * 源站ID。
      */
-    RealServerId: string;
+    RealServerId?: string;
     /**
      * 0表示未被绑定 1表示被规则或者监听器绑定。
      */
-    BindStatus: number;
+    BindStatus?: number;
     /**
      * 绑定此源站的通道ID，没有绑定时为空字符串。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 绑定此源站的通道组ID，没有绑定时为空字符串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
 }
 /**
  * DescribeTaskStatus返回参数结构体
@@ -2105,11 +2105,11 @@ export interface TagResourceInfo {
   ProxyGroup表示通道组，
   RealServer表示源站
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
 }
 /**
  * CreateSecurityRules返回参数结构体
@@ -4469,11 +4469,11 @@ export interface MetricStatisticsInfo {
     /**
      * 指标名称
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 指标统计数据
      */
-    MetricData: Array<StatisticsDataInfo>;
+    MetricData?: Array<StatisticsDataInfo>;
 }
 /**
  * DescribeProxyDetail返回参数结构体

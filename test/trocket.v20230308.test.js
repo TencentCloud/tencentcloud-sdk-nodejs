@@ -68,6 +68,16 @@ it("trocket.v20230308.ModifyMQTTTopic", async function () {
     }
 })
 
+it("trocket.v20230308.ResendDeadLetterMessage", async function () {
+    try {
+       const data = await client.ResendDeadLetterMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DeleteMQTTUser", async function () {
     try {
        const data = await client.DeleteMQTTUser({})
@@ -131,6 +141,16 @@ it("trocket.v20230308.DescribeMQTTProductSKUList", async function () {
 it("trocket.v20230308.ImportSourceClusterTopics", async function () {
     try {
        const data = await client.ImportSourceClusterTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeMessage", async function () {
+    try {
+       const data = await client.DescribeMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +311,16 @@ it("trocket.v20230308.DescribeConsumerGroup", async function () {
 it("trocket.v20230308.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeMessageList", async function () {
+    try {
+       const data = await client.DescribeMessageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

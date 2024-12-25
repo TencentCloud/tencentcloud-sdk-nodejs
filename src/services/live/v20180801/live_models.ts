@@ -186,7 +186,6 @@ export interface DescribeLiveTranscodeTemplatesRequest {
 export interface DescribeBackupStreamListResponse {
   /**
    * 主备流分组信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamInfoList?: Array<BackupStreamGroupInfo>
   /**
@@ -1940,7 +1939,7 @@ export interface DescribeLivePullStreamTaskStatusResponse {
   /**
    * 任务状态信息。
    */
-  TaskStatusInfo: TaskStatusInfo
+  TaskStatusInfo?: TaskStatusInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1953,7 +1952,6 @@ export interface DescribeLivePullStreamTaskStatusResponse {
 export interface DescribeLivePadProcessorListResponse {
   /**
    * 当前正在拉取垫片的流名称列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamNameList?: Array<string>
   /**
@@ -4214,17 +4212,14 @@ export interface CreateCasterPgmResponse {
   /**
    * 主监任务的rtmp协议预览地址。
 注：该地址仅供预览，不可分发。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PgmPlayUrl?: string
   /**
    * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdnPlayUrl?: string
   /**
    * 主监任务在腾讯云直播侧的流ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdnStreamId?: string
   /**
@@ -4232,7 +4227,6 @@ export interface CreateCasterPgmResponse {
 注：
 1. 该预览地址仅作为预览，不可分发。
 2. webrtc播放地址需配合腾讯云快直播播放sdk使用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PgmWebRTCPlayUrl?: string
   /**
@@ -4389,7 +4383,7 @@ export interface CreatePullStreamConfigResponse {
   /**
    * 配置成功后的 ID。
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8069,7 +8063,6 @@ export interface CreateLiveRecordTemplateResponse {
 export interface StopLivePadProcessorResponse {
   /**
    * 处理结果信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultMessage?: string
   /**
@@ -8384,7 +8377,6 @@ export interface CreateCasterPgmFromPvwResponse {
   PgmPlayUrl?: string
   /**
    * 注：该字段已废弃，请结合腾讯云直播播放地址生成策略生成cdn播放地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdnPlayUrl?: string
   /**
@@ -11331,7 +11323,6 @@ export interface EnableLiveDomainRequest {
 export interface DescribeLiveTranscodeTotalInfoResponse {
   /**
    * 统计数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataInfoList?: Array<TranscodeTotalInfo>
   /**

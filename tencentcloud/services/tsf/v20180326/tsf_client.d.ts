@@ -241,7 +241,9 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribeImageRepository(req: DescribeImageRepositoryRequest, cb?: (error: string, rep: DescribeImageRepositoryResponse) => void): Promise<DescribeImageRepositoryResponse>;
     /**
-     * 重关联业务日志配置
+     * 后端服务已经删除这个接口,  API 接口下线处理
+
+重关联业务日志配置
      */
     ReassociateBusinessLogConfig(req: ReassociateBusinessLogConfigRequest, cb?: (error: string, rep: ReassociateBusinessLogConfigResponse) => void): Promise<ReassociateBusinessLogConfigResponse>;
     /**

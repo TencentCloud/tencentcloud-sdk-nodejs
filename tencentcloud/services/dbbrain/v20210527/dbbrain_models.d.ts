@@ -5,11 +5,11 @@ export interface SchemaSpaceTimeSeries {
     /**
      * 库名
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 单位时间间隔内的空间指标数据。
      */
-    SeriesData: MonitorMetricSeriesData;
+    SeriesData?: MonitorMetricSeriesData;
 }
 /**
  * 慢日志来源用户详情。
@@ -35,31 +35,31 @@ export interface RedisKeySpaceData {
     /**
      * key名。
      */
-    Key: string;
+    Key?: string;
     /**
      * key类型。
      */
-    Type: string;
+    Type?: string;
     /**
      * key编码方式。
      */
-    Encoding: string;
+    Encoding?: string;
     /**
      * key过期时间戳（毫秒），0代表未设置过期时间。
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * key内存大小，单位Byte。
      */
-    Length: number;
+    Length?: number;
     /**
      * 元素个数。
      */
-    ItemCount: number;
+    ItemCount?: number;
     /**
      * 最大元素长度。
      */
-    MaxElementSize: number;
+    MaxElementSize?: number;
     /**
      * 平均元素长度。
      */
@@ -231,19 +231,19 @@ export interface TableSpaceTimeSeries {
     /**
      * 表名。
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 库表的存储引擎。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 单位时间间隔内的空间指标数据。
      */
-    SeriesData: MonitorFloatMetricSeriesData;
+    SeriesData?: MonitorFloatMetricSeriesData;
 }
 /**
  * DescribeAuditLogFiles返回参数结构体
@@ -872,44 +872,44 @@ export interface DiagHistoryEventItem {
     /**
      * 诊断类型。
      */
-    DiagType: string;
+    DiagType?: string;
     /**
      * 结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 事件唯一ID 。
      */
-    EventId: number;
+    EventId?: number;
     /**
      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
      */
-    Severity: number;
+    Severity?: number;
     /**
      * 诊断概要。
      */
-    Outline: string;
+    Outline?: string;
     /**
      * 诊断项说明。
      */
-    DiagItem: string;
+    DiagItem?: string;
     /**
      * 实例 ID 。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 保留字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 地域。
      */
-    Region: string;
+    Region?: string;
 }
 /**
  * DescribeProxySessionKillTasks请求参数结构体
@@ -1065,11 +1065,11 @@ export interface DescribeTopSpaceTablesResponse {
     /**
      * 返回的Top表空间统计信息列表。
      */
-    TopSpaceTables: Array<TableSpaceData>;
+    TopSpaceTables?: Array<TableSpaceData>;
     /**
      * 采集表空间数据的时间戳（秒）。
      */
-    Timestamp: number;
+    Timestamp?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1082,47 +1082,47 @@ export interface TaskInfo {
     /**
      * 异步任务 ID。
      */
-    AsyncRequestId: number;
+    AsyncRequestId?: number;
     /**
      * 当前实例所有 proxy 列表。
      */
-    InstProxyList: Array<string>;
+    InstProxyList?: Array<string>;
     /**
      * 当前实例所有 proxy 数量。
      */
-    InstProxyCount: number;
+    InstProxyCount?: number;
     /**
      * 任务创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务启动时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 完成 kill 任务的 proxyId。
      */
-    FinishedProxyList: Array<string>;
+    FinishedProxyList?: Array<string>;
     /**
      * kill 任务实行失败的 proxyId。
      */
-    FailedProxyList: Array<string>;
+    FailedProxyList?: Array<string>;
     /**
      * 任务结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务执行进度。
      */
-    Progress: number;
+    Progress?: number;
     /**
      * 实例 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
 }
 /**
  * ModifySqlFilters返回参数结构体
@@ -1183,15 +1183,15 @@ export interface ContactItem {
     /**
      * 联系人id。
      */
-    Id: number;
+    Id?: number;
     /**
      * 联系人姓名。
      */
-    Name: string;
+    Name?: string;
     /**
      * 联系人绑定的邮箱。
      */
-    Mail: string;
+    Mail?: string;
 }
 /**
  * DeleteAuditLogFile返回参数结构体
@@ -1791,11 +1791,11 @@ export interface MonitorFloatMetricSeriesData {
     /**
      * 监控指标。
      */
-    Series: Array<MonitorFloatMetric>;
+    Series?: Array<MonitorFloatMetric>;
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number | bigint>;
+    Timestamp?: Array<number | bigint>;
 }
 /**
  * 邮件发送配置
@@ -1884,43 +1884,43 @@ export interface TableSpaceData {
     /**
      * 表名。
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 库表的存储引擎。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 数据空间（MB）。
      */
-    DataLength: number;
+    DataLength?: number;
     /**
      * 索引空间（MB）。
      */
-    IndexLength: number;
+    IndexLength?: number;
     /**
      * 碎片空间（MB）。
      */
-    DataFree: number;
+    DataFree?: number;
     /**
      * 总使用空间（MB）。
      */
-    TotalLength: number;
+    TotalLength?: number;
     /**
      * 碎片率（%）。
      */
-    FragRatio: number;
+    FragRatio?: number;
     /**
      * 行数。
      */
-    TableRows: number;
+    TableRows?: number;
     /**
      * 表对应的独立物理文件大小（MB）。
      */
-    PhysicalFileSize: number;
+    PhysicalFileSize?: number;
 }
 /**
  * 异常事件信息。
@@ -1929,39 +1929,39 @@ export interface EventInfo {
     /**
      * 事件 ID 。
      */
-    EventId: number;
+    EventId?: number;
     /**
      * 诊断类型。
      */
-    DiagType: string;
+    DiagType?: string;
     /**
      * 开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 概要。
      */
-    Outline: string;
+    Outline?: string;
     /**
      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
      */
-    Severity: number;
+    Severity?: number;
     /**
      * 扣分。
      */
-    ScoreLost: number;
+    ScoreLost?: number;
     /**
      * 保留字段。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 告警数目。
      */
-    Count: number;
+    Count?: number;
 }
 /**
  * 实例列表查询条件
@@ -2221,23 +2221,23 @@ export interface DescribeSqlTemplateResponse {
     /**
      * 数据库名。
      */
-    Schema: string;
+    Schema?: string;
     /**
      * SQL语句。
      */
-    SqlText: string;
+    SqlText?: string;
     /**
      * SQL类型。
      */
-    SqlType: string;
+    SqlType?: string;
     /**
      * SQL模版内容。
      */
-    SqlTemplate: string;
+    SqlTemplate?: string;
     /**
      * SQL模版ID。
      */
-    SqlId: number;
+    SqlId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2271,7 +2271,7 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
     /**
      * 返回的Top表空间统计信息的时序数据列表。
      */
-    TopSpaceTableTimeSeries: Array<TableSpaceTimeSeries>;
+    TopSpaceTableTimeSeries?: Array<TableSpaceTimeSeries>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2366,16 +2366,16 @@ export interface MonitorMetric {
     /**
      * 指标名称。
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 指标单位。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Values: Array<number>;
+    Values?: Array<number>;
 }
 /**
  * 用户配置的信息
@@ -2398,26 +2398,26 @@ export interface UserProfile {
      * 配置的id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileId: string;
+    ProfileId?: string;
     /**
      * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileType: string;
+    ProfileType?: string;
     /**
      * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileLevel: string;
+    ProfileLevel?: string;
     /**
      * 配置名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfileName: string;
+    ProfileName?: string;
     /**
      * 配置详情。
      */
-    ProfileInfo: ProfileInfo;
+    ProfileInfo?: ProfileInfo;
 }
 /**
  * AddUserContact请求参数结构体
@@ -2476,27 +2476,27 @@ export interface InstanceBasicInfo {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例内网IP。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 实例内网Port。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 实例产品。
      */
-    Product: string;
+    Product?: string;
     /**
      * 实例引擎版本。
      */
-    EngineVersion: string;
+    EngineVersion?: string;
 }
 /**
  * 接收用户
@@ -2520,36 +2520,36 @@ export interface SchemaSpaceData {
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 数据空间（MB）。
      */
-    DataLength: number;
+    DataLength?: number;
     /**
      * 索引空间（MB）。
      */
-    IndexLength: number;
+    IndexLength?: number;
     /**
      * 碎片空间（MB）。
      */
-    DataFree: number;
+    DataFree?: number;
     /**
      * 总使用空间（MB）。
      */
-    TotalLength: number;
+    TotalLength?: number;
     /**
      * 碎片率（%）。
      */
-    FragRatio: number;
+    FragRatio?: number;
     /**
      * 行数。
      */
-    TableRows: number;
+    TableRows?: number;
     /**
      * 库中所有表对应的独立物理文件大小加和（MB）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhysicalFileSize: number;
+    PhysicalFileSize?: number;
 }
 /**
  * DescribeAllUserContact请求参数结构体
@@ -2571,35 +2571,35 @@ export interface MySqlProcess {
     /**
      * 线程ID。
      */
-    ID: string;
+    ID?: string;
     /**
      * 线程的操作账号名。
      */
-    User: string;
+    User?: string;
     /**
      * 线程的操作主机地址。
      */
-    Host: string;
+    Host?: string;
     /**
      * 线程的操作数据库。
      */
-    DB: string;
+    DB?: string;
     /**
      * 线程的操作状态。
      */
-    State: string;
+    State?: string;
     /**
      * 线程的执行类型。
      */
-    Command: string;
+    Command?: string;
     /**
      * 线程的操作时长，单位秒。
      */
-    Time: string;
+    Time?: string;
     /**
      * 线程的操作语句。
      */
-    Info: string;
+    Info?: string;
 }
 /**
  * DescribeDBDiagEvent请求参数结构体
@@ -3832,31 +3832,31 @@ export interface DescribeUserSqlAdviceResponse {
     /**
      * SQL优化建议，可解析为JSON数组，无需优化时输出为空。
      */
-    Advices: string;
+    Advices?: string;
     /**
      * SQL优化建议备注，可解析为String数组，无需优化时输出为空。
      */
-    Comments: string;
+    Comments?: string;
     /**
      * SQL语句。
      */
-    SqlText: string;
+    SqlText?: string;
     /**
      * 库名。
      */
-    Schema: string;
+    Schema?: string;
     /**
      * 相关表的DDL信息，可解析为JSON数组。
      */
-    Tables: string;
+    Tables?: string;
     /**
      * SQL执行计划，可解析为JSON，无需优化时输出为空。
      */
-    SqlPlan: string;
+    SqlPlan?: string;
     /**
      * SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。
      */
-    Cost: string;
+    Cost?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3894,47 +3894,47 @@ export interface SQLFilter {
     /**
      * 任务ID。
      */
-    Id: number;
+    Id?: number;
     /**
      * 任务状态，取值包括RUNNING - 运行中, FINISHED - 已完成, TERMINATED - 已终止。
      */
-    Status: string;
+    Status?: string;
     /**
      * SQL类型，取值包括SELECT, UPDATE, DELETE, INSERT, REPLACE。
      */
-    SqlType: string;
+    SqlType?: string;
     /**
      * 筛选SQL的关键词，多个关键词用英文逗号拼接。
      */
-    OriginKeys: string;
+    OriginKeys?: string;
     /**
      * 筛选SQL的规则。
      */
-    OriginRule: string;
+    OriginRule?: string;
     /**
      * 已拒绝SQL数目。
      */
-    RejectedSqlCount: number;
+    RejectedSqlCount?: number;
     /**
      * 当前并发数。
      */
-    CurrentConcurrency: number;
+    CurrentConcurrency?: number;
     /**
      * 最大并发数。
      */
-    MaxConcurrency: number;
+    MaxConcurrency?: number;
     /**
      * 任务创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 当前时间。
      */
-    CurrentTime: string;
+    CurrentTime?: string;
     /**
      * 限流过期时间。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
 }
 /**
  * 描述组信息。
@@ -3943,15 +3943,15 @@ export interface GroupItem {
     /**
      * 组id。
      */
-    Id: number;
+    Id?: number;
     /**
      * 组名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 组成员数量。
      */
-    MemberCount: number;
+    MemberCount?: number;
 }
 /**
  * redis key前缀空间信息
@@ -4080,11 +4080,11 @@ export interface MonitorMetricSeriesData {
     /**
      * 监控指标。
      */
-    Series: Array<MonitorMetric>;
+    Series?: Array<MonitorMetric>;
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number | bigint>;
+    Timestamp?: Array<number | bigint>;
 }
 /**
  * 慢日志详细信息
@@ -4259,11 +4259,11 @@ export interface DescribeNoPrimaryKeyTablesResponse {
  */
 export interface DescribeAuditLogFilesRequest {
     /**
-     * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+     * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB， "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "postgres" - 云数据库 PostgreSQL
      */
     Product: string;
     /**
-     * 与Product保持一致。如："dcdb" ,"mariadb"
+     * 该字段规则如下： 当product为"dcdb"则输入"dcdb"， 当product为"mariadb"则输入"mariadb"， 当product为"mysql"则输入"mysql"， 当product为"cynosdb"则输入"mysql"， 当product为"postgres"则输入"postgres"。
      */
     NodeRequestType: string;
     /**
@@ -4340,23 +4340,23 @@ export interface Table {
     /**
      * 库名。
      */
-    TableSchema: string;
+    TableSchema?: string;
     /**
      * 表名。
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 库表的存储引擎。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 行数。
      */
-    TableRows: number;
+    TableRows?: number;
     /**
      * 总使用空间（MB）。
      */
-    TotalLength: number;
+    TotalLength?: number;
 }
 /**
  * DescribeMySqlProcessList请求参数结构体
@@ -4431,11 +4431,11 @@ export interface DescribeProxySessionKillTasksResponse {
     /**
      * kill 任务的详情。
      */
-    Tasks: Array<TaskInfo>;
+    Tasks?: Array<TaskInfo>;
     /**
      * 任务总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
