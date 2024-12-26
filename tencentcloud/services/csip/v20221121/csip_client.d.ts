@@ -1,12 +1,20 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse, DescribeVULRiskAdvanceCFGListResponse, DescribeAssetViewVulRiskListResponse, DescribeOrganizationUserInfoRequest, DescribeScanReportListRequest, DescribeVULRiskDetailRequest, DescribeTopAttackInfoResponse, DescribeVULRiskDetailResponse, DescribeDomainAssetsRequest, ModifyRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewCFGRiskListRequest, DescribeRiskCenterWebsiteRiskListResponse, ModifyRiskCenterRiskStatusResponse, UpdateAlertStatusListResponse, DeleteDomainAndIpRequest, DescribeNICAssetsRequest, DescribeScanTaskListRequest, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeOrganizationUserInfoResponse, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeSubnetAssetsResponse, DescribeRiskCenterAssetViewPortRiskListRequest, StopRiskCenterTaskResponse, DescribeVpcAssetsRequest, ModifyRiskCenterRiskStatusRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, DescribeTopAttackInfoRequest, DescribeCVMAssetsResponse, DescribePublicIpAssetsRequest, DescribeCVMAssetInfoRequest, CreateRiskCenterScanTaskRequest, DescribeRiskCenterAssetViewCFGRiskListResponse, DescribeRiskCenterVULViewVULRiskListResponse, DescribeRiskCenterVULViewVULRiskListRequest, UpdateAlertStatusListRequest, StopRiskCenterTaskRequest, DescribeScanTaskListResponse, DescribeClusterPodAssetsRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeVulViewVulRiskListRequest, DescribeTaskLogURLResponse, ModifyOrganizationAccountStatusResponse, DescribeDbAssetInfoRequest, DescribeAssetViewVulRiskListRequest, DescribeVulViewVulRiskListResponse, DescribeRiskCenterWebsiteRiskListRequest, DescribeSubnetAssetsRequest, DescribeClusterPodAssetsResponse, DescribeCFWAssetStatisticsResponse, DescribeGatewayAssetsResponse, DescribeRiskCenterPortViewPortRiskListRequest, DescribeVpcAssetsResponse, DescribeRiskCenterPortViewPortRiskListResponse, DeleteDomainAndIpResponse, AddNewBindRoleUserResponse, DescribeAlertListResponse, DescribeDbAssetsRequest, DescribeVULRiskAdvanceCFGListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, DescribeAlertListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, ModifyOrganizationAccountStatusRequest, DescribeTaskLogListResponse, DescribeDomainAssetsResponse, DescribeDbAssetsResponse, DescribeNICAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterServerRiskListRequest, ModifyRiskCenterScanTaskRequest, DescribeRiskCenterServerRiskListResponse, DescribeListenerListRequest, DeleteRiskScanTaskResponse, DescribeGatewayAssetsRequest, DescribeCFWAssetStatisticsRequest, CreateDomainAndIpResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeTaskLogURLRequest, AddNewBindRoleUserRequest } from "./csip_models";
+import { DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse, DescribeVULRiskAdvanceCFGListResponse, DescribeAssetViewVulRiskListResponse, DescribeOrganizationUserInfoRequest, ModifyUebaRuleSwitchResponse, DescribeSubnetAssetsRequest, DescribeScanReportListRequest, DescribeVULRiskDetailRequest, DescribeClusterAssetsRequest, DescribeTopAttackInfoResponse, DescribeVULRiskDetailResponse, DescribeDomainAssetsRequest, ModifyRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewCFGRiskListRequest, DescribeRiskCenterWebsiteRiskListResponse, ModifyRiskCenterRiskStatusResponse, UpdateAlertStatusListResponse, DeleteDomainAndIpRequest, DescribeNICAssetsRequest, DescribeScanTaskListRequest, DescribeOrganizationInfoRequest, DescribeUebaRuleResponse, ModifyUebaRuleSwitchRequest, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeOrganizationUserInfoResponse, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeSubnetAssetsResponse, DescribeRiskCenterAssetViewPortRiskListRequest, StopRiskCenterTaskResponse, DescribeOrganizationInfoResponse, DescribeVpcAssetsRequest, ModifyRiskCenterRiskStatusRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, DescribeTopAttackInfoRequest, DescribeCVMAssetsResponse, DescribePublicIpAssetsRequest, DescribeCVMAssetInfoRequest, CreateRiskCenterScanTaskRequest, DescribeRiskCenterAssetViewCFGRiskListResponse, DescribeRiskCenterVULViewVULRiskListResponse, DescribeRiskCenterVULViewVULRiskListRequest, UpdateAlertStatusListRequest, StopRiskCenterTaskRequest, DescribeScanTaskListResponse, DescribeClusterPodAssetsRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeVulViewVulRiskListRequest, DescribeTaskLogURLResponse, ModifyOrganizationAccountStatusResponse, DescribeDbAssetInfoRequest, DescribeAssetViewVulRiskListRequest, DescribeUebaRuleRequest, DescribeVulViewVulRiskListResponse, DescribeRiskCenterWebsiteRiskListRequest, DescribeClusterPodAssetsResponse, DescribeCFWAssetStatisticsResponse, DescribeGatewayAssetsResponse, DescribeRiskCenterPortViewPortRiskListRequest, DescribeVpcAssetsResponse, DescribeRiskCenterPortViewPortRiskListResponse, DeleteDomainAndIpResponse, AddNewBindRoleUserResponse, DescribeAlertListResponse, DescribeDbAssetsRequest, DescribeVULRiskAdvanceCFGListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, DescribeAlertListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, ModifyOrganizationAccountStatusRequest, DescribeClusterAssetsResponse, DescribeSubUserInfoResponse, DescribeDomainAssetsResponse, DescribeDbAssetsResponse, DescribeNICAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterServerRiskListRequest, DescribeTaskLogListRequest, ModifyRiskCenterScanTaskRequest, DescribeRiskCenterServerRiskListResponse, DescribeListenerListRequest, DeleteRiskScanTaskResponse, DescribeGatewayAssetsRequest, DescribeCFWAssetStatisticsRequest, CreateDomainAndIpResponse, DescribeTaskLogListResponse, DescribeSubUserInfoRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeTaskLogURLRequest, AddNewBindRoleUserRequest } from "./csip_models";
 /**
  * csip client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 查询用户行为分析策略列表
+     */
+    DescribeUebaRule(req: DescribeUebaRuleRequest, cb?: (error: string, rep: DescribeUebaRuleResponse) => void): Promise<DescribeUebaRuleResponse>;
+    /**
+     * 获取任务扫描报告列表
+     */
+    DescribeTaskLogList(req: DescribeTaskLogListRequest, cb?: (error: string, rep: DescribeTaskLogListResponse) => void): Promise<DescribeTaskLogListResponse>;
     /**
      * 删除域名和ip请求
      */
@@ -39,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 查询clb监听器列表
      */
     DescribeListenerList(req: DescribeListenerListRequest, cb?: (error: string, rep: DescribeListenerListResponse) => void): Promise<DescribeListenerListResponse>;
+    /**
+     * 停止扫风险中心扫描任务
+     */
+    StopRiskCenterTask(req: StopRiskCenterTaskRequest, cb?: (error: string, rep: StopRiskCenterTaskResponse) => void): Promise<StopRiskCenterTaskResponse>;
     /**
      * 删除风险中心扫描任务
      */
@@ -76,6 +88,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyRiskCenterScanTask(req: ModifyRiskCenterScanTaskRequest, cb?: (error: string, rep: ModifyRiskCenterScanTaskResponse) => void): Promise<ModifyRiskCenterScanTaskResponse>;
     /**
+     * 云防资产中心统计数据
+     */
+    DescribeCFWAssetStatistics(req?: DescribeCFWAssetStatisticsRequest, cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void): Promise<DescribeCFWAssetStatisticsResponse>;
+    /**
      * 获取资产视角的漏洞风险列表
      */
     DescribeAssetViewVulRiskList(req: DescribeAssetViewVulRiskListRequest, cb?: (error: string, rep: DescribeAssetViewVulRiskListResponse) => void): Promise<DescribeAssetViewVulRiskListResponse>;
@@ -88,13 +104,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeRiskCenterWebsiteRiskList(req: DescribeRiskCenterWebsiteRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void): Promise<DescribeRiskCenterWebsiteRiskListResponse>;
     /**
-     * 云防资产中心统计数据
+     * 查询集团账号详情
      */
-    DescribeCFWAssetStatistics(req?: DescribeCFWAssetStatisticsRequest, cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void): Promise<DescribeCFWAssetStatisticsResponse>;
+    DescribeOrganizationInfo(req: DescribeOrganizationInfoRequest, cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void): Promise<DescribeOrganizationInfoResponse>;
     /**
      * 获取报告下载的临时链接
      */
     DescribeTaskLogURL(req: DescribeTaskLogURLRequest, cb?: (error: string, rep: DescribeTaskLogURLResponse) => void): Promise<DescribeTaskLogURLResponse>;
+    /**
+     * 更新自定义策略的开关
+     */
+    ModifyUebaRuleSwitch(req: ModifyUebaRuleSwitchRequest, cb?: (error: string, rep: ModifyUebaRuleSwitchResponse) => void): Promise<ModifyUebaRuleSwitchResponse>;
     /**
      * 创建风险中心扫描任务
      */
@@ -112,9 +132,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSearchBugInfo(req: DescribeSearchBugInfoRequest, cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void): Promise<DescribeSearchBugInfoResponse>;
     /**
-     * 获取任务扫描报告列表
+     * 查询集团的子账号列表
      */
-    DescribeTaskLogList(req: DescribeTaskLogListRequest, cb?: (error: string, rep: DescribeTaskLogListResponse) => void): Promise<DescribeTaskLogListResponse>;
+    DescribeSubUserInfo(req: DescribeSubUserInfoRequest, cb?: (error: string, rep: DescribeSubUserInfoResponse) => void): Promise<DescribeSubUserInfoResponse>;
     /**
      * 获取漏洞视角的漏洞风险列表
      */
@@ -168,9 +188,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationUserInfo(req: DescribeOrganizationUserInfoRequest, cb?: (error: string, rep: DescribeOrganizationUserInfoResponse) => void): Promise<DescribeOrganizationUserInfoResponse>;
     /**
-     * 停止扫风险中心扫描任务
+     * 集群列表
      */
-    StopRiskCenterTask(req: StopRiskCenterTaskRequest, cb?: (error: string, rep: StopRiskCenterTaskResponse) => void): Promise<StopRiskCenterTaskResponse>;
+    DescribeClusterAssets(req: DescribeClusterAssetsRequest, cb?: (error: string, rep: DescribeClusterAssetsResponse) => void): Promise<DescribeClusterAssetsResponse>;
     /**
      * 获取子网列表
      */

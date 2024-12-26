@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("csip.tencentcloudapi.com", "2022-11-21", clientConfig);
     }
     /**
+     * 查询用户行为分析策略列表
+     */
+    async DescribeUebaRule(req, cb) {
+        return this.request("DescribeUebaRule", req, cb);
+    }
+    /**
+     * 获取任务扫描报告列表
+     */
+    async DescribeTaskLogList(req, cb) {
+        return this.request("DescribeTaskLogList", req, cb);
+    }
+    /**
      * 删除域名和ip请求
      */
     async DeleteDomainAndIp(req, cb) {
@@ -74,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeListenerList(req, cb) {
         return this.request("DescribeListenerList", req, cb);
+    }
+    /**
+     * 停止扫风险中心扫描任务
+     */
+    async StopRiskCenterTask(req, cb) {
+        return this.request("StopRiskCenterTask", req, cb);
     }
     /**
      * 删除风险中心扫描任务
@@ -130,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRiskCenterScanTask", req, cb);
     }
     /**
+     * 云防资产中心统计数据
+     */
+    async DescribeCFWAssetStatistics(req, cb) {
+        return this.request("DescribeCFWAssetStatistics", req, cb);
+    }
+    /**
      * 获取资产视角的漏洞风险列表
      */
     async DescribeAssetViewVulRiskList(req, cb) {
@@ -148,16 +172,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskCenterWebsiteRiskList", req, cb);
     }
     /**
-     * 云防资产中心统计数据
+     * 查询集团账号详情
      */
-    async DescribeCFWAssetStatistics(req, cb) {
-        return this.request("DescribeCFWAssetStatistics", req, cb);
+    async DescribeOrganizationInfo(req, cb) {
+        return this.request("DescribeOrganizationInfo", req, cb);
     }
     /**
      * 获取报告下载的临时链接
      */
     async DescribeTaskLogURL(req, cb) {
         return this.request("DescribeTaskLogURL", req, cb);
+    }
+    /**
+     * 更新自定义策略的开关
+     */
+    async ModifyUebaRuleSwitch(req, cb) {
+        return this.request("ModifyUebaRuleSwitch", req, cb);
     }
     /**
      * 创建风险中心扫描任务
@@ -184,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchBugInfo", req, cb);
     }
     /**
-     * 获取任务扫描报告列表
+     * 查询集团的子账号列表
      */
-    async DescribeTaskLogList(req, cb) {
-        return this.request("DescribeTaskLogList", req, cb);
+    async DescribeSubUserInfo(req, cb) {
+        return this.request("DescribeSubUserInfo", req, cb);
     }
     /**
      * 获取漏洞视角的漏洞风险列表
@@ -268,10 +298,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationUserInfo", req, cb);
     }
     /**
-     * 停止扫风险中心扫描任务
+     * 集群列表
      */
-    async StopRiskCenterTask(req, cb) {
-        return this.request("StopRiskCenterTask", req, cb);
+    async DescribeClusterAssets(req, cb) {
+        return this.request("DescribeClusterAssets", req, cb);
     }
     /**
      * 获取子网列表

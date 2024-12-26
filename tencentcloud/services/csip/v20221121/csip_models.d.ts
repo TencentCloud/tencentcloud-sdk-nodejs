@@ -166,6 +166,23 @@ export interface DescribeOrganizationUserInfoRequest {
     NotSupportCloud?: boolean;
 }
 /**
+ * ModifyUebaRuleSwitch返回参数结构体
+ */
+export interface ModifyUebaRuleSwitchResponse {
+    /**
+     * 0成功，1失败
+     */
+    Code?: number;
+    /**
+     * 返回信息
+     */
+    Msg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 过滤数据对象
  */
 export interface FilterDataObject {
@@ -587,142 +604,17 @@ export interface AssetViewCFGRisk {
     ClbId?: string;
 }
 /**
- * 资产视角的漏洞风险对象
+ * DescribeSubnetAssets请求参数结构体
  */
-export interface AssetViewVULRisk {
+export interface DescribeSubnetAssetsRequest {
     /**
-     * 影响资产
+     * 集团账号的成员id
      */
-    AffectAsset?: string;
+    MemberId?: Array<string>;
     /**
-     * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
-  
+     * 过滤参数
      */
-    Level?: string;
-    /**
-     * 资产类型
-     */
-    InstanceType?: string;
-    /**
-     * 组件
-     */
-    Component?: string;
-    /**
-     * 服务
-     */
-    Service?: string;
-    /**
-     * 最近识别时间
-     */
-    RecentTime?: string;
-    /**
-     * 首次识别时间
-     */
-    FirstTime?: string;
-    /**
-     * 状态，0未处理、1已处置、2已忽略
-     */
-    Status?: number;
-    /**
-     * 风险ID
-     */
-    Id?: string;
-    /**
-     * 前端索引
-     */
-    Index?: string;
-    /**
-     * 实例id
-     */
-    InstanceId?: string;
-    /**
-     * 实例名
-     */
-    InstanceName?: string;
-    /**
-     * 用户appid
-     */
-    AppId?: string;
-    /**
-     * 用户昵称
-     */
-    Nick?: string;
-    /**
-     * 用户uin
-     */
-    Uin?: string;
-    /**
-     * 漏洞类型
-     */
-    VULType?: string;
-    /**
-     * 端口
-     */
-    Port?: string;
-    /**
-     * 漏洞描述
-     */
-    Describe?: string;
-    /**
-     * 漏洞影响组件
-     */
-    AppName?: string;
-    /**
-     * 技术参考
-     */
-    References?: string;
-    /**
-     * 漏洞影响版本
-     */
-    AppVersion?: string;
-    /**
-     * 风险点
-     */
-    VULURL?: string;
-    /**
-     * 漏洞名称
-     */
-    VULName?: string;
-    /**
-     * cve
-     */
-    CVE?: string;
-    /**
-     * 修复方案
-     */
-    Fix?: string;
-    /**
-     * pocid
-     */
-    POCId?: string;
-    /**
-     * 扫描来源
-     */
-    From?: string;
-    /**
-     * 主机版本
-     */
-    CWPVersion?: number;
-    /**
-     * 是否支持修复
-     */
-    IsSupportRepair?: boolean;
-    /**
-     * 是否支持扫描
-     */
-    IsSupportDetect?: boolean;
-    /**
-     * 实例uuid
-     */
-    InstanceUUID?: string;
-    /**
-     * 攻击载荷
-     */
-    Payload?: string;
-    /**
-     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-     */
-    EMGCVulType?: number;
+    Filter?: Filter;
 }
 /**
  * DescribeScanReportList请求参数结构体
@@ -966,6 +858,24 @@ export interface PortRiskAdvanceCFGParamItem {
      * 是否启用，1-启用，0-禁用
      */
     Enable?: number;
+}
+/**
+ * 用户行为分析 统计条件
+ */
+export interface StatisticalFilter {
+    /**
+     * 0:不基于统计检测
+  1:发生次数高于固定值
+  2:发生次数高于周期平均值的百分之
+  3:发生次数高于用户平均值的百分之
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorType: number;
+    /**
+     * 统计值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value: number;
 }
 /**
  * 主机资产详情
@@ -1449,6 +1359,79 @@ export interface IpAssetListVO {
     VerifyStatus?: number;
 }
 /**
+ * 用户行为分析  自定义策略结构体
+ */
+export interface UebaCustomRule {
+    /**
+     * 策略名称
+     */
+    RuleName: string;
+    /**
+     * 1: 云账号
+  2: 自定义用户
+     */
+    UserType: number;
+    /**
+     * 发生时间
+  1：10分钟
+  2：1小时
+  3：一天
+  4：一周
+  5：一个月
+     */
+    TimeInterval: number;
+    /**
+     * 发生事件
+     */
+    EventContent: UebaEventContent;
+    /**
+     * 告警名称
+     */
+    AlertName: string;
+    /**
+     * 告警类型
+  0:  提示
+  1:  低危
+  2:  中危
+  3:  高危
+  4:  严重
+     */
+    AlterLevel: number;
+    /**
+     * 操作者
+     */
+    Operator: Array<string>;
+    /**
+     * 操作对象
+     */
+    OperateObject: Array<string>;
+    /**
+     * 操作方式
+     */
+    OperateMethod: Array<string>;
+    /**
+     * 日志类型
+     */
+    LogType?: string;
+    /**
+     * 日志中文名
+     */
+    LogTypeStr?: string;
+}
+/**
+ * DescribeClusterAssets请求参数结构体
+ */
+export interface DescribeClusterAssetsRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
+     * 过滤
+     */
+    Filter?: Filter;
+}
+/**
  * DescribeTopAttackInfo返回参数结构体
  */
 export interface DescribeTopAttackInfoResponse {
@@ -1677,6 +1660,15 @@ export interface DescribeScanTaskListRequest {
     Tags?: Array<Tags>;
 }
 /**
+ * DescribeOrganizationInfo请求参数结构体
+ */
+export interface DescribeOrganizationInfoRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+}
+/**
  * 任务ID列表Key
  */
 export interface TaskIdListKey {
@@ -1783,17 +1775,49 @@ export interface RoleInfo {
     ContainerID?: string;
 }
 /**
- * 产品日志条数
+ * DescribeUebaRule返回参数结构体
  */
-export interface TagCount {
+export interface DescribeUebaRuleResponse {
     /**
-     * 产品名
+     * 总数
      */
-    Name?: string;
+    TotalCount?: number;
     /**
-     * 日志条数
+     * 策略列表
      */
-    Count?: number;
+    Data?: Array<UebaRule>;
+    /**
+     * 自定义策略对应的告警类别枚举
+     */
+    AlterType?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 用户行为分析 发生事件结构体
+ */
+export interface UebaEventContent {
+    /**
+     * 发生事件类型
+  1:语句检索
+  2:过滤检索
+     */
+    EventType: number;
+    /**
+     * 语句检索内容
+     */
+    Content?: string;
+    /**
+     * 检索条件
+  
+     */
+    Filters?: Array<WhereFilter>;
+    /**
+     * 统计条件
+     */
+    StatisticalFilter?: StatisticalFilter;
 }
 /**
  * 网关资产
@@ -1915,6 +1939,23 @@ export interface GateWayAsset {
      * TSE的网关真实地域
      */
     EngineRegion?: string;
+}
+/**
+ * ModifyUebaRuleSwitch请求参数结构体
+ */
+export interface ModifyUebaRuleSwitchRequest {
+    /**
+     * 策略ID
+     */
+    RuleID: string;
+    /**
+     * 开关状态
+     */
+    Status: boolean;
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
 }
 /**
  * DescribeScanReportList返回参数结构体
@@ -2267,6 +2308,119 @@ export interface NICAsset {
     IsNewAsset?: number;
 }
 /**
+ * 集团账号详情
+ */
+export interface OrganizationInfo {
+    /**
+     * 成员账号名称
+     */
+    NickName?: string;
+    /**
+     * 部门节点名称，账号所属部门
+     */
+    NodeName?: string;
+    /**
+     * Member/Admin/DelegatedAdmin/EntityAdmin; 成员/管理员/委派管理员/主体管理员
+     */
+    Role?: string;
+    /**
+     * 成员账号id
+     */
+    MemberId?: string;
+    /**
+     * 账号加入方式,create/invite
+     */
+    JoinType?: string;
+    /**
+     * 集团名称
+     */
+    GroupName?: string;
+    /**
+     * 管理员账号名称
+     */
+    AdminName?: string;
+    /**
+     * 管理员Uin
+     */
+    AdminUin?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 部门数
+     */
+    NodeCount?: number;
+    /**
+     * 成员数
+     */
+    MemberCount?: number;
+    /**
+     * 子账号数
+     */
+    SubAccountCount?: number;
+    /**
+     * 异常子账号数量
+     */
+    AbnormalSubUserCount?: number;
+    /**
+     * 集团关系策略权限
+     */
+    GroupPermission?: Array<string>;
+    /**
+     * 成员关系策略权限
+     */
+    MemberPermission?: Array<string>;
+    /**
+     * 集团付费模式；0/自付费，1/代付费
+     */
+    GroupPayMode?: number;
+    /**
+     * 个人付费模式；0/自付费，1/代付费
+     */
+    MemberPayMode?: number;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+     */
+    CFWProtect?: string;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+     */
+    WAFProtect?: string;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+     */
+    CWPProtect?: string;
+    /**
+     * 所有部门的集合数组
+     */
+    Departments?: Array<string>;
+    /**
+     * 成员创建时间
+     */
+    MemberCreateTime?: string;
+    /**
+     * Advanced/Enterprise/Ultimate
+     */
+    CSIPProtect?: string;
+    /**
+     * 1表示配额消耗方
+     */
+    QuotaConsumer?: number;
+    /**
+     * 管理员/委派管理员 已开启数量
+     */
+    EnableAdminCount?: number;
+    /**
+     * 账户多云信息统计，数组形式，具体参考CloudCountDesc描述
+     */
+    CloudCountDesc?: Array<CloudCountDesc>;
+    /**
+     * 管理员/委派管理员 总数量
+     */
+    AdminCount?: number;
+}
+/**
  * DescribeListenerList返回参数结构体
  */
 export interface DescribeListenerListResponse {
@@ -2585,6 +2739,23 @@ export interface StopRiskCenterTaskResponse {
      * Status为0， 停止成功
      */
     Status?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeOrganizationInfo返回参数结构体
+ */
+export interface DescribeOrganizationInfoResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 集团用户列表
+     */
+    Data?: Array<OrganizationInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2973,6 +3144,102 @@ export interface WhereFilter {
   
      */
     OperatorType?: number;
+}
+/**
+ * 子账号详情
+ */
+export interface SubUserInfo {
+    /**
+     * 主键ID，无业务意义
+  仅作为唯一键
+     */
+    ID?: number;
+    /**
+     * 子账号Appid
+     */
+    AppID?: string;
+    /**
+     * 子账号UIn
+     */
+    Uin?: string;
+    /**
+     * 子账号名称
+     */
+    NickName?: string;
+    /**
+     * 主账号Appid
+     */
+    OwnerAppID?: string;
+    /**
+     * 主账号Uin
+     */
+    OwnerUin?: string;
+    /**
+     * 主账号名称
+     */
+    OwnerNickName?: string;
+    /**
+     * 所属主账号memberid
+     */
+    OwnerMemberID?: string;
+    /**
+     * 账户类型，0为腾讯云账户，1为AWS账户
+     */
+    CloudType?: number;
+    /**
+     * 可访问服务数量
+     */
+    ServiceCount?: number;
+    /**
+     * 可访问接口数量
+     */
+    InterfaceCount?: number;
+    /**
+     * 可访问资源数量
+     */
+    AssetCount?: number;
+    /**
+     * 访问/行为日志数量
+     */
+    LogCount?: number;
+    /**
+     * 权限配置风险
+     */
+    ConfigRiskCount?: number;
+    /**
+     * 危险行为告警
+     */
+    ActionRiskCount?: number;
+    /**
+     * 是否接入云审计日志
+     */
+    IsAccessCloudAudit?: boolean;
+    /**
+     * 是否配置风险的安全体检
+     */
+    IsAccessCheck?: boolean;
+    /**
+     * 是否配置用户行为管理策略
+     */
+    IsAccessUeba?: boolean;
+}
+/**
+ * 多云账户统计信息
+ */
+export interface CloudCountDesc {
+    /**
+     * 0表示腾讯云
+  1表示AWS
+     */
+    CloudType?: number;
+    /**
+     * 账户数量
+     */
+    CloudCount?: number;
+    /**
+     * 该云账号类型描述
+     */
+    CloudDesc?: string;
 }
 /**
  * DescribePublicIpAssets请求参数结构体
@@ -4297,6 +4564,19 @@ export interface DescribeAssetViewVulRiskListRequest {
     Tags?: Array<AssetTag>;
 }
 /**
+ * DescribeUebaRule请求参数结构体
+ */
+export interface DescribeUebaRuleRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
+     * 过滤条件
+     */
+    Filter?: Filter;
+}
+/**
  * DescribeVulViewVulRiskList返回参数结构体
  */
 export interface DescribeVulViewVulRiskListResponse {
@@ -4393,17 +4673,142 @@ export interface ServerRiskSuggestion {
     Body?: string;
 }
 /**
- * DescribeSubnetAssets请求参数结构体
+ * 资产视角的漏洞风险对象
  */
-export interface DescribeSubnetAssetsRequest {
+export interface AssetViewVULRisk {
     /**
-     * 集团账号的成员id
+     * 影响资产
      */
-    MemberId?: Array<string>;
+    AffectAsset?: string;
     /**
-     * 过滤参数
+     * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+  
      */
-    Filter?: Filter;
+    Level?: string;
+    /**
+     * 资产类型
+     */
+    InstanceType?: string;
+    /**
+     * 组件
+     */
+    Component?: string;
+    /**
+     * 服务
+     */
+    Service?: string;
+    /**
+     * 最近识别时间
+     */
+    RecentTime?: string;
+    /**
+     * 首次识别时间
+     */
+    FirstTime?: string;
+    /**
+     * 状态，0未处理、1已处置、2已忽略
+     */
+    Status?: number;
+    /**
+     * 风险ID
+     */
+    Id?: string;
+    /**
+     * 前端索引
+     */
+    Index?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 实例名
+     */
+    InstanceName?: string;
+    /**
+     * 用户appid
+     */
+    AppId?: string;
+    /**
+     * 用户昵称
+     */
+    Nick?: string;
+    /**
+     * 用户uin
+     */
+    Uin?: string;
+    /**
+     * 漏洞类型
+     */
+    VULType?: string;
+    /**
+     * 端口
+     */
+    Port?: string;
+    /**
+     * 漏洞描述
+     */
+    Describe?: string;
+    /**
+     * 漏洞影响组件
+     */
+    AppName?: string;
+    /**
+     * 技术参考
+     */
+    References?: string;
+    /**
+     * 漏洞影响版本
+     */
+    AppVersion?: string;
+    /**
+     * 风险点
+     */
+    VULURL?: string;
+    /**
+     * 漏洞名称
+     */
+    VULName?: string;
+    /**
+     * cve
+     */
+    CVE?: string;
+    /**
+     * 修复方案
+     */
+    Fix?: string;
+    /**
+     * pocid
+     */
+    POCId?: string;
+    /**
+     * 扫描来源
+     */
+    From?: string;
+    /**
+     * 主机版本
+     */
+    CWPVersion?: number;
+    /**
+     * 是否支持修复
+     */
+    IsSupportRepair?: boolean;
+    /**
+     * 是否支持扫描
+     */
+    IsSupportDetect?: boolean;
+    /**
+     * 实例uuid
+     */
+    InstanceUUID?: string;
+    /**
+     * 攻击载荷
+     */
+    Payload?: string;
+    /**
+     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+     */
+    EMGCVulType?: number;
 }
 /**
  * DescribeClusterPodAssets返回参数结构体
@@ -4810,6 +5215,85 @@ export interface ReportTaskIdList {
      * 租户ID
      */
     AppId?: string;
+}
+/**
+ * 用户行为分析策略
+ */
+export interface UebaRule {
+    /**
+     * 策略id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleID?: string;
+    /**
+     * 规则名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleName?: string;
+    /**
+     * 策略类型
+  0:系统策略
+  1:自定义策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleType?: number;
+    /**
+     * 策略等级
+  0:提示
+  1:低危
+  2:中危
+  3:高危
+  4:严重
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleLevel?: number;
+    /**
+     * 策略内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleContent?: string;
+    /**
+     * 策略开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleStatus?: boolean;
+    /**
+     * 命中次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HitCount?: number;
+    /**
+     * 所属账号Appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppID?: string;
+    /**
+     * 多账号，成员ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberID?: string;
+    /**
+     * Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nickname?: string;
+    /**
+     * 自定义规则具体内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomRuleDetail?: UebaCustomRule;
+    /**
+     * 云类型
+  腾讯云：0
+  aws：1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudType?: number;
 }
 /**
  * AddNewBindRoleUser返回参数结构体
@@ -5531,25 +6015,70 @@ export interface ModifyOrganizationAccountStatusRequest {
     MemberId?: Array<string>;
 }
 /**
- * DescribeTaskLogList返回参数结构体
+ * DescribeClusterAssets返回参数结构体
  */
-export interface DescribeTaskLogListResponse {
+export interface DescribeClusterAssetsResponse {
     /**
-     * 总条数
+     * 列表
+     */
+    Data?: Array<AssetCluster>;
+    /**
+     * 总数
      */
     TotalCount?: number;
     /**
-     * 报告列表
+     * 集群类型枚举
      */
-    Data?: Array<TaskLogInfo>;
+    ClusterTypeList?: Array<FilterDataObject>;
     /**
-     * 待查看数量
+     * 集群状态枚举
      */
-    NotViewNumber?: number;
+    ClusterStatusList?: Array<FilterDataObject>;
     /**
-     * 报告模板数
+     * 组件状态枚举
      */
-    ReportTemplateNumber?: number;
+    ComponentStatusList?: Array<FilterDataObject>;
+    /**
+     * 私有网络枚举
+     */
+    VpcList?: Array<FilterDataObject>;
+    /**
+     * 地域枚举
+     */
+    RegionList?: Array<FilterDataObject>;
+    /**
+     * 租户枚举
+     */
+    AppIdList?: Array<FilterDataObject>;
+    /**
+     * 集群防护状态枚举
+     */
+    ProtectStatusList?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeSubUserInfo返回参数结构体
+ */
+export interface DescribeSubUserInfoResponse {
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 子用户列表
+     */
+    Data?: Array<SubUserInfo>;
+    /**
+     * 厂商枚举列表
+     */
+    CloudTypeLst?: Array<FilterDataObject>;
+    /**
+     * 所属主账号appid枚举
+     */
+    OwnerAppIDLst?: Array<FilterDataObject>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5639,6 +6168,19 @@ export interface BugInfoDetail {
      * 漏洞子类别
      */
     SubCategory?: string;
+}
+/**
+ * 产品日志条数
+ */
+export interface TagCount {
+    /**
+     * 产品名
+     */
+    Name?: string;
+    /**
+     * 日志条数
+     */
+    Count?: number;
 }
 /**
  * DescribeDomainAssets返回参数结构体
@@ -5809,6 +6351,19 @@ export interface DescribeRiskCenterServerRiskListRequest {
      * 资产标签
      */
     Tags?: Array<AssetTag>;
+}
+/**
+ * DescribeTaskLogList请求参数结构体
+ */
+export interface DescribeTaskLogListRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
+     * 过滤内容
+     */
+    Filter?: Filter;
 }
 /**
  * ModifyRiskCenterScanTask请求参数结构体
@@ -5994,6 +6549,139 @@ export interface DescribeGatewayAssetsRequest {
  */
 export declare type DescribeCFWAssetStatisticsRequest = null;
 /**
+ * 集群列表
+
+集群防护状态，左边枚举,右边为显示
+集群防护状态
+0:未接入
+1:未防护
+2:部分防护
+3:防护中
+4:接入异常
+5:接入中
+6:卸载中
+7:卸载异常
+ */
+export interface AssetCluster {
+    /**
+     * 租户id
+     */
+    AppId?: number;
+    /**
+     * 租户uin
+     */
+    Uin?: string;
+    /**
+     * 租户昵称
+     */
+    Nick?: string;
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * 集群id
+     */
+    AssetId?: string;
+    /**
+     * 集群名称
+     */
+    AssetName?: string;
+    /**
+     * 集群类型
+     */
+    AssetType?: string;
+    /**
+     * 集群创建时间
+     */
+    InstanceCreateTime?: string;
+    /**
+     * 状态
+     */
+    Status?: string;
+    /**
+     * 集群防护状态，左边枚举,右边为显示
+  集群防护状态
+  0:未接入
+  1:未防护
+  2:部分防护
+  3:防护中
+  4:接入异常
+  5:接入中
+  6:卸载中
+  7:卸载异常
+     */
+    ProtectStatus?: number;
+    /**
+     * 接入信息，不为空表示有接入异常信息
+     */
+    ProtectInfo?: string;
+    /**
+     * 私有网络id
+     */
+    VpcId?: string;
+    /**
+     * 私有网络名称
+     */
+    VpcName?: string;
+    /**
+     * kubernetes版本
+     */
+    KubernetesVersion?: string;
+    /**
+     * 运行时组件
+     */
+    Component?: string;
+    /**
+     * 运行时组件版本
+     */
+    ComponentVersion?: string;
+    /**
+     * 组件状态
+     */
+    ComponentStatus?: string;
+    /**
+     * 体检时间
+     */
+    CheckTime?: string;
+    /**
+     * 关联主机数
+     */
+    MachineCount?: number;
+    /**
+     * 关联pod数
+     */
+    PodCount?: number;
+    /**
+     * 关联service数
+     */
+    ServiceCount?: number;
+    /**
+     * 漏洞风险
+     */
+    VulRisk?: number;
+    /**
+     * 配置风险
+     */
+    CFGRisk?: number;
+    /**
+     * 体检数
+     */
+    CheckCount?: number;
+    /**
+     * 是否核心：1:核心，2:非核心
+     */
+    IsCore?: number;
+    /**
+     * 是否新资产 1新
+     */
+    IsNewAsset?: number;
+    /**
+     * 云资产类型：0：腾讯云，1：aws，2：azure
+     */
+    CloudType?: number;
+}
+/**
  * CreateDomainAndIp返回参数结构体
  */
 export interface CreateDomainAndIpResponse {
@@ -6007,9 +6695,34 @@ export interface CreateDomainAndIpResponse {
     RequestId?: string;
 }
 /**
- * DescribeTaskLogList请求参数结构体
+ * DescribeTaskLogList返回参数结构体
  */
-export interface DescribeTaskLogListRequest {
+export interface DescribeTaskLogListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 报告列表
+     */
+    Data?: Array<TaskLogInfo>;
+    /**
+     * 待查看数量
+     */
+    NotViewNumber?: number;
+    /**
+     * 报告模板数
+     */
+    ReportTemplateNumber?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeSubUserInfo请求参数结构体
+ */
+export interface DescribeSubUserInfoRequest {
     /**
      * 集团账号的成员id
      */

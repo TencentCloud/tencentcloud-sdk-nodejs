@@ -18,6 +18,26 @@ const client = new tencentcloud.csip.v20221121.Client({
 })
 describe("csip.v20221121.test.js", function () {
 
+it("csip.v20221121.DescribeUebaRule", async function () {
+    try {
+       const data = await client.DescribeUebaRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeTaskLogList", async function () {
+    try {
+       const data = await client.DescribeTaskLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DeleteDomainAndIp", async function () {
     try {
        const data = await client.DeleteDomainAndIp({})
@@ -91,6 +111,16 @@ it("csip.v20221121.AddNewBindRoleUser", async function () {
 it("csip.v20221121.DescribeListenerList", async function () {
     try {
        const data = await client.DescribeListenerList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.StopRiskCenterTask", async function () {
+    try {
+       const data = await client.StopRiskCenterTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +218,16 @@ it("csip.v20221121.ModifyRiskCenterScanTask", async function () {
     }
 })
 
+it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
+    try {
+       const data = await client.DescribeCFWAssetStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeAssetViewVulRiskList", async function () {
     try {
        const data = await client.DescribeAssetViewVulRiskList({})
@@ -218,9 +258,9 @@ it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
     }
 })
 
-it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
+it("csip.v20221121.DescribeOrganizationInfo", async function () {
     try {
-       const data = await client.DescribeCFWAssetStatistics({})
+       const data = await client.DescribeOrganizationInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +271,16 @@ it("csip.v20221121.DescribeCFWAssetStatistics", async function () {
 it("csip.v20221121.DescribeTaskLogURL", async function () {
     try {
        const data = await client.DescribeTaskLogURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
+    try {
+       const data = await client.ModifyUebaRuleSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +328,9 @@ it("csip.v20221121.DescribeSearchBugInfo", async function () {
     }
 })
 
-it("csip.v20221121.DescribeTaskLogList", async function () {
+it("csip.v20221121.DescribeSubUserInfo", async function () {
     try {
-       const data = await client.DescribeTaskLogList({})
+       const data = await client.DescribeSubUserInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +468,9 @@ it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
     }
 })
 
-it("csip.v20221121.StopRiskCenterTask", async function () {
+it("csip.v20221121.DescribeClusterAssets", async function () {
     try {
-       const data = await client.StopRiskCenterTask({})
+       const data = await client.DescribeClusterAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

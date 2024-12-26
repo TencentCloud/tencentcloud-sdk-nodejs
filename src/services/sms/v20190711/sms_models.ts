@@ -192,7 +192,7 @@ export interface AddTemplateStatus {
   /**
    * 模板参数
    */
-  TemplateId: string
+  TemplateId?: string
 }
 
 /**
@@ -372,43 +372,43 @@ export interface SmsPackagesStatistics {
   /**
    * 套餐包创建时间，标准时间，例如：2019-10-08 17:18:37。
    */
-  PackageCreateTime: string
+  PackageCreateTime?: string
   /**
    * 套餐包创建时间，UNIX 时间戳（单位：秒）。
    */
-  PackageCreateUnixTime: number
+  PackageCreateUnixTime?: number
   /**
    * 套餐包生效时间，标准时间，例如：2019-10-08 17:18:37。
    */
-  PackageEffectiveTime: string
+  PackageEffectiveTime?: string
   /**
    * 套餐包生效时间，UNIX 时间戳（单位：秒）。
    */
-  PackageEffectiveUnixTime: number
+  PackageEffectiveUnixTime?: number
   /**
    * 套餐包过期时间，标准时间，例如：2019-10-08 17:18:37。
    */
-  PackageExpiredTime: string
+  PackageExpiredTime?: string
   /**
    * 套餐包过期时间，UNIX 时间戳（单位：秒）。
    */
-  PackageExpiredUnixTime: number
+  PackageExpiredUnixTime?: number
   /**
    * 套餐包条数。
    */
-  AmountOfPackage: number
+  AmountOfPackage?: number
   /**
    * 0表示赠送套餐包，1表示购买套餐包。
    */
-  TypeOfPackage: number
+  TypeOfPackage?: number
   /**
    * 套餐包 ID。
    */
-  PackageId: number
+  PackageId?: number
   /**
    * 当前使用量。
    */
-  CurrentUsage: number
+  CurrentUsage?: number
 }
 
 /**
@@ -432,11 +432,11 @@ export interface ModifySignStatus {
   /**
    * 签名Id
    */
-  SignId: number
+  SignId?: number
   /**
    * 签名修改申请Id
    */
-  SignApplyId: string
+  SignApplyId?: string
 }
 
 /**
@@ -545,15 +545,15 @@ export interface SendStatusStatistics {
   /**
    * 短信计费条数统计，例如提交成功量为100条，其中有20条是长短信（长度为80字）被拆分成2条，则计费条数为： ```80 * 1 + 20 * 2 = 120``` 条。
    */
-  FeeCount: number
+  FeeCount?: number
   /**
    * 短信提交量统计。
    */
-  RequestCount: number
+  RequestCount?: number
   /**
    * 短信提交成功量统计。
    */
-  RequestSuccessCount: number
+  RequestSuccessCount?: number
 }
 
 /**
@@ -592,11 +592,11 @@ export interface DeleteTemplateStatus {
   /**
    * 删除状态信息。
    */
-  DeleteStatus: string
+  DeleteStatus?: string
   /**
    * 删除时间，UNIX 时间戳（单位：秒）。
    */
-  DeleteTime: number
+  DeleteTime?: number
 }
 
 /**
@@ -755,39 +755,39 @@ export interface CallbackStatusStatistics {
   /**
    * 短信回执量统计。
    */
-  CallbackCount: number
+  CallbackCount?: number
   /**
    * 短信提交成功量统计。
    */
-  RequestSuccessCount: number
+  RequestSuccessCount?: number
   /**
    * 短信回执失败量统计。
    */
-  CallbackFailCount: number
+  CallbackFailCount?: number
   /**
    * 短信回执成功量统计。
    */
-  CallbackSuccessCount: number
+  CallbackSuccessCount?: number
   /**
    * 运营商内部错误统计。
    */
-  InternalErrorCount: number
+  InternalErrorCount?: number
   /**
    * 号码无效或空号统计。
    */
-  InvalidNumberCount: number
+  InvalidNumberCount?: number
   /**
    * 停机、关机等错误统计。
    */
-  ShutdownErrorCount: number
+  ShutdownErrorCount?: number
   /**
    * 号码拉入黑名单统计。
    */
-  BlackListCount: number
+  BlackListCount?: number
   /**
    * 运营商频率限制统计。
    */
-  FrequencyLimitCount: number
+  FrequencyLimitCount?: number
 }
 
 /**
@@ -968,11 +968,11 @@ export interface AddSignStatus {
   /**
    * 签名Id。
    */
-  SignId: number
+  SignId?: number
   /**
    * 签名申请Id。
    */
-  SignApplyId: number
+  SignApplyId?: number
 }
 
 /**
@@ -982,7 +982,7 @@ export interface ModifyTemplateStatus {
   /**
    * 模板参数
    */
-  TemplateId: number
+  TemplateId?: number
 }
 
 /**
