@@ -260,6 +260,7 @@ import {
   IpAddressStates,
   DescribeRouteTableSelectionPoliciesRequest,
   InstanceStatistic,
+  InternetPriceDetail,
   CreateVpnConnectionRequest,
   PrivateNatGatewayLimit,
   CcnRoute,
@@ -393,6 +394,7 @@ import {
   ModifyDirectConnectGatewayAttributeResponse,
   DescribeVpnGatewaysRequest,
   NetDetectIpState,
+  InternetPrice,
   ModifyIp6AddressesBandwidthResponse,
   CreateSubnetsRequest,
   DescribeVpcEndPointServiceRequest,
@@ -407,6 +409,7 @@ import {
   DescribeVpcsRequest,
   DescribeSecurityGroupPoliciesRequest,
   ModifyNetworkInterfaceAttributeResponse,
+  InquiryPriceRenewAddressesRequest,
   CreateSecurityGroupResponse,
   DisassociateNetworkInterfaceSecurityGroupsResponse,
   DescribeIp6TranslatorQuotaRequest,
@@ -505,6 +508,7 @@ import {
   RejectAttachCcnInstancesResponse,
   DescribeCcnRouteTableInputPolicysRequest,
   ModifySnapshotPoliciesResponse,
+  InquiryPriceRenewAddressesResponse,
   ReplaceCcnRouteTableInputPolicysResponse,
   DeleteCdcNetPlanesResponse,
   RenewAddressesResponse,
@@ -523,6 +527,7 @@ import {
   AllocateAddressesRequest,
   DeleteAssistantCidrResponse,
   DescribeDhcpIpsResponse,
+  UnassignIpv6CidrBlockRequest,
   ResetHighPriorityRoutesRequest,
   ModifyAssistantCidrRequest,
   CreateReserveIpAddressesResponse,
@@ -650,6 +655,7 @@ import {
   DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
   CreateNetDetectResponse,
+  InquiryPriceAllocateAddressesResponse,
   DeleteCcnRequest,
   ModifyLocalGatewayResponse,
   AssociateNetworkInterfaceSecurityGroupsResponse,
@@ -674,6 +680,7 @@ import {
   DeleteVpnGatewayResponse,
   BackupPolicy,
   SnapshotPolicy,
+  InquiryPriceModifyAddressesBandwidthResponse,
   UnassignPrivateIpAddressesResponse,
   DescribeVpcPeeringConnectionsRequest,
   Address,
@@ -721,7 +728,7 @@ import {
   ModifyServiceTemplateGroupAttributeRequest,
   ReturnNormalAddressesResponse,
   DeleteVpcEndPointRequest,
-  UnassignIpv6CidrBlockRequest,
+  InquiryPriceAllocateAddressesRequest,
   CCN,
   NetworkAclQuintupleEntry,
   ModifyHighPriorityRouteAttributeRequest,
@@ -940,6 +947,7 @@ import {
   DescribeCrossBorderFlowMonitorResponse,
   DescribeBandwidthPackageQuotaRequest,
   DeleteVpcResponse,
+  InquiryPriceModifyAddressesBandwidthRequest,
   ReplaceCcnRouteTableInputPolicysRequest,
   InstanceChargePrepaid,
   DescribeTemplateLimitsRequest,
@@ -2533,6 +2541,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（InquiryPriceRenewAddresses）用于续费预付费弹性公网IP询价。
+   */
+  async InquiryPriceRenewAddresses(
+    req: InquiryPriceRenewAddressesRequest,
+    cb?: (error: string, rep: InquiryPriceRenewAddressesResponse) => void
+  ): Promise<InquiryPriceRenewAddressesResponse> {
+    return this.request("InquiryPriceRenewAddresses", req, cb)
+  }
+
+  /**
    * 本接口（ModifyGatewayFlowQos）用于调整网关流控带宽。
    */
   async ModifyGatewayFlowQos(
@@ -3718,6 +3736,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（InquiryPriceAllocateAddresses）用于新购弹性公网IP询价。
+   */
+  async InquiryPriceAllocateAddresses(
+    req: InquiryPriceAllocateAddressesRequest,
+    cb?: (error: string, rep: InquiryPriceAllocateAddressesResponse) => void
+  ): Promise<InquiryPriceAllocateAddressesResponse> {
+    return this.request("InquiryPriceAllocateAddresses", req, cb)
+  }
+
+  /**
    * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
    */
   async ModifyDirectConnectGatewayAttribute(
@@ -4319,6 +4347,17 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeVpcsResponse) => void
   ): Promise<DescribeVpcsResponse> {
     return this.request("DescribeVpcs", req, cb)
+  }
+
+  /**
+     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+  async MigrateNetworkInterface(
+    req: MigrateNetworkInterfaceRequest,
+    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
+  ): Promise<MigrateNetworkInterfaceResponse> {
+    return this.request("MigrateNetworkInterface", req, cb)
   }
 
   /**
@@ -4958,14 +4997,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
-     */
-  async MigrateNetworkInterface(
-    req: MigrateNetworkInterfaceRequest,
-    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
-  ): Promise<MigrateNetworkInterfaceResponse> {
-    return this.request("MigrateNetworkInterface", req, cb)
+   * EIP修改带宽询价
+   */
+  async InquiryPriceModifyAddressesBandwidth(
+    req: InquiryPriceModifyAddressesBandwidthRequest,
+    cb?: (error: string, rep: InquiryPriceModifyAddressesBandwidthResponse) => void
+  ): Promise<InquiryPriceModifyAddressesBandwidthResponse> {
+    return this.request("InquiryPriceModifyAddressesBandwidth", req, cb)
   }
 
   /**

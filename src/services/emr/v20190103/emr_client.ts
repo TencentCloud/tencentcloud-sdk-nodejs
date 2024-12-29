@@ -18,15 +18,17 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  AddNodeResourceConfigRequest,
   MonthRepeatStrategy,
   ClusterSetting,
-  ZoneDetailPriceResult,
+  ModifyResourceResponse,
+  ZoneSetting,
   PodSpecInfo,
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
   NodeSelector,
   DescribeClusterFlowStatusDetailResponse,
-  SchedulerTaskInfo,
+  RunJobFlowResponse,
   DynamicPodSpec,
   DescribeHDFSStorageInfoResponse,
   ModifyUserManagerPwdResponse,
@@ -63,6 +65,7 @@ import {
   DefaultSetting,
   COSSettings,
   ClusterInstancesInfo,
+  ModifyResourcesTagsResponse,
   CreateCloudInstanceResponse,
   ScaleOutInstanceRequest,
   ResetYarnConfigRequest,
@@ -71,6 +74,7 @@ import {
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyAutoScaleStrategyRequest,
   FlowParamsDesc,
+  AttachDisksRequest,
   DescribeSparkQueriesRequest,
   ModifyYarnDeployResponse,
   ModifyResourceScheduleConfigResponse,
@@ -85,6 +89,7 @@ import {
   ClusterIDToFlowID,
   EmrListInstance,
   Disk,
+  ZoneDetailPriceResult,
   AddUsersForUserManagerResponse,
   SearchItem,
   DescribeResourceScheduleDiffDetailResponse,
@@ -94,6 +99,7 @@ import {
   ScaleOutInstanceResponse,
   NodeResourceSpec,
   AddMetricScaleStrategyRequest,
+  DeleteNodeResourceConfigRequest,
   EmrProductConfigOutter,
   HostPathVolumeSource,
   VPCSettings,
@@ -106,6 +112,7 @@ import {
   FlowParam,
   NodeAffinity,
   DescribeAutoScaleStrategiesResponse,
+  DescribeNodeDataDisksRequest,
   ModifyGlobalConfigRequest,
   StopParams,
   DependService,
@@ -119,18 +126,20 @@ import {
   DescribeHDFSStorageInfoRequest,
   OverviewMetricData,
   WeekRepeatStrategy,
+  SchedulerTaskInfo,
   AutoScaleRecord,
   JobFlowResourceSpec,
   HealthStatus,
   Configuration,
   DescribeResourceScheduleRequest,
-  ZoneSetting,
+  PodParameter,
   SyncPodStateResponse,
+  UserManagerUserBriefInfo,
   AllNodeResourceSpec,
   Placement,
   DescribeGlobalConfigResponse,
   ModifyYarnDeployRequest,
-  PodParameter,
+  DeleteNodeResourceConfigResponse,
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
   TerminateClusterNodesResponse,
@@ -140,15 +149,15 @@ import {
   DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
   DescribeHiveQueriesResponse,
-  RunJobFlowResponse,
+  ResizeDataDisksResponse,
   DescribeYarnQueueRequest,
   DescribeInstanceRenewNodesResponse,
-  ModifyResourcesTagsResponse,
+  ModifyResourceRequest,
   GroupGlobalConfs,
   ServiceNodeDetailInfo,
   ScaleOutServiceConfGroupsInfo,
   CreateSLInstanceResponse,
-  UserManagerUserBriefInfo,
+  SetNodeResourceConfigDefaultRequest,
   DescribeYarnScheduleHistoryResponse,
   DescribeAutoScaleGroupGlobalConfResponse,
   Resource,
@@ -163,9 +172,10 @@ import {
   PodVolume,
   PriceDetail,
   DescribeResourceScheduleResponse,
+  UserManagerFilter,
   MultiDisk,
   TerminateInstanceRequest,
-  TriggerCondition,
+  DescribeNodeResourceConfigFastRequest,
   MetricTags,
   ExternalAccess,
   ModifyResourceSchedulerRequest,
@@ -174,6 +184,7 @@ import {
   DescribeKyuubiQueryInfoRequest,
   PriceResource,
   ModifyGlobalConfigResponse,
+  DescribeNodeResourceConfigFastResponse,
   TimeAutoScaleStrategy,
   ModifySLInstanceRequest,
   DescribeInsightListResponse,
@@ -188,8 +199,9 @@ import {
   AddMetricScaleStrategyResponse,
   SubnetInfo,
   BootstrapAction,
-  ScaleOutClusterRequest,
+  NodeResource,
   DescribeClusterNodesRequest,
+  ModifyInstanceBasicResponse,
   ModifyYarnQueueV2Request,
   DescribeCvmQuotaRequest,
   DescribeImpalaQueriesRequest,
@@ -212,15 +224,18 @@ import {
   UserInfoForUserManager,
   DescribeAutoScaleStrategiesRequest,
   DeployYarnConfRequest,
-  TerminateClusterNodesRequest,
+  DescribeNodeDataDisksResponse,
   DescribeInstancesListRequest,
   ItemSeq,
   RepeatStrategy,
+  AttachDisksResponse,
   QuotaEntity,
   RenewInstancesInfo,
   OutterResource,
   OpScope,
+  ResizeDataDisksRequest,
   DeleteAutoScaleStrategyRequest,
+  NodeSpecDiskV2,
   CLBSetting,
   DeployYarnConfResponse,
   DeleteUserManagerUserListResponse,
@@ -228,6 +243,7 @@ import {
   ShortNodeInfo,
   Period,
   DayRepeatStrategy,
+  ModifyInstanceBasicRequest,
   DescribeYarnApplicationsResponse,
   DescribeUsersForUserManagerResponse,
   YarnApplication,
@@ -244,12 +260,15 @@ import {
   DescribeSLInstanceRequest,
   CustomMetaInfo,
   ApplicationStatics,
+  ScaleOutClusterRequest,
   InquiryPriceCreateInstanceRequest,
+  TriggerCondition,
   DescribeSLInstanceResponse,
   SyncPodStateRequest,
   MultiZoneSetting,
   ModifyAutoRenewFlagRequest,
-  UserManagerFilter,
+  AddNodeResourceConfigResponse,
+  CBSInstance,
   ModifyResourceScheduleConfigRequest,
   StrategyConfig,
   PodNewParameter,
@@ -277,6 +296,7 @@ import {
   CustomMetaDBInfo,
   Item,
   ResetYarnConfigResponse,
+  SetNodeResourceConfigDefaultResponse,
   DescribeStarRocksQueryInfoResponse,
   TableSchemaItem,
   ConfigModifyInfoV2,
@@ -294,6 +314,7 @@ import {
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
   DescribeAutoScaleRecordsRequest,
+  TerminateClusterNodesRequest,
   Filters,
   ModifyResourcePoolsRequest,
   CreateSLInstanceRequest,
@@ -301,6 +322,7 @@ import {
   InstanceChargePrepaid,
   DescribeGlobalConfigRequest,
   TerminateInstanceResponse,
+  DescribeResourceConfig,
 } from "./emr_models"
 
 /**
@@ -423,6 +445,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * EMR同步TKE中POD状态
+   */
+  async SyncPodState(
+    req: SyncPodStateRequest,
+    cb?: (error: string, rep: SyncPodStateResponse) => void
+  ): Promise<SyncPodStateResponse> {
+    return this.request("SyncPodState", req, cb)
+  }
+
+  /**
    * 扩容询价. 当扩容时候，请通过该接口查询价格。
    */
   async InquiryPriceScaleOutInstance(
@@ -480,6 +512,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleOutInstanceResponse) => void
   ): Promise<ScaleOutInstanceResponse> {
     return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 云盘挂载
+   */
+  async AttachDisks(
+    req: AttachDisksRequest,
+    cb?: (error: string, rep: AttachDisksResponse) => void
+  ): Promise<AttachDisksResponse> {
+    return this.request("AttachDisks", req, cb)
+  }
+
+  /**
+   * 设置当前集群的某个节点规格配置为默认或取消默认
+   */
+  async SetNodeResourceConfigDefault(
+    req: SetNodeResourceConfigDefaultRequest,
+    cb?: (error: string, rep: SetNodeResourceConfigDefaultResponse) => void
+  ): Promise<SetNodeResourceConfigDefaultResponse> {
+    return this.request("SetNodeResourceConfigDefault", req, cb)
   }
 
   /**
@@ -550,6 +602,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateTasksResponse) => void
   ): Promise<TerminateTasksResponse> {
     return this.request("TerminateTasks", req, cb)
+  }
+
+  /**
+   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   */
+  async TerminateInstance(
+    req: TerminateInstanceRequest,
+    cb?: (error: string, rep: TerminateInstanceResponse) => void
+  ): Promise<TerminateInstanceResponse> {
+    return this.request("TerminateInstance", req, cb)
   }
 
   /**
@@ -658,6 +720,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云盘扩容
+   */
+  async ResizeDataDisks(
+    req: ResizeDataDisksRequest,
+    cb?: (error: string, rep: ResizeDataDisksResponse) => void
+  ): Promise<ResizeDataDisksResponse> {
+    return this.request("ResizeDataDisks", req, cb)
+  }
+
+  /**
    * 修改自动扩缩容规则
    */
   async ModifyAutoScaleStrategy(
@@ -725,6 +797,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourceSchedulerResponse) => void
   ): Promise<ModifyResourceSchedulerResponse> {
     return this.request("ModifyResourceScheduler", req, cb)
+  }
+
+  /**
+   * 快速获取当前集群的节点规格配置
+   */
+  async DescribeNodeResourceConfigFast(
+    req: DescribeNodeResourceConfigFastRequest,
+    cb?: (error: string, rep: DescribeNodeResourceConfigFastResponse) => void
+  ): Promise<DescribeNodeResourceConfigFastResponse> {
+    return this.request("DescribeNodeResourceConfigFast", req, cb)
   }
 
   /**
@@ -838,13 +920,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * EMR同步TKE中POD状态
+   * 增加当前集群的节点规格配置
    */
-  async SyncPodState(
-    req: SyncPodStateRequest,
-    cb?: (error: string, rep: SyncPodStateResponse) => void
-  ): Promise<SyncPodStateResponse> {
-    return this.request("SyncPodState", req, cb)
+  async AddNodeResourceConfig(
+    req: AddNodeResourceConfigRequest,
+    cb?: (error: string, rep: AddNodeResourceConfigResponse) => void
+  ): Promise<AddNodeResourceConfigResponse> {
+    return this.request("AddNodeResourceConfig", req, cb)
   }
 
   /**
@@ -858,13 +940,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   * 变配实例
    */
-  async TerminateInstance(
-    req: TerminateInstanceRequest,
-    cb?: (error: string, rep: TerminateInstanceResponse) => void
-  ): Promise<TerminateInstanceResponse> {
-    return this.request("TerminateInstance", req, cb)
+  async ModifyResource(
+    req: ModifyResourceRequest,
+    cb?: (error: string, rep: ModifyResourceResponse) => void
+  ): Promise<ModifyResourceResponse> {
+    return this.request("ModifyResource", req, cb)
   }
 
   /**
@@ -877,6 +959,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySLInstanceResponse) => void
   ): Promise<ModifySLInstanceResponse> {
     return this.request("ModifySLInstance", req, cb)
+  }
+
+  /**
+   * 查询节点数据盘信息
+   */
+  async DescribeNodeDataDisks(
+    req: DescribeNodeDataDisksRequest,
+    cb?: (error: string, rep: DescribeNodeDataDisksResponse) => void
+  ): Promise<DescribeNodeDataDisksResponse> {
+    return this.request("DescribeNodeDataDisks", req, cb)
   }
 
   /**
@@ -957,6 +1049,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInsightListResponse) => void
   ): Promise<DescribeInsightListResponse> {
     return this.request("DescribeInsightList", req, cb)
+  }
+
+  /**
+   * 删除当前集群的节点规格配置
+   */
+  async DeleteNodeResourceConfig(
+    req: DeleteNodeResourceConfigRequest,
+    cb?: (error: string, rep: DeleteNodeResourceConfigResponse) => void
+  ): Promise<DeleteNodeResourceConfigResponse> {
+    return this.request("DeleteNodeResourceConfig", req, cb)
+  }
+
+  /**
+   * 修改集群名称
+   */
+  async ModifyInstanceBasic(
+    req: ModifyInstanceBasicRequest,
+    cb?: (error: string, rep: ModifyInstanceBasicResponse) => void
+  ): Promise<ModifyInstanceBasicResponse> {
+    return this.request("ModifyInstanceBasic", req, cb)
   }
 
   /**

@@ -688,9 +688,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 调整弹性公网IP带宽
-
-     */
+   * 调整弹性公网IP带宽
+   */
   async ModifyAddressesBandwidth(
     req: ModifyAddressesBandwidthRequest,
     cb?: (error: string, rep: ModifyAddressesBandwidthResponse) => void

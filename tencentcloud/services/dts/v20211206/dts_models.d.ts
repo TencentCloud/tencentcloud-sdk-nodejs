@@ -4383,27 +4383,27 @@ export interface MigrateDetailInfo {
      * 总步骤数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepAll: number;
+    StepAll?: number;
     /**
      * 当前步骤
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepNow: number;
+    StepNow?: number;
     /**
      * 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MasterSlaveDistance: number;
+    MasterSlaveDistance?: number;
     /**
      * 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecondsBehindMaster: number;
+    SecondsBehindMaster?: number;
     /**
      * 步骤信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepInfo: Array<StepDetailInfo>;
+    StepInfo?: Array<StepDetailInfo>;
 }
 /**
  * StopMigrateJob请求参数结构体
@@ -4782,6 +4782,11 @@ export interface SyncJobInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OfflineTime?: string;
+    /**
+     * 动态修改对象，修改任务的状态等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OptObjStatus?: string;
     /**
      * 自动重试时间段设置
   注意：此字段可能返回 null，表示取不到有效值。

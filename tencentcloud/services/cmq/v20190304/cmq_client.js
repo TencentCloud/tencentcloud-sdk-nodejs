@@ -34,25 +34,33 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
-     * 创建订阅接口
+     * 下线老cmq云API 3.0 无调用量接口
+
+创建订阅接口
      */
     async CreateSubscribe(req, cb) {
         return this.request("CreateSubscribe", req, cb);
     }
     /**
-     * 修改主题属性
+     * 下线老cmq云API 3.0 无调用量接口
+
+修改主题属性
      */
     async ModifyTopicAttribute(req, cb) {
         return this.request("ModifyTopicAttribute", req, cb);
     }
     /**
-     * 清空订阅者消息标签
+     * 下线老cmq云API 3.0 无调用量接口
+
+清空订阅者消息标签
      */
     async ClearSubscriptionFilterTags(req, cb) {
         return this.request("ClearSubscriptionFilterTags", req, cb);
     }
     /**
-     * 删除订阅
+     * 下线老cmq云API 3.0 无调用量接口
+
+删除订阅
      */
     async DeleteSubscribe(req, cb) {
         return this.request("DeleteSubscribe", req, cb);
@@ -65,13 +73,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQueue", req, cb);
     }
     /**
-     * 回溯队列
+     * 下线老cmq云API 3.0 无调用量接口
+
+回溯队列
      */
     async RewindQueue(req, cb) {
         return this.request("RewindQueue", req, cb);
     }
     /**
-     * 修改订阅属性
+     * 下线老cmq云API 3.0 无调用量接口
+
+修改订阅属性
      */
     async ModifySubscriptionAttribute(req, cb) {
         return this.request("ModifySubscriptionAttribute", req, cb);
@@ -101,25 +113,33 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSubscriptionDetail", req, cb);
     }
     /**
-     * 枚举死信队列源队列
+     * 下线老cmq云API 3.0 无调用量接口
+
+枚举死信队列源队列
      */
     async DescribeDeadLetterSourceQueues(req, cb) {
         return this.request("DescribeDeadLetterSourceQueues", req, cb);
     }
     /**
-     * 删除主题
+     * 下线老cmq云API 3.0 无调用量接口
+
+删除主题
      */
     async DeleteTopic(req, cb) {
         return this.request("DeleteTopic", req, cb);
     }
     /**
-     * 清除queue中的所有消息
+     * 下线老cmq云API 3.0 无调用量接口
+
+清除queue中的所有消息
      */
     async ClearQueue(req, cb) {
         return this.request("ClearQueue", req, cb);
     }
     /**
-     * 解绑死信队列
+     * 下线老cmq云API 3.0 无调用量接口
+
+解绑死信队列
      */
     async UnbindDeadLetter(req, cb) {
         return this.request("UnbindDeadLetter", req, cb);

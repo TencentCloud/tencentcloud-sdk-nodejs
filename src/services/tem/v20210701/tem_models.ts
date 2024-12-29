@@ -695,12 +695,12 @@ export interface LogConfigListPage {
    * 记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Records: Array<LogConfig>
+  Records?: Array<LogConfig>
   /**
    * 翻页游标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContinueToken: string
+  ContinueToken?: string
 }
 
 /**
@@ -939,27 +939,27 @@ export interface NodeInfo {
   /**
    * node名字
    */
-  Name: string
+  Name?: string
   /**
    * node可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * node子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 可用IP数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvailableIpCount: string
+  AvailableIpCount?: string
   /**
    * cidr块
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cidr: string
+  Cidr?: string
 }
 
 /**
@@ -2015,78 +2015,78 @@ export interface RunVersionPod {
   /**
    * shell地址
    */
-  Webshell: string
+  Webshell?: string
   /**
    * pod的id
    */
-  PodId: string
+  PodId?: string
   /**
    * 状态
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例的ip
    */
-  PodIp: string
+  PodIp?: string
   /**
    * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 部署版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployVersion: string
+  DeployVersion?: string
   /**
    * 重启次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RestartCount: number
+  RestartCount?: number
   /**
    * pod是否就绪
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ready: boolean
+  Ready?: boolean
   /**
    * 容器状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContainerState: string
+  ContainerState?: string
   /**
    * 实例所在节点信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeInfo: NodeInfo
+  NodeInfo?: NodeInfo
   /**
    * 启动时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 是否健康
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unhealthy: boolean
+  Unhealthy?: boolean
   /**
    * 不健康时的提示信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnhealthyWarningMsg: string
+  UnhealthyWarningMsg?: string
   /**
    * 版本ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId: string
+  VersionId?: string
   /**
    * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationName: string
+  ApplicationName?: string
 }
 
 /**
@@ -2809,112 +2809,112 @@ export interface TemNamespaceInfo {
   /**
    * 环境id
    */
-  EnvironmentId: string
+  EnvironmentId?: string
   /**
    * 渠道
    */
-  Channel: string
+  Channel?: string
   /**
    * 环境名称
    */
-  EnvironmentName: string
+  EnvironmentName?: string
   /**
    * 区域名称
    */
-  Region: string
+  Region?: string
   /**
    * 环境描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 状态,1:已销毁;0:正常
    */
-  Status: number
+  Status?: number
   /**
    * vpc网络
    */
-  Vpc: string
+  Vpc?: string
   /**
    * 创建时间
    */
-  CreateDate: string
+  CreateDate?: string
   /**
    * 修改时间
    */
-  ModifyDate: string
+  ModifyDate?: string
   /**
    * 修改人
    */
-  Modifier: string
+  Modifier?: string
   /**
    * 创建人
    */
-  Creator: string
+  Creator?: string
   /**
    * 应用数
    */
-  ApplicationNum: number
+  ApplicationNum?: number
   /**
    * 运行实例数
    */
-  RunInstancesNum: number
+  RunInstancesNum?: number
   /**
    * 子网络
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 环境集群 status
    */
-  ClusterStatus: string
+  ClusterStatus?: string
   /**
    * 是否开启tsw
    */
-  EnableTswTraceService: boolean
+  EnableTswTraceService?: boolean
   /**
    * 环境锁，1为上锁，0则为上锁
    */
-  Locked: number
+  Locked?: number
   /**
    * 用户AppId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: string
+  AppId?: string
   /**
    * 用户Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
   /**
    * 用户SubAccountUin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubAccountUin: string
+  SubAccountUin?: string
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 资源是否有权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasAuthority: boolean
+  HasAuthority?: boolean
   /**
    * 环境类型: test、pre、prod
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvType: string
+  EnvType?: string
   /**
    * 地域码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: string
+  RegionId?: string
 }
 
 /**
@@ -2961,19 +2961,19 @@ export interface ConfigData {
   /**
    * 配置名称
    */
-  Name: string
+  Name?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 关联的服务列表
    */
-  RelatedApplications: Array<TemService>
+  RelatedApplications?: Array<TemService>
   /**
    * 配置条目
    */
-  Data: Array<Pair>
+  Data?: Array<Pair>
 }
 
 /**
@@ -3274,17 +3274,17 @@ export interface DescribeConfigDataListPage {
   /**
    * 记录
    */
-  Records: Array<ConfigData>
+  Records?: Array<ConfigData>
   /**
    * 分页游标，用以查询下一页
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ContinueToken: string
+  ContinueToken?: string
   /**
    * 剩余数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemainingCount: number
+  RemainingCount?: number
 }
 
 /**
@@ -3710,23 +3710,23 @@ export interface DescribeRunPodPage {
   /**
    * 分页下标
    */
-  Offset: number
+  Offset?: number
   /**
    * 单页条数
    */
-  Limit: number
+  Limit?: number
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 请求id
    */
-  RequestId: string
+  RequestId?: string
   /**
    * 条目
    */
-  PodList: Array<RunVersionPod>
+  PodList?: Array<RunVersionPod>
 }
 
 /**
@@ -3890,47 +3890,47 @@ export interface WorkloadInfo {
    * 资源 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 应用名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationName: string
+  ApplicationName?: string
   /**
    * 版本名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionName: string
+  VersionName?: string
   /**
    * Ready实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadyReplicas: number
+  ReadyReplicas?: number
   /**
    * 实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Replicas: number
+  Replicas?: number
   /**
    * Updated实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedReplicas: number
+  UpdatedReplicas?: number
   /**
    * UpdatedReady实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedReadyReplicas: number
+  UpdatedReadyReplicas?: number
   /**
    * 更新版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateRevision: string
+  UpdateRevision?: string
   /**
    * 当前版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentRevision: string
+  CurrentRevision?: string
 }
 
 /**
@@ -3954,56 +3954,56 @@ export interface NamespaceInfo {
   /**
    * ID 信息
    */
-  EnvironmentId: string
+  EnvironmentId?: string
   /**
    * 名字（已弃用）
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * vpc id
    */
-  VpcId: string
+  VpcId?: string
   /**
    * subnet id 数组
    */
-  SubnetIds: Array<string>
+  SubnetIds?: Array<string>
   /**
    * 描述
    */
-  Description: string
+  Description?: string
   /**
    * 创建时间
    */
-  CreatedDate: string
+  CreatedDate?: string
   /**
    * 环境名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvironmentName: string
+  EnvironmentName?: string
   /**
    * APM 资源 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApmInstanceId: string
+  ApmInstanceId?: string
   /**
    * 环境是否上锁，1为上锁，0则未上锁
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Locked: number
+  Locked?: number
   /**
    * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 环境类型：test、pre、prod
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvType: string
+  EnvType?: string
 }
 
 /**
@@ -4074,7 +4074,7 @@ export interface SortType {
  */
 export interface CreateApplicationResponse {
   /**
-   * 服务code
+   * 应用ID
    */
   Result?: string
   /**

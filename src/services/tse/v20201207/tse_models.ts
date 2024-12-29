@@ -2260,6 +2260,10 @@ export interface DescribeGovernanceNamespacesRequest {
    */
   Name?: string
   /**
+   * 是否开启同步到全局注册中心
+   */
+  SyncToGlobalRegistry?: string
+  /**
    * 偏移量，默认为0。
    */
   Offset?: number
@@ -4823,6 +4827,11 @@ export interface GovernanceNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveGroupIds?: Array<string>
+  /**
+   * 该命名空间下的服务对哪些命名空间可见
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceExportTo?: Array<string>
 }
 
 /**
@@ -6923,6 +6932,13 @@ export interface GovernanceNamespaceInput {
    * 移除可以操作此命名空间的用户组ID列表
    */
   RemoveGroupIds?: Array<string>
+  /**
+   * 该命名空间下的服务对哪些命名空间下可见，
+1、为空或者不填写，表示仅当前命名空间可见
+2、列表内容仅一个元素，且为字符 *，表示所有命名空间可见（包括新增）
+3、列表内容为部份命名空间名称，则只对这些命名空间下可见
+   */
+  ServiceExportTo?: Array<string>
 }
 
 /**
@@ -8863,6 +8879,10 @@ export interface DescribeGovernanceServicesRequest {
    * 是否只查询存在健康实例的服务
    */
   OnlyExistHealthyInstance?: boolean
+  /**
+   * 是否开启同步到全局注册中心
+   */
+  SyncToGlobalRegistry?: string
 }
 
 /**

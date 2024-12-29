@@ -112,10 +112,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDisasterRecoverGroupQuota", req, cb);
     }
     /**
-     * 本接口(DescribeReservedInstances)可提供列出用户已购买的预留实例
+     * 本接口 (DescribeTaskInfo) 用于查询云服务器维修任务列表及详细信息。
+
+- 可以根据实例ID、实例名称或任务状态等信息来查询维修任务列表。过滤信息详情可参考入参说明。
+- 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的维修任务列表。
      */
-    async DescribeReservedInstances(req, cb) {
-        return this.request("DescribeReservedInstances", req, cb);
+    async DescribeTaskInfo(req, cb) {
+        return this.request("DescribeTaskInfo", req, cb);
     }
     /**
      * 本接口(CreateImage)用于将实例的系统盘制作为新镜像，创建后的镜像可以用于创建实例。
@@ -140,22 +143,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetInstancesType", req, cb);
     }
     /**
-     * 本接口(DescribeReservedInstancesConfigInfos)供用户列出可购买预留实例机型配置。预留实例当前只针对国际站白名单用户开放。
-     */
-    async DescribeReservedInstancesConfigInfos(req, cb) {
-        return this.request("DescribeReservedInstancesConfigInfos", req, cb);
-    }
-    /**
      * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
      */
     async DescribeInstanceFamilyConfigs(req, cb) {
         return this.request("DescribeInstanceFamilyConfigs", req, cb);
-    }
-    /**
-     * 本接口(InquirePricePurchaseReservedInstancesOffering)用于创建预留实例询价。本接口仅允许针对购买限制范围内的预留实例配置进行询价。预留实例当前只针对国际站白名单用户开放。
-     */
-    async InquirePricePurchaseReservedInstancesOffering(req, cb) {
-        return this.request("InquirePricePurchaseReservedInstancesOffering", req, cb);
     }
     /**
      * 本接口（SyncImages）用于将自定义镜像同步到其它地区。
@@ -429,12 +420,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceResetInstance", req, cb);
     }
     /**
-     * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例
-     */
-    async PurchaseReservedInstancesOffering(req, cb) {
-        return this.request("PurchaseReservedInstancesOffering", req, cb);
-    }
-    /**
      * 本接口 (ModifyInstancesRenewFlag) 用于修改包年包月实例续费标识。
 
 * 实例被标识为自动续费后，每次在实例到期时，会自动续费一个月。
@@ -561,21 +546,6 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     async DescribeKeyPairs(req, cb) {
         return this.request("DescribeKeyPairs", req, cb);
-    }
-    /**
-     * 本接口 (DescribeTaskInfo) 用于查询云服务器维修任务列表及详细信息。
-
-- 可以根据实例ID、实例名称或任务状态等信息来查询维修任务列表。过滤信息详情可参考入参说明。
-- 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的维修任务列表。
-     */
-    async DescribeTaskInfo(req, cb) {
-        return this.request("DescribeTaskInfo", req, cb);
-    }
-    /**
-     * 本接口(DescribeReservedInstancesOfferings)供用户列出可购买的预留实例配置
-     */
-    async DescribeReservedInstancesOfferings(req, cb) {
-        return this.request("DescribeReservedInstancesOfferings", req, cb);
     }
     /**
      * 本接口 (InquiryPriceModifyInstancesChargeType) 用于切换实例的计费模式询价。

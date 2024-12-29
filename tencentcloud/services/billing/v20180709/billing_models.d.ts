@@ -4751,6 +4751,14 @@ export interface VoucherInfos {
      * 不适用商品信息
      */
     ExcludedProducts?: Array<ExcludedProducts>;
+    /**
+     * 使用说明/批次备注
+     */
+    PolicyRemark?: string;
+    /**
+     * 发券时间
+     */
+    CreateTime?: string;
 }
 /**
  * DescribeBillSummaryForOrganization请求参数结构体

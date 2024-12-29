@@ -843,7 +843,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeIsolatedInstances)用于查询回收站实例列表。
+   * 本接口（DescribeIsolatedInstances）用于查询回收站实例列表。
    */
   async DescribeIsolatedInstances(
     req: DescribeIsolatedInstancesRequest,
@@ -1403,7 +1403,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+   * 本接口（DescribeAuditLogs）用于查询数据库审计日志。
    */
   async DescribeAuditLogs(
     req: DescribeAuditLogsRequest,
@@ -1663,7 +1663,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
+   * 本接口（DeleteAuditLogFile）用于删除云数据库实例的审计日志文件。
    */
   async DeleteAuditLogFile(
     req: DeleteAuditLogFileRequest,

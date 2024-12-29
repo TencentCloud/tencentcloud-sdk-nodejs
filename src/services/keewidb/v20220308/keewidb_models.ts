@@ -67,47 +67,47 @@ export interface TaskInfoDetail {
    * 任务Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 任务类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskType: string
+  TaskType?: string
   /**
    * 实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 实例Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 项目Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 任务进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
    * 结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 任务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: number
+  Result?: number
   /**
    * 操作者用户uin
 注意：此字段可能返回 null，表示取不到有效值。
@@ -284,35 +284,35 @@ export interface Inbound {
   /**
    * 策略，ACCEPT或者DROP。
    */
-  Action: string
+  Action?: string
   /**
    * 地址组id代表的地址集合。
    */
-  AddressModule: string
+  AddressModule?: string
   /**
    * 来源Ip或Ip段，例如192.168.0.0/16。
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 描述。
    */
-  Desc: string
+  Desc?: string
   /**
    * 网络协议，支持udp、tcp等。
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 端口。
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 服务组id代表的协议和端口集合。
    */
-  ServiceModule: string
+  ServiceModule?: string
   /**
    * 安全组id代表的地址集合。
    */
-  Id: string
+  Id?: string
 }
 
 /**
@@ -398,7 +398,7 @@ export interface CreateBackupManuallyResponse {
   /**
    * 任务 ID。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -476,7 +476,7 @@ export interface ProxyNodeInfo {
    * 节点ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: string
+  NodeId?: string
 }
 
 /**
@@ -496,23 +496,23 @@ export interface InstanceProxySlowlogDetail {
   /**
    * 慢查询耗时
    */
-  Duration: number
+  Duration?: number
   /**
    * 客户端地址
    */
-  Client: string
+  Client?: string
   /**
    * 命令
    */
-  Command: string
+  Command?: string
   /**
    * 详细命令行信息
    */
-  CommandLine: string
+  CommandLine?: string
   /**
    * 执行时间
    */
-  ExecuteTime: string
+  ExecuteTime?: string
 }
 
 /**
@@ -628,35 +628,35 @@ export interface InstanceMultiParam {
   /**
    * 参数名
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：multi
    */
-  ValueType: string
+  ValueType?: string
   /**
    * 修改后是否需要重启：true，false
    */
-  NeedRestart: string
+  NeedRestart?: string
   /**
    * 参数默认值
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 当前运行参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 参数说明
    */
-  Tips: string
+  Tips?: string
   /**
    * 参数说明
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
   /**
    * 参数状态, 1: 修改中， 2：修改完成
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -686,44 +686,44 @@ export interface InstanceIntegerParam {
   /**
    * 参数名
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：integer
    */
-  ValueType: string
+  ValueType?: string
   /**
    * 修改后是否需要重启：true，false
    */
-  NeedRestart: string
+  NeedRestart?: string
   /**
    * 参数默认值
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 当前运行参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 参数说明
    */
-  Tips: string
+  Tips?: string
   /**
    * 参数最小值
    */
-  Min: string
+  Min?: string
   /**
    * 参数最大值
    */
-  Max: string
+  Max?: string
   /**
    * 参数状态, 1: 修改中， 2：修改完成
    */
-  Status: number
+  Status?: number
   /**
    * 参数单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
 }
 
 /**
@@ -835,27 +835,27 @@ export interface BackupInfo {
   /**
    * 备份开始时间。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 备份 ID。
    */
-  BackupId: string
+  BackupId?: string
   /**
-   * 备份类型。<ul><li>1：手动备份，指根据业务运维排障需求，立即执行备份任务的操作。</li> <li>0：自动备份，指根据自动备份策略定时自动发起的备份任务。</li></ul>
+   * 备份类型。<ul><li>1：手动备份，指根据业务运维排障需求，立即执行备份任务的操作。</li> <li>0：自动备份，指根据自动备份策略定时自动发起的备份任务。</li><li>2：生成RDB，指根据业务需求，发起的生成文件为rdb类型的备份任务。</li></ul>
    */
-  BackupType: string
+  BackupType?: string
   /**
    * 备份的备注信息.
    */
-  Remark: string
+  Remark?: string
   /**
    * 备份状态。  <ul><li>1：备份任务被其它流程锁定。</li><li>2：备份正常，没有被任何流程锁定。</li> <li>-1：备份已过期。</li><li>3：备份正在被导出。</li> <li>4：备份导出成功。</li></ul>
    */
-  Status: number
+  Status?: number
   /**
    * 备份是否被锁定。<ul><li>0：未被锁定。</li><li>1：已被锁定。</li></ul>
    */
-  Locked: number
+  Locked?: number
 }
 
 /**
@@ -962,35 +962,35 @@ export interface InstanceTextParam {
   /**
    * 参数名
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：text
    */
-  ValueType: string
+  ValueType?: string
   /**
    * 修改后是否需要重启：true，false
    */
-  NeedRestart: string
+  NeedRestart?: string
   /**
    * 参数默认值
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 当前运行参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 参数说明
    */
-  Tips: string
+  Tips?: string
   /**
    * 参数可取值
    */
-  TextValue: Array<string>
+  TextValue?: Array<string>
   /**
    * 参数状态, 1: 修改中， 2：修改完成
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -1000,23 +1000,23 @@ export interface InstanceParamHistory {
   /**
    * 参数名称
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 修改前值
    */
-  PreValue: string
+  PreValue?: string
   /**
    * 修改后值
    */
-  NewValue: string
+  NewValue?: string
   /**
    * 状态：1-参数配置修改中；2-参数配置修改成功；3-参数配置修改失败
    */
-  Status: number
+  Status?: number
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
 }
 
 /**
@@ -1291,35 +1291,35 @@ export interface Outbound {
   /**
    * 策略，ACCEPT或者DROP。
    */
-  Action: string
+  Action?: string
   /**
    * 地址组id代表的地址集合。
    */
-  AddressModule: string
+  AddressModule?: string
   /**
    * 来源Ip或Ip段，例如192.168.0.0/16。
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 描述。
    */
-  Desc: string
+  Desc?: string
   /**
    * 网络协议，支持udp、tcp等。
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 端口。
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 服务组id代表的协议和端口集合。
    */
-  ServiceModule: string
+  ServiceModule?: string
   /**
    * 安全组id代表的地址集合。
    */
-  Id: string
+  Id?: string
 }
 
 /**
@@ -1382,31 +1382,31 @@ export interface SecurityGroup {
   /**
    * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 项目ID。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 安全组ID。
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 安全组名称。
    */
-  SecurityGroupName: string
+  SecurityGroupName?: string
   /**
    * 安全组备注。
    */
-  SecurityGroupRemark: string
+  SecurityGroupRemark?: string
   /**
    * 出站规则。
    */
-  Outbound: Array<Outbound>
+  Outbound?: Array<Outbound>
   /**
    * 入站规则。
    */
-  Inbound: Array<Inbound>
+  Inbound?: Array<Inbound>
 }
 
 /**
@@ -1604,23 +1604,23 @@ export interface ReplicaGroup {
   /**
    * 节点 ID。
    */
-  GroupId: number
+  GroupId?: number
   /**
    * 节点组的名称，主节点为空。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 节点的可用区ID，比如ap-guangzhou-1。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 节点组角色。<ul><li>master：为主节点。</li><li>replica：为副本节点。</li></ul>
    */
-  Role: string
+  Role?: string
   /**
    * 节点组节点列表。
    */
-  KeeWiDBNodes: Array<KeeWiDBNode>
+  KeeWiDBNodes?: Array<KeeWiDBNode>
 }
 
 /**
@@ -2163,23 +2163,23 @@ export interface TendisSlowLogDetail {
   /**
    * 执行时间
    */
-  ExecuteTime: string
+  ExecuteTime?: string
   /**
    * 慢查询耗时（毫秒）
    */
-  Duration: number
+  Duration?: number
   /**
    * 命令
    */
-  Command: string
+  Command?: string
   /**
    * 详细命令行信息
    */
-  CommandLine: string
+  CommandLine?: string
   /**
    * 节点ID
    */
-  Node: string
+  Node?: string
 }
 
 /**

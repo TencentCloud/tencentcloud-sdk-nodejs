@@ -238,6 +238,16 @@ it("iai.v20200303.GetUpgradeGroupFaceModelVersionJobList", async function () {
     }
 })
 
+it("iai.v20200303.DetectFaceSimilarity", async function () {
+    try {
+       const data = await client.DetectFaceSimilarity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iai.v20200303.GetGroupInfo", async function () {
     try {
        const data = await client.GetGroupInfo({})

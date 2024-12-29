@@ -82,8 +82,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建订阅接口
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+创建订阅接口
+     */
   async CreateSubscribe(
     req: CreateSubscribeRequest,
     cb?: (error: string, rep: CreateSubscribeResponse) => void
@@ -92,8 +94,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改主题属性
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+修改主题属性
+     */
   async ModifyTopicAttribute(
     req: ModifyTopicAttributeRequest,
     cb?: (error: string, rep: ModifyTopicAttributeResponse) => void
@@ -102,8 +106,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清空订阅者消息标签
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+清空订阅者消息标签
+     */
   async ClearSubscriptionFilterTags(
     req: ClearSubscriptionFilterTagsRequest,
     cb?: (error: string, rep: ClearSubscriptionFilterTagsResponse) => void
@@ -112,8 +118,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除订阅
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+删除订阅
+     */
   async DeleteSubscribe(
     req: DeleteSubscribeRequest,
     cb?: (error: string, rep: DeleteSubscribeResponse) => void
@@ -133,8 +141,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回溯队列
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+回溯队列
+     */
   async RewindQueue(
     req: RewindQueueRequest,
     cb?: (error: string, rep: RewindQueueResponse) => void
@@ -143,8 +153,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改订阅属性
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+修改订阅属性
+     */
   async ModifySubscriptionAttribute(
     req: ModifySubscriptionAttributeRequest,
     cb?: (error: string, rep: ModifySubscriptionAttributeResponse) => void
@@ -193,8 +205,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举死信队列源队列
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+枚举死信队列源队列
+     */
   async DescribeDeadLetterSourceQueues(
     req: DescribeDeadLetterSourceQueuesRequest,
     cb?: (error: string, rep: DescribeDeadLetterSourceQueuesResponse) => void
@@ -203,8 +217,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除主题
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+删除主题
+     */
   async DeleteTopic(
     req: DeleteTopicRequest,
     cb?: (error: string, rep: DeleteTopicResponse) => void
@@ -213,8 +229,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清除queue中的所有消息
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+清除queue中的所有消息
+     */
   async ClearQueue(
     req: ClearQueueRequest,
     cb?: (error: string, rep: ClearQueueResponse) => void
@@ -223,8 +241,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑死信队列
-   */
+     * 下线老cmq云API 3.0 无调用量接口
+
+解绑死信队列
+     */
   async UnbindDeadLetter(
     req: UnbindDeadLetterRequest,
     cb?: (error: string, rep: UnbindDeadLetterResponse) => void

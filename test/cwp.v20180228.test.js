@@ -2918,16 +2918,6 @@ it("cwp.v20180228.AddLoginWhiteLists", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeIndexList", async function () {
-    try {
-       const data = await client.DescribeIndexList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ExportProtectDirList", async function () {
     try {
        const data = await client.ExportProtectDirList({})

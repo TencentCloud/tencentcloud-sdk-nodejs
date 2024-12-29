@@ -336,6 +336,22 @@ export interface CreateJobConfigRequest {
      * flink版本
      */
     FlinkVersion?: string;
+    /**
+     * JobManager cpu
+     */
+    JobManagerCpu?: number;
+    /**
+     * JobManager 内存
+     */
+    JobManagerMem?: number;
+    /**
+     * TaskManager cpu
+     */
+    TaskManagerCpu?: number;
+    /**
+     * TaskManager 内存
+     */
+    TaskManagerMem?: number;
 }
 /**
  * 集群的版本相关信息
@@ -690,6 +706,20 @@ export interface TreeJobSets {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
+    /**
+     * 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScalingType?: number;
+    /**
+     * RunningCpu
+     */
+    RunningCpu?: number;
+    /**
+     * RunningMem
+     */
+    RunningMem?: number;
 }
 /**
  * 资源详细描述
@@ -756,7 +786,6 @@ export interface ResourceItem {
     RefJobCount?: number;
     /**
      * 作业运行状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsJobRun?: number;
     /**
@@ -774,6 +803,34 @@ export interface ResourceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
+    /**
+     * 连接器名称
+     */
+    Connector?: string;
+    /**
+     * 连接器版本
+     */
+    ConnectorVersion?: string;
+    /**
+     * 连接方式
+     */
+    ConnectionMethod?: string;
+    /**
+     * connector关联的资源id
+     */
+    RelatedResourceId?: string;
+    /**
+     * 图标
+     */
+    Icon?: string;
+    /**
+     * 连接器中文名
+     */
+    ConnectorName?: string;
+    /**
+     * 连接器官网链接
+     */
+    ConnectorUrl?: string;
 }
 /**
  * 依赖作业分状态计数信息
@@ -1071,6 +1128,14 @@ export interface SqlGatewayItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Properties?: Array<Property>;
+    /**
+     * Cpu
+     */
+    Cpu?: number;
+    /**
+     * Mem
+     */
+    Mem?: number;
 }
 /**
  * DescribeJobRuntimeInfo返回参数结构体
@@ -1551,6 +1616,10 @@ export interface DescribeSystemResourcesRequest {
      * 查询对应Flink版本的内置connector
      */
     FlinkVersion?: string;
+    /**
+     * 空间
+     */
+    WorkSpaceId?: string;
 }
 /**
  * CreateFolder返回参数结构体
@@ -1755,6 +1824,22 @@ export interface SubEks {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RunningCu?: number;
+    /**
+     * 总的CPU
+     */
+    TotalCpu?: number;
+    /**
+     * 总的内存
+     */
+    TotalMem?: number;
+    /**
+     * 运行的CPU
+     */
+    RunningCpu?: number;
+    /**
+     * 运行的内存
+     */
+    RunningMem?: number;
 }
 /**
  * 空间和集群绑定关系
@@ -1887,7 +1972,7 @@ export interface DeleteWorkSpaceResponse {
     /**
      * 是否删除
      */
-    Delete: boolean;
+    Delete?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2040,27 +2125,31 @@ export interface SystemResourceItem {
     /**
      * 资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 资源类型。1 表示 JAR 包，目前只支持该值。
      */
-    ResourceType: number;
+    ResourceType?: number;
     /**
      * 资源备注
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 资源所属地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 资源的最新版本
      */
-    LatestResourceConfigVersion: number;
+    LatestResourceConfigVersion?: number;
+    /**
+     * 1 是系统提供资源 2 用户提供CONNECTOR
+     */
+    SystemProvide?: number;
 }
 /**
  * DescribeResourceRelatedJobs请求参数结构体
@@ -2246,23 +2335,27 @@ export interface ResourceRefDetail {
     /**
      * 资源id
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源版本，-1表示使用最新版本
      */
-    Version: number;
+    Version?: number;
     /**
      * 资源名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 1: 主资源
      */
-    Type: number;
+    Type?: number;
     /**
      * 1: 系统内置资源
      */
-    SystemProvide: number;
+    SystemProvide?: number;
+    /**
+     * Connector
+     */
+    Connector?: string;
 }
 /**
  * 树状结构资源对象
@@ -2447,6 +2540,22 @@ export interface ClusterGroupSetItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingResourceMode?: string;
+    /**
+     * TotalCpu
+     */
+    TotalCpu?: number;
+    /**
+     * TotalMem
+     */
+    TotalMem?: number;
+    /**
+     * RunningCpu
+     */
+    RunningCpu?: number;
+    /**
+     * RunningMem
+     */
+    RunningMem?: number;
 }
 /**
  * DescribeJobConfigs请求参数结构体
@@ -2781,6 +2890,22 @@ export interface Cluster {
      * 是否开启跨租户弹性网卡
      */
     CrossTenantEniMode?: number;
+    /**
+     * 总的CPU
+     */
+    TotalCpu?: number;
+    /**
+     * 总的内存
+     */
+    TotalMem?: number;
+    /**
+     * 运行的CPU
+     */
+    RunningCpu?: number;
+    /**
+     * 运行的内存
+     */
+    RunningMem?: number;
 }
 /**
  * 作业运行图
@@ -3220,6 +3345,31 @@ export interface JobConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlinkVersion?: string;
+    /**
+     * jm使用cpu数目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobManagerCpu?: number;
+    /**
+     * jm使用内存数目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobManagerMem?: number;
+    /**
+     * tm使用cpu数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskManagerCpu?: number;
+    /**
+     * tm使用mem数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskManagerMem?: number;
+    /**
+     * 运行中配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobConfigItem?: JobConfig;
 }
 /**
  * DescribeResourceConfigs请求参数结构体
@@ -3592,6 +3742,10 @@ export interface DescribeResourcesRequest {
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+    /**
+     * 资源类型，0=用户，1系统connector，2=用户自定义connector
+     */
+    SystemResource?: number;
 }
 /**
  * DescribeJobEvents请求参数结构体

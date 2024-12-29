@@ -327,13 +327,77 @@ export interface LoadBalancerPackageNew {
     LoadBalancerDomain?: string;
 }
 /**
- * DeleteHost请求参数结构体
+ * cc规则
  */
-export interface DeleteHostRequest {
+export interface CCRuleItem {
     /**
-     * 删除的域名列表
+     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验
      */
-    HostsDel: Array<HostDel>;
+    ActionType?: number;
+    /**
+     * 高级模式
+     */
+    Advance?: number;
+    /**
+     * 时间周期
+     */
+    Interval?: number;
+    /**
+     * 限制次数
+     */
+    Limit?: number;
+    /**
+     * 匹配方法
+     */
+    MatchFunc?: number;
+    /**
+     * 名称
+     */
+    Name?: string;
+    /**
+     * 优先级
+     */
+    Priority?: number;
+    /**
+     * 状态
+     */
+    Status?: number;
+    /**
+     * 更新时间戳
+     */
+    TsVersion?: number;
+    /**
+     * 匹配url
+     */
+    Url?: string;
+    /**
+     * 策略动作有效时间
+     */
+    ValidTime?: number;
+    /**
+     * 高级参数
+     */
+    OptionsArr?: string;
+    /**
+     * url长度
+     */
+    Length?: number;
+    /**
+     * 规则ID
+     */
+    RuleId?: number;
+    /**
+     * 事件id
+     */
+    EventId?: string;
+    /**
+     * 关联的Session规则
+     */
+    SessionApplied?: Array<number | bigint>;
+    /**
+     * 创建时间
+     */
+    CreateTime?: number;
 }
 /**
  * DescribeCertificateVerifyResult返回参数结构体
@@ -1737,6 +1801,31 @@ export interface ModifyCustomWhiteRuleStatusRequest {
     Status: number;
 }
 /**
+ * ModifyAreaBanRule请求参数结构体
+ */
+export interface ModifyAreaBanRuleRequest {
+    /**
+     * 需要修改的域名
+     */
+    Domain: string;
+    /**
+     * 需要新增的封禁地域
+     */
+    Areas: Array<Area>;
+    /**
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+     */
+    JobType: string;
+    /**
+     * 定时任务配置
+     */
+    JobDateTime: JobDateTime;
+    /**
+     * 地域信息的语言，支持cn、en，默认为中文cn
+     */
+    Lang?: string;
+}
+/**
  * Clb-waf地域信息
  */
 export interface ClbWafRegionItem {
@@ -1809,77 +1898,13 @@ export interface TargetEntity {
     Domain?: string;
 }
 /**
- * cc规则
+ * DeleteHost请求参数结构体
  */
-export interface CCRuleItem {
+export interface DeleteHostRequest {
     /**
-     * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，24表示JS校验
+     * 删除的域名列表
      */
-    ActionType?: number;
-    /**
-     * 高级模式
-     */
-    Advance?: number;
-    /**
-     * 时间周期
-     */
-    Interval?: number;
-    /**
-     * 限制次数
-     */
-    Limit?: number;
-    /**
-     * 匹配方法
-     */
-    MatchFunc?: number;
-    /**
-     * 名称
-     */
-    Name?: string;
-    /**
-     * 优先级
-     */
-    Priority?: number;
-    /**
-     * 状态
-     */
-    Status?: number;
-    /**
-     * 更新时间戳
-     */
-    TsVersion?: number;
-    /**
-     * 匹配url
-     */
-    Url?: string;
-    /**
-     * 策略动作有效时间
-     */
-    ValidTime?: number;
-    /**
-     * 高级参数
-     */
-    OptionsArr?: string;
-    /**
-     * url长度
-     */
-    Length?: number;
-    /**
-     * 规则ID
-     */
-    RuleId?: number;
-    /**
-     * 事件id
-     */
-    EventId?: string;
-    /**
-     * 关联的Session规则
-     */
-    SessionApplied?: Array<number | bigint>;
-    /**
-     * 创建时间
-     */
-    CreateTime?: number;
+    HostsDel: Array<HostDel>;
 }
 /**
  * DescribeDomainCountInfo请求参数结构体
@@ -2123,7 +2148,7 @@ export interface DescribeAntiFakeRulesRequest {
      */
     Order?: string;
     /**
-     * 目前支持根据ts排序
+     * 目前支持根据create_time、modify_time、id排序
      */
     By?: string;
 }
@@ -2903,6 +2928,19 @@ export interface AccessRuleInfo {
     Tag?: AccessRuleTagInfo;
 }
 /**
+ * DescribeAreaBanRule返回参数结构体
+ */
+export interface DescribeAreaBanRuleResponse {
+    /**
+     * 规则内容
+     */
+    Data?: AreaBanRule;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CC规则总览
  */
 export interface CCRuleLists {
@@ -3389,6 +3427,39 @@ export interface DescribeWafAutoDenyStatusResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 地域封禁规则详情
+ */
+export interface AreaBanRule {
+    /**
+     * 状态 0：未开启地域封禁、1：开启地域封禁
+     */
+    Status?: number;
+    /**
+     * 数据来源 custom：自定义(默认)、batch：批量防护
+     */
+    Source?: string;
+    /**
+     * 配置的地域列表
+     */
+    Areas?: Array<Area>;
+    /**
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+     */
+    JobType?: string;
+    /**
+     * 定时任务配置
+     */
+    JobDateTime?: JobDateTime;
+    /**
+     * 如果是周期任务类型，那么表示周期的类型，支持 Week：按周、Month：按月
+     */
+    CronType?: string;
+    /**
+     * 地域信息的语言，支持cn、en，默认为中文cn
+     */
+    Lang?: string;
 }
 /**
  * DescribeTlsVersion请求参数结构体
@@ -4469,6 +4540,15 @@ export interface DescribeUserSignatureRuleRequest {
     Filters?: Array<FiltersItemNew>;
 }
 /**
+ * ModifyAreaBanRule返回参数结构体
+ */
+export interface ModifyAreaBanRuleResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUserClbWafRegions请求参数结构体
  */
 export interface DescribeUserClbWafRegionsRequest {
@@ -4860,17 +4940,17 @@ export interface CreateAccessExportRequest {
     Order?: string;
 }
 /**
- * DescribeAutoDenyIP返回参数结构体
+ * ModifyUserLevel请求参数结构体
  */
-export interface DescribeAutoDenyIPResponse {
+export interface ModifyUserLevelRequest {
     /**
-     * 查询IP封禁状态返回结果
+     * 域名
      */
-    Data?: IpHitItemsData;
+    Domain: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 防护规则等级 300=standard，400=extended
      */
-    RequestId?: string;
+    Level: number;
 }
 /**
  * DescribeIpHitItems返回参数结构体
@@ -5113,7 +5193,7 @@ export interface ModifyProtectionStatusRequest {
      */
     Domain: string;
     /**
-     * 状态
+     * 1：开启WAF开关，0：关闭WAF开关
      */
     Status: number;
     /**
@@ -5568,6 +5648,48 @@ export interface DeleteAntiFakeUrlResponse {
     RequestId?: string;
 }
 /**
+ * CreateAreaBanRule请求参数结构体
+ */
+export interface CreateAreaBanRuleRequest {
+    /**
+     * 需要修改的域名
+     */
+    Domain: string;
+    /**
+     * 需要新增的封禁地域
+     */
+    Areas: Array<Area>;
+    /**
+     * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+     */
+    JobType: string;
+    /**
+     * 定时任务配置
+     */
+    JobDateTime: JobDateTime;
+    /**
+     * 地域信息的语言，支持cn、en，默认为中文cn
+     */
+    Lang: string;
+}
+/**
+ * 地域信息
+ */
+export interface Area {
+    /**
+     * 国家，除了标准的国家外还支持国内、国外这两个特殊的标识
+     */
+    Country: string;
+    /**
+     * 省份
+     */
+    Region?: string;
+    /**
+     * 城市
+     */
+    City?: string;
+}
+/**
  * DescribeUserLevel返回参数结构体
  */
 export interface DescribeUserLevelResponse {
@@ -5641,17 +5763,17 @@ export interface SessionData {
     Res?: Array<SessionItem>;
 }
 /**
- * ModifyUserLevel请求参数结构体
+ * DescribeAutoDenyIP返回参数结构体
  */
-export interface ModifyUserLevelRequest {
+export interface DescribeAutoDenyIPResponse {
     /**
-     * 域名
+     * 查询IP封禁状态返回结果
      */
-    Domain: string;
+    Data?: IpHitItemsData;
     /**
-     * 防护规则等级 300=standard，400=extended
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Level: number;
+    RequestId?: string;
 }
 /**
  * SwitchDomainRules返回参数结构体
@@ -5774,6 +5896,15 @@ export interface DescribeAntiFakeRulesResponse {
      * 返回值
      */
     Data?: Array<CacheUrlItems>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateAreaBanRule返回参数结构体
+ */
+export interface CreateAreaBanRuleResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6665,29 +6796,29 @@ export interface DeleteIpAccessControlV2Request {
     ActionType?: number;
 }
 /**
- * ModifyWafAutoDenyRules请求参数结构体
+ * DescribeTopAttackDomain请求参数结构体
  */
-export interface ModifyWafAutoDenyRulesRequest {
+export interface DescribeTopAttackDomainRequest {
     /**
-     * 域名
+     * 查询起始时间
      */
-    Domain: string;
+    FromTime: string;
     /**
-     * 触发IP封禁的攻击次数阈值，范围为2~100次
+     * 查询结束时间
      */
-    AttackThreshold: number;
+    ToTime: string;
     /**
-     * IP封禁统计时间，范围为1-60分钟
+     * TOP N,可从0-10选择，默认是10
      */
-    TimeThreshold: number;
+    Count?: number;
     /**
-     * 触发IP封禁后的封禁时间，范围为5~360分钟
+     * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
      */
-    DenyTimeThreshold: number;
+    Edition?: string;
     /**
-     * 自动封禁状态，0表示关闭，1表示打开
+     * WAF实例ID，不传则不过滤
      */
-    DefenseStatus: number;
+    InstanceID?: string;
 }
 /**
  * DescribeAccessFastAnalysis返回参数结构体
@@ -6928,6 +7059,15 @@ export interface GetAttackDownloadRecordsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeAreaBanRule请求参数结构体
+ */
+export interface DescribeAreaBanRuleRequest {
+    /**
+     * 需要查询的域名
+     */
+    Domain: string;
 }
 /**
  * DescribeApiDetail返回参数结构体
@@ -7177,31 +7317,6 @@ export interface DeleteCustomRuleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeTopAttackDomain请求参数结构体
- */
-export interface DescribeTopAttackDomainRequest {
-    /**
-     * 查询起始时间
-     */
-    FromTime: string;
-    /**
-     * 查询结束时间
-     */
-    ToTime: string;
-    /**
-     * TOP N,可从0-10选择，默认是10
-     */
-    Count?: number;
-    /**
-     * 只有两个值有效，sparta-waf，clb-waf，不传则不过滤
-     */
-    Edition?: string;
-    /**
-     * WAF实例ID，不传则不过滤
-     */
-    InstanceID?: string;
 }
 /**
  * DescribeHistogram请求参数结构体
@@ -9766,6 +9881,31 @@ export interface DescribeDomainWhiteRulesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyWafAutoDenyRules请求参数结构体
+ */
+export interface ModifyWafAutoDenyRulesRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 触发IP封禁的攻击次数阈值，范围为2~100次
+     */
+    AttackThreshold: number;
+    /**
+     * IP封禁统计时间，范围为1-60分钟
+     */
+    TimeThreshold: number;
+    /**
+     * 触发IP封禁后的封禁时间，范围为5~360分钟
+     */
+    DenyTimeThreshold: number;
+    /**
+     * 自动封禁状态，0表示关闭，1表示打开
+     */
+    DefenseStatus: number;
 }
 /**
  * DescribeSession返回参数结构体

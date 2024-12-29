@@ -196,7 +196,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 调整弹性公网IP带宽
-
      */
     async ModifyAddressesBandwidth(req, cb) {
         return this.request("ModifyAddressesBandwidth", req, cb);

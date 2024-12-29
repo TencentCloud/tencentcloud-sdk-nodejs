@@ -52,7 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePagedLogConfigList", req, cb);
     }
     /**
-     * 创建或者更新 Ingress 规则
+     * 此接口没有被使用了
+
+创建或者更新 Ingress 规则
      */
     async ModifyIngress(req, cb) {
         return this.request("ModifyIngress", req, cb);

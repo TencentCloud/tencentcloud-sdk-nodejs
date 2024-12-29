@@ -265,8 +265,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移动网络发起Qos加速过程
-   */
+     * 产品下线
+
+移动网络发起Qos加速过程
+     */
   async CreateQos(
     req: CreateQosRequest,
     cb?: (error: string, rep: CreateQosResponse) => void
@@ -295,8 +297,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Qos加速状态
-   */
+     * 产品下线
+
+获取Qos加速状态
+     */
   async DescribeQos(
     req: DescribeQosRequest,
     cb?: (error: string, rep: DescribeQosResponse) => void
@@ -405,8 +409,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移动网络停止Qos加速过程
-   */
+     * 产品下线
+
+移动网络停止Qos加速过程
+     */
   async DeleteQos(
     req: DeleteQosRequest,
     cb?: (error: string, rep: DeleteQosResponse) => void

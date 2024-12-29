@@ -1777,14 +1777,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddLoginWhiteLists", req, cb);
     }
     /**
-     * 接口已废弃
-
-获取索引列表
-     */
-    async DescribeIndexList(req, cb) {
-        return this.request("DescribeIndexList", req, cb);
-    }
-    /**
      * 导出网页防篡改防护目录列表
      */
     async ExportProtectDirList(req, cb) {

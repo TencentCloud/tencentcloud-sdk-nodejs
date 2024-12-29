@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterFlowStatusDetail", req, cb);
     }
     /**
+     * EMR同步TKE中POD状态
+     */
+    async SyncPodState(req, cb) {
+        return this.request("SyncPodState", req, cb);
+    }
+    /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      */
     async InquiryPriceScaleOutInstance(req, cb) {
@@ -128,6 +134,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 云盘挂载
+     */
+    async AttachDisks(req, cb) {
+        return this.request("AttachDisks", req, cb);
+    }
+    /**
+     * 设置当前集群的某个节点规格配置为默认或取消默认
+     */
+    async SetNodeResourceConfigDefault(req, cb) {
+        return this.request("SetNodeResourceConfigDefault", req, cb);
     }
     /**
      * 查询YARN资源调度数据信息。已废弃，请使用`DescribeYarnQueue`去查询队列信息。
@@ -170,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateTasks(req, cb) {
         return this.request("TerminateTasks", req, cb);
+    }
+    /**
+     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     */
+    async TerminateInstance(req, cb) {
+        return this.request("TerminateInstance", req, cb);
     }
     /**
      * 销毁集群节点
@@ -237,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSLInstanceList", req, cb);
     }
     /**
+     * 云盘扩容
+     */
+    async ResizeDataDisks(req, cb) {
+        return this.request("ResizeDataDisks", req, cb);
+    }
+    /**
      * 修改自动扩缩容规则
      */
     async ModifyAutoScaleStrategy(req, cb) {
@@ -277,6 +307,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyResourceScheduler(req, cb) {
         return this.request("ModifyResourceScheduler", req, cb);
+    }
+    /**
+     * 快速获取当前集群的节点规格配置
+     */
+    async DescribeNodeResourceConfigFast(req, cb) {
+        return this.request("DescribeNodeResourceConfigFast", req, cb);
     }
     /**
      * YARN资源调度-变更详情
@@ -345,10 +381,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEmrOverviewMetrics", req, cb);
     }
     /**
-     * EMR同步TKE中POD状态
+     * 增加当前集群的节点规格配置
      */
-    async SyncPodState(req, cb) {
-        return this.request("SyncPodState", req, cb);
+    async AddNodeResourceConfig(req, cb) {
+        return this.request("AddNodeResourceConfig", req, cb);
     }
     /**
      * 集群续费询价。
@@ -357,10 +393,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenewEmr", req, cb);
     }
     /**
-     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     * 变配实例
      */
-    async TerminateInstance(req, cb) {
-        return this.request("TerminateInstance", req, cb);
+    async ModifyResource(req, cb) {
+        return this.request("ModifyResource", req, cb);
     }
     /**
      * 本接口（ModifySLInstance）用于Serverless HBase变配实例。
@@ -369,6 +405,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySLInstance(req, cb) {
         return this.request("ModifySLInstance", req, cb);
+    }
+    /**
+     * 查询节点数据盘信息
+     */
+    async DescribeNodeDataDisks(req, cb) {
+        return this.request("DescribeNodeDataDisks", req, cb);
     }
     /**
      * 获取自动扩缩容规则
@@ -417,6 +459,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInsightList(req, cb) {
         return this.request("DescribeInsightList", req, cb);
+    }
+    /**
+     * 删除当前集群的节点规格配置
+     */
+    async DeleteNodeResourceConfig(req, cb) {
+        return this.request("DeleteNodeResourceConfig", req, cb);
+    }
+    /**
+     * 修改集群名称
+     */
+    async ModifyInstanceBasic(req, cb) {
+        return this.request("ModifyInstanceBasic", req, cb);
     }
     /**
      * 调整Pod数量

@@ -1309,6 +1309,10 @@ export interface CreateTopicRequest {
      * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
      */
     MsgTTL?: number;
+    /**
+     * 不传默认是原生策略，DefaultPolicy表示当订阅下达到最大未确认消息数 5000 时，服务端将不再向当前订阅下的所有消费者推送消息，DynamicPolicy表示动态调整订阅下的最大未确认消息数，具体配额是在 5000 和消费者数量*20之间取最大值。每个消费者默认最大 unack 消息数为 20，超过该限制时仅影响该消费者，不影响其他消费者。
+     */
+    UnackPolicy?: string;
 }
 /**
  * DescribeCmqTopics返回参数结构体
@@ -9467,6 +9471,10 @@ export interface ModifyTopicRequest {
   
      */
     MsgTTL?: number;
+    /**
+     * 不传默认是原生策略，DefaultPolicy表示当订阅下达到最大未确认消息数 5000 时，服务端将不再向当前订阅下的所有消费者推送消息，DynamicPolicy表示动态调整订阅下的最大未确认消息数，具体配额是在 5000 和消费者数量*20之间取最大值。每个消费者默认最大 unack 消息数为 20，超过该限制时仅影响该消费者，不影响其他消费者。
+     */
+    UnackPolicy?: string;
 }
 /**
  * 消费者

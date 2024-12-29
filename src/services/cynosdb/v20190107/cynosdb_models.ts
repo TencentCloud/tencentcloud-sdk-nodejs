@@ -1327,11 +1327,11 @@ export interface ProxySpec {
   /**
    * 数据库代理cpu核数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 数据库代理内存
    */
-  Mem: number
+  Mem?: number
 }
 
 /**
@@ -2041,7 +2041,7 @@ export interface DescribeProxyNodesRequest {
  */
 export interface DescribeAuditLogsRequest {
   /**
-   * 实例ID
+   * 实例 ID。
    */
   InstanceId: string
   /**
@@ -2073,6 +2073,7 @@ export interface DescribeAuditLogsRequest {
   Limit?: number
   /**
    * 分页偏移量。
+说明：Limit 和 Offset 的取值之和需小于等于65536。
    */
   Offset?: number
   /**
@@ -4979,7 +4980,6 @@ pause
   MaxCpu?: number
   /**
    * Db类型:<li>NORMAL</li><li>SERVERLESS</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbMode?: string
 }
@@ -5205,11 +5205,11 @@ export interface RollbackTimeRange {
   /**
    * 开始时间
    */
-  TimeRangeStart: string
+  TimeRangeStart?: string
   /**
    * 结束时间
    */
-  TimeRangeEnd: string
+  TimeRangeEnd?: string
 }
 
 /**
@@ -5337,7 +5337,7 @@ export interface AuditLog {
    */
   LockWaitTime?: number
   /**
-   * 事物持续等待时间，微秒。
+   * 事务持续等待时间，微秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TrxLivingTime?: number
@@ -6102,27 +6102,27 @@ export interface Account {
   /**
    * 数据库账号名
    */
-  AccountName: string
+  AccountName?: string
   /**
    * 数据库账号描述
    */
-  Description: string
+  Description?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 主机
    */
-  Host: string
+  Host?: string
   /**
    * 用户最大连接数
    */
-  MaxUserConnections: number
+  MaxUserConnections?: number
 }
 
 /**
@@ -6368,17 +6368,14 @@ export interface DeleteClusterDatabaseRequest {
 export interface CynosdbErrorLogItem {
   /**
    * 日志时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
   /**
    * 日志等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: string
   /**
    * 日志内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: string
 }
@@ -6558,7 +6555,6 @@ export interface Ability {
   IsSupportSlaveZone: string
   /**
    * 不支持从可用区的原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NonsupportSlaveZoneReason: string
   /**
@@ -6567,27 +6563,22 @@ export interface Ability {
   IsSupportRo: string
   /**
    * 不支持RO实例的原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NonsupportRoReason: string
   /**
    * 是否支持手动发起快照备份
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportManualSnapshot: string
   /**
    * 是否支持透明数据加密
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportTransparentDataEncryption?: string
   /**
    * 不支持透明数据加密原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NoSupportTransparentDataEncryptionReason?: string
   /**
    * 是否支持手动发起逻辑备份
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportManualLogic?: string
 }
@@ -8986,7 +8977,7 @@ export interface CynosdbInstanceGroup {
    */
   Status?: string
   /**
-   * 实例组类型。ha-ha组；ro-只读组
+   * 实例组（网络）类型。ha-ha组；ro-只读组；proxy-代理；singleRo-只读实例独占
    */
   Type?: string
   /**
@@ -9091,42 +9082,42 @@ export interface ProxyGroup {
   /**
    * 数据库代理组ID
    */
-  ProxyGroupId: string
+  ProxyGroupId?: string
   /**
    * 数据库代理组节点个数
    */
-  ProxyNodeCount: number
+  ProxyNodeCount?: number
   /**
    * 数据库代理组状态
    */
-  Status: string
+  Status?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 当前代理版本
    */
-  CurrentProxyVersion: string
+  CurrentProxyVersion?: string
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 用户AppId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: number
+  AppId?: number
   /**
    * 读写节点开通数据库代理
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OpenRw: string
+  OpenRw?: string
 }
 
 /**
@@ -9299,33 +9290,30 @@ export interface AuditLogFile {
   /**
    * 审计日志文件名称
    */
-  FileName: string
+  FileName?: string
   /**
    * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 文件状态值。可能返回的值为：
 "creating" - 生成中;
 "failed" - 创建失败;
 "success" - 已生成;
    */
-  Status: string
+  Status?: string
   /**
    * 文件大小，单位为 KB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSize: number
+  FileSize?: number
   /**
    * 审计日志下载地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
    * 错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
 }
 
 /**
@@ -10267,15 +10255,15 @@ export interface BillingResourceInfo {
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 实例ID列表
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
   /**
    * 订单ID
    */
-  DealName: string
+  DealName?: string
 }
 
 /**
@@ -10770,35 +10758,35 @@ export interface ClusterParamModifyLog {
   /**
    * 参数名称
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 当前值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 修改后的值
    */
-  UpdateValue: string
+  UpdateValue?: string
   /**
    * 修改状态
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
 }
 
 /**

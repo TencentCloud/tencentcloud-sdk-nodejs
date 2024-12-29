@@ -1428,6 +1428,16 @@ it("vpc.v20170312.CreateHighPriorityRouteTable", async function () {
     }
 })
 
+it("vpc.v20170312.InquiryPriceRenewAddresses", async function () {
+    try {
+       const data = await client.InquiryPriceRenewAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyGatewayFlowQos", async function () {
     try {
        const data = await client.ModifyGatewayFlowQos({})
@@ -2508,6 +2518,16 @@ it("vpc.v20170312.CreateServiceTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.InquiryPriceAllocateAddresses", async function () {
+    try {
+       const data = await client.InquiryPriceAllocateAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyDirectConnectGatewayAttribute", async function () {
     try {
        const data = await client.ModifyDirectConnectGatewayAttribute({})
@@ -3081,6 +3101,16 @@ it("vpc.v20170312.ResetHighPriorityRoutes", async function () {
 it("vpc.v20170312.DescribeVpcs", async function () {
     try {
        const data = await client.DescribeVpcs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.MigrateNetworkInterface", async function () {
+    try {
+       const data = await client.MigrateNetworkInterface({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3678,9 +3708,9 @@ it("vpc.v20170312.ClearRouteTableSelectionPolicies", async function () {
     }
 })
 
-it("vpc.v20170312.MigrateNetworkInterface", async function () {
+it("vpc.v20170312.InquiryPriceModifyAddressesBandwidth", async function () {
     try {
-       const data = await client.MigrateNetworkInterface({})
+       const data = await client.InquiryPriceModifyAddressesBandwidth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

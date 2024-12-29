@@ -2182,6 +2182,10 @@ export interface ReplicationRule {
      * 同步过滤条件
      */
     Filters: Array<ReplicationFilter>;
+    /**
+     * 是否同步删除事件
+     */
+    Deletion?: boolean;
 }
 /**
  * 仓库信息的返回信息

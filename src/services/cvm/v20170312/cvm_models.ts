@@ -36,23 +36,23 @@ export interface LocalDiskType {
   /**
    * 本地磁盘类型。
    */
-  Type: string
+  Type?: string
   /**
    * 本地磁盘属性。
    */
-  PartitionType: string
+  PartitionType?: string
   /**
    * 本地磁盘最小值。
    */
-  MinSize: number
+  MinSize?: number
   /**
    * 本地磁盘最大值。
    */
-  MaxSize: number
+  MaxSize?: number
   /**
-   * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+   * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选</li><li>OPTIONAL：表示可选。</li>
    */
-  Required: string
+  Required?: string
 }
 
 /**
@@ -378,7 +378,7 @@ export interface ResetInstancesTypeRequest {
    */
   InstanceType: string
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：<br><li>true：表示在正常关机失败后进行强制关机<br><li>false：表示在正常关机失败后不进行强制关机<br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><br><li>false：表示在正常关机失败后不进行强制关机</li><br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
    */
   ForceStop?: boolean
 }
@@ -390,15 +390,15 @@ export interface ChcHost {
   /**
    * CHC物理服务器ID。
    */
-  ChcId: string
+  ChcId?: string
   /**
    * 实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 服务器序列号。
    */
-  SerialNumber: string
+  SerialNumber?: string
   /**
    * CHC的状态<br/>
 <ul>
@@ -410,7 +410,7 @@ export interface ChcHost {
 <li>CLEAR_NETWORK_FAILED: 清理带外和部署网络失败</li>
 </ul>
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 设备类型。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -419,7 +419,7 @@ export interface ChcHost {
   /**
    * 所属可用区
    */
-  Placement: Placement
+  Placement?: Placement
   /**
    * 带外网络。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -458,7 +458,7 @@ export interface ChcHost {
   /**
    * 服务器导入的时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量
 注意：此字段可能返回 null，表示取不到有效值。
@@ -468,27 +468,27 @@ export interface ChcHost {
    * CHC物理服务器的CPU核数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CPU: number
+  CPU?: number
   /**
    * CHC物理服务器的内存大小，单位为GB
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Memory: number
+  Memory?: number
   /**
    * CHC物理服务器的磁盘信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Disk: string
+  Disk?: string
   /**
    * 带外网络下分配的MAC地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BmcMAC: string
+  BmcMAC?: string
   /**
    * 部署网络下分配的MAC地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployMAC: string
+  DeployMAC?: string
   /**
    * 设备托管类型。
 HOSTING: 托管
@@ -497,10 +497,86 @@ TENANT: 租赁
    */
   TenantType?: string
   /**
-   * chc dhcp选项，用于minios调试
+   * chc dhcp选项，用于minios调试。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployExtraConfig?: ChcDeployExtraConfig
+  /**
+   * GPU型号。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gpu?: string
+  /**
+   * 网卡型号。主要指RDMA网卡。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkCard?: string
+  /**
+   * 是否是预定义机型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPredefinedType?: boolean
+  /**
+   * CHC云主机机型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChcInstanceType?: string
+  /**
+   * CHC云主机机型簇。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChcInstanceFamily?: string
+  /**
+   * CHC云主机机型簇名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChcInstanceFamilyName?: string
+  /**
+   * 转售客户的AppId。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResaleAppId?: string
+  /**
+   * 转售客户的账号ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResaleAccountId?: string
+  /**
+   * 售卖状态。<br/>
+<ul>
+<li>NOT_FOR_SALE:不可售卖</li>
+<li>AVAILABLE: 可售卖</li>
+<li>SOLD: 已售卖</li>
+</ul>
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SaleStatus?: string
+  /**
+   * CHC物理服务器关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 最近操作
+   */
+  LatestOperation?: string
+  /**
+   * 最近操作错误码
+   */
+  LatestOperationErrorCode?: string
+  /**
+   * 最近操作错误详情和建议项
+   */
+  LatestOperationErrorMsg?: string
+  /**
+   * 最近操作名称
+   */
+  LatestOperationName?: string
+  /**
+   * 最近操作状态
+   */
+  LatestOperationState?: string
 }
 
 /**
@@ -1015,32 +1091,6 @@ export interface ImportImageDataDisk {
 }
 
 /**
- * PurchaseReservedInstancesOffering请求参数结构体
- */
-export interface PurchaseReservedInstancesOfferingRequest {
-  /**
-   * 购买预留实例计费数量
-   */
-  InstanceCount: number
-  /**
-   * 预留实例计费配置ID
-   */
-  ReservedInstancesOfferingId: string
-  /**
-   * 试运行
-   */
-  DryRun?: boolean
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
-   */
-  ClientToken?: string
-  /**
-   * 预留实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>最多支持60个字符（包含模式串）。</li>
-   */
-  ReservedInstanceName?: string
-}
-
-/**
  * RebootInstances请求参数结构体
  */
 export interface RebootInstancesRequest {
@@ -1377,10 +1427,12 @@ export interface RemoveChcAssistVpcResponse {
 export interface InternetChargeTypeConfig {
   /**
    * 网络计费模式。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetChargeType?: string
   /**
    * 网络计费模式描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -1661,38 +1713,6 @@ export interface RunInstancesResponse {
 }
 
 /**
- * 预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstancePrice {
-  /**
-   * 预支合计费用的原价，单位：元。
-   */
-  OriginalFixedPrice?: number
-  /**
-   * 预支合计费用的折扣价，单位：元。
-   */
-  DiscountFixedPrice?: number
-  /**
-   * 后续合计费用的原价，单位：元/小时
-   */
-  OriginalUsagePrice?: number
-  /**
-   * 后续合计费用的折扣价，单位：元/小时
-   */
-  DiscountUsagePrice?: number
-  /**
-   * 预支费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FixedPriceDiscount?: number
-  /**
-   * 后续费用的折扣，如20.0代表2折。 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UsagePriceDiscount?: number
-}
-
-/**
  * 置放群组配置数据
  */
 export interface DisasterRecoverGroupQuota {
@@ -1772,36 +1792,6 @@ export interface SyncImagesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyChcAttribute请求参数结构体
- */
-export interface ModifyChcAttributeRequest {
-  /**
-   * CHC物理服务器ID。
-   */
-  ChcIds: Array<string>
-  /**
-   * CHC物理服务器名称
-   */
-  InstanceName?: string
-  /**
-   * 服务器类型
-   */
-  DeviceType?: string
-  /**
-   * 合法字符为字母,数字, 横线和下划线
-   */
-  BmcUser?: string
-  /**
-   * 密码8-16位字符, 允许数字，字母， 和特殊字符()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
-   */
-  Password?: string
-  /**
-   * bmc网络的安全组列表
-   */
-  BmcSecurityGroupIds?: Array<string>
 }
 
 /**
@@ -2064,30 +2054,6 @@ export interface DescribeDisasterRecoverGroupsRequest {
 }
 
 /**
- * ModifyKeyPairAttribute返回参数结构体
- */
-export interface ModifyKeyPairAttributeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyInstancesRenewFlag请求参数结构体
- */
-export interface ModifyInstancesRenewFlagRequest {
-  /**
-   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-   */
-  RenewFlag: string
-}
-
-/**
  * SyncImages请求参数结构体
  */
 export interface SyncImagesRequest {
@@ -2198,6 +2164,10 @@ export interface ConfigureChcDeployVpcRequest {
    * 部署网络的安全组列表。
    */
   DeploySecurityGroupIds?: Array<string>
+  /**
+   * 部署所需要的dhcp选项参数
+   */
+  ChcDeployExtraConfig?: ChcDeployExtraConfig
 }
 
 /**
@@ -2592,7 +2562,28 @@ IMPORTFAILED-导入失败
 /**
  * chc部署网络minos引导配置。
  */
-export type ChcDeployExtraConfig = null
+export interface ChcDeployExtraConfig {
+  /**
+   * minos类型。是使用腾讯云的minios，还是客户自己的minios。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MiniOsType: string
+  /**
+   * 服务器的架构和启动方式。取值为x86_legacy, arm_uefi。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BootType: string
+  /**
+   * PXE使用的引导文件。默认为pxelinux.0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BootFile?: string
+  /**
+   * tftp服务器的ip地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextServerAddress?: string
+}
 
 /**
  * DescribeDisasterRecoverGroupQuota返回参数结构体
@@ -2672,24 +2663,6 @@ export interface DescribeChcDeniedActionsRequest {
 }
 
 /**
- * DescribeReservedInstances返回参数结构体
- */
-export interface DescribeReservedInstancesResponse {
-  /**
-   * 符合条件的预留实例计费数量。
-   */
-  TotalCount?: number
-  /**
-   * 符合条件的预留实例计费列表。
-   */
-  ReservedInstancesSet?: Array<ReservedInstances>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeImportImageOs返回参数结构体
  */
 export interface DescribeImportImageOsResponse {
@@ -2708,29 +2681,13 @@ export interface DescribeImportImageOsResponse {
 }
 
 /**
- * InquirePricePurchaseReservedInstancesOffering请求参数结构体
+ * ModifyKeyPairAttribute返回参数结构体
  */
-export interface InquirePricePurchaseReservedInstancesOfferingRequest {
+export interface ModifyKeyPairAttributeResponse {
   /**
-   * 购买预留实例计费数量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceCount: number
-  /**
-   * 预留实例计费配置ID
-   */
-  ReservedInstancesOfferingId: string
-  /**
-   * 试运行
-   */
-  DryRun?: boolean
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
-   */
-  ClientToken?: string
-  /**
-   * 预留实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>最多支持60个字符（包含模式串）。</li>
-   */
-  ReservedInstanceName?: string
+  RequestId?: string
 }
 
 /**
@@ -2892,43 +2849,31 @@ export interface DescribeKeyPairsRequest {
  */
 export interface OperationCountLimit {
   /**
-   * 实例操作。取值范围：<br><li>`INSTANCE_DEGRADE`：降配操作<br><li>`INTERNET_CHARGE_TYPE_CHANGE`：修改网络带宽计费模式
+   * 实例操作。取值范围：<br><li>`INSTANCE_DEGRADE`：降配操作</li><li>`INTERNET_CHARGE_TYPE_CHANGE`：修改网络带宽计费模式</li>
    */
-  Operation: string
+  Operation?: string
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 当前已使用次数，如果返回值为-1表示该操作无次数限制。
    */
-  CurrentCount: number
+  CurrentCount?: number
   /**
    * 操作次数最高额度，如果返回值为-1表示该操作无次数限制，如果返回值为0表示不支持调整配置。
    */
-  LimitCount: number
+  LimitCount?: number
 }
 
 /**
- * 预留实例静态配置信息。预留实例当前只针对国际站白名单用户开放。
+ * 描述了 “云自动化助手” 服务相关的信息
  */
-export interface ReservedInstanceConfigInfoItem {
+export interface RunAutomationServiceEnabled {
   /**
-   * 实例规格。
+   * 是否开启云自动化助手。取值范围：<br><li>true：表示开启云自动化助手服务<br><li>false：表示不开启云自动化助手服务<br><br>默认取值：false。
    */
-  Type: string
-  /**
-   * 实例规格名称。
-   */
-  TypeName: string
-  /**
-   * 优先级。
-   */
-  Order: number
-  /**
-   * 实例族信息列表。
-   */
-  InstanceFamilies: Array<ReservedInstanceFamilyItem>
+  Enabled?: boolean
 }
 
 /**
@@ -3157,15 +3102,15 @@ export interface OsVersion {
   /**
    * 操作系统类型
    */
-  OsName: string
+  OsName?: string
   /**
    * 支持的操作系统版本
    */
-  OsVersions: Array<string>
+  OsVersions?: Array<string>
   /**
    * 支持的操作系统架构
    */
-  Architecture: Array<string>
+  Architecture?: Array<string>
 }
 
 /**
@@ -3636,70 +3581,6 @@ export interface DescribeInstanceVncUrlResponse {
 }
 
 /**
- * DescribeReservedInstancesOfferings请求参数结构体
- */
-export interface DescribeReservedInstancesOfferingsRequest {
-  /**
-   * 试运行, 默认为 false。
-   */
-  DryRun?: boolean
-  /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Limit?: number
-  /**
-   * 以最大有效期作为过滤参数。
-计量单位: 秒
-默认为 94608000。
-   */
-  MaxDuration?: number
-  /**
-   * 以最小有效期作为过滤参数。
-计量单位: 秒
-默认为 2592000。
-   */
-  MinDuration?: number
-  /**
-   * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>duration</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
-<li><strong>instance-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
-<li><strong>offering-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
-<li><strong>product-description</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
-<li><strong>reserved-instances-offering-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例计费配置ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 预留实例相关实例族信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstanceFamilyItem {
-  /**
-   * 实例族。
-   */
-  InstanceFamily: string
-  /**
-   * 优先级。
-   */
-  Order: number
-  /**
-   * 实例类型信息列表。
-   */
-  InstanceTypes: Array<ReservedInstanceTypeItem>
-}
-
-/**
  * DescribeInternetChargeTypeConfigs请求参数结构体
  */
 export type DescribeInternetChargeTypeConfigsRequest = null
@@ -3934,33 +3815,6 @@ false（默认）：发送正常请求，通过检查后直接创建实例。
 }
 
 /**
- * DescribeReservedInstancesConfigInfos请求参数结构体
- */
-export interface DescribeReservedInstancesConfigInfosRequest {
-  /**
-   * zone
-按照预留实例计费可购买的可用区进行过滤。形如：ap-guangzhou-1。
-类型：String
-必选：否
-可选项：各地域可用区列表
-
-product-description
-按照预留实例计费的平台描述（即操作系统）进行过滤。形如：linux。
-类型：String
-必选：否
-可选项：linux
-
-duration
-按照预留实例计费有效期，即预留实例计费购买时长进行过滤。形如：31536000。
-类型：Integer
-计量单位：秒
-必选：否
-可选项：31536000 (1年)
-   */
-  Filters?: Array<Filter>
-}
-
-/**
  * InquiryPriceResetInstance请求参数结构体
  */
 export interface InquiryPriceResetInstanceRequest {
@@ -4039,11 +3893,11 @@ export interface InstanceFamilyConfig {
   /**
    * 机型族名称的中文全称。
    */
-  InstanceFamilyName: string
+  InstanceFamilyName?: string
   /**
    * 机型族名称的英文简称。
    */
-  InstanceFamily: string
+  InstanceFamily?: string
 }
 
 /**
@@ -4167,6 +4021,10 @@ export interface ConfigureChcAssistVpcRequest {
    * 部署网络的安全组列表
    */
   DeploySecurityGroupIds?: Array<string>
+  /**
+   * 部署网络的附加参数，用于指定minios类型、bios引导模式等
+   */
+  ChcDeployExtraConfig?: ChcDeployExtraConfig
 }
 
 /**
@@ -4671,16 +4529,6 @@ export interface AccountQuotaOverview {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
- */
-export interface RunAutomationServiceEnabled {
-  /**
-   * 是否开启云自动化助手。取值范围：<br><li>true：表示开启云自动化助手服务<br><li>false：表示不开启云自动化助手服务<br><br>默认取值：false。
-   */
-  Enabled?: boolean
-}
-
-/**
  * DescribeZoneInstanceConfigInfos请求参数结构体
  */
 export interface DescribeZoneInstanceConfigInfosRequest {
@@ -4951,74 +4799,12 @@ export interface ImageOsList {
    * 支持的Windows操作系统。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Windows: Array<string>
+  Windows?: Array<string>
   /**
    * 支持的Linux操作系统
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Linux: Array<string>
-}
-
-/**
- * 预留实例类型信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstanceTypeItem {
-  /**
-   * 实例类型。
-   */
-  InstanceType: string
-  /**
-   * CPU核数。
-   */
-  Cpu: number
-  /**
-   * 内存大小。
-   */
-  Memory: number
-  /**
-   * GPU数量。
-   */
-  Gpu: number
-  /**
-   * FPGA数量。
-   */
-  Fpga: number
-  /**
-   * 本地存储块数量。
-   */
-  StorageBlock: number
-  /**
-   * 网卡数。
-   */
-  NetworkCard: number
-  /**
-   * 最大带宽。
-   */
-  MaxBandwidth: number
-  /**
-   * 主频。
-   */
-  Frequency: string
-  /**
-   * CPU型号名称。
-   */
-  CpuModelName: string
-  /**
-   * 包转发率。
-   */
-  Pps: number
-  /**
-   * 外部信息。
-   */
-  Externals: Externals
-  /**
-   * 备注信息。
-   */
-  Remark: string
-  /**
-   * 预留实例配置价格信息。
-   */
-  Prices: Array<ReservedInstancePriceItem>
+  Linux?: Array<string>
 }
 
 /**
@@ -5124,42 +4910,33 @@ export interface DescribeAccountQuotaRequest {
 }
 
 /**
- * DescribeReservedInstances请求参数结构体
+ * ModifyChcAttribute请求参数结构体
  */
-export interface DescribeReservedInstancesRequest {
+export interface ModifyChcAttributeRequest {
   /**
-   * 试运行。默认为 false。
+   * CHC物理服务器ID。
    */
-  DryRun?: boolean
+  ChcIds: Array<string>
   /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * CHC物理服务器名称
    */
-  Offset?: number
+  InstanceName?: string
   /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 服务器类型
    */
-  Limit?: number
+  DeviceType?: string
   /**
-   * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>duration</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
-<li><strong>instance-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例规格</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例规格列表</a></p>
-<li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">按照【<strong>预留实例类型</strong>】进行过滤。形如：S3。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例类型列表</a></p>
-<li><strong>offering-type</strong></li>
-<li><strong>offering-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (全预付)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (全预付) | Partial Upfront (部分预付) | No Upfront (零预付)</p>
-<li><strong>product-description</strong></li>
-<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
-<li><strong>reserved-instances-id</strong></li>
-<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>state</strong></li>
-<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费状态</strong>】进行过滤。形如：active。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：active (已创建) | pending (等待被创建) | retired (过期)</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+   * 合法字符为字母,数字, 横线和下划线
    */
-  Filters?: Array<Filter>
+  BmcUser?: string
+  /**
+   * 密码8-16位字符, 允许数字，字母， 和特殊字符()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
+   */
+  Password?: string
+  /**
+   * bmc网络的安全组列表
+   */
+  BmcSecurityGroupIds?: Array<string>
 }
 
 /**
@@ -5236,95 +5013,11 @@ export interface SharePermission {
   /**
    * 镜像分享时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 镜像分享的账户ID
    */
-  AccountId: string
-}
-
-/**
- * 描述用户已购买预留实例计费信息
- */
-export interface ReservedInstances {
-  /**
-   * （此字段已废弃，建议使用字段：ReservedInstanceId）已购买的预留实例计费ID。形如：ri-rtbh4han。
-   */
-  ReservedInstancesId: string
-  /**
-   * 预留实例计费的规格。形如：S3.MEDIUM4。
-返回项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费规格列表</a>
-   */
-  InstanceType: string
-  /**
-   * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
-返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
-   */
-  Zone: string
-  /**
-   * 预留实例计费开始时间。形如：1949-10-01 00:00:00
-   */
-  StartTime: string
-  /**
-   * 预留实例计费到期时间。形如：1949-10-01 00:00:00
-   */
-  EndTime: string
-  /**
-   * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
-计量单位：秒。
-   */
-  Duration: number
-  /**
-   * 已购买的预留实例计费个数。形如：10。
-   */
-  InstanceCount: number
-  /**
-   * 描述预留实例计费的平台描述（即操作系统）。形如：linux。
-返回项： linux 。
-   */
-  ProductDescription: string
-  /**
-   * 预留实例计费购买的状态。形如：active
-返回项： active (以创建) | pending (等待被创建) | retired (过期)。
-   */
-  State: string
-  /**
-   * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。形如：USD。
-返回项：USD（美元）。
-   */
-  CurrencyCode: string
-  /**
-   * 预留实例计费的付款类型。形如：All Upfront。
-返回项： All Upfront (预付全部费用)。
-   */
-  OfferingType: string
-  /**
-   * 预留实例计费的类型。形如：S3。
-返回项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a>
-   */
-  InstanceFamily: string
-  /**
-   * 已购买的预留实例计费ID。形如：ri-rtbh4han。
-   */
-  ReservedInstanceId: string
-  /**
-   * 预留实例显示名称。形如：riname-01
-   */
-  ReservedInstanceName: string
-}
-
-/**
- * PurchaseReservedInstancesOffering返回参数结构体
- */
-export interface PurchaseReservedInstancesOfferingResponse {
-  /**
-   * 已购买预留实例计费ID
-   */
-  ReservedInstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AccountId?: string
 }
 
 /**
@@ -5359,50 +5052,6 @@ export interface ModifyDisasterRecoverGroupAttributeRequest {
    * 分散置放群组名称，长度1-60个字符，支持中、英文。
    */
   Name: string
-}
-
-/**
- * 基于付费类型的预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
- */
-export interface ReservedInstancePriceItem {
-  /**
-   * 付费类型，如："All Upfront","Partial Upfront","No Upfront"
-   */
-  OfferingType?: string
-  /**
-   * 预支合计费用，单位：元。
-   */
-  FixedPrice?: number
-  /**
-   * 后续合计费用，单位：元/小时
-   */
-  UsagePrice?: number
-  /**
-   * 预留实例配置ID
-   */
-  ReservedInstancesOfferingId?: string
-  /**
-   * 预留实例计费可购买的可用区。
-   */
-  Zone?: string
-  /**
-   * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
-计量单位：秒
-   */
-  Duration?: number
-  /**
-   * 预留实例计费的平台描述（即操作系统）。形如：Linux。
-返回项： Linux 。
-   */
-  ProductDescription?: string
-  /**
-   * 预支合计费用，单位：元。
-   */
-  DiscountUsagePrice?: number
-  /**
-   * 后续合计费用的折扣价，单位：元/小时
-   */
-  DiscountFixedPrice?: number
 }
 
 /**
@@ -5446,6 +5095,8 @@ export interface DescribeChcHostsRequest {
 <p style="padding-left: 30px;">按照【<strong>私有网络唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>subnet-id</strong></li>
 <p style="padding-left: 30px;">按照【<strong>私有子网唯一ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>sn</strong></li>
+<p style="padding-left: 30px;">按照【<strong>设备SN</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
    */
   Filters?: Array<Filter>
   /**
@@ -5512,57 +5163,6 @@ export interface DeleteHpcClustersRequest {
    * 高性能计算集群ID列表。
    */
   HpcClusterIds: Array<string>
-}
-
-/**
- * 描述可购买预留实例计费信息
- */
-export interface ReservedInstancesOffering {
-  /**
-   * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
-返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
-   */
-  Zone: string
-  /**
-   * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。
-返回项：USD（美元）。
-   */
-  CurrencyCode: string
-  /**
-   * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
-计量单位：秒
-   */
-  Duration: number
-  /**
-   * 预留实例计费的购买价格。形如：4000.0。
-计量单位：与 currencyCode 一致，目前支持 USD（美元）
-   */
-  FixedPrice: number
-  /**
-   * 预留实例计费的实例类型。形如：S3.MEDIUM4。
-返回项：<a href="https://cloud.tencent.com/product/cvm/instances">预留实例计费类型列表</a>
-   */
-  InstanceType: string
-  /**
-   * 预留实例计费的付款类型。形如：All Upfront。
-返回项： All Upfront (预付全部费用)。
-   */
-  OfferingType: string
-  /**
-   * 可购买的预留实例计费配置ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
-   */
-  ReservedInstancesOfferingId: string
-  /**
-   * 预留实例计费的平台描述（即操作系统）。形如：linux。
-返回项： linux 。
-   */
-  ProductDescription: string
-  /**
-   * 扣除预付费之后的使用价格 (按小时计费)。形如：0.0。
-目前，因为只支持 All Upfront 付款类型，所以默认为 0元/小时。
-计量单位：元/小时，货币单位与 currencyCode 一致，目前支持 USD（美元）
-   */
-  UsagePrice: number
 }
 
 /**
@@ -5647,24 +5247,6 @@ export interface GPUInfo {
 }
 
 /**
- * DescribeReservedInstancesOfferings返回参数结构体
- */
-export interface DescribeReservedInstancesOfferingsResponse {
-  /**
-   * 符合条件的预留实例计费数量。
-   */
-  TotalCount?: number
-  /**
-   * 符合条件的预留实例计费列表。
-   */
-  ReservedInstancesOfferingsSet?: Array<ReservedInstancesOffering>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 描述退款详情。
  */
 export interface InstanceRefund {
@@ -5707,30 +5289,19 @@ export interface DescribeInstanceTypeConfigsRequest {
 export interface RegionInfo {
   /**
    * 地域名称，例如，ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 地域描述，例如，华南地区(广州)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域是否可用状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionState: string
-}
-
-/**
- * DescribeReservedInstancesConfigInfos返回参数结构体
- */
-export interface DescribeReservedInstancesConfigInfosResponse {
-  /**
-   * 预留实例静态配置信息列表。
-   */
-  ReservedInstanceConfigInfos?: Array<ReservedInstanceConfigInfoItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RegionState?: string
 }
 
 /**
@@ -5876,17 +5447,17 @@ export interface LoginSettings {
 }
 
 /**
- * InquirePricePurchaseReservedInstancesOffering返回参数结构体
+ * ModifyInstancesRenewFlag请求参数结构体
  */
-export interface InquirePricePurchaseReservedInstancesOfferingResponse {
+export interface ModifyInstancesRenewFlagRequest {
   /**
-   * 该参数表示对应配置预留实例的价格。
+   * 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
    */
-  Price?: ReservedInstancePrice
+  InstanceIds: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br>若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
-  RequestId?: string
+  RenewFlag: string
 }
 
 /**
@@ -5939,7 +5510,7 @@ export interface RenewInstancesRequest {
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 是否续费弹性数据盘。取值范围：<br><li>true：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>false：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：true。
+   * 是否续费弹性数据盘。取值范围：<br><li>true：表示续费包年包月实例同时续费其挂载的弹性数据盘</li><li>false：表示续费包年包月实例同时不再续费其挂载的弹性数据盘</li><br>默认取值：true。
    */
   RenewPortableDataDisk?: boolean
 }
@@ -6447,17 +6018,17 @@ export interface Snapshot {
   /**
    * 快照Id。
    */
-  SnapshotId: string
+  SnapshotId?: string
   /**
    * 创建此快照的云硬盘类型。取值范围：
 SYSTEM_DISK：系统盘
 DATA_DISK：数据盘。
    */
-  DiskUsage: string
+  DiskUsage?: string
   /**
    * 创建此快照的云硬盘大小，单位GB。
    */
-  DiskSize: number
+  DiskSize?: number
 }
 
 /**

@@ -10065,6 +10065,22 @@ export interface SegmentRecognitionItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
+  /**
+   * 直播拆条用，音频url。
+   */
+  AudioUrl?: string
+  /**
+   * 直播拆条用，音频对应起始时间戳；
+   */
+  AudioBeginTime?: number
+  /**
+   * 直播拆条用，音频对应结束时间戳。
+   */
+  AudioEndTime?: number
+  /**
+   * 直播拆条用，人物位置参考信息用于横转竖。
+   */
+  PersonPositionUrl?: string
 }
 
 /**

@@ -248,7 +248,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取交易详情
+   * 获取交易的详情
    */
   async GetTransactionDetailForUser(
     req: GetTransactionDetailForUserRequest,
@@ -298,7 +298,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取区块内的交易列表
+   * 获取区块内交易列表
    */
   async GetBlockTransactionListForUser(
     req: GetBlockTransactionListForUserRequest,

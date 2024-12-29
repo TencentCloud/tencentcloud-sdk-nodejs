@@ -4811,6 +4811,30 @@ export interface InstanceStatistic {
 }
 
 /**
+ * 公网IP询价出参
+ */
+export interface InternetPriceDetail {
+  /**
+   * 付费单价，单位：元，仅后付费价格查询返回。
+   */
+  UnitPrice?: number
+  /**
+   * 折扣后的价格，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiscountPrice?: number
+  /**
+   * 计价单元，可取值范围：<ul> <li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeUnit?: string
+  /**
+   * 原价，单位：元，仅预付费价格查询返回。
+   */
+  OriginalPrice?: number
+}
+
+/**
  * CreateVpnConnection请求参数结构体
  */
 export interface CreateVpnConnectionRequest {
@@ -6739,19 +6763,19 @@ export interface CustomerGateway {
   /**
    * 用户网关唯一ID
    */
-  CustomerGatewayId: string
+  CustomerGatewayId?: string
   /**
    * 网关名称
    */
-  CustomerGatewayName: string
+  CustomerGatewayName?: string
   /**
    * 公网地址
    */
-  IpAddress: string
+  IpAddress?: string
   /**
    * 创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * BGP ASN。
    */
@@ -7668,6 +7692,16 @@ export interface NetDetectIpState {
 }
 
 /**
+ * 公网询价出参
+ */
+export interface InternetPrice {
+  /**
+   * 公网IP询价详细参数。
+   */
+  AddressPrice?: InternetPriceDetail
+}
+
+/**
  * ModifyIp6AddressesBandwidth返回参数结构体
  */
 export interface ModifyIp6AddressesBandwidthResponse {
@@ -7955,6 +7989,20 @@ export interface ModifyNetworkInterfaceAttributeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InquiryPriceRenewAddresses请求参数结构体
+ */
+export interface InquiryPriceRenewAddressesRequest {
+  /**
+   * 续费资源实例ID。
+   */
+  AddressIds: Array<string>
+  /**
+   * 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递。
+   */
+  AddressChargePrepaid: AddressChargePrepaid
 }
 
 /**
@@ -10216,6 +10264,20 @@ export interface ModifySnapshotPoliciesResponse {
 }
 
 /**
+ * InquiryPriceRenewAddresses返回参数结构体
+ */
+export interface InquiryPriceRenewAddressesResponse {
+  /**
+   * 弹性公网IP续费价格。
+   */
+  Price?: InternetPrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReplaceCcnRouteTableInputPolicys返回参数结构体
  */
 export interface ReplaceCcnRouteTableInputPolicysResponse {
@@ -10703,6 +10765,20 @@ export interface DescribeDhcpIpsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnassignIpv6CidrBlock请求参数结构体
+ */
+export interface UnassignIpv6CidrBlockRequest {
+  /**
+   * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+   */
+  VpcId: string
+  /**
+   * `IPv6`网段。形如：`3402:4e00:20:1000::/56`。
+   */
+  Ipv6CidrBlock?: string
 }
 
 /**
@@ -13017,6 +13093,20 @@ export interface CreateNetDetectResponse {
 }
 
 /**
+ * InquiryPriceAllocateAddresses返回参数结构体
+ */
+export interface InquiryPriceAllocateAddressesResponse {
+  /**
+   * 弹性公网IP价格
+   */
+  Price?: InternetPrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCcn请求参数结构体
  */
 export interface DeleteCcnRequest {
@@ -13517,6 +13607,20 @@ export interface SnapshotPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSet?: Array<Tag>
+}
+
+/**
+ * InquiryPriceModifyAddressesBandwidth返回参数结构体
+ */
+export interface InquiryPriceModifyAddressesBandwidthResponse {
+  /**
+   * 弹性公网IP调整带宽询价结果
+   */
+  Price?: InternetPrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14528,17 +14632,42 @@ export interface DeleteVpcEndPointRequest {
 }
 
 /**
- * UnassignIpv6CidrBlock请求参数结构体
+ * InquiryPriceAllocateAddresses请求参数结构体
  */
-export interface UnassignIpv6CidrBlockRequest {
+export interface InquiryPriceAllocateAddressesRequest {
   /**
-   * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+   * EIP计费方式。
+<ul style="margin:0"><li>账号为标准账户类型的用户，可选值：<ul>
+<li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费</li>
+<li>BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费</li>
+<li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费</li></ul>默认值：TRAFFIC_POSTPAID_BY_HOUR。</li>
+</ul>
    */
-  VpcId: string
+  InternetChargeType?: string
   /**
-   * `IPv6`网段。形如：`3402:4e00:20:1000::/56`。
+   * EIP出带宽上限，单位：Mbps。
+<ul style="margin:0"><li>账号为标准账户类型的用户，可选值范围取决于EIP计费方式：<ul>
+<li>BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li>
+<li>BANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 Mbps</li>
+<li>TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li></ul>默认值：1 Mbps。</li>
+<li>账号为传统账户类型的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。</li></ul>
    */
-  Ipv6CidrBlock?: string
+  InternetMaxBandwidthOut?: number
+  /**
+   * 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递
+   */
+  AddressChargePrepaid?: AddressChargePrepaid
+  /**
+   * EIP类型。默认值：EIP。
+
+<ul style="margin:0"><li>精品IP，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul><ul style="margin:0">
+        <li>高防IP，可选值：<ul>
+                <li>AntiDDoSEIP：高防IP</li>
+            </ul>
+        </li>
+    </ul>
+   */
+  AddressType?: string
 }
 
 /**
@@ -18481,6 +18610,20 @@ export interface DeleteVpcResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InquiryPriceModifyAddressesBandwidth请求参数结构体
+ */
+export interface InquiryPriceModifyAddressesBandwidthRequest {
+  /**
+   * EIP唯一ID
+   */
+  AddressIds: Array<string>
+  /**
+   * 新带宽值
+   */
+  InternetMaxBandwidthOut: number
 }
 
 /**

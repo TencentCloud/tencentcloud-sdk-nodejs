@@ -458,32 +458,32 @@ export interface ProxyAccessInfo {
    * 地域ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 地域名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 通道ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyId: string
+  ProxyId?: string
   /**
    * 通道接入ip
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vip: string
+  Vip?: string
   /**
    * 三网通道VIP列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VipList: Array<IPDetail>
+  VipList?: Array<IPDetail>
   /**
    * 接入点IDC类型。ec或dc
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceRegionIdcType: string
+  SourceRegionIdcType?: string
 }
 
 /**
@@ -527,11 +527,11 @@ export interface DescribeResourcesByTagResponse {
   /**
    * 资源总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 标签对应的资源列表
    */
-  ResourceSet: Array<TagResourceInfo>
+  ResourceSet?: Array<TagResourceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -929,7 +929,7 @@ export interface CreateRuleResponse {
   /**
    * 创建转发规则成功返回规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1408,7 +1408,7 @@ export interface CreateHTTPListenerResponse {
   /**
    * 创建的监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2092,7 +2092,7 @@ export interface CreateSecurityPolicyResponse {
   /**
    * 安全策略ID
    */
-  PolicyId: string
+  PolicyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2356,55 +2356,55 @@ export interface Domain {
   /**
    * 域名ID
    */
-  DomainId: string
+  DomainId?: string
   /**
    * 完整域名记录
    */
-  FullDomain: string
+  FullDomain?: string
   /**
    * 别名
    */
-  Alias: string
+  Alias?: string
   /**
    * 类型
    */
-  Type: string
+  Type?: string
   /**
    * 状态，1表示关闭，0表示开启，2表示关闭中，3表示开启中
    */
-  Status: number
+  Status?: number
   /**
    * 所属项目
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 默认入口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 通道数量
    */
-  ProxyCount: number
+  ProxyCount?: number
   /**
    * 创建时间，使用UNIX时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间，使用UNIX时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagSet: Array<TagPair>
+  TagSet?: Array<TagPair>
   /**
    * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BanStatus: string
+  BanStatus?: string
 }
 
 /**
@@ -3119,7 +3119,7 @@ export interface DescribeProxiesStatusResponse {
   /**
    * 通道状态列表。
    */
-  InstanceStatusSet: Array<ProxyStatus>
+  InstanceStatusSet?: Array<ProxyStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3559,11 +3559,11 @@ export interface CloseProxiesResponse {
   /**
    * 非运行状态下的通道实例ID列表，不可开启。
    */
-  InvalidStatusInstanceSet: Array<string>
+  InvalidStatusInstanceSet?: Array<string>
   /**
    * 开启操作失败的通道实例ID列表。
    */
-  OperationFailedInstanceSet: Array<string>
+  OperationFailedInstanceSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4063,11 +4063,11 @@ export interface DescribeRealServerStatisticsResponse {
   /**
    * 指定监听器的源站状态统计数据
    */
-  StatisticsData: Array<StatisticsDataInfo>
+  StatisticsData?: Array<StatisticsDataInfo>
   /**
    * 多个源站状态统计数据
    */
-  RsStatisticsData: Array<MetricStatisticsInfo>
+  RsStatisticsData?: Array<MetricStatisticsInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4283,34 +4283,34 @@ export interface SecurityPolicyRuleOut {
   /**
    * 策略：允许（ACCEPT）或拒绝（DROP）
    */
-  Action: string
+  Action?: string
   /**
    * 请求来源Ip或Ip段
    */
-  SourceCidr: string
+  SourceCidr?: string
   /**
    * 规则别名
    */
-  AliasName: string
+  AliasName?: string
   /**
    * 目标端口范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DestPortRange: string
+  DestPortRange?: string
   /**
    * 规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 要匹配的协议类型（TCP/UDP）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 安全策略ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyId: string
+  PolicyId?: string
 }
 
 /**
@@ -4340,15 +4340,15 @@ export interface BindRealServer {
   /**
    * 源站ID
    */
-  RealServerId: string
+  RealServerId?: string
   /**
    * 源站IP或者域名
    */
-  RealServerIP: string
+  RealServerIP?: string
   /**
    * 该源站所占权重
    */
-  RealServerWeight: number
+  RealServerWeight?: number
   /**
    * 源站健康检查状态，其中：
 0表示正常；
@@ -4356,20 +4356,20 @@ export interface BindRealServer {
 未开启健康检查状态时，该状态始终为正常。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerStatus: number
+  RealServerStatus?: number
   /**
    * 源站的端口号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealServerPort: number
+  RealServerPort?: number
   /**
    * 当源站为域名时，域名被解析成一个或者多个IP，该字段表示其中异常的IP列表。状态异常，但该字段为空时，表示域名解析异常。
    */
-  DownIPList: Array<string>
+  DownIPList?: Array<string>
   /**
    * 源站主备角色：master表示主，slave表示备，该参数必须在监听器打开了源站主备模式。
    */
-  RealServerFailoverRole: string
+  RealServerFailoverRole?: string
 }
 
 /**
@@ -4425,7 +4425,7 @@ export interface CreateHTTPSListenerResponse {
   /**
    * 创建的监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5042,11 +5042,11 @@ export interface DescribeRealServersStatusResponse {
   /**
    * 返回源站查询结果的个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 源站被绑定状态列表
    */
-  RealServerStatusSet: Array<RealServerStatus>
+  RealServerStatusSet?: Array<RealServerStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5088,11 +5088,11 @@ export interface CloseProxyGroupResponse {
   /**
    * 非运行状态下的通道实例ID列表，不可开启。
    */
-  InvalidStatusInstanceSet: Array<string>
+  InvalidStatusInstanceSet?: Array<string>
   /**
    * 开启操作失败的通道实例ID列表。
    */
-  OperationFailedInstanceSet: Array<string>
+  OperationFailedInstanceSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5350,11 +5350,11 @@ export interface OpenProxyGroupResponse {
   /**
    * 非关闭状态下的通道实例ID列表，不可开启。
    */
-  InvalidStatusInstanceSet: Array<string>
+  InvalidStatusInstanceSet?: Array<string>
   /**
    * 开启操作失败的通道实例ID列表。
    */
-  OperationFailedInstanceSet: Array<string>
+  OperationFailedInstanceSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5406,11 +5406,11 @@ export interface NationCountryInnerInfo {
   /**
    * 国家名
    */
-  NationCountryName: string
+  NationCountryName?: string
   /**
    * 国家内部编码
    */
-  NationCountryInnerCode: string
+  NationCountryInnerCode?: string
 }
 
 /**
@@ -6016,11 +6016,11 @@ export interface OpenProxiesResponse {
   /**
    * 非关闭状态下的通道实例ID列表，不可开启。
    */
-  InvalidStatusInstanceSet: Array<string>
+  InvalidStatusInstanceSet?: Array<string>
   /**
    * 开启操作失败的通道实例ID列表。
    */
-  OperationFailedInstanceSet: Array<string>
+  OperationFailedInstanceSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

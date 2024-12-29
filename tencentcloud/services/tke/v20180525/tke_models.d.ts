@@ -498,6 +498,10 @@ export interface Addon {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
+    /**
+     * addon的创建时间
+     */
+    CreateTime?: string;
 }
 /**
  * opa策略信息
@@ -8736,22 +8740,22 @@ export interface Switch {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 审计开关的详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Audit: SwitchInfo;
+    Audit?: SwitchInfo;
     /**
      * 事件开关的详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Event: SwitchInfo;
+    Event?: SwitchInfo;
     /**
      * 普通日志的详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Log: SwitchInfo;
+    Log?: SwitchInfo;
     /**
      * master 日志详细信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -9000,11 +9004,11 @@ export interface DeleteClusterRouteTableResponse {
  */
 export interface DescribeAddonValuesResponse {
     /**
-     * 参数列表，如果addon已安装，会使用已设置的参数做渲染，是一个json格式的字符串
+     * 参数列表，如果addon已安装，会使用已设置的参数和chart里的默认参数做渲染，是一个json格式的字符串，未安装addon时返回为空值。
      */
     Values?: string;
     /**
-     * addon支持的参数列表，使用默认值，是一个json格式的字符串
+     * addon支持的参数列表，值为chart的默认值，是一个json格式的字符串。
      */
     DefaultValues?: string;
     /**
@@ -12763,7 +12767,7 @@ export interface DeletePrometheusRecordRuleYamlRequest {
  */
 export interface InstallAddonRequest {
     /**
-     * 集群ID
+     * 集群ID（仅支持标准tke集群）
      */
     ClusterId: string;
     /**

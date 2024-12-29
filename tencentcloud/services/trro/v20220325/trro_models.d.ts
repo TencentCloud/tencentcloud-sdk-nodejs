@@ -107,23 +107,23 @@ export interface DescribePolicyResponse {
     /**
      * 权限模式
      */
-    PolicyMode: string;
+    PolicyMode?: string;
     /**
      * 返回的权限模式是否为当前生效的权限模式
      */
-    PolicyEnabled: boolean;
+    PolicyEnabled?: boolean;
     /**
      * 权限信息列表
      */
-    PolicyInfo: Array<PolicyInfo>;
+    PolicyInfo?: Array<PolicyInfo>;
     /**
      * 本次返回的权限信息数量
      */
-    Num: number;
+    Num?: number;
     /**
      * 权限信息总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -551,15 +551,15 @@ export interface DescribeRecentSessionListResponse {
     /**
      * 总个数
      */
-    Total: number;
+    Total?: number;
     /**
      * 会话列表
      */
-    RecentSessionList: Array<RecentSessionInfo>;
+    RecentSessionList?: Array<RecentSessionInfo>;
     /**
      * 本页数量
      */
-    Num: number;
+    Num?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -648,15 +648,15 @@ export interface DescribeDeviceSessionListResponse {
     /**
      * 总个数
      */
-    Total: number;
+    Total?: number;
     /**
      * 会话列表
      */
-    DeviceSessionList: Array<SessionInfo>;
+    DeviceSessionList?: Array<SessionInfo>;
     /**
      * 本页数量
      */
-    Num: number;
+    Num?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

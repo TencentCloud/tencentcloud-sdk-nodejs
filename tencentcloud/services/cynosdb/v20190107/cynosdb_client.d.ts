@@ -164,7 +164,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterInstanceGrps(req: DescribeClusterInstanceGrpsRequest, cb?: (error: string, rep: DescribeClusterInstanceGrpsResponse) => void): Promise<DescribeClusterInstanceGrpsResponse>;
     /**
-     * 本接口(DescribeIsolatedInstances)用于查询回收站实例列表。
+     * 本接口（DescribeIsolatedInstances）用于查询回收站实例列表。
      */
     DescribeIsolatedInstances(req: DescribeIsolatedInstancesRequest, cb?: (error: string, rep: DescribeIsolatedInstancesResponse) => void): Promise<DescribeIsolatedInstancesResponse>;
     /**
@@ -388,7 +388,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeServerlessInstanceSpecs(req: DescribeServerlessInstanceSpecsRequest, cb?: (error: string, rep: DescribeServerlessInstanceSpecsResponse) => void): Promise<DescribeServerlessInstanceSpecsResponse>;
     /**
-     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     * 本接口（DescribeAuditLogs）用于查询数据库审计日志。
      */
     DescribeAuditLogs(req: DescribeAuditLogsRequest, cb?: (error: string, rep: DescribeAuditLogsResponse) => void): Promise<DescribeAuditLogsResponse>;
     /**
@@ -492,7 +492,7 @@ export declare class Client extends AbstractClient {
      */
     OpenAuditService(req: OpenAuditServiceRequest, cb?: (error: string, rep: OpenAuditServiceResponse) => void): Promise<OpenAuditServiceResponse>;
     /**
-     * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
+     * 本接口（DeleteAuditLogFile）用于删除云数据库实例的审计日志文件。
      */
     DeleteAuditLogFile(req: DeleteAuditLogFileRequest, cb?: (error: string, rep: DeleteAuditLogFileResponse) => void): Promise<DeleteAuditLogFileResponse>;
     /**

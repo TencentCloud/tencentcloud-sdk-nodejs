@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerDemoContract", req, cb);
     }
     /**
-     * 获取交易详情
+     * 获取交易的详情
      */
     async GetTransactionDetailForUser(req, cb) {
         return this.request("GetTransactionDetailForUser", req, cb);
@@ -154,7 +154,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeChainMakerDemoContract", req, cb);
     }
     /**
-     * 获取区块内的交易列表
+     * 获取区块内交易列表
      */
     async GetBlockTransactionListForUser(req, cb) {
         return this.request("GetBlockTransactionListForUser", req, cb);

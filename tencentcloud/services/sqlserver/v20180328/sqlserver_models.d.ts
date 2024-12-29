@@ -169,12 +169,10 @@ export interface CreateBusinessDBInstancesResponse {
     DealName?: string;
     /**
      * 流程ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowId?: number;
     /**
      * 实例ID集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIdSet?: Array<string>;
     /**
@@ -218,7 +216,6 @@ export interface DescribeDatabasesNormalRequest {
 export interface DescribeInquiryPriceParameterResponse {
     /**
      * 计费参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Parameter?: string;
     /**
@@ -479,17 +476,14 @@ export interface SSLConfig {
   disable_doing-关闭中
   renew_doing-更新中
   wait_doing-等待维护时间内执行
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Encryption?: string;
     /**
      * SSL证书有效期，时间格式 YYYY-MM-DD HH:MM:SS
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SSLValidityPeriod?: string;
     /**
      * SSL证书有效性，0-无效，1-有效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SSLValidity?: number;
     /**
@@ -713,7 +707,6 @@ export interface SpecInfo {
     Pid?: number;
     /**
      * 此规格对应的按量计费Pid列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PostPid?: Array<number | bigint>;
     /**
@@ -978,6 +971,10 @@ export interface AccountPassword {
      * 密码
      */
     Password: string;
+    /**
+     * 加密密钥版本号，0表示不使用加密
+     */
+    EncryptedVersion?: number;
 }
 /**
  * DeleteAccount请求参数结构体
@@ -1819,35 +1816,54 @@ export interface RollbackInstanceRequest {
  */
 export interface DrReadableInfo {
     /**
-     * 备机状态，enable-运行中，disable-不可用
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 备机资源ID
+     */
+    DrInstanceId?: string;
+    /**
+     * 备机可用区
+     */
+    Zone?: string;
+    /**
+     * 备机状态
+  DR_CREATING-备机创建中
+  DR_RUNNING-备机运行中
+  DR_UNAVAILABLE-备机不可用
+  DR_ISOLATED-备机已隔离
+  DR_RECYCLING-备机回收中
+  DR_RECYCLED-备机已回收
+  DR_JOB_RUNNING-备机执行任务中
+  DR_OFFLINE-备机已下线
+  DR_FAIL_OVER-备机只读故障转移中
      */
     SlaveStatus?: string;
     /**
      * 备机可读状态，enable-已开启，disable-已关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadableStatus?: string;
     /**
      * 备机只读vip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * 备机只读端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VPort?: number;
     /**
      * 备机所在私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 备机所在私有网络子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
+    /**
+     * 备机只读权重
+     */
+    RoWeight?: number;
+    /**
+     * 备机只读模式，BalancedReadOnly-多备一读模式，SingleReadOnly-一备一读模式
+     */
+    ReadMode?: string;
 }
 /**
  * DescribeRollbackTime请求参数结构体
@@ -1923,7 +1939,6 @@ export interface TDEConfigAttribute {
     CertificateAttribution?: string;
     /**
      * 开通TDE加密时引用的其他主账号ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QuoteUin?: string;
     /**
@@ -2080,11 +2095,15 @@ export interface SlaveZones {
     /**
      * 备可用区地域码
      */
-    SlaveZone: string;
+    SlaveZone?: string;
     /**
      * 备可用区
      */
-    SlaveZoneName: string;
+    SlaveZoneName?: string;
+    /**
+     * 备机资源ID
+     */
+    DrInstanceId?: string;
 }
 /**
  * DescribeBackupUploadSize请求参数结构体
@@ -2277,7 +2296,6 @@ export interface ModifyDatabaseShrinkMDFRequest {
 export interface DescribeInstanceTradeParameterResponse {
     /**
      * 计费参数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Parameter?: string;
     /**
@@ -2941,30 +2959,29 @@ export interface DBPrivilegeModifyInfo {
 export interface CheckItem {
     /**
      * 检查项目名称，CK_CPU-变配后CPU风险检查；CK_MASTER_STORAGE-只读副本变配下，只读副本磁盘空间不小于主实例空间检查；CK_MEMORY-变配后内存风险检查；CK_STORAGE-变配后磁盘空间风险检查；CK_UPGRATE-变配是否需要迁移检查；
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckName: string;
+    CheckName?: string;
     /**
      * 检查项目返回值，CK_CPU-当前CPU近7天最大的使用率(%) ；CK_MASTER_STORAGE-主实例的磁盘空间(GB)；CK_MEMORY-当前内存近7天最大的使用值（GB)；
   CK_STORAGE-当前磁盘近7天最大的使用值（GB)；CK_UPGRATE- 当前变配检查是否需要迁移，MIGRATE需要迁移变配，LOCAL本地变配；
      */
-    CurrentValue: string;
+    CurrentValue?: string;
     /**
      * 检查条目是否通过 0-不通过，不能变配； 1-通过，可以变配
      */
-    Passed: number;
+    Passed?: number;
     /**
      * 本条目变配是否对实例有影响 0-没有影响 1-有影响
      */
-    IsAffect: number;
+    IsAffect?: number;
     /**
      * 有影响或者不通过的情况下的必要描述
      */
-    Msg: string;
+    Msg?: string;
     /**
      * 描述对应的代码
      */
-    MsgCode: number;
+    MsgCode?: number;
 }
 /**
  * 设置实例扩展事件阈值
@@ -3164,7 +3181,7 @@ export interface DescribeInstanceTradeParameterRequest {
      */
     Storage: number;
     /**
-     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,BI-商业智能服务,cvmHA-新版高可用,cvmRO-新版只读
+     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,BI-商业智能服务,cvmHA-新版高可用,cvmRO-新版只读，MultiHA-多节点，cvmMultiHA-云盘多节点
      */
     InstanceType: string;
     /**
@@ -3235,6 +3252,14 @@ export interface DescribeInstanceTradeParameterRequest {
      * 系统字符集排序规则，默认：Chinese_PRC_CI_AS
      */
     Collation?: string;
+    /**
+     * 是否多节点架构，默认值为false
+     */
+    MultiNodes?: boolean;
+    /**
+     * 备节点可用区，默认为空。如果是多节点架构时必传，并且当MultiZones=true时备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。
+     */
+    DrZones?: Array<string>;
 }
 /**
  * ModifyDatabaseCDC返回参数结构体
@@ -3334,7 +3359,7 @@ export interface DBInstance {
      */
     RenewFlag?: number;
     /**
-     * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
+     * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，6-多节点集群，7-多节点集群跨可用区，9-自研机房
      */
     Model?: number;
     /**
@@ -3383,22 +3408,18 @@ export interface DBInstance {
     UniqSubnetId?: string;
     /**
      * 实例隔离操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsolateOperator?: string;
     /**
      * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubFlag?: string;
     /**
      * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ROFlag?: string;
     /**
      * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HAFlag?: string;
     /**
@@ -3408,12 +3429,10 @@ export interface DBInstance {
     ResourceTags?: Array<ResourceTag>;
     /**
      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupModel?: string;
     /**
      * 实例备份信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceNote?: string;
     /**
@@ -3429,7 +3448,8 @@ export interface DBInstance {
      */
     BackupSaveDays?: number;
     /**
-     * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+     * 实例类型 HA-高可用，RO-只读实例，SI-基础版，BI-商业智能服务，cvmHA-云盘高可用，cvmRO-云盘只读实例，MultiHA-多节点，cvmMultiHA-云盘多节点
+  
      */
     InstanceType?: string;
     /**
@@ -3465,20 +3485,21 @@ export interface DBInstance {
      */
     IsDrZone?: boolean;
     /**
-     * 备可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 双节点实例备可用区信息
      */
     SlaveZones?: SlaveZones;
     /**
      * 架构标识，SINGLE-单节点 DOUBLE-双节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Architecture?: string;
     /**
      * 类型标识，EXCLUSIVE-独享型，SHARED-共享型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Style?: string;
+    /**
+     * 多节点实例备可用区信息
+     */
+    MultiSlaveZones?: Array<SlaveZones>;
 }
 /**
  * DescribeBackupCommand返回参数结构体
@@ -3827,24 +3848,20 @@ export interface DeletePublishSubscribeResponse {
 export interface Price {
     /**
      * 包年包月参考价格，单位-分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrepaidPrice: number;
+    PrepaidPrice?: number;
     /**
      * 包年包月价格单位，M-月
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrepaidPriceUnit: string;
+    PrepaidPriceUnit?: string;
     /**
      * 按量付费价格，单位-分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PostpaidPrice: number;
+    PostpaidPrice?: number;
     /**
      * 按量付费价格单位，H-小时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PostpaidPriceUnit: string;
+    PostpaidPriceUnit?: string;
 }
 /**
  * CreateAccount返回参数结构体
@@ -4053,7 +4070,6 @@ export interface SlowLog {
     ExternalAddr?: string;
     /**
      * 状态（1成功 2失败）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }
@@ -5430,27 +5446,22 @@ export interface ModifyDatabaseCTResponse {
 export interface SwitchLog {
     /**
      * 切换事件ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EventId?: string;
     /**
      * 切换模式 0-系统自动切换，1-手动切换
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchType?: number;
     /**
      * 切换开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 切换结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 机器故障导致自动切换
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
 }
@@ -5528,6 +5539,10 @@ export interface AccountCreateInfo {
      * 是否开启CAM验证
      */
     IsCam?: boolean;
+    /**
+     * 加密密钥版本号，0表示不使用加密
+     */
+    EncryptedVersion?: number;
 }
 /**
  * StartInstanceXEvent请求参数结构体
@@ -6569,74 +6584,72 @@ export interface Migration {
     /**
      * 备份导入任务ID 或 增量导入任务ID
      */
-    MigrationId: string;
+    MigrationId?: string;
     /**
      * 备份导入名称，增量导入任务该字段为空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MigrationName: string;
+    MigrationName?: string;
     /**
      * 应用ID
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 迁移目标实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 迁移任务恢复类型
      */
-    RecoveryType: string;
+    RecoveryType?: string;
     /**
      * 备份用户上传类型，COS_URL-备份放在用户的对象存储上，提供URL。COS_UPLOAD-备份放在业务的对象存储上，用户上传
      */
-    UploadType: string;
+    UploadType?: string;
     /**
      * 备份文件列表，UploadType确定，COS_URL则保存URL，COS_UPLOAD则保存备份名称
      */
-    BackupFiles: Array<string>;
+    BackupFiles?: Array<string>;
     /**
      * 迁移任务状态，2-创建完成，7-全量导入中，8-等待增量，9-导入成功，10-导入失败，12-增量导入中
      */
-    Status: number;
+    Status?: number;
     /**
      * 迁移任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 迁移任务开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 迁移任务结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 说明信息
      */
-    Message: string;
+    Message?: string;
     /**
      * 迁移细节
      */
-    Detail: MigrationDetail;
+    Detail?: MigrationDetail;
     /**
      * 当前状态允许的操作
      */
-    Action: MigrationAction;
+    Action?: MigrationAction;
     /**
      * 是否是最终恢复，全量导入任务该字段为空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsRecovery: string;
+    IsRecovery?: string;
     /**
      * 重命名的数据库名称集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DBRename: Array<DBRenameRes>;
+    DBRename?: Array<DBRenameRes>;
 }
 /**
  * 商业智能服务文件类型
@@ -6996,7 +7009,6 @@ export interface MigrationDetail {
     Progress?: number;
     /**
      * 步骤信息，null表示还未开始迁移
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StepInfo?: Array<MigrationStep>;
 }
@@ -7712,7 +7724,6 @@ export interface DbNormalDetail {
     CreateTime?: string;
     /**
      * 是否全文启用 0：否 1：是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFullTextEnabled?: string;
 }
@@ -7871,7 +7882,6 @@ export interface OldVip {
     RecycleTime?: string;
     /**
      * 旧IP保留时间小时数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldIpRetainTime?: number;
 }

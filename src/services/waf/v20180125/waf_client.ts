@@ -28,7 +28,7 @@ import {
   ProductInfo,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
-  DeleteHostRequest,
+  CCRuleItem,
   DescribeCertificateVerifyResultResponse,
   ModifyUserSignatureRuleResponse,
   ModifyInstanceNameResponse,
@@ -92,11 +92,12 @@ import {
   JobDateTime,
   DescribeHostsRequest,
   ModifyCustomWhiteRuleStatusRequest,
+  ModifyAreaBanRuleRequest,
   ClbWafRegionItem,
   DescribeFindDomainListRequest,
   ModifyInstanceElasticModeResponse,
   TargetEntity,
-  CCRuleItem,
+  DeleteHostRequest,
   DescribeDomainCountInfoRequest,
   DescribeCustomWhiteRuleResponse,
   ModifySpartaProtectionRequest,
@@ -132,6 +133,7 @@ import {
   DescribeUserCdcClbWafRegionsResponse,
   SwitchElasticModeResponse,
   AccessRuleInfo,
+  DescribeAreaBanRuleResponse,
   CCRuleLists,
   BatchOperateUserSignatureRulesResponse,
   ModifyAreaBanAreasResponse,
@@ -156,6 +158,7 @@ import {
   DescribeUserSignatureClassResponse,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
+  AreaBanRule,
   DescribeTlsVersionRequest,
   DealData,
   DescribeDomainDetailsSaasRequest,
@@ -188,6 +191,7 @@ import {
   GoodNews,
   ScanIpInfo,
   DescribeUserSignatureRuleRequest,
+  ModifyAreaBanRuleResponse,
   DescribeUserClbWafRegionsRequest,
   AddAntiInfoLeakRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
@@ -203,7 +207,7 @@ import {
   ClbObject,
   ModifyUserLevelResponse,
   CreateAccessExportRequest,
-  DescribeAutoDenyIPResponse,
+  ModifyUserLevelRequest,
   DescribeIpHitItemsResponse,
   ModifyHostResponse,
   DescribeCertificateVerifyResultRequest,
@@ -237,18 +241,21 @@ import {
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
+  CreateAreaBanRuleRequest,
+  Area,
   DescribeUserLevelResponse,
   IpAccessControlParam,
   DescribeCustomRuleListResponse,
   GetInstanceQpsLimitRequest,
   SessionData,
-  ModifyUserLevelRequest,
+  DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
   ModifyInstanceQpsLimitRequest,
   FreshAntiFakeUrlResponse,
   DeleteSpartaProtectionRequest,
   UserDomainInfo,
   DescribeAntiFakeRulesResponse,
+  CreateAreaBanRuleResponse,
   GetAttackTotalCountRequest,
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
@@ -287,7 +294,7 @@ import {
   ModifyAntiInfoLeakRuleStatusResponse,
   ModifyAreaBanStatusResponse,
   DeleteIpAccessControlV2Request,
-  ModifyWafAutoDenyRulesRequest,
+  DescribeTopAttackDomainRequest,
   DescribeAccessFastAnalysisResponse,
   ModifyDomainIpv6StatusResponse,
   DescribeHostLimitResponse,
@@ -300,6 +307,7 @@ import {
   DescribeCCRuleRequest,
   BatchOperateUserSignatureRulesRequest,
   GetAttackDownloadRecordsResponse,
+  DescribeAreaBanRuleRequest,
   DescribeApiDetailResponse,
   VipInfo,
   DescribeAccessHistogramResponse,
@@ -310,7 +318,6 @@ import {
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
-  DescribeTopAttackDomainRequest,
   DescribeHistogramRequest,
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
@@ -404,6 +411,7 @@ import {
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
   DescribeDomainWhiteRulesResponse,
+  ModifyWafAutoDenyRulesRequest,
   DescribeSessionResponse,
   UpsertSessionRequest,
   DescribeHostLimitRequest,
@@ -789,6 +797,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加（编辑）地域封禁中的地域信息
+   */
+  async CreateAreaBanRule(
+    req: CreateAreaBanRuleRequest,
+    cb?: (error: string, rep: CreateAreaBanRuleResponse) => void
+  ): Promise<CreateAreaBanRuleResponse> {
+    return this.request("CreateAreaBanRule", req, cb)
+  }
+
+  /**
    * 修改地域封禁中的地域信息
    */
   async ModifyAreaBanAreas(
@@ -1170,7 +1188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础安全防护（WAF开关）状态
+   * 开启、关闭WAF开关
    */
   async ModifyProtectionStatus(
     req: ModifyProtectionStatusRequest,
@@ -1540,6 +1558,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取地域封禁规则配置
+   */
+  async DescribeAreaBanRule(
+    req: DescribeAreaBanRuleRequest,
+    cb?: (error: string, rep: DescribeAreaBanRuleResponse) => void
+  ): Promise<DescribeAreaBanRuleResponse> {
+    return this.request("DescribeAreaBanRule", req, cb)
+  }
+
+  /**
    * 本接口用于删除访问日志导出
    */
   async DeleteAccessExport(
@@ -1667,6 +1695,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserCdcClbWafRegionsResponse) => void
   ): Promise<DescribeUserCdcClbWafRegionsResponse> {
     return this.request("DescribeUserCdcClbWafRegions", req, cb)
+  }
+
+  /**
+   * 添加（编辑）地域封禁中的地域信息
+   */
+  async ModifyAreaBanRule(
+    req: ModifyAreaBanRuleRequest,
+    cb?: (error: string, rep: ModifyAreaBanRuleResponse) => void
+  ): Promise<ModifyAreaBanRuleResponse> {
+    return this.request("ModifyAreaBanRule", req, cb)
   }
 
   /**

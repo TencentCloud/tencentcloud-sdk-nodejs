@@ -36,11 +36,11 @@ export interface SpanLog {
  */
 export interface ModifyApmInstanceRequest {
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId: string
   /**
-   * 实例名
+   * 业务系统名
    */
   Name: string
   /**
@@ -48,7 +48,7 @@ export interface ModifyApmInstanceRequest {
    */
   Tags?: Array<ApmTag>
   /**
-   * 实例详情
+   * 业务系统详情
    */
   Description?: string
   /**
@@ -60,7 +60,7 @@ export interface ModifyApmInstanceRequest {
    */
   OpenBilling?: boolean
   /**
-   * 实例上报额度
+   * 业务系统上报额度
    */
   SpanDailyCounters?: number
   /**
@@ -326,11 +326,11 @@ export interface ApmInstanceDetail {
  */
 export interface CreateApmInstanceRequest {
   /**
-   * 实例名
+   * 业务系统名
    */
   Name: string
   /**
-   * 实例描述信息
+   * 业务系统描述信息
    */
   Description?: string
   /**
@@ -342,11 +342,11 @@ export interface CreateApmInstanceRequest {
    */
   Tags?: Array<ApmTag>
   /**
-   * 实例上报额度值，默认赋值为0表示不限制上报额度
+   * 业务系统上报额度值，默认赋值为0表示不限制上报额度
    */
   SpanDailyCounters?: number
   /**
-   * 实例的计费模式
+   * 业务系统的计费模式
    */
   PayMode?: number
   /**
@@ -382,7 +382,7 @@ export interface DescribeServiceOverviewResponse {
    * 指标结果集
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Records: Array<ApmMetricRecord>
+  Records?: Array<ApmMetricRecord>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -412,7 +412,7 @@ export interface QueryMetricItem {
  */
 export interface TerminateApmInstanceRequest {
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId: string
 }
@@ -571,11 +571,11 @@ export interface DescribeGeneralSpanListResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * Span分页列表
    */
-  Spans: Array<Span>
+  Spans?: Array<Span>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -617,7 +617,7 @@ export interface DescribeServiceOverviewRequest {
    */
   OrderBy?: OrderBy
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId?: string
   /**
@@ -662,7 +662,7 @@ export interface DescribeTagValuesRequest {
    */
   TagKey: string
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId?: string
   /**
@@ -920,7 +920,7 @@ export interface DescribeGeneralSpanListRequest {
    */
   StartTime?: number
   /**
-   * 实例名
+   * 业务系统ID
    */
   InstanceId?: string
   /**
@@ -979,7 +979,7 @@ export interface APMKV {
  */
 export interface DescribeApmAgentRequest {
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId: string
   /**
@@ -1021,7 +1021,7 @@ export interface DescribeMetricRecordsRequest {
    */
   OrderBy?: OrderBy
   /**
-   * 实例ID
+   * 业务系统ID
    */
   InstanceId?: string
   /**
@@ -1131,7 +1131,7 @@ Value 填写排序方式：
  */
 export interface CreateApmInstanceResponse {
   /**
-   * 实例ID
+   * 业务系统ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string

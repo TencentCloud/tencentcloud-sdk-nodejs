@@ -128,6 +128,16 @@ it("emr.v20190103.DescribeClusterFlowStatusDetail", async function () {
     }
 })
 
+it("emr.v20190103.SyncPodState", async function () {
+    try {
+       const data = await client.SyncPodState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     try {
        const data = await client.InquiryPriceScaleOutInstance({})
@@ -181,6 +191,26 @@ it("emr.v20190103.ModifyGlobalConfig", async function () {
 it("emr.v20190103.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.AttachDisks", async function () {
+    try {
+       const data = await client.AttachDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.SetNodeResourceConfigDefault", async function () {
+    try {
+       const data = await client.SetNodeResourceConfigDefault({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +281,16 @@ it("emr.v20190103.ModifyYarnDeploy", async function () {
 it("emr.v20190103.TerminateTasks", async function () {
     try {
        const data = await client.TerminateTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.TerminateInstance", async function () {
+    try {
+       const data = await client.TerminateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +398,16 @@ it("emr.v20190103.DescribeSLInstanceList", async function () {
     }
 })
 
+it("emr.v20190103.ResizeDataDisks", async function () {
+    try {
+       const data = await client.ResizeDataDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
     try {
        const data = await client.ModifyAutoScaleStrategy({})
@@ -421,6 +471,16 @@ it("emr.v20190103.StartStopServiceOrMonitor", async function () {
 it("emr.v20190103.ModifyResourceScheduler", async function () {
     try {
        const data = await client.ModifyResourceScheduler({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeNodeResourceConfigFast", async function () {
+    try {
+       const data = await client.DescribeNodeResourceConfigFast({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +598,9 @@ it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     }
 })
 
-it("emr.v20190103.SyncPodState", async function () {
+it("emr.v20190103.AddNodeResourceConfig", async function () {
     try {
-       const data = await client.SyncPodState({})
+       const data = await client.AddNodeResourceConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +618,9 @@ it("emr.v20190103.InquirePriceRenewEmr", async function () {
     }
 })
 
-it("emr.v20190103.TerminateInstance", async function () {
+it("emr.v20190103.ModifyResource", async function () {
     try {
-       const data = await client.TerminateInstance({})
+       const data = await client.ModifyResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +631,16 @@ it("emr.v20190103.TerminateInstance", async function () {
 it("emr.v20190103.ModifySLInstance", async function () {
     try {
        const data = await client.ModifySLInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeNodeDataDisks", async function () {
+    try {
+       const data = await client.DescribeNodeDataDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +721,26 @@ it("emr.v20190103.ModifyResourcePools", async function () {
 it("emr.v20190103.DescribeInsightList", async function () {
     try {
        const data = await client.DescribeInsightList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DeleteNodeResourceConfig", async function () {
+    try {
+       const data = await client.DeleteNodeResourceConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyInstanceBasic", async function () {
+    try {
+       const data = await client.ModifyInstanceBasic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

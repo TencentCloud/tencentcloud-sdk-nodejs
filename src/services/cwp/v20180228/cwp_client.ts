@@ -487,7 +487,6 @@ import {
   DescribeRansomDefenseMachineStrategyInfoRequest,
   DescribeAssetCoreModuleInfoRequest,
   DescribeProductStatusResponse,
-  DescribeIndexListResponse,
   ModifyJavaMemShellPluginSwitchRequest,
   DescribeIgnoreHostAndItemConfigResponse,
   RemoveLocalStorageItemResponse,
@@ -514,7 +513,6 @@ import {
   AssetUserBaseInfo,
   ModifyRiskEventsStatusRequest,
   ExportBaselineEffectHostListRequest,
-  ExportMaliciousRequestsResponse,
   ScanBaselineRequest,
   RansomDefenseRollbackRequest,
   EffectiveMachineInfo,
@@ -525,7 +523,7 @@ import {
   DescribeVulDefenceEventRequest,
   ModifyBaselineRuleResponse,
   AttackSource,
-  DescribeIndexListRequest,
+  ExportMaliciousRequestsResponse,
   RetryVulFixRequest,
   DescribeRiskDnsEventListRequest,
   DescribeLogKafkaDeliverInfoResponse,
@@ -4239,18 +4237,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddLoginWhiteListsResponse) => void
   ): Promise<AddLoginWhiteListsResponse> {
     return this.request("AddLoginWhiteLists", req, cb)
-  }
-
-  /**
-     * 接口已废弃
-
-获取索引列表
-     */
-  async DescribeIndexList(
-    req?: DescribeIndexListRequest,
-    cb?: (error: string, rep: DescribeIndexListResponse) => void
-  ): Promise<DescribeIndexListResponse> {
-    return this.request("DescribeIndexList", req, cb)
   }
 
   /**

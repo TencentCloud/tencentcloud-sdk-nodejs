@@ -106,7 +106,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDevice", req, cb);
     }
     /**
-     * 移动网络发起Qos加速过程
+     * 产品下线
+
+移动网络发起Qos加速过程
      */
     async CreateQos(req, cb) {
         return this.request("CreateQos", req, cb);
@@ -124,7 +126,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGroup", req, cb);
     }
     /**
-     * 获取Qos加速状态
+     * 产品下线
+
+获取Qos加速状态
      */
     async DescribeQos(req, cb) {
         return this.request("DescribeQos", req, cb);
@@ -190,7 +194,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEncryptedKey", req, cb);
     }
     /**
-     * 移动网络停止Qos加速过程
+     * 产品下线
+
+移动网络停止Qos加速过程
      */
     async DeleteQos(req, cb) {
         return this.request("DeleteQos", req, cb);

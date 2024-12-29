@@ -20,7 +20,7 @@
  */
 export interface DescribeCertificateBindResourceTaskDetailRequest {
   /**
-   * 任务ID，根据任务ID查询绑定云资源结果
+   * 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果
    */
   TaskId: string
   /**
@@ -844,11 +844,11 @@ export interface TkeNameSpaceDetail {
   /**
    * namespace名称
    */
-  Name: string
+  Name?: string
   /**
    * secret列表
    */
-  SecretList: Array<TkeSecretDetail>
+  SecretList?: Array<TkeSecretDetail>
 }
 
 /**
@@ -950,29 +950,29 @@ export interface ClbListener {
   /**
    * 监听器ID
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 监听器名称
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 是否开启SNI，1为开启，0为关闭
    */
-  SniSwitch: number
+  SniSwitch?: number
   /**
    * 监听器协议类型， HTTPS|TCP_SSL
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 监听器绑定的证书数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Certificate: Certificate
+  Certificate?: Certificate
   /**
    * 监听器规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rules: Array<ClbListenerRule>
+  Rules?: Array<ClbListenerRule>
   /**
    * 不匹配域名列表
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1031,36 +1031,36 @@ export interface UpdateRecordInfo {
   /**
    * 记录ID
    */
-  Id: number
+  Id?: number
   /**
    * 新证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * 原证书ID
    */
-  OldCertId: string
+  OldCertId?: string
   /**
    * 部署资源类型列表
    */
-  ResourceTypes: Array<string>
+  ResourceTypes?: Array<string>
   /**
    * 部署地域列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regions: Array<string>
+  Regions?: Array<string>
   /**
    * 部署状态
    */
-  Status: number
+  Status?: number
   /**
    * 部署时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后一次更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -1230,19 +1230,19 @@ export interface LighthouseInstanceDetail {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * IP地址
    */
-  IP: Array<string>
+  IP?: Array<string>
   /**
    * 可选择域名
    */
-  Domain: Array<string>
+  Domain?: Array<string>
 }
 
 /**
@@ -1416,49 +1416,49 @@ export interface PackageInfo {
   /**
    * 权益包ID。
    */
-  PackageId: string
+  PackageId?: string
   /**
    * 权益包内权益点总量。
    */
-  Total: number
+  Total?: number
   /**
    * 权益包内权益点余量。
    */
-  Balance: number
+  Balance?: number
   /**
    * 权益包名称。
    */
-  Type: string
+  Type?: string
   /**
    * 权益点是转入时，来源信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceUin: number
+  SourceUin?: number
   /**
    * 权益点状态。
    */
-  Status: string
+  Status?: string
   /**
    * 过期时间。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 生成时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 来源类型。
    */
-  SourceType: string
+  SourceType?: string
   /**
    * 转移信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransferOutInfos: Array<PackageTransferOutInfo>
+  TransferOutInfos?: Array<PackageTransferOutInfo>
 }
 
 /**
@@ -1515,11 +1515,11 @@ export interface UpdateRecordDetails {
   /**
    * 部署资源类型
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 部署资源详情列表
    */
-  List: Array<UpdateRecordDetail>
+  List?: Array<UpdateRecordDetail>
   /**
    * 该部署资源总数
    */
@@ -2040,27 +2040,27 @@ export interface CosInstanceDetail {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 已绑定的证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertId: string
+  CertId?: string
   /**
    * ENABLED: 域名上线状态
 DISABLED:域名下线状态
    */
-  Status: string
+  Status?: string
   /**
    * 存储桶名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 存储桶地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -2148,16 +2148,16 @@ export interface ClbInstanceDetail {
   /**
    * CLB实例ID
    */
-  LoadBalancerId: string
+  LoadBalancerId?: string
   /**
    * CLB实例名称
    */
-  LoadBalancerName: string
+  LoadBalancerName?: string
   /**
    * CLB监听器列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Listeners: Array<ClbListener>
+  Listeners?: Array<ClbListener>
 }
 
 /**
@@ -2269,46 +2269,46 @@ export interface PackageTransferOutInfo {
   /**
    * 权益包ID。
    */
-  PackageId: string
+  PackageId?: string
   /**
    * 转移码。
    */
-  TransferCode: string
+  TransferCode?: string
   /**
    * 本次转移点数。
    */
-  TransferCount: number
+  TransferCount?: number
   /**
    * 转入的PackageID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceivePackageId: string
+  ReceivePackageId?: string
   /**
    * 本次转移过期时间。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 本次转移生成时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 本次转移更新时间。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 转移状态。
    */
-  TransferStatus: string
+  TransferStatus?: string
   /**
    * 接收者uin。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceiverUin: number
+  ReceiverUin?: number
   /**
    * 接收时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceiveTime: string
+  ReceiveTime?: string
 }
 
 /**
@@ -2608,24 +2608,24 @@ export interface DdosInstanceDetail {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 协议类型
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertId: string
+  CertId?: string
   /**
    * 转发端口
    */
-  VirtualPort: string
+  VirtualPort?: string
 }
 
 /**
@@ -2816,18 +2816,18 @@ export interface LiveInstanceDetail {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 已绑定的证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertId: string
+  CertId?: string
   /**
    * -1：域名未关联证书。
 1： 域名https已开启。
 0： 域名https已关闭。
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -3005,11 +3005,11 @@ export interface TeoInstanceDetail {
   /**
    * 域名
    */
-  Host: string
+  Host?: string
   /**
    * 证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * 区域ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3078,17 +3078,17 @@ export interface PreAuditInfo {
    * 证书总年限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalPeriod: number
+  TotalPeriod?: number
   /**
    * 证书当前年限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NowPeriod: number
+  NowPeriod?: number
   /**
    * 证书预审核管理人ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ManagerId: string
+  ManagerId?: string
 }
 
 /**
@@ -3501,20 +3501,20 @@ export interface TkeSecretDetail {
   /**
    * secret名称
    */
-  Name: string
+  Name?: string
   /**
    * 证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * ingress列表
    */
-  IngressList: Array<TkeIngressDetail>
+  IngressList?: Array<TkeIngressDetail>
   /**
    * 和新证书不匹配的域名列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NoMatchDomains: Array<string>
+  NoMatchDomains?: Array<string>
 }
 
 /**
@@ -4306,15 +4306,15 @@ export interface TkeIngressDetail {
   /**
    * ingress名称
    */
-  IngressName: string
+  IngressName?: string
   /**
    * tls域名列表
    */
-  TlsDomains: Array<string>
+  TlsDomains?: Array<string>
   /**
    * ingress域名列表
    */
-  Domains: Array<string>
+  Domains?: Array<string>
 }
 
 /**
@@ -4354,24 +4354,24 @@ export interface ApiGatewayInstanceDetail {
   /**
    * 实例ID
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * 实例名称
    */
-  ServiceName: string
+  ServiceName?: string
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertId: string
+  CertId?: string
   /**
    * 使用协议
    */
-  Protocol: string
+  Protocol?: string
 }
 
 /**
@@ -4496,7 +4496,7 @@ export interface DescribeHostCdnInstanceListRequest {
  */
 export interface DescribeHostTeoInstanceListResponse {
   /**
-   * teo实例列表
+   * teo实例列表，如取不到值返回空数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceList?: Array<TeoInstanceDetail>
@@ -4782,38 +4782,38 @@ export interface DomainValidationResult {
   /**
    * 域名。
    */
-  Domain: string
+  Domain?: string
   /**
    * 验证类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VerifyType: string
+  VerifyType?: string
   /**
    * 本地检查结果。
    */
-  LocalCheck: number
+  LocalCheck?: number
   /**
    * CA检查结果。
    */
-  CaCheck: number
+  CaCheck?: number
   /**
    * 检查失败原因。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalCheckFailReason: string
+  LocalCheckFailReason?: string
   /**
    * 检查到的值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckValue: Array<string>
+  CheckValue?: Array<string>
   /**
    * 是否频繁请求。
    */
-  Frequently: boolean
+  Frequently?: boolean
   /**
    * 是否已经签发。
    */
-  Issued: boolean
+  Issued?: boolean
 }
 
 /**
@@ -5163,7 +5163,7 @@ export interface DescribeHostTeoInstanceListRequest {
    */
   Limit?: number
   /**
-   * 是否异步
+   * 是否异步，1表示是，0表示否，默认为0
    */
   AsyncCache?: number
 }
@@ -5422,31 +5422,31 @@ export interface DeployRecordInfo {
   /**
    * 部署记录ID
    */
-  Id: number
+  Id?: number
   /**
    * 部署证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * 部署资源类型
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 部署地域
    */
-  Region: string
+  Region?: string
   /**
    * 部署状态
    */
-  Status: number
+  Status?: number
   /**
    * 部署时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最近一次更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**

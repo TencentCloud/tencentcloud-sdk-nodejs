@@ -61,12 +61,12 @@ export interface TsfPageFileConfig {
    * 总数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 文件配置数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<FileConfig>
+  Content?: Array<FileConfig>
 }
 
 /**
@@ -240,11 +240,11 @@ export interface PathRewritePage {
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 路径重写规则列表
    */
-  Content: Array<PathRewrite>
+  Content?: Array<PathRewrite>
 }
 
 /**
@@ -793,22 +793,22 @@ export interface QuantileEntity {
    * 最大值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxValue: string
+  MaxValue?: string
   /**
    * 最小值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MinValue: string
+  MinValue?: string
   /**
    * 五分位值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FifthPositionValue: string
+  FifthPositionValue?: string
   /**
    * 九分位值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NinthPositionValue: string
+  NinthPositionValue?: string
 }
 
 /**
@@ -1299,11 +1299,11 @@ export interface TsfPageConfig {
   /**
    * TsfPageConfig
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 配置项列表
    */
-  Content: Array<Config>
+  Content?: Array<Config>
 }
 
 /**
@@ -1739,52 +1739,52 @@ export interface LaneRule {
    * 泳道规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 泳道规则名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 优先级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Priority: number
+  Priority?: number
   /**
    * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 泳道规则标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleTagList: Array<LaneRuleTag>
+  RuleTagList?: Array<LaneRuleTag>
   /**
    * 泳道规则标签关系
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleTagRelationship: string
+  RuleTagRelationship?: string
   /**
    * 泳道ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaneId: string
+  LaneId?: string
   /**
    * 开启状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable: boolean
+  Enable?: boolean
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: number
 }
 
 /**
@@ -2870,7 +2870,7 @@ export interface UpdateApiTimeoutsResponse {
   /**
    * 是否成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3234,11 +3234,11 @@ export interface LaneRules {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 泳道规则列表
    */
-  Content: Array<LaneRule>
+  Content?: Array<LaneRule>
 }
 
 /**
@@ -3349,7 +3349,7 @@ export interface AssociateConfigWithGroupResponse {
    * 绑定是否成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4555,32 +4555,32 @@ export interface MonitorOverview {
    * 近24小时调用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvocationCountOfDay: string
+  InvocationCountOfDay?: string
   /**
    * 总调用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvocationCount: string
+  InvocationCount?: string
   /**
    * 近24小时调用错误数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorCountOfDay: string
+  ErrorCountOfDay?: string
   /**
    * 总调用错误数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorCount: string
+  ErrorCount?: string
   /**
    * 近24小时调用成功率
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessRatioOfDay: string
+  SuccessRatioOfDay?: string
   /**
    * 总调用成功率
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessRatio: string
+  SuccessRatio?: string
 }
 
 /**
@@ -4952,12 +4952,12 @@ export interface TsfPageMsInstance {
    * 微服务实例总数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 微服务实例列表内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<MsInstance>
+  Content?: Array<MsInstance>
 }
 
 /**
@@ -6677,17 +6677,16 @@ export interface IndicatorCoord {
 
 /**
  * 单元化规则翻页对象
-
  */
 export interface TsfPageUnitRule {
   /**
    * 记录总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 记录实体列表
    */
-  Content: Array<UnitRule>
+  Content?: Array<UnitRule>
 }
 
 /**
@@ -6783,12 +6782,12 @@ export interface TsfPageConfigReleaseLog {
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 配置项发布日志数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<ConfigReleaseLog>
+  Content?: Array<ConfigReleaseLog>
 }
 
 /**
@@ -7634,42 +7633,42 @@ export interface GroupRelease {
    * 程序包ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageId: string
+  PackageId?: string
   /**
    * 程序包名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageName: string
+  PackageName?: string
   /**
    * 程序包版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageVersion: string
+  PackageVersion?: string
   /**
    * 镜像名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoName: string
+  RepoName?: string
   /**
    * 镜像版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagName: string
+  TagName?: string
   /**
    * 已发布的全局配置列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicConfigReleaseList: Array<ConfigRelease>
+  PublicConfigReleaseList?: Array<ConfigRelease>
   /**
    * 已发布的应用配置列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigReleaseList: Array<ConfigRelease>
+  ConfigReleaseList?: Array<ConfigRelease>
   /**
    * 已发布的文件配置列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileConfigReleaseList: Array<FileConfigRelease>
+  FileConfigReleaseList?: Array<FileConfigRelease>
 }
 
 /**
@@ -8221,12 +8220,12 @@ export interface TsfPageGatewayPlugin {
    * 记录总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 记录实体列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<GatewayPlugin>
+  Content?: Array<GatewayPlugin>
 }
 
 /**
@@ -8548,12 +8547,12 @@ export interface TsfApiListResponse {
    * 数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * API 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<MsApiArray>
+  Content?: Array<MsApiArray>
 }
 
 /**
@@ -8614,11 +8613,11 @@ export interface TsfPageGatewayDeployGroup {
   /**
    * 记录总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 记录实体列表
    */
-  Content: Array<GatewayDeployGroup>
+  Content?: Array<GatewayDeployGroup>
 }
 
 /**
@@ -9579,27 +9578,27 @@ export interface PathRewrite {
   /**
    * 路径重写规则ID
    */
-  PathRewriteId: string
+  PathRewriteId?: string
   /**
    * 网关部署组ID
    */
-  GatewayGroupId: string
+  GatewayGroupId?: string
   /**
    * 正则表达式
    */
-  Regex: string
+  Regex?: string
   /**
    * 替换的内容
    */
-  Replacement: string
+  Replacement?: string
   /**
    * 是否屏蔽映射后路径，Y: 是 N: 否
    */
-  Blocked: string
+  Blocked?: string
   /**
    * 规则顺序，越小优先级越高
    */
-  Order: number
+  Order?: number
 }
 
 /**
@@ -9775,12 +9774,12 @@ export interface TsfPageConfigRelease {
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 配置项发布信息数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<ConfigRelease>
+  Content?: Array<ConfigRelease>
 }
 
 /**
@@ -11864,12 +11863,12 @@ export interface TsfPageFileConfigRelease {
    * 数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<FileConfigRelease>
+  Content?: Array<FileConfigRelease>
 }
 
 /**
@@ -14324,12 +14323,12 @@ export interface TsfPageMicroservice {
    * 微服务总数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 微服务列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: Array<Microservice>
+  Content?: Array<Microservice>
 }
 
 /**
@@ -15433,16 +15432,16 @@ export interface PropertyField {
   /**
    * 属性名称
    */
-  Name: string
+  Name?: string
   /**
    * 属性类型
    */
-  Type: string
+  Type?: string
   /**
    * 属性描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -16127,11 +16126,11 @@ export interface TsfPageApiGroupInfo {
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * API分组信息
    */
-  Content: Array<ApiGroupInfo>
+  Content?: Array<ApiGroupInfo>
 }
 
 /**

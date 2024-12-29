@@ -281,7 +281,7 @@ export interface DescribeFileSystemsResponse {
   /**
    * 文件系统列表
    */
-  FileSystems: Array<FileSystem>
+  FileSystems?: Array<FileSystem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -921,7 +921,7 @@ export interface MountPoint {
   /**
    * 挂载点ID
    */
-  MountPointId: string
+  MountPointId?: string
   /**
    * 挂载点名称
    */
@@ -929,19 +929,19 @@ export interface MountPoint {
   /**
    * 文件系统ID
    */
-  FileSystemId: string
+  FileSystemId?: string
   /**
    * 挂载点状态（1：打开；2：关闭）
    */
-  Status: number
+  Status?: number
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 绑定的权限组ID列表
    */
-  AccessGroupIds: Array<string>
+  AccessGroupIds?: Array<string>
 }
 
 /**

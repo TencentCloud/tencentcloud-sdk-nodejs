@@ -989,23 +989,23 @@ export interface LocalDiskType {
     /**
      * 本地磁盘类型。
      */
-    Type: string;
+    Type?: string;
     /**
      * 本地磁盘属性。
      */
-    PartitionType: string;
+    PartitionType?: string;
     /**
      * 本地磁盘最小值。
      */
-    MinSize: number;
+    MinSize?: number;
     /**
      * 本地磁盘最大值。
      */
-    MaxSize: number;
+    MaxSize?: number;
     /**
-     * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+     * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选</li><li>OPTIONAL：表示可选。</li>
      */
-    Required: string;
+    Required?: string;
 }
 /**
  * DescribeComputeEnvActivities请求参数结构体

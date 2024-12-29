@@ -1029,6 +1029,12 @@ LimitTypes取值范围：
         return this.request("CreateHighPriorityRouteTable", req, cb);
     }
     /**
+     * 本接口（InquiryPriceRenewAddresses）用于续费预付费弹性公网IP询价。
+     */
+    async InquiryPriceRenewAddresses(req, cb) {
+        return this.request("InquiryPriceRenewAddresses", req, cb);
+    }
+    /**
      * 本接口（ModifyGatewayFlowQos）用于调整网关流控带宽。
      */
     async ModifyGatewayFlowQos(req, cb) {
@@ -1773,6 +1779,12 @@ LimitTypes取值范围：
         return this.request("CreateServiceTemplate", req, cb);
     }
     /**
+     * 本接口（InquiryPriceAllocateAddresses）用于新购弹性公网IP询价。
+     */
+    async InquiryPriceAllocateAddresses(req, cb) {
+        return this.request("InquiryPriceAllocateAddresses", req, cb);
+    }
+    /**
      * 本接口（ModifyDirectConnectGatewayAttribute）用于修改专线网关属性
      */
     async ModifyDirectConnectGatewayAttribute(req, cb) {
@@ -2143,6 +2155,13 @@ LimitTypes取值范围：
      */
     async DescribeVpcs(req, cb) {
         return this.request("DescribeVpcs", req, cb);
+    }
+    /**
+     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+    async MigrateNetworkInterface(req, cb) {
+        return this.request("MigrateNetworkInterface", req, cb);
     }
     /**
      * 查询高优路由表。
@@ -2545,11 +2564,10 @@ LimitTypes取值范围：
         return this.request("ClearRouteTableSelectionPolicies", req, cb);
     }
     /**
-     * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     * EIP修改带宽询价
      */
-    async MigrateNetworkInterface(req, cb) {
-        return this.request("MigrateNetworkInterface", req, cb);
+    async InquiryPriceModifyAddressesBandwidth(req, cb) {
+        return this.request("InquiryPriceModifyAddressesBandwidth", req, cb);
     }
     /**
      * 本接口（AllocateIPv6Addresses）用于申请一个或多个弹性公网IPv6（简称EIPv6）实例。

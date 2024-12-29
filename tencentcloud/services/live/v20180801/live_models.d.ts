@@ -8,22 +8,18 @@ export interface DescribeCasterDisplayInfoResponse {
   1：无预监，有主监
   2：有预监，无主监
   3：有预监，有主监
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 预监使用的展示参数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PvwDisplayInfo?: CasterDisplayInfo;
     /**
      * 主监使用的展示参数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PgmDisplayInfo?: CasterDisplayInfo;
     /**
      * 启动直播的时间，值为unix时间戳。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartLiveTime?: number;
     /**
@@ -282,7 +278,6 @@ export interface CommonMixOutputParams {
 export interface DescribeCasterOutputInfosResponse {
     /**
      * 导播台的推流信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputInfos?: Array<CasterOutputInfo>;
     /**
@@ -735,14 +730,12 @@ export interface DescribeCasterPlayUrlResponse {
     /**
      * 播放url。
   当导播台不存在预监或主监时，若请求预监或主监的播放地址，该字段为空。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PlayUrl?: string;
     /**
      * webrtc协议播放地址。
   当导播台不存在预监或主监时，若请求预监或主监的webrtc播放地址，该字段为空。
   注：webrtc协议播放地址需配合腾讯云快直播播放sdk方可使用。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WebRTCPlayUrl?: string;
     /**
@@ -1184,7 +1177,7 @@ export interface DescribeLivePadRulesResponse {
     /**
      * 规则信息列表。
      */
-    Rules: Array<RuleInfo>;
+    Rules?: Array<RuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1371,7 +1364,6 @@ export interface DescribeLiveStreamOnlineListResponse {
 export interface DescribeCasterMarkWordInfosResponse {
     /**
      * 导播台的文本信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordInfos?: Array<CasterMarkWordInfo>;
     /**
@@ -2019,15 +2011,20 @@ export interface CreateLiveTranscodeTemplateRequest {
  */
 export interface MPSResult {
     /**
-     * 智能语音识别结果
+     * 智能语音识别结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AiAsrResults?: Array<string>;
     /**
-     * 智能文字识别结果
+     * 智能文字识别结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AiOcrResults?: Array<string>;
+    /**
+     * 内容质检结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamQuaCtrlResults?: Array<string>;
 }
 /**
  * DescribeLiveTimeShiftTemplates返回参数结构体
@@ -2036,7 +2033,7 @@ export interface DescribeLiveTimeShiftTemplatesResponse {
     /**
      * 直播时移模板信息。
      */
-    Templates: Array<TimeShiftTemplate>;
+    Templates?: Array<TimeShiftTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2177,7 +2174,7 @@ export interface DescribeLivePadTemplateResponse {
     /**
      * 直播垫片模板信息。
      */
-    Template: PadTemplate;
+    Template?: PadTemplate;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2435,6 +2432,14 @@ export interface CreateLiveStreamMonitorRequest {
      * 是否开启内容质检。
      */
     AiQualityControl?: number;
+    /**
+     * 导播台监播对应的导播台场次id。
+     */
+    CasterId?: string;
+    /**
+     * 拉流转推监播任务对应的拉流转推场次id
+     */
+    PullPushTaskId?: string;
 }
 /**
  * DescribeScreenShotSheetNumList请求参数结构体
@@ -2695,7 +2700,6 @@ export interface DescribeLivePushAuthKeyRequest {
 export interface DescribeCasterTransitionTypesResponse {
     /**
      * 转场信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransitionTypes?: Array<TransitionTypeInfo>;
     /**
@@ -3142,6 +3146,14 @@ export interface LiveStreamMonitorInputInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
+    /**
+     * 导播台输入源索引（10000 pvw， 10001 pgm， 其余代表输入下标）
+     */
+    CasterInputIndex?: number;
+    /**
+     * 该输入源是否正在监播
+     */
+    NeedMonitor?: boolean;
 }
 /**
  * DeleteLivePullStreamTask请求参数结构体
@@ -3166,7 +3178,6 @@ export interface DeleteLivePullStreamTaskRequest {
 export interface DescribeCasterMarkPicInfosResponse {
     /**
      * 导播台的水印信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkPicInfos?: Array<CasterMarkPicInfo>;
     /**
@@ -3746,11 +3757,11 @@ export interface DescribeLiveDomainCertBindingsResponse {
     /**
      * 有绑定证书的域名信息数组。
      */
-    LiveDomainCertBindings: Array<LiveDomainCertBindings>;
+    LiveDomainCertBindings?: Array<LiveDomainCertBindings>;
     /**
      * 总的记录行数，便于分页。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3763,7 +3774,7 @@ export interface CreateLivePadTemplateResponse {
     /**
      * 模板Id。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3776,7 +3787,7 @@ export interface DescribeLiveRecordTemplatesResponse {
     /**
      * 录制模板信息列表。
      */
-    Templates: Array<RecordTemplateInfo>;
+    Templates?: Array<RecordTemplateInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4051,7 +4062,7 @@ export interface DescribeLiveTranscodeRulesResponse {
     /**
      * 转码规则列表。
      */
-    Rules: Array<RuleInfo>;
+    Rules?: Array<RuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5051,12 +5062,10 @@ export interface ModifyLiveDomainRefererResponse {
 export interface DescribeMonitorReportResponse {
     /**
      * 媒体处理结果信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MPSResult?: MPSResult;
     /**
      * 媒体诊断结果信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiagnoseResult?: DiagnoseResult;
     /**
@@ -5245,7 +5254,7 @@ export interface DescribeLiveCallbackTemplatesResponse {
     /**
      * 模板信息列表。
      */
-    Templates: Array<CallBackTemplateInfo>;
+    Templates?: Array<CallBackTemplateInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5702,7 +5711,7 @@ export interface DescribeLiveCallbackTemplateResponse {
     /**
      * 回调模板信息。
      */
-    Template: CallBackTemplateInfo;
+    Template?: CallBackTemplateInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6550,12 +6559,10 @@ export interface DescribeLiveDomainsResponse {
     DomainList?: Array<DomainInfo>;
     /**
      * 可继续添加域名数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateLimitCount?: number;
     /**
      * 启用的播放域名加速区域统计，数组元素分别为：中国大陆（境内），全球地区，国际/港澳台（境外）域名数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PlayTypeCount?: Array<number | bigint>;
     /**
@@ -6620,12 +6627,11 @@ export interface ModifyLiveDomainCertBindingsResponse {
     /**
      * DomainNames 入参中，与证书不匹配的域名列表，将会跳过处理。
      */
-    MismatchedDomainNames: Array<string>;
+    MismatchedDomainNames?: Array<string>;
     /**
      * 操作失败的域名及错误码，错误信息，包括MismatchedDomainNames中的域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Errors: Array<BatchDomainOperateErrors>;
+    Errors?: Array<BatchDomainOperateErrors>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6645,7 +6651,6 @@ export declare type DescribeCasterUserStatusRequest = null;
 export interface DescribeLiveStreamMonitorResponse {
     /**
      * 直播监播任务相关信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LiveStreamMonitor?: LiveStreamMonitorInfo;
     /**
@@ -7174,11 +7179,11 @@ export interface DescribeScreenshotTaskResponse {
     /**
      * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。
      */
-    ScrollToken: string;
+    ScrollToken?: string;
     /**
      * 截图任务列表。当该字段为空，说明已返回所有数据。
      */
-    TaskList: Array<ScreenshotTask>;
+    TaskList?: Array<ScreenshotTask>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7270,7 +7275,6 @@ export interface DescribeProvinceIspPlayInfoListResponse {
 export interface DescribeLivePackageInfoResponse {
     /**
      * 套餐包信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LivePackageInfoList?: Array<LivePackageInfo>;
     /**
@@ -7284,7 +7288,6 @@ export interface DescribeLivePackageInfoResponse {
   205: 日结时长
   206: 月结时长
   304: 日结流量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageBillMode?: number;
     /**
@@ -7313,7 +7316,6 @@ export interface DescribeLivePackageInfoResponse {
   标准直播，国际/港澳台（境外多地区）计费方式。
   快直播，中国大陆（境内全地区）计费方式。
   快直播，国际/港澳台（境外多地区）计费方式。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FluxPackageBillMode?: string;
     /**
@@ -7749,7 +7751,7 @@ export interface DescribeLiveTimeShiftRulesResponse {
     /**
      * 规则信息列表。
      */
-    Rules: Array<RuleInfo>;
+    Rules?: Array<RuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7851,7 +7853,7 @@ export interface DescribeLivePadTemplatesResponse {
     /**
      * 直播垫片模板信息。
      */
-    Templates: Array<PadTemplate>;
+    Templates?: Array<PadTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8828,7 +8830,6 @@ export interface StopCasterPgmRequest {
 export interface CreateLiveStreamMonitorResponse {
     /**
      * 监播任务ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorId?: string;
     /**
@@ -8907,7 +8908,7 @@ export interface DescribeLiveTranscodeTemplateResponse {
     /**
      * 模板信息。
      */
-    Template: TemplateInfo;
+    Template?: TemplateInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9083,18 +9084,18 @@ export interface AuthenticateDomainOwnerResponse {
   VerifyType 传 dnsCheck 时，为要配的 TXT 记录值。
   VerifyType 传 fileCheck 时，为文件内容。
      */
-    Content: string;
+    Content?: string;
     /**
      * 域名验证状态。
   >=0 为已验证归属。
   <0 未验证归属权。
      */
-    Status: number;
+    Status?: number;
     /**
      * DomainName 对应的主域名。
   同一主域名下的所有域名只需成功验证一次，后续均无需再验证。
      */
-    MainDomain: string;
+    MainDomain?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9465,7 +9466,7 @@ export interface DescribeLiveRecordTemplateResponse {
     /**
      * 录制模板信息。
      */
-    Template: RecordTemplateInfo;
+    Template?: RecordTemplateInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10059,12 +10060,10 @@ export interface DescribeLivePackageInfoRequest {
 export interface DescribeLiveStreamMonitorListResponse {
     /**
      * 账号下的直播流监播任务个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalNum?: number;
     /**
      * 直播流监播任务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LiveStreamMonitors?: Array<LiveStreamMonitorInfo>;
     /**
@@ -10262,7 +10261,6 @@ export interface DescribeTimeShiftStreamListResponse {
     TotalSize?: number;
     /**
      * 流列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamList?: Array<TimeShiftStreamInfo>;
     /**
@@ -10460,6 +10458,14 @@ export interface LiveStreamMonitorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AiQualityControl?: number;
+    /**
+     * 导播台监播对应的导播台场次id
+     */
+    CasterId?: string;
+    /**
+     * 拉流转推监播对应的拉流转推任务id
+     */
+    PullPushTaskId?: string;
 }
 /**
  * 直播拉流当前正在拉的文件信息。
@@ -10509,7 +10515,7 @@ export interface DescribeLiveSnapshotTemplatesResponse {
     /**
      * 截图模板列表。
      */
-    Templates: Array<SnapshotTemplateInfo>;
+    Templates?: Array<SnapshotTemplateInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10595,7 +10601,6 @@ export interface DescribeLiveTimeShiftWriteSizeInfoListResponse {
 export interface DescribeCasterListResponse {
     /**
      * 用户对应的导播台简要信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CasterList?: Array<CasterBriefInfo>;
     /**
@@ -11110,7 +11115,6 @@ export interface DescribeAllStreamPlayInfoListRequest {
 export interface DescribeLiveDomainResponse {
     /**
      * 域名信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainInfo?: DomainInfo;
     /**
@@ -11217,7 +11221,6 @@ export interface ForbidStreamInfo {
 export interface DescribeTimeShiftRecordDetailResponse {
     /**
      * 时移录制会话数组。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordList?: Array<TimeShiftRecord>;
     /**

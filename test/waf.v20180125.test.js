@@ -378,6 +378,16 @@ it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     }
 })
 
+it("waf.v20180125.CreateAreaBanRule", async function () {
+    try {
+       const data = await client.CreateAreaBanRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAreaBanAreas", async function () {
     try {
        const data = await client.ModifyAreaBanAreas({})
@@ -1128,6 +1138,16 @@ it("waf.v20180125.GetInstanceQpsLimit", async function () {
     }
 })
 
+it("waf.v20180125.DescribeAreaBanRule", async function () {
+    try {
+       const data = await client.DescribeAreaBanRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteAccessExport", async function () {
     try {
        const data = await client.DeleteAccessExport({})
@@ -1251,6 +1271,16 @@ it("waf.v20180125.ModifyModuleStatus", async function () {
 it("waf.v20180125.DescribeUserCdcClbWafRegions", async function () {
     try {
        const data = await client.DescribeUserCdcClbWafRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyAreaBanRule", async function () {
+    try {
+       const data = await client.ModifyAreaBanRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

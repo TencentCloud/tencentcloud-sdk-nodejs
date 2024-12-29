@@ -24,7 +24,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePagedLogConfigList(req: DescribePagedLogConfigListRequest, cb?: (error: string, rep: DescribePagedLogConfigListResponse) => void): Promise<DescribePagedLogConfigListResponse>;
     /**
-     * 创建或者更新 Ingress 规则
+     * 此接口没有被使用了
+
+创建或者更新 Ingress 规则
      */
     ModifyIngress(req: ModifyIngressRequest, cb?: (error: string, rep: ModifyIngressResponse) => void): Promise<ModifyIngressResponse>;
     /**

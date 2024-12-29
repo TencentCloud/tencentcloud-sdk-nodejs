@@ -2104,6 +2104,10 @@ export interface ObjectTypeConfigFields {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonParse?: string
+  /**
+   * 字段类型 0:str 1:list
+   */
+  Type?: number
 }
 
 /**

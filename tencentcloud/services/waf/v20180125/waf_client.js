@@ -244,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAntiInfoLeakRule", req, cb);
     }
     /**
+     * 添加（编辑）地域封禁中的地域信息
+     */
+    async CreateAreaBanRule(req, cb) {
+        return this.request("CreateAreaBanRule", req, cb);
+    }
+    /**
      * 修改地域封禁中的地域信息
      */
     async ModifyAreaBanAreas(req, cb) {
@@ -473,7 +479,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBotStatus", req, cb);
     }
     /**
-     * 获取基础安全防护（WAF开关）状态
+     * 开启、关闭WAF开关
      */
     async ModifyProtectionStatus(req, cb) {
         return this.request("ModifyProtectionStatus", req, cb);
@@ -695,6 +701,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetInstanceQpsLimit", req, cb);
     }
     /**
+     * 获取地域封禁规则配置
+     */
+    async DescribeAreaBanRule(req, cb) {
+        return this.request("DescribeAreaBanRule", req, cb);
+    }
+    /**
      * 本接口用于删除访问日志导出
      */
     async DeleteAccessExport(req, cb) {
@@ -771,6 +783,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUserCdcClbWafRegions(req, cb) {
         return this.request("DescribeUserCdcClbWafRegions", req, cb);
+    }
+    /**
+     * 添加（编辑）地域封禁中的地域信息
+     */
+    async ModifyAreaBanRule(req, cb) {
+        return this.request("ModifyAreaBanRule", req, cb);
     }
     /**
      * 描述WAF自动封禁模块详情

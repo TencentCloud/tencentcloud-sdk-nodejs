@@ -262,7 +262,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGrps", req, cb);
     }
     /**
-     * 本接口(DescribeIsolatedInstances)用于查询回收站实例列表。
+     * 本接口（DescribeIsolatedInstances）用于查询回收站实例列表。
      */
     async DescribeIsolatedInstances(req, cb) {
         return this.request("DescribeIsolatedInstances", req, cb);
@@ -598,7 +598,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerlessInstanceSpecs", req, cb);
     }
     /**
-     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     * 本接口（DescribeAuditLogs）用于查询数据库审计日志。
      */
     async DescribeAuditLogs(req, cb) {
         return this.request("DescribeAuditLogs", req, cb);
@@ -754,7 +754,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenAuditService", req, cb);
     }
     /**
-     * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
+     * 本接口（DeleteAuditLogFile）用于删除云数据库实例的审计日志文件。
      */
     async DeleteAuditLogFile(req, cb) {
         return this.request("DeleteAuditLogFile", req, cb);

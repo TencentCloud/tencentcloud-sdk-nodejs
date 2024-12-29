@@ -72,6 +72,7 @@ import {
   UpgradeGroupFaceModelVersionResponse,
   SearchFacesReturnsByGroupRequest,
   AnalyzeDenseLandmarksResponse,
+  DetectFaceSimilarityResponse,
   ModifyPersonBaseInfoResponse,
   ModifyPersonGroupInfoRequest,
   RevertGroupFaceModelVersionRequest,
@@ -80,6 +81,7 @@ import {
   VerifyPersonRequest,
   CompareMaskFaceResponse,
   ModifyPersonBaseInfoRequest,
+  DetectFaceSimilarityRequest,
   DetectLiveFaceAccurateRequest,
   VerifyFaceResponse,
   FaceDetailInfo,
@@ -426,6 +428,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetUpgradeGroupFaceModelVersionJobListResponse) => void
   ): Promise<GetUpgradeGroupFaceModelVersionJobListResponse> {
     return this.request("GetUpgradeGroupFaceModelVersionJobList", req, cb)
+  }
+
+  /**
+     * 对两张图片中的人脸进行相似度比对，返回人脸相似度分数。
+
+若您需要判断 “此人是否是某人”，即验证某张图片中的人是否是已知身份的某人，如常见的人脸登录场景，建议使用[人脸验证](https://www.tencentcloud.com/document/product/1059/36972)或[人员验证](https://www.tencentcloud.com/document/product/1059/36971)接口。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+  async DetectFaceSimilarity(
+    req: DetectFaceSimilarityRequest,
+    cb?: (error: string, rep: DetectFaceSimilarityResponse) => void
+  ): Promise<DetectFaceSimilarityResponse> {
+    return this.request("DetectFaceSimilarity", req, cb)
   }
 
   /**

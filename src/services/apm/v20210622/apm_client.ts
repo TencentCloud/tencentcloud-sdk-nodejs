@@ -113,7 +113,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取APM Agent信息
+   * 获取 APM Agent信息
    */
   async DescribeApmAgent(
     req: DescribeApmAgentRequest,
@@ -123,7 +123,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改APM实例接口
+   * 修改APM业务系统接口
    */
   async ModifyApmInstance(
     req: ModifyApmInstanceRequest,
@@ -164,7 +164,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * apm销毁实例
+   * 销毁 APM 业务系统
    */
   async TerminateApmInstance(
     req: TerminateApmInstanceRequest,
@@ -174,7 +174,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 业务购买APM实例，调用该接口创建
+   * 业务购买 APM 业务系统，调用该接口创建
    */
   async CreateApmInstance(
     req: CreateApmInstanceRequest,
@@ -184,7 +184,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务概览数据拉取
+   * 应用概览数据拉取
    */
   async DescribeServiceOverview(
     req: DescribeServiceOverviewRequest,

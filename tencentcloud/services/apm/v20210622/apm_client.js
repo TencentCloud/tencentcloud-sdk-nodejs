@@ -52,13 +52,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApmInstances", req, cb);
     }
     /**
-     * 获取APM Agent信息
+     * 获取 APM Agent信息
      */
     async DescribeApmAgent(req, cb) {
         return this.request("DescribeApmAgent", req, cb);
     }
     /**
-     * 修改APM实例接口
+     * 修改APM业务系统接口
      */
     async ModifyApmInstance(req, cb) {
         return this.request("ModifyApmInstance", req, cb);
@@ -83,19 +83,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMetricRecords", req, cb);
     }
     /**
-     * apm销毁实例
+     * 销毁 APM 业务系统
      */
     async TerminateApmInstance(req, cb) {
         return this.request("TerminateApmInstance", req, cb);
     }
     /**
-     * 业务购买APM实例，调用该接口创建
+     * 业务购买 APM 业务系统，调用该接口创建
      */
     async CreateApmInstance(req, cb) {
         return this.request("CreateApmInstance", req, cb);
     }
     /**
-     * 服务概览数据拉取
+     * 应用概览数据拉取
      */
     async DescribeServiceOverview(req, cb) {
         return this.request("DescribeServiceOverview", req, cb);

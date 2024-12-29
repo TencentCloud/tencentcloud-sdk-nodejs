@@ -10875,20 +10875,6 @@ export interface DescribeProductStatusResponse {
 }
 
 /**
- * DescribeIndexList返回参数结构体
- */
-export interface DescribeIndexListResponse {
-  /**
-   * ES 索引信息
-   */
-  Data: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyJavaMemShellPluginSwitch请求参数结构体
  */
 export interface ModifyJavaMemShellPluginSwitchRequest {
@@ -11444,24 +11430,6 @@ export interface ExportBaselineEffectHostListRequest {
 }
 
 /**
- * ExportMaliciousRequests返回参数结构体
- */
-export interface ExportMaliciousRequestsResponse {
-  /**
-   * 该参数已废弃
-   */
-  DownloadUrl?: string
-  /**
-   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ScanBaseline请求参数结构体
  */
 export interface ScanBaselineRequest {
@@ -11682,9 +11650,22 @@ export interface AttackSource {
 }
 
 /**
- * DescribeIndexList请求参数结构体
+ * ExportMaliciousRequests返回参数结构体
  */
-export type DescribeIndexListRequest = null
+export interface ExportMaliciousRequestsResponse {
+  /**
+   * 该参数已废弃
+   */
+  DownloadUrl?: string
+  /**
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * RetryVulFix请求参数结构体

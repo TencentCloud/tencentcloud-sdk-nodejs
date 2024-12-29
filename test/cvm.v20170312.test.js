@@ -108,9 +108,9 @@ it("cvm.v20170312.DescribeDisasterRecoverGroupQuota", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeReservedInstances", async function () {
+it("cvm.v20170312.DescribeTaskInfo", async function () {
     try {
-       const data = await client.DescribeReservedInstances({})
+       const data = await client.DescribeTaskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,29 +148,9 @@ it("cvm.v20170312.ResetInstancesType", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeReservedInstancesConfigInfos", async function () {
-    try {
-       const data = await client.DescribeReservedInstancesConfigInfos({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cvm.v20170312.DescribeInstanceFamilyConfigs", async function () {
     try {
        const data = await client.DescribeInstanceFamilyConfigs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cvm.v20170312.InquirePricePurchaseReservedInstancesOffering", async function () {
-    try {
-       const data = await client.InquirePricePurchaseReservedInstancesOffering({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,16 +518,6 @@ it("cvm.v20170312.InquiryPriceResetInstance", async function () {
     }
 })
 
-it("cvm.v20170312.PurchaseReservedInstancesOffering", async function () {
-    try {
-       const data = await client.PurchaseReservedInstancesOffering({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cvm.v20170312.ModifyInstancesRenewFlag", async function () {
     try {
        const data = await client.ModifyInstancesRenewFlag({})
@@ -671,26 +641,6 @@ it("cvm.v20170312.ModifyInstancesProject", async function () {
 it("cvm.v20170312.DescribeKeyPairs", async function () {
     try {
        const data = await client.DescribeKeyPairs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cvm.v20170312.DescribeTaskInfo", async function () {
-    try {
-       const data = await client.DescribeTaskInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cvm.v20170312.DescribeReservedInstancesOfferings", async function () {
-    try {
-       const data = await client.DescribeReservedInstancesOfferings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

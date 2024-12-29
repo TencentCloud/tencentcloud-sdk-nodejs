@@ -60,7 +60,9 @@ export declare class Client extends AbstractClient {
      */
     GetDevice(req: GetDeviceRequest, cb?: (error: string, rep: GetDeviceResponse) => void): Promise<GetDeviceResponse>;
     /**
-     * 移动网络发起Qos加速过程
+     * 产品下线
+
+移动网络发起Qos加速过程
      */
     CreateQos(req: CreateQosRequest, cb?: (error: string, rep: CreateQosResponse) => void): Promise<CreateQosResponse>;
     /**
@@ -72,7 +74,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteGroup(req: DeleteGroupRequest, cb?: (error: string, rep: DeleteGroupResponse) => void): Promise<DeleteGroupResponse>;
     /**
-     * 获取Qos加速状态
+     * 产品下线
+
+获取Qos加速状态
      */
     DescribeQos(req: DescribeQosRequest, cb?: (error: string, rep: DescribeQosResponse) => void): Promise<DescribeQosResponse>;
     /**
@@ -116,7 +120,9 @@ export declare class Client extends AbstractClient {
      */
     CreateEncryptedKey(req?: CreateEncryptedKeyRequest, cb?: (error: string, rep: CreateEncryptedKeyResponse) => void): Promise<CreateEncryptedKeyResponse>;
     /**
-     * 移动网络停止Qos加速过程
+     * 产品下线
+
+移动网络停止Qos加速过程
      */
     DeleteQos(req: DeleteQosRequest, cb?: (error: string, rep: DeleteQosResponse) => void): Promise<DeleteQosResponse>;
     /**

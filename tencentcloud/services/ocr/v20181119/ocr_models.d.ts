@@ -6123,6 +6123,26 @@ export interface VatElectronicInfo {
      * 业务类型标志
      */
     ServiceTypeLabel?: string;
+    /**
+     * 价税合计(大写)前符号
+     */
+    TotalCnMark?: string;
+    /**
+     * 价税合计(小写)前字样
+     */
+    TotalMark?: string;
+    /**
+     * 合计金额前字样
+     */
+    PretaxAmountMark?: string;
+    /**
+     * 合计税额前字样
+     */
+    TaxMark?: string;
+    /**
+     * 是否有公司印章（0：没有，1：有）
+     */
+    CompanySealMark?: number;
 }
 /**
  * RecognizeValidIDCardOCR返回参数结构体

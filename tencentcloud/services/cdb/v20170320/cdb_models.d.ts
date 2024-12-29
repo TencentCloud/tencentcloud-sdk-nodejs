@@ -57,7 +57,6 @@ export interface TaskDetail {
     EndTime?: string;
     /**
      * 任务关联的实例 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIds?: Array<string>;
     /**
@@ -274,7 +273,6 @@ export interface CreateCdbProxyRequest {
 export interface CreateCdbProxyResponse {
     /**
      * 异步任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -288,22 +286,18 @@ export interface CreateCdbProxyResponse {
 export interface InstanceRollbackRangeTime {
     /**
      * 查询数据库错误码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 查询数据库错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 实例ID列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 可回档时间范围
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Times?: Array<RollbackTimeRange>;
 }
@@ -347,62 +341,50 @@ export interface InstanceDbAuditStatus {
     AuditStatus?: string;
     /**
      * 任务状态。0-无任务；1-审计开启中，2-审计关闭中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuditTask?: number;
     /**
      * 日志保留时长。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogExpireDay?: number;
     /**
      * 高频存储时长。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HighLogExpireDay?: number;
     /**
      * 低频存储时长。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LowLogExpireDay?: number;
     /**
      * 日志存储量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BillingAmount?: number;
     /**
      * 高频存储量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HighRealStorage?: number;
     /**
      * 低频存储量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LowRealStorage?: number;
     /**
      * 是否为全审计。true-表示全审计。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuditAll?: boolean;
     /**
      * 审计开通时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateAt?: string;
     /**
      * 实例相关信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceInfo?: AuditInstanceInfo;
     /**
      * 总存储量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealStorage?: number;
     /**
      * 是否包含审计策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldRule?: boolean;
     /**
@@ -818,7 +800,7 @@ export interface DescribeDBInstancesRequest {
      */
     InstanceNames?: Array<string>;
     /**
-     * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行
+     * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行<br>34 - 原地升级待执行
      */
     TaskStatus?: Array<number | bigint>;
     /**
@@ -907,6 +889,7 @@ export interface DescribeDBInstancesRequest {
     UniqSubnetIds?: Array<string>;
     /**
      * 标签键值
+  请注意，创建中的实例无法查询到标签。
      */
     Tags?: Array<Tag>;
     /**
@@ -1035,7 +1018,6 @@ export interface DescribeInstanceUpgradeTypeResponse {
 export interface CreateCdbProxyAddressResponse {
     /**
      * 异步任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -1049,12 +1031,10 @@ export interface CreateCdbProxyAddressResponse {
 export interface RollbackTableName {
     /**
      * 回档前的原数据库表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableName: string;
     /**
      * 回档后的新数据库表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewTableName: string;
 }
@@ -1137,22 +1117,18 @@ export interface CreateAuditPolicyResponse {
 export interface LogRuleTemplateInfo {
     /**
      * 模板ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateId?: string;
     /**
      * 规则模板名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateName?: string;
     /**
      * 告警等级。1-低风险，2-中风险，3-高风险。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmLevel?: string;
     /**
      * 规则模板变更状态：0-未变更；1-已变更；2-已删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateStatus?: number;
 }
@@ -1447,12 +1423,10 @@ export interface UpgradeDBInstanceEngineVersionResponse {
 export interface ErrlogItem {
     /**
      * 错误发生时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * 错误详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
 }
@@ -1466,47 +1440,38 @@ export interface ProxyGroupInfo {
     ProxyGroupId?: string;
     /**
      * 代理版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyVersion?: string;
     /**
      * 代理支持升级版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportUpgradeProxyVersion?: string;
     /**
      * 代理状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 代理任务状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskStatus?: string;
     /**
      * 代理组节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyNode?: Array<ProxyNode>;
     /**
      * 代理组地址信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyAddress?: Array<ProxyAddress>;
     /**
      * 连接池阈值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionPoolLimit?: number;
     /**
      * 支持创建地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportCreateProxyAddress?: boolean;
     /**
      * 支持升级代理版本所需的cdb版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportUpgradeProxyMysqlVersion?: string;
 }
@@ -1546,14 +1511,12 @@ export interface BackupConfig {
 export interface Rule {
     /**
      * 划分上限
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LessThan: number;
+    LessThan?: number;
     /**
      * 权重
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Weight: number;
+    Weight?: number;
 }
 /**
  * 审计策略
@@ -1593,12 +1556,10 @@ export interface AuditPolicy {
     RuleId?: string;
     /**
      * 审计规则名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
     /**
      * 数据库实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
 }
@@ -1608,39 +1569,32 @@ export interface AuditPolicy {
 export interface ProxyNode {
     /**
      * 代理节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * CPU核数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 内存大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mem: number;
+    Mem?: number;
     /**
      * 节点状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 代理节点可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 代理节点地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 连接数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Connection: number;
+    Connection?: number;
 }
 /**
  * DescribeCdbZoneConfig返回参数结构体
@@ -1973,22 +1927,20 @@ export interface DeleteDeployGroupsRequest {
 export interface DescribeAuditConfigResponse {
     /**
      * 审计日志保存时长。目前支持的值包括：[0，7，30，180，365，1095，1825]。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogExpireDay: number;
+    LogExpireDay?: number;
     /**
      * 审计日志存储类型。目前支持的值包括："storage" - 存储型。
      */
-    LogType: string;
+    LogType?: string;
     /**
      * 是否正在关闭审计。目前支持的值包括："false"-否，"true"-是
      */
-    IsClosing: string;
+    IsClosing?: string;
     /**
      * 审计服务开通时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2059,7 +2011,6 @@ export interface DescribeParamTemplateInfoResponse {
     TemplateType?: string;
     /**
      * 参数模板引擎。支持值包括："InnoDB"，"RocksDB"。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: string;
     /**
@@ -2103,12 +2054,10 @@ export interface DeleteDatabaseRequest {
 export interface UploadInfo {
     /**
      * 文件所有分片数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllSliceNum?: number;
     /**
      * 已完成分片数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompleteNum?: number;
 }
@@ -2135,7 +2084,6 @@ export interface DisassociateSecurityGroupsRequest {
 export interface AuditRuleFilters {
     /**
      * 单条审计规则。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleFilters?: Array<RuleFilters>;
 }
@@ -2415,12 +2363,10 @@ export interface DescribeCdbProxyInfoRequest {
 export interface RollbackDBName {
     /**
      * 回档前的原数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DatabaseName: string;
     /**
      * 回档后的新数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewDatabaseName: string;
 }
@@ -2519,17 +2465,14 @@ export interface DescribeDBInstanceInfoResponse {
     Encryption?: string;
     /**
      * 加密使用的密钥 ID 。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyId?: string;
     /**
      * 密钥所在地域。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyRegion?: string;
     /**
      * 当前 CDB 后端服务使用的 KMS 服务的默认地域。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultKmsRegion?: string;
     /**
@@ -2704,22 +2647,18 @@ export interface DescribeDefaultParamsRequest {
 export interface AuditInstanceInfo {
     /**
      * 项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: number;
     /**
      * 标签信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagList?: Array<TagInfoUnit>;
     /**
      * 数据库内核类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbType?: string;
     /**
      * 数据库内核版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbVersion?: string;
 }
@@ -2729,27 +2668,22 @@ export interface AuditInstanceInfo {
 export interface CustomConfig {
     /**
      * 设备
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Device?: string;
     /**
      * 类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 设备类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceType?: string;
     /**
      * 内存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Memory?: number;
     /**
      * 核数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu?: number;
 }
@@ -2829,19 +2763,19 @@ export interface DrInfo {
     /**
      * 灾备实例状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 可用区信息
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 地域信息
      */
-    Region: string;
+    Region?: string;
     /**
      * 实例同步状态。可能的返回值为：
   0 - 灾备未同步；
@@ -2850,15 +2784,15 @@ export interface DrInfo {
   3 - 灾备同步失败；
   4 - 灾备同步修复中。
      */
-    SyncStatus: number;
+    SyncStatus?: number;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例类型
      */
-    InstanceType: number;
+    InstanceType?: number;
 }
 /**
  * ModifyBackupDownloadRestriction请求参数结构体
@@ -3018,7 +2952,6 @@ export interface DescribeErrorLogDataResponse {
     TotalCount?: number;
     /**
      * 返回的记录。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<ErrlogItem>;
     /**
@@ -3073,67 +3006,54 @@ export interface AddTimeWindowRequest {
 export interface ImportRecord {
     /**
      * 状态值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 状态值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 执行时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CostTime?: number;
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 后端任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkId?: string;
     /**
      * 导入文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileName?: string;
     /**
      * 执行进度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Process?: number;
     /**
      * 任务创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 文件大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSize?: string;
     /**
      * 任务执行信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobId?: number;
     /**
      * 导入库表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DbName?: string;
     /**
      * 异步任务的请求ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
 }
@@ -3173,7 +3093,6 @@ export interface SlaveInfo {
     First?: SlaveInstanceInfo;
     /**
      * 第二备机信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Second?: SlaveInstanceInfo;
 }
@@ -3316,14 +3235,12 @@ export interface DescribeSupportedPrivilegesRequest {
 export interface DescribeAsyncRequestInfoResponse {
     /**
      * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 任务执行信息描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Info: string;
+    Info?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3368,7 +3285,6 @@ export interface ParamTemplateInfo {
     TemplateType?: string;
     /**
      * 参数模板引擎
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: string;
 }
@@ -3643,11 +3559,11 @@ export interface DescribeParamTemplatesResponse {
     /**
      * 该用户的参数模板数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 参数模板详情。
      */
-    Items: Array<ParamTemplateInfo>;
+    Items?: Array<ParamTemplateInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3659,22 +3575,18 @@ export interface DescribeParamTemplatesResponse {
 export interface ZoneConf {
     /**
      * 可用区部署方式，可能的值为：0-单可用区；1-多可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployMode: Array<number | bigint>;
     /**
      * 主实例所在的可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterZone: Array<string>;
     /**
      * 实例为多可用区部署时，备库1所在的可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveZone: Array<string>;
     /**
      * 实例为多可用区部署时，备库2所在的可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupZone: Array<string>;
 }
@@ -3813,17 +3725,14 @@ export interface DescribeBackupOverviewResponse {
     FreeVolume?: number;
     /**
      * 用户在当前地域的异地备份总容量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemoteBackupVolume?: number;
     /**
      * 归档备份容量，包含数据备份以及日志备份。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupArchiveVolume?: number;
     /**
      * 标准存储备份容量，包含数据备份以及日志备份。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupStandbyVolume?: number;
     /**
@@ -3964,12 +3873,10 @@ export interface DescribeDBInstanceConfigResponse {
 export interface SlaveConfig {
     /**
      * 从库复制方式，可能的返回值：aysnc-异步，semisync-半同步
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReplicationMode?: string;
     /**
      * 从库可用区的正式名称，如ap-shanghai-1
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
 }
@@ -4056,7 +3963,6 @@ export interface ClusterNodeInfo {
     Weight?: number;
     /**
      * 节点状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
 }
@@ -4095,17 +4001,14 @@ export interface ModifyAuditServiceRequest {
 export interface DescribeProxyCustomConfResponse {
     /**
      * 代理配置数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 代理配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomConf?: CustomConfig;
     /**
      * 权重限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WeightRule?: Rule;
     /**
@@ -4283,12 +4186,10 @@ export interface DeviceMemInfo {
 export interface AuditLogAggregationResult {
     /**
      * 聚合维度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AggregationField?: string;
     /**
      * 聚合桶的结果集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Buckets?: Array<Bucket>;
 }
@@ -4435,12 +4336,10 @@ export interface DescribeAccountsResponse {
 export interface RollbackTimeRange {
     /**
      * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Begin?: string;
     /**
      * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     End?: string;
 }
@@ -4611,12 +4510,10 @@ export interface DeployGroupInfo {
     Quota?: number;
     /**
      * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Affinity?: string;
     /**
      * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LimitNum?: number;
     /**
@@ -4625,7 +4522,6 @@ export interface DeployGroupInfo {
     Description?: string;
     /**
      * 置放群组物理机型属性。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DevClass?: string;
 }
@@ -4919,27 +4815,22 @@ export interface DescribeBackupConfigRequest {
 export interface RoVipInfo {
     /**
      * 只读vip状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoVipStatus?: number;
     /**
      * 只读vip的子网
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoSubnetId?: number;
     /**
      * 只读vip的私有网络
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoVpcId?: number;
     /**
      * 只读vip的端口号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoVport?: number;
     /**
      * 只读vip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoVip?: string;
 }
@@ -5007,7 +4898,6 @@ export interface DescribeAuditLogFilesResponse {
     TotalCount?: number;
     /**
      * 审计日志文件详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<AuditLogFile>;
     /**
@@ -5435,27 +5325,22 @@ export interface RoGroup {
     Vport?: number;
     /**
      * 私有网络 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqVpcId?: string;
     /**
      * 子网 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UniqSubnetId?: string;
     /**
      * 只读组所在的地域。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoGroupRegion?: string;
     /**
      * 只读组所在的可用区。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoGroupZone?: string;
     /**
      * 延迟复制时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DelayReplicationTime?: number;
 }
@@ -5509,7 +5394,6 @@ export interface ParameterDetail {
     MinFunc?: string;
     /**
      * 参数是否不支持修改
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNotSupportEdit?: boolean;
 }
@@ -5692,7 +5576,6 @@ export interface DeleteAuditRuleTemplatesRequest {
 export interface CreateAuditRuleTemplateResponse {
     /**
      * 生成的规则模板ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleTemplateId?: string;
     /**
@@ -5803,7 +5686,6 @@ export interface BackupInfo {
     InstanceId?: string;
     /**
      * 备份文件是否加密， on-加密， off-未加密
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptionFlag?: string;
     /**
@@ -6028,7 +5910,6 @@ export interface RollbackTask {
     EndTime?: string;
     /**
      * 回档任务详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Detail?: Array<RollbackInstancesInfo>;
 }
@@ -6047,37 +5928,30 @@ export interface StartReplicationRequest {
 export interface ProxyInst {
     /**
      * 实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 实例类型：1 master 主实例; 2 ro 只读实例; 3 dr 灾备实例; 4 sdr 小灾备实例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: number;
     /**
      * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 只读权重,如果权重为系统自动分配，改值不生效，只代表是否启用该实例
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Weight?: number;
     /**
      * 实例所属地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 实例所属可用区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
@@ -6134,11 +6008,11 @@ export interface DescribeDBImportRecordsResponse {
     /**
      * 符合查询条件的导入任务操作日志总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的导入操作记录列表。
      */
-    Items: Array<ImportRecord>;
+    Items?: Array<ImportRecord>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6187,52 +6061,42 @@ export interface AuditFilter {
 export interface DescribeProxySupportParamResponse {
     /**
      * 支持最大代理版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyVersion?: string;
     /**
      * 是否支持连接池
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportPool?: boolean;
     /**
      * 连接池最小值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PoolMin?: number;
     /**
      * 连接池最大值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PoolMax?: number;
     /**
      * 是否支持事务拆分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportTransSplit?: boolean;
     /**
      * 支持连接池的最小代理版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportPoolMinVersion?: string;
     /**
      * 支持事务拆分的最小代理版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportTransSplitMinVersion?: string;
     /**
      * 是否支持设置只读
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportReadOnly?: boolean;
     /**
      * 是否自动均衡负载
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportAutoLoadBalance?: boolean;
     /**
      * 是否支持接入模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportAccessMode?: boolean;
     /**
@@ -6276,7 +6140,6 @@ export interface DescribeRollbackTaskDetailRequest {
 export interface AdjustCdbProxyResponse {
     /**
      * 异步任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -6333,7 +6196,6 @@ export interface DeviceNetInfo {
 export interface ModifyDBInstanceVipVportResponse {
     /**
      * 异步任务ID。(该返回字段目前已废弃)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -6424,7 +6286,6 @@ export interface InstanceInfo {
     InitFlag?: number;
     /**
      * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoVipInfo?: RoVipInfo;
     /**
@@ -6441,7 +6302,6 @@ export interface InstanceInfo {
     VpcId?: number;
     /**
      * 备机信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlaveInfo?: SlaveInfo;
     /**
@@ -6462,7 +6322,6 @@ export interface InstanceInfo {
     ProtectMode?: number;
     /**
      * 只读组详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoGroups?: Array<RoGroup>;
     /**
@@ -6495,7 +6354,6 @@ export interface InstanceInfo {
     TaskStatus?: number;
     /**
      * 主实例详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MasterInfo?: MasterInfo;
     /**
@@ -6512,7 +6370,6 @@ export interface InstanceInfo {
     InstanceName?: string;
     /**
      * 灾备实例详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DrInfo?: Array<DrInfo>;
     /**
@@ -6569,17 +6426,14 @@ export interface InstanceInfo {
     ZoneName?: string;
     /**
      * 物理机型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceClass?: string;
     /**
      * 置放群组 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeployGroupId?: string;
     /**
      * 可用区 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneId?: number;
     /**
@@ -6588,17 +6442,14 @@ export interface InstanceInfo {
     InstanceNodes?: number;
     /**
      * 标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagList?: Array<TagInfoItem>;
     /**
      * 引擎类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: string;
     /**
      * 最大延迟阈值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxDelayTime?: number;
     /**
@@ -6607,12 +6458,10 @@ export interface InstanceInfo {
     DiskType?: string;
     /**
      * 当前扩容的CPU核心数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpandCpu?: number;
     /**
      * 实例集群版节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterInfo?: Array<ClusterInfo>;
 }
@@ -6652,7 +6501,6 @@ export interface SwitchCDBProxyRequest {
 export interface StartReplicationResponse {
     /**
      * 异步任务 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -6691,7 +6539,6 @@ export interface DescribeDeployGroupListResponse {
     Total?: number;
     /**
      * 返回列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<DeployGroupInfo>;
     /**
@@ -6739,12 +6586,10 @@ export interface CreateAuditRuleTemplateRequest {
 export interface DatabasePrivilege {
     /**
      * 权限信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database: string;
 }
@@ -7188,7 +7033,6 @@ export interface DescribeTimeWindowRequest {
 export interface AdjustCdbProxyAddressResponse {
     /**
      * 异步任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -7347,7 +7191,6 @@ export interface CloseCDBProxyResponse {
 export interface StopReplicationResponse {
     /**
      * 异步任务 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -7443,13 +7286,12 @@ export interface ModifyDBInstanceProjectRequest {
 export interface Bucket {
     /**
      * 无
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Key?: string;
     /**
      * key值出现的次数。
      */
-    Count: number;
+    Count?: number;
 }
 /**
  * SwitchForUpgrade返回参数结构体
@@ -7497,48 +7339,47 @@ export interface CdbSellConfig {
     /**
      * 内存大小，单位为MB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * CPU核心数
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 磁盘最小规格，单位为GB
      */
-    VolumeMin: number;
+    VolumeMin?: number;
     /**
      * 磁盘最大规格，单位为GB
      */
-    VolumeMax: number;
+    VolumeMax?: number;
     /**
      * 磁盘步长，单位为GB
      */
-    VolumeStep: number;
+    VolumeStep?: number;
     /**
      * 每秒IO数量
      */
-    Iops: number;
+    Iops?: number;
     /**
      * 应用场景描述
      */
-    Info: string;
+    Info?: string;
     /**
      * 状态值，0 表示该规格对外售卖
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型), BASIC_V2 (基础型v2)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeviceType: string;
+    DeviceType?: string;
     /**
      * 引擎类型描述，可能的取值范围有：Innodb，RocksDB
      */
-    EngineType: string;
+    EngineType?: string;
     /**
      * 售卖规格Id
      */
-    Id: number;
+    Id?: number;
 }
 /**
  * DescribeSupportedPrivileges返回参数结构体
@@ -7588,57 +7429,46 @@ export interface CheckMigrateResult {
 export interface SlowLogItem {
     /**
      * Sql的执行时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Timestamp?: number;
     /**
      * Sql的执行时长（秒）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QueryTime?: number;
     /**
      * Sql语句。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SqlText?: string;
     /**
      * 客户端地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserHost?: string;
     /**
      * 用户名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 数据库名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database?: string;
     /**
      * 锁时长（秒）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LockTime?: number;
     /**
      * 扫描行数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RowsExamined?: number;
     /**
      * 结果集行数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RowsSent?: number;
     /**
      * Sql模板。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SqlTemplate?: string;
     /**
      * Sql语句的md5。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Md5?: string;
 }
@@ -7772,12 +7602,10 @@ export interface DescribeBackupEncryptionStatusResponse {
 export interface DescribeCdbProxyInfoResponse {
     /**
      * 代理组数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 代理组信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyInfos?: Array<ProxyGroupInfo>;
     /**
@@ -7855,7 +7683,6 @@ export interface DescribeInstanceAlarmEventsResponse {
     TotalCount?: number;
     /**
      * 事件信息。查询不到信息时，Items为null。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<InstEventInfo>;
     /**
@@ -7903,7 +7730,6 @@ export interface DescribeSlowLogDataResponse {
     TotalCount?: number;
     /**
      * 查询到的记录。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<SlowLogItem>;
     /**
@@ -7972,12 +7798,10 @@ export interface DescribeSlowLogsRequest {
 export interface TagInfoItem {
     /**
      * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue: string;
 }
@@ -8055,7 +7879,6 @@ export interface CloseCdbProxyAddressRequest {
 export interface ModifyRoGroupInfoResponse {
     /**
      * 异步任务 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRequestId?: string;
     /**
@@ -8087,12 +7910,10 @@ export interface DeleteParamTemplateResponse {
 export interface DBSwitchInfo {
     /**
      * 切换时间，格式为：2017-09-03 01:34:31
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchTime?: string;
     /**
      * 切换类型，可能的返回值为：TRANSFER - 数据迁移；MASTER2SLAVE - 主备切换；RECOVERY - 主从恢复
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchType?: string;
 }
@@ -8179,7 +8000,6 @@ export interface DescribeAuditPoliciesResponse {
     TotalCount?: number;
     /**
      * 审计策略详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<AuditPolicy>;
     /**
@@ -8193,9 +8013,8 @@ export interface DescribeAuditPoliciesResponse {
 export interface IsolateDBInstanceResponse {
     /**
      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8273,57 +8092,46 @@ export interface ProxyAddress {
     /**
      * 权重分配模式；
   系统自动分配："system"， 自定义："custom"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WeightMode?: string;
     /**
      * 是否开启延迟剔除，取值："true" | "false"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsKickOut?: boolean;
     /**
      * 最小保留数量，最小取值：0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinCount?: number;
     /**
      * 延迟剔除阈值，最小取值：0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxDelay?: number;
     /**
      * 是否自动添加RO，取值："true" | "false"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoAddRo?: boolean;
     /**
      * 是否是只读，取值："true" | "false"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: boolean;
     /**
      * 是否开启事务分离
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransSplit?: boolean;
     /**
      * 是否开启故障转移
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailOver?: boolean;
     /**
      * 是否开启连接池
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConnectionPool?: boolean;
     /**
      * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Desc?: string;
     /**
      * 实例读权重分配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyAllocation?: Array<ProxyAllocation>;
     /**
@@ -8500,12 +8308,11 @@ export interface DescribeRollbackTaskDetailResponse {
     /**
      * 符合条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 回档任务详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<RollbackTask>;
+    Items?: Array<RollbackTask>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8700,7 +8507,6 @@ export interface DescribeAuditRuleTemplatesResponse {
     TotalCount?: number;
     /**
      * 规则模板详细信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<AuditRuleTemplateInfo>;
     /**
@@ -8915,12 +8721,10 @@ export interface DescribeBackupSummariesRequest {
 export interface AnalyzeAuditLogsResponse {
     /**
      * 返回的聚合桶信息集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Items?: Array<AuditLogAggregationResult>;
     /**
      * 扫描的日志条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -9053,7 +8857,6 @@ export interface InstEventInfo {
     InstanceId?: string;
     /**
      * 节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeId?: string;
 }
@@ -9249,37 +9052,30 @@ export interface DescribeBackupDecryptionKeyResponse {
 export interface SecurityGroup {
     /**
      * 项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: number;
     /**
      * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 入站规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Inbound?: Array<Inbound>;
     /**
      * 出站规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Outbound?: Array<Outbound>;
     /**
      * 安全组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupId?: string;
     /**
      * 安全组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupName?: string;
     /**
      * 安全组备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecurityGroupRemark?: string;
 }
@@ -9392,32 +9188,26 @@ export interface AuditLog {
     ThreadId?: number;
     /**
      * 扫描行数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckRows?: number;
     /**
      * cpu执行时间，微秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuTime?: number;
     /**
      * IO等待时间，微秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IoWaitTime?: number;
     /**
      * 锁等待时间，微秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LockWaitTime?: number;
     /**
      * 开始时间，与timestamp构成一个精确到纳秒的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NsTime?: number;
     /**
      * 事物持续时间，微秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrxLivingTime?: number;
     /**
@@ -9435,22 +9225,18 @@ export interface AuditLog {
 export interface ColumnPrivilege {
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database: string;
     /**
      * 数据库表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Table: string;
     /**
      * 数据库列名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Column: string;
     /**
      * 权限信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -9644,9 +9430,8 @@ export interface RoGroupAttr {
 export interface UpgradeCDBProxyVersionResponse {
     /**
      * 异步处理ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9692,17 +9477,15 @@ export interface ModifyAccountPasswordRequest {
 export interface DescribeCpuExpandStrategyResponse {
     /**
      * 策略类型。可选值 auto、manual。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 手动扩容的 CPU 。Type为 manual 时有效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpandCpu?: string;
     /**
      * 自动扩容策略。Type 为 auto 时有效
-  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     AutoStrategy?: string;
     /**
@@ -9716,12 +9499,10 @@ export interface DescribeCpuExpandStrategyResponse {
 export interface InstanceRebootTime {
     /**
      * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 预期重启时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeInSeconds?: number;
 }
@@ -9744,17 +9525,14 @@ export interface RenewDBInstanceResponse {
 export interface TablePrivilege {
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database: string;
     /**
      * 数据库表名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Table: string;
     /**
      * 权限信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -9875,17 +9653,14 @@ export interface AuditLogFile {
     Status?: string;
     /**
      * 文件大小，单位为 KB。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileSize?: number;
     /**
      * 审计日志下载地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownloadUrl?: string;
     /**
      * 错误信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrMsg?: string;
 }
@@ -9924,12 +9699,10 @@ export interface DescribeAuditRuleTemplatesRequest {
 export interface RollbackTables {
     /**
      * 数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Database: string;
     /**
      * 数据库表详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Table: Array<RollbackTableName>;
 }
@@ -9951,7 +9724,6 @@ export interface AuditRuleTemplateInfo {
     RuleFilters?: Array<RuleFilters>;
     /**
      * 规则模板描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -10107,7 +9879,6 @@ export interface Parameter {
 export interface RollbackInstancesInfo {
     /**
      * 云数据库实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId: string;
     /**
@@ -10120,12 +9891,10 @@ export interface RollbackInstancesInfo {
     RollbackTime: string;
     /**
      * 待回档的数据库信息，表示整库回档
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Databases?: Array<RollbackDBName>;
     /**
      * 待回档的数据库表信息，表示按表回档
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tables?: Array<RollbackTables>;
 }

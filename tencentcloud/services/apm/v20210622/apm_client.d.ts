@@ -24,11 +24,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeApmInstances(req: DescribeApmInstancesRequest, cb?: (error: string, rep: DescribeApmInstancesResponse) => void): Promise<DescribeApmInstancesResponse>;
     /**
-     * 获取APM Agent信息
+     * 获取 APM Agent信息
      */
     DescribeApmAgent(req: DescribeApmAgentRequest, cb?: (error: string, rep: DescribeApmAgentResponse) => void): Promise<DescribeApmAgentResponse>;
     /**
-     * 修改APM实例接口
+     * 修改APM业务系统接口
      */
     ModifyApmInstance(req: ModifyApmInstanceRequest, cb?: (error: string, rep: ModifyApmInstanceResponse) => void): Promise<ModifyApmInstanceResponse>;
     /**
@@ -45,15 +45,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeMetricRecords(req: DescribeMetricRecordsRequest, cb?: (error: string, rep: DescribeMetricRecordsResponse) => void): Promise<DescribeMetricRecordsResponse>;
     /**
-     * apm销毁实例
+     * 销毁 APM 业务系统
      */
     TerminateApmInstance(req: TerminateApmInstanceRequest, cb?: (error: string, rep: TerminateApmInstanceResponse) => void): Promise<TerminateApmInstanceResponse>;
     /**
-     * 业务购买APM实例，调用该接口创建
+     * 业务购买 APM 业务系统，调用该接口创建
      */
     CreateApmInstance(req: CreateApmInstanceRequest, cb?: (error: string, rep: CreateApmInstanceResponse) => void): Promise<CreateApmInstanceResponse>;
     /**
-     * 服务概览数据拉取
+     * 应用概览数据拉取
      */
     DescribeServiceOverview(req: DescribeServiceOverviewRequest, cb?: (error: string, rep: DescribeServiceOverviewResponse) => void): Promise<DescribeServiceOverviewResponse>;
 }
