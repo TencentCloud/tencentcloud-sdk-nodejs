@@ -67,6 +67,10 @@ export interface AgentConfig {
 - 1表示客户端在收到字幕消息后，自行决定是否手动发送聊天信令触发一轮新的对话。
    */
   TurnDetectionMode?: number
+  /**
+   * 是否过滤掉用户只说了一个字的句子，true表示过滤，false表示不过滤，默认值为true
+   */
+  FilterOneWord?: boolean
 }
 
 /**
@@ -4052,6 +4056,7 @@ https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.9
   TargetUserId?: string
   /**
    * 机器人订阅的用户列表
+仅 TranscriptionMode 为 1或者 TranscriptionMode 为无限上麦模式支持传入多个用户列表
    */
   TargetUserIdList?: Array<string>
 }

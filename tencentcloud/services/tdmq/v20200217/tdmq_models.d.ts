@@ -1081,6 +1081,48 @@ export interface DescribeRabbitMQVirtualHostResponse {
     RequestId?: string;
 }
 /**
+ * RabbitMQ权限详情
+ */
+export interface RabbitMQPermission {
+    /**
+     * 集群实例Id
+     */
+    InstanceId?: string;
+    /**
+     * 用户名，权限关联的用户
+     */
+    User?: string;
+    /**
+     * vhost名
+     */
+    VirtualHost?: string;
+    /**
+     * 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigRegexp?: string;
+    /**
+     * 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WriteRegexp?: string;
+    /**
+     * 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReadRegexp?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+}
+/**
  * CreateRocketMQCluster请求参数结构体
  */
 export interface CreateRocketMQClusterRequest {
@@ -1246,23 +1288,29 @@ export interface DescribeRocketMQMsgRequest {
     FilterTrackGroup?: string;
 }
 /**
- * SendMessages返回参数结构体
+ * RocketMQ消费组配置信息
  */
-export interface SendMessagesResponse {
+export interface RocketMQGroupConfigOutput {
     /**
-     * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
+     * 命名空间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessageId?: string;
+    Namespace?: string;
     /**
-     * 返回的错误消息，如果返回为 “”，说明没有错误
+     * 消费组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg?: string;
+    GroupName?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 是否已导入
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Imported?: boolean;
+    /**
+     * remark
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
 }
 /**
  * CreateTopic请求参数结构体
@@ -1680,6 +1728,23 @@ export interface DescribeRocketMQSourceClusterTopicListResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRabbitMQPermission请求参数结构体
+ */
+export interface DeleteRabbitMQPermissionRequest {
+    /**
+     * 集群实例Id
+     */
+    InstanceId: string;
+    /**
+     * 用户名，登录时使用
+     */
+    User: string;
+    /**
+     * vhost名
+     */
+    VirtualHost: string;
+}
+/**
  * CreateTopic返回参数结构体
  */
 export interface CreateTopicResponse {
@@ -2091,29 +2156,13 @@ export interface DescribeMsgRequest {
     ClusterId?: string;
 }
 /**
- * RocketMQ消费组配置信息
+ * DeleteRabbitMQPermission返回参数结构体
  */
-export interface RocketMQGroupConfigOutput {
+export interface DeleteRabbitMQPermissionResponse {
     /**
-     * 命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Namespace?: string;
-    /**
-     * 消费组名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GroupName?: string;
-    /**
-     * 是否已导入
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Imported?: boolean;
-    /**
-     * remark
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * DeleteRabbitMQBinding返回参数结构体
@@ -3003,6 +3052,23 @@ export interface CreateRabbitMQVipInstanceRequest {
      * 是否打开公网接入，不传默认为false
      */
     EnablePublicAccess?: boolean;
+}
+/**
+ * DescribeRabbitMQPermission返回参数结构体
+ */
+export interface DescribeRabbitMQPermissionResponse {
+    /**
+     * 返回权限数量
+     */
+    TotalCount?: number;
+    /**
+     * 权限详情列表
+     */
+    RabbitMQPermissionList?: Array<RabbitMQPermission>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeRocketMQSmoothMigrationTask请求参数结构体
@@ -5357,6 +5423,31 @@ export interface DescribeRolesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRabbitMQPermission请求参数结构体
+ */
+export interface DescribeRabbitMQPermissionRequest {
+    /**
+     * 集群实例id
+     */
+    InstanceId: string;
+    /**
+     * 用户名，用于查询过滤，不传则查询全部
+     */
+    User?: string;
+    /**
+     * vhost名，用于查询过滤，不传则查询全部
+     */
+    VirtualHost?: string;
+    /**
+     * 分页Offset
+     */
+    Offset?: number;
+    /**
+     * 分页Limit
+     */
+    Limit?: number;
+}
+/**
  * DeleteRabbitMQUser请求参数结构体
  */
 export interface DeleteRabbitMQUserRequest {
@@ -6170,6 +6261,25 @@ export interface Subscription {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxUnackedMsgNum?: number;
+}
+/**
+ * SendMessages返回参数结构体
+ */
+export interface SendMessagesResponse {
+    /**
+     * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageId?: string;
+    /**
+     * 返回的错误消息，如果返回为 “”，说明没有错误
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Rocketmq消息消费track信息
@@ -7214,6 +7324,35 @@ export interface DescribeAMQPClustersResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyRabbitMQPermission请求参数结构体
+ */
+export interface ModifyRabbitMQPermissionRequest {
+    /**
+     * 集群实例Id
+     */
+    InstanceId: string;
+    /**
+     * 用户名，权限关联的用户
+     */
+    User: string;
+    /**
+     * vhost名称
+     */
+    VirtualHost: string;
+    /**
+     * 权限类型，declare相关操作，该用户可操作该vhost下的资源名称正则表达式
+     */
+    ConfigRegexp: string;
+    /**
+     * 权限类型，消息写入相关操作，该用户可操作该vhost下的资源名称正则表达式
+     */
+    WriteRegexp: string;
+    /**
+     * 权限类型，消息读取相关操作，该用户可操作该vhost下的资源名称正则表达式
+     */
+    ReadRegexp: string;
 }
 /**
  * 消费进度详情
@@ -8524,6 +8663,15 @@ export interface Topic {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MsgTTL?: number;
+}
+/**
+ * ModifyRabbitMQPermission返回参数结构体
+ */
+export interface ModifyRabbitMQPermissionResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCmqQueueDetail返回参数结构体

@@ -1708,8 +1708,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述WAF自动封禁模块详情
-   */
+     * 废弃接口
+
+描述WAF自动封禁模块详情
+     */
   async DescribeWafAutoDenyStatus(
     req?: DescribeWafAutoDenyStatusRequest,
     cb?: (error: string, rep: DescribeWafAutoDenyStatusResponse) => void

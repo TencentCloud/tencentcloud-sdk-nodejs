@@ -1382,15 +1382,15 @@ export interface VpnGatewayQuota {
     /**
      * 带宽配额
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 配额中文名称
      */
-    Cname: string;
+    Cname?: string;
     /**
      * 配额英文名称
      */
-    Name: string;
+    Name?: string;
 }
 /**
  * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
@@ -1556,19 +1556,16 @@ export interface DescribeFlowLogsRequest {
 export interface CcnRegionBandwidthLimitInfo {
     /**
      * 源地域，例如：ap-shanghai
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceRegion: string;
+    SourceRegion?: string;
     /**
      * 目的地域， 例如：ap-shanghai
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DestinationRegion: string;
+    DestinationRegion?: string;
     /**
      * 出带宽上限，单位：Mbps。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BandwidthLimit: number;
+    BandwidthLimit?: number;
 }
 /**
  * CloneSecurityGroup请求参数结构体
@@ -4735,12 +4732,10 @@ export interface CcnRoute {
     InstanceExtraName?: string;
     /**
      * 实例类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasType?: string;
     /**
      * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AliasInstanceId?: string;
 }
@@ -4869,17 +4864,14 @@ export interface VpnConnection {
     HealthCheckStatus?: string;
     /**
      * DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DpdEnable?: number;
     /**
      * DPD超时时间。即探测确认对端不存在需要的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DpdTimeout?: string;
     /**
      * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DpdAction?: string;
     /**
@@ -4888,17 +4880,14 @@ export interface VpnConnection {
     TagSet?: Array<Tag>;
     /**
      * 协商类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NegotiationType?: string;
     /**
      * Bgp配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BgpConfig?: BgpConfigAndAsn;
     /**
      * Nqa配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HealthCheckConfig?: HealthCheckConfig;
 }
@@ -7176,7 +7165,6 @@ export interface DescribeNetworkInterfaceLimitRequest {
 export interface ModifyVpnGatewayRoutesResponse {
     /**
      * VPN路由信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Routes?: Array<VpnGatewayRoute>;
     /**
@@ -7433,26 +7421,25 @@ export interface AccessPolicy {
     /**
      * 目的CIDR
      */
-    TargetCidr: string;
+    TargetCidr?: string;
     /**
      * 策略ID
      */
-    VpnGatewayIdSslAccessPolicyId: string;
+    VpnGatewayIdSslAccessPolicyId?: string;
     /**
      * 是否对所有用户都生效。1 生效 0不生效
      */
-    ForAllClient: number;
+    ForAllClient?: number;
     /**
      * 用户组ID
      */
-    UserGroupIds: Array<string>;
+    UserGroupIds?: Array<string>;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * Remark
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -8063,11 +8050,11 @@ export interface DescribeCcnRouteTablesResponse {
     /**
      * 路由表信息列表。
      */
-    CcnRouteTableSet: Array<CcnRouteTable>;
+    CcnRouteTableSet?: Array<CcnRouteTable>;
     /**
      * 查询到的路由表数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8799,7 +8786,6 @@ export interface ModifyVpcEndPointServiceWhiteListRequest {
 export interface DescribeTenantCcnsResponse {
     /**
      * 云联网（CCN）对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CcnSet?: Array<CcnInstanceInfo>;
     /**
@@ -8866,27 +8852,22 @@ export interface DeleteNatGatewaySourceIpTranslationNatRuleResponse {
 export interface BgpConfigAndAsn {
     /**
      * BGP通道CIDR
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TunnelCidr?: string;
     /**
      * 本端BGP IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalBgpIp?: string;
     /**
      * 对端BGP IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemoteBgpIp?: string;
     /**
      * 本端BGP ASN号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalBgpAsn?: string;
     /**
      * 对端BGP ASN号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemoteBgpAsn?: string;
 }
@@ -8984,17 +8965,14 @@ export interface SecurityPolicyDatabase {
 export interface CcnRouteTableInputPolicys {
     /**
      * 策略列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Policys?: Array<CcnRouteTableInputPolicy>;
     /**
      * 版本号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolicyVersion?: number;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
 }
@@ -10698,12 +10676,10 @@ export interface CcnInstance {
     Description?: string;
     /**
      * 实例关联的路由表ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RouteTableId?: string;
     /**
      * 实例付费方式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderType?: string;
 }
@@ -11310,7 +11286,6 @@ export interface DescribeVpnGatewayRoutesResponse {
     Routes?: Array<VpnGatewayRoute>;
     /**
      * 路由条数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -14439,22 +14414,18 @@ export interface CcnRouteTableBroadcastPolicy {
     Description?: string;
     /**
      * as-path操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateAsPath?: string;
     /**
      * as-path操作模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsPathOperateMode?: string;
     /**
      * community操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateCommunitySet?: Array<string>;
     /**
      * community操作模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CommunityOperateMode?: string;
 }
@@ -15318,44 +15289,44 @@ export interface ModifyHaVipAttributeResponse {
 export interface CcnBandwidthInfo {
     /**
      * 带宽所属的云联网ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CcnId: string;
+    CcnId?: string;
     /**
      * 实例的创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 实例的过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredTime: string;
+    ExpiredTime?: string;
     /**
      * 带宽实例的唯一ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionFlowControlId: string;
+    RegionFlowControlId?: string;
     /**
      * 带宽是否自动续费的标记。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RenewFlag: string;
+    RenewFlag?: string;
     /**
      * 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CcnRegionBandwidthLimit: CcnRegionBandwidthLimit;
+    CcnRegionBandwidthLimit?: CcnRegionBandwidthLimit;
     /**
      * 云市场实例ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MarketId: string;
+    MarketId?: string;
     /**
      * 资源绑定的标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
+    /**
+     * `true表示`Qos默认带宽；`false`表示非Qos默认带宽；
+     */
+    DefaultQosBandwidthFlag?: boolean;
+    /**
+     * 服务等级信息。
+     */
+    QosLevel?: string;
 }
 /**
  * CreateVpcPeeringConnection返回参数结构体
@@ -15976,7 +15947,12 @@ export interface DescribeVpcsResponse {
 /**
  * 云联网实例对象，该对象特用于运营端使用，不建议给租户的接口中提供该复杂类型。
  */
-export declare type CcnInstanceInfo = null;
+export interface CcnInstanceInfo {
+    /**
+     * 云联网唯一ID。
+     */
+    CcnId?: string;
+}
 /**
  * 安全组对象
  */
@@ -16090,12 +16066,10 @@ export interface DescribeVpnGatewayRoutesRequest {
 export interface GetCcnRegionBandwidthLimitsResponse {
     /**
      * 云联网（CCN）各地域出带宽详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CcnBandwidthSet?: Array<CcnBandwidthInfo>;
     /**
      * 符合条件的对象数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -16152,40 +16126,39 @@ export interface RouteSelectionPolicy {
     /**
      * 云联网ID。
      */
-    CcnId: string;
+    CcnId?: string;
     /**
      * 路由表ID。
      */
-    RouteTableId: string;
+    RouteTableId?: string;
     /**
      * 路由表名称。
      */
-    RouteTableName: string;
+    RouteTableName?: string;
     /**
      * 实例类型。如VPC
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 源端cidr。
      */
-    SourceCidrBlock: string;
+    SourceCidrBlock?: string;
     /**
      * 路由表描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 关联实例所属UIN（根账号）。
      */
-    InstanceUin: string;
+    InstanceUin?: string;
 }
 /**
  * 云联网（CCN）地域出带宽上限
@@ -16205,7 +16178,6 @@ export interface CcnRegionBandwidthLimit {
     IsBm?: boolean;
     /**
      * 目的地域，例如：ap-shanghai
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstRegion?: string;
     /**
@@ -16751,12 +16723,10 @@ export interface CrossBorderCompliance {
     CreatedTime?: string;
     /**
      * 法定代表人身份证号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LegalPersonId?: string;
     /**
      * 法定代表人身份证。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LegalPersonIdCard?: string;
 }
@@ -17118,14 +17088,17 @@ export interface CreateAssistantCidrResponse {
 export interface CustomerGatewayVendor {
     /**
      * 平台。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Platform: string;
     /**
      * 软件版本。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SoftwareVersion: string;
     /**
      * 供应商名称。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     VendorName: string;
 }
@@ -17645,7 +17618,6 @@ export interface DisassociateAddressRequest {
 export interface DescribeCrossBorderFlowMonitorResponse {
     /**
      * 云联网跨境带宽监控数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossBorderFlowMonitorData?: Array<CrossBorderFlowMonitorData>;
     /**

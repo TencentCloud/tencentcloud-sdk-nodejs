@@ -78,6 +78,16 @@ it("ocr.v20181119.InsuranceBillOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeOnlineTaxiItineraryOCR", async function () {
+    try {
+       const data = await client.RecognizeOnlineTaxiItineraryOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.IDCardOCR", async function () {
     try {
        const data = await client.IDCardOCR({})
@@ -368,9 +378,9 @@ it("ocr.v20181119.GetTaskState", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeOnlineTaxiItineraryOCR", async function () {
+it("ocr.v20181119.GetOCRResult", async function () {
     try {
-       const data = await client.RecognizeOnlineTaxiItineraryOCR({})
+       const data = await client.GetOCRResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,6 +771,16 @@ it("ocr.v20181119.PassportOCR", async function () {
 it("ocr.v20181119.FinanBillOCR", async function () {
     try {
        const data = await client.FinanBillOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.GetOCRToken", async function () {
+    try {
+       const data = await client.GetOCRToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

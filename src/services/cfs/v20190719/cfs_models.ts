@@ -1121,11 +1121,11 @@ export interface PGroup {
   /**
    * 权限组ID
    */
-  PGroupId: string
+  PGroupId?: string
   /**
    * 权限组名称
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -2285,23 +2285,23 @@ export interface PGroupInfo {
   /**
    * 权限组ID
    */
-  PGroupId: string
+  PGroupId?: string
   /**
    * 权限组名称
    */
-  Name: string
+  Name?: string
   /**
    * 描述信息
    */
-  DescInfo: string
+  DescInfo?: string
   /**
    * 创建时间
    */
-  CDate: string
+  CDate?: string
   /**
    * 关联文件系统个数
    */
-  BindCfsNum: number
+  BindCfsNum?: number
 }
 
 /**

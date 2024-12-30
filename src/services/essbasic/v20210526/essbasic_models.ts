@@ -3758,6 +3758,29 @@ export interface CreateConsoleLoginUrlRequest {
 ![image](https://qcloudimg.tencent-cloud.cn/raw/c3639b05503d3735bac483d17aa6b0a3.png)
    */
   AutoActive?: boolean
+  /**
+   * 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。
+   */
+  BusinessLicense?: string
+  /**
+   * 组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。
+   */
+  ProxyAddress?: string
+  /**
+   * 组织机构法人的姓名。 请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。
+   */
+  ProxyLegalName?: string
+  /**
+   * 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。
+ p.s. 如果上传授权书 ，需遵循以下条件 
+1. 超管的信息（超管姓名，超管手机号）必须为必填参数。 
+2. 认证方式AuthorizationTypes必须只能是上传授权书方式	
+   */
+  PowerOfAttorneys?: Array<string>
+  /**
+   * 企业认证时个性化能力信息
+   */
+  OrganizationAuthorizationOptions?: OrganizationAuthorizationOptions
 }
 
 /**
@@ -5487,6 +5510,27 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    * 合同流程名称是否应包含扫码签署人的信息，且遵循特定格式（flowname-姓名-手机号后四位）。 例如，通过参数FlowName设定的扫码发起合同名称为“员工入职合同”，当扫码人张三（手机号18800009527）扫码签署时，合同名称将自动生成为“员工入职合同-张三-9527”。
    */
   FlowNameAppendScannerInfo?: boolean
+}
+
+/**
+ * 企业认证可选项，其中包括 社会信用代码是否一致，企业名称是否一致，法人是否一致等信息。
+代表生成链接的时候指定的这些信息不能被用户修改。
+
+p.s. 注意这些选项一旦传递，相关的信息也不会被上传的营业执照里面包含的信息所覆盖。
+ */
+export interface OrganizationAuthorizationOptions {
+  /**
+   * 对方打开链接认证时，对方填写的营业执照的社会信用代码是否与接口上传上来的要保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>
+   */
+  UniformSocialCreditCodeSame?: boolean
+  /**
+   * 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>p.s. 仅在企业名称不为空时有效
+   */
+  OrganizationNameSame?: boolean
+  /**
+   * 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>p.s. 仅在法人姓名不为空时有效
+   */
+  LegalNameSame?: boolean
 }
 
 /**

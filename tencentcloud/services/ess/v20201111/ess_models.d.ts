@@ -1552,14 +1552,21 @@ export interface CreateOrganizationAuthUrlRequest {
     UniformSocialCreditCodeSame?: boolean;
     /**
      * 对方打开链接认证时，法人姓名是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>
+  
+  p.s. 仅在法人姓名不为空时有效
      */
     LegalNameSame?: boolean;
     /**
      * 对方打开链接认证时，认证人姓名是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>
+  
+  p.s. 仅在认证人姓名不为空时有效
      */
     AdminNameSame?: boolean;
     /**
      * 对方打开链接认证时，认证人居民身份证件号是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>
+  
+  p.s. 仅在认证人身份证号不为空时有效
+  
      */
     AdminIdCardNumberSame?: boolean;
     /**
@@ -1567,10 +1574,15 @@ export interface CreateOrganizationAuthUrlRequest {
   <li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li>
   <li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li>
   </ul>
+  
+  p.s. 仅在认证人手机号不为空时有效
      */
     AdminMobileSame?: boolean;
     /**
      * 对方打开链接认证时，企业名称是否要与接口传递上来的保持一致。<ul><li><b>false（默认值）</b>：关闭状态，实际认证时允许与接口传递的信息存在不一致。</li><li><b>true</b>：启用状态，实际认证时必须与接口传递的信息完全相符。</li></ul>
+  
+  
+  p.s. 仅在企业名称不为空时有效
      */
     OrganizationNameSame?: boolean;
     /**
@@ -1597,6 +1609,14 @@ export interface CreateOrganizationAuthUrlRequest {
   ![image](https://qcloudimg.tencent-cloud.cn/raw/88e0b45095a5c589de8995462ad755dc.jpg)
      */
     Initialization?: Array<number | bigint>;
+    /**
+     * 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。
+  授权书可以通过接口[生成企业授权书](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthFile) 来获得。
+  p.s. 如果上传授权书 ，需遵循以下条件
+  1.  超管的信息（超管姓名，超管手机号）必须为必填参数。
+  2.  认证方式AuthorizationTypes必须只能是上传授权书方式
+     */
+    PowerOfAttorneys?: Array<string>;
 }
 /**
  * CreateBatchQuickSignUrl返回参数结构体
@@ -5823,7 +5843,7 @@ export interface RegistrationOrganizationInfo {
     /**
      * 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。
   p.s. 如果上传授权书 ，需遵循以下条件
-  1. 超管的信息（超管姓名，超管身份证，超管手机号）必须为必填参数。
+  1. 超管的信息（超管姓名，超管手机号）必须为必填参数。
   2. 超管的个人身份必须在电子签已经实名。
   2. 认证方式AuthorizationTypes必须只能是上传授权书方式
   

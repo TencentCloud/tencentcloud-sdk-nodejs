@@ -932,6 +932,10 @@ export interface ModifyOutputInfo {
      * 转推RIST的配置。
      */
     RISTSettings?: CreateOutputRistSettings;
+    /**
+     * 输出类型：Internet/TencentCSS/StreamLive
+     */
+    OutputType?: string;
 }
 /**
  * 点播文件指定时间点截图信息

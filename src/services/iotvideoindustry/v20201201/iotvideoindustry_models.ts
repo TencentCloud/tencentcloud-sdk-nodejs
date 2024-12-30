@@ -63,7 +63,7 @@ export interface CreateRecordingPlanResponse {
   /**
    * 录制计划ID
    */
-  PlanId: string
+  PlanId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -111,7 +111,7 @@ export interface DeleteTimeTemplateResponse {
    * 操作结果，OK：成功，其他：失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -228,7 +228,7 @@ export interface GetRecordDatesByDevResponse {
    * 含有录像文件的日期列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Dates: Array<string>
+  Dates?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -293,7 +293,7 @@ export interface DescribeRecordDatesByChannelResponse {
    * 含有录像文件的日期列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Dates: Array<string>
+  Dates?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -566,12 +566,12 @@ export interface DescribeWarningsResponse {
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 告警列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<WarningsData>
+  Data?: Array<WarningsData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -784,12 +784,12 @@ export interface DescribeRecordingPlansResponse {
    * 录制计划详情·列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Plans: Array<RecordPlanDetail>
+  Plans?: Array<RecordPlanDetail>
   /**
    * 录制计划总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -839,15 +839,15 @@ export interface DescribeVideoListResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 已废弃
    */
-  VideoList: RecordTaskItem
+  VideoList?: RecordTaskItem
   /**
    * 录像详情列表
    */
-  RecordList: Array<RecordTaskItem>
+  RecordList?: Array<RecordTaskItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1051,12 +1051,12 @@ export interface CreateDeviceGroupResponse {
    * 响应结果，“OK”为成功，其他为失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 分组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1071,12 +1071,12 @@ export interface GetVideoListByConResponse {
    * 录像详情列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VideoList: Array<RecordTaskItem>
+  VideoList?: Array<RecordTaskItem>
   /**
    * 录像总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1200,7 +1200,7 @@ export interface ModifyDeviceDataResponse {
    * 操作结果,“OK”表示成功，其他表示失败。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1745,7 +1745,7 @@ export interface ModifyRecordingPlanResponse {
   /**
    * 操作结果
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1786,7 +1786,7 @@ export interface GetRecordPlanByDevResponse {
    * 录制计划详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Plan: RecordPlanItem
+  Plan?: RecordPlanItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2066,17 +2066,17 @@ export interface CreateDeviceResponse {
    * 设备编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceCode: string
+  DeviceCode?: string
   /**
    * 设备唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceId: string
+  DeviceId?: string
   /**
    * 设备虚拟组信息，仅在创建NVR时返回该值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirtualGroupId: string
+  VirtualGroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2442,7 +2442,7 @@ export interface GetTimeTemplateByIdResponse {
    * 时间模板详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Template: TimeTemplateItem
+  Template?: TimeTemplateItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2750,7 +2750,7 @@ export interface UpdateDevicePassWordResponse {
    * 操作结果，“OK”表示成功，其他表示失败。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2830,7 +2830,7 @@ export interface UpdateTimeTemplateResponse {
   /**
    * 操作结果，“OK”表示成功，其他表示失败。
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2886,7 +2886,7 @@ export interface CreateRecordPlanResponse {
   /**
    * 录制计划ID
    */
-  PlanId: string
+  PlanId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3054,7 +3054,7 @@ export interface DescribeDeviceStreamsResponse {
   /**
    * 设备实时流地址列表
    */
-  Data: DescribeDeviceStreamsData
+  Data?: DescribeDeviceStreamsData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3069,12 +3069,12 @@ export interface DescribeLiveVideoListResponse {
    * 总的条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 录制任务详情数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordList: Array<LiveRecordItem>
+  RecordList?: Array<LiveRecordItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3129,7 +3129,7 @@ export interface DescribeDeviceGroupResponse {
    * 设备所在分组信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevGroups: Array<DevGroupInfo>
+  DevGroups?: Array<DevGroupInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3285,12 +3285,12 @@ export interface DescribeLiveChannelListResponse {
    * 频道总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 频道信息数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveChannels: Array<LiveChannelInfo>
+  LiveChannels?: Array<LiveChannelInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3305,11 +3305,11 @@ export interface GetTimeTemplatesResponse {
    * 时间模板列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Templates: Array<TimeTemplateItem>
+  Templates?: Array<TimeTemplateItem>
   /**
    * 时间模板总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3382,12 +3382,12 @@ export interface DescribeAllDeviceListResponse {
    * 设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 设备详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Devices: Array<AllDeviceInfo>
+  Devices?: Array<AllDeviceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3665,7 +3665,7 @@ export interface DescribeRecordDatesByLiveResponse {
    * 录制日期数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Dates: Array<string>
+  Dates?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3679,7 +3679,7 @@ export interface UpdateRecordPlanResponse {
   /**
    * 操作结果
    */
-  Status: string
+  Status?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4065,7 +4065,7 @@ export interface GetRecordPlanByIdResponse {
    * 录制计划详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Plan: RecordPlanItem
+  Plan?: RecordPlanItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4174,7 +4174,7 @@ export interface DescribeRecordingPlanByIdResponse {
    * 录制计划详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Plan: RecordPlanDetail
+  Plan?: RecordPlanDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4549,7 +4549,7 @@ export interface DescribeDevicePassWordResponse {
   /**
    * 设备密码
    */
-  PassWord: string
+  PassWord?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

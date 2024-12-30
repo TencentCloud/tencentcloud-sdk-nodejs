@@ -39,55 +39,55 @@ export interface ClusterOverview {
     /**
      * 集群ID。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
-     * 集群状态。取值范围：<br><li>PENDING：创建中<br><li>INITING：初始化中<br><li>INIT_FAILED：初始化失败<br><li>RUNNING：运行中<br><li>TERMINATING：销毁中
+     * 集群状态。取值范围：<br><li>PENDING：创建中</li><br><li>INITING：初始化中</li><br><li>INIT_FAILED：初始化失败</li><br><li>RUNNING：运行中</li><br><li>TERMINATING：销毁中</li>
      */
-    ClusterStatus: string;
+    ClusterStatus?: string;
     /**
      * 集群名称。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群位置信息。
      */
-    Placement: Placement;
+    Placement?: Placement;
     /**
      * 集群创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 集群调度器。
      */
-    SchedulerType: string;
+    SchedulerType?: string;
     /**
      * 计算节点数量。
      */
-    ComputeNodeCount: number;
+    ComputeNodeCount?: number;
     /**
      * 计算节点概览。
      */
-    ComputeNodeSet: Array<ComputeNodeOverview>;
+    ComputeNodeSet?: Array<ComputeNodeOverview>;
     /**
      * 管控节点数量。
      */
-    ManagerNodeCount: number;
+    ManagerNodeCount?: number;
     /**
      * 管控节点概览。
      */
-    ManagerNodeSet: Array<ManagerNodeOverview>;
+    ManagerNodeSet?: Array<ManagerNodeOverview>;
     /**
      * 登录节点概览。
      */
-    LoginNodeSet: Array<LoginNodeOverview>;
+    LoginNodeSet?: Array<LoginNodeOverview>;
     /**
      * 登录节点数量。
      */
-    LoginNodeCount: number;
+    LoginNodeCount?: number;
     /**
      * 集群所属私有网络ID。
      */
-    VpcId: string;
+    VpcId?: string;
 }
 /**
  * 队列信息概览。
@@ -255,7 +255,7 @@ export interface ExpansionNodeConfig {
      */
     Placement: Placement;
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。</li>
      */
     InstanceChargeType?: string;
     /**
@@ -263,8 +263,7 @@ export interface ExpansionNodeConfig {
      */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-     * 节点机型。不同实例机型指定了不同的资源规格。
-  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     * 节点机型。不同实例机型指定了不同的资源规格。 <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -280,21 +279,21 @@ export interface NodeActivity {
      * 节点活动所在的实例ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeInstanceId: string;
+    NodeInstanceId?: string;
     /**
-     * 节点活动状态。取值范围：<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>FAILED：活动失败
+     * 节点活动状态。取值范围：<br><li>RUNNING：运行中</li><br><li>SUCCESSFUL：活动成功</li><br><li>FAILED：活动失败</li>
      */
-    NodeActivityStatus: string;
+    NodeActivityStatus?: string;
     /**
      * 节点活动状态码。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeActivityStatusCode: string;
+    NodeActivityStatusCode?: string;
     /**
      * 节点活动状态原因。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeActivityStatusReason: string;
+    NodeActivityStatusReason?: string;
 }
 /**
  * 描述了实例的抽象位置
@@ -358,52 +357,51 @@ export interface ClusterActivity {
     /**
      * 集群ID。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群活动ID。
      */
-    ActivityId: string;
+    ActivityId?: string;
     /**
-     * 集群活动类型。取值范围：<br><li>CreateAndAddNodes：创建实例并添加进集群<br><li>RemoveNodesFromCluster：从集群移除实例<br><li>TerminateNodes：销毁实例<br><li>MountStorageOption：增加挂载选项并进行挂载<br><li>UmountStorageOption：删除集群挂载存储选项并解挂载
-  
+     * 集群活动类型。取值范围：<br><li>CreateAndAddNodes：创建实例并添加进集群</li><br><li>RemoveNodesFromCluster：从集群移除实例</li><br><li>TerminateNodes：销毁实例</li><br><li>MountStorageOption：增加挂载选项并进行挂载</li><br><li>UmountStorageOption：删除集群挂载存储选项并解挂载</li>
      */
-    ActivityType: string;
+    ActivityType?: string;
     /**
-     * 集群活动状态。取值范围：<br><li>PENDING：等待运行<br><li>RUNNING：运行中<br><li>SUCCESSFUL：活动成功<br><li>PARTIALLY_SUCCESSFUL：活动部分成功<br><li>FAILED：活动失败
+     * 集群活动状态。取值范围：<br><li>PENDING：等待运行</li><br><li>RUNNING：运行中</li><br><li>SUCCESSFUL：活动成功</li><br><li>PARTIALLY_SUCCESSFUL：活动部分成功</li><br><li>FAILED：活动失败</li>
      */
-    ActivityStatus: string;
+    ActivityStatus?: string;
     /**
      * 集群活动状态码。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActivityStatusCode: string;
+    ActivityStatusCode?: string;
     /**
      * 集群活动结果详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultDetail: string;
+    ResultDetail?: string;
     /**
      * 集群活动起因。
      */
-    Cause: string;
+    Cause?: string;
     /**
      * 集群活动描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * 集群活动相关节点活动集合。
      */
-    RelatedNodeActivitySet: Array<NodeActivity>;
+    RelatedNodeActivitySet?: Array<NodeActivity>;
     /**
      * 集群活动开始时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 集群活动结束时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
 }
 /**
  * CreateCluster返回参数结构体
@@ -576,15 +574,15 @@ export interface GooseFSOptionOverview {
     /**
      * 文件系统本地挂载路径。
      */
-    LocalPath: string;
+    LocalPath?: string;
     /**
      * 文件系统远程挂载路径。
      */
-    RemotePath: string;
+    RemotePath?: string;
     /**
      * 文件系统master的ip和端口。
      */
-    Masters: Array<string>;
+    Masters?: Array<string>;
 }
 /**
  * 扩容队列配置。
@@ -890,7 +888,7 @@ export interface AddNodesRequest {
      */
     ImageId?: string;
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。</li>
      */
     InstanceChargeType?: string;
     /**
@@ -898,7 +896,7 @@ export interface AddNodesRequest {
      */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
-     * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+     * 节点机型。不同实例机型指定了不同的资源规格。<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -932,12 +930,11 @@ export interface AddNodesRequest {
      */
     ClientToken?: string;
     /**
-     * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。<li>SGE默认队列为：all.q。
-  
+     * 队列名称。不指定则为默认队列。<li>SLURM默认队列为：compute。</li><li>SGE默认队列为：all.q。</li>
      */
     QueueName?: string;
     /**
-     * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。<br><li>Login：登录节点。
+     * 添加节点角色。默认值：Compute<br><li>Compute：计算节点。</li><br><li>Login：登录节点。</li>
      */
     NodeRole?: string;
     /**
@@ -949,7 +946,7 @@ export interface AddNodesRequest {
      */
     DryRun?: boolean;
     /**
-     * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。<li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。
+     * 添加节点类型。默认取值：STATIC。<li>STATIC：静态节点，不会参与弹性伸缩流程。</li><li>DYNAMIC：弹性节点，会被弹性缩容的节点。管控节点和登录节点不支持此参数。</li>
      */
     NodeType?: string;
 }
@@ -1185,7 +1182,7 @@ export interface InternetAccessible {
  */
 export interface ComputeNode {
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。</li>
      */
     InstanceChargeType?: string;
     /**
@@ -1194,7 +1191,7 @@ export interface ComputeNode {
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
      * 节点机型。不同实例机型指定了不同的资源规格。
-  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -1212,7 +1209,7 @@ export interface ComputeNode {
     /**
      * 节点显示名称。<br><li>
   不指定节点显示名称则默认显示‘未命名’。
-  最多支持60个字符。
+  最多支持60个字符。</li>
      */
     InstanceName?: string;
 }
@@ -1298,7 +1295,7 @@ export interface DataDisk {
      */
     DiskSize: number;
     /**
-     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘</li><br><li>LOCAL_SSD：本地SSD硬盘</li><br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定</li><br><li>CLOUD_BASIC：普通云硬盘</li><br><li>CLOUD_PREMIUM：高性能云硬盘</li><br><li>CLOUD_SSD：SSD云硬盘</li><br><li>CLOUD_HSSD：增强型SSD云硬盘</li><br><li>CLOUD_TSSD：极速型SSD云硬盘</li><br><br>默认取值：LOCAL_BASIC。</li>
      */
     DiskType?: string;
 }

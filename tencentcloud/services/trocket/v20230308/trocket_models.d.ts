@@ -1859,6 +1859,15 @@ export interface DescribeMQTTInstanceListRequest {
     IncludeNew?: boolean;
 }
 /**
+ * ModifyConsumerGroup返回参数结构体
+ */
+export interface ModifyConsumerGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateMQTTInstance返回参数结构体
  */
 export interface CreateMQTTInstanceResponse {
@@ -2333,6 +2342,32 @@ export interface CreateInstanceRequest {
     ZoneIds?: Array<number | bigint>;
 }
 /**
+ * 消费者客户端
+ */
+export interface ConsumerClient {
+    /**
+     * 客户端ID
+     */
+    ClientId?: string;
+    /**
+     * 客户端地址
+     */
+    ClientAddr?: string;
+    /**
+     * 客户端SDK语言
+     */
+    Language?: string;
+    /**
+     * 客户端SDK版本
+     */
+    Version?: string;
+    /**
+     * 客户端消费堆积
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerLag?: number;
+}
+/**
  * DescribeConsumerGroup返回参数结构体
  */
 export interface DescribeConsumerGroupResponse {
@@ -2383,6 +2418,35 @@ export interface DescribeConsumerGroupResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeConsumerClient请求参数结构体
+ */
+export interface DescribeConsumerClientRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 客户端ID
+     */
+    ClientId: string;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit?: number;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
 }
 /**
  * ModifyTopic返回参数结构体
@@ -2692,9 +2756,19 @@ export interface DeleteMQTTTopicResponse {
     RequestId?: string;
 }
 /**
- * ModifyConsumerGroup返回参数结构体
+ * DescribeConsumerClient返回参数结构体
  */
-export interface ModifyConsumerGroupResponse {
+export interface DescribeConsumerClientResponse {
+    /**
+     * 客户端详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Client?: ConsumerClient;
+    /**
+     * 主题消费信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicList?: Array<TopicConsumeStats>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3010,6 +3084,36 @@ export interface DescribeTopicListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 主题消费进度
+ */
+export interface TopicConsumeStats {
+    /**
+     * 主题名称
+     */
+    Topic?: string;
+    /**
+     * 主题类型
+     */
+    TopicType?: string;
+    /**
+     * 单节点主题队列数量
+     */
+    QueueNum?: number;
+    /**
+     * 消费堆积
+     */
+    ConsumerLag?: number;
+    /**
+     * 订阅规则
+     */
+    SubString?: string;
+    /**
+     * 最后消费进度更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastUpdateTime?: number;
 }
 /**
  * DescribeMQTTTopic请求参数结构体

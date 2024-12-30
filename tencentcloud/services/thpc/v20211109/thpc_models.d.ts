@@ -189,7 +189,7 @@ export interface CreateClusterRequest {
      */
     ComputeNodeCount?: number;
     /**
-     * 调度器类型。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
+     * 调度器类型。<br><li>SGE：SGE调度器。</li><br><li>SLURM：SLURM调度器。</li>
      */
     SchedulerType?: string;
     /**
@@ -221,8 +221,7 @@ export interface CreateClusterRequest {
      */
     DryRun?: boolean;
     /**
-     * 域名字服务类型。默认值：NIS
-  <li>NIS：NIS域名字服务。
+     * 域名字服务类型。默认值：NIS<li>NIS：NIS域名字服务。</li>
      */
     AccountType?: string;
     /**
@@ -269,7 +268,7 @@ export interface CreateClusterResponse {
      * 集群ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -465,7 +464,7 @@ export interface LoginNodeOverview {
  */
 export interface ComputeNode {
     /**
-     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+     * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。</li>
      */
     InstanceChargeType?: string;
     /**
@@ -474,7 +473,7 @@ export interface ComputeNode {
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
      * 节点机型。不同实例机型指定了不同的资源规格。
-  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+  <br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。</li>
      */
     InstanceType?: string;
     /**
@@ -492,7 +491,7 @@ export interface ComputeNode {
     /**
      * 节点显示名称。<br><li>
   不指定节点显示名称则默认显示‘未命名’。
-  最多支持60个字符。
+  最多支持60个字符。</li>
      */
     InstanceName?: string;
 }
@@ -503,11 +502,11 @@ export interface DescribeClustersResponse {
     /**
      * 集群概览信息列表。
      */
-    ClusterSet: Array<ClusterOverview>;
+    ClusterSet?: Array<ClusterOverview>;
     /**
      * 集群数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

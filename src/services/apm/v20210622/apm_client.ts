@@ -103,7 +103,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * APM实例列表拉取
+   * 拉取 APM 业务系统列表
    */
   async DescribeApmInstances(
     req: DescribeApmInstancesRequest,

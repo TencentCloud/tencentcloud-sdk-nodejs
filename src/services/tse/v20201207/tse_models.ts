@@ -4832,6 +4832,11 @@ export interface GovernanceNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceExportTo?: Array<string>
+  /**
+   * 是否开启同步到全局注册中心	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SyncToGlobalRegistry?: boolean
 }
 
 /**
@@ -5285,6 +5290,10 @@ export interface GovernanceService {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Revision?: string
+  /**
+   * 是否开启同步到全局注册中心
+   */
+  SyncToGlobalRegistry?: boolean
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RecognizeOnlineTaxiItineraryOCRResponse, HKIDCardOCRRequest, BankSlipOCRRequest, BusinessCardOCRResponse, BankCardOCRRequest, CarInvoiceOCRRequest, RecognizeTravelCardOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, MLIDPassportOCRRequest, RecognizeGeneralTextImageWarnResponse, SmartStructuralOCRV2Request, TextDetectResponse, TollInvoiceOCRResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, WaybillOCRResponse, CreateAIFormTaskRequest, ClassifyStoreNameRequest, InvoiceGeneralOCRRequest, HmtResidentPermitOCRResponse, EnterpriseLicenseOCRResponse, InstitutionOCRResponse, DriverLicenseOCRRequest, SmartStructuralProRequest, RecognizeTableOCRResponse, QrcodeOCRResponse, MainlandPermitOCRRequest, SmartStructuralOCRV2Response, EnterpriseLicenseOCRRequest, SmartStructuralOCRRequest, RecognizeStoreNameRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, SmartStructuralOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, RideHailingDriverLicenseOCRRequest, GeneralAccurateOCRResponse, QrcodeOCRRequest, TaxiInvoiceOCRResponse, RecognizeGeneralInvoiceRequest, GeneralBasicOCRResponse, RecognizeStoreNameResponse, RecognizeMedicalInvoiceOCRResponse, RecognizeValidIDCardOCRRequest, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VatInvoiceVerifyNewRequest, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, RecognizeThaiIDCardOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, VatInvoiceVerifyNewResponse, TaxiInvoiceOCRRequest, RecognizeContainerOCRRequest, TextDetectRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, PropOwnerCertOCRRequest, ImageEnhancementResponse, PassportOCRResponse, VehicleRegCertOCRRequest, RecognizeTravelCardOCRResponse, LicensePlateOCRRequest, GeneralBasicOCRRequest, ReconstructDocumentResponse, GeneralEfficientOCRRequest, AdvertiseOCRRequest, RideHailingDriverLicenseOCRResponse, ImageEnhancementRequest, EnglishOCRRequest, VatInvoiceVerifyResponse, RecognizeValidIDCardOCRResponse, IDCardOCRResponse, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, FlightInvoiceOCRResponse, ShipInvoiceOCRResponse, ReconstructDocumentRequest, InstitutionOCRRequest, ArithmeticOCRRequest, VerifyOfdVatInvoiceOCRRequest, FinanBillSliceOCRRequest, ClassifyStoreNameResponse, VatRollInvoiceOCRRequest, RecognizeTableAccurateOCRRequest, SealOCRResponse, FinanBillOCRResponse, RecognizeHealthCodeOCRRequest, BankSlipOCRResponse, RecognizeEncryptedIDCardOCRResponse, VinOCRResponse, EduPaperOCRRequest, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RecognizeHealthCodeOCRResponse, RecognizeEncryptedIDCardOCRRequest, CreateAIFormTaskResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, VehicleRegCertOCRResponse, GeneralFastOCRRequest, RecognizeGeneralInvoiceResponse, GetTaskStateResponse, GetTaskStateRequest, RecognizeMedicalInvoiceOCRRequest, InsuranceBillOCRResponse, GeneralEfficientOCRResponse, ShipInvoiceOCRRequest, MLIDPassportOCRResponse, SealOCRRequest, VerifyOfdVatInvoiceOCRResponse, HmtResidentPermitOCRRequest, RecognizeTableAccurateOCRResponse, ResidenceBookletOCRRequest, BusInvoiceOCRResponse, MainlandPermitOCRResponse, MLIDCardOCRRequest, EnglishOCRResponse, RecognizeForeignPermanentResidentIdCardResponse, BusInvoiceOCRRequest, OrgCodeCertOCRResponse, RideHailingTransportLicenseOCRResponse, RecognizeContainerOCRResponse, SmartStructuralProResponse, PermitOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, AdvertiseOCRResponse, VehicleLicenseOCRRequest, RecognizeOnlineTaxiItineraryOCRRequest, IDCardOCRRequest, MixedInvoiceDetectRequest, WaybillOCRRequest, VinOCRRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, RecognizeTableOCRRequest, EstateCertOCRRequest, BizLicenseOCRResponse, TableOCRRequest, VatInvoiceOCRResponse, QuotaInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, FinanBillOCRRequest, QuotaInvoiceOCRResponse, RecognizeGeneralTextImageWarnRequest, RecognizeForeignPermanentResidentIdCardRequest, GeneralFastOCRResponse } from "./ocr_models";
+import { RecognizeOnlineTaxiItineraryOCRResponse, HKIDCardOCRRequest, BankSlipOCRRequest, BusinessCardOCRResponse, BankCardOCRRequest, CarInvoiceOCRRequest, RecognizeTravelCardOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, MLIDPassportOCRRequest, RecognizeGeneralTextImageWarnResponse, SmartStructuralOCRV2Request, TextDetectResponse, TollInvoiceOCRResponse, GetOCRTokenResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, WaybillOCRResponse, CreateAIFormTaskRequest, ClassifyStoreNameRequest, InvoiceGeneralOCRRequest, HmtResidentPermitOCRResponse, EnterpriseLicenseOCRResponse, InstitutionOCRResponse, DriverLicenseOCRRequest, SmartStructuralProRequest, RecognizeTableOCRResponse, QrcodeOCRResponse, MainlandPermitOCRRequest, SmartStructuralOCRV2Response, EnterpriseLicenseOCRRequest, SmartStructuralOCRRequest, RecognizeStoreNameRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, SmartStructuralOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, RideHailingDriverLicenseOCRRequest, GeneralAccurateOCRResponse, QrcodeOCRRequest, TaxiInvoiceOCRResponse, RecognizeGeneralInvoiceRequest, GeneralBasicOCRResponse, RecognizeMedicalInvoiceOCRResponse, RecognizeValidIDCardOCRRequest, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VinOCRRequest, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, RecognizeThaiIDCardOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, VatInvoiceVerifyNewResponse, TaxiInvoiceOCRRequest, RecognizeContainerOCRRequest, TextDetectRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, PropOwnerCertOCRRequest, ImageEnhancementResponse, PassportOCRResponse, VehicleRegCertOCRRequest, RecognizeTravelCardOCRResponse, LicensePlateOCRRequest, GeneralBasicOCRRequest, ReconstructDocumentResponse, GeneralEfficientOCRRequest, AdvertiseOCRRequest, RideHailingDriverLicenseOCRResponse, ImageEnhancementRequest, EnglishOCRRequest, VatInvoiceVerifyResponse, RecognizeValidIDCardOCRResponse, IDCardOCRResponse, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, FlightInvoiceOCRResponse, ShipInvoiceOCRResponse, ReconstructDocumentRequest, VatInvoiceVerifyNewRequest, InstitutionOCRRequest, ArithmeticOCRRequest, VerifyOfdVatInvoiceOCRRequest, FinanBillSliceOCRRequest, ClassifyStoreNameResponse, VatRollInvoiceOCRRequest, RecognizeTableAccurateOCRRequest, SealOCRResponse, FinanBillOCRResponse, RecognizeHealthCodeOCRRequest, BankSlipOCRResponse, RecognizeEncryptedIDCardOCRResponse, VinOCRResponse, EduPaperOCRRequest, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RecognizeHealthCodeOCRResponse, RecognizeEncryptedIDCardOCRRequest, CreateAIFormTaskResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, VehicleRegCertOCRResponse, GeneralFastOCRRequest, RecognizeGeneralInvoiceResponse, GetTaskStateResponse, GetTaskStateRequest, RecognizeMedicalInvoiceOCRRequest, InsuranceBillOCRResponse, GeneralEfficientOCRResponse, ShipInvoiceOCRRequest, MLIDPassportOCRResponse, SealOCRRequest, VerifyOfdVatInvoiceOCRResponse, HmtResidentPermitOCRRequest, RecognizeTableAccurateOCRResponse, ResidenceBookletOCRRequest, GetOCRResultRequest, BusInvoiceOCRResponse, GetOCRResultResponse, MainlandPermitOCRResponse, MLIDCardOCRRequest, EnglishOCRResponse, RecognizeForeignPermanentResidentIdCardResponse, BusInvoiceOCRRequest, OrgCodeCertOCRResponse, RideHailingTransportLicenseOCRResponse, RecognizeContainerOCRResponse, SmartStructuralProResponse, PermitOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, AdvertiseOCRResponse, VehicleLicenseOCRRequest, RecognizeOnlineTaxiItineraryOCRRequest, IDCardOCRRequest, MixedInvoiceDetectRequest, WaybillOCRRequest, RecognizeStoreNameResponse, GetOCRTokenRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, RecognizeTableOCRRequest, EstateCertOCRRequest, BizLicenseOCRResponse, TableOCRRequest, VatInvoiceOCRResponse, QuotaInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, FinanBillOCRRequest, QuotaInvoiceOCRResponse, RecognizeGeneralTextImageWarnRequest, RecognizeForeignPermanentResidentIdCardRequest, GeneralFastOCRResponse } from "./ocr_models";
 /**
  * ocr client
  * @class
@@ -104,9 +104,15 @@ export declare class Client extends AbstractClient {
      */
     InsuranceBillOCR(req: InsuranceBillOCRRequest, cb?: (error: string, rep: InsuranceBillOCRResponse) => void): Promise<InsuranceBillOCRResponse>;
     /**
+     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
+
+默认接口请求频率限制：20次/秒。
+     */
+    RecognizeOnlineTaxiItineraryOCR(req: RecognizeOnlineTaxiItineraryOCRRequest, cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void): Promise<RecognizeOnlineTaxiItineraryOCRResponse>;
+    /**
      * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
 
-另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备8种告警功能，如下表所示。
+另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备8种告警功能，如下表所示。
 
 <table style="width:650px">
       <thead>
@@ -251,7 +257,7 @@ export declare class Client extends AbstractClient {
      */
     RecognizeContainerOCR(req: RecognizeContainerOCRRequest, cb?: (error: string, rep: RecognizeContainerOCRResponse) => void): Promise<RecognizeContainerOCRResponse>;
     /**
-     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。点击[立即体验](https://ocrdemo.cloud.tencent.com?action=RecognizeTableAccurateOCR)。
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
 
 默认接口请求频率限制：2次/秒。
      */
@@ -261,7 +267,7 @@ export declare class Client extends AbstractClient {
 
 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
 
-另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
+另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
 
 <table style="width:650px">
       <thead>
@@ -431,11 +437,9 @@ export declare class Client extends AbstractClient {
      */
     GetTaskState(req: GetTaskStateRequest, cb?: (error: string, rep: GetTaskStateResponse) => void): Promise<GetTaskStateResponse>;
     /**
-     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
-
-默认接口请求频率限制：20次/秒。
+     * 获取ocr结果
      */
-    RecognizeOnlineTaxiItineraryOCR(req: RecognizeOnlineTaxiItineraryOCRRequest, cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void): Promise<RecognizeOnlineTaxiItineraryOCRResponse>;
+    GetOCRResult(req: GetOCRResultRequest, cb?: (error: string, rep: GetOCRResultResponse) => void): Promise<GetOCRResultResponse>;
     /**
      * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备人像照片裁剪等扩展功能。
 
@@ -741,6 +745,10 @@ export declare class Client extends AbstractClient {
 默认接口请求频率限制：5次/秒。
      */
     FinanBillOCR(req: FinanBillOCRRequest, cb?: (error: string, rep: FinanBillOCRResponse) => void): Promise<FinanBillOCRResponse>;
+    /**
+     * 获取ocr的token值
+     */
+    GetOCRToken(req: GetOCRTokenRequest, cb?: (error: string, rep: GetOCRTokenResponse) => void): Promise<GetOCRTokenResponse>;
     /**
      * 本接口支持OFD格式的 增值税电子普通发票、增值税电子专用发票、电子发票（普通发票）、电子发票（增值税专用发票）、电子发票（铁路电子客票）、电子发票（航空运输电子客票行程单）识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
      */

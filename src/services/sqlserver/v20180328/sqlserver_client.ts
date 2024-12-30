@@ -286,6 +286,7 @@ import {
   CreateDBInstancesRequest,
   ModifyCrossBackupStrategyRequest,
   DescribeReadOnlyGroupAutoWeightResponse,
+  DrZoneInfo,
   ModifyBackupStrategyRequest,
   CreatePublishSubscribeRequest,
   CreateBusinessIntelligenceFileRequest,

@@ -845,6 +845,88 @@ export interface TollInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
+ * GetOCRToken返回参数结构体
+ */
+export interface GetOCRTokenResponse {
+    /**
+     * token值
+     */
+    OCRToken?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 身份证ocr信息结果
+ */
+export interface IDCardInfoResult {
+    /**
+     * 警告代码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WarnCodes?: Array<number | bigint>;
+    /**
+     * 地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Address?: string;
+    /**
+     * 签发机关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Authority?: string;
+    /**
+     * 出生日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Birth?: string;
+    /**
+     * 身份证号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdNum?: string;
+    /**
+     * 名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 地区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nation?: string;
+    /**
+     * 性别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sex?: string;
+    /**
+     * 到期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidDate?: string;
+    /**
+     * 请求的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestId?: string;
+    /**
+     * 错误码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorCode?: string;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage?: string;
+    /**
+     * 原图地址
+     */
+    ImageUrl?: string;
+}
+/**
  * FinanBillSliceOCR返回参数结构体
  */
 export interface FinanBillSliceOCRResponse {
@@ -3003,25 +3085,29 @@ export interface GeneralBasicOCRResponse {
     RequestId?: string;
 }
 /**
- * RecognizeStoreName返回参数结构体
+ * 港澳台来往内地通行证背面字段信息
  */
-export interface RecognizeStoreNameResponse {
+export interface MainlandTravelPermitBackInfos {
     /**
-     * 门头照名称
+     * String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StoreInfo?: Array<StoreInfo>;
+    Type?: string;
     /**
-     * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负
+     * 卡证背面的中文姓名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Angle?: number;
+    Name?: string;
     /**
-     * 门头照标签
+     * 卡证背面的身份证号码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StoreLabel?: Array<string>;
+    IDNumber?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 历史通行证号码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    HistoryNumber?: string;
 }
 /**
  * 其他发票
@@ -3171,53 +3257,34 @@ export interface ClassifyDetectOCRResponse {
     RequestId?: string;
 }
 /**
- * VatInvoiceVerifyNew请求参数结构体
+ * VinOCR请求参数结构体
  */
-export interface VatInvoiceVerifyNewRequest {
+export interface VinOCRRequest {
     /**
-     * 发票号码，8位、20位（全电票）
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    InvoiceNo: string;
+    ImageBase64?: string;
     /**
-     * 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    InvoiceDate: string;
+    ImageUrl?: string;
+}
+/**
+ * ocr结果信息
+ */
+export interface OCRResult {
     /**
-     * 发票代码（10或12 位），全电发票为空。查验未成功超过5次后当日无法再查。
+     * 身份证结果
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InvoiceCode?: string;
-    /**
-     * 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票，16:财务发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。
-     */
-    InvoiceKind?: string;
-    /**
-     * 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)、全电纸质发票（增值税普通发票）、财政票据时必填;
-  区块链为 5 位
-     */
-    CheckCode?: string;
-    /**
-     * 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票、财政发票时必填; 全电发票为价税合计(含税金额)
-     */
-    Amount?: string;
-    /**
-     * 地区编码，通用机打电子发票时必填。
-  广东:4400，浙江:3300
-     */
-    RegionCode?: string;
-    /**
-     * 销方税号，通用机打电子发票必填，区块链发票时必填
-     */
-    SellerTaxCode?: string;
-    /**
-     * 是否开启通用机打电子发票，默认为关闭。
-     */
-    EnableCommonElectronic?: boolean;
-    /**
-     * 是否允许查验当日发票，默认值为false。
-  
-  请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的发票。
-     */
-    EnableTodayInvoice?: boolean;
+    IDCardResult?: IDCardResult;
 }
 /**
  * VehicleLicenseOCR返回参数结构体
@@ -6477,6 +6544,53 @@ export interface ReconstructDocumentRequest {
     Config?: ReconstructDocumentConfig;
 }
 /**
+ * VatInvoiceVerifyNew请求参数结构体
+ */
+export interface VatInvoiceVerifyNewRequest {
+    /**
+     * 发票号码，8位、20位（全电票）
+     */
+    InvoiceNo: string;
+    /**
+     * 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。
+     */
+    InvoiceDate: string;
+    /**
+     * 发票代码（10或12 位），全电发票为空。查验超过5次后当日无法再查。
+     */
+    InvoiceCode?: string;
+    /**
+     * 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票，16:财务发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。
+     */
+    InvoiceKind?: string;
+    /**
+     * 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)、全电纸质发票（增值税普通发票）、财政票据时必填;
+  区块链为 5 位
+     */
+    CheckCode?: string;
+    /**
+     * 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票、财政发票时必填; 全电发票为价税合计(含税金额)
+     */
+    Amount?: string;
+    /**
+     * 地区编码，通用机打电子发票时必填。
+  广东:4400，浙江:3300
+     */
+    RegionCode?: string;
+    /**
+     * 销方税号，通用机打电子发票必填，区块链发票时必填
+     */
+    SellerTaxCode?: string;
+    /**
+     * 是否开启通用机打电子发票，默认为关闭。
+     */
+    EnableCommonElectronic?: boolean;
+    /**
+     * 是否允许查验当日发票，默认值为false。请注意，发票从开具到录入税局需要一定的时间来更新和验证发票信息，打开后仅支持查验已成功录入到税局中的当日发票。
+     */
+    EnableTodayInvoice?: boolean;
+}
+/**
  * InstitutionOCR请求参数结构体
  */
 export interface InstitutionOCRRequest {
@@ -7920,6 +8034,39 @@ export interface TableDetectInfo {
     TableCoordPoint: Array<Coord>;
 }
 /**
+ * 身份证配置信息
+ */
+export interface IDCardConfig {
+    /**
+     * 默认为false
+     */
+    CopyWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    BorderCheckWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    ReshootWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    DetectPsWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    TempIdWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    InvalidDateWarn?: boolean;
+    /**
+     * 默认为false
+     */
+    ReflectWarn?: boolean;
+}
+/**
  * ResidenceBookletOCR返回参数结构体
  */
 export interface ResidenceBookletOCRResponse {
@@ -8854,6 +9001,15 @@ export interface ResidenceBookletOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * GetOCRResult请求参数结构体
+ */
+export interface GetOCRResultRequest {
+    /**
+     * token值
+     */
+    OCRToken: string;
+}
+/**
  * BusInvoiceOCR返回参数结构体
  */
 export interface BusInvoiceOCRResponse {
@@ -8891,6 +9047,23 @@ export interface QrcodeResultsInfo {
      * 二维码/条形码坐标
      */
     Position?: QrcodePositionObj;
+}
+/**
+ * GetOCRResult返回参数结构体
+ */
+export interface GetOCRResultResponse {
+    /**
+     * ocr业务类型
+     */
+    Type?: string;
+    /**
+     * ocr结果
+     */
+    OCRResult?: OCRResult;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * MainlandPermitOCR返回参数结构体
@@ -9745,29 +9918,19 @@ export interface GeneralHandwritingOCRResponse {
     RequestId?: string;
 }
 /**
- * 港澳台来往内地通行证背面字段信息
+ * IDCardResult
  */
-export interface MainlandTravelPermitBackInfos {
+export interface IDCardResult {
     /**
-     * String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
+     * 正面结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type?: string;
+    Front?: IDCardInfoResult;
     /**
-     * 卡证背面的中文姓名
+     * 反面结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
-    /**
-     * 卡证背面的身份证号码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IDNumber?: string;
-    /**
-     * 历史通行证号码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HistoryNumber?: string;
+    Back?: IDCardInfoResult;
 }
 /**
  * 单元格数据
@@ -10072,24 +10235,38 @@ export interface ReconstructDocumentConfig {
     EnableInsetImage?: boolean;
 }
 /**
- * VinOCR请求参数结构体
+ * RecognizeStoreName返回参数结构体
  */
-export interface VinOCRRequest {
+export interface RecognizeStoreNameResponse {
     /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 门头照名称
      */
-    ImageBase64?: string;
+    StoreInfo?: Array<StoreInfo>;
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负
      */
-    ImageUrl?: string;
+    Angle?: number;
+    /**
+     * 门头照标签
+     */
+    StoreLabel?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetOCRToken请求参数结构体
+ */
+export interface GetOCRTokenRequest {
+    /**
+     * 业务类型，如身份证识别为IDCardOCR
+     */
+    Type: string;
+    /**
+     * 身份证配置信息
+     */
+    IDCardConfig?: IDCardConfig;
 }
 /**
  * RideHailingTransportLicenseOCR请求参数结构体

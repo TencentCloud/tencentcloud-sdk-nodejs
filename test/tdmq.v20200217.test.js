@@ -308,9 +308,9 @@ it("tdmq.v20200217.CreateEnvironment", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeTopics", async function () {
+it("tdmq.v20200217.DescribeRabbitMQPermission", async function () {
     try {
-       const data = await client.DescribeTopics({})
+       const data = await client.DescribeRabbitMQPermission({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +511,16 @@ it("tdmq.v20200217.ResetRocketMQConsumerOffSet", async function () {
 it("tdmq.v20200217.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DeleteRabbitMQPermission", async function () {
+    try {
+       const data = await client.DeleteRabbitMQPermission({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -881,6 +891,16 @@ it("tdmq.v20200217.DescribeRocketMQVipInstances", async function () {
 it("tdmq.v20200217.VerifyRocketMQConsume", async function () {
     try {
        const data = await client.VerifyRocketMQConsume({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyRabbitMQPermission", async function () {
+    try {
+       const data = await client.ModifyRabbitMQPermission({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1301,16 @@ it("tdmq.v20200217.DescribeRabbitMQQueueDetail", async function () {
 it("tdmq.v20200217.DescribeRocketMQMsg", async function () {
     try {
        const data = await client.DescribeRocketMQMsg({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeTopics", async function () {
+    try {
+       const data = await client.DescribeTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

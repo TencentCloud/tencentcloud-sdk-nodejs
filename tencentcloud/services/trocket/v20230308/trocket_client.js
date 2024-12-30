@@ -165,6 +165,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMQTTInsVPCEndpoints", req, cb);
     }
     /**
+     * 查询消费者客户端详情
+     */
+    async DescribeConsumerClient(req, cb) {
+        return this.request("DescribeConsumerClient", req, cb);
+    }
+    /**
      * 删除角色
      */
     async DeleteRole(req, cb) {

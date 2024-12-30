@@ -1008,9 +1008,8 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-     * 本接口(ModifyRecordingPlan)用于更新录制计划。
-
-     */
+   * 本接口(ModifyRecordingPlan)用于更新录制计划。
+   */
   async ModifyRecordingPlan(
     req: ModifyRecordingPlanRequest,
     cb?: (error: string, rep: ModifyRecordingPlanResponse) => void
@@ -1235,9 +1234,8 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-     * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
-
-     */
+   * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+   */
   async GetRecordPlanByDev(
     req: GetRecordPlanByDevRequest,
     cb?: (error: string, rep: GetRecordPlanByDevResponse) => void

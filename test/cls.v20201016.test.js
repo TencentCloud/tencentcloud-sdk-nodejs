@@ -88,6 +88,16 @@ it("cls.v20201016.ModifyShipper", async function () {
     }
 })
 
+it("cls.v20201016.CreateWebCallback", async function () {
+    try {
+       const data = await client.CreateWebCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeConfigs", async function () {
     try {
        const data = await client.DescribeConfigs({})
@@ -598,6 +608,16 @@ it("cls.v20201016.CreateConsoleSharing", async function () {
     }
 })
 
+it("cls.v20201016.CreateScheduledSql", async function () {
+    try {
+       const data = await client.CreateScheduledSql({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeLogsets", async function () {
     try {
        const data = await client.DescribeLogsets({})
@@ -768,6 +788,16 @@ it("cls.v20201016.DeleteShipper", async function () {
     }
 })
 
+it("cls.v20201016.DeleteWebCallback", async function () {
+    try {
+       const data = await client.DeleteWebCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.QueryRangeMetric", async function () {
     try {
        const data = await client.QueryRangeMetric({})
@@ -851,6 +881,16 @@ it("cls.v20201016.ModifyTopic", async function () {
 it("cls.v20201016.DescribeDashboardSubscribes", async function () {
     try {
        const data = await client.DescribeDashboardSubscribes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyWebCallback", async function () {
+    try {
+       const data = await client.ModifyWebCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +1028,9 @@ it("cls.v20201016.UploadLog", async function () {
     }
 })
 
-it("cls.v20201016.CreateScheduledSql", async function () {
+it("cls.v20201016.DeleteTopic", async function () {
     try {
-       const data = await client.CreateScheduledSql({})
+       const data = await client.DeleteTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1098,9 +1138,9 @@ it("cls.v20201016.CreateAlarm", async function () {
     }
 })
 
-it("cls.v20201016.DeleteTopic", async function () {
+it("cls.v20201016.DescribeWebCallbacks", async function () {
     try {
-       const data = await client.DeleteTopic({})
+       const data = await client.DescribeWebCallbacks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

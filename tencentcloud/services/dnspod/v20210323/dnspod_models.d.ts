@@ -1391,19 +1391,19 @@ export interface LineGroupInfo {
     /**
      * 线路分组ID
      */
-    LineId: string;
+    LineId?: string;
     /**
      * 线路分组名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 分组类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 线路分组包含的线路列表
      */
-    LineList: Array<string>;
+    LineList?: Array<string>;
 }
 /**
  * DeleteDomain请求参数结构体
@@ -1484,7 +1484,7 @@ export interface DeleteRecordBatchDetail {
     /**
      * 解析记录列表，json 序列化之后的字符串形式
      */
-    RecordList: string;
+    RecordList?: string;
 }
 /**
  * 域名共享信息
@@ -2389,65 +2389,65 @@ export interface ModifyRecordBatchRequest {
  */
 export interface WhoisContactAddress {
     /**
-     * 无
+     * 城市
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    City: string;
+    City?: string;
+    /**
+     * 国家
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Country?: string;
+    /**
+     * 电子邮箱
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Email?: string;
+    /**
+     * 传真
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Fax?: string;
+    /**
+     * 传真分机号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FaxExt?: string;
     /**
      * 无
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Country: string;
+    Handle?: string;
     /**
-     * 无
+     * 名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Email: string;
+    Name?: string;
     /**
-     * 无
+     * 组织机构
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Fax: string;
+    Organization?: string;
     /**
-     * 无
+     * 电话
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaxExt: string;
+    Phone?: string;
     /**
-     * 无
+     * 邮编
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Handle: string;
+    PostalCode?: string;
     /**
-     * 无
+     * 省份/州
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    State?: string;
     /**
-     * 无
+     * 街道地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Organization: string;
-    /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Phone: string;
-    /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PostalCode: string;
-    /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    State: string;
-    /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Street: string;
+    Street?: string;
 }
 /**
  * 域名解析快照配置
@@ -3867,10 +3867,6 @@ export interface ModifyDynamicDNSRequest {
      */
     RecordLine: string;
     /**
-     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
-     */
-    Value: string;
-    /**
      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
      */
     DomainId?: number;
@@ -3882,6 +3878,10 @@ export interface ModifyDynamicDNSRequest {
      * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
      */
     RecordLineId?: string;
+    /**
+     * IP 地址，支持 IPv4、IPv6，例如 119.29.29.29 或者 2402:4e00::
+     */
+    Value?: string;
     /**
      * TTL值，如果不传，默认为域名的TTL值。
      */

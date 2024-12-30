@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGeneralSpanList(req: DescribeGeneralSpanListRequest, cb?: (error: string, rep: DescribeGeneralSpanListResponse) => void): Promise<DescribeGeneralSpanListResponse>;
     /**
-     * APM实例列表拉取
+     * 拉取 APM 业务系统列表
      */
     DescribeApmInstances(req: DescribeApmInstancesRequest, cb?: (error: string, rep: DescribeApmInstancesResponse) => void): Promise<DescribeApmInstancesResponse>;
     /**

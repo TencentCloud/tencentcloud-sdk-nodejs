@@ -517,7 +517,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyAreaBanRule(req: ModifyAreaBanRuleRequest, cb?: (error: string, rep: ModifyAreaBanRuleResponse) => void): Promise<ModifyAreaBanRuleResponse>;
     /**
-     * 描述WAF自动封禁模块详情
+     * 废弃接口
+
+描述WAF自动封禁模块详情
      */
     DescribeWafAutoDenyStatus(req?: DescribeWafAutoDenyStatusRequest, cb?: (error: string, rep: DescribeWafAutoDenyStatusResponse) => void): Promise<DescribeWafAutoDenyStatusResponse>;
     /**

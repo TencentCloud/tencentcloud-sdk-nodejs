@@ -54,6 +54,7 @@ import {
   SendBatchMessagesResponse,
   DescribeRocketMQVipInstanceDetailResponse,
   DescribeRabbitMQVirtualHostResponse,
+  RabbitMQPermission,
   CreateRocketMQClusterRequest,
   ModifyCmqSubscriptionAttributeResponse,
   DeleteRocketMQRolesResponse,
@@ -61,7 +62,7 @@ import {
   Publisher,
   ModifyRoleRequest,
   DescribeRocketMQMsgRequest,
-  SendMessagesResponse,
+  RocketMQGroupConfigOutput,
   CreateTopicRequest,
   DescribeCmqTopicsResponse,
   DescribeRocketMQMsgTraceRequest,
@@ -78,6 +79,7 @@ import {
   DeleteRocketMQNamespaceRequest,
   DescribeRocketMQSmoothMigrationTaskListResponse,
   DescribeRocketMQSourceClusterTopicListResponse,
+  DeleteRabbitMQPermissionRequest,
   CreateTopicResponse,
   ReceiveMessageResponse,
   CreateRocketMQVipInstanceRequest,
@@ -91,7 +93,7 @@ import {
   RocketMQClusterConfig,
   SendMsgResponse,
   DescribeMsgRequest,
-  RocketMQGroupConfigOutput,
+  DeleteRabbitMQPermissionResponse,
   DeleteRabbitMQBindingResponse,
   ModifyRabbitMQVipInstanceResponse,
   DescribeRocketMQSourceClusterGroupListRequest,
@@ -126,6 +128,7 @@ import {
   ReceiveMessageRequest,
   RocketMQConsumerConnection,
   CreateRabbitMQVipInstanceRequest,
+  DescribeRabbitMQPermissionResponse,
   DescribeRocketMQSmoothMigrationTaskRequest,
   DeleteClusterRequest,
   CmqSubscription,
@@ -214,6 +217,7 @@ import {
   Filter,
   DescribeRocketMQPublicAccessMonitorDataRequest,
   DescribeRolesResponse,
+  DescribeRabbitMQPermissionRequest,
   DeleteRabbitMQUserRequest,
   DescribeSubscriptionsRequest,
   InstanceNodeDistribution,
@@ -247,6 +251,7 @@ import {
   SendRocketMQMessageResponse,
   PulsarProClusterSpecInfo,
   Subscription,
+  SendMessagesResponse,
   RocketMQMessageTrack,
   DescribeRocketMQNamespacesResponse,
   DescribeTopicsRequest,
@@ -283,6 +288,7 @@ import {
   ResetMsgSubOffsetByTimestampRequest,
   DescribeBindVpcsResponse,
   DescribeAMQPClustersResponse,
+  ModifyRabbitMQPermissionRequest,
   ConsumersSchedule,
   DescribeRocketMQClustersResponse,
   TraceResult,
@@ -332,6 +338,7 @@ import {
   CmqQueue,
   CreateEnvironmentResponse,
   Topic,
+  ModifyRabbitMQPermissionResponse,
   DescribeCmqQueueDetailResponse,
   DescribeRocketMQSourceClusterTopicListRequest,
   ModifyCmqTopicAttributeResponse,
@@ -704,13 +711,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取环境下主题列表
+   * 查询RabbitMQ权限列表
    */
-  async DescribeTopics(
-    req: DescribeTopicsRequest,
-    cb?: (error: string, rep: DescribeTopicsResponse) => void
-  ): Promise<DescribeTopicsResponse> {
-    return this.request("DescribeTopics", req, cb)
+  async DescribeRabbitMQPermission(
+    req: DescribeRabbitMQPermissionRequest,
+    cb?: (error: string, rep: DescribeRabbitMQPermissionResponse) => void
+  ): Promise<DescribeRabbitMQPermissionResponse> {
+    return this.request("DescribeRabbitMQPermission", req, cb)
   }
 
   /**
@@ -911,6 +918,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 删除RabbitMQ的权限
+   */
+  async DeleteRabbitMQPermission(
+    req: DeleteRabbitMQPermissionRequest,
+    cb?: (error: string, rep: DeleteRabbitMQPermissionResponse) => void
+  ): Promise<DeleteRabbitMQPermissionResponse> {
+    return this.request("DeleteRabbitMQPermission", req, cb)
   }
 
   /**
@@ -1281,6 +1298,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyRocketMQConsumeResponse) => void
   ): Promise<VerifyRocketMQConsumeResponse> {
     return this.request("VerifyRocketMQConsume", req, cb)
+  }
+
+  /**
+   * 修改RabbitMQ的权限
+   */
+  async ModifyRabbitMQPermission(
+    req: ModifyRabbitMQPermissionRequest,
+    cb?: (error: string, rep: ModifyRabbitMQPermissionResponse) => void
+  ): Promise<ModifyRabbitMQPermissionResponse> {
+    return this.request("ModifyRabbitMQPermission", req, cb)
   }
 
   /**
@@ -1707,6 +1734,16 @@ RabbitMQ专享版查询虚拟主机列表
     cb?: (error: string, rep: DescribeRocketMQMsgResponse) => void
   ): Promise<DescribeRocketMQMsgResponse> {
     return this.request("DescribeRocketMQMsg", req, cb)
+  }
+
+  /**
+   * 获取环境下主题列表
+   */
+  async DescribeTopics(
+    req: DescribeTopicsRequest,
+    cb?: (error: string, rep: DescribeTopicsResponse) => void
+  ): Promise<DescribeTopicsResponse> {
+    return this.request("DescribeTopics", req, cb)
   }
 
   /**

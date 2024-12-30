@@ -93,6 +93,7 @@ import {
   DescribeMessageTraceRequest,
   CreateTopicResponse,
   DescribeMQTTInstanceListRequest,
+  ModifyConsumerGroupResponse,
   CreateMQTTInstanceResponse,
   DescribeMQTTInstanceResponse,
   MQTTEndpointItem,
@@ -106,7 +107,9 @@ import {
   TopicItem,
   SubscriptionData,
   CreateInstanceRequest,
+  ConsumerClient,
   DescribeConsumerGroupResponse,
+  DescribeConsumerClientRequest,
   ModifyTopicResponse,
   DescribeConsumerLagResponse,
   DescribeMQTTInsPublicEndpointsRequest,
@@ -120,7 +123,7 @@ import {
   DescribeInstanceResponse,
   PacketStatistics,
   DeleteMQTTTopicResponse,
-  ModifyConsumerGroupResponse,
+  DescribeConsumerClientResponse,
   DescribeMQTTInstanceCertRequest,
   MessageTrackItem,
   ModifyMQTTInsPublicEndpointResponse,
@@ -135,6 +138,7 @@ import {
   ModifyMQTTInstanceResponse,
   CreateMQTTInstanceRequest,
   DescribeTopicListResponse,
+  TopicConsumeStats,
   DescribeMQTTTopicRequest,
   CreateRoleRequest,
   DeleteConsumerGroupResponse,
@@ -389,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMQTTInsVPCEndpointsResponse) => void
   ): Promise<DescribeMQTTInsVPCEndpointsResponse> {
     return this.request("DescribeMQTTInsVPCEndpoints", req, cb)
+  }
+
+  /**
+   * 查询消费者客户端详情
+   */
+  async DescribeConsumerClient(
+    req: DescribeConsumerClientRequest,
+    cb?: (error: string, rep: DescribeConsumerClientResponse) => void
+  ): Promise<DescribeConsumerClientResponse> {
+    return this.request("DescribeConsumerClient", req, cb)
   }
 
   /**

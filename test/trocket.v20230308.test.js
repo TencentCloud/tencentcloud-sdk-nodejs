@@ -238,6 +238,16 @@ it("trocket.v20230308.DescribeMQTTInsVPCEndpoints", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeConsumerClient", async function () {
+    try {
+       const data = await client.DescribeConsumerClient({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DeleteRole", async function () {
     try {
        const data = await client.DeleteRole({})

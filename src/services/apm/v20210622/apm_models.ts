@@ -136,187 +136,153 @@ export interface ModifyApmInstanceRequest {
 }
 
 /**
- * apm实例信息
+ * APM 业务系统信息
  */
 export interface ApmInstanceDetail {
   /**
-   * 存储使用量(MB)
-注意：此字段可能返回 null，表示取不到有效值。
+   * 存储使用量( MB )
    */
   AmountOfUsedStorage?: number
   /**
-   * 实例名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统名
    */
   Name?: string
   /**
-   * 实例所属tag列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统所属 Tag 列表
    */
   Tags?: Array<ApmTag>
   /**
-   * 实例ID
+   * 业务系统 ID
    */
   InstanceId?: string
   /**
-   * 创建人Uin
-注意：此字段可能返回 null，表示取不到有效值。
+   * 创建人 Uin
    */
   CreateUin?: string
   /**
-   * 该实例已上报的服务端应用数量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 该业务系统已上报的服务端应用数量
    */
   ServiceCount?: number
   /**
-   * 日均上报Span数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日均上报 Span 数
    */
   CountOfReportSpanPerDay?: number
   /**
-   * AppId信息
+   * AppID 信息
    */
   AppId?: number
   /**
-   * Trace数据保存时长
-注意：此字段可能返回 null，表示取不到有效值。
+   * Trace 数据保存时长
    */
   TraceDuration?: number
   /**
-   * 实例描述信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统描述信息
    */
   Description?: string
   /**
-   * 实例状态
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统状态
    */
   Status?: number
   /**
-   * 实例所属地域
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统所属地域
    */
   Region?: string
   /**
-   * 实例上报额度
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统上报额度
    */
   SpanDailyCounters?: number
   /**
-   * 实例是否开通计费
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统是否开通计费
    */
   BillingInstance?: number
   /**
    * 错误率阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrRateThreshold?: number
   /**
    * 采样率阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SampleRate?: number
   /**
    * 是否开启错误采样 0  关 1 开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorSample?: number
   /**
    * 慢调用保存阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SlowRequestSavedThreshold?: number
   /**
-   * cls日志所在地域
-注意：此字段可能返回 null，表示取不到有效值。
+   * CLS 日志所在地域
    */
   LogRegion?: string
   /**
    * 日志来源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogSource?: string
   /**
    * 日志功能开关 0 关 | 1 开
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsRelatedLog?: number
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogTopicID?: string
   /**
    * 该实例已上报的客户端应用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientCount?: number
   /**
    * 该实例已上报的总应用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * CLS日志集 | ES集群ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * CLS 日志集 | ES 集群ID
    */
   LogSet?: string
   /**
-   * Metric数据保存时长
-注意：此字段可能返回 null，表示取不到有效值。
+   * Metric 数据保存时长
    */
   MetricDuration?: number
   /**
    * 用户自定义展示标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomShowTags?: Array<string>
   /**
-   * 实例计费模式
+   * 业务系统计费模式
 1为预付费
 0为按量付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
-   * 实例计费模式是否生效
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统计费模式是否生效
    */
   PayModeEffective?: boolean
   /**
    * 响应时间满意阈值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseDurationWarningThreshold?: number
   /**
    * 是否免费（0=否，1=限额免费，2=完全免费），默认0
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Free?: number
   /**
-   * 是否tsf默认业务系统（0=否，1-是）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否 tsf 默认业务系统（0=否，1-是）
    */
   DefaultTSF?: number
   /**
-   * 是否关联dashboard： 0 关 1 开
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否关联 Dashboard： 0 关 1 开
    */
   IsRelatedDashboard?: number
   /**
-   * dashboard ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * Dashboard ID
    */
   DashboardTopicID?: string
   /**
    * 是否开启组件漏洞检测
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启SQL注入分析
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启 SQL 注入分析
    */
   IsSqlInjectionAnalysis?: number
 }
@@ -334,7 +300,7 @@ export interface CreateApmInstanceRequest {
    */
   Description?: string
   /**
-   * Trace数据保存时长，单位为天默认存储为3天
+   * Trace 数据保存时长，单位为天默认存储为3天
    */
   TraceDuration?: number
   /**
@@ -350,7 +316,7 @@ export interface CreateApmInstanceRequest {
    */
   PayMode?: number
   /**
-   * （0=付费版；1=tsf受限免费版；2=免费版）
+   * （0=付费版；1=tsf 受限免费版；2=免费版）
    */
   Free?: number
 }
@@ -380,7 +346,6 @@ export interface ModifyGeneralApmApplicationConfigRequest {
 export interface DescribeServiceOverviewResponse {
   /**
    * 指标结果集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Records?: Array<ApmMetricRecord>
   /**
@@ -422,8 +387,7 @@ export interface TerminateApmInstanceRequest {
  */
 export interface DescribeApmInstancesResponse {
   /**
-   * apm实例列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * APM 业务系统列表
    */
   Instances?: Array<ApmInstanceDetail>
   /**
@@ -438,12 +402,10 @@ export interface DescribeApmInstancesResponse {
 export interface Instrument {
   /**
    * 组件名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 组件开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Enable?: boolean
 }
@@ -463,105 +425,87 @@ export interface DescribeTagValuesResponse {
 }
 
 /**
- * Span对象
+ * Span 对象
  */
 export interface Span {
   /**
-   * Trace Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * Trace ID
    */
   TraceID?: string
   /**
    * 日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Logs?: Array<SpanLog>
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<SpanTag>
   /**
    * 上报应用服务信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Process?: SpanProcess
   /**
    * 产生时间戳(毫秒)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: number
   /**
-   * Span名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * Span 名称
    */
   OperationName?: string
   /**
    * 关联关系
-注意：此字段可能返回 null，表示取不到有效值。
    */
   References?: Array<SpanReference>
   /**
    * 产生时间戳(微秒)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 持续耗时(微妙)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
-   * Span Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * Span ID
    */
   SpanID?: string
   /**
    * 产生时间戳(毫秒)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTimeMillis?: number
   /**
-   * Parent Span Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * Parent Span ID
    */
   ParentSpanID?: string
 }
 
 /**
- * apm Agent信息
+ * APM Agent 信息
  */
 export interface ApmAgentInfo {
   /**
-   * Agent下载地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * Agent 下载地址
    */
-  AgentDownloadURL: string
+  AgentDownloadURL?: string
   /**
-   * Collector上报地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * Collector 上报地址
    */
-  CollectorURL: string
+  CollectorURL?: string
   /**
-   * Token信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * Token 信息
    */
-  Token: string
+  Token?: string
   /**
    * 外网上报地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicCollectorURL: string
+  PublicCollectorURL?: string
   /**
-   * 自研VPC上报地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * 自研 VPC 上报地址
    */
-  InnerCollectorURL: string
+  InnerCollectorURL?: string
   /**
-   * 内网上报地址(Private Link上报地址)
-注意：此字段可能返回 null，表示取不到有效值。
+   * 内网上报地址( Private Link 上报地址)
    */
-  PrivateLinkCollectorURL: string
+  PrivateLinkCollectorURL?: string
 }
 
 /**
@@ -573,7 +517,7 @@ export interface DescribeGeneralSpanListResponse {
    */
   TotalCount?: number
   /**
-   * Span分页列表
+   * Span 分页列表
    */
   Spans?: Array<Span>
   /**
@@ -643,8 +587,7 @@ export interface DescribeServiceOverviewRequest {
  */
 export interface DescribeApmAgentResponse {
   /**
-   * Agent信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * Agent 信息
    */
   ApmAgent?: ApmAgentInfo
   /**
@@ -693,33 +636,30 @@ export interface DescribeTagValuesRequest {
 export interface ApmField {
   /**
    * 昨日同比指标值，已弃用，不建议使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompareVal: string
+  CompareVal?: string
   /**
    * Compare值结果数组，推荐使用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompareVals: Array<APMKVItem>
+  CompareVals?: Array<APMKVItem>
   /**
    * 指标值
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
   /**
    * 指标所对应的单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
   /**
    * 请求数
    */
-  Key: string
+  Key?: string
   /**
    * 同环比上周期具体数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastPeriodValue: Array<APMKV>
+  LastPeriodValue?: Array<APMKV>
 }
 
 /**
@@ -729,25 +669,23 @@ export interface Line {
   /**
    * 指标名
    */
-  MetricName: string
+  MetricName?: string
   /**
    * 指标中文名
    */
-  MetricNameCN: string
+  MetricNameCN?: string
   /**
    * 时间序列
    */
-  TimeSerial: Array<number | bigint>
+  TimeSerial?: Array<number | bigint>
   /**
    * 数据序列
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSerial: Array<number>
+  DataSerial?: Array<number>
   /**
    * 维度列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<ApmTag>
+  Tags?: Array<ApmTag>
 }
 
 /**
@@ -755,7 +693,7 @@ export interface Line {
  */
 export interface ApmApplicationConfigView {
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceKey?: string
   /**
@@ -771,28 +709,27 @@ export interface ApmApplicationConfigView {
    */
   ExceptionFilter?: string
   /**
-   * HTTP状态码过滤
+   * HTTP 状态码过滤
    */
   ErrorCodeFilter?: string
   /**
    * 应用诊断开关（已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EventEnable?: boolean
   /**
-   * URL收敛开关 0 关 1 开
+   * URL 收敛开关 0 关 1 开
    */
   UrlConvergenceSwitch?: number
   /**
-   * URL收敛阈值
+   * URL 收敛阈值
    */
   UrlConvergenceThreshold?: number
   /**
-   * URL收敛规则正则
+   * URL 收敛规则正则
    */
   UrlConvergence?: string
   /**
-   * URL排除规则正则
+   * URL 排除规则正则
    */
   UrlExclude?: string
   /**
@@ -800,8 +737,7 @@ export interface ApmApplicationConfigView {
    */
   IsRelatedLog?: number
   /**
-   * 日志源	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志源
    */
   LogSource?: string
   /**
@@ -826,7 +762,6 @@ export interface ApmApplicationConfigView {
   AgentEnable?: boolean
   /**
    * 组件列表开关（已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstrumentList?: Array<Instrument>
   /**
@@ -850,17 +785,15 @@ export interface ApmTag {
 }
 
 /**
- * Apm通用KV结构
+ * APM 通用 KV 结构
  */
 export interface APMKVItem {
   /**
-   * Key值定义
-注意：此字段可能返回 null，表示取不到有效值。
+   * Key 值定义
    */
   Key: string
   /**
-   * Value值定义
-注意：此字段可能返回 null，表示取不到有效值。
+   * Value 值定义
    */
   Value: string
 }
@@ -885,12 +818,10 @@ export interface OrderBy {
 export interface DescribeMetricRecordsResponse {
   /**
    * 指标结果集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Records?: Array<ApmMetricRecord>
   /**
    * 查询指标结果集条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -916,11 +847,11 @@ export interface DescribeGeneralSpanListRequest {
    */
   OrderBy?: OrderBy
   /**
-   * span查询开始时间戳（单位:秒）
+   * Span查询开始时间戳（单位:秒）
    */
   StartTime?: number
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId?: string
   /**
@@ -932,7 +863,7 @@ export interface DescribeGeneralSpanListRequest {
    */
   BusinessName?: string
   /**
-   * span查询结束时间戳（单位:秒）
+   * Span查询结束时间戳（单位:秒）
    */
   EndTime?: number
 }
@@ -943,35 +874,30 @@ export interface DescribeGeneralSpanListRequest {
 export interface Filter {
   /**
    * 过滤方式（=, !=, in）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
    * 过滤维度名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 过滤值，in过滤方式用逗号分割多个值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
 
 /**
- * APM浮点数类型键值对
+ * APM 浮点数类型键值对
  */
 export interface APMKV {
   /**
-   * Key值定义
-注意：此字段可能返回 null，表示取不到有效值。
+   * Key 值定义
    */
-  Key: string
+  Key?: string
   /**
-   * Value值定义
-注意：此字段可能返回 null，表示取不到有效值。
+   * Value 值定义
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -979,7 +905,7 @@ export interface APMKV {
  */
 export interface DescribeApmAgentRequest {
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId: string
   /**
@@ -1131,8 +1057,7 @@ Value 填写排序方式：
  */
 export interface CreateApmInstanceResponse {
   /**
-   * 业务系统ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 业务系统 ID
    */
   InstanceId?: string
   /**
@@ -1216,23 +1141,23 @@ export interface GeneralFilter {
  */
 export interface DescribeApmInstancesRequest {
   /**
-   * Tag列表
+   * Tag 列表
    */
   Tags?: Array<ApmTag>
   /**
-   * 搜索实例名
+   * 搜索业务系统名
    */
   InstanceName?: string
   /**
-   * 过滤实例ID
+   * 过滤业务系统 ID
    */
   InstanceIds?: Array<string>
   /**
-   * 是否查询官方demo实例
+   * 是否查询官方 Demo 业务系统
    */
   DemoInstanceFlag?: number
   /**
-   * 是否查询全地域实例
+   * 是否查询全地域业务系统
    */
   AllRegionsFlag?: number
 }
@@ -1263,7 +1188,6 @@ export interface SpanTag {
 export interface DescribeGeneralMetricDataResponse {
   /**
    * 指标结果集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Records?: Array<Line>
   /**

@@ -182,7 +182,7 @@ export interface OpenSecurityPolicyResponse {
   /**
    * 异步流程ID，可以通过DescribeAsyncTaskStatus接口查询流程运行状态
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2688,23 +2688,23 @@ export interface RealServer {
   /**
    * 源站的IP或域名
    */
-  RealServerIP: string
+  RealServerIP?: string
   /**
    * 源站ID
    */
-  RealServerId: string
+  RealServerId?: string
   /**
    * 源站名称
    */
-  RealServerName: string
+  RealServerName?: string
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
    */
-  InBanBlacklist: number
+  InBanBlacklist?: number
 }
 
 /**

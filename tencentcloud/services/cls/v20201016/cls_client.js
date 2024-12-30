@@ -71,6 +71,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyShipper", req, cb);
     }
     /**
+     * 该接口用于创建告警渠道回调配置。
+     */
+    async CreateWebCallback(req, cb) {
+        return this.request("CreateWebCallback", req, cb);
+    }
+    /**
      * 获取采集规则配置
      */
     async DescribeConfigs(req, cb) {
@@ -377,6 +383,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConsoleSharing", req, cb);
     }
     /**
+     * 本接口用于创建定时SQL分析任务
+     */
+    async CreateScheduledSql(req, cb) {
+        return this.request("CreateScheduledSql", req, cb);
+    }
+    /**
      * 本接口用于获取日志集信息列表。
      */
     async DescribeLogsets(req, cb) {
@@ -489,6 +501,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteShipper", req, cb);
     }
     /**
+     * 该接口用于删除告警渠道回调配置。
+     */
+    async DeleteWebCallback(req, cb) {
+        return this.request("DeleteWebCallback", req, cb);
+    }
+    /**
      * 查询指定时间范围内指标的变化趋势
      */
     async QueryRangeMetric(req, cb) {
@@ -541,6 +559,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDashboardSubscribes(req, cb) {
         return this.request("DescribeDashboardSubscribes", req, cb);
+    }
+    /**
+     * 该接口用于修改告警渠道回调配置。
+     */
+    async ModifyWebCallback(req, cb) {
+        return this.request("ModifyWebCallback", req, cb);
     }
     /**
      * 修改机器组
@@ -763,10 +787,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("UploadLog", req, cb);
     }
     /**
-     * 本接口用于创建定时SQL分析任务
+     * 本接口用于删除日志主题。
      */
-    async CreateScheduledSql(req, cb) {
-        return this.request("CreateScheduledSql", req, cb);
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
     }
     /**
      * 本接口用于修改日志集信息
@@ -830,10 +854,10 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
         return this.request("CreateAlarm", req, cb);
     }
     /**
-     * 本接口用于删除日志主题。
+     * 获取告警渠道回调配置列表。
      */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
+    async DescribeWebCallbacks(req, cb) {
+        return this.request("DescribeWebCallbacks", req, cb);
     }
 }
 exports.Client = Client;

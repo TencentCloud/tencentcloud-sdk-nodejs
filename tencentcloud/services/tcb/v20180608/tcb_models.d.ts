@@ -574,15 +574,15 @@ export interface DescribeCloudBaseRunServerDomainNameResponse {
     /**
      * 公网服务域名
      */
-    PublicDomain: string;
+    PublicDomain?: string;
     /**
      * 内部服务域名
      */
-    InternalDomain: string;
+    InternalDomain?: string;
     /**
      * 弃用
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2581,7 +2581,7 @@ export interface ModifyCloudBaseRunServerFlowConfResponse {
      * 返回结果，succ代表成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2889,34 +2889,34 @@ export interface DescribeCloudBaseRunOneClickTaskExternalResponse {
     /**
      * 外部任务Id
      */
-    ExternalId: string;
+    ExternalId?: string;
     /**
      * 弃用
      */
-    EnvId: string;
+    EnvId?: string;
     /**
      * 用户uin
      */
-    UserUin: string;
+    UserUin?: string;
     /**
      * 服务名
      */
-    ServerName: string;
+    ServerName?: string;
     /**
      * 版本名
      */
-    VersionName: string;
+    VersionName?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 当前阶段
   微信云托管环境创建阶段：envStage
   存储资源创建阶段：storageStage
   服务创建阶段：serverStage
      */
-    Stage: string;
+    Stage?: string;
     /**
      * 状态
   running
@@ -2924,23 +2924,23 @@ export interface DescribeCloudBaseRunOneClickTaskExternalResponse {
   failed
   finished
      */
-    Status: string;
+    Status?: string;
     /**
      * 失败原因
      */
-    FailReason: string;
+    FailReason?: string;
     /**
      * 用户envId
      */
-    UserEnvId: string;
+    UserEnvId?: string;
     /**
      * 创建时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 步骤信息
      */
-    Steps: Array<OneClickTaskStepInfo>;
+    Steps?: Array<OneClickTaskStepInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3981,13 +3981,13 @@ export interface UnfreezeCloudBaseRunServersResponse {
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 解冻失败列表
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailServerList: Array<string>;
+    FailServerList?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5719,7 +5719,7 @@ export interface DescribeCloudBaseRunVersionSnapshotResponse {
      * 版本历史
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Snapshots: Array<CloudRunServiceSimpleVersionSnapshot>;
+    Snapshots?: Array<CloudRunServiceSimpleVersionSnapshot>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6096,11 +6096,11 @@ export interface ObjectKV {
     /**
      * object 的 key
      */
-    Key: string;
+    Key?: string;
     /**
      * object key 对应的 value
      */
-    Value: string;
+    Value?: string;
 }
 /**
  * 云开发项目版本
@@ -6319,7 +6319,7 @@ export interface ModifyCloudBaseRunServerVersionResponse {
      * 返回结果（succ为成功）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

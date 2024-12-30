@@ -479,7 +479,6 @@ RecordId和StartTime/EndTime互斥
     }
     /**
      * 本接口(ModifyRecordingPlan)用于更新录制计划。
-
      */
     async ModifyRecordingPlan(req, cb) {
         return this.request("ModifyRecordingPlan", req, cb);
@@ -618,7 +617,6 @@ RecordId和StartTime/EndTime互斥
     }
     /**
      * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
-
      */
     async GetRecordPlanByDev(req, cb) {
         return this.request("GetRecordPlanByDev", req, cb);

@@ -166,6 +166,7 @@ import {
   CreateSignUrlsRequest,
   RegistrationOrganizationInfo,
   ChannelCreateMultiFlowSignQRCodeRequest,
+  OrganizationAuthorizationOptions,
   SignQrCode,
   FlowApproverInfo,
   ChannelCreateUserAutoSignEnableUrlResponse,

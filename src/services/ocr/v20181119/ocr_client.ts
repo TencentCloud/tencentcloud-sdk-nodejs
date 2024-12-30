@@ -43,6 +43,8 @@ import {
   TextDetectResponse,
   RailwayTicketInfo,
   TollInvoiceOCRResponse,
+  GetOCRTokenResponse,
+  IDCardInfoResult,
   FinanBillSliceOCRResponse,
   DriverLicenseOCRResponse,
   WaybillOCRResponse,
@@ -112,14 +114,15 @@ import {
   TaxiInvoiceOCRResponse,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
-  RecognizeStoreNameResponse,
+  MainlandTravelPermitBackInfos,
   OtherInvoice,
   CellContent,
   RecognizeMedicalInvoiceOCRResponse,
   RecognizeValidIDCardOCRRequest,
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
-  VatInvoiceVerifyNewRequest,
+  VinOCRRequest,
+  OCRResult,
   VehicleLicenseOCRResponse,
   VatInvoiceOCRRequest,
   Key,
@@ -191,6 +194,7 @@ import {
   FlightInvoiceOCRResponse,
   ShipInvoiceOCRResponse,
   ReconstructDocumentRequest,
+  VatInvoiceVerifyNewRequest,
   InstitutionOCRRequest,
   CarInvoiceInfo,
   FlightInvoiceInfo,
@@ -234,6 +238,7 @@ import {
   MixedInvoiceOCRRequest,
   ShippingInvoice,
   TableDetectInfo,
+  IDCardConfig,
   ResidenceBookletOCRResponse,
   VatInvoiceRoll,
   CarInvoiceOCRResponse,
@@ -260,8 +265,10 @@ import {
   HmtResidentPermitOCRRequest,
   RecognizeTableAccurateOCRResponse,
   ResidenceBookletOCRRequest,
+  GetOCRResultRequest,
   BusInvoiceOCRResponse,
   QrcodeResultsInfo,
+  GetOCRResultResponse,
   MainlandPermitOCRResponse,
   VatInvoice,
   MLIDCardOCRRequest,
@@ -282,7 +289,7 @@ import {
   QuotaInvoice,
   InsuranceBillOCRRequest,
   GeneralHandwritingOCRResponse,
-  MainlandTravelPermitBackInfos,
+  IDCardResult,
   TableCell,
   TableOCRResponse,
   DetectedWordCoordPoint,
@@ -295,7 +302,8 @@ import {
   MixedInvoiceDetectRequest,
   WaybillOCRRequest,
   ReconstructDocumentConfig,
-  VinOCRRequest,
+  RecognizeStoreNameResponse,
+  GetOCRTokenRequest,
   RideHailingTransportLicenseOCRRequest,
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
@@ -458,9 +466,21 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async RecognizeOnlineTaxiItineraryOCR(
+    req: RecognizeOnlineTaxiItineraryOCRRequest,
+    cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void
+  ): Promise<RecognizeOnlineTaxiItineraryOCRResponse> {
+    return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb)
+  }
+
+  /**
      * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
 
-另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备8种告警功能，如下表所示。
+另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备8种告警功能，如下表所示。
 
 <table style="width:650px">
       <thead>
@@ -647,7 +667,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。点击[立即体验](https://ocrdemo.cloud.tencent.com?action=RecognizeTableAccurateOCR)。
+     * 本接口支持中英文图片/PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。识别效果比表格识别V2更好，覆盖场景更加广泛，对表格难例场景，如无线表格、嵌套表格（有线表格中包含无线表格）的识别效果均优于表格识别V2。
 
 默认接口请求频率限制：2次/秒。
      */
@@ -663,7 +683,7 @@ export class Client extends AbstractClient {
 
 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
 
-另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
+另外，本接口还支持多种扩展能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
 
 <table style="width:650px">
       <thead>
@@ -959,15 +979,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async RecognizeOnlineTaxiItineraryOCR(
-    req: RecognizeOnlineTaxiItineraryOCRRequest,
-    cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void
-  ): Promise<RecognizeOnlineTaxiItineraryOCRResponse> {
-    return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb)
+   * 获取ocr结果
+   */
+  async GetOCRResult(
+    req: GetOCRResultRequest,
+    cb?: (error: string, rep: GetOCRResultResponse) => void
+  ): Promise<GetOCRResultResponse> {
+    return this.request("GetOCRResult", req, cb)
   }
 
   /**
@@ -1507,6 +1525,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FinanBillOCRResponse) => void
   ): Promise<FinanBillOCRResponse> {
     return this.request("FinanBillOCR", req, cb)
+  }
+
+  /**
+   * 获取ocr的token值
+   */
+  async GetOCRToken(
+    req: GetOCRTokenRequest,
+    cb?: (error: string, rep: GetOCRTokenResponse) => void
+  ): Promise<GetOCRTokenResponse> {
+    return this.request("GetOCRToken", req, cb)
   }
 
   /**

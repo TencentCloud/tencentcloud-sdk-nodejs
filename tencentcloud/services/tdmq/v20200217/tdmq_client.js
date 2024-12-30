@@ -204,10 +204,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEnvironment", req, cb);
     }
     /**
-     * 获取环境下主题列表
+     * 查询RabbitMQ权限列表
      */
-    async DescribeTopics(req, cb) {
-        return this.request("DescribeTopics", req, cb);
+    async DescribeRabbitMQPermission(req, cb) {
+        return this.request("DescribeRabbitMQPermission", req, cb);
     }
     /**
      * 修改pulsar专业版公网安全策略
@@ -328,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 删除RabbitMQ的权限
+     */
+    async DeleteRabbitMQPermission(req, cb) {
+        return this.request("DeleteRabbitMQPermission", req, cb);
     }
     /**
      * 平滑迁移过程获取源集群topic列表接口
@@ -550,6 +556,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async VerifyRocketMQConsume(req, cb) {
         return this.request("VerifyRocketMQConsume", req, cb);
+    }
+    /**
+     * 修改RabbitMQ的权限
+     */
+    async ModifyRabbitMQPermission(req, cb) {
+        return this.request("ModifyRabbitMQPermission", req, cb);
     }
     /**
      * 历史原因，该接口位于tdmq-manager，目前rabbitmq产品没有使用该接口，当前使用的是DescribeRabbitMQVipInstances。不过从调用链上看，线网还有请求流程，所以走预下线流程。
@@ -816,6 +828,12 @@ RabbitMQ专享版查询虚拟主机列表
      */
     async DescribeRocketMQMsg(req, cb) {
         return this.request("DescribeRocketMQMsg", req, cb);
+    }
+    /**
+     * 获取环境下主题列表
+     */
+    async DescribeTopics(req, cb) {
+        return this.request("DescribeTopics", req, cb);
     }
     /**
      * 获取命名空间角色列表

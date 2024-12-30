@@ -2446,22 +2446,22 @@ export interface DvAuthDetail {
      * DV 认证值域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DvAuthDomain: string;
+    DvAuthDomain?: string;
     /**
      * DV 认证值路径。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DvAuthPath: string;
+    DvAuthPath?: string;
     /**
      * DV 认证子域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DvAuthKeySubDomain: string;
+    DvAuthKeySubDomain?: string;
     /**
      * DV 认证信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DvAuths: Array<DvAuths>;
+    DvAuths?: Array<DvAuths>;
 }
 /**
  * CheckCertificateDomainVerification请求参数结构体
@@ -3531,25 +3531,25 @@ export interface DeployedResources {
     /**
      * 证书ID
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 数量
      */
-    Count: number;
+    Count?: number;
     /**
      * 资源标识:clb,cdn,live,waf,antiddos
      */
-    Type: string;
+    Type?: string;
     /**
      * 不建议使用。字段返回和Resources相同。本字段后续只返回null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceIds: Array<string>;
+    ResourceIds?: Array<string>;
     /**
      * 关联资源ID或关联域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Resources: Array<string>;
+    Resources?: Array<string>;
 }
 /**
  * ModifyCertificateProject请求参数结构体
@@ -3653,22 +3653,22 @@ export interface RevokeDomainValidateAuths {
      * DV 认证值路径。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainValidateAuthPath: string;
+    DomainValidateAuthPath?: string;
     /**
      * DV 认证 KEY。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainValidateAuthKey: string;
+    DomainValidateAuthKey?: string;
     /**
      * DV 认证值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainValidateAuthValue: string;
+    DomainValidateAuthValue?: string;
     /**
      * DV 认证域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DomainValidateAuthDomain: string;
+    DomainValidateAuthDomain?: string;
 }
 /**
  * DescribeHostUpdateRecordDetail返回参数结构体
@@ -4913,32 +4913,32 @@ export interface ProjectInfo {
      * 项目名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 项目创建用户 UIN。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectCreatorUin: number;
+    ProjectCreatorUin?: number;
     /**
      * 项目创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectCreateTime: string;
+    ProjectCreateTime?: string;
     /**
      * 项目信息简述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectResume: string;
+    ProjectResume?: string;
     /**
      * 用户 UIN。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerUin: number;
+    OwnerUin?: number;
     /**
      * 项目 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    ProjectId?: string;
 }
 /**
  * DescribeHostTeoInstanceList请求参数结构体

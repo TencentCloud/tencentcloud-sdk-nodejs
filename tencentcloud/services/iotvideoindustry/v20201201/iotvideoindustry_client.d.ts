@@ -315,7 +315,6 @@ RecordId和StartTime/EndTime互斥
     DeleteDeviceGroup(req: DeleteDeviceGroupRequest, cb?: (error: string, rep: DeleteDeviceGroupResponse) => void): Promise<DeleteDeviceGroupResponse>;
     /**
      * 本接口(ModifyRecordingPlan)用于更新录制计划。
-
      */
     ModifyRecordingPlan(req: ModifyRecordingPlanRequest, cb?: (error: string, rep: ModifyRecordingPlanResponse) => void): Promise<ModifyRecordingPlanResponse>;
     /**
@@ -410,7 +409,6 @@ RecordId和StartTime/EndTime互斥
     GetRecordPlans(req?: GetRecordPlansRequest, cb?: (error: string, rep: GetRecordPlansResponse) => void): Promise<GetRecordPlansResponse>;
     /**
      * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
-
      */
     GetRecordPlanByDev(req: GetRecordPlanByDevRequest, cb?: (error: string, rep: GetRecordPlanByDevResponse) => void): Promise<GetRecordPlanByDevResponse>;
     /**

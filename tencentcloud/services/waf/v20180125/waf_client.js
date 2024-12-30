@@ -791,7 +791,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAreaBanRule", req, cb);
     }
     /**
-     * 描述WAF自动封禁模块详情
+     * 废弃接口
+
+描述WAF自动封禁模块详情
      */
     async DescribeWafAutoDenyStatus(req, cb) {
         return this.request("DescribeWafAutoDenyStatus", req, cb);

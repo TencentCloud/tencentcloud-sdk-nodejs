@@ -339,7 +339,7 @@ export interface ExternalNodeInfo {
     /**
      * 第三方节点名称
      */
-    Name: string;
+    Name?: string;
     /**
      * CPU核数，单位：核
   注意：此字段可能返回 null，表示取不到有效值。
@@ -520,12 +520,12 @@ export interface NodeCountSummary {
      * 手动管理的节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ManuallyAdded: ManuallyAdded;
+    ManuallyAdded?: ManuallyAdded;
     /**
      * 自动管理的节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingAdded: AutoscalingAdded;
+    AutoscalingAdded?: AutoscalingAdded;
 }
 /**
  * 虚拟节点池信息
@@ -582,15 +582,15 @@ export interface HealthCheckPolicyBinding {
     /**
      * 健康检测策略名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 规则创建时间
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 关联节点池数组
      */
-    NodePools: Array<string>;
+    NodePools?: Array<string>;
 }
 /**
  * CreateHealthCheckPolicy请求参数结构体
@@ -989,40 +989,40 @@ export interface RegularNodePoolInfo {
     /**
      * LaunchConfigurationId 配置
      */
-    LaunchConfigurationId: string;
+    LaunchConfigurationId?: string;
     /**
      * AutoscalingGroupId 分组id
      */
-    AutoscalingGroupId: string;
+    AutoscalingGroupId?: string;
     /**
      * NodeCountSummary 节点列表
      */
-    NodeCountSummary: NodeCountSummary;
+    NodeCountSummary?: NodeCountSummary;
     /**
      * 状态信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingGroupStatus: string;
+    AutoscalingGroupStatus?: string;
     /**
      * 最大节点数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxNodesNum: number;
+    MaxNodesNum?: number;
     /**
      * 最小节点数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinNodesNum: number;
+    MinNodesNum?: number;
     /**
      * 期望的节点数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DesiredNodesNum: number;
+    DesiredNodesNum?: number;
     /**
      * 节点池osName
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodePoolOs: string;
+    NodePoolOs?: string;
     /**
      * 节点配置
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1184,12 +1184,12 @@ export interface DescribeHealthCheckPolicyBindingsResponse {
      * 健康检测规则数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheckPolicyBindings: Array<HealthCheckPolicyBinding>;
+    HealthCheckPolicyBindings?: Array<HealthCheckPolicyBinding>;
     /**
      * 健康检测规则数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1522,12 +1522,12 @@ export interface DescribeHealthCheckPoliciesResponse {
      * 健康检测策略数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheckPolicies: Array<HealthCheckPolicy>;
+    HealthCheckPolicies?: Array<HealthCheckPolicy>;
     /**
      * 数组总数目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1580,72 +1580,72 @@ export interface SuperNodeInfo {
      * 实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 自动续费标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /**
      * 资源类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 节点的 CPU 规格，单位：核。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CPU: number;
+    CPU?: number;
     /**
      * 节点上 Pod 的 CPU总和，单位：核。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsedCPU: number;
+    UsedCPU?: number;
     /**
      * 节点的内存规格，单位：Gi。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 节点上 Pod 的内存总和，单位：Gi。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsedMemory: number;
+    UsedMemory?: number;
     /**
      * 可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * VPC 唯一 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网唯一 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 生效时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActiveAt: string;
+    ActiveAt?: string;
     /**
      * 过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireAt: string;
+    ExpireAt?: string;
     /**
      * 可调度的单 Pod 最大 CPU 规格
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxCPUScheduledPod: number;
+    MaxCPUScheduledPod?: number;
     /**
      * 实例属性
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceAttribute: string;
+    InstanceAttribute?: string;
 }
 /**
  * 手动加入的节点
@@ -1654,19 +1654,19 @@ export interface ManuallyAdded {
     /**
      * 加入中的节点数量
      */
-    Joining: number;
+    Joining?: number;
     /**
      * 初始化中的节点数量
      */
-    Initializing: number;
+    Initializing?: number;
     /**
      * 正常的节点数量
      */
-    Normal: number;
+    Normal?: number;
     /**
      * 节点总数
      */
-    Total: number;
+    Total?: number;
 }
 /**
  * 托管节点池Management配置
@@ -1755,7 +1755,7 @@ export interface CreateHealthCheckPolicyResponse {
     /**
      * 健康检测策略名称
      */
-    HealthCheckPolicyName: string;
+    HealthCheckPolicyName?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

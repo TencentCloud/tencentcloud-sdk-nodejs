@@ -45,7 +45,7 @@ import {
   ConsoleSharingConfig,
   DeleteConsoleSharingRequest,
   EscalateNoticeInfo,
-  ModifyConsoleSharingRequest,
+  DescribeWebCallbacksResponse,
   CreateLogsetRequest,
   DescribeShippersRequest,
   CreateScheduledSqlResponse,
@@ -108,6 +108,7 @@ import {
   ModifyDashboardSubscribeRequest,
   CreateConsumerResponse,
   DescribeConsoleSharingListResponse,
+  DeleteWebCallbackResponse,
   ModifyMachineGroupResponse,
   DataTransformResouceInfo,
   CreateDashboardSubscribeRequest,
@@ -116,6 +117,7 @@ import {
   QueryMetricResponse,
   DescribeAlarmShieldsRequest,
   ModifyLogsetRequest,
+  WebCallbackInfo,
   ModifyNoticeContentResponse,
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
@@ -156,6 +158,7 @@ import {
   DescribeTopicsRequest,
   DeleteConsumerResponse,
   GetAlarmLogResponse,
+  CreateWebCallbackResponse,
   CreateDashboardSubscribeResponse,
   DescribeExportsRequest,
   CreateMachineGroupResponse,
@@ -168,6 +171,7 @@ import {
   CreateDeliverCloudFunctionRequest,
   DeleteConsumerRequest,
   NoticeContentInfo,
+  CreateWebCallbackRequest,
   DescribeMachineGroupsRequest,
   DeleteIndexRequest,
   AnonymousInfo,
@@ -180,6 +184,7 @@ import {
   DashboardTopicInfo,
   DeleteConfigRequest,
   AnalysisDimensional,
+  DeleteWebCallbackRequest,
   LogRechargeRuleInfo,
   ModifyCloudProductLogTaskResponse,
   CloseKafkaConsumerRequest,
@@ -191,12 +196,14 @@ import {
   AlarmNoticeDeliverConfig,
   DescribeMachineGroupsResponse,
   DeleteConfigExtraRequest,
-  CreateDeliverCloudFunctionResponse,
+  DashboardInfo,
   ModifyConfigRequest,
   AddMachineGroupInfoRequest,
   DescribeKafkaRechargesRequest,
   JsonInfo,
+  ModifyConsoleSharingRequest,
   PreviewKafkaRechargeResponse,
+  ModifyWebCallbackRequest,
   CreateShipperRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
@@ -243,7 +250,7 @@ import {
   RuleInfo,
   CreateConfigResponse,
   CreateConsumerRequest,
-  MultiTopicSearchInformation,
+  ModifyWebCallbackResponse,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyNoticeContentRequest,
@@ -251,7 +258,7 @@ import {
   QueryRangeMetricResponse,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
-  DashboardInfo,
+  CreateDeliverCloudFunctionResponse,
   DataTransformTaskInfo,
   DescribeMachinesResponse,
   ModifyCosRechargeResponse,
@@ -291,7 +298,7 @@ import {
   ModifyLogsetResponse,
   MonitorTime,
   SearchLogTopics,
-  SearchLogRequest,
+  MultiTopicSearchInformation,
   CreateMachineGroupRequest,
   LogItem,
   KeyRegexInfo,
@@ -317,6 +324,8 @@ import {
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
+  SearchLogRequest,
+  DescribeWebCallbacksRequest,
   DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
   ConsoleSharingParam,
@@ -415,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyShipperResponse) => void
   ): Promise<ModifyShipperResponse> {
     return this.request("ModifyShipper", req, cb)
+  }
+
+  /**
+   * 该接口用于创建告警渠道回调配置。
+   */
+  async CreateWebCallback(
+    req: CreateWebCallbackRequest,
+    cb?: (error: string, rep: CreateWebCallbackResponse) => void
+  ): Promise<CreateWebCallbackResponse> {
+    return this.request("CreateWebCallback", req, cb)
   }
 
   /**
@@ -928,6 +947,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于创建定时SQL分析任务
+   */
+  async CreateScheduledSql(
+    req: CreateScheduledSqlRequest,
+    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
+  ): Promise<CreateScheduledSqlResponse> {
+    return this.request("CreateScheduledSql", req, cb)
+  }
+
+  /**
    * 本接口用于获取日志集信息列表。
    */
   async DescribeLogsets(
@@ -1108,6 +1137,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于删除告警渠道回调配置。
+   */
+  async DeleteWebCallback(
+    req: DeleteWebCallbackRequest,
+    cb?: (error: string, rep: DeleteWebCallbackResponse) => void
+  ): Promise<DeleteWebCallbackResponse> {
+    return this.request("DeleteWebCallback", req, cb)
+  }
+
+  /**
    * 查询指定时间范围内指标的变化趋势
    */
   async QueryRangeMetric(
@@ -1195,6 +1234,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDashboardSubscribesResponse) => void
   ): Promise<DescribeDashboardSubscribesResponse> {
     return this.request("DescribeDashboardSubscribes", req, cb)
+  }
+
+  /**
+   * 该接口用于修改告警渠道回调配置。
+   */
+  async ModifyWebCallback(
+    req: ModifyWebCallbackRequest,
+    cb?: (error: string, rep: ModifyWebCallbackResponse) => void
+  ): Promise<ModifyWebCallbackResponse> {
+    return this.request("ModifyWebCallback", req, cb)
   }
 
   /**
@@ -1470,13 +1519,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建定时SQL分析任务
+   * 本接口用于删除日志主题。
    */
-  async CreateScheduledSql(
-    req: CreateScheduledSqlRequest,
-    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
-  ): Promise<CreateScheduledSqlResponse> {
-    return this.request("CreateScheduledSql", req, cb)
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
   }
 
   /**
@@ -1581,12 +1630,12 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 本接口用于删除日志主题。
+   * 获取告警渠道回调配置列表。
    */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
+  async DescribeWebCallbacks(
+    req: DescribeWebCallbacksRequest,
+    cb?: (error: string, rep: DescribeWebCallbacksResponse) => void
+  ): Promise<DescribeWebCallbacksResponse> {
+    return this.request("DescribeWebCallbacks", req, cb)
   }
 }

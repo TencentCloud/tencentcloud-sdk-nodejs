@@ -685,17 +685,22 @@ export interface EscalateNoticeInfo {
     EscalateNotice?: EscalateNoticeInfo;
 }
 /**
- * ModifyConsoleSharing请求参数结构体
+ * DescribeWebCallbacks返回参数结构体
  */
-export interface ModifyConsoleSharingRequest {
+export interface DescribeWebCallbacksResponse {
     /**
-     * 免密分享链接Id
+     * 告警渠道回调配置列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SharingId: string;
+    WebCallbacks?: Array<WebCallbackInfo>;
     /**
-     * 指定分享链接有效期，单位：毫秒，最长可设定有效期为30天
+     * 符合条件的通知内容配置总数。
      */
-    DurationMilliseconds: number;
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateLogset请求参数结构体
@@ -2249,6 +2254,15 @@ export interface DescribeConsoleSharingListResponse {
     RequestId?: string;
 }
 /**
+ * DeleteWebCallback返回参数结构体
+ */
+export interface DeleteWebCallbackResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyMachineGroup返回参数结构体
  */
 export interface ModifyMachineGroupResponse {
@@ -2376,6 +2390,63 @@ export interface ModifyLogsetRequest {
      * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
      */
     Tags?: Array<Tag>;
+}
+/**
+ * 告警渠道回调配置信息
+ */
+export interface WebCallbackInfo {
+    /**
+     * 告警渠道回调配置id。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebCallbackId?: string;
+    /**
+     * 告警渠道回调配置名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 渠道类型
+  
+  WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 回调地址。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Webhook?: string;
+    /**
+     * 请求方式。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Method?: string;
+    /**
+     * 秘钥信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 主账号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: number;
+    /**
+     * 子账号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubUin?: number;
+    /**
+     * 创建时间。秒级时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 更新时间。秒级时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: number;
 }
 /**
  * ModifyNoticeContent返回参数结构体
@@ -2991,7 +3062,7 @@ export interface CreateConfigExtraRequest {
      */
     ContainerStdout?: ContainerStdoutInfo;
     /**
-     * 日志格式化方式，用于容器采集场景。
+     * 日志格式化方式，用于容器采集场景。 - 已废弃
   - stdout-docker-json：用于docker容器采集场景
   - stdout-containerd：用于containerd容器采集场景
      */
@@ -3474,8 +3545,8 @@ export interface DescribeTopicsRequest {
     PreciseSearch?: number;
     /**
      * 主题类型
-  <ul><li>0:日志主题，默认值</li>
-  <li>1:指标主题</li></ul>
+  - 0:日志主题，默认值
+  - 1:指标主题
      */
     BizType?: number;
 }
@@ -3533,6 +3604,19 @@ export interface GetAlarmLogResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Columns?: Array<Column>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateWebCallback返回参数结构体
+ */
+export interface CreateWebCallbackResponse {
+    /**
+     * 回调配置ID。
+     */
+    WebCallbackId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3805,6 +3889,35 @@ export interface NoticeContentInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Headers?: Array<string>;
+}
+/**
+ * CreateWebCallback请求参数结构体
+ */
+export interface CreateWebCallbackRequest {
+    /**
+     * 通知内容名称。
+     */
+    Name: string;
+    /**
+     * 渠道类型。
+  
+  WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调。
+     */
+    Type: string;
+    /**
+     * Webhook地址。
+     */
+    Webhook: string;
+    /**
+     * 请求方式。 支持POST、PUT。
+  
+  当Type为Http时，必填。
+     */
+    Method?: string;
+    /**
+     * 秘钥。
+     */
+    Key?: string;
 }
 /**
  * DescribeMachineGroups请求参数结构体
@@ -4240,9 +4353,17 @@ export interface AnalysisDimensional {
       "Key": "SyntaxRule", // 查不到这个字段也是老语法
       "Value": "0"//0:Lucene, 1:CQL
   }
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigInfo?: Array<AlarmAnalysisConfig>;
+}
+/**
+ * DeleteWebCallback请求参数结构体
+ */
+export interface DeleteWebCallbackRequest {
+    /**
+     * 告警渠道回调配置ID。
+     */
+    WebCallbackId: string;
 }
 /**
  * 日志导入规则
@@ -4522,13 +4643,61 @@ export interface DeleteConfigExtraRequest {
     ConfigExtraId: string;
 }
 /**
- * CreateDeliverCloudFunction返回参数结构体
+ * 仪表盘信息
  */
-export interface CreateDeliverCloudFunctionResponse {
+export interface DashboardInfo {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 仪表盘id
      */
-    RequestId?: string;
+    DashboardId: string;
+    /**
+     * 仪表盘名字
+     */
+    DashboardName: string;
+    /**
+     * 仪表盘数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: string;
+    /**
+     * 创建仪表盘的时间
+     */
+    CreateTime: string;
+    /**
+     * AssumerUin非空则表示创建该日志主题的服务方Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssumerUin: number;
+    /**
+     * RoleName非空则表示创建该日志主题的服务方使用的角色
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoleName: string;
+    /**
+     * AssumerName非空则表示创建该日志主题的服务方名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssumerName: string;
+    /**
+     * 日志主题绑定的标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tag>;
+    /**
+     * 仪表盘所在地域： 为了兼容老的地域。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardRegion: string;
+    /**
+     * 修改仪表盘的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 仪表盘对应的topic相关信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardTopicInfos: Array<DashboardTopicInfo>;
 }
 /**
  * ModifyConfig请求参数结构体
@@ -4638,6 +4807,19 @@ export interface JsonInfo {
     JsonType?: number;
 }
 /**
+ * ModifyConsoleSharing请求参数结构体
+ */
+export interface ModifyConsoleSharingRequest {
+    /**
+     * 免密分享链接Id
+     */
+    SharingId: string;
+    /**
+     * 指定分享链接有效期，单位：毫秒，最长可设定有效期为30天
+     */
+    DurationMilliseconds: number;
+}
+/**
  * PreviewKafkaRecharge返回参数结构体
  */
 export interface PreviewKafkaRechargeResponse {
@@ -4654,6 +4836,41 @@ export interface PreviewKafkaRechargeResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyWebCallback请求参数结构体
+ */
+export interface ModifyWebCallbackRequest {
+    /**
+     * 告警渠道回调配置ID。
+     */
+    WebCallbackId: string;
+    /**
+     * 告警渠道回调配置名称。
+     */
+    Name?: string;
+    /**
+     * 渠道类型
+  
+  WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调;
+     */
+    Type?: string;
+    /**
+     * 回调地址。
+     */
+    Webhook?: string;
+    /**
+     * 请求方式。
+  
+  支持POST、PUT。
+  
+  注意：当Type为Http时，必填。
+     */
+    Method?: string;
+    /**
+     * 秘钥信息。
+     */
+    Key?: string;
 }
 /**
  * CreateShipper请求参数结构体
@@ -6054,17 +6271,13 @@ export interface CreateConsumerRequest {
     Compression?: number;
 }
 /**
- * 多日志主题检索相关信息
+ * ModifyWebCallback返回参数结构体
  */
-export interface MultiTopicSearchInformation {
+export interface ModifyWebCallbackResponse {
     /**
-     * 要检索分析的日志主题ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TopicId?: string;
-    /**
-     * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
-     */
-    Context?: string;
+    RequestId?: string;
 }
 /**
  * 告警通知渠道组详细配置
@@ -6218,61 +6431,13 @@ export interface ModifyAlarmNoticeResponse {
     RequestId?: string;
 }
 /**
- * 仪表盘信息
+ * CreateDeliverCloudFunction返回参数结构体
  */
-export interface DashboardInfo {
+export interface CreateDeliverCloudFunctionResponse {
     /**
-     * 仪表盘id
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    DashboardId: string;
-    /**
-     * 仪表盘名字
-     */
-    DashboardName: string;
-    /**
-     * 仪表盘数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data: string;
-    /**
-     * 创建仪表盘的时间
-     */
-    CreateTime: string;
-    /**
-     * AssumerUin非空则表示创建该日志主题的服务方Uin
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssumerUin: number;
-    /**
-     * RoleName非空则表示创建该日志主题的服务方使用的角色
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RoleName: string;
-    /**
-     * AssumerName非空则表示创建该日志主题的服务方名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssumerName: string;
-    /**
-     * 日志主题绑定的标签信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags: Array<Tag>;
-    /**
-     * 仪表盘所在地域： 为了兼容老的地域。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DashboardRegion: string;
-    /**
-     * 修改仪表盘的时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
-    /**
-     * 仪表盘对应的topic相关信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DashboardTopicInfos: Array<DashboardTopicInfo>;
+    RequestId?: string;
 }
 /**
  * 数据加工任务基本详情
@@ -7188,92 +7353,17 @@ export interface SearchLogTopics {
     Infos?: Array<SearchLogInfos>;
 }
 /**
- * SearchLog请求参数结构体
+ * 多日志主题检索相关信息
  */
-export interface SearchLogRequest {
+export interface MultiTopicSearchInformation {
     /**
-     * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
-     */
-    From: number;
-    /**
-     * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
-     */
-    To: number;
-    /**
-     * 检索分析语句，最大长度为12KB
-  语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
-  使用*或空字符串可查询所有日志
-     */
-    Query: string;
-    /**
-     * 检索语法规则，默认值为0，推荐使用1 。
-  
-  - 0：Lucene语法
-  - 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
-  
-  详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
-     */
-    SyntaxRule?: number;
-    /**
-     * - 要检索分析的日志主题ID，仅能指定一个日志主题。
-  - 如需同时检索多个日志主题，请使用Topics参数。
-  - TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+     * 要检索分析的日志主题ID
      */
     TopicId?: string;
     /**
-     * - 要检索分析的日志主题列表，最大支持50个日志主题。
-  - 检索单个日志主题时请使用TopicId。
-  - TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
-     */
-    Topics?: Array<MultiTopicSearchInformation>;
-    /**
-     * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-  注意：
-  * 仅当检索分析语句(Query)不包含SQL时有效
-  * SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a>
-     */
-    Sort?: string;
-    /**
-     * 表示单次查询返回的原始日志条数，默认为100，最大值为1000。
-  注意：
-  * 仅当检索分析语句(Query)不包含SQL时有效
-  * SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
-  
-  可通过两种方式获取后续更多日志：
-  * Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志
-  * Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制
-     */
-    Limit?: number;
-    /**
-     * 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。
-  注意：
-  * 仅当检索分析语句(Query)不包含SQL时有效
-  * 不能与Context参数同时使用
-  * 仅适用于单日志主题检索
-     */
-    Offset?: number;
-    /**
-     * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
-  注意：
-  * 透传该参数时，请勿修改除该参数外的其它参数
-  * 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
-  * 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+     * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
      */
     Context?: string;
-    /**
-     * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
-  0：自动采样;
-  0～1：按指定采样率采样，例如0.02;
-  1：不采样，即精确分析
-  默认值为1
-     */
-    SamplingRate?: number;
-    /**
-     * 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效
-  为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效
-  两种返回方式在编码格式上有少量区别，建议使用true
-     */
-    UseNewAnalysis?: boolean;
 }
 /**
  * CreateMachineGroup请求参数结构体
@@ -8077,6 +8167,124 @@ export interface CosRechargeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Metadata?: Array<string>;
+}
+/**
+ * SearchLog请求参数结构体
+ */
+export interface SearchLogRequest {
+    /**
+     * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
+     */
+    From: number;
+    /**
+     * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
+     */
+    To: number;
+    /**
+     * 检索分析语句，最大长度为12KB
+  语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
+  使用*或空字符串可查询所有日志
+     */
+    Query: string;
+    /**
+     * 检索语法规则，默认值为0，推荐使用1 。
+  
+  - 0：Lucene语法
+  - 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
+  
+  详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+     */
+    SyntaxRule?: number;
+    /**
+     * - 要检索分析的日志主题ID，仅能指定一个日志主题。
+  - 如需同时检索多个日志主题，请使用Topics参数。
+  - TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+     */
+    TopicId?: string;
+    /**
+     * - 要检索分析的日志主题列表，最大支持50个日志主题。
+  - 检索单个日志主题时请使用TopicId。
+  - TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+     */
+    Topics?: Array<MultiTopicSearchInformation>;
+    /**
+     * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+  注意：
+  * 仅当检索分析语句(Query)不包含SQL时有效
+  * SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a>
+     */
+    Sort?: string;
+    /**
+     * 表示单次查询返回的原始日志条数，默认为100，最大值为1000。
+  注意：
+  * 仅当检索分析语句(Query)不包含SQL时有效
+  * SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+  
+  可通过两种方式获取后续更多日志：
+  * Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志
+  * Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制
+     */
+    Limit?: number;
+    /**
+     * 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。
+  注意：
+  * 仅当检索分析语句(Query)不包含SQL时有效
+  * 不能与Context参数同时使用
+  * 仅适用于单日志主题检索
+     */
+    Offset?: number;
+    /**
+     * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
+  注意：
+  * 透传该参数时，请勿修改除该参数外的其它参数
+  * 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+  * 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+     */
+    Context?: string;
+    /**
+     * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
+  0：自动采样;
+  0～1：按指定采样率采样，例如0.02;
+  1：不采样，即精确分析
+  默认值为1
+     */
+    SamplingRate?: number;
+    /**
+     * 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效
+  为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效
+  两种返回方式在编码格式上有少量区别，建议使用true
+     */
+    UseNewAnalysis?: boolean;
+}
+/**
+ * DescribeWebCallbacks请求参数结构体
+ */
+export interface DescribeWebCallbacksRequest {
+    /**
+     * <li> name
+  按照【告警渠道回调配置名称】进行过滤。
+  类型：String
+  必选：否
+  <li> webCallbackId
+  按照【告警渠道回调配置ID】进行过滤。
+  类型：String
+  必选：否
+  <li> type
+  按照【告警渠道回调配置渠道类型】进行过滤。
+  类型：String
+  必选：否
+  
+  每次请求的Filters的上限为10，Filter.Values的上限为100。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为20，最大值100。
+     */
+    Limit?: number;
 }
 /**
  * DeleteNoticeContent请求参数结构体

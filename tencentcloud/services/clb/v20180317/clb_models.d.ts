@@ -917,6 +917,10 @@ export interface BasicTargetGroupInfo {
      * 目标组名称
      */
     TargetGroupName?: string;
+    /**
+     * 权重
+     */
+    Weight?: number;
 }
 /**
  * ModifyTargetWeight返回参数结构体
@@ -4636,30 +4640,30 @@ export interface ListenerBackend {
     /**
      * 监听器 ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器的协议
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器的端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器下的规则信息（仅适用于HTTP/HTTPS监听器）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rules: Array<RuleTargets>;
+    Rules?: Array<RuleTargets>;
     /**
      * 监听器上绑定的后端服务列表（仅适用于TCP/UDP/TCP_SSL监听器）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Targets: Array<Backend>;
+    Targets?: Array<Backend>;
     /**
      * 若支持端口段，则为端口段结束端口；若不支持端口段，则为0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndPort: number;
+    EndPort?: number;
 }
 /**
  * SetSecurityGroupForLoadbalancers返回参数结构体
@@ -5463,6 +5467,11 @@ export interface AssociationItem {
      * 监听器名称
      */
     ListenerName?: string;
+    /**
+     * 关联目标组的权重， 该参数只有v2新版目标组生效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Weight?: number;
 }
 /**
  * DescribeCrossTargets请求参数结构体
