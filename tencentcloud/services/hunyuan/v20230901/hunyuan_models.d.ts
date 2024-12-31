@@ -132,7 +132,7 @@ export interface ChatCompletionsRequest {
      * 推荐问答开关。
   说明：
   1. 未传值时默认关闭。
-  2. 开启后，返回值里将增加 RecommendedQuestions 字段返回推荐问答， 最多只返回3条。
+  2. 开启后，在返回值的最后一个包中会增加 RecommendedQuestions 字段表示推荐问答， 最多返回3条。
      */
     EnableRecommendedQuestions?: boolean;
 }

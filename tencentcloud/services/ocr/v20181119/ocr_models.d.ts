@@ -1790,6 +1790,10 @@ export interface SmartStructuralProRequest {
      * 配置id支持：General -- 通用场景 InvoiceEng -- 海运提单、国际invoice模版 WayBillEng --海运订单模板
      */
     ConfigId?: string;
+    /**
+     * 是否开启全文字段坐标值的识别
+     */
+    EnableCoord?: boolean;
 }
 /**
  * RecognizeTableOCR返回参数结构体

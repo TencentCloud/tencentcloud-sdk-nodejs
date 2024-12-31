@@ -457,67 +457,67 @@ export interface Instance {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
    */
-  InstanceRole: string
+  InstanceRole?: string
   /**
    * 实例异常(或者处于初始化中)的原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedReason: string
+  FailedReason?: string
   /**
    * 实例的状态
 - initializing创建中
 - running 运行中
 - failed 异常
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 是否不可调度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unschedulable: boolean
+  Unschedulable?: boolean
   /**
    * 添加时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 节点内网IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LanIP: string
+  LanIP?: string
   /**
    * 资源池ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodePoolId: string
+  NodePoolId?: string
   /**
    * 原生节点参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Native: NativeNodeInfo
+  Native?: NativeNodeInfo
   /**
    * 普通节点参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regular: RegularNodeInfo
+  Regular?: RegularNodeInfo
   /**
    * 超级节点参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Super: SuperNodeInfo
+  Super?: SuperNodeInfo
   /**
    * 第三方节点参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  External: ExternalNodeInfo
+  External?: ExternalNodeInfo
   /**
    * 节点类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeType: string
+  NodeType?: string
 }
 
 /**
@@ -1232,12 +1232,12 @@ export interface RegularNodeInfo {
    * 节点配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceAdvancedSettings: InstanceAdvancedSettings
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
   /**
    * 自动伸缩组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoscalingGroupId: string
+  AutoscalingGroupId?: string
 }
 
 /**

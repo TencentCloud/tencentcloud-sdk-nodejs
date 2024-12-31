@@ -1440,7 +1440,7 @@ export interface DescribeSampleMatrixQueryRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 分组
+   * 分组；取值范围参见 DescribeMetricLabelWithValues 接口返回的指标及其支持的标签名
    */
   GroupBy?: Array<string>
 }
@@ -2766,12 +2766,12 @@ export interface DescribeCronJobsResponse {
   /**
    * 定时任务总数
    */
-  Total: number
+  Total?: number
   /**
    * 定时任务信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CronJobSet: Array<CronJob>
+  CronJobSet?: Array<CronJob>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3386,7 +3386,7 @@ export interface DescribeCheckSummaryResponse {
    * 检查点汇总信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckSummarySet: Array<CheckSummary>
+  CheckSummarySet?: Array<CheckSummary>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3443,11 +3443,11 @@ export interface DescribeScenariosResponse {
    * 场景列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScenarioSet: Array<Scenario>
+  ScenarioSet?: Array<Scenario>
   /**
    * 场景总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

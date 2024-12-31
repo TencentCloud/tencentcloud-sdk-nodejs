@@ -6685,7 +6685,7 @@ export interface SearchLogRequest {
      */
     EndTime: number;
     /**
-     * 检索分析语句，最大长度为12KB，查询语法可参考文档https://cloud.tencent.com/document/product/296/50508
+     * 检索分析语句，最大长度为12KB，查询语法可参考文档 https://cloud.tencent.com/document/product/296/50508
      */
     QueryString: string;
     /**

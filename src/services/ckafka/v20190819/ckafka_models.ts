@@ -2325,6 +2325,11 @@ export interface KafkaParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepPartition?: boolean
+  /**
+   * 正则匹配Topic列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicRegularExpression?: string
 }
 
 /**

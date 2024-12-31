@@ -832,22 +832,18 @@ export interface DeleteQosResponse {
 export interface VendorHardware {
     /**
      * 硬件id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareId?: string;
     /**
      * 硬件序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SN?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 激活状态， 空：全部； 1:待激活； 2:已激活
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
@@ -857,18 +853,15 @@ export interface VendorHardware {
     ActiveTime?: string;
     /**
      * 厂商备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 设备id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceId?: string;
     /**
      * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
   注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode?: number;
     /**
@@ -881,14 +874,12 @@ export interface VendorHardware {
   0：月度授权
   1：永久授权
   -1：未知
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicensePayMode?: number;
     /**
      * 付费方
   0：客户付费
   1：厂商付费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Payer?: number;
 }
@@ -1102,32 +1093,32 @@ export interface DeviceNetInfo {
   2:有线
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: number;
+    Type?: number;
     /**
      * 启用/禁用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataEnable: boolean;
+    DataEnable?: boolean;
     /**
      * 上行限速
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UploadLimit: string;
+    UploadLimit?: string;
     /**
      * 下行限速
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadLimit: string;
+    DownloadLimit?: string;
     /**
      * 接收实时速率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataRx: number;
+    DataRx?: number;
     /**
      * 发送实时速率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataTx: number;
+    DataTx?: number;
     /**
      * 运营商类型：
   1: 中国移动；
@@ -1135,7 +1126,7 @@ export interface DeviceNetInfo {
   3: 中国联通
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vendor: number;
+    Vendor?: number;
     /**
      * 连接状态：
   0:无连接
@@ -1143,17 +1134,17 @@ export interface DeviceNetInfo {
   2:已连接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    State: number;
+    State?: number;
     /**
      * 公网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 信号强度/单位：dbm
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SignalStrength: number;
+    SignalStrength?: number;
     /**
      * 数据网络类型：
   -1 ：无效值
@@ -1163,12 +1154,12 @@ export interface DeviceNetInfo {
   5：5G
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rat: number;
+    Rat?: number;
     /**
      * 网卡名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetInfoName: string;
+    NetInfoName?: string;
     /**
      * 下行实时速率（浮点数类型代替上一版本DataRx的整型）
   注意：此字段可能返回 null，表示取不到有效值。

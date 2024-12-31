@@ -149,19 +149,19 @@ export interface ServerConfiguration {
   /**
    * SIP服务器地址
    */
-  Host: string
+  Host?: string
   /**
    * SIP服务器端口
    */
-  Port: number
+  Port?: number
   /**
    * SIP服务器编码
    */
-  Serial: string
+  Serial?: string
   /**
    * SIP服务器域
    */
-  Realm: string
+  Realm?: string
 }
 
 /**
@@ -2113,42 +2113,42 @@ export interface WarningsData {
    * 唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  Id?: number
   /**
    * 设备ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceId: string
+  DeviceId?: string
   /**
    * 设备名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 告警通道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnChannel: string
+  WarnChannel?: string
   /**
    * 告警级别 1: "一级警情", 2: "二级警情", 3: "三级警情", 4: "四级警情",
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnLevel: number
+  WarnLevel?: number
   /**
    * 告警级别名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnLevelName: string
+  WarnLevelName?: string
   /**
    * 告警方式 2 设备报警 5 视频报警 6 设备故障报警
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnMode: number
+  WarnMode?: number
   /**
    * 告警方式名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnModeName: string
+  WarnModeName?: string
   /**
    * 告警类型  2: {
 			Name: "设备报警",
@@ -2186,22 +2186,22 @@ export interface WarningsData {
 		}
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnType: number
+  WarnType?: number
   /**
    * 是否删除
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Del: number
+  Del?: number
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -2704,42 +2704,42 @@ export interface Events {
    * 开始时间，秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventTime: number
+  EventTime?: number
   /**
    * 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventType: number
+  EventType?: number
   /**
    * 事件描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventDesc: string
+  EventDesc?: string
   /**
    * 设备类型
    */
-  DeviceType: number
+  DeviceType?: number
   /**
    * 设备地址
    */
-  DeviceAddress: string
+  DeviceAddress?: string
   /**
    * 设备Id
    */
-  DeviceId: string
+  DeviceId?: string
   /**
    * 通道Id
    */
-  ChannelId: string
+  ChannelId?: string
   /**
    * 事件日志
    */
-  EventLog: string
+  EventLog?: string
   /**
    * 设备备注名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceName: string
+  DeviceName?: string
 }
 
 /**
@@ -3426,46 +3426,46 @@ export interface ChannelDetail {
   /**
    * 通道名称
    */
-  ChannelName: string
+  ChannelName?: string
   /**
    * 通道唯一标识
    */
-  ChannelId: string
+  ChannelId?: string
   /**
    * 通道类型 0：未知；1：视频通道；2：音频通道；3：告警通道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChannelType: number
+  ChannelType?: number
   /**
    * 20位国标通道编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChannelCode: string
+  ChannelCode?: string
   /**
    * 通道扩展信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtraInformation: string
+  ExtraInformation?: string
   /**
    * 通道在线状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 通道是否存在录像标识 0：无录像；1：有录像
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsRecord: number
+  IsRecord?: number
   /**
    * 通道所属设备唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceId: string
+  DeviceId?: string
   /**
    * 通道所属虚拟组织的ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BusinessGroupId: string
+  BusinessGroupId?: string
 }
 
 /**
@@ -3489,19 +3489,19 @@ export interface DescribeDeviceStreamsData {
   /**
    * rtsp地址
    */
-  RtspAddr: string
+  RtspAddr?: string
   /**
    * rtmp地址
    */
-  RtmpAddr: string
+  RtmpAddr?: string
   /**
    * hls地址
    */
-  HlsAddr: string
+  HlsAddr?: string
   /**
    * flv地址
    */
-  FlvAddr: string
+  FlvAddr?: string
 }
 
 /**
@@ -3611,12 +3611,12 @@ export interface StatisticItem {
    * 日期。格式【YYYY-MM-DD】
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Date: string
+  Date?: string
   /**
    * 统计数额
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sum: number
+  Sum?: number
 }
 
 /**
@@ -4372,34 +4372,33 @@ export interface DeleteLiveChannelResponse {
 
 /**
  * 拉流地址，只有在推流情况下才有
-
  */
 export interface StreamAddress {
   /**
    * 流ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StreamId: string
+  StreamId?: string
   /**
    * rtsp流地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RtspAddr: string
+  RtspAddr?: string
   /**
    * rtmp流地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RtmpAddr: string
+  RtmpAddr?: string
   /**
    * hls流地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HlsAddr: string
+  HlsAddr?: string
   /**
    * flv流地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlvAddr: string
+  FlvAddr?: string
 }
 
 /**

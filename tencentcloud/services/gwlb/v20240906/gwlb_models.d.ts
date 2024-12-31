@@ -352,7 +352,6 @@ export interface GatewayLoadBalancer {
     LoadBalancerName?: string;
     /**
      * 网关负载均衡所属私有网络。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
@@ -370,17 +369,14 @@ export interface GatewayLoadBalancer {
     Status?: number;
     /**
      * 关联的目标组唯一ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetGroupId?: string;
     /**
      * 是否开启删除保护功能。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteProtect?: boolean;
     /**
      * 负载均衡实例的标签信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<TagInfo>;
     /**
@@ -389,17 +385,14 @@ export interface GatewayLoadBalancer {
     CreateTime?: string;
     /**
      * 网关负载均衡实例的计费类型，POSTPAID_BY_HOUR：按量计费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeType?: string;
     /**
      * 0：表示未被隔离，1：表示被隔离。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Isolation?: number;
     /**
      * 负载均衡实例被隔离的时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsolatedTime?: string;
 }

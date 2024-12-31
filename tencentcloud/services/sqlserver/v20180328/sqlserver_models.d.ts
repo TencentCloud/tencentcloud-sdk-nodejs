@@ -2392,7 +2392,7 @@ export interface InquiryPriceCreateDBInstancesRequest {
      */
     Cpu?: number;
     /**
-     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-虚拟机双机高可用,cvmRO-虚拟机只读
+     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-虚拟机双机高可用,cvmRO-虚拟机只读，MultiHA-多节点，cvmMultiHA-云盘
      */
     InstanceType?: string;
     /**
@@ -2400,6 +2400,10 @@ export interface InquiryPriceCreateDBInstancesRequest {
   CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘
      */
     MachineType?: string;
+    /**
+     * 备节点可用区，默认为空。如果是多节点架构时必传，并且备机可用区集合最小为2个，最大不超过5个。
+     */
+    DrZones?: Array<string>;
 }
 /**
  * StartIncrementalMigration请求参数结构体
@@ -2772,6 +2776,14 @@ export interface ReadOnlyGroup {
      * RO组外网地址端口
      */
     TgwWanVPort?: number;
+    /**
+     * RO只读组类型，1-按照一个实例一个只读组的方式发货，2-新建只读组后发货的所有实例都在这个只读组下面， 3-发货的所有实例都在已有的只读组下面
+     */
+    ReadOnlyGroupType?: number;
+    /**
+     * 部署RO副本模式，0-默认不升级主实例，1-强制升级主实例完成RO部署
+     */
+    ReadOnlyGroupForcedUpgrade?: number;
 }
 /**
  * DescribeDBsNormal返回参数结构体

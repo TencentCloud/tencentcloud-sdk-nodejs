@@ -371,137 +371,110 @@ export interface ModifyUserManagerPwdResponse {
 export interface ImpalaQuery {
   /**
    * 执行语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statement?: string
   /**
    * 查询ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 运行时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 执行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * 获取行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RowsFetched?: number
   /**
    * 用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
    * 默认DB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultDB?: string
   /**
    * 执行的Coordinator节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Coordinator?: string
   /**
    * 单节点内存峰值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxNodePeakMemoryUsage?: string
   /**
    * 查询类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryType?: string
   /**
    * 扫描的HDFS行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanHDFSRows?: number
   /**
    * 扫描的Kudu行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanKUDURows?: number
   /**
    * 扫描的总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanRowsTotal?: number
   /**
    * 读取的总字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBytesRead?: number
   /**
    * 发送的总字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBytesSent?: number
   /**
    * CPU总时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCpuTime?: number
   /**
    * 内部数据发送总量(Bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalInnerBytesSent?: number
   /**
    * 内部扫描数据发送总量(Bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalScanBytesSent?: number
   /**
    * 预估单节点内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EstimatedPerHostMemBytes?: number
   /**
    * 从缓存中获取的数据行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRowsFetchedFromCache?: number
   /**
    * 会话ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionId?: string
   /**
    * 单节点内存峰值和(Bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PerNodePeakMemoryBytesSum?: number
   /**
    * 后端个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackendsCount?: number
   /**
    * fragment数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FragmentInstancesCount?: number
   /**
    * 剩余未完成Fragment数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainingFragmentCount?: number
 }
@@ -585,17 +558,14 @@ export interface CreateInstanceResponse {
 export interface PersistentVolumeContext {
   /**
    * 磁盘大小，单位为GB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize?: number
   /**
    * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
    * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskNum?: number
 }
@@ -620,7 +590,6 @@ export interface TerminateTasksRequest {
 export interface HostVolumeContext {
   /**
    * Pod挂载宿主机的目录。资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumePath: string
 }
@@ -700,7 +669,6 @@ export interface DescribeServiceNodeInfosRequest {
 export interface DiskSpecInfo {
   /**
    * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count: number
   /**
@@ -720,17 +688,14 @@ export interface DiskSpecInfo {
 <li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
 <li>CLOUD_THROUGHPUT：表示吞吐型云硬盘。</li>
 <li>CLOUD_TSSD：表示极速型SSD云硬盘。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType: string
   /**
    * 数据容量，单位为GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize: number
   /**
    * 额外性能
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraPerformance?: number
 }
@@ -741,32 +706,26 @@ export interface DiskSpecInfo {
 export interface HiveQuery {
   /**
    * 查询语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statement?: string
   /**
    * 执行时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: string
   /**
    * 开始时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 结束时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * 用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
@@ -776,12 +735,10 @@ export interface HiveQuery {
   JobIds?: Array<string>
   /**
    * 执行引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEngine?: string
   /**
    * 查询ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
 }
@@ -885,12 +842,10 @@ export interface PreExecuteFileSettings {
 export interface KeyValue {
   /**
    * 键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -936,22 +891,18 @@ export interface EmrProductConfigDetail {
   SoftInfo?: Array<string>
   /**
    * Master节点个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterNodeSize?: number
   /**
    * Core节点个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CoreNodeSize?: number
   /**
    * Task节点个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskNodeSize?: number
   /**
    * Common节点个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComNodeSize?: number
   /**
@@ -976,42 +927,34 @@ export interface EmrProductConfigDetail {
   ComResource?: ResourceDetail
   /**
    * 是否使用COS
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OnCos?: boolean
   /**
    * 收费类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeType?: number
   /**
    * Router节点个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouterNodeSize?: number
   /**
    * 是否支持HA
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportHA?: boolean
   /**
    * 是否支持安全模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityOn?: boolean
   /**
    * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroup?: string
   /**
    * 是否开启Cbs加密
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CbsEncrypt?: number
   /**
    * 自定义应用角色。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationRole?: string
   /**
@@ -1021,7 +964,6 @@ export interface EmrProductConfigDetail {
   SecurityGroups?: Array<string>
   /**
    * SSH密钥Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicKeyId?: string
 }
@@ -1075,12 +1017,10 @@ export interface DescribeTrinoQueryInfoResponse {
 export interface PriceResult {
   /**
    * 原价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginalCost?: number
   /**
    * 折扣价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountCost?: number
 }
@@ -1091,97 +1031,78 @@ export interface PriceResult {
 export interface TrinoQueryInfo {
   /**
    * catalog
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalog?: string
   /**
    * 提交IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIpAddr?: string
   /**
    * 切片数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CompletedSplits?: string
   /**
    * CPU时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuTime?: number
   /**
    * 累计内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CumulativeMemory?: number
   /**
    * 执行时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationMillis?: number
   /**
    * 结束时间 (s)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 查询ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 内部传输量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalNetworkBytes?: number
   /**
    * 输出字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputBytes?: number
   /**
    * 峰值内存量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeakUserMemoryBytes?: number
   /**
    * 物理输入量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PhysicalInputBytes?: number
   /**
    * 处理输入量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessedInputBytes?: number
   /**
    * 编译时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlCompileTime?: number
   /**
    * 开始时间 (s)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
    * 执行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * 执行语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Statement?: string
   /**
    * 提交用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
    * 写入字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WrittenBytes?: number
 }
@@ -1192,7 +1113,6 @@ export interface TrinoQueryInfo {
 export interface PreferredSchedulingTerm {
   /**
    * 权重，范围1-100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
@@ -1224,22 +1144,18 @@ export interface SparkQuery {
   Id?: string
   /**
    * 扫描分区数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanPartitionNum?: number
   /**
    * 扫描总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanRowNum?: number
   /**
    * 扫描总文件数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanFileNum?: number
   /**
    * 查询扫描总数据量(单位B)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanTotalData?: number
   /**
@@ -1249,32 +1165,26 @@ export interface SparkQuery {
   ApplicationId?: Array<string>
   /**
    * 输出总行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputRowNum?: number
   /**
    * 输出总文件数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputFileNum?: number
   /**
    * 输出分区数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputPartitionNum?: number
   /**
    * 输出总数据量（单位B）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputTotalData?: number
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime?: number
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
 }
@@ -1285,12 +1195,10 @@ export interface SparkQuery {
 export interface Dps {
   /**
    * 时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: string
   /**
    * 采样值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -1576,7 +1484,6 @@ export interface DefaultSetting {
   Key?: string
   /**
    * Name对应的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
 }
@@ -2057,62 +1964,50 @@ export interface ResetYarnConfigRequest {
 export interface KyuubiQueryInfo {
   /**
    * 提交IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIP?: string
   /**
    * 执行时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: number
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * Engine Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineID?: string
   /**
    * 计算引擎
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineType?: string
   /**
    * ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * Session Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionID?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime?: number
   /**
    * 执行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionState?: string
   /**
    * 执行语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStatement?: string
   /**
    * Statement Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatementID?: string
   /**
    * 提交用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
 }
@@ -2182,12 +2077,11 @@ export interface FlowParamsDesc {
   /**
    * 参数key
    */
-  PKey: string
+  PKey?: string
   /**
    * 参数value
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PValue: string
+  PValue?: string
 }
 
 /**
@@ -2306,12 +2200,10 @@ export interface ModifyResourceScheduleConfigResponse {
 export interface InsightResult {
   /**
    * 当Type为HIVE时，是Hive查询ID，当Type为MAPREDUCE，SPARK，TEZ时则是YarnAppID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
   /**
    * 洞察应用的类型，HIVE,SPARK,MAPREDUCE,TEZ
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
@@ -2344,52 +2236,42 @@ TEZ-ReducerDataSkew:Reduce数据倾斜
 TEZ-TezMemWaste:Memory资源浪费
 TEZ-TezSlowTask:慢Task
 TEZ-TezTaskGC:TasksGC
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleID?: string
   /**
    * 洞察规则名字，可参考RuleID的说明
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
    * 洞察规则解释
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleExplain?: string
   /**
    * 详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: string
   /**
    * 建议信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Suggestion?: string
   /**
    * 洞察异常衡量值，同类型的洞察项越大越严重，不同类型的洞察项无对比意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: number
   /**
    * 调度任务执行ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTaskExecID?: string
   /**
    * 调度流，DAG
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleFlowName?: string
   /**
    * 调度flow中的某个task节点
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTaskName?: string
   /**
    * Yarn任务的部分核心配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobConf?: string
 }
@@ -2400,13 +2282,12 @@ TEZ-TezTaskGC:TasksGC
 export interface NodeDetailPriceResult {
   /**
    * 节点类型 master core task common router mysql
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeType: string
+  NodeType?: string
   /**
    * 节点组成部分价格详情
    */
-  PartDetailPrice: Array<PartDetailPriceItem>
+  PartDetailPrice?: Array<PartDetailPriceItem>
 }
 
 /**
@@ -2415,12 +2296,10 @@ export interface NodeDetailPriceResult {
 export interface UserAndGroup {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName: string
   /**
    * 用户组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserGroup: string
 }
@@ -2434,7 +2313,6 @@ export interface VolumeSetting {
 <li>HOST_PATH表示支持本机路径</li>
 <li>NEW_PVC表示新建PVC</li>
 组件角色支持的数据卷类型可参考 EMR on TKE 集群部署说明：[部署说明](https://cloud.tencent.com/document/product/589/94254)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeType?: string
   /**
@@ -2493,7 +2371,6 @@ export interface TerminateSLInstanceRequest {
 export interface Arg {
   /**
    * key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
@@ -2509,12 +2386,10 @@ export interface Arg {
 export interface ClusterIDToFlowID {
   /**
    * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
    * 流程id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
 }
@@ -2678,17 +2553,14 @@ export interface Disk {
    * 数据盘类型，创建EMR容器集群实例可选
 <li> SSD云盘: CLOUD_SSD</li>
 <li>高效云盘: CLOUD_PREMIUM</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
    * 单块大小GB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCapacity?: number
   /**
    * 数据盘数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskNumber?: number
 }
@@ -2699,13 +2571,12 @@ export interface Disk {
 export interface ZoneDetailPriceResult {
   /**
    * 可用区Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 不同节点的价格详情
    */
-  NodeDetailPrice: Array<NodeDetailPriceResult>
+  NodeDetailPrice?: Array<NodeDetailPriceResult>
 }
 
 /**
@@ -2734,12 +2605,10 @@ export interface AddUsersForUserManagerResponse {
 export interface SearchItem {
   /**
    * 支持搜索的类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchType: string
   /**
    * 支持搜索的值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchValue: string
 }
@@ -2783,12 +2652,10 @@ export interface DescribeYarnQueueResponse {
 export interface TopologyInfo {
   /**
    * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
    * 可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
@@ -2809,22 +2676,18 @@ export interface TopologyInfo {
 export interface SchedulerTaskDetail {
   /**
    * 步骤
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Step?: string
   /**
    * 进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: string
   /**
    * 失败信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailReason?: string
   /**
    * 用来获取详情的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: number
 }
@@ -2874,7 +2737,6 @@ export interface ScaleOutInstanceResponse {
 export interface NodeResourceSpec {
   /**
    * 规格类型，如S2.MEDIUM8
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType: string
   /**
@@ -3054,12 +2916,10 @@ export interface EmrProductConfigOutter {
 export interface HostPathVolumeSource {
   /**
    * 主机路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
    * 主机路径类型，当前默认DirectoryOrCreate
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
 }
@@ -3145,7 +3005,6 @@ export interface DescribeSparkQueriesResponse {
 export interface JobResult {
   /**
    * 任务步骤名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
@@ -3153,7 +3012,6 @@ export interface JobResult {
 "CONTINUE"，跳过当前失败步骤，继续后续步骤。
 “TERMINATE_CLUSTER”，终止当前及后续步骤，并销毁集群。
 “CANCEL_AND_WAIT”，取消当前步骤并阻塞等待处理。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActionOnFailure: string
   /**
@@ -3162,12 +3020,10 @@ export interface JobResult {
 “JobFlowStepStatusRunning”，任务步骤正在执行。
 “JobFlowStepStatusFailed”，任务步骤执行失败。
 “JobFlowStepStatusSucceed”，任务步骤执行成功。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JobState: string
   /**
    * YARN任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationId?: string
 }
@@ -3183,7 +3039,6 @@ export interface PrePaySetting {
   Period: Period
   /**
    * 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag: number
 }
@@ -3538,97 +3393,78 @@ export interface StartStopServiceOrMonitorRequest {
 export interface StarRocksQueryInfo {
   /**
    * 提交IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClientIP?: string
   /**
    * CPU总时间(ns)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CPUCost?: number
   /**
    * 默认DB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultDB?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: number
   /**
    * 执行IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionIP?: string
   /**
    * 查询ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryID?: string
   /**
    * 查询类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryType?: string
   /**
    * 消耗总内存(bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemCost?: number
   /**
    * plan阶段CPU占用(ns)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanCpuCosts?: number
   /**
    * plan阶段内存占用(bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanMemCosts?: number
   /**
    * 执行时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryTime?: number
   /**
    * 资源组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroup?: string
   /**
    * 获取行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnRows?: number
   /**
    * 扫描数据量(bytes)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanBytes?: number
   /**
    * 扫描行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanRows?: number
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeginTime?: number
   /**
    * 执行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionState?: string
   /**
    * 执行语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStatement?: string
   /**
    * 用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
 }
@@ -3657,22 +3493,18 @@ export interface DescribeHDFSStorageInfoRequest {
 export interface OverviewMetricData {
   /**
    * 指标名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metric?: string
   /**
    * 第一个数据时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   First?: number
   /**
    * 最后一个数据时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Last?: number
   /**
    * 采样点时间间隔
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Interval?: number
   /**
@@ -3693,7 +3525,6 @@ export interface OverviewMetricData {
 export interface WeekRepeatStrategy {
   /**
    * 重复任务执行的具体时刻，例如"01:02:00"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteAtTimeOfDay: string
   /**
@@ -3717,17 +3548,14 @@ export interface SchedulerTaskInfo {
   OperatorName?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: number
   /**
@@ -3779,32 +3607,26 @@ export interface AutoScaleRecord {
   SpecInfo?: string
   /**
    * 补偿扩容，0表示不开启，1表示开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CompensateFlag?: number
   /**
    * 补偿次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CompensateCount?: number
   /**
    * 重试次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryCount?: number
   /**
    * 重试信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryInfo?: string
   /**
    * 重试英文描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryEnReason?: string
   /**
    * 重试描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryReason?: string
 }
@@ -4032,29 +3854,27 @@ export interface UserManagerUserBriefInfo {
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 用户所属的组
    */
-  UserGroup: string
+  UserGroup?: string
   /**
    * Manager表示管理员、NormalUser表示普通用户
    */
-  UserType: string
+  UserType?: string
   /**
    * 用户创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 是否可以下载用户对应的keytab文件，对开启kerberos的集群才有意义
    */
-  SupportDownLoadKeyTab: boolean
+  SupportDownLoadKeyTab?: boolean
   /**
    * keytab文件的下载地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownLoadKeyTabUrl: string
+  DownLoadKeyTabUrl?: string
 }
 
 /**
@@ -4243,7 +4063,6 @@ export interface TerminateClusterNodesResponse {
 export interface ConfigSetInfo {
   /**
    * 配置集名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigSet: string
   /**
@@ -4503,17 +4322,14 @@ export interface GroupGlobalConfs {
   GroupGlobalConf?: AutoScaleResourceConf
   /**
    * 当前伸缩组扩容出来的节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentNodes?: number
   /**
    * 当前伸缩组扩容出来的后付费节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentPostPaidNodes?: number
   /**
    * 当前伸缩组扩容出来的竞价实例节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentSpotPaidNodes?: number
 }
@@ -4577,7 +4393,6 @@ export interface ServiceNodeDetailInfo {
   ServiceDetectionInfo?: Array<ServiceProcessFunctionInfo>
   /**
    * 节点类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeFlagFilter?: string
   /**
@@ -4587,7 +4402,6 @@ export interface ServiceNodeDetailInfo {
   HealthStatus?: HealthStatus
   /**
    * 角色是否支持监控
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportRoleMonitor?: boolean
   /**
@@ -4597,22 +4411,18 @@ export interface ServiceNodeDetailInfo {
   StopPolicies?: Array<RestartPolicy>
   /**
    * 测试环境api强校验，现网没有，emrcc接口返回有。不加会报错
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HAState?: string
   /**
    * NameService名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NameService?: string
   /**
    * 是否支持联邦
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsFederation?: boolean
   /**
    * datanode是否是维护状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataNodeMaintenanceState?: number
 }
@@ -5055,7 +4865,6 @@ export interface DeleteUserManagerUserListRequest {
 export interface PodVolume {
   /**
    * 存储类型，可为"pvc"，"hostpath"。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeType: string
   /**
@@ -5077,19 +4886,19 @@ export interface PriceDetail {
   /**
    * 节点ID
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 价格计算公式
    */
-  Formula: string
+  Formula?: string
   /**
    * 原价
    */
-  OriginalCost: number
+  OriginalCost?: number
   /**
    * 折扣价
    */
-  DiscountCost: number
+  DiscountCost?: number
 }
 
 /**
@@ -5124,9 +4933,12 @@ export interface DescribeResourceScheduleResponse {
 export interface UserManagerFilter {
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
+  /**
+   * 用户来源
+   */
+  UserType?: string
 }
 
 /**
@@ -5215,12 +5027,10 @@ export interface DescribeNodeResourceConfigFastRequest {
 export interface MetricTags {
   /**
    * 指标单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Unit?: string
   /**
    * 指标Type
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
 }
@@ -5231,7 +5041,6 @@ export interface MetricTags {
 export interface ExternalAccess {
   /**
    * 外部访问类型，当前仅支持CLB字段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
@@ -5633,7 +5442,6 @@ export interface StageInfoDetail {
   Stage?: string
   /**
    * 步骤名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
@@ -5646,7 +5454,6 @@ export interface StageInfoDetail {
   IsSubFlow?: boolean
   /**
    * 子流程标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubFlowFlag?: string
   /**
@@ -5655,12 +5462,10 @@ export interface StageInfoDetail {
   Status?: number
   /**
    * 步骤运行状态描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 运行进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
   /**
@@ -5675,27 +5480,22 @@ export interface StageInfoDetail {
   Endtime?: string
   /**
    * 是否有详情信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HadWoodDetail?: boolean
   /**
    * Wood子流程Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WoodJobId?: number
   /**
    * 多语言版本Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LanguageKey?: string
   /**
    * 如果stage失败，失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedReason?: string
   /**
    * 步骤耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeConsuming?: string
 }
@@ -5995,12 +5795,10 @@ export interface AddMetricScaleStrategyResponse {
 export interface SubnetInfo {
   /**
    * 子网信息（名字）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetName?: string
   /**
    * 子网信息（ID）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
 }
@@ -6208,7 +6006,6 @@ export interface DescribeImpalaQueriesRequest {
 export interface ComponentBasicRestartInfo {
   /**
    * 进程名，必填，如NameNode
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentName?: string
   /**
@@ -6401,67 +6198,54 @@ Hadoop-Hbase
 export interface DiffDetailItem {
   /**
    * 属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Attribute?: string
   /**
    * 当前生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InEffect?: string
   /**
    * 待生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingEffectiveness?: string
   /**
    * 操作
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operation?: string
   /**
    * 队列
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Queue?: string
   /**
    * 配置集
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigSet?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelName?: string
   /**
    * 当前所在位置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InEffectIndex?: string
   /**
    * 待生效的位置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PendingEffectIndex?: string
   /**
    * 计划模式名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanName?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Label?: string
   /**
    * 放置规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
 }
@@ -6659,7 +6443,6 @@ export interface DescribeInstancesRequest {
 export interface NotRepeatStrategy {
   /**
    * 该次任务执行的具体完整时间，格式为"2020-07-13 00:00:00"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteAt: string
 }
@@ -6719,17 +6502,14 @@ export interface PodNewSpec {
   DynamicPodSpec?: DynamicPodSpec
   /**
    * 代表vpc网络唯一id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 代表vpc子网唯一id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * pod name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodName?: string
 }
@@ -6948,22 +6728,18 @@ export interface AttachDisksResponse {
 export interface QuotaEntity {
   /**
    * 已使用配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedQuota?: number
   /**
    * 剩余配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainingQuota?: number
   /**
    * 总配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalQuota?: number
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
 }
@@ -7011,12 +6787,10 @@ export interface RenewInstancesInfo {
   StorageType?: number
   /**
    * 系统盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RootSize?: number
   /**
    * 系统盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RootStorageType?: number
   /**
@@ -7138,22 +6912,18 @@ export interface DeleteAutoScaleStrategyRequest {
 export interface NodeSpecDiskV2 {
   /**
    * 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
    * 名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 磁盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
    * 指定磁盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultDiskSize?: number
 }
@@ -7163,8 +6933,7 @@ export interface NodeSpecDiskV2 {
  */
 export interface CLBSetting {
   /**
-   * CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段 
-注意：此字段可能返回 null，表示取不到有效值。
+   * CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段
    */
   CLBType?: string
   /**
@@ -7223,12 +6992,10 @@ export interface ModifyResourcePoolsResponse {
 export interface ShortNodeInfo {
   /**
    * 节点类型，Master/Core/Task/Router/Common
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeType?: string
   /**
    * 节点数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeSize?: number
 }
@@ -7239,12 +7006,10 @@ export interface ShortNodeInfo {
 export interface Period {
   /**
    * 时间跨度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSpan: number
   /**
    * 时间单位，"m"代表月。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeUnit?: string
 }
@@ -7255,12 +7020,10 @@ export interface Period {
 export interface DayRepeatStrategy {
   /**
    * 重复任务执行的具体时刻，例如"01:02:00"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteAtTimeOfDay: string
   /**
    * 每隔Step天执行一次
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Step: number
 }
@@ -7330,247 +7093,198 @@ export interface DescribeUsersForUserManagerResponse {
 export interface YarnApplication {
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
    * 应用名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 队列
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Queue?: string
   /**
    * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationType?: string
   /**
    * 运行时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ElapsedTime?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * 最终状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinalStatus?: string
   /**
    * 进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: number
   /**
    * 开始时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StartedTime?: number
   /**
    * 结束时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishedTime?: number
   /**
    * 申请内存MB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllocatedMB?: number
   /**
    * 申请VCores
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllocatedVCores?: number
   /**
    * 运行的Containers数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningContainers?: number
   /**
    * 内存MB*时间秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemorySeconds?: number
   /**
    * VCores*时间秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VCoreSeconds?: number
   /**
    * 队列资源占比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueUsagePercentage?: number
   /**
    * 集群资源占比
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterUsagePercentage?: number
   /**
    * 预占用的内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreemptedResourceMB?: number
   /**
    * 预占用的VCore
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreemptedResourceVCores?: number
   /**
    * 预占的非应用程序主节点容器数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NumNonAMContainerPreempted?: number
   /**
    * AM预占用的容器数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NumAMContainerPreempted?: number
   /**
    * Map总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MapsTotal?: number
   /**
    * 完成的Map数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MapsCompleted?: number
   /**
    * Reduce总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReducesTotal?: number
   /**
    * 完成的Reduce数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReducesCompleted?: number
   /**
    * 平均Map时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvgMapTime?: number
   /**
    * 平均Reduce时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvgReduceTime?: number
   /**
    * 平均Shuffle时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvgShuffleTime?: number
   /**
    * 平均Merge时间毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AvgMergeTime?: number
   /**
    * 失败的Reduce执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedReduceAttempts?: number
   /**
    * Kill的Reduce执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KilledReduceAttempts?: number
   /**
    * 成功的Reduce执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessfulReduceAttempts?: number
   /**
    * 失败的Map执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedMapAttempts?: number
   /**
    * Kill的Map执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KilledMapAttempts?: number
   /**
    * 成功的Map执行次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessfulMapAttempts?: number
   /**
    * GC毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GcTimeMillis?: number
   /**
    * Map使用的VCore毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VCoreMillisMaps?: number
   /**
    * Map使用的内存毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MbMillisMaps?: number
   /**
    * Reduce使用的VCore毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VCoreMillisReduces?: number
   /**
    * Reduce使用的内存毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MbMillisReduces?: number
   /**
    * 启动Map的总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalLaunchedMaps?: number
   /**
    * 启动Reduce的总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalLaunchedReduces?: number
   /**
    * Map输入记录数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MapInputRecords?: number
   /**
    * Map输出记录数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MapOutputRecords?: number
   /**
    * Reduce输入记录数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReduceInputRecords?: number
   /**
    * Reduce输出记录数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReduceOutputRecords?: number
   /**
    * HDFS写入字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HDFSBytesWritten?: number
   /**
    * HDFS读取字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HDFSBytesRead?: number
 }
@@ -7595,7 +7309,6 @@ export interface DescribeResourceScheduleDiffDetailRequest {
 export interface FlowExtraDetail {
   /**
    * 额外信息Title
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
@@ -7781,7 +7494,6 @@ export interface InquirePriceRenewEmrResponse {
 export interface MultiDiskMC {
   /**
    * 该类型云盘个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count: number
   /**
@@ -7798,17 +7510,14 @@ export interface MultiDiskMC {
 14 : 大数据型云硬盘
 15 : 高IO型云硬盘
 16 : 远端SSD盘
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
    * 磁盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: string
   /**
    * 云盘大小,单位b
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Volume?: number
 }
@@ -7851,7 +7560,6 @@ export interface ZoneResourceConfiguration {
   <li>master</li>
   <li>standby</li>
   <li>third-party</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneTag?: string
 }
@@ -7862,12 +7570,10 @@ export interface ZoneResourceConfiguration {
 export interface StorageSummaryDistribution {
   /**
    * 数据项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricItem?: string
   /**
    * 数据项描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName?: string
   /**
@@ -8286,79 +7992,65 @@ export interface AddNodeResourceConfigResponse {
 export interface CBSInstance {
   /**
    * 云硬盘ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskId: string
+  DiskId?: string
   /**
    * 云硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskUsage: string
+  DiskUsage?: string
   /**
    * 云硬盘名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskName: string
+  DiskName?: string
   /**
    * 云硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskSize: number
+  DiskSize?: number
   /**
    * 云盘介质类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 是否跟随实例删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeleteWithInstance: boolean
+  DeleteWithInstance?: boolean
   /**
    * 云硬盘收费类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskChargeType: string
+  DiskChargeType?: string
   /**
    * 云硬盘运行状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskState: string
+  DiskState?: string
   /**
    * 是否自动续费
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewFlag: string
+  RenewFlag?: string
   /**
    * 到期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeadlineTime: string
+  DeadlineTime?: string
   /**
    * 云盘是否挂载到云主机上
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Attached: boolean
+  Attached?: boolean
   /**
    * 当前时间距离盘到期的天数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DifferDaysOfDeadline: number
+  DifferDaysOfDeadline?: number
   /**
    * 该云盘当前被挂载到的CVM实例InstanceId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceIdList: Array<string>
+  InstanceIdList?: Array<string>
   /**
    * 云硬盘挂载的云主机ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 云盘是否为共享型云盘。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Shareable: boolean
+  Shareable?: boolean
 }
 
 /**
@@ -8386,22 +8078,18 @@ export interface StrategyConfig {
   /**
    * 0:关闭滚动重启
 1:开启滚动启动
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RollingRestartSwitch?: number
   /**
    * 滚动重启每批次的重启数量，最大重启台数为 99999 台
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchSize?: number
   /**
    * 滚动重启每批停止等待时间 ,最大间隔为 5 分钟 单位是秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeWait?: number
   /**
    * 操作失败处理策略，0:失败阻塞, 1:失败自动跳过
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DealOnFail?: number
   /**
@@ -8646,7 +8334,6 @@ export interface ScaleOutClusterResponse {
 export interface ServiceProcessFunctionInfo {
   /**
    * 探测告警级别
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetectAlert?: string
   /**
@@ -8669,17 +8356,14 @@ export interface ServiceProcessFunctionInfo {
   DetetcTime?: string
   /**
    * 探测功能描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetectFunctionKey?: string
   /**
    * 探测功能结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetectFunctionValue?: string
   /**
    * 探测结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DetectTime?: string
 }
@@ -8690,32 +8374,26 @@ export interface ServiceProcessFunctionInfo {
 export interface PartDetailPriceItem {
   /**
    * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 单价（原价）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Price?: number
   /**
    * 单价（折扣价）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealCost?: number
   /**
    * 总价（折扣价）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealTotalCost?: number
   /**
    * 折扣
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Policy?: number
   /**
    * 数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GoodsNum?: number
 }
@@ -8784,24 +8462,20 @@ export interface ModifyYarnQueueV2Response {
 export interface ClusterExternalServiceInfo {
   /**
    * 依赖关系，0:被其他集群依赖，1:依赖其他集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DependType: number
+  DependType?: number
   /**
    * 共用组件
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Service: string
+  Service?: string
   /**
    * 共用集群
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 共用集群状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterStatus: number
+  ClusterStatus?: number
 }
 
 /**
@@ -9146,12 +8820,10 @@ export interface CustomMetaDBInfo {
 export interface Item {
   /**
    * 健值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -9202,30 +8874,28 @@ export interface TableSchemaItem {
   /**
    * 列标识
    */
-  Name: string
+  Name?: string
   /**
    * 是否可按该列排序
    */
-  Sortable: boolean
+  Sortable?: boolean
   /**
    * 是否可筛选
    */
-  WithFilter: boolean
+  WithFilter?: boolean
   /**
    * 筛选的候选集
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Candidates: Array<string>
+  Candidates?: Array<string>
   /**
    * 是否可点击
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Clickable: boolean
+  Clickable?: boolean
   /**
    * 展示的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Title: string
+  Title?: string
 }
 
 /**
@@ -9241,7 +8911,6 @@ export interface ConfigModifyInfoV2 {
 - 3：删除
 - 4：克隆，与新建子队列的行为一样，特别的对于`fair`，可以复制子队列到新建队列
 - 6：编辑-增量更新
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OpType: number
   /**
@@ -9250,12 +8919,10 @@ export interface ConfigModifyInfoV2 {
   Name?: string
   /**
    * 新建队列 传root的MyId；新建子队列 传 选中队列的 myId；克隆 要传 选中队列 parentId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentId?: string
   /**
    * 编辑、删除 传选中队列的 myId。克隆只有在调度器是`fair`时才需要传，用来复制子队列到新队列。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MyId?: string
   /**
@@ -9369,7 +9036,6 @@ export interface InquiryPriceScaleOutInstanceResponse {
 export interface AutoScaleResourceConf {
   /**
    * 配置ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
@@ -9390,57 +9056,46 @@ export interface AutoScaleResourceConf {
   StrategyType?: number
   /**
    * 下次能可扩容时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NextTimeCanScale?: number
   /**
    * 优雅缩容开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GraceDownFlag?: boolean
   /**
    * "CVM"表示规格全部使用CVM相关类型，"POD"表示规格使用容器相关类型,默认为"CVM"。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HardwareType?: string
   /**
    * "POSTPAY"表示只使用按量计费，"SPOT_FIRST"表示竞价实例优先，只有HardwareType为"HOST"时支持竞价实例优先，"POD"只支持纯按量计费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 竞价实例优先的场景下，按量计费资源数量的最低百分比，整数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PostPayPercentMin?: number
   /**
    * 预设资源类型为HOST时，支持勾选“资源不足时切换POD”；支持取消勾选；默认不勾选（0），勾选（1)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChangeToPod?: number
   /**
    * 伸缩组名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   YarnNodeLabel?: string
   /**
    * 伸缩组状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupStatus?: number
   /**
    * 并行伸缩 0关闭；1开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Parallel?: number
   /**
    * 是否支持MNode
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableMNode?: number
 }
@@ -9475,12 +9130,10 @@ export interface VirtualPrivateCloud {
 export interface NodeSelectorRequirement {
   /**
    * 节点选择项Key值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * 节点选择项Operator值，支持In, NotIn, Exists, DoesNotExist. Gt, and Lt.
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
   /**
@@ -9496,49 +9149,40 @@ export interface NodeSelectorRequirement {
 export interface ResourceDetail {
   /**
    * 规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Spec: string
+  Spec?: string
   /**
    * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecName: string
+  SpecName?: string
   /**
    * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageType: number
+  StorageType?: number
   /**
    * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 系统盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RootSize: number
+  RootSize?: number
   /**
    * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MemSize: number
+  MemSize?: number
   /**
    * CPU个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskSize: number
+  DiskSize?: number
   /**
    * 规格
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType: string
+  InstanceType?: string
 }
 
 /**

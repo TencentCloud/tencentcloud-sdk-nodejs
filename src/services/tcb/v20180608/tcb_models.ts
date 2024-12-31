@@ -1599,59 +1599,59 @@ export interface EndUserInfo {
   /**
    * 用户唯一ID
    */
-  UUId: string
+  UUId?: string
   /**
    * 微信ID
    */
-  WXOpenId: string
+  WXOpenId?: string
   /**
    * qq ID
    */
-  QQOpenId: string
+  QQOpenId?: string
   /**
    * 手机号
    */
-  Phone: string
+  Phone?: string
   /**
    * 邮箱
    */
-  Email: string
+  Email?: string
   /**
    * 昵称
    */
-  NickName: string
+  NickName?: string
   /**
    * 性别
    */
-  Gender: string
+  Gender?: string
   /**
    * 头像地址
    */
-  AvatarUrl: string
+  AvatarUrl?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 是否为匿名用户
    */
-  IsAnonymous: boolean
+  IsAnonymous?: boolean
   /**
    * 是否禁用账户
    */
-  IsDisabled: boolean
+  IsDisabled?: boolean
   /**
    * 是否设置过密码
    */
-  HasPassword: boolean
+  HasPassword?: boolean
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
 }
 
 /**
@@ -2458,7 +2458,6 @@ export interface CbrRepoInfo {
 export interface DescribeEndUserLoginStatisticResponse {
   /**
    * 环境终端用户新增与登录统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LoginStatistics?: Array<LoginStatistic>
   /**
@@ -3444,22 +3443,18 @@ export interface CreateCloudBaseRunServerVersionRequest {
 export interface LoginStatistic {
   /**
    * 统计类型 新增NEWUSER 和登录 LOGIN
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatisticalType?: string
   /**
    * 统计周期：日DAY，周WEEK，月MONTH
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatisticalCycle?: string
   /**
    * 统计总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
 }
@@ -5488,7 +5483,6 @@ export interface EnvBillingInfoItem {
 export interface DescribeEndUserStatisticResponse {
   /**
    * 终端用户各平台统计
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PlatformStatistics?: Array<PlatformStatistic>
   /**
