@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAliasRequest, ListTriggersResponse, ListAliasesResponse, DeleteLayerVersionResponse, GetReservedConcurrencyConfigResponse, UpdateCustomDomainResponse, DeleteProvisionedConcurrencyConfigResponse, GetCustomDomainResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, ListCustomDomainsResponse, DeleteProvisionedConcurrencyConfigRequest, DeleteReservedConcurrencyConfigResponse, GetCustomDomainRequest, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, GetRequestStatusRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, InvokeFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PublishVersionRequest, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, GetFunctionEventInvokeConfigResponse, GetProvisionedConcurrencyConfigRequest, UpdateCustomDomainRequest, TerminateAsyncEventRequest, DeleteCustomDomainResponse, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, UpdateNamespaceResponse, GetAccountResponse, DeleteFunctionResponse, ListAsyncEventsRequest, CreateAliasResponse, CreateFunctionRequest, GetAccountRequest, PutTotalConcurrencyConfigResponse, GetAsyncEventStatusRequest, DeleteAliasResponse, PublishVersionResponse, TerminateAsyncEventResponse, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, UpdateFunctionEventInvokeConfigResponse, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, UpdateTriggerStatusResponse, UpdateFunctionEventInvokeConfigRequest, DeleteLayerVersionRequest, GetFunctionResponse, GetFunctionEventInvokeConfigRequest, PutTotalConcurrencyConfigRequest, DeleteCustomDomainRequest, UpdateNamespaceRequest, GetLayerVersionResponse, GetRequestStatusResponse, PutReservedConcurrencyConfigResponse, InvokeFunctionRequest, GetFunctionAddressResponse, UpdateTriggerStatusRequest, ListLayersResponse, CreateCustomDomainRequest, CreateCustomDomainResponse, ListFunctionsResponse, GetAsyncEventStatusResponse, ListTriggersRequest, UpdateTriggerResponse, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, ListCustomDomainsRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetProvisionedConcurrencyConfigResponse, ListAsyncEventsResponse, ListNamespacesResponse, UpdateFunctionCodeResponse, UpdateTriggerRequest, ListVersionByFunctionRequest } from "./scf_models";
+import { UpdateAliasRequest, ListTriggersResponse, ListAliasesResponse, DeleteLayerVersionResponse, DeleteFunctionVersionRequest, GetReservedConcurrencyConfigResponse, UpdateCustomDomainResponse, DeleteProvisionedConcurrencyConfigResponse, GetCustomDomainResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, ListCustomDomainsResponse, DeleteProvisionedConcurrencyConfigRequest, DeleteReservedConcurrencyConfigResponse, GetCustomDomainRequest, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, GetRequestStatusRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, InvokeFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PublishVersionRequest, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, GetFunctionEventInvokeConfigResponse, GetProvisionedConcurrencyConfigRequest, UpdateCustomDomainRequest, TerminateAsyncEventRequest, DeleteCustomDomainResponse, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, UpdateNamespaceResponse, GetAccountResponse, DeleteFunctionResponse, ListAsyncEventsRequest, CreateAliasResponse, CreateFunctionRequest, GetAccountRequest, PutTotalConcurrencyConfigResponse, GetAsyncEventStatusRequest, DeleteAliasResponse, PublishVersionResponse, TerminateAsyncEventResponse, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, UpdateFunctionEventInvokeConfigResponse, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, UpdateTriggerStatusResponse, UpdateFunctionEventInvokeConfigRequest, DeleteLayerVersionRequest, GetFunctionResponse, GetFunctionEventInvokeConfigRequest, PutTotalConcurrencyConfigRequest, DeleteCustomDomainRequest, UpdateNamespaceRequest, GetLayerVersionResponse, GetRequestStatusResponse, PutReservedConcurrencyConfigResponse, InvokeFunctionRequest, GetProvisionedConcurrencyConfigResponse, DeleteFunctionVersionResponse, UpdateTriggerStatusRequest, ListLayersResponse, CreateCustomDomainRequest, CreateCustomDomainResponse, ListFunctionsResponse, GetAsyncEventStatusResponse, ListTriggersRequest, UpdateTriggerResponse, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, ListCustomDomainsRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetFunctionAddressResponse, ListAsyncEventsResponse, ListNamespacesResponse, UpdateFunctionCodeResponse, UpdateTriggerRequest, ListVersionByFunctionRequest } from "./scf_models";
 /**
  * scf client
  * @class
@@ -66,9 +66,9 @@ export declare class Client extends AbstractClient {
      */
     ListAliases(req: ListAliasesRequest, cb?: (error: string, rep: ListAliasesResponse) => void): Promise<ListAliasesResponse>;
     /**
-     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+     * 该接口根据传入的参数删除命名空间。
      */
-    GetFunctionLogs(req: GetFunctionLogsRequest, cb?: (error: string, rep: GetFunctionLogsResponse) => void): Promise<GetFunctionLogsResponse>;
+    DeleteNamespace(req: DeleteNamespaceRequest, cb?: (error: string, rep: DeleteNamespaceResponse) => void): Promise<DeleteNamespaceResponse>;
     /**
      * 获取函数或函数某一版本的预置并发详情。
      */
@@ -106,13 +106,21 @@ export declare class Client extends AbstractClient {
      */
     GetAsyncEventStatus(req: GetAsyncEventStatusRequest, cb?: (error: string, rep: GetAsyncEventStatusResponse) => void): Promise<GetAsyncEventStatusResponse>;
     /**
-     * 该接口根据传入的参数删除命名空间。
+     * 修改账号并发限制配额
      */
-    DeleteNamespace(req: DeleteNamespaceRequest, cb?: (error: string, rep: DeleteNamespaceResponse) => void): Promise<DeleteNamespaceResponse>;
+    PutTotalConcurrencyConfig(req: PutTotalConcurrencyConfigRequest, cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void): Promise<PutTotalConcurrencyConfigResponse>;
     /**
      * 更新触发器状态的值
      */
     UpdateTriggerStatus(req: UpdateTriggerStatusRequest, cb?: (error: string, rep: UpdateTriggerStatusResponse) => void): Promise<UpdateTriggerStatusResponse>;
+    /**
+     * 该接口根据传入参数删除函数的指定版本。
+     */
+    DeleteFunctionVersion(req: DeleteFunctionVersionRequest, cb?: (error: string, rep: DeleteFunctionVersionResponse) => void): Promise<DeleteFunctionVersionResponse>;
+    /**
+     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+     */
+    GetFunctionLogs(req: GetFunctionLogsRequest, cb?: (error: string, rep: GetFunctionLogsResponse) => void): Promise<GetFunctionLogsResponse>;
     /**
      * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
 一个别名必须指向一个主版本，此外还可以同时指向一个附加版本。调用函数时指定特定的别名，则请求会被发送到别名指向的版本上，您可以配置请求发送到主版本和附加版本的比例。
@@ -205,10 +213,6 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
      * 获取函数的最大独占配额详情。
      */
     GetReservedConcurrencyConfig(req: GetReservedConcurrencyConfigRequest, cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void): Promise<GetReservedConcurrencyConfigResponse>;
-    /**
-     * 修改账号并发限制配额
-     */
-    PutTotalConcurrencyConfig(req: PutTotalConcurrencyConfigRequest, cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void): Promise<PutTotalConcurrencyConfigResponse>;
     /**
      * 查看云函数自定义域名详情
      */

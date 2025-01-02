@@ -2854,6 +2854,10 @@ export interface EventLog {
   Timestamp?: number
   /**
    * 事件ID过滤列表
+	
+选填，为空表示不做过滤
+支持正向过滤单个值（例：20）或范围（例：0-20），也支持反向过滤单个值(例：-20)
+多个过滤项之间可由逗号隔开，例：1-200,-100表示采集1-200范围内除了100以外的事件日志
    */
   EventIDs?: Array<string>
 }
@@ -3036,28 +3040,28 @@ export interface PartitionInfo {
   /**
    * 分区ID
    */
-  PartitionId: number
+  PartitionId?: number
   /**
    * 分区的状态（readwrite或者是readonly）
    */
-  Status: string
+  Status?: string
   /**
    * 分区哈希键起始key
    */
-  InclusiveBeginKey: string
+  InclusiveBeginKey?: string
   /**
    * 分区哈希键结束key
    */
-  ExclusiveEndKey: string
+  ExclusiveEndKey?: string
   /**
    * 分区创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 只读分区数据停止写入时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastWriteTime: string
+  LastWriteTime?: string
 }
 
 /**
@@ -4264,6 +4268,12 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议。
   MetadataType?: number
   /**
    * 采集配置路径正则表达式。
+
+```
+请用"()"标识路径中目标字段对应的正则表达式，解析时将"()"视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。
+若不希望以序号为键名，可以通过命名捕获组"(?<{键名}>{正则})"自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组
+```
+
 注意：
 - MetadataType为3时必填。
 - COS导入不支持此字段。
@@ -4844,55 +4854,55 @@ export interface DashboardInfo {
   /**
    * 仪表盘id
    */
-  DashboardId: string
+  DashboardId?: string
   /**
    * 仪表盘名字
    */
-  DashboardName: string
+  DashboardName?: string
   /**
    * 仪表盘数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: string
+  Data?: string
   /**
    * 创建仪表盘的时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * AssumerUin非空则表示创建该日志主题的服务方Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssumerUin: number
+  AssumerUin?: number
   /**
    * RoleName非空则表示创建该日志主题的服务方使用的角色
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoleName: string
+  RoleName?: string
   /**
    * AssumerName非空则表示创建该日志主题的服务方名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssumerName: string
+  AssumerName?: string
   /**
    * 日志主题绑定的标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 仪表盘所在地域： 为了兼容老的地域。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DashboardRegion: string
+  DashboardRegion?: string
   /**
    * 修改仪表盘的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 仪表盘对应的topic相关信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DashboardTopicInfos: Array<DashboardTopicInfo>
+  DashboardTopicInfos?: Array<DashboardTopicInfo>
 }
 
 /**
@@ -6864,11 +6874,11 @@ export interface AlertHistoryNotice {
   /**
    * 通知渠道组名称
    */
-  Name: string
+  Name?: string
   /**
    * 通知渠道组ID
    */
-  AlarmNoticeId: string
+  AlarmNoticeId?: string
 }
 
 /**
@@ -7493,7 +7503,8 @@ export interface MultiCondition {
   Condition?: string
   /**
    * 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。
-<li> 不填则默认为0。
+
+- 不填则默认为0。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
@@ -7720,11 +7731,11 @@ export interface LogItem {
   /**
    * 日志Key
    */
-  Key: string
+  Key?: string
   /**
    * 日志Value
    */
-  Value: string
+  Value?: string
 }
 
 /**
@@ -8585,15 +8596,17 @@ export interface SearchLogRequest {
  */
 export interface DescribeWebCallbacksRequest {
   /**
-   * <li> name
+   * - name
 按照【告警渠道回调配置名称】进行过滤。
 类型：String
 必选：否
-<li> webCallbackId
+
+- webCallbackId
 按照【告警渠道回调配置ID】进行过滤。
 类型：String
 必选：否
-<li> type
+
+- type
 按照【告警渠道回调配置渠道类型】进行过滤。
 类型：String
 必选：否
@@ -8779,11 +8792,11 @@ export interface HighLightItem {
   /**
    * 高亮的日志Key
    */
-  Key: string
+  Key?: string
   /**
    * 高亮的语法
    */
-  Values: Array<string>
+  Values?: Array<string>
 }
 
 /**

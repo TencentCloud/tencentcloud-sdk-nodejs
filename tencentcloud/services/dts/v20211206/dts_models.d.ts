@@ -4944,6 +4944,10 @@ export interface CreateSyncJobRequest {
      */
     Specification?: string;
     /**
+     * 购买时长（单位：月），当PayMode值为PrePay则此项配置有意义，默认为1月，取值范围为[1,100]
+     */
+    TimeSpan?: number;
+    /**
      * 标签信息
      */
     Tags?: Array<TagItem>;

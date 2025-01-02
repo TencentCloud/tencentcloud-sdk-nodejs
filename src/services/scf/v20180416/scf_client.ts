@@ -25,6 +25,7 @@ import {
   ListTriggersResponse,
   ListAliasesResponse,
   DeleteLayerVersionResponse,
+  DeleteFunctionVersionRequest,
   GetReservedConcurrencyConfigResponse,
   ProtocolParams,
   RoutingConfig,
@@ -137,9 +138,10 @@ import {
   FunctionLog,
   InvokeFunctionRequest,
   RetryConfig,
-  GetFunctionAddressResponse,
+  GetProvisionedConcurrencyConfigResponse,
   CfsInsInfo,
   InstanceConcurrencyConfig,
+  DeleteFunctionVersionResponse,
   UpdateTriggerStatusRequest,
   TriggerAction,
   LimitsInfo,
@@ -172,7 +174,7 @@ import {
   SearchKey,
   DeleteTriggerRequest,
   VpcConfig,
-  GetProvisionedConcurrencyConfigResponse,
+  GetFunctionAddressResponse,
   ListAsyncEventsResponse,
   ListNamespacesResponse,
   EipConfigOut,
@@ -328,13 +330,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+   * 该接口根据传入的参数删除命名空间。
    */
-  async GetFunctionLogs(
-    req: GetFunctionLogsRequest,
-    cb?: (error: string, rep: GetFunctionLogsResponse) => void
-  ): Promise<GetFunctionLogsResponse> {
-    return this.request("GetFunctionLogs", req, cb)
+  async DeleteNamespace(
+    req: DeleteNamespaceRequest,
+    cb?: (error: string, rep: DeleteNamespaceResponse) => void
+  ): Promise<DeleteNamespaceResponse> {
+    return this.request("DeleteNamespace", req, cb)
   }
 
   /**
@@ -428,13 +430,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口根据传入的参数删除命名空间。
+   * 修改账号并发限制配额
    */
-  async DeleteNamespace(
-    req: DeleteNamespaceRequest,
-    cb?: (error: string, rep: DeleteNamespaceResponse) => void
-  ): Promise<DeleteNamespaceResponse> {
-    return this.request("DeleteNamespace", req, cb)
+  async PutTotalConcurrencyConfig(
+    req: PutTotalConcurrencyConfigRequest,
+    cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void
+  ): Promise<PutTotalConcurrencyConfigResponse> {
+    return this.request("PutTotalConcurrencyConfig", req, cb)
   }
 
   /**
@@ -445,6 +447,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateTriggerStatusResponse) => void
   ): Promise<UpdateTriggerStatusResponse> {
     return this.request("UpdateTriggerStatus", req, cb)
+  }
+
+  /**
+   * 该接口根据传入参数删除函数的指定版本。
+   */
+  async DeleteFunctionVersion(
+    req: DeleteFunctionVersionRequest,
+    cb?: (error: string, rep: DeleteFunctionVersionResponse) => void
+  ): Promise<DeleteFunctionVersionResponse> {
+    return this.request("DeleteFunctionVersion", req, cb)
+  }
+
+  /**
+   * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+   */
+  async GetFunctionLogs(
+    req: GetFunctionLogsRequest,
+    cb?: (error: string, rep: GetFunctionLogsResponse) => void
+  ): Promise<GetFunctionLogsResponse> {
+    return this.request("GetFunctionLogs", req, cb)
   }
 
   /**
@@ -651,16 +673,6 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
     cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void
   ): Promise<GetReservedConcurrencyConfigResponse> {
     return this.request("GetReservedConcurrencyConfig", req, cb)
-  }
-
-  /**
-   * 修改账号并发限制配额
-   */
-  async PutTotalConcurrencyConfig(
-    req: PutTotalConcurrencyConfigRequest,
-    cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void
-  ): Promise<PutTotalConcurrencyConfigResponse> {
-    return this.request("PutTotalConcurrencyConfig", req, cb)
   }
 
   /**

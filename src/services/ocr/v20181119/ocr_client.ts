@@ -23,18 +23,17 @@ import {
   TextWaybill,
   RecognizeOnlineTaxiItineraryOCRResponse,
   InvoiceItem,
-  HKIDCardOCRRequest,
   BankSlipOCRRequest,
   BusinessCardOCRResponse,
   TextArithmetic,
   ResidencePermitInfo,
-  BankCardOCRRequest,
+  HKIDCardOCRRequest,
   CarInvoiceOCRRequest,
   MixedInvoiceItem,
   RecognizeTravelCardOCRRequest,
   TrainTicketOCRRequest,
   EstateCertOCRResponse,
-  FlightInvoiceOCRRequest,
+  GeneralHandwritingOCRResponse,
   WordItem,
   MLIDPassportOCRRequest,
   RecognizeGeneralTextImageWarnResponse,
@@ -57,7 +56,7 @@ import {
   Rect,
   LicensePlateInfo,
   SingleInvoiceInfo,
-  VatRollItem,
+  FlightInvoiceOCRRequest,
   TextFormula,
   HmtResidentPermitOCRResponse,
   OtherInvoiceList,
@@ -110,7 +109,7 @@ import {
   GeneralAccurateOCRResponse,
   ElectronicTrainTicketFull,
   BusInvoice,
-  QrcodeOCRRequest,
+  QuotaInvoice,
   TaxiInvoiceOCRResponse,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
@@ -286,14 +285,14 @@ import {
   EnterpriseLicenseInfo,
   SmartStructuralProResponse,
   PermitOCRResponse,
-  QuotaInvoice,
   InsuranceBillOCRRequest,
-  GeneralHandwritingOCRResponse,
+  QrcodeOCRRequest,
   IDCardResult,
   TableCell,
   TableOCRResponse,
   DetectedWordCoordPoint,
   QuestionBlockObj,
+  VatRollItem,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
   VatRollInvoiceInfo,
@@ -313,7 +312,6 @@ import {
   TableOCRRequest,
   VatInvoiceOCRResponse,
   QuotaInvoiceOCRRequest,
-  BankCardOCRResponse,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
   QuotaInvoiceOCRResponse,
@@ -334,75 +332,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
+     * 本接口支持病案首页、费用清单、结算单、医疗发票四种保险理赔单据的文本识别和结构化输出。
 
-适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
-
-产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
-
-通用印刷体识别不同版本的差异如下：
-<table style="width:715px">
-      <thead>
-        <tr>
-          <th style="width:150px"></th>
-          <th style="width:200px">【荐】通用印刷体识别</th>
-          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 适用场景</td>
-          <td>适用于所有通用场景的印刷体识别</td>
-          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-        </tr>
-        <tr>
-          <td>识别准确率</td>
-          <td>96%</td>
-          <td>99%</td>
-          <td>91%</td>
-        </tr>
-        <tr>
-          <td>价格</td>
-          <td>中</td>
-          <td>高</td>
-          <td>低</td>
-        </tr>
-        <tr>
-          <td>支持的语言</td>
-          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-          <td>中文、英文、中英文</td>
-          <td>中文、英文、中英文</td>
-        </tr>
-        <tr>
-          <td>自动语言检测</td>
-          <td>支持</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>返回文本行坐标</td>
-          <td>支持</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>自动旋转纠正</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：20次/秒。
+默认接口请求频率限制：1次/秒。
      */
-  async GeneralBasicOCR(
-    req: GeneralBasicOCRRequest,
-    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
-  ): Promise<GeneralBasicOCRResponse> {
-    return this.request("GeneralBasicOCR", req, cb)
+  async InsuranceBillOCR(
+    req: InsuranceBillOCRRequest,
+    cb?: (error: string, rep: InsuranceBillOCRResponse) => void
+  ): Promise<InsuranceBillOCRResponse> {
+    return this.request("InsuranceBillOCR", req, cb)
   }
 
   /**
@@ -451,18 +389,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BusinessCardOCRResponse) => void
   ): Promise<BusinessCardOCRResponse> {
     return this.request("BusinessCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持病案首页、费用清单、结算单、医疗发票四种保险理赔单据的文本识别和结构化输出。
-
-默认接口请求频率限制：1次/秒。
-     */
-  async InsuranceBillOCR(
-    req: InsuranceBillOCRRequest,
-    cb?: (error: string, rep: InsuranceBillOCRResponse) => void
-  ): Promise<InsuranceBillOCRResponse> {
-    return this.request("InsuranceBillOCR", req, cb)
   }
 
   /**
@@ -653,6 +579,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GeneralAccurateOCRResponse) => void
   ): Promise<GeneralAccurateOCRResponse> {
     return this.request("GeneralAccurateOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async FlightInvoiceOCR(
+    req: FlightInvoiceOCRRequest,
+    cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
+  ): Promise<FlightInvoiceOCRResponse> {
+    return this.request("FlightInvoiceOCR", req, cb)
   }
 
   /**
@@ -1039,15 +977,75 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
+     * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
 
-默认接口请求频率限制：5次/秒。
+适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
+
+产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th style="width:200px">【荐】通用印刷体识别</th>
+          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>96%</td>
+          <td>99%</td>
+          <td>91%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>中</td>
+          <td>高</td>
+          <td>低</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：20次/秒。
      */
-  async FlightInvoiceOCR(
-    req: FlightInvoiceOCRRequest,
-    cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
-  ): Promise<FlightInvoiceOCRResponse> {
-    return this.request("FlightInvoiceOCR", req, cb)
+  async GeneralBasicOCR(
+    req: GeneralBasicOCRRequest,
+    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
+  ): Promise<GeneralBasicOCRResponse> {
+    return this.request("GeneralBasicOCR", req, cb)
   }
 
   /**
@@ -1433,18 +1431,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeValidIDCardOCRResponse) => void
   ): Promise<RecognizeValidIDCardOCRResponse> {
     return this.request("RecognizeValidIDCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async BankCardOCR(
-    req: BankCardOCRRequest,
-    cb?: (error: string, rep: BankCardOCRResponse) => void
-  ): Promise<BankCardOCRResponse> {
-    return this.request("BankCardOCR", req, cb)
   }
 
   /**

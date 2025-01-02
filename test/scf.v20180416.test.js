@@ -148,9 +148,9 @@ it("scf.v20180416.ListAliases", async function () {
     }
 })
 
-it("scf.v20180416.GetFunctionLogs", async function () {
+it("scf.v20180416.DeleteNamespace", async function () {
     try {
-       const data = await client.GetFunctionLogs({})
+       const data = await client.DeleteNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +248,9 @@ it("scf.v20180416.GetAsyncEventStatus", async function () {
     }
 })
 
-it("scf.v20180416.DeleteNamespace", async function () {
+it("scf.v20180416.PutTotalConcurrencyConfig", async function () {
     try {
-       const data = await client.DeleteNamespace({})
+       const data = await client.PutTotalConcurrencyConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +261,26 @@ it("scf.v20180416.DeleteNamespace", async function () {
 it("scf.v20180416.UpdateTriggerStatus", async function () {
     try {
        const data = await client.UpdateTriggerStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.DeleteFunctionVersion", async function () {
+    try {
+       const data = await client.DeleteFunctionVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.GetFunctionLogs", async function () {
+    try {
+       const data = await client.GetFunctionLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,16 +471,6 @@ it("scf.v20180416.GetAlias", async function () {
 it("scf.v20180416.GetReservedConcurrencyConfig", async function () {
     try {
        const data = await client.GetReservedConcurrencyConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("scf.v20180416.PutTotalConcurrencyConfig", async function () {
-    try {
-       const data = await client.PutTotalConcurrencyConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

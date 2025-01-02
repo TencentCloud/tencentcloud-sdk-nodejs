@@ -49,6 +49,10 @@ export interface DescribeInstanceNodesResponse {
    */
   InstanceNodesList?: Array<InstanceNode>
   /**
+   * 节点类型
+   */
+  NodeRoles?: Array<string>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2088,11 +2092,11 @@ export interface ModifyInstanceRequest {
  */
 export interface DescribeSpecResponse {
   /**
-   * zookeeper节点规格描述
+   * fe节点规格描述
    */
   MasterSpec?: Array<ResourceSpec>
   /**
-   * 数据节点规格描述
+   * be节点规格描述
    */
   CoreSpec?: Array<ResourceSpec>
   /**
@@ -2100,6 +2104,10 @@ export interface DescribeSpecResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachCBSSpec?: Array<DiskSpec>
+  /**
+   * cn节点列表
+   */
+  CNSpec?: Array<ResourceSpec>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

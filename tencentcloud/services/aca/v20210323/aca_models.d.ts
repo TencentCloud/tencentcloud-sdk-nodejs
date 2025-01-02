@@ -319,27 +319,22 @@ export interface SmartPredictResponse {
 export interface Department {
     /**
      * 科室ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id: string;
     /**
      * 科室名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 科室类型 0:门诊  1:住院  2:门诊+住院
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scope: number;
     /**
      * 门诊区开关 true:此科室对应的门诊区开启智能审方功能, false:此科室对应的门诊区关闭智能审方功能; 仅对scope为0/2的科室生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutpatientOn: boolean;
     /**
      * 住院区开关 true:此科室对应的住院区开启智能审方功能, false:此科室对应的住院区关闭智能审方功能; 仅对scope为1/2的科室生效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InHospitalOn: boolean;
 }
@@ -626,7 +621,7 @@ export interface CommonHeader {
      */
     HospitalId: string;
     /**
-     * 合作方ID
+     * token
      */
     Token: string;
 }

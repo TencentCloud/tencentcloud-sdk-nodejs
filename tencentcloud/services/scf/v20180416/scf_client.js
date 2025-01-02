@@ -112,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListAliases", req, cb);
     }
     /**
-     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+     * 该接口根据传入的参数删除命名空间。
      */
-    async GetFunctionLogs(req, cb) {
-        return this.request("GetFunctionLogs", req, cb);
+    async DeleteNamespace(req, cb) {
+        return this.request("DeleteNamespace", req, cb);
     }
     /**
      * 获取函数或函数某一版本的预置并发详情。
@@ -172,16 +172,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAsyncEventStatus", req, cb);
     }
     /**
-     * 该接口根据传入的参数删除命名空间。
+     * 修改账号并发限制配额
      */
-    async DeleteNamespace(req, cb) {
-        return this.request("DeleteNamespace", req, cb);
+    async PutTotalConcurrencyConfig(req, cb) {
+        return this.request("PutTotalConcurrencyConfig", req, cb);
     }
     /**
      * 更新触发器状态的值
      */
     async UpdateTriggerStatus(req, cb) {
         return this.request("UpdateTriggerStatus", req, cb);
+    }
+    /**
+     * 该接口根据传入参数删除函数的指定版本。
+     */
+    async DeleteFunctionVersion(req, cb) {
+        return this.request("DeleteFunctionVersion", req, cb);
+    }
+    /**
+     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
+     */
+    async GetFunctionLogs(req, cb) {
+        return this.request("GetFunctionLogs", req, cb);
     }
     /**
      * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
@@ -312,12 +324,6 @@ CustomArgument 触发器用户附加信息（注意：只有timer触发器展示
      */
     async GetReservedConcurrencyConfig(req, cb) {
         return this.request("GetReservedConcurrencyConfig", req, cb);
-    }
-    /**
-     * 修改账号并发限制配额
-     */
-    async PutTotalConcurrencyConfig(req, cb) {
-        return this.request("PutTotalConcurrencyConfig", req, cb);
     }
     /**
      * 查看云函数自定义域名详情

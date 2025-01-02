@@ -159,19 +159,19 @@ export interface AccessVpc {
   /**
    * Vpc的Id
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网Id
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 内网接入状态
    */
-  Status: string
+  Status?: string
   /**
    * 内网接入Ip
    */
-  AccessIp: string
+  AccessIp?: string
 }
 
 /**
@@ -295,47 +295,47 @@ export interface TriggerLogResp {
    * 仓库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoName: string
+  RepoName?: string
   /**
    * Tag名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagName: string
+  TagName?: string
   /**
    * 触发器名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerName: string
+  TriggerName?: string
   /**
    * 触发方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeSource: string
+  InvokeSource?: string
   /**
    * 触发动作
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeAction: string
+  InvokeAction?: string
   /**
    * 触发时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeTime: string
+  InvokeTime?: string
   /**
    * 触发条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeCondition: TriggerInvokeCondition
+  InvokeCondition?: TriggerInvokeCondition
   /**
    * 触发参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokePara: TriggerInvokePara
+  InvokePara?: TriggerInvokePara
   /**
    * 触发结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeResult: TriggerInvokeResult
+  InvokeResult?: TriggerInvokeResult
 }
 
 /**
@@ -473,16 +473,16 @@ export interface RegistryCondition {
   /**
    * 实例创建过程类型
    */
-  Type: string
+  Type?: string
   /**
    * 实例创建过程状态
    */
-  Status: string
+  Status?: string
   /**
    * 转换到该过程的简明原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
 }
 
 /**
@@ -548,27 +548,27 @@ export interface AutoDelStrategyInfo {
   /**
    * 用户名
    */
-  Username: string
+  Username?: string
   /**
    * 仓库名
    */
-  RepoName: string
+  RepoName?: string
   /**
    * 类型
    */
-  Type: string
+  Type?: string
   /**
    * 策略值
    */
-  Value: number
+  Value?: number
   /**
    * Valid
    */
-  Valid: number
+  Valid?: number
   /**
    * 创建时间
    */
-  CreationTime: string
+  CreationTime?: string
 }
 
 /**
@@ -818,12 +818,12 @@ export interface FavorResp {
   /**
    * 收藏仓库的总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 仓库信息数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoInfo: Array<Favors>
+  RepoInfo?: Array<Favors>
 }
 
 /**
@@ -954,37 +954,37 @@ export interface TriggerResp {
    * 触发器名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerName: string
+  TriggerName?: string
   /**
    * 触发来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeSource: string
+  InvokeSource?: string
   /**
    * 触发动作
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeAction: string
+  InvokeAction?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 触发条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeCondition: TriggerInvokeCondition
+  InvokeCondition?: TriggerInvokeCondition
   /**
    * 触发器参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokePara: TriggerInvokePara
+  InvokePara?: TriggerInvokePara
 }
 
 /**
@@ -1064,7 +1064,7 @@ export interface DescribeServiceAccountsRequest {
    */
   EmbedPermission?: boolean
   /**
-   * 过滤条件
+   * 过滤条件，key 目前只支持ServiceAccountName
    */
   Filters?: Array<Filter>
   /**
@@ -1313,7 +1313,7 @@ export interface DupImageTagResp {
   /**
    * 镜像Digest值
    */
-  Digest: string
+  Digest?: string
 }
 
 /**
@@ -1426,12 +1426,12 @@ export interface AutoDelStrategyInfoResp {
   /**
    * 总数目
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 自动删除策略列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StrategyInfo: Array<AutoDelStrategyInfo>
+  StrategyInfo?: Array<AutoDelStrategyInfo>
 }
 
 /**
@@ -1760,7 +1760,7 @@ export interface RepoIsExistResp {
   /**
    * 仓库是否存在
    */
-  IsExist: boolean
+  IsExist?: boolean
 }
 
 /**
@@ -1967,49 +1967,49 @@ export interface Favors {
   /**
    * 仓库名字
    */
-  RepoName: string
+  RepoName?: string
   /**
    * 仓库类型
    */
-  RepoType: string
+  RepoType?: string
   /**
    * Pull总共的次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PullCount: number
+  PullCount?: number
   /**
    * 仓库收藏次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FavorCount: number
+  FavorCount?: number
   /**
    * 仓库是否公开
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Public: number
+  Public?: number
   /**
    * 是否为官方所有
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsQcloudOfficial: boolean
+  IsQcloudOfficial?: boolean
   /**
    * 仓库Tag的数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagCount: number
+  TagCount?: number
   /**
    * Logo
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Logo: string
+  Logo?: string
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 地域的Id
    */
-  RegionId: number
+  RegionId?: number
 }
 
 /**
@@ -2149,29 +2149,29 @@ export interface TcrNamespaceInfo {
   /**
    * 命名空间名称
    */
-  Name: string
+  Name?: string
   /**
    * 创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 访问级别
    */
-  Public: boolean
+  Public?: boolean
   /**
    * 命名空间的Id
    */
-  NamespaceId: number
+  NamespaceId?: number
   /**
    * 实例云标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagSpecification: TagSpecification
+  TagSpecification?: TagSpecification
   /**
    * 命名空间元数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metadata: Array<KeyValueString>
+  Metadata?: Array<KeyValueString>
   /**
    * 漏洞白名单列表
    */
@@ -2335,15 +2335,15 @@ export interface RepoInfoResp {
   /**
    * 仓库总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 仓库信息列表
    */
-  RepoInfo: Array<RepoInfo>
+  RepoInfo?: Array<RepoInfo>
   /**
    * Server信息
    */
-  Server: string
+  Server?: string
 }
 
 /**
@@ -2445,6 +2445,11 @@ export interface WebhookTrigger {
    * 触发器所属命名空间 Id
    */
   NamespaceId?: number
+  /**
+   * 触发器所属命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceName?: string
 }
 
 /**
@@ -2551,12 +2556,12 @@ export interface DescribeApplicationTriggerLogPersonalResp {
   /**
    * 返回总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 触发日志列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogInfo: Array<TriggerLogResp>
+  LogInfo?: Array<TriggerLogResp>
 }
 
 /**
@@ -2654,11 +2659,11 @@ export interface NamespaceInfoResp {
   /**
    * 命名空间数量
    */
-  NamespaceCount: number
+  NamespaceCount?: number
   /**
    * 命名空间信息
    */
-  NamespaceInfo: Array<NamespaceInfo>
+  NamespaceInfo?: Array<NamespaceInfo>
 }
 
 /**
@@ -2769,12 +2774,12 @@ export interface TriggerInvokeResult {
    * 请求TKE返回值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnCode: number
+  ReturnCode?: number
   /**
    * 请求TKE返回信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnMsg: string
+  ReturnMsg?: string
 }
 
 /**
@@ -3252,23 +3257,23 @@ export interface GCJobInfo {
   /**
    * 作业 ID
    */
-  ID: number
+  ID?: number
   /**
    * 作业状态
    */
-  JobStatus: string
+  JobStatus?: string
   /**
    * 创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 调度信息
    */
-  Schedule: Schedule
+  Schedule?: Schedule
 }
 
 /**
@@ -3500,12 +3505,12 @@ export interface TriggerInvokeCondition {
   /**
    * 触发方式
    */
-  InvokeMethod: string
+  InvokeMethod?: string
   /**
    * 触发表达式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvokeExpr: string
+  InvokeExpr?: string
 }
 
 /**
@@ -3599,47 +3604,47 @@ export interface RepoInfo {
   /**
    * 仓库名称
    */
-  RepoName: string
+  RepoName?: string
   /**
    * 仓库类型
    */
-  RepoType: string
+  RepoType?: string
   /**
    * Tag数量
    */
-  TagCount: number
+  TagCount?: number
   /**
    * 是否为公开
    */
-  Public: number
+  Public?: number
   /**
    * 是否为用户收藏
    */
-  IsUserFavor: boolean
+  IsUserFavor?: boolean
   /**
    * 是否为腾讯云官方仓库
    */
-  IsQcloudOfficial: boolean
+  IsQcloudOfficial?: boolean
   /**
    * 被收藏的个数
    */
-  FavorCount: number
+  FavorCount?: number
   /**
    * 拉取的数量
    */
-  PullCount: number
+  PullCount?: number
   /**
    * 描述
    */
-  Description: string
+  Description?: string
   /**
    * 仓库创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 仓库更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -4543,11 +4548,11 @@ export interface DescribeApplicationTriggerPersonalResp {
   /**
    * 返回条目总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 触发器列表
    */
-  TriggerInfo: Array<TriggerResp>
+  TriggerInfo?: Array<TriggerResp>
 }
 
 /**

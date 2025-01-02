@@ -706,31 +706,31 @@ export interface ClusterLevelChangeRecord {
     /**
      * 记录ID
      */
-    ID: string;
+    ID?: string;
     /**
      * 集群ID
      */
-    ClusterID: string;
+    ClusterID?: string;
     /**
      * 变配状态：trading 发货中,upgrading 变配中,success 变配成功,failed 变配失败。
      */
-    Status: string;
+    Status?: string;
     /**
      * 状态描述
      */
-    Message: string;
+    Message?: string;
     /**
      * 变配前规模
      */
-    OldLevel: string;
+    OldLevel?: string;
     /**
      * 变配后规模
      */
-    NewLevel: string;
+    NewLevel?: string;
     /**
      * 变配触发类型：manual 手动,auto 自动
      */
-    TriggerType: string;
+    TriggerType?: string;
     /**
      * 创建时间
      */
@@ -738,11 +738,11 @@ export interface ClusterLevelChangeRecord {
     /**
      * 开始时间
      */
-    StartedAt: string;
+    StartedAt?: string;
     /**
      * 结束时间
      */
-    EndedAt: string;
+    EndedAt?: string;
 }
 /**
  * ModifyPrometheusAlertRule返回参数结构体
@@ -777,15 +777,15 @@ export interface RouteTableInfo {
     /**
      * 路由表名称。
      */
-    RouteTableName: string;
+    RouteTableName?: string;
     /**
      * 路由表CIDR。
      */
-    RouteTableCidrBlock: string;
+    RouteTableCidrBlock?: string;
     /**
      * VPC实例ID。
      */
-    VpcId: string;
+    VpcId?: string;
 }
 /**
  * EnableClusterDeletionProtection返回参数结构体
@@ -803,25 +803,25 @@ export interface ClusterAsGroup {
     /**
      * 伸缩组ID
      */
-    AutoScalingGroupId: string;
+    AutoScalingGroupId?: string;
     /**
      * 伸缩组状态(开启 enabled 开启中 enabling 关闭 disabled 关闭中 disabling 更新中 updating 删除中 deleting 开启缩容中 scaleDownEnabling 关闭缩容中 scaleDownDisabling)
      */
-    Status: string;
+    Status?: string;
     /**
      * 节点是否设置成不可调度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsUnschedulable: boolean;
+    IsUnschedulable?: boolean;
     /**
      * 伸缩组的label列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<Label>;
+    Labels?: Array<Label>;
     /**
      * 创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * 云原生Prometheus模板可修改项
@@ -982,19 +982,19 @@ export interface ManuallyAdded {
     /**
      * 加入中的节点数量
      */
-    Joining: number;
+    Joining?: number;
     /**
      * 初始化中的节点数量
      */
-    Initializing: number;
+    Initializing?: number;
     /**
      * 正常的节点数量
      */
-    Normal: number;
+    Normal?: number;
     /**
      * 节点总数
      */
-    Total: number;
+    Total?: number;
 }
 /**
  * 标签绑定的资源类型，当前支持类型："cluster"
@@ -1091,7 +1091,7 @@ export interface DescribeClustersRequest {
      */
     Limit?: number;
     /**
-     * · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-123qajzs"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["abc:1"] 按照【标签键值对】进行过滤。 类型：String 必选：否
+     * · "Name":"ClusterName","Values": ["test"] 按照【集群名】进行过滤。 类型：String 必选：否 · "Name":"ClusterType","Values": ["MANAGED_CLUSTER"] 按照【集群类型】进行过滤。 类型：String 必选：否 · "Name":"ClusterStatus","Values": ["Running"] 按照【集群状态】进行过滤。 类型：String 必选：否 · "Name":"vpc-id","Values": ["vpc-2wds9k9p"] 按照【VPC】进行过滤。 类型：String 必选：否 · "Name":"tag-key","Values": ["testKey"] 按照【标签键】进行过滤。 类型：String 必选：否 · "Name":"tag-value","Values": ["testValue"] 按照【标签值】进行过滤。 类型：String 必选：否 · "Name":"Tags","Values": ["product:tke"] 按照【标签键值对】进行过滤。 类型：String 必选：否
      */
     Filters?: Array<Filter>;
     /**
@@ -1609,78 +1609,78 @@ export interface ExistedInstance {
      * 实例是否支持加入集群(TRUE 可以加入 FALSE 不能加入)。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Usable: boolean;
+    Usable?: boolean;
     /**
      * 实例不支持加入的原因。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnusableReason: string;
+    UnusableReason?: string;
     /**
      * 实例已经所在的集群ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlreadyInCluster: string;
+    AlreadyInCluster?: string;
     /**
-     * 实例ID形如：ins-xxxxxxxx。
+     * 实例ID形如：ins-e55paxnt。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例主网卡的内网IP列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivateIpAddresses: Array<string>;
+    PrivateIpAddresses?: Array<string>;
     /**
      * 实例主网卡的公网IP列表。
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIpAddresses: Array<string>;
+    PublicIpAddresses?: Array<string>;
     /**
      * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 实例的CPU核数，单位：核。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CPU: number;
+    CPU?: number;
     /**
      * 实例内存容量，单位：GB。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 操作系统名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 实例机型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 伸缩组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingGroupId: string;
+    AutoscalingGroupId?: string;
     /**
      * 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceChargeType: string;
+    InstanceChargeType?: string;
     /**
      * 实例的IPv6地址。
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPv6Addresses: Array<string>;
+    IPv6Addresses?: Array<string>;
 }
 /**
  * CreateReservedInstances返回参数结构体
@@ -2021,48 +2021,48 @@ export interface Instance {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
      */
-    InstanceRole: string;
+    InstanceRole?: string;
     /**
      * 实例异常(或者处于初始化中)的原因
      */
-    FailedReason: string;
+    FailedReason?: string;
     /**
      * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
      */
-    InstanceState: string;
+    InstanceState?: string;
     /**
      * 实例是否封锁状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DrainStatus: string;
+    DrainStatus?: string;
     /**
      * 节点配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceAdvancedSettings: InstanceAdvancedSettings;
+    InstanceAdvancedSettings?: InstanceAdvancedSettings;
     /**
      * 添加时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 节点内网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LanIP: string;
+    LanIP?: string;
     /**
      * 资源池ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodePoolId: string;
+    NodePoolId?: string;
     /**
      * 自动伸缩组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingGroupId: string;
+    AutoscalingGroupId?: string;
 }
 /**
  * ModifyClusterAttribute返回参数结构体
@@ -2368,22 +2368,22 @@ export interface PodLimitsInstance {
      * 机型所在可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 机型所属机型族
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceFamily: string;
+    InstanceFamily?: string;
     /**
      * 实例机型名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 机型可支持的最大VPC-CNI模式Pod数量信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PodLimits: PodLimitsByType;
+    PodLimits?: PodLimitsByType;
 }
 /**
  * ModifyPrometheusTemp请求参数结构体
@@ -2448,30 +2448,30 @@ export interface VirtualNodePool {
     /**
      * 节点池ID
      */
-    NodePoolId: string;
+    NodePoolId?: string;
     /**
      * 子网列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetIds: Array<string>;
+    SubnetIds?: Array<string>;
     /**
      * 节点池名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 节点池生命周期
      */
-    LifeState: string;
+    LifeState?: string;
     /**
      * 虚拟节点label
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<Label>;
+    Labels?: Array<Label>;
     /**
      * 虚拟节点taint
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Taints: Array<Taint>;
+    Taints?: Array<Taint>;
 }
 /**
  * DescribeTKEEdgeClusterStatus请求参数结构体
@@ -2568,16 +2568,16 @@ export interface UpgradeAbleInstancesItem {
     /**
      * 节点Id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 节点的当前版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 当前版本的最新小版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestVersion: string;
+    LatestVersion?: string;
     /**
      * RuntimeVersion
      */
@@ -2596,7 +2596,7 @@ export interface ModifyClusterImageRequest {
      */
     ClusterId: string;
     /**
-     * 指定有效的镜像ID，格式形如img-xxxx。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。
+     * 指定有效的镜像ID，格式形如img-e55paxnt。可通过登录控制台查询，也可调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715)，取返回信息中的ImageId字段。
      */
     ImageId: string;
 }
@@ -2789,7 +2789,7 @@ export interface DescribeClusterNodePoolsRequest {
       类型：String
       必选：否
   
-  ·  "Name":"Tags","Values": ["abc:1"]
+  ·  "Name":"Tags","Values": ["product:tke"]
       按照【标签键值对】进行过滤。
       类型：String
       必选：否
@@ -3271,12 +3271,12 @@ export interface NodeCountSummary {
      * 手动管理的节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ManuallyAdded: ManuallyAdded;
+    ManuallyAdded?: ManuallyAdded;
     /**
      * 自动管理的节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoscalingAdded: AutoscalingAdded;
+    AutoscalingAdded?: AutoscalingAdded;
 }
 /**
  * 边缘计算集群信息
@@ -4237,15 +4237,15 @@ export interface ResourceUsage {
     /**
      * 资源类型
      */
-    Name: string;
+    Name?: string;
     /**
      * 资源使用量
      */
-    Usage: number;
+    Usage?: number;
     /**
      * 资源使用详情
      */
-    Details: Array<ResourceUsageDetail>;
+    Details?: Array<ResourceUsageDetail>;
 }
 /**
  * CreateClusterVirtualNode请求参数结构体
@@ -5194,32 +5194,32 @@ export interface RegionInstance {
      * 地域名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 地域ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 地域状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 地域特性开关(按照JSON的形式返回所有属性)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FeatureGates: string;
+    FeatureGates?: string;
     /**
      * 地域简称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 地域白名单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * DescribePrometheusConfig请求参数结构体
@@ -5828,11 +5828,11 @@ export interface InstanceUpgradeClusterStatus {
     /**
      * pod总数
      */
-    PodTotal: number;
+    PodTotal?: number;
     /**
      * NotReady pod总数
      */
-    NotReadyPod: number;
+    NotReadyPod?: number;
 }
 /**
  * DescribeClusterRoutes请求参数结构体
@@ -5867,23 +5867,23 @@ export interface ClusterLevelAttribute {
     /**
      * 集群等级
      */
-    Name: string;
+    Name?: string;
     /**
      * 等级名称
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 节点数量
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * Pod数量
      */
-    PodCount: number;
+    PodCount?: number;
     /**
      * Configmap数量
      */
-    ConfigMapCount: number;
+    ConfigMapCount?: number;
     /**
      * ReplicaSets数量
      */
@@ -5891,16 +5891,16 @@ export interface ClusterLevelAttribute {
     /**
      * CRD数量
      */
-    CRDCount: number;
+    CRDCount?: number;
     /**
      * 是否启用
      */
-    Enable: boolean;
+    Enable?: boolean;
     /**
      * 其他资源数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OtherCount: number;
+    OtherCount?: number;
 }
 /**
  * Pod计费信息
@@ -6156,27 +6156,27 @@ export interface InstanceUpgradePreCheckResultItem {
     /**
      * 工作负载的命名空间
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 工作负载类型
      */
-    WorkLoadKind: string;
+    WorkLoadKind?: string;
     /**
      * 工作负载名称
      */
-    WorkLoadName: string;
+    WorkLoadName?: string;
     /**
      * 驱逐节点前工作负载running的pod数目
      */
-    Before: number;
+    Before?: number;
     /**
      * 驱逐节点后工作负载running的pod数目
      */
-    After: number;
+    After?: number;
     /**
      * 工作负载在本节点上的pod列表
      */
-    Pods: Array<string>;
+    Pods?: Array<string>;
 }
 /**
  * DeleteClusterNodePool返回参数结构体
@@ -6409,15 +6409,15 @@ export interface RouteInfo {
     /**
      * 路由表名称。
      */
-    RouteTableName: string;
+    RouteTableName?: string;
     /**
      * 目的端CIDR。
      */
-    DestinationCidrBlock: string;
+    DestinationCidrBlock?: string;
     /**
      * 下一跳地址。
      */
-    GatewayIp: string;
+    GatewayIp?: string;
 }
 /**
  * ModifyNodePoolDesiredCapacityAboutAsg返回参数结构体
@@ -6607,11 +6607,11 @@ export interface ClusterVersion {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群主版本号列表，例如1.18.4
      */
-    Versions: Array<string>;
+    Versions?: Array<string>;
 }
 /**
  * 某个节点的升级进度
@@ -7126,20 +7126,20 @@ export interface VirtualNode {
     /**
      * 虚拟节点名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 虚拟节点所属子网
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 虚拟节点状态
      */
-    Phase: string;
+    Phase?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * Pod所在的节点信息
@@ -7557,17 +7557,17 @@ export interface VersionInstance {
      * 版本名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 版本信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version: string;
+    Version?: string;
     /**
      * Remark
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * EksContainerInstance实例类型
@@ -8712,26 +8712,26 @@ export interface PrometheusGrafanaInfo {
     /**
      * 是否启用
      */
-    Enabled: boolean;
+    Enabled?: boolean;
     /**
      * 域名，只有开启外网访问才有效果
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 内网地址，或者外网地址
      */
-    Address: string;
+    Address?: string;
     /**
      * 是否开启了外网访问
   close = 未开启外网访问
   opening = 正在开启外网访问
   open  = 已开启外网访问
      */
-    Internet: string;
+    Internet?: string;
     /**
      * grafana管理员用户名
      */
-    AdminUser: string;
+    AdminUser?: string;
 }
 /**
  * 集群日志开关集合
@@ -8770,22 +8770,22 @@ export interface ImageInstance {
      * 镜像别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 操作系统名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 镜像ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OsCustomizeType: string;
+    OsCustomizeType?: string;
 }
 /**
  * CreatePrometheusAlertPolicy请求参数结构体
@@ -8824,11 +8824,11 @@ export interface ResourceUsageDetail {
     /**
      * 资源名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 资源使用量
      */
-    Usage: number;
+    Usage?: number;
 }
 /**
  * DescribeClusterVirtualNodePools返回参数结构体
@@ -9598,11 +9598,11 @@ export interface DescribeClusterAsGroupsResponse {
     /**
      * 集群关联的伸缩组总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群关联的伸缩组列表
      */
-    ClusterAsGroupSet: Array<ClusterAsGroup>;
+    ClusterAsGroupSet?: Array<ClusterAsGroup>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10225,11 +10225,11 @@ export interface CommonName {
     /**
      * 子账户UIN
      */
-    SubaccountUin: string;
+    SubaccountUin?: string;
     /**
      * 子账户客户端证书中的CommonName字段
      */
-    CN: string;
+    CN?: string;
 }
 /**
  * EnableEventPersistence请求参数结构体
@@ -10709,7 +10709,7 @@ export interface TaskStepInfo {
     /**
      * 步骤名称
      */
-    Step: string;
+    Step?: string;
     /**
      * 生命周期
   pending : 步骤未开始
@@ -10717,22 +10717,22 @@ export interface TaskStepInfo {
   success: 步骤成功完成
   failed: 步骤失败
      */
-    LifeState: string;
+    LifeState?: string;
     /**
      * 步骤开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartAt: string;
+    StartAt?: string;
     /**
      * 步骤结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndAt: string;
+    EndAt?: string;
     /**
      * 若步骤生命周期为failed,则此字段显示错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedMsg: string;
+    FailedMsg?: string;
 }
 /**
  * DeletePrometheusAlertRule请求参数结构体
@@ -10824,7 +10824,7 @@ export interface ClusterBasicSettings {
      */
     ClusterDescription?: string;
     /**
-     * 私有网络ID，形如vpc-xxx。创建托管空集群时必传。
+     * 私有网络ID，形如vpc-e55paxnt。创建托管空集群时必传。
      */
     VpcId?: string;
     /**
@@ -11229,12 +11229,12 @@ export interface UnavailableReason {
      * 实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reason: string;
+    Reason?: string;
 }
 /**
  * GetUpgradeInstanceProgress请求参数结构体
@@ -12479,51 +12479,51 @@ export interface ClusterStatus {
     /**
      * 集群Id
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群状态
      */
-    ClusterState: string;
+    ClusterState?: string;
     /**
      * 集群下机器实例的状态
      */
-    ClusterInstanceState: string;
+    ClusterInstanceState?: string;
     /**
      * 集群是否开启监控
      */
-    ClusterBMonitor: boolean;
+    ClusterBMonitor?: boolean;
     /**
      * 集群创建中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
      */
-    ClusterInitNodeNum: number;
+    ClusterInitNodeNum?: number;
     /**
      * 集群运行中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
      */
-    ClusterRunningNodeNum: number;
+    ClusterRunningNodeNum?: number;
     /**
      * 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
      */
-    ClusterFailedNodeNum: number;
+    ClusterFailedNodeNum?: number;
     /**
      * 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterClosedNodeNum: number;
+    ClusterClosedNodeNum?: number;
     /**
      * 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterClosingNodeNum: number;
+    ClusterClosingNodeNum?: number;
     /**
      * 集群是否开启删除保护
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterDeletionProtection: boolean;
+    ClusterDeletionProtection?: boolean;
     /**
      * 集群是否可审计
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterAuditEnabled: boolean;
+    ClusterAuditEnabled?: boolean;
 }
 /**
  * DescribePrometheusAgents返回参数结构体
@@ -12790,15 +12790,15 @@ export interface InstanceUpgradePreCheckResult {
     /**
      * 检查是否通过
      */
-    CheckPass: boolean;
+    CheckPass?: boolean;
     /**
      * 检查项数组
      */
-    Items: Array<InstanceUpgradePreCheckResultItem>;
+    Items?: Array<InstanceUpgradePreCheckResultItem>;
     /**
      * 本节点独立pod列表
      */
-    SinglePods: Array<string>;
+    SinglePods?: Array<string>;
 }
 /**
  * ScaleInClusterMaster返回参数结构体
@@ -12988,22 +12988,22 @@ export interface RouteTableConflict {
     /**
      * 路由表类型。
      */
-    RouteTableType: string;
+    RouteTableType?: string;
     /**
      * 路由表CIDR。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableCidrBlock: string;
+    RouteTableCidrBlock?: string;
     /**
      * 路由表名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableName: string;
+    RouteTableName?: string;
     /**
      * 路由表ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableId: string;
+    RouteTableId?: string;
 }
 /**
  * InstallAddon返回参数结构体

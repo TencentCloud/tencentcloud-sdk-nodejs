@@ -4021,32 +4021,26 @@ export type DescribeNetworkAccountTypeRequest = null
 export interface TrafficQosPolicySet {
   /**
    * CCN实例ID。形如：ccn-f49l6u0z。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CcnId?: string
   /**
    * qos id。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosId?: number
   /**
    * 描述。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosPolicyDescription?: string
   /**
    * 名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosPolicyName?: string
   /**
    * 带宽。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Bandwidth?: number
   /**
    * 流量调度策略ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosPolicyId?: string
 }
@@ -6977,60 +6971,49 @@ export interface CcnBandwidth {
   /**
    * 带宽所属的云联网ID。
    */
-  CcnId: string
+  CcnId?: string
   /**
    * 实例的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 实例的过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpiredTime: string
+  ExpiredTime?: string
   /**
    * 带宽实例的唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionFlowControlId: string
+  RegionFlowControlId?: string
   /**
    * 带宽是否自动续费的标记。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewFlag: string
+  RenewFlag?: string
   /**
    * 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CcnRegionBandwidthLimit: CcnRegionBandwidthLimitInfo
+  CcnRegionBandwidthLimit?: CcnRegionBandwidthLimitInfo
   /**
    * 云市场实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MarketId: string
+  MarketId?: string
   /**
    * 实例所属用户主账号ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAccountID: string
+  UserAccountID?: string
   /**
    * 是否跨境，`true`表示跨境，反之不跨境。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsCrossBorder: boolean
+  IsCrossBorder?: boolean
   /**
    * `true`表示封禁，地域间流量不通，`false`解禁，地域间流量正常
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSecurityLock: boolean
+  IsSecurityLock?: boolean
   /**
    * `POSTPAID`表示后付费，`PREPAID`表示预付费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceChargeType: string
+  InstanceChargeType?: string
   /**
    * 实例更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
 }
@@ -8305,11 +8288,11 @@ export interface DescribeCcnRouteTableBroadcastPolicysResponse {
   /**
    * 路由表传播策略。
    */
-  PolicySet: Array<CcnRouteTableBroadcastPolicys>
+  PolicySet?: Array<CcnRouteTableBroadcastPolicys>
   /**
    * 符合条件的对象数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8654,117 +8637,111 @@ export interface DirectConnectGateway {
   /**
    * 专线网关`ID`。
    */
-  DirectConnectGatewayId: string
+  DirectConnectGatewayId?: string
   /**
    * 专线网关名称。
    */
-  DirectConnectGatewayName: string
+  DirectConnectGatewayName?: string
   /**
    * 专线网关关联`VPC`实例`ID`。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 关联网络类型：
 <li>`VPC` - 私有网络</li>
 <li>`CCN` - 云联网</li>
    */
-  NetworkType: string
+  NetworkType?: string
   /**
    * 关联网络实例`ID`：
 <li>`NetworkType`为`VPC`时，这里为私有网络实例`ID`</li>
 <li>`NetworkType`为`CCN`时，这里为云联网实例`ID`</li>
    */
-  NetworkInstanceId: string
+  NetworkInstanceId?: string
   /**
    * 网关类型：
 <li>NORMAL - 标准型，注：云联网只支持标准型</li>
 <li>NAT - NAT型</li>
 NAT类型支持网络地址转换配置，类型确定后不能修改；一个私有网络可以创建一个NAT类型的专线网关和一个非NAT类型的专线网关
    */
-  GatewayType: string
+  GatewayType?: string
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 专线网关IP。
    */
-  DirectConnectGatewayIp: string
+  DirectConnectGatewayIp?: string
   /**
    * 专线网关关联`CCN`实例`ID`。
    */
-  CcnId: string
+  CcnId?: string
   /**
    * 云联网路由学习类型：
 <li>`BGP` - 自动学习。</li>
 <li>`STATIC` - 静态，即用户配置。</li>
    */
-  CcnRouteType: string
+  CcnRouteType?: string
   /**
    * 是否启用BGP。
    */
-  EnableBGP: boolean
+  EnableBGP?: boolean
   /**
    * 开启和关闭BGP的community属性。
    */
-  EnableBGPCommunity: boolean
+  EnableBGPCommunity?: boolean
   /**
    * 绑定的NAT网关ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NatGatewayId: string
+  NatGatewayId?: string
   /**
    * 专线网关是否支持VXLAN架构
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  VXLANSupport: Array<boolean>
+  VXLANSupport?: Array<boolean>
   /**
    * 云联网路由发布模式：`standard`（标准模式）、`exquisite`（精细模式）。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModeType: string
+  ModeType?: string
   /**
    * 是否为localZone专线网关。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalZone: boolean
+  LocalZone?: boolean
   /**
    * 专线网关所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 网关流控明细启用状态：
 0：关闭
 1：开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableFlowDetails: number
+  EnableFlowDetails?: number
   /**
    * 开启、关闭网关流控明细时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowDetailsUpdateTime: string
+  FlowDetailsUpdateTime?: string
   /**
    * 是否支持开启网关流控明细
 0：不支持
 1：支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  NewAfc: number
+  NewAfc?: number
   /**
    * 专线网关接入网络类型：
 <li>`VXLAN` - VXLAN类型。</li>
 <li>`MPLS` - MPLS类型。</li>
 <li>`Hybrid` - Hybrid类型。</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessNetworkType: string
+  AccessNetworkType?: string
   /**
    * 跨可用区容灾专线网关的可用区列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  HaZoneList: Array<string>
+  HaZoneList?: Array<string>
+  /**
+   * 专线网关自定义ASN
+   */
+  GatewayAsn?: number
 }
 
 /**
@@ -9426,12 +9403,10 @@ export interface CcnAttachedInstance {
 export interface SecurityPolicyDatabase {
   /**
    * 本端网段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalCidrBlock: string
   /**
    * 对端网段
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteCidrBlock: Array<string>
 }
@@ -9795,6 +9770,10 @@ export interface CreateDirectConnectGatewayRequest {
    */
   ModeType?: string
   /**
+   * 专线网关自定义ASN，范围：45090，64512-65534 和4200000000-4294967294
+   */
+  GatewayAsn?: number
+  /**
    * 专线网关可用区
    */
   Zone?: string
@@ -9802,6 +9781,10 @@ export interface CreateDirectConnectGatewayRequest {
    * 专线网关高可用区容灾组ID
    */
   HaZoneGroupId?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -10496,7 +10479,6 @@ export interface DeleteDhcpIpResponse {
 export interface SslVpnSever {
   /**
    * VPC实例ID.
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
@@ -10581,7 +10563,6 @@ export interface SslVpnSever {
   AccessPolicy?: Array<AccessPolicy>
   /**
    * CAM服务提供商Name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpName?: string
 }
@@ -11350,15 +11331,15 @@ export interface CcnRouteTableBroadcastPolicys {
   /**
    * 策略列表
    */
-  Policys: Array<CcnRouteTableBroadcastPolicy>
+  Policys?: Array<CcnRouteTableBroadcastPolicy>
   /**
    * 版本号
    */
-  PolicyVersion: number
+  PolicyVersion?: number
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -14451,7 +14432,7 @@ export interface CreateDirectConnectGatewayResponse {
   /**
    * 专线网关对象。
    */
-  DirectConnectGateway: DirectConnectGateway
+  DirectConnectGateway?: DirectConnectGateway
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17958,22 +17939,18 @@ export interface InquiryPriceCreateVpnGatewayRequest {
 export interface HealthCheckConfig {
   /**
    * 探测模式，默认值NQA，不可修改。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProbeType?: string
   /**
    * 探测间隔，腾讯云两次健康检查间隔时间，范围【1000-5000】，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProbeInterval?: number
   /**
    * 探测次数，连续N次健康检查失败后执行路由切换，范围【3-8】，单位次。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProbeThreshold?: number
   /**
    * 探测超时时间，范围【10-5000】，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProbeTimeout?: number
 }
@@ -17998,17 +17975,14 @@ export interface CreateAssistantCidrResponse {
 export interface CustomerGatewayVendor {
   /**
    * 平台。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Platform: string
   /**
    * 软件版本。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SoftwareVersion: string
   /**
    * 供应商名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VendorName: string
 }

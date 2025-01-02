@@ -46,7 +46,6 @@ export interface UpdateAliasRequest {
 export interface CertConf {
     /**
      * ssl证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertificateId?: string;
 }
@@ -57,35 +56,35 @@ export interface Trigger {
     /**
      * 触发器最后修改时间
      */
-    ModTime: string;
+    ModTime?: string;
     /**
      * 触发器类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 触发器详细配置
      */
-    TriggerDesc: string;
+    TriggerDesc?: string;
     /**
      * 触发器名称
      */
-    TriggerName: string;
+    TriggerName?: string;
     /**
      * 触发器创建时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 使能开关
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 客户自定义参数
      */
-    CustomArgument: string;
+    CustomArgument?: string;
     /**
      * 触发器状态
      */
-    AvailableStatus: string;
+    AvailableStatus?: string;
     /**
      * 触发器最小资源ID
      * @deprecated
@@ -104,7 +103,7 @@ export interface Trigger {
     /**
      * 触发器绑定的别名或版本
      */
-    Qualifier: string;
+    Qualifier?: string;
     /**
      * 触发器描述
      */
@@ -137,7 +136,6 @@ export interface ListAliasesResponse {
     Aliases?: Array<Alias>;
     /**
      * 别名总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -155,6 +153,27 @@ export interface DeleteLayerVersionResponse {
     RequestId?: string;
 }
 /**
+ * DeleteFunctionVersion请求参数结构体
+ */
+export interface DeleteFunctionVersionRequest {
+    /**
+     * 要删除的函数名称
+     */
+    FunctionName: string;
+    /**
+     * 填写需要删除的版本号
+     */
+    Qualifier: string;
+    /**
+     * 函数所属命名空间
+     */
+    Namespace?: string;
+    /**
+     * 强制删除标记，传true会直接删除容器，并强制关闭还在执行中的函数
+     */
+    ForceDelete?: string;
+}
+/**
  * GetReservedConcurrencyConfig返回参数结构体
  */
 export interface GetReservedConcurrencyConfigResponse {
@@ -162,7 +181,7 @@ export interface GetReservedConcurrencyConfigResponse {
      * 该函数的最大独占配额。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReservedMem: number;
+    ReservedMem?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -271,7 +290,6 @@ export interface TimeInterval {
 export interface LayerVersionInfo {
     /**
      * 版本适用的运行时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompatibleRuntimes?: Array<string>;
     /**
@@ -280,7 +298,6 @@ export interface LayerVersionInfo {
     AddTime?: string;
     /**
      * 版本描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -302,7 +319,6 @@ export interface LayerVersionInfo {
     Status?: string;
     /**
      * Stamp
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Stamp?: string;
     /**
@@ -349,23 +365,23 @@ export interface UsageInfo {
     /**
      * 命名空间个数
      */
-    NamespacesCount: number;
+    NamespacesCount?: number;
     /**
      * 命名空间详情
      */
-    Namespace: Array<NamespaceUsage>;
+    Namespace?: Array<NamespaceUsage>;
     /**
      * 当前地域用户并发内存配额上限
      */
-    TotalConcurrencyMem: number;
+    TotalConcurrencyMem?: number;
     /**
      * 当前地域用户已配置并发内存额度
      */
-    TotalAllocatedConcurrencyMem: number;
+    TotalAllocatedConcurrencyMem?: number;
     /**
      * 用户实际配置的账号并发配额
      */
-    UserConcurrencyMemLimit: number;
+    UserConcurrencyMemLimit?: number;
 }
 /**
  * 云函数自定义域名详情
@@ -381,17 +397,14 @@ export interface DomainInfo {
     Protocol?: string;
     /**
      * 路由配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndpointsConfig?: Array<EndpointsConf>;
     /**
      * 证书配置信息，HTTPS协议必传路由配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertConfig?: CertConf;
     /**
      * web 应用防火墙配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WafConfig?: WafConf;
 }
@@ -513,30 +526,27 @@ export interface GetAliasResponse {
     /**
      * 别名指向的主版本
      */
-    FunctionVersion: string;
+    FunctionVersion?: string;
     /**
      * 别名的名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 别名的路由信息
      */
-    RoutingConfig: RoutingConfig;
+    RoutingConfig?: RoutingConfig;
     /**
      * 别名的描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModTime: string;
+    ModTime?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -558,28 +568,28 @@ export interface VersionProvisionedConcurrencyInfo {
     /**
      * 设置的预置并发数。
      */
-    AllocatedProvisionedConcurrencyNum: number;
+    AllocatedProvisionedConcurrencyNum?: number;
     /**
      * 当前已完成预置的并发数。
      */
-    AvailableProvisionedConcurrencyNum: number;
+    AvailableProvisionedConcurrencyNum?: number;
     /**
      * 预置任务状态，Done表示已完成，InProgress表示进行中，Failed表示部分或全部失败。
      */
-    Status: string;
+    Status?: string;
     /**
      * 对预置任务状态Status的说明。
      */
-    StatusReason: string;
+    StatusReason?: string;
     /**
      * 函数版本号
      */
-    Qualifier: string;
+    Qualifier?: string;
     /**
      * 预置并发定时任务。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TriggerActions: Array<TriggerAction>;
+    TriggerActions?: Array<TriggerAction>;
 }
 /**
  * GetFunctionLogs请求参数结构体
@@ -642,17 +652,14 @@ export interface GetFunctionLogsRequest {
 export interface PathRewriteRule {
     /**
      * 需要重路由的路径，取值规范：/，/*，/xxx，/xxx/a，/xxx/*
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path: string;
     /**
      * 匹配规，取值范围： WildcardRules 通配符匹配， ExactRules 精确匹配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: string;
     /**
      * 替换值：比如/, /$
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rewrite: string;
 }
@@ -777,23 +784,23 @@ export interface Namespace {
     /**
      * 命名空间创建时间
      */
-    ModTime: string;
+    ModTime?: string;
     /**
      * 命名空间修改时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 命名空间描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 命名空间名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 默认default，TCB表示是小程序云开发创建的
      */
-    Type: string;
+    Type?: string;
 }
 /**
  * GetFunction请求参数结构体
@@ -824,22 +831,18 @@ export interface GetFunctionRequest {
 export interface EndpointsConf {
     /**
      * 函数命名空间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Namespace: string;
     /**
      * 函数名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FunctionName: string;
     /**
      * 函数别名或版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qualifier: string;
     /**
      * 路径,取值规范：/，/*，/xxx，/xxx/a，/xxx/*"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PathMatch: string;
     /**
@@ -914,17 +917,15 @@ export interface ListVersionByFunctionResponse {
     /**
      * 函数版本。
      */
-    FunctionVersion: Array<string>;
+    FunctionVersion?: Array<string>;
     /**
      * 函数版本列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Versions: Array<FunctionVersion>;
+    Versions?: Array<FunctionVersion>;
     /**
      * 函数版本总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -973,11 +974,11 @@ export interface PublicNetConfigOut {
     /**
      * 是否开启公网访问能力取值['DISABLE','ENABLE']
      */
-    PublicNetStatus: string;
+    PublicNetStatus?: string;
     /**
      * Eip配置
      */
-    EipConfig: EipConfigOut;
+    EipConfig?: EipConfigOut;
 }
 /**
  * UpdateFunctionCode请求参数结构体
@@ -1324,52 +1325,51 @@ export interface TriggerCount {
     /**
      * Cos触发器数量
      */
-    Cos: number;
+    Cos?: number;
     /**
      * Timer触发器数量
      */
-    Timer: number;
+    Timer?: number;
     /**
      * Cmq触发器数量
      */
-    Cmq: number;
+    Cmq?: number;
     /**
      * 触发器总数
      */
-    Total: number;
+    Total?: number;
     /**
      * Ckafka触发器数量
      */
-    Ckafka: number;
+    Ckafka?: number;
     /**
      * Apigw触发器数量
      */
-    Apigw: number;
+    Apigw?: number;
     /**
      * Cls触发器数量
      */
-    Cls: number;
+    Cls?: number;
     /**
      * Clb触发器数量
      */
-    Clb: number;
+    Clb?: number;
     /**
      * Mps触发器数量
      */
-    Mps: number;
+    Mps?: number;
     /**
      * Cm触发器数量
      */
-    Cm: number;
+    Cm?: number;
     /**
      * Vod触发器数量
      */
-    Vod: number;
+    Vod?: number;
     /**
      * Eb触发器数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Eb: number;
+    Eb?: number;
 }
 /**
  * 命名空间限制
@@ -1378,44 +1378,44 @@ export interface NamespaceLimit {
     /**
      * 函数总数
      */
-    FunctionsCount: number;
+    FunctionsCount?: number;
     /**
      * Trigger信息
      */
-    Trigger: TriggerCount;
+    Trigger?: TriggerCount;
     /**
      * Namespace名称
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 并发量
      */
-    ConcurrentExecutions: number;
+    ConcurrentExecutions?: number;
     /**
      * Timeout限制
      */
-    TimeoutLimit: number;
+    TimeoutLimit?: number;
     /**
      * 测试事件限制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TestModelLimit: number;
+    TestModelLimit?: number;
     /**
      * 初始化超时限制
      */
-    InitTimeoutLimit: number;
+    InitTimeoutLimit?: number;
     /**
      * 异步重试次数限制
      */
-    RetryNumLimit: number;
+    RetryNumLimit?: number;
     /**
      * 异步重试消息保留时间下限
      */
-    MinMsgTTL: number;
+    MinMsgTTL?: number;
     /**
      * 异步重试消息保留时间上限
      */
-    MaxMsgTTL: number;
+    MaxMsgTTL?: number;
 }
 /**
  * 文件系统(cfs)配置描述
@@ -1468,10 +1468,7 @@ export interface ListFunctionsRequest {
      */
     Description?: string;
     /**
-     * 过滤条件。
-  - tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
-  
-  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     * `过滤特定属性或者有特定标签的函数。`- 传值方式key-value 进行传值  例如："Filters": [{ "Name": "Status", "Values": ["CreateFailed","Creating"]}, {"Name": "Type","Values": ["HTTP"]}]上述条件的函数是，函数状态为创建失败或者创建中，且函数类型为 HTTP 函数`如果通过标签进行过滤：`- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。示例值："Filters": [{"Name":"tag-dmtest","Values":["dmtest"]}]`入参限制：`1.每次请求的Filters的上限为10，Filter.Values的上限为5。2.[VpcId', 'SubnetId', 'ClsTopicId', 'ClsLogsetId', 'Role', 'CfsId', 'CfsMountInsId', 'Eip'] 过滤的Name 为这些属性时， values 只能传一个值3.['Status', 'Runtime', 'Type', 'PublicNetStatus', 'AsyncRunEnable', 'TraceEnable', 'Stamp'] 过滤的Name 为这些属性时 ，values 可以传多个值
      */
     Filters?: Array<Filter>;
 }
@@ -1532,11 +1529,11 @@ export interface GetAccountResponse {
     /**
      * 命名空间已使用的信息
      */
-    AccountUsage: UsageInfo;
+    AccountUsage?: UsageInfo;
     /**
      * 命名空间限制的信息
      */
-    AccountLimit: LimitsInfo;
+    AccountLimit?: LimitsInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1678,40 +1675,40 @@ export interface TriggerInfo {
     /**
      * 使能开关
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 函数版本或别名
      */
-    Qualifier: string;
+    Qualifier?: string;
     /**
      * 触发器名称
      */
-    TriggerName: string;
+    TriggerName?: string;
     /**
      * 触发器类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 触发器详细配置
      */
-    TriggerDesc: string;
+    TriggerDesc?: string;
     /**
      * 触发器是否可用
      */
-    AvailableStatus: string;
+    AvailableStatus?: string;
     /**
      * 客户自定义参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomArgument: string;
+    CustomArgument?: string;
     /**
      * 触发器创建时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 触发器最后修改时间
      */
-    ModTime: string;
+    ModTime?: string;
     /**
      * 触发器最小资源ID
      * @deprecated
@@ -1740,35 +1737,35 @@ export interface RequestStatus {
     /**
      * 函数的名称
      */
-    FunctionName: string;
+    FunctionName?: string;
     /**
      * 函数执行完成后的返回值
      */
-    RetMsg: string;
+    RetMsg?: string;
     /**
      * 查询的请求 id
      */
-    RequestId: string;
+    RequestId?: string;
     /**
      * 请求开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 请求执行结果， 0 表示执行成功，1表示运行中，-1 表示执行异常。
      */
-    RetCode: number;
+    RetCode?: number;
     /**
      * 请求运行耗时，单位：ms
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 请求消耗内存，单位为 MB
      */
-    MemUsage: number;
+    MemUsage?: number;
     /**
      * 重试次数
      */
-    RetryNum: number;
+    RetryNum?: number;
 }
 /**
  * Kubernetes污点容忍，使用时请注意您的Kubernetes版本所支持的字段情况。
@@ -2175,12 +2172,10 @@ export interface VersionMatch {
 export interface WafConf {
     /**
      * web应用防火墙是否打开， 取值范围:OPEN, CLOSE
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WafOpen?: string;
     /**
      * web应用防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WafInstanceId?: string;
 }
@@ -2501,17 +2496,14 @@ export interface GetFunctionResponse {
     OnsEnable?: string;
     /**
      * 文件系统配置参数，用于云函数挂载文件系统
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CfsConfig?: CfsConfig;
     /**
      * 函数的计费状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvailableStatus?: string;
     /**
      * 函数版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qualifier?: string;
     /**
@@ -2520,17 +2512,14 @@ export interface GetFunctionResponse {
     InitTimeout?: number;
     /**
      * 函数状态失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusReasons?: Array<StatusReason>;
     /**
      * 是否开启异步属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsyncRunEnable?: string;
     /**
      * 是否开启事件追踪
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TraceEnable?: string;
     /**
@@ -2550,7 +2539,6 @@ export interface GetFunctionResponse {
     ProtocolParams?: ProtocolParams;
     /**
      * 是否开启DNS缓存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DnsCache?: string;
     /**
@@ -2829,10 +2817,12 @@ export interface FunctionLog {
     Log?: string;
     /**
      * 日志等级
+     * @deprecated
      */
     Level?: string;
     /**
      * 日志来源
+     * @deprecated
      */
     Source?: string;
     /**
@@ -2879,17 +2869,17 @@ export interface RetryConfig {
     RetryNum: number;
 }
 /**
- * GetFunctionAddress返回参数结构体
+ * GetProvisionedConcurrencyConfig返回参数结构体
  */
-export interface GetFunctionAddressResponse {
+export interface GetProvisionedConcurrencyConfigResponse {
     /**
-     * 函数的Cos地址
+     * 该函数剩余可配置的预置并发数。
      */
-    Url: string;
+    UnallocatedConcurrencyNum?: number;
     /**
-     * 函数的SHA256编码
+     * 函数已预置的并发配置详情。
      */
-    CodeSha256: string;
+    Allocated?: Array<VersionProvisionedConcurrencyInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2958,6 +2948,15 @@ export interface InstanceConcurrencyConfig {
     MaxConcurrency?: number;
 }
 /**
+ * DeleteFunctionVersion返回参数结构体
+ */
+export interface DeleteFunctionVersionResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateTriggerStatus请求参数结构体
  */
 export interface UpdateTriggerStatusRequest {
@@ -2996,17 +2995,14 @@ export interface UpdateTriggerStatusRequest {
 export interface TriggerAction {
     /**
      * 定时预置名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TriggerName: string;
     /**
      * 定时预置并发数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TriggerProvisionedConcurrencyNum: number;
     /**
      * 设置定时触发器的时间配置，cron表达式。Cron 表达式有七个必需字段，按空格分隔。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TriggerCronConfig: string;
     /**
@@ -3022,11 +3018,11 @@ export interface LimitsInfo {
     /**
      * 命名空间个数限制
      */
-    NamespacesCount: number;
+    NamespacesCount?: number;
     /**
      * 命名空间限制信息
      */
-    Namespace: Array<NamespaceLimit>;
+    Namespace?: Array<NamespaceLimit>;
 }
 /**
  * ListLayers返回参数结构体
@@ -3091,7 +3087,7 @@ export interface CreateCustomDomainRequest {
      */
     EndpointsConfig: Array<EndpointsConf>;
     /**
-     * 证书配置信息，HTTPS协议必穿
+     * 证书配置信息，有使用HTTPS协议时候必须传
      */
     CertConfig?: CertConf;
     /**
@@ -3145,11 +3141,11 @@ export interface StatusReason {
     /**
      * 错误码
      */
-    ErrorCode: string;
+    ErrorCode?: string;
     /**
      * 错误描述
      */
-    ErrorMessage: string;
+    ErrorMessage?: string;
 }
 /**
  * ListFunctions返回参数结构体
@@ -3158,11 +3154,11 @@ export interface ListFunctionsResponse {
     /**
      * 函数列表
      */
-    Functions: Array<Function>;
+    Functions?: Array<Function>;
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3300,70 +3296,70 @@ export interface Function {
     /**
      * 修改时间
      */
-    ModTime: string;
+    ModTime?: string;
     /**
      * 创建时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 运行时
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Runtime: string;
+    Runtime?: string;
     /**
      * 函数名称
      */
-    FunctionName: string;
+    FunctionName?: string;
     /**
      * 函数ID
      */
-    FunctionId: string;
+    FunctionId?: string;
     /**
      * 命名空间
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175)
      */
-    Status: string;
+    Status?: string;
     /**
      * 函数状态详情
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 函数描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 函数标签
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 函数类型，取值为 HTTP 或者 Event
      */
-    Type: string;
+    Type?: string;
     /**
      * 函数状态失败原因
      */
-    StatusReasons: Array<StatusReason>;
+    StatusReasons?: Array<StatusReason>;
     /**
      * 函数所有版本预置并发内存总和
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalProvisionedConcurrencyMem: number;
+    TotalProvisionedConcurrencyMem?: number;
     /**
      * 函数并发保留内存
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReservedConcurrencyMem: number;
+    ReservedConcurrencyMem?: number;
     /**
      * 函数异步属性，取值 TRUE 或者 FALSE
      */
-    AsyncRunEnable: string;
+    AsyncRunEnable?: string;
     /**
      * 异步函数是否开启调用追踪，取值 TRUE 或者 FALSE
      */
-    TraceEnable: string;
+    TraceEnable?: string;
 }
 /**
  * 名称空间已使用信息
@@ -3372,30 +3368,27 @@ export interface NamespaceUsage {
     /**
      * 函数数组
      */
-    Functions: Array<string>;
+    Functions?: Array<string>;
     /**
      * 命名空间名称
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 命名空间函数个数
      */
-    FunctionsCount: number;
+    FunctionsCount?: number;
     /**
      * 命名空间配额总量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalConcurrencyMem: number;
+    TotalConcurrencyMem?: number;
     /**
      * 命名空间并发使用量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalAllocatedConcurrencyMem: number;
+    TotalAllocatedConcurrencyMem?: number;
     /**
      * 命名空间预置使用量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalAllocatedProvisionedMem: number;
+    TotalAllocatedProvisionedMem?: number;
 }
 /**
  * 内网配置
@@ -3470,11 +3463,11 @@ export interface EipOutConfig {
     /**
      * 是否是固定IP，["TRUE","FALSE"]
      */
-    EipFixed: string;
+    EipFixed?: string;
     /**
      * IP列表
      */
-    Eips: Array<string>;
+    Eips?: Array<string>;
 }
 /**
  * 函数的版本别名
@@ -3490,22 +3483,18 @@ export interface Alias {
     Name: string;
     /**
      * 别名的路由信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoutingConfig: RoutingConfig;
     /**
      * 描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AddTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModTime?: string;
 }
@@ -3668,17 +3657,17 @@ export interface VpcConfig {
     SubnetId?: string;
 }
 /**
- * GetProvisionedConcurrencyConfig返回参数结构体
+ * GetFunctionAddress返回参数结构体
  */
-export interface GetProvisionedConcurrencyConfigResponse {
+export interface GetFunctionAddressResponse {
     /**
-     * 该函数剩余可配置的预置并发数。
+     * 函数的Cos地址
      */
-    UnallocatedConcurrencyNum: number;
+    Url?: string;
     /**
-     * 函数已预置的并发配置详情。
+     * 函数的SHA256编码
      */
-    Allocated: Array<VersionProvisionedConcurrencyInfo>;
+    CodeSha256?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3725,12 +3714,11 @@ export interface EipConfigOut {
     /**
      * 是否是固定IP，["ENABLE","DISABLE"]
      */
-    EipStatus: string;
+    EipStatus?: string;
     /**
      * IP列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipAddress: Array<string>;
+    EipAddress?: Array<string>;
 }
 /**
  * 命名空间资源池配置
