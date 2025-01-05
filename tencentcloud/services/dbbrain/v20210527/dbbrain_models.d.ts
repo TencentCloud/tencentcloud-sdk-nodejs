@@ -192,6 +192,35 @@ export interface OpenAuditServiceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRedisTopHotKeys请求参数结构体
+ */
+export interface DescribeRedisTopHotKeysRequest {
+    /**
+     * 实例 ID 。
+     */
+    InstanceId: string;
+    /**
+     * 开始时间，如“2024-09-22T00:00:00+00:00”。0天 < 当前服务器时间 - 开始时间 <= 10天。
+     */
+    StartTime: string;
+    /**
+     * 结束时间，如“2024-09-22T01:00:00+00:00”，0天 < 结束时间 - 开始时间 <= 10天。
+     */
+    EndTime: string;
+    /**
+     * 服务产品类型，仅仅支持值 "redis" - 云数据库 Redis。
+     */
+    Product: string;
+    /**
+     * Redis 节点数组。
+     */
+    InstanceNodeIds?: Array<string>;
+    /**
+     * top 数目，默认为20，最大值为100。
+     */
+    Limit?: number;
+}
+/**
  * CreateDBDiagReportTask请求参数结构体
  */
 export interface CreateDBDiagReportTaskRequest {
@@ -1724,6 +1753,31 @@ export interface DescribeProxyProcessStatisticsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 热key分析返回信息
+ */
+export interface TopHotKeys {
+    /**
+     * 访问频次。
+     */
+    Count?: number;
+    /**
+     * 热Key所属数据库。
+     */
+    Db?: string;
+    /**
+     * Redis节点。
+     */
+    InstanceNodeId?: string;
+    /**
+     * 热Key。
+     */
+    Key?: string;
+    /**
+     * 数据类型。
+     */
+    Type?: string;
 }
 /**
  * DescribeIndexRecommendInfo请求参数结构体
@@ -3398,6 +3452,19 @@ export interface CreateKillTaskRequest {
      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
      */
     Product?: string;
+}
+/**
+ * DescribeRedisTopHotKeys返回参数结构体
+ */
+export interface DescribeRedisTopHotKeysResponse {
+    /**
+     * 热Key分析结果
+     */
+    TopHotKeys?: Array<TopHotKeys>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateSecurityAuditLogExportTask返回参数结构体

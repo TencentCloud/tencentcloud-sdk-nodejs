@@ -158,6 +158,34 @@ export interface InvoiceItem {
     ItemPolygon?: Array<ItemPolygonInfo>;
 }
 /**
+ * HKIDCardOCR请求参数结构体
+ */
+export interface HKIDCardOCRRequest {
+    /**
+     * 是否返回人像照片。
+     */
+    ReturnHeadImage: boolean;
+    /**
+     * 是否鉴伪。
+     * @deprecated
+     */
+    DetectFake?: boolean;
+    /**
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+     */
+    ImageBase64?: string;
+    /**
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    ImageUrl?: string;
+}
+/**
  * BankSlipOCR请求参数结构体
  */
 export interface BankSlipOCRRequest {
@@ -308,32 +336,43 @@ export interface ResidencePermitInfo {
     IssueNum?: ContentInfo;
 }
 /**
- * HKIDCardOCR请求参数结构体
+ * BankCardOCR请求参数结构体
  */
-export interface HKIDCardOCRRequest {
+export interface BankCardOCRRequest {
     /**
-     * 是否返回人像照片。
-     */
-    ReturnHeadImage: boolean;
-    /**
-     * 是否鉴伪。
-     * @deprecated
-     */
-    DetectFake?: boolean;
-    /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
     ImageBase64?: string;
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
      */
     ImageUrl?: string;
+    /**
+     * 是否返回预处理（精确剪裁对齐）后的银行卡图片数据，默认false。
+     */
+    RetBorderCutImage?: boolean;
+    /**
+     * 是否返回卡号的切图图片数据，默认false。
+     */
+    RetCardNoImage?: boolean;
+    /**
+     * 复印件检测开关，如果输入的图片是银行卡复印件图片则返回告警，默认false。
+     */
+    EnableCopyCheck?: boolean;
+    /**
+     * 翻拍检测开关，如果输入的图片是银行卡翻拍图片则返回告警，默认false。
+     */
+    EnableReshootCheck?: boolean;
+    /**
+     * 边框遮挡检测开关，如果输入的图片是银行卡边框被遮挡则返回告警，默认false。
+     */
+    EnableBorderCheck?: boolean;
+    /**
+     * 是否返回图片质量分数（图片质量分数是评价一个图片的模糊程度的标准），默认false。
+     */
+    EnableQualityValue?: boolean;
 }
 /**
  * CarInvoiceOCR请求参数结构体
@@ -515,26 +554,32 @@ export interface EstateCertOCRResponse {
     RequestId?: string;
 }
 /**
- * GeneralHandwritingOCR返回参数结构体
+ * FlightInvoiceOCR请求参数结构体
  */
-export interface GeneralHandwritingOCRResponse {
+export interface FlightInvoiceOCRRequest {
     /**
-     * 检测到的文本信息，具体内容请点击左侧链接。
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    TextDetections?: Array<TextGeneralHandwriting>;
+    ImageBase64?: string;
     /**
-     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
-     * @deprecated
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    Angel?: number;
+    ImageUrl?: string;
     /**
-     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+     * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
      */
-    Angle?: number;
+    IsPdf?: boolean;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
      */
-    RequestId?: string;
+    PdfPageNumber?: number;
 }
 /**
  * 还原文本信息
@@ -1293,32 +1338,25 @@ export interface SingleInvoiceInfo {
     Row?: number;
 }
 /**
- * FlightInvoiceOCR请求参数结构体
+ * 增值税普通发票（卷票）条目
  */
-export interface FlightInvoiceOCRRequest {
+export interface VatRollItem {
     /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 项目名称
      */
-    ImageBase64?: string;
+    Name?: string;
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 数量
      */
-    ImageUrl?: string;
+    Quantity?: string;
     /**
-     * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+     * 单价
      */
-    IsPdf?: boolean;
+    Price?: string;
     /**
-     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+     * 金额
      */
-    PdfPageNumber?: number;
+    Total?: string;
 }
 /**
  * 数学公式识别结果
@@ -2881,49 +2919,19 @@ export interface BusInvoice {
     TrainNumber?: string;
 }
 /**
- * 定额发票
+ * QrcodeOCR请求参数结构体
  */
-export interface QuotaInvoice {
+export interface QrcodeOCRRequest {
     /**
-     * 发票名称
+     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Title?: string;
+    ImageBase64?: string;
     /**
-     * 发票代码
+     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
+  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
      */
-    Code?: string;
-    /**
-     * 发票号码
-     */
-    Number?: string;
-    /**
-     * 价税合计（小写）
-     */
-    Total?: string;
-    /**
-     * 价税合计（大写）
-     */
-    TotalCn?: string;
-    /**
-     * 发票消费类型
-     */
-    Kind?: string;
-    /**
-     * 省
-     */
-    Province?: string;
-    /**
-     * 市
-     */
-    City?: string;
-    /**
-     * 是否存在二维码（1：有，0：无）
-     */
-    QRCodeMark?: number;
-    /**
-     * 是否有公司印章（0：没有，1：有）
-     */
-    CompanySealMark?: number;
+    ImageUrl?: string;
 }
 /**
  * TaxiInvoiceOCR返回参数结构体
@@ -9827,6 +9835,51 @@ export interface PermitOCRResponse {
     RequestId?: string;
 }
 /**
+ * 定额发票
+ */
+export interface QuotaInvoice {
+    /**
+     * 发票名称
+     */
+    Title?: string;
+    /**
+     * 发票代码
+     */
+    Code?: string;
+    /**
+     * 发票号码
+     */
+    Number?: string;
+    /**
+     * 价税合计（小写）
+     */
+    Total?: string;
+    /**
+     * 价税合计（大写）
+     */
+    TotalCn?: string;
+    /**
+     * 发票消费类型
+     */
+    Kind?: string;
+    /**
+     * 省
+     */
+    Province?: string;
+    /**
+     * 市
+     */
+    City?: string;
+    /**
+     * 是否存在二维码（1：有，0：无）
+     */
+    QRCodeMark?: number;
+    /**
+     * 是否有公司印章（0：没有，1：有）
+     */
+    CompanySealMark?: number;
+}
+/**
  * InsuranceBillOCR请求参数结构体
  */
 export interface InsuranceBillOCRRequest {
@@ -9847,19 +9900,26 @@ export interface InsuranceBillOCRRequest {
     ImageUrl?: string;
 }
 /**
- * QrcodeOCR请求参数结构体
+ * GeneralHandwritingOCR返回参数结构体
  */
-export interface QrcodeOCRRequest {
+export interface GeneralHandwritingOCRResponse {
     /**
-     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 检测到的文本信息，具体内容请点击左侧链接。
      */
-    ImageBase64?: string;
+    TextDetections?: Array<TextGeneralHandwriting>;
     /**
-     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
-  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+     * @deprecated
      */
-    ImageUrl?: string;
+    Angel?: number;
+    /**
+     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+     */
+    Angle?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * IDCardResult
@@ -9960,27 +10020,6 @@ export interface QuestionBlockObj {
      * 题目主体区域检测框在图片中的像素坐标
      */
     QuestionBboxCoord: Rect;
-}
-/**
- * 增值税普通发票（卷票）条目
- */
-export interface VatRollItem {
-    /**
-     * 项目名称
-     */
-    Name?: string;
-    /**
-     * 数量
-     */
-    Quantity?: string;
-    /**
-     * 单价
-     */
-    Price?: string;
-    /**
-     * 金额
-     */
-    Total?: string;
 }
 /**
  * AdvertiseOCR返回参数结构体
@@ -10607,6 +10646,61 @@ export interface QuotaInvoiceOCRRequest {
      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
      */
     PdfPageNumber?: number;
+}
+/**
+ * BankCardOCR返回参数结构体
+ */
+export interface BankCardOCRResponse {
+    /**
+     * 卡号
+     */
+    CardNo?: string;
+    /**
+     * 银行信息
+     */
+    BankInfo?: string;
+    /**
+     * 有效期，格式如：07/2023
+     */
+    ValidDate?: string;
+    /**
+     * 卡类型
+     */
+    CardType?: string;
+    /**
+     * 卡名字
+     */
+    CardName?: string;
+    /**
+     * 切片图片数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BorderCutImage?: string;
+    /**
+     * 卡号图片数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CardNoImage?: string;
+    /**
+     * WarningCode 告警码列表和释义：
+  -9110:银行卡日期无效;
+  -9111:银行卡边框不完整;
+  -9112:银行卡图片反光;
+  -9113:银行卡复印件;
+  -9114:银行卡翻拍件
+  （告警码可以同时存在多个）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WarningCode?: Array<number | bigint>;
+    /**
+     * 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualityValue?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * BusinessCardOCR请求参数结构体

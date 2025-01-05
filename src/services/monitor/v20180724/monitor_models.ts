@@ -3126,6 +3126,20 @@ export interface DescribePolicyConditionListMetric {
 }
 
 /**
+ * 通知内容模板绑定信息
+ */
+export interface NoticeContentTmplBindInfo {
+  /**
+   * 通知内容模板ID
+   */
+  ContentTmplID?: string
+  /**
+   * 通知模板ID
+   */
+  NoticeID?: string
+}
+
+/**
  * BindingPolicyObject请求参数结构体
  */
 export interface BindingPolicyObjectRequest {
@@ -3377,6 +3391,14 @@ export interface CreateAlarmPolicyRequest {
    * 事件配置的告警
    */
   EbSubject?: string
+  /**
+   * 附加告警内容
+   */
+  AdditionalAlarmContent?: string
+  /**
+   * 通知模板绑定信息
+   */
+  NoticeContentTmplBindInfos?: Array<NoticeContentTmplBindInfo>
 }
 
 /**
@@ -9062,6 +9084,10 @@ export interface ModifyAlarmPolicyNoticeRequest {
    * 告警分级通知规则配置
    */
   HierarchicalNotices?: Array<AlarmHierarchicalNotice>
+  /**
+   * 通知内容模板绑定信息
+   */
+  NoticeContentTmplBindInfos?: Array<NoticeContentTmplBindInfo>
 }
 
 /**

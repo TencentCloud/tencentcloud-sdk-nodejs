@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagReportTasks", req, cb);
     }
     /**
+     * 热Key分析
+     */
+    async DescribeRedisTopHotKeys(req, cb) {
+        return this.request("DescribeRedisTopHotKeys", req, cb);
+    }
+    /**
      * 更新Agent实例状态（停止或重连实例）
      */
     async UpdateMonitorSwitch(req, cb) {

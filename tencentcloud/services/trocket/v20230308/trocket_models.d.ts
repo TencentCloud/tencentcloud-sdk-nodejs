@@ -1571,6 +1571,24 @@ export interface PriceTag {
     Step?: number;
 }
 /**
+ * DescribeTopicListByGroup返回参数结构体
+ */
+export interface DescribeTopicListByGroupResponse {
+    /**
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 主题列表
+     */
+    Data?: Array<SubscriptionData>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeMessageTrace返回参数结构体
  */
 export interface DescribeMessageTraceResponse {
@@ -2487,6 +2505,31 @@ export interface DeleteRoleResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeTopicListByGroup请求参数结构体
+ */
+export interface DescribeTopicListByGroupRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit?: number;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * 查询过滤器

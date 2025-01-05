@@ -82,6 +82,7 @@ import {
   DescribeMQTTUserListResponse,
   ModifyMQTTUserResponse,
   PriceTag,
+  DescribeTopicListByGroupResponse,
   DescribeMessageTraceResponse,
   MQTTUserItem,
   ModifyMQTTInsPublicEndpointRequest,
@@ -114,6 +115,7 @@ import {
   DescribeConsumerLagResponse,
   DescribeMQTTInsPublicEndpointsRequest,
   DeleteRoleResponse,
+  DescribeTopicListByGroupRequest,
   Filter,
   ModifyMQTTTopicResponse,
   DescribeMQTTTopicListRequest,
@@ -209,6 +211,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTopicResponse) => void
   ): Promise<ModifyTopicResponse> {
     return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
+     * 根据消费组获取主题列表，Filter参数使用说明如下：
+
+TopicName，主题名称过滤
+     */
+  async DescribeTopicListByGroup(
+    req: DescribeTopicListByGroupRequest,
+    cb?: (error: string, rep: DescribeTopicListByGroupResponse) => void
+  ): Promise<DescribeTopicListByGroupResponse> {
+    return this.request("DescribeTopicListByGroup", req, cb)
   }
 
   /**

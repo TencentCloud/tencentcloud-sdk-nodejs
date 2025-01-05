@@ -25,6 +25,7 @@ import {
   HealthReportTask,
   SecLogExportTaskInfo,
   OpenAuditServiceResponse,
+  DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
@@ -93,6 +94,7 @@ import {
   CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
+  TopHotKeys,
   DescribeIndexRecommendInfoRequest,
   SlowLogHost,
   CreateMailProfileRequest,
@@ -160,6 +162,7 @@ import {
   DescribeDiagDBInstancesResponse,
   DescribeAllUserGroupRequest,
   CreateKillTaskRequest,
+  DescribeRedisTopHotKeysResponse,
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
   CreateSqlFilterResponse,
@@ -312,6 +315,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
   ): Promise<DescribeDBDiagReportTasksResponse> {
     return this.request("DescribeDBDiagReportTasks", req, cb)
+  }
+
+  /**
+   * 热Key分析
+   */
+  async DescribeRedisTopHotKeys(
+    req: DescribeRedisTopHotKeysRequest,
+    cb?: (error: string, rep: DescribeRedisTopHotKeysResponse) => void
+  ): Promise<DescribeRedisTopHotKeysResponse> {
+    return this.request("DescribeRedisTopHotKeys", req, cb)
   }
 
   /**

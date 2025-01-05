@@ -1254,25 +1254,25 @@ export interface PrometheusRecordRuleYamlItem {
   /**
    * 实例名称
    */
-  Name: string
+  Name?: string
   /**
    * 最近更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * Yaml内容
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 如果该聚合规则来至模板，则TemplateId为模板id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: string
+  Content?: string
   /**
    * 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
 }
 
 /**
@@ -1823,69 +1823,69 @@ export interface PrometheusInstancesOverview {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * VPC ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
    */
-  InstanceStatus: number
+  InstanceStatus?: number
   /**
    * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeStatus: number
+  ChargeStatus?: number
   /**
    * 是否开启 Grafana（0:不开启，1:开启）
    */
-  EnableGrafana: number
+  EnableGrafana?: number
   /**
    * Grafana 面板 URL
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GrafanaURL: string
+  GrafanaURL?: string
   /**
    * 实例付费类型（1:试用版；2:预付费）
    */
-  InstanceChargeType: number
+  InstanceChargeType?: number
   /**
    * 规格名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecName: string
+  SpecName?: string
   /**
    * 存储周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataRetentionTime: number
+  DataRetentionTime?: number
   /**
    * 购买的实例过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 绑定集群总数
    */
-  BoundTotal: number
+  BoundTotal?: number
   /**
    * 绑定集群正常状态总数
    */
-  BoundNormal: number
+  BoundNormal?: number
 }
 
 /**
@@ -2044,31 +2044,31 @@ export interface Event {
   /**
    * pod名称
    */
-  PodName: string
+  PodName?: string
   /**
    * 事件原因内容
    */
-  Reason: string
+  Reason?: string
   /**
    * 事件类型
    */
-  Type: string
+  Type?: string
   /**
    * 事件出现次数
    */
-  Count: number
+  Count?: number
   /**
    * 事件第一次出现时间
    */
-  FirstTimestamp: string
+  FirstTimestamp?: string
   /**
    * 事件最后一次出现时间
    */
-  LastTimestamp: string
+  LastTimestamp?: string
   /**
    * 事件内容
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -3739,47 +3739,47 @@ export interface RIUtilizationDetail {
   /**
    * 预留券ID
    */
-  ReservedInstanceId: string
+  ReservedInstanceId?: string
   /**
    * Pod唯一ID
    */
-  EksId: string
+  EksId?: string
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * Pod的名称
    */
-  Name: string
+  Name?: string
   /**
    * Pod的命名空间
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 工作负载类型
    */
-  Kind: string
+  Kind?: string
   /**
    * 工作负载名称
    */
-  KindName: string
+  KindName?: string
   /**
    * Pod的uid
    */
-  Uid: string
+  Uid?: string
   /**
    * 用量开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 用量结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 抵扣资源所属产品
    */
-  Product: string
+  Product?: string
 }
 
 /**
@@ -3926,31 +3926,31 @@ export interface ClusterCondition {
   /**
    * 集群创建过程类型
    */
-  Type: string
+  Type?: string
   /**
    * 集群创建过程状态
    */
-  Status: string
+  Status?: string
   /**
    * 最后一次探测到该状态的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastProbeTime: string
+  LastProbeTime?: string
   /**
    * 最后一次转换到该过程的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastTransitionTime: string
+  LastTransitionTime?: string
   /**
    * 转换到该过程的简明原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 转换到该过程的更多信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -4333,15 +4333,15 @@ export interface EksCiRegionInfo {
   /**
    * 地域别名，形如gz
    */
-  Alias: string
+  Alias?: string
   /**
    * 地域名，形如ap-guangzhou
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域ID
    */
-  RegionId: number
+  RegionId?: number
 }
 
 /**
@@ -5160,7 +5160,7 @@ export interface UpdateEKSContainerInstanceResponse {
    * 容器实例 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EksCiId: string
+  EksCiId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5206,7 +5206,7 @@ export interface EksCluster {
    */
   K8SVersion: string
   /**
-   * 集群状态(running运行中，initializing 初始化中，failed异常)
+   * 集群状态(running 运行中，initializing 初始化中，Failed 异常，Idling 空闲中，Activating 激活中，Terminating 删除中)
    */
   Status?: string
   /**
@@ -8199,27 +8199,27 @@ export interface ImageCacheEvent {
   /**
    * 镜像缓存Id
    */
-  ImageCacheId: string
+  ImageCacheId?: string
   /**
    * 事件类型, Normal或者Warning
    */
-  Type: string
+  Type?: string
   /**
    * 事件原因简述
    */
-  Reason: string
+  Reason?: string
   /**
    * 事件原因详述
    */
-  Message: string
+  Message?: string
   /**
    * 事件第一次出现时间
    */
-  FirstTimestamp: string
+  FirstTimestamp?: string
   /**
    * 事件最后一次出现时间
    */
-  LastTimestamp: string
+  LastTimestamp?: string
 }
 
 /**
@@ -8655,11 +8655,11 @@ export interface DescribeEKSContainerInstancesResponse {
   /**
    * 容器组总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 容器组列表
    */
-  EksCis: Array<EksCi>
+  EksCis?: Array<EksCi>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9031,76 +9031,91 @@ export interface ReleaseDetails {
   /**
    * 应用名称
    */
-  Name: string
+  Name?: string
   /**
    * 应用所在命名空间
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 应用当前版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: number
+  Version?: number
   /**
    * 应用状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 应用描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 应用提示
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Notes: string
+  Notes?: string
   /**
    * 用户自定义参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Config: string
+  Config?: string
   /**
    * 应用资源详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Manifest: string
+  Manifest?: string
   /**
    * 应用制品版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChartVersion: string
+  ChartVersion?: string
   /**
    * 应用制品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChartName: string
+  ChartName?: string
   /**
    * 应用制品描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChartDescription: string
+  ChartDescription?: string
   /**
    * 应用制品app版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppVersion: string
+  AppVersion?: string
   /**
    * 应用首次部署时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FirstDeployedTime: string
+  FirstDeployedTime?: string
   /**
    * 应用最近部署时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastDeployedTime: string
+  LastDeployedTime?: string
   /**
    * 应用参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComputedValues: string
+  ComputedValues?: string
+  /**
+   * chart 的来源， tke-market, others
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChartFrom?: string
+  /**
+   * 第三方chart 的安装地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChartURL?: string
+  /**
+   * 通过chart 创建的资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resources?: string
 }
 
 /**
@@ -9490,19 +9505,19 @@ export interface PrometheusJobTargets {
   /**
    * 该Job的targets列表
    */
-  Targets: Array<PrometheusTarget>
+  Targets?: Array<PrometheusTarget>
   /**
    * job的名称
    */
-  JobName: string
+  JobName?: string
   /**
    * targets总数
    */
-  Total: number
+  Total?: number
   /**
    * 健康的target总数
    */
-  Up: number
+  Up?: number
 }
 
 /**
@@ -9530,7 +9545,7 @@ export interface UninstallLogAgentResponse {
  */
 export interface PrometheusClusterAgentBasic {
   /**
-   * 集群ID
+   * 地域
    */
   Region: string
   /**
@@ -10861,46 +10876,46 @@ export interface Release {
   /**
    * 应用名称
    */
-  Name: string
+  Name?: string
   /**
    * 应用命名空间
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 应用当前版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Revision: string
+  Revision?: string
   /**
    * 应用状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 制品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChartName: string
+  ChartName?: string
   /**
    * 制品版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChartVersion: string
+  ChartVersion?: string
   /**
    * 制品应用版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppVersion: string
+  AppVersion?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 应用描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -11866,55 +11881,55 @@ export interface ReservedInstance {
   /**
    * 预留实例ID
    */
-  ReservedInstanceId: string
+  ReservedInstanceId?: string
   /**
    * 预留实例名称
    */
-  ReservedInstanceName: string
+  ReservedInstanceName?: string
   /**
    * 预留券状态
    */
-  Status: string
+  Status?: string
   /**
    * 有效期，单位：月
    */
-  TimeSpan: number
+  TimeSpan?: number
   /**
    * 抵扣资源类型
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 资源核数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 资源内存，单位：Gi
    */
-  Memory: number
+  Memory?: number
   /**
    * 预留券的范围，默认值region。
    */
-  Scope: string
+  Scope?: string
   /**
    * 创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 生效时间
    */
-  ActiveAt: string
+  ActiveAt?: string
   /**
    * 过期时间
    */
-  ExpireAt: string
+  ExpireAt?: string
   /**
    * GPU卡数
    */
-  GpuCount: string
+  GpuCount?: string
   /**
    * 自动续费标记
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 集群 ID
    */
@@ -12147,30 +12162,30 @@ export interface PrometheusTarget {
   /**
    * 抓取目标的URL
    */
-  Url: string
+  Url?: string
   /**
    * target当前状态,当前支持
 up = 健康
 down = 不健康
 unknown = 未知
    */
-  State: string
+  State?: string
   /**
    * target的元label
    */
-  Labels: Array<Label>
+  Labels?: Array<Label>
   /**
    * 上一次抓取的时间
    */
-  LastScrape: string
+  LastScrape?: string
   /**
    * 上一次抓取的耗时，单位是s
    */
-  ScrapeDuration: number
+  ScrapeDuration?: number
   /**
    * 上一次抓取如果错误，该字段存储错误信息
    */
-  Error: string
+  Error?: string
 }
 
 /**
@@ -12560,41 +12575,41 @@ export interface ReleaseHistory {
   /**
    * 应用名称
    */
-  Name: string
+  Name?: string
   /**
    * 应用命名空间
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 应用版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Revision: number
+  Revision?: number
   /**
    * 应用状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 应用制品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Chart: string
+  Chart?: string
   /**
    * 应用制品版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppVersion: string
+  AppVersion?: string
   /**
    * 应用更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 应用描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
 }
 
 /**
@@ -12645,42 +12660,42 @@ export interface PrometheusAgentOverview {
   /**
    * 集群类型
    */
-  ClusterType: string
+  ClusterType?: string
   /**
    * 集群id
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * agent状态
 normal = 正常
 abnormal = 异常
    */
-  Status: string
+  Status?: string
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 额外labels
 本集群的所有指标都会带上这几个label
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExternalLabels: Array<Label>
+  ExternalLabels?: Array<Label>
   /**
    * 集群所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 集群所在VPC ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 记录关联等操作的失败信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedReason: string
+  FailedReason?: string
 }
 
 /**
@@ -12690,16 +12705,16 @@ export interface AppChart {
   /**
    * chart名称
    */
-  Name: string
+  Name?: string
   /**
    * chart的标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * chart的版本
    */
-  LatestVersion: string
+  LatestVersion?: string
 }
 
 /**
@@ -13700,45 +13715,45 @@ export interface PrometheusInstanceOverview {
   /**
    * 实例id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  Name: string
+  Name?: string
   /**
    * 实例vpcId
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 实例子网Id
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 实例当前的状态
 prepare_env = 初始化环境
 install_suit = 安装组件
 running = 运行中
    */
-  Status: string
+  Status?: string
   /**
    * COS桶存储
    */
-  COSBucket: string
+  COSBucket?: string
   /**
    * grafana默认地址，如果开启外网访问得为域名，否则为内网地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GrafanaURL: string
+  GrafanaURL?: string
   /**
    * 关联集群总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BoundTotal: number
+  BoundTotal?: number
   /**
    * 运行正常的集群数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BoundNormal: number
+  BoundNormal?: number
 }
 
 /**

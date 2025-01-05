@@ -18,9 +18,9 @@ const client = new tencentcloud.ocr.v20181119.Client({
 })
 describe("ocr.v20181119.test.js", function () {
 
-it("ocr.v20181119.InsuranceBillOCR", async function () {
+it("ocr.v20181119.GeneralBasicOCR", async function () {
     try {
-       const data = await client.InsuranceBillOCR({})
+       const data = await client.GeneralBasicOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("ocr.v20181119.EnterpriseLicenseOCR", async function () {
 it("ocr.v20181119.BusinessCardOCR", async function () {
     try {
        const data = await client.BusinessCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.InsuranceBillOCR", async function () {
+    try {
+       const data = await client.InsuranceBillOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,16 +141,6 @@ it("ocr.v20181119.QrcodeOCR", async function () {
 it("ocr.v20181119.GeneralAccurateOCR", async function () {
     try {
        const data = await client.GeneralAccurateOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.FlightInvoiceOCR", async function () {
-    try {
-       const data = await client.FlightInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +428,9 @@ it("ocr.v20181119.DutyPaidProofOCR", async function () {
     }
 })
 
-it("ocr.v20181119.GeneralBasicOCR", async function () {
+it("ocr.v20181119.FlightInvoiceOCR", async function () {
     try {
-       const data = await client.GeneralBasicOCR({})
+       const data = await client.FlightInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +701,16 @@ it("ocr.v20181119.EnglishOCR", async function () {
 it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
     try {
        const data = await client.RecognizeValidIDCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.BankCardOCR", async function () {
+    try {
+       const data = await client.BankCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

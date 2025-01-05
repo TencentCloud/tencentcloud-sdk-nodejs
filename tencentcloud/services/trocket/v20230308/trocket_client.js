@@ -53,6 +53,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
+     * 根据消费组获取主题列表，Filter参数使用说明如下：
+
+TopicName，主题名称过滤
+     */
+    async DescribeTopicListByGroup(req, cb) {
+        return this.request("DescribeTopicListByGroup", req, cb);
+    }
+    /**
      * 修改主题属性
      */
     async ModifyMQTTTopic(req, cb) {

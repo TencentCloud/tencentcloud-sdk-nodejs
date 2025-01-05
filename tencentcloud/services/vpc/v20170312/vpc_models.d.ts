@@ -3318,12 +3318,12 @@ export interface DescribeTenantCcnsRequest {
  */
 export interface DescribeIp6AddressesRequest {
     /**
-     * 标识 IPV6 的唯一 ID 列表。IPV6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。
+     * 标识 IPv6 的唯一 ID 列表。IPv6 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`Ip6AddressIds`和`Filters`。
      */
     Ip6AddressIds?: Array<string>;
     /**
      * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
-  <li> address-ip - String - 是否必填：否 - （过滤条件）按照 IPV6 的 IP 地址过滤。</li>
+  <li> address-ip - String - 是否必填：否 - （过滤条件）按照 IPv6 的 IP 地址过滤。</li>
   <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。</li>
      */
     Filters?: Array<Filter>;
@@ -3637,11 +3637,11 @@ export interface ModifyIp6AddressesBandwidthRequest {
      */
     InternetMaxBandwidthOut: number;
     /**
-     * IPV6地址。Ip6Addresses和Ip6AddressId必须且只能传一个
+     * IPv6地址。Ip6Addresses和Ip6AddressId必须且只能传一个
      */
     Ip6Addresses?: Array<string>;
     /**
-     * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个
+     * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个
      */
     Ip6AddressIds?: Array<string>;
 }
@@ -4302,7 +4302,7 @@ export interface DeleteVpnGatewaySslServerRequest {
  */
 export interface AllocateIp6AddressesBandwidthResponse {
     /**
-     * 弹性公网 IPV6 的唯一 ID 列表。
+     * 传统弹性公网 IPv6 的唯一 ID 列表。
      */
     AddressSet?: Array<string>;
     /**
@@ -5147,7 +5147,7 @@ export interface FlowLogStorage {
  */
 export interface AllocateIp6AddressesBandwidthRequest {
     /**
-     * 需要开通公网访问能力的IPV6地址
+     * 需要开通公网访问能力的IPv6地址
      */
     Ip6Addresses: Array<string>;
     /**
@@ -5155,11 +5155,11 @@ export interface AllocateIp6AddressesBandwidthRequest {
      */
     InternetMaxBandwidthOut?: number;
     /**
-     * 网络计费模式。IPV6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
+     * 网络计费模式。IPv6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
      */
     InternetChargeType?: string;
     /**
-     * 带宽包id，上移账号，申请带宽包计费模式的ipv6地址需要传入.
+     * 带宽包id，上移账号，申请带宽包计费模式的IPv6地址需要传入.
      */
     BandwidthPackageId?: string;
     /**
@@ -7181,11 +7181,11 @@ export interface AddressTemplateItem {
  */
 export interface DescribeIp6AddressesResponse {
     /**
-     * 符合条件的 IPV6 数量。
+     * 符合条件的 IPv6 数量。
      */
     TotalCount?: number;
     /**
-     * IPV6 详细信息列表。
+     * IPv6 详细信息列表。
      */
     AddressSet?: Array<Address>;
     /**
@@ -16096,7 +16096,7 @@ export interface AssociateAddressRequest {
      */
     EipDirectConnection?: boolean;
     /**
-     * 要绑定的实例所在的地域
+     * 要绑定的实例所在地域。默认无需填写，仅限GAAP特殊场景需指定实例所在地域。
      */
     InstanceRegion?: string;
 }
@@ -16952,11 +16952,11 @@ export interface DescribeClassicLinkInstancesRequest {
  */
 export interface ReleaseIp6AddressesBandwidthRequest {
     /**
-     * IPV6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个
+     * IPv6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个
      */
     Ip6Addresses?: Array<string>;
     /**
-     * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。
+     * IPv6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。
      */
     Ip6AddressIds?: Array<string>;
 }

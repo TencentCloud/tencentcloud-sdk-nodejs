@@ -144,6 +144,7 @@ import {
   DescribeServiceDiscoveryResponse,
   PrometheusTag,
   DescribePolicyConditionListMetric,
+  NoticeContentTmplBindInfo,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
   DescribeClusterAgentCreatingProgressRequest,
