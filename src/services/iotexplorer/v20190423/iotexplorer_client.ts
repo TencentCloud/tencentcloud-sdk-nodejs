@@ -86,6 +86,7 @@ import {
   InheritCloudStorageUserRequest,
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
+  PauseTWeCallDeviceRequest,
   DescribeDeviceDataHistoryResponse,
   DeviceUser,
   ProductModelDefinition,
@@ -130,6 +131,7 @@ import {
   CreateLoRaGatewayRequest,
   ModifyTopicRuleRequest,
   DescribeFenceBindListResponse,
+  TransferTWeCallDeviceRequest,
   PackageConsumeTask,
   UnbindProductsRequest,
   CreateCloudStorageAIServiceRequest,
@@ -166,6 +168,7 @@ import {
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
+  ResetTWeCallDeviceResponse,
   AppDeviceInfo,
   DescribeCloudStorageResponse,
   DescribeCloudStorageStreamDataRequest,
@@ -212,6 +215,7 @@ import {
   CreateCloudStorageAIServiceResponse,
   DeviceDataHistoryItem,
   GetTWeCallActiveStatusResponse,
+  PauseTWeCallDeviceResponse,
   BatchProductionInfo,
   DeleteDeviceRequest,
   GetProjectListResponse,
@@ -239,8 +243,9 @@ import {
   ReleaseStudioProductRequest,
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
+  ResetTWeCallDeviceRequest,
   CallDeviceActionAsyncRequest,
-  CallDeviceActionAsyncResponse,
+  ResumeWeCallDeviceResponse,
   GetPositionSpaceListResponse,
   CreatePositionFenceResponse,
   DescribeTopicRuleResponse,
@@ -316,12 +321,15 @@ import {
   DeleteLoRaGatewayRequest,
   ModifyTopicPolicyResponse,
   DescribeCloudStorageStreamDataResponse,
+  TransferTWeCallDeviceResponse,
   DescribeTopicRuleRequest,
   ModifyCloudStorageAIServiceCallbackRequest,
   GetWechatDeviceTicketResponse,
+  CallDeviceActionAsyncResponse,
   TopicRulePayload,
   ResetCloudStorageResponse,
   FirmwareInfo,
+  ResumeWeCallDeviceRequest,
   GetCOSURLRequest,
   CreateFenceBindRequest,
   AuthMiniProgramAppInfo,
@@ -826,6 +834,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 转移设备
+   */
+  async TransferTWeCallDevice(
+    req: TransferTWeCallDeviceRequest,
+    cb?: (error: string, rep: TransferTWeCallDeviceResponse) => void
+  ): Promise<TransferTWeCallDeviceResponse> {
+    return this.request("TransferTWeCallDevice", req, cb)
+  }
+
+  /**
    * 本接口（ListFirmwares）用于获取固件列表
    */
   async ListFirmwares(
@@ -1304,6 +1322,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 重置设备
+   */
+  async ResetTWeCallDevice(
+    req: ResetTWeCallDeviceRequest,
+    cb?: (error: string, rep: ResetTWeCallDeviceResponse) => void
+  ): Promise<ResetTWeCallDeviceResponse> {
+    return this.request("ResetTWeCallDevice", req, cb)
+  }
+
+  /**
    * 本接口（UpdateTopicPolicy）用于更新Topic信息
    */
   async ModifyTopicPolicy(
@@ -1441,6 +1469,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudStorageAIServiceResponse) => void
   ): Promise<ModifyCloudStorageAIServiceResponse> {
     return this.request("ModifyCloudStorageAIService", req, cb)
+  }
+
+  /**
+   * 恢复设备
+   */
+  async ResumeWeCallDevice(
+    req: ResumeWeCallDeviceRequest,
+    cb?: (error: string, rep: ResumeWeCallDeviceResponse) => void
+  ): Promise<ResumeWeCallDeviceResponse> {
+    return this.request("ResumeWeCallDevice", req, cb)
   }
 
   /**
@@ -1741,6 +1779,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageStreamDataResponse) => void
   ): Promise<DescribeCloudStorageStreamDataResponse> {
     return this.request("DescribeCloudStorageStreamData", req, cb)
+  }
+
+  /**
+   * 暂停设备
+   */
+  async PauseTWeCallDevice(
+    req: PauseTWeCallDeviceRequest,
+    cb?: (error: string, rep: PauseTWeCallDeviceResponse) => void
+  ): Promise<PauseTWeCallDeviceResponse> {
+    return this.request("PauseTWeCallDevice", req, cb)
   }
 
   /**

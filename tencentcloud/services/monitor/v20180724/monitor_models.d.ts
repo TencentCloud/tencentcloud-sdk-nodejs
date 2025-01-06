@@ -870,6 +870,10 @@ export interface AlarmPolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagOperation?: string;
+    /**
+     * 通知模板绑定内容模板信息
+     */
+    NoticeTmplBindInfos?: Array<NoticeContentTmplBindInfo>;
 }
 /**
  * DeleteExporterIntegration请求参数结构体
@@ -10098,6 +10102,10 @@ export interface DescribeAlarmPoliciesRequest {
      * 根据排班表搜索
      */
     ReceiverOnCallFormIDs?: Array<string>;
+    /**
+     * 通知内容模板ID筛选
+     */
+    NoticeContentTmplIDs?: Array<string>;
 }
 /**
  * UpdateSSOAccount请求参数结构体

@@ -87,6 +87,24 @@ export interface TaskDetail {
 }
 
 /**
+ * DescribeTableColumns返回参数结构体
+ */
+export interface DescribeTableColumnsResponse {
+  /**
+   * 符合查询条件的实例总数。
+   */
+  TotalCount: number
+  /**
+   * 返回的数据库列信息。
+   */
+  Items: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 可用区售卖配置
  */
 export interface CdbZoneSellConf {
@@ -4167,33 +4185,21 @@ export interface ClusterNodeInfo {
 }
 
 /**
- * ModifyAuditService请求参数结构体
+ * DescribeTableColumns请求参数结构体
  */
-export interface ModifyAuditServiceRequest {
+export interface DescribeTableColumnsRequest {
   /**
-   * 实例ID。
+   * 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
   /**
-   * 日志保留时长。
+   * 数据库名称，可使用[查询数据库](https://cloud.tencent.com/document/api/253/7167)接口获得。
    */
-  LogExpireDay?: number
+  Database: string
   /**
-   * 高频日志保留时长。
+   * 数据库中的表的名称。
    */
-  HighLogExpireDay?: number
-  /**
-   * 修改实例审计规则为全审计。
-   */
-  AuditAll?: boolean
-  /**
-   * 审计规则。
-   */
-  AuditRuleFilters?: Array<AuditRuleFilters>
-  /**
-   * 规则模板ID。
-   */
-  RuleTemplateIds?: Array<string>
+  Table: string
 }
 
 /**
@@ -5093,6 +5099,36 @@ export interface DescribeAccountsRequest {
    * 匹配账号名的正则表达式，规则同 MySQL 官网。
    */
   AccountRegexp?: string
+}
+
+/**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保留时长。
+   */
+  LogExpireDay?: number
+  /**
+   * 高频日志保留时长。
+   */
+  HighLogExpireDay?: number
+  /**
+   * 修改实例审计规则为全审计。
+   */
+  AuditAll?: boolean
+  /**
+   * 审计规则。
+   */
+  AuditRuleFilters?: Array<AuditRuleFilters>
+  /**
+   * 规则模板ID。
+   */
+  RuleTemplateIds?: Array<string>
 }
 
 /**

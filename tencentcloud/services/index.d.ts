@@ -142,6 +142,7 @@ export { lcic } from "./lcic";
 export { lighthouse } from "./lighthouse";
 export { live } from "./live";
 export { lke } from "./lke";
+export { lkeap } from "./lkeap";
 export { lowcode } from "./lowcode";
 export { lp } from "./lp";
 export { mall } from "./mall";

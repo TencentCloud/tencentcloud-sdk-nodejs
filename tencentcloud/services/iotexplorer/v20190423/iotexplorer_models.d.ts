@@ -1290,6 +1290,15 @@ export interface ModifySpacePropertyResponse {
     RequestId?: string;
 }
 /**
+ * PauseTWeCallDevice请求参数结构体
+ */
+export interface PauseTWeCallDeviceRequest {
+    /**
+     * 设备列表
+     */
+    DeviceList?: Array<TWeCallInfo>;
+}
+/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -2302,6 +2311,19 @@ export interface DescribeFenceBindListResponse {
     RequestId?: string;
 }
 /**
+ * TransferTWeCallDevice请求参数结构体
+ */
+export interface TransferTWeCallDeviceRequest {
+    /**
+     * sn信息，product_deviceName
+     */
+    TransferInDevice?: string;
+    /**
+     * sn信息，product_deviceName
+     */
+    TransferOutDevice?: string;
+}
+/**
  * 套餐包消耗任务列表
  */
 export interface PackageConsumeTask {
@@ -2900,6 +2922,15 @@ export interface DeletePositionSpaceResponse {
     RequestId?: string;
 }
 /**
+ * ResetTWeCallDevice返回参数结构体
+ */
+export interface ResetTWeCallDeviceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 云api直接绑定设备出参
  */
 export interface AppDeviceInfo {
@@ -3102,7 +3133,7 @@ export interface DisableTopicRuleRequest {
  */
 export interface ActivateTWeCallLicenseRequest {
     /**
-     * TWecall类型：1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
+     * TWecall类型：0-体验套餐；1-家庭安防场景； 2-穿戴类场景； 3-生活娱乐场景； 4-对讲及其它场景
      */
     PkgType: number;
     /**
@@ -3775,6 +3806,15 @@ export interface GetTWeCallActiveStatusResponse {
     RequestId?: string;
 }
 /**
+ * PauseTWeCallDevice返回参数结构体
+ */
+export interface PauseTWeCallDeviceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取返回列表的详情。
  */
 export interface BatchProductionInfo {
@@ -4401,6 +4441,15 @@ export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
     RequestId?: string;
 }
 /**
+ * ResetTWeCallDevice请求参数结构体
+ */
+export interface ResetTWeCallDeviceRequest {
+    /**
+     * 设备列表
+     */
+    DeviceList?: Array<TWeCallInfo>;
+}
+/**
  * CallDeviceActionAsync请求参数结构体
  */
 export interface CallDeviceActionAsyncRequest {
@@ -4422,17 +4471,9 @@ export interface CallDeviceActionAsyncRequest {
     InputParams?: string;
 }
 /**
- * CallDeviceActionAsync返回参数结构体
+ * ResumeWeCallDevice返回参数结构体
  */
-export interface CallDeviceActionAsyncResponse {
-    /**
-     * 调用Id
-     */
-    ClientToken: string;
-    /**
-     * 异步调用状态
-     */
-    Status: string;
+export interface ResumeWeCallDeviceResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5981,6 +6022,15 @@ export interface DescribeCloudStorageStreamDataResponse {
     RequestId?: string;
 }
 /**
+ * TransferTWeCallDevice返回参数结构体
+ */
+export interface TransferTWeCallDeviceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTopicRule请求参数结构体
  */
 export interface DescribeTopicRuleRequest {
@@ -6020,6 +6070,23 @@ export interface GetWechatDeviceTicketResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WXDeviceInfo?: WXDeviceInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CallDeviceActionAsync返回参数结构体
+ */
+export interface CallDeviceActionAsyncResponse {
+    /**
+     * 调用Id
+     */
+    ClientToken: string;
+    /**
+     * 异步调用状态
+     */
+    Status: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6159,6 +6226,15 @@ export interface FirmwareInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserDefined?: string;
+}
+/**
+ * ResumeWeCallDevice请求参数结构体
+ */
+export interface ResumeWeCallDeviceRequest {
+    /**
+     * 设备列表
+     */
+    DeviceList?: Array<TWeCallInfo>;
 }
 /**
  * GetCOSURL请求参数结构体

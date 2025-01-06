@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InheritCloudStorageUser", req, cb);
     }
     /**
+     * 转移设备
+     */
+    async TransferTWeCallDevice(req, cb) {
+        return this.request("TransferTWeCallDevice", req, cb);
+    }
+    /**
      * 本接口（ListFirmwares）用于获取固件列表
      */
     async ListFirmwares(req, cb) {
@@ -582,6 +588,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignTWeCallLicense", req, cb);
     }
     /**
+     * 重置设备
+     */
+    async ResetTWeCallDevice(req, cb) {
+        return this.request("ResetTWeCallDevice", req, cb);
+    }
+    /**
      * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
     async ModifyTopicPolicy(req, cb) {
@@ -664,6 +676,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCloudStorageAIService(req, cb) {
         return this.request("ModifyCloudStorageAIService", req, cb);
+    }
+    /**
+     * 恢复设备
+     */
+    async ResumeWeCallDevice(req, cb) {
+        return this.request("ResumeWeCallDevice", req, cb);
     }
     /**
      * 提供查询某个项目下所有产品信息的能力。
@@ -844,6 +862,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudStorageStreamData(req, cb) {
         return this.request("DescribeCloudStorageStreamData", req, cb);
+    }
+    /**
+     * 暂停设备
+     */
+    async PauseTWeCallDevice(req, cb) {
+        return this.request("PauseTWeCallDevice", req, cb);
     }
     /**
      * 查询小程序列表

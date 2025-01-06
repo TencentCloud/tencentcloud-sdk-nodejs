@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuditPolicy", req, cb);
     }
     /**
+     * 本接口(DescribeTableColumns)用于查询云数据库实例的指定数据库表的列信息，仅支持主实例和灾备实例。
+     */
+    async DescribeTableColumns(req, cb) {
+        return this.request("DescribeTableColumns", req, cb);
+    }
+    /**
      * 开启SSL连接功能。
      */
     async OpenSSL(req, cb) {

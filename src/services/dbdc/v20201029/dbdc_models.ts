@@ -22,43 +22,43 @@ export interface InstanceDetail {
   /**
    * 集群状态，0：运行中，1：不在运行
    */
-  Status: number
+  Status?: number
   /**
    * 读写集群剩余内存容量，单位GB
    */
-  ReadWriteTotalLeaveMemory: number
+  ReadWriteTotalLeaveMemory?: number
   /**
    * 读写集群剩余磁盘容量，单位GB
    */
-  ReadWriteTotalLeaveDisk: number
+  ReadWriteTotalLeaveDisk?: number
   /**
    * 读写集群总内存容量，单位GB
    */
-  ReadWriteTotalMemory: number
+  ReadWriteTotalMemory?: number
   /**
    * 读写集群总磁盘容量，单位GB
    */
-  ReadWriteTotalDisk: number
+  ReadWriteTotalDisk?: number
   /**
    * 只读集群剩余内存容量，单位GB
    */
-  ReadOnlyTotalLeaveMemory: number
+  ReadOnlyTotalLeaveMemory?: number
   /**
    * 只读集群剩余磁盘容量，单位GB
    */
-  ReadOnlyTotalLeaveDisk: number
+  ReadOnlyTotalLeaveDisk?: number
   /**
    * 只读集群总内存容量，单位GB
    */
-  ReadOnlyTotalMemory: number
+  ReadOnlyTotalMemory?: number
   /**
    * 只读集群总磁盘容量，单位GB
    */
-  ReadOnlyTotalDisk: number
+  ReadOnlyTotalDisk?: number
   /**
    * 集群设备详情
    */
-  InstanceDeviceInfos: Array<InstanceDeviceInfo>
+  InstanceDeviceInfos?: Array<InstanceDeviceInfo>
 }
 
 /**
@@ -435,22 +435,22 @@ export interface InstanceDeviceInfo {
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 读写设备组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadWriteDevice: Array<DeviceInfo>
+  ReadWriteDevice?: Array<DeviceInfo>
   /**
    * 只读设备组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReadOnlyDevice: Array<DeviceInfo>
+  ReadOnlyDevice?: Array<DeviceInfo>
   /**
    * 空闲设备组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FreeDevice: Array<DeviceInfo>
+  FreeDevice?: Array<DeviceInfo>
 }
 
 /**
@@ -506,39 +506,39 @@ export interface DeviceInfo {
   /**
    * 设备ID
    */
-  DeviceId: number
+  DeviceId?: number
   /**
    * 设备No
    */
-  DeviceNo: string
+  DeviceNo?: string
   /**
    * 设备类型
    */
-  DevClass: string
+  DevClass?: string
   /**
    * 设备总内存，单位GB
    */
-  MaxMemory: number
+  MaxMemory?: number
   /**
    * 设备总磁盘，单位GB
    */
-  MaxDisk: number
+  MaxDisk?: number
   /**
    * 设备剩余内存，单位GB
    */
-  RestMemory: number
+  RestMemory?: number
   /**
    * 设备剩余磁盘，单位GB
    */
-  RestDisk: number
+  RestDisk?: number
   /**
    * 设备机器个数
    */
-  RawDeviceNum: number
+  RawDeviceNum?: number
   /**
    * 数据库实例个数
    */
-  InstanceNum: number
+  InstanceNum?: number
 }
 
 /**
@@ -648,55 +648,55 @@ export interface InstanceExpand {
   /**
    * 集群ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 集群名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 用户ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 集群类型： 0：一主一备，1：一主两备
    */
-  InstanceType: number
+  InstanceType?: number
   /**
    * 集群状态: 0 集群创建中, 1 集群有效, 2 集群扩容中, 3 集群删除中, 4 集群缩容中 -1 集群已隔离 -2 集群已删除
    */
-  InstanceStatus: number
+  InstanceStatus?: number
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例自动续费标识： 0正常续费 1自动续费 2到期不续费
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 机型
    */
-  Machine: string
+  Machine?: string
   /**
    * 过期时间
    */
-  PeriodEndTime: string
+  PeriodEndTime?: string
   /**
    * 集群信息
    */
-  InstanceDetail: InstanceDetail
+  InstanceDetail?: InstanceDetail
   /**
    * 计费侧的产品ID
    */
-  Pid: number
+  Pid?: number
 }
 
 /**

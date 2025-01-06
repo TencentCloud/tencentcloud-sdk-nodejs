@@ -458,6 +458,16 @@ it("iotexplorer.v20190423.InheritCloudStorageUser", async function () {
     }
 })
 
+it("iotexplorer.v20190423.TransferTWeCallDevice", async function () {
+    try {
+       const data = await client.TransferTWeCallDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ListFirmwares", async function () {
     try {
        const data = await client.ListFirmwares({})
@@ -928,6 +938,16 @@ it("iotexplorer.v20190423.AssignTWeCallLicense", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ResetTWeCallDevice", async function () {
+    try {
+       const data = await client.ResetTWeCallDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
     try {
        const data = await client.ModifyTopicPolicy({})
@@ -1061,6 +1081,16 @@ it("iotexplorer.v20190423.UnbindDevices", async function () {
 it("iotexplorer.v20190423.ModifyCloudStorageAIService", async function () {
     try {
        const data = await client.ModifyCloudStorageAIService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ResumeWeCallDevice", async function () {
+    try {
+       const data = await client.ResumeWeCallDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1361,6 +1391,16 @@ it("iotexplorer.v20190423.DescribeInstance", async function () {
 it("iotexplorer.v20190423.DescribeCloudStorageStreamData", async function () {
     try {
        const data = await client.DescribeCloudStorageStreamData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.PauseTWeCallDevice", async function () {
+    try {
+       const data = await client.PauseTWeCallDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

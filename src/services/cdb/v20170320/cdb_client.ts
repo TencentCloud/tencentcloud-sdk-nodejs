@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   TaskDetail,
+  DescribeTableColumnsResponse,
   CdbZoneSellConf,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
@@ -201,7 +202,7 @@ import {
   ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
   ClusterNodeInfo,
-  ModifyAuditServiceRequest,
+  DescribeTableColumnsRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
   SwitchDrInstanceToMasterResponse,
@@ -241,6 +242,7 @@ import {
   DescribeBackupConfigRequest,
   RoVipInfo,
   DescribeAccountsRequest,
+  ModifyAuditServiceRequest,
   DescribeErrorLogDataRequest,
   DescribeAuditLogFilesResponse,
   DescribeDBInstanceRebootTimeRequest,
@@ -510,6 +512,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuditPolicyResponse) => void
   ): Promise<CreateAuditPolicyResponse> {
     return this.request("CreateAuditPolicy", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeTableColumns)用于查询云数据库实例的指定数据库表的列信息，仅支持主实例和灾备实例。
+   */
+  async DescribeTableColumns(
+    req: DescribeTableColumnsRequest,
+    cb?: (error: string, rep: DescribeTableColumnsResponse) => void
+  ): Promise<DescribeTableColumnsResponse> {
+    return this.request("DescribeTableColumns", req, cb)
   }
 
   /**

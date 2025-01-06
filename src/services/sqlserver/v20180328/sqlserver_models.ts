@@ -680,7 +680,7 @@ export interface DescribeDBInstancesRequest {
    */
   UidSet?: Array<string>
   /**
-   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务,cvmHA-云盘双机高可用，cvmRO-云盘只读副本,MultiHA-多节点,cvmMultiHA-云盘多节点
    */
   InstanceType?: string
   /**
@@ -1422,6 +1422,11 @@ export interface UpgradeDBInstanceRequest {
    * 执行变配的方式，默认为 1。支持值包括：0 - 立刻执行，1 - 维护时间窗执行
    */
   WaitSwitch?: number
+  /**
+   * 多节点架构实例的备节点可用区，默认为空。如果需要在变配的同时修改指定备节点的可用区时必传，当MultiZones = MultiZones时主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。
+
+   */
+  DrZones?: Array<DrZoneInfo>
 }
 
 /**
@@ -2585,6 +2590,10 @@ export interface ModifyDBInstanceNetworkRequest {
 
    */
   DRNetwork?: number
+  /**
+   * 备机资源ID。当DRNetwork = 1时必填
+   */
+  DrInstanceId?: string
 }
 
 /**
@@ -3842,13 +3851,21 @@ export interface DescribeDBInstancesAttributeResponse {
    */
   SSLConfig?: SSLConfig
   /**
-   * 备机只读信息
+   * 双节点备机只读信息
    */
   DrReadableInfo?: DrReadableInfo
   /**
    * 等待回收的IP列表
    */
   OldVipList?: Array<OldVip>
+  /**
+   * 操作日志采集状态，enable-采集中，disable-不可用，renew_doing-配置开启或关闭中
+   */
+  XEventStatus?: string
+  /**
+   * 多节点备机只读信息
+   */
+  MultiDrReadableInfo?: Array<DrReadableInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

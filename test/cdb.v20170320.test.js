@@ -48,6 +48,16 @@ it("cdb.v20170320.CreateAuditPolicy", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeTableColumns", async function () {
+    try {
+       const data = await client.DescribeTableColumns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.OpenSSL", async function () {
     try {
        const data = await client.OpenSSL({})

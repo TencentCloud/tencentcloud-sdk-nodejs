@@ -2054,6 +2054,21 @@ export interface AlarmEventInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmReason?: string;
+    /**
+     * 近范围值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndicatorTimeRangeValue?: number;
+    /**
+     * 近范围单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndicatorTimeRangeUnit?: string;
+    /**
+     * 同步类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncType?: number;
 }
 /**
  * DescribeTaskLineage请求参数结构体
@@ -9436,7 +9451,16 @@ export interface CreateTaskFolderRequest {
      */
     ParentFolderId?: string;
     /**
-     * 目录分类
+     * 目录分类，该值必传，枚举值如下：
+  ETL：数据集成
+  EMR：EMR
+  TBDS：TBDS
+  DLC：DLC
+  TDSQL：TDSQL
+  TCHOUSE：TCHOUSE
+  GENERAL：通用
+  TI_ONE：TI-ONE机器学习
+  ACROSS_WORKFLOWS：跨工作流
      */
     TaskNodeType?: string;
 }

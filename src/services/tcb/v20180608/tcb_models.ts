@@ -22,59 +22,59 @@ export interface DescribeEnvLimitResponse {
   /**
    * 环境总数上限
    */
-  MaxEnvNum: number
+  MaxEnvNum?: number
   /**
    * 目前环境总数
    */
-  CurrentEnvNum: number
+  CurrentEnvNum?: number
   /**
    * 免费环境数量上限
    */
-  MaxFreeEnvNum: number
+  MaxFreeEnvNum?: number
   /**
    * 目前免费环境数量
    */
-  CurrentFreeEnvNum: number
+  CurrentFreeEnvNum?: number
   /**
    * 总计允许销毁环境次数上限
    */
-  MaxDeleteTotal: number
+  MaxDeleteTotal?: number
   /**
    * 目前已销毁环境次数
    */
-  CurrentDeleteTotal: number
+  CurrentDeleteTotal?: number
   /**
    * 每月允许销毁环境次数上限
    */
-  MaxDeleteMonthly: number
+  MaxDeleteMonthly?: number
   /**
    * 本月已销毁环境次数
    */
-  CurrentDeleteMonthly: number
+  CurrentDeleteMonthly?: number
   /**
    * 微信网关体验版可购买月份数
    */
-  MaxFreeTrialNum: number
+  MaxFreeTrialNum?: number
   /**
    * 微信网关体验版已购买月份数
    */
-  CurrentFreeTrialNum: number
+  CurrentFreeTrialNum?: number
   /**
    * 转支付限额总数
    */
-  ChangePayTotal: number
+  ChangePayTotal?: number
   /**
    * 当前已用转支付次数
    */
-  CurrentChangePayTotal: number
+  CurrentChangePayTotal?: number
   /**
    * 转支付每月限额
    */
-  ChangePayMonthly: number
+  ChangePayMonthly?: number
   /**
    * 本月已用转支付额度
    */
-  CurrentChangePayMonthly: number
+  CurrentChangePayMonthly?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -432,7 +432,7 @@ export interface CommonServiceAPIResponse {
   /**
    * json格式response
    */
-  JSONResp: string
+  JSONResp?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1733,57 +1733,57 @@ export interface FreezeCloudBaseRunServersRequest {
 }
 
 /**
- * 新套餐套餐详情
+ * 云开发新套餐详情
  */
 export interface BaasPackageInfo {
   /**
    * DAU产品套餐ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageName: string
+  PackageName?: string
   /**
    * DAU套餐中文名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageTitle: string
+  PackageTitle?: string
   /**
    * 套餐分组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 套餐分组中文名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupTitle: string
+  GroupTitle?: string
   /**
    * json格式化计费标签，例如：
 {"pid":2, "cids":{"create": 2, "renew": 2, "modify": 2}, "productCode":"p_tcb_mp", "subProductCode":"sp_tcb_mp_cloudbase_dau"}
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillTags: string
+  BillTags?: string
   /**
    * json格式化用户资源限制，例如：
 {"Qps":1000,"InvokeNum":{"TimeUnit":"m", "Unit":"万次", "MaxSize": 100},"Capacity":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "Cdn":{"Flux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "BackFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}},"Scf":{"Concurrency":1000,"OutFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100},"MemoryUse":{"TimeUnit":"m", "Unit":"WGBS", "MaxSize": 100000}}}
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceLimit: string
+  ResourceLimit?: string
   /**
    * json格式化高级限制，例如：
 {"CMSEnable":false,"ProvisionedConcurrencyMem":512000, "PictureProcessing":false, "SecurityAudit":false, "RealTimePush":false, "TemplateMessageBatchPush":false, "Payment":false}
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvanceLimit: string
+  AdvanceLimit?: string
   /**
    * 套餐描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageDescription: string
+  PackageDescription?: string
   /**
    * 是否对外展示
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsExternal: boolean
+  IsExternal?: boolean
 }
 
 /**
@@ -3517,7 +3517,7 @@ export interface DescribeBaasPackageListResponse {
   /**
    * 套餐列表
    */
-  PackageList: Array<BaasPackageInfo>
+  PackageList?: Array<BaasPackageInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

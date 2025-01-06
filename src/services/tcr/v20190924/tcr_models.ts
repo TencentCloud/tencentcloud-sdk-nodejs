@@ -3682,29 +3682,29 @@ export interface TaskDetail {
   /**
    * 任务
    */
-  TaskName: string
+  TaskName?: string
   /**
    * 任务UUID
    */
-  TaskUUID: string
+  TaskUUID?: string
   /**
    * 任务状态
    */
-  TaskStatus: string
+  TaskStatus?: string
   /**
    * 任务的状态信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskMessage: string
+  TaskMessage?: string
   /**
    * 任务开始时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 任务结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FinishedTime: string
+  FinishedTime?: string
 }
 
 /**
@@ -4562,64 +4562,64 @@ export interface TagInfo {
   /**
    * Tag名称
    */
-  TagName: string
+  TagName?: string
   /**
    * 制品的 ID
    */
-  TagId: string
+  TagId?: string
   /**
    * docker image 可以看到的id
    */
-  ImageId: string
+  ImageId?: string
   /**
    * 大小
    */
-  Size: string
+  Size?: string
   /**
    * 制品的创建时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 制品创建至今时间长度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DurationDays: string
+  DurationDays?: string
   /**
    * 标注的制品作者
    */
-  Author: string
+  Author?: string
   /**
    * 标注的制品平台
    */
-  Architecture: string
+  Architecture?: string
   /**
    * 创建制品的 Docker 版本
    */
-  DockerVersion: string
+  DockerVersion?: string
   /**
    * 标注的制品操作系统
    */
-  OS: string
+  OS?: string
   /**
    * 制品大小
    */
-  SizeByte: number
+  SizeByte?: number
   /**
    * 序号
    */
-  Id: number
+  Id?: number
   /**
    * 数据更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 制品更新时间
    */
-  PushTime: string
+  PushTime?: string
   /**
    * 制品类型
    */
-  Kind: string
+  Kind?: string
 }
 
 /**
