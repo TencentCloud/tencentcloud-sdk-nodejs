@@ -2252,6 +2252,14 @@ HoaiMy
    */
   EndFunctionDesc?: string
   /**
+   * 模型是否支持(或者开启)transfer_to_human function calling
+   */
+  TransferFunctionEnable?: boolean
+  /**
+   * TransferFunctionEnable为true的时候生效: 转人工配置
+   */
+  TransferItems?: Array<AITransferItem>
+  /**
    * 用户多久没说话提示时长,最小10秒,默认10秒
    */
   NotifyDuration?: number
@@ -2345,6 +2353,10 @@ HoaiMy
 </div></div>
    */
   CustomTTSConfig?: string
+  /**
+   * 提示词变量
+   */
+  PromptVariables?: Array<Variable>
 }
 
 /**
@@ -3088,6 +3100,24 @@ export interface CreateCarrierPrivilegeNumberApplicantRequest {
    * 描述
    */
   Description?: string
+}
+
+/**
+ * AI转人工配置项
+ */
+export interface AITransferItem {
+  /**
+   * 转人工的function calling 名称
+   */
+  TransferFunctionName: string
+  /**
+   * TransferFunctionEnable为true时生效；transfer_to_human function calling的desc，默认为 "Transfer to human when the user has to transfer to human (like says transfer to human) or you are instructed to do so."
+   */
+  TransferFunctionDesc: string
+  /**
+   * 转人工的技能组ID
+   */
+  TransferSkillGroupId: number
 }
 
 /**

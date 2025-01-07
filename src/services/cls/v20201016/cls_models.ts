@@ -644,7 +644,7 @@ export interface ConsoleSharingConfig {
    */
   Domain?: string
   /**
-   * 验证码
+   * 分享链接加密访问验证码。支持0-9和a-z(不区分大小写)在内的6个字符，可为空，代表免验证码访问
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VerifyCode?: string

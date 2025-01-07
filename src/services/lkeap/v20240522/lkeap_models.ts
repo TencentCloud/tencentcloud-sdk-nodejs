@@ -840,6 +840,53 @@ export interface ModifyAttributeLabelResponse {
 }
 
 /**
+ * UploadDoc请求参数结构体
+ */
+export interface UploadDocRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 文件名，可选。
+   **需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。
+   */
+  FileName: string
+  /**
+   * 文件类型。
+
+**支持的文件类型：**
+- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`
+
+**支持的文件大小：**
+ - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M
+ - `TXT`、`MD` 最大10M
+ - 其他 最大20M
+
+   */
+  FileType: string
+  /**
+   * 文件的 URL 地址。
+文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
+参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749)
+   */
+  FileUrl: string
+  /**
+   * 属性标签引用
+   * @deprecated
+   */
+  AttributeLabel?: Array<AttributeLabelReferItem>
+  /**
+   * 属性标签引用
+   */
+  AttributeLabels?: Array<AttributeLabelReferItem>
+  /**
+   * 分段信息
+   */
+  Config?: SegmentationConfig
+}
+
+/**
  * DeleteQAs返回参数结构体
  */
 export interface DeleteQAsResponse {
@@ -879,6 +926,20 @@ export interface GetEmbeddingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryRewrite请求参数结构体
+ */
+export interface QueryRewriteRequest {
+  /**
+   * 需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入，由于模型字符限制，最多提供4轮对话。针对最后一轮对话进行改写
+   */
+  Messages: Array<Message>
+  /**
+   * 模型名称
+   */
+  Model?: string
 }
 
 /**
@@ -985,6 +1046,24 @@ export interface CreateReconstructDocumentFlowResponse {
 }
 
 /**
+ * QueryRewrite返回参数结构体
+ */
+export interface QueryRewriteResponse {
+  /**
+   * 改写结果
+   */
+  Content?: string
+  /**
+   * 消耗量，返回输入token数，输出token数以及总token数
+   */
+  Usage?: Usage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateQA请求参数结构体
  */
 export interface CreateQARequest {
@@ -1045,50 +1124,17 @@ export interface EmbeddingObject {
 }
 
 /**
- * UploadDoc请求参数结构体
+ * 会话内容
  */
-export interface UploadDocRequest {
+export interface Message {
   /**
-   * 知识库ID
+   * 角色
    */
-  KnowledgeBaseId: string
+  Role?: string
   /**
-   * 文件名，可选。
-   **需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。
+   * 内容
    */
-  FileName: string
-  /**
-   * 文件类型。
-
-**支持的文件类型：**
-- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`
-
-**支持的文件大小：**
- - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M
- - `TXT`、`MD` 最大10M
- - 其他 最大20M
-
-   */
-  FileType: string
-  /**
-   * 文件的 URL 地址。
-文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
-参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749)
-   */
-  FileUrl: string
-  /**
-   * 属性标签引用
-   * @deprecated
-   */
-  AttributeLabel?: Array<AttributeLabelReferItem>
-  /**
-   * 属性标签引用
-   */
-  AttributeLabels?: Array<AttributeLabelReferItem>
-  /**
-   * 分段信息
-   */
-  Config?: SegmentationConfig
+  Content?: string
 }
 
 /**

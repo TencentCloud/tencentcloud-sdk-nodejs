@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateSplitDocumentFlowRequest, ImportQAsResponse, ListQAsRequest, ReconstructDocumentSSEResponse, GetEmbeddingRequest, UploadDocRealtimeRequest, DescribeDocResponse, DeleteQAsRequest, ModifyQARequest, GetReconstructDocumentResultRequest, ListQAsResponse, DeleteAttributeLabelsResponse, ListDocsRequest, CreateAttributeLabelResponse, RetrieveKnowledgeResponse, CreateSplitDocumentFlowResponse, CreateQAResponse, ModifyAttributeLabelRequest, ListDocsResponse, ListAttributeLabelsRequest, DeleteAttributeLabelsRequest, RetrieveKnowledgeRequest, GetReconstructDocumentResultResponse, RunRerankRequest, GetSplitDocumentResultRequest, ReconstructDocumentSSERequest, ListAttributeLabelsResponse, CreateAttributeLabelRequest, ImportQAsRequest, DescribeDocRequest, DeleteKnowledgeBaseResponse, DeleteDocsResponse, CreateReconstructDocumentFlowRequest, GetSplitDocumentResultResponse, ModifyQAResponse, UploadDocRealtimeResponse, ModifyAttributeLabelResponse, DeleteQAsResponse, CreateKnowledgeBaseResponse, GetEmbeddingResponse, RunRerankResponse, CreateReconstructDocumentFlowResponse, CreateQARequest, UploadDocResponse, UploadDocRequest, CreateKnowledgeBaseRequest, DeleteKnowledgeBaseRequest, DeleteDocsRequest } from "./lkeap_models";
+import { CreateSplitDocumentFlowRequest, ImportQAsResponse, ListQAsRequest, ReconstructDocumentSSEResponse, GetEmbeddingRequest, UploadDocRealtimeRequest, DescribeDocResponse, DeleteQAsRequest, ModifyQARequest, GetReconstructDocumentResultRequest, ListQAsResponse, DeleteAttributeLabelsResponse, ListDocsRequest, CreateAttributeLabelResponse, RetrieveKnowledgeResponse, CreateSplitDocumentFlowResponse, CreateQAResponse, ModifyAttributeLabelRequest, ListDocsResponse, ListAttributeLabelsRequest, DeleteAttributeLabelsRequest, RetrieveKnowledgeRequest, GetReconstructDocumentResultResponse, RunRerankRequest, GetSplitDocumentResultRequest, ReconstructDocumentSSERequest, ListAttributeLabelsResponse, CreateAttributeLabelRequest, ImportQAsRequest, DescribeDocRequest, DeleteKnowledgeBaseResponse, DeleteDocsResponse, CreateReconstructDocumentFlowRequest, GetSplitDocumentResultResponse, ModifyQAResponse, UploadDocRealtimeResponse, ModifyAttributeLabelResponse, UploadDocRequest, DeleteQAsResponse, CreateKnowledgeBaseResponse, GetEmbeddingResponse, QueryRewriteRequest, RunRerankResponse, CreateReconstructDocumentFlowResponse, QueryRewriteResponse, CreateQARequest, UploadDocResponse, CreateKnowledgeBaseRequest, DeleteKnowledgeBaseRequest, DeleteDocsRequest } from "./lkeap_models";
 /**
  * lkeap client
  * @class
@@ -39,6 +39,11 @@ export declare class Client extends AbstractClient {
      * 用于删除已有的问答对。 使用场景：当某个问答对不再适用或需要移除时使用。
      */
     DeleteQAs(req?: DeleteQAsRequest, cb?: (error: string, rep: DeleteQAsResponse) => void): Promise<DeleteQAsResponse>;
+    /**
+     * 多轮改写（QueryRewrite）主要用于多轮对话中，进行指代消解和省略补全。使用本接口，无需输入prompt描述，根据对话历史即可生成更精确的用户查询。在应用场景上，本接口可应用于智能问答、对话式搜索等多种场景。
+开通[产品体验](https://lke.cloud.tencent.com/lke/#/trialProduct)后可获得50wtoken体验额度。本接口（QueryRewrite）有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
+     */
+    QueryRewrite(req: QueryRewriteRequest, cb?: (error: string, rep: QueryRewriteResponse) => void): Promise<QueryRewriteResponse>;
     /**
      * 本接口（GetEmbedding）调用文本表示模型，将文本转化为用数值表示的向量形式，可用于文本检索、信息推荐、知识挖掘等场景。
 本接口（GetEmbedding）有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。

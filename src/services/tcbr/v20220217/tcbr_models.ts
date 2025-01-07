@@ -115,7 +115,11 @@ export interface DescribeEnvBaseInfoResponse {
   /**
    * 环境基础信息
    */
-  EnvBaseInfo: EnvBaseInfo
+  EnvBaseInfo?: EnvBaseInfo
+  /**
+   * 是否存在
+   */
+  IsExist?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -713,31 +717,35 @@ export interface ServerBaseInfo {
   /**
    * 服务名
    */
-  ServerName: string
+  ServerName?: string
   /**
    * 默认服务域名
    */
-  DefaultDomainName: string
+  DefaultDomainName?: string
   /**
    * 自定义域名
    */
-  CustomDomainName: string
+  CustomDomainName?: string
   /**
    * 服务状态：running/deploying/deploy_failed
    */
-  Status: string
+  Status?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 公网访问类型
    */
-  AccessTypes: Array<string>
+  AccessTypes?: Array<string>
   /**
    * 展示自定义域名
    */
-  CustomDomainNames: Array<string>
+  CustomDomainNames?: Array<string>
+  /**
+   * 服务类型: function 云函数2.0；container 容器服务
+   */
+  ServerType?: string
 }
 
 /**
@@ -952,6 +960,10 @@ export interface BuildPacksInfo {
    * 上传文件名
    */
   UploadFilename: string
+  /**
+   * 语言版本
+   */
+  LanguageVersion?: string
 }
 
 /**
@@ -989,15 +1001,15 @@ Activity：活动来源
    */
   ReqKey?: string
   /**
-   * 来源：wechat | cloud
+   * 来源：wechat | cloud | weda
    */
   Source?: string
   /**
-   * 渠道：wechat | cloud
+   * 渠道：wechat | cloud | weda
    */
   Channel?: string
   /**
-   * 环境ID
+   * 环境ID 云开发平台必填
    */
   EnvId?: string
 }

@@ -889,7 +889,8 @@ export interface RegisterUserRequest {
      */
     Name?: string;
     /**
-     * 用户在客户系统的Id，需要在同一应用下唯一。
+     * 用户在客户系统的Id，需要在同一应用下唯一。入参为空时默认赋值为UserId
+  。
      */
     OriginId?: string;
     /**
@@ -2039,11 +2040,11 @@ export interface RegisterUserResponse {
     /**
      * 用户Id。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 登录/注册成功后返回登录态token。有效期7天。
      */
-    Token: string;
+    Token?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2071,7 +2072,9 @@ export interface BindDocumentToRoomRequest {
      */
     DocumentId: string;
     /**
-     * 绑定类型。后台可透传到客户端，默认为0。客户端可以根据这个字段实现业务逻辑。
+     * 绑定类型。后台可透传到客户端，默认为0。除以下例值外支持自定义该字段，并在前端实现相应业务逻辑，示例参考：
+  示例值：0，仅绑定课件到房间
+  示例值：1，绑定课件到房间后，默认展示课件
      */
     BindType?: number;
 }
@@ -3607,7 +3610,7 @@ export interface BackgroundPictureConfig {
      * 背景图片的url
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
 }
 /**
  * DeleteAppCustomContent返回参数结构体

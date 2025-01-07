@@ -311,6 +311,37 @@ export interface DescribeAllTenantsResponse {
 }
 
 /**
+ * 消费者详情中的主题信息
+ */
+export interface RocketMQConsumerTopic {
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
+   */
+  Type?: string
+  /**
+   * 分区数
+   */
+  PartitionNum?: number
+  /**
+   * 消息堆积数
+   */
+  Accumulative?: number
+  /**
+   * 最后消费时间，以毫秒为单位
+   */
+  LastConsumptionTime?: number
+  /**
+   * 订阅规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubRule?: string
+}
+
+/**
  * DescribeRabbitMQNodeList请求参数结构体
  */
 export interface DescribeRabbitMQNodeListRequest {
@@ -4660,6 +4691,24 @@ export interface ModifyRocketMQInstanceSpecResponse {
 }
 
 /**
+ * GetTopicList返回参数结构体
+ */
+export interface GetTopicListResponse {
+  /**
+   * 主题数量。
+   */
+  TotalCount?: number
+  /**
+   * 主题列表
+   */
+  TopicList?: Array<Topic_Simplification>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeMsgTrace请求参数结构体
  */
 export interface DescribeMsgTraceRequest {
@@ -5319,14 +5368,9 @@ Cancelled 已取消
 }
 
 /**
- * DeleteRabbitMQVirtualHost返回参数结构体
+ * DescribeBindClusters请求参数结构体
  */
-export interface DeleteRabbitMQVirtualHostResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeBindClustersRequest = null
 
 /**
  * CreateRabbitMQVirtualHost请求参数结构体
@@ -5540,6 +5584,25 @@ export interface CreateRocketMQNamespaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 主题实例
+ */
+export interface Topic_Simplification {
+  /**
+   * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+  /**
+   * 0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PulsarTopicType?: number
 }
 
 /**
@@ -5894,6 +5957,28 @@ export interface DescribeNamespaceBundlesOptResponse {
 }
 
 /**
+ * GetTopicList请求参数结构体
+ */
+export interface GetTopicListRequest {
+  /**
+   * 环境（命名空间）名称。
+   */
+  EnvironmentId: string
+  /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
+   * 起始下标，不填默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，不填则默认为10，最大值为20。
+   */
+  Limit?: number
+}
+
+/**
  * RewindCmqQueue返回参数结构体
  */
 export interface RewindCmqQueueResponse {
@@ -6187,34 +6272,13 @@ export interface ModifyPublicNetworkSecurityPolicyResponse {
 }
 
 /**
- * 消费者详情中的主题信息
+ * DeleteRabbitMQVirtualHost返回参数结构体
  */
-export interface RocketMQConsumerTopic {
+export interface DeleteRabbitMQVirtualHostResponse {
   /**
-   * 主题名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Topic?: string
-  /**
-   * 主题类型，Normal表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
-   */
-  Type?: string
-  /**
-   * 分区数
-   */
-  PartitionNum?: number
-  /**
-   * 消息堆积数
-   */
-  Accumulative?: number
-  /**
-   * 最后消费时间，以毫秒为单位
-   */
-  LastConsumptionTime?: number
-  /**
-   * 订阅规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubRule?: string
+  RequestId?: string
 }
 
 /**
@@ -7909,11 +7973,6 @@ export interface DescribeMqMsgTraceResponse {
    */
   RequestId?: string
 }
-
-/**
- * DescribeBindClusters请求参数结构体
- */
-export type DescribeBindClustersRequest = null
 
 /**
  * CreateRabbitMQUser请求参数结构体

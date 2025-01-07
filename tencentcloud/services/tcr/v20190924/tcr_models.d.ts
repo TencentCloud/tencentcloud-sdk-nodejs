@@ -2377,20 +2377,20 @@ export interface CreateInstanceTokenResponse {
      * 用户名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Username: string;
+    Username?: string;
     /**
      * 访问凭证
      */
-    Token: string;
+    Token?: string;
     /**
      * 访问凭证过期时间戳，是一个时间戳数字，无单位
      */
-    ExpTime: number;
+    ExpTime?: number;
     /**
      * 长期凭证的TokenId，短期凭证没有TokenId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TokenId: string;
+    TokenId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

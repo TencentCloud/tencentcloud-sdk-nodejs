@@ -164,7 +164,7 @@ export interface HKIDCardOCRRequest {
     /**
      * 是否返回人像照片。
      */
-    ReturnHeadImage: boolean;
+    ReturnHeadImage?: boolean;
     /**
      * 是否鉴伪。
      * @deprecated

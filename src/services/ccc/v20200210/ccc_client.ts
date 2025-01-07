@@ -122,6 +122,7 @@ import {
   CreateExtensionRequest,
   StaffSkillGroupList,
   CreateCarrierPrivilegeNumberApplicantRequest,
+  AITransferItem,
   Filter,
   UnbindStaffSkillGroupListRequest,
   CreateOwnNumberApplyResponse,

@@ -6885,6 +6885,30 @@ export interface DescribeVoucherInfoRequest {
      * 代金券副类型 discount 为折扣券 deduct 为抵扣券
      */
     VoucherSubType?: string;
+    /**
+     * 券有效时间开始时间
+     */
+    StartTimeFrom?: string;
+    /**
+     * 券有效时间结束时间
+     */
+    StartTimeTo?: string;
+    /**
+     * 券失效时间开始时间
+     */
+    EndTimeFrom?: string;
+    /**
+     * 券失效时间结束时间
+     */
+    EndTimeTo?: string;
+    /**
+     * 发券时间开始时间
+     */
+    CreateTimeFrom?: string;
+    /**
+     * 发券时间结束时间
+     */
+    CreateTimeTo?: string;
 }
 /**
  * 交易类型筛选列表

@@ -28,6 +28,7 @@ import {
   DescribeCmqQueuesResponse,
   DescribeRabbitMQVirtualHostListRequest,
   DescribeAllTenantsResponse,
+  RocketMQConsumerTopic,
   DescribeRabbitMQNodeListRequest,
   DeleteCmqQueueResponse,
   ConsumerStats,
@@ -184,6 +185,7 @@ import {
   DescribeEnvironmentsResponse,
   AMQPClusterInfo,
   ModifyRocketMQInstanceSpecResponse,
+  GetTopicListResponse,
   DescribeMsgTraceRequest,
   DescribeCmqTopicsRequest,
   ConsumerLog,
@@ -201,7 +203,7 @@ import {
   MigrateTopic,
   DeleteRabbitMQBindingRequest,
   DescribeRocketMQSmoothMigrationTaskResponse,
-  DeleteRabbitMQVirtualHostResponse,
+  DescribeBindClustersRequest,
   CreateRabbitMQVirtualHostRequest,
   VerifyRocketMQConsumeRequest,
   DescribeRabbitMQQueueDetailRequest,
@@ -211,6 +213,7 @@ import {
   DescribeEnvironmentAttributesResponse,
   DescribeRocketMQRolesRequest,
   CreateRocketMQNamespaceResponse,
+  Topic_Simplification,
   ModifyRocketMQEnvironmentRoleResponse,
   CreateCmqQueueResponse,
   DeleteRabbitMQVipInstanceRequest,
@@ -229,6 +232,7 @@ import {
   RabbitMQPrivateVirtualHost,
   CreateRabbitMQVirtualHostResponse,
   DescribeNamespaceBundlesOptResponse,
+  GetTopicListRequest,
   RewindCmqQueueResponse,
   PublicAccessRule,
   RabbitMQClusterWhiteListInfo,
@@ -242,7 +246,7 @@ import {
   DescribeRocketMQMsgResponse,
   DescribeEnvironmentAttributesRequest,
   ModifyPublicNetworkSecurityPolicyResponse,
-  RocketMQConsumerTopic,
+  DeleteRabbitMQVirtualHostResponse,
   DescribePublishersRequest,
   RabbitMQBindingListInfo,
   ModifyPublicNetworkSecurityPolicyRequest,
@@ -302,7 +306,6 @@ import {
   Sort,
   ConsumerLogs,
   DescribeMqMsgTraceResponse,
-  DescribeBindClustersRequest,
   CreateRabbitMQUserRequest,
   DescribeRocketMQConsumeStatsRequest,
   SendCmqMsgResponse,
@@ -888,6 +891,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void
   ): Promise<DescribeCmqSubscriptionDetailResponse> {
     return this.request("DescribeCmqSubscriptionDetail", req, cb)
+  }
+
+  /**
+   * 获取环境下主题列表
+   */
+  async GetTopicList(
+    req: GetTopicListRequest,
+    cb?: (error: string, rep: GetTopicListResponse) => void
+  ): Promise<GetTopicListResponse> {
+    return this.request("GetTopicList", req, cb)
   }
 
   /**

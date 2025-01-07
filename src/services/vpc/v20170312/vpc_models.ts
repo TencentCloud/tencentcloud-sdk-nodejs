@@ -4115,6 +4115,16 @@ export interface NetworkInterface {
    */
   State?: string
   /**
+   * 弹性网卡状态：
+<li>`PENDING`：创建中</li>
+<li>`AVAILABLE`：可用的</li>
+<li>`ATTACHING`：绑定中</li>
+<li>`DETACHING`：解绑中</li>
+<li>`DELETING`：删除中</li>
+<li>`INUSE`：已绑定</li>
+   */
+  NetworkInterfaceState?: string
+  /**
    * 内网IP信息。
    */
   PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>
@@ -4673,20 +4683,20 @@ export interface DeleteDirectConnectGatewayCcnRoutesResponse {
  */
 export interface HaVipAssociation {
   /**
-   * HaVip实例唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HaVipId: string
-  /**
    * HaVip绑定的子机或网卡唯一ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
   /**
+   * HaVip实例唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HaVipId?: string
+  /**
    * HaVip绑定的类型。取值:CVM, ENI。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType: string
+  InstanceType?: string
 }
 
 /**
@@ -7551,11 +7561,11 @@ export interface AddressTemplateItem {
    */
   AddressTemplateId?: string
   /**
-   * IP模板名称
+   * IP模板名称。
    */
   AddressTemplateName?: string
   /**
-   * 废弃字段
+   * 废弃字段。
    */
   From?: string
   /**
@@ -15591,7 +15601,6 @@ export interface ServicesInfo {
   Service: string
   /**
    * 备注。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }

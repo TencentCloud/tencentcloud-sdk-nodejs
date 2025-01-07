@@ -69,18 +69,21 @@ import {
   UploadDocRealtimeResponse,
   SplitDocumentFailedPage,
   ModifyAttributeLabelResponse,
+  UploadDocRequest,
   DeleteQAsResponse,
   CreateKnowledgeBaseResponse,
   GetEmbeddingResponse,
+  QueryRewriteRequest,
   QaItem,
   CreateSplitDocumentFlowConfig,
   RunRerankResponse,
   CreateReconstructDocumentFlowResponse,
+  QueryRewriteResponse,
   CreateQARequest,
   UploadDocResponse,
   AttributeItem,
   EmbeddingObject,
-  UploadDocRequest,
+  Message,
   CreateKnowledgeBaseRequest,
   DeleteKnowledgeBaseRequest,
   DeleteDocsRequest,
@@ -173,6 +176,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteQAsResponse) => void
   ): Promise<DeleteQAsResponse> {
     return this.request("DeleteQAs", req, cb)
+  }
+
+  /**
+     * 多轮改写（QueryRewrite）主要用于多轮对话中，进行指代消解和省略补全。使用本接口，无需输入prompt描述，根据对话历史即可生成更精确的用户查询。在应用场景上，本接口可应用于智能问答、对话式搜索等多种场景。
+开通[产品体验](https://lke.cloud.tencent.com/lke/#/trialProduct)后可获得50wtoken体验额度。本接口（QueryRewrite）有单账号调用上限控制，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
+     */
+  async QueryRewrite(
+    req: QueryRewriteRequest,
+    cb?: (error: string, rep: QueryRewriteResponse) => void
+  ): Promise<QueryRewriteResponse> {
+    return this.request("QueryRewrite", req, cb)
   }
 
   /**

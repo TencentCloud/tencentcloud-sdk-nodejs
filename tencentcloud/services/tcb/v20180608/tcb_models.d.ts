@@ -84,18 +84,18 @@ export interface OrderInfo {
     /**
      * 订单号
      */
-    TranId: string;
+    TranId?: string;
     /**
      * 订单要切换的套餐ID
      */
-    PackageId: string;
+    PackageId?: string;
     /**
      * 订单类型
   <li>1 购买</li>
   <li>2 续费</li>
   <li>3 变配</li>
      */
-    TranType: string;
+    TranType?: string;
     /**
      * 订单状态。
   <li>1未支付</li>
@@ -107,42 +107,42 @@ export interface OrderInfo {
   <li>7 已取消</li>
   <li>100 已删除</li>
      */
-    TranStatus: string;
+    TranStatus?: string;
     /**
      * 订单更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 订单创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 付费模式.
   <li>prepayment 预付费</li>
   <li>postpaid 后付费</li>
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 订单绑定的扩展ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtensionId: string;
+    ExtensionId?: string;
     /**
      * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceReady: string;
+    ResourceReady?: string;
     /**
      * 安装标记。建议使用方统一转大小写之后再判断。
   <li>QuickStart：快速启动来源</li>
   <li>Activity：活动来源</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Flag: string;
+    Flag?: string;
     /**
      * 下单时的参数
      */
-    ReqBody: string;
+    ReqBody?: string;
 }
 /**
  * CheckTcbService返回参数结构体
@@ -616,15 +616,15 @@ export interface LogResObject {
     /**
      * 获取更多检索结果的游标
      */
-    Context: string;
+    Context?: string;
     /**
      * 搜索结果是否已经全部返回
      */
-    ListOver: boolean;
+    ListOver?: boolean;
     /**
      * 日志内容信息
      */
-    Results: Array<LogObject>;
+    Results?: Array<LogObject>;
 }
 /**
  * DestroyStandaloneGateway请求参数结构体
@@ -1736,7 +1736,6 @@ export interface DescribeQuotaDataResponse {
     Value?: number;
     /**
      * 指标的附加值信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubValue?: string;
     /**
@@ -1784,27 +1783,27 @@ export interface ActivityInfoItem {
     /**
      * 活动id
      */
-    ActivityId: number;
+    ActivityId?: number;
     /**
      * 记录插入时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 记录最后一次变更时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 活动开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 活动结束时间
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 自定义备注信息
      */
-    Tag: string;
+    Tag?: string;
 }
 /**
  * 键值对
@@ -1859,12 +1858,12 @@ export interface FunctionInfo {
     /**
      * 命名空间
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 所属地域。
   当前支持ap-shanghai
      */
-    Region: string;
+    Region?: string;
 }
 /**
  * CommonServiceAPI请求参数结构体
@@ -1971,7 +1970,7 @@ export interface DescribeActivityRecordResponse {
     /**
      * 活动记录详情
      */
-    ActivityRecords: Array<ActivityRecordItem>;
+    ActivityRecords?: Array<ActivityRecordItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2444,27 +2443,27 @@ export interface LogObject {
     /**
      * 日志属于的 topic ID
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志主题的名字
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 日志时间
      */
-    Timestamp: string;
+    Timestamp?: string;
     /**
      * 日志内容
      */
-    Content: string;
+    Content?: string;
     /**
      * 采集路径
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 日志来源设备
      */
-    Source: string;
+    Source?: string;
 }
 /**
  * DestroyStaticStore返回参数结构体
@@ -2994,7 +2993,6 @@ export interface CreateAuthDomainRequest {
 export interface DescribeEnvPostpaidDeductResponse {
     /**
      * 指标抵扣详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PostPaidEnvDeductInfoList?: Array<PostPaidEnvDeductInfo>;
     /**
@@ -3352,7 +3350,6 @@ export interface CreatePostpayPackageResponse {
     TranId?: string;
     /**
      * 环境ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvId?: string;
     /**
@@ -3569,9 +3566,8 @@ export interface CloudBaseRunServiceVolumeMount {
 export interface DescribeSpecialCostItemsResponse {
     /**
      * 1分钱抵扣详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpecialCostItems: Array<SpecialCostItem>;
+    SpecialCostItems?: Array<SpecialCostItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3742,22 +3738,22 @@ export interface PackageFreeQuotaInfo {
   <li>SCF</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 资源指标名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceMetric: string;
+    ResourceMetric?: string;
     /**
      * 资源指标免费量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreeQuota: number;
+    FreeQuota?: number;
     /**
      * 指标单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricUnit: string;
+    MetricUnit?: string;
     /**
      * 免费量抵扣周期
   <li>sum-month:以月为单位抵扣</li>
@@ -3765,13 +3761,13 @@ export interface PackageFreeQuotaInfo {
   <li>totalize:总容量抵扣</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeductType: string;
+    DeductType?: string;
     /**
      * 免费量类型
   <li>basic:通用量抵扣</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreeQuotaType: string;
+    FreeQuotaType?: string;
 }
 /**
  * DescribeEnvFreeQuota返回参数结构体
@@ -3779,7 +3775,6 @@ export interface PackageFreeQuotaInfo {
 export interface DescribeEnvFreeQuotaResponse {
     /**
      * 免费抵扣配额详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QuotaItems?: Array<PostpayEnvQuota>;
     /**
@@ -4158,27 +4153,27 @@ export interface SmsFreeQuota {
      * 免费量总条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreeQuota: number;
+    FreeQuota?: number;
     /**
      * 共计已使用总条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalUsedQuota: number;
+    TotalUsedQuota?: number;
     /**
      * 免费周期起点，0000-00-00 00:00:00 形式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleStart: string;
+    CycleStart?: string;
     /**
      * 免费周期终点，0000-00-00 00:00:00 形式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleEnd: string;
+    CycleEnd?: string;
     /**
      * 今天已使用总条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TodayUsedQuota: number;
+    TodayUsedQuota?: number;
 }
 /**
  * CreateCloudBaseRunServerVersion返回参数结构体
@@ -4378,19 +4373,16 @@ export interface DescribeWxGatewaysResponse {
 export interface DescribeDownloadFileResponse {
     /**
      * 文件路径，该字段已废弃
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FilePath: string;
+    FilePath?: string;
     /**
      * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomKey: string;
+    CustomKey?: string;
     /**
      * 下载链接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4449,7 +4441,6 @@ export interface CloudBaseRunNfsVolumeSource {
 export interface DescribeSmsQuotasResponse {
     /**
      * 短信免费量信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SmsFreeQuotaList?: Array<SmsFreeQuota>;
     /**
@@ -4757,6 +4748,10 @@ export interface DescribeQuotaDataRequest {
   <li> TkeMemUsedPkgDay: 当天容器托管内存使用量，单位MB*秒 </li>
   <li> CodingBuildTimePkgDay: 当天容器托管构建时间使用量，单位毫秒 </li>
   <li> TkeHttpServiceNatPkgDay: 当天容器托管流量使用量，单位B </li>
+  <li> CynosdbCcupkg: 当月微信云托管MySQL CCU使用量，单位个  （需要除以1000）</li>
+  <li> CynosdbStoragepkg: 当月微信云托管MySQL 存储使用量，单位MB  （需要除以1000）</li>
+  <li> CynosdbCcupkgDay: 当天微信云托管MySQL 存储使用量，单位个 （需要除以1000） </li>
+  <li> CynosdbStoragepkgDay: 当天微信云托管MySQL 存储使用量，单位MB （需要除以1000） </li>
      */
     MetricName: string;
     /**
@@ -4770,7 +4765,6 @@ export interface DescribeQuotaDataRequest {
 export interface CreateStaticStoreResponse {
     /**
      * 创建静态资源结果(succ/fail)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
@@ -4840,19 +4834,19 @@ export interface StorageInfo {
      * 资源所属地域。
   当前支持ap-shanghai
      */
-    Region: string;
+    Region?: string;
     /**
      * 桶名，存储资源的唯一标识
      */
-    Bucket: string;
+    Bucket?: string;
     /**
      * cdn 域名
      */
-    CdnDomain: string;
+    CdnDomain?: string;
     /**
      * 资源所属用户的腾讯云appId
      */
-    AppId: string;
+    AppId?: string;
 }
 /**
  * DescribeCloudBaseRunVersionSnapshot请求参数结构体
@@ -4894,19 +4888,19 @@ export interface FreequotaInfo {
   <li>FLEXDB</li>
   <li>SCF</li>
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 资源指标名称
      */
-    ResourceMetric: string;
+    ResourceMetric?: string;
     /**
      * 资源指标免费量
      */
-    FreeQuota: number;
+    FreeQuota?: number;
     /**
      * 指标单位
      */
-    MetricUnit: string;
+    MetricUnit?: string;
     /**
      * 免费量抵扣周期
   <li>sum-month:以月为单位抵扣</li>
@@ -4914,13 +4908,13 @@ export interface FreequotaInfo {
   <li>totalize:总容量抵扣</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeductType: string;
+    DeductType?: string;
     /**
      * 免费量类型
   <li>basic:通用量抵扣</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FreeQuotaType: string;
+    FreeQuotaType?: string;
 }
 /**
  * TurnOnStandaloneGateway请求参数结构体
@@ -4946,24 +4940,23 @@ export interface DescribeUserActivityInfoResponse {
     /**
      * 自定义标记，1元钱裂变需求中即代指`团id`
      */
-    Tag: string;
+    Tag?: string;
     /**
      * 自定义备注，1元钱裂变需求中返回`团列表`，uin列表通过","拼接
      */
-    Notes: string;
+    Notes?: string;
     /**
      * 活动剩余时间，单位为s.1元钱裂变需求中即为 time(活动过期时间)-Now()), 过期后为0，即返回必为自然数
      */
-    ActivityTimeLeft: number;
+    ActivityTimeLeft?: number;
     /**
      * 拼团剩余时间，单位为s.1元钱裂变需求中即为time(成团时间)+24H-Now()，过期后为0，即返回必为自然数
      */
-    GroupTimeLeft: number;
+    GroupTimeLeft?: number;
     /**
      * 昵称列表,通过","拼接， 1元钱裂变活动中与Notes中uin一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NickNameList: string;
+    NickNameList?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4975,7 +4968,6 @@ export interface DescribeUserActivityInfoResponse {
 export interface DescribePostpayFreeQuotasResponse {
     /**
      * 免费量资源信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FreequotaInfoList?: Array<FreequotaInfo>;
     /**
@@ -5000,32 +4992,32 @@ export interface ActivityRecordItem {
      * 用户uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 活动id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActivityId: number;
+    ActivityId?: number;
     /**
      * 自定义状态码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 自定义子状态码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubStatus: string;
+    SubStatus?: string;
     /**
      * 整型子状态码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubStatusInt: number;
+    SubStatusInt?: number;
     /**
      * 是否软删除
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDeleted: boolean;
+    IsDeleted?: boolean;
 }
 /**
  * 合法域名
@@ -5034,31 +5026,31 @@ export interface AuthDomain {
     /**
      * 域名ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 域名类型。包含以下取值：
   <li>SYSTEM</li>
   <li>USER</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * 状态。包含以下取值：
   <li>ENABLE</li>
   <li>DISABLE</li>
      */
-    Status: string;
+    Status?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeCloudBaseProjectLatestVersionList请求参数结构体
@@ -5100,28 +5092,28 @@ export interface LogServiceInfo {
     /**
      * log名
      */
-    LogsetName: string;
+    LogsetName?: string;
     /**
      * log-id
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * topic名
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * topic-id
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * cls日志所属地域
      */
-    Region: string;
+    Region?: string;
     /**
      * topic保存时长 默认7天
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Period: number;
+    Period?: number;
 }
 /**
  * 安全网关版本路由信息限额配置
@@ -6050,7 +6042,9 @@ export interface ExtensionFileInfo {
      */
     UploadUrl: string;
     /**
-     * 自定义密钥。如果为空，则表示不需要加密
+     * 自定义密钥。如果为空，则表示不需要加密。
+  参考cos预签名url上传https://cloud.tencent.com/document/product/436/36121
+  上传的时候要按照 SSE-C 的方式设置header：https://cloud.tencent.com/document/product/436/7728
      */
     CustomKey: string;
     /**
@@ -6326,7 +6320,7 @@ export interface DescribeExtensionUploadInfoResponse {
     /**
      * 待上传文件的信息数组
      */
-    FilesData: Array<ExtensionFileInfo>;
+    FilesData?: Array<ExtensionFileInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6365,25 +6359,25 @@ export interface PostpayEnvQuota {
     /**
      * 资源类型
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 指标名
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 配额值
      */
-    Value: number;
+    Value?: number;
     /**
      * 配额生效时间
   为空表示没有时间限制
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 配额失效时间
   为空表示没有时间限制
      */
-    EndTime: string;
+    EndTime?: string;
 }
 /**
  * 安全网关请求自定义头部
@@ -6411,7 +6405,6 @@ export interface CustomRequestToAdd {
 export interface DescribePostpayPackageFreeQuotasResponse {
     /**
      * 免费量资源信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageFreeQuotaInfos?: Array<PackageFreeQuotaInfo>;
     /**

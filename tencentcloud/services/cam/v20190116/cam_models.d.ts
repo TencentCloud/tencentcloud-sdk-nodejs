@@ -448,7 +448,7 @@ export interface DescribeUserSAMLConfigResponse {
      */
     SAMLMetadata?: string;
     /**
-     * 状态：0:未设置，1:已开启，2:已禁用
+     * 状态：0:未设置，11:已开启，2:已禁用
      */
     Status?: number;
     /**
@@ -1519,47 +1519,47 @@ export interface DescribeUserOIDCConfigResponse {
     /**
      * 身份提供商类型。 12：用户OIDC身份提供商
      */
-    ProviderType: number;
+    ProviderType?: number;
     /**
      * 身份提供商URL
      */
-    IdentityUrl: string;
+    IdentityUrl?: string;
     /**
      * 签名公钥
      */
-    IdentityKey: string;
+    IdentityKey?: string;
     /**
      * 客户端id
      */
-    ClientId: string;
+    ClientId?: string;
     /**
      * 状态：0:未设置，11:已开启，2:已禁用
      */
-    Status: number;
+    Status?: number;
     /**
      * 授权请求Endpoint
      */
-    AuthorizationEndpoint: string;
+    AuthorizationEndpoint?: string;
     /**
      * 授权请求Scope
      */
-    Scope: Array<string>;
+    Scope?: Array<string>;
     /**
      * 授权请求Response type
      */
-    ResponseType: string;
+    ResponseType?: string;
     /**
      * 授权请求Response mode
      */
-    ResponseMode: string;
+    ResponseMode?: string;
     /**
      * 映射字段名称
      */
-    MappingFiled: string;
+    MappingFiled?: string;
     /**
      * 描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -312,6 +312,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
+     * 获取环境下主题列表
+     */
+    async GetTopicList(req, cb) {
+        return this.request("GetTopicList", req, cb);
+    }
+    /**
      * 删除集群
      */
     async DeleteCluster(req, cb) {

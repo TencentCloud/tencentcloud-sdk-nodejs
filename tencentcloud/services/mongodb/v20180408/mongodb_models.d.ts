@@ -123,7 +123,7 @@ export interface CreateDBInstanceHourRequest {
      */
     EngineVersion: string;
     /**
-     * 实例类型，GIO：高IO版；TGIO：高IO万兆
+     * 实例类型，HIO10G：高IO万兆。
      */
     Machine: string;
     /**
@@ -135,7 +135,7 @@ export interface CreateDBInstanceHourRequest {
      */
     Zone: string;
     /**
-     * 实例角色，支持值包括：MASTER-表示主实例，DR-表示灾备实例，RO-表示只读实例
+     * 实例角色，默认传MASTER即可
      */
     InstanceRole: string;
     /**
@@ -162,6 +162,14 @@ export interface CreateDBInstanceHourRequest {
      * 安全组参数
      */
     SecurityGroup?: Array<string>;
+    /**
+     * 私有网络ID，如果不传则默认选择基础网络
+     */
+    UniqVpcId?: string;
+    /**
+     * 私有网络下的子网ID，如果设置了 VpcId，则 SubnetId必填
+     */
+    UniqSubnetId?: string;
 }
 /**
  * AssignProject请求参数结构体
@@ -264,15 +272,15 @@ export interface SpecificationInfo {
     /**
      * 地域信息
      */
-    Region: string;
+    Region?: string;
     /**
      * 可用区信息
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 售卖规格信息
      */
-    SpecItems: Array<SpecItem>;
+    SpecItems?: Array<SpecItem>;
 }
 /**
  * 实例详情
@@ -388,27 +396,22 @@ export interface MongoDBInstanceDetail {
     ReplicaSets?: Array<MongodbShardInfo>;
     /**
      * 只读实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadonlyInstances?: Array<MongoDBInstance>;
     /**
      * 灾备实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StandbyInstances?: Array<MongoDBInstance>;
     /**
      * 临时实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloneInstances?: Array<MongoDBInstance>;
     /**
      * 关联实例信息，对于正式实例，该字段表示它的临时实例信息；对于临时实例，则表示它的正式实例信息;如果为只读/灾备实例,则表示他的主实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RelatedInstance?: MongoDBInstance;
     /**
      * 实例标签信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<TagInfo>;
     /**
@@ -660,12 +663,10 @@ export interface RenameInstanceResponse {
 export interface DescribeClientConnectionsResponse {
     /**
      * 客户端连接信息，包括客户端IP和对应IP的连接数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Clients?: Array<ClientConnection>;
     /**
      * 连接数总结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -780,86 +781,107 @@ export interface MongodbShardInfo {
 export interface SpecItem {
     /**
      * 规格信息标识
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecCode: string;
     /**
      * 规格有效标志，取值：0-停止售卖，1-开放售卖
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: number;
     /**
      * 机器类型，取值：0-HIO，4-HIO10G
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineType: string;
     /**
      * cpu核心数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu: number;
     /**
      * 内存规格，单位为MB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Memory: number;
     /**
      * 默认磁盘规格，单位MB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultStorage: number;
     /**
      * 最大磁盘规格，单位MB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxStorage: number;
     /**
      * 最小磁盘规格，单位MB
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinStorage: number;
     /**
      * 可承载qps信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qps: number;
     /**
      * 连接数限制
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Conns: number;
     /**
      * 实例mongodb版本信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoVersionCode: string;
     /**
      * 实例mongodb版本号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoVersionValue: number;
     /**
      * 实例mongodb版本号（短）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version: string;
     /**
      * 存储引擎
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineName: string;
     /**
      * 集群类型，取值：1-分片集群，0-副本集集群
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType: number;
     /**
      * 最小副本集从节点数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinNodeNum: number;
     /**
      * 最大副本集从节点数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxNodeNum: number;
     /**
      * 最小分片数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinReplicateSetNum: number;
     /**
      * 最大分片数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxReplicateSetNum: number;
     /**
      * 最小分片从节点数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinReplicateSetNodeNum: number;
     /**
      * 最大分片从节点数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxReplicateSetNodeNum: number;
 }

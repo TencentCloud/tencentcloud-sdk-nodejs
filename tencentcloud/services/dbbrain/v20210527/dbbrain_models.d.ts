@@ -86,9 +86,13 @@ export interface DescribeRedisTopKeyPrefixListRequest {
      */
     Product: string;
     /**
-     * 查询数目，默认为20，最大值为100。
+     * 查询数目，默认为20，最大值为500。
      */
     Limit?: number;
+    /**
+     * 分片ID数组。
+     */
+    ShardIds?: Array<number | bigint>;
 }
 /**
  * 健康报告任务详情。
@@ -3788,11 +3792,11 @@ export interface DescribeRedisTopKeyPrefixListResponse {
     /**
      * top key前缀列表。
      */
-    Items: Array<RedisPreKeySpaceData>;
+    Items?: Array<RedisPreKeySpaceData>;
     /**
      * 采集时间戳（秒）。
      */
-    Timestamp: number;
+    Timestamp?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

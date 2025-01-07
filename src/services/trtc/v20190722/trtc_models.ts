@@ -915,12 +915,10 @@ export interface DescribeWebRecordResponse {
   Status?: number
   /**
    * 在使用RecordId查询时返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
    * 在使用TaskId查询时返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordId?: string
   /**
@@ -2889,7 +2887,7 @@ export interface OutputParams {
  */
 export interface DeleteBasicModerationRequest {
   /**
-   * TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。
+   * TRTC的SDKAppId，和TRTC的房间所使用的SDKAppId相同。
    */
   SdkAppId: number
   /**
@@ -4100,7 +4098,7 @@ export interface RemoveUserByStrRoomIdRequest {
  */
 export interface DeleteBasicModerationResponse {
   /**
-   * 审核任务的唯一Id，在启动审核任务成功后会返回。
+   * 审核任务的唯一Id。
    */
   TaskId?: string
   /**

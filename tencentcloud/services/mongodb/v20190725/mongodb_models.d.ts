@@ -222,7 +222,6 @@ export interface CreateBackupDBInstanceResponse {
 export interface DBInstancePrice {
     /**
      * 单价
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPrice: number;
     /**
@@ -419,19 +418,19 @@ export interface SlowLogPattern {
     /**
      * 慢日志模式
      */
-    Pattern: string;
+    Pattern?: string;
     /**
      * 最大执行时间
      */
-    MaxTime: number;
+    MaxTime?: number;
     /**
      * 平均执行时间
      */
-    AverageTime: number;
+    AverageTime?: number;
     /**
      * 该模式慢日志条数
      */
-    Total: number;
+    Total?: number;
 }
 /**
  * AssignProject返回参数结构体
@@ -948,7 +947,6 @@ export interface DescribeSlowLogsResponse {
     Count?: number;
     /**
      * 慢日志详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SlowLogs?: Array<string>;
     /**
@@ -999,22 +997,18 @@ export interface BackupInfo {
     BackupName?: string;
     /**
      * 备份备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupDesc?: string;
     /**
      * 备份文件大小，单位KB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupSize?: number;
     /**
      * 备份开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 备份结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
@@ -1035,7 +1029,6 @@ export interface BackupInfo {
     DeleteTime?: string;
     /**
      * 异地备份地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupRegion?: string;
 }
@@ -1626,12 +1619,10 @@ export interface DescribeInstanceParamsRequest {
 export interface NodeTag {
     /**
      * 节点Tag key
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey?: string;
     /**
      * 节点Tag Value
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue?: string;
 }
@@ -1739,9 +1730,8 @@ export interface ClientConnection {
 export interface ReplicateSetInfo {
     /**
      * 节点属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Nodes: Array<NodeProperty>;
+    Nodes?: Array<NodeProperty>;
 }
 /**
  * DescribeDBInstanceDeal请求参数结构体
@@ -1878,13 +1868,12 @@ export interface SecurityGroupBound {
 export interface DescribeDBInstanceNodePropertyResponse {
     /**
      * Mongos节点属性。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mongos: Array<NodeProperty>;
+    Mongos?: Array<NodeProperty>;
     /**
      * 副本集节点信息。
      */
-    ReplicateSets: Array<ReplicateSetInfo>;
+    ReplicateSets?: Array<ReplicateSetInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1896,42 +1885,34 @@ export interface DescribeDBInstanceNodePropertyResponse {
 export interface DescribeDBInstanceParamTplDetailResponse {
     /**
      * 枚举类参数详情列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceEnumParams?: Array<InstanceEnumParam>;
     /**
      * 整形参数详情列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIntegerParams?: Array<InstanceIntegerParam>;
     /**
      * 文本参数详情列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTextParams?: Array<InstanceTextParam>;
     /**
      * 多值参数详情列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceMultiParams?: Array<InstanceMultiParam>;
     /**
      * 参数总个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 模板适配实例版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoVersion?: string;
     /**
      * 模板适配集群类型，副本集或分片。。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType?: string;
     /**
      * 参数模板名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TplName?: string;
     /**
@@ -2016,44 +1997,53 @@ export interface BackupDownloadTask {
     /**
      * 任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 备份文件名
      */
-    BackupName: string;
+    BackupName?: string;
     /**
      * 分片名称
      */
-    ReplicaSetId: string;
+    ReplicaSetId?: string;
     /**
      * 备份数据大小，单位为字节
      */
-    BackupSize: number;
+    BackupSize?: number;
     /**
      * 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
      */
-    Status: number;
+    Status?: number;
     /**
      * 任务进度百分比
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 耗时，单位为秒
      */
-    TimeSpend: number;
+    TimeSpend?: number;
     /**
      * 备份数据下载链接
      */
-    Url: string;
+    Url?: string;
     /**
      * 备份文件备份类型，0-逻辑备份，1-物理备份
      */
-    BackupMethod: number;
+    BackupMethod?: number;
     /**
      * 发起备份时指定的备注信息
+     */
+    BackupDesc?: string;
+    /**
+     * 地区信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupDesc: string;
+    Region?: string;
+    /**
+     * Bucket信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bucket?: string;
 }
 /**
  * DescribeDBBackups请求参数结构体
@@ -2101,35 +2091,35 @@ export interface ShardInfo {
     /**
      * 分片已使用容量
      */
-    UsedVolume: number;
+    UsedVolume?: number;
     /**
      * 分片ID
      */
-    ReplicaSetId: string;
+    ReplicaSetId?: string;
     /**
      * 分片名
      */
-    ReplicaSetName: string;
+    ReplicaSetName?: string;
     /**
      * 分片内存规格，单位为MB
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 分片磁盘规格，单位为MB
      */
-    Volume: number;
+    Volume?: number;
     /**
      * 分片Oplog大小，单位为MB
      */
-    OplogSize: number;
+    OplogSize?: number;
     /**
      * 分片从节点数
      */
-    SecondaryNum: number;
+    SecondaryNum?: number;
     /**
      * 分片物理id
      */
-    RealReplicaSetId: string;
+    RealReplicaSetId?: string;
 }
 /**
  * SetBackupRules返回参数结构体
@@ -2309,59 +2299,52 @@ export interface SetAccountUserPrivilegeRequest {
 export interface NodeProperty {
     /**
      * 节点所在的可用区。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 节点名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeName: string;
+    NodeName?: string;
     /**
      * 节点访问地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
+    /**
+     * 节点公网访问地址(IP或域名)。
+     */
+    WanServiceAddress?: string;
     /**
      * 角色。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Role: string;
+    Role?: string;
     /**
      * 是否为Hidden节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Hidden: boolean;
+    Hidden?: boolean;
     /**
      * 节点状态，包括：ORMAL/STARTUP/RECOVERING/STARTUP2/UNKNOWN/DOWN/ROLLBACK/REMOVED等。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 主从延迟，单位秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlaveDelay: number;
+    SlaveDelay?: number;
     /**
      * 节点优先级。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Priority: number;
+    Priority?: number;
     /**
      * 节点投票权。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Votes: number;
+    Votes?: number;
     /**
      * 节点标签。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<NodeTag>;
+    Tags?: Array<NodeTag>;
     /**
      * 副本集Id。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReplicateSetId: string;
+    ReplicateSetId?: string;
 }
 /**
  * KillOps返回参数结构体
@@ -2768,32 +2751,26 @@ export interface OfflineIsolatedDBInstanceRequest {
 export interface KMSInfoDetail {
     /**
      * 主密钥 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyId?: string;
     /**
      * 主密钥名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyName?: string;
     /**
      * 实例与密钥绑定时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 密钥状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 密钥用途。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyUsage?: string;
     /**
      * 密钥来源。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyOrigin?: string;
     /**
@@ -2928,12 +2905,10 @@ export interface DescribeInstanceParamsResponse {
 export interface DescribeDBInstanceParamTplResponse {
     /**
      * 参数模板列表信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ParamTpls?: Array<ParamTpl>;
     /**
      * 参数模板总数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -3192,47 +3167,38 @@ export interface InstanceDetail {
     RealInstanceId?: string;
     /**
      * 实例当前可用区信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneList?: Array<string>;
     /**
      * mongos节点个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongosNodeNum?: number;
     /**
      * mongos节点内存。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongosMemory?: number;
     /**
      * mongos节点CPU核数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongosCpuNum?: number;
     /**
      * Config Server节点个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigServerNodeNum?: number;
     /**
      * Config Server节点内存。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigServerMemory?: number;
     /**
      * Config Server节点磁盘大小。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigServerVolume?: number;
     /**
      * Config Server节点CPU核数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigServerCpuNum?: number;
     /**
      * readonly节点个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadonlyNodeNum?: number;
 }

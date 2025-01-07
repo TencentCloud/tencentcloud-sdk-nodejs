@@ -98,6 +98,16 @@ it("lkeap.v20240522.DeleteQAs", async function () {
     }
 })
 
+it("lkeap.v20240522.QueryRewrite", async function () {
+    try {
+       const data = await client.QueryRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lkeap.v20240522.GetEmbedding", async function () {
     try {
        const data = await client.GetEmbedding({})
