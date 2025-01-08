@@ -3574,7 +3574,7 @@ export interface DescribeTargetHealthResponse {
    * 负载均衡实例列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoadBalancers: Array<LoadBalancerHealth>
+  LoadBalancers?: Array<LoadBalancerHealth>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3624,6 +3624,19 @@ export interface CreateTargetGroupRequest {
    * 目标组绑定的后端服务器
    */
   TargetGroupInstances?: Array<TargetGroupInstance>
+  /**
+   * 标签。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 后端服务默认权重。
+<ul>
+    <li>取值范围[0, 100]</li>
+    <li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li>
+</ul>
+
+   */
+  Weight?: number
 }
 
 /**
@@ -4658,6 +4671,14 @@ export interface ModifyTargetGroupAttributeRequest {
    * 目标组的新默认端口。
    */
   Port?: number
+  /**
+   * 后端服务默认权重。
+<ul>
+    <li>取值范围[0, 100]</li>
+    <li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li> 
+</ul>
+   */
+  Weight?: number
 }
 
 /**

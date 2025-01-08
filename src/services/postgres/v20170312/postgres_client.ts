@@ -52,6 +52,7 @@ import {
   RemoveDBInstanceFromReadOnlyGroupRequest,
   CreateAccountRequest,
   InitDBInstancesResponse,
+  DescribeMaintainTimeWindowResponse,
   DescribeDefaultParametersRequest,
   DescribeDedicatedClustersResponse,
   RenewInstanceRequest,
@@ -85,7 +86,7 @@ import {
   DescribeOrdersResponse,
   DescribeBackupDownloadURLResponse,
   OpenServerlessDBExtranetAccessResponse,
-  ModifyParameterTemplateRequest,
+  ModifyMaintainTimeWindowResponse,
   InquiryPriceCreateDBInstancesResponse,
   Version,
   CreateDBInstanceNetworkAccessRequest,
@@ -101,6 +102,7 @@ import {
   UpgradeDBInstanceRequest,
   DescribeZonesRequest,
   SpecInfo,
+  ModifyMaintainTimeWindowRequest,
   ModifyBackupDownloadRestrictionResponse,
   ParamVersionRelation,
   DescribeLogBackupsRequest,
@@ -120,6 +122,7 @@ import {
   ModifyDBInstanceHAConfigRequest,
   PgDeal,
   DeleteReadOnlyGroupNetworkAccessResponse,
+  DescribeMaintainTimeWindowRequest,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
   DBBackup,
@@ -158,6 +161,7 @@ import {
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   EncryptionKey,
+  ModifyParameterTemplateRequest,
   DeleteAccountRequest,
   UpgradeDBInstanceKernelVersionResponse,
   InquiryPriceRenewDBInstanceResponse,
@@ -371,6 +375,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DescribeMaintainTimeWindow) 用于查询实例的维护时间窗口
+   */
+  async DescribeMaintainTimeWindow(
+    req: DescribeMaintainTimeWindowRequest,
+    cb?: (error: string, rep: DescribeMaintainTimeWindowResponse) => void
+  ): Promise<DescribeMaintainTimeWindowResponse> {
+    return this.request("DescribeMaintainTimeWindow", req, cb)
+  }
+
+  /**
    * 查询专属集群
    */
   async DescribeDedicatedClusters(
@@ -438,6 +452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
   ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
     return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+   */
+  async ModifyMaintainTimeWindow(
+    req: ModifyMaintainTimeWindowRequest,
+    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
+  ): Promise<ModifyMaintainTimeWindowResponse> {
+    return this.request("ModifyMaintainTimeWindow", req, cb)
   }
 
   /**

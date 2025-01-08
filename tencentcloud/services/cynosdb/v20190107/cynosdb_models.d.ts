@@ -5492,6 +5492,10 @@ export interface BizTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>;
+    /**
+     * 任务进度信息
+     */
+    TaskProgressInfo?: TaskProgressInfo;
 }
 /**
  * DescribeRollbackTimeRange请求参数结构体
@@ -6728,6 +6732,10 @@ export interface RollbackToNewClusterRequest {
      * 原ro实例信息
      */
     OriginalROInstanceList?: Array<string>;
+    /**
+     * 项目id
+     */
+    ProjectId?: number;
 }
 /**
  * Binlog描述
@@ -8153,6 +8161,10 @@ export interface DescribeInstanceSlowQueriesRequest {
      * 排序类型，可选值：asc,desc
      */
     OrderByType?: string;
+    /**
+     * sql语句
+     */
+    SqlText?: string;
 }
 /**
  * ModifyResourcePackageClusters返回参数结构体
@@ -9717,6 +9729,23 @@ export interface ModifyInstanceParamResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 任务进度查询
+ */
+export interface TaskProgressInfo {
+    /**
+     * 当前步骤
+     */
+    CurrentStep?: string;
+    /**
+     * 当前进度
+     */
+    CurrentStepProgress?: number;
+    /**
+     * 预估时间
+     */
+    CurrentStepRemainingTime?: string;
 }
 /**
  * 参数模板详情

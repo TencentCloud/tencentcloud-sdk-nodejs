@@ -50,6 +50,7 @@ import {
   CreateWxCloudBaseRunServerDBClusterResponse,
   ReplaceActivityRecordResponse,
   DescribeSpecialCostItemsRequest,
+  TurnOnStandaloneGatewayRequest,
   CreatePostpayPackageRequest,
   DescribeWxCloudBaseRunSubNetsRequest,
   ModifyEndUserRequest,
@@ -213,7 +214,7 @@ import {
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
   FreequotaInfo,
-  TurnOnStandaloneGatewayRequest,
+  CloudBaseRunVersionPod,
   DescribeUserActivityInfoResponse,
   DescribePostpayFreeQuotasResponse,
   ModifyGatewayVersionTrafficResponse,
@@ -1162,7 +1163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云应用服务版本容器列表
+   * 查询云托管服务版本容器列表
    */
   async DescribeCloudBaseRunPodList(
     req: DescribeCloudBaseRunPodListRequest,

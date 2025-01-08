@@ -3127,6 +3127,10 @@ export interface DescribeSyncJobsRequest {
      */
     JobId?: string;
     /**
+     * 同步任务id列表，如sync-werwfs23
+     */
+    JobIds?: Array<string>;
+    /**
      * 同步任务名
      */
     JobName?: string;
@@ -3166,6 +3170,14 @@ export interface DescribeSyncJobsRequest {
      * tag
      */
     TagFilters?: Array<TagFilter>;
+    /**
+     * 源端数据库连接信息，可以输入实例ID或者IP等
+     */
+    SrcInfoPattern?: string;
+    /**
+     * 目标端数据库连接信息，可以输入实例ID或者IP等
+     */
+    DstInfoPattern?: string;
 }
 /**
  * 同步任务的步骤信息
@@ -3981,7 +3993,10 @@ export interface EndpointItem {
      */
     CcnOwnerUin?: string;
     /**
-     * 为业务添加的额外信息。参数名作key，参数值作value。 tdpg必填参数：PgDatabase-订阅的库名。
+     * 为业务添加的额外信息。参数名作key，参数值作value。
+  tdpg必填参数：PgDatabase-订阅的库名；
+  mongo选填参数：InstanceType-实例类型：replicaset-副本集，cluster-分片集，主要用于控制台跳转到mongo实例页面，如不填不影响任务运行；
+  全业务选填参数：EngineVersion-内核版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraAttr?: Array<KeyValuePairOption>;
@@ -5281,6 +5296,10 @@ export interface DescribeSubscribeJobsRequest {
      * 订阅 ID 筛选，精确匹配
      */
     SubscribeId?: string;
+    /**
+     * 订阅 ID 筛选，精确匹配
+     */
+    SubscribeIds?: Array<string>;
     /**
      * 订阅名称，前缀模糊匹配
      */

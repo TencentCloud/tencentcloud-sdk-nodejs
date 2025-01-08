@@ -1482,7 +1482,7 @@ export interface GetRoomEventRequest {
      */
     Page: number;
     /**
-     * 每页个数。keyword为空时有效。一次性最多200条。
+     * 每页个数。keyword为空时有效。一次性最多100条。
      */
     Limit: number;
     /**

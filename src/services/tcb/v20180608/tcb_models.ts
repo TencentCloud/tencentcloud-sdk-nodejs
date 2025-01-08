@@ -143,19 +143,16 @@ export interface OrderInfo {
   PayMode?: string
   /**
    * 订单绑定的扩展ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtensionId?: string
   /**
    * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceReady?: string
   /**
    * 安装标记。建议使用方统一转大小写之后再判断。
 <li>QuickStart：快速启动来源</li>
 <li>Activity：活动来源</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Flag?: string
   /**
@@ -216,12 +213,10 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 export interface CbrPackageInfo {
   /**
    * 代码包名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
    * 代码包版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageVersion?: string
 }
@@ -603,6 +598,23 @@ export interface DescribeEndUsersRequest {
  */
 export interface DescribeCloudBaseRunPodListResponse {
   /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodList?: Array<CloudBaseRunVersionPod>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -875,6 +887,24 @@ export interface DescribeSpecialCostItemsRequest {
    * 查询结束时间
    */
   EndTime?: string
+}
+
+/**
+ * TurnOnStandaloneGateway请求参数结构体
+ */
+export interface TurnOnStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 网关名称
+   */
+  GatewayName: string
+  /**
+   * 服务名称列表
+   */
+  ServiceNameList: Array<string>
 }
 
 /**
@@ -1275,14 +1305,17 @@ export interface DescribeCloudBaseRunServerRequest {
 export interface CloudBaseRunEmptyDirVolumeSource {
   /**
    * 启用emptydir数据卷
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableEmptyDirVolume?: boolean
   /**
    * "","Memory","HugePages"
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Medium?: string
   /**
    * emptydir数据卷大小
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SizeLimit?: string
 }
@@ -1738,50 +1771,41 @@ export interface FreezeCloudBaseRunServersRequest {
 export interface BaasPackageInfo {
   /**
    * DAU产品套餐ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
    * DAU套餐中文名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageTitle?: string
   /**
    * 套餐分组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 套餐分组中文名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupTitle?: string
   /**
    * json格式化计费标签，例如：
 {"pid":2, "cids":{"create": 2, "renew": 2, "modify": 2}, "productCode":"p_tcb_mp", "subProductCode":"sp_tcb_mp_cloudbase_dau"}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BillTags?: string
   /**
    * json格式化用户资源限制，例如：
 {"Qps":1000,"InvokeNum":{"TimeUnit":"m", "Unit":"万次", "MaxSize": 100},"Capacity":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "Cdn":{"Flux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}, "BackFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100}},"Scf":{"Concurrency":1000,"OutFlux":{"TimeUnit":"m", "Unit":"GB", "MaxSize": 100},"MemoryUse":{"TimeUnit":"m", "Unit":"WGBS", "MaxSize": 100000}}}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceLimit?: string
   /**
    * json格式化高级限制，例如：
 {"CMSEnable":false,"ProvisionedConcurrencyMem":512000, "PictureProcessing":false, "SecurityAudit":false, "RealTimePush":false, "TemplateMessageBatchPush":false, "Payment":false}
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvanceLimit?: string
   /**
    * 套餐描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageDescription?: string
   /**
    * 是否对外展示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsExternal?: boolean
 }
@@ -2353,7 +2377,6 @@ export interface DescribeEnvPostpaidDeductRequest {
 export interface CustomHeader {
   /**
    * 请求添加头部配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestToAddList?: Array<CustomRequestToAdd>
 }
@@ -2409,18 +2432,14 @@ export interface DescribeEnvFreeQuotaRequest {
 
 /**
  * cloudrun安全特性能力
-
-
  */
 export interface CloudBaseCapabilities {
   /**
    * 启用安全能力项列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Add?: Array<string>
   /**
    * 禁用安全能力向列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Drop?: Array<string>
 }
@@ -2431,17 +2450,14 @@ export interface CloudBaseCapabilities {
 export interface CbrRepoInfo {
   /**
    * 仓库名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Repo?: string
   /**
    * 仓库平台
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoType?: string
   /**
    * 仓库语言
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoLanguage?: string
   /**
@@ -2626,37 +2642,30 @@ export interface ModifyDatabaseACLResponse {
 export interface CloudBaseEsInfo {
   /**
    * es的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * secret名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretName?: string
   /**
    * ip地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * 端口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 索引
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Index?: string
   /**
    * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Account?: string
   /**
    * 密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
 }
@@ -2667,34 +2676,28 @@ export interface CloudBaseEsInfo {
 export interface PostPaidEnvDeductInfo {
   /**
    * 资源方
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 指标名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricName: string
+  MetricName?: string
   /**
    * 按量计费详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResQuota: number
+  ResQuota?: number
   /**
    * 资源包抵扣详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PkgQuota: number
+  PkgQuota?: number
   /**
    * 免费额度抵扣详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  FreeQuota: number
+  FreeQuota?: number
   /**
    * 环境id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  EnvId?: string
 }
 
 /**
@@ -2720,12 +2723,12 @@ export interface DescribeCloudBaseRunOperationTypesResponse {
    * 操作类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Action: Array<string>
+  Action?: Array<string>
   /**
    * 服务名列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerName: Array<string>
+  ServerName?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2738,22 +2741,18 @@ export interface DescribeCloudBaseRunOperationTypesResponse {
 export interface SpecialCostItem {
   /**
    * 上报日期
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportDate?: string
   /**
    * 腾讯云uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 资源id:环境id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvId?: string
   /**
    * 上报任务状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
 }
@@ -2819,84 +2818,68 @@ export interface EnvInfo {
   Functions?: Array<FunctionInfo>
   /**
    * tcb产品套餐ID，参考DescribePackages接口的返回值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageId?: string
   /**
    * 套餐中文名称，参考DescribePackages接口的返回值。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
    * 云日志服务列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogServices?: Array<LogServiceInfo>
   /**
    * 静态资源信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StaticStorages?: Array<StaticStorageInfo>
   /**
    * 是否到期自动降为免费版
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAutoDegrade?: boolean
   /**
    * 环境渠道
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvChannel?: string
   /**
    * 支付方式。包含以下取值：
 <li> prepayment：预付费</li>
 <li> postpaid：后付费</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 是否为默认环境
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefault?: boolean
   /**
    * 环境所属地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 环境标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 自定义日志服务
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomLogServices?: Array<ClsInfo>
   /**
    * 环境类型：baas, run, hoting, weda
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvType?: string
   /**
    * 是否是dau新套餐
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDauPackage?: boolean
   /**
    * 套餐类型:空\baas\tcbr
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageType?: string
   /**
    * 架构类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ArchitectureType?: string
   /**
    * 回收标志，默认为空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Recycle?: string
 }
@@ -2965,52 +2948,42 @@ export interface DescribeCloudBaseProjectVersionListRequest {
 export interface CodeSource {
   /**
    * 类型, 可能的枚举: "coding","package","package_url","github","gitlab","gitee","rawcode"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * 下载链接
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**
    * 名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 工作目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkDir?: string
   /**
    * code包名, type为coding的时候需要填写
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodingPackageName?: string
   /**
    * coding版本名, type为coding的时候需要填写
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodingPackageVersion?: string
   /**
    * 源码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RawCode?: string
   /**
    * 代码分支
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Branch?: string
   /**
    * coding项目ID，type为coding时需要填写
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * coding项目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
 }
@@ -3563,12 +3536,10 @@ export interface DeleteWxGatewayRouteResponse {
 export interface DescribeCloudBaseProjectVersionListResponse {
   /**
    * 版本列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectVersions?: Array<CloudBaseProjectVersion>
   /**
    * 总个数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -3817,19 +3788,16 @@ export interface DescribeWxGatewaysRequest {
 export interface CloudBaseRunKVPriority {
   /**
    * 参数的Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  Key?: string
   /**
    * 参数的Value
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 优先级
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Priority: number
+  Priority?: number
 }
 
 /**
@@ -3860,37 +3828,37 @@ export interface CloudBaseRunVpcSubnet {
    * 子网id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
   /**
    * 子网的ipv4
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cidr: string
+  Cidr?: string
   /**
    * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * subnet类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Target: string
+  Target?: string
   /**
    * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -3903,22 +3871,18 @@ export interface PackageFreeQuotaInfo {
 <li>CDN</li>
 <li>FLEXDB</li>
 <li>SCF</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
   /**
    * 资源指标名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceMetric?: string
   /**
    * 资源指标免费量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeQuota?: number
   /**
    * 指标单位
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricUnit?: string
   /**
@@ -3926,13 +3890,11 @@ export interface PackageFreeQuotaInfo {
 <li>sum-month:以月为单位抵扣</li>
 <li>sum-day:以天为单位抵扣</li>
 <li>totalize:总容量抵扣</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductType?: string
   /**
    * 免费量类型
 <li>basic:通用量抵扣</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeQuotaType?: string
 }
@@ -3957,7 +3919,6 @@ export interface DescribeEnvFreeQuotaResponse {
 export interface CreateAndDeployCloudBaseProjectResponse {
   /**
    * 环境Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvId?: string
   /**
@@ -3972,27 +3933,22 @@ export interface CreateAndDeployCloudBaseProjectResponse {
 export interface StaticStorageInfo {
   /**
    * 静态CDN域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StaticDomain?: string
   /**
    * 静态CDN默认文件夹，当前为根目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultDirName?: string
   /**
    * 资源状态(process/online/offline/init)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * cos所属区域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * bucket信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Bucket?: string
 }
@@ -4224,7 +4180,7 @@ export interface DatabasesInfo {
   /**
    * 数据库唯一标识
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 状态。包含以下取值：
 <li>INITIALIZING：资源初始化中</li>
@@ -4232,17 +4188,16 @@ export interface DatabasesInfo {
 <li>UNUSABLE：禁用，不可用</li>
 <li>OVERDUE：资源过期</li>
    */
-  Status: string
+  Status?: string
   /**
    * 所属地域。
 当前支持ap-shanghai
    */
-  Region: string
+  Region?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -4337,27 +4292,22 @@ export interface DescribeDatabaseACLRequest {
 export interface SmsFreeQuota {
   /**
    * 免费量总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeQuota?: number
   /**
    * 共计已使用总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalUsedQuota?: number
   /**
    * 免费周期起点，0000-00-00 00:00:00 形式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStart?: string
   /**
    * 免费周期终点，0000-00-00 00:00:00 形式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleEnd?: string
   /**
    * 今天已使用总条数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TodayUsedQuota?: number
 }
@@ -4397,7 +4347,6 @@ export interface CloudBaseRunServerVersionItem {
   VersionName?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -4406,42 +4355,34 @@ export interface CloudBaseRunServerVersionItem {
   FlowRatio?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
   /**
    * 构建ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildId?: number
   /**
    * 构建方式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UploadType?: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * url中的参数路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UrlParam?: ObjectKV
   /**
    * 优先级（数值越小，优先级越高）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Priority?: number
   /**
    * 是否是默认兜底版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefaultPriority?: boolean
   /**
@@ -4451,32 +4392,26 @@ export interface CloudBaseRunServerVersionItem {
   FlowParams?: Array<CloudBaseRunKVPriority>
   /**
    * 最小副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinReplicas?: number
   /**
    * 最大副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxReplicas?: number
   /**
    * 操作记录id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RunId?: string
   /**
    * 进度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
   /**
    * 当前副本数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentReplicas?: number
   /**
    * Monolithic，Microservice
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Architecture?: string
 }
@@ -4487,17 +4422,14 @@ export interface CloudBaseRunServerVersionItem {
 export interface PlatformStatistic {
   /**
    * 终端用户从属平台
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Platform?: string
   /**
    * 平台终端用户数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
 }
@@ -4526,12 +4458,10 @@ export interface DeleteCloudBaseProjectLatestVersionRequest {
 export interface DescribeCloudBaseProjectLatestVersionListResponse {
   /**
    * 项目列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectList?: Array<CloudBaseProjectVersion>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
@@ -4606,27 +4536,22 @@ export interface StandaloneGatewayPackageInfo {
 export interface CloudBaseRunNfsVolumeSource {
   /**
    * NFS挂载Server
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Server?: string
   /**
    * Server路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
    * 是否只读
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadOnly?: boolean
   /**
    * secret名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretName?: string
   /**
    * 临时目录
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableEmptyDirVolume?: boolean
 }
@@ -4662,7 +4587,13 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
 /**
  * 主机路径挂载参数
  */
-export type CloudBaseRunServiceVolumeHostPath = null
+export interface CloudBaseRunServiceVolumeHostPath {
+  /**
+   * 主机路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+}
 
 /**
  * DescribeCurveData请求参数结构体
@@ -5117,33 +5048,41 @@ export interface FreequotaInfo {
 <li>sum-month:以月为单位抵扣</li>
 <li>sum-day:以天为单位抵扣</li>
 <li>totalize:总容量抵扣</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeductType?: string
   /**
    * 免费量类型
 <li>basic:通用量抵扣</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeQuotaType?: string
 }
 
 /**
- * TurnOnStandaloneGateway请求参数结构体
+ * pod信息
  */
-export interface TurnOnStandaloneGatewayRequest {
+export interface CloudBaseRunVersionPod {
   /**
-   * 环境ID
+   * webshell链接
    */
-  EnvId: string
+  Webshell?: string
   /**
-   * 网关名称
+   * pod name
    */
-  GatewayName: string
+  PodId?: string
   /**
-   * 服务名称列表
+   * pod ip
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceNameList: Array<string>
+  PodIp?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -5206,32 +5145,26 @@ export interface ModifyGatewayVersionTrafficResponse {
 export interface ActivityRecordItem {
   /**
    * 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 活动id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityId?: number
   /**
    * 自定义状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 自定义子状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatus?: string
   /**
    * 整型子状态码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatusInt?: number
   /**
    * 是否软删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDeleted?: boolean
 }
@@ -5330,7 +5263,6 @@ export interface LogServiceInfo {
   Region?: string
   /**
    * topic保存时长 默认7天
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: number
 }
@@ -5436,27 +5368,22 @@ export interface EnvBillingInfoItem {
    * 付费渠道。
 <li> miniapp：小程序</li>
 <li> qcloud：腾讯云</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PaymentChannel?: string
   /**
    * 最新的订单信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderInfo?: OrderInfo
   /**
    * 免费配额信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeQuota?: string
   /**
    * 是否开启 `超过套餐额度部分转按量付费`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableOverrun?: boolean
   /**
    * 环境套餐类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtPackageType?: string
   /**
@@ -6349,22 +6276,18 @@ export interface CloudBaseProjectVersion {
   Name?: string
   /**
    * SAM json
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sam?: string
   /**
    * 来源类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: CodeSource
   /**
    * 创建时间, unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
    * 更新时间 ,unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
   /**
@@ -6376,12 +6299,10 @@ export interface CloudBaseProjectVersion {
 	"deploying"-部署中
 	 "deployFail"-部署失败
 	 "success"-部署成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 环境变量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Parameters?: Array<KVPair>
   /**
@@ -6389,112 +6310,90 @@ export interface CloudBaseProjectVersion {
 "framework-oneclick" 控制台一键部署
 "framework-local-oneclick" cli本地一键部署
 "qci-extension-cicd" 内网coding ci cd
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
    * ci的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CIId?: string
   /**
    * cd的id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CDId?: string
   /**
    * 环境id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnvId?: string
   /**
    * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionNum?: number
   /**
    * 错误原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailReason?: string
   /**
    * rc.json内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RcJson?: string
   /**
    * 插件配置内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AddonConfig?: string
   /**
    * 标签
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<string>
   /**
    * 网络配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NetworkConfig?: string
   /**
    * 扩展id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtensionId?: string
   /**
    * 错误类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailType?: string
   /**
    * 私有仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepoUrl?: string
   /**
    * 是否私有仓库代码变更触发自动部署
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoDeployOnCodeChange?: boolean
   /**
    * ci部署进度（%）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildPercent?: number
   /**
    * Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * BuildFinishTime
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildFinishTime?: string
   /**
    * DeployFinishTime
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployFinishTime?: string
   /**
    * BuildId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildId?: string
   /**
    * SourceUrl
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceUrl?: string
   /**
    * FailReasonShort
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailReasonShort?: string
   /**
    * FirstInitRepo
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstInitRepo?: string
 }
@@ -6642,17 +6541,14 @@ export interface PostpayEnvQuota {
 export interface CustomRequestToAdd {
   /**
    * Header名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: string
   /**
    * Header值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * Header类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppendAction?: string
 }
@@ -6681,27 +6577,27 @@ export interface OneClickTaskStepInfo {
 失败："failed"
 成功结束："finished"
    */
-  Status: string
+  Status?: string
   /**
    * 开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 耗时：秒
    */
-  CostTime: number
+  CostTime?: number
   /**
    * 失败原因
    */
-  FailReason: string
+  FailReason?: string
   /**
    * 步骤名
    */
-  Name: string
+  Name?: string
 }
 
 /**
@@ -6728,12 +6624,10 @@ export interface DescribeExtraPkgBillingInfoResponse {
 export interface CloudBaseCodeRepoName {
   /**
    * repo的名字
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * repo的完整全名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FullName?: string
 }

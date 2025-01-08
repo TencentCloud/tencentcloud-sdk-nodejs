@@ -110,7 +110,7 @@ export interface VoiceMessageStatisticsItem {
     /**
      * 离线语音DAU
      */
-    Dau: number;
+    Dau?: number;
 }
 /**
  * 房间内用户信息
@@ -202,27 +202,27 @@ export interface RealTimeSpeechStatisticsItem {
     /**
      * 大陆地区DAU
      */
-    MainLandDau: number;
+    MainLandDau?: number;
     /**
      * 大陆地区PCU
      */
-    MainLandPcu: number;
+    MainLandPcu?: number;
     /**
      * 大陆地区总使用时长，单位为min
      */
-    MainLandDuration: number;
+    MainLandDuration?: number;
     /**
      * 海外地区DAU
      */
-    OverseaDau: number;
+    OverseaDau?: number;
     /**
      * 海外地区PCU
      */
-    OverseaPcu: number;
+    OverseaPcu?: number;
     /**
      * 海外地区总使用时长，单位为min
      */
-    OverseaDuration: number;
+    OverseaDuration?: number;
 }
 /**
  * 录音转文本用量统计数据
@@ -730,7 +730,7 @@ export interface StatusInfo {
     /**
      * 服务开关状态， 0-正常，1-关闭
      */
-    Status: number;
+    Status?: number;
 }
 /**
  * SceneInfo场景信息
@@ -746,11 +746,11 @@ export interface DeleteResult {
     /**
      * 错误码，0-剔除成功 其他-剔除失败
      */
-    Code: number;
+    Code?: number;
     /**
      * 错误描述
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
 }
 /**
  * 年龄语音任务结果
@@ -828,11 +828,11 @@ export interface ScanVoiceResult {
     /**
      * 数据ID
      */
-    DataId: string;
+    DataId?: string;
     /**
      * 任务ID
      */
-    TaskId: string;
+    TaskId?: string;
 }
 /**
  * 服务开关状态
@@ -978,55 +978,55 @@ export interface ApplicationDataStatistics {
     /**
      * 应用ID
      */
-    BizId: number;
+    BizId?: number;
     /**
      * Dau统计项数目
      */
-    DauDataNum: number;
+    DauDataNum?: number;
     /**
      * 大陆地区Dau统计数据，单位人
      */
-    DauDataMainland: Array<StatisticsItem>;
+    DauDataMainland?: Array<StatisticsItem>;
     /**
      * 海外地区Dau统计数据，单位人
      */
-    DauDataOversea: Array<StatisticsItem>;
+    DauDataOversea?: Array<StatisticsItem>;
     /**
      * 大陆和海外地区Dau统计数据汇总，单位人
      */
-    DauDataSum: Array<StatisticsItem>;
+    DauDataSum?: Array<StatisticsItem>;
     /**
      * 实时语音时长统计项数目
      */
-    DurationDataNum: number;
+    DurationDataNum?: number;
     /**
      * 大陆地区实时语音时长统计数据，单位分钟
      */
-    DurationDataMainland: Array<StatisticsItem>;
+    DurationDataMainland?: Array<StatisticsItem>;
     /**
      * 海外地区实时语音时长统计数据，单位分钟
      */
-    DurationDataOversea: Array<StatisticsItem>;
+    DurationDataOversea?: Array<StatisticsItem>;
     /**
      * 大陆和海外地区实时语音时长统计数据汇总，单位分钟
      */
-    DurationDataSum: Array<StatisticsItem>;
+    DurationDataSum?: Array<StatisticsItem>;
     /**
      * Pcu统计项数目
      */
-    PcuDataNum: number;
+    PcuDataNum?: number;
     /**
      * 大陆地区Pcu统计数据，单位人
      */
-    PcuDataMainland: Array<StatisticsItem>;
+    PcuDataMainland?: Array<StatisticsItem>;
     /**
      * 海外地区Pcu统计数据，单位人
      */
-    PcuDataOversea: Array<StatisticsItem>;
+    PcuDataOversea?: Array<StatisticsItem>;
     /**
      * 大陆和海外地区Pcu统计数据汇总，单位人
      */
-    PcuDataSum: Array<StatisticsItem>;
+    PcuDataSum?: Array<StatisticsItem>;
 }
 /**
  * ModifyAppStatus接口输出参数
@@ -1035,11 +1035,11 @@ export interface ModifyAppStatusResp {
     /**
      * GME应用ID
      */
-    BizId: number;
+    BizId?: number;
     /**
      * 应用状态，取值：open/close
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * 房间内的事件
@@ -1091,11 +1091,11 @@ export interface StatisticsItem {
     /**
      * 日期，格式为年-月-日，如2018-07-13
      */
-    StatDate: string;
+    StatDate?: string;
     /**
      * 统计值
      */
-    Data: number;
+    Data?: number;
 }
 /**
  * 查找过滤

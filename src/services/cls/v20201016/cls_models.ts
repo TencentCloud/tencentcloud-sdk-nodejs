@@ -154,6 +154,11 @@ export interface AlarmInfo {
    */
   AlarmLevel?: number
   /**
+   * 告警附加分类字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Classifications?: Array<AlarmClassification>
+  /**
    * 多触发条件。与
 Condition互斥。
 注意：此字段可能返回 null，表示取不到有效值。

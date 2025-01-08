@@ -18,9 +18,9 @@ const client = new tencentcloud.hai.v20230812.Client({
 })
 describe("hai.v20230812.test.js", function () {
 
-it("hai.v20230812.DescribeServiceLoginSettings", async function () {
+it("hai.v20230812.DescribeInstances", async function () {
     try {
-       const data = await client.DescribeServiceLoginSettings({})
+       const data = await client.DescribeInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +78,16 @@ it("hai.v20230812.StartInstance", async function () {
     }
 })
 
+it("hai.v20230812.CreateMuskPrompt", async function () {
+    try {
+       const data = await client.CreateMuskPrompt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.TerminateInstances", async function () {
     try {
        const data = await client.TerminateInstances({})
@@ -98,9 +108,9 @@ it("hai.v20230812.DescribeInstanceNetworkStatus", async function () {
     }
 })
 
-it("hai.v20230812.DescribeInstances", async function () {
+it("hai.v20230812.DescribeServiceLoginSettings", async function () {
     try {
-       const data = await client.DescribeInstances({})
+       const data = await client.DescribeServiceLoginSettings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

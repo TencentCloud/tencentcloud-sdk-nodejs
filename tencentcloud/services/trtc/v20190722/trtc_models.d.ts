@@ -1338,12 +1338,10 @@ export interface DescribeCallDetailInfoResponse {
     Total?: number;
     /**
      * 用户信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserList?: Array<UserInformation>;
     /**
      * 质量数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<QualityData>;
     /**
@@ -1832,7 +1830,6 @@ export interface DescribeUserInfoResponse {
     Total?: number;
     /**
      * 用户信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserList?: Array<UserInformation>;
     /**
@@ -2238,7 +2235,6 @@ export interface DescribeScaleInfoResponse {
     Total?: number;
     /**
      * 返回的数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScaleList?: Array<ScaleInfomation>;
     /**

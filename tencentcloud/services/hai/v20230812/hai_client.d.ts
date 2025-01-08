@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeRegionsRequest, StartInstanceRequest, TerminateInstancesRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, StartInstanceResponse, DescribeServiceLoginSettingsRequest, DescribeApplicationsResponse, DescribeInstanceNetworkStatusRequest, StopInstanceResponse } from "./hai_models";
+import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeRegionsRequest, StartInstanceRequest, TerminateInstancesRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, StartInstanceResponse, CreateMuskPromptResponse, DescribeServiceLoginSettingsRequest, CreateMuskPromptRequest, DescribeApplicationsResponse, DescribeInstanceNetworkStatusRequest, StopInstanceResponse } from "./hai_models";
 /**
  * hai client
  * @class
@@ -8,9 +8,9 @@ import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceL
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 查询服务登录配置
+     * 查询实例
      */
-    DescribeServiceLoginSettings(req: DescribeServiceLoginSettingsRequest, cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void): Promise<DescribeServiceLoginSettingsResponse>;
+    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
      * 查询应用
      */
@@ -32,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     StartInstance(req: StartInstanceRequest, cb?: (error: string, rep: StartInstanceResponse) => void): Promise<StartInstanceResponse>;
     /**
+     * 创建musk prompt 任务
+     */
+    CreateMuskPrompt(req: CreateMuskPromptRequest, cb?: (error: string, rep: CreateMuskPromptResponse) => void): Promise<CreateMuskPromptResponse>;
+    /**
      * 本接口 (TerminateInstances) 用于主动退还实例。
      */
     TerminateInstances(req: TerminateInstancesRequest, cb?: (error: string, rep: TerminateInstancesResponse) => void): Promise<TerminateInstancesResponse>;
@@ -40,9 +44,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceNetworkStatus(req: DescribeInstanceNetworkStatusRequest, cb?: (error: string, rep: DescribeInstanceNetworkStatusResponse) => void): Promise<DescribeInstanceNetworkStatusResponse>;
     /**
-     * 查询实例
+     * 查询服务登录配置
      */
-    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
+    DescribeServiceLoginSettings(req: DescribeServiceLoginSettingsRequest, cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void): Promise<DescribeServiceLoginSettingsResponse>;
     /**
      * 本接口 (InquirePriceRunInstances) 用于实例询价。
      */

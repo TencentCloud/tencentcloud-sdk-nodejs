@@ -43,9 +43,11 @@ import {
   DescribeRegionsResponse,
   InquirePriceRunInstancesRequest,
   StartInstanceResponse,
+  CreateMuskPromptResponse,
   DescribeServiceLoginSettingsRequest,
   ApplicationInfo,
   ItemPriceDetail,
+  CreateMuskPromptRequest,
   DescribeApplicationsResponse,
   ItemPrice,
   DescribeInstanceNetworkStatusRequest,
@@ -65,13 +67,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务登录配置
+   * 查询实例
    */
-  async DescribeServiceLoginSettings(
-    req: DescribeServiceLoginSettingsRequest,
-    cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void
-  ): Promise<DescribeServiceLoginSettingsResponse> {
-    return this.request("DescribeServiceLoginSettings", req, cb)
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**
@@ -125,6 +127,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建musk prompt 任务
+   */
+  async CreateMuskPrompt(
+    req: CreateMuskPromptRequest,
+    cb?: (error: string, rep: CreateMuskPromptResponse) => void
+  ): Promise<CreateMuskPromptResponse> {
+    return this.request("CreateMuskPrompt", req, cb)
+  }
+
+  /**
    * 本接口 (TerminateInstances) 用于主动退还实例。
    */
   async TerminateInstances(
@@ -145,13 +157,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例
+   * 查询服务登录配置
    */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
+  async DescribeServiceLoginSettings(
+    req: DescribeServiceLoginSettingsRequest,
+    cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void
+  ): Promise<DescribeServiceLoginSettingsResponse> {
+    return this.request("DescribeServiceLoginSettings", req, cb)
   }
 
   /**

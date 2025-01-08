@@ -2037,8 +2037,13 @@ export interface ChannelCreateFlowByFilesRequest {
   <ul><li> **false** :(默认) 不开启动态合同（动态签署人2.0）</li>
   <li> **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人</li></ul>
   
+     * @deprecated
      */
     OpenDynamicFlow?: boolean;
+    /**
+     * 是否开启动态合同（动态签署人2.0）<ul><li> **false** :(默认) 不开启动态合同（动态签署人2.0）</li><li> **true** :开启动态合同（动态签署人2.0）,发起后可继续追加合同签署人</li></ul>
+     */
+    OpenDynamicSignFlow?: boolean;
 }
 /**
  * UploadFiles返回参数结构体
@@ -2176,6 +2181,7 @@ export interface ChannelCreatePreparedPersonalEsignResponse {
 export interface FlowApproverDetail {
     /**
      * 模板配置时候的签署人角色ID(用PDF文件发起也可以指定,如果不指定则自动生成此角色ID), 所有的填写控件和签署控件都归属不同的角色
+     * @deprecated
      */
     ReceiptId?: string;
     /**
@@ -2248,6 +2254,10 @@ export interface FlowApproverDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SignId?: string;
+    /**
+     * 模板配置时候的签署人角色ID(用PDF文件发起也可以指定,如果不指定则自动生成此角色ID), 所有的填写控件和签署控件都归属不同的角色
+     */
+    RecipientId?: string;
 }
 /**
  * DescribeResourceUrlsByFlows返回参数结构体

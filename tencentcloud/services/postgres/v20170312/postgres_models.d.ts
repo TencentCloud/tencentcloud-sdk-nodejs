@@ -889,6 +889,31 @@ export interface InitDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeMaintainTimeWindow返回参数结构体
+ */
+export interface DescribeMaintainTimeWindowResponse {
+    /**
+     * 实例ID
+     */
+    DBInstanceId?: string;
+    /**
+     * 维护开始时间。时区为东八区（UTC+8）
+     */
+    MaintainStartTime?: string;
+    /**
+     * 维护持续时间。单位：小时
+     */
+    MaintainDuration?: number;
+    /**
+     * 维护周期
+     */
+    MaintainWeekDays?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDefaultParameters请求参数结构体
  */
 export interface DescribeDefaultParametersRequest {
@@ -1527,29 +1552,13 @@ export interface OpenServerlessDBExtranetAccessResponse {
     RequestId?: string;
 }
 /**
- * ModifyParameterTemplate请求参数结构体
+ * ModifyMaintainTimeWindow返回参数结构体
  */
-export interface ModifyParameterTemplateRequest {
+export interface ModifyMaintainTimeWindowResponse {
     /**
-     * 参数模板ID，用于唯一确认参数模板，不可修改
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateId: string;
-    /**
-     * 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若该字段为空    ，则保持原参数模板名称
-     */
-    TemplateName?: string;
-    /**
-     * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若不传入该参数，则保持原参数模板描述
-     */
-    TemplateDescription?: string;
-    /**
-     * 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
-     */
-    ModifyParamEntrySet?: Array<ParamEntry>;
-    /**
-     * 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
-     */
-    DeleteParamSet?: Array<string>;
+    RequestId?: string;
 }
 /**
  * InquiryPriceCreateDBInstances返回参数结构体
@@ -1994,6 +2003,27 @@ export interface SpecInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportKMSRegions: Array<string>;
+}
+/**
+ * ModifyMaintainTimeWindow请求参数结构体
+ */
+export interface ModifyMaintainTimeWindowRequest {
+    /**
+     * 实例ID
+     */
+    DBInstanceId: string;
+    /**
+     * 维护开始时间。时区为东八区（UTC+8）
+     */
+    MaintainStartTime?: string;
+    /**
+     * 维护持续时间。单位：小时
+     */
+    MaintainDuration?: number;
+    /**
+     * 维护周期
+     */
+    MaintainWeekDays?: Array<string>;
 }
 /**
  * ModifyBackupDownloadRestriction返回参数结构体
@@ -2472,6 +2502,15 @@ export interface DeleteReadOnlyGroupNetworkAccessResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeMaintainTimeWindow请求参数结构体
+ */
+export interface DescribeMaintainTimeWindowRequest {
+    /**
+     * 实例ID
+     */
+    DBInstanceId: string;
 }
 /**
  * DescribeBackupSummaries返回参数结构体
@@ -3547,6 +3586,31 @@ export interface EncryptionKey {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
+}
+/**
+ * ModifyParameterTemplate请求参数结构体
+ */
+export interface ModifyParameterTemplateRequest {
+    /**
+     * 参数模板ID，用于唯一确认参数模板，不可修改
+     */
+    TemplateId: string;
+    /**
+     * 参数模板名称，长度为1～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若该字段为空    ，则保持原参数模板名称
+     */
+    TemplateName?: string;
+    /**
+     * 参数模板描述，长度为0～60个字符，仅支持数字,英文大小写字母、中文以及特殊字符_-./()（）[]+=：:@  注：若不传入该参数，则保持原参数模板描述
+     */
+    TemplateDescription?: string;
+    /**
+     * 需要修改或添加的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+     */
+    ModifyParamEntrySet?: Array<ParamEntry>;
+    /**
+     * 需要从模板中删除的参数集合，注：同一参数不能同时出现在修改添加集合和删除集合中
+     */
+    DeleteParamSet?: Array<string>;
 }
 /**
  * DeleteAccount请求参数结构体

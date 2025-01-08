@@ -162,6 +162,11 @@ export interface CreateLicenseRequest {
    * 播放策略参数。
    */
   PlaybackPolicy?: PlaybackPolicy
+  /**
+   * Widevine安全级别，接口取值[L1, L2, L3]。
+安全级别定义参考Widevine安全级别定义。
+   */
+  WidevineSecurityLevel?: string
 }
 
 /**

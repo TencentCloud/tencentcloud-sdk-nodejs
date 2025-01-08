@@ -82,7 +82,7 @@ export interface CreateDBInstanceRequest {
  */
 export interface UpgradeDBInstanceHourRequest {
     /**
-     * 实例ID，格式如：cmgo-p8vnipr5
+     * 实例ID，格式如：cmgo-iga0****
      */
     InstanceId: string;
     /**
@@ -781,107 +781,86 @@ export interface MongodbShardInfo {
 export interface SpecItem {
     /**
      * 规格信息标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecCode: string;
     /**
      * 规格有效标志，取值：0-停止售卖，1-开放售卖
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: number;
     /**
      * 机器类型，取值：0-HIO，4-HIO10G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineType: string;
     /**
      * cpu核心数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cpu: number;
     /**
      * 内存规格，单位为MB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Memory: number;
     /**
      * 默认磁盘规格，单位MB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultStorage: number;
     /**
      * 最大磁盘规格，单位MB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxStorage: number;
     /**
      * 最小磁盘规格，单位MB
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinStorage: number;
     /**
      * 可承载qps信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Qps: number;
     /**
      * 连接数限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Conns: number;
     /**
      * 实例mongodb版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoVersionCode: string;
     /**
      * 实例mongodb版本号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MongoVersionValue: number;
     /**
      * 实例mongodb版本号（短）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version: string;
     /**
      * 存储引擎
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineName: string;
     /**
      * 集群类型，取值：1-分片集群，0-副本集集群
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterType: number;
     /**
      * 最小副本集从节点数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinNodeNum: number;
     /**
      * 最大副本集从节点数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxNodeNum: number;
     /**
      * 最小分片数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinReplicateSetNum: number;
     /**
      * 最大分片数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxReplicateSetNum: number;
     /**
      * 最小分片从节点数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinReplicateSetNodeNum: number;
     /**
      * 最大分片从节点数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxReplicateSetNodeNum: number;
 }

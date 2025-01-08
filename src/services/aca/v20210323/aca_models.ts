@@ -982,7 +982,7 @@ export interface SmartDrugInfoResp {
    */
   DrugBasicCode?: string
   /**
-   * OCT标签
+   * OTC标签
    */
   OctTag?: string
 }

@@ -84,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
+     * 本接口 (DescribeMaintainTimeWindow) 用于查询实例的维护时间窗口
+     */
+    async DescribeMaintainTimeWindow(req, cb) {
+        return this.request("DescribeMaintainTimeWindow", req, cb);
+    }
+    /**
      * 查询专属集群
      */
     async DescribeDedicatedClusters(req, cb) {
@@ -124,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+     */
+    async ModifyMaintainTimeWindow(req, cb) {
+        return this.request("ModifyMaintainTimeWindow", req, cb);
     }
     /**
      * 本接口（RenewInstance）用于续费实例。

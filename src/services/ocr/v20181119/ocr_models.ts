@@ -8279,31 +8279,31 @@ export interface TableDetectInfo {
  */
 export interface IDCardConfig {
   /**
-   * 默认为false
+   * 复印件告警，默认为false
    */
   CopyWarn?: boolean
   /**
-   * 默认为false
+   * 边框和框内遮挡告警，默认为false
    */
   BorderCheckWarn?: boolean
   /**
-   * 默认为false
+   * 翻拍告警，默认为false
    */
   ReshootWarn?: boolean
   /**
-   * 默认为false
+   * 疑似存在PS痕迹告警，默认为false
    */
   DetectPsWarn?: boolean
   /**
-   * 默认为false
+   * 临时身份证告警，默认为false
    */
   TempIdWarn?: boolean
   /**
-   * 默认为false
+   * 身份证有效日期不合法告警，默认为false
    */
   InvalidDateWarn?: boolean
   /**
-   * 默认为false
+   * 是否开启反光检测，默认为false
    */
   ReflectWarn?: boolean
 }

@@ -577,6 +577,11 @@ export interface NotebookSetItem {
    * 子用户名称
    */
   SubUinName?: string
+  /**
+   * AppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
 }
 
 /**
@@ -3890,6 +3895,11 @@ export interface NotebookDetail {
    * 任务实例创建时间
    */
   JobCreateTime?: string
+  /**
+   * Appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
 }
 
 /**

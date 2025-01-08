@@ -78,7 +78,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeReplicaToMaster", req, cb);
     }
     /**
-     * 查询实例访问命令
+     * 本接口（DescribeInstanceMonitorTopNCmd）用于查询实例访问命令。
      */
     async DescribeInstanceMonitorTopNCmd(req, cb) {
         return this.request("DescribeInstanceMonitorTopNCmd", req, cb);
@@ -138,7 +138,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb);
     }
     /**
-     * 查询全球复制支持地域信息
+     * 本接口（DescribeGlobalReplicationArea）用于查询全球复制支持地域信息。
      */
     async DescribeGlobalReplicationArea(req, cb) {
         return this.request("DescribeGlobalReplicationArea", req, cb);
@@ -228,7 +228,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoBackupConfig", req, cb);
     }
     /**
-     * 删除参数模板
+     * 本接口（DeleteParamTemplate）用于删除参数模板。
      */
     async DeleteParamTemplate(req, cb) {
         return this.request("DeleteParamTemplate", req, cb);
@@ -246,7 +246,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneInstances", req, cb);
     }
     /**
-     * 创建参数模板。
+     * 该接口（CreateParamTemplate）用于创建参数模板。
      */
     async CreateParamTemplate(req, cb) {
         return this.request("CreateParamTemplate", req, cb);
@@ -378,7 +378,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyPrepaidInstance", req, cb);
     }
     /**
-     * 查询参数修改历史列表
+     * 本接口（DescribeInstanceParamRecords）用于查询参数修改历史列表。
      */
     async DescribeInstanceParamRecords(req, cb) {
         return this.request("DescribeInstanceParamRecords", req, cb);
@@ -408,7 +408,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTookDist", req, cb);
     }
     /**
-     * 查询参数模板列表
+     * 本接口（DescribeParamTemplates）用于查询参数模板列表。
      */
     async DescribeParamTemplates(req, cb) {
         return this.request("DescribeParamTemplates", req, cb);
@@ -450,7 +450,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateReplicationGroup", req, cb);
     }
     /**
-     * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics] (https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
+     * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics](https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
      */
     async DescribeInstanceMonitorSIP(req, cb) {
         return this.request("DescribeInstanceMonitorSIP", req, cb);
@@ -582,7 +582,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceShards", req, cb);
     }
     /**
-     * 恢复 CRS 实例
+     * 本接口（RestoreInstance）用于恢复实例。
      */
     async RestoreInstance(req, cb) {
         return this.request("RestoreInstance", req, cb);

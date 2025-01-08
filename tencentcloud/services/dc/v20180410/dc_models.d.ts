@@ -3,17 +3,19 @@
  */
 export declare type DescribeInternetAddressQuotaRequest = null;
 /**
- * bgp参数，包括Asn，AuthKey
+ * bgp参数，包括CloudAsn，Asn，AuthKey
  */
 export interface BgpPeer {
     /**
+     * 腾讯侧BGP ASN
+     */
+    CloudAsn?: string;
+    /**
      * 用户侧BGP ASN
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Asn?: number;
     /**
      * 用户侧BGP密钥
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthKey?: string;
 }
@@ -45,6 +47,15 @@ export interface DirectConnectTunnelRoute {
      * 路由下一跳IP
      */
     NextHop: string;
+    /**
+     * 路由更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 是否配置在通道上
+     */
+    ApplyOnTunnelEnable: boolean;
 }
 /**
  * RejectDirectConnectTunnel请求参数结构体
@@ -180,7 +191,6 @@ export interface DirectConnect {
     PortType?: string;
     /**
      * 运营商或者服务商为物理专线提供的电路编码。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CircuitCode?: string;
     /**
@@ -189,57 +199,46 @@ export interface DirectConnect {
     RedundantDirectConnectId?: string;
     /**
      * 物理专线调试VLAN。默认开启VLAN，自动分配VLAN。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vlan?: number;
     /**
      * 物理专线调试腾讯侧互联IP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TencentAddress?: string;
     /**
      * 物理专线调试用户侧互联IP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomerAddress?: string;
     /**
      * 物理专线申请者姓名。默认从账户体系获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomerName?: string;
     /**
      * 物理专线申请者联系邮箱。默认从账户体系获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomerContactMail?: string;
     /**
      * 物理专线申请者联系号码。默认从账户体系获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomerContactNumber?: string;
     /**
      * 物理专线的过期时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpiredTime?: string;
     /**
      * 物理专线计费类型。 NON_RECURRING_CHARGE：一次性接入费用；PREPAID_BY_YEAR：按年预付费。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeType?: string;
     /**
      * 报障联系人。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FaultReportContactPerson?: string;
     /**
      * 报障联系电话。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FaultReportContactNumber?: string;
     /**
      * 标签键值对
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
     /**
@@ -248,52 +247,42 @@ export interface DirectConnect {
     AccessPointType?: string;
     /**
      * IDC所在城市
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdcCity?: string;
     /**
      * 计费状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeState?: string;
     /**
      * 物理专线开通时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 物理专线是否已签署用户协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SignLaw?: boolean;
     /**
      * 物理专线是否为LocalZone
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalZone?: boolean;
     /**
      * 该物理专线下vlan 0的专用通道数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VlanZeroDirectConnectTunnelCount?: number;
     /**
      * 该物理专线下非vlan 0的专用通道数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OtherVlanDirectConnectTunnelCount?: number;
     /**
      * 物理专线最小带宽
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinBandwidth?: number;
     /**
      * 建设模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Construct?: number;
     /**
      * 物理专线的接入点名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessPointName?: string;
 }
@@ -303,68 +292,57 @@ export interface DirectConnect {
 export interface InternetAddressDetail {
     /**
      * 互联网地址ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 互联网网络地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Subnet: string;
+    Subnet?: string;
     /**
      * 网络地址掩码长度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaskLen: number;
+    MaskLen?: number;
     /**
      * 0:BGP
   1:电信
   2:移动
   3:联通
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddrType: number;
+    AddrType?: number;
     /**
      * 0:使用中
   1:已停用
   2:已退还
      */
-    Status: number;
+    Status?: number;
     /**
      * 申请时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplyTime: string;
+    ApplyTime?: string;
     /**
      * 停用时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StopTime: string;
+    StopTime?: string;
     /**
      * 退还时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReleaseTime: string;
+    ReleaseTime?: string;
     /**
      * 地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 0:IPv4 1:IPv6
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddrProto: number;
+    AddrProto?: number;
     /**
      * 释放状态的IP地址保留的天数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReserveTime: number;
+    ReserveTime?: number;
 }
 /**
  * DescribeAccessPoints返回参数结构体
@@ -669,37 +647,30 @@ export interface DirectConnectTunnelExtra {
     BgpStatus?: BGPStatus;
     /**
      * 是否开启IPv6
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IPv6Enable?: number;
     /**
      * 腾讯侧互联IPv6地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TencentIPv6Address?: string;
     /**
      * 腾讯侧备用互联IPv6地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TencentBackupIPv6Address?: string;
     /**
      * BGPv6状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BgpIPv6Status?: BGPStatus;
     /**
      * 用户侧互联IPv6地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomerIPv6Address?: string;
     /**
      * 专用通道是否支持巨帧。1 支持，0 不支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JumboEnable?: number;
     /**
      * 专用通道是否支持高精度BFD。1支持，0不支持
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HighPrecisionBFDEnable?: number;
 }
@@ -709,12 +680,10 @@ export interface DirectConnectTunnelExtra {
 export interface Tag {
     /**
      * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -1088,14 +1057,12 @@ export declare type DescribeInternetAddressStatisticsRequest = null;
 export interface InternetAddressStatistics {
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 互联网公网地址数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetNum: number;
+    SubnetNum?: number;
 }
 /**
  * CreateDirectConnect请求参数结构体
@@ -1473,7 +1440,6 @@ export interface CloudAttachInfo {
 export interface RouteFilterPrefix {
     /**
      * 用户侧网段地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cidr?: string;
 }
@@ -1686,7 +1652,7 @@ export interface DirectConnectTunnel {
      */
     RouteType?: string;
     /**
-     * 用户侧BGP，Asn，AuthKey
+     * 用户侧BGP，包括： CloudAsn，Asn，AuthKey
      */
     BgpPeer?: BgpPeer;
     /**
@@ -1723,62 +1689,50 @@ export interface DirectConnectTunnel {
     TagSet?: Array<Tag>;
     /**
      * 关联的网络自定义探测ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetDetectId?: string;
     /**
      * BGP community开关
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableBGPCommunity?: boolean;
     /**
      * 是否为Nat通道
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NatType?: number;
     /**
      * VPC地域简码，如gz、cd
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcRegion?: string;
     /**
      * 是否开启BFD
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BfdEnable?: number;
     /**
      * 专用通道接入点类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessPointType?: string;
     /**
      * 专线网关名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DirectConnectGatewayName?: string;
     /**
      * VPC名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcName?: string;
     /**
      * TencentBackupAddress，腾讯侧备用互联 IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TencentBackupAddress?: string;
     /**
      * 专用通道关联的物理专线是否签署了用户协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SignLaw?: boolean;
     /**
      * 高速上云服务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CloudAttachId?: string;
     /**
      * 是否共享通道
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ShareOrNot?: number;
 }

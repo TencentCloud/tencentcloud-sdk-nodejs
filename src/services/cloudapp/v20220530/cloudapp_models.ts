@@ -24,19 +24,25 @@ export interface SaleParam {
    */
   ParamKey: string
   /**
-   * 售卖参数值
-   */
-  ParamValue: string
-  /**
    * 售卖参数的展示名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamKeyName: string
   /**
+   * 售卖参数值，当ParamType=Quant时，该值有可能为Null
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamValue?: string
+  /**
    * 售卖参数值的展示名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamValueName: string
+  ParamValueName?: string
+  /**
+   * 售卖参数的类型，目前支持枚举类Enum/数量类Quant
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamType?: string
 }
 
 /**
@@ -53,6 +59,14 @@ export interface VerifyLicenseResponse {
    */
   License?: License
   /**
+   * 当前请求服务端的时间戳，格式为RFC3339
+   */
+  Timestamp?: string
+  /**
+   * 对License字段对应的json数据的签名
+   */
+  Signature?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -67,7 +81,7 @@ export interface License {
    */
   LicenseId?: string
   /**
-   * 软件授权模式。<table><thead><tr><th>枚举值</th><th>说明</th></tr></thead><tbody><tr><td>Permanent</td><td>永久授权。该授权不受有效期限制。</td></tr><tr><td>Subscription</td><td>订阅授权。授权如果过了有效期，则会进入过期状态。</td></tr></tbody></table>
+   * 软件授权模式。<table><thead><tr><th>枚举值</th><th>说明</th></tr></thead><tbody><tr><td>Permanent</td><td>永久授权。该授权不受有效期限制。</td></tr><tr><td>Subscription</td><td>订阅授权。授权如果过了有效期，则会进入过期状态。</td></tr><tr><td>Accept</td><td>验收期授权。用于需要验收的软件处于验收期间的授权，授权如果过了验收有效期，则会进入过期状态。</td></tr></tbody></table>
    */
   LicenseMode?: string
   /**

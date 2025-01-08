@@ -1966,6 +1966,7 @@ export interface FlowApproverDetail {
     ApproveStatus?: number;
     /**
      * 模板配置中的参与方ID,与控件绑定
+     * @deprecated
      */
     ReceiptId?: string;
     /**
@@ -2020,6 +2021,10 @@ export interface FlowApproverDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApproverRoleName?: string;
+    /**
+     * 模板配置中的参与方ID,与控件绑定
+     */
+    RecipientId?: string;
 }
 /**
  * CreateFlowGroupByFiles请求参数结构体
@@ -8944,8 +8949,9 @@ export interface ReleasedApprover {
     Mobile: string;
     /**
      * 要更换的原合同参与人RecipientId编号。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+     * @deprecated
      */
-    RelievedApproverReceiptId: string;
+    RelievedApproverReceiptId?: string;
     /**
      * 指定签署人类型，目前仅支持
   <ul><li> **ORGANIZATION**：企业（默认值）</li>
@@ -8971,6 +8977,10 @@ export interface ReleasedApprover {
      * 印章Id，签署控件类型为印章时，用于指定本企业签署方在解除协议中使用那个印章进行签署
      */
     ApproverSignSealId?: string;
+    /**
+     * 要更换的原合同参与人RecipientId编号。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+     */
+    RelievedApproverRecipientId?: string;
 }
 /**
  * CreateFlowGroupSignReview请求参数结构体

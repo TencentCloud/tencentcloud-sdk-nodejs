@@ -108,6 +108,16 @@ it("postgres.v20170312.ModifyDBInstanceName", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeMaintainTimeWindow", async function () {
+    try {
+       const data = await client.DescribeMaintainTimeWindow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDedicatedClusters", async function () {
     try {
        const data = await client.DescribeDedicatedClusters({})
@@ -171,6 +181,16 @@ it("postgres.v20170312.ModifyDBInstanceSpec", async function () {
 it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     try {
        const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyMaintainTimeWindow", async function () {
+    try {
+       const data = await client.ModifyMaintainTimeWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

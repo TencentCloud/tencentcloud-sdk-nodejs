@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("hai.tencentcloudapi.com", "2023-08-12", clientConfig);
     }
     /**
-     * 查询服务登录配置
+     * 查询实例
      */
-    async DescribeServiceLoginSettings(req, cb) {
-        return this.request("DescribeServiceLoginSettings", req, cb);
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
     }
     /**
      * 查询应用
@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartInstance", req, cb);
     }
     /**
+     * 创建musk prompt 任务
+     */
+    async CreateMuskPrompt(req, cb) {
+        return this.request("CreateMuskPrompt", req, cb);
+    }
+    /**
      * 本接口 (TerminateInstances) 用于主动退还实例。
      */
     async TerminateInstances(req, cb) {
@@ -76,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceNetworkStatus", req, cb);
     }
     /**
-     * 查询实例
+     * 查询服务登录配置
      */
-    async DescribeInstances(req, cb) {
-        return this.request("DescribeInstances", req, cb);
+    async DescribeServiceLoginSettings(req, cb) {
+        return this.request("DescribeServiceLoginSettings", req, cb);
     }
     /**
      * 本接口 (InquirePriceRunInstances) 用于实例询价。

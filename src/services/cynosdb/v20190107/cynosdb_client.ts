@@ -397,6 +397,7 @@ import {
   ModifyClusterPasswordComplexityRequest,
   UnbindClusterResourcePackagesRequest,
   ModifyInstanceParamResponse,
+  TaskProgressInfo,
   TemplateParamInfo,
   CreateBackupResponse,
   DescribeInstancesWithinSameClusterResponse,

@@ -2294,14 +2294,16 @@ export interface PeerConnection {
   TagSet?: Array<Tag>
   /**
    * 服务分级：PT、AU、AG。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QosLevel?: string
   /**
    * 互通类型，VPC_PEER：VPC间互通；VPC_BM_PEER：VPC与黑石网络互通。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
+  /**
+   * 对端VPC唯一ID。
+   */
+  DestinationVpcId?: string
 }
 
 /**
@@ -16130,7 +16132,6 @@ export interface CcnBandwidthInfo {
 export interface CreateVpcPeeringConnectionResponse {
   /**
    * 对等连接ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeeringConnectionId?: string
   /**

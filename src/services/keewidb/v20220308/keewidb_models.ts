@@ -2011,41 +2011,41 @@ export interface DescribeAutoBackupConfigRequest {
 }
 
 /**
- * 实例枚举类型参数描述
+ * 实例枚举类型参数描述，keewidb暂无枚举值
  */
 export interface InstanceEnumParam {
   /**
    * 参数名
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：enum
    */
-  ValueType: string
+  ValueType?: string
   /**
    * 修改后是否需要重启：true，false
    */
-  NeedRestart: string
+  NeedRestart?: string
   /**
    * 参数默认值
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 当前运行参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 参数说明
    */
-  Tips: string
+  Tips?: string
   /**
    * 参数可取值
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
   /**
    * 参数状态, 1: 修改中， 2：修改完成
    */
-  Status: number
+  Status?: number
 }
 
 /**

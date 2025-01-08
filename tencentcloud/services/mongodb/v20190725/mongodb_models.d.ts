@@ -1105,22 +1105,18 @@ export interface DescribeDBInstancesRequest {
 export interface CurrentOp {
     /**
      * 操作序号。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpId?: number;
     /**
      * 操作所在的命名空间，形式如db.collection。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ns?: string;
     /**
      * 操作执行语句。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Query?: string;
     /**
      * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Op?: string;
     /**
@@ -1133,22 +1129,18 @@ export interface CurrentOp {
     NodeName?: string;
     /**
      * 操作详细信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operation?: string;
     /**
      * 筛选条件，节点状态，可能的取值为：Primary、Secondary。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: string;
     /**
      * 操作已执行时间（ms）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MicrosecsRunning?: number;
     /**
      * 当前操作所在节点信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecNode?: string;
 }
@@ -2036,12 +2028,10 @@ export interface BackupDownloadTask {
     BackupDesc?: string;
     /**
      * 地区信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * Bucket信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
 }
@@ -2310,7 +2300,7 @@ export interface NodeProperty {
      */
     Address?: string;
     /**
-     * 节点公网访问地址(IP或域名)。
+     * 节点公网访问外网地址(IP或域名，示例为IP方式)。
      */
     WanServiceAddress?: string;
     /**

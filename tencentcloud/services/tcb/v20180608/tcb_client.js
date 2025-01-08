@@ -561,7 +561,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunVersion", req, cb);
     }
     /**
-     * 查询云应用服务版本容器列表
+     * 查询云托管服务版本容器列表
      */
     async DescribeCloudBaseRunPodList(req, cb) {
         return this.request("DescribeCloudBaseRunPodList", req, cb);

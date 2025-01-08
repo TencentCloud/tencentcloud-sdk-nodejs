@@ -42,7 +42,7 @@ export declare class Client extends AbstractClient {
      */
     ChangeReplicaToMaster(req: ChangeReplicaToMasterRequest, cb?: (error: string, rep: ChangeReplicaToMasterResponse) => void): Promise<ChangeReplicaToMasterResponse>;
     /**
-     * 查询实例访问命令
+     * 本接口（DescribeInstanceMonitorTopNCmd）用于查询实例访问命令。
      */
     DescribeInstanceMonitorTopNCmd(req: DescribeInstanceMonitorTopNCmdRequest, cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdResponse) => void): Promise<DescribeInstanceMonitorTopNCmdResponse>;
     /**
@@ -82,7 +82,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeVersionToMultiAvailabilityZones(req: UpgradeVersionToMultiAvailabilityZonesRequest, cb?: (error: string, rep: UpgradeVersionToMultiAvailabilityZonesResponse) => void): Promise<UpgradeVersionToMultiAvailabilityZonesResponse>;
     /**
-     * 查询全球复制支持地域信息
+     * 本接口（DescribeGlobalReplicationArea）用于查询全球复制支持地域信息。
      */
     DescribeGlobalReplicationArea(req?: DescribeGlobalReplicationAreaRequest, cb?: (error: string, rep: DescribeGlobalReplicationAreaResponse) => void): Promise<DescribeGlobalReplicationAreaResponse>;
     /**
@@ -142,7 +142,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAutoBackupConfig(req: ModifyAutoBackupConfigRequest, cb?: (error: string, rep: ModifyAutoBackupConfigResponse) => void): Promise<ModifyAutoBackupConfigResponse>;
     /**
-     * 删除参数模板
+     * 本接口（DeleteParamTemplate）用于删除参数模板。
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
@@ -154,7 +154,7 @@ export declare class Client extends AbstractClient {
      */
     CloneInstances(req: CloneInstancesRequest, cb?: (error: string, rep: CloneInstancesResponse) => void): Promise<CloneInstancesResponse>;
     /**
-     * 创建参数模板。
+     * 该接口（CreateParamTemplate）用于创建参数模板。
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
@@ -242,7 +242,7 @@ export declare class Client extends AbstractClient {
      */
     DestroyPrepaidInstance(req: DestroyPrepaidInstanceRequest, cb?: (error: string, rep: DestroyPrepaidInstanceResponse) => void): Promise<DestroyPrepaidInstanceResponse>;
     /**
-     * 查询参数修改历史列表
+     * 本接口（DescribeInstanceParamRecords）用于查询参数修改历史列表。
      */
     DescribeInstanceParamRecords(req: DescribeInstanceParamRecordsRequest, cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void): Promise<DescribeInstanceParamRecordsResponse>;
     /**
@@ -262,7 +262,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorTookDist(req: DescribeInstanceMonitorTookDistRequest, cb?: (error: string, rep: DescribeInstanceMonitorTookDistResponse) => void): Promise<DescribeInstanceMonitorTookDistResponse>;
     /**
-     * 查询参数模板列表
+     * 本接口（DescribeParamTemplates）用于查询参数模板列表。
      */
     DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
@@ -290,7 +290,7 @@ export declare class Client extends AbstractClient {
      */
     CreateReplicationGroup(req: CreateReplicationGroupRequest, cb?: (error: string, rep: CreateReplicationGroupResponse) => void): Promise<CreateReplicationGroupResponse>;
     /**
-     * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics] (https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
+     * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics](https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
      */
     DescribeInstanceMonitorSIP(req: DescribeInstanceMonitorSIPRequest, cb?: (error: string, rep: DescribeInstanceMonitorSIPResponse) => void): Promise<DescribeInstanceMonitorSIPResponse>;
     /**
@@ -378,7 +378,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceShards(req: DescribeInstanceShardsRequest, cb?: (error: string, rep: DescribeInstanceShardsResponse) => void): Promise<DescribeInstanceShardsResponse>;
     /**
-     * 恢复 CRS 实例
+     * 本接口（RestoreInstance）用于恢复实例。
      */
     RestoreInstance(req: RestoreInstanceRequest, cb?: (error: string, rep: RestoreInstanceResponse) => void): Promise<RestoreInstanceResponse>;
     /**

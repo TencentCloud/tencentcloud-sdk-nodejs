@@ -192,7 +192,7 @@ export interface TargetGroupBackend {
    */
   TargetGroupId?: string
   /**
-   * 后端服务的类型，可取：CVM、ENI（即将支持）
+   * 后端服务的类型，可取：CVM、ENI
    */
   Type?: string
   /**
