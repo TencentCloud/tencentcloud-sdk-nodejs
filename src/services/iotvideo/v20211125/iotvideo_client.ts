@@ -23,6 +23,7 @@ import {
   PackageConsumeStat,
   DescribeCloudStoragePackageConsumeDetailsResponse,
   CreateCloudStorageRequest,
+  CloudStoragePackageInfo,
   MessageCntStats,
   DescribeDeviceDataStatsRequest,
   ThumbnailURLInfoList,
@@ -182,6 +183,7 @@ import {
   CloudStorageEvent,
   DeviceDataHistoryItem,
   DescribeCloudStorageDateResponse,
+  DescribeFreeCloudStorageNumResponse,
   TransferCloudStorageResponse,
   ModifyDataForwardStatusResponse,
   CloudStorageTimeInfo,
@@ -192,6 +194,7 @@ import {
   DescribeDeviceRequest,
   CreateCloudStorageResponse,
   BindCloudStorageUserResponse,
+  DescribeFreeCloudStorageNumRequest,
   CancelDeviceFirmwareTaskRequest,
   CancelDeviceFirmwareTaskResponse,
   DescribeBatchsRequest,
@@ -569,6 +572,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void
   ): Promise<DescribeCloudStorageDateResponse> {
     return this.request("DescribeCloudStorageDate", req, cb)
+  }
+
+  /**
+   * 查询云存卡套餐信息
+   */
+  async DescribeFreeCloudStorageNum(
+    req?: DescribeFreeCloudStorageNumRequest,
+    cb?: (error: string, rep: DescribeFreeCloudStorageNumResponse) => void
+  ): Promise<DescribeFreeCloudStorageNumResponse> {
+    return this.request("DescribeFreeCloudStorageNum", req, cb)
   }
 
   /**

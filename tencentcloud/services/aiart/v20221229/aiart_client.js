@@ -28,6 +28,17 @@ class Client extends abstract_client_1.AbstractClient {
         super("aiart.tencentcloudapi.com", "2022-12-29", clientConfig);
     }
     /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    async SubmitMemeJob(req, cb) {
+        return this.request("SubmitMemeJob", req, cb);
+    }
+    /**
      * 线稿生图接口支持上传一张黑白线稿图，按照指定的主体对象以及样式、颜色、材质、风格等的文本描述prompt ，对线稿图进行色彩填充与细节描绘，得到一张完整绘制的图像。生成图分辨率默认为1024:1024。
 线稿生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
@@ -80,6 +91,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GenerateAvatar", req, cb);
     }
     /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    async QueryMemeJob(req, cb) {
+        return this.request("QueryMemeJob", req, cb);
+    }
+    /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 如果选择免训练模式无需调用本接口。
 训练模型分为提交任务和查询任务2个接口：
@@ -91,19 +112,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryTrainPortraitModelJob(req, cb) {
         return this.request("QueryTrainPortraitModelJob", req, cb);
-    }
-    /**
-     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
-生成图片分为提交任务和查询任务2个接口：
-
-- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
-- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
-
-每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
-提交生成写真图片任务默认提供1个并发。
-     */
-    async SubmitDrawPortraitJob(req, cb) {
-        return this.request("SubmitDrawPortraitJob", req, cb);
     }
     /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
@@ -149,6 +157,19 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryTextToImageProJob(req, cb) {
         return this.request("QueryTextToImageProJob", req, cb);
+    }
+    /**
+     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
+生成图片分为提交任务和查询任务2个接口：
+
+- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
+- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
+
+每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
+提交生成写真图片任务默认提供1个并发。
+     */
+    async SubmitDrawPortraitJob(req, cb) {
+        return this.request("SubmitDrawPortraitJob", req, cb);
     }
     /**
      * 局部消除接口通过图像 mask 指定需要消除的人、物、文字等区域，在选定区域对图像内容进行消除与重绘补全。

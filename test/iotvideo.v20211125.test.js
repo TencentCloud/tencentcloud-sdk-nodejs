@@ -318,6 +318,16 @@ it("iotvideo.v20211125.DescribeCloudStorageDate", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeFreeCloudStorageNum", async function () {
+    try {
+       const data = await client.DescribeFreeCloudStorageNum({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.SetForwardAuth", async function () {
     try {
        const data = await client.SetForwardAuth({})

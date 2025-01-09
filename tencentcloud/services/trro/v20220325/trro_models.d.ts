@@ -488,6 +488,10 @@ export interface Device {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MonthlyRemainTime?: number;
+    /**
+     * 月封顶时长（分钟)
+     */
+    LimitedTime?: number;
 }
 /**
  * DescribeSessionStatistics请求参数结构体

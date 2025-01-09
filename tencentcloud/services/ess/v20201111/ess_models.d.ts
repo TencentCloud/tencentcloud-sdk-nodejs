@@ -518,7 +518,6 @@ export interface CreateFlowApproversResponse {
      * 批量补充签署人时，补充失败的报错说明
   
   注:`目前仅补充动态签署人时会返回补充失败的原因`
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FillError?: Array<FillError>;
     /**
@@ -2064,7 +2063,6 @@ export interface CreateFlowGroupByFilesRequest {
 export interface DescribeFlowComponentsResponse {
     /**
      * 合同流程关联的填写控件信息，包括填写控件的归属方以及是否填写等内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecipientComponentInfos?: Array<RecipientComponentInfo>;
     /**
@@ -2078,7 +2076,6 @@ export interface DescribeFlowComponentsResponse {
 export interface DescribeFlowEvidenceReportResponse {
     /**
      * 出证报告PDF的下载 URL，`有效期为5分钟`，超过有效期后将无法再下载。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportUrl?: string;
     /**
@@ -2166,12 +2163,10 @@ export interface CreateEmployeeQualificationSealQrCodeResponse {
 export interface CreateFlowGroupByTemplatesResponse {
     /**
      * 合同(流程)组的合同组Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowGroupId?: string;
     /**
      * 合同(流程)组中子合同列表.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowIds?: Array<string>;
     /**
@@ -2454,12 +2449,10 @@ export interface CreateDocumentResponse {
   
   注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL`
   `2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容`
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PreviewFileUrl?: string;
     /**
      * 签署方信息，如角色ID、角色名称等
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Approvers?: Array<ApproverItem>;
     /**
@@ -2499,7 +2492,7 @@ export interface DescribeIntegrationEmployeesRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。
+     * 偏移量，默认为0，最大20000。。关于<code>Offset</code>的更进一步介绍请参考 API <a href="https://cloud.tencent.com/document/api/213/15688" target="_blank">简介</a>中的相关小节。
      */
     Offset?: number;
 }
@@ -3685,24 +3678,20 @@ export interface CreatePersonAuthCertificateImageResponse {
   该编号会合成到个人用户证书证明图片。
   
   注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动`
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageCertId?: string;
     /**
      * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialNumber?: string;
     /**
      * CA证书颁发时间，格式为Unix标准时间戳（秒）
   该时间格式化后会合成到个人用户证书证明图片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidFrom?: number;
     /**
      * CA证书有效截止时间，格式为Unix标准时间戳（秒）
   该时间格式化后会合成到个人用户证书证明图片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidTo?: number;
     /**
@@ -3980,12 +3969,10 @@ export interface DisableUserAutoSignRequest {
 export interface DescribeIntegrationEmployeesResponse {
     /**
      * 员工信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Employees?: Array<Staff>;
     /**
-     * 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 偏移量
      */
     Offset?: number;
     /**
@@ -5404,7 +5391,6 @@ export interface RecipientComponentInfo {
 export interface CreateFlowEvidenceReportResponse {
     /**
      * 出证报告 ID，可用于<a href="https://qian.tencent.com/developers/companyApis/certificate/DescribeFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>查询出证任务结果和出证PDF的下载URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportId?: string;
     /**
@@ -5961,8 +5947,7 @@ export interface FailedUpdateStaffData {
  */
 export interface GetTaskResultApiRequest {
     /**
-     * 转换任务Id，通过接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>或<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateMergeFileTask" target="_blank">创建多文件转换任务接口</a>
-  得到的转换任务id
+     * 转换任务Id，通过接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>得到的转换任务id
      */
     TaskId: string;
     /**
@@ -6383,12 +6368,10 @@ export interface CreateFlowByFilesResponse {
      * 合同预览链接URL。
   
   注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PreviewUrl?: string;
     /**
      * 签署方信息，如角色ID、角色名称等
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Approvers?: Array<ApproverItem>;
     /**
@@ -6627,7 +6610,6 @@ export interface DescribeBillUsageResponse {
     Summary?: Array<OrgBillSummary>;
     /**
      * 集团子企业套餐使用情况
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubOrgSummary?: Array<SubOrgBillSummary>;
     /**
@@ -8844,12 +8826,10 @@ export interface CreateUserAutoSignEnableUrlResponse {
 export interface DescribeSignFaceVideoResponse {
     /**
      * 核身视频结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VideoData?: DetectInfoVideoData;
     /**
      * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntentionQuestionResult?: IntentionQuestionResult;
     /**

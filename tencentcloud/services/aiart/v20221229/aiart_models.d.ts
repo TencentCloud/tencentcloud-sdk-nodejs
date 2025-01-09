@@ -108,6 +108,15 @@ export interface ImageToImageRequest {
     RestoreFace?: number;
 }
 /**
+ * QueryMemeJob请求参数结构体
+ */
+export interface QueryMemeJobRequest {
+    /**
+     * 查询表情动图生成任务 ID。
+     */
+    JobId: string;
+}
+/**
  * QueryTextToImageProJob返回参数结构体
  */
 export interface QueryTextToImageProJobResponse {
@@ -318,48 +327,36 @@ export interface ImageOutpaintingRequest {
     LogoParam?: LogoParam;
 }
 /**
- * SubmitTextToImageProJob请求参数结构体
+ * QueryMemeJob返回参数结构体
  */
-export interface SubmitTextToImageProJobRequest {
+export interface QueryMemeJobResponse {
     /**
-     * 文本描述。
-  算法将根据输入的文本智能生成与之相关的图像。
-  不能为空，推荐使用中文。最多可传100个 utf-8 字符。
+     * 当前任务状态码：
+  1：等待中、2：运行中、4：处理失败、5：处理完成。
      */
-    Prompt: string;
+    JobStatusCode?: string;
     /**
-     * 绘画风格。
-  请在 [文生图（高级版）风格列表](https://cloud.tencent.com/document/product/1668/104567) 中选择期望的风格，传入风格编号。
-  不传默认不指定风格。
+     * 当前任务状态：排队中、处理中、处理失败或者处理完成。
      */
-    Style?: string;
+    JobStatusMsg?: string;
     /**
-     * 生成图分辨率。
-  支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。
+     * 任务处理失败错误码。
+  
      */
-    Resolution?: string;
+    JobErrorCode?: string;
     /**
-     * 为生成结果图添加显式水印标识的开关，默认为1。
-  1：添加。
-  0：不添加。
-  其他数值：默认按1处理。
-  建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
+     * 任务处理失败错误信息。
+  
      */
-    LogoAdd?: number;
+    JobErrorMsg?: string;
     /**
-     * 文生图模型，默认使用engine1。
-  取值：
-  engine1
-  engine2
+     * 生成图 URL，有效期1小时，请及时保存。
      */
-    Engine?: string;
+    ResultImage?: string;
     /**
-     * prompt 扩写开关。1为开启，0为关闭，不传默认开启。
-  开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。
-  如果关闭扩写，将直接使用原始输入的 prompt 生成图片。
-  建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Revise?: number;
+    RequestId?: string;
 }
 /**
  * QueryDrawPortraitJob返回参数结构体
@@ -438,11 +435,11 @@ export interface ChangeClothesResponse {
     RequestId?: string;
 }
 /**
- * SubmitTextToImageProJob返回参数结构体
+ * SubmitMemeJob返回参数结构体
  */
-export interface SubmitTextToImageProJobResponse {
+export interface SubmitMemeJobResponse {
     /**
-     * 任务 ID。
+     * 任务id
      */
     JobId?: string;
     /**
@@ -546,6 +543,19 @@ export interface TextToImageRequest {
      * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
      */
     RspImgType?: string;
+}
+/**
+ * SubmitTextToImageProJob返回参数结构体
+ */
+export interface SubmitTextToImageProJobResponse {
+    /**
+     * 任务 ID。
+     */
+    JobId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * GenerateAvatar请求参数结构体
@@ -665,6 +675,105 @@ export interface ImageInpaintingRemovalResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SubmitMemeJob请求参数结构体
+ */
+export interface SubmitMemeJobRequest {
+    /**
+     * 表情模板。
+  请在 [表情动图模板列表](https://cloud.tencent.com/document/product/1668/115327)  中选择期望的模板，传入 Pose 名称。
+     */
+    Pose: string;
+    /**
+     * 人像参考图 Base64 数据。
+  Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
+  图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     */
+    InputImage?: string;
+    /**
+     * 人像参考图 Url。
+  Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
+  图片限制：单边分辨率小于5000，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+     */
+    InputUrl?: string;
+    /**
+     * 生成分辨率。
+  真人类型支持256、512，默认为256，
+  卡通类型仅支持512。
+     */
+    Resolution?: number;
+    /**
+     * 自定义文案。
+  仅对真人类型的 Pose 生效，将在生成的表情动图中显示指定的文字。如果传入的字符串长度大于10，只截取前10个显示。
+  如果不传，默认使用自带的文案。
+  如果 text = "" 空字符串，代表不在表情动图中添加文案。
+     */
+    Text?: string;
+    /**
+     * 头发遮罩开关。
+  true：裁剪过长的头发。
+  false：不裁剪过长的头发。
+  仅对卡通类型的 Pose 生效，默认为 false。
+     */
+    Haircut?: boolean;
+    /**
+     * 为生成结果图添加标识的开关，默认为1。
+  1：添加标识。
+  0：不添加标识。
+  其他数值：默认按1处理。
+  建议您使用显著标识来提示结果图是 AI 生成的图片。
+     */
+    LogoAdd?: number;
+    /**
+     * 标识内容设置。
+  默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+     */
+    LogoParam?: LogoParam;
+}
+/**
+ * SubmitTextToImageProJob请求参数结构体
+ */
+export interface SubmitTextToImageProJobRequest {
+    /**
+     * 文本描述。
+  算法将根据输入的文本智能生成与之相关的图像。
+  不能为空，推荐使用中文。最多可传100个 utf-8 字符。
+     */
+    Prompt: string;
+    /**
+     * 绘画风格。
+  请在 [文生图（高级版）风格列表](https://cloud.tencent.com/document/product/1668/104567) 中选择期望的风格，传入风格编号。
+  不传默认不指定风格。
+     */
+    Style?: string;
+    /**
+     * 生成图分辨率。
+  支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。
+     */
+    Resolution?: string;
+    /**
+     * 为生成结果图添加显式水印标识的开关，默认为1。
+  1：添加。
+  0：不添加。
+  其他数值：默认按1处理。
+  建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
+     */
+    LogoAdd?: number;
+    /**
+     * 文生图模型，默认使用engine1。
+  取值：
+  engine1
+  engine2
+     */
+    Engine?: string;
+    /**
+     * prompt 扩写开关。1为开启，0为关闭，不传默认开启。
+  开启扩写后，将自动扩写原始输入的 prompt 并使用扩写后的 prompt 生成图片，返回生成图片结果时将一并返回扩写后的 prompt 文本。
+  如果关闭扩写，将直接使用原始输入的 prompt 生成图片。
+  建议开启，在多数场景下可提升生成图片效果、丰富生成图片细节。
+     */
+    Revise?: number;
 }
 /**
  * SubmitTrainPortraitModelJob返回参数结构体

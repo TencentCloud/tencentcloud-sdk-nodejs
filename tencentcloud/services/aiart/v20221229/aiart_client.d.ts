@@ -1,12 +1,21 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ChangeClothesRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, SubmitTextToImageProJobRequest, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitTextToImageProJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, GenerateAvatarRequest, ImageInpaintingRemovalResponse, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ImageInpaintingRemovalRequest, ReplaceBackgroundRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryMemeJobRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ChangeClothesRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, QueryMemeJobResponse, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitMemeJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, SubmitTextToImageProJobResponse, GenerateAvatarRequest, ImageInpaintingRemovalResponse, SubmitMemeJobRequest, SubmitTextToImageProJobRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ImageInpaintingRemovalRequest, ReplaceBackgroundRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    SubmitMemeJob(req: SubmitMemeJobRequest, cb?: (error: string, rep: SubmitMemeJobResponse) => void): Promise<SubmitMemeJobResponse>;
     /**
      * 线稿生图接口支持上传一张黑白线稿图，按照指定的主体对象以及样式、颜色、材质、风格等的文本描述prompt ，对线稿图进行色彩填充与细节描绘，得到一张完整绘制的图像。生成图分辨率默认为1024:1024。
 线稿生图默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
@@ -48,6 +57,14 @@ export declare class Client extends AbstractClient {
      */
     GenerateAvatar(req: GenerateAvatarRequest, cb?: (error: string, rep: GenerateAvatarResponse) => void): Promise<GenerateAvatarResponse>;
     /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    QueryMemeJob(req: QueryMemeJobRequest, cb?: (error: string, rep: QueryMemeJobResponse) => void): Promise<QueryMemeJobResponse>;
+    /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 如果选择免训练模式无需调用本接口。
 训练模型分为提交任务和查询任务2个接口：
@@ -58,17 +75,6 @@ export declare class Client extends AbstractClient {
 每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
      */
     QueryTrainPortraitModelJob(req: QueryTrainPortraitModelJobRequest, cb?: (error: string, rep: QueryTrainPortraitModelJobResponse) => void): Promise<QueryTrainPortraitModelJobResponse>;
-    /**
-     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
-生成图片分为提交任务和查询任务2个接口：
-
-- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
-- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
-
-每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
-提交生成写真图片任务默认提供1个并发。
-     */
-    SubmitDrawPortraitJob(req: SubmitDrawPortraitJobRequest, cb?: (error: string, rep: SubmitDrawPortraitJobResponse) => void): Promise<SubmitDrawPortraitJobResponse>;
     /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 生成图片分为提交任务和查询任务2个接口：
@@ -106,6 +112,17 @@ export declare class Client extends AbstractClient {
 并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
     QueryTextToImageProJob(req: QueryTextToImageProJobRequest, cb?: (error: string, rep: QueryTextToImageProJobResponse) => void): Promise<QueryTextToImageProJobResponse>;
+    /**
+     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
+生成图片分为提交任务和查询任务2个接口：
+
+- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
+- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
+
+每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
+提交生成写真图片任务默认提供1个并发。
+     */
+    SubmitDrawPortraitJob(req: SubmitDrawPortraitJobRequest, cb?: (error: string, rep: SubmitDrawPortraitJobResponse) => void): Promise<SubmitDrawPortraitJobResponse>;
     /**
      * 局部消除接口通过图像 mask 指定需要消除的人、物、文字等区域，在选定区域对图像内容进行消除与重绘补全。
 默认提供1个并发，代表最多能同时处理1个已提交的任务。

@@ -126,17 +126,17 @@ export interface RedisBackupSet {
   /**
    * 备份开始时间。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 备份任务ID。
    */
-  BackupId: string
+  BackupId?: string
   /**
    * 备份类型。
 - 1：凌晨系统发起的自动备份。
 - 0：用户发起的手动备份。
    */
-  BackupType: string
+  BackupType?: string
   /**
    * 备份状态。 
 - 1：备份被其它流程锁定。
@@ -145,56 +145,56 @@ export interface RedisBackupSet {
 - 3：备份正在被导出。
 - 4：备份导出成功。
    */
-  Status: number
+  Status?: number
   /**
    * 备份的备注信息。
    */
-  Remark: string
+  Remark?: string
   /**
    * 备份是否被锁定。
 - 0：未被锁定。
 - 1：已被锁定。
    */
-  Locked: number
+  Locked?: number
   /**
    * 内部字段，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackupSize: number
+  BackupSize?: number
   /**
    * 内部字段，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FullBackup: number
+  FullBackup?: number
   /**
    * 内部字段，用户可忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType: number
+  InstanceType?: number
   /**
    * 实例 ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 本地备份所在地域。
    */
-  Region: string
+  Region?: string
   /**
    * 备份结束时间。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 备份文件类型。
    */
-  FileType: string
+  FileType?: string
   /**
    * 备份文件过期时间。
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -579,35 +579,35 @@ export interface Inbound {
   /**
    * 策略，ACCEPT或者DROP。
    */
-  Action: string
+  Action?: string
   /**
    * 地址组id代表的地址集合。
    */
-  AddressModule: string
+  AddressModule?: string
   /**
    * 来源Ip或Ip段，例如192.168.0.0/16。
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 描述。
    */
-  Desc: string
+  Desc?: string
   /**
    * 网络协议，支持udp、tcp等。
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 端口。
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 服务组id代表的协议和端口集合。
    */
-  ServiceModule: string
+  ServiceModule?: string
   /**
    * 安全组id代表的地址集合。
    */
-  Id: string
+  Id?: string
 }
 
 /**
@@ -1206,23 +1206,23 @@ export interface RegionConf {
   /**
    * 地域ID
    */
-  RegionId: string
+  RegionId?: string
   /**
    * 地域名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 地域简称
    */
-  RegionShortName: string
+  RegionShortName?: string
   /**
    * 地域所在大区名称
    */
-  Area: string
+  Area?: string
   /**
    * 可用区信息
    */
-  ZoneSet: Array<ZoneCapacityConf>
+  ZoneSet?: Array<ZoneCapacityConf>
 }
 
 /**
@@ -1232,23 +1232,23 @@ export interface BigKeyInfo {
   /**
    * 所属的database
    */
-  DB: number
+  DB?: number
   /**
    * 大Key
    */
-  Key: string
+  Key?: string
   /**
    * 类型
    */
-  Type: string
+  Type?: string
   /**
    * 大小
    */
-  Size: number
+  Size?: number
   /**
    * 数据时间戳
    */
-  Updatetime: number
+  Updatetime?: number
 }
 
 /**
@@ -1424,31 +1424,31 @@ export interface SecurityGroup {
   /**
    * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 项目ID。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 安全组ID。
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 安全组名称。
    */
-  SecurityGroupName: string
+  SecurityGroupName?: string
   /**
    * 安全组备注。
    */
-  SecurityGroupRemark: string
+  SecurityGroupRemark?: string
   /**
    * 出站规则。
    */
-  Outbound: Array<Outbound>
+  Outbound?: Array<Outbound>
   /**
    * 入站规则。
    */
-  Inbound: Array<Inbound>
+  Inbound?: Array<Inbound>
 }
 
 /**
@@ -1618,44 +1618,44 @@ export interface ParameterDetail {
   /**
    * 参数名称。
    */
-  Name: string
+  Name?: string
   /**
    * 参数类型。
    */
-  ParamType: string
+  ParamType?: string
   /**
    * 参数默认值。
    */
-  Default: string
+  Default?: string
   /**
    * 参数描述。
    */
-  Description: string
+  Description?: string
   /**
    * 参数当前值。
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 修改参数后，是否需要重启数据库以使参数生效。
 - 0：不需要重启。
 - 1：需要重启。
    */
-  NeedReboot: number
+  NeedReboot?: number
   /**
    * 参数允许的最大值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Max: string
+  Max?: string
   /**
    * 参数允许的最小值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Min: string
+  Min?: string
   /**
    * 参数可选枚举值。如果为非枚举参数，则为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
 }
 
 /**
@@ -3665,35 +3665,35 @@ export interface Outbound {
   /**
    * 策略，ACCEPT或者DROP。
    */
-  Action: string
+  Action?: string
   /**
    * 地址组id代表的地址集合。
    */
-  AddressModule: string
+  AddressModule?: string
   /**
    * 来源Ip或Ip段，例如192.168.0.0/16。
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 描述。
    */
-  Desc: string
+  Desc?: string
   /**
    * 网络协议，支持udp、tcp等。
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 端口。
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 服务组id代表的协议和端口集合。
    */
-  ServiceModule: string
+  ServiceModule?: string
   /**
    * 安全组id代表的地址集合。
    */
-  Id: string
+  Id?: string
 }
 
 /**
@@ -4214,51 +4214,51 @@ export interface TradeDealDetail {
   /**
    * 订单号ID，调用云API时使用此ID
    */
-  DealId: string
+  DealId?: string
   /**
    * 长订单ID，反馈订单问题给官方客服使用此ID
    */
-  DealName: string
+  DealName?: string
   /**
    * 可用区id
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 订单关联的实例数
    */
-  GoodsNum: number
+  GoodsNum?: number
   /**
    * 创建用户uin
    */
-  Creater: string
+  Creater?: string
   /**
    * 订单创建时间
    */
-  CreatTime: string
+  CreatTime?: string
   /**
    * 订单超时时间
    */
-  OverdueTime: string
+  OverdueTime?: string
   /**
    * 订单完成时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
    */
-  Status: number
+  Status?: number
   /**
    * 订单状态描述
    */
-  Description: string
+  Description?: string
   /**
    * 订单实际总价，单位：分
    */
-  Price: number
+  Price?: number
   /**
    * 实例ID
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
 }
 
 /**
@@ -5109,7 +5109,9 @@ export interface InstanceSet {
    */
   OfflineTime?: string
   /**
-   * 流程中的实例，返回子状态。
+   * 流程中的实例返回的子状态。
+- 0：磁盘读写状态。
+- 1：磁盘超限只读状态。
    */
   SubStatus?: number
   /**
@@ -5642,19 +5644,19 @@ export interface BigKeyTypeInfo {
   /**
    * 类型
    */
-  Type: string
+  Type?: string
   /**
    * 数量
    */
-  Count: number
+  Count?: number
   /**
    * 大小
    */
-  Size: number
+  Size?: number
   /**
    * 时间戳
    */
-  Updatetime: number
+  Updatetime?: number
 }
 
 /**
@@ -6425,23 +6427,23 @@ export interface TendisSlowLogDetail {
   /**
    * 执行时间
    */
-  ExecuteTime: string
+  ExecuteTime?: string
   /**
    * 慢查询耗时（毫秒）
    */
-  Duration: number
+  Duration?: number
   /**
    * 命令
    */
-  Command: string
+  Command?: string
   /**
    * 详细命令行信息
    */
-  CommandLine: string
+  CommandLine?: string
   /**
    * 节点ID
    */
-  Node: string
+  Node?: string
 }
 
 /**
@@ -6761,25 +6763,25 @@ export interface InstanceSlowlogDetail {
   /**
    * 慢查询耗时
    */
-  Duration: number
+  Duration?: number
   /**
    * 客户端地址
    */
-  Client: string
+  Client?: string
   /**
    * 命令
    */
-  Command: string
+  Command?: string
   /**
    * 详细命令行信息
    */
-  CommandLine: string
+  CommandLine?: string
   /**
    * 执行时间
    */
-  ExecuteTime: string
+  ExecuteTime?: string
   /**
    * 节点ID
    */
-  Node: string
+  Node?: string
 }

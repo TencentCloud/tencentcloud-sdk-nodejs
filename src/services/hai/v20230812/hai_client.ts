@@ -25,20 +25,23 @@ import {
   DescribeInstanceNetworkStatusResponse,
   Instance,
   TerminateInstancesResponse,
-  DescribeRegionsRequest,
+  DescribeApplicationsResponse,
   StartInstanceRequest,
   LoginSetting,
+  RegionInfo,
   Price,
   TerminateInstancesRequest,
-  RegionInfo,
+  DescribeMuskPromptsRequest,
   DescribeScenesResponse,
   DescribeApplicationsRequest,
+  SceneInfo,
   RunInstancesRequest,
   DescribeInstancesResponse,
   SystemDisk,
   RunInstancesResponse,
   DescribeInstancesRequest,
   Filter,
+  MuskPromptInfo,
   DescribeScenesRequest,
   DescribeRegionsResponse,
   InquirePriceRunInstancesRequest,
@@ -48,13 +51,13 @@ import {
   ApplicationInfo,
   ItemPriceDetail,
   CreateMuskPromptRequest,
-  DescribeApplicationsResponse,
+  DescribeRegionsRequest,
   ItemPrice,
   DescribeInstanceNetworkStatusRequest,
   LoginService,
   StopInstanceResponse,
   InstanceChargePrepaid,
-  SceneInfo,
+  DescribeMuskPromptsResponse,
 } from "./hai_models"
 
 /**
@@ -84,6 +87,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationsResponse) => void
   ): Promise<DescribeApplicationsResponse> {
     return this.request("DescribeApplications", req, cb)
+  }
+
+  /**
+   * 获取prompt任务列表
+   */
+  async DescribeMuskPrompts(
+    req: DescribeMuskPromptsRequest,
+    cb?: (error: string, rep: DescribeMuskPromptsResponse) => void
+  ): Promise<DescribeMuskPromptsResponse> {
+    return this.request("DescribeMuskPrompts", req, cb)
   }
 
   /**

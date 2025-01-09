@@ -165,7 +165,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteKnowledgeBase", req, cb);
     }
     /**
-     * 创建文档拆分任务
+     * 用于创建一个文档拆分任务，支持多种文件类型，具备mllm能力，能够解析并深入理解图表中的信息。
      */
     async CreateSplitDocumentFlow(req, cb) {
         return this.request("CreateSplitDocumentFlow", req, cb);

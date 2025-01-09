@@ -118,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEventHistory", req, cb);
     }
     /**
-     * 删除设备
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
+    async DescribeStudioProduct(req, cb) {
+        return this.request("DescribeStudioProduct", req, cb);
     }
     /**
      * 获取 LoRa 网关列表接口
@@ -182,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeletePositionSpace(req, cb) {
         return this.request("DeletePositionSpace", req, cb);
+    }
+    /**
+     * 获取设备激活详情
+     */
+    async DescribeActivateDevice(req, cb) {
+        return this.request("DescribeActivateDevice", req, cb);
     }
     /**
      * 获取网关产品已经绑定的子产品
@@ -250,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageDate", req, cb);
     }
     /**
+     * 查询云存卡套餐信息
+     */
+    async DescribeFreeCloudStorageNum(req, cb) {
+        return this.request("DescribeFreeCloudStorageNum", req, cb);
+    }
+    /**
      * 启用规则
      */
     async EnableTopicRule(req, cb) {
@@ -272,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TransferCloudStorage(req, cb) {
         return this.request("TransferCloudStorage", req, cb);
+    }
+    /**
+     * 用于查询视频激活码统计概览
+     */
+    async DescribeVideoLicense(req, cb) {
+        return this.request("DescribeVideoLicense", req, cb);
     }
     /**
      * 提供根据产品名称查找产品的能力
@@ -536,6 +554,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeCloudStorageAIServiceTask", req, cb);
     }
     /**
+     * 获取增值服务激活码详情
+     */
+    async DescribeActivateLicenseService(req, cb) {
+        return this.request("DescribeActivateLicenseService", req, cb);
+    }
+    /**
      * 开通免费云存服务
      */
     async CreateFreeCloudStorage(req, cb) {
@@ -786,10 +810,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPositionFence", req, cb);
     }
     /**
-     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * 删除设备
      */
-    async DescribeStudioProduct(req, cb) {
-        return this.request("DescribeStudioProduct", req, cb);
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
     }
     /**
      * 获取围栏列表

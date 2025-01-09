@@ -2896,6 +2896,10 @@ export interface GovernanceServiceInput {
    * 该服务对哪些命名空间可见
    */
   ExportTo?: Array<string>
+  /**
+   * 是否开启同步到全局注册中心
+   */
+  SyncToGlobalRegistry?: boolean
 }
 
 /**
@@ -6948,6 +6952,10 @@ export interface GovernanceNamespaceInput {
 3、列表内容为部份命名空间名称，则只对这些命名空间下可见
    */
   ServiceExportTo?: Array<string>
+  /**
+   * 是否开启同步到全局注册中心
+   */
+  SyncToGlobalRegistry?: boolean
 }
 
 /**

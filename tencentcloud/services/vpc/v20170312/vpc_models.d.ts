@@ -6846,12 +6846,10 @@ export interface NetDetect {
     NetDetectDescription?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -12303,7 +12301,6 @@ export interface DhcpIp {
     CreatedTime?: string;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -16230,12 +16227,10 @@ export interface CreateDefaultSecurityGroupResponse {
 export interface ClassicLinkInstance {
     /**
      * VPC实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 云服务器实例唯一ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
 }
@@ -16517,7 +16512,7 @@ export interface Ipv6SubnetCidrBlock {
      */
     SubnetId: string;
     /**
-     * `IPv6`子网段。形如：`3402:4e00:20:1001::/64`
+     * `IPv6`子网段。形如：`3402:4e00:20:1001::/64`。作为AssignIpv6SubnetCidrBlock接口入参时，该参数必填。
      */
     Ipv6CidrBlock?: string;
 }

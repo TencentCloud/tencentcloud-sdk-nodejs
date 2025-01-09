@@ -234,9 +234,24 @@ export interface TerminateInstancesResponse {
     RequestId?: string;
 }
 /**
- * DescribeRegions请求参数结构体
+ * DescribeApplications返回参数结构体
  */
-export declare type DescribeRegionsRequest = null;
+export interface DescribeApplicationsResponse {
+    /**
+     * 应用总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 分页返回的应用列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationSet?: Array<ApplicationInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * StartInstance请求参数结构体
  */
@@ -264,6 +279,35 @@ export interface LoginSetting {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
+}
+/**
+ * 地域列表
+ */
+export interface RegionInfo {
+    /**
+     * ap-guangzhou
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 华南地区(广州)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionName?: string;
+    /**
+     * 地域是否可用状态
+  AVAILABLE：可用
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionState?: string;
+    /**
+     * 学术加速是否支持：
+  NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScholarRocketSupportState?: string;
 }
 /**
  * 费用数据结构体
@@ -299,33 +343,29 @@ export interface TerminateInstancesRequest {
     DryRun?: boolean;
 }
 /**
- * 地域列表
+ * DescribeMuskPrompts请求参数结构体
  */
-export interface RegionInfo {
+export interface DescribeMuskPromptsRequest {
     /**
-     * ap-guangzhou
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * workgroup id
      */
-    Region?: string;
+    WorkgroupId: string;
     /**
-     * 华南地区(广州)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * workflow id
      */
-    RegionName?: string;
+    WorkflowId: string;
     /**
-     * 地域是否可用状态
-  AVAILABLE：可用
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * offset
      */
-    RegionState?: string;
+    Offset: number;
     /**
-     * 学术加速是否支持：
-  NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。对于ALREADY_SUPPORT的地域才需进一步调用DescribeScholarRocketStatus查看学术加速是开启还是关闭
-  注意：此字段可能返回 null，表示取不到有效值。
+     * limit
      */
-    ScholarRocketSupportState?: string;
+    Limit: number;
+    /**
+     * 过滤参数 支持过滤的键值： PromptId，Status
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeScenes返回参数结构体
@@ -376,6 +416,23 @@ export interface DescribeApplicationsRequest {
      * 输出应用列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列。
      */
     Order?: string;
+}
+/**
+ * 场景详情
+ */
+export interface SceneInfo {
+    /**
+     * 场景id
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneId?: string;
+    /**
+     * 场景名
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SceneName?: string;
 }
 /**
  * RunInstances请求参数结构体
@@ -501,6 +558,50 @@ export interface Filter {
      * 字段的过滤值。
      */
     Values: Array<string>;
+}
+/**
+ * musk prompt详情
+ */
+export interface MuskPromptInfo {
+    /**
+     * workflow id
+     */
+    WorkflowId?: string;
+    /**
+     * workgroup id
+     */
+    WorkgroupId?: string;
+    /**
+     * prompt id
+     */
+    PromptId?: string;
+    /**
+     * 生成的内容
+     */
+    OutputResource?: Array<string>;
+    /**
+     * prompt status
+  0: 执行中
+  1: 执行成功
+  2: 执行失败
+     */
+    Status?: number;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: string;
+    /**
+     * 任务执行耗时，单位毫秒
+     */
+    Cost?: number;
+    /**
+     * 任务执行失败错误信息
+     */
+    ErrorMessage?: string;
 }
 /**
  * DescribeScenes请求参数结构体
@@ -701,24 +802,9 @@ export interface CreateMuskPromptRequest {
     PromptParams: string;
 }
 /**
- * DescribeApplications返回参数结构体
+ * DescribeRegions请求参数结构体
  */
-export interface DescribeApplicationsResponse {
-    /**
-     * 应用总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount?: number;
-    /**
-     * 分页返回的应用列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ApplicationSet?: Array<ApplicationInfo>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeRegionsRequest = null;
 /**
  * 套餐价格
  */
@@ -805,19 +891,19 @@ export interface InstanceChargePrepaid {
     TimeUnit?: string;
 }
 /**
- * 场景详情
+ * DescribeMuskPrompts返回参数结构体
  */
-export interface SceneInfo {
+export interface DescribeMuskPromptsResponse {
     /**
-     * 场景id
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * total count
      */
-    SceneId?: string;
+    TotalCount?: number;
     /**
-     * 场景名
-  
-  注意：此字段可能返回 null，表示取不到有效值。
+     * prompt列表详情
      */
-    SceneName?: string;
+    MuskPromptInfos?: Array<MuskPromptInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

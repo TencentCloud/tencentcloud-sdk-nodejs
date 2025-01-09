@@ -124,6 +124,27 @@ export interface CreateCloudStorageRequest {
     StorageRegion?: string;
 }
 /**
+ * 云存套餐包信息
+ */
+export interface CloudStoragePackageInfo {
+    /**
+     * 套餐包id
+     */
+    PackageId?: string;
+    /**
+     * 套餐包名字
+     */
+    PackageName?: string;
+    /**
+     * 套餐包数量
+     */
+    Num?: number;
+    /**
+     * 已使用数量
+     */
+    UsedNum?: number;
+}
+/**
  * 消息数量统计
  */
 export interface MessageCntStats {
@@ -3360,6 +3381,19 @@ export interface DescribeCloudStorageDateResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFreeCloudStorageNum返回参数结构体
+ */
+export interface DescribeFreeCloudStorageNumResponse {
+    /**
+     * 套餐包信息
+     */
+    PackageInfos?: Array<CloudStoragePackageInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TransferCloudStorage返回参数结构体
  */
 export interface TransferCloudStorageResponse {
@@ -3461,6 +3495,10 @@ export interface BindCloudStorageUserResponse {
      */
     RequestId?: string;
 }
+/**
+ * DescribeFreeCloudStorageNum请求参数结构体
+ */
+export declare type DescribeFreeCloudStorageNumRequest = null;
 /**
  * CancelDeviceFirmwareTask请求参数结构体
  */

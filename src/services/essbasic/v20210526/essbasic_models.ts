@@ -4295,9 +4295,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
    */
   UrlType?: string
   /**
-   * 是否通知开通方，通知类型:
-<ul><li>默认不设置为不通知开通方</li>
-<li>**SMS** :  短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号</li></ul>
+   * 是否通知开通方，通知类型:<ul><li>默认为不通知开通方</li><li>**SMS** :  短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号</li></ul>
    */
   NotifyType?: string
   /**
@@ -5147,7 +5145,6 @@ export interface ChannelCreateFlowApproversResponse {
   /**
    * 批量补充签署人时，补充失败的报错说明 
 注:`目前仅补充动态签署人时会返回补充失败的原因`	
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FillError?: Array<FillError>
   /**
@@ -6760,7 +6757,7 @@ export interface ChannelOrganizationInfo {
    */
   ActiveStatus?: number
   /**
-   * 账号过期时间，时间戳
+   * 账号到期时间，时间戳
    */
   LicenseExpireTime?: number
 }
@@ -7011,12 +7008,10 @@ export interface ChannelCreateFlowByFilesResponse {
 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
 
 [点击查看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: string
   /**
    * 签署方信息，如角色ID、角色名称等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Approvers?: Array<ApproverItem>
   /**
@@ -7343,7 +7338,6 @@ export interface ChannelCreateFlowGroupByFilesResponse {
   /**
    * 合同组ID，为32位字符串。
 建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowGroupId?: string
   /**
@@ -7351,7 +7345,6 @@ export interface ChannelCreateFlowGroupByFilesResponse {
 
 注:
 `此数组的顺序和入参中的FlowGroupInfos顺序一致`
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowIds?: Array<string>
   /**

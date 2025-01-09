@@ -236,7 +236,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查看安全网关路由
-
      */
     async DescribeWxGatewayRoutes(req, cb) {
         return this.request("DescribeWxGatewayRoutes", req, cb);

@@ -359,6 +359,20 @@ export interface DescribeCloudStoragePackageConsumeDetailsRequest {
     EndDate: string;
 }
 /**
+ * DescribeActivateLicenseService返回参数结构体
+ */
+export interface DescribeActivateLicenseServiceResponse {
+    /**
+     * 增值服务激活码信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<LicenseServiceNumInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * wifi定位信息
  */
 export interface WifiInfo {
@@ -447,9 +461,17 @@ export interface DescribeSpaceFenceEventListResponse {
     RequestId?: string;
 }
 /**
- * DeleteLoRaGateway返回参数结构体
+ * SearchTopicRule返回参数结构体
  */
-export interface DeleteLoRaGatewayResponse {
+export interface SearchTopicRuleResponse {
+    /**
+     * 搜索到的规则总数
+     */
+    TotalCnt?: number;
+    /**
+     * 规则信息列表
+     */
+    Rules?: Array<TopicRuleInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -903,6 +925,19 @@ export interface FenceEventItem {
      * 围栏事件的设备位置信息
      */
     Data: FenceAlarmPoint;
+}
+/**
+ * 已注册通信类型信息
+ */
+export interface RegisteredDeviceNetTypeInfo {
+    /**
+     * 普通设备数
+     */
+    NormalDeviceNum: number;
+    /**
+     * 蓝牙设备数
+     */
+    BluetoothDeviceNum: number;
 }
 /**
  * DescribeGatewaySubDeviceList请求参数结构体
@@ -1663,6 +1698,26 @@ export interface DescribeCloudStorageUsersRequest {
     Offset: number;
 }
 /**
+ * TWeCall信息
+ */
+export interface TWeCallLicenseInfo {
+    /**
+     * voip类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TWeCallType?: string;
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalNum?: number;
+    /**
+     * 已使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedNum?: number;
+}
+/**
  * DescribeCloudStorageDate请求参数结构体
  */
 export interface DescribeCloudStorageDateRequest {
@@ -1875,6 +1930,10 @@ export interface BindProductInfo {
      */
     ProductOwnerName: string;
 }
+/**
+ * DescribeFreeCloudStorageNum请求参数结构体
+ */
+export declare type DescribeFreeCloudStorageNumRequest = null;
 /**
  * DescribeDevicePositionList请求参数结构体
  */
@@ -2922,6 +2981,20 @@ export interface DeletePositionSpaceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeActivateDevice返回参数结构体
+ */
+export interface DescribeActivateDeviceResponse {
+    /**
+     * 设备激活详情信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: ActivateDeviceInfo;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ResetTWeCallDevice返回参数结构体
  */
 export interface ResetTWeCallDeviceResponse {
@@ -3309,6 +3382,15 @@ export interface DescribeDeviceLocationSolveRequest {
      * wifi信息
      */
     WiFiInfo?: Array<WifiInfo>;
+}
+/**
+ * DescribeVideoLicense请求参数结构体
+ */
+export interface DescribeVideoLicenseRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * DescribeCloudStorageAIService返回参数结构体
@@ -3750,6 +3832,15 @@ export interface DeletePositionSpaceRequest {
     SpaceId: string;
 }
 /**
+ * DescribeActivateDevice请求参数结构体
+ */
+export interface DescribeActivateDeviceRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+}
+/**
  * CreateProject请求参数结构体
  */
 export interface CreateProjectRequest {
@@ -4062,6 +4153,23 @@ export interface DescribeDeviceFirmWareResponse {
     RequestId?: string;
 }
 /**
+ * 已注册设备类型信息
+ */
+export interface RegisteredDeviceTypeInfo {
+    /**
+     * 已注册设备数
+     */
+    NormalDeviceNum: number;
+    /**
+     * 已注册网关数
+     */
+    GatewayDeviceNum: number;
+    /**
+     * 已注册子设备数
+     */
+    SubDeviceNum: number;
+}
+/**
  * 缩略图信息
  */
 export interface ThumbnailURLInfoList {
@@ -4092,6 +4200,28 @@ export interface DescribeFenceEventListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 增值服务数量统计
+ */
+export interface LicenseServiceNumInfo {
+    /**
+     * 服务类型
+     */
+    LicenseType?: string;
+    /**
+     * 授权总数
+     */
+    TotalNum?: number;
+    /**
+     * 已使用授权数
+     */
+    UsedNum?: number;
+    /**
+     * TWeCall激活码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TWeCallLicense?: Array<TWeCallLicenseInfo>;
 }
 /**
  * TRTC 的参数 可以用来加入房间
@@ -4379,6 +4509,27 @@ export interface PositionFenceItem {
     FenceArea: string;
 }
 /**
+ * 视频设备激活码统计
+ */
+export interface VideoLicenseEntity {
+    /**
+     * 激活码类型，取值范围如下：0_5_mbps、1_mbps、1_5_mbps、2_mbps
+     */
+    Type?: string;
+    /**
+     * 有效激活码总数
+     */
+    TotalCount?: number;
+    /**
+     * 待使用的激活码数量
+     */
+    UsedCount?: number;
+    /**
+     * 即将过期的激活码数量
+     */
+    ExpiresSoonCount?: number;
+}
+/**
  * GetCOSURL返回参数结构体
  */
 export interface GetCOSURLResponse {
@@ -4439,6 +4590,31 @@ export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 设备激活详情信息
+ */
+export interface ActivateDeviceInfo {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 实例类型
+     */
+    InstanceType: number;
+    /**
+     * 设备激活信息
+     */
+    DeviceActivationDetails: DeviceActivationDetail;
+    /**
+     * 已注册设备类型信息
+     */
+    RegisteredDeviceType: RegisteredDeviceTypeInfo;
+    /**
+     * 已注册设备通信类型信息
+     */
+    RegisteredDeviceNetType: RegisteredDeviceNetTypeInfo;
 }
 /**
  * ResetTWeCallDevice请求参数结构体
@@ -4705,6 +4881,20 @@ export interface SearchStudioProductResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVideoLicense返回参数结构体
+ */
+export interface DescribeVideoLicenseResponse {
+    /**
+     * 视频激活码分类概览
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    License?: Array<VideoLicenseEntity>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribePackageConsumeTasks请求参数结构体
  */
 export interface DescribePackageConsumeTasksRequest {
@@ -4732,17 +4922,9 @@ export interface GetFamilyDeviceUserListResponse {
     RequestId?: string;
 }
 /**
- * SearchTopicRule返回参数结构体
+ * DeleteLoRaGateway返回参数结构体
  */
-export interface SearchTopicRuleResponse {
-    /**
-     * 搜索到的规则总数
-     */
-    TotalCnt?: number;
-    /**
-     * 规则信息列表
-     */
-    Rules?: Array<TopicRuleInfo>;
+export interface DeleteLoRaGatewayResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5103,6 +5285,19 @@ export interface DescribeCloudStorageOrderResponse {
     RequestId?: string;
 }
 /**
+ * DescribeActivateLicenseService请求参数结构体
+ */
+export interface DescribeActivateLicenseServiceRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 激活码类型
+     */
+    LicenseType?: string;
+}
+/**
  * CreateTRTCSignaturesWithRoomId返回参数结构体
  */
 export interface CreateTRTCSignaturesWithRoomIdResponse {
@@ -5315,6 +5510,27 @@ export interface DeleteProjectRequest {
      * 项目ID
      */
     ProjectId: string;
+}
+/**
+ * 云存套餐包信息
+ */
+export interface CloudStoragePackageInfo {
+    /**
+     * 套餐包id
+     */
+    PackageId?: string;
+    /**
+     * 套餐包名字
+     */
+    PackageName?: string;
+    /**
+     * 套餐包数量
+     */
+    Num?: number;
+    /**
+     * 已使用数量
+     */
+    UsedNum?: number;
 }
 /**
  * ProductId -> DeviceName
@@ -6785,6 +7001,19 @@ export interface DescribeCloudStorageDateResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFreeCloudStorageNum返回参数结构体
+ */
+export interface DescribeFreeCloudStorageNumResponse {
+    /**
+     * 套餐包信息
+     */
+    PackageInfos?: Array<CloudStoragePackageInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 云存时间轴信息
  */
 export interface CloudStorageTimeInfo {
@@ -6888,6 +7117,35 @@ export interface DeleteTopicPolicyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 设备激活详情信息
+ */
+export interface DeviceActivationDetail {
+    /**
+     * 可注册设备数
+     */
+    TotalDeviceNum: number;
+    /**
+     * 已注册设备数
+     */
+    UsedDeviceNum: number;
+    /**
+     * 设备授权数
+     */
+    TotalNormalLicense: number;
+    /**
+     * 已使用设备授权数
+     */
+    UsedNormalLicense: number;
+    /**
+     * 蓝牙授权数
+     */
+    TotalBluetoothLicense: number;
+    /**
+     * 已使用蓝牙授权数
+     */
+    UsedBluetoothLicense: number;
 }
 /**
  * UnbindDevices返回参数结构体

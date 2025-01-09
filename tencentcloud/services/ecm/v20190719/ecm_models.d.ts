@@ -737,12 +737,11 @@ export interface DescribeRouteTablesResponse {
     /**
      * 符合条件的实例数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 路由表列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RouteTableSet: Array<RouteTable>;
+    RouteTableSet?: Array<RouteTable>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1721,7 +1720,6 @@ export interface DescribeVpcsResponse {
     TotalCount?: number;
     /**
      * 私有网络对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcSet?: Array<VpcInfo>;
     /**
@@ -2206,7 +2204,6 @@ export interface SecurityGroupPolicy {
     PolicyDescription?: string;
     /**
      * 修改时间，例如 2020-07-22 19：27：23
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
     /**
@@ -2678,12 +2675,10 @@ export interface ModifyLoadBalancerAttributesResponse {
 export interface Tag {
     /**
      * 标签健。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
      * 标签值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -3975,49 +3970,49 @@ export interface HaVip {
     /**
      * HAVIP的ID，是HAVIP的唯一标识。
      */
-    HaVipId: string;
+    HaVipId?: string;
     /**
      * HAVIP名称。
      */
-    HaVipName: string;
+    HaVipName?: string;
     /**
      * 虚拟IP地址。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * HAVIP所在私有网络ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * HAVIP所在子网ID。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * HAVIP关联弹性网卡ID。
      */
-    NetworkInterfaceId: string;
+    NetworkInterfaceId?: string;
     /**
      * 被绑定的实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 绑定EIP。
      */
-    AddressIp: string;
+    AddressIp?: string;
     /**
      * 状态：
   AVAILABLE：运行中。
   UNBIND：未绑定。
      */
-    State: string;
+    State?: string;
     /**
      * 创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 使用havip的业务标识。
      */
-    Business: string;
+    Business?: string;
 }
 /**
  * ModifyAddressesBandwidth返回参数结构体
@@ -4773,7 +4768,6 @@ export interface PrivateIpAddressSpecification {
     PrivateIpAddress: string;
     /**
      * 是否是主IP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Primary?: boolean;
     /**
@@ -4790,7 +4784,6 @@ export interface PrivateIpAddressSpecification {
     Description?: string;
     /**
      * 公网IP是否被封堵。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsWanIpBlocked?: boolean;
     /**
@@ -5891,7 +5884,6 @@ export interface DescribeSubnetsResponse {
     TotalCount?: number;
     /**
      * 子网对象。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetSet?: Array<Subnet>;
     /**
@@ -7407,7 +7399,6 @@ export interface DescribeNetworkInterfacesResponse {
     TotalCount?: number;
     /**
      * 实例详细信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkInterfaceSet?: Array<NetworkInterface>;
     /**

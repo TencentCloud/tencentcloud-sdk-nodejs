@@ -22,11 +22,11 @@ export interface TimeValue {
   /**
    * 时间，unix时间戳（1590065877s)
    */
-  Time: number
+  Time?: number
   /**
    * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -524,12 +524,12 @@ export interface AbnormalEvent {
   /**
    * 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916
    */
-  AbnormalEventId: number
+  AbnormalEventId?: number
   /**
    * 远端用户ID,""：表示异常事件不是由远端用户产生
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PeerId: string
+  PeerId?: string
 }
 
 /**
@@ -539,22 +539,22 @@ export interface ScaleInfomation {
   /**
    * 每天开始的时间
    */
-  Time: number
+  Time?: number
   /**
    * 房间人数，用户重复进入同一个房间为1次
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserNumber: number
+  UserNumber?: number
   /**
    * 房间人次，用户每次进入房间为一次
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserCount: number
+  UserCount?: number
   /**
    * sdkappid下一天内的房间数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoomNumbers: number
+  RoomNumbers?: number
 }
 
 /**
@@ -742,27 +742,27 @@ export interface PictureInfo {
   /**
    * 图片长度
    */
-  Height: number
+  Height?: number
   /**
    * 图片宽度
    */
-  Width: number
+  Width?: number
   /**
    * 显示位置x轴方向
    */
-  XPosition: number
+  XPosition?: number
   /**
    * 显示位置y轴方向
    */
-  YPosition: number
+  YPosition?: number
   /**
    * 应用id
    */
-  SdkAppId: number
+  SdkAppId?: number
   /**
    * 图片id
    */
-  PictureId: number
+  PictureId?: number
 }
 
 /**
@@ -1651,11 +1651,11 @@ export interface EventList {
   /**
    * 数据内容
    */
-  Content: Array<EventMessage>
+  Content?: Array<EventMessage>
   /**
    * 发送端的userId
    */
-  PeerId: string
+  PeerId?: string
 }
 
 /**
@@ -2482,11 +2482,11 @@ export interface SdkAppIdRecordUsage {
   /**
    * SdkAppId的值。
    */
-  SdkAppId: string
+  SdkAppId?: string
   /**
    * 统计的时间点数据。
    */
-  Usages: Array<RecordUsage>
+  Usages?: Array<RecordUsage>
 }
 
 /**
@@ -2780,23 +2780,23 @@ export interface RecordUsage {
   /**
    * 本组数据对应的时间点，格式如:2020-09-07或2020-09-07 00:05:05。
    */
-  TimeKey: string
+  TimeKey?: string
   /**
    * 视频时长-标清SD，单位：秒。
    */
-  Class1VideoTime: number
+  Class1VideoTime?: number
   /**
    * 视频时长-高清HD，单位：秒。
    */
-  Class2VideoTime: number
+  Class2VideoTime?: number
   /**
    * 视频时长-超清HD，单位：秒。
    */
-  Class3VideoTime: number
+  Class3VideoTime?: number
   /**
    * 语音时长，单位：秒。
    */
-  AudioTime: number
+  AudioTime?: number
 }
 
 /**
@@ -3002,20 +3002,20 @@ export interface QualityData {
   /**
    * 数据内容
    */
-  Content: Array<TimeValue>
+  Content?: Array<TimeValue>
   /**
    * 用户ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 对端Id,为空时表示上行数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PeerId: string
+  PeerId?: string
   /**
    * 数据类型
    */
-  DataType: string
+  DataType?: string
 }
 
 /**
@@ -3444,35 +3444,35 @@ export interface UserInformation {
   /**
    * 房间号
    */
-  RoomStr: string
+  RoomStr?: string
   /**
    * 用户Id
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户进房时间
    */
-  JoinTs: number
+  JoinTs?: number
   /**
    * 用户退房时间，用户没有退房则返回当前时间
    */
-  LeaveTs: number
+  LeaveTs?: number
   /**
    * 终端类型
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * Sdk版本号
    */
-  SdkVersion: string
+  SdkVersion?: string
   /**
    * 客户端IP地址
    */
-  ClientIp: string
+  ClientIp?: string
   /**
    * 判断用户是否已经离开房间
    */
-  Finished: boolean
+  Finished?: boolean
 }
 
 /**
@@ -3930,23 +3930,23 @@ export interface EventMessage {
 3：视频为小画面；
 7：视频为旁路画面；
    */
-  Type: number
+  Type?: number
   /**
    * 事件上报的时间戳，unix时间（1589891188801ms)
    */
-  Time: number
+  Time?: number
   /**
    * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
    */
-  EventId: number
+  EventId?: number
   /**
    * 事件的第一个参数，如视频分辨率宽
    */
-  ParamOne: number
+  ParamOne?: number
   /**
    * 事件的第二个参数，如视频分辨率高
    */
-  ParamTwo: number
+  ParamTwo?: number
 }
 
 /**
@@ -4124,15 +4124,15 @@ export interface OneSdkAppIdTranscodeTimeUsagesInfo {
   /**
    * 旁路转码时长查询结果数组
    */
-  SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>
+  SdkAppIdTranscodeTimeUsages?: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>
   /**
    * 查询记录数量
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
    */
-  SdkAppId: string
+  SdkAppId?: string
 }
 
 /**
@@ -4390,23 +4390,23 @@ export interface AbnormalExperience {
   /**
    * 用户ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 异常体验ID
    */
-  ExperienceId: number
+  ExperienceId?: number
   /**
    * 字符串房间号
    */
-  RoomId: string
+  RoomId?: string
   /**
    * 异常事件数组
    */
-  AbnormalEventList: Array<AbnormalEvent>
+  AbnormalEventList?: Array<AbnormalEvent>
   /**
    * 异常事件的上报时间
    */
-  EventTime: number
+  EventTime?: number
 }
 
 /**
@@ -4446,27 +4446,27 @@ export interface RoomState {
   /**
    * 通话ID（唯一标识一次通话）
    */
-  CommId: string
+  CommId?: string
   /**
    * 房间号
    */
-  RoomString: string
+  RoomString?: string
   /**
    * 房间创建时间
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 房间销毁时间
    */
-  DestroyTime: number
+  DestroyTime?: number
   /**
    * 房间是否已经结束
    */
-  IsFinished: boolean
+  IsFinished?: boolean
   /**
    * 房间创建者Id
    */
-  UserId: string
+  UserId?: string
 }
 
 /**

@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageDate", req, cb);
     }
     /**
+     * 查询云存卡套餐信息
+     */
+    async DescribeFreeCloudStorageNum(req, cb) {
+        return this.request("DescribeFreeCloudStorageNum", req, cb);
+    }
+    /**
      * 设置转发权限
      */
     async SetForwardAuth(req, cb) {

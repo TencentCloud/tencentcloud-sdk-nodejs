@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeRegionsRequest, StartInstanceRequest, TerminateInstancesRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, StartInstanceResponse, CreateMuskPromptResponse, DescribeServiceLoginSettingsRequest, CreateMuskPromptRequest, DescribeApplicationsResponse, DescribeInstanceNetworkStatusRequest, StopInstanceResponse } from "./hai_models";
+import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeApplicationsResponse, StartInstanceRequest, TerminateInstancesRequest, DescribeMuskPromptsRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, StartInstanceResponse, CreateMuskPromptResponse, DescribeServiceLoginSettingsRequest, CreateMuskPromptRequest, DescribeRegionsRequest, DescribeInstanceNetworkStatusRequest, StopInstanceResponse, DescribeMuskPromptsResponse } from "./hai_models";
 /**
  * hai client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 查询应用
      */
     DescribeApplications(req: DescribeApplicationsRequest, cb?: (error: string, rep: DescribeApplicationsResponse) => void): Promise<DescribeApplicationsResponse>;
+    /**
+     * 获取prompt任务列表
+     */
+    DescribeMuskPrompts(req: DescribeMuskPromptsRequest, cb?: (error: string, rep: DescribeMuskPromptsResponse) => void): Promise<DescribeMuskPromptsResponse>;
     /**
      * 查询场景
      */

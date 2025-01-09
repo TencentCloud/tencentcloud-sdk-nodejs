@@ -38,11 +38,12 @@ import {
   CheckFirmwareUpdateResponse,
   DescribeCloudStorageUsersResponse,
   DescribeCloudStoragePackageConsumeDetailsRequest,
+  DescribeActivateLicenseServiceResponse,
   WifiInfo,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   DescribeSpaceFenceEventListResponse,
-  DeleteLoRaGatewayResponse,
+  SearchTopicRuleResponse,
   ModifyCloudStorageAIServiceResponse,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
@@ -68,6 +69,7 @@ import {
   CreateTRTCSignaturesWithRoomIdRequest,
   DescribeSpaceFenceEventListRequest,
   FenceEventItem,
+  RegisteredDeviceNetTypeInfo,
   DescribeGatewaySubDeviceListRequest,
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
@@ -99,6 +101,7 @@ import {
   GetBatchProductionsListResponse,
   DescribeDeviceFirmwaresResponse,
   DescribeCloudStorageUsersRequest,
+  TWeCallLicenseInfo,
   DescribeCloudStorageDateRequest,
   DescribeTopicPolicyRequest,
   DescribeDeviceFirmwaresRequest,
@@ -111,6 +114,7 @@ import {
   GetDeviceListResponse,
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
+  DescribeFreeCloudStorageNumRequest,
   DescribeDevicePositionListRequest,
   InvokeExternalSourceAIServiceTaskResponse,
   CreateStudioProductRequest,
@@ -168,6 +172,7 @@ import {
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
+  DescribeActivateDeviceResponse,
   ResetTWeCallDeviceResponse,
   AppDeviceInfo,
   DescribeCloudStorageResponse,
@@ -187,6 +192,7 @@ import {
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
   DescribeDeviceLocationSolveRequest,
+  DescribeVideoLicenseRequest,
   DescribeCloudStorageAIServiceResponse,
   AssignTWeCallLicenseRequest,
   PackageInfo,
@@ -211,6 +217,7 @@ import {
   DevicePositionItem,
   GetDeviceLocationHistoryRequest,
   DeletePositionSpaceRequest,
+  DescribeActivateDeviceRequest,
   CreateProjectRequest,
   CreateCloudStorageAIServiceResponse,
   DeviceDataHistoryItem,
@@ -227,8 +234,10 @@ import {
   DescribeTopicPolicyResponse,
   LoRaFrequencyEntry,
   DescribeDeviceFirmWareResponse,
+  RegisteredDeviceTypeInfo,
   ThumbnailURLInfoList,
   DescribeFenceEventListResponse,
+  LicenseServiceNumInfo,
   TRTCParams,
   ModifyCloudStorageAIServiceRequest,
   GetStudioProductListRequest,
@@ -239,10 +248,12 @@ import {
   ListFirmwaresRequest,
   PublishMessageRequest,
   PositionFenceItem,
+  VideoLicenseEntity,
   GetCOSURLResponse,
   ReleaseStudioProductRequest,
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
+  ActivateDeviceInfo,
   ResetTWeCallDeviceRequest,
   CallDeviceActionAsyncRequest,
   ResumeWeCallDeviceResponse,
@@ -259,9 +270,10 @@ import {
   DescribeDevicePackagesResponse,
   DescribeGatewaySubDeviceListResponse,
   SearchStudioProductResponse,
+  DescribeVideoLicenseResponse,
   DescribePackageConsumeTasksRequest,
   GetFamilyDeviceUserListResponse,
-  SearchTopicRuleResponse,
+  DeleteLoRaGatewayResponse,
   AssignTWeCallLicenseResponse,
   LoRaGatewayItem,
   ModifyLoRaFrequencyRequest,
@@ -278,12 +290,14 @@ import {
   ModifyLoRaGatewayResponse,
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageOrderResponse,
+  DescribeActivateLicenseServiceRequest,
   CreateTRTCSignaturesWithRoomIdResponse,
   DescribeCloudStorageEventsRequest,
   DeviceInfo,
   DescribeInstanceRequest,
   ResetCloudStorageRequest,
   DeleteProjectRequest,
+  CloudStoragePackageInfo,
   DevicesItem,
   UpdateDevicesEnableStateResponse,
   GenerateSignedVideoURLRequest,
@@ -356,11 +370,13 @@ import {
   DescribeLoRaFrequencyResponse,
   CreateCloudStorageAIServiceTaskResponse,
   DescribeCloudStorageDateResponse,
+  DescribeFreeCloudStorageNumResponse,
   CloudStorageTimeInfo,
   CreateIotVideoCloudStorageRequest,
   GenerateCloudStorageAIServiceTaskFileURLRequest,
   BindCloudStorageUserResponse,
   DeleteTopicPolicyResponse,
+  DeviceActivationDetail,
   UnbindDevicesResponse,
   CreateBatchProductionResponse,
   GetTopicRuleListRequest,
@@ -544,13 +560,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除设备
+   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
+  async DescribeStudioProduct(
+    req: DescribeStudioProductRequest,
+    cb?: (error: string, rep: DescribeStudioProductResponse) => void
+  ): Promise<DescribeStudioProductResponse> {
+    return this.request("DescribeStudioProduct", req, cb)
   }
 
   /**
@@ -651,6 +667,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePositionSpaceResponse) => void
   ): Promise<DeletePositionSpaceResponse> {
     return this.request("DeletePositionSpace", req, cb)
+  }
+
+  /**
+   * 获取设备激活详情
+   */
+  async DescribeActivateDevice(
+    req: DescribeActivateDeviceRequest,
+    cb?: (error: string, rep: DescribeActivateDeviceResponse) => void
+  ): Promise<DescribeActivateDeviceResponse> {
+    return this.request("DescribeActivateDevice", req, cb)
   }
 
   /**
@@ -764,6 +790,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云存卡套餐信息
+   */
+  async DescribeFreeCloudStorageNum(
+    req?: DescribeFreeCloudStorageNumRequest,
+    cb?: (error: string, rep: DescribeFreeCloudStorageNumResponse) => void
+  ): Promise<DescribeFreeCloudStorageNumResponse> {
+    return this.request("DescribeFreeCloudStorageNum", req, cb)
+  }
+
+  /**
    * 启用规则
    */
   async EnableTopicRule(
@@ -801,6 +837,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferCloudStorageResponse) => void
   ): Promise<TransferCloudStorageResponse> {
     return this.request("TransferCloudStorage", req, cb)
+  }
+
+  /**
+   * 用于查询视频激活码统计概览
+   */
+  async DescribeVideoLicense(
+    req: DescribeVideoLicenseRequest,
+    cb?: (error: string, rep: DescribeVideoLicenseResponse) => void
+  ): Promise<DescribeVideoLicenseResponse> {
+    return this.request("DescribeVideoLicense", req, cb)
   }
 
   /**
@@ -1238,6 +1284,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取增值服务激活码详情
+   */
+  async DescribeActivateLicenseService(
+    req: DescribeActivateLicenseServiceRequest,
+    cb?: (error: string, rep: DescribeActivateLicenseServiceResponse) => void
+  ): Promise<DescribeActivateLicenseServiceResponse> {
+    return this.request("DescribeActivateLicenseService", req, cb)
+  }
+
+  /**
    * 开通免费云存服务
    */
   async CreateFreeCloudStorage(
@@ -1652,13 +1708,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+   * 删除设备
    */
-  async DescribeStudioProduct(
-    req: DescribeStudioProductRequest,
-    cb?: (error: string, rep: DescribeStudioProductResponse) => void
-  ): Promise<DescribeStudioProductResponse> {
-    return this.request("DescribeStudioProduct", req, cb)
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
   }
 
   /**

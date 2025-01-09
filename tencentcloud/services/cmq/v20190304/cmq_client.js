@@ -28,67 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("cmq.tencentcloudapi.com", "2019-03-04", clientConfig);
     }
     /**
-     * 创建主题
-     */
-    async CreateTopic(req, cb) {
-        return this.request("CreateTopic", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-创建订阅接口
-     */
-    async CreateSubscribe(req, cb) {
-        return this.request("CreateSubscribe", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-修改主题属性
-     */
-    async ModifyTopicAttribute(req, cb) {
-        return this.request("ModifyTopicAttribute", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-清空订阅者消息标签
-     */
-    async ClearSubscriptionFilterTags(req, cb) {
-        return this.request("ClearSubscriptionFilterTags", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-删除订阅
-     */
-    async DeleteSubscribe(req, cb) {
-        return this.request("DeleteSubscribe", req, cb);
-    }
-    /**
-     * 创建队列接口
-
-     */
-    async CreateQueue(req, cb) {
-        return this.request("CreateQueue", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-回溯队列
-     */
-    async RewindQueue(req, cb) {
-        return this.request("RewindQueue", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-修改订阅属性
-     */
-    async ModifySubscriptionAttribute(req, cb) {
-        return this.request("ModifySubscriptionAttribute", req, cb);
-    }
-    /**
      * 查询主题详情
      */
     async DescribeTopicDetail(req, cb) {
@@ -99,56 +38,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeQueueDetail(req, cb) {
         return this.request("DescribeQueueDetail", req, cb);
-    }
-    /**
-     * DeleteQueue
-     */
-    async DeleteQueue(req, cb) {
-        return this.request("DeleteQueue", req, cb);
-    }
-    /**
-     * 查询订阅详情
-     */
-    async DescribeSubscriptionDetail(req, cb) {
-        return this.request("DescribeSubscriptionDetail", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-枚举死信队列源队列
-     */
-    async DescribeDeadLetterSourceQueues(req, cb) {
-        return this.request("DescribeDeadLetterSourceQueues", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-删除主题
-     */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-清除queue中的所有消息
-     */
-    async ClearQueue(req, cb) {
-        return this.request("ClearQueue", req, cb);
-    }
-    /**
-     * 下线老cmq云API 3.0 无调用量接口
-
-解绑死信队列
-     */
-    async UnbindDeadLetter(req, cb) {
-        return this.request("UnbindDeadLetter", req, cb);
-    }
-    /**
-     * 修改队列属性
-     */
-    async ModifyQueueAttribute(req, cb) {
-        return this.request("ModifyQueueAttribute", req, cb);
     }
 }
 exports.Client = Client;

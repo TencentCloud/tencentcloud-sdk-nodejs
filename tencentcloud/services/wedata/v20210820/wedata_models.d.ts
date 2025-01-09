@@ -9658,6 +9658,10 @@ export interface GenHiveTableDDLSqlRequest {
      * 目标端schema名称
      */
     SinkSchemaName?: string;
+    /**
+     * 获取源信息的环境
+     */
+    Env?: string;
 }
 /**
  * BatchCreateIntegrationTaskAlarms请求参数结构体
@@ -14978,6 +14982,11 @@ export interface TaskAlarmInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DingDingWebHooks?: string;
+    /**
+     * 业务类型, 0-非默认, 1-默认
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessType?: number;
 }
 /**
  * DescribeSchedulerTaskCntByStatus请求参数结构体
@@ -15464,6 +15473,16 @@ export interface AlarmIndicatorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Threshold?: number;
+    /**
+     * 时间范围单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndicatorTimeRangeUnit?: string;
+    /**
+     * 时间范围值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndicatorTimeRangeValue?: number;
 }
 /**
  * DescribeDataServicePublishedApiDetail返回参数结构体
@@ -20638,6 +20657,14 @@ export interface CreateHiveTableRequest {
      * 责任人
      */
     Incharge?: string;
+    /**
+     * 数据优化引擎
+     */
+    DataOptimizationResource?: string;
+    /**
+     * 是否开启数据优化
+     */
+    SmartOptimizerWritten?: string;
 }
 /**
  * 数据运维脚本信息
@@ -21419,6 +21446,14 @@ export interface CreateHiveTableByDDLRequest {
      * 是否异步建表
      */
     Async?: boolean;
+    /**
+     * 数据优化使用的资源
+     */
+    DataOptimizationResource?: string;
+    /**
+     * 是否开启数据优化
+     */
+    SmartOptimizerWritten?: string;
 }
 /**
  * 数据质量数据来源数据库

@@ -168,9 +168,9 @@ it("iotexplorer.v20190423.ListEventHistory", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DeleteDevice", async function () {
+it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
     try {
-       const data = await client.DeleteDevice({})
+       const data = await client.DescribeStudioProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +271,16 @@ it("iotexplorer.v20190423.DescribeCloudStoragePackageConsumeStats", async functi
 it("iotexplorer.v20190423.DeletePositionSpace", async function () {
     try {
        const data = await client.DeletePositionSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeActivateDevice", async function () {
+    try {
+       const data = await client.DescribeActivateDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,6 +398,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageDate", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeFreeCloudStorageNum", async function () {
+    try {
+       const data = await client.DescribeFreeCloudStorageNum({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.EnableTopicRule", async function () {
     try {
        const data = await client.EnableTopicRule({})
@@ -421,6 +441,16 @@ it("iotexplorer.v20190423.DescribeCloudStorageUsers", async function () {
 it("iotexplorer.v20190423.TransferCloudStorage", async function () {
     try {
        const data = await client.TransferCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeVideoLicense", async function () {
+    try {
+       const data = await client.DescribeVideoLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,6 +888,16 @@ it("iotexplorer.v20190423.InvokeCloudStorageAIServiceTask", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeActivateLicenseService", async function () {
+    try {
+       const data = await client.DescribeActivateLicenseService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateFreeCloudStorage", async function () {
     try {
        const data = await client.CreateFreeCloudStorage({})
@@ -1268,9 +1308,9 @@ it("iotexplorer.v20190423.ModifyPositionFence", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
+it("iotexplorer.v20190423.DeleteDevice", async function () {
     try {
-       const data = await client.DescribeStudioProduct({})
+       const data = await client.DeleteDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

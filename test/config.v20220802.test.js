@@ -18,9 +18,9 @@ const client = new tencentcloud.config.v20220802.Client({
 })
 describe("config.v20220802.test.js", function () {
 
-it("config.v20220802.ListConfigRules", async function () {
+it("config.v20220802.ListAggregateConfigRules", async function () {
     try {
-       const data = await client.ListConfigRules({})
+       const data = await client.ListAggregateConfigRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("config.v20220802.ListDiscoveredResources", async function () {
     }
 })
 
-it("config.v20220802.ListAggregateConfigRules", async function () {
+it("config.v20220802.ListConfigRules", async function () {
     try {
-       const data = await client.ListAggregateConfigRules({})
+       const data = await client.ListConfigRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("config.v20220802.ListAggregateConfigRules", async function () {
     }
 })
 
-it("config.v20220802.PutEvaluations", async function () {
+it("config.v20220802.DescribeAggregateDiscoveredResource", async function () {
     try {
-       const data = await client.PutEvaluations({})
+       const data = await client.DescribeAggregateDiscoveredResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,26 @@ it("config.v20220802.PutEvaluations", async function () {
 it("config.v20220802.DescribeDiscoveredResource", async function () {
     try {
        const data = await client.DescribeDiscoveredResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.ListAggregateDiscoveredResources", async function () {
+    try {
+       const data = await client.ListAggregateDiscoveredResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.PutEvaluations", async function () {
+    try {
+       const data = await client.PutEvaluations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

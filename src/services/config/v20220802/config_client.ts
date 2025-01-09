@@ -19,25 +19,30 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ResourceListInfo,
-  ListAggregateConfigRulesRequest,
-  ConfigRule,
-  Tag,
-  ListConfigRulesResponse,
-  DescribeDiscoveredResourceResponse,
-  ListAggregateConfigRulesResponse,
-  InputParameterForManage,
-  ListConfigRulesRequest,
+  ListAggregateDiscoveredResourcesRequest,
+  DescribeAggregateDiscoveredResourceRequest,
   SourceConditionForManage,
+  ListAggregateConfigRulesRequest,
+  DescribeDiscoveredResourceRequest,
+  PutEvaluationsResponse,
+  Evaluation,
+  DescribeDiscoveredResourceResponse,
+  InputParameterForManage,
+  ListConfigRulesResponse,
+  Tag,
+  ListDiscoveredResourcesRequest,
+  Annotation,
+  ConfigRule,
   TriggerType,
   PutEvaluationsRequest,
   Filter,
-  DescribeDiscoveredResourceRequest,
+  ListAggregateConfigRulesResponse,
+  ListAggregateDiscoveredResourcesResponse,
+  DescribeAggregateDiscoveredResourceResponse,
+  ListConfigRulesRequest,
+  AggregateResourceInfo,
   ListDiscoveredResourcesResponse,
-  ListDiscoveredResourcesRequest,
   InputParameter,
-  PutEvaluationsResponse,
-  Evaluation,
-  Annotation,
 } from "./config_models"
 
 /**
@@ -47,26 +52,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("config.tencentcloudapi.com", "2022-08-02", clientConfig)
-  }
-
-  /**
-   * 获取规则列表
-   */
-  async ListConfigRules(
-    req: ListConfigRulesRequest,
-    cb?: (error: string, rep: ListConfigRulesResponse) => void
-  ): Promise<ListConfigRulesResponse> {
-    return this.request("ListConfigRules", req, cb)
-  }
-
-  /**
-   * 获取资源列表
-   */
-  async ListDiscoveredResources(
-    req: ListDiscoveredResourcesRequest,
-    cb?: (error: string, rep: ListDiscoveredResourcesResponse) => void
-  ): Promise<ListDiscoveredResourcesResponse> {
-    return this.request("ListDiscoveredResources", req, cb)
   }
 
   /**
@@ -80,13 +65,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上报自定义规则评估结果
+   * 获取资源列表
    */
-  async PutEvaluations(
-    req: PutEvaluationsRequest,
-    cb?: (error: string, rep: PutEvaluationsResponse) => void
-  ): Promise<PutEvaluationsResponse> {
-    return this.request("PutEvaluations", req, cb)
+  async ListDiscoveredResources(
+    req: ListDiscoveredResourcesRequest,
+    cb?: (error: string, rep: ListDiscoveredResourcesResponse) => void
+  ): Promise<ListDiscoveredResourcesResponse> {
+    return this.request("ListDiscoveredResources", req, cb)
+  }
+
+  /**
+   * 获取规则列表
+   */
+  async ListConfigRules(
+    req: ListConfigRulesRequest,
+    cb?: (error: string, rep: ListConfigRulesResponse) => void
+  ): Promise<ListConfigRulesResponse> {
+    return this.request("ListConfigRules", req, cb)
+  }
+
+  /**
+   * 账号组资源详情
+   */
+  async DescribeAggregateDiscoveredResource(
+    req: DescribeAggregateDiscoveredResourceRequest,
+    cb?: (error: string, rep: DescribeAggregateDiscoveredResourceResponse) => void
+  ): Promise<DescribeAggregateDiscoveredResourceResponse> {
+    return this.request("DescribeAggregateDiscoveredResource", req, cb)
   }
 
   /**
@@ -97,5 +102,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiscoveredResourceResponse) => void
   ): Promise<DescribeDiscoveredResourceResponse> {
     return this.request("DescribeDiscoveredResource", req, cb)
+  }
+
+  /**
+   * 账号组获取资源列表
+   */
+  async ListAggregateDiscoveredResources(
+    req: ListAggregateDiscoveredResourcesRequest,
+    cb?: (error: string, rep: ListAggregateDiscoveredResourcesResponse) => void
+  ): Promise<ListAggregateDiscoveredResourcesResponse> {
+    return this.request("ListAggregateDiscoveredResources", req, cb)
+  }
+
+  /**
+   * 上报自定义规则评估结果
+   */
+  async PutEvaluations(
+    req: PutEvaluationsRequest,
+    cb?: (error: string, rep: PutEvaluationsResponse) => void
+  ): Promise<PutEvaluationsResponse> {
+    return this.request("PutEvaluations", req, cb)
   }
 }

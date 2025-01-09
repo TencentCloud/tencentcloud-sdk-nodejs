@@ -148,7 +148,6 @@ export declare class Client extends AbstractClient {
     DescribeCloudBaseRunResource(req: DescribeCloudBaseRunResourceRequest, cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void): Promise<DescribeCloudBaseRunResourceResponse>;
     /**
      * 查看安全网关路由
-
      */
     DescribeWxGatewayRoutes(req: DescribeWxGatewayRoutesRequest, cb?: (error: string, rep: DescribeWxGatewayRoutesResponse) => void): Promise<DescribeWxGatewayRoutesResponse>;
     /**

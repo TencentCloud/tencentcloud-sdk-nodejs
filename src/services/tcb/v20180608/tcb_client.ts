@@ -621,9 +621,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查看安全网关路由
-
-     */
+   * 查看安全网关路由
+   */
   async DescribeWxGatewayRoutes(
     req: DescribeWxGatewayRoutesRequest,
     cb?: (error: string, rep: DescribeWxGatewayRoutesResponse) => void

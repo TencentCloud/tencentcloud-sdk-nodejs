@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplications", req, cb);
     }
     /**
+     * 获取prompt任务列表
+     */
+    async DescribeMuskPrompts(req, cb) {
+        return this.request("DescribeMuskPrompts", req, cb);
+    }
+    /**
      * 查询场景
      */
     async DescribeScenes(req, cb) {

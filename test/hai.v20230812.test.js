@@ -38,6 +38,16 @@ it("hai.v20230812.DescribeApplications", async function () {
     }
 })
 
+it("hai.v20230812.DescribeMuskPrompts", async function () {
+    try {
+       const data = await client.DescribeMuskPrompts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeScenes", async function () {
     try {
        const data = await client.DescribeScenes({})

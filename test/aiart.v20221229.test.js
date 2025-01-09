@@ -18,6 +18,16 @@ const client = new tencentcloud.aiart.v20221229.Client({
 })
 describe("aiart.v20221229.test.js", function () {
 
+it("aiart.v20221229.SubmitMemeJob", async function () {
+    try {
+       const data = await client.SubmitMemeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.SketchToImage", async function () {
     try {
        const data = await client.SketchToImage({})
@@ -78,9 +88,9 @@ it("aiart.v20221229.GenerateAvatar", async function () {
     }
 })
 
-it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
+it("aiart.v20221229.QueryMemeJob", async function () {
     try {
-       const data = await client.QueryTrainPortraitModelJob({})
+       const data = await client.QueryMemeJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +98,9 @@ it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
     }
 })
 
-it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
+it("aiart.v20221229.QueryTrainPortraitModelJob", async function () {
     try {
-       const data = await client.SubmitDrawPortraitJob({})
+       const data = await client.QueryTrainPortraitModelJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("aiart.v20221229.TextToImage", async function () {
 it("aiart.v20221229.QueryTextToImageProJob", async function () {
     try {
        const data = await client.QueryTextToImageProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.SubmitDrawPortraitJob", async function () {
+    try {
+       const data = await client.SubmitDrawPortraitJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

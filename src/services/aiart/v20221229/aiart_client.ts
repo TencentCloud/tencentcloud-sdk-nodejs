@@ -21,6 +21,7 @@ import {
   SubmitDrawPortraitJobResponse,
   LogoParam,
   ImageToImageRequest,
+  QueryMemeJobRequest,
   QueryTextToImageProJobResponse,
   UploadTrainPortraitImagesRequest,
   ResultConfig,
@@ -28,18 +29,21 @@ import {
   ChangeClothesRequest,
   ReplaceBackgroundResponse,
   ImageOutpaintingRequest,
-  SubmitTextToImageProJobRequest,
+  QueryMemeJobResponse,
   QueryDrawPortraitJobResponse,
   QueryTrainPortraitModelJobResponse,
   ChangeClothesResponse,
-  SubmitTextToImageProJobResponse,
+  SubmitMemeJobResponse,
   SubmitTrainPortraitModelJobRequest,
   SketchToImageRequest,
   TextToImageRequest,
+  SubmitTextToImageProJobResponse,
   GenerateAvatarRequest,
   LogoRect,
   Filter,
   ImageInpaintingRemovalResponse,
+  SubmitMemeJobRequest,
+  SubmitTextToImageProJobRequest,
   SubmitTrainPortraitModelJobResponse,
   QueryDrawPortraitJobRequest,
   ImageToImageResponse,
@@ -61,6 +65,21 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("aiart.tencentcloudapi.com", "2022-12-29", clientConfig)
+  }
+
+  /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async SubmitMemeJob(
+    req: SubmitMemeJobRequest,
+    cb?: (error: string, rep: SubmitMemeJobResponse) => void
+  ): Promise<SubmitMemeJobResponse> {
+    return this.request("SubmitMemeJob", req, cb)
   }
 
   /**
@@ -140,6 +159,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 表情动图生成接口将静态照片制作成动态的表情包。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个表情动图生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+表情动图生成默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async QueryMemeJob(
+    req: QueryMemeJobRequest,
+    cb?: (error: string, rep: QueryMemeJobResponse) => void
+  ): Promise<QueryMemeJobResponse> {
+    return this.request("QueryMemeJob", req, cb)
+  }
+
+  /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 如果选择免训练模式无需调用本接口。
 训练模型分为提交任务和查询任务2个接口：
@@ -154,23 +187,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryTrainPortraitModelJobResponse) => void
   ): Promise<QueryTrainPortraitModelJobResponse> {
     return this.request("QueryTrainPortraitModelJob", req, cb)
-  }
-
-  /**
-     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
-生成图片分为提交任务和查询任务2个接口：
-
-- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
-- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
-
-每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
-提交生成写真图片任务默认提供1个并发。
-     */
-  async SubmitDrawPortraitJob(
-    req: SubmitDrawPortraitJobRequest,
-    cb?: (error: string, rep: SubmitDrawPortraitJobResponse) => void
-  ): Promise<SubmitDrawPortraitJobResponse> {
-    return this.request("SubmitDrawPortraitJob", req, cb)
   }
 
   /**
@@ -232,6 +248,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryTextToImageProJobResponse) => void
   ): Promise<QueryTextToImageProJobResponse> {
     return this.request("QueryTextToImageProJob", req, cb)
+  }
+
+  /**
+     * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
+生成图片分为提交任务和查询任务2个接口：
+
+- 提交生成写真图片任务：选择风格模板，提交一个生成写真图片异步任务，根据写真模型 ID 生成写真图片，获得任务 ID。
+- 查询生成写真图片任务：根据任务 ID 查询生成图片任务的处理状态、处理结果。
+
+每个写真模型自训练完成起1年内有效，有效期内可使用写真模型 ID 生成图片，期满后需要重新训练。
+提交生成写真图片任务默认提供1个并发。
+     */
+  async SubmitDrawPortraitJob(
+    req: SubmitDrawPortraitJobRequest,
+    cb?: (error: string, rep: SubmitDrawPortraitJobResponse) => void
+  ): Promise<SubmitDrawPortraitJobResponse> {
+    return this.request("SubmitDrawPortraitJob", req, cb)
   }
 
   /**

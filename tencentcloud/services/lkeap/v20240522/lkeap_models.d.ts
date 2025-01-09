@@ -3,32 +3,50 @@
  */
 export interface CreateSplitDocumentFlowRequest {
     /**
-     * 文件类型。支持的文件类型：PDF、DOC、DOCX、XLS、XLSX、PPT、PPTX、MD、TXT、PNG、JPG、JPEG、CSV
+     * 文件类型。
+  
+  **支持的文件类型：**
+  - `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`
+  
+  **支持的文件大小：**
+   - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M
+   - `TXT`、`MD` 最大10M
+   - 其他 最大20M
+  
      */
     FileType: string;
     /**
-     * 文件的 Url 地址。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 文件的 URL 地址。
+  文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。
+  参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749)
      */
     FileUrl: string;
     /**
-     * 文件名，可选，当文件名无法从传入的FileUrl获取时需要通过该字段来明确
+     * 文件名，可选。
+  **需带文件类型后缀**，当文件名无法从传入的`FileUrl`获取时需要通过该字段来明确。
      */
     FileName?: string;
     /**
-     * 文件的 Base64 值。支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
+     * 文件的 Base64 值。
+  支持的文件大小：所下载文件经Base64编码后不超过 8M。文件下载时间不超过 3 秒。
+  支持的图片像素：单边介于20-10000px之间。
+  文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。
      * @deprecated
      */
     FileBase64?: string;
     /**
-     * 当传入文件是PDF类型时，用来指定pdf识别的起始页码，识别的页码包含当前值
+     * 文档的起始页码。
+  当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的起始页码，识别的页码包含当前值。
      */
     FileStartPageNumber?: number;
     /**
-     * 当传入文件是PDF类型时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+     * 文档的结束页码。
+  当传入文件是PDF、PDF、PPT、PPTX、DOC类型时，用来指定识别的结束页码，识别的页码包含当前值。
      */
     FileEndPageNumber?: number;
     /**
-     * 创建文档拆分任务配置信息创建文档解析任务配置信息
+     * 文档拆分任务的配置信息。
+  
      */
     Config?: CreateSplitDocumentFlowConfig;
 }
@@ -302,7 +320,8 @@ export interface RetrieveKnowledgeResponse {
  */
 export interface CreateSplitDocumentFlowResponse {
     /**
-     * 任务唯一id。30天内可以通过GetSplitDocumentResult接口查询TaskId对应的处理结果。
+     * 拆分任务唯一ID。
+  30天内可以通过`GetSplitDocumentResult`接口查询TaskId对应的拆分结果。
      */
     TaskId?: string;
     /**

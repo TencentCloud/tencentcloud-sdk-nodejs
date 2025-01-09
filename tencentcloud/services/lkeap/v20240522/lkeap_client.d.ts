@@ -101,7 +101,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteKnowledgeBase(req: DeleteKnowledgeBaseRequest, cb?: (error: string, rep: DeleteKnowledgeBaseResponse) => void): Promise<DeleteKnowledgeBaseResponse>;
     /**
-     * 创建文档拆分任务
+     * 用于创建一个文档拆分任务，支持多种文件类型，具备mllm能力，能够解析并深入理解图表中的信息。
      */
     CreateSplitDocumentFlow(req: CreateSplitDocumentFlowRequest, cb?: (error: string, rep: CreateSplitDocumentFlowResponse) => void): Promise<CreateSplitDocumentFlowResponse>;
     /**

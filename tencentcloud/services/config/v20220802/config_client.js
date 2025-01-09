@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("config.tencentcloudapi.com", "2022-08-02", clientConfig);
     }
     /**
-     * 获取规则列表
+     * 账号组获取规则列表
      */
-    async ListConfigRules(req, cb) {
-        return this.request("ListConfigRules", req, cb);
+    async ListAggregateConfigRules(req, cb) {
+        return this.request("ListAggregateConfigRules", req, cb);
     }
     /**
      * 获取资源列表
@@ -40,22 +40,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListDiscoveredResources", req, cb);
     }
     /**
-     * 账号组获取规则列表
+     * 获取规则列表
      */
-    async ListAggregateConfigRules(req, cb) {
-        return this.request("ListAggregateConfigRules", req, cb);
+    async ListConfigRules(req, cb) {
+        return this.request("ListConfigRules", req, cb);
     }
     /**
-     * 上报自定义规则评估结果
+     * 账号组资源详情
      */
-    async PutEvaluations(req, cb) {
-        return this.request("PutEvaluations", req, cb);
+    async DescribeAggregateDiscoveredResource(req, cb) {
+        return this.request("DescribeAggregateDiscoveredResource", req, cb);
     }
     /**
      * 资源详情
      */
     async DescribeDiscoveredResource(req, cb) {
         return this.request("DescribeDiscoveredResource", req, cb);
+    }
+    /**
+     * 账号组获取资源列表
+     */
+    async ListAggregateDiscoveredResources(req, cb) {
+        return this.request("ListAggregateDiscoveredResources", req, cb);
+    }
+    /**
+     * 上报自定义规则评估结果
+     */
+    async PutEvaluations(req, cb) {
+        return this.request("PutEvaluations", req, cb);
     }
 }
 exports.Client = Client;

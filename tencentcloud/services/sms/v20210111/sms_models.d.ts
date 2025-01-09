@@ -101,6 +101,10 @@ export interface ModifySmsSignRequest {
      * 签名的申请备注。
      */
     Remark?: string;
+    /**
+     * 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。<dx-alert infotype="notice" title="说明"><ul><li>国内短信需填写资质ID，国际短信无需填写。</li></ul></dx-alert>
+     */
+    QualificationId?: number;
 }
 /**
  * SmsPackagesStatistics请求参数结构体
@@ -203,6 +207,10 @@ export interface AddSmsSignRequest {
      * 签名的申请备注。
      */
     Remark?: string;
+    /**
+     * 已审核通过的国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。<dx-alert infotype="notice" title="说明"><ul><li>国内短信需填写资质ID，国际短信无需填写。</li></ul></dx-alert>
+     */
+    QualificationId?: number;
 }
 /**
  * 添加模板参数响应
@@ -483,6 +491,21 @@ export interface DescribeSignListStatus {
      * 提交审核时间，UNIX 时间戳（单位：秒）。
      */
     CreateTime?: number;
+    /**
+     * 国内短信的资质 ID。资质 ID 信息可前往国内短信的 [实名资质管理](https://console.cloud.tencent.com/smsv2/enterprise) 页查看。
+  注：国际短信不涉及，默认为0。
+     */
+    QualificationId?: number;
+    /**
+     * 国内短信的资质名称。
+  注：国际短信不涉及，默认为空。
+     */
+    QualificationName?: string;
+    /**
+     * 国内短信的资质状态。其中0表示待审核，1表示已通过，2表示已拒绝，3表示待补充后提交，4表示变更后待审核，5表示变更后被驳回。可参考 [实名资质审核状态说明](https://cloud.tencent.com/document/product/382/13444#.E5.AE.A1.E6.A0.B8.E7.8A.B6.E6.80.81.E8.AF.B4.E6.98.8E) 。
+  注：国际短信不涉及，默认为0。
+     */
+    QualificationStatusCode?: number;
 }
 /**
  * SendSms返回参数结构体

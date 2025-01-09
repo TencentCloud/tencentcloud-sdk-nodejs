@@ -69,6 +69,93 @@ export interface ResourceListInfo {
 }
 
 /**
+ * ListAggregateDiscoveredResources请求参数结构体
+ */
+export interface ListAggregateDiscoveredResourcesRequest {
+  /**
+   * 每页显示数量
+   */
+  MaxResults: number
+  /**
+   * 账号组ID
+   */
+  AccountGroupId: string
+  /**
+   * resourceName：资源名  resourceId ：资源ID
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 下一页token
+   */
+  NextToken?: string
+  /**
+   * 排序方式 asc、desc
+   */
+  OrderType?: string
+}
+
+/**
+ * DescribeAggregateDiscoveredResource请求参数结构体
+ */
+export interface DescribeAggregateDiscoveredResourceRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源地域
+   */
+  ResourceRegion: string
+  /**
+   * 账号组ID
+   */
+  AccountGroupId: string
+  /**
+   * 资源所属用户ID
+   */
+  ResourceOwnerId: number
+}
+
+/**
+ * 管理端规则条件
+ */
+export interface SourceConditionForManage {
+  /**
+   * 条件为空，合规：COMPLIANT，不合规：NON_COMPLIANT，无法应用：NOT_APPLICABLE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmptyAs?: string
+  /**
+   * 配置路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectPath?: string
+  /**
+   * 操作运算符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * 是否必须
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Required?: boolean
+  /**
+   * 期望值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DesiredValue?: string
+}
+
+/**
  * ListAggregateConfigRules请求参数结构体
  */
 export interface ListAggregateConfigRulesRequest {
@@ -111,6 +198,235 @@ export interface ListAggregateConfigRulesRequest {
    * 规则所属账号ID
    */
   RuleOwnerId?: number
+}
+
+/**
+ * DescribeDiscoveredResource请求参数结构体
+ */
+export interface DescribeDiscoveredResourceRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源地域
+   */
+  ResourceRegion: string
+}
+
+/**
+ * PutEvaluations返回参数结构体
+ */
+export interface PutEvaluationsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 自定义规则评估结果
+ */
+export interface Evaluation {
+  /**
+   * 已评估资源ID。长度为0~256个字符
+   */
+  ComplianceResourceId: string
+  /**
+   * 已评估资源类型。
+支持:
+QCS::CVM::Instance、 QCS::CBS::Disk、QCS::VPC::Vpc、QCS::VPC::Subnet、QCS::VPC::SecurityGroup、 QCS::CAM::User、QCS::CAM::Group、QCS::CAM::Policy、QCS::CAM::Role、QCS::COS::Bucket
+   */
+  ComplianceResourceType: string
+  /**
+   * 已评估资源地域。
+长度为0~32个字符
+   */
+  ComplianceRegion: string
+  /**
+   * 合规类型。取值：
+COMPLIANT：合规、
+NON_COMPLIANT：不合规
+   */
+  ComplianceType: string
+  /**
+   * 不合规资源的补充信息。
+   */
+  Annotation?: Annotation
+}
+
+/**
+ * DescribeDiscoveredResource返回参数结构体
+ */
+export interface DescribeDiscoveredResourceResponse {
+  /**
+   * 资源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: string
+  /**
+   * 资源名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 资源地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceRegion?: string
+  /**
+   * 资源可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceZone?: string
+  /**
+   * 资源配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configuration?: string
+  /**
+   * 资源创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceCreateTime?: string
+  /**
+   * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 资源更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 规则入参
+ */
+export interface InputParameterForManage {
+  /**
+   * 值类型。数值：Integer， 字符串：String
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueType?: string
+  /**
+   * 参数Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParameterKey?: string
+  /**
+   * 参数类型。必填类型：Require，可选类型：Optional。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 默认值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultValue?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
+ * ListConfigRules返回参数结构体
+ */
+export interface ListConfigRulesResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 详情
+   */
+  Items?: Array<ConfigRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey?: string
+  /**
+   * 标签value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: string
+}
+
+/**
+ * ListDiscoveredResources请求参数结构体
+ */
+export interface ListDiscoveredResourcesRequest {
+  /**
+   * 每页显示数量
+   */
+  MaxResults: number
+  /**
+   * resourceName：资源名  resourceId ：资源ID
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 下一页token
+   */
+  NextToken?: string
+  /**
+   * 排序方式 asc、desc
+   */
+  OrderType?: string
+}
+
+/**
+ * 合规详情
+ */
+export interface Annotation {
+  /**
+   * 资源当前实际配置。长度为0~256位字符，即资源不合规配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Configuration: string
+  /**
+   * 资源期望配置。长度为0~256位字符，即资源合规配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DesiredValue: string
+  /**
+   * 资源当前配置和期望配置之间的比较运算符。长度为0~16位字符，自定义规则上报评估结果此字段可能为空
+   */
+  Operator?: string
+  /**
+   * 当前配置在资源属性结构体中的JSON路径。长度为0~256位字符，自定义规则上报评估结果此字段可能为空
+   */
+  Property?: string
 }
 
 /**
@@ -268,25 +584,53 @@ ConfigurationItemChangeNotification：变更触发
 }
 
 /**
- * 标签
+ * 规则支持触发类型
  */
-export interface Tag {
+export interface TriggerType {
   /**
-   * 标签key
+   * 触发类型
+   */
+  MessageType: string
+  /**
+   * 触发时间周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKey?: string
-  /**
-   * 标签value
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue?: string
+  MaximumExecutionFrequency?: string
 }
 
 /**
- * ListConfigRules返回参数结构体
+ * PutEvaluations请求参数结构体
  */
-export interface ListConfigRulesResponse {
+export interface PutEvaluationsRequest {
+  /**
+   * 回调令牌。从自定义规则所选的scf云函数入参中取参数ResultToken值
+<a href="https://cloud.tencent.com/document/product/583/9210#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E" target="_blank">云函数入参说明</a>
+   */
+  ResultToken: string
+  /**
+   * 自定义规则评估结果信息。
+   */
+  Evaluations: Array<Evaluation>
+}
+
+/**
+ * 资源列表筛选
+ */
+export interface Filter {
+  /**
+   * 查询字段名称 资源名称：resourceName  资源ID：resourceId 资源类型：resourceType 资源地域：resourceRegion    删除状态：resourceDelete 0未删除，1已删除  resourceRegionAndZone地域/可用区
+   */
+  Name?: string
+  /**
+   * 查询字段值
+   */
+  Values?: Array<string>
+}
+
+/**
+ * ListAggregateConfigRules返回参数结构体
+ */
+export interface ListAggregateConfigRulesResponse {
   /**
    * 总数
    */
@@ -302,9 +646,28 @@ export interface ListConfigRulesResponse {
 }
 
 /**
- * DescribeDiscoveredResource返回参数结构体
+ * ListAggregateDiscoveredResources返回参数结构体
  */
-export interface DescribeDiscoveredResourceResponse {
+export interface ListAggregateDiscoveredResourcesResponse {
+  /**
+   * 详情
+   */
+  Items?: Array<AggregateResourceInfo>
+  /**
+   * 下一页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAggregateDiscoveredResource返回参数结构体
+ */
+export interface DescribeAggregateDiscoveredResourceResponse {
   /**
    * 资源Id
 注意：此字段可能返回 null，表示取不到有效值。
@@ -357,55 +720,6 @@ export interface DescribeDiscoveredResourceResponse {
 }
 
 /**
- * ListAggregateConfigRules返回参数结构体
- */
-export interface ListAggregateConfigRulesResponse {
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 详情
-   */
-  Items?: Array<ConfigRule>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 规则入参
- */
-export interface InputParameterForManage {
-  /**
-   * 值类型。数值：Integer， 字符串：String
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ValueType?: string
-  /**
-   * 参数Key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ParameterKey?: string
-  /**
-   * 参数类型。必填类型：Require，可选类型：Optional。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 默认值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefaultValue?: string
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-}
-
-/**
  * ListConfigRules请求参数结构体
  */
 export interface ListConfigRulesRequest {
@@ -452,96 +766,65 @@ NON_COMPLIANT：不合规
 }
 
 /**
- * 管理端规则条件
+ * 资源列列表信息
  */
-export interface SourceConditionForManage {
-  /**
-   * 条件为空，合规：COMPLIANT，不合规：NON_COMPLIANT，无法应用：NOT_APPLICABLE
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EmptyAs?: string
-  /**
-   * 配置路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SelectPath?: string
-  /**
-   * 操作运算符
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operator?: string
-  /**
-   * 是否必须
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Required?: boolean
-  /**
-   * 期望值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DesiredValue?: string
-}
-
-/**
- * 规则支持触发类型
- */
-export interface TriggerType {
-  /**
-   * 触发类型
-   */
-  MessageType: string
-  /**
-   * 触发时间周期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaximumExecutionFrequency?: string
-}
-
-/**
- * PutEvaluations请求参数结构体
- */
-export interface PutEvaluationsRequest {
-  /**
-   * 回调令牌。从自定义规则所选的scf云函数入参中取参数ResultToken值
-<a href="https://cloud.tencent.com/document/product/583/9210#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E" target="_blank">云函数入参说明</a>
-   */
-  ResultToken: string
-  /**
-   * 自定义规则评估结果信息。
-   */
-  Evaluations: Array<Evaluation>
-}
-
-/**
- * 资源列表筛选
- */
-export interface Filter {
-  /**
-   * 查询字段名称 资源名称：resourceName  资源ID：resourceId 资源类型：resourceType 资源地域：resourceRegion    删除状态：resourceDelete 0未删除，1已删除  resourceRegionAndZone地域/可用区
-   */
-  Name?: string
-  /**
-   * 查询字段值
-   */
-  Values?: Array<string>
-}
-
-/**
- * DescribeDiscoveredResource请求参数结构体
- */
-export interface DescribeDiscoveredResourceRequest {
-  /**
-   * 资源ID
-   */
-  ResourceId: string
+export interface AggregateResourceInfo {
   /**
    * 资源类型
    */
-  ResourceType: string
+  ResourceType?: string
   /**
-   * 资源地域
+   * 资源名称
    */
-  ResourceRegion: string
+  ResourceName?: string
+  /**
+   * 资源ID
+   */
+  ResourceId?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceRegion?: string
+  /**
+   * 资源状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceStatus?: string
+  /**
+   * 是否删除 1:已删除 0:未删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceDelete?: number
+  /**
+   * 资源创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceCreateTime?: string
+  /**
+   * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceZone?: string
+  /**
+   * 合规状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplianceResult?: string
+  /**
+   * 资源所属用户ID
+   */
+  ResourceOwnerId?: number
+  /**
+   * 用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceOwnerName?: string
 }
 
 /**
@@ -564,32 +847,6 @@ export interface ListDiscoveredResourcesResponse {
 }
 
 /**
- * ListDiscoveredResources请求参数结构体
- */
-export interface ListDiscoveredResourcesRequest {
-  /**
-   * 每页显示数量
-   */
-  MaxResults: number
-  /**
-   * resourceName：资源名  resourceId ：资源ID
-   */
-  Filters?: Array<Filter>
-  /**
-   * 标签
-   */
-  Tags?: Array<Tag>
-  /**
-   * 下一页token
-   */
-  NextToken?: string
-  /**
-   * 排序方式 asc、desc
-   */
-  OrderType?: string
-}
-
-/**
  * 参数值
  */
 export interface InputParameter {
@@ -606,69 +863,4 @@ export interface InputParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
-}
-
-/**
- * PutEvaluations返回参数结构体
- */
-export interface PutEvaluationsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 自定义规则评估结果
- */
-export interface Evaluation {
-  /**
-   * 已评估资源ID。长度为0~256个字符
-   */
-  ComplianceResourceId: string
-  /**
-   * 已评估资源类型。
-支持:
-QCS::CVM::Instance、 QCS::CBS::Disk、QCS::VPC::Vpc、QCS::VPC::Subnet、QCS::VPC::SecurityGroup、 QCS::CAM::User、QCS::CAM::Group、QCS::CAM::Policy、QCS::CAM::Role、QCS::COS::Bucket
-   */
-  ComplianceResourceType: string
-  /**
-   * 已评估资源地域。
-长度为0~32个字符
-   */
-  ComplianceRegion: string
-  /**
-   * 合规类型。取值：
-COMPLIANT：合规、
-NON_COMPLIANT：不合规
-   */
-  ComplianceType: string
-  /**
-   * 不合规资源的补充信息。
-   */
-  Annotation?: Annotation
-}
-
-/**
- * 合规详情
- */
-export interface Annotation {
-  /**
-   * 资源当前实际配置。长度为0~256位字符，即资源不合规配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Configuration: string
-  /**
-   * 资源期望配置。长度为0~256位字符，即资源合规配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DesiredValue: string
-  /**
-   * 资源当前配置和期望配置之间的比较运算符。长度为0~16位字符，自定义规则上报评估结果此字段可能为空
-   */
-  Operator?: string
-  /**
-   * 当前配置在资源属性结构体中的JSON路径。长度为0~256位字符，自定义规则上报评估结果此字段可能为空
-   */
-  Property?: string
 }

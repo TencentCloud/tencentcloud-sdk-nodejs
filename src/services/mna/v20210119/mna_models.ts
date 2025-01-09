@@ -341,12 +341,10 @@ export interface DeviceBaseInfo {
   AccessScope?: number
   /**
    * license授权有效期 0：月度授权 1：永久授权
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicensePayMode?: number
   /**
    * 付费方 0：厂商付费 1：客户付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Payer?: number
   /**
@@ -1284,7 +1282,6 @@ export interface CreateQosResponse {
 export interface ActivateHardware {
   /**
    * 厂商名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Vendor: string
   /**
@@ -1293,12 +1290,10 @@ export interface ActivateHardware {
   SN: string
   /**
    * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
@@ -1316,27 +1311,22 @@ export interface ActivateHardware {
 若不传则默认为月度授权。
 当付费方为厂商时，此参数无效
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicensePayMode?: number
   /**
    * 设备分组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
    * 设备分组名称，预留参数，需要分组时传入GroupId
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * 设备无流量包处理方式，0: 按量付费，1: 截断加速
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowTrunc?: number
   /**
    * 激活后的设备ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceId?: string
 }

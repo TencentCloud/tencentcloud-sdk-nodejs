@@ -1870,7 +1870,7 @@ export interface DeleteGatewayVersionRequest {
      */
     IsForce?: boolean;
     /**
-     * 操作记录
+     * 操作者记录
      */
     OperatorRemark?: string;
 }
@@ -3980,14 +3980,12 @@ export interface DescribeCbrServerVersionRequest {
 export interface DescribeWxGatewayRoutesResponse {
     /**
      * 返回的服务个数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的服务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WxGatewayRouteSet: Array<WxGatewayRountItem>;
+    WxGatewayRouteSet?: Array<WxGatewayRountItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4283,12 +4281,10 @@ export interface DescribeCloudBaseProjectLatestVersionListResponse {
 export interface DescribeWxGatewaysResponse {
     /**
      * 返回的服务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Gateways?: Array<GatewayItem>;
     /**
      * 网关总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -5052,12 +5048,10 @@ export interface LogServiceInfo {
 export interface FrequencyLimitConfig {
     /**
      * 限额对象 "ConnectionsLimit" 或 "QPSLimit"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LimitObject?: string;
     /**
      * 限额配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LimitConfig?: string;
 }
@@ -5218,57 +5212,46 @@ export interface WxGatewayRountItem {
     GatewayRouteCreateTime?: string;
     /**
      * 安全网关路由限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FrequencyLimitConfig?: Array<FrequencyLimitConfig>;
     /**
      * ip代表绑定后端ip。cbr代表云托管服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRouteServerType?: string;
     /**
      * 服务名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRouteServerName?: string;
     /**
      * ip
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRewriteHost?: string;
     /**
      * 网关版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayVersion?: string;
     /**
      * 请求路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRoutePath?: string;
     /**
      * 请求模式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRouteMethod?: string;
     /**
      * 4层端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRoutePort?: number;
     /**
      * 路由环境ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRouteEnvId?: string;
     /**
      * 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRoutePathMatchType?: string;
     /**
      * 安全网关自定义头部
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomHeader?: CustomHeader;
 }
@@ -5831,127 +5814,102 @@ export interface GatewayItem {
     Uin?: string;
     /**
      * 用户appid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * WxAppId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WxAppId?: string;
     /**
      * 环境id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvId?: string;
     /**
      * Gateway唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayId?: string;
     /**
      * Gateway名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayName?: string;
     /**
      * Gateway类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayType?: string;
     /**
      * Gateway描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayDesc?: string;
     /**
      * 套餐版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageVersion?: string;
     /**
      * 套餐唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageId?: number;
     /**
      * vpc唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 子网id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubnetIds?: Array<string>;
     /**
      * 网关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * l5地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     L5Addr?: string;
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 是否可以续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CanRenew?: boolean;
     /**
      * 自动续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * 隔离时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsolateTime?: string;
     /**
      * 到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 变更时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 是否可以降配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CanDowngrade?: boolean;
     /**
      * 允许未登录访问
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowUncertified?: number;
     /**
      * 网关版本限额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionNumLimit?: number;
     /**
      * Donut接入ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LongAccessId?: string;
     /**
      * Donut接入域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccessDomain?: string;
 }
