@@ -45,36 +45,35 @@ export interface DirectConnectTunnelRoute {
   /**
    * 专用通道路由ID
    */
-  RouteId: string
+  RouteId?: string
   /**
    * 网段CIDR
    */
-  DestinationCidrBlock: string
+  DestinationCidrBlock?: string
   /**
    * 路由类型：BGP/STATIC路由
    */
-  RouteType: string
+  RouteType?: string
   /**
    * ENABLE：路由启用，DISABLE：路由禁用
    */
-  Status: string
+  Status?: string
   /**
    * ASPath信息
    */
-  ASPath: Array<string>
+  ASPath?: Array<string>
   /**
    * 路由下一跳IP
    */
-  NextHop: string
+  NextHop?: string
   /**
    * 路由更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 是否配置在通道上
    */
-  ApplyOnTunnelEnable: boolean
+  ApplyOnTunnelEnable?: boolean
 }
 
 /**
@@ -144,21 +143,21 @@ export interface DescribeDirectConnectTunnelExtraRequest {
  */
 export interface DescribePublicDirectConnectTunnelRoutesRequest {
   /**
-   * 专用通道ID
+   * 专用通道ID。
    */
   DirectConnectTunnelId: string
   /**
    * 过滤条件：
-route-type：路由类型，取值：BGP/STATIC
-route-subnet：路由cidr，取值如：192.68.1.0/24
+route-type：路由类型，取值：BGP/STATIC；
+route-subnet：路由cidr，取值如：192.68.1.0/24。
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -514,9 +513,8 @@ export interface AccessPoint {
 export interface ApplyInternetAddressResponse {
   /**
    * 互联网公网地址ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -895,7 +893,6 @@ export interface DescribeDirectConnectsResponse {
   TotalCount?: number
   /**
    * 用户名下物理专线是否都签署了用户协议。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AllSignLaw?: boolean
   /**
@@ -1541,7 +1538,6 @@ export interface DescribeInternetAddressStatisticsResponse {
   TotalCount?: number
   /**
    * 互联网公网地址统计信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetAddressStatistics?: Array<InternetAddressStatistics>
   /**
@@ -1596,11 +1592,11 @@ export interface DescribeInternetAddressRequest {
  */
 export interface DescribePublicDirectConnectTunnelRoutesResponse {
   /**
-   * 互联网通道路由列表
+   * 互联网通道路由列表。
    */
   Routes?: Array<DirectConnectTunnelRoute>
   /**
-   * 记录总数
+   * 路由总数量。
    */
   TotalCount?: number
   /**
@@ -1615,27 +1611,22 @@ export interface DescribePublicDirectConnectTunnelRoutesResponse {
 export interface DescribeInternetAddressQuotaResponse {
   /**
    * IPv6互联网公网允许的最小前缀长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6PrefixLen?: number
   /**
    * BGP类型IPv4互联网地址配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv4BgpQuota?: number
   /**
    * 非BGP类型IPv4互联网地址配额
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv4OtherQuota?: number
   /**
    * BGP类型IPv4互联网地址已使用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv4BgpNum?: number
   /**
    * 非BGP类型互联网地址已使用数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv4OtherNum?: number
   /**

@@ -2688,44 +2688,44 @@ export interface InstanceIntegerParam {
   /**
    * 参数名
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：integer
    */
-  ValueType: string
+  ValueType?: string
   /**
    * 修改后是否需要重启：true，false
    */
-  NeedRestart: string
+  NeedRestart?: string
   /**
    * 参数默认值
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 当前运行参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 参数说明
    */
-  Tips: string
+  Tips?: string
   /**
    * 参数最小值
    */
-  Min: string
+  Min?: string
   /**
    * 参数最大值
    */
-  Max: string
+  Max?: string
   /**
    * 参数状态, 1: 修改中， 2：修改完成
    */
-  Status: number
+  Status?: number
   /**
    * 参数单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
 }
 
 /**

@@ -896,7 +896,6 @@ export interface GetDeviceRequest {
 export interface ActivateHardwareResponse {
     /**
      * 完成激活的设备信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareInfo?: Array<ActivateHardware>;
     /**

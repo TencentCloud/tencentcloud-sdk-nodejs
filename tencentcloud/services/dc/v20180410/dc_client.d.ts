@@ -51,7 +51,7 @@ export declare class Client extends AbstractClient {
      */
     DisableInternetAddress(req: DisableInternetAddressRequest, cb?: (error: string, rep: DisableInternetAddressResponse) => void): Promise<DisableInternetAddressResponse>;
     /**
-     * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
+     * 查询互联网通道路由列表。
      */
     DescribePublicDirectConnectTunnelRoutes(req: DescribePublicDirectConnectTunnelRoutesRequest, cb?: (error: string, rep: DescribePublicDirectConnectTunnelRoutesResponse) => void): Promise<DescribePublicDirectConnectTunnelRoutesResponse>;
     /**

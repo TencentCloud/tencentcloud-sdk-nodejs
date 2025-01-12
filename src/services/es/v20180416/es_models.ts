@@ -632,6 +632,11 @@ export interface IndexMetaField {
    */
   IndexSettingsField?: IndexSettingsField
   /**
+   * 索引别名字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexAliasesField?: Array<string>
+  /**
    * 索引所属集群APP ID
 注意：此字段可能返回 null，表示取不到有效值。
    */

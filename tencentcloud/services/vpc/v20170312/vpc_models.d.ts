@@ -14072,12 +14072,10 @@ export interface ModifyHighPriorityRouteAttributeRequest {
 export interface InquirePriceCreateDirectConnectGatewayResponse {
     /**
      * 专线网关标准接入费用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCost?: number;
     /**
      * 专线网关真实接入费用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealTotalCost?: number;
     /**

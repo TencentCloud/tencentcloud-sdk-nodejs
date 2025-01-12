@@ -195,7 +195,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
+   * 查询互联网通道路由列表。
    */
   async DescribePublicDirectConnectTunnelRoutes(
     req: DescribePublicDirectConnectTunnelRoutesRequest,

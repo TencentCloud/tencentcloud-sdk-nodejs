@@ -91,7 +91,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableInternetAddress", req, cb);
     }
     /**
-     * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
+     * 查询互联网通道路由列表。
      */
     async DescribePublicDirectConnectTunnelRoutes(req, cb) {
         return this.request("DescribePublicDirectConnectTunnelRoutes", req, cb);

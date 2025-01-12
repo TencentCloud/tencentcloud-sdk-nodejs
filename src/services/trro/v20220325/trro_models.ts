@@ -490,42 +490,34 @@ export interface ModifyPolicyResponse {
 export interface Device {
   /**
    * 设备ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceId?: string
   /**
    * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceName?: string
   /**
    * 已经绑定license数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseCount?: number
   /**
    * 剩余天数：天
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemainDay?: number
   /**
    * 过期时间：s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 服务时长：s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration?: string
   /**
    * 已经绑定licenseId列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseIds?: Array<string>
   /**
    * 每月license的限定时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonthlyRemainTime?: number
   /**
@@ -884,17 +876,14 @@ export interface SessionDeviceDetail {
   DeviceId?: string
   /**
    * sdk版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ver?: string
   /**
    * 模式(p2p/server)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SdkMode?: string
   /**
    * 解码耗时，单位：ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DecodeCost?: Array<number | bigint>
   /**
@@ -905,92 +894,74 @@ export interface SessionDeviceDetail {
   RenderConst?: Array<number | bigint>
   /**
    * 卡顿k100
-注意：此字段可能返回 null，表示取不到有效值。
    */
   K100?: Array<number>
   /**
    * 卡顿k150
-注意：此字段可能返回 null，表示取不到有效值。
    */
   K150?: Array<number>
   /**
    * nack请求数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NACK?: Array<number | bigint>
   /**
    * 服务端调控码率,单位：kbps
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BitRateEstimate?: Array<number | bigint>
   /**
    * 宽度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Width?: number
   /**
    * 高度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Height?: number
   /**
    * 编码耗时，单位：ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncodeCost?: Array<number | bigint>
   /**
    * 采集耗时，单位：ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaptureCost?: Array<number | bigint>
   /**
    * 渲染耗时，单位：ms
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenderCost?: Array<number | bigint>
   /**
    * 配置宽度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigWidth?: number
   /**
    * 配置高度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigHeight?: number
   /**
    * 平均帧间隔
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameDelta?: Array<number | bigint>
   /**
    * 最大帧间隔
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxFrameDelta?: Array<number | bigint>
   /**
    * 总码率评估,单位：kbps
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBitrateEstimate?: Array<number | bigint>
   /**
    * 帧间隔大于100ms的卡顿时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Lag100Duration?: Array<number | bigint>
   /**
    * 帧间隔大于150ms的卡顿时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Lag150Duration?: Array<number | bigint>
   /**
    * 是否开启多网：0 单网，1 多网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiMode?: number
   /**
    * 多网卡信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiNet?: Array<MultiNet>
 }
