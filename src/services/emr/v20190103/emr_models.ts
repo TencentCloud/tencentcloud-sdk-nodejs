@@ -67,7 +67,6 @@ export interface AddNodeResourceConfigRequest {
 export interface MonthRepeatStrategy {
   /**
    * 重复任务执行的具体时刻，例如"01:02:00"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteAtTimeOfDay: string
   /**
@@ -1754,7 +1753,6 @@ export interface ModifyResourcesTagsResponse {
 export interface CreateCloudInstanceResponse {
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
@@ -5390,7 +5388,6 @@ export interface StageInfoDetail {
 export interface CreateClusterResponse {
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**

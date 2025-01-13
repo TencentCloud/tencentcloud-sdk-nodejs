@@ -173,6 +173,14 @@ export interface SearchResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
+  /**
+   * 搜索引文站点名
+   */
+  Text?: string
+  /**
+   * 搜索引文图标
+   */
+  Icon?: string
 }
 
 /**

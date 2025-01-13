@@ -2453,60 +2453,84 @@ export interface ScoreInfo {
     /**
      * duration
      */
-    StaticDuration: string;
+    StaticDuration?: string;
     /**
      * pv
      */
-    PagePv: string;
+    PagePv?: string;
     /**
      * 失败
      */
-    ApiFail: string;
+    ApiFail?: string;
     /**
      * 请求
      */
-    ApiNum: string;
+    ApiNum?: string;
     /**
      * fail
      */
-    StaticFail: string;
+    StaticFail?: string;
     /**
      * 项目id
      */
-    ProjectID: number;
+    ProjectID?: number;
     /**
      * uv
      */
-    PageUv: string;
+    PageUv?: string;
     /**
      * 请求次数
      */
-    ApiDuration: string;
+    ApiDuration?: string;
     /**
-     * 分数
+     * 项目总分
      */
-    Score: string;
+    Score?: string;
     /**
      * error
      */
-    PageError: string;
+    PageError?: string;
     /**
      * num
      */
-    StaticNum: string;
+    StaticNum?: string;
     /**
      * num
      */
-    RecordNum: number;
+    RecordNum?: number;
     /**
      * Duration
      */
-    PageDuration: string;
+    PageDuration?: string;
     /**
      * 时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
+    /**
+     * 页面性能评分
+     */
+    PagePerformanceScore?: string;
+    /**
+     * js错误评分
+     */
+    JsErrorScore?: string;
+    /**
+     * API性能评分
+     */
+    ApiPerformanceScore?: string;
+    /**
+     * API可用性评分
+     */
+    ApiAvaliableScore?: string;
+    /**
+     * 静态资源性能评分
+     */
+    StaticPerformanceScore?: string;
+    /**
+     * 静态资源可用性评分
+     */
+    StaticAvaliableScore?: string;
 }
 /**
  * DescribeDataWebVitalsPage返回参数结构体

@@ -171,47 +171,38 @@ export interface DeleteJobsRequest {
 export interface AlertChannelRecord {
     /**
      * Notice ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoticeId?: string;
     /**
      * Consumer ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AMPConsumerId?: string;
     /**
      * 项目 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedAt?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedAt?: string;
     /**
      * App ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 主账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 子账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubAccountUin?: string;
 }
@@ -419,17 +410,14 @@ export interface DNSConfig {
 export interface ScriptInfo {
     /**
      * 文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 文件大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
@@ -439,22 +427,18 @@ export interface ScriptInfo {
     UpdatedAt?: string;
     /**
      * base64编码后的文件内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncodedContent?: string;
     /**
      * base64编码后的har结构体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncodedHttpArchive?: string;
     /**
      * 脚本权重，范围 1-100
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadWeight?: number;
     /**
      * 文件 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileId?: string;
 }
@@ -464,19 +448,16 @@ export interface ScriptInfo {
 export interface NormalLog {
     /**
      * 毫秒时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timestamp: string;
+    Timestamp?: string;
     /**
      * 日志级别
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SeverityText: string;
+    SeverityText?: string;
     /**
      * 日志输出内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Body: string;
+    Body?: string;
 }
 /**
  * UpdateProject请求参数结构体
@@ -526,7 +507,6 @@ export interface Project {
     Name?: string;
     /**
      * 项目描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -549,15 +529,15 @@ export interface Project {
     /**
      * App ID
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 用户ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 子用户ID
      */
-    SubAccountUin: string;
+    SubAccountUin?: string;
 }
 /**
  * UpdateEnvironment请求参数结构体
@@ -583,29 +563,24 @@ export interface DescribeRegionsResponse {
 export interface Attributes {
     /**
      * 采用请求返回码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 采样请求结果码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    Result?: string;
     /**
      * 采样请求API
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Service: string;
+    Service?: string;
     /**
      * 采样请求调用方法
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Method: string;
+    Method?: string;
     /**
      * 采样请求延时时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Duration: string;
+    Duration?: string;
 }
 /**
  * CreateEnvironment返回参数结构体
@@ -632,97 +607,89 @@ export interface File {
     /**
      * 文件 ID
      */
-    FileId: string;
+    FileId?: string;
     /**
      * 文件种类，参数文件-1，协议文件-2，请求文件-3
      */
-    Kind: number;
+    Kind?: number;
     /**
      * 文件名
      */
-    Name: string;
+    Name?: string;
     /**
      * 文件字节数
      */
-    Size: number;
+    Size?: number;
     /**
      * 文件类型
      */
-    Type: string;
+    Type?: string;
     /**
      * 更新时间
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
      * 文件行数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LineCount: number;
+    LineCount?: number;
     /**
      * 头部数据行
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeadLines: Array<string>;
+    HeadLines?: Array<string>;
     /**
      * 尾部数据行
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TailLines: Array<string>;
+    TailLines?: Array<string>;
     /**
      * 首行是否为参数名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeaderInFile: boolean;
+    HeaderInFile?: boolean;
     /**
      * 参数名数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeaderColumns: Array<string>;
+    HeaderColumns?: Array<string>;
     /**
      * 文件夹中的文件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileInfos: Array<FileInfo>;
+    FileInfos?: Array<FileInfo>;
     /**
      * 关联场景
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScenarioSet: Array<Scenario>;
+    ScenarioSet?: Array<Scenario>;
     /**
      * 文件状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 项目 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 此字段不再使用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppID: number;
+    AppID?: number;
     /**
      * 用户主账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 用户子账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubAccountUin: string;
+    SubAccountUin?: string;
     /**
      * 用户账号的 App ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
 }
 /**
  * DescribeEnvironments请求参数结构体
@@ -735,34 +702,33 @@ export interface CustomSample {
     /**
      * 指标名
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 聚合条件
      */
-    Aggregation: string;
+    Aggregation?: string;
     /**
      * 过滤条件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<Label>;
+    Labels?: Array<Label>;
     /**
      * 查询值
      */
-    Value: number;
+    Value?: number;
     /**
      * Time is the number of milliseconds since the epoch
   // (1970-01-01 00:00 UTC) excluding leap seconds.
      */
-    Timestamp: number;
+    Timestamp?: number;
     /**
      * 指标对应的单位，当前单位有：s,bytes,bytes/s,reqs,reqs/s,checks,checks/s,iters,iters/s,VUs, %
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标序列名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
 }
 /**
  * CreateProject请求参数结构体
@@ -822,7 +788,6 @@ export interface HostAlias {
     HostNames?: Array<string>;
     /**
      * 需绑定的 IP 地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IP?: string;
 }
@@ -902,17 +867,14 @@ export interface Label {
 export interface ProtocolInfo {
     /**
      * 协议详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 文件大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
@@ -922,7 +884,6 @@ export interface ProtocolInfo {
     UpdatedAt?: string;
     /**
      * 文件 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileId?: string;
 }
@@ -940,7 +901,6 @@ export interface VpcLoadDistribution {
     Region?: string;
     /**
      * VPC ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
@@ -970,92 +930,78 @@ export interface CronJob {
      * 定时任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CronJobId: string;
+    CronJobId?: string;
     /**
      * 定时任务名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 场景ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScenarioId: string;
+    ScenarioId?: string;
     /**
      * 场景名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScenarioName: string;
+    ScenarioName?: string;
     /**
      * cron 表达式
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CronExpression: string;
+    CronExpression?: string;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 中止原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AbortReason: number;
+    AbortReason?: number;
     /**
      * 定时任务状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * Notice ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoticeId: string;
+    NoticeId?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
      * 执行频率类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrequencyType: number;
+    FrequencyType?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Note: string;
+    Note?: string;
     /**
      * tom
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobOwner: string;
+    JobOwner?: string;
     /**
      * App ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 主账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 子账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubAccountUin: string;
+    SubAccountUin?: string;
 }
 /**
  * DescribeLabelValues返回参数结构体
@@ -1107,12 +1053,10 @@ export interface Job {
     JobId?: string;
     /**
      * 任务的场景ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScenarioId?: string;
     /**
      * 任务的施压配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Load?: Load;
     /**
@@ -1134,7 +1078,6 @@ export interface Job {
      * 任务的运行状态, JobUnknown: 0,JobCreated:1,JobPending:2, JobPreparing:3,JobSelectClustering:4,JobCreateTasking:5,JobSyncTasking:6
   JobRunning:11,JobFinished:12,JobPrepareException:13,JobFinishException:14,JobAborting:15,JobAborted:16,JobAbortException:17,JobDeleted:18,
   JobSelectClusterException:19,JobCreateTaskException:20,JobSyncTaskException:21
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
@@ -1149,22 +1092,18 @@ export interface Job {
     EndTime?: string;
     /**
      * 任务的最大VU数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxVirtualUserCount?: number;
     /**
      * 任务的备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Note?: string;
     /**
      * 错误率百分比
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorRate?: number;
     /**
      * 任务发起人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobOwner?: string;
     /**
@@ -1174,42 +1113,34 @@ export interface Job {
     LoadSources?: LoadSource;
     /**
      * 任务时长
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Duration?: number;
     /**
      * 最大每秒请求数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRequestsPerSecond?: number;
     /**
      * 总请求数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RequestTotal?: number;
     /**
      * 平均每秒请求数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RequestsPerSecond?: number;
     /**
      * 平均响应时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeAverage?: number;
     /**
      * 响应时间第99百分位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeP99?: number;
     /**
      * 响应时间第95百分位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeP95?: number;
     /**
      * 响应时间第90百分位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeP90?: number;
     /**
@@ -1219,12 +1150,10 @@ export interface Job {
     Scripts?: Array<string>;
     /**
      * 最大响应时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeMax?: number;
     /**
      * 最小响应时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResponseTimeMin?: number;
     /**
@@ -1254,27 +1183,22 @@ export interface Job {
     Plugins?: Array<FileInfo>;
     /**
      * 定时任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronId?: string;
     /**
      * 场景类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 域名绑定配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainNameConfig?: DomainNameConfig;
     /**
      * false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Debug?: boolean;
     /**
      * 中断原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AbortReason?: number;
     /**
@@ -1284,7 +1208,6 @@ export interface Job {
     CreatedAt?: string;
     /**
      * 项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
@@ -1294,37 +1217,30 @@ export interface Job {
     NotificationHooks?: Array<NotificationHook>;
     /**
      * 每秒接收字节数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkReceiveRate?: number;
     /**
      * 每秒发送字节数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetworkSendRate?: number;
     /**
      * 任务状态描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * test-project
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectName?: string;
     /**
      * test-scenario
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScenarioName?: string;
     /**
      * 付费类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PayMode?: number;
     /**
      * job VUM用量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Usage?: number;
 }
@@ -1385,15 +1301,15 @@ export interface GenerateTmpKeyResponse {
     /**
      * 临时访问凭证获取时刻的时间戳（单位秒）
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 临时访问凭证超时 时刻的时间戳（单位秒）
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
      * 临时访问凭证
      */
-    Credentials: Credentials;
+    Credentials?: Credentials;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1405,12 +1321,10 @@ export interface GenerateTmpKeyResponse {
 export interface Stage {
     /**
      * 施压时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DurationSeconds?: number;
     /**
      * 虚拟用户数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetVirtualUsers?: number;
 }
@@ -1425,7 +1339,6 @@ export interface DescribeFilesResponse {
     FileSet?: Array<File>;
     /**
      * 文件总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -1473,14 +1386,13 @@ export interface UpdateFileScenarioRelationRequest {
 export interface ScenarioWithJobs {
     /**
      * scecario结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Scenario: Scenario;
+    Scenario?: Scenario;
     /**
      * job结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Jobs: Array<Job>;
+    Jobs?: Array<Job>;
 }
 /**
  * DeleteJobs返回参数结构体
@@ -1497,12 +1409,10 @@ export interface DeleteJobsResponse {
 export interface TagSpec {
     /**
      * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagKey?: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagValue?: string;
 }
@@ -1521,32 +1431,26 @@ export interface AdjustJobSpeedResponse {
 export interface ErrorSummary {
     /**
      * 状态码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 结果码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: string;
     /**
      * 错误出现次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
      * 错误率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rate?: number;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 请求协议类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Proto?: string;
 }
@@ -1621,12 +1525,10 @@ export interface DeleteEnvironmentsResponse {
 export interface SLALabel {
     /**
      * 标签名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelName?: string;
     /**
      * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LabelValue?: string;
 }
@@ -1641,67 +1543,54 @@ export interface AlertRecord {
     AlertRecordId?: string;
     /**
      * 项目 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
      * 场景 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScenarioId?: string;
     /**
      * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: AlertRecordStatus;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedAt?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdatedAt?: string;
     /**
      * 任务 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobId?: string;
     /**
      * App ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 主账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 子账号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubAccountUin?: string;
     /**
      * 场景名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScenarioName?: string;
     /**
      * 告警对象
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Target?: string;
     /**
      * 告警规则 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobSLAId?: string;
     /**
      * 告警规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobSLADescription?: string;
 }
@@ -1711,37 +1600,30 @@ export interface AlertRecord {
 export interface RequestsPerSecond {
     /**
      * 最大RPS
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRequestsPerSecond?: number;
     /**
      * 施压时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DurationSeconds?: number;
     /**
      * deprecated
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetVirtualUsers?: number;
     /**
      * 资源数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resources?: number;
     /**
      * 起始RPS
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartRequestsPerSecond?: number;
     /**
      * 目标RPS，入参无效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetRequestsPerSecond?: number;
     /**
      * 优雅关停的等待时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GracefulStopSeconds?: number;
 }
@@ -1807,17 +1689,14 @@ export interface CopyScenarioRequest {
 export interface TestData {
     /**
      * 测试数据集所在的文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 测试数据集是否分片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Split: boolean;
     /**
      * 首行是否为参数名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeaderInFile: boolean;
     /**
@@ -1827,7 +1706,6 @@ export interface TestData {
     HeaderColumns?: Array<string>;
     /**
      * 文件行数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LineCount?: number;
     /**
@@ -1837,7 +1715,6 @@ export interface TestData {
     UpdatedAt?: string;
     /**
      * 文件字节数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
     /**
@@ -1852,12 +1729,10 @@ export interface TestData {
     TailLines?: Array<string>;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 文件 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileId?: string;
 }
@@ -1867,19 +1742,16 @@ export interface TestData {
 export interface SampleLog {
     /**
      * 日志毫秒时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timestamp: string;
+    Timestamp?: string;
     /**
      * 采样日志属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Attributes: Attributes;
+    Attributes?: Attributes;
     /**
      * har格式的采样请求
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Body: string;
+    Body?: string;
 }
 /**
  * 施压机的域名解析相关配置
@@ -1902,7 +1774,6 @@ export interface DomainNameConfig {
 export interface DescribeNormalLogsResponse {
     /**
      * 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Context?: string;
     /**
@@ -1995,32 +1866,31 @@ export interface MetricInfo {
     /**
      * 后台指标
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 前台展示指标名称
      */
-    Alias: string;
+    Alias?: string;
     /**
      * 指标描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 指标类型
      */
-    MetricType: string;
+    MetricType?: string;
     /**
      * 默认指标单位
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标支持的聚合函数
      */
-    Aggregations: Array<AggregationLegend>;
+    Aggregations?: Array<AggregationLegend>;
     /**
      * 是否内部指标，内部指标不可在前台提供用户自由选择
      */
-    InnerMetric: boolean;
+    InnerMetric?: boolean;
 }
 /**
  * CreateAlertChannel请求参数结构体
@@ -2045,12 +1915,10 @@ export interface CreateAlertChannelRequest {
 export interface AlertRecordStatus {
     /**
      * 停止压测任务成功与否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AbortJob?: number;
     /**
      * 发送告警通知成功与否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SendNotice?: number;
 }
@@ -2089,22 +1957,18 @@ export interface DescribeAlertChannelsRequest {
 export interface SLARule {
     /**
      * 压测指标
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Metric?: string;
     /**
      * 压测指标聚合方法
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Aggregation?: string;
     /**
      * 压测指标条件判断符号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Condition?: string;
     /**
      * 阈值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: number;
     /**
@@ -2114,12 +1978,10 @@ export interface SLARule {
     LabelFilter?: Array<SLALabel>;
     /**
      * 是否停止压测任务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AbortFlag?: boolean;
     /**
      * 持续时长
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     For?: string;
 }
@@ -2144,7 +2006,7 @@ export interface DescribeMetricLabelWithValuesResponse {
      * 指标所有的label和values数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricLabelWithValuesSet: Array<MetricLabelWithValues>;
+    MetricLabelWithValuesSet?: Array<MetricLabelWithValues>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2156,17 +2018,14 @@ export interface DescribeMetricLabelWithValuesResponse {
 export interface FileInfo {
     /**
      * 文件名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 文件大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Size?: number;
     /**
      * 文件类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
@@ -2176,7 +2035,6 @@ export interface FileInfo {
     UpdatedAt?: string;
     /**
      * 文件 ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileId?: string;
 }
@@ -2206,12 +2064,10 @@ export interface LoadSpec {
 export interface AlertChannel {
     /**
      * 通知模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoticeId?: string;
     /**
      * AMP consumer ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AMPConsumerId?: string;
 }
@@ -2269,15 +2125,15 @@ export interface Credentials {
     /**
      * 临时secret ID
      */
-    TmpSecretId: string;
+    TmpSecretId?: string;
     /**
      * 临时secret key
      */
-    TmpSecretKey: string;
+    TmpSecretKey?: string;
     /**
      * 临时token
      */
-    Token: string;
+    Token?: string;
 }
 /**
  * DescribeAlertChannels返回参数结构体
@@ -2290,7 +2146,6 @@ export interface DescribeAlertChannelsResponse {
     AlertChannelSet?: Array<AlertChannelRecord>;
     /**
      * 告警通知接收组数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -2430,17 +2285,14 @@ export interface AggregationLegend {
 export interface LoadSource {
     /**
      * 发压host的IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IP?: string;
     /**
      * 发压host所在的pod
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PodName?: string;
     /**
      * 所属地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
 }
@@ -2451,21 +2303,20 @@ export interface CustomSampleMatrix {
     /**
      * 指标名字
      */
-    Metric: string;
+    Metric?: string;
     /**
      * 聚合函数
      */
-    Aggregation: string;
+    Aggregation?: string;
     /**
      * 指标单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 指标序列数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Streams: Array<SampleStream>;
+    Streams?: Array<SampleStream>;
 }
 /**
  * 施压配置
@@ -2473,7 +2324,6 @@ export interface CustomSampleMatrix {
 export interface Load {
     /**
      * 施压配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadSpec?: LoadSpec;
     /**
@@ -2620,7 +2470,6 @@ export interface DescribeSampleLogsResponse {
     Total?: number;
     /**
      * 日志上下文，加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Context?: string;
     /**
@@ -2823,7 +2672,6 @@ export interface DescribeAlertRecordsResponse {
     AlertRecordSet?: Array<AlertRecord>;
     /**
      * 告警历史记录的总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -2990,27 +2838,22 @@ export interface Scenario {
     Name?: string;
     /**
      * 场景描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 场景类型，如pts-http, pts-js, pts-trpc, pts-jmeter
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 场景状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 施压配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Load?: Load;
     /**
      * deprecated
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncodedScripts?: string;
     /**
@@ -3030,12 +2873,10 @@ export interface Scenario {
     Datasets?: Array<TestData>;
     /**
      * SLA规则的ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SLAId?: string;
     /**
      * Cron Job规则的ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CronId?: string;
     /**
@@ -3048,22 +2889,18 @@ export interface Scenario {
     UpdatedAt?: string;
     /**
      * 项目ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
      * App ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Uin?: string;
     /**
      * 子用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubAccountUin?: string;
     /**
@@ -3083,7 +2920,6 @@ export interface Scenario {
     RequestFiles?: Array<FileInfo>;
     /**
      * SLA 策略
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SLAPolicy?: SLAPolicy;
     /**
@@ -3093,7 +2929,6 @@ export interface Scenario {
     Plugins?: Array<FileInfo>;
     /**
      * 域名解析配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainNameConfig?: DomainNameConfig;
     /**
@@ -3103,12 +2938,10 @@ export interface Scenario {
     NotificationHooks?: Array<NotificationHook>;
     /**
      * 创建人员
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Owner?: string;
     /**
      * 场景所在的项目的名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectName?: string;
 }
@@ -3224,16 +3057,15 @@ export interface SampleStream {
      * labels描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<Label>;
+    Labels?: Array<Label>;
     /**
      * 指标采样数组
      */
-    Values: Array<SamplePair>;
+    Values?: Array<SamplePair>;
     /**
      * 指标序列名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
 }
 /**
  * DescribeCheckSummary返回参数结构体
@@ -3362,23 +3194,23 @@ export interface CheckSummary {
     /**
      * 检查点名字
      */
-    Name: string;
+    Name?: string;
     /**
      * 检查点所在步骤名字
      */
-    Step: string;
+    Step?: string;
     /**
      * 检查点成功次数
      */
-    SuccessCount: number;
+    SuccessCount?: number;
     /**
      * 检查失败次数
      */
-    FailCount: number;
+    FailCount?: number;
     /**
      * 错误比例
      */
-    ErrorRate: number;
+    ErrorRate?: number;
 }
 /**
  * 事件通知回调
@@ -3391,7 +3223,6 @@ export interface NotificationHook {
     Events?: Array<string>;
     /**
      * 回调 URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     URL?: string;
 }
@@ -3406,7 +3237,6 @@ export interface DescribeJobsResponse {
     JobSet?: Array<Job>;
     /**
      * 任务数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -3636,22 +3466,18 @@ export interface Concurrency {
     Stages?: Array<Stage>;
     /**
      * 运行次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IterationCount?: number;
     /**
      * 最大RPS
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRequestsPerSecond?: number;
     /**
      * 优雅终止任务的等待时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GracefulStopSeconds?: number;
     /**
      * 资源数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resources?: number;
 }

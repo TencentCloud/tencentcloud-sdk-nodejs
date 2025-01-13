@@ -498,7 +498,6 @@ export interface ChannelDisableUserAutoSignResponse {
 export interface DescribeExtendedServiceAuthDetailResponse {
     /**
      * 服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthInfoDetail?: AuthInfoDetail;
     /**
@@ -514,12 +513,12 @@ export interface Department {
      * 部门id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DepartmentId: string;
+    DepartmentId?: string;
     /**
      * 部门名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DepartmentName: string;
+    DepartmentName?: string;
 }
 /**
  * CreateLegalSealQrCode返回参数结构体
@@ -1003,12 +1002,10 @@ export interface DetectInfoVideoData {
 export interface OperateChannelTemplateResponse {
     /**
      * 第三方应用平台的应用ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 合同模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: string;
     /**
@@ -1018,24 +1015,20 @@ export interface OperateChannelTemplateResponse {
   <li>part-success: 部分成功,失败的会在FailMessageList中展示</li>
   <li>fail:全部失败, 失败的会在FailMessageList中展示</li>
   </ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateResult?: string;
     /**
      * 模板可见范围:
   **all**: 所有本第三方应用合作企业可见
   **part**: 指定的本第三方应用合作企业
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthTag?: string;
     /**
      * 第三方平台子客企业标识列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyOrganizationOpenIds?: Array<string>;
     /**
      * 操作失败信息数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailMessageList?: Array<AuthFailMessage>;
     /**
@@ -1090,7 +1083,7 @@ export interface FlowFileInfo {
      */
     CallbackUrl?: string;
     /**
-     * 第三方应用的业务信息，最大长度1000个字符。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+     * 第三方应用的业务信息，最大长度1000个字符。
      */
     CustomerData?: string;
     /**
@@ -1202,7 +1195,6 @@ export interface ChannelCreateRoleRequest {
 export interface CreateOrganizationAuthFileResponse {
     /**
      * 授权书链接，有效期5分钟。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FileUrl?: string;
     /**
@@ -1671,12 +1663,10 @@ export interface OrganizationInfo {
 export interface ChannelDescribeSignFaceVideoResponse {
     /**
      * 核身视频结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VideoData?: DetectInfoVideoData;
     /**
      * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IntentionQuestionResult?: IntentionQuestionResult;
     /**
@@ -2419,17 +2409,14 @@ export interface DescribeFlowDetailInfoResponse {
     /**
      * 合同流程的详细信息。
   如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowInfo?: Array<FlowDetailInfo>;
     /**
      * 合同组ID，只有在查询合同组信息时才会返回。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowGroupId?: string;
     /**
      * 合同组名称，只有在查询合同组信息时才会返回。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowGroupName?: string;
     /**
@@ -2998,12 +2985,12 @@ export interface StaffRole {
      * 角色id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleId: string;
+    RoleId?: string;
     /**
      * 角色名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleName: string;
+    RoleName?: string;
 }
 /**
  * CreateBatchOrganizationRegistrationTasks返回参数结构体
@@ -3234,9 +3221,8 @@ export interface CreateOrganizationAuthFileRequest {
     OrganizationCommonInfo?: OrganizationCommonInfo;
     /**
      * 授权书类型：
-  - 0: 企业认证超管授权书
-  - 1: 超管变更授权书
-  - 2: 企业注销授权书
+  
+  <ul><li>0: 企业认证超管授权书</li><li>1: 超管变更授权书</li><li>2: 企业注销授权书</li></ul>
      */
     Type?: number;
 }
@@ -3946,22 +3932,18 @@ export interface CreatePersonAuthCertificateImageResponse {
     AuthCertUrl?: string;
     /**
      * 个人用户认证证书的编号, 为20位数字组成的字符串,  由腾讯电子签下发此编号 。该编号会合成到个人用户证书证明图片。注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动`
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageCertId?: string;
     /**
      * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。请注意，当证书到期并自动续期时，该序列号将会发生变化。值得注意的是，此序列号不会被合成至个人用户证书的证明图片中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialNumber?: string;
     /**
      * CA证书颁发时间，格式为Unix标准时间戳（秒）   该时间格式化后会合成到个人用户证书证明图片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidFrom?: number;
     /**
      * CA证书有效截止时间，格式为Unix标准时间戳（秒）该时间格式化后会合成到个人用户证书证明图片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidTo?: number;
     /**
@@ -4404,7 +4386,6 @@ export interface DescribeChannelSealPolicyWorkflowUrlRequest {
 export interface CreatePartnerAutoSignAuthUrlResponse {
     /**
      * 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
     /**
@@ -4588,12 +4569,12 @@ export interface TaskInfo {
      * 合成任务Id，可以通过 ChannelGetTaskResultApi 接口获取任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 任务状态：READY - 任务已完成；NOTREADY - 任务未完成；
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskStatus: string;
+    TaskStatus?: string;
 }
 /**
  * ChannelCreateBoundFlows返回参数结构体
@@ -4883,7 +4864,7 @@ export interface AuthorizedUser {
     /**
      * 第三方应用平台的用户openid
      */
-    OpenId: string;
+    OpenId?: string;
 }
 /**
  * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
@@ -5002,7 +4983,6 @@ export interface DescribeUsageResponse {
     Total?: number;
     /**
      * 用量明细
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: Array<UsageDetail>;
     /**
@@ -6881,12 +6861,10 @@ export interface SyncProxyOrganizationOperatorsResponse {
   
   <ul><li> **1** :全部成功</li>
   <li> **2** :部分成功</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 同步失败员工ID及其失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedList?: Array<SyncFailReason>;
     /**
@@ -6907,7 +6885,6 @@ export interface CreateSealByImageResponse {
      * 电子印章预览链接地址，地址默认失效时间为24小时。
   
   注:`图片上传生成的电子印章无预览链接地址`
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
     /**
@@ -6963,7 +6940,6 @@ export interface ChannelDescribeRolesResponse {
     TotalCount?: number;
     /**
      * 查询的角色信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChannelRoles?: Array<ChannelRole>;
     /**
@@ -7384,7 +7360,6 @@ export interface ChannelGetTaskResultApiResponse {
     /**
      * 预览文件Url，有效期30分钟
   当前字段返回为空，发起的时候，将ResourceId 放入发起即可
-  注意：此字段可能返回 null，表示取不到有效值。
      * @deprecated
      */
     PreviewUrl?: string;
@@ -8618,7 +8593,6 @@ export interface DescribeChannelSealPolicyWorkflowUrlResponse {
 export interface CreateChannelFlowEvidenceReportResponse {
     /**
      * 出证报告 ID，可用于<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>查询出证任务结果和出证PDF的下载URL
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportId?: string;
     /**
@@ -8626,12 +8600,11 @@ export interface CreateChannelFlowEvidenceReportResponse {
   
   <ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
   <li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-  <li>**EvidenceStatusFailed** ： 出征任务执行失败</li></ul>
+  <li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
      */
     Status?: string;
     /**
      * 废除，字段无效
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportUrl?: string;
     /**
@@ -8660,12 +8633,10 @@ export interface ChannelDescribeAccountBillDetailRequest {
 export interface ChannelDescribeEmployeesResponse {
     /**
      * 员工信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Employees?: Array<Staff>;
     /**
      * 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Offset?: number;
     /**
@@ -8709,7 +8680,6 @@ export interface ChannelCreateReleaseFlowResponse {
 export interface DescribeChannelFlowEvidenceReportResponse {
     /**
      * 出证报告PDF的下载 URL，有效期为5分钟，超过有效期后将无法再下载。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportUrl?: string;
     /**
@@ -8717,7 +8687,7 @@ export interface DescribeChannelFlowEvidenceReportResponse {
   
   <ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
   <li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-  <li>**EvidenceStatusFailed** ： 出征任务执行失败</li></ul>
+  <li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
      */
     Status?: string;
     /**
@@ -8838,7 +8808,6 @@ export interface ChannelCreateFlowRemindsRequest {
 export interface DescribeExtendedServiceAuthInfoResponse {
     /**
      * 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthInfo?: Array<ExtentServiceAuthInfo>;
     /**
@@ -8870,8 +8839,8 @@ export interface ChannelCreateEmbedWebUrlRequest {
   <li>CREATE_TEMPLATE：生成创建模板的嵌入页面</li>
   <li>MODIFY_TEMPLATE：生成修改模板的嵌入页面</li>
   <li>PREVIEW_TEMPLATE：生成预览模板的嵌入页面</li>
-  <li>PREVIEW_FLOW：生成预览合同文档的嵌入页面（支持移动端）</li>
-  <li>PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC端）</li>
+  <li>PREVIEW_FLOW：生成预览合同文档的嵌入页面（H5链接，支持移动端的浏览器中打开）</li>
+  <li>PREVIEW_FLOW_DETAIL：生成预览合同详情的嵌入页面（仅支持PC的浏览器中打开）</li>
   <li>PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面</li>
   <li>PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面</li>
   <li>EXTEND_SERVICE：生成扩展服务的嵌入页面</li>

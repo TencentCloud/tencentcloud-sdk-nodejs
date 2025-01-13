@@ -68,7 +68,7 @@ export interface BillUsageDetail {
   <li>**7**: 还没有预发起</li>
   <li>**8**: 等待填写</li>
   <li>**9**: 部分填写 </li>
-  <li>**10**: 拒填</li>
+  <li>**10**: 拒签</li>
   <li>**11**: 已解除</li>
   </ul>
      */
@@ -2083,7 +2083,7 @@ export interface DescribeFlowEvidenceReportResponse {
   
   <ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
   <li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-  <li>**EvidenceStatusFailed** ： 出征任务执行失败</li></ul>
+  <li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
      */
     Status?: string;
     /**
@@ -3707,16 +3707,16 @@ export interface FailedDeleteStaffData {
      * 员工在电子签的userId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 员工在第三方平台的openId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OpenId: string;
+    OpenId?: string;
     /**
      * 失败原因
      */
-    Reason: string;
+    Reason?: string;
 }
 /**
  * 合同文件验签单个结果结构体
@@ -3995,15 +3995,15 @@ export interface SuccessDeleteStaffData {
     /**
      * 员工名
      */
-    DisplayName: string;
+    DisplayName?: string;
     /**
      * 员工手机号
      */
-    Mobile: string;
+    Mobile?: string;
     /**
      * 员工在电子签平台的id
      */
-    UserId: string;
+    UserId?: string;
 }
 /**
  * DeleteSealPolicies请求参数结构体
@@ -4358,7 +4358,6 @@ export interface FlowGroupInfo {
     TemplateId?: string;
     /**
      * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
-  示例值：劳务合同
      */
     FlowType?: string;
     /**
@@ -4411,7 +4410,7 @@ export interface FlowGroupInfo {
     NeedSignReview?: boolean;
     /**
      * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
-  示例值：E_PRESCRIPTION_AUTO_SIGN
+  
      */
     AutoSignScene?: string;
     /**
@@ -5398,13 +5397,12 @@ export interface CreateFlowEvidenceReportResponse {
   
   <ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
   <li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-  <li>**EvidenceStatusFailed** ： 出征任务执行失败</li></ul>
+  <li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
      */
     Status?: string;
     /**
      * 此字段已经废除,不再使用.
   出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取
-  注意：此字段可能返回 null，表示取不到有效值。
      * @deprecated
      */
     ReportUrl?: string;
@@ -5529,7 +5527,7 @@ export interface AuthorizedUser {
     /**
      * 电子签系统中的用户id
      */
-    UserId: string;
+    UserId?: string;
 }
 /**
  * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
@@ -6306,7 +6304,6 @@ export interface SuccessUpdateStaffData {
     UserId?: string;
     /**
      * H5端员工实名链接
-  
   只有入参 InvitationNotifyType = H5的时候才会进行返回。
      */
     Url?: string;
