@@ -348,6 +348,16 @@ it("mps.v20190612.CreateContentReviewTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DescribeGroupAttachFlowsById", async function () {
+    try {
+       const data = await client.DescribeGroupAttachFlowsById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateSampleSnapshotTemplate", async function () {
     try {
        const data = await client.CreateSampleSnapshotTemplate({})
@@ -468,6 +478,16 @@ it("mps.v20190612.DescribeTranscodeTemplates", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamLinkSecurityGroup", async function () {
+    try {
+       const data = await client.ModifyStreamLinkSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteStreamLinkFlow", async function () {
     try {
        const data = await client.DeleteStreamLinkFlow({})
@@ -548,9 +568,19 @@ it("mps.v20190612.CreateLiveRecordTemplate", async function () {
     }
 })
 
-it("mps.v20190612.DeleteContentReviewTemplate", async function () {
+it("mps.v20190612.DescribeStreamLinkSecurityGroups", async function () {
     try {
-       const data = await client.DeleteContentReviewTemplate({})
+       const data = await client.DescribeStreamLinkSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteStreamLinkSecurityGroup", async function () {
+    try {
+       const data = await client.DeleteStreamLinkSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,6 +1038,16 @@ it("mps.v20190612.DeleteLiveRecordTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DeleteContentReviewTemplate", async function () {
+    try {
+       const data = await client.DeleteContentReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteSampleSnapshotTemplate", async function () {
     try {
        const data = await client.DeleteSampleSnapshotTemplate({})
@@ -1058,6 +1098,16 @@ it("mps.v20190612.DescribeQualityControlTemplates", async function () {
     }
 })
 
+it("mps.v20190612.CreateStreamLinkSecurityGroup", async function () {
+    try {
+       const data = await client.CreateStreamLinkSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DisableSchedule", async function () {
     try {
        const data = await client.DisableSchedule({})
@@ -1071,6 +1121,16 @@ it("mps.v20190612.DisableSchedule", async function () {
 it("mps.v20190612.CreateStreamLinkInput", async function () {
     try {
        const data = await client.CreateStreamLinkInput({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DisassociateSecurityGroup", async function () {
+    try {
+       const data = await client.DisassociateSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1514,6 +1514,11 @@ export interface NativeGatewayServerGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultWeight?: number
+  /**
+   * 弹性节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticNumber?: number
 }
 
 /**

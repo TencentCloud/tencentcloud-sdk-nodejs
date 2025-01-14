@@ -117,6 +117,29 @@ export interface ContainerDiagnoseResultItem {
     TimestampSet?: Array<number>;
 }
 /**
+ * 安全组解绑输入/输出请求信息。
+ */
+export interface UnattachSecurityGroupInOutInfo {
+    /**
+     * 该安全组关联的FlowId。
+     */
+    FlowId: string;
+    /**
+     * 要解绑的输入/输出ID。
+     */
+    InOutId: string;
+    /**
+     * 输入/输出类型，可选值：
+  Input：输入
+  Output：输出。
+     */
+    InOutType: string;
+    /**
+     * Flow所在的Region，和input共用。
+     */
+    FlowRegion: string;
+}
+/**
  * ModifyWatermarkTemplate请求参数结构体
  */
 export interface ModifyWatermarkTemplateRequest {
@@ -232,58 +255,13 @@ export interface FrameRateConfig {
     Fps?: number;
 }
 /**
- * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ * DeleteStreamLinkSecurityGroup返回参数结构体
  */
-export interface OverrideTranscodeParameter {
+export interface DeleteStreamLinkSecurityGroupResponse {
     /**
-     * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Container?: string;
-    /**
-     * 是否去除视频数据，取值：
-  <li>0：保留；</li>
-  <li>1：去除。</li>
-     */
-    RemoveVideo?: number;
-    /**
-     * 是否去除音频数据，取值：
-  <li>0：保留；</li>
-  <li>1：去除。</li>
-     */
-    RemoveAudio?: number;
-    /**
-     * 视频流配置参数。
-     */
-    VideoTemplate?: VideoTemplateInfoForUpdate;
-    /**
-     * 音频流配置参数。
-     */
-    AudioTemplate?: AudioTemplateInfoForUpdate;
-    /**
-     * 极速高清转码参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TEHDConfig?: TEHDConfigForUpdate;
-    /**
-     * 字幕流配置参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubtitleTemplate?: SubtitleTemplate;
-    /**
-     * 外挂音轨参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AddonAudioStream?: Array<MediaInputInfo>;
-    /**
-     * 转码扩展字段。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StdExtInfo?: string;
-    /**
-     * 要插入的字幕文件。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AddOnSubtitles?: Array<AddOnSubtitle>;
+    RequestId?: string;
 }
 /**
  * 智能分类任务输入类型
@@ -436,19 +414,19 @@ export interface CreateOutputSRTSettings {
      */
     StreamId?: string;
     /**
-     * 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。
+     * 转推SRT的总延迟，默认0，单位ms，范围为[0, 3000]。此参数同时设置了发送方和接收方的延迟（recvlatency和peerlatency）为相同的值。建议配置为至少3倍RTT，以确保在网络拥塞时能够有效处理数据包的重传和确认
      */
     Latency?: number;
     /**
-     * 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。
+     * 转推SRT的接收延迟，默认120，单位ms，范围为[0, 3000]。 此参数表示接收方用于缓存数据包的时间长度
      */
     RecvLatency?: number;
     /**
-     * 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。
+     * 转推SRT的对端延迟，默认0，单位ms，范围为[0, 3000]。 此参数由发送方设置，用于告知接收方其期望的延迟缓冲时间
      */
     PeerLatency?: number;
     /**
-     * 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。
+     * 转推SRT的对端空闲超时时间，默认5000，单位ms，范围为[1000, 10000]。 如果连接在设定的超时时间内没有活动，将会被关闭
      */
     PeerIdleTimeout?: number;
     /**
@@ -1070,6 +1048,53 @@ export interface ManageTaskRequest {
     TaskId: string;
 }
 /**
+ * 查询Flow的配置信息。
+ */
+export interface FlowInOutResp {
+    /**
+     * 流Id。
+     */
+    FlowId?: string;
+    /**
+     * 流名称。
+     */
+    FlowName?: string;
+    /**
+     * 该Flow关联的媒体传输事件EventId。
+     */
+    EventId?: string;
+    /**
+     * 媒体传输输入流所属的区域，取值和InputRegion相同。
+     */
+    FlowRegion?: string;
+    /**
+     * 当返回是输出类型时非空，output所在Region。
+     */
+    OutputRegion?: string;
+    /**
+     * EventName。
+     */
+    EventName?: string;
+    /**
+     * InOutType为Input有效。
+     */
+    InputName?: string;
+    /**
+     * InOutType为Output有效。
+     */
+    OutputName?: string;
+    /**
+     * Input或者Output的Id。
+     */
+    InOutId?: string;
+    /**
+     * 输入/输出类型，可选值：
+  Input：输入
+  Outpu：输出。
+     */
+    InOutType?: string;
+}
+/**
  * 音视频增强配置
  */
 export interface EnhanceConfig {
@@ -1436,6 +1461,60 @@ export interface AiSampleWord {
     UpdateTime: string;
 }
 /**
+ * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ */
+export interface OverrideTranscodeParameter {
+    /**
+     * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+     */
+    Container?: string;
+    /**
+     * 是否去除视频数据，取值：
+  <li>0：保留；</li>
+  <li>1：去除。</li>
+     */
+    RemoveVideo?: number;
+    /**
+     * 是否去除音频数据，取值：
+  <li>0：保留；</li>
+  <li>1：去除。</li>
+     */
+    RemoveAudio?: number;
+    /**
+     * 视频流配置参数。
+     */
+    VideoTemplate?: VideoTemplateInfoForUpdate;
+    /**
+     * 音频流配置参数。
+     */
+    AudioTemplate?: AudioTemplateInfoForUpdate;
+    /**
+     * 极速高清转码参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TEHDConfig?: TEHDConfigForUpdate;
+    /**
+     * 字幕流配置参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubtitleTemplate?: SubtitleTemplate;
+    /**
+     * 外挂音轨参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AddonAudioStream?: Array<MediaInputInfo>;
+    /**
+     * 转码扩展字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StdExtInfo?: string;
+    /**
+     * 要插入的字幕文件。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AddOnSubtitles?: Array<AddOnSubtitle>;
+}
+/**
  * 文本涉敏任务控制参数
  */
 export interface PoliticalOcrReviewTemplateInfo {
@@ -1572,6 +1651,15 @@ export interface CreateInputHLSPullSettings {
      * HLS源站的源站地址，有且只能有一个。
      */
     SourceAddresses: Array<HLSPullSourceAddress>;
+}
+/**
+ * DeleteStreamLinkSecurityGroup请求参数结构体
+ */
+export interface DeleteStreamLinkSecurityGroupRequest {
+    /**
+     * 安全组 ID。
+     */
+    Id: string;
 }
 /**
  * 内容审核模板详情
@@ -3096,6 +3184,19 @@ export interface AudioBeautifyConfig {
     Types?: Array<string>;
 }
 /**
+ * CreateStreamLinkSecurityGroup请求参数结构体
+ */
+export interface CreateStreamLinkSecurityGroupRequest {
+    /**
+     * 安全组名称，限制大小写、数字和下划线，Region下唯一。
+     */
+    Name: string;
+    /**
+     * 白名单列表，数量限制[1, 10]。
+     */
+    Whitelist: Array<string>;
+}
+/**
  * DescribeStreamLinkEvent返回参数结构体
  */
 export interface DescribeStreamLinkEventResponse {
@@ -3212,6 +3313,15 @@ export interface FlowRealtimeStatusItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RTPStatus: FlowRealtimeStatusRTP;
+}
+/**
+ * DisassociateSecurityGroup返回参数结构体
+ */
+export interface DisassociateSecurityGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 文本全文识别输出。
@@ -4889,6 +4999,7 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
     Type?: string;
     /**
      * 是否为纯音频，0表示视频，1表示纯音频
+  默认值：0
      */
     PureAudio?: number;
     /**
@@ -5251,6 +5362,7 @@ export interface VideoTemplateInfo {
   <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
   <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
   默认值：0。
+  注意：Codec为MV-HEVC时可以支持到7680
      */
     Width?: number;
     /**
@@ -5260,6 +5372,7 @@ export interface VideoTemplateInfo {
   <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
   <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
   默认值：0。
+  注意：Codec为MV-HEVC时可以支持到7680
      */
     Height?: number;
     /**
@@ -7126,29 +7239,13 @@ export interface CreateInputSRTSettings {
     SourceAddresses?: Array<SRTSourceAddressReq>;
 }
 /**
- * 实时流状态查询的通用状态信息。
+ * DescribeGroupAttachFlowsById请求参数结构体
  */
-export interface FlowRealtimeStatusCommon {
+export interface DescribeGroupAttachFlowsByIdRequest {
     /**
-     * 当前连接状态，Connected|Waiting|Idle。
+     * 媒体传输安全组ID。
      */
-    State: string;
-    /**
-     * 连接模式，Listener|Caller。
-     */
-    Mode: string;
-    /**
-     * 已连接时长，单位为ms。
-     */
-    ConnectedTime: number;
-    /**
-     * 实时码率，单位为bps。
-     */
-    Bitrate: number;
-    /**
-     * 重试次数。
-     */
-    Reconnections: number;
+    Id?: string;
 }
 /**
  * DescribeWorkflows返回参数结构体
@@ -7274,11 +7371,13 @@ export interface VideoTemplateInfoForUpdate {
   <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
   <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
   <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  注意：Codec为MV-HEVC时可以支持到7680
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Width?: number;
     /**
      * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+  注意：Codec为MV-HEVC时可以支持到7680
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Height?: number;
@@ -8037,6 +8136,37 @@ export interface ClassificationConfigureInfoForUpdate {
     Switch?: string;
 }
 /**
+ * 安全组信息。
+ */
+export interface SecurityGroupInfo {
+    /**
+     * 安全组 ID。
+     */
+    Id?: string;
+    /**
+     * 安全组名称。
+     */
+    Name?: string;
+    /**
+     * 白名单列表。
+     */
+    Whitelist?: Array<string>;
+    /**
+     * 绑定的输入流列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OccupiedInputs?: Array<string>;
+    /**
+     * 安全组地址。
+     */
+    Region?: string;
+    /**
+     * 绑定的输出流列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OccupiedOutputs?: Array<string>;
+}
+/**
  * CreateSchedule请求参数结构体
  */
 export interface CreateScheduleRequest {
@@ -8629,6 +8759,19 @@ export interface BatchStartStreamLinkFlowResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DisassociateSecurityGroup请求参数结构体
+ */
+export interface DisassociateSecurityGroupRequest {
+    /**
+     * 媒体传输安全组ID。
+     */
+    Id?: string;
+    /**
+     * 要解绑的输入输出信息列表。
+     */
+    UnattachInOutInfos?: Array<UnattachSecurityGroupInOutInfo>;
 }
 /**
  * 违禁任务控制参数
@@ -10484,6 +10627,19 @@ export interface TranscodeTaskInput {
     HeadTailParameter?: HeadTailParameter;
 }
 /**
+ * CreateStreamLinkSecurityGroup返回参数结构体
+ */
+export interface CreateStreamLinkSecurityGroupResponse {
+    /**
+     * 安全组 ID。
+     */
+    Id?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyAIRecognitionTemplate请求参数结构体
  */
 export interface ModifyAIRecognitionTemplateRequest {
@@ -11271,6 +11427,23 @@ export interface DescribeOutputRTMPPullServerUrl {
     StreamKey: string;
 }
 /**
+ * ModifyStreamLinkSecurityGroup请求参数结构体
+ */
+export interface ModifyStreamLinkSecurityGroupRequest {
+    /**
+     * 安全组Id。
+     */
+    Id: string;
+    /**
+     * 安全组名称，限制大小写、数字和下划线，长度[1, 32]，Region下唯一。
+     */
+    Name?: string;
+    /**
+     * 白名单列表，最多10个。
+     */
+    Whitelist?: Array<string>;
+}
+/**
  * 文本识别片段。
  */
 export interface AiRecognitionTaskOcrWordsSegmentItem {
@@ -11884,24 +12057,29 @@ export interface DescribeImageSpriteTemplatesResponse {
     RequestId?: string;
 }
 /**
- * SimpleAes 加密信息。
+ * 实时流状态查询的通用状态信息。
  */
-export interface SimpleAesDrm {
+export interface FlowRealtimeStatusCommon {
     /**
-     * 请求解密秘钥uri地址。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前连接状态，Connected|Waiting|Idle。
      */
-    Uri: string;
+    State: string;
     /**
-     * 加密key(32字节字符串)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 连接模式，Listener|Caller。
      */
-    Key: string;
+    Mode: string;
     /**
-     * 加密初始化向量(32字节字符串)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 已连接时长，单位为ms。
      */
-    Vector?: string;
+    ConnectedTime: number;
+    /**
+     * 实时码率，单位为bps。
+     */
+    Bitrate: number;
+    /**
+     * 重试次数。
+     */
+    Reconnections: number;
 }
 /**
  * 任务的事件通知配置。
@@ -12376,6 +12554,10 @@ export interface LiveStreamTransTextRecognitionResult {
      */
     SteadyState?: boolean;
 }
+/**
+ * DescribeStreamLinkSecurityGroups请求参数结构体
+ */
+export declare type DescribeStreamLinkSecurityGroupsRequest = null;
 /**
  * 文本全文本识别任务控制参数
  */
@@ -13881,6 +14063,19 @@ export interface ModifyLiveRecordTemplateResponse {
     RequestId?: string;
 }
 /**
+ * DescribeStreamLinkSecurityGroups返回参数结构体
+ */
+export interface DescribeStreamLinkSecurityGroupsResponse {
+    /**
+     * 安全组信息列表。
+     */
+    Infos?: Array<SecurityGroupInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BatchDeleteStreamLinkFlow返回参数结构体
  */
 export interface BatchDeleteStreamLinkFlowResponse {
@@ -14198,6 +14393,26 @@ export interface DescribeVideoDatabaseEntryTaskDetailResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SimpleAes 加密信息。
+ */
+export interface SimpleAesDrm {
+    /**
+     * 请求解密秘钥uri地址。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uri: string;
+    /**
+     * 加密key(32字节字符串)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key: string;
+    /**
+     * 加密初始化向量(32字节字符串)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vector?: string;
 }
 /**
  * DeleteTranscodeTemplate返回参数结构体
@@ -14972,6 +15187,15 @@ export interface OcrFullTextConfigureInfo {
     Switch: string;
 }
 /**
+ * ModifyStreamLinkSecurityGroup返回参数结构体
+ */
+export interface ModifyStreamLinkSecurityGroupResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyLiveRecordTemplate请求参数结构体
  */
 export interface ModifyLiveRecordTemplateRequest {
@@ -15703,6 +15927,33 @@ export interface AiRecognitionTaskTransTextResult {
     Progress?: number;
 }
 /**
+ * DescribeAIRecognitionTemplates请求参数结构体
+ */
+export interface DescribeAIRecognitionTemplatesRequest {
+    /**
+     * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
+     */
+    Definitions?: Array<number | bigint>;
+    /**
+     * 分页偏移量，默认值：0。
+     */
+    Offset?: number;
+    /**
+     * 返回记录条数，默认值：10，最大值：50。
+     */
+    Limit?: number;
+    /**
+     * 模板类型过滤条件，不填则返回所有，可选值：
+  * Preset：系统预置模板；
+  * Custom：用户自定义模板。
+     */
+    Type?: string;
+    /**
+     * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
+     */
+    Name?: string;
+}
+/**
  * BatchStopStreamLinkFlow返回参数结构体
  */
 export interface BatchStopStreamLinkFlowResponse {
@@ -15837,31 +16088,17 @@ export interface CreateImageSpriteTemplateResponse {
     RequestId?: string;
 }
 /**
- * DescribeAIRecognitionTemplates请求参数结构体
+ * DescribeGroupAttachFlowsById返回参数结构体
  */
-export interface DescribeAIRecognitionTemplatesRequest {
+export interface DescribeGroupAttachFlowsByIdResponse {
     /**
-     * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
+     * 安全组反查的Flow信息列表。
      */
-    Definitions?: Array<number | bigint>;
+    Infos?: Array<FlowInOutResp>;
     /**
-     * 分页偏移量，默认值：0。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset?: number;
-    /**
-     * 返回记录条数，默认值：10，最大值：50。
-     */
-    Limit?: number;
-    /**
-     * 模板类型过滤条件，不填则返回所有，可选值：
-  * Preset：系统预置模板；
-  * Custom：用户自定义模板。
-     */
-    Type?: string;
-    /**
-     * 视频内容识别模板标识过滤条件，长度限制：64 个字符。
-     */
-    Name?: string;
+    RequestId?: string;
 }
 /**
  * 翻译片段。

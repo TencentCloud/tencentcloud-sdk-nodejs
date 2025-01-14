@@ -22,12 +22,13 @@ import {
   ModifySnapshotByTimeOffsetTemplateResponse,
   ModifySampleSnapshotTemplateResponse,
   ContainerDiagnoseResultItem,
+  UnattachSecurityGroupInOutInfo,
   ModifyWatermarkTemplateRequest,
   DescribeInputRTPSettings,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DeleteStreamLinkFlowRequest,
   FrameRateConfig,
-  OverrideTranscodeParameter,
+  DeleteStreamLinkSecurityGroupResponse,
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
   FlowStatisticsArray,
@@ -60,6 +61,7 @@ import {
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
   ManageTaskRequest,
+  FlowInOutResp,
   EnhanceConfig,
   MediaInputInfo,
   CreateWorkflowRequest,
@@ -71,11 +73,13 @@ import {
   RawWatermarkParameter,
   AiReviewTaskPoliticalOcrResult,
   AiSampleWord,
+  OverrideTranscodeParameter,
   PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
   UserDefineFaceReviewTemplateInfo,
   CreateInputHLSPullSettings,
+  DeleteStreamLinkSecurityGroupRequest,
   ContentReviewTemplateItem,
   ModifyStreamLinkFlowResponse,
   DeleteAIRecognitionTemplateResponse,
@@ -137,6 +141,7 @@ import {
   DescribeInputSRTSettings,
   AiAnalysisTaskCoverResult,
   AudioBeautifyConfig,
+  CreateStreamLinkSecurityGroupRequest,
   DescribeStreamLinkEventResponse,
   EnableWorkflowRequest,
   CreateStreamLinkFlowResponse,
@@ -144,6 +149,7 @@ import {
   SRTAddressDestination,
   DescribeFlowId,
   FlowRealtimeStatusItem,
+  DisassociateSecurityGroupResponse,
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   ComposeTransitionOperation,
@@ -310,7 +316,7 @@ import {
   AiSamplePerson,
   FlowStatistics,
   CreateInputSRTSettings,
-  FlowRealtimeStatusCommon,
+  DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
   DeleteImageSpriteTemplateResponse,
@@ -338,6 +344,7 @@ import {
   EnableScheduleResponse,
   OutputSRTSourceAddressResp,
   ClassificationConfigureInfoForUpdate,
+  SecurityGroupInfo,
   CreateScheduleRequest,
   StreamLinkRegionInfo,
   CreateVideoSearchTaskResponse,
@@ -362,6 +369,7 @@ import {
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
   BatchStartStreamLinkFlowResponse,
+  DisassociateSecurityGroupRequest,
   ProhibitedConfigureInfo,
   DescribeStreamLinkFlowSRTStatisticsResponse,
   AiReviewTerrorismOcrTaskOutput,
@@ -440,6 +448,7 @@ import {
   AdaptiveStreamTemplate,
   DescribeStreamLinkEventsRequest,
   TranscodeTaskInput,
+  CreateStreamLinkSecurityGroupResponse,
   ModifyAIRecognitionTemplateRequest,
   ParseNotificationResponse,
   ComposeImageOperation,
@@ -475,6 +484,7 @@ import {
   PoliticalConfigureInfo,
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeOutputRTMPPullServerUrl,
+  ModifyStreamLinkSecurityGroupRequest,
   AiRecognitionTaskOcrWordsSegmentItem,
   DescribeLiveRecordTemplatesRequest,
   FlowLogInfo,
@@ -503,7 +513,7 @@ import {
   AdaptiveDynamicStreamingTaskInput,
   ModifyQualityControlTemplateRequest,
   DescribeImageSpriteTemplatesResponse,
-  SimpleAesDrm,
+  FlowRealtimeStatusCommon,
   TaskNotifyConfig,
   FaceEnhanceConfig,
   LiveStreamAiReviewImagePornResult,
@@ -522,6 +532,7 @@ import {
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
   LiveStreamTransTextRecognitionResult,
+  DescribeStreamLinkSecurityGroupsRequest,
   OcrFullTextConfigureInfoForUpdate,
   FlowSRTInfo,
   AiRecognitionTaskOcrFullTextResultInput,
@@ -580,6 +591,7 @@ import {
   FlowMediaAudio,
   DescribeTranscodeTemplatesRequest,
   ModifyLiveRecordTemplateResponse,
+  DescribeStreamLinkSecurityGroupsResponse,
   BatchDeleteStreamLinkFlowResponse,
   SchedulesInfo,
   DisableWorkflowRequest,
@@ -594,6 +606,7 @@ import {
   DescribeStreamLinkFlowLogsResponse,
   AiAnalysisTaskHeadTailOutput,
   DescribeVideoDatabaseEntryTaskDetailResponse,
+  SimpleAesDrm,
   DeleteTranscodeTemplateResponse,
   LiveStreamObjectRecognitionResult,
   MediaSampleSnapshotItem,
@@ -625,6 +638,7 @@ import {
   PornImgReviewTemplateInfo,
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
+  ModifyStreamLinkSecurityGroupResponse,
   ModifyLiveRecordTemplateRequest,
   AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,
@@ -655,6 +669,7 @@ import {
   ComposeAudioOperation,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
+  DescribeAIRecognitionTemplatesRequest,
   BatchStopStreamLinkFlowResponse,
   EditMediaTaskOutput,
   HighlightSegmentItem,
@@ -665,7 +680,7 @@ import {
   DescribeMediaMetaDataRequest,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
-  DescribeAIRecognitionTemplatesRequest,
+  DescribeGroupAttachFlowsByIdResponse,
   AiRecognitionTaskTransTextSegmentItem,
   ModifyWatermarkTemplateResponse,
   AiRecognitionResult,
@@ -1039,6 +1054,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据安全组反差关联的Flow信息。
+   */
+  async DescribeGroupAttachFlowsById(
+    req: DescribeGroupAttachFlowsByIdRequest,
+    cb?: (error: string, rep: DescribeGroupAttachFlowsByIdResponse) => void
+  ): Promise<DescribeGroupAttachFlowsByIdResponse> {
+    return this.request("DescribeGroupAttachFlowsById", req, cb)
+  }
+
+  /**
    * 创建用户自定义采样截图模板，数量上限：16。
    */
   async CreateSampleSnapshotTemplate(
@@ -1161,6 +1186,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新安全组。
+   */
+  async ModifyStreamLinkSecurityGroup(
+    req: ModifyStreamLinkSecurityGroupRequest,
+    cb?: (error: string, rep: ModifyStreamLinkSecurityGroupResponse) => void
+  ): Promise<ModifyStreamLinkSecurityGroupResponse> {
+    return this.request("ModifyStreamLinkSecurityGroup", req, cb)
+  }
+
+  /**
    * 删除媒体传输的传输流配置。
    */
   async DeleteStreamLinkFlow(
@@ -1243,13 +1278,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义内容审核模板。
+   * 批量查询安全组信息。
    */
-  async DeleteContentReviewTemplate(
-    req: DeleteContentReviewTemplateRequest,
-    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
-  ): Promise<DeleteContentReviewTemplateResponse> {
-    return this.request("DeleteContentReviewTemplate", req, cb)
+  async DescribeStreamLinkSecurityGroups(
+    req?: DescribeStreamLinkSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkSecurityGroupsResponse) => void
+  ): Promise<DescribeStreamLinkSecurityGroupsResponse> {
+    return this.request("DescribeStreamLinkSecurityGroups", req, cb)
+  }
+
+  /**
+   * 删除安全组。
+   */
+  async DeleteStreamLinkSecurityGroup(
+    req: DeleteStreamLinkSecurityGroupRequest,
+    cb?: (error: string, rep: DeleteStreamLinkSecurityGroupResponse) => void
+  ): Promise<DeleteStreamLinkSecurityGroupResponse> {
+    return this.request("DeleteStreamLinkSecurityGroup", req, cb)
   }
 
   /**
@@ -1735,6 +1780,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户自定义内容审核模板。
+   */
+  async DeleteContentReviewTemplate(
+    req: DeleteContentReviewTemplateRequest,
+    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
+  ): Promise<DeleteContentReviewTemplateResponse> {
+    return this.request("DeleteContentReviewTemplate", req, cb)
+  }
+
+  /**
    * 删除用户自定义采样截图模板。
    */
   async DeleteSampleSnapshotTemplate(
@@ -1786,6 +1841,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安全组，数量限制5个。
+   */
+  async CreateStreamLinkSecurityGroup(
+    req: CreateStreamLinkSecurityGroupRequest,
+    cb?: (error: string, rep: CreateStreamLinkSecurityGroupResponse) => void
+  ): Promise<CreateStreamLinkSecurityGroupResponse> {
+    return this.request("CreateStreamLinkSecurityGroup", req, cb)
+  }
+
+  /**
    * 禁用自动化触发编排任务。
    */
   async DisableSchedule(
@@ -1803,6 +1868,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStreamLinkInputResponse) => void
   ): Promise<CreateStreamLinkInputResponse> {
     return this.request("CreateStreamLinkInput", req, cb)
+  }
+
+  /**
+   * 批量解绑安全组下面关联的输入输出。
+   */
+  async DisassociateSecurityGroup(
+    req: DisassociateSecurityGroupRequest,
+    cb?: (error: string, rep: DisassociateSecurityGroupResponse) => void
+  ): Promise<DisassociateSecurityGroupResponse> {
+    return this.request("DisassociateSecurityGroup", req, cb)
   }
 
   /**

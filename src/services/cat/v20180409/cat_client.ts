@@ -65,7 +65,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停拨测任务
+   * 暂停任务
    */
   async SuspendProbeTask(
     req: SuspendProbeTaskRequest,

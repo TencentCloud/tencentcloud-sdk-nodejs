@@ -1550,7 +1550,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过yaml的方式修改Prometheus聚合实例
+   * 通过yaml的方式修改Prometheus预聚合规则
    */
   async ModifyPrometheusRecordRuleYaml(
     req: ModifyPrometheusRecordRuleYamlRequest,

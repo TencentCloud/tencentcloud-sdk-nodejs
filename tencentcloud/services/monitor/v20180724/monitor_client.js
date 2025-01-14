@@ -676,7 +676,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGrafanaInstances", req, cb);
     }
     /**
-     * 通过yaml的方式修改Prometheus聚合实例
+     * 通过yaml的方式修改Prometheus预聚合规则
      */
     async ModifyPrometheusRecordRuleYaml(req, cb) {
         return this.request("ModifyPrometheusRecordRuleYaml", req, cb);

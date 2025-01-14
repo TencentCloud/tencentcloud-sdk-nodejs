@@ -254,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateContentReviewTemplate", req, cb);
     }
     /**
+     * 根据安全组反差关联的Flow信息。
+     */
+    async DescribeGroupAttachFlowsById(req, cb) {
+        return this.request("DescribeGroupAttachFlowsById", req, cb);
+    }
+    /**
      * 创建用户自定义采样截图模板，数量上限：16。
      */
     async CreateSampleSnapshotTemplate(req, cb) {
@@ -328,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscodeTemplates", req, cb);
     }
     /**
+     * 更新安全组。
+     */
+    async ModifyStreamLinkSecurityGroup(req, cb) {
+        return this.request("ModifyStreamLinkSecurityGroup", req, cb);
+    }
+    /**
      * 删除媒体传输的传输流配置。
      */
     async DeleteStreamLinkFlow(req, cb) {
@@ -378,10 +390,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLiveRecordTemplate", req, cb);
     }
     /**
-     * 删除用户自定义内容审核模板。
+     * 批量查询安全组信息。
      */
-    async DeleteContentReviewTemplate(req, cb) {
-        return this.request("DeleteContentReviewTemplate", req, cb);
+    async DescribeStreamLinkSecurityGroups(req, cb) {
+        return this.request("DescribeStreamLinkSecurityGroups", req, cb);
+    }
+    /**
+     * 删除安全组。
+     */
+    async DeleteStreamLinkSecurityGroup(req, cb) {
+        return this.request("DeleteStreamLinkSecurityGroup", req, cb);
     }
     /**
      * 创建用户自定义内容分析模板，数量上限：50。
@@ -686,6 +704,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLiveRecordTemplate", req, cb);
     }
     /**
+     * 删除用户自定义内容审核模板。
+     */
+    async DeleteContentReviewTemplate(req, cb) {
+        return this.request("DeleteContentReviewTemplate", req, cb);
+    }
+    /**
      * 删除用户自定义采样截图模板。
      */
     async DeleteSampleSnapshotTemplate(req, cb) {
@@ -717,6 +741,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeQualityControlTemplates", req, cb);
     }
     /**
+     * 创建安全组，数量限制5个。
+     */
+    async CreateStreamLinkSecurityGroup(req, cb) {
+        return this.request("CreateStreamLinkSecurityGroup", req, cb);
+    }
+    /**
      * 禁用自动化触发编排任务。
      */
     async DisableSchedule(req, cb) {
@@ -727,6 +757,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateStreamLinkInput(req, cb) {
         return this.request("CreateStreamLinkInput", req, cb);
+    }
+    /**
+     * 批量解绑安全组下面关联的输入输出。
+     */
+    async DisassociateSecurityGroup(req, cb) {
+        return this.request("DisassociateSecurityGroup", req, cb);
     }
     /**
      * 修改用户自定义内容审核模板。

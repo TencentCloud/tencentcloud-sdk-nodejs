@@ -618,6 +618,16 @@ it("ccc.v20200210.DescribeCompanyList", async function () {
     }
 })
 
+it("ccc.v20200210.CreateAIAgentCall", async function () {
+    try {
+       const data = await client.CreateAIAgentCall({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DeletePredictiveDialingCampaign", async function () {
     try {
        const data = await client.DeletePredictiveDialingCampaign({})

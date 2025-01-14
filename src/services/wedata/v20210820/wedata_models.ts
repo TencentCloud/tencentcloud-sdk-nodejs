@@ -4532,6 +4532,26 @@ export interface DescribeInstanceLogDetailRequest {
    * 请求来源，WEB 前端；CLIENT 客户端
    */
   RequestFromSource?: string
+  /**
+   * 生命周期为基础数据进行日志匹配
+   */
+  InstanceLifeDetailDtoList?: Array<InstanceLifeDetailDto>
+  /**
+   * 当前生命周期
+   */
+  CurrentLifeRound?: number
+  /**
+   * 生命周期总数
+   */
+  MaxLifeRound?: number
+  /**
+   * 当前生命周期重试次数
+   */
+  Tries?: number
+  /**
+   * 动态加载日志
+   */
+  Dynamic?: boolean
 }
 
 /**
@@ -5267,6 +5287,11 @@ export interface WorkflowExtOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyTime?: string
+  /**
+   * 工作流类型，周期cycle，手动manual
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowType?: string
 }
 
 /**
@@ -6945,6 +6970,14 @@ export interface DescribeOpsWorkflowsRequest {
    * 项目ID列表，用于多项目工作流筛选
    */
   ProjectIds?: Array<string>
+  /**
+   * 工作流类型列表 多个用英文逗号连接 cycle,manual. 默认只查询 cycle
+   */
+  WorkflowTypeList?: Array<string>
+  /**
+   * 工作流过滤keyword，支持工作流 id/name 模糊匹配， 多个用|分割
+   */
+  KeyWord?: string
 }
 
 /**
@@ -7522,6 +7555,13 @@ false 否
    * 节点分类ID
    */
   TaskNodeId?: string
+  /**
+   * 工作流类型, 使用场景: 任务复制,选择工作流. 取值范围
+
+- cycle    周期工作流
+- manual    手动工作流
+   */
+  WorkflowType?: string
 }
 
 /**
@@ -9285,6 +9325,11 @@ export interface InstanceLifeCycleOpsDto {
    */
   TaskId?: string
   /**
+   * 任务名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
    * 数据时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -9349,6 +9394,15 @@ export interface InstanceLifeCycleOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceRunType?: number
+  /**
+   * 实例当前总生命周期数
+   */
+  TotalLifeRound?: number
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: TaskTypeOpsDto
 }
 
 /**
@@ -10931,6 +10985,13 @@ export interface MakePlanOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfWorkflowDependency?: string
+  /**
+   * 补录时间顺序
+NORMAL： 正常
+ORDER ： 按照实例时间顺序执行
+REVERSE： 实例数据时间逆序
+   */
+  MakeDataTimeOrder?: string
 }
 
 /**
@@ -11261,6 +11322,14 @@ export interface CreateWorkflowDsRequest {
    * 工作流描述
    */
   WorkflowDesc?: string
+  /**
+   * 工作流类型,取值示例
+
+- cycle 周期工作流
+- manual 手动工作流
+
+   */
+  WorkflowType?: string
 }
 
 /**
@@ -14700,6 +14769,10 @@ export interface InstanceLogInfoOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSize?: string
+  /**
+   * 日志匹配节点信息
+   */
+  MatchedBrokerIp?: string
 }
 
 /**
@@ -17958,6 +18031,22 @@ export interface DescribeInstanceLogFileRequest {
    * 文件类型,Log/Code
    */
   ExecutionFileType?: string
+  /**
+   * 生命周期为基础数据进行日志匹配。Dynamic=true动态获取日志链路中使用
+   */
+  InstanceLifeDetailDtoList?: Array<InstanceLifeDetailDto>
+  /**
+   * 当前生命周期数
+   */
+  CurrentLifeRound?: number
+  /**
+   * 当前生命周期重试次数
+   */
+  Tries?: number
+  /**
+   * 动态获取日志信息标识
+   */
+  Dynamic?: boolean
 }
 
 /**
@@ -18771,6 +18860,34 @@ export interface RunRerunScheduleInstancesRequest {
    * 是否异步模式
    */
   AsyncMode?: boolean
+  /**
+   * 是否检查上游任务： ALL（全部）、 MAKE_SCOPE（选中）、NONE （全部不检查）
+   */
+  CheckParentType?: string
+  /**
+   * 任务原有自依赖配置 true（是）、false（否）
+   */
+  SameSelfDependType?: boolean
+  /**
+   * 实例运行并发度
+   */
+  ParallelNum?: number
+  /**
+   * 任务原有自依赖配置 true（是）、false（否）
+   */
+  SameSelfWorkflowDependType?: boolean
+  /**
+   * 代表重新指定 的  是 或者 否  yes、 no
+   */
+  SelfWorkflowDependency?: string
+  /**
+   * 运行实例数据时间排序 0---正常  1--正序  2 – 逆序
+   */
+  DataTimeOrder?: number
+  /**
+   * 重跑参数
+   */
+  ReDoParams?: string
 }
 
 /**
@@ -20955,6 +21072,11 @@ export interface WorkflowCanvasOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerId?: string
+  /**
+   * 工作流类型，周期cycle，手动manual
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowType?: string
 }
 
 /**
@@ -21337,6 +21459,10 @@ export interface CreateHiveTableRequest {
    * 是否开启数据优化
    */
   SmartOptimizerWritten?: string
+  /**
+   * 数据优化针对的表
+   */
+  TableName?: string
 }
 
 /**
@@ -22164,6 +22290,10 @@ export interface CreateHiveTableByDDLRequest {
    * 是否开启数据优化
    */
   SmartOptimizerWritten?: string
+  /**
+   * 数据优化表名
+   */
+  TableName?: string
 }
 
 /**

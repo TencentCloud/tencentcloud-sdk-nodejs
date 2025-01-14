@@ -136,17 +136,17 @@ export interface SuspendProbeTaskResponse {
   /**
    * 任务总量
    */
-  Total: number
+  Total?: number
   /**
    * 任务成功量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 任务执行结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<TaskResult>
+  Results?: Array<TaskResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -175,11 +175,11 @@ export interface DescribeInstantTasksResponse {
    * 任务
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks: Array<SingleInstantTask>
+  Tasks?: Array<SingleInstantTask>
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -759,17 +759,17 @@ export interface ResumeProbeTaskResponse {
   /**
    * 任务总量
    */
-  Total: number
+  Total?: number
   /**
    * 任务成功量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 任务执行详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<TaskResult>
+  Results?: Array<TaskResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -783,17 +783,17 @@ export interface DeleteProbeTaskResponse {
   /**
    * 任务总量
    */
-  Total: number
+  Total?: number
   /**
    * 任务成功量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 任务执行结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<TaskResult>
+  Results?: Array<TaskResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

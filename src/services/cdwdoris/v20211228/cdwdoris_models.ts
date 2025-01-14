@@ -395,17 +395,14 @@ export interface DescribeInstancesResponse {
 export interface CosSourceInfo {
   /**
    * cos认证中的Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretId?: string
   /**
    * cos认证中的key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretKey?: string
   /**
    * cos认证中的路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosPath?: string
 }
@@ -769,27 +766,22 @@ export interface UpdateCoolDownResponse {
 export interface ConfigKeyValue {
   /**
    * key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyName?: string
   /**
    * 值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 1-只读，2-可修改但不可删除，3-可删除
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Display?: number
   /**
    * 0不支持 1支持热更新
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportHotUpdate?: number
 }
@@ -860,7 +852,6 @@ export interface DescribeCoolDownTableDataRequest {
 export interface CheckCoolDownWorkingVariableConfigCorrectResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1064,39 +1055,36 @@ export interface SlowQueryRecord {
   InitialAddress?: string
   /**
    * 数据库名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbName?: string
   /**
    * 是否是查询，0：否，1：查询语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsQuery?: number
   /**
    * ResultBytes的MB格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultBytesMB?: number
   /**
    * MemoryUsage的MB表示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemoryUsageMB?: number
   /**
    * DurationMs的秒表示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationSec?: number
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
    * Catalog  Name
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * cpu执行时间
+   */
+  CpuTimeMs?: number
 }
 
 /**
@@ -1131,22 +1119,18 @@ export interface DescribeInstanceNodesRequest {
 export interface ChargeProperties {
   /**
    * 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeType?: string
   /**
    * 是否自动续费，1表示自动续费开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: number
   /**
    * 计费时间长度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeSpan?: number
   /**
    * 计费时间单位，“m”表示月等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeUnit?: string
 }
@@ -1237,37 +1221,30 @@ export interface InstanceOperation {
 export interface BackupTableContent {
   /**
    * 数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * 表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 表总字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBytes: number
   /**
    * 表单个副本的大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SingleReplicaBytes?: string
   /**
    * 备份状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupStatus?: number
   /**
    * 备份的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupErrorMsg?: string
   /**
    * 该库表是否绑定降冷策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOpenCoolDown?: boolean
 }
@@ -1448,17 +1425,14 @@ export interface UpdateCoolDownRequest {
 export interface CoolDownPolicyInfo {
   /**
    * 策略名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
    * cooldown_ttl
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CooldownDatetime?: string
   /**
    * cooldown_datetime
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CooldownTtl?: string
 }
@@ -1566,74 +1540,64 @@ export interface AttachCBSSpec {
 export interface DataBaseAuditRecord {
   /**
    * 查询用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OsUser?: string
   /**
    * 查询ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialQueryId?: string
   /**
    * SQL语句
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Sql?: string
   /**
    * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QueryStartTime?: string
   /**
    * 执行耗时
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationMs?: number
   /**
    * 读取行数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadRows?: number
   /**
    * 读取字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultRows?: number
   /**
    * 结果字节数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultBytes?: number
   /**
    * 内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemoryUsage?: number
   /**
    * 初始查询IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InitialAddress?: string
   /**
    * 数据库
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DbName?: string
   /**
    * sql类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlType?: string
   /**
    * catalog名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalog?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
+  /**
+   * 是否是查询
+   */
+  IsQuery?: boolean
 }
 
 /**
@@ -1671,28 +1635,27 @@ export interface ClusterConfigsHistory {
   /**
    * 配置文件名称
    */
-  FileName: string
+  FileName?: string
   /**
    * 修改后的配置文件内容，base64编码
    */
-  NewConfValue: string
+  NewConfValue?: string
   /**
    * 修改前的配置文件内容，base64编码
    */
-  OldConfValue: string
+  OldConfValue?: string
   /**
    * 修改原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 修改时间
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 修改子账号id
    */
-  UserUin: string
+  UserUin?: string
 }
 
 /**
@@ -2186,12 +2149,10 @@ export interface DescribeDatabaseAuditRecordsResponse {
   SlowQueryRecords?: DataBaseAuditRecord
   /**
    * 记录列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Records?: Array<DataBaseAuditRecord>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2750,7 +2711,6 @@ export interface DescribeClusterConfigsRequest {
 export interface CreateCoolDownPolicyResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2793,7 +2753,6 @@ export interface DescribeRestoreTaskDetailRequest {
 export interface CreateBackUpScheduleResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -3087,6 +3046,10 @@ export interface DescribeDatabaseAuditRecordsRequest {
    * catalog名称（多选）
    */
   Catalogs?: Array<string>
+  /**
+   * 是否是查询
+   */
+  IsQuery?: Array<boolean>
 }
 
 /**
@@ -3212,22 +3175,18 @@ export interface DescribeWorkloadGroupResponse {
 export interface CoolDownTableDataInfo {
   /**
    * 列：DatabaseName
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
    * 列：TableName
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
   /**
    * 列：Size
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: string
   /**
    * 列：RemoteSize
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteSize?: string
 }
@@ -3274,22 +3233,18 @@ export interface BackupCosInfo {
 export interface CoolDownBackend {
   /**
    * 字段：Host
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
    * 字段：DataUsedCapacity
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataUsedCapacity?: string
   /**
    * 字段：TotalCapacity
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCapacity?: string
   /**
    * 字段：RemoteUsedCapacity
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteUsedCapacity?: string
 }
@@ -3898,7 +3853,6 @@ export interface ClusterConfigsInfoFromEMR {
   NeedRestart?: number
   /**
    * 配置文件路径
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FilePath?: string
   /**
@@ -3909,7 +3863,6 @@ export interface ClusterConfigsInfoFromEMR {
   FileKeyValues?: string
   /**
    * 配置文件kv值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FileKeyValuesNew?: Array<ConfigKeyValue>
 }

@@ -541,11 +541,11 @@ export interface PrometheusRecordRuleYamlItem {
      */
     UpdateTime?: string;
     /**
-     * Yaml内容
+     * 如果该聚合规则来至模板，则TemplateId为模板id
      */
     TemplateId?: string;
     /**
-     * 如果该聚合规则来至模板，则TemplateId为模板id
+     * Yaml内容
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
@@ -4363,7 +4363,7 @@ export interface CreatePrometheusAgentResponse {
     /**
      * 创建成功的 Agent Id
      */
-    AgentId: string;
+    AgentId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9548,7 +9548,19 @@ export interface PrometheusScrapeJob {
 /**
  * prometheus一个抓取目标的信息
  */
-export declare type PrometheusTarget = null;
+export interface PrometheusTarget {
+    /**
+     * 抓取目标的URL
+     */
+    Url?: string;
+    /**
+     * target当前状态,当前支持
+  up = 健康
+  down = 不健康
+  unknown = 未知
+     */
+    State?: string;
+}
 /**
  * 通知模板ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
  */

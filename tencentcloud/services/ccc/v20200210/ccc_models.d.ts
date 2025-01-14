@@ -234,13 +234,41 @@ export interface DescribeIvrAudioListResponse {
     RequestId?: string;
 }
 /**
- * BindNumberCallOutSkillGroup返回参数结构体
+ * 查询预测式外呼任务列表元素
  */
-export interface BindNumberCallOutSkillGroupResponse {
+export interface DescribePredictiveDialingCampaignsElement {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 任务 ID
      */
-    RequestId?: string;
+    CampaignId?: number;
+    /**
+     * 任务名称
+     */
+    Name?: string;
+    /**
+     * 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成
+     */
+    Status?: number;
+    /**
+     * 任务状态原因 0 正常 1 手动结束 2 超时结束
+     */
+    StatusReason?: number;
+    /**
+     * 被叫号码个数
+     */
+    CalleeCount?: number;
+    /**
+     * 已完成的被叫个数
+     */
+    FinishedCalleeCount?: number;
+    /**
+     * 相同应用内多个任务运行优先级，从高到底 1 - 5
+     */
+    Priority?: number;
+    /**
+     * 使用的座席技能组 ID
+     */
+    SkillGroupId?: number;
 }
 /**
  * ResetExtensionPassword请求参数结构体
@@ -640,6 +668,77 @@ export interface DescribeExtensionsResponse {
     RequestId?: string;
 }
 /**
+ * 座席状态相关信息
+ */
+export interface StaffStatusMetrics {
+    /**
+     * 座席邮箱
+     */
+    Email?: string;
+    /**
+     * 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
+     */
+    Status?: string;
+    /**
+     * 座席状态补充信息
+     */
+    StatusExtra?: StaffStatusExtra;
+    /**
+     * 当天在线总时长
+     */
+    OnlineDuration?: number;
+    /**
+     * 当天示闲总时长
+     */
+    FreeDuration?: number;
+    /**
+     * 当天忙碌总时长
+     */
+    BusyDuration?: number;
+    /**
+     * 当天示忙总时长
+     */
+    NotReadyDuration?: number;
+    /**
+     * 当天小休总时长
+     */
+    RestDuration?: number;
+    /**
+     * 当天话后调整总时长
+     */
+    AfterCallWorkDuration?: number;
+    /**
+     * 小休原因
+     */
+    Reason?: string;
+    /**
+     * 是否预约小休
+     */
+    ReserveRest?: boolean;
+    /**
+     * 是否预约示忙
+     */
+    ReserveNotReady?: boolean;
+    /**
+     * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
+     */
+    UseMobileAccept?: number;
+    /**
+     * 手机外呼开关
+     */
+    UseMobileCallOut?: boolean;
+    /**
+     * 最近一次上线时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastOnlineTimestamp?: number;
+    /**
+     * 最近一次状态时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastStatusTimestamp?: number;
+}
+/**
  * DeleteExtension请求参数结构体
  */
 export interface DeleteExtensionRequest {
@@ -723,75 +822,17 @@ export interface DescribePredictiveDialingCampaignResponse {
     RequestId?: string;
 }
 /**
- * 座席状态相关信息
+ * CreateAIAgentCall返回参数结构体
  */
-export interface StaffStatusMetrics {
+export interface CreateAIAgentCallResponse {
     /**
-     * 座席邮箱
+     * 新创建的会话 ID
      */
-    Email?: string;
+    SessionId?: string;
     /**
-     * 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Status?: string;
-    /**
-     * 座席状态补充信息
-     */
-    StatusExtra?: StaffStatusExtra;
-    /**
-     * 当天在线总时长
-     */
-    OnlineDuration?: number;
-    /**
-     * 当天示闲总时长
-     */
-    FreeDuration?: number;
-    /**
-     * 当天忙碌总时长
-     */
-    BusyDuration?: number;
-    /**
-     * 当天示忙总时长
-     */
-    NotReadyDuration?: number;
-    /**
-     * 当天小休总时长
-     */
-    RestDuration?: number;
-    /**
-     * 当天话后调整总时长
-     */
-    AfterCallWorkDuration?: number;
-    /**
-     * 小休原因
-     */
-    Reason?: string;
-    /**
-     * 是否预约小休
-     */
-    ReserveRest?: boolean;
-    /**
-     * 是否预约示忙
-     */
-    ReserveNotReady?: boolean;
-    /**
-     * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
-     */
-    UseMobileAccept?: number;
-    /**
-     * 手机外呼开关
-     */
-    UseMobileCallOut?: boolean;
-    /**
-     * 最近一次上线时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LastOnlineTimestamp?: number;
-    /**
-     * 最近一次状态时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LastStatusTimestamp?: number;
+    RequestId?: string;
 }
 /**
  * DescribeTelCdr请求参数结构体
@@ -1784,17 +1825,29 @@ export interface SkillGroupInfoItem {
     Alias?: string;
 }
 /**
- * ResetExtensionPassword返回参数结构体
+ * CreateAIAgentCall请求参数结构体
  */
-export interface ResetExtensionPasswordResponse {
+export interface CreateAIAgentCallRequest {
     /**
-     * 重置后密码
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
-    Password?: string;
+    SdkAppId: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * AI智能体ID
      */
-    RequestId?: string;
+    AIAgentId: number;
+    /**
+     * 被叫号码
+     */
+    Callee: string;
+    /**
+     * 主叫号码列表
+     */
+    Callers?: Array<string>;
+    /**
+     * 提示词变量
+     */
+    PromptVariables?: Array<Variable>;
 }
 /**
  * UpdateCCCSkillGroup请求参数结构体
@@ -2260,6 +2313,10 @@ export interface CreateAICallRequest {
      * 提示词变量
      */
     PromptVariables?: Array<Variable>;
+    /**
+     * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
+     */
+    VadSilenceTime?: number;
 }
 /**
  * DescribeNumbers请求参数结构体
@@ -2961,6 +3018,19 @@ export interface StaffSkillGroupList {
     Priority?: number;
 }
 /**
+ * ResetExtensionPassword返回参数结构体
+ */
+export interface ResetExtensionPasswordResponse {
+    /**
+     * 重置后密码
+     */
+    Password?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCarrierPrivilegeNumberApplicant请求参数结构体
  */
 export interface CreateCarrierPrivilegeNumberApplicantRequest {
@@ -3042,41 +3112,13 @@ export interface CreateOwnNumberApplyResponse {
     RequestId?: string;
 }
 /**
- * 查询预测式外呼任务列表元素
+ * BindNumberCallOutSkillGroup返回参数结构体
  */
-export interface DescribePredictiveDialingCampaignsElement {
+export interface BindNumberCallOutSkillGroupResponse {
     /**
-     * 任务 ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    CampaignId?: number;
-    /**
-     * 任务名称
-     */
-    Name?: string;
-    /**
-     * 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成
-     */
-    Status?: number;
-    /**
-     * 任务状态原因 0 正常 1 手动结束 2 超时结束
-     */
-    StatusReason?: number;
-    /**
-     * 被叫号码个数
-     */
-    CalleeCount?: number;
-    /**
-     * 已完成的被叫个数
-     */
-    FinishedCalleeCount?: number;
-    /**
-     * 相同应用内多个任务运行优先级，从高到底 1 - 5
-     */
-    Priority?: number;
-    /**
-     * 使用的座席技能组 ID
-     */
-    SkillGroupId?: number;
+    RequestId?: string;
 }
 /**
  * HangUpCall返回参数结构体

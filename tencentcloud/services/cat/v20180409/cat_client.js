@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("cat.tencentcloudapi.com", "2018-04-09", clientConfig);
     }
     /**
-     * 暂停拨测任务
+     * 暂停任务
      */
     async SuspendProbeTask(req, cb) {
         return this.request("SuspendProbeTask", req, cb);

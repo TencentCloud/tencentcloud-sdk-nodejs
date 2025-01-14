@@ -8,7 +8,7 @@ import { DescribeNodesRequest, SuspendProbeTaskResponse, DescribeInstantTasksRes
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 暂停拨测任务
+     * 暂停任务
      */
     SuspendProbeTask(req: SuspendProbeTaskRequest, cb?: (error: string, rep: SuspendProbeTaskResponse) => void): Promise<SuspendProbeTaskResponse>;
     /**

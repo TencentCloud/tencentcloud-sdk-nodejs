@@ -6009,6 +6009,10 @@ export interface BackupInfo {
    * 备份GTID点位
    */
   ExecutedGTIDSet?: string
+  /**
+   * 备份文件MD5值
+   */
+  MD5?: string
 }
 
 /**
