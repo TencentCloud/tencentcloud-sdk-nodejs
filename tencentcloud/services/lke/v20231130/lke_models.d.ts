@@ -971,6 +971,10 @@ export interface QAQuery {
   
      */
     QueryAnswer?: string;
+    /**
+     * 查询类型 filename 名称、 attribute 标签
+     */
+    QueryType?: string;
 }
 /**
  * ListApp请求参数结构体

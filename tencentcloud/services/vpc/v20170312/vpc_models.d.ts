@@ -634,12 +634,15 @@ export interface ServiceTemplateGroup {
      */
     CreatedTime?: string;
     /**
+     * 最后更新时间。
+     */
+    UpdatedTime?: string;
+    /**
      * 协议端口模板实例信息。
      */
     ServiceTemplateSet?: Array<ServiceTemplate>;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -1357,12 +1360,15 @@ export interface AddressTemplate {
      */
     CreatedTime?: string;
     /**
+     * 最后更新时间。
+     */
+    UpdatedTime?: string;
+    /**
      * 带备注的IP地址信息。
      */
     AddressExtraSet?: Array<AddressInfo>;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -2353,12 +2359,15 @@ export interface ServiceTemplate {
      */
     CreatedTime?: string;
     /**
+     * 最后更新时间。
+     */
+    UpdatedTime?: string;
+    /**
      * 带备注的协议端口信息。
      */
     ServiceExtraSet?: Array<ServicesInfo>;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -7169,7 +7178,7 @@ export interface AddressTemplateItem {
      */
     AddressTemplateId?: string;
     /**
-     * IP模板名称。
+     * IP模板名称，废弃字段。
      */
     AddressTemplateName?: string;
     /**
@@ -7180,6 +7189,14 @@ export interface AddressTemplateItem {
      * 废弃字段
      */
     To?: string;
+    /**
+     * 备注。
+     */
+    Description?: string;
+    /**
+     * 最后更新时间。
+     */
+    UpdatedTime?: string;
 }
 /**
  * DescribeIp6Addresses返回参数结构体
@@ -9508,12 +9525,15 @@ export interface AddressTemplateGroup {
      */
     CreatedTime?: string;
     /**
+     * 最后更新时间。
+     */
+    UpdatedTime?: string;
+    /**
      * IP地址模板实例。
      */
     AddressTemplateSet?: Array<AddressTemplateItem>;
     /**
      * 标签键值对。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
 }
@@ -14456,6 +14476,22 @@ export interface DescribeAddressTemplateGroupsRequest {
      * 是否查询IP地址模板成员标识。
      */
     NeedMemberInfo?: boolean;
+    /**
+     * 排序字段。支持：`AddressTemplateGroupId ` `CreatedTime` `UpdateTime`。注意：该字段没有默认值。
+     */
+    OrderField?: string;
+    /**
+     * 排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    OrderDirection?: string;
+    /**
+     * IP地址成员排序字段。支持：`AddressTemplateId` `UpdateTime`。注意：该字段没有默认值。
+     */
+    MemberOrderField?: string;
+    /**
+     * IP地址成员排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    MemberOrderDirection?: string;
 }
 /**
  * MigratePrivateIpAddress返回参数结构体
@@ -14818,6 +14854,10 @@ export interface ServicesInfo {
      * 备注。
      */
     Description?: string;
+    /**
+     * 更新时间。
+     */
+    UpdatedTime?: string;
 }
 /**
  * MigratePrivateIpAddress请求参数结构体
@@ -15590,6 +15630,22 @@ export interface DescribeServiceTemplatesRequest {
      * 是否获取协议端口成员标识。
      */
     NeedMemberInfo?: boolean;
+    /**
+     * 排序字段。支持：`ServiceTemplateId ` `CreatedTime` `UpdateTime`。注意：该字段没有默认值。
+     */
+    OrderField?: string;
+    /**
+     * 排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    OrderDirection?: string;
+    /**
+     * 协议端口排序字段。支持：`Service ` `UpdateTime`。注意：该字段没有默认值。
+     */
+    MemberOrderField?: string;
+    /**
+     * 协议端口排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    MemberOrderDirection?: string;
 }
 /**
  * ModifyPrivateNatGatewayTranslationNatRule返回参数结构体
@@ -17097,6 +17153,22 @@ export interface DescribeAddressTemplatesRequest {
      * 是否获取IP地址模板成员标识。
      */
     NeedMemberInfo?: boolean;
+    /**
+     * 排序字段。支持：`AddressTemplateId` `CreatedTime` `UpdateTime`。注意：该字段没有默认值。
+     */
+    OrderField?: string;
+    /**
+     * 排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    OrderDirection?: string;
+    /**
+     * IP成员排序字段。支持：`Address` `UpdateTime`。注意：该字段没有默认值。
+     */
+    MemberOrderField?: string;
+    /**
+     * IP成员排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    MemberOrderDirection?: string;
 }
 /**
  * 冲突资源信息。
@@ -17335,6 +17407,22 @@ export interface DescribeServiceTemplateGroupsRequest {
      * 是否获取协议端口模板成员标识。
      */
     NeedMemberInfo?: boolean;
+    /**
+     * 排序字段。支持：`ServiceTemplateGroupId ` `CreatedTime` `UpdateTime`。注意：该字段没有默认值。
+     */
+    OrderField?: string;
+    /**
+     * 排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    OrderDirection?: string;
+    /**
+     * 协议端口成员排序字段。支持：`ServiceTemplateId ` `UpdateTime`。注意：该字段没有默认值。
+     */
+    MemberOrderField?: string;
+    /**
+     * 协议端口成员排序方法。升序：`ASC`，倒序：`DESC`。注意：该字段没有默认值。
+     */
+    MemberOrderDirection?: string;
 }
 /**
  * CreateSecurityGroupWithPolicies请求参数结构体
@@ -17761,7 +17849,10 @@ export interface AddressInfo {
     Address: string;
     /**
      * 备注。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
+    /**
+     * 更新时间。
+     */
+    UpdatedTime?: string;
 }

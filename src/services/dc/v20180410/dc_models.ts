@@ -1456,7 +1456,6 @@ stoped：终止状态
   ApplyTime?: string
   /**
    * 敏捷上云建设完成的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadyTime?: string
   /**
@@ -1497,6 +1496,10 @@ cross-region：跨地域
    * 敏捷上云服务是否处于升降配中
    */
   BUpdateBandwidth?: boolean
+  /**
+   * 接入地域
+   */
+  ArRegion?: string
 }
 
 /**
@@ -1657,6 +1660,10 @@ export interface CreateCasInput {
    * 备注信息
    */
   Remarks: string
+  /**
+   * 接入地域
+   */
+  ArRegion?: string
 }
 
 /**

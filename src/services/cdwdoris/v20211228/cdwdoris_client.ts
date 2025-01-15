@@ -682,7 +682,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+   * 拉取集群节点规格列表
    */
   async DescribeSpec(
     req: DescribeSpecRequest,

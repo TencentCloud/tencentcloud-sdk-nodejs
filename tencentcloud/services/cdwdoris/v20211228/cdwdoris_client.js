@@ -322,7 +322,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartClusterForConfigs", req, cb);
     }
     /**
-     * 购买页拉取集群的数据节点和zookeeper节点的规格列表
+     * 拉取集群节点规格列表
      */
     async DescribeSpec(req, cb) {
         return this.request("DescribeSpec", req, cb);

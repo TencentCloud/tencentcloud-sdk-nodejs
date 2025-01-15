@@ -714,6 +714,16 @@ export interface CancelNotebookSessionStatementBatchResponse {
     RequestId?: string;
 }
 /**
+ * 混合表中，change表的数据保存时间，单位为天
+ */
+export interface SmartOptimizerChangeTablePolicy {
+    /**
+     * change表的数据保存时间，单位为天
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataRetentionTime?: number;
+}
+/**
  * SparkSQL批任务信息
  */
 export interface BatchSqlTask {
@@ -990,6 +1000,11 @@ export interface SmartOptimizerPolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Index?: SmartOptimizerIndexPolicy;
+    /**
+     * SmartOptimizerChangeTablePolicy
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChangeTable?: SmartOptimizerChangeTablePolicy;
 }
 /**
  * DescribeUserInfo返回参数结构体
@@ -2022,6 +2037,10 @@ export interface TableResponseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HeatValue?: number;
+    /**
+     * InputFormat的缩写
+     */
+    InputFormatShort?: string;
 }
 /**
  * UpdateUserDataEngineConfig返回参数结构体
@@ -8011,6 +8030,11 @@ export interface TableBaseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SmartPolicy?: SmartPolicy;
+    /**
+     * T-ICEBERG表的主键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrimaryKeys?: Array<string>;
 }
 /**
  * UnlockMetaData请求参数结构体

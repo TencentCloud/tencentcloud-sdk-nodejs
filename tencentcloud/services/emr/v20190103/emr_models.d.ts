@@ -8782,153 +8782,124 @@ export interface EmrPrice {
 export interface NodeHardwareInfo {
     /**
      * 用户APPID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialNo?: string;
     /**
      * 机器实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderNo?: string;
     /**
      * master节点绑定外网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanIp?: string;
     /**
      * 节点类型。0:common节点；1:master节点
   ；2:core节点；3:task节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Flag?: number;
     /**
      * 节点规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Spec?: string;
     /**
      * 节点核数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuNum?: number;
     /**
-     * 节点内存
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 节点内存,单位b
      */
     MemSize?: number;
     /**
-     * 节点内存描述
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 节点内存描述，单位GB
      */
     MemDesc?: string;
     /**
      * 节点所在region
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
     /**
      * 节点所在Zone
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneId?: number;
     /**
      * 申请时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplyTime?: string;
     /**
      * 释放时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FreeTime?: string;
     /**
      * 硬盘大小
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: string;
     /**
      * 节点描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NameTag?: string;
     /**
      * 节点部署服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Services?: string;
     /**
-     * 磁盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 磁盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘
+  
      */
     StorageType?: number;
     /**
-     * 系统盘大小
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 系统盘大小，单位GB
      */
     RootSize?: number;
     /**
-     * 付费类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 付费类型，0：按量计费；1：包年包月
      */
     ChargeType?: number;
     /**
      * 数据库IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdbIp?: string;
     /**
      * 数据库端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdbPort?: number;
     /**
-     * 硬盘容量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 硬盘容量,单位b
      */
     HwDiskSize?: number;
     /**
      * 硬盘容量描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HwDiskSizeDesc?: string;
     /**
-     * 内存容量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 内存容量，单位b
      */
     HwMemSize?: number;
     /**
      * 内存容量描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HwMemSizeDesc?: string;
     /**
      * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: string;
     /**
      * 节点资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EmrResourceId?: string;
     /**
      * 续费标志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAutoRenew?: number;
     /**
      * 设备标识
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceClass?: string;
     /**
      * 支持变配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Mutable?: number;
     /**
@@ -8943,12 +8914,10 @@ export interface NodeHardwareInfo {
     CdbNodeInfo?: CdbInfo;
     /**
      * 内网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 此节点是否可销毁，1可销毁，0不可销毁
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Destroyable?: number;
     /**
@@ -8958,37 +8927,31 @@ export interface NodeHardwareInfo {
     Tags?: Array<Tag>;
     /**
      * 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoFlag?: number;
     /**
      * 资源类型, host/pod
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareResourceType?: string;
     /**
      * 是否浮动规格，1是，0否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDynamicSpec?: number;
     /**
      * 浮动规格值json字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DynamicPodSpec?: string;
     /**
      * 是否支持变更计费类型 1是，0否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportModifyPayMode?: number;
     /**
-     * 系统盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 系统盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘
+  
      */
     RootStorageType?: number;
     /**
      * 可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zone?: string;
     /**
@@ -8998,59 +8961,56 @@ export interface NodeHardwareInfo {
     SubnetInfo?: SubnetInfo;
     /**
      * 客户端
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Clients?: string;
     /**
      * 系统当前时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentTime?: string;
     /**
      * 是否用于联邦 ,1是，0否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFederation?: number;
     /**
      * 设备名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceName?: string;
     /**
      * 服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceClient?: string;
     /**
      * 该实例是否开启实例保护，true为开启 false为关闭
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DisableApiTermination?: boolean;
     /**
      * 0表示老计费，1表示新计费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TradeVersion?: number;
     /**
      * 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ServicesStatus?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 共享集群id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SharedClusterId?: string;
     /**
      * 共享集群id描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SharedClusterIdDesc?: string;
+    /**
+     * 是否是定时销毁资源
+     */
+    TimingResource?: boolean;
+    /**
+     * 资源类型（HardwareResourceType）为pod时，对应的TKE集群id
+     */
+    TkeClusterId?: string;
 }
 /**
  * 操作的服务范围

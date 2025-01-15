@@ -157,7 +157,6 @@ export interface ScaleOutInstanceResponse {
 export interface ModifyUserPrivilegesV3Response {
   /**
    * 错误信息，为空就是没有错误
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -660,17 +659,14 @@ export interface DescribeInstanceStateRequest {
 export interface NetworkInfo {
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 当前子网可用ip数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetIpNum?: number
 }
@@ -990,7 +986,6 @@ export interface RestartClusterForNodeResponse {
 export interface CancelBackupJobResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1477,22 +1472,18 @@ export interface OpenCoolDownPolicyRequest {
 export interface DorisSourceInfo {
   /**
    * doris集群的fe的ip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
    * doris集群的fe的端口号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * doris集群的账号
-注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: string
   /**
    * base64编码的doris集群对应用户的密码
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
 }
@@ -1503,7 +1494,6 @@ export interface DorisSourceInfo {
 export interface OpenCoolDownResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2022,12 +2012,10 @@ export interface CreateCoolDownPolicyRequest {
 export interface DescribeSqlApisResponse {
   /**
    * 返回的查询数据，大部分情况是list，也可能是bool
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReturnData?: string
   /**
    * 错误消息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2064,7 +2052,6 @@ export interface DescribeSpecResponse {
   CoreSpec?: Array<ResourceSpec>
   /**
    * 云盘列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachCBSSpec?: Array<DiskSpec>
   /**
@@ -2083,7 +2070,6 @@ export interface DescribeSpecResponse {
 export interface ModifyInstanceKeyValConfigsResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2195,27 +2181,22 @@ export interface InstanceNode {
   Role?: string
   /**
    * 状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * rip
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Rip?: string
   /**
    * FE节点角色
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeRole?: string
   /**
    * UUID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UUID?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
@@ -2230,7 +2211,6 @@ export interface InstanceNode {
 export interface ModifyCoolDownPolicyResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -2260,42 +2240,34 @@ export interface DescribeInstancesHealthStateRequest {
 export interface NodeInfo {
   /**
    * 用户IP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip?: string
   /**
    * 节点状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 节点角色名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
    * 组件名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComponentName?: string
   /**
    * 节点角色
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeRole?: string
   /**
    * 节点上次重启的时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastRestartTime?: string
   /**
    * 节点所在可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
 }
@@ -2306,19 +2278,16 @@ export interface NodeInfo {
 export interface FrontEndRule {
   /**
    * id序列
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ID: number
+  ID?: number
   /**
    * 规则名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 详细规则
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rule: string
+  Rule?: string
 }
 
 /**
@@ -2345,12 +2314,10 @@ export interface RestartClusterForConfigsResponse {
 export interface InstanceInfo {
   /**
    * 集群实例ID, "cdw-xxxx" 字符串类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
    * 集群实例名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -2358,62 +2325,50 @@ export interface InstanceInfo {
 Init 创建中; Serving 运行中； 
 Deleted已销毁；Deleting 销毁中；
 Modify 集群变更中；
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
    * 地域, ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
    * 可用区， ap-guangzhou-3
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
    * 私有网络名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
    * 子网名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
    * 付费类型，"hour", "prepay"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 数据节点描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterSummary?: NodesSummary
   /**
    * zookeeper节点描述信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CoreSummary?: NodesSummary
   /**
    * 高可用，“true" "false"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HA?: string
   /**
@@ -2421,113 +2376,91 @@ Modify 集群变更中；
 0：非高可用
 1：读高可用
 2：读写高可用。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HaType?: number
   /**
    * 访问地址，例如 "10.0.0.1:9000"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessInfo?: string
   /**
    * 记录ID，数值型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
    * regionId, 表示地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 可用区说明，例如 "广州二区"
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneDesc?: string
   /**
    * 错误流程说明信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
   /**
    * 状态描述，例如“运行中”等
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
    * 自动续费标记
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
   /**
    * 标签列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
    * 监控信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Monitor?: string
   /**
    * 是否开通日志
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HasClsTopic?: boolean
   /**
    * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsTopicId?: string
   /**
    * 日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsLogSetId?: string
   /**
    * 是否支持xml配置管理
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableXMLConfig?: number
   /**
    * 区域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionDesc?: string
   /**
    * 弹性网卡地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Eip?: string
   /**
    * 冷热分层系数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosMoveFactor?: number
   /**
    * external/local/yunti
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Kind?: string
   /**
    * cos桶
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketName?: string
   /**
    * cbs
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CanAttachCbs?: boolean
   /**
    * 小版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuildVersion?: string
   /**
    * 组件信息
 注：这里返回类型实际为map[string]struct类型，并非显示的string类型，可以参考“示例值”进行数据的解析。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Components?: string
   /**
@@ -2538,72 +2471,58 @@ Modify 集群变更中；
   IfExistCatalog?: number
   /**
    * 页面特性，用于前端屏蔽一些页面入口
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Characteristic?: Array<string>
   /**
    * 超时时间 单位s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RestartTimeout?: string
   /**
    * 内核优雅重启超时时间，如果为-1说明未设置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   GraceShutdownWaitSeconds?: string
   /**
    * 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CaseSensitive?: number
   /**
    * 用户是否可以绑定安全组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsWhiteSGs?: boolean
   /**
    * 已绑定的安全组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BindSGs?: Array<string>
   /**
    * 是否为多可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableMultiZones?: boolean
   /**
    * 用户可用区和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNetworkInfos?: string
   /**
    * 是否启用冷热分层。0：未开启 1：已开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableCoolDown?: number
   /**
    * 冷热分层使用COS桶
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CoolDownBucket?: string
   /**
    * 实例扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: InstanceDetail
   /**
    * 是否启用DLC 0:关闭 1:开启
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableDlc?: number
   /**
    * 账户类型 0:普通用户 1:CAM用户
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountType?: number
   /**
    * 监控模式 0: 老监控 1：新监控
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorMode?: number
   /**
@@ -3197,7 +3116,6 @@ export interface CoolDownTableDataInfo {
 export interface ModifySecurityGroupsResponse {
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -3328,8 +3246,7 @@ export interface DeleteWorkloadGroupResponse {
  */
 export interface InstanceDetail {
   /**
-   * 告警策略是否可用	
-注意：此字段可能返回 null，表示取不到有效值。
+   * 告警策略是否可用
    */
   EnableAlarmStrategy?: boolean
 }
@@ -3883,12 +3800,10 @@ export interface RecoverBackUpJobResponse {
 export interface DescribeTableListResponse {
   /**
    * 表名列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TableNames?: Array<string>
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
@@ -3953,37 +3868,30 @@ export interface NodesSummary {
   DiskDesc?: string
   /**
    * 挂载云盘信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachCBSSpec?: AttachCBSSpec
   /**
    * 子产品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductType?: string
   /**
    * 规格核数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecCore?: number
   /**
    * 规格内存
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecMemory?: number
   /**
    * 磁盘大小
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskCount?: number
   /**
    * 是否加密
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Encrypt?: number
   /**
    * 最大磁盘
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDiskSize?: number
 }
@@ -4213,12 +4121,10 @@ export interface NodeInfos {
   LastRestartTime?: string
   /**
    * id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
    * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**

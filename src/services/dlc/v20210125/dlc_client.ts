@@ -44,6 +44,7 @@ import {
   DescribeTablesNameResponse,
   DescribeAdvancedStoreLocationRequest,
   CancelNotebookSessionStatementBatchResponse,
+  SmartOptimizerChangeTablePolicy,
   BatchSqlTask,
   CreateNotebookSessionRequest,
   UpdateDataEngineRequest,
