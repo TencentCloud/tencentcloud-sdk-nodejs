@@ -384,6 +384,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLaunchTemplate", req, cb);
     }
     /**
+     * 本接口 (ModifyInstancesDisasterRecoverGroup) 用于调整实例所在置放群组。
+* 目前只支持基础网络或私有网络实例。
+     */
+    async ModifyInstancesDisasterRecoverGroup(req, cb) {
+        return this.request("ModifyInstancesDisasterRecoverGroup", req, cb);
+    }
+    /**
      * 本接口 (CreateKeyPair) 用于创建一个 `OpenSSH RSA` 密钥对，可以用于登录 `Linux` 实例。
 
 * 开发者只需指定密钥对名称，即可由系统自动创建密钥对，并返回所生成的密钥对的 `ID` 及其公钥、私钥的内容。

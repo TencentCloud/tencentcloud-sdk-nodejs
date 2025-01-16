@@ -406,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDsFolderTree", req, cb);
     }
     /**
+     * 查询实时任务表粒度指标概览
+     */
+    async DescribeTaskTableMetricOverview(req, cb) {
+        return this.request("DescribeTaskTableMetricOverview", req, cb);
+    }
+    /**
      * 无
      */
     async SubmitTaskTestRun(req, cb) {

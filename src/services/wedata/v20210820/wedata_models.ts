@@ -3987,17 +3987,26 @@ export interface SearchConditionInstanceNew {
 }
 
 /**
- * DescribeThirdTaskRunLog请求参数结构体
+ * DescribeTaskTableMetricOverview返回参数结构体
  */
-export interface DescribeThirdTaskRunLogRequest {
+export interface DescribeTaskTableMetricOverviewResponse {
   /**
-   * 任务ID
+   * 表粒度指标集合
    */
-  TaskId: string
+  TaskTableMetricInfos?: Array<TaskTableMetricInfo>
   /**
-   * 实例数据时间
+   * 总数
    */
-  CurRunDate: string
+  TotalCount?: number
+  /**
+   * 返回列表类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4633,6 +4642,20 @@ export interface MoveTasksToFolderRequest {
    * 虚拟任务ID
    */
   VirtualTaskIds: Array<string>
+}
+
+/**
+ * 排序
+ */
+export interface OrderFields {
+  /**
+   * 字段
+   */
+  Name?: string
+  /**
+   * 排序
+   */
+  Direction?: string
 }
 
 /**
@@ -6996,6 +7019,7 @@ export interface CreateOfflineTaskResponse {
   ArrangeSpaceTaskId?: string
   /**
    * 结果
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
@@ -11498,6 +11522,145 @@ export interface DescribeDataSourceInfoListRequest {
 }
 
 /**
+ * 任务表粒度指标信息
+ */
+export interface TaskTableMetricInfo {
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRecordNum?: number
+  /**
+   * 总字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRecordByteNum?: number
+  /**
+   * 总脏记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalDirtyRecordNum?: number
+  /**
+   * Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName?: string
+  /**
+   * topic名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * Collection名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Collection?: string
+  /**
+   * 数据源名称
+   */
+  DataSourceName?: string
+  /**
+   * 节点id
+   */
+  NodeId?: string
+  /**
+   * 逻辑库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogicDatabase?: string
+  /**
+   * 逻辑表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogicTable?: string
+  /**
+   * 逻辑schema名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogicSchema?: string
+  /**
+   * 物理表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTableMetricInfos?: Array<TaskTableMetricInfo>
+  /**
+   * 同步状态，0-未知，1-正常， 2-异常
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SyncStatus?: number
+  /**
+   * Target数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetDatabaseName?: string
+  /**
+   * Target表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetTableName?: string
+  /**
+   * Write总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteTotalRecordNum?: number
+  /**
+   * Write总字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteTotalRecordByteNum?: string
+  /**
+   * TargetSchema名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSchemaName?: string
+  /**
+   * Targettopic名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetTopic?: string
+  /**
+   * TargetCollection名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetCollection?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetDataSourceName?: string
+  /**
+   * 节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetNodeId?: string
+  /**
+   * 读取条数的速度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRecordSpeed?: number
+  /**
+   * 写入条数的速度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteTotalRecordSpeed?: number
+  /**
+   * 异常原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExceptionReason?: string
+}
+
+/**
  * 批量执行结果
  */
 export interface BatchResultDs {
@@ -13753,60 +13916,6 @@ export interface DeleteFilePathRequest {
 }
 
 /**
- * DescribeRulesByPage请求参数结构体
- */
-export interface DescribeRulesByPageRequest {
-  /**
-   * 分页序号
-   */
-  PageNumber?: number
-  /**
-   * 分页大小
-   */
-  PageSize?: number
-  /**
-   * 过滤条件
-   */
-  Filters?: Array<Filter>
-  /**
-   * 排序字段
-   */
-  OrderFields?: Array<OrderField>
-  /**
-   * 项目ID
-   */
-  ProjectId?: string
-}
-
-/**
- * DescribeTopTableStat返回参数结构体
- */
-export interface DescribeTopTableStatResponse {
-  /**
-   * 结果
-   */
-  Data?: TopTableStat
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeDataServicePublishedApiDetail请求参数结构体
- */
-export interface DescribeDataServicePublishedApiDetailRequest {
-  /**
-   * 服务Id
-   */
-  Id: string
-  /**
-   * 项目ID
-   */
-  ProjectId: string
-}
-
-/**
  * 工作流调度详情
  */
 export interface WorkflowSchedulerOpsDto {
@@ -13910,6 +14019,98 @@ export interface WorkflowSchedulerOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestSubmitTime?: string
+}
+
+/**
+ * DescribeRulesByPage请求参数结构体
+ */
+export interface DescribeRulesByPageRequest {
+  /**
+   * 分页序号
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 项目ID
+   */
+  ProjectId?: string
+}
+
+/**
+ * DescribeTopTableStat返回参数结构体
+ */
+export interface DescribeTopTableStatResponse {
+  /**
+   * 结果
+   */
+  Data?: TopTableStat
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataServicePublishedApiDetail请求参数结构体
+ */
+export interface DescribeDataServicePublishedApiDetailRequest {
+  /**
+   * 服务Id
+   */
+  Id: string
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+}
+
+/**
+ * DescribeTaskTableMetricOverview请求参数结构体
+ */
+export interface DescribeTaskTableMetricOverviewRequest {
+  /**
+   * 任务TaskId
+   */
+  TaskId: string
+  /**
+   * 来源类型，支持枚举： SOURCE、SINK
+   */
+  NodeType: string
+  /**
+   * 页码
+   */
+  PageNumber: number
+  /**
+   * 页大小
+   */
+  PageSize: number
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 任务类型：201. stream, 202. offline，当前只支持实时201
+   */
+  TaskType?: number
+  /**
+   * 根据SchemaName来模糊搜索
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序
+   */
+  OrderFields?: Array<OrderFields>
 }
 
 /**
@@ -22087,6 +22288,20 @@ export interface Duty {
 }
 
 /**
+ * DescribeThirdTaskRunLog请求参数结构体
+ */
+export interface DescribeThirdTaskRunLogRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 实例数据时间
+   */
+  CurRunDate: string
+}
+
+/**
  * DescribeIntegrationStatisticsTaskStatus返回参数结构体
  */
 export interface DescribeIntegrationStatisticsTaskStatusResponse {
@@ -22255,7 +22470,7 @@ export interface CreateHiveTableByDDLRequest {
    */
   Database: string
   /**
-   * 建hive表ddl
+   * 建hive表ddl的base64编码
    */
   DDLSql: string
   /**

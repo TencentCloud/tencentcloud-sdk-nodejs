@@ -338,7 +338,7 @@ export interface ListSelectDocResponse {
  */
 export interface DescribeReleaseInfoRequest {
   /**
-   * 机器人ID
+   * 应用ID
    */
   BotBizId: string
 }
@@ -3627,9 +3627,7 @@ export interface CreateRejectedQuestionRequest {
    */
   Question: string
   /**
-   * 拒答问题来源的数据源唯一id，取值1，2
-
-
+   * 拒答问题来源的数据源唯一id， - 拒答来源于不满意回复  2 - 拒答来源于手动添加
    */
   BusinessSource: number
   /**
@@ -6131,12 +6129,11 @@ export interface DescribeReleaseInfoResponse {
    */
   LastTime?: string
   /**
-   * 发布状态
+   * 发布状态 ， 1-待发布 , 2-发布中 , 3-发布成功 , 4-发布失败 , 5-审核中 , 6-审核成功 , 7-审核失败 , 8-发布成功回调处理中 , 9-发布暂停 , 10-申诉审核中 , 11-申诉审核通过 , 12-申诉审核不通过
    */
   Status?: number
   /**
-   * 是否编辑过
-
+   * 是否编辑过, 当为true的时候表示可以发布
    */
   IsUpdated?: boolean
   /**

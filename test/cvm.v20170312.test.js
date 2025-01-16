@@ -478,6 +478,16 @@ it("cvm.v20170312.DeleteLaunchTemplate", async function () {
     }
 })
 
+it("cvm.v20170312.ModifyInstancesDisasterRecoverGroup", async function () {
+    try {
+       const data = await client.ModifyInstancesDisasterRecoverGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.CreateKeyPair", async function () {
     try {
        const data = await client.CreateKeyPair({})

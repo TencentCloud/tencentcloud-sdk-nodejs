@@ -20,11 +20,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeGeneralSpanList(req: DescribeGeneralSpanListRequest, cb?: (error: string, rep: DescribeGeneralSpanListResponse) => void): Promise<DescribeGeneralSpanListResponse>;
     /**
-     * 拉取 APM 业务系统列表
+     * 获取 APM 业务系统列表
      */
     DescribeApmInstances(req: DescribeApmInstancesRequest, cb?: (error: string, rep: DescribeApmInstancesResponse) => void): Promise<DescribeApmInstancesResponse>;
     /**
-     * 获取 APM Agent信息
+     * 获取 APM 接入点
      */
     DescribeApmAgent(req: DescribeApmAgentRequest, cb?: (error: string, rep: DescribeApmAgentResponse) => void): Promise<DescribeApmAgentResponse>;
     /**
@@ -41,7 +41,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGeneralMetricData(req: DescribeGeneralMetricDataRequest, cb?: (error: string, rep: DescribeGeneralMetricDataResponse) => void): Promise<DescribeGeneralMetricDataResponse>;
     /**
-     * 拉取通用指标列表
+     * 查询指标列表接口，查询指标更推荐使用DescribeGeneralMetricData接口
      */
     DescribeMetricRecords(req: DescribeMetricRecordsRequest, cb?: (error: string, rep: DescribeMetricRecordsResponse) => void): Promise<DescribeMetricRecordsResponse>;
     /**

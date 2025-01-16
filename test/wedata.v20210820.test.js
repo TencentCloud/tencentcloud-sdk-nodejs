@@ -648,6 +648,16 @@ it("wedata.v20210820.DescribeDsFolderTree", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTaskTableMetricOverview", async function () {
+    try {
+       const data = await client.DescribeTaskTableMetricOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.SubmitTaskTestRun", async function () {
     try {
        const data = await client.SubmitTaskTestRun({})

@@ -127,7 +127,7 @@ import {
   FolderDsDto,
   BatchDeleteIntegrationTasksResponse,
   SearchConditionInstanceNew,
-  DescribeThirdTaskRunLogRequest,
+  DescribeTaskTableMetricOverviewResponse,
   BatchRerunIntegrationTaskInstancesRequest,
   DescribeWorkflowTaskCountResponse,
   TaskTag,
@@ -145,6 +145,7 @@ import {
   DeleteDsFolderResponse,
   DescribeDrInstancePageResponse,
   MoveTasksToFolderRequest,
+  OrderFields,
   MoveTasksToFolderResponse,
   UpdateWorkflowOwnerRequest,
   DescribeSchedulerTaskTypeCntResponse,
@@ -351,6 +352,7 @@ import {
   DescribeApproveTypeListRequest,
   DeleteIntegrationNodeResponse,
   DescribeDataSourceInfoListRequest,
+  TaskTableMetricInfo,
   BatchResultDs,
   DeleteDataModelResponse,
   DescribeIntegrationNodeRequest,
@@ -442,10 +444,11 @@ import {
   DiagnoseRep,
   DescribeWorkflowListByProjectIdResponse,
   DeleteFilePathRequest,
+  WorkflowSchedulerOpsDto,
   DescribeRulesByPageRequest,
   DescribeTopTableStatResponse,
   DescribeDataServicePublishedApiDetailRequest,
-  WorkflowSchedulerOpsDto,
+  DescribeTaskTableMetricOverviewRequest,
   SourceFieldInfo,
   DeleteDsFolderRequest,
   SaveCustomFunctionResponse,
@@ -702,6 +705,7 @@ import {
   BatchCreateTaskVersionAsyncResponse,
   DescribeInstanceByCycleRequest,
   Duty,
+  DescribeThirdTaskRunLogRequest,
   DescribeIntegrationStatisticsTaskStatusResponse,
   JudgeResourceFileRequest,
   UploadResourceResponse,
@@ -1401,6 +1405,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDsFolderTreeResponse) => void
   ): Promise<DescribeDsFolderTreeResponse> {
     return this.request("DescribeDsFolderTree", req, cb)
+  }
+
+  /**
+   * 查询实时任务表粒度指标概览
+   */
+  async DescribeTaskTableMetricOverview(
+    req: DescribeTaskTableMetricOverviewRequest,
+    cb?: (error: string, rep: DescribeTaskTableMetricOverviewResponse) => void
+  ): Promise<DescribeTaskTableMetricOverviewResponse> {
+    return this.request("DescribeTaskTableMetricOverview", req, cb)
   }
 
   /**

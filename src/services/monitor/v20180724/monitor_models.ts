@@ -5045,28 +5045,28 @@ export interface GrafanaAccountInfo {
   /**
    * 用户账号ID
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户权限
    */
-  Role: Array<GrafanaAccountRole>
+  Role?: Array<GrafanaAccountRole>
   /**
    * 备注
    */
-  Notes: string
+  Notes?: string
   /**
    * 创建时间
    */
-  CreateAt: string
+  CreateAt?: string
   /**
    * 实例 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 用户主账号 UIN
    */
-  Uin: string
+  Uin?: string
 }
 
 /**
@@ -6142,24 +6142,24 @@ export interface GrafanaIntegrationConfig {
   /**
    * 集成 ID
    */
-  IntegrationId: string
+  IntegrationId?: string
   /**
    * 集成类型
    */
-  Kind: string
+  Kind?: string
   /**
    * 集成内容
    */
-  Content: string
+  Content?: string
   /**
    * 集成描述
    */
-  Description: string
+  Description?: string
   /**
-   * Grafana 跳转地址
+   * Grafana 跳转地址(目前未使用，默认为空)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GrafanaURL: string
+  GrafanaURL?: string
 }
 
 /**
@@ -9722,27 +9722,27 @@ export interface PrometheusInstanceTenantUsage {
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 计费周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CalcDate: string
+  CalcDate?: string
   /**
    * 总用量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 基础指标用量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Basic: number
+  Basic?: number
   /**
    * 付费指标用量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Fee: number
+  Fee?: number
 }
 
 /**
@@ -10921,42 +10921,42 @@ export interface GrafanaNotificationChannel {
   /**
    * 渠道 ID
    */
-  ChannelId: string
+  ChannelId?: string
   /**
    * 渠道名
    */
-  ChannelName: string
+  ChannelName?: string
   /**
    * 告警通道模板 ID 数组
    */
-  Receivers: Array<string>
+  Receivers?: Array<string>
   /**
    * 创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 更新时间
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 默认生效组织，已废弃，请使用 OrganizationIds
    */
-  OrgId: string
+  OrgId?: string
   /**
    * 额外生效组织，已废弃，请使用 OrganizationIds
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtraOrgIds: Array<string>
+  ExtraOrgIds?: Array<string>
   /**
    * 生效组织，已废弃，请使用 OrganizationIds
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgIds: Array<string>
+  OrgIds?: Array<string>
   /**
    * 告警渠道的所有生效组织
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrganizationIds: Array<string>
+  OrganizationIds?: Array<string>
 }
 
 /**

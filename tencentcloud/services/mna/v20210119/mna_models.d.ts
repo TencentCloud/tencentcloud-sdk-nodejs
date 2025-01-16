@@ -314,27 +314,22 @@ export interface DeviceBaseInfo {
     Payer?: number;
     /**
      * 设备分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 设备分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 设备无流量包处理方式，0: 按量付费，1: 截断加速
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowTrunc?: number;
     /**
      * 设备sn
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Sn?: string;
     /**
      * 厂商
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vendor?: string;
 }
@@ -564,7 +559,6 @@ export interface GetFlowStatisticByGroupResponse {
 export interface GetNetMonitorResponse {
     /**
      * 监控数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorData?: Array<MonitorData>;
     /**
@@ -1088,7 +1082,6 @@ export interface DeviceNetInfo {
   0:数据
   1:Wi-Fi
   2:有线
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
@@ -1322,22 +1315,18 @@ export interface DeviceDetails {
     DeviceBaseInfo?: DeviceBaseInfo;
     /**
      * 设备网络信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceNetInfo?: Array<DeviceNetInfo>;
     /**
      * 聚合服务器地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewaySite?: string;
     /**
      * 业务下行速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessDownRate?: number;
     /**
      * 业务上行速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BusinessUpRate?: number;
 }
@@ -1431,17 +1420,14 @@ export interface ExpectedThreshold {
 export interface GetFlowAlarmInfoResponse {
     /**
      * 流量包的告警阈值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmValue?: number;
     /**
      * 告警通知回调url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotifyUrl?: string;
     /**
      * 告警通知回调key
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CallbackKey?: string;
     /**
@@ -2050,7 +2036,6 @@ export interface AddDeviceResponse {
     DeviceId?: string;
     /**
      * 签名字符串
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Signature?: string;
     /**

@@ -181,7 +181,6 @@ export interface DestroyInstanceRequest {
 export interface ScheduleInfo {
     /**
      * 生效周期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EffectivePeriod?: string;
     /**
@@ -191,23 +190,19 @@ export interface ScheduleInfo {
   Month-月
   Once-单次
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleType?: string;
     /**
      * 执行调度的日期。调度类型为周和月时以英文逗号分隔；
   调度类型为单次时，该值是个日期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleData?: string;
     /**
      * 执行时间：时
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleHour?: number;
     /**
      * 执行时间：分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScheduleMin?: number;
     /**
@@ -215,12 +210,10 @@ export interface ScheduleInfo {
   All-全量
   Database-按库
   Table-按表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupScope?: string;
     /**
      * 备份库：如果是按库备份，则需要该字段，库之间用英文逗号分割
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupDatabase?: string;
 }
@@ -271,12 +264,10 @@ export interface ModifyWorkloadGroupRequest {
 export interface UserWorkloadGroup {
     /**
      * test
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * normal
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkloadGroupName?: string;
 }
@@ -312,27 +303,22 @@ export interface DeleteWorkloadGroupRequest {
 export interface WorkloadGroupConfig {
     /**
      * 资源组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkloadGroupName?: string;
     /**
      * CPU权重
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuShare?: number;
     /**
      * 内存限制，所有资源组的内存限制值之和应该小于等于100
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MemoryLimit?: number;
     /**
      * 是否允许超配分配
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableMemoryOverCommit?: boolean;
     /**
      * cpu硬限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CpuHardLimit?: string;
 }
@@ -641,12 +627,10 @@ export interface ZoneInfo {
     ZoneId?: number;
     /**
      * Encryptid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Encrypt?: number;
     /**
      * 是否为主力园区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Main?: boolean;
 }
@@ -696,7 +680,6 @@ export interface DeleteBackUpDataRequest {
 export interface UpdateCoolDownResponse {
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -3209,7 +3192,6 @@ export interface RegionInfo {
     RegionId?: number;
     /**
      * 地域下所有可用区列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Zones?: Array<ZoneInfo>;
     /**
@@ -3218,12 +3200,10 @@ export interface RegionInfo {
     Count?: number;
     /**
      * 0代表是国际站 1代表不是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsInternationalSite?: number;
     /**
      * 桶
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
 }
@@ -3309,32 +3289,26 @@ export interface ResourceSpec {
     Type?: string;
     /**
      * 系统盘描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SystemDisk?: DiskSpec;
     /**
      * 数据盘描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataDisk?: DiskSpec;
     /**
      * 最大节点数目限制
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxNodeSize?: number;
     /**
      * 是否可用，false代表售罄
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Available?: boolean;
     /**
      * 规格描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ComputeSpecDesc?: string;
     /**
      * cvm库存
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceQuota?: number;
 }
@@ -3445,12 +3419,10 @@ export interface RestoreStatus {
     ReserveDynamicPartitionEnable?: boolean;
     /**
      * 备份实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupJobId?: number;
     /**
      * 实例对应snapshot的id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
 }
@@ -3624,6 +3596,18 @@ export interface ClusterConfigsInfoFromEMR {
  * RecoverBackUpJob返回参数结构体
  */
 export interface RecoverBackUpJobResponse {
+    /**
+     * 恢复任务总数量
+     */
+    TotalCount?: number;
+    /**
+     * 重复的表名
+     */
+    DuplicateTables?: Array<string>;
+    /**
+     * 错误信息
+     */
+    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

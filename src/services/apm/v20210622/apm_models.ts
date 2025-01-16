@@ -36,7 +36,7 @@ export interface SpanLog {
  */
 export interface ModifyApmInstanceRequest {
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId: string
   /**
@@ -44,15 +44,15 @@ export interface ModifyApmInstanceRequest {
    */
   Name: string
   /**
-   * 标签列表
+   * Tag 列表
    */
   Tags?: Array<ApmTag>
   /**
-   * 业务系统详情
+   * 业务系统描述
    */
   Description?: string
   /**
-   * Trace数据保存时长
+   * Trace 数据保存时长（单位：天）
    */
   TraceDuration?: number
   /**
@@ -64,39 +64,39 @@ export interface ModifyApmInstanceRequest {
    */
   SpanDailyCounters?: number
   /**
-   * 错误率阈值
+   * 错误率警示线，当应用的平均错误率超出该阈值时，系统会给出异常提示。
    */
   ErrRateThreshold?: number
   /**
-   * 采样率
+   * 采样率（单位：%）
    */
   SampleRate?: number
   /**
-   * 是否开启错误采样 0 关 1 开
+   * 是否开启错误采样（0=关, 1=开）
    */
   ErrorSample?: number
   /**
-   * 慢请求阈值
+   * 采样慢调用保存阈值（单位：ms）
    */
   SlowRequestSavedThreshold?: number
   /**
-   * 是否开启日志功能 0 关 1 开
+   * 是否开启日志功能（0=关, 1=开）
    */
   IsRelatedLog?: number
   /**
-   * 日志地域
+   * 日志地域，开启日志功能后才会生效
    */
   LogRegion?: string
   /**
-   * CLS日志主题ID | ES 索引名
+   * CLS 日志主题 ID，开启日志功能后才会生效
    */
   LogTopicID?: string
   /**
-   * CLS日志集 | ES集群ID
+   * 日志集，开启日志功能后才会生效
    */
   LogSet?: string
   /**
-   * CLS | ES
+   * 日志源，开启日志功能后才会生效
    */
   LogSource?: string
   /**
@@ -104,33 +104,31 @@ export interface ModifyApmInstanceRequest {
    */
   CustomShowTags?: Array<string>
   /**
-   * 修改计费模式
-1为预付费
-0为按量付费
+   * 修改计费模式（1为预付费，0为按量付费）
    */
   PayMode?: number
   /**
-   * 响应时间满意阈值
+   * 响应时间警示线
    */
   ResponseDurationWarningThreshold?: number
   /**
-   * （0=付费版；1=tsf受限免费版；2=免费版）
+   * 是否免费（0=付费版；1=TSF 受限免费版；2=免费版），默认0
    */
   Free?: number
   /**
-   * 是否关联dashboard： 0 关 1 开
+   * 是否关联 Dashboard（0=关,1=开）
    */
   IsRelatedDashboard?: number
   /**
-   * dashboard ID
+   * 关联的 Dashboard ID，开启关联 Dashboard 后才会生效
    */
   DashboardTopicID?: string
   /**
-   * 是否开启SQL注入检测
+   * 是否开启 SQL 注入检测（0=关,1=开）
    */
   IsSqlInjectionAnalysis?: number
   /**
-   * 是否开启组件漏洞检测
+   * 是否开启组件漏洞检测（0=关,1=开）
    */
   IsInstrumentationVulnerabilityScan?: number
 }
@@ -140,41 +138,13 @@ export interface ModifyApmInstanceRequest {
  */
 export interface ApmInstanceDetail {
   /**
-   * 存储使用量( MB )
-   */
-  AmountOfUsedStorage?: number
-  /**
-   * 业务系统名
-   */
-  Name?: string
-  /**
-   * 业务系统所属 Tag 列表
-   */
-  Tags?: Array<ApmTag>
-  /**
    * 业务系统 ID
    */
   InstanceId?: string
   /**
-   * 创建人 Uin
+   * 业务系统名
    */
-  CreateUin?: string
-  /**
-   * 该业务系统已上报的服务端应用数量
-   */
-  ServiceCount?: number
-  /**
-   * 日均上报 Span 数
-   */
-  CountOfReportSpanPerDay?: number
-  /**
-   * AppID 信息
-   */
-  AppId?: number
-  /**
-   * Trace 数据保存时长
-   */
-  TraceDuration?: number
+  Name?: string
   /**
    * 业务系统描述信息
    */
@@ -188,27 +158,55 @@ export interface ApmInstanceDetail {
    */
   Region?: string
   /**
+   * 业务系统 Tag 列表
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * AppID 信息
+   */
+  AppId?: number
+  /**
+   * 创建人 Uin
+   */
+  CreateUin?: string
+  /**
+   * 存储使用量(单位：MB)
+   */
+  AmountOfUsedStorage?: number
+  /**
+   * 该业务系统服务端应用数量
+   */
+  ServiceCount?: number
+  /**
+   * 日均上报 Span 数
+   */
+  CountOfReportSpanPerDay?: number
+  /**
+   * Trace 数据保存时长（单位：天）
+   */
+  TraceDuration?: number
+  /**
    * 业务系统上报额度
    */
   SpanDailyCounters?: number
   /**
-   * 业务系统是否开通计费
+   * 业务系统是否已开通计费（0=未开通，1=已开通）
    */
   BillingInstance?: number
   /**
-   * 错误率阈值
+   * 错误警示线（单位：%）
    */
   ErrRateThreshold?: number
   /**
-   * 采样率阈值
+   * 采样率（单位：%）
    */
   SampleRate?: number
   /**
-   * 是否开启错误采样 0  关 1 开
+   * 是否开启错误采样（0=关, 1=开）
    */
   ErrorSample?: number
   /**
-   * 慢调用保存阈值
+   * 采样慢调用保存阈值（单位：ms）
    */
   SlowRequestSavedThreshold?: number
   /**
@@ -216,31 +214,31 @@ export interface ApmInstanceDetail {
    */
   LogRegion?: string
   /**
-   * 日志来源
+   * 日志源
    */
   LogSource?: string
   /**
-   * 日志功能开关 0 关 | 1 开
+   * 日志功能开关（0=关， 1=开）
    */
   IsRelatedLog?: number
   /**
-   * 日志主题ID
+   * 日志主题 ID
    */
   LogTopicID?: string
   /**
-   * 该实例已上报的客户端应用数量
+   * 该业务系统客户端应用数量
    */
   ClientCount?: number
   /**
-   * 该实例已上报的总应用数量
+   * 该业务系统最近2天活跃应用数量
    */
   TotalCount?: number
   /**
-   * CLS 日志集 | ES 集群ID
+   * CLS 日志集
    */
   LogSet?: string
   /**
-   * Metric 数据保存时长
+   * Metric 数据保存时长（单位：天）
    */
   MetricDuration?: number
   /**
@@ -248,9 +246,7 @@ export interface ApmInstanceDetail {
    */
   CustomShowTags?: Array<string>
   /**
-   * 业务系统计费模式
-1为预付费
-0为按量付费
+   * 业务系统计费模式（1为预付费，0为按量付费）
    */
   PayMode?: number
   /**
@@ -258,7 +254,7 @@ export interface ApmInstanceDetail {
    */
   PayModeEffective?: boolean
   /**
-   * 响应时间满意阈值
+   * 响应时间警示线（单位：ms）
    */
   ResponseDurationWarningThreshold?: number
   /**
@@ -266,23 +262,23 @@ export interface ApmInstanceDetail {
    */
   Free?: number
   /**
-   * 是否 tsf 默认业务系统（0=否，1-是）
+   * 是否 TSF 默认业务系统（0=否，1=是）
    */
   DefaultTSF?: number
   /**
-   * 是否关联 Dashboard： 0 关 1 开
+   * 是否关联 Dashboard（0=关, 1=开）
    */
   IsRelatedDashboard?: number
   /**
-   * Dashboard ID
+   * 关联的 Dashboard ID
    */
   DashboardTopicID?: string
   /**
-   * 是否开启组件漏洞检测
+   * 是否开启组件漏洞检测（0=关， 1=开）
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启 SQL 注入分析
+   * 是否开启 SQL 注入分析（0=关， 1=开）
    */
   IsSqlInjectionAnalysis?: number
 }
@@ -300,23 +296,23 @@ export interface CreateApmInstanceRequest {
    */
   Description?: string
   /**
-   * Trace 数据保存时长，单位为天默认存储为3天
+   * Trace 数据保存时长（单位：天，默认存储时长为3天）
    */
   TraceDuration?: number
   /**
-   * 标签列表
+   * 业务系统 Tag 列表
    */
   Tags?: Array<ApmTag>
   /**
-   * 业务系统上报额度值，默认赋值为0表示不限制上报额度
+   * 业务系统上报额度值，默认赋值为0表示不限制上报额度，已废弃
    */
   SpanDailyCounters?: number
   /**
-   * 业务系统的计费模式
+   * 业务系统的计费模式（0=按量付费，1=预付费）
    */
   PayMode?: number
   /**
-   * （0=付费版；1=tsf 受限免费版；2=免费版）
+   * 是否为免费版业务系统（0=付费版；1=TSF 受限免费版；2=免费版）
    */
   Free?: number
 }
@@ -363,13 +359,13 @@ export interface QueryMetricItem {
    */
   MetricName: string
   /**
+   * 同比，现支持 CompareByYesterday (与昨天相比)和CompareByLastWeek (与上周相比)
+   */
+  Compares?: Array<string>
+  /**
    * 同比，已弃用，不建议使用
    */
   Compare?: string
-  /**
-   * 同比，支持多种同比方式
-   */
-  Compares?: Array<string>
 }
 
 /**
@@ -531,13 +527,13 @@ export interface DescribeGeneralSpanListResponse {
  */
 export interface ApmMetricRecord {
   /**
-   * field数组
+   * field数组，用于指标的查询结果
    */
-  Fields: Array<ApmField>
+  Fields?: Array<ApmField>
   /**
-   * tag数组
+   * tag数组，用于区分 Groupby 的对象
    */
-  Tags: Array<ApmTag>
+  Tags?: Array<ApmTag>
 }
 
 /**
@@ -545,41 +541,44 @@ export interface ApmMetricRecord {
  */
 export interface DescribeServiceOverviewRequest {
   /**
-   * 过滤条件
-   */
-  Filters: Array<Filter>
-  /**
    * 指标列表
    */
   Metrics: Array<QueryMetricItem>
   /**
-   * 聚合维度
-   */
-  GroupBy: Array<string>
-  /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 聚合维度
+   */
+  GroupBy?: Array<string>
+  /**
+   * 开始时间（单位：秒）
+   */
+  StartTime?: number
+  /**
+   * 结束时间（单位：秒）
+   */
+  EndTime?: number
+  /**
+   * 排序方式
+Value 填写：
+- asc：对查询指标进行升序排序
+- desc：对查询指标进行降序排序
+   */
+  OrderBy?: OrderBy
   /**
    * 每页大小
    */
   Limit?: number
   /**
-   * 开始时间
-   */
-  StartTime?: number
-  /**
    * 分页起始点
    */
   Offset?: number
-  /**
-   * 结束时间
-   */
-  EndTime?: number
 }
 
 /**
@@ -605,23 +604,23 @@ export interface DescribeTagValuesRequest {
    */
   TagKey: string
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: number
   /**
    * 过滤条件
    */
   Filters?: Array<Filter>
   /**
-   * 开始时间
+   * 开始时间（单位为秒）
    */
   StartTime?: number
   /**
-   * Or过滤条件
+   * 结束时间（单位为秒）
+   */
+  EndTime?: number
+  /**
+   * Or 过滤条件
    */
   OrFilters?: Array<Filter>
   /**
@@ -635,16 +634,11 @@ export interface DescribeTagValuesRequest {
  */
 export interface ApmField {
   /**
-   * 昨日同比指标值，已弃用，不建议使用
+   * 指标名
    */
-  CompareVal?: string
+  Key?: string
   /**
-   * Compare值结果数组，推荐使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompareVals?: Array<APMKVItem>
-  /**
-   * 指标值
+   * 指标数值
    */
   Value?: number
   /**
@@ -652,14 +646,19 @@ export interface ApmField {
    */
   Unit?: string
   /**
-   * 请求数
+   * 同比结果数组，推荐使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key?: string
+  CompareVals?: Array<APMKVItem>
   /**
-   * 同环比上周期具体数值
+   * 同比上一个周期的具体指标数值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastPeriodValue?: Array<APMKV>
+  /**
+   * 同比指标值，已弃用，不建议使用
+   */
+  CompareVal?: string
 }
 
 /**
@@ -799,15 +798,15 @@ export interface APMKVItem {
 }
 
 /**
- * sql排序字段
+ * 排序字段
  */
 export interface OrderBy {
   /**
-   * 需要排序的字段
+   * 需要排序的字段，现支持 startTIme, endTime, duration
    */
   Key: string
   /**
-   * 顺序排序/倒序排序
+   * asc 顺序排序 / desc 倒序排序
    */
   Value: string
 }
@@ -835,37 +834,47 @@ export interface DescribeMetricRecordsResponse {
  */
 export interface DescribeGeneralSpanListRequest {
   /**
-   * 分页
-   */
-  Offset: number
-  /**
-   * 列表项个数
-   */
-  Limit: number
-  /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * Span查询开始时间戳（单位:秒）
-   */
-  StartTime?: number
-  /**
    * 业务系统 ID
    */
   InstanceId?: string
+  /**
+   * Span 查询开始时间戳（单位：秒）
+   */
+  StartTime?: number
+  /**
+   * Span 查询结束时间戳（单位：秒）
+   */
+  EndTime?: number
   /**
    * 通用过滤参数
    */
   Filters?: Array<Filter>
   /**
-   * 业务自身服务名
+   * 排序
+现支持的 Key 有：
+
+- startTime(开始时间)
+- endTime(结束时间)
+- duration(响应时间)
+
+现支持的 Value 有：
+
+- desc(降序排序)
+- asc(升序排序)
+   */
+  OrderBy?: OrderBy
+  /**
+   * 业务自身服务名，控制台用户请填写taw
    */
   BusinessName?: string
   /**
-   * Span查询结束时间戳（单位:秒）
+   * 单页项目个数，默认为10000，合法取值范围为0～10000
    */
-  EndTime?: number
+  Limit?: number
+  /**
+   * 分页
+   */
+  Offset?: number
 }
 
 /**
@@ -909,19 +918,19 @@ export interface DescribeApmAgentRequest {
    */
   InstanceId: string
   /**
-   * 接入方式
+   * 接入方式，现支持 skywalking, ot, ebpf 方式接入上报，不填默认为 ot
    */
   AgentType?: string
   /**
-   * 环境
+   * 上报环境，现支持 pl (内网上报), public (外网), inner (自研 VPC )环境上报，不传默认为 public
    */
   NetworkMode?: string
   /**
-   * 语言
+   * 语言，现支持 java, golang, php, python, dotNet, nodejs 语言上报，不传默认为 golang
    */
   LanguageEnvironment?: string
   /**
-   * 上报方式
+   * 上报方式，已弃用
    */
   ReportMethod?: string
 }
@@ -931,45 +940,63 @@ export interface DescribeApmAgentRequest {
  */
 export interface DescribeMetricRecordsRequest {
   /**
-   * 过滤条件
-   */
-  Filters: Array<Filter>
-  /**
    * 指标列表
    */
   Metrics: Array<QueryMetricItem>
   /**
-   * 聚合维度
-   */
-  GroupBy: Array<string>
-  /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-  /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId?: string
   /**
-   * 每页大小
-   */
-  Limit?: number
-  /**
-   * 开始时间
+   * 开始时间（单位为秒）
    */
   StartTime?: number
+  /**
+   * 结束时间（单位为秒）
+   */
+  EndTime?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * Or 过滤条件
+   */
+  OrFilters?: Array<Filter>
+  /**
+   * 聚合维度
+   */
+  GroupBy?: Array<string>
+  /**
+   * 排序
+现支持的 Key 有：
+
+- startTime(开始时间)
+- endTime(结束时间)
+- duration(响应时间)
+
+现支持的 Value 有：
+
+- desc(降序排序)
+- asc(升序排序)
+   */
+  OrderBy?: OrderBy
+  /**
+   * 业务名称，控制台用户请填写taw。
+   */
+  BusinessName?: string
+  /**
+   * 特殊处理查询结果
+   */
+  Type?: string
+  /**
+   * 每页大小，默认为1000，合法取值范围为0~1000
+   */
+  Limit?: number
   /**
    * 分页起始点
    */
   Offset?: number
-  /**
-   * 结束时间
-   */
-  EndTime?: number
-  /**
-   * 业务名称（默认值：taw）
-   */
-  BusinessName?: string
   /**
    * 页码
    */
@@ -978,14 +1005,6 @@ export interface DescribeMetricRecordsRequest {
    * 页长
    */
   PageSize?: number
-  /**
-   * Or过滤条件
-   */
-  OrFilters?: Array<Filter>
-  /**
-   * 数据来源
-   */
-  Type?: string
 }
 
 /**
@@ -1011,7 +1030,7 @@ export interface DescribeGeneralMetricDataRequest {
    */
   Metrics: Array<string>
   /**
-   * 业务系统ID
+   * 业务系统 ID
    */
   InstanceId: string
   /**
@@ -1027,22 +1046,27 @@ export interface DescribeGeneralMetricDataRequest {
    */
   GroupBy?: Array<string>
   /**
-   * 起始时间的时间戳，单位为秒，只支持查询2天内最多1小时的指标数据。
+   * 起始时间的时间戳，支持查询30天内的指标数据。（单位：秒）
    */
   StartTime?: number
   /**
-   * 结束时间的时间戳，单位为秒，只支持查询2天内最多1小时的指标数据。
+   * 结束时间的时间戳，支持查询30天内的指标数据。（单位：秒）
    */
   EndTime?: number
   /**
-   * 聚合粒度，单位为秒，最小为60s，即一分钟的聚合粒度；如果为空或0则计算开始时间到截止时间的指标数据，上报其他值会报错。
+   * 是否按固定时间跨度聚合，填入1及大于1的值按1处理，不填按0处理。
+- 填入0，则计算开始时间到截止时间的指标数据。
+- 填入1，则会按照开始时间到截止时间的时间跨度选择聚合粒度：
+ - 时间跨度 (0,12) 小时，则按一分钟粒度聚合。
+ - 时间跨度 [12,48] 小时，则按五分钟粒度聚合。
+ - 时间跨度 (48, +∞) 小时，则按一小时粒度聚合。
    */
   Period?: number
   /**
    * 对查询指标进行排序：
 Key 填写云 API 指标名称，[详情请见。](https://cloud.tencent.com/document/product/248/101681)
 Value 填写排序方式：     
-- asc:对查询指标进行升序排序
+- asc：对查询指标进行升序排序
 - desc：对查询指标进行降序排序
    */
   OrderBy?: OrderBy
@@ -1145,19 +1169,19 @@ export interface DescribeApmInstancesRequest {
    */
   Tags?: Array<ApmTag>
   /**
-   * 搜索业务系统名
+   * 按业务系统名过滤
    */
   InstanceName?: string
   /**
-   * 过滤业务系统 ID
+   * 按业务系统 ID 过滤
    */
   InstanceIds?: Array<string>
   /**
-   * 是否查询官方 Demo 业务系统
+   * 是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0）
    */
   DemoInstanceFlag?: number
   /**
-   * 是否查询全地域业务系统
+   * 是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0）
    */
   AllRegionsFlag?: number
 }

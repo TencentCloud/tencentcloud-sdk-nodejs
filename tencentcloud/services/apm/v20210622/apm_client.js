@@ -46,13 +46,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGeneralSpanList", req, cb);
     }
     /**
-     * 拉取 APM 业务系统列表
+     * 获取 APM 业务系统列表
      */
     async DescribeApmInstances(req, cb) {
         return this.request("DescribeApmInstances", req, cb);
     }
     /**
-     * 获取 APM Agent信息
+     * 获取 APM 接入点
      */
     async DescribeApmAgent(req, cb) {
         return this.request("DescribeApmAgent", req, cb);
@@ -77,7 +77,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGeneralMetricData", req, cb);
     }
     /**
-     * 拉取通用指标列表
+     * 查询指标列表接口，查询指标更推荐使用DescribeGeneralMetricData接口
      */
     async DescribeMetricRecords(req, cb) {
         return this.request("DescribeMetricRecords", req, cb);

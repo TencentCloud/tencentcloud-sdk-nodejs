@@ -49,7 +49,7 @@ import {
   DescribeHostsResponse,
   DeleteKeyPairsRequest,
   SystemDisk,
-  ResetInstanceRequest,
+  ModifyInstancesDisasterRecoverGroupRequest,
   ModifyHpcClusterAttributeRequest,
   ExitRescueModeResponse,
   DescribeChcHostsResponse,
@@ -218,6 +218,7 @@ import {
   TerminateInstancesRequest,
   SharePermission,
   DeleteImagesResponse,
+  ResetInstanceRequest,
   ImportImageResponse,
   ModifyDisasterRecoverGroupAttributeRequest,
   ConfigureChcAssistVpcResponse,
@@ -258,6 +259,7 @@ import {
   ResetInstanceResponse,
   ProgramFpgaImageRequest,
   DisasterRecoverGroup,
+  ModifyInstancesDisasterRecoverGroupResponse,
   VirtualPrivateCloud,
   InternetBandwidthConfig,
   ModifyDisasterRecoverGroupAttributeResponse,
@@ -825,6 +827,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLaunchTemplateResponse) => void
   ): Promise<DeleteLaunchTemplateResponse> {
     return this.request("DeleteLaunchTemplate", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyInstancesDisasterRecoverGroup) 用于调整实例所在置放群组。
+   * 目前只支持基础网络或私有网络实例。
+   */
+  async ModifyInstancesDisasterRecoverGroup(
+    req: ModifyInstancesDisasterRecoverGroupRequest,
+    cb?: (error: string, rep: ModifyInstancesDisasterRecoverGroupResponse) => void
+  ): Promise<ModifyInstancesDisasterRecoverGroupResponse> {
+    return this.request("ModifyInstancesDisasterRecoverGroup", req, cb)
   }
 
   /**

@@ -7162,7 +7162,7 @@ export interface VideoTemplateInfo {
    */
   Fps: number
   /**
-   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
    */
   Bitrate: number
@@ -8886,7 +8886,7 @@ export interface EditMediaVideoStream {
    */
   Codec?: string
   /**
-   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
 当取值为 0 或不填时，表示自动选择最佳视频码率。
    */
   Bitrate?: number
@@ -15729,7 +15729,7 @@ export interface VideoTemplateInfoForUpdate {
    */
   Fps?: number
   /**
-   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
 当取值为 0，表示视频码率和原始视频保持一致。
    */
   Bitrate?: number

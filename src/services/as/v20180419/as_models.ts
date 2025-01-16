@@ -156,6 +156,10 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    * 本地专用集群ID。
    */
   DedicatedClusterId?: string
+  /**
+   * 自定义metadata。
+   */
+  Metadata?: Metadata
 }
 
 /**
@@ -565,6 +569,16 @@ export interface LaunchConfiguration {
    * 本地专用集群 ID。
    */
   DedicatedClusterId?: string
+}
+
+/**
+ * 自定义 Metadata
+ */
+export interface Metadata {
+  /**
+   * 自定义 Metadata 键值对列表
+   */
+  Items?: Array<MetadataItem>
 }
 
 /**
@@ -1394,6 +1408,10 @@ export interface CreateLaunchConfigurationRequest {
    * 本地专用集群ID。
    */
   DedicatedClusterId?: string
+  /**
+   * 自定义metadata。
+   */
+  Metadata?: Metadata
 }
 
 /**
@@ -3733,6 +3751,10 @@ export interface ClearLaunchConfigurationAttributesRequest {
 填 true 代表清空实例标签列表，清空后基于此新创建的云主机将不会绑定列表中的标签。
    */
   ClearInstanceTags?: boolean
+  /**
+   * 是否清空 MetaData，非必填，默认为 false。填 true 代表清空 MetaData，清空后基于此新创建的云主机将不会关联自定义的 Metadata。
+   */
+  ClearMetadata?: boolean
 }
 
 /**
@@ -4079,6 +4101,20 @@ export interface RunMonitorServiceEnabled {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled?: boolean
+}
+
+/**
+ * 自定义 Metadata 的一组键值对信息
+ */
+export interface MetadataItem {
+  /**
+   * 自定义 MetaData 键
+   */
+  Key: string
+  /**
+   * 自定义 MetaData 值
+   */
+  Value: string
 }
 
 /**

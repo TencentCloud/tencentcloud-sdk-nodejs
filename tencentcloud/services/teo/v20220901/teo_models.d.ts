@@ -9769,9 +9769,7 @@ export interface DescribeSecurityIPGroupRequest {
      */
     ZoneId: string;
     /**
-     * 指定安全 IP 组 ID。
-  <li>提供该参数时，仅查询指定 ID 的安全 IP 组配置；</li>
-  <li>不传递参数时，返回站点下所有安全 IP 组信息。</li>
+     * 指定安全 IP 组 ID。 <li>提供该参数时，仅查询指定 ID 的安全 IP 组配置；</li> <li>不传递参数时，返回站点下所有安全 IP 组信息。</li>
      */
     GroupIds?: Array<number | bigint>;
 }
