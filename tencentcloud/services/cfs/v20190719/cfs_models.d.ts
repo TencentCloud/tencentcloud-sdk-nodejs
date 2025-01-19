@@ -736,6 +736,39 @@ export interface UpdateCfsPGroupResponse {
     RequestId?: string;
 }
 /**
+ * 快照操作日志
+ */
+export interface SnapshotOperateLog {
+    /**
+     * 操作类型
+  CreateCfsSnapshot：创建快照
+  DeleteCfsSnapshot：删除快照
+  CreateCfsFileSystem：创建文件系统
+  UpdateCfsSnapshotAttribute：更新快照
+     */
+    Action?: string;
+    /**
+     * 操作时间
+     */
+    ActionTime?: string;
+    /**
+     * 操作名称
+  CreateCfsSnapshot
+  DeleteCfsSnapshot
+  CreateCfsFileSystem
+  UpdateCfsSnapshotAttribute
+     */
+    ActionName?: string;
+    /**
+     * 操作者uin
+     */
+    Operator?: string;
+    /**
+     * 1-任务进行中；2-任务成功；3-任务失败
+     */
+    Result?: number;
+}
+/**
  * DeleteAutoSnapshotPolicy请求参数结构体
  */
 export interface DeleteAutoSnapshotPolicyRequest {
@@ -1259,37 +1292,13 @@ export interface BucketInfo {
     Region: string;
 }
 /**
- * 快照操作日志
+ * CreateAccessCert请求参数结构体
  */
-export interface SnapshotOperateLog {
+export interface CreateAccessCertRequest {
     /**
-     * 操作类型
-  CreateCfsSnapshot：创建快照
-  DeleteCfsSnapshot：删除快照
-  CreateCfsFileSystem：创建文件系统
-  UpdateCfsSnapshotAttribute：更新快照
+     * 证书描述
      */
-    Action?: string;
-    /**
-     * 操作时间
-     */
-    ActionTime?: string;
-    /**
-     * 操作名称
-  CreateCfsSnapshot
-  DeleteCfsSnapshot
-  CreateCfsFileSystem
-  UpdateCfsSnapshotAttribute
-     */
-    ActionName?: string;
-    /**
-     * 操作者uin
-     */
-    Operator?: string;
-    /**
-     * 1-任务进行中；2-任务成功；3-任务失败
-     */
-    Result?: number;
+    CertDesc: string;
 }
 /**
  * DescribeUserQuota请求参数结构体
@@ -2070,6 +2079,19 @@ export interface UpdateCfsPGroupRequest {
      * 权限组描述信息，1-255个字符。 Name和Descinfo不能同时为空
      */
     DescInfo?: string;
+}
+/**
+ * CreateAccessCert返回参数结构体
+ */
+export interface CreateAccessCertResponse {
+    /**
+     * 凭证唯一标识
+     */
+    CertId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SetUserQuota返回参数结构体

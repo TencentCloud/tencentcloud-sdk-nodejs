@@ -223,12 +223,10 @@ export interface ScheduleInfo {
 export interface BindUser {
     /**
      * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
     /**
      * 主机信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Host?: string;
 }
@@ -842,6 +840,14 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
      * catalog名称
      */
     CatalogName?: Array<string>;
+    /**
+     * 排序字段
+     */
+    SortField?: string;
+    /**
+     * 排序方式
+     */
+    SortOrder?: string;
 }
 /**
  * DescribeRestoreTaskDetail返回参数结构体
@@ -1503,12 +1509,10 @@ export interface DescribeSlowQueryRecordsResponse {
     SlowQueryRecords?: Array<SlowQueryRecord>;
     /**
      * 所有数据库名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DBNameList?: Array<string>;
     /**
      * 所有catalog名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CatalogNameList?: Array<string>;
     /**
@@ -1795,6 +1799,14 @@ export interface DescribeSlowQueryRecordsRequest {
      * MemoryUsage排序字段
      */
     MemoryUsage?: string;
+    /**
+     * 排序字段
+     */
+    SortField?: string;
+    /**
+     * 排序方式
+     */
+    SortOrder?: string;
 }
 /**
  * DescribeInstanceNodesRole返回参数结构体
@@ -2681,12 +2693,10 @@ export interface BackupStatus {
     Timeout?: number;
     /**
      * 备份实例id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupJobId?: number;
     /**
      * 实例对应snapshoit的id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
 }
@@ -2973,17 +2983,14 @@ export interface ModifySecurityGroupsResponse {
 export interface BackupCosInfo {
     /**
      * 备份文件所在的cos桶
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CosBucket?: string;
     /**
      * 备份文件所在的完整cos路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CosPath?: string;
     /**
      * 备份文件名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SnapShotPath?: string;
 }
@@ -3772,6 +3779,10 @@ export interface DescribeDatabaseAuditDownloadRequest {
      * catalog名称 （多选）
      */
     Catalogs?: Array<string>;
+    /**
+     * 是否是查询
+     */
+    IsQuery?: Array<boolean>;
 }
 /**
  * 集群规格

@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevice", req, cb);
     }
     /**
+     * 拉取云存事件列表
+     */
+    async DescribeCloudStorageEventsWithAITasks(req, cb) {
+        return this.request("DescribeCloudStorageEventsWithAITasks", req, cb);
+    }
+    /**
      * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
      */
     async DescribeTopicPolicy(req, cb) {

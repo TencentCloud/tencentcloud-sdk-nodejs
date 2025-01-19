@@ -194,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAutoSnapshotPolicy", req, cb);
     }
     /**
+     * 本接口（UpdateCfsRule）用于更新权限规则。
+     */
+    async UpdateCfsRule(req, cb) {
+        return this.request("UpdateCfsRule", req, cb);
+    }
+    /**
      * 本接口（DescribeCfsFileSystems）用于查询文件系统
      */
     async DescribeCfsFileSystems(req, cb) {
@@ -281,10 +287,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCfsRule", req, cb);
     }
     /**
-     * 本接口（UpdateCfsRule）用于更新权限规则。
+     * 创建用于访问文件系统的凭证
      */
-    async UpdateCfsRule(req, cb) {
-        return this.request("UpdateCfsRule", req, cb);
+    async CreateAccessCert(req, cb) {
+        return this.request("CreateAccessCert", req, cb);
     }
     /**
      * 本接口（UpdateCfsPGroup）更新权限组信息。

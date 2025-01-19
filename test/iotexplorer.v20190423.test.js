@@ -68,6 +68,16 @@ it("iotexplorer.v20190423.DescribeDevice", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorageEventsWithAITasks", async function () {
+    try {
+       const data = await client.DescribeCloudStorageEventsWithAITasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
     try {
        const data = await client.DescribeTopicPolicy({})

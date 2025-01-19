@@ -7640,7 +7640,7 @@ export interface CreateInput {
      */
     InputName: string;
     /**
-     * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。
+     * 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。
      */
     Protocol: string;
     /**
@@ -14579,10 +14579,7 @@ export interface ModifyInput {
      */
     RTPSettings: CreateInputRTPSettings;
     /**
-     * 输入的协议，可选[SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST]。
-  当输出包含RTP时，输入只能是RTP。
-  当输出包含RTMP时，输入可以是SRT/RTMP。
-  当输出包含SRT时，输入只能是SRT。
+     * 输入的协议，可选[SRT|RTP|RTMP_PUSH|RTMP_PULL|RTSP_PULL|RIST]。	-
      */
     Protocol?: string;
     /**

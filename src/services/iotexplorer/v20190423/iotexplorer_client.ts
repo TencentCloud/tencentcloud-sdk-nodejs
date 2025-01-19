@@ -43,6 +43,7 @@ import {
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   DescribeSpaceFenceEventListResponse,
+  DescribeCloudStorageEventsWithAITasksResponse,
   SearchTopicRuleResponse,
   ModifyCloudStorageAIServiceResponse,
   DescribeDeviceFirmWareRequest,
@@ -177,7 +178,7 @@ import {
   AppDeviceInfo,
   DescribeCloudStorageResponse,
   DescribeCloudStorageStreamDataRequest,
-  CancelAssignTWeCallLicenseResponse,
+  DirectBindDeviceInFamilyRequest,
   ProjectEntryEx,
   PublishMessageResponse,
   SearchKeyword,
@@ -189,6 +190,7 @@ import {
   DescribePositionFenceListRequest,
   InvokeCloudStorageAIServiceTaskRequest,
   CreatePositionSpaceRequest,
+  DescribeCloudStorageEventsWithAITasksRequest,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
   DescribeDeviceLocationSolveRequest,
@@ -256,7 +258,7 @@ import {
   ActivateDeviceInfo,
   ResetTWeCallDeviceRequest,
   CallDeviceActionAsyncRequest,
-  ResumeWeCallDeviceResponse,
+  CallDeviceActionAsyncResponse,
   GetPositionSpaceListResponse,
   CreatePositionFenceResponse,
   DescribeTopicRuleResponse,
@@ -266,6 +268,7 @@ import {
   DescribeDeviceRequest,
   CamTag,
   WXDeviceInfo,
+  CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
   DescribeGatewaySubDeviceListResponse,
@@ -339,7 +342,7 @@ import {
   DescribeTopicRuleRequest,
   ModifyCloudStorageAIServiceCallbackRequest,
   GetWechatDeviceTicketResponse,
-  CallDeviceActionAsyncResponse,
+  ResumeWeCallDeviceResponse,
   TopicRulePayload,
   ResetCloudStorageResponse,
   FirmwareInfo,
@@ -362,7 +365,7 @@ import {
   CreateDeviceChannelResponse,
   CreateTopicRuleRequest,
   CreateTopicPolicyRequest,
-  DirectBindDeviceInFamilyRequest,
+  CancelAssignTWeCallLicenseResponse,
   DescribeCloudStorageEventsResponse,
   Filter,
   DescribeBindedProductsRequest,
@@ -457,6 +460,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceResponse) => void
   ): Promise<DescribeDeviceResponse> {
     return this.request("DescribeDevice", req, cb)
+  }
+
+  /**
+   * 拉取云存事件列表
+   */
+  async DescribeCloudStorageEventsWithAITasks(
+    req: DescribeCloudStorageEventsWithAITasksRequest,
+    cb?: (error: string, rep: DescribeCloudStorageEventsWithAITasksResponse) => void
+  ): Promise<DescribeCloudStorageEventsWithAITasksResponse> {
+    return this.request("DescribeCloudStorageEventsWithAITasks", req, cb)
   }
 
   /**

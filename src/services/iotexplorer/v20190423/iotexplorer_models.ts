@@ -503,6 +503,36 @@ export interface DescribeSpaceFenceEventListResponse {
 }
 
 /**
+ * DescribeCloudStorageEventsWithAITasks返回参数结构体
+ */
+export interface DescribeCloudStorageEventsWithAITasksResponse {
+  /**
+   * 云存事件列表
+   */
+  Events?: Array<CloudStorageEventWithAITasks>
+  /**
+   * 请求上下文, 用作查询游标
+   */
+  Context?: string
+  /**
+   * 拉取结果是否已经结束
+   */
+  Listover?: boolean
+  /**
+   * 内部结果数量，并不等同于事件总数。
+   */
+  Total?: number
+  /**
+   * 视频播放URL
+   */
+  VideoURL?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchTopicRule返回参数结构体
  */
 export interface SearchTopicRuleResponse {
@@ -3272,13 +3302,33 @@ export interface DescribeCloudStorageStreamDataRequest {
 }
 
 /**
- * CancelAssignTWeCallLicense返回参数结构体
+ * DirectBindDeviceInFamily请求参数结构体
  */
-export interface CancelAssignTWeCallLicenseResponse {
+export interface DirectBindDeviceInFamilyRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 小程序appid
    */
-  RequestId?: string
+  IotAppID: string
+  /**
+   * 用户ID
+   */
+  UserID: string
+  /**
+   * 家庭ID
+   */
+  FamilyId: string
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名
+   */
+  DeviceName: string
+  /**
+   * 房间ID
+   */
+  RoomId?: string
 }
 
 /**
@@ -3521,6 +3571,56 @@ export interface CreatePositionSpaceRequest {
    * 缩略图
    */
   Icon?: string
+}
+
+/**
+ * DescribeCloudStorageEventsWithAITasks请求参数结构体
+ */
+export interface DescribeCloudStorageEventsWithAITasksRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 事件关联的视频 AI 分析服务类型（支持多选）。可选值：
+
+- `RealtimeObjectDetect`：目标检测
+- `Highlight`：视频浓缩
+- `VideoToText`：视频语义理解
+   */
+  ServiceTypes: Array<string>
+  /**
+   * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+   */
+  StartTime?: number
+  /**
+   * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+   */
+  EndTime?: number
+  /**
+   * 请求上下文, 用作查询游标
+   */
+  Context?: string
+  /**
+   * 查询数据项目的最大数量, 默认为10。假设传Size=10，返回的实际事件数量为N，则 5 <= N <= 10。
+   */
+  Size?: number
+  /**
+   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+   */
+  EventId?: string
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+   */
+  ChannelId?: number
 }
 
 /**
@@ -4648,6 +4748,7 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
    * 云存 AI 服务类型。可选值：
 - `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
+- `VideoToText`：视频语义理解
    */
   ServiceType: string
   /**
@@ -4902,9 +5003,17 @@ export interface CallDeviceActionAsyncRequest {
 }
 
 /**
- * ResumeWeCallDevice返回参数结构体
+ * CallDeviceActionAsync返回参数结构体
  */
-export interface ResumeWeCallDeviceResponse {
+export interface CallDeviceActionAsyncResponse {
+  /**
+   * 调用Id
+   */
+  ClientToken: string
+  /**
+   * 异步调用状态
+   */
+  Status: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5072,6 +5181,40 @@ export interface WXDeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WXIoTDeviceInfo?: WXIoTDeviceInfo
+}
+
+/**
+ * 云存事件及其关联的云存 AI 任务
+ */
+export interface CloudStorageEventWithAITasks {
+  /**
+   * 事件起始时间（Unix 时间戳，秒级
+   */
+  StartTime?: number
+  /**
+   * 事件结束时间（Unix 时间戳，秒级
+   */
+  EndTime?: number
+  /**
+   * 事件缩略图
+   */
+  Thumbnail?: string
+  /**
+   * 事件ID
+   */
+  EventId?: string
+  /**
+   * 事件录像上传状态，Finished: 全部上传成功 Partial: 部分上传成功 Failed: 上传失败
+   */
+  UploadStatus?: string
+  /**
+   * 事件自定义数据
+   */
+  Data?: string
+  /**
+   * 事件关联的云存 AI 任务列表
+   */
+  AITasks?: Array<CloudStorageAIServiceTask>
 }
 
 /**
@@ -6434,6 +6577,7 @@ export interface CloudStorageAIServiceTask {
 
 - `RealtimeObjectDetect`：目标检测
 - `Highlight`：视频浓缩
+- `VideoToText`：视频语义理解
    */
   ServiceType?: string
   /**
@@ -6630,17 +6774,9 @@ export interface GetWechatDeviceTicketResponse {
 }
 
 /**
- * CallDeviceActionAsync返回参数结构体
+ * ResumeWeCallDevice返回参数结构体
  */
-export interface CallDeviceActionAsyncResponse {
-  /**
-   * 调用Id
-   */
-  ClientToken: string
-  /**
-   * 异步调用状态
-   */
-  Status: string
+export interface ResumeWeCallDeviceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7187,33 +7323,13 @@ export interface CreateTopicPolicyRequest {
 }
 
 /**
- * DirectBindDeviceInFamily请求参数结构体
+ * CancelAssignTWeCallLicense返回参数结构体
  */
-export interface DirectBindDeviceInFamilyRequest {
+export interface CancelAssignTWeCallLicenseResponse {
   /**
-   * 小程序appid
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IotAppID: string
-  /**
-   * 用户ID
-   */
-  UserID: string
-  /**
-   * 家庭ID
-   */
-  FamilyId: string
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名
-   */
-  DeviceName: string
-  /**
-   * 房间ID
-   */
-  RoomId?: string
+  RequestId?: string
 }
 
 /**

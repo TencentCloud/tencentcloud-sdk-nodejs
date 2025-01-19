@@ -293,6 +293,14 @@ false（默认）：发送正常请求，通过检查后直接创建实例
    * 创建实例后自动执行的命令。
    */
   InitCommand?: Command
+  /**
+   * 主域名。
+   */
+  DomainName?: string
+  /**
+   * 子域名。
+   */
+  Subdomain?: string
 }
 
 /**

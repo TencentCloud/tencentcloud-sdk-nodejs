@@ -288,6 +288,16 @@ it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
     }
 })
 
+it("cfs.v20190719.UpdateCfsRule", async function () {
+    try {
+       const data = await client.UpdateCfsRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DescribeCfsFileSystems", async function () {
     try {
        const data = await client.DescribeCfsFileSystems({})
@@ -428,9 +438,9 @@ it("cfs.v20190719.CreateCfsRule", async function () {
     }
 })
 
-it("cfs.v20190719.UpdateCfsRule", async function () {
+it("cfs.v20190719.CreateAccessCert", async function () {
     try {
-       const data = await client.UpdateCfsRule({})
+       const data = await client.CreateAccessCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

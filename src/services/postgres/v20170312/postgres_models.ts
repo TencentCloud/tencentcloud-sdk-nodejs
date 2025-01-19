@@ -747,7 +747,7 @@ export interface RenewInstanceResponse {
   /**
    * 订单名
    */
-  DealName: string
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1002,11 +1002,16 @@ export interface RenewInstanceRequest {
    */
   DBInstanceId: string
   /**
-   * 续费多少个月
+   * 购买时长，单位：月。
+<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
+<li>后付费：只支持1</li>
    */
   Period: number
   /**
-   * 是否自动使用代金券,1是,0否，默认不使用
+   * 是否自动使用代金券：
+<li>0：否</li>
+<li>1：是</li>
+默认值：0
    */
   AutoVoucher?: number
   /**
@@ -1698,6 +1703,7 @@ TDE：支持数据加密。
   /**
    * 数据库版本状态，包括：
 AVAILABLE：可用；
+UPGRADE_ONLY：不可创建，此版本仅可升级至高版本；
 DEPRECATED：已弃用。
    */
   Status?: string
@@ -5144,13 +5150,21 @@ export interface ModifyBackupPlanRequest {
    */
   BaseBackupRetentionPeriod?: number
   /**
-   * 实例备份周期，按照星期维度，格式为小写星期英文单词
+   * 实例备份周期，若是星期维度，格式为小写星期英文单词；若是按月维度，格式为数字字符，如["1","2"]。
    */
   BackupPeriod?: Array<string>
   /**
    * 实例日志备份保留时长，取值范围为7-1830，单位是天
    */
   LogBackupRetentionPeriod?: number
+  /**
+   * 备份计划ID，用于指明要修改哪个备份计划，不传则是修改默认备份计划。
+   */
+  PlanId?: string
+  /**
+   * 要修改的备份计划名称。
+   */
+  PlanName?: string
 }
 
 /**
@@ -5380,14 +5394,14 @@ export interface DisIsolateDBInstancesRequest {
   DBInstanceIdSet: Array<string>
   /**
    * 购买时长，单位：月。
-<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
-<li>后付费：只支持1
+<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
+<li>后付费：只支持1</li>
    */
   Period?: number
   /**
    * 是否使用代金券：
-<li>true：使用
-<li>false：不使用
+<li>true：使用</li>
+<li>false：不使用</li>
 默认值：false
    */
   AutoVoucher?: boolean
@@ -5747,28 +5761,28 @@ export interface ModifyDBInstanceChargeTypeRequest {
   DBInstanceId: string
   /**
    * 实例计费类型，目前支持：
-<li>PREPAID：预付费，即包年包月
-<li>POSTPAID_BY_HOUR：后付费，即按量计费
+<li>PREPAID：预付费，即包年包月</li>
+<li>POSTPAID_BY_HOUR：后付费，即按量计费</li>
 默认值：PREPAID
    */
   InstanceChargeType: string
   /**
    * 购买时长，单位：月。
-<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
-<li>后付费：只支持1
+<li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36</li>
+<li>后付费：只支持1</li>
    */
   Period: number
   /**
    * 续费标记：
-<li>0：手动续费
-<li>1：自动续费
+<li>0：手动续费</li>
+<li>1：自动续费</li>
 默认值：0
    */
   AutoRenewFlag?: number
   /**
    * 是否自动使用代金券：
-<li>0：否
-<li>1：是
+<li>0：否</li>
+<li>1：是</li>
 默认值：0
    */
   AutoVoucher?: number

@@ -45,6 +45,7 @@ import {
   UpdateCfsFileSystemNameRequest,
   DeleteCfsPGroupRequest,
   UpdateCfsPGroupResponse,
+  SnapshotOperateLog,
   DeleteAutoSnapshotPolicyRequest,
   DeleteCfsFileSystemResponse,
   UpdateCfsRuleRequest,
@@ -76,7 +77,7 @@ import {
   DeleteMountTargetRequest,
   CreateCfsRuleRequest,
   BucketInfo,
-  SnapshotOperateLog,
+  CreateAccessCertRequest,
   DescribeUserQuotaRequest,
   DescribeBucketListResponse,
   UpdateCfsFileSystemNameResponse,
@@ -111,6 +112,7 @@ import {
   DeleteCfsRuleResponse,
   UpdateCfsSnapshotAttributeResponse,
   UpdateCfsPGroupRequest,
+  CreateAccessCertResponse,
   SetUserQuotaResponse,
   TagInfo,
   DescribeCfsPGroupsRequest,
@@ -412,6 +414,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpdateCfsRule）用于更新权限规则。
+   */
+  async UpdateCfsRule(
+    req: UpdateCfsRuleRequest,
+    cb?: (error: string, rep: UpdateCfsRuleResponse) => void
+  ): Promise<UpdateCfsRuleResponse> {
+    return this.request("UpdateCfsRule", req, cb)
+  }
+
+  /**
    * 本接口（DescribeCfsFileSystems）用于查询文件系统
    */
   async DescribeCfsFileSystems(
@@ -555,13 +567,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateCfsRule）用于更新权限规则。
+   * 创建用于访问文件系统的凭证
    */
-  async UpdateCfsRule(
-    req: UpdateCfsRuleRequest,
-    cb?: (error: string, rep: UpdateCfsRuleResponse) => void
-  ): Promise<UpdateCfsRuleResponse> {
-    return this.request("UpdateCfsRule", req, cb)
+  async CreateAccessCert(
+    req: CreateAccessCertRequest,
+    cb?: (error: string, rep: CreateAccessCertResponse) => void
+  ): Promise<CreateAccessCertResponse> {
+    return this.request("CreateAccessCert", req, cb)
   }
 
   /**

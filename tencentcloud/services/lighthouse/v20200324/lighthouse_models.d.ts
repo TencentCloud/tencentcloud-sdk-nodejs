@@ -264,6 +264,14 @@ export interface CreateInstancesRequest {
      * 创建实例后自动执行的命令。
      */
     InitCommand?: Command;
+    /**
+     * 主域名。
+     */
+    DomainName?: string;
+    /**
+     * 子域名。
+     */
+    Subdomain?: string;
 }
 /**
  * DescribeZones请求参数结构体

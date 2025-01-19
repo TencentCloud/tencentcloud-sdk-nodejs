@@ -86,6 +86,14 @@ export interface DescribeHpcClustersRequest {
      * 高性能计算集群对应的业务场景标识，当前只支持CDC。
      */
     HpcClusterBusinessId?: string;
+    /**
+     * 高性能计算集群实例类型
+     */
+    InstanceType?: string;
+    /**
+     * <li><strong>tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> <li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p> 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeImageQuota返回参数结构体
@@ -4135,6 +4143,10 @@ export interface CreateHpcClusterRequest {
      * 高性能计算集群对应的业务场景标识，当前只支持CDC。
      */
     HpcClusterBusinessId?: string;
+    /**
+     * 标签描述列表。通过指定该参数可以同时绑定标签到相应的HPC高性能集群。
+     */
+    TagSpecification?: Array<TagSpecification>;
 }
 /**
  * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
@@ -5707,6 +5719,14 @@ export interface HpcClusterInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HpcClusterBusinessId?: string;
+    /**
+     * 高性能计算集群网络模式
+     */
+    HpcClusterNetMode?: number;
+    /**
+     * 高性能计算集群关联的标签列表
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * HDD的本地存储信息
