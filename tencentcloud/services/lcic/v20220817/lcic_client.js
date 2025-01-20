@@ -90,7 +90,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetWatermark", req, cb);
     }
     /**
-     * 此接口用于修改用户配置，如头像，昵称/用户名等。
+     * 此接口用于修改用户信息，例如头像、昵称（用户名）等。注意，课中的用户信息不会立即同步修改，需待下次上课时，修改后的信息才会更新显示。
      */
     async ModifyUserProfile(req, cb) {
         return this.request("ModifyUserProfile", req, cb);

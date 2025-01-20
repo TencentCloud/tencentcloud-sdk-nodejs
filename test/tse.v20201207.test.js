@@ -608,6 +608,16 @@ it("tse.v20201207.DescribeNativeGatewayServiceSources", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayInfoByIp", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayInfoByIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyNativeGatewayServerGroup", async function () {
     try {
        const data = await client.ModifyNativeGatewayServerGroup({})

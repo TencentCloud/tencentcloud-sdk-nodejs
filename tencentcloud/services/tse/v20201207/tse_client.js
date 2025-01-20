@@ -382,6 +382,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNativeGatewayServiceSources", req, cb);
     }
     /**
+     * 根据公网IP查询云原生网关实例信息
+     */
+    async DescribeCloudNativeAPIGatewayInfoByIp(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayInfoByIp", req, cb);
+    }
+    /**
      * 修改云原生API网关实例分组基础信息
      */
     async ModifyNativeGatewayServerGroup(req, cb) {

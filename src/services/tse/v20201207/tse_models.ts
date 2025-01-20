@@ -1423,31 +1423,21 @@ export interface CreateGovernanceServicesRequest {
 }
 
 /**
- * 弹性伸缩配置指标
+ * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
-export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
+export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
   /**
-   * 指标类型
-- Resource
+   * 网关ID
    */
-  Type?: string
+  GatewayId: string
   /**
-   * 指标资源名称
-- cpu
-- memory
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务名称，或服务ID
    */
-  ResourceName?: string
+  Name: string
   /**
-   * 指标目标类型，目前只支持百分比Utilization
-注意：此字段可能返回 null，表示取不到有效值。
+   * 限流配置
    */
-  TargetType?: string
-  /**
-   * 指标目标值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetValue?: number
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
 }
 
 /**
@@ -1532,43 +1522,21 @@ export interface ModifyNetworkAccessStrategyResponse {
 }
 
 /**
- * ModifyAutoScalerResourceStrategy请求参数结构体
+ * RestartSREInstance请求参数结构体
  */
-export interface ModifyAutoScalerResourceStrategyRequest {
+export interface RestartSREInstanceRequest {
   /**
-   * 网关实例ID
+   * 微服务引擎实例Id
    */
-  GatewayId: string
+  InstanceId: string
   /**
-   * 策略ID
+   * 重启的环境类型（PROD，DEV，UAT等）
    */
-  StrategyId: string
+  EnvTypes?: Array<string>
   /**
-   * 策略名称
+   * 指定需要重启的实例节点（当前仅支持zk单节点重启）
    */
-  StrategyName?: string
-  /**
-   * 策略描述
-   */
-  Description?: string
-  /**
-   * 指标伸缩配置
-   */
-  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
-  /**
-   * 定时伸缩配置
-   * @deprecated
-   */
-  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
-  /**
-   * 最大节点数
-   * @deprecated
-   */
-  MaxReplicas?: number
-  /**
-   * 指标伸缩配置
-   */
-  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  NodeName?: string
 }
 
 /**
@@ -4518,6 +4486,21 @@ export interface RollbackConfigFileReleasesRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayInfoByIp返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
+  /**
+   * 出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeInstanceInfoByIpResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 灰度规则
  */
 export interface CloudNativeAPIGatewayCanaryRule {
@@ -5380,6 +5363,22 @@ export interface CreateGatewayServiceResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: string
+}
+
+/**
+ * 根据公网IP查询云原生网关实例信息出参
+ */
+export interface DescribeInstanceInfoByIpResult {
+  /**
+   * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 分组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
 }
 
 /**
@@ -6399,6 +6398,16 @@ export interface DescribeSREInstancesRequest {
    * 调用方来源
    */
   QuerySource?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayInfoByIp请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayInfoByIpRequest {
+  /**
+   * 云原生网关的公网ip
+   */
+  PublicNetworkIP: string
 }
 
 /**
@@ -7777,21 +7786,31 @@ export interface ModifyNetworkBasicInfoRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
+ * 弹性伸缩配置指标
  */
-export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   /**
-   * 网关ID
+   * 指标类型
+- Resource
    */
-  GatewayId: string
+  Type?: string
   /**
-   * 服务名称，或服务ID
+   * 指标资源名称
+- cpu
+- memory
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  ResourceName?: string
   /**
-   * 限流配置
+   * 指标目标类型，目前只支持百分比Utilization
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+  TargetType?: string
+  /**
+   * 指标目标值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetValue?: number
 }
 
 /**
@@ -8125,21 +8144,43 @@ export interface Filter {
 }
 
 /**
- * RestartSREInstance请求参数结构体
+ * ModifyAutoScalerResourceStrategy请求参数结构体
  */
-export interface RestartSREInstanceRequest {
+export interface ModifyAutoScalerResourceStrategyRequest {
   /**
-   * 微服务引擎实例Id
+   * 网关实例ID
    */
-  InstanceId: string
+  GatewayId: string
   /**
-   * 重启的环境类型（PROD，DEV，UAT等）
+   * 策略ID
    */
-  EnvTypes?: Array<string>
+  StrategyId: string
   /**
-   * 指定需要重启的实例节点（当前仅支持zk单节点重启）
+   * 策略名称
    */
-  NodeName?: string
+  StrategyName?: string
+  /**
+   * 策略描述
+   */
+  Description?: string
+  /**
+   * 指标伸缩配置
+   */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 定时伸缩配置
+   * @deprecated
+   */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+   * @deprecated
+   */
+  MaxReplicas?: number
+  /**
+   * 指标伸缩配置
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
 }
 
 /**

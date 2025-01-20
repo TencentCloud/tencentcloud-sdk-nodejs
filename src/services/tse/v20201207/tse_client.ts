@@ -75,10 +75,10 @@ import {
   DescribeConfigFileReleasesResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   CreateGovernanceServicesRequest,
-  CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
+  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   NativeGatewayServerGroup,
   ModifyNetworkAccessStrategyResponse,
-  ModifyAutoScalerResourceStrategyRequest,
+  RestartSREInstanceRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
@@ -194,6 +194,7 @@ import {
   DescribeAllConfigFileTemplatesRequest,
   RateLimitResponse,
   RollbackConfigFileReleasesRequest,
+  DescribeCloudNativeAPIGatewayInfoByIpResponse,
   CloudNativeAPIGatewayCanaryRule,
   PublishConfigFilesResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoRequest,
@@ -225,6 +226,7 @@ import {
   NacosReplica,
   CreateGovernanceInstancesResponse,
   CreateGatewayServiceResult,
+  DescribeInstanceInfoByIpResult,
   DeleteEngineResponse,
   Location,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
@@ -268,6 +270,7 @@ import {
   DescribeNacosServerInterfacesRequest,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
+  DescribeCloudNativeAPIGatewayInfoByIpRequest,
   DescribeZookeeperReplicasResponse,
   ModifyConfigFileGroupRequest,
   DescribePublicAddressConfigResponse,
@@ -332,7 +335,7 @@ import {
   UpdateCloudNativeAPIGatewaySpecRequest,
   DeleteEngineRequest,
   ModifyNetworkBasicInfoRequest,
-  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
+  CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   SREInstance,
   CloudNativeAPIGatewayNode,
@@ -342,7 +345,7 @@ import {
   DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   CreateGovernanceServicesResponse,
   Filter,
-  RestartSREInstanceRequest,
+  ModifyAutoScalerResourceStrategyRequest,
   CreateOrUpdateConfigFileAndReleaseResponse,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   DeleteNativeGatewayServiceSourceRequest,
@@ -973,6 +976,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNativeGatewayServiceSourcesResponse) => void
   ): Promise<DescribeNativeGatewayServiceSourcesResponse> {
     return this.request("DescribeNativeGatewayServiceSources", req, cb)
+  }
+
+  /**
+   * 根据公网IP查询云原生网关实例信息
+   */
+  async DescribeCloudNativeAPIGatewayInfoByIp(
+    req: DescribeCloudNativeAPIGatewayInfoByIpRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayInfoByIpResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayInfoByIpResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayInfoByIp", req, cb)
   }
 
   /**

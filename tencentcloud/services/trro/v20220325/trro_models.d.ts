@@ -195,7 +195,7 @@ export interface DescribeSessionStatisticsByIntervalResponse {
     /**
      * 各时间段的会话统计数据
      */
-    SessionStatistics: Array<SessionIntervalStatistic>;
+    SessionStatistics?: Array<SessionIntervalStatistic>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1018,23 +1018,23 @@ export interface DescribeSessionStatisticsResponse {
     /**
      * 会话数量
      */
-    SessionNum: number;
+    SessionNum?: number;
     /**
      * 通话时长，单位：分钟
      */
-    TotalDuration: number;
+    TotalDuration?: number;
     /**
      * 活跃现场设备数
      */
-    ActiveFieldDeviceNum: number;
+    ActiveFieldDeviceNum?: number;
     /**
      * 活跃远端设备数
      */
-    ActiveRemoteDeviceNum: number;
+    ActiveRemoteDeviceNum?: number;
     /**
      * 优良会话占比，单位：%
      */
-    NotBadSessionRatio: number;
+    NotBadSessionRatio?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -382,7 +382,7 @@ export interface ModifyUserProfileRequest {
    */
   UserId: string
   /**
-   * 待修改的用户名
+   * 待修改的用户名。对应注册用户下“Name“字段，本次修改是对此内容进行修改。
    */
   Nickname?: string
   /**
