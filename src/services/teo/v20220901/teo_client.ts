@@ -27,11 +27,14 @@ import {
   DescribeSecurityIPGroupInfoResponse,
   SlowPostConfig,
   OriginRecord,
+  CompressionParameters,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
+  HeaderAction,
   RealtimeLogDeliveryTask,
   PrepaidPlanParam,
-  BindSharedCNAMEResponse,
+  AccessURLRedirectQueryString,
+  ModifyFunctionRulePriorityRequest,
   ModifyAccelerationDomainResponse,
   TopEntryValue,
   DescribeHostsSettingResponse,
@@ -45,6 +48,7 @@ import {
   LogFormat,
   DescribeEnvironmentsRequest,
   DescribeAliasDomainsRequest,
+  QUICParameters,
   RateLimitConfig,
   CreateRealtimeLogDeliveryTaskRequest,
   ModifyAccelerationDomainStatusesResponse,
@@ -63,40 +67,50 @@ import {
   DescribeAccelerationDomainsResponse,
   SwitchConfig,
   IdentifyZoneResponse,
+  UpstreamRequestQueryString,
   ModifyLoadBalancerResponse,
   ModifyL4ProxyResponse,
   HealthChecker,
   CreateFunctionRuleRequest,
+  RuleBranch,
   DescribeAliasDomainsResponse,
   EnvInfo,
   ModifyLoadBalancerRequest,
   PlanInfo,
   DescribeTimingL7CacheDataRequest,
+  IPv6Parameters,
   CreateFunctionRequest,
+  PostMaxSizeParameters,
   S3,
   DescribeDDoSAttackEventResponse,
   DeleteL4ProxyRulesResponse,
   ForceRedirect,
   CodeAction,
+  CreateL7AccRulesResponse,
   CachePrefresh,
   DescribeTimingL7AnalysisDataResponse,
   ImageOptimize,
+  CreateL7AccRulesRequest,
   BotPortraitRule,
   RulesProperties,
   RuleCodeActionParams,
   OriginGroupReference,
-  ModifyFunctionRulePriorityResponse,
+  DeleteLoadBalancerRequest,
+  CacheKeyCookie,
   ExceptUserRule,
   SecEntry,
   ModifyCustomErrorPageResponse,
   SubRule,
+  StandardDebugParameters,
   ConfigGroupVersionInfo,
   VerifyOwnershipResponse,
   Sv,
   Rule,
   DownloadL4LogsRequest,
+  StatusCodeCacheParam,
   ModifyZoneSettingRequest,
   OriginGroupHealthStatus,
+  ModifyDnsRecordsResponse,
   BillingDataFilter,
   DeleteCustomErrorPageResponse,
   DescribeTimingL7CacheDataResponse,
@@ -104,20 +118,22 @@ import {
   Header,
   DeleteCustomErrorPageRequest,
   CustomField,
+  CacheKeyHeader,
   DeleteZoneRequest,
-  SecurityType,
+  RangeOriginPullParameters,
   BotManagedRule,
   SecurityConfig,
   L4OfflineLog,
   ModifyPlanRequest,
-  ExceptUserRuleScope,
-  MaxAge,
+  HostName,
+  DDoS,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
   EntityStatus,
+  SmartRoutingParameters,
   ModifyAliasDomainRequest,
   CreateFunctionRuleResponse,
-  RuleNormalActionParams,
+  HTTPUpstreamTimeoutParameters,
   PrivateParameter,
   CreateSecurityIPGroupRequest,
   CreateOriginGroupRequest,
@@ -132,34 +148,41 @@ import {
   L4ProxyRemoteAuth,
   AlgDetectResult,
   DefaultServerCertInfo,
+  RuleEngineItem,
+  OCSPStaplingParameters,
   CreateL4ProxyRulesRequest,
   DescribeDDoSAttackTopDataResponse,
   LoadBalancer,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
-  SecEntryValue,
+  ModifyL7AccRuleRequest,
+  MaxAge,
   DescribeCustomErrorPagesResponse,
   DeleteApplicationProxyResponse,
   AlgDetectRule,
+  SecEntryValue,
   DiffIPWhitelist,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
+  SetContentIdentifierParameters,
   RenewPlanRequest,
   DescribePrefetchTasksResponse,
   DescribeZoneSettingRequest,
   ModifyL4ProxyStatusResponse,
   FileVerification,
   ModifySecurityPolicyRequest,
+  DeleteL7AccRulesRequest,
   SmartRouting,
   CreateApplicationProxyResponse,
   BotUserRule,
   Task,
   DescribeL4ProxyRulesResponse,
   OriginHealthStatus,
+  ZoneConfig,
   CustomizedHeader,
   DescribeFunctionsRequest,
   ModifyDnsRecordsStatusRequest,
-  DeleteAliasDomainRequest,
+  ModifyHostsCertificateRequest,
   BotExtendAction,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
@@ -172,6 +195,8 @@ import {
   ApplicationProxyRule,
   UpstreamCertInfo,
   Zone,
+  RuleNormalActionParams,
+  ErrorPageParameters,
   DescribeRulesSettingResponse,
   BindSecurityTemplateToEntityResponse,
   ModifyL4ProxyRulesResponse,
@@ -185,7 +210,7 @@ import {
   DescribeZonesRequest,
   DescribeZoneConfigImportResultResponse,
   Tag,
-  ModifyFunctionRulePriorityRequest,
+  BindSharedCNAMEResponse,
   DeleteSharedCNAMERequest,
   ModifyRealtimeLogDeliveryTaskRequest,
   DescribeHostsSettingRequest,
@@ -197,12 +222,15 @@ import {
   CreatePrefetchTaskResponse,
   DescribeDefaultCertificatesRequest,
   ModifyApplicationProxyRuleResponse,
-  DDoS,
+  FailReason,
+  ModifyRequestHeaderParameters,
   CreateConfigGroupVersionResponse,
   DownloadL7LogsRequest,
+  WebSocketParameters,
   RuleItem,
   SlowRateConfig,
   Cache,
+  CustomTime,
   DetailHost,
   DescribeRealtimeLogDeliveryTasksResponse,
   DescribeConfigGroupVersionsResponse,
@@ -210,19 +238,23 @@ import {
   DeleteRealtimeLogDeliveryTaskResponse,
   RuleCondition,
   DescribeOverviewL7DataResponse,
+  MaxAgeParameters,
   DescribeEnvironmentsResponse,
+  CacheParameters,
   TimingDataItem,
   RateLimitUserRule,
   CreatePlanForZoneRequest,
   CreateL4ProxyRulesResponse,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
+  DescribeL7AccRulesRequest,
   DescribeFunctionRulesResponse,
   CacheKey,
   DownloadL4LogsResponse,
   BindSharedCNAMERequest,
   IpTableConfig,
   DeleteOriginGroupResponse,
+  ModifyOriginParameters,
   DescribeL4ProxyRequest,
   DescribeIdentificationsRequest,
   ModifyHostsCertificateResponse,
@@ -234,6 +266,7 @@ import {
   ModifyDnsRecordsRequest,
   IdentifyZoneRequest,
   CacheConfig,
+  DescribeL7AccSettingRequest,
   UpgradePlanResponse,
   AclConfig,
   JITVideoProcess,
@@ -243,8 +276,11 @@ import {
   CreateConfigGroupVersionRequest,
   AclUserRule,
   DescribeLoadBalancerListRequest,
+  AccessURLRedirectParameters,
   DescribeDDoSAttackEventRequest,
+  CacheConfigParameters,
   FunctionRuleCondition,
+  CacheKeyParameters,
   ModifyFunctionResponse,
   DescribeOriginGroupRequest,
   DescribeIPRegionRequest,
@@ -255,10 +291,12 @@ import {
   ImportZoneConfigResponse,
   CustomEndpoint,
   VerifyOwnershipRequest,
+  ResponseSpeedLimitParameters,
   DeleteL4ProxyRequest,
   DeleteApplicationProxyRequest,
+  AccelerateMainlandParameters,
   ModifyZoneStatusRequest,
-  FailReason,
+  UpstreamURLRewriteParameters,
   DescribeL4ProxyResponse,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
@@ -269,7 +307,10 @@ import {
   ModifyOriginGroupRequest,
   DeleteZoneResponse,
   CreateRuleResponse,
+  ModifyL7AccSettingResponse,
   BindZoneToPlanResponse,
+  UpstreamHTTP2Parameters,
+  DescribeL7AccSettingResponse,
   OriginInfo,
   CreateDnsRecordRequest,
   WafRule,
@@ -279,6 +320,7 @@ import {
   BindSharedCNAMEMap,
   DeleteRealtimeLogDeliveryTaskRequest,
   RulesSettingAction,
+  ForceRedirectHTTPSParameters,
   MutualTLS,
   Ipv6,
   ModifyApplicationProxyRuleRequest,
@@ -286,15 +328,18 @@ import {
   DescribeLoadBalancerListResponse,
   AlgDetectJS,
   SubRuleItem,
+  DescribeL7AccRulesResponse,
   DeleteSecurityIPGroupRequest,
   Grpc,
   CreateAliasDomainResponse,
   ClientIpCountry,
   DeleteApplicationProxyRuleRequest,
+  ModifyL7AccRuleResponse,
   FileAscriptionInfo,
   CreateRealtimeLogDeliveryTaskResponse,
   DescribeTopL7CacheDataResponse,
   DescribeFunctionRuntimeEnvironmentResponse,
+  GrpcParameters,
   RuleChoicePropertiesItem,
   DescribeSecurityTemplateBindingsResponse,
   ModifyAliasDomainStatusResponse,
@@ -327,16 +372,19 @@ import {
   HandleFunctionRuntimeEnvironmentRequest,
   ModifyL4ProxyRulesStatusRequest,
   DescribeCustomErrorPagesRequest,
-  DescribeTimingL4DataResponse,
+  CachePrefreshParameters,
   Action,
+  UpstreamFollowRedirectParameters,
   ApplicationProxy,
   ModifyApplicationProxyResponse,
   ModifySecurityIPGroupResponse,
+  SecurityType,
   ZoneSetting,
   ModifyL4ProxyRequest,
   RuleAndConditions,
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
+  ExceptUserRuleScope,
   PartialModule,
   DescribeZoneConfigImportResultRequest,
   ModifyApplicationProxyRuleStatusRequest,
@@ -345,16 +393,21 @@ import {
   FollowOrigin,
   IPRegionInfo,
   DestroyPlanResponse,
+  CacheKeyConfigParameters,
+  TLSConfigParameters,
   QueryCondition,
   RuleRewriteActionParams,
+  ClientIPHeaderParameters,
   ModifyAliasDomainResponse,
   DeleteDnsRecordsRequest,
-  ModifyHostsCertificateRequest,
+  OfflineCacheParameters,
+  DeleteAliasDomainRequest,
   DeleteFunctionRulesResponse,
   DescribeTopL7AnalysisDataResponse,
   ModifyContentIdentifierRequest,
   ClientIpHeader,
   Resource,
+  ModifyResponseHeaderParameters,
   DescribeOriginProtectionRequest,
   DeleteContentIdentifierResponse,
   HandleFunctionRuntimeEnvironmentResponse,
@@ -375,6 +428,7 @@ import {
   DescribeContentIdentifiersRequest,
   ExportZoneConfigRequest,
   L4ProxyRule,
+  CacheKeyQueryString,
   AdvancedFilter,
   DescribeDDoSAttackDataResponse,
   TemplateConfig,
@@ -383,6 +437,7 @@ import {
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
   ModifyZoneRequest,
+  ClientIPCountryParameters,
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
   DescribeAvailablePlansRequest,
@@ -399,6 +454,7 @@ import {
   ModifyFunctionRuleRequest,
   IncreasePlanQuotaRequest,
   FunctionRule,
+  UpstreamRequestCookie,
   DescribeDDoSAttackTopDataRequest,
   Quic,
   CreateCLSIndexRequest,
@@ -409,28 +465,40 @@ import {
   AccelerationDomain,
   ContentIdentifier,
   CreateCustomizeErrorPageResponse,
+  RuleEngineAction,
+  StatusCodeCacheParameters,
   RewriteAction,
   TemplateScope,
+  ErrorPage,
+  HTTP2Parameters,
   DescribeOverviewL7DataRequest,
   DeleteSharedCNAMEResponse,
   DDoSBlockData,
   DescribePrefetchTasksRequest,
+  ZoneConfigParameters,
   DnsRecord,
-  ModifyDnsRecordsResponse,
+  OriginPrivateParameters,
+  HSTSParameters,
   BindZoneToPlanRequest,
   DeleteFunctionResponse,
   IPWhitelist,
-  DeleteLoadBalancerRequest,
+  ModifyL7AccSettingRequest,
+  ModifyFunctionRulePriorityResponse,
   CreateCustomizeErrorPageRequest,
+  URLPath,
   DescribeSecurityIPGroupRequest,
   ModifyApplicationProxyStatusResponse,
   Identification,
   OriginGroupInLoadBalancer,
+  CheckRegionHealthStatus,
+  UpstreamRequestParameters,
   TopEntry,
   NsVerification,
   AccelerateMainland,
   StandardDebug,
+  AuthenticationParameters,
   BindSecurityTemplateToEntityRequest,
+  RuleEngineSubRule,
   IntelligenceRuleItem,
   ExportZoneConfigResponse,
   PostMaxSize,
@@ -442,13 +510,16 @@ import {
   CreateL4ProxyResponse,
   ModifySecurityPolicyResponse,
   DeleteLoadBalancerResponse,
+  DeleteL7AccRulesResponse,
   DescribeOriginGroupHealthStatusResponse,
   DescribeContentIdentifiersResponse,
+  CacheConfigCustomTime,
   SecurityTemplateBinding,
   CacheTag,
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
   CreateContentIdentifierResponse,
+  HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
   DescribeL4ProxyRulesRequest,
   AiRule,
@@ -461,7 +532,7 @@ import {
   CreatePurgeTaskRequest,
   DeleteDnsRecordsResponse,
   DescribePurgeTasksResponse,
-  CheckRegionHealthStatus,
+  HTTPResponseParameters,
   DescribeFunctionRulesRequest,
   DeployConfigGroupVersionResponse,
   RateLimitIntelligence,
@@ -469,6 +540,7 @@ import {
   QueryString,
   DescribeAccelerationDomainsRequest,
   DescribeTimingL4DataRequest,
+  DescribeTimingL4DataResponse,
   VanityNameServersIps,
 } from "./teo_models"
 
@@ -653,6 +725,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于修改[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中的规则，单次仅支持修改单条规则。
+   */
+  async ModifyL7AccRule(
+    req: ModifyL7AccRuleRequest,
+    cb?: (error: string, rep: ModifyL7AccRuleResponse) => void
+  ): Promise<ModifyL7AccRuleResponse> {
+    return this.request("ModifyL7AccRule", req, cb)
+  }
+
+  /**
    * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
    */
   async DescribeAccelerationDomains(
@@ -691,6 +773,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteApplicationProxyResponse) => void
   ): Promise<DeleteApplicationProxyResponse> {
     return this.request("DeleteApplicationProxy", req, cb)
+  }
+
+  /**
+   * 本接口用于修改[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+   */
+  async ModifyL7AccSetting(
+    req: ModifyL7AccSettingRequest,
+    cb?: (error: string, rep: ModifyL7AccSettingResponse) => void
+  ): Promise<ModifyL7AccSettingResponse> {
+    return this.request("ModifyL7AccSetting", req, cb)
   }
 
   /**
@@ -814,6 +906,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
   ): Promise<DescribeConfigGroupVersionDetailResponse> {
     return this.request("DescribeConfigGroupVersionDetail", req, cb)
+  }
+
+  /**
+   * 本接口用于查询[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则列表。
+   */
+  async DescribeL7AccRules(
+    req: DescribeL7AccRulesRequest,
+    cb?: (error: string, rep: DescribeL7AccRulesResponse) => void
+  ): Promise<DescribeL7AccRulesResponse> {
+    return this.request("DescribeL7AccRules", req, cb)
   }
 
   /**
@@ -969,7 +1071,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于修改站点配置
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccSetting](https://cloud.tencent.com/document/product/1552/115817)。
    */
   async ModifyZoneSetting(
     req: ModifyZoneSettingRequest,
@@ -999,13 +1101,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
+   * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
    */
-  async DescribeDnsRecords(
-    req: DescribeDnsRecordsRequest,
-    cb?: (error: string, rep: DescribeDnsRecordsResponse) => void
-  ): Promise<DescribeDnsRecordsResponse> {
-    return this.request("DescribeDnsRecords", req, cb)
+  async DescribeSecurityIPGroup(
+    req: DescribeSecurityIPGroupRequest,
+    cb?: (error: string, rep: DescribeSecurityIPGroupResponse) => void
+  ): Promise<DescribeSecurityIPGroupResponse> {
+    return this.request("DescribeSecurityIPGroup", req, cb)
   }
 
   /**
@@ -1086,6 +1188,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyPlanResponse) => void
   ): Promise<ModifyPlanResponse> {
     return this.request("ModifyPlan", req, cb)
+  }
+
+  /**
+   * 本接口用于删除[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则，支持批量删除。
+   */
+  async DeleteL7AccRules(
+    req: DeleteL7AccRulesRequest,
+    cb?: (error: string, rep: DeleteL7AccRulesResponse) => void
+  ): Promise<DeleteL7AccRulesResponse> {
+    return this.request("DeleteL7AccRules", req, cb)
   }
 
   /**
@@ -1323,7 +1435,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [RuleEngineAction](https://cloud.tencent.com/document/product/1552/80721#RuleEngineAction)。
    */
   async DescribeRulesSetting(
     req?: DescribeRulesSettingRequest,
@@ -1383,6 +1495,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 本接口用于在[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中创建规则，支持批量创建。
+   */
+  async CreateL7AccRules(
+    req: CreateL7AccRulesRequest,
+    cb?: (error: string, rep: CreateL7AccRulesResponse) => void
+  ): Promise<CreateL7AccRulesResponse> {
+    return this.request("CreateL7AccRules", req, cb)
+  }
+
+  /**
    * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
    */
   async DescribePurgeTasks(
@@ -1393,7 +1515,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 批量删除规则引擎规则。
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DeleteL7AccRules](https://cloud.tencent.com/document/product/1552/115821)。
    */
   async DeleteRules(
     req: DeleteRulesRequest,
@@ -1487,7 +1609,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询规则引擎规则。
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820)。
    */
   async DescribeRules(
     req: DescribeRulesRequest,
@@ -1558,6 +1680,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 本接口用于查询[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+   */
+  async DescribeL7AccSetting(
+    req: DescribeL7AccSettingRequest,
+    cb?: (error: string, rep: DescribeL7AccSettingResponse) => void
+  ): Promise<DescribeL7AccSettingResponse> {
+    return this.request("DescribeL7AccSetting", req, cb)
+  }
+
+  /**
    * 创建源站组，以源站组的方式管理业务源站。此处配置的源站组可于**添加加速域名**和**四层代理**等功能中引用。
    */
   async CreateOriginGroup(
@@ -1600,7 +1732,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于查询域名配置信息
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，可通过 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819) 和 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820) 来获取域名的详细配置。
    */
   async DescribeHostsSetting(
     req: DescribeHostsSettingRequest,
@@ -1681,7 +1813,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于查询站点的所有配置信息。
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819)。
    */
   async DescribeZoneSetting(
     req: DescribeZoneSettingRequest,
@@ -1775,13 +1907,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
+   * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
    */
-  async DescribeSecurityIPGroup(
-    req: DescribeSecurityIPGroupRequest,
-    cb?: (error: string, rep: DescribeSecurityIPGroupResponse) => void
-  ): Promise<DescribeSecurityIPGroupResponse> {
-    return this.request("DescribeSecurityIPGroup", req, cb)
+  async DescribeDnsRecords(
+    req: DescribeDnsRecordsRequest,
+    cb?: (error: string, rep: DescribeDnsRecordsResponse) => void
+  ): Promise<DescribeDnsRecordsResponse> {
+    return this.request("DescribeDnsRecords", req, cb)
   }
 
   /**

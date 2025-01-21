@@ -212,6 +212,24 @@ export interface OriginRecord {
 }
 
 /**
+ * 智能压缩配置。
+ */
+export interface CompressionParameters {
+  /**
+   * 智能压缩配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 支持的压缩算法列表。当 Switch 为 on 时，此字段必填，否则此字段不生效。取值有：
+<li>brotli：brotli 算法；</li>
+<li>gzip：gzip 算法。</li>
+   */
+  Algorithms?: Array<string>
+}
+
+/**
  * DescribeConfigGroupVersionDetail返回参数结构体
  */
 export interface DescribeConfigGroupVersionDetailResponse {
@@ -292,6 +310,27 @@ export interface OriginDetail {
    * @deprecated
    */
   VodeoBucketId?: string
+}
+
+/**
+ * HTTP 头部设置规则。
+ */
+export interface HeaderAction {
+  /**
+   * HTTP 头部设置方式。取值有：
+<li>set：设置。变更指定头部参数的取值为设置后的值；</li>
+<li>del：删除。删除指定的头部参数；</li>
+<li>add：增加。增加指定的头部参数。</li>
+   */
+  Action: string
+  /**
+   * HTTP 头部名称。
+   */
+  Name: string
+  /**
+   * HTTP 头部值。当 Action 取值为 set 或者 add 时，该参数必填；当 Action 取值为 del 时，该参数无需填写。
+   */
+  Value?: string
 }
 
 /**
@@ -394,13 +433,29 @@ export interface PrepaidPlanParam {
 }
 
 /**
- * BindSharedCNAME返回参数结构体
+ * 访问 URL 重定向 配置参数。
  */
-export interface BindSharedCNAMEResponse {
+export interface AccessURLRedirectQueryString {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 执行动作，取值有：
+<li>full：全部保留；</li>
+<li>ignore：全部忽略。</li>
    */
-  RequestId?: string
+  Action?: string
+}
+
+/**
+ * ModifyFunctionRulePriority请求参数结构体
+ */
+export interface ModifyFunctionRulePriorityRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 规则 ID 列表，必须填入调整优先级后的所有规则 ID，多条规则执行顺序依次从上往下，不填写保持原优先级顺序。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -685,6 +740,18 @@ export interface DescribeAliasDomainsRequest {
 <li>alias-name：按照别称域名名称进行过滤。</li>模糊查询时仅支持过滤字段名为 alias-name。
    */
   Filters?: Array<AdvancedFilter>
+}
+
+/**
+ * QUIC 配置项。
+ */
+export interface QUICParameters {
+  /**
+   * QUIC 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -1204,6 +1271,30 @@ export interface IdentifyZoneResponse {
 }
 
 /**
+ * 回源请求参数查询字符串配置。
+ */
+export interface UpstreamRequestQueryString {
+  /**
+   * 回源请求参数查询字符串配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 查询字符串模式。当 Switch 为 on 时，该参数必填。取值有：
+<li>full：全部保留；</li>
+<li>ignore：全部忽略；</li>
+<li>includeCustom：保留部分参数；</li>
+<li>excludeCustom：忽略部分参数。</li>
+   */
+  Action?: string
+  /**
+   * 指定参数值。仅当查询字符串模式 Action 为 includeCustom 或者 excludeCustom 时该参数生效，用于指定需要保留或者忽略的参数。最大支持 10 个参数。
+   */
+  Values?: Array<string>
+}
+
+/**
  * ModifyLoadBalancer返回参数结构体
  */
 export interface ModifyLoadBalancerResponse {
@@ -1311,6 +1402,27 @@ export interface CreateFunctionRuleRequest {
    * 规则描述，最大支持 60 个字符。
    */
   Remark?: string
+}
+
+/**
+ * 子规则分支。
+ */
+export interface RuleBranch {
+  /**
+   * [匹配条件
+](https://cloud.tencent.com/document/product/1552/90438#33f65828-c6c6-4b66-a011-25a20b548d5d)。
+   */
+  Condition?: string
+  /**
+   * [操作](https://cloud.tencent.com/document/product/1552/90438#c7bd7e02-9247-4a72-b0e4-11c27cadb198)。<br>注意：Actions 和 SubRules 不可同时为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Actions?: Array<RuleEngineAction>
+  /**
+   * 子规则列表。此列表中时存在多条规则，按照从上往下的顺序依次执行。<br>注意：SubRules 和 Actions 不可同时为空。且当前只支持填写一层 SubRules。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubRules?: Array<RuleEngineSubRule>
 }
 
 /**
@@ -1522,6 +1634,18 @@ export interface DescribeTimingL7CacheDataRequest {
 }
 
 /**
+ * IPv6 访问配置。
+ */
+export interface IPv6Parameters {
+  /**
+   * IPv6 访问功能配置，取值有：
+<li>on：开启 IPv6 访问功能；</li>
+<li>off：关闭 IPv6 访问功能。</li>
+   */
+  Switch?: string
+}
+
+/**
  * CreateFunction请求参数结构体
  */
 export interface CreateFunctionRequest {
@@ -1541,6 +1665,20 @@ export interface CreateFunctionRequest {
    * 函数描述，最大支持 60 个字符。
    */
   Remark?: string
+}
+
+/**
+ * POST 请求上传文件流式传输最大限制。
+ */
+export interface PostMaxSizeParameters {
+  /**
+   * 是否开启 POST 请求上传文件限制，单位为 Byte，平台默认为限制为 32 * 2<sup>20</sup> Byte，取值有：<li>on：开启限制；</li><li>off：关闭限制。</li>
+   */
+  Switch?: string
+  /**
+   * POST 请求上传文件流式传输最大限制，单位为 Byte，取值：1 * 2<sup>20</sup> Byte～500 * 2<sup>20</sup> Byte。
+   */
+  MaxSize?: number
 }
 
 /**
@@ -1636,6 +1774,20 @@ export interface CodeAction {
 }
 
 /**
+ * CreateL7AccRules返回参数结构体
+ */
+export interface CreateL7AccRulesResponse {
+  /**
+   * 规则 ID 列表。
+   */
+  RuleIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 缓存预刷新
  */
 export interface CachePrefresh {
@@ -1681,6 +1833,20 @@ export interface ImageOptimize {
 <li>off：关闭。</li>
    */
   Switch: string
+}
+
+/**
+ * CreateL7AccRules请求参数结构体
+ */
+export interface CreateL7AccRulesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 规则内容。
+   */
+  Rules: Array<RuleEngineItem>
 }
 
 /**
@@ -1810,13 +1976,41 @@ export interface OriginGroupReference {
 }
 
 /**
- * ModifyFunctionRulePriority返回参数结构体
+ * DeleteLoadBalancer请求参数结构体
  */
-export interface ModifyFunctionRulePriorityResponse {
+export interface DeleteLoadBalancerRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 站点 ID。
    */
-  RequestId?: string
+  ZoneId: string
+  /**
+   * 负载均衡实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
+ * 自定义 Cache Key Cookie 配置参数。
+ */
+export interface CacheKeyCookie {
+  /**
+   * 功能开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 缓存动作，取值有：
+<li>full：全部保留；</li>
+<li> ignore：全部忽略；</li>
+<li> includeCustom：保留指定参数；</li>
+<li>excludeCustom：忽略指定参数。</li>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Action?: string
+  /**
+   * 自定义 Cache Key Cookie 名称列表。<br>注意：当 Action 为 includeCustom 或 excludeCustom 时，此字段必填；当 Action 为 full 或 ignore 时，无需填写此字段，若填写则不生效。
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -1899,6 +2093,26 @@ export interface SubRule {
    * 执行的功能。
    */
   Actions: Array<Action>
+}
+
+/**
+ * Debug 调试结构体。
+ */
+export interface StandardDebugParameters {
+  /**
+   * Debug 功能开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP 网段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试；::/0 表示允许所有 IPv6 客户端进行调试；不能填写 127.0.0.1。<br>注意：当 Switch 字段为 on 时，此字段必填，且填写个数为 1～100；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  AllowClientIPList?: Array<string>
+  /**
+   * Debug 功能到期时间。超出设置的时间，则功能失效。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Expires?: string
 }
 
 /**
@@ -2044,6 +2258,20 @@ export interface DownloadL4LogsRequest {
 }
 
 /**
+ * 状态码缓存 TTL 配置参数内部结构。
+ */
+export interface StatusCodeCacheParam {
+  /**
+   * 状态码，取值为 400、 401、403、 404、 405、 407、 414、 500、 501、 502、 503、 504、 509、 514 之一。
+   */
+  StatusCode?: number
+  /**
+   * 缓存时间数值，单位为秒，取值：0～31536000。
+   */
+  CacheTime?: number
+}
+
+/**
  * ModifyZoneSetting请求参数结构体
  */
 export interface ModifyZoneSettingRequest {
@@ -2185,6 +2413,16 @@ export interface OriginGroupHealthStatus {
 }
 
 /**
+ * ModifyDnsRecords返回参数结构体
+ */
+export interface ModifyDnsRecordsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 计费数据过滤条件。
  */
 export interface BillingDataFilter {
@@ -2301,6 +2539,22 @@ export interface CustomField {
 }
 
 /**
+ * 自定义 Cache Key HTTP 请求头配置参数。
+ */
+export interface CacheKeyHeader {
+  /**
+   * 功能开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 自定义 Cache Key HTTP 请求头列表。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Values?: Array<string>
+}
+
+/**
  * DeleteZone请求参数结构体
  */
 export interface DeleteZoneRequest {
@@ -2311,15 +2565,15 @@ export interface DeleteZoneRequest {
 }
 
 /**
- * 安全类型配置项。
+ * 分片回源配置参数。
  */
-export interface SecurityType {
+export interface RangeOriginPullParameters {
   /**
-   * 安全类型开关，取值为：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 分片回源开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  Switch: string
+  Switch?: string
 }
 
 /**
@@ -2476,52 +2730,31 @@ export interface ModifyPlanRequest {
 }
 
 /**
- * 例外规则的生效范围。
+ * 访问 URL 重定向 HostName 配置参数。
  */
-export interface ExceptUserRuleScope {
+export interface HostName {
   /**
-   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-<li>complete：完全跳过模式；</li>
-<li>partial：部分跳过模式。</li>
+   * 目标 HostName 配置，取值有：
+<li>follow：跟随请求；</li>
+<li>custom：自定义。</li>
    */
-  Type?: string
+  Action?: string
   /**
-   * 生效的模块，该字段取值有：
-<li>waf：托管规则；</li>
-<li>rate：速率限制；</li>
-<li>acl：自定义规则；</li>
-<li>cc：cc攻击防护；</li>
-<li>bot：Bot防护。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目标 HostName 自定义取值，最大长度 1024。<br>注意：当 Action 为 custom 时，此字段必填；当 Action 为 follow 时，此字段不生效。
    */
-  Modules?: Array<string>
-  /**
-   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartialModules?: Array<PartialModule>
-  /**
-   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SkipConditions?: Array<SkipCondition>
+  Value?: string
 }
 
 /**
- * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ * DDoS配置
  */
-export interface MaxAge {
+export interface DDoS {
   /**
-   * 是否遵循源站，取值有：
-<li>on：遵循源站，忽略MaxAge 时间设置；</li>
-<li>off：不遵循源站，使用MaxAge 时间设置。</li>
+   * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  FollowOrigin?: string
-  /**
-   * MaxAge 时间设置，单位秒，最大365天。
-注意：时间为0，即不缓存。
-   */
-  MaxAgeTime?: number
+  Switch: string
 }
 
 /**
@@ -2568,6 +2801,18 @@ export interface EntityStatus {
 }
 
 /**
+ * 智能加速配置。
+ */
+export interface SmartRoutingParameters {
+  /**
+   * 智能加速配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * ModifyAliasDomain请求参数结构体
  */
 export interface ModifyAliasDomainRequest {
@@ -2611,17 +2856,13 @@ export interface CreateFunctionRuleResponse {
 }
 
 /**
- * 规则引擎条件常规动作参数
+ * 七层回源超时配置。
  */
-export interface RuleNormalActionParams {
+export interface HTTPUpstreamTimeoutParameters {
   /**
-   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   * HTTP 应答超时时间，单位为秒，取值：5～600。
    */
-  Name: string
-  /**
-   * 参数值。
-   */
-  Values: Array<string>
+  ResponseTimeout?: number
 }
 
 /**
@@ -2928,6 +3169,49 @@ export interface DefaultServerCertInfo {
 }
 
 /**
+ * 规则引擎规则详情。
+ */
+export interface RuleEngineItem {
+  /**
+   * 规则状态。取值有：<li> enable: 启用； </li><li> disable: 未启用。</li>
+   */
+  Status?: string
+  /**
+   * 规则 ID。规则的唯一性标识，当调用 ModifyL7AccRules 时，该参数必填。
+   */
+  RuleId?: string
+  /**
+   * 规则名称。名称长度限制不超过 255 个字符。
+   */
+  RuleName?: string
+  /**
+   * 规则注释。可以填写多个注释。
+   */
+  Description?: Array<string>
+  /**
+   * 子规则分支。此列表当前只支持填写一项规则，多填无效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Branches?: Array<RuleBranch>
+  /**
+   * 规则优先级。仅作为出参使用。
+   */
+  RulePriority?: number
+}
+
+/**
+ * OCSP 装订配置参数。
+ */
+export interface OCSPStaplingParameters {
+  /**
+   * OCSP 装订配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * CreateL4ProxyRules请求参数结构体
  */
 export interface CreateL4ProxyRulesRequest {
@@ -3083,29 +3367,34 @@ export interface ExceptUserRuleCondition {
 }
 
 /**
- * 安全数据维度值信息
+ * ModifyL7AccRule请求参数结构体
  */
-export interface SecEntryValue {
+export interface ModifyL7AccRuleRequest {
   /**
-   * 指标名称。
+   * 站点 ID。
    */
-  Metric: string
+  ZoneId: string
   /**
-   * 时序数据详情。
+   * 需要修改的规则。您可以先通过 DescribeL7AccRules 接口来获取需要修改的规则的 Ruleid，然后传入修改后的规则内容，原规则内容会被覆盖式更新。
    */
-  Detail: Array<TimingDataItem>
+  Rule: RuleEngineItem
+}
+
+/**
+ * 浏览器缓存规则配置，用于设置 MaxAge 默认值，默认为关闭状态
+ */
+export interface MaxAge {
   /**
-   * 最大值。
+   * 是否遵循源站，取值有：
+<li>on：遵循源站，忽略MaxAge 时间设置；</li>
+<li>off：不遵循源站，使用MaxAge 时间设置。</li>
    */
-  Max: number
+  FollowOrigin?: string
   /**
-   * 平均值。
+   * MaxAge 时间设置，单位秒，最大365天。
+注意：时间为0，即不缓存。
    */
-  Avg: number
-  /**
-   * 数据总和。
-   */
-  Sum: number
+  MaxAgeTime?: number
 }
 
 /**
@@ -3172,6 +3461,32 @@ export interface AlgDetectRule {
 }
 
 /**
+ * 安全数据维度值信息
+ */
+export interface SecEntryValue {
+  /**
+   * 指标名称。
+   */
+  Metric: string
+  /**
+   * 时序数据详情。
+   */
+  Detail: Array<TimingDataItem>
+  /**
+   * 最大值。
+   */
+  Max: number
+  /**
+   * 平均值。
+   */
+  Avg: number
+  /**
+   * 数据总和。
+   */
+  Sum: number
+}
+
+/**
  * 最新IP白名单列表相比于当前IP白名单列表的区别
  */
 export interface DiffIPWhitelist {
@@ -3233,6 +3548,16 @@ export interface ModifyRuleRequest {
    * 规则标签。
    */
   Tags?: Array<string>
+}
+
+/**
+ * 内容标识配置参数。
+ */
+export interface SetContentIdentifierParameters {
+  /**
+   * 内容标识id
+   */
+  ContentIdentifier?: string
 }
 
 /**
@@ -3331,6 +3656,20 @@ export interface ModifySecurityPolicyRequest {
 注意：当使用本参数时，Entity 参数不生效。请勿同时使用本参数和 Entity 参数。
    */
   TemplateId?: string
+}
+
+/**
+ * DeleteL7AccRules请求参数结构体
+ */
+export interface DeleteL7AccRulesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 需要删除的规则 ID 列表。您可以通过 DescribeL7AccRules 获取 Ruleid。
+   */
+  RuleIds: Array<string>
 }
 
 /**
@@ -3517,6 +3856,122 @@ export interface OriginHealthStatus {
 }
 
 /**
+ * 站点加速配置。
+ */
+export interface ZoneConfig {
+  /**
+   * 智能加速配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartRouting?: SmartRoutingParameters
+  /**
+   * 缓存过期时间配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cache?: CacheConfigParameters
+  /**
+   * 浏览器缓存配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxAge?: MaxAgeParameters
+  /**
+   * 节点缓存键配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheKey?: CacheKeyConfigParameters
+  /**
+   * 缓存预刷新配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CachePrefresh?: CachePrefreshParameters
+  /**
+   * 离线缓存配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OfflineCache?: OfflineCacheParameters
+  /**
+   * 智能压缩配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compression?: CompressionParameters
+  /**
+   * 访问协议强制 HTTPS 跳转配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForceRedirectHTTPS?: ForceRedirectHTTPSParameters
+  /**
+   * HSTS 相关配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSTS?: HSTSParameters
+  /**
+   * TLS 相关配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TLSConfig?: TLSConfigParameters
+  /**
+   * OCSP 装订配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OCSPStapling?: OCSPStaplingParameters
+  /**
+   * HTTP2 相关配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTP2?: HTTP2Parameters
+  /**
+   * QUIC 访问配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QUIC?: QUICParameters
+  /**
+   * HTTP2 回源配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamHTTP2?: UpstreamHTTP2Parameters
+  /**
+   * IPv6 访问配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IPv6?: IPv6Parameters
+  /**
+   * WebSocket 配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebSocket?: WebSocketParameters
+  /**
+   * POST 请求传输配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostMaxSize?: PostMaxSizeParameters
+  /**
+   * 客户端 IP 回源请求头配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPHeader?: ClientIPHeaderParameters
+  /**
+   * 回源时是否携带客户端 IP 所属地域信息的配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPCountry?: ClientIPCountryParameters
+  /**
+   * gRPC 协议支持配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Grpc?: GrpcParameters
+  /**
+   * 中国大陆加速优化配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccelerateMainland?: AccelerateMainlandParameters
+  /**
+   * 标准 Debug 配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StandardDebug?: StandardDebugParameters
+}
+
+/**
  * 负载均衡实例 HTTP/HTTPS 健康检查策略下可配置的自定义头部。
  */
 export interface CustomizedHeader {
@@ -3579,17 +4034,41 @@ export interface ModifyDnsRecordsStatusRequest {
 }
 
 /**
- * DeleteAliasDomain请求参数结构体
+ * ModifyHostsCertificate请求参数结构体
  */
-export interface DeleteAliasDomainRequest {
+export interface ModifyHostsCertificateRequest {
   /**
    * 站点 ID。
    */
   ZoneId: string
   /**
-   * 待删除别称域名名称。如果为空，则不执行删除操作。
+   * 需要修改证书配置的加速域名。
    */
-  AliasNames?: Array<string>
+  Hosts: Array<string>
+  /**
+   * 配置服务端证书的模式，取值有：
+<li>disable：不配置服务端证书；</li>
+<li>eofreecert：配置 EdgeOne 免费服务端证书；</li>
+<li>sslcert：配置 SSL 托管服务端证书；</li>
+不填写表示服务端证书保持原有配置。
+   */
+  Mode?: string
+  /**
+   * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
+   */
+  ServerCertInfo?: Array<ServerCertInfo>
+  /**
+   * 托管类型，取值有：
+<li>none：不托管EO；</li>
+<li>apply：托管EO</li>
+不填，默认取值为none。
+   * @deprecated
+   */
+  ApplyType?: string
+  /**
+   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
+   */
+  ClientCertInfo?: MutualTLS
 }
 
 /**
@@ -3995,6 +4474,31 @@ export interface Zone {
 }
 
 /**
+ * 规则引擎条件常规动作参数
+ */
+export interface RuleNormalActionParams {
+  /**
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   */
+  Name: string
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
+}
+
+/**
+ * 自定义错误页面配置参数。
+ */
+export interface ErrorPageParameters {
+  /**
+   * 自定义错误页面配置列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorPageParams?: Array<ErrorPage>
+}
+
+/**
  * DescribeRulesSetting返回参数结构体
  */
 export interface DescribeRulesSettingResponse {
@@ -4300,17 +4804,13 @@ export interface Tag {
 }
 
 /**
- * ModifyFunctionRulePriority请求参数结构体
+ * BindSharedCNAME返回参数结构体
  */
-export interface ModifyFunctionRulePriorityRequest {
+export interface BindSharedCNAMEResponse {
   /**
-   * 站点 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-  /**
-   * 规则 ID 列表，必须填入调整优先级后的所有规则 ID，多条规则执行顺序依次从上往下，不填写保持原优先级顺序。
-   */
-  RuleIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -4560,15 +5060,28 @@ export interface ModifyApplicationProxyRuleResponse {
 }
 
 /**
- * DDoS配置
+ * 失败原因
  */
-export interface DDoS {
+export interface FailReason {
   /**
-   * 开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 失败原因。
    */
-  Switch: string
+  Reason: string
+  /**
+   * 处理失败的资源列表。
+   */
+  Targets: Array<string>
+}
+
+/**
+ * 修改 HTTP 回源请求头配置参数。
+ */
+export interface ModifyRequestHeaderParameters {
+  /**
+   * HTTP 头部设置规则列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderActions?: Array<HeaderAction>
 }
 
 /**
@@ -4613,6 +5126,22 @@ export interface DownloadL7LogsRequest {
    * 分页的偏移量，默认值为 0。
    */
   Offset?: number
+}
+
+/**
+ * WebSocket 配置。
+ */
+export interface WebSocketParameters {
+  /**
+   * WebSocket 超时时间配置开关，取值有：
+<li>on：使用 Timeout 作为 WebSocket 超时时间；</li>
+<li>off：平台仍支持 WebSocket 连接，此时使用系统默认的 15 秒为超时时间。</li>
+   */
+  Switch?: string
+  /**
+   * 超时时间，单位为秒，最大超时时间 120 秒。<br>注意：当 Switch 为 on 时，此字段必填，否则此字段不生效。
+   */
+  Timeout?: number
 }
 
 /**
@@ -4693,6 +5222,28 @@ export interface Cache {
    * @deprecated
    */
   IgnoreCacheControl?: string
+}
+
+/**
+ * 节点缓存 TTL 自定义缓存时间参数配置。
+ */
+export interface CustomTime {
+  /**
+   * 自定义缓存时间开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 忽略源站 CacheControl 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  IgnoreCacheControl?: string
+  /**
+   * 自定义缓存时间数值，单位为秒，取值：0～315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  CacheTime?: number
 }
 
 /**
@@ -4948,6 +5499,22 @@ export interface DescribeOverviewL7DataResponse {
 }
 
 /**
+ * 浏览器缓存 TTL 配置参数。
+ */
+export interface MaxAgeParameters {
+  /**
+   * 遵循源站 Cache-Control 开关，取值有：
+<li>on：遵循源站，忽略 CacheTime 时间设置；</li>
+<li>off：不遵循源站，使用 CacheTime 时间设置。</li>
+   */
+  FollowOrigin?: string
+  /**
+   * 自定义缓存时间数值，单位为秒，取值：0～315360000。<br>注意：当 FollowOrigin 为 off 时，表示不遵循源站，使用 CacheTime 设置缓存时间，否则此字段不生效。
+   */
+  CacheTime?: number
+}
+
+/**
  * DescribeEnvironments返回参数结构体
  */
 export interface DescribeEnvironmentsResponse {
@@ -4963,6 +5530,27 @@ export interface DescribeEnvironmentsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点缓存 TTL 配置参数。
+ */
+export interface CacheParameters {
+  /**
+   * 缓存遵循源站。不填表示不设置该配置，FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FollowOrigin?: FollowOrigin
+  /**
+   * 不缓存。不填表示不设置该配置，FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoCache?: NoCache
+  /**
+   * 自定义缓存时间。不填表示不设置该配置，FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomTime?: CustomTime
 }
 
 /**
@@ -5144,6 +5732,29 @@ export interface ModifyFunctionRuleResponse {
 }
 
 /**
+ * DescribeL7AccRules请求参数结构体
+ */
+export interface DescribeL7AccRulesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 过滤条件，Filters.Values 的上限为 20，不填写此参数时默认按顺序返回站点下的规则。详细的过滤条件如下：
+<li>rule-id：按照规则 ID 进行过滤。</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页查询限制数目，默认值：20，上限：1000。
+   */
+  Limit?: number
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+}
+
+/**
  * DescribeFunctionRules返回参数结构体
  */
 export interface DescribeFunctionRulesResponse {
@@ -5246,6 +5857,56 @@ export interface DeleteOriginGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改源站配置参数。
+ */
+export interface ModifyOriginParameters {
+  /**
+   * 源站类型。取值有：
+<li>IPDomain：IPV4、IPV6 或域名类型源站；</li>
+<li>OriginGroup：源站组类型源站；</li>
+<li>LoadBalance：负载均衡，该功能内测中，如需使用，请提工单或联系智能客服；</li>
+<li>COS：腾讯云 COS 对象存储源站；</li>
+<li>AWSS3：支持 AWS S3 协议的所有对象存储源站。</li>
+   */
+  OriginType?: string
+  /**
+   * 源站地址，根据 OriginType 的取值分为以下情况：
+<li>当 OriginType = IPDomain 时，该参数请填写 IPV4、IPV6 地址或域名；</li>
+<li>当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；</li>
+<li>当 OriginType = AWSS3，该参数请填写 S3 桶的访问域名；</li>
+<li>当 OriginType = OriginGroup 时，该参数请填写源站组 ID；</li>
+<li>当 OriginType = LoadBalance 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放。</li>
+   */
+  Origin?: string
+  /**
+   * 回源协议配置。当 OriginType 取值为 IPDomain、OriginGroup、LoadBalance 时该参数必填。取值有：
+<li>http：使用 HTTP 协议；</li>
+<li>https：使用 HTTPS 协议；</li>
+<li>follow：协议跟随。</li>
+   */
+  OriginProtocol?: string
+  /**
+   * HTTP 回源端口，取值范围 1～65535。该参数仅当回源协议 OriginProtocol 为 http 或者 follow 时生效。
+   */
+  HTTPOriginPort?: number
+  /**
+   * HTTPS 回源端口，取值范围 1～65535。该参数仅当回源协议 OriginProtocol 为 https 或者 follow 时生效。
+   */
+  HTTPSOriginPort?: number
+  /**
+   * 指定是否允许访问私有对象存储源站，该参数仅当源站类型 OriginType = COS 或 AWSS3 时会生效，取值有：
+<li>on：使用私有鉴权；</li>
+<li>off：不使用私有鉴权。</li>不填写时，默认值为off。
+   */
+  PrivateAccess?: string
+  /**
+   * 私有鉴权使用参数，该参数仅当 OriginType = AWSS3 且 PrivateAccess = on 时会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateParameters?: OriginPrivateParameters
 }
 
 /**
@@ -5474,6 +6135,16 @@ export interface CacheConfig {
 }
 
 /**
+ * DescribeL7AccSetting请求参数结构体
+ */
+export interface DescribeL7AccSettingRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+}
+
+/**
  * UpgradePlan返回参数结构体
  */
 export interface UpgradePlanResponse {
@@ -5686,6 +6357,38 @@ export interface DescribeLoadBalancerListRequest {
 }
 
 /**
+ * 访问 URL 重定向 配置参数。
+ */
+export interface AccessURLRedirectParameters {
+  /**
+   * 状态码，取值为 301、302、303、307、308 之一。
+   */
+  StatusCode?: number
+  /**
+   * 目标请求协议，取值有：
+<li>http：目标请求协议 HTTP；</li>
+<li>https：目标请求协议 HTTPS；</li>
+<li>follow：跟随请求。</li>
+   */
+  Protocol?: string
+  /**
+   * 目标 HostName 。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostName?: HostName
+  /**
+   * 目标路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  URLPath?: URLPath
+  /**
+   * 携带查询参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryString?: AccessURLRedirectQueryString
+}
+
+/**
  * DescribeDDoSAttackEvent请求参数结构体
  */
 export interface DescribeDDoSAttackEventRequest {
@@ -5739,6 +6442,27 @@ export interface DescribeDDoSAttackEventRequest {
 }
 
 /**
+ * 节点缓存 TTL 配置参数。
+ */
+export interface CacheConfigParameters {
+  /**
+   * 遵循源站缓存配置。FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FollowOrigin?: FollowOrigin
+  /**
+   * 不缓存配置。FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoCache?: NoCache
+  /**
+   * 自定义缓存时间配置。FollowOrigin、NoCache、CustomTime 最多只能配置一个 Switch 为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomTime?: CacheConfigCustomTime
+}
+
+/**
  * 边缘函数触发规则条件。
  */
 export interface FunctionRuleCondition {
@@ -5746,6 +6470,97 @@ export interface FunctionRuleCondition {
    * 边缘函数触发规则条件，该列表内所有项全部满足即判断该条件满足。
    */
   RuleConditions: Array<RuleCondition>
+}
+
+/**
+ * 自定义 Cache Key 配置参数。该配置参数的 FullURLCache 和 QueryString 采用组合表达，具体示例可以参考：
+- 查询字符串全部保留。开启忽略大小写。
+```
+{
+  "CacheKey": {
+    "FullURLCache": "on",
+    "QueryString": {
+      "Switch": "off"
+    },
+    "IgnoreCase": "on"
+  }
+}
+```
+- 查询字符串全部忽略。开启忽略大小写。
+```
+{
+  "CacheKey": {
+    "FullURLCache": "off",
+    "QueryString": {
+      "Switch": "off"
+    },
+    "IgnoreCase": "on"
+  }
+}
+```
+- 查询字符串保留指定参数。关闭忽略大小写。
+```
+{
+  "CacheKey": {
+    "FullURLCache": "off",
+    "QueryString": {
+        "Switch": "on",
+        "Action": "includeCustom",
+        "Values": ["name1","name2","name3"]
+    },
+    "IgnoreCase": "off"
+  }
+}
+```
+- 查询字符串忽略指定参数。关闭忽略大小写。
+```
+{
+  "CacheKey": {
+    "FullURLCache": "off",
+    "QueryString": {
+        "Switch": "on",
+        "Action": "excludeCustom",
+        "Values": ["name1","name2","name3"]
+    },
+    "IgnoreCase": "off"
+  }
+}
+```
+ */
+export interface CacheKeyParameters {
+  /**
+   * 查询字符串全部保留开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>注意：FullURLCache、IgnoreCase、Header、Scheme、Cookie 至少设置一个配置。此字段和 QueryString.Switch 必须同时设置，但不能同为 on。
+   */
+  FullURLCache?: string
+  /**
+   * 查询字符串保留配置参数。此字段和 FullURLCache 必须同时设置，但不能同为 on。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryString?: CacheKeyQueryString
+  /**
+   * 忽略大小写开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>注意：FullURLCache、IgnoreCase、Header、Scheme、Cookie 至少设置一个配置。
+   */
+  IgnoreCase?: string
+  /**
+   * HTTP 请求头配置参数。FullURLCache、IgnoreCase、Header、Scheme、Cookie 至少设置一个配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Header?: CacheKeyHeader
+  /**
+   * 请求协议开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>注意：FullURLCache、IgnoreCase、Header、Scheme、Cookie 至少设置一个配置。
+   */
+  Scheme?: string
+  /**
+   * Cookie 配置参数。FullURLCache、IgnoreCase、Header、Scheme、Cookie 至少设置一个配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cookie?: CacheKeyCookie
 }
 
 /**
@@ -5917,6 +6732,27 @@ export interface VerifyOwnershipRequest {
 }
 
 /**
+ * 单连接下载限速配置参数。
+ */
+export interface ResponseSpeedLimitParameters {
+  /**
+   * 下载限速模式，取值有：
+<li>LimitUponDownload：全过程下载限速；</li>
+<li>LimitAfterSpecificBytesDownloaded：全速下载特定字节后开始限速；</li>
+<li>LimitAfterSpecificSecondsDownloaded：全速下载特定时间后开始限速。</li>
+   */
+  Mode: string
+  /**
+   * 限速值，单位为：KB/s，填写数值，指定限速大小。
+   */
+  MaxSpeed: string
+  /**
+   * 限速开始值，可以为下载大小或指定时长，单位为：KB或s，当 Mode 取值为 LimitAfterSpecificBytesDownloaded 或 LimitAfterSpecificSecondsDownloaded 时，该参数必填。填写数值，指定下载大小或指定时长。
+   */
+  StartAt?: string
+}
+
+/**
  * DeleteL4Proxy请求参数结构体
  */
 export interface DeleteL4ProxyRequest {
@@ -5945,6 +6781,18 @@ export interface DeleteApplicationProxyRequest {
 }
 
 /**
+ * 中国大陆加速优化配置。
+ */
+export interface AccelerateMainlandParameters {
+  /**
+   * 中国大陆加速优化配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * ModifyZoneStatus请求参数结构体
  */
 export interface ModifyZoneStatusRequest {
@@ -5961,17 +6809,24 @@ export interface ModifyZoneStatusRequest {
 }
 
 /**
- * 失败原因
+ * 回源 URL 重写 配置参数。
  */
-export interface FailReason {
+export interface UpstreamURLRewriteParameters {
   /**
-   * 失败原因。
+   * 回源 URL 重写类型，仅支持填写 Path。
    */
-  Reason: string
+  Type?: string
   /**
-   * 处理失败的资源列表。
+   * 回源 URL 重写动作。取值有：
+<li>replace：替换路径前缀；</li>
+<li>addPrefix：增加路径前缀；</li>
+<li>rmvPrefix：移除路径前缀。</li>
    */
-  Targets: Array<string>
+  Action?: string
+  /**
+   * 回源 URL 重写值，最大长度 1024，必须以 / 开头。<br>注意：当 Action 为 addPrefix 时，不能以 / 结尾；当 Action 为 rmvPrefix 时，不能存在 *。
+   */
+  Value?: string
 }
 
 /**
@@ -6160,9 +7015,46 @@ export interface CreateRuleResponse {
 }
 
 /**
+ * ModifyL7AccSetting返回参数结构体
+ */
+export interface ModifyL7AccSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindZoneToPlan返回参数结构体
  */
 export interface BindZoneToPlanResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HTTP2 回源配置。
+ */
+export interface UpstreamHTTP2Parameters {
+  /**
+   * HTTP2 回源配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
+ * DescribeL7AccSetting返回参数结构体
+ */
+export interface DescribeL7AccSettingResponse {
+  /**
+   * 站点加速全局配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneSetting?: ZoneConfigParameters
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6432,6 +7324,24 @@ export interface RulesSettingAction {
 }
 
 /**
+ * 访问协议强制 HTTPS 跳转配置。
+ */
+export interface ForceRedirectHTTPSParameters {
+  /**
+   * 访问强制跳转配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 重定向状态码。当 Switch 为 on 时，此字段必填，否则此字段不生效。取值有：
+<li>301：301跳转；</li>
+<li>302：302跳转。</li>
+   */
+  RedirectStatusCode?: number
+}
+
+/**
  * HTTPS 双向认证。
  */
 export interface MutualTLS {
@@ -6612,6 +7522,25 @@ export interface SubRuleItem {
 }
 
 /**
+ * DescribeL7AccRules返回参数结构体
+ */
+export interface DescribeL7AccRulesResponse {
+  /**
+   * 规则总数。
+   */
+  TotalCount?: number
+  /**
+   * 规则列表，规则按照从上到下的顺序执行，详情参考[规则生效优先级](https://cloud.tencent.com/document/product/1552/70901#.E4.BC.98.E5.85.88.E7.BA.A7)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<RuleEngineItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSecurityIPGroup请求参数结构体
  */
 export interface DeleteSecurityIPGroupRequest {
@@ -6683,6 +7612,16 @@ export interface DeleteApplicationProxyRuleRequest {
 }
 
 /**
+ * ModifyL7AccRule返回参数结构体
+ */
+export interface ModifyL7AccRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 站点归属权校验——文件校验信息。
  */
 export interface FileAscriptionInfo {
@@ -6741,6 +7680,18 @@ export interface DescribeFunctionRuntimeEnvironmentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * gRPC 配置项。
+ */
+export interface GrpcParameters {
+  /**
+   * gRPC 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -7651,22 +8602,19 @@ export interface DescribeCustomErrorPagesRequest {
 }
 
 /**
- * DescribeTimingL4Data返回参数结构体
+ * 缓存预刷新 配置参数。
  */
-export interface DescribeTimingL4DataResponse {
+export interface CachePrefreshParameters {
   /**
-   * 查询结果的总条数。
+   * 缓存预刷新开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  TotalCount?: number
+  Switch?: string
   /**
-   * 四层时序流量数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预刷新时间设置为节点缓存时间的百分比数值，取值：1～99。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
    */
-  Data?: Array<TimingDataRecord>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CacheTimePercent?: number
 }
 
 /**
@@ -7720,6 +8668,23 @@ export interface Action {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeAction?: CodeAction
+}
+
+/**
+ * 回源跟随重定向参数配置。
+ */
+export interface UpstreamFollowRedirectParameters {
+  /**
+   * 回源跟随重定向配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 最大重定向次数。取值为 1-5。
+注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  MaxTimes?: number
 }
 
 /**
@@ -7840,6 +8805,18 @@ export interface ModifySecurityIPGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安全类型配置项。
+ */
+export interface SecurityType {
+  /**
+   * 安全类型开关，取值为：
+<li> on：开启；</li>
+<li> off：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -8046,6 +9023,38 @@ export interface DescribeSecurityIPGroupInfoRequest {
 }
 
 /**
+ * 例外规则的生效范围。
+ */
+export interface ExceptUserRuleScope {
+  /**
+   * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+<li>complete：完全跳过模式；</li>
+<li>partial：部分跳过模式。</li>
+   */
+  Type?: string
+  /**
+   * 生效的模块，该字段取值有：
+<li>waf：托管规则；</li>
+<li>rate：速率限制；</li>
+<li>acl：自定义规则；</li>
+<li>cc：cc攻击防护；</li>
+<li>bot：Bot防护。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Modules?: Array<string>
+  /**
+   * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartialModules?: Array<PartialModule>
+  /**
+   * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipConditions?: Array<SkipCondition>
+}
+
+/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
@@ -8180,6 +9189,42 @@ export interface DestroyPlanResponse {
 }
 
 /**
+ * 缓存键配置。
+ */
+export interface CacheKeyConfigParameters {
+  /**
+   * 是否开启全路径缓存，取值有：
+<li>on：开启全路径缓存（即关闭参数忽略）；</li>
+<li>off：关闭全路径缓存（即开启参数忽略）。</li>
+   */
+  FullURLCache?: string
+  /**
+   * 是否忽略大小写缓存，取值有：
+<li>on：忽略；</li>
+<li>off：不忽略。</li>
+   */
+  IgnoreCase?: string
+  /**
+   * 查询字符串保留配置参数。此字段和 FullURLCache 必须同时设置，但不能同为 on。
+   */
+  QueryString?: CacheKeyQueryString
+}
+
+/**
+ * SSL/TLS 安全配置参数。
+ */
+export interface TLSConfigParameters {
+  /**
+   * TLS 版本。至少填写一个，如果是多个时，需要为连续版本号，例如：开启 TLS1、1.1、1.2 和 1.3，不可仅开启 1 和 1.2 而关闭 1.1。取值有：<li>TLSv1：TLSv1 版本；</li><li>TLSv1.1：TLSv1.1 版本；</li><li>TLSv1.2：TLSv1.2 版本；</li><li>TLSv1.3：TLSv1.3 版本。</li>
+   */
+  Version?: Array<string>
+  /**
+   * 密码套件。详细介绍请参考 [TLS 版本及密码套件说明](https://cloud.tencent.com/document/product/1552/86545)。取值有：<li>loose-v2023：loose-v2023 密码套件；</li><li>general-v2023：general-v2023 密码套件；</li><li>strict-v2023：strict-v2023 密码套件。</li>
+   */
+  CipherSuite?: string
+}
+
+/**
  * 查询条件
  */
 export interface QueryCondition {
@@ -8227,6 +9272,22 @@ export interface RuleRewriteActionParams {
 }
 
 /**
+ * 存储客户端请求IP的头部信息配置。
+ */
+export interface ClientIPHeaderParameters {
+  /**
+   * 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 回源时，存放客户端 IP 的请求头名称。当 Switch 为 on 时，该参数必填。该参数不允许填写 X-Forwarded-For。
+   */
+  HeaderName?: string
+}
+
+/**
  * ModifyAliasDomain返回参数结构体
  */
 export interface ModifyAliasDomainResponse {
@@ -8251,41 +9312,29 @@ export interface DeleteDnsRecordsRequest {
 }
 
 /**
- * ModifyHostsCertificate请求参数结构体
+ * 离线缓存是否开启。
  */
-export interface ModifyHostsCertificateRequest {
+export interface OfflineCacheParameters {
+  /**
+   * 离线缓存开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
+ * DeleteAliasDomain请求参数结构体
+ */
+export interface DeleteAliasDomainRequest {
   /**
    * 站点 ID。
    */
   ZoneId: string
   /**
-   * 需要修改证书配置的加速域名。
+   * 待删除别称域名名称。如果为空，则不执行删除操作。
    */
-  Hosts: Array<string>
-  /**
-   * 配置服务端证书的模式，取值有：
-<li>disable：不配置服务端证书；</li>
-<li>eofreecert：配置 EdgeOne 免费服务端证书；</li>
-<li>sslcert：配置 SSL 托管服务端证书；</li>
-不填写表示服务端证书保持原有配置。
-   */
-  Mode?: string
-  /**
-   * SSL 证书配置，本参数仅在 mode 为 sslcert 时生效，传入对应证书的 CertId 即可。您可以前往 [SSL 证书列表](https://console.cloud.tencent.com/ssl) 查看 CertId。
-   */
-  ServerCertInfo?: Array<ServerCertInfo>
-  /**
-   * 托管类型，取值有：
-<li>none：不托管EO；</li>
-<li>apply：托管EO</li>
-不填，默认取值为none。
-   * @deprecated
-   */
-  ApplyType?: string
-  /**
-   * 在边缘双向认证场景下，该字段为客户端的 CA 证书，部署在 EO 节点内，用于客户端对 EO 节点进行认证。默认关闭，不填写表示保持原有配置。
-   */
-  ClientCertInfo?: MutualTLS
+  AliasNames?: Array<string>
 }
 
 /**
@@ -8420,6 +9469,17 @@ export interface Resource {
 <li>vodeo：vodeo资源。</li>
    */
   Type?: string
+}
+
+/**
+ * 修改 HTTP 节点响应头配置参数。
+ */
+export interface ModifyResponseHeaderParameters {
+  /**
+   * HTTP 回源头部规则列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderActions?: Array<HeaderAction>
 }
 
 /**
@@ -9048,6 +10108,28 @@ export interface L4ProxyRule {
 }
 
 /**
+ * 自定义 Cache Key 查询字符串配置参数。
+ */
+export interface CacheKeyQueryString {
+  /**
+   * 查询字符串保留/忽略指定参数开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 查询字符串保留/忽略指定参数动作。取值有：
+<li>includeCustom：表示保留部分参数；</li>
+<li>excludeCustom：表示忽略部分参数。</li>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Action?: string
+  /**
+   * 查询字符串中需保留/忽略的参数名列表。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Values?: Array<string>
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询，支持模糊查询。例如过滤ID、名称、状态等。
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
@@ -9182,6 +10264,22 @@ export interface ModifyZoneRequest {
    * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
    */
   ZoneName?: string
+}
+
+/**
+ * 回源时携带客户端 IP 所属地域信息，值的格式为 ISO-3166-1 两位字母代码。
+ */
+export interface ClientIPCountryParameters {
+  /**
+   * 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 存放客户端 IP 所属地域信息的请求头名称，当 Switch=on 时有效。为空则使用默认值：EO-Client-IPCountry。
+   */
+  HeaderName?: string
 }
 
 /**
@@ -9590,6 +10688,30 @@ export interface FunctionRule {
 }
 
 /**
+ * 回源请求参数 Cookie 配置。
+ */
+export interface UpstreamRequestCookie {
+  /**
+   * 回源请求参数 Cookie 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 回源请求参数 Cookie 模式。当 Switch 为 on 时，该参数必填。取值有：
+<li>full：表示全部保留；</li>
+<li>ignore：表示全部忽略；</li>
+<li>includeCustom：表示保留部分参数；</li>
+<li>excludeCustom：表示忽略部分参数。</li>
+   */
+  Action?: string
+  /**
+   * 指定参数值。仅当查询字符串模式 Action 为 includeCustom 或者 excludeCustom 时该参数生效，用于指定需要保留或者忽略的参数。最大支持 10 个参数。
+   */
+  Values?: Array<string>
+}
+
+/**
  * DescribeDDoSAttackTopData请求参数结构体
  */
 export interface DescribeDDoSAttackTopDataRequest {
@@ -9685,7 +10807,7 @@ export interface DescribeRulesRequest {
   ZoneId: string
   /**
    * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>rule-id<br>   按照【<strong>规则ID</strong>】进行过滤。<br>   类型：string<br>   必选：否</li>
+<li>rule-id：按照规则 ID 进行过滤。</li>
    */
   Filters?: Array<Filter>
 }
@@ -9879,6 +11001,234 @@ export interface CreateCustomizeErrorPageResponse {
 }
 
 /**
+ * 规则引擎操作。
+ */
+export interface RuleEngineAction {
+  /**
+   * 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。
+<li>Cache：节点缓存 TTL；</li>
+<li>CacheKey：自定义 Cache Key；</li>
+<li>CachePrefresh：缓存预刷新；</li>
+<li>AccessURLRedirect：访问 URL 重定向；</li>
+<li>UpstreamURLRewrite：回源 URL 重写；</li>
+<li>QUIC：QUIC；</li>
+<li>WebSocket：WebSocket；</li>
+<li>Authentication：Token 鉴权；</li>
+<li>MaxAge：浏览器缓存 TTL；</li>
+<li>StatusCodeCache：状态码缓存 TTL；</li>
+<li>OfflineCache：离线缓存；</li>
+<li>SmartRouting：智能加速；</li>
+<li>RangeOriginPull：分片回源 ；</li>
+<li>UpstreamHTTP2：HTTP2 回源；</li>
+<li>HostHeader：Host Header 重写；</li>
+<li>ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；</li>
+<li>OriginPullProtocol：回源 HTTPS；</li>
+<li>Compression：智能压缩配置；</li>
+<li>HSTS：HSTS；</li>
+<li>ClientIPHeader：存储客户端请求 IP 的头部信息配置；</li>
+<li>OCSPStapling：OCSP 装订；</li>
+<li>HTTP2：HTTP2 接入；</li>
+<li>PostMaxSize：POST 请求上传文件流式传输最大限制配置；</li>
+<li>ClientIPCountry：回源时携带客户端 IP 所属地域信息；</li>
+<li>UpstreamFollowRedirect：回源跟随重定向参数配置；</li>
+<li>UpstreamRequest：回源请求参数；</li>
+<li>TLSConfig：SSL/TLS 安全；</li>
+<li>ModifyOrigin：修改源站；</li>
+<li>HTTPUpstreamTimeout：七层回源超时配置；</li>
+<li>HttpResponse：HTTP 应答；</li>
+<li>ErrorPage：自定义错误页面；</li>
+<li>ModifyResponseHeader：修改 HTTP 节点响应头；</li>
+<li>ModifyRequestHeader：修改 HTTP 节点请求头；</li>
+<li>ResponseSpeedLimit：单连接下载限速。</li>
+<li>SetContentIdentifierParameters：设置内容标识符。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheParameters?: CacheParameters
+  /**
+   * 自定义 Cache Key 配置参数，当 Name 取值为 CacheKey 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheKeyParameters?: CacheKeyParameters
+  /**
+   * 缓存预刷新配置参数，当 Name 取值为 CachePrefresh 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CachePrefreshParameters?: CachePrefreshParameters
+  /**
+   * 访问 URL 重定向配置参数，当 Name 取值为 AccessURLRedirect 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessURLRedirectParameters?: AccessURLRedirectParameters
+  /**
+   * 回源 URL 重写配置参数，当 Name 取值为 UpstreamURLRewrite 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamURLRewriteParameters?: UpstreamURLRewriteParameters
+  /**
+   * QUIC 配置参数，当 Name 取值为 QUIC 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QUICParameters?: QUICParameters
+  /**
+   * WebSocket 配置参数，当 Name 取值为 WebSocket 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebSocketParameters?: WebSocketParameters
+  /**
+   * Token 鉴权配置参数，当 Name 取值为 Authentication 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthenticationParameters?: AuthenticationParameters
+  /**
+   * 浏览器缓存 TTL 配置参数，当 Name 取值为 MaxAge 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxAgeParameters?: MaxAgeParameters
+  /**
+   * 状态码缓存 TTL 配置参数，当 Name 取值为 StatusCodeCache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCodeCacheParameters?: StatusCodeCacheParameters
+  /**
+   * 离线缓存配置参数，当 Name 取值为 OfflineCache 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OfflineCacheParameters?: OfflineCacheParameters
+  /**
+   * 智能加速配置参数，当 Name 取值为 SmartRouting 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartRoutingParameters?: SmartRoutingParameters
+  /**
+   * 分片回源配置参数，当 Name 取值为 RangeOriginPull 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RangeOriginPullParameters?: RangeOriginPullParameters
+  /**
+   * HTTP2 回源配置参数，当 Name 取值为 UpstreamHTTP2 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamHTTP2Parameters?: UpstreamHTTP2Parameters
+  /**
+   * Host Header 重写配置参数，当 Name 取值为 HostHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostHeaderParameters?: HostHeaderParameters
+  /**
+   * 访问协议强制 HTTPS 跳转配置，当 Name 取值为 ForceRedirectHTTPS 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForceRedirectHTTPSParameters?: ForceRedirectHTTPSParameters
+  /**
+   * 智能压缩配置，当 Name 取值为 Compression 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompressionParameters?: CompressionParameters
+  /**
+   * HSTS 配置参数，当 Name 取值为 HSTS 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSTSParameters?: HSTSParameters
+  /**
+   * 存储客户端请求 IP 的头部信息配置，当 Name 取值为 ClientIPHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPHeaderParameters?: ClientIPHeaderParameters
+  /**
+   * OCSP 装订配置参数，当 Name 取值为 OCSPStapling 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OCSPStaplingParameters?: OCSPStaplingParameters
+  /**
+   * HTTP2 接入配置参数，当 Name 取值为 HTTP2 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTP2Parameters?: HTTP2Parameters
+  /**
+   * POST 请求上传文件流式传输最大限制配置，当 Name 取值为 PostMaxSize 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostMaxSizeParameters?: PostMaxSizeParameters
+  /**
+   * 回源时携带客户端 IP 所属地域信息配置参数，当 Name 取值为 ClientIPCountry 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIPCountryParameters?: ClientIPCountryParameters
+  /**
+   * 回源跟随重定向参数配置，当 Name 取值为 UpstreamFollowRedirect 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamFollowRedirectParameters?: UpstreamFollowRedirectParameters
+  /**
+   * 回源请求参数配置参数，当 Name 取值为 UpstreamRequest 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamRequestParameters?: UpstreamRequestParameters
+  /**
+   * SSL/TLS 安全配置参数，当 Name 取值为 TLSConfig 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TLSConfigParameters?: TLSConfigParameters
+  /**
+   * 修改源站配置参数，当 Name 取值为 ModifyOrigin 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyOriginParameters?: ModifyOriginParameters
+  /**
+   * 七层回源超时配置，当 Name 取值为 HTTPUpstreamTimeout 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPUpstreamTimeoutParameters?: HTTPUpstreamTimeoutParameters
+  /**
+   * HTTP 应答配置参数，当 Name 取值为 HttpResponse 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpResponseParameters?: HTTPResponseParameters
+  /**
+   * 自定义错误页面配置参数，当 Name 取值为 ErrorPage 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorPageParameters?: ErrorPageParameters
+  /**
+   * 修改 HTTP 节点响应头配置参数，当 Name 取值为 ModifyResponseHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyResponseHeaderParameters?: ModifyResponseHeaderParameters
+  /**
+   * 修改 HTTP 节点请求头配置参数，当 Name 取值为 ModifyRequestHeader 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyRequestHeaderParameters?: ModifyRequestHeaderParameters
+  /**
+   * 单连接下载限速配置参数，当 Name 取值为 ResponseSpeedLimit 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseSpeedLimitParameters?: ResponseSpeedLimitParameters
+  /**
+   * 内容标识配置参数，当 Name 取值为 HttpResponse 时，该参数必填。
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetContentIdentifierParameters?: SetContentIdentifierParameters
+}
+
+/**
+ * 状态码缓存 TTL 配置参数。
+ */
+export interface StatusCodeCacheParameters {
+  /**
+   * 状态码缓存 TTL 。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCodeCacheParams?: Array<StatusCodeCacheParam>
+}
+
+/**
  * 规则引擎HTTP请求头/响应头类型的动作
  */
 export interface RewriteAction {
@@ -9906,6 +11256,32 @@ export interface TemplateScope {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EntityStatus?: Array<EntityStatus>
+}
+
+/**
+ * 自定义错误页面。
+ */
+export interface ErrorPage {
+  /**
+   * 状态码。支持范围为 400、403、404、405、414、416、451、500、501、502、503、504。
+   */
+  StatusCode: number
+  /**
+   * 重定向 URL，需要为完整跳转路径，如 https://www.test.com/error.html。
+   */
+  RedirectURL: string
+}
+
+/**
+ * HTTP2 接入配置参数。
+ */
+export interface HTTP2Parameters {
+  /**
+   * HTTP2 接入配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -10032,6 +11408,21 @@ export interface DescribePrefetchTasksRequest {
 }
 
 /**
+ * 站点配置相关信息。
+ */
+export interface ZoneConfigParameters {
+  /**
+   * 站点名称。
+   */
+  ZoneName?: string
+  /**
+   * 站点配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneConfig?: ZoneConfig
+}
+
+/**
  * DNS 记录
  */
 export interface DnsRecord {
@@ -10094,13 +11485,55 @@ export interface DnsRecord {
 }
 
 /**
- * ModifyDnsRecords返回参数结构体
+ * 对象存储源站私有鉴权参数。
  */
-export interface ModifyDnsRecordsResponse {
+export interface OriginPrivateParameters {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 鉴权参数 Access Key ID。
    */
-  RequestId?: string
+  AccessKeyId: string
+  /**
+   * 鉴权参数 Secret Access Key。
+   */
+  SecretAccessKey: string
+  /**
+   * 鉴权版本。取值有：
+<li>v2：v2版本；</li>
+<li>v4：v4版本。</li>
+   */
+  SignatureVersion: string
+  /**
+   * 存储桶地域。
+   */
+  Region?: string
+}
+
+/**
+ * HSTS 配置参数。
+ */
+export interface HSTSParameters {
+  /**
+   * HSTS 配置开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 缓存 HSTS 头部时间，单位为秒，取值：1-31536000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Timeout?: number
+  /**
+   * 是否允许其他子域名继承相同的 HSTS 头部，取值有：
+<li>on：允许其他子域名继承相同的 HSTS 头部；</li>
+<li>off：不允许其他子域名继承相同的 HSTS 头部。</li>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  IncludeSubDomains?: string
+  /**
+   * 是否允许浏览器预加载 HSTS 头部，取值有：
+<li>on：允许浏览器预加载 HSTS 头部；</li>
+<li>off：不允许浏览器预加载 HSTS 头部。</li>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  Preload?: string
 }
 
 /**
@@ -10142,17 +11575,29 @@ export interface IPWhitelist {
 }
 
 /**
- * DeleteLoadBalancer请求参数结构体
+ * ModifyL7AccSetting请求参数结构体
  */
-export interface DeleteLoadBalancerRequest {
+export interface ModifyL7AccSettingRequest {
   /**
    * 站点 ID。
    */
   ZoneId: string
   /**
-   * 负载均衡实例 ID。
+   * 站点加速全局配置，该参数中的配置会对站点下的所有域名生效。您只需直接修改所需的配置，未传入的其他配置将保持原有状态。
+
+
    */
-  InstanceId: string
+  ZoneConfig: ZoneConfig
+}
+
+/**
+ * ModifyFunctionRulePriority返回参数结构体
+ */
+export interface ModifyFunctionRulePriorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10179,6 +11624,27 @@ export interface CreateCustomizeErrorPageRequest {
    * 自定义错误页面内容，内容不超过 2KB。
    */
   Content?: string
+}
+
+/**
+ * 访问 URL 重定向路径配置参数。
+ */
+export interface URLPath {
+  /**
+   * 执行动作，取值有：
+<li>follow：跟随请求；</li>
+<li>custom：自定义；</li>
+<li>regex：正则匹配。</li>
+   */
+  Action?: string
+  /**
+   * 正则匹配的表达式，长度范围为 1～1024。<br>注意：当 Action 为 regex 时，此字段必填；当 Action 为 follow 或 custom 时，无需填写此字段，若填写则不生效。
+   */
+  Regex?: string
+  /**
+   * 重定向的目标URL，长度范围为 1～1024。<br>注意：当 Action 为 regex 或 custom 时，此字段必填；当 Action 为 follow 时，无需填写此字段，若填写则不生效。
+   */
+  Value?: string
 }
 
 /**
@@ -10257,6 +11723,43 @@ export interface OriginGroupInLoadBalancer {
 }
 
 /**
+ * 各个健康检查区域下源站的健康状态。
+ */
+export interface CheckRegionHealthStatus {
+  /**
+   * 健康检查区域，ISO-3166-1 两位字母代码。
+   */
+  Region?: string
+  /**
+   * 单健康检查区域下探测源站的健康状态，取值有：
+<li>Healthy：健康；</li>
+<li>Unhealthy：不健康；</li>
+<li> Undetected：未探测到数据。</li>说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。
+   */
+  Healthy?: string
+  /**
+   * 源站健康状态。
+   */
+  OriginHealthStatus?: Array<OriginHealthStatus>
+}
+
+/**
+ * 回源请求参数配置参数。
+ */
+export interface UpstreamRequestParameters {
+  /**
+   * 查询字符串配置。可选配置项，不填表示不配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryString?: UpstreamRequestQueryString
+  /**
+   * Cookie 配置。可选配置项，不填表示不配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cookie?: UpstreamRequestCookie
+}
+
+/**
  * TopN的Entry数据
  */
 export interface TopEntry {
@@ -10313,6 +11816,50 @@ export interface StandardDebug {
 }
 
 /**
+ * Token 鉴权 配置参数。
+ */
+export interface AuthenticationParameters {
+  /**
+   * 鉴权类型。取值有：
+
+<li>TypeA：鉴权方式 A 类型，具体含义请参考 [鉴权方式 A](https://cloud.tencent.com/document/product/1552/109329)；</li>
+<li>TypeB：鉴权方式 B 类型，具体含义请参考 [鉴权方式 B](https://cloud.tencent.com/document/product/1552/109330)；</li>
+<li>TypeC：鉴权方式 C 类型，具体含义请参考 [鉴权方式 C](https://cloud.tencent.com/document/product/1552/109331)；</li>
+<li>TypeD：鉴权方式 D 类型，具体含义请参考 [鉴权方式 D](https://cloud.tencent.com/document/product/1552/109332)；</li>
+<li>TypeVOD：鉴权方式 V 类型，具体含义请参考 [鉴权方式 V](https://cloud.tencent.com/document/product/1552/109333)。</li>
+   */
+  AuthType?: string
+  /**
+   * 主鉴权密钥，由 6～40 位大小写英文字母或数字组成，不能包含 " 和 $。
+   */
+  SecretKey?: string
+  /**
+   * 鉴权 URL 的有效时长，单位为秒，取值：1～630720000。用于判断客户端访问请求是否过期：
+<li>若当前时间超过 “timestamp + 有效时长” 时间，则为过期请求，直接返回 403。</li>
+<li>若当前时间未超过 “timestamp + 有效时长” 时间，则请求未过期，继续校验 md5 字符串。</li>注意：当 AuthType 为 TypeA、TypeB、TypeC、TypeD 之一时，此字段必填。
+   */
+  Timeout?: number
+  /**
+   * 备鉴权密钥，由 6～40 位大小写英文字母或数字组成，不能包含 " 和 $。
+   */
+  BackupSecretKey?: string
+  /**
+   * 鉴权参数名称，节点将校验此参数名对应的值。由 1～100 位大小写字母、数字或下划线组成。<br>注意：当 AuthType 为 TypeA、TypeD 之一时，此字段必填。
+   */
+  AuthParam?: string
+  /**
+   * 鉴权时间戳，和 AuthParam 字段的值不能相同。<br>注意：当 AuthType 为 TypeD 时，此字段必填。
+   */
+  TimeParam?: string
+  /**
+   * 鉴权时间格式，取值有：
+<li>dec：十进制；</li>
+<li>hex：十六进制。</li>注意：当 AuthType 为 TypeD 时，此字段必填。默认为 hex。
+   */
+  TimeFormat?: string
+}
+
+/**
  * BindSecurityTemplateToEntity请求参数结构体
  */
 export interface BindSecurityTemplateToEntityRequest {
@@ -10345,6 +11892,21 @@ export interface BindSecurityTemplateToEntityRequest {
 <li>false：不替换域名当前绑定的模板。</li>注意：当选择不替换已有策略模板时，若指定域名已经绑定策略模板，API 将返回错误。
    */
   OverWrite?: boolean
+}
+
+/**
+ * 子规则。
+ */
+export interface RuleEngineSubRule {
+  /**
+   * 子规则分支
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Branches?: Array<RuleBranch>
+  /**
+   * 规则注释。
+   */
+  Description?: Array<string>
 }
 
 /**
@@ -10533,6 +12095,16 @@ export interface DeleteLoadBalancerResponse {
 }
 
 /**
+ * DeleteL7AccRules返回参数结构体
+ */
+export interface DeleteL7AccRulesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOriginGroupHealthStatus返回参数结构体
  */
 export interface DescribeOriginGroupHealthStatusResponse {
@@ -10562,6 +12134,22 @@ export interface DescribeContentIdentifiersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点缓存 TTL 自定义缓存时间配置参数。
+ */
+export interface CacheConfigCustomTime {
+  /**
+   * 自定义缓存时间开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  CacheTime?: number
 }
 
 /**
@@ -10632,6 +12220,22 @@ export interface CreateContentIdentifierResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Host Header 重写配置参数。
+ */
+export interface HostHeaderParameters {
+  /**
+   * 执行动作，取值有：
+<li>followOrigin：跟随源站域名；</li>
+<li>custom：自定义。</li>
+   */
+  Action?: string
+  /**
+   * Host Header 重写，需要填写完整域名。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  ServerName?: string
 }
 
 /**
@@ -10888,24 +12492,17 @@ export interface DescribePurgeTasksResponse {
 }
 
 /**
- * 各个健康检查区域下源站的健康状态。
+ * HTTP 应答配置参数。
  */
-export interface CheckRegionHealthStatus {
+export interface HTTPResponseParameters {
   /**
-   * 健康检查区域，ISO-3166-1 两位字母代码。
+   * 响应状态码。支持 2XX、4XX、5XX，不包括 499、514、101、301、302、303、509、520-599。
    */
-  Region?: string
+  StatusCode?: number
   /**
-   * 单健康检查区域下探测源站的健康状态，取值有：
-<li>Healthy：健康；</li>
-<li>Unhealthy：不健康；</li>
-<li> Undetected：未探测到数据。</li>说明：单健康检查区域下所有源站为健康，则状态为健康，否则为不健康。
+   * 响应页面 ID。
    */
-  Healthy?: string
-  /**
-   * 源站健康状态。
-   */
-  OriginHealthStatus?: Array<OriginHealthStatus>
+  ResponsePage?: string
 }
 
 /**
@@ -11098,6 +12695,25 @@ export interface DescribeTimingL4DataRequest {
 <li>global：全球数据。</li>不填默认取值为global。
    */
   Area?: string
+}
+
+/**
+ * DescribeTimingL4Data返回参数结构体
+ */
+export interface DescribeTimingL4DataResponse {
+  /**
+   * 查询结果的总条数。
+   */
+  TotalCount?: number
+  /**
+   * 四层时序流量数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<TimingDataRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -199,28 +199,28 @@ export interface PythonSparkImage {
     /**
      * spark镜像唯一id
      */
-    SparkImageId: string;
+    SparkImageId?: string;
     /**
      * 集群小版本镜像id
      */
-    ChildImageVersionId: string;
+    ChildImageVersionId?: string;
     /**
      * spark镜像名称
      */
-    SparkImageVersion: string;
+    SparkImageVersion?: string;
     /**
      * spark镜像描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * ModifyGovernEventRule返回参数结构体
@@ -1666,7 +1666,7 @@ export interface DescribeWorkGroupInfoResponse {
      * 工作组详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupInfo: WorkGroupDetailInfo;
+    WorkGroupInfo?: WorkGroupDetailInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2473,38 +2473,38 @@ export interface WorkGroupInfo {
     /**
      * 查询到的工作组唯一Id
      */
-    WorkGroupId: number;
+    WorkGroupId?: number;
     /**
      * 工作组名称
      */
-    WorkGroupName: string;
+    WorkGroupName?: string;
     /**
      * 工作组描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupDescription: string;
+    WorkGroupDescription?: string;
     /**
      * 工作组关联的用户数量
      */
-    UserNum: number;
+    UserNum?: number;
     /**
      * 工作组关联的用户集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserSet: Array<UserMessage>;
+    UserSet?: Array<UserMessage>;
     /**
      * 工作组绑定的权限集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicySet: Array<Policy>;
+    PolicySet?: Array<Policy>;
     /**
      * 工作组的创建人
      */
-    Creator: string;
+    Creator?: string;
     /**
      * 工作组的创建时间，形如2021-07-28 16:19:32
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * SwitchDataEngine请求参数结构体
@@ -4363,11 +4363,11 @@ export interface LockMetaDataResponse {
     /**
      * 锁id
      */
-    LockId: number;
+    LockId?: number;
     /**
      * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
      */
-    LockState: string;
+    LockState?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4380,11 +4380,11 @@ export interface CheckLockMetaDataResponse {
     /**
      * 锁ID
      */
-    LockId: number;
+    LockId?: number;
     /**
      * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
      */
-    LockState: string;
+    LockState?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4980,7 +4980,7 @@ export interface DataEngineBasicInfo {
     /**
      * DataEngine名称
      */
-    DataEngineName: string;
+    DataEngineName?: string;
     /**
      * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
      */
@@ -5232,32 +5232,32 @@ export interface Script {
      * 脚本Id，长度36字节。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScriptId: string;
+    ScriptId?: string;
     /**
      * 脚本名称，长度0-25。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScriptName: string;
+    ScriptName?: string;
     /**
      * 脚本描述，长度0-50。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScriptDesc: string;
+    ScriptDesc?: string;
     /**
      * 默认关联数据库。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatabaseName: string;
+    DatabaseName?: string;
     /**
      * SQL描述，长度0-10000。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SQLStatement: string;
+    SQLStatement?: string;
     /**
      * 更新时间戳， 单位：ms。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: number;
+    UpdateTime?: number;
 }
 /**
  * CheckDataEngineImageCanBeUpgrade返回参数结构体
@@ -5444,15 +5444,15 @@ export interface TPartition {
      */
     Comment?: string;
     /**
-     * 分区类型
+     * 分区类型（已废弃）
      */
     PartitionType?: string;
     /**
-     * 分区格式
+     * 分区格式（已废弃）
      */
     PartitionFormat?: string;
     /**
-     * 分区分隔数
+     * 分区分隔数（已废弃）
      */
     PartitionDot?: number;
     /**
@@ -6113,25 +6113,25 @@ export interface ViewResponseInfo {
     /**
      * 视图基本信息。
      */
-    ViewBaseInfo: ViewBaseInfo;
+    ViewBaseInfo?: ViewBaseInfo;
     /**
      * 视图列信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Columns: Array<Column>;
+    Columns?: Array<Column>;
     /**
      * 视图属性信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Properties: Array<Property>;
+    Properties?: Array<Property>;
     /**
      * 视图创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 视图更新时间。
      */
-    ModifiedTime: string;
+    ModifiedTime?: string;
 }
 /**
  * 网络配置
@@ -6992,17 +6992,17 @@ export interface HouseEventsInfo {
      * 事件时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Time: Array<string>;
+    Time?: Array<string>;
     /**
      * 事件类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventsAction: Array<string>;
+    EventsAction?: Array<string>;
     /**
      * 集群信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterInfo: Array<string>;
+    ClusterInfo?: Array<string>;
 }
 /**
  *  SQL查询任务
@@ -7275,24 +7275,24 @@ export interface WorkGroupMessage {
     /**
      * 工作组唯一Id
      */
-    WorkGroupId: number;
+    WorkGroupId?: number;
     /**
      * 工作组名称
      */
-    WorkGroupName: string;
+    WorkGroupName?: string;
     /**
      * 工作组描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupDescription: string;
+    WorkGroupDescription?: string;
     /**
      * 创建者
      */
-    Creator: string;
+    Creator?: string;
     /**
      * 工作组创建的时间，形如2021-07-28 16:19:32
      */
-    CreateTime: string;
+    CreateTime?: string;
 }
 /**
  * DescribeUserDataEngineConfig返回参数结构体
@@ -9242,22 +9242,22 @@ export interface JobLogResult {
      * 日志时间戳，毫秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Time: number;
+    Time?: number;
     /**
      * 日志topic id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志topic name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 日志内容，json字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogJson: string;
+    LogJson?: string;
     /**
      * 日志ID
   注意：此字段可能返回 null，表示取不到有效值。
@@ -9538,7 +9538,7 @@ export interface CreateInternalTableResponse {
     /**
      * 创建托管存储内表sql语句描述
      */
-    Execution: string;
+    Execution?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -135,6 +135,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDefaultCertificates", req, cb);
     }
     /**
+     * 本接口用于修改[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中的规则，单次仅支持修改单条规则。
+     */
+    async ModifyL7AccRule(req, cb) {
+        return this.request("ModifyL7AccRule", req, cb);
+    }
+    /**
      * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
      */
     async DescribeAccelerationDomains(req, cb) {
@@ -158,6 +164,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteApplicationProxy(req, cb) {
         return this.request("DeleteApplicationProxy", req, cb);
+    }
+    /**
+     * 本接口用于修改[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+     */
+    async ModifyL7AccSetting(req, cb) {
+        return this.request("ModifyL7AccSetting", req, cb);
     }
     /**
      * 用于启用/停用四层代理实例。
@@ -233,6 +245,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeConfigGroupVersionDetail(req, cb) {
         return this.request("DescribeConfigGroupVersionDetail", req, cb);
+    }
+    /**
+     * 本接口用于查询[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则列表。
+     */
+    async DescribeL7AccRules(req, cb) {
+        return this.request("DescribeL7AccRules", req, cb);
     }
     /**
      * 操作安全策略模板，支持将域名绑定或换绑到指定的策略模板，或者从指定的策略模板解绑。
@@ -327,7 +345,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeConfigGroupVersions", req, cb);
     }
     /**
-     * 用于修改站点配置
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccSetting](https://cloud.tencent.com/document/product/1552/115817)。
      */
     async ModifyZoneSetting(req, cb) {
         return this.request("ModifyZoneSetting", req, cb);
@@ -345,10 +363,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyAliasDomainStatus", req, cb);
     }
     /**
-     * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
+     * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
      */
-    async DescribeDnsRecords(req, cb) {
-        return this.request("DescribeDnsRecords", req, cb);
+    async DescribeSecurityIPGroup(req, cb) {
+        return this.request("DescribeSecurityIPGroup", req, cb);
     }
     /**
      * 用于创建四层代理实例规则，支持单条或者批量创建。
@@ -397,6 +415,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async ModifyPlan(req, cb) {
         return this.request("ModifyPlan", req, cb);
+    }
+    /**
+     * 本接口用于删除[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则，支持批量删除。
+     */
+    async DeleteL7AccRules(req, cb) {
+        return this.request("DeleteL7AccRules", req, cb);
     }
     /**
      * 将未绑定套餐的站点绑定到已有套餐
@@ -541,7 +565,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DeleteContentIdentifier", req, cb);
     }
     /**
-     * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [RuleEngineAction](https://cloud.tencent.com/document/product/1552/80721#RuleEngineAction)。
      */
     async DescribeRulesSetting(req, cb) {
         return this.request("DescribeRulesSetting", req, cb);
@@ -577,13 +601,19 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyZoneStatus", req, cb);
     }
     /**
+     * 本接口用于在[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中创建规则，支持批量创建。
+     */
+    async CreateL7AccRules(req, cb) {
+        return this.request("CreateL7AccRules", req, cb);
+    }
+    /**
      * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
      */
     async DescribePurgeTasks(req, cb) {
         return this.request("DescribePurgeTasks", req, cb);
     }
     /**
-     * 批量删除规则引擎规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DeleteL7AccRules](https://cloud.tencent.com/document/product/1552/115821)。
      */
     async DeleteRules(req, cb) {
         return this.request("DeleteRules", req, cb);
@@ -641,7 +671,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifySecurityIPGroup", req, cb);
     }
     /**
-     * 查询规则引擎规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820)。
      */
     async DescribeRules(req, cb) {
         return this.request("DescribeRules", req, cb);
@@ -684,6 +714,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyApplicationProxyRule", req, cb);
     }
     /**
+     * 本接口用于查询[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+     */
+    async DescribeL7AccSetting(req, cb) {
+        return this.request("DescribeL7AccSetting", req, cb);
+    }
+    /**
      * 创建源站组，以源站组的方式管理业务源站。此处配置的源站组可于**添加加速域名**和**四层代理**等功能中引用。
      */
     async CreateOriginGroup(req, cb) {
@@ -710,7 +746,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DeployConfigGroupVersion", req, cb);
     }
     /**
-     * 用于查询域名配置信息
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，可通过 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819) 和 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820) 来获取域名的详细配置。
      */
     async DescribeHostsSetting(req, cb) {
         return this.request("DescribeHostsSetting", req, cb);
@@ -759,7 +795,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("RenewPlan", req, cb);
     }
     /**
-     * 用于查询站点的所有配置信息。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819)。
      */
     async DescribeZoneSetting(req, cb) {
         return this.request("DescribeZoneSetting", req, cb);
@@ -817,10 +853,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeSecurityIPGroupInfo", req, cb);
     }
     /**
-     * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
+     * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
      */
-    async DescribeSecurityIPGroup(req, cb) {
-        return this.request("DescribeSecurityIPGroup", req, cb);
+    async DescribeDnsRecords(req, cb) {
+        return this.request("DescribeDnsRecords", req, cb);
     }
     /**
      * 导入站点配置接口，本接口支持站点配置文件的快速导入，发起导入后接口会返回对应的任务 ID（TaskId），用户需通过查询站点配置导入结果接口（DescribeZoneConfigImportResult）获取本次导入任务执行的结果。该功能仅支持标准版和企业版套餐站点使用。

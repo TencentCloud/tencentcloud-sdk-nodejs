@@ -1849,7 +1849,7 @@ export interface DeleteRabbitMQPermissionRequest {
    */
   User: string
   /**
-   * vhost名
+   * vhost名称
    */
   VirtualHost: string
 }

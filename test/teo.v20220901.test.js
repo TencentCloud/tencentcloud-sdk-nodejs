@@ -178,6 +178,16 @@ it("teo.v20220901.DescribeDefaultCertificates", async function () {
     }
 })
 
+it("teo.v20220901.ModifyL7AccRule", async function () {
+    try {
+       const data = await client.ModifyL7AccRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeAccelerationDomains", async function () {
     try {
        const data = await client.DescribeAccelerationDomains({})
@@ -211,6 +221,16 @@ it("teo.v20220901.ModifyOriginGroup", async function () {
 it("teo.v20220901.DeleteApplicationProxy", async function () {
     try {
        const data = await client.DeleteApplicationProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyL7AccSetting", async function () {
+    try {
+       const data = await client.ModifyL7AccSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,16 @@ it("teo.v20220901.CreateAccelerationDomain", async function () {
 it("teo.v20220901.DescribeConfigGroupVersionDetail", async function () {
     try {
        const data = await client.DescribeConfigGroupVersionDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeL7AccRules", async function () {
+    try {
+       const data = await client.DescribeL7AccRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +548,9 @@ it("teo.v20220901.ModifyAliasDomainStatus", async function () {
     }
 })
 
-it("teo.v20220901.DescribeDnsRecords", async function () {
+it("teo.v20220901.DescribeSecurityIPGroup", async function () {
     try {
-       const data = await client.DescribeDnsRecords({})
+       const data = await client.DescribeSecurityIPGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +631,16 @@ it("teo.v20220901.ModifySecurityPolicy", async function () {
 it("teo.v20220901.ModifyPlan", async function () {
     try {
        const data = await client.ModifyPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DeleteL7AccRules", async function () {
+    try {
+       const data = await client.DeleteL7AccRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,6 +938,16 @@ it("teo.v20220901.ModifyZoneStatus", async function () {
     }
 })
 
+it("teo.v20220901.CreateL7AccRules", async function () {
+    try {
+       const data = await client.CreateL7AccRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribePurgeTasks", async function () {
     try {
        const data = await client.DescribePurgeTasks({})
@@ -1061,6 +1111,16 @@ it("teo.v20220901.CreateLoadBalancer", async function () {
 it("teo.v20220901.ModifyApplicationProxyRule", async function () {
     try {
        const data = await client.ModifyApplicationProxyRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeL7AccSetting", async function () {
+    try {
+       const data = await client.DescribeL7AccSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1278,9 +1338,9 @@ it("teo.v20220901.DescribeSecurityIPGroupInfo", async function () {
     }
 })
 
-it("teo.v20220901.DescribeSecurityIPGroup", async function () {
+it("teo.v20220901.DescribeDnsRecords", async function () {
     try {
-       const data = await client.DescribeSecurityIPGroup({})
+       const data = await client.DescribeDnsRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

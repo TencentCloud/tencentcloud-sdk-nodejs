@@ -30,7 +30,7 @@ export interface ModifyQAAttrRangeResponse {
  */
 export interface GetWsTokenResponse {
   /**
-   * token值（有效期60s）
+   * token值（有效期60s，仅一次有效，多次校验会报错）
    */
   Token?: string
   /**
@@ -42,6 +42,14 @@ export interface GetWsTokenResponse {
    * 对话窗输入字符限制
    */
   InputLenLimit?: number
+  /**
+   * 应用模式，standard:标准模式, agent: agent模式，single_workflow：单工作流模式
+   */
+  Pattern?: string
+  /**
+   * SingleWorkflow
+   */
+  SingleWorkflow?: KnowledgeQaSingleWorkflow
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -621,6 +629,11 @@ export interface MsgRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuoteInfos?: Array<QuoteInfo>
+  /**
+   * Agent的思考过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentThought?: AgentThought
 }
 
 /**
@@ -1962,39 +1975,33 @@ export interface CreateCorpRequest {
 }
 
 /**
- * 调试信息
+ * 插件参数请求结构
  */
-export interface ProcedureDebugging {
+export interface PluginToolReqParam {
   /**
-   * 检索query
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数名称
    */
-  Content?: string
+  Name?: string
   /**
-   * 系统prompt
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数描述
    */
-  System?: string
+  Desc?: string
   /**
-   * 多轮历史信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object
    */
-  Histories?: Array<HistorySummary>
+  Type?: number
   /**
-   * 检索知识
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数是否必填
    */
-  Knowledge?: Array<KnowledgeSummary>
+  IsRequired?: boolean
   /**
-   * 任务流程
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数默认值
    */
-  TaskFlow?: TaskFlowSummary
+  DefaultValue?: string
   /**
-   * 工作流调试信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用
    */
-  WorkFlow?: WorkFlowSummary
+  SubParams?: Array<PluginToolReqParam>
 }
 
 /**
@@ -2103,6 +2110,10 @@ export interface ListQaItem {
    * 相似问个数
    */
   SimilarQuestionNum?: number
+  /**
+   * 返回问答关联的相似问,联动搜索,仅展示一条
+   */
+  SimilarQuestionTips?: string
 }
 
 /**
@@ -2313,6 +2324,57 @@ export interface Label {
 }
 
 /**
+ * 思考事件过程信息
+ */
+export interface AgentProcedure {
+  /**
+   * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: number
+  /**
+   * 执行过程英语名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 中文名, 用于展示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 状态常量: 使用中: processing, 成功: success, 失败: failed
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 图标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Icon?: string
+  /**
+   * Agent调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Debugging?: AgentProcedureDebugging
+  /**
+   * 是否切换Agent，取值为"main"或者"workflow",不切换为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 当前请求执行时间, 单位 ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Elapsed?: number
+}
+
+/**
  * 应用管理输出配置
  */
 export interface KnowledgeQaOutput {
@@ -2367,6 +2429,52 @@ export interface ApiVarAttrInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttrBizId?: string
+}
+
+/**
+ * Agent的思考过程
+ */
+export interface AgentThought {
+  /**
+   * 会话 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * 请求 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestId?: string
+  /**
+   * 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: string
+  /**
+   * 当前请求执行时间, 单位 ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Elapsed?: number
+  /**
+   * 当前是否为工作流
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWorkflow?: boolean
+  /**
+   * 如果当前是工作流，工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 具体思考过程详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Procedures?: Array<AgentProcedure>
+  /**
+   * TraceId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceId?: string
 }
 
 /**
@@ -2430,6 +2538,22 @@ export interface ModifyQACateRequest {
    * 分类业务ID
    */
   CateBizId: string
+}
+
+/**
+ * 知识库检索策略
+ */
+export interface SearchStrategy {
+  /**
+   * 检索策略类型 0:混合检索，1：语义检索
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyType?: number
+  /**
+   * Excel检索增强开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableEnhancement?: boolean
 }
 
 /**
@@ -2803,6 +2927,37 @@ export interface DescribeDocRequest {
 }
 
 /**
+ * Agent思考过程调试信息
+ */
+export interface AgentProcedureDebugging {
+  /**
+   * 模型思考内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 展示的具体文本内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayContent?: string
+  /**
+   * 展示类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayType?: number
+  /**
+   * 搜索引擎展示的索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuoteInfos?: Array<QuoteInfo>
+  /**
+   * 具体的参考来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  References?: Array<AgentReference>
+}
+
+/**
  * DescribeTokenUsageGraph请求参数结构体
  */
 export interface DescribeTokenUsageGraphRequest {
@@ -3034,6 +3189,32 @@ export interface ModifyAttributeLabelResponse {
 }
 
 /**
+ * 问答知识库单工作流模式下指定单工作流配置
+ */
+export interface KnowledgeQaSingleWorkflow {
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名称
+   */
+  WorkflowName?: string
+  /**
+   * 工作流描述
+   */
+  WorkflowDesc?: string
+  /**
+   * 工作流状态，发布状态(UNPUBLISHED: 待发布 PUBLISHING: 发布中 PUBLISHED: 已发布 FAIL:发布失败)
+   */
+  Status?: string
+  /**
+   * 工作流是否启用
+   */
+  IsEnable?: boolean
+}
+
+/**
  * ListQACate返回参数结构体
  */
 export interface ListQACateResponse {
@@ -3231,7 +3412,7 @@ export interface ReleaseQA {
    */
   ActionDesc?: string
   /**
-   * 来源
+   * 来源1:文档生成，2：批量导入，3：手动添加
    */
   Source?: number
   /**
@@ -4075,6 +4256,10 @@ export interface ListDocItem {
    */
   FileName?: string
   /**
+   * 重命名的新文档名称，在重命名提交之后，文档发布之前都是这个名称
+   */
+  NewName?: string
+  /**
    * 文件类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4301,6 +4486,16 @@ export interface AppModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsageType?: string
+  /**
+   * 模型温度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Temperature?: string
+  /**
+   * 模型TopP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopP?: string
 }
 
 /**
@@ -4806,10 +5001,20 @@ export interface AppInfo {
    */
   ModelName?: string
   /**
-   * 模型别名
+   * 生成模型别名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelAliasName?: string
+  /**
+   * 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pattern?: string
+  /**
+   * 思考模型别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThoughtModelAliasName?: string
 }
 
 /**
@@ -4906,13 +5111,39 @@ export interface RunReRankResponse {
 }
 
 /**
- * QueryParseDocResult请求参数结构体
+ * 调试信息
  */
-export interface QueryParseDocResultRequest {
+export interface ProcedureDebugging {
   /**
-   * 任务ID
+   * 检索query
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  Content?: string
+  /**
+   * 系统prompt
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  System?: string
+  /**
+   * 多轮历史信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Histories?: Array<HistorySummary>
+  /**
+   * 检索知识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Knowledge?: Array<KnowledgeSummary>
+  /**
+   * 任务流程
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskFlow?: TaskFlowSummary
+  /**
+   * 工作流调试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlow?: WorkFlowSummary
 }
 
 /**
@@ -4930,7 +5161,7 @@ export interface KnowledgeQaConfig {
    */
   RoleDescription?: string
   /**
-   * 模型配置
+   * 生成模型配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model?: AppModel
@@ -4954,6 +5185,31 @@ export interface KnowledgeQaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchRange?: SearchRange
+  /**
+   * 应用模式，standard:标准模式, agent: agent模式，single_workflow：单工作流模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pattern?: string
+  /**
+   * 检索策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchStrategy?: SearchStrategy
+  /**
+   * 单工作流ID，Pattern为single_workflow时传入
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SingleWorkflow?: KnowledgeQaSingleWorkflow
+  /**
+   * 应用关联插件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Plugins?: Array<KnowledgeQaPlugin>
+  /**
+   * 思考模型配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThoughtModel?: AppModel
 }
 
 /**
@@ -5193,8 +5449,7 @@ export interface ExportQAListRequest {
  */
 export interface GetDocPreviewResponse {
   /**
-   * 文件名
-
+   * 文件名, 发布端固定使用这个名称
    */
   FileName?: string
   /**
@@ -5216,6 +5471,10 @@ export interface GetDocPreviewResponse {
 
    */
   Bucket?: string
+  /**
+   * 存在文档重命名情况下的新名称, 评测端优先使用这个名称
+   */
+  NewName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5381,6 +5640,45 @@ export interface RetryReleaseRequest {
 }
 
 /**
+ * 应用关联插件信息
+ */
+export interface KnowledgeQaPlugin {
+  /**
+   * 插件ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PluginId?: string
+  /**
+   * 插件名称
+   */
+  PluginName?: string
+  /**
+   * 插件图标
+   */
+  PluginIcon?: string
+  /**
+   * 工具ID
+   */
+  ToolId?: string
+  /**
+   * 工具名称
+   */
+  ToolName?: string
+  /**
+   * 工具描述
+   */
+  ToolDesc?: string
+  /**
+   * 工具输入参数
+   */
+  Inputs?: Array<PluginToolReqParam>
+  /**
+   * 插件是否和知识库绑定
+   */
+  IsBindingKnowledge?: boolean
+}
+
+/**
  * VerifyQA请求参数结构体
  */
 export interface VerifyQARequest {
@@ -5447,7 +5745,7 @@ export interface GetWsTokenRequest {
    */
   VisitorBizId?: string
   /**
-   * 知识标签（用于知识库中知识的检索过滤）
+   * 知识标签，用于知识库中知识的检索过滤。该字段即将下线，请使用对话端接口中的 custom_variables 字段替代该字段。
    */
   VisitorLabels?: Array<GetWsTokenReq_Label>
 }
@@ -5673,6 +5971,62 @@ export interface DeleteDocCateRequest {
    * 分类业务ID
    */
   CateBizId: string
+}
+
+/**
+ * Agent中的参考来源
+ */
+export interface AgentReference {
+  /**
+   * 来源文档ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocId?: string
+  /**
+   * id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 文档业务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocBizId?: string
+  /**
+   * 文档名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocName?: string
+  /**
+   * 问答业务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QaBizId?: string
+  /**
+   * 搜索引擎索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: number
+  /**
+   * 标题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
 }
 
 /**
@@ -6376,6 +6730,16 @@ export interface DescribeCorpResponse {
 }
 
 /**
+ * QueryParseDocResult请求参数结构体
+ */
+export interface QueryParseDocResultRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * ModifyDocCate返回参数结构体
  */
 export interface ModifyDocCateResponse {
@@ -7039,6 +7403,11 @@ export interface KnowledgeWorkflow {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsEnabled?: boolean
+  /**
+   * 是否启用PDL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsePdl?: boolean
 }
 
 /**
@@ -7049,6 +7418,14 @@ export interface ListModelRequest {
    * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
    */
   AppType: string
+  /**
+   * 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式
+   */
+  Pattern?: string
+  /**
+   * 模型类别 generate：生成模型，thought：思考模型
+   */
+  ModelCategory?: string
   /**
    * 登录用户主账号(集成商模式必填)
    */

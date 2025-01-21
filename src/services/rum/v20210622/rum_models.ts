@@ -198,8 +198,7 @@ export interface CreateTawInstanceResponse {
    */
   InstanceId?: string
   /**
-   * 预付费订单 id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预付费订单 ，预付费不为null，后付费为null
    */
   DealName?: string
   /**
@@ -442,7 +441,6 @@ export interface DeleteWhitelistResponse {
 export interface DescribePvListResponse {
   /**
    * pv列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectPvSet?: Array<RumPvInfo>
   /**
@@ -802,7 +800,7 @@ export interface ModifyInstanceResponse {
  */
 export interface DeleteStarProjectRequest {
   /**
-   * 实例ID：taw-123
+   * 实例ID：****-1792
    */
   InstanceID: string
   /**
@@ -1390,24 +1388,23 @@ export interface ReleaseFile {
   /**
    * 文件版本
    */
-  Version: string
+  Version?: string
   /**
    * 文件唯一 key
    */
-  FileKey: string
+  FileKey?: string
   /**
    * 文件名
    */
-  FileName: string
+  FileName?: string
   /**
    * 文件哈希值
    */
-  FileHash: string
+  FileHash?: string
   /**
    * 文件 id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ID: number
+  ID?: number
 }
 
 /**
@@ -1416,7 +1413,6 @@ export interface ReleaseFile {
 export interface ModifyProjectLimitResponse {
   /**
    * 返回信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
@@ -1564,13 +1560,43 @@ export interface DescribeRumStatsLogListRequest {
 }
 
 /**
- * ResumeProject请求参数结构体
+ * 旁路kafka配置
  */
-export interface ResumeProjectRequest {
+export interface Kafka {
   /**
-   * 项目 id
+   * 1：开启
+0：关闭
    */
-  ProjectId: number
+  EnableKafka?: number
+  /**
+   * host地址
+   */
+  KafkaHost?: string
+  /**
+   * topic
+   */
+  KafkaTopic?: string
+  /**
+   * 版本
+   */
+  KafkaVersion?: string
+  /**
+   * username
+   */
+  SaslUserName?: string
+  /**
+   * password
+   */
+  SaslPassword?: string
+  /**
+   * ssl
+   */
+  SaslMechanism?: string
+  /**
+   * 默认算子id为0新增算子
+一旦算子新增成功会返回正确的算子id值
+   */
+  SinkId?: number
 }
 
 /**
@@ -1988,16 +2014,15 @@ export interface RumPvInfo {
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * pv访问量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pv: string
+  Pv?: string
   /**
    * 时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -2242,8 +2267,7 @@ export interface Filter {
  */
 export interface DeleteStarProjectResponse {
   /**
-   * 返回消息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回消息,请求成功才会返回，出现异常默认为null
    */
   Msg?: string
   /**
@@ -2787,6 +2811,16 @@ export interface DescribeAppDimensionMetricsResponse {
 }
 
 /**
+ * ResumeProject请求参数结构体
+ */
+export interface ResumeProjectRequest {
+  /**
+   * 项目 id
+   */
+  ProjectId: number
+}
+
+/**
  * DescribeAppSingleCaseDetailList请求参数结构体
  */
 export interface DescribeAppSingleCaseDetailListRequest {
@@ -3301,35 +3335,35 @@ export interface Whitelist {
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 实例ID
    */
-  InstanceID: string
+  InstanceID?: string
   /**
    * 截止时间
    */
-  Ttl: string
+  Ttl?: string
   /**
    * 白名单自增ID
    */
-  ID: string
+  ID?: string
   /**
    * 业务唯一标识
    */
-  WhitelistUin: string
+  WhitelistUin?: string
   /**
    * 创建者ID
    */
-  CreateUser: string
+  CreateUser?: string
   /**
    * aid标识
    */
-  Aid: string
+  Aid?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -3339,77 +3373,75 @@ export interface RumProject {
   /**
    * 项目名
    */
-  Name: string
+  Name?: string
   /**
    * 创建者 id
    */
-  Creator: string
+  Creator?: string
   /**
    * 实例 id
    */
-  InstanceID: string
+  InstanceID?: string
   /**
    * 项目类型
    */
-  Type: string
+  Type?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 项目仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Repo: string
+  Repo?: string
   /**
    * 项目网址地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  URL: string
+  URL?: string
   /**
    * 项目采样频率
    */
-  Rate: string
+  Rate?: string
   /**
    * 项目唯一key（长度 12 位）
    */
-  Key: string
+  Key?: string
   /**
    * 是否开启url聚类
    */
-  EnableURLGroup: number
+  EnableURLGroup?: number
   /**
    * 实例名
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 项目 ID
    */
-  ID: number
+  ID?: number
   /**
    * 实例 key
    */
-  InstanceKey: string
+  InstanceKey?: string
   /**
    * 项目描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Desc: string
+  Desc?: string
   /**
    * 是否星标  1:是 0:否
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsStar: number
+  IsStar?: number
   /**
    * 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁)
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectStatus: number
+  ProjectStatus?: number
   /**
    * 日志接入点，用户忽略。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessPoint?: string
+  /**
+   * kafka旁路配置信息
+   */
+  Kafka?: Kafka
 }
 
 /**
@@ -3479,54 +3511,53 @@ export interface RumInstanceInfo {
   /**
    * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=已删除)
    */
-  InstanceStatus: number
+  InstanceStatus?: number
   /**
    * 片区Id
    */
-  AreaId: number
+  AreaId?: number
   /**
    * 标签列表
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 实例Id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 集群Id
    */
-  ClusterId: number
+  ClusterId?: number
   /**
    * 实例描述
    */
-  InstanceDesc: string
+  InstanceDesc?: string
   /**
    * 计费状态(1=使用中，2=已过期，3=已销毁，4=分配中，5=分配失败)
    */
-  ChargeStatus: number
+  ChargeStatus?: number
   /**
    * 计费类型(1=免费版，2=预付费，3=后付费)
    */
-  ChargeType: number
+  ChargeType?: number
   /**
    * 更新时间
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 数据保留时间(天)
    */
-  DataRetentionDays: number
+  DataRetentionDays?: number
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 实例类型 1:原web相关类型 2:app端类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: number
 }

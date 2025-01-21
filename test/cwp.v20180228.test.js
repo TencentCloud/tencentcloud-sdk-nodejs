@@ -2178,16 +2178,6 @@ it("cwp.v20180228.ModifyBaselinePolicy", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeAttackSourceEvents", async function () {
-    try {
-       const data = await client.DescribeAttackSourceEvents({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeAssetJarInfo", async function () {
     try {
        const data = await client.DescribeAssetJarInfo({})
@@ -3001,16 +2991,6 @@ it("cwp.v20180228.DescribeIgnoreRuleEffectHostList", async function () {
 it("cwp.v20180228.DescribeAssetAppList", async function () {
     try {
        const data = await client.DescribeAssetAppList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.DescribeAttackSource", async function () {
-    try {
-       const data = await client.DescribeAttackSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeployConfigGroupVersionRequest, DescribeFunctionsResponse, DeleteL4ProxyRulesRequest, DescribeOriginGroupResponse, DescribeSecurityIPGroupInfoResponse, DescribeConfigGroupVersionDetailResponse, BindSharedCNAMEResponse, ModifyAccelerationDomainResponse, DescribeHostsSettingResponse, DescribeRulesResponse, CreateCLSIndexResponse, DescribeRealtimeLogDeliveryTasksRequest, DescribeOriginProtectionResponse, DescribeBillingDataRequest, DescribeEnvironmentsRequest, DescribeAliasDomainsRequest, CreateRealtimeLogDeliveryTaskRequest, ModifyAccelerationDomainStatusesResponse, ModifyAccelerationDomainRequest, ModifyContentIdentifierResponse, CreateAliasDomainRequest, CreatePrefetchTaskRequest, DescribeApplicationProxiesResponse, DescribeTopL7AnalysisDataRequest, DescribeAccelerationDomainsResponse, IdentifyZoneResponse, ModifyLoadBalancerResponse, ModifyL4ProxyResponse, CreateFunctionRuleRequest, DescribeAliasDomainsResponse, ModifyLoadBalancerRequest, DescribeTimingL7CacheDataRequest, CreateFunctionRequest, DescribeDDoSAttackEventResponse, DeleteL4ProxyRulesResponse, DescribeTimingL7AnalysisDataResponse, ModifyFunctionRulePriorityResponse, ModifyCustomErrorPageResponse, VerifyOwnershipResponse, DownloadL4LogsRequest, ModifyZoneSettingRequest, DeleteCustomErrorPageResponse, DescribeTimingL7CacheDataResponse, DescribeZonesResponse, DeleteCustomErrorPageRequest, DeleteZoneRequest, ModifyPlanRequest, ModifyL4ProxyRulesRequest, DescribeRulesSettingRequest, ModifyAliasDomainRequest, CreateFunctionRuleResponse, CreateSecurityIPGroupRequest, CreateOriginGroupRequest, CreateSecurityIPGroupResponse, CreateSharedCNAMEResponse, DescribeAvailablePlansResponse, ModifyRealtimeLogDeliveryTaskResponse, DescribeSecurityTemplateBindingsRequest, CreateL4ProxyRulesRequest, DescribeDDoSAttackTopDataResponse, DeleteRulesRequest, DescribeCustomErrorPagesResponse, DeleteApplicationProxyResponse, DeleteSecurityIPGroupResponse, ModifyRuleRequest, RenewPlanRequest, DescribePrefetchTasksResponse, DescribeZoneSettingRequest, ModifyL4ProxyStatusResponse, ModifySecurityPolicyRequest, CreateApplicationProxyResponse, DescribeL4ProxyRulesResponse, DescribeFunctionsRequest, ModifyDnsRecordsStatusRequest, DeleteAliasDomainRequest, CreatePurgeTaskResponse, DeleteApplicationProxyRuleResponse, DeleteAccelerationDomainsResponse, DeleteOriginGroupRequest, ModifyRuleResponse, DescribeRulesSettingResponse, BindSecurityTemplateToEntityResponse, ModifyL4ProxyRulesResponse, DescribeConfigGroupVersionDetailRequest, ModifyPlanResponse, CreateDnsRecordResponse, DescribeZonesRequest, DescribeZoneConfigImportResultResponse, ModifyFunctionRulePriorityRequest, DeleteSharedCNAMERequest, ModifyRealtimeLogDeliveryTaskRequest, DescribeHostsSettingRequest, DestroyPlanRequest, CreatePlanRequest, DescribeFunctionRuntimeEnvironmentRequest, DescribeDnsRecordsRequest, CreatePrefetchTaskResponse, DescribeDefaultCertificatesRequest, ModifyApplicationProxyRuleResponse, CreateConfigGroupVersionResponse, DownloadL7LogsRequest, DescribeRealtimeLogDeliveryTasksResponse, DescribeConfigGroupVersionsResponse, DeleteRealtimeLogDeliveryTaskResponse, DescribeOverviewL7DataResponse, DescribeEnvironmentsResponse, CreatePlanForZoneRequest, CreateL4ProxyRulesResponse, ModifyCustomErrorPageRequest, ModifyFunctionRuleResponse, DescribeFunctionRulesResponse, DownloadL4LogsResponse, BindSharedCNAMERequest, DeleteOriginGroupResponse, DescribeL4ProxyRequest, DescribeIdentificationsRequest, ModifyHostsCertificateResponse, CreateAccelerationDomainRequest, DescribeZoneSettingResponse, DescribePurgeTasksRequest, ModifyDnsRecordsRequest, IdentifyZoneRequest, UpgradePlanResponse, CreateLoadBalancerResponse, CreateConfigGroupVersionRequest, DescribeLoadBalancerListRequest, DescribeDDoSAttackEventRequest, ModifyFunctionResponse, DescribeOriginGroupRequest, DescribeIPRegionRequest, CreatePlanForZoneResponse, ModifyL4ProxyRulesStatusResponse, CheckCnameStatusResponse, ImportZoneConfigResponse, VerifyOwnershipRequest, DeleteL4ProxyRequest, DeleteApplicationProxyRequest, ModifyZoneStatusRequest, DescribeL4ProxyResponse, ModifyOriginGroupResponse, DeleteAccelerationDomainsRequest, RenewPlanResponse, DescribeDeployHistoryRequest, ModifyOriginGroupRequest, DeleteZoneResponse, CreateRuleResponse, BindZoneToPlanResponse, CreateDnsRecordRequest, ModifyApplicationProxyRequest, ModifyAliasDomainStatusRequest, DeleteFunctionRequest, DeleteRealtimeLogDeliveryTaskRequest, ModifyApplicationProxyRuleRequest, CreateFunctionResponse, DescribeLoadBalancerListResponse, DeleteSecurityIPGroupRequest, CreateAliasDomainResponse, DeleteApplicationProxyRuleRequest, CreateRealtimeLogDeliveryTaskResponse, DescribeTopL7CacheDataResponse, DescribeFunctionRuntimeEnvironmentResponse, DescribeSecurityTemplateBindingsResponse, ModifyAliasDomainStatusResponse, DeleteFunctionRulesRequest, DescribeTimingL7AnalysisDataRequest, ModifyFunctionRequest, ModifyApplicationProxyStatusRequest, CreateZoneRequest, CreateApplicationProxyRuleRequest, DescribeDnsRecordsResponse, DescribeDDoSAttackDataRequest, CreateL4ProxyRequest, CreatePlanResponse, DescribeApplicationProxiesRequest, DescribeContentQuotaRequest, CreateRuleRequest, ModifyL4ProxyStatusRequest, CreateApplicationProxyRuleResponse, CreateApplicationProxyRequest, HandleFunctionRuntimeEnvironmentRequest, ModifyL4ProxyRulesStatusRequest, DescribeCustomErrorPagesRequest, DescribeTimingL4DataResponse, ModifyApplicationProxyResponse, ModifySecurityIPGroupResponse, ModifyL4ProxyRequest, DescribeSecurityIPGroupInfoRequest, DescribeZoneConfigImportResultRequest, ModifyApplicationProxyRuleStatusRequest, DestroyPlanResponse, ModifyAliasDomainResponse, DeleteDnsRecordsRequest, ModifyHostsCertificateRequest, DeleteFunctionRulesResponse, DescribeTopL7AnalysisDataResponse, ModifyContentIdentifierRequest, DescribeOriginProtectionRequest, DeleteContentIdentifierResponse, HandleFunctionRuntimeEnvironmentResponse, DeleteRulesResponse, ModifySecurityIPGroupRequest, CreateSharedCNAMERequest, DeleteAliasDomainResponse, ModifyZoneResponse, DescribeTopL7CacheDataRequest, CreateLoadBalancerRequest, DescribeOriginGroupHealthStatusRequest, DescribeContentIdentifiersRequest, ExportZoneConfigRequest, DescribeDDoSAttackDataResponse, DescribeIdentificationsResponse, DeleteL4ProxyResponse, ModifyApplicationProxyRuleStatusResponse, ModifyZoneRequest, IncreasePlanQuotaResponse, DescribeIPRegionResponse, DescribeAvailablePlansRequest, DeleteContentIdentifierRequest, CreateContentIdentifierRequest, ModifyDnsRecordsStatusResponse, ImportZoneConfigRequest, ModifyFunctionRuleRequest, IncreasePlanQuotaRequest, DescribeDDoSAttackTopDataRequest, CreateCLSIndexRequest, DescribeRulesRequest, DescribeContentQuotaResponse, ModifyZoneSettingResponse, DownloadL7LogsResponse, CreateCustomizeErrorPageResponse, DescribeOverviewL7DataRequest, DeleteSharedCNAMEResponse, DescribePrefetchTasksRequest, ModifyDnsRecordsResponse, BindZoneToPlanRequest, DeleteFunctionResponse, DeleteLoadBalancerRequest, CreateCustomizeErrorPageRequest, DescribeSecurityIPGroupRequest, ModifyApplicationProxyStatusResponse, BindSecurityTemplateToEntityRequest, ExportZoneConfigResponse, DescribeBillingDataResponse, CreateAccelerationDomainResponse, ModifyAccelerationDomainStatusesRequest, CreateZoneResponse, CreateL4ProxyResponse, ModifySecurityPolicyResponse, DeleteLoadBalancerResponse, DescribeOriginGroupHealthStatusResponse, DescribeContentIdentifiersResponse, DescribeDefaultCertificatesResponse, CreateOriginGroupResponse, CreateContentIdentifierResponse, DescribeConfigGroupVersionsRequest, DescribeL4ProxyRulesRequest, CheckCnameStatusRequest, ModifyZoneStatusResponse, DescribeSecurityIPGroupResponse, UpgradePlanRequest, CreatePurgeTaskRequest, DeleteDnsRecordsResponse, DescribePurgeTasksResponse, DescribeFunctionRulesRequest, DeployConfigGroupVersionResponse, DescribeDeployHistoryResponse, DescribeAccelerationDomainsRequest, DescribeTimingL4DataRequest } from "./teo_models";
+import { DeployConfigGroupVersionRequest, DescribeFunctionsResponse, DeleteL4ProxyRulesRequest, DescribeOriginGroupResponse, DescribeSecurityIPGroupInfoResponse, DescribeConfigGroupVersionDetailResponse, ModifyFunctionRulePriorityRequest, ModifyAccelerationDomainResponse, DescribeHostsSettingResponse, DescribeRulesResponse, CreateCLSIndexResponse, DescribeRealtimeLogDeliveryTasksRequest, DescribeOriginProtectionResponse, DescribeBillingDataRequest, DescribeEnvironmentsRequest, DescribeAliasDomainsRequest, CreateRealtimeLogDeliveryTaskRequest, ModifyAccelerationDomainStatusesResponse, ModifyAccelerationDomainRequest, ModifyContentIdentifierResponse, CreateAliasDomainRequest, CreatePrefetchTaskRequest, DescribeApplicationProxiesResponse, DescribeTopL7AnalysisDataRequest, DescribeAccelerationDomainsResponse, IdentifyZoneResponse, ModifyLoadBalancerResponse, ModifyL4ProxyResponse, CreateFunctionRuleRequest, DescribeAliasDomainsResponse, ModifyLoadBalancerRequest, DescribeTimingL7CacheDataRequest, CreateFunctionRequest, DescribeDDoSAttackEventResponse, DeleteL4ProxyRulesResponse, CreateL7AccRulesResponse, DescribeTimingL7AnalysisDataResponse, CreateL7AccRulesRequest, DeleteLoadBalancerRequest, ModifyCustomErrorPageResponse, VerifyOwnershipResponse, DownloadL4LogsRequest, ModifyZoneSettingRequest, ModifyDnsRecordsResponse, DeleteCustomErrorPageResponse, DescribeTimingL7CacheDataResponse, DescribeZonesResponse, DeleteCustomErrorPageRequest, DeleteZoneRequest, ModifyPlanRequest, ModifyL4ProxyRulesRequest, DescribeRulesSettingRequest, ModifyAliasDomainRequest, CreateFunctionRuleResponse, CreateSecurityIPGroupRequest, CreateOriginGroupRequest, CreateSecurityIPGroupResponse, CreateSharedCNAMEResponse, DescribeAvailablePlansResponse, ModifyRealtimeLogDeliveryTaskResponse, DescribeSecurityTemplateBindingsRequest, CreateL4ProxyRulesRequest, DescribeDDoSAttackTopDataResponse, DeleteRulesRequest, ModifyL7AccRuleRequest, DescribeCustomErrorPagesResponse, DeleteApplicationProxyResponse, DeleteSecurityIPGroupResponse, ModifyRuleRequest, RenewPlanRequest, DescribePrefetchTasksResponse, DescribeZoneSettingRequest, ModifyL4ProxyStatusResponse, ModifySecurityPolicyRequest, DeleteL7AccRulesRequest, CreateApplicationProxyResponse, DescribeL4ProxyRulesResponse, DescribeFunctionsRequest, ModifyDnsRecordsStatusRequest, ModifyHostsCertificateRequest, CreatePurgeTaskResponse, DeleteApplicationProxyRuleResponse, DeleteAccelerationDomainsResponse, DeleteOriginGroupRequest, ModifyRuleResponse, DescribeRulesSettingResponse, BindSecurityTemplateToEntityResponse, ModifyL4ProxyRulesResponse, DescribeConfigGroupVersionDetailRequest, ModifyPlanResponse, CreateDnsRecordResponse, DescribeZonesRequest, DescribeZoneConfigImportResultResponse, BindSharedCNAMEResponse, DeleteSharedCNAMERequest, ModifyRealtimeLogDeliveryTaskRequest, DescribeHostsSettingRequest, DestroyPlanRequest, CreatePlanRequest, DescribeFunctionRuntimeEnvironmentRequest, DescribeDnsRecordsRequest, CreatePrefetchTaskResponse, DescribeDefaultCertificatesRequest, ModifyApplicationProxyRuleResponse, CreateConfigGroupVersionResponse, DownloadL7LogsRequest, DescribeRealtimeLogDeliveryTasksResponse, DescribeConfigGroupVersionsResponse, DeleteRealtimeLogDeliveryTaskResponse, DescribeOverviewL7DataResponse, DescribeEnvironmentsResponse, CreatePlanForZoneRequest, CreateL4ProxyRulesResponse, ModifyCustomErrorPageRequest, ModifyFunctionRuleResponse, DescribeL7AccRulesRequest, DescribeFunctionRulesResponse, DownloadL4LogsResponse, BindSharedCNAMERequest, DeleteOriginGroupResponse, DescribeL4ProxyRequest, DescribeIdentificationsRequest, ModifyHostsCertificateResponse, CreateAccelerationDomainRequest, DescribeZoneSettingResponse, DescribePurgeTasksRequest, ModifyDnsRecordsRequest, IdentifyZoneRequest, DescribeL7AccSettingRequest, UpgradePlanResponse, CreateLoadBalancerResponse, CreateConfigGroupVersionRequest, DescribeLoadBalancerListRequest, DescribeDDoSAttackEventRequest, ModifyFunctionResponse, DescribeOriginGroupRequest, DescribeIPRegionRequest, CreatePlanForZoneResponse, ModifyL4ProxyRulesStatusResponse, CheckCnameStatusResponse, ImportZoneConfigResponse, VerifyOwnershipRequest, DeleteL4ProxyRequest, DeleteApplicationProxyRequest, ModifyZoneStatusRequest, DescribeL4ProxyResponse, ModifyOriginGroupResponse, DeleteAccelerationDomainsRequest, RenewPlanResponse, DescribeDeployHistoryRequest, ModifyOriginGroupRequest, DeleteZoneResponse, CreateRuleResponse, ModifyL7AccSettingResponse, BindZoneToPlanResponse, DescribeL7AccSettingResponse, CreateDnsRecordRequest, ModifyApplicationProxyRequest, ModifyAliasDomainStatusRequest, DeleteFunctionRequest, DeleteRealtimeLogDeliveryTaskRequest, ModifyApplicationProxyRuleRequest, CreateFunctionResponse, DescribeLoadBalancerListResponse, DescribeL7AccRulesResponse, DeleteSecurityIPGroupRequest, CreateAliasDomainResponse, DeleteApplicationProxyRuleRequest, ModifyL7AccRuleResponse, CreateRealtimeLogDeliveryTaskResponse, DescribeTopL7CacheDataResponse, DescribeFunctionRuntimeEnvironmentResponse, DescribeSecurityTemplateBindingsResponse, ModifyAliasDomainStatusResponse, DeleteFunctionRulesRequest, DescribeTimingL7AnalysisDataRequest, ModifyFunctionRequest, ModifyApplicationProxyStatusRequest, CreateZoneRequest, CreateApplicationProxyRuleRequest, DescribeDnsRecordsResponse, DescribeDDoSAttackDataRequest, CreateL4ProxyRequest, CreatePlanResponse, DescribeApplicationProxiesRequest, DescribeContentQuotaRequest, CreateRuleRequest, ModifyL4ProxyStatusRequest, CreateApplicationProxyRuleResponse, CreateApplicationProxyRequest, HandleFunctionRuntimeEnvironmentRequest, ModifyL4ProxyRulesStatusRequest, DescribeCustomErrorPagesRequest, ModifyApplicationProxyResponse, ModifySecurityIPGroupResponse, ModifyL4ProxyRequest, DescribeSecurityIPGroupInfoRequest, DescribeZoneConfigImportResultRequest, ModifyApplicationProxyRuleStatusRequest, DestroyPlanResponse, ModifyAliasDomainResponse, DeleteDnsRecordsRequest, DeleteAliasDomainRequest, DeleteFunctionRulesResponse, DescribeTopL7AnalysisDataResponse, ModifyContentIdentifierRequest, DescribeOriginProtectionRequest, DeleteContentIdentifierResponse, HandleFunctionRuntimeEnvironmentResponse, DeleteRulesResponse, ModifySecurityIPGroupRequest, CreateSharedCNAMERequest, DeleteAliasDomainResponse, ModifyZoneResponse, DescribeTopL7CacheDataRequest, CreateLoadBalancerRequest, DescribeOriginGroupHealthStatusRequest, DescribeContentIdentifiersRequest, ExportZoneConfigRequest, DescribeDDoSAttackDataResponse, DescribeIdentificationsResponse, DeleteL4ProxyResponse, ModifyApplicationProxyRuleStatusResponse, ModifyZoneRequest, IncreasePlanQuotaResponse, DescribeIPRegionResponse, DescribeAvailablePlansRequest, DeleteContentIdentifierRequest, CreateContentIdentifierRequest, ModifyDnsRecordsStatusResponse, ImportZoneConfigRequest, ModifyFunctionRuleRequest, IncreasePlanQuotaRequest, DescribeDDoSAttackTopDataRequest, CreateCLSIndexRequest, DescribeRulesRequest, DescribeContentQuotaResponse, ModifyZoneSettingResponse, DownloadL7LogsResponse, CreateCustomizeErrorPageResponse, DescribeOverviewL7DataRequest, DeleteSharedCNAMEResponse, DescribePrefetchTasksRequest, BindZoneToPlanRequest, DeleteFunctionResponse, ModifyL7AccSettingRequest, ModifyFunctionRulePriorityResponse, CreateCustomizeErrorPageRequest, DescribeSecurityIPGroupRequest, ModifyApplicationProxyStatusResponse, BindSecurityTemplateToEntityRequest, ExportZoneConfigResponse, DescribeBillingDataResponse, CreateAccelerationDomainResponse, ModifyAccelerationDomainStatusesRequest, CreateZoneResponse, CreateL4ProxyResponse, ModifySecurityPolicyResponse, DeleteLoadBalancerResponse, DeleteL7AccRulesResponse, DescribeOriginGroupHealthStatusResponse, DescribeContentIdentifiersResponse, DescribeDefaultCertificatesResponse, CreateOriginGroupResponse, CreateContentIdentifierResponse, DescribeConfigGroupVersionsRequest, DescribeL4ProxyRulesRequest, CheckCnameStatusRequest, ModifyZoneStatusResponse, DescribeSecurityIPGroupResponse, UpgradePlanRequest, CreatePurgeTaskRequest, DeleteDnsRecordsResponse, DescribePurgeTasksResponse, DescribeFunctionRulesRequest, DeployConfigGroupVersionResponse, DescribeDeployHistoryResponse, DescribeAccelerationDomainsRequest, DescribeTimingL4DataRequest, DescribeTimingL4DataResponse } from "./teo_models";
 /**
  * teo client
  * @class
@@ -83,6 +83,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDefaultCertificates(req: DescribeDefaultCertificatesRequest, cb?: (error: string, rep: DescribeDefaultCertificatesResponse) => void): Promise<DescribeDefaultCertificatesResponse>;
     /**
+     * 本接口用于修改[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中的规则，单次仅支持修改单条规则。
+     */
+    ModifyL7AccRule(req: ModifyL7AccRuleRequest, cb?: (error: string, rep: ModifyL7AccRuleResponse) => void): Promise<ModifyL7AccRuleResponse>;
+    /**
      * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
      */
     DescribeAccelerationDomains(req: DescribeAccelerationDomainsRequest, cb?: (error: string, rep: DescribeAccelerationDomainsResponse) => void): Promise<DescribeAccelerationDomainsResponse>;
@@ -99,6 +103,10 @@ export declare class Client extends AbstractClient {
 ](https://cloud.tencent.com/document/product/1552/103415) 。
      */
     DeleteApplicationProxy(req: DeleteApplicationProxyRequest, cb?: (error: string, rep: DeleteApplicationProxyResponse) => void): Promise<DeleteApplicationProxyResponse>;
+    /**
+     * 本接口用于修改[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+     */
+    ModifyL7AccSetting(req: ModifyL7AccSettingRequest, cb?: (error: string, rep: ModifyL7AccSettingResponse) => void): Promise<ModifyL7AccSettingResponse>;
     /**
      * 用于启用/停用四层代理实例。
      */
@@ -150,6 +158,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
      */
     DescribeConfigGroupVersionDetail(req: DescribeConfigGroupVersionDetailRequest, cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void): Promise<DescribeConfigGroupVersionDetailResponse>;
+    /**
+     * 本接口用于查询[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则列表。
+     */
+    DescribeL7AccRules(req: DescribeL7AccRulesRequest, cb?: (error: string, rep: DescribeL7AccRulesResponse) => void): Promise<DescribeL7AccRulesResponse>;
     /**
      * 操作安全策略模板，支持将域名绑定或换绑到指定的策略模板，或者从指定的策略模板解绑。
      */
@@ -213,7 +225,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DescribeConfigGroupVersions(req: DescribeConfigGroupVersionsRequest, cb?: (error: string, rep: DescribeConfigGroupVersionsResponse) => void): Promise<DescribeConfigGroupVersionsResponse>;
     /**
-     * 用于修改站点配置
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccSetting](https://cloud.tencent.com/document/product/1552/115817)。
      */
     ModifyZoneSetting(req: ModifyZoneSettingRequest, cb?: (error: string, rep: ModifyZoneSettingResponse) => void): Promise<ModifyZoneSettingResponse>;
     /**
@@ -225,9 +237,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     ModifyAliasDomainStatus(req: ModifyAliasDomainStatusRequest, cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void): Promise<ModifyAliasDomainStatusResponse>;
     /**
-     * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
+     * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
      */
-    DescribeDnsRecords(req: DescribeDnsRecordsRequest, cb?: (error: string, rep: DescribeDnsRecordsResponse) => void): Promise<DescribeDnsRecordsResponse>;
+    DescribeSecurityIPGroup(req: DescribeSecurityIPGroupRequest, cb?: (error: string, rep: DescribeSecurityIPGroupResponse) => void): Promise<DescribeSecurityIPGroupResponse>;
     /**
      * 用于创建四层代理实例规则，支持单条或者批量创建。
      */
@@ -260,6 +272,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      * 修改套餐配置。目前仅支持修改预付费套餐的自动续费开关。
      */
     ModifyPlan(req: ModifyPlanRequest, cb?: (error: string, rep: ModifyPlanResponse) => void): Promise<ModifyPlanResponse>;
+    /**
+     * 本接口用于删除[规则引擎](https://cloud.tencent.com/document/product/1552/70901)的规则，支持批量删除。
+     */
+    DeleteL7AccRules(req: DeleteL7AccRulesRequest, cb?: (error: string, rep: DeleteL7AccRulesResponse) => void): Promise<DeleteL7AccRulesResponse>;
     /**
      * 将未绑定套餐的站点绑定到已有套餐
      */
@@ -357,7 +373,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DeleteContentIdentifier(req: DeleteContentIdentifierRequest, cb?: (error: string, rep: DeleteContentIdentifierResponse) => void): Promise<DeleteContentIdentifierResponse>;
     /**
-     * 返回规则引擎可应用匹配请求的设置列表及其详细建议配置信息
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [RuleEngineAction](https://cloud.tencent.com/document/product/1552/80721#RuleEngineAction)。
      */
     DescribeRulesSetting(req?: DescribeRulesSettingRequest, cb?: (error: string, rep: DescribeRulesSettingResponse) => void): Promise<DescribeRulesSettingResponse>;
     /**
@@ -381,11 +397,15 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     ModifyZoneStatus(req: ModifyZoneStatusRequest, cb?: (error: string, rep: ModifyZoneStatusResponse) => void): Promise<ModifyZoneStatusResponse>;
     /**
+     * 本接口用于在[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中创建规则，支持批量创建。
+     */
+    CreateL7AccRules(req: CreateL7AccRulesRequest, cb?: (error: string, rep: CreateL7AccRulesResponse) => void): Promise<CreateL7AccRulesResponse>;
+    /**
      * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
      */
     DescribePurgeTasks(req: DescribePurgeTasksRequest, cb?: (error: string, rep: DescribePurgeTasksResponse) => void): Promise<DescribePurgeTasksResponse>;
     /**
-     * 批量删除规则引擎规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DeleteL7AccRules](https://cloud.tencent.com/document/product/1552/115821)。
      */
     DeleteRules(req: DeleteRulesRequest, cb?: (error: string, rep: DeleteRulesResponse) => void): Promise<DeleteRulesResponse>;
     /**
@@ -425,7 +445,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     ModifySecurityIPGroup(req: ModifySecurityIPGroupRequest, cb?: (error: string, rep: ModifySecurityIPGroupResponse) => void): Promise<ModifySecurityIPGroupResponse>;
     /**
-     * 查询规则引擎规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820)。
      */
     DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
     /**
@@ -454,6 +474,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     ModifyApplicationProxyRule(req: ModifyApplicationProxyRuleRequest, cb?: (error: string, rep: ModifyApplicationProxyRuleResponse) => void): Promise<ModifyApplicationProxyRuleResponse>;
     /**
+     * 本接口用于查询[站点加速](https://cloud.tencent.com/document/product/1552/96193)全局配置。
+     */
+    DescribeL7AccSetting(req: DescribeL7AccSettingRequest, cb?: (error: string, rep: DescribeL7AccSettingResponse) => void): Promise<DescribeL7AccSettingResponse>;
+    /**
      * 创建源站组，以源站组的方式管理业务源站。此处配置的源站组可于**添加加速域名**和**四层代理**等功能中引用。
      */
     CreateOriginGroup(req: CreateOriginGroupRequest, cb?: (error: string, rep: CreateOriginGroupResponse) => void): Promise<CreateOriginGroupResponse>;
@@ -472,7 +496,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DeployConfigGroupVersion(req: DeployConfigGroupVersionRequest, cb?: (error: string, rep: DeployConfigGroupVersionResponse) => void): Promise<DeployConfigGroupVersionResponse>;
     /**
-     * 用于查询域名配置信息
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，可通过 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819) 和 [DescribeL7AccRules](https://cloud.tencent.com/document/product/1552/115820) 来获取域名的详细配置。
      */
     DescribeHostsSetting(req: DescribeHostsSettingRequest, cb?: (error: string, rep: DescribeHostsSettingResponse) => void): Promise<DescribeHostsSettingResponse>;
     /**
@@ -505,7 +529,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     RenewPlan(req: RenewPlanRequest, cb?: (error: string, rep: RenewPlanResponse) => void): Promise<RenewPlanResponse>;
     /**
-     * 用于查询站点的所有配置信息。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [DescribeL7AccSetting](https://cloud.tencent.com/document/product/1552/115819)。
      */
     DescribeZoneSetting(req: DescribeZoneSettingRequest, cb?: (error: string, rep: DescribeZoneSettingResponse) => void): Promise<DescribeZoneSettingResponse>;
     /**
@@ -545,9 +569,9 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DescribeSecurityIPGroupInfo(req: DescribeSecurityIPGroupInfoRequest, cb?: (error: string, rep: DescribeSecurityIPGroupInfoResponse) => void): Promise<DescribeSecurityIPGroupInfoResponse>;
     /**
-     * 查询安全 IP 组的配置信息，包括安全 IP 组的 ID、名称和内容。
+     * 您可以用过本接口查看站点下的 DNS 记录信息，包括 DNS 记录名、记录类型以及记录内容等信息，支持指定过滤条件查询对应的 DNS 记录信息。
      */
-    DescribeSecurityIPGroup(req: DescribeSecurityIPGroupRequest, cb?: (error: string, rep: DescribeSecurityIPGroupResponse) => void): Promise<DescribeSecurityIPGroupResponse>;
+    DescribeDnsRecords(req: DescribeDnsRecordsRequest, cb?: (error: string, rep: DescribeDnsRecordsResponse) => void): Promise<DescribeDnsRecordsResponse>;
     /**
      * 导入站点配置接口，本接口支持站点配置文件的快速导入，发起导入后接口会返回对应的任务 ID（TaskId），用户需通过查询站点配置导入结果接口（DescribeZoneConfigImportResult）获取本次导入任务执行的结果。该功能仅支持标准版和企业版套餐站点使用。
      */

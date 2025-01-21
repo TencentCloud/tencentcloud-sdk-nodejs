@@ -4,12 +4,10 @@
 export interface DescribeInstanceUsedSubnetsResponse {
     /**
      * 集群使用的vpc信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
      * 集群使用的subnet信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedSubnets?: Array<string>;
     /**
@@ -27,7 +25,6 @@ export interface DescribeInstanceNodesResponse {
     TotalCount?: number;
     /**
      * 实例节点总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceNodesList?: Array<InstanceNode>;
     /**
@@ -95,7 +92,6 @@ export interface DescribeClusterConfigsResponse {
     BuildVersion?: string;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -509,7 +505,6 @@ export interface DescribeInstanceOperationsResponse {
     TotalCount?: number;
     /**
      * 操作记录具体数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Operations?: Array<InstanceOperation>;
     /**
@@ -642,12 +637,10 @@ export interface DescribeAreaRegionResponse {
     Items?: Array<RegionAreaInfo>;
     /**
      * 前端规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FrontEndRules?: Array<FrontEndRule>;
     /**
      * 返回可用的白名单名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvailableWhiteListNames?: Array<string>;
     /**
@@ -855,14 +848,12 @@ export interface DescribeSlowQueryRecordsDownloadRequest {
 export interface DescribeRestoreTaskDetailResponse {
     /**
      * 恢复任务进度详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RestoreStatus: Array<RestoreStatus>;
+    RestoreStatus?: Array<RestoreStatus>;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1305,8 +1296,13 @@ export interface CreateInstanceNewRequest {
     EnableMultiZones?: boolean;
     /**
      * 开启多可用区后，用户的所有可用区和子网信息
+     * @deprecated
      */
     UserMultiZoneInfos?: NetworkInfo;
+    /**
+     * 开启多可用区后，用户的所有可用区和子网信息
+     */
+    UserMultiZoneInfoArr?: Array<NetworkInfo>;
 }
 /**
  * UpdateCoolDown请求参数结构体
@@ -1731,7 +1727,6 @@ export interface DescribeInstanceNodesInfoRequest {
 export interface DescribeInstancesHealthStateResponse {
     /**
      * base64编码后的数据，包含了集群的健康信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: string;
     /**
@@ -1992,17 +1987,14 @@ export interface DescribeBackUpTablesResponse {
     AvailableTables?: Array<BackupTableContent>;
     /**
      * msg
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Msg?: string;
     /**
      * 未知version
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUnknownVersion?: boolean;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -2588,17 +2580,14 @@ export interface DescribeInstanceResponse {
 export interface DescribeBackUpJobResponse {
     /**
      * 任务列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackUpJobs?: Array<BackUpJobDisplay>;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2838,9 +2827,20 @@ export interface DescribeDatabaseAuditRecordsRequest {
 export interface DescribeBackUpJobDetailResponse {
     /**
      * 备份表详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TableContents: Array<BackupTableContent>;
+    TableContents?: Array<BackupTableContent>;
+    /**
+     * 错误信息
+     */
+    ErrorMsg?: string;
+    /**
+     * 是否是未知版本
+     */
+    IsUnknownVersion?: boolean;
+    /**
+     * 返回对象用字符串表示
+     */
+    Msg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2865,12 +2865,10 @@ export interface DescribeBackUpJobDetailRequest {
 export interface DescribeCoolDownBackendsResponse {
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
      * 节点信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<CoolDownBackend>;
     /**
@@ -2884,12 +2882,10 @@ export interface DescribeCoolDownBackendsResponse {
 export interface DescribeCoolDownPoliciesResponse {
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
      * 冷热分层策略列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<CoolDownPolicyInfo>;
     /**
@@ -3021,14 +3017,12 @@ export interface CoolDownBackend {
 export interface DescribeBackUpTaskDetailResponse {
     /**
      * 备份任务进度详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupStatus: Array<BackupStatus>;
+    BackupStatus?: Array<BackupStatus>;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3100,12 +3094,10 @@ export interface InstanceDetail {
 export interface DescribeCoolDownTableDataResponse {
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
      * 冷热分层Table数据列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<CoolDownTableDataInfo>;
     /**
@@ -3237,27 +3229,22 @@ export interface DescribeInstanceStateResponse {
     InstanceState?: string;
     /**
      * 集群操作创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowCreateTime?: string;
     /**
      * 集群操作名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowName?: string;
     /**
      * 集群操作进度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowProgress?: number;
     /**
      * 集群状态描述，例如：运行中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStateDesc?: string;
     /**
      * 集群流程错误信息，例如：“创建失败，资源不足”
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowMsg?: string;
     /**
@@ -3501,7 +3488,6 @@ export interface BackUpJobDisplay {
     BackUpSize?: number;
     /**
      * 备份单副本数据量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackUpSingleSize?: number;
     /**
@@ -3518,34 +3504,32 @@ export interface BackUpJobDisplay {
     JobStatus?: string;
     /**
      * 0为默认。1时是对远端的doris进行备份，不周期，一次性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupType?: number;
     /**
      * 0为默认。1时是立即备份。2时是迁移
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupTimeType?: number;
     /**
      * 远端doris的连接信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DorisSourceInfo?: DorisSourceInfo;
     /**
      * 实例状态对应的数值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobStatusNum?: number;
     /**
      * 备份实例中关于cos的信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupCosInfo?: BackupCosInfo;
     /**
      * 是否使用的自定义桶
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsUserDefineBucket?: boolean;
+    /**
+     * 错误原因
+     */
+    ErrorReason?: string;
 }
 /**
  * ModifyUserBindWorkloadGroup返回参数结构体
@@ -3957,12 +3941,10 @@ export interface NodeInfos {
 export interface DescribeInstanceNodesInfoResponse {
     /**
      * Be节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeNodes?: Array<string>;
     /**
      * Fe节点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FeNodes?: Array<string>;
     /**
@@ -3971,12 +3953,10 @@ export interface DescribeInstanceNodesInfoResponse {
     FeMaster?: string;
     /**
      * Be节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BeNodeInfos?: Array<NodeInfo>;
     /**
      * Fe节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FeNodeInfos?: Array<NodeInfo>;
     /**

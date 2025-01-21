@@ -47,7 +47,6 @@ import {
   ExportAssetDatabaseListRequest,
   HostLoginWhiteObj,
   ClearLocalStorageResponse,
-  CreateNetAttackWhiteListRequest,
   DescribeUndoVulCountsResponse,
   DescribeBaselineScanScheduleResponse,
   MaliciousRequestWhiteListInfo,
@@ -164,14 +163,12 @@ import {
   DescribeUsualLoginPlacesResponse,
   DescribeAttackEventsRequest,
   DescribeRiskDnsListRequest,
-  DescribeAttackVulTypeListResponse,
   CreateWhiteListOrderRequest,
   BaselineItem,
   DescribeRansomDefenseStrategyDetailResponse,
   EditBashRulesResponse,
   DescribeLogIndexResponse,
   DescribeRansomDefenseBackupListRequest,
-  ModifyFileTamperRuleStatusRequest,
   LoginWhiteLists,
   ScanVulResponse,
   DeleteMalwareWhiteListResponse,
@@ -202,7 +199,7 @@ import {
   HostLoginList,
   DescribeScreenRiskAssetsTopRequest,
   DeletePrivilegeEventsRequest,
-  AssetMachineDetail,
+  DeleteWebHookRuleResponse,
   ModifyNetAttackWhiteListRequest,
   DescribeVulDefenceSettingRequest,
   DescribeTrialReportRequest,
@@ -417,7 +414,7 @@ import {
   ScanAssetRequest,
   DescribeBaselineRuleResponse,
   ModifyMachineRemarkRequest,
-  AttackSourceNode,
+  ModifyVulDefenceEventStatusResponse,
   DescribeBaselineItemRiskTopRequest,
   DeleteMaliciousRequestsResponse,
   DescribeWebHookReceiverRequest,
@@ -435,7 +432,7 @@ import {
   ExportBaselineRuleDetectListRequest,
   SetLocalStorageExpireResponse,
   DescribeBanRegionsResponse,
-  DescribeAttackSourceResponse,
+  RecoverMalwaresRequest,
   DescribeAssetTypeTopResponse,
   DescribeVulDefencePluginExceptionCountRequest,
   DescribeLogIndexRequest,
@@ -472,7 +469,7 @@ import {
   AssetKeyVal,
   AssetWebLocationInfo,
   ChangeRuleEventsIgnoreStatusResponse,
-  DeleteWebHookRuleResponse,
+  AssetMachineDetail,
   SeparateMalwaresRequest,
   AssetDatabaseBaseInfo,
   LicenseOrder,
@@ -522,7 +519,7 @@ import {
   FieldValueRatioInfo,
   DescribeVulDefenceEventRequest,
   ModifyBaselineRuleResponse,
-  AttackSource,
+  RaspRuleVul,
   ExportMaliciousRequestsResponse,
   RetryVulFixRequest,
   DescribeRiskDnsEventListRequest,
@@ -595,7 +592,7 @@ import {
   ModifyLicenseUnBindsRequest,
   DescribeBaselineRuleDetectListRequest,
   DescribeVulOverviewResponse,
-  AttackSourceEdge,
+  ExportRansomDefenseStrategyListRequest,
   DeleteMaliciousRequestsRequest,
   DescribeBanWhiteListRequest,
   VulInfoHostInfo,
@@ -742,7 +739,7 @@ import {
   CanNotSeparateInfo,
   DescribeAssetWebLocationCountResponse,
   DescribeBashEventsNewResponse,
-  RaspRuleVul,
+  VulFixStatusInfo,
   DeleteWebHookReceiverResponse,
   ModifyBashPolicyStatusResponse,
   VertexDetail,
@@ -885,7 +882,7 @@ import {
   ExportInfo,
   DescribeScreenProtectionStatResponse,
   ExportBaselineItemDetectListRequest,
-  DescribeAttackSourceRequest,
+  CreateNetAttackWhiteListRequest,
   DescribeMalwareInfoResponse,
   DeleteRiskDnsPolicyResponse,
   DuplicateHosts,
@@ -952,7 +949,7 @@ import {
   DescribeMalwareTimingScanSettingResponse,
   DescribeHostLoginListRequest,
   ModifyRansomDefenseStrategyStatusResponse,
-  ExportRansomDefenseStrategyListRequest,
+  ModifyLoginWhiteInfoResponse,
   Machine,
   FileTamperRule,
   SecurityTrend,
@@ -978,7 +975,6 @@ import {
   IgnoreBaselineRule,
   DescribeBaselineItemDetectListRequest,
   ExportBaselineItemDetectListResponse,
-  ModifyVulDefenceEventStatusResponse,
   DescribeBanStatusRequest,
   DescribeAssetRecentMachineInfoResponse,
   DescribeBaselineBasicInfoResponse,
@@ -1034,7 +1030,7 @@ import {
   CreateBaselineStrategyRequest,
   DescribeSecurityTrendsRequest,
   VulFixStatusHostInfo,
-  AttackSourceEvent,
+  DescribeAttackVulTypeListResponse,
   DescribePrivilegeRulesResponse,
   DescribeReverseShellEventsResponse,
   DescribeAssetAppCountRequest,
@@ -1048,7 +1044,6 @@ import {
   DescribeVulDefencePluginDetailRequest,
   ModifyLoginWhiteInfoRequest,
   DescribeExportMachinesRequest,
-  RecoverMalwaresRequest,
   DescribeAssetInfoResponse,
   FileTamperRuleDetail,
   DescribeAssetPortCountResponse,
@@ -1082,7 +1077,6 @@ import {
   DescribeAESKeyRequest,
   ModifyWebHookRuleResponse,
   DescribeAssetLoadInfoRequest,
-  ModifyLoginWhiteInfoResponse,
   ExportBaselineWeakPasswordListResponse,
   RetryCreateSnapshotResponse,
   CreateBuyBindTaskResponse,
@@ -1137,7 +1131,6 @@ import {
   DescribeMachineLicenseDetailRequest,
   DescribeVersionCompareChartRequest,
   DescribeProtectDirRelatedServerRequest,
-  VulFixStatusInfo,
   TestWebHookRuleResponse,
   Tags,
   DescribeBaselineItemListResponse,
@@ -1154,7 +1147,7 @@ import {
   DescribeBaselineDefaultStrategyListResponse,
   BanWhiteListDetail,
   DeleteScanTaskResponse,
-  DescribeScreenGeneralStatResponse,
+  ModifyFileTamperRuleStatusRequest,
   EditBashRulesRequest,
   ExportIgnoreBaselineRuleRequest,
   RansomDefenseRollbackTask,
@@ -1293,7 +1286,7 @@ import {
   AssetPortBaseInfo,
   DescribeAssetWebLocationInfoRequest,
   DescribeAlarmVertexIdRequest,
-  DescribeAttackSourceEventsRequest,
+  DescribeScreenGeneralStatResponse,
   DescribeAssetInitServiceListResponse,
   ModifyBaselinePolicyRequest,
   DescribeBaselineHostDetectListRequest,
@@ -1303,7 +1296,6 @@ import {
   DescribeRansomDefenseStrategyDetailRequest,
   ModifyRiskDnsPolicyRequest,
   DescribeWarningListResponse,
-  DescribeAttackSourceEventsResponse,
   ClearLocalStorageRequest,
   DescribeAssetUserListRequest,
   DeleteBaselineStrategyRequest,
@@ -3495,18 +3487,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 已废弃
-
-查询攻击溯源事件
-     */
-  async DescribeAttackSourceEvents(
-    req: DescribeAttackSourceEventsRequest,
-    cb?: (error: string, rep: DescribeAttackSourceEventsResponse) => void
-  ): Promise<DescribeAttackSourceEventsResponse> {
-    return this.request("DescribeAttackSourceEvents", req, cb)
-  }
-
-  /**
    * 获取Jar包详情
    */
   async DescribeAssetJarInfo(
@@ -4327,18 +4307,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetAppListResponse) => void
   ): Promise<DescribeAssetAppListResponse> {
     return this.request("DescribeAssetAppList", req, cb)
-  }
-
-  /**
-     * 已废弃
-
-查询攻击溯源
-     */
-  async DescribeAttackSource(
-    req: DescribeAttackSourceRequest,
-    cb?: (error: string, rep: DescribeAttackSourceResponse) => void
-  ): Promise<DescribeAttackSourceResponse> {
-    return this.request("DescribeAttackSource", req, cb)
   }
 
   /**

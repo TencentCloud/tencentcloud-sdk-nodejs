@@ -1510,6 +1510,10 @@ export interface DescribeTaskListRequest {
    * 架构ID
    */
   ArchId?: string
+  /**
+   * 架构名称
+   */
+  ArchName?: string
 }
 
 /**
@@ -1624,6 +1628,14 @@ export interface TaskListItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStatusType?: number
+  /**
+   * 架构ID
+   */
+  ArchId?: string
+  /**
+   * 架构名称
+   */
+  ArchName?: string
 }
 
 /**

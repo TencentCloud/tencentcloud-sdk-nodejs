@@ -240,6 +240,14 @@ export interface CreateDatasourceRequest {
      * 操作权限限制
      */
     OperationAuthLimit?: Array<string>;
+    /**
+     * 开启vpc
+     */
+    UseVPC?: boolean;
+    /**
+     * 地域
+     */
+    RegionId?: string;
 }
 /**
  * DeleteDatasource请求参数结构体
@@ -708,6 +716,18 @@ export interface ModifyUserRoleRequest {
      * 是否开启手机验证码登录（0 关闭，1 开启）
      */
     LoginSecurityStatus?: number;
+    /**
+     * 是否开启密码过期提醒（0 关闭，1 开启
+     */
+    ResetPassWordTip?: number;
+    /**
+     * 强制修改密码（0 关闭，1 开启）
+     */
+    ForceResetPassWord?: number;
+    /**
+     * 密码过期提醒时间，30、60、90（默认）、180天
+     */
+    PasswordExpired?: number;
 }
 /**
  * 数据源详情列表
@@ -1324,6 +1344,14 @@ export interface ModifyDatasourceRequest {
      * 腾讯云私有网络标识
      */
     VpcId?: string;
+    /**
+     * 开启vpc
+     */
+    UseVPC?: boolean;
+    /**
+     * 地域
+     */
+    RegionId?: string;
 }
 /**
  * ModifyProject请求参数结构体
@@ -1881,6 +1909,11 @@ export interface DatasourceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DbTypeName?: string;
+    /**
+     * 开启vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UseVPC?: boolean;
 }
 /**
  * DeleteUserRoleProject请求参数结构体

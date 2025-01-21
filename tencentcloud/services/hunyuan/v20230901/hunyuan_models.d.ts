@@ -754,6 +754,10 @@ export interface Choice {
      * 索引值，流式调用时使用该字段。
      */
     Index?: number;
+    /**
+     * 多轮会话风险审核，值为1时，表明存在信息安全风险，建议终止客户多轮会话。
+     */
+    ModerationLevel?: string;
 }
 /**
  * GetTokenCount返回参数结构体
@@ -1750,6 +1754,7 @@ export interface ChatCompletionsResponse {
     ErrorMsg?: ErrorMsg;
     /**
      * 多轮会话风险审核，值为1时，表明存在信息安全风险，建议终止客户多轮会话。
+     * @deprecated
      */
     ModerationLevel?: string;
     /**

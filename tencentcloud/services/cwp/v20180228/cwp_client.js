@@ -1328,14 +1328,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBaselinePolicy", req, cb);
     }
     /**
-     * 已废弃
-
-查询攻击溯源事件
-     */
-    async DescribeAttackSourceEvents(req, cb) {
-        return this.request("DescribeAttackSourceEvents", req, cb);
-    }
-    /**
      * 获取Jar包详情
      */
     async DescribeAssetJarInfo(req, cb) {
@@ -1829,14 +1821,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAssetAppList(req, cb) {
         return this.request("DescribeAssetAppList", req, cb);
-    }
-    /**
-     * 已废弃
-
-查询攻击溯源
-     */
-    async DescribeAttackSource(req, cb) {
-        return this.request("DescribeAttackSource", req, cb);
     }
     /**
      * 获取kafka投递信息
