@@ -199,6 +199,7 @@ import {
   ChannelDeleteRoleRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
   ChannelCreateBatchQuickSignUrlResponse,
+  CreateBatchOrganizationAuthorizationUrlResponse,
   CreatePartnerAutoSignAuthUrlRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ChannelDescribeAccountBillDetailResponse,
@@ -256,6 +257,7 @@ import {
   DescribeChannelOrganizationsResponse,
   ChannelCreateOrganizationBatchSignUrlResponse,
   EmbedUrlOption,
+  CreateBatchOrganizationAuthorizationUrlRequest,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
   OperateChannelTemplateRequest,
@@ -288,28 +290,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（ChannelDeleteSealPolicies）用于删除已指定员工印章授权信息，删除员工的印章授权后，该员工使用印章进行盖章时，将需要提交印章授权申请且通过审核后才能使用该印章进行签署。
-   */
-  async ChannelDeleteSealPolicies(
-    req: ChannelDeleteSealPoliciesRequest,
-    cb?: (error: string, rep: ChannelDeleteSealPoliciesResponse) => void
-  ): Promise<ChannelDeleteSealPoliciesResponse> {
-    return this.request("ChannelDeleteSealPolicies", req, cb)
-  }
-
-  /**
-     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
-
-注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
-     */
-  async ChannelRenewAutoSignLicense(
-    req: ChannelRenewAutoSignLicenseRequest,
-    cb?: (error: string, rep: ChannelRenewAutoSignLicenseResponse) => void
-  ): Promise<ChannelRenewAutoSignLicenseResponse> {
-    return this.request("ChannelRenewAutoSignLicense", req, cb)
-  }
-
-  /**
      * 提交企业流程审批结果 
 **当前存在两种审核操作：**
 <ul>
@@ -335,53 +315,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 管理企业扩展服务
-
-- **直接开通的情形：** 若在操作过程中接口没有返回跳转链接，这表明无需进行任何跳转操作。此时，相应的企业拓展服务将会直接被开通或关闭。
-
-- **需要法人或者超管签署开通协议的情形：** 当需要开通以下企业拓展服务时， 系统将返回一个操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成服务的开通操作。
-  - **AUTO_SIGN（企业自动签）**
-  - **DOWNLOAD_FLOW（授权渠道下载合同）**
-
-注意： `在调用此接口以管理企业扩展服务时，操作者（ Agent.ProxyOperator.OpenId）必须是企业的超级管理员（超管）或法人`
-
-
-对应的扩展服务能力可以在控制台的【扩展服务】中找到
-![image](https://qcloudimg.tencent-cloud.cn/raw/99eebd37883ec55ed1f1df3a57aee60a.png)
-     */
-  async ModifyExtendedService(
-    req: ModifyExtendedServiceRequest,
-    cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
-  ): Promise<ModifyExtendedServiceResponse> {
-    return this.request("ModifyExtendedService", req, cb)
-  }
-
-  /**
-     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多签签署码。 
-
-**适用场景**:
-签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
-
-**注意**:
-1. 本接口适用于**发起方没有填写控件的 B2C或者单C模板**,  若是B2C模板,还要满足以下任意一个条件
-    - 模板中配置的签署顺序是无序
-    - B端企业的签署方式是静默签署
-    - B端企业是非首位签署
-2. 通过扫描一码多签签署码发起的合同，合同涉及到的回调消息可参考文档[合同发起及签署相关回调
-]( https://qian.tencent.com/developers/partner/callback_types_contracts_sign)
-3. 用户通过扫描一码多签签署码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档[签署二维码相关回调](https://qian.tencent.com/developers/partner/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83)
-
-签署码的样式如下图:
-![image](https://qcloudimg.tencent-cloud.cn/raw/27317cf5aacb094fb1dc6f94179a5148.png )
-     */
-  async ChannelCreateMultiFlowSignQRCode(
-    req: ChannelCreateMultiFlowSignQRCodeRequest,
-    cb?: (error: string, rep: ChannelCreateMultiFlowSignQRCodeResponse) => void
-  ): Promise<ChannelCreateMultiFlowSignQRCodeResponse> {
-    return this.request("ChannelCreateMultiFlowSignQRCode", req, cb)
-  }
-
-  /**
      * 此接口（ChannelModifyRole）用来更新企业自定义角色。
 
 适用场景1：更新当前企业的自定义角色的名称或描述等其他信息，更新时不进行权限的设置（PermissionGroups 参数不传）。
@@ -393,6 +326,326 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelModifyRoleResponse) => void
   ): Promise<ChannelModifyRoleResponse> {
     return this.request("ChannelModifyRole", req, cb)
+  }
+
+  /**
+     * 1. 在使用[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByFiles)或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByTemplates)创建合同组签署流程时，若指定了参数以下参数为true,则可以调用此接口提交企业内部签署审批结果,即使是自动签署也需要进行审核通过才会进行签署。
+  - [FlowInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowinfo)
+  - [FlowFileInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowfileinfo)
+  - [FlowApproverInfo.ApproverNeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowapproverinfo) 
+
+2. 同一合同组，同一签署人可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+     */
+  async CreateFlowGroupSignReview(
+    req: CreateFlowGroupSignReviewRequest,
+    cb?: (error: string, rep: CreateFlowGroupSignReviewResponse) => void
+  ): Promise<CreateFlowGroupSignReviewResponse> {
+    return this.request("CreateFlowGroupSignReview", req, cb)
+  }
+
+  /**
+     * 此接口（CancelMultiFlowSignQRCode）用于废除取消一码多签签署码。
+该接口所需的二维码ID，源自[创建一码多签签署码](https://qian.tencent.com/developers/partnerApis/templates/ChannelCreateMultiFlowSignQRCode)生成的。
+如果该签署码尚处于有效期内，可通过本接口将其设置为失效状态。
+     */
+  async ChannelCancelMultiFlowSignQRCode(
+    req: ChannelCancelMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: ChannelCancelMultiFlowSignQRCodeResponse) => void
+  ): Promise<ChannelCancelMultiFlowSignQRCodeResponse> {
+    return this.request("ChannelCancelMultiFlowSignQRCode", req, cb)
+  }
+
+  /**
+     * 查询企业扩展服务的开通和授权情况，当前支持查询以下内容：
+
+1. **企业自动签**
+2. **企业与港澳台居民签署合同**
+3. **使用手机号验证签署方身份**
+4. **拓宽签署方年龄限制**
+5. **下载企业合同/文件**
+6. **隐藏合同经办人姓名**
+
+对应能力开通页面在子客控制台-企业中心-拓展服务，如下图所示:
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/931a1e02955ab36e5cc69a489af10352.jpg)
+
+注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+     */
+  async DescribeExtendedServiceAuthInfo(
+    req: DescribeExtendedServiceAuthInfoRequest,
+    cb?: (error: string, rep: DescribeExtendedServiceAuthInfoResponse) => void
+  ): Promise<DescribeExtendedServiceAuthInfoResponse> {
+    return this.request("DescribeExtendedServiceAuthInfo", req, cb)
+  }
+
+  /**
+     * 此接口用于获取企业批量认证异步任务的状态及结果。需要先调用接口<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks" target="_blank">提交子企业批量认证链接创建任务</a>获取到任务ID，然后再调用此接口获取到各个子企业的注册认证链接。整体流程如下图。
+![image](https://qcloudimg.tencent-cloud.cn/raw/654aa2a72ab7d42f06464ea33c50c3bb.png)
+
+
+注：
+`异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间`
+     */
+  async DescribeBatchOrganizationRegistrationUrls(
+    req: DescribeBatchOrganizationRegistrationUrlsRequest,
+    cb?: (error: string, rep: DescribeBatchOrganizationRegistrationUrlsResponse) => void
+  ): Promise<DescribeBatchOrganizationRegistrationUrlsResponse> {
+    return this.request("DescribeBatchOrganizationRegistrationUrls", req, cb)
+  }
+
+  /**
+     * 此接口（DescribeUsage）用于获取此应用下子客企业的合同消耗数量。
+
+<font color="red">此接口即将下线， 请使用新接口</font>  [查询渠道计费消耗情况](https://qian.tencent.com/developers/partnerApis/fee/ChannelDescribeBillUsageDetail)
+
+注: 此接口**每日限频50次**，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
+     */
+  async DescribeUsage(
+    req: DescribeUsageRequest,
+    cb?: (error: string, rep: DescribeUsageResponse) => void
+  ): Promise<DescribeUsageResponse> {
+    return this.request("DescribeUsage", req, cb)
+  }
+
+  /**
+     * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
+
+1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取认证的视频内容。
+2. 该接口**不支持小程序端**的签署认证的视频获取。
+3. 请在**签署完成后的三天内**获取视频，**过期后将无法获取**。
+
+**注意：该接口需要开通白名单，请联系客户经理开通后使用。**
+     */
+  async ChannelDescribeSignFaceVideo(
+    req: ChannelDescribeSignFaceVideoRequest,
+    cb?: (error: string, rep: ChannelDescribeSignFaceVideoResponse) => void
+  ): Promise<ChannelDescribeSignFaceVideoResponse> {
+    return this.request("ChannelDescribeSignFaceVideo", req, cb)
+  }
+
+  /**
+     * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
+
+对应控制台的操作如下图
+![image](https://qcloudimg.tencent-cloud.cn/raw/5b41194d3cb3f2058ec0ba0fb5ebc6a6.png)
+     */
+  async ChannelDeleteRoleUsers(
+    req: ChannelDeleteRoleUsersRequest,
+    cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void
+  ): Promise<ChannelDeleteRoleUsersResponse> {
+    return this.request("ChannelDeleteRoleUsers", req, cb)
+  }
+
+  /**
+     * 创建跳转小程序查看或签署的链接
+
+**腾讯电子签小程序的AppID 和 原始Id如下:**
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+
+**主要使用场景EndPoint分类**
+
+|EndPoint| 场景| 说明和示例|
+|  ----  | ----  | --- |
+|  WEIXINAPP  | 短链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序（与腾讯电子签官方短信提醒用户签署形式一样）<br> 示例: https://essurl.cn/x9nvWU8fTg|
+|  LONGURL2WEIXINAPP  | 长链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序, 是WEIXINAPP生成短链代表的那个长链|
+|  CHANNEL  | 带有H5引导页的跳转腾讯电子签小程序签署场景 |  点击链接打开一个H5引导页面, 页面中有个"前往小程序"的按钮, 点击后会跳转到腾讯电子签小程序签署场景;  签署完成会回到H5引导页面, 然后跳转到指定创建链接指定的JumpUrl<br>示例: https://res.ess.tencent.cn/cdn/h5-activity-beta/jump-mp.html?use=channel-guide&type=warning&token=uIFKIU8fTd |
+|APP| <font color="red">贵方APP</font>跳转腾讯电子签小程序签署场景|  贵方App直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方App的场景<br>跳转到腾讯电子签小程序的实现可以参考微信的官方文档:<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html" target="_blank">开放能力/打开 App</a> <br> 示例: pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3 |
+|APP| <font color="red">贵方小程序</font>跳转腾讯电子签小程序签署场景|  贵方小程序直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方小程序的场景<br>跳转到腾讯电子签小程序的实现可以参考微信官方文档<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html" target="_blank">全屏方式</a>和<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html " target="_blank">半屏方式</a><br>此时返回的SignUrl就是官方文档中的path<br> 示例:pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3  |
+     */
+  async CreateSignUrls(
+    req: CreateSignUrlsRequest,
+    cb?: (error: string, rep: CreateSignUrlsResponse) => void
+  ): Promise<CreateSignUrlsResponse> {
+    return this.request("CreateSignUrls", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelCreateBoundFlows）用于子客企业领取未归属给员工的合同，将合同领取给当前员工，合同不能重复领取。
+
+
+**未归属合同发起方式**
+ 指定对应企业的OrganizationOpenId和OrganizationName而不指定具体的参与人(OpenId/名字/手机号等),  则合同进入待领取状态, 示例代码如下
+```
+		FlowApprovers: []*essbasic.FlowApproverInfo{
+			{
+				ApproverType:       common.StringPtr("ORGANIZATION"),
+				OrganizationOpenId: common.StringPtr("org_dianziqian"),
+				OrganizationName:   common.StringPtr("典子谦示例企业"),
+			}
+		},
+```
+
+可以<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录控制台查看带领取的合同
+![image](https://qcloudimg.tencent-cloud.cn/raw/a34d0cc56ec871613e94dfc6252bc072.png)
+
+注: 
+1. 支持批量领取,  如果有一个合同流程无法领取会导致接口报错,  使得所有合同都领取失败
+2. 只有企业的<font color="red">超管或者法人</font>才能进行合同的领取
+     */
+  async ChannelCreateBoundFlows(
+    req: ChannelCreateBoundFlowsRequest,
+    cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
+  ): Promise<ChannelCreateBoundFlowsResponse> {
+    return this.request("ChannelCreateBoundFlows", req, cb)
+  }
+
+  /**
+     * 创建一个用于他方自动签授权的链接（可选择他方授权或我方授权）。通过这个链接，合作方企业可以直接进入小程序，进行自动签授权操作。
+
+如果授权企业尚未开通企业自动签功能，该链接还将引导他们首先开通本企业的自动签服务
+
+
+注: 
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+2. 已经在授权中或者授权成功的企业，无法重复授权
+3. 授权企业和被授权企业必须都是已认证企业
+4. <font color='red'>需要授权企业或被授权企业的超管或者法人打开链接</font>走开通逻辑。
+
+**该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权**
+![image](https://qcloudimg.tencent-cloud.cn/raw/091823fd4f02af7dda416fa10ca65f2d.png)
+     */
+  async CreatePartnerAutoSignAuthUrl(
+    req: CreatePartnerAutoSignAuthUrlRequest,
+    cb?: (error: string, rep: CreatePartnerAutoSignAuthUrlResponse) => void
+  ): Promise<CreatePartnerAutoSignAuthUrlResponse> {
+    return this.request("CreatePartnerAutoSignAuthUrl", req, cb)
+  }
+
+  /**
+     * 用来创建嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），该接口配合其他所有可嵌入页面接口使用
+创建配置对当前第三方应用全局生效，如果多次调用，会以最后一次的配置为准
+     */
+  async ChannelCreateWebThemeConfig(
+    req: ChannelCreateWebThemeConfigRequest,
+    cb?: (error: string, rep: ChannelCreateWebThemeConfigResponse) => void
+  ): Promise<ChannelCreateWebThemeConfigResponse> {
+    return this.request("ChannelCreateWebThemeConfig", req, cb)
+  }
+
+  /**
+     * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办
+1. 合同中当前状态为 **待签署** 的签署人是催办的对象
+2. **每个合同只能催办一次**
+
+**催办的效果**: 对方会收到如下的短信通知
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/3caf94b7f540fa5736270d38528d3a7b.png)
+
+
+**注**：`合同催办是白名单功能，请联系客户经理申请开白后使用`
+     */
+  async ChannelCreateFlowReminds(
+    req: ChannelCreateFlowRemindsRequest,
+    cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void
+  ): Promise<ChannelCreateFlowRemindsResponse> {
+    return this.request("ChannelCreateFlowReminds", req, cb)
+  }
+
+  /**
+     * 通过合同编号批量撤销合同，单次最多支持撤销100份合同。
+
+适用场景：如果某个合同当前**至少还有一方没有签署**，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。
+
+- **可撤回合同状态**：未全部签署完成
+- **不撤回合同状态**：已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等合同状态。
+
+批量撤销结果可以通过接口返回的TaskId关联[批量撤销任务结果回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign#%E4%B9%9D-%E6%89%B9%E9%87%8F%E6%92%A4%E9%94%80%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83)或通过接口[查询批量撤销合同结果](https://qian.tencent.com/developers/partnerApis/operateFlows/DescribeCancelFlowsTask)主动查询。
+
+
+注:
+- 有对应合同撤销权限的人:  <font color='red'>**合同的发起人（并已经授予撤销权限）或者发起人所在企业的超管、法人**</font>
+- 签署完毕的合同需要双方走解除流程将合同作废，可以参考<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateReleaseFlow" target="_blank">发起解除合同流程接口</a>
+- <font color='red'>只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。</font>
+- 撤销后可以看合同PDF内容的人员： 发起方的超管， 发起方自己，发起方撤销合同的操作人员，已经签署合同、已经填写合同、邀请填写已经补充信息的参与人员， 其他参与人员看不到合同的内容。
+     */
+  async ChannelBatchCancelFlows(
+    req: ChannelBatchCancelFlowsRequest,
+    cb?: (error: string, rep: ChannelBatchCancelFlowsResponse) => void
+  ): Promise<ChannelBatchCancelFlowsResponse> {
+    return this.request("ChannelBatchCancelFlows", req, cb)
+  }
+
+  /**
+     * **适用场景**：
+当通过模板或文件发起合同时，若未指定企业签署人信息，则可调用此接口动态补充签署人。同一签署人只允许补充一人，最终实际签署人取决于谁先领取合同完成签署。
+
+**接口使用说明**：
+
+1.本接口现已支持批量补充签署人
+
+2.当<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中指定需要补充的FlowId时，可以对指定合同补充签署人；可以指定多个相同发起方的不同合同在完成批量补充
+
+3.当<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中指定需要补充的FlowId时，是对指定的合同补充多个指定的签署人
+
+4.如果同时指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，仅使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId作为补充的合同
+
+5.如果部分指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，又指定了<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId；那么<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>存在指定的FlowId，则使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，不存在则使用<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId作为补充的合同
+
+
+6.如果同时未指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，则传参错误
+
+**限制条件**：
+1. 本企业（发起方企业）企业签署人仅支持通过企业名称+姓名+手机号进行补充。
+2. 个人签署人支持通过姓名+手机号进行补充，补充动态签署人时：若个人用户已完成实名，则可通过姓名+证件号码进行补充。
+     */
+  async ChannelCreateFlowApprovers(
+    req: ChannelCreateFlowApproversRequest,
+    cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void
+  ): Promise<ChannelCreateFlowApproversResponse> {
+    return this.request("ChannelCreateFlowApprovers", req, cb)
+  }
+
+  /**
+     * 获取个人用户认证证书图片下载URL
+
+个人用户认证证书图片样式如下图
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/d568bc0f101bef582f7af2cb5ab7a715.png)
+
+注:  
+<ul>
+<li>只能获取个人用户证明图片, 企业员工的暂不支持</li>
+<li>专为电子处方单（医疗自动签）特定场景使用。在使用前，请务必与您的客户经理联系以确认已经开通电子处方单功能 </li>
+</ul>
+     */
+  async CreatePersonAuthCertificateImage(
+    req: CreatePersonAuthCertificateImageRequest,
+    cb?: (error: string, rep: CreatePersonAuthCertificateImageResponse) => void
+  ): Promise<CreatePersonAuthCertificateImageResponse> {
+    return this.request("CreatePersonAuthCertificateImage", req, cb)
+  }
+
+  /**
+     * 提交申请出证报告任务并返回报告ID。
+
+注意：
+- 使用此功能**需搭配出证套餐**  ，使用前请联系对接的客户经理沟通。
+- 操作人必须是**发起方或者签署方企业的(非走授权书认证)法人或者超管**。
+- 合同流程必须**所有参与方已经签署完成**。
+- 出证过程需一定时间，建议在**提交出证任务后的24小时之后**，通过<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>接口进行查询执行结果和出证报告的下载URL。
+
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
+     */
+  async CreateChannelFlowEvidenceReport(
+    req: CreateChannelFlowEvidenceReportRequest,
+    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
+  ): Promise<CreateChannelFlowEvidenceReportResponse> {
+    return this.request("CreateChannelFlowEvidenceReport", req, cb)
+  }
+
+  /**
+   * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章（处方单场景专用，使用此接口请与客户经理确认）。
+   */
+  async ChannelCreatePreparedPersonalEsign(
+    req: ChannelCreatePreparedPersonalEsignRequest,
+    cb?: (error: string, rep: ChannelCreatePreparedPersonalEsignResponse) => void
+  ): Promise<ChannelCreatePreparedPersonalEsignResponse> {
+    return this.request("ChannelCreatePreparedPersonalEsign", req, cb)
   }
 
   /**
@@ -433,41 +686,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取区块链存证证书查看链接/二维码接口
-
-适用场景：企业员工可以通过此接口生成合同区块链存证证书的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。
-
-[点击查看区块链存证证书样式](https://qcloudimg.tencent-cloud.cn/raw/47d5e9c2ffa90ad4e27b3cd14095aa08.jpg)
-
-注：
-<ul><li>1. 二维码下载链接过期时间为5分钟，请尽快下载保存。二维码/短链的过期时间为<font color="red">7天</font>，超过有效期则不可用。</li>
-<li>2. 合同状态需为<font color="red">签署完成</font> 、<font color="red">已解除</font>才能生成证书查看二维码/短链。</li>
-<li>3. 调用接口时，需确保接口调用身份拥有此合同的访问数据权限或为合同参与方。</li>
-<li>4. 通过扫码或者点击链接，用户无需登录或者鉴权即可查看对应合同的区块链存证证书，请妥善保管好二维码或链接。</li></ul>
-     */
-  async CreateFlowBlockchainEvidenceUrl(
-    req: CreateFlowBlockchainEvidenceUrlRequest,
-    cb?: (error: string, rep: CreateFlowBlockchainEvidenceUrlResponse) => void
-  ): Promise<CreateFlowBlockchainEvidenceUrlResponse> {
-    return this.request("CreateFlowBlockchainEvidenceUrl", req, cb)
-  }
-
-  /**
-     * 此接口用于获取企业批量认证异步任务的状态及结果。需要先调用接口<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks" target="_blank">提交子企业批量认证链接创建任务</a>获取到任务ID，然后再调用此接口获取到各个子企业的注册认证链接。整体流程如下图。
-![image](https://qcloudimg.tencent-cloud.cn/raw/654aa2a72ab7d42f06464ea33c50c3bb.png)
-
-
-注：
-`异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间`
-     */
-  async DescribeBatchOrganizationRegistrationUrls(
-    req: DescribeBatchOrganizationRegistrationUrlsRequest,
-    cb?: (error: string, rep: DescribeBatchOrganizationRegistrationUrlsResponse) => void
-  ): Promise<DescribeBatchOrganizationRegistrationUrlsResponse> {
-    return this.request("DescribeBatchOrganizationRegistrationUrls", req, cb)
-  }
-
-  /**
      * 1. 可以**通过图片**为子客企业代创建印章，图片最大5MB
 
 2. 可以**系统创建**子客企业代创建印章, 系统创建的印章样子下图(样式可以调整)
@@ -479,63 +697,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSealByImageResponse) => void
   ): Promise<CreateSealByImageResponse> {
     return this.request("CreateSealByImage", req, cb)
-  }
-
-  /**
-     * 此接口（CancelMultiFlowSignQRCode）用于废除取消一码多签签署码。
-该接口所需的二维码ID，源自[创建一码多签签署码](https://qian.tencent.com/developers/partnerApis/templates/ChannelCreateMultiFlowSignQRCode)生成的。
-如果该签署码尚处于有效期内，可通过本接口将其设置为失效状态。
-     */
-  async ChannelCancelMultiFlowSignQRCode(
-    req: ChannelCancelMultiFlowSignQRCodeRequest,
-    cb?: (error: string, rep: ChannelCancelMultiFlowSignQRCodeResponse) => void
-  ): Promise<ChannelCancelMultiFlowSignQRCodeResponse> {
-    return this.request("ChannelCancelMultiFlowSignQRCode", req, cb)
-  }
-
-  /**
-     * 查询企业扩展服务的开通和授权情况，当前支持查询以下内容：
-
-1. **企业自动签**
-2. **企业与港澳台居民签署合同**
-3. **使用手机号验证签署方身份**
-4. **拓宽签署方年龄限制**
-5. **下载企业合同/文件**
-6. **隐藏合同经办人姓名**
-
-对应能力开通页面在子客控制台-企业中心-拓展服务，如下图所示:
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/931a1e02955ab36e5cc69a489af10352.jpg)
-
-注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
-     */
-  async DescribeExtendedServiceAuthInfo(
-    req: DescribeExtendedServiceAuthInfoRequest,
-    cb?: (error: string, rep: DescribeExtendedServiceAuthInfoResponse) => void
-  ): Promise<DescribeExtendedServiceAuthInfoResponse> {
-    return this.request("DescribeExtendedServiceAuthInfo", req, cb)
-  }
-
-  /**
-     * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列。
-
-
-<font color="red">系统默认角色</font>说明可参考下表
-
-| 角色名称| 建议授予对象 | 角色描述 |
-| --- | --- | --- |
-| **超级管理员** |电子签业务最高权限，可以授权给法务/企业法人/业务负责人等 | 所有功能和数据管理权限，只能设置一位超管。 |
-| **业务管理员**|IT 系统负责人，可以授权给CTO等 | 企业合同模块、印章模块、模板模块等全量功能及数据权限。 |
-| **经办人**|企业法务负责人等 | 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看企业所有合同数据。 |
-| **业务员**|销售员、采购员 等| 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看自己相关所有合同数据。 |
-
-附件：<a href="https://dyn.ess.tencent.cn/guide/apivideo/roles.xlsx" target="_blank">点击下载角色对应的权限点的excel文档</a>
-     */
-  async ChannelDescribeRoles(
-    req: ChannelDescribeRolesRequest,
-    cb?: (error: string, rep: ChannelDescribeRolesResponse) => void
-  ): Promise<ChannelDescribeRolesResponse> {
-    return this.request("ChannelDescribeRoles", req, cb)
   }
 
   /**
@@ -553,59 +714,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateConvertTaskApiResponse) => void
   ): Promise<ChannelCreateConvertTaskApiResponse> {
     return this.request("ChannelCreateConvertTaskApi", req, cb)
-  }
-
-  /**
-     * 此接口（DescribeUsage）用于获取此应用下子客企业的合同消耗数量。
-
-<font color="red">此接口即将下线， 请使用新接口</font>  [查询渠道计费消耗情况](https://qian.tencent.com/developers/partnerApis/fee/ChannelDescribeBillUsageDetail)
-
-注: 此接口**每日限频50次**，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
-     */
-  async DescribeUsage(
-    req: DescribeUsageRequest,
-    cb?: (error: string, rep: DescribeUsageResponse) => void
-  ): Promise<DescribeUsageResponse> {
-    return this.request("DescribeUsage", req, cb)
-  }
-
-  /**
-     * 查询企业扩展服务的授权详情（列表），当前支持查询以下内容：
-
-1. **企业自动签**
-2. **批量签署**
-
-
-注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
-     */
-  async DescribeExtendedServiceAuthDetail(
-    req: DescribeExtendedServiceAuthDetailRequest,
-    cb?: (error: string, rep: DescribeExtendedServiceAuthDetailResponse) => void
-  ): Promise<DescribeExtendedServiceAuthDetailResponse> {
-    return this.request("DescribeExtendedServiceAuthDetail", req, cb)
-  }
-
-  /**
-     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
-1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
-2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
-
-此接口存在以下限制：
-1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
-2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
-4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
-5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
-6. <font  color="red">不支持操作合同组合同</font>。
-
-合同（流程）层面截止时间子企业控制台展示的位置：
-![image](https://qcloudimg.tencent-cloud.cn/raw/f0f88c0eb49a926da9a86e5a6e9efa8b.png)
-     */
-  async ModifyFlowDeadline(
-    req: ModifyFlowDeadlineRequest,
-    cb?: (error: string, rep: ModifyFlowDeadlineResponse) => void
-  ): Promise<ModifyFlowDeadlineResponse> {
-    return this.request("ModifyFlowDeadline", req, cb)
   }
 
   /**
@@ -627,60 +735,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCancelFlowResponse) => void
   ): Promise<ChannelCancelFlowResponse> {
     return this.request("ChannelCancelFlow", req, cb)
-  }
-
-  /**
-     * 通过此接口，可以创建企业批量签署链接，员工只需点击链接即可跳转至控制台进行批量签署。
-
-注：
-- 员工必须在企业下完成实名认证，且需作为批量签署合同的签署方或者领取方。
-- 仅支持传入待签署或者待领取的合同，待填写暂不支持。
-- 员工批量签署，支持多种签名方式，包括手写签名、临摹签名、系统签名、个人印章、签批控件等。
-
-签署的嵌入页面长相如下：
-![image](https://qcloudimg.tencent-cloud.cn/raw/a4754bc835a3f837ddec1e28b02ed9c0.png)
-     */
-  async ChannelCreateOrganizationBatchSignUrl(
-    req: ChannelCreateOrganizationBatchSignUrlRequest,
-    cb?: (error: string, rep: ChannelCreateOrganizationBatchSignUrlResponse) => void
-  ): Promise<ChannelCreateOrganizationBatchSignUrlResponse> {
-    return this.request("ChannelCreateOrganizationBatchSignUrl", req, cb)
-  }
-
-  /**
-   * 通过接口[批量撤销合同流程](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelBatchCancelFlows)或者[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
-   */
-  async DescribeCancelFlowsTask(
-    req: DescribeCancelFlowsTaskRequest,
-    cb?: (error: string, rep: DescribeCancelFlowsTaskResponse) => void
-  ): Promise<DescribeCancelFlowsTaskResponse> {
-    return this.request("DescribeCancelFlowsTask", req, cb)
-  }
-
-  /**
-   * 将指定印章授权给第三方平台子客企业下的某些员工
-   */
-  async ChannelCreateSealPolicy(
-    req: ChannelCreateSealPolicyRequest,
-    cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void
-  ): Promise<ChannelCreateSealPolicyResponse> {
-    return this.request("ChannelCreateSealPolicy", req, cb)
-  }
-
-  /**
-     * 该接口用于发起合同后，生成个人/企业用户的批量待办链接。
-**注意：**
-1. 该接口可生成签署人的批量、合同组签署/查看链接 。
-2. 该签署链接**有效期为30分钟**，过期后将失效，如需签署可重新创建批量签署链接 。
-4. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。
-跳转到小程序的实现，参考微信官方文档(分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式)，如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
-6. 因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
-     */
-  async ChannelCreateBatchQuickSignUrl(
-    req: ChannelCreateBatchQuickSignUrlRequest,
-    cb?: (error: string, rep: ChannelCreateBatchQuickSignUrlResponse) => void
-  ): Promise<ChannelCreateBatchQuickSignUrlResponse> {
-    return this.request("ChannelCreateBatchQuickSignUrl", req, cb)
   }
 
   /**
@@ -757,35 +811,104 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 通过此接口可以关闭个人用户自动签功能。
-无需对应的用户刷脸等方式同意即可关闭。
+     * 此接口（ChannelCreateRole）用来创建企业自定义角色。
 
-注意: 
+适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
 
-<ul><li>处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。</li>
-<li>如果此用户在开通时候绑定过个人自动签账号许可,  关闭此用户的自动签不会归还个人自动签账号许可的额度。</li></ul>
+适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考[查询角色列表接口](https://qian.tencent.com/developers/partnerApis/accounts/ChannelDescribeRoles) 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
      */
-  async ChannelDisableUserAutoSign(
-    req: ChannelDisableUserAutoSignRequest,
-    cb?: (error: string, rep: ChannelDisableUserAutoSignResponse) => void
-  ): Promise<ChannelDisableUserAutoSignResponse> {
-    return this.request("ChannelDisableUserAutoSign", req, cb)
+  async ChannelCreateRole(
+    req: ChannelCreateRoleRequest,
+    cb?: (error: string, rep: ChannelCreateRoleResponse) => void
+  ): Promise<ChannelCreateRoleResponse> {
+    return this.request("ChannelCreateRole", req, cb)
   }
 
   /**
-     * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
-
-1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取认证的视频内容。
-2. 该接口**不支持小程序端**的签署认证的视频获取。
-3. 请在**签署完成后的三天内**获取视频，**过期后将无法获取**。
-
-**注意：该接口需要开通白名单，请联系客户经理开通后使用。**
+     * 生成用印申请审批链接，审批人可以通过此链接进入小程序进行审批。
+ p.s.
+Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批人打开。
      */
-  async ChannelDescribeSignFaceVideo(
-    req: ChannelDescribeSignFaceVideoRequest,
-    cb?: (error: string, rep: ChannelDescribeSignFaceVideoResponse) => void
-  ): Promise<ChannelDescribeSignFaceVideoResponse> {
-    return this.request("ChannelDescribeSignFaceVideo", req, cb)
+  async DescribeChannelSealPolicyWorkflowUrl(
+    req: DescribeChannelSealPolicyWorkflowUrlRequest,
+    cb?: (error: string, rep: DescribeChannelSealPolicyWorkflowUrlResponse) => void
+  ): Promise<DescribeChannelSealPolicyWorkflowUrlResponse> {
+    return this.request("DescribeChannelSealPolicyWorkflowUrl", req, cb)
+  }
+
+  /**
+   * 生成渠道子客编辑企业信息二维码
+   */
+  async ChannelCreateOrganizationModifyQrCode(
+    req: ChannelCreateOrganizationModifyQrCodeRequest,
+    cb?: (error: string, rep: ChannelCreateOrganizationModifyQrCodeResponse) => void
+  ): Promise<ChannelCreateOrganizationModifyQrCodeResponse> {
+    return this.request("ChannelCreateOrganizationModifyQrCode", req, cb)
+  }
+
+  /**
+     * 接口（ChannelCreateDynamicFlowApprover）用来补充<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>发起的动态合同的签署人信息
+**注**: 
+<ul>
+<li>此接口需要保证：渠道企业已开启：模块化计费能力，</li>
+<li>此接口需要保证：渠道应用已开启：动态签署人2.0能力</li>
+<li>此接口需要保证：合同发起时指定开启了动态合同</li>
+<li>此接口补充的动态签署人传参规则，请参考接口：<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>的签署人传参规则</li>
+</ul>
+     */
+  async ChannelCreateDynamicFlowApprover(
+    req: ChannelCreateDynamicFlowApproverRequest,
+    cb?: (error: string, rep: ChannelCreateDynamicFlowApproverResponse) => void
+  ): Promise<ChannelCreateDynamicFlowApproverResponse> {
+    return this.request("ChannelCreateDynamicFlowApprover", req, cb)
+  }
+
+  /**
+     * 该接口用于获取创建法人章的二维码，需要通过微信扫描。扫描后将跳转到腾讯电子签署，进入到创建法人章的流程。
+
+**注意**
+1. 该二维码**有效期为7天**，过期后将失效，可重新创建 。
+2. 每个公司**只能有1个法人章**，无法重复创建或者创建多个
+
+法人章的样式可以参考下图索引（也可以自己上传法人印章图片）：
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/36a0a090750c45bb5cac5047ac461b2c.png)
+     */
+  async CreateLegalSealQrCode(
+    req: CreateLegalSealQrCodeRequest,
+    cb?: (error: string, rep: CreateLegalSealQrCodeResponse) => void
+  ): Promise<CreateLegalSealQrCodeResponse> {
+    return this.request("CreateLegalSealQrCode", req, cb)
+  }
+
+  /**
+     * 对合同流程文件进行数字签名验证，判断数字签名是否有效，合同文件内容是否被篡改。
+
+**补充**： 可以到控制台[合同验签](https://qian.tencent.com/verifySign)体验验签功能，界面如下
+![image](https://qcloudimg.tencent-cloud.cn/raw/81c333ccb07f0c5fbaf840d9cee61333.png)
+     */
+  async ChannelVerifyPdf(
+    req: ChannelVerifyPdfRequest,
+    cb?: (error: string, rep: ChannelVerifyPdfResponse) => void
+  ): Promise<ChannelVerifyPdfResponse> {
+    return this.request("ChannelVerifyPdf", req, cb)
+  }
+
+  /**
+     * 此接口（GetDownloadFlowUrl）用户获取合同控制台下载页面链接,  点击链接后会跳转至本企业合同管理控制台(会筛选出传入的合同列表), 点击**下载**按钮后就会下载传入的合同列表, 下载页面如下图
+![image](https://dyn.ess.tencent.cn/guide/capi/channel_GetDownloadFlowUrl.png)
+
+注:
+<ul>
+<li>仅支持下载 <b>本企业</b> 下合同，链接会 <b>登录企业控制台</b> </li>
+<li> <b>链接仅可使用一次</b>，不可重复使用</li>
+</ul>
+     */
+  async GetDownloadFlowUrl(
+    req: GetDownloadFlowUrlRequest,
+    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
+  ): Promise<GetDownloadFlowUrlResponse> {
+    return this.request("GetDownloadFlowUrl", req, cb)
   }
 
   /**
@@ -802,39 +925,422 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称、企业营业执照、企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。
+     * 查询企业扩展服务的授权详情（列表），当前支持查询以下内容：
 
-注意：
-
-- **需要在<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>前同步的企业信息**, 否则会出现信息同步没有用的情形
-- **企业信息需要和营业执照信息对应**,  否则会出现激活过程验证不通过的问题
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/7ec91b79a0a4860e77c9ff9f4a5f13ad/channel_SyncProxyOrganization2.png)
+1. **企业自动签**
+2. **批量签署**
 
 
-- **企业统一社会信用代码**: 对应上图中的**1**
-- **第三方平台子客企业名称**: 对应上图中的**2**
-- **企业法定代表人的名字**:对应上图中的**3**
-- **企业详细住所**:对应上图中的**4**
+注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
      */
-  async SyncProxyOrganization(
-    req: SyncProxyOrganizationRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
-  ): Promise<SyncProxyOrganizationResponse> {
-    return this.request("SyncProxyOrganization", req, cb)
+  async DescribeExtendedServiceAuthDetail(
+    req: DescribeExtendedServiceAuthDetailRequest,
+    cb?: (error: string, rep: DescribeExtendedServiceAuthDetailResponse) => void
+  ): Promise<DescribeExtendedServiceAuthDetailResponse> {
+    return this.request("DescribeExtendedServiceAuthDetail", req, cb)
   }
 
   /**
-     * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
+     * 创建企业注销链接
 
-对应控制台的操作如下图
-![image](https://qcloudimg.tencent-cloud.cn/raw/5b41194d3cb3f2058ec0ba0fb5ebc6a6.png)
+系统将返回操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成企业的注销操作。
+
+注意： `在调用此接口以管理企业扩展服务时，操作者（ Agent.ProxyOperator.OpenId）必须是企业的超级管理员（超管）或法人。`
      */
-  async ChannelDeleteRoleUsers(
-    req: ChannelDeleteRoleUsersRequest,
-    cb?: (error: string, rep: ChannelDeleteRoleUsersResponse) => void
-  ): Promise<ChannelDeleteRoleUsersResponse> {
-    return this.request("ChannelDeleteRoleUsers", req, cb)
+  async CreateCloseOrganizationUrl(
+    req: CreateCloseOrganizationUrlRequest,
+    cb?: (error: string, rep: CreateCloseOrganizationUrlResponse) => void
+  ): Promise<CreateCloseOrganizationUrlResponse> {
+    return this.request("CreateCloseOrganizationUrl", req, cb)
+  }
+
+  /**
+     * 该接口 (PrepareFlows) 用于创建待发起文件
+用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
+目前该接口只支持B2C，<font color='red'> **不建议使用，将会废弃**</font>。
+     */
+  async PrepareFlows(
+    req: PrepareFlowsRequest,
+    cb?: (error: string, rep: PrepareFlowsResponse) => void
+  ): Promise<PrepareFlowsResponse> {
+    return this.request("PrepareFlows", req, cb)
+  }
+
+  /**
+     * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列。
+
+
+<font color="red">系统默认角色</font>说明可参考下表
+
+| 角色名称| 建议授予对象 | 角色描述 |
+| --- | --- | --- |
+| **超级管理员** |电子签业务最高权限，可以授权给法务/企业法人/业务负责人等 | 所有功能和数据管理权限，只能设置一位超管。 |
+| **业务管理员**|IT 系统负责人，可以授权给CTO等 | 企业合同模块、印章模块、模板模块等全量功能及数据权限。 |
+| **经办人**|企业法务负责人等 | 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看企业所有合同数据。 |
+| **业务员**|销售员、采购员 等| 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看自己相关所有合同数据。 |
+
+附件：<a href="https://dyn.ess.tencent.cn/guide/apivideo/roles.xlsx" target="_blank">点击下载角色对应的权限点的excel文档</a>
+     */
+  async ChannelDescribeRoles(
+    req: ChannelDescribeRolesRequest,
+    cb?: (error: string, rep: ChannelDescribeRolesResponse) => void
+  ): Promise<ChannelDescribeRolesResponse> {
+    return this.request("ChannelDescribeRoles", req, cb)
+  }
+
+  /**
+     * 获取合同流程PDF的下载链接，可以下载签署中、签署完的此子企业创建的合同。
+
+
+
+
+### 2. 确保合同的PDF已经合成后，再调用本接口。
+ 用户创建合同或者提交签署动作后，后台需要1~3秒的时间就进行合同PDF合成或者签名，为了确保您下载的是签署完成的完整合同文件，我们建议采取下面两种方式的一种来<font color="red"><b>确保PDF已经合成完成，然后在调用本接口</b></font>。
+
+**第一种**：请确保您的系统配置了[接收合同完成通知的回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign)功能。一旦所有参与方签署完毕，我们的系统将自动向您提供的回调地址发送完成通知。
+
+**第二种**：通过调用我们的[获取合同信息](https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo)接口来主动检查合同的签署状态。请仅在确认合同状态为“全部签署完成”后，进行文件的下载操作。
+
+### 3.  链接具有有效期限
+<font color="red"><b>生成的链接是有时间限制的，过期后将无法访问</b></font>。您可以在接口返回的信息中查看具体的过期时间。为避免错误，请确保在链接过期之前进行下载操作。
+
+### 4. 有两种开通下载权限的途径。
+
+**第一种**:   需第三方应用的子企业登录控制台进行授权,  授权在**企业中心**的**授权管理**区域,  界面如下图。
+授权过程需要**子企业超管**扫描跳转到电子签小程序签署<<渠道端下载渠道子客合同功能授权委托书>>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/8b483dfebdeafac85051279406944048.png)
+
+**第二种**: 渠道方企业在**企业应用管理**的配置界面打开需要配置的应用，点击**应用扩展服务**开通此功能，需要**渠道方企业的超管**扫描二维码跳转到电子签小程序签署 <<渠道端下载渠道子客合同功能开通知情同意书>>
+注: 
+1. `请注意如果第三方应用的子客主动关闭了渠道端下载渠道子客合同功能开关，那么渠道方开通了此功能也无法下载子客的合同文件`
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/238979ef51dd381ccbdbc755a593debc/channel_DescribeResourceUrlsByFlows_appilications2.png)
+     */
+  async DescribeResourceUrlsByFlows(
+    req: DescribeResourceUrlsByFlowsRequest,
+    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
+  ): Promise<DescribeResourceUrlsByFlowsResponse> {
+    return this.request("DescribeResourceUrlsByFlows", req, cb)
+  }
+
+  /**
+     * 查询渠道子客企业信息时，可以支持单个子客和整个应用下所有子客的查询。返回的信息包括超管、法人的信息以及当前企业的认证状态等信息。
+
+- 对于单个企业的查询，通过**指定子客的唯一标识**来查询该子客的企业信息
+- 对于整个应用下所有企业的查询，**不需要指定子客的唯一标识**，直接查询整个应用下所有子客企业的企业信息
+     */
+  async DescribeChannelOrganizations(
+    req: DescribeChannelOrganizationsRequest,
+    cb?: (error: string, rep: DescribeChannelOrganizationsResponse) => void
+  ): Promise<DescribeChannelOrganizationsResponse> {
+    return this.request("DescribeChannelOrganizations", req, cb)
+  }
+
+  /**
+     * 支持企业进行批量初始化操作：
+
+此接口存在以下限制：
+1. 批量操作的企业需要已经完成电子签的认证流程。
+2. 通过此接口生成的链接在小程序端进行操作时，操作人需要是<font  color="red">所有企业的超管或法人</font>。
+3. 批量操作的企业，需要是本方第三方应用下的企业。
+4. <font  color="red">操作链接过期时间默认为生成链接后7天。</font>
+     */
+  async CreateBatchInitOrganizationUrl(
+    req: CreateBatchInitOrganizationUrlRequest,
+    cb?: (error: string, rep: CreateBatchInitOrganizationUrlResponse) => void
+  ): Promise<CreateBatchInitOrganizationUrlResponse> {
+    return this.request("CreateBatchInitOrganizationUrl", req, cb)
+  }
+
+  /**
+     * 通过此接口（ChannelDescribeAccountBillDetail）查询该第三方平台子客账号计费详情。
+<ul>
+<li>对于渠道客户企业的查询，通过指定渠道企业的唯一标识(Agent.ProxyOrganizationId)来查询子客账号消耗详情</li>
+</ul>
+     */
+  async ChannelDescribeAccountBillDetail(
+    req: ChannelDescribeAccountBillDetailRequest,
+    cb?: (error: string, rep: ChannelDescribeAccountBillDetailResponse) => void
+  ): Promise<ChannelDescribeAccountBillDetailResponse> {
+    return this.request("ChannelDescribeAccountBillDetail", req, cb)
+  }
+
+  /**
+     * 您可以通过合同流程ID查询相关的<font color="red"><b>填写控件</b></font>信息及其内容。这包括控件的归属方、控件的填写状态（是否已填写）以及具体的填写内容。
+
+无论是<font color="red"><b>发起方还是签署方</b></font>填写的控件，均包含在查询结果中。
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/08f6ea50d3ae88b51c280c2b17c2a126.png)
+### 2.  哪些控件会出现在结果里边？ 
+**A.不返回的控件类型：**
+- 动态表格
+- 附件控件
+- 水印控件
+
+**B.返回的控件类型：**
+- 单行文本
+- 多行文本
+- 勾选框控件
+- 数字控件
+- 日期控件
+- 图片控件（图片下载地址）
+- 邮箱控件
+- 地址控件
+- 学历控件
+- 性别控件
+- 省市区控件
+
+### 3.怎么授权？   
+
+此接口需要授权,  有两种开通权限的途径
+
+**第一种**:   需第三方应用的子企业登录控制台进行授权,  授权在**企业中心**的**授权管理**区域,  界面如下图
+授权过程需要**子企业超管**扫描跳转到电子签小程序签署<<渠道端下载渠道子客合同功能授权委托书>>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/8b483dfebdeafac85051279406944048.png)
+
+**第二种**: 第三方应用的配置接口打开全第三个应用下的所有自己起开通, 需要**渠道方企业的超管**扫描二维码跳转到电子签小程序签署 <<渠道端下载渠道子客合同功能开通知情同意书>>
+![image](https://qcloudimg.tencent-cloud.cn/raw/238979ef51dd381ccbdbc755a593debc/channel_DescribeResourceUrlsByFlows_appilications2.png)
+     */
+  async ChannelDescribeFlowComponents(
+    req: ChannelDescribeFlowComponentsRequest,
+    cb?: (error: string, rep: ChannelDescribeFlowComponentsResponse) => void
+  ): Promise<ChannelDescribeFlowComponentsResponse> {
+    return this.request("ChannelDescribeFlowComponents", req, cb)
+  }
+
+  /**
+   * 此接口（ChannelDeleteSealPolicies）用于删除已指定员工印章授权信息，删除员工的印章授权后，该员工使用印章进行盖章时，将需要提交印章授权申请且通过审核后才能使用该印章进行签署。
+   */
+  async ChannelDeleteSealPolicies(
+    req: ChannelDeleteSealPoliciesRequest,
+    cb?: (error: string, rep: ChannelDeleteSealPoliciesResponse) => void
+  ): Promise<ChannelDeleteSealPoliciesResponse> {
+    return this.request("ChannelDeleteSealPolicies", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多签签署码。 
+
+**适用场景**:
+签署人可通过扫描二维码补充签署信息进行实名签署。常用于提前不知道签署人的身份信息场景，例如：劳务工招工、大批量员工入职等场景。
+
+**注意**:
+1. 本接口适用于**发起方没有填写控件的 B2C或者单C模板**,  若是B2C模板,还要满足以下任意一个条件
+    - 模板中配置的签署顺序是无序
+    - B端企业的签署方式是静默签署
+    - B端企业是非首位签署
+2. 通过扫描一码多签签署码发起的合同，合同涉及到的回调消息可参考文档[合同发起及签署相关回调
+]( https://qian.tencent.com/developers/partner/callback_types_contracts_sign)
+3. 用户通过扫描一码多签签署码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档[签署二维码相关回调](https://qian.tencent.com/developers/partner/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83)
+
+签署码的样式如下图:
+![image](https://qcloudimg.tencent-cloud.cn/raw/27317cf5aacb094fb1dc6f94179a5148.png )
+     */
+  async ChannelCreateMultiFlowSignQRCode(
+    req: ChannelCreateMultiFlowSignQRCodeRequest,
+    cb?: (error: string, rep: ChannelCreateMultiFlowSignQRCodeResponse) => void
+  ): Promise<ChannelCreateMultiFlowSignQRCodeResponse> {
+    return this.request("ChannelCreateMultiFlowSignQRCode", req, cb)
+  }
+
+  /**
+     * 管理企业扩展服务
+
+- **直接开通的情形：** 若在操作过程中接口没有返回跳转链接，这表明无需进行任何跳转操作。此时，相应的企业拓展服务将会直接被开通或关闭。
+
+- **需要法人或者超管签署开通协议的情形：** 当需要开通以下企业拓展服务时， 系统将返回一个操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成服务的开通操作。
+  - **AUTO_SIGN（企业自动签）**
+  - **DOWNLOAD_FLOW（授权渠道下载合同）**
+
+注意： `在调用此接口以管理企业扩展服务时，操作者（ Agent.ProxyOperator.OpenId）必须是企业的超级管理员（超管）或法人`
+
+
+对应的扩展服务能力可以在控制台的【扩展服务】中找到
+![image](https://qcloudimg.tencent-cloud.cn/raw/99eebd37883ec55ed1f1df3a57aee60a.png)
+     */
+  async ModifyExtendedService(
+    req: ModifyExtendedServiceRequest,
+    cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
+  ): Promise<ModifyExtendedServiceResponse> {
+    return this.request("ModifyExtendedService", req, cb)
+  }
+
+  /**
+     * 获取区块链存证证书查看链接/二维码接口
+
+适用场景：企业员工可以通过此接口生成合同区块链存证证书的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。
+
+[点击查看区块链存证证书样式](https://qcloudimg.tencent-cloud.cn/raw/47d5e9c2ffa90ad4e27b3cd14095aa08.jpg)
+
+注：
+<ul><li>1. 二维码下载链接过期时间为5分钟，请尽快下载保存。二维码/短链的过期时间为<font color="red">7天</font>，超过有效期则不可用。</li>
+<li>2. 合同状态需为<font color="red">签署完成</font> 、<font color="red">已解除</font>才能生成证书查看二维码/短链。</li>
+<li>3. 调用接口时，需确保接口调用身份拥有此合同的访问数据权限或为合同参与方。</li>
+<li>4. 通过扫码或者点击链接，用户无需登录或者鉴权即可查看对应合同的区块链存证证书，请妥善保管好二维码或链接。</li></ul>
+     */
+  async CreateFlowBlockchainEvidenceUrl(
+    req: CreateFlowBlockchainEvidenceUrlRequest,
+    cb?: (error: string, rep: CreateFlowBlockchainEvidenceUrlResponse) => void
+  ): Promise<CreateFlowBlockchainEvidenceUrlResponse> {
+    return this.request("CreateFlowBlockchainEvidenceUrl", req, cb)
+  }
+
+  /**
+     * 此接口用于获取企业批量认证链接-单链接包含多条认证流。
+
+前提条件：已调用 [CreateBatchOrganizationRegistrationTasks创建子企业批量认证链接任务接口](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks) 和[查询子企业批量认证链接DescribeBatchOrganizationRegistrationUrls](https://qian.tencent.com/developers/partnerApis/accounts/DescribeBatchOrganizationRegistrationUrls) 确保认证任务已经完成。
+
+异步任务的处理完成时间视当前已提交的任务量、任务的复杂程度等因素决定，正常情况下 3~5 秒即可完成，但也可能需要更长的时间。
+此链接包含多条认证流程，使用该链接可以批量的对企业进行认证。
+     */
+  async CreateBatchOrganizationAuthorizationUrl(
+    req: CreateBatchOrganizationAuthorizationUrlRequest,
+    cb?: (error: string, rep: CreateBatchOrganizationAuthorizationUrlResponse) => void
+  ): Promise<CreateBatchOrganizationAuthorizationUrlResponse> {
+    return this.request("CreateBatchOrganizationAuthorizationUrl", req, cb)
+  }
+
+  /**
+     * 该接口用于发起合同后，生成个人/企业用户的批量待办链接。
+**注意：**
+1. 该接口可生成签署人的批量、合同组签署/查看链接 。
+2. 该签署链接**有效期为30分钟**，过期后将失效，如需签署可重新创建批量签署链接 。
+4. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。
+跳转到小程序的实现，参考微信官方文档(分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式)，如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
+6. 因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
+     */
+  async ChannelCreateBatchQuickSignUrl(
+    req: ChannelCreateBatchQuickSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateBatchQuickSignUrlResponse) => void
+  ): Promise<ChannelCreateBatchQuickSignUrlResponse> {
+    return this.request("ChannelCreateBatchQuickSignUrl", req, cb)
+  }
+
+  /**
+     * 通过此接口可以关闭个人用户自动签功能。
+无需对应的用户刷脸等方式同意即可关闭。
+
+注意: 
+
+<ul><li>处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。</li>
+<li>如果此用户在开通时候绑定过个人自动签账号许可,  关闭此用户的自动签不会归还个人自动签账号许可的额度。</li></ul>
+     */
+  async ChannelDisableUserAutoSign(
+    req: ChannelDisableUserAutoSignRequest,
+    cb?: (error: string, rep: ChannelDisableUserAutoSignResponse) => void
+  ): Promise<ChannelDisableUserAutoSignResponse> {
+    return this.request("ChannelDisableUserAutoSign", req, cb)
+  }
+
+  /**
+     * 该接口用于批量创建企业认证链接， 可以支持PC浏览器，H5和小程序三种途径。
+此接口为异步提交任务接口，需要与[查询子企业批量认证链接](https://qcloudimg.tencent-cloud.cn/raw/1d3737991b2a3be78002bd78a47d6917.png)配合使用，整体流程如下图。
+![image](https://qcloudimg.tencent-cloud.cn/raw/654aa2a72ab7d42f06464ea33c50c3bb.png)
+
+
+
+**注意**
+
+1. 单次最多创建10个子企业。
+2. 一天内，同一家企业最多创建8000个子企业。
+3. 同一批创建的子客户不能重复，包括企业名称、企业统一信用代码和子客户经办人openId。
+4. 跳转到小程序的实现，请参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）。如何配置跳转电子签小程序，可参考：<a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
+
+
+
+**腾讯电子签小程序的AppID 和 原始Id如下:**
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+  async CreateBatchOrganizationRegistrationTasks(
+    req: CreateBatchOrganizationRegistrationTasksRequest,
+    cb?: (error: string, rep: CreateBatchOrganizationRegistrationTasksResponse) => void
+  ): Promise<CreateBatchOrganizationRegistrationTasksResponse> {
+    return this.request("CreateBatchOrganizationRegistrationTasks", req, cb)
+  }
+
+  /**
+     * 该接口用于获取个人授权执业章给企业的二维码，需要个人用户通过微信扫码。
+
+扫描后将跳转到腾讯电子签小程序，进入到授权执业章的流程。
+
+个人用户授权成功后，企业印章管理员需对印章进行审核，审核通过后，即可使用个人授权的执业章进行盖章操作。
+
+**注意**
+1. 该二维码**有效期为7天**，过期后将失效，可重新创建。
+ 
+
+整体流程入下图
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/21b6b56dbc796c9d6f402d6ce6febb07.png)
+     */
+  async CreateEmployeeQualificationSealQrCode(
+    req: CreateEmployeeQualificationSealQrCodeRequest,
+    cb?: (error: string, rep: CreateEmployeeQualificationSealQrCodeResponse) => void
+  ): Promise<CreateEmployeeQualificationSealQrCodeResponse> {
+    return this.request("CreateEmployeeQualificationSealQrCode", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelGetTaskResultApi）用来查询转换任务的状态。如需发起转换任务，请使用<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行资源文件的转换操作<br />
+前提条件：已调用 <a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行文件转换，并得到了返回的转换任务Id。<br />
+
+适用场景：已创建一个文件转换任务，想查询该文件转换任务的状态，或获取转换后的文件资源ID。<br />
+注：
+1. `大文件转换所需的时间可能会比较长。`
+2. `本接口返回的文件资源ID就是PDF资源ID，可以直接用于【用PDF文件创建签署流程】接口发起合同。`
+     */
+  async ChannelGetTaskResultApi(
+    req: ChannelGetTaskResultApiRequest,
+    cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void
+  ): Promise<ChannelGetTaskResultApiResponse> {
+    return this.request("ChannelGetTaskResultApi", req, cb)
+  }
+
+  /**
+     * 获取设置自动签印章小程序链接。
+
+注意：
+<ul><li>需要<code>企业开通自动签</code>后使用。</li>
+<li>仅支持<code>已经开通了自动签的个人</code>更换自动签印章。</li>
+<li>链接有效期默认7天，<code>最多30天</code>。</li>
+<li>该接口的链接适用于<code>小程序</code>端。</li>
+<li>该接口不会扣除您的合同套餐，暂不参与计费。</li></ul>
+     */
+  async ChannelCreateUserAutoSignSealUrl(
+    req: ChannelCreateUserAutoSignSealUrlRequest,
+    cb?: (error: string, rep: ChannelCreateUserAutoSignSealUrlResponse) => void
+  ): Promise<ChannelCreateUserAutoSignSealUrlResponse> {
+    return this.request("ChannelCreateUserAutoSignSealUrl", req, cb)
+  }
+
+  /**
+     * 激活或续期子客企业， 在激活状态下，企业可以正常发起合同；在非激活状态下，企业仅能查看和签署合同。
+
+**1. 激活**：使用一个许可证将子客企业从未激活状态转变为激活状态。**激活状态的有效期为一年，一年后将自动回到未激活状态**。
+
+**2. 续期**：使用一个许可证将已激活的子客企业的有效期延长一年。只有处于激活状态的子企业才能进行续期操作（**若处于非激活状态，则需先激活**）。您可以使用多个许可证对同一子客企业进行多次续费。
+
+
+该接口的效果同：**【企业应用管理】 -> 【子客企业管理】 -> 【激活】或者【续期】**
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/cd63761ca6e814c64b4ecf131555b74e.png)
+
+
+如果不想调用此接口或者页面点击进行激活或续期，可以在【应用扩展服务】中打开自动激活或续期，在许可证充足的情况下会自动激活或续期子客企业
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/2ccb37ef6bde463c15c39fdda789216f.png)
+     */
+  async CreateChannelSubOrganizationActive(
+    req: CreateChannelSubOrganizationActiveRequest,
+    cb?: (error: string, rep: CreateChannelSubOrganizationActiveResponse) => void
+  ): Promise<CreateChannelSubOrganizationActiveResponse> {
+    return this.request("CreateChannelSubOrganizationActive", req, cb)
   }
 
   /**
@@ -879,57 +1385,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于批量创建企业认证链接， 可以支持PC浏览器，H5和小程序三种途径。
-此接口为异步提交任务接口，需要与[查询子企业批量认证链接](https://qcloudimg.tencent-cloud.cn/raw/1d3737991b2a3be78002bd78a47d6917.png)配合使用，整体流程如下图。
-![image](https://qcloudimg.tencent-cloud.cn/raw/654aa2a72ab7d42f06464ea33c50c3bb.png)
-
-
-
-**注意**
-
-1. 单次最多创建10个子企业。
-2. 一天内，同一家企业最多创建8000个子企业。
-3. 同一批创建的子客户不能重复，包括企业名称、企业统一信用代码和子客户经办人openId。
-4. 跳转到小程序的实现，请参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）。如何配置跳转电子签小程序，可参考：<a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
-
-
-
-**腾讯电子签小程序的AppID 和 原始Id如下:**
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
-     */
-  async CreateBatchOrganizationRegistrationTasks(
-    req: CreateBatchOrganizationRegistrationTasksRequest,
-    cb?: (error: string, rep: CreateBatchOrganizationRegistrationTasksResponse) => void
-  ): Promise<CreateBatchOrganizationRegistrationTasksResponse> {
-    return this.request("CreateBatchOrganizationRegistrationTasks", req, cb)
-  }
-
-  /**
-     * 激活或续期子客企业， 在激活状态下，企业可以正常发起合同；在非激活状态下，企业仅能查看和签署合同。
-
-**1. 激活**：使用一个许可证将子客企业从未激活状态转变为激活状态。**激活状态的有效期为一年，一年后将自动回到未激活状态**。
-
-**2. 续期**：使用一个许可证将已激活的子客企业的有效期延长一年。只有处于激活状态的子企业才能进行续期操作（**若处于非激活状态，则需先激活**）。您可以使用多个许可证对同一子客企业进行多次续费。
-
-
-该接口的效果同：**【企业应用管理】 -> 【子客企业管理】 -> 【激活】或者【续期】**
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/cd63761ca6e814c64b4ecf131555b74e.png)
-
-
-如果不想调用此接口或者页面点击进行激活或续期，可以在【应用扩展服务】中打开自动激活或续期，在许可证充足的情况下会自动激活或续期子客企业
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/2ccb37ef6bde463c15c39fdda789216f.png)
-     */
-  async CreateChannelSubOrganizationActive(
-    req: CreateChannelSubOrganizationActiveRequest,
-    cb?: (error: string, rep: CreateChannelSubOrganizationActiveResponse) => void
-  ): Promise<CreateChannelSubOrganizationActiveResponse> {
-    return this.request("CreateChannelSubOrganizationActive", req, cb)
+   * 此接口（ChannelCancelUserAutoSignEnableUrl）用来撤销发送给个人用户的自动签开通链接，撤销后对应的个人用户开通链接失效。若个人用户已经完成开通，将无法撤销。（处方单场景专用，使用此接口请与客户经理确认）
+   */
+  async ChannelCancelUserAutoSignEnableUrl(
+    req: ChannelCancelUserAutoSignEnableUrlRequest,
+    cb?: (error: string, rep: ChannelCancelUserAutoSignEnableUrlResponse) => void
+  ): Promise<ChannelCancelUserAutoSignEnableUrlResponse> {
+    return this.request("ChannelCancelUserAutoSignEnableUrl", req, cb)
   }
 
   /**
@@ -958,25 +1420,258 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 该接口用于获取个人授权执业章给企业的二维码，需要个人用户通过微信扫码。
-
-扫描后将跳转到腾讯电子签小程序，进入到授权执业章的流程。
-
-个人用户授权成功后，企业印章管理员需对印章进行审核，审核通过后，即可使用个人授权的执业章进行盖章操作。
+     * 该接口用于发起合同后，生成用户的签署链接 <br/>
 
 **注意**
-1. 该二维码**有效期为7天**，过期后将失效，可重新创建。
- 
-
-整体流程入下图
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/21b6b56dbc796c9d6f402d6ce6febb07.png)
+1. 该签署**链接有效期为30分钟**，过期后将失效，如需签署可重新创建签署链接 。
+2. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。配置方式请参考：<a href="https://qian.tencent.com/developers/company/openqianh5/">跳转电子签H5</a>。
+如需跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
+3. 因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
      */
-  async CreateEmployeeQualificationSealQrCode(
-    req: CreateEmployeeQualificationSealQrCodeRequest,
-    cb?: (error: string, rep: CreateEmployeeQualificationSealQrCodeResponse) => void
-  ): Promise<CreateEmployeeQualificationSealQrCodeResponse> {
-    return this.request("CreateEmployeeQualificationSealQrCode", req, cb)
+  async ChannelCreateFlowSignUrl(
+    req: ChannelCreateFlowSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void
+  ): Promise<ChannelCreateFlowSignUrlResponse> {
+    return this.request("ChannelCreateFlowSignUrl", req, cb)
+  }
+
+  /**
+     * 此接口（CreateChannelOrganizationInfoChangeUrl）用于创建子客企业信息变更链接。
+
+<h3 id="1">支持变更链接类型，通过入参 Endpoint 指定，默认为WEIXINAPP。</h3>
+
+<h4 id="WEIXINAPP">WEIXINAPP</h4>
+<p>创建变更短链。需要在移动端打开，会跳转到微信腾讯电子签小程序进行更换。</p>
+
+<h4 id="APP">APP</h4>
+<p>创建变更小程序链接，可从第三方App跳转到微信腾讯电子签小程序进行更换。</p>
+
+
+<h3 id="2">支持创建企业超管变更链接或企业基础信息变更链接，通过入参 ChangeType 指定。</h3>
+
+<h4 id="1-企业超管变更">1. 企业超管变更</h4>
+
+<p>换成企业的其他员工来当超管</p>
+
+<h4 id="2-企业基础信息变更">2. 企业基础信息变更</h4>
+
+<h5 id="可以变动">可以变动</h5>
+
+<ul>
+<li>企业名称<br>
+</li>
+<li>法定代表人姓名(新法人有邀请链接)<br>
+</li>
+<li>企业地址和所在地</li>
+</ul>
+
+<h5 id="不可变动">不可变动</h5>
+
+<ul>
+<li>统一社会信用代码<br>
+</li>
+<li>企业主体类型</li>
+</ul>
+
+<p>如果企业名称变动会引起下面的变动</p>
+
+<ul>
+<li>合同:   老合同不做任何处理,   新发起的合同需要用新的企业名字作为签署方, 否则无法签署</li>
+<li>印章:   会删除所有的印章所有的机构公章，合同专用章，财务专用章和人事专用章,  然后用新企业名称生成新的机构公章，合同专用章，财务专用章和人事专用章,  而法人章不会处理</li>
+<li>证书:   企业证书会重新请求CA机构用新企业名称生成新的证书</li>
+</ul>
+
+
+注意： 
+1. 生成的电子签小程序链接<font color='red'>只能由企业的法人或者超管</font>点击后进行操作， 其他员工打开后会提示“无权查看该内容”
+2. 法人可以无需生成链接，直接在电子签小程序中更换本企业的超管
+     */
+  async CreateChannelOrganizationInfoChangeUrl(
+    req: CreateChannelOrganizationInfoChangeUrlRequest,
+    cb?: (error: string, rep: CreateChannelOrganizationInfoChangeUrlResponse) => void
+  ): Promise<CreateChannelOrganizationInfoChangeUrlResponse> {
+    return this.request("CreateChannelOrganizationInfoChangeUrl", req, cb)
+  }
+
+  /**
+     * 接口（ChannelCreateFlowGroupByFiles）用于使用 PDF 文件创建合同组签署流程。
+
+- 该接口允许通过选择多个模板一次性创建多个合同，这些合同被组织在一个合同组中。
+- 每个签署方将收到一个签署链接，通过这个链接可以访问并签署合同组中的所有合同。
+- 合同组中的合同必须作为一个整体进行签署，不能将合同组拆分成单独的合同进行逐一签署。
+
+<img src="https://qcloudimg.tencent-cloud.cn/raw/a63074a0293c9ff5bf6c0bb74c0d3b20.png"   width="400" />
+
+
+### 2. 适用场景
+
+该接口适用于需要一次性完成多份合同签署的情况，多份合同一般具有关联性，用户以目录的形式查看合同。
+
+### 3. 发起方要求和签署方实名要求
+- **发起方要求**：作为合同发起方的第三方子企业A的员工必须进行实名认证。
+- **签署方要求**：签署方可以是多种身份（如第三方子企业的员工、个人、SaaS平台企业员工），其中企业和员工可以不进行实名认证。
+
+**可以作为发起方和签署方的角色列表**
+
+<table>
+<thead>
+<tr>
+<th>场景编号</th>
+<th>可作为发起方类型</th>
+<th>可作为签署方的类型</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>场景一</td>
+<td>第三方子企业A员工</td>
+<td>第三方子企业A员工</td>
+</tr>
+
+<tr>
+<td>场景二</td>
+<td>第三方子企业A员工</td>
+<td>第三方子企业B员工</td>
+</tr>
+
+<tr>
+<td>场景三</td>
+<td>第三方子企业A员工</td>
+<td>个人/自然人</td>
+</tr>
+
+<tr>
+<td>场景四</td>
+<td>第三方子企业A员工</td>
+<td>SaaS平台企业员工</td>
+</tr>
+</tbody>
+</table>
+
+### 4. 签署方参数差异
+- 根据签署方的不同类型（第三方子企业的员工、个人、SaaS平台企业员工），传递的参数也不同。具体参数的结构和要求可以参考开发者中心提供的 `FlowApproverInfo` 结构体说明。
+
+### 5. 合同额度的扣减与返还
+- **扣减时机**：合同一旦发起，相关的合同额度就会被扣减，合同组下面的每个合同都要扣减一个合同额度。
+- **返还条件**：只有在合同被撤销且没有任何签署方签署过，或者只有自动签署的情况下，合同额度才会被返还。
+- **不返还的情况**：如果合同已过期、被拒签、签署完成或已解除，合同额度将不会被返还。
+
+### 6. 静默（自动）签署的限制
+- 在使用静默（自动）签署功能时，合同签署方不能有填写控件。<font color="red">此接口静默签(企业自动签)能力为白名单功能</font>，使用前请联系对接的客户经理沟通。
+
+### 7.合同组暂不支持抄送功能
+     */
+  async ChannelCreateFlowGroupByFiles(
+    req: ChannelCreateFlowGroupByFilesRequest,
+    cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void
+  ): Promise<ChannelCreateFlowGroupByFilesResponse> {
+    return this.request("ChannelCreateFlowGroupByFiles", req, cb)
+  }
+
+  /**
+     * 此接口用于查询合同或者合同组的详情信息，支持查询多个（数量不能超过100）。
+
+适用场景：可用于主动查询某个合同或者合同组的详情信息。
+
+注:  `只能查询本企业创建的合同(创建合同用的Agent和此接口用的Agent数据最好一致) `
+     */
+  async DescribeFlowDetailInfo(
+    req: DescribeFlowDetailInfoRequest,
+    cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
+  ): Promise<DescribeFlowDetailInfoResponse> {
+    return this.request("DescribeFlowDetailInfo", req, cb)
+  }
+
+  /**
+     * 通过此接口（ChannelDescribeBillUsageDetail）查询该第三方平台子客企业的套餐消耗详情。可以支持单个子客和整个应用下所有子客的查询。
+<ul>
+<li>对于单个子客企业的查询，通过指定子客的唯一标识(Agent.ProxyOrganizationOpenId)来查询该子客消耗详情</li>
+<li>对于整个应用下所有企业的查询，不需要指定子客的唯一标识，只需要传入渠道应用标识(Agent.AppId)直接查询整个应用下所有子客企业消耗详情</li>
+</ul>
+     */
+  async ChannelDescribeBillUsageDetail(
+    req: ChannelDescribeBillUsageDetailRequest,
+    cb?: (error: string, rep: ChannelDescribeBillUsageDetailResponse) => void
+  ): Promise<ChannelDescribeBillUsageDetailResponse> {
+    return this.request("ChannelDescribeBillUsageDetail", req, cb)
+  }
+
+  /**
+     * 批量清理未认证的企业认证流程。
+
+此接口用来清除企业方认证信息填写错误，批量清理认证中的认证流信息。
+为接口[提交子企业批量认证链接创建任务](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks) 和[查询子企业批量认证链接](https://qian.tencent.com/developers/partnerApis/accounts/DescribeBatchOrganizationRegistrationUrls) 接口的扩展接口。即在批量认证过程中，当发起认证企业发现超管信息错误的时候，可以将当前超管下的所有认证流企业清除。
+
+注意：
+**这个接口的操作人必须跟生成批量认证链接接口的应用号一致，才可以调用，否则会返回当前操作人没有认证中的企业认证流**
+     */
+  async DeleteOrganizationAuthorizations(
+    req: DeleteOrganizationAuthorizationsRequest,
+    cb?: (error: string, rep: DeleteOrganizationAuthorizationsResponse) => void
+  ): Promise<DeleteOrganizationAuthorizationsResponse> {
+    return this.request("DeleteOrganizationAuthorizations", req, cb)
+  }
+
+  /**
+     * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
+1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
+2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。
+
+此接口存在以下限制：
+1. 执行操作的员工须为<font  color="red">发起方企业的超级管理员、法定代表人或签署流程发起人</font>。
+2. 延长整个签署流程时，<font  color="red">应至少有一方尚未签署</font>（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+3. 延长整个签署流程时，新的签署截止日期应晚于已设定的签署截止日期和当前日期。
+4. 延长签署方截止时间时，<font  color="red">签署方不能处于流程完结或已终止状态</font>（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+5. 延长签署方截止时间时，新的签署截止日期应晚于当前日期和已设定的截止日期。若为有序合同，还需早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
+6. <font  color="red">不支持操作合同组合同</font>。
+
+合同（流程）层面截止时间子企业控制台展示的位置：
+![image](https://qcloudimg.tencent-cloud.cn/raw/f0f88c0eb49a926da9a86e5a6e9efa8b.png)
+     */
+  async ModifyFlowDeadline(
+    req: ModifyFlowDeadlineRequest,
+    cb?: (error: string, rep: ModifyFlowDeadlineResponse) => void
+  ): Promise<ModifyFlowDeadlineResponse> {
+    return this.request("ModifyFlowDeadline", req, cb)
+  }
+
+  /**
+     * 通过此接口，可以创建企业批量签署链接，员工只需点击链接即可跳转至控制台进行批量签署。
+
+注：
+- 员工必须在企业下完成实名认证，且需作为批量签署合同的签署方或者领取方。
+- 仅支持传入待签署或者待领取的合同，待填写暂不支持。
+- 员工批量签署，支持多种签名方式，包括手写签名、临摹签名、系统签名、个人印章、签批控件等。
+
+签署的嵌入页面长相如下：
+![image](https://qcloudimg.tencent-cloud.cn/raw/a4754bc835a3f837ddec1e28b02ed9c0.png)
+     */
+  async ChannelCreateOrganizationBatchSignUrl(
+    req: ChannelCreateOrganizationBatchSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateOrganizationBatchSignUrlResponse) => void
+  ): Promise<ChannelCreateOrganizationBatchSignUrlResponse> {
+    return this.request("ChannelCreateOrganizationBatchSignUrl", req, cb)
+  }
+
+  /**
+   * 将指定印章授权给第三方平台子客企业下的某些员工
+   */
+  async ChannelCreateSealPolicy(
+    req: ChannelCreateSealPolicyRequest,
+    cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void
+  ): Promise<ChannelCreateSealPolicyResponse> {
+    return this.request("ChannelCreateSealPolicy", req, cb)
+  }
+
+  /**
+   * 通过接口[批量撤销合同流程](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelBatchCancelFlows)或者[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
+   */
+  async DescribeCancelFlowsTask(
+    req: DescribeCancelFlowsTaskRequest,
+    cb?: (error: string, rep: DescribeCancelFlowsTaskResponse) => void
+  ): Promise<DescribeCancelFlowsTaskResponse> {
+    return this.request("DescribeCancelFlowsTask", req, cb)
   }
 
   /**
@@ -1026,16 +1721,6 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: CreateConsoleLoginUrlResponse) => void
   ): Promise<CreateConsoleLoginUrlResponse> {
     return this.request("CreateConsoleLoginUrl", req, cb)
-  }
-
-  /**
-   * 生成渠道子客编辑企业信息二维码
-   */
-  async ChannelCreateOrganizationModifyQrCode(
-    req: ChannelCreateOrganizationModifyQrCodeRequest,
-    cb?: (error: string, rep: ChannelCreateOrganizationModifyQrCodeResponse) => void
-  ): Promise<ChannelCreateOrganizationModifyQrCodeResponse> {
-    return this.request("ChannelCreateOrganizationModifyQrCode", req, cb)
   }
 
   /**
@@ -1120,36 +1805,26 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 此接口（ChannelGetTaskResultApi）用来查询转换任务的状态。如需发起转换任务，请使用<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行资源文件的转换操作<br />
-前提条件：已调用 <a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行文件转换，并得到了返回的转换任务Id。<br />
+     * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称、企业营业执照、企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。
 
-适用场景：已创建一个文件转换任务，想查询该文件转换任务的状态，或获取转换后的文件资源ID。<br />
-注：
-1. `大文件转换所需的时间可能会比较长。`
-2. `本接口返回的文件资源ID就是PDF资源ID，可以直接用于【用PDF文件创建签署流程】接口发起合同。`
-     */
-  async ChannelGetTaskResultApi(
-    req: ChannelGetTaskResultApiRequest,
-    cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void
-  ): Promise<ChannelGetTaskResultApiResponse> {
-    return this.request("ChannelGetTaskResultApi", req, cb)
-  }
+注意：
 
-  /**
-     * 接口（ChannelCreateDynamicFlowApprover）用来补充<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>发起的动态合同的签署人信息
-**注**: 
-<ul>
-<li>此接口需要保证：渠道企业已开启：模块化计费能力，</li>
-<li>此接口需要保证：渠道应用已开启：动态签署人2.0能力</li>
-<li>此接口需要保证：合同发起时指定开启了动态合同</li>
-<li>此接口补充的动态签署人传参规则，请参考接口：<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>的签署人传参规则</li>
-</ul>
+- **需要在<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>前同步的企业信息**, 否则会出现信息同步没有用的情形
+- **企业信息需要和营业执照信息对应**,  否则会出现激活过程验证不通过的问题
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/7ec91b79a0a4860e77c9ff9f4a5f13ad/channel_SyncProxyOrganization2.png)
+
+
+- **企业统一社会信用代码**: 对应上图中的**1**
+- **第三方平台子客企业名称**: 对应上图中的**2**
+- **企业法定代表人的名字**:对应上图中的**3**
+- **企业详细住所**:对应上图中的**4**
      */
-  async ChannelCreateDynamicFlowApprover(
-    req: ChannelCreateDynamicFlowApproverRequest,
-    cb?: (error: string, rep: ChannelCreateDynamicFlowApproverResponse) => void
-  ): Promise<ChannelCreateDynamicFlowApproverResponse> {
-    return this.request("ChannelCreateDynamicFlowApprover", req, cb)
+  async SyncProxyOrganization(
+    req: SyncProxyOrganizationRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
+  ): Promise<SyncProxyOrganizationResponse> {
+    return this.request("SyncProxyOrganization", req, cb)
   }
 
   /**
@@ -1184,50 +1859,15 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 此接口（ChannelCreateBoundFlows）用于子客企业领取未归属给员工的合同，将合同领取给当前员工，合同不能重复领取。
+     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
 
-
-**未归属合同发起方式**
- 指定对应企业的OrganizationOpenId和OrganizationName而不指定具体的参与人(OpenId/名字/手机号等),  则合同进入待领取状态, 示例代码如下
-```
-		FlowApprovers: []*essbasic.FlowApproverInfo{
-			{
-				ApproverType:       common.StringPtr("ORGANIZATION"),
-				OrganizationOpenId: common.StringPtr("org_dianziqian"),
-				OrganizationName:   common.StringPtr("典子谦示例企业"),
-			}
-		},
-```
-
-可以<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录控制台查看带领取的合同
-![image](https://qcloudimg.tencent-cloud.cn/raw/a34d0cc56ec871613e94dfc6252bc072.png)
-
-注: 
-1. 支持批量领取,  如果有一个合同流程无法领取会导致接口报错,  使得所有合同都领取失败
-2. 只有企业的<font color="red">超管或者法人</font>才能进行合同的领取
+注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
      */
-  async ChannelCreateBoundFlows(
-    req: ChannelCreateBoundFlowsRequest,
-    cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
-  ): Promise<ChannelCreateBoundFlowsResponse> {
-    return this.request("ChannelCreateBoundFlows", req, cb)
-  }
-
-  /**
-     * 获取设置自动签印章小程序链接。
-
-注意：
-<ul><li>需要<code>企业开通自动签</code>后使用。</li>
-<li>仅支持<code>已经开通了自动签的个人</code>更换自动签印章。</li>
-<li>链接有效期默认7天，<code>最多30天</code>。</li>
-<li>该接口的链接适用于<code>小程序</code>端。</li>
-<li>该接口不会扣除您的合同套餐，暂不参与计费。</li></ul>
-     */
-  async ChannelCreateUserAutoSignSealUrl(
-    req: ChannelCreateUserAutoSignSealUrlRequest,
-    cb?: (error: string, rep: ChannelCreateUserAutoSignSealUrlResponse) => void
-  ): Promise<ChannelCreateUserAutoSignSealUrlResponse> {
-    return this.request("ChannelCreateUserAutoSignSealUrl", req, cb)
+  async ChannelRenewAutoSignLicense(
+    req: ChannelRenewAutoSignLicenseRequest,
+    cb?: (error: string, rep: ChannelRenewAutoSignLicenseResponse) => void
+  ): Promise<ChannelRenewAutoSignLicenseResponse> {
+    return this.request("ChannelRenewAutoSignLicense", req, cb)
   }
 
   /**
@@ -1240,64 +1880,6 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelDescribeUserAutoSignStatusResponse) => void
   ): Promise<ChannelDescribeUserAutoSignStatusResponse> {
     return this.request("ChannelDescribeUserAutoSignStatus", req, cb)
-  }
-
-  /**
-     * 该接口用于获取创建法人章的二维码，需要通过微信扫描。扫描后将跳转到腾讯电子签署，进入到创建法人章的流程。
-
-**注意**
-1. 该二维码**有效期为7天**，过期后将失效，可重新创建 。
-2. 每个公司**只能有1个法人章**，无法重复创建或者创建多个
-
-法人章的样式可以参考下图索引（也可以自己上传法人印章图片）：
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/36a0a090750c45bb5cac5047ac461b2c.png)
-     */
-  async CreateLegalSealQrCode(
-    req: CreateLegalSealQrCodeRequest,
-    cb?: (error: string, rep: CreateLegalSealQrCodeResponse) => void
-  ): Promise<CreateLegalSealQrCodeResponse> {
-    return this.request("CreateLegalSealQrCode", req, cb)
-  }
-
-  /**
-     * 对合同流程文件进行数字签名验证，判断数字签名是否有效，合同文件内容是否被篡改。
-
-**补充**： 可以到控制台[合同验签](https://qian.tencent.com/verifySign)体验验签功能，界面如下
-![image](https://qcloudimg.tencent-cloud.cn/raw/81c333ccb07f0c5fbaf840d9cee61333.png)
-     */
-  async ChannelVerifyPdf(
-    req: ChannelVerifyPdfRequest,
-    cb?: (error: string, rep: ChannelVerifyPdfResponse) => void
-  ): Promise<ChannelVerifyPdfResponse> {
-    return this.request("ChannelVerifyPdf", req, cb)
-  }
-
-  /**
-     * 用来创建嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），该接口配合其他所有可嵌入页面接口使用
-创建配置对当前第三方应用全局生效，如果多次调用，会以最后一次的配置为准
-     */
-  async ChannelCreateWebThemeConfig(
-    req: ChannelCreateWebThemeConfigRequest,
-    cb?: (error: string, rep: ChannelCreateWebThemeConfigResponse) => void
-  ): Promise<ChannelCreateWebThemeConfigResponse> {
-    return this.request("ChannelCreateWebThemeConfig", req, cb)
-  }
-
-  /**
-     * 该接口用于发起合同后，生成用户的签署链接 <br/>
-
-**注意**
-1. 该签署**链接有效期为30分钟**，过期后将失效，如需签署可重新创建签署链接 。
-2. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，**不支持微信小程序嵌入**。配置方式请参考：<a href="https://qian.tencent.com/developers/company/openqianh5/">跳转电子签H5</a>。
-如需跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>。
-3. 因h5涉及人脸身份认证能力基于慧眼人脸核身，对Android和iOS系统均有一定要求， 因此<font color='red'>App嵌入H5签署合同需要按照慧眼提供的<a href="https://cloud.tencent.com/document/product/1007/61076">慧眼人脸核身兼容性文档</a>做兼容性适配</font>。
-     */
-  async ChannelCreateFlowSignUrl(
-    req: ChannelCreateFlowSignUrlRequest,
-    cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void
-  ): Promise<ChannelCreateFlowSignUrlResponse> {
-    return this.request("ChannelCreateFlowSignUrl", req, cb)
   }
 
   /**
@@ -1334,44 +1916,6 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 创建企业注销链接
-
-系统将返回操作链接。贵方需要主动联系并通知企业的超级管理员（超管）或法人。由他们点击该链接，完成企业的注销操作。
-
-注意： `在调用此接口以管理企业扩展服务时，操作者（ Agent.ProxyOperator.OpenId）必须是企业的超级管理员（超管）或法人。`
-     */
-  async CreateCloseOrganizationUrl(
-    req: CreateCloseOrganizationUrlRequest,
-    cb?: (error: string, rep: CreateCloseOrganizationUrlResponse) => void
-  ): Promise<CreateCloseOrganizationUrlResponse> {
-    return this.request("CreateCloseOrganizationUrl", req, cb)
-  }
-
-  /**
-     * 通过合同编号批量撤销合同，单次最多支持撤销100份合同。
-
-适用场景：如果某个合同当前**至少还有一方没有签署**，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。
-
-- **可撤回合同状态**：未全部签署完成
-- **不撤回合同状态**：已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等合同状态。
-
-批量撤销结果可以通过接口返回的TaskId关联[批量撤销任务结果回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign#%E4%B9%9D-%E6%89%B9%E9%87%8F%E6%92%A4%E9%94%80%E7%BB%93%E6%9E%9C%E5%9B%9E%E8%B0%83)或通过接口[查询批量撤销合同结果](https://qian.tencent.com/developers/partnerApis/operateFlows/DescribeCancelFlowsTask)主动查询。
-
-
-注:
-- 有对应合同撤销权限的人:  <font color='red'>**合同的发起人（并已经授予撤销权限）或者发起人所在企业的超管、法人**</font>
-- 签署完毕的合同需要双方走解除流程将合同作废，可以参考<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateReleaseFlow" target="_blank">发起解除合同流程接口</a>
-- <font color='red'>只有撤销没有参与方签署过或只有自动签署签署过的合同，才会返还合同额度。</font>
-- 撤销后可以看合同PDF内容的人员： 发起方的超管， 发起方自己，发起方撤销合同的操作人员，已经签署合同、已经填写合同、邀请填写已经补充信息的参与人员， 其他参与人员看不到合同的内容。
-     */
-  async ChannelBatchCancelFlows(
-    req: ChannelBatchCancelFlowsRequest,
-    cb?: (error: string, rep: ChannelBatchCancelFlowsResponse) => void
-  ): Promise<ChannelBatchCancelFlowsResponse> {
-    return this.request("ChannelBatchCancelFlows", req, cb)
-  }
-
-  /**
      * 该接口用于结束动态签署方2.0的合同流程。
 
 
@@ -1389,196 +1933,18 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-     * 该接口 (PrepareFlows) 用于创建待发起文件
-用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
-目前该接口只支持B2C，<font color='red'> **不建议使用，将会废弃**</font>。
+     * 生成合成后的各类企业授权书，包括：
+- 企业认证超管授权书
+- 超管变更授权书
+- 企业注销授权书
+
+注: 需自行保证传入真实的企业/法人/超管信息，否则后续的审核将会拒绝。
      */
-  async PrepareFlows(
-    req: PrepareFlowsRequest,
-    cb?: (error: string, rep: PrepareFlowsResponse) => void
-  ): Promise<PrepareFlowsResponse> {
-    return this.request("PrepareFlows", req, cb)
-  }
-
-  /**
-     * 创建跳转小程序查看或签署的链接
-
-**腾讯电子签小程序的AppID 和 原始Id如下:**
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
-
-**主要使用场景EndPoint分类**
-
-|EndPoint| 场景| 说明和示例|
-|  ----  | ----  | --- |
-|  WEIXINAPP  | 短链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序（与腾讯电子签官方短信提醒用户签署形式一样）<br> 示例: https://essurl.cn/x9nvWU8fTg|
-|  LONGURL2WEIXINAPP  | 长链跳转腾讯电子签小程序签署场景  |  点击链接打开电子签小程序, 是WEIXINAPP生成短链代表的那个长链|
-|  CHANNEL  | 带有H5引导页的跳转腾讯电子签小程序签署场景 |  点击链接打开一个H5引导页面, 页面中有个"前往小程序"的按钮, 点击后会跳转到腾讯电子签小程序签署场景;  签署完成会回到H5引导页面, 然后跳转到指定创建链接指定的JumpUrl<br>示例: https://res.ess.tencent.cn/cdn/h5-activity-beta/jump-mp.html?use=channel-guide&type=warning&token=uIFKIU8fTd |
-|APP| <font color="red">贵方APP</font>跳转腾讯电子签小程序签署场景|  贵方App直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方App的场景<br>跳转到腾讯电子签小程序的实现可以参考微信的官方文档:<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html" target="_blank">开放能力/打开 App</a> <br> 示例: pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3 |
-|APP| <font color="red">贵方小程序</font>跳转腾讯电子签小程序签署场景|  贵方小程序直接跳转到小程序后, 在腾讯电子签小程序签署完成后返回贵方小程序的场景<br>跳转到腾讯电子签小程序的实现可以参考微信官方文档<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html" target="_blank">全屏方式</a>和<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html " target="_blank">半屏方式</a><br>此时返回的SignUrl就是官方文档中的path<br> 示例:pages/guide?from=default&where=mini& to=CONTRACT_DETAIL& id=yDwiBUUc*duRvquCSX8wd& shortKey=yDwivUA**W1yRsTre3  |
-     */
-  async CreateSignUrls(
-    req: CreateSignUrlsRequest,
-    cb?: (error: string, rep: CreateSignUrlsResponse) => void
-  ): Promise<CreateSignUrlsResponse> {
-    return this.request("CreateSignUrls", req, cb)
-  }
-
-  /**
-     * 此接口（GetDownloadFlowUrl）用户获取合同控制台下载页面链接,  点击链接后会跳转至本企业合同管理控制台(会筛选出传入的合同列表), 点击**下载**按钮后就会下载传入的合同列表, 下载页面如下图
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_GetDownloadFlowUrl.png)
-
-注:
-<ul>
-<li>仅支持下载 <b>本企业</b> 下合同，链接会 <b>登录企业控制台</b> </li>
-<li> <b>链接仅可使用一次</b>，不可重复使用</li>
-</ul>
-     */
-  async GetDownloadFlowUrl(
-    req: GetDownloadFlowUrlRequest,
-    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
-  ): Promise<GetDownloadFlowUrlResponse> {
-    return this.request("GetDownloadFlowUrl", req, cb)
-  }
-
-  /**
-     * **适用场景**：
-当通过模板或文件发起合同时，若未指定企业签署人信息，则可调用此接口动态补充签署人。同一签署人只允许补充一人，最终实际签署人取决于谁先领取合同完成签署。
-
-**接口使用说明**：
-
-1.本接口现已支持批量补充签署人
-
-2.当<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中指定需要补充的FlowId时，可以对指定合同补充签署人；可以指定多个相同发起方的不同合同在完成批量补充
-
-3.当<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中指定需要补充的FlowId时，是对指定的合同补充多个指定的签署人
-
-4.如果同时指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，仅使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId作为补充的合同
-
-5.如果部分指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，又指定了<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId；那么<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>存在指定的FlowId，则使用<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId，不存在则使用<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId作为补充的合同
-
-
-6.如果同时未指定了<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#fillapproverinfo/" target="_blank">补充签署人结构体</a>中的FlowId和<a href="https://qian.tencent.com/developers/partnerApis/flows/ChannelCreateFlowApprovers/" target="_blank">补充签署人接口入参</a>中的FlowId，则传参错误
-
-**限制条件**：
-1. 本企业（发起方企业）企业签署人仅支持通过企业名称+姓名+手机号进行补充。
-2. 个人签署人支持通过姓名+手机号进行补充，补充动态签署人时：若个人用户已完成实名，则可通过姓名+证件号码进行补充。
-     */
-  async ChannelCreateFlowApprovers(
-    req: ChannelCreateFlowApproversRequest,
-    cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void
-  ): Promise<ChannelCreateFlowApproversResponse> {
-    return this.request("ChannelCreateFlowApprovers", req, cb)
-  }
-
-  /**
-     * 获取个人用户认证证书图片下载URL
-
-个人用户认证证书图片样式如下图
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/d568bc0f101bef582f7af2cb5ab7a715.png)
-
-注:  
-<ul>
-<li>只能获取个人用户证明图片, 企业员工的暂不支持</li>
-<li>专为电子处方单（医疗自动签）特定场景使用。在使用前，请务必与您的客户经理联系以确认已经开通电子处方单功能 </li>
-</ul>
-     */
-  async CreatePersonAuthCertificateImage(
-    req: CreatePersonAuthCertificateImageRequest,
-    cb?: (error: string, rep: CreatePersonAuthCertificateImageResponse) => void
-  ): Promise<CreatePersonAuthCertificateImageResponse> {
-    return this.request("CreatePersonAuthCertificateImage", req, cb)
-  }
-
-  /**
-     * 创建一个用于他方自动签授权的链接（可选择他方授权或我方授权）。通过这个链接，合作方企业可以直接进入小程序，进行自动签授权操作。
-
-如果授权企业尚未开通企业自动签功能，该链接还将引导他们首先开通本企业的自动签服务
-
-
-注: 
-1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
-2. 已经在授权中或者授权成功的企业，无法重复授权
-3. 授权企业和被授权企业必须都是已认证企业
-4. <font color='red'>需要授权企业或被授权企业的超管或者法人打开链接</font>走开通逻辑。
-
-**该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权**
-![image](https://qcloudimg.tencent-cloud.cn/raw/091823fd4f02af7dda416fa10ca65f2d.png)
-     */
-  async CreatePartnerAutoSignAuthUrl(
-    req: CreatePartnerAutoSignAuthUrlRequest,
-    cb?: (error: string, rep: CreatePartnerAutoSignAuthUrlResponse) => void
-  ): Promise<CreatePartnerAutoSignAuthUrlResponse> {
-    return this.request("CreatePartnerAutoSignAuthUrl", req, cb)
-  }
-
-  /**
-     * 此接口（ChannelCreateRole）用来创建企业自定义角色。
-
-适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
-
-适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考[查询角色列表接口](https://qian.tencent.com/developers/partnerApis/accounts/ChannelDescribeRoles) 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
-     */
-  async ChannelCreateRole(
-    req: ChannelCreateRoleRequest,
-    cb?: (error: string, rep: ChannelCreateRoleResponse) => void
-  ): Promise<ChannelCreateRoleResponse> {
-    return this.request("ChannelCreateRole", req, cb)
-  }
-
-  /**
-     * 获取合同流程PDF的下载链接，可以下载签署中、签署完的此子企业创建的合同。
-
-
-
-
-### 2. 确保合同的PDF已经合成后，再调用本接口。
- 用户创建合同或者提交签署动作后，后台需要1~3秒的时间就进行合同PDF合成或者签名，为了确保您下载的是签署完成的完整合同文件，我们建议采取下面两种方式的一种来<font color="red"><b>确保PDF已经合成完成，然后在调用本接口</b></font>。
-
-**第一种**：请确保您的系统配置了[接收合同完成通知的回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign)功能。一旦所有参与方签署完毕，我们的系统将自动向您提供的回调地址发送完成通知。
-
-**第二种**：通过调用我们的[获取合同信息](https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo)接口来主动检查合同的签署状态。请仅在确认合同状态为“全部签署完成”后，进行文件的下载操作。
-
-### 3.  链接具有有效期限
-<font color="red"><b>生成的链接是有时间限制的，过期后将无法访问</b></font>。您可以在接口返回的信息中查看具体的过期时间。为避免错误，请确保在链接过期之前进行下载操作。
-
-### 4. 有两种开通下载权限的途径。
-
-**第一种**:   需第三方应用的子企业登录控制台进行授权,  授权在**企业中心**的**授权管理**区域,  界面如下图。
-授权过程需要**子企业超管**扫描跳转到电子签小程序签署<<渠道端下载渠道子客合同功能授权委托书>>
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/8b483dfebdeafac85051279406944048.png)
-
-**第二种**: 渠道方企业在**企业应用管理**的配置界面打开需要配置的应用，点击**应用扩展服务**开通此功能，需要**渠道方企业的超管**扫描二维码跳转到电子签小程序签署 <<渠道端下载渠道子客合同功能开通知情同意书>>
-注: 
-1. `请注意如果第三方应用的子客主动关闭了渠道端下载渠道子客合同功能开关，那么渠道方开通了此功能也无法下载子客的合同文件`
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/238979ef51dd381ccbdbc755a593debc/channel_DescribeResourceUrlsByFlows_appilications2.png)
-     */
-  async DescribeResourceUrlsByFlows(
-    req: DescribeResourceUrlsByFlowsRequest,
-    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
-  ): Promise<DescribeResourceUrlsByFlowsResponse> {
-    return this.request("DescribeResourceUrlsByFlows", req, cb)
-  }
-
-  /**
-     * 1. 在使用[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByFiles)或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByTemplates)创建合同组签署流程时，若指定了参数以下参数为true,则可以调用此接口提交企业内部签署审批结果,即使是自动签署也需要进行审核通过才会进行签署。
-  - [FlowInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowinfo)
-  - [FlowFileInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowfileinfo)
-  - [FlowApproverInfo.ApproverNeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowapproverinfo) 
-
-2. 同一合同组，同一签署人可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
-     */
-  async CreateFlowGroupSignReview(
-    req: CreateFlowGroupSignReviewRequest,
-    cb?: (error: string, rep: CreateFlowGroupSignReviewResponse) => void
-  ): Promise<CreateFlowGroupSignReviewResponse> {
-    return this.request("CreateFlowGroupSignReview", req, cb)
+  async CreateOrganizationAuthFile(
+    req: CreateOrganizationAuthFileRequest,
+    cb?: (error: string, rep: CreateOrganizationAuthFileResponse) => void
+  ): Promise<CreateOrganizationAuthFileResponse> {
+    return this.request("CreateOrganizationAuthFile", req, cb)
   }
 
   /**
@@ -1593,79 +1959,6 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void
   ): Promise<ChannelCreateUserRolesResponse> {
     return this.request("ChannelCreateUserRoles", req, cb)
-  }
-
-  /**
-   * 此接口（ChannelCancelUserAutoSignEnableUrl）用来撤销发送给个人用户的自动签开通链接，撤销后对应的个人用户开通链接失效。若个人用户已经完成开通，将无法撤销。（处方单场景专用，使用此接口请与客户经理确认）
-   */
-  async ChannelCancelUserAutoSignEnableUrl(
-    req: ChannelCancelUserAutoSignEnableUrlRequest,
-    cb?: (error: string, rep: ChannelCancelUserAutoSignEnableUrlResponse) => void
-  ): Promise<ChannelCancelUserAutoSignEnableUrlResponse> {
-    return this.request("ChannelCancelUserAutoSignEnableUrl", req, cb)
-  }
-
-  /**
-     * 生成用印申请审批链接，审批人可以通过此链接进入小程序进行审批。
- p.s.
-Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批人打开。
-     */
-  async DescribeChannelSealPolicyWorkflowUrl(
-    req: DescribeChannelSealPolicyWorkflowUrlRequest,
-    cb?: (error: string, rep: DescribeChannelSealPolicyWorkflowUrlResponse) => void
-  ): Promise<DescribeChannelSealPolicyWorkflowUrlResponse> {
-    return this.request("DescribeChannelSealPolicyWorkflowUrl", req, cb)
-  }
-
-  /**
-     * 查询渠道子客企业信息时，可以支持单个子客和整个应用下所有子客的查询。返回的信息包括超管、法人的信息以及当前企业的认证状态等信息。
-
-- 对于单个企业的查询，通过**指定子客的唯一标识**来查询该子客的企业信息
-- 对于整个应用下所有企业的查询，**不需要指定子客的唯一标识**，直接查询整个应用下所有子客企业的企业信息
-     */
-  async DescribeChannelOrganizations(
-    req: DescribeChannelOrganizationsRequest,
-    cb?: (error: string, rep: DescribeChannelOrganizationsResponse) => void
-  ): Promise<DescribeChannelOrganizationsResponse> {
-    return this.request("DescribeChannelOrganizations", req, cb)
-  }
-
-  /**
-     * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办
-1. 合同中当前状态为 **待签署** 的签署人是催办的对象
-2. **每个合同只能催办一次**
-
-**催办的效果**: 对方会收到如下的短信通知
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/3caf94b7f540fa5736270d38528d3a7b.png)
-
-
-**注**：`合同催办是白名单功能，请联系客户经理申请开白后使用`
-     */
-  async ChannelCreateFlowReminds(
-    req: ChannelCreateFlowRemindsRequest,
-    cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void
-  ): Promise<ChannelCreateFlowRemindsResponse> {
-    return this.request("ChannelCreateFlowReminds", req, cb)
-  }
-
-  /**
-     * 提交申请出证报告任务并返回报告ID。
-
-注意：
-- 使用此功能**需搭配出证套餐**  ，使用前请联系对接的客户经理沟通。
-- 操作人必须是**发起方或者签署方企业的(非走授权书认证)法人或者超管**。
-- 合同流程必须**所有参与方已经签署完成**。
-- 出证过程需一定时间，建议在**提交出证任务后的24小时之后**，通过<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>接口进行查询执行结果和出证报告的下载URL。
-
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
-     */
-  async CreateChannelFlowEvidenceReport(
-    req: CreateChannelFlowEvidenceReportRequest,
-    cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void
-  ): Promise<CreateChannelFlowEvidenceReportResponse> {
-    return this.request("CreateChannelFlowEvidenceReport", req, cb)
   }
 
   /**
@@ -1743,115 +2036,6 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
   }
 
   /**
-     * 支持企业进行批量初始化操作：
-
-此接口存在以下限制：
-1. 批量操作的企业需要已经完成电子签的认证流程。
-2. 通过此接口生成的链接在小程序端进行操作时，操作人需要是<font  color="red">所有企业的超管或法人</font>。
-3. 批量操作的企业，需要是本方第三方应用下的企业。
-4. <font  color="red">操作链接过期时间默认为生成链接后7天。</font>
-     */
-  async CreateBatchInitOrganizationUrl(
-    req: CreateBatchInitOrganizationUrlRequest,
-    cb?: (error: string, rep: CreateBatchInitOrganizationUrlResponse) => void
-  ): Promise<CreateBatchInitOrganizationUrlResponse> {
-    return this.request("CreateBatchInitOrganizationUrl", req, cb)
-  }
-
-  /**
-     * 此接口（CreateChannelOrganizationInfoChangeUrl）用于创建子客企业信息变更链接。
-
-<h3 id="1">支持变更链接类型，通过入参 Endpoint 指定，默认为WEIXINAPP。</h3>
-
-<h4 id="WEIXINAPP">WEIXINAPP</h4>
-<p>创建变更短链。需要在移动端打开，会跳转到微信腾讯电子签小程序进行更换。</p>
-
-<h4 id="APP">APP</h4>
-<p>创建变更小程序链接，可从第三方App跳转到微信腾讯电子签小程序进行更换。</p>
-
-
-<h3 id="2">支持创建企业超管变更链接或企业基础信息变更链接，通过入参 ChangeType 指定。</h3>
-
-<h4 id="1-企业超管变更">1. 企业超管变更</h4>
-
-<p>换成企业的其他员工来当超管</p>
-
-<h4 id="2-企业基础信息变更">2. 企业基础信息变更</h4>
-
-<h5 id="可以变动">可以变动</h5>
-
-<ul>
-<li>企业名称<br>
-</li>
-<li>法定代表人姓名(新法人有邀请链接)<br>
-</li>
-<li>企业地址和所在地</li>
-</ul>
-
-<h5 id="不可变动">不可变动</h5>
-
-<ul>
-<li>统一社会信用代码<br>
-</li>
-<li>企业主体类型</li>
-</ul>
-
-<p>如果企业名称变动会引起下面的变动</p>
-
-<ul>
-<li>合同:   老合同不做任何处理,   新发起的合同需要用新的企业名字作为签署方, 否则无法签署</li>
-<li>印章:   会删除所有的印章所有的机构公章，合同专用章，财务专用章和人事专用章,  然后用新企业名称生成新的机构公章，合同专用章，财务专用章和人事专用章,  而法人章不会处理</li>
-<li>证书:   企业证书会重新请求CA机构用新企业名称生成新的证书</li>
-</ul>
-
-
-注意： 
-1. 生成的电子签小程序链接<font color='red'>只能由企业的法人或者超管</font>点击后进行操作， 其他员工打开后会提示“无权查看该内容”
-2. 法人可以无需生成链接，直接在电子签小程序中更换本企业的超管
-     */
-  async CreateChannelOrganizationInfoChangeUrl(
-    req: CreateChannelOrganizationInfoChangeUrlRequest,
-    cb?: (error: string, rep: CreateChannelOrganizationInfoChangeUrlResponse) => void
-  ): Promise<CreateChannelOrganizationInfoChangeUrlResponse> {
-    return this.request("CreateChannelOrganizationInfoChangeUrl", req, cb)
-  }
-
-  /**
-     * 此接口（SyncProxyOrganizationOperators）用于同步 第三方平台子客企业经办人列表，主要是同步经办人的离职状态。
-子客Web控制台的组织架构管理，依赖于第三方应用平台的，无法在页面针对员工做新增/更新/离职等操作， 必须通过 API 来操作。 
-
-- **新增员工的场景**:    通过本接口提前导入员工列表, 然后调用<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>分享给对应的员工进行实名, 新增员工后员工的状态为**未实名**, 通过链接实名后状态变为**已实名**, 已实名员工就可以参与合同的发起。
-
-- **员工离职的场景**: 通过本接口将员工置为离职, 员工无法登录控制台和腾讯电子签小程序进行操作了,   同时给此员工分配的openid会被回收可以给其他新员工使用 (离职后员工数据会被置空,  再次加入公司会从零开始) ,  若员工信息有误可通过离职后在新增来解决,  离职员工状态为**离职**。
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/7a27a6bb0e4d39c2f6aa2a0b39946181/channel_SyncProxyOrganizationOperators.png)
-
-**注**:    
--  新增员工可以配置白名单限制注册使用对应openid的员工必须满足SyncProxyOrganizationOperators导入的(默认生成子客登录链接生成的链接可以任意员工点击注册绑定对应的openid), 此白名单需要咨询接入经理
--  <font color='red'>超管和法人无法通过此接口离职</font>,  需要超管和法人将权限转移给其他人后才可通过此接口离职
-- 新增员工的场景同ID不同员工会覆盖掉上一个同ID的员工, 如果上一个员工已经实名则不会被覆盖
-     */
-  async SyncProxyOrganizationOperators(
-    req: SyncProxyOrganizationOperatorsRequest,
-    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
-  ): Promise<SyncProxyOrganizationOperatorsResponse> {
-    return this.request("SyncProxyOrganizationOperators", req, cb)
-  }
-
-  /**
-     * 通过此接口（ChannelDescribeAccountBillDetail）查询该第三方平台子客账号计费详情。
-<ul>
-<li>对于渠道客户企业的查询，通过指定渠道企业的唯一标识(Agent.ProxyOrganizationId)来查询子客账号消耗详情</li>
-</ul>
-     */
-  async ChannelDescribeAccountBillDetail(
-    req: ChannelDescribeAccountBillDetailRequest,
-    cb?: (error: string, rep: ChannelDescribeAccountBillDetailResponse) => void
-  ): Promise<ChannelDescribeAccountBillDetailResponse> {
-    return this.request("ChannelDescribeAccountBillDetail", req, cb)
-  }
-
-  /**
      * 获取出证报告任务执行结果，返回报告 URL。
 
 注意：
@@ -1896,104 +2080,25 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
   }
 
   /**
-   * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章（处方单场景专用，使用此接口请与客户经理确认）。
-   */
-  async ChannelCreatePreparedPersonalEsign(
-    req: ChannelCreatePreparedPersonalEsignRequest,
-    cb?: (error: string, rep: ChannelCreatePreparedPersonalEsignResponse) => void
-  ): Promise<ChannelCreatePreparedPersonalEsignResponse> {
-    return this.request("ChannelCreatePreparedPersonalEsign", req, cb)
-  }
+     * 此接口（SyncProxyOrganizationOperators）用于同步 第三方平台子客企业经办人列表，主要是同步经办人的离职状态。
+子客Web控制台的组织架构管理，依赖于第三方应用平台的，无法在页面针对员工做新增/更新/离职等操作， 必须通过 API 来操作。 
 
-  /**
-     * 生成合成后的各类企业授权书，包括：
-- 企业认证超管授权书
-- 超管变更授权书
-- 企业注销授权书
+- **新增员工的场景**:    通过本接口提前导入员工列表, 然后调用<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>分享给对应的员工进行实名, 新增员工后员工的状态为**未实名**, 通过链接实名后状态变为**已实名**, 已实名员工就可以参与合同的发起。
 
-注: 需自行保证传入真实的企业/法人/超管信息，否则后续的审核将会拒绝。
+- **员工离职的场景**: 通过本接口将员工置为离职, 员工无法登录控制台和腾讯电子签小程序进行操作了,   同时给此员工分配的openid会被回收可以给其他新员工使用 (离职后员工数据会被置空,  再次加入公司会从零开始) ,  若员工信息有误可通过离职后在新增来解决,  离职员工状态为**离职**。
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/7a27a6bb0e4d39c2f6aa2a0b39946181/channel_SyncProxyOrganizationOperators.png)
+
+**注**:    
+-  新增员工可以配置白名单限制注册使用对应openid的员工必须满足SyncProxyOrganizationOperators导入的(默认生成子客登录链接生成的链接可以任意员工点击注册绑定对应的openid), 此白名单需要咨询接入经理
+-  <font color='red'>超管和法人无法通过此接口离职</font>,  需要超管和法人将权限转移给其他人后才可通过此接口离职
+- 新增员工的场景同ID不同员工会覆盖掉上一个同ID的员工, 如果上一个员工已经实名则不会被覆盖
      */
-  async CreateOrganizationAuthFile(
-    req: CreateOrganizationAuthFileRequest,
-    cb?: (error: string, rep: CreateOrganizationAuthFileResponse) => void
-  ): Promise<CreateOrganizationAuthFileResponse> {
-    return this.request("CreateOrganizationAuthFile", req, cb)
-  }
-
-  /**
-     * 接口（ChannelCreateFlowGroupByFiles）用于使用 PDF 文件创建合同组签署流程。
-
-- 该接口允许通过选择多个模板一次性创建多个合同，这些合同被组织在一个合同组中。
-- 每个签署方将收到一个签署链接，通过这个链接可以访问并签署合同组中的所有合同。
-- 合同组中的合同必须作为一个整体进行签署，不能将合同组拆分成单独的合同进行逐一签署。
-
-<img src="https://qcloudimg.tencent-cloud.cn/raw/a63074a0293c9ff5bf6c0bb74c0d3b20.png"   width="400" />
-
-
-### 2. 适用场景
-
-该接口适用于需要一次性完成多份合同签署的情况，多份合同一般具有关联性，用户以目录的形式查看合同。
-
-### 3. 发起方要求和签署方实名要求
-- **发起方要求**：作为合同发起方的第三方子企业A的员工必须进行实名认证。
-- **签署方要求**：签署方可以是多种身份（如第三方子企业的员工、个人、SaaS平台企业员工），其中企业和员工可以不进行实名认证。
-
-**可以作为发起方和签署方的角色列表**
-
-<table>
-<thead>
-<tr>
-<th>场景编号</th>
-<th>可作为发起方类型</th>
-<th>可作为签署方的类型</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>场景一</td>
-<td>第三方子企业A员工</td>
-<td>第三方子企业A员工</td>
-</tr>
-
-<tr>
-<td>场景二</td>
-<td>第三方子企业A员工</td>
-<td>第三方子企业B员工</td>
-</tr>
-
-<tr>
-<td>场景三</td>
-<td>第三方子企业A员工</td>
-<td>个人/自然人</td>
-</tr>
-
-<tr>
-<td>场景四</td>
-<td>第三方子企业A员工</td>
-<td>SaaS平台企业员工</td>
-</tr>
-</tbody>
-</table>
-
-### 4. 签署方参数差异
-- 根据签署方的不同类型（第三方子企业的员工、个人、SaaS平台企业员工），传递的参数也不同。具体参数的结构和要求可以参考开发者中心提供的 `FlowApproverInfo` 结构体说明。
-
-### 5. 合同额度的扣减与返还
-- **扣减时机**：合同一旦发起，相关的合同额度就会被扣减，合同组下面的每个合同都要扣减一个合同额度。
-- **返还条件**：只有在合同被撤销且没有任何签署方签署过，或者只有自动签署的情况下，合同额度才会被返还。
-- **不返还的情况**：如果合同已过期、被拒签、签署完成或已解除，合同额度将不会被返还。
-
-### 6. 静默（自动）签署的限制
-- 在使用静默（自动）签署功能时，合同签署方不能有填写控件。<font color="red">此接口静默签(企业自动签)能力为白名单功能</font>，使用前请联系对接的客户经理沟通。
-
-### 7.合同组暂不支持抄送功能
-     */
-  async ChannelCreateFlowGroupByFiles(
-    req: ChannelCreateFlowGroupByFilesRequest,
-    cb?: (error: string, rep: ChannelCreateFlowGroupByFilesResponse) => void
-  ): Promise<ChannelCreateFlowGroupByFilesResponse> {
-    return this.request("ChannelCreateFlowGroupByFiles", req, cb)
+  async SyncProxyOrganizationOperators(
+    req: SyncProxyOrganizationOperatorsRequest,
+    cb?: (error: string, rep: SyncProxyOrganizationOperatorsResponse) => void
+  ): Promise<SyncProxyOrganizationOperatorsResponse> {
+    return this.request("SyncProxyOrganizationOperators", req, cb)
   }
 
   /**
@@ -2018,34 +2123,6 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
   }
 
   /**
-     * 此接口用于查询合同或者合同组的详情信息，支持查询多个（数量不能超过100）。
-
-适用场景：可用于主动查询某个合同或者合同组的详情信息。
-
-注:  `只能查询本企业创建的合同(创建合同用的Agent和此接口用的Agent数据最好一致) `
-     */
-  async DescribeFlowDetailInfo(
-    req: DescribeFlowDetailInfoRequest,
-    cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
-  ): Promise<DescribeFlowDetailInfoResponse> {
-    return this.request("DescribeFlowDetailInfo", req, cb)
-  }
-
-  /**
-     * 通过此接口（ChannelDescribeBillUsageDetail）查询该第三方平台子客企业的套餐消耗详情。可以支持单个子客和整个应用下所有子客的查询。
-<ul>
-<li>对于单个子客企业的查询，通过指定子客的唯一标识(Agent.ProxyOrganizationOpenId)来查询该子客消耗详情</li>
-<li>对于整个应用下所有企业的查询，不需要指定子客的唯一标识，只需要传入渠道应用标识(Agent.AppId)直接查询整个应用下所有子客企业消耗详情</li>
-</ul>
-     */
-  async ChannelDescribeBillUsageDetail(
-    req: ChannelDescribeBillUsageDetailRequest,
-    cb?: (error: string, rep: ChannelDescribeBillUsageDetailResponse) => void
-  ): Promise<ChannelDescribeBillUsageDetailResponse> {
-    return this.request("ChannelDescribeBillUsageDetail", req, cb)
-  }
-
-  /**
      * 获取个人用户自动签的开通链接。
 
 注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -2055,65 +2132,5 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: ChannelCreateUserAutoSignEnableUrlResponse) => void
   ): Promise<ChannelCreateUserAutoSignEnableUrlResponse> {
     return this.request("ChannelCreateUserAutoSignEnableUrl", req, cb)
-  }
-
-  /**
-     * 批量清理未认证的企业认证流程。
-
-此接口用来清除企业方认证信息填写错误，批量清理认证中的认证流信息。
-为接口[提交子企业批量认证链接创建任务](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchOrganizationRegistrationTasks) 和[查询子企业批量认证链接](https://qian.tencent.com/developers/partnerApis/accounts/DescribeBatchOrganizationRegistrationUrls) 接口的扩展接口。即在批量认证过程中，当发起认证企业发现超管信息错误的时候，可以将当前超管下的所有认证流企业清除。
-
-注意：
-**这个接口的操作人必须跟生成批量认证链接接口的应用号一致，才可以调用，否则会返回当前操作人没有认证中的企业认证流**
-     */
-  async DeleteOrganizationAuthorizations(
-    req: DeleteOrganizationAuthorizationsRequest,
-    cb?: (error: string, rep: DeleteOrganizationAuthorizationsResponse) => void
-  ): Promise<DeleteOrganizationAuthorizationsResponse> {
-    return this.request("DeleteOrganizationAuthorizations", req, cb)
-  }
-
-  /**
-     * 您可以通过合同流程ID查询相关的<font color="red"><b>填写控件</b></font>信息及其内容。这包括控件的归属方、控件的填写状态（是否已填写）以及具体的填写内容。
-
-无论是<font color="red"><b>发起方还是签署方</b></font>填写的控件，均包含在查询结果中。
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/08f6ea50d3ae88b51c280c2b17c2a126.png)
-### 2.  哪些控件会出现在结果里边？ 
-**A.不返回的控件类型：**
-- 动态表格
-- 附件控件
-- 水印控件
-
-**B.返回的控件类型：**
-- 单行文本
-- 多行文本
-- 勾选框控件
-- 数字控件
-- 日期控件
-- 图片控件（图片下载地址）
-- 邮箱控件
-- 地址控件
-- 学历控件
-- 性别控件
-- 省市区控件
-
-### 3.怎么授权？   
-
-此接口需要授权,  有两种开通权限的途径
-
-**第一种**:   需第三方应用的子企业登录控制台进行授权,  授权在**企业中心**的**授权管理**区域,  界面如下图
-授权过程需要**子企业超管**扫描跳转到电子签小程序签署<<渠道端下载渠道子客合同功能授权委托书>>
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/8b483dfebdeafac85051279406944048.png)
-
-**第二种**: 第三方应用的配置接口打开全第三个应用下的所有自己起开通, 需要**渠道方企业的超管**扫描二维码跳转到电子签小程序签署 <<渠道端下载渠道子客合同功能开通知情同意书>>
-![image](https://qcloudimg.tencent-cloud.cn/raw/238979ef51dd381ccbdbc755a593debc/channel_DescribeResourceUrlsByFlows_appilications2.png)
-     */
-  async ChannelDescribeFlowComponents(
-    req: ChannelDescribeFlowComponentsRequest,
-    cb?: (error: string, rep: ChannelDescribeFlowComponentsResponse) => void
-  ): Promise<ChannelDescribeFlowComponentsResponse> {
-    return this.request("ChannelDescribeFlowComponents", req, cb)
   }
 }

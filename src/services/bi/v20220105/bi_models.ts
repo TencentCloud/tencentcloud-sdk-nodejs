@@ -52,7 +52,7 @@ export interface DescribeUserRoleListResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 扩展
+   * 扩展描述信息(提供更多异常信息,用于辅助判断)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
@@ -1697,87 +1697,87 @@ export interface Project {
   /**
    * 项目ID
    */
-  Id: number
+  Id?: number
   /**
    * 项目Logo
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Logo: string
+  Logo?: string
   /**
    * 项目名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * logo底色
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColorCode: string
+  ColorCode?: string
   /**
    * 创建人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedUser: string
+  CreatedUser?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 成员个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MemberCount: number
+  MemberCount?: number
   /**
    * 页面个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageCount: number
+  PageCount?: number
   /**
    * 最后修改报表、简报名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyName: string
+  LastModifyName?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Source: string
+  Source?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Apply: boolean
+  Apply?: boolean
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedUser: string
+  UpdatedUser?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: string
+  CorpId?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Mark: string
+  Mark?: string
   /**
    * ""
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Seed: string
+  Seed?: string
   /**
    * 项目内权限列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthList: Array<string>
+  AuthList?: Array<string>
   /**
    * 默认看板
 注意：此字段可能返回 null，表示取不到有效值。

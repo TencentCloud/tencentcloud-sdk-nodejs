@@ -3808,6 +3808,20 @@ export interface DescribeHostLiveInstanceListResponse {
     RequestId?: string;
 }
 /**
+ * CheckCertificateExist返回参数结构体
+ */
+export interface CheckCertificateExistResponse {
+    /**
+     * 重复的证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RepeatCertId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeHostApiGatewayInstanceList请求参数结构体
  */
 export interface DescribeHostApiGatewayInstanceListRequest {
@@ -5187,6 +5201,15 @@ export interface CheckCertificateChainRequest {
      * 待检查的证书链
      */
     CertificateChain: string;
+}
+/**
+ * CheckCertificateExist请求参数结构体
+ */
+export interface CheckCertificateExistRequest {
+    /**
+     * 证书公钥内容， 包含证书链
+     */
+    CertificatePublicKey: string;
 }
 /**
  * DescribeCompanies请求参数结构体

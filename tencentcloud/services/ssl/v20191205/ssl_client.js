@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostUpdateRecord", req, cb);
     }
     /**
-     * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+     * 查询证书云资源部署记录列表
      */
-    async UploadRevokeLetter(req, cb) {
-        return this.request("UploadRevokeLetter", req, cb);
+    async DescribeHostDeployRecord(req, cb) {
+        return this.request("DescribeHostDeployRecord", req, cb);
     }
     /**
      * 删除管理人
@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeManagerDetail", req, cb);
     }
     /**
+     * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+     */
+    async UploadRevokeLetter(req, cb) {
+        return this.request("UploadRevokeLetter", req, cb);
+    }
+    /**
      * 查询证书云资源部署记录详情列表
      */
     async DescribeHostDeployRecordDetail(req, cb) {
@@ -263,10 +269,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelAuditCertificate", req, cb);
     }
     /**
-     * 查询证书云资源部署记录列表
+     * 根据证书内容检测当前账号下是否存在一致的证书， 存在则返回证书ID， 不存在则返回空
      */
-    async DescribeHostDeployRecord(req, cb) {
-        return this.request("DescribeHostDeployRecord", req, cb);
+    async CheckCertificateExist(req, cb) {
+        return this.request("CheckCertificateExist", req, cb);
     }
     /**
      * 批量删除证书，删除证书前支持查询证书是否关联了腾讯云云资源 （需自定义配置参数，参数名称：IsSync）
@@ -299,10 +305,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeployedResources", req, cb);
     }
     /**
-     * 本接口（CreateCertificate）用于创建付费证书。
+     * 使用权益点创建证书
      */
-    async CreateCertificate(req, cb) {
-        return this.request("CreateCertificate", req, cb);
+    async CreateCertificateByPackage(req, cb) {
+        return this.request("CreateCertificateByPackage", req, cb);
     }
     /**
      * 本接口（UploadConfirmLetter）用于上传证书确认函。
@@ -341,10 +347,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostApiGatewayInstanceList", req, cb);
     }
     /**
-     * 使用权益点创建证书
+     * 本接口（CreateCertificate）用于创建付费证书。
      */
-    async CreateCertificateByPackage(req, cb) {
-        return this.request("CreateCertificateByPackage", req, cb);
+    async CreateCertificate(req, cb) {
+        return this.request("CreateCertificate", req, cb);
     }
     /**
      * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口

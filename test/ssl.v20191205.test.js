@@ -78,9 +78,9 @@ it("ssl.v20191205.DescribeHostUpdateRecord", async function () {
     }
 })
 
-it("ssl.v20191205.UploadRevokeLetter", async function () {
+it("ssl.v20191205.DescribeHostDeployRecord", async function () {
     try {
-       const data = await client.UploadRevokeLetter({})
+       const data = await client.DescribeHostDeployRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +348,16 @@ it("ssl.v20191205.DescribeManagerDetail", async function () {
     }
 })
 
+it("ssl.v20191205.UploadRevokeLetter", async function () {
+    try {
+       const data = await client.UploadRevokeLetter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeHostDeployRecordDetail", async function () {
     try {
        const data = await client.DescribeHostDeployRecordDetail({})
@@ -398,9 +408,9 @@ it("ssl.v20191205.CancelAuditCertificate", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeHostDeployRecord", async function () {
+it("ssl.v20191205.CheckCertificateExist", async function () {
     try {
-       const data = await client.DescribeHostDeployRecord({})
+       const data = await client.CheckCertificateExist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +468,9 @@ it("ssl.v20191205.DescribeDeployedResources", async function () {
     }
 })
 
-it("ssl.v20191205.CreateCertificate", async function () {
+it("ssl.v20191205.CreateCertificateByPackage", async function () {
     try {
-       const data = await client.CreateCertificate({})
+       const data = await client.CreateCertificateByPackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +538,9 @@ it("ssl.v20191205.DescribeHostApiGatewayInstanceList", async function () {
     }
 })
 
-it("ssl.v20191205.CreateCertificateByPackage", async function () {
+it("ssl.v20191205.CreateCertificate", async function () {
     try {
-       const data = await client.CreateCertificateByPackage({})
+       const data = await client.CreateCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

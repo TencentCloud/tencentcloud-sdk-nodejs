@@ -154,6 +154,7 @@ import {
   VerifyManagerRequest,
   CertTaskId,
   DescribeHostLiveInstanceListResponse,
+  CheckCertificateExistResponse,
   DescribeHostApiGatewayInstanceListRequest,
   TCBAccessService,
   DdosInstanceList,
@@ -202,6 +203,7 @@ import {
   DescribePackagesRequest,
   TCBHostService,
   CheckCertificateChainRequest,
+  CheckCertificateExistRequest,
   DescribeCompaniesRequest,
   ManagerStatusInfo,
   CancelAuditCertificateResponse,
@@ -284,13 +286,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+   * 查询证书云资源部署记录列表
    */
-  async UploadRevokeLetter(
-    req: UploadRevokeLetterRequest,
-    cb?: (error: string, rep: UploadRevokeLetterResponse) => void
-  ): Promise<UploadRevokeLetterResponse> {
-    return this.request("UploadRevokeLetter", req, cb)
+  async DescribeHostDeployRecord(
+    req: DescribeHostDeployRecordRequest,
+    cb?: (error: string, rep: DescribeHostDeployRecordResponse) => void
+  ): Promise<DescribeHostDeployRecordResponse> {
+    return this.request("DescribeHostDeployRecord", req, cb)
   }
 
   /**
@@ -561,6 +563,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+   */
+  async UploadRevokeLetter(
+    req: UploadRevokeLetterRequest,
+    cb?: (error: string, rep: UploadRevokeLetterResponse) => void
+  ): Promise<UploadRevokeLetterResponse> {
+    return this.request("UploadRevokeLetter", req, cb)
+  }
+
+  /**
    * 查询证书云资源部署记录详情列表
    */
   async DescribeHostDeployRecordDetail(
@@ -611,13 +623,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询证书云资源部署记录列表
+   * 根据证书内容检测当前账号下是否存在一致的证书， 存在则返回证书ID， 不存在则返回空
    */
-  async DescribeHostDeployRecord(
-    req: DescribeHostDeployRecordRequest,
-    cb?: (error: string, rep: DescribeHostDeployRecordResponse) => void
-  ): Promise<DescribeHostDeployRecordResponse> {
-    return this.request("DescribeHostDeployRecord", req, cb)
+  async CheckCertificateExist(
+    req: CheckCertificateExistRequest,
+    cb?: (error: string, rep: CheckCertificateExistResponse) => void
+  ): Promise<CheckCertificateExistResponse> {
+    return this.request("CheckCertificateExist", req, cb)
   }
 
   /**
@@ -671,13 +683,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCertificate）用于创建付费证书。
+   * 使用权益点创建证书
    */
-  async CreateCertificate(
-    req: CreateCertificateRequest,
-    cb?: (error: string, rep: CreateCertificateResponse) => void
-  ): Promise<CreateCertificateResponse> {
-    return this.request("CreateCertificate", req, cb)
+  async CreateCertificateByPackage(
+    req: CreateCertificateByPackageRequest,
+    cb?: (error: string, rep: CreateCertificateByPackageResponse) => void
+  ): Promise<CreateCertificateByPackageResponse> {
+    return this.request("CreateCertificateByPackage", req, cb)
   }
 
   /**
@@ -741,13 +753,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用权益点创建证书
+   * 本接口（CreateCertificate）用于创建付费证书。
    */
-  async CreateCertificateByPackage(
-    req: CreateCertificateByPackageRequest,
-    cb?: (error: string, rep: CreateCertificateByPackageResponse) => void
-  ): Promise<CreateCertificateByPackageResponse> {
-    return this.request("CreateCertificateByPackage", req, cb)
+  async CreateCertificate(
+    req: CreateCertificateRequest,
+    cb?: (error: string, rep: CreateCertificateResponse) => void
+  ): Promise<CreateCertificateResponse> {
+    return this.request("CreateCertificate", req, cb)
   }
 
   /**
