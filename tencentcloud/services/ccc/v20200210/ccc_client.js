@@ -146,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTelCallInfo", req, cb);
     }
     /**
+     * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+     */
+    async UploadIvrAudio(req, cb) {
+        return this.request("UploadIvrAudio", req, cb);
+    }
+    /**
      * 获取话机信息
      */
     async DescribeExtension(req, cb) {
@@ -230,10 +236,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb);
     }
     /**
-     * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+     * 获取 AI 通话内容提取结果。
      */
-    async UploadIvrAudio(req, cb) {
-        return this.request("UploadIvrAudio", req, cb);
+    async DescribeAICallExtractResult(req, cb) {
+        return this.request("DescribeAICallExtractResult", req, cb);
     }
     /**
      * 创建客户自携号码接入审核

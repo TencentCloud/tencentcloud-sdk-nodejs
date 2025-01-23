@@ -90,11 +90,11 @@ export interface ListSendTasksResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 数据记录
    */
-  Data: Array<SendTaskData>
+  Data?: Array<SendTaskData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -108,7 +108,7 @@ export interface CreateReceiverResponse {
   /**
    * 收件人列表id，后续根据收件人列表id上传收件人地址
    */
-  ReceiverId: number
+  ReceiverId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -135,7 +135,6 @@ export interface CreateCustomBlacklistRequest {
 export interface ListEmailAddressResponse {
   /**
    * 发信地址列表详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EmailSenders?: Array<EmailSender>
   /**
@@ -389,17 +388,19 @@ export interface EmailSender {
   /**
    * 发信地址
    */
-  EmailAddress: string
+  EmailAddress?: string
   /**
    * 发信人别名
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  EmailSenderName: string
+  EmailSenderName?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTimestamp: number
+  CreatedTimestamp?: number
+  /**
+   * smtp密码类型,0=没有设置密码,1=已经设置了密码
+   */
+  SmtpPwdType?: number
 }
 
 /**
@@ -569,71 +570,71 @@ export interface SendTaskData {
   /**
    * 任务id
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 发信地址
    */
-  FromEmailAddress: string
+  FromEmailAddress?: string
   /**
    * 收件人列表Id
    */
-  ReceiverId: number
+  ReceiverId?: number
   /**
    * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成
    */
-  TaskStatus: number
+  TaskStatus?: number
   /**
    * 任务类型 1 即时 2 定时 3 周期
    */
-  TaskType: number
+  TaskType?: number
   /**
    * 任务请求发信数量
    */
-  RequestCount: number
+  RequestCount?: number
   /**
    * 已经发送数量
    */
-  SendCount: number
+  SendCount?: number
   /**
    * 缓存数量
    */
-  CacheCount: number
+  CacheCount?: number
   /**
    * 任务创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 邮件主题
    */
-  Subject: string
+  Subject?: string
   /**
    * 模板和模板数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Template: Template
+  Template?: Template
   /**
    * 周期任务参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CycleParam: CycleEmailParam
+  CycleParam?: CycleEmailParam
   /**
    * 定时任务参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimedParam: TimedEmailParam
+  TimedParam?: TimedEmailParam
   /**
    * 任务异常信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 收件人列表名称
    */
-  ReceiversName: string
+  ReceiversName?: string
 }
 
 /**
@@ -872,15 +873,15 @@ export interface SendEmailStatus {
   /**
    * SendEmail返回的MessageId
    */
-  MessageId: string
+  MessageId?: string
   /**
    * 收件人邮箱
    */
-  ToEmailAddress: string
+  ToEmailAddress?: string
   /**
    * 发件人邮箱
    */
-  FromEmailAddress: string
+  FromEmailAddress?: string
   /**
    * 腾讯云处理状态
 0: 处理成功
@@ -908,7 +909,7 @@ export interface SendEmailStatus {
 3030: 退信率过高，临时限制发送
 3033: 余额不足，账号欠费等
    */
-  SendStatus: number
+  SendStatus?: number
   /**
    * 收件方处理状态
 0: 请求成功被腾讯云接受，进入发送队列
@@ -917,35 +918,35 @@ export interface SendEmailStatus {
 3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因
 8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因
    */
-  DeliverStatus: number
+  DeliverStatus?: number
   /**
    * 收件方处理状态描述
    */
-  DeliverMessage: string
+  DeliverMessage?: string
   /**
    * 请求到达腾讯云时间戳
    */
-  RequestTime: number
+  RequestTime?: number
   /**
    * 腾讯云执行递送时间戳
    */
-  DeliverTime: number
+  DeliverTime?: number
   /**
    * 用户是否打开该邮件
    */
-  UserOpened: boolean
+  UserOpened?: boolean
   /**
    * 用户是否点击该邮件中的链接
    */
-  UserClicked: boolean
+  UserClicked?: boolean
   /**
    * 用户是否取消该发送者的订阅
    */
-  UserUnsubscribed: boolean
+  UserUnsubscribed?: boolean
   /**
    * 用户是否举报该发送者
    */
-  UserComplainted: boolean
+  UserComplainted?: boolean
 }
 
 /**
@@ -1016,6 +1017,26 @@ export interface ReceiverInputData {
  * CreateReceiverDetail返回参数结构体
  */
 export interface CreateReceiverDetailResponse {
+  /**
+   * 收件人总数
+   */
+  TotalCount?: number
+  /**
+   * 实际上传数量
+   */
+  ValidCount?: number
+  /**
+   * 数据过长数量
+   */
+  TooLongCount?: number
+  /**
+   * 邮件地址为空数量
+   */
+  EmptyEmailCount?: number
+  /**
+   * 重复数量
+   */
+  RepeatCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1089,7 +1110,7 @@ export interface SendEmailRequest {
    */
   Cc?: Array<string>
   /**
-   * 密送人邮箱地址，最多支持抄送20人。
+   * 密送人邮箱地址，最多支持抄送20人,Bcc和Destination不能重复。
    */
   Bcc?: Array<string>
   /**
@@ -1466,7 +1487,7 @@ export interface CreateEmailTemplateResponse {
   /**
    * 模板id
    */
-  TemplateID: number
+  TemplateID?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1480,11 +1501,11 @@ export interface ListReceiversResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 数据记录
    */
-  Data: Array<ReceiverData>
+  Data?: Array<ReceiverData>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1542,23 +1563,23 @@ export interface DNSAttributes {
   /**
    * 记录类型 CNAME | A | TXT | MX
    */
-  Type: string
+  Type?: string
   /**
    * 域名
    */
-  SendDomain: string
+  SendDomain?: string
   /**
    * 需要配置的值
    */
-  ExpectedValue: string
+  ExpectedValue?: string
   /**
    * 腾讯云目前检测到的值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 检测是否通过，创建时默认为false
    */
-  Status: boolean
+  Status?: boolean
 }
 
 /**

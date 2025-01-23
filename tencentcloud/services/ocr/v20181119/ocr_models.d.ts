@@ -375,6 +375,24 @@ export interface BankCardOCRRequest {
     EnableQualityValue?: boolean;
 }
 /**
+ * SmartStructuralOCR返回参数结构体
+ */
+export interface SmartStructuralOCRResponse {
+    /**
+     * 图片旋转角度(角度制)，文本的水平方向
+  为 0；顺时针为正，逆时针为负
+     */
+    Angle?: number;
+    /**
+     * 识别信息
+     */
+    StructuralItems?: Array<StructuralItem>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CarInvoiceOCR请求参数结构体
  */
 export interface CarInvoiceOCRRequest {
@@ -1321,21 +1339,29 @@ export interface LicensePlateInfo {
     Color?: string;
 }
 /**
- * 混贴票据中单张发票的内容
+ * QuestionSplitOCR请求参数结构体
  */
-export interface SingleInvoiceInfo {
+export interface QuestionSplitOCRRequest {
     /**
-     * 识别出的字段名称
+     * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    Name?: string;
+    ImageUrl?: string;
     /**
-     * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
+     * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Value?: string;
+    ImageBase64?: string;
     /**
-     * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
+     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
      */
-    Row?: number;
+    IsPdf?: boolean;
+    /**
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+     */
+    PdfPageNumber?: number;
+    /**
+     * 是否开启切边增强和弯曲矫正,默认为false不开启
+     */
+    EnableImageCrop?: boolean;
 }
 /**
  * 增值税普通发票（卷票）条目
@@ -1548,6 +1574,19 @@ export interface EnterpriseLicenseOCRResponse {
      * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
      */
     Angle?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * QuestionOCR返回参数结构体
+ */
+export interface QuestionOCRResponse {
+    /**
+     * 检测到的文本信息
+     */
+    QuestionInfo?: Array<QuestionInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2112,42 +2151,17 @@ export interface EnterpriseLicenseOCRRequest {
     ImageUrl?: string;
 }
 /**
- * SmartStructuralOCR请求参数结构体
+ * QuestionSplitOCR返回参数结构体
  */
-export interface SmartStructuralOCRRequest {
+export interface QuestionSplitOCRResponse {
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 检测到的文本信息
      */
-    ImageUrl?: string;
+    QuestionInfo?: Array<QuestionInfo>;
     /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ImageBase64?: string;
-    /**
-     * 自定义结构化功能需返回的字段名称，例：
-  若客户只想返回姓名、性别两个字段的识别结果，则输入
-  ItemNames=["姓名","性别"]
-     */
-    ItemNames?: Array<string>;
-    /**
-     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-     */
-    IsPdf?: boolean;
-    /**
-     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-     */
-    PdfPageNumber?: number;
-    /**
-     * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
-     */
-    ReturnFullText?: boolean;
+    RequestId?: string;
 }
 /**
  * RecognizeStoreName请求参数结构体
@@ -2428,6 +2442,19 @@ export interface TrainTicketOCRResponse {
     RequestId?: string;
 }
 /**
+ * 公式识别结果
+ */
+export interface TextFormulaInfo {
+    /**
+     * 识别出的文本行内容
+     */
+    DetectedText?: string;
+    /**
+     * 识别出的文本行内容坐标
+     */
+    Coord?: Polygon;
+}
+/**
  * 过路过桥费字段信息
  */
 export interface TollInvoiceInfo {
@@ -2464,18 +2491,17 @@ export interface BankSlipInfo {
     Rect?: Rect;
 }
 /**
- * SmartStructuralOCR返回参数结构体
+ * RecognizeFormulaOCR返回参数结构体
  */
-export interface SmartStructuralOCRResponse {
+export interface RecognizeFormulaOCRResponse {
     /**
-     * 图片旋转角度(角度制)，文本的水平方向
-  为 0；顺时针为正，逆时针为负
+     * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
      */
     Angle?: number;
     /**
-     * 识别信息
+     * 检测到的文本信息
      */
-    StructuralItems?: Array<StructuralItem>;
+    FormulaInfoList?: Array<TextFormulaInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2516,41 +2542,6 @@ export interface FormulaOCRResponse {
     RequestId?: string;
 }
 /**
- * RecognizeGeneralCardWarn请求参数结构体
- */
-export interface RecognizeGeneralCardWarnRequest {
-    /**
-     * 图片链接
-     */
-    ImageUrl?: string;
-    /**
-     * 图片base64
-     */
-    ImageBase64?: string;
-    /**
-     * 卡证类型参数，包含以下范围：
-  default：通用卡证
-  idcard：身份证
-  passport：护照
-  bizlicense：营业执照
-  regcertificate：登记证书
-  residpermit：居住证
-  transpermit：通行证
-  signboard：门头照
-  bankcard：银行卡
-  drivinglicense：驾驶证、行驶证
-     */
-    CardType?: string;
-    /**
-     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
-     */
-    IsPdf?: boolean;
-    /**
-     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-     */
-    PdfPageNumber?: number;
-}
-/**
  * 汽车票字段信息
  */
 export interface BusInvoiceInfo {
@@ -2569,63 +2560,42 @@ export interface BusInvoiceInfo {
     Rect?: Rect;
 }
 /**
- * RecognizeEncryptedIDCardOCR请求参数结构体
+ * SmartStructuralOCR请求参数结构体
  */
-export interface RecognizeEncryptedIDCardOCRRequest {
+export interface SmartStructuralOCRRequest {
     /**
-     * 请求体被加密后的密文（Base64编码），本接口只支持加密传输
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    EncryptedBody: string;
+    ImageUrl?: string;
     /**
-     * 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。
-     */
-    Encryption: Encryption;
-    /**
-     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
   图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
     ImageBase64?: string;
     /**
-     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
-  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+     * 自定义结构化功能需返回的字段名称，例：
+  若客户只想返回姓名、性别两个字段的识别结果，则输入
+  ItemNames=["姓名","性别"]
      */
-    ImageUrl?: string;
+    ItemNames?: Array<string>;
     /**
-     * FRONT：身份证有照片的一面（人像面），
-  BACK：身份证有国徽的一面（国徽面），
-  该参数如果不填，将为您自动判断身份证正反面。
+     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
      */
-    CardSide?: string;
+    IsPdf?: boolean;
     /**
-     * 以下可选字段均为bool 类型，默认false：
-  CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
-  CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
-  CopyWarn，复印件告警
-  BorderCheckWarn，边框和框内遮挡告警
-  ReshootWarn，翻拍告警
-  DetectPsWarn，疑似存在PS痕迹告警
-  TempIdWarn，临时身份证告警
-  InvalidDateWarn，身份证有效日期不合法告警
-  Quality，图片质量分数（评价图片的模糊程度）
-  MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）
-  ReflectWarn，是否开启反光检测
-  
-  SDK 设置方式参考：
-  Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
-  API 3.0 Explorer 设置方式参考：
-  Config = {"CropIdCard":true,"CropPortrait":true}
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
      */
-    Config?: string;
+    PdfPageNumber?: number;
     /**
-     * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
+     * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
      */
-    EnableRecognitionRectify?: boolean;
-    /**
-     * 默认值为false。
-  
-  此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
-     */
-    EnableReflectDetail?: boolean;
+    ReturnFullText?: boolean;
 }
 /**
  * 单元格数据
@@ -4582,6 +4552,23 @@ export interface FinancialBillItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
+}
+/**
+ * 混贴票据中单张发票的内容
+ */
+export interface SingleInvoiceInfo {
+    /**
+     * 识别出的字段名称
+     */
+    Name?: string;
+    /**
+     * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
+     */
+    Value?: string;
+    /**
+     * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
+     */
+    Row?: number;
 }
 /**
  * RecognizeContainerOCR请求参数结构体
@@ -6594,6 +6581,27 @@ export interface OrgCodeCertOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * RecognizeFormulaOCR请求参数结构体
+ */
+export interface RecognizeFormulaOCRRequest {
+    /**
+     * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    ImageUrl?: string;
+    /**
+     * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    ImageBase64?: string;
+    /**
+     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+     */
+    IsPdf?: boolean;
+    /**
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+     */
+    PdfPageNumber?: number;
+}
+/**
  * FlightInvoiceOCR返回参数结构体
  */
 export interface FlightInvoiceOCRResponse {
@@ -7168,53 +7176,6 @@ export interface FinanBillSliceOCRRequest {
   非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
-}
-/**
- * RecognizeGeneralCardWarn返回参数结构体
- */
-export interface RecognizeGeneralCardWarnResponse {
-    /**
-     * 卡证类型参数，包含以下范围：
-  default：通用卡证
-  idcard：身份证
-  passport：护照
-  bizlicense：营业执照
-  regcertificate：登记证书
-  residpermit：居住证
-  transpermit：通行证
-  signboard：门头照
-  bankcard：银行卡
-  drivinglicense：驾驶证、行驶证
-     */
-    CardType?: string;
-    /**
-     * 模糊信息
-     */
-    Blur?: GeneralCardWarnInfo;
-    /**
-     * 边框不完整信息
-     */
-    BorderIncomplete?: GeneralCardWarnInfo;
-    /**
-     * 复印件信息
-     */
-    Copy?: GeneralCardWarnInfo;
-    /**
-     * ps篡改信息
-     */
-    Ps?: GeneralCardWarnInfo;
-    /**
-     * 反光信息
-     */
-    Reflection?: GeneralCardWarnInfo;
-    /**
-     * 翻拍件信息
-     */
-    Reprint?: GeneralCardWarnInfo;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * ClassifyStoreName返回参数结构体
@@ -7897,21 +7858,63 @@ export interface LineInfo {
     Lines?: Array<ItemInfo>;
 }
 /**
- * 通用卡证鉴伪告警信息
+ * RecognizeEncryptedIDCardOCR请求参数结构体
  */
-export interface GeneralCardWarnInfo {
+export interface RecognizeEncryptedIDCardOCRRequest {
     /**
-     * 是否存在该告警
+     * 请求体被加密后的密文（Base64编码），本接口只支持加密传输
      */
-    IsWarn?: boolean;
+    EncryptedBody: string;
     /**
-     * 风险程度
+     * 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
-    RiskConfidence?: number;
+    Encryption: Encryption;
     /**
-     * 告警位置四点坐标
+     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Polygon?: Array<Polygon>;
+    ImageBase64?: string;
+    /**
+     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+     */
+    ImageUrl?: string;
+    /**
+     * FRONT：身份证有照片的一面（人像面），
+  BACK：身份证有国徽的一面（国徽面），
+  该参数如果不填，将为您自动判断身份证正反面。
+     */
+    CardSide?: string;
+    /**
+     * 以下可选字段均为bool 类型，默认false：
+  CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
+  CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
+  CopyWarn，复印件告警
+  BorderCheckWarn，边框和框内遮挡告警
+  ReshootWarn，翻拍告警
+  DetectPsWarn，疑似存在PS痕迹告警
+  TempIdWarn，临时身份证告警
+  InvalidDateWarn，身份证有效日期不合法告警
+  Quality，图片质量分数（评价图片的模糊程度）
+  MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）
+  ReflectWarn，是否开启反光检测
+  
+  SDK 设置方式参考：
+  Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
+  API 3.0 Explorer 设置方式参考：
+  Config = {"CropIdCard":true,"CropPortrait":true}
+     */
+    Config?: string;
+    /**
+     * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
+     */
+    EnableRecognitionRectify?: boolean;
+    /**
+     * 默认值为false。
+  
+  此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
+     */
+    EnableReflectDetail?: boolean;
 }
 /**
  * 过路过桥费发票
@@ -8609,6 +8612,31 @@ export interface ContentInfo {
   1 字段有反光
      */
     IsReflect?: number;
+}
+/**
+ * QuestionOCR请求参数结构体
+ */
+export interface QuestionOCRRequest {
+    /**
+     * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    ImageUrl?: string;
+    /**
+     * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    ImageBase64?: string;
+    /**
+     * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+     */
+    IsPdf?: boolean;
+    /**
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+     */
+    PdfPageNumber?: number;
+    /**
+     * 是否开启切边增强和弯曲矫正,默认为false不开启
+     */
+    EnableImageCrop?: boolean;
 }
 /**
  * GetTaskState请求参数结构体
@@ -9422,6 +9450,40 @@ export interface MLIDCardOCRRequest {
     RetImage?: boolean;
 }
 /**
+ * 试题识别结果
+ */
+export interface QuestionInfo {
+    /**
+     * 旋转角度
+     */
+    Angle?: number;
+    /**
+     * 预处理后图片高度
+     */
+    Height?: number;
+    /**
+     * 预处理后图片宽度
+     */
+    Width?: number;
+    /**
+     * 文档元素
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultList?: Array<ResultList>;
+    /**
+     * 输入图片高度
+     */
+    OrgHeight?: number;
+    /**
+     * 输入图片宽度
+     */
+    OrgWidth?: number;
+    /**
+     * 预处理后的图片base64编码
+     */
+    ImageBase64?: string;
+}
+/**
  * 出租车发票
  */
 export interface TaxiTicket {
@@ -10133,6 +10195,32 @@ export interface QuestionBlockObj {
     QuestionBboxCoord: Rect;
 }
 /**
+ * 试题识别结果-元素内容
+ */
+export interface Element {
+    /**
+     * 元素内容，当type为figure时该字段内容为图片的位置
+     */
+    Text?: string;
+    /**
+     * 元素坐标
+     */
+    Coord?: Polygon;
+    /**
+     * 元素group类型，包括multiple-choice(选择题)、fill-in-the-blank(填空题)、problem-solving(解答题)、arithmetic(算术题)
+     */
+    GroupType?: string;
+    /**
+     * 结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultList?: Array<ResultList>;
+    /**
+     * 元素索引
+     */
+    Index?: number;
+}
+/**
  * AdvertiseOCR返回参数结构体
  */
 export interface AdvertiseOCRResponse {
@@ -10686,24 +10774,39 @@ export interface BizLicenseOCRResponse {
     RequestId?: string;
 }
 /**
- * TableOCR请求参数结构体
+ * 结果列表
  */
-export interface TableOCRRequest {
+export interface ResultList {
     /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 题干
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageBase64?: string;
+    Question?: Array<Element>;
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 选项
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageUrl?: string;
+    Option?: Array<Element>;
+    /**
+     * 插图
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Figure?: Array<Element>;
+    /**
+     * 表格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Table?: Array<Element>;
+    /**
+     * 答案
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Answer?: Array<Element>;
+    /**
+     * 整题的坐标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Coord?: Array<Polygon>;
 }
 /**
  * VatInvoiceOCR返回参数结构体
@@ -10812,6 +10915,26 @@ export interface BankCardOCRResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * TableOCR请求参数结构体
+ */
+export interface TableOCRRequest {
+    /**
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    ImageBase64?: string;
+    /**
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    ImageUrl?: string;
 }
 /**
  * BusinessCardOCR请求参数结构体

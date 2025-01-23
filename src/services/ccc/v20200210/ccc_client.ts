@@ -31,7 +31,7 @@ import {
   DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTaskRequest,
   CreateUserSigResponse,
-  DescribeIMCdrsResponse,
+  CreateAICallRequest,
   CreateAdminURLResponse,
   PausePredictiveDialingCampaignRequest,
   CreateCallOutSessionResponse,
@@ -39,20 +39,23 @@ import {
   DisableCCCPhoneNumberRequest,
   ModifyStaffPasswordResponse,
   CreatePredictiveDialingCampaignRequest,
-  DescribeChatMessagesResponse,
+  CreateCompanyApplyResponse,
   ServeParticipant,
+  AICallExtractResultElement,
   DescribeTelCallInfoResponse,
   DescribeExtensionsResponse,
   StaffStatusMetrics,
   DeleteExtensionRequest,
-  AutoCalloutTaskCalleeInfo,
+  DescribePredictiveDialingCampaignRequest,
   DescribePredictiveDialingCampaignResponse,
   CreateAIAgentCallResponse,
-  DescribeTelCdrRequest,
+  AICallExtractConfigElement,
   DescribeAutoCalloutTasksResponse,
   PackageBuyInfo,
-  ModifyExtensionResponse,
+  DescribeTelCdrRequest,
+  AICallExtractResultInfo,
   DescribeIMCdrListResponse,
+  DescribeAICallExtractResultRequest,
   CreateStaffResponse,
   DescribePredictiveDialingCampaignsRequest,
   DescribeSkillGroupInfoListResponse,
@@ -75,7 +78,7 @@ import {
   DescribeIMCdrsRequest,
   DescribeSkillGroupInfoListRequest,
   CreateCarrierPrivilegeNumberApplicantResponse,
-  DescribePredictiveDialingCampaignRequest,
+  AutoCalloutTaskCalleeInfo,
   SeatUserInfo,
   UpdateCCCSkillGroupResponse,
   AsrData,
@@ -99,7 +102,7 @@ import {
   PSTNSessionInfo,
   Message,
   AbortPredictiveDialingCampaignResponse,
-  CreateAICallRequest,
+  DescribeIMCdrsResponse,
   DescribeNumbersRequest,
   ExtensionInfo,
   BindNumberCallOutSkillGroupRequest,
@@ -108,8 +111,9 @@ import {
   UnbindNumberCallOutSkillGroupResponse,
   StaffInfo,
   CreateAutoCalloutTaskResponse,
-  TelCdrInfo,
+  DescribeAICallExtractResultResponse,
   UploadIvrAudioResponse,
+  ModifyExtensionResponse,
   DescribeCompanyListResponse,
   NumberInfo,
   DeleteStaffRequest,
@@ -132,6 +136,7 @@ import {
   HangUpCallResponse,
   StopAutoCalloutTaskResponse,
   AbortPredictiveDialingCampaignRequest,
+  TelCdrInfo,
   SkillGroupItem,
   MessageBody,
   PhoneNumBuyInfo,
@@ -161,7 +166,7 @@ import {
   CalleeAttribute,
   StaffStatusExtra,
   CreateStaffRequest,
-  CreateCompanyApplyResponse,
+  DescribeChatMessagesResponse,
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
@@ -392,6 +397,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+   */
+  async UploadIvrAudio(
+    req: UploadIvrAudioRequest,
+    cb?: (error: string, rep: UploadIvrAudioResponse) => void
+  ): Promise<UploadIvrAudioResponse> {
+    return this.request("UploadIvrAudio", req, cb)
+  }
+
+  /**
    * 获取话机信息
    */
   async DescribeExtension(
@@ -532,13 +547,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+   * 获取 AI 通话内容提取结果。
    */
-  async UploadIvrAudio(
-    req: UploadIvrAudioRequest,
-    cb?: (error: string, rep: UploadIvrAudioResponse) => void
-  ): Promise<UploadIvrAudioResponse> {
-    return this.request("UploadIvrAudio", req, cb)
+  async DescribeAICallExtractResult(
+    req: DescribeAICallExtractResultRequest,
+    cb?: (error: string, rep: DescribeAICallExtractResultResponse) => void
+  ): Promise<DescribeAICallExtractResultResponse> {
+    return this.request("DescribeAICallExtractResult", req, cb)
   }
 
   /**

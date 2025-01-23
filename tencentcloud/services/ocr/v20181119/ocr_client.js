@@ -28,6 +28,14 @@ class Client extends abstract_client_1.AbstractClient {
         super("ocr.tencentcloudapi.com", "2018-11-19", clientConfig);
     }
     /**
+     * 题目识别是教育的基础OCR识别能力。可支持扫描、拍照场景的单题题目识别。接口支持印刷体文本、手写体文本及公式的OCR识别和坐标返回，此外，接口还可对题目中的配图位置进行检测并返回坐标位置。适用于智能批改等场景的题目内容识别作为检索输入。
+
+默认接口请求频率限制：2次/秒。
+     */
+    async QuestionOCR(req, cb) {
+        return this.request("QuestionOCR", req, cb);
+    }
+    /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
 
 默认接口请求频率限制：5次/秒。
@@ -286,12 +294,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RideHailingDriverLicenseOCR", req, cb);
     }
     /**
-     * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
-
-默认接口请求频率限制：5次/秒。
+     * 外国人永久居留身份证识别
      */
-    async DutyPaidProofOCR(req, cb) {
-        return this.request("DutyPaidProofOCR", req, cb);
+    async RecognizeForeignPermanentResidentIdCard(req, cb) {
+        return this.request("RecognizeForeignPermanentResidentIdCard", req, cb);
     }
     /**
      * 智能识别并结构化港澳台居民来往内地通行证正面全部字段，包含中文姓名、英文姓名、性别、出生日期、签发机关、有效期限、证件号、签发地点、签发次数、证件类别。
@@ -527,12 +533,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetTaskState(req, cb) {
         return this.request("GetTaskState", req, cb);
-    }
-    /**
-     * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
-     */
-    async RecognizeGeneralCardWarn(req, cb) {
-        return this.request("RecognizeGeneralCardWarn", req, cb);
     }
     /**
      * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
@@ -867,6 +867,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClassifyDetectOCR", req, cb);
     }
     /**
+     * 公式识别是教育的基础OCR识别能力，可支持理科（数学、物理、化学、生物）的印刷体和手写体的公式识别。
+
+默认接口请求频率限制：2次/秒。
+     */
+    async RecognizeFormulaOCR(req, cb) {
+        return this.request("RecognizeFormulaOCR", req, cb);
+    }
+    /**
      * 本接口支持各类印章主体内容、印章其他内容及形状识别，支持单图多印章识别，包括发票章、财务章等，适用于公文票据等场景。
 
 默认接口请求频率限制：5次/秒。
@@ -953,6 +961,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageEnhancement", req, cb);
     }
     /**
+     * 试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置。
+
+默认接口请求频率限制：2次/秒。
+     */
+    async QuestionSplitOCR(req, cb) {
+        return this.request("QuestionSplitOCR", req, cb);
+    }
+    /**
      * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
      */
@@ -984,10 +1000,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VatInvoiceOCR", req, cb);
     }
     /**
-     * 外国人永久居留身份证识别
+     * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
      */
-    async RecognizeForeignPermanentResidentIdCard(req, cb) {
-        return this.request("RecognizeForeignPermanentResidentIdCard", req, cb);
+    async DutyPaidProofOCR(req, cb) {
+        return this.request("DutyPaidProofOCR", req, cb);
     }
     /**
      * 本接口支持组织机构代码证关键字段的识别，包括代码、有效期、地址、机构名称等。

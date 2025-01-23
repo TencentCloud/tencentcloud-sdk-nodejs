@@ -371,27 +371,283 @@ export interface CreateUserSigResponse {
 }
 
 /**
- * DescribeIMCdrs返回参数结构体
+ * CreateAICall请求参数结构体
  */
-export interface DescribeIMCdrsResponse {
+export interface CreateAICallRequest {
   /**
-   * 总记录数
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  TotalCount?: number
+  SdkAppId: number
   /**
-   * 服务记录列表
-   * @deprecated
+   * 被叫号码
    */
-  IMCdrs?: Array<IMCdrInfo>
+  Callee: string
   /**
-   * 服务记录列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用于设定AI人设、说话规则、任务等的全局提示词。示例：## 人设您是人民医院友善、和蔼的随访医生李医生，正在给患者小明的家长打电话，原因是医院要求小明2024-08-08回院复查手术恢复情况，但小明没有来。您需要按照任务流程对小明家长进行电话随访调查。## 要求简洁回复：使用简练语言，每次最多询问一个问题，不要在一个回复中询问多个问题。富有变化：尽量使表达富有变化，表达机械重复。自然亲切：使用日常语言，尽量显得专业并亲切。提到时间时使用口语表述，如下周三、6月18日。积极主动：尝试引导对话，每个回复通常以问题或下一步建议来结尾。询问清楚：如果对方部分回答了您的问题，或者回答很模糊，请通过追问来确保回答的完整明确。遵循任务：当对方的回答偏离了您的任务时，及时引导对方回到任务中。不要从头开始重复，从偏离的地方继续询问。诚实可靠：对于客户的提问，如果不确定请务必不要编造，礼貌告知对方不清楚。不要捏造患者未提及的症状史、用药史、治疗史。其他注意点：避免提到病情恶化、恢复不理想或疾病名称等使用会使患者感到紧张的表述。不要问患者已经直接或间接回答过的问题，例如患者已经说没有不适症状，那就不要再问手术部位是否有红肿疼痛症状的问题。##任务： 1.自我介绍您是人民医院负责随访的李医生，并说明致电的目的。2.询问被叫方是否是小明家长。 - 如果不是小明家长，请礼貌表达歉意，并使用 call_end 挂断电话。- 如果小明家长没空，请礼貌告诉对方稍后会重新致电，并使用 end_call 挂断电话。3.询问小明出院后水肿情况如何，较出院时是否有变化。- 如果水肿变严重，直接跳转步骤7。4.询问出院后是否给小朋友量过体温，是否出现过发烧情况。- 如果没有量过体温，请礼貌告诉家长出院后三个月内需要每天观察体温。- 如果出现过发烧，请直接跳转步骤7。5.询问出院后是否给小朋友按时服药。- 如果没有按时服药，请友善提醒家长严格按医嘱服用药物，避免影响手术效果。6.询问小朋友在饮食上是否做到低盐低脂，适量吃优质蛋白如鸡蛋、牛奶、瘦肉等。- 如果没有做到，请友善提醒家长低盐低脂和优质蛋白有助小朋友尽快恢复。7.告知家长医生要求6月18日回院复查，但没看到有相关复诊记录。提醒家长尽快前往医院体检复查血化验、尿常规。8.询问家长是否有问题需要咨询，如果没有请礼貌道别并用call_end挂断电话。
    */
-  IMCdrList?: Array<IMCdrInfo>
+  SystemPrompt: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 模型接口协议类型，目前兼容三种协议类型：
+
+- OpenAI协议(包括GPT、混元、DeepSeek等)："openai"
+- Azure协议："azure"
+- Minimax协议："minimax"
    */
-  RequestId?: string
+  LLMType: string
+  /**
+   * 模型名称，如
+
+- OpenAI协议
+"gpt-4o-mini","gpt-4o"，"hunyuan-standard", "hunyuan-turbo"，"deepseek-chat"；
+
+- Azure协议
+"gpt-4o-mini", "gpt-4o"；
+
+- Minmax协议
+"deepseek-chat".
+   */
+  Model: string
+  /**
+   * 模型API密钥，获取鉴权信息方式请参见各模型官网
+
+- OpenAI协议：[GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key)，[混元](https://cloud.tencent.com/document/product/1729/111008)，[DeepSeek](https://api-docs.deepseek.com/zh-cn/)；
+
+- Azure协议：[Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings)；
+
+- Minimax：[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
+   */
+  APIKey: string
+  /**
+   * 模型接口地址
+
+- OpenAI协议
+GPT："https://api.openai.com/v1/"
+混元："https://api.hunyuan.cloud.tencent.com/v1"
+Deepseek："https://api.deepseek.com/v1"
+
+- Azure协议
+ "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
+
+- Minimax协议
+"https://api.minimax.chat/v1"
+   */
+  APIUrl: string
+  /**
+   * 默认提供以下音色参数值可选择，如需自定义音色VoiceType请留空并在参数CustomTTSConfig中配置
+
+汉语：
+ZhiMei：智美，客服女声
+ZhiXi： 智希 通用女声
+ZhiQi：智琪 客服女声
+ZhiTian：智甜 女童声
+AiXiaoJing：爱小静 对话女声
+
+英语:
+WeRose：英文女声
+Monika：英文女声
+
+日语：
+Nanami
+
+韩语：
+SunHi
+
+印度尼西亚语(印度尼西亚)：
+Gadis
+
+马来语（马来西亚）:
+Yasmin
+
+ 泰米尔语（马来西亚）:
+Kani
+
+泰语（泰国）:
+Achara
+
+越南语(越南):
+HoaiMy
+
+
+   */
+  VoiceType?: string
+  /**
+   * 主叫号码列表
+   */
+  Callers?: Array<string>
+  /**
+   * 用于设定AI座席欢迎语。
+   */
+  WelcomeMessage?: string
+  /**
+   * 0：使用welcomeMessage(为空时，被叫先说话；不为空时，机器人先说话)
+1:   使用ai根据prompt自动生成welcomeMessage并先说话
+   */
+  WelcomeType?: number
+  /**
+   * 0: 默认可打断， 1：高优先不可打断
+   */
+  WelcomeMessagePriority?: number
+  /**
+   * 最大等待时长(毫秒)，默认60秒，超过这个时间用户没说话，自动挂断
+   */
+  MaxDuration?: number
+  /**
+   * 语音识别支持的语言, 默认是"zh" 中文,
+填写数组,最长4个语言，第一个语言为主要识别语言，后面为可选语言，
+注意:主要语言为中国方言时，可选语言无效
+目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循ISO639：
+1. Chinese = "zh" # 中文
+2. Chinese_TW = "zh-TW" # 中国台湾
+3. Chinese_DIALECT = "zh-dialect" # 中国方言
+4. English = "en" # 英语
+5. Vietnamese = "vi" # 越南语
+6. Japanese = "ja" # 日语
+7. Korean = "ko" # 汉语
+8. Indonesia = "id" # 印度尼西亚语
+9. Thai = "th" # 泰语
+10. Portuguese = "pt" # 葡萄牙语
+11. Turkish = "tr" # 土耳其语
+12. Arabic = "ar" # 阿拉伯语
+13. Spanish = "es" # 西班牙语
+14. Hindi = "hi" # 印地语
+15. French = "fr" # 法语
+16. Malay = "ms" # 马来语
+17. Filipino = "fil" # 菲律宾语
+18. German = "de" # 德语
+19. Italian = "it" # 意大利语
+20. Russian = "ru" # 俄语
+   */
+  Languages?: Array<string>
+  /**
+   * 打断AI说话模式，默认为0，0表示自动打断，1表示不打断。
+   */
+  InterruptMode?: number
+  /**
+   * InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。
+   */
+  InterruptSpeechDuration?: number
+  /**
+   * 模型是否支持(或者开启)call_end function calling
+   */
+  EndFunctionEnable?: boolean
+  /**
+   * EndFunctionEnable为true时生效；call_end function calling的desc，默认为 "End the call when user has to leave (like says bye) or you are instructed to do so."
+   */
+  EndFunctionDesc?: string
+  /**
+   * 模型是否支持(或者开启)transfer_to_human function calling
+   */
+  TransferFunctionEnable?: boolean
+  /**
+   * TransferFunctionEnable为true的时候生效: 转人工配置
+   */
+  TransferItems?: Array<AITransferItem>
+  /**
+   * 用户多久没说话提示时长,最小10秒,默认10秒
+   */
+  NotifyDuration?: number
+  /**
+   * 用户NotifyDuration没说话，AI提示的语句，默认是"抱歉，我没听清。您可以重复下吗？"
+   */
+  NotifyMessage?: string
+  /**
+   * 最大触发AI提示音次数，默认为不限制
+   */
+  NotifyMaxCount?: number
+  /**
+   * <p>和VoiceType字段需要选填一个，这里是使用自己自定义的TTS，VoiceType是系统内置的一些音色</p>
+<ul>
+<li>Tencent TTS<br>
+配置请参考<a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">腾讯云TTS文档链接</a></li>
+</ul>
+<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
+       &quot;TTSType&quot;: &quot;tencent&quot;, // String TTS类型, 目前支持&quot;tencent&quot; 和 “minixmax”， 其他的厂商支持中
+       &quot;AppId&quot;: &quot;您的应用ID&quot;, // String 必填
+       &quot;SecretId&quot;: &quot;您的密钥ID&quot;, // String 必填
+       &quot;SecretKey&quot;:  &quot;您的密钥Key&quot;, // String 必填
+       &quot;VoiceType&quot;: 101001, // Integer  必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。
+       &quot;Speed&quot;: 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍  6: 代表2.5倍  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换
+       &quot;Volume&quot;: 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。
+       &quot;PrimaryLanguage&quot;: 1, // Integer 可选 主要语言 1-中文（默认） 2-英文 3-日文
+       &quot;FastVoiceType&quot;: &quot;xxxx&quot;   //  可选参数， 快速声音复刻的参数 
+  }
+</code></pre>
+
+  </div></div><ul>
+<li>Minimax TTS<br>
+配置请参考<a href="https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS文档链接</a>。注意Minimax TTS存在频率限制，超频可能会导致回答卡顿，<a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS频率限制相关文档链接</a>。</li>
+</ul>
+<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
+        &quot;TTSType&quot;: &quot;minimax&quot;,  // String TTS类型, 
+        &quot;Model&quot;: &quot;speech-01-turbo&quot;,
+        &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
+        &quot;APIKey&quot;: &quot;eyxxxx&quot;,
+        &quot;GroupId&quot;: &quot;181000000000000&quot;,
+        &quot;VoiceType&quot;:&quot;female-tianmei-jingpin&quot;,
+        &quot;Speed&quot;: 1.2
+}
+</code></pre>
+</div></div><ul>
+<li>火山 TTS</li>
+</ul>
+<p>配置音色类型参考<a href="https://www.volcengine.com/docs/6561/162929" target="_blank">火山TTS文档链接</a><br>
+语音合成音色列表–语音技术-火山引擎<br>
+大模型语音合成音色列表–语音技术-火山引擎</p>
+<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
+    &quot;TTSType&quot;: &quot;volcengine&quot;,  // 必填：String TTS类型
+    &quot;AppId&quot; : &quot;xxxxxxxx&quot;,   // 必填：String 火山引擎分配的Appid
+    &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // 必填： String类型 火山引擎的访问token
+    &quot;Speed&quot; : 1.0,            // 可选参数 语速，默认为1.0
+    &quot;Volume&quot;: 1.0,            // 可选参数， 音量大小， 默认为1.0
+    &quot;Cluster&quot; : &quot;volcano_tts&quot;, // 可选参数，业务集群, 默认是 volcano_tts
+    &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot;   // 音色类型， 默认为大模型语音合成的音色。 如果使用普通语音合成，则需要填写对应的音色类型。 音色类型填写错误会导致没有声音。
+}
+</code></pre>
+
+</div></div><ul>
+<li>Azure TTS<br>
+配置请参考<a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS文档链接</a></li>
+</ul>
+<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
+    &quot;TTSType&quot;: &quot;azure&quot;, // 必填：String TTS类型
+    &quot;SubscriptionKey&quot;: &quot;xxxxxxxx&quot;, // 必填：String 订阅的Key
+    &quot;Region&quot;: &quot;chinanorth3&quot;,  // 必填：String 订阅的地区
+    &quot;VoiceName&quot;: &quot;zh-CN-XiaoxiaoNeural&quot;, // 必填：String 音色名必填
+    &quot;Language&quot;: &quot;zh-CN&quot;, // 必填：String 合成的语言  
+    &quot;Rate&quot;: 1 // 选填：float 语速  0.5～2 默认为 1
+}
+</code></pre>
+
+</div></div><ul>
+<li>自定义</li>
+</ul>
+<p>TTS<br>
+具体协议规范请参考<a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw" target="_blank">腾讯文档</a></p>
+<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
+  &quot;TTSType&quot;: &quot;custom&quot;, // String 必填
+  &quot;APIKey&quot;: &quot;ApiKey&quot;, // String 必填 用来鉴权
+  &quot;APIUrl&quot;: &quot;http://0.0.0.0:8080/stream-audio&quot; // String，必填，TTS API URL
+  &quot;AudioFormat&quot;: &quot;wav&quot;, // String, 非必填，期望输出的音频格式，如mp3， ogg_opus，pcm，wav，默认为 wav，目前只支持pcm和wav，
+  &quot;SampleRate&quot;: 16000,  // Integer，非必填，音频采样率，默认为16000(16k)，推荐值为16000
+  &quot;AudioChannel&quot;: 1,    // Integer，非必填，音频通道数，取值：1 或 2  默认为1  
+}
+</code></pre>
+
+</div></div>
+   */
+  CustomTTSConfig?: string
+  /**
+   * 提示词变量
+   */
+  PromptVariables?: Array<Variable>
+  /**
+   * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
+   */
+  VadSilenceTime?: number
+  /**
+   * 通话内容提取配置
+   */
+  ExtractConfig?: Array<AICallExtractConfigElement>
 }
 
 /**
@@ -557,17 +813,13 @@ export interface CreatePredictiveDialingCampaignRequest {
 }
 
 /**
- * DescribeChatMessages返回参数结构体
+ * CreateCompanyApply返回参数结构体
  */
-export interface DescribeChatMessagesResponse {
+export interface CreateCompanyApplyResponse {
   /**
-   * 总记录数
+   * 申请单ID
    */
-  TotalCount?: number
-  /**
-   * 消息列表
-   */
-  Messages?: Array<MessageBody>
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -650,6 +902,32 @@ export interface ServeParticipant {
    * 录音转存第三方COS地址
    */
   CustomRecordURL?: string
+}
+
+/**
+ * AI 通话提取结果。
+ */
+export interface AICallExtractResultElement {
+  /**
+   * 提取信息的类型
+Text 文本
+Selector 选项
+Boolean 布尔值
+Number 数字
+   */
+  InfoType?: string
+  /**
+   * 提取信息的名称
+   */
+  InfoName?: string
+  /**
+   * 提取信息的具体描述
+   */
+  InfoContent?: string
+  /**
+   * 提取信息的具体结果
+   */
+  Result?: AICallExtractResultInfo
 }
 
 /**
@@ -796,21 +1074,17 @@ export interface DeleteExtensionRequest {
 }
 
 /**
- * 外呼任务被叫信息
+ * DescribePredictiveDialingCampaign请求参数结构体
  */
-export interface AutoCalloutTaskCalleeInfo {
+export interface DescribePredictiveDialingCampaignRequest {
   /**
-   * 被叫号码
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Callee: string
+  SdkAppId: number
   /**
-   * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
+   * 任务 ID
    */
-  State: number
-  /**
-   * 会话ID列表
-   */
-  Sessions: Array<string>
+  CampaignId: number
 }
 
 /**
@@ -882,50 +1156,33 @@ export interface CreateAIAgentCallResponse {
 }
 
 /**
- * DescribeTelCdr请求参数结构体
+ * AI 通话提取配置项
  */
-export interface DescribeTelCdrRequest {
+export interface AICallExtractConfigElement {
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * 配置项类型，包括
+Text 文本
+Selector 选项
+Boolean 布尔值
+Number 数字
    */
-  StartTimeStamp: number
+  InfoType: string
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * 配置项名称，不可重复
    */
-  EndTimeStamp: number
+  InfoName: string
   /**
-   * 实例 ID（废弃）
-   * @deprecated
+   * 配置项具体内容
    */
-  InstanceId?: number
+  InfoContent?: string
   /**
-   * 返回数据条数，上限（废弃）
+   * 配置项提取内容示例
    */
-  Limit?: number
+  Examples?: Array<string>
   /**
-   * 偏移（废弃）
+   * InfoType 为 Selector，需要配置此字段
    */
-  Offset?: number
-  /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
-   */
-  SdkAppId?: number
-  /**
-   * 分页尺寸（必填），上限 100
-   */
-  PageSize?: number
-  /**
-   * 分页页码（必填），从 0 开始
-   */
-  PageNumber?: number
-  /**
-   * 按手机号筛选
-   */
-  Phones?: Array<string>
-  /**
-   * 按SessionId筛选
-   */
-  SessionIds?: Array<string>
+  Choices?: Array<string>
 }
 
 /**
@@ -977,13 +1234,72 @@ export interface PackageBuyInfo {
 }
 
 /**
- * ModifyExtension返回参数结构体
+ * DescribeTelCdr请求参数结构体
  */
-export interface ModifyExtensionResponse {
+export interface DescribeTelCdrRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
    */
-  RequestId?: string
+  StartTimeStamp: number
+  /**
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   */
+  EndTimeStamp: number
+  /**
+   * 实例 ID（废弃）
+   * @deprecated
+   */
+  InstanceId?: number
+  /**
+   * 返回数据条数，上限（废弃）
+   */
+  Limit?: number
+  /**
+   * 偏移（废弃）
+   */
+  Offset?: number
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId?: number
+  /**
+   * 分页尺寸（必填），上限 100
+   */
+  PageSize?: number
+  /**
+   * 分页页码（必填），从 0 开始
+   */
+  PageNumber?: number
+  /**
+   * 按手机号筛选
+   */
+  Phones?: Array<string>
+  /**
+   * 按SessionId筛选
+   */
+  SessionIds?: Array<string>
+}
+
+/**
+ * AI 通话结果具体信息
+ */
+export interface AICallExtractResultInfo {
+  /**
+   * 提取的类型是文本
+   */
+  Text?: string
+  /**
+   * 提取的内型是选项
+   */
+  Chosen?: Array<string>
+  /**
+   * 提取类型是布尔值
+   */
+  Boolean?: boolean
+  /**
+   * 提取类型是数字
+   */
+  Number?: number
 }
 
 /**
@@ -1002,6 +1318,28 @@ export interface DescribeIMCdrListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAICallExtractResult请求参数结构体
+ */
+export interface DescribeAICallExtractResultRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 会话 ID
+   */
+  SessionId: string
+  /**
+   * 查找起始时间
+   */
+  StartTime: number
+  /**
+   * 查找结束时间
+   */
+  EndTime: number
 }
 
 /**
@@ -1460,17 +1798,21 @@ export interface CreateCarrierPrivilegeNumberApplicantResponse {
 }
 
 /**
- * DescribePredictiveDialingCampaign请求参数结构体
+ * 外呼任务被叫信息
  */
-export interface DescribePredictiveDialingCampaignRequest {
+export interface AutoCalloutTaskCalleeInfo {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 被叫号码
    */
-  SdkAppId: number
+  Callee: string
   /**
-   * 任务 ID
+   * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
    */
-  CampaignId: number
+  State: number
+  /**
+   * 会话ID列表
+   */
+  Sessions: Array<string>
 }
 
 /**
@@ -2146,275 +2488,27 @@ export interface AbortPredictiveDialingCampaignResponse {
 }
 
 /**
- * CreateAICall请求参数结构体
+ * DescribeIMCdrs返回参数结构体
  */
-export interface CreateAICallRequest {
+export interface DescribeIMCdrsResponse {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 总记录数
    */
-  SdkAppId: number
+  TotalCount?: number
   /**
-   * 被叫号码
+   * 服务记录列表
+   * @deprecated
    */
-  Callee: string
+  IMCdrs?: Array<IMCdrInfo>
   /**
-   * 用于设定AI人设、说话规则、任务等的全局提示词。示例：## 人设您是人民医院友善、和蔼的随访医生李医生，正在给患者小明的家长打电话，原因是医院要求小明2024-08-08回院复查手术恢复情况，但小明没有来。您需要按照任务流程对小明家长进行电话随访调查。## 要求简洁回复：使用简练语言，每次最多询问一个问题，不要在一个回复中询问多个问题。富有变化：尽量使表达富有变化，表达机械重复。自然亲切：使用日常语言，尽量显得专业并亲切。提到时间时使用口语表述，如下周三、6月18日。积极主动：尝试引导对话，每个回复通常以问题或下一步建议来结尾。询问清楚：如果对方部分回答了您的问题，或者回答很模糊，请通过追问来确保回答的完整明确。遵循任务：当对方的回答偏离了您的任务时，及时引导对方回到任务中。不要从头开始重复，从偏离的地方继续询问。诚实可靠：对于客户的提问，如果不确定请务必不要编造，礼貌告知对方不清楚。不要捏造患者未提及的症状史、用药史、治疗史。其他注意点：避免提到病情恶化、恢复不理想或疾病名称等使用会使患者感到紧张的表述。不要问患者已经直接或间接回答过的问题，例如患者已经说没有不适症状，那就不要再问手术部位是否有红肿疼痛症状的问题。##任务： 1.自我介绍您是人民医院负责随访的李医生，并说明致电的目的。2.询问被叫方是否是小明家长。 - 如果不是小明家长，请礼貌表达歉意，并使用 call_end 挂断电话。- 如果小明家长没空，请礼貌告诉对方稍后会重新致电，并使用 end_call 挂断电话。3.询问小明出院后水肿情况如何，较出院时是否有变化。- 如果水肿变严重，直接跳转步骤7。4.询问出院后是否给小朋友量过体温，是否出现过发烧情况。- 如果没有量过体温，请礼貌告诉家长出院后三个月内需要每天观察体温。- 如果出现过发烧，请直接跳转步骤7。5.询问出院后是否给小朋友按时服药。- 如果没有按时服药，请友善提醒家长严格按医嘱服用药物，避免影响手术效果。6.询问小朋友在饮食上是否做到低盐低脂，适量吃优质蛋白如鸡蛋、牛奶、瘦肉等。- 如果没有做到，请友善提醒家长低盐低脂和优质蛋白有助小朋友尽快恢复。7.告知家长医生要求6月18日回院复查，但没看到有相关复诊记录。提醒家长尽快前往医院体检复查血化验、尿常规。8.询问家长是否有问题需要咨询，如果没有请礼貌道别并用call_end挂断电话。
+   * 服务记录列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SystemPrompt: string
+  IMCdrList?: Array<IMCdrInfo>
   /**
-   * 模型接口协议类型，目前兼容三种协议类型：
-
-- OpenAI协议(包括GPT、混元、DeepSeek等)："openai"
-- Azure协议："azure"
-- Minimax协议："minimax"
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LLMType: string
-  /**
-   * 模型名称，如
-
-- OpenAI协议
-"gpt-4o-mini","gpt-4o"，"hunyuan-standard", "hunyuan-turbo"，"deepseek-chat"；
-
-- Azure协议
-"gpt-4o-mini", "gpt-4o"；
-
-- Minmax协议
-"deepseek-chat".
-   */
-  Model: string
-  /**
-   * 模型API密钥，获取鉴权信息方式请参见各模型官网
-
-- OpenAI协议：[GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key)，[混元](https://cloud.tencent.com/document/product/1729/111008)，[DeepSeek](https://api-docs.deepseek.com/zh-cn/)；
-
-- Azure协议：[Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings)；
-
-- Minimax：[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
-   */
-  APIKey: string
-  /**
-   * 模型接口地址
-
-- OpenAI协议
-GPT："https://api.openai.com/v1/"
-混元："https://api.hunyuan.cloud.tencent.com/v1"
-Deepseek："https://api.deepseek.com/v1"
-
-- Azure协议
- "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
-
-- Minimax协议
-"https://api.minimax.chat/v1"
-   */
-  APIUrl: string
-  /**
-   * 默认提供以下音色参数值可选择，如需自定义音色VoiceType请留空并在参数CustomTTSConfig中配置
-
-汉语：
-ZhiMei：智美，客服女声
-ZhiXi： 智希 通用女声
-ZhiQi：智琪 客服女声
-ZhiTian：智甜 女童声
-AiXiaoJing：爱小静 对话女声
-
-英语:
-WeRose：英文女声
-Monika：英文女声
-
-日语：
-Nanami
-
-韩语：
-SunHi
-
-印度尼西亚语(印度尼西亚)：
-Gadis
-
-马来语（马来西亚）:
-Yasmin
-
- 泰米尔语（马来西亚）:
-Kani
-
-泰语（泰国）:
-Achara
-
-越南语(越南):
-HoaiMy
-
-
-   */
-  VoiceType?: string
-  /**
-   * 主叫号码列表
-   */
-  Callers?: Array<string>
-  /**
-   * 用于设定AI座席欢迎语。
-   */
-  WelcomeMessage?: string
-  /**
-   * 0：使用welcomeMessage(为空时，被叫先说话；不为空时，机器人先说话)
-1:   使用ai根据prompt自动生成welcomeMessage并先说话
-   */
-  WelcomeType?: number
-  /**
-   * 最大等待时长(毫秒)，默认60秒，超过这个时间用户没说话，自动挂断
-   */
-  MaxDuration?: number
-  /**
-   * 语音识别支持的语言, 默认是"zh" 中文,
-填写数组,最长4个语言，第一个语言为主要识别语言，后面为可选语言，
-注意:主要语言为中国方言时，可选语言无效
-目前全量支持的语言如下，等号左面是语言英文名，右面是Language字段需要填写的值，该值遵循ISO639：
-1. Chinese = "zh" # 中文
-2. Chinese_TW = "zh-TW" # 中国台湾
-3. Chinese_DIALECT = "zh-dialect" # 中国方言
-4. English = "en" # 英语
-5. Vietnamese = "vi" # 越南语
-6. Japanese = "ja" # 日语
-7. Korean = "ko" # 汉语
-8. Indonesia = "id" # 印度尼西亚语
-9. Thai = "th" # 泰语
-10. Portuguese = "pt" # 葡萄牙语
-11. Turkish = "tr" # 土耳其语
-12. Arabic = "ar" # 阿拉伯语
-13. Spanish = "es" # 西班牙语
-14. Hindi = "hi" # 印地语
-15. French = "fr" # 法语
-16. Malay = "ms" # 马来语
-17. Filipino = "fil" # 菲律宾语
-18. German = "de" # 德语
-19. Italian = "it" # 意大利语
-20. Russian = "ru" # 俄语
-   */
-  Languages?: Array<string>
-  /**
-   * 打断AI说话模式，默认为0，0表示服务端自动打断，1表示服务端不打断，由端上发送打断信令进行打断
-   */
-  InterruptMode?: number
-  /**
-   * InterruptMode为0时使用，单位为毫秒，默认为500ms。表示服务端检测到持续InterruptSpeechDuration毫秒的人声则进行打断。
-   */
-  InterruptSpeechDuration?: number
-  /**
-   * 模型是否支持(或者开启)call_end function calling
-   */
-  EndFunctionEnable?: boolean
-  /**
-   * EndFunctionEnable为true时生效；call_end function calling的desc，默认为 "End the call when user has to leave (like says bye) or you are instructed to do so."
-   */
-  EndFunctionDesc?: string
-  /**
-   * 模型是否支持(或者开启)transfer_to_human function calling
-   */
-  TransferFunctionEnable?: boolean
-  /**
-   * TransferFunctionEnable为true的时候生效: 转人工配置
-   */
-  TransferItems?: Array<AITransferItem>
-  /**
-   * 用户多久没说话提示时长,最小10秒,默认10秒
-   */
-  NotifyDuration?: number
-  /**
-   * 用户NotifyDuration没说话，AI提示的语句，默认是"抱歉，我没听清。您可以重复下吗？"
-   */
-  NotifyMessage?: string
-  /**
-   * 最大触发AI提示音次数，默认为不限制
-   */
-  NotifyMaxCount?: number
-  /**
-   * <p>和VoiceType字段需要选填一个，这里是使用自己自定义的TTS，VoiceType是系统内置的一些音色</p>
-<ul>
-<li>Tencent TTS<br>
-配置请参考<a href="https://cloud.tencent.com/document/product/1073/92668#55924b56-1a73-4663-a7a1-a8dd82d6e823" target="_blank">腾讯云TTS文档链接</a></li>
-</ul>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{ 
-       &quot;TTSType&quot;: &quot;tencent&quot;, // String TTS类型, 目前支持&quot;tencent&quot; 和 “minixmax”， 其他的厂商支持中
-       &quot;AppId&quot;: &quot;您的应用ID&quot;, // String 必填
-       &quot;SecretId&quot;: &quot;您的密钥ID&quot;, // String 必填
-       &quot;SecretKey&quot;:  &quot;您的密钥Key&quot;, // String 必填
-       &quot;VoiceType&quot;: 101001, // Integer  必填，音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见语音合成计费概述。完整的音色 ID 列表请参见语音合成音色列表。
-       &quot;Speed&quot;: 1.25, // Integer 非必填，语速，范围：[-2，6]，分别对应不同语速： -2: 代表0.6倍 -1: 代表0.8倍 0: 代表1.0倍（默认） 1: 代表1.2倍 2: 代表1.5倍  6: 代表2.5倍  如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。 参数值与实际语速转换，可参考 语速转换
-       &quot;Volume&quot;: 5, // Integer 非必填，音量大小，范围：[0，10]，分别对应11个等级的音量，默认值为0，代表正常音量。
-       &quot;PrimaryLanguage&quot;: 1, // Integer 可选 主要语言 1-中文（默认） 2-英文 3-日文
-       &quot;FastVoiceType&quot;: &quot;xxxx&quot;   //  可选参数， 快速声音复刻的参数 
-  }
-</code></pre>
-
-  </div></div><ul>
-<li>Minimax TTS<br>
-配置请参考<a href="https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS文档链接</a>。注意Minimax TTS存在频率限制，超频可能会导致回答卡顿，<a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS频率限制相关文档链接</a>。</li>
-</ul>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-        &quot;TTSType&quot;: &quot;minimax&quot;,  // String TTS类型, 
-        &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-        &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-        &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-        &quot;GroupId&quot;: &quot;181000000000000&quot;,
-        &quot;VoiceType&quot;:&quot;female-tianmei-jingpin&quot;,
-        &quot;Speed&quot;: 1.2
-}
-</code></pre>
-</div></div><ul>
-<li>火山 TTS</li>
-</ul>
-<p>配置音色类型参考<a href="https://www.volcengine.com/docs/6561/162929" target="_blank">火山TTS文档链接</a><br>
-语音合成音色列表–语音技术-火山引擎<br>
-大模型语音合成音色列表–语音技术-火山引擎</p>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-    &quot;TTSType&quot;: &quot;volcengine&quot;,  // 必填：String TTS类型
-    &quot;AppId&quot; : &quot;xxxxxxxx&quot;,   // 必填：String 火山引擎分配的Appid
-    &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // 必填： String类型 火山引擎的访问token
-    &quot;Speed&quot; : 1.0,            // 可选参数 语速，默认为1.0
-    &quot;Volume&quot;: 1.0,            // 可选参数， 音量大小， 默认为1.0
-    &quot;Cluster&quot; : &quot;volcano_tts&quot;, // 可选参数，业务集群, 默认是 volcano_tts
-    &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot;   // 音色类型， 默认为大模型语音合成的音色。 如果使用普通语音合成，则需要填写对应的音色类型。 音色类型填写错误会导致没有声音。
-}
-</code></pre>
-
-</div></div><ul>
-<li>Azure TTS<br>
-配置请参考<a href="https://docs.azure.cn/zh-cn/ai-services/speech-service/speech-synthesis-markup-voice" target="_blank">AzureTTS文档链接</a></li>
-</ul>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-    &quot;TTSType&quot;: &quot;azure&quot;, // 必填：String TTS类型
-    &quot;SubscriptionKey&quot;: &quot;xxxxxxxx&quot;, // 必填：String 订阅的Key
-    &quot;Region&quot;: &quot;chinanorth3&quot;,  // 必填：String 订阅的地区
-    &quot;VoiceName&quot;: &quot;zh-CN-XiaoxiaoNeural&quot;, // 必填：String 音色名必填
-    &quot;Language&quot;: &quot;zh-CN&quot;, // 必填：String 合成的语言  
-    &quot;Rate&quot;: 1 // 选填：float 语速  0.5～2 默认为 1
-}
-</code></pre>
-
-</div></div><ul>
-<li>自定义</li>
-</ul>
-<p>TTS<br>
-具体协议规范请参考<a href="https://doc.weixin.qq.com/doc/w3_ANQAiAbdAFwHILbJBmtSqSbV1WZ3L?scode=AJEAIQdfAAo5a1xajYANQAiAbdAFw" target="_blank">腾讯文档</a></p>
-<div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-  &quot;TTSType&quot;: &quot;custom&quot;, // String 必填
-  &quot;APIKey&quot;: &quot;ApiKey&quot;, // String 必填 用来鉴权
-  &quot;APIUrl&quot;: &quot;http://0.0.0.0:8080/stream-audio&quot; // String，必填，TTS API URL
-  &quot;AudioFormat&quot;: &quot;wav&quot;, // String, 非必填，期望输出的音频格式，如mp3， ogg_opus，pcm，wav，默认为 wav，目前只支持pcm和wav，
-  &quot;SampleRate&quot;: 16000,  // Integer，非必填，音频采样率，默认为16000(16k)，推荐值为16000
-  &quot;AudioChannel&quot;: 1,    // Integer，非必填，音频通道数，取值：1 或 2  默认为1  
-}
-</code></pre>
-
-</div></div>
-   */
-  CustomTTSConfig?: string
-  /**
-   * 提示词变量
-   */
-  PromptVariables?: Array<Variable>
-  /**
-   * 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。
-   */
-  VadSilenceTime?: number
+  RequestId?: string
 }
 
 /**
@@ -2610,270 +2704,17 @@ export interface CreateAutoCalloutTaskResponse {
 }
 
 /**
- * 电话话单信息
+ * DescribeAICallExtractResult返回参数结构体
  */
-export interface TelCdrInfo {
+export interface DescribeAICallExtractResultResponse {
   /**
-   * 主叫号码
+   * 结果列表
    */
-  Caller?: string
+  ResultList?: Array<AICallExtractResultElement>
   /**
-   * 被叫号码
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Callee?: string
-  /**
-   * 呼叫发起时间戳，Unix 时间戳
-   */
-  Time?: number
-  /**
-   * 呼入呼出方向 0 呼入 1 呼出
-   */
-  Direction?: number
-  /**
-   * 通话时长
-   */
-  Duration?: number
-  /**
-   * 录音信息
-   */
-  RecordURL?: string
-  /**
-   * 录音 ID
-   */
-  RecordId?: string
-  /**
-   * 座席信息
-   */
-  SeatUser?: SeatUserInfo
-  /**
-   * EndStatus与EndStatusString一一对应，具体枚举如下：
-
-**场景	         EndStatus	EndStatusString	状态说明**
-
-电话呼入&呼出	1	        ok	                        正常结束
-
-电话呼入&呼出	0	        error	                系统错误
-
-电话呼入	             102	        ivrGiveUp	        IVR 期间用户放弃
-
-电话呼入	             103	        waitingGiveUp	       会话排队期间用户放弃
-
-电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
-
-电话呼入	             105	        noSeatOnline	       无座席在线
-
-电话呼入              106	       notWorkTime	       非工作时间   
-
-电话呼入	            107	       ivrEnd	               IVR 后直接结束
-
-电话呼入	            100	      blackList 呼入黑名单 
-
-电话呼出               2	              unconnected	未接通
-
-电话呼出             108	        restrictedCallee	被叫因高风险受限
-
-电话呼出             109	        tooManyRequest	    超频
-
-电话呼出             110	        restrictedArea	    外呼盲区
-
-电话呼出             111	        restrictedTime	外呼时间限制
-                         
-电话呼出             201            unknown	未知状态
-
-电话呼出             202            notAnswer	未接听
-
-电话呼出            203	    userReject	拒接挂断
-
-电话呼出	          204	    powerOff	关机
-
-电话呼出           205            numberNotExist	空号
-
-电话呼出	         206	           busy	通话中
-
-电话呼出   	        207	           outOfCredit	欠费
-
-电话呼出	         208	           operatorError	运营商线路异常
-
-电话呼出         	209	           callerCancel	主叫取消
-
-电话呼出	        210	           notInService	不在服务区
-
-电话呼入&呼出	211    clientError    客户端错误
-
-   */
-  EndStatus?: number
-  /**
-   * 技能组名称
-   */
-  SkillGroup?: string
-  /**
-   * 主叫归属地
-   */
-  CallerLocation?: string
-  /**
-   * IVR 阶段耗时
-   */
-  IVRDuration?: number
-  /**
-   * 振铃时间戳，UNIX 秒级时间戳
-   */
-  RingTimestamp?: number
-  /**
-   * 接听时间戳，UNIX 秒级时间戳
-   */
-  AcceptTimestamp?: number
-  /**
-   * 结束时间戳，UNIX 秒级时间戳
-   */
-  EndedTimestamp?: number
-  /**
-   * IVR 按键信息 ，e.g. ["1","2","3"]
-   */
-  IVRKeyPressed?: Array<string>
-  /**
-   * 挂机方 seat 座席 user 用户 system 系统
-   */
-  HungUpSide?: string
-  /**
-   * 服务参与者列表
-   */
-  ServeParticipants?: Array<ServeParticipant>
-  /**
-   * 技能组ID
-   */
-  SkillGroupId?: number
-  /**
-   * EndStatus与EndStatusString一一对应，具体枚举如下：
-
-**场景	         EndStatus	EndStatusString	状态说明**
-
-电话呼入&呼出	1	        ok	                        正常结束
-
-电话呼入&呼出	0	        error	                系统错误
-
-电话呼入	             102	        ivrGiveUp	        IVR 期间用户放弃
-
-电话呼入	             103	        waitingGiveUp	       会话排队期间用户放弃
-
-电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
-
-电话呼入	             105	        noSeatOnline	       无座席在线
-
-电话呼入              106	       notWorkTime	       非工作时间   
-
-电话呼入	            107	       ivrEnd	               IVR 后直接结束
-
-电话呼入	            100	      blackList 呼入黑名单 
-
-电话呼出               2	              unconnected	未接通
-
-电话呼出             108	        restrictedCallee	被叫因高风险受限
-
-电话呼出             109	        tooManyRequest	    超频
-
-电话呼出             110	        restrictedArea	    外呼盲区
-
-电话呼出             111	        restrictedTime	外呼时间限制
-                         
-电话呼出             201            unknown	未知状态
-
-电话呼出             202            notAnswer	未接听
-
-电话呼出            203	    userReject	拒接挂断
-
-电话呼出	          204	    powerOff	关机
-
-电话呼出           205            numberNotExist	空号
-
-电话呼出	         206	           busy	通话中
-
-电话呼出   	        207	           outOfCredit	欠费
-
-电话呼出	         208	           operatorError	运营商线路异常
-
-电话呼出         	209	           callerCancel	主叫取消
-
-电话呼出	        210	           notInService	不在服务区
-
-电话呼入&呼出	211    clientError    客户端错误
-
-   */
-  EndStatusString?: string
-  /**
-   * 会话开始时间戳，UNIX 秒级时间戳
-   */
-  StartTimestamp?: number
-  /**
-   * 进入排队时间，Unix 秒级时间戳
-   */
-  QueuedTimestamp?: number
-  /**
-   * 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
-   */
-  PostIVRKeyPressed?: Array<IVRKeyPressedElement>
-  /**
-   * 排队技能组Id
-   */
-  QueuedSkillGroupId?: number
-  /**
-   * 会话 ID
-   */
-  SessionId?: string
-  /**
-   * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
-   */
-  ProtectedCaller?: string
-  /**
-   * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
-   */
-  ProtectedCallee?: string
-  /**
-   * 客户自定义数据（User-to-User Interface）
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  Uui?: string
-  /**
-   * 客户自定义数据（User-to-User Interface）
-   */
-  UUI?: string
-  /**
-   * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
-   */
-  IVRKeyPressedEx?: Array<IVRKeyPressedElement>
-  /**
-   * 获取录音ASR文本信息地址
-   */
-  AsrUrl?: string
-  /**
-   * AsrUrl的状态：Complete
-已完成;
-Processing
-正在生成中;
-NotExists
-无记录(未开启生成离线asr或者无套餐包)
-   */
-  AsrStatus?: string
-  /**
-   * 录音转存第三方COS地址
-   */
-  CustomRecordURL?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 排队技能组名称
-   */
-  QueuedSkillGroupName?: string
-  /**
-   * 通话中语音留言录音URL
-   */
-  VoicemailRecordURL?: Array<string>
-  /**
-   * 通话中语音留言ASR文本信息地址
-   */
-  VoicemailAsrURL?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -2888,6 +2729,16 @@ export interface UploadIvrAudioResponse {
    * 上传成功文件列表
    */
   SuccessFileList?: Array<AudioFileInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyExtension返回参数结构体
+ */
+export interface ModifyExtensionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3280,6 +3131,273 @@ export interface AbortPredictiveDialingCampaignRequest {
    * 任务 ID
    */
   CampaignId: number
+}
+
+/**
+ * 电话话单信息
+ */
+export interface TelCdrInfo {
+  /**
+   * 主叫号码
+   */
+  Caller?: string
+  /**
+   * 被叫号码
+   */
+  Callee?: string
+  /**
+   * 呼叫发起时间戳，Unix 时间戳
+   */
+  Time?: number
+  /**
+   * 呼入呼出方向 0 呼入 1 呼出
+   */
+  Direction?: number
+  /**
+   * 通话时长
+   */
+  Duration?: number
+  /**
+   * 录音信息
+   */
+  RecordURL?: string
+  /**
+   * 录音 ID
+   */
+  RecordId?: string
+  /**
+   * 座席信息
+   */
+  SeatUser?: SeatUserInfo
+  /**
+   * EndStatus与EndStatusString一一对应，具体枚举如下：
+
+**场景	         EndStatus	EndStatusString	状态说明**
+
+电话呼入&呼出	1	        ok	                        正常结束
+
+电话呼入&呼出	0	        error	                系统错误
+
+电话呼入	             102	        ivrGiveUp	        IVR 期间用户放弃
+
+电话呼入	             103	        waitingGiveUp	       会话排队期间用户放弃
+
+电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
+
+电话呼入	             105	        noSeatOnline	       无座席在线
+
+电话呼入              106	       notWorkTime	       非工作时间   
+
+电话呼入	            107	       ivrEnd	               IVR 后直接结束
+
+电话呼入	            100	      blackList 呼入黑名单 
+
+电话呼出               2	              unconnected	未接通
+
+电话呼出             108	        restrictedCallee	被叫因高风险受限
+
+电话呼出             109	        tooManyRequest	    超频
+
+电话呼出             110	        restrictedArea	    外呼盲区
+
+电话呼出             111	        restrictedTime	外呼时间限制
+                         
+电话呼出             201            unknown	未知状态
+
+电话呼出             202            notAnswer	未接听
+
+电话呼出            203	    userReject	拒接挂断
+
+电话呼出	          204	    powerOff	关机
+
+电话呼出           205            numberNotExist	空号
+
+电话呼出	         206	           busy	通话中
+
+电话呼出   	        207	           outOfCredit	欠费
+
+电话呼出	         208	           operatorError	运营商线路异常
+
+电话呼出         	209	           callerCancel	主叫取消
+
+电话呼出	        210	           notInService	不在服务区
+
+电话呼入&呼出	211    clientError    客户端错误
+
+   */
+  EndStatus?: number
+  /**
+   * 技能组名称
+   */
+  SkillGroup?: string
+  /**
+   * 主叫归属地
+   */
+  CallerLocation?: string
+  /**
+   * IVR 阶段耗时
+   */
+  IVRDuration?: number
+  /**
+   * 振铃时间戳，UNIX 秒级时间戳
+   */
+  RingTimestamp?: number
+  /**
+   * 接听时间戳，UNIX 秒级时间戳
+   */
+  AcceptTimestamp?: number
+  /**
+   * 结束时间戳，UNIX 秒级时间戳
+   */
+  EndedTimestamp?: number
+  /**
+   * IVR 按键信息 ，e.g. ["1","2","3"]
+   */
+  IVRKeyPressed?: Array<string>
+  /**
+   * 挂机方 seat 座席 user 用户 system 系统
+   */
+  HungUpSide?: string
+  /**
+   * 服务参与者列表
+   */
+  ServeParticipants?: Array<ServeParticipant>
+  /**
+   * 技能组ID
+   */
+  SkillGroupId?: number
+  /**
+   * EndStatus与EndStatusString一一对应，具体枚举如下：
+
+**场景	         EndStatus	EndStatusString	状态说明**
+
+电话呼入&呼出	1	        ok	                        正常结束
+
+电话呼入&呼出	0	        error	                系统错误
+
+电话呼入	             102	        ivrGiveUp	        IVR 期间用户放弃
+
+电话呼入	             103	        waitingGiveUp	       会话排队期间用户放弃
+
+电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
+
+电话呼入	             105	        noSeatOnline	       无座席在线
+
+电话呼入              106	       notWorkTime	       非工作时间   
+
+电话呼入	            107	       ivrEnd	               IVR 后直接结束
+
+电话呼入	            100	      blackList 呼入黑名单 
+
+电话呼出               2	              unconnected	未接通
+
+电话呼出             108	        restrictedCallee	被叫因高风险受限
+
+电话呼出             109	        tooManyRequest	    超频
+
+电话呼出             110	        restrictedArea	    外呼盲区
+
+电话呼出             111	        restrictedTime	外呼时间限制
+                         
+电话呼出             201            unknown	未知状态
+
+电话呼出             202            notAnswer	未接听
+
+电话呼出            203	    userReject	拒接挂断
+
+电话呼出	          204	    powerOff	关机
+
+电话呼出           205            numberNotExist	空号
+
+电话呼出	         206	           busy	通话中
+
+电话呼出   	        207	           outOfCredit	欠费
+
+电话呼出	         208	           operatorError	运营商线路异常
+
+电话呼出         	209	           callerCancel	主叫取消
+
+电话呼出	        210	           notInService	不在服务区
+
+电话呼入&呼出	211    clientError    客户端错误
+
+   */
+  EndStatusString?: string
+  /**
+   * 会话开始时间戳，UNIX 秒级时间戳
+   */
+  StartTimestamp?: number
+  /**
+   * 进入排队时间，Unix 秒级时间戳
+   */
+  QueuedTimestamp?: number
+  /**
+   * 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
+   */
+  PostIVRKeyPressed?: Array<IVRKeyPressedElement>
+  /**
+   * 排队技能组Id
+   */
+  QueuedSkillGroupId?: number
+  /**
+   * 会话 ID
+   */
+  SessionId?: string
+  /**
+   * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+   */
+  ProtectedCaller?: string
+  /**
+   * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+   */
+  ProtectedCallee?: string
+  /**
+   * 客户自定义数据（User-to-User Interface）
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Uui?: string
+  /**
+   * 客户自定义数据（User-to-User Interface）
+   */
+  UUI?: string
+  /**
+   * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
+   */
+  IVRKeyPressedEx?: Array<IVRKeyPressedElement>
+  /**
+   * 获取录音ASR文本信息地址
+   */
+  AsrUrl?: string
+  /**
+   * AsrUrl的状态：Complete
+已完成;
+Processing
+正在生成中;
+NotExists
+无记录(未开启生成离线asr或者无套餐包)
+   */
+  AsrStatus?: string
+  /**
+   * 录音转存第三方COS地址
+   */
+  CustomRecordURL?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 排队技能组名称
+   */
+  QueuedSkillGroupName?: string
+  /**
+   * 通话中语音留言录音URL
+   */
+  VoicemailRecordURL?: Array<string>
+  /**
+   * 通话中语音留言ASR文本信息地址
+   */
+  VoicemailAsrURL?: Array<string>
 }
 
 /**
@@ -3815,13 +3933,17 @@ export interface CreateStaffRequest {
 }
 
 /**
- * CreateCompanyApply返回参数结构体
+ * DescribeChatMessages返回参数结构体
  */
-export interface CreateCompanyApplyResponse {
+export interface DescribeChatMessagesResponse {
   /**
-   * 申请单ID
+   * 总记录数
    */
-  Id?: number
+  TotalCount?: number
+  /**
+   * 消息列表
+   */
+  Messages?: Array<MessageBody>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

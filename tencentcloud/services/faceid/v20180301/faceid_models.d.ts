@@ -1602,7 +1602,7 @@ export interface CheckIdCardInformationResponse {
  */
 export interface GetEidResultRequest {
     /**
-     * E证通流程的唯一标识，调用GetEidToken接口时生成。
+     * E证通流程的唯一标识，调用[GetEidToken](https://cloud.tencent.com/document/product/1007/54089)接口时生成。
      */
     EidToken: string;
     /**

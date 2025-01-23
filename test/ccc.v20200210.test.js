@@ -208,6 +208,16 @@ it("ccc.v20200210.DescribeTelCallInfo", async function () {
     }
 })
 
+it("ccc.v20200210.UploadIvrAudio", async function () {
+    try {
+       const data = await client.UploadIvrAudio({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeExtension", async function () {
     try {
        const data = await client.DescribeExtension({})
@@ -348,9 +358,9 @@ it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
     }
 })
 
-it("ccc.v20200210.UploadIvrAudio", async function () {
+it("ccc.v20200210.DescribeAICallExtractResult", async function () {
     try {
-       const data = await client.UploadIvrAudio({})
+       const data = await client.DescribeAICallExtractResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

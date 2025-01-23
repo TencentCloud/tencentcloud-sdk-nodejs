@@ -29,6 +29,7 @@ import {
   TextArithmetic,
   ResidencePermitInfo,
   BankCardOCRRequest,
+  SmartStructuralOCRResponse,
   CarInvoiceOCRRequest,
   MixedInvoiceItem,
   RecognizeTravelCardOCRRequest,
@@ -56,7 +57,7 @@ import {
   InvoiceGeneralOCRRequest,
   Rect,
   LicensePlateInfo,
-  SingleInvoiceInfo,
+  QuestionSplitOCRRequest,
   VatRollItem,
   TextFormula,
   HmtResidentPermitOCRResponse,
@@ -66,6 +67,7 @@ import {
   FlightItem,
   Value,
   EnterpriseLicenseOCRResponse,
+  QuestionOCRResponse,
   SealInfo,
   InvoiceGeneralInfo,
   TextVatInvoice,
@@ -85,7 +87,7 @@ import {
   VatElectronicItemInfo,
   SmartStructuralOCRV2Response,
   EnterpriseLicenseOCRRequest,
-  SmartStructuralOCRRequest,
+  QuestionSplitOCRResponse,
   RecognizeStoreNameRequest,
   StructuralItem,
   OnlineTaxiItineraryInfo,
@@ -94,14 +96,14 @@ import {
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
+  TextFormulaInfo,
   TollInvoiceInfo,
   BankSlipInfo,
-  SmartStructuralOCRResponse,
+  RecognizeFormulaOCRResponse,
   ArithmeticOCRResponse,
   FormulaOCRResponse,
-  RecognizeGeneralCardWarnRequest,
   BusInvoiceInfo,
-  RecognizeEncryptedIDCardOCRRequest,
+  SmartStructuralOCRRequest,
   TableCellInfo,
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
@@ -149,6 +151,7 @@ import {
   TaxiInvoiceOCRRequest,
   MachinePrintedInvoice,
   FinancialBillItem,
+  SingleInvoiceInfo,
   RecognizeContainerOCRRequest,
   TrainTicket,
   TextDetectRequest,
@@ -193,6 +196,7 @@ import {
   MedicalInvoiceItem,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
+  RecognizeFormulaOCRRequest,
   FlightInvoiceOCRResponse,
   ShipInvoiceOCRResponse,
   ReconstructDocumentRequest,
@@ -210,7 +214,6 @@ import {
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
   FinanBillSliceOCRRequest,
-  RecognizeGeneralCardWarnResponse,
   ClassifyStoreNameResponse,
   VatRollInvoiceOCRRequest,
   AirTransport,
@@ -234,7 +237,7 @@ import {
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
   LineInfo,
-  GeneralCardWarnInfo,
+  RecognizeEncryptedIDCardOCRRequest,
   TollInvoice,
   ItemCoord,
   CreateAIFormTaskResponse,
@@ -254,6 +257,7 @@ import {
   GetTaskStateResponse,
   InsuranceBillInfo,
   ContentInfo,
+  QuestionOCRRequest,
   GetTaskStateRequest,
   TextTractorVehicleBack,
   RecognizeMedicalInvoiceOCRRequest,
@@ -275,6 +279,7 @@ import {
   MainlandPermitOCRResponse,
   VatInvoice,
   MLIDCardOCRRequest,
+  QuestionInfo,
   TaxiTicket,
   EnglishOCRResponse,
   ImageCoordinates,
@@ -297,6 +302,7 @@ import {
   TableOCRResponse,
   DetectedWordCoordPoint,
   QuestionBlockObj,
+  Element,
   AdvertiseOCRResponse,
   VehicleLicenseOCRRequest,
   VatRollInvoiceInfo,
@@ -313,10 +319,11 @@ import {
   EstateCertOCRRequest,
   PermanentResidencePermitInfo,
   BizLicenseOCRResponse,
-  TableOCRRequest,
+  ResultList,
   VatInvoiceOCRResponse,
   QuotaInvoiceOCRRequest,
   BankCardOCRResponse,
+  TableOCRRequest,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
   QuotaInvoiceOCRResponse,
@@ -334,6 +341,18 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ocr.tencentcloudapi.com", "2018-11-19", clientConfig)
+  }
+
+  /**
+     * 题目识别是教育的基础OCR识别能力。可支持扫描、拍照场景的单题题目识别。接口支持印刷体文本、手写体文本及公式的OCR识别和坐标返回，此外，接口还可对题目中的配图位置进行检测并返回坐标位置。适用于智能批改等场景的题目内容识别作为检索输入。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async QuestionOCR(
+    req: QuestionOCRRequest,
+    cb?: (error: string, rep: QuestionOCRResponse) => void
+  ): Promise<QuestionOCRResponse> {
+    return this.request("QuestionOCR", req, cb)
   }
 
   /**
@@ -671,15 +690,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async DutyPaidProofOCR(
-    req: DutyPaidProofOCRRequest,
-    cb?: (error: string, rep: DutyPaidProofOCRResponse) => void
-  ): Promise<DutyPaidProofOCRResponse> {
-    return this.request("DutyPaidProofOCR", req, cb)
+   * 外国人永久居留身份证识别
+   */
+  async RecognizeForeignPermanentResidentIdCard(
+    req: RecognizeForeignPermanentResidentIdCardRequest,
+    cb?: (error: string, rep: RecognizeForeignPermanentResidentIdCardResponse) => void
+  ): Promise<RecognizeForeignPermanentResidentIdCardResponse> {
+    return this.request("RecognizeForeignPermanentResidentIdCard", req, cb)
   }
 
   /**
@@ -955,16 +972,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTaskStateResponse) => void
   ): Promise<GetTaskStateResponse> {
     return this.request("GetTaskState", req, cb)
-  }
-
-  /**
-   * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
-   */
-  async RecognizeGeneralCardWarn(
-    req: RecognizeGeneralCardWarnRequest,
-    cb?: (error: string, rep: RecognizeGeneralCardWarnResponse) => void
-  ): Promise<RecognizeGeneralCardWarnResponse> {
-    return this.request("RecognizeGeneralCardWarn", req, cb)
   }
 
   /**
@@ -1412,6 +1419,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 公式识别是教育的基础OCR识别能力，可支持理科（数学、物理、化学、生物）的印刷体和手写体的公式识别。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async RecognizeFormulaOCR(
+    req: RecognizeFormulaOCRRequest,
+    cb?: (error: string, rep: RecognizeFormulaOCRResponse) => void
+  ): Promise<RecognizeFormulaOCRResponse> {
+    return this.request("RecognizeFormulaOCR", req, cb)
+  }
+
+  /**
      * 本接口支持各类印章主体内容、印章其他内容及形状识别，支持单图多印章识别，包括发票章、财务章等，适用于公文票据等场景。
 
 默认接口请求频率限制：5次/秒。
@@ -1538,6 +1557,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 试卷切题识别可将整页练习册、试卷或教辅中的题目进行自动切题，并识别出其中的文字内容和坐标位置。
+
+默认接口请求频率限制：2次/秒。
+     */
+  async QuestionSplitOCR(
+    req: QuestionSplitOCRRequest,
+    cb?: (error: string, rep: QuestionSplitOCRResponse) => void
+  ): Promise<QuestionSplitOCRResponse> {
+    return this.request("QuestionSplitOCR", req, cb)
+  }
+
+  /**
      * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
      */
@@ -1585,13 +1616,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 外国人永久居留身份证识别
-   */
-  async RecognizeForeignPermanentResidentIdCard(
-    req: RecognizeForeignPermanentResidentIdCardRequest,
-    cb?: (error: string, rep: RecognizeForeignPermanentResidentIdCardResponse) => void
-  ): Promise<RecognizeForeignPermanentResidentIdCardResponse> {
-    return this.request("RecognizeForeignPermanentResidentIdCard", req, cb)
+     * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async DutyPaidProofOCR(
+    req: DutyPaidProofOCRRequest,
+    cb?: (error: string, rep: DutyPaidProofOCRResponse) => void
+  ): Promise<DutyPaidProofOCRResponse> {
+    return this.request("DutyPaidProofOCR", req, cb)
   }
 
   /**

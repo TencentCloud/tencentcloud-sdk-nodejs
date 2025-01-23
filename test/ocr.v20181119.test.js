@@ -18,6 +18,16 @@ const client = new tencentcloud.ocr.v20181119.Client({
 })
 describe("ocr.v20181119.test.js", function () {
 
+it("ocr.v20181119.QuestionOCR", async function () {
+    try {
+       const data = await client.QuestionOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.TextDetect", async function () {
     try {
        const data = await client.TextDetect({})
@@ -208,9 +218,9 @@ it("ocr.v20181119.RideHailingDriverLicenseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.DutyPaidProofOCR", async function () {
+it("ocr.v20181119.RecognizeForeignPermanentResidentIdCard", async function () {
     try {
-       const data = await client.DutyPaidProofOCR({})
+       const data = await client.RecognizeForeignPermanentResidentIdCard({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,16 +321,6 @@ it("ocr.v20181119.BizLicenseOCR", async function () {
 it("ocr.v20181119.GetTaskState", async function () {
     try {
        const data = await client.GetTaskState({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.RecognizeGeneralCardWarn", async function () {
-    try {
-       const data = await client.RecognizeGeneralCardWarn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +608,16 @@ it("ocr.v20181119.ClassifyDetectOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeFormulaOCR", async function () {
+    try {
+       const data = await client.RecognizeFormulaOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.SealOCR", async function () {
     try {
        const data = await client.SealOCR({})
@@ -708,6 +718,16 @@ it("ocr.v20181119.ImageEnhancement", async function () {
     }
 })
 
+it("ocr.v20181119.QuestionSplitOCR", async function () {
+    try {
+       const data = await client.QuestionSplitOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.MLIDCardOCR", async function () {
     try {
        const data = await client.MLIDCardOCR({})
@@ -748,9 +768,9 @@ it("ocr.v20181119.VatInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeForeignPermanentResidentIdCard", async function () {
+it("ocr.v20181119.DutyPaidProofOCR", async function () {
     try {
-       const data = await client.RecognizeForeignPermanentResidentIdCard({})
+       const data = await client.DutyPaidProofOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
