@@ -870,15 +870,6 @@ export interface ModifyEdgeIpSwitchRequest {
     SwitchMode?: number;
 }
 /**
- * ModifyAllVPCSwitchStatus返回参数结构体
- */
-export interface ModifyAllVPCSwitchStatusResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * vpc区域数据详情
  */
 export interface VpcZoneData {
@@ -5578,19 +5569,6 @@ export interface SetNatFwDnatRuleRequest {
      * 修改操作的新的Dnat规则
      */
     NewDnat?: CfwNatDnatRule;
-}
-/**
- * ModifyAllVPCSwitchStatus请求参数结构体
- */
-export interface ModifyAllVPCSwitchStatusRequest {
-    /**
-     * 状态，0：关闭，1：开启
-     */
-    Status: number;
-    /**
-     * 选中的防火墙开关Id
-     */
-    FireWallVpcIds?: Array<string>;
 }
 /**
  * 双向下发的企业安全组规则

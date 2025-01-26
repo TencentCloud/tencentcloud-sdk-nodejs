@@ -998,16 +998,6 @@ it("cfw.v20190904.ModifyRunSyncAsset", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyAllVPCSwitchStatus", async function () {
-    try {
-       const data = await client.ModifyAllVPCSwitchStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.DescribeGuideScanInfo", async function () {
     try {
        const data = await client.DescribeGuideScanInfo({})

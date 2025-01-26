@@ -622,14 +622,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyRunSyncAsset", req, cb);
     }
     /**
-     * 该接口已不再使用
-
-VPC防火墙一键开关
-     */
-    async ModifyAllVPCSwitchStatus(req, cb) {
-        return this.request("ModifyAllVPCSwitchStatus", req, cb);
-    }
-    /**
      * DescribeGuideScanInfo新手引导扫描接口信息
      */
     async DescribeGuideScanInfo(req, cb) {

@@ -55,7 +55,6 @@ import {
   DeleteBlockIgnoreRuleNewResponse,
   DeleteAllAccessControlRuleRequest,
   ModifyEdgeIpSwitchRequest,
-  ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
   DatabaseWhiteListRuleData,
   DescribeNatFwVpcDnsLstRequest,
@@ -243,7 +242,6 @@ import {
   ModifyNatFwReSelectRequest,
   ModifyVpcFwSequenceRulesResponse,
   SetNatFwDnatRuleRequest,
-  ModifyAllVPCSwitchStatusRequest,
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   StopSecurityGroupRuleDispatchRequest,
@@ -1305,18 +1303,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyRunSyncAssetResponse) => void
   ): Promise<ModifyRunSyncAssetResponse> {
     return this.request("ModifyRunSyncAsset", req, cb)
-  }
-
-  /**
-     * 该接口已不再使用
-
-VPC防火墙一键开关
-     */
-  async ModifyAllVPCSwitchStatus(
-    req: ModifyAllVPCSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void
-  ): Promise<ModifyAllVPCSwitchStatusResponse> {
-    return this.request("ModifyAllVPCSwitchStatus", req, cb)
   }
 
   /**

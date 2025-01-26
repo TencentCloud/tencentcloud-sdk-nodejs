@@ -2752,7 +2752,7 @@ export interface DescribeCcnAttachedInstancesResponse {
  */
 export interface DescribeBundlesRequest {
     /**
-     * 套餐 ID 列表。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。
+     * 套餐 ID 列表。每次请求批量套餐的上限为 100。可通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回值中的BundleId获取。
      */
     BundleIds?: Array<string>;
     /**

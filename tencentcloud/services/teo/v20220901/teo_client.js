@@ -387,7 +387,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeTopL7CacheData", req, cb);
     }
     /**
-     * 修改规则引擎规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccRule](https://cloud.tencent.com/document/product/1552/115818)。
      */
     async ModifyRule(req, cb) {
         return this.request("ModifyRule", req, cb);
@@ -496,7 +496,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateSharedCNAME", req, cb);
     }
     /**
-     * 规则引擎创建规则。
+     * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [CreateL7AccRules](https://cloud.tencent.com/document/product/1552/115822)。
      */
     async CreateRule(req, cb) {
         return this.request("CreateRule", req, cb);
