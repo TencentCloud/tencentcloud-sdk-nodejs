@@ -1,11 +1,9 @@
 .git
 .vscode
 dist
-webpack.config.js
-test/
+rollup.config.js
 examples/
 test/
 CHANGELOG.md
 SERVICE_CHANGELOG.md
 products.md
-
