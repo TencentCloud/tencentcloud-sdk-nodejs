@@ -1,0 +1,11 @@
+.git
+.vscode
+dist
+webpack.config.js
+test/
+examples/
+test/
+CHANGELOG.md
+SERVICE_CHANGELOG.md
+products.md
+

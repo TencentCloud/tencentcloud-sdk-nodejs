@@ -1,0 +1,27 @@
+{
+    "presets": ["@babel/env", "@babel/typescript"],
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "env": {
+      "esm": {
+        "presets": [
+          [
+            "@babel/env",
+            {
+              "modules": false
+            }
+          ]
+        ],
+        "plugins": [
+          [
+            "@babel/plugin-transform-runtime",
+            {
+              "useESModules": true
+            }
+          ]
+        ]
+      }
+    }
+  }
