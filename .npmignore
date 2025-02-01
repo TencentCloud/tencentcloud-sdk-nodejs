@@ -1,6 +1,5 @@
 .git
 .vscode
-dist
 rollup.config.js
 examples/
 test/
