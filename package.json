@@ -31,6 +31,7 @@
     "tslib": "1.13.0",
     "uuid": "^9.0.1"
   },
+  "dist": ["tencentcloud"],
   "directories": {
     "example": "examples",
     "lib": "lib"
