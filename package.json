@@ -5,7 +5,7 @@
   "scripts": {
     "test": "mocha -t 10000",
     "build": "npm run clean && cross-env NODE_ENV=production rollup -c rollup.config.js",
-    "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'",
+    "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}' package.json rollup.config.js babel.config.json *.md",
     "clean": "rimraf lib es typings"
   },
   "engines": {
