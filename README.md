@@ -13,14 +13,43 @@
 
 安装 NODEJS SDK 前，先获取安全凭证。在第一次使用云 API 之前，用户首先需要在腾讯云控制台上申请安全凭证，安全凭证包括 SecretID 和 SecretKey， SecretID 是用于标识 API 调用者的身份，SecretKey 是用于加密签名字符串和服务器端验证签名字符串的密钥。SecretKey 必须严格保管，避免泄露。
 
-## 通过 Npm 安装
+## 通过 NPM 安装
 
-通过 npm 获取安装是使用 NODEJS SDK 的推荐方法，npm 是 NODEJS 的包管理工具。关于 npm 详细可参考[ npm 官网](https://www.npmjs.com/) 。
+通过 NPM 获取安装是使用 NODEJS SDK 的推荐方法，NPM 是 NODEJS 的包管理工具。关于 NPM 详细可参考 [NPM 官网](https://www.npmjs.com/) 。
 
-1. 执行以下安装命令：
-   > npm install tencentcloud-sdk-nodejs --save
-2. 在您的代码中引用对应模块代码，可参考示例。
-3. 如上引用方式会将腾讯云所有产品sdk下载到本地，可以将tencentcloud-sdk-nodejs换成tencentcloud-sdk-nodejs-cvm/cbs/vpc等，即可引用特定产品的sdk，代码中可将require("tencentcloud-sdk-nodejs")改为require("tencentcloud-sdk-nodejs-cvm/cbs/vpc")，其余不变，可参考示例，可大大节省存储空间。
+### 安装指定产品 SDK（推荐）
+
+安装 CVM SDK：
+
+```
+npm install tencentcloud-sdk-nodejs-cvm --save
+```
+
+安装 VPC SDK：
+
+```
+npm install tencentcloud-sdk-nodejs-vpc --save
+```
+
+具体产品的缩写表请参考 [products.md](./products.md) 中的包名字段。
+
+安装指定产品 SDK 后，注意修改引入的包名：
+
+```diff
+- const tencentcloud = require("tencentcloud-sdk-nodejs")
++ const { cvm } = require("tencentcloud-sdk-nodejs-cvm")
+
+- const CvmClient = tencentcloud.cvm.v20170312.Client
++ const CvmClient = cvm.v20170312.Client
+```
+
+### 安装全产品 SDK
+
+```
+npm install tencentcloud-sdk-nodejs --save
+```
+
+全产品 SDK 包含了所有云产品的调用代码，体积偏大，对体积敏感的场景，推荐安装指定产品 SDK。
 
 ## 通过源码包安装
 
