@@ -56,7 +56,7 @@ npm install tencentcloud-sdk-nodejs --save
 1. 前往 [GitHub 仓库](https://github.com/tencentcloud/tencentcloud-sdk-nodejs) 或者 [Gitee 仓库](https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs) 下载源码压缩包。
 2. 解压源码包到您项目合适的位置，例如 `sdk/tencentcloud-sdk-nodejs`。
 3. 执行 `npm install ./sdk/tencentcloud-sdk-nodejs`。
-4. 使用 `require("tencentcloud-sdk-nodejs")` 的方式引入sdk，具体可参考示例。
+4. 使用 `require("tencentcloud-sdk-nodejs")` 的方式引入SDK，具体可参考示例。
 
 # 示例
 
@@ -154,9 +154,9 @@ new XxxClient({
 # 常见问题
 - webpack打包出错/浏览器报错
 
-  请**务必不要**将此sdk直接用于web前端(包括小程序等)，暴露密钥在这些环境非常不安全。
+  请**务必不要**将此SDK直接用于web前端(包括小程序等)，暴露密钥在这些环境非常不安全。
 
-  正确的做法是在自己的服务端引用此sdk，并保存好密钥，做好请求鉴权；前端再调用服务端执行业务流程。
+  正确的做法是在自己的服务端引用此SDK，并保存好密钥，做好请求鉴权；前端再调用服务端执行业务流程。
 
 - `The "original" argument must be of type Function.`
 
