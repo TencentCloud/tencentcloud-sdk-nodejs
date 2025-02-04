@@ -53,7 +53,7 @@ npm install tencentcloud-sdk-nodejs --save
 
 ## 通过源码包安装
 
-1. 前往 [Github 仓库](https://github.com/tencentcloud/tencentcloud-sdk-nodejs) 或者 [Gitee 仓库](https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs) 下载源码压缩包。
+1. 前往 [GitHub 仓库](https://github.com/tencentcloud/tencentcloud-sdk-nodejs) 或者 [Gitee 仓库](https://gitee.com/tencentcloud/tencentcloud-sdk-nodejs) 下载源码压缩包。
 2. 解压源码包到您项目合适的位置，例如 `sdk/tencentcloud-sdk-nodejs`。
 3. 执行 `npm install ./sdk/tencentcloud-sdk-nodejs`。
 4. 使用 `require("tencentcloud-sdk-nodejs")` 的方式引入sdk，具体可参考示例。
@@ -149,7 +149,7 @@ new XxxClient({
 
 # 旧版 SDK
 
-我们推荐使用新版 NODEJS SDK，如果一定要用旧版 SDK，请前往[github 仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
+我们推荐使用新版 NODEJS SDK，如果一定要用旧版 SDK，请前往[GitHub 仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
 
 # 常见问题
 - webpack打包出错/浏览器报错
