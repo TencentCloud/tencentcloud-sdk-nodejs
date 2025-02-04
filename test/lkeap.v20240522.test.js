@@ -268,4 +268,14 @@ it("lkeap.v20240522.UploadDoc", async function () {
     }
 })
 
+it("lkeap.v20240522.ChatCompletions", async function () {
+    try {
+       const data = await client.ChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

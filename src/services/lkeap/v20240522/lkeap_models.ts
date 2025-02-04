@@ -16,6 +16,24 @@
  */
 
 /**
+ * ChatCompletions请求参数结构体
+ */
+export interface ChatCompletionsRequest {
+  /**
+   * 模型名称
+   */
+  Model: string
+  /**
+   * 会话列表
+   */
+  Messages: Array<Message>
+  /**
+   * 是否流式输出
+   */
+  Stream?: boolean
+}
+
+/**
  * CreateSplitDocumentFlow请求参数结构体
  */
 export interface CreateSplitDocumentFlowRequest {
@@ -67,16 +85,6 @@ export interface CreateSplitDocumentFlowRequest {
 
    */
   Config?: CreateSplitDocumentFlowConfig
-}
-
-/**
- * ImportQAs返回参数结构体
- */
-export interface ImportQAsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -190,6 +198,16 @@ export interface GetEmbeddingRequest {
    * 需要 embedding 的文本, 单条文本最大长度500个字符, 总条数最大7条
    */
   Inputs: Array<string>
+}
+
+/**
+ * ImportQAs返回参数结构体
+ */
+export interface ImportQAsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -861,6 +879,24 @@ export interface ModifyAttributeLabelResponse {
 }
 
 /**
+ * QueryRewrite返回参数结构体
+ */
+export interface QueryRewriteResponse {
+  /**
+   * 改写结果
+   */
+  Content?: string
+  /**
+   * 消耗量，返回输入token数，输出token数以及总token数
+   */
+  Usage?: Usage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UploadDoc请求参数结构体
  */
 export interface UploadDocRequest {
@@ -1067,19 +1103,11 @@ export interface CreateReconstructDocumentFlowResponse {
 }
 
 /**
- * QueryRewrite返回参数结构体
+ * ChatCompletions返回参数结构体
  */
-export interface QueryRewriteResponse {
+export interface ChatCompletionsResponse {
   /**
-   * 改写结果
-   */
-  Content?: string
-  /**
-   * 消耗量，返回输入token数，输出token数以及总token数
-   */
-  Usage?: Usage
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
    */
   RequestId?: string
 }

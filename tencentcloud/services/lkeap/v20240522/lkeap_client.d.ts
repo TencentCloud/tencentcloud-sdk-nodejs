@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateSplitDocumentFlowRequest, ImportQAsResponse, ListQAsRequest, ReconstructDocumentSSEResponse, GetEmbeddingRequest, UploadDocRealtimeRequest, DescribeDocResponse, DeleteQAsRequest, ModifyQARequest, GetReconstructDocumentResultRequest, ListQAsResponse, DeleteAttributeLabelsResponse, ListDocsRequest, CreateAttributeLabelResponse, RetrieveKnowledgeResponse, CreateSplitDocumentFlowResponse, CreateQAResponse, ModifyAttributeLabelRequest, ListDocsResponse, ListAttributeLabelsRequest, DeleteAttributeLabelsRequest, RetrieveKnowledgeRequest, GetReconstructDocumentResultResponse, RunRerankRequest, GetSplitDocumentResultRequest, ReconstructDocumentSSERequest, ListAttributeLabelsResponse, CreateAttributeLabelRequest, ImportQAsRequest, DescribeDocRequest, DeleteKnowledgeBaseResponse, DeleteDocsResponse, CreateReconstructDocumentFlowRequest, GetSplitDocumentResultResponse, ModifyQAResponse, UploadDocRealtimeResponse, ModifyAttributeLabelResponse, UploadDocRequest, DeleteQAsResponse, CreateKnowledgeBaseResponse, GetEmbeddingResponse, QueryRewriteRequest, RunRerankResponse, CreateReconstructDocumentFlowResponse, QueryRewriteResponse, CreateQARequest, UploadDocResponse, CreateKnowledgeBaseRequest, DeleteKnowledgeBaseRequest, DeleteDocsRequest } from "./lkeap_models";
+import { ChatCompletionsRequest, CreateSplitDocumentFlowRequest, ListQAsRequest, ReconstructDocumentSSEResponse, GetEmbeddingRequest, ImportQAsResponse, UploadDocRealtimeRequest, DescribeDocResponse, DeleteQAsRequest, ModifyQARequest, GetReconstructDocumentResultRequest, ListQAsResponse, DeleteAttributeLabelsResponse, ListDocsRequest, CreateAttributeLabelResponse, RetrieveKnowledgeResponse, CreateSplitDocumentFlowResponse, CreateQAResponse, ModifyAttributeLabelRequest, ListDocsResponse, ListAttributeLabelsRequest, DeleteAttributeLabelsRequest, RetrieveKnowledgeRequest, GetReconstructDocumentResultResponse, RunRerankRequest, GetSplitDocumentResultRequest, ReconstructDocumentSSERequest, ListAttributeLabelsResponse, CreateAttributeLabelRequest, ImportQAsRequest, DescribeDocRequest, DeleteKnowledgeBaseResponse, DeleteDocsResponse, CreateReconstructDocumentFlowRequest, GetSplitDocumentResultResponse, ModifyQAResponse, UploadDocRealtimeResponse, ModifyAttributeLabelResponse, QueryRewriteResponse, UploadDocRequest, DeleteQAsResponse, CreateKnowledgeBaseResponse, GetEmbeddingResponse, QueryRewriteRequest, RunRerankResponse, CreateReconstructDocumentFlowResponse, ChatCompletionsResponse, CreateQARequest, UploadDocResponse, CreateKnowledgeBaseRequest, DeleteKnowledgeBaseRequest, DeleteDocsRequest } from "./lkeap_models";
 /**
  * lkeap client
  * @class
@@ -113,4 +113,8 @@ export declare class Client extends AbstractClient {
 使用场景：适用于需要长期存储和检索的文档内容，如产品手册、用户指南等。
      */
     UploadDoc(req: UploadDocRequest, cb?: (error: string, rep: UploadDocResponse) => void): Promise<UploadDocResponse>;
+    /**
+     * 对话
+     */
+    ChatCompletions(req: ChatCompletionsRequest, cb?: (error: string, rep: ChatCompletionsResponse) => void): Promise<ChatCompletionsResponse>;
 }

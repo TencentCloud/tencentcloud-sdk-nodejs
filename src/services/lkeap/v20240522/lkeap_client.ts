@@ -18,13 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ChatCompletionsRequest,
   CreateSplitDocumentFlowRequest,
-  ImportQAsResponse,
   RetrievalRecordMetadata,
   ListQAsRequest,
   ReconstructDocumentSSEResponse,
   DocItem,
   GetEmbeddingRequest,
+  ImportQAsResponse,
   UploadDocRealtimeRequest,
   DescribeDocResponse,
   AttributeLabelReferItem,
@@ -69,6 +70,7 @@ import {
   UploadDocRealtimeResponse,
   SplitDocumentFailedPage,
   ModifyAttributeLabelResponse,
+  QueryRewriteResponse,
   UploadDocRequest,
   DeleteQAsResponse,
   CreateKnowledgeBaseResponse,
@@ -78,7 +80,7 @@ import {
   CreateSplitDocumentFlowConfig,
   RunRerankResponse,
   CreateReconstructDocumentFlowResponse,
-  QueryRewriteResponse,
+  ChatCompletionsResponse,
   CreateQARequest,
   UploadDocResponse,
   AttributeItem,
@@ -352,5 +354,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadDocResponse) => void
   ): Promise<UploadDocResponse> {
     return this.request("UploadDoc", req, cb)
+  }
+
+  /**
+   * 对话
+   */
+  async ChatCompletions(
+    req: ChatCompletionsRequest,
+    cb?: (error: string, rep: ChatCompletionsResponse) => void
+  ): Promise<ChatCompletionsResponse> {
+    return this.request("ChatCompletions", req, cb)
   }
 }

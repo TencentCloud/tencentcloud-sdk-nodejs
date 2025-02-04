@@ -183,5 +183,11 @@ class Client extends abstract_client_1.AbstractClient {
     async UploadDoc(req, cb) {
         return this.request("UploadDoc", req, cb);
     }
+    /**
+     * 对话
+     */
+    async ChatCompletions(req, cb) {
+        return this.request("ChatCompletions", req, cb);
+    }
 }
 exports.Client = Client;
