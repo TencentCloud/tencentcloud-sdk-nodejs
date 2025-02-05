@@ -31,6 +31,14 @@ export interface ChatCompletionsRequest {
    * 是否流式输出
    */
   Stream?: boolean
+  /**
+   * 控制生成的随机性，较高的值会产生更多样化的输出。
+   */
+  Temperature?: number
+  /**
+   * 最大生成的token数量
+   */
+  MaxTokens?: number
 }
 
 /**
@@ -417,6 +425,28 @@ export interface ModifyAttributeLabelRequest {
 }
 
 /**
+ * GetReconstructDocumentResult返回参数结构体
+ */
+export interface GetReconstructDocumentResultResponse {
+  /**
+   * 任务状态。- `Success`：执行完成- `Processing`：执行中- `Pause`: 暂停- `Failed`：执行失败- `WaitExecute`：等待执行
+   */
+  Status?: string
+  /**
+   * 解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟
+   */
+  DocumentRecognizeResultUrl?: string
+  /**
+   * 文档解析失败的页码
+   */
+  FailedPages?: Array<ReconstructDocumentFailedPage>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReconstructDocumentSSE 功能配置参数
  */
 export interface ReconstructDocumentSSEConfig {
@@ -517,25 +547,28 @@ export interface RetrieveKnowledgeRequest {
 }
 
 /**
- * GetReconstructDocumentResult返回参数结构体
+ * 返回的回复, 支持多个
  */
-export interface GetReconstructDocumentResultResponse {
+export interface Choice {
   /**
-   * 任务状态。- `Success`：执行完成- `Processing`：执行中- `Pause`: 暂停- `Failed`：执行失败- `WaitExecute`：等待执行
+   * 结束标志位，可能为 stop、 sensitive或者tool_calls。
+stop 表示输出正常结束。
+sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。
+tool_calls 标识函数调用。
    */
-  Status?: string
+  FinishReason?: string
   /**
-   * 解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟
+   * 增量返回值，流式调用时使用该字段。
    */
-  DocumentRecognizeResultUrl?: string
+  Delta?: Delta
   /**
-   * 文档解析失败的页码
+   * 返回值，非流式调用时使用该字段。
    */
-  FailedPages?: Array<ReconstructDocumentFailedPage>
+  Message?: Message
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 索引值，流式调用时使用该字段。
    */
-  RequestId?: string
+  Index?: number
 }
 
 /**
@@ -582,6 +615,24 @@ export interface RunRerankRequest {
 }
 
 /**
+ * 消耗量
+ */
+export interface ChatUsage {
+  /**
+   * 输入token数
+   */
+  PromptTokens?: number
+  /**
+   * 输出token数
+   */
+  CompletionTokens?: number
+  /**
+   * 总token数
+   */
+  TotalTokens?: number
+}
+
+/**
  * GetSplitDocumentResult请求参数结构体
  */
 export interface GetSplitDocumentResultRequest {
@@ -589,6 +640,20 @@ export interface GetSplitDocumentResultRequest {
    * 拆分任务ID
    */
   TaskId: string
+}
+
+/**
+ * 返回的内容
+ */
+export interface Delta {
+  /**
+   * 角色名称。
+   */
+  Role?: string
+  /**
+   * 内容详情。
+   */
+  Content?: string
 }
 
 /**
@@ -1103,13 +1168,13 @@ export interface CreateReconstructDocumentFlowResponse {
 }
 
 /**
- * ChatCompletions返回参数结构体
+ * DeleteKnowledgeBase请求参数结构体
  */
-export interface ChatCompletionsResponse {
+export interface DeleteKnowledgeBaseRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+   * 知识库ID
    */
-  RequestId?: string
+  KnowledgeBaseId: string
 }
 
 /**
@@ -1184,6 +1249,11 @@ export interface Message {
    * 内容
    */
   Content?: string
+  /**
+   * 思维链内容。
+ReasoningConent参数仅支持出参，且只有deepseek-r1模型会返回。
+   */
+  ReasoningContent?: string
 }
 
 /**
@@ -1192,13 +1262,34 @@ export interface Message {
 export type CreateKnowledgeBaseRequest = null
 
 /**
- * DeleteKnowledgeBase请求参数结构体
+ * ChatCompletions返回参数结构体
  */
-export interface DeleteKnowledgeBaseRequest {
+export interface ChatCompletionsResponse {
   /**
-   * 知识库ID
+   * Unix 时间戳，单位为秒。
    */
-  KnowledgeBaseId: string
+  Created?: number
+  /**
+   * Token 统计信息。
+按照总 Token 数量计费。
+   */
+  Usage?: ChatUsage
+  /**
+   * 本次请求的 RequestId。
+   */
+  Id?: string
+  /**
+   * 回复内容。
+   */
+  Choices?: Array<Choice>
+  /**
+   * 模型名称。
+   */
+  Model?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+   */
+  RequestId?: string
 }
 
 /**

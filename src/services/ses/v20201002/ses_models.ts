@@ -319,23 +319,23 @@ export interface TemplatesMetadata {
   /**
    * 创建时间
    */
-  CreatedTimestamp: number
+  CreatedTimestamp?: number
   /**
    * 模板名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
    */
-  TemplateStatus: number
+  TemplateStatus?: number
   /**
    * 模板ID
    */
-  TemplateID: number
+  TemplateID?: number
   /**
    * 审核原因
    */
-  ReviewReason: string
+  ReviewReason?: string
 }
 
 /**
@@ -356,17 +356,14 @@ export interface ReceiverDetail {
   TemplateData?: string
   /**
    * 无效原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
    * 1:有效，2:无效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 收件人地址id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EmailId?: number
 }
@@ -435,36 +432,36 @@ export interface Volume {
    * 日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SendDate: string
+  SendDate?: string
   /**
    * 邮件请求数量
    */
-  RequestCount: number
+  RequestCount?: number
   /**
    * 腾讯云通过数量
    */
-  AcceptedCount: number
+  AcceptedCount?: number
   /**
    * 送达数量
    */
-  DeliveredCount: number
+  DeliveredCount?: number
   /**
    * 打开邮件的用户数量，根据收件人去重
    */
-  OpenedCount: number
+  OpenedCount?: number
   /**
    * 点击了邮件中的链接数量用户数量
    */
-  ClickedCount: number
+  ClickedCount?: number
   /**
    * 退信数量
    */
-  BounceCount: number
+  BounceCount?: number
   /**
    * 取消订阅的用户数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnsubscribeCount: number
+  UnsubscribeCount?: number
 }
 
 /**
@@ -755,12 +752,10 @@ export interface ReceiverData {
   Count?: number
   /**
    * 收件人列表描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Desc?: string
   /**
    * 列表状态(1 待上传 2 上传中 3 上传完成)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiversStatus?: number
   /**
@@ -769,7 +764,6 @@ export interface ReceiverData {
   CreateTime?: string
   /**
    * 无效收件人数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InvalidCount?: number
 }
@@ -969,27 +963,22 @@ export interface ListEmailTemplatesRequest {
 export interface CreateReceiverDetailWithDataResponse {
   /**
    * 收件人总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 实际上传数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidCount?: number
   /**
    * 数据过长数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TooLongCount?: number
   /**
    * 邮件地址为空数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EmptyEmailCount?: number
   /**
    * 重复数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RepeatCount?: number
   /**
@@ -1353,7 +1342,6 @@ export interface BlackEmailAddress {
   EmailAddress?: string
   /**
    * 被拉黑的理由
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IspDesc?: string
 }
