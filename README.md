@@ -59,6 +59,8 @@ npm install tencentcloud-sdk-nodejs --save
 
 # 示例
 
+以云服务器产品查询可用区列表接口为例。
+
 ```js
 const tencentcloud = require("tencentcloud-sdk-nodejs")
 
@@ -123,7 +125,7 @@ const CvmClient = tencentcloud.cvm.v20170312.Client
 
 ## 更多示例
 
-更丰富的使用 demo 请在 examples 目录中寻找。
+请参考 [examples](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/tree/master/examples) 目录。
 
 # 相关配置
 
