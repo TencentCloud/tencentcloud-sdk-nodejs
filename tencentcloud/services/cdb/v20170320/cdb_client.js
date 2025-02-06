@@ -814,7 +814,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
-     * 通过该 API 可以查询实例的 CPU 弹性扩容策略
+     * DescribeCpuExpandStrategy
+
+通过该 API 可以查询实例的 CPU 弹性扩容策略
      */
     async DescribeCpuExpandStrategy(req, cb) {
         return this.request("DescribeCpuExpandStrategy", req, cb);

@@ -135,6 +135,7 @@ import {
   DescribeMQTTMessageRequest,
   CreateRoleResponse,
   DescribeMQTTTopicListResponse,
+  ModifyInstanceEndpointRequest,
   SourceClusterGroupConfig,
   DescribeMQTTUserListRequest,
   ModifyMQTTInstanceResponse,
@@ -158,6 +159,7 @@ import {
   DeleteTopicResponse,
   DescribeMQTTInstanceCertResponse,
   DescribeMQTTTopicResponse,
+  ModifyInstanceEndpointResponse,
   DescribeInstanceRequest,
   DescribeProductSKUsResponse,
   DescribeMQTTMessageListRequest,
@@ -570,6 +572,16 @@ TopicName，主题名称过滤
     cb?: (error: string, rep: DescribeInstanceResponse) => void
   ): Promise<DescribeInstanceResponse> {
     return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 修改 RocketMQ 5.x 集群接入点。
+   */
+  async ModifyInstanceEndpoint(
+    req: ModifyInstanceEndpointRequest,
+    cb?: (error: string, rep: ModifyInstanceEndpointResponse) => void
+  ): Promise<ModifyInstanceEndpointResponse> {
+    return this.request("ModifyInstanceEndpoint", req, cb)
   }
 
   /**

@@ -408,6 +408,16 @@ it("trocket.v20230308.DescribeInstance", async function () {
     }
 })
 
+it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
+    try {
+       const data = await client.ModifyInstanceEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeTopicList", async function () {
     try {
        const data = await client.DescribeTopicList({})

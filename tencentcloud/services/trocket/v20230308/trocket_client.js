@@ -272,6 +272,12 @@ TopicName，主题名称过滤
         return this.request("DescribeInstance", req, cb);
     }
     /**
+     * 修改 RocketMQ 5.x 集群接入点。
+     */
+    async ModifyInstanceEndpoint(req, cb) {
+        return this.request("ModifyInstanceEndpoint", req, cb);
+    }
+    /**
      * 获取主题列表，Filter参数使用说明如下：
 
 1. TopicName，主题名称模糊搜索

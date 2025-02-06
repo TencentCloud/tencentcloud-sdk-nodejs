@@ -107,7 +107,7 @@ export interface TccCatalogConfig {
  */
 export interface TccConnection {
     /**
-     * 终端节点服务Id
+     * 引擎终端节点服务Id
      */
     EndpointServiceId?: string;
     /**
@@ -115,9 +115,21 @@ export interface TccConnection {
      */
     MetaStoreUrl?: string;
     /**
-     * 	网络信息
+     * 网络信息
      */
     NetWork?: NetWork;
+    /**
+     * hive版本
+     */
+    HiveVersion?: string;
+    /**
+     * hive location
+     */
+    Location?: string;
+    /**
+     * HMS终端节点服务
+     */
+    HmsEndpointServiceId?: string;
 }
 /**
  * DescribeTccCatalogs请求参数结构体

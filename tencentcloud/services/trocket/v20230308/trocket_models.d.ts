@@ -2973,6 +2973,32 @@ export interface DescribeMQTTTopicListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyInstanceEndpoint请求参数结构体
+ */
+export interface ModifyInstanceEndpointRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 接入点类型，
+  PUBLIC 公网
+     */
+    Type: string;
+    /**
+     * 公网带宽，Mbps为单位
+     */
+    Bandwidth?: number;
+    /**
+     * 公网安全组信息
+     */
+    IpRules?: Array<IpRule>;
+    /**
+     * 公网是否按流量计费
+     */
+    BillingFlow?: boolean;
+}
+/**
  * 消费组配置信息
  */
 export interface SourceClusterGroupConfig {
@@ -3536,6 +3562,15 @@ export interface DescribeMQTTTopicResponse {
      * 创建时间，秒为单位
      */
     CreatedTime?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyInstanceEndpoint返回参数结构体
+ */
+export interface ModifyInstanceEndpointResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
