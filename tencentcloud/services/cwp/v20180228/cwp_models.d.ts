@@ -1549,15 +1549,6 @@ export interface WebHookPolicy {
     ExcludedQuuids?: Array<string>;
 }
 /**
- * ModifyFileTamperRuleStatus返回参数结构体
- */
-export interface ModifyFileTamperRuleStatusResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeAssetUserInfo返回参数结构体
  */
 export interface DescribeAssetUserInfoResponse {
@@ -2238,69 +2229,13 @@ export interface BroadcastInfo {
     Type?: number;
 }
 /**
- * 网络攻击日志
+ * DeleteLoginWhiteList请求参数结构体
  */
-export interface DefendAttackLog {
+export interface DeleteLoginWhiteListRequest {
     /**
-     * 日志ID
+     * 白名单ID (最大 100 条)
      */
-    Id?: number;
-    /**
-     * 客户端ID
-     */
-    Uuid?: string;
-    /**
-     * 来源IP
-     */
-    SrcIp?: string;
-    /**
-     * 来源端口
-     */
-    SrcPort?: number;
-    /**
-     * 攻击方式
-     */
-    HttpMethod?: string;
-    /**
-     * 攻击描述
-     */
-    HttpCgi?: string;
-    /**
-     * 攻击参数
-     */
-    HttpParam?: string;
-    /**
-     * 威胁类型
-     */
-    VulType?: string;
-    /**
-     * 攻击时间
-     */
-    CreatedAt?: string;
-    /**
-     * 目标服务器IP
-     */
-    MachineIp?: string;
-    /**
-     * 目标服务器名称
-     */
-    MachineName?: string;
-    /**
-     * 目标IP
-     */
-    DstIp?: string;
-    /**
-     * 目标端口
-     */
-    DstPort?: number;
-    /**
-     * 攻击内容
-     */
-    HttpContent?: string;
-    /**
-     * 主机额外信息
-     */
-    MachineExtraInfo?: MachineExtraInfo;
+    Ids: Array<number | bigint>;
 }
 /**
  * DeleteRiskDnsEvent请求参数结构体
@@ -2890,6 +2825,15 @@ export interface ReverseShellRule {
     Hostip?: string;
 }
 /**
+ * DescribeAESKey返回参数结构体
+ */
+export interface DescribeAESKeyResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBashRules返回参数结构体
  */
 export interface DescribeBashRulesResponse {
@@ -3142,17 +3086,13 @@ export interface ModifyReverseShellRulesAggregationRequest {
     GroupID?: string;
 }
 /**
- * DescribeComponentStatistics返回参数结构体
+ * ExportAssetMachineDetail返回参数结构体
  */
-export interface DescribeComponentStatisticsResponse {
+export interface ExportAssetMachineDetailResponse {
     /**
-     * 组件统计列表记录总数。
+     * 下载地址
      */
-    TotalCount: number;
-    /**
-     * 组件统计列表数据数组。
-     */
-    ComponentStatistics: Array<ComponentStatistics>;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3250,36 +3190,17 @@ export interface PolicyRules {
  */
 export declare type DescribeMachineRegionsRequest = null;
 /**
- * DescribeAttackLogs请求参数结构体
+ * ExportWebPageEventList返回参数结构体
  */
-export interface DescribeAttackLogsRequest {
+export interface ExportWebPageEventListResponse {
     /**
-     * 返回数量，最大值为100。
+     * 任务id 可通过 ExportTasks接口下载
      */
-    Limit?: number;
+    TaskId?: string;
     /**
-     * 偏移量，默认为0。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset?: number;
-    /**
-     * 过滤条件。
-  <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-  <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
-  <li>VulType - String 威胁类型 - 是否必填: 否</li>
-  <li>SrcIp - String 攻击源IP - 是否必填: 否</li>
-  <li>DstIp - String 攻击目标IP - 是否必填: 否</li>
-  <li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
-  <li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 主机安全客户端ID
-     */
-    Uuid?: string;
-    /**
-     * 云主机机器ID
-     */
-    Quuid?: string;
+    RequestId?: string;
 }
 /**
  * ModifyMachineAutoClearConfig请求参数结构体
@@ -4802,24 +4723,6 @@ export interface DescribeVertexDetailResponse {
  * DeleteRiskDnsEvent返回参数结构体
  */
 export interface DeleteRiskDnsEventResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAttackLogs返回参数结构体
- */
-export interface DescribeAttackLogsResponse {
-    /**
-     * 日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AttackLogs?: Array<DefendAttackLog>;
-    /**
-     * 总条数
-     */
-    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6354,13 +6257,13 @@ export interface DeleteReverseShellEventsRequest {
     All?: boolean;
 }
 /**
- * DescribeBanRegions请求参数结构体
+ * DeleteBashPolicies请求参数结构体
  */
-export interface DescribeBanRegionsRequest {
+export interface DeleteBashPoliciesRequest {
     /**
-     * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+     * ID数组，最大100条。
      */
-    Mode: string;
+    Ids: Array<number | bigint>;
 }
 /**
  * ExportAssetAppList返回参数结构体
@@ -7074,17 +6977,17 @@ export interface RansomDefenseStrategyDetail {
     EventCount?: number;
 }
 /**
- * ExportWebPageEventList返回参数结构体
+ * ModifyBaselinePolicyState请求参数结构体
  */
-export interface ExportWebPageEventListResponse {
+export interface ModifyBaselinePolicyStateRequest {
     /**
-     * 任务id 可通过 ExportTasks接口下载
+     * 策略Id
      */
-    TaskId?: string;
+    PolicyId: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 开启状态[1:开启|0:未开启]
      */
-    RequestId?: string;
+    IsEnabled: number;
 }
 /**
  * DescribeLicenseBindSchedule返回参数结构体
@@ -9075,13 +8978,17 @@ export interface SetLocalStorageExpireResponse {
     RequestId?: string;
 }
 /**
- * DescribeBanRegions返回参数结构体
+ * DescribeBaselineDownloadList返回参数结构体
  */
-export interface DescribeBanRegionsResponse {
+export interface DescribeBaselineDownloadListResponse {
     /**
-     * 地域信息列表
+     * 无
      */
-    RegionSet?: Array<RegionSet>;
+    List?: Array<BaselineDownload>;
+    /**
+     * 总数
+     */
+    Total?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12353,13 +12260,13 @@ export interface CreateRansomDefenseStrategyRequest {
     Machines?: Array<RansomDefenseStrategyMachineInfo>;
 }
 /**
- * DeleteLoginWhiteList请求参数结构体
+ * DescribeMalwareFile请求参数结构体
  */
-export interface DeleteLoginWhiteListRequest {
+export interface DescribeMalwareFileRequest {
     /**
-     * 白名单ID (最大 100 条)
+     * 木马记录ID
      */
-    Ids: Array<number | bigint>;
+    Id: number;
 }
 /**
  * DescribeLicenseList请求参数结构体
@@ -13815,19 +13722,6 @@ export interface RecoverMalwaresResponse {
     RequestId?: string;
 }
 /**
- * ModifyBaselinePolicyState请求参数结构体
- */
-export interface ModifyBaselinePolicyStateRequest {
-    /**
-     * 策略Id
-     */
-    PolicyId: number;
-    /**
-     * 开启状态[1:开启|0:未开启]
-     */
-    IsEnabled: number;
-}
-/**
  * DeleteBaselineRule请求参数结构体
  */
 export interface DeleteBaselineRuleRequest {
@@ -14601,33 +14495,6 @@ export interface DescribeVertexDetailRequest {
      * 事件所在表名
      */
     TableName: string;
-}
-/**
- * 组件统计数据。
- */
-export interface ComponentStatistics {
-    /**
-     * 组件ID。
-     */
-    Id?: number;
-    /**
-     * 主机数量。
-     */
-    MachineNum?: number;
-    /**
-     * 组件名称。
-     */
-    ComponentName?: string;
-    /**
-     * 组件类型。
-  <li>WEB：Web组件</li>
-  <li>SYSTEM：系统组件</li>
-     */
-    ComponentType?: string;
-    /**
-     * 组件描述。
-     */
-    Description?: string;
 }
 /**
  * ExportAssetWebServiceInfoList请求参数结构体
@@ -17141,13 +17008,9 @@ export interface DeleteNonlocalLoginPlacesResponse {
     RequestId?: string;
 }
 /**
- * ExportAssetMachineDetail返回参数结构体
+ * ModifyFileTamperRuleStatus返回参数结构体
  */
-export interface ExportAssetMachineDetailResponse {
-    /**
-     * 下载地址
-     */
-    DownloadUrl?: string;
+export interface ModifyFileTamperRuleStatusResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17372,9 +17235,13 @@ export interface DescribeBaselinePolicyListResponse {
     RequestId?: string;
 }
 /**
- * DeleteBashPolicies返回参数结构体
+ * DescribeBanRegions返回参数结构体
  */
-export interface DeleteBashPoliciesResponse {
+export interface DescribeBanRegionsResponse {
+    /**
+     * 地域信息列表
+     */
+    RegionSet?: Array<RegionSet>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17759,24 +17626,6 @@ export interface DescribeFileTamperRulesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeComponentStatistics请求参数结构体
- */
-export interface DescribeComponentStatisticsRequest {
-    /**
-     * 返回数量，默认为10，最大值为100。
-     */
-    Limit?: number;
-    /**
-     * 偏移量，默认为0。
-     */
-    Offset?: number;
-    /**
-     * 过滤条件。
-  ComponentName - String - 是否必填：否 - 组件名称
-     */
-    Filters?: Array<Filter>;
 }
 /**
  * DescribeAssetProcessCount请求参数结构体
@@ -19836,15 +19685,6 @@ export interface BaselineEventLevelInfo {
     EventCount?: number;
 }
 /**
- * DescribeMalwareFile请求参数结构体
- */
-export interface DescribeMalwareFileRequest {
-    /**
-     * 木马记录ID
-     */
-    Id: number;
-}
-/**
  * DescribeLoginWhiteCombinedList请求参数结构体
  */
 export interface DescribeLoginWhiteCombinedListRequest {
@@ -19940,9 +19780,9 @@ export interface DeleteSearchTemplateResponse {
     RequestId?: string;
 }
 /**
- * DescribeAESKey返回参数结构体
+ * DeleteBashPolicies返回参数结构体
  */
-export interface DescribeAESKeyResponse {
+export interface DeleteBashPoliciesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22639,23 +22479,6 @@ export interface DescribeAssetAppCountRequest {
     Name?: string;
 }
 /**
- * DescribeBaselineDownloadList返回参数结构体
- */
-export interface DescribeBaselineDownloadListResponse {
-    /**
-     * 无
-     */
-    List?: Array<BaselineDownload>;
-    /**
-     * 总数
-     */
-    Total?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeMaliciousRequestWhiteList请求参数结构体
  */
 export interface DescribeMaliciousRequestWhiteListRequest {
@@ -24883,13 +24706,13 @@ export interface BaselineWeakPassword {
     ModifyTime?: string;
 }
 /**
- * DeleteBashPolicies请求参数结构体
+ * DescribeBanRegions请求参数结构体
  */
-export interface DeleteBashPoliciesRequest {
+export interface DescribeBanRegionsRequest {
     /**
-     * ID数组，最大100条。
+     * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
      */
-    Ids: Array<number | bigint>;
+    Mode: string;
 }
 /**
  * DescribeBashPolicies返回参数结构体

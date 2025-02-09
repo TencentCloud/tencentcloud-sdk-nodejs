@@ -3860,11 +3860,13 @@ export interface RemoteWrite {
   /**
    * 最大block
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   MaxBlockSize?: string
   /**
    * Label
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Label?: string
   /**
@@ -9952,20 +9954,20 @@ export interface PrometheusScrapeJob {
    * 任务名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * Agent ID
    */
-  AgentId: string
+  AgentId?: string
   /**
    * 任务 ID
    */
-  JobId: string
+  JobId?: string
   /**
    * 配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Config: string
+  Config?: string
 }
 
 /**

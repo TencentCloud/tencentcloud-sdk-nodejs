@@ -471,13 +471,13 @@ export interface SketchToImageRequest {
     /**
      * 线稿图 Base64 数据。
   Base64 和 Url 必须提供一个，如果都提供以Url 为准。
-  图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+  图片限制：黑白线稿图片，单边分辨率小于5000且大于128（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
      */
     InputImage?: string;
     /**
      * 线稿图 Url。
   Base64 和 Url 必须提供一个，如果都提供以Url 为准。
-  图片限制：黑白线稿图片，单边分辨率小于5000且大于512（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+  图片限制：黑白线稿图片，单边分辨率小于5000且大于128（分辨率过小会导致效果受损），转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
      */
     InputUrl?: string;
     /**

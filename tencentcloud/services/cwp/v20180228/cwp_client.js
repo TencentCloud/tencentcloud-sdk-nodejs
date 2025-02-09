@@ -34,14 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetPortInfoList", req, cb);
     }
     /**
-     * 接口已无效
-
-本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
-     */
-    async DescribeComponentStatistics(req, cb) {
-        return this.request("DescribeComponentStatistics", req, cb);
-    }
-    /**
      * 获取配置的aeskey和aesiv
      */
     async DescribeAESKey(req, cb) {
@@ -928,14 +920,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVertexDetail(req, cb) {
         return this.request("DescribeVertexDetail", req, cb);
-    }
-    /**
-     * DescribeAttackEvents 代替
-
-按分页形式展示网络攻击日志列表
-     */
-    async DescribeAttackLogs(req, cb) {
-        return this.request("DescribeAttackLogs", req, cb);
     }
     /**
      * 修改告警策略开关

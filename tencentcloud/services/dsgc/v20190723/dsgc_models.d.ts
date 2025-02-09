@@ -6677,21 +6677,25 @@ export interface UpdateDSPASelfBuildResourceRequest {
     /**
      * 资源绑定的端口，为0则表示不更新。
      */
-    ResourceVPort: number;
+    ResourceVPort?: number;
     /**
      * 账户名，为空则表示不更新。
   UserName和Password必须同时填写或同时为空。
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 账户密码，为空则表示不更新。
   UserName和Password必须同时填写或同时为空。
      */
-    Password: string;
+    Password?: string;
     /**
      * 授权范围：all 授权全部  manual：手动指定
      */
     AuthRange?: string;
+    /**
+     * 自建数据资产的名称，支持修改
+     */
+    ResourceName?: string;
 }
 /**
  * DescribeDSPAAssessmentTasks请求参数结构体

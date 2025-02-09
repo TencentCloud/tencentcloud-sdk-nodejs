@@ -2415,6 +2415,43 @@ export interface DescribeKeyPairsRequest {
  */
 export declare type DescribeCcnAttachedInstancesRequest = null;
 /**
+ * 实例支持IPv6详情描述。
+ */
+export interface SupportIpv6Detail {
+    /**
+     * 是否支持开启IPv6。
+     */
+    IsSupport?: boolean;
+    /**
+     * 详情。
+  
+  当IsSupport为True，Detail枚举值为:
+  
+  EFFECTIVE_IMMEDIATELY: 立即生效
+  
+  EFFECTIVE_AFTER_REBOOT: 分配过程需要开关机，用户需备份数据
+  
+   
+  
+  当IsSupport为False，Detail枚举值为:
+  
+  HAD_BEEN_ASSIGNED: 已分配IPv6地址
+  
+  REGION_NOT_SUPPORT: 地域不支持
+  
+  BLUEPRINT_NOT_SUPPORT: 镜像不支持
+  
+  BUNDLE_INSTANCE_NOT_SUPPORT: 套餐实例不支持
+  
+  BUNDLE_BANDWIDTH_NOT_SUPPORT: 套餐带宽不支持
+     */
+    Detail?: string;
+    /**
+     * 提示信息。
+     */
+    Message?: string;
+}
+/**
  * ApplyDiskBackup请求参数结构体
  */
 export interface ApplyDiskBackupRequest {
@@ -2602,6 +2639,14 @@ export interface Instance {
   <li>NORMAL实例正常。</li><li>NETWORK_RESTRICT：网络封禁。</li>
      */
     InstanceRestrictState?: string;
+    /**
+     * 描述实例是否支持IPv6。
+     */
+    SupportIpv6Detail?: SupportIpv6Detail;
+    /**
+     * 公网IPv6地址列表。
+     */
+    PublicIpv6Addresses?: Array<string>;
     /**
      * 创建实例后自动执行TAT命令的调用ID。
      */
@@ -3771,6 +3816,13 @@ export interface FirewallRule {
      */
     CidrBlock?: string;
     /**
+     * IPv6网段或IPv6地址(互斥)。
+  示例值：::/0。
+  
+  和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。
+     */
+    Ipv6CidrBlock?: string;
+    /**
      * 取值：ACCEPT，DROP。默认为 ACCEPT。
      */
     Action?: string;
@@ -3811,6 +3863,13 @@ export interface FirewallRuleInfo {
   和Ipv6CidrBlock互斥，两者都不指定时，如果Protocol不是ICMPv6，则取默认值0.0.0.0/0。
      */
     CidrBlock?: string;
+    /**
+     * IPv6网段或IPv6地址(互斥)。
+  示例值：::/0。
+  
+  和CidrBlock互斥，两者都不指定时，如果Protocol是ICMPv6，则取默认值::/0。
+     */
+    Ipv6CidrBlock?: string;
     /**
      * 取值：ACCEPT，DROP。默认为 ACCEPT。
      */

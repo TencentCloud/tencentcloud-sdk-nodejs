@@ -575,107 +575,17 @@ export interface DescribeAclRuleResponse {
     RequestId?: string;
 }
 /**
- * AddAcRule请求参数结构体
+ * DescribeNatFwInstanceWithRegion返回参数结构体
  */
-export interface AddAcRuleRequest {
+export interface DescribeNatFwInstanceWithRegionResponse {
     /**
-     * -1表示优先级最低，1表示优先级最高
+     * 实例数组
      */
-    OrderIndex: string;
+    NatinsLst?: Array<NatFwInstance>;
     /**
-     * 访问控制策略中设置的流量通过云防火墙的方式。取值：
-  accept：放行
-  drop：拒绝
-  log：观察
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    RuleAction: string;
-    /**
-     * 访问控制策略的流量方向。取值：
-  in：外对内流量访问控制
-  out：内对外流量访问控制
-     */
-    Direction: string;
-    /**
-     * 访问控制策略的描述信息
-     */
-    Description: string;
-    /**
-     * 访问控制策略中的源地址类型。取值：
-  net：源IP或网段（IP或者CIDR）
-  location：源区域
-  template：云防火墙地址模板
-  instance：实例id
-  vendor：云厂商
-     */
-    SourceType: string;
-    /**
-     * 访问控制策略中的源地址。取值：
-  当SourceType为net时，SourceContent为源IP地址或者CIDR地址。
-  例如：1.1.1.0/24
-  
-  当SourceType为template时，SourceContent为源地址模板id。
-  
-  当SourceType为location时，SourceContent为源区域。
-  例如["BJ11", "ZB"]
-  
-  当SourceType为instance时，SourceContent为该实例id对应的公网ip。
-  例如ins-xxxxx
-  
-  当SourceType为vendor时，SourceContent为所选择厂商的公网ip列表。
-  例如：aws,huawei,tencent,aliyun,azure,all代表以上五个
-     */
-    SourceContent: string;
-    /**
-     * 访问控制策略中的目的地址类型。取值：
-  net：目的IP或者网段（IP或者CIDR）
-  location：源区域
-  template：云防火墙地址模板
-  instance：实例id
-  vendor：云厂商
-  domain: 域名或者ip
-     */
-    DestType: string;
-    /**
-     * 访问控制策略中的目的地址。取值：
-  当DestType为net时，DestContent为源IP地址或者CIDR地址。
-  例如：1.1.1.0/24
-  
-  当DestType为template时，DestContent为源地址模板id。
-  
-  当DestType为location时，DestContent为源区域。
-  例如["BJ11", "ZB"]
-  
-  当DestType为instance时，DestContent为该实例id对应的公网ip。
-  例如ins-xxxxx
-  
-  当DestType为domain时，DestContent为该实例id对应的域名规则。
-  例如*.qq.com
-  
-  当DestType为vendor时，DestContent为所选择厂商的公网ip列表。
-  例如：aws,huawei,tencent,aliyun,azure,all代表以上五个
-     */
-    DestContent: string;
-    /**
-     * 访问控制策略的端口。取值：
-  -1/-1：全部端口
-  80,443：80或者443
-     */
-    Port: string;
-    /**
-     * 访问控制策略中流量访问的协议类型。取值：TCP，目前互联网边界规则只能支持TCP，不传参数默认就是TCP
-     */
-    Protocol?: string;
-    /**
-     * 七层协议，取值：
-  HTTP/HTTPS
-  TLS/SSL
-     */
-    ApplicationName?: string;
-    /**
-     * 是否启用规则，默认为启用，取值：
-  true为启用，false为不启用
-     */
-    Enable?: string;
+    RequestId?: string;
 }
 /**
  * DescribeTLogInfo请求参数结构体
@@ -2266,13 +2176,21 @@ export interface DescribeSwitchListsRequest {
     By?: string;
 }
 /**
- * ModifyEdgeIpSwitch返回参数结构体
+ * Nat防火墙弹性公网ip列表
  */
-export interface ModifyEdgeIpSwitchResponse {
+export interface NatFwEipsInfo {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 弹性公网ip
      */
-    RequestId?: string;
+    Eip?: string;
+    /**
+     * 所属的Nat网关Id
+     */
+    NatGatewayId?: string;
+    /**
+     * Nat网关名称
+     */
+    NatGatewayName?: string;
 }
 /**
  * AddAclRule返回参数结构体
@@ -3616,23 +3534,6 @@ export interface CreateBlockIgnoreRuleNewResponse {
     RequestId?: string;
 }
 /**
- * Nat防火墙弹性公网ip列表
- */
-export interface NatFwEipsInfo {
-    /**
-     * 弹性公网ip
-     */
-    Eip?: string;
-    /**
-     * 所属的Nat网关Id
-     */
-    NatGatewayId?: string;
-    /**
-     * Nat网关名称
-     */
-    NatGatewayName?: string;
-}
-/**
  * AddNatAcRule请求参数结构体
  */
 export interface AddNatAcRuleRequest {
@@ -4364,13 +4265,9 @@ export interface DescribeResourceGroupNewResponse {
     RequestId?: string;
 }
 /**
- * DescribeNatFwInstanceWithRegion返回参数结构体
+ * ModifyEdgeIpSwitch返回参数结构体
  */
-export interface DescribeNatFwInstanceWithRegionResponse {
-    /**
-     * 实例数组
-     */
-    NatinsLst?: Array<NatFwInstance>;
+export interface ModifyEdgeIpSwitchResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4764,13 +4661,17 @@ export interface DescribeFwSyncStatusResponse {
     RequestId?: string;
 }
 /**
- * DeleteNatFwInstance请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface DescribeBlockByIpTimesListResponse {
     /**
-     * 防火墙实例id
+     * 返回数据
      */
-    CfwInstance: string;
+    Data?: Array<IpStatic>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyAllRuleStatus请求参数结构体
@@ -5404,27 +5305,6 @@ export interface RemoveAcRuleRequest {
     RuleUuid: number;
 }
 /**
- * AddAcRule返回参数结构体
- */
-export interface AddAcRuleResponse {
-    /**
-     * 创建成功后返回新策略的uuid
-     */
-    RuleUuid?: number;
-    /**
-     * 0代表成功，-1代表失败
-     */
-    ReturnCode?: number;
-    /**
-     * success代表成功，failed代表失败
-     */
-    ReturnMsg?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * VPC防火墙(组)四种开关展示
  */
 export interface FwGroupSwitchShow {
@@ -5780,17 +5660,13 @@ export interface RemoveAclRuleResponse {
     RequestId?: string;
 }
 /**
- * DescribeBlockByIpTimesList返回参数结构体
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface DescribeBlockByIpTimesListResponse {
+export interface DeleteNatFwInstanceRequest {
     /**
-     * 返回数据
+     * 防火墙实例id
      */
-    Data?: Array<IpStatic>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    CfwInstance: string;
 }
 /**
  * ModifyVpcFwSequenceRules请求参数结构体

@@ -102,7 +102,7 @@ export interface CreateDBInstanceRequest {
    * 实例密码。设置要求如下：
 - 字符个数为[8,32]。
 - 可输入[A,Z]、[a,z]、[0,9]范围内的字符。
-- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#“、百分号”%”、插入号“^”、星号“*”、括号“()”、下划线“_”。
+- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“\_”。
 - 不能设置单一的字母或者数字。
    */
   Password?: string
@@ -280,7 +280,7 @@ export interface KillOpsRequest {
  */
 export interface InquirePriceRenewDBInstancesRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vn****。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
+   * 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
    */
   InstanceIds: Array<string>
   /**
@@ -602,11 +602,11 @@ export interface DescribeSecurityGroupRequest {
  */
 export interface RenameInstanceRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * 实例ID，格式如：cmgo-p8vnipr5。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
    */
   InstanceId: string
   /**
-   * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
+   * 自定义实例名称，要求为1～128 长度的任意字符。
    */
   NewName: string
 }
@@ -2544,7 +2544,11 @@ export interface CreateDBInstanceHourRequest {
    */
   SubnetId?: string
   /**
-   * 实例密码。自定义密码长度为8-32个字符，至少包含字母、数字和字符（!@#%^*()_）中的两种。
+   * 实例密码。设置要求如下：
+- 字符个数为[8,32]。
+- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。
+- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“_”。
+- 不能设置单一的字母或者数字。
    */
   Password?: string
   /**
@@ -2671,7 +2675,7 @@ export interface SetBackupRulesRequest {
  */
 export interface AssignProjectRequest {
   /**
-   * 实例ID列表，格式如：cmgo-p8vn****。与云数据库控制台页面中显示的实例ID相同
+   * 实例 ID 列表，请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceIds: Array<string>
   /**
@@ -2722,19 +2726,19 @@ export interface SpecificationInfo {
   /**
    * 地域信息
    */
-  Region: string
+  Region?: string
   /**
    * 可用区信息
    */
-  Zone: string
+  Zone?: string
   /**
    * 售卖规格信息
    */
-  SpecItems: Array<SpecItem>
+  SpecItems?: Array<SpecItem>
   /**
    * 是否支持跨可用区部署 1-支持，0-不支持
    */
-  SupportMultiAZ: number
+  SupportMultiAZ?: number
 }
 
 /**
@@ -3381,7 +3385,9 @@ export interface InstanceChargePrepaid {
  */
 export interface RenewDBInstancesRequest {
   /**
-   * 一个或多个待操作的实例ID。可通过DescribeInstances接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
+   * 指定续费的一个或多个待操作的实例ID。
+- 可通过[DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568)接口返回值中的**InstanceIds**获取。
+- 每次续费请求的实例数量上限为100。
    */
   InstanceIds: Array<string>
   /**

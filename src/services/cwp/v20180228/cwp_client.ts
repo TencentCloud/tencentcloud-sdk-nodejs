@@ -82,7 +82,6 @@ import {
   DescribeRaspMaxCpuRequest,
   MalWareList,
   WebHookPolicy,
-  ModifyFileTamperRuleStatusResponse,
   DescribeAssetUserInfoResponse,
   DescribeRansomDefenseStrategyListRequest,
   DescribeMachineClearHistoryRequest,
@@ -111,7 +110,7 @@ import {
   DescribeWebPageGeneralizeResponse,
   DescribeAssetWebLocationPathListRequest,
   BroadcastInfo,
-  DefendAttackLog,
+  DeleteLoginWhiteListRequest,
   DeleteRiskDnsEventRequest,
   PrivilegeEventInfo,
   RuleInfo,
@@ -132,6 +131,7 @@ import {
   DescribeBaselineDetectListResponse,
   DescribeNetAttackSettingResponse,
   ReverseShellRule,
+  DescribeAESKeyResponse,
   DescribeBashRulesResponse,
   DescribeAvailableExpertServiceDetailResponse,
   DescribeLogStorageConfigRequest,
@@ -144,12 +144,12 @@ import {
   DescribeRansomDefenseMachineListRequest,
   ExportAssetCoreModuleListRequest,
   ModifyReverseShellRulesAggregationRequest,
-  DescribeComponentStatisticsResponse,
+  ExportAssetMachineDetailResponse,
   ProtectDirRelatedServer,
   ModifyNetAttackWhiteListResponse,
   PolicyRules,
   DescribeMachineRegionsRequest,
-  DescribeAttackLogsRequest,
+  ExportWebPageEventListResponse,
   ModifyMachineAutoClearConfigRequest,
   ModifyEventAttackStatusRequest,
   DeleteRaspRulesResponse,
@@ -224,7 +224,6 @@ import {
   DeleteLoginWhiteListResponse,
   DescribeVertexDetailResponse,
   DeleteRiskDnsEventResponse,
-  DescribeAttackLogsResponse,
   ModifyLoginWhiteRecordRequest,
   ModifyRiskDnsPolicyResponse,
   DescribeScanTaskDetailsRequest,
@@ -303,7 +302,7 @@ import {
   HistoryAccount,
   DescribeStrategyExistResponse,
   DeleteReverseShellEventsRequest,
-  DescribeBanRegionsRequest,
+  DeleteBashPoliciesRequest,
   ExportAssetAppListResponse,
   DescribeLogTypeRequest,
   DescribeVulTopResponse,
@@ -332,7 +331,7 @@ import {
   AssetWebAppPluginInfo,
   DeletePrivilegeRulesRequest,
   RansomDefenseStrategyDetail,
-  ExportWebPageEventListResponse,
+  ModifyBaselinePolicyStateRequest,
   DescribeLicenseBindScheduleResponse,
   DescribeMalwareInfoRequest,
   DescribeVersionStatisticsRequest,
@@ -431,7 +430,7 @@ import {
   LoginWhiteCombinedInfo,
   ExportBaselineRuleDetectListRequest,
   SetLocalStorageExpireResponse,
-  DescribeBanRegionsResponse,
+  DescribeBaselineDownloadListResponse,
   RecoverMalwaresRequest,
   DescribeAssetTypeTopResponse,
   DescribeVulDefencePluginExceptionCountRequest,
@@ -586,7 +585,7 @@ import {
   ProtectMachineInfo,
   DescribeBaselineFixListResponse,
   CreateRansomDefenseStrategyRequest,
-  DeleteLoginWhiteListRequest,
+  DescribeMalwareFileRequest,
   DescribeLicenseListRequest,
   CreateMalwareWhiteListRequest,
   ModifyLicenseUnBindsRequest,
@@ -648,7 +647,6 @@ import {
   BashEvent,
   DeleteMalwaresRequest,
   RecoverMalwaresResponse,
-  ModifyBaselinePolicyStateRequest,
   DeleteBaselineRuleRequest,
   PrivilegeRule,
   WebHookHostLabel,
@@ -679,7 +677,6 @@ import {
   BaselineItemInfo,
   NetAttackTrend,
   DescribeVertexDetailRequest,
-  ComponentStatistics,
   ExportAssetWebServiceInfoListRequest,
   SetBashEventsStatusResponse,
   ProtectMachine,
@@ -798,7 +795,7 @@ import {
   DescribeLogKafkaDeliverInfoRequest,
   DescribeBaselineWeakPasswordListResponse,
   DeleteNonlocalLoginPlacesResponse,
-  ExportAssetMachineDetailResponse,
+  ModifyFileTamperRuleStatusResponse,
   ModifyLogKafkaAccessResponse,
   DeleteMalwareScanTaskResponse,
   BaselineRule,
@@ -809,7 +806,7 @@ import {
   ExportIgnoreRuleEffectHostListResponse,
   ScreenRegionInfo,
   DescribeBaselinePolicyListResponse,
-  DeleteBashPoliciesResponse,
+  DescribeBanRegionsResponse,
   DescribeLogStorageRecordResponse,
   DeletePrivilegeEventsResponse,
   DescribeMachineInfoResponse,
@@ -828,7 +825,6 @@ import {
   DescribeVulInfoCvssRequest,
   RegionInfo,
   DescribeFileTamperRulesResponse,
-  DescribeComponentStatisticsRequest,
   DescribeAssetProcessCountRequest,
   ModifyBanStatusResponse,
   DescribeLoginWhiteListResponse,
@@ -914,12 +910,11 @@ import {
   DescribeAssetWebAppCountRequest,
   DescribeAssetTypesRequest,
   BaselineEventLevelInfo,
-  DescribeMalwareFileRequest,
   DescribeLoginWhiteCombinedListRequest,
   Strategy,
   AddLoginWhiteListsRequest,
   DeleteSearchTemplateResponse,
-  DescribeAESKeyResponse,
+  DeleteBashPoliciesResponse,
   DescribeEmergencyResponseListResponse,
   ProtectHostConfig,
   ScreenProtectionCnt,
@@ -1034,7 +1029,6 @@ import {
   DescribePrivilegeRulesResponse,
   DescribeReverseShellEventsResponse,
   DescribeAssetAppCountRequest,
-  DescribeBaselineDownloadListResponse,
   DescribeMaliciousRequestWhiteListRequest,
   NetAttackTopInfo,
   DescribeBashEventsNewRequest,
@@ -1137,7 +1131,7 @@ import {
   DescribeMachinesSimpleRequest,
   StopBaselineDetectResponse,
   BaselineWeakPassword,
-  DeleteBashPoliciesRequest,
+  DescribeBanRegionsRequest,
   DescribeBashPoliciesResponse,
   SecurityEventInfo,
   MachineSnapshotInfo,
@@ -1330,18 +1324,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetPortInfoListResponse) => void
   ): Promise<DescribeAssetPortInfoListResponse> {
     return this.request("DescribeAssetPortInfoList", req, cb)
-  }
-
-  /**
-     * 接口已无效
-
-本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
-     */
-  async DescribeComponentStatistics(
-    req: DescribeComponentStatisticsRequest,
-    cb?: (error: string, rep: DescribeComponentStatisticsResponse) => void
-  ): Promise<DescribeComponentStatisticsResponse> {
-    return this.request("DescribeComponentStatistics", req, cb)
   }
 
   /**
@@ -2822,18 +2804,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVertexDetailResponse) => void
   ): Promise<DescribeVertexDetailResponse> {
     return this.request("DescribeVertexDetail", req, cb)
-  }
-
-  /**
-     * DescribeAttackEvents 代替
-
-按分页形式展示网络攻击日志列表
-     */
-  async DescribeAttackLogs(
-    req: DescribeAttackLogsRequest,
-    cb?: (error: string, rep: DescribeAttackLogsResponse) => void
-  ): Promise<DescribeAttackLogsResponse> {
-    return this.request("DescribeAttackLogs", req, cb)
   }
 
   /**

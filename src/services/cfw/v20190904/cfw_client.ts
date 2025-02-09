@@ -47,7 +47,7 @@ import {
   ModifyAssetScanResponse,
   ModifyNatSequenceRulesRequest,
   DescribeAclRuleResponse,
-  AddAcRuleRequest,
+  DescribeNatFwInstanceWithRegionResponse,
   DescribeTLogInfoRequest,
   BlockIgnoreRule,
   ModifyFwGroupSwitchResponse,
@@ -102,7 +102,7 @@ import {
   DeleteRemoteAccessDomainResponse,
   VpcFwInstanceInfo,
   DescribeSwitchListsRequest,
-  ModifyEdgeIpSwitchResponse,
+  NatFwEipsInfo,
   AddAclRuleResponse,
   DeleteRemoteAccessDomainRequest,
   SetNatFwEipResponse,
@@ -159,7 +159,6 @@ import {
   ModifySequenceAclRulesResponse,
   CreateAddressTemplateRequest,
   CreateBlockIgnoreRuleNewResponse,
-  NatFwEipsInfo,
   AddNatAcRuleRequest,
   ModifySecurityGroupSequenceRulesRequest,
   CreateDatabaseWhiteListRulesResponse,
@@ -192,7 +191,7 @@ import {
   DeleteIdsWhiteRuleResponse,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
-  DescribeNatFwInstanceWithRegionResponse,
+  ModifyEdgeIpSwitchResponse,
   DescribeResourceGroupNewRequest,
   DescribeAddressTemplateListRequest,
   RemoveAclRuleRequest,
@@ -204,7 +203,7 @@ import {
   DescribeNatFwDnatRuleResponse,
   ModifyNatFwVpcDnsSwitchRequest,
   DescribeFwSyncStatusResponse,
-  DeleteNatFwInstanceRequest,
+  DescribeBlockByIpTimesListResponse,
   ModifyAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
   VpcFwInstanceShow,
@@ -237,7 +236,6 @@ import {
   DescribeNatFwInfoCountRequest,
   BanAndAllowRule,
   RemoveAcRuleRequest,
-  AddAcRuleResponse,
   FwGroupSwitchShow,
   ModifyNatFwReSelectRequest,
   ModifyVpcFwSequenceRulesResponse,
@@ -250,7 +248,7 @@ import {
   DescribeBlockIgnoreListRequest,
   ModifyBlockTopResponse,
   RemoveAclRuleResponse,
-  DescribeBlockByIpTimesListResponse,
+  DeleteNatFwInstanceRequest,
   ModifyVpcFwSequenceRulesRequest,
   ModifyStorageSettingRequest,
   DescribeIdsWhiteRuleRequest,
@@ -971,18 +969,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifySequenceRulesResponse) => void
   ): Promise<ModifySequenceRulesResponse> {
     return this.request("ModifySequenceRules", req, cb)
-  }
-
-  /**
-     * 接口不再使用，已有新接口AddAclRule
-
-添加互联网边界规则
-     */
-  async AddAcRule(
-    req: AddAcRuleRequest,
-    cb?: (error: string, rep: AddAcRuleResponse) => void
-  ): Promise<AddAcRuleResponse> {
-    return this.request("AddAcRule", req, cb)
   }
 
   /**

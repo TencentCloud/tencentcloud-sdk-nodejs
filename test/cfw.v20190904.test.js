@@ -668,16 +668,6 @@ it("cfw.v20190904.ModifySequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.AddAcRule", async function () {
-    try {
-       const data = await client.AddAcRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.ModifySequenceAclRules", async function () {
     try {
        const data = await client.ModifySequenceAclRules({})

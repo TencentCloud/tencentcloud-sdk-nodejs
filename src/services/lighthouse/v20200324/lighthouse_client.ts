@@ -158,6 +158,7 @@ import {
   DescribeBlueprintsResponse,
   DescribeKeyPairsRequest,
   DescribeCcnAttachedInstancesRequest,
+  SupportIpv6Detail,
   ApplyDiskBackupRequest,
   ResetInstancesPasswordResponse,
   StartInstancesResponse,

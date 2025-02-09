@@ -1086,27 +1086,22 @@ export interface DeviceNetInfo {
     Type?: number;
     /**
      * 启用/禁用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataEnable?: boolean;
     /**
      * 上行限速
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UploadLimit?: string;
     /**
      * 下行限速
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownloadLimit?: string;
     /**
      * 接收实时速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataRx?: number;
     /**
      * 发送实时速率
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataTx?: number;
     /**
@@ -1114,7 +1109,6 @@ export interface DeviceNetInfo {
   1: 中国移动；
   2: 中国电信;
   3: 中国联通
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vendor?: number;
     /**
@@ -1122,17 +1116,14 @@ export interface DeviceNetInfo {
   0:无连接
   1:连接中
   2:已连接
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: number;
     /**
      * 公网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
      * 信号强度/单位：dbm
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SignalStrength?: number;
     /**
@@ -1142,7 +1133,6 @@ export interface DeviceNetInfo {
   3：3G
   4：4G
   5：5G
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rat?: number;
     /**

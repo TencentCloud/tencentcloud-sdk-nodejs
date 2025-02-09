@@ -2226,11 +2226,11 @@ export interface StorageFile {
      * 录制文件对应的UserId，如果是混流的话的这里返回的是空串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 录制索引文件名。
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 录制文件流信息。
   video：视频录制文件
@@ -2238,11 +2238,11 @@ export interface StorageFile {
   audio_video：音视频录制文件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrackType: string;
+    TrackType?: string;
     /**
      * 录制文件开始Unix时间戳。
      */
-    BeginTimeStamp: number;
+    BeginTimeStamp?: number;
 }
 /**
  * 水印布局参数
@@ -3330,11 +3330,11 @@ export interface DescribePictureResponse {
     /**
      * 返回的图片记录数
      */
-    Total: number;
+    Total?: number;
     /**
      * 图片信息列表
      */
-    PictureInfo: Array<PictureInfo>;
+    PictureInfo?: Array<PictureInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

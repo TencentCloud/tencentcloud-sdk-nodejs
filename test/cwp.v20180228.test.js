@@ -28,16 +28,6 @@ it("cwp.v20180228.DescribeAssetPortInfoList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeComponentStatistics", async function () {
-    try {
-       const data = await client.DescribeComponentStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeAESKey", async function () {
     try {
        const data = await client.DescribeAESKey({})
@@ -1511,16 +1501,6 @@ it("cwp.v20180228.DescribeVulTrend", async function () {
 it("cwp.v20180228.DescribeVertexDetail", async function () {
     try {
        const data = await client.DescribeVertexDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.DescribeAttackLogs", async function () {
-    try {
-       const data = await client.DescribeAttackLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
