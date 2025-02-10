@@ -48,9 +48,9 @@ it("ssl.v20191205.DescribeHostCdnInstanceList", async function () {
     }
 })
 
-it("ssl.v20191205.CheckCertificateDomainVerification", async function () {
+it("ssl.v20191205.CancelAuditCertificate", async function () {
     try {
-       const data = await client.CheckCertificateDomainVerification({})
+       const data = await client.CancelAuditCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("ssl.v20191205.DescribeHostDeployRecord", async function () {
 it("ssl.v20191205.DeleteManager", async function () {
     try {
        const data = await client.DeleteManager({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.CertificateInfoSubmit", async function () {
+    try {
+       const data = await client.CertificateInfoSubmit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +221,16 @@ it("ssl.v20191205.DescribeHostTeoInstanceList", async function () {
 it("ssl.v20191205.CancelCertificateOrder", async function () {
     try {
        const data = await client.CancelCertificateOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.CertificateOrderSubmit", async function () {
+    try {
+       const data = await client.CertificateOrderSubmit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +418,9 @@ it("ssl.v20191205.DescribeCertificateBindResourceTaskResult", async function () 
     }
 })
 
-it("ssl.v20191205.CancelAuditCertificate", async function () {
+it("ssl.v20191205.CheckCertificateDomainVerification", async function () {
     try {
-       const data = await client.CancelAuditCertificate({})
+       const data = await client.CheckCertificateDomainVerification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +488,9 @@ it("ssl.v20191205.DescribeDeployedResources", async function () {
     }
 })
 
-it("ssl.v20191205.CreateCertificateByPackage", async function () {
+it("ssl.v20191205.CreateCertificate", async function () {
     try {
-       const data = await client.CreateCertificateByPackage({})
+       const data = await client.CreateCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +558,9 @@ it("ssl.v20191205.DescribeHostApiGatewayInstanceList", async function () {
     }
 })
 
-it("ssl.v20191205.CreateCertificate", async function () {
+it("ssl.v20191205.CreateCertificateByPackage", async function () {
     try {
-       const data = await client.CreateCertificate({})
+       const data = await client.CreateCertificateByPackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

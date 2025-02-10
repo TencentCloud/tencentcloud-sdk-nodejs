@@ -90,6 +90,7 @@ import {
   ResourceTypeRegions,
   DeleteManagerRequest,
   DescribeHostUpdateRecordResponse,
+  CertificateOrderSubmitRequest,
   UpdateCertificateRecordRollbackResponse,
   DescribeHostVodInstanceListRequest,
   DescribeCertificateBindResourceTaskDetailResponse,
@@ -141,6 +142,7 @@ import {
   RevokeCertificateResponse,
   DeployedResources,
   ModifyCertificateProjectRequest,
+  DescribePackagesRequest,
   DeleteCertificatesRequest,
   DescribeHostVodInstanceListResponse,
   WafInstanceList,
@@ -173,6 +175,7 @@ import {
   DescribeCertificateOperateLogsResponse,
   DescribeHostLighthouseInstanceListRequest,
   DescribeHostCdnInstanceListRequest,
+  CertificateInfoSubmitResponse,
   DescribeHostTeoInstanceListResponse,
   DescribeHostWafInstanceListRequest,
   UploadRevokeLetterResponse,
@@ -198,9 +201,10 @@ import {
   UploadConfirmLetterRequest,
   SubmitCertificateInformationResponse,
   TCBEnvironments,
+  CertificateInfoSubmitRequest,
   ClbInstanceList,
   UpdateCertificateRecordRetryResponse,
-  DescribePackagesRequest,
+  CertificateOrderSubmitResponse,
   TCBHostService,
   CheckCertificateChainRequest,
   CheckCertificateExistRequest,
@@ -256,13 +260,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查证书域名验证
+   * 取消证书审核
    */
-  async CheckCertificateDomainVerification(
-    req: CheckCertificateDomainVerificationRequest,
-    cb?: (error: string, rep: CheckCertificateDomainVerificationResponse) => void
-  ): Promise<CheckCertificateDomainVerificationResponse> {
-    return this.request("CheckCertificateDomainVerification", req, cb)
+  async CancelAuditCertificate(
+    req: CancelAuditCertificateRequest,
+    cb?: (error: string, rep: CancelAuditCertificateResponse) => void
+  ): Promise<CancelAuditCertificateResponse> {
+    return this.request("CancelAuditCertificate", req, cb)
   }
 
   /**
@@ -303,6 +307,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteManagerResponse) => void
   ): Promise<DeleteManagerResponse> {
     return this.request("DeleteManager", req, cb)
+  }
+
+  /**
+   * 付费提交证书资料
+   */
+  async CertificateInfoSubmit(
+    req: CertificateInfoSubmitRequest,
+    cb?: (error: string, rep: CertificateInfoSubmitResponse) => void
+  ): Promise<CertificateInfoSubmitResponse> {
+    return this.request("CertificateInfoSubmit", req, cb)
   }
 
   /**
@@ -430,6 +444,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelCertificateOrderResponse) => void
   ): Promise<CancelCertificateOrderResponse> {
     return this.request("CancelCertificateOrder", req, cb)
+  }
+
+  /**
+   * 提交付费证书订单
+   */
+  async CertificateOrderSubmit(
+    req: CertificateOrderSubmitRequest,
+    cb?: (error: string, rep: CertificateOrderSubmitResponse) => void
+  ): Promise<CertificateOrderSubmitResponse> {
+    return this.request("CertificateOrderSubmit", req, cb)
   }
 
   /**
@@ -613,13 +637,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消证书审核
+   * 检查证书域名验证
    */
-  async CancelAuditCertificate(
-    req: CancelAuditCertificateRequest,
-    cb?: (error: string, rep: CancelAuditCertificateResponse) => void
-  ): Promise<CancelAuditCertificateResponse> {
-    return this.request("CancelAuditCertificate", req, cb)
+  async CheckCertificateDomainVerification(
+    req: CheckCertificateDomainVerificationRequest,
+    cb?: (error: string, rep: CheckCertificateDomainVerificationResponse) => void
+  ): Promise<CheckCertificateDomainVerificationResponse> {
+    return this.request("CheckCertificateDomainVerification", req, cb)
   }
 
   /**
@@ -683,13 +707,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用权益点创建证书
+   * 本接口（CreateCertificate）用于创建付费证书。
    */
-  async CreateCertificateByPackage(
-    req: CreateCertificateByPackageRequest,
-    cb?: (error: string, rep: CreateCertificateByPackageResponse) => void
-  ): Promise<CreateCertificateByPackageResponse> {
-    return this.request("CreateCertificateByPackage", req, cb)
+  async CreateCertificate(
+    req: CreateCertificateRequest,
+    cb?: (error: string, rep: CreateCertificateResponse) => void
+  ): Promise<CreateCertificateResponse> {
+    return this.request("CreateCertificate", req, cb)
   }
 
   /**
@@ -753,13 +777,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCertificate）用于创建付费证书。
+   * 使用权益点创建证书
    */
-  async CreateCertificate(
-    req: CreateCertificateRequest,
-    cb?: (error: string, rep: CreateCertificateResponse) => void
-  ): Promise<CreateCertificateResponse> {
-    return this.request("CreateCertificate", req, cb)
+  async CreateCertificateByPackage(
+    req: CreateCertificateByPackageRequest,
+    cb?: (error: string, rep: CreateCertificateByPackageResponse) => void
+  ): Promise<CreateCertificateByPackageResponse> {
+    return this.request("CreateCertificateByPackage", req, cb)
   }
 
   /**

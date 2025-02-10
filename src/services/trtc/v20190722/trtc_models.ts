@@ -580,7 +580,6 @@ export interface AbnormalEvent {
   AbnormalEventId?: number
   /**
    * 远端用户ID,""：表示异常事件不是由远端用户产生
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeerId?: string
 }
@@ -2952,7 +2951,7 @@ export interface DeleteCloudRecordingResponse {
   /**
    * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3106,7 +3105,6 @@ export interface QualityData {
   UserId?: string
   /**
    * 对端Id,为空时表示上行数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PeerId?: string
   /**
@@ -3648,7 +3646,7 @@ export interface ModifyCloudRecordingResponse {
   /**
    * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

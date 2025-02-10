@@ -531,7 +531,7 @@ export interface CreateDisksRequest {
    */
   ThroughputPerformance?: number
   /**
-   * 云硬盘大小，单位为GB。<br><li>如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小</li><br><li>如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小</li><br><li>云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。</li>
+   * 云硬盘大小，单位为GiB。<br><li>如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小</li><br><li>如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小</li><br><li>云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。</li>
    */
   DiskSize?: number
   /**
@@ -834,7 +834,7 @@ export interface Disk {
    */
   Attached?: boolean
   /**
-   * 云硬盘大小，单位GB。
+   * 云硬盘大小，单位GiB。
    */
   DiskSize?: number
   /**
@@ -916,6 +916,11 @@ export interface Disk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BurstPerformance?: boolean
+  /**
+   * 云硬盘加密类型，值为ENCRYPT_V1和ENCRYPT_V2，分别表示第一代和第二代加密技术，两种加密技术互不兼容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptType?: string
 }
 
 /**

@@ -18,64 +18,92 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  UpdateAuthorizationPolicyPriorityResponse,
-  UpdateAuthorizationPolicyPriorityRequest,
-  AuthorizationPolicyItem,
-  DeviceCertificateItem,
-  CreateJWTAuthenticatorResponse,
-  DeleteAuthorizationPolicyRequest,
-  ModifyJWKSAuthenticatorResponse,
-  RegisterDeviceCertificateResponse,
+  DeleteUserRequest,
   ModifyJWTAuthenticatorResponse,
-  DescribeAuthorizationPoliciesRequest,
-  DescribeTopicListRequest,
-  DescribeInstanceListRequest,
-  ModifyAuthorizationPolicyResponse,
-  CreateAuthorizationPolicyRequest,
+  UpdateAuthorizationPolicyPriorityRequest,
   ActivateDeviceCertificateRequest,
-  DescribeInstanceResponse,
+  CreateInstanceResponse,
+  DescribeAuthenticatorRequest,
+  ModifyJWTAuthenticatorRequest,
+  AuthorizationPolicyPriority,
+  ModifyInstanceRequest,
+  DeleteTopicRequest,
+  ModifyUserResponse,
+  DescribeDeviceCertificatesRequest,
+  DeleteAuthenticatorRequest,
+  PublicAccessRule,
+  VpcInfo,
+  DeleteAuthorizationPolicyResponse,
+  ModifyJWKSAuthenticatorRequest,
+  DeleteInstanceResponse,
+  RegisterDeviceCertificateResponse,
+  MQTTAuthenticatorItem,
+  Tag,
+  DescribeDeviceCertificateRequest,
+  MQTTInstanceItem,
+  DescribeInstanceListResponse,
+  ModifyInstanceResponse,
+  ModifyInsPublicEndpointResponse,
+  ModifyJWKSAuthenticatorResponse,
+  CreateInsPublicEndpointResponse,
+  CreateUserResponse,
+  CreateAuthorizationPolicyRequest,
   DescribeAuthenticatorResponse,
   DeleteDeviceCertificateRequest,
-  CreateTopicResponse,
-  ModifyJWTAuthenticatorRequest,
-  DescribeDeviceCertificateResponse,
-  RevokedDeviceCertificateRequest,
-  AuthorizationPolicyPriority,
-  CreateAuthorizationPolicyResponse,
+  DescribeInsPublicEndpointsRequest,
+  DeleteUserResponse,
   DeleteDeviceCertificateResponse,
-  CreateJWTAuthenticatorRequest,
-  DeleteTopicRequest,
+  ModifyAuthorizationPolicyResponse,
   CreateJWKSAuthenticatorRequest,
-  ModifyTopicResponse,
   DescribeTopicResponse,
-  DescribeDeviceCertificatesRequest,
   CreateJWKSAuthenticatorResponse,
-  DeleteAuthenticatorRequest,
   DescribeAuthorizationPoliciesResponse,
-  RegisterDeviceCertificateRequest,
   CreateTopicRequest,
-  MQTTTopicItem,
-  Filter,
-  DeleteAuthorizationPolicyResponse,
-  DescribeDeviceCertificatesResponse,
-  ModifyJWKSAuthenticatorRequest,
-  ModifyTopicRequest,
-  DescribeTopicListResponse,
-  DescribeAuthenticatorRequest,
-  MQTTInstanceItem,
-  RevokedDeviceCertificateResponse,
-  DeleteTopicResponse,
-  DeactivateDeviceCertificateResponse,
-  DescribeDeviceCertificateRequest,
-  DeactivateDeviceCertificateRequest,
-  DescribeInstanceRequest,
-  MQTTAuthenticatorItem,
-  DeleteAuthenticatorResponse,
   TagFilter,
-  ModifyAuthorizationPolicyRequest,
+  DescribeUserListResponse,
+  ModifyTopicResponse,
+  DeactivateDeviceCertificateResponse,
+  MQTTUserItem,
   ActivateDeviceCertificateResponse,
-  DescribeInstanceListResponse,
   DescribeTopicRequest,
+  UpdateAuthorizationPolicyPriorityResponse,
+  CreateTopicResponse,
+  DeleteInsPublicEndpointResponse,
+  MQTTEndpointItem,
+  DescribeTopicListRequest,
+  AuthorizationPolicyItem,
+  RevokedDeviceCertificateRequest,
+  CreateAuthorizationPolicyResponse,
+  CreateInstanceRequest,
+  CreateInsPublicEndpointRequest,
+  RegisterDeviceCertificateRequest,
+  Filter,
+  DeactivateDeviceCertificateRequest,
+  DescribeDeviceCertificatesResponse,
+  ModifyTopicRequest,
+  CreateUserRequest,
+  DescribeInstanceResponse,
+  DeleteInstanceRequest,
+  DescribeInsPublicEndpointsResponse,
+  ModifyInsPublicEndpointRequest,
+  DeleteInsPublicEndpointRequest,
+  DescribeUserListRequest,
+  CreateJWTAuthenticatorResponse,
+  DeleteAuthorizationPolicyRequest,
+  DescribeAuthorizationPoliciesRequest,
+  RevokedDeviceCertificateResponse,
+  DescribeDeviceCertificateResponse,
+  DescribeInstanceListRequest,
+  CreateJWTAuthenticatorRequest,
+  DeviceCertificateItem,
+  MQTTTopicItem,
+  ModifyAuthorizationPolicyRequest,
+  DescribeTopicListResponse,
+  DeleteTopicResponse,
+  DescribeInstanceRequest,
+  ModifyUserRequest,
+  DeleteAuthenticatorResponse,
+  IpRule,
 } from "./mqtt_models"
 
 /**
@@ -85,6 +113,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mqtt.tencentcloudapi.com", "2024-05-16", clientConfig)
+  }
+
+  /**
+   * 购买新的MQTT实例
+   */
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 为MQTT实例创建公网接入点
+   */
+  async CreateInsPublicEndpoint(
+    req: CreateInsPublicEndpointRequest,
+    cb?: (error: string, rep: CreateInsPublicEndpointResponse) => void
+  ): Promise<CreateInsPublicEndpointResponse> {
+    return this.request("CreateInsPublicEndpoint", req, cb)
   }
 
   /**
@@ -138,6 +186,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除MQTT实例
+   */
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
    * 修改MQTT JWKS 认证器
    */
   async ModifyJWTAuthenticator(
@@ -165,6 +223,38 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceCertificatesResponse) => void
   ): Promise<DescribeDeviceCertificatesResponse> {
     return this.request("DescribeDeviceCertificates", req, cb)
+  }
+
+  /**
+   * 查询MQTT实例公网接入点
+   */
+  async DescribeInsPublicEndpoints(
+    req: DescribeInsPublicEndpointsRequest,
+    cb?: (error: string, rep: DescribeInsPublicEndpointsResponse) => void
+  ): Promise<DescribeInsPublicEndpointsResponse> {
+    return this.request("DescribeInsPublicEndpoints", req, cb)
+  }
+
+  /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
+  }
+
+  /**
+   * 更新MQTT实例公网接入点
+   */
+  async ModifyInsPublicEndpoint(
+    req: ModifyInsPublicEndpointRequest,
+    cb?: (error: string, rep: ModifyInsPublicEndpointResponse) => void
+  ): Promise<ModifyInsPublicEndpointResponse> {
+    return this.request("ModifyInsPublicEndpoint", req, cb)
   }
 
   /**
@@ -205,6 +295,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuthorizationPoliciesResponse) => void
   ): Promise<DescribeAuthorizationPoliciesResponse> {
     return this.request("DescribeAuthorizationPolicies", req, cb)
+  }
+
+  /**
+   * 删除MQTT实例的公网接入点
+   */
+  async DeleteInsPublicEndpoint(
+    req: DeleteInsPublicEndpointRequest,
+    cb?: (error: string, rep: DeleteInsPublicEndpointResponse) => void
+  ): Promise<DeleteInsPublicEndpointResponse> {
+    return this.request("DeleteInsPublicEndpoint", req, cb)
   }
 
   /**
@@ -253,13 +353,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除MQTT主题
-   */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+  async DescribeTopicList(
+    req: DescribeTopicListRequest,
+    cb?: (error: string, rep: DescribeTopicListResponse) => void
+  ): Promise<DescribeTopicListResponse> {
+    return this.request("DescribeTopicList", req, cb)
   }
 
   /**
@@ -270,6 +373,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateJWKSAuthenticatorResponse) => void
   ): Promise<CreateJWKSAuthenticatorResponse> {
     return this.request("CreateJWKSAuthenticator", req, cb)
+  }
+
+  /**
+   * 修改MQTT角色
+   */
+  async ModifyUser(
+    req: ModifyUserRequest,
+    cb?: (error: string, rep: ModifyUserResponse) => void
+  ): Promise<ModifyUserResponse> {
+    return this.request("ModifyUser", req, cb)
+  }
+
+  /**
+   * 删除MQTT访问用户
+   */
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
   }
 
   /**
@@ -323,16 +446,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取主题列表，Filter参数使用说明如下：
+   * 添加mqtt角色
+   */
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
+  }
 
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-  async DescribeTopicList(
-    req: DescribeTopicListRequest,
-    cb?: (error: string, rep: DescribeTopicListResponse) => void
-  ): Promise<DescribeTopicListResponse> {
-    return this.request("DescribeTopicList", req, cb)
+  /**
+   * 删除MQTT主题
+   */
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
   }
 
   /**
@@ -343,5 +473,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuthorizationPolicyResponse) => void
   ): Promise<CreateAuthorizationPolicyResponse> {
     return this.request("CreateAuthorizationPolicy", req, cb)
+  }
+
+  /**
+   * 修改实例属性
+   */
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
   }
 }

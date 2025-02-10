@@ -914,6 +914,10 @@ export interface ModifyOutputInfo {
      * 输出类型：Internet/TencentCSS/StreamLive
      */
     OutputType?: string;
+    /**
+     * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+     */
+    PidSelector?: PidSelector;
 }
 /**
  * 点播文件指定时间点截图信息
@@ -5128,6 +5132,17 @@ export interface ComposeSourceMedia {
     EndTime?: string;
 }
 /**
+ * 智能标签任务控制参数
+ */
+export interface TagConfigureInfoForUpdate {
+    /**
+     * 智能标签任务开关，可选值：
+  <li>ON：开启智能标签任务；</li>
+  <li>OFF：关闭智能标签任务。</li>
+     */
+    Switch?: string;
+}
+/**
  * CreatePersonSample返回参数结构体
  */
 export interface CreatePersonSampleResponse {
@@ -5181,15 +5196,19 @@ export interface ComposeEmptyItem {
     Duration: string;
 }
 /**
- * 智能标签任务控制参数
+ * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
  */
-export interface TagConfigureInfoForUpdate {
+export interface PidSelector {
     /**
-     * 智能标签任务开关，可选值：
-  <li>ON：开启智能标签任务；</li>
-  <li>OFF：关闭智能标签任务。</li>
+     * 对于含有多音轨的流, 可以通过输入PID来指定需要使用的音轨，PID可以输入1到8191之间的正整数。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Switch?: string;
+    AudioPID?: Array<number | bigint>;
+    /**
+     * 对于含有多个视频轨的流，可以通过输入PID来指定需要使用的视频轨，PID可以输入1到8191之间的正整数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VideoPID?: Array<number | bigint>;
 }
 /**
  * DeleteWordSamples请求参数结构体
@@ -5772,6 +5791,10 @@ export interface CreateOutputInfo {
      * 输出的RIST的配置。
      */
     RISTSettings?: CreateOutputRistSettings;
+    /**
+     * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+     */
+    PidSelector?: PidSelector;
 }
 /**
  * 媒体处理输出对象信息。
@@ -9215,6 +9238,10 @@ export interface DescribeOutput {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RISTSettings?: DescribeOutputRISTSettings;
+    /**
+     * 对于含有多个音/视频轨的流，可以指定需要使用的轨道
+     */
+    PidSelector?: PidSelector;
 }
 /**
  * 直播 AI 内容审核声音鉴黄结果
@@ -10106,36 +10133,44 @@ export interface DescribeFlow {
     /**
      * 流Id。
      */
-    FlowId: string;
+    FlowId?: string;
     /**
      * 流名称。
      */
-    FlowName: string;
+    FlowName?: string;
     /**
      * 流状态，目前有IDLE/RUNNING。
      */
-    State: string;
+    State?: string;
     /**
      * 最大带宽值。
      */
-    MaxBandwidth: number;
+    MaxBandwidth?: number;
     /**
      * 输入组。
      */
-    InputGroup: Array<DescribeInput>;
+    InputGroup?: Array<DescribeInput>;
     /**
      * 输出组。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OutputGroup: Array<DescribeOutput>;
+    OutputGroup?: Array<DescribeOutput>;
     /**
      * 该Flow关联的媒体传输事件EventId。
      */
-    EventId: string;
+    EventId?: string;
     /**
      * 媒体传输输入流所属的区域，取值和InputRegion相同。
      */
-    Region: string;
+    Region?: string;
+    /**
+     * 该Flow允许创建的输入协议
+     */
+    AllowedInputProtocols?: Array<string>;
+    /**
+     * 该Flow允许创建的输出协议
+     */
+    AllowedOutputProtocols?: Array<string>;
 }
 /**
  * CreateVideoDatabaseEntryTask返回参数结构体

@@ -473,12 +473,10 @@ export interface InquirePriceRenewInstancesResponse {
     Price?: Price;
     /**
      * 数据盘价格信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataDiskPriceSet?: Array<DataDiskPrice>;
     /**
      * 待续费实例价格列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstancePriceDetailSet?: Array<InstancePriceDetail>;
     /**
@@ -2784,9 +2782,8 @@ export interface CreateFirewallTemplateResponse {
 export interface DescribeCcnAttachedInstancesResponse {
     /**
      * 云联网关联的实例列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CcnAttachedInstanceSet: Array<CcnAttachedInstance>;
+    CcnAttachedInstanceSet?: Array<CcnAttachedInstance>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

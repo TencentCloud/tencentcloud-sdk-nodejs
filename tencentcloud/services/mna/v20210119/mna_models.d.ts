@@ -1137,17 +1137,14 @@ export interface DeviceNetInfo {
     Rat?: number;
     /**
      * 网卡名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetInfoName?: string;
     /**
      * 下行实时速率（浮点数类型代替上一版本DataRx的整型）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DownRate?: number;
     /**
      * 上行实时速率（浮点数类型代替上一版本TxRate的整型）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpRate?: number;
 }
@@ -1258,27 +1255,22 @@ export interface GetHardwareListRequest {
 export interface FlowDetails {
     /**
      * 流量数据点
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetDetails?: Array<NetDetails>;
     /**
      * 设备ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceId?: string;
     /**
      * 流量最大值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxValue?: number;
     /**
      * 流量平均值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvgValue?: number;
     /**
      * 流量总值（单位：bytes）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalValue?: number;
 }

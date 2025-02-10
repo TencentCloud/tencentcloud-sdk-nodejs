@@ -770,6 +770,14 @@ export interface SearchSessionRequest {
    * 若入参为Id，则其他入参字段不作为搜索依据，仅按照Id来搜索会话
    */
   Id?: string
+  /**
+   * 应用资产类型, 1-web
+   */
+  AppAssetKindSet?: Array<number | bigint>
+  /**
+   * 应用资产Url
+   */
+  AppAssetUrl?: string
 }
 
 /**
@@ -1157,6 +1165,92 @@ export interface ModifyCmdTemplateRequest {
 }
 
 /**
+ * 搜索字符或图形会话时返回的SessionResul结构体
+ */
+export interface SessionResult {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 姓名
+   */
+  RealName?: string
+  /**
+   * 主机账号
+   */
+  Account?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 会话大小
+   */
+  Size?: number
+  /**
+   * 设备ID
+   */
+  InstanceId?: string
+  /**
+   * 设备名
+   */
+  DeviceName?: string
+  /**
+   * 内部Ip
+   */
+  PrivateIp?: string
+  /**
+   * 外部Ip
+   */
+  PublicIp?: string
+  /**
+   * 来源Ip
+   */
+  FromIp?: string
+  /**
+   * 会话持续时长
+   */
+  Duration?: number
+  /**
+   * 该会话内命令数量 ，搜索图形会话时该字段无意义
+   */
+  Count?: number
+  /**
+   * 该会话内高危命令数，搜索图形时该字段无意义
+   */
+  DangerCount?: number
+  /**
+   * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
+   */
+  Status?: number
+  /**
+   * 会话Id
+   */
+  Id?: string
+  /**
+   * 设备所属的地域
+   */
+  ApCode?: string
+  /**
+   * 会话协议
+   */
+  Protocol?: string
+  /**
+   * 应用资产类型：1-web
+   */
+  AppAssetKind?: number
+  /**
+   * 应用资产url
+   */
+  AppAssetUrl?: string
+}
+
+/**
  * CreateUser返回参数结构体
  */
 export interface CreateUserResponse {
@@ -1168,6 +1262,88 @@ export interface CreateUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 应用资产信息
+ */
+export interface AppAsset {
+  /**
+   * 应用资产id
+   */
+  Id?: number
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 资产名称
+   */
+  Name?: string
+  /**
+   * 应用服务器id
+   */
+  DeviceId?: number
+  /**
+   * 应用服务器账号id
+   */
+  DeviceAccountId?: number
+  /**
+   * 应用资产类型。1-web应用
+   */
+  Kind?: number
+  /**
+   * 客户端工具路径
+   */
+  ClientAppPath?: string
+  /**
+   * 客户端工具类型
+   */
+  ClientAppKind?: string
+  /**
+   * 应用资产url
+   */
+  Url?: string
+  /**
+   * 托管状态。0-未托管，1-已托管
+   */
+  BindStatus?: number
+  /**
+   * 应用服务器实例id
+   */
+  DeviceInstanceId?: string
+  /**
+   * 应用服务器名称
+   */
+  DeviceName?: string
+  /**
+   * 应用服务器账号名称
+   */
+  DeviceAccountName?: string
+  /**
+   * 堡垒机实例id
+   */
+  ResourceId?: string
+  /**
+   * 堡垒机实例信息
+   */
+  Resource?: Resource
+  /**
+   * 网络域id
+   */
+  DomainId?: string
+  /**
+   * 网络域名称
+   */
+  DomainName?: string
+  /**
+   * 资产组信息
+   */
+  GroupSet?: Array<Group>
+  /**
+   * 资产所属部门
+   */
+  Department?: Department
 }
 
 /**
@@ -1280,6 +1456,10 @@ export interface CreateAclRequest {
    * 关联的资产ID集合
    */
   DeviceIdSet?: Array<number | bigint>
+  /**
+   * 关联的应用资产ID集合
+   */
+  AppAssetIdSet?: Array<number | bigint>
   /**
    * 关联的资产组ID
    */
@@ -1547,6 +1727,10 @@ export interface ModifyAclRequest {
    */
   DeviceIdSet?: Array<number | bigint>
   /**
+   * 关联的应用资产ID集合
+   */
+  AppAssetIdSet?: Array<number | bigint>
+  /**
    * 关联的资产组ID
    */
   DeviceGroupIdSet?: Array<number | bigint>
@@ -1778,6 +1962,10 @@ export interface DescribeUsersRequest {
    */
   AuthorizedDeviceIdSet?: Array<number | bigint>
   /**
+   * 查询具有指定应用资产ID访问权限的用户
+   */
+  AuthorizedAppAssetIdSet?: Array<number | bigint>
+  /**
    * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
    */
   AuthTypeSet?: Array<number | bigint>
@@ -1846,6 +2034,10 @@ export interface SearchSessionResponse {
    * 记录数
    */
   TotalCount?: number
+  /**
+   * 会话信息列表
+   */
+  SessionSet?: Array<SessionResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3429,6 +3621,10 @@ export interface Acl {
    * 是否允许记录键盘
    */
   AllowKeyboardLogger?: boolean
+  /**
+   * 关联的应用资产列表
+   */
+  AppAssetSet?: Array<AppAsset>
 }
 
 /**
@@ -3814,6 +4010,10 @@ export interface DescribeDeviceGroupMembersRequest {
    */
   Kind?: number
   /**
+   * 资产类型集合，1 - Linux，2 - Windows，3 - MySQL，4 - SQLServer
+   */
+  KindSet?: Array<number | bigint>
+  /**
    * 所属部门ID
    */
   DepartmentId?: string
@@ -3855,6 +4055,10 @@ export interface DescribeAclsRequest {
    * 有访问权限的资产ID集合
    */
   AuthorizedDeviceIdSet?: Array<number | bigint>
+  /**
+   * 有访问权限的应用资产ID集合
+   */
+  AuthorizedAppAssetIdSet?: Array<number | bigint>
   /**
    * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
    */

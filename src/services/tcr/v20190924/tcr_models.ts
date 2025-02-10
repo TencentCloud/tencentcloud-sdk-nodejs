@@ -4722,6 +4722,8 @@ export interface DescribeImagesRequest {
   Limit?: number
   /**
    * 页数，默认值为1
+补充说明：limit指的是每页的大小，offset指的是具体第几页。
+举例：limit 20 offset 1指的是1-20；limit 20 offset 2 指的是21-40；limit 30 offset 4 是指 90-120。
    */
   Offset?: number
   /**

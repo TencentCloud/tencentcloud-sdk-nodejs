@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCertificateBindResourceTaskDetailRequest, DescribeHostDdosInstanceListRequest, CompleteCertificateRequest, DownloadCertificateResponse, DescribeHostDeployRecordDetailResponse, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, VerifyManagerResponse, DescribeCertificateDetailRequest, CreateCertificateBindResourceSyncTaskResponse, DescribeDeployedResourcesRequest, UploadRevokeLetterRequest, DescribeCompaniesResponse, CheckCertificateChainResponse, DescribeHostCosInstanceListResponse, ModifyCertificateAliasRequest, DescribeManagerDetailRequest, SubmitCertificateInformationRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, ModifyCertificatesExpiringNotificationSwitchResponse, DescribeHostLiveInstanceListRequest, DescribeHostDdosInstanceListResponse, DeployCertificateRecordRetryRequest, ModifyCertificateResubmitRequest, DescribeCertificateResponse, DownloadCertificateRequest, DescribeHostTkeInstanceListResponse, DescribeCertificateBindResourceTaskResultRequest, ApplyCertificateResponse, DescribeHostDeployRecordRequest, CreateCertificateBindResourceSyncTaskRequest, UploadConfirmLetterResponse, DescribeHostUpdateRecordDetailRequest, ReplaceCertificateResponse, DescribeManagersResponse, DeleteCertificatesResponse, DescribeDeleteCertificatesTaskResultResponse, DeleteManagerRequest, DescribeHostUpdateRecordResponse, UpdateCertificateRecordRollbackResponse, DescribeHostVodInstanceListRequest, DescribeCertificateBindResourceTaskDetailResponse, DeployCertificateRecordRetryResponse, CheckCertificateDomainVerificationRequest, UpdateCertificateRecordRetryRequest, DescribeHostWafInstanceListResponse, DescribeDeployedResourcesResponse, CreateCertificateRequest, DescribeCertificatesResponse, CommitCertificateInformationResponse, DeleteManagerResponse, SubmitAuditManagerRequest, UploadCertificateResponse, DeployCertificateInstanceResponse, CreateCertificateByPackageResponse, DescribeCertificatesRequest, UpdateCertificateRecordRollbackRequest, DescribeHostClbInstanceListResponse, RevokeCertificateRequest, DescribeManagerDetailResponse, UploadCertificateRequest, CreateCertificateByPackageRequest, CommitCertificateInformationRequest, DescribeHostDeployRecordDetailRequest, UpdateCertificateInstanceRequest, ReplaceCertificateRequest, DescribeHostDeployRecordResponse, CheckCertificateDomainVerificationResponse, DescribeDownloadCertificateUrlResponse, DescribeHostTkeInstanceListRequest, DeployCertificateRecordRollbackRequest, DeleteCertificateResponse, RevokeCertificateResponse, ModifyCertificateProjectRequest, DeleteCertificatesRequest, DescribeHostVodInstanceListResponse, ModifyCertificatesExpiringNotificationSwitchRequest, DescribeHostUpdateRecordDetailResponse, DescribeDeleteCertificatesTaskResultRequest, DescribeHostUpdateRecordRequest, DescribeHostClbInstanceListRequest, VerifyManagerRequest, DescribeHostLiveInstanceListResponse, CheckCertificateExistResponse, DescribeHostApiGatewayInstanceListRequest, DescribeDownloadCertificateUrlRequest, DeployCertificateRecordRollbackResponse, DescribeHostCosInstanceListRequest, DescribeHostCdnInstanceListResponse, DeployCertificateInstanceRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, DescribeHostLighthouseInstanceListRequest, DescribeHostCdnInstanceListRequest, DescribeHostTeoInstanceListResponse, DescribeHostWafInstanceListRequest, UploadRevokeLetterResponse, CancelAuditCertificateRequest, ModifyCertificateResubmitResponse, SubmitAuditManagerResponse, UpdateCertificateInstanceResponse, DescribeCertificateRequest, ModifyCertificateAliasResponse, ApplyCertificateRequest, CreateCertificateResponse, DescribeHostApiGatewayInstanceListResponse, DescribeCertificateDetailResponse, DescribeCertificateBindResourceTaskResultResponse, DescribeHostTeoInstanceListRequest, UploadConfirmLetterRequest, SubmitCertificateInformationResponse, UpdateCertificateRecordRetryResponse, DescribePackagesRequest, CheckCertificateChainRequest, CheckCertificateExistRequest, DescribeCompaniesRequest, CancelAuditCertificateResponse, DescribePackagesResponse, DescribeManagersRequest, DescribeHostLighthouseInstanceListResponse, CompleteCertificateResponse } from "./ssl_models";
+import { DescribeCertificateBindResourceTaskDetailRequest, DescribeHostDdosInstanceListRequest, CompleteCertificateRequest, DownloadCertificateResponse, DescribeHostDeployRecordDetailResponse, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, VerifyManagerResponse, DescribeCertificateDetailRequest, CreateCertificateBindResourceSyncTaskResponse, DescribeDeployedResourcesRequest, UploadRevokeLetterRequest, DescribeCompaniesResponse, CheckCertificateChainResponse, DescribeHostCosInstanceListResponse, ModifyCertificateAliasRequest, DescribeManagerDetailRequest, SubmitCertificateInformationRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, ModifyCertificatesExpiringNotificationSwitchResponse, DescribeHostLiveInstanceListRequest, DescribeHostDdosInstanceListResponse, DeployCertificateRecordRetryRequest, ModifyCertificateResubmitRequest, DescribeCertificateResponse, DownloadCertificateRequest, DescribeHostTkeInstanceListResponse, DescribeCertificateBindResourceTaskResultRequest, ApplyCertificateResponse, DescribeHostDeployRecordRequest, CreateCertificateBindResourceSyncTaskRequest, UploadConfirmLetterResponse, DescribeHostUpdateRecordDetailRequest, ReplaceCertificateResponse, DescribeManagersResponse, DeleteCertificatesResponse, DescribeDeleteCertificatesTaskResultResponse, DeleteManagerRequest, DescribeHostUpdateRecordResponse, CertificateOrderSubmitRequest, UpdateCertificateRecordRollbackResponse, DescribeHostVodInstanceListRequest, DescribeCertificateBindResourceTaskDetailResponse, DeployCertificateRecordRetryResponse, CheckCertificateDomainVerificationRequest, UpdateCertificateRecordRetryRequest, DescribeHostWafInstanceListResponse, DescribeDeployedResourcesResponse, CreateCertificateRequest, DescribeCertificatesResponse, CommitCertificateInformationResponse, DeleteManagerResponse, SubmitAuditManagerRequest, UploadCertificateResponse, DeployCertificateInstanceResponse, CreateCertificateByPackageResponse, DescribeCertificatesRequest, UpdateCertificateRecordRollbackRequest, DescribeHostClbInstanceListResponse, RevokeCertificateRequest, DescribeManagerDetailResponse, UploadCertificateRequest, CreateCertificateByPackageRequest, CommitCertificateInformationRequest, DescribeHostDeployRecordDetailRequest, UpdateCertificateInstanceRequest, ReplaceCertificateRequest, DescribeHostDeployRecordResponse, CheckCertificateDomainVerificationResponse, DescribeDownloadCertificateUrlResponse, DescribeHostTkeInstanceListRequest, DeployCertificateRecordRollbackRequest, DeleteCertificateResponse, RevokeCertificateResponse, ModifyCertificateProjectRequest, DescribePackagesRequest, DeleteCertificatesRequest, DescribeHostVodInstanceListResponse, ModifyCertificatesExpiringNotificationSwitchRequest, DescribeHostUpdateRecordDetailResponse, DescribeDeleteCertificatesTaskResultRequest, DescribeHostUpdateRecordRequest, DescribeHostClbInstanceListRequest, VerifyManagerRequest, DescribeHostLiveInstanceListResponse, CheckCertificateExistResponse, DescribeHostApiGatewayInstanceListRequest, DescribeDownloadCertificateUrlRequest, DeployCertificateRecordRollbackResponse, DescribeHostCosInstanceListRequest, DescribeHostCdnInstanceListResponse, DeployCertificateInstanceRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, DescribeHostLighthouseInstanceListRequest, DescribeHostCdnInstanceListRequest, CertificateInfoSubmitResponse, DescribeHostTeoInstanceListResponse, DescribeHostWafInstanceListRequest, UploadRevokeLetterResponse, CancelAuditCertificateRequest, ModifyCertificateResubmitResponse, SubmitAuditManagerResponse, UpdateCertificateInstanceResponse, DescribeCertificateRequest, ModifyCertificateAliasResponse, ApplyCertificateRequest, CreateCertificateResponse, DescribeHostApiGatewayInstanceListResponse, DescribeCertificateDetailResponse, DescribeCertificateBindResourceTaskResultResponse, DescribeHostTeoInstanceListRequest, UploadConfirmLetterRequest, SubmitCertificateInformationResponse, CertificateInfoSubmitRequest, UpdateCertificateRecordRetryResponse, CertificateOrderSubmitResponse, CheckCertificateChainRequest, CheckCertificateExistRequest, DescribeCompaniesRequest, CancelAuditCertificateResponse, DescribePackagesResponse, DescribeManagersRequest, DescribeHostLighthouseInstanceListResponse, CompleteCertificateResponse } from "./ssl_models";
 /**
  * ssl client
  * @class
@@ -20,9 +20,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeHostCdnInstanceList(req: DescribeHostCdnInstanceListRequest, cb?: (error: string, rep: DescribeHostCdnInstanceListResponse) => void): Promise<DescribeHostCdnInstanceListResponse>;
     /**
-     * 检查证书域名验证
+     * 取消证书审核
      */
-    CheckCertificateDomainVerification(req: CheckCertificateDomainVerificationRequest, cb?: (error: string, rep: CheckCertificateDomainVerificationResponse) => void): Promise<CheckCertificateDomainVerificationResponse>;
+    CancelAuditCertificate(req: CancelAuditCertificateRequest, cb?: (error: string, rep: CancelAuditCertificateResponse) => void): Promise<CancelAuditCertificateResponse>;
     /**
      * 查询证书tke云资源部署实例列表
      */
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 删除管理人
      */
     DeleteManager(req: DeleteManagerRequest, cb?: (error: string, rep: DeleteManagerResponse) => void): Promise<DeleteManagerResponse>;
+    /**
+     * 付费提交证书资料
+     */
+    CertificateInfoSubmit(req: CertificateInfoSubmitRequest, cb?: (error: string, rep: CertificateInfoSubmitResponse) => void): Promise<CertificateInfoSubmitResponse>;
     /**
      * 获取下载证书链接
      */
@@ -94,6 +98,10 @@ export declare class Client extends AbstractClient {
      * 取消证书订单。
      */
     CancelCertificateOrder(req: CancelCertificateOrderRequest, cb?: (error: string, rep: CancelCertificateOrderResponse) => void): Promise<CancelCertificateOrderResponse>;
+    /**
+     * 提交付费证书订单
+     */
+    CertificateOrderSubmit(req: CertificateOrderSubmitRequest, cb?: (error: string, rep: CertificateOrderSubmitResponse) => void): Promise<CertificateOrderSubmitResponse>;
     /**
      * 本接口（DownloadCertificate）用于下载证书。
      */
@@ -167,9 +175,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCertificateBindResourceTaskResult(req: DescribeCertificateBindResourceTaskResultRequest, cb?: (error: string, rep: DescribeCertificateBindResourceTaskResultResponse) => void): Promise<DescribeCertificateBindResourceTaskResultResponse>;
     /**
-     * 取消证书审核
+     * 检查证书域名验证
      */
-    CancelAuditCertificate(req: CancelAuditCertificateRequest, cb?: (error: string, rep: CancelAuditCertificateResponse) => void): Promise<CancelAuditCertificateResponse>;
+    CheckCertificateDomainVerification(req: CheckCertificateDomainVerificationRequest, cb?: (error: string, rep: CheckCertificateDomainVerificationResponse) => void): Promise<CheckCertificateDomainVerificationResponse>;
     /**
      * 根据证书内容检测当前账号下是否存在一致的证书， 存在则返回证书ID， 不存在则返回空
      */
@@ -195,9 +203,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeployedResources(req: DescribeDeployedResourcesRequest, cb?: (error: string, rep: DescribeDeployedResourcesResponse) => void): Promise<DescribeDeployedResourcesResponse>;
     /**
-     * 使用权益点创建证书
+     * 本接口（CreateCertificate）用于创建付费证书。
      */
-    CreateCertificateByPackage(req: CreateCertificateByPackageRequest, cb?: (error: string, rep: CreateCertificateByPackageResponse) => void): Promise<CreateCertificateByPackageResponse>;
+    CreateCertificate(req: CreateCertificateRequest, cb?: (error: string, rep: CreateCertificateResponse) => void): Promise<CreateCertificateResponse>;
     /**
      * 本接口（UploadConfirmLetter）用于上传证书确认函。
      */
@@ -223,9 +231,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeHostApiGatewayInstanceList(req: DescribeHostApiGatewayInstanceListRequest, cb?: (error: string, rep: DescribeHostApiGatewayInstanceListResponse) => void): Promise<DescribeHostApiGatewayInstanceListResponse>;
     /**
-     * 本接口（CreateCertificate）用于创建付费证书。
+     * 使用权益点创建证书
      */
-    CreateCertificate(req: CreateCertificateRequest, cb?: (error: string, rep: CreateCertificateResponse) => void): Promise<CreateCertificateResponse>;
+    CreateCertificateByPackage(req: CreateCertificateByPackageRequest, cb?: (error: string, rep: CreateCertificateByPackageResponse) => void): Promise<CreateCertificateByPackageResponse>;
     /**
      * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口
      */

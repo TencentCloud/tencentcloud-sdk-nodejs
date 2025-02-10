@@ -2393,6 +2393,24 @@ export interface DescribeHostUpdateRecordResponse {
 }
 
 /**
+ * CertificateOrderSubmit请求参数结构体
+ */
+export interface CertificateOrderSubmitRequest {
+  /**
+   * 证书 ID。
+   */
+  CertId: string
+  /**
+   * 是否删除自动DNS验证值：0，不删除； 1，删除； 默认不删除
+   */
+  DeleteDnsAutoRecord?: number
+  /**
+   * 域名验证方式：DNS_AUTO 自动DNS验证， DNS DNS验证， FILE 文件验证
+   */
+  VerifyType?: string
+}
+
+/**
  * UpdateCertificateRecordRollback返回参数结构体
  */
 export interface UpdateCertificateRecordRollbackResponse {
@@ -3709,6 +3727,40 @@ export interface ModifyCertificateProjectRequest {
 }
 
 /**
+ * DescribePackages请求参数结构体
+ */
+export interface DescribePackagesRequest {
+  /**
+   * 偏移量，默认0。
+   */
+  Offset?: number
+  /**
+   * 限制数目，默认20。
+   */
+  Limit?: number
+  /**
+   * 按状态筛选。
+   */
+  Status?: string
+  /**
+   * 按过期时间升序或降序排列。
+   */
+  ExpireTime?: string
+  /**
+   * 按权益包ID搜索。
+   */
+  PackageId?: string
+  /**
+   * 按权益包类型搜索。
+   */
+  Type?: string
+  /**
+   * 子产品编号
+   */
+  Pid?: number
+}
+
+/**
  * DeleteCertificates请求参数结构体
  */
 export interface DeleteCertificatesRequest {
@@ -4539,6 +4591,16 @@ export interface DescribeHostCdnInstanceListRequest {
 }
 
 /**
+ * CertificateInfoSubmit返回参数结构体
+ */
+export interface CertificateInfoSubmitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHostTeoInstanceList返回参数结构体
  */
 export interface DescribeHostTeoInstanceListResponse {
@@ -5311,6 +5373,164 @@ export interface TCBEnvironments {
 }
 
 /**
+ * CertificateInfoSubmit请求参数结构体
+ */
+export interface CertificateInfoSubmitRequest {
+  /**
+   * 证书 ID。
+   */
+  CertId: string
+  /**
+   * CSR 生成方式：online = 在线生成, upload = 手动上传。
+   */
+  GenCsrType: string
+  /**
+   * 绑定证书的主域名。
+   */
+  CertCommonName: string
+  /**
+   * 组织信息类型：1，个人； 2， 公司；
+   */
+  CompanyType: number
+  /**
+   * 公司证件类型（）
+   */
+  OrgIdType: string
+  /**
+   * 公司证件号码
+   */
+  OrgIdNumber: string
+  /**
+   * 管理人证件类型
+   */
+  AdminIdType: string
+  /**
+   * 管理人证件号码
+   */
+  AdminIdNumber: string
+  /**
+   * 联系人证件类型
+   */
+  TechIdType: string
+  /**
+   * 联系人证件号码
+   */
+  TechIdNumber: string
+  /**
+   * 公司ID
+   */
+  CompanyId: string
+  /**
+   * 上传的 CSR 内容。如果GenCsrType为upload则该字段必传
+   */
+  Csr?: string
+  /**
+   * 域名数组（多域名证书可以上传）。
+   */
+  DnsNames?: Array<string>
+  /**
+   * 私钥密码（非必填）。
+   */
+  KeyPass?: string
+  /**
+   * 公司名称。
+   */
+  OrgOrganization?: string
+  /**
+   * 部门名称。
+   */
+  OrgDivision?: string
+  /**
+   * 公司详细地址。
+   */
+  OrgAddress?: string
+  /**
+   * 国家名称，如中国：CN 。
+   */
+  OrgCountry?: string
+  /**
+   * 公司所在城市。
+   */
+  OrgCity?: string
+  /**
+   * 公司所在省份。
+   */
+  OrgRegion?: string
+  /**
+   * 公司座机区号。
+   */
+  OrgPhoneArea?: string
+  /**
+   * 公司座机号码。
+   */
+  OrgPhoneNumber?: string
+  /**
+   * 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
+   */
+  VerifyType?: string
+  /**
+   * 管理人名。
+   */
+  AdminFirstName?: string
+  /**
+   * 管理人姓。
+   */
+  AdminLastName?: string
+  /**
+   * 管理人手机号码。
+   */
+  AdminPhone?: string
+  /**
+   * 管理人邮箱地址。
+   */
+  AdminEmail?: string
+  /**
+   * 管理人职位。
+   */
+  AdminTitle?: string
+  /**
+   * 联系人名。
+   */
+  TechFirstName?: string
+  /**
+   * 联系人姓。
+   */
+  TechLastName?: string
+  /**
+   * 联系人邮箱地址。
+   */
+  ContactEmail?: string
+  /**
+   * 是否开启自动续费： 0， 不开启；  1， 开启； 默认为0
+   */
+  AutoRenewFlag?: number
+  /**
+   * 证书加密参数
+   */
+  CsrKeyParameter?: string
+  /**
+   * 证书加密方式
+   */
+  CsrEncryptAlgo?: string
+  /**
+   * 管理人ID
+   */
+  ManagerId?: string
+  /**
+   * 联系人电话
+   */
+  TechPhone?: string
+  /**
+   * 联系人邮箱
+   */
+  TechEmail?: string
+  /**
+   * 联系人职位
+   */
+  TechTitle?: string
+}
+
+/**
  * clb实例详情 - 异步关联云资源数据结构
  */
 export interface ClbInstanceList {
@@ -5345,37 +5565,25 @@ export interface UpdateCertificateRecordRetryResponse {
 }
 
 /**
- * DescribePackages请求参数结构体
+ * CertificateOrderSubmit返回参数结构体
  */
-export interface DescribePackagesRequest {
+export interface CertificateOrderSubmitResponse {
   /**
-   * 偏移量，默认0。
+   * CA机构侧订单号。
    */
-  Offset?: number
+  OrderId?: string
   /**
-   * 限制数目，默认20。
+   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。
    */
-  Limit?: number
+  Status?: number
   /**
-   * 按状态筛选。
+   * 是否预审核
    */
-  Status?: string
+  IsAudited?: boolean
   /**
-   * 按过期时间升序或降序排列。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ExpireTime?: string
-  /**
-   * 按权益包ID搜索。
-   */
-  PackageId?: string
-  /**
-   * 按权益包类型搜索。
-   */
-  Type?: string
-  /**
-   * 子产品编号
-   */
-  Pid?: number
+  RequestId?: string
 }
 
 /**

@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostCdnInstanceList", req, cb);
     }
     /**
-     * 检查证书域名验证
+     * 取消证书审核
      */
-    async CheckCertificateDomainVerification(req, cb) {
-        return this.request("CheckCertificateDomainVerification", req, cb);
+    async CancelAuditCertificate(req, cb) {
+        return this.request("CancelAuditCertificate", req, cb);
     }
     /**
      * 查询证书tke云资源部署实例列表
@@ -74,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteManager(req, cb) {
         return this.request("DeleteManager", req, cb);
+    }
+    /**
+     * 付费提交证书资料
+     */
+    async CertificateInfoSubmit(req, cb) {
+        return this.request("CertificateInfoSubmit", req, cb);
     }
     /**
      * 获取下载证书链接
@@ -153,6 +159,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CancelCertificateOrder(req, cb) {
         return this.request("CancelCertificateOrder", req, cb);
+    }
+    /**
+     * 提交付费证书订单
+     */
+    async CertificateOrderSubmit(req, cb) {
+        return this.request("CertificateOrderSubmit", req, cb);
     }
     /**
      * 本接口（DownloadCertificate）用于下载证书。
@@ -263,10 +275,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificateBindResourceTaskResult", req, cb);
     }
     /**
-     * 取消证书审核
+     * 检查证书域名验证
      */
-    async CancelAuditCertificate(req, cb) {
-        return this.request("CancelAuditCertificate", req, cb);
+    async CheckCertificateDomainVerification(req, cb) {
+        return this.request("CheckCertificateDomainVerification", req, cb);
     }
     /**
      * 根据证书内容检测当前账号下是否存在一致的证书， 存在则返回证书ID， 不存在则返回空
@@ -305,10 +317,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeployedResources", req, cb);
     }
     /**
-     * 使用权益点创建证书
+     * 本接口（CreateCertificate）用于创建付费证书。
      */
-    async CreateCertificateByPackage(req, cb) {
-        return this.request("CreateCertificateByPackage", req, cb);
+    async CreateCertificate(req, cb) {
+        return this.request("CreateCertificate", req, cb);
     }
     /**
      * 本接口（UploadConfirmLetter）用于上传证书确认函。
@@ -347,10 +359,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostApiGatewayInstanceList", req, cb);
     }
     /**
-     * 本接口（CreateCertificate）用于创建付费证书。
+     * 使用权益点创建证书
      */
-    async CreateCertificate(req, cb) {
-        return this.request("CreateCertificate", req, cb);
+    async CreateCertificateByPackage(req, cb) {
+        return this.request("CreateCertificateByPackage", req, cb);
     }
     /**
      * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）、cos。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口

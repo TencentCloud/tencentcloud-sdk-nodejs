@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("mqtt.tencentcloudapi.com", "2024-05-16", clientConfig);
     }
     /**
+     * 购买新的MQTT实例
+     */
+    async CreateInstance(req, cb) {
+        return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 为MQTT实例创建公网接入点
+     */
+    async CreateInsPublicEndpoint(req, cb) {
+        return this.request("CreateInsPublicEndpoint", req, cb);
+    }
+    /**
      * 修改主题属性
      */
     async ModifyTopic(req, cb) {
@@ -58,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDeviceCertificate", req, cb);
     }
     /**
+     * 删除MQTT实例
+     */
+    async DeleteInstance(req, cb) {
+        return this.request("DeleteInstance", req, cb);
+    }
+    /**
      * 修改MQTT JWKS 认证器
      */
     async ModifyJWTAuthenticator(req, cb) {
@@ -74,6 +92,26 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDeviceCertificates(req, cb) {
         return this.request("DescribeDeviceCertificates", req, cb);
+    }
+    /**
+     * 查询MQTT实例公网接入点
+     */
+    async DescribeInsPublicEndpoints(req, cb) {
+        return this.request("DescribeInsPublicEndpoints", req, cb);
+    }
+    /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+    async DescribeUserList(req, cb) {
+        return this.request("DescribeUserList", req, cb);
+    }
+    /**
+     * 更新MQTT实例公网接入点
+     */
+    async ModifyInsPublicEndpoint(req, cb) {
+        return this.request("ModifyInsPublicEndpoint", req, cb);
     }
     /**
      * 注册设备证书
@@ -98,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAuthorizationPolicies(req, cb) {
         return this.request("DescribeAuthorizationPolicies", req, cb);
+    }
+    /**
+     * 删除MQTT实例的公网接入点
+     */
+    async DeleteInsPublicEndpoint(req, cb) {
+        return this.request("DeleteInsPublicEndpoint", req, cb);
     }
     /**
      * 查询设备证书详情接口
@@ -129,16 +173,31 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 删除MQTT主题
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
      */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
+    async DescribeTopicList(req, cb) {
+        return this.request("DescribeTopicList", req, cb);
     }
     /**
      * 创建一个jwks的认证
      */
     async CreateJWKSAuthenticator(req, cb) {
         return this.request("CreateJWKSAuthenticator", req, cb);
+    }
+    /**
+     * 修改MQTT角色
+     */
+    async ModifyUser(req, cb) {
+        return this.request("ModifyUser", req, cb);
+    }
+    /**
+     * 删除MQTT访问用户
+     */
+    async DeleteUser(req, cb) {
+        return this.request("DeleteUser", req, cb);
     }
     /**
      * 修改策略规则
@@ -171,19 +230,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAuthorizationPolicyPriority", req, cb);
     }
     /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     * 添加mqtt角色
      */
-    async DescribeTopicList(req, cb) {
-        return this.request("DescribeTopicList", req, cb);
+    async CreateUser(req, cb) {
+        return this.request("CreateUser", req, cb);
+    }
+    /**
+     * 删除MQTT主题
+     */
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
     }
     /**
      * 创建MQTT实例的性能测试任务
      */
     async CreateAuthorizationPolicy(req, cb) {
         return this.request("CreateAuthorizationPolicy", req, cb);
+    }
+    /**
+     * 修改实例属性
+     */
+    async ModifyInstance(req, cb) {
+        return this.request("ModifyInstance", req, cb);
     }
 }
 exports.Client = Client;

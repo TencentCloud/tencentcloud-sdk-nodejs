@@ -522,9 +522,8 @@ export interface CreateLifeCycleRulesRequest {
 export interface CreateAccessRulesResponse {
     /**
      * 权限规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccessRules: Array<AccessRule>;
+    AccessRules?: Array<AccessRule>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -589,12 +588,10 @@ export interface FileSystem {
     PosixAcl?: boolean;
     /**
      * 是否打开Ranger地址校验
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableRanger?: boolean;
     /**
      * Ranger地址列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RangerServiceAddresses?: Array<string>;
 }

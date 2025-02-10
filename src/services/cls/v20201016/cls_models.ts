@@ -3650,8 +3650,9 @@ export interface CreateTopicRequest {
    */
   StorageType?: string
   /**
-   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存。
-不传此值，默认获取该日志主题对应日志集的Period值（当获取失败时默认为30天）。
+   * 存储时间，单位天。
+- 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。
+- 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。
    */
   Period?: number
   /**
@@ -3664,6 +3665,12 @@ export interface CreateTopicRequest {
 仅在StorageType为 hot 时生效。
    */
   HotPeriod?: number
+  /**
+   * 主题自定义ID，格式为：用户自定义部分-APPID。未填写该参数时将自动生成ID。
+- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符
+- APPID可在https://console.cloud.tencent.com/developer页面查询
+   */
+  TopicId?: string
   /**
    * 免鉴权开关。 false：关闭； true：开启。默认为false。
 开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。

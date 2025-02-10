@@ -7035,57 +7035,69 @@ export interface TextVehicleFront {
    * 号牌号码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlateNo: string
+  PlateNo?: string
   /**
    * 车辆类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VehicleType: string
+  VehicleType?: string
   /**
    * 所有人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Owner: string
+  Owner?: string
   /**
    * 住址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
    * 使用性质
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UseCharacter: string
+  UseCharacter?: string
   /**
    * 品牌型号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Model: string
+  Model?: string
   /**
    * 车辆识别代号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vin: string
+  Vin?: string
   /**
    * 发动机号码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineNo: string
+  EngineNo?: string
   /**
    * 注册日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegisterDate: string
+  RegisterDate?: string
   /**
    * 发证日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IssueDate: string
+  IssueDate?: string
   /**
    * 印章
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Seal: string
+  Seal?: string
+  /**
+   * 状态
+   */
+  StateElectronic?: string
+  /**
+   * 检验有效期
+   */
+  InspectionValidityTimeElectronic?: string
+  /**
+   * 生成时间
+   */
+  GenerationTimeElectronic?: string
 }
 
 /**
