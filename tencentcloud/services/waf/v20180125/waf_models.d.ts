@@ -6526,6 +6526,14 @@ export interface InstanceInfo {
      * 实例延期释放标识
      */
     FreeDelayFlag?: number;
+    /**
+     * 最近3天最大qps
+     */
+    Last3MaxQPS?: number;
+    /**
+     * 最近3天最大带宽
+     */
+    Last3MaxBandwidth?: number;
 }
 /**
  * DescribeUserSignatureRuleV2返回参数结构体

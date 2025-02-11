@@ -625,7 +625,6 @@ export interface LoginOriginIdRequest {
 export interface BatchRegisterResponse {
     /**
      * 注册成功的用户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Users?: Array<BatchUserInfo>;
     /**
@@ -1884,7 +1883,6 @@ export interface DescribeGroupMemberListRequest {
 export interface DescribeRoomForbiddenUserResponse {
     /**
      * 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MutedAccountList?: Array<MutedAccountList>;
     /**
@@ -1962,7 +1960,6 @@ export interface DescribeScoreListResponse {
     Total?: number;
     /**
      * 课堂评分列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Scores?: Array<ClassScoreItem>;
     /**
@@ -2418,7 +2415,6 @@ export interface DescribeSdkAppIdUsersResponse {
     Total?: number;
     /**
      * 当前获取用户信息数组列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Users?: Array<UserInfo>;
     /**

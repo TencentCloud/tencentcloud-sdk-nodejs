@@ -147,7 +147,7 @@ export class Client extends AbstractClient {
    * 用于查询特定文档的详细信息。 使用场景：当需要查看某个文档的具体内容和属性时使用。
    */
   async DescribeDoc(
-    req?: DescribeDocRequest,
+    req: DescribeDocRequest,
     cb?: (error: string, rep: DescribeDocResponse) => void
   ): Promise<DescribeDocResponse> {
     return this.request("DescribeDoc", req, cb)
@@ -167,7 +167,7 @@ export class Client extends AbstractClient {
    * 用于删除已有的文档。 使用场景：当某个文档不再需要时，可以将其删除以保持文档库的整洁。
    */
   async DeleteDocs(
-    req?: DeleteDocsRequest,
+    req: DeleteDocsRequest,
     cb?: (error: string, rep: DeleteDocsResponse) => void
   ): Promise<DeleteDocsResponse> {
     return this.request("DeleteDocs", req, cb)
@@ -177,7 +177,7 @@ export class Client extends AbstractClient {
    * 用于删除已有的问答对。 使用场景：当某个问答对不再适用或需要移除时使用。
    */
   async DeleteQAs(
-    req?: DeleteQAsRequest,
+    req: DeleteQAsRequest,
     cb?: (error: string, rep: DeleteQAsResponse) => void
   ): Promise<DeleteQAsResponse> {
     return this.request("DeleteQAs", req, cb)
@@ -229,7 +229,7 @@ export class Client extends AbstractClient {
    * 用于获取所有问答对的列表。 使用场景：用于查看当前系统中所有已有的问答对，方便进行管理和维护。
    */
   async ListQAs(
-    req?: ListQAsRequest,
+    req: ListQAsRequest,
     cb?: (error: string, rep: ListQAsResponse) => void
   ): Promise<ListQAsResponse> {
     return this.request("ListQAs", req, cb)
@@ -239,7 +239,7 @@ export class Client extends AbstractClient {
    * 用于删除不再需要的属性标签。 使用场景：当某个标签不再使用时，可以将其删除以保持标签系统的整洁。
    */
   async DeleteAttributeLabels(
-    req?: DeleteAttributeLabelsRequest,
+    req: DeleteAttributeLabelsRequest,
     cb?: (error: string, rep: DeleteAttributeLabelsResponse) => void
   ): Promise<DeleteAttributeLabelsResponse> {
     return this.request("DeleteAttributeLabels", req, cb)
@@ -272,7 +272,7 @@ export class Client extends AbstractClient {
    * 用于获取所有属性标签的列表。 使用场景：用于查看当前系统中所有已有的属性标签，方便进行管理和维护。
    */
   async ListAttributeLabels(
-    req?: ListAttributeLabelsRequest,
+    req: ListAttributeLabelsRequest,
     cb?: (error: string, rep: ListAttributeLabelsResponse) => void
   ): Promise<ListAttributeLabelsResponse> {
     return this.request("ListAttributeLabels", req, cb)
@@ -282,7 +282,7 @@ export class Client extends AbstractClient {
    * 用于获取所有文档的列表。 使用场景：用于查看当前系统中所有已有的文档，方便进行管理和维护。
    */
   async ListDocs(
-    req?: ListDocsRequest,
+    req: ListDocsRequest,
     cb?: (error: string, rep: ListDocsResponse) => void
   ): Promise<ListDocsResponse> {
     return this.request("ListDocs", req, cb)
@@ -302,7 +302,7 @@ export class Client extends AbstractClient {
    * 用于批量导入问答对，最多支持50,000条数据导入。通过此接口，可以将多个问答对一次性导入系统中，以便在后续的知识检索中使用。导入的问答对可以来自外部系统、文件或其他数据源。使用场景：当需要一次性导入大量的问答对时使用。例如，一个公司可能需要将其产品的常见问题解答从一个文档或外部系统批量导入到知识库中，以便用户可以通过知识检索系统进行查询。
    */
   async ImportQAs(
-    req?: ImportQAsRequest,
+    req: ImportQAsRequest,
     cb?: (error: string, rep: ImportQAsResponse) => void
   ): Promise<ImportQAsResponse> {
     return this.request("ImportQAs", req, cb)

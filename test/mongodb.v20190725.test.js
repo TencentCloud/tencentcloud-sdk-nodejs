@@ -28,6 +28,16 @@ it("mongodb.v20190725.TerminateDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeDBInstanceURL", async function () {
+    try {
+       const data = await client.DescribeDBInstanceURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstanceNodeProperty", async function () {
     try {
        const data = await client.DescribeDBInstanceNodeProperty({})

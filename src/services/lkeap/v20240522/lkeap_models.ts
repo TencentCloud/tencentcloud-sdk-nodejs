@@ -125,7 +125,20 @@ export interface RetrievalRecordMetadata {
 /**
  * ListQAs请求参数结构体
  */
-export type ListQAsRequest = null
+export interface ListQAsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 页码，默认1
+   */
+  PageNumber?: number
+  /**
+   * 每页数目，最大50，默认20
+   */
+  PageSize?: number
+}
 
 /**
  * ReconstructDocumentSSE返回参数结构体
@@ -173,6 +186,7 @@ export interface DocItem {
   /**
    *  状态，
 - Uploading  上传中  
+- Auditing 审核中
 - Parsing 解析中  
 - ParseFailed 解析失败
 - Indexing 创建索引中  
@@ -233,6 +247,31 @@ export type UploadDocRealtimeRequest = null
  */
 export interface DescribeDocResponse {
   /**
+   * 文档ID
+   */
+  DocId?: string
+  /**
+   * 状态，
+
+- Uploading  上传中  
+- Auditing 审核中
+- Parsing 解析中  
+- ParseFailed 解析失败
+- Indexing 创建索引中  
+- IndexFailed 创建索引失败
+- Success  发布成功
+- Failed  失败
+   */
+  Status?: string
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
    * 属性标签
    */
   AttributeLabels?: Array<AttributeLabelReferItem>
@@ -261,12 +300,37 @@ export interface AttributeLabelReferItem {
 /**
  * DeleteQAs请求参数结构体
  */
-export type DeleteQAsRequest = null
+export interface DeleteQAsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 问答对ID列表。支持批量删除，数量不超过100
+   */
+  QaIds: Array<string>
+}
 
 /**
  * ModifyQA请求参数结构体
  */
 export interface ModifyQARequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 问答对ID
+   */
+  QaId: string
+  /**
+   * 问题，最大1000个英文字符
+   */
+  Question: string
+  /**
+   * 答案，最大4000个英文字符
+   */
+  Answer: string
   /**
    * 属性标签
    */
@@ -309,6 +373,10 @@ export interface GetReconstructDocumentResultRequest {
  * ListQAs返回参数结构体
  */
 export interface ListQAsResponse {
+  /**
+   * 问答对总数量
+   */
+  TotalCount?: number
   /**
    * 问答对信息
    */
@@ -354,7 +422,20 @@ export interface RetrievalSetting {
 /**
  * ListDocs请求参数结构体
  */
-export type ListDocsRequest = null
+export interface ListDocsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 页码，默认1
+   */
+  PageNumber?: number
+  /**
+   * 每页数目，最大50，默认20
+   */
+  PageSize?: number
+}
 
 /**
  * CreateAttributeLabel返回参数结构体
@@ -414,6 +495,10 @@ export interface SegmentationConfig {
  */
 export interface CreateQAResponse {
   /**
+   * 问答对ID
+   */
+  QaId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -423,6 +508,22 @@ export interface CreateQAResponse {
  * ModifyAttributeLabel请求参数结构体
  */
 export interface ModifyAttributeLabelRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 属性ID
+   */
+  AttributeId: string
+  /**
+   * 属性标识，最大40个英文字符，如style
+   */
+  AttributeKey: string
+  /**
+   * 属性名称，最大80个英文字符，如风格
+   */
+  AttributeName: string
   /**
    * 属性标签
    */
@@ -484,6 +585,10 @@ export interface ReconstructDocumentSSEConfig {
  */
 export interface ListDocsResponse {
   /**
+   * 文档总数
+   */
+  TotalCount?: number
+  /**
    * 文档信息
    */
   List?: Array<DocItem>
@@ -515,12 +620,34 @@ export interface DocumentUsage {
 /**
  * ListAttributeLabels请求参数结构体
  */
-export type ListAttributeLabelsRequest = null
+export interface ListAttributeLabelsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 页码，默认1
+   */
+  PageNumber?: number
+  /**
+   * 每页数目，最大50，默认20
+   */
+  PageSize?: number
+}
 
 /**
  * DeleteAttributeLabels请求参数结构体
  */
-export type DeleteAttributeLabelsRequest = null
+export interface DeleteAttributeLabelsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 属性ID
+   */
+  AttributeIds: Array<string>
+}
 
 /**
  * RetrieveKnowledge请求参数结构体
@@ -709,6 +836,10 @@ export interface ReconstructDocumentSSERequest {
  */
 export interface ListAttributeLabelsResponse {
   /**
+   * 属性总数
+   */
+  TotalCount?: number
+  /**
    * 属性标签列表
    */
   List?: Array<AttributeItem>
@@ -757,6 +888,18 @@ export interface AttributeLabelItem {
  */
 export interface CreateAttributeLabelRequest {
   /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 属性标识，最大40个英文字符，如style
+   */
+  AttributeKey: string
+  /**
+   * 属性名称，最大80个英文字符，如风格
+   */
+  AttributeName: string
+  /**
    * 属性标签信息
    */
   Labels?: Array<AttributeLabelItem>
@@ -765,12 +908,39 @@ export interface CreateAttributeLabelRequest {
 /**
  * ImportQAs请求参数结构体
  */
-export type ImportQAsRequest = null
+export interface ImportQAsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 文件名
+   */
+  FileName: string
+  /**
+   * 文件的 Url 地址。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+导入模板：https://cdn.xiaowei.qq.com/lke/assets//static/批量导入问答模板v6.xlsx
+   */
+  FileUrl: string
+  /**
+   * 文件类型，仅支持XLSX格式，请使用模板
+   */
+  FileType?: string
+}
 
 /**
  * DescribeDoc请求参数结构体
  */
-export type DescribeDocRequest = null
+export interface DescribeDocRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 文档ID
+   */
+  DocId: string
+}
 
 /**
  * DeleteKnowledgeBase返回参数结构体
@@ -1187,6 +1357,18 @@ export interface DeleteKnowledgeBaseRequest {
  */
 export interface CreateQARequest {
   /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 问题，最大1000个英文字符
+   */
+  Question: string
+  /**
+   * 答案，最大4000个英文字符
+   */
+  Answer: string
+  /**
    * 属性标签
    */
   AttributeLabels?: Array<AttributeLabelReferItem>
@@ -1300,4 +1482,13 @@ export interface ChatCompletionsResponse {
 /**
  * DeleteDocs请求参数结构体
  */
-export type DeleteDocsRequest = null
+export interface DeleteDocsRequest {
+  /**
+   * 知识库ID
+   */
+  KnowledgeBaseId: string
+  /**
+   * 文档ID列表。支持批量删除，数量不超过100
+   */
+  DocIds: Array<string>
+}

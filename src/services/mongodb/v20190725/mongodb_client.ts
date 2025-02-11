@@ -92,6 +92,7 @@ import {
   NodeTag,
   InquirePriceCreateDBInstancesResponse,
   DescribeSecurityGroupResponse,
+  DescribeTransparentDataEncryptionStatusRequest,
   SecurityGroup,
   ReplicaSetInfo,
   ResetDBInstancePasswordResponse,
@@ -130,6 +131,7 @@ import {
   AssignProjectRequest,
   ModifyInstanceParamsRequest,
   CreateBackupDownloadTaskResponse,
+  DbURL,
   SpecificationInfo,
   DescribeSlowLogPatternsRequest,
   FlashbackCollection,
@@ -143,11 +145,12 @@ import {
   InquirePriceCreateDBInstancesRequest,
   DescribeInstanceParamsResponse,
   DescribeDBInstanceParamTplResponse,
-  DescribeTransparentDataEncryptionStatusRequest,
+  DescribeDBInstanceURLResponse,
   RemoveNodeList,
   RestartNodesRequest,
   SetInstanceMaintenanceRequest,
   RestartNodesResponse,
+  DescribeDBInstanceURLRequest,
   DescribeDBInstanceParamTplDetailRequest,
   InstanceDetail,
   ModifyDBInstanceSpecResponse,
@@ -172,6 +175,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateDBInstancesResponse) => void
   ): Promise<TerminateDBInstancesResponse> {
     return this.request("TerminateDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBInstanceURL）用于获取指定实例的 URI 形式的连接串访问地址示例。
+   */
+  async DescribeDBInstanceURL(
+    req: DescribeDBInstanceURLRequest,
+    cb?: (error: string, rep: DescribeDBInstanceURLResponse) => void
+  ): Promise<DescribeDBInstanceURLResponse> {
+    return this.request("DescribeDBInstanceURL", req, cb)
   }
 
   /**

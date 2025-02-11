@@ -1693,7 +1693,7 @@ export interface CloneSecurityGroupRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
 若指定Tags入参且指定IsCloneTags为true，会合并源安全组的标签和新增的标签。
    */
-  Tags?: Tag
+  Tags?: Array<Tag>
 }
 
 /**

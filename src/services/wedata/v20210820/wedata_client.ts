@@ -79,6 +79,7 @@ import {
   ThresholdValue,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
+  DescribeInstanceDetailInfoResponse,
   DescribeTemplateDimCountRequest,
   ModifyIntegrationTaskResponse,
   DescribeDataSourceListRequest,
@@ -723,6 +724,7 @@ import {
   OpsTaskCanvasDto,
   DescribeRuleTemplatesRequest,
   DescribeDataCheckStatResponse,
+  DescribeInstanceDetailInfoRequest,
   DescribeIntegrationStatisticsInstanceTrendRequest,
   DescribeDsFolderTreeResponse,
   PathNodeDsVO,
@@ -2161,6 +2163,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterEventListenerResponse) => void
   ): Promise<RegisterEventListenerResponse> {
     return this.request("RegisterEventListener", req, cb)
+  }
+
+  /**
+   * 实例详情页，返回某个实例所有生命周期信息
+   */
+  async DescribeInstanceDetailInfo(
+    req: DescribeInstanceDetailInfoRequest,
+    cb?: (error: string, rep: DescribeInstanceDetailInfoResponse) => void
+  ): Promise<DescribeInstanceDetailInfoResponse> {
+    return this.request("DescribeInstanceDetailInfo", req, cb)
   }
 
   /**

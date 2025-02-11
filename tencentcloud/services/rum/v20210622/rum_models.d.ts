@@ -448,6 +448,7 @@ export interface DescribeScoresRequest {
     ID?: number;
     /**
      * 该参数已废弃
+     * @deprecated
      */
     IsDemo?: number;
 }
@@ -2111,6 +2112,7 @@ export interface DescribeTawInstancesRequest {
     InstanceStatuses?: Array<number | bigint>;
     /**
      * 实例Id, 该参数已废弃，请在Filters内注明
+     * @deprecated
      */
     InstanceIds?: Array<string>;
     /**
@@ -2119,6 +2121,7 @@ export interface DescribeTawInstancesRequest {
     Filters?: Array<Filter>;
     /**
      * 该参数已废弃，demo模式请在Filters内注明
+     * @deprecated
      */
     IsDemo?: number;
 }
@@ -2586,6 +2589,7 @@ export interface DescribeProjectsRequest {
     Filters?: Array<Filter>;
     /**
      * 该参数已废弃，demo模式请在Filters内注明
+     * @deprecated
      */
     IsDemo?: number;
 }
@@ -3177,7 +3181,7 @@ export interface CreateReleaseFileResponse {
     /**
      * 调用结果
      */
-    Msg: string;
+    Msg?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

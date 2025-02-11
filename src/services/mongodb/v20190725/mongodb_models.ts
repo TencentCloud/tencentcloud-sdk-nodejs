@@ -1740,6 +1740,16 @@ export interface DescribeSecurityGroupResponse {
 }
 
 /**
+ * DescribeTransparentDataEncryptionStatus请求参数结构体
+ */
+export interface DescribeTransparentDataEncryptionStatusRequest {
+  /**
+   * 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * 安全组信息
  */
 export interface SecurityGroup {
@@ -2720,6 +2730,30 @@ export interface CreateBackupDownloadTaskResponse {
 }
 
 /**
+ * 数据库实例 URI 形式的连接串访问地址示例。
+ */
+export interface DbURL {
+  /**
+   * 指 URI 类别，包括：，
+- CLUSTER_ALL：指通过该 URI 连接库实例的主节点，可读写。
+- CLUSTER_READ_READONLY：指通过该 URI 连接实例只读节点。
+- CLUSTER_READ_SECONDARY：指通过该 URI 连接实例从节点。
+- CLUSTER_READ_SECONDARY_AND_READONLY：指通过该 URI 连接实例只读从节点。
+- CLUSTER_PRIMARY_AND_SECONDARY：指通过该 URI 连接实例 主节点与从节点。
+- MONGOS_ALL：指通过该  URI 连接每个 Mongos 节点，可读写。
+- MONGOS_READ_READONLY：指通过该 URI 连接 Mongos 的只读节点。
+- MONGOS_READ_SECONDARY：指通过该 URI 连接 Mongos 的从节点。
+- MONGOS_READ_PRIMARY_AND_SECONDARY：指通过该URI 连接 Mongos 的主节点与从节点。
+- MONGOS_READ_SECONDARY_AND_READONLY：指通过该URI 连接 Mongos 的从节点与只读节点。
+   */
+  URLType: string
+  /**
+   * 实例 URI 形式的连接串访问地址示例。
+   */
+  Address: string
+}
+
+/**
  * 实例规格信息
  */
 export interface SpecificationInfo {
@@ -3057,13 +3091,17 @@ export interface DescribeDBInstanceParamTplResponse {
 }
 
 /**
- * DescribeTransparentDataEncryptionStatus请求参数结构体
+ * DescribeDBInstanceURL返回参数结构体
  */
-export interface DescribeTransparentDataEncryptionStatusRequest {
+export interface DescribeDBInstanceURLResponse {
   /**
-   * 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 实例 URI 形式的连接串访问地址示例。包含：URI 类型及连接串地址。
    */
-  InstanceId: string
+  Urls?: Array<DbURL>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3139,6 +3177,16 @@ export interface RestartNodesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDBInstanceURL请求参数结构体
+ */
+export interface DescribeDBInstanceURLRequest {
+  /**
+   * 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb#/)在实例列表复制实例 ID。
+   */
+  InstanceId: string
 }
 
 /**

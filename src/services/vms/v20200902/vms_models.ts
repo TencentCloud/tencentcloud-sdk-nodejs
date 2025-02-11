@@ -22,7 +22,7 @@ export interface SendTtsVoiceResponse {
   /**
    * 语音通知发送状态。
    */
-  SendStatus: SendStatus
+  SendStatus?: SendStatus
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -36,7 +36,7 @@ export interface SendCodeVoiceResponse {
   /**
    * 语音验证码发送状态。
    */
-  SendStatus: SendStatus
+  SendStatus?: SendStatus
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -50,12 +50,12 @@ export interface SendStatus {
   /**
    * 标识本次发送 ID，标识一次下发记录。
    */
-  CallId: string
+  CallId?: string
   /**
    * 用户的 session 内容，腾讯 server 回包中会原样返回。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionContext: string
+  SessionContext?: string
 }
 
 /**

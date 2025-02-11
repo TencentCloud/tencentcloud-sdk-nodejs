@@ -862,6 +862,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterEventListener", req, cb);
     }
     /**
+     * 实例详情页，返回某个实例所有生命周期信息
+     */
+    async DescribeInstanceDetailInfo(req, cb) {
+        return this.request("DescribeInstanceDetailInfo", req, cb);
+    }
+    /**
      * 获取值班表列表
      */
     async DescribeDutyScheduleList(req, cb) {

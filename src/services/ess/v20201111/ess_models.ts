@@ -10108,33 +10108,27 @@ export interface CreateOrganizationInfoChangeUrlRequest {
 export interface DescribeOrganizationGroupOrganizationsResponse {
   /**
    * 符合查询条件的资源实例总数量。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 已授权待激活的子企业总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   JoinedTotal?: number
   /**
    * 已加入的企业数量(废弃,请使用ActivatedTotal)
-注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ActivedTotal?: number
   /**
    * 如果入参Export为 true 时使用，表示导出Excel的url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExportUrl?: string
   /**
    * 成员企业信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<GroupOrganization>
   /**
    * 已加入的子企业总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivatedTotal?: number
   /**

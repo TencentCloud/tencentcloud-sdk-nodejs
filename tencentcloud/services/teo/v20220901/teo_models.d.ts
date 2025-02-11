@@ -1338,8 +1338,7 @@ export interface CreateFunctionRuleRequest {
  */
 export interface RuleBranch {
     /**
-     * [匹配条件
-  ](https://cloud.tencent.com/document/product/1552/90438#33f65828-c6c6-4b66-a011-25a20b548d5d)。
+     * [匹配条件](https://cloud.tencent.com/document/product/1552/90438#33f65828-c6c6-4b66-a011-25a20b548d5d)。
      */
     Condition?: string;
     /**

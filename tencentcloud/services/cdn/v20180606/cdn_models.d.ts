@@ -2106,7 +2106,7 @@ export interface AwsPrivateAccess {
      */
     AccessKey?: string;
     /**
-     * 密钥。
+     * 密钥，字段为脱敏返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretKey?: string;
@@ -3637,7 +3637,7 @@ export interface QnPrivateAccess {
      */
     AccessKey?: string;
     /**
-     * 密钥
+     * 密钥，字段为脱敏返回。
      */
     SecretKey?: string;
 }
@@ -5016,7 +5016,7 @@ export interface OthersPrivateAccess {
      */
     AccessKey?: string;
     /**
-     * 密钥。
+     * 密钥，字段位脱敏返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretKey?: string;
@@ -7256,7 +7256,7 @@ export interface OssPrivateAccess {
      */
     AccessKey?: string;
     /**
-     * 密钥。
+     * 密钥，字段为脱敏返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretKey?: string;
@@ -9920,7 +9920,7 @@ export interface HwPrivateAccess {
      */
     AccessKey?: string;
     /**
-     * 密钥
+     * 密钥，字段为脱敏返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretKey?: string;

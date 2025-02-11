@@ -2159,6 +2159,19 @@ export interface DescribeFunctionKindsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceDetailInfo返回参数结构体
+ */
+export interface DescribeInstanceDetailInfoResponse {
+    /**
+     * 生命周期结果
+     */
+    Data?: Array<InstanceLifeCycleOpsDto>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTemplateDimCount请求参数结构体
  */
 export interface DescribeTemplateDimCountRequest {
@@ -22140,6 +22153,43 @@ export interface DescribeDataCheckStatResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeInstanceDetailInfo请求参数结构体
+ */
+export interface DescribeInstanceDetailInfoRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+    /**
+     * 实例数据时间
+     */
+    CurRunDate: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 实例的第几次执行
+     */
+    LifeRound?: number;
+    /**
+     * 生命周期查询起始index
+     */
+    LifeRoundStartIndex?: number;
+    /**
+     * 生命周期查询批次数量
+     */
+    LifeRoundSize?: number;
+    /**
+     * 生命周期总数，可省略
+     */
+    TotalLifeRound?: string;
+    /**
+     * 动态加载日志标识
+     */
+    Dynamic?: boolean;
 }
 /**
  * DescribeIntegrationStatisticsInstanceTrend请求参数结构体
