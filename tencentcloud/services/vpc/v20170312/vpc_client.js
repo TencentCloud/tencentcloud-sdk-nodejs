@@ -564,6 +564,12 @@ LimitTypes取值范围：
         return this.request("DescribeSnapshotAttachedInstances", req, cb);
     }
     /**
+     * 本接口（DeleteTrafficMirror）用于删除流量镜像实例。
+     */
+    async DeleteTrafficMirror(req, cb) {
+        return this.request("DeleteTrafficMirror", req, cb);
+    }
+    /**
      * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）。<br />
 本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
@@ -885,6 +891,12 @@ LimitTypes取值范围：
         return this.request("ModifyVpnGatewayRoutes", req, cb);
     }
     /**
+     * 检查流量镜像的采集端接收端（公网IP类型）
+     */
+    async CheckTrafficMirror(req, cb) {
+        return this.request("CheckTrafficMirror", req, cb);
+    }
+    /**
      * 本接口（ModifyIPv6AddressesBandwidth）用于调整弹性公网 IPv6（简称EIPv6）实例的带宽上限。
      */
     async ModifyIPv6AddressesBandwidth(req, cb) {
@@ -1160,10 +1172,23 @@ LimitTypes取值范围：
         return this.request("DisableFlowLogs", req, cb);
     }
     /**
+     * 本接口（ResetTrafficMirrorFilter）用于更新流量镜像实例过滤规则。
+注意：每一个流量镜像实例，不能同时支持按nat网关和五元组两种规则过滤
+     */
+    async ResetTrafficMirrorFilter(req, cb) {
+        return this.request("ResetTrafficMirrorFilter", req, cb);
+    }
+    /**
      * 本接口（CreateCustomerGateway）用于创建对端网关。
      */
     async CreateCustomerGateway(req, cb) {
         return this.request("CreateCustomerGateway", req, cb);
+    }
+    /**
+     * 本接口（CreateTrafficMirror）用于创建流量镜像实例。
+     */
+    async CreateTrafficMirror(req, cb) {
+        return this.request("CreateTrafficMirror", req, cb);
     }
     /**
      * 本接口（AuditCrossBorderCompliance）用于服务商操作合规化资质审批。
@@ -1437,6 +1462,12 @@ LimitTypes取值范围：
         return this.request("CreateNetworkAcl", req, cb);
     }
     /**
+     * 本接口（UpdateTrafficMirrorAllFilter）用于更新流量镜像实例的过滤规则或者采集对象。
+     */
+    async UpdateTrafficMirrorAllFilter(req, cb) {
+        return this.request("UpdateTrafficMirrorAllFilter", req, cb);
+    }
+    /**
      * 本接口 (CreateBandwidthPackage) 支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)和[IP带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)。
      */
     async CreateBandwidthPackage(req, cb) {
@@ -1530,6 +1561,12 @@ LimitTypes取值范围：
      */
     async ReplaceSecurityGroupPolicies(req, cb) {
         return this.request("ReplaceSecurityGroupPolicies", req, cb);
+    }
+    /**
+     * 本接口（DescribeTrafficMirrors）用于查询流量镜像实例信息。
+     */
+    async DescribeTrafficMirrors(req, cb) {
+        return this.request("DescribeTrafficMirrors", req, cb);
     }
     /**
      * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
@@ -1851,6 +1888,13 @@ LimitTypes取值范围：
         return this.request("ReplaceHighPriorityRouteTableAssociation", req, cb);
     }
     /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     */
+    async ReturnNormalAddresses(req, cb) {
+        return this.request("ReturnNormalAddresses", req, cb);
+    }
+    /**
      * 本接口（EnableFlowLogs）用于启动流日志。
      */
     async EnableFlowLogs(req, cb) {
@@ -2046,6 +2090,12 @@ LimitTypes取值范围：
      */
     async DeleteNetworkAclEntries(req, cb) {
         return this.request("DeleteNetworkAclEntries", req, cb);
+    }
+    /**
+     * 本接口（StopTrafficMirror）用于关闭流量镜像实例。
+     */
+    async StopTrafficMirror(req, cb) {
+        return this.request("StopTrafficMirror", req, cb);
     }
     /**
      * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
@@ -2311,6 +2361,12 @@ LimitTypes取值范围：
         return this.request("ModifyCcnAttachedInstancesAttribute", req, cb);
     }
     /**
+     * 本接口（ResetTrafficMirrorTarget）用于更新流量镜像实例的接收目的信息。
+     */
+    async ResetTrafficMirrorTarget(req, cb) {
+        return this.request("ResetTrafficMirrorTarget", req, cb);
+    }
+    /**
      * 本接口（DeleteNatGateway）用于删除NAT网关。
 删除 NAT 网关后，系统会自动删除路由表中包含此 NAT 网关的路由项，同时也会解绑弹性公网IP（EIP）。
      */
@@ -2526,6 +2582,18 @@ LimitTypes取值范围：
         return this.request("DescribeAddressQuota", req, cb);
     }
     /**
+     * 本接口（UpdateTrafficMirrorDirection）用于更新流量镜像实例的采集方向。
+     */
+    async UpdateTrafficMirrorDirection(req, cb) {
+        return this.request("UpdateTrafficMirrorDirection", req, cb);
+    }
+    /**
+     * 本接口（StartTrafficMirror）用于开启流量镜像实例。
+     */
+    async StartTrafficMirror(req, cb) {
+        return this.request("StartTrafficMirror", req, cb);
+    }
+    /**
      * 本接口（CreateCcn）用于创建云联网（CCN）。<br />
 * 创建云联网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
 * 每个账号能创建的云联网实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
@@ -2616,10 +2684,10 @@ LimitTypes取值范围：
         return this.request("CreateDhcpIp", req, cb);
     }
     /**
-     * 查询虚拟连接
+     * 本接口（ModifyVpcAttribute）用于修改私有网络（VPC）的相关属性。
      */
-    async DescribeCdcNetPlanes(req, cb) {
-        return this.request("DescribeCdcNetPlanes", req, cb);
+    async ModifyVpcAttribute(req, cb) {
+        return this.request("ModifyVpcAttribute", req, cb);
     }
     /**
      * 本接口（ResumeSnapshotInstance）用于根据备份内容恢复安全组策略。
@@ -2675,17 +2743,23 @@ LimitTypes取值范围：
         return this.request("CreateSecurityGroupWithPolicies", req, cb);
     }
     /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     * 本接口（ResetTrafficMirrorSrcs）用于重置流量镜像实例采集对象。
      */
-    async ReturnNormalAddresses(req, cb) {
-        return this.request("ReturnNormalAddresses", req, cb);
+    async ResetTrafficMirrorSrcs(req, cb) {
+        return this.request("ResetTrafficMirrorSrcs", req, cb);
     }
     /**
-     * 本接口（ModifyVpcAttribute）用于修改私有网络（VPC）的相关属性。
+     * 本接口（ModifyTrafficMirrorAttribute）用于修改流量镜像实例属性。
+注意：只支持修改名字和描述信息
      */
-    async ModifyVpcAttribute(req, cb) {
-        return this.request("ModifyVpcAttribute", req, cb);
+    async ModifyTrafficMirrorAttribute(req, cb) {
+        return this.request("ModifyTrafficMirrorAttribute", req, cb);
+    }
+    /**
+     * 查询虚拟连接
+     */
+    async DescribeCdcNetPlanes(req, cb) {
+        return this.request("DescribeCdcNetPlanes", req, cb);
     }
     /**
      * 本接口（DeletePrivateNatGateway）用于删除私网NAT网关。

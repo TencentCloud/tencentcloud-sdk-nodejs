@@ -2705,22 +2705,18 @@ export interface CreateKeyPairResponse {
 export interface InstanceViolationDetail {
     /**
      *  来源：RESTRICT：封禁、FREEZW：冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Source?: string;
     /**
      * 是否允许自助解封：1是，2否
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     State?: string;
     /**
      * 违规类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
     /**
      * 违规内容（URL、关联域名）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
 }
@@ -4390,7 +4386,6 @@ export interface InstancePriceDetail {
     InstancePrice?: InstancePrice;
     /**
      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountDetail?: Array<DiscountDetail>;
 }

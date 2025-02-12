@@ -436,7 +436,6 @@ export interface GetRoomEventResponse {
     Total?: number;
     /**
      * 详细事件内容。包含相应的类型、发生的时间戳。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Events?: Array<EventInfo>;
     /**
@@ -583,22 +582,18 @@ export interface ModifyUserProfileResponse {
 export interface GetWatermarkResponse {
     /**
      * 老师视频区域的水印参数配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TeacherLogo?: WatermarkConfig;
     /**
      * 白板区域的水印参数配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BoardLogo?: WatermarkConfig;
     /**
      * 背景图片配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackgroundPicture?: BackgroundPictureConfig;
     /**
      * 文字水印配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Text?: TextMarkConfig;
     /**
@@ -1942,7 +1937,6 @@ export interface DescribeUserResponse {
     Avatar?: string;
     /**
      * 用户在客户系统的Id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginId?: string;
     /**
@@ -2497,12 +2491,10 @@ export interface DescribeRoomStatisticsResponse {
     MemberRecords?: Array<MemberRecord>;
     /**
      * 秒级unix时间戳，实际房间开始时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealStartTime?: number;
     /**
      * 秒级unix时间戳，实际房间结束时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RealEndTime?: number;
     /**

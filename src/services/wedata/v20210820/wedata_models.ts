@@ -898,6 +898,20 @@ export interface DescribeRuleTemplatesResponse {
 }
 
 /**
+ * DeleteDsFolder返回参数结构体
+ */
+export interface DeleteDsFolderResponse {
+  /**
+   * true代表删除成功，false代表删除失败
+   */
+  Data?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationNode返回参数结构体
  */
 export interface CreateIntegrationNodeResponse {
@@ -4604,17 +4618,19 @@ export interface BatchSuspendIntegrationTasksRequest {
 }
 
 /**
- * DeleteDsFolder返回参数结构体
+ * 是否支持creat 或ddl
  */
-export interface DeleteDsFolderResponse {
+export interface CreateAndDDLSupport {
   /**
-   * true代表删除成功，false代表删除失败
+   * 是否支持select
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: boolean
+  SupportSelect?: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否支持ddl
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  SupportDdl?: boolean
 }
 
 /**
@@ -6027,6 +6043,16 @@ export interface DatabaseMeta {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
+  /**
+   * 库下表的最新更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedTimeByTables?: number
+  /**
+   * 库下表的最新访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastAccessTimeByTables?: number
 }
 
 /**
@@ -16609,6 +16635,21 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HasBizPermission?: boolean
+  /**
+   * 引擎侧创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerByEngine?: string
+  /**
+   * 用户无映射账户，请先完成账户映射后再来申请。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorTips?: string
+  /**
+   * 是否支持select or ddl
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IfSupportCreateAndDDL?: CreateAndDDLSupport
 }
 
 /**

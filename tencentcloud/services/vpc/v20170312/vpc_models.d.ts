@@ -263,6 +263,23 @@ export interface CreateVpcPeeringConnectionRequest {
     Tags?: Array<Tags>;
 }
 /**
+ * ResetTrafficMirrorFilter请求参数结构体
+ */
+export interface ResetTrafficMirrorFilterRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像需要过滤的natgw实例ID
+     */
+    NatId?: string;
+    /**
+     * 流量镜像需要过滤的五元组规则
+     */
+    CollectorNormalFilters?: Array<TrafficMirrorFilter>;
+}
+/**
  * DescribeBandwidthPackageResources请求参数结构体
  */
 export interface DescribeBandwidthPackageResourcesRequest {
@@ -1056,6 +1073,32 @@ export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleReque
     LocalDestinationIpPortTranslationNatRules: Array<LocalDestinationIpPortTranslationNatRule>;
 }
 /**
+ * 查询nat路由的返回路由对象
+ */
+export interface NatDirectConnectGatewayRoute {
+    /**
+     * 子网的 `IPv4` `CIDR`
+     */
+    DestinationCidrBlock: string;
+    /**
+     * 下一跳网关的类型，目前此接口支持的类型有：
+  DIRECTCONNECT：专线网关
+     */
+    GatewayType: string;
+    /**
+     * 下一跳网关ID
+     */
+    GatewayId: string;
+    /**
+     * 路由的创建时间
+     */
+    CreateTime: string;
+    /**
+     * 路由的更新时间
+     */
+    UpdateTime: string;
+}
+/**
  * IP在线查询的字段信息
  */
 export interface IpField {
@@ -1373,6 +1416,15 @@ export interface AddressTemplate {
     TagSet?: Array<Tag>;
 }
 /**
+ * StopTrafficMirror返回参数结构体
+ */
+export interface StopTrafficMirrorResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteHaVip返回参数结构体
  */
 export interface DeleteHaVipResponse {
@@ -1399,19 +1451,17 @@ export interface VpnGatewayQuota {
     Name?: string;
 }
 /**
- * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+ * DeleteVpnGatewaySslClient请求参数结构体
  */
-export interface RouteECMPAlgorithm {
+export interface DeleteVpnGatewaySslClientRequest {
     /**
-     *  目标网段
-  注意：此字段可能返回 null，表示取不到有效值。
+     * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
      */
-    DestinationCidrBlock?: string;
+    SslVpnClientId?: string;
     /**
-     * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。
      */
-    SubnetRouteAlgorithm?: string;
+    SslVpnClientIds?: Array<string>;
 }
 /**
  * DescribeBandwidthPackageBillUsage请求参数结构体
@@ -2303,6 +2353,27 @@ export interface DeleteVpcEndPointServiceWhiteListRequest {
     EndPointServiceId: string;
 }
 /**
+ * DescribeTrafficMirrors请求参数结构体
+ */
+export interface DescribeTrafficMirrorsRequest {
+    /**
+     * 流量镜像实例ID集合
+     */
+    TrafficMirrorIds?: Array<string>;
+    /**
+     * 流量镜像查询过滤调节
+     */
+    Filters?: Filter;
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为20，最大值为100。
+     */
+    Limit?: number;
+}
+/**
  * DetachSnapshotInstances返回参数结构体
  */
 export interface DetachSnapshotInstancesResponse {
@@ -2792,6 +2863,24 @@ export interface IpGeolocationInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AddressIp?: string;
+}
+/**
+ * ResetTrafficMirrorTarget返回参数结构体
+ */
+export interface ResetTrafficMirrorTargetResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RemoveBandwidthPackageResources返回参数结构体
+ */
+export interface RemoveBandwidthPackageResourcesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 私网网关Snat转发规则入参
@@ -4492,6 +4581,15 @@ export interface DescribeHaVipsRequest {
     Limit?: number;
 }
 /**
+ * UpdateTrafficMirrorDirection返回参数结构体
+ */
+export interface UpdateTrafficMirrorDirectionResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 占用ip的资源信息
  */
 export interface IpAddressStates {
@@ -4750,6 +4848,15 @@ export interface CcnRoute {
     AliasInstanceId?: string;
 }
 /**
+ * ResetTrafficMirrorFilter返回参数结构体
+ */
+export interface ResetTrafficMirrorFilterResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyIpv6AddressesAttribute返回参数结构体
  */
 export interface ModifyIpv6AddressesAttributeResponse {
@@ -4986,6 +5093,21 @@ export interface CreateAddressTemplateGroupRequest {
      * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
      */
     Tags?: Array<Tag>;
+}
+/**
+ * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+ */
+export interface RouteECMPAlgorithm {
+    /**
+     *  目标网段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DestinationCidrBlock?: string;
+    /**
+     * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetRouteAlgorithm?: string;
 }
 /**
  * AssociateIPv6Address请求参数结构体
@@ -5898,6 +6020,19 @@ export interface TrafficPackage {
     DeductType?: string;
 }
 /**
+ * CreateTrafficMirror返回参数结构体
+ */
+export interface CreateTrafficMirrorResponse {
+    /**
+     * 流量镜像实例
+     */
+    TrafficMirror?: TrafficMirror;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * WithdrawNotifyRoutes请求参数结构体
  */
 export interface WithdrawNotifyRoutesRequest {
@@ -6160,6 +6295,15 @@ export interface NetworkAclEntrySet {
     Egress?: Array<NetworkAclEntry>;
 }
 /**
+ * StartTrafficMirror返回参数结构体
+ */
+export interface StartTrafficMirrorResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteVpnConnection返回参数结构体
  */
 export interface DeleteVpnConnectionResponse {
@@ -6359,6 +6503,19 @@ export interface DescribeGatewayFlowMonitorDetailRequest {
      * VPC内部IPv4地址，精确匹配
      */
     PrivateIpAddress?: string;
+}
+/**
+ * ResetTrafficMirrorSrcs请求参数结构体
+ */
+export interface ResetTrafficMirrorSrcsRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像采集对象
+     */
+    CollectorSrcs: Array<string>;
 }
 /**
  * InquiryPriceCreateVpnGateway返回参数结构体
@@ -7003,6 +7160,70 @@ export interface CreateNetworkAclEntriesRequest {
     NetworkAclEntrySet: NetworkAclEntrySet;
 }
 /**
+ * 流量镜像实例
+ */
+export interface TrafficMirror {
+    /**
+     * VPC实例ID。
+     */
+    VpcId: string;
+    /**
+     * 流量镜像实例。
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像名字。
+     */
+    TrafficMirrorName: string;
+    /**
+     * 流量镜像描述。
+     */
+    TrafficMirrorDescribe: string;
+    /**
+     * 流量镜像状态。
+     */
+    State: string;
+    /**
+     * 流量镜像采集方向。
+     */
+    Direction: string;
+    /**
+     * 流量镜像采集对象。
+     */
+    CollectorSrcs: Array<string>;
+    /**
+     * 流量镜像过滤的nat网关实例ID。
+     */
+    NatId: string;
+    /**
+     * 流量镜像过滤的五元组规则。
+     */
+    CollectorNormalFilters: Array<TrafficMirrorFilter>;
+    /**
+     * 流量镜接收目标。
+     */
+    CollectorTarget: TrafficMirrorTarget;
+    /**
+     * 流量镜像创建时间。
+     */
+    CreateTime: string;
+    /**
+     * 流量镜像的类型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type: string;
+    /**
+     * 流量镜像所属的子网ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId: string;
+    /**
+     * 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetInfo: Array<TrafficMirrorTargetResourceInfo>;
+}
+/**
  * DeleteCustomerGateway返回参数结构体
  */
 export interface DeleteCustomerGatewayResponse {
@@ -7349,6 +7570,15 @@ export interface DisableSnapshotPoliciesResponse {
     RequestId?: string;
 }
 /**
+ * ResetTrafficMirrorSrcs返回参数结构体
+ */
+export interface ResetTrafficMirrorSrcsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyServiceTemplateAttribute请求参数结构体
  */
 export interface ModifyServiceTemplateAttributeRequest {
@@ -7543,9 +7773,9 @@ export interface DescribeSecurityGroupPoliciesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * ModifyNetworkInterfaceAttribute返回参数结构体
+ * ModifyIPv6AddressesAttributes返回参数结构体
  */
-export interface ModifyNetworkInterfaceAttributeResponse {
+export interface ModifyIPv6AddressesAttributesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9168,22 +9398,22 @@ export interface CreateNetworkInterfaceRequest {
      */
     TrunkingFlag?: string;
     /**
+     * 是否创建RDMA弹性网卡，true:创建rdma弹性网卡，false:普通弹性网卡。不填默认为false
+     */
+    IsRdma?: boolean;
+    /**
      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
      */
     ClientToken?: string;
 }
 /**
- * ModifyBandwidthPackageBandwidth请求参数结构体
+ * DeleteTrafficMirror返回参数结构体
  */
-export interface ModifyBandwidthPackageBandwidthRequest {
+export interface DeleteTrafficMirrorResponse {
     /**
-     * 带宽包限速大小。单位：Mbps。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    InternetMaxBandwidth: number;
-    /**
-     * 共享带宽包ID
-     */
-    BandwidthPackageId: string;
+    RequestId?: string;
 }
 /**
  * 后付费共享带宽包的当前计费用量
@@ -9876,9 +10106,9 @@ export interface GenerateVpnConnectionDefaultHealthCheckIpResponse {
     RequestId?: string;
 }
 /**
- * ModifyDhcpIpAttribute返回参数结构体
+ * CheckTrafficMirror返回参数结构体
  */
-export interface ModifyDhcpIpAttributeResponse {
+export interface CheckTrafficMirrorResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9932,6 +10162,10 @@ export interface CreateAndAttachNetworkInterfaceRequest {
      * 绑定类型：0 标准型 1 扩展型。
      */
     AttachType?: number;
+    /**
+     * 是否创建RDMA弹性网卡，true:创建rdma弹性网卡，false:普通弹性网卡。不填默认为false。
+     */
+    IsRdma?: boolean;
     /**
      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
      */
@@ -10215,6 +10449,43 @@ export interface UnassignIpv6CidrBlockRequest {
     Ipv6CidrBlock?: string;
 }
 /**
+ * 私网网关转发规则匹配ACL
+ */
+export interface TranslationAclRule {
+    /**
+     * ACL协议类型，可选值:"ALL","TCP","UDP"
+     */
+    Protocol: string;
+    /**
+     * 源端口。
+     */
+    SourcePort: string;
+    /**
+     * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
+     */
+    SourceCidr: string;
+    /**
+     * 目的端口。
+     */
+    DestinationPort: string;
+    /**
+     * 目的地址。
+     */
+    DestinationCidr: string;
+    /**
+     * ACL规则`ID`。
+     */
+    AclRuleId?: number;
+    /**
+     * 是否匹配。
+     */
+    Action?: number;
+    /**
+     * ACL规则描述
+     */
+    Description?: string;
+}
+/**
  * ResetHighPriorityRoutes请求参数结构体
  */
 export interface ResetHighPriorityRoutesRequest {
@@ -10262,26 +10533,43 @@ export interface CreateReserveIpAddressesResponse {
     RequestId?: string;
 }
 /**
- * CreateIp6Translators请求参数结构体
+ * CheckTrafficMirror请求参数结构体
  */
-export interface CreateIp6TranslatorsRequest {
+export interface CheckTrafficMirrorRequest {
     /**
-     * 转换实例名称
+     * 流量镜像所属的vpc
      */
-    Ip6TranslatorName?: string;
+    VpcId: string;
     /**
-     * 创建转换实例数量，默认是1个
+     * 流量镜像的实例id
      */
-    Ip6TranslatorCount?: number;
+    TrafficMirrorId?: string;
     /**
-     * 转换实例运营商属性，可取"CMCC","CTCC","CUCC","BGP"
+     * 流量镜像的采集端IP列表
      */
-    Ip6InternetServiceProvider?: string;
+    CollectorSources?: Array<string>;
+    /**
+     * 流量镜像的接收端的子网
+     */
+    SubnetId?: string;
+    /**
+     * 流量镜像采集端的
+     */
+    CollectorTarget?: Array<TrafficMirrorTarget>;
 }
 /**
  * AssociateDhcpIpWithAddressIp返回参数结构体
  */
 export interface AssociateDhcpIpWithAddressIpResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyTrafficMirrorAttribute返回参数结构体
+ */
+export interface ModifyTrafficMirrorAttributeResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10717,6 +11005,19 @@ export interface DeleteNatGatewayRequest {
     NatGatewayId: string;
 }
 /**
+ * ModifyBandwidthPackageBandwidth请求参数结构体
+ */
+export interface ModifyBandwidthPackageBandwidthRequest {
+    /**
+     * 带宽包限速大小。单位：Mbps。
+     */
+    InternetMaxBandwidth: number;
+    /**
+     * 共享带宽包ID
+     */
+    BandwidthPackageId: string;
+}
+/**
  * ModifyCustomerGatewayAttribute返回参数结构体
  */
 export interface ModifyCustomerGatewayAttributeResponse {
@@ -11029,6 +11330,19 @@ export interface ModifyIpv6AddressesAttributeRequest {
  * DescribeCustomerGatewayVendors请求参数结构体
  */
 export declare type DescribeCustomerGatewayVendorsRequest = null;
+/**
+ * 网络ACL五元组
+ */
+export interface NetworkAclQuintupleEntries {
+    /**
+     * 网络ACL五元组入站规则。
+     */
+    Ingress?: Array<NetworkAclQuintupleEntry>;
+    /**
+     * 网络ACL五元组出站规则
+     */
+    Egress?: Array<NetworkAclQuintupleEntry>;
+}
 /**
  * 云联网限速实例锁对象，该对象特用于运营端使用，用于封禁实例流量。
  */
@@ -12096,6 +12410,15 @@ export interface ModifyGatewayFlowQosRequest {
     IpAddresses: Array<string>;
 }
 /**
+ * StopTrafficMirror请求参数结构体
+ */
+export interface StopTrafficMirrorRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+}
+/**
  * ModifyHighPriorityRouteTableAttribute返回参数结构体
  */
 export interface ModifyHighPriorityRouteTableAttributeResponse {
@@ -12129,6 +12452,15 @@ export interface CreateRouteTableRequest {
      * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
      */
     Tags?: Array<Tag>;
+}
+/**
+ * StartTrafficMirror请求参数结构体
+ */
+export interface StartTrafficMirrorRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
 }
 /**
  * MigrateNetworkInterface请求参数结构体
@@ -12322,17 +12654,17 @@ export interface DisableVpnGatewaySslClientCertRequest {
     SslVpnClientIds?: Array<string>;
 }
 /**
- * DeleteVpnGatewaySslClient请求参数结构体
+ * CreateRouteTable返回参数结构体
  */
-export interface DeleteVpnGatewaySslClientRequest {
+export interface CreateRouteTableResponse {
     /**
-     * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
+     * 路由表对象。
      */
-    SslVpnClientId?: string;
+    RouteTable?: RouteTable;
     /**
-     * SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    SslVpnClientIds?: Array<string>;
+    RequestId?: string;
 }
 /**
  * 子网对象
@@ -12415,6 +12747,19 @@ export interface DeleteCcnRequest {
      * CCN实例ID。形如：ccn-f49l6u0z。
      */
     CcnId: string;
+}
+/**
+ * 流量镜像接收流量信息，当接收目标为ENI和CLB时返回
+ */
+export interface TrafficMirrorTargetResourceInfo {
+    /**
+     * 接收目标的资源Id
+     */
+    TargetId: string;
+    /**
+     * 接收目标的资源名称
+     */
+    TargetName: string;
 }
 /**
  * ModifyLocalGateway返回参数结构体
@@ -14179,9 +14524,38 @@ export interface CheckAssistantCidrRequest {
     OldCidrBlocks?: Array<string>;
 }
 /**
- * RemoveBandwidthPackageResources返回参数结构体
+ * UpdateTrafficMirrorAllFilter请求参数结构体
  */
-export interface RemoveBandwidthPackageResourcesResponse {
+export interface UpdateTrafficMirrorAllFilterRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像采集方向
+     */
+    Direction: string;
+    /**
+     * 流量镜像采集对象
+     */
+    CollectorSrcs?: Array<string>;
+    /**
+     * 流量镜像需要过滤的natgw实例
+     */
+    NatId?: string;
+    /**
+     * 流量镜像需要过滤的五元组规则
+     */
+    CollectorNormalFilters?: Array<TrafficMirrorFilter>;
+}
+/**
+ * DescribeTrafficMirrors返回参数结构体
+ */
+export interface DescribeTrafficMirrorsResponse {
+    /**
+     * 流量镜像实例信息
+     */
+    TrafficMirrorSet?: Array<TrafficMirror>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14319,6 +14693,31 @@ export interface DescribeVpcTaskResultResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 流量镜像五元组过滤规则对象
+ */
+export interface TrafficMirrorFilter {
+    /**
+     * 过滤规则的源网段
+     */
+    SrcNet: string;
+    /**
+     * 过滤规则的目的网段
+     */
+    DstNet: string;
+    /**
+     * 过滤规则的协议
+     */
+    Protocol: string;
+    /**
+     * 过滤规则的源端口，默认值1-65535
+     */
+    SrcPort?: string;
+    /**
+     * 过滤规则的目的端口，默认值1-65535
+     */
+    DstPort?: string;
 }
 /**
  * InquiryPriceRenewVpnGateway请求参数结构体
@@ -15429,6 +15828,19 @@ export interface DeleteNetworkAclEntriesResponse {
  */
 export declare type DescribeCdcLDCXListRequest = null;
 /**
+ * UpdateTrafficMirrorDirection请求参数结构体
+ */
+export interface UpdateTrafficMirrorDirectionRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像采集方向
+     */
+    Direction: string;
+}
+/**
  * CreateNetworkInterface返回参数结构体
  */
 export interface CreateNetworkInterfaceResponse {
@@ -15687,6 +16099,23 @@ export interface ServiceTemplateSpecification {
     ServiceGroupId: string;
 }
 /**
+ * ResetTrafficMirrorTarget请求参数结构体
+ */
+export interface ResetTrafficMirrorTargetRequest {
+    /**
+     * 流量镜像实例ID
+     */
+    TrafficMirrorId: string;
+    /**
+     * 流量镜像的接收目的信息
+     */
+    CollectorTarget: TrafficMirrorTarget;
+    /**
+     * 公网IP类型的流量镜像采集流量的发送端所属子网
+     */
+    SubnetId?: string;
+}
+/**
  * DetachNetworkInterface请求参数结构体
  */
 export interface DetachNetworkInterfaceRequest {
@@ -15879,43 +16308,30 @@ export interface DescribeNatGatewaysResponse {
     RequestId?: string;
 }
 /**
- * 查询nat路由的返回路由对象
+ * ModifyTrafficMirrorAttribute请求参数结构体
  */
-export interface NatDirectConnectGatewayRoute {
+export interface ModifyTrafficMirrorAttributeRequest {
     /**
-     * 子网的 `IPv4` `CIDR`
+     * 流量镜像实例ID
      */
-    DestinationCidrBlock: string;
+    TrafficMirrorId: string;
     /**
-     * 下一跳网关的类型，目前此接口支持的类型有：
-  DIRECTCONNECT：专线网关
+     * 流量镜像实例名称
      */
-    GatewayType: string;
+    TrafficMirrorName?: string;
     /**
-     * 下一跳网关ID
+     * 流量镜像实例描述信息
      */
-    GatewayId: string;
-    /**
-     * 路由的创建时间
-     */
-    CreateTime: string;
-    /**
-     * 路由的更新时间
-     */
-    UpdateTime: string;
+    TrafficMirrorDescription?: string;
 }
 /**
- * 网络ACL五元组
+ * ModifyDhcpIpAttribute返回参数结构体
  */
-export interface NetworkAclQuintupleEntries {
+export interface ModifyDhcpIpAttributeResponse {
     /**
-     * 网络ACL五元组入站规则。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Ingress?: Array<NetworkAclQuintupleEntry>;
-    /**
-     * 网络ACL五元组出站规则
-     */
-    Egress?: Array<NetworkAclQuintupleEntry>;
+    RequestId?: string;
 }
 /**
  * CreatePrivateNatGateway返回参数结构体
@@ -16613,6 +17029,29 @@ export interface EnableFlowLogsResponse {
     RequestId?: string;
 }
 /**
+ * 流量镜像采集目标类型
+ */
+export interface TrafficMirrorTarget {
+    /**
+     * 流量镜像的接收IP
+     */
+    TargetIps?: Array<string>;
+    /**
+     * 流量镜像接收IP组，均衡规则，支持ENI/FIVE_TUPLE_FLOW（vpc），FIVE_TUPLE_FLOW（公网IP）
+     */
+    AlgHash?: string;
+    /**
+     * 流量镜像的接收endpoint（公网IP）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetEndPoints?: Array<string>;
+    /**
+     * 流量镜像的接收类型，分别为：IP/ENI/CLB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetType?: string;
+}
+/**
  * DeletePrivateNatGatewayTranslationAclRule请求参数结构体
  */
 export interface DeletePrivateNatGatewayTranslationAclRuleRequest {
@@ -16804,54 +17243,74 @@ export interface CrossBorderCompliance {
     LegalPersonIdCard?: string;
 }
 /**
- * 私网网关转发规则匹配ACL
+ * CreateTrafficMirror请求参数结构体
  */
-export interface TranslationAclRule {
+export interface CreateTrafficMirrorRequest {
     /**
-     * ACL协议类型，可选值:"ALL","TCP","UDP"
+     * VPC实例ID。
      */
-    Protocol: string;
+    VpcId: string;
     /**
-     * 源端口。
+     * 流量镜像名字。
      */
-    SourcePort: string;
+    TrafficMirrorName: string;
     /**
-     * 源地址。支持`ip`或`cidr`格式"xxx.xxx.xxx.000/xx"
+     * 流量镜像描述。
      */
-    SourceCidr: string;
+    TrafficMirrorDescribe?: string;
     /**
-     * 目的端口。
+     * 流量镜像状态, 支持RUNNING/STOPED（vpc），RUNNING（公网IP），当采集vpc流量镜像时，此参数为必填。
      */
-    DestinationPort: string;
+    State?: string;
     /**
-     * 目的地址。
+     * 流量镜像采集方向，支持EGRESS/INGRESS/ALL（vpc），ALL（公网IP）。
      */
-    DestinationCidr: string;
+    Direction?: string;
     /**
-     * ACL规则`ID`。
+     * 流量镜像的采集对象，支持eni_xxxx。
      */
-    AclRuleId?: number;
+    CollectorSrcs?: Array<string>;
     /**
-     * 是否匹配。
+     * 流量镜像过滤的natgw实例。
      */
-    Action?: number;
+    NatId?: string;
     /**
-     * ACL规则描述
+     * 需要过滤的五元组规则。
      */
-    Description?: string;
+    CollectorNormalFilters?: Array<TrafficMirrorFilter>;
+    /**
+     * 流量镜像的目的地址。
+     */
+    CollectorTarget?: TrafficMirrorTarget;
+    /**
+     * 流量镜像采集流量的发送端所属子网ID。
+     */
+    SubnetId?: string;
+    /**
+     * 创建的流量镜像的类型，支持VPC/PUBLICIP，默认为VPC类型。
+     */
+    Type?: string;
+    /**
+     * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+     */
+    Tags?: Array<Tag>;
 }
 /**
- * CreateRouteTable返回参数结构体
+ * CreateIp6Translators请求参数结构体
  */
-export interface CreateRouteTableResponse {
+export interface CreateIp6TranslatorsRequest {
     /**
-     * 路由表对象。
+     * 转换实例名称
      */
-    RouteTable?: RouteTable;
+    Ip6TranslatorName?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 创建转换实例数量，默认是1个
      */
-    RequestId?: string;
+    Ip6TranslatorCount?: number;
+    /**
+     * 转换实例运营商属性，可取"CMCC","CTCC","CUCC","BGP"
+     */
+    Ip6InternetServiceProvider?: string;
 }
 /**
  * DescribeCrossBorderCcnRegionBandwidthLimits请求参数结构体
@@ -16950,6 +17409,15 @@ export interface ModifyPrivateIpAddressesAttributeRequest {
  * ResetNatGatewayConnection返回参数结构体
  */
 export interface ResetNatGatewayConnectionResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateTrafficMirrorAllFilter返回参数结构体
+ */
+export interface UpdateTrafficMirrorAllFilterResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17371,13 +17839,13 @@ export interface CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRespo
     RequestId?: string;
 }
 /**
- * ModifyIPv6AddressesAttributes返回参数结构体
+ * DeleteTrafficMirror请求参数结构体
  */
-export interface ModifyIPv6AddressesAttributesResponse {
+export interface DeleteTrafficMirrorRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 流量镜像实例ID
      */
-    RequestId?: string;
+    TrafficMirrorId: string;
 }
 /**
  * ModifyCdcLDCXAttribute返回参数结构体
@@ -17795,6 +18263,15 @@ export interface AddTemplateMemberRequest {
      * 需要添加的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致。
      */
     TemplateMember: Array<MemberInfo>;
+}
+/**
+ * ModifyNetworkInterfaceAttribute返回参数结构体
+ */
+export interface ModifyNetworkInterfaceAttributeResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeVpcEndPointServiceWhiteList返回参数结构体

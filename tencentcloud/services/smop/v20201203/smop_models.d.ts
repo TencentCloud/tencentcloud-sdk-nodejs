@@ -4,67 +4,54 @@
 export interface TaskEventData {
     /**
      * 状态码，0为成功，-1为失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
      * 当前完成或正在完成的安心用户运营平台的任务订单ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskOrderId?: string;
     /**
      * 当前任务订单状态码。1代表未完成；2代表已完成但未提交任务；3表示已完成，且已提交获得积分任务；4表示过期任务，提交后不获得积分。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskCode?: number;
     /**
      * 获得积分数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskCoinNumber?: number;
     /**
      * 任务类型后台代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskType?: number;
     /**
      * 用户的当前积分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCoin?: number;
     /**
      * 用户透传的附加数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Attach?: string;
     /**
      * 计次任务当前完成次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DoneTimes?: number;
     /**
      * 计次任务当前所需完成次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalTimes?: number;
     /**
      * 任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskName?: string;
     /**
      * 用户当前成长值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GrowScore?: number;
 }
@@ -74,22 +61,18 @@ export interface TaskEventData {
 export interface SubmitTaskEventResponse {
     /**
      * 任务的唯一订单号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OrderId?: string;
     /**
      * 信息码。0表示成功，-1标识失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 任务处理结果列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<TaskEventData>;
     /**

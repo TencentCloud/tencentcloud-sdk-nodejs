@@ -3088,7 +3088,7 @@ export interface TelCdrInfo {
   电话呼出	        210	           notInService	不在服务区
   
   电话呼入&呼出	211    clientError    客户端错误
-  
+  电话呼出        212     carrierBlocked      运营商拦截
      */
     EndStatus?: number;
     /**
@@ -3185,7 +3185,7 @@ export interface TelCdrInfo {
   电话呼出	        210	           notInService	不在服务区
   
   电话呼入&呼出	211    clientError    客户端错误
-  
+  电话呼出        212     carrierBlocked      运营商拦截
      */
     EndStatusString?: string;
     /**

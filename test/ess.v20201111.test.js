@@ -148,6 +148,16 @@ it("ess.v20201111.CreateFlowGroupByTemplates", async function () {
     }
 })
 
+it("ess.v20201111.VerifyDigitFile", async function () {
+    try {
+       const data = await client.VerifyDigitFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreatePartnerAutoSignAuthUrl", async function () {
     try {
        const data = await client.CreatePartnerAutoSignAuthUrl({})
@@ -898,6 +908,16 @@ it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
     }
 })
 
+it("ess.v20201111.DescribeFileCounterSignResult", async function () {
+    try {
+       const data = await client.DescribeFileCounterSignResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.GetTaskResultApi", async function () {
     try {
        const data = await client.GetTaskResultApi({})
@@ -941,6 +961,16 @@ it("ess.v20201111.CreateOrganizationBatchSignUrl", async function () {
 it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     try {
        const data = await client.DescribeThirdPartyAuthCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateFileCounterSign", async function () {
+    try {
+       const data = await client.CreateFileCounterSign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

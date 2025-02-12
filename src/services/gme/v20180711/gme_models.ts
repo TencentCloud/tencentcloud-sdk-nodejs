@@ -258,9 +258,8 @@ export interface RealTimeSpeechStatisticsItem {
 export interface AudioTextStatisticsItem {
   /**
    * 统计值，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: number
+  Data?: number
 }
 
 /**
@@ -519,12 +518,10 @@ export interface ScanPiece {
 export interface Tag {
   /**
    * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey?: string
   /**
    * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
 }
@@ -797,7 +794,22 @@ export interface StatusInfo {
 'VoiceMessage','语音消息',
 'GMECloudApi':'GME云API接口'
  */
-export type SceneInfo = null
+export interface SceneInfo {
+  /**
+   * 'RealTime','实时语音分析',
+'VoiceMessage','语音消息',
+'GMECloudApi':'GME云API接口'
+   */
+  SceneId: string
+  /**
+   * 开关状态，true开启/false关闭
+   */
+  Status: boolean
+  /**
+   * 用户回调地址
+   */
+  CallbackUrl?: string
+}
 
 /**
  * 剔除房间操作结果
@@ -1340,17 +1352,14 @@ export interface ScanVoiceResponse {
 export interface AppStatisticsItem {
   /**
    * 实时语音统计数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealtimeSpeechStatisticsItem?: RealTimeSpeechStatisticsItem
   /**
    * 语音消息统计数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceMessageStatisticsItem?: VoiceMessageStatisticsItem
   /**
    * 语音过滤统计数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceFilterStatisticsItem?: VoiceFilterStatisticsItem
   /**
@@ -1359,22 +1368,18 @@ export interface AppStatisticsItem {
   Date?: string
   /**
    * 录音转文本用量统计数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioTextStatisticsItem?: AudioTextStatisticsItem
   /**
    * 流式转文本用量数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamTextStatisticsItem?: StreamTextStatisticsItem
   /**
    * 海外转文本用量数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OverseaTextStatisticsItem?: OverseaTextStatisticsItem
   /**
    * 实时语音转文本用量数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RealtimeTextStatisticsItem?: RealtimeTextStatisticsItem
 }
@@ -1577,9 +1582,8 @@ export interface CreateScanUserRequest {
 export interface StreamTextStatisticsItem {
   /**
    * 统计值，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: number
+  Data?: number
 }
 
 /**
@@ -1713,9 +1717,8 @@ export interface UpdateScanUsersRequest {
 export interface OverseaTextStatisticsItem {
   /**
    * 统计值，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: number
+  Data?: number
 }
 
 /**
@@ -1827,9 +1830,8 @@ export interface ModifyAppStatusResponse {
 export interface RealtimeTextStatisticsItem {
   /**
    * 统计值，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: number
+  Data?: number
 }
 
 /**

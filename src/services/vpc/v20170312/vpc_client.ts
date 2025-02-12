@@ -31,6 +31,7 @@ import {
   DeleteServiceTemplateResponse,
   CreateServiceTemplateRequest,
   CreateVpcPeeringConnectionRequest,
+  ResetTrafficMirrorFilterRequest,
   DescribeBandwidthPackageResourcesRequest,
   DescribeVpnConnectionsRequest,
   CreateAssistantCidrRequest,
@@ -71,6 +72,7 @@ import {
   FlowLog,
   DescribeVpcLimitsResponse,
   CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleRequest,
+  NatDirectConnectGatewayRoute,
   IpField,
   DescribeReserveIpAddressesRequest,
   AddBandwidthPackageResourcesRequest,
@@ -83,9 +85,10 @@ import {
   ModifyNetworkAclEntriesRequest,
   DescribeVpcPrivateIpAddressesRequest,
   AddressTemplate,
+  StopTrafficMirrorResponse,
   DeleteHaVipResponse,
   VpnGatewayQuota,
-  RouteECMPAlgorithm,
+  DeleteVpnGatewaySslClientRequest,
   DescribeBandwidthPackageBillUsageRequest,
   CcnRouteTableSelectPolicy,
   DescribeRouteTableSelectionPoliciesResponse,
@@ -125,6 +128,7 @@ import {
   ModifyCustomerGatewayAttributeRequest,
   DescribeRouteTablesResponse,
   DeleteVpcEndPointServiceWhiteListRequest,
+  DescribeTrafficMirrorsRequest,
   DetachSnapshotInstancesResponse,
   DetachNetworkInterfaceResponse,
   DeleteVpcEndPointServiceRequest,
@@ -156,6 +160,8 @@ import {
   CreateNetworkAclQuintupleEntriesResponse,
   DescribeGatewayFlowMonitorDetailResponse,
   IpGeolocationInfo,
+  ResetTrafficMirrorTargetResponse,
+  RemoveBandwidthPackageResourcesResponse,
   TranslationNatRuleInput,
   DeleteFlowLogRequest,
   DownloadVpnGatewaySslClientCertResponse,
@@ -257,6 +263,7 @@ import {
   HaVipAssociation,
   DescribeAssistantCidrResponse,
   DescribeHaVipsRequest,
+  UpdateTrafficMirrorDirectionResponse,
   IpAddressStates,
   DescribeRouteTableSelectionPoliciesRequest,
   InstanceStatistic,
@@ -264,6 +271,7 @@ import {
   CreateVpnConnectionRequest,
   PrivateNatGatewayLimit,
   CcnRoute,
+  ResetTrafficMirrorFilterResponse,
   ModifyIpv6AddressesAttributeResponse,
   DescribeTrafficPackagesRequest,
   DeleteSecurityGroupPoliciesRequest,
@@ -272,6 +280,7 @@ import {
   ModifyNatGatewayAttributeResponse,
   DescribeNetDetectsRequest,
   CreateAddressTemplateGroupRequest,
+  RouteECMPAlgorithm,
   AssociateIPv6AddressRequest,
   DescribeCustomerGatewayVendorsResponse,
   DeleteCdcLDCXListRequest,
@@ -325,6 +334,7 @@ import {
   ReplaceRoutesRequest,
   CreateCustomerGatewayResponse,
   TrafficPackage,
+  CreateTrafficMirrorResponse,
   WithdrawNotifyRoutesRequest,
   ResourceDashboard,
   DescribeSubnetResourceDashboardRequest,
@@ -333,6 +343,7 @@ import {
   DeleteServiceTemplateGroupResponse,
   DirectConnectSubnet,
   NetworkAclEntrySet,
+  StartTrafficMirrorResponse,
   DeleteVpnConnectionResponse,
   DescribeVpnGatewaySslClientsResponse,
   ReleaseIPv6AddressesResponse,
@@ -344,6 +355,7 @@ import {
   DescribeIp6TranslatorsRequest,
   CreateSubnetsResponse,
   DescribeGatewayFlowMonitorDetailRequest,
+  ResetTrafficMirrorSrcsRequest,
   InquiryPriceCreateVpnGatewayResponse,
   DescribeSecurityGroupLimitsResponse,
   CustomerGateway,
@@ -379,6 +391,7 @@ import {
   DescribeSnapshotFilesResponse,
   CreateFlowLogResponse,
   CreateNetworkAclEntriesRequest,
+  TrafficMirror,
   DeleteCustomerGatewayResponse,
   CreateVpnGatewayRoutesResponse,
   CreateNetDetectRequest,
@@ -399,6 +412,7 @@ import {
   CreateSubnetsRequest,
   DescribeVpcEndPointServiceRequest,
   DisableSnapshotPoliciesResponse,
+  ResetTrafficMirrorSrcsResponse,
   ModifyServiceTemplateAttributeRequest,
   ModifyPrivateNatGatewayAttributeRequest,
   AssociateAddressResponse,
@@ -408,7 +422,7 @@ import {
   DescribeAddressesRequest,
   DescribeVpcsRequest,
   DescribeSecurityGroupPoliciesRequest,
-  ModifyNetworkInterfaceAttributeResponse,
+  ModifyIPv6AddressesAttributesResponse,
   InquiryPriceRenewAddressesRequest,
   CreateSecurityGroupResponse,
   DisassociateNetworkInterfaceSecurityGroupsResponse,
@@ -487,7 +501,7 @@ import {
   Ipv6Address,
   DescribePrivateNatGatewayTranslationAclRulesResponse,
   CreateNetworkInterfaceRequest,
-  ModifyBandwidthPackageBandwidthRequest,
+  DeleteTrafficMirrorResponse,
   BandwidthPackageBillBandwidth,
   DescribePrivateNatGatewayTranslationAclRulesRequest,
   ConflictItem,
@@ -516,7 +530,7 @@ import {
   CcnInstanceWithoutRegion,
   DescribeCcnRoutesRequest,
   GenerateVpnConnectionDefaultHealthCheckIpResponse,
-  ModifyDhcpIpAttributeResponse,
+  CheckTrafficMirrorResponse,
   CreateAndAttachNetworkInterfaceRequest,
   DeleteVpcEndPointResponse,
   DeleteDhcpIpResponse,
@@ -528,11 +542,13 @@ import {
   DeleteAssistantCidrResponse,
   DescribeDhcpIpsResponse,
   UnassignIpv6CidrBlockRequest,
+  TranslationAclRule,
   ResetHighPriorityRoutesRequest,
   ModifyAssistantCidrRequest,
   CreateReserveIpAddressesResponse,
-  CreateIp6TranslatorsRequest,
+  CheckTrafficMirrorRequest,
   AssociateDhcpIpWithAddressIpResponse,
+  ModifyTrafficMirrorAttributeResponse,
   ModifyGatewayFlowQosResponse,
   ModifyNetworkInterfaceQosResponse,
   ModifySecurityGroupAttributeResponse,
@@ -558,6 +574,7 @@ import {
   DescribeLocalGatewayResponse,
   ItemPrice,
   DeleteNatGatewayRequest,
+  ModifyBandwidthPackageBandwidthRequest,
   ModifyCustomerGatewayAttributeResponse,
   CreatePrivateNatGatewayTranslationAclRuleResponse,
   DeletePrivateNatGatewayTranslationNatRuleResponse,
@@ -578,6 +595,7 @@ import {
   GetCcnRegionBandwidthLimitsRequest,
   ModifyIpv6AddressesAttributeRequest,
   DescribeCustomerGatewayVendorsRequest,
+  NetworkAclQuintupleEntries,
   CcnFlowLock,
   DetachSnapshotInstancesRequest,
   ReplaceHighPriorityRouteTableAssociationResponse,
@@ -637,9 +655,11 @@ import {
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
   ModifyGatewayFlowQosRequest,
+  StopTrafficMirrorRequest,
   ModifyHighPriorityRouteTableAttributeResponse,
   CreateDirectConnectGatewayCcnRoutesResponse,
   CreateRouteTableRequest,
+  StartTrafficMirrorRequest,
   MigrateNetworkInterfaceRequest,
   DescribeCustomerGatewaysRequest,
   ModifyReserveIpAddressResponse,
@@ -650,13 +670,14 @@ import {
   DhcpIp,
   DeleteAssistantCidrRequest,
   DisableVpnGatewaySslClientCertRequest,
-  DeleteVpnGatewaySslClientRequest,
+  CreateRouteTableResponse,
   SubnetInput,
   DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
   CreateNetDetectResponse,
   InquiryPriceAllocateAddressesResponse,
   DeleteCcnRequest,
+  TrafficMirrorTargetResourceInfo,
   ModifyLocalGatewayResponse,
   AssociateNetworkInterfaceSecurityGroupsResponse,
   EnableFlowLogsRequest,
@@ -737,7 +758,8 @@ import {
   DeleteIp6TranslatorsRequest,
   Ip6Translator,
   CheckAssistantCidrRequest,
-  RemoveBandwidthPackageResourcesResponse,
+  UpdateTrafficMirrorAllFilterRequest,
+  DescribeTrafficMirrorsResponse,
   DeleteVpcPeeringConnectionResponse,
   DeleteSnapshotPoliciesRequest,
   CcnRouteTable,
@@ -747,6 +769,7 @@ import {
   DescribeCustomerGatewaysResponse,
   CheckAssistantCidrResponse,
   DescribeVpcTaskResultResponse,
+  TrafficMirrorFilter,
   InquiryPriceRenewVpnGatewayRequest,
   HighPriorityModifyItem,
   EnableCcnRoutesResponse,
@@ -814,6 +837,7 @@ import {
   DeleteSecurityGroupResponse,
   DeleteNetworkAclEntriesResponse,
   DescribeCdcLDCXListRequest,
+  UpdateTrafficMirrorDirectionRequest,
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
   LockCcnsResponse,
@@ -831,6 +855,7 @@ import {
   DescribeServiceTemplatesRequest,
   ModifyPrivateNatGatewayTranslationNatRuleResponse,
   ServiceTemplateSpecification,
+  ResetTrafficMirrorTargetRequest,
   DetachNetworkInterfaceRequest,
   DescribeSnapshotAttachedInstancesResponse,
   ReserveIpAddressInfo,
@@ -839,8 +864,8 @@ import {
   DownloadVpnGatewaySslClientCertRequest,
   CreateAddressTemplateRequest,
   DescribeNatGatewaysResponse,
-  NatDirectConnectGatewayRoute,
-  NetworkAclQuintupleEntries,
+  ModifyTrafficMirrorAttributeRequest,
+  ModifyDhcpIpAttributeResponse,
   CreatePrivateNatGatewayResponse,
   ModifyRouteTableSelectionPoliciesResponse,
   AttachNetworkInterfaceRequest,
@@ -883,14 +908,15 @@ import {
   CreateHaVipRequest,
   Ipv6SubnetCidrBlock,
   EnableFlowLogsResponse,
+  TrafficMirrorTarget,
   DeletePrivateNatGatewayTranslationAclRuleRequest,
   DescribeAddressQuotaResponse,
   DescribePrivateNatGatewayLimitsRequest,
   CreateCustomerGatewayRequest,
   DeleteSecurityGroupRequest,
   CrossBorderCompliance,
-  TranslationAclRule,
-  CreateRouteTableResponse,
+  CreateTrafficMirrorRequest,
+  CreateIp6TranslatorsRequest,
   DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
   ReplaceCcnRouteTableBroadcastPolicysRequest,
   UnlockCcnsRequest,
@@ -898,6 +924,7 @@ import {
   DescribeDirectConnectGatewayCcnRoutesResponse,
   ModifyPrivateIpAddressesAttributeRequest,
   ResetNatGatewayConnectionResponse,
+  UpdateTrafficMirrorAllFilterResponse,
   AssociateNetworkInterfaceSecurityGroupsRequest,
   DeleteVpnGatewayRoutesResponse,
   DeleteHighPriorityRouteTablesResponse,
@@ -927,7 +954,7 @@ import {
   AcceptVpcPeeringConnectionRequest,
   CreateCdcNetPlanesRequest,
   CreatePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse,
-  ModifyIPv6AddressesAttributesResponse,
+  DeleteTrafficMirrorRequest,
   ModifyCdcLDCXAttributeResponse,
   DescribeNetworkInterfacesResponse,
   DeleteNetworkAclResponse,
@@ -954,6 +981,7 @@ import {
   InstanceChargePrepaid,
   DescribeTemplateLimitsRequest,
   AddTemplateMemberRequest,
+  ModifyNetworkInterfaceAttributeResponse,
   DescribeVpcEndPointServiceWhiteListResponse,
   AcceptAttachCcnInstancesResponse,
   DescribeUsedIpAddressResponse,
@@ -1792,6 +1820,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（DeleteTrafficMirror）用于删除流量镜像实例。
+   */
+  async DeleteTrafficMirror(
+    req: DeleteTrafficMirrorRequest,
+    cb?: (error: string, rep: DeleteTrafficMirrorResponse) => void
+  ): Promise<DeleteTrafficMirrorResponse> {
+    return this.request("DeleteTrafficMirror", req, cb)
+  }
+
+  /**
      * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）。<br />
 本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
@@ -2308,6 +2346,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 检查流量镜像的采集端接收端（公网IP类型）
+   */
+  async CheckTrafficMirror(
+    req: CheckTrafficMirrorRequest,
+    cb?: (error: string, rep: CheckTrafficMirrorResponse) => void
+  ): Promise<CheckTrafficMirrorResponse> {
+    return this.request("CheckTrafficMirror", req, cb)
+  }
+
+  /**
    * 本接口（ModifyIPv6AddressesBandwidth）用于调整弹性公网 IPv6（简称EIPv6）实例的带宽上限。
    */
   async ModifyIPv6AddressesBandwidth(
@@ -2742,6 +2790,17 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（ResetTrafficMirrorFilter）用于更新流量镜像实例过滤规则。
+注意：每一个流量镜像实例，不能同时支持按nat网关和五元组两种规则过滤
+     */
+  async ResetTrafficMirrorFilter(
+    req: ResetTrafficMirrorFilterRequest,
+    cb?: (error: string, rep: ResetTrafficMirrorFilterResponse) => void
+  ): Promise<ResetTrafficMirrorFilterResponse> {
+    return this.request("ResetTrafficMirrorFilter", req, cb)
+  }
+
+  /**
    * 本接口（CreateCustomerGateway）用于创建对端网关。
    */
   async CreateCustomerGateway(
@@ -2749,6 +2808,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateCustomerGatewayResponse) => void
   ): Promise<CreateCustomerGatewayResponse> {
     return this.request("CreateCustomerGateway", req, cb)
+  }
+
+  /**
+   * 本接口（CreateTrafficMirror）用于创建流量镜像实例。
+   */
+  async CreateTrafficMirror(
+    req: CreateTrafficMirrorRequest,
+    cb?: (error: string, rep: CreateTrafficMirrorResponse) => void
+  ): Promise<CreateTrafficMirrorResponse> {
+    return this.request("CreateTrafficMirror", req, cb)
   }
 
   /**
@@ -3182,6 +3251,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（UpdateTrafficMirrorAllFilter）用于更新流量镜像实例的过滤规则或者采集对象。
+   */
+  async UpdateTrafficMirrorAllFilter(
+    req: UpdateTrafficMirrorAllFilterRequest,
+    cb?: (error: string, rep: UpdateTrafficMirrorAllFilterResponse) => void
+  ): Promise<UpdateTrafficMirrorAllFilterResponse> {
+    return this.request("UpdateTrafficMirrorAllFilter", req, cb)
+  }
+
+  /**
    * 本接口 (CreateBandwidthPackage) 支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)和[IP带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)。
    */
   async CreateBandwidthPackage(
@@ -3337,6 +3416,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ReplaceSecurityGroupPoliciesResponse) => void
   ): Promise<ReplaceSecurityGroupPoliciesResponse> {
     return this.request("ReplaceSecurityGroupPolicies", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTrafficMirrors）用于查询流量镜像实例信息。
+   */
+  async DescribeTrafficMirrors(
+    req: DescribeTrafficMirrorsRequest,
+    cb?: (error: string, rep: DescribeTrafficMirrorsResponse) => void
+  ): Promise<DescribeTrafficMirrorsResponse> {
+    return this.request("DescribeTrafficMirrors", req, cb)
   }
 
   /**
@@ -3858,6 +3947,17 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
+为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
+     */
+  async ReturnNormalAddresses(
+    req: ReturnNormalAddressesRequest,
+    cb?: (error: string, rep: ReturnNormalAddressesResponse) => void
+  ): Promise<ReturnNormalAddressesResponse> {
+    return this.request("ReturnNormalAddresses", req, cb)
+  }
+
+  /**
    * 本接口（EnableFlowLogs）用于启动流日志。
    */
   async EnableFlowLogs(
@@ -4172,6 +4272,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DeleteNetworkAclEntriesResponse) => void
   ): Promise<DeleteNetworkAclEntriesResponse> {
     return this.request("DeleteNetworkAclEntries", req, cb)
+  }
+
+  /**
+   * 本接口（StopTrafficMirror）用于关闭流量镜像实例。
+   */
+  async StopTrafficMirror(
+    req: StopTrafficMirrorRequest,
+    cb?: (error: string, rep: StopTrafficMirrorResponse) => void
+  ): Promise<StopTrafficMirrorResponse> {
+    return this.request("StopTrafficMirror", req, cb)
   }
 
   /**
@@ -4598,6 +4708,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（ResetTrafficMirrorTarget）用于更新流量镜像实例的接收目的信息。
+   */
+  async ResetTrafficMirrorTarget(
+    req: ResetTrafficMirrorTargetRequest,
+    cb?: (error: string, rep: ResetTrafficMirrorTargetResponse) => void
+  ): Promise<ResetTrafficMirrorTargetResponse> {
+    return this.request("ResetTrafficMirrorTarget", req, cb)
+  }
+
+  /**
      * 本接口（DeleteNatGateway）用于删除NAT网关。
 删除 NAT 网关后，系统会自动删除路由表中包含此 NAT 网关的路由项，同时也会解绑弹性公网IP（EIP）。
      */
@@ -4937,6 +5057,26 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（UpdateTrafficMirrorDirection）用于更新流量镜像实例的采集方向。
+   */
+  async UpdateTrafficMirrorDirection(
+    req: UpdateTrafficMirrorDirectionRequest,
+    cb?: (error: string, rep: UpdateTrafficMirrorDirectionResponse) => void
+  ): Promise<UpdateTrafficMirrorDirectionResponse> {
+    return this.request("UpdateTrafficMirrorDirection", req, cb)
+  }
+
+  /**
+   * 本接口（StartTrafficMirror）用于开启流量镜像实例。
+   */
+  async StartTrafficMirror(
+    req: StartTrafficMirrorRequest,
+    cb?: (error: string, rep: StartTrafficMirrorResponse) => void
+  ): Promise<StartTrafficMirrorResponse> {
+    return this.request("StartTrafficMirror", req, cb)
+  }
+
+  /**
    * 本接口（CreateCcn）用于创建云联网（CCN）。<br />
    * 创建云联网同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
    * 每个账号能创建的云联网实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
@@ -5083,13 +5223,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 查询虚拟连接
+   * 本接口（ModifyVpcAttribute）用于修改私有网络（VPC）的相关属性。
    */
-  async DescribeCdcNetPlanes(
-    req?: DescribeCdcNetPlanesRequest,
-    cb?: (error: string, rep: DescribeCdcNetPlanesResponse) => void
-  ): Promise<DescribeCdcNetPlanesResponse> {
-    return this.request("DescribeCdcNetPlanes", req, cb)
+  async ModifyVpcAttribute(
+    req: ModifyVpcAttributeRequest,
+    cb?: (error: string, rep: ModifyVpcAttributeResponse) => void
+  ): Promise<ModifyVpcAttributeResponse> {
+    return this.request("ModifyVpcAttribute", req, cb)
   }
 
   /**
@@ -5170,24 +5310,34 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（ReturnNormalAddresses）用于解绑并释放普通公网IP。
-为完善公网IP的访问管理功能，此接口于2022年12月15日升级优化鉴权功能，升级后子用户调用此接口需向主账号申请CAM策略授权，否则可能调用失败。您可以提前为子账号配置操作授权，详情见[授权指南](https://cloud.tencent.com/document/product/598/34545)。
-     */
-  async ReturnNormalAddresses(
-    req: ReturnNormalAddressesRequest,
-    cb?: (error: string, rep: ReturnNormalAddressesResponse) => void
-  ): Promise<ReturnNormalAddressesResponse> {
-    return this.request("ReturnNormalAddresses", req, cb)
+   * 本接口（ResetTrafficMirrorSrcs）用于重置流量镜像实例采集对象。
+   */
+  async ResetTrafficMirrorSrcs(
+    req: ResetTrafficMirrorSrcsRequest,
+    cb?: (error: string, rep: ResetTrafficMirrorSrcsResponse) => void
+  ): Promise<ResetTrafficMirrorSrcsResponse> {
+    return this.request("ResetTrafficMirrorSrcs", req, cb)
   }
 
   /**
-   * 本接口（ModifyVpcAttribute）用于修改私有网络（VPC）的相关属性。
+     * 本接口（ModifyTrafficMirrorAttribute）用于修改流量镜像实例属性。
+注意：只支持修改名字和描述信息
+     */
+  async ModifyTrafficMirrorAttribute(
+    req: ModifyTrafficMirrorAttributeRequest,
+    cb?: (error: string, rep: ModifyTrafficMirrorAttributeResponse) => void
+  ): Promise<ModifyTrafficMirrorAttributeResponse> {
+    return this.request("ModifyTrafficMirrorAttribute", req, cb)
+  }
+
+  /**
+   * 查询虚拟连接
    */
-  async ModifyVpcAttribute(
-    req: ModifyVpcAttributeRequest,
-    cb?: (error: string, rep: ModifyVpcAttributeResponse) => void
-  ): Promise<ModifyVpcAttributeResponse> {
-    return this.request("ModifyVpcAttribute", req, cb)
+  async DescribeCdcNetPlanes(
+    req?: DescribeCdcNetPlanesRequest,
+    cb?: (error: string, rep: DescribeCdcNetPlanesResponse) => void
+  ): Promise<DescribeCdcNetPlanesResponse> {
+    return this.request("DescribeCdcNetPlanes", req, cb)
   }
 
   /**

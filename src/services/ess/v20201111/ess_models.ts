@@ -180,6 +180,24 @@ export interface IntentionActionResult {
 }
 
 /**
+ * DescribeFileCounterSignResult请求参数结构体
+ */
+export interface DescribeFileCounterSignResultRequest {
+  /**
+   * 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 加签任务Id
+   */
+  TaskId?: string
+}
+
+/**
  * CreateSeal请求参数结构体
  */
 export interface CreateSealRequest {
@@ -470,6 +488,34 @@ export interface DescribeIntegrationDepartmentsResponse {
 }
 
 /**
+ * CreateFileCounterSign请求参数结构体
+ */
+export interface CreateFileCounterSignRequest {
+  /**
+   * 需要加签的文件Id。
+
+注: `暂时只支持pdf类型的文件`
+   */
+  FileId: string
+  /**
+   * 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 是否使用同步模式。
+<ul><li><b>false</b>:异步模式，返回taskId。需要使用taskId轮询结果查询接口。</li>
+<li><b>true</b>: 同步模式，此接口将直接返回taskId和ResultFileId(加签后文件id)。</li></ul>
+注：
+1. 当加签文件较大的时候，建议使用异步接口进行操作。否则文件加签时间过长会导致接口超时。
+   */
+  SyncMode?: boolean
+}
+
+/**
  * 模板中文件的信息结构
  */
 export interface FileInfo {
@@ -582,25 +628,18 @@ export interface DescribeFileUrlsResponse {
 }
 
 /**
- * CreateExtendedServiceAuthInfos请求参数结构体
+ * CreateFlowReminds请求参数结构体
  */
-export interface CreateExtendedServiceAuthInfosRequest {
+export interface CreateFlowRemindsRequest {
   /**
    * 执行本接口操作的员工信息。
 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 本企业员工的id，需要已实名，正常在职员工
+   * 需执行催办的签署流程ID数组，最多包含100个。
    */
-  UserIds: Array<string>
-  /**
-   * 取值
-<ul><li>OPEN_SERVER_SIGN：企业自动签</li>
-<li>BATCH_SIGN：批量签署</li>
-</ul>
-   */
-  ExtendServiceType?: string
+  FlowIds: Array<string>
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -4615,24 +4654,11 @@ export interface DescribeFileUrlsRequest {
    */
   Operator: UserInfo
   /**
-   * 文件对应的业务类型，目前支持：
-<ul>
-<li>**FLOW ** : <font color="red">如需下载合同文件请选择此项</font></li>
-<li>**TEMPLATE ** : 如需下载模板文件请选择此项</li>
-<li>**DOCUMENT  **: 如需下载文档文件请选择此项</li>
-<li>**SEAL  **: 如需下载印章图片请选择此项</li>
-</ul>
+   * 文件对应的业务类型，目前支持：<ul><li>**FLOW ** : <font color="red">如需下载合同文件请选择此项</font></li><li>**TEMPLATE ** : 如需下载模板文件请选择此项</li><li>**DOCUMENT  **: 如需下载文档文件请选择此项</li><li>**SEAL  **: 如需下载印章图片请选择此项</li><li>**DIGITFILE**: 如需下载加签文件请选择此项</li></ul>
    */
   BusinessType: string
   /**
-   * 业务编号的数组，取值如下：
-<ul>
-<li>流程编号</li>
-<li>模板编号</li>
-<li>文档编号</li>
-<li>印章编号</li>
-<li>如需下载合同文件请传入FlowId，最大支持20个资源</li>
-</ul>
+   * 业务编号的数组，取值如下：<ul><li>流程编号</li><li>模板编号</li><li>文档编号</li><li>印章编号</li><li>加签文件编号</li><li>如需下载合同文件请传入FlowId，最大支持20个资源</li></ul>
    */
   BusinessIds: Array<string>
   /**
@@ -5850,6 +5876,32 @@ export interface CreatePreparedPersonalEsignResponse {
 }
 
 /**
+ * VerifyDigitFile返回参数结构体
+ */
+export interface VerifyDigitFileResponse {
+  /**
+   * 加签文件MD5哈希值
+   */
+  PdfResourceMd5?: string
+  /**
+   * 验签结果代码，代码的含义如下：<ul><li>**1**：文件验证成功。</li><li>**2**：文件验证失败。</li></ul>
+   */
+  VerifyResult?: number
+  /**
+   * 验签序列号, 为11为数组组成的字符串
+   */
+  VerifySerialNo?: string
+  /**
+   * 验签结果详情，每个签名域对应的验签结果。
+   */
+  VerifyDigitFileResults?: Array<VerifyDigitFileResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationSeals返回参数结构体
  */
 export interface DescribeOrganizationSealsResponse {
@@ -6101,30 +6153,28 @@ export interface DeleteIntegrationEmployeesRequest {
 }
 
 /**
- * 更新员工信息失败返回的数据信息
+ * DescribeUserAutoSignStatus请求参数结构体
  */
-export interface FailedUpdateStaffData {
+export interface DescribeUserAutoSignStatusRequest {
   /**
-   * 用户传入的名称
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  DisplayName?: string
+  Operator: UserInfo
   /**
-   * 用户传入的手机号，明文展示
+   * 自动签使用的场景值, 可以选择的场景值如下:
+<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
    */
-  Mobile?: string
+  SceneKey: string
   /**
-   * 失败原因
+   * 要查询状态的用户信息, 包括名字,身份证等
    */
-  Reason?: string
+  UserInfo: UserThreeFactor
   /**
-   * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
-  UserId?: string
-  /**
-   * 员工在第三方平台的openId
-   */
-  OpenId?: string
+  Agent?: Agent
 }
 
 /**
@@ -7722,6 +7772,33 @@ export interface GetTaskResultApiResponse {
 }
 
 /**
+ * 更新员工信息失败返回的数据信息
+ */
+export interface FailedUpdateStaffData {
+  /**
+   * 用户传入的名称
+   */
+  DisplayName?: string
+  /**
+   * 用户传入的手机号，明文展示
+   */
+  Mobile?: string
+  /**
+   * 失败原因
+   */
+  Reason?: string
+  /**
+   * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
+   */
+  UserId?: string
+  /**
+   * 员工在第三方平台的openId
+   */
+  OpenId?: string
+}
+
+/**
  * DescribeOrganizationVerifyStatus请求参数结构体
  */
 export interface DescribeOrganizationVerifyStatusRequest {
@@ -7847,28 +7924,70 @@ export interface ModifyApplicationCallbackInfoRequest {
 }
 
 /**
- * DescribeUserAutoSignStatus请求参数结构体
+ * CreateFileCounterSign返回参数结构体
  */
-export interface DescribeUserAutoSignStatusRequest {
+export interface CreateFileCounterSignResponse {
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * 加签任务的状态。
+
+<ul>
+<li><b>PROCESSING</b>: 任务正在执行中。</li>
+<li><b>FINISHED</b>: 已执行成功</li>
+</ul>
    */
-  Operator: UserInfo
+  Status?: string
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:
-<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   * 加签完成后新的文件Id
    */
-  SceneKey: string
+  ResultFileId?: string
   /**
-   * 要查询状态的用户信息, 包括名字,身份证等
+   * 异步模式下用于轮询状态的任务Id
    */
-  UserInfo: UserThreeFactor
+  TaskId?: string
   /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Agent?: Agent
+  RequestId?: string
+}
+
+/**
+ * 数字加签文件验签结果
+ */
+export interface VerifyDigitFileResult {
+  /**
+   * 证书起始时间的Unix时间戳，单位毫秒
+   */
+  CertNotBefore?: number
+  /**
+   * 证书过期时间的时间戳，单位毫秒
+   */
+  CertNotAfter?: number
+  /**
+   * 证书序列号，在数字证书申请过程中，系统会自动生成一个独一无二的序号。
+   */
+  CertSn?: string
+  /**
+   * 证书签名算法, 如SHA1withRSA等算法
+   */
+  SignAlgorithm?: string
+  /**
+   * 签署时间的Unix时间戳，单位毫秒
+   */
+  SignTime?: number
+  /**
+   * 签名类型。0表示带签章的数字签名，1表示仅数字签名
+   */
+  SignType?: number
+  /**
+   * 申请证书的主体的名字
+
+如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
+**企业**:  ESS@企业名称@编码
+**个人**: ESS@个人姓名@证件号@808854
+
+如果在其他平台签署的, 主体的名字参考其他平台的说明
+   */
+  SignerName?: string
 }
 
 /**
@@ -8203,56 +8322,31 @@ export interface FlowGroupApproverInfo {
 }
 
 /**
- * DescribeOrganizationSeals请求参数结构体
+ * DescribeFileCounterSignResult返回参数结构体
  */
-export interface DescribeOrganizationSealsRequest {
+export interface DescribeFileCounterSignResultResponse {
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
-   */
-  Operator: UserInfo
-  /**
-   * 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。
-   */
-  Limit?: number
-  /**
-   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。
-   */
-  Offset?: number
-  /**
-   * 查询授权用户信息类型，取值如下：
+   * 加签任务的状态。
 
-<ul> <li><b>0</b>：（默认）不返回授权用户信息</li> <li><b>1</b>：返回授权用户的信息</li> </ul>
-   */
-  InfoType?: number
-  /**
-   * 印章id，是否查询特定的印章（没有输入返回所有）
-   */
-  SealId?: string
-  /**
-   * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种：<ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>ORGANIZATION_SEAL</strong>：企业印章（通过图片上传创建）；</li> <li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> <li><strong>EMPLOYEE_QUALIFICATION_SEAL</strong>：员工执业章。</li> </ul>
-   */
-  SealTypes?: Array<string>
-  /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-   */
-  Agent?: Agent
-  /**
-   * 需查询的印章状态列表。
 <ul>
-<li>空：（默认）仅查询启用状态的印章；</li>
-<li><strong>ALL</strong>：查询所有状态的印章；</li>
-<li><strong>CHECKING</strong>：查询待审核的印章；</li>
-<li><strong>SUCCESS</strong>：查询启用状态的印章；</li>
-<li><strong>FAIL</strong>：查询印章审核拒绝的印章；</li>
-<li><strong>DISABLE</strong>：查询已停用的印章；</li>
-<li><strong>STOPPED</strong>：查询已终止的印章；</li>
-<li><strong>VOID</strong>：查询已作废的印章；</li>
-<li><strong>INVALID</strong>：查询已失效的印章。</li>
+<li><b>PROCESSING</b>: 任务正在执行中。</li>
+<li><b>FINISHED</b>: 已执行成功</li>
+<li><b>FAILED</b>: 执行失败</li>
 </ul>
    */
-  SealStatuses?: Array<string>
+  Status?: string
+  /**
+   * 加签完成后新的文件Id
+   */
+  ResultFileId?: string
+  /**
+   * 失败的错误信息，加签任务失败的情况下会返回。
+   */
+  ErrorDetail?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8864,23 +8958,48 @@ export interface CreateBatchSignUrlRequest {
 }
 
 /**
- * CreateFlowReminds请求参数结构体
+ * CreateExtendedServiceAuthInfos请求参数结构体
  */
-export interface CreateFlowRemindsRequest {
+export interface CreateExtendedServiceAuthInfosRequest {
   /**
    * 执行本接口操作的员工信息。
 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 需执行催办的签署流程ID数组，最多包含100个。
+   * 本企业员工的id，需要已实名，正常在职员工
    */
-  FlowIds: Array<string>
+  UserIds: Array<string>
+  /**
+   * 取值
+<ul><li>OPEN_SERVER_SIGN：企业自动签</li>
+<li>BATCH_SIGN：批量签署</li>
+</ul>
+   */
+  ExtendServiceType?: string
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * VerifyDigitFile请求参数结构体
+ */
+export interface VerifyDigitFileRequest {
+  /**
+   * 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 加签接口返回的文件Id
+   */
+  FileId?: string
 }
 
 /**
@@ -9470,6 +9589,59 @@ export interface UploadFilesRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * DescribeOrganizationSeals请求参数结构体
+ */
+export interface DescribeOrganizationSealsRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。
+   */
+  Limit?: number
+  /**
+   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。
+   */
+  Offset?: number
+  /**
+   * 查询授权用户信息类型，取值如下：
+
+<ul> <li><b>0</b>：（默认）不返回授权用户信息</li> <li><b>1</b>：返回授权用户的信息</li> </ul>
+   */
+  InfoType?: number
+  /**
+   * 印章id，是否查询特定的印章（没有输入返回所有）
+   */
+  SealId?: string
+  /**
+   * 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种：<ul> <li><strong>OFFICIAL</strong>：企业公章；</li> <li><strong>CONTRACT</strong>：合同专用章；</li> <li><strong>ORGANIZATION_SEAL</strong>：企业印章（通过图片上传创建）；</li> <li><strong>LEGAL_PERSON_SEAL</strong>：法定代表人章。</li> <li><strong>EMPLOYEE_QUALIFICATION_SEAL</strong>：员工执业章。</li> </ul>
+   */
+  SealTypes?: Array<string>
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 需查询的印章状态列表。
+<ul>
+<li>空：（默认）仅查询启用状态的印章；</li>
+<li><strong>ALL</strong>：查询所有状态的印章；</li>
+<li><strong>CHECKING</strong>：查询待审核的印章；</li>
+<li><strong>SUCCESS</strong>：查询启用状态的印章；</li>
+<li><strong>FAIL</strong>：查询印章审核拒绝的印章；</li>
+<li><strong>DISABLE</strong>：查询已停用的印章；</li>
+<li><strong>STOPPED</strong>：查询已终止的印章；</li>
+<li><strong>VOID</strong>：查询已作废的印章；</li>
+<li><strong>INVALID</strong>：查询已失效的印章。</li>
+</ul>
+   */
+  SealStatuses?: Array<string>
 }
 
 /**

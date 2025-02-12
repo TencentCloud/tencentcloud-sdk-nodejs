@@ -1368,7 +1368,7 @@ export interface ModifyPodNumRequest {
 }
 
 /**
- * Serverless HBase 实例信息
+ * Serverless HBase实例信息
  */
 export interface SLInstanceInfo {
   /**
@@ -1383,6 +1383,10 @@ export interface SLInstanceInfo {
    * 状态描述
    */
   StatusDesc?: string
+  /**
+   * 健康状态
+   */
+  HealthStatus?: string
   /**
    * 实例名称
    */

@@ -297,7 +297,7 @@ export interface CreateBoundIPRequest {
      */
     CopyPolicy?: string;
     /**
-     * 如果该资源实例为域名化资产则，该参数必填
+     * 如果该资源实例为域名化资产以及跨地域绑定则，该参数必填
      */
     FilterRegion?: string;
 }
@@ -2283,11 +2283,11 @@ export interface SuccessCode {
     /**
      * 描述
      */
-    Message: string;
+    Message?: string;
     /**
      * 成功/错误码
      */
-    Code: string;
+    Code?: string;
 }
 /**
  * AssociateDDoSEipAddress返回参数结构体

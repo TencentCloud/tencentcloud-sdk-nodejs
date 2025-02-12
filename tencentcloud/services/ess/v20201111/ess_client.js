@@ -277,6 +277,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowGroupByTemplates", req, cb);
     }
     /**
+     * 对加签后的文件进行数字签名验证，判断数字签名是否有效。
+     */
+    async VerifyDigitFile(req, cb) {
+        return this.request("VerifyDigitFile", req, cb);
+    }
+    /**
      * 创建一个用于他方自动签授权的链接（可选择他方授权或我方授权）。通过这个链接，合作方企业可以直接进入小程序，进行自动签授权操作。
 
 如果授权企业尚未开通企业自动签功能，该链接还将引导他们首先开通本企业的自动签服务
@@ -1363,6 +1369,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("DescribeFlowEvidenceReport", req, cb);
     }
     /**
+     * 文件CA加签任务结果查询接口，用于查询 CreateFileCounterSign接口 发起的异步加签任务。
+
+注意：`此接口为『数字文件CA加签服务』白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    async DescribeFileCounterSignResult(req, cb) {
+        return this.request("DescribeFileCounterSignResult", req, cb);
+    }
+    /**
      * 此接口（GetTaskResultApi）用来查询转换任务的状态。如需发起转换任务，请使用<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行资源文件的转换操作<br />
 前提条件：已调用 <a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行文件转换，并得到了返回的转换任务Id。<br />
 
@@ -1456,6 +1470,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async DescribeThirdPartyAuthCode(req, cb) {
         return this.request("DescribeThirdPartyAuthCode", req, cb);
+    }
+    /**
+     * 此接口用于发起数字文件CA加签操作。可以使用同步或者异步模式进行。
+
+**注意： 1. 文件类型暂时仅支持PDF类型文件。2. 此接口为『数字文件CA加签服务』白名单功能，使用前请联系对接的客户经理沟通。**
+     */
+    async CreateFileCounterSign(req, cb) {
+        return this.request("CreateFileCounterSign", req, cb);
     }
     /**
      * 查询企业印章列表。

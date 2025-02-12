@@ -658,6 +658,14 @@ export interface MediaAiAnalysisDescriptionItem {
    */
   Confidence?: number
   /**
+   * 智能描述标题
+   */
+  Title?: string
+  /**
+   * 智能描述关键词
+   */
+  Keywords?: Array<string>
+  /**
    * 分段结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3180,6 +3188,14 @@ export interface AiParagraphInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Summary?: string
+  /**
+   * 分段标题
+   */
+  Title?: string
+  /**
+   * 分段关键词
+   */
+  Keywords?: Array<string>
   /**
    * 分段起始时间点，秒
 注意：此字段可能返回 null，表示取不到有效值。

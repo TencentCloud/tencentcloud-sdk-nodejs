@@ -1731,7 +1731,6 @@ export interface ModifyBackupDownloadRestrictionRequest {
 export interface DisableReplicaReadonlyResponse {
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
@@ -1780,42 +1779,34 @@ export interface InstanceTagInfo {
 export interface DescribeInstanceDTSInfoResponse {
     /**
      * DTS任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobId?: string;
     /**
      * DTS任务名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     JobName?: string;
     /**
      * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 状态描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusDesc?: string;
     /**
      * 同步时延，单位：字节
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Offset?: number;
     /**
      * 断开时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CutDownTime?: string;
     /**
      * 源实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SrcInfo?: DescribeInstanceDTSInstanceInfo;
     /**
      * 目标实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DstInfo?: DescribeInstanceDTSInstanceInfo;
     /**
@@ -2239,7 +2230,6 @@ export interface DescribeBackupUrlResponse {
     Filenames?: Array<string>;
     /**
      * 备份文件信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupInfos?: Array<BackupDownloadInfo>;
     /**
@@ -2253,7 +2243,6 @@ export interface DescribeBackupUrlResponse {
 export interface InquiryPriceRenewInstanceResponse {
     /**
      * 价格，单位：分。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
@@ -2332,7 +2321,6 @@ export declare type DescribeProductInfoRequest = null;
 export interface InquiryPriceCreateInstanceResponse {
     /**
      * 价格，单位：分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
@@ -3708,12 +3696,10 @@ export interface RemoveReplicationInstanceRequest {
 export interface EnableReplicaReadonlyResponse {
     /**
      * 错误：ERROR，正确OK（已废弃）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 任务ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId?: number;
     /**
@@ -5712,12 +5698,10 @@ export interface ModifyInstanceReadOnlyRequest {
 export interface DescribeInstanceAccountResponse {
     /**
      * 账号详细信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Accounts?: Array<Account>;
     /**
      * 账号个数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -6052,7 +6036,6 @@ export interface SecurityGroupDetail {
 export interface InquiryPriceUpgradeInstanceResponse {
     /**
      * 价格，单位：分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Price?: number;
     /**
@@ -6278,7 +6261,6 @@ export interface DescribeInstanceNodeInfoResponse {
     ProxyCount?: number;
     /**
      * Proxy节点信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Proxy?: Array<ProxyNodes>;
     /**
@@ -6287,7 +6269,6 @@ export interface DescribeInstanceNodeInfoResponse {
     RedisCount?: number;
     /**
      * Redis节点信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Redis?: Array<RedisNodes>;
     /**
@@ -6296,7 +6277,6 @@ export interface DescribeInstanceNodeInfoResponse {
     TendisCount?: number;
     /**
      * 该参数不再使用，请忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tendis?: Array<TendisNodes>;
     /**
