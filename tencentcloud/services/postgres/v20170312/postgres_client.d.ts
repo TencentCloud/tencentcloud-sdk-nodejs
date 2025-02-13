@@ -114,7 +114,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceChargeType(req: ModifyDBInstanceChargeTypeRequest, cb?: (error: string, rep: ModifyDBInstanceChargeTypeResponse) => void): Promise<ModifyDBInstanceChargeTypeResponse>;
     /**
-     * 解除数据库账号的锁定，解锁后账号可以登陆数据库。
+     * 解除数据库账号的锁定，解锁后账号可以登录数据库。
      */
     UnlockAccount(req: UnlockAccountRequest, cb?: (error: string, rep: UnlockAccountResponse) => void): Promise<UnlockAccountResponse>;
     /**

@@ -545,7 +545,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解除数据库账号的锁定，解锁后账号可以登陆数据库。
+   * 解除数据库账号的锁定，解锁后账号可以登录数据库。
    */
   async UnlockAccount(
     req: UnlockAccountRequest,

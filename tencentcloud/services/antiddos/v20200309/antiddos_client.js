@@ -162,7 +162,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCCReqLimitPolicy", req, cb);
     }
     /**
-     * 开启或关闭DDoS防护的水印防护配置
+     * 开启或关闭DDoS防护的水印防护配置，此功能为付费增值服务，有需求请联系售后
      */
     async SwitchWaterPrintConfig(req, cb) {
         return this.request("SwitchWaterPrintConfig", req, cb);

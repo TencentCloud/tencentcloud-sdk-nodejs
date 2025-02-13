@@ -186,7 +186,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceChargeType", req, cb);
     }
     /**
-     * 解除数据库账号的锁定，解锁后账号可以登陆数据库。
+     * 解除数据库账号的锁定，解锁后账号可以登录数据库。
      */
     async UnlockAccount(req, cb) {
         return this.request("UnlockAccount", req, cb);

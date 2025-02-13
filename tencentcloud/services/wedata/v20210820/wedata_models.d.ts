@@ -6454,7 +6454,7 @@ export interface DeleteResourceFilesRequest {
      */
     ProjectId: string;
     /**
-     * 使用状态
+     * 使用状态， 为ture 判断资源的使用状态，如果使用中则不能删除
      */
     UseStatus: boolean;
     /**
@@ -6462,7 +6462,7 @@ export interface DeleteResourceFilesRequest {
      */
     ResourceIds?: Array<string>;
     /**
-     * 资源路径列表
+     * 需要删除的资源路径列表 即资源管理中的目录结构
      */
     FilePaths?: Array<string>;
 }
@@ -7977,12 +7977,16 @@ export interface PairDto {
      * 键名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Key?: string;
     /**
      * 值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value: string;
+    Value?: string;
+    /**
+     * 描述
+     */
+    Description?: string;
 }
 /**
  * cos token信息
@@ -14534,6 +14538,10 @@ export interface InstanceLogInfoOpsDto {
      * 日志匹配节点信息
      */
     MatchedBrokerIp?: string;
+    /**
+     * 执行平台通用协议
+     */
+    ExecutionExtendedProps?: Array<PairDto>;
 }
 /**
  * DeleteFilePath返回参数结构体

@@ -1,4 +1,29 @@
 /**
+ * Topic&Group维度的权限配置
+ */
+export interface DetailedRolePerm {
+    /**
+     * 权限对应的资源
+     */
+    Resource: string;
+    /**
+     * 是否开启生产权限
+     */
+    PermWrite: boolean;
+    /**
+     * 是否开启消费权限
+     */
+    PermRead: boolean;
+    /**
+     * 授权资源类型（Topic:主题; Group:消费组）
+     */
+    ResourceType: string;
+    /**
+     * 资源备注
+     */
+    Remark?: string;
+}
+/**
  * DescribeProductSKUs请求参数结构体
  */
 export declare type DescribeProductSKUsRequest = null;
@@ -1305,9 +1330,17 @@ export interface ModifyRoleRequest {
      */
     PermWrite: boolean;
     /**
+     * 权限类型，默认按集群授权（Cluster：集群维度；TopicAndGroup：主题和消费组维度）
+     */
+    PermType?: string;
+    /**
      * 备注
      */
     Remark?: string;
+    /**
+     * Topic&Group维度权限配置
+     */
+    DetailedPerms?: Array<DetailedRolePerm>;
 }
 /**
  * DescribeMQTTInsVPCEndpoints请求参数结构体
@@ -3210,10 +3243,6 @@ export interface CreateRoleRequest {
      */
     Role: string;
     /**
-     * 备注
-     */
-    Remark: string;
-    /**
      * 是否开启生产权限
      */
     PermWrite: boolean;
@@ -3221,6 +3250,18 @@ export interface CreateRoleRequest {
      * 是否开启消费权限
      */
     PermRead: boolean;
+    /**
+     * 备注
+     */
+    Remark: string;
+    /**
+     * 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别）
+     */
+    PermType?: string;
+    /**
+     * Topic&Group维度权限配置
+     */
+    DetailedPerms?: Array<DetailedRolePerm>;
 }
 /**
  * DeleteConsumerGroup返回参数结构体
@@ -3413,6 +3454,15 @@ export interface RoleItem {
      * 修改时间，秒为单位
      */
     ModifiedTime?: number;
+    /**
+     * 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别）
+     */
+    PermType?: string;
+    /**
+     * Topic和Group维度权限配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetailedRolePerms?: Array<DetailedRolePerm>;
 }
 /**
  * MQTT 主题详情

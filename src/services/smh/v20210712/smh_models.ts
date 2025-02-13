@@ -84,49 +84,58 @@ export interface Instance {
   /**
    * 实例 ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 专属域名。如果实例无专属域名，则该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 生效时间
    */
-  EffectiveTime: string
+  EffectiveTime?: string
   /**
    * 过期时间。如果为按量计费或永久有效实例，该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 用户数量。如果为按量计费或不限制用户数量实例，该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserLimit: number
+  UserLimit?: number
   /**
    * 存储容量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。如果为按量计费或不限制存储容量实例，该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageLimit: string
+  StorageLimit?: string
   /**
    * 存储容量，单位为 GB。如果为按量计费或不限制存储容量实例，该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageLimitGB: number
+  StorageLimitGB?: number
   /**
    * 是否过期隔离
    */
-  Isolated: boolean
+  Isolated?: boolean
   /**
    * 续费标识。0：手动续费；1：自动续费；2：到期不续。
    */
-  AutoRenew: number
+  AutoRenew?: number
   /**
    * 超级管理员账号，如果未选择查询实例绑定的超级管理员账号或当前实例未绑定超级管理员账号，则该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuperAdminAccount: string
+  SuperAdminAccount?: string
+  /**
+   * 自选桶模式下，展示存储桶使用
+   */
+  Bucket?: string
+  /**
+   * 自选桶模式下，展示日志桶使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogBucket?: string
 }
 
 /**
@@ -150,45 +159,45 @@ export interface TrafficPackage {
   /**
    * 流量资源包所抵扣的实例 ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 专属域名。如果实例无专属域名，则该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 流量资源包来源类型，0 为付费购买，1 为赠送。
    */
-  Type: number
+  Type?: number
   /**
    * 总流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。
    */
-  Size: string
+  Size?: string
   /**
    * 总流量，单位为 GB
    */
-  SizeGB: number
+  SizeGB?: number
   /**
    * 剩余流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。
    */
-  Remain: string
+  Remain?: string
   /**
    * 已使用流量，单位为 Bytes，由于数字类型精度限制，该字段为 String 类型。
    */
-  Used: string
+  Used?: string
   /**
    * 已使用百分比，由于数字类型精度限制，该字段为 String 类型。
    */
-  UsedPercentage: string
+  UsedPercentage?: string
   /**
    * 生效时间，即流量资源包的订购时间
    */
-  EffectiveTime: string
+  EffectiveTime?: string
   /**
    * 过期时间，即所抵扣的实例的过期时间。如果流量资源包所抵扣的实例为按量计费或永久有效实例，该属性为 null。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: string
+  ExpireTime?: string
 }
 
 /**
@@ -300,22 +309,18 @@ export interface CreateUserResponse {
   AccountUserId?: string
   /**
    * 备注。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
    * 昵称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nickname?: string
   /**
    * 用户头像地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Avatar?: string
   /**
    * 自定义信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Customize?: string
   /**
@@ -620,11 +625,11 @@ export interface DescribeOfficialInstancesResponse {
   /**
    * 实例列表
    */
-  List: Array<Instance>
+  List?: Array<Instance>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

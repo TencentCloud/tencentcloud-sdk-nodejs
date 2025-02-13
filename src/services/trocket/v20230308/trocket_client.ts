@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DetailedRolePerm,
   DescribeProductSKUsRequest,
   ProductSKU,
   DescribeRoleListResponse,
@@ -353,6 +354,7 @@ TopicName，主题名称过滤
      * 查询角色列表，Filter参数使用说明如下：
 
 1. RoleName，角色名称模糊搜索
+2. AccessKey，AccessKey模糊搜索
      */
   async DescribeRoleList(
     req: DescribeRoleListRequest,

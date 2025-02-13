@@ -885,42 +885,42 @@ export interface IDCardInfoResult {
      */
     WarnCodes?: Array<number | bigint>;
     /**
-     * 地址
+     * 地址（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Address?: string;
     /**
-     * 签发机关
+     * 发证机关（国徽面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Authority?: string;
     /**
-     * 出生日期
+     * 出生日期（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Birth?: string;
     /**
-     * 身份证号
+     * 身份证号（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdNum?: string;
     /**
-     * 名字
+     * 名字（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
-     * 地区
+     * 民族（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Nation?: string;
     /**
-     * 性别
+     * 性别（人像面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Sex?: string;
     /**
-     * 到期时间
+     * 证件有效期（国徽面）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidDate?: string;
@@ -943,6 +943,10 @@ export interface IDCardInfoResult {
      * 原图地址
      */
     ImageUrl?: string;
+    /**
+     * 身份证头像照片的地址（人像面）
+     */
+    PortraitUrl?: string;
 }
 /**
  * FinanBillSliceOCR返回参数结构体
@@ -8195,6 +8199,10 @@ export interface IDCardConfig {
      * 是否开启反光检测，默认为false
      */
     ReflectWarn?: boolean;
+    /**
+     * 是否开启头像剪切
+     */
+    CropPortrait?: boolean;
 }
 /**
  * ResidenceBookletOCR返回参数结构体

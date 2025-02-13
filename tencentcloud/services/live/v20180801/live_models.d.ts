@@ -3480,6 +3480,14 @@ export interface CallBackTemplateInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AudioAuditNotifyUrl?: string;
+    /**
+     * 录制异常回调 URL。
+     */
+    RecordExceptionNotifyUrl?: string;
+    /**
+     * 录制异常回调级别，可选择：error: 错误。alarm: 告警。
+     */
+    RecordExceptionLevels?: Array<string>;
 }
 /**
  * StopCasterPvw请求参数结构体
@@ -6773,6 +6781,14 @@ export interface CreateLiveCallbackTemplateRequest {
      * 音频审核回调 URL。
      */
     AudioAuditNotifyUrl?: string;
+    /**
+     * 录制异常回调 URL。
+     */
+    RecordExceptionNotifyUrl?: string;
+    /**
+     * 录制异常回调级别，可选择：error、warning、info。
+     */
+    RecordExceptionLevels?: Array<string>;
 }
 /**
  * 推断流事件信息。
@@ -11083,6 +11099,14 @@ export interface ModifyLiveCallbackTemplateRequest {
      * 音频审核回调 URL。
      */
     AudioAuditNotifyUrl?: string;
+    /**
+     * 录制异常回调 URL。
+     */
+    RecordExceptionNotifyUrl?: string;
+    /**
+     * 录制异常回调级别，可选择：error、warning、info。
+     */
+    RecordExceptionLevels?: Array<string>;
 }
 /**
  * DescribeMonitorReport请求参数结构体

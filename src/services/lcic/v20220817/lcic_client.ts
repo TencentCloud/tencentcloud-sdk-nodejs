@@ -124,6 +124,7 @@ import {
   DescribeAnswerListResponse,
   DescribeRoomStatisticsResponse,
   DeleteDocumentRequest,
+  DescribeRecordTaskResponse,
   DescribeSupervisorsRequest,
   MessageList,
   DescribeGroupRequest,
@@ -161,6 +162,7 @@ import {
   GetRoomsRequest,
   ForbidSendMsgResponse,
   SendRoomNormalMessageRequest,
+  DescribeRecordTaskRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
   BatchDescribeDocumentResponse,
@@ -214,6 +216,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoomForbiddenUserResponse) => void
   ): Promise<DescribeRoomForbiddenUserResponse> {
     return this.request("DescribeRoomForbiddenUser", req, cb)
+  }
+
+  /**
+   * 获取房间统计信息，仅可在房间结束后调用。
+   */
+  async DescribeRoomStatistics(
+    req: DescribeRoomStatisticsRequest,
+    cb?: (error: string, rep: DescribeRoomStatisticsResponse) => void
+  ): Promise<DescribeRoomStatisticsResponse> {
+    return this.request("DescribeRoomStatistics", req, cb)
   }
 
   /**
@@ -579,13 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间统计信息，仅可在房间结束后调用。
+   * 查询录制任务ID
    */
-  async DescribeRoomStatistics(
-    req: DescribeRoomStatisticsRequest,
-    cb?: (error: string, rep: DescribeRoomStatisticsResponse) => void
-  ): Promise<DescribeRoomStatisticsResponse> {
-    return this.request("DescribeRoomStatistics", req, cb)
+  async DescribeRecordTask(
+    req: DescribeRecordTaskRequest,
+    cb?: (error: string, rep: DescribeRecordTaskResponse) => void
+  ): Promise<DescribeRecordTaskResponse> {
+    return this.request("DescribeRecordTask", req, cb)
   }
 
   /**

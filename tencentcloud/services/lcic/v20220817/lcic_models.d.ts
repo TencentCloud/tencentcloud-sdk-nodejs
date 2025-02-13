@@ -2520,6 +2520,19 @@ export interface DeleteDocumentRequest {
     DocumentId: string;
 }
 /**
+ * DescribeRecordTask返回参数结构体
+ */
+export interface DescribeRecordTaskResponse {
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSupervisors请求参数结构体
  */
 export interface DescribeSupervisorsRequest {
@@ -3370,6 +3383,19 @@ export interface SendRoomNormalMessageRequest {
      * 昵称，当FromAccount没有在房间中，需要填写NickName，当FromAccount在房间中，填写NickName无意义
      */
     NickName?: string;
+}
+/**
+ * DescribeRecordTask请求参数结构体
+ */
+export interface DescribeRecordTaskRequest {
+    /**
+     * 学校ID
+     */
+    SdkAppId: number;
+    /**
+     * 房间ID
+     */
+    RoomId: number;
 }
 /**
  * DescribeDeveloper请求参数结构体

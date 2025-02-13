@@ -98,7 +98,7 @@ export declare class Client extends AbstractClient {
      */
     CreateCCReqLimitPolicy(req: CreateCCReqLimitPolicyRequest, cb?: (error: string, rep: CreateCCReqLimitPolicyResponse) => void): Promise<CreateCCReqLimitPolicyResponse>;
     /**
-     * 开启或关闭DDoS防护的水印防护配置
+     * 开启或关闭DDoS防护的水印防护配置，此功能为付费增值服务，有需求请联系售后
      */
     SwitchWaterPrintConfig(req: SwitchWaterPrintConfigRequest, cb?: (error: string, rep: SwitchWaterPrintConfigResponse) => void): Promise<SwitchWaterPrintConfigResponse>;
     /**

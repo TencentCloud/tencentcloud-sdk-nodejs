@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRoomForbiddenUser", req, cb);
     }
     /**
+     * 获取房间统计信息，仅可在房间结束后调用。
+     */
+    async DescribeRoomStatistics(req, cb) {
+        return this.request("DescribeRoomStatistics", req, cb);
+    }
+    /**
      * App 管理员可以通过该接口在群组中发送通知、公告等。目前仅支持文本消息。
      */
     async SendRoomNotificationMessage(req, cb) {
@@ -258,10 +264,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterUser", req, cb);
     }
     /**
-     * 获取房间统计信息，仅可在房间结束后调用。
+     * 查询录制任务ID
      */
-    async DescribeRoomStatistics(req, cb) {
-        return this.request("DescribeRoomStatistics", req, cb);
+    async DescribeRecordTask(req, cb) {
+        return this.request("DescribeRecordTask", req, cb);
     }
     /**
      * 功能概述

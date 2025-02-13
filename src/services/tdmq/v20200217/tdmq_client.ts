@@ -123,6 +123,7 @@ import {
   EnvironmentRole,
   ImportRocketMQTopicsRequest,
   DeleteRabbitMQVipInstanceResponse,
+  DetailedRolePerm,
   RabbitMQClusterAccessInfo,
   DescribeBindClustersResponse,
   ModifyRabbitMQVirtualHostRequest,

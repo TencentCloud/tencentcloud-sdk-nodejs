@@ -547,6 +547,10 @@ export interface QueueConfigOverview {
      */
     DesiredIdleNodeCapacity?: number;
     /**
+     * 队列中期望的总节点数。
+     */
+    DesiredNodeCount?: number;
+    /**
      * 扩容比例。默认值：100。取值范围：1～100。
   如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1805,6 +1809,10 @@ export interface QueueConfig {
      * 队列中期望的空闲节点数量（包含弹性节点和静态节点）。默认值：0。队列中，处于空闲状态的节点小于此值，集群会扩容弹性节点；处于空闲状态的节点大于此值，集群会缩容弹性节点。
      */
     DesiredIdleNodeCapacity?: number;
+    /**
+     * 队列中期望的总节点数。
+     */
+    DesiredNodeCount?: number;
     /**
      * 扩容比例。默认值：100。取值范围：1～100。
   如果扩容比例为50，那么每轮只会扩容当前作业负载所需的50%数量的节点。

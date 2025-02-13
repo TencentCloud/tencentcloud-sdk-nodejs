@@ -1791,11 +1791,11 @@ export interface CreateVpnGatewaySslServerRequest {
      */
     SslVpnPort?: number;
     /**
-     * 认证算法。可选 'SHA1', 'MD5', 'NONE'，默认NONE。
+     * 认证算法。可选 'SHA1'，默认SHA1。
      */
     IntegrityAlgorithm?: string;
     /**
-     * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 'NONE'，默认NONE。
+     * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。
      */
     EncryptAlgorithm?: string;
     /**
@@ -2361,7 +2361,11 @@ export interface DescribeTrafficMirrorsRequest {
      */
     TrafficMirrorIds?: Array<string>;
     /**
-     * 流量镜像查询过滤调节
+     * 流量镜像查询过滤调节。
+  vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。
+  traffic-mirror-id：流量镜像实例ID。
+  traffic-mirror-name：流量镜像名称。
+  tag-key ：按照标签键进行过滤。
      */
     Filters?: Filter;
     /**
@@ -7166,62 +7170,62 @@ export interface TrafficMirror {
     /**
      * VPC实例ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 流量镜像实例。
      */
-    TrafficMirrorId: string;
+    TrafficMirrorId?: string;
     /**
      * 流量镜像名字。
      */
-    TrafficMirrorName: string;
+    TrafficMirrorName?: string;
     /**
      * 流量镜像描述。
      */
-    TrafficMirrorDescribe: string;
+    TrafficMirrorDescribe?: string;
     /**
      * 流量镜像状态。
      */
-    State: string;
+    State?: string;
     /**
      * 流量镜像采集方向。
      */
-    Direction: string;
+    Direction?: string;
     /**
      * 流量镜像采集对象。
      */
-    CollectorSrcs: Array<string>;
+    CollectorSrcs?: Array<string>;
     /**
      * 流量镜像过滤的nat网关实例ID。
      */
-    NatId: string;
+    NatId?: string;
     /**
      * 流量镜像过滤的五元组规则。
      */
-    CollectorNormalFilters: Array<TrafficMirrorFilter>;
+    CollectorNormalFilters?: Array<TrafficMirrorFilter>;
     /**
      * 流量镜接收目标。
      */
-    CollectorTarget: TrafficMirrorTarget;
+    CollectorTarget?: TrafficMirrorTarget;
     /**
      * 流量镜像创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 流量镜像的类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 流量镜像所属的子网ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetInfo: Array<TrafficMirrorTargetResourceInfo>;
+    TargetInfo?: Array<TrafficMirrorTargetResourceInfo>;
 }
 /**
  * DeleteCustomerGateway返回参数结构体
@@ -10017,11 +10021,11 @@ export interface ModifyVpnGatewaySslServerRequest {
      */
     SslVpnPort?: number;
     /**
-     * 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE
+     * 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。
      */
     EncryptAlgorithm?: string;
     /**
-     * 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE
+     * 认证算法。可选 'SHA1'，默认SHA1。
      */
     IntegrityAlgorithm?: string;
     /**
@@ -17267,7 +17271,7 @@ export interface CreateTrafficMirrorRequest {
      */
     Direction?: string;
     /**
-     * 流量镜像的采集对象，支持eni_xxxx。
+     * 流量镜像的采集对象。
      */
     CollectorSrcs?: Array<string>;
     /**

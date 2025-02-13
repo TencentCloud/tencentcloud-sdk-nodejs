@@ -84,6 +84,7 @@ TopicName，主题名称过滤
      * 查询角色列表，Filter参数使用说明如下：
 
 1. RoleName，角色名称模糊搜索
+2. AccessKey，AccessKey模糊搜索
      */
     DescribeRoleList(req: DescribeRoleListRequest, cb?: (error: string, rep: DescribeRoleListResponse) => void): Promise<DescribeRoleListResponse>;
     /**

@@ -515,7 +515,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或关闭DDoS防护的水印防护配置
+   * 开启或关闭DDoS防护的水印防护配置，此功能为付费增值服务，有需求请联系售后
    */
   async SwitchWaterPrintConfig(
     req: SwitchWaterPrintConfigRequest,
