@@ -1875,32 +1875,26 @@ export interface AppConfig {
   ApplicationId?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppName?: string
   /**
    * 应用状态 1正常 2停用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: number
   /**
    * 1试用 2轻量版 3标准版 4旗舰版
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppVersion?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
    * 回调
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Callback?: string
   /**
    * 回调Key
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackKey?: string
 }
@@ -3797,7 +3791,6 @@ export interface CreateSupervisorRequest {
 export interface BackgroundPictureConfig {
   /**
    * 背景图片的url
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
 }

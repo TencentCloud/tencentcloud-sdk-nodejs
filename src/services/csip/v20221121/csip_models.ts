@@ -904,12 +904,10 @@ export interface StatisticalFilter {
 1:发生次数高于固定值
 2:发生次数高于周期平均值的百分之
 3:发生次数高于用户平均值的百分之
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType: number
   /**
    * 统计值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: number
 }
@@ -5364,19 +5362,16 @@ export interface ReportTaskIdList {
 export interface UebaRule {
   /**
    * 策略id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleID?: string
   /**
    * 规则名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
    * 策略类型
 0:系统策略
 1:自定义策略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: number
   /**
@@ -5386,54 +5381,44 @@ export interface UebaRule {
 2:中危
 3:高危
 4:严重
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleLevel?: number
   /**
    * 策略内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleContent?: string
   /**
    * 策略开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleStatus?: boolean
   /**
    * 命中次数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   HitCount?: number
   /**
    * 所属账号Appid
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppID?: string
   /**
    * 多账号，成员ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MemberID?: string
   /**
    * Uin
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
    * 昵称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nickname?: string
   /**
    * 自定义规则具体内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomRuleDetail?: UebaCustomRule
   /**
    * 云类型
 腾讯云：0
 aws：1
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudType?: number
 }

@@ -171,7 +171,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSplitDocumentFlow", req, cb);
     }
     /**
-     * 用于上传实时文档内容。实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
+     * 用于上传实时文档内容。
+实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
      */
     async UploadDocRealtime(req, cb) {
         return this.request("UploadDocRealtime", req, cb);

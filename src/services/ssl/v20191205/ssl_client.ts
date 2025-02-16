@@ -367,7 +367,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
+   * 付费证书提交资料； 本接口不维护新功能， 可使用新接口进行资料提交， [CertificateInfoSubmit](https://cloud.tencent.com/document/product/400/116033)
    */
   async SubmitCertificateInformation(
     req: SubmitCertificateInformationRequest,
@@ -377,7 +377,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云资源更新一键回滚
+   * 云资源更新成功记录回滚， 只对更新已成功的记录回滚
    */
   async UpdateCertificateRecordRollback(
     req: UpdateCertificateRecordRollbackRequest,
@@ -607,7 +607,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云资源部署一键回滚
+   * 云资源部署成功记录回滚， 部署失败的记录不会回滚； 接口调用成功后， 会创建一个用于回滚的部署任务， 并返回该任务的ID
    */
   async DeployCertificateRecordRollback(
     req: DeployCertificateRecordRollbackRequest,
@@ -637,7 +637,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查证书域名验证
+   * 检查证书域名验证结果
    */
   async CheckCertificateDomainVerification(
     req: CheckCertificateDomainVerificationRequest,
@@ -737,7 +737,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询证书云资源更新记录详情列表
+   * 查询证书云资源更新记录详情
    */
   async DescribeHostUpdateRecordDetail(
     req: DescribeHostUpdateRecordDetailRequest,
@@ -747,7 +747,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交证书订单到CA机构。
+   * 付费证书提交订单； 本接口不维护新功能， 可使用新接口进行提交， [CertificateOrderSubmit](https://cloud.tencent.com/document/product/400/116032)
    */
   async CommitCertificateInformation(
     req: CommitCertificateInformationRequest,

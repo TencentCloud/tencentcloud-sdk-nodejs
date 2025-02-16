@@ -9366,25 +9366,37 @@ export interface CloseAuditServiceRequest {
 }
 
 /**
- * CPU弹性扩容的自动扩容策略
+ * CPU 弹性扩容的自动扩容策略。
  */
 export interface AutoStrategy {
   /**
-   * 自动扩容阈值，可选值70、80、90，代表CPU利用率达到70%、80%、90%时后台进行自动扩容
+   * 自动扩容阈值，可选值40、50、60、70、80、90，代表 CPU 利用率达到40%、50%、60%、70%、80%、90%时后台进行自动扩容。
    */
   ExpandThreshold: number
-  /**
-   * 自动扩容观测周期，单位是分钟，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。
-   */
-  ExpandPeriod: number
   /**
    * 自动缩容阈值，可选值10、20、30，代表CPU利用率达到10%、20%、30%时后台进行自动缩容
    */
   ShrinkThreshold: number
   /**
-   * 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。
+   * 自动扩容观测周期，单位是分钟，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  ShrinkPeriod: number
+  ExpandPeriod?: number
+  /**
+   * 自动缩容观测周期，单位是分钟，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ShrinkPeriod?: number
+  /**
+   * 弹性扩容观测周期（秒级）
+   */
+  ExpandSecondPeriod?: number
+  /**
+   * 缩容观测周期（秒级）
+   */
+  ShrinkSecondPeriod?: number
 }
 
 /**

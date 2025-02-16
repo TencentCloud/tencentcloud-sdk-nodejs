@@ -67,11 +67,11 @@ export declare class Client extends AbstractClient {
      */
     DescribePackages(req: DescribePackagesRequest, cb?: (error: string, rep: DescribePackagesResponse) => void): Promise<DescribePackagesResponse>;
     /**
-     * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
+     * 付费证书提交资料； 本接口不维护新功能， 可使用新接口进行资料提交， [CertificateInfoSubmit](https://cloud.tencent.com/document/product/400/116033)
      */
     SubmitCertificateInformation(req: SubmitCertificateInformationRequest, cb?: (error: string, rep: SubmitCertificateInformationResponse) => void): Promise<SubmitCertificateInformationResponse>;
     /**
-     * 云资源更新一键回滚
+     * 云资源更新成功记录回滚， 只对更新已成功的记录回滚
      */
     UpdateCertificateRecordRollback(req: UpdateCertificateRecordRollbackRequest, cb?: (error: string, rep: UpdateCertificateRecordRollbackResponse) => void): Promise<UpdateCertificateRecordRollbackResponse>;
     /**
@@ -163,7 +163,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeHostDeployRecordDetail(req: DescribeHostDeployRecordDetailRequest, cb?: (error: string, rep: DescribeHostDeployRecordDetailResponse) => void): Promise<DescribeHostDeployRecordDetailResponse>;
     /**
-     * 云资源部署一键回滚
+     * 云资源部署成功记录回滚， 部署失败的记录不会回滚； 接口调用成功后， 会创建一个用于回滚的部署任务， 并返回该任务的ID
      */
     DeployCertificateRecordRollback(req: DeployCertificateRecordRollbackRequest, cb?: (error: string, rep: DeployCertificateRecordRollbackResponse) => void): Promise<DeployCertificateRecordRollbackResponse>;
     /**
@@ -175,7 +175,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCertificateBindResourceTaskResult(req: DescribeCertificateBindResourceTaskResultRequest, cb?: (error: string, rep: DescribeCertificateBindResourceTaskResultResponse) => void): Promise<DescribeCertificateBindResourceTaskResultResponse>;
     /**
-     * 检查证书域名验证
+     * 检查证书域名验证结果
      */
     CheckCertificateDomainVerification(req: CheckCertificateDomainVerificationRequest, cb?: (error: string, rep: CheckCertificateDomainVerificationResponse) => void): Promise<CheckCertificateDomainVerificationResponse>;
     /**
@@ -215,11 +215,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeHostLighthouseInstanceList(req: DescribeHostLighthouseInstanceListRequest, cb?: (error: string, rep: DescribeHostLighthouseInstanceListResponse) => void): Promise<DescribeHostLighthouseInstanceListResponse>;
     /**
-     * 查询证书云资源更新记录详情列表
+     * 查询证书云资源更新记录详情
      */
     DescribeHostUpdateRecordDetail(req: DescribeHostUpdateRecordDetailRequest, cb?: (error: string, rep: DescribeHostUpdateRecordDetailResponse) => void): Promise<DescribeHostUpdateRecordDetailResponse>;
     /**
-     * 提交证书订单到CA机构。
+     * 付费证书提交订单； 本接口不维护新功能， 可使用新接口进行提交， [CertificateOrderSubmit](https://cloud.tencent.com/document/product/400/116032)
      */
     CommitCertificateInformation(req: CommitCertificateInformationRequest, cb?: (error: string, rep: CommitCertificateInformationResponse) => void): Promise<CommitCertificateInformationResponse>;
     /**

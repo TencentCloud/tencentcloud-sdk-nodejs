@@ -105,9 +105,10 @@ export declare class Client extends AbstractClient {
      */
     CreateSplitDocumentFlow(req: CreateSplitDocumentFlowRequest, cb?: (error: string, rep: CreateSplitDocumentFlowResponse) => void): Promise<CreateSplitDocumentFlowResponse>;
     /**
-     * 用于上传实时文档内容。实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
+     * 用于上传实时文档内容。
+实时文档在上传后可以立即通过SearchRealtime进行实时检索，适用于在会话中对文档进行问答的场景。
      */
-    UploadDocRealtime(req?: UploadDocRealtimeRequest, cb?: (error: string, rep: UploadDocRealtimeResponse) => void): Promise<UploadDocRealtimeResponse>;
+    UploadDocRealtime(req: UploadDocRealtimeRequest, cb?: (error: string, rep: UploadDocRealtimeResponse) => void): Promise<UploadDocRealtimeResponse>;
     /**
      * 用于上传文档内容。上传的文档将存储在知识库中，可以通过SearchKnowledge知识库内容检索接口进行检索。
 使用场景：适用于需要长期存储和检索的文档内容，如产品手册、用户指南等。

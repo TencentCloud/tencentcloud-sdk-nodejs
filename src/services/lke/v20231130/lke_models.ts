@@ -2372,6 +2372,16 @@ export interface AgentProcedure {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Elapsed?: number
+  /**
+   * 工作流节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeName?: string
+  /**
+   * 用于展示思考放在哪个回复气泡中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplyIndex?: number
 }
 
 /**

@@ -367,6 +367,7 @@ export declare class Client extends AbstractClient {
     AdjustCdbProxy(req: AdjustCdbProxyRequest, cb?: (error: string, rep: AdjustCdbProxyResponse) => void): Promise<AdjustCdbProxyResponse>;
     /**
      * 该接口（ModifyProtectMode）用于修改实例的同步方式。
+说明：仅专属集群可调用，该接口即将下线。
      */
     ModifyProtectMode(req: ModifyProtectModeRequest, cb?: (error: string, rep: ModifyProtectModeResponse) => void): Promise<ModifyProtectModeResponse>;
     /**
