@@ -92,12 +92,10 @@ export interface DockerContainerPublishPort {
     ContainerPort: number;
     /**
      * 对外绑定IP，默认0.0.0.0
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 协议，默认tcp，支持tcp/udp/sctp
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
 }
@@ -345,7 +343,6 @@ export interface DescribeBlueprintInstancesResponse {
 export interface InstanceDeniedActions {
     /**
      * 实例 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
@@ -1065,17 +1062,14 @@ export interface DiskBackup {
     Percent?: number;
     /**
      * 上一次操作
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestOperation?: string;
     /**
      * 上一次操作状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestOperationState?: string;
     /**
      * 上一次请求ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LatestOperationRequestId?: string;
     /**
@@ -2004,28 +1998,27 @@ export interface DataDiskPrice {
     /**
      * 云硬盘ID。
      */
-    DiskId: string;
+    DiskId?: string;
     /**
      * 云硬盘单价。
      */
-    OriginalDiskPrice: number;
+    OriginalDiskPrice?: number;
     /**
      * 云硬盘总价。
      */
-    OriginalPrice: number;
+    OriginalPrice?: number;
     /**
      * 折扣。
      */
-    Discount: number;
+    Discount?: number;
     /**
      * 折后总价。
      */
-    DiscountPrice: number;
+    DiscountPrice?: number;
     /**
      * 数据盘挂载的实例ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
 }
 /**
  * 用户执行TAT命令的数据结构。
@@ -2651,7 +2644,6 @@ export interface Instance {
     InitInvocationId?: string;
     /**
      * 实例违规详情。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceViolationDetail?: InstanceViolationDetail;
 }
@@ -2895,7 +2887,6 @@ export interface Blueprint {
     RequiredMemorySize?: number;
     /**
      * CVM镜像共享到轻量应用服务器轻量应用服务器后的CVM镜像ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageId?: string;
     /**
@@ -2908,7 +2899,6 @@ export interface Blueprint {
     GuideUrl?: string;
     /**
      * 镜像关联使用场景Id列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneIdSet?: Array<string>;
     /**
@@ -2940,12 +2930,10 @@ export interface InquirePriceCreateInstancesResponse {
 export interface TotalPrice {
     /**
      * 原始总计价格。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPrice?: number;
     /**
      * 折扣总计价格。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPrice?: number;
 }
@@ -3074,7 +3062,6 @@ export interface Bundle {
     BundleType?: string;
     /**
      * 套餐类型描述信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BundleTypeDescription?: string;
     /**
@@ -3440,7 +3427,6 @@ export interface DockerActivity {
     CreatedTime?: string;
     /**
      * 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
 }
@@ -3733,10 +3719,12 @@ export interface DescribeInstancesReturnableResponse {
 export interface ContainerEnv {
     /**
      * 环境变量Key
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
      * 环境变量值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -3767,19 +3755,16 @@ export interface TrafficPackage {
     /**
      * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Deadline?: string;
     /**
@@ -4376,12 +4361,10 @@ export interface ReplaceFirewallTemplateRuleRequest {
 export interface InstancePriceDetail {
     /**
      * 实例ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 询价信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstancePrice?: InstancePrice;
     /**
@@ -4689,7 +4672,6 @@ export interface InstancePrice {
     DiscountPrice?: number;
     /**
      * 价格货币单位。取值范围CNY:人民币。USD:美元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Currency?: string;
 }

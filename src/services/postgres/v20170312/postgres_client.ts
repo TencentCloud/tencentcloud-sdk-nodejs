@@ -19,7 +19,9 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateDBInstancesRequest,
+  TaskDetail,
   SetAutoRenewFlagRequest,
+  DeleteBackupPlanResponse,
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   DescribeDBXlogsRequest,
@@ -52,6 +54,7 @@ import {
   RemoveDBInstanceFromReadOnlyGroupRequest,
   CreateAccountRequest,
   InitDBInstancesResponse,
+  DescribeTasksResponse,
   DescribeMaintainTimeWindowResponse,
   DescribeDefaultParametersRequest,
   DescribeDedicatedClustersResponse,
@@ -71,17 +74,18 @@ import {
   NormalQueryItem,
   Tag,
   DescribeBackupSummariesRequest,
-  DescribeDBInstanceAttributeRequest,
+  CreateBackupPlanRequest,
   CloseServerlessDBExtranetAccessRequest,
   CreateBaseBackupResponse,
   LockAccountResponse,
   CloneDBInstanceResponse,
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
+  EncryptionKey,
   BaseBackup,
   CreateReadOnlyDBInstanceResponse,
   DescribeAvailableRecoveryTimeRequest,
-  DurationAnalysis,
+  DescribeTasksRequest,
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
   DescribeBackupDownloadURLResponse,
@@ -91,6 +95,7 @@ import {
   Version,
   CreateDBInstanceNetworkAccessRequest,
   ModifySwitchTimePeriodResponse,
+  TaskSet,
   InquiryPriceCreateDBInstancesRequest,
   DescribeDefaultParametersResponse,
   ServerlessDBInstanceNetInfo,
@@ -109,6 +114,7 @@ import {
   SetAutoRenewFlagResponse,
   ModifyPrivilege,
   NetworkAccess,
+  DescribeDBInstanceAttributeRequest,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   RawSlowQuery,
@@ -118,7 +124,7 @@ import {
   DatabaseObject,
   UpgradeDBInstanceKernelVersionRequest,
   SwitchDBInstancePrimaryResponse,
-  UnlockAccountRequest,
+  ModifyReadOnlyDBInstanceWeightResponse,
   ModifyDBInstanceHAConfigRequest,
   PgDeal,
   DeleteReadOnlyGroupNetworkAccessResponse,
@@ -127,6 +133,7 @@ import {
   DescribeDBErrlogsRequest,
   DBBackup,
   ModifyDBInstancesProjectResponse,
+  DeleteBackupPlanRequest,
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
   DescribeClassesRequest,
@@ -141,6 +148,7 @@ import {
   DescribeSlowQueryListResponse,
   ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
+  ModifyDBInstanceSSLConfigResponse,
   DescribeParamsEventResponse,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeDedicatedClustersRequest,
@@ -160,7 +168,7 @@ import {
   DescribeDatabaseObjectsResponse,
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
-  EncryptionKey,
+  DescribeDBInstanceSSLConfigResponse,
   ModifyParameterTemplateRequest,
   DeleteAccountRequest,
   UpgradeDBInstanceKernelVersionResponse,
@@ -174,17 +182,21 @@ import {
   DescribeClassesResponse,
   DeleteDBInstanceNetworkAccessRequest,
   ModifyDBInstanceDeploymentResponse,
+  UnlockAccountRequest,
   DBInstance,
   DeleteParameterTemplateResponse,
+  ModifyReadOnlyDBInstanceWeightRequest,
   ModifyAccountPrivilegesResponse,
   Database,
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
+  RestartDBInstanceResponse,
   Filter,
   DescribeReadOnlyGroupsRequest,
   DescribeBaseBackupsResponse,
   ModifyDBInstanceParametersResponse,
   DescribeDBVersionsResponse,
+  ModifyDBInstanceSSLConfigRequest,
   DatabasePrivilege,
   UnlockAccountResponse,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -224,6 +236,7 @@ import {
   InquiryPriceUpgradeDBInstanceResponse,
   DisIsolateDBInstancesResponse,
   CreateParameterTemplateRequest,
+  DescribeDBInstanceSSLConfigRequest,
   ModifyDatabaseOwnerResponse,
   ModifySwitchTimePeriodRequest,
   CreateAccountResponse,
@@ -232,7 +245,7 @@ import {
   RegionInfo,
   ModifyDatabaseOwnerRequest,
   DisIsolateDBInstancesRequest,
-  RestartDBInstanceResponse,
+  CreateBackupPlanResponse,
   LockAccountRequest,
   DescribeDBInstancesResponse,
   DescribeDBInstanceSecurityGroupsRequest,
@@ -246,6 +259,7 @@ import {
   ModifyDBInstanceParametersRequest,
   DedicatedCluster,
   ServerlessDBAccount,
+  DurationAnalysis,
   DescribeDBSlowlogsResponse,
   DescribeAccountPrivilegesRequest,
   DescribeReadOnlyGroupsResponse,
@@ -280,6 +294,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig)
+  }
+
+  /**
+   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+   */
+  async ModifyMaintainTimeWindow(
+    req: ModifyMaintainTimeWindowRequest,
+    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
+  ): Promise<ModifyMaintainTimeWindowResponse> {
+    return this.request("ModifyMaintainTimeWindow", req, cb)
   }
 
   /**
@@ -445,23 +469,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**
-   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
-   */
-  async ModifyMaintainTimeWindow(
-    req: ModifyMaintainTimeWindowRequest,
-    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
-  ): Promise<ModifyMaintainTimeWindowResponse> {
-    return this.request("ModifyMaintainTimeWindow", req, cb)
+     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
+注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
+     */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
   }
 
   /**
@@ -865,13 +890,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
    */
-  async DeleteReadOnlyGroup(
-    req: DeleteReadOnlyGroupRequest,
-    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
-  ): Promise<DeleteReadOnlyGroupResponse> {
-    return this.request("DeleteReadOnlyGroup", req, cb)
+  async ModifyDBInstancesProject(
+    req: ModifyDBInstancesProjectRequest,
+    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
+  ): Promise<ModifyDBInstancesProjectResponse> {
+    return this.request("ModifyDBInstancesProject", req, cb)
   }
 
   /**
@@ -915,13 +940,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
+   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
    */
-  async ModifyDBInstancesProject(
-    req: ModifyDBInstancesProjectRequest,
-    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
-  ): Promise<ModifyDBInstancesProjectResponse> {
-    return this.request("ModifyDBInstancesProject", req, cb)
+  async DeleteReadOnlyGroup(
+    req: DeleteReadOnlyGroupRequest,
+    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
+  ): Promise<DeleteReadOnlyGroupResponse> {
+    return this.request("DeleteReadOnlyGroup", req, cb)
   }
 
   /**
@@ -1107,6 +1132,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于创建备份策略。
+   */
+  async CreateBackupPlan(
+    req: CreateBackupPlanRequest,
+    cb?: (error: string, rep: CreateBackupPlanResponse) => void
+  ): Promise<CreateBackupPlanResponse> {
+    return this.request("CreateBackupPlan", req, cb)
+  }
+
+  /**
    * 本接口（DescribeParamsEvent）用于查询参数修改事件。
    */
   async DescribeParamsEvent(
@@ -1147,6 +1182,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchDBInstancePrimaryResponse) => void
   ): Promise<SwitchDBInstancePrimaryResponse> {
     return this.request("SwitchDBInstancePrimary", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyReadOnlyDBInstanceWeight）用于修改只读实例权重
+   */
+  async ModifyReadOnlyDBInstanceWeight(
+    req: ModifyReadOnlyDBInstanceWeightRequest,
+    cb?: (error: string, rep: ModifyReadOnlyDBInstanceWeightResponse) => void
+  ): Promise<ModifyReadOnlyDBInstanceWeightResponse> {
+    return this.request("ModifyReadOnlyDBInstanceWeight", req, cb)
   }
 
   /**
@@ -1210,6 +1255,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于修改实例SSL配置，功能包含开启、关闭、修改SSL证书保护的连接地址。
+   */
+  async ModifyDBInstanceSSLConfig(
+    req: ModifyDBInstanceSSLConfigRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSSLConfigResponse) => void
+  ): Promise<ModifyDBInstanceSSLConfigResponse> {
+    return this.request("ModifyDBInstanceSSLConfig", req, cb)
+  }
+
+  /**
    * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
    */
   async InitDBInstances(
@@ -1227,6 +1282,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZonesResponse) => void
   ): Promise<DescribeZonesResponse> {
     return this.request("DescribeZones", req, cb)
+  }
+
+  /**
+   * 本接口用于查询实例SSL状态
+   */
+  async DescribeDBInstanceSSLConfig(
+    req: DescribeDBInstanceSSLConfigRequest,
+    cb?: (error: string, rep: DescribeDBInstanceSSLConfigResponse) => void
+  ): Promise<DescribeDBInstanceSSLConfigResponse> {
+    return this.request("DescribeDBInstanceSSLConfig", req, cb)
+  }
+
+  /**
+   * 删除备份策略
+   */
+  async DeleteBackupPlan(
+    req: DeleteBackupPlanRequest,
+    cb?: (error: string, rep: DeleteBackupPlanResponse) => void
+  ): Promise<DeleteBackupPlanResponse> {
+    return this.request("DeleteBackupPlan", req, cb)
   }
 
   /**
@@ -1260,13 +1335,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
    */
-  async ModifyBackupDownloadRestriction(
-    req: ModifyBackupDownloadRestrictionRequest,
-    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
-  ): Promise<ModifyBackupDownloadRestrictionResponse> {
-    return this.request("ModifyBackupDownloadRestriction", req, cb)
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**

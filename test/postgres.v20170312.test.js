@@ -18,6 +18,16 @@ const client = new tencentcloud.postgres.v20170312.Client({
 })
 describe("postgres.v20170312.test.js", function () {
 
+it("postgres.v20170312.ModifyMaintainTimeWindow", async function () {
+    try {
+       const data = await client.ModifyMaintainTimeWindow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeBackupDownloadURL", async function () {
     try {
        const data = await client.DescribeBackupDownloadURL({})
@@ -178,9 +188,9 @@ it("postgres.v20170312.ModifyDBInstanceSpec", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
+it("postgres.v20170312.ModifyBackupDownloadRestriction", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyBackupDownloadRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +198,9 @@ it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyMaintainTimeWindow", async function () {
+it("postgres.v20170312.DescribeTasks", async function () {
     try {
-       const data = await client.ModifyMaintainTimeWindow({})
+       const data = await client.DescribeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +608,9 @@ it("postgres.v20170312.DescribeEncryptionKeys", async function () {
     }
 })
 
-it("postgres.v20170312.DeleteReadOnlyGroup", async function () {
+it("postgres.v20170312.ModifyDBInstancesProject", async function () {
     try {
-       const data = await client.DeleteReadOnlyGroup({})
+       const data = await client.ModifyDBInstancesProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +658,9 @@ it("postgres.v20170312.DeleteDBInstanceNetworkAccess", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyDBInstancesProject", async function () {
+it("postgres.v20170312.DeleteReadOnlyGroup", async function () {
     try {
-       const data = await client.ModifyDBInstancesProject({})
+       const data = await client.DeleteReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,6 +848,16 @@ it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
     }
 })
 
+it("postgres.v20170312.CreateBackupPlan", async function () {
+    try {
+       const data = await client.CreateBackupPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeParamsEvent", async function () {
     try {
        const data = await client.DescribeParamsEvent({})
@@ -871,6 +891,16 @@ it("postgres.v20170312.DescribeOrders", async function () {
 it("postgres.v20170312.SwitchDBInstancePrimary", async function () {
     try {
        const data = await client.SwitchDBInstancePrimary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyReadOnlyDBInstanceWeight", async function () {
+    try {
+       const data = await client.ModifyReadOnlyDBInstanceWeight({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,6 +968,16 @@ it("postgres.v20170312.ModifyBackupPlan", async function () {
     }
 })
 
+it("postgres.v20170312.ModifyDBInstanceSSLConfig", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSSLConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.InitDBInstances", async function () {
     try {
        const data = await client.InitDBInstances({})
@@ -951,6 +991,26 @@ it("postgres.v20170312.InitDBInstances", async function () {
 it("postgres.v20170312.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeDBInstanceSSLConfig", async function () {
+    try {
+       const data = await client.DescribeDBInstanceSSLConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DeleteBackupPlan", async function () {
+    try {
+       const data = await client.DeleteBackupPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +1048,9 @@ it("postgres.v20170312.InquiryPriceRenewDBInstance", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyBackupDownloadRestriction", async function () {
+it("postgres.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     try {
-       const data = await client.ModifyBackupDownloadRestriction({})
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

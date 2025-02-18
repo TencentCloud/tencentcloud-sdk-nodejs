@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBXlogsRequest, CreateReadOnlyGroupNetworkAccessRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, OpenDBExtranetAccessRequest, CreateInstancesRequest, CreateDBInstanceNetworkAccessResponse, DescribeAvailableRecoveryTimeResponse, CreateBaseBackupRequest, ModifyDBInstanceReadOnlyGroupResponse, DescribeDBInstanceParametersResponse, DescribeDBInstanceSecurityGroupsResponse, RestoreDBInstanceObjectsResponse, SwitchDBInstancePrimaryRequest, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, DeleteLogBackupResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, RemoveDBInstanceFromReadOnlyGroupRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeMaintainTimeWindowResponse, DescribeDefaultParametersRequest, DescribeDedicatedClustersResponse, RenewInstanceRequest, DescribeBackupOverviewRequest, DescribeRegionsResponse, ModifyBaseBackupExpireTimeResponse, UpgradeDBInstanceMajorVersionResponse, ModifyBackupDownloadRestrictionRequest, ModifyDBInstanceDeploymentRequest, DeleteReadOnlyGroupNetworkAccessRequest, DescribeBackupDownloadRestrictionRequest, CreateDatabaseRequest, DescribeBackupSummariesRequest, DescribeDBInstanceAttributeRequest, CloseServerlessDBExtranetAccessRequest, CreateBaseBackupResponse, LockAccountResponse, CloneDBInstanceResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, DescribeAvailableRecoveryTimeRequest, DescribeDBInstanceParametersRequest, DescribeOrdersResponse, DescribeBackupDownloadURLResponse, OpenServerlessDBExtranetAccessResponse, ModifyMaintainTimeWindowResponse, InquiryPriceCreateDBInstancesResponse, CreateDBInstanceNetworkAccessRequest, ModifySwitchTimePeriodResponse, InquiryPriceCreateDBInstancesRequest, DescribeDefaultParametersResponse, DescribeBackupPlansResponse, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, ModifyMaintainTimeWindowRequest, ModifyBackupDownloadRestrictionResponse, DescribeLogBackupsRequest, SetAutoRenewFlagResponse, ResetAccountPasswordResponse, RemoveDBInstanceFromReadOnlyGroupResponse, DescribeDatabaseObjectsRequest, DescribeParameterTemplatesResponse, UpgradeDBInstanceKernelVersionRequest, SwitchDBInstancePrimaryResponse, UnlockAccountRequest, ModifyDBInstanceHAConfigRequest, DeleteReadOnlyGroupNetworkAccessResponse, DescribeMaintainTimeWindowRequest, DescribeBackupSummariesResponse, DescribeDBErrlogsRequest, ModifyDBInstancesProjectResponse, CloneDBInstanceRequest, DeleteParameterTemplateRequest, DescribeClassesRequest, DescribeParamsEventRequest, CreateInstancesResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, DescribeSlowQueryListResponse, CreateReadOnlyGroupRequest, DescribeParamsEventResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeDedicatedClustersRequest, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, DescribeDBInstanceHAConfigRequest, CreateParameterTemplateResponse, DescribeLogBackupsResponse, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, DescribeDBInstanceHAConfigResponse, DescribeDatabaseObjectsResponse, IsolateDBInstancesRequest, ModifyDBInstanceNameRequest, ModifyParameterTemplateRequest, DeleteAccountRequest, UpgradeDBInstanceKernelVersionResponse, InquiryPriceRenewDBInstanceResponse, DescribeSlowQueryAnalysisRequest, DescribeServerlessDBInstancesResponse, DescribeBackupOverviewResponse, DescribeParameterTemplatesRequest, InitDBInstancesRequest, DescribeClassesResponse, DeleteDBInstanceNetworkAccessRequest, ModifyDBInstanceDeploymentResponse, DeleteParameterTemplateResponse, ModifyAccountPrivilegesResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, DescribeReadOnlyGroupsRequest, DescribeBaseBackupsResponse, ModifyDBInstanceParametersResponse, DescribeDBVersionsResponse, UnlockAccountResponse, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, UpgradeDBInstanceMajorVersionRequest, CloseDBExtranetAccessResponse, DescribeBackupDownloadRestrictionResponse, CreateReadOnlyDBInstanceRequest, DescribeCloneDBInstanceSpecResponse, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeProductConfigResponse, DescribeOrdersRequest, CloseDBExtranetAccessRequest, ModifyParameterTemplateResponse, DescribeEncryptionKeysRequest, RebalanceReadOnlyGroupRequest, ModifyBackupPlanResponse, DestroyDBInstanceRequest, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteDBInstanceNetworkAccessResponse, ModifyAccountPrivilegesRequest, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, ModifyAccountRemarkRequest, DescribeParameterTemplateAttributesRequest, DescribeDBErrlogsResponse, ModifyBackupPlanRequest, DeleteBaseBackupRequest, InquiryPriceUpgradeDBInstanceResponse, DisIsolateDBInstancesResponse, CreateParameterTemplateRequest, ModifyDatabaseOwnerResponse, ModifySwitchTimePeriodRequest, CreateAccountResponse, DescribeSlowQueryListRequest, DescribeCloneDBInstanceSpecRequest, ModifyDatabaseOwnerRequest, DisIsolateDBInstancesRequest, RestartDBInstanceResponse, LockAccountRequest, DescribeDBInstancesResponse, DescribeDBInstanceSecurityGroupsRequest, DescribeBackupPlansRequest, ModifyBaseBackupExpireTimeRequest, ModifyDBInstanceHAConfigResponse, CreateDatabaseResponse, RebalanceReadOnlyGroupResponse, ResetAccountPasswordRequest, DescribeSlowQueryAnalysisResponse, ModifyDBInstanceParametersRequest, DescribeDBSlowlogsResponse, DescribeAccountPrivilegesRequest, DescribeReadOnlyGroupsResponse, RestoreDBInstanceObjectsRequest, DescribeAccountsResponse, ModifyDBInstanceChargeTypeRequest, DescribeParameterTemplateAttributesResponse, UpgradeDBInstanceResponse, DescribeDBVersionsRequest, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, DeleteLogBackupRequest, DeleteBaseBackupResponse, ModifyDBInstanceSpecResponse, DescribeBackupDownloadURLRequest, DescribeDBXlogsResponse, ModifyDBInstanceChargeTypeResponse, DescribeBaseBackupsRequest, DescribeEncryptionKeysResponse, CreateReadOnlyGroupNetworkAccessResponse, CreateDBInstancesResponse, DeleteAccountResponse } from "./postgres_models";
+import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DeleteBackupPlanResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBXlogsRequest, CreateReadOnlyGroupNetworkAccessRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, OpenDBExtranetAccessRequest, CreateInstancesRequest, CreateDBInstanceNetworkAccessResponse, DescribeAvailableRecoveryTimeResponse, CreateBaseBackupRequest, ModifyDBInstanceReadOnlyGroupResponse, DescribeDBInstanceParametersResponse, DescribeDBInstanceSecurityGroupsResponse, RestoreDBInstanceObjectsResponse, SwitchDBInstancePrimaryRequest, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, DeleteLogBackupResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, RemoveDBInstanceFromReadOnlyGroupRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeTasksResponse, DescribeMaintainTimeWindowResponse, DescribeDefaultParametersRequest, DescribeDedicatedClustersResponse, RenewInstanceRequest, DescribeBackupOverviewRequest, DescribeRegionsResponse, ModifyBaseBackupExpireTimeResponse, UpgradeDBInstanceMajorVersionResponse, ModifyBackupDownloadRestrictionRequest, ModifyDBInstanceDeploymentRequest, DeleteReadOnlyGroupNetworkAccessRequest, DescribeBackupDownloadRestrictionRequest, CreateDatabaseRequest, DescribeBackupSummariesRequest, CreateBackupPlanRequest, CloseServerlessDBExtranetAccessRequest, CreateBaseBackupResponse, LockAccountResponse, CloneDBInstanceResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, DescribeAvailableRecoveryTimeRequest, DescribeTasksRequest, DescribeDBInstanceParametersRequest, DescribeOrdersResponse, DescribeBackupDownloadURLResponse, OpenServerlessDBExtranetAccessResponse, ModifyMaintainTimeWindowResponse, InquiryPriceCreateDBInstancesResponse, CreateDBInstanceNetworkAccessRequest, ModifySwitchTimePeriodResponse, InquiryPriceCreateDBInstancesRequest, DescribeDefaultParametersResponse, DescribeBackupPlansResponse, DescribeDBInstancesRequest, ModifyDBInstanceSpecRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, ModifyMaintainTimeWindowRequest, ModifyBackupDownloadRestrictionResponse, DescribeLogBackupsRequest, SetAutoRenewFlagResponse, DescribeDBInstanceAttributeRequest, ResetAccountPasswordResponse, RemoveDBInstanceFromReadOnlyGroupResponse, DescribeDatabaseObjectsRequest, DescribeParameterTemplatesResponse, UpgradeDBInstanceKernelVersionRequest, SwitchDBInstancePrimaryResponse, ModifyReadOnlyDBInstanceWeightResponse, ModifyDBInstanceHAConfigRequest, DeleteReadOnlyGroupNetworkAccessResponse, DescribeMaintainTimeWindowRequest, DescribeBackupSummariesResponse, DescribeDBErrlogsRequest, ModifyDBInstancesProjectResponse, DeleteBackupPlanRequest, CloneDBInstanceRequest, DeleteParameterTemplateRequest, DescribeClassesRequest, DescribeParamsEventRequest, CreateInstancesResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, DescribeSlowQueryListResponse, CreateReadOnlyGroupRequest, ModifyDBInstanceSSLConfigResponse, DescribeParamsEventResponse, ModifyDBInstanceSecurityGroupsRequest, DescribeDedicatedClustersRequest, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, DescribeDBInstanceHAConfigRequest, CreateParameterTemplateResponse, DescribeLogBackupsResponse, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, DescribeDBInstanceHAConfigResponse, DescribeDatabaseObjectsResponse, IsolateDBInstancesRequest, ModifyDBInstanceNameRequest, DescribeDBInstanceSSLConfigResponse, ModifyParameterTemplateRequest, DeleteAccountRequest, UpgradeDBInstanceKernelVersionResponse, InquiryPriceRenewDBInstanceResponse, DescribeSlowQueryAnalysisRequest, DescribeServerlessDBInstancesResponse, DescribeBackupOverviewResponse, DescribeParameterTemplatesRequest, InitDBInstancesRequest, DescribeClassesResponse, DeleteDBInstanceNetworkAccessRequest, ModifyDBInstanceDeploymentResponse, UnlockAccountRequest, DeleteParameterTemplateResponse, ModifyReadOnlyDBInstanceWeightRequest, ModifyAccountPrivilegesResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, RestartDBInstanceResponse, DescribeReadOnlyGroupsRequest, DescribeBaseBackupsResponse, ModifyDBInstanceParametersResponse, DescribeDBVersionsResponse, ModifyDBInstanceSSLConfigRequest, UnlockAccountResponse, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, UpgradeDBInstanceMajorVersionRequest, CloseDBExtranetAccessResponse, DescribeBackupDownloadRestrictionResponse, CreateReadOnlyDBInstanceRequest, DescribeCloneDBInstanceSpecResponse, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeProductConfigResponse, DescribeOrdersRequest, CloseDBExtranetAccessRequest, ModifyParameterTemplateResponse, DescribeEncryptionKeysRequest, RebalanceReadOnlyGroupRequest, ModifyBackupPlanResponse, DestroyDBInstanceRequest, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteDBInstanceNetworkAccessResponse, ModifyAccountPrivilegesRequest, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, ModifyAccountRemarkRequest, DescribeParameterTemplateAttributesRequest, DescribeDBErrlogsResponse, ModifyBackupPlanRequest, DeleteBaseBackupRequest, InquiryPriceUpgradeDBInstanceResponse, DisIsolateDBInstancesResponse, CreateParameterTemplateRequest, DescribeDBInstanceSSLConfigRequest, ModifyDatabaseOwnerResponse, ModifySwitchTimePeriodRequest, CreateAccountResponse, DescribeSlowQueryListRequest, DescribeCloneDBInstanceSpecRequest, ModifyDatabaseOwnerRequest, DisIsolateDBInstancesRequest, CreateBackupPlanResponse, LockAccountRequest, DescribeDBInstancesResponse, DescribeDBInstanceSecurityGroupsRequest, DescribeBackupPlansRequest, ModifyBaseBackupExpireTimeRequest, ModifyDBInstanceHAConfigResponse, CreateDatabaseResponse, RebalanceReadOnlyGroupResponse, ResetAccountPasswordRequest, DescribeSlowQueryAnalysisResponse, ModifyDBInstanceParametersRequest, DescribeDBSlowlogsResponse, DescribeAccountPrivilegesRequest, DescribeReadOnlyGroupsResponse, RestoreDBInstanceObjectsRequest, DescribeAccountsResponse, ModifyDBInstanceChargeTypeRequest, DescribeParameterTemplateAttributesResponse, UpgradeDBInstanceResponse, DescribeDBVersionsRequest, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, DeleteLogBackupRequest, DeleteBaseBackupResponse, ModifyDBInstanceSpecResponse, DescribeBackupDownloadURLRequest, DescribeDBXlogsResponse, ModifyDBInstanceChargeTypeResponse, DescribeBaseBackupsRequest, DescribeEncryptionKeysResponse, CreateReadOnlyGroupNetworkAccessResponse, CreateDBInstancesResponse, DeleteAccountResponse } from "./postgres_models";
 /**
  * postgres client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+     */
+    ModifyMaintainTimeWindow(req: ModifyMaintainTimeWindowRequest, cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void): Promise<ModifyMaintainTimeWindowResponse>;
     /**
      * 本接口 (DescribeBackupDownloadURL) 用于查询指定备份集的下载地址，可包括全量备份集、增量日志备份集。
      */
@@ -74,13 +78,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceSpec(req: ModifyDBInstanceSpecRequest, cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void): Promise<ModifyDBInstanceSpecResponse>;
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
      */
-    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
     /**
-     * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
+注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
      */
-    ModifyMaintainTimeWindow(req: ModifyMaintainTimeWindowRequest, cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void): Promise<ModifyMaintainTimeWindowResponse>;
+    DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
     /**
      * 本接口（RenewInstance）用于续费实例。
      */
@@ -242,9 +247,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEncryptionKeys(req: DescribeEncryptionKeysRequest, cb?: (error: string, rep: DescribeEncryptionKeysResponse) => void): Promise<DescribeEncryptionKeysResponse>;
     /**
-     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
      */
-    DeleteReadOnlyGroup(req: DeleteReadOnlyGroupRequest, cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void): Promise<DeleteReadOnlyGroupResponse>;
+    ModifyDBInstancesProject(req: ModifyDBInstancesProjectRequest, cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void): Promise<ModifyDBInstancesProjectResponse>;
     /**
      * 本接口（UpgradeDBInstanceKernelVersion）用于升级实例的内核版本号。
      */
@@ -262,9 +267,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteDBInstanceNetworkAccess(req: DeleteDBInstanceNetworkAccessRequest, cb?: (error: string, rep: DeleteDBInstanceNetworkAccessResponse) => void): Promise<DeleteDBInstanceNetworkAccessResponse>;
     /**
-     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
+     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
      */
-    ModifyDBInstancesProject(req: ModifyDBInstancesProjectRequest, cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void): Promise<ModifyDBInstancesProjectResponse>;
+    DeleteReadOnlyGroup(req: DeleteReadOnlyGroupRequest, cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void): Promise<DeleteReadOnlyGroupResponse>;
     /**
      * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。本接口已废弃，推荐使用接口[DescribeLogBackups](https://cloud.tencent.com/document/api/409/89021)替代。
      */
@@ -340,6 +345,10 @@ export declare class Client extends AbstractClient {
      */
     RemoveDBInstanceFromReadOnlyGroup(req: RemoveDBInstanceFromReadOnlyGroupRequest, cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void): Promise<RemoveDBInstanceFromReadOnlyGroupResponse>;
     /**
+     * 此接口用于创建备份策略。
+     */
+    CreateBackupPlan(req: CreateBackupPlanRequest, cb?: (error: string, rep: CreateBackupPlanResponse) => void): Promise<CreateBackupPlanResponse>;
+    /**
      * 本接口（DescribeParamsEvent）用于查询参数修改事件。
      */
     DescribeParamsEvent(req: DescribeParamsEventRequest, cb?: (error: string, rep: DescribeParamsEventResponse) => void): Promise<DescribeParamsEventResponse>;
@@ -358,6 +367,10 @@ export declare class Client extends AbstractClient {
 <li>只有主实例可以执行该操作
      */
     SwitchDBInstancePrimary(req: SwitchDBInstancePrimaryRequest, cb?: (error: string, rep: SwitchDBInstancePrimaryResponse) => void): Promise<SwitchDBInstancePrimaryResponse>;
+    /**
+     * 本接口（ModifyReadOnlyDBInstanceWeight）用于修改只读实例权重
+     */
+    ModifyReadOnlyDBInstanceWeight(req: ModifyReadOnlyDBInstanceWeightRequest, cb?: (error: string, rep: ModifyReadOnlyDBInstanceWeightResponse) => void): Promise<ModifyReadOnlyDBInstanceWeightResponse>;
     /**
      * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询
      */
@@ -383,6 +396,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupPlan(req: ModifyBackupPlanRequest, cb?: (error: string, rep: ModifyBackupPlanResponse) => void): Promise<ModifyBackupPlanResponse>;
     /**
+     * 本接口用于修改实例SSL配置，功能包含开启、关闭、修改SSL证书保护的连接地址。
+     */
+    ModifyDBInstanceSSLConfig(req: ModifyDBInstanceSSLConfigRequest, cb?: (error: string, rep: ModifyDBInstanceSSLConfigResponse) => void): Promise<ModifyDBInstanceSSLConfigResponse>;
+    /**
      * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
@@ -390,6 +407,14 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeZones) 用于查询支持的可用区信息。
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
+    /**
+     * 本接口用于查询实例SSL状态
+     */
+    DescribeDBInstanceSSLConfig(req: DescribeDBInstanceSSLConfigRequest, cb?: (error: string, rep: DescribeDBInstanceSSLConfigResponse) => void): Promise<DescribeDBInstanceSSLConfigResponse>;
+    /**
+     * 删除备份策略
+     */
+    DeleteBackupPlan(req: DeleteBackupPlanRequest, cb?: (error: string, rep: DeleteBackupPlanResponse) => void): Promise<DeleteBackupPlanResponse>;
     /**
      * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
      */
@@ -403,9 +428,9 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceRenewDBInstance(req: InquiryPriceRenewDBInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void): Promise<InquiryPriceRenewDBInstanceResponse>;
     /**
-     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
      */
-    ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
      * 本接口（DeleteBaseBackup）用于删除实例指定数据备份。
      */

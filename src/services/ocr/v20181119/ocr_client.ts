@@ -102,7 +102,9 @@ import {
   RecognizeFormulaOCRResponse,
   ArithmeticOCRResponse,
   FormulaOCRResponse,
+  RecognizeGeneralCardWarnRequest,
   BusInvoiceInfo,
+  RecognizeEncryptedIDCardOCRRequest,
   SmartStructuralOCRRequest,
   TableCellInfo,
   GeneralHandwritingOCRRequest,
@@ -214,6 +216,7 @@ import {
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
   FinanBillSliceOCRRequest,
+  RecognizeGeneralCardWarnResponse,
   ClassifyStoreNameResponse,
   VatRollInvoiceOCRRequest,
   AirTransport,
@@ -237,7 +240,7 @@ import {
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
   LineInfo,
-  RecognizeEncryptedIDCardOCRRequest,
+  GeneralCardWarnInfo,
   TollInvoice,
   ItemCoord,
   CreateAIFormTaskResponse,
@@ -972,6 +975,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTaskStateResponse) => void
   ): Promise<GetTaskStateResponse> {
     return this.request("GetTaskState", req, cb)
+  }
+
+  /**
+   * 支持通用证照的有效性检测告警，包括卡证复印件告警、卡证翻拍告警等功能，支持通用证照的ps伪造检测，可以应用于各种证件信息有效性校验场景。
+   */
+  async RecognizeGeneralCardWarn(
+    req: RecognizeGeneralCardWarnRequest,
+    cb?: (error: string, rep: RecognizeGeneralCardWarnResponse) => void
+  ): Promise<RecognizeGeneralCardWarnResponse> {
+    return this.request("RecognizeGeneralCardWarn", req, cb)
   }
 
   /**

@@ -155,6 +155,10 @@ export interface ChatCompletionsRequest {
 2. 开启后，在返回值的最后一个包中会增加 RecommendedQuestions 字段表示推荐问答， 最多返回3条。
    */
   EnableRecommendedQuestions?: boolean
+  /**
+   * 是否开启深度阅读，默认是false，在值为true时，会返回深度阅读的结果信息。说明:1.深度阅读需要开启插件增强,即设置EnableEnhancement为true,当设置EnableDeepRead为true时EnableEnhancement默认为true；2.目前暂时只支持单文档单轮的深度阅读；3.深度阅读功能的文件上传可以使用FilesUploads接口，具体参数详见FilesUploads接口文档
+   */
+  EnableDeepRead?: boolean
 }
 
 /**

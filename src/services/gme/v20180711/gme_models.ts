@@ -142,20 +142,17 @@ export interface RoomUser {
   /**
    * 房间id
    */
-  RoomId: number
+  RoomId?: number
   /**
    * 房间里用户uin列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uins: Array<number | bigint>
+  Uins?: Array<number | bigint>
   /**
    * 字符串房间id
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  StrRoomId: string
+  StrRoomId?: string
   /**
    * 房间里用户字符串uin列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   StrUins?: Array<string>
 }
@@ -464,52 +461,44 @@ export interface StopRecordResponse {
 export interface ScanPiece {
   /**
    * 流检测时返回，音频转存地址，保留30min
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  DumpUrl: string
+  DumpUrl?: string
   /**
    * 是否违规
    */
-  HitFlag: boolean
+  HitFlag?: boolean
   /**
    * 违规主要类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  MainType: string
+  MainType?: string
   /**
    * 语音检测详情
    */
-  ScanDetail: Array<ScanDetail>
+  ScanDetail?: Array<ScanDetail>
   /**
    * gme实时语音房间ID，透传任务传入时的RoomId
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoomId: string
+  RoomId?: string
   /**
    * gme实时语音用户ID，透传任务传入时的OpenId
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  OpenId: string
+  OpenId?: string
   /**
    * 备注
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Info: string
+  Info?: string
   /**
    * 流检测时分片在流中的偏移时间，单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  Offset?: number
   /**
    * 流检测时分片时长
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Duration: number
+  Duration?: number
   /**
    * 分片开始检测时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  PieceStartTime: number
+  PieceStartTime?: number
 }
 
 /**
@@ -1135,11 +1124,11 @@ export interface InOutTimeInfo {
   /**
    * 进入房间时间
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 退出房间时间
    */
-  EndTime: number
+  EndTime?: number
 }
 
 /**
@@ -1326,7 +1315,6 @@ export interface VoiceFilterConf {
   Status?: string
   /**
    * 场景配置信息，如开关状态，回调地址。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneInfos?: Array<SceneInfo>
 }
@@ -1629,35 +1617,35 @@ export interface CreateAppResp {
   /**
    * 应用ID，由后台自动生成。
    */
-  BizId: number
+  BizId?: number
   /**
    * 应用名称，透传输入参数的AppName
    */
-  AppName: string
+  AppName?: string
   /**
    * 项目ID，透传输入的ProjectId
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 应用密钥，GME SDK初始化时使用
    */
-  SecretKey: string
+  SecretKey?: string
   /**
    * 服务创建时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 实时语音服务配置数据
    */
-  RealtimeSpeechConf: RealtimeSpeechConf
+  RealtimeSpeechConf?: RealtimeSpeechConf
   /**
    * 语音消息服务配置数据
    */
-  VoiceMessageConf: VoiceMessageConf
+  VoiceMessageConf?: VoiceMessageConf
   /**
    * 语音分析服务配置数据
    */
-  VoiceFilterConf: VoiceFilterConf
+  VoiceFilterConf?: VoiceFilterConf
   /**
    * 语音转文本服务配置数据
    */
@@ -1728,60 +1716,58 @@ export interface DescribeScanResult {
   /**
    * 业务返回码
    */
-  Code: number
+  Code?: number
   /**
    * 数据唯一 ID
    */
-  DataId: string
+  DataId?: string
   /**
    * 检测完成的时间戳
    */
-  ScanFinishTime: number
+  ScanFinishTime?: number
   /**
    * 是否违规
    */
-  HitFlag: boolean
+  HitFlag?: boolean
   /**
    * 是否为流
    */
-  Live: boolean
+  Live?: boolean
   /**
    * 业务返回描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Msg: string
+  Msg?: string
   /**
    * 检测结果，Code 为 0 时返回
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanPiece: Array<ScanPiece>
+  ScanPiece?: Array<ScanPiece>
   /**
    * 提交检测的时间戳
    */
-  ScanStartTime: number
+  ScanStartTime?: number
   /**
    * 语音检测场景，对应请求时的 Scene
    */
-  Scenes: Array<string>
+  Scenes?: Array<string>
   /**
    * 语音检测任务 ID，由后台分配
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 文件或接流地址
    */
-  Url: string
+  Url?: string
   /**
    * 检测任务执行结果状态，分别为：
 <li>Start: 任务开始</li>
 <li>Success: 成功结束</li>
 <li>Error: 异常</li>
    */
-  Status: string
+  Status?: string
   /**
    * 提交检测的应用 ID
    */
-  BizId: number
+  BizId?: number
 }
 
 /**

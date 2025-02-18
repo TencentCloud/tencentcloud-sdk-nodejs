@@ -105,6 +105,51 @@ export interface CreateDBInstancesRequest {
 }
 
 /**
+ * 任务的详情信息
+ */
+export interface TaskDetail {
+  /**
+   * 当前执行的子任务步骤名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentStep?: string
+  /**
+   * 当前任务所拥有的子步骤描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllSteps?: string
+  /**
+   * 任务的输入参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: string
+  /**
+   * 任务的输出参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: string
+  /**
+   * 指定实例配置完成变更后的切换时间，默认值：0
+0:   此任务不需要切换
+1：立即切换
+2：指定时间切换
+3：维护时间窗口内切换。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchTag?: number
+  /**
+   * 指定的切换时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchTime?: string
+  /**
+   * 任务的提示信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+}
+
+/**
  * SetAutoRenewFlag请求参数结构体
  */
 export interface SetAutoRenewFlagRequest {
@@ -116,6 +161,16 @@ export interface SetAutoRenewFlagRequest {
    * 续费标记。0-正常续费；1-自动续费；2-到期不续费
    */
   AutoRenewFlag: number
+}
+
+/**
+ * DeleteBackupPlan返回参数结构体
+ */
+export interface DeleteBackupPlanResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -665,6 +720,34 @@ export interface BackupPlan {
    * 开始备份的最晚时间
    */
   MaxBackupStartTime?: string
+  /**
+   * 备份计划ID
+   */
+  PlanId?: string
+  /**
+   * 备份计划自定义名称。
+   */
+  PlanName?: string
+  /**
+   * 日志备份保留时长。
+   */
+  LogBackupRetentionPeriod?: number
+  /**
+   * 创建时间。
+   */
+  CreatedTime?: string
+  /**
+   * 最近一次的修改时间。
+   */
+  UpdatedTime?: string
+  /**
+   * 备份计划类型。系统默认创建的为default，自定义的为custom。
+   */
+  PlanType?: string
+  /**
+   * 备份周期类型。当前支持week、month。
+   */
+  BackupPeriodType?: string
 }
 
 /**
@@ -933,6 +1016,24 @@ export interface InitDBInstancesResponse {
    * 实例ID集合。
    */
   DBInstanceIdSet?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+  /**
+   * 查询到的任务数量
+   */
+  TotalCount?: number
+  /**
+   * 任务信息列表
+   */
+  TaskSet?: Array<TaskSet>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1389,13 +1490,37 @@ db-instance-ip：按照实例私有网络IP地址过滤，类型为string。
 }
 
 /**
- * DescribeDBInstanceAttribute请求参数结构体
+ * CreateBackupPlan请求参数结构体
  */
-export interface DescribeDBInstanceAttributeRequest {
+export interface CreateBackupPlanRequest {
   /**
-   * 实例ID
+   * 实例ID。
    */
   DBInstanceId: string
+  /**
+   * 备份计划名称。
+   */
+  PlanName: string
+  /**
+   * 创建的备份计划类型，当前仅支持month创建。
+   */
+  BackupPeriodType: string
+  /**
+   * 备份的日期，示例是每个月的2号开启备份。
+   */
+  BackupPeriod: Array<string>
+  /**
+   * 备份开始时间，不传跟随默认备份计划。
+   */
+  MinBackupStartTime?: string
+  /**
+   * 备份结束时间，不传跟随默认计划。
+   */
+  MaxBackupStartTime?: string
+  /**
+   * 数据备份保留时长，week默认是7,month为30。
+   */
+  BaseBackupRetentionPeriod?: number
 }
 
 /**
@@ -1494,6 +1619,42 @@ export interface AddDBInstanceToReadOnlyGroupResponse {
 }
 
 /**
+ * KMS密钥信息
+ */
+export interface EncryptionKey {
+  /**
+   * KMS实例加密的KeyId。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyId?: string
+  /**
+   * KMS实例加密Key的别名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyAlias?: string
+  /**
+   * 实例加密密钥DEK的密文。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DEKCipherTextBlob?: string
+  /**
+   * 密钥是否启用，1-启用， 0-未启用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEnabled?: number
+  /**
+   * KMS密钥所在地域。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyRegion?: string
+  /**
+   * DEK密钥创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+}
+
+/**
  * 数据库数据备份信息
  */
 export interface BaseBackup {
@@ -1572,17 +1733,41 @@ export interface DescribeAvailableRecoveryTimeRequest {
 }
 
 /**
- * 慢SQL耗时分段分析
+ * DescribeTasks请求参数结构体
  */
-export interface DurationAnalysis {
+export interface DescribeTasksRequest {
   /**
-   * 慢SQL耗时，时段
+   * 按照任务ID进行查询。其余云API中返回的FlowId和TaskId等价。
    */
-  TimeSegment: string
+  TaskId?: number
   /**
-   * 对应时段区间慢SQL 条数
+   * 按照数据库实例ID进行查询。
    */
-  Count: number
+  DBInstanceId?: string
+  /**
+   * 任务的最早开始时间，形如2024-08-23 00:00:00,默认只展示180天内的数据。
+   */
+  MinStartTime?: string
+  /**
+   * 任务的最晚开始时间，形如2024-08-23 00:00:00，默认为当前时间。
+   */
+  MaxStartTime?: string
+  /**
+   * 每页显示数量，取值范围为1-100，默认为返回20条。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 排序字段，支持StartTime,EndTime，默认为StartTime。
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，包括升序：asc，降序：desc，默认为desc。
+   */
+  OrderByType?: string
 }
 
 /**
@@ -1747,6 +1932,46 @@ export interface ModifySwitchTimePeriodResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务列表信息
+ */
+export interface TaskSet {
+  /**
+   * 任务ID。
+   */
+  TaskId?: number
+  /**
+   * 任务的类型。
+   */
+  TaskType?: string
+  /**
+   * 任务实例的实例ID。
+   */
+  DBInstanceId?: string
+  /**
+   * 任务的开始时间。
+   */
+  StartTime?: string
+  /**
+   * 任务的结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 任务的运行状态，包括Running,Success,WaitSwitch,Fail,Pause。
+   */
+  Status?: string
+  /**
+   * 任务的执行进度，取值范围0-100。
+   */
+  Progress?: number
+  /**
+   * 任务的详情信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskDetail?: TaskDetail
 }
 
 /**
@@ -2303,6 +2528,16 @@ export interface NetworkAccess {
 }
 
 /**
+ * DescribeDBInstanceAttribute请求参数结构体
+ */
+export interface DescribeDBInstanceAttributeRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+}
+
+/**
  * ResetAccountPassword返回参数结构体
  */
 export interface ResetAccountPasswordResponse {
@@ -2529,17 +2764,13 @@ export interface SwitchDBInstancePrimaryResponse {
 }
 
 /**
- * UnlockAccount请求参数结构体
+ * ModifyReadOnlyDBInstanceWeight返回参数结构体
  */
-export interface UnlockAccountRequest {
+export interface ModifyReadOnlyDBInstanceWeightResponse {
   /**
-   * 实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceId: string
-  /**
-   * 账号名称。
-   */
-  UserName: string
+  RequestId?: string
 }
 
 /**
@@ -2759,6 +2990,20 @@ export interface ModifyDBInstancesProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteBackupPlan请求参数结构体
+ */
+export interface DeleteBackupPlanRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 备份计划的ID。
+   */
+  PlanId: string
 }
 
 /**
@@ -3285,6 +3530,20 @@ export interface CreateReadOnlyGroupRequest {
 }
 
 /**
+ * ModifyDBInstanceSSLConfig返回参数结构体
+ */
+export interface ModifyDBInstanceSSLConfigResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeParamsEvent返回参数结构体
  */
 export interface DescribeParamsEventResponse {
@@ -3718,39 +3977,25 @@ export interface ModifyDBInstanceNameRequest {
 }
 
 /**
- * KMS密钥信息
+ * DescribeDBInstanceSSLConfig返回参数结构体
  */
-export interface EncryptionKey {
+export interface DescribeDBInstanceSSLConfigResponse {
   /**
-   * KMS实例加密的KeyId。
-注意：此字段可能返回 null，表示取不到有效值。
+   * true 代表开通 ，false 代表未开通
    */
-  KeyId?: string
+  SSLEnabled?: boolean
   /**
-   * KMS实例加密Key的别名。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云端根证书下载链接
    */
-  KeyAlias?: string
+  CAUrl?: string
   /**
-   * 实例加密密钥DEK的密文。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务器证书中配置的内网或外网连接地址
    */
-  DEKCipherTextBlob?: string
+  ConnectAddress?: string
   /**
-   * 密钥是否启用，1-启用， 0-未启用。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsEnabled?: number
-  /**
-   * KMS密钥所在地域。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyRegion?: string
-  /**
-   * DEK密钥创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -4045,6 +4290,20 @@ export interface ModifyDBInstanceDeploymentResponse {
 }
 
 /**
+ * UnlockAccount请求参数结构体
+ */
+export interface UnlockAccountRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+  /**
+   * 账号名称。
+   */
+  UserName: string
+}
+
+/**
  * 描述实例的详细信息
  */
 export interface DBInstance {
@@ -4257,6 +4516,24 @@ export interface DeleteParameterTemplateResponse {
 }
 
 /**
+ * ModifyReadOnlyDBInstanceWeight请求参数结构体
+ */
+export interface ModifyReadOnlyDBInstanceWeightRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+  /**
+   * 只读组ID
+   */
+  ReadOnlyGroupId: string
+  /**
+   * 只读实例在只读组中的流量权重(1-50)
+   */
+  Weight: number
+}
+
+/**
  * ModifyAccountPrivileges返回参数结构体
  */
 export interface ModifyAccountPrivilegesResponse {
@@ -4353,6 +4630,20 @@ export interface DescribeDBBackupsRequest {
 }
 
 /**
+ * RestartDBInstance返回参数结构体
+ */
+export interface RestartDBInstanceResponse {
+  /**
+   * 异步流程ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称等
  * 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
  * 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
@@ -4436,6 +4727,24 @@ export interface DescribeDBVersionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBInstanceSSLConfig请求参数结构体
+ */
+export interface ModifyDBInstanceSSLConfigRequest {
+  /**
+   * 实例 ID
+   */
+  DBInstanceId: string
+  /**
+   * 开启或关闭SSL
+   */
+  SSLEnabled: boolean
+  /**
+   * SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。
+   */
+  ConnectAddress?: string
 }
 
 /**
@@ -5250,6 +5559,16 @@ export interface CreateParameterTemplateRequest {
 }
 
 /**
+ * DescribeDBInstanceSSLConfig请求参数结构体
+ */
+export interface DescribeDBInstanceSSLConfigRequest {
+  /**
+   * 实例ID，形如postgres-6bwgamo3
+   */
+  DBInstanceId: string
+}
+
+/**
  * ModifyDatabaseOwner返回参数结构体
  */
 export interface ModifyDatabaseOwnerResponse {
@@ -5412,13 +5731,13 @@ export interface DisIsolateDBInstancesRequest {
 }
 
 /**
- * RestartDBInstance返回参数结构体
+ * CreateBackupPlan返回参数结构体
  */
-export interface RestartDBInstanceResponse {
+export interface CreateBackupPlanResponse {
   /**
-   * 异步流程ID
+   * 备份策略的ID.
    */
-  FlowId?: number
+  PlanId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5659,6 +5978,20 @@ export interface ServerlessDBAccount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DBConnLimit?: number
+}
+
+/**
+ * 慢SQL耗时分段分析
+ */
+export interface DurationAnalysis {
+  /**
+   * 慢SQL耗时，时段
+   */
+  TimeSegment: string
+  /**
+   * 对应时段区间慢SQL 条数
+   */
+  Count: number
 }
 
 /**

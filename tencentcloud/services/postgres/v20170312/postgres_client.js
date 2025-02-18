@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
+     * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+     */
+    async ModifyMaintainTimeWindow(req, cb) {
+        return this.request("ModifyMaintainTimeWindow", req, cb);
+    }
+    /**
      * 本接口 (DescribeBackupDownloadURL) 用于查询指定备份集的下载地址，可包括全量备份集、增量日志备份集。
      */
     async DescribeBackupDownloadURL(req, cb) {
@@ -126,16 +132,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSpec", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async ModifyBackupDownloadRestriction(req, cb) {
+        return this.request("ModifyBackupDownloadRestriction", req, cb);
     }
     /**
-     * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
+注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
      */
-    async ModifyMaintainTimeWindow(req, cb) {
-        return this.request("ModifyMaintainTimeWindow", req, cb);
+    async DescribeTasks(req, cb) {
+        return this.request("DescribeTasks", req, cb);
     }
     /**
      * 本接口（RenewInstance）用于续费实例。
@@ -378,10 +385,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEncryptionKeys", req, cb);
     }
     /**
-     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
      */
-    async DeleteReadOnlyGroup(req, cb) {
-        return this.request("DeleteReadOnlyGroup", req, cb);
+    async ModifyDBInstancesProject(req, cb) {
+        return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
      * 本接口（UpgradeDBInstanceKernelVersion）用于升级实例的内核版本号。
@@ -408,10 +415,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDBInstanceNetworkAccess", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
+     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
      */
-    async ModifyDBInstancesProject(req, cb) {
-        return this.request("ModifyDBInstancesProject", req, cb);
+    async DeleteReadOnlyGroup(req, cb) {
+        return this.request("DeleteReadOnlyGroup", req, cb);
     }
     /**
      * 本接口（DescribeDBXlogs）用于获取实例Xlog列表。本接口已废弃，推荐使用接口[DescribeLogBackups](https://cloud.tencent.com/document/api/409/89021)替代。
@@ -524,6 +531,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
+     * 此接口用于创建备份策略。
+     */
+    async CreateBackupPlan(req, cb) {
+        return this.request("CreateBackupPlan", req, cb);
+    }
+    /**
      * 本接口（DescribeParamsEvent）用于查询参数修改事件。
      */
     async DescribeParamsEvent(req, cb) {
@@ -549,6 +562,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SwitchDBInstancePrimary(req, cb) {
         return this.request("SwitchDBInstancePrimary", req, cb);
+    }
+    /**
+     * 本接口（ModifyReadOnlyDBInstanceWeight）用于修改只读实例权重
+     */
+    async ModifyReadOnlyDBInstanceWeight(req, cb) {
+        return this.request("ModifyReadOnlyDBInstanceWeight", req, cb);
     }
     /**
      * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询
@@ -587,6 +606,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupPlan", req, cb);
     }
     /**
+     * 本接口用于修改实例SSL配置，功能包含开启、关闭、修改SSL证书保护的连接地址。
+     */
+    async ModifyDBInstanceSSLConfig(req, cb) {
+        return this.request("ModifyDBInstanceSSLConfig", req, cb);
+    }
+    /**
      * 本接口（InitDBInstances）用于初始化云数据库PostgreSQL实例。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     async InitDBInstances(req, cb) {
@@ -597,6 +622,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
+    }
+    /**
+     * 本接口用于查询实例SSL状态
+     */
+    async DescribeDBInstanceSSLConfig(req, cb) {
+        return this.request("DescribeDBInstanceSSLConfig", req, cb);
+    }
+    /**
+     * 删除备份策略
+     */
+    async DeleteBackupPlan(req, cb) {
+        return this.request("DeleteBackupPlan", req, cb);
     }
     /**
      * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
@@ -617,10 +654,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewDBInstance", req, cb);
     }
     /**
-     * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
      */
-    async ModifyBackupDownloadRestriction(req, cb) {
-        return this.request("ModifyBackupDownloadRestriction", req, cb);
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 本接口（DeleteBaseBackup）用于删除实例指定数据备份。

@@ -287,7 +287,6 @@ export interface DeployRecordDetail {
     CertId?: string;
     /**
      * 原绑定证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldCertId?: string;
     /**
@@ -300,7 +299,6 @@ export interface DeployRecordDetail {
     InstanceName?: string;
     /**
      * 部署监听器ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ListenerId?: string;
     /**
@@ -309,7 +307,6 @@ export interface DeployRecordDetail {
     Domains?: Array<string>;
     /**
      * 部署监听器协议
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Protocol?: string;
     /**
@@ -318,7 +315,6 @@ export interface DeployRecordDetail {
     Status?: number;
     /**
      * 部署错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorMsg?: string;
     /**
@@ -339,42 +335,34 @@ export interface DeployRecordDetail {
     SniSwitch?: number;
     /**
      * COS存储桶名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 命名空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Namespace?: string;
     /**
      * secret名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretName?: string;
     /**
      * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: number;
     /**
      * TCB环境ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnvId?: string;
     /**
      * 部署的TCB类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TCBType?: string;
     /**
      * 部署的TCB地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 部署CLB监听器的Url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: Array<string>;
 }
@@ -412,12 +400,10 @@ export interface ModifyCertificateProjectResponse {
 export interface Certificates {
     /**
      * 用户 UIN。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OwnerUin?: string;
     /**
      * 项目 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId?: string;
     /**
@@ -426,7 +412,6 @@ export interface Certificates {
   upload：用户上传。
   wosign：沃通
   sheca：上海CA
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     From?: string;
     /**
@@ -515,267 +500,214 @@ export interface Certificates {
   99：CFCA 企业型多域名(OV)SSL证书
   100：CFCA 企业型通配符(OV)SSL证书
   101：CFCA 增强型(EV)SSL证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageType?: string;
     /**
      * 证书类型：CA = 客户端证书，SVR = 服务器证书。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertificateType?: string;
     /**
      * 证书产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductZhName?: string;
     /**
      * 主域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
     /**
      * 备注名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Alias?: string;
     /**
      * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 自动添加DNS记录，5 = 企业证书，待提交资料，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函，13 = 免费证书待提交资料。14 = 证书已退款。 15 = 证书迁移中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 证书扩展信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertificateExtra?: CertificateExtra;
     /**
      * 漏洞扫描状态：INACTIVE = 未开启，ACTIVE = 已开启
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VulnerabilityStatus?: string;
     /**
      * 状态信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusMsg?: string;
     /**
      * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，DNS_PROXY = DNS代理验证。FILE_PROXY = 文件代理验证
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VerifyType?: string;
     /**
      * 证书生效时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertBeginTime?: string;
     /**
      * 证书过期时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertEndTime?: string;
     /**
      * 证书有效期，单位（月）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidityPeriod?: string;
     /**
      * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InsertTime?: string;
     /**
      * 证书 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertificateId?: string;
     /**
      * 证书包含的多个域名（包含主域名）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubjectAltName?: Array<string>;
     /**
      * 证书类型名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackageTypeName?: string;
     /**
      * 状态名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusName?: string;
     /**
      * 是否为 VIP 客户。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsVip?: boolean;
     /**
      * 是否为 DV 版证书。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDv?: boolean;
     /**
      * 是否为泛域名证书。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsWildcard?: boolean;
     /**
      * 是否启用了漏洞扫描功能。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsVulnerability?: boolean;
     /**
      * 是否可续费。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewAble?: boolean;
     /**
      * 项目信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectInfo?: ProjectInfo;
     /**
      * 关联的云资源，暂不可用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BoundResource?: Array<string>;
     /**
      * 是否可部署。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Deployable?: boolean;
     /**
      * 标签列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tags>;
     /**
      * 是否已忽略到期通知
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsIgnore?: boolean;
     /**
      * 是否国密证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSM?: boolean;
     /**
      * 证书算法
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptAlgorithm?: string;
     /**
      * 上传CA证书的加密算法
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CAEncryptAlgorithms?: Array<string>;
     /**
      * 上传CA证书的过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CAEndTimes?: Array<string>;
     /**
      * 上传CA证书的通用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CACommonNames?: Array<string>;
     /**
      * 证书预审核信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PreAuditInfo?: PreAuditInfo;
     /**
      * 是否自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoRenewFlag?: number;
     /**
      * 托管状态，0，托管中，5，资源替换中， 10， 托管完成， -1未托管
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostingStatus?: number;
     /**
      * 托管完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostingCompleteTime?: string;
     /**
      * 托管新证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostingRenewCertId?: string;
     /**
      * 存在的续费证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HasRenewOrder?: string;
     /**
      * 重颁发证书原证书是否删除
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReplaceOriCertIsDelete?: boolean;
     /**
      * 是否即将过期， 证书即将到期的30天内为即将过期
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsExpiring?: boolean;
     /**
      * DV证书添加验证截止时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DVAuthDeadline?: string;
     /**
      * 域名验证通过时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidationPassedTime?: string;
     /**
      * 证书关联的多域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertSANs?: Array<string>;
     /**
      * 域名验证驳回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AwaitingValidationMsg?: string;
     /**
      * 是否允许下载
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowDownload?: boolean;
     /**
      * 证书域名是否全部在DNSPOD托管解析
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsDNSPODResolve?: boolean;
     /**
      * 是否是权益点购买的证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPackage?: boolean;
     /**
      * 是否存在私钥密码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     KeyPasswordCustomFlag?: boolean;
     /**
      * 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SupportDownloadType?: SupportDownloadType;
     /**
      * 证书吊销完成时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertRevokedTime?: string;
     /**
      * 托管资源类型列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostingResourceTypes?: Array<string>;
     /**
      * 托管配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HostingConfig?: HostingConfig;
 }
@@ -785,7 +717,6 @@ export interface Certificates {
 export interface CertificateExtra {
     /**
      * 证书可配置域名数量。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DomainNumber?: string;
     /**
@@ -810,12 +741,10 @@ export interface CertificateExtra {
     RenewOrder?: string;
     /**
      * 是否是国密证书
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SMCert?: number;
     /**
      * 公司类型，取值：1（个人）；2（公司）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CompanyType?: number;
 }
@@ -1023,17 +952,14 @@ export interface ClbListener {
     Protocol?: string;
     /**
      * 监听器绑定的证书数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Certificate?: Certificate;
     /**
      * 监听器规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Rules?: Array<ClbListenerRule>;
     /**
      * 不匹配域名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoMatchDomains?: Array<string>;
 }
@@ -1043,22 +969,18 @@ export interface ClbListener {
 export interface COSInstanceList {
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 实例详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<CosInstanceDetail>;
     /**
      * 地域下总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -1260,17 +1182,14 @@ export interface ClbListenerRule {
     IsMatch?: boolean;
     /**
      * 规则已绑定的证书数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Certificate?: Certificate;
     /**
      * 不匹配域名列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoMatchDomains?: Array<string>;
     /**
      * 规则绑定的路径
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
 }
@@ -2206,7 +2125,6 @@ export interface CosInstanceDetail {
     Domain?: string;
     /**
      * 已绑定的证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId?: string;
     /**
@@ -2216,12 +2134,10 @@ export interface CosInstanceDetail {
     Status?: string;
     /**
      * 存储桶名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Bucket?: string;
     /**
      * 存储桶地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
 }
@@ -2313,7 +2229,6 @@ export interface ClbInstanceDetail {
     LoadBalancerName?: string;
     /**
      * CLB监听器列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Listeners?: Array<ClbListener>;
 }
@@ -2403,18 +2318,15 @@ export interface CompanyInfo {
      * 公司证件类型，取值范围：
   TYDMZ（统一社会信用代码 ）：仅CFCA类型证书需要使用本字段， 其他类型证书不需要使用本字段
   OTHERS（其他）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdType?: string;
     /**
      * 公司证件号码，取值范围：
   TYDMZ（统一社会信用代码 ）：11532xxxxxxxx24820
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IdNumber?: string;
     /**
      * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags?: Array<Tags>;
 }
@@ -2436,7 +2348,6 @@ export interface PackageTransferOutInfo {
     TransferCount?: number;
     /**
      * 转入的PackageID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReceivePackageId?: string;
     /**
@@ -2457,12 +2368,10 @@ export interface PackageTransferOutInfo {
     TransferStatus?: string;
     /**
      * 接收者uin。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReceiverUin?: number;
     /**
      * 接收时间。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReceiveTime?: string;
 }
@@ -2580,7 +2489,7 @@ export interface UpdateCertificateRecordRollbackResponse {
  */
 export interface DescribeHostVodInstanceListRequest {
     /**
-     * 待部署的证书ID
+     * 待部署的证书ID,必填选项
      */
     CertificateId?: string;
     /**
@@ -2741,12 +2650,10 @@ export interface CdnInstanceList {
     TotalCount?: number;
     /**
      * cdn域名详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<CdnInstanceDetail>;
     /**
      * 是否查询异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -2781,7 +2688,6 @@ export interface DdosInstanceDetail {
     Protocol?: string;
     /**
      * 证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId?: string;
     /**
@@ -3133,7 +3039,6 @@ export interface ApiGatewayInstanceList {
     Region?: string;
     /**
      * apigateway实例详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<ApiGatewayInstanceDetail>;
     /**
@@ -3142,7 +3047,6 @@ export interface ApiGatewayInstanceList {
     TotalCount?: number;
     /**
      * 是否查询异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -3246,6 +3150,7 @@ export interface PreAuditInfo {
 export interface DescribeManagerDetailResponse {
     /**
      * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
+     * @deprecated
      */
     Status?: string;
     /**
@@ -3378,12 +3283,10 @@ export interface Certificate {
     DnsNames?: Array<string>;
     /**
      * 根证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertCaId?: string;
     /**
      * 证书认证模式：UNIDIRECTIONAL单向认证，MUTUAL双向认证
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SSLMode?: string;
 }
@@ -3620,17 +3523,14 @@ export interface DeleteTaskResult {
     Status?: number;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
     /**
      * 当前结果缓存时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CacheTime?: string;
     /**
      * 包含的域名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domains?: Array<string>;
 }
@@ -3749,12 +3649,10 @@ export interface ReplaceCertificateRequest {
 export interface BatchDeleteFail {
     /**
      * 失败的证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId?: string;
     /**
      * 失败的原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Msg?: string;
 }
@@ -3935,12 +3833,10 @@ export interface DeployedResources {
     Type?: string;
     /**
      * 不建议使用。字段返回和Resources相同。本字段后续只返回null
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: Array<string>;
     /**
      * 关联资源ID或关联域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Resources?: Array<string>;
 }
@@ -4303,12 +4199,10 @@ export interface DdosInstanceList {
     TotalCount?: number;
     /**
      * ddos实例详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<DdosInstanceDetail>;
     /**
      * 是否查询异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -4670,7 +4564,6 @@ export interface ApiGatewayInstanceDetail {
     Domain?: string;
     /**
      * 证书ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertId?: string;
     /**
@@ -5111,7 +5004,6 @@ export interface DomainValidationResult {
     Domain?: string;
     /**
      * 域名验证类型。 取值为：DNS、FILE、DNS_AUTO、DNS_PROXY、FILE_PROXY
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VerifyType?: string;
     /**
@@ -5125,12 +5017,10 @@ export interface DomainValidationResult {
     CaCheck?: number;
     /**
      * 检查失败原因。状态LocalCheck的具体描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalCheckFailReason?: string;
     /**
      * 检查到的值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckValue?: Array<string>;
     /**
@@ -5595,7 +5485,6 @@ export interface DescribeHostTeoInstanceListRequest {
 export interface BindResourceRegionResult {
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
@@ -5604,7 +5493,6 @@ export interface BindResourceRegionResult {
     TotalCount?: number;
     /**
      * 是否查询异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }
@@ -5872,7 +5760,6 @@ export interface ClbInstanceList {
     Region?: string;
     /**
      * clb实例详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceList?: Array<ClbInstanceDetail>;
     /**
@@ -5881,7 +5768,6 @@ export interface ClbInstanceList {
     TotalCount?: number;
     /**
      * 是否查询异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Error?: string;
 }

@@ -328,6 +328,16 @@ it("ocr.v20181119.GetTaskState", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeGeneralCardWarn", async function () {
+    try {
+       const data = await client.RecognizeGeneralCardWarn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.GeneralBasicOCR", async function () {
     try {
        const data = await client.GeneralBasicOCR({})
