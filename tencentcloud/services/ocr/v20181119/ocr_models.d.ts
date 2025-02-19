@@ -1366,6 +1366,10 @@ export interface QuestionSplitOCRRequest {
      * 是否开启切边增强和弯曲矫正,默认为false不开启
      */
     EnableImageCrop?: boolean;
+    /**
+     * 是否只返回检测框，默认false
+     */
+    EnableOnlyDetectBorder?: boolean;
 }
 /**
  * 增值税普通发票（卷票）条目

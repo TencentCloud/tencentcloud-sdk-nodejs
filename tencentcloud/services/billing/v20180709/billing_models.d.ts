@@ -1204,23 +1204,6 @@ export interface DescribeBillSummaryByProductRequest {
     PayType?: string;
 }
 /**
- * DescribeSavingPlanOverview返回参数结构体
- */
-export interface DescribeSavingPlanOverviewResponse {
-    /**
-     * 节省计划总览明细数据
-     */
-    Overviews?: Array<SavingPlanOverviewDetail>;
-    /**
-     * 查询命中的节省计划总览明细数据总条数
-     */
-    Total?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 经销账单资源汇总数据对象
  */
 export interface BillDistributionResourceSummary {
@@ -2643,60 +2626,6 @@ export interface DescribeAllocationSummaryByBusinessRequest {
     SearchKey?: string;
 }
 /**
- * CreateSavingPlanOrder返回参数结构体
- */
-export interface CreateSavingPlanOrderResponse {
-    /**
-     * 订单号
-     */
-    BigDealId?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 节省计划总览明细数据
- */
-export interface SavingPlanOverviewDetail {
-    /**
-     * 节省计划类型
-     */
-    SpType?: string;
-    /**
-     * 支付类型
-     */
-    PayType?: number;
-    /**
-     * 支付金额（单位：元）
-     */
-    PayAmount?: string;
-    /**
-     * 开始时间 yyyy-mm-dd HH:mm:ss格式
-     */
-    StartTime?: string;
-    /**
-     * 结束时间 yyyy-mm-dd HH:mm:ss格式
-     */
-    EndTime?: string;
-    /**
-     * 购买时间 yyyy-mm-dd HH:mm:ss格式
-     */
-    BuyTime?: string;
-    /**
-     * 状态
-     */
-    Status?: number;
-    /**
-     * 累计节省金额（单位：元）
-     */
-    SavingAmount?: string;
-    /**
-     * 地域
-     */
-    Region?: Array<string>;
-}
-/**
  * DescribeBillSummaryByPayMode请求参数结构体
  */
 export interface DescribeBillSummaryByPayModeRequest {
@@ -3333,47 +3262,6 @@ export interface BillDetail {
      * 优惠内容
      */
     DiscountContent?: string;
-}
-/**
- * CreateSavingPlanOrder请求参数结构体
- */
-export interface CreateSavingPlanOrderRequest {
-    /**
-     * 地域编码
-     */
-    RegionId: number;
-    /**
-     * 区域编码
-     */
-    ZoneId: number;
-    /**
-     * 预付费类型
-     */
-    PrePayType: string;
-    /**
-     * 时长
-     */
-    TimeSpan: number;
-    /**
-     * 时长单位
-     */
-    TimeUnit: string;
-    /**
-     * 商品唯一标识
-     */
-    CommodityCode: string;
-    /**
-     * 承诺时长内的小额金额（单位：元）
-     */
-    PromiseUseAmount: number;
-    /**
-     * 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:"2023-10-01 00:00:00"，仅支持指定日期的0点时刻
-     */
-    SpecifyEffectTime?: string;
-    /**
-     * 可重入ID
-     */
-    ClientToken?: string;
 }
 /**
  * DescribeBillDetail返回参数结构体
@@ -4918,27 +4806,6 @@ export interface AllocationSummaryByBusiness {
     AllocationRealTotalCost?: string;
 }
 /**
- * DescribeSavingPlanOverview请求参数结构体
- */
-export interface DescribeSavingPlanOverviewRequest {
-    /**
-     * 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月
-     */
-    StartDate: string;
-    /**
-     * 结束时间，格式yyyy-MM-dd
-     */
-    EndDate: string;
-    /**
-     * 分页偏移量
-     */
-    Offset: number;
-    /**
-     * 每页数量，最大值为200
-     */
-    Limit: number;
-}
-/**
  * 分账账单趋势图
  */
 export interface AllocationStat {
@@ -6002,52 +5869,6 @@ export interface DescribeBillSummaryByProductResponse {
     RequestId?: string;
 }
 /**
- * 节省计划使用率数据
- */
-export interface SavingPlanUsageDetail {
-    /**
-     * 节省计划类型
-     */
-    SpType?: string;
-    /**
-     * 节省计划状态
-     */
-    Status?: number;
-    /**
-     * 累计抵扣的金额（单位：元）
-     */
-    DeductAmount?: string;
-    /**
-     * 累计承诺消费金额（单位：元）
-     */
-    PromiseAmount?: string;
-    /**
-     * 累计净节省金额（单位：元）
-     */
-    NetSavings?: string;
-    /**
-     * 使用率
-     */
-    UtilizationRate?: number;
-    /**
-     * 累计流失金额（单位：元）
-     */
-    LossAmount?: string;
-    /**
-     * 累计按量计费预期金额（单位：元）
-     */
-    DosageAmount?: string;
-    /**
-     * 累计成本金额（单位：元）
-     */
-    CostAmount?: string;
-    /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: Array<string>;
-}
-/**
  * DescribeBillSummaryByRegion返回参数结构体
  */
 export interface DescribeBillSummaryByRegionResponse {
@@ -6664,23 +6485,6 @@ export interface BusinessSummaryOverviewItem {
     TotalCost?: string;
 }
 /**
- * DescribeSavingPlanUsage返回参数结构体
- */
-export interface DescribeSavingPlanUsageResponse {
-    /**
-     * 节省计划使用率数据
-     */
-    Usages?: Array<SavingPlanUsageDetail>;
-    /**
-     * 查询命中的节省计划总览明细数据总条数
-     */
-    Total?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 标签筛选列表
  */
 export interface BillTag {
@@ -6924,31 +6728,6 @@ export interface BillActionType {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ActionTypeName: string;
-}
-/**
- * DescribeSavingPlanUsage请求参数结构体
- */
-export interface DescribeSavingPlanUsageRequest {
-    /**
-     * 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月
-     */
-    StartDate: string;
-    /**
-     * 结束时间，格式yyyy-MM-dd
-     */
-    EndDate: string;
-    /**
-     * 分页偏移量
-     */
-    Offset: number;
-    /**
-     * 每页数量，最大值为200
-     */
-    Limit: number;
-    /**
-     * 查询结果数据的时间间隔
-     */
-    TimeInterval: string;
 }
 /**
  * 资源归集汇总

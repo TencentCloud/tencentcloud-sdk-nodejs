@@ -49,7 +49,6 @@ import {
   DescribeDosageCosDetailByDateRequest,
   DeleteAllocationTagRequest,
   DescribeBillSummaryByProductRequest,
-  DescribeSavingPlanOverviewResponse,
   BillDistributionResourceSummary,
   BusinessSummaryInfo,
   DescribeDosageDetailListResponse,
@@ -87,8 +86,6 @@ import {
   ConsumptionSummaryTrend,
   DescribeBillDownloadUrlRequest,
   DescribeAllocationSummaryByBusinessRequest,
-  CreateSavingPlanOrderResponse,
-  SavingPlanOverviewDetail,
   DescribeBillSummaryByPayModeRequest,
   DescribeAllocationBillConditionsRequest,
   ApplicableProducts,
@@ -100,7 +97,6 @@ import {
   DescribeSavingPlanCoverageRequest,
   PayDealsResponse,
   BillDetail,
-  CreateSavingPlanOrderRequest,
   DescribeBillDetailResponse,
   Deal,
   DescribeDealsByCondResponse,
@@ -134,7 +130,6 @@ import {
   VoucherInfos,
   DescribeBillSummaryForOrganizationRequest,
   AllocationSummaryByBusiness,
-  DescribeSavingPlanOverviewRequest,
   AllocationStat,
   BillProject,
   ActionSummaryOverviewItem,
@@ -164,7 +159,6 @@ import {
   AnalyseConditions,
   CostDetail,
   DescribeBillSummaryByProductResponse,
-  SavingPlanUsageDetail,
   DescribeBillSummaryByRegionResponse,
   CreateAllocationTagResponse,
   DescribeBillDownloadUrlResponse,
@@ -179,14 +173,12 @@ import {
   DescribeAccountBalanceResponse,
   DescribeAllocationBillDetailResponse,
   BusinessSummaryOverviewItem,
-  DescribeSavingPlanUsageResponse,
   BillTag,
   DescribeAllocateConditionsResponse,
   DescribeDosageDetailListRequest,
   BillComponent,
   DescribeVoucherInfoRequest,
   BillActionType,
-  DescribeSavingPlanUsageRequest,
   GatherResourceSummary,
   DescribeSavingPlanResourceInfoResponse,
   DescribeDealsByCondRequest,
@@ -295,18 +287,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllocateConditionsResponse) => void
   ): Promise<DescribeAllocateConditionsResponse> {
     return this.request("DescribeAllocateConditions", req, cb)
-  }
-
-  /**
-     * 接口迁移到其他业务
-
-查用当前用户明细节省计划总览查询时段内的使用情况
-     */
-  async DescribeSavingPlanOverview(
-    req: DescribeSavingPlanOverviewRequest,
-    cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void
-  ): Promise<DescribeSavingPlanOverviewResponse> {
-    return this.request("DescribeSavingPlanOverview", req, cb)
   }
 
   /**
@@ -483,18 +463,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口迁移到其他业务
-
-查用当前用户明细节省计划查询时段内的使用情况
-     */
-  async DescribeSavingPlanUsage(
-    req: DescribeSavingPlanUsageRequest,
-    cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void
-  ): Promise<DescribeSavingPlanUsageResponse> {
-    return this.request("DescribeSavingPlanUsage", req, cb)
-  }
-
-  /**
    * 可以通过API获取当前UIN是否有调账，客户可以更快地主动地获取调账情况。
    */
   async DescribeBillAdjustInfo(
@@ -615,15 +583,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口迁移到其他业务
-
-创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
-     */
-  async CreateSavingPlanOrder(
-    req: CreateSavingPlanOrderRequest,
-    cb?: (error: string, rep: CreateSavingPlanOrderResponse) => void
-  ): Promise<CreateSavingPlanOrderResponse> {
-    return this.request("CreateSavingPlanOrder", req, cb)
+   * 获取按产品汇总消耗详情
+   */
+  async DescribeCostSummaryByProduct(
+    req: DescribeCostSummaryByProductRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
+  ): Promise<DescribeCostSummaryByProductResponse> {
+    return this.request("DescribeCostSummaryByProduct", req, cb)
   }
 
   /**
@@ -644,16 +610,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDealsByCondResponse) => void
   ): Promise<DescribeDealsByCondResponse> {
     return this.request("DescribeDealsByCond", req, cb)
-  }
-
-  /**
-   * 获取按产品汇总消耗详情
-   */
-  async DescribeCostSummaryByProduct(
-    req: DescribeCostSummaryByProductRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
-  ): Promise<DescribeCostSummaryByProductResponse> {
-    return this.request("DescribeCostSummaryByProduct", req, cb)
   }
 
   /**

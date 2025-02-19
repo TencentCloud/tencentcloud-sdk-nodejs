@@ -841,32 +841,26 @@ export interface ScanVoiceResult {
 export interface ServiceStatus {
     /**
      * 实时语音服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealTimeSpeech: StatusInfo;
+    RealTimeSpeech?: StatusInfo;
     /**
      * 语音消息服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VoiceMessage: StatusInfo;
+    VoiceMessage?: StatusInfo;
     /**
      * 语音内容安全服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Porn: StatusInfo;
+    Porn?: StatusInfo;
     /**
      * 语音录制服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Live: StatusInfo;
+    Live?: StatusInfo;
     /**
      * 语音转文本服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealTimeAsr: StatusInfo;
+    RealTimeAsr?: StatusInfo;
     /**
      * 文本翻译服务开关状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TextTranslate?: StatusInfo;
 }

@@ -714,10 +714,9 @@ export interface RetrieveKnowledgeRequest {
  */
 export interface Choice {
   /**
-   * 结束标志位，可能为 stop、 sensitive或者tool_calls。
+   * 结束标志位，可能为 stop、 content_filter。
 stop 表示输出正常结束。
-sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。
-tool_calls 标识函数调用。
+content_filter 只在开启流式输出审核时会出现，表示安全审核未通过。
    */
   FinishReason?: string
   /**

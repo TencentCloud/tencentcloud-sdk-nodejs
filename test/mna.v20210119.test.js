@@ -38,6 +38,16 @@ it("mna.v20210119.UpdateHardware", async function () {
     }
 })
 
+it("mna.v20210119.DownloadActiveDeviceCount", async function () {
+    try {
+       const data = await client.DownloadActiveDeviceCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.ModifyPackageRenewFlag", async function () {
     try {
        const data = await client.ModifyPackageRenewFlag({})
@@ -181,6 +191,16 @@ it("mna.v20210119.DeleteGroup", async function () {
 it("mna.v20210119.DescribeQos", async function () {
     try {
        const data = await client.DescribeQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetActiveDeviceCount", async function () {
+    try {
+       const data = await client.GetActiveDeviceCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

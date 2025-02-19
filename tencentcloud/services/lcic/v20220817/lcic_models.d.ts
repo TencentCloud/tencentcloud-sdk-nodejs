@@ -2141,12 +2141,10 @@ export interface BatchUserInfo {
     SdkAppId?: number;
     /**
      * 用户ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
      * 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginId?: string;
 }

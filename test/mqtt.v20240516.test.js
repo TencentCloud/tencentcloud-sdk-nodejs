@@ -18,9 +18,9 @@ const client = new tencentcloud.mqtt.v20240516.Client({
 })
 describe("mqtt.v20240516.test.js", function () {
 
-it("mqtt.v20240516.CreateInstance", async function () {
+it("mqtt.v20240516.DescribeUserList", async function () {
     try {
-       const data = await client.CreateInstance({})
+       const data = await client.DescribeUserList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,6 +48,16 @@ it("mqtt.v20240516.ModifyTopic", async function () {
     }
 })
 
+it("mqtt.v20240516.DeleteCaCertificate", async function () {
+    try {
+       const data = await client.DeleteCaCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DeactivateDeviceCertificate", async function () {
     try {
        const data = await client.DeactivateDeviceCertificate({})
@@ -61,6 +71,16 @@ it("mqtt.v20240516.DeactivateDeviceCertificate", async function () {
 it("mqtt.v20240516.DescribeTopic", async function () {
     try {
        const data = await client.DescribeTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DeactivateCaCertificate", async function () {
+    try {
+       const data = await client.DeactivateCaCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,16 +158,6 @@ it("mqtt.v20240516.DescribeInsPublicEndpoints", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeUserList", async function () {
-    try {
-       const data = await client.DescribeUserList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("mqtt.v20240516.ModifyInsPublicEndpoint", async function () {
     try {
        const data = await client.ModifyInsPublicEndpoint({})
@@ -158,9 +168,49 @@ it("mqtt.v20240516.ModifyInsPublicEndpoint", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeDeviceCertificate", async function () {
+    try {
+       const data = await client.DescribeDeviceCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.RegisterDeviceCertificate", async function () {
     try {
        const data = await client.RegisterDeviceCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.ModifyInstanceCertBinding", async function () {
+    try {
+       const data = await client.ModifyInstanceCertBinding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeCaCertificates", async function () {
+    try {
+       const data = await client.DescribeCaCertificates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.UpdateAuthorizationPolicyPriority", async function () {
+    try {
+       const data = await client.UpdateAuthorizationPolicyPriority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +248,16 @@ it("mqtt.v20240516.DescribeAuthorizationPolicies", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeTopicList", async function () {
+    try {
+       const data = await client.DescribeTopicList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DeleteInsPublicEndpoint", async function () {
     try {
        const data = await client.DeleteInsPublicEndpoint({})
@@ -208,9 +268,9 @@ it("mqtt.v20240516.DeleteInsPublicEndpoint", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeDeviceCertificate", async function () {
+it("mqtt.v20240516.CreateInstance", async function () {
     try {
-       const data = await client.DescribeDeviceCertificate({})
+       const data = await client.CreateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +308,19 @@ it("mqtt.v20240516.DescribeInstance", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeTopicList", async function () {
+it("mqtt.v20240516.DeleteTopic", async function () {
     try {
-       const data = await client.DescribeTopicList({})
+       const data = await client.DeleteTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeCaCertificate", async function () {
+    try {
+       const data = await client.DescribeCaCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +388,16 @@ it("mqtt.v20240516.DeleteAuthenticator", async function () {
     }
 })
 
+it("mqtt.v20240516.RegisterCaCertificate", async function () {
+    try {
+       const data = await client.RegisterCaCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeAuthenticator", async function () {
     try {
        const data = await client.DescribeAuthenticator({})
@@ -328,9 +408,9 @@ it("mqtt.v20240516.DescribeAuthenticator", async function () {
     }
 })
 
-it("mqtt.v20240516.UpdateAuthorizationPolicyPriority", async function () {
+it("mqtt.v20240516.ActivateCaCertificate", async function () {
     try {
-       const data = await client.UpdateAuthorizationPolicyPriority({})
+       const data = await client.ActivateCaCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +428,9 @@ it("mqtt.v20240516.CreateUser", async function () {
     }
 })
 
-it("mqtt.v20240516.DeleteTopic", async function () {
+it("mqtt.v20240516.ApplyRegistrationCode", async function () {
     try {
-       const data = await client.DeleteTopic({})
+       const data = await client.ApplyRegistrationCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

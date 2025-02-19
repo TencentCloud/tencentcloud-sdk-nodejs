@@ -1106,19 +1106,19 @@ export interface PhoneEmailData {
     /**
      * 手机号或者邮箱
      */
-    Code: string;
+    Code?: string;
     /**
      * 1：手机  2：邮箱
      */
-    Type: number;
+    Type?: number;
     /**
      * 创建时间
      */
-    CreatedOn: string;
+    CreatedOn?: string;
     /**
      * 1=控制台校验，2=第三方校验
      */
-    CheckStatus: number;
+    CheckStatus?: number;
 }
 /**
  * CreateTemplate返回参数结构体

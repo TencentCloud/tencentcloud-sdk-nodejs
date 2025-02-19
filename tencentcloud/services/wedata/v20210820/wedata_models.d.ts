@@ -1654,96 +1654,13 @@ export interface KillOpsMakePlanInstancesRequest {
     PlanName?: string;
 }
 /**
- * DescribeEventCases请求参数结构体
+ * AddProjectUserRole返回参数结构体
  */
-export interface DescribeEventCasesRequest {
+export interface AddProjectUserRoleResponse {
     /**
-     * 项目ID
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ProjectId: string;
-    /**
-     * 事件实例目录,示例取值:
-  - 已过期: expired
-  - 未过期: consuming
-  - 全部: all
-  
-     */
-    Category: string;
-    /**
-     * 页码
-     */
-    PageNumber: number;
-    /**
-     * 每页数目
-     */
-    PageSize: number;
-    /**
-     * 事件名称
-     */
-    EventName?: string;
-    /**
-     * 事件类型
-     * @deprecated
-     */
-    EventType?: string;
-    /**
-     * 事件分割类型
-     */
-    EventSubType?: string;
-    /**
-     * 事件广播类型
-     * @deprecated
-     */
-    EventBroadcastType?: string;
-    /**
-     * 事件实例状态,示例取值:
-  - 已消费: COMSUMED
-  - 已过期: EXPIRED
-  - 待消费: ACTIVE
-  - 消费中: CONSUMING
-     * @deprecated
-     */
-    Status?: string;
-    /**
-     * 事件实例最小创建时间
-     */
-    CreationTimeStart?: string;
-    /**
-     * 事件实例最大创建时间
-     */
-    CreationTimeEnd?: string;
-    /**
-     * 事件实例最小触发时间
-     */
-    EventTriggeredTimeStart?: string;
-    /**
-     * 事件实例最大触发时间
-     */
-    EventTriggeredTimeEnd?: string;
-    /**
-     * 事件实例最小消费时间
-     */
-    LogTimeStart?: string;
-    /**
-     * 事件实例最大消费时间
-     */
-    LogTimeEnd?: string;
-    /**
-     * 事件实例数据时间
-     */
-    Dimension?: string;
-    /**
-     * 事件实例有效时间
-     */
-    TimeToLive?: string;
-    /**
-     * 排序字段
-     */
-    SortItem?: string;
-    /**
-     * 排序顺序
-     */
-    SortType?: string;
+    RequestId?: string;
 }
 /**
  * BatchResumeIntegrationTasks返回参数结构体
@@ -4292,19 +4209,9 @@ export interface Rule {
     ProjectName?: string;
 }
 /**
- * DescribeTableLineage返回参数结构体
+ * AddProjectUserRole请求参数结构体
  */
-export interface DescribeTableLineageResponse {
-    /**
-     * 表血缘信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TableLineage?: TableLineageInfo;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type AddProjectUserRoleRequest = null;
 /**
  * ModifyRuleGroupSubscription请求参数结构体
  */
@@ -10882,18 +10789,96 @@ export interface ProjectBaseInfoOpsRequest {
     IsAdmin?: boolean;
 }
 /**
- * DescribeWorkflowSchedulerInfoDs返回参数结构体
+ * DescribeEventCases请求参数结构体
  */
-export interface DescribeWorkflowSchedulerInfoDsResponse {
+export interface DescribeEventCasesRequest {
     /**
-     * 数据
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目ID
      */
-    Data?: WorkflowScheduleDtoDs;
+    ProjectId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 事件实例目录,示例取值:
+  - 已过期: expired
+  - 未过期: consuming
+  - 全部: all
+  
      */
-    RequestId?: string;
+    Category: string;
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 每页数目
+     */
+    PageSize: number;
+    /**
+     * 事件名称
+     */
+    EventName?: string;
+    /**
+     * 事件类型
+     * @deprecated
+     */
+    EventType?: string;
+    /**
+     * 事件分割类型
+     */
+    EventSubType?: string;
+    /**
+     * 事件广播类型
+     * @deprecated
+     */
+    EventBroadcastType?: string;
+    /**
+     * 事件实例状态,示例取值:
+  - 已消费: COMSUMED
+  - 已过期: EXPIRED
+  - 待消费: ACTIVE
+  - 消费中: CONSUMING
+     * @deprecated
+     */
+    Status?: string;
+    /**
+     * 事件实例最小创建时间
+     */
+    CreationTimeStart?: string;
+    /**
+     * 事件实例最大创建时间
+     */
+    CreationTimeEnd?: string;
+    /**
+     * 事件实例最小触发时间
+     */
+    EventTriggeredTimeStart?: string;
+    /**
+     * 事件实例最大触发时间
+     */
+    EventTriggeredTimeEnd?: string;
+    /**
+     * 事件实例最小消费时间
+     */
+    LogTimeStart?: string;
+    /**
+     * 事件实例最大消费时间
+     */
+    LogTimeEnd?: string;
+    /**
+     * 事件实例数据时间
+     */
+    Dimension?: string;
+    /**
+     * 事件实例有效时间
+     */
+    TimeToLive?: string;
+    /**
+     * 排序字段
+     */
+    SortItem?: string;
+    /**
+     * 排序顺序
+     */
+    SortType?: string;
 }
 /**
  * DeleteRule返回参数结构体
@@ -16141,6 +16126,20 @@ export interface TableMeta {
     IfSupportCreateAndDDL?: CreateAndDDLSupport;
 }
 /**
+ * RegisterEvent返回参数结构体
+ */
+export interface RegisterEventResponse {
+    /**
+     * 成功或者失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: BatchReturn;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CountOpsInstanceState返回参数结构体
  */
 export interface CountOpsInstanceStateResponse {
@@ -21171,6 +21170,20 @@ export interface CheckIntegrationTaskNameExistsRequest {
     SyncType?: number;
 }
 /**
+ * DescribeWorkflowSchedulerInfoDs返回参数结构体
+ */
+export interface DescribeWorkflowSchedulerInfoDsResponse {
+    /**
+     * 数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: WorkflowScheduleDtoDs;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRuleGroupTable返回参数结构体
  */
 export interface DescribeRuleGroupTableResponse {
@@ -23136,14 +23149,14 @@ export interface WorkflowExtOpsDtoPage {
     Items?: Array<WorkflowExtOpsDto>;
 }
 /**
- * RegisterEvent返回参数结构体
+ * DescribeTableLineage返回参数结构体
  */
-export interface RegisterEventResponse {
+export interface DescribeTableLineageResponse {
     /**
-     * 成功或者失败
+     * 表血缘信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: BatchReturn;
+    TableLineage?: TableLineageInfo;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

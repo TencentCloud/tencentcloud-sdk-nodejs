@@ -68,7 +68,7 @@ import {
   EventCaseAuditLogOptDto,
   DescribeTableLineageRequest,
   KillOpsMakePlanInstancesRequest,
-  DescribeEventCasesRequest,
+  AddProjectUserRoleResponse,
   BatchResumeIntegrationTasksResponse,
   DescribeFieldBasicInfoResponse,
   ColumnItem,
@@ -138,7 +138,7 @@ import {
   DescribeTopTableStatRequest,
   SearchCondition,
   Rule,
-  DescribeTableLineageResponse,
+  AddProjectUserRoleRequest,
   ModifyRuleGroupSubscriptionRequest,
   DescribeDataSourceListResponse,
   AgentStatus,
@@ -343,7 +343,7 @@ import {
   DeleteTaskAlarmRegularResponse,
   DeleteWorkflowByIdRequest,
   ProjectBaseInfoOpsRequest,
-  DescribeWorkflowSchedulerInfoDsResponse,
+  DescribeEventCasesRequest,
   DeleteRuleResponse,
   MakePlanTaskOpsDtoCollection,
   SimpleColumnInfo,
@@ -521,6 +521,7 @@ import {
   AlarmIndicatorInfo,
   DescribeDataServicePublishedApiDetailResponse,
   TableMeta,
+  RegisterEventResponse,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
   EventCaseAuditLogVOCollection,
@@ -684,6 +685,7 @@ import {
   RunTasksByMultiWorkflowRequest,
   EventListenerOpsDto,
   CheckIntegrationTaskNameExistsRequest,
+  DescribeWorkflowSchedulerInfoDsResponse,
   DescribeRuleGroupTableResponse,
   DailyScoreInfo,
   SuspendIntegrationTaskRequest,
@@ -757,7 +759,7 @@ import {
   BaseTenant,
   DescribeWorkflowExecuteByIdRequest,
   WorkflowExtOpsDtoPage,
-  RegisterEventResponse,
+  DescribeTableLineageResponse,
   DescribeRuleExecLogRequest,
   BatchRerunIntegrationTaskInstancesResponse,
   RuleGroupPage,
@@ -1275,13 +1277,13 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
   }
 
   /**
-   * 抢占锁定集成任务
+   * 添加项目用户角色
    */
-  async RobAndLockIntegrationTask(
-    req: RobAndLockIntegrationTaskRequest,
-    cb?: (error: string, rep: RobAndLockIntegrationTaskResponse) => void
-  ): Promise<RobAndLockIntegrationTaskResponse> {
-    return this.request("RobAndLockIntegrationTask", req, cb)
+  async AddProjectUserRole(
+    req?: AddProjectUserRoleRequest,
+    cb?: (error: string, rep: AddProjectUserRoleResponse) => void
+  ): Promise<AddProjectUserRoleResponse> {
+    return this.request("AddProjectUserRole", req, cb)
   }
 
   /**
@@ -1512,6 +1514,16 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
     cb?: (error: string, rep: DescribeRuleGroupTableResponse) => void
   ): Promise<DescribeRuleGroupTableResponse> {
     return this.request("DescribeRuleGroupTable", req, cb)
+  }
+
+  /**
+   * 抢占锁定集成任务
+   */
+  async RobAndLockIntegrationTask(
+    req: RobAndLockIntegrationTaskRequest,
+    cb?: (error: string, rep: RobAndLockIntegrationTaskResponse) => void
+  ): Promise<RobAndLockIntegrationTaskResponse> {
+    return this.request("RobAndLockIntegrationTask", req, cb)
   }
 
   /**

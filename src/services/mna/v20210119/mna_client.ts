@@ -36,6 +36,7 @@ import {
   GetFlowPackagesResponse,
   DeleteL3ConnRequest,
   GetVendorHardwareResponse,
+  GetActiveDeviceCountResponse,
   DeviceBaseInfo,
   AddGroupRequest,
   GetGroupListRequest,
@@ -73,18 +74,19 @@ import {
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
   Capacity,
-  Context,
+  GetFlowStatisticRequest,
   SlotNetInfo,
   DeviceNetInfo,
   NetDetails,
   CreateQosResponse,
   ActivateHardware,
+  DownloadActiveDeviceCountResponse,
   GetHardwareListRequest,
   FlowDetails,
   GroupDeleteDeviceRequest,
   DeviceDetails,
   GetFlowStatisticByRegionResponse,
-  ActivateHardwareRequest,
+  ActiveDeviceList,
   GetMultiFlowStatisticRequest,
   ExpectedThreshold,
   GetFlowAlarmInfoResponse,
@@ -93,6 +95,7 @@ import {
   UpdateGroupResponse,
   GetL3ConnListRequest,
   FlowPackageInfo,
+  DownloadActiveDeviceCountRequest,
   GetHardwareListResponse,
   AddDeviceRequest,
   OrderPerLicenseRequest,
@@ -105,15 +108,17 @@ import {
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
   L3ConnInfo,
+  ActivateHardwareRequest,
   GroupAddDeviceResponse,
   GetStatisticDataRequest,
   UpdateDeviceRequest,
   DeleteGroupResponse,
   GetPublicKeyResponse,
   AddHardwareResponse,
-  GetFlowStatisticRequest,
+  Context,
   AddDeviceResponse,
   GetDevicePayModeResponse,
+  GetActiveDeviceCountRequest,
   UpdateL3ConnRequest,
   DevicePayModeInfo,
   MonitorData,
@@ -152,6 +157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateHardwareResponse) => void
   ): Promise<UpdateHardwareResponse> {
     return this.request("UpdateHardware", req, cb)
+  }
+
+  /**
+   * 下载活跃设备数量统计
+   */
+  async DownloadActiveDeviceCount(
+    req: DownloadActiveDeviceCountRequest,
+    cb?: (error: string, rep: DownloadActiveDeviceCountResponse) => void
+  ): Promise<DownloadActiveDeviceCountResponse> {
+    return this.request("DownloadActiveDeviceCount", req, cb)
   }
 
   /**
@@ -306,6 +321,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQosResponse) => void
   ): Promise<DescribeQosResponse> {
     return this.request("DescribeQos", req, cb)
+  }
+
+  /**
+   * 活跃设备数量统计
+   */
+  async GetActiveDeviceCount(
+    req: GetActiveDeviceCountRequest,
+    cb?: (error: string, rep: GetActiveDeviceCountResponse) => void
+  ): Promise<GetActiveDeviceCountResponse> {
+    return this.request("GetActiveDeviceCount", req, cb)
   }
 
   /**

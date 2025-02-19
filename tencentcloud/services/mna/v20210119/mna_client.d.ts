@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteL3ConnResponse, GetDeviceResponse, GetMultiFlowStatisticResponse, UpdateL3ConnResponse, UpdateHardwareResponse, UpdateL3SwitchRequest, DescribeQosResponse, AddL3ConnRequest, OrderPerLicenseResponse, GetFlowPackagesRequest, SetNotifyUrlResponse, UpdateL3CidrResponse, ModifyPackageRenewFlagRequest, GetFlowPackagesResponse, DeleteL3ConnRequest, GetVendorHardwareResponse, AddGroupRequest, GetGroupListRequest, GetGroupDetailRequest, GroupDeleteDeviceResponse, GroupAddDeviceRequest, GetStatisticDataResponse, GetPublicKeyRequest, GetFlowStatisticByGroupResponse, GetNetMonitorResponse, DeleteQosRequest, GetFlowStatisticByRegionRequest, GetFlowAlarmInfoRequest, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, DeleteGroupRequest, CreateEncryptedKeyResponse, UpdateL3SwitchResponse, GetL3ConnListResponse, CreateQosRequest, ModifyPackageRenewFlagResponse, DeleteQosResponse, GetDeviceRequest, ActivateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, AddL3ConnResponse, GetDevicesRequest, SetNotifyUrlRequest, GetDevicePayModeRequest, CreateQosResponse, GetHardwareListRequest, GroupDeleteDeviceRequest, GetFlowStatisticByRegionResponse, ActivateHardwareRequest, GetMultiFlowStatisticRequest, GetFlowAlarmInfoResponse, OrderFlowPackageRequest, GetGroupDetailResponse, UpdateGroupResponse, GetL3ConnListRequest, GetHardwareListResponse, AddDeviceRequest, OrderPerLicenseRequest, UpdateGroupRequest, GetFlowStatisticResponse, UpdateHardwareRequest, GetNetMonitorRequest, GetGroupListResponse, OrderFlowPackageResponse, UpdateDeviceResponse, GroupAddDeviceResponse, GetStatisticDataRequest, UpdateDeviceRequest, DeleteGroupResponse, GetPublicKeyResponse, AddHardwareResponse, GetFlowStatisticRequest, AddDeviceResponse, GetDevicePayModeResponse, UpdateL3ConnRequest, DeleteDeviceResponse, AddHardwareRequest, UpdateL3CidrRequest, AddGroupResponse } from "./mna_models";
+import { DeleteL3ConnResponse, GetDeviceResponse, GetMultiFlowStatisticResponse, UpdateL3ConnResponse, UpdateHardwareResponse, UpdateL3SwitchRequest, DescribeQosResponse, AddL3ConnRequest, OrderPerLicenseResponse, GetFlowPackagesRequest, SetNotifyUrlResponse, UpdateL3CidrResponse, ModifyPackageRenewFlagRequest, GetFlowPackagesResponse, DeleteL3ConnRequest, GetVendorHardwareResponse, GetActiveDeviceCountResponse, AddGroupRequest, GetGroupListRequest, GetGroupDetailRequest, GroupDeleteDeviceResponse, GroupAddDeviceRequest, GetStatisticDataResponse, GetPublicKeyRequest, GetFlowStatisticByGroupResponse, GetNetMonitorResponse, DeleteQosRequest, GetFlowStatisticByRegionRequest, GetFlowAlarmInfoRequest, GetVendorHardwareRequest, CreateEncryptedKeyRequest, DeleteDeviceRequest, DeleteGroupRequest, CreateEncryptedKeyResponse, UpdateL3SwitchResponse, GetL3ConnListResponse, CreateQosRequest, ModifyPackageRenewFlagResponse, DeleteQosResponse, GetDeviceRequest, ActivateHardwareResponse, GetFlowStatisticByGroupRequest, GetDevicesResponse, DescribeQosRequest, AddL3ConnResponse, GetDevicesRequest, SetNotifyUrlRequest, GetDevicePayModeRequest, GetFlowStatisticRequest, CreateQosResponse, DownloadActiveDeviceCountResponse, GetHardwareListRequest, GroupDeleteDeviceRequest, GetFlowStatisticByRegionResponse, GetMultiFlowStatisticRequest, GetFlowAlarmInfoResponse, OrderFlowPackageRequest, GetGroupDetailResponse, UpdateGroupResponse, GetL3ConnListRequest, DownloadActiveDeviceCountRequest, GetHardwareListResponse, AddDeviceRequest, OrderPerLicenseRequest, UpdateGroupRequest, GetFlowStatisticResponse, UpdateHardwareRequest, GetNetMonitorRequest, GetGroupListResponse, OrderFlowPackageResponse, UpdateDeviceResponse, ActivateHardwareRequest, GroupAddDeviceResponse, GetStatisticDataRequest, UpdateDeviceRequest, DeleteGroupResponse, GetPublicKeyResponse, AddHardwareResponse, AddDeviceResponse, GetDevicePayModeResponse, GetActiveDeviceCountRequest, UpdateL3ConnRequest, DeleteDeviceResponse, AddHardwareRequest, UpdateL3CidrRequest, AddGroupResponse } from "./mna_models";
 /**
  * mna client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 更新硬件信息
      */
     UpdateHardware(req: UpdateHardwareRequest, cb?: (error: string, rep: UpdateHardwareResponse) => void): Promise<UpdateHardwareResponse>;
+    /**
+     * 下载活跃设备数量统计
+     */
+    DownloadActiveDeviceCount(req: DownloadActiveDeviceCountRequest, cb?: (error: string, rep: DownloadActiveDeviceCountResponse) => void): Promise<DownloadActiveDeviceCountResponse>;
     /**
      * 可开启/关闭流量包自动续费，不影响当前周期正在生效的流量包。
      */
@@ -79,6 +83,10 @@ export declare class Client extends AbstractClient {
 获取Qos加速状态
      */
     DescribeQos(req: DescribeQosRequest, cb?: (error: string, rep: DescribeQosResponse) => void): Promise<DescribeQosResponse>;
+    /**
+     * 活跃设备数量统计
+     */
+    GetActiveDeviceCount(req: GetActiveDeviceCountRequest, cb?: (error: string, rep: GetActiveDeviceCountResponse) => void): Promise<GetActiveDeviceCountResponse>;
     /**
      * 删除设备信息
      */

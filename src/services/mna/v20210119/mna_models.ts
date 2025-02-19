@@ -312,6 +312,44 @@ export interface GetVendorHardwareResponse {
 }
 
 /**
+ * GetActiveDeviceCount返回参数结构体
+ */
+export interface GetActiveDeviceCountResponse {
+  /**
+   * 激活设备统计
+   */
+  ActiveDeviceList?: Array<ActiveDeviceList>
+  /**
+   * 查询粒度，0:day, 1:week, 2:month, 不传默认为day
+   */
+  Period?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 设备组
+   */
+  DevGroup?: string
+  /**
+   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   */
+  LicenseType?: string
+  /**
+   * 租户ID
+   */
+  AppId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设备的基本信息
  */
 export interface DeviceBaseInfo {
@@ -1109,21 +1147,41 @@ export interface Capacity {
 }
 
 /**
- * 加速策略关键数据
+ * GetFlowStatistic请求参数结构体
  */
-export interface Context {
+export interface GetFlowStatisticRequest {
   /**
-   * 测速数据
+   * 设备ID
    */
-  NetworkData?: NetworkData
+  DeviceId: string
   /**
-   * 用户期望最低门限
+   * 开始查找时间
    */
-  ExpectedLowThreshold?: ExpectedThreshold
+  BeginTime: number
   /**
-   * 用户期望最高门限
+   * 截止时间
    */
-  ExpectedHighThreshold?: ExpectedThreshold
+  EndTime: number
+  /**
+   * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
+   */
+  Type: number
+  /**
+   * 时间粒度（1：按小时统计，2：按天统计）
+   */
+  TimeGranularity: number
+  /**
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
+   */
+  AccessRegion?: string
+  /**
+   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   */
+  GatewayType?: number
+  /**
+   * 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
+   */
+  DeviceList?: Array<string>
 }
 
 /**
@@ -1311,6 +1369,20 @@ export interface ActivateHardware {
 }
 
 /**
+ * DownloadActiveDeviceCount返回参数结构体
+ */
+export interface DownloadActiveDeviceCountResponse {
+  /**
+   * URL地址
+   */
+  FilePath?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetHardwareList请求参数结构体
  */
 export interface GetHardwareListRequest {
@@ -1421,13 +1493,17 @@ export interface GetFlowStatisticByRegionResponse {
 }
 
 /**
- * ActivateHardware请求参数结构体
+ * 激活设备数统计
  */
-export interface ActivateHardwareRequest {
+export interface ActiveDeviceList {
   /**
-   * 待激活的设备列表
+   * 数量
    */
-  Hardware: Array<ActivateHardware>
+  Count?: number
+  /**
+   * 时间
+   */
+  Time?: string
 }
 
 /**
@@ -1675,6 +1751,32 @@ DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
    * 流量包精确余量，单位：MB
    */
   CapacityRemainPrecise?: number
+}
+
+/**
+ * DownloadActiveDeviceCount请求参数结构体
+ */
+export interface DownloadActiveDeviceCountRequest {
+  /**
+   * 查询粒度。0:day, 1:week, 2:month, 不传默认为day
+   */
+  Period?: number
+  /**
+   * 开始时间。单位秒
+   */
+  StartTime?: number
+  /**
+   * 结束时间。单位秒
+   */
+  EndTime?: number
+  /**
+   * 设备组, 不传查询全部
+   */
+  DevGroup?: string
+  /**
+   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   */
+  LicenseType?: number
 }
 
 /**
@@ -1960,6 +2062,16 @@ export interface L3ConnInfo {
 }
 
 /**
+ * ActivateHardware请求参数结构体
+ */
+export interface ActivateHardwareRequest {
+  /**
+   * 待激活的设备列表
+   */
+  Hardware: Array<ActivateHardware>
+}
+
+/**
  * GroupAddDevice返回参数结构体
  */
 export interface GroupAddDeviceResponse {
@@ -2078,41 +2190,21 @@ export interface AddHardwareResponse {
 }
 
 /**
- * GetFlowStatistic请求参数结构体
+ * 加速策略关键数据
  */
-export interface GetFlowStatisticRequest {
+export interface Context {
   /**
-   * 设备ID
+   * 测速数据
    */
-  DeviceId: string
+  NetworkData?: NetworkData
   /**
-   * 开始查找时间
+   * 用户期望最低门限
    */
-  BeginTime: number
+  ExpectedLowThreshold?: ExpectedThreshold
   /**
-   * 截止时间
+   * 用户期望最高门限
    */
-  EndTime: number
-  /**
-   * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
-   */
-  Type: number
-  /**
-   * 时间粒度（1：按小时统计，2：按天统计）
-   */
-  TimeGranularity: number
-  /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
-   */
-  AccessRegion?: string
-  /**
-   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
-   */
-  GatewayType?: number
-  /**
-   * 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
-   */
-  DeviceList?: Array<string>
+  ExpectedHighThreshold?: ExpectedThreshold
 }
 
 /**
@@ -2149,6 +2241,32 @@ export interface GetDevicePayModeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetActiveDeviceCount请求参数结构体
+ */
+export interface GetActiveDeviceCountRequest {
+  /**
+   * 查询粒度。0:day, 1:week, 2:month, 不传默认为day
+   */
+  Period?: number
+  /**
+   * 开始时间。单位秒
+   */
+  StartTime?: number
+  /**
+   * 结束时间。单位秒
+   */
+  EndTime?: number
+  /**
+   * 设备组, 不传查询全部
+   */
+  DevGroup?: string
+  /**
+   * license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权
+   */
+  LicenseType?: number
 }
 
 /**

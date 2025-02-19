@@ -40,17 +40,79 @@ export interface ModifyJWTAuthenticatorResponse {
 }
 
 /**
- * UpdateAuthorizationPolicyPriority请求参数结构体
+ * CA证书信息
  */
-export interface UpdateAuthorizationPolicyPriorityRequest {
+export interface CaCertificateItem {
   /**
-   * 实例ID
+   * common name
    */
-  InstanceId: string
+  CaCn?: string
   /**
-   * 策略ID和优先级
+   * 证书内容
    */
-  Priorities?: Array<AuthorizationPolicyPriority>
+  CaCertificate?: string
+  /**
+   * 证书序列号
+   */
+  CaSn?: string
+  /**
+   * 证书格式
+   */
+  Format?: string
+  /**
+   * 验证证书内容
+   */
+  VerificationCertificate?: string
+  /**
+   * ca状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 上次激活时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastActivationTime?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: number
+  /**
+   * 预销毁时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 上次去激活时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastInactivationTime?: number
+  /**
+   * Ca证书颁发者CN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CaIssuerCn?: string
+  /**
+   * 生效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotBeforeTime?: number
+  /**
+   * 失效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotAfterTime?: number
+}
+
+/**
+ * ModifyAuthorizationPolicy返回参数结构体
+ */
+export interface ModifyAuthorizationPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -82,17 +144,13 @@ export interface CreateInstanceResponse {
 }
 
 /**
- * DescribeAuthenticator请求参数结构体
+ * ApplyRegistrationCode请求参数结构体
  */
-export interface DescribeAuthenticatorRequest {
+export interface ApplyRegistrationCodeRequest {
   /**
-   * 实例ID
+   * 集群id
    */
   InstanceId: string
-  /**
-   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 HTTP:HTTP认证器
-   */
-  Type?: string
 }
 
 /**
@@ -197,6 +255,65 @@ export interface DeleteTopicRequest {
  * ModifyUser返回参数结构体
  */
 export interface ModifyUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaCertificate返回参数结构体
+ */
+export interface DescribeCaCertificateResponse {
+  /**
+   * 创建时间
+   */
+  CreatedTime?: number
+  /**
+   * 上次更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 失效日期
+   */
+  NotAfterTime?: number
+  /**
+   * 上次激活时间
+   */
+  LastActivationTime?: number
+  /**
+   * 上次吊销时间
+   */
+  LastInactivationTime?: number
+  /**
+   * 证书状态
+   */
+  Status?: string
+  /**
+   * 证书序列号
+   */
+  CaSn?: string
+  /**
+   * common name
+   */
+  CaCn?: string
+  /**
+   * 证书内容
+   */
+  CaCertificate?: string
+  /**
+   * 证书格式
+   */
+  Format?: string
+  /**
+   * Ca证书颁发者CN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CaIssuerCn?: string
+  /**
+   * 生效开始时间
+   */
+  NotBeforeTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -329,9 +446,9 @@ export interface ModifyJWKSAuthenticatorRequest {
 }
 
 /**
- * DeleteInstance返回参数结构体
+ * RegisterCaCertificate返回参数结构体
  */
-export interface DeleteInstanceResponse {
+export interface RegisterCaCertificateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -541,6 +658,24 @@ export interface DescribeInstanceListResponse {
 }
 
 /**
+ * ApplyRegistrationCode返回参数结构体
+ */
+export interface ApplyRegistrationCodeResponse {
+  /**
+   * 集群ID
+   */
+  InstanceId?: string
+  /**
+   * 注册码
+   */
+  RegistrationCode?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstance返回参数结构体
  */
 export interface ModifyInstanceResponse {
@@ -663,6 +798,30 @@ export interface DescribeAuthenticatorResponse {
 }
 
 /**
+ * DeactivateCaCertificate返回参数结构体
+ */
+export interface DeactivateCaCertificateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCaCertificate请求参数结构体
+ */
+export interface DeleteCaCertificateRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 证书序列号
+   */
+  CaSn: string
+}
+
+/**
  * DeleteDeviceCertificate请求参数结构体
  */
 export interface DeleteDeviceCertificateRequest {
@@ -697,6 +856,16 @@ export interface DeleteUserResponse {
 }
 
 /**
+ * ActivateCaCertificate返回参数结构体
+ */
+export interface ActivateCaCertificateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDeviceCertificate返回参数结构体
  */
 export interface DeleteDeviceCertificateResponse {
@@ -707,9 +876,9 @@ export interface DeleteDeviceCertificateResponse {
 }
 
 /**
- * ModifyAuthorizationPolicy返回参数结构体
+ * DeleteInstance返回参数结构体
  */
-export interface ModifyAuthorizationPolicyResponse {
+export interface DeleteInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -821,6 +990,16 @@ export interface CreateTopicRequest {
 }
 
 /**
+ * DeleteCaCertificate返回参数结构体
+ */
+export interface DeleteCaCertificateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 标签过滤器
  */
 export interface TagFilter {
@@ -897,6 +1076,20 @@ export interface MQTTUserItem {
    * 修改时间，秒为单位
    */
   ModifiedTime?: number
+}
+
+/**
+ * ActivateCaCertificate请求参数结构体
+ */
+export interface ActivateCaCertificateRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 证书序列号
+   */
+  CaSn: string
 }
 
 /**
@@ -1131,6 +1324,50 @@ export interface CreateAuthorizationPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuthenticator请求参数结构体
+ */
+export interface DescribeAuthenticatorRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 认证器类型: JWT：JWT认证器 JWKS：JWKS认证器 HTTP:HTTP认证器
+   */
+  Type?: string
+}
+
+/**
+ * RegisterCaCertificate请求参数结构体
+ */
+export interface RegisterCaCertificateRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * CA证书
+   */
+  CaCertificate: string
+  /**
+   * 验证证书
+   */
+  VerificationCertificate: string
+  /**
+   * 证书格式，不传默认PEM格式
+   */
+  Format?: string
+  /**
+   * 证书状态，不传默认ACTIVE状态
+    ACTIVE,//激活
+    INACTIVE,//未激活
+    REVOKED,//吊销
+    PENDING_ACTIVATION,//注册待激活
+   */
+  Status?: string
 }
 
 /**
@@ -1430,6 +1667,16 @@ API：通过API手动注册
 }
 
 /**
+ * ModifyInstanceCertBinding返回参数结构体
+ */
+export interface ModifyInstanceCertBindingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteInstance请求参数结构体
  */
 export interface DeleteInstanceRequest {
@@ -1526,6 +1773,34 @@ Username：Username模糊查询
 }
 
 /**
+ * DescribeCaCertificate请求参数结构体
+ */
+export interface DescribeCaCertificateRequest {
+  /**
+   * ca证书sn
+   */
+  CaSn: string
+  /**
+   * 集群id
+   */
+  InstanceId: string
+}
+
+/**
+ * UpdateAuthorizationPolicyPriority请求参数结构体
+ */
+export interface UpdateAuthorizationPolicyPriorityRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 策略ID和优先级
+   */
+  Priorities?: Array<AuthorizationPolicyPriority>
+}
+
+/**
  * CreateJWTAuthenticator返回参数结构体
  */
 export interface CreateJWTAuthenticatorResponse {
@@ -1560,9 +1835,18 @@ export interface DescribeAuthorizationPoliciesRequest {
 }
 
 /**
- * RevokedDeviceCertificate返回参数结构体
+ * DescribeTopicList返回参数结构体
  */
-export interface RevokedDeviceCertificateResponse {
+export interface DescribeTopicListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 主题列表
+   */
+  Data?: Array<MQTTTopicItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1663,6 +1947,20 @@ InstanceStatus：集群状态搜索
 }
 
 /**
+ * DeactivateCaCertificate请求参数结构体
+ */
+export interface DeactivateCaCertificateRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 证书序列号
+   */
+  CaSn: string
+}
+
+/**
  * CreateJWTAuthenticator请求参数结构体
  */
 export interface CreateJWTAuthenticatorRequest {
@@ -1694,6 +1992,16 @@ export interface CreateJWTAuthenticatorRequest {
    * 说明
    */
   Remark?: string
+}
+
+/**
+ * DescribeCaCertificates请求参数结构体
+ */
+export interface DescribeCaCertificatesRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -1853,18 +2161,9 @@ export interface ModifyAuthorizationPolicyRequest {
 }
 
 /**
- * DescribeTopicList返回参数结构体
+ * RevokedDeviceCertificate返回参数结构体
  */
-export interface DescribeTopicListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 主题列表
-   */
-  Data?: Array<MQTTTopicItem>
+export interface RevokedDeviceCertificateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1882,6 +2181,41 @@ export interface DeleteTopicResponse {
 }
 
 /**
+ * ModifyInstanceCertBinding请求参数结构体
+ */
+export interface ModifyInstanceCertBindingRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 服务端证书id
+   */
+  SSLServerCertId: string
+  /**
+   * CA证书id
+   */
+  SSLCaCertId: string
+  /**
+   * 加密通信方式
+TLS：单向证书认证
+mTLS：双向证书认证
+BYOC：一设备一证书认证
+   */
+  X509Mode: string
+  /**
+   * 设备证书注册类型：
+JITP，自动注册；
+MANUAL 手动注册
+   */
+  DeviceCertificateProvisionType?: string
+  /**
+   * 是否自动激活，默认为false
+   */
+  AutomaticActivation?: boolean
+}
+
+/**
  * DescribeInstance请求参数结构体
  */
 export interface DescribeInstanceRequest {
@@ -1889,6 +2223,20 @@ export interface DescribeInstanceRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeCaCertificates返回参数结构体
+ */
+export interface DescribeCaCertificatesResponse {
+  /**
+   * ca证书列表
+   */
+  Data?: Array<CaCertificateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

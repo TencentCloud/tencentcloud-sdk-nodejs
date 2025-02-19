@@ -221,6 +221,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（ClearInstance）用于清空实例数据。
+> **说明**：在清空数据流程中，系统将自动进行数据备份，耗时较长，请您耐心等待并提前做好时间规划。
      */
     async ClearInstance(req, cb) {
         return this.request("ClearInstance", req, cb);

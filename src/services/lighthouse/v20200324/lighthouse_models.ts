@@ -432,7 +432,6 @@ export interface ModifyBundle {
   Bundle?: Bundle
   /**
    * 不支持套餐变更原因信息。变更套餐状态为"AVAILABLE"时, 该信息为空
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NotSupportModifyMessage?: string
 }
@@ -1198,7 +1197,6 @@ export interface KeyPair {
   PublicKey?: string
   /**
    * 密钥对关联的实例 ID 列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociatedInstanceIds?: Array<string>
   /**
@@ -1223,11 +1221,11 @@ export type DescribeFirewallRulesTemplateRequest = null
  */
 export interface DescribeDockerContainerConfigurationRequest {
   /**
-   * 实例ID。
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
    */
   InstanceId: string
   /**
-   * 容器ID。
+   * 容器ID。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
    */
   ContainerId: string
 }
@@ -3725,7 +3723,6 @@ export interface Snapshot {
   /**
    * 快照的最新操作，只有创建、回滚快照时记录。
 取值如 CreateInstanceSnapshot，RollbackInstanceSnapshot。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperation?: string
   /**
@@ -3734,17 +3731,14 @@ export interface Snapshot {
 <li>SUCCESS：表示操作成功</li>
 <li>OPERATING：表示操作执行中</li>
 <li>FAILED：表示操作失败</li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationState?: string
   /**
    * 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationRequestId?: string
   /**
    * 快照的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
 }

@@ -326,10 +326,10 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
         return this.request("DescribeApproveList", req, cb);
     }
     /**
-     * 抢占锁定集成任务
+     * 添加项目用户角色
      */
-    async RobAndLockIntegrationTask(req, cb) {
-        return this.request("RobAndLockIntegrationTask", req, cb);
+    async AddProjectUserRole(req, cb) {
+        return this.request("AddProjectUserRole", req, cb);
     }
     /**
      * 判断集成节点名称是否存在
@@ -468,6 +468,12 @@ https://capi.woa.com/api/detail?product=wedata&env=api_formal&version=2021-08-20
      */
     async DescribeRuleGroupTable(req, cb) {
         return this.request("DescribeRuleGroupTable", req, cb);
+    }
+    /**
+     * 抢占锁定集成任务
+     */
+    async RobAndLockIntegrationTask(req, cb) {
+        return this.request("RobAndLockIntegrationTask", req, cb);
     }
     /**
      * 创建集成任务

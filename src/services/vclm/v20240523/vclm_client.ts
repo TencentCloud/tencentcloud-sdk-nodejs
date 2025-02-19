@@ -18,30 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  AsrTimestamps,
-  SubmitVideoStylizationJobRequest,
-  LogoParam,
-  SubmitImageAnimateJobRequest,
-  SubmitPortraitSingJobResponse,
-  ConfirmVideoTranslateJobRequest,
-  DescribePortraitSingJobRequest,
-  SubmitImageAnimateJobResponse,
-  SubmitVideoTranslateJobResponse,
-  DescribeVideoTranslateJobResponse,
   CheckAnimateImageJobResponse,
+  SubmitVideoStylizationJobRequest,
   CheckAnimateImageJobRequest,
   DescribeVideoStylizationJobRequest,
+  DescribePortraitSingJobRequest,
   DescribeImageAnimateJobResponse,
   SubmitPortraitSingJobRequest,
   LogoRect,
-  DescribeVideoStylizationJobResponse,
+  SubmitImageAnimateJobResponse,
   SubmitVideoStylizationJobResponse,
-  SubmitVideoTranslateJobRequest,
-  TranslateResult,
-  ConfirmVideoTranslateJobResponse,
-  DescribeVideoTranslateJobRequest,
+  DescribeVideoStylizationJobResponse,
+  SubmitImageAnimateJobRequest,
   DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
+  SubmitPortraitSingJobResponse,
+  LogoParam,
 } from "./vclm_models"
 
 /**
@@ -51,61 +43,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("vclm.tencentcloudapi.com", "2024-05-23", clientConfig)
-  }
-
-  /**
-     * ### 支持音色种别列表。
-每个音色都支持：英语（美国）、阿拉伯语、德语、西班牙语、法语、印尼语、意大利语、日语、韩语、马来语、葡萄牙语、俄语、泰语、土耳其语、越南语。
-
-| 音色名称    | 性别 | 音色ID |
-| ----------- | ---- | ------ |
-| Seraphina   | 女   | 701002 |
-| Ada         | 女   | 701003 |
-| Emma        | 女   | 701007 |
-| Brian       | 男   | 701008 |
-| Amanda      | 女   | 701013 |
-| Brandon     | 男   | 701014 |
-| Christopher | 男   | 701015 |
-| Davis       | 男   | 701017 |
-| Derek       | 男   | 701018 |
-| Dustin      | 男   | 701019 |
-| Evelyn      | 女   | 701020 |
-| Lewis       | 男   | 701021 |
-| Lola        | 女   | 701022 |
-| Samuel      | 男   | 701026 |
-| Steffan     | 男   | 701028 |
-| Arabella    | 女   | 701029 |
-| Isidora     | 女   | 701030 |
-| Tristan     | 男   | 701031 |
-| Vivienne    | 女   | 701034 |
-| Lucien      | 男   | 701035 |
-| Alessio     | 男   | 701036 |
-| Giuseppe    | 男   | 701037 |
-| Isabella    | 女   | 701038 |
-| Marcello    | 男   | 701039 |
-| Masaru      | 男   | 701040 |
-| Macerio     | 男   | 701042 |
-| Thalita     | 女   | 701043 |
-| 晓晓         | 女   | 701045 |
-| 晓宇         | 女   | 701046 |
-| 云逸         | 男   | 701047 |
-| Yunfan       | 男   | 701048 |
-     */
-  async SubmitVideoTranslateJob(
-    req: SubmitVideoTranslateJobRequest,
-    cb?: (error: string, rep: SubmitVideoTranslateJobResponse) => void
-  ): Promise<SubmitVideoTranslateJobResponse> {
-    return this.request("SubmitVideoTranslateJob", req, cb)
-  }
-
-  /**
-   * 查询视频转译任务
-   */
-  async DescribeVideoTranslateJob(
-    req: DescribeVideoTranslateJobRequest,
-    cb?: (error: string, rep: DescribeVideoTranslateJobResponse) => void
-  ): Promise<DescribeVideoTranslateJobResponse> {
-    return this.request("DescribeVideoTranslateJob", req, cb)
   }
 
   /**
@@ -127,16 +64,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitPortraitSingJobResponse) => void
   ): Promise<SubmitPortraitSingJobResponse> {
     return this.request("SubmitPortraitSingJob", req, cb)
-  }
-
-  /**
-   * 确认视频转译结果
-   */
-  async ConfirmVideoTranslateJob(
-    req: ConfirmVideoTranslateJobRequest,
-    cb?: (error: string, rep: ConfirmVideoTranslateJobResponse) => void
-  ): Promise<ConfirmVideoTranslateJobResponse> {
-    return this.request("ConfirmVideoTranslateJob", req, cb)
   }
 
   /**

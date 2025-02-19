@@ -77,14 +77,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAllocateConditions", req, cb);
     }
     /**
-     * 接口迁移到其他业务
-
-查用当前用户明细节省计划总览查询时段内的使用情况
-     */
-    async DescribeSavingPlanOverview(req, cb) {
-        return this.request("DescribeSavingPlanOverview", req, cb);
-    }
-    /**
      * 查询分账账单日概览
      */
     async DescribeAllocationOverview(req, cb) {
@@ -190,14 +182,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDosageDetailByDate", req, cb);
     }
     /**
-     * 接口迁移到其他业务
-
-查用当前用户明细节省计划查询时段内的使用情况
-     */
-    async DescribeSavingPlanUsage(req, cb) {
-        return this.request("DescribeSavingPlanUsage", req, cb);
-    }
-    /**
      * 可以通过API获取当前UIN是否有调账，客户可以更快地主动地获取调账情况。
      */
     async DescribeBillAdjustInfo(req, cb) {
@@ -270,12 +254,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PayDeals", req, cb);
     }
     /**
-     * 接口迁移到其他业务
-
-创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+     * 获取按产品汇总消耗详情
      */
-    async CreateSavingPlanOrder(req, cb) {
-        return this.request("CreateSavingPlanOrder", req, cb);
+    async DescribeCostSummaryByProduct(req, cb) {
+        return this.request("DescribeCostSummaryByProduct", req, cb);
     }
     /**
      * 批量取消设置分账标签
@@ -288,12 +270,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDealsByCond(req, cb) {
         return this.request("DescribeDealsByCond", req, cb);
-    }
-    /**
-     * 获取按产品汇总消耗详情
-     */
-    async DescribeCostSummaryByProduct(req, cb) {
-        return this.request("DescribeCostSummaryByProduct", req, cb);
     }
     /**
      * 查询分账账单按组件汇总

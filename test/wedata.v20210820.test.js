@@ -508,9 +508,9 @@ it("wedata.v20210820.DescribeApproveList", async function () {
     }
 })
 
-it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+it("wedata.v20210820.AddProjectUserRole", async function () {
     try {
-       const data = await client.RobAndLockIntegrationTask({})
+       const data = await client.AddProjectUserRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +741,16 @@ it("wedata.v20210820.DescribeDimensionScore", async function () {
 it("wedata.v20210820.DescribeRuleGroupTable", async function () {
     try {
        const data = await client.DescribeRuleGroupTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RobAndLockIntegrationTask", async function () {
+    try {
+       const data = await client.RobAndLockIntegrationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

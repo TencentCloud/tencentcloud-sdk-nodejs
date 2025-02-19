@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateHardware", req, cb);
     }
     /**
+     * 下载活跃设备数量统计
+     */
+    async DownloadActiveDeviceCount(req, cb) {
+        return this.request("DownloadActiveDeviceCount", req, cb);
+    }
+    /**
      * 可开启/关闭流量包自动续费，不影响当前周期正在生效的流量包。
      */
     async ModifyPackageRenewFlag(req, cb) {
@@ -132,6 +138,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeQos(req, cb) {
         return this.request("DescribeQos", req, cb);
+    }
+    /**
+     * 活跃设备数量统计
+     */
+    async GetActiveDeviceCount(req, cb) {
+        return this.request("GetActiveDeviceCount", req, cb);
     }
     /**
      * 删除设备信息

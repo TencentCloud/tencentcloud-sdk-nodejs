@@ -98,16 +98,6 @@ it("billing.v20180709.DescribeAllocateConditions", async function () {
     }
 })
 
-it("billing.v20180709.DescribeSavingPlanOverview", async function () {
-    try {
-       const data = await client.DescribeSavingPlanOverview({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("billing.v20180709.DescribeAllocationOverview", async function () {
     try {
        const data = await client.DescribeAllocationOverview({})
@@ -278,16 +268,6 @@ it("billing.v20180709.DescribeDosageDetailByDate", async function () {
     }
 })
 
-it("billing.v20180709.DescribeSavingPlanUsage", async function () {
-    try {
-       const data = await client.DescribeSavingPlanUsage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("billing.v20180709.DescribeBillAdjustInfo", async function () {
     try {
        const data = await client.DescribeBillAdjustInfo({})
@@ -408,9 +388,9 @@ it("billing.v20180709.PayDeals", async function () {
     }
 })
 
-it("billing.v20180709.CreateSavingPlanOrder", async function () {
+it("billing.v20180709.DescribeCostSummaryByProduct", async function () {
     try {
-       const data = await client.CreateSavingPlanOrder({})
+       const data = await client.DescribeCostSummaryByProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,16 +411,6 @@ it("billing.v20180709.DeleteAllocationTag", async function () {
 it("billing.v20180709.DescribeDealsByCond", async function () {
     try {
        const data = await client.DescribeDealsByCond({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("billing.v20180709.DescribeCostSummaryByProduct", async function () {
-    try {
-       const data = await client.DescribeCostSummaryByProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
