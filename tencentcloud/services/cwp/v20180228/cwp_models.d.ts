@@ -3033,59 +3033,6 @@ export interface ExportAssetCoreModuleListRequest {
     By?: string;
 }
 /**
- * ModifyReverseShellRulesAggregation请求参数结构体
- */
-export interface ModifyReverseShellRulesAggregationRequest {
-    /**
-     * 规则ID(新增时请留空)
-     */
-    Id?: number;
-    /**
-     * 客户端ID数组
-     */
-    Uuids?: Array<string>;
-    /**
-     * 主机IP
-     */
-    HostIp?: string;
-    /**
-     * 目标IP
-     */
-    DestIp?: string;
-    /**
-     * 目标端口
-     */
-    DestPort?: string;
-    /**
-     * 进程名
-     */
-    ProcessName?: string;
-    /**
-     * 是否全局规则(默认否)
-     */
-    IsGlobal?: number;
-    /**
-     * 事件列表和详情点击加白时关联的事件id (新增规则时请留空)
-     */
-    EventId?: number;
-    /**
-     * 加白方式， 0:常规加白 1:正则加白
-     */
-    WhiteType?: number;
-    /**
-     * 正则表达式
-     */
-    RuleRegexp?: string;
-    /**
-     * 处理历史事件， 0:不处理 1:处理
-     */
-    HandleHistory?: number;
-    /**
-     * 批次id
-     */
-    GroupID?: string;
-}
-/**
  * ExportAssetMachineDetail返回参数结构体
  */
 export interface ExportAssetMachineDetailResponse {
@@ -24352,10 +24299,6 @@ export interface Place {
     Location?: string;
 }
 /**
- * DescribeSecurityProtectionStat请求参数结构体
- */
-export declare type DescribeSecurityProtectionStatRequest = null;
-/**
  * 日志详情
  */
 export interface LogInfo {
@@ -27965,77 +27908,57 @@ export interface DescribeScanTaskDetailsResponse {
     RequestId?: string;
 }
 /**
- * DescribeSecurityProtectionStat返回参数结构体
+ * ModifyReverseShellRulesAggregation请求参数结构体
  */
-export interface DescribeSecurityProtectionStatResponse {
+export interface ModifyReverseShellRulesAggregationRequest {
     /**
-     * 0 ：0付费资产情况， 1：存在未安装agent情况 ，2：部分资产已是专业版/旗舰版， 3：全部资产已是专业版/旗舰版
+     * 规则ID(新增时请留空)
      */
-    AssetManageStat?: number;
+    Id?: number;
     /**
-     * 0:从未检测过，或0资产付费情况, 1:存在漏洞风险, 2:无风险
+     * 客户端ID数组
      */
-    VulManageStat?: number;
+    Uuids?: Array<string>;
     /**
-     * 0:从未检测过，或0资产付费情况, 1:存在基线风险,2:无风险
+     * 主机IP
      */
-    SecureBasicLineStat?: number;
+    HostIp?: string;
     /**
-     * 0:从未检测过，或0资产付费情况, 1:已检测，存在恶意文件, 2:已检测，未开启隔离防护, 3:已检测且已开启防护且无风险
+     * 目标IP
      */
-    MalwareScanStat?: number;
+    DestIp?: string;
     /**
-     * 密码破解是否开启防护 0:未开启防护或0付费资产情况 1:已开启防护 2:存在带处理事件
+     * 目标端口
      */
-    DefenseBruteAttackStat?: number;
+    DestPort?: string;
     /**
-     * 核心文件监控 0:未开启防护（0付费资产情况）,1: 已开通
+     * 进程名
      */
-    FileTamperStat?: number;
+    ProcessName?: string;
     /**
-     * 网页防篡改  0:未开通, 1:已开通
+     * 是否全局规则(默认否)
      */
-    WebPageStat?: number;
+    IsGlobal?: number;
     /**
-     * 异常登录 0:存在未处理风险,1:无风险，未配置白名单,2:无风险，已配置
+     * 事件列表和详情点击加白时关联的事件id (新增规则时请留空)
      */
-    LoginLogStat?: number;
+    EventId?: number;
     /**
-     * 检测--密码破解有无存在风险  0:存在未处理风险, 1：无风险，正常检测
+     * 加白方式， 0:常规加白 1:正则加白
      */
-    DiscoverBruteAttackStat?: number;
+    WhiteType?: number;
     /**
-     * 恶意请求 0 : 0台开通专业版/旗舰版, 1: 恶意请求 存在未处理风险, 2:已有付费资产，无风险
+     * 正则表达式
      */
-    MaliciousRequestStat?: number;
+    RuleRegexp?: string;
     /**
-     * 本地提权 0:0台开通专业版/旗舰版, 1:存在未处理风险 2:已有付费资产，无风险
+     * 处理历史事件， 0:不处理 1:处理
      */
-    PrivilegeStat?: number;
+    HandleHistory?: number;
     /**
-     * 反弹shell 0:0台开通专业版/旗舰版, 1:存在未处理风险 2:已有付费资产，无风险
+     * 批次id
      */
-    ReverseShellStat?: number;
-    /**
-     * 专家服务 0:未开通服务, 1:已开通
-     */
-    ExpertServiceStat?: number;
-    /**
-     * 日志分析 0:未开通服务, 1:已开通
-     */
-    LogAnalysisStat?: number;
-    /**
-     * 安全告警 0:未开通设置（全部关闭） 1:已开通（只要开启1个就算）
-     */
-    WarningSetStat?: number;
-    /**
-     * 高危命令，0：0台开通专业版/旗舰版， 1：存在未处理风险， 2：已有付费资产，无风险
-     */
-    EventBashStat?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    GroupID?: string;
 }
 /**
  * DescribeHostLoginList返回参数结构体

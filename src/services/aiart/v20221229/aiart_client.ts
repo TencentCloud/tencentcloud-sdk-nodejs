@@ -21,35 +21,41 @@ import {
   SubmitDrawPortraitJobResponse,
   LogoParam,
   ImageToImageRequest,
-  QueryMemeJobRequest,
+  QueryTrainPortraitModelJobRequest,
   QueryTextToImageProJobResponse,
   UploadTrainPortraitImagesRequest,
   ResultConfig,
-  QueryTrainPortraitModelJobRequest,
-  ChangeClothesRequest,
-  ReplaceBackgroundResponse,
+  QueryMemeJobRequest,
+  QueryGlamPicJobResponse,
   ImageOutpaintingRequest,
+  ReplaceBackgroundResponse,
   QueryMemeJobResponse,
   QueryDrawPortraitJobResponse,
   QueryTrainPortraitModelJobResponse,
   ChangeClothesResponse,
+  SubmitGlamPicJobResponse,
   SubmitMemeJobResponse,
   SubmitTrainPortraitModelJobRequest,
   SketchToImageRequest,
   TextToImageRequest,
+  Rect,
+  FaceInfo,
   SubmitTextToImageProJobResponse,
+  SubmitGlamPicJobRequest,
   GenerateAvatarRequest,
   LogoRect,
   Filter,
   ImageInpaintingRemovalResponse,
   SubmitMemeJobRequest,
+  ReplaceBackgroundRequest,
   SubmitTextToImageProJobRequest,
   SubmitTrainPortraitModelJobResponse,
   QueryDrawPortraitJobRequest,
   ImageToImageResponse,
   SketchToImageResponse,
+  QueryGlamPicJobRequest,
   ImageInpaintingRemovalRequest,
-  ReplaceBackgroundRequest,
+  ChangeClothesRequest,
   ImageOutpaintingResponse,
   UploadTrainPortraitImagesResponse,
   QueryTextToImageProJobRequest,
@@ -206,6 +212,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * AI 美照接口将根据模板为用户生成精美照片。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个美照生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+AI 美照默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async QueryGlamPicJob(
+    req: QueryGlamPicJobRequest,
+    cb?: (error: string, rep: QueryGlamPicJobResponse) => void
+  ): Promise<QueryGlamPicJobResponse> {
+    return this.request("QueryGlamPicJob", req, cb)
+  }
+
+  /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 本接口用于上传人像图片并指定对应的写真模型 ID。上传的图片要求是同一个人，建议上传单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图片。
 可选模式：
@@ -248,6 +268,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryTextToImageProJobResponse) => void
   ): Promise<QueryTextToImageProJobResponse> {
     return this.request("QueryTextToImageProJob", req, cb)
+  }
+
+  /**
+     * AI 美照接口将根据模板为用户生成精美照片。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个美照生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+AI 美照默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+  async SubmitGlamPicJob(
+    req: SubmitGlamPicJobRequest,
+    cb?: (error: string, rep: SubmitGlamPicJobResponse) => void
+  ): Promise<SubmitGlamPicJobResponse> {
+    return this.request("SubmitGlamPicJob", req, cb)
   }
 
   /**

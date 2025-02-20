@@ -300,6 +300,20 @@ export interface DescribeDCDBInstanceDetailRequest {
 }
 
 /**
+ * DescribeFileDownloadUrl返回参数结构体
+ */
+export interface DescribeFileDownloadUrlResponse {
+  /**
+   * 带签名的下载连接
+   */
+  PreSignedUrl: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceVip返回参数结构体
  */
 export interface ModifyInstanceVipResponse {
@@ -439,6 +453,20 @@ export interface NewBackupConfig {
 备份模式选择年时，可填写1-336整数。
    */
   BackupCount?: number
+}
+
+/**
+ * CancelOnlineDDLJob请求参数结构体
+ */
+export interface CancelOnlineDDLJobRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * 要暂停的 Online DDL 任务对应的流程Id。创建任务时，CreateOnlineDDLJob 会返回此流程Id
+   */
+  FlowId: number
 }
 
 /**
@@ -980,6 +1008,20 @@ export interface DescribeDCDBInstanceNodeInfoRequest {
    * 返回数据的偏移值，默认为0
    */
   Offset?: number
+}
+
+/**
+ * SwitchDBInstanceHA返回参数结构体
+ */
+export interface SwitchDBInstanceHAResponse {
+  /**
+   * 异步流程Id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1685,17 +1727,17 @@ export interface DescribeDCDBPriceRequest {
 }
 
 /**
- * SwitchDBInstanceHA返回参数结构体
+ * DescribeOnlineDDLJob请求参数结构体
  */
-export interface SwitchDBInstanceHAResponse {
+export interface DescribeOnlineDDLJobRequest {
   /**
-   * 异步流程Id
+   * 实例Id
    */
-  FlowId?: number
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Online DDL 对应的流程Id。创建任务时，CreateOnlineDDLJob 会返回此流程Id
    */
-  RequestId?: string
+  FlowId: number
 }
 
 /**
@@ -2557,17 +2599,45 @@ export interface DescribeDcnDetailRequest {
 }
 
 /**
- * DescribeFileDownloadUrl返回参数结构体
+ * DDL任务执行详情
  */
-export interface DescribeFileDownloadUrlResponse {
+export interface DDLDetail {
   /**
-   * 带签名的下载连接
+   * 分片Id
    */
-  PreSignedUrl: string
+  ShardSerialId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据库
    */
-  RequestId?: string
+  DbName?: string
+  /**
+   * 表
+   */
+  Table?: string
+  /**
+   * 执行的DDL任务内容
+   */
+  Alter?: string
+  /**
+   * 开始执行时间
+   */
+  BeginTime?: string
+  /**
+   * 当前任务状态。0 成功； 1失败；  2进行中
+   */
+  Status?: number
+  /**
+   * 任务详细描述信息
+   */
+  Desc?: string
+  /**
+   * 任务当前所处阶段
+   */
+  Stage?: string
+  /**
+   * 切换状态：1: 未到切换阶段；2：正在等待进行表切换；3: 正在进行切换；4: 切换成功；5: 切换失败
+   */
+  SwitchStatus?: number
 }
 
 /**
@@ -4928,6 +4998,32 @@ export interface DescribeLogFileRetentionPeriodRequest {
 }
 
 /**
+ * DescribeOnlineDDLJob返回参数结构体
+ */
+export interface DescribeOnlineDDLJobResponse {
+  /**
+   * 任务状态。0：成功；1：失败；大于1：进行中
+   */
+  Status?: number
+  /**
+   * 任务进度百分比
+   */
+  Process?: number
+  /**
+   * 错误信息或提示信息
+   */
+  ErrorMessage?: string
+  /**
+   * 各分片DDL执行详情
+   */
+  DDLDetails?: Array<DDLDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceVport请求参数结构体
  */
 export interface ModifyInstanceVportRequest {
@@ -4969,6 +5065,16 @@ export interface FlushBinlogRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * CancelOnlineDDLJob返回参数结构体
+ */
+export interface CancelOnlineDDLJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -98,9 +98,9 @@ it("dcdb.v20180411.ResetAccountPassword", async function () {
     }
 })
 
-it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+it("dcdb.v20180411.ModifyInstanceVip", async function () {
     try {
-       const data = await client.UpgradeDCDBInstance({})
+       const data = await client.ModifyInstanceVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,9 @@ it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
     }
 })
 
-it("dcdb.v20180411.KillSession", async function () {
+it("dcdb.v20180411.DescribeOnlineDDLJob", async function () {
     try {
-       const data = await client.KillSession({})
+       const data = await client.DescribeOnlineDDLJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +351,16 @@ it("dcdb.v20180411.UpgradeHourDCDBInstance", async function () {
 it("dcdb.v20180411.DescribeDBSyncMode", async function () {
     try {
        const data = await client.DescribeDBSyncMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +411,16 @@ it("dcdb.v20180411.CreateAccount", async function () {
 it("dcdb.v20180411.ModifyInstanceNetwork", async function () {
     try {
        const data = await client.ModifyInstanceNetwork({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.KillSession", async function () {
+    try {
+       const data = await client.KillSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +568,9 @@ it("dcdb.v20180411.GrantAccountPrivileges", async function () {
     }
 })
 
-it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
+it("dcdb.v20180411.CancelOnlineDDLJob", async function () {
     try {
-       const data = await client.IsolateDedicatedDBInstance({})
+       const data = await client.CancelOnlineDDLJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +678,9 @@ it("dcdb.v20180411.DescribeDBSecurityGroups", async function () {
     }
 })
 
-it("dcdb.v20180411.ModifyInstanceVip", async function () {
+it("dcdb.v20180411.IsolateDedicatedDBInstance", async function () {
     try {
-       const data = await client.ModifyInstanceVip({})
+       const data = await client.IsolateDedicatedDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

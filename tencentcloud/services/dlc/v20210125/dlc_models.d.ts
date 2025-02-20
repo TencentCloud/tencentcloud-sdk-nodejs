@@ -354,6 +354,10 @@ export interface DropDMSDatabaseRequest {
      * 是否级联删除
      */
     Cascade?: boolean;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * 按批提交Statement运行SQL任务。
@@ -508,6 +512,10 @@ export interface DescribeDMSPartitionsRequest {
      * 表达式
      */
     Expression?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeDMSTable返回参数结构体
@@ -1262,6 +1270,10 @@ export interface CreateDMSTableRequest {
      * 表名称
      */
     Name?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DMSTable基本信息
@@ -3514,6 +3526,10 @@ export interface AlterDMSTableRequest {
      * 当前表名
      */
     Name?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeDMSPartitions返回参数结构体
@@ -3860,9 +3876,13 @@ export interface DescribeDMSDatabaseRequest {
      */
     SchemaName?: string;
     /**
-     * 匹配规则
+     * 匹配规则，只支持填*
      */
     Pattern?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeLakeFsDirSummary请求参数结构体
@@ -4410,6 +4430,10 @@ export interface AlterDMSDatabaseRequest {
      * 基础对象
      */
     Asset?: Asset;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeOtherCHDFSBindingList返回参数结构体
@@ -5201,6 +5225,10 @@ export interface AlterDMSPartitionRequest {
      * 分区
      */
     Partition?: DMSPartition;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * ReportHeartbeatMetaData返回参数结构体
@@ -5728,7 +5756,7 @@ export interface DescribeDMSTablesRequest {
      */
     Name?: string;
     /**
-     * 数据目录
+     * catalog类型
      */
     Catalog?: string;
     /**
@@ -5736,7 +5764,7 @@ export interface DescribeDMSTablesRequest {
      */
     Keyword?: string;
     /**
-     * 查询模式
+     * 查询模式，只支持填*
      */
     Pattern?: string;
     /**
@@ -5767,6 +5795,10 @@ export interface DescribeDMSTablesRequest {
      * 排序字段：true：升序（默认），false：降序
      */
     Asc?: boolean;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * GenerateCreateMangedTableSql返回参数结构体
@@ -6385,6 +6417,10 @@ export interface DMSPartition {
      * 存储对象
      */
     Sds?: DMSSds;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * 工作组详细信息
@@ -7046,6 +7082,10 @@ export interface CreateDMSDatabaseRequest {
      * 数据库名称
      */
     Name?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * DetachWorkGroupPolicy请求参数结构体
@@ -7590,6 +7630,10 @@ export interface DropDMSPartitionsRequest {
      * 是否删除分区数据
      */
     DeleteData?: boolean;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * 任务公共指标
@@ -9530,6 +9574,10 @@ export interface DropDMSTableRequest {
      * 环境属性
      */
     EnvProps?: KVPair;
+    /**
+     * 数据目录信息
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * CreateInternalTable返回参数结构体
@@ -9637,7 +9685,7 @@ export interface DescribeDMSTableRequest {
      */
     Name?: string;
     /**
-     * 数据目录
+     * catalog类型
      */
     Catalog?: string;
     /**
@@ -9645,13 +9693,17 @@ export interface DescribeDMSTableRequest {
      */
     Keyword?: string;
     /**
-     * 查询模式
+     * 查询模式，只支持填*
      */
     Pattern?: string;
     /**
      * 表类型
      */
     Type?: string;
+    /**
+     * 数据源连接名
+     */
+    DatasourceConnectionName?: string;
 }
 /**
  * ModifyGovernEventRule请求参数结构体

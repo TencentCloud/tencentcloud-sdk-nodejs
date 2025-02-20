@@ -1085,6 +1085,7 @@ export interface CLSTopic {
 export interface CreatePrefetchTaskRequest {
   /**
    * 站点 ID。
+若您希望快速提交不同站点下的 Targets Url，可以将其填写为 *，但前提是调用该 API 的账号必须具备主账号下全部站点资源的权限。
    */
   ZoneId: string
   /**
@@ -1095,6 +1096,7 @@ http://www.example.com/example.txt。参数值当前必填。
   Targets?: Array<string>
   /**
    * 是否对url进行encode，若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。
+   * @deprecated
    */
   EncodeUrl?: boolean
   /**

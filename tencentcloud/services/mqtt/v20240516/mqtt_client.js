@@ -139,6 +139,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceCertBinding", req, cb);
     }
     /**
+     * 获取产品售卖规格
+     */
+    async DescribeProductSKUList(req, cb) {
+        return this.request("DescribeProductSKUList", req, cb);
+    }
+    /**
      * 查询集群下的ca证书信息
      */
     async DescribeCaCertificates(req, cb) {

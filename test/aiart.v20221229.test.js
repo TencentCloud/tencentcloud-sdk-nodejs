@@ -118,6 +118,16 @@ it("aiart.v20221229.QueryDrawPortraitJob", async function () {
     }
 })
 
+it("aiart.v20221229.QueryGlamPicJob", async function () {
+    try {
+       const data = await client.QueryGlamPicJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.UploadTrainPortraitImages", async function () {
     try {
        const data = await client.UploadTrainPortraitImages({})
@@ -141,6 +151,16 @@ it("aiart.v20221229.TextToImage", async function () {
 it("aiart.v20221229.QueryTextToImageProJob", async function () {
     try {
        const data = await client.QueryTextToImageProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.SubmitGlamPicJob", async function () {
+    try {
+       const data = await client.SubmitGlamPicJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

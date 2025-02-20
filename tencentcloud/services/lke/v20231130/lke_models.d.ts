@@ -1228,6 +1228,10 @@ export interface ListQARequest {
      */
     QueryAnswer?: string;
     /**
+     * 分类ID
+     */
+    CateBizId?: string;
+    /**
      * QA业务ID列表
      */
     QaBizIds?: Array<string>;

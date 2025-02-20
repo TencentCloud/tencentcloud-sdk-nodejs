@@ -86,6 +86,7 @@ import {
   DescribeDataSourceListRequest,
   DescribeInstanceByCycleResponse,
   DataServiceRequestParam,
+  DataSourceEnvInfo,
   DescribeDataCheckStatRequest,
   TablePropertyScore,
   GetOfflineInstanceListRequest,

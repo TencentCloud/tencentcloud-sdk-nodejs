@@ -18,22 +18,11 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ManagePortraitRiskOutput,
-  InputBusinessEncryptData,
-  RecognizeCustomizedAudienceRequest,
-  RecognizePreciseTargetAudienceRequest,
   ManagePortraitRiskResponse,
-  RecognizeTargetAudienceResponse,
-  ManagePortraitRiskValueOutput,
-  OutputRecognizeTargetAudienceValue,
-  OutputRecognizeTargetAudience,
-  RecognizeCustomizedAudienceResponse,
-  InputRecognizeTargetAudience,
-  Device,
+  ManagePortraitRiskOutput,
   ManagePortraitRiskInput,
   ManagePortraitRiskRequest,
-  RecognizeTargetAudienceRequest,
-  RecognizePreciseTargetAudienceResponse,
+  ManagePortraitRiskValueOutput,
 } from "./taf_models"
 
 /**
@@ -46,16 +35,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 流量反欺诈-流量验准定制版
-   */
-  async RecognizeCustomizedAudience(
-    req: RecognizeCustomizedAudienceRequest,
-    cb?: (error: string, rep: RecognizeCustomizedAudienceResponse) => void
-  ): Promise<RecognizeCustomizedAudienceResponse> {
-    return this.request("RecognizeCustomizedAudience", req, cb)
-  }
-
-  /**
    * 虚假流量识别
    */
   async ManagePortraitRisk(
@@ -63,25 +42,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManagePortraitRiskResponse) => void
   ): Promise<ManagePortraitRiskResponse> {
     return this.request("ManagePortraitRisk", req, cb)
-  }
-
-  /**
-   * 流量反欺诈-流量验准高级版
-   */
-  async RecognizePreciseTargetAudience(
-    req: RecognizePreciseTargetAudienceRequest,
-    cb?: (error: string, rep: RecognizePreciseTargetAudienceResponse) => void
-  ): Promise<RecognizePreciseTargetAudienceResponse> {
-    return this.request("RecognizePreciseTargetAudience", req, cb)
-  }
-
-  /**
-   * 流量反欺诈-流量验准
-   */
-  async RecognizeTargetAudience(
-    req: RecognizeTargetAudienceRequest,
-    cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void
-  ): Promise<RecognizeTargetAudienceResponse> {
-    return this.request("RecognizeTargetAudience", req, cb)
   }
 }

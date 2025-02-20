@@ -566,13 +566,13 @@ export interface DetectAuthRequest {
     /**
      * 意愿核身（语音播报+语音回答模式）使用的文案。
   - 包括：系统语音播报的文本、需要核验的标准文本。
-  - 当前仅支持1轮问答。
+  - 问答模式支持1-10轮（不超过10轮）的意愿确认。
      */
     IntentionQuestions?: Array<IntentionQuestion>;
     /**
      * 意愿核身（点头确认模式）使用的文案。
   - 若未使用意愿核身（点头确认模式），则该字段无需传入。
-  - 当前仅支持一个提示文本。
+  - 点头确认模式支持1-10轮（不超过10轮）的意愿确认。
      */
     IntentionActions?: Array<IntentionActionConfig>;
     /**
@@ -2006,13 +2006,14 @@ export interface GetEidTokenConfig {
     IntentionVerifyText?: string;
     /**
      * 意愿核身问答模式的配置列表。
-  - 当前仅支持一个问答。
+  - 问答模式支持1-10轮（不超过10轮）的意愿确认。
      */
     IntentionQuestions?: Array<IntentionQuestion>;
     /**
      * 意愿核身（点头确认模式）使用的文案。
   - 若未使用意愿核身（点头确认模式），则该字段无需传入。
   - 默认为空，最长可接受150的字符串长度。
+  - 点头确认模式支持1-10轮（不超过10轮）的意愿确认。
      */
     IntentionActions?: Array<IntentionActionConfig>;
     /**

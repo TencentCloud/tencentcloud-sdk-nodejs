@@ -198,6 +198,16 @@ it("mqtt.v20240516.ModifyInstanceCertBinding", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeProductSKUList", async function () {
+    try {
+       const data = await client.DescribeProductSKUList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeCaCertificates", async function () {
     try {
        const data = await client.DescribeCaCertificates({})

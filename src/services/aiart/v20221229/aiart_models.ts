@@ -128,13 +128,14 @@ Strength 值越小，生成图和原图越接近，取值范围(0, 1]，不传�
 }
 
 /**
- * QueryMemeJob请求参数结构体
+ * QueryTrainPortraitModelJob请求参数结构体
  */
-export interface QueryMemeJobRequest {
+export interface QueryTrainPortraitModelJobRequest {
   /**
-   * 查询表情动图生成任务 ID。
+   * 写真模型 ID。
+
    */
-  JobId: string
+  ModelId: string
 }
 
 /**
@@ -235,79 +236,49 @@ export interface ResultConfig {
 }
 
 /**
- * QueryTrainPortraitModelJob请求参数结构体
+ * QueryMemeJob请求参数结构体
  */
-export interface QueryTrainPortraitModelJobRequest {
+export interface QueryMemeJobRequest {
   /**
-   * 写真模型 ID。
-
+   * 查询表情动图生成任务 ID。
    */
-  ModelId: string
+  JobId: string
 }
 
 /**
- * ChangeClothes请求参数结构体
+ * QueryGlamPicJob返回参数结构体
  */
-export interface ChangeClothesRequest {
+export interface QueryGlamPicJobResponse {
   /**
-   * 模特图片 Url。
-图片限制：单边分辨率小于3000，且大于512，转成 Base64 字符串后小于 8MB。
-输入要求：
-1、建议上传正面模特图片，至少完整露出应穿着输入指定服装的身体部位（全身、上半身或下半身），无大角度身体偏转或异常姿势。
-2、建议上传3:4比例的图片，生成效果更佳。
-3、建议模特图片中的原始服装和更换后的服装类别一致，或原始服装在身体上的覆盖范围小于等于更换后的服装（例如需要给模特换上短裤，则原始模特图片中也建议穿短裤，不建议穿长裤），否则会影响人像生成效果。
+   * 当前任务状态码：
+1：等待中、2：运行中、4：处理失败、5：处理完成。
+   */
+  JobStatusCode?: string
+  /**
+   * 当前任务状态：排队中、处理中、处理失败或者处理完成。
 
    */
-  ModelUrl: string
+  JobStatusMsg?: string
   /**
-   * 服装图片 Url。
-图片限制：单边分辨率小于3000，大于512，转成 Base64 字符串后小于 8MB。
-输入要求：
-建议上传服装完整的正面平铺图片，仅包含1个服装主体，服装类型支持上衣、下装、连衣裙，三选一。算法将根据输入的图片，结合服装图片给模特换装。
-   */
-  ClothesUrl: string
-  /**
-   * 服装类型，需要和服装图片保持一致。
-取值：
-Upper-body：上衣
-Lower-body：下装
-Dress：连衣裙
-   */
-  ClothesType: string
-  /**
-   * 为生成结果图添加标识的开关，默认为1。
-1：添加标识。
-0：不添加标识。
-其他数值：默认按1处理。
-建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
-   */
-  LogoAdd?: number
-  /**
-   * 标识内容设置。
-默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
-   */
-  LogoParam?: LogoParam
-  /**
-   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
-生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。
-   */
-  RspImgType?: string
-}
+   * 任务处理失败错误码。
 
-/**
- * ReplaceBackground返回参数结构体
- */
-export interface ReplaceBackgroundResponse {
-  /**
-   * 根据入参 RspImgType 填入不同，返回不同的内容。
-如果传入 base64 则返回生成图 Base64 编码。
-如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
    */
-  ResultImage?: string
+  JobErrorCode?: string
   /**
-   * 如果 MaskUrl 未传，则返回使用内置商品分割算法得到的 Mask 结果。
+   * 任务处理失败错误信息。
+
    */
-  MaskImage?: string
+  JobErrorMsg?: string
+  /**
+   * 生成图 URL 列表，有效期1小时，请及时保存。
+
+   */
+  ResultImage?: Array<string>
+  /**
+   * 结果 detail 数组，Success 代表成功。
+
+   */
+  ResultDetails?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -352,6 +323,26 @@ Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
 默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
    */
   LogoParam?: LogoParam
+}
+
+/**
+ * ReplaceBackground返回参数结构体
+ */
+export interface ReplaceBackgroundResponse {
+  /**
+   * 根据入参 RspImgType 填入不同，返回不同的内容。
+如果传入 base64 则返回生成图 Base64 编码。
+如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
+   */
+  ResultImage?: string
+  /**
+   * 如果 MaskUrl 未传，则返回使用内置商品分割算法得到的 Mask 结果。
+   */
+  MaskImage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -460,6 +451,20 @@ export interface ChangeClothesResponse {
 如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
    */
   ResultImage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitGlamPicJob返回参数结构体
+ */
+export interface SubmitGlamPicJobResponse {
+  /**
+   * 任务ID。
+   */
+  JobId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -581,6 +586,42 @@ export interface TextToImageRequest {
 }
 
 /**
+ * 人脸框坐标
+ */
+export interface Rect {
+  /**
+   * 人脸框左上角横坐标。
+   */
+  X?: number
+  /**
+   * 人脸框左上角纵坐标。
+   */
+  Y?: number
+  /**
+   * 人脸框宽度。
+   */
+  Width?: number
+  /**
+   * 人脸框高度。
+   */
+  Height?: number
+}
+
+/**
+ * 融合信息
+ */
+export interface FaceInfo {
+  /**
+   * 用户图 URL 列表
+   */
+  ImageUrls?: Array<string>
+  /**
+   * 模版图人脸坐标。
+   */
+  TemplateFaceRect?: Rect
+}
+
+/**
  * SubmitTextToImageProJob返回参数结构体
  */
 export interface SubmitTextToImageProJobResponse {
@@ -592,6 +633,60 @@ export interface SubmitTextToImageProJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SubmitGlamPicJob请求参数结构体
+ */
+export interface SubmitGlamPicJobRequest {
+  /**
+   * 美照模板图 URL。
+图片限制：模板图中最多出现5张人脸，单边分辨率大于300，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+   */
+  TemplateUrl: string
+  /**
+   * 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。
+一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，如果图中存在多个人脸将取最大人脸。
+模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。
+图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。
+   */
+  FaceInfos?: Array<FaceInfo>
+  /**
+   * 美照生成数量。
+支持1 ~ 4张，默认生成4张。
+   */
+  Num?: number
+  /**
+   * 美照生成风格。
+仅对单人美照生效，单人可支持选择不同风格。需按照美照生成数量，在数组中逐一填入每张美照的风格名称。如果不传，默认取不重复的随机风格顺序。
+多人美照只支持 balanced 一种风格，该参数不生效。
+可选风格：<ul><li>real：面部相似度更高。</li><li>balanced：平衡面部真实感和美观度。</li><li>extured：脸部皮肤更具真实感。</li><li>beautiful：脸部美观度更高。</li></ul>
+   */
+  Style?: Array<string>
+  /**
+   * 相似度系数，越高越像用户图。
+取值范围[0, 1]，默认为0.6。
+   */
+  Similarity?: number
+  /**
+   * 超分选项，默认不做超分，可选开启。
+x2：2倍超分
+x4：4倍超分
+   */
+  Clarity?: string
+  /**
+   * 为生成结果图添加标识的开关，默认为1。
+1：添加标识。
+0：不添加标识。
+其他数值：默认按1处理。
+建议您使用显著标识来提示结果图是 AI 生成的图片。
+   */
+  LogoAdd?: number
+  /**
+   * 标识内容设置。
+默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+   */
+  LogoParam?: LogoParam
 }
 
 /**
@@ -774,6 +869,69 @@ false：不裁剪过长的头发。
 }
 
 /**
+ * ReplaceBackground请求参数结构体
+ */
+export interface ReplaceBackgroundRequest {
+  /**
+   * 商品原图 Url。
+图片限制：单边分辨率小于4000，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+   */
+  ProductUrl: string
+  /**
+   * 对新背景的文本描述。
+最多支持256个 utf-8 字符，支持中、英文。
+如果 Prompt = "BackgroundTemplate" 代表启用背景模板，需要在参数 BackgroundTemplate 中指定一个背景名称。
+   */
+  Prompt: string
+  /**
+   * 反向提示词。
+最多支持256个 utf-8 字符，支持中、英文。
+   */
+  NegativePrompt?: string
+  /**
+   * 商品图中的商品主体名称。
+建议说明商品主体，否则影响生成效果。
+   */
+  Product?: string
+  /**
+   * 背景模板。
+仅当 Prompt = "BackgroundTemplate" 时生效，可支持的模板详见 [商品背景模板列表](https://cloud.tencent.com/document/product/1668/115391) ，请传入字段“背景名称”中的值。
+   */
+  BackgroundTemplate?: string
+  /**
+   * 商品 Mask 图 Url，要求背景透明，保留商品主体。
+如果不传，将自动使用内置的商品分割算法得到 Mask。
+支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。
+图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。
+   */
+  MaskUrl?: string
+  /**
+   * 替换背景后生成的商品图分辨率。
+支持生成单边分辨率大于500且小于4000、长宽比在2:5 ~ 5:2之间的图片，不传默认生成1280:1280。
+建议图片比例为1:1、9:16、16:9，生成效果更佳，使用其他比例的生成效果可能不如建议比例。
+   */
+  Resolution?: string
+  /**
+   * 为生成结果图添加标识的开关，默认为1。
+1：添加标识。
+0：不添加标识。
+其他数值：默认按1处理。
+建议您使用显著标识来提示结果图是 AI 生成的图片。
+   */
+  LogoAdd?: number
+  /**
+   * 标识内容设置。
+默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
+   */
+  LogoParam?: LogoParam
+  /**
+   * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。
+   */
+  RspImgType?: string
+}
+
+/**
  * SubmitTextToImageProJob请求参数结构体
  */
 export interface SubmitTextToImageProJobRequest {
@@ -871,6 +1029,16 @@ export interface SketchToImageResponse {
 }
 
 /**
+ * QueryGlamPicJob请求参数结构体
+ */
+export interface QueryGlamPicJobRequest {
+  /**
+   * 任务ID。
+   */
+  JobId: string
+}
+
+/**
  * ImageInpaintingRemoval请求参数结构体
  */
 export interface ImageInpaintingRemovalRequest {
@@ -920,54 +1088,40 @@ Mask 的 Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
 }
 
 /**
- * ReplaceBackground请求参数结构体
+ * ChangeClothes请求参数结构体
  */
-export interface ReplaceBackgroundRequest {
+export interface ChangeClothesRequest {
   /**
-   * 商品原图 Url。
-图片限制：单边分辨率小于4000，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。
+   * 模特图片 Url。
+图片限制：单边分辨率小于3000，且大于512，转成 Base64 字符串后小于 8MB。
+输入要求：
+1、建议上传正面模特图片，至少完整露出应穿着输入指定服装的身体部位（全身、上半身或下半身），无大角度身体偏转或异常姿势。
+2、建议上传3:4比例的图片，生成效果更佳。
+3、建议模特图片中的原始服装和更换后的服装类别一致，或原始服装在身体上的覆盖范围小于等于更换后的服装（例如需要给模特换上短裤，则原始模特图片中也建议穿短裤，不建议穿长裤），否则会影响人像生成效果。
+
    */
-  ProductUrl: string
+  ModelUrl: string
   /**
-   * 对新背景的文本描述。
-最多支持256个 utf-8 字符，支持中、英文。
-如果 Prompt = "BackgroundTemplate" 代表启用背景模板，需要在参数 BackgroundTemplate 中指定一个背景名称。
+   * 服装图片 Url。
+图片限制：单边分辨率小于3000，大于512，转成 Base64 字符串后小于 8MB。
+输入要求：
+建议上传服装完整的正面平铺图片，仅包含1个服装主体，服装类型支持上衣、下装、连衣裙，三选一。算法将根据输入的图片，结合服装图片给模特换装。
    */
-  Prompt: string
+  ClothesUrl: string
   /**
-   * 反向提示词。
-最多支持256个 utf-8 字符，支持中、英文。
+   * 服装类型，需要和服装图片保持一致。
+取值：
+Upper-body：上衣
+Lower-body：下装
+Dress：连衣裙
    */
-  NegativePrompt?: string
-  /**
-   * 商品图中的商品主体名称。
-建议说明商品主体，否则影响生成效果。
-   */
-  Product?: string
-  /**
-   * 背景模板。
-仅当 Prompt = "BackgroundTemplate" 时生效，可支持的模板详见 [商品背景模板列表](https://cloud.tencent.com/document/product/1668/115391) ，请传入字段“背景名称”中的值。
-   */
-  BackgroundTemplate?: string
-  /**
-   * 商品 Mask 图 Url，要求背景透明，保留商品主体。
-如果不传，将自动使用内置的商品分割算法得到 Mask。
-支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。
-图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。
-   */
-  MaskUrl?: string
-  /**
-   * 替换背景后生成的商品图分辨率。
-支持生成单边分辨率大于500且小于4000、长宽比在2:5 ~ 5:2之间的图片，不传默认生成1280:1280。
-建议图片比例为1:1、9:16、16:9，生成效果更佳，使用其他比例的生成效果可能不如建议比例。
-   */
-  Resolution?: string
+  ClothesType: string
   /**
    * 为生成结果图添加标识的开关，默认为1。
 1：添加标识。
 0：不添加标识。
 其他数值：默认按1处理。
-建议您使用显著标识来提示结果图是 AI 生成的图片。
+建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
    */
   LogoAdd?: number
   /**

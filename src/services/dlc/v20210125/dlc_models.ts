@@ -383,6 +383,10 @@ export interface DropDMSDatabaseRequest {
    * 是否级联删除
    */
   Cascade?: boolean
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -542,6 +546,10 @@ export interface DescribeDMSPartitionsRequest {
    * 表达式
    */
   Expression?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -1325,6 +1333,10 @@ export interface CreateDMSTableRequest {
    * 表名称
    */
   Name?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -3678,6 +3690,10 @@ export interface AlterDMSTableRequest {
    * 当前表名
    */
   Name?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -4042,9 +4058,13 @@ export interface DescribeDMSDatabaseRequest {
    */
   SchemaName?: string
   /**
-   * 匹配规则
+   * 匹配规则，只支持填*
    */
   Pattern?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -4608,6 +4628,10 @@ export interface AlterDMSDatabaseRequest {
    * 基础对象
    */
   Asset?: Asset
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -5427,6 +5451,10 @@ export interface AlterDMSPartitionRequest {
    * 分区
    */
   Partition?: DMSPartition
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -5982,7 +6010,7 @@ export interface DescribeDMSTablesRequest {
    */
   Name?: string
   /**
-   * 数据目录
+   * catalog类型
    */
   Catalog?: string
   /**
@@ -5990,7 +6018,7 @@ export interface DescribeDMSTablesRequest {
    */
   Keyword?: string
   /**
-   * 查询模式
+   * 查询模式，只支持填*
    */
   Pattern?: string
   /**
@@ -6021,6 +6049,10 @@ export interface DescribeDMSTablesRequest {
    * 排序字段：true：升序（默认），false：降序
    */
   Asc?: boolean
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -6662,6 +6694,10 @@ export interface DMSPartition {
    * 存储对象
    */
   Sds?: DMSSds
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -7348,6 +7384,10 @@ export interface CreateDMSDatabaseRequest {
    * 数据库名称
    */
   Name?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -7922,6 +7962,10 @@ export interface DropDMSPartitionsRequest {
    * 是否删除分区数据
    */
   DeleteData?: boolean
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -9937,6 +9981,10 @@ export interface DropDMSTableRequest {
    * 环境属性
    */
   EnvProps?: KVPair
+  /**
+   * 数据目录信息
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -10050,7 +10098,7 @@ export interface DescribeDMSTableRequest {
    */
   Name?: string
   /**
-   * 数据目录
+   * catalog类型
    */
   Catalog?: string
   /**
@@ -10058,13 +10106,17 @@ export interface DescribeDMSTableRequest {
    */
   Keyword?: string
   /**
-   * 查询模式
+   * 查询模式，只支持填*
    */
   Pattern?: string
   /**
    * 表类型
    */
   Type?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**

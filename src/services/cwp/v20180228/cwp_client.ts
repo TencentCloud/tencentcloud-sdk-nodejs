@@ -143,7 +143,6 @@ import {
   OpenPortStatistics,
   DescribeRansomDefenseMachineListRequest,
   ExportAssetCoreModuleListRequest,
-  ModifyReverseShellRulesAggregationRequest,
   ExportAssetMachineDetailResponse,
   ProtectDirRelatedServer,
   ModifyNetAttackWhiteListResponse,
@@ -1108,7 +1107,6 @@ import {
   DescribeMachineListResponse,
   MalwareInfo,
   Place,
-  DescribeSecurityProtectionStatRequest,
   LogInfo,
   DescribeHostInfoResponse,
   ModifyWebHookPolicyStatusResponse,
@@ -1267,7 +1265,7 @@ import {
   UpdateMachineTagsRequest,
   DescribeBaselineItemDetectListResponse,
   DescribeScanTaskDetailsResponse,
-  DescribeSecurityProtectionStatResponse,
+  ModifyReverseShellRulesAggregationRequest,
   DescribeHostLoginListResponse,
   DescribePublicProxyInstallCommandResponse,
   DescribeAttackTopRequest,
@@ -4597,18 +4595,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOpenPortStatisticsResponse) => void
   ): Promise<DescribeOpenPortStatisticsResponse> {
     return this.request("DescribeOpenPortStatistics", req, cb)
-  }
-
-  /**
-     * 接口已无效
-
-获取安全防护状态汇总
-     */
-  async DescribeSecurityProtectionStat(
-    req?: DescribeSecurityProtectionStatRequest,
-    cb?: (error: string, rep: DescribeSecurityProtectionStatResponse) => void
-  ): Promise<DescribeSecurityProtectionStatResponse> {
-    return this.request("DescribeSecurityProtectionStat", req, cb)
   }
 
   /**

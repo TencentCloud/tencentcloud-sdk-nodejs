@@ -2297,6 +2297,52 @@ export interface DataServiceRequestParam {
 }
 
 /**
+ * 数据源环境信息
+ */
+export interface DataSourceEnvInfo {
+  /**
+   * 环境
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Env?: string
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceType?: string
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: string
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 数据源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceId?: string
+  /**
+   * env环境的数据源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvDataSourceId?: string
+  /**
+   * 配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizParams?: string
+}
+
+/**
  * DescribeDataCheckStat请求参数结构体
  */
 export interface DescribeDataCheckStatRequest {
@@ -7308,6 +7354,31 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectStatus?: DataSourceConnectStatus
+  /**
+   * 数据源展示类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayType?: string
+  /**
+   * 数据源环境
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Env?: string
+  /**
+   * 数据源唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceUrn?: string
+  /**
+   * 是否标准模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model?: string
+  /**
+   *  数据源环境信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceEnvInfos?: Array<DataSourceEnvInfo>
 }
 
 /**
@@ -19764,6 +19835,11 @@ export interface Project {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model?: string
+  /**
+   * 二级菜单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecondModuleList?: Array<string>
 }
 
 /**

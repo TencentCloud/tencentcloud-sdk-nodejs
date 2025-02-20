@@ -78,10 +78,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
-     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     * 本接口（ModifyInstanceVip）用于修改实例Vip
      */
-    async UpgradeDCDBInstance(req, cb) {
-        return this.request("UpgradeDCDBInstance", req, cb);
+    async ModifyInstanceVip(req, cb) {
+        return this.request("ModifyInstanceVip", req, cb);
     }
     /**
      * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
@@ -211,10 +211,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTmpDCDBInstance", req, cb);
     }
     /**
-     * 本接口（KillSession）用于杀死指定会话。
+     * 查询Online DDL 任务详情
      */
-    async KillSession(req, cb) {
-        return this.request("KillSession", req, cb);
+    async DescribeOnlineDDLJob(req, cb) {
+        return this.request("DescribeOnlineDDLJob", req, cb);
     }
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。
@@ -239,6 +239,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBSyncMode(req, cb) {
         return this.request("DescribeDBSyncMode", req, cb);
+    }
+    /**
+     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     */
+    async UpgradeDCDBInstance(req, cb) {
+        return this.request("UpgradeDCDBInstance", req, cb);
     }
     /**
      * 获取实例回档时可选的时间范围
@@ -269,6 +275,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstanceNetwork(req, cb) {
         return this.request("ModifyInstanceNetwork", req, cb);
+    }
+    /**
+     * 本接口（KillSession）用于杀死指定会话。
+     */
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
     }
     /**
      * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
@@ -361,10 +373,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
-     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     * 取消 Online DDL 任务
      */
-    async IsolateDedicatedDBInstance(req, cb) {
-        return this.request("IsolateDedicatedDBInstance", req, cb);
+    async CancelOnlineDDLJob(req, cb) {
+        return this.request("CancelOnlineDDLJob", req, cb);
     }
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
@@ -428,10 +440,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
-     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
      */
-    async ModifyInstanceVip(req, cb) {
-        return this.request("ModifyInstanceVip", req, cb);
+    async IsolateDedicatedDBInstance(req, cb) {
+        return this.request("IsolateDedicatedDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。

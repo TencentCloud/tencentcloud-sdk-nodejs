@@ -28,28 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("taf.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 流量反欺诈-流量验准定制版
-     */
-    async RecognizeCustomizedAudience(req, cb) {
-        return this.request("RecognizeCustomizedAudience", req, cb);
-    }
-    /**
      * 虚假流量识别
      */
     async ManagePortraitRisk(req, cb) {
         return this.request("ManagePortraitRisk", req, cb);
-    }
-    /**
-     * 流量反欺诈-流量验准高级版
-     */
-    async RecognizePreciseTargetAudience(req, cb) {
-        return this.request("RecognizePreciseTargetAudience", req, cb);
-    }
-    /**
-     * 流量反欺诈-流量验准
-     */
-    async RecognizeTargetAudience(req, cb) {
-        return this.request("RecognizeTargetAudience", req, cb);
     }
 }
 exports.Client = Client;

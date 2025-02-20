@@ -1999,14 +1999,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOpenPortStatistics", req, cb);
     }
     /**
-     * 接口已无效
-
-获取安全防护状态汇总
-     */
-    async DescribeSecurityProtectionStat(req, cb) {
-        return this.request("DescribeSecurityProtectionStat", req, cb);
-    }
-    /**
      * 修改爆破阻断模式
      */
     async ModifyBanMode(req, cb) {

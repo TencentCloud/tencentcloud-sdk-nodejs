@@ -18,39 +18,9 @@ const client = new tencentcloud.taf.v20200210.Client({
 })
 describe("taf.v20200210.test.js", function () {
 
-it("taf.v20200210.RecognizeCustomizedAudience", async function () {
-    try {
-       const data = await client.RecognizeCustomizedAudience({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("taf.v20200210.ManagePortraitRisk", async function () {
     try {
        const data = await client.ManagePortraitRisk({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("taf.v20200210.RecognizePreciseTargetAudience", async function () {
-    try {
-       const data = await client.RecognizePreciseTargetAudience({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("taf.v20200210.RecognizeTargetAudience", async function () {
-    try {
-       const data = await client.RecognizeTargetAudience({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -5189,6 +5189,7 @@ export interface Pod {
     /**
      * 容器列表
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     Containers?: Container;
     /**
@@ -5201,6 +5202,10 @@ export interface Pod {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CrossTenantENIInfo?: CrossTenantENIInfo;
+    /**
+     * 实例的状态信息
+     */
+    Status?: string;
 }
 /**
  * DeleteTrainingModel请求参数结构体

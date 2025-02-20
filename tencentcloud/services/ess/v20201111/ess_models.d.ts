@@ -2529,7 +2529,7 @@ export interface DescribeIntegrationEmployeesRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 偏移量，默认为0，最大20000。。关于<code>Offset</code>的更进一步介绍请参考 API <a href="https://cloud.tencent.com/document/api/213/15688" target="_blank">简介</a>中的相关小节。
+     * 偏移量，默认为0，最大20000。关于<code>Offset</code>的更进一步介绍请参考 API <a href="https://cloud.tencent.com/document/api/213/15688" target="_blank">简介</a>中的相关小节。
      */
     Offset?: number;
 }

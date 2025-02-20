@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryMemeJobRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryTrainPortraitModelJobRequest, ChangeClothesRequest, ReplaceBackgroundResponse, ImageOutpaintingRequest, QueryMemeJobResponse, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitMemeJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, SubmitTextToImageProJobResponse, GenerateAvatarRequest, ImageInpaintingRemovalResponse, SubmitMemeJobRequest, SubmitTextToImageProJobRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, ImageInpaintingRemovalRequest, ReplaceBackgroundRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
+import { SubmitDrawPortraitJobResponse, ImageToImageRequest, QueryTrainPortraitModelJobRequest, QueryTextToImageProJobResponse, UploadTrainPortraitImagesRequest, QueryMemeJobRequest, QueryGlamPicJobResponse, ImageOutpaintingRequest, ReplaceBackgroundResponse, QueryMemeJobResponse, QueryDrawPortraitJobResponse, QueryTrainPortraitModelJobResponse, ChangeClothesResponse, SubmitGlamPicJobResponse, SubmitMemeJobResponse, SubmitTrainPortraitModelJobRequest, SketchToImageRequest, TextToImageRequest, SubmitTextToImageProJobResponse, SubmitGlamPicJobRequest, GenerateAvatarRequest, ImageInpaintingRemovalResponse, SubmitMemeJobRequest, ReplaceBackgroundRequest, SubmitTextToImageProJobRequest, SubmitTrainPortraitModelJobResponse, QueryDrawPortraitJobRequest, ImageToImageResponse, SketchToImageResponse, QueryGlamPicJobRequest, ImageInpaintingRemovalRequest, ChangeClothesRequest, ImageOutpaintingResponse, UploadTrainPortraitImagesResponse, QueryTextToImageProJobRequest, GenerateAvatarResponse, TextToImageResponse, SubmitDrawPortraitJobRequest } from "./aiart_models";
 /**
  * aiart client
  * @class
@@ -86,6 +86,14 @@ export declare class Client extends AbstractClient {
      */
     QueryDrawPortraitJob(req: QueryDrawPortraitJobRequest, cb?: (error: string, rep: QueryDrawPortraitJobResponse) => void): Promise<QueryDrawPortraitJobResponse>;
     /**
+     * AI 美照接口将根据模板为用户生成精美照片。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个美照生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+AI 美照默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    QueryGlamPicJob(req: QueryGlamPicJobRequest, cb?: (error: string, rep: QueryGlamPicJobResponse) => void): Promise<QueryGlamPicJobResponse>;
+    /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 本接口用于上传人像图片并指定对应的写真模型 ID。上传的图片要求是同一个人，建议上传单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图片。
 可选模式：
@@ -112,6 +120,14 @@ export declare class Client extends AbstractClient {
 并发任务数（并发）说明：并发任务数指能同时处理的任务数量。文生图（高级版）默认提供1个并发任务数，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
      */
     QueryTextToImageProJob(req: QueryTextToImageProJobRequest, cb?: (error: string, rep: QueryTextToImageProJobResponse) => void): Promise<QueryTextToImageProJobResponse>;
+    /**
+     * AI 美照接口将根据模板为用户生成精美照片。分为提交任务和查询任务2个接口。
+- 提交任务：提交一个美照生成异步任务，获得任务 ID。
+- 查询任务：根据任务 ID 查询任务的处理状态、处理结果，任务处理完成后可获得生成图像结果。
+
+AI 美照默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后才能开始处理下一个任务。
+     */
+    SubmitGlamPicJob(req: SubmitGlamPicJobRequest, cb?: (error: string, rep: SubmitGlamPicJobResponse) => void): Promise<SubmitGlamPicJobResponse>;
     /**
      * AI 写真分为上传训练图片、训练写真模型（可选跳过）、生成写真图片3个环节，需要依次调用对应接口。
 生成图片分为提交任务和查询任务2个接口：

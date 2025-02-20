@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserTasksResponse, InitDCDBInstancesResponse, DescribeDBTmpInstancesRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DestroyDCDBInstanceResponse, DescribeDBParametersRequest, DescribeAccountsRequest, UpgradeHourDCDBInstanceResponse, ModifyRealServerAccessStrategyResponse, ModifyBackupConfigsRequest, ActiveHourDCDBInstanceResponse, DescribeDCDBPriceResponse, ModifyInstanceVportResponse, DescribeDCDBInstanceDetailRequest, ModifyInstanceVipResponse, AssociateSecurityGroupsRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, CancelDcnJobResponse, DescribeFileDownloadUrlRequest, UpgradeDCDBInstanceResponse, DescribeDBSyncModeResponse, DescribeProjectSecurityGroupsRequest, DescribeDCDBUpgradePriceResponse, DescribeDBSlowLogsRequest, CreateAccountRequest, UpgradeDedicatedDCDBInstanceResponse, CreateOnlineDDLJobResponse, DescribeDBParametersResponse, DescribeDatabaseTableRequest, IsolateHourDCDBInstanceRequest, ModifyDBInstanceNameResponse, DescribeFlowResponse, UpgradeHourDCDBInstanceRequest, CloneAccountResponse, IsolateDCDBInstanceRequest, IsolateDedicatedDBInstanceRequest, ModifyAccountDescriptionResponse, DestroyDCDBInstanceRequest, OpenDBExtranetAccessResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, ModifyDBEncryptAttributesResponse, DescribeDCDBInstanceNodeInfoRequest, DescribeDBLogFilesRequest, DescribeOrdersResponse, CreateDedicatedClusterDCDBInstanceRequest, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBInstanceDetailResponse, ModifyInstanceNetworkResponse, DescribeDBSecurityGroupsRequest, DescribeDCDBPriceRequest, SwitchDBInstanceHAResponse, DescribeBackupFilesResponse, DescribeProjectSecurityGroupsResponse, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, ModifyRealServerAccessStrategyRequest, ModifyAccountConfigRequest, TerminateDedicatedDBInstanceResponse, RenewDCDBInstanceRequest, DescribeDBEncryptAttributesResponse, CreateTmpDCDBInstanceRequest, DescribeDBEncryptAttributesRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, SwitchDBInstanceHARequest, ModifyDBParametersRequest, DescribeBackupConfigsRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, DescribeFileDownloadUrlResponse, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeBackupFilesRequest, DescribeDCDBInstanceNodeInfoResponse, KillSessionRequest, TerminateDedicatedDBInstanceRequest, DescribeDatabaseObjectsResponse, ModifyDBInstanceNameRequest, DescribeDcnDetailResponse, DescribeBackupConfigsResponse, ModifyDBEncryptAttributesRequest, RenewDCDBInstanceResponse, DescribeDCDBRenewalPriceResponse, UpgradeDedicatedDCDBInstanceRequest, AssociateSecurityGroupsResponse, DescribeDCDBBinlogTimeRequest, DescribeShardSpecResponse, DescribeDCDBShardsResponse, CreateHourDCDBInstanceResponse, GrantAccountPrivilegesResponse, CancelDcnJobRequest, IsolateHourDCDBInstanceResponse, ModifyInstanceVipRequest, OpenDBExtranetAccessRequest, ModifyBackupConfigsResponse, DescribeDCDBSaleInfoResponse, ModifyDBInstancesProjectRequest, CreateHourDCDBInstanceRequest, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeProjectsRequest, CreateOnlineDDLJobRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DeleteAccountRequest, DescribeDCDBInstancesResponse, ModifyAccountPrivilegesResponse, DescribeFlowRequest, ModifyAccountPrivilegesRequest, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, CreateDedicatedClusterDCDBInstanceResponse, DescribeDBTmpInstancesResponse, DescribeDCDBBinlogTimeResponse, ModifyDBSyncModeRequest, ModifyAccountConfigResponse, IsolateDCDBInstanceResponse, DescribeProjectsResponse, CreateTmpDCDBInstanceResponse, CreateAccountResponse, IsolateDedicatedDBInstanceResponse, DescribeLogFileRetentionPeriodResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, ModifyInstanceNetworkRequest, DestroyHourDCDBInstanceResponse, ActiveHourDCDBInstanceRequest, DisassociateSecurityGroupsRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDBSlowLogsResponse, DescribeDCDBRenewalPriceRequest, DescribeDCDBInstancesRequest, DescribeLogFileRetentionPeriodRequest, ModifyInstanceVportRequest, ModifyDBInstanceSecurityGroupsResponse, DestroyHourDCDBInstanceRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DisassociateSecurityGroupsResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
+import { DescribeUserTasksResponse, InitDCDBInstancesResponse, DescribeDBTmpInstancesRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DestroyDCDBInstanceResponse, DescribeDBParametersRequest, DescribeAccountsRequest, UpgradeHourDCDBInstanceResponse, ModifyRealServerAccessStrategyResponse, ModifyBackupConfigsRequest, ActiveHourDCDBInstanceResponse, DescribeDCDBPriceResponse, ModifyInstanceVportResponse, DescribeDCDBInstanceDetailRequest, DescribeFileDownloadUrlResponse, ModifyInstanceVipResponse, AssociateSecurityGroupsRequest, CancelOnlineDDLJobRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, CancelDcnJobResponse, DescribeFileDownloadUrlRequest, UpgradeDCDBInstanceResponse, DescribeDBSyncModeResponse, DescribeProjectSecurityGroupsRequest, DescribeDCDBUpgradePriceResponse, DescribeDBSlowLogsRequest, CreateAccountRequest, UpgradeDedicatedDCDBInstanceResponse, CreateOnlineDDLJobResponse, DescribeDBParametersResponse, DescribeDatabaseTableRequest, IsolateHourDCDBInstanceRequest, ModifyDBInstanceNameResponse, DescribeFlowResponse, UpgradeHourDCDBInstanceRequest, CloneAccountResponse, IsolateDCDBInstanceRequest, IsolateDedicatedDBInstanceRequest, ModifyAccountDescriptionResponse, DestroyDCDBInstanceRequest, OpenDBExtranetAccessResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, ModifyDBEncryptAttributesResponse, DescribeDCDBInstanceNodeInfoRequest, SwitchDBInstanceHAResponse, DescribeDBLogFilesRequest, DescribeOrdersResponse, CreateDedicatedClusterDCDBInstanceRequest, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBInstanceDetailResponse, ModifyInstanceNetworkResponse, DescribeDBSecurityGroupsRequest, DescribeDCDBPriceRequest, DescribeOnlineDDLJobRequest, DescribeBackupFilesResponse, DescribeProjectSecurityGroupsResponse, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, ModifyRealServerAccessStrategyRequest, ModifyAccountConfigRequest, TerminateDedicatedDBInstanceResponse, RenewDCDBInstanceRequest, DescribeDBEncryptAttributesResponse, CreateTmpDCDBInstanceRequest, DescribeDBEncryptAttributesRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, SwitchDBInstanceHARequest, ModifyDBParametersRequest, DescribeBackupConfigsRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeBackupFilesRequest, DescribeDCDBInstanceNodeInfoResponse, KillSessionRequest, TerminateDedicatedDBInstanceRequest, DescribeDatabaseObjectsResponse, ModifyDBInstanceNameRequest, DescribeDcnDetailResponse, DescribeBackupConfigsResponse, ModifyDBEncryptAttributesRequest, RenewDCDBInstanceResponse, DescribeDCDBRenewalPriceResponse, UpgradeDedicatedDCDBInstanceRequest, AssociateSecurityGroupsResponse, DescribeDCDBBinlogTimeRequest, DescribeShardSpecResponse, DescribeDCDBShardsResponse, CreateHourDCDBInstanceResponse, GrantAccountPrivilegesResponse, CancelDcnJobRequest, IsolateHourDCDBInstanceResponse, ModifyInstanceVipRequest, OpenDBExtranetAccessRequest, ModifyBackupConfigsResponse, DescribeDCDBSaleInfoResponse, ModifyDBInstancesProjectRequest, CreateHourDCDBInstanceRequest, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeProjectsRequest, CreateOnlineDDLJobRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DeleteAccountRequest, DescribeDCDBInstancesResponse, ModifyAccountPrivilegesResponse, DescribeFlowRequest, ModifyAccountPrivilegesRequest, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, CreateDedicatedClusterDCDBInstanceResponse, DescribeDBTmpInstancesResponse, DescribeDCDBBinlogTimeResponse, ModifyDBSyncModeRequest, ModifyAccountConfigResponse, IsolateDCDBInstanceResponse, DescribeProjectsResponse, CreateTmpDCDBInstanceResponse, CreateAccountResponse, IsolateDedicatedDBInstanceResponse, DescribeLogFileRetentionPeriodResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, ModifyInstanceNetworkRequest, DestroyHourDCDBInstanceResponse, ActiveHourDCDBInstanceRequest, DisassociateSecurityGroupsRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDBSlowLogsResponse, DescribeDCDBRenewalPriceRequest, DescribeDCDBInstancesRequest, DescribeLogFileRetentionPeriodRequest, DescribeOnlineDDLJobResponse, ModifyInstanceVportRequest, ModifyDBInstanceSecurityGroupsResponse, DestroyHourDCDBInstanceRequest, FlushBinlogRequest, CancelOnlineDDLJobResponse, ModifyDBSyncModeResponse, DisassociateSecurityGroupsResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
 /**
  * dcdb client
  * @class
@@ -42,9 +42,9 @@ export declare class Client extends AbstractClient {
      */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
-     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     * 本接口（ModifyInstanceVip）用于修改实例Vip
      */
-    UpgradeDCDBInstance(req: UpgradeDCDBInstanceRequest, cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void): Promise<UpgradeDCDBInstanceResponse>;
+    ModifyInstanceVip(req: ModifyInstanceVipRequest, cb?: (error: string, rep: ModifyInstanceVipResponse) => void): Promise<ModifyInstanceVipResponse>;
     /**
      * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
 如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
@@ -133,9 +133,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTmpDCDBInstance(req: CreateTmpDCDBInstanceRequest, cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void): Promise<CreateTmpDCDBInstanceResponse>;
     /**
-     * 本接口（KillSession）用于杀死指定会话。
+     * 查询Online DDL 任务详情
      */
-    KillSession(req: KillSessionRequest, cb?: (error: string, rep: KillSessionResponse) => void): Promise<KillSessionResponse>;
+    DescribeOnlineDDLJob(req: DescribeOnlineDDLJobRequest, cb?: (error: string, rep: DescribeOnlineDDLJobResponse) => void): Promise<DescribeOnlineDDLJobResponse>;
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。
      */
@@ -152,6 +152,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
      */
     DescribeDBSyncMode(req: DescribeDBSyncModeRequest, cb?: (error: string, rep: DescribeDBSyncModeResponse) => void): Promise<DescribeDBSyncModeResponse>;
+    /**
+     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     */
+    UpgradeDCDBInstance(req: UpgradeDCDBInstanceRequest, cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void): Promise<UpgradeDCDBInstanceResponse>;
     /**
      * 获取实例回档时可选的时间范围
      */
@@ -172,6 +176,10 @@ export declare class Client extends AbstractClient {
      * 本接口（ModifyInstanceNetwork）用于修改实例所属网络。
      */
     ModifyInstanceNetwork(req: ModifyInstanceNetworkRequest, cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void): Promise<ModifyInstanceNetworkResponse>;
+    /**
+     * 本接口（KillSession）用于杀死指定会话。
+     */
+    KillSession(req: KillSessionRequest, cb?: (error: string, rep: KillSessionResponse) => void): Promise<KillSessionResponse>;
     /**
      * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
      */
@@ -235,9 +243,9 @@ export declare class Client extends AbstractClient {
      */
     GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
-     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+     * 取消 Online DDL 任务
      */
-    IsolateDedicatedDBInstance(req: IsolateDedicatedDBInstanceRequest, cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void): Promise<IsolateDedicatedDBInstanceResponse>;
+    CancelOnlineDDLJob(req: CancelOnlineDDLJobRequest, cb?: (error: string, rep: CancelOnlineDDLJobResponse) => void): Promise<CancelOnlineDDLJobResponse>;
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
@@ -280,9 +288,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
     /**
-     * 本接口（ModifyInstanceVip）用于修改实例Vip
+     * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
      */
-    ModifyInstanceVip(req: ModifyInstanceVipRequest, cb?: (error: string, rep: ModifyInstanceVipResponse) => void): Promise<ModifyInstanceVipResponse>;
+    IsolateDedicatedDBInstance(req: IsolateDedicatedDBInstanceRequest, cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void): Promise<IsolateDedicatedDBInstanceResponse>;
     /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。
      */

@@ -2198,6 +2198,22 @@ export interface VatElectronicItemInfo {
    * 面积单位，仅不动产经营租赁服务发票返回
    */
   AreaUnit?: string
+  /**
+   * 出行人，仅旅客运输服务发票返回
+   */
+  Traveler?: string
+  /**
+   * 有效身份证件号，仅旅客运输服务发票返回
+   */
+  TravelerID?: string
+  /**
+   * 出行日期，仅旅客运输服务发票返回
+   */
+  TravelDate?: string
+  /**
+   * 等级，仅旅客运输服务发票返回
+   */
+  TravelLevel?: string
 }
 
 /**
@@ -2362,6 +2378,14 @@ export interface FlightItemInfo {
    * 免费行李额
    */
   Allow?: string
+  /**
+   * 客票生效日期
+   */
+  DateStart?: string
+  /**
+   * 有效截止日期
+   */
+  DateEnd?: string
 }
 
 /**
@@ -7682,7 +7706,7 @@ export interface AirTransport {
    */
   DateStart?: string
   /**
-   * 有效截至日期
+   * 有效截止日期
    */
   DateEnd?: string
   /**

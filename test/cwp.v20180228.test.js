@@ -3298,16 +3298,6 @@ it("cwp.v20180228.DescribeOpenPortStatistics", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeSecurityProtectionStat", async function () {
-    try {
-       const data = await client.DescribeSecurityProtectionStat({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ModifyBanMode", async function () {
     try {
        const data = await client.ModifyBanMode({})

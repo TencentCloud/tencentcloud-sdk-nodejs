@@ -35,10 +35,12 @@ import {
   DescribeDCDBPriceResponse,
   ModifyInstanceVportResponse,
   DescribeDCDBInstanceDetailRequest,
+  DescribeFileDownloadUrlResponse,
   ModifyInstanceVipResponse,
   AssociateSecurityGroupsRequest,
   ShardBriefInfo,
   NewBackupConfig,
+  CancelOnlineDDLJobRequest,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
@@ -69,6 +71,7 @@ import {
   ModifyDBInstancesProjectResponse,
   ModifyDBEncryptAttributesResponse,
   DescribeDCDBInstanceNodeInfoRequest,
+  SwitchDBInstanceHAResponse,
   DatabaseView,
   ConfigValue,
   DescribeDBLogFilesRequest,
@@ -83,7 +86,7 @@ import {
   ModifyInstanceNetworkResponse,
   DescribeDBSecurityGroupsRequest,
   DescribeDCDBPriceRequest,
-  SwitchDBInstanceHAResponse,
+  DescribeOnlineDDLJobRequest,
   DescribeBackupFilesResponse,
   ParamModifyResult,
   TablePrivilege,
@@ -116,7 +119,7 @@ import {
   DescribeBackupConfigsRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeDcnDetailRequest,
-  DescribeFileDownloadUrlResponse,
+  DDLDetail,
   ModifyDBParametersResponse,
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
@@ -211,10 +214,12 @@ import {
   DescribeDCDBRenewalPriceRequest,
   DescribeDCDBInstancesRequest,
   DescribeLogFileRetentionPeriodRequest,
+  DescribeOnlineDDLJobResponse,
   ModifyInstanceVportRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DestroyHourDCDBInstanceRequest,
   FlushBinlogRequest,
+  CancelOnlineDDLJobResponse,
   ModifyDBSyncModeResponse,
   DisassociateSecurityGroupsResponse,
   DescribeUserTasksRequest,
@@ -313,13 +318,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   * 本接口（ModifyInstanceVip）用于修改实例Vip
    */
-  async UpgradeDCDBInstance(
-    req: UpgradeDCDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
-  ): Promise<UpgradeDCDBInstanceResponse> {
-    return this.request("UpgradeDCDBInstance", req, cb)
+  async ModifyInstanceVip(
+    req: ModifyInstanceVipRequest,
+    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
+  ): Promise<ModifyInstanceVipResponse> {
+    return this.request("ModifyInstanceVip", req, cb)
   }
 
   /**
@@ -530,13 +535,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（KillSession）用于杀死指定会话。
+   * 查询Online DDL 任务详情
    */
-  async KillSession(
-    req: KillSessionRequest,
-    cb?: (error: string, rep: KillSessionResponse) => void
-  ): Promise<KillSessionResponse> {
-    return this.request("KillSession", req, cb)
+  async DescribeOnlineDDLJob(
+    req: DescribeOnlineDDLJobRequest,
+    cb?: (error: string, rep: DescribeOnlineDDLJobResponse) => void
+  ): Promise<DescribeOnlineDDLJobResponse> {
+    return this.request("DescribeOnlineDDLJob", req, cb)
   }
 
   /**
@@ -577,6 +582,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSyncModeResponse) => void
   ): Promise<DescribeDBSyncModeResponse> {
     return this.request("DescribeDBSyncMode", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   */
+  async UpgradeDCDBInstance(
+    req: UpgradeDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
+  ): Promise<UpgradeDCDBInstanceResponse> {
+    return this.request("UpgradeDCDBInstance", req, cb)
   }
 
   /**
@@ -627,6 +642,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void
   ): Promise<ModifyInstanceNetworkResponse> {
     return this.request("ModifyInstanceNetwork", req, cb)
+  }
+
+  /**
+   * 本接口（KillSession）用于杀死指定会话。
+   */
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**
@@ -776,13 +801,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
+   * 取消 Online DDL 任务
    */
-  async IsolateDedicatedDBInstance(
-    req: IsolateDedicatedDBInstanceRequest,
-    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
-  ): Promise<IsolateDedicatedDBInstanceResponse> {
-    return this.request("IsolateDedicatedDBInstance", req, cb)
+  async CancelOnlineDDLJob(
+    req: CancelOnlineDDLJobRequest,
+    cb?: (error: string, rep: CancelOnlineDDLJobResponse) => void
+  ): Promise<CancelOnlineDDLJobResponse> {
+    return this.request("CancelOnlineDDLJob", req, cb)
   }
 
   /**
@@ -887,13 +912,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyInstanceVip）用于修改实例Vip
+   * 本接口（IsolateDedicatedDBInstance）用于隔离独享云数据库实例。
    */
-  async ModifyInstanceVip(
-    req: ModifyInstanceVipRequest,
-    cb?: (error: string, rep: ModifyInstanceVipResponse) => void
-  ): Promise<ModifyInstanceVipResponse> {
-    return this.request("ModifyInstanceVip", req, cb)
+  async IsolateDedicatedDBInstance(
+    req: IsolateDedicatedDBInstanceRequest,
+    cb?: (error: string, rep: IsolateDedicatedDBInstanceResponse) => void
+  ): Promise<IsolateDedicatedDBInstanceResponse> {
+    return this.request("IsolateDedicatedDBInstance", req, cb)
   }
 
   /**

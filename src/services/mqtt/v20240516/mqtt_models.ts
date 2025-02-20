@@ -412,6 +412,59 @@ export interface DeleteAuthorizationPolicyResponse {
 }
 
 /**
+ * MQTT ProductSkuItem
+ */
+export interface ProductSkuItem {
+  /**
+   * 规格类型
+BASIC：基础版
+PRO ：专业版
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 规格代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkuCode?: string
+  /**
+   * 是否售卖
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnSale?: boolean
+  /**
+   * topic num限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNumLimit?: number
+  /**
+   * tps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 客户端连接数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientNumLimit?: number
+  /**
+   * 单客户端最大订阅数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxSubscriptionPerClient?: number
+  /**
+   * 授权规则条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationPolicyLimit?: number
+  /**
+   * 计费项信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PriceTags?: Array<PriceTag>
+}
+
+/**
  * ModifyJWKSAuthenticator请求参数结构体
  */
 export interface ModifyJWKSAuthenticatorRequest {
@@ -879,6 +932,26 @@ export interface DeleteDeviceCertificateResponse {
  * DeleteInstance返回参数结构体
  */
 export interface DeleteInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProductSKUList返回参数结构体
+ */
+export interface DescribeProductSKUListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * mqtt商品配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQTTProductSkuList?: Array<ProductSkuItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1835,6 +1908,11 @@ export interface DescribeAuthorizationPoliciesRequest {
 }
 
 /**
+ * DescribeProductSKUList请求参数结构体
+ */
+export type DescribeProductSKUListRequest = null
+
+/**
  * DescribeTopicList返回参数结构体
  */
 export interface DescribeTopicListResponse {
@@ -2096,6 +2174,29 @@ export interface MQTTTopicItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
+}
+
+/**
+ * 价格标签信息
+ */
+export interface PriceTag {
+  /**
+   * 计价名称
+   */
+  Name?: string
+  /**
+   * 计价类别
+   */
+  Category?: string
+  /**
+   * 计费项标签
+   */
+  Code?: string
+  /**
+   * 步长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Step?: number
 }
 
 /**

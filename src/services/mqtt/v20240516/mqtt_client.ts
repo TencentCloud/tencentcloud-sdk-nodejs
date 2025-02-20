@@ -36,6 +36,7 @@ import {
   PublicAccessRule,
   VpcInfo,
   DeleteAuthorizationPolicyResponse,
+  ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
   RegisterCaCertificateResponse,
   RegisterDeviceCertificateResponse,
@@ -60,6 +61,7 @@ import {
   ActivateCaCertificateResponse,
   DeleteDeviceCertificateResponse,
   DeleteInstanceResponse,
+  DescribeProductSKUListResponse,
   CreateJWKSAuthenticatorRequest,
   DescribeTopicResponse,
   CreateJWKSAuthenticatorResponse,
@@ -104,6 +106,7 @@ import {
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeAuthorizationPoliciesRequest,
+  DescribeProductSKUListRequest,
   DescribeTopicListResponse,
   DescribeDeviceCertificateResponse,
   DescribeInstanceListRequest,
@@ -112,6 +115,7 @@ import {
   DescribeCaCertificatesRequest,
   DeviceCertificateItem,
   MQTTTopicItem,
+  PriceTag,
   ModifyAuthorizationPolicyRequest,
   RevokedDeviceCertificateResponse,
   DeleteTopicResponse,
@@ -313,6 +317,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceCertBindingResponse) => void
   ): Promise<ModifyInstanceCertBindingResponse> {
     return this.request("ModifyInstanceCertBinding", req, cb)
+  }
+
+  /**
+   * 获取产品售卖规格
+   */
+  async DescribeProductSKUList(
+    req?: DescribeProductSKUListRequest,
+    cb?: (error: string, rep: DescribeProductSKUListResponse) => void
+  ): Promise<DescribeProductSKUListResponse> {
+    return this.request("DescribeProductSKUList", req, cb)
   }
 
   /**

@@ -22,24 +22,24 @@ export interface TaskDetail {
   /**
    * 任务名
    */
-  Name: string
+  Name?: string
   /**
    * 任务进度
    */
-  Progress: number
+  Progress?: number
   /**
    * 任务完成时间
    */
-  FinishTime: string
+  FinishTime?: string
   /**
    * 子任务
    */
-  SubTasks: Array<SubTaskDetail>
+  SubTasks?: Array<SubTaskDetail>
   /**
    * 任务花费时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ElapsedTime: number
+  ElapsedTime?: number
   /**
    * 任务进度详情
 注意：此字段可能返回 null，表示取不到有效值。
