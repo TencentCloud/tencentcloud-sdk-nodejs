@@ -118,6 +118,8 @@ export interface InvoiceItem {
   15：非税发票
   16：全电发票
   17：医疗发票
+  18：完税凭证
+  19：海关缴款书
      */
     Type?: number;
     /**
@@ -1322,25 +1324,17 @@ export interface Rect {
     Height?: number;
 }
 /**
- * 全部车牌信息
+ * 海关缴款书
  */
-export interface LicensePlateInfo {
+export interface CustomsPaymentReceipt {
     /**
-     * 识别出的车牌号码。
+     * 发票名称
      */
-    Number?: string;
+    Title?: string;
     /**
-     * 置信度，0 - 100 之间。
+     * 识别出的字段名称(关键字)，支持以下字段： 税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 示例值：纳税人识别号
      */
-    Confidence?: number;
-    /**
-     * 文本行在原图片中的像素坐标框。
-     */
-    Rect?: Rect;
-    /**
-     * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
-     */
-    Color?: string;
+    Content?: Array<OtherInvoiceItem>;
 }
 /**
  * QuestionSplitOCR请求参数结构体
@@ -2182,6 +2176,23 @@ export interface QuestionSplitOCRResponse {
      * 检测到的文本信息
      */
     QuestionInfo?: Array<QuestionInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * TableOCR返回参数结构体
+ */
+export interface TableOCRResponse {
+    /**
+     * 检测到的文本信息，具体内容请点击左侧链接
+     */
+    TextDetections?: Array<TextTable>;
+    /**
+     * Base64 编码后的 Excel 数据。
+     */
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4199,6 +4210,16 @@ export interface SingleInvoiceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ElectronicFlightTicketFull?: ElectronicFlightTicketFull;
+    /**
+     * 完税凭证
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaxPayment?: TaxPayment;
+    /**
+     * 海关缴款
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomsPaymentReceipt?: CustomsPaymentReceipt;
 }
 /**
  * InvoiceGeneralOCR返回参数结构体
@@ -5655,6 +5676,21 @@ export interface CardWarnInfo {
   1：有PS
      */
     PSCheck?: number;
+}
+/**
+ * 完税凭证
+ */
+export interface TaxPayment {
+    /**
+     * 发票名称
+     */
+    Title?: string;
+    /**
+     * 识别出的字段名称(关键字)，支持以下字段：
+  税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。
+  示例值：纳税人识别号
+     */
+    Content?: Array<OtherInvoiceItem>;
 }
 /**
  * VehicleRegCertOCR请求参数结构体
@@ -10315,21 +10351,25 @@ export interface TableCell {
     Contents: Array<CellContent>;
 }
 /**
- * TableOCR返回参数结构体
+ * 全部车牌信息
  */
-export interface TableOCRResponse {
+export interface LicensePlateInfo {
     /**
-     * 检测到的文本信息，具体内容请点击左侧链接
+     * 识别出的车牌号码。
      */
-    TextDetections?: Array<TextTable>;
+    Number?: string;
     /**
-     * Base64 编码后的 Excel 数据。
+     * 置信度，0 - 100 之间。
      */
-    Data?: string;
+    Confidence?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 文本行在原图片中的像素坐标框。
      */
-    RequestId?: string;
+    Rect?: Rect;
+    /**
+     * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
+     */
+    Color?: string;
 }
 /**
  * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。

@@ -3296,12 +3296,10 @@ export interface Users {
 export interface DataEngineConfigPair {
     /**
      * 配置项
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigItem: string;
     /**
      * 配置值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ConfigValue: string;
 }
@@ -4732,17 +4730,14 @@ export interface DeleteUserRequest {
 export interface DataEngineScaleInfoDetail {
     /**
      * 统计开始时间，格式为：yyyy-MM-dd HH:mm:ss
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: string;
     /**
      * 统计结束时间，格式为：yyyy-MM-dd HH:mm:ss
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime?: string;
     /**
      * 当前统计时间段，引擎规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CU?: number;
 }
@@ -5019,7 +5014,6 @@ export interface DataEngineBasicInfo {
     UpdateTime?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
@@ -5028,17 +5022,14 @@ export interface DataEngineBasicInfo {
     DataEngineId?: string;
     /**
      * 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataEngineType?: string;
     /**
      * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
     /**
      * 账号ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserUin?: string;
 }
@@ -9477,17 +9468,14 @@ export interface DescribeDataEngineResponse {
 export interface DataEngineScaleInfo {
     /**
      * 引擎ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataEngineId?: string;
     /**
      * 引擎名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DataEngineName?: string;
     /**
      * 引擎规格详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScaleDetail?: Array<DataEngineScaleInfoDetail>;
 }

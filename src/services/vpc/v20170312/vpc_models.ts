@@ -2448,17 +2448,13 @@ export interface ModifyCustomerGatewayAttributeRequest {
 }
 
 /**
- * DescribeRouteTables返回参数结构体
+ * DescribeBandwidthPackageBandwidthRange返回参数结构体
  */
-export interface DescribeRouteTablesResponse {
+export interface DescribeBandwidthPackageBandwidthRangeResponse {
   /**
-   * 符合条件的实例数量。
+   * 带宽包带宽上下限详细信息。
    */
-  TotalCount?: number
-  /**
-   * 路由表对象。
-   */
-  RouteTableSet?: Array<RouteTable>
+  BandwidthRangeSet?: Array<BandwidthRange>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3920,9 +3916,22 @@ export interface DisassociateNetworkAclSubnetsResponse {
 }
 
 /**
- * CreateCdcLDCXList请求参数结构体
+ * 带宽上下限。
  */
-export type CreateCdcLDCXListRequest = null
+export interface BandwidthRange {
+  /**
+   * 资源ID。
+   */
+  ResourceId?: string
+  /**
+   * 带宽下限，单位：Mbps。
+   */
+  BandwidthLowerLimit?: number
+  /**
+   * 带宽上限，单位：Mbps。
+   */
+  BandwidthUpperLimit?: number
+}
 
 /**
  * ModifyAddressInternetChargeType请求参数结构体
@@ -4359,22 +4368,9 @@ export interface ModifyAddressTemplateAttributeRequest {
 }
 
 /**
- * SetCcnRegionBandwidthLimits请求参数结构体
+ * CreateCdcLDCXList请求参数结构体
  */
-export interface SetCcnRegionBandwidthLimitsRequest {
-  /**
-   * CCN实例ID，形如：ccn-f49l6u0z。
-   */
-  CcnId: string
-  /**
-   * 云联网（CCN）各地域出带宽上限。
-   */
-  CcnRegionBandwidthLimits: Array<CcnRegionBandwidthLimit>
-  /**
-   * 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。
-   */
-  SetDefaultLimitFlag?: boolean
-}
+export type CreateCdcLDCXListRequest = null
 
 /**
  * CreateNatGateway返回参数结构体
@@ -6094,6 +6090,20 @@ export interface CreateSubnetResponse {
    * 子网对象。
    */
   Subnet?: Subnet
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAddressBandwidthRange返回参数结构体
+ */
+export interface DescribeAddressBandwidthRangeResponse {
+  /**
+   * EIP带宽上下限详细信息。
+   */
+  BandwidthRangeSet?: Array<BandwidthRange>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9570,77 +9580,13 @@ export interface BgpConfigAndAsn {
 }
 
 /**
- * 云联网（CCN）关联实例（Instance）对象
+ * DescribeAddressBandwidthRange请求参数结构体
  */
-export interface CcnAttachedInstance {
+export interface DescribeAddressBandwidthRangeRequest {
   /**
-   * 云联网实例ID。
+   * EIP资源ID列表，单次查询上限20。
    */
-  CcnId?: string
-  /**
-   * 关联实例类型：
-<li>`VPC`：私有网络</li>
-<li>`DIRECTCONNECT`：专线网关</li>
-<li>`BMVPC`：黑石私有网络</li>
-   */
-  InstanceType?: string
-  /**
-   * 关联实例ID。
-   */
-  InstanceId?: string
-  /**
-   * 关联实例名称。
-   */
-  InstanceName?: string
-  /**
-   * 关联实例所属大区，例如：ap-guangzhou。
-   */
-  InstanceRegion?: string
-  /**
-   * 关联实例所属UIN（根账号）。
-   */
-  InstanceUin?: string
-  /**
-   * 关联实例CIDR。
-   */
-  CidrBlock?: Array<string>
-  /**
-   * 关联实例状态：
-<li>`PENDING`：申请中</li>
-<li>`ACTIVE`：已连接</li>
-<li>`EXPIRED`：已过期</li>
-<li>`REJECTED`：已拒绝</li>
-<li>`DELETED`：已删除</li>
-<li>`FAILED`：失败的（2小时后将异步强制解关联）</li>
-<li>`ATTACHING`：关联中</li>
-<li>`DETACHING`：解关联中</li>
-<li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
-   */
-  State?: string
-  /**
-   * 关联时间。
-   */
-  AttachedTime?: string
-  /**
-   * 云联网所属UIN（根账号）。
-   */
-  CcnUin?: string
-  /**
-   * 关联实例所属的大地域，如: CHINA_MAINLAND
-   */
-  InstanceArea?: string
-  /**
-   * 备注
-   */
-  Description?: string
-  /**
-   * 路由表ID
-   */
-  RouteTableId?: string
-  /**
-   * 路由表名称
-   */
-  RouteTableName?: string
+  AddressIds?: Array<string>
 }
 
 /**
@@ -13023,6 +12969,24 @@ export interface DescribeAddressTemplateGroupsResponse {
 }
 
 /**
+ * SetCcnRegionBandwidthLimits请求参数结构体
+ */
+export interface SetCcnRegionBandwidthLimitsRequest {
+  /**
+   * CCN实例ID，形如：ccn-f49l6u0z。
+   */
+  CcnId: string
+  /**
+   * 云联网（CCN）各地域出带宽上限。
+   */
+  CcnRegionBandwidthLimits: Array<CcnRegionBandwidthLimit>
+  /**
+   * 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。
+   */
+  SetDefaultLimitFlag?: boolean
+}
+
+/**
  * ModifyPrivateNatGatewayTranslationAclRule返回参数结构体
  */
 export interface ModifyPrivateNatGatewayTranslationAclRuleResponse {
@@ -14386,6 +14350,34 @@ export interface DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRe
    * 目的端口转换规则数组。
    */
   LocalDestinationIpPortTranslationNatRuleSet: Array<PrivateNatDestinationIpPortTranslationNatRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBandwidthPackageBandwidthRange请求参数结构体
+ */
+export interface DescribeBandwidthPackageBandwidthRangeRequest {
+  /**
+   * 带宽包资源ID列表，单次查询上限20。
+   */
+  BandwidthPackageIds?: Array<string>
+}
+
+/**
+ * DescribeRouteTables返回参数结构体
+ */
+export interface DescribeRouteTablesResponse {
+  /**
+   * 符合条件的实例数量。
+   */
+  TotalCount?: number
+  /**
+   * 路由表对象。
+   */
+  RouteTableSet?: Array<RouteTable>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18546,6 +18538,80 @@ export interface HealthCheckConfig {
    * 探测超时时间，范围【10-5000】，单位ms。
    */
   ProbeTimeout?: number
+}
+
+/**
+ * 云联网（CCN）关联实例（Instance）对象
+ */
+export interface CcnAttachedInstance {
+  /**
+   * 云联网实例ID。
+   */
+  CcnId?: string
+  /**
+   * 关联实例类型：
+<li>`VPC`：私有网络</li>
+<li>`DIRECTCONNECT`：专线网关</li>
+<li>`BMVPC`：黑石私有网络</li>
+   */
+  InstanceType?: string
+  /**
+   * 关联实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 关联实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 关联实例所属大区，例如：ap-guangzhou。
+   */
+  InstanceRegion?: string
+  /**
+   * 关联实例所属UIN（根账号）。
+   */
+  InstanceUin?: string
+  /**
+   * 关联实例CIDR。
+   */
+  CidrBlock?: Array<string>
+  /**
+   * 关联实例状态：
+<li>`PENDING`：申请中</li>
+<li>`ACTIVE`：已连接</li>
+<li>`EXPIRED`：已过期</li>
+<li>`REJECTED`：已拒绝</li>
+<li>`DELETED`：已删除</li>
+<li>`FAILED`：失败的（2小时后将异步强制解关联）</li>
+<li>`ATTACHING`：关联中</li>
+<li>`DETACHING`：解关联中</li>
+<li>`DETACHFAILED`：解关联失败（2小时后将异步强制解关联）</li>
+   */
+  State?: string
+  /**
+   * 关联时间。
+   */
+  AttachedTime?: string
+  /**
+   * 云联网所属UIN（根账号）。
+   */
+  CcnUin?: string
+  /**
+   * 关联实例所属的大地域，如: CHINA_MAINLAND
+   */
+  InstanceArea?: string
+  /**
+   * 备注
+   */
+  Description?: string
+  /**
+   * 路由表ID
+   */
+  RouteTableId?: string
+  /**
+   * 路由表名称
+   */
+  RouteTableName?: string
 }
 
 /**

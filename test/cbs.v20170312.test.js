@@ -118,9 +118,19 @@ it("cbs.v20170312.ModifyDisksRenewFlag", async function () {
     }
 })
 
-it("cbs.v20170312.InquirePriceModifyDiskBackupQuota", async function () {
+it("cbs.v20170312.CreateSnapshotGroup", async function () {
     try {
-       const data = await client.InquirePriceModifyDiskBackupQuota({})
+       const data = await client.CreateSnapshotGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DeleteSnapshotGroup", async function () {
+    try {
+       const data = await client.DeleteSnapshotGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +178,16 @@ it("cbs.v20170312.DescribeDiskBackups", async function () {
     }
 })
 
+it("cbs.v20170312.ApplySnapshotGroup", async function () {
+    try {
+       const data = await client.ApplySnapshotGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.DeleteAutoSnapshotPolicies", async function () {
     try {
        const data = await client.DeleteAutoSnapshotPolicies({})
@@ -191,6 +211,16 @@ it("cbs.v20170312.InitializeDisks", async function () {
 it("cbs.v20170312.DescribeDisks", async function () {
     try {
        const data = await client.DescribeDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DescribeSnapshotGroups", async function () {
+    try {
+       const data = await client.DescribeSnapshotGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +391,16 @@ it("cbs.v20170312.DescribeDiskStoragePool", async function () {
 it("cbs.v20170312.ApplySnapshot", async function () {
     try {
        const data = await client.ApplySnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.InquirePriceModifyDiskBackupQuota", async function () {
+    try {
+       const data = await client.InquirePriceModifyDiskBackupQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

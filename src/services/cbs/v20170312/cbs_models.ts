@@ -70,6 +70,24 @@ export interface DescribeDiskBackupsRequest {
 }
 
 /**
+ * CreateSnapshotGroup请求参数结构体
+ */
+export interface CreateSnapshotGroupRequest {
+  /**
+   * 需要创建快照组的云硬盘ID列表，必须选择挂载在同一实例上的盘列表。
+   */
+  DiskIds: Array<string>
+  /**
+   * 快照组名称，快照组关联的快照也会继承快照组的名称。例如：快照组名称为testSnapshotGroup，快照组关联两个快照，则两个快照的名称分别为testSnapshotGroup_0，testSnapshotGroup_1。
+   */
+  SnapshotGroupName?: string
+  /**
+   * 快照组需要绑定的标签列表。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * 描述了定期快照策略的详细信息
  */
 export interface AutoSnapshotPolicy {
@@ -252,13 +270,21 @@ export interface CopySnapshotCrossRegionsResponse {
 }
 
 /**
- * ModifyAutoSnapshotPolicyAttribute返回参数结构体
+ * DescribeSnapshotGroups请求参数结构体
  */
-export interface ModifyAutoSnapshotPolicyAttributeResponse {
+export interface DescribeSnapshotGroupsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤条件。<br><li>snapshot-group-id - Array of String - 是否必填：否 -（过滤条件）按快照组ID过滤 <br><li>snapshot-group-state - Array of String - 是否必填：否 -（过滤条件）按快照组状态过滤。(NORMAL: 正常 | CREATING:创建中 | ROLLBACKING:回滚中) <br><li>snapshot-group-name - Array of String - 是否必填：否 -（过滤条件）按快照组名称过滤 <br><li>snapshot-id - Array of String - 是否必填：否 -（过滤条件）按快照组内的快照ID过滤
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -962,6 +988,24 @@ export interface DetachDisksRequest {
 }
 
 /**
+ * DescribeSnapshotGroups返回参数结构体
+ */
+export interface DescribeSnapshotGroupsResponse {
+  /**
+   * 符合条件的总数量。
+   */
+  TotalCount?: number
+  /**
+   * 快照组列表详情。
+   */
+  SnapshotGroupSet?: Array<SnapshotGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSnapshotOverview返回参数结构体
  */
 export interface DescribeSnapshotOverviewResponse {
@@ -1295,6 +1339,16 @@ export interface Image {
 }
 
 /**
+ * ModifyAutoSnapshotPolicyAttribute返回参数结构体
+ */
+export interface ModifyAutoSnapshotPolicyAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TerminateDisks请求参数结构体
  */
 export interface TerminateDisksRequest {
@@ -1346,9 +1400,9 @@ export interface ResizeDiskRequest {
    */
   DiskSize: number
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。该字段仅供单块云硬盘扩容时传入。
    */
-  DiskId: string
+  DiskId?: string
 }
 
 /**
@@ -1568,6 +1622,26 @@ export interface DiskChargePrepaid {
    * 需要将云盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费，示例取值：2018-03-30 20:15:03。
    */
   CurInstanceDeadline?: string
+}
+
+/**
+ * DeleteSnapshotGroup返回参数结构体
+ */
+export interface DeleteSnapshotGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ApplySnapshotGroup返回参数结构体
+ */
+export interface ApplySnapshotGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1793,6 +1867,83 @@ export interface CreateDiskBackupRequest {
    * 云硬盘备份点名称。长度不能超过100个字符。
    */
   DiskBackupName?: string
+}
+
+/**
+ * DeleteSnapshotGroup请求参数结构体
+ */
+export interface DeleteSnapshotGroupRequest {
+  /**
+   * 快照组ID。
+   */
+  SnapshotGroupId?: string
+  /**
+   * 快照组ID 列表。此参数与快照组 ID 至少传 1 个，同时传会与快照组 ID 合并。
+   */
+  SnapshotGroupIds?: Array<string>
+  /**
+   * 是否同时删除快照组关联的镜像；取值为false，表示不删除快照组绑定的镜像，此时，如果快照组有绑定的镜像，删除会失败；取值为true，表示同时删除快照组绑定的镜像；默认值为false。
+   */
+  DeleteBindImages?: boolean
+}
+
+/**
+ * 描述快照组详情
+ */
+export interface SnapshotGroup {
+  /**
+   * 快照组ID。
+   */
+  SnapshotGroupId: string
+  /**
+   * 快照组类型。NORMAL: 普通快照组，非一致性快照。
+   */
+  SnapshotGroupType: string
+  /**
+   * 快照组是否包含系统盘快照。
+   */
+  ContainRootSnapshot: boolean
+  /**
+   * 快照组包含的快照ID列表。
+   */
+  SnapshotIdSet: Array<string>
+  /**
+   * 快照组状态。<br><li>NORMAL: 正常<br><li>CREATING:创建中<br><li>ROLLBACKING:回滚中
+   */
+  SnapshotGroupState: string
+  /**
+   * 快照组创建进度。
+   */
+  Percent: number
+  /**
+   * 快照组创建时间。
+   */
+  CreateTime: string
+  /**
+   * 快照组最新修改时间
+   */
+  ModifyTime: string
+  /**
+   * 快照组关联的镜像列表。
+   */
+  Images: Array<Image>
+  /**
+   * 快照组名称。
+   */
+  SnapshotGroupName: string
+  /**
+   * 快照组关联的镜像数量。
+   */
+  ImageCount: number
+  /**
+   * 快照组是否永久保留
+   */
+  IsPermanent: boolean
+  /**
+   * 快照组到期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadlineTime: string
 }
 
 /**
@@ -2066,6 +2217,28 @@ export interface DescribeDiskAssociatedAutoSnapshotPolicyResponse {
 }
 
 /**
+ * ApplySnapshotGroup请求参数结构体
+ */
+export interface ApplySnapshotGroupRequest {
+  /**
+   * 回滚的快照组ID。
+   */
+  SnapshotGroupId: string
+  /**
+   * 回滚的快照组关联的快照ID，及快照对应的原云硬盘ID列表。
+   */
+  ApplyDisks: Array<ApplyDisk>
+  /**
+   * 回滚前是否执行自动关机。
+   */
+  AutoStopInstance?: boolean
+  /**
+   * 回滚完成后是否自动开机。
+   */
+  AutoStartInstance?: boolean
+}
+
+/**
  * GetSnapOverview返回参数结构体
  */
 export interface GetSnapOverviewResponse {
@@ -2261,6 +2434,20 @@ export interface Cdc {
 }
 
 /**
+ * 本参数用于快照组回滚接口的入参，表示回滚的云盘、快照列表。
+ */
+export interface ApplyDisk {
+  /**
+   * 快照组关联的快照ID。
+   */
+  SnapshotId: string
+  /**
+   * 快照组关联快照对应的原云硬盘ID。
+   */
+  DiskId: string
+}
+
+/**
  * UnbindAutoSnapshotPolicy返回参数结构体
  */
 export interface UnbindAutoSnapshotPolicyResponse {
@@ -2316,6 +2503,20 @@ export interface CreateAutoSnapshotPolicyRequest {
    * 通过该定期快照策略创建的快照保留天数，默认保留7天。如果指定本参数，则IsPermanent入参不可指定为TRUE，否则会产生冲突。
    */
   RetentionDays?: number
+}
+
+/**
+ * CreateSnapshotGroup返回参数结构体
+ */
+export interface CreateSnapshotGroupResponse {
+  /**
+   * 创建成功的快照组ID。
+   */
+  SnapshotGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

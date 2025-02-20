@@ -655,9 +655,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取高防IP资产实例列表
-
-     */
+   * 获取高防IP资产实例列表
+   */
   async DescribeListBGPIPInstances(
     req: DescribeListBGPIPInstancesRequest,
     cb?: (error: string, rep: DescribeListBGPIPInstancesResponse) => void

@@ -1309,23 +1309,27 @@ export interface EmailIdentity {
   /**
    * 发信域名
    */
-  IdentityName: string
+  IdentityName?: string
   /**
    * 验证类型，固定为DOMAIN
    */
-  IdentityType: string
+  IdentityType?: string
   /**
    * 是否已通过验证
    */
-  SendingEnabled: boolean
+  SendingEnabled?: boolean
   /**
    * 当前信誉等级
    */
-  CurrentReputationLevel: number
+  CurrentReputationLevel?: number
   /**
    * 当日最高发信量
    */
-  DailyQuota: number
+  DailyQuota?: number
+  /**
+   * 域名配置的独立ip
+   */
+  SendIp?: Array<string>
 }
 
 /**

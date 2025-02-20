@@ -155,7 +155,6 @@ export declare class Client extends AbstractClient {
     ModifyCCLevelPolicy(req: ModifyCCLevelPolicyRequest, cb?: (error: string, rep: ModifyCCLevelPolicyResponse) => void): Promise<ModifyCCLevelPolicyResponse>;
     /**
      * 获取高防IP资产实例列表
-
      */
     DescribeListBGPIPInstances(req: DescribeListBGPIPInstancesRequest, cb?: (error: string, rep: DescribeListBGPIPInstancesResponse) => void): Promise<DescribeListBGPIPInstancesResponse>;
     /**

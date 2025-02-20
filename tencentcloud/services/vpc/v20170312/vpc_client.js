@@ -449,6 +449,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddTemplateMember", req, cb);
     }
     /**
+     * 查询指定EIP的带宽上下限范围。
+     */
+    async DescribeAddressBandwidthRange(req, cb) {
+        return this.request("DescribeAddressBandwidthRange", req, cb);
+    }
+    /**
      * 本接口（DeleteAddressTemplate）用于删除IP地址模板。
 >?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
 >
@@ -703,6 +709,12 @@ LimitTypes取值范围：
      */
     async DescribeReserveIpAddresses(req, cb) {
         return this.request("DescribeReserveIpAddresses", req, cb);
+    }
+    /**
+     * 查询指定带宽包的带宽上下限范围
+     */
+    async DescribeBandwidthPackageBandwidthRange(req, cb) {
+        return this.request("DescribeBandwidthPackageBandwidthRange", req, cb);
     }
     /**
      * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。

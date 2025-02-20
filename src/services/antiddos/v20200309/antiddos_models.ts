@@ -61,11 +61,11 @@ export interface DescribeListBGPIPInstancesResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 高防IP资产实例列表
    */
-  InstanceList: Array<BGPIPInstance>
+  InstanceList?: Array<BGPIPInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -634,8 +634,7 @@ export interface DescribeListBGPInstancesRequest {
    */
   FilterBasicPlusFlag?: number
   /**
-   * 是否商业模式优化-普惠版 0: 包含商业模式优化-普惠版 1: 只查询商业模式优化-普惠版 
-
+   * 是否标准版2.0 0: 包含标准版2.0 0 1: 只查询标准版2.0 0 2: 不查标准版2.0
    */
   FilterPlanCntFlag?: number
   /**
@@ -1160,7 +1159,7 @@ export interface DescribeCCLevelPolicyRequest {
    */
   Domain: string
   /**
-   * 协议，可取值HTTP，HTTPS
+   * 协议，可取值http、https、http/https
    */
   Protocol: string
 }
@@ -1357,27 +1356,27 @@ export interface StaticPackRelation {
    * 保底带宽
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtectBandwidth: number
+  ProtectBandwidth?: number
   /**
    * 业务带宽
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NormalBandwidth: number
+  NormalBandwidth?: number
   /**
    * 转发规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForwardRulesLimit: number
+  ForwardRulesLimit?: number
   /**
    * 自动续费标记
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 到期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurDeadline: string
+  CurDeadline?: string
 }
 
 /**
@@ -3628,22 +3627,22 @@ export interface AnycastOutPackRelation {
    * 业务带宽(单位M)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NormalBandwidth: number
+  NormalBandwidth?: number
   /**
    * 转发规则数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForwardRulesLimit: number
+  ForwardRulesLimit?: number
   /**
    * 自动续费标记
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 到期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurDeadline: string
+  CurDeadline?: string
 }
 
 /**
@@ -4281,52 +4280,52 @@ export interface BGPInstanceSpecification {
   /**
    * 保底防护峰值，单位Gbps
    */
-  ProtectBandwidth: number
+  ProtectBandwidth?: number
   /**
    * 防护次数，单位次
    */
-  ProtectCountLimit: number
+  ProtectCountLimit?: number
   /**
    * 防护IP数，单位个
    */
-  ProtectIPNumberLimit: number
+  ProtectIPNumberLimit?: number
   /**
    * 自动续费状态，取值[
 0：没有开启自动续费
 1：开启了自动续费
 ]
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 联合产品标记，0代表普通高防包，1代表联合高防包
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnionPackFlag: number
+  UnionPackFlag?: number
   /**
    * 业务带宽
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceBandWidth: number
+  ServiceBandWidth?: number
   /**
    * 战斗服版本标记，0表示普通高防包，1表示战斗服高防包
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BattleEditionFlag: number
+  BattleEditionFlag?: number
   /**
    * 渠道版标记，0表示普通高防包，1表示渠道版高防包
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChannelEditionFlag: number
+  ChannelEditionFlag?: number
   /**
    * 高防包企业版标记，0表示普通高防包；1表示企业版高防包
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnterpriseFlag: number
+  EnterpriseFlag?: number
   /**
    * 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ElasticLimit: number
+  ElasticLimit?: number
   /**
    * 降配后的防护能力，单位Gbps
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4812,9 +4811,15 @@ export interface NewL7RuleEntry {
    */
   CCEnable?: number
   /**
-   * HTTPS协议的CC防护阈值
+   * HTTPS协议的CC防护阈值（已废弃）
    */
   CCThreshold?: number
+  /**
+   * HTTPS协议的CC防护阈值 -1：默认防御阈值
+0: 关闭
+大于0：自定义防护阈值
+   */
+  CCThresholdNew?: number
   /**
    * HTTPS协议的CC防护等级
    */
@@ -5650,7 +5655,7 @@ export interface DescribeCCLevelPolicyResponse {
   /**
    * CC防护等级，可取值loose表示宽松，strict表示严格，normal表示适中， emergency表示攻击紧急， sup_loose表示超级宽松，default表示默认策略（无频控配置下发），customized表示自定义策略
    */
-  Level: string
+  Level?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6101,7 +6106,7 @@ export interface ModifyCCLevelPolicyRequest {
    */
   Domain: string
   /**
-   * 协议，可取值HTTP，HTTPS
+   * 协议，可取值http、https、http/https
    */
   Protocol: string
   /**

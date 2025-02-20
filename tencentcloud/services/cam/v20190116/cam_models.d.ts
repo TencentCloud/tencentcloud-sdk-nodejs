@@ -1581,19 +1581,19 @@ export interface GroupInfo {
     /**
      * 用户组 ID。
      */
-    GroupId: number;
+    GroupId?: number;
     /**
      * 用户组名称。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 用户组创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 用户组描述。
      */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * AddUser请求参数结构体

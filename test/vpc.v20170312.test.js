@@ -608,6 +608,16 @@ it("vpc.v20170312.AddTemplateMember", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeAddressBandwidthRange", async function () {
+    try {
+       const data = await client.DescribeAddressBandwidthRange({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteAddressTemplate", async function () {
     try {
        const data = await client.DeleteAddressTemplate({})
@@ -921,6 +931,16 @@ it("vpc.v20170312.ReleaseAddresses", async function () {
 it("vpc.v20170312.DescribeReserveIpAddresses", async function () {
     try {
        const data = await client.DescribeReserveIpAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeBandwidthPackageBandwidthRange", async function () {
+    try {
+       const data = await client.DescribeBandwidthPackageBandwidthRange({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

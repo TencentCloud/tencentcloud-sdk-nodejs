@@ -150,7 +150,8 @@ export interface ApmInstanceDetail {
    */
   Description?: string
   /**
-   * 业务系统状态
+   * 业务系统状态。{
+1: 初始化中; 2: 运行中; 4: 限流}
    */
   Status?: number
   /**
@@ -281,6 +282,15 @@ export interface ApmInstanceDetail {
    * 是否开启 SQL 注入分析（0=关， 1=开）
    */
   IsSqlInjectionAnalysis?: number
+  /**
+   * 限流原因。{
+1: 正式版限额;
+2: 试用版限额;
+4: 试用版到期;
+8: 账号欠费
+}
+   */
+  StopReason?: number
 }
 
 /**

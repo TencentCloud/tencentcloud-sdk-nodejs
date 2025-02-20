@@ -126,7 +126,7 @@ import {
   CheckNetDetectStateRequest,
   RouteTableAssociation,
   ModifyCustomerGatewayAttributeRequest,
-  DescribeRouteTablesResponse,
+  DescribeBandwidthPackageBandwidthRangeResponse,
   DeleteVpcEndPointServiceWhiteListRequest,
   DescribeTrafficMirrorsRequest,
   DetachSnapshotInstancesResponse,
@@ -213,7 +213,7 @@ import {
   ModifyIPv6AddressesAttributesRequest,
   CreateVpnGatewayRoutesRequest,
   DisassociateNetworkAclSubnetsResponse,
-  CreateCdcLDCXListRequest,
+  BandwidthRange,
   ModifyAddressInternetChargeTypeRequest,
   ModifyIp6AddressesBandwidthRequest,
   DisableVpnGatewaySslClientCertResponse,
@@ -237,7 +237,7 @@ import {
   ReplaceDirectConnectGatewayCcnRoutesRequest,
   ReferredSecurityGroup,
   ModifyAddressTemplateAttributeRequest,
-  SetCcnRegionBandwidthLimitsRequest,
+  CreateCdcLDCXListRequest,
   CreateNatGatewayResponse,
   DescribeVpnGatewaySslClientsRequest,
   ModifyDirectConnectGatewayAttributeRequest,
@@ -325,6 +325,7 @@ import {
   PolicyStatistics,
   CreateCdcLDCXListResponse,
   CreateSubnetResponse,
+  DescribeAddressBandwidthRangeResponse,
   DescribeSecurityGroupPoliciesResponse,
   DescribeGatewayFlowQosResponse,
   ModifySecurityGroupPoliciesRequest,
@@ -490,7 +491,7 @@ import {
   CreateNatGatewaySourceIpTranslationNatRuleResponse,
   DeleteNatGatewaySourceIpTranslationNatRuleResponse,
   BgpConfigAndAsn,
-  CcnAttachedInstance,
+  DescribeAddressBandwidthRangeRequest,
   SecurityPolicyDatabase,
   CcnRouteTableInputPolicys,
   DescribeNetworkAccountTypeResponse,
@@ -652,6 +653,7 @@ import {
   ReleaseIPv6AddressesRequest,
   DisassociateIPv6AddressResponse,
   DescribeAddressTemplateGroupsResponse,
+  SetCcnRegionBandwidthLimitsRequest,
   ModifyPrivateNatGatewayTranslationAclRuleResponse,
   CreateDirectConnectGatewayCcnRoutesRequest,
   ModifyGatewayFlowQosRequest,
@@ -714,6 +716,8 @@ import {
   Resource,
   HighPriorityRouteTable,
   DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesResponse,
+  DescribeBandwidthPackageBandwidthRangeRequest,
+  DescribeRouteTablesResponse,
   DeleteDhcpIpRequest,
   AllocateAddressesResponse,
   DescribeCdcUsedIdcVlanRequest,
@@ -939,6 +943,7 @@ import {
   DescribeCcnRegionBandwidthLimitsRequest,
   InquiryPriceCreateVpnGatewayRequest,
   HealthCheckConfig,
+  CcnAttachedInstance,
   CreateAssistantCidrResponse,
   CustomerGatewayVendor,
   DescribeAddressTemplatesRequest,
@@ -1657,6 +1662,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定EIP的带宽上下限范围。
+   */
+  async DescribeAddressBandwidthRange(
+    req: DescribeAddressBandwidthRangeRequest,
+    cb?: (error: string, rep: DescribeAddressBandwidthRangeResponse) => void
+  ): Promise<DescribeAddressBandwidthRangeResponse> {
+    return this.request("DescribeAddressBandwidthRange", req, cb)
+  }
+
+  /**
      * 本接口（DeleteAddressTemplate）用于删除IP地址模板。
 >?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
 >
@@ -2038,6 +2053,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeReserveIpAddressesResponse) => void
   ): Promise<DescribeReserveIpAddressesResponse> {
     return this.request("DescribeReserveIpAddresses", req, cb)
+  }
+
+  /**
+   * 查询指定带宽包的带宽上下限范围
+   */
+  async DescribeBandwidthPackageBandwidthRange(
+    req: DescribeBandwidthPackageBandwidthRangeRequest,
+    cb?: (error: string, rep: DescribeBandwidthPackageBandwidthRangeResponse) => void
+  ): Promise<DescribeBandwidthPackageBandwidthRangeResponse> {
+    return this.request("DescribeBandwidthPackageBandwidthRange", req, cb)
   }
 
   /**

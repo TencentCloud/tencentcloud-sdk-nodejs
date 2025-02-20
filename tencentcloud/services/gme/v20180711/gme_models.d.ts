@@ -236,7 +236,6 @@ export interface AudioTextStatisticsItem {
 export interface GetCustomizationListResponse {
     /**
      * 语音消息转文本热句模型配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomizationConfigs?: Array<CustomizationConfigs>;
     /**
@@ -372,17 +371,16 @@ export interface GetCustomizationListRequest {
 export interface DescribeRecordInfoResponse {
     /**
      * 录制信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordInfo: Array<RecordInfo>;
+    RecordInfo?: Array<RecordInfo>;
     /**
      * 录制类型：1代表单流 2代表混流 3代表单流和混流。
      */
-    RecordMode: number;
+    RecordMode?: number;
     /**
      * 房间ID。
      */
-    RoomId: string;
+    RoomId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -525,7 +523,6 @@ export interface StartRecordResponse {
 export interface DescribeScanResultListResponse {
     /**
      * 要查询的语音检测任务的结果
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<DescribeScanResult>;
     /**
@@ -674,12 +671,10 @@ export interface DeleteScanUserResponse {
 export interface DescribeRoomInfoResponse {
     /**
      * 操作结果, 0成功, 非0失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: number;
     /**
      * 房间用户信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RoomUsers?: Array<RoomUser>;
     /**
@@ -948,19 +943,16 @@ export interface ModifyUserMicStatusResponse {
 export interface DescribeTaskInfoResponse {
     /**
      * 进行中的任务taskid（StartRecord接口返回）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 录制类型：1代表单流 2代表混流 3代表单流和混流。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordMode: number;
+    RecordMode?: number;
     /**
      * 指定订阅流白名单或者黑名单。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubscribeRecordUserIds: SubscribeRecordUserIds;
+    SubscribeRecordUserIds?: SubscribeRecordUserIds;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1551,7 +1543,6 @@ export interface CreateAppResp {
 export interface UpdateScanRoomsResponse {
     /**
      * 返回结果码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ErrorCode?: number;
     /**

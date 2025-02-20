@@ -4,72 +4,58 @@
 export interface CodeBatch {
     /**
      * 批次号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
      * 批次编码(未使用)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchCode?: string;
     /**
      * 码数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeCnt?: number;
     /**
      * 所属商户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
      * 产品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
      * 批次类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchType?: number;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 微信模板
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MpTpl?: string;
     /**
      * 批次状态 0: 未激活 1: 已激活 -1: 已冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 修改时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 所属商户名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantName?: string;
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
@@ -80,7 +66,6 @@ export interface CodeBatch {
     Ext?: Ext;
     /**
      * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TplName?: string;
     /**
@@ -164,82 +149,66 @@ export interface DescribeScanLogsResponse {
 export interface Quota {
     /**
      * 服务开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime: string;
     /**
      * 服务结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime: string;
     /**
      * 配额ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     QuotaId?: number;
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
      * 开通服务
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Services?: Array<string>;
     /**
      * 商户配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FactoryQuota?: number;
     /**
      * 商品配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ItemQuota?: number;
     /**
      * 溯源码配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrackQuota?: number;
     /**
      * 销售码配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SaleQuota?: number;
     /**
      * 上链配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChainQuota?: number;
     /**
      * 风控配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RiskQuota?: number;
     /**
      * AI文字数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AigcTextQuota?: number;
     /**
      * AI图片数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AigcImageQuota?: number;
     /**
      * 溯源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrackType?: number;
     /**
      * 开通版本 lite:轻量版, basic:基础版, standard:标准版
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
     /**
      * 是否开启企业认证
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductCertify?: number;
 }
@@ -249,12 +218,10 @@ export interface Quota {
 export interface PlanQRCode {
     /**
      * 二维码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url: string;
     /**
      * 状态，0:未激活 1:已激活 2:已冻结
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: number;
 }
@@ -268,77 +235,62 @@ export interface ScanLog {
     LogId?: number;
     /**
      * 微信openid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Openid?: string;
     /**
      * 微信昵称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Nickname?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: string;
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
      * 商户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
      * ip地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip?: string;
     /**
      * 国家
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Country?: string;
     /**
      * 省份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Province?: string;
     /**
      * 城市
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     City?: string;
     /**
      * 县/区
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     District?: string;
     /**
      * 微信 unionid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Unionid?: string;
     /**
      * 首次扫码 0:否, 1:是
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     First?: number;
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
@@ -347,17 +299,14 @@ export interface ScanLog {
     Type?: number;
     /**
      * 商户名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantName?: string;
     /**
      * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 产品Logo
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductLogo?: string;
     /**
@@ -406,7 +355,6 @@ export interface DescribeProductsRequest {
 export interface CreateCorporationOrderResponse {
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
@@ -420,7 +368,6 @@ export interface CreateCorporationOrderResponse {
 export interface ModifyProductResponse {
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
@@ -492,17 +439,14 @@ export interface ModifyCustomRuleRequest {
 export interface CodePart {
     /**
      * 码段名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name: string;
     /**
      * 码段类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: string;
     /**
      * 码段内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
     /**
@@ -511,7 +455,6 @@ export interface CodePart {
     Length: number;
     /**
      * 扩展字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ext: string;
 }
@@ -521,117 +464,94 @@ export interface CodePart {
 export interface CodePack {
     /**
      * 码id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackId?: string;
     /**
      * 企业id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
      * 商户id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
      * 制码状态 init: 初始化, pending: 执行中, done: 完成, error: 失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
     /**
      * 执行日志
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Log?: string;
     /**
      * 创建人
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateUser?: string;
     /**
      * 码数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Amount?: number;
     /**
      * 防伪码长度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeLength?: number;
     /**
      * 码类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeType?: string;
     /**
      * 是否暗码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Cipher?: number;
     /**
      * [弃用] 文字码地址，通过另一个接口查
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TextUrl?: string;
     /**
      * [弃用] 二维码地址，通过另一个接口查
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackUrl?: string;
     /**
      * 商户名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantName?: string;
     /**
      * 码规则类型 0: 默认, 1: 自定义
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleType?: number;
     /**
      * 自定义码规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomId?: string;
     /**
      * 码包类型 0: 普通码包 1: 层级码包
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackType?: number;
     /**
      * 生码层级
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackLevel?: number;
     /**
      * 层级码配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackSpec?: Array<PackSpec>;
     /**
      * 商品名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductName?: string;
     /**
      * 商品规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductSpecification?: string;
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
@@ -641,27 +561,22 @@ export interface CodePack {
     RelateType?: number;
     /**
      * 场景码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneCode?: number;
     /**
      * 码规则
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeRule?: string;
     /**
      * 已使用码数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedAmount?: number;
     /**
      * 开始流水号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialStart?: number;
     /**
      * 结束流水号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialEnd?: number;
 }
@@ -803,42 +718,39 @@ export interface CustomRule {
     /**
      * 码规则ID
      */
-    CustomId: string;
+    CustomId?: string;
     /**
      * 码规则名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CorpId: number;
+    CorpId?: number;
     /**
      * 商户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MerchantId: string;
+    MerchantId?: string;
     /**
      * 码ID长度
      */
-    CodeLength: number;
+    CodeLength?: number;
     /**
      * 规则状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 码段配置
      */
-    CodeParts: Array<CodePart>;
+    CodeParts?: Array<CodePart>;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeProducts返回参数结构体
@@ -846,12 +758,10 @@ export interface CustomRule {
 export interface DescribeProductsResponse {
     /**
      * 商品列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Products?: Array<Product>;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1284,7 +1194,6 @@ export interface DescribeAgentCorpsResponse {
 export interface ModifyTraceDataRanksResponse {
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
@@ -1340,12 +1249,10 @@ export interface DescribeCodeBatchByIdResponse {
 export interface DescribeCorpQuotasResponse {
     /**
      * 子企业额度使用情况
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpQuotas?: Array<CorpQuota>;
     /**
      * 记录总数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Total?: number;
     /**
@@ -1359,9 +1266,8 @@ export interface DescribeCorpQuotasResponse {
 export interface DescribeCodePackStatusResponse {
     /**
      * 码包状态 init: 初始化, pending: 执行中, done: 完成, error: 失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1403,7 +1309,6 @@ export interface TraceData {
     Type: number;
     /**
      * 码值，跟码类型一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code: string;
     /**
@@ -1420,32 +1325,26 @@ export interface TraceData {
     PhaseName: string;
     /**
      * 溯源时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TraceTime: string;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime: string;
     /**
      * 上链状态 0: 未上链 1: 上链中 2: 已上链 -1: 异常
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChainStatus: number;
     /**
      * 上链时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChainTime: string;
     /**
      * 上链数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChainData: ChainData;
     /**
      * 溯源阶段配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PhaseData: PhaseData;
     /**
@@ -1488,22 +1387,18 @@ export interface PackSpec {
     Amount: number;
     /**
      * 码规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomId?: string;
     /**
      * 码段配置
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeParts?: Array<CodePart>;
     /**
      * 包装单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Unit?: string;
     /**
      * 场景值
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneCode?: number;
 }
@@ -1513,7 +1408,6 @@ export interface PackSpec {
 export interface ModifyCustomRuleResponse {
     /**
      * 码规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomId?: string;
     /**
@@ -1527,7 +1421,6 @@ export interface ModifyCustomRuleResponse {
 export interface ModifyMerchantResponse {
     /**
      * 商户标识码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
@@ -1541,9 +1434,8 @@ export interface ModifyMerchantResponse {
 export interface DescribeCodesByPackResponse {
     /**
      * 码列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Codes: Array<CodeItem>;
+    Codes?: Array<CodeItem>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1555,7 +1447,6 @@ export interface DescribeCodesByPackResponse {
 export interface CreateProductResponse {
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
@@ -1731,12 +1622,10 @@ export interface DescribeCodeBatchesResponse {
 export interface Chain {
     /**
      * 码url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code: string;
     /**
      * 上链数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data: Array<ChainValue>;
 }
@@ -2008,17 +1897,14 @@ export interface ReportBatchCallbackStatusResponse {
 export interface ChainData {
     /**
      * 区块hash
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BlockHash?: string;
     /**
      * 区块高度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BlockHeight?: string;
     /**
      * 区块时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BlockTime?: string;
 }
@@ -2028,32 +1914,26 @@ export interface ChainData {
 export interface PhaseData {
     /**
      * 启用头
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeadEnabled?: boolean;
     /**
      * 标题
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeadTitle?: string;
     /**
      * 标识符
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 小程序AppId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 小程序AppPath
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppPath?: string;
     /**
      * 小程序名称AppName
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppName?: string;
 }
@@ -2128,7 +2008,6 @@ export interface ModifyTraceDataRanksRequest {
 export interface ModifyCustomRuleStatusResponse {
     /**
      * 码规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomId?: string;
     /**
@@ -2184,7 +2063,6 @@ export interface ModifyMerchantRequest {
 export interface DescribeTmpTokenResponse {
     /**
      * 临时token
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Token?: string;
     /**
@@ -2211,9 +2089,8 @@ export interface DescribeCodePackUrlRequest {
 export interface DeleteProductResponse {
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductId: string;
+    ProductId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2238,17 +2115,14 @@ export interface CreateChainBatchRequest {
 export interface OutputAuthorizedTransfer {
     /**
      * 推送状态，0表示成功。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 错误码。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
      * 错误信息描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
 }
@@ -2258,7 +2132,6 @@ export interface OutputAuthorizedTransfer {
 export interface DeleteTraceDataResponse {
     /**
      * 溯源id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TraceId?: string;
     /**
@@ -2302,7 +2175,6 @@ export interface CreateCodePackResponse {
 export interface DescribeMerchantByIdResponse {
     /**
      * 商户信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Merchant?: Merchant;
     /**
@@ -2360,7 +2232,6 @@ export interface CreateTraceDataResponse {
 export interface DescribeCustomRuleByIdResponse {
     /**
      * 码规则信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRule?: CustomRule;
     /**
@@ -2374,12 +2245,10 @@ export interface DescribeCustomRuleByIdResponse {
 export interface DescribeCodeBatchsResponse {
     /**
      * 批次列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeBatchs?: Array<CodeBatch>;
     /**
      * 总条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2393,7 +2262,6 @@ export interface DescribeCodeBatchsResponse {
 export interface CreateCustomRuleResponse {
     /**
      * 码规则ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomId?: string;
     /**
@@ -2490,7 +2358,6 @@ export interface DescribeJobFileUrlRequest {
 export interface CreateTraceCodesAsyncResponse {
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
@@ -2529,7 +2396,6 @@ export interface RawScanLog {
     LogId?: number;
     /**
      * 微信小程序openid
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Openid?: string;
     /**
@@ -2546,32 +2412,26 @@ export interface RawScanLog {
     CorpId?: number;
     /**
      * 商户ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
      * 商品ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId?: string;
     /**
      * 批次ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
     /**
      * 省份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Province?: string;
     /**
      * 地市
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     City?: string;
     /**
      * 区/县
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     District?: string;
 }
@@ -2673,12 +2533,10 @@ export interface DescribeProductByIdRequest {
 export interface DescribeTraceCodesResponse {
     /**
      * 标识列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TraceCodes?: Array<TraceCode>;
     /**
      * 条数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -2692,32 +2550,26 @@ export interface DescribeTraceCodesResponse {
 export interface UsageQuota {
     /**
      * 企业ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpId?: number;
     /**
      * 商户配额
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FactoryCnt?: number;
     /**
      * 商品数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ItemCnt?: number;
     /**
      * 溯源码量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TrackCnt?: number;
     /**
      * 营销码额度
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SaleCnt?: number;
     /**
      * 区块链上链次数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChainCnt?: number;
     /**
@@ -2728,7 +2580,6 @@ export interface UsageQuota {
     RiskCnt?: number;
     /**
      * 时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
 }
@@ -2925,41 +2776,39 @@ export interface Merchant {
     /**
      * 商户标识码
      */
-    MerchantId: string;
+    MerchantId?: string;
     /**
      * 企业id
      */
-    CorpId: number;
+    CorpId?: number;
     /**
      * 商户名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 商户码规则
      */
-    CodeRule: string;
+    CodeRule?: string;
     /**
      * 码来源类型 0: 安心平台 1: 第三方码
      */
-    CodeType: number;
+    CodeType?: number;
     /**
      * 第三方码域名前缀
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CodeUrl: string;
+    CodeUrl?: string;
 }
 /**
  * 商品信息
@@ -2987,17 +2836,14 @@ export interface Product {
     ProductCode?: string;
     /**
      * 商品规格
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Specification?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
      * 商品图片
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Logo?: Array<string>;
     /**
@@ -3010,7 +2856,6 @@ export interface Product {
     UpdateTime?: string;
     /**
      * 预留字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ext?: Ext;
     /**
@@ -3019,7 +2864,6 @@ export interface Product {
     MerchantName?: string;
     /**
      * 认证状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CertState?: number;
 }
@@ -3090,17 +2934,14 @@ export interface TraceCode {
     Level?: number;
     /**
      * 码层级详情
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PackSpec?: Array<PackSpec>;
     /**
      * 场景码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneCode?: number;
     /**
      * 流水码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialCode?: number;
 }
@@ -3123,7 +2964,6 @@ export interface DescribeScanStatsResponse {
 export interface CreateMerchantResponse {
     /**
      * 商户标识码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
@@ -3137,12 +2977,10 @@ export interface CreateMerchantResponse {
 export interface DescribeMerchantsResponse {
     /**
      * 商户列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Merchants?: Array<Merchant>;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -3202,17 +3040,14 @@ export interface DescribeTraceDataListRequest {
 export interface ChainValue {
     /**
      * 标题名字
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label: string;
     /**
      * 类型，文字："text"，图片："image"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type: string;
     /**
      * 值，文字类型："abc"，图片类型：""/images/img.png"
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -3222,7 +3057,6 @@ export interface ChainValue {
 export interface DeleteMerchantResponse {
     /**
      * 商户标识码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MerchantId?: string;
     /**
@@ -3288,7 +3122,6 @@ export interface DescribeTraceDataByIdRequest {
 export interface DescribeProductByIdResponse {
     /**
      * 商品信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Product?: Product;
     /**
@@ -3343,9 +3176,8 @@ export interface DescribeCodePacksRequest {
 export interface DescribeJobFileUrlResponse {
     /**
      * 码包地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3357,12 +3189,10 @@ export interface DescribeJobFileUrlResponse {
 export interface DescribeCustomRulesResponse {
     /**
      * 码规则列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomRules?: Array<CustomRule>;
     /**
      * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -3402,37 +3232,30 @@ export interface ModifyCodeBatchResponse {
 export interface PlanQRCodeRecord {
     /**
      * 二维码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url: string;
     /**
      * OpenID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpenId: string;
     /**
      * 扫码时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanTime: string;
     /**
      * IP 地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Ip: string;
     /**
      * 国家
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Country: string;
     /**
      * 省份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Province: string;
     /**
      * 城市
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     City: string;
 }
@@ -3451,19 +3274,16 @@ export interface ModifyTraceCodeResponse {
 export interface DescribeCodePackUrlResponse {
     /**
      * 文字码包地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 图片码包地址，可能为空
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImgUrl: string;
+    ImgUrl?: string;
     /**
      * 文字码包Key，用于上传导入
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileKey: string;
+    FileKey?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

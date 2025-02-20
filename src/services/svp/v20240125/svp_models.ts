@@ -155,12 +155,10 @@ export interface SavingPlanOverviewDetail {
   Region?: Array<string>
   /**
    * 支付类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayType?: number
   /**
    * 购买时间 yyyy-mm-dd HH:mm:ss格式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BuyTime?: string
 }
@@ -417,7 +415,6 @@ export interface SavingPlanUsageDetail {
   CostAmount?: string
   /**
    * 地域
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: Array<string>
 }

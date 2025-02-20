@@ -1,4 +1,3 @@
-export { aa } from "./aa"
 export { aai } from "./aai"
 export { aca } from "./aca"
 export { acp } from "./acp"
