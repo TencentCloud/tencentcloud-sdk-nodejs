@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyApmInstanceRequest, CreateApmInstanceRequest, ModifyGeneralApmApplicationConfigRequest, DescribeServiceOverviewResponse, TerminateApmInstanceRequest, DescribeApmInstancesResponse, DescribeTagValuesResponse, DescribeGeneralSpanListResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeTagValuesRequest, DescribeMetricRecordsResponse, DescribeGeneralSpanListRequest, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralApmApplicationConfigResponse, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, DescribeGeneralApmApplicationConfigRequest, ModifyApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse, ModifyGeneralApmApplicationConfigResponse, TerminateApmInstanceResponse } from "./apm_models";
+import { ModifyApmInstanceRequest, CreateApmInstanceRequest, ModifyGeneralApmApplicationConfigRequest, DescribeServiceOverviewResponse, TerminateApmInstanceRequest, DescribeApmInstancesResponse, DescribeTagValuesResponse, DescribeGeneralSpanListResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeTagValuesRequest, DescribeMetricRecordsResponse, DescribeGeneralOTSpanListResponse, DescribeGeneralSpanListRequest, DescribeGeneralOTSpanListRequest, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralApmApplicationConfigResponse, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, DescribeGeneralApmApplicationConfigRequest, ModifyApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse, ModifyGeneralApmApplicationConfigResponse, TerminateApmInstanceResponse } from "./apm_models";
 /**
  * apm client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 获取 APM 接入点
      */
     DescribeApmAgent(req: DescribeApmAgentRequest, cb?: (error: string, rep: DescribeApmAgentResponse) => void): Promise<DescribeApmAgentResponse>;
+    /**
+     * 通用查询 OpenTelemetry 调用链列表
+     */
+    DescribeGeneralOTSpanList(req: DescribeGeneralOTSpanListRequest, cb?: (error: string, rep: DescribeGeneralOTSpanListResponse) => void): Promise<DescribeGeneralOTSpanListResponse>;
     /**
      * 修改APM业务系统接口
      */

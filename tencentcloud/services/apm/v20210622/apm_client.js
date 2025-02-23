@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApmAgent", req, cb);
     }
     /**
+     * 通用查询 OpenTelemetry 调用链列表
+     */
+    async DescribeGeneralOTSpanList(req, cb) {
+        return this.request("DescribeGeneralOTSpanList", req, cb);
+    }
+    /**
      * 修改APM业务系统接口
      */
     async ModifyApmInstance(req, cb) {

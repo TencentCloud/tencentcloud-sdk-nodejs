@@ -43,9 +43,11 @@ import {
   APMKVItem,
   OrderBy,
   DescribeMetricRecordsResponse,
+  DescribeGeneralOTSpanListResponse,
   DescribeGeneralSpanListRequest,
   Filter,
   APMKV,
+  DescribeGeneralOTSpanListRequest,
   DescribeApmAgentRequest,
   DescribeMetricRecordsRequest,
   DescribeGeneralApmApplicationConfigResponse,
@@ -120,6 +122,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApmAgentResponse) => void
   ): Promise<DescribeApmAgentResponse> {
     return this.request("DescribeApmAgent", req, cb)
+  }
+
+  /**
+   * 通用查询 OpenTelemetry 调用链列表
+   */
+  async DescribeGeneralOTSpanList(
+    req: DescribeGeneralOTSpanListRequest,
+    cb?: (error: string, rep: DescribeGeneralOTSpanListResponse) => void
+  ): Promise<DescribeGeneralOTSpanListResponse> {
+    return this.request("DescribeGeneralOTSpanList", req, cb)
   }
 
   /**

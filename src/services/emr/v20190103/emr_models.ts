@@ -1339,10 +1339,37 @@ export interface LoadAutoScaleStrategy {
    */
   MeasureMethod?: string
   /**
+   * 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployDesc?: Array<string>
+  /**
+   * 启动进程列表，例如["NodeManager"]。
+   */
+  ServiceNodeDesc?: string
+  /**
+   * 启动进程列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
    * 多指标触发条件
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadMetricsConditions?: LoadMetricsConditions
+  /**
+   * 伸缩组Id
+   */
+  GroupId?: number
+  /**
+   * soft例如yarn
+   */
+  Soft?: string
 }
 
 /**

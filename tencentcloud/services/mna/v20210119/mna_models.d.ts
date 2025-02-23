@@ -406,77 +406,63 @@ export interface GetGroupListRequest {
 export interface HardwareInfo {
     /**
      * 设备ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceId?: string;
     /**
      * 设备名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceName?: string;
     /**
      * 激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActiveTime?: string;
     /**
      * 最后在线时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastOnlineTime?: string;
     /**
      * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 厂商备注
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VendorDescription?: string;
     /**
      * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
   注：后续将废弃此参数，新接入请使用LicensePayMode和Payer
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
      * 硬件序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SN?: string;
     /**
      * license授权有效期
   0：月度授权
   1：永久授权
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicensePayMode?: number;
     /**
      * 付费方
   0：客户付费
   1：厂商付费
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Payer?: number;
     /**
      * 设备分组ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupId?: string;
     /**
      * 设备分组名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
      * 设备无流量包处理方式，0: 按量付费，1: 截断加速
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowTrunc?: number;
 }
@@ -821,7 +807,6 @@ export interface GroupInfo {
     UpdateTime?: string;
     /**
      * 分组描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -877,7 +862,6 @@ export interface VendorHardware {
     Status?: number;
     /**
      * 激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ActiveTime?: string;
     /**
@@ -895,7 +879,6 @@ export interface VendorHardware {
     LicenseChargingMode?: number;
     /**
      * 最后在线时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LastOnlineTime?: string;
     /**
@@ -1116,19 +1099,16 @@ export interface GetFlowStatisticRequest {
 export interface SlotNetInfo {
     /**
      * 网卡名
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetInfoName: string;
+    NetInfoName?: string;
     /**
      * 公网IP
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIP: string;
+    PublicIP?: string;
     /**
      * 指标数据（bps/ms/%）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Current: number;
+    Current?: number;
 }
 /**
  * 设备网络状态信息
@@ -1619,7 +1599,6 @@ export interface FlowPackageInfo {
     Status?: number;
     /**
      * 购买时间，Unix时间戳格式，单位：秒
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
@@ -1950,7 +1929,6 @@ export interface L3ConnInfo {
     Enable?: boolean;
     /**
      * 互通规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
 }
@@ -2184,7 +2162,6 @@ export interface DevicePayModeInfo {
     PayModeDesc?: string;
     /**
      * 流量包ID，仅当付费模式为流量包类型时才有。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
 }
@@ -2195,17 +2172,15 @@ export interface MonitorData {
     /**
      * 时间点：s
      */
-    Time: string;
+    Time?: string;
     /**
      * 业务指标（bps/ms/%）
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BusinessMetrics: number;
+    BusinessMetrics?: number;
     /**
      * 网卡状态信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlotNetInfo: Array<SlotNetInfo>;
+    SlotNetInfo?: Array<SlotNetInfo>;
 }
 /**
  * DeleteDevice返回参数结构体
@@ -2270,7 +2245,6 @@ export interface AddHardwareRequest {
 export interface Hardware {
     /**
      * 硬件序列号
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SN: string;
     /**
@@ -2278,17 +2252,14 @@ export interface Hardware {
   1，租户付费
   2，厂商月付费
   3，厂商永久授权
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode: number;
     /**
      * 设备描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 硬件ID，入参无需传递
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HardwareId?: string;
 }

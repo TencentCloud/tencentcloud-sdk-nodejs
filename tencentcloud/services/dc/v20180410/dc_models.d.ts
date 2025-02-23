@@ -470,6 +470,10 @@ export interface AccessPoint {
      * 端口规格信息。
      */
     AvailablePortInfo?: Array<PortSpecification>;
+    /**
+     * 接入点地址。
+     */
+    Address?: string;
 }
 /**
  * ApplyInternetAddress返回参数结构体
