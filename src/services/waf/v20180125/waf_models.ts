@@ -1638,7 +1638,8 @@ export interface Strategy {
    * 匹配字段
 
     匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
-<table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr></tbody></table>
+<table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>CONTENT_LENGTH（Content-length）</td><td>支持参数录入</td><td>numgt（数值大于）<br/>numlt（数值小于）<br/>numeq（数值等于）<br/></td><td>请输入0-9999999999999之间的整数</td></tr><tr><td>IP_GEO（来源IP归属地）</td><td>支持参数录入</td><td>geo_in（属于）<br/>geo_not_in（不属于）<br/></td><td>请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}]</td></tr>
+</tbody></table>
    */
   Field: string
   /**
@@ -1658,6 +1659,11 @@ export interface Strategy {
         len_lt （ 长度小于）
         ipmatch （ 属于）
         ipnmatch （ 不属于）
+        numgt （ 数值大于）
+        numlt （ 数值小于）
+        numeq （ 数值等于）
+        geo_in （ IP地理属于）
+        geo_not_in （ IP地理不属于）
     各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
 
    */
@@ -1835,14 +1841,17 @@ export interface ModifyApiSecEventChangeRequest {
 export interface JobDateTime {
   /**
    * 定时执行的时间参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Timed?: Array<TimedJob>
   /**
    * 周期执行的时间参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Cron?: Array<CronJob>
   /**
    * 时区
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeTZone?: string
 }
@@ -2212,6 +2221,14 @@ https：使用https协议回源
    * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   GmSSLId?: string
+  /**
+   * 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源
+   */
+  UpstreamPolicy?: number
+  /**
+   * 分流回源时生效，分流回源的规则。
+   */
+  UpstreamRules?: Array<UpstreamRule>
 }
 
 /**
@@ -2558,6 +2575,10 @@ export interface DescribeCustomRulesRspRuleListItem {
    * 域名
    */
   Domain?: string
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -4085,6 +4106,7 @@ export interface DeleteIpAccessControlResponse {
 export interface BatchIpAccessControlItem {
   /**
    * mongo表自增Id
+   * @deprecated
    */
   Id?: string
   /**
@@ -4093,6 +4115,7 @@ export interface BatchIpAccessControlItem {
   ActionType?: number
   /**
    * 黑白名单的IP
+   * @deprecated
    */
   Ip?: string
   /**
@@ -4100,7 +4123,7 @@ export interface BatchIpAccessControlItem {
    */
   Note?: string
   /**
-   * 添加路径
+   * batch为批量域名，batch-group为防护对象组
    */
   Source?: string
   /**
@@ -4143,6 +4166,10 @@ export interface BatchIpAccessControlItem {
    * 生效状态
    */
   ValidStatus?: number
+  /**
+   * 防护对象组ID列表，如果绑定的是防护对象组
+   */
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -4462,7 +4489,7 @@ export interface DescribeIpAccessControlRequest {
    */
   Ip?: string
   /**
-   * 生效状态
+   * 生效状态，1表示生效中，2表示过期，0表示全部
    */
   ValidStatus?: number
   /**
@@ -4478,7 +4505,7 @@ export interface DescribeIpAccessControlRequest {
    */
   RuleId?: number
   /**
-   * 定时任务类型筛选0 1 2 3 4
+   * 0表示全部，1表示永久生效，2表示定时生效，3表示周粒度生效，4表示月粒度生效
    */
   TimerType?: number
 }
@@ -4606,7 +4633,7 @@ export interface DescribeIpHitItemsRequest {
    */
   Skip?: number
   /**
-   * 限制数目
+   * 限制数目，category不等于threat_intelligence时，该值需要必传
    */
   Limit?: number
   /**
@@ -4618,7 +4645,7 @@ export interface DescribeIpHitItemsRequest {
    */
   Sort?: string
   /**
-   * IP
+   * IP,category传threat_intelligence的时候，该值必传
    */
   Ip?: string
   /**
@@ -6872,7 +6899,7 @@ export interface ModifyAntiFakeUrlResponse {
  */
 export interface DescribeBatchIpAccessControlRequest {
   /**
-   * 筛选条件，支持 ActionType，可选的值为40（白名单）42（黑名单），ValidStatus，可选的值为1（生效）0（过期）
+   * 筛选条件，支持 ActionType（可选的值为40：白名单，42：黑名单），ValidStatus（可选的值0：全部，1：生效，2：过期），Ip，Domains（域名列表），GroupId（防护对象组ID），GroupName（防护对象组名），RuleId（规则ID），TimerType（生效方式，1：永久生效，2：定时生效，3：按周周期生效，4：按月周期生效）
    */
   Filters: Array<FiltersItemNew>
   /**
@@ -7644,6 +7671,38 @@ export interface DeleteCustomRuleResponse {
 }
 
 /**
+ * SAASWAF规则回源时的规则数据结构
+ */
+export interface UpstreamRule {
+  /**
+   * 匹配的关键字。目前支持host、uri两种
+   */
+  KeyName: string
+  /**
+   * 逻辑符号。
+equal：等于
+not equal：不等于
+belong：属于
+not belong：不属于
+   */
+  Symbol: string
+  /**
+   * 匹配的内容。equal和not equal时，数组只能有一个元素
+   */
+  ContentList: Array<string>
+  /**
+   * 规则匹配后生效的回源地址。
+   */
+  AddressList: Array<string>
+  /**
+   * 回源负载均衡类型，仅多个回源地址时生效。
+0：轮询
+1：IP_HASH
+   */
+  BalanceType: number
+}
+
+/**
  * DescribeHistogram请求参数结构体
  */
 export interface DescribeHistogramRequest {
@@ -7762,7 +7821,7 @@ export interface UpsertCCRuleRequest {
    */
   Url: string
   /**
-   * 匹配方法，0表示等于，1表示前缀匹配，2表示包含
+   * 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含
    */
   MatchFunc: number
   /**
@@ -7778,7 +7837,7 @@ export interface UpsertCCRuleRequest {
    */
   ValidTime: number
   /**
-   * 附加参数
+   * [{\"key\":\"Method\",\"args\":[\"=R0VU\"],\"match\":\"0\",\"encodeflag\":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。
    */
   OptionsArr?: string
   /**
@@ -8259,6 +8318,7 @@ export interface ModifyCustomRuleRequest {
   /**
    * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。
 默认是"geoip,cc,owasp,ai,antileakage"
+   * @deprecated
    */
   Bypass?: string
   /**
@@ -8291,6 +8351,10 @@ export interface ModifyCustomRuleRequest {
    * 拦截页面id
    */
   PageId?: string
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -8751,7 +8815,7 @@ export interface ModifyCustomWhiteRuleRequest {
    */
   SortId: number
   /**
-   * 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。
+   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
    */
   ExpireTime: number
   /**
@@ -8829,10 +8893,6 @@ export interface AddCustomWhiteRuleRequest {
    */
   SortId: string
   /**
-   * 过期时间
-   */
-  ExpireTime: string
-  /**
    * 策略详情
    */
   Strategies: Array<Strategy>
@@ -8841,9 +8901,13 @@ export interface AddCustomWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 放行的详情
+   * 放行的模块，多个模块之间用逗号连接。支持的模块：acl（自定义规则）、owasp（规则引擎）、webshell（恶意文件检测）、geoip（地域封禁）、bwip（IP黑白名单）、cc、botrpc（BOT防护）、antileakage（信息防泄露）、api（API安全）、ai（AI引擎）、ip_auto_deny（IP封禁）、applet（小程序流量风控）
    */
   Bypass: string
+  /**
+   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
+   */
+  ExpireTime?: string
   /**
    * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
    */
@@ -9129,6 +9193,16 @@ https：使用https协议回源
    * 拨测状态。 0: 禁用拨测, 1: 启用拨测
    */
   ProbeStatus?: number
+  /**
+   * 回源策略。
+0：负载均衡回源
+1：分流回源
+   */
+  UpstreamPolicy?: number
+  /**
+   * 分流回源策略
+   */
+  UpstreamRules?: Array<UpstreamRule>
 }
 
 /**
@@ -9409,6 +9483,14 @@ cdn-waf：CDN上的Web防护能力
    * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   GmSSLId?: string
+  /**
+   * 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源
+   */
+  UpstreamPolicy?: number
+  /**
+   * 分流回源时生效，分流回源的规则。
+   */
+  UpstreamRules?: Array<UpstreamRule>
 }
 
 /**
@@ -9934,6 +10016,7 @@ export interface AddCustomRuleRequest {
   Edition?: string
   /**
    * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。默认是"geoip,cc,owasp,ai,antileakage"
+   * @deprecated
    */
   Bypass?: string
   /**
@@ -9964,6 +10047,10 @@ export interface AddCustomRuleRequest {
    * 拦截页面id
    */
   PageId?: string
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**

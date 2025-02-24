@@ -48,14 +48,15 @@ import {
   KeyValue,
   DescribeServiceNodeInfosResponse,
   EmrProductConfigDetail,
-  DescribeInstancesResponse,
+  ResetYarnConfigRequest,
+  DayRepeatStrategy,
   DescribeTrinoQueryInfoResponse,
   PriceResult,
   TrinoQueryInfo,
   PreferredSchedulingTerm,
   SparkQuery,
   Dps,
-  TerminateTasksResponse,
+  DescribeSparkQueriesRequest,
   DeleteAutoScaleStrategyResponse,
   OverviewRow,
   DiskSpec,
@@ -68,14 +69,14 @@ import {
   ModifyResourcesTagsResponse,
   CreateCloudInstanceResponse,
   ScaleOutInstanceRequest,
-  ResetYarnConfigRequest,
+  DescribeInstanceRenewNodesResponse,
   KyuubiQueryInfo,
   DescribeHBaseTableOverviewResponse,
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyAutoScaleStrategyRequest,
   FlowParamsDesc,
   AttachDisksRequest,
-  DescribeSparkQueriesRequest,
+  DescribeInstancesResponse,
   ModifyYarnDeployResponse,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
@@ -143,15 +144,15 @@ import {
   DescribeClusterFlowStatusDetailRequest,
   DescribeUsersForUserManagerRequest,
   TerminateClusterNodesResponse,
-  ConfigSetInfo,
+  DescribeDAGInfoResponse,
   DiffDetail,
   DescribeInsightListRequest,
-  DescribeYarnScheduleHistoryRequest,
+  DescribeSLInstanceListRequest,
   StartStopServiceOrMonitorResponse,
   DescribeHiveQueriesResponse,
   ResizeDataDisksResponse,
   DescribeYarnQueueRequest,
-  DescribeInstanceRenewNodesResponse,
+  ConfigSetInfo,
   ModifyResourceRequest,
   GroupGlobalConfs,
   ServiceNodeDetailInfo,
@@ -159,12 +160,13 @@ import {
   CreateSLInstanceResponse,
   SetNodeResourceConfigDefaultRequest,
   DescribeYarnScheduleHistoryResponse,
+  DescribeDAGInfoRequest,
   DescribeAutoScaleGroupGlobalConfResponse,
   Resource,
-  DescribeEmrApplicationStaticsRequest,
+  ResetYarnConfigResponse,
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
-  InquiryPriceUpdateInstanceResponse,
+  DescribeYarnScheduleHistoryRequest,
   NewResourceSpec,
   DiskGroup,
   ScaleOutNodeConfig,
@@ -179,6 +181,7 @@ import {
   MetricTags,
   ExternalAccess,
   ModifyResourceSchedulerRequest,
+  TableSchemaItem,
   LoginSettings,
   RunJobFlowRequest,
   DescribeKyuubiQueryInfoRequest,
@@ -193,7 +196,7 @@ import {
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
   DescribeCvmQuotaResponse,
-  DescribeSLInstanceListRequest,
+  DAGInfo,
   CreateClusterRequest,
   CreateCloudInstanceRequest,
   AddMetricScaleStrategyResponse,
@@ -242,7 +245,7 @@ import {
   ModifyResourcePoolsResponse,
   ShortNodeInfo,
   Period,
-  DayRepeatStrategy,
+  DescribeEmrApplicationStaticsRequest,
   ModifyInstanceBasicRequest,
   DescribeYarnApplicationsResponse,
   DescribeUsersForUserManagerResponse,
@@ -280,7 +283,7 @@ import {
   PartDetailPriceItem,
   ExternalService,
   RestartPolicy,
-  ModifyYarnQueueV2Response,
+  InquiryPriceUpdateInstanceResponse,
   ClusterExternalServiceInfo,
   SoftDependInfo,
   ModifyAutoScaleStrategyResponse,
@@ -296,10 +299,9 @@ import {
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   Item,
-  ResetYarnConfigResponse,
   SetNodeResourceConfigDefaultResponse,
   DescribeStarRocksQueryInfoResponse,
-  TableSchemaItem,
+  ModifyYarnQueueV2Response,
   ConfigModifyInfoV2,
   ModifyUserManagerPwdRequest,
   InquiryPriceScaleOutInstanceResponse,
@@ -312,6 +314,7 @@ import {
   NodeSelectorTerm,
   DescribeTrinoQueryInfoRequest,
   EmrPrice,
+  TerminateTasksResponse,
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
   DescribeAutoScaleRecordsRequest,
@@ -596,13 +599,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 缩容Task节点
+   * 查询DAG信息
    */
-  async TerminateTasks(
-    req: TerminateTasksRequest,
-    cb?: (error: string, rep: TerminateTasksResponse) => void
-  ): Promise<TerminateTasksResponse> {
-    return this.request("TerminateTasks", req, cb)
+  async DescribeDAGInfo(
+    req: DescribeDAGInfoRequest,
+    cb?: (error: string, rep: DescribeDAGInfoResponse) => void
+  ): Promise<DescribeDAGInfoResponse> {
+    return this.request("DescribeDAGInfo", req, cb)
   }
 
   /**
@@ -685,6 +688,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUsersForUserManagerResponse) => void
   ): Promise<AddUsersForUserManagerResponse> {
     return this.request("AddUsersForUserManager", req, cb)
+  }
+
+  /**
+   * 缩容Task节点
+   */
+  async TerminateTasks(
+    req: TerminateTasksRequest,
+    cb?: (error: string, rep: TerminateTasksResponse) => void
+  ): Promise<TerminateTasksResponse> {
+    return this.request("TerminateTasks", req, cb)
   }
 
   /**

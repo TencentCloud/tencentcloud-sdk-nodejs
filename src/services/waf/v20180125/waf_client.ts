@@ -318,6 +318,7 @@ import {
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
+  UpstreamRule,
   DescribeHistogramRequest,
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,

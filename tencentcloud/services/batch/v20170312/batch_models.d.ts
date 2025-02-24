@@ -294,14 +294,12 @@ export interface SystemDisk {
     DiskSize?: number;
     /**
      * 所属的独享集群ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcId?: string;
     /**
      * 磁盘名称，长度不超过128 个字符。
   
   该参数正在邀测中，暂未开放使用。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskName?: string;
 }

@@ -918,27 +918,34 @@ export interface EmrProductConfigDetail {
     PublicKeyId?: string;
 }
 /**
- * DescribeInstances返回参数结构体
+ * ResetYarnConfig请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface ResetYarnConfigRequest {
     /**
-     * 符合条件的实例总数。
+     * emr集群的英文id
      */
-    TotalCnt?: number;
+    InstanceId: string;
     /**
-     * EMR实例详细信息列表。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 要重置的配置别名，可选值：
+  
+  - capacityLabel：重置标签管理的配置
+  - fair：重置公平调度的配置
+  - capacity：重置容量调度的配置
      */
-    ClusterList?: Array<ClusterInstancesInfo>;
+    Key?: string;
+}
+/**
+ * 弹性扩缩容按天重复任务描述
+ */
+export interface DayRepeatStrategy {
     /**
-     * 实例关联的标签键列表。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 重复任务执行的具体时刻，例如"01:02:00"
      */
-    TagKeys?: Array<string>;
+    ExecuteAtTimeOfDay: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 每隔Step天执行一次
      */
-    RequestId?: string;
+    Step: number;
 }
 /**
  * DescribeTrinoQueryInfo返回参数结构体
@@ -1146,13 +1153,33 @@ export interface Dps {
     Value?: string;
 }
 /**
- * TerminateTasks返回参数结构体
+ * DescribeSparkQueries请求参数结构体
  */
-export interface TerminateTasksResponse {
+export interface DescribeSparkQueriesRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 集群ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 开始时间
+     */
+    StartTime: number;
+    /**
+     * 结束时间
+     */
+    EndTime: number;
+    /**
+     * 分页起始偏移，从0开始
+     */
+    Offset: number;
+    /**
+     * 分页大小，合法范围[1,100]
+     */
+    Limit: number;
+    /**
+     * 执行状态:RUNNING,COMPLETED,FAILED
+     */
+    Status?: Array<string>;
 }
 /**
  * DeleteAutoScaleStrategy返回参数结构体
@@ -1855,21 +1882,27 @@ export interface ScaleOutInstanceRequest {
     ComputeResourceId?: string;
 }
 /**
- * ResetYarnConfig请求参数结构体
+ * DescribeInstanceRenewNodes返回参数结构体
  */
-export interface ResetYarnConfigRequest {
+export interface DescribeInstanceRenewNodesResponse {
     /**
-     * emr集群的英文id
+     * 查询到的节点总数
      */
-    InstanceId: string;
+    TotalCnt?: number;
     /**
-     * 要重置的配置别名，可选值：
-  
-  - capacityLabel：重置标签管理的配置
-  - fair：重置公平调度的配置
-  - capacity：重置容量调度的配置
+     * 节点详细信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key?: string;
+    NodeList?: Array<RenewInstancesInfo>;
+    /**
+     * 用户所有的标签键列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetaInfo?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Kyuubi查询信息
@@ -2028,33 +2061,27 @@ export interface AttachDisksRequest {
     DeleteWithInstance?: boolean;
 }
 /**
- * DescribeSparkQueries请求参数结构体
+ * DescribeInstances返回参数结构体
  */
-export interface DescribeSparkQueriesRequest {
+export interface DescribeInstancesResponse {
     /**
-     * 集群ID
+     * 符合条件的实例总数。
      */
-    InstanceId: string;
+    TotalCnt?: number;
     /**
-     * 开始时间
+     * EMR实例详细信息列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: number;
+    ClusterList?: Array<ClusterInstancesInfo>;
     /**
-     * 结束时间
+     * 实例关联的标签键列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: number;
+    TagKeys?: Array<string>;
     /**
-     * 分页起始偏移，从0开始
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset: number;
-    /**
-     * 分页大小，合法范围[1,100]
-     */
-    Limit: number;
-    /**
-     * 执行状态:RUNNING,COMPLETED,FAILED
-     */
-    Status?: Array<string>;
+    RequestId?: string;
 }
 /**
  * ModifyYarnDeploy返回参数结构体
@@ -3875,51 +3902,22 @@ export interface TerminateClusterNodesResponse {
     RequestId?: string;
 }
 /**
- * 资源调度-配置集信息
+ * DescribeDAGInfo返回参数结构体
  */
-export interface ConfigSetInfo {
+export interface DescribeDAGInfoResponse {
     /**
-     * 配置集名称
+     * 总数，分页查询时使用
      */
-    ConfigSet: string;
+    TotalCount?: number;
     /**
-     * 容量调度器会使用，里面设置了标签相关的配置。key的取值与**DescribeYarnQueue**返回的字段一致。
-  key的取值信息如下：
-  - labelName，标签名称，标签管理里的标签。
-  - capacity，容量，取值为**数字字符串**
-  - maximum-capacity，最大容量，取值为**数字字符串**
+     * Starrocks 查询信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LabelParams?: Array<ItemSeq>;
+    DAGInfoList?: Array<DAGInfo>;
     /**
-     * 设置配置集相关的参数。key的取值与**DescribeYarnQueue**返回的字段一致。
-  ###### 公平调度器
-  key的取值信息如下：
-  - minResources，最大资源量，取值为**YarnResource类型的json串**或**null**
-  - maxResources，最大资源量，取值为**YarnResource类型的json串**或**null**
-  - maxChildResources，能够分配给为未声明子队列的最大资源量，取值为**数字字符串**或**null**
-  - maxRunningApps，最高可同时处于运行的App数量，取值为**数字字符串**或**null**
-  - weight，权重，取值为**数字字符串**或**null**
-  - maxAMShare，App Master最大份额，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
-  
-  ```
-  type YarnResource struct {
-      Vcores *int `json:"vcores"`
-      Memory *int `json:"memory"`
-      Type *string `json:"type"` // 取值为`percent`或`null`当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值。只有maxResources、maxChildResources才可以取值为`percent`
-  }
-  ```
-  
-  ###### 容量调度器
-  key的取值信息如下：
-  - minimum-user-limit-percent，用户最小容量，取值为**YarnResource类型的json串**或**null**，其中数字的范围是[0，100]
-  - user-limit-factor，用户资源因子，取值为**YarnResource类型的json串**或**null**
-  - maximum-applications，最大应用数Max-Applications，取值为**数字字符串**或**null**，其中数字为正整数
-  - maximum-am-resource-percent，最大AM比例，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
-  - default-application-priority，资源池优先级，取值为**数字字符串**或**null**，其中数字为正整数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    BasicParams?: Array<Item>;
+    RequestId?: string;
 }
 /**
  * 动态生成的变更详情
@@ -3974,37 +3972,33 @@ export interface DescribeInsightListRequest {
     Type?: string;
 }
 /**
- * DescribeYarnScheduleHistory请求参数结构体
+ * DescribeSLInstanceList请求参数结构体
  */
-export interface DescribeYarnScheduleHistoryRequest {
+export interface DescribeSLInstanceListRequest {
     /**
-     * 集群id
+     * 实例筛选策略。取值范围：<li>clusterList：表示查询除了已销毁实例之外的实例列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的实例之外的实例列表。</li>
      */
-    InstanceId: string;
+    DisplayStrategy: string;
     /**
-     * 开始时间
-     */
-    StartTime?: number;
-    /**
-     * 结束时间
-     */
-    EndTime?: number;
-    /**
-     * 页码
-     */
-    Limit?: number;
-    /**
-     * 页大小
+     * 页编号，默认值为0，表示第一页。
      */
     Offset?: number;
     /**
-     * 调度器类型 可选值为“ALL”，"Capacity Scheduler", "Fair Scheduler"
+     * 每页返回数量，默认值为10，最大值为100。
      */
-    SchedulerType?: string;
+    Limit?: number;
     /**
-     * 任务类型0:等待执行，1:执行中，2：完成，-1:失败 ，-99:全部
+     * 排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li>
      */
-    TaskState?: number;
+    OrderField?: string;
+    /**
+     * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示升序。</li><li>1：表示降序。</li>默认值为0。
+     */
+    Asc?: number;
+    /**
+     * 自定义查询过滤器。示例：<li>根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]</li><li>根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]</li><li>根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}]</li>
+     */
+    Filters?: Array<Filters>;
 }
 /**
  * StartStopServiceOrMonitor返回参数结构体
@@ -4062,27 +4056,51 @@ export interface DescribeYarnQueueRequest {
     Scheduler: string;
 }
 /**
- * DescribeInstanceRenewNodes返回参数结构体
+ * 资源调度-配置集信息
  */
-export interface DescribeInstanceRenewNodesResponse {
+export interface ConfigSetInfo {
     /**
-     * 查询到的节点总数
+     * 配置集名称
      */
-    TotalCnt?: number;
+    ConfigSet: string;
     /**
-     * 节点详细信息列表
+     * 容量调度器会使用，里面设置了标签相关的配置。key的取值与**DescribeYarnQueue**返回的字段一致。
+  key的取值信息如下：
+  - labelName，标签名称，标签管理里的标签。
+  - capacity，容量，取值为**数字字符串**
+  - maximum-capacity，最大容量，取值为**数字字符串**
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeList?: Array<RenewInstancesInfo>;
+    LabelParams?: Array<ItemSeq>;
     /**
-     * 用户所有的标签键列表
+     * 设置配置集相关的参数。key的取值与**DescribeYarnQueue**返回的字段一致。
+  ###### 公平调度器
+  key的取值信息如下：
+  - minResources，最大资源量，取值为**YarnResource类型的json串**或**null**
+  - maxResources，最大资源量，取值为**YarnResource类型的json串**或**null**
+  - maxChildResources，能够分配给为未声明子队列的最大资源量，取值为**数字字符串**或**null**
+  - maxRunningApps，最高可同时处于运行的App数量，取值为**数字字符串**或**null**
+  - weight，权重，取值为**数字字符串**或**null**
+  - maxAMShare，App Master最大份额，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
+  
+  ```
+  type YarnResource struct {
+      Vcores *int `json:"vcores"`
+      Memory *int `json:"memory"`
+      Type *string `json:"type"` // 取值为`percent`或`null`当值为`percent`时，表示使用的百分比，否则就是使用的绝对数值。只有maxResources、maxChildResources才可以取值为`percent`
+  }
+  ```
+  
+  ###### 容量调度器
+  key的取值信息如下：
+  - minimum-user-limit-percent，用户最小容量，取值为**YarnResource类型的json串**或**null**，其中数字的范围是[0，100]
+  - user-limit-factor，用户资源因子，取值为**YarnResource类型的json串**或**null**
+  - maximum-applications，最大应用数Max-Applications，取值为**数字字符串**或**null**，其中数字为正整数
+  - maximum-am-resource-percent，最大AM比例，取值为**数字字符串**或**null**，其中数字的范围是[0，1]或-1
+  - default-application-priority，资源池优先级，取值为**数字字符串**或**null**，其中数字为正整数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetaInfo?: Array<string>;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    BasicParams?: Array<Item>;
 }
 /**
  * ModifyResource请求参数结构体
@@ -4317,6 +4335,23 @@ export interface DescribeYarnScheduleHistoryResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDAGInfo请求参数结构体
+ */
+export interface DescribeDAGInfoRequest {
+    /**
+     * 集群ID
+     */
+    InstanceID: string;
+    /**
+     * DAG类型，目前只支持STARROCKS
+     */
+    Type: string;
+    /**
+     * 查询ID列表,最大长度为1
+     */
+    IDList: Array<string>;
+}
+/**
  * DescribeAutoScaleGroupGlobalConf返回参数结构体
  */
 export interface DescribeAutoScaleGroupGlobalConfResponse {
@@ -4400,53 +4435,13 @@ export interface Resource {
     DiskNum?: number;
 }
 /**
- * DescribeEmrApplicationStatics请求参数结构体
+ * ResetYarnConfig返回参数结构体
  */
-export interface DescribeEmrApplicationStaticsRequest {
+export interface ResetYarnConfigResponse {
     /**
-     * 集群id
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    InstanceId: string;
-    /**
-     * 起始时间，时间戳（秒）
-     */
-    StartTime?: number;
-    /**
-     * 结束时间，时间戳（秒）
-     */
-    EndTime?: number;
-    /**
-     * 过滤的队列名
-     */
-    Queues?: Array<string>;
-    /**
-     * 过滤的用户名
-     */
-    Users?: Array<string>;
-    /**
-     * 过滤的作业类型
-     */
-    ApplicationTypes?: Array<string>;
-    /**
-     * 分组字段，可选：queue, user, applicationType
-     */
-    GroupBy?: Array<string>;
-    /**
-     * 排序字段，可选：sumMemorySeconds, sumVCoreSeconds, sumHDFSBytesWritten, sumHDFSBytesRead
-     */
-    OrderBy?: string;
-    /**
-     * 是否顺序排序，0-逆序，1-正序
-     */
-    IsAsc?: number;
-    /**
-     * 页号
-     */
-    Offset?: number;
-    /**
-     * 页容量，范围为[10,100]
-     */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeClusterNodes返回参数结构体
@@ -4502,41 +4497,37 @@ export interface DescribeYarnApplicationsRequest {
     Limit: number;
 }
 /**
- * InquiryPriceUpdateInstance返回参数结构体
+ * DescribeYarnScheduleHistory请求参数结构体
  */
-export interface InquiryPriceUpdateInstanceResponse {
+export interface DescribeYarnScheduleHistoryRequest {
     /**
-     * 原价，单位为元。
+     * 集群id
      */
-    OriginalCost?: number;
+    InstanceId: string;
     /**
-     * 折扣价，单位为元。
+     * 开始时间
      */
-    DiscountCost?: number;
+    StartTime?: number;
     /**
-     * 变配的时间单位。取值范围：
-  <li>s：表示秒。</li>
-  <li>m：表示月份。</li>
+     * 结束时间
      */
-    TimeUnit?: string;
+    EndTime?: number;
     /**
-     * 变配的时长。
+     * 页码
      */
-    TimeSpan?: number;
+    Limit?: number;
     /**
-     * 价格详情
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 页大小
      */
-    PriceDetail?: Array<PriceDetail>;
+    Offset?: number;
     /**
-     * 新配置价格
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 调度器类型 可选值为“ALL”，"Capacity Scheduler", "Fair Scheduler"
      */
-    NewConfigPrice?: PriceResult;
+    SchedulerType?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 任务类型0:等待执行，1:执行中，2：完成，-1:失败 ，-99:全部
      */
-    RequestId?: string;
+    TaskState?: number;
 }
 /**
  * 资源描述
@@ -4829,6 +4820,36 @@ export interface ModifyResourceSchedulerRequest {
      * 新的调度器:capacity
      */
     NewValue: string;
+}
+/**
+ * 表格schema信息
+ */
+export interface TableSchemaItem {
+    /**
+     * 列标识
+     */
+    Name?: string;
+    /**
+     * 是否可按该列排序
+     */
+    Sortable?: boolean;
+    /**
+     * 是否可筛选
+     */
+    WithFilter?: boolean;
+    /**
+     * 筛选的候选集
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Candidates?: Array<string>;
+    /**
+     * 是否可点击
+     */
+    Clickable?: boolean;
+    /**
+     * 展示的名字
+     */
+    Title?: string;
 }
 /**
  * 登录设置
@@ -5279,33 +5300,21 @@ export interface DescribeCvmQuotaResponse {
     RequestId?: string;
 }
 /**
- * DescribeSLInstanceList请求参数结构体
+ * DAG信息
  */
-export interface DescribeSLInstanceListRequest {
+export interface DAGInfo {
     /**
-     * 实例筛选策略。取值范围：<li>clusterList：表示查询除了已销毁实例之外的实例列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的实例之外的实例列表。</li>
+     * 查询ID
      */
-    DisplayStrategy: string;
+    ID?: string;
     /**
-     * 页编号，默认值为0，表示第一页。
+     * DAG类型，目前只支持starrocks
      */
-    Offset?: number;
+    Type?: string;
     /**
-     * 每页返回数量，默认值为10，最大值为100。
+     * 返回的DAG的JSON字符串
      */
-    Limit?: number;
-    /**
-     * 排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li>
-     */
-    OrderField?: string;
-    /**
-     * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示升序。</li><li>1：表示降序。</li>默认值为0。
-     */
-    Asc?: number;
-    /**
-     * 自定义查询过滤器。示例：<li>根据ClusterId过滤实例：[{"Name":"ClusterId","Values":["emr-xxxxxxxx"]}]</li><li>根据clusterName过滤实例：[{"Name": "ClusterName","Values": ["cluster_name"]}]</li><li>根据ClusterStatus过滤实例：[{"Name": "ClusterStatus","Values": ["2"]}]</li>
-     */
-    Filters?: Array<Filters>;
+    Content?: string;
 }
 /**
  * CreateCluster请求参数结构体
@@ -6671,17 +6680,53 @@ export interface Period {
     TimeUnit?: string;
 }
 /**
- * 弹性扩缩容按天重复任务描述
+ * DescribeEmrApplicationStatics请求参数结构体
  */
-export interface DayRepeatStrategy {
+export interface DescribeEmrApplicationStaticsRequest {
     /**
-     * 重复任务执行的具体时刻，例如"01:02:00"
+     * 集群id
      */
-    ExecuteAtTimeOfDay: string;
+    InstanceId: string;
     /**
-     * 每隔Step天执行一次
+     * 起始时间，时间戳（秒）
      */
-    Step: number;
+    StartTime?: number;
+    /**
+     * 结束时间，时间戳（秒）
+     */
+    EndTime?: number;
+    /**
+     * 过滤的队列名
+     */
+    Queues?: Array<string>;
+    /**
+     * 过滤的用户名
+     */
+    Users?: Array<string>;
+    /**
+     * 过滤的作业类型
+     */
+    ApplicationTypes?: Array<string>;
+    /**
+     * 分组字段，可选：queue, user, applicationType
+     */
+    GroupBy?: Array<string>;
+    /**
+     * 排序字段，可选：sumMemorySeconds, sumVCoreSeconds, sumHDFSBytesWritten, sumHDFSBytesRead
+     */
+    OrderBy?: string;
+    /**
+     * 是否顺序排序，0-逆序，1-正序
+     */
+    IsAsc?: number;
+    /**
+     * 页号
+     */
+    Offset?: number;
+    /**
+     * 页容量，范围为[10,100]
+     */
+    Limit?: number;
 }
 /**
  * ModifyInstanceBasic请求参数结构体
@@ -8069,9 +8114,37 @@ export interface RestartPolicy {
     IsDefault?: string;
 }
 /**
- * ModifyYarnQueueV2返回参数结构体
+ * InquiryPriceUpdateInstance返回参数结构体
  */
-export interface ModifyYarnQueueV2Response {
+export interface InquiryPriceUpdateInstanceResponse {
+    /**
+     * 原价，单位为元。
+     */
+    OriginalCost?: number;
+    /**
+     * 折扣价，单位为元。
+     */
+    DiscountCost?: number;
+    /**
+     * 变配的时间单位。取值范围：
+  <li>s：表示秒。</li>
+  <li>m：表示月份。</li>
+     */
+    TimeUnit?: string;
+    /**
+     * 变配的时长。
+     */
+    TimeSpan?: number;
+    /**
+     * 价格详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PriceDetail?: Array<PriceDetail>;
+    /**
+     * 新配置价格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewConfigPrice?: PriceResult;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8431,15 +8504,6 @@ export interface Item {
     Value: string;
 }
 /**
- * ResetYarnConfig返回参数结构体
- */
-export interface ResetYarnConfigResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * SetNodeResourceConfigDefault返回参数结构体
  */
 export interface SetNodeResourceConfigDefaultResponse {
@@ -8467,34 +8531,13 @@ export interface DescribeStarRocksQueryInfoResponse {
     RequestId?: string;
 }
 /**
- * 表格schema信息
+ * ModifyYarnQueueV2返回参数结构体
  */
-export interface TableSchemaItem {
+export interface ModifyYarnQueueV2Response {
     /**
-     * 列标识
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Name?: string;
-    /**
-     * 是否可按该列排序
-     */
-    Sortable?: boolean;
-    /**
-     * 是否可筛选
-     */
-    WithFilter?: boolean;
-    /**
-     * 筛选的候选集
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Candidates?: Array<string>;
-    /**
-     * 是否可点击
-     */
-    Clickable?: boolean;
-    /**
-     * 展示的名字
-     */
-    Title?: string;
+    RequestId?: string;
 }
 /**
  * 资源调度 - 队列修改信息
@@ -8806,6 +8849,15 @@ export interface EmrPrice {
      * 是否支持竞价实例
      */
     SupportSpotPaid?: boolean;
+}
+/**
+ * TerminateTasks返回参数结构体
+ */
+export interface TerminateTasksResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 节点硬件信息

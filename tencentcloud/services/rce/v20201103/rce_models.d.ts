@@ -11,11 +11,11 @@ export interface DataContentInfo {
      */
     DataRemark?: string;
     /**
-     * 名单数据开始时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据开始时间
      */
     StartTime?: string;
     /**
-     * 名单数据结束时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据结束时间
      */
     EndTime?: string;
 }
@@ -51,11 +51,11 @@ export interface OutputDescribeNameListFrontFix {
      */
     Remark?: string;
     /**
-     * 创建时间，时间格式示例"2024-05-05 12:10:15"
+     * 创建时间
      */
     CreateTime?: string;
     /**
-     * 更新时间，时间格式示例"2024-05-05 12:10:15"
+     * 更新时间
      */
     UpdateTime?: string;
     /**
@@ -107,13 +107,11 @@ export interface OutputDescribeDataListFront {
      */
     DataSource?: number;
     /**
-     * 名单数据开始时间，时间格式示例"2024-05-05 12:10:15"
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 名单数据开始时间
      */
     StartTime?: string;
     /**
-     * 名单数据结束时间，时间格式示例"2024-05-05 12:10:15"
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 名单数据结束时间
      */
     EndTime?: string;
     /**
@@ -122,20 +120,18 @@ export interface OutputDescribeDataListFront {
     Status?: number;
     /**
      * 名单数据描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
-     * 名单数据创建时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据创建时间
      */
     CreateTime?: string;
     /**
-     * 名单数据更新时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据更新时间
      */
     UpdateTime?: string;
     /**
      * 加密名单数据内容
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     EncryptDataContent?: string;
 }
@@ -297,7 +293,6 @@ export interface ModifyNameListDataRequest {
 export interface OuntputDescribeDataListInfo {
     /**
      * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
     /**
@@ -541,12 +536,10 @@ export interface OutputDescribeNameListFrontFixListData {
 export interface OutputDeleteNameListData {
     /**
      * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: number;
     /**
      * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Message?: string;
     /**
@@ -657,11 +650,11 @@ export interface InputModifyNameListDataFront {
      */
     DataContent?: string;
     /**
-     * 名单数据开始时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据开始时间
      */
     StartTime?: string;
     /**
-     * 名单数据结束时间，时间格式示例"2024-05-05 12:10:15"
+     * 名单数据结束时间
      */
     EndTime?: string;
     /**
@@ -965,12 +958,12 @@ export interface OutputDescribeNameListDetail {
      */
     Remark?: string;
     /**
-     * 创建时间，时间格式示例"2024-05-05 12:10:15"
+     * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
     /**
-     * 更新时间，时间格式示例"2024-05-05 12:10:15"
+     * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
@@ -1001,7 +994,9 @@ export interface OnlineScamInfo {
      */
     ContentType?: number;
     /**
-     * 类型
+     * 账号类型
+  1：手机号
+  2：uin账号
      */
     FraudType?: number;
     /**
@@ -1252,16 +1247,12 @@ export interface ImportNameListDataRequest {
 export interface DataAuthorizationInfo {
     /**
      * 数据委托方、需求方：客户主体名称。
-  
-  示例值：某某有限公司。
      */
     DataProviderName: string;
     /**
      * 数据受托方、提供方：腾讯云主体名称。
   
   固定填：腾讯云计算（北京）有限责任公司
-  
-  示例值：腾讯云计算（北京）有限责任公司
      */
     DataRecipientName: string;
     /**
@@ -1276,43 +1267,33 @@ export interface DataAuthorizationInfo {
   4-IP地址；
   
   999-其它；
-  
-  示例值：[1, 4]
      */
     UserDataType: Array<number | bigint>;
     /**
      * 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意客户委托腾讯云处理入参信息
   1-已授权；其它值为未授权。
-  示例值：1
      */
     IsAuthorize: number;
     /**
      * 客户是否已按[合规指南](https://rule.tencent.com/rule/202409130001)要求获取用户授权，同意腾讯云结合客户提供的信息，对已合法收集的用户数据进行必要处理得出服务结果，并返回给客户。
   1-已授权；其它值为未授权。
-  示例值：1
      */
     IsOrderHandling?: number;
     /**
      * 客户获得的用户授权期限时间戳（单位秒）。
   
   不填默认无固定期限。
-  
-  示例值：1719805604
      */
     AuthorizationTerm?: number;
     /**
      *
   客户获得用户授权所依赖的协议地址。
-  
-  示例值：https://www.*****.com/*
      */
     PrivacyPolicyLink?: string;
     /**
      * 是否是用户个人敏感数据（不推荐使用）。
   
   固定填：1。
-  
-  示例值：1
      */
     IsPersonalData?: number;
 }

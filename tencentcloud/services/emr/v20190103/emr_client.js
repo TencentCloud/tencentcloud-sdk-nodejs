@@ -184,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyYarnDeploy", req, cb);
     }
     /**
-     * 缩容Task节点
+     * 查询DAG信息
      */
-    async TerminateTasks(req, cb) {
-        return this.request("TerminateTasks", req, cb);
+    async DescribeDAGInfo(req, cb) {
+        return this.request("DescribeDAGInfo", req, cb);
     }
     /**
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
@@ -238,6 +238,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddUsersForUserManager(req, cb) {
         return this.request("AddUsersForUserManager", req, cb);
+    }
+    /**
+     * 缩容Task节点
+     */
+    async TerminateTasks(req, cb) {
+        return this.request("TerminateTasks", req, cb);
     }
     /**
      * 前提：预付费集群

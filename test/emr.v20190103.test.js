@@ -278,9 +278,9 @@ it("emr.v20190103.ModifyYarnDeploy", async function () {
     }
 })
 
-it("emr.v20190103.TerminateTasks", async function () {
+it("emr.v20190103.DescribeDAGInfo", async function () {
     try {
-       const data = await client.TerminateTasks({})
+       const data = await client.DescribeDAGInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +361,16 @@ it("emr.v20190103.TerminateSLInstance", async function () {
 it("emr.v20190103.AddUsersForUserManager", async function () {
     try {
        const data = await client.AddUsersForUserManager({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.TerminateTasks", async function () {
+    try {
+       const data = await client.TerminateTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -3312,6 +3312,10 @@ export interface LiveStreamMonitorInputInfo {
    * 该输入源是否正在监播
    */
   NeedMonitor?: boolean
+  /**
+   * 导播台pvw pgm的cdn流id
+   */
+  CdnStreamId?: string
 }
 
 /**

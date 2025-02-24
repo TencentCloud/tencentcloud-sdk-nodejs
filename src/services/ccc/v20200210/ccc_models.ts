@@ -2470,11 +2470,11 @@ export interface Message {
   /**
    * 消息类型
    */
-  Type: string
+  Type?: string
   /**
    * 消息内容
    */
-  Content: string
+  Content?: string
 }
 
 /**
@@ -3429,15 +3429,15 @@ export interface MessageBody {
   /**
    * 消息时间戳
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 发消息的用户ID
    */
-  From: string
+  From?: string
   /**
    * 消息列表
    */
-  Messages: Array<Message>
+  Messages?: Array<Message>
 }
 
 /**
