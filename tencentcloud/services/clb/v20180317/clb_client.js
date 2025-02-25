@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTargetGroupInstancesWeight", req, cb);
     }
     /**
+     * 关联配置到server或location，根据配置类型关联到server或location。准备下线，请使用SetCustomizedConfigForLoadBalancer。
+     */
+    async AssociateCustomizedConfig(req, cb) {
+        return this.request("AssociateCustomizedConfig", req, cb);
+    }
+    /**
      * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
     async DeregisterTargetsFromClassicalLB(req, cb) {
@@ -157,6 +163,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRewrite", req, cb);
     }
     /**
+     * 去关联个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
+     */
+    async DisassociateCustomizedConfig(req, cb) {
+        return this.request("DisassociateCustomizedConfig", req, cb);
+    }
+    /**
      * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
 绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
 解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网 CLB 绑定 EIP 后，CLB 上的安全组对来自 EIP 的流量不生效，对来自内网 CLB 的流量生效。
@@ -204,6 +216,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyListener(req, cb) {
         return this.request("ModifyListener", req, cb);
+    }
+    /**
+     * 删除个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
+     */
+    async DeleteCustomizedConfig(req, cb) {
+        return this.request("DeleteCustomizedConfig", req, cb);
     }
     /**
      * 查询用户在当前地域支持可用区列表和资源列表。
@@ -375,6 +393,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRule", req, cb);
     }
     /**
+     * 新增个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
+     */
+    async AddCustomizedConfig(req, cb) {
+        return this.request("AddCustomizedConfig", req, cb);
+    }
+    /**
      * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -412,6 +436,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRule(req, cb) {
         return this.request("DeleteRule", req, cb);
+    }
+    /**
+     * 修改个性化配置。如果配置已经绑定clb、server或location，同时更新。准备下线，请使用SetCustomizedConfigForLoadBalancer。
+     */
+    async ModifyCustomizedConfig(req, cb) {
+        return this.request("ModifyCustomizedConfig", req, cb);
     }
     /**
      * 本接口用于查询异步任务的执行状态，对于非查询类的接口（创建/删除负载均衡实例、监听器、规则以及绑定或解绑后端服务等），在接口调用成功后，都需要使用本接口查询任务最终是否执行成功。

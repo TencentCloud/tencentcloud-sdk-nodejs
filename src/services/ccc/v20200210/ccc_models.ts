@@ -4237,7 +4237,7 @@ export interface CreateCallOutSessionRequest {
    */
   SdkAppId: number
   /**
-   * 客服用户 ID，一般为客服邮箱
+   * 客服用户 ID，一般为客服邮箱，确保已经绑定了手机号 https://cloud.tencent.com/document/product/679/76067#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF
    */
   UserId: string
   /**
@@ -4253,7 +4253,7 @@ export interface CreateCallOutSessionRequest {
    */
   Callers?: Array<string>
   /**
-   * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
+   * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单 https://cloud.tencent.com/document/product/679/76744#.E6.93.8D.E4.BD.9C.E6.AD.A5.E9.AA.A4
    */
   IsForceUseMobile?: boolean
   /**

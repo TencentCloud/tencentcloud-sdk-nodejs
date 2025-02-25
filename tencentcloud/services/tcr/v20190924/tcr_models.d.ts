@@ -440,7 +440,6 @@ export interface RegistryCondition {
     Status?: string;
     /**
      * 转换到该过程的简明原因
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
 }
@@ -4928,34 +4927,28 @@ export interface CreateTagRetentionExecutionRequest {
 export interface ReplicationLog {
     /**
      * 资源类型
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceType: string;
+    ResourceType?: string;
     /**
      * 源资源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Source: string;
+    Source?: string;
     /**
      * 目的资源
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Destination: string;
+    Destination?: string;
     /**
      * 同步状态
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
 }
 /**
  * DescribeInstanceAllNamespaces返回参数结构体

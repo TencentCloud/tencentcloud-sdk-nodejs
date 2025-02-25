@@ -2960,17 +2960,14 @@ export interface OsVersion {
 export interface Externals {
     /**
      * 释放地址
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReleaseAddress?: boolean;
     /**
      * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络</li><li>VPC1.0：私有网络VPC1.0</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnsupportNetworks?: Array<string>;
     /**
      * HDD本地存储属性
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StorageBlockAttr?: StorageBlock;
 }
@@ -4366,105 +4363,86 @@ export interface DescribeZonesResponse {
 export interface ItemPrice {
     /**
      * 后续合计费用的原价，后付费模式使用，单位：元。<br><li>如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPrice?: number;
     /**
      * 后续计价单元，后付费模式使用，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：</li><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeUnit?: string;
     /**
      * 预支合计费用的原价，预付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPrice?: number;
     /**
      * 预支合计费用的折扣价，预付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPrice?: number;
     /**
      * 折扣，如20.0代表2折。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Discount?: number;
     /**
      * 后续合计费用的折扣价，后付费模式使用，单位：元<br><li>如返回了其他时间区间项，如UnitPriceDiscountSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPriceDiscount?: number;
     /**
      * 使用时间区间在(96, 360)小时的后续合计费用的原价，后付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPriceSecondStep?: number;
     /**
      * 使用时间区间在(96, 360)小时的后续合计费用的折扣价，后付费模式使用，单位：元
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPriceDiscountSecondStep?: number;
     /**
      * 使用时间区间在(360, ∞)小时的后续合计费用的原价，后付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPriceThirdStep?: number;
     /**
      * 使用时间区间在(360, ∞)小时的后续合计费用的折扣价，后付费模式使用，单位：元
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UnitPriceDiscountThirdStep?: number;
     /**
      * 预支三年合计费用的原价，预付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPriceThreeYear?: number;
     /**
      * 预支三年合计费用的折扣价，预付费模式使用，单位：元。
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPriceThreeYear?: number;
     /**
      * 预支三年应用的折扣，如20.0代表2折。
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountThreeYear?: number;
     /**
      * 预支五年合计费用的原价，预付费模式使用，单位：元。
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPriceFiveYear?: number;
     /**
      * 预支五年合计费用的折扣价，预付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPriceFiveYear?: number;
     /**
      * 预支五年应用的折扣，如20.0代表2折。
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountFiveYear?: number;
     /**
      * 预支一年合计费用的原价，预付费模式使用，单位：元。
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginalPriceOneYear?: number;
     /**
      * 预支一年合计费用的折扣价，预付费模式使用，单位：元。
   注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountPriceOneYear?: number;
     /**
      * 预支一年应用的折扣，如20.0代表2折。
-  注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DiscountOneYear?: number;
@@ -4491,7 +4469,6 @@ export interface InstanceTypeQuotaItem {
     NetworkCard?: number;
     /**
      * 扩展属性。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Externals?: Externals;
     /**
@@ -4524,7 +4501,6 @@ export interface InstanceTypeQuotaItem {
     Price?: ItemPrice;
     /**
      * 售罄原因。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SoldOutReason?: string;
     /**
@@ -4569,7 +4545,6 @@ export interface InstanceTypeQuotaItem {
   <li>NormalStock：表示对应库存供应有保障</li>
   <li> UnderStock：表示对应库存即将售罄</li>
   <li>WithoutStock：表示对应库存已经售罄</li>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusCategory?: string;
 }
@@ -5736,17 +5711,14 @@ export interface HpcClusterInfo {
 export interface StorageBlock {
     /**
      * HDD本地存储类型，值为：LOCAL_PRO.
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * HDD本地存储的最小容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MinSize?: number;
     /**
      * HDD本地存储的最大容量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxSize?: number;
 }

@@ -47,12 +47,10 @@ export interface OutputDescribeNameListFrontFix {
   NameListId?: number
   /**
    * 名单名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListName?: string
   /**
    * 名单类型 [1 黑名单 2 白名单]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListType?: number
   /**
@@ -65,7 +63,6 @@ export interface OutputDescribeNameListFrontFix {
   Status?: number
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
@@ -82,12 +79,10 @@ export interface OutputDescribeNameListFrontFix {
   EffectCount?: string
   /**
    * 加密类型[0 无需加密 1 MD5加密 2 SHA256加密]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptionType?: number
   /**
    * 场景Code，all_scene代表全部场景
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneCode?: string
 }
@@ -470,37 +465,30 @@ export interface DeleteNameListRequest {
 export interface OutputDescribeUserUsageCnt {
   /**
    * 当前付费模式，0 后付费 1 预付费
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
    * 后付费本月使用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AfterPayModeThisMonthUsedCnt?: number
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 超出时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
    * 后付费上月使用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AfterPayModeLastMonthUsedCnt?: number
   /**
    * 预付费总量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeforePayModeTotalUsedCnt?: number
   /**
    * 预付费剩余用量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BeforePayModeRemainUsedCnt?: number
 }
@@ -525,7 +513,6 @@ export interface DescribeNameListDetailResponse {
 export interface OutputDescribeNameListInfo {
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Count?: number
   /**
@@ -556,17 +543,14 @@ export interface OutputDescribeNameListFrontFixListData {
   /**
    * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误
 
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 黑白名单列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: OutputDescribeNameListInfo
 }
@@ -945,17 +929,14 @@ SHA256手机号加密方式，使用中国大陆11位手机号进行SHA256加密
 export interface OutputDescribeDataListFrontData {
   /**
    * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 黑白名单数据信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: OuntputDescribeDataListInfo
 }
@@ -966,12 +947,10 @@ export interface OutputDescribeDataListFrontData {
 export interface OutputDescribeNameListDetailFront {
   /**
    * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Code?: number
   /**
    * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
@@ -987,52 +966,42 @@ export interface OutputDescribeNameListDetailFront {
 export interface OutputDescribeNameListDetail {
   /**
    * 名单ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NameListId?: number
   /**
    * 名单名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListName?: string
   /**
    * 名单类型 [1 黑名单 2 白名单]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ListType?: number
   /**
    * 数据类型[1 手机号 2 qqOpenId 3 2echatOpenId 4 ip 6 idfa 7 imei]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DataType?: number
   /**
    * 场景Code
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneCode?: string
   /**
    * 名单列表状态 [1 启用 2 停用]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
    * 描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
    * 加密类型 [0 无需加密，1 MD5加密，2 SHA256加密]
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptionType?: number
 }
