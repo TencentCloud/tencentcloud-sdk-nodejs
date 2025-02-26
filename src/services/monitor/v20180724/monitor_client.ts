@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyAlarmPolicyInfoRequest,
   AlarmPolicyTriggerTask,
+  GetTopNMonitorDataRequest,
   DescribePrometheusRegionsResponse,
   DescribePolicyGroupListResponse,
   DescribePrometheusInstancesOverviewRequest,
@@ -69,6 +70,7 @@ import {
   DescribePrometheusInstanceInitStatusResponse,
   DescribeProductEventListResponse,
   Targets,
+  GetTopNMonitorDataResponse,
   AlarmGroupByItem,
   DescribeAlarmNoticeCallbacksResponse,
   DescribePrometheusInstanceUsageRequest,
@@ -192,6 +194,7 @@ import {
   DescribePrometheusClusterAgentsResponse,
   UpdatePrometheusScrapeJobRequest,
   PrometheusAgentInfo,
+  SingleOrderedDataPoint,
   ServiceDiscoveryItem,
   CreatePrometheusClusterAgentResponse,
   PrometheusAlertAllowTimeRange,
@@ -1390,6 +1393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void
   ): Promise<UpdateAlertRuleStateResponse> {
     return this.request("UpdateAlertRuleState", req, cb)
+  }
+
+  /**
+   * 支持TopN查询，对于给定的监控指标和时间区间，按照指标大小按序返回不同维度组合及数据。
+   */
+  async GetTopNMonitorData(
+    req: GetTopNMonitorDataRequest,
+    cb?: (error: string, rep: GetTopNMonitorDataResponse) => void
+  ): Promise<GetTopNMonitorDataResponse> {
+    return this.request("GetTopNMonitorData", req, cb)
   }
 
   /**

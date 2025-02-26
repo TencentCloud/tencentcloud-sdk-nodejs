@@ -487,7 +487,6 @@ export interface ModifyApplicationResponse {
   /**
    * true：操作成功
 false：操作失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -729,7 +728,6 @@ export interface SimpleApplication {
 export interface DescribeSimpleNamespacesResponse {
   /**
    * 命名空间分页列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageNamespace
   /**
@@ -744,7 +742,6 @@ export interface DescribeSimpleNamespacesResponse {
 export interface DescribeSimpleClustersResponse {
   /**
    * TSF集群分页对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageCluster
   /**
@@ -759,7 +756,6 @@ export interface DescribeSimpleClustersResponse {
 export interface DeleteRepositoryResponse {
   /**
    * 删除仓库是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -1229,7 +1225,6 @@ export interface TaskRecord {
 export interface CreateNamespaceResponse {
   /**
    * 成功时为命名空间ID，失败为null
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -1258,7 +1253,6 @@ export interface RedoTaskBatchRequest {
 export interface DescribeGroupsResponse {
   /**
    * 虚拟机部署组分页信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageVmGroup
   /**
@@ -1626,7 +1620,6 @@ export interface RollbackConfigRequest {
 export interface DisassociateBusinessLogConfigResponse {
   /**
    * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -1955,7 +1948,6 @@ export interface GatewayPluginBoundParam {
 export interface ModifyNamespaceResponse {
   /**
    * Result
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -2004,7 +1996,6 @@ export interface ModifyLaneRuleRequest {
 export interface AddInstancesResponse {
   /**
    * 添加云主机是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -2029,7 +2020,6 @@ export interface StartContainerGroupRequest {
 export interface DescribeRepositoryResponse {
   /**
    * 查询的仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: RepositoryInfo
   /**
@@ -2339,7 +2329,6 @@ export interface EnableUnitRuleRequest {
 export interface CreateClusterResponse {
   /**
    * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -2458,7 +2447,6 @@ export interface StopGroupRequest {
 export interface ShrinkGroupResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskId
   /**
@@ -2823,7 +2811,6 @@ export interface CreateLaneResponse {
 export interface DescribeDeliveryConfigsResponse {
   /**
    * 投递项关联部署组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DeliveryConfigBindGroups
   /**
@@ -3347,7 +3334,6 @@ export interface DescribeConfigReleaseLogsRequest {
 export interface AssociateConfigWithGroupResponse {
   /**
    * 绑定是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -3362,7 +3348,6 @@ export interface AssociateConfigWithGroupResponse {
 export interface UpdateRepositoryResponse {
   /**
    * 更新仓库是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -3571,7 +3556,6 @@ export interface DisableTaskRequest {
 export interface DescribeStatisticsResponse {
   /**
    * 查询服务统计结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ServiceStatisticsResults
   /**
@@ -3661,7 +3645,6 @@ export interface DeleteGroupResponse {
    * 删除部署组操作是否成功。
 true：操作成功。
 false：操作失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -3676,7 +3659,6 @@ false：操作失败。
 export interface DescribeSimpleApplicationsResponse {
   /**
    * 简单应用分页对象
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageSimpleApplication
   /**
@@ -5029,7 +5011,6 @@ export interface CreateConfigWithDetailRespRequest {
 export interface RemoveInstancesResponse {
   /**
    * 集群移除机器是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -5584,7 +5565,6 @@ export interface DeletePublicConfigResponse {
 export interface DescribeSimpleGroupsResponse {
   /**
    * 简单部署组列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageSimpleGroup
   /**
@@ -5682,7 +5662,6 @@ export interface TerminateTaskFlowBatchResponse {
 export interface DisassociateKafkaConfigResponse {
   /**
    * 解除绑定是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -6318,7 +6297,6 @@ export interface ExecuteTaskFlowResponse {
 export interface DescribeClustersResponse {
   /**
    * Cluster分页信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageClusterV2
   /**
@@ -6391,7 +6369,6 @@ export interface SearchBusinessLogRequest {
 export interface ExpandGroupResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskId
   /**
@@ -6705,7 +6682,6 @@ export interface DescribeApiGroupRequest {
 export interface AssociateBusinessLogConfigResponse {
   /**
    * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -6918,7 +6894,6 @@ export interface ImageRepositoryResult {
 export interface ModifyTaskResponse {
   /**
    * 更新是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -7616,7 +7591,6 @@ export interface CreateUnitRuleRequest {
 export interface StartGroupResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskId
   /**
@@ -7765,7 +7739,6 @@ export interface CreateLaneRuleResponse {
 export interface CreateTaskResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -8291,7 +8264,6 @@ export interface DescribePathRewriteRequest {
 export interface CreateApplicationResponse {
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -8354,7 +8326,6 @@ export interface DescribeInvocationMetricDataDimensionRequest {
 export interface DeployGroupResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskId
   /**
@@ -8371,7 +8342,6 @@ export interface ModifyGroupResponse {
    * 更新部署组详情是否成功。
 true：操作成功。
 false：操作失败。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -8444,7 +8414,6 @@ export interface MetricDataPointMap {
 export interface DescribeGroupAttributeResponse {
   /**
    * 虚拟机部署组信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: VmGroupOther
   /**
@@ -8754,7 +8723,6 @@ export interface CreateUnitNamespacesRequest {
 export interface DescribeTaskRecordsResponse {
   /**
    * 任务记录列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskRecordPage
   /**
@@ -9167,7 +9135,6 @@ export interface UpdateGatewayApiResponse {
 export interface DescribeInstancesResponse {
   /**
    * 机器列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: InstanceEnrichedInfoPage
   /**
@@ -11465,7 +11432,6 @@ export interface DescribeInvocationMetricScatterPlotRequest {
 export interface CreateTaskFlowResponse {
   /**
    * 工作流 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**
@@ -11526,7 +11492,6 @@ export interface DescribeMicroservicesRequest {
 export interface AddClusterInstancesResponse {
   /**
    * 添加云主机的返回列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: AddInstanceResult
   /**
@@ -11903,7 +11868,6 @@ export interface DescribeLaneRulesRequest {
 export interface DescribeContainerEventsResponse {
   /**
    * events 分页列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageContainerEvent
   /**
@@ -11964,7 +11928,6 @@ export interface DescribePluginInstancesResponse {
 export interface CreateRepositoryResponse {
   /**
    * 创建仓库是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -12239,7 +12202,6 @@ export interface GroupUnitApiUseStatistics {
 export interface DescribeGroupInstancesResponse {
   /**
    * 部署组机器信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageInstance
   /**
@@ -12377,7 +12339,6 @@ export interface DescribeFileConfigReleasesRequest {
 export interface DescribeClusterInstancesResponse {
   /**
    * 集群机器实例分页信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageInstance
   /**
@@ -12699,7 +12660,6 @@ export interface ApiInfo {
 export interface StopGroupResponse {
   /**
    * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TaskId
   /**
@@ -12975,7 +12935,6 @@ export interface RedoTaskExecuteRequest {
 export interface DescribeApplicationsResponse {
   /**
    * 应用分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: TsfPageApplication
   /**
@@ -13969,7 +13928,6 @@ export interface DescribeResourceTaskStatusRequest {
 export interface DescribeInvocationMetricDataCurveResponse {
   /**
    * 指标监控数据曲线集合
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<MetricDataCurve>
   /**
@@ -14695,7 +14653,6 @@ export interface Filter {
 export interface DescribeInvocationMetricDataPointResponse {
   /**
    * 单值指标列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: Array<MetricDataSingleValue>
   /**
@@ -16301,7 +16258,6 @@ export interface LaneGroup {
 export interface CreateGroupResponse {
   /**
    * groupId， null表示创建失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: string
   /**

@@ -566,7 +566,12 @@ export interface ModifyAttributeLabelRequest {
  */
 export interface GetReconstructDocumentResultResponse {
   /**
-   * 任务状态。- `Success`：执行完成- `Processing`：执行中- `Pause`: 暂停- `Failed`：执行失败- `WaitExecute`：等待执行
+   * 任务状态。
+- `Success`：执行完成
+- `Processing`：执行中
+-  `Pause`: 暂停
+-  `Failed`：执行失败
+-  `WaitExecute`：等待执行
    */
   Status?: string
   /**

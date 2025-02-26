@@ -1238,7 +1238,7 @@ export interface CompareObject {
    */
   ObjectItems?: Array<CompareObjectItem>
   /**
-   * 高级对象类型，目前只支持mongodb链路。如account(账号),index(索引),shardkey(片键，后面可能会调整),schema(库表结构)
+   * 高级对象类型，目前只支持mongodb链路。如index(索引),shardkey(片键),schema(库表)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedObjects?: Array<string>

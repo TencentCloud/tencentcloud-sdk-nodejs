@@ -4230,6 +4230,16 @@ export interface ListDocItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAllowRetry?: boolean;
+    /**
+     * 0:文档比对处理 1:文档生成问答
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Processing?: Array<number | bigint>;
+    /**
+     * 文档创建落库时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
 }
 /**
  * ParseDoc请求参数结构体
@@ -4333,6 +4343,11 @@ export interface AppModel {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TopP?: string;
+    /**
+     * 模型资源状态 1：资源可用；2：资源已用尽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceStatus?: number;
 }
 /**
  * 计费统计信息
@@ -6474,8 +6489,7 @@ export interface DescribeCorpResponse {
      */
     CorpBizId?: string;
     /**
-     * 机器人配额
-  
+     * 应用配额
      */
     RobotQuota?: number;
     /**
@@ -6483,6 +6497,22 @@ export interface DescribeCorpResponse {
   
      */
     FullName?: string;
+    /**
+     * 是否试用
+     */
+    IsTrial?: boolean;
+    /**
+     * 是否试用过期
+     */
+    IsTrialExpired?: boolean;
+    /**
+     * 可用应用数量
+     */
+    AvailableAppQuota?: number;
+    /**
+     * 是否支持自定义模型配置
+     */
+    IsSupportCustomModel?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6856,7 +6886,7 @@ export interface CreateQACateRequest {
      */
     BotBizId: string;
     /**
-     * 父级业务ID
+     * 父级业务ID，创建顶级分类时传字符串"0"
      */
     ParentBizId: string;
     /**

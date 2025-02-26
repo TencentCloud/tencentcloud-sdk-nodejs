@@ -918,6 +918,16 @@ it("monitor.v20180724.UpdateAlertRuleState", async function () {
     }
 })
 
+it("monitor.v20180724.GetTopNMonitorData", async function () {
+    try {
+       const data = await client.GetTopNMonitorData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyPrometheusTemp", async function () {
     try {
        const data = await client.ModifyPrometheusTemp({})

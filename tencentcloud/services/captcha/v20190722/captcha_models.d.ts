@@ -8,12 +8,10 @@ export interface DescribeCaptchaOperDataResponse {
     CaptchaCode?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
      * 用户操作数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: CaptchaOperDataRes;
     /**
@@ -65,12 +63,10 @@ export interface DescribeCaptchaMiniOperDataResponse {
     CaptchaCode?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
      * 用户操作数据
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: CaptchaOperDataRes;
     /**
@@ -104,47 +100,38 @@ export interface GetTotalTicketStatisticsRequest {
 export interface DescribeCaptchaMiniDataSumResponse {
     /**
      * 请求总量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GetSum?: number;
     /**
      * 请求验证成功量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VfySuccSum?: number;
     /**
      * 请求验证量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     VfySum?: number;
     /**
      * 拦截攻击量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AttackSum?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
      * 成功返回0  其它失败
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaCode?: number;
     /**
      * 票据校验总量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckTicketSum?: number;
     /**
      * 票据验证通过量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TicketThroughputSum?: number;
     /**
      * 票据验证拦截量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TicketInterceptSum?: number;
     /**
@@ -473,12 +460,10 @@ export interface DescribeCaptchaMiniDataResponse {
     CaptchaCode?: number;
     /**
      * 数据数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<CaptchaQueryData>;
     /**
      * 返回信息描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -566,7 +551,6 @@ export interface UpdateCaptchaAppIdInfoResponse {
     CaptchaCode?: number;
     /**
      * 返回操作信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -617,7 +601,6 @@ export interface DescribeCaptchaDataSumResponse {
     AttackSum?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -950,12 +933,10 @@ export interface DescribeCaptchaDataResponse {
     CaptchaCode?: number;
     /**
      * 数据数组
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<CaptchaQueryData>;
     /**
      * 返回信息描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -1227,7 +1208,6 @@ export interface DescribeCaptchaAppIdInfoResponse {
     CaptchaCode?: number;
     /**
      * 返回操作信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -1290,7 +1270,6 @@ export interface DescribeCaptchaRceResultRequest {
 export interface DescribeCaptchaUserAllAppIdResponse {
     /**
      * 用户注册的所有Appid和应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: Array<CaptchaUserAllAppId>;
     /**
@@ -1299,7 +1278,6 @@ export interface DescribeCaptchaUserAllAppIdResponse {
     CaptchaCode?: number;
     /**
      * 返回操作信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
@@ -1379,12 +1357,10 @@ export interface DescribeCaptchaTicketDataResponse {
     CaptchaCode?: number;
     /**
      * 返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CaptchaMsg?: string;
     /**
      * 验证码票据信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: CaptchaTicketDataRes;
     /**

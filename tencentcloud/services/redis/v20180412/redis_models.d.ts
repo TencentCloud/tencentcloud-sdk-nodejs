@@ -995,17 +995,14 @@ export interface DescribeInstanceZoneInfoResponse {
 export interface Account {
     /**
      * 实例 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 账号名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AccountName?: string;
     /**
      * 账号描述信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
     /**
@@ -1013,14 +1010,12 @@ export interface Account {
   - r：只读。
   - w：只写。
   - rw：读写。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privilege?: string;
     /**
      * 只读路由策略。
   - master：主节点。
   - replication：从节点。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadonlyPolicy?: Array<string>;
     /**
@@ -1028,12 +1023,10 @@ export interface Account {
   - 1：账号变更中。
   - 2：账号有效。
   - 4：账号已删除。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
 }
@@ -2584,7 +2577,6 @@ export interface InstanceIntegerParam {
     Status?: number;
     /**
      * 参数单位
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Unit?: string;
 }
@@ -3966,42 +3958,34 @@ export interface StartupInstanceResponse {
 export interface DescribeInstanceDTSInstanceInfo {
     /**
      * 地域 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RegionId?: number;
     /**
      * 实例 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
     /**
      * 仓库ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SetId?: number;
     /**
      * 可用区ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneId?: number;
     /**
      * 实例类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;
     /**
      * 实例名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceName?: string;
     /**
      * 实例访问地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip?: string;
     /**
      * 状态。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
 }
@@ -4086,22 +4070,18 @@ export interface AssociateSecurityGroupsResponse {
 export interface LogDeliveryInfo {
     /**
      * 日志投递开启状态，开启：true，关闭：false
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
     /**
      * 日志集ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogsetId?: string;
     /**
      * 日志主题ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicId?: string;
     /**
      * 日志集所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogRegion?: string;
 }
@@ -4238,7 +4218,6 @@ export interface Groups {
     GroupId?: string;
     /**
      * 复制组名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     GroupName?: string;
     /**
@@ -4256,12 +4235,10 @@ export interface Groups {
     InstanceCount?: number;
     /**
      * 复制组中的实例信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Instances?: Array<Instances>;
     /**
      * 备注信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
 }
@@ -4752,12 +4729,10 @@ export interface ModifyParamTemplateRequest {
 export interface AvailableRegion {
     /**
      * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 可用区信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AvailableZones?: Array<string>;
 }
@@ -4914,137 +4889,110 @@ export interface InstanceSet {
     SlaveReadWeight?: number;
     /**
      * 实例关联的标签信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceTags?: Array<InstanceTagInfo>;
     /**
      * 项目名称。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectName?: string;
     /**
      * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NoAuth?: boolean;
     /**
      * 客户端连接数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimit?: number;
     /**
      * DTS状态（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DtsStatus?: number;
     /**
      * 分片带宽上限，单位MB。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NetLimit?: number;
     /**
      * 免密实例标识（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PasswordFree?: number;
     /**
      * 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip6?: string;
     /**
      * 内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IPv6?: string;
     /**
      * 实例只读标识（内部参数，用户可忽略）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: number;
     /**
      * 内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RemainBandwidthDuration?: string;
     /**
      * Redis实例请忽略该参数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: number;
     /**
      * 监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。</li><li>5s：5秒粒度监控。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorVersion?: string;
     /**
      * 客户端最大连接数可设置的最小值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMin?: number;
     /**
      * 客户端最大连接数可设置的最大值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ClientLimitMax?: number;
     /**
      * 实例的节点详细信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeSet?: Array<RedisNodeInfo>;
     /**
      * 实例所在的地域信息，比如ap-guangzhou。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
     /**
      * 外网地址。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WanAddress?: string;
     /**
      * 北极星服务地址，内部使用。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PolarisServer?: string;
     /**
      * CDC Redis集群ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RedisClusterId?: string;
     /**
      * CDC 集群ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DedicatedClusterId?: string;
     /**
      * 产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul>
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductVersion?: string;
     /**
      * 实例当前Proxy版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentProxyVersion?: string;
     /**
      * 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentRedisVersion?: string;
     /**
      * 实例可升级Proxy版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpgradeProxyVersion?: string;
     /**
      * 实例可升级Cache小版本。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpgradeRedisVersion?: string;
     /**
      * 备份模式：- SecondLevelBackup   秒级备份- NormalLevelBackup    普通备份
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BackupMode?: string;
 }
@@ -6335,7 +6283,6 @@ export interface Instances {
     RedisShardSize?: number;
     /**
      * 实例的磁盘大小。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskSize?: number;
     /**
@@ -6352,12 +6299,10 @@ export interface Instances {
     Vip?: string;
     /**
      * 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Vip6?: string;
     /**
      * 内部参数，用户可忽略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IPv6?: string;
     /**

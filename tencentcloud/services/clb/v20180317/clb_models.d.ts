@@ -3602,6 +3602,10 @@ export interface CreateTargetGroupRequest {
      */
     TargetGroupInstances?: Array<TargetGroupInstance>;
     /**
+     * 目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。
+     */
+    Type?: string;
+    /**
      * 标签。
      */
     Tags?: Array<TagInfo>;

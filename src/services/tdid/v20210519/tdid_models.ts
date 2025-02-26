@@ -30,6 +30,24 @@ export interface GetTDidDocumentResponse {
 }
 
 /**
+ * 设置凭证状态信息
+ */
+export interface CredentialStatusInfo {
+  /**
+   * 凭证唯一id
+   */
+  Id?: string
+  /**
+   * 凭证状态（0：吊销；1：有效）
+   */
+  Issuer?: string
+  /**
+   * 凭证颁发者Did
+   */
+  Status?: number
+}
+
+/**
  * VerifyPresentation请求参数结构体
  */
 export interface VerifyPresentationRequest {
@@ -85,27 +103,22 @@ export interface IssueCredentialResponse {
 export interface ResourceCounterData {
   /**
    * DID总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DidCnt?: number
   /**
    * VC总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VCCnt?: number
   /**
    * CPT总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CPTCnt?: number
   /**
-   *  VC验证总数 
-注意：此字段可能返回 null，表示取不到有效值。
+   *  VC验证总数
    */
   VerifyCnt?: number
   /**
    * 权威机构数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthCnt?: number
 }
@@ -152,6 +165,10 @@ export interface CreateDisclosedCredentialRequest {
    * DID应用ID
    */
   DAPId?: number
+  /**
+   * 用户应用ID
+   */
+  UAPId?: number
 }
 
 /**
@@ -244,7 +261,6 @@ export interface VerifyCredentialsResponse {
 export interface GetCredentialStateResponse {
   /**
    * 凭证状态信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CredentialState?: CredentialState
   /**
@@ -277,7 +293,6 @@ export interface IssueCredentialRequest {
 export interface GetTDidByObjectIdResponse {
   /**
    * DID标识
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Did?: string
   /**
@@ -446,6 +461,10 @@ export interface CreatePresentationRequest {
    */
   DAPId?: number
   /**
+   * 用户应用id
+   */
+  UAPId?: number
+  /**
    * 凭证列表
    */
   Credentials?: Array<string>
@@ -490,13 +509,11 @@ export interface CreateTDidByHostRequest {
  */
 export interface GetAppSummaryResponse {
   /**
-   * 用户参与应用的统计指标 
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户参与应用的统计指标
    */
   AppCounter?: ResourceCounterData
   /**
    * 用户创建资源的统计指标
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserCounter?: ResourceCounterData
   /**
@@ -555,7 +572,6 @@ export interface GetTDidPubKeyResponse {
 export interface UpdateCredentialStateResponse {
   /**
    * 更新是否成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: boolean
   /**
@@ -635,13 +651,17 @@ export interface CredentialState {
 }
 
 /**
- * 链上交易信息
+ * GetTDidByObjectId请求参数结构体
  */
-export interface ChainTransaction {
+export interface GetTDidByObjectIdRequest {
   /**
-   * 交易哈希
+   * 业务层为DID设置的唯一标识
    */
-  TransactionHash: string
+  ObjectId?: string
+  /**
+   * DID应用Id
+   */
+  DAPId?: number
 }
 
 /**
@@ -681,9 +701,17 @@ export interface UpdateCredentialStateRequest {
    */
   DAPId?: number
   /**
-   * 更新VC状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，建议设置为1分钟内
+   * 更新VC状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，如设置为1分钟内
    */
   OperateCredential?: string
+  /**
+   * 待更新凭证状态的原始凭证内容
+   */
+  OriginCredential?: string
+  /**
+   * 凭证状态信息
+   */
+  CredentialStatus?: CredentialStatusInfo
 }
 
 /**
@@ -766,17 +794,13 @@ export interface DeactivateTDidRequest {
 }
 
 /**
- * GetTDidByObjectId请求参数结构体
+ * 链上交易信息
  */
-export interface GetTDidByObjectIdRequest {
+export interface ChainTransaction {
   /**
-   * 业务层为DID设置的唯一标识
+   * 交易哈希
    */
-  ObjectId?: string
-  /**
-   * DID应用Id
-   */
-  DAPId?: number
+  TransactionHash: string
 }
 
 /**

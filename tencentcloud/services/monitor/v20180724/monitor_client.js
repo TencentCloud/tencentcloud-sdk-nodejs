@@ -579,6 +579,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAlertRuleState", req, cb);
     }
     /**
+     * 支持TopN查询，对于给定的监控指标和时间区间，按照指标大小按序返回不同维度组合及数据。
+     */
+    async GetTopNMonitorData(req, cb) {
+        return this.request("GetTopNMonitorData", req, cb);
+    }
+    /**
      * 修改模板内容
      */
     async ModifyPrometheusTemp(req, cb) {

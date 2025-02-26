@@ -1551,45 +1551,69 @@ export interface InstanceNode {
     /**
      * IP地址
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 机型，如 S1
      */
-    Spec: string;
+    Spec?: string;
     /**
      * cpu核数
      */
-    Core: number;
+    Core?: number;
     /**
      * 内存大小
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 磁盘类型
      */
-    DiskType: string;
+    DiskType?: string;
     /**
      * 磁盘大小
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 所属clickhouse cluster名称
      */
-    Cluster: string;
+    Cluster?: string;
     /**
      * 节点所属的分组信息
      */
-    NodeGroups: Array<GroupInfo>;
+    NodeGroups?: Array<GroupInfo>;
     /**
      * VPC IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rip: string;
+    Rip?: string;
     /**
      * ture的时候表示该节点上部署了chproxy进程
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsCHProxy: boolean;
+    IsCHProxy?: boolean;
+    /**
+     * 节点状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 节点uuid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UUID?: string;
+    /**
+     * 区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 区描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneDesc?: string;
+    /**
+     * 真实资源id
+     */
+    RealResourceId?: string;
 }
 /**
  * 集群配置信息

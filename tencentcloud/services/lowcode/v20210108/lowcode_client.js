@@ -28,10 +28,64 @@ class Client extends abstract_client_1.AbstractClient {
         super("lowcode.tencentcloudapi.com", "2021-01-08", clientConfig);
     }
     /**
+     * 创建知识库
+     */
+    async CreateKnowledgeSet(req, cb) {
+        return this.request("CreateKnowledgeSet", req, cb);
+    }
+    /**
+     * 更新知识库
+     */
+    async UpdateKnowledgeSet(req, cb) {
+        return this.request("UpdateKnowledgeSet", req, cb);
+    }
+    /**
+     * 知识库文档搜索接口
+     */
+    async SearchDocList(req, cb) {
+        return this.request("SearchDocList", req, cb);
+    }
+    /**
+     * 查询知识库
+     */
+    async DescribeKnowledgeSetList(req, cb) {
+        return this.request("DescribeKnowledgeSetList", req, cb);
+    }
+    /**
      * 获取数据源详情列表
      */
     async DescribeDataSourceList(req, cb) {
         return this.request("DescribeDataSourceList", req, cb);
+    }
+    /**
+     * 删除知识库下文档
+     */
+    async DeleteKnowledgeDocumentSet(req, cb) {
+        return this.request("DeleteKnowledgeDocumentSet", req, cb);
+    }
+    /**
+     * 获取知识库下文档详情
+     */
+    async DescribeKnowledgeDocumentSetDetail(req, cb) {
+        return this.request("DescribeKnowledgeDocumentSetDetail", req, cb);
+    }
+    /**
+     * 更新知识库
+     */
+    async UploadKnowledgeDocumentSet(req, cb) {
+        return this.request("UploadKnowledgeDocumentSet", req, cb);
+    }
+    /**
+     * 查询知识库下文件集合
+     */
+    async DescribeKnowledgeDocumentSetList(req, cb) {
+        return this.request("DescribeKnowledgeDocumentSetList", req, cb);
+    }
+    /**
+     * 删除知识库
+     */
+    async DeleteKnowledgeSet(req, cb) {
+        return this.request("DeleteKnowledgeSet", req, cb);
     }
 }
 exports.Client = Client;
