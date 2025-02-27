@@ -3349,6 +3349,8 @@ export interface RecognizeGeneralInvoiceRequest {
 15：非税发票
 16：全电发票
 17：医疗发票
+18：完税凭证
+19：海关缴款书
 -1：其他发票
    */
   Types?: Array<number | bigint>
@@ -9233,11 +9235,16 @@ export interface GeneralEfficientOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
-  TextDetections: Array<TextDetection>
+  TextDetections?: Array<TextDetection>
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   * @deprecated
+   */
+  Angel?: number
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel: number
+  Angle?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

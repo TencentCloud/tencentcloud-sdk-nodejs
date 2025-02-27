@@ -322,7 +322,7 @@ export interface OutputManageMarketingRiskValue {
      */
     PostTime?: number;
     /**
-     * 业务参数。
+     * 业务预留参数（暂无实际业务含义， 无需关注返回值）
      */
     AssociateAccount?: string;
     /**

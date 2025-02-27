@@ -320,7 +320,6 @@ export interface CreateNativeNodePoolParam {
 export interface DescribeNodePoolsResponse {
     /**
      * 节点池列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NodePools?: Array<NodePool>;
     /**
@@ -370,7 +369,6 @@ export interface DescribeClusterInstancesResponse {
     InstanceSet?: Array<Instance>;
     /**
      * 错误信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Errors?: Array<string>;
     /**
@@ -1187,7 +1185,6 @@ export interface DescribeHealthCheckPolicyBindingsResponse {
     HealthCheckPolicyBindings?: Array<HealthCheckPolicyBinding>;
     /**
      * 健康检测规则数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**
@@ -1525,7 +1522,6 @@ export interface DescribeHealthCheckPoliciesResponse {
     HealthCheckPolicies?: Array<HealthCheckPolicy>;
     /**
      * 数组总数目
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**

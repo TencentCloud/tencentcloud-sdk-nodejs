@@ -112,7 +112,6 @@ export interface DescribeClusterEndpointVipStatusResponse {
   Status?: string
   /**
    * 操作失败的原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -1345,7 +1344,6 @@ export interface DisableVpcCniNetworkTypeRequest {
 export interface DescribeClusterReleaseDetailsResponse {
   /**
    * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Release?: ReleaseDetails
   /**
@@ -2183,37 +2181,30 @@ export interface Instance {
 export interface ModifyClusterAttributeResponse {
   /**
    * 集群所属项目
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
    * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
    * 集群描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterDesc?: string
   /**
    * 集群等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterLevel?: string
   /**
    * 自动变配集群等级
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
   /**
    * 是否开启QGPU共享
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QGPUShareEnable?: boolean
   /**
    * 集群属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterProperty?: ClusterProperty
   /**
@@ -3085,14 +3076,12 @@ export interface KubeJarvisStateInspectionResultsItem {
 export interface DescribeClusterReleaseHistoryResponse {
   /**
    * 已安装应用版本历史
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseHistorySet: Array<ReleaseHistory>
+  ReleaseHistorySet?: Array<ReleaseHistory>
   /**
    * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3200,7 +3189,6 @@ export interface ExistedInstancesPara {
 export interface DescribeClusterAsGroupOptionResponse {
   /**
    * 集群弹性伸缩属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterAsGroupOption?: ClusterAsGroupOption
   /**
@@ -3788,7 +3776,6 @@ export interface RIUtilizationDetail {
 export interface DescribeBatchModifyTagsStatusResponse {
   /**
    * 失败资源列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedResources?: Array<FailedResource>
   /**
@@ -3796,7 +3783,6 @@ export interface DescribeBatchModifyTagsStatusResponse {
 - running 运行中
 - failed 失败
 - done 成功
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
@@ -4557,7 +4543,6 @@ export interface DescribePrometheusAlertHistoryRequest {
 export interface SetNodePoolNodeProtectionResponse {
   /**
    * 成功设置的节点id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SucceedInstanceIds?: Array<string>
   /**
@@ -4737,9 +4722,8 @@ export interface DeleteBackupStorageLocationRequest {
 export interface UninstallClusterReleaseResponse {
   /**
    * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Release: PendingRelease
+  Release?: PendingRelease
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5390,7 +5374,6 @@ export interface DescribeAvailableClusterVersionRequest {
 export interface UpgradeClusterReleaseResponse {
   /**
    * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Release?: PendingRelease
   /**
@@ -5677,12 +5660,10 @@ export interface CreatePrometheusConfigResponse {
 export interface DescribeClusterEndpointStatusResponse {
   /**
    * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 开启访问入口失败信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMsg?: string
   /**
@@ -6354,7 +6335,6 @@ export interface DescribeClusterEndpointsResponse {
   ClusterIntranetEndpoint?: string
   /**
    * 集群APIServer的域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterDomain?: string
   /**
@@ -6364,22 +6344,18 @@ export interface DescribeClusterEndpointsResponse {
   ClusterExternalACL?: Array<string>
   /**
    * 外网域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterExternalDomain?: string
   /**
    * 内网域名
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIntranetDomain?: string
   /**
    * 外网安全组
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroup?: string
   /**
    * 内网访问所属子网
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterIntranetSubnetId?: string
   /**
@@ -6713,7 +6689,6 @@ export interface DescribeClusterSecurityResponse {
   SecurityPolicy?: Array<string>
   /**
    * 集群Kubeconfig文件
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Kubeconfig?: string
   /**
@@ -6926,9 +6901,8 @@ export interface PrometheusTemplateModify {
 export interface RollbackClusterReleaseResponse {
   /**
    * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Release: PendingRelease
+  Release?: PendingRelease
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7228,22 +7202,18 @@ export interface DescribeClusterVirtualNodeRequest {
 export interface DescribeClusterReleasesResponse {
   /**
    * 数量限制
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
    * 偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Offset?: number
   /**
    * 已安装应用列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseSet?: Array<Release>
   /**
    * 已安装应用总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -8083,22 +8053,18 @@ export interface DescribeIPAMDResponse {
   EnableIPAMD?: boolean
   /**
    * 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableCustomizedPodCidr?: boolean
   /**
    * 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DisableVpcCniMode?: boolean
   /**
    * 组件状态，已安装eniipamd组件才会有值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Phase?: string
   /**
    * 错误信息，已安装eniipamd组件且状态为非running才会有错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Reason?: string
   /**
@@ -8108,12 +8074,10 @@ export interface DescribeIPAMDResponse {
   SubnetIds?: Array<string>
   /**
    * 固定ip回收时间，已安装eniipamd组件才会有值
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClaimExpiredDuration?: string
   /**
    * 是否开启了中继网卡模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableTrunkingENI?: boolean
   /**
@@ -8246,7 +8210,6 @@ export interface DescribeRouteTableConflictsResponse {
   HasConflict?: boolean
   /**
    * 路由表冲突列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteTableConflictSet?: Array<RouteTableConflict>
   /**
@@ -8524,22 +8487,18 @@ Name: 通过实例名称来过滤
 export interface DescribeClusterPendingReleasesResponse {
   /**
    * 正在安装中应用列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseSet?: Array<PendingRelease>
   /**
    * 每页返回数量限制
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
    * 页偏移量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Offset?: number
   /**
    * 总数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -8600,17 +8559,14 @@ export interface DeleteEKSClusterRequest {
 export interface DescribeLogConfigsResponse {
   /**
    * 分页查找时返回采集规则总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
    * 指定采集规则名称查找，部分失败时返回失败采集规则名称及最后一个失败原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
    * 采集规则查询结果
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LogConfigs?: string
   /**
@@ -8625,7 +8581,6 @@ export interface DescribeLogConfigsResponse {
 export interface DescribeExistedInstancesResponse {
   /**
    * 已经存在的实例信息数组。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExistedInstanceSet?: Array<ExistedInstance>
   /**
@@ -8923,17 +8878,14 @@ export interface ListClusterInspectionResultsItemsRequest {
 export interface DescribeClusterAuthenticationOptionsResponse {
   /**
    * ServiceAccount认证配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceAccounts?: ServiceAccountAuthenticationOptions
   /**
    * 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationState?: string
   /**
    * OIDC认证配置
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OIDCConfig?: OIDCConfigAuthenticationOptions
   /**
@@ -9283,12 +9235,10 @@ export interface ResourceUsageDetail {
 export interface DescribeClusterVirtualNodePoolsResponse {
   /**
    * 节点池总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 虚拟节点池列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodePoolSet?: Array<VirtualNodePool>
   /**
@@ -9397,12 +9347,10 @@ export interface CheckInstancesUpgradeAbleResponse {
   LatestVersion?: string
   /**
    * 可升级节点列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeAbleInstances?: Array<UpgradeAbleInstancesItem>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
@@ -9737,7 +9685,6 @@ export interface SyncPrometheusTemplateResponse {
 export interface DescribeClusterExtraArgsResponse {
   /**
    * 集群自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterExtraArgs?: ClusterExtraArgs
   /**
@@ -10034,9 +9981,8 @@ export interface InstanceAdvancedSettings {
 export interface CancelClusterReleaseResponse {
   /**
    * 应用信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Release: PendingRelease
+  Release?: PendingRelease
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10460,7 +10406,6 @@ export interface CreateTKEEdgeClusterRequest {
 export interface DescribeSupportedRuntimeResponse {
   /**
    * 可选运行时列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionalRuntimes?: Array<OptionalRuntimes>
   /**
@@ -10849,12 +10794,10 @@ export interface ModifyClusterVirtualNodePoolRequest {
 export interface DescribeRegionsResponse {
   /**
    * 地域的数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 地域列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionInstanceSet?: Array<RegionInstance>
   /**
@@ -10976,12 +10919,10 @@ export interface ECMZoneInstanceCountISP {
 export interface DescribeVpcCniPodLimitsResponse {
   /**
    * 机型数据数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 机型信息及其可支持的最大VPC-CNI模式Pod数量信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PodLimitsInstanceSet?: Array<PodLimitsInstance>
   /**
@@ -10996,12 +10937,10 @@ export interface DescribeVpcCniPodLimitsResponse {
 export interface DescribeVersionsResponse {
   /**
    * 版本数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 版本列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionInstanceSet?: Array<VersionInstance>
   /**
@@ -11168,12 +11107,10 @@ export interface ClusterNetworkSettings {
 export interface DescribeImagesResponse {
   /**
    * 镜像数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
    * 镜像信息列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageInstanceSet?: Array<ImageInstance>
   /**
@@ -11780,7 +11717,6 @@ export interface FailedResource {
 export interface DescribeClusterNodePoolsResponse {
   /**
    * NodePools（节点池列表）
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodePoolSet?: Array<NodePool>
   /**
@@ -12517,7 +12453,6 @@ export interface DescribePrometheusTempResponse {
 export interface CreateClusterReleaseResponse {
   /**
    * 应用详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Release?: PendingRelease
   /**
@@ -12626,7 +12561,6 @@ export interface DescribeEnableVpcCniProgressResponse {
   Status?: string
   /**
    * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
   /**
@@ -12992,7 +12926,6 @@ pod-not-deduct
 export interface UpdateClusterKubeconfigResponse {
   /**
    * 已更新的子账户Uin列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedSubAccounts?: Array<string>
   /**
@@ -13474,7 +13407,6 @@ export interface DescribeAvailableClusterVersionResponse {
   Versions?: Array<string>
   /**
    * 集群信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Clusters?: Array<ClusterVersion>
   /**
@@ -13683,7 +13615,6 @@ export interface InstallAddonResponse {
 export interface DeleteLogConfigsResponse {
   /**
    * 删除采集规则遇到错误时返回错误原因
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
@@ -13770,12 +13701,10 @@ running = 运行中
 export interface DescribeClusterVirtualNodeResponse {
   /**
    * 节点列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Nodes?: Array<VirtualNode>
   /**
    * 节点总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**

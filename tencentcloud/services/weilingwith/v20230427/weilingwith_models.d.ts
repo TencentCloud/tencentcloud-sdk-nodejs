@@ -1701,22 +1701,18 @@ export interface StopVideoStreamingRequest {
 export interface SpaceDataStats {
     /**
      * 工作空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkspaceId?: string;
     /**
      * 工作空间名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     WorkspaceName?: string;
     /**
      * 楼栋数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildingCount?: number;
     /**
      * 建筑面积
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildingArea?: number;
 }
@@ -2339,17 +2335,14 @@ export interface CreateDeviceSucceeded {
 export interface SceneInfo {
     /**
      * 场景id
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneId?: string;
     /**
      * 场景名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SceneName?: string;
     /**
      * 场景版本
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
 }
@@ -2851,12 +2844,10 @@ export interface DescribeDeviceShadowListResponse {
 export interface SpaceDataTotalStatsRes {
     /**
      * 总楼栋数量
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildingCount?: number;
     /**
      * 总建筑面积
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     BuildingArea?: number;
 }
@@ -3022,7 +3013,6 @@ export interface DescribeVideoCloudRecordResponse {
 export interface SaveDeviceGroupRes {
     /**
      * 保存or修改设备分组回包信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: number;
 }

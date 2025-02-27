@@ -423,6 +423,14 @@ export interface DescribeCloudRunServersRequest {
      * 不传或传0时 会默认为1
      */
     PageNum?: number;
+    /**
+     * 服务名
+     */
+    ServerName?: string;
+    /**
+     * 服务类型：function | container
+     */
+    ServerType?: string;
 }
 /**
  * cls日志信息

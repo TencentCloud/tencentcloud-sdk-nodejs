@@ -4513,6 +4513,10 @@ export interface OrgMember {
    * 成员标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * 腾讯云昵称
+   */
+  NickName?: string
 }
 
 /**
@@ -5184,6 +5188,10 @@ export interface UpdateOrganizationMemberRequest {
    * 代付者Uin。成员财务权限有代付费时需要，取值为成员对应主体的主体管理员Uin
    */
   PayUin?: string
+  /**
+   * 是否同步组织成员名称到成员账号昵称。取值： 1-同步 0-不同步
+   */
+  IsModifyNickName?: number
 }
 
 /**

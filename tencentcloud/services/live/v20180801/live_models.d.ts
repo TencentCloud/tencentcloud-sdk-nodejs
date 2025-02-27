@@ -63,7 +63,6 @@ export interface CasterMarkPicInfo {
     MarkPicIndex: number;
     /**
      * 注：该字段已废弃。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkPicId?: number;
     /**
@@ -93,19 +92,16 @@ export interface CasterMarkPicInfo {
     /**
      * 水印地址。
   最大长度256字符，且url需以jpg、jpeg、png、bmp、gif后缀结尾。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkPicUrl?: string;
     /**
      * 水印描述。
   最大允许长度为256。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 是否启用了等比例缩放。
   注：该字段仅做状态保存，无实际效果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsEqualProportion?: boolean;
 }
@@ -834,31 +830,26 @@ export interface CasterDisplayInfo {
      * 布局Index。
   如果使用自定义布局，为自定义布局下标。
   如果使用单输入布局，如使用输入1，则LayoutIndexType=1， 且LayoutIndex=1，以此类推。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LayoutIndex?: number;
     /**
      * 使用的水印Index列表。
   注：当作为入参使用时，列表中的水印Index需要已经存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkPicIndexList?: Array<number | bigint>;
     /**
      * 使用的文字水印Index列表。
   注：作为入参使用时，列表中的Index需要已经存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordIndexList?: Array<number | bigint>;
     /**
      * 使用的转场类型。
   注：支持的转场类型可通过DescribeCasterTransitionTypes接口获取。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransitionType?: string;
     /**
      * 使用的音频输入Index列表。
   注：当该字段非空时，表示使用布局中对应的输入源的视频，AudioIndexList中对应的输入源的音频。且这些输入源需已存在。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AudioIndexList?: Array<number | bigint>;
     /**
@@ -867,7 +858,6 @@ export interface CasterDisplayInfo {
   有效值，0,1。
   0代表不从头播放
   1代表从头播放
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputStartType?: number;
     /**
@@ -876,7 +866,6 @@ export interface CasterDisplayInfo {
   可选值[0,1]
   0:默认类型，代表普通布局
   1:单输入类型，代表单输入布局
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LayoutIndexType?: number;
 }
@@ -893,15 +882,15 @@ export interface CallbackEventInfo {
      */
     EventTime?: string;
     /**
-     * 事件类型
+     * 事件类型。
      */
     EventType?: number;
     /**
-     * 回调请求
+     * 回调请求。
      */
     Request?: string;
     /**
-     * 回调响应
+     * 回调响应。
      */
     Response?: string;
     /**
@@ -913,11 +902,11 @@ export interface CallbackEventInfo {
      */
     ResponseTime?: string;
     /**
-     * 回调结果
+     * 回调结果。
      */
     ResultCode?: number;
     /**
-     * 流名称
+     * 流名称。
      */
     StreamId?: string;
 }
@@ -1514,13 +1503,11 @@ export interface CasterInputInfo {
   最大允许长度512。
   当InputType为0（推流地址），2（直播拉流地址），3（图片地址）,4（webrtc推流地址）这几种类型时，URL需填入该字段。
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputUrl?: string;
     /**
      * 输入源描述。
   最大允许长度256字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -1528,13 +1515,11 @@ export interface CasterInputInfo {
   单个地址最大允许长度512字符。
   最多允许同时填入5个地址。
   注：此时需保持InputUrl字段为空。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputUrls?: Array<string>;
     /**
      * 是否启用点播无限循环播放。
   注：当前该字段未生效，默认为True。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoopEnable?: boolean;
     /**
@@ -1543,20 +1528,17 @@ export interface CasterInputInfo {
   当值为-1时，表示无限循环。
   当值为其他正整数时，表示循环对应次数。
   注：该字段暂未生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LoopNumber?: number;
     /**
      * 是否启用拉取到导播台。
   注：该字段默认强制为true。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PullPushEnable?: boolean;
     /**
      * 输入源音量百分比。
   默认为100。表示音量为原始大小。
   允许值[0,200]。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Volume?: number;
 }
@@ -1610,17 +1592,14 @@ export interface ReleaseCasterRequest {
 export interface TransitionTypeInfo {
     /**
      * 转场名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TransitionType?: string;
     /**
      * 素材url
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceUrl?: string;
     /**
      * 转场的下标，可用来排序，从1开始递增
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Index?: number;
 }
@@ -4795,24 +4774,23 @@ export interface StreamOnlineInfo {
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 推流时间列表
      */
-    PublishTimeList: Array<PublishTime>;
+    PublishTimeList?: Array<PublishTime>;
     /**
      * 应用名称。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 推流域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 流是否推送到延播。
   0 - 无延播，
   1 - 有延播。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PushToDelay?: number;
 }
@@ -4904,7 +4882,6 @@ export interface CasterLayoutParam {
     LayerLocationY: number;
     /**
      * 是否启用抠图。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UsePortraitSegment?: boolean;
 }
@@ -5317,27 +5294,22 @@ export interface CasterBriefInfo {
     CasterId?: number;
     /**
      * 导播台名称
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CasterName?: string;
     /**
      * 导播台的描述
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 开始计费时间，值为unix时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartBillingTime?: number;
     /**
      * 结束计费时间，值为unix时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StopBillingTime?: number;
     /**
      * 创建时间，值为unix时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
@@ -5346,19 +5318,16 @@ export interface CasterBriefInfo {
   1：无预监，有主监
   2：有预监，无主监
   3：有预监，有主监
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 导播台的过期时间，值为-1或unix时间戳。
   当值为-1时，代表永不过期。
   当值为特定unix时间戳时，代表过期时间为对应的时间，导播台在该时间自动停止。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExpireTime?: number;
     /**
      * 计费字段，该字段暂无作用
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     FeeType?: number;
 }
@@ -6066,31 +6035,31 @@ export interface ProIspPlayCodeDataInfo {
     /**
      * 国家或地区。
      */
-    CountryAreaName: string;
+    CountryAreaName?: string;
     /**
      * 省份。
      */
-    ProvinceName: string;
+    ProvinceName?: string;
     /**
      * 运营商。
      */
-    IspName: string;
+    IspName?: string;
     /**
      * 错误码为2开头的次数。
      */
-    Code2xx: number;
+    Code2xx?: number;
     /**
      * 错误码为3开头的次数。
      */
-    Code3xx: number;
+    Code3xx?: number;
     /**
      * 错误码为4开头的次数。
      */
-    Code4xx: number;
+    Code4xx?: number;
     /**
      * 错误码为5开头的次数。
      */
-    Code5xx: number;
+    Code5xx?: number;
 }
 /**
  * 并发录制路数
@@ -6521,13 +6490,11 @@ export interface CasterLayoutInfo {
      * 布局输出的宽度，单位为像素。
   默认为1280像素。
   注：该值仅在画中画布局，且未设置PgmWidth时生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LayoutWidth?: number;
     /**
      * 布局输出的高度，单位为像素。
   注：该参数仅在画中画布局，且未设置PgmHeight时生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LayoutHeight?: number;
 }
@@ -6801,42 +6768,42 @@ export interface StreamEventInfo {
     /**
      * 应用名称。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 推流域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 推流开始时间。
   UTC 格式时间，例如：2019-01-07T12:00:00Z。
      */
-    StreamStartTime: string;
+    StreamStartTime?: string;
     /**
      * 推流结束时间。
   UTC 格式时间，例如：2019-01-07T15:00:00Z。
      */
-    StreamEndTime: string;
+    StreamEndTime?: string;
     /**
      * 停止原因。
      */
-    StopReason: string;
+    StopReason?: string;
     /**
      * 推流持续时长，单位：秒。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 主播 IP。
   当客户端为内网推流时，展示为: - 。
      */
-    ClientIp: string;
+    ClientIp?: string;
     /**
      * 分辨率。
      */
-    Resolution: string;
+    Resolution?: string;
 }
 /**
  * DeleteRecordTask返回参数结构体
@@ -8989,18 +8956,15 @@ export interface CasterMarkWordInfo {
     MarkWordIndex: number;
     /**
      * 文字水印内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordText?: string;
     /**
      * 文字水印的字号。
   范围[16, 60]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordFontSize?: number;
     /**
      * 文字水印的颜色，值为HEX颜色代码
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordFontColor?: string;
     /**
@@ -9008,34 +8972,29 @@ export interface CasterMarkWordInfo {
   范围[1,2]。
   1. 宋体
   2. 黑体
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordFontType?: number;
     /**
      * 文字水印的x坐标位置，单位百分比。
   范围[0.0, 1.0]
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordLocationX?: number;
     /**
      * 文字水印的Y坐标位置，单位百分比。
   范围[0.0, 1.0]
   
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordLocationY?: number;
     /**
      * 是否开启文字跑马灯功能。
   默认为false。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordRollEnable?: boolean;
     /**
      * 跑马灯文字显示一遍的时间，单位为秒。
   默认为5s。
   范围[5, 600]。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordRollOnceTime?: number;
     /**
@@ -9044,19 +9003,16 @@ export interface CasterMarkWordInfo {
   范围[0,1]。
   0 从左到右
   1 从右到左
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordRollDirection?: number;
     /**
      * 跑马灯文字显示的起始x坐标，单位百分比。
   范围[0.0, 1.0]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordRollStartLocationX?: number;
     /**
      * 跑马灯文字显示的截止x坐标，单位百分比。
   范围[0.0, 1.0]
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MarkWordRollEndLocationX?: number;
 }
@@ -9259,14 +9215,12 @@ export interface CasterOutputInfo {
     OutputUrl?: string;
     /**
      * 描述信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
      * 推流到腾讯云直播源站时，使用的流ID。
   仅当OutputType为1时生效。
   最大允许128字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputStreamId?: string;
     /**
@@ -9280,21 +9234,18 @@ export interface CasterOutputInfo {
      * 推到腾讯云直播源站时，使用的域名。
   最大允许128字符，且域名需属于当前账号绑定的云直播推流域名。
   仅在OutputType为1时生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputDomainName?: string;
     /**
      * 推到腾讯云直播源站时，使用的AppName。
   最大允许64字符。
   仅在OutputType为1时生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputAppName?: string;
     /**
      * 推到腾讯云直播源站时需要添加的推流参数。
   最大允许长度256字符。
   仅在OutputType为1时生效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputParam?: string;
 }
@@ -9688,96 +9639,95 @@ export interface PushQualityData {
   例如：2019-01-08T10:00:00Z。
   注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    Time: string;
+    Time?: string;
     /**
      * 推流域名。
      */
-    PushDomain: string;
+    PushDomain?: string;
     /**
      * 推流路径。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 推流客户端 IP。
      */
-    ClientIp: string;
+    ClientIp?: string;
     /**
      * 开始推流时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
      */
-    BeginPushTime: string;
+    BeginPushTime?: string;
     /**
      * 分辨率信息。
      */
-    Resolution: string;
+    Resolution?: string;
     /**
      * 视频编码格式。
      */
-    VCodec: string;
+    VCodec?: string;
     /**
      * 音频编码格式。
      */
-    ACodec: string;
+    ACodec?: string;
     /**
      * 推流序列号，用来唯一的标志一次推流。
      */
-    Sequence: string;
+    Sequence?: string;
     /**
      * 视频帧率。
      */
-    VideoFps: number;
+    VideoFps?: number;
     /**
      * 视频码率，单位: bps。
      */
-    VideoRate: number;
+    VideoRate?: number;
     /**
      * 音频帧率。
      */
-    AudioFps: number;
+    AudioFps?: number;
     /**
      * 音频码率，单位: bps。
      */
-    AudioRate: number;
+    AudioRate?: number;
     /**
      * 本地流逝时间，单位: ms，音视频流逝时间与本地流逝时间的差距越大表示推流质量越差，上行卡顿越严重。
      */
-    LocalTs: number;
+    LocalTs?: number;
     /**
      * 视频流逝时间，单位: ms。
      */
-    VideoTs: number;
+    VideoTs?: number;
     /**
      * 音频流逝时间，单位: ms。
      */
-    AudioTs: number;
+    AudioTs?: number;
     /**
      * metadata 中的视频码率，单位: kbps。
      */
-    MetaVideoRate: number;
+    MetaVideoRate?: number;
     /**
      * metadata 中的音频码率，单位: kbps。
      */
-    MetaAudioRate: number;
+    MetaAudioRate?: number;
     /**
      * metadata 中的帧率。
      */
-    MateFps: number;
+    MateFps?: number;
     /**
      * 推流参数
      */
-    StreamParam: string;
+    StreamParam?: string;
     /**
      * 带宽，单位Mbps。
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 流量，单位MB。
      */
-    Flux: number;
+    Flux?: number;
     /**
      * 推流服务端 IP。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerIp: string;
+    ServerIp?: string;
 }
 /**
  * DescribeLiveCert请求参数结构体
@@ -10006,41 +9956,41 @@ export interface StreamName {
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 应用名称。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 推流域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 推流开始时间。
   UTC格式时间，例如：2019-01-07T12:00:00Z。
      */
-    StreamStartTime: string;
+    StreamStartTime?: string;
     /**
      * 推流结束时间。
   UTC格式时间，例如：2019-01-07T15:00:00Z。
      */
-    StreamEndTime: string;
+    StreamEndTime?: string;
     /**
      * 停止原因。
      */
-    StopReason: string;
+    StopReason?: string;
     /**
      * 推流持续时长，单位：秒。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 主播 IP。
      */
-    ClientIp: string;
+    ClientIp?: string;
     /**
      * 分辨率。
      */
-    Resolution: string;
+    Resolution?: string;
 }
 /**
  * DescribeLivePackageInfo请求参数结构体

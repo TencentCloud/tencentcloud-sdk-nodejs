@@ -573,6 +573,10 @@ export interface MultiCertInfo {
      * 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。
      */
     CertList: Array<CertInfo>;
+    /**
+     * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON
+     */
+    SSLVerifyClient?: string;
 }
 /**
  * 修改节点标签的数据类型
@@ -3100,6 +3104,10 @@ export interface CertificateInput {
      */
     SSLMode?: string;
     /**
+     * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON。
+     */
+    SSLVerifyClient?: string;
+    /**
      * 服务端证书的 ID，如果不填写此项则必须上传证书，包括 CertContent，CertKey，CertName。
      */
     CertId?: string;
@@ -5499,6 +5507,10 @@ export interface CertificateOutput {
      * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
      */
     SSLMode?: string;
+    /**
+     * 是否开启客户端证书验证，只在双向认证时生效。
+     */
+    SSLVerifyClient?: string;
     /**
      * 服务端证书的ID。
      */

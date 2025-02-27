@@ -1606,6 +1606,10 @@ export interface DescribeSlowQueryRecordsResponse {
  */
 export interface ClusterConfigsHistory {
   /**
+   * 计算组id
+   */
+  ComputeGroupId?: string
+  /**
    * 配置文件名称
    */
   FileName?: string
@@ -1787,6 +1791,10 @@ export interface DescribeClusterConfigsHistoryRequest {
 apache_hdfs_broker.conf、be.conf、fe.conf、core-site.xml、hdfs-site.xml、odbcinst.ini
    */
   ConfigFileNames?: Array<string>
+  /**
+   * 需要查询的计算组列表
+   */
+  ComputeGroupIds?: Array<string>
 }
 
 /**
