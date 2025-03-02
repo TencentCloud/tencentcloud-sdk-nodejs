@@ -142,11 +142,12 @@ import {
   OrganizationAuthUrl,
   AuthRecord,
   CreateSealPolicyResponse,
+  DeleteSealPoliciesRequest,
   FlowApproverUrlInfo,
   DisableUserAutoSignRequest,
   DescribeIntegrationEmployeesResponse,
   SuccessDeleteStaffData,
-  DeleteSealPoliciesRequest,
+  CreateEmployeeChangeUrlResponse,
   CreateConvertTaskApiResponse,
   CreateFlowSignReviewRequest,
   CreateOrganizationAuthUrlResponse,
@@ -209,7 +210,7 @@ import {
   Recipient,
   DescribeFlowEvidenceReportRequest,
   FailedCreateRoleData,
-  DescribeBillUsageRequest,
+  CreateEmployeeChangeUrlRequest,
   ExtendScene,
   DescribeBillUsageResponse,
   ApproverInfo,
@@ -240,6 +241,7 @@ import {
   FailedUpdateStaffData,
   DescribeOrganizationVerifyStatusRequest,
   SubOrgBillSummary,
+  DescribeBillUsageRequest,
   DeleteStaffsResult,
   CancelMultiFlowSignQRCodeRequest,
   DeleteIntegrationDepartmentRequest,
@@ -1355,6 +1357,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
   ): Promise<ModifyExtendedServiceResponse> {
     return this.request("ModifyExtendedService", req, cb)
+  }
+
+  /**
+     * 生成员工信息变更链接，当前仅支持变更手机号
+
+注: 
+1. 目前仅支持修改员工手机号，待修改员工必须已经实名且在职
+2. 仅支持返回小程序链接
+     */
+  async CreateEmployeeChangeUrl(
+    req: CreateEmployeeChangeUrlRequest,
+    cb?: (error: string, rep: CreateEmployeeChangeUrlResponse) => void
+  ): Promise<CreateEmployeeChangeUrlResponse> {
+    return this.request("CreateEmployeeChangeUrl", req, cb)
   }
 
   /**

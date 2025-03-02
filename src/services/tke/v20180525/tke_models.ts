@@ -1700,17 +1700,14 @@ export interface DescribeEdgeAvailableExtraArgsRequest {
 export interface ExistedInstance {
   /**
    * 实例是否支持加入集群(TRUE 可以加入 FALSE 不能加入)。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Usable?: boolean
   /**
    * 实例不支持加入的原因。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UnusableReason?: string
   /**
    * 实例已经所在的集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AlreadyInCluster?: string
   /**
@@ -1719,7 +1716,6 @@ export interface ExistedInstance {
   InstanceId?: string
   /**
    * 实例名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
@@ -1735,37 +1731,30 @@ export interface ExistedInstance {
   PublicIpAddresses?: Array<string>
   /**
    * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 实例的CPU核数，单位：核。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CPU?: number
   /**
    * 实例内存容量，单位：GB。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: number
   /**
    * 操作系统名称。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OsName?: string
   /**
    * 实例机型。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
    * 伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoscalingGroupId?: string
   /**
    * 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceChargeType?: string
   /**
@@ -2839,7 +2828,6 @@ export interface ClusterAsGroupOption {
   IsScaleDownEnabled?: boolean
   /**
    * 多伸缩组情况下扩容选择算法(random 随机选择，most-pods 最多类型的Pod least-waste 最少的资源浪费，默认为random)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Expander?: string
   /**
@@ -5443,32 +5431,26 @@ export interface ModifyClusterRuntimeConfigRequest {
 export interface RegionInstance {
   /**
    * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionName?: string
   /**
    * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
   /**
    * 地域状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 地域特性开关(按照JSON的形式返回所有属性)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureGates?: string
   /**
    * 地域简称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
   /**
    * 地域白名单
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
 }
@@ -7312,22 +7294,18 @@ export interface NodePool {
   NodeCountSummary?: NodeCountSummary
   /**
    * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoscalingGroupStatus?: string
   /**
    * 最大节点数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxNodesNum?: number
   /**
    * 最小节点数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MinNodesNum?: number
   /**
    * 期望的节点数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DesiredNodesNum?: number
   /**
@@ -7337,27 +7315,22 @@ export interface NodePool {
   RuntimeConfig?: RuntimeConfig
   /**
    * 节点池osName
-注意：此字段可能返回 null，表示取不到有效值。
    */
   NodePoolOs?: string
   /**
    * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OsCustomizeType?: string
   /**
    * 镜像id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageId?: string
   /**
    * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DesiredPodNum?: number
   /**
    * 用户自定义脚本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserScript?: string
   /**
@@ -7367,7 +7340,6 @@ export interface NodePool {
   Tags?: Array<Tag>
   /**
    * 删除保护开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeletionProtection?: boolean
   /**
@@ -7382,7 +7354,6 @@ export interface NodePool {
   GPUArgs?: GPUArgs
   /**
    * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DockerGraphPath?: string
   /**
@@ -7392,12 +7363,10 @@ export interface NodePool {
   DataDisks?: Array<DataDisk>
   /**
    * 是否不可调度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Unschedulable?: number
   /**
    * 用户自定义脚本,在UserScript前执行
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreStartUserScript?: string
 }
@@ -7767,7 +7736,6 @@ export interface Cluster {
   ClusterStatus?: string
   /**
    * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Property?: string
   /**
@@ -7776,62 +7744,50 @@ export interface Cluster {
   ClusterMaterNodeNum?: number
   /**
    * 集群使用镜像id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageId?: string
   /**
    * OsCustomizeType 系统定制类型
-注意：此字段可能返回 null，表示取不到有效值。
    */
   OsCustomizeType?: string
   /**
    * 集群运行环境docker或container
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerRuntime?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 删除保护开关
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeletionProtection?: boolean
   /**
    * 集群是否开启第三方节点支持
-注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableExternalNode?: boolean
   /**
    * 集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterLevel?: string
   /**
    * 自动变配集群等级，针对托管集群生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoUpgradeClusterLevel?: boolean
   /**
    * 是否开启QGPU共享
-注意：此字段可能返回 null，表示取不到有效值。
    */
   QGPUShareEnable?: boolean
   /**
    * 运行时版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeVersion?: string
   /**
    * 集群当前etcd数量
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterEtcdNodeNum?: number
   /**
    * 本地专用集群Id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
 }
@@ -8990,82 +8946,66 @@ export interface ReleaseDetails {
   Namespace?: string
   /**
    * 应用当前版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
   /**
    * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
    * 应用提示
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Notes?: string
   /**
    * 用户自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Config?: string
   /**
    * 应用资源详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Manifest?: string
   /**
    * 应用制品版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartVersion?: string
   /**
    * 应用制品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartName?: string
   /**
    * 应用制品描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartDescription?: string
   /**
    * 应用制品app版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppVersion?: string
   /**
    * 应用首次部署时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstDeployedTime?: string
   /**
    * 应用最近部署时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   LastDeployedTime?: string
   /**
    * 应用参数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ComputedValues?: string
   /**
    * chart 的来源， tke-market, others
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartFrom?: string
   /**
    * 第三方chart 的安装地址
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartURL?: string
   /**
    * 通过chart 创建的资源
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources?: string
 }
@@ -9764,8 +9704,7 @@ export interface DisableEventPersistenceRequest {
  */
 export interface RunMonitorServiceEnabled {
   /**
-   * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>true：表示开启云监控服务<br><li>false：表示不开启云监控服务<br><br>默认取值：true。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>true：表示开启云监控服务</li><li>false：表示不开启云监控服务</li><br>默认取值：true。
    */
   Enabled?: boolean
 }
@@ -9920,7 +9859,6 @@ export interface DescribeTKEEdgeClusterCredentialResponse {
 export interface InstanceAdvancedSettings {
   /**
    * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DesiredPodNumber: number
   /**
@@ -9930,7 +9868,6 @@ export interface InstanceAdvancedSettings {
   GPUArgs: GPUArgs
   /**
    * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
-注意：此字段可能返回 null，表示取不到有效值。
    */
   PreStartUserScript: string
   /**
@@ -9941,17 +9878,14 @@ export interface InstanceAdvancedSettings {
   /**
    * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
 注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MountTarget?: string
   /**
    * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DockerGraphPath?: string
   /**
    * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UserScript?: string
   /**
@@ -9970,7 +9904,6 @@ export interface InstanceAdvancedSettings {
   DataDisks?: Array<DataDisk>
   /**
    * 节点相关的自定义参数信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraArgs?: InstanceExtraArgs
 }
@@ -10830,37 +10763,30 @@ export interface Release {
   Namespace?: string
   /**
    * 应用当前版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Revision?: string
   /**
    * 应用状态
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 制品名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartName?: string
   /**
    * 制品版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ChartVersion?: string
   /**
    * 制品应用版本
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AppVersion?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
   /**
    * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
 }
@@ -11065,12 +10991,10 @@ export interface ClusterNetworkSettings {
   Cni?: boolean
   /**
    * service的网络模式，当前参数只适用于ipvs+bpf模式
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KubeProxyMode?: string
   /**
    * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceCIDR?: string
   /**
@@ -11080,23 +11004,19 @@ export interface ClusterNetworkSettings {
   Subnets?: Array<string>
   /**
    * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IgnoreServiceCIDRConflict?: boolean
   /**
    * 集群VPC-CNI模式是否为非双栈集群，默认false，非双栈。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDualStack?: boolean
   /**
    * 用于分配service的IP range，由系统自动分配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6ServiceCIDR?: string
   /**
    * 集群Cilium Mode配置
 - clusterIP
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CiliumMode?: string
 }
@@ -12143,7 +12063,6 @@ export interface LoginSettings {
   KeyIds?: Array<string>
   /**
    * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为true。取值范围：<li>true：表示保持镜像的登录设置</li><li>false：表示不保持镜像的登录设置</li>默认取值：false。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepImageLogin?: string
 }
@@ -13751,37 +13670,30 @@ export interface RunPrometheusInstanceRequest {
 export interface PendingRelease {
   /**
    * 应用状态详情
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Condition?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
   /**
    * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 应用命名空间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 应用状态(参考helm的发布状态： unknown, deployed, uninstalled, superseded, failed, uninstalling, pending-install, pending-upgrade 或 pending-rollback)
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
    * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
 }

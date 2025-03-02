@@ -3656,6 +3656,10 @@ export interface KongRoutePreview {
    * 是否缓存响应body，默认true
    */
   ResponseBuffering?: boolean
+  /**
+   * 正则优先级
+   */
+  RegexPriority?: number
 }
 
 /**
@@ -5427,11 +5431,15 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
   /**
    * 优先级，同一个服务的灰度规则优先级是唯一的
    */
-  Priority: number
+  Priority?: number
   /**
    * 灰度规则配置
    */
-  CanaryRule: CloudNativeAPIGatewayCanaryRule
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule
+  /**
+   * 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略Priority和CanaryRule参数
+   */
+  CanaryRuleList?: Array<CanaryPriorityRule>
 }
 
 /**
@@ -5963,7 +5971,11 @@ export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
   /**
    * 灰度规则配置
    */
-  CanaryRule: CloudNativeAPIGatewayCanaryRule
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule
+  /**
+   * 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略CanaryRule参数
+   */
+  CanaryRuleList?: Array<CloudNativeAPIGatewayCanaryRule>
 }
 
 /**
@@ -6767,6 +6779,10 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
    * 是否缓存响应body，默认true
    */
   ResponseBuffering?: boolean
+  /**
+   * 增加优先级
+   */
+  RegexPriority?: number
 }
 
 /**
@@ -7011,7 +7027,11 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
   /**
    * 优先级
    */
-  Priority: number
+  Priority?: number
+  /**
+   * 优先级列表，如果配置了此参数，将以此参数为准，忽略Priority参数
+   */
+  PriorityList?: Array<number | bigint>
 }
 
 /**
@@ -7476,6 +7496,20 @@ export interface KongPassiveHealthCheck {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
+}
+
+/**
+ * 灰度规则 Priority - Rule
+ */
+export interface CanaryPriorityRule {
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 灰度规则配置
+   */
+  CanaryRule?: CloudNativeAPIGatewayCanaryRule
 }
 
 /**
@@ -8609,6 +8643,10 @@ export interface CreateCloudNativeAPIGatewayRouteRequest {
    * 是否缓存响应body，默认true
    */
   ResponseBuffering?: boolean
+  /**
+   * 正则优先级
+   */
+  RegexPriority?: number
 }
 
 /**

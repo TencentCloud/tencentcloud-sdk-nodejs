@@ -578,6 +578,16 @@ it("ess.v20201111.ModifyExtendedService", async function () {
     }
 })
 
+it("ess.v20201111.CreateEmployeeChangeUrl", async function () {
+    try {
+       const data = await client.CreateEmployeeChangeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.ModifyFlowDeadline", async function () {
     try {
        const data = await client.ModifyFlowDeadline({})

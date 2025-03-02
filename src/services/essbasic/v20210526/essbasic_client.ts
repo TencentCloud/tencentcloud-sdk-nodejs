@@ -174,6 +174,7 @@ import {
   DescribeChannelOrganizationsRequest,
   ChannelCreatePreparedPersonalEsignRequest,
   FillError,
+  CreateEmployeeChangeUrlResponse,
   ChannelRenewAutoSignLicenseRequest,
   ChannelDescribeBillUsageDetailResponse,
   IntentionActionResult,
@@ -185,6 +186,7 @@ import {
   ChannelCreateRoleResponse,
   FormField,
   FailedCreateRoleData,
+  CreateEmployeeChangeUrlRequest,
   ChannelDescribeUserAutoSignStatusRequest,
   FlowResourceUrlInfo,
   UploadFile,
@@ -1165,6 +1167,20 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: ModifyExtendedServiceResponse) => void
   ): Promise<ModifyExtendedServiceResponse> {
     return this.request("ModifyExtendedService", req, cb)
+  }
+
+  /**
+     * 生成员工信息变更链接，当前仅支持变更手机号
+
+注: 
+1. 目前仅支持修改员工手机号，待修改员工必须已经实名且在职
+2. 仅支持返回小程序链接
+     */
+  async CreateEmployeeChangeUrl(
+    req: CreateEmployeeChangeUrlRequest,
+    cb?: (error: string, rep: CreateEmployeeChangeUrlResponse) => void
+  ): Promise<CreateEmployeeChangeUrlResponse> {
+    return this.request("CreateEmployeeChangeUrl", req, cb)
   }
 
   /**

@@ -51,6 +51,10 @@ export interface TextResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubLabel?: string;
+    /**
+     * 该字段用于返回违规文本命中信息
+     */
+    HitInfos?: Array<HitInfo>;
 }
 /**
  * DescribeTasks请求参数结构体
@@ -135,25 +139,25 @@ export interface CreateAudioModerationSyncTaskRequest {
     FileUrl?: string;
 }
 /**
- * 文件桶信息
-参考腾讯云存储相关说明 https://cloud.tencent.com/document/product/436/44352
+ * 关键词命中位置信息
  */
-export interface BucketInfo {
+export interface HitInfo {
     /**
-     * 该字段用于标识腾讯云对象存储的存储桶名称,关于文件桶的详细信息敬请参考 [腾讯云存储相关说明](https://cloud.tencent.com/document/product/436/44352)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 标识模型命中还是关键词命中
      */
-    Bucket: string;
+    Type?: string;
     /**
-     * 该字段用于标识腾讯云对象存储的托管机房的分布地区，对象存储 COS 的数据存放在这些地域的存储桶中。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 命中关键词
      */
-    Region: string;
+    Keyword?: string;
     /**
-     * 该字段用于标识腾讯云对象存储的对象Key,对象作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义词库名称
      */
-    Object: string;
+    LibName?: string;
+    /**
+     * 	位置信息
+     */
+    Positions?: Array<Position>;
 }
 /**
  * CreateAudioModerationTask返回参数结构体
@@ -731,6 +735,19 @@ export interface MoanResult {
     SubLabel?: string;
 }
 /**
+ * 标识命中的违规关键词位置信息
+ */
+export interface Position {
+    /**
+     * 关键词起始位置
+     */
+    Start?: number;
+    /**
+     * 关键词结束位置
+     */
+    End?: number;
+}
+/**
  * CancelTask返回参数结构体
  */
 export interface CancelTaskResponse {
@@ -738,6 +755,27 @@ export interface CancelTaskResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 文件桶信息
+参考腾讯云存储相关说明 https://cloud.tencent.com/document/product/436/44352
+ */
+export interface BucketInfo {
+    /**
+     * 该字段用于标识腾讯云对象存储的存储桶名称,关于文件桶的详细信息敬请参考 [腾讯云存储相关说明](https://cloud.tencent.com/document/product/436/44352)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bucket: string;
+    /**
+     * 该字段用于标识腾讯云对象存储的托管机房的分布地区，对象存储 COS 的数据存放在这些地域的存储桶中。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * 该字段用于标识腾讯云对象存储的对象Key,对象作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Object: string;
 }
 /**
  * 音频ASR文本审核结果

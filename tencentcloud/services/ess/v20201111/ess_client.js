@@ -836,6 +836,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyExtendedService", req, cb);
     }
     /**
+     * 生成员工信息变更链接，当前仅支持变更手机号
+
+注:
+1. 目前仅支持修改员工手机号，待修改员工必须已经实名且在职
+2. 仅支持返回小程序链接
+     */
+    async CreateEmployeeChangeUrl(req, cb) {
+        return this.request("CreateEmployeeChangeUrl", req, cb);
+    }
+    /**
      * 在已启动的签署流程中，可对签署截止日期进行延期操作，主要分为以下两个层面：
 1. <b> 合同（流程）层面</b>：仅需提供签署流程ID。此操作将对整个签署流程以及未单独设置签署截止时间的签署人进行延期。
 2. <b> 签署人层面</b>  ：需提供流程ID和签署人ID。此操作针对特定签署人进行延期，特别是对于有序合同（流程），签署截止时间不得超过后续签署人的流程截止时间。

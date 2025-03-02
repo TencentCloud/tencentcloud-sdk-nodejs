@@ -19,10 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ImageSegments,
+  TextPosition,
+  AudioLabelResult,
+  SpeakerResult,
   ImageResultResult,
   StorageInfo,
-  BucketInfo,
+  HitInfo,
   CreateVideoModerationTaskResponse,
+  TravelResult,
   TaskResult,
   CancelTaskRequest,
   DescribeTaskDetailResponse,
@@ -38,6 +42,7 @@ import {
   TaskFilter,
   RecognitionResult,
   CancelTaskResponse,
+  BucketInfo,
   AudioResultDetailTextResult,
   SegmentCosUrlList,
   RcbAsr,

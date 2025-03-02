@@ -287,7 +287,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeNatFwInstanceWithRegion", req, cb);
     }
     /**
-     * 删除入侵防御规则白名单接口
+     * 历史方案，业务已迁移，接口不再适用
+
+删除入侵防御规则白名单接口
      */
     async DeleteIdsWhiteRule(req, cb) {
         return this.request("DeleteIdsWhiteRule", req, cb);
@@ -329,7 +331,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("CreateAlertCenterOmit", req, cb);
     }
     /**
-     * 创建入侵防御规则白名单接口
+     * CreateIdsWhiteRule
+
+创建入侵防御规则白名单接口
      */
     async CreateIdsWhiteRule(req, cb) {
         return this.request("CreateIdsWhiteRule", req, cb);
@@ -698,7 +702,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeBlockStaticList", req, cb);
     }
     /**
-     * 查询入侵防御规则白名单接口
+     * 历史方案，业务已迁移，接口不再适用
+
+查询入侵防御规则白名单接口
      */
     async DescribeIdsWhiteRule(req, cb) {
         return this.request("DescribeIdsWhiteRule", req, cb);

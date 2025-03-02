@@ -3500,6 +3500,10 @@ export interface KongRoutePreview {
      * 是否缓存响应body，默认true
      */
     ResponseBuffering?: boolean;
+    /**
+     * 正则优先级
+     */
+    RegexPriority?: number;
 }
 /**
  * 实例地域信息描述
@@ -5199,11 +5203,15 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
     /**
      * 优先级，同一个服务的灰度规则优先级是唯一的
      */
-    Priority: number;
+    Priority?: number;
     /**
      * 灰度规则配置
      */
-    CanaryRule: CloudNativeAPIGatewayCanaryRule;
+    CanaryRule?: CloudNativeAPIGatewayCanaryRule;
+    /**
+     * 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略Priority和CanaryRule参数
+     */
+    CanaryRuleList?: Array<CanaryPriorityRule>;
 }
 /**
  * DescribeCloudNativeAPIGatewayPorts返回参数结构体
@@ -5704,7 +5712,11 @@ export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
     /**
      * 灰度规则配置
      */
-    CanaryRule: CloudNativeAPIGatewayCanaryRule;
+    CanaryRule?: CloudNativeAPIGatewayCanaryRule;
+    /**
+     * 灰度规则配置列表，如果配置了此参数，将以此参数为准，忽略CanaryRule参数
+     */
+    CanaryRuleList?: Array<CloudNativeAPIGatewayCanaryRule>;
 }
 /**
  * OpenWafProtection请求参数结构体
@@ -6482,6 +6494,10 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
      * 是否缓存响应body，默认true
      */
     ResponseBuffering?: boolean;
+    /**
+     * 增加优先级
+     */
+    RegexPriority?: number;
 }
 /**
  * CreateGovernanceAlias返回参数结构体
@@ -6714,7 +6730,11 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
     /**
      * 优先级
      */
-    Priority: number;
+    Priority?: number;
+    /**
+     * 优先级列表，如果配置了此参数，将以此参数为准，忽略Priority参数
+     */
+    PriorityList?: Array<number | bigint>;
 }
 /**
  * 网关实例协议端口列表
@@ -7159,6 +7179,19 @@ export interface KongPassiveHealthCheck {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
+}
+/**
+ * 灰度规则 Priority - Rule
+ */
+export interface CanaryPriorityRule {
+    /**
+     * 优先级
+     */
+    Priority?: number;
+    /**
+     * 灰度规则配置
+     */
+    CanaryRule?: CloudNativeAPIGatewayCanaryRule;
 }
 /**
  * 云原生API网关vpc配置。
@@ -8247,6 +8280,10 @@ export interface CreateCloudNativeAPIGatewayRouteRequest {
      * 是否缓存响应body，默认true
      */
     ResponseBuffering?: boolean;
+    /**
+     * 正则优先级
+     */
+    RegexPriority?: number;
 }
 /**
  * 网关分组列表

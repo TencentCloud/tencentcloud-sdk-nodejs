@@ -206,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAttributeLabelExist", req, cb);
     }
     /**
+     * 文档重命名
+     */
+    async RenameDoc(req, cb) {
+        return this.request("RenameDoc", req, cb);
+    }
+    /**
      * 文档详情
      */
     async DescribeDoc(req, cb) {

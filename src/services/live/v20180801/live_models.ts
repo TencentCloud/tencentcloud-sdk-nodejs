@@ -243,7 +243,7 @@ export interface PublishTime {
    * 推流时间。
 UTC 格式，例如：2018-06-29T19:00:00Z。
    */
-  PublishTime: string
+  PublishTime?: string
 }
 
 /**
@@ -481,11 +481,11 @@ export interface PlayCodeTotalInfo {
    * HTTP code，可选值包括:
 400，403，404，500，502，503，504。
    */
-  Code: string
+  Code?: string
   /**
    * 总次数。
    */
-  Num: number
+  Num?: number
 }
 
 /**
@@ -1110,19 +1110,19 @@ export interface ProIspPlaySumInfo {
   /**
    * 省份/运营商/国家或地区。
    */
-  Name: string
+  Name?: string
   /**
    * 总流量，单位: MB。
    */
-  TotalFlux: number
+  TotalFlux?: number
   /**
    * 总请求数。
    */
-  TotalRequest: number
+  TotalRequest?: number
   /**
    * 平均下载流量，单位: MB/s。
    */
-  AvgFluxPerSecond: number
+  AvgFluxPerSecond?: number
 }
 
 /**
@@ -1958,11 +1958,11 @@ export interface HttpStatusInfo {
   /**
    * 播放HTTP状态码。
    */
-  HttpStatus: string
+  HttpStatus?: string
   /**
    * 个数。
    */
-  Num: number
+  Num?: number
 }
 
 /**
@@ -2145,25 +2145,25 @@ export interface PlayAuthKeyInfo {
   /**
    * 域名。
    */
-  DomainName: string
+  DomainName?: string
   /**
    * 是否启用:
 0: 关闭。
 1: 启用。
    */
-  Enable: number
+  Enable?: number
   /**
    * 鉴权 Key。
    */
-  AuthKey: string
+  AuthKey?: string
   /**
    * 有效时间，单位：秒。
    */
-  AuthDelta: number
+  AuthDelta?: number
   /**
    * 鉴权 BackKey。
    */
-  AuthBackKey: string
+  AuthBackKey?: string
 }
 
 /**
@@ -2594,31 +2594,31 @@ export interface MonitorStreamPlayInfo {
   /**
    * 播放域名。
    */
-  PlayDomain: string
+  PlayDomain?: string
   /**
    * 流id。
    */
-  StreamName: string
+  StreamName?: string
   /**
    * 播放码率，0表示原始码率。
    */
-  Rate: number
+  Rate?: number
   /**
    * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 带宽，单位是Mbps。
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
    */
-  Online: number
+  Online?: number
   /**
    * 请求数。
    */
-  Request: number
+  Request?: number
 }
 
 /**
@@ -3247,11 +3247,11 @@ export interface PlayDataInfoByStream {
   /**
    * 流名称。
    */
-  StreamName: string
+  StreamName?: string
   /**
    * 总流量，单位: MB。
    */
-  TotalFlux: number
+  TotalFlux?: number
 }
 
 /**
@@ -3459,11 +3459,11 @@ export interface BillCountryInfo {
   /**
    * 国家名称
    */
-  Name: string
+  Name?: string
   /**
    * 带宽明细数据信息。
    */
-  BandInfoList: Array<BillDataInfo>
+  BandInfoList?: Array<BillDataInfo>
 }
 
 /**
@@ -3737,36 +3737,36 @@ export interface PullStreamConfig {
   /**
    * 拉流配置 ID。
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 源 URL。
    */
-  FromUrl: string
+  FromUrl?: string
   /**
    * 目的 URL。
    */
-  ToUrl: string
+  ToUrl?: string
   /**
    * 区域名。
    */
-  AreaName: string
+  AreaName?: string
   /**
    * 运营商名。
    */
-  IspName: string
+  IspName?: string
   /**
    * 开始时间。
 UTC格式时间，例如: 2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 结束时间。
 
 UTC格式时间，例如：2019-01-08T10:00:00Z。
 注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 状态:
 0: 无效。
@@ -3775,7 +3775,7 @@ UTC格式时间，例如：2019-01-08T10:00:00Z。
 3: 拉起失败。
 4: 暂停。
    */
-  Status: string
+  Status?: string
 }
 
 /**
@@ -4798,27 +4798,27 @@ export interface ClientIpPlaySumInfo {
   /**
    * 客户端 IP，点分型。
    */
-  ClientIp: string
+  ClientIp?: string
   /**
    * 客户端所在省份。
    */
-  Province: string
+  Province?: string
   /**
    * 总流量。
    */
-  TotalFlux: number
+  TotalFlux?: number
   /**
    * 总请求数。
    */
-  TotalRequest: number
+  TotalRequest?: number
   /**
    * 总失败请求数。
    */
-  TotalFailedRequest: number
+  TotalFailedRequest?: number
   /**
    * 客户端所在国家。
    */
-  CountryArea: string
+  CountryArea?: string
 }
 
 /**
@@ -5035,23 +5035,23 @@ export interface DomainDetailInfo {
 Mainland: 表示国内数据。
 Oversea: 表示国外数据。
    */
-  MainlandOrOversea: string
+  MainlandOrOversea?: string
   /**
    * 带宽，单位: Mbps。
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * 流量，单位: MB。
    */
-  Flux: number
+  Flux?: number
   /**
    * 人数。
    */
-  Online: number
+  Online?: number
   /**
    * 请求数。
    */
-  Request: number
+  Request?: number
 }
 
 /**
@@ -5605,38 +5605,38 @@ export interface DelayInfo {
   /**
    * 推流域名。
    */
-  DomainName: string
+  DomainName?: string
   /**
    * 推流路径，与推流和播放地址中的 
  AppName 保持一致，默认为 live。
    */
-  AppName: string
+  AppName?: string
   /**
    * 流名称。
    */
-  StreamName: string
+  StreamName?: string
   /**
    * 延播时间，单位：秒。
    */
-  DelayInterval: number
+  DelayInterval?: number
   /**
    * 创建时间，UTC 时间。
 注意：UTC时间和北京时间相差8小时。
 例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 过期时间，UTC 时间。
 注意：UTC时间和北京时间相差8小时。
 例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 当前状态:
 -1：已过期。
 1： 生效中。
    */
-  Status: number
+  Status?: number
 }
 
 /**
@@ -6185,11 +6185,11 @@ export interface DomainInfoList {
   /**
    * 域名。
    */
-  Domain: string
+  Domain?: string
   /**
    * 明细信息。
    */
-  DetailInfoList: Array<DomainDetailInfo>
+  DetailInfoList?: Array<DomainDetailInfo>
 }
 
 /**
@@ -6349,11 +6349,11 @@ export interface ConcurrentRecordStreamNum {
   /**
    * 时间点。
    */
-  Time: string
+  Time?: string
   /**
    * 路数。
    */
-  Num: number
+  Num?: number
 }
 
 /**
@@ -8435,12 +8435,11 @@ export interface PlayStatInfo {
   /**
    * 数据时间点。
    */
-  Time: string
+  Time?: string
   /**
    * 带宽/流量/请求数/并发连接数/下载速度的值，若没数据返回时该值为0。
-注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -9764,11 +9763,11 @@ export interface TimeValue {
   /**
    * UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。
    */
-  Time: string
+  Time?: string
   /**
    * 数值。
    */
-  Num: number
+  Num?: number
 }
 
 /**
@@ -10208,21 +10207,21 @@ export interface PlaySumStatInfo {
   /**
    * 域名或流 ID。
    */
-  Name: string
+  Name?: string
   /**
    * 平均下载速度，
 单位: MB/s。
 计算公式: 每分钟的下载速度求平均值。
    */
-  AvgFluxPerSecond: number
+  AvgFluxPerSecond?: number
   /**
    * 总流量，单位: MB。
    */
-  TotalFlux: number
+  TotalFlux?: number
   /**
    * 总请求数。
    */
-  TotalRequest: number
+  TotalRequest?: number
 }
 
 /**
@@ -11220,11 +11219,11 @@ export interface HttpCodeInfo {
    * HTTP协议返回码。
 例："2xx", "3xx", "4xx", "5xx"。
    */
-  HttpCode: string
+  HttpCode?: string
   /**
    * 统计信息，对于无数据的时间点，会补0。
    */
-  ValueList: Array<HttpCodeValue>
+  ValueList?: Array<HttpCodeValue>
 }
 
 /**
@@ -11639,15 +11638,15 @@ export interface GroupProIspDataInfo {
   /**
    * 省份。
    */
-  ProvinceName: string
+  ProvinceName?: string
   /**
    * 运营商。
    */
-  IspName: string
+  IspName?: string
   /**
    * 分钟维度的明细数据。
    */
-  DetailInfoList: Array<CdnPlayStatData>
+  DetailInfoList?: Array<CdnPlayStatData>
 }
 
 /**

@@ -730,6 +730,16 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
         return this.request("ModifyExtendedService", req, cb);
     }
     /**
+     * 生成员工信息变更链接，当前仅支持变更手机号
+
+注:
+1. 目前仅支持修改员工手机号，待修改员工必须已经实名且在职
+2. 仅支持返回小程序链接
+     */
+    async CreateEmployeeChangeUrl(req, cb) {
+        return this.request("CreateEmployeeChangeUrl", req, cb);
+    }
+    /**
      * 获取区块链存证证书查看链接/二维码接口
 
 适用场景：企业员工可以通过此接口生成合同区块链存证证书的查看链接/二维码，以供他人扫码打开腾讯电子签小程序查看。

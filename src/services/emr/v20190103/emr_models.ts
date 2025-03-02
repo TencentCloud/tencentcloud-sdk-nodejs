@@ -2820,97 +2820,97 @@ export interface EmrProductConfigOutter {
    * 软件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SoftInfo: Array<string>
+  SoftInfo?: Array<string>
   /**
    * Master节点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterNodeSize: number
+  MasterNodeSize?: number
   /**
    * Core节点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoreNodeSize: number
+  CoreNodeSize?: number
   /**
    * Task节点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskNodeSize: number
+  TaskNodeSize?: number
   /**
    * Common节点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComNodeSize: number
+  ComNodeSize?: number
   /**
    * Master节点资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterResource: OutterResource
+  MasterResource?: OutterResource
   /**
    * Core节点资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoreResource: OutterResource
+  CoreResource?: OutterResource
   /**
    * Task节点资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskResource: OutterResource
+  TaskResource?: OutterResource
   /**
    * Common节点资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComResource: OutterResource
+  ComResource?: OutterResource
   /**
    * 是否使用COS
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OnCos: boolean
+  OnCos?: boolean
   /**
    * 收费类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeType: number
+  ChargeType?: number
   /**
    * Router节点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RouterNodeSize: number
+  RouterNodeSize?: number
   /**
    * 是否支持HA
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SupportHA: boolean
+  SupportHA?: boolean
   /**
    * 是否支持安全模式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityOn: boolean
+  SecurityOn?: boolean
   /**
-   * 安全组名称
+   * 集群初始安全组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityGroup: string
+  SecurityGroup?: string
   /**
    * 是否开启Cbs加密
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CbsEncrypt: number
+  CbsEncrypt?: number
   /**
    * 自定义应用角色。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationRole: string
+  ApplicationRole?: string
   /**
-   * 安全组
+   * 安全组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityGroups: Array<string>
+  SecurityGroups?: Array<string>
   /**
    * SSH密钥Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicKeyId: string
+  PublicKeyId?: string
 }
 
 /**

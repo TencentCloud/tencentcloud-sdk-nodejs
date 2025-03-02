@@ -3515,12 +3515,12 @@ export interface InstanceParamItem {
  */
 export interface DescribeDBSecurityGroupsRequest {
   /**
-   * 实例ID
+   * 实例ID（InstanceId与InstanceGroupId必须任选一个传入）
    * @deprecated
    */
   InstanceId?: string
   /**
-   * 实例组ID
+   * 实例组ID（InstanceId与InstanceGroupId必须任选一个传入）
    */
   InstanceGroupId?: string
 }
@@ -3908,6 +3908,11 @@ export interface DescribeBackupConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogicCrossRegionsConfigUpdateTime?: string
+  /**
+   * 自动逻辑备份配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogicBackupConfig?: LogicBackupConfigInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

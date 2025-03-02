@@ -181,7 +181,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     DescribeNatFwInstanceWithRegion(req?: DescribeNatFwInstanceWithRegionRequest, cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void): Promise<DescribeNatFwInstanceWithRegionResponse>;
     /**
-     * 删除入侵防御规则白名单接口
+     * 历史方案，业务已迁移，接口不再适用
+
+删除入侵防御规则白名单接口
      */
     DeleteIdsWhiteRule(req: DeleteIdsWhiteRuleRequest, cb?: (error: string, rep: DeleteIdsWhiteRuleResponse) => void): Promise<DeleteIdsWhiteRuleResponse>;
     /**
@@ -209,7 +211,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     CreateAlertCenterOmit(req: CreateAlertCenterOmitRequest, cb?: (error: string, rep: CreateAlertCenterOmitResponse) => void): Promise<CreateAlertCenterOmitResponse>;
     /**
-     * 创建入侵防御规则白名单接口
+     * CreateIdsWhiteRule
+
+创建入侵防御规则白名单接口
      */
     CreateIdsWhiteRule(req: CreateIdsWhiteRuleRequest, cb?: (error: string, rep: CreateIdsWhiteRuleResponse) => void): Promise<CreateIdsWhiteRuleResponse>;
     /**
@@ -456,7 +460,9 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     DescribeBlockStaticList(req: DescribeBlockStaticListRequest, cb?: (error: string, rep: DescribeBlockStaticListResponse) => void): Promise<DescribeBlockStaticListResponse>;
     /**
-     * 查询入侵防御规则白名单接口
+     * 历史方案，业务已迁移，接口不再适用
+
+查询入侵防御规则白名单接口
      */
     DescribeIdsWhiteRule(req: DescribeIdsWhiteRuleRequest, cb?: (error: string, rep: DescribeIdsWhiteRuleResponse) => void): Promise<DescribeIdsWhiteRuleResponse>;
 }

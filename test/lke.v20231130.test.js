@@ -308,6 +308,16 @@ it("lke.v20231130.CheckAttributeLabelExist", async function () {
     }
 })
 
+it("lke.v20231130.RenameDoc", async function () {
+    try {
+       const data = await client.RenameDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lke.v20231130.DescribeDoc", async function () {
     try {
        const data = await client.DescribeDoc({})

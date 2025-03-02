@@ -493,16 +493,15 @@ export interface ManageMarketingRiskResponse {
  */
 export interface OutputDescribeNameListFrontFixListData {
     /**
-     * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误
-  
+     * 错误码，0 表示成功，非0表示失败错误码。 0：成功 1002：参数错误 4300：未开通服务 6000：系统内部错误。
      */
     Code?: number;
     /**
-     * 错误信息
+     * 错误信息。
      */
     Message?: string;
     /**
-     * 黑白名单列表信息
+     * 黑白名单列表信息。
      */
     Value?: OutputDescribeNameListInfo;
 }
@@ -726,14 +725,11 @@ export interface DescribeNameListDataListRequest {
 export interface InputCryptoManageMarketingRisk {
     /**
      * 是否授权：1已授权，否则未授权。
-   调用全栈式风控引擎接口服务时，客户需先明确授权
-  
-  
+   调用全栈式风控引擎接口服务时，客户需先明确授权。
      */
     IsAuthorized?: string;
     /**
      * 加密类型：1AES加密
-  
      */
     CryptoType?: string;
     /**
@@ -986,7 +982,6 @@ export interface QQAccountInfo {
     MobilePhone?: string;
     /**
      * 用户设备号（已不推荐使用）。
-  
      */
     DeviceId?: string;
 }
@@ -1106,7 +1101,6 @@ export interface InputManageMarketingRisk {
   2：iOS
   3：H5
   4：小程序
-  
      */
     Platform?: string;
     /**
@@ -1208,22 +1202,15 @@ export interface DataAuthorizationInfo {
      */
     DataProviderName: string;
     /**
-     * 数据受托方、提供方：腾讯云主体名称。
-  
-  固定填：腾讯云计算（北京）有限责任公司
+     * 数据受托方、提供方：腾讯云主体名称。固定填：腾讯云计算（北京）有限责任公司
      */
     DataRecipientName: string;
     /**
      * 客户请求RCE所提供的用户数据类型，支持多选。实际以接口请求传参为准。
-  
   1-手机号；
-  
   2-微信开放账号；
-  
   3-QQ开放账号；
-  
   4-IP地址；
-  
   999-其它；
      */
     UserDataType: Array<number | bigint>;
@@ -1238,20 +1225,15 @@ export interface DataAuthorizationInfo {
      */
     IsOrderHandling?: number;
     /**
-     * 客户获得的用户授权期限时间戳（单位秒）。
-  
-  不填默认无固定期限。
+     * 客户获得的用户授权期限时间戳（单位秒）。不填默认无固定期限。
      */
     AuthorizationTerm?: number;
     /**
-     *
-  客户获得用户授权所依赖的协议地址。
+     * 客户获得用户授权所依赖的协议地址。
      */
     PrivacyPolicyLink?: string;
     /**
-     * 是否是用户个人敏感数据（不推荐使用）。
-  
-  固定填：1。
+     * 是否是用户个人敏感数据（不推荐使用）。固定填：1。
      */
     IsPersonalData?: number;
 }

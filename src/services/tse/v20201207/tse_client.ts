@@ -319,6 +319,7 @@ import {
   ServiceGovernanceInfo,
   DescribeNacosReplicasResponse,
   KongPassiveHealthCheck,
+  CanaryPriorityRule,
   CloudNativeAPIGatewayVpcConfig,
   DescribeGovernanceInstancesResponse,
   ModifyGovernanceNamespacesResponse,

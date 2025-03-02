@@ -7,11 +7,53 @@ export interface ImageSegments {
   点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10
   直播流：该值为时间戳，例如：1594650717
      */
-    OffsetTime: string;
+    OffsetTime?: string;
     /**
      * 画面截帧结果详情
      */
-    Result: ImageResult;
+    Result?: ImageResult;
+    /**
+     * 时间
+     */
+    CreatedAt?: string;
+    /**
+     * 截帧毫秒时间
+     */
+    OffsetusTime?: string;
+}
+/**
+ * 文本关键词命中的位置信息
+ */
+export interface TextPosition {
+    /**
+     * 命中关键词在文本中的起始位置
+     */
+    Start?: number;
+    /**
+     * 命中关键词在文本中的结束位置
+     */
+    End?: number;
+}
+/**
+ * 说话人结果
+ */
+export interface SpeakerResult {
+    /**
+     * 标签
+     */
+    Label?: string;
+    /**
+     * 分数
+     */
+    Score?: number;
+    /**
+     * 开始时间
+     */
+    StartTime?: number;
+    /**
+     * 结束时间
+     */
+    EndTime?: number;
 }
 /**
  * 图片输出结果的子结果
@@ -127,6 +169,39 @@ export interface CreateVideoModerationTaskResponse {
     RequestId?: string;
 }
 /**
+ * 出行结果
+ */
+export interface TravelResult {
+    /**
+     * 一级标签
+     */
+    Label?: string;
+    /**
+     * 二级标签
+     */
+    SubLabel?: string;
+    /**
+     * 风险等级
+     */
+    RiskLevel?: string;
+    /**
+     * 出行音频角色
+     */
+    AudioRole?: string;
+    /**
+     * 出行语音文本
+     */
+    AudioText?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: number;
+    /**
+     * 结束时间
+     */
+    EndTime?: number;
+}
+/**
  * 创建任务时的返回结果
  */
 export interface TaskResult {
@@ -150,6 +225,41 @@ export interface TaskResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Message: string;
+}
+/**
+ * 任务输出标签
+ */
+export interface TaskLabel {
+    /**
+     * 命中的标签
+  Porn 色情
+  Sexy 性感
+  Polity 政治
+  Illegal 违法
+  Abuse 谩骂
+  Terror 暴恐
+  Ad 广告
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Label: string;
+    /**
+     * 审核建议，可选值：
+  Pass 通过，
+  Review 建议人审，
+  Block 确认违规
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Suggestion: string;
+    /**
+     * 得分，分数是 0 ～ 100
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Score: number;
+    /**
+     * 命中的二级标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubLabel: string;
 }
 /**
  * CancelTask请求参数结构体
@@ -400,39 +510,37 @@ export interface User {
     SendTime?: string;
 }
 /**
- * 任务输出标签
+ * 歌曲识别结果
  */
-export interface TaskLabel {
+export interface LabelResult {
     /**
-     * 命中的标签
-  Porn 色情
-  Sexy 性感
-  Polity 政治
-  Illegal 违法
-  Abuse 谩骂
-  Terror 暴恐
-  Ad 广告
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 场景
      */
-    Label: string;
+    Scene?: string;
     /**
-     * 审核建议，可选值：
-  Pass 通过，
-  Review 建议人审，
-  Block 确认违规
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 建议
      */
-    Suggestion: string;
+    Suggestion?: number;
     /**
-     * 得分，分数是 0 ～ 100
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 标签
      */
-    Score: number;
+    Label?: string;
     /**
-     * 命中的二级标签
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 名字
      */
-    SubLabel: string;
+    Name?: string;
+    /**
+     * 分数
+     */
+    Score?: number;
+    /**
+     * 开始时间
+     */
+    StartTime?: number;
+    /**
+     * 结束时间
+     */
+    EndTime?: number;
 }
 /**
  * 具体场景下的图片识别结果
@@ -442,52 +550,60 @@ export interface ImageResultsResultDetail {
      * 任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * OCR识别文本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Text: string;
+    Text?: string;
     /**
      * 位置信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Location: ImageResultsResultDetailLocation;
+    Location?: ImageResultsResultDetailLocation;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
     /**
      * 库ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibId: string;
+    LibId?: string;
     /**
      * 库名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibName: string;
+    LibName?: string;
     /**
      * 命中的关键词
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keywords: Array<string>;
+    Keywords?: Array<string>;
     /**
      * 建议
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 得分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Score: number;
+    Score?: number;
     /**
      * 子标签码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubLabelCode: string;
+    SubLabelCode?: string;
+    /**
+     * 子标签
+     */
+    SubLabel?: string;
+    /**
+     * Ocr文本命中信息
+     */
+    OcrHitInfos?: Array<OcrHitInfo>;
 }
 /**
  * 输入信息详情
@@ -508,6 +624,27 @@ export interface InputInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BucketInfo: string;
+}
+/**
+ * Ocr命中信息
+ */
+export interface OcrHitInfo {
+    /**
+     * 关键词
+     */
+    Type?: string;
+    /**
+     * 关键词内容
+     */
+    Keyword?: string;
+    /**
+     * 自定义库名
+     */
+    LibName?: string;
+    /**
+     * 位置信息
+     */
+    Positions?: Array<TextPosition>;
 }
 /**
  * CreateVideoModerationTask请求参数结构体
@@ -647,45 +784,41 @@ export interface CancelTaskResponse {
 export interface AudioResultDetailTextResult {
     /**
      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Label: string;
+    Label?: string;
     /**
      * 该字段用于返回ASR识别出的文本内容命中的关键词信息，用于标注内容违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；若返回值为空，Score不为空，则代表识别结果所对应的恶意标签（Label）来自于语义模型判断的返回值。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keywords: Array<string>;
+    Keywords?: Array<string>;
     /**
      * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的ID，以方便自定义库管理和配置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibId: string;
+    LibId?: string;
     /**
      * 该字段**仅当Label为Custom：自定义关键词时该参数有效**,用于返回自定义库的名称,以方便自定义库管理和配置。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibName: string;
+    LibName?: string;
     /**
      * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高**），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Score: number;
+    Score?: number;
     /**
      * 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LibType: number;
+    LibType?: number;
     /**
      * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
   返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Suggestion: string;
+    Suggestion?: string;
     /**
      * 该字段用于返回当前标签（Lable）下的二级标签。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubLabel: string;
+    SubLabel?: string;
+    /**
+     * 该字段用于返回命中的关键词信息
+     */
+    HitInfos?: Array<OcrHitInfo>;
 }
 /**
  * 明细数据相关的cos url
@@ -738,70 +871,77 @@ export interface RcbAsr {
 export interface AudioResult {
     /**
      * 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HitFlag?: number;
     /**
      * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: string;
     /**
      * 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。<br>
   返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Suggestion?: string;
     /**
      * 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Score?: number;
     /**
      * 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Text?: string;
     /**
      * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
     /**
      * 该字段用于返回音频文件的时长，单位为毫秒。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Duration?: string;
     /**
      * 该字段用于返回输入参数中的额外附加信息（Extra），如未配置则默认返回值为空。<br>备注：不同客户或Biztype下返回信息不同，如需配置该字段请提交工单咨询或联系售后专员处理。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Extra?: string;
     /**
      * 该字段用于返回音频文件经ASR识别后产生的文本的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     TextResults?: Array<AudioResultDetailTextResult>;
     /**
      * 该字段用于返回音频文件呻吟检测的详细审核结果。具体结果内容请参见AudioResultDetailMoanResult数据结构的细节描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MoanResults?: Array<AudioResultDetailMoanResult>;
     /**
      * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LanguageResults?: Array<AudioResultDetailLanguageResult>;
     /**
      * 该字段用于返回当前标签（Lable）下的二级标签。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubLabel?: string;
     /**
      * 识别类标签结果信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RecognitionResults?: Array<RecognitionResult>;
+    /**
+     * 该字段用于返回音频文件说话人检测的详细审核结果
+     */
+    SpeakerResults?: Array<SpeakerResult>;
+    /**
+     * 该字段用于返回音频文件出行检测的详细审核结果
+     */
+    TravelResults?: Array<TravelResult>;
+    /**
+     * 该字段用于返回音频文件的三级标签
+     */
+    SubTag?: string;
+    /**
+     * 该字段用于返回音频文件的三级标签码
+     */
+    SubTagCode?: string;
+    /**
+     * 该字段用于返回音频文件歌曲识别的详细审核结果
+     */
+    LabelResults?: Array<LabelResult>;
 }
 /**
  * 音频呻吟审核结果
@@ -963,14 +1103,16 @@ export interface AudioSegments {
      * 截帧时间。
   点播文件：该值为相对于视频偏移时间，单位为秒，例如：0，5，10
   直播流：该值为时间戳，例如：1594650717
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    OffsetTime: string;
+    OffsetTime?: string;
     /**
      * 结果集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: AudioResult;
+    Result?: AudioResult;
+    /**
+     * 创建时间
+     */
+    CreatedAt?: string;
 }
 /**
  * 图片详情位置信息
@@ -1010,7 +1152,6 @@ export interface ImageResult {
      * 违规标志
   0 未命中
   1 命中
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     HitFlag?: number;
     /**
@@ -1022,7 +1163,6 @@ export interface ImageResult {
   Abuse 谩骂
   Terror 暴恐
   Ad 广告
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Label?: string;
     /**
@@ -1030,27 +1170,30 @@ export interface ImageResult {
   Pass 通过，
   Review 建议人审，
   Block 确认违规
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Suggestion?: string;
     /**
      * 得分
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Score?: number;
     /**
      * 画面截帧图片结果集
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Results?: Array<ImageResultResult>;
     /**
      * 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Url?: string;
     /**
      * 附加字段
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Extra?: string;
+    /**
+     * 二级标签
+     */
+    SubLabel?: string;
+    /**
+     * 场景结果
+     */
+    RecognitionResults?: Array<RecognitionResult>;
 }

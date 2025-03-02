@@ -2067,6 +2067,15 @@ export interface DescribeRobotBizIDByAppKeyResponse {
     RequestId?: string;
 }
 /**
+ * RenameDoc返回参数结构体
+ */
+export interface RenameDocResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ReconstructDocument返回参数结构体
  */
 export interface ReconstructDocumentResponse {
@@ -2708,6 +2717,31 @@ export interface WordRecognizeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WordBase64?: string;
+}
+/**
+ * RenameDoc请求参数结构体
+ */
+export interface RenameDocRequest {
+    /**
+     * 登录用户主账号(集成商模式必填)
+     */
+    LoginUin?: string;
+    /**
+     * 登录用户子账号(集成商模式必填)
+     */
+    LoginSubAccountUin?: string;
+    /**
+     * 应用ID
+     */
+    BotBizId?: string;
+    /**
+     * 文档ID
+     */
+    DocBizId?: string;
+    /**
+     * 新文档名，需要带上后缀
+     */
+    NewName?: string;
 }
 /**
  * 知识摘要应用配置
@@ -5550,11 +5584,11 @@ export interface GenerateQARequest {
  */
 export interface GetWsTokenRequest {
     /**
-     * 接入类型
+     * 接入类型，当前请填写5
      */
     Type: number;
     /**
-     * 应用AppKey（应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取）
+     * 当Type=5时，必填；应用AppKey（应用发布后在应用页面[发布管理]-[调用信息]-[API管理]处获取）
      */
     BotAppKey?: string;
     /**

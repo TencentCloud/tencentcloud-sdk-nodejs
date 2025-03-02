@@ -91,6 +91,7 @@ import {
   ListQaItem,
   DeleteAttributeLabelRequest,
   DescribeRobotBizIDByAppKeyResponse,
+  RenameDocResponse,
   ReconstructDocumentResponse,
   ListDocCateRequest,
   DescribeDocResponse,
@@ -116,6 +117,7 @@ import {
   QueryParseDocResultResponse,
   ListReleaseDocPreviewResponse,
   WordRecognizeInfo,
+  RenameDocRequest,
   SummaryConfig,
   GenerateQAResponse,
   GetTaskStatusResponse,
@@ -607,6 +609,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckAttributeLabelExistResponse) => void
   ): Promise<CheckAttributeLabelExistResponse> {
     return this.request("CheckAttributeLabelExist", req, cb)
+  }
+
+  /**
+   * 文档重命名
+   */
+  async RenameDoc(
+    req: RenameDocRequest,
+    cb?: (error: string, rep: RenameDocResponse) => void
+  ): Promise<RenameDocResponse> {
+    return this.request("RenameDoc", req, cb)
   }
 
   /**

@@ -1345,12 +1345,10 @@ export interface DescribeComputeEnvRequest {
 export interface InstanceMarketOptionsRequest {
   /**
    * 竞价相关选项
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpotOptions: SpotMarketOptions
   /**
    * 市场选项类型，当前只支持取值：spot
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MarketType?: string
 }
@@ -1635,12 +1633,10 @@ export interface DataDisk {
   默认取值：true<br />
   该参数目前仅用于 `RunInstances` 接口。
 </li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteWithInstance?: boolean
   /**
    * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotId?: string
   /**
@@ -1651,31 +1647,26 @@ export interface DataDisk {
   默认取值：false<br />
   该参数目前仅用于 `RunInstances` 接口。
 </li>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Encrypt?: boolean
   /**
    * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
 
 该参数目前仅用于 `RunInstances` 接口。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   KmsKeyId?: string
   /**
    * 云硬盘性能，单位：MB/s
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ThroughputPerformance?: number
   /**
    * 所属的独享集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
    * 突发性能
 
  <b>注：内测中。</b>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   BurstPerformance?: boolean
   /**
@@ -1781,12 +1772,10 @@ export interface EventConfig {
 export interface SpotMarketOptions {
   /**
    * 竞价出价
-注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPrice: string
   /**
    * 竞价请求类型，当前仅支持类型：one-time
-注意：此字段可能返回 null，表示取不到有效值。
    */
   SpotInstanceType?: string
 }
@@ -2988,8 +2977,7 @@ export interface Activity {
  */
 export interface RunMonitorServiceEnabled {
   /**
-   * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>true：表示开启云监控服务<br><li>false：表示不开启云监控服务<br><br>默认取值：true。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>true：表示开启云监控服务</li><li>false：表示不开启云监控服务</li><br>默认取值：true。
    */
   Enabled?: boolean
 }
