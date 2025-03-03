@@ -677,6 +677,25 @@ export interface AuthFailMessage {
     Message?: string;
 }
 /**
+ * CreateFlowForwards请求参数结构体
+ */
+export interface CreateFlowForwardsRequest {
+    /**
+     * 合同对应参与方需要修改的目标经办人对应的OpenId。
+  
+  注意：`需要保证目标经办人已经加入企业且已实名`
+     */
+    TargetOpenId: string;
+    /**
+     * 企业签署方的合同及对应签署方
+     */
+    FlowForwardInfos: Array<FlowForwardInfo>;
+    /**
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。<ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
+     */
+    Agent: Agent;
+}
+/**
  * DescribeFlowDetailInfo请求参数结构体
  */
 export interface DescribeFlowDetailInfoRequest {
@@ -2679,6 +2698,15 @@ export interface TemplateInfo {
     Available?: number;
 }
 /**
+ * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+ */
+export interface IntentionAction {
+    /**
+     * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+     */
+    Text?: string;
+}
+/**
  * ChannelCreateOrganizationBatchSignUrl请求参数结构体
  */
 export interface ChannelCreateOrganizationBatchSignUrlRequest {
@@ -3944,6 +3972,19 @@ export interface ChannelCreateUserAutoSignSealUrlRequest {
      * 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。`如果不传，默认过期时间为当前时间往后7天。`
      */
     ExpiredTime?: number;
+}
+/**
+ * 转交合同结果
+ */
+export interface FlowForwardResult {
+    /**
+     * 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。
+     */
+    FlowId?: string;
+    /**
+     * 如果失败，返回的错误细节。
+     */
+    ErrorDetail?: string;
 }
 /**
  * 合同验签每个签署区的信息
@@ -5849,6 +5890,19 @@ export interface CreatePersonAuthCertificateImageRequest {
     SceneKey?: string;
 }
 /**
+ * 合同转交相关信息
+ */
+export interface FlowForwardInfo {
+    /**
+     * 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。
+     */
+    FlowId: string;
+    /**
+     * 签署方经办人在合同中的参与方ID，为32位字符串。
+     */
+    RecipientId: string;
+}
+/**
  * CreateFlowsByTemplates返回参数结构体
  */
 export interface CreateFlowsByTemplatesResponse {
@@ -6738,13 +6792,21 @@ export interface ApproverRestriction {
     IdCardNumber?: string;
 }
 /**
- * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+ * CreateFlowForwards返回参数结构体
  */
-export interface IntentionAction {
+export interface CreateFlowForwardsResponse {
     /**
-     * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+     * 失败的合同id以及错误详情
      */
-    Text?: string;
+    FailedFlows?: Array<FlowForwardResult>;
+    /**
+     * 成功的合同id
+     */
+    SuccessFlows?: Array<string>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ChannelCreateFlowByFiles返回参数结构体

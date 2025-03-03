@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ImageModerationRequest,
   RecognitionResult,
+  OcrHitInfo,
   ObjectResult,
   OcrTextDetail,
   CreateImageModerationAsyncTaskResponse,
@@ -34,6 +35,7 @@ import {
   CreateImageModerationAsyncTaskRequest,
   LibResult,
   ImageModerationResponse,
+  Positions,
   User,
 } from "./ims_models"
 

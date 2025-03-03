@@ -614,17 +614,14 @@ export interface DescribeLiveEnhanceInfoListRequest {
 export interface DiagnoseResult {
     /**
      * 断流信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamBrokenResults?: Array<string>;
     /**
      * 低帧率信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LowFrameRateResults?: Array<string>;
     /**
      * 流格式诊断信息
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamFormatResults?: Array<string>;
 }
@@ -1700,29 +1697,24 @@ export interface BandwidthInfo {
 export interface LiveStreamMonitorOutputInfo {
     /**
      * 监播任务输出流宽度像素。范围[1,1920]。建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputStreamWidth: number;
     /**
      * 监播任务输出流长度像素。范围[1,1080]，建议至少大于100像素。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputStreamHeight: number;
     /**
      * 监播任务输出流名称。
   不填时，系统会自动生成。
   256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputStreamName?: string;
     /**
      * 监播任务播放域名。128字节以内，只允许填处于启用状态的播放域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputDomain?: string;
     /**
      * 监播任务播放路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputApp?: string;
 }
@@ -1991,17 +1983,14 @@ export interface CreateLiveTranscodeTemplateRequest {
 export interface MPSResult {
     /**
      * 智能语音识别结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiAsrResults?: Array<string>;
     /**
      * 智能文字识别结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiOcrResults?: Array<string>;
     /**
      * 内容质检结果。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StreamQuaCtrlResults?: Array<string>;
 }
@@ -3102,27 +3091,22 @@ export interface PlayDataInfoByStream {
 export interface LiveStreamMonitorInputInfo {
     /**
      * 待监播的输入流名称。256字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputStreamName: string;
     /**
      * 待监播的输入流推流域名。128字节以内，只允许填处于启用状态的推流域名。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputDomain?: string;
     /**
      * 待监播的输入流推流路径。32字节以内，只允许包含字母、数字、‘-’，‘_’，'.'字符。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputApp?: string;
     /**
      * 待监播的输入流推流url。一般场景下，无需该参数。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputUrl?: string;
     /**
      * 描述。256字节以内。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
     /**
@@ -10309,13 +10293,11 @@ export interface LiveStreamMonitorNotifyPolicy {
      * 通知策略类型：范围[0,1]
   0:代表不使用任何通知策略
   1:代表使用全局回调策略，所有事件通知到CallbackUrl。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotifyPolicyType?: number;
     /**
      * 回调URL：长度[0,512]
   只支持http和https类型的url。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CallbackUrl?: string;
 }
@@ -10325,106 +10307,86 @@ export interface LiveStreamMonitorNotifyPolicy {
 export interface LiveStreamMonitorInfo {
     /**
      * 监播任务ID。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorId: string;
     /**
      * 监播任务名称。128字节以内。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorName?: string;
     /**
      * 监播任务输出信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OutputInfo?: LiveStreamMonitorOutputInfo;
     /**
      * 待监播的输入流信息。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InputList?: Array<LiveStreamMonitorInputInfo>;
     /**
      * 监播任务状态。
   0： 代表空闲
   1： 代表监播中。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
     /**
      * 上一次的启动时间，unix时间戳。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTime?: number;
     /**
      * 上一次的停止时间，unix时间戳。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     StopTime?: number;
     /**
      * 监播任务创建时间，unix时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: number;
     /**
      * 监播任务更新时间，unix时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: number;
     /**
      * 监播事件通知策略。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     NotifyPolicy?: LiveStreamMonitorNotifyPolicy;
     /**
      * 输出音频的输入Index列表。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AudibleInputIndexList?: Array<number | bigint>;
     /**
      * 开启智能语音识别的输入Index列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiAsrInputIndexList?: Array<number | bigint>;
     /**
      * 是否开启断流检测
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckStreamBroken?: number;
     /**
      * 是否开启低帧率检测
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckStreamLowFrameRate?: number;
     /**
      * 智能语音识别语种：
   0 关闭 1 中文 2 英文 3日文 4 韩文
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AsrLanguage?: number;
     /**
      * 智能文字识别语种：
   0 关闭 1 中、英文
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OcrLanguage?: number;
     /**
      * 开启智能文字识别的输入Index列表
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiOcrInputIndexList?: Array<number | bigint>;
     /**
      * 是否存储监播事件到监播报告，以及是否允许查询监播报告
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowMonitorReport?: number;
     /**
      * 是否开启格式诊断
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiFormatDiagnose?: number;
     /**
      * 是否开启内容质检。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     AiQualityControl?: number;
     /**

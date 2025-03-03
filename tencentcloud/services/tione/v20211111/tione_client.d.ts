@@ -152,7 +152,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeBillingResourceGroups(req: DescribeBillingResourceGroupsRequest, cb?: (error: string, rep: DescribeBillingResourceGroupsResponse) => void): Promise<DescribeBillingResourceGroupsResponse>;
     /**
-     * 查询推理镜像模板
+     * 已废弃，收敛到统一接口
+
+查询推理镜像模板
      */
     DescribeInferTemplates(req?: DescribeInferTemplatesRequest, cb?: (error: string, rep: DescribeInferTemplatesResponse) => void): Promise<DescribeInferTemplatesResponse>;
     /**

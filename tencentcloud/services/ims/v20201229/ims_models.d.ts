@@ -51,6 +51,27 @@ export interface RecognitionResult {
     Tags?: Array<RecognitionTag>;
 }
 /**
+ * ocr关键词命中位置信息
+ */
+export interface OcrHitInfo {
+    /**
+     * 标识模型命中还是关键词命中
+     */
+    Type?: string;
+    /**
+     * 命中关键词
+     */
+    Keyword?: string;
+    /**
+     * 自定义词库名称
+     */
+    LibName?: string;
+    /**
+     * 位置信息
+     */
+    Positions?: Array<Positions>;
+}
+/**
  * 用于返回实体检测结果详情
  */
 export interface ObjectResult {
@@ -126,6 +147,10 @@ export interface OcrTextDetail {
      * 该字段用于返回检测结果所对应的恶意二级标签。
      */
     SubLabel?: string;
+    /**
+     * 关键词命中位置信息
+     */
+    HitInfos?: Array<OcrHitInfo>;
 }
 /**
  * CreateImageModerationAsyncTask返回参数结构体
@@ -514,6 +539,19 @@ export interface ImageModerationResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 标识命中的违规关键词位置信息
+ */
+export interface Positions {
+    /**
+     * 关键词起始位置
+     */
+    Start?: number;
+    /**
+     * 关键词结束位置
+     */
+    End?: number;
 }
 /**
  * 用于表示业务用户的账号相关信息

@@ -244,7 +244,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillingResourceGroups", req, cb);
     }
     /**
-     * 查询推理镜像模板
+     * 已废弃，收敛到统一接口
+
+查询推理镜像模板
      */
     async DescribeInferTemplates(req, cb) {
         return this.request("DescribeInferTemplates", req, cb);

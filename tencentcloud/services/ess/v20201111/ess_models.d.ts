@@ -152,7 +152,6 @@ export interface DescribeCancelFlowsTaskResponse {
 export interface IntentionActionResult {
     /**
      * 意愿核身结果详细数据，与每段点头确认过程一一对应
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     Details?: Array<IntentionActionResultDetail>;
 }
@@ -528,6 +527,29 @@ export interface DeleteExtendedServiceAuthInfosResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateFlowForwards请求参数结构体
+ */
+export interface CreateFlowForwardsRequest {
+    /**
+     * 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。
+  
+  注意：`需要保证目标经办人已经加入企业且已实名`
+     */
+    TargetUserId: string;
+    /**
+     * 企业签署方的合同及对应签署方
+     */
+    FlowForwardInfos: Array<FlowForwardInfo>;
+    /**
+     * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * CreateDynamicFlowApprover请求参数结构体
@@ -962,6 +984,15 @@ export interface ModifyExtendedServiceRequest {
   </ul>
      */
     Endpoint?: string;
+}
+/**
+ * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+ */
+export interface IntentionAction {
+    /**
+     * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+     */
+    Text?: string;
 }
 /**
  * CreateBatchInitOrganizationUrl返回参数结构体
@@ -2077,13 +2108,28 @@ export interface DescribeFlowEvidenceReportResponse {
     RequestId?: string;
 }
 /**
- * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+ * CreateWebThemeConfig请求参数结构体
  */
-export interface IntentionAction {
+export interface CreateWebThemeConfigRequest {
     /**
-     * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+     * 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    Text?: string;
+    Operator: UserInfo;
+    /**
+     * 主题类型，取值如下：
+  <ul><li> **EMBED_WEB_THEME**：嵌入式主题（默认），web页面嵌入的主题风格配置</li>
+  </ul>
+     */
+    ThemeType: string;
+    /**
+     * 电子签logo是否展示，主体颜色等配置项
+     */
+    WebThemeConfig: WebThemeConfig;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * 企业应用回调信息
@@ -2175,6 +2221,71 @@ export interface CancelFailureFlow {
      * 撤销失败原因
      */
     Reason?: string;
+}
+/**
+ * 合同文件验签单个结果结构体
+ */
+export interface PdfVerifyResult {
+    /**
+     * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
+     */
+    VerifyResult?: number;
+    /**
+     * 签署平台
+  如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，
+  如果文件不在腾讯电子签平台签署，则为**其他平台**。
+     */
+    SignPlatform?: string;
+    /**
+     * 申请证书的主体的名字
+  
+  如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
+  **企业**:  ESS@企业名称@编码
+  **个人**: ESS@个人姓名@证件号@808854
+  
+  如果在其他平台签署的, 主体的名字参考其他平台的说明
+     */
+    SignerName?: string;
+    /**
+     * 签署时间的Unix时间戳，单位毫秒
+     */
+    SignTime?: number;
+    /**
+     * 证书签名算法,  如SHA1withRSA等算法
+     */
+    SignAlgorithm?: string;
+    /**
+     * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。
+     */
+    CertSn?: string;
+    /**
+     * 证书起始时间的Unix时间戳，单位毫秒
+     */
+    CertNotBefore?: number;
+    /**
+     * 证书过期时间的时间戳，单位毫秒
+     */
+    CertNotAfter?: number;
+    /**
+     * 签名域横坐标，单位px
+     */
+    ComponentPosX?: number;
+    /**
+     * 签名域纵坐标，单位px
+     */
+    ComponentPosY?: number;
+    /**
+     * 签名域宽度，单位px
+     */
+    ComponentWidth?: number;
+    /**
+     * 签名域高度，单位px
+     */
+    ComponentHeight?: number;
+    /**
+     * 签名域所在页码，1～N
+     */
+    ComponentPage?: number;
 }
 /**
  * CreateUserVerifyUrl返回参数结构体
@@ -3652,12 +3763,10 @@ export interface CreatePersonAuthCertificateImageResponse {
 export interface FailedDeleteStaffData {
     /**
      * 员工在电子签的userId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UserId?: string;
     /**
      * 员工在第三方平台的openId
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     OpenId?: string;
     /**
@@ -3666,69 +3775,17 @@ export interface FailedDeleteStaffData {
     Reason?: string;
 }
 /**
- * 合同文件验签单个结果结构体
+ * 转交合同结果
  */
-export interface PdfVerifyResult {
+export interface FlowForwardResult {
     /**
-     * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
+     * 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)。
      */
-    VerifyResult?: number;
+    FlowId?: string;
     /**
-     * 签署平台
-  如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，
-  如果文件不在腾讯电子签平台签署，则为**其他平台**。
+     * 如果失败，返回的错误细节。
      */
-    SignPlatform?: string;
-    /**
-     * 申请证书的主体的名字
-  
-  如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下
-  **企业**:  ESS@企业名称@编码
-  **个人**: ESS@个人姓名@证件号@808854
-  
-  如果在其他平台签署的, 主体的名字参考其他平台的说明
-     */
-    SignerName?: string;
-    /**
-     * 签署时间的Unix时间戳，单位毫秒
-     */
-    SignTime?: number;
-    /**
-     * 证书签名算法,  如SHA1withRSA等算法
-     */
-    SignAlgorithm?: string;
-    /**
-     * 在数字证书申请过程中，系统会自动生成一个独一无二的序列号。
-     */
-    CertSn?: string;
-    /**
-     * 证书起始时间的Unix时间戳，单位毫秒
-     */
-    CertNotBefore?: number;
-    /**
-     * 证书过期时间的时间戳，单位毫秒
-     */
-    CertNotAfter?: number;
-    /**
-     * 签名域横坐标，单位px
-     */
-    ComponentPosX?: number;
-    /**
-     * 签名域纵坐标，单位px
-     */
-    ComponentPosY?: number;
-    /**
-     * 签名域宽度，单位px
-     */
-    ComponentWidth?: number;
-    /**
-     * 签名域高度，单位px
-     */
-    ComponentHeight?: number;
-    /**
-     * 签名域所在页码，1～N
-     */
-    ComponentPage?: number;
+    ErrorDetail?: string;
 }
 /**
  * CreateBatchCancelFlowUrl返回参数结构体
@@ -7237,28 +7294,21 @@ export interface ApproverRestriction {
     IdCardNumber?: string;
 }
 /**
- * CreateWebThemeConfig请求参数结构体
+ * CreateFlowForwards返回参数结构体
  */
-export interface CreateWebThemeConfigRequest {
+export interface CreateFlowForwardsResponse {
     /**
-     * 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     * 失败的合同id以及错误详情
      */
-    Operator: UserInfo;
+    FailedFlows?: Array<FlowForwardResult>;
     /**
-     * 主题类型，取值如下：
-  <ul><li> **EMBED_WEB_THEME**：嵌入式主题（默认），web页面嵌入的主题风格配置</li>
-  </ul>
+     * 成功的合同id
      */
-    ThemeType: string;
+    SuccessFlows?: Array<string>;
     /**
-     * 电子签logo是否展示，主体颜色等配置项
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    WebThemeConfig: WebThemeConfig;
-    /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-     */
-    Agent?: Agent;
+    RequestId?: string;
 }
 /**
  * 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称
@@ -7326,6 +7376,19 @@ export interface CreateOrganizationBatchSignUrlRequest {
   若传了此参数，则可以不传 UserId, Name, Mobile等参数
      */
     RecipientIds?: Array<string>;
+}
+/**
+ * 合同转交相关信息
+ */
+export interface FlowForwardInfo {
+    /**
+     * 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。
+     */
+    FlowId: string;
+    /**
+     * 签署方经办人在合同中的参与方ID，为32位字符串。
+     */
+    RecipientId: string;
 }
 /**
  * 企业角色数据信息

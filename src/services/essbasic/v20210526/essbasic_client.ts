@@ -38,6 +38,7 @@ import {
   ChannelCreateFlowGroupByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
+  CreateFlowForwardsRequest,
   DescribeFlowDetailInfoRequest,
   ChannelCancelFlowResponse,
   ModifyExtendedServiceRequest,
@@ -97,6 +98,7 @@ import {
   SignUrl,
   ChannelCancelFlowRequest,
   TemplateInfo,
+  IntentionAction,
   ChannelCreateOrganizationBatchSignUrlRequest,
   DynamicFlowApproverResult,
   GetDownloadFlowUrlResponse,
@@ -131,6 +133,7 @@ import {
   CreateEmployeeQualificationSealQrCodeRequest,
   ChannelArchiveDynamicApproverData,
   ChannelCreateUserAutoSignSealUrlRequest,
+  FlowForwardResult,
   PdfVerifyResult,
   UserThreeFactor,
   ChannelCreateUserAutoSignEnableUrlRequest,
@@ -180,6 +183,7 @@ import {
   IntentionActionResult,
   FlowDetailInfo,
   CreatePersonAuthCertificateImageRequest,
+  FlowForwardInfo,
   CreateFlowsByTemplatesResponse,
   SyncFailReason,
   DescribeChannelFlowEvidenceReportRequest,
@@ -206,7 +210,7 @@ import {
   ChannelCreateBatchCancelFlowUrlRequest,
   ChannelDescribeAccountBillDetailResponse,
   ApproverRestriction,
-  IntentionAction,
+  CreateFlowForwardsResponse,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
   ChannelDisableUserAutoSignRequest,
@@ -1433,6 +1437,23 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
+  }
+
+  /**
+     * 该接口用于将合同中本企业当前经办人转为本企业其他员工进行操作。
+
+注意：
+1. 转交的目标经办人需要已经加入企业，且完成实名。
+2. 仅企业拥有`超管`或`法人角色`的员工才有调用本接口的权限。
+3. 仅支持当前经办人为待签署或待填写状态时进行转交操作。
+4. 若原合同有填写控件，且当前经办人已经完成填写，则不支持进行转交。
+5. 若当前经办人已签署完成，或者处于签署流程中，则不支持进行转交。
+     */
+  async CreateFlowForwards(
+    req: CreateFlowForwardsRequest,
+    cb?: (error: string, rep: CreateFlowForwardsResponse) => void
+  ): Promise<CreateFlowForwardsResponse> {
+    return this.request("CreateFlowForwards", req, cb)
   }
 
   /**
