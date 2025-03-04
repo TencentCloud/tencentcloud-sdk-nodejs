@@ -134,6 +134,7 @@ import {
   Configuration,
   DescribeResourceScheduleRequest,
   PodParameter,
+  ModifySLInstanceResponse,
   SyncPodStateResponse,
   UserManagerUserBriefInfo,
   AllNodeResourceSpec,
@@ -171,6 +172,7 @@ import {
   DiskGroup,
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
+  SetNodeResourceConfigDefaultResponse,
   PodVolume,
   PriceDetail,
   DescribeResourceScheduleResponse,
@@ -289,7 +291,7 @@ import {
   ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
   DescribeStarRocksQueryInfoRequest,
-  ModifySLInstanceResponse,
+  ModifySLInstanceBasicRequest,
   LoadMetricsConditions,
   JobFlowResource,
   DescribeEmrApplicationStaticsResponse,
@@ -299,7 +301,7 @@ import {
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   Item,
-  SetNodeResourceConfigDefaultResponse,
+  ModifySLInstanceBasicResponse,
   DescribeStarRocksQueryInfoResponse,
   ModifyYarnQueueV2Response,
   ConfigModifyInfoV2,
@@ -667,6 +669,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserManagerUserListResponse) => void
   ): Promise<DeleteUserManagerUserListResponse> {
     return this.request("DeleteUserManagerUserList", req, cb)
+  }
+
+  /**
+   * serverless hbase修改实例名称
+   */
+  async ModifySLInstanceBasic(
+    req: ModifySLInstanceBasicRequest,
+    cb?: (error: string, rep: ModifySLInstanceBasicResponse) => void
+  ): Promise<ModifySLInstanceBasicResponse> {
+    return this.request("ModifySLInstanceBasic", req, cb)
   }
 
   /**

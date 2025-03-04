@@ -348,6 +348,16 @@ it("emr.v20190103.DeleteUserManagerUserList", async function () {
     }
 })
 
+it("emr.v20190103.ModifySLInstanceBasic", async function () {
+    try {
+       const data = await client.ModifySLInstanceBasic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateSLInstance", async function () {
     try {
        const data = await client.TerminateSLInstance({})

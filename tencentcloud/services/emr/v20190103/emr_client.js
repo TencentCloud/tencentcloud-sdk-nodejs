@@ -227,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserManagerUserList", req, cb);
     }
     /**
+     * serverless hbase修改实例名称
+     */
+    async ModifySLInstanceBasic(req, cb) {
+        return this.request("ModifySLInstanceBasic", req, cb);
+    }
+    /**
      * 本接口（TerminateSLInstance）用于销毁Serverless HBase实例
      */
     async TerminateSLInstance(req, cb) {

@@ -7613,7 +7613,7 @@ export interface CreateZoneRequest {
      */
     PlanId?: string;
     /**
-     * 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。
+     * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。
      */
     AliasZoneName?: string;
     /**
@@ -9841,7 +9841,7 @@ export interface ModifyZoneRequest {
      */
     VanityNameServers?: VanityNameServers;
     /**
-     * 站点别名。数字、英文、-和_组合，限制20个字符。
+     * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
      */
     AliasZoneName?: string;
     /**

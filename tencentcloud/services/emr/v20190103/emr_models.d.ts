@@ -3696,6 +3696,15 @@ export interface PodParameter {
     Parameter: string;
 }
 /**
+ * ModifySLInstance返回参数结构体
+ */
+export interface ModifySLInstanceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SyncPodState返回参数结构体
  */
 export interface SyncPodStateResponse {
@@ -4624,6 +4633,15 @@ export interface DeleteUserManagerUserListRequest {
      * 是否删除家目录，只针对cvm集群
      */
     DeleteHomeDir?: boolean;
+}
+/**
+ * SetNodeResourceConfigDefault返回参数结构体
+ */
+export interface SetNodeResourceConfigDefaultResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Pod的存储设备描述信息。
@@ -8283,13 +8301,17 @@ export interface DescribeStarRocksQueryInfoRequest {
     Page: number;
 }
 /**
- * ModifySLInstance返回参数结构体
+ * ModifySLInstanceBasic请求参数结构体
  */
-export interface ModifySLInstanceResponse {
+export interface ModifySLInstanceBasicRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 集群实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 实例名称
+     */
+    ClusterName: string;
 }
 /**
  * 负载指标
@@ -8504,9 +8526,9 @@ export interface Item {
     Value: string;
 }
 /**
- * SetNodeResourceConfigDefault返回参数结构体
+ * ModifySLInstanceBasic返回参数结构体
  */
-export interface SetNodeResourceConfigDefaultResponse {
+export interface ModifySLInstanceBasicResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

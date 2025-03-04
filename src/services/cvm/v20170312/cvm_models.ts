@@ -2040,6 +2040,14 @@ export interface DescribeDisasterRecoverGroupsRequest {
    * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Limit?: number
+  /**
+   * <li><strong>tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-value</strong></li> <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag:tag-key</strong></li> <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2641,6 +2649,10 @@ export interface CreateDisasterRecoverGroupRequest {
    * 置放群组的亲和度，在置放群组的实例会按该亲和度分布，亲和度的取值范围是：1-10，默认为1
    */
   Affinity?: number
+  /**
+   * 标签描述列表。通过指定该参数可以绑定标签到置放群组。
+   */
+  TagSpecification?: Array<TagSpecification>
 }
 
 /**
@@ -5729,14 +5741,16 @@ export interface DisasterRecoverGroup {
   CurrentNum?: number
   /**
    * 分散置放群组内，云服务器id列表。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceIds?: Array<string>
   /**
    * 分散置放群组创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
+  /**
+   * 置放群组关联的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
