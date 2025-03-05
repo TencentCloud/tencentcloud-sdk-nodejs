@@ -26,7 +26,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDefaultStorageRegion(req: ModifyDefaultStorageRegionRequest, cb?: (error: string, rep: ModifyDefaultStorageRegionResponse) => void): Promise<ModifyDefaultStorageRegionResponse>;
     /**
-     * 该 API 已经<font color='red'>不再维护</font>。如果有盗录溯源需求，请参考 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
+     * 如果有盗录溯源需求，推荐使用 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
      */
     ExtractTraceWatermark(req: ExtractTraceWatermarkRequest, cb?: (error: string, rep: ExtractTraceWatermarkResponse) => void): Promise<ExtractTraceWatermarkResponse>;
     /**
@@ -527,7 +527,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDailyMostPlayedStat(req: DescribeDailyMostPlayedStatRequest, cb?: (error: string, rep: DescribeDailyMostPlayedStatResponse) => void): Promise<DescribeDailyMostPlayedStatResponse>;
     /**
-     * 该 API 已经<font color='red'>不再维护</font>。如果有盗录溯源需求，请参考 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
+     * 如果有盗录溯源需求，请参考 [幽灵水印](https://cloud.tencent.com/document/product/266/94228)。
      */
     ExtractCopyRightWatermark(req: ExtractCopyRightWatermarkRequest, cb?: (error: string, rep: ExtractCopyRightWatermarkResponse) => void): Promise<ExtractCopyRightWatermarkResponse>;
     /**

@@ -486,7 +486,7 @@ export interface CreateProbeTasksRequest {
      */
     Nodes: Array<string>;
     /**
-     * 拨测间隔
+     * 拨测间隔，单位为分钟
      */
     Interval: number;
     /**

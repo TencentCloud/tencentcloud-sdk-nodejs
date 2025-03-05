@@ -13734,11 +13734,11 @@ export interface TranscodeTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
-   * 溯源水印，该功能已不再支持使用。
+   * 溯源水印。
    */
   TraceWatermark?: TraceWatermarkInput
   /**
-   * 版权水印，该功能已不再支持使用。
+   * 版权水印。
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**
@@ -15887,11 +15887,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   WatermarkSet?: Array<WatermarkInput>
   /**
-   * 溯源水印，该功能已不再支持使用。
+   * 溯源水印。
    */
   TraceWatermark?: TraceWatermarkInput
   /**
-   * 版权水印，该功能已不再支持使用。
+   * 版权水印。
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**

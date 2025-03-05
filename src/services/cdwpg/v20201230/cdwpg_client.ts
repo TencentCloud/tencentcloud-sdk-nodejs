@@ -18,33 +18,83 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ConfigParams,
   ModifyInstanceResponse,
   DescribeInstanceInfoRequest,
+  DescribeUserHbaConfigResponse,
+  AccessInfo,
+  DescribeUserHbaConfigRequest,
+  ModifyDBParametersResponse,
   InstanceStateInfo,
+  NormQueryItem,
   DescribeInstanceStateRequest,
+  AccountInfo,
+  DescribeAccountsRequest,
+  ScaleOutInstanceResponse,
+  DescribeInstanceNodesRequest,
+  RestartInstanceResponse,
   ChargeProperties,
   DestroyInstanceByApiRequest,
-  InstanceNodeGroup,
+  UpgradeItem,
+  DescribeDBConfigHistoryResponse,
+  ResourceSpecNew,
+  InstanceNode,
+  DescribeDBConfigHistoryRequest,
+  ErrorLogDetail,
+  DescribeDBParamsRequest,
   CBSSpec,
+  DescribeInstanceNodesResponse,
   ModifyInstanceRequest,
   DescribeSimpleInstancesResponse,
-  ResourceInfo,
+  UpgradeInstanceRequest,
+  DescribeSlowLogResponse,
+  ModifyUserHbaResponse,
+  NodeConfigParams,
   InstanceInfo,
+  DescribeDBParamsResponse,
+  ParamDetail,
   DescribeInstancesResponse,
-  ResourceSpecNew,
+  ConfigHistory,
+  ResetAccountPasswordResponse,
+  DiskSpecPlus,
+  ResetAccountPasswordRequest,
+  RestartInstanceRequest,
+  DescribeUpgradeListRequest,
+  ResourceInfo,
   DescribeInstancesRequest,
+  UpgradeInstanceResponse,
+  DescribeInstanceOperationsResponse,
   CreateInstanceByApiResponse,
-  SimpleInstanceInfo,
-  DescribeInstanceResponse,
-  DestroyInstanceByApiResponse,
-  CBSSpecInfo,
-  CreateInstanceByApiRequest,
+  DescribeSlowLogRequest,
+  DescribeUpgradeListResponse,
+  ScaleOutInstanceRequest,
+  DescribeAccountsResponse,
   SearchTags,
+  Range,
+  InstanceNodeGroup,
+  DescribeInstanceResponse,
+  ModifyDBParametersRequest,
+  DescribeErrorLogResponse,
+  ModifyUserHbaRequest,
+  ScaleUpInstanceRequest,
+  CNResourceSpec,
+  DestroyInstanceByApiResponse,
+  ParamItem,
+  CBSSpecInfo,
+  HbaConfig,
+  SimpleInstanceInfo,
+  CreateInstanceByApiRequest,
+  DescribeInstanceOperationsRequest,
   DescribeInstanceRequest,
+  SlowLogDetail,
+  ValueRange,
   Tag,
   DescribeInstanceStateResponse,
+  InstanceOperation,
   InstanceSimpleInfoNew,
   DescribeSimpleInstancesRequest,
+  DescribeErrorLogRequest,
+  ScaleUpInstanceResponse,
   DescribeInstanceInfoResponse,
 } from "./cdwpg_models"
 
@@ -55,6 +105,56 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cdwpg.tencentcloudapi.com", "2020-12-30", clientConfig)
+  }
+
+  /**
+   * user_hba
+   */
+  async DescribeUserHbaConfig(
+    req: DescribeUserHbaConfigRequest,
+    cb?: (error: string, rep: DescribeUserHbaConfigResponse) => void
+  ): Promise<DescribeUserHbaConfigResponse> {
+    return this.request("DescribeUserHbaConfig", req, cb)
+  }
+
+  /**
+   * 修改账号密码
+   */
+  async ResetAccountPassword(
+    req: ResetAccountPasswordRequest,
+    cb?: (error: string, rep: ResetAccountPasswordResponse) => void
+  ): Promise<ResetAccountPasswordResponse> {
+    return this.request("ResetAccountPassword", req, cb)
+  }
+
+  /**
+   * 集群配置下发
+   */
+  async ModifyDBParameters(
+    req: ModifyDBParametersRequest,
+    cb?: (error: string, rep: ModifyDBParametersResponse) => void
+  ): Promise<ModifyDBParametersResponse> {
+    return this.request("ModifyDBParameters", req, cb)
+  }
+
+  /**
+   * 水平扩容
+   */
+  async ScaleOutInstance(
+    req: ScaleOutInstanceRequest,
+    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
+  ): Promise<ScaleOutInstanceResponse> {
+    return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 控制台垂直变配集群
+   */
+  async ScaleUpInstance(
+    req: ScaleUpInstanceRequest,
+    cb?: (error: string, rep: ScaleUpInstanceResponse) => void
+  ): Promise<ScaleUpInstanceResponse> {
+    return this.request("ScaleUpInstance", req, cb)
   }
 
   /**
@@ -88,16 +188,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据实例ID查询某个实例的具体信息
-   */
-  async DescribeInstance(
-    req: DescribeInstanceRequest,
-    cb?: (error: string, rep: DescribeInstanceResponse) => void
-  ): Promise<DescribeInstanceResponse> {
-    return this.request("DescribeInstance", req, cb)
-  }
-
-  /**
    * 获取集群信息
    */
   async DescribeInstanceInfo(
@@ -108,6 +198,76 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用户在控制台主动发起重启实例
+   */
+  async RestartInstance(
+    req: RestartInstanceRequest,
+    cb?: (error: string, rep: RestartInstanceResponse) => void
+  ): Promise<RestartInstanceResponse> {
+    return this.request("RestartInstance", req, cb)
+  }
+
+  /**
+   * DescribeDBConfigHistory1
+   */
+  async DescribeDBConfigHistory(
+    req: DescribeDBConfigHistoryRequest,
+    cb?: (error: string, rep: DescribeDBConfigHistoryResponse) => void
+  ): Promise<DescribeDBConfigHistoryResponse> {
+    return this.request("DescribeDBConfigHistory", req, cb)
+  }
+
+  /**
+   * 配置描述
+   */
+  async DescribeDBParams(
+    req: DescribeDBParamsRequest,
+    cb?: (error: string, rep: DescribeDBParamsResponse) => void
+  ): Promise<DescribeDBParamsResponse> {
+    return this.request("DescribeDBParams", req, cb)
+  }
+
+  /**
+   * 在集群详情页面，拉取该集群的操作
+   */
+  async DescribeInstanceOperations(
+    req: DescribeInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
+  ): Promise<DescribeInstanceOperationsResponse> {
+    return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
+   * 修改用户Hba配置
+   */
+  async ModifyUserHba(
+    req: ModifyUserHbaRequest,
+    cb?: (error: string, rep: ModifyUserHbaResponse) => void
+  ): Promise<ModifyUserHbaResponse> {
+    return this.request("ModifyUserHba", req, cb)
+  }
+
+  /**
+   * 根据实例ID查询某个实例的具体信息
+   */
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 节点list
+   */
+  async DescribeInstanceNodes(
+    req: DescribeInstanceNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
+  ): Promise<DescribeInstanceNodesResponse> {
+    return this.request("DescribeInstanceNodes", req, cb)
+  }
+
+  /**
    * 创建集群
    */
   async CreateInstanceByApi(
@@ -115,6 +275,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceByApiResponse) => void
   ): Promise<CreateInstanceByApiResponse> {
     return this.request("CreateInstanceByApi", req, cb)
+  }
+
+  /**
+   * 升级记录
+   */
+  async DescribeUpgradeList(
+    req: DescribeUpgradeListRequest,
+    cb?: (error: string, rep: DescribeUpgradeListResponse) => void
+  ): Promise<DescribeUpgradeListResponse> {
+    return this.request("DescribeUpgradeList", req, cb)
+  }
+
+  /**
+   * 获取云原生实例对应的账号列表
+   */
+  async DescribeAccounts(
+    req: DescribeAccountsRequest,
+    cb?: (error: string, rep: DescribeAccountsResponse) => void
+  ): Promise<DescribeAccountsResponse> {
+    return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 在线升级
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
+  }
+
+  /**
+   * 查询慢SQL日志
+   */
+  async DescribeSlowLog(
+    req: DescribeSlowLogRequest,
+    cb?: (error: string, rep: DescribeSlowLogResponse) => void
+  ): Promise<DescribeSlowLogResponse> {
+    return this.request("DescribeSlowLog", req, cb)
+  }
+
+  /**
+   * 查询错误日志
+   */
+  async DescribeErrorLog(
+    req: DescribeErrorLogRequest,
+    cb?: (error: string, rep: DescribeErrorLogResponse) => void
+  ): Promise<DescribeErrorLogResponse> {
+    return this.request("DescribeErrorLog", req, cb)
   }
 
   /**

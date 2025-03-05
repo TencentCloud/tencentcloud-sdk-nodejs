@@ -28,6 +28,36 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdwpg.tencentcloudapi.com", "2020-12-30", clientConfig);
     }
     /**
+     * user_hba
+     */
+    async DescribeUserHbaConfig(req, cb) {
+        return this.request("DescribeUserHbaConfig", req, cb);
+    }
+    /**
+     * 修改账号密码
+     */
+    async ResetAccountPassword(req, cb) {
+        return this.request("ResetAccountPassword", req, cb);
+    }
+    /**
+     * 集群配置下发
+     */
+    async ModifyDBParameters(req, cb) {
+        return this.request("ModifyDBParameters", req, cb);
+    }
+    /**
+     * 水平扩容
+     */
+    async ScaleOutInstance(req, cb) {
+        return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 控制台垂直变配集群
+     */
+    async ScaleUpInstance(req, cb) {
+        return this.request("ScaleUpInstance", req, cb);
+    }
+    /**
      * 获取云原生实例列表
      */
     async DescribeInstances(req, cb) {
@@ -46,22 +76,88 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyInstanceByApi", req, cb);
     }
     /**
-     * 根据实例ID查询某个实例的具体信息
-     */
-    async DescribeInstance(req, cb) {
-        return this.request("DescribeInstance", req, cb);
-    }
-    /**
      * 获取集群信息
      */
     async DescribeInstanceInfo(req, cb) {
         return this.request("DescribeInstanceInfo", req, cb);
     }
     /**
+     * 用户在控制台主动发起重启实例
+     */
+    async RestartInstance(req, cb) {
+        return this.request("RestartInstance", req, cb);
+    }
+    /**
+     * DescribeDBConfigHistory1
+     */
+    async DescribeDBConfigHistory(req, cb) {
+        return this.request("DescribeDBConfigHistory", req, cb);
+    }
+    /**
+     * 配置描述
+     */
+    async DescribeDBParams(req, cb) {
+        return this.request("DescribeDBParams", req, cb);
+    }
+    /**
+     * 在集群详情页面，拉取该集群的操作
+     */
+    async DescribeInstanceOperations(req, cb) {
+        return this.request("DescribeInstanceOperations", req, cb);
+    }
+    /**
+     * 修改用户Hba配置
+     */
+    async ModifyUserHba(req, cb) {
+        return this.request("ModifyUserHba", req, cb);
+    }
+    /**
+     * 根据实例ID查询某个实例的具体信息
+     */
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 节点list
+     */
+    async DescribeInstanceNodes(req, cb) {
+        return this.request("DescribeInstanceNodes", req, cb);
+    }
+    /**
      * 创建集群
      */
     async CreateInstanceByApi(req, cb) {
         return this.request("CreateInstanceByApi", req, cb);
+    }
+    /**
+     * 升级记录
+     */
+    async DescribeUpgradeList(req, cb) {
+        return this.request("DescribeUpgradeList", req, cb);
+    }
+    /**
+     * 获取云原生实例对应的账号列表
+     */
+    async DescribeAccounts(req, cb) {
+        return this.request("DescribeAccounts", req, cb);
+    }
+    /**
+     * 在线升级
+     */
+    async UpgradeInstance(req, cb) {
+        return this.request("UpgradeInstance", req, cb);
+    }
+    /**
+     * 查询慢SQL日志
+     */
+    async DescribeSlowLog(req, cb) {
+        return this.request("DescribeSlowLog", req, cb);
+    }
+    /**
+     * 查询错误日志
+     */
+    async DescribeErrorLog(req, cb) {
+        return this.request("DescribeErrorLog", req, cb);
     }
     /**
      * 获取集群实例列表

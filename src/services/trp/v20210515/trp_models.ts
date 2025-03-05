@@ -1347,7 +1347,6 @@ export interface Job {
   Status?: string
   /**
    * 任务错误信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
 }
@@ -2422,12 +2421,10 @@ export interface ModifyTraceCodeUnlinkRequest {
 export interface DescribeCodePacksResponse {
   /**
    * 码列表
-注意：此字段可能返回 null，表示取不到有效值。
    */
   CodePacks?: Array<CodePack>
   /**
    * 总数
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
